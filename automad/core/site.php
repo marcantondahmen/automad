@@ -1,0 +1,383 @@
+<?php
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD CMS
+ *
+ *	(c) 2013 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ */
+
+
+/**
+ *	The Site class includes all methods and properties regarding the whole site and its structure.
+ */
+
+ 
+class Site {
+	
+	
+	/**
+	 * 	Array holding the site's settings.
+	 */
+	
+	public $siteData = array();
+	
+	
+	/**
+	 * 	Array holding all the site's pages and the related data. 
+	 *	
+	 *	To access the data for a specific page, use the url as key: $this->siteIndex['url'].
+	 */
+	
+	public $siteIndex = array();
+	
+	
+	/**
+	 * 	Parse Site settings.
+	 *
+	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
+	 *	in the root of the content directory.
+	 */
+	
+	private function parseSiteSettings() {
+		
+		$this->siteData = Data::parseTxt(SITE_CONTENT_DIR . '/' . SITE_SETTINGS_FILE);
+		
+	}
+	
+	
+	/**
+	 *	Transforms a file system path into an url.
+	 *
+	 *	The prefix for sorting (xxxx.folder) will be stripped.
+	 *	In case the resulting url is already in use, a suffix (-1, -2 ...) gets appende to the new url.
+	 *
+	 *	@param string $folder
+	 *	@return string $url
+	 */
+	
+	private function folderToUrl($folder) {
+		
+		// strip prefix
+		$pattern = '/[a-zA-Z0-9_-]+\./';
+		$replacement = '';
+		$url = preg_replace($pattern, $replacement, $folder);
+		
+		// check if url already exists
+		if (array_key_exists($url, $this->siteIndex)) {
+							
+			$i = 0;
+			
+			$newUrl = $url;
+			
+			while (array_key_exists($newUrl, $this->siteIndex)) {
+				$i++;
+				$newUrl = $url . "-" . $i;
+			}
+			
+			$url = $newUrl;
+			
+		}
+		
+		return $url;
+		
+	}
+	
+	
+	/**
+	 *	Searches $relPath recursively for files with the DATA_FILE_EXTENSION and adds the parsed data to $siteIndex.
+	 *
+	 *	After successful indexing, the $siteIndex holds basically all information (except media files) from all pages of the whole site.
+	 *	This makes searching and filtering very easy since all data is stored in one place.
+	 *	To access the data of a specific page within the $siteIndex array, the page's url serves as the key: $this->siteIndex['/path/to/page']
+	 *
+	 *	@param string $relPath 
+	 *	@param number $level 
+	 *	@param string $parentRelPath
+	 */
+	 
+	private function indexPagesRecursively($relPath, $level, $parentRelPath) {
+		
+		$fullPath = BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . $relPath;
+		
+		if ($dh = opendir($fullPath)) {
+		
+			while (false !== ($item = readdir($dh))) {
+		
+				if ($item != "." && $item != "..") {
+					
+					$itemFullPath = $fullPath . '/' . $item;
+				
+					// If $item is a file with the DATA_FILE_EXTENSION, $item gets added to the index.
+					// In case there are more than one matching files, they get all added.
+					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
+						
+						$relUrl = $this->folderToUrl($relPath);
+						
+						$data = Data::parseTxt($itemFullPath);
+						
+						// The relative $relUrl of the page becomes the key (in $siteIndex). 
+						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 
+						$this->siteIndex[$relUrl] = array(
+							"template" => str_replace('.' . DATA_FILE_EXTENSION, '', $item),
+							"level" => $level,
+							"relPath" => $relPath,
+							"parentRelPath" => $parentRelPath,
+							"parentRelUrl" => $this->folderToUrl($parentRelPath),
+							"data" => $data
+						);
+						
+					}
+					
+					// If $item is a folder, $this->indexPagesRecursively gets again executed for that folder (recursively).
+					if (is_dir($itemFullPath)) {
+						
+						$this->indexPagesRecursively($relPath . '/' . $item, $level + 1, $relPath);
+						
+					}
+						
+				}
+			
+			}
+			
+			closedir($dh);	
+		
+		}
+			
+	}
+		
+	
+	/** 
+	 *	Parse sitewide settings and create siteIndex
+	 */
+	
+	public function __construct() {
+		
+		$this->parseSiteSettings();
+		
+		// $relPath and $parentRelPath = ''
+		// all pages of the first level have no parentRelUrl, just like the homepage
+		$this->indexPagesRecursively('', 0, '');
+		
+	}
+
+	
+	/**
+	 *	Return on of the main keys from $siteIndex (file, level, relPath, parentRelUrl, etc.).
+	 *
+	 *	@param string $key
+	 *	@return string $this->siteData[$key]
+	 */
+	
+	public function getSiteData($key) {
+		
+		return $this->siteData[$key];
+			
+	}
+	 
+	
+	/**
+	 *	Return name of the website - shortcut for $this->getSiteData('sitename').
+	 *
+	 *	@return string $this->getSiteData('sitename')
+	 */
+	
+	public function getSiteName() {
+		
+		if ($this->getSiteData('sitename')) {
+			
+			return $this->getSiteData('sitename');
+			
+		}
+		
+	}
+	
+	
+	/**
+	 * 	Return $siteIndex array.
+	 *
+	 * 	@return array $this->siteIndex
+	 */
+	
+	public function getSiteIndex() {
+		
+		return $this->siteIndex;
+		
+	}
+	
+	
+	/**
+	 *	Filter $siteIndex by relative file system path of the parent page.
+	 *
+	 *	@param mixed $parent
+	 *	@return array $filtered
+	 */
+	
+	public function filterSiteByParentRelPath($parent) {
+		
+		$filtered = array();
+		
+		foreach ($this->siteIndex as $key => $page) {
+			if ($page['parentRelPath'] == $parent) {
+				$filtered[$key] = $page;
+			}
+		}
+		
+		return $filtered;
+		
+	}
+	
+	
+	/**
+	 *	Filter $siteIndex by relative url of the parent page.
+	 *
+	 *	@param mixed $parent
+	 *	@return array $filtered
+	 */
+	
+	public function filterSiteByParentRelUrl($parent) {
+		
+		$filtered = array();
+		
+		foreach ($this->siteIndex as $key => $page) {
+			if ($page['parentRelUrl'] == $parent) {
+				$filtered[$key] = $page;
+			}
+		}
+		
+		return $filtered;
+		
+	}
+	
+
+	/**
+	 *	Filter $siteIndex by level (in the tree).
+	 *
+	 *	@param mixed $level
+	 *	@return array $filtered
+	 */
+	
+	public function filterSiteByLevel($level) {
+		
+		$filtered = array();
+		
+		foreach ($this->siteIndex as $key => $page) {
+			if ($page['level'] == $level) {
+				$filtered[$key] = $page;
+			}
+		}
+		
+		return $filtered;
+		
+	}
+	
+	
+	/**
+	 *	Filter $siteIndex by tag.
+	 *
+	 *	@param mixed $tag
+	 *	@return array $filtered
+	 */
+	
+	public function filterSiteByTag($tag) {
+		
+		$filtered = array();
+		
+		foreach ($this->siteIndex as $key => $page) {
+			
+			if (isset($page['data'][DATA_TAGS_KEY])) {
+				if (in_array($tag, $page['data'][DATA_TAGS_KEY])) {
+					$filtered[$key] = $page;
+				}
+			}
+			
+		}
+		
+		return $filtered;
+		
+	}
+	 
+	
+	/**
+	 *	Filter $siteIndex by multiple keywords (a search string).
+	 *
+	 *	@param string $str
+	 *	@return array $filtered
+	 */
+	
+	public function filterSiteByKeywords($str) {
+		
+		$filtered = array();
+		
+		$keywords = explode(' ', $str);
+		
+		// generate pattern
+		$pattern = '/^';
+		foreach ($keywords as $keyword) {
+			$pattern .= '(?=.*' . $keyword . ')';
+		}
+		// case-insensitive and multiline
+		$pattern .= '/is';
+		
+		// loop elements in $siteIndex
+		foreach ($this->siteIndex as $key => $page) {
+			
+			// Build string to search in.
+			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
+			// even if the keywords are distributed over different variables in $page[data]. 
+			$dataAsString = '';
+			
+			if (isset($page['data'])) {
+				
+				foreach ($page['data'] as $data) {
+					if (is_array($data)) {
+						// in case it is an array (for example for the tags)
+						$dataAsString .= implode(' ', $data) . ' ';
+					} else {
+						$dataAsString .= $data . ' ';	
+					}
+				}
+				
+				// search
+				if (preg_match($pattern, $dataAsString) == 1) {
+					$filtered[$key] = $page;
+				}
+				
+			}
+			
+		}
+		
+		return $filtered;
+		
+	}
+	 
+	 
+}
+
+
+?>

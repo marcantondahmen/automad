@@ -1,0 +1,24 @@
+title: NeoTax
+
+---
+
+tags: Utopia, Mixed Use, Residential
+
+---
+
+text: There have been many ideas in the past addressing the problem of disconnected skyscrapers. In fact, vertical peaks in a planar world create many dead ends and long connection paths while at the same time wasting area and interfering with surface related bio-ecological processes.
+In a world of permanently growing population we therefore have
+to deal with the issue of finding a way to establish a higher urban density than presently encountered without degrading life environment. So this design does not aim at creating a single building complex to solve these problems but rather proposes the functionality of a network of a three-dimensional infrastructure organized in a horizontal and vertical street grid.
+
+A 3D-grid infrastructure offers short connection paths and higher urban density with better local communication and less social isolation through 3D-street live and a higher number of neighbor interfaces. It favors geodesic closeness as a cube maximizes the volume among all hyper-rectangles with a given surface measure. Imagine that you can buy a plot in a city which has an xyz coordinate instead of a normal address to build your house on. Hence, designing the grid still leaves individual variability for each parcel owner.
+
+The network is based on a modular system where each module can be viewed as a "quarter". It can grow by adding framework modules in the first step which can be colonized by attaching units (houses) in the second step.
+
+Of course, increasing density would create a couple of new problems like traffic and natural illumination.
+To handle traffic and communication it is important to break down the infrastructure to a 3-scale organization.
+1. The global 3d macro-communication between different modules across the city;
+2. the meso-scale infrastructure in each module which makes the units accessible;
+3. the micro-scale infrastructure within each unit.
+
+This kind of structure entails also a decreased dependence on specific terrain conditions and warrants increased flexibility in choosing the location (forest, sea, desert, city extension, etc.). Condensing the city plot in a livable manner could therefore be a significant contribution
+towards preventing the waste of our limited planet surface. As a consequence it helps minimizing interference with surface related bio-ecological systems.
