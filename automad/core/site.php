@@ -150,9 +150,21 @@ class Site {
 						
 						$data = Data::parseTxt($itemFullPath);
 						
+						// Set the title (parsed from data file) as main property, since every page needs a title.
+						// In case the title is not set in the data file, use the slug of the URL instead.
+						// In case the title is missig for the home page, use the site name instead.
+						if (isset($data['title'])) {
+							$title = $data['title'];
+						} elseif ($relUrl) {
+							$title = ucwords(basename($relUrl));
+						} else {
+							$title = $this->getSiteName();
+						}
+						
 						// The relative $relUrl of the page becomes the key (in $siteIndex). 
 						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 
 						$this->siteIndex[$relUrl] = array(
+							"title" => $title,
 							"template" => str_replace('.' . DATA_FILE_EXTENSION, '', $item),
 							"level" => $level,
 							"relPath" => $relPath,
@@ -358,6 +370,48 @@ class Site {
 		return $filtered;
 		
 	}
+	 
+	 
+	/**
+	 *	Sorts the $siteIndex based on the file system path.
+	 *
+	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
+	 */ 
+	 
+	public function sortSiteByPath($order = SORT_ASC) {
+		
+		$arrayToSortBy = array();
+		
+		foreach ($this->siteIndex as $key => $value) {
+			
+			$arrayToSortBy[$key] = $value['relPath'];
+			
+		}
+				
+		array_multisort($arrayToSortBy, $order, $this->siteIndex);
+				
+	}
+	 	 
+	 
+	/**
+	 *	Sorts the $siteIndex based on the title.
+	 *
+	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
+	 */ 
+	 
+	public function sortSiteByTitle($order = SORT_ASC) {
+		
+		$arrayToSortBy = array();
+		
+		foreach ($this->siteIndex as $key => $value) {
+			
+			$arrayToSortBy[$key] = strtolower($value['title']);
+			
+		}
+				
+		array_multisort($arrayToSortBy, $order, $this->siteIndex);
+				
+	} 
 	 
 	 
 }

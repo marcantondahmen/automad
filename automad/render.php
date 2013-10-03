@@ -61,6 +61,10 @@ echo $site->getSiteData('theme');
 
 
 echo "<br><pre>";
+
+$site->sortSiteByPath(SORT_DESC);
+$site->sortSiteByTitle();
+
 //print_r ($site->getSiteIndex());
 print_r ($site->filterSiteByParentRelUrl(''));
 //print_r ($site->filterSiteByLevel(1));
