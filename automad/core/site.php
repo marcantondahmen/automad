@@ -72,22 +72,31 @@ class Site {
 	
 	
 	/**
-	 *	Transforms a file system path into an url.
+	 *	Builds an URL out of the parent URL and the actual file system folder name.
 	 *
-	 *	The prefix for sorting (xxxx.folder) will be stripped.
+	 *	It is important to only transform the actual folder name (slug) and not the whole path,
+	 *	because of handling possible duplicate parent folder names right.
+	 *	If there are for example two folders on the level above, called xxx.folder/ and yyy.folder/,
+	 *	they will be transformed into folder/ and folder-1/. If the URL from yyy.folder/child/ is made from the whole path,
+	 *	it will return folder/child/ instead of folder-1/child/, even if the parent URL would be folder-1/. 
+	 *
+	 *	The prefix for sorting (xxx.folder) will be stripped.
 	 *	In case the resulting url is already in use, a suffix (-1, -2 ...) gets appende to the new url.
 	 *
-	 *	@param string $folder
+	 *	@param string $parentUrl
+	 *	@param string $slug
 	 *	@return string $url
 	 */
 	
-	private function folderToUrl($folder) {
+	private function makeUrl($parentUrl, $slug) {
 		
-		// strip prefix
+		// strip prefix regex replace pattern
 		$pattern = '/[a-zA-Z0-9_-]+\./';
 		$replacement = '';
-		$url = preg_replace($pattern, $replacement, $folder);
 		
+		// build url
+		$url = ltrim($parentUrl . '/' . preg_replace($pattern, $replacement, $slug), '/');
+	
 		// check if url already exists
 		if (array_key_exists($url, $this->siteIndex)) {
 							
@@ -118,13 +127,13 @@ class Site {
 	 *
 	 *	@param string $relPath 
 	 *	@param number $level 
-	 *	@param string $parentRelPath
+	 *	@param string $parentRelUrl
 	 */
 	 
-	private function indexPagesRecursively($relPath, $level, $parentRelPath) {
+	private function indexPagesRecursively($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . $relPath;
-		
+		$fullPath = BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath;
+				
 		if ($dh = opendir($fullPath)) {
 		
 			while (false !== ($item = readdir($dh))) {
@@ -132,12 +141,12 @@ class Site {
 				if ($item != "." && $item != "..") {
 					
 					$itemFullPath = $fullPath . '/' . $item;
+					
+					$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
 				
 					// If $item is a file with the DATA_FILE_EXTENSION, $item gets added to the index.
 					// In case there are more than one matching files, they get all added.
 					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
-						
-						$relUrl = $this->folderToUrl($relPath);
 						
 						$data = Data::parseTxt($itemFullPath);
 						
@@ -147,8 +156,7 @@ class Site {
 							"template" => str_replace('.' . DATA_FILE_EXTENSION, '', $item),
 							"level" => $level,
 							"relPath" => $relPath,
-							"parentRelPath" => $parentRelPath,
-							"parentRelUrl" => $this->folderToUrl($parentRelPath),
+							"parentRelUrl" => $parentRelUrl,
 							"data" => $data
 						);
 						
@@ -157,7 +165,7 @@ class Site {
 					// If $item is a folder, $this->indexPagesRecursively gets again executed for that folder (recursively).
 					if (is_dir($itemFullPath)) {
 						
-						$this->indexPagesRecursively($relPath . '/' . $item, $level + 1, $relPath);
+						$this->indexPagesRecursively(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
 						
 					}
 						
@@ -179,10 +187,7 @@ class Site {
 	public function __construct() {
 		
 		$this->parseSiteSettings();
-		
-		// $relPath and $parentRelPath = ''
-		// all pages of the first level have no parentRelUrl, just like the homepage
-		$this->indexPagesRecursively('', 0, '');
+		$this->indexPagesRecursively();
 		
 	}
 
@@ -227,28 +232,6 @@ class Site {
 	public function getSiteIndex() {
 		
 		return $this->siteIndex;
-		
-	}
-	
-	
-	/**
-	 *	Filter $siteIndex by relative file system path of the parent page.
-	 *
-	 *	@param mixed $parent
-	 *	@return array $filtered
-	 */
-	
-	public function filterSiteByParentRelPath($parent) {
-		
-		$filtered = array();
-		
-		foreach ($this->siteIndex as $key => $page) {
-			if ($page['parentRelPath'] == $parent) {
-				$filtered[$key] = $page;
-			}
-		}
-		
-		return $filtered;
 		
 	}
 	
