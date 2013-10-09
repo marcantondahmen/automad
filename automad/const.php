@@ -43,4 +43,7 @@ define('DATA_TAG_SEPARATOR', ',');
 define('DATA_TAGS_KEY', 'tags');
 
  
+include(BASE . '/automad/version.php');
+ 
+ 
 ?>

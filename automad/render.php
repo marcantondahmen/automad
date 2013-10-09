@@ -72,6 +72,7 @@ print_r ($site->filterSiteByParentRelUrl(''));
 //print_r ($site->filterSiteByKeywords('neotax modules urban'));
 echo "</pre>";
 
-
+echo "<br>";
+echo "Automad " . VERSION;
 
 ?>
