@@ -51,10 +51,10 @@ class Site {
 	/**
 	 * 	Array holding all the site's pages and the related data. 
 	 *	
-	 *	To access the data for a specific page, use the url as key: $this->siteIndex['url'].
+	 *	To access the data for a specific page, use the url as key: $this->siteCollection['url'].
 	 */
 	
-	public $siteIndex = array();
+	public $siteCollection = array();
 	
 	
 	/**
@@ -98,13 +98,13 @@ class Site {
 		$url = ltrim($parentUrl . '/' . preg_replace($pattern, $replacement, $slug), '/');
 	
 		// check if url already exists
-		if (array_key_exists($url, $this->siteIndex)) {
+		if (array_key_exists($url, $this->siteCollection)) {
 							
 			$i = 0;
 			
 			$newUrl = $url;
 			
-			while (array_key_exists($newUrl, $this->siteIndex)) {
+			while (array_key_exists($newUrl, $this->siteCollection)) {
 				$i++;
 				$newUrl = $url . "-" . $i;
 			}
@@ -119,18 +119,18 @@ class Site {
 	
 	
 	/**
-	 *	Searches $relPath recursively for files with the DATA_FILE_EXTENSION and adds the parsed data to $siteIndex.
+	 *	Searches $relPath recursively for files with the DATA_FILE_EXTENSION and adds the parsed data to $siteCollection.
 	 *
-	 *	After successful indexing, the $siteIndex holds basically all information (except media files) from all pages of the whole site.
+	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
-	 *	To access the data of a specific page within the $siteIndex array, the page's url serves as the key: $this->siteIndex['/path/to/page']
+	 *	To access the data of a specific page within the $siteCollection array, the page's url serves as the key: $this->siteCollection['/path/to/page']
 	 *
 	 *	@param string $relPath 
 	 *	@param number $level 
 	 *	@param string $parentRelUrl
 	 */
 	 
-	private function indexPagesRecursively($relPath = '', $level = 0, $parentRelUrl = '') {
+	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
 		$fullPath = BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath;
 				
@@ -161,9 +161,9 @@ class Site {
 							$title = $this->getSiteName();
 						}
 						
-						// The relative $relUrl of the page becomes the key (in $siteIndex). 
+						// The relative $relUrl of the page becomes the key (in $siteCollection). 
 						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 
-						$this->siteIndex[$relUrl] = array(
+						$this->siteCollection[$relUrl] = array(
 							"title" => $title,
 							"template" => str_replace('.' . DATA_FILE_EXTENSION, '', $item),
 							"level" => $level,
@@ -174,10 +174,10 @@ class Site {
 						
 					}
 					
-					// If $item is a folder, $this->indexPagesRecursively gets again executed for that folder (recursively).
+					// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
 					if (is_dir($itemFullPath)) {
 						
-						$this->indexPagesRecursively(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
+						$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
 						
 					}
 						
@@ -193,19 +193,19 @@ class Site {
 		
 	
 	/** 
-	 *	Parse sitewide settings and create siteIndex
+	 *	Parse sitewide settings and create $siteCollection
 	 */
 	
 	public function __construct() {
 		
 		$this->parseSiteSettings();
-		$this->indexPagesRecursively();
+		$this->collectPages();
 		
 	}
 
 	
 	/**
-	 *	Return on of the main keys from $siteIndex (file, level, relPath, parentRelUrl, etc.).
+	 *	Return a keys from $siteData (sitename, theme, etc.).
 	 *
 	 *	@param string $key
 	 *	@return string $this->siteData[$key]
@@ -219,7 +219,7 @@ class Site {
 	 
 	
 	/**
-	 *	Return name of the website - shortcut for $this->getSiteData('sitename').
+	 *	Return the name of the website - shortcut for $this->getSiteData('sitename').
 	 *
 	 *	@return string $this->getSiteData('sitename')
 	 */
@@ -236,20 +236,20 @@ class Site {
 	
 	
 	/**
-	 * 	Return $siteIndex array.
+	 * 	Return $siteCollection array.
 	 *
-	 * 	@return array $this->siteIndex
+	 * 	@return array $this->siteCollection
 	 */
 	
-	public function getSiteIndex() {
+	public function getCollection() {
 		
-		return $this->siteIndex;
+		return $this->siteCollection;
 		
 	}
 	
 	
 	/**
-	 *	Filter $siteIndex by relative url of the parent page.
+	 *	Filter $siteCollection by relative url of the parent page.
 	 *
 	 *	@param mixed $parent
 	 *	@return array $filtered
@@ -259,7 +259,7 @@ class Site {
 		
 		$filtered = array();
 		
-		foreach ($this->siteIndex as $key => $page) {
+		foreach ($this->siteCollection as $key => $page) {
 			if ($page['parentRelUrl'] == $parent) {
 				$filtered[$key] = $page;
 			}
@@ -271,7 +271,7 @@ class Site {
 	
 
 	/**
-	 *	Filter $siteIndex by level (in the tree).
+	 *	Filter $siteCollection by level (in the tree).
 	 *
 	 *	@param mixed $level
 	 *	@return array $filtered
@@ -281,7 +281,7 @@ class Site {
 		
 		$filtered = array();
 		
-		foreach ($this->siteIndex as $key => $page) {
+		foreach ($this->siteCollection as $key => $page) {
 			if ($page['level'] == $level) {
 				$filtered[$key] = $page;
 			}
@@ -293,7 +293,7 @@ class Site {
 	
 	
 	/**
-	 *	Filter $siteIndex by tag.
+	 *	Filter $siteCollection by tag.
 	 *
 	 *	@param mixed $tag
 	 *	@return array $filtered
@@ -303,7 +303,7 @@ class Site {
 		
 		$filtered = array();
 		
-		foreach ($this->siteIndex as $key => $page) {
+		foreach ($this->siteCollection as $key => $page) {
 			
 			if (isset($page['data'][DATA_TAGS_KEY])) {
 				if (in_array($tag, $page['data'][DATA_TAGS_KEY])) {
@@ -319,7 +319,7 @@ class Site {
 	 
 	
 	/**
-	 *	Filter $siteIndex by multiple keywords (a search string).
+	 *	Filter $siteCollection by multiple keywords (a search string).
 	 *
 	 *	@param string $str
 	 *	@return array $filtered
@@ -339,8 +339,8 @@ class Site {
 		// case-insensitive and multiline
 		$pattern .= '/is';
 		
-		// loop elements in $siteIndex
-		foreach ($this->siteIndex as $key => $page) {
+		// loop elements in $siteCollection
+		foreach ($this->siteCollection as $key => $page) {
 			
 			// Build string to search in.
 			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
@@ -373,7 +373,7 @@ class Site {
 	 
 	 
 	/**
-	 *	Sorts the $siteIndex based on the file system path.
+	 *	Sorts the $siteCollection based on the file system path.
 	 *
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
 	 */ 
@@ -382,19 +382,19 @@ class Site {
 		
 		$arrayToSortBy = array();
 		
-		foreach ($this->siteIndex as $key => $value) {
+		foreach ($this->siteCollection as $key => $value) {
 			
 			$arrayToSortBy[$key] = $value['relPath'];
 			
 		}
 				
-		array_multisort($arrayToSortBy, $order, $this->siteIndex);
+		array_multisort($arrayToSortBy, $order, $this->siteCollection);
 				
 	}
 	 	 
 	 
 	/**
-	 *	Sorts the $siteIndex based on the title.
+	 *	Sorts the $siteCollection based on the title.
 	 *
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
 	 */ 
@@ -403,13 +403,13 @@ class Site {
 		
 		$arrayToSortBy = array();
 		
-		foreach ($this->siteIndex as $key => $value) {
+		foreach ($this->siteCollection as $key => $value) {
 			
 			$arrayToSortBy[$key] = strtolower($value['title']);
 			
 		}
 				
-		array_multisort($arrayToSortBy, $order, $this->siteIndex);
+		array_multisort($arrayToSortBy, $order, $this->siteCollection);
 				
 	} 
 	 

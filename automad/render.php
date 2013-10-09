@@ -65,7 +65,7 @@ echo "<br><pre>";
 $site->sortSiteByPath(SORT_DESC);
 $site->sortSiteByTitle();
 
-//print_r ($site->getSiteIndex());
+//print_r ($site->getCollection());
 print_r ($site->filterSiteByParentRelUrl(''));
 //print_r ($site->filterSiteByLevel(1));
 //print_r ($site->filterSiteByTag('Culture'));
