@@ -33,6 +33,7 @@
  */
  
 
+// Auto load classes
 spl_autoload_register(function ($class) {
 		
 	$class = strtolower($class);
@@ -41,39 +42,26 @@ spl_autoload_register(function ($class) {
 });
 
 
+// Constants
 include BASE . '/automad/const.php';
 
 
+// Initialize Page
+if (isset($_SERVER["PATH_INFO"])) {
+	$page = new Page($_SERVER["PATH_INFO"]);	
+} else {
+	$page = new Page('/');
+}
+
+
+// Render Page
+$page->render();
 
 
 
 
-
-// render page
-
-$site = new Site();
-
-echo $site->getSiteName();
-echo "<br>";
-echo $site->getSiteData('credits');
-echo "<br>";
-echo $site->getSiteData('theme');
-
-$selection = new Selection($site->getCollection());
-
-$selection->filterByParentRelUrl('publications');
-//$selection->filterByLevel(1);
-//$selection->filterByTag('Education');
-//$selection->filterByKeywords('utopia');
-$selection->sortByPath();
-$selection->sortByTitle();
-
-
-echo "<br><pre>";
-print_r ($selection->getSelection());
-echo "</pre>";
-
-echo "<br>";
+echo "<br><br><br>";
 echo "Automad " . VERSION;
+
 
 ?>
