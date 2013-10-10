@@ -153,19 +153,14 @@ class Site {
 						// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 						// In case the title is missig for the home page, use the site name instead.
 						if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-							
 							if ($relUrl) {
 								$data['title'] = ucwords(basename($relUrl));
 							} else {
 								$data['title'] = $this->getSiteName();
 							}
-							
 						} 
-						
-						
-						
 							
-						// The relative $relUrl of the page becomes the key (in $siteCollection). 
+						// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
 						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 
 						$this->siteCollection[$relUrl] = array(
 							"template" => str_replace('.' . DATA_FILE_EXTENSION, '', $item),
@@ -208,7 +203,7 @@ class Site {
 
 	
 	/**
-	 *	Return a keys from $siteData (sitename, theme, etc.).
+	 *	Return a key from $siteData (sitename, theme, etc.).
 	 *
 	 *	@param string $key
 	 *	@return string $this->siteData[$key]
@@ -230,9 +225,7 @@ class Site {
 	public function getSiteName() {
 		
 		if ($this->getSiteData('sitename')) {
-			
 			return $this->getSiteData('sitename');
-			
 		}
 		
 	}
@@ -249,173 +242,7 @@ class Site {
 		return $this->siteCollection;
 		
 	}
-	
-	
-	/**
-	 *	Filter $siteCollection by relative url of the parent page.
-	 *
-	 *	@param mixed $parent
-	 *	@return array $filtered
-	 */
-	
-	public function filterSiteByParentRelUrl($parent) {
-		
-		$filtered = array();
-		
-		foreach ($this->siteCollection as $key => $page) {
-			if ($page['parentRelUrl'] == $parent) {
-				$filtered[$key] = $page;
-			}
-		}
-		
-		return $filtered;
-		
-	}
-	
-
-	/**
-	 *	Filter $siteCollection by level (in the tree).
-	 *
-	 *	@param mixed $level
-	 *	@return array $filtered
-	 */
-	
-	public function filterSiteByLevel($level) {
-		
-		$filtered = array();
-		
-		foreach ($this->siteCollection as $key => $page) {
-			if ($page['level'] == $level) {
-				$filtered[$key] = $page;
-			}
-		}
-		
-		return $filtered;
-		
-	}
-	
-	
-	/**
-	 *	Filter $siteCollection by tag.
-	 *
-	 *	@param mixed $tag
-	 *	@return array $filtered
-	 */
-	
-	public function filterSiteByTag($tag) {
-		
-		$filtered = array();
-		
-		foreach ($this->siteCollection as $key => $page) {
-			
-			if (isset($page['data'][DATA_TAGS_KEY])) {
-				if (in_array($tag, $page['data'][DATA_TAGS_KEY])) {
-					$filtered[$key] = $page;
-				}
-			}
-			
-		}
-		
-		return $filtered;
-		
-	}
-	 
-	
-	/**
-	 *	Filter $siteCollection by multiple keywords (a search string).
-	 *
-	 *	@param string $str
-	 *	@return array $filtered
-	 */
-	
-	public function filterSiteByKeywords($str) {
-		
-		$filtered = array();
-		
-		$keywords = explode(' ', $str);
-		
-		// generate pattern
-		$pattern = '/^';
-		foreach ($keywords as $keyword) {
-			$pattern .= '(?=.*' . $keyword . ')';
-		}
-		// case-insensitive and multiline
-		$pattern .= '/is';
-		
-		// loop elements in $siteCollection
-		foreach ($this->siteCollection as $key => $page) {
-			
-			// Build string to search in.
-			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
-			// even if the keywords are distributed over different variables in $page[data]. 
-			$dataAsString = '';
-			
-			if (isset($page['data'])) {
-				
-				foreach ($page['data'] as $data) {
-					if (is_array($data)) {
-						// in case it is an array (for example for the tags)
-						$dataAsString .= implode(' ', $data) . ' ';
-					} else {
-						$dataAsString .= $data . ' ';	
-					}
-				}
-				
-				// search
-				if (preg_match($pattern, $dataAsString) == 1) {
-					$filtered[$key] = $page;
-				}
-				
-			}
-			
-		}
-		
-		return $filtered;
-		
-	}
-	 
-	 
-	/**
-	 *	Sorts the $siteCollection based on the file system path.
-	 *
-	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
-	 */ 
-	 
-	public function sortSiteByPath($order = SORT_ASC) {
-		
-		$arrayToSortBy = array();
-		
-		foreach ($this->siteCollection as $key => $value) {
-			
-			$arrayToSortBy[$key] = $value['relPath'];
-			
-		}
-				
-		array_multisort($arrayToSortBy, $order, $this->siteCollection);
-				
-	}
-	 	 
-	 
-	/**
-	 *	Sorts the $siteCollection based on the title.
-	 *
-	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
-	 */ 
-	 
-	public function sortSiteByTitle($order = SORT_ASC) {
-		
-		$arrayToSortBy = array();
-		
-		foreach ($this->siteCollection as $key => $value) {
-			
-			$arrayToSortBy[$key] = strtolower($value['data']['title']);
-			
-		}
-				
-		array_multisort($arrayToSortBy, $order, $this->siteCollection);
-				
-	} 
-	 
+		 
 	 
 }
 
