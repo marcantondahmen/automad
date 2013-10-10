@@ -94,8 +94,12 @@ class Site {
 		$pattern = '/[a-zA-Z0-9_-]+\./';
 		$replacement = '';
 		
-		// build url
-		$url = ltrim($parentUrl . '/' . preg_replace($pattern, $replacement, $slug), '/');
+		// Build URL:
+		// The ltrim (/) is needed to prevent a double / in front of every url, 
+		// since $parentUrl will be empty for level 0 and 1 (//path/to/page).
+		// Trimming all '/' and then prependig a single '/', makes sure that there is always just one slash 
+		// at the beginning of the URL.  
+		$url = '/' . ltrim($parentUrl . '/' . preg_replace($pattern, $replacement, $slug), '/');
 	
 		// check if url already exists
 		if (array_key_exists($url, $this->siteCollection)) {
