@@ -215,7 +215,9 @@ class Site {
 	
 	public function getSiteData($key) {
 		
-		return $this->siteData[$key];
+		if (array_key_exists($key, $this->siteData)) {
+			return $this->siteData[$key];
+		}
 			
 	}
 	 
@@ -230,6 +232,35 @@ class Site {
 		
 		if ($this->getSiteData('sitename')) {
 			return $this->getSiteData('sitename');
+		}
+		
+	}
+	
+	
+	/**
+	 * 	Return the theme for the website.
+	 *
+	 *	@return string $this->getSiteData('theme')
+	 */
+	
+	public function getTheme() {
+		
+		$theme = $this->getSiteData('theme');
+
+		// check if theme is defined in the settings file
+		if ($theme) {
+			
+			$themeDir = BASE . '/' . SITE_THEMES_DIR . '/' . $theme;
+			
+			// check if theme exists
+			if (is_dir($themeDir)) {
+				return $theme;
+			} else {
+				return SITE_DEFAULT_THEME;
+			}
+			
+		} else {
+			return SITE_DEFAULT_THEME;
 		}
 		
 	}

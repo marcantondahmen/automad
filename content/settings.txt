@@ -2,9 +2,5 @@ sitename: Automad CMS
 
 ---
 
-credits: Marc Anton Dahmen
-
----
-
-theme: default
+theme: test
 
