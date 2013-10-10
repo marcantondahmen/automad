@@ -59,17 +59,18 @@ echo $site->getSiteData('credits');
 echo "<br>";
 echo $site->getSiteData('theme');
 
+$selection = new Selection($site->getCollection());
+
+$selection->filterByParentRelUrl('publications');
+//$selection->filterByLevel(1);
+//$selection->filterByTag('Education');
+//$selection->filterByKeywords('utopia');
+$selection->sortByPath();
+$selection->sortByTitle();
+
 
 echo "<br><pre>";
-
-$site->sortSiteByPath(SORT_DESC);
-$site->sortSiteByTitle();
-
-//print_r ($site->getCollection());
-print_r ($site->filterSiteByParentRelUrl(''));
-//print_r ($site->filterSiteByLevel(1));
-//print_r ($site->filterSiteByTag('Culture'));
-//print_r ($site->filterSiteByKeywords('neotax modules urban'));
+print_r ($selection->getSelection());
 echo "</pre>";
 
 echo "<br>";
