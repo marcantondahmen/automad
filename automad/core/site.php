@@ -34,7 +34,7 @@
 
 
 /**
- *	The Site class includes all methods and properties regarding the whole site and its structure.
+ *	The Site class includes all methods and properties regarding the site, structure and pages.
  */
 
  
@@ -283,6 +283,39 @@ class Site {
 		
 	}
 		 
+		 
+	/**
+	 * 	Return the page object for the passed relative URL.
+	 * 
+	 *	@param string $url
+	 *	@return object $page
+	 */ 
+
+	public function getPageByUrl($url) {
+		
+		return $this->siteCollection[$url];
+		
+	} 
+
+	 
+	/**
+	 * 	Return the page object for the current page.
+	 *
+	 *	@return object $currentPage
+	 */ 
+	
+	public function getCurrentPage() {
+		
+		if (isset($_SERVER["PATH_INFO"])) {
+			$url = '/' . trim($_SERVER["PATH_INFO"], '/');
+		} else {
+			$url = '/';
+		}
+			
+		return $this->getPageByUrl($url);
+		
+	} 
+	 	 
 	 
 }
 
