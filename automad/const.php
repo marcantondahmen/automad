@@ -40,6 +40,13 @@ define('SITE_THEMES_DIR', 'themes');
 define('SITE_DEFAULT_THEME', 'standard');
 
 
+define('PAGE_DEFAULT_TEMPLATE', 'default');
+
+
+define('TEMPLATE_VAR_DELIMITER_LEFT', '$(');
+define('TEMPLATE_VAR_DELIMITER_RIGHT', ')');
+
+
 define('DATA_FILE_EXTENSION', 'txt');
 define('DATA_BLOCK_SEPARATOR', '---');
 define('DATA_PAIR_SEPARATOR', ':');
