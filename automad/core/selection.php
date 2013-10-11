@@ -140,10 +140,8 @@ class Selection {
 		
 		foreach ($this->selection as $key => $page) {
 			
-			if (isset($page['data'][DATA_TAGS_KEY])) {
-				if (in_array($tag, $page['data'][DATA_TAGS_KEY])) {
-					$filtered[$key] = $page;
-				}
+			if (in_array($tag, $page[DATA_TAGS_KEY])) {
+				$filtered[$key] = $page;
 			}
 			
 		}
@@ -176,27 +174,13 @@ class Selection {
 		// loop elements in $this->selection
 		foreach ($this->selection as $key => $page) {
 			
-			// Build string to search in.
 			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
 			// even if the keywords are distributed over different variables in $page[data]. 
-			$dataAsString = '';
-			
-			if (isset($page['data'])) {
+			$dataAsString = implode(" ", $page['data']);
 				
-				foreach ($page['data'] as $data) {
-					if (is_array($data)) {
-						// in case it is an array (for example for the tags)
-						$dataAsString .= implode(' ', $data) . ' ';
-					} else {
-						$dataAsString .= $data . ' ';	
-					}
-				}
-				
-				// search
-				if (preg_match($pattern, $dataAsString) == 1) {
-					$filtered[$key] = $page;
-				}
-				
+			// search
+			if (preg_match($pattern, $dataAsString) == 1) {
+				$filtered[$key] = $page;
 			}
 			
 		}
