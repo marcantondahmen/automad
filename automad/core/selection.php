@@ -97,7 +97,7 @@ class Selection {
 		$filtered = array();
 		
 		foreach ($this->selection as $key => $page) {
-			if ($page['parentRelUrl'] == $parent) {
+			if ($page->parentRelUrl == $parent) {
 				$filtered[$key] = $page;
 			}
 		}
@@ -118,7 +118,7 @@ class Selection {
 		$filtered = array();
 		
 		foreach ($this->selection as $key => $page) {
-			if ($page['level'] == $level) {
+			if ($page->level == $level) {
 				$filtered[$key] = $page;
 			}
 		}
@@ -140,7 +140,7 @@ class Selection {
 		
 		foreach ($this->selection as $key => $page) {
 			
-			if (in_array($tag, $page[DATA_TAGS_KEY])) {
+			if (in_array($tag, $page->tags)) {
 				$filtered[$key] = $page;
 			}
 			
@@ -149,8 +149,8 @@ class Selection {
 		$this->selection = $filtered;
 		
 	}
-	 
-	 
+	
+		 
 	/**
 	 *	Filter $this->selection by multiple keywords (a search string).
 	 *
@@ -176,7 +176,7 @@ class Selection {
 			
 			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
 			// even if the keywords are distributed over different variables in $page[data]. 
-			$dataAsString = implode(" ", $page['data']);
+			$dataAsString = implode(" ", $page->data);
 				
 			// search
 			if (preg_match($pattern, $dataAsString) == 1) {
@@ -200,9 +200,9 @@ class Selection {
 		
 		$arrayToSortBy = array();
 		
-		foreach ($this->selection as $key => $value) {
+		foreach ($this->selection as $key => $page) {
 			
-			$arrayToSortBy[$key] = $value['relPath'];
+			$arrayToSortBy[$key] = $page->relPath;
 			
 		}
 				
@@ -221,9 +221,9 @@ class Selection {
 		
 		$arrayToSortBy = array();
 		
-		foreach ($this->selection as $key => $value) {
+		foreach ($this->selection as $key => $page) {
 			
-			$arrayToSortBy[$key] = strtolower($value['data']['title']);
+			$arrayToSortBy[$key] = strtolower($page->data['title']);
 			
 		}
 				
