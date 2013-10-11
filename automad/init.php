@@ -45,32 +45,11 @@ spl_autoload_register(function ($class) {
 // Constants
 include BASE . '/automad/const.php';
 
-/*
-// Initialize Page
-if (isset($_SERVER["PATH_INFO"])) {
-	$page = new Page($_SERVER["PATH_INFO"]);	
-} else {
-	$page = new Page('/');
-}
 
+// Init new template
+$T = new Template();
 
-// Render Page
-$page->render();
-*/
-
-$s = new Site();
-$sel = new Selection($s->getCollection());
-
-$sel->filterByTag('Culture');
-
-
-echo "<pre>";
-print_r($sel);
-echo "</pre>";
-
-
-echo "<br><br><br>";
-echo "Automad " . VERSION;
+$T->render();
 
 
 ?>
