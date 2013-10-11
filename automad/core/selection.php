@@ -61,9 +61,9 @@ class Selection {
 	/**
 	 * 	Gets the collection.
 	 *
-	 *	Basically $collection means $site->getCollection(), assuming $site is an instance of Site.
+	 *	Basically $collection means Site::getCollection(), assuming $site is an instance of Site.
 	 *	
-	 *	@param array $collection
+	 *	@param array $collection (Site::getCollection())
 	 */
 	
 	public function __construct($collection) {
@@ -74,7 +74,7 @@ class Selection {
 	
 	
 	/**
-	 * 	Return the array with the selected pages.
+	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@return array $this->selection
 	 */
