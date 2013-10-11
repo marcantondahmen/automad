@@ -163,7 +163,10 @@ class Site {
 								$data['title'] = $this->getSiteName();
 							}
 						} 
-							
+						
+						// Extract tags
+						$tags = Data::extractTags($data);
+						
 						// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
 						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 
 						$this->siteCollection[$relUrl] = array(
@@ -171,6 +174,7 @@ class Site {
 							"level" => $level,
 							"relPath" => $relPath,
 							"parentRelUrl" => $parentRelUrl,
+							DATA_TAGS_KEY => $tags,
 							"data" => $data
 						);
 						

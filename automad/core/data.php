@@ -46,8 +46,6 @@ class Data {
 	 *
 	 *	First it separates the different blocks into simple key/value pairs.
 	 *	Then it creates an array of vars by splitting the pairs. 
-	 *	Keys which describe the tags of a page are detected and their value will be returned
-	 *	as an array. All other Values are strings.
 	 * 
 	 *	@param string $file
 	 *	@return array $vars
@@ -63,25 +61,7 @@ class Data {
 		foreach ($pairs as $pair) {
 		
 			list($key, $value) = explode(DATA_PAIR_SEPARATOR, $pair, 2);
-			
-			$key = trim($key);
-			$value = trim($value);
-			
-			if ($key == DATA_TAGS_KEY) {
-				
-				// All tags are splitted into an array
-				$tags = explode(DATA_TAG_SEPARATOR, $value);
-				// trim Tags
-				$vars[$key] = 	array_map(function($tag) {
-							return trim($tag); 
-						}, $tags);
-				
-			} else {
-				
-				// All other possible values are strings
-				$vars[$key] = $value;
-				
-			}
+			$vars[trim($key)] = trim($value);	
 			
 		}
 		
@@ -90,7 +70,36 @@ class Data {
 	}
  
  
- 
+ 	/**
+ 	 *	Extracts the tags string out of a given array and returns an array with these tags.
+ 	 *
+ 	 *	@param array $data
+ 	 *	@return array $tags
+ 	 */
+	
+	public function extractTags($data) {
+		
+		$tags = array();
+		
+		foreach ($data as $key => $value) {
+		
+			if ($key == DATA_TAGS_KEY) {
+	
+				// All tags are splitted into an array
+				$tags = explode(DATA_TAG_SEPARATOR, $value);
+				// Trim Tags
+				$tags = array_map(function($tag) {
+						return trim($tag); 
+					}, $tags);
+				
+			}		
+			
+		}
+		
+		return $tags;
+		
+	}
+ 	
  
 }
  
