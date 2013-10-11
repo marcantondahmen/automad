@@ -93,6 +93,9 @@ class Template {
 			$content = preg_replace('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '(' . $key . ')' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/', $value, $content);	
 		}
 		
+		// Delete all undefined variable in template
+		$content = preg_replace('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '[A-Za-z0-9_\-]+' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/', '', $content);	
+		
 		return $content;
 		
 	}
