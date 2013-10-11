@@ -168,16 +168,17 @@ class Site {
 						$tags = Data::extractTags($data);
 						
 						// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
-						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 
-						$this->siteCollection[$relUrl] = array(
-							"template" => str_replace('.' . DATA_FILE_EXTENSION, '', $item),
-							"level" => $level,
-							"relPath" => $relPath,
-							"parentRelUrl" => $parentRelUrl,
-							DATA_TAGS_KEY => $tags,
-							"data" => $data
-						);
-						
+						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
+						$P = new Page();
+						$P->data = $data;
+						$P->tags = $tags;
+						$P->relUrl = $relUrl;
+						$P->relPath = $relPath;
+						$P->level = $level;
+						$P->parentRelUrl = $parentRelUrl;
+						$P->template = str_replace('.' . DATA_FILE_EXTENSION, '', $item);
+						$this->siteCollection[$relUrl] = $P;
+							
 					}
 					
 					// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
