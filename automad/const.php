@@ -31,6 +31,9 @@
  *	http://marcdahmen.de
  *
  */
+
+
+define('BASE_URL', $_SERVER['SCRIPT_NAME']);
  
 
 define('SITE_CONTENT_DIR', 'content');
@@ -45,6 +48,8 @@ define('PAGE_DEFAULT_TEMPLATE', 'default');
 
 define('TEMPLATE_VAR_DELIMITER_LEFT', '$(');
 define('TEMPLATE_VAR_DELIMITER_RIGHT', ')');
+define('TEMPLATE_FN_DELIMITER_LEFT', '$[');
+define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
