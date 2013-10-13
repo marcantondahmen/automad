@@ -137,18 +137,20 @@ class Site {
 	 
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath;
+		$fullPath = rtrim(BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath, '/');
+				
+		$ignore = array('.', '..', '@eaDir');
 				
 		if ($dh = opendir($fullPath)) {
+			
+			$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
 		
 			while (false !== ($item = readdir($dh))) {
 		
-				if ($item != "." && $item != "..") {
+				if (!in_array($item, $ignore)) {
 					
 					$itemFullPath = $fullPath . '/' . $item;
-					
-					$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
-				
+									
 					// If $item is a file with the DATA_FILE_EXTENSION, $item gets added to the index.
 					// In case there are more than one matching files, they get all added.
 					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
