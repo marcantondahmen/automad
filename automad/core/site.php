@@ -35,6 +35,7 @@
 
 /**
  *	The Site class includes all methods and properties regarding the site, structure and pages.
+ *	A Site object is the "main" object. It consists of many single Page objects and holds also additional data like the site's name and theme.
  */
 
  
@@ -152,7 +153,7 @@ class Site {
 					$itemFullPath = $fullPath . '/' . $item;
 									
 					// If $item is a file with the DATA_FILE_EXTENSION, $item gets added to the index.
-					// In case there are more than one matching files, they get all added.
+					// In case there are more than one matching file, the last accessed gets added.
 					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
 						
 						$data = Data::parseTxt($itemFullPath);

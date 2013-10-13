@@ -34,7 +34,9 @@
 
  
 /**
- *	The Page class holds all properties and methods of a page.
+ *	The Page class holds all properties and methods of a single page.
+ *	A Page object describes an entry in the collection of all pages in the Site class.
+ *	Basically the Site object consists of many Page objects.
  */
 
 
