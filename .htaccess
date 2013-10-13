@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+RewriteBase /
+
+# Pretty URLs 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
+RewriteRule ^(.*)$ %2index.php/$1 [L]
+
+</IfModule>
