@@ -37,13 +37,13 @@
 spl_autoload_register(function ($class) {
 		
 	$class = strtolower($class);
-	include BASE . '/automad/core/' . $class . '.php';
+	include BASE_DIR . '/automad/core/' . $class . '.php';
 	
 });
 
 
 // Constants
-include BASE . '/automad/const.php';
+include BASE_DIR . '/automad/const.php';
 
 
 // Init new template

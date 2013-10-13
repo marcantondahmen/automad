@@ -1,6 +1,6 @@
 <?php
 
-define('BASE', __DIR__);
-include(BASE . '/automad/init.php');
+define('BASE_DIR', __DIR__);
+include(BASE_DIR . '/automad/init.php');
 
 ?>

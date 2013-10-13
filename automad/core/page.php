@@ -108,10 +108,10 @@ class Page {
 	
 	public function getTemplatePath($theme) {
 		
-		$templatePath = BASE . '/' . SITE_THEMES_DIR . '/' . $theme . '/' . $this->template . '.php';
+		$templatePath = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . $theme . '/' . $this->template . '.php';
 		
 		if (!file_exists($templatePath)) {			
-			$templatePath = BASE . '/' . SITE_THEMES_DIR . '/' . SITE_DEFAULT_THEME . '/' . PAGE_DEFAULT_TEMPLATE . '.php'; 	
+			$templatePath = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . SITE_DEFAULT_THEME . '/' . PAGE_DEFAULT_TEMPLATE . '.php'; 	
 		} 
 		
 		return $templatePath;

@@ -138,7 +138,7 @@ class Site {
 	 
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = rtrim(BASE . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath, '/');
+		$fullPath = rtrim(BASE_DIR . '/' . SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath, '/');
 				
 		$ignore = array('.', '..', '@eaDir');
 				
@@ -259,7 +259,7 @@ class Site {
 		// check if theme is defined in the settings file
 		if ($theme) {
 			
-			$themeDir = BASE . '/' . SITE_THEMES_DIR . '/' . $theme;
+			$themeDir = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . $theme;
 			
 			// check if theme exists
 			if (is_dir($themeDir)) {
