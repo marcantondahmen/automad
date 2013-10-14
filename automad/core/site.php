@@ -258,7 +258,7 @@ class Site {
 	public function getThemePath() {
 		
 		$theme = $this->getSiteData('theme');
-		$themePath = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . $theme;
+		$themePath = SITE_THEMES_DIR . '/' . $theme;
 
 		if ($theme && is_dir($themePath)) {	
 			// If theme is defined in the settings and exists in the file system as a folder, use that path.		
