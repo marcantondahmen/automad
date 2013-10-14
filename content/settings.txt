@@ -2,5 +2,5 @@ sitename: Automad CMS
 
 ---
 
-theme: test
+theme: standard
 
