@@ -67,7 +67,7 @@ class Site {
 	
 	private function parseSiteSettings() {
 		
-		$this->siteData = Parse::textFile(SITE_CONTENT_DIR . '/' . SITE_SETTINGS_FILE);
+		$this->siteData = Parse::textFile(SITE_SETTINGS_FILE);
 		
 	}
 	
