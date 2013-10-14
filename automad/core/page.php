@@ -102,21 +102,36 @@ class Page {
 	/**
 	 * 	Return the template of the page.
 	 *
-	 *	@param string $theme
-	 *	@return string $templatePath
+	 *	If a matching template can't be found, the default location will be searched.
+	 *	If it still can't be found, the default template will be returned.
+	 *
+	 *	@param string $themePath
+	 *	@return $templatePath
 	 */
 	
-	public function getTemplatePath($theme) {
+	public function getTemplatePath($themePath) {
 		
-		$templatePath = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . $theme . '/' . $this->template . '.php';
+		// First the passed $themePath is used to get the template file.
+		// That path may be already the default location, in case the theme is not set
+		// or the theme's folder can't be found.	
+		$templatePath = $themePath . '/' . $this->template . '.php';
+			
+		// If there is no matching template file in the theme folder,
+		// the default template location is used, if both locations are not equal already.
+		if (!file_exists($templatePath) && $themePath != BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR) {
+			$templatePath = BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';			
+		}
 		
-		if (!file_exists($templatePath)) {			
-			$templatePath = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . SITE_DEFAULT_THEME . '/' . PAGE_DEFAULT_TEMPLATE . '.php'; 	
-		} 
+		// If there is also no match in the default folder,
+		// the default folder in combination with the default template name is used. 
+		if (!file_exists($templatePath)) {	
+			$templatePath = BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';			
+		}
 		
 		return $templatePath;
 		
 	}
+	
 	
 } 
  
