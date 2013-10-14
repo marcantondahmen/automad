@@ -44,7 +44,7 @@ if (file_exists(BASE_DIR . '/.htaccess')) {
 
 define('SITE_CONTENT_DIR', BASE_DIR . '/content');
 define('SITE_SETTINGS_FILE', SITE_CONTENT_DIR . '/settings.txt'); 
-define('SITE_PAGES_DIR', 'pages');
+define('SITE_PAGES_DIR', SITE_CONTENT_DIR . '/pages');
 define('SITE_THEMES_DIR', 'themes');
 
 

@@ -138,7 +138,7 @@ class Site {
 	 
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = rtrim(SITE_CONTENT_DIR . '/' . SITE_PAGES_DIR . '/' . $relPath, '/');
+		$fullPath = rtrim(SITE_PAGES_DIR . '/' . $relPath, '/');
 				
 		$ignore = array('.', '..', '@eaDir');
 				
