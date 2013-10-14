@@ -69,7 +69,7 @@ class Template {
 	
 	private function loadTemplate() {
 		
-		require_once $this->P->getTemplatePath($this->S->getTheme());
+		require_once $this->P->getTemplatePath($this->S->getThemePath());
 		
 	}
 		
