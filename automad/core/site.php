@@ -289,7 +289,7 @@ class Site {
 		 
 		 
 	/**
-	 * 	Return the page object for the passed relative URL.
+	 * 	If existing, return the page object for the passed relative URL, else return error page.
 	 * 
 	 *	@param string $url
 	 *	@return object $page
@@ -297,7 +297,20 @@ class Site {
 
 	public function getPageByUrl($url) {
 		
-		return $this->siteCollection[$url];
+		if (array_key_exists($url, $this->siteCollection)) {
+		
+			return $this->siteCollection[$url];
+		
+		} else {
+			
+			$errorPage = new Page();
+			$errorPage->template = 'error';
+			$errorPage->data['title'] = 'Page not found!';
+			$errorPage->parentRelUrl = '';
+			
+			return $errorPage;
+			
+		}
 		
 	} 
 
