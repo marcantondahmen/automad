@@ -34,11 +34,11 @@
  
  
 /**
- *	The Data class includes all methods to handle data saved in text files.
+ *	The Parse class holds all parsing methods.
  */
  
  
-class Data {
+class Parse {
 	
 	
 	/**

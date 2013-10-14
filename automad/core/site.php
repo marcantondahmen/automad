@@ -67,7 +67,7 @@ class Site {
 	
 	private function parseSiteSettings() {
 		
-		$this->siteData = Data::parseTxt(SITE_CONTENT_DIR . '/' . SITE_SETTINGS_FILE);
+		$this->siteData = Parse::parseTxt(SITE_CONTENT_DIR . '/' . SITE_SETTINGS_FILE);
 		
 	}
 	
@@ -156,7 +156,7 @@ class Site {
 					// In case there are more than one matching file, the last accessed gets added.
 					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
 						
-						$data = Data::parseTxt($itemFullPath);
+						$data = Parse::parseTxt($itemFullPath);
 						
 						// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 						// In case the title is missig for the home page, use the site name instead.
@@ -169,7 +169,7 @@ class Site {
 						} 
 						
 						// Extract tags
-						$tags = Data::extractTags($data);
+						$tags = Parse::extractTags($data);
 						
 						// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
 						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
