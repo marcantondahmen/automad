@@ -46,12 +46,10 @@ define('SITE_CONTENT_DIR', 'content');
 define('SITE_SETTINGS_FILE', 'settings.txt'); 
 define('SITE_PAGES_DIR', 'pages');
 define('SITE_THEMES_DIR', 'themes');
-define('SITE_DEFAULT_THEME', 'standard');
 
 
-define('PAGE_DEFAULT_TEMPLATE', 'default');
-
-
+define('TEMPLATE_DEFAULT_DIR', 'automad/templates');
+define('TEMPLATE_DEFAULT_NAME', 'default');
 define('TEMPLATE_VAR_DELIMITER_LEFT', '$(');
 define('TEMPLATE_VAR_DELIMITER_RIGHT', ')');
 define('TEMPLATE_FN_DELIMITER_LEFT', '$[');
