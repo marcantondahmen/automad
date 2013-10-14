@@ -51,7 +51,7 @@ class Parse {
 	 *	@return array $vars
 	 */
 	 
-	public function parseTxt($file) {
+	public function textFile($file) {
 		
 		// split $file into data blocks
 		$pairs = explode(DATA_BLOCK_SEPARATOR, file_get_contents($file));
