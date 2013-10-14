@@ -247,29 +247,25 @@ class Site {
 	
 	
 	/**
-	 * 	Return the theme for the website.
+	 * 	Return the path to the theme for the website.
 	 *
-	 *	@return string $this->getSiteData('theme')
+	 *	If the theme is not defined or not existing in the file system, 
+	 *	the default template location will be returned instead.
+	 *
+	 *	@return theme path
 	 */
 	
-	public function getTheme() {
+	public function getThemePath() {
 		
 		$theme = $this->getSiteData('theme');
+		$themePath = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . $theme;
 
-		// check if theme is defined in the settings file
-		if ($theme) {
-			
-			$themeDir = BASE_DIR . '/' . SITE_THEMES_DIR . '/' . $theme;
-			
-			// check if theme exists
-			if (is_dir($themeDir)) {
-				return $theme;
-			} else {
-				return SITE_DEFAULT_THEME;
-			}
-			
+		if ($theme && is_dir($themePath)) {	
+			// If theme is defined in the settings and exists in the file system as a folder, use that path.		
+			return $themePath;
 		} else {
-			return SITE_DEFAULT_THEME;
+			// If not, use the default template location.
+			return BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR;
 		}
 		
 	}
