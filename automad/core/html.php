@@ -154,6 +154,32 @@ class Html {
 	}
 	
 	
+	/**
+	 * 	Return the site name
+	 *
+	 *	@return site name
+	 */
+	
+	public function siteName() {
+		
+		return $this->S->getSiteName();
+		
+	}
+	
+	
+	/**
+	 * 	Return the URL of the page theme
+	 *
+	 *	@return page theme URL
+	 */
+	
+	public function themeURL() {
+		
+		return str_replace(BASE_DIR, BASE_URL, $this->S->getThemePath());
+		
+	}
+	
+	
 }
 
 
