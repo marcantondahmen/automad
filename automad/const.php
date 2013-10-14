@@ -48,7 +48,7 @@ define('SITE_PAGES_DIR', SITE_CONTENT_DIR . '/pages');
 define('SITE_THEMES_DIR', BASE_DIR . '/themes');
 
 
-define('TEMPLATE_DEFAULT_DIR', 'automad/templates');
+define('TEMPLATE_DEFAULT_DIR', BASE_DIR . '/automad/templates');
 define('TEMPLATE_DEFAULT_NAME', 'default');
 define('TEMPLATE_VAR_DELIMITER_LEFT', '$(');
 define('TEMPLATE_VAR_DELIMITER_RIGHT', ')');

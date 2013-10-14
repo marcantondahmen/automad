@@ -265,7 +265,7 @@ class Site {
 			return $themePath;
 		} else {
 			// If not, use the default template location.
-			return BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR;
+			return TEMPLATE_DEFAULT_DIR;
 		}
 		
 	}

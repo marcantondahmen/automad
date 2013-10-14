@@ -118,14 +118,14 @@ class Page {
 			
 		// If there is no matching template file in the theme folder,
 		// the default template location is used, if both locations are not equal already.
-		if (!file_exists($templatePath) && $themePath != BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR) {
-			$templatePath = BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';			
+		if (!file_exists($templatePath) && $themePath != TEMPLATE_DEFAULT_DIR) {
+			$templatePath = TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';			
 		}
 		
 		// If there is also no match in the default folder,
 		// the default folder in combination with the default template name is used. 
 		if (!file_exists($templatePath)) {	
-			$templatePath = BASE_DIR . '/' . TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';			
+			$templatePath = TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';			
 		}
 		
 		return $templatePath;
