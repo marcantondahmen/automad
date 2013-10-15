@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>$[siteName] / $(title)</title>
+	<meta name="app" content="Automad <?php echo VERSION; ?>">
 	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
 </head>
 
@@ -12,5 +13,7 @@
 	<h1>$(title)</h1>
 	<p>$(text)</p>
 	<p>Page Template</p>
+	<br />
+	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
 </html>

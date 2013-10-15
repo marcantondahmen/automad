@@ -2,10 +2,13 @@
 <html>
 <head>
 <title>$(title)</title>
+<meta name="app" content="Automad <?php echo VERSION; ?>">
 </head>
 
 <body>	
 <h1>$(title)</h1>
 <p>Go back to home:<br />$[navBelow()]</p>
+<br />
+<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
 </html>

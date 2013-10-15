@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>$(title)</title>
+<meta name="app" content="Automad <?php echo VERSION; ?>">
 </head>
 
 <body>
@@ -12,5 +13,7 @@
 <p>$(tags)</p>
 <p>$(text)</p>
 <p><?php echo $this->P->template; ?></p>
+<br />
+<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
 </html>
