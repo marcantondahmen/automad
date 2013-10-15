@@ -56,6 +56,12 @@ define('TEMPLATE_FN_DELIMITER_LEFT', '$[');
 define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 
 
+define('HTML_CLASS_NAV', 'nav');
+define('HTML_CLASS_LIST', 'list');
+define('HTML_CLASS_CURRENT', 'current');
+define('HMTL_CLASS_CURRENT_PATH', 'currentPath');
+
+
 define('DATA_FILE_EXTENSION', 'txt');
 define('DATA_BLOCK_SEPARATOR', '---');
 define('DATA_PAIR_SEPARATOR', ':');
