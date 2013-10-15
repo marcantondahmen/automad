@@ -133,6 +133,52 @@ class Page {
 	}
 	
 	
+	/**
+	 *	Check if page is the current page.
+	 *
+	 *	@return boolean
+	 */
+	
+	public function isCurrent() {
+		
+		if (isset($_SERVER["PATH_INFO"])) {
+			$currentRelUrl = '/' . trim($_SERVER["PATH_INFO"], '/');
+		} else {
+			$currentRelUrl = '/';
+		}
+		
+		if ($currentRelUrl == $this->relUrl) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
+	/**
+	 *	Check if the page URL is a part the current page's URL.
+	 *
+	 *	@return boolean
+	 */
+	
+	public function isInCurrentPath() {
+		
+		if (isset($_SERVER["PATH_INFO"])) {
+			$currentRelUrl = '/' . trim($_SERVER["PATH_INFO"], '/');
+		} else {
+			$currentRelUrl = '/';
+		}
+		
+		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent()) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
 } 
  
  
