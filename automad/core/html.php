@@ -88,7 +88,7 @@ class Html {
 			
 		$vars = array_map('trim', explode(',', $varStr));
 		
-		$html = '<ul class="list">';
+		$html = '<ul class="' . HTML_CLASS_LIST . '">';
 		
 		foreach ($pages as $page) {
 			
@@ -166,7 +166,7 @@ class Html {
 	
 	public function navBelow($parentUrl) {
 		
-		$html = '<ul class="nav">';
+		$html = '<ul class="' . HTML_CLASS_NAV . '">';
 		
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentRelUrl($parentUrl);
@@ -220,7 +220,7 @@ class Html {
 	
 	public function navTop() {
 	
-		$html = '<ul class="nav">';
+		$html = '<ul class="' . HTML_CLASS_NAV . '">';
 		
 		$home = $this->S->getPageByUrl('/');
 		
