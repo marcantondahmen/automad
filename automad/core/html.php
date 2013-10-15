@@ -174,7 +174,15 @@ class Html {
 		
 		foreach($pages as $page) {
 			
-			$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a></li>'; 
+			if ($page->isCurrent()) {	
+				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			} elseif ($page->isInCurrentPath()) {
+				$class = ' class="' . HMTL_CLASS_CURRENT_PATH . '" ';
+			} else {
+				$class = ' ';
+			}
+			
+			$html .= '<li><a' . $class . 'href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a></li>'; 
 			
 		}
 		
