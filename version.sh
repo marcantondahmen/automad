@@ -45,7 +45,7 @@ if [[ $arg != *"$flowCommitMessage"* ]]; then
 	# Finish release or hotfix (hg-flow)
 	if [[ $arg =~ (release|hotfix).*finish ]]; then
 	 
-		version=${arg##*finish }
+		version=${arg##*finish }.0
 			
 		echo
 		echo "---"
@@ -81,11 +81,11 @@ if [[ $arg != *"$flowCommitMessage"* ]]; then
 			distance=$(($nextRev - $taggedRev))
 			echo "Distance in history: $distance"
 			
-			version=$tag-$distance
+			version=$tag.$distance
 	
 		else			
 			
-			version=0.0.0-$nextRev	
+			version=0.0.$nextRev	
 		
 		fi
 				
