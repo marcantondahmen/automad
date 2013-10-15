@@ -66,6 +66,96 @@ class Html {
 		
 	}
 	
+
+	/**
+	 * 	Generate the HTML out of a selection of pages and a string of variables.
+	 *
+	 *	The string of variables represents the variables used in the page's 
+	 *	text file which should be included in the HTML of the list.
+	 * 
+	 *	The function is private and is not supposed to be included in a template.
+	 *
+	 *	@param array $pages (selected pages)
+	 *	@param string $varStr (variable to output in the list, comma separated)
+	 *	@return the HTML of the list
+	 */
+	
+	private function listGenerateHtml($pages, $varStr) {
+		
+		if (!$varStr) {
+			$varStr = 'title';
+		}	
+			
+		$vars = array_map('trim', explode(',', $varStr));
+		
+		$html = '<ul>';
+		
+		foreach ($pages as $page) {
+			
+			$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">';
+			
+			foreach ($vars as $var) {
+				
+				if (isset($page->data[$var])) {
+					// Variable key is used to define the html class.
+					// That makes styling with CSS very customizable.
+					$html .= '<div class="' . $var . '">' . $page->data[$var] . '</div>';
+				}
+				
+			}
+			
+			$html .= '</a></li>';
+			
+		}
+		
+		$html .= '</ul>';
+		
+		return $html;
+		
+	}
+
+	
+	/**
+	 * 	Return the HTML for a list of pages below the current page.
+	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
+	 *
+	 *	@param string $varStr
+	 *	@return the HTML of the list
+	 */
+	
+	public function listChildren($varStr) {
+		
+		$selection = new Selection($this->S->getCollection());
+		$selection->filterByParentRelUrl($this->P->relUrl);
+		$selection->sortByPath();
+		$pages = $selection->getSelection();
+		
+		return $this->listGenerateHtml($pages, $varStr);
+		
+	}
+	
+	
+	/**
+	 * 	Return the HTML for a list of all pages excluding the current page.
+	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
+	 *
+	 *	@param string $varStr
+	 *	@return the HTML of the list
+	 */
+	
+	public function listAll($varStr) {
+	
+		$selection = new Selection($this->S->getCollection());	
+		$selection->sortByPath();
+		$pages = $selection->getSelection();
+		
+		// Remove current page from selecion
+		unset($pages[$this->P->relUrl]);
+	
+		return $this->listGenerateHtml($pages, $varStr);	
+		
+	}
+	
 	
 	/**
 	 *	Generate a list for the navigation below a given URL.
