@@ -2,6 +2,10 @@ title: Canton School Chur
 
 ---
 
+subtitle: Competition
+
+---
+
 tags: Education, Public
 
 ---

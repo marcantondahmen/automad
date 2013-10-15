@@ -18,3 +18,13 @@ a {
 pre {
 	width: 800px;
 }
+
+li .title {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+li .subtitle {
+	font-weight: bold;
+	font-size: 18px;
+}
