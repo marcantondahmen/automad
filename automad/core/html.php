@@ -156,22 +156,21 @@ class Html {
 		
 	}
 	
-	
+
 	/**
-	 *	Generate a list for the navigation below a given URL.
+	 * 	Generate the HTML a navigation list for the passed pages.
 	 *
-	 *	@param string $parentRelUrl
-	 *	@return html of the generated list	
+	 *	Each page gets checked against the current URL. 
+	 *	If the page is the current page or the page is a parent of the current page, 
+	 *	additional classe will be added to the representing element.
+	 *	
+	 *	@param array $pages
+	 *	@return the HTML of the navigation
 	 */
 	
-	public function navBelow($parentUrl) {
+	private function navGenerateHtml($pages) {
 		
 		$html = '<ul class="' . HTML_CLASS_NAV . '">';
-		
-		$selection = new Selection($this->S->getCollection());
-		$selection->filterByParentRelUrl($parentUrl);
-		$selection->sortByPath();
-		$pages = $selection->getSelection();
 		
 		foreach($pages as $page) {
 			
@@ -182,6 +181,25 @@ class Html {
 		$html .= '</ul>';
 		
 		return $html;
+		
+	}
+	
+	
+	/**
+	 *	Generate a list for the navigation below a given URL.
+	 *
+	 *	@param string $parentRelUrl
+	 *	@return html of the generated list	
+	 */
+	
+	public function navBelow($parentUrl) {
+				
+		$selection = new Selection($this->S->getCollection());
+		$selection->filterByParentRelUrl($parentUrl);
+		$selection->sortByPath();
+		$pages = $selection->getSelection();
+		
+		return $this->navGenerateHtml($pages);
 		
 	}
 	
@@ -220,26 +238,15 @@ class Html {
 	
 	public function navTop() {
 	
-		$html = '<ul class="' . HTML_CLASS_NAV . '">';
-		
-		$home = $this->S->getPageByUrl('/');
-		
-		$html .= '<li><a href="' . BASE_URL . '">' . $home->data['title'] . '</a></li>'; 
-		
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentRelUrl('/');
 		$selection->sortByPath();
 		$pages = $selection->getSelection();
 		
-		foreach($pages as $page) {
-			
-			$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a></li>'; 
-			
-		}
+		// Add Home Page as well
+		$pages = array('/' => $this->S->getPageByUrl('/')) + $pages;
 		
-		$html .= '</ul>';
-		
-		return $html;
+		return $this->navGenerateHtml($pages);
 		
 	}
 	
