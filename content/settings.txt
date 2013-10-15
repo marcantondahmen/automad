@@ -1,0 +1,6 @@
+sitename: Automad CMS
+
+---
+
+theme: standard
+
