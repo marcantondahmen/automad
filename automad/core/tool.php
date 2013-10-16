@@ -82,7 +82,7 @@ class Tool {
 		$selection->sortByPath();
 		$pages = $selection->getSelection();
 		
-		return Html::listGenerateHtml($pages, $varStr);
+		return Html::generateList($pages, $varStr);
 		
 	}
 	
@@ -104,7 +104,7 @@ class Tool {
 		// Remove current page from selecion
 		unset($pages[$this->P->relUrl]);
 	
-		return Html::listGenerateHtml($pages, $varStr);	
+		return Html::generateList($pages, $varStr);	
 		
 	}
 	
@@ -123,7 +123,7 @@ class Tool {
 		$selection->sortByPath();
 		$pages = $selection->getSelection();
 		
-		return Html::navGenerateHtml($pages);
+		return Html::generateNav($pages);
 		
 	}
 	
@@ -170,7 +170,7 @@ class Tool {
 		// Add Home Page as well
 		$pages = array('/' => $this->S->getPageByUrl('/')) + $pages;
 		
-		return Html::navGenerateHtml($pages);
+		return Html::generateNav($pages);
 		
 	}
 	

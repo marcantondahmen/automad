@@ -54,7 +54,7 @@ class Html {
 	 *	@return the HTML of the list
 	 */
 	
-	public static function listGenerateHtml($pages, $varStr) {
+	public static function generateList($pages, $varStr) {
 		
 		if (!$varStr) {
 			$varStr = 'title';
@@ -100,7 +100,7 @@ class Html {
 	 *	@return the HTML of the navigation
 	 */
 	
-	public static function navGenerateHtml($pages) {
+	public static function generateNav($pages) {
 		
 		$html = '<ul class="' . HTML_CLASS_NAV . '">';
 		
