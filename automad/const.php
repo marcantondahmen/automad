@@ -59,7 +59,9 @@ define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 define('HTML_CLASS_NAV', 'nav');
 define('HTML_CLASS_LIST', 'list');
 define('HTML_CLASS_CURRENT', 'current');
-define('HMTL_CLASS_CURRENT_PATH', 'currentPath');
+define('HTML_CLASS_CURRENT_PATH', 'currentPath');
+define('HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
+define('HTML_BREADCRUMB_SEPARATOR', ' &gt; ');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
