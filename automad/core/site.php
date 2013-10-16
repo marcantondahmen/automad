@@ -59,7 +59,7 @@ class Site {
 	
 	
 	/**
-	 * 	Parse Site settings.
+	 * 	Parse Site settings to replace defaults.
 	 *
 	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
 	 *	in the root of the content directory.
@@ -67,7 +67,17 @@ class Site {
 	
 	private function parseSiteSettings() {
 		
-		$this->siteData = Parse::textFile(SITE_SETTINGS_FILE);
+		// Load defaults		
+		$defaults = 	array(	
+					'sitename' => SITE_DEFAULT_NAME, 
+					'theme' => SITE_DEFAULT_THEME, 
+					'errorPageTitle' => SITE_ERROR_PAGE_TITLE, 
+					'resultsPageTitle' => SITE_RESULTS_PAGE_TITLE,
+					'resultsPageUrl' => SITE_RESULTS_PAGE_URL
+				);
+		
+		// Merge defaults with settings from file
+		$this->siteData = array_merge($defaults, Parse::textFile(SITE_SETTINGS_FILE));
 		
 	}
 	
@@ -229,7 +239,7 @@ class Site {
 		}
 			
 	}
-	 
+	
 	
 	/**
 	 *	Return the name of the website - shortcut for $this->getSiteData('sitename').
@@ -239,9 +249,7 @@ class Site {
 	
 	public function getSiteName() {
 		
-		if ($this->getSiteData('sitename')) {
-			return $this->getSiteData('sitename');
-		}
+		return $this->getSiteData('sitename');
 		
 	}
 	
@@ -261,7 +269,7 @@ class Site {
 		$themePath = SITE_THEMES_DIR . '/' . $theme;
 
 		if ($theme && is_dir($themePath)) {	
-			// If theme is defined in the settings and exists in the file system as a folder, use that path.		
+			// If theme is defined (and not '' in the constants) and exists in the file system as a folder, use that path.		
 			return $themePath;
 		} else {
 			// If not, use the default template location.
@@ -294,18 +302,21 @@ class Site {
 	public function getPageByUrl($url) {
 		
 		if (array_key_exists($url, $this->siteCollection)) {
-		
+			
+			// If page exists
 			return $this->siteCollection[$url];
-		
+	
+		} elseif (isset($_GET["search"]) && $url == $this->getSiteData('resultsPageUrl')) {
+	
+			// If not, but it has the URL of the search results page (settings) and has a query (!).
+			// An empty query for a results page doesn't make sense.
+			return $this->createPage('results', $this->getSiteData('resultsPageTitle') . ' / "' . $_GET["search"] . '"');
+	
 		} else {
-			
-			$errorPage = new Page();
-			$errorPage->template = 'error';
-			$errorPage->data['title'] = 'Page not found!';
-			$errorPage->parentRelUrl = '';
-			
-			return $errorPage;
-			
+	
+			// Else return error page
+			return $this->createPage('error', $this->getSiteData('errorPageTitle'));
+	
 		}
 		
 	} 
@@ -328,7 +339,28 @@ class Site {
 		return $this->getPageByUrl($url);
 		
 	} 
-	 	 
+	
+	
+	/**
+	 * 	Create a temporary page on the fly (for example error page or search results).
+	 *
+	 *	@param string $template
+	 *	@param string $title
+	 *	@param string $parent
+	 *	@return temporary page object
+	 */
+	
+	private function createPage($template, $title) {
+		
+		$page = new Page();
+		$page->template = $template;
+		$page->data['title'] = $title;
+		$page->parentRelUrl = '';
+		
+		return $page;
+		
+	}
+		 	 
 	 
 }
 
