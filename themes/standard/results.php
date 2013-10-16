@@ -7,12 +7,10 @@
 </head>
 
 <body>
-	<p>$[searchField(Search this Site ...)]</p>
+	<p>$[searchField()]</p>
 	<p>$[navTop]</p>
-	<p>$[navSiblings]</p>	
-	<p>$[navChildren]</p>
 	<h1>$(title)</h1>
-	<div>$[listChildren(title, subtitle, tags)]</div>
+	<div>$[searchResults(title, subtitle, tags)]</div>
 	<br />
 	<p>$[navBreadcrumbs]</p>
 	<br />
