@@ -78,7 +78,7 @@ class Tool {
 	public function listChildren($varStr) {
 		
 		$selection = new Selection($this->S->getCollection());
-		$selection->filterByParentRelUrl($this->P->relUrl);
+		$selection->filterByParentUrl($this->P->relUrl);
 		$selection->sortByPath();
 		$pages = $selection->getSelection();
 		
@@ -119,7 +119,7 @@ class Tool {
 	public function navBelow($parentUrl) {
 				
 		$selection = new Selection($this->S->getCollection());
-		$selection->filterByParentRelUrl($parentUrl);
+		$selection->filterByParentUrl($parentUrl);
 		$selection->sortByPath();
 		$pages = $selection->getSelection();
 		
@@ -187,7 +187,7 @@ class Tool {
 	public function navTop() {
 	
 		$selection = new Selection($this->S->getCollection());
-		$selection->filterByParentRelUrl('/');
+		$selection->filterByParentUrl('/');
 		$selection->sortByPath();
 		$pages = $selection->getSelection();
 		

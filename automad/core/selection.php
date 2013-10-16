@@ -92,7 +92,7 @@ class Selection {
 	 *	@param string $parent
 	 */
 	
-	public function filterByParentRelUrl($parent) {
+	public function filterByParentUrl($parent) {
 		
 		$filtered = array();
 		
