@@ -108,27 +108,6 @@ class Selection {
 	
 	
 	/**
-	 *	Filter $this->selection by level (in the tree).
-	 *
-	 *	@param number $level
-	 */
-	
-	public function filterByLevel($level) {
-		
-		$filtered = array();
-		
-		foreach ($this->selection as $key => $page) {
-			if ($page->level == $level) {
-				$filtered[$key] = $page;
-			}
-		}
-		
-		$this->selection = $filtered;
-		
-	}
-	
-	
-	/**
 	 *	Filter $this->selection by tag.
 	 *
 	 *	@param string $tag
