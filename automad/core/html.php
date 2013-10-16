@@ -40,9 +40,36 @@
 
 class Html {
 	
-
+	
 	/**
-	 * 	Generate the HTML out of a selection of pages and a string of variables.
+	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
+	 *	
+	 *	@param array $pages
+	 *	@return the HTML of the breadcrumbs
+	 */
+	
+	public static function generateBreadcrumbs($pages) {
+		
+		$html = '<div class="' . HTML_CLASS_BREADCRUMBS . '">';
+		
+		foreach ($pages as $page) {
+			
+			$html .= '<a href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a>' . HTML_BREADCRUMB_SEPARATOR;
+			
+		}
+		
+		// Remove last separator again
+		$html = rtrim($html, HTML_BREADCRUMB_SEPARATOR);
+		
+		$html .= '</div>';
+		
+		return $html;
+		
+	}
+	
+	
+	/**
+	 * 	Generate the HTML for a page list out of a selection of pages and a string of variables.
 	 *
 	 *	The string of variables represents the variables used in the page's 
 	 *	text file which should be included in the HTML of the list.
@@ -90,7 +117,7 @@ class Html {
 
 
 	/**
-	 * 	Generate the HTML a navigation list for the passed pages.
+	 * 	Generate the HTML of a navigation list for the passed pages.
 	 *
 	 *	Each page gets checked against the current URL. 
 	 *	If the page is the current page or the page is a parent of the current page, 
@@ -109,7 +136,7 @@ class Html {
 			if ($page->isCurrent()) {	
 				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
 			} elseif ($page->isInCurrentPath()) {
-				$class = ' class="' . HMTL_CLASS_CURRENT_PATH . '" ';
+				$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';
 			} else {
 				$class = ' ';
 			}
