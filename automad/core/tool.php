@@ -232,6 +232,48 @@ class Tool {
 				
 	}
 	
+		
+	/**
+	 * 	Place a search field with placeholder text.
+	 *
+	 *	@param string $varStr (placeholder text)
+	 *	@return the HTML of the searchfield
+	 */
+	
+	public function searchField($varStr) {
+		
+		$url = BASE_URL . $this->S->getSiteData('resultsPageUrl');
+		
+		return Html::generateSearchField($url, $varStr);
+		
+	}
+
+	
+	/**
+	 * 	Generate a list of search results.
+	 *
+	 *	@param string $varString
+	 *	@return html of the generated list
+	 */
+	
+	public function searchResults($varStr) {
+		
+		if (isset($_GET["search"])) {
+			
+			$search = $_GET["search"];
+			
+			$selection = new Selection($this->S->getCollection());
+			$selection->filterByKeywords($search);
+			$selection->sortByTitle();
+			
+			$pages = $selection->getSelection();
+			
+			return Html::generateList($pages, $varStr);
+			
+		}
+		
+	}
+	
 	
 	/**
 	 * 	Return the site name
