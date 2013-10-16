@@ -13,6 +13,8 @@
 	<h1>$(title)</h1>
 	<div>$[listChildren(title, subtitle, tags)]</div>
 	<br />
+	<p>$[navBreadcrumbs]</p>
+	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
 </html>

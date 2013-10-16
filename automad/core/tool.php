@@ -127,7 +127,31 @@ class Tool {
 		
 	}
 	
+
+	/**
+	 * 	Generate breadcrumbs to current page.
+	 *
+	 *	@return html of breadcrumb navigation
+	 */
 	
+	public function navBreadcrumbs() {
+		
+		$pages = array();
+		$urlSegments = explode('/', $this->P->relUrl);
+		$tempUrl = '';
+		
+		foreach ($urlSegments as $urlSegment) {
+			
+			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');
+			$pages[] = $this->S->getPageByUrl($tempUrl); 
+			
+		}
+		
+		return Html::generateBreadcrumbs($pages);
+		
+	}
+	
+		
 	/**
 	 *	Generate a list for the navigation below the current page.
 	 *

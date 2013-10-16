@@ -11,10 +11,14 @@
 	<p>$[navChildren]</p>
 	<p>$[navSiblings]</p>	
 	<h1>$(title)</h1>
+	<h2>$(subtitle)</h2>
+	<h3>$(tags)</h3>
 	<p>$(text)</p>
 	<br />
 	<p>Related Pages:</p>
 	<p>$[relatedPages(title, tags)]</p>
+	<br />
+	<p>$[navBreadcrumbs]</p>
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
