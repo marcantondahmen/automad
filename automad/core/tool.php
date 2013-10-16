@@ -173,6 +173,40 @@ class Tool {
 		return Html::generateNav($pages);
 		
 	}
+
+	
+	/**
+	 * 	Generate a list of pages having at least one tag in common with the current page.
+	 *
+	 *	@param string $varString
+	 *	@return html of the generated list
+	 */
+	
+	public function relatedPages($varStr) {
+		
+		$pages = array();
+		$tags = $this->P->tags;
+		
+		// Get pages
+		foreach ($tags as $tag) {
+			
+			$selection = new Selection($this->S->getCollection());
+			$selection->filterByTag($tag);			
+			$pages = array_merge($pages, $selection->getSelection());
+						
+		}
+		
+		// Remove current page from selecion
+		unset($pages[$this->P->relUrl]);
+		
+		// Sort pages
+		$selection = new Selection($pages);
+		$selection->sortByTitle();
+		$pages = $selection->getSelection();
+		
+		return Html::generateList($pages, $varStr);
+				
+	}
 	
 	
 	/**
