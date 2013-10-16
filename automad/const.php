@@ -46,6 +46,11 @@ define('SITE_CONTENT_DIR', BASE_DIR . '/content');
 define('SITE_SETTINGS_FILE', SITE_CONTENT_DIR . '/settings.txt'); 
 define('SITE_PAGES_DIR', SITE_CONTENT_DIR . '/pages');
 define('SITE_THEMES_DIR', BASE_DIR . '/themes');
+define('SITE_DEFAULT_NAME', 'Automad');
+define('SITE_DEFAULT_THEME', 'standard');
+define('SITE_ERROR_PAGE_TITLE', '404');
+define('SITE_RESULTS_PAGE_TITLE', 'Search Results');
+define('SITE_RESULTS_PAGE_URL', '/results');
 
 
 define('TEMPLATE_DEFAULT_DIR', BASE_DIR . '/automad/templates');
@@ -62,6 +67,8 @@ define('HTML_CLASS_CURRENT', 'current');
 define('HTML_CLASS_CURRENT_PATH', 'currentPath');
 define('HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
 define('HTML_BREADCRUMB_SEPARATOR', ' &gt; ');
+define('HTML_SEARCH_PLACEHOLDER', 'Search ...');
+define('HTML_CLASS_SEARCH', 'search');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
