@@ -152,6 +152,27 @@ class Html {
 	}
 	
 	
+	/**
+	 * 	Generate search field.
+	 *	
+	 *	@param string $url (absolute URL of the results page)
+	 *	@param string $varStr (placeholder text)
+	 *	@return the HTML for the search field
+	 */
+	
+	public static function generateSearchField($url, $varStr) {
+		
+		if (!$varStr) {
+			$varStr = HTML_SEARCH_PLACEHOLDER;
+		}
+		
+		$html = '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . HTML_SEARCH_PLACEHOLDER . '" /></form>';
+	
+		return $html;
+			
+	}
+	
+	
 }
 
 
