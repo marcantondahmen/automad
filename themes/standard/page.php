@@ -12,7 +12,9 @@
 	<p>$[navSiblings]</p>	
 	<h1>$(title)</h1>
 	<p>$(text)</p>
-	<p>Page Template</p>
+	<br />
+	<p>Related Pages:</p>
+	<p>$[relatedPages(title, tags)]</p>
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>

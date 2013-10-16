@@ -8,15 +8,10 @@
 
 <body>
 	<p>$[navTop]</p>
-	<p>$[navChildren]</p>
 	<p>$[navSiblings]</p>	
+	<p>$[navChildren]</p>
 	<h1>$(title)</h1>
-	
-	
-	
 	<div>$[listChildren(title, subtitle, tags)]</div>
-	
-	
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>

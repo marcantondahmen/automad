@@ -15,8 +15,35 @@ a {
 	color: #ffffff;
 }
 
+a:hover {
+	color: #cccccc;
+}
+
+a.current {
+	color: #6CE5E0;
+}
+
+a.currentPath {
+	color: #EBAFBD;
+}
+
 pre {
 	width: 800px;
+}
+
+ul.nav,
+ul.list {
+	padding: 0px;
+	list-style-type: none;
+}
+
+.nav li {
+	display: inline;
+	padding-right: 1em;
+}
+
+.list li {
+	margin-bottom: 1em;
 }
 
 li .title {
