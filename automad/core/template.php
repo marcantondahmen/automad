@@ -103,7 +103,7 @@ class Template {
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
 		$tool = new Tool($this->S); 
-		$content = 	preg_replace_callback('/' . preg_quote(TEMPLATE_FN_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)(\([A-Za-z0-9\/_\-,\s]*\))?' . preg_quote(TEMPLATE_FN_DELIMITER_RIGHT) . '/', 
+		$content = 	preg_replace_callback('/' . preg_quote(TEMPLATE_FN_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(TEMPLATE_FN_DELIMITER_RIGHT) . '/', 
 				function($matches) use($tool) {
 					if (method_exists($tool, $matches[1])) {
 						if (!isset($matches[2])) {
