@@ -85,16 +85,16 @@ class Template {
 
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
-		$html = new Html($this->S); 
+		$tool = new Tool($this->S); 
 		$content = 	preg_replace_callback('/' . preg_quote(TEMPLATE_FN_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)(\([A-Za-z0-9\/_\-,\s]*\))?' . preg_quote(TEMPLATE_FN_DELIMITER_RIGHT) . '/', 
-				function($matches) use($html) {
-					if (method_exists($html, $matches[1])) {
+				function($matches) use($tool) {
+					if (method_exists($tool, $matches[1])) {
 						if (!isset($matches[2])) {
 							// If there is no parameter passed (no brackets),
 							// an empty string will be passed as an argument
 							$matches[2] = '';
 						}
-						return $html->$matches[1](trim($matches[2],'()'));
+						return $tool->$matches[1](trim($matches[2],'()'));
 					}
 				}, 
 				$content);
