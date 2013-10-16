@@ -34,7 +34,24 @@
 
 
 /**
- * 	The Template class hold all methods to render the current page using a template file.
+ * 	The Template class holds all methods to render the current page using a template file.
+ *	
+ *	When render() is called the output buffer gets started and the template file gets loaded.
+ *	The output of the included file, basically the raw template HTML (including the generated HTML by PHP in the template file) 
+ *	gets stored in $content.
+ *
+ *	In a second step $content gets processed. All variables get replaced with values from the page's text file and 
+ *	all $[function]s get replaced with the return values of the matching methods of the Tool class.
+ *	
+ *	That way, it is possible that the template.php file can include HTML as well as PHP, while the "user-generated" content in the text files 
+ *	can not have any executable code (PHP). There are no "eval" functions needed, since all the PHP gets only included from the template files,
+ *	which should not be edited by users anyway.
+ *
+ *	All the replaced functions in the template file provide an easy way for designing a template file without any PHP knowledge. 
+ *	The processTemplate() method checks, if a found $[function] in the template file matches a method of the Tool class to then repalce 
+ *	that match with the method's return value.  
+ *
+ *	In a last step the processed $content get displayed.
  */
 
 
@@ -75,7 +92,7 @@ class Template {
 		
 	
 	/**
-	 * 	Replace all vars in template with values from $this->currentPage and all function shortcuts with functions from the Html class.
+	 * 	Replace all vars in template with values from $this->currentPage and all function shortcuts with functions from the Tool class.
 	 *
 	 *	@param string $content
 	 *	@return string $content
