@@ -98,9 +98,8 @@ class Tool {
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentUrl($this->P->relUrl);
 		$selection->sortPages($this->sortMode, $this->sortOrder);
-		$pages = $selection->getSelection();
 		
-		return Html::generateList($pages, $varStr);
+		return Html::generateList($selection->getSelection(), $varStr);
 		
 	}
 	
@@ -139,9 +138,8 @@ class Tool {
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentUrl($parentUrl);
 		$selection->sortPages($this->sortMode, $this->sortOrder);
-		$pages = $selection->getSelection();
 		
-		return Html::generateNav($pages);
+		return Html::generateNav($selection->getSelection());
 		
 	}
 	
@@ -205,15 +203,25 @@ class Tool {
 	public function navTop() {
 	
 		$selection = new Selection($this->S->getCollection());
+		$selection->makeHomePageFirstLevel();
 		$selection->filterByParentUrl('/');
 		$selection->sortPages($this->sortMode, $this->sortOrder);
-		$pages = $selection->getSelection();
 		
-		// Add Home Page as well
-		$pages = array('/' => $this->S->getPageByUrl('/')) + $pages;
+		return Html::generateNav($selection->getSelection());
 		
-		return Html::generateNav($pages);
-		
+	}
+	
+	
+	/**
+	 * 	Generate full navigation tree.
+	 *
+	 *	@return the HTML of the tree
+	 */
+	
+	public function navTree() {
+				
+		return Html::generateTree($this->S->getCollection());
+	
 	}
 
 	
@@ -244,9 +252,8 @@ class Tool {
 		// Sort pages
 		$selection = new Selection($pages);
 		$selection->sortPages($this->sortMode, $this->sortOrder);
-		$pages = $selection->getSelection();
 		
-		return Html::generateList($pages, $varStr);
+		return Html::generateList($selection->getSelection(), $varStr);
 				
 	}
 	
@@ -296,7 +303,7 @@ class Tool {
 	/**
 	 * 	Resets the sort mode to the original file system order.
 	 *	
-	 *	If Selection::sortPages() gets passed an empty variable as mode, it will fall back to Selection::sortByPath().
+	 *	If Selection::sortPages() gets passed an empty variable as mode, it will fall back to Selection::sortPagesByPath().
 	 */
 	
 	public function sortOriginalOrder() {
