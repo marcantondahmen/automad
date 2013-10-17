@@ -171,6 +171,65 @@ class Html {
 		return $html;
 			
 	}
+
+	
+	/**
+	 * 	Generate the HTML for a full site tree.
+	 *
+	 *	@param array $pages
+	 *	@return the HTML of the tree
+	 */
+	
+	public static function generateTree($pages) {
+		
+		// The tree starts at level one.
+		$level = 1;
+		
+		$selection = new Selection($pages);
+		$selection->makeHomePageFirstLevel();
+		$selection->sortPagesByPath();
+		$tree = $selection->getSelection();
+		
+		$html = '<ul class="' . HTML_CLASS_TREE . '">';
+		
+		foreach ($tree as $page) {
+			
+			// If the page level is deeper than the previous level,
+			// a new sub-list gets started.
+			if ($page->level > $level) {
+				$html .= '<ul class="level' . $page->level . '">';
+			} 
+			
+			// If the page level is smaller (higher) than the previous level, 
+			// the previous sub-list gets first closed.
+			if ($page->level < $level) {
+				$html .= '</ul>';
+			}
+			
+			// Check if Page is current page or parent of the current page
+			if ($page->isCurrent()) {	
+				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			} elseif ($page->isInCurrentPath()) {
+				$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';
+			} else {
+				$class = ' ';
+			}
+					
+			$html .= '<li><a' . $class . 'href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a></li>';
+			
+			// The current level gets saved to be compared with the next iteration for starting or closing sub-lists
+			$level = $page->level;
+			
+		}
+		
+		// Add all missing closing </ul> for open lists
+		for ($x=$level; $x>=1; $x--) {
+			$html .= '</ul>';
+		}
+		
+		return $html;
+		
+	}
 	
 	
 }
