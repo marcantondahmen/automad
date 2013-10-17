@@ -56,6 +56,24 @@ class Tool {
 	
 	
 	/**
+	 * 	The modus defines the way a selection of pages gets sortet.
+	 *	
+	 *	Default is empty, to make sure the original order is kept when leaving out $this->sortBy().
+	 */
+	
+	private $sortMode = '';
+	
+	
+	/**
+	 * 	Sort order for selections.
+	 *
+	 *	Default is SORT_ASC, to make sure the original order is kept when leaving out $this->sortAscending().
+	 */
+	
+	private $sortOrder = SORT_ASC;
+	
+	
+	/**
 	 * 	The Site object is passed as an argument. It shouldn't be created again (performance).
 	 */
 		
@@ -79,7 +97,7 @@ class Tool {
 		
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentUrl($this->P->relUrl);
-		$selection->sortByPath();
+		$selection->sortPages($this->sortMode, $this->sortOrder);
 		$pages = $selection->getSelection();
 		
 		return Html::generateList($pages, $varStr);
@@ -98,7 +116,7 @@ class Tool {
 	public function listAll($varStr) {
 	
 		$selection = new Selection($this->S->getCollection());	
-		$selection->sortByPath();
+		$selection->sortPages($this->sortMode, $this->sortOrder);
 		$pages = $selection->getSelection();
 		
 		// Remove current page from selecion
@@ -120,7 +138,7 @@ class Tool {
 				
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentUrl($parentUrl);
-		$selection->sortByPath();
+		$selection->sortPages($this->sortMode, $this->sortOrder);
 		$pages = $selection->getSelection();
 		
 		return Html::generateNav($pages);
@@ -188,7 +206,7 @@ class Tool {
 	
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentUrl('/');
-		$selection->sortByPath();
+		$selection->sortPages($this->sortMode, $this->sortOrder);
 		$pages = $selection->getSelection();
 		
 		// Add Home Page as well
@@ -225,7 +243,7 @@ class Tool {
 		
 		// Sort pages
 		$selection = new Selection($pages);
-		$selection->sortByTitle();
+		$selection->sortPages($this->sortMode, $this->sortOrder);
 		$pages = $selection->getSelection();
 		
 		return Html::generateList($pages, $varStr);
@@ -264,7 +282,7 @@ class Tool {
 			
 			$selection = new Selection($this->S->getCollection());
 			$selection->filterByKeywords($search);
-			$selection->sortByTitle();
+			$selection->sortPages($this->sortMode, $this->sortOrder);
 			
 			$pages = $selection->getSelection();
 			
@@ -275,6 +293,54 @@ class Tool {
 	}
 	
 	
+	/**
+	 * 	Resets the sort mode to the original file system order.
+	 *	
+	 *	If Selection::sortPages() gets passed an empty variable as mode, it will fall back to Selection::sortByPath().
+	 */
+	
+	public function sortOriginalOrder() {
+		
+		$this->sortMode = NULL;
+		
+	}
+	
+	
+	/**
+	 * 	Sets the $key in Page::data[$key] as the sort mode for all following lists and navigations.
+	 *
+	 *	@param string $var (any variable set in the text file of the page)
+	 */
+	
+	public function sortBy($var) {
+		
+		$this->sortMode = $var;
+		
+	}
+	
+	
+	/**
+	 * 	Sets the sort order to ascending for all following lists and navigations.
+	 */
+	
+	public function sortAscending() {
+		
+		$this->sortOrder = SORT_ASC;
+		
+	}
+	
+	
+	/**
+	 * 	Sets the sort order to descending for all following lists and navigations.
+	 */
+	
+	public function sortDescending() {
+		
+		$this->sortOrder = SORT_DESC;
+		
+	}
+	
+
 	/**
 	 * 	Return the site name
 	 *
