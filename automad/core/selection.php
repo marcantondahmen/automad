@@ -59,16 +59,16 @@ class Selection {
 	
 	
 	/**
-	 * 	Gets the collection.
+	 * 	Gets the collection or a previously created selection (array) of pages.
 	 *
-	 *	Basically $collection means Site::getCollection(), assuming $site is an instance of Site.
+	 *	Basically $pages means Site::getCollection(), assuming $site is an instance of Site.
 	 *	
-	 *	@param array $collection (Site::getCollection())
+	 *	@param array $pages (normally Site::getCollection() or any other selection array)
 	 */
 	
-	public function __construct($collection) {
+	public function __construct($pages) {
 		
-		$this->selection = $collection;
+		$this->selection = $pages;
 		
 	}
 	
@@ -168,6 +168,24 @@ class Selection {
 		
 	}
 	 
+	 
+	/**
+	 * 	Makes the Home Page a neighbor of all level 1 pages. Useful for filtering the top level pages all together.
+	 */
+	
+	public function makeHomePageFirstLevel() {
+		
+		if (array_key_exists('/', $this->selection)) {
+			
+			$home = clone $this->selection['/'];
+			$home->parentRelUrl = '/';
+			$home->level = 1;
+			$this->selection['/'] = $home;
+			
+		}
+		
+	}
+	
 	  
 	/**
 	 *	Sorts the $this->selection based on the file system path.
