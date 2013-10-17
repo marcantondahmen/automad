@@ -46,7 +46,7 @@ class Site {
 	 * 	Array holding the site's settings.
 	 */
 	
-	public $siteData = array();
+	private $siteData = array();
 	
 	
 	/**
@@ -55,7 +55,7 @@ class Site {
 	 *	To access the data for a specific page, use the url as key: $this->siteCollection['url'].
 	 */
 	
-	public $siteCollection = array();
+	private $siteCollection = array();
 	
 	
 	/**
