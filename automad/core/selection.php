@@ -175,7 +175,7 @@ class Selection {
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
 	 */ 
 	 
-	public function sortByPath($order = SORT_ASC) {
+	public function sortPagesByPath($order = SORT_ASC) {
 		
 		$arrayToSortBy = array();
 		
@@ -193,7 +193,7 @@ class Selection {
 	/**
 	 *	Sorts $this->selection based on any variable in the text files.
 	 *
-	 *	If the $var gets passed empty, $this->sortByPath() will be used as fallback.
+	 *	If the $var gets passed empty, $this->sortPagesByPath() will be used as fallback.
 	 *
 	 *	@param string $var (any variable from a text file)
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
@@ -220,7 +220,7 @@ class Selection {
 		
 		} else {
 			// else the selection is sorted by the file system path
-			$this->sortByPath($order);
+			$this->sortPagesByPath($order);
 		}
 		
 	} 
