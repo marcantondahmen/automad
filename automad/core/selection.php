@@ -225,27 +225,6 @@ class Selection {
 		
 	} 
 	 
-	 
-	/**
-	 *	Sorts the $this->selection based on the title.
-	 *
-	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
-	 */ 
-	 
-	public function sortByTitle($order = SORT_ASC) {
-		
-		$arrayToSortBy = array();
-		
-		foreach ($this->selection as $key => $page) {
-			
-			$arrayToSortBy[$key] = strtolower($page->data['title']);
-			
-		}
-				
-		array_multisort($arrayToSortBy, $order, $this->selection);
-				
-	} 
-	
 	
 }
 
