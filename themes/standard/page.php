@@ -8,6 +8,7 @@
 
 <body>
 	<p>$[searchField()]</p>
+	<p>$[navTree]</p>
 	<p>$[navTop]</p>
 	<p>$[navChildren]</p>
 	<p>$[navSiblings]</p>	

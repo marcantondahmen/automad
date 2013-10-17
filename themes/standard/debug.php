@@ -8,13 +8,17 @@
 
 <body>
 	<p>$[searchField(Search me...)]</p>
-	<p>$[navTop]</p>
-	<p>$[navChildren]</p>
-	<p>$[navSiblings]</p>	
+	<p>$[navTree]</p>	
 	<h1>$(title)</h1>
 	<p>$(text)</p>
+	
+	$[sortOriginalOrder]
+	$[sortBy(title)]
+	$[sortAscending]
+	
+	<p>$[listAll(title,tags)]</p>
 	<br />
-	<pre><?php print_r ($this->S); ?></pre>
+	<pre><?php print_r ($this->S->getCollection()); ?></pre>
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
