@@ -170,7 +170,7 @@ class Page {
 			$currentRelUrl = '/';
 		}
 		
-		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent()) {
+		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent() && $this->relUrl != '/') {
 			return true;
 		} else {
 			return false;
