@@ -188,7 +188,43 @@ class Selection {
 		array_multisort($arrayToSortBy, $order, $this->selection);
 				
 	}
-	 	 
+
+	 
+	/**
+	 *	Sorts $this->selection based on any variable in the text files.
+	 *
+	 *	If the $var gets passed empty, $this->sortByPath() will be used as fallback.
+	 *
+	 *	@param string $var (any variable from a text file)
+	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
+	 */  
+	 
+	public function sortPages($var, $order = SORT_ASC) {
+		
+		if ($var) {
+			// If $var is set the selections is sorted by data[$var]
+			$arrayToSortBy = array();
+		
+			foreach ($this->selection as $key => $page) {
+			
+				if (isset($page->data[$var])) {
+					$arrayToSortBy[$key] = strtolower($page->data[$var]);
+				} else {
+					// If data[$var] doesn't exists, an empty string will be added
+					$arrayToSortBy[$key] = '';
+				}
+			
+			}
+				
+			array_multisort($arrayToSortBy, $order, $this->selection);
+		
+		} else {
+			// else the selection is sorted by the file system path
+			$this->sortByPath($order);
+		}
+		
+	} 
+	 
 	 
 	/**
 	 *	Sorts the $this->selection based on the title.
