@@ -103,6 +103,13 @@ class Html {
 		// The "All" button gets added for that purpose.
 		if (!$targetPage) {
 			
+			// Get page url to clear query string if needed
+			if (isset($_SERVER["PATH_INFO"])) {
+				$currentUrl = BASE_URL . $_SERVER["PATH_INFO"];
+			} else {
+				$currentUrl = BASE_URL;
+			}
+			
 			// Check if current query is empty
 			if (!$current) {
 				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
@@ -123,7 +130,7 @@ class Html {
 				$queryStr = '';
 			}
 		
-			$html .= '<li><a' . $class . 'href="' . BASE_URL . $_SERVER["PATH_INFO"] . $queryStr . '">' . HTML_FILTERS_ALL . '</a></li>';
+			$html .= '<li><a' . $class . 'href="' . $currentUrl . $queryStr . '">' . HTML_FILTERS_ALL . '</a></li>';
 			
 		}
 		
