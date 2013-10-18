@@ -63,14 +63,15 @@ define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 
 
 define('HTML_CLASS_NAV', 'nav');
+define('HTML_CLASS_FILTER', 'filter');
 define('HTML_CLASS_TREE', 'tree');
 define('HTML_CLASS_LIST', 'list');
 define('HTML_CLASS_CURRENT', 'current');
 define('HTML_CLASS_CURRENT_PATH', 'currentPath');
 define('HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
+define('HTML_CLASS_SEARCH', 'search');
 define('HTML_BREADCRUMB_SEPARATOR', ' &gt; ');
 define('HTML_SEARCH_PLACEHOLDER', 'Search ...');
-define('HTML_CLASS_SEARCH', 'search');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
