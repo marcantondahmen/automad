@@ -98,12 +98,47 @@ class Tool {
 		
 		$selection = new Selection($this->S->getCollection());
 		$selection->filterByParentUrl($this->P->relUrl);
+		
+		if (isset($_GET['filter'])) {
+			$selection->filterByTag($_GET['filter']);
+		}
+		
 		$selection->sortPages($this->sortMode, $this->sortOrder);
 		
 		return Html::generateList($selection->getSelection(), $varStr);
 		
 	}
 	
+
+	/**
+	 *	Place a set of all tags included in the children pages to filter the children page list.
+	 *
+	 *	This method should be used together with the listChildren() method.
+	 *
+	 *	@return the HTML of the filters
+	 */
+	
+	public function listChildrenFilters() {
+		
+		$selection = new Selection($this->S->getCollection());
+		$selection->filterByParentUrl($this->P->relUrl);
+		$pages = $selection->getSelection();
+		
+		$tags = array();
+		
+		foreach ($pages as $page) {
+			
+			$tags = array_merge($tags, $page->tags);
+			
+		}
+		
+		$tags = array_unique($tags);
+		sort($tags);
+		
+		return Html::generateFilters($tags);
+		
+	}
+		
 	
 	/**
 	 * 	Return the HTML for a list of all pages excluding the current page.
@@ -117,8 +152,13 @@ class Tool {
 	
 		$selection = new Selection($this->S->getCollection());	
 		$selection->sortPages($this->sortMode, $this->sortOrder);
+	
+		if (isset($_GET['filter'])) {
+			$selection->filterByTag($_GET['filter']);
+		}
+	
 		$pages = $selection->getSelection();
-		
+	
 		// Remove current page from selecion
 		unset($pages[$this->P->relUrl]);
 	
@@ -126,6 +166,38 @@ class Tool {
 		
 	}
 	
+	
+	/**
+	 *	Place a set of all tags (sitewide) to filter the full page list.
+	 *
+	 *	This method should be used together with the listAll() method.
+	 *
+	 *	@return the HTML of the filters
+	 */
+	
+	public function listAllFilters() {
+		
+		$selection = new Selection($this->S->getCollection());
+		$pages = $selection->getSelection();
+		
+		// Remove current page from selecion
+		unset($pages[$this->P->relUrl]);
+		
+		$tags = array();
+		
+		foreach ($pages as $page) {
+			
+			$tags = array_merge($tags, $page->tags);
+			
+		}
+		
+		$tags = array_unique($tags);
+		sort($tags);
+		
+		return Html::generateFilters($tags);
+		
+	}
+
 	
 	/**
 	 *	Generate a list for the navigation below a given URL.
