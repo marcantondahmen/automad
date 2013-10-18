@@ -90,6 +90,8 @@ class Html {
 		// Save currently passed filter query to determine current filter when generating list
 		if (isset($_GET['filter'])) {
 			$current = $_GET['filter'];
+		} else {
+			$current = '';
 		}
 		
 		$html = '<ul class="' . HTML_CLASS_FILTER . '">';
