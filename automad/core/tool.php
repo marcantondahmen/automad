@@ -87,6 +87,19 @@ class Tool {
 	
 	
 	/**
+	 *	Place a set of the current page's tags and link back to the parent page passing each tag as a filter.
+	 *
+	 *	@return the HTML of the filters
+	 */
+
+	public function filterParentByTags() {
+		
+		return Html::generateFilters($this->P->tags, BASE_URL . $this->P->parentRelUrl);
+		
+	}
+	
+	
+	/**
 	 * 	Return the HTML for a list of pages below the current page.
 	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
 	 *
