@@ -73,10 +73,11 @@ class Html {
 	 *	Generate the HTML for filter menu out of $tags.
 	 *
 	 *	@param array $tags
+	 *	@param string $targetPage (default is empty, stay on same page)
 	 *	@return the HTML of the filter menu
 	 */
 		
-	public static function generateFilters($tags) {
+	public static function generateFilters($tags, $targetPage = '') {
 
 		// First get existing query string to prevent overwriting existing settings passed already
 		// and store its data in $query.
@@ -86,12 +87,27 @@ class Html {
 			$query = array();
 		}
 		
+		// Save currently passed filter query to determine current filter when generating list
+		if (isset($_GET['filter'])) {
+			$current = $_GET['filter'];
+		}
+		
 		$html = '<ul class="' . HTML_CLASS_FILTER . '">';
 		
 		foreach ($tags as $tag) {
+			
+			// Check if $tag equals current filter in query
+			if ($current == $tag) {
+				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			} else {
+				$class = ' ';
+			}
+			
 			// Only change the ['filter'] key
 			$query['filter'] = $tag;
-			$html .= '<li><a href="?' . http_build_query($query) . '">' . $tag . '</a></li>';
+		
+			$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query) . '">' . $tag . '</a></li>';
+		
 		}
 		
 		$html .= '</ul>';
