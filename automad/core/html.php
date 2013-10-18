@@ -94,7 +94,38 @@ class Html {
 			$current = '';
 		}
 		
-		$html = '<ul class="' . HTML_CLASS_FILTER . '">';
+		$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
+		
+		// If there is no $tagetPage in the options, the filters will be used to filter a page list 
+		// on the current page without leaving the page after selecting a tag.
+		// In that case, a visitor stays on the page while using the filters and therefore needs
+		// the option to "reset" the filters again to an "unfiltered" mode.
+		// The "All" button gets added for that purpose.
+		if (!$targetPage) {
+			
+			// Check if current query is empty
+			if (!$current) {
+				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			} else {
+				$class = ' ';
+			}
+			
+			// Remove filter form $query, but only the filter.
+			// Other items stay in that array.
+			unset($query['filter']);
+			
+			if (http_build_query($query)) {
+				// In case there are also other items in the query string, 
+				// it will be passed when updating the query string to remove the filter paramter.
+				$queryStr = '?' . http_build_query($query);
+			} else {
+				// If there are no other items, the query strings and the "?" get completly removed.
+				$queryStr = '';
+			}
+		
+			$html .= '<li><a' . $class . 'href="' . BASE_URL . $_SERVER["PATH_INFO"] . $queryStr . '">' . HTML_FILTERS_ALL . '</a></li>';
+			
+		}
 		
 		foreach ($tags as $tag) {
 			
