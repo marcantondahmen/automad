@@ -27,9 +27,10 @@
  *
  *	AUTOMAD CMS
  *
- *	(c) 2013 by Marc Anton Dahmen
+ *	Copyright (c) 2013 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
+ *	Licensed under the MIT license.
  */
  
  
