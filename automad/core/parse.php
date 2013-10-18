@@ -52,7 +52,7 @@ class Parse {
 	 *	@return array $vars
 	 */
 	 
-	public function textFile($file) {
+	public static function textFile($file) {
 		
 		// split $file into data blocks
 		$pairs = explode(DATA_BLOCK_SEPARATOR, file_get_contents($file));
@@ -78,7 +78,7 @@ class Parse {
  	 *	@return array $tags
  	 */
 	
-	public function extractTags($data) {
+	public static function extractTags($data) {
 		
 		$tags = array();
 		
