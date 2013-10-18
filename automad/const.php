@@ -72,6 +72,7 @@ define('HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
 define('HTML_CLASS_SEARCH', 'search');
 define('HTML_BREADCRUMB_SEPARATOR', ' &gt; ');
 define('HTML_SEARCH_PLACEHOLDER', 'Search ...');
+define('HTML_FILTERS_ALL', 'All');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
