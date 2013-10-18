@@ -68,6 +68,38 @@ class Html {
 		
 	}
 	
+
+	/**
+	 *	Generate the HTML for filter menu out of $tags.
+	 *
+	 *	@param array $tags
+	 *	@return the HTML of the filter menu
+	 */
+		
+	public static function generateFilters($tags) {
+
+		// First get existing query string to prevent overwriting existing settings passed already
+		// and store its data in $query.
+		if (isset($_GET)) {
+			$query = $_GET;
+		} else {
+			$query = array();
+		}
+		
+		$html = '<ul class="' . HTML_CLASS_FILTER . '">';
+		
+		foreach ($tags as $tag) {
+			// Only change the ['filter'] key
+			$query['filter'] = $tag;
+			$html .= '<li><a href="?' . http_build_query($query) . '">' . $tag . '</a></li>';
+		}
+		
+		$html .= '</ul>';
+		
+		return $html;
+		
+	}
+		
 	
 	/**
 	 * 	Generate the HTML for a page list out of a selection of pages and a string of variables.
