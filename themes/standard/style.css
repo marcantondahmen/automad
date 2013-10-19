@@ -32,11 +32,17 @@ pre {
 }
 
 ul.nav,
-ul.list {
+ul.list,
+ul.filter {
 	padding: 0px;
 	list-style-type: none;
 }
 
+.filter {
+	font-size: 12px;
+}
+
+.filter li, 
 .nav li {
 	display: inline;
 	padding-right: 1em;

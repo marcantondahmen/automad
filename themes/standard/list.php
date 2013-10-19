@@ -1,6 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 	<title>$[siteName] / $(title)</title>
 	<meta name="app" content="Automad <?php echo VERSION; ?>">
 	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
@@ -8,11 +10,14 @@
 
 <body>
 	<p>$[searchField(Search this Site ...)]</p>
-	<p>$[navTop]</p>
+	<p>$[navTreeCurrent]</p>
 	<p>$[navSiblings]</p>	
 	<p>$[navChildren]</p>
 	<h1>$(title)</h1>
-	<div>$[listChildren(title, subtitle, tags)]</div>
+	
+	$[listChildrenFilters]
+	$[listChildren(title, subtitle, tags)]
+	
 	<br />
 	<p>$[navBreadcrumbs]</p>
 	<br />
