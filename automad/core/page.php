@@ -171,7 +171,7 @@ class Page {
 			$currentRelUrl = '/';
 		}
 		
-		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent() && $this->relUrl != '/') {
+		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent()) {
 			return true;
 		} else {
 			return false;
@@ -179,6 +179,22 @@ class Page {
 		
 	}
 	
+	
+	/**
+	 *	Check if page is the home page.
+	 *
+	 *	@return boolean
+	 */
+	
+	public function isHome() {
+		
+		if ($this->relUrl == '/') {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 	
 } 
  
