@@ -51,17 +51,27 @@ class Html {
 
 	private static function addLink($page) {
 	
+		$classes = '';
+	
 		if ($page->isHome()) {	
-			$class = ' class="' . HTML_CLASS_HOME . '" ';
-		} elseif ($page->isCurrent()) {	
-			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
-		} elseif ($page->isInCurrentPath()) {
-			$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';	
-		} else {
-			$class = ' ';
-		}
+			$classes .= ' ' . HTML_CLASS_HOME;	
+		} 
 		
-		return '<a' . $class . 'href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a>';
+		if ($page->isCurrent()) {	
+			$classes .= ' ' . HTML_CLASS_CURRENT;
+		} 
+		
+		if ($page->isInCurrentPath() && !$page->isHome()) {
+			$classes .= ' ' . HTML_CLASS_CURRENT_PATH;	
+		} 
+		
+		$classes = trim($classes);
+		
+		if ($classes) {
+			$classes = ' class="' . $classes . '"';
+		} 
+				
+		return '<a' . $classes . ' href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a>';
 		
 	}
 
@@ -347,12 +357,10 @@ class Html {
 	
 	public static function generateTree($collection, $expandAll = true) {
 		
-		// To generate the full tree including the homepage (if first level or not),
-		// $collection['/']->parentRelUrl makes sure, that there will be always the correct
-		// parent URL selected.
-		// If the homepage is included in the first level it would be '/',
-		// else it would be just ''. 
-		return self::branch($collection['/']->parentRelUrl, $expandAll, $collection);
+		// The tree starts on level 1. By default the homepage will not be included.
+		// To include the homepage, it has to be moved to the first level by using Selection::makeHomePageFirstLevel()
+		// or $[includeHome] from the templates.
+		return self::branch('/', $expandAll, $collection);
 		
 	}
 	
