@@ -239,20 +239,20 @@ class Html {
 	 *	The function is private and is not supposed to be included in a template.
 	 *
 	 *	@param array $pages (selected pages)
-	 *	@param string $varStr (variable to output in the list, comma separated)
+	 *	@param string $optionStr (variable to output in the list, comma separated)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $varStr) {
+	public static function generateList($pages, $optionStr) {
 		
 		if ($pages) {
 		
-			if (!$varStr) {
-				$varStr = 'title';
+			if (!$optionStr) {
+				$optionStr = 'title';
 			}	
+					
+			$vars = Parse::toolOptions($optionStr);
 			
-			$vars = array_map('trim', explode(',', $varStr));
-		
 			$html = '<ul class="' . HTML_CLASS_LIST . '">';
 		
 			foreach ($pages as $page) {
@@ -318,17 +318,18 @@ class Html {
 	 * 	Generate search field.
 	 *	
 	 *	@param string $url (absolute URL of the results page)
-	 *	@param string $varStr (placeholder text)
+	 *	@param string $optionStr (placeholder text)
 	 *	@return the HTML for the search field
 	 */
 	
-	public static function generateSearchField($url, $varStr) {
+	public static function generateSearchField($url, $optionStr) {
 		
-		if (!$varStr) {
-			$varStr = HTML_SEARCH_PLACEHOLDER;
+		// Don't parse $optionStr, since it can be only a string.
+		if (!$optionStr) {
+			$optionStr = HTML_SEARCH_PLACEHOLDER;
 		}
 		
-		$html = '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . HTML_SEARCH_PLACEHOLDER . '" /></form>';
+		$html = '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $optionStr . '" /></form>';
 	
 		return $html;
 			
