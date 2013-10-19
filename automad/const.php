@@ -66,6 +66,7 @@ define('HTML_CLASS_NAV', 'nav');
 define('HTML_CLASS_FILTER', 'filter');
 define('HTML_CLASS_TREE', 'tree');
 define('HTML_CLASS_LIST', 'list');
+define('HTML_CLASS_SORT', 'sort');
 define('HTML_CLASS_HOME', 'home');
 define('HTML_CLASS_CURRENT', 'current');
 define('HTML_CLASS_CURRENT_PATH', 'currentPath');
@@ -74,11 +75,14 @@ define('HTML_CLASS_SEARCH', 'search');
 define('HTML_BREADCRUMB_SEPARATOR', ' &gt; ');
 define('HTML_SEARCH_PLACEHOLDER', 'Search ...');
 define('HTML_FILTERS_ALL', 'All');
+define('HTML_SORT_ASC', 'ascending');
+define('HTML_SORT_DESC', 'descending');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
 define('DATA_BLOCK_SEPARATOR', '---');
 define('DATA_PAIR_SEPARATOR', ':');
+define('DATA_OPTION_SEPARATOR', ',');
 define('DATA_TAG_SEPARATOR', ',');
 define('DATA_TAGS_KEY', 'tags');
 
