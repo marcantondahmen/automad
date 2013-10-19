@@ -306,7 +306,20 @@ class Tool {
 	
 	public function navTree() {
 				
-		return Html::generateTree($this->S->getCollection());
+		return Html::generateTree($this->S);
+	
+	}
+	
+	
+	/**
+	 * 	Generate navigation tree expanded only along the current page's path.
+	 *
+	 *	@return the HTML of the tree
+	 */
+	
+	public function navTreeCurrent() {
+				
+		return Html::generateTree($this->S, false);
 	
 	}
 
