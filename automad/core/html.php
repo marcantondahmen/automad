@@ -82,25 +82,33 @@ class Html {
 		$selection->sortPagesByPath();
 		
 		$pages = $selection->getSelection();
-			
-		$html = '<ul class="' . HTML_CLASS_TREE . '">';
 		
-		foreach ($pages as $page) {
+		if ($pages) {
+				
+			// Use first element in $pages to determine the current level.
+			$level = ' level-' . $pages[array_shift(array_keys($pages))]->level;
+		
+			$html = '<ul class="' . HTML_CLASS_TREE . $level . '">';	
+		
+			foreach ($pages as $page) {
 			
-			$html .= '<li>' . self::addLink($page) . '</li>';
+				$html .= '<li>' . self::addLink($page) . '</li>';
 			
-			// There would be an infinite loop if the parentRelUrl equals the relUlr.
-			// That is the case if the current page is the homepage and the homepage moved to the first level. 
-			if ($page->parentRelUrl != $page->relUrl) {			
-				if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-					$html .= self::branch($page->relUrl, $expandAll, $collection);
+				// There would be an infinite loop if the parentRelUrl equals the relUlr.
+				// That is the case if the current page is the homepage and the homepage moved to the first level. 
+				if ($page->parentRelUrl != $page->relUrl) {			
+					if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
+						$html .= self::branch($page->relUrl, $expandAll, $collection);
+					}
 				}
+			
 			}
-		}
 
-		$html .= '</ul>';
+			$html .= '</ul>';
 		
-		return $html;
+			return $html;
+		
+		}
 		
 	}
 	
