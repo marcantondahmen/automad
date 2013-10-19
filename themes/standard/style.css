@@ -19,6 +19,10 @@ a:hover {
 	color: #cccccc;
 }
 
+a.home {
+	color: #E8E899;
+}
+
 a.current {
 	color: #6CE5E0;
 }
@@ -33,15 +37,18 @@ pre {
 
 ul.nav,
 ul.list,
-ul.filter {
+ul.filter,
+ul.sort {
 	padding: 0px;
 	list-style-type: none;
 }
 
-.filter {
+.filter,
+.sort {
 	font-size: 12px;
 }
 
+.sort li,
 .filter li, 
 .nav li {
 	display: inline;

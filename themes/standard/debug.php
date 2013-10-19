@@ -9,20 +9,28 @@
 </head>
 
 <body>
+	$[includeHome]
+	
 	<p>$[searchField(Search me...)]</p>
-	<p>$[navTreeCurrent]</p>	
+	<p>$[_navTreeCurrent]</p>
+	<p>$[navPerLevel]</p>	
 	<h1>$(title)</h1>
 	<p>$(text)</p>
 	
-	$[sortOriginalOrder]
-	$[sortBy(title)]
-	$[sortAscending]
+	$[sortOriginal]
+	$[_sortBy(title)]
+	$[sortDescending]
 	
-	$[listAllFilters]
+	$[menuFilterAll]
+	$[menuSortType(Date, title: Title)]
+	$[menuSortDirection]
+	
 	$[listAll(title,tags)]
 	
 	<br />
-	<pre><?php print_r ($this->S->getCollection()); ?></pre>
+	<p>$[navBreadcrumbs]</p>
+	<br />
+	<pre><?php /* print_r ($this->S->getCollection()); */ ?></pre>
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>

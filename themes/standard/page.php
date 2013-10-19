@@ -9,16 +9,15 @@
 </head>
 
 <body>
+	$[includeHome]
+	
 	<p>$[searchField()]</p>
 	<p>$[navTreeCurrent]</p>
-	<p>$[navTop]</p>
-	<p>$[navChildren]</p>
-	<p>$[navSiblings]</p>	
+	<p>$[navPerLevel]</p>
+	<br />		
 	<h1>$(title)</h1>
 	<h2>$(subtitle)</h2>
-	
 	$[filterParentByTags]
-	
 	<p>$(text)</p>
 	<br />
 	<p>Related Pages:</p>

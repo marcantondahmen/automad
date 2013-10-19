@@ -9,13 +9,16 @@
 </head>
 
 <body>
+	$[includeHome]
+	
 	<p>$[searchField(Search this Site ...)]</p>
 	<p>$[navTreeCurrent]</p>
-	<p>$[navSiblings]</p>	
-	<p>$[navChildren]</p>
+	<p>$[navPerLevel]</p>
 	<h1>$(title)</h1>
 	
-	$[listChildrenFilters]
+	$[menuFilterChildren]
+	$[menuSortType(Original, title: Title, tags: Tags + Filters)]
+	$[menuSortDirection]
 	$[listChildren(title, subtitle, tags)]
 	
 	<br />
