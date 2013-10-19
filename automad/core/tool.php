@@ -260,7 +260,8 @@ class Tool {
 	
 	public function menuSortDirection($optionStr) {
 		
-		return Html::generateSortDirectionMenu($optionStr);
+		// $this->sortDirection gets passed as well to let Html know what flag is set to apply the correct "current" class to the HTML tag
+		return Html::generateSortDirectionMenu($this->sortDirection, $optionStr);
 		
 	}
 		
@@ -268,7 +269,7 @@ class Tool {
 	/**
 	 *	Place a set of sort options for all existing lists on the current page.
 	 *
-	 *	@param string $optionStr (optional)- Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
+	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
 	 */
 
