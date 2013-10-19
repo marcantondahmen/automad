@@ -339,14 +339,27 @@ class Html {
 	/**
 	 *	Generate ascending/descending buttons for sorting.
 	 *
+	 *	@param sort_flag $default
 	 *	@param string $optionStr
 	 *	@return the HTML for the buttons
 	 */
 	
-	public static function generateSortDirectionMenu($optionStr) {
+	public static function generateSortDirectionMenu($default, $optionStr) {
 		
 		$query = self::getQueryString();
 		$current = self::getQueryKey('sort_dir');
+				
+		if (!$current) {
+			switch ($default) {
+			    case SORT_ASC:
+			        $current = "sort_asc";
+			        break;
+    			    case SORT_DESC:
+    			        $current = "sort_desc";
+			        break;
+			}
+		}
+		
 		$options = Parse::toolOptions($optionStr);
 		
 		$defaults["SORT_ASC"] = HTML_SORT_ASC;
@@ -393,7 +406,7 @@ class Html {
 	public static function generateSortTypeMenu($optionStr) {
 
 		$query = self::getQueryString();
-		$current = self::getQueryKey('sort_type');	
+		$current = self::getQueryKey('sort_type');		
 		$options = Parse::toolOptions($optionStr);
 		
 		$html = '<ul class="' . HTML_CLASS_SORT . '">';
