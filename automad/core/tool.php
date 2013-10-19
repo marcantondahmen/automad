@@ -190,7 +190,7 @@ class Tool {
 	
 
 	/**
-	 *	Place a set of all tags (sitewide) to filter the full page list.
+	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Tool::listAll()
 	 *
 	 *	This method should be used together with the listAll() method.
 	 *
@@ -222,7 +222,7 @@ class Tool {
 
 
 	/**
-	 *	Place a set of all tags included in the children pages to filter the children page list.
+	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Tool::listChildren()
 	 *
 	 *	This method should be used together with the listChildren() method.
 	 *
@@ -252,7 +252,7 @@ class Tool {
 
 	
 	/**
-	 *	Place a menu to select the sort direction.
+	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Tool::listChildren() and Tool::listAll()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
 	 *	@return the HTML for the sort menu
@@ -267,7 +267,7 @@ class Tool {
 		
 
 	/**
-	 *	Place a set of sort options for all existing lists on the current page.
+	 *	Place a set of sort options. The menu only affects lists of pages created by Tool::listChildren() and Tool::listAll()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
@@ -291,7 +291,7 @@ class Tool {
 				
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($parentUrl);
-		$selection->sortPages($this->sortType, $this->sortDirection);
+		$selection->sortPagesByPath();
 		
 		return Html::generateNav($selection->getSelection());
 		
@@ -384,7 +384,7 @@ class Tool {
 	
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl('/');
-		$selection->sortPages($this->sortType, $this->sortDirection);
+		$selection->sortPagesByPath();
 		
 		return Html::generateNav($selection->getSelection());
 		
@@ -443,7 +443,7 @@ class Tool {
 		
 		// Sort pages
 		$selection = new Selection($pages);
-		$selection->sortPages($this->sortType, $this->sortDirection);
+		$selection->sortPagesByPath();
 		
 		return Html::generateList($selection->getSelection(), $optionStr);
 				
@@ -481,7 +481,7 @@ class Tool {
 			
 			$selection = new Selection($this->collection);
 			$selection->filterByKeywords($search);
-			$selection->sortPages($this->sortType, $this->sortDirection);
+			$selection->sortPagesByPath();
 			
 			$pages = $selection->getSelection();
 			
@@ -493,7 +493,7 @@ class Tool {
 	
 	
 	/**
-	 * 	Resets the sort mode to the original file system order.
+	 * 	Resets the sort mode to the original file system order. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
 	 *	
 	 *	If Selection::sortPages() gets passed an empty variable as mode, it will fall back to Selection::sortPagesByPath().
 	 */
@@ -510,7 +510,7 @@ class Tool {
 	
 	
 	/**
-	 * 	Sets the $key in Page::data[$key] as the sort type for all following lists and navigation menus.
+	 * 	Sets the $key in Page::data[$key] as the sort type. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
 	 *
 	 *	@param string $optionStr - Any variable from the text file of the page - will be used as the new sort type
 	 */
@@ -527,7 +527,7 @@ class Tool {
 	
 	
 	/**
-	 * 	Sets the sort order to ascending for all following lists and navigations.
+	 * 	Sets the sort order to ascending. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
 	 */
 	
 	public function sortAscending() {
@@ -542,7 +542,7 @@ class Tool {
 	
 	
 	/**
-	 * 	Sets the sort order to descending for all following lists and navigations.
+	 * 	Sets the sort order to descending. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
 	 */
 	
 	public function sortDescending() {
@@ -557,7 +557,7 @@ class Tool {
 	
 
 	/**
-	 * 	Return the site name
+	 * 	Return the site name.
 	 *
 	 *	@return site name
 	 */
@@ -570,7 +570,7 @@ class Tool {
 	
 	
 	/**
-	 * 	Return the URL of the page theme
+	 * 	Return the URL of the page theme.
 	 *
 	 *	@return page theme URL
 	 */
