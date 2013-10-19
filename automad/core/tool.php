@@ -123,13 +123,13 @@ class Tool {
 
 	/**
 	 * 	Return the HTML for a list of all pages excluding the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
+	 *	The variables to be included in the output are set in a comma separated parameter string ($optionStr).
 	 *
-	 *	@param string $varStr
+	 *	@param string $optionStr - All variables from the page's text file which should be included in the output. Expample: $[listAll(title, subtitle, date)]
 	 *	@return the HTML of the list
 	 */
 	
-	public function listAll($varStr) {
+	public function listAll($optionStr) {
 	
 		$selection = new Selection($this->collection);	
 	
@@ -152,20 +152,20 @@ class Tool {
 		// Remove current page from selecion
 		unset($pages[$this->P->relUrl]);
 	
-		return Html::generateList($pages, $varStr);	
+		return Html::generateList($pages, $optionStr);	
 		
 	}
 
 	
 	/**
 	 * 	Return the HTML for a list of pages below the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
+	 *	The variables to be included in the output are set in a comma separated parameter string ($optionStr).
 	 *
-	 *	@param string $varStr
+	 *	@param string $optionStr - All variables from the page's text file which should be included in the output. Expample: $[listAll(title, subtitle, date)]
 	 *	@return the HTML of the list
 	 */
 	
-	public function listChildren($varStr) {
+	public function listChildren($optionStr) {
 		
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($this->P->relUrl);
@@ -184,7 +184,7 @@ class Tool {
 		
 		$selection->sortPages($this->sortType, $this->sortDirection);
 		
-		return Html::generateList($selection->getSelection(), $varStr);
+		return Html::generateList($selection->getSelection(), $optionStr);
 		
 	}
 	
@@ -194,7 +194,7 @@ class Tool {
 	 *
 	 *	This method should be used together with the listAll() method.
 	 *
-	 *	@return the HTML of the filters
+	 *	@return the HTML of the filter menu
 	 */
 	
 	public function menuFilterAll() {
@@ -226,7 +226,7 @@ class Tool {
 	 *
 	 *	This method should be used together with the listChildren() method.
 	 *
-	 *	@return the HTML of the filters
+	 *	@return the HTML of the filter menu
 	 */
 	
 	public function menuFilterChildren() {
@@ -254,7 +254,7 @@ class Tool {
 	/**
 	 *	Place a menu to select the sort direction.
 	 *
-	 *	@param string $optionStr (optional) example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)]  
+	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
 	 *	@return the HTML for the sort menu
 	 */
 	
@@ -268,7 +268,7 @@ class Tool {
 	/**
 	 *	Place a set of sort options for all existing lists on the current page.
 	 *
-	 *	@param string $optionStr / example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
+	 *	@param string $optionStr (optional)- Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
 	 */
 
@@ -419,11 +419,11 @@ class Tool {
 	/**
 	 * 	Generate a list of pages having at least one tag in common with the current page.
 	 *
-	 *	@param string $varString
+	 *	@param string $optionStr - Variables from the text files to be included in the output. Example: $[relatedPages(title, date)]
 	 *	@return html of the generated list
 	 */
 	
-	public function relatedPages($varStr) {
+	public function relatedPages($optionStr) {
 		
 		$pages = array();
 		$tags = $this->P->tags;
@@ -444,7 +444,7 @@ class Tool {
 		$selection = new Selection($pages);
 		$selection->sortPages($this->sortType, $this->sortDirection);
 		
-		return Html::generateList($selection->getSelection(), $varStr);
+		return Html::generateList($selection->getSelection(), $optionStr);
 				
 	}
 	
@@ -452,15 +452,15 @@ class Tool {
 	/**
 	 * 	Place a search field with placeholder text.
 	 *
-	 *	@param string $varStr (placeholder text)
+	 *	@param string $optionStr (optional) - placeholder text
 	 *	@return the HTML of the searchfield
 	 */
 	
-	public function searchField($varStr) {
+	public function searchField($optionStr) {
 		
-		$url = BASE_URL . $this->S->getSiteData('resultsPageUrl');
+		$targetUrl = BASE_URL . $this->S->getSiteData('resultsPageUrl');
 		
-		return Html::generateSearchField($url, $varStr);
+		return Html::generateSearchField($targetUrl, $optionStr);
 		
 	}
 
@@ -468,11 +468,11 @@ class Tool {
 	/**
 	 * 	Generate a list of search results.
 	 *
-	 *	@param string $varString
-	 *	@return html of the generated list
+	 *	@param string $optionStr (optional) - Variables from the text files to be included in the output. Example: $[searchResults(title, date)]
+	 *	@return the HTML for the results list
 	 */
 	
-	public function searchResults($varStr) {
+	public function searchResults($optionStr) {
 		
 		if (isset($_GET["search"])) {
 			
@@ -484,7 +484,7 @@ class Tool {
 			
 			$pages = $selection->getSelection();
 			
-			return Html::generateList($pages, $varStr);
+			return Html::generateList($pages, $optionStr);
 			
 		}
 		
@@ -499,7 +499,8 @@ class Tool {
 	
 	public function sortOriginal() {
 		
-		// Check if query string is empty to prevent overriding user actions.
+		// To prevent that the user selection passed in the query string gets overwritten by this method,
+		// the $_GET array gets first checked, if sort_type is empty.
 		if (!isset($_GET['sort_type'])) {
 			$this->sortType = NULL;
 		}
@@ -508,16 +509,17 @@ class Tool {
 	
 	
 	/**
-	 * 	Sets the $key in Page::data[$key] as the sort mode for all following lists and navigations.
+	 * 	Sets the $key in Page::data[$key] as the sort type for all following lists and navigation menus.
 	 *
-	 *	@param string $var (any variable set in the text file of the page)
+	 *	@param string $optionStr - Any variable from the text file of the page - will be used as the new sort type
 	 */
 	
-	public function sortBy($var) {
+	public function sortBy($optionStr) {
 		
-		// Check if query string is empty to prevent overriding user actions.
+		// To prevent that the user selection passed in the query string gets overwritten by this method,
+		// the $_GET array gets first checked, if sort_type is empty.
 		if (!isset($_GET['sort_type'])) {	
-			$this->sortType = $var;
+			$this->sortType = $optionStr;
 		}
 		
 	}
@@ -529,7 +531,8 @@ class Tool {
 	
 	public function sortAscending() {
 		
-		// Check if query string is empty to prevent overriding user actions.
+		// To prevent that the user selection passed in the query string gets overwritten by this method,
+		// the $_GET array gets first checked, if sort_dir is empty.
 		if (!isset($_GET['sort_dir'])) {
 			$this->sortDirection = SORT_ASC;
 		}
@@ -543,7 +546,8 @@ class Tool {
 	
 	public function sortDescending() {
 		
-		// Check if query string is empty to prevent overriding user actions.
+		// To prevent that the user selection passed in the query string gets overwritten by this method,
+		// the $_GET array gets first checked, if sort_dir is empty.
 		if (!isset($_GET['sort_dir'])) {
 			$this->sortDirection = SORT_DESC;
 		}
