@@ -51,10 +51,12 @@ class Html {
 
 	private static function addLink($page) {
 	
-		if ($page->isCurrent()) {	
+		if ($page->isHome()) {	
+			$class = ' class="' . HTML_CLASS_HOME . '" ';
+		} elseif ($page->isCurrent()) {	
 			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
 		} elseif ($page->isInCurrentPath()) {
-			$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';
+			$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';	
 		} else {
 			$class = ' ';
 		}
@@ -76,20 +78,24 @@ class Html {
 	private static function branch($parentRelUrl, $expandAll, $S) {
 		
 		$selection = new Selection($S->getCollection());
-		// Only for the first level
-		$selection->makeHomePageFirstLevel();
 		$selection->filterByParentUrl($parentRelUrl);
 		$selection->sortPagesByPath();
 		
 		$pages = $selection->getSelection();
 		
-		$html = '<ul class="' . HTML_CLASS_TREE . ' level' . ($S->getPageByUrl($parentRelUrl)->level + 1) . '">';
+		if (isset($S->getPageByUrl($parentRelUrl)->level)) {
+			$level = ($S->getPageByUrl($parentRelUrl)->level + 1);
+		} else {
+			$level = 0;
+		}
+		
+		$html = '<ul class="' . HTML_CLASS_TREE . ' level-' . $level . '">';
 		
 		foreach ($pages as $page) {
 			
 			$html .= '<li>' . self::addLink($page) . '</li>';
 			
-			if ($page->relUrl != '/' && ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) ) {			
+			if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
 				$html .= self::branch($page->relUrl, $expandAll, $S);
 			}
 			
@@ -139,80 +145,84 @@ class Html {
 		
 	public static function generateFilters($tags, $targetPage = '') {
 
-		// First get existing query string to prevent overwriting existing settings passed already
-		// and store its data in $query.
-		if (isset($_GET)) {
-			$query = $_GET;
-		} else {
-			$query = array();
-		}
-		
-		// Save currently passed filter query to determine current filter when generating list
-		if (isset($_GET['filter'])) {
-			$current = $_GET['filter'];
-		} else {
-			$current = '';
-		}
-		
-		$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
-		
-		// If there is no $tagetPage in the options, the filters will be used to filter a page list 
-		// on the current page without leaving the page after selecting a tag.
-		// In that case, a visitor stays on the page while using the filters and therefore needs
-		// the option to "reset" the filters again to an "unfiltered" mode.
-		// The "All" button gets added for that purpose.
-		if (!$targetPage) {
-			
-			// Get page url to clear query string if needed
-			if (isset($_SERVER["PATH_INFO"])) {
-				$currentUrl = BASE_URL . $_SERVER["PATH_INFO"];
+		if ($tags) {
+
+			// First get existing query string to prevent overwriting existing settings passed already
+			// and store its data in $query.
+			if (isset($_GET)) {
+				$query = $_GET;
 			} else {
-				$currentUrl = BASE_URL;
-			}
-			
-			// Check if current query is empty
-			if (!$current) {
-				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
-			} else {
-				$class = ' ';
-			}
-			
-			// Remove filter form $query, but only the filter.
-			// Other items stay in that array.
-			unset($query['filter']);
-			
-			if (http_build_query($query)) {
-				// In case there are also other items in the query string, 
-				// it will be passed when updating the query string to remove the filter paramter.
-				$queryStr = '?' . http_build_query($query);
-			} else {
-				// If there are no other items, the query strings and the "?" get completly removed.
-				$queryStr = '';
+				$query = array();
 			}
 		
-			$html .= '<li><a' . $class . 'href="' . $currentUrl . $queryStr . '">' . HTML_FILTERS_ALL . '</a></li>';
-			
-		}
-		
-		foreach ($tags as $tag) {
-			
-			// Check if $tag equals current filter in query
-			if ($current == $tag) {
-				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			// Save currently passed filter query to determine current filter when generating list
+			if (isset($_GET['filter'])) {
+				$current = $_GET['filter'];
 			} else {
-				$class = ' ';
+				$current = '';
 			}
+		
+			$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
+		
+			// If there is no $tagetPage in the options, the filters will be used to filter a page list 
+			// on the current page without leaving the page after selecting a tag.
+			// In that case, a visitor stays on the page while using the filters and therefore needs
+			// the option to "reset" the filters again to an "unfiltered" mode.
+			// The "All" button gets added for that purpose.
+			if (!$targetPage) {
 			
-			// Only change the ['filter'] key
-			$query['filter'] = $tag;
+				// Get page url to clear query string if needed
+				if (isset($_SERVER["PATH_INFO"])) {
+					$currentUrl = BASE_URL . $_SERVER["PATH_INFO"];
+				} else {
+					$currentUrl = BASE_URL;
+				}
+			
+				// Check if current query is empty
+				if (!$current) {
+					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+				} else {
+					$class = ' ';
+				}
+			
+				// Remove filter form $query, but only the filter.
+				// Other items stay in that array.
+				unset($query['filter']);
+			
+				if (http_build_query($query)) {
+					// In case there are also other items in the query string, 
+					// it will be passed when updating the query string to remove the filter paramter.
+					$queryStr = '?' . http_build_query($query);
+				} else {
+					// If there are no other items, the query strings and the "?" get completly removed.
+					$queryStr = '';
+				}
 		
-			$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query) . '">' . $tag . '</a></li>';
+				$html .= '<li><a' . $class . 'href="' . $currentUrl . $queryStr . '">' . HTML_FILTERS_ALL . '</a></li>';
+			
+			}
 		
+			foreach ($tags as $tag) {
+			
+				// Check if $tag equals current filter in query
+				if ($current == $tag) {
+					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+				} else {
+					$class = ' ';
+				}
+			
+				// Only change the ['filter'] key
+				$query['filter'] = $tag;
+		
+				$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query) . '">' . $tag . '</a></li>';
+		
+			}
+		
+			$html .= '</ul>';
+		
+			return $html;
+			
 		}
-		
-		$html .= '</ul>';
-		
-		return $html;
 		
 	}
 		
@@ -232,35 +242,39 @@ class Html {
 	
 	public static function generateList($pages, $varStr) {
 		
-		if (!$varStr) {
-			$varStr = 'title';
-		}	
-			
-		$vars = array_map('trim', explode(',', $varStr));
+		if ($pages) {
 		
-		$html = '<ul class="' . HTML_CLASS_LIST . '">';
+			if (!$varStr) {
+				$varStr = 'title';
+			}	
+			
+			$vars = array_map('trim', explode(',', $varStr));
 		
-		foreach ($pages as $page) {
+			$html = '<ul class="' . HTML_CLASS_LIST . '">';
+		
+			foreach ($pages as $page) {
 			
-			$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">';
+				$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">';
 			
-			foreach ($vars as $var) {
+				foreach ($vars as $var) {
 				
-				if (isset($page->data[$var])) {
-					// Variable key is used to define the html class.
-					// That makes styling with CSS very customizable.
-					$html .= '<div class="' . $var . '">' . $page->data[$var] . '</div>';
+					if (isset($page->data[$var])) {
+						// Variable key is used to define the html class.
+						// That makes styling with CSS very customizable.
+						$html .= '<div class="' . $var . '">' . $page->data[$var] . '</div>';
+					}
+				
 				}
-				
-			}
 			
-			$html .= '</a></li>';
+				$html .= '</a></li>';
+			
+			}
+		
+			$html .= '</ul>';
+		
+			return $html;
 			
 		}
-		
-		$html .= '</ul>';
-		
-		return $html;
 		
 	}
 
@@ -278,17 +292,21 @@ class Html {
 	
 	public static function generateNav($pages) {
 		
-		$html = '<ul class="' . HTML_CLASS_NAV . '">';
+		if ($pages) {
 		
-		foreach($pages as $page) {
+			$html = '<ul class="' . HTML_CLASS_NAV . '">';
+		
+			foreach($pages as $page) {
 			
-			$html .= '<li>' . self::addLink($page) . '</li>'; 
+				$html .= '<li>' . self::addLink($page) . '</li>'; 
+			
+			}
+		
+			$html .= '</ul>';
+		
+			return $html;
 			
 		}
-		
-		$html .= '</ul>';
-		
-		return $html;
 		
 	}
 	
@@ -324,7 +342,7 @@ class Html {
 	
 	public static function generateTree($S, $expandAll = true) {
 		
-		return self::branch('/', $expandAll, $S);
+		return self::branch('', $expandAll, $S);
 		
 	}
 	
