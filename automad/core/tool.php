@@ -50,6 +50,13 @@ class Tool {
 	
 	
 	/**
+	 *	The full collection of pages.
+	 */
+	
+	private $collection;
+	
+	
+	/**
 	 * 	Current Page object.
 	 */
 	
@@ -81,6 +88,7 @@ class Tool {
 	public function __construct($site) {
 		
 		$this->S = $site;
+		$this->collection = $this->S->getCollection();
 		$this->P = $this->S->getCurrentPage();
 		
 	}
@@ -98,6 +106,20 @@ class Tool {
 		
 	}
 	
+	
+	/**
+	 *	To place the homepage at the same level like all the other pages from the first level,
+	 *	includeHome() will modify $this->collection and move the homepage one level down: 0 -> 1
+	 */
+	
+	public function includeHome() {
+		
+		$selection = new Selection($this->collection);
+		$selection->makeHomePageFirstLevel();
+		$this->collection = $selection->getSelection();
+		
+	}
+	
 		
 	/**
 	 * 	Return the HTML for a list of pages below the current page.
@@ -109,7 +131,7 @@ class Tool {
 	
 	public function listChildren($varStr) {
 		
-		$selection = new Selection($this->S->getCollection());
+		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($this->P->relUrl);
 		
 		if (isset($_GET['filter'])) {
@@ -133,7 +155,7 @@ class Tool {
 	
 	public function listChildrenFilters() {
 		
-		$selection = new Selection($this->S->getCollection());
+		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($this->P->relUrl);
 		$pages = $selection->getSelection();
 		
@@ -163,7 +185,7 @@ class Tool {
 	
 	public function listAll($varStr) {
 	
-		$selection = new Selection($this->S->getCollection());	
+		$selection = new Selection($this->collection);	
 		$selection->sortPages($this->sortMode, $this->sortOrder);
 	
 		if (isset($_GET['filter'])) {
@@ -190,7 +212,7 @@ class Tool {
 	
 	public function listAllFilters() {
 		
-		$selection = new Selection($this->S->getCollection());
+		$selection = new Selection($this->collection);
 		$pages = $selection->getSelection();
 		
 		// Remove current page from selecion
@@ -221,7 +243,7 @@ class Tool {
 	
 	public function navBelow($parentUrl) {
 				
-		$selection = new Selection($this->S->getCollection());
+		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($parentUrl);
 		$selection->sortPages($this->sortMode, $this->sortOrder);
 		
@@ -312,7 +334,7 @@ class Tool {
 	
 	public function navTop() {
 	
-		$selection = new Selection($this->S->getCollection());
+		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl('/');
 		$selection->sortPages($this->sortMode, $this->sortOrder);
 		
@@ -329,7 +351,7 @@ class Tool {
 	
 	public function navTree() {
 				
-		return Html::generateTree($this->S);
+		return Html::generateTree($this->collection);
 	
 	}
 	
@@ -342,7 +364,7 @@ class Tool {
 	
 	public function navTreeCurrent() {
 				
-		return Html::generateTree($this->S, false);
+		return Html::generateTree($this->collection, false);
 	
 	}
 
@@ -362,7 +384,7 @@ class Tool {
 		// Get pages
 		foreach ($tags as $tag) {
 			
-			$selection = new Selection($this->S->getCollection());
+			$selection = new Selection($this->collection);
 			$selection->filterByTag($tag);			
 			$pages = array_merge($pages, $selection->getSelection());
 						
@@ -409,7 +431,7 @@ class Tool {
 			
 			$search = $_GET["search"];
 			
-			$selection = new Selection($this->S->getCollection());
+			$selection = new Selection($this->collection);
 			$selection->filterByKeywords($search);
 			$selection->sortPages($this->sortMode, $this->sortOrder);
 			
