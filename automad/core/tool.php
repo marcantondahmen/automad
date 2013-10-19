@@ -98,7 +98,7 @@ class Tool {
 		
 	}
 	
-	
+		
 	/**
 	 * 	Return the HTML for a list of pages below the current page.
 	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
@@ -268,6 +268,30 @@ class Tool {
 	
 	
 	/**
+	 *	Generate a seperate navigation menu for each level within the current path.
+	 *
+	 *	@return the HTML for the seperate navigations
+	 */
+	
+	public function navPerLevel() {
+		
+		$urlSegments = explode('/', $this->P->relUrl);
+		$tempUrl = '';
+		$html = '';
+		
+		foreach ($urlSegments as $urlSegment) {
+			
+			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');	
+			$html .= $this->navBelow($tempUrl);
+			
+		}
+		
+		return $html;
+		
+	}
+	
+	
+	/**
 	 *	Generate a list for the navigation below the current page's parent.
 	 *
 	 *	@return html of the generated list	
@@ -289,7 +313,6 @@ class Tool {
 	public function navTop() {
 	
 		$selection = new Selection($this->S->getCollection());
-		$selection->makeHomePageFirstLevel();
 		$selection->filterByParentUrl('/');
 		$selection->sortPages($this->sortMode, $this->sortOrder);
 		
