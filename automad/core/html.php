@@ -43,6 +43,66 @@ class Html {
 	
 	
 	/**
+	 *	Add link to $page and check, if $page is the current page or within the current path.
+	 *
+	 *	@param object $page
+	 *	@return the HTML tag for the link to the given page
+	 */
+
+	private static function addLink($page) {
+	
+		if ($page->isCurrent()) {	
+			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+		} elseif ($page->isInCurrentPath()) {
+			$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';
+		} else {
+			$class = ' ';
+		}
+		
+		return '<a' . $class . 'href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a>';
+		
+	}
+
+
+	/**
+	 *	Branch out recursively below a certain relative URL.
+	 *
+	 *	@param string $parentRelUrl
+	 *	@param boolean $expandAll
+	 *	@param object $S
+	 *	@return the HTML for the branch/tree (recursive)
+	 */
+
+	private static function branch($parentRelUrl, $expandAll, $S) {
+		
+		$selection = new Selection($S->getCollection());
+		// Only for the first level
+		$selection->makeHomePageFirstLevel();
+		$selection->filterByParentUrl($parentRelUrl);
+		$selection->sortPagesByPath();
+		
+		$pages = $selection->getSelection();
+		
+		$html = '<ul class="' . HTML_CLASS_TREE . ' level' . $S->getPageByUrl($parentRelUrl)->level . '">';
+		
+		foreach ($pages as $page) {
+			
+			$html .= '<li>' . self::addLink($page) . '</li>';
+			
+			if ($page->relUrl != '/' && ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) ) {			
+				$html .= self::branch($page->relUrl, $expandAll, $S);
+			}
+			
+		}
+
+		$html .= '</ul>';
+		
+		return $html;
+		
+	}
+	
+		
+	/**
 	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
 	 *	
 	 *	@param array $pages
@@ -222,15 +282,7 @@ class Html {
 		
 		foreach($pages as $page) {
 			
-			if ($page->isCurrent()) {	
-				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
-			} elseif ($page->isInCurrentPath()) {
-				$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';
-			} else {
-				$class = ' ';
-			}
-			
-			$html .= '<li><a' . $class . 'href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a></li>'; 
+			$html .= '<li>' . self::addLink($page) . '</li>'; 
 			
 		}
 		
@@ -265,58 +317,14 @@ class Html {
 	/**
 	 * 	Generate the HTML for a full site tree.
 	 *
-	 *	@param array $pages
+	 *	@param object $S (the Site gets passed to make new selections within self::branch available)
+	 *	@param boolean $expandAll
 	 *	@return the HTML of the tree
 	 */
 	
-	public static function generateTree($pages) {
+	public static function generateTree($S, $expandAll = true) {
 		
-		// The tree starts at level one.
-		$level = 1;
-		
-		$selection = new Selection($pages);
-		$selection->makeHomePageFirstLevel();
-		$selection->sortPagesByPath();
-		$tree = $selection->getSelection();
-		
-		$html = '<ul class="' . HTML_CLASS_TREE . '">';
-		
-		foreach ($tree as $page) {
-			
-			// If the page level is deeper than the previous level,
-			// a new sub-list gets started.
-			if ($page->level > $level) {
-				$html .= '<ul class="level' . $page->level . '">';
-			} 
-			
-			// If the page level is smaller (higher) than the previous level, 
-			// the previous sub-list gets first closed.
-			if ($page->level < $level) {
-				$html .= '</ul>';
-			}
-			
-			// Check if Page is current page or parent of the current page
-			if ($page->isCurrent()) {	
-				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
-			} elseif ($page->isInCurrentPath()) {
-				$class = ' class="' . HTML_CLASS_CURRENT_PATH . '" ';
-			} else {
-				$class = ' ';
-			}
-					
-			$html .= '<li><a' . $class . 'href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a></li>';
-			
-			// The current level gets saved to be compared with the next iteration for starting or closing sub-lists
-			$level = $page->level;
-			
-		}
-		
-		// Add all missing closing </ul> for open lists
-		for ($x=$level; $x>=1; $x--) {
-			$html .= '</ul>';
-		}
-		
-		return $html;
+		return self::branch('/', $expandAll, $S);
 		
 	}
 	
