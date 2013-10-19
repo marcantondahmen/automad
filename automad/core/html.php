@@ -158,24 +158,12 @@ class Html {
 	 *	@return the HTML of the filter menu
 	 */
 		
-	public static function generateFilters($tags, $targetPage = '') {
+	public static function generateFilterMenu($tags, $targetPage = '') {
 
 		if ($tags) {
 
-			// First get existing query string to prevent overwriting existing settings passed already
-			// and store its data in $query.
-			if (isset($_GET)) {
-				$query = $_GET;
-			} else {
-				$query = array();
-			}
-		
-			// Save currently passed filter query to determine current filter when generating list
-			if (isset($_GET['filter'])) {
-				$current = $_GET['filter'];
-			} else {
-				$current = '';
-			}
+			$query = self::getQueryString();
+			$current = self::getQueryKey('filter');
 		
 			$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
 		
@@ -348,6 +336,130 @@ class Html {
 
 	
 	/**
+	 *	Generate ascending/descending buttons for sorting.
+	 *
+	 *	@param string $optionStr
+	 *	@return the HTML for the buttons
+	 */
+	
+	public static function generateSortDirectionMenu($optionStr) {
+		
+		$query = self::getQueryString();
+		$current = self::getQueryKey('sort_dir');
+		$options = Parse::toolOptions($optionStr);
+		
+		$defaults["SORT_ASC"] = HTML_SORT_ASC;
+		$defaults["SORT_DESC"] = HTML_SORT_DESC;
+		
+		$options = array_merge($defaults, $options);
+		
+		$html = '<ul class="' . HTML_CLASS_SORT . '">';
+		
+		// Ascending buttom		
+		if ($current == "sort_asc") {
+			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+		} else {
+			$class = ' ';
+		}
+		
+		$query['sort_dir'] = "sort_asc";
+		$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
+		
+		// Descending button
+		if ($current == "sort_desc") {
+			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+		} else {
+			$class = ' ';
+		}
+		
+		$query['sort_dir'] = "sort_desc";
+		$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_DESC"] . '</a></li>';
+		
+		$html .= '</ul>';
+	
+		return $html;
+		
+	}
+
+	
+	/**
+	 *	Generate the menu to select the sort type from the given types ($optionStr).
+	 *
+	 *	@param string $optionStr
+	 *	@return the HTML of the menu
+	 */
+	
+	public static function generateSortTypeMenu($optionStr) {
+
+		$query = self::getQueryString();
+		$current = self::getQueryKey('sort_type');	
+		$options = Parse::toolOptions($optionStr);
+		
+		$html = '<ul class="' . HTML_CLASS_SORT . '">';
+		
+		foreach ($options as $key => $value) {
+			
+			if (is_string($key)) {
+					
+				// If the $key is a string, the option is a "var: title" pair.
+					
+				// Check if $value equals current filter in query
+				if ($current == $key) {
+					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+				} else {
+					$class = ' ';
+				}
+			
+				// Only change the ['sort_type'] key
+				$query['sort_type'] = $key;
+		
+				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $value . '</a></li>';
+				
+			} else {
+				
+				// Else the option is just a title for "original order", since the key is missing.
+					
+				// Get page url to clear query string if needed
+				if (isset($_SERVER["PATH_INFO"])) {
+					$currentUrl = BASE_URL . $_SERVER["PATH_INFO"];
+				} else {
+					$currentUrl = BASE_URL;
+				}
+			
+				// Check if current query is empty and apply class accordingly.
+				if (!$current) {
+					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+				} else {
+					$class = ' ';
+				}
+				
+				// Remove filter form $query, but only the filter.
+				// Other items stay in that array.
+				unset($query['sort_type']);
+			
+				if (http_build_query($query)) {
+					// In case there are also other items in the query string, 
+					// it will be passed when updating the query string to remove the filter paramter.
+					$queryStr = '?' . http_build_query($query);
+				} else {
+					// If there are no other items, the query strings and the "?" get completly removed.
+					$queryStr = '';
+				}
+		
+				$html .= '<li><a' . $class . 'href="' . $currentUrl . $queryStr . '">' . $value . '</a></li>';
+				
+			}
+			
+		}
+	
+		$html .= '</ul>';
+	
+		return $html;
+	
+	}
+	
+	
+	/**
 	 * 	Generate the HTML for a full site tree.
 	 *
 	 *	@param array $collection (all pages)
@@ -362,6 +474,49 @@ class Html {
 		// or $[includeHome] from the templates.
 		return self::branch('/', $expandAll, $collection);
 		
+	}
+	
+	
+	/**
+	 *	Get the query string, if existing.
+	 *
+	 *	@return $query
+	 */
+	
+	private static function getQueryString() {
+		
+		// First get existing query string to prevent overwriting existing settings passed already
+		// and store its data in $query.
+		if (isset($_GET)) {
+			$query = $_GET;
+		} else {
+			$query = array();
+		}
+		
+		return $query;
+		
+		
+	}
+	
+	
+	/**
+	 *	Test if a key exists in the query string and return that key.
+	 *
+	 *	@param string $key
+	 *	@return $queryKey
+	 */
+	
+	private static function getQueryKey($key) {
+	
+		// Save currently passed filter query to determine current filter when generating list
+		if (isset($_GET[$key])) {
+			$queryKey = $_GET[$key];
+		} else {
+			$queryKey = '';
+		}
+		
+		return $queryKey;
+	
 	}
 	
 	
