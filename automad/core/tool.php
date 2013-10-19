@@ -69,7 +69,7 @@ class Tool {
 	 *	Default is empty, to make sure the original order is kept when leaving out $this->sortBy().
 	 */
 	
-	private $sortMode = '';
+	private $sortType = '';
 	
 	
 	/**
@@ -78,7 +78,7 @@ class Tool {
 	 *	Default is SORT_ASC, to make sure the original order is kept when leaving out $this->sortAscending().
 	 */
 	
-	private $sortOrder = SORT_ASC;
+	private $sortDirection = SORT_ASC;
 	
 	
 	/**
@@ -102,7 +102,7 @@ class Tool {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilters($this->P->tags, BASE_URL . $this->P->parentRelUrl);
+		return Html::generateFilterMenu($this->P->tags, BASE_URL . $this->P->parentRelUrl);
 		
 	}
 	
@@ -132,11 +132,20 @@ class Tool {
 	public function listAll($varStr) {
 	
 		$selection = new Selection($this->collection);	
-		$selection->sortPages($this->sortMode, $this->sortOrder);
 	
 		if (isset($_GET['filter'])) {
 			$selection->filterByTag($_GET['filter']);
 		}
+		
+		if (isset($_GET['sort_type'])) {
+			$this->sortType = $_GET['sort_type'];
+		}
+		
+		if (isset($_GET['sort_dir'])) {
+			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
+		}
+	
+		$selection->sortPages($this->sortType, $this->sortDirection);
 	
 		$pages = $selection->getSelection();
 	
@@ -165,7 +174,15 @@ class Tool {
 			$selection->filterByTag($_GET['filter']);
 		}
 		
-		$selection->sortPages($this->sortMode, $this->sortOrder);
+		if (isset($_GET['sort_type'])) {
+			$this->sortType = $_GET['sort_type'];
+		}
+		
+		if (isset($_GET['sort_dir'])) {
+			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
+		}
+		
+		$selection->sortPages($this->sortType, $this->sortDirection);
 		
 		return Html::generateList($selection->getSelection(), $varStr);
 		
@@ -199,7 +216,7 @@ class Tool {
 		$tags = array_unique($tags);
 		sort($tags);
 		
-		return Html::generateFilters($tags);
+		return Html::generateFilterMenu($tags);
 		
 	}
 
@@ -229,7 +246,35 @@ class Tool {
 		$tags = array_unique($tags);
 		sort($tags);
 		
-		return Html::generateFilters($tags);
+		return Html::generateFilterMenu($tags);
+		
+	}
+
+	
+	/**
+	 *	Place a menu to select the sort direction.
+	 *
+	 *	@param string $optionStr (optional) example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)]  
+	 *	@return the HTML for the sort menu
+	 */
+	
+	public function menuSortDirection($optionStr) {
+		
+		return Html::generateSortDirectionMenu($optionStr);
+		
+	}
+		
+
+	/**
+	 *	Place a set of sort options for all existing lists on the current page.
+	 *
+	 *	@param string $optionStr / example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
+	 *	@return the HTML for the sort menu
+	 */
+
+	public function menuSortType($optionStr) {
+		
+		return Html::generateSortTypeMenu($optionStr);
 		
 	}
 
@@ -245,7 +290,7 @@ class Tool {
 				
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($parentUrl);
-		$selection->sortPages($this->sortMode, $this->sortOrder);
+		$selection->sortPages($this->sortType, $this->sortDirection);
 		
 		return Html::generateNav($selection->getSelection());
 		
@@ -338,7 +383,7 @@ class Tool {
 	
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl('/');
-		$selection->sortPages($this->sortMode, $this->sortOrder);
+		$selection->sortPages($this->sortType, $this->sortDirection);
 		
 		return Html::generateNav($selection->getSelection());
 		
@@ -397,7 +442,7 @@ class Tool {
 		
 		// Sort pages
 		$selection = new Selection($pages);
-		$selection->sortPages($this->sortMode, $this->sortOrder);
+		$selection->sortPages($this->sortType, $this->sortDirection);
 		
 		return Html::generateList($selection->getSelection(), $varStr);
 				
@@ -435,7 +480,7 @@ class Tool {
 			
 			$selection = new Selection($this->collection);
 			$selection->filterByKeywords($search);
-			$selection->sortPages($this->sortMode, $this->sortOrder);
+			$selection->sortPages($this->sortType, $this->sortDirection);
 			
 			$pages = $selection->getSelection();
 			
@@ -452,9 +497,12 @@ class Tool {
 	 *	If Selection::sortPages() gets passed an empty variable as mode, it will fall back to Selection::sortPagesByPath().
 	 */
 	
-	public function sortOriginalOrder() {
+	public function sortOriginal() {
 		
-		$this->sortMode = NULL;
+		// Check if query string is empty to prevent overriding user actions.
+		if (!isset($_GET['sort_type'])) {
+			$this->sortType = NULL;
+		}
 		
 	}
 	
@@ -467,7 +515,10 @@ class Tool {
 	
 	public function sortBy($var) {
 		
-		$this->sortMode = $var;
+		// Check if query string is empty to prevent overriding user actions.
+		if (!isset($_GET['sort_type'])) {	
+			$this->sortType = $var;
+		}
 		
 	}
 	
@@ -478,7 +529,10 @@ class Tool {
 	
 	public function sortAscending() {
 		
-		$this->sortOrder = SORT_ASC;
+		// Check if query string is empty to prevent overriding user actions.
+		if (!isset($_GET['sort_dir'])) {
+			$this->sortDirection = SORT_ASC;
+		}
 		
 	}
 	
@@ -489,7 +543,10 @@ class Tool {
 	
 	public function sortDescending() {
 		
-		$this->sortOrder = SORT_DESC;
+		// Check if query string is empty to prevent overriding user actions.
+		if (!isset($_GET['sort_dir'])) {
+			$this->sortDirection = SORT_DESC;
+		}
 		
 	}
 	
