@@ -262,6 +262,7 @@ class Tool {
 		
 		$pages = array();
 		$urlSegments = explode('/', $this->P->relUrl);
+		$urlSegments = array_unique($urlSegments);
 		$tempUrl = '';
 		
 		foreach ($urlSegments as $urlSegment) {
@@ -298,14 +299,15 @@ class Tool {
 	public function navPerLevel() {
 		
 		$urlSegments = explode('/', $this->P->relUrl);
+		$urlSegments = array_unique($urlSegments);
 		$tempUrl = '';
 		$html = '';
-		
+				
 		foreach ($urlSegments as $urlSegment) {
 			
 			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');	
 			$html .= $this->navBelow($tempUrl);
-			
+					
 		}
 		
 		return $html;
