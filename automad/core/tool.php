@@ -119,62 +119,8 @@ class Tool {
 		$this->collection = $selection->getSelection();
 		
 	}
-	
-		
-	/**
-	 * 	Return the HTML for a list of pages below the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
-	 *
-	 *	@param string $varStr
-	 *	@return the HTML of the list
-	 */
-	
-	public function listChildren($varStr) {
-		
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($this->P->relUrl);
-		
-		if (isset($_GET['filter'])) {
-			$selection->filterByTag($_GET['filter']);
-		}
-		
-		$selection->sortPages($this->sortMode, $this->sortOrder);
-		
-		return Html::generateList($selection->getSelection(), $varStr);
-		
-	}
-	
 
-	/**
-	 *	Place a set of all tags included in the children pages to filter the children page list.
-	 *
-	 *	This method should be used together with the listChildren() method.
-	 *
-	 *	@return the HTML of the filters
-	 */
-	
-	public function listChildrenFilters() {
-		
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($this->P->relUrl);
-		$pages = $selection->getSelection();
-		
-		$tags = array();
-		
-		foreach ($pages as $page) {
-			
-			$tags = array_merge($tags, $page->tags);
-			
-		}
-		
-		$tags = array_unique($tags);
-		sort($tags);
-		
-		return Html::generateFilters($tags);
-		
-	}
-		
-	
+
 	/**
 	 * 	Return the HTML for a list of all pages excluding the current page.
 	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
@@ -200,8 +146,32 @@ class Tool {
 		return Html::generateList($pages, $varStr);	
 		
 	}
+
 	
+	/**
+	 * 	Return the HTML for a list of pages below the current page.
+	 *	The variables to be included in the output are set in a comma separated parameter string ($varStr).
+	 *
+	 *	@param string $varStr
+	 *	@return the HTML of the list
+	 */
 	
+	public function listChildren($varStr) {
+		
+		$selection = new Selection($this->collection);
+		$selection->filterByParentUrl($this->P->relUrl);
+		
+		if (isset($_GET['filter'])) {
+			$selection->filterByTag($_GET['filter']);
+		}
+		
+		$selection->sortPages($this->sortMode, $this->sortOrder);
+		
+		return Html::generateList($selection->getSelection(), $varStr);
+		
+	}
+	
+
 	/**
 	 *	Place a set of all tags (sitewide) to filter the full page list.
 	 *
@@ -210,13 +180,43 @@ class Tool {
 	 *	@return the HTML of the filters
 	 */
 	
-	public function listAllFilters() {
+	public function menuFilterAll() {
 		
 		$selection = new Selection($this->collection);
 		$pages = $selection->getSelection();
 		
 		// Remove current page from selecion
 		unset($pages[$this->P->relUrl]);
+		
+		$tags = array();
+		
+		foreach ($pages as $page) {
+			
+			$tags = array_merge($tags, $page->tags);
+			
+		}
+		
+		$tags = array_unique($tags);
+		sort($tags);
+		
+		return Html::generateFilters($tags);
+		
+	}
+
+
+	/**
+	 *	Place a set of all tags included in the children pages to filter the children page list.
+	 *
+	 *	This method should be used together with the listChildren() method.
+	 *
+	 *	@return the HTML of the filters
+	 */
+	
+	public function menuFilterChildren() {
+		
+		$selection = new Selection($this->collection);
+		$selection->filterByParentUrl($this->P->relUrl);
+		$pages = $selection->getSelection();
 		
 		$tags = array();
 		
