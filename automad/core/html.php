@@ -71,34 +71,31 @@ class Html {
 	 *
 	 *	@param string $parentRelUrl
 	 *	@param boolean $expandAll
-	 *	@param object $S
+	 *	@param array $collection (all pages)
 	 *	@return the HTML for the branch/tree (recursive)
 	 */
 
-	private static function branch($parentRelUrl, $expandAll, $S) {
+	private static function branch($parentRelUrl, $expandAll, $collection) {
 		
-		$selection = new Selection($S->getCollection());
+		$selection = new Selection($collection);
 		$selection->filterByParentUrl($parentRelUrl);
 		$selection->sortPagesByPath();
 		
 		$pages = $selection->getSelection();
-		
-		if (isset($S->getPageByUrl($parentRelUrl)->level)) {
-			$level = ($S->getPageByUrl($parentRelUrl)->level + 1);
-		} else {
-			$level = 0;
-		}
-		
-		$html = '<ul class="' . HTML_CLASS_TREE . ' level-' . $level . '">';
+			
+		$html = '<ul class="' . HTML_CLASS_TREE . '">';
 		
 		foreach ($pages as $page) {
 			
 			$html .= '<li>' . self::addLink($page) . '</li>';
 			
-			if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-				$html .= self::branch($page->relUrl, $expandAll, $S);
+			// There would be an infinite loop if the parentRelUrl equals the relUlr.
+			// That is the case if the current page is the homepage and the homepage moved to the first level. 
+			if ($page->parentRelUrl != $page->relUrl) {			
+				if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
+					$html .= self::branch($page->relUrl, $expandAll, $collection);
+				}
 			}
-			
 		}
 
 		$html .= '</ul>';
@@ -335,14 +332,19 @@ class Html {
 	/**
 	 * 	Generate the HTML for a full site tree.
 	 *
-	 *	@param object $S (the Site gets passed to make new selections within self::branch available)
+	 *	@param array $collection (all pages)
 	 *	@param boolean $expandAll
 	 *	@return the HTML of the tree
 	 */
 	
-	public static function generateTree($S, $expandAll = true) {
+	public static function generateTree($collection, $expandAll = true) {
 		
-		return self::branch('', $expandAll, $S);
+		// To generate the full tree including the homepage (if first level or not),
+		// $collection['/']->parentRelUrl makes sure, that there will be always the correct
+		// parent URL selected.
+		// If the homepage is included in the first level it would be '/',
+		// else it would be just ''. 
+		return self::branch($collection['/']->parentRelUrl, $expandAll, $collection);
 		
 	}
 	
