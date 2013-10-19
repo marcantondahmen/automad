@@ -41,6 +41,37 @@
  
 class Parse {
 	
+
+ 	/**
+ 	 *	Extracts the tags string out of a given array and returns an array with these tags.
+ 	 *
+ 	 *	@param array $data
+ 	 *	@return array $tags
+ 	 */
+	
+	public static function extractTags($data) {
+		
+		$tags = array();
+		
+		foreach ($data as $key => $value) {
+		
+			if ($key == DATA_TAGS_KEY) {
+	
+				// All tags are splitted into an array
+				$tags = explode(DATA_TAG_SEPARATOR, $value);
+				// Trim Tags
+				$tags = array_map(function($tag) {
+						return trim($tag); 
+					}, $tags);
+				
+			}		
+			
+		}
+		
+		return $tags;
+		
+	}
+	
 	
 	/**
 	 *	Loads and parses a text file.
@@ -71,33 +102,37 @@ class Parse {
 	}
  
  
- 	/**
- 	 *	Extracts the tags string out of a given array and returns an array with these tags.
- 	 *
- 	 *	@param array $data
- 	 *	@return array $tags
- 	 */
-	
-	public static function extractTags($data) {
+	/**
+	 *	Parse $optionStr and return a (mixed) array of options
+	 *
+	 *	@param string $optionStr
+	 *	@return $parsedOptions
+	 */
+
+	public static function toolOptions($optionStr) {
 		
-		$tags = array();
+		$options = explode(DATA_OPTION_SEPARATOR, $optionStr);
 		
-		foreach ($data as $key => $value) {
+		$parsedOptions = array();
 		
-			if ($key == DATA_TAGS_KEY) {
-	
-				// All tags are splitted into an array
-				$tags = explode(DATA_TAG_SEPARATOR, $value);
-				// Trim Tags
-				$tags = array_map(function($tag) {
-						return trim($tag); 
-					}, $tags);
+		foreach ($options as $option) {
+			
+			if (strpos($option, DATA_PAIR_SEPARATOR) !== false) {
+			
+				// If it is a pair of $key: $value, it goes like that into the new array.
+				list($key, $value) = explode(DATA_PAIR_SEPARATOR, $option, 2);
+				$parsedOptions[trim($key)] = trim($value);
 				
-			}		
+			} else {
+				
+				// Else the whole string goes into the array and gets just an index and not a key.
+				$parsedOptions[] = trim($option);
+				
+			}
 			
 		}
 		
-		return $tags;
+		return $parsedOptions;
 		
 	}
  	
