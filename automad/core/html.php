@@ -83,7 +83,7 @@ class Html {
 		
 		$pages = $selection->getSelection();
 		
-		$html = '<ul class="' . HTML_CLASS_TREE . ' level' . $S->getPageByUrl($parentRelUrl)->level . '">';
+		$html = '<ul class="' . HTML_CLASS_TREE . ' level' . ($S->getPageByUrl($parentRelUrl)->level + 1) . '">';
 		
 		foreach ($pages as $page) {
 			
