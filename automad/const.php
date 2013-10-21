@@ -80,6 +80,8 @@ define('HTML_FILTERS_ALL', 'All');
 define('HTML_SORT_ASC', 'ascending');
 define('HTML_SORT_DESC', 'descending');
 define('HTML_LIST_MAX_STR_LENGTH', 150);
+define('HTML_DEFAULT_SORT_DIR', 'sort_asc');
+define('HTML_DEFAULT_SORT_TYPES', 'Original Order, title: By Title');
 
 
 define('DATA_FILE_EXTENSION', 'txt');
