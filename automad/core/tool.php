@@ -119,6 +119,44 @@ class Tool {
 		$this->collection = $selection->getSelection();
 		
 	}
+	
+
+	/**
+	 *	Place a link to the previous sibling.
+	 *
+	 *	@return the HTML for the link.
+	 */
+
+	public function linkPrev() {
+		
+		$selection = new Selection($this->collection);
+		$selection->filterPrevAndNextToUrl($this->P->relUrl);
+		
+		// Check if there is a previous page and return HTML
+		if (isset($selection->getSelection()['prev'])) {
+			return Html::addLink($selection->getSelection()['prev'], HTML_CLASS_PREV);
+		}
+		
+	}
+	
+	
+	/**
+	 *	Place a link to the previous sibling.
+	 *
+	 *	@return the HTML for the link.
+	 */
+	
+	public function linkNext() {
+		
+		$selection = new Selection($this->collection);
+		$selection->filterPrevAndNextToUrl($this->P->relUrl);
+		
+		// Check if there is a next page and return HTML
+		if (isset($selection->getSelection()['next'])) {
+			return Html::addLink($selection->getSelection()['next'], HTML_CLASS_NEXT);
+		}
+		
+	}
 
 
 	/**
