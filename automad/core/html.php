@@ -262,9 +262,23 @@ class Html {
 				foreach ($vars as $var) {
 				
 					if (isset($page->data[$var])) {
+						
+						$text = $page->data[$var];
+						
+						// Shorten $text to maximal HTML_MAX_LIST_STR_LENGTH characters (full words).
+						if (strlen($text) > HTML_LIST_MAX_STR_LENGTH) {
+							// Cut $text to max chars
+							$text = substr($text, 0, HTML_LIST_MAX_STR_LENGTH);
+							// Find last space and get position
+							$pos = strrpos($text, ' ');
+							// Cut $text again at last space's position (< HTML_LIST_MAX_STR_LENGTH)
+							$text = substr($text, 0, $pos) . ' ...';
+						}
+					
 						// Variable key is used to define the html class.
 						// That makes styling with CSS very customizable.
-						$html .= '<div class="' . $var . '">' . $page->data[$var] . '</div>';
+						$html .= '<div class="' . $var . '">' . $text . '</div>';
+						
 					}
 				
 				}
