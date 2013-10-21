@@ -111,25 +111,29 @@ class Parse {
 
 	public static function toolOptions($optionStr) {
 		
-		$options = explode(DATA_OPTION_SEPARATOR, $optionStr);
-		
 		$parsedOptions = array();
 		
-		foreach ($options as $option) {
+		if ($optionStr) {
+		
+			$options = explode(DATA_OPTION_SEPARATOR, $optionStr);
+		
+			foreach ($options as $option) {
 			
-			if (strpos($option, DATA_PAIR_SEPARATOR) !== false) {
+				if (strpos($option, DATA_PAIR_SEPARATOR) !== false) {
 			
-				// If it is a pair of $key: $value, it goes like that into the new array.
-				list($key, $value) = explode(DATA_PAIR_SEPARATOR, $option, 2);
-				$parsedOptions[trim($key)] = trim($value);
+					// If it is a pair of $key: $value, it goes like that into the new array.
+					list($key, $value) = explode(DATA_PAIR_SEPARATOR, $option, 2);
+					$parsedOptions[trim($key)] = trim($value);
 				
-			} else {
+				} else {
 				
-				// Else the whole string goes into the array and gets just an index and not a key.
-				$parsedOptions[] = trim($option);
+					// Else the whole string goes into the array and gets just an index and not a key.
+					$parsedOptions[] = trim($option);
 				
+				}
+			
 			}
-			
+		
 		}
 		
 		return $parsedOptions;
