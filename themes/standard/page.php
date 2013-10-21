@@ -13,8 +13,11 @@
 	
 	<p>$[searchField()]</p>
 	<p>$[navTreeCurrent]</p>
-	<p>$[navPerLevel]</p>
+	<p>$[navPerLevel(2)]</p>
 	<br />		
+	$[linkPrev]
+	$[linkNext]
+	<br />
 	<h1>$(title)</h1>
 	<h2>$(subtitle)</h2>
 	$[filterParentByTags]

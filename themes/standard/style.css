@@ -31,6 +31,19 @@ a.currentPath {
 	color: #EBAFBD;
 }
 
+a.prev:before {
+	content: '<\00a0';
+}
+
+a.next {
+	display: block;
+	float: right;
+}
+
+a.next:after {
+	content: '\00a0>';
+}
+
 pre {
 	width: 800px;
 }

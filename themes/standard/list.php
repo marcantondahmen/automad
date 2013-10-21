@@ -17,9 +17,9 @@
 	<h1>$(title)</h1>
 	
 	$[menuFilterChildren]
-	$[menuSortType(Original, title: Title, tags: Tags + Filters)]
+	$[menuSortType(title: Title)]
 	$[menuSortDirection]
-	$[listChildren(title, subtitle, tags)]
+	$[listChildren(title, subtitle, tags, text)]
 	
 	<br />
 	<p>$[navBreadcrumbs]</p>

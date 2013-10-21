@@ -12,7 +12,7 @@
 	<p>$[searchField()]</p>
 	<p>$[navTop]</p>
 	<h1>$(title)</h1>
-	<div>$[searchResults(title, subtitle, tags)]</div>
+	<div>$[searchResults(title, subtitle, tags, text)]</div>
 	<br />
 	<p>$[navBreadcrumbs]</p>
 	<br />

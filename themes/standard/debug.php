@@ -17,10 +17,6 @@
 	<h1>$(title)</h1>
 	<p>$(text)</p>
 	
-	$[sortOriginal]
-	$[_sortBy(title)]
-	$[sortDescending]
-	
 	$[menuFilterAll]
 	$[menuSortType(Date, title: Title)]
 	$[menuSortDirection]
