@@ -64,21 +64,24 @@ class Tool {
 	
 	
 	/**
-	 * 	The modus defines the way a selection of pages gets sortet.
-	 *	
-	 *	Default is empty, to make sure the original order is kept when leaving out $this->sortBy().
+	 *	Filter for the page lists.
 	 */
 	
-	private $sortType = '';
+	private $filter;
 	
 	
 	/**
-	 * 	Sort order for selections.
-	 *
-	 *	Default is SORT_ASC, to make sure the original order is kept when leaving out $this->sortAscending().
+	 * 	The type defines the way the pages within the lists gets sortet.
 	 */
 	
-	private $sortDirection = SORT_ASC;
+	private $sortType;
+	
+	
+	/**
+	 * 	Sort order for lists.
+	 */
+	
+	private $sortDirection;
 	
 	
 	/**
@@ -90,6 +93,25 @@ class Tool {
 		$this->S = $site;
 		$this->collection = $this->S->getCollection();
 		$this->P = $this->S->getCurrentPage();
+		
+		// Set up filter and sort
+		if (isset($_GET['filter'])) {
+			$this->filter = $_GET['filter'];
+		} else {
+			$this->filter = '';
+		}
+		
+		if (isset($_GET['sort_type'])) {
+			$this->sortType = $_GET['sort_type'];
+		} else {
+			$this->sortType = '';
+		}
+		
+		if (isset($_GET['sort_dir'])) {
+			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
+		} else {
+			$this->sortDirection = SORT_ASC;
+		}
 		
 	}
 	
@@ -170,21 +192,8 @@ class Tool {
 	public function listAll($optionStr) {
 	
 		$selection = new Selection($this->collection);	
-	
-		if (isset($_GET['filter'])) {
-			$selection->filterByTag($_GET['filter']);
-		}
-		
-		if (isset($_GET['sort_type'])) {
-			$this->sortType = $_GET['sort_type'];
-		}
-		
-		if (isset($_GET['sort_dir'])) {
-			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
-		}
-	
+		$selection->filterByTag($this->filter);
 		$selection->sortPages($this->sortType, $this->sortDirection);
-	
 		$pages = $selection->getSelection();
 	
 		// Remove current page from selecion
@@ -207,19 +216,7 @@ class Tool {
 		
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($this->P->relUrl);
-		
-		if (isset($_GET['filter'])) {
-			$selection->filterByTag($_GET['filter']);
-		}
-		
-		if (isset($_GET['sort_type'])) {
-			$this->sortType = $_GET['sort_type'];
-		}
-		
-		if (isset($_GET['sort_dir'])) {
-			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
-		}
-		
+		$selection->filterByTag($this->filter);
 		$selection->sortPages($this->sortType, $this->sortDirection);
 		
 		return Html::generateList($selection->getSelection(), $optionStr);
