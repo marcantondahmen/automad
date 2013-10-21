@@ -168,7 +168,56 @@ class Selection {
 		$this->selection = $filtered;
 		
 	}
-	 
+	
+	
+	/**
+	 *	Filter out the neighbors (prevoius and next page) to the passed URL under the same parent URL.
+	 *
+	 *	$this->selection only holds two pages after completion with the keys ['prev'] and ['next'] instead of the URL-key.
+	 *	If there is only one page in the array (has no siblings), the selection will be empty. For two pages, it will only
+	 *	contain the ['next'] page. For more than two pages, both neighbors will be set in the selection.
+	 *
+	 *	@param string $url
+	 */	
+	
+	public function filterPrevAndNextToUrl($url) {
+		
+		// Narrow down selection to pages with the same parentUrl
+		$this->filterByParentUrl($this->selection[$url]->parentRelUrl);
+		$this->sortPagesByPath();
+		
+		$keys = array_keys($this->selection);
+		$keyIndexes = array_flip($keys);
+		
+		$neighbors = array();
+		
+		// Check number of pages
+		if (sizeof($keys) > 1) {
+	
+			if (sizeof($keys) > 2) {
+		
+				// Previous
+				if (isset($keys[$keyIndexes[$url]-1])) {
+					$neighbors['prev'] = $this->selection[$keys[$keyIndexes[$url]-1]];
+				} else {
+					$neighbors['prev'] = $this->selection[$keys[sizeof($keys)-1]];
+				}
+			
+			}
+			
+  		       	// Next
+		  	if (isset($keys[$keyIndexes[$url]+1])) {
+				$neighbors['next'] = $this->selection[$keys[$keyIndexes[$url]+1]];
+			} else {
+				$neighbors['next'] = $this->selection[$keys[0]];
+			}
+		
+		}
+		
+		$this->selection = $neighbors;
+		
+	}
+	
 	 
 	/**
 	 * 	Makes the Home Page a neighbor of all level 1 pages. Useful for filtering the top level pages all together.
