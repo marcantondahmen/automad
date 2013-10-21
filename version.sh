@@ -33,7 +33,7 @@ fi
 
 
 flowCommitMessage="Updated version number to"
-file="automad/version.php"
+file="www/automad/version.php"
 
 
 # If $arg contains the $flowCommitMessage, 
