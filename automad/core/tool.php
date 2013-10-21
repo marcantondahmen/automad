@@ -110,7 +110,7 @@ class Tool {
 		if (isset($_GET['sort_dir'])) {
 			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
 		} else {
-			$this->sortDirection = SORT_ASC;
+			$this->sortDirection = constant(strtoupper(HTML_DEFAULT_SORT_DIR));
 		}
 		
 	}
