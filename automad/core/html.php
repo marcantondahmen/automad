@@ -46,12 +46,11 @@ class Html {
 	 *	Add link to $page and check, if $page is the current page or within the current path.
 	 *
 	 *	@param object $page
+	 *	@param string $classes - additional classes to add to the link (separated by space as one string)
 	 *	@return the HTML tag for the link to the given page
 	 */
 
-	private static function addLink($page) {
-	
-		$classes = '';
+	public static function addLink($page, $classes = '') {
 	
 		if ($page->isHome()) {	
 			$classes .= ' ' . HTML_CLASS_HOME;	
