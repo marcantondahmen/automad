@@ -283,14 +283,14 @@ class Tool {
 	/**
 	 *	Generate a list for the navigation below a given URL.
 	 *
-	 *	@param string $parentRelUrl
+	 *	@param string $optionStr - the URL of the parent page of the displayed pages.
 	 *	@return html of the generated list	
 	 */
 	
-	public function navBelow($parentUrl) {
+	public function navBelow($optionStr) {
 				
 		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($parentUrl);
+		$selection->filterByParentUrl($optionStr);
 		$selection->sortPagesByPath();
 		
 		return Html::generateNav($selection->getSelection());
@@ -339,11 +339,13 @@ class Tool {
 	/**
 	 *	Generate a seperate navigation menu for each level within the current path.
 	 *
+	 *	@param string $optionStr (optional) - The maximal level to display.
 	 *	@return the HTML for the seperate navigations
 	 */
 	
-	public function navPerLevel() {
+	public function navPerLevel($optionStr) {
 		
+		$maxLevel = (int)trim($optionStr);
 		$urlSegments = explode('/', $this->P->relUrl);
 		$urlSegments = array_unique($urlSegments);
 		$tempUrl = '';
@@ -352,8 +354,10 @@ class Tool {
 		foreach ($urlSegments as $urlSegment) {
 			
 			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');	
-			$html .= $this->navBelow($tempUrl);
-					
+			
+			if ((int)$this->S->getPageByUrl($tempUrl)->level < $maxLevel || !$maxLevel) {
+				$html .= $this->navBelow($tempUrl);
+			}
 		}
 		
 		return $html;
