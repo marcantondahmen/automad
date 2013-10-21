@@ -116,17 +116,21 @@ class Selection {
 	
 	public function filterByTag($tag) {
 		
-		$filtered = array();
+		if ($tag) {
 		
-		foreach ($this->selection as $key => $page) {
+			$filtered = array();
+		
+			foreach ($this->selection as $key => $page) {
 			
-			if (in_array($tag, $page->tags)) {
-				$filtered[$key] = $page;
+				if (in_array($tag, $page->tags)) {
+					$filtered[$key] = $page;
+				}
+			
 			}
-			
-		}
 		
-		$this->selection = $filtered;
+			$this->selection = $filtered;
+		
+		} 
 		
 	}
 	
