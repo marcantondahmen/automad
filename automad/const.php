@@ -63,6 +63,8 @@ define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 
 
 define('HTML_CLASS_NAV', 'nav');
+define('HTML_CLASS_PREV', 'prev');
+define('HTML_CLASS_NEXT', 'next');
 define('HTML_CLASS_FILTER', 'filter');
 define('HTML_CLASS_TREE', 'tree');
 define('HTML_CLASS_LIST', 'list');
