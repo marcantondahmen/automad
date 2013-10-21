@@ -161,7 +161,7 @@ class Html {
 
 		if ($tags) {
 
-			$query = self::getQueryString();
+			$query = self::getQueryArray();
 			$current = self::getQueryKey('filter');
 		
 			$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
@@ -173,34 +173,18 @@ class Html {
 			// The "All" button gets added for that purpose.
 			if (!$targetPage) {
 			
-				// Get page url to clear query string if needed
-				if (isset($_SERVER["PATH_INFO"])) {
-					$currentUrl = BASE_URL . $_SERVER["PATH_INFO"];
-				} else {
-					$currentUrl = BASE_URL;
-				}
-			
-				// Check if current query is empty
+				// Check if current query is empty. 
+				// No query means no filter - in that case the HTML_CLASS_CURRENT gets applied to the "All" button.
 				if (!$current) {
 					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
 				} else {
 					$class = ' ';
 				}
 			
-				// Remove filter form $query, but only the filter.
-				// Other items stay in that array.
-				unset($query['filter']);
-			
-				if (http_build_query($query)) {
-					// In case there are also other items in the query string, 
-					// it will be passed when updating the query string to remove the filter paramter.
-					$queryStr = '?' . http_build_query($query);
-				} else {
-					// If there are no other items, the query strings and the "?" get completly removed.
-					$queryStr = '';
-				}
-		
-				$html .= '<li><a' . $class . 'href="' . $currentUrl . $queryStr . '">' . HTML_FILTERS_ALL . '</a></li>';
+				// Only change the ['filter'] key
+				$query['filter'] = '';
+					
+				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . HTML_FILTERS_ALL . '</a></li>';
 			
 			}
 		
@@ -352,25 +336,17 @@ class Html {
 	/**
 	 *	Generate ascending/descending buttons for sorting.
 	 *
-	 *	@param sort_flag $default
 	 *	@param string $optionStr
 	 *	@return the HTML for the buttons
 	 */
 	
-	public static function generateSortDirectionMenu($default, $optionStr) {
+	public static function generateSortDirectionMenu($optionStr) {
 		
-		$query = self::getQueryString();
+		$query = self::getQueryArray();
 		$current = self::getQueryKey('sort_dir');
 				
 		if (!$current) {
-			switch ($default) {
-			    case SORT_ASC:
-			        $current = "sort_asc";
-			        break;
-    			    case SORT_DESC:
-    			        $current = "sort_desc";
-			        break;
-			}
+			$current = HTML_DEFAULT_SORT_DIR;
 		}
 		
 		$options = Parse::toolOptions($optionStr);
@@ -418,64 +394,34 @@ class Html {
 	
 	public static function generateSortTypeMenu($optionStr) {
 
-		$query = self::getQueryString();
+		$query = self::getQueryArray();
 		$current = self::getQueryKey('sort_type');		
 		$options = Parse::toolOptions($optionStr);
+		$defaults = Parse::toolOptions(HTML_DEFAULT_SORT_TYPES);		
+		$options = array_merge($defaults, $options);
+		
+		for($i=0; isset($options[$i]); $i++){
+			$options[''] = $options[$i];
+			unset($options[$i]);
+		}
+		
+		ksort($options);
 		
 		$html = '<ul class="' . HTML_CLASS_SORT . '">';
 		
 		foreach ($options as $key => $value) {
-			
-			if (is_string($key)) {
-					
-				// If the $key is a string, the option is a "var: title" pair.
-					
-				// Check if $value equals current filter in query
-				if ($current == $key) {
-					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
-				} else {
-					$class = ' ';
-				}
-			
-				// Only change the ['sort_type'] key
-				$query['sort_type'] = $key;
-		
-				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $value . '</a></li>';
-				
+							
+			// Check if $value equals current filter in query
+			if ($current == $key) {
+				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
 			} else {
-				
-				// Else the option is just a title for "original order", since the key is missing.
-					
-				// Get page url to clear query string if needed
-				if (isset($_SERVER["PATH_INFO"])) {
-					$currentUrl = BASE_URL . $_SERVER["PATH_INFO"];
-				} else {
-					$currentUrl = BASE_URL;
-				}
-			
-				// Check if current query is empty and apply class accordingly.
-				if (!$current) {
-					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
-				} else {
-					$class = ' ';
-				}
-				
-				// Remove filter form $query, but only the filter.
-				// Other items stay in that array.
-				unset($query['sort_type']);
-			
-				if (http_build_query($query)) {
-					// In case there are also other items in the query string, 
-					// it will be passed when updating the query string to remove the filter paramter.
-					$queryStr = '?' . http_build_query($query);
-				} else {
-					// If there are no other items, the query strings and the "?" get completly removed.
-					$queryStr = '';
-				}
-		
-				$html .= '<li><a' . $class . 'href="' . $currentUrl . $queryStr . '">' . $value . '</a></li>';
-				
+				$class = ' ';
 			}
+		
+			// Only change the ['sort_type'] key
+			$query['sort_type'] = $key;
+	
+			$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $value . '</a></li>';
 			
 		}
 	
@@ -510,7 +456,7 @@ class Html {
 	 *	@return $query
 	 */
 	
-	private static function getQueryString() {
+	private static function getQueryArray() {
 		
 		// First get existing query string to prevent overwriting existing settings passed already
 		// and store its data in $query.
