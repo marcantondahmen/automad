@@ -77,6 +77,7 @@ define('HTML_SEARCH_PLACEHOLDER', 'Search ...');
 define('HTML_FILTERS_ALL', 'All');
 define('HTML_SORT_ASC', 'ascending');
 define('HTML_SORT_DESC', 'descending');
+define('HTML_LIST_MAX_STR_LENGTH', 150);
 
 
 define('DATA_FILE_EXTENSION', 'txt');
