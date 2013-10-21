@@ -532,71 +532,7 @@ class Tool {
 		}
 		
 	}
-	
-	
-	/**
-	 * 	Resets the sort mode to the original file system order. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
-	 *	
-	 *	If Selection::sortPages() gets passed an empty variable as mode, it will fall back to Selection::sortPagesByPath().
-	 */
-	
-	public function sortOriginal() {
 		
-		// To prevent that the user selection passed in the query string gets overwritten by this method,
-		// the $_GET array gets first checked, if sort_type is empty.
-		if (!isset($_GET['sort_type'])) {
-			$this->sortType = NULL;
-		}
-		
-	}
-	
-	
-	/**
-	 * 	Sets the $key in Page::data[$key] as the sort type. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
-	 *
-	 *	@param string $optionStr - Any variable from the text file of the page - will be used as the new sort type
-	 */
-	
-	public function sortBy($optionStr) {
-		
-		// To prevent that the user selection passed in the query string gets overwritten by this method,
-		// the $_GET array gets first checked, if sort_type is empty.
-		if (!isset($_GET['sort_type'])) {	
-			$this->sortType = $optionStr;
-		}
-		
-	}
-	
-	
-	/**
-	 * 	Sets the sort order to ascending. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
-	 */
-	
-	public function sortAscending() {
-		
-		// To prevent that the user selection passed in the query string gets overwritten by this method,
-		// the $_GET array gets first checked, if sort_dir is empty.
-		if (!isset($_GET['sort_dir'])) {
-			$this->sortDirection = SORT_ASC;
-		}
-		
-	}
-	
-	
-	/**
-	 * 	Sets the sort order to descending. This method only affects following lists of pages created by Tool::listChildren() and Tool::listAll()
-	 */
-	
-	public function sortDescending() {
-		
-		// To prevent that the user selection passed in the query string gets overwritten by this method,
-		// the $_GET array gets first checked, if sort_dir is empty.
-		if (!isset($_GET['sort_dir'])) {
-			$this->sortDirection = SORT_DESC;
-		}
-		
-	}
-	
 
 	/**
 	 * 	Return the site name.
