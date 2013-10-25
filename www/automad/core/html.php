@@ -70,7 +70,7 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		return '<a' . $classes . ' href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a>';
+		return '<a' . $classes . ' href="' . BASE_URL . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>';
 		
 	}
 
@@ -135,7 +135,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . BASE_URL . $page->relUrl . '">' . $page->data['title'] . '</a>' . HTML_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . BASE_URL . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
 			
 		}
 		
@@ -246,7 +246,7 @@ class Html {
 				
 					if (isset($page->data[$var])) {
 						
-						$text = $page->data[$var];
+						$text = Parse::sanitize($page->data[$var]);
 						
 						// Shorten $text to maximal HTML_MAX_LIST_STR_LENGTH characters (full words).
 						if (strlen($text) > HTML_LIST_MAX_STR_LENGTH) {
