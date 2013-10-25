@@ -43,6 +43,10 @@ spl_autoload_register(function ($class) {
 });
 
 
+// 3rd party libraries
+include BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
+
+
 // Constants
 include BASE_DIR . '/automad/const.php';
 
