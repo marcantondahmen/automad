@@ -167,7 +167,7 @@ class Site {
 					// In case there are more than one matching file, the last accessed gets added.
 					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
 						
-						$data = Parse::textFile($itemFullPath);
+						$data = Parse::markdownFile($itemFullPath);
 						
 						// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 						// In case the title is missig for the home page, use the site name instead.
