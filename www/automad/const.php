@@ -56,8 +56,8 @@ define('SITE_RESULTS_PAGE_URL', '/results');
 
 define('TEMPLATE_DEFAULT_DIR', BASE_DIR . '/automad/templates');
 define('TEMPLATE_DEFAULT_NAME', 'default');
-define('TEMPLATE_VAR_DELIMITER_LEFT', '$(');
-define('TEMPLATE_VAR_DELIMITER_RIGHT', ')');
+define('TEMPLATE_VAR_DELIMITER_LEFT', '[');
+define('TEMPLATE_VAR_DELIMITER_RIGHT', ']');
 define('TEMPLATE_FN_DELIMITER_LEFT', '$[');
 define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 
