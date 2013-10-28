@@ -34,6 +34,23 @@
  */
  
 
+// Constants
+include BASE_DIR . '/automad/const.php';
+
+
+// Remove trailing slash from URL to keep relative links consistent
+if (isset($_SERVER['PATH_INFO'])) {
+	
+	if (substr($_SERVER['PATH_INFO'], -1) == '/') {
+		
+		header('Location: ' . BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
+		exit;
+		
+	}
+	
+}	
+
+
 // Auto load classes
 spl_autoload_register(function ($class) {
 		
@@ -45,10 +62,6 @@ spl_autoload_register(function ($class) {
 
 // 3rd party libraries
 include BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
-
-
-// Constants
-include BASE_DIR . '/automad/const.php';
 
 
 // Init new template
