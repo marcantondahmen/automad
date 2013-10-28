@@ -116,14 +116,16 @@ class Template {
 					}
 				}, 
 				$content);
-				
-		// Replace vars in data array		
-		foreach ($this->P->data as $key => $value) {
-			$content = preg_replace('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '(' . $key . ')' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/', $value, $content);	
-		}
-		
-		// Delete all undefined variables in template
-		$content = preg_replace('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '[A-Za-z0-9_\-]+' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/', '', $content);
+							
+		// Replace vars in data array			
+		$data = $this->P->data;
+		$content =	preg_replace_callback('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/',
+				function($matches) use($data) {
+					if (array_key_exists($matches[1], $data)) {
+						return $data[$matches[1]];
+					}
+				},
+				$content);
 				
 		return $content;
 		
@@ -144,9 +146,7 @@ class Template {
 
 		ob_end_clean();
 		
-		$html = $this->processTemplate($content);
-		
-		echo $html;		
+		echo $this->processTemplate($content);		
 		
 	}	
 	
