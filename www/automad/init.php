@@ -34,6 +34,9 @@
  */
  
 
+define('AUTOMAD', true);
+
+
 // Constants
 include BASE_DIR . '/automad/const.php';
 
