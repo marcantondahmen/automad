@@ -2,7 +2,8 @@ title: Hippodrome de Longchamp
 
 ---
 
-subtitle: Paris
+subtitle: Paris  
+International Competition
 
 ---
 
@@ -10,4 +11,12 @@ tags: Sports, Public, Culture
 
 ---
 
-text: After the fire of the church in 2009, the Våler community needs a new church building. For this reason the Våler Parish Council invited architects for an open architectural competition. The new building should accommodate 350 people and provide many secondary spaces. The new building is to be placed next to the ruins of the old burned down church.
+text: 
+
+### The Longchamp racetrack 
+
+is the most **important** horseracing facility in *Paris*. The Hippodrome was built in 1857 on top of the ruins of the abbey *Longchamp* caused during the French revolution. 
+
+Every first weekend in October, Longchamp hosts the _Prix de l’Arc de Triomphe_. 
+
+This prestigious event is one of the most important races of the year and attracts the best horses, horse owners and jockeys from all over the world. During that day the attendee adds up to 60,000 people.
