@@ -21,8 +21,6 @@
 	<br />
 	<p>$[navBreadcrumbs]</p>
 	<br />
-	<pre><?php  print_r ($this->S->getCollection());  ?></pre>
-	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>
 </html>
