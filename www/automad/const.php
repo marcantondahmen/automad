@@ -43,9 +43,9 @@ if (file_exists(BASE_DIR . '/.htaccess')) {
 }
 
 
-define('SITE_CONTENT_DIR', BASE_DIR . '/content');
-define('SITE_SETTINGS_FILE', SITE_CONTENT_DIR . '/settings.txt'); 
-define('SITE_PAGES_DIR', SITE_CONTENT_DIR . '/pages');
+define('SITE_SHARED_DIR', BASE_DIR . '/shared');
+define('SITE_SETTINGS_FILE', SITE_SHARED_DIR . '/site.txt'); 
+define('SITE_PAGES_DIR', BASE_DIR . '/pages');
 define('SITE_THEMES_DIR', BASE_DIR . '/themes');
 define('SITE_DEFAULT_NAME', 'Automad');
 define('SITE_DEFAULT_THEME', 'standard');
