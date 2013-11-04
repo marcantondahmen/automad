@@ -70,11 +70,7 @@ class Site {
 		
 		// Load defaults		
 		$defaults = 	array(	
-					'sitename' => SITE_DEFAULT_NAME, 
-					'theme' => SITE_DEFAULT_THEME, 
-					'errorPageTitle' => SITE_ERROR_PAGE_TITLE, 
-					'resultsPageTitle' => SITE_RESULTS_PAGE_TITLE,
-					'resultsPageUrl' => SITE_RESULTS_PAGE_URL
+					'sitename' => $_SERVER['SERVER_NAME']  
 				);
 		
 		// Merge defaults with settings from file
@@ -307,16 +303,16 @@ class Site {
 			// If page exists
 			return $this->siteCollection[$url];
 	
-		} elseif (isset($_GET["search"]) && $url == $this->getSiteData('resultsPageUrl')) {
+		} elseif (isset($_GET["search"]) && $url == SITE_RESULTS_PAGE_URL) {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage('results', $this->getSiteData('resultsPageTitle') . ' / "' . $_GET["search"] . '"');
+			return $this->createPage('results', SITE_RESULTS_PAGE_TITLE . ' / "' . $_GET["search"] . '"');
 	
 		} else {
 	
 			// Else return error page
-			return $this->createPage('error', $this->getSiteData('errorPageTitle'));
+			return $this->createPage('error', SITE_ERROR_PAGE_TITLE);
 	
 		}
 		
