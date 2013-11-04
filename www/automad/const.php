@@ -190,28 +190,28 @@ if (!defined('HTML_DEFAULT_SORT_TYPES')) {
 // Parsing defaults
 
 // File extension
-if (!defined('DATA_FILE_EXTENSION')) {
-	define('DATA_FILE_EXTENSION', 'txt');
+if (!defined('PARSE_DATA_FILE_EXTENSION')) {
+	define('PARSE_DATA_FILE_EXTENSION', 'txt');
 }
 // Block separator - separates all key/value pairs
-if (!defined('DATA_BLOCK_SEPARATOR')) {
-	define('DATA_BLOCK_SEPARATOR', '---');
+if (!defined('PARSE_BLOCK_SEPARATOR')) {
+	define('PARSE_BLOCK_SEPARATOR', '---');
 }
 // Pair separator - separates the key from the value
-if (!defined('DATA_PAIR_SEPARATOR')) {
-	define('DATA_PAIR_SEPARATOR', ':');
+if (!defined('PARSE_PAIR_SEPARATOR')) {
+	define('PARSE_PAIR_SEPARATOR', ':');
 }
 // Tool options separator
-if (!defined('DATA_OPTION_SEPARATOR')) {
-	define('DATA_OPTION_SEPARATOR', ',');
+if (!defined('PARSE_OPTION_SEPARATOR')) {
+	define('PARSE_OPTION_SEPARATOR', ',');
 }
 // Tags separator
-if (!defined('DATA_TAG_SEPARATOR')) {
-	define('DATA_TAG_SEPARATOR', ',');
+if (!defined('PARSE_TAG_SEPARATOR')) {
+	define('PARSE_TAG_SEPARATOR', ',');
 }
 // Tags key (to identify tags in the page's txt file)
-if (!defined('DATA_TAGS_KEY')) {
-	define('DATA_TAGS_KEY', 'tags');
+if (!defined('PARSE_TAGS_KEY')) {
+	define('PARSE_TAGS_KEY', 'tags');
 }
 
  

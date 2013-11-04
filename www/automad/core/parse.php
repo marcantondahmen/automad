@@ -55,10 +55,10 @@ class Parse {
 		
 		foreach ($data as $key => $value) {
 		
-			if ($key == DATA_TAGS_KEY) {
+			if ($key == PARSE_TAGS_KEY) {
 	
 				// All tags are splitted into an array
-				$tags = explode(DATA_TAG_SEPARATOR, $value);
+				$tags = explode(PARSE_TAG_SEPARATOR, $value);
 				// Trim & sanitize tags
 				$tags = array_map(function($tag) {
 						return trim(Parse::sanitize($tag)); 
@@ -163,13 +163,13 @@ class Parse {
 	public static function textFile($file) {
 		
 		// split $file into data blocks
-		$pairs = explode(DATA_BLOCK_SEPARATOR, file_get_contents($file));
+		$pairs = explode(PARSE_BLOCK_SEPARATOR, file_get_contents($file));
 		
 		// split $pairs into an array of vars
 		$vars = array();
 		foreach ($pairs as $pair) {
 		
-			list($key, $value) = explode(DATA_PAIR_SEPARATOR, $pair, 2);
+			list($key, $value) = explode(PARSE_PAIR_SEPARATOR, $pair, 2);
 			$vars[trim($key)] = trim($value);	
 			
 		}
@@ -192,14 +192,14 @@ class Parse {
 		
 		if ($optionStr) {
 		
-			$options = explode(DATA_OPTION_SEPARATOR, $optionStr);
+			$options = explode(PARSE_OPTION_SEPARATOR, $optionStr);
 		
 			foreach ($options as $option) {
 			
-				if (strpos($option, DATA_PAIR_SEPARATOR) !== false) {
+				if (strpos($option, PARSE_PAIR_SEPARATOR) !== false) {
 			
 					// If it is a pair of $key: $value, it goes like that into the new array.
-					list($key, $value) = explode(DATA_PAIR_SEPARATOR, $option, 2);
+					list($key, $value) = explode(PARSE_PAIR_SEPARATOR, $option, 2);
 					$parsedOptions[trim($key)] = trim($value);
 				
 				} else {

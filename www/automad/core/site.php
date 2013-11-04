@@ -132,7 +132,7 @@ class Site {
 	
 	
 	/**
-	 *	Searches $relPath recursively for files with the DATA_FILE_EXTENSION and adds the parsed data to $siteCollection.
+	 *	Searches $relPath recursively for files with the PARSE_DATA_FILE_EXTENSION and adds the parsed data to $siteCollection.
 	 *
 	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
@@ -159,9 +159,9 @@ class Site {
 					
 					$itemFullPath = $fullPath . '/' . $item;
 									
-					// If $item is a file with the DATA_FILE_EXTENSION, $item gets added to the index.
+					// If $item is a file with the PARSE_DATA_FILE_EXTENSION, $item gets added to the index.
 					// In case there are more than one matching file, the last accessed gets added.
-					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
+					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == PARSE_DATA_FILE_EXTENSION) {
 						
 						$data = Parse::markdownFile($itemFullPath);
 						
@@ -187,7 +187,7 @@ class Site {
 						$P->relPath = $relPath;
 						$P->level = $level;
 						$P->parentRelUrl = $parentRelUrl;
-						$P->template = str_replace('.' . DATA_FILE_EXTENSION, '', $item);
+						$P->template = str_replace('.' . PARSE_DATA_FILE_EXTENSION, '', $item);
 						$this->siteCollection[$relUrl] = $P;
 							
 					}
