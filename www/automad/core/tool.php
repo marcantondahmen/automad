@@ -1,4 +1,4 @@
-<?php
+<?php defined('AUTOMAD') or die('Direct access not permitted!');
 /*
  *	                  ....
  *	                .:   '':.
@@ -154,9 +154,11 @@ class Tool {
 		$selection = new Selection($this->collection);
 		$selection->filterPrevAndNextToUrl($this->P->relUrl);
 		
+		$pages = $selection->getSelection();
+		
 		// Check if there is a previous page and return HTML
-		if (isset($selection->getSelection()['prev'])) {
-			return Html::addLink($selection->getSelection()['prev'], HTML_CLASS_PREV);
+		if (isset($pages['prev'])) {
+			return Html::addLink($pages['prev'], HTML_CLASS_PREV);
 		}
 		
 	}
@@ -173,9 +175,11 @@ class Tool {
 		$selection = new Selection($this->collection);
 		$selection->filterPrevAndNextToUrl($this->P->relUrl);
 		
+		$pages = $selection->getSelection();
+		
 		// Check if there is a next page and return HTML
-		if (isset($selection->getSelection()['next'])) {
-			return Html::addLink($selection->getSelection()['next'], HTML_CLASS_NEXT);
+		if (isset($pages['next'])) {
+			return Html::addLink($pages['next'], HTML_CLASS_NEXT);
 		}
 		
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php defined('AUTOMAD') or die('Direct access not permitted!');
 /*
  *	                  ....
  *	                .:   '':.
@@ -145,7 +145,7 @@ class Selection {
 		
 		$filtered = array();
 		
-		$keywords = explode(' ', $str);
+		$keywords = explode(' ', Parse::sanitize($str));
 		
 		// generate pattern
 		$pattern = '/^';
@@ -160,8 +160,8 @@ class Selection {
 			
 			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
 			// even if the keywords are distributed over different variables in $page[data]. 
-			$dataAsString = implode(" ", $page->data);
-				
+			$dataAsString = Parse::sanitize(implode(" ", $page->data));
+								
 			// search
 			if (preg_match($pattern, $dataAsString) == 1) {
 				$filtered[$key] = $page;

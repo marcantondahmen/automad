@@ -1,4 +1,4 @@
-<?php
+<?php defined('AUTOMAD') or die('Direct access not permitted!');
 /*
  *	                  ....
  *	                .:   '':.
@@ -43,9 +43,9 @@ if (file_exists(BASE_DIR . '/.htaccess')) {
 }
 
 
-define('SITE_CONTENT_DIR', BASE_DIR . '/content');
-define('SITE_SETTINGS_FILE', SITE_CONTENT_DIR . '/settings.txt'); 
-define('SITE_PAGES_DIR', SITE_CONTENT_DIR . '/pages');
+define('SITE_SHARED_DIR', BASE_DIR . '/shared');
+define('SITE_SETTINGS_FILE', SITE_SHARED_DIR . '/site.txt'); 
+define('SITE_PAGES_DIR', BASE_DIR . '/pages');
 define('SITE_THEMES_DIR', BASE_DIR . '/themes');
 define('SITE_DEFAULT_NAME', 'Automad');
 define('SITE_DEFAULT_THEME', 'standard');
@@ -56,8 +56,8 @@ define('SITE_RESULTS_PAGE_URL', '/results');
 
 define('TEMPLATE_DEFAULT_DIR', BASE_DIR . '/automad/templates');
 define('TEMPLATE_DEFAULT_NAME', 'default');
-define('TEMPLATE_VAR_DELIMITER_LEFT', '$(');
-define('TEMPLATE_VAR_DELIMITER_RIGHT', ')');
+define('TEMPLATE_VAR_DELIMITER_LEFT', '[');
+define('TEMPLATE_VAR_DELIMITER_RIGHT', ']');
 define('TEMPLATE_FN_DELIMITER_LEFT', '$[');
 define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
 

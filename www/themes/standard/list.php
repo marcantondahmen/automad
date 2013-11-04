@@ -3,18 +3,17 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-	<title>$[siteName] / $(title)</title>
+	<title>$[siteName] / [title]</title>
 	<meta name="app" content="Automad <?php echo VERSION; ?>">
 	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
 </head>
 
 <body>
 	$[includeHome]
-	
-	<p>$[searchField(Search this Site ...)]</p>
-	<p>$[navTreeCurrent]</p>
-	<p>$[navPerLevel]</p>
-	<h1>$(title)</h1>
+	$[searchField(Search this Site ...)]
+	$[navTreeCurrent]
+	$[navPerLevel]
+	<h1>[title]</h1>
 	
 	$[menuFilterChildren]
 	$[menuSortType(title: Title)]
