@@ -37,7 +37,11 @@
 define('AUTOMAD', true);
 
 
-// Constants
+// Configuration overrides
+include BASE_DIR . '/config/overrides.php';
+
+
+// Default constants
 include BASE_DIR . '/automad/const.php';
 
 
