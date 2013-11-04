@@ -3,15 +3,3 @@ sitename: Automad CMS
 ---
 
 theme: standard
-
----
-
-errorPageTitle: Automad can't find the requested page!
-
----
-
-resultsPageTitle: Search Results
-
----
-
-resultsPageUrl: /search-results
