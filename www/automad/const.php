@@ -61,15 +61,6 @@ if (!defined('SITE_SETTINGS_FILE')) {
 if (!defined('SITE_THEMES_DIR')) {
 	define('SITE_THEMES_DIR', BASE_DIR . '/themes');
 }
-// Site's default name in case of missing variable in site.txt
-if (!defined('SITE_DEFAULT_NAME')) {
-	define('SITE_DEFAULT_NAME', 'Automad');
-}
-
-
-define('SITE_DEFAULT_THEME', 'standard');
-
-
 // Title for 404 page
 if (!defined('SITE_ERROR_PAGE_TITLE')) {
 	define('SITE_ERROR_PAGE_TITLE', '404');
