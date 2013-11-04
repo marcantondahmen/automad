@@ -61,7 +61,7 @@ class Parse {
 				$tags = explode(DATA_TAG_SEPARATOR, $value);
 				// Trim & sanitize tags
 				$tags = array_map(function($tag) {
-						return trim(self::sanitize($tag)); 
+						return trim(Parse::sanitize($tag)); 
 					}, $tags);
 				
 			}		
