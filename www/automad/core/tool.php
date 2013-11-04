@@ -502,7 +502,7 @@ class Tool {
 	
 	public function searchField($optionStr) {
 		
-		$targetUrl = BASE_URL . $this->S->getSiteData('resultsPageUrl');
+		$targetUrl = BASE_URL . SITE_RESULTS_PAGE_URL;
 		
 		return Html::generateSearchField($targetUrl, $optionStr);
 		
