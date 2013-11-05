@@ -95,7 +95,8 @@ class Html {
 		if ($pages) {
 				
 			// Use first element in $pages to determine the current level.
-			$level = ' level-' . $pages[array_shift(array_keys($pages))]->level;
+			$pagesKeys = array_keys($pages);
+			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
 		
 			$html = '<ul class="' . HTML_CLASS_TREE . $level . '">';	
 		
