@@ -146,7 +146,9 @@ class Template {
 
 		ob_end_clean();
 		
-		echo $this->processTemplate($content);		
+		echo $this->processTemplate($content);	
+		
+		Debug::pr($this->S);	
 		
 	}	
 	
