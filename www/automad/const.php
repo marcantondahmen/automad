@@ -34,12 +34,19 @@
  */
 
 
+// Base URL for all URLs relative to the root
 if (file_exists(BASE_DIR . '/.htaccess')) {
 	// If .htaccess exists, assume that pretty URLs are enabled and remove /index.php from SCRIPT_NAME
 	define('BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
 } else {
 	// If not, use SCRIPT_NAME as base url
 	define('BASE_URL', $_SERVER['SCRIPT_NAME']);
+}
+
+
+// Debugging
+if (!defined('DEBUG_MODE')) {
+	define('DEBUG_MODE', false);
 }
 
 
