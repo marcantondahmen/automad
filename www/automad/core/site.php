@@ -63,17 +63,21 @@ class Site {
 	 * 	Parse Site settings to replace defaults.
 	 *
 	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
-	 *	in the root of the content directory.
+	 *	in the root of the /shared directory.
+	 *	
+	 *	The settings file (by default /shared/site.txt) can basically hold any key/value pair.
+	 *	These variables can be later access sidewide via the Site::getSiteData() method.
 	 */
 	
 	private function parseSiteSettings() {
 		
-		// Load defaults		
+		// Define default settings.
+		// Basically that is only the site name, because that is the only really needed value.		
 		$defaults = 	array(	
 					'sitename' => $_SERVER['SERVER_NAME']  
 				);
 		
-		// Merge defaults with settings from file
+		// Merge defaults with settings from file.
 		$this->siteData = array_merge($defaults, Parse::textFile(SITE_SETTINGS_FILE));
 		
 	}
@@ -223,7 +227,7 @@ class Site {
 
 	
 	/**
-	 *	Return a key from $siteData (sitename, theme, etc.).
+	 *	Return a key from $this->siteData (sitename, theme, etc.).
 	 *
 	 *	@param string $key
 	 *	@return string $this->siteData[$key]
@@ -266,7 +270,7 @@ class Site {
 		$themePath = SITE_THEMES_DIR . '/' . $theme;
 
 		if ($theme && is_dir($themePath)) {	
-			// If theme is defined (and not '' in the constants) and exists in the file system as a folder, use that path.		
+			// If $theme is not '' and also exists in the file system as a folder, use that path.		
 			return $themePath;
 		} else {
 			// If not, use the default template location.

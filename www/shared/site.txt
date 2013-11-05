@@ -3,3 +3,11 @@ sitename: Automad CMS
 ---
 
 theme: standard
+
+---
+
+owner: Marc
+
+---
+
+email: test@test.de
