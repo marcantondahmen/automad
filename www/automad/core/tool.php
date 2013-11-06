@@ -124,7 +124,7 @@ class Tool {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->P->tags, BASE_URL . $this->P->parentRelUrl);
+		return Html::generateFilterMenu($this->P->tags, $this->P->parentRelUrl);
 		
 	}
 	
@@ -502,9 +502,7 @@ class Tool {
 	
 	public function searchField($optionStr) {
 		
-		$targetUrl = BASE_URL . SITE_RESULTS_PAGE_URL;
-		
-		return Html::generateSearchField($targetUrl, $optionStr);
+		return Html::generateSearchField(SITE_RESULTS_PAGE_URL, $optionStr);
 		
 	}
 
@@ -570,7 +568,7 @@ class Tool {
 	
 	public function themeURL() {
 		
-		return str_replace(BASE_DIR, BASE_URL, $this->S->getThemePath());
+		return $this->S->getThemePath();
 		
 	}
 	
