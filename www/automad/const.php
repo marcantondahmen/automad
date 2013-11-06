@@ -35,12 +35,16 @@
 
 
 // Base URL for all URLs relative to the root
+define('BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
+
+
+// Pretty URLs
 if (file_exists(BASE_DIR . '/.htaccess')) {
-	// If .htaccess exists, assume that pretty URLs are enabled and remove /index.php from SCRIPT_NAME
-	define('BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
+	// If .htaccess exists, assume that pretty URLs are enabled and INDEX is empty
+	define('INDEX', '');
 } else {
-	// If not, use SCRIPT_NAME as base url
-	define('BASE_URL', $_SERVER['SCRIPT_NAME']);
+	// If not, INDEX will be defined
+	define('INDEX', '/index.php');
 }
 
 
@@ -54,19 +58,19 @@ if (!defined('DEBUG_MODE')) {
 
 // Directory for the pages
 if (!defined('SITE_PAGES_DIR')) {
-	define('SITE_PAGES_DIR', BASE_DIR . '/pages');
+	define('SITE_PAGES_DIR', '/pages');
 }
 // Directory for shared/sitewide items
 if (!defined('SITE_SHARED_DIR')) {
-	define('SITE_SHARED_DIR', BASE_DIR . '/shared');
+	define('SITE_SHARED_DIR', '/shared');
 }
 // Sidewide settings/variable
 if (!defined('SITE_SETTINGS_FILE')) {
-	define('SITE_SETTINGS_FILE', SITE_SHARED_DIR . '/site.txt'); 
+	define('SITE_SETTINGS_FILE', BASE_DIR . SITE_SHARED_DIR . '/site.txt'); 
 }
 // Directory for themes
 if (!defined('SITE_THEMES_DIR')) {
-	define('SITE_THEMES_DIR', BASE_DIR . '/themes');
+	define('SITE_THEMES_DIR', '/themes');
 }
 // Title for 404 page
 if (!defined('SITE_ERROR_PAGE_TITLE')) {
@@ -86,7 +90,7 @@ if (!defined('SITE_RESULTS_PAGE_URL')) {
 
 // Default template directory
 if (!defined('TEMPLATE_DEFAULT_DIR')) {
-	define('TEMPLATE_DEFAULT_DIR', BASE_DIR . '/automad/templates');
+	define('TEMPLATE_DEFAULT_DIR', '/automad/templates');
 }
 // Default template name
 if (!defined('TEMPLATE_DEFAULT_NAME')) {
@@ -196,7 +200,7 @@ if (!defined('HTML_DEFAULT_SORT_TYPES')) {
 
 // Parsing defaults
 
-// File extension
+// File extension of data file
 if (!defined('PARSE_DATA_FILE_EXTENSION')) {
 	define('PARSE_DATA_FILE_EXTENSION', 'txt');
 }
@@ -219,6 +223,10 @@ if (!defined('PARSE_TAG_SEPARATOR')) {
 // Tags key (to identify tags in the page's txt file)
 if (!defined('PARSE_TAGS_KEY')) {
 	define('PARSE_TAGS_KEY', 'tags');
+}
+// List of file extensions to identify file in URL
+if (!defined('PARSE_REGISTERED_FILE_EXTENSIONS')) {
+	define('PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'jpeg', 'png', 'svg', 'tif', 'tiff', 'js')));
 }
 
  
