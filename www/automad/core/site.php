@@ -149,7 +149,7 @@ class Site {
 	 
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = rtrim(SITE_PAGES_DIR . '/' . $relPath, '/');
+		$fullPath = rtrim(BASE_DIR . SITE_PAGES_DIR . '/' . $relPath, '/');
 				
 		$ignore = array('.', '..', '@eaDir');
 				
@@ -268,8 +268,11 @@ class Site {
 		
 		$theme = $this->getSiteData('theme');
 		$themePath = SITE_THEMES_DIR . '/' . $theme;
-
-		if ($theme && is_dir($themePath)) {	
+		
+		// To verify the existence of $themePath, BASE_DIR has to be prepended,
+		// because $themePath must NOT contain the BASE_DIR to be more flexible.
+		// Also $theme has to be tested, just to check if it is actually not empty. 
+		if ($theme && is_dir(BASE_DIR . $themePath)) {	
 			// If $theme is not '' and also exists in the file system as a folder, use that path.		
 			return $themePath;
 		} else {
