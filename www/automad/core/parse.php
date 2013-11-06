@@ -74,6 +74,54 @@ class Parse {
 	
 	
 	/**
+	 *	Tests if a string is a file name.
+	 *
+	 *	Basically a possibly existing file extension is checked against the array of registered file extensions.
+	 *
+	 *	"/url/file.jpg" will return true, "/url/file" or "/url/file.something" will return false.
+	 *	
+	 *	@param string $str
+	 *	@return boolean
+	 */
+	
+	public static function isFileName($str) {
+		
+		// Remove possible query string
+		$str = preg_replace('/\?.*/', '', $str);
+		
+		// Get just the basename
+		$str = basename($str);
+		
+		// Explode to name / type
+		// If there is actually an extension will be checked below
+		$parts = explode('.', $str);
+		
+		// Check if an extensions exists and if that extensions is on of the registered (known) extensions.
+		if (count($parts > 1)) {
+			
+			$str = end($parts);	
+			$fileExtensions = unserialize(PARSE_REGISTERED_FILE_EXTENSIONS);
+			
+			if (in_array($str, $fileExtensions)) {
+				
+				return true;
+				
+			} else {
+				
+				return false;
+				
+			}
+			
+		} else {
+			
+			return false;
+			
+		}
+		
+	}
+	
+	
+	/**
 	 *	Parses a text file including markdown syntax. 
 	 *	
 	 *	If a variable in that file has a multiline string as its value, that string will be then parsed as markdown.
@@ -99,38 +147,7 @@ class Parse {
 				}
 				
 			}, $vars);
-	
-		// In a second step (!) the BASE_URL gets prepended to all URLs starting with a slash (relative to website's root).
-		// It must be in a separate step to make the Parsedown parsing possibly cachable before.
-		
-		// HREF (links)
-		$vars = preg_replace_callback('/(?<=href=")(.+?)(?=")/', 
-			function($match) {
-				 
-				if (strpos($match[1], '/') === 0) {
-					// If the match starts with a '/' it is a link to some page starting from the website's root.
-					// The BASE_URL gets prepended in that case. 
-					return BASE_URL . $match[1];
-				} else {
-					// In any other case ("http://domain.tld" or "path/to/page") the given URL gets interpreted as either absolute (somewhere in the www)
-					// or relative to the current page. In that case, nothing gets prepended. 
-					return $match[1];
-				}
-				
-			},
-			$vars);
-			
-		// SRC (images)
-		$pageItemsBaseUrl = str_replace(BASE_DIR, BASE_URL, dirname($file)) . '/';
-		
-		$vars = preg_replace_callback('/(?<=src=")(.+?)(?=")/', 
-			function($match) use ($pageItemsBaseUrl) { 
-				
-				return $pageItemsBaseUrl . $match[1];
-				
-			},
-			$vars);
-				
+					
 		return $vars;
 		
 	}
