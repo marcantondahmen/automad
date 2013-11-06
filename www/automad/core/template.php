@@ -133,21 +133,79 @@ class Template {
 	
 	
 	/**
+	 *	Find all links/URLs in $content and modulate the matches according to their type.
+	 * 
+	 *	Absolute URLs: 		not modified
+	 *	Root-relative URLs: 	BASE_URL is prepended (and INDEX in case of pages)
+	 *	Relative URLs:		Only URLs of files are modified - the full file system path gets prepended
+	 *	
+	 *	@param string $content
+	 *	@return $content
+	 */
+	
+	private function modulateUrls($content) {
+		
+		$P = $this->P;
+
+		$content = 	preg_replace_callback('/(href|src)="(.+?)"/',
+				function($match) use ($P) {
+					
+					$url = $match[2];
+					
+					if (strpos($url, 'http') === 0) {
+						
+						// Absolute URL
+						return $match[0];
+						
+					} else if (strpos($url, '/') === 0) {
+						
+						// Relative to root	
+						if (Parse::isFileName($url)) {
+							return $match[1] . '="' . BASE_URL . $url . '"';
+						} else {
+							return $match[1] . '="' . BASE_URL . INDEX . $url . '"';	
+						}
+												
+					} else {
+						
+						// Just a relative URL
+						if (Parse::isFileName($url)) {
+							return $match[1] . '="' . BASE_URL . SITE_PAGES_DIR . '/' . $P->relPath . '/' . $url . '"';
+						} else {
+							return $match[0];
+						}
+						
+					}
+					
+				},
+				$content);
+	
+		return $content;
+		
+	}
+	
+	
+	/**
 	 * 	Renders the current page.
 	 */
 	
 	public function render() {
 		
 		ob_start();
-		
 		$this->loadTemplate();
-		
 		$content = ob_get_contents();
-
 		ob_end_clean();
 		
-		echo $this->processTemplate($content);	
+		$content = $this->processTemplate($content);	
+		$content = $this->modulateUrls($content);
+			
+		echo $content;
 		
+		Debug::pr('BASE_URL: ' . BASE_URL);
+		Debug::pr('Pretty URLs: ' . var_export(!(boolean)INDEX, true));
+		Debug::pr('Theme: ' . $this->S->getThemePath());
+		Debug::pr('Template: ' . $this->P->getTemplatePath($this->S->getThemePath()));
+		Debug::pr(get_defined_constants(true)['user']);
 		Debug::pr($this->S);	
 		
 	}	
