@@ -115,18 +115,18 @@ class Page {
 		// First the passed $themePath is used to get the template file.
 		// That path may be already the default location, in case the theme is not set
 		// or the theme's folder can't be found.	
-		$templatePath = $themePath . '/' . $this->template . '.php';
+		$templatePath = BASE_DIR . $themePath . '/' . $this->template . '.php';
 			
 		// If there is no matching template file in the theme folder,
 		// the default template location is used, if both locations are not equal already.
 		if (!file_exists($templatePath) && $themePath != TEMPLATE_DEFAULT_DIR) {
-			$templatePath = TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';			
+			$templatePath = BASE_DIR . TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';						
 		}
 		
 		// If there is also no match in the default folder,
 		// the default folder in combination with the default template name is used. 
 		if (!file_exists($templatePath)) {	
-			$templatePath = TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';			
+			$templatePath = BASE_DIR . TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';	
 		}
 		
 		return $templatePath;
