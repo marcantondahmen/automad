@@ -1,1 +1,1 @@
-<?php define('VERSION', '0.3.23'); ?>
+<?php define('VERSION', '0.3.24'); ?>
