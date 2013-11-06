@@ -70,7 +70,7 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		return '<a' . $classes . ' href="' . BASE_URL . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>';
+		return '<a' . $classes . ' href="' . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>';
 		
 	}
 
@@ -136,7 +136,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . BASE_URL . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
 			
 		}
 		
@@ -241,7 +241,7 @@ class Html {
 		
 			foreach ($pages as $page) {
 			
-				$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">';
+				$html .= '<li><a href="' . $page->relUrl . '">';
 			
 				foreach ($vars as $var) {
 				
