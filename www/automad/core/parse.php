@@ -59,7 +59,7 @@ class Parse {
 	
 				// All tags are splitted into an array
 				$tags = explode(PARSE_TAG_SEPARATOR, $value);
-				// Trim & sanitize tags
+				// Trim & strip tags
 				$tags = array_map(function($tag) {
 						return trim(strip_tags($tag)); 
 					}, $tags);
@@ -149,20 +149,6 @@ class Parse {
 			}, $vars);
 					
 		return $vars;
-		
-	}
-	
-	
-	/**
-	 *	Sanitizes a string by stripping all HTML tags.
-	 *
-	 *	@param string $str
-	 *	@return clean string
-	 */
-	
-	public static function sanitize($str) {
-		
-		return strip_tags($str);
 		
 	}
 	
