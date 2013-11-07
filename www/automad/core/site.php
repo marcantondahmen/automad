@@ -102,9 +102,13 @@ class Site {
 	
 	private function makeUrl($parentUrl, $slug) {
 		
-		// strip prefix regex replace pattern
+		// strip prefix from $slug
 		$pattern = '/[a-zA-Z0-9_-]+\./';
 		$replacement = '';
+		$slug = preg_replace($pattern, $replacement, $slug);
+		
+		// Clean up $slug
+		$slug = Parse::sanitizeUrl($slug);
 		
 		// Build URL:
 		// The ltrim (/) is needed to prevent a double / in front of every url, 
@@ -112,7 +116,7 @@ class Site {
 		// Trimming all '/' and then prependig a single '/', makes sure that there is always just one slash 
 		// at the beginning of the URL. 
 		// The leading slash is better to have in case of the home page where the key becomes [/] insted of just [] 
-		$url = '/' . ltrim($parentUrl . '/' . preg_replace($pattern, $replacement, $slug), '/');
+		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
 	
 		// check if url already exists
 		if (array_key_exists($url, $this->siteCollection)) {
@@ -150,64 +154,73 @@ class Site {
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
 		$fullPath = rtrim(BASE_DIR . SITE_PAGES_DIR . '/' . $relPath, '/');
+		
+		// Test if the directory actually has a data file.		
+		if (count(glob($fullPath . '/*.' . PARSE_DATA_FILE_EXTENSION)) > 0) {
+						
+			$ignore = array('.', '..', '@eaDir');
 				
-		$ignore = array('.', '..', '@eaDir');
-				
-		if ($dh = opendir($fullPath)) {
+			if ($dh = opendir($fullPath)) {
 			
-			$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
+				$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
 		
-			while (false !== ($item = readdir($dh))) {
+				while (false !== ($item = readdir($dh))) {
 		
-				if (!in_array($item, $ignore)) {
+					if (!in_array($item, $ignore)) {
 					
-					$itemFullPath = $fullPath . '/' . $item;
+						$itemFullPath = $fullPath . '/' . $item;
 									
-					// If $item is a file with the PARSE_DATA_FILE_EXTENSION, $item gets added to the index.
-					// In case there are more than one matching file, the last accessed gets added.
-					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == PARSE_DATA_FILE_EXTENSION) {
+						// If $item is a file with the PARSE_DATA_FILE_EXTENSION, $item gets added to the index.
+						// In case there are more than one matching file, the last accessed gets added.
+						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == PARSE_DATA_FILE_EXTENSION) {
 						
-						$data = Parse::markdownFile($itemFullPath);
+							$data = Parse::markdownFile($itemFullPath);
 						
-						// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-						// In case the title is missig for the home page, use the site name instead.
-						if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-							if ($relUrl) {
-								$data['title'] = ucwords(basename($relUrl));
-							} else {
-								$data['title'] = $this->getSiteName();
-							}
-						} 
+							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
+							// In case the title is missig for the home page, use the site name instead.
+							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
+								if ($relUrl) {
+									$data['title'] = ucwords(basename($relUrl));
+								} else {
+									$data['title'] = $this->getSiteName();
+								}
+							} 
 						
-						// Extract tags
-						$tags = Parse::extractTags($data);
+							// Extract tags
+							$tags = Parse::extractTags($data);
 						
-						// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
-						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
-						$P = new Page();
-						$P->data = $data;
-						$P->tags = $tags;
-						$P->relUrl = $relUrl;
-						$P->relPath = $relPath;
-						$P->level = $level;
-						$P->parentRelUrl = $parentRelUrl;
-						$P->template = str_replace('.' . PARSE_DATA_FILE_EXTENSION, '', $item);
-						$this->siteCollection[$relUrl] = $P;
+							// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
+							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
+							$P = new Page();
+							$P->data = $data;
+							$P->tags = $tags;
+							$P->relUrl = $relUrl;
+							$P->relPath = $relPath;
+							$P->level = $level;
+							$P->parentRelUrl = $parentRelUrl;
+							$P->template = str_replace('.' . PARSE_DATA_FILE_EXTENSION, '', $item);
+							$this->siteCollection[$relUrl] = $P;
 							
-					}
+						}
 					
-					// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
-					if (is_dir($itemFullPath)) {
+						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
+						if (is_dir($itemFullPath)) {
 						
-						$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
+							$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
+						
+						}
 						
 					}
-						
+			
 				}
 			
-			}
+				closedir($dh);	
 			
-			closedir($dh);	
+			}
+		
+		} else {
+			
+			Debug::pr('No file with the extension ".' . PARSE_DATA_FILE_EXTENSION . '" found in "' . $fullPath . '/" - Skipped directory!');
 		
 		}
 			
