@@ -143,12 +143,12 @@ class Page {
 	public function isCurrent() {
 		
 		if (isset($_SERVER["PATH_INFO"])) {
-			$currentRelUrl = '/' . trim($_SERVER["PATH_INFO"], '/');
+			$currentPath = '/' . trim($_SERVER["PATH_INFO"], '/');
 		} else {
-			$currentRelUrl = '/';
+			$currentPath = '/';
 		}
 		
-		if ($currentRelUrl == $this->relUrl) {
+		if ($currentPath == $this->relUrl) {
 			return true;
 		} else {
 			return false;
@@ -166,12 +166,16 @@ class Page {
 	public function isInCurrentPath() {
 		
 		if (isset($_SERVER["PATH_INFO"])) {
-			$currentRelUrl = '/' . trim($_SERVER["PATH_INFO"], '/');
+			$currentPath = '/' . trim($_SERVER["PATH_INFO"], '/');
 		} else {
-			$currentRelUrl = '/';
+			$currentPath = '/';
 		}
 		
-		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent()) {
+		// Test if $currentPath starts with $this->relUrl.
+		// The trailing slash is very important ($this->relUrl . '/'), since without that slash,
+		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage, 
+		// while /path/to/page/ would not match.
+		if (strpos($currentPath, $this->relUrl . '/') === 0 && !$this->isCurrent()) {
 			return true;
 		} else {
 			return false;
