@@ -77,6 +77,39 @@ class Debug {
 		
 	}
 	
+	
+	/**
+	 *	Save the current microtime to a constant. 
+	 */
+	
+	public static function timerStart() {
+		
+		if (DEBUG_MODE) {
+			
+			define('DEBUG_TIMER_START', microtime(true));
+			
+		}	
+		
+	}
+	
+	
+	/**
+	 *	Substract the initial microtime (stored in DEBUG_TIMER_START) from the current microtime 
+	 *	and print out the difference.
+	 */
+	
+	public static function timerEnd() {
+		
+		if (DEBUG_MODE) {
+			
+			$seconds = microtime(true) - DEBUG_TIMER_START;
+			Debug::pr('Time for execution: ' . $seconds . ' seconds');
+			
+		}
+		
+	}
+	
+	
 }
 
 
