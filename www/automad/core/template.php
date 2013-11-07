@@ -39,9 +39,9 @@
  *	
  *	When render() is called the output buffer gets started and the template file gets loaded.
  *	The output of the included file, basically the raw template HTML (including the generated HTML by PHP in the template file) 
- *	gets stored in $content.
+ *	gets stored in $output.
  *
- *	In a second step $content gets processed. All variables get replaced with values from the page's text file and 
+ *	In a second step $output gets processed. All variables get replaced with values from the page's text file and 
  *	all $[function]s get replaced with the return values of the matching methods of the Tool class.
  *	
  *	That way, it is possible that the template.php file can include HTML as well as PHP, while the "user-generated" content in the text files 
@@ -52,7 +52,7 @@
  *	The processTemplate() method checks, if a found $[function] in the template file matches a method of the Tool class to then repalce 
  *	that match with the method's return value.  
  *
- *	In a last step the processed $content get displayed.
+ *	In a last step the processed $output get displayed.
  */
 
 
@@ -71,40 +71,39 @@ class Template {
 	 */
 
 	private $P;
-		
 	
-	public function __construct() {
-		
-		$this->S = new Site();
-		$this->P = $this->S->getCurrentPage();
-		
-	}
-
-
+	
 	/**
-	 * 	Load page template.
+	 *	Load the unmodified template file and return its output.
+	 *
+	 *	@return $ouput 
 	 */
 	
-	private function loadTemplate() {
+	private function getTemplate() {
 		
+		ob_start();
 		require_once $this->P->getTemplatePath($this->S->getThemePath());
+		$output = ob_get_contents();
+		ob_end_clean();
 		
-	}
-		
+		return $output;
 	
+	}
+	
+		
 	/**
 	 * 	Replace all vars in template with values from $this->currentPage and all function shortcuts with functions from the Tool class.
 	 *
-	 *	@param string $content
-	 *	@return string $content
+	 *	@param string $output
+	 *	@return string $output
 	 */
 	
-	private function processTemplate($content) {
+	private function processTemplate($output) {
 
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
 		$tool = new Tool($this->S); 
-		$content = 	preg_replace_callback('/' . preg_quote(TEMPLATE_FN_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(TEMPLATE_FN_DELIMITER_RIGHT) . '/', 
+		$output = 	preg_replace_callback('/' . preg_quote(TEMPLATE_FN_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(TEMPLATE_FN_DELIMITER_RIGHT) . '/', 
 				function($matches) use($tool) {
 					if (method_exists($tool, $matches[1])) {
 						if (!isset($matches[2])) {
@@ -115,39 +114,38 @@ class Template {
 						return $tool->$matches[1](trim($matches[2],'()'));
 					}
 				}, 
-				$content);
+				$output);
 							
 		// Replace vars in data array			
 		$data = $this->P->data;
-		$content =	preg_replace_callback('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/',
 				function($matches) use($data) {
 					if (array_key_exists($matches[1], $data)) {
 						return $data[$matches[1]];
 					}
 				},
-				$content);
+				$output);
 				
-		return $content;
+		return $output;
 		
 	}
 	
 	
 	/**
-	 *	Find all links/URLs in $content and modulate the matches according to their type.
+	 *	Find all links/URLs in $output and modulate the matches according to their type.
 	 * 
 	 *	Absolute URLs: 		not modified
 	 *	Root-relative URLs: 	BASE_URL is prepended (and INDEX in case of pages)
 	 *	Relative URLs:		Only URLs of files are modified - the full file system path gets prepended
 	 *	
-	 *	@param string $content
-	 *	@return $content
+	 *	@param string $output
+	 *	@return $output
 	 */
 	
-	private function modulateUrls($content) {
+	private function modulateUrls($output) {
 		
 		$P = $this->P;
-
-		$content = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
+		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
 				function($match) use ($P) {
 					
 					$url = $match[2];
@@ -178,9 +176,9 @@ class Template {
 					}
 					
 				},
-				$content);
+				$output);
 	
-		return $content;
+		return $output;
 		
 	}
 	
@@ -191,15 +189,14 @@ class Template {
 	
 	public function render() {
 		
-		ob_start();
-		$this->loadTemplate();
-		$content = ob_get_contents();
-		ob_end_clean();
+		$this->S = new Site();
+		$this->P = $this->S->getCurrentPage();
 		
-		$content = $this->processTemplate($content);	
-		$content = $this->modulateUrls($content);
+		$output = $this->getTemplate();
+		$output = $this->processTemplate($output);	
+		$output = $this->modulateUrls($output);
 			
-		echo $content;
+		echo $output;
 		
 		Debug::pr('BASE_URL: ' . BASE_URL);
 		Debug::pr('Pretty URLs: ' . var_export(!(boolean)INDEX, true));
