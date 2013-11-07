@@ -108,7 +108,7 @@ class Site {
 		$slug = preg_replace($pattern, $replacement, $slug);
 		
 		// Clean up $slug
-		$slug = Parse::sanitizeUrl($slug);
+		$slug = Parse::sanitize($slug);
 		
 		// Build URL:
 		// The ltrim (/) is needed to prevent a double / in front of every url, 

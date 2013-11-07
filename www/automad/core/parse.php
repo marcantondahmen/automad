@@ -160,7 +160,7 @@ class Parse {
 	 *	@return $str
 	 */
 	
-	public static function sanitizeUrl($str) {
+	public static function sanitize($str) {
 		
 		$search  = array(" ","&"  ,"/","*","+"  ,"ä","ö","ü","å","ø","á","à","é","è","Ä","Ö","Ü","Å","Ø","Á","À","É","È");
 		$replace = array("-","and","-","x","and","a","o","u","a","o","a","a","e","e","A","O","U","A","O","A","A","E","E");
