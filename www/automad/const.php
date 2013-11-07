@@ -226,7 +226,7 @@ if (!defined('PARSE_TAGS_KEY')) {
 }
 // List of file extensions to identify file in URL
 if (!defined('PARSE_REGISTERED_FILE_EXTENSIONS')) {
-	define('PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'jpeg', 'png', 'svg', 'tif', 'tiff', 'js')));
+	define('PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js')));
 }
 
  
