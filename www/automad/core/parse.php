@@ -154,6 +154,23 @@ class Parse {
 	
 	
 	/**
+	 *	Cleans up a string to be used as URL.
+	 *
+	 *	@param string $str
+	 *	@return $str
+	 */
+	
+	public static function sanitizeUrl($str) {
+		
+		$search  = array(" ","&"  ,"/","*","+"  ,"ä","ö","ü","å","ø","á","à","é","è","Ä","Ö","Ü","Å","Ø","Á","À","É","È");
+		$replace = array("-","and","-","x","and","a","o","u","a","o","a","a","e","e","A","O","U","A","O","A","A","E","E");
+		
+		return strtolower(str_replace($search, $replace, html_entity_decode($str)));
+
+	}
+	
+	
+	/**
 	 *	Loads and parses a text file.
 	 *
 	 *	First it separates the different blocks into simple key/value pairs.
