@@ -71,14 +71,16 @@ spl_autoload_register(function ($class) {
 include BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
 
 
-// Debug: Turn on error reporting for all errors.
 Debug::reportAllErrors();
+Debug::timerStart();
 
 
 // Init new template
 $T = new Template();
-
 $T->render();
+
+
+Debug::timerEnd();
 
 
 ?>
