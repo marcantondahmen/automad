@@ -147,13 +147,13 @@ class Template {
 		
 		$P = $this->P;
 
-		$content = 	preg_replace_callback('/(href|src)="(.+?)"/',
+		$content = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
 				function($match) use ($P) {
 					
 					$url = $match[2];
 					
-					if (strpos($url, 'http') === 0) {
-						
+					if (strpos($url, '://') !== false) {
+												
 						// Absolute URL
 						return $match[0];
 						
