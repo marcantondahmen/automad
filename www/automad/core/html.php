@@ -184,6 +184,8 @@ class Html {
 			
 				// Only change the ['filter'] key
 				$query['filter'] = '';
+				
+				ksort($query);
 					
 				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . HTML_FILTERS_ALL . '</a></li>';
 			
@@ -200,6 +202,8 @@ class Html {
 			
 				// Only change the ['filter'] key
 				$query['filter'] = $tag;
+				
+				ksort($query);
 		
 				$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query) . '">' . $tag . '</a></li>';
 		
@@ -359,6 +363,7 @@ class Html {
 		
 		$html = '<ul class="' . HTML_CLASS_SORT . '">';
 		
+		
 		// Ascending buttom		
 		if ($current == "sort_asc") {
 			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
@@ -367,7 +372,9 @@ class Html {
 		}
 		
 		$query['sort_dir'] = "sort_asc";
+		ksort($query);
 		$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
+		
 		
 		// Descending button
 		if ($current == "sort_desc") {
@@ -421,6 +428,8 @@ class Html {
 		
 			// Only change the ['sort_type'] key
 			$query['sort_type'] = $key;
+			
+			ksort($query);
 	
 			$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $value . '</a></li>';
 			
