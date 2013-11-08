@@ -86,6 +86,35 @@ if (!defined('SITE_RESULTS_PAGE_URL')) {
 }
 
 
+// Cache
+
+
+// Enable cache
+if (!defined('CACHE_ENABLED')) {
+	define('CACHE_ENABLED', true);
+}
+// Directory for page cache
+if (!defined('CACHE_DIR')) {
+	define('CACHE_DIR', '/cache');
+}
+// Cache file prefix
+if (!defined('CACHE_FILE_PREFIX')) {
+	define('CACHE_FILE_PREFIX', 'cached');
+}
+// Cache file extension
+if (!defined('CACHE_FILE_EXTENSION')) {
+	define('CACHE_FILE_EXTENSION', 'html');
+}
+// Site modification time last checked
+if (!defined('CACHE_LAST_CHECK_FILE')) {
+	define('CACHE_LAST_CHECK_FILE', BASE_DIR . CACHE_DIR . '/last_check');
+}
+// Site modification time check delay (seconds)
+if (!defined('CACHE_CHECK_DELAY')) {
+	define('CACHE_CHECK_DELAY', 30);
+}
+
+
 // Template defaults
 
 // Default template directory
