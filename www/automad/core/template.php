@@ -189,9 +189,6 @@ class Template {
 	
 	public function render() {
 		
-		Debug::pr('Template: BASE_URL: ' . BASE_URL);
-		Debug::pr('Template: Pretty URLs: ' . var_export(!(boolean)INDEX, true));
-		
 		$C = new Cache();
 		
 		if ($C->cacheIsApproved()) {
@@ -218,10 +215,12 @@ class Template {
 			
 			Debug::pr('Template: Theme path: ' . $this->S->getThemePath());
 			Debug::pr('Template: Template file: ' . $this->P->getTemplatePath($this->S->getThemePath()));
-			Debug::pr($this->S);
+			Debug::pr(array_keys($this->S->getCollection()));
 		
 		} 	
 		
+		Debug::pr('Template: BASE_URL: ' . BASE_URL);
+		Debug::pr('Template: Pretty URLs: ' . var_export(!(boolean)INDEX, true));
 		Debug::pr(get_defined_constants(true)['user']);
 				
 	}	
