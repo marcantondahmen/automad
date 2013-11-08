@@ -189,22 +189,41 @@ class Template {
 	
 	public function render() {
 		
-		$this->S = new Site();
-		$this->P = $this->S->getCurrentPage();
+		Debug::pr('Template: BASE_URL: ' . BASE_URL);
+		Debug::pr('Template: Pretty URLs: ' . var_export(!(boolean)INDEX, true));
 		
-		$output = $this->getTemplate();
-		$output = $this->processTemplate($output);	
-		$output = $this->modulateUrls($output);
+		$C = new Cache();
+		
+		if ($C->cacheIsApproved()) {
+		
+			// If cache is up to date and the cached file exists,
+			// just get the page from the cache.
+			echo $C->readCache();
 			
-		echo $output;
+		} else {
+			
+			// If the cache is not approved,
+			// everything has to be re-rendered.
+			$this->S = new Site();
+			$this->P = $this->S->getCurrentPage();
 		
-		Debug::pr('BASE_URL: ' . BASE_URL);
-		Debug::pr('Pretty URLs: ' . var_export(!(boolean)INDEX, true));
-		Debug::pr('Theme: ' . $this->S->getThemePath());
-		Debug::pr('Template: ' . $this->P->getTemplatePath($this->S->getThemePath()));
+			$output = $this->getTemplate();
+			$output = $this->processTemplate($output);
+			$output = $this->modulateUrls($output);	
+			
+			// Write the rendered HTML to the cache.
+			$C->writeCache($output);
+		
+			echo $output;
+			
+			Debug::pr('Template: Theme path: ' . $this->S->getThemePath());
+			Debug::pr('Template: Template file: ' . $this->P->getTemplatePath($this->S->getThemePath()));
+			Debug::pr($this->S);
+		
+		} 	
+		
 		Debug::pr(get_defined_constants(true)['user']);
-		Debug::pr($this->S);	
-		
+				
 	}	
 	
 	
