@@ -63,21 +63,21 @@ class Site {
 	 * 	Parse Site settings to replace defaults.
 	 *
 	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
-	 *	in the root of the content directory.
+	 *	in the root of the /shared directory.
+	 *	
+	 *	The settings file (by default /shared/site.txt) can basically hold any key/value pair.
+	 *	These variables can be later access sidewide via the Site::getSiteData() method.
 	 */
 	
 	private function parseSiteSettings() {
 		
-		// Load defaults		
+		// Define default settings.
+		// Basically that is only the site name, because that is the only really needed value.		
 		$defaults = 	array(	
-					'sitename' => SITE_DEFAULT_NAME, 
-					'theme' => SITE_DEFAULT_THEME, 
-					'errorPageTitle' => SITE_ERROR_PAGE_TITLE, 
-					'resultsPageTitle' => SITE_RESULTS_PAGE_TITLE,
-					'resultsPageUrl' => SITE_RESULTS_PAGE_URL
+					'sitename' => $_SERVER['SERVER_NAME']  
 				);
 		
-		// Merge defaults with settings from file
+		// Merge defaults with settings from file.
 		$this->siteData = array_merge($defaults, Parse::textFile(SITE_SETTINGS_FILE));
 		
 	}
@@ -102,9 +102,13 @@ class Site {
 	
 	private function makeUrl($parentUrl, $slug) {
 		
-		// strip prefix regex replace pattern
+		// strip prefix from $slug
 		$pattern = '/[a-zA-Z0-9_-]+\./';
 		$replacement = '';
+		$slug = preg_replace($pattern, $replacement, $slug);
+		
+		// Clean up $slug
+		$slug = Parse::sanitize($slug);
 		
 		// Build URL:
 		// The ltrim (/) is needed to prevent a double / in front of every url, 
@@ -112,7 +116,7 @@ class Site {
 		// Trimming all '/' and then prependig a single '/', makes sure that there is always just one slash 
 		// at the beginning of the URL. 
 		// The leading slash is better to have in case of the home page where the key becomes [/] insted of just [] 
-		$url = '/' . ltrim($parentUrl . '/' . preg_replace($pattern, $replacement, $slug), '/');
+		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
 	
 		// check if url already exists
 		if (array_key_exists($url, $this->siteCollection)) {
@@ -136,7 +140,7 @@ class Site {
 	
 	
 	/**
-	 *	Searches $relPath recursively for files with the DATA_FILE_EXTENSION and adds the parsed data to $siteCollection.
+	 *	Searches $relPath recursively for files with the PARSE_DATA_FILE_EXTENSION and adds the parsed data to $siteCollection.
 	 *
 	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
@@ -149,65 +153,74 @@ class Site {
 	 
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = rtrim(SITE_PAGES_DIR . '/' . $relPath, '/');
+		$fullPath = rtrim(BASE_DIR . SITE_PAGES_DIR . '/' . $relPath, '/');
+		
+		// Test if the directory actually has a data file.		
+		if (count(glob($fullPath . '/*.' . PARSE_DATA_FILE_EXTENSION)) > 0) {
+						
+			$ignore = array('.', '..', '@eaDir');
 				
-		$ignore = array('.', '..', '@eaDir');
-				
-		if ($dh = opendir($fullPath)) {
+			if ($dh = opendir($fullPath)) {
 			
-			$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
+				$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
 		
-			while (false !== ($item = readdir($dh))) {
+				while (false !== ($item = readdir($dh))) {
 		
-				if (!in_array($item, $ignore)) {
+					if (!in_array($item, $ignore)) {
 					
-					$itemFullPath = $fullPath . '/' . $item;
+						$itemFullPath = $fullPath . '/' . $item;
 									
-					// If $item is a file with the DATA_FILE_EXTENSION, $item gets added to the index.
-					// In case there are more than one matching file, the last accessed gets added.
-					if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == DATA_FILE_EXTENSION) {
+						// If $item is a file with the PARSE_DATA_FILE_EXTENSION, $item gets added to the index.
+						// In case there are more than one matching file, the last accessed gets added.
+						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == PARSE_DATA_FILE_EXTENSION) {
 						
-						$data = Parse::markdownFile($itemFullPath);
+							$data = Parse::markdownFile($itemFullPath);
 						
-						// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-						// In case the title is missig for the home page, use the site name instead.
-						if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-							if ($relUrl) {
-								$data['title'] = ucwords(basename($relUrl));
-							} else {
-								$data['title'] = $this->getSiteName();
-							}
-						} 
+							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
+							// In case the title is missig for the home page, use the site name instead.
+							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
+								if ($relUrl) {
+									$data['title'] = ucwords(basename($relUrl));
+								} else {
+									$data['title'] = $this->getSiteName();
+								}
+							} 
 						
-						// Extract tags
-						$tags = Parse::extractTags($data);
+							// Extract tags
+							$tags = Parse::extractTags($data);
 						
-						// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
-						// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
-						$P = new Page();
-						$P->data = $data;
-						$P->tags = $tags;
-						$P->relUrl = $relUrl;
-						$P->relPath = $relPath;
-						$P->level = $level;
-						$P->parentRelUrl = $parentRelUrl;
-						$P->template = str_replace('.' . DATA_FILE_EXTENSION, '', $item);
-						$this->siteCollection[$relUrl] = $P;
+							// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
+							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
+							$P = new Page();
+							$P->data = $data;
+							$P->tags = $tags;
+							$P->relUrl = $relUrl;
+							$P->relPath = $relPath;
+							$P->level = $level;
+							$P->parentRelUrl = $parentRelUrl;
+							$P->template = str_replace('.' . PARSE_DATA_FILE_EXTENSION, '', $item);
+							$this->siteCollection[$relUrl] = $P;
 							
-					}
+						}
 					
-					// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
-					if (is_dir($itemFullPath)) {
+						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
+						if (is_dir($itemFullPath)) {
 						
-						$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
+							$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
+						
+						}
 						
 					}
-						
+			
 				}
 			
-			}
+				closedir($dh);	
 			
-			closedir($dh);	
+			}
+		
+		} else {
+			
+			Debug::pr('No file with the extension ".' . PARSE_DATA_FILE_EXTENSION . '" found in "' . $fullPath . '/" - Skipped directory!');
 		
 		}
 			
@@ -227,7 +240,7 @@ class Site {
 
 	
 	/**
-	 *	Return a key from $siteData (sitename, theme, etc.).
+	 *	Return a key from $this->siteData (sitename, theme, etc.).
 	 *
 	 *	@param string $key
 	 *	@return string $this->siteData[$key]
@@ -268,9 +281,12 @@ class Site {
 		
 		$theme = $this->getSiteData('theme');
 		$themePath = SITE_THEMES_DIR . '/' . $theme;
-
-		if ($theme && is_dir($themePath)) {	
-			// If theme is defined (and not '' in the constants) and exists in the file system as a folder, use that path.		
+		
+		// To verify the existence of $themePath, BASE_DIR has to be prepended,
+		// because $themePath must NOT contain the BASE_DIR to be more flexible.
+		// Also $theme has to be tested, just to check if it is actually not empty. 
+		if ($theme && is_dir(BASE_DIR . $themePath)) {	
+			// If $theme is not '' and also exists in the file system as a folder, use that path.		
 			return $themePath;
 		} else {
 			// If not, use the default template location.
@@ -307,16 +323,16 @@ class Site {
 			// If page exists
 			return $this->siteCollection[$url];
 	
-		} elseif (isset($_GET["search"]) && $url == $this->getSiteData('resultsPageUrl')) {
+		} elseif (isset($_GET["search"]) && $url == SITE_RESULTS_PAGE_URL) {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage('results', $this->getSiteData('resultsPageTitle') . ' / "' . $_GET["search"] . '"');
+			return $this->createPage('results', SITE_RESULTS_PAGE_TITLE . ' / "' . $_GET["search"] . '"');
 	
 		} else {
 	
 			// Else return error page
-			return $this->createPage('error', $this->getSiteData('errorPageTitle'));
+			return $this->createPage('error', SITE_ERROR_PAGE_TITLE);
 	
 		}
 		

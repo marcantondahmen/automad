@@ -55,13 +55,13 @@ class Parse {
 		
 		foreach ($data as $key => $value) {
 		
-			if ($key == DATA_TAGS_KEY) {
+			if ($key == PARSE_TAGS_KEY) {
 	
 				// All tags are splitted into an array
-				$tags = explode(DATA_TAG_SEPARATOR, $value);
-				// Trim & sanitize tags
+				$tags = explode(PARSE_TAG_SEPARATOR, $value);
+				// Trim & strip tags
 				$tags = array_map(function($tag) {
-						return trim(Parse::sanitize($tag)); 
+						return trim(strip_tags($tag)); 
 					}, $tags);
 				
 			}		
@@ -69,6 +69,54 @@ class Parse {
 		}
 		
 		return $tags;
+		
+	}
+	
+	
+	/**
+	 *	Tests if a string is a file name.
+	 *
+	 *	Basically a possibly existing file extension is checked against the array of registered file extensions.
+	 *
+	 *	"/url/file.jpg" will return true, "/url/file" or "/url/file.something" will return false.
+	 *	
+	 *	@param string $str
+	 *	@return boolean
+	 */
+	
+	public static function isFileName($str) {
+		
+		// Remove possible query string
+		$str = preg_replace('/\?.*/', '', $str);
+		
+		// Get just the basename
+		$str = basename($str);
+		
+		// Explode to name / type
+		// If there is actually an extension will be checked below
+		$parts = explode('.', $str);
+		
+		// Check if an extensions exists and if that extensions is on of the registered (known) extensions.
+		if (count($parts > 1)) {
+			
+			$str = end($parts);	
+			$fileExtensions = unserialize(PARSE_REGISTERED_FILE_EXTENSIONS);
+			
+			if (in_array($str, $fileExtensions)) {
+				
+				return true;
+				
+			} else {
+				
+				return false;
+				
+			}
+			
+		} else {
+			
+			return false;
+			
+		}
 		
 	}
 	
@@ -99,54 +147,26 @@ class Parse {
 				}
 				
 			}, $vars);
-	
-		// In a second step (!) the BASE_URL gets prepended to all URLs starting with a slash (relative to website's root).
-		// It must be in a separate step to make the Parsedown parsing possibly cachable before.
-		
-		// HREF (links)
-		$vars = preg_replace_callback('/(?<=href=")(.+?)(?=")/', 
-			function($match) {
-				 
-				if (strpos($match[1], '/') === 0) {
-					// If the match starts with a '/' it is a link to some page starting from the website's root.
-					// The BASE_URL gets prepended in that case. 
-					return BASE_URL . $match[1];
-				} else {
-					// In any other case ("http://domain.tld" or "path/to/page") the given URL gets interpreted as either absolute (somewhere in the www)
-					// or relative to the current page. In that case, nothing gets prepended. 
-					return $match[1];
-				}
-				
-			},
-			$vars);
-			
-		// SRC (images)
-		$pageItemsBaseUrl = str_replace(BASE_DIR, BASE_URL, dirname($file)) . '/';
-		
-		$vars = preg_replace_callback('/(?<=src=")(.+?)(?=")/', 
-			function($match) use ($pageItemsBaseUrl) { 
-				
-				return $pageItemsBaseUrl . $match[1];
-				
-			},
-			$vars);
-				
+					
 		return $vars;
 		
 	}
 	
 	
 	/**
-	 *	Sanitizes a string by stripping all HTML tags.
+	 *	Cleans up a string to be used as URL.
 	 *
 	 *	@param string $str
-	 *	@return clean string
+	 *	@return $str
 	 */
 	
 	public static function sanitize($str) {
 		
-		return strip_tags($str);
+		$search  = array(" ","&"  ,"/","=","*","+"  ,"ä","ö","ü","å","ø","á","à","é","è","Ä","Ö","Ü","Å","Ø","Á","À","É","È");
+		$replace = array("-","and","-","_","x","and","a","o","u","a","o","a","a","e","e","A","O","U","A","O","A","A","E","E");
 		
+		return strtolower(str_replace($search, $replace, html_entity_decode($str)));
+
 	}
 	
 	
@@ -163,13 +183,13 @@ class Parse {
 	public static function textFile($file) {
 		
 		// split $file into data blocks
-		$pairs = explode(DATA_BLOCK_SEPARATOR, file_get_contents($file));
+		$pairs = explode(PARSE_BLOCK_SEPARATOR, file_get_contents($file));
 		
 		// split $pairs into an array of vars
 		$vars = array();
 		foreach ($pairs as $pair) {
 		
-			list($key, $value) = explode(DATA_PAIR_SEPARATOR, $pair, 2);
+			list($key, $value) = explode(PARSE_PAIR_SEPARATOR, $pair, 2);
 			$vars[trim($key)] = trim($value);	
 			
 		}
@@ -192,14 +212,14 @@ class Parse {
 		
 		if ($optionStr) {
 		
-			$options = explode(DATA_OPTION_SEPARATOR, $optionStr);
+			$options = explode(PARSE_OPTION_SEPARATOR, $optionStr);
 		
 			foreach ($options as $option) {
 			
-				if (strpos($option, DATA_PAIR_SEPARATOR) !== false) {
+				if (strpos($option, PARSE_PAIR_SEPARATOR) !== false) {
 			
 					// If it is a pair of $key: $value, it goes like that into the new array.
-					list($key, $value) = explode(DATA_PAIR_SEPARATOR, $option, 2);
+					list($key, $value) = explode(PARSE_PAIR_SEPARATOR, $option, 2);
 					$parsedOptions[trim($key)] = trim($value);
 				
 				} else {

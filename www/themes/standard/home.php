@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
 </head>
 
-<body>
+<body>	
 	$[includeHome]
 	$[searchField(Search me...)]
 	$[navPerLevel]	
@@ -20,6 +20,8 @@
 	$[listAll(title,tags)]
 	<br />
 	<p>$[navBreadcrumbs]</p>
+	<br />
+	<p>&copy $[year] by <a href="/">$[siteData(owner)]</a></p>
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
 </body>

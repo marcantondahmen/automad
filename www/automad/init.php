@@ -37,7 +37,11 @@
 define('AUTOMAD', true);
 
 
-// Constants
+// Configuration overrides
+include BASE_DIR . '/config/overrides.php';
+
+
+// Default constants
 include BASE_DIR . '/automad/const.php';
 
 
@@ -67,10 +71,16 @@ spl_autoload_register(function ($class) {
 include BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
 
 
+Debug::reportAllErrors();
+Debug::timerStart();
+
+
 // Init new template
 $T = new Template();
-
 $T->render();
+
+
+Debug::timerEnd();
 
 
 ?>

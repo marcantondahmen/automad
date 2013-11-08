@@ -124,7 +124,7 @@ class Tool {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->P->tags, BASE_URL . $this->P->parentRelUrl);
+		return Html::generateFilterMenu($this->P->tags, $this->P->parentRelUrl);
 		
 	}
 	
@@ -502,9 +502,7 @@ class Tool {
 	
 	public function searchField($optionStr) {
 		
-		$targetUrl = BASE_URL . $this->S->getSiteData('resultsPageUrl');
-		
-		return Html::generateSearchField($targetUrl, $optionStr);
+		return Html::generateSearchField(SITE_RESULTS_PAGE_URL, $optionStr);
 		
 	}
 
@@ -536,6 +534,20 @@ class Tool {
 		
 
 	/**
+	 * 	Return any item from the site settings file (/shared/site.txt).
+	 *
+	 *	@param string $optionStr
+	 *	@return site data item
+	 */
+	
+	public function siteData($optionStr) {
+		
+		return $this->S->getSiteData($optionStr);
+		
+	}
+
+
+	/**
 	 * 	Return the site name.
 	 *
 	 *	@return site name
@@ -556,7 +568,20 @@ class Tool {
 	
 	public function themeURL() {
 		
-		return str_replace(BASE_DIR, BASE_URL, $this->S->getThemePath());
+		return $this->S->getThemePath();
+		
+	}
+	
+	
+	/**
+	 *	Return the current year.
+	 *
+	 *	@return current year
+	 */
+	
+	public function year() {
+		
+		return date('Y');
 		
 	}
 	

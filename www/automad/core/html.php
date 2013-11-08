@@ -70,7 +70,7 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		return '<a' . $classes . ' href="' . BASE_URL . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>';
+		return '<a' . $classes . ' href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>';
 		
 	}
 
@@ -95,7 +95,8 @@ class Html {
 		if ($pages) {
 				
 			// Use first element in $pages to determine the current level.
-			$level = ' level-' . $pages[array_shift(array_keys($pages))]->level;
+			$pagesKeys = array_keys($pages);
+			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
 		
 			$html = '<ul class="' . HTML_CLASS_TREE . $level . '">';	
 		
@@ -135,7 +136,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . BASE_URL . $page->relUrl . '">' . Parse::sanitize($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
 			
 		}
 		
@@ -183,6 +184,8 @@ class Html {
 			
 				// Only change the ['filter'] key
 				$query['filter'] = '';
+				
+				ksort($query);
 					
 				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . HTML_FILTERS_ALL . '</a></li>';
 			
@@ -199,6 +202,8 @@ class Html {
 			
 				// Only change the ['filter'] key
 				$query['filter'] = $tag;
+				
+				ksort($query);
 		
 				$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query) . '">' . $tag . '</a></li>';
 		
@@ -240,13 +245,13 @@ class Html {
 		
 			foreach ($pages as $page) {
 			
-				$html .= '<li><a href="' . BASE_URL . $page->relUrl . '">';
+				$html .= '<li><a href="' . $page->relUrl . '">';
 			
 				foreach ($vars as $var) {
 				
 					if (isset($page->data[$var])) {
 						
-						$text = Parse::sanitize($page->data[$var]);
+						$text = strip_tags($page->data[$var]);
 						
 						// Shorten $text to maximal HTML_MAX_LIST_STR_LENGTH characters (full words).
 						if (strlen($text) > HTML_LIST_MAX_STR_LENGTH) {
@@ -358,6 +363,7 @@ class Html {
 		
 		$html = '<ul class="' . HTML_CLASS_SORT . '">';
 		
+		
 		// Ascending buttom		
 		if ($current == "sort_asc") {
 			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
@@ -366,7 +372,9 @@ class Html {
 		}
 		
 		$query['sort_dir'] = "sort_asc";
+		ksort($query);
 		$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
+		
 		
 		// Descending button
 		if ($current == "sort_desc") {
@@ -420,6 +428,8 @@ class Html {
 		
 			// Only change the ['sort_type'] key
 			$query['sort_type'] = $key;
+			
+			ksort($query);
 	
 			$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $value . '</a></li>';
 			

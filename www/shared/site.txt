@@ -6,12 +6,8 @@ theme: standard
 
 ---
 
-errorPageTitle: Automad can't find the requested page!
+owner: Marc
 
 ---
 
-resultsPageTitle: Search Results
-
----
-
-resultsPageUrl: /search-results
+email: test@test.de

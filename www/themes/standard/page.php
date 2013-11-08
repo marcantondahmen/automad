@@ -28,6 +28,5 @@
 	$[navBreadcrumbs]
 	<br />
 	<p>Made with Automad <?php echo VERSION; ?></p>
-	<p>BASE_URL: <?php echo BASE_URL; ?></p>
 </body>
 </html>

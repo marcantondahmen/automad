@@ -51,7 +51,7 @@ class Page {
 	 *	Out of all possible keys ther are two very special ones:
 	 *
 	 *	- "title": 				The title of the page - will also be used for sorting
-	 *	- "tags" (or better DATA_TAGS_KEY): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
+	 *	- "tags" (or better PARSE_TAGS_KEY): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
 	 *						The original string will remain in the $data array for seaching
 	 */
 	
@@ -115,18 +115,18 @@ class Page {
 		// First the passed $themePath is used to get the template file.
 		// That path may be already the default location, in case the theme is not set
 		// or the theme's folder can't be found.	
-		$templatePath = $themePath . '/' . $this->template . '.php';
+		$templatePath = BASE_DIR . $themePath . '/' . $this->template . '.php';
 			
 		// If there is no matching template file in the theme folder,
 		// the default template location is used, if both locations are not equal already.
 		if (!file_exists($templatePath) && $themePath != TEMPLATE_DEFAULT_DIR) {
-			$templatePath = TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';			
+			$templatePath = BASE_DIR . TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';						
 		}
 		
 		// If there is also no match in the default folder,
 		// the default folder in combination with the default template name is used. 
 		if (!file_exists($templatePath)) {	
-			$templatePath = TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';			
+			$templatePath = BASE_DIR . TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';	
 		}
 		
 		return $templatePath;
@@ -143,12 +143,12 @@ class Page {
 	public function isCurrent() {
 		
 		if (isset($_SERVER["PATH_INFO"])) {
-			$currentRelUrl = '/' . trim($_SERVER["PATH_INFO"], '/');
+			$currentPath = '/' . trim($_SERVER["PATH_INFO"], '/');
 		} else {
-			$currentRelUrl = '/';
+			$currentPath = '/';
 		}
 		
-		if ($currentRelUrl == $this->relUrl) {
+		if ($currentPath == $this->relUrl) {
 			return true;
 		} else {
 			return false;
@@ -166,12 +166,16 @@ class Page {
 	public function isInCurrentPath() {
 		
 		if (isset($_SERVER["PATH_INFO"])) {
-			$currentRelUrl = '/' . trim($_SERVER["PATH_INFO"], '/');
+			$currentPath = '/' . trim($_SERVER["PATH_INFO"], '/');
 		} else {
-			$currentRelUrl = '/';
+			$currentPath = '/';
 		}
 		
-		if (strpos($currentRelUrl, $this->relUrl) !== false && !$this->isCurrent()) {
+		// Test if $currentPath starts with $this->relUrl.
+		// The trailing slash is very important ($this->relUrl . '/'), since without that slash,
+		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage, 
+		// while /path/to/page/ would not match.
+		if (strpos($currentPath, $this->relUrl . '/') === 0 && !$this->isCurrent()) {
 			return true;
 		} else {
 			return false;

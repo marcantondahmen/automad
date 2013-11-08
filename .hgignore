@@ -1,0 +1,3 @@
+syntax: glob
+cached*
+last_check
