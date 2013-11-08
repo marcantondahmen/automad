@@ -36,6 +36,17 @@
 
 /**
  *	The Cache class holds all methods for evaluating, reading and writing the HTML output from/to CACHE_DIR.
+ *
+ *	First a virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO and the QUERY_STRING.
+ *	In a second step, the existance of that file gets verified.
+ *	Third, the mtime of the site (last modified page mtime) gets determined and compared with the cache file's mtime. (That process gets limited by a certain delay)
+ *	If the cache file mtime is smaller than the latest mtime (site), false gets returned.
+ *
+ *	To determine the latest changed page from all the existing pages, all directories under /pages and all *.txt files get collected in an array.
+ *	The mtime for each item in that array gets stored in a new array ($mTimes[$item]). After sorting, all keys are stored in $mTimesKeys.
+ *	The last modified item is then = end($mTimesKeys), and its mtime is $mTimes[$lastItem].
+ *	Compared to using max() on the $mTime array, this method is a bit more complicated, but also determines, which of the items was last edited and not only its mtime.
+ *	(That gives a bit more control for debugging)
  */
 
 
@@ -87,7 +98,7 @@ class Cache {
 					$lastestMTime = $this->getLastestMTime();
 			
 					if (filemtime($this->pageCacheFile) < $lastestMTime) {
-						Debug::pr('Cache: Cached version is depraced!');
+						Debug::pr('Cache: Cached version is deprecated!');
 						return false;
 					} else {
 						Debug::pr('Cache: Cached version got approved!');
