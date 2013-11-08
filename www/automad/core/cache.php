@@ -90,27 +90,29 @@ class Cache {
 					// After scanning, the mTime gets written to a file.
 					$siteMTime = $this->getSiteMTime();
 					file_put_contents(CACHE_SITE_MTIME_FILE, serialize($siteMTime));			
-					Debug::pr('Cache: Scanned all pages and saved latest mTime. (' . date('d. M Y, H:i:s', $siteMTime) . ')');
+					Debug::pr('Cache: Scanned all pages and saved Site-mTime: ' . date('d. M Y, H:i:s', $siteMTime));
 					
 				} else {
 					
 					// In between it just gets loaded from a file.
 					$siteMTime = unserialize(file_get_contents(CACHE_SITE_MTIME_FILE));
-					Debug::pr('Cache: Load mTime from file. (' . date('d. M Y, H:i:s', $siteMTime) . ')');
+					Debug::pr('Cache: Load Site-mTime from file: ' . date('d. M Y, H:i:s', $siteMTime));
 			
 				}
 			
-				if (filemtime($this->pageCacheFile) < $siteMTime) {
+				$cacheMTime = filemtime($this->pageCacheFile);
+			
+				if ($cacheMTime < $siteMTime) {
 					
 					// If the cached page is older than the site's mTime,
 					// the cache gets no approval.
-					Debug::pr('Cache: Cached version is deprecated!');
+					Debug::pr('Cache: Cached version is deprecated! Cache-mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
 					return false;
 					
 				} else {
 					
 					// If the cached page is newer, it gets approved.
-					Debug::pr('Cache: Cached version got approved!');
+					Debug::pr('Cache: Cached version got approved! Cache-mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
 					return true;
 					
 				}
@@ -215,7 +217,7 @@ class Cache {
 	
 	public function readCache() {
 		
-		Debug::pr('Cache: Reading: ' . $this->pageCacheFile);
+		Debug::pr('Cache: Read: ' . $this->pageCacheFile);
 		return file_get_contents($this->pageCacheFile);
 		
 	}
@@ -235,7 +237,7 @@ class Cache {
 		
 			file_put_contents($this->pageCacheFile, $output);
 		
-			Debug::pr('Cache: Writing: ' . $this->pageCacheFile);
+			Debug::pr('Cache: Write: ' . $this->pageCacheFile);
 		
 		}
 		
