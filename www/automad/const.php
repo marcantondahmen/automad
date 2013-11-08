@@ -106,12 +106,12 @@ if (!defined('CACHE_FILE_EXTENSION')) {
 	define('CACHE_FILE_EXTENSION', 'html');
 }
 // Site modification time last checked
-if (!defined('CACHE_LAST_CHECK_FILE')) {
-	define('CACHE_LAST_CHECK_FILE', BASE_DIR . CACHE_DIR . '/last_check');
+if (!defined('CACHE_SITE_MTIME_FILE')) {
+	define('CACHE_SITE_MTIME_FILE', BASE_DIR . CACHE_DIR . '/site_mtime');
 }
 // Site modification time check delay (seconds)
 if (!defined('CACHE_CHECK_DELAY')) {
-	define('CACHE_CHECK_DELAY', 30);
+	define('CACHE_CHECK_DELAY', 60);
 }
 
 
