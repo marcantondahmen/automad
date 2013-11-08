@@ -236,6 +236,8 @@ class Site {
 		$this->parseSiteSettings();
 		$this->collectPages();
 		
+		Debug::pr('Site: New Instance created! Pages collected!');
+		
 	}
 
 	
