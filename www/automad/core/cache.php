@@ -83,33 +83,36 @@ class Cache {
 	
 			if (file_exists($this->pageCacheFile)) {
 		
-				if (!file_exists(CACHE_LAST_CHECK_FILE)) {
-					Debug::pr('Cache: Create ' . CACHE_LAST_CHECK_FILE);
-					touch(CACHE_LAST_CHECK_FILE);
-				}
-		
-				// The modification times get only checked every CACHE_CHECK_DELAY seconds, since
-				// the process of collecting all mtimes itself takes some time too.
-				if ((filemtime(CACHE_LAST_CHECK_FILE) + CACHE_CHECK_DELAY) < time()) {
-	
-					// Touch file to safe the time when site got last checked for mtimes.
-					touch(CACHE_LAST_CHECK_FILE);
-		
-					$lastestMTime = $this->getLastestMTime();
-			
-					if (filemtime($this->pageCacheFile) < $lastestMTime) {
-						Debug::pr('Cache: Cached version is deprecated!');
-						return false;
-					} else {
-						Debug::pr('Cache: Cached version got approved!');
-						return true;
-					}
-			
+				if ((@filemtime(CACHE_SITE_MTIME_FILE) + CACHE_CHECK_DELAY) < time()) {
+
+					// The modification times get only checked every CACHE_CHECK_DELAY seconds, since
+					// the process of collecting all mtimes itself takes some time too.
+					// After scanning, the mTime gets written to a file.
+					$siteMTime = $this->getSiteMTime();
+					file_put_contents(CACHE_SITE_MTIME_FILE, serialize($siteMTime));			
+					Debug::pr('Cache: Scanned all pages and saved latest mTime. (' . date('d. M Y, H:i:s', $siteMTime) . ')');
+					
 				} else {
+					
+					// In between it just gets loaded from a file.
+					$siteMTime = unserialize(file_get_contents(CACHE_SITE_MTIME_FILE));
+					Debug::pr('Cache: Load mTime from file. (' . date('d. M Y, H:i:s', $siteMTime) . ')');
 			
-					Debug::pr('Cache: Skipped searching for the latest mtime! Last check was: ' . date('d. M Y, H:i:s', filemtime(CACHE_LAST_CHECK_FILE)));
+				}
+			
+				if (filemtime($this->pageCacheFile) < $siteMTime) {
+					
+					// If the cached page is older than the site's mTime,
+					// the cache gets no approval.
+					Debug::pr('Cache: Cached version is deprecated!');
+					return false;
+					
+				} else {
+					
+					// If the cached page is newer, it gets approved.
+					Debug::pr('Cache: Cached version got approved!');
 					return true;
-			
+					
 				}
 	
 			} else {
@@ -164,7 +167,7 @@ class Cache {
 	 *	@return The latest found mtime, which equal basically the site's modification time.
 	 */
 	
-	private function getLastestMTime() {
+	private function getSiteMTime() {
 		
 		// Get all page directories
 		$dir = BASE_DIR . SITE_PAGES_DIR;	
@@ -195,11 +198,11 @@ class Cache {
 		asort($mTimes);
 		$mTimesKeys = array_keys($mTimes);
 		$lastModifiedItem = end($mTimesKeys);
-		$lastestMTime = $mTimes[$lastModifiedItem];
+		$siteMTime = $mTimes[$lastModifiedItem];
 	
-		Debug::pr('Cache: Last modified page: "' . $lastModifiedItem . '" - ' . date('d. M Y, H:i:s', $lastestMTime));
+		Debug::pr('Cache: Last modified: "' . $lastModifiedItem . '" - ' . date('d. M Y, H:i:s', $siteMTime));
 		
-		return $lastestMTime;
+		return $siteMTime;
 		
 	}
 	
