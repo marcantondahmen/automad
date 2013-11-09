@@ -37,8 +37,12 @@
 /**
  *	The Cache class holds all methods for evaluating, reading and writing the HTML output from/to CACHE_DIR.
  *
- *	First a virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO and the QUERY_STRING.
+ *	First a virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO, the QUERY_STRING and the SERVER_NAME.
+ *	To keep the whole site portable, the SERVER_NAME within the path is very important, to make sure, that all links/URLs are relative to the correct root directory.
+ *	("sub.domain.com/" and "www.domain.com/sub" will return different root relative URLs > "/" and "/sub", but may host the same site > each will get its own /cache/directory)
+ *
  *	In a second step, the existance of that file gets verified.
+ *
  *	Third, the mtime of the site (last modified page mtime) gets determined and compared with the cache file's mtime. (That process gets limited by a certain delay)
  *	If the cache file mtime is smaller than the latest mtime (site), false gets returned.
  *
