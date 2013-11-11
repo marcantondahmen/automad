@@ -43,6 +43,47 @@ class Html {
 	
 	
 	/**
+	 *	Add an image with an optional link.
+	 *
+	 *	@param string $file
+	 *	@param string $w
+	 *	@param string $h
+	 *	@param boolean $crop
+	 *	@param string $link
+	 *	@param string $target
+	 *	@return the HTML of an img tag (optionally wrapped by the given link)
+	 */
+	
+	public static function addImage($file, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+		
+		if ($file) {
+							
+			$img = new Image($file, $w, $h, $crop);
+			
+			if ($target) {
+				$target = ' target="' . $target . '"';
+			}
+			
+			$html = '';
+		
+			if ($link) {
+				$html .= '<a href="' . $link . '"' . $target . '>';
+			}
+			
+			$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+			
+			if ($link) {
+				$html .= '</a>';
+			}
+			
+			return $html;
+		
+		}
+		
+	}
+	
+	
+	/**
 	 *	Add link to $page and check, if $page is the current page or within the current path.
 	 *
 	 *	@param object $page
@@ -501,7 +542,7 @@ class Html {
 		return $queryKey;
 	
 	}
-	
+		
 	
 }
 
