@@ -88,7 +88,6 @@ if (!defined('SITE_RESULTS_PAGE_URL')) {
 
 // Cache
 
-
 // Enable cache
 if (!defined('CACHE_ENABLED')) {
 	define('CACHE_ENABLED', true);
@@ -112,6 +111,46 @@ if (!defined('CACHE_SITE_MTIME_FILE')) {
 // Site modification time check delay (seconds)
 if (!defined('CACHE_CHECK_DELAY')) {
 	define('CACHE_CHECK_DELAY', 60);
+}
+
+
+// Image
+
+// Default jpg quality
+if (!defined('IMG_JPG_QUALITY')) {
+	define('IMG_JPG_QUALITY', 90);
+}
+
+
+// Tools
+
+// String to be used within the options to define a filename/filepath
+if (!defined('TOOL_FILE_KEY')) {
+	define('TOOL_FILE_KEY', 'file');
+}
+// String to be used within the options to define a width
+if (!defined('TOOL_WIDTH_KEY')) {
+	define('TOOL_WIDTH_KEY', 'width');
+}
+// String to be used within the options to define a height
+if (!defined('TOOL_HEIGHT_KEY')) {
+	define('TOOL_HEIGHT_KEY', 'height');
+}
+// String to be used within the options to define the crop parameter
+if (!defined('TOOL_CROP_KEY')) {
+	define('TOOL_CROP_KEY', 'crop');
+}
+// String to be used within the options to define a link
+if (!defined('TOOL_LINK_KEY')) {
+	define('TOOL_LINK_KEY', 'link');
+}
+// String to be used within the options to define a link target
+if (!defined('TOOL_TARGET_KEY')) {
+	define('TOOL_TARGET_KEY', 'target');
+}
+// Default Tool options
+if (!defined('TOOL_IMG_DEFAULTS')) {
+	define('TOOL_IMG_DEFAULTS', TOOL_FILE_KEY . ': , ' . TOOL_WIDTH_KEY . ': , ' . TOOL_HEIGHT_KEY . ': , ' . TOOL_CROP_KEY . ': 0, ' . TOOL_LINK_KEY . ': , ' . TOOL_TARGET_KEY . ': ');
 }
 
 
