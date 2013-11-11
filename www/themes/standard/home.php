@@ -9,6 +9,8 @@
 </head>
 
 <body>	
+	$[img(file: /shared/MAD-Logo.png, height: 100, link: http://marcdahmen.de, target: _blank)]
+	<br /><br />
 	$[includeHome]
 	$[searchField(Search me...)]
 	$[navPerLevel]	

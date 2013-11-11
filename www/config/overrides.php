@@ -18,4 +18,7 @@ define('HTML_LIST_MAX_STR_LENGTH', 80);
 define('DEBUG_MODE', true);
 
 
+define('CACHE_ENABLED', false);
+
+
 ?>
