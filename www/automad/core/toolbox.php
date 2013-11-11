@@ -110,7 +110,7 @@ class Toolbox {
 		if (isset($_GET['sort_dir'])) {
 			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
 		} else {
-			$this->sortDirection = constant(strtoupper(HTML_DEFAULT_SORT_DIR));
+			$this->sortDirection = constant(strtoupper(TOOL_DEFAULT_SORT_DIR));
 		}
 		
 	}

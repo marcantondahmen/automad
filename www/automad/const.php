@@ -152,6 +152,18 @@ if (!defined('TOOL_TARGET_KEY')) {
 if (!defined('TOOL_IMG_DEFAULTS')) {
 	define('TOOL_IMG_DEFAULTS', TOOL_FILE_KEY . ': , ' . TOOL_WIDTH_KEY . ': , ' . TOOL_HEIGHT_KEY . ': , ' . TOOL_CROP_KEY . ': 0, ' . TOOL_LINK_KEY . ': , ' . TOOL_TARGET_KEY . ': ');
 }
+// Placeholder text for search field
+if (!defined('TOOL_SEARCH_PLACEHOLDER')) {
+	define('TOOL_SEARCH_PLACEHOLDER', 'Search ...');
+}
+// Default sort direction
+if (!defined('TOOL_DEFAULT_SORT_DIR')) {
+	define('TOOL_DEFAULT_SORT_DIR', 'sort_asc');
+}
+// Default sort types
+if (!defined('TOOL_DEFAULT_SORT_TYPES')) {
+	define('TOOL_DEFAULT_SORT_TYPES', 'Original Order, title: By Title');
+}
 
 
 // Template defaults
@@ -236,10 +248,6 @@ if (!defined('HTML_BREADCRUMB_SEPARATOR')) {
 if (!defined('HTML_CLASS_SEARCH')) {
 	define('HTML_CLASS_SEARCH', 'search');
 }
-// Placeholder text for search field
-if (!defined('HTML_SEARCH_PLACEHOLDER')) {
-	define('HTML_SEARCH_PLACEHOLDER', 'Search ...');
-}
 // Filter menu text for "all items"
 if (!defined('HTML_FILTERS_ALL')) {
 	define('HTML_FILTERS_ALL', 'All');
@@ -255,14 +263,6 @@ if (!defined('HTML_SORT_DESC')) {
 // Max characters in list output
 if (!defined('HTML_LIST_MAX_STR_LENGTH')) {
 	define('HTML_LIST_MAX_STR_LENGTH', 150);
-}
-// Default sort direction
-if (!defined('HTML_DEFAULT_SORT_DIR')) {
-	define('HTML_DEFAULT_SORT_DIR', 'sort_asc');
-}
-// Default sort types
-if (!defined('HTML_DEFAULT_SORT_TYPES')) {
-	define('HTML_DEFAULT_SORT_TYPES', 'Original Order, title: By Title');
 }
 
 

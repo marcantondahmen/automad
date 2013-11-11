@@ -369,7 +369,7 @@ class Html {
 		
 		// Don't parse $optionStr, since it can be only a string.
 		if (!$optionStr) {
-			$optionStr = HTML_SEARCH_PLACEHOLDER;
+			$optionStr = TOOL_SEARCH_PLACEHOLDER;
 		}
 		
 		$html = '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $optionStr . '" /></form>';
@@ -392,7 +392,7 @@ class Html {
 		$current = self::getQueryKey('sort_dir');
 				
 		if (!$current) {
-			$current = HTML_DEFAULT_SORT_DIR;
+			$current = TOOL_DEFAULT_SORT_DIR;
 		}
 		
 		$options = Parse::toolOptions($optionStr);
@@ -446,7 +446,7 @@ class Html {
 		$query = self::getQueryArray();
 		$current = self::getQueryKey('sort_type');		
 		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(HTML_DEFAULT_SORT_TYPES);		
+		$defaults = Parse::toolOptions(TOOL_DEFAULT_SORT_TYPES);		
 		$options = array_merge($defaults, $options);
 		
 		for($i=0; isset($options[$i]); $i++){
