@@ -35,11 +35,11 @@
 
 
 /**
- * 	The Tool class holds all methods to be used within the template files.
+ * 	The Toolbox class holds all methods to be used within the template files.
  */
 
 
-class Tool {
+class Toolbox {
 	
 
 	/**
@@ -267,7 +267,7 @@ class Tool {
 	
 
 	/**
-	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Tool::listAll()
+	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Toolbox::listAll()
 	 *
 	 *	This method should be used together with the listAll() method.
 	 *
@@ -299,7 +299,7 @@ class Tool {
 
 
 	/**
-	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Tool::listChildren()
+	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Toolbox::listChildren()
 	 *
 	 *	This method should be used together with the listChildren() method.
 	 *
@@ -329,7 +329,7 @@ class Tool {
 
 	
 	/**
-	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Tool::listChildren() and Tool::listAll()
+	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
 	 *	@return the HTML for the sort menu
@@ -344,7 +344,7 @@ class Tool {
 		
 
 	/**
-	 *	Place a set of sort options. The menu only affects lists of pages created by Tool::listChildren() and Tool::listAll()
+	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
