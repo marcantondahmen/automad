@@ -101,8 +101,8 @@ if (!defined('CACHE_FILE_PREFIX')) {
 	define('CACHE_FILE_PREFIX', 'cached');
 }
 // Cache file extension
-if (!defined('CACHE_FILE_EXTENSION')) {
-	define('CACHE_FILE_EXTENSION', 'html');
+if (!defined('CACHE_PAGE_EXTENSION')) {
+	define('CACHE_PAGE_EXTENSION', 'html');
 }
 // Site modification time last checked
 if (!defined('CACHE_SITE_MTIME_FILE')) {

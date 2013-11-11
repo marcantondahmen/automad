@@ -159,7 +159,7 @@ class Cache {
 			$queryString = '';
 		}
 		
-		$pageCacheFile = BASE_DIR . CACHE_DIR . '/' . $_SERVER['SERVER_NAME'] . $currentPath . '/' . CACHE_FILE_PREFIX . $queryString . '.' . CACHE_FILE_EXTENSION;
+		$pageCacheFile = BASE_DIR . CACHE_DIR . '/' . $_SERVER['SERVER_NAME'] . $currentPath . '/' . CACHE_FILE_PREFIX . $queryString . '.' . CACHE_PAGE_EXTENSION;
 		
 		return $pageCacheFile;
 		
