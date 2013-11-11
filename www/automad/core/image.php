@@ -1,0 +1,402 @@
+<?php defined('AUTOMAD') or die('Direct access not permitted!');
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD CMS
+ *
+ *	Copyright (c) 2013 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+/**
+ *	The Image object represents a resized (and cropped) copy of a given image.
+ */
+
+
+class Image {
+	
+	/**
+	 *	The filename of the source image
+	 */
+	
+	private $originalFile;
+	
+	
+	/**
+	 *	The array returned by getimagesize() for the sourceimage.
+	 */
+	
+	private $getimagesize;
+	
+	
+	/**
+	 *	The width of the source image.
+	 */
+	
+	private $originalWidth;
+	
+	
+	/**
+	 *	The height of the source image.
+	 */
+	
+	private $originalHeight;
+	
+	
+	/**
+	 *	The disired width of the new image. (May not be the resulting width, depending on cropping or original image size)
+	 */
+	
+	private $requestedWidth;
+	
+	
+	/**
+	 *	The desired height of the new image. (May not be the resulting width, depending on cropping or original image size)
+	 */
+	
+	private $requestedHeight;
+	
+	
+	/**
+	 *	Cropping parameter.
+	 */
+	
+	private $crop;
+	
+	
+	/**
+	 *	The pixels to crop the image on the X-axis on both sides.
+	 */
+	
+	private $cropX;
+	
+	
+	/**
+	 *	The pixels to crop the image on the Y-axis on both sides.
+	 */
+	
+	private $cropY;
+	
+	
+	/**
+	 *	The given image type.
+	 */
+	
+	private $type;
+	
+	
+	/**
+	 *	The filename of generated image.
+	 */
+	
+	public $file;
+	
+	
+	/**
+	 *	The full file system path to the generated image.
+	 */
+	
+	public $fileFullPath;
+	
+	
+	/**
+	 *	The image's description, read from the source image's exif data.
+	 */
+	
+	public $description;
+	
+	
+	/**
+	 *	The width of the generated image.
+	 */
+	
+	public $width;
+	
+	
+	/**
+	 *	The height of the generated image.
+	 */
+	
+	public $height;
+	
+	
+	/**
+	 *	The constructor defines the main object properties from the given parameters and initiates the main methods.
+	 */
+	
+	public function __construct($originalFile = false, $requestedWidth = false, $requestedHeight = false, $crop = false) {
+		
+		if ($originalFile) {
+			
+			$this->originalFile = $originalFile;
+			$this->getimagesize = getimagesize($originalFile);
+			$this->originalWidth = $this->getimagesize[0];
+			$this->originalHeight = $this->getimagesize[1];	
+			$this->type = $this->getimagesize['mime'];
+			$this->description = $this->getDescription();
+			$this->crop = $crop;
+		
+			if ($requestedWidth) {
+				$this->requestedWidth = $requestedWidth;
+			} else {
+				$this->requestedWidth = $this->originalWidth;
+			}
+		
+			if ($requestedHeight) {
+				$this->requestedHeight = $requestedHeight;
+			} else {
+				$this->requestedHeight = $this->originalHeight;
+			}
+	
+			// Get the possible size for the generated image (based on crop and original size).
+			$this->calculateSize();
+			
+			// Get the filename hash, based on the given settings, to check later, if the file exists.
+			$this->file = $this->getImageCacheFilePath();
+			$this->fileFullPath = BASE_DIR . $this->file;
+		
+			// Check if an image with the generated hash exists already and create the file, when neccassary.
+			$this->verifyCachedImage();
+			
+		}
+		
+	}
+	
+	
+	/**
+	 *	Calculate the size and pixels to crop for the generated image.
+	 */
+	
+	private function calculateSize() {
+		
+		$originalAspect = $this->originalWidth / $this->originalHeight;
+		$requestedAspect = $this->requestedWidth / $this->requestedHeight;
+		
+		if ($this->crop) {
+			
+			// Crop image
+					
+			if ($originalAspect > $requestedAspect) {
+			
+				if ($this->requestedWidth < $this->originalWidth) {
+					$w = $this->requestedWidth;
+				} else {
+					$w = $this->originalWidth;
+				}
+				
+				$h = $w / $requestedAspect;
+				
+				if ($h > $this->originalHeight) {
+					$h = $this->originalHeight;
+					$requestedAspect = $w / $h;
+				}
+				
+				// crop X
+				$x = ($this->originalWidth - ($this->originalHeight * $requestedAspect)) / 2;
+				$y = 0;
+				
+				
+			} else {
+				
+				if ($this->requestedHeight < $this->originalHeight) {
+					$h = $this->requestedHeight;
+				} else {
+					$h = $this->originalHeight;
+				}
+				
+				$w = $h * $requestedAspect;
+				
+				if ($w > $this->originalWidth) {
+					$w = $this->originalWidth;
+					$requestedAspect = $w / $h;
+				}
+				
+				// crop X
+				$x = 0;
+				$y = ($this->originalHeight - ($this->originalWidth / $requestedAspect)) / 2;
+				
+			}
+			
+		} else {
+			
+			// No cropping
+			
+			$x = 0;
+			$y = 0;
+			
+			if ($originalAspect > $requestedAspect) {
+				
+				if ($this->requestedWidth < $this->originalWidth) {
+					$w = $this->requestedWidth;
+				} else {
+					$w = $this->originalWidth;
+				}
+				
+				$h = $w / $originalAspect;
+				
+			} else {
+				
+				if ($this->requestedHeight < $this->originalHeight) {
+					$h = $this->requestedHeight;
+				} else {
+					$h = $this->originalHeight;
+				}
+				
+				$w = $h * $originalAspect;
+				
+			}
+			
+		}
+		
+		$this->width = $w;
+		$this->height = $h;
+		$this->cropX = $x;
+		$this->cropY = $y;
+		
+	}
+	
+	
+	/**
+	 *	Create a new (resized and cropped) image from the source image and save that image in the CACHE_DIR.
+	 */
+	
+	private function createImage() {
+		
+		switch($this->type){
+		
+			case 'image/jpeg':
+				$src = imagecreatefromjpeg($this->originalFile);
+				break;
+			case 'image/gif':
+				$src = imagecreatefromgif($this->originalFile);
+				break;
+			case 'image/png':
+				$src = imagecreatefrompng($this->originalFile);
+				break;
+			default: 
+				$src = false;
+		    	    	break;
+		
+		}
+		
+		$dest = imagecreatetruecolor($this->width, $this->height);
+		
+		imagealphablending($dest, false);
+		imagesavealpha($dest, true);
+		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
+			
+		Debug::pr('Image: Save: ' . $this->fileFullPath);
+		
+		switch($this->type){
+		
+			case 'image/jpeg':
+				imagejpeg($dest, $this->fileFullPath, IMG_JPG_QUALITY);
+				break;		
+			case 'image/gif':
+				imagegif($dest, $this->fileFullPath);
+				break;
+			case 'image/png':
+				imagepng($dest, $this->fileFullPath);
+				break;
+		
+		}
+		
+		ImageDestroy ($src);
+		ImageDestroy ($dest);
+		
+	}
+	
+	
+	/**
+	 *	Return the description from the JPG's exif data.
+	 *
+	 *	@return The description string.
+	 */
+	
+	private function getDescription() {
+		
+		if ($this->type == 'image/jpeg') {	
+			return exif_read_data($this->originalFile)['ImageDescription'];
+		} else {
+			return '';
+		}
+	
+	}
+	
+	
+	/**
+	 *	Determine the corresponding image file to a source file based on a md5 hash.
+	 *	That hash is based on the source image's path, mtime, the new width and height and the cropping parameter.
+	 *	If one parameter changes, the hash will be different, which will result in recreating an image.
+	 *	Since the mtime is part of the hash, also any modification to the source image will be reflected in a different name.
+	 *	For each size and cropping setting, a unique filename will be returned, to clearly identify that setting.
+	 *
+	 *	@return the matching filename for the requested source image, based on its parameters
+	 */
+	
+	private function getImageCacheFilePath() {
+		
+		$extension = substr($this->originalFile, strrpos($this->originalFile, '.')+1);
+		
+		// Create unique filename in the cache folder:
+		// The hash makes it possible to clearly identify an unchanged file in the cache, 
+		// since the given hashData will always result in the same hash.
+		// So if a file gets requested, the hash is generated from the path, calculated width x height, the mtime from the original and the cropping setting. 
+		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
+		$hash = hash('md5', $hashData);
+		
+		$file = CACHE_DIR . '/' . CACHE_FILE_PREFIX . '_' . $hash . '.' . $extension;
+		
+		Debug::pr('Image: Hash data: ' . $hashData);
+		
+		return $file;
+		
+	}
+	
+	
+	/**
+	 *	To verify, if the requested image is up to date, only the existence has to be tested, 
+	 *	since any changes in the source image will be reflected in the filename's hash.
+	 */
+	
+	private function verifyCachedImage() {
+		
+		if (!file_exists($this->fileFullPath)) {
+					
+			$this->createImage();
+		
+		}	
+		
+	}
+		
+	
+}
+
+
+?>
