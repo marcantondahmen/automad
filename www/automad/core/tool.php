@@ -128,6 +128,44 @@ class Tool {
 		
 	}
 	
+
+	/**
+	 *	Place an image with an optional link.
+	 *
+	 *	@param string $optionStr - (file: path/to/file, width: px, height: px, crop: 1, link: url, target: _blank)
+	 *	@return HTML for the image output
+	 */
+	
+	public function img($optionStr) {
+		
+		$options = Parse::toolOptions($optionStr);	
+		$defaults = Parse::toolOptions(TOOL_IMG_DEFAULTS);
+		$options = array_merge($defaults, $options);
+		$file = $options[TOOL_FILE_KEY];
+				
+		if ($file) {
+			
+			if (strpos($file, '/') === 0) {
+				// Relative to root
+				$file = BASE_DIR . $file;
+			} else {
+				// Relative to page
+				$path = ltrim($this->P->relPath . '/', '/');
+				$file = BASE_DIR . SITE_PAGES_DIR . '/' . $path . $file;
+			}
+		
+			$w = intval($options[TOOL_WIDTH_KEY]);
+			$h = intval($options[TOOL_HEIGHT_KEY]);
+			$crop = (boolean)intval($options[TOOL_CROP_KEY]);
+			$link = $options[TOOL_LINK_KEY];
+			$target = $options[TOOL_TARGET_KEY];
+		
+			return Html::addImage($file, $w, $h, $crop, $link, $target);
+			
+		}
+
+	}
+	
 	
 	/**
 	 *	To place the homepage at the same level like all the other pages from the first level,
