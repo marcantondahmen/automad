@@ -168,7 +168,9 @@ class Template {
 						
 						// Just a relative URL
 						if (Parse::isFileName($url)) {
-							return $match[1] . '="' . BASE_URL . SITE_PAGES_DIR . '/' . $P->relPath . '/' . $url . '"';
+							// Remove double slash when relPath is empty.
+							$path = ltrim($P->relPath . '/', '/');
+							return $match[1] . '="' . BASE_URL . SITE_PAGES_DIR . '/' . $path . $url . '"';
 						} else {
 							return $match[0];
 						}
