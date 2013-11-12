@@ -13,12 +13,12 @@ define('SITE_RESULTS_PAGE_TITLE', 'Search Results');
 define('SITE_RESULTS_PAGE_URL', '/results');
 define('HTML_LIST_MAX_STR_LENGTH', 80);
 
-
-// Debugging
+// Activate debugging
 define('DEBUG_MODE', true);
 
-
-define('CACHE_ENABLED', false);
+// Cache settings
+define('CACHE_ENABLED', true);
+define('CACHE_MONITOR_DELAY', 60);
 
 
 ?>
