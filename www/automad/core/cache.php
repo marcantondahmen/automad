@@ -87,9 +87,9 @@ class Cache {
 	
 			if (file_exists($this->pageCacheFile)) {
 		
-				if ((@filemtime(CACHE_SITE_MTIME_FILE) + CACHE_CHECK_DELAY) < time()) {
+				if ((@filemtime(CACHE_SITE_MTIME_FILE) + CACHE_MONITOR_DELAY) < time()) {
 
-					// The modification times get only checked every CACHE_CHECK_DELAY seconds, since
+					// The modification times get only checked every CACHE_MONITOR_DELAY seconds, since
 					// the process of collecting all mtimes itself takes some time too.
 					// After scanning, the mTime gets written to a file.
 					$siteMTime = $this->getSiteMTime();

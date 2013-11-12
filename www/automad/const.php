@@ -109,8 +109,8 @@ if (!defined('CACHE_SITE_MTIME_FILE')) {
 	define('CACHE_SITE_MTIME_FILE', BASE_DIR . CACHE_DIR . '/site_mtime');
 }
 // Site modification time check delay (seconds)
-if (!defined('CACHE_CHECK_DELAY')) {
-	define('CACHE_CHECK_DELAY', 60);
+if (!defined('CACHE_MONITOR_DELAY')) {
+	define('CACHE_MONITOR_DELAY', 60);
 }
 
 
