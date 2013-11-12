@@ -49,13 +49,6 @@ class Image {
 	
 	
 	/**
-	 *	The array returned by getimagesize() for the sourceimage.
-	 */
-	
-	private $getimagesize;
-	
-	
-	/**
 	 *	The width of the source image.
 	 */
 	
@@ -154,11 +147,12 @@ class Image {
 		
 		if ($originalFile) {
 			
+			$getimagesize = getimagesize($originalFile);
+			
 			$this->originalFile = $originalFile;
-			$this->getimagesize = getimagesize($originalFile);
-			$this->originalWidth = $this->getimagesize[0];
-			$this->originalHeight = $this->getimagesize[1];	
-			$this->type = $this->getimagesize['mime'];
+			$this->originalWidth = $getimagesize[0];
+			$this->originalHeight = $getimagesize[1];	
+			$this->type = $getimagesize['mime'];
 			$this->description = $this->getDescription();
 			$this->crop = $crop;
 		
@@ -311,6 +305,7 @@ class Image {
 		imagesavealpha($dest, true);
 		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
 			
+		Debug::pr($this);
 		Debug::pr('Image: Save: ' . $this->fileFullPath);
 		
 		switch($this->type){
