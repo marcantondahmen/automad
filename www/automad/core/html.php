@@ -45,6 +45,10 @@ class Html {
 	/**
 	 *	Add an image with an optional link.
 	 *
+	 *	The requested image can be optionally resized and cropped. 
+	 *	If only a file is specified, the placed image keeps its original size and has no link.
+	 *	If the image is a JPG and the description field in its EXIF data is defined, that description is used for the title attribute.
+	 *
 	 *	@param string $file
 	 *	@param string $w
 	 *	@param string $h
@@ -274,7 +278,7 @@ class Html {
 	
 	public static function generateList($pages, $vars) {
 		
-		if (!empty($pages)) {			
+		if ($pages) {			
 						
 			$html = '<ul class="' . HTML_CLASS_LIST . '">';
 		
@@ -369,7 +373,7 @@ class Html {
 	/**
 	 *	Generate ascending/descending buttons for sorting.
 	 *
-	 *	@param array $options
+	 *	@param array $options - An array with the text for each direction: array('SORT_ASC' => 'asc', 'SORT_DESC' => 'desc')
 	 *	@return the HTML for the buttons
 	 */
 	
@@ -417,7 +421,8 @@ class Html {
 	/**
 	 *	Generate the menu to select the sort type from the given types ($options).
 	 *
-	 *	@param array $options - Variable to "sort by", defined as var/text pairs (and text without a variable will be taken for the original order): "Original, title: By Title, tags: By Tags".
+	 *	@param array $options -	An array with the variables to "sort by", where the key is the variable and the value its description. 
+	 *				An array item with a numeric key will be taken for the original order: array('Original', 'title' => 'By Title', 'tags' => 'By Tags').
 	 *	@return the HTML of the menu
 	 */
 	
