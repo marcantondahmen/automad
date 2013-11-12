@@ -233,6 +233,12 @@ class Toolbox {
 	
 	public function listAll($optionStr) {
 	
+		$vars = Parse::toolOptions($optionStr);
+		
+		if (empty($vars)) {
+			$vars = array('title');
+		}
+
 		$selection = new Selection($this->collection);	
 		$selection->filterByTag($this->filter);
 		$selection->sortPages($this->sortType, $this->sortDirection);
@@ -241,7 +247,7 @@ class Toolbox {
 		// Remove current page from selecion
 		unset($pages[$this->P->relUrl]);
 	
-		return Html::generateList($pages, $optionStr);	
+		return Html::generateList($pages, $vars);	
 		
 	}
 
@@ -256,12 +262,18 @@ class Toolbox {
 	
 	public function listChildren($optionStr) {
 		
+		$vars = Parse::toolOptions($optionStr);
+		
+		if (empty($vars)) {
+			$vars = array('title');
+		}
+		
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($this->P->relUrl);
 		$selection->filterByTag($this->filter);
 		$selection->sortPages($this->sortType, $this->sortDirection);
 		
-		return Html::generateList($selection->getSelection(), $optionStr);
+		return Html::generateList($selection->getSelection(), $vars);
 		
 	}
 	
@@ -337,14 +349,18 @@ class Toolbox {
 	
 	public function menuSortDirection($optionStr) {
 		
-		// $this->sortDirection gets passed as well to let Html know what flag is set to apply the correct "current" class to the HTML tag
-		return Html::generateSortDirectionMenu($this->sortDirection, $optionStr);
+		$options = Parse::toolOptions($optionStr);
+		$defaults = Parse::toolOptions(TOOL_DEFAULT_SORT_DIR_TEXT);
+		$options = array_merge($defaults, $options);
+		
+		return Html::generateSortDirectionMenu($options);
 		
 	}
 		
 
 	/**
-	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll()
+	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll().
+	 *	If the $optionStr is missing, the default options are used.
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
@@ -352,7 +368,11 @@ class Toolbox {
 
 	public function menuSortType($optionStr) {
 		
-		return Html::generateSortTypeMenu($optionStr);
+		$options = Parse::toolOptions($optionStr);
+		$defaults = Parse::toolOptions(TOOL_DEFAULT_SORT_TYPES);		
+		$options = array_merge($defaults, $options);
+		
+		return Html::generateSortTypeMenu($options);
 		
 	}
 
@@ -507,6 +527,12 @@ class Toolbox {
 	
 	public function relatedPages($optionStr) {
 		
+		$vars = Parse::toolOptions($optionStr);
+		
+		if (empty($vars)) {
+			$vars = array('title');
+		}
+		
 		$pages = array();
 		$tags = $this->P->tags;
 		
@@ -526,7 +552,7 @@ class Toolbox {
 		$selection = new Selection($pages);
 		$selection->sortPagesByPath();
 		
-		return Html::generateList($selection->getSelection(), $optionStr);
+		return Html::generateList($selection->getSelection(), $vars);
 				
 	}
 	
@@ -534,11 +560,16 @@ class Toolbox {
 	/**
 	 * 	Place a search field with placeholder text.
 	 *
-	 *	@param string $optionStr (optional) - placeholder text
+	 *	@param string $optionStr (optional) - placeholder text, just a simple string
 	 *	@return the HTML of the searchfield
 	 */
 	
 	public function searchField($optionStr) {
+		
+		// Don't parse $optionStr, since it can be only a string.
+		if (!$optionStr) {
+			$optionStr = TOOL_SEARCH_PLACEHOLDER;
+		}
 		
 		return Html::generateSearchField(SITE_RESULTS_PAGE_URL, $optionStr);
 		
@@ -556,6 +587,12 @@ class Toolbox {
 		
 		if (isset($_GET["search"])) {
 			
+			$vars = Parse::toolOptions($optionStr);
+		
+			if (empty($vars)) {
+				$vars = array('title');
+			}
+			
 			$search = $_GET["search"];
 			
 			$selection = new Selection($this->collection);
@@ -564,7 +601,7 @@ class Toolbox {
 			
 			$pages = $selection->getSelection();
 			
-			return Html::generateList($pages, $optionStr);
+			return Html::generateList($pages, $vars);
 			
 		}
 		
@@ -574,7 +611,7 @@ class Toolbox {
 	/**
 	 * 	Return any item from the site settings file (/shared/site.txt).
 	 *
-	 *	@param string $optionStr
+	 *	@param string $optionStr - Any variable key from the site settings file (/shared/site.txt)
 	 *	@return site data item
 	 */
 	
