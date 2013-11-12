@@ -268,20 +268,14 @@ class Html {
 	 *	The function is private and is not supposed to be included in a template.
 	 *
 	 *	@param array $pages (selected pages)
-	 *	@param string $optionStr (variable to output in the list, comma separated)
+	 *	@param array $vars (variables to output in the list)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $optionStr) {
+	public static function generateList($pages, $vars) {
 		
-		if ($pages) {
-		
-			if (!$optionStr) {
-				$optionStr = 'title';
-			}	
-					
-			$vars = Parse::toolOptions($optionStr);
-			
+		if (!empty($pages)) {			
+						
 			$html = '<ul class="' . HTML_CLASS_LIST . '">';
 		
 			foreach ($pages as $page) {
@@ -360,21 +354,14 @@ class Html {
 	/**
 	 * 	Generate search field.
 	 *	
-	 *	@param string $url (absolute URL of the results page)
-	 *	@param string $optionStr (placeholder text)
+	 *	@param string $url (URL of the results page)
+	 *	@param string $placeholderText (placeholder text)
 	 *	@return the HTML for the search field
 	 */
 	
-	public static function generateSearchField($url, $optionStr) {
+	public static function generateSearchField($url, $placeholderText) {
 		
-		// Don't parse $optionStr, since it can be only a string.
-		if (!$optionStr) {
-			$optionStr = TOOL_SEARCH_PLACEHOLDER;
-		}
-		
-		$html = '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $optionStr . '" /></form>';
-	
-		return $html;
+		return '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $placeholderText . '" /></form>';
 			
 	}
 
@@ -382,11 +369,11 @@ class Html {
 	/**
 	 *	Generate ascending/descending buttons for sorting.
 	 *
-	 *	@param string $optionStr
+	 *	@param array $options
 	 *	@return the HTML for the buttons
 	 */
 	
-	public static function generateSortDirectionMenu($optionStr) {
+	public static function generateSortDirectionMenu($options) {
 		
 		$query = self::getQueryArray();
 		$current = self::getQueryKey('sort_dir');
@@ -394,13 +381,6 @@ class Html {
 		if (!$current) {
 			$current = TOOL_DEFAULT_SORT_DIR;
 		}
-		
-		$options = Parse::toolOptions($optionStr);
-		
-		$defaults["SORT_ASC"] = HTML_SORT_ASC;
-		$defaults["SORT_DESC"] = HTML_SORT_DESC;
-		
-		$options = array_merge($defaults, $options);
 		
 		$html = '<ul class="' . HTML_CLASS_SORT . '">';
 		
@@ -435,25 +415,24 @@ class Html {
 
 	
 	/**
-	 *	Generate the menu to select the sort type from the given types ($optionStr).
+	 *	Generate the menu to select the sort type from the given types ($options).
 	 *
-	 *	@param string $optionStr
+	 *	@param array $options - Variable to "sort by", defined as var/text pairs (and text without a variable will be taken for the original order): "Original, title: By Title, tags: By Tags".
 	 *	@return the HTML of the menu
 	 */
 	
-	public static function generateSortTypeMenu($optionStr) {
+	public static function generateSortTypeMenu($options) {
 
 		$query = self::getQueryArray();
-		$current = self::getQueryKey('sort_type');		
-		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(TOOL_DEFAULT_SORT_TYPES);		
-		$options = array_merge($defaults, $options);
+		$current = self::getQueryKey('sort_type');
 		
+		// All option array items with numeric keys get merged into one item (last one kept).
+		// That way the text for the 'Original Order' button can be defined with just adding a "keyless" value to the array. 
 		for($i=0; isset($options[$i]); $i++){
 			$options[''] = $options[$i];
 			unset($options[$i]);
 		}
-		
+				
 		ksort($options);
 		
 		$html = '<ul class="' . HTML_CLASS_SORT . '">';
