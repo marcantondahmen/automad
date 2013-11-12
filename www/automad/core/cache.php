@@ -175,27 +175,42 @@ class Cache {
 	
 	private function getSiteMTime() {
 		
-		// Get all page directories
-		$dir = BASE_DIR . SITE_PAGES_DIR;	
-		$pageDirs = array($dir);
+		$arrayDirsAndFiles = array();
+		
+		// The following directories are monitored for any changes.
+		$monitoredDirs = array(SITE_PAGES_DIR, SITE_THEMES_DIR, SITE_SHARED_DIR, '/config');
+		
+		foreach($monitoredDirs as $monitoredDir) {
+		
+			// Get all directories below the monitored directory (including the monitored directory).
+			
+			// Add base dir to string.
+			$dir = BASE_DIR . $monitoredDir;
+			
+			// Also add the directory itself, to monitor the top level.	
+			$arrayDirs = array($dir);
 	
-		while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
-			$dir .= '/*';
-			$pageDirs = array_merge($pageDirs, $dirs);
-		}
+			while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
+				$dir .= '/*';
+				$arrayDirs = array_merge($arrayDirs, $dirs);
+			}
 
-		// Get all page data files
-		$pageFiles = array();
+			// Get all files
+			$arrayFiles = array();
 	
-		foreach ($pageDirs as $pageDir) {
-			$pageFiles = array_merge($pageFiles, glob($pageDir . '/*.' . PARSE_DATA_FILE_EXTENSION));
+			foreach ($arrayDirs as $d) {
+				$arrayFiles = array_merge($arrayFiles, array_filter(glob($d . '/*'), 'is_file'));
+			}
+		
+			// Merge all files and dirs into the full collection.
+			$arrayDirsAndFiles = array_merge($arrayDirsAndFiles, $arrayDirs, $arrayFiles);
+
 		}
-	
-		// Collect all modification times and find last modified page
-		$pageDirsAndFiles = array_merge($pageDirs, $pageFiles);
+		
+		// Collect all modification times and find last modified item
 		$mTimes = array();
 	
-		foreach ($pageDirsAndFiles as $item) {
+		foreach ($arrayDirsAndFiles as $item) {
 			$mTimes[$item] = filemtime($item);
 		}
 	
