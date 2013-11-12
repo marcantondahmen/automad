@@ -164,6 +164,10 @@ if (!defined('TOOL_DEFAULT_SORT_DIR')) {
 if (!defined('TOOL_DEFAULT_SORT_TYPES')) {
 	define('TOOL_DEFAULT_SORT_TYPES', 'Original Order, title: By Title');
 }
+// Default sort directions text
+if (!defined('TOOL_DEFAULT_SORT_DIR_TEXT')) {
+	define('TOOL_DEFAULT_SORT_DIR_TEXT', 'SORT_ASC: Sort Ascending, SORT_DESC: Sort Descending');
+}
 
 
 // Template defaults
@@ -251,14 +255,6 @@ if (!defined('HTML_CLASS_SEARCH')) {
 // Filter menu text for "all items"
 if (!defined('HTML_FILTERS_ALL')) {
 	define('HTML_FILTERS_ALL', 'All');
-}
-// Sort menu text for ascending
-if (!defined('HTML_SORT_ASC')) {
-	define('HTML_SORT_ASC', 'ascending');
-}
-// Sort menu text for descending
-if (!defined('HTML_SORT_DESC')) {
-	define('HTML_SORT_DESC', 'descending');
 }
 // Max characters in list output
 if (!defined('HTML_LIST_MAX_STR_LENGTH')) {
