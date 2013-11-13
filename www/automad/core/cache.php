@@ -81,7 +81,7 @@ class Cache {
 	 *	@return boolean - true, if the cached version is valid.
 	 */
 
-	public function cacheIsApproved() {
+	public function pageCacheIsApproved() {
 		
 		if (CACHE_ENABLED) {
 	

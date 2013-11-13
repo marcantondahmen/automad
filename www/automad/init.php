@@ -73,7 +73,7 @@ Debug::timerStart();
 // Load page from cache or process template
 $C = new Cache;
 
-if ($C->cacheIsApproved()) {
+if ($C->pageCacheIsApproved()) {
 
 	// If cache is up to date and the cached file exists,
 	// just get the page from the cache.
