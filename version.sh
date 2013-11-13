@@ -50,7 +50,7 @@ if [[ $arg != *"$flowCommitMessage"* ]]; then
 		echo
 		echo "---"
 		echo "Get version number from hg-flow argument: $version"
-		echo "<?php define('VERSION', '$version'); ?>" > $file
+		echo "<?php define('AM_VERSION', '$version'); ?>" > $file
 		echo "Commit $file"
 		echo "---"
 		echo
@@ -92,7 +92,7 @@ if [[ $arg != *"$flowCommitMessage"* ]]; then
 		echo "Generated version number: $version"	
 		echo "---"
 		echo
-		echo "<?php define('VERSION', '$version'); ?>" > $file
+		echo "<?php define('AM_VERSION', '$version'); ?>" > $file
 		
 	# Start release or hotfix (hg-flow)	
 	elif [[ $arg =~ (release|hotfix).*start ]]; then

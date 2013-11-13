@@ -98,15 +98,15 @@ class Html {
 	public static function addLink($page, $classes = '') {
 	
 		if ($page->isHome()) {	
-			$classes .= ' ' . HTML_CLASS_HOME;	
+			$classes .= ' ' . AM_HTML_CLASS_HOME;	
 		} 
 		
 		if ($page->isCurrent()) {	
-			$classes .= ' ' . HTML_CLASS_CURRENT;
+			$classes .= ' ' . AM_HTML_CLASS_CURRENT;
 		} 
 		
 		if ($page->isInCurrentPath() && !$page->isHome()) {
-			$classes .= ' ' . HTML_CLASS_CURRENT_PATH;	
+			$classes .= ' ' . AM_HTML_CLASS_CURRENT_PATH;	
 		} 
 		
 		$classes = trim($classes);
@@ -143,7 +143,7 @@ class Html {
 			$pagesKeys = array_keys($pages);
 			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
 		
-			$html = '<ul class="' . HTML_CLASS_TREE . $level . '">';	
+			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
 		
 			foreach ($pages as $page) {
 			
@@ -177,16 +177,16 @@ class Html {
 	
 	public static function generateBreadcrumbs($pages) {
 		
-		$html = '<div class="' . HTML_CLASS_BREADCRUMBS . '">';
+		$html = '<div class="' . AM_HTML_CLASS_BREADCRUMBS . '">';
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
 			
 		}
 		
 		// Remove last separator again
-		$html = rtrim($html, HTML_BREADCRUMB_SEPARATOR);
+		$html = rtrim($html, AM_HTML_STR_BREADCRUMB_SEPARATOR);
 		
 		$html .= '</div>';
 		
@@ -210,7 +210,7 @@ class Html {
 			$query = self::getQueryArray();
 			$current = self::getQueryKey('filter');
 		
-			$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
+			$html = '<ul class="' . AM_HTML_CLASS_FILTER . '">';			
 		
 			// If there is no $tagetPage in the options, the filters will be used to filter a page list 
 			// on the current page without leaving the page after selecting a tag.
@@ -220,9 +220,9 @@ class Html {
 			if (!$targetPage) {
 			
 				// Check if current query is empty. 
-				// No query means no filter - in that case the HTML_CLASS_CURRENT gets applied to the "All" button.
+				// No query means no filter - in that case the AM_HTML_CLASS_CURRENT gets applied to the "All" button.
 				if (!$current) {
-					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+					$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 				} else {
 					$class = ' ';
 				}
@@ -232,7 +232,7 @@ class Html {
 				
 				ksort($query);
 					
-				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . HTML_FILTERS_ALL . '</a></li>';
+				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . AM_HTML_TEXT_FILTER_ALL . '</a></li>';
 			
 			}
 		
@@ -240,7 +240,7 @@ class Html {
 			
 				// Check if $tag equals current filter in query
 				if ($current == $tag) {
-					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+					$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 				} else {
 					$class = ' ';
 				}
@@ -280,7 +280,7 @@ class Html {
 		
 		if ($pages) {			
 						
-			$html = '<ul class="' . HTML_CLASS_LIST . '">';
+			$html = '<ul class="' . AM_HTML_CLASS_LIST . '">';
 		
 			foreach ($pages as $page) {
 			
@@ -293,12 +293,12 @@ class Html {
 						$text = strip_tags($page->data[$var]);
 						
 						// Shorten $text to maximal HTML_MAX_LIST_STR_LENGTH characters (full words).
-						if (strlen($text) > HTML_LIST_MAX_STR_LENGTH) {
+						if (strlen($text) > AM_HTML_LIST_MAX_CHARS) {
 							// Cut $text to max chars
-							$text = substr($text, 0, HTML_LIST_MAX_STR_LENGTH);
+							$text = substr($text, 0, AM_HTML_LIST_MAX_CHARS);
 							// Find last space and get position
 							$pos = strrpos($text, ' ');
-							// Cut $text again at last space's position (< HTML_LIST_MAX_STR_LENGTH)
+							// Cut $text again at last space's position (< AM_HTML_LIST_MAX_CHARS)
 							$text = substr($text, 0, $pos) . ' ...';
 						}
 					
@@ -338,7 +338,7 @@ class Html {
 		
 		if ($pages) {
 		
-			$html = '<ul class="' . HTML_CLASS_NAV . '">';
+			$html = '<ul class="' . AM_HTML_CLASS_NAV . '">';
 		
 			foreach($pages as $page) {
 			
@@ -365,7 +365,7 @@ class Html {
 	
 	public static function generateSearchField($url, $placeholderText) {
 		
-		return '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $placeholderText . '" /></form>';
+		return '<form class="' . AM_HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $placeholderText . '" /></form>';
 			
 	}
 
@@ -383,15 +383,15 @@ class Html {
 		$current = self::getQueryKey('sort_dir');
 				
 		if (!$current) {
-			$current = TOOL_DEFAULT_SORT_DIR;
+			$current = AM_TOOL_DEFAULT_SORT_DIR;
 		}
 		
-		$html = '<ul class="' . HTML_CLASS_SORT . '">';
+		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
 		
 		// Ascending buttom		
 		if ($current == "sort_asc") {
-			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 		} else {
 			$class = ' ';
 		}
@@ -403,7 +403,7 @@ class Html {
 		
 		// Descending button
 		if ($current == "sort_desc") {
-			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 		} else {
 			$class = ' ';
 		}
@@ -440,13 +440,13 @@ class Html {
 				
 		ksort($options);
 		
-		$html = '<ul class="' . HTML_CLASS_SORT . '">';
+		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
 		foreach ($options as $key => $value) {
 							
 			// Check if $value equals current filter in query
 			if ($current == $key) {
-				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+				$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 			} else {
 				$class = ' ';
 			}

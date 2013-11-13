@@ -35,7 +35,7 @@
 
 
 /**
- *	The Cache class holds all methods for evaluating, reading and writing the HTML output from/to CACHE_DIR.
+ *	The Cache class holds all methods for evaluating, reading and writing the HTML output from/to AM_DIR_CACHE.
  *
  *	First a virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO, the QUERY_STRING and the SERVER_NAME.
  *	To keep the whole site portable, the SERVER_NAME within the path is very important, to make sure, that all links/URLs are relative to the correct root directory.
@@ -83,23 +83,23 @@ class Cache {
 
 	public function pageCacheIsApproved() {
 		
-		if (CACHE_ENABLED) {
+		if (AM_CACHE_ENABLED) {
 	
 			if (file_exists($this->pageCacheFile)) {
 		
-				if ((@filemtime(CACHE_SITE_MTIME_FILE) + CACHE_MONITOR_DELAY) < time()) {
+				if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 
-					// The modification times get only checked every CACHE_MONITOR_DELAY seconds, since
+					// The modification times get only checked every AM_CACHE_MONITOR_DELAY seconds, since
 					// the process of collecting all mtimes itself takes some time too.
 					// After scanning, the mTime gets written to a file.
 					$siteMTime = $this->getSiteMTime();
-					file_put_contents(CACHE_SITE_MTIME_FILE, serialize($siteMTime));			
+					file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));			
 					Debug::pr('Cache: Scanned all pages and saved Site-mTime: ' . date('d. M Y, H:i:s', $siteMTime));
 					
 				} else {
 					
 					// In between it just gets loaded from a file.
-					$siteMTime = unserialize(file_get_contents(CACHE_SITE_MTIME_FILE));
+					$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
 					Debug::pr('Cache: Load Site-mTime from file: ' . date('d. M Y, H:i:s', $siteMTime));
 			
 				}
@@ -159,7 +159,7 @@ class Cache {
 			$queryString = '';
 		}
 		
-		$pageCacheFile = BASE_DIR . CACHE_DIR . '/' . $_SERVER['SERVER_NAME'] . $currentPath . '/' . CACHE_FILE_PREFIX . $queryString . '.' . CACHE_PAGE_EXTENSION;
+		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . $_SERVER['SERVER_NAME'] . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
 		
 		return $pageCacheFile;
 		
@@ -178,14 +178,14 @@ class Cache {
 		$arrayDirsAndFiles = array();
 		
 		// The following directories are monitored for any changes.
-		$monitoredDirs = array(SITE_PAGES_DIR, SITE_THEMES_DIR, SITE_SHARED_DIR, '/config');
+		$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_THEMES, AM_DIR_SHARED, '/config');
 		
 		foreach($monitoredDirs as $monitoredDir) {
 		
 			// Get all directories below the monitored directory (including the monitored directory).
 			
 			// Add base dir to string.
-			$dir = BASE_DIR . $monitoredDir;
+			$dir = AM_BASE_DIR . $monitoredDir;
 			
 			// Also add the directory itself, to monitor the top level.	
 			$arrayDirs = array($dir);
@@ -248,7 +248,7 @@ class Cache {
 	
 	public function writeCache($output) {
 		
-		if (CACHE_ENABLED) {
+		if (AM_CACHE_ENABLED) {
 		
 			if(!file_exists(dirname($this->pageCacheFile))) {
 				mkdir(dirname($this->pageCacheFile), 0700, true);

@@ -37,7 +37,7 @@
 /**
  *	The Debug class holds all methods to help debugging while development.
  *	
- *	The output of all the contained methods can be activated/deactivated with defining the DEBUG_MODE constant.
+ *	The output of all the contained methods can be activated/deactivated with defining the AM_DEBUG_ENABLED constant.
  */
 
 
@@ -52,7 +52,7 @@ class Debug {
 	
 	public static function pr($var) {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 			
 			echo '<pre>';
 			print_r($var);
@@ -69,7 +69,7 @@ class Debug {
 	
 	public static function reportAllErrors() {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 		
 			error_reporting(E_ALL);
 			
@@ -84,7 +84,7 @@ class Debug {
 	
 	public static function timerStart() {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 			
 			define('DEBUG_TIMER_START', microtime(true));
 			
@@ -100,7 +100,7 @@ class Debug {
 	
 	public static function timerEnd() {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 			
 			$seconds = microtime(true) - DEBUG_TIMER_START;
 			Debug::pr('Time for execution: ' . $seconds . ' seconds');

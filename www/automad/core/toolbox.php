@@ -110,7 +110,7 @@ class Toolbox {
 		if (isset($_GET['sort_dir'])) {
 			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
 		} else {
-			$this->sortDirection = constant(strtoupper(TOOL_DEFAULT_SORT_DIR));
+			$this->sortDirection = constant(strtoupper(AM_TOOL_DEFAULT_SORT_DIR));
 		}
 		
 	}
@@ -139,26 +139,26 @@ class Toolbox {
 	public function img($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);	
-		$defaults = Parse::toolOptions(TOOL_IMG_DEFAULTS);
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_IMG);
 		$options = array_merge($defaults, $options);
-		$file = $options[TOOL_FILE_KEY];
+		$file = $options[AM_TOOL_OPTION_KEY_FILENAME];
 				
 		if ($file) {
 			
 			if (strpos($file, '/') === 0) {
 				// Relative to root
-				$file = BASE_DIR . $file;
+				$file = AM_BASE_DIR . $file;
 			} else {
 				// Relative to page
 				$path = ltrim($this->P->relPath . '/', '/');
-				$file = BASE_DIR . SITE_PAGES_DIR . '/' . $path . $file;
+				$file = AM_BASE_DIR . AM_DIR_PAGES . '/' . $path . $file;
 			}
 		
-			$w = intval($options[TOOL_WIDTH_KEY]);
-			$h = intval($options[TOOL_HEIGHT_KEY]);
-			$crop = (boolean)intval($options[TOOL_CROP_KEY]);
-			$link = $options[TOOL_LINK_KEY];
-			$target = $options[TOOL_TARGET_KEY];
+			$w = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
+			$h = intval($options[AM_TOOL_OPTION_KEY_HEIGHT]);
+			$crop = (boolean)intval($options[AM_TOOL_OPTION_KEY_CROP]);
+			$link = $options[AM_TOOL_OPTION_KEY_LINK];
+			$target = $options[AM_TOOL_OPTION_KEY_TARGET];
 		
 			return Html::addImage($file, $w, $h, $crop, $link, $target);
 			
@@ -196,7 +196,7 @@ class Toolbox {
 		
 		// Check if there is a previous page and return HTML
 		if (isset($pages['prev'])) {
-			return Html::addLink($pages['prev'], HTML_CLASS_PREV);
+			return Html::addLink($pages['prev'], AM_HTML_CLASS_PREV);
 		}
 		
 	}
@@ -217,7 +217,7 @@ class Toolbox {
 		
 		// Check if there is a next page and return HTML
 		if (isset($pages['next'])) {
-			return Html::addLink($pages['next'], HTML_CLASS_NEXT);
+			return Html::addLink($pages['next'], AM_HTML_CLASS_NEXT);
 		}
 		
 	}
@@ -350,7 +350,7 @@ class Toolbox {
 	public function menuSortDirection($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(TOOL_DEFAULT_SORT_DIR_TEXT);
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_DIR);
 		$options = array_merge($defaults, $options);
 		
 		return Html::generateSortDirectionMenu($options);
@@ -369,7 +369,7 @@ class Toolbox {
 	public function menuSortType($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(TOOL_DEFAULT_SORT_TYPES);		
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_TYPE);		
 		$options = array_merge($defaults, $options);
 		
 		return Html::generateSortTypeMenu($options);
@@ -568,10 +568,10 @@ class Toolbox {
 		
 		// Don't parse $optionStr, since it can be only a string.
 		if (!$optionStr) {
-			$optionStr = TOOL_SEARCH_PLACEHOLDER;
+			$optionStr = AM_TOOL_OPTIONS_SEARCH;
 		}
 		
-		return Html::generateSearchField(SITE_RESULTS_PAGE_URL, $optionStr);
+		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $optionStr);
 		
 	}
 

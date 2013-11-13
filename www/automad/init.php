@@ -38,17 +38,17 @@ define('AUTOMAD', true);
 
 
 // Load lonfiguration
-include BASE_DIR . '/config/overrides.php';
+include AM_BASE_DIR . '/config/overrides.php';
 
 
 // Load defaults
-include BASE_DIR . '/automad/const.php';
+include AM_BASE_DIR . '/automad/const.php';
 
 
 // Remove trailing slash from URL to keep relative links consistent
 if (isset($_SERVER['PATH_INFO'])) {
 	if (substr($_SERVER['PATH_INFO'], -1) == '/') {
-		header('Location: ' . BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
+		header('Location: ' . AM_BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
 		exit;	
 	}	
 }	
@@ -57,12 +57,12 @@ if (isset($_SERVER['PATH_INFO'])) {
 // Autoload classes
 spl_autoload_register(function ($class) {
 	$class = strtolower($class);
-	include BASE_DIR . '/automad/core/' . $class . '.php';	
+	include AM_BASE_DIR . '/automad/core/' . $class . '.php';	
 });
 
 
 // Load 3rd party libs
-include BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
+include AM_BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
 
 
 // Setup basic debugging

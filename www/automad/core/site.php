@@ -78,7 +78,7 @@ class Site {
 				);
 		
 		// Merge defaults with settings from file.
-		$this->siteData = array_merge($defaults, Parse::textFile(SITE_SETTINGS_FILE));
+		$this->siteData = array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
 		
 	}
 	
@@ -140,7 +140,7 @@ class Site {
 	
 	
 	/**
-	 *	Searches $relPath recursively for files with the PARSE_DATA_FILE_EXTENSION and adds the parsed data to $siteCollection.
+	 *	Searches $relPath recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
 	 *
 	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
@@ -153,10 +153,10 @@ class Site {
 	 
 	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = rtrim(BASE_DIR . SITE_PAGES_DIR . '/' . $relPath, '/');
+		$fullPath = rtrim(AM_BASE_DIR . AM_DIR_PAGES . '/' . $relPath, '/');
 		
 		// Test if the directory actually has a data file.		
-		if (count(glob($fullPath . '/*.' . PARSE_DATA_FILE_EXTENSION)) > 0) {
+		if (count(glob($fullPath . '/*.' . AM_FILE_EXT_DATA)) > 0) {
 						
 			$ignore = array('.', '..', '@eaDir');
 				
@@ -170,9 +170,9 @@ class Site {
 					
 						$itemFullPath = $fullPath . '/' . $item;
 									
-						// If $item is a file with the PARSE_DATA_FILE_EXTENSION, $item gets added to the index.
+						// If $item is a file with the AM_FILE_EXT_DATA, $item gets added to the index.
 						// In case there are more than one matching file, the last accessed gets added.
-						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == PARSE_DATA_FILE_EXTENSION) {
+						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == AM_FILE_EXT_DATA) {
 						
 							$data = Parse::markdownFile($itemFullPath);
 						
@@ -198,7 +198,7 @@ class Site {
 							$P->relPath = $relPath;
 							$P->level = $level;
 							$P->parentRelUrl = $parentRelUrl;
-							$P->template = str_replace('.' . PARSE_DATA_FILE_EXTENSION, '', $item);
+							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
 							$this->siteCollection[$relUrl] = $P;
 							
 						}
@@ -220,7 +220,7 @@ class Site {
 		
 		} else {
 			
-			Debug::pr('No file with the extension ".' . PARSE_DATA_FILE_EXTENSION . '" found in "' . $fullPath . '/" - Skipped directory!');
+			Debug::pr('No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '/" - Skipped directory!');
 		
 		}
 			
@@ -282,17 +282,17 @@ class Site {
 	public function getThemePath() {
 		
 		$theme = $this->getSiteData('theme');
-		$themePath = SITE_THEMES_DIR . '/' . $theme;
+		$themePath = AM_DIR_THEMES . '/' . $theme;
 		
-		// To verify the existence of $themePath, BASE_DIR has to be prepended,
-		// because $themePath must NOT contain the BASE_DIR to be more flexible.
+		// To verify the existence of $themePath, AM_BASE_DIR has to be prepended,
+		// because $themePath must NOT contain the AM_BASE_DIR to be more flexible.
 		// Also $theme has to be tested, just to check if it is actually not empty. 
-		if ($theme && is_dir(BASE_DIR . $themePath)) {	
+		if ($theme && is_dir(AM_BASE_DIR . $themePath)) {	
 			// If $theme is not '' and also exists in the file system as a folder, use that path.		
 			return $themePath;
 		} else {
 			// If not, use the default template location.
-			return TEMPLATE_DEFAULT_DIR;
+			return AM_DIR_DEFAULT_TEMPLATES;
 		}
 		
 	}
@@ -325,16 +325,16 @@ class Site {
 			// If page exists
 			return $this->siteCollection[$url];
 	
-		} elseif (isset($_GET["search"]) && $url == SITE_RESULTS_PAGE_URL) {
+		} elseif (isset($_GET["search"]) && $url == AM_PAGE_RESULTS_URL) {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage('results', SITE_RESULTS_PAGE_TITLE . ' / "' . $_GET["search"] . '"');
+			return $this->createPage('results', AM_PAGE_RESULTS_TITLE . ' / "' . $_GET["search"] . '"');
 	
 		} else {
 	
 			// Else return error page
-			return $this->createPage('error', SITE_ERROR_PAGE_TITLE);
+			return $this->createPage('error', AM_PAGE_ERROR_TITLE);
 	
 		}
 		

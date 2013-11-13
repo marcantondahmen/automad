@@ -173,7 +173,7 @@ class Image {
 			
 			// Get the filename hash, based on the given settings, to check later, if the file exists.
 			$this->file = $this->getImageCacheFilePath();
-			$this->fileFullPath = BASE_DIR . $this->file;
+			$this->fileFullPath = AM_BASE_DIR . $this->file;
 		
 			// Check if an image with the generated hash exists already and create the file, when neccassary.
 			$this->verifyCachedImage();
@@ -277,7 +277,7 @@ class Image {
 	
 	
 	/**
-	 *	Create a new (resized and cropped) image from the source image and save that image in the CACHE_DIR.
+	 *	Create a new (resized and cropped) image from the source image and save that image in the AM_DIR_CACHE.
 	 */
 	
 	private function createImage() {
@@ -311,7 +311,7 @@ class Image {
 		switch($this->type){
 		
 			case 'image/jpeg':
-				imagejpeg($dest, $this->fileFullPath, IMG_JPG_QUALITY);
+				imagejpeg($dest, $this->fileFullPath, AM_IMG_JPG_QUALITY);
 				break;		
 			case 'image/gif':
 				imagegif($dest, $this->fileFullPath);
@@ -366,7 +366,7 @@ class Image {
 		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
 		$hash = hash('md5', $hashData);
 		
-		$file = CACHE_DIR . '/' . CACHE_FILE_PREFIX . '_' . $hash . '.' . $extension;
+		$file = AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
 		
 		Debug::pr('Image: Hash data: ' . $hashData);
 		

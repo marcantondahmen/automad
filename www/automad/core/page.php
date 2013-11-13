@@ -51,7 +51,7 @@ class Page {
 	 *	Out of all possible keys ther are two very special ones:
 	 *
 	 *	- "title": 				The title of the page - will also be used for sorting
-	 *	- "tags" (or better PARSE_TAGS_KEY): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
+	 *	- "tags" (or better AM_PARSE_TAGS_KEY): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
 	 *						The original string will remain in the $data array for seaching
 	 */
 	
@@ -115,18 +115,18 @@ class Page {
 		// First the passed $themePath is used to get the template file.
 		// That path may be already the default location, in case the theme is not set
 		// or the theme's folder can't be found.	
-		$templatePath = BASE_DIR . $themePath . '/' . $this->template . '.php';
+		$templatePath = AM_BASE_DIR . $themePath . '/' . $this->template . '.php';
 			
 		// If there is no matching template file in the theme folder,
 		// the default template location is used, if both locations are not equal already.
-		if (!file_exists($templatePath) && $themePath != TEMPLATE_DEFAULT_DIR) {
-			$templatePath = BASE_DIR . TEMPLATE_DEFAULT_DIR . '/' . $this->template . '.php';						
+		if (!file_exists($templatePath) && $themePath != AM_DIR_DEFAULT_TEMPLATES) {
+			$templatePath = AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/' . $this->template . '.php';						
 		}
 		
 		// If there is also no match in the default folder,
 		// the default folder in combination with the default template name is used. 
 		if (!file_exists($templatePath)) {	
-			$templatePath = BASE_DIR . TEMPLATE_DEFAULT_DIR . '/' . TEMPLATE_DEFAULT_NAME . '.php';	
+			$templatePath = AM_FILE_DEFAULT_TEMPLATE;	
 		}
 		
 		return $templatePath;

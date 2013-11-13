@@ -35,266 +35,271 @@
 
 
 // Base URL for all URLs relative to the root
-define('BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
+define('AM_BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
 
 
 // Pretty URLs
-if (file_exists(BASE_DIR . '/.htaccess')) {
-	// If .htaccess exists, assume that pretty URLs are enabled and INDEX is empty
-	define('INDEX', '');
+if (file_exists(AM_BASE_DIR . '/.htaccess')) {
+	// If .htaccess exists, assume that pretty URLs are enabled and AM_INDEX is empty
+	define('AM_INDEX', '');
 } else {
-	// If not, INDEX will be defined
-	define('INDEX', '/index.php');
+	// If not, AM_INDEX will be defined
+	define('AM_INDEX', '/index.php');
 }
 
 
-// Debugging
-if (!defined('DEBUG_MODE')) {
-	define('DEBUG_MODE', false);
+// DEBUG
+if (!defined('AM_DEBUG_ENABLED')) {
+	define('AM_DEBUG_ENABLED', false);
 }
 
 
-// Site defaults
-
-// Directory for the pages
-if (!defined('SITE_PAGES_DIR')) {
-	define('SITE_PAGES_DIR', '/pages');
+// DIR
+// Pages
+if (!defined('AM_DIR_PAGES')) {
+	define('AM_DIR_PAGES', '/pages');
 }
-// Directory for shared/sitewide items
-if (!defined('SITE_SHARED_DIR')) {
-	define('SITE_SHARED_DIR', '/shared');
+// Shared
+if (!defined('AM_DIR_SHARED')) {
+	define('AM_DIR_SHARED', '/shared');
 }
-// Sidewide settings/variable
-if (!defined('SITE_SETTINGS_FILE')) {
-	define('SITE_SETTINGS_FILE', BASE_DIR . SITE_SHARED_DIR . '/site.txt'); 
+// Themes
+if (!defined('AM_DIR_THEMES')) {
+	define('AM_DIR_THEMES', '/themes');
 }
-// Directory for themes
-if (!defined('SITE_THEMES_DIR')) {
-	define('SITE_THEMES_DIR', '/themes');
-}
-// Title for 404 page
-if (!defined('SITE_ERROR_PAGE_TITLE')) {
-	define('SITE_ERROR_PAGE_TITLE', '404');
-}
-// Title for search results page
-if (!defined('SITE_RESULTS_PAGE_TITLE')) {
-	define('SITE_RESULTS_PAGE_TITLE', 'Search Results');
-}
-// URL of search results page
-if (!defined('SITE_RESULTS_PAGE_URL')) {
-	define('SITE_RESULTS_PAGE_URL', '/results');
-}
-
-
 // Cache
+if (!defined('AM_DIR_CACHE')) {
+	define('AM_DIR_CACHE', '/cache');
+}
+// Default template directory
+if (!defined('AM_DIR_DEFAULT_TEMPLATES')) {
+	define('AM_DIR_DEFAULT_TEMPLATES', '/automad/templates');
+}
 
-// Enable cache
-if (!defined('CACHE_ENABLED')) {
-	define('CACHE_ENABLED', true);
-}
-// Directory for page cache
-if (!defined('CACHE_DIR')) {
-	define('CACHE_DIR', '/cache');
-}
-// Cache file prefix
-if (!defined('CACHE_FILE_PREFIX')) {
-	define('CACHE_FILE_PREFIX', 'cached');
-}
-// Cache file extension
-if (!defined('CACHE_PAGE_EXTENSION')) {
-	define('CACHE_PAGE_EXTENSION', 'html');
+
+// FILE
+// Sidewide settings/variable
+if (!defined('AM_FILE_SITE_SETTINGS')) {
+	define('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.txt'); 
 }
 // Site modification time last checked
-if (!defined('CACHE_SITE_MTIME_FILE')) {
-	define('CACHE_SITE_MTIME_FILE', BASE_DIR . CACHE_DIR . '/site_mtime');
+if (!defined('AM_FILE_SITE_MTIME')) {
+	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/site_mtime');
+}
+// Default template
+if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
+	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
+}
+// Cache file prefix
+if (!defined('AM_FILE_PREFIX_CACHE')) {
+	define('AM_FILE_PREFIX_CACHE', 'cached');
+}
+// Cache file extension
+if (!defined('AM_FILE_EXT_PAGE_CACHE')) {
+	define('AM_FILE_EXT_PAGE_CACHE', 'html');
+}
+// Data file extension
+if (!defined('AM_FILE_EXT_DATA')) {
+	define('AM_FILE_EXT_DATA', 'txt');
+}
+
+
+// PAGE
+// Title for 404 page
+if (!defined('AM_PAGE_ERROR_TITLE')) {
+	define('AM_PAGE_ERROR_TITLE', '404');
+}
+// Title for search results page
+if (!defined('AM_PAGE_RESULTS_TITLE')) {
+	define('AM_PAGE_RESULTS_TITLE', 'Search Results');
+}
+// URL of search results page
+if (!defined('AM_PAGE_RESULTS_URL')) {
+	define('AM_PAGE_RESULTS_URL', '/results');
+}
+
+
+// CACHE
+// Enable cache
+if (!defined('AM_CACHE_ENABLED')) {
+	define('AM_CACHE_ENABLED', true);
 }
 // Site modification time check delay (seconds)
-if (!defined('CACHE_MONITOR_DELAY')) {
-	define('CACHE_MONITOR_DELAY', 60);
+if (!defined('AM_CACHE_MONITOR_DELAY')) {
+	define('AM_CACHE_MONITOR_DELAY', 60);
 }
 
 
-// Image
-
+// IMAGE
 // Default jpg quality
-if (!defined('IMG_JPG_QUALITY')) {
-	define('IMG_JPG_QUALITY', 90);
+if (!defined('AM_IMG_JPG_QUALITY')) {
+	define('AM_IMG_JPG_QUALITY', 90);
 }
 
 
-// Tools
-
+// TOOL KEYS
 // String to be used within the options to define a filename/filepath
-if (!defined('TOOL_FILE_KEY')) {
-	define('TOOL_FILE_KEY', 'file');
+if (!defined('AM_TOOL_OPTION_KEY_FILENAME')) {
+	define('AM_TOOL_OPTION_KEY_FILENAME', 'file');
 }
 // String to be used within the options to define a width
-if (!defined('TOOL_WIDTH_KEY')) {
-	define('TOOL_WIDTH_KEY', 'width');
+if (!defined('AM_TOOL_OPTION_KEY_WIDTH')) {
+	define('AM_TOOL_OPTION_KEY_WIDTH', 'width');
 }
 // String to be used within the options to define a height
-if (!defined('TOOL_HEIGHT_KEY')) {
-	define('TOOL_HEIGHT_KEY', 'height');
+if (!defined('AM_TOOL_OPTION_KEY_HEIGHT')) {
+	define('AM_TOOL_OPTION_KEY_HEIGHT', 'height');
 }
 // String to be used within the options to define the crop parameter
-if (!defined('TOOL_CROP_KEY')) {
-	define('TOOL_CROP_KEY', 'crop');
+if (!defined('AM_TOOL_OPTION_KEY_CROP')) {
+	define('AM_TOOL_OPTION_KEY_CROP', 'crop');
 }
 // String to be used within the options to define a link
-if (!defined('TOOL_LINK_KEY')) {
-	define('TOOL_LINK_KEY', 'link');
+if (!defined('AM_TOOL_OPTION_KEY_LINK')) {
+	define('AM_TOOL_OPTION_KEY_LINK', 'link');
 }
 // String to be used within the options to define a link target
-if (!defined('TOOL_TARGET_KEY')) {
-	define('TOOL_TARGET_KEY', 'target');
+if (!defined('AM_TOOL_OPTION_KEY_TARGET')) {
+	define('AM_TOOL_OPTION_KEY_TARGET', 'target');
 }
+
+
+// TOOL OPTIONS
 // Default Tool options
-if (!defined('TOOL_IMG_DEFAULTS')) {
-	define('TOOL_IMG_DEFAULTS', TOOL_FILE_KEY . ': , ' . TOOL_WIDTH_KEY . ': , ' . TOOL_HEIGHT_KEY . ': , ' . TOOL_CROP_KEY . ': 0, ' . TOOL_LINK_KEY . ': , ' . TOOL_TARGET_KEY . ': ');
+if (!defined('AM_TOOL_OPTIONS_IMG')) {
+	define('AM_TOOL_OPTIONS_IMG', AM_TOOL_OPTION_KEY_FILENAME . ': , ' . AM_TOOL_OPTION_KEY_WIDTH . ': , ' . AM_TOOL_OPTION_KEY_HEIGHT . ': , ' . AM_TOOL_OPTION_KEY_CROP . ': 0, ' . AM_TOOL_OPTION_KEY_LINK . ': , ' . AM_TOOL_OPTION_KEY_TARGET . ': ');
 }
 // Placeholder text for search field
-if (!defined('TOOL_SEARCH_PLACEHOLDER')) {
-	define('TOOL_SEARCH_PLACEHOLDER', 'Search ...');
-}
-// Default sort direction
-if (!defined('TOOL_DEFAULT_SORT_DIR')) {
-	define('TOOL_DEFAULT_SORT_DIR', 'sort_asc');
+if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
+	define('AM_TOOL_OPTIONS_SEARCH', 'Search ...');
 }
 // Default sort types
-if (!defined('TOOL_DEFAULT_SORT_TYPES')) {
-	define('TOOL_DEFAULT_SORT_TYPES', 'Original Order, title: By Title');
+if (!defined('AM_TOOL_OPTIONS_SORT_TYPE')) {
+	define('AM_TOOL_OPTIONS_SORT_TYPE', 'Original Order, title: By Title');
 }
 // Default sort directions text
-if (!defined('TOOL_DEFAULT_SORT_DIR_TEXT')) {
-	define('TOOL_DEFAULT_SORT_DIR_TEXT', 'SORT_ASC: Sort Ascending, SORT_DESC: Sort Descending');
+if (!defined('AM_TOOL_OPTIONS_SORT_DIR')) {
+	define('AM_TOOL_OPTIONS_SORT_DIR', 'SORT_ASC: Sort Ascending, SORT_DESC: Sort Descending');
 }
 
 
-// Template defaults
+// TOOL DEFAULTS
+// Default sort direction
+if (!defined('AM_TOOL_DEFAULT_SORT_DIR')) {
+	define('AM_TOOL_DEFAULT_SORT_DIR', 'sort_asc');
+}
 
-// Default template directory
-if (!defined('TEMPLATE_DEFAULT_DIR')) {
-	define('TEMPLATE_DEFAULT_DIR', '/automad/templates');
-}
-// Default template name
-if (!defined('TEMPLATE_DEFAULT_NAME')) {
-	define('TEMPLATE_DEFAULT_NAME', 'default');
-}
+
+// TEMPLATE DEFAULTS
 // Left delimiter for template variables
-if (!defined('TEMPLATE_VAR_DELIMITER_LEFT')) {
-	define('TEMPLATE_VAR_DELIMITER_LEFT', '[');
+if (!defined('AM_TMPLT_DEL_VAR_L')) {
+	define('AM_TMPLT_DEL_VAR_L', '[');
 }
 // Right delimiter for template variables
-if (!defined('TEMPLATE_VAR_DELIMITER_RIGHT')) {
-	define('TEMPLATE_VAR_DELIMITER_RIGHT', ']');
+if (!defined('AM_TMPLT_DEL_VAR_R')) {
+	define('AM_TMPLT_DEL_VAR_R', ']');
 }
 // Left delimiter for template functions
-if (!defined('TEMPLATE_FN_DELIMITER_LEFT')) {
-	define('TEMPLATE_FN_DELIMITER_LEFT', '$[');
+if (!defined('AM_TMPLT_DEL_TOOL_L')) {
+	define('AM_TMPLT_DEL_TOOL_L', '$[');
 }
 // Right delimiter for template functions
-if (!defined('TEMPLATE_FN_DELIMITER_RIGHT')) {
-	define('TEMPLATE_FN_DELIMITER_RIGHT', ']');
+if (!defined('AM_TMPLT_DEL_TOOL_R')) {
+	define('AM_TMPLT_DEL_TOOL_R', ']');
 }
 
 
-// HTML defaults
-
+// HTML
 // Navigation class
-if (!defined('HTML_CLASS_NAV')) {
-	define('HTML_CLASS_NAV', 'nav');
+if (!defined('AM_HTML_CLASS_NAV')) {
+	define('AM_HTML_CLASS_NAV', 'nav');
 }
 // Previous page link class
-if (!defined('HTML_CLASS_PREV')) {
-	define('HTML_CLASS_PREV', 'prev');
+if (!defined('AM_HTML_CLASS_PREV')) {
+	define('AM_HTML_CLASS_PREV', 'prev');
 }
 // Next page link class
-if (!defined('HTML_CLASS_NEXT')) {
-	define('HTML_CLASS_NEXT', 'next');
+if (!defined('AM_HTML_CLASS_NEXT')) {
+	define('AM_HTML_CLASS_NEXT', 'next');
 }
 // Filter menu class
-if (!defined('HTML_CLASS_FILTER')) {
-	define('HTML_CLASS_FILTER', 'filter');
+if (!defined('AM_HTML_CLASS_FILTER')) {
+	define('AM_HTML_CLASS_FILTER', 'filter');
 }
 // Navigation tree class
-if (!defined('HTML_CLASS_TREE')) {
-	define('HTML_CLASS_TREE', 'tree');
+if (!defined('AM_HTML_CLASS_TREE')) {
+	define('AM_HTML_CLASS_TREE', 'tree');
 }
 // Page list class
-if (!defined('HTML_CLASS_LIST')) {
-	define('HTML_CLASS_LIST', 'list');
+if (!defined('AM_HTML_CLASS_LIST')) {
+	define('AM_HTML_CLASS_LIST', 'list');
 }
 // Sort menu class
-if (!defined('HTML_CLASS_SORT')) {
-	define('HTML_CLASS_SORT', 'sort');
+if (!defined('AM_HTML_CLASS_SORT')) {
+	define('AM_HTML_CLASS_SORT', 'sort');
 }
 // Class for link to Home page in navigation 
-if (!defined('HTML_CLASS_HOME')) {
-	define('HTML_CLASS_HOME', 'home');
+if (!defined('AM_HTML_CLASS_HOME')) {
+	define('AM_HTML_CLASS_HOME', 'home');
 }
 // Class for current page in navigation
-if (!defined('HTML_CLASS_CURRENT')) {
-	define('HTML_CLASS_CURRENT', 'current');
+if (!defined('AM_HTML_CLASS_CURRENT')) {
+	define('AM_HTML_CLASS_CURRENT', 'current');
 }
 // Class for a page within the path of the current page in the navigation
-if (!defined('HTML_CLASS_CURRENT_PATH')) {
-	define('HTML_CLASS_CURRENT_PATH', 'currentPath');
+if (!defined('AM_HTML_CLASS_CURRENT_PATH')) {
+	define('AM_HTML_CLASS_CURRENT_PATH', 'currentPath');
 }
 // Breadcrumbs class
-if (!defined('HTML_CLASS_BREADCRUMBS')) {
-	define('HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
-}
-// Breadcrumbs items separator
-if (!defined('HTML_BREADCRUMB_SEPARATOR')) {
-	define('HTML_BREADCRUMB_SEPARATOR', ' &gt; ');
+if (!defined('AM_HTML_CLASS_BREADCRUMBS')) {
+	define('AM_HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
 }
 // Search form class
-if (!defined('HTML_CLASS_SEARCH')) {
-	define('HTML_CLASS_SEARCH', 'search');
+if (!defined('AM_HTML_CLASS_SEARCH')) {
+	define('AM_HTML_CLASS_SEARCH', 'search');
+}
+// Breadcrumbs items separator
+if (!defined('AM_HTML_STR_BREADCRUMB_SEPARATOR')) {
+	define('AM_HTML_STR_BREADCRUMB_SEPARATOR', ' &gt; ');
 }
 // Filter menu text for "all items"
-if (!defined('HTML_FILTERS_ALL')) {
-	define('HTML_FILTERS_ALL', 'All');
+if (!defined('AM_HTML_TEXT_FILTER_ALL')) {
+	define('AM_HTML_TEXT_FILTER_ALL', 'All');
 }
 // Max characters in list output
-if (!defined('HTML_LIST_MAX_STR_LENGTH')) {
-	define('HTML_LIST_MAX_STR_LENGTH', 150);
+if (!defined('AM_HTML_LIST_MAX_CHARS')) {
+	define('AM_HTML_LIST_MAX_CHARS', 150);
 }
 
 
-// Parsing defaults
-
-// File extension of data file
-if (!defined('PARSE_DATA_FILE_EXTENSION')) {
-	define('PARSE_DATA_FILE_EXTENSION', 'txt');
-}
+// PARSE
 // Block separator - separates all key/value pairs
-if (!defined('PARSE_BLOCK_SEPARATOR')) {
-	define('PARSE_BLOCK_SEPARATOR', '---');
+if (!defined('AM_PARSE_BLOCK_SEPARATOR')) {
+	define('AM_PARSE_BLOCK_SEPARATOR', '---');
 }
 // Pair separator - separates the key from the value
-if (!defined('PARSE_PAIR_SEPARATOR')) {
-	define('PARSE_PAIR_SEPARATOR', ':');
+if (!defined('AM_PARSE_PAIR_SEPARATOR')) {
+	define('AM_PARSE_PAIR_SEPARATOR', ':');
 }
 // Tool options separator
-if (!defined('PARSE_OPTION_SEPARATOR')) {
-	define('PARSE_OPTION_SEPARATOR', ',');
+if (!defined('AM_PARSE_OPTION_SEPARATOR')) {
+	define('AM_PARSE_OPTION_SEPARATOR', ',');
 }
 // Tags separator
-if (!defined('PARSE_TAG_SEPARATOR')) {
-	define('PARSE_TAG_SEPARATOR', ',');
+if (!defined('AM_PARSE_TAG_SEPARATOR')) {
+	define('AM_PARSE_TAG_SEPARATOR', ',');
 }
 // Tags key (to identify tags in the page's txt file)
-if (!defined('PARSE_TAGS_KEY')) {
-	define('PARSE_TAGS_KEY', 'tags');
+if (!defined('AM_PARSE_TAGS_KEY')) {
+	define('AM_PARSE_TAGS_KEY', 'tags');
 }
 // List of file extensions to identify file in URL
-if (!defined('PARSE_REGISTERED_FILE_EXTENSIONS')) {
-	define('PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js')));
+if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {
+	define('AM_PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3')));
 }
 
  
-include(BASE_DIR . '/automad/version.php');
+include(AM_BASE_DIR . '/automad/version.php');
  
  
 ?>

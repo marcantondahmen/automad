@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>[title]</title>
-<meta name="app" content="Automad <?php echo VERSION; ?>">
+<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
 </head>
 
 <body>
@@ -12,6 +12,6 @@ $[searchResults]
 <br />
 <p><?php echo $this->P->template; ?></p>
 <br />
-<p>Made with Automad <?php echo VERSION; ?></p>
+<p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>
 </html>

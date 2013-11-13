@@ -126,7 +126,7 @@ class Template {
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
 		$toolbox = new Toolbox($this->S); 
-		$output = 	preg_replace_callback('/' . preg_quote(TEMPLATE_FN_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(TEMPLATE_FN_DELIMITER_RIGHT) . '/', 
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/', 
 				function($matches) use($toolbox) {
 					if (method_exists($toolbox, $matches[1])) {
 						if (!isset($matches[2])) {
@@ -141,7 +141,7 @@ class Template {
 							
 		// Replace vars in data array			
 		$data = $this->P->data;
-		$output =	preg_replace_callback('/' . preg_quote(TEMPLATE_VAR_DELIMITER_LEFT) . '([A-Za-z0-9_\-]+)' . preg_quote(TEMPLATE_VAR_DELIMITER_RIGHT) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_VAR_R) . '/',
 				function($matches) use($data) {
 					if (array_key_exists($matches[1], $data)) {
 						return $data[$matches[1]];
@@ -158,7 +158,7 @@ class Template {
 	 *	Find all links/URLs in $output and modulate the matches according to their type.
 	 * 
 	 *	Absolute URLs: 		not modified
-	 *	Root-relative URLs: 	BASE_URL is prepended (and INDEX in case of pages)
+	 *	Root-relative URLs: 	AM_BASE_URL is prepended (and AM_INDEX in case of pages)
 	 *	Relative URLs:		Only URLs of files are modified - the full file system path gets prepended
 	 *	
 	 *	@param string $output
@@ -182,9 +182,9 @@ class Template {
 						
 						// Relative to root	
 						if (Parse::isFileName($url)) {
-							return $match[1] . '="' . BASE_URL . $url . '"';
+							return $match[1] . '="' . AM_BASE_URL . $url . '"';
 						} else {
-							return $match[1] . '="' . BASE_URL . INDEX . $url . '"';	
+							return $match[1] . '="' . AM_BASE_URL . AM_INDEX . $url . '"';	
 						}
 												
 					} else {
@@ -193,7 +193,7 @@ class Template {
 						if (Parse::isFileName($url)) {
 							// Remove double slash when relPath is empty.
 							$path = ltrim($P->relPath . '/', '/');
-							return $match[1] . '="' . BASE_URL . SITE_PAGES_DIR . '/' . $path . $url . '"';
+							return $match[1] . '="' . AM_BASE_URL . AM_DIR_PAGES . '/' . $path . $url . '"';
 						} else {
 							return $match[0];
 						}

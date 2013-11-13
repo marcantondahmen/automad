@@ -4,7 +4,7 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
 	<title>$[siteName] / [title]</title>
-	<meta name="app" content="Automad <?php echo VERSION; ?>">
+	<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
 	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
 </head>
 
@@ -25,6 +25,6 @@
 	<br />
 	<p>&copy $[year] by <a href="/">$[siteData(owner)]</a></p>
 	<br />
-	<p>Made with Automad <?php echo VERSION; ?></p>
+	<p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>
 </html>

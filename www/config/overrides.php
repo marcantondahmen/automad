@@ -8,17 +8,17 @@
  */
 
 
-define('SITE_ERROR_PAGE_TITLE', 'Page not found!');
-define('SITE_RESULTS_PAGE_TITLE', 'Search Results');
-define('SITE_RESULTS_PAGE_URL', '/results');
-define('HTML_LIST_MAX_STR_LENGTH', 80);
+define('AM_PAGE_ERROR_TITLE', 'Page not found!');
+define('AM_PAGE_RESULTS_TITLE', 'Search Results');
+define('AM_PAGE_RESULTS_URL', '/results');
+define('AM_HTML_LIST_MAX_CHARS', 80);
 
 // Activate debugging
-define('DEBUG_MODE', true);
+define('AM_DEBUG_ENABLED', true);
 
 // Cache settings
-define('CACHE_ENABLED', true);
-define('CACHE_MONITOR_DELAY', 60);
+define('AM_CACHE_ENABLED', true);
+define('AM_CACHE_MONITOR_DELAY', 60);
 
 
 ?>
