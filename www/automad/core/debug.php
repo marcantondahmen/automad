@@ -86,7 +86,7 @@ class Debug {
 		
 		if (AM_DEBUG_ENABLED) {
 			
-			define('DEBUG_TIMER_START', microtime(true));
+			define('AM_DEBUG_TIMER_START', microtime(true));
 			
 		}	
 		
@@ -94,7 +94,7 @@ class Debug {
 	
 	
 	/**
-	 *	Substract the initial microtime (stored in DEBUG_TIMER_START) from the current microtime 
+	 *	Substract the initial microtime (stored in AM_DEBUG_TIMER_START) from the current microtime 
 	 *	and print out the difference.
 	 */
 	
@@ -102,7 +102,7 @@ class Debug {
 		
 		if (AM_DEBUG_ENABLED) {
 			
-			$seconds = microtime(true) - DEBUG_TIMER_START;
+			$seconds = microtime(true) - AM_DEBUG_TIMER_START;
 			Debug::pr('Time for execution: ' . $seconds . ' seconds');
 			
 		}
