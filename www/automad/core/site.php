@@ -292,6 +292,7 @@ class Site {
 			return $themePath;
 		} else {
 			// If not, use the default template location.
+			Debug::pr('Site: Theme "' . $theme . '" not found! Default template folder will be used!');
 			return AM_DIR_DEFAULT_TEMPLATES;
 		}
 		

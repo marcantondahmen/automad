@@ -37,8 +37,8 @@
 /**
  * 	The Template class holds all methods to render the current page using a template file.
  *	
- *	When render() is called the output buffer gets started and the template file gets loaded.
- *	The output of the included file, basically the raw template HTML (including the generated HTML by PHP in the template file) 
+ *	When render() is called, first the template file gets loaded by loadTemplate().
+ *	The output, basically the raw template HTML (including the generated HTML by PHP in the template file) 
  *	gets stored in $output.
  *
  *	In a second step $output gets processed. All variables get replaced with values from the page's text file and 
@@ -52,7 +52,7 @@
  *	The processTemplate() method checks, if a found $[function] in the template file matches a method of the Toolbox class to then repalce 
  *	that match with the method's return value.  
  *
- *	In a last step the processed $output get displayed.
+ *	In a last step, all URLs within the generated HTML get modulated to the be relative to the server's root (or absolute), before $output gets returned.
  */
 
 

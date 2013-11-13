@@ -292,7 +292,7 @@ class Html {
 						
 						$text = strip_tags($page->data[$var]);
 						
-						// Shorten $text to maximal HTML_MAX_LIST_STR_LENGTH characters (full words).
+						// Shorten $text to maximal characters (full words).
 						if (strlen($text) > AM_HTML_LIST_MAX_CHARS) {
 							// Cut $text to max chars
 							$text = substr($text, 0, AM_HTML_LIST_MAX_CHARS);
@@ -516,7 +516,7 @@ class Html {
 	
 	private static function getQueryKey($key) {
 	
-		// Save currently passed filter query to determine current filter when generating list
+		// Save currently passed filter query to determine current filter/sort_dir when generating list
 		if (isset($_GET[$key])) {
 			$queryKey = $_GET[$key];
 		} else {
