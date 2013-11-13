@@ -74,15 +74,38 @@ class Template {
 	
 	
 	/**
+	 *	The template file for the current page.
+	 */
+	
+	private $template;
+
+	
+	/**
+	 *	Define $S, $P and $theme.
+	 */
+	
+	public function __construct($site) {
+		
+		$this->S = $site;
+		$this->P = $site->getCurrentPage();
+		$this->template = $this->P->getTemplatePath($this->S->getThemePath());
+		
+		Debug::pr('Template: New instance created!');
+		
+	}
+		
+	
+	/**
 	 *	Load the unmodified template file and return its output.
 	 *
+	 *	@param string $template
 	 *	@return $ouput 
 	 */
 	
-	private function getTemplate() {
+	private function loadTemplate($template) {
 		
 		ob_start();
-		require_once $this->P->getTemplatePath($this->S->getThemePath());
+		require_once $template;
 		$output = ob_get_contents();
 		ob_end_clean();
 		
@@ -186,45 +209,21 @@ class Template {
 	
 	
 	/**
-	 * 	Renders the current page.
+	 * 	Render the current page.
+	 *
+	 *	@return The fully rendered HTML for the current page.
 	 */
 	
 	public function render() {
 		
-		$C = new Cache();
+		Debug::pr('Template: Render template: ' . $this->template);
 		
-		if ($C->cacheIsApproved()) {
+		$output = $this->loadTemplate($this->template);
+		$output = $this->processTemplate($output);
+		$output = $this->modulateUrls($output);	
+	
+		return $output;	
 		
-			// If cache is up to date and the cached file exists,
-			// just get the page from the cache.
-			echo $C->readCache();
-			
-		} else {
-			
-			// If the cache is not approved,
-			// everything has to be re-rendered.
-			$this->S = new Site();
-			$this->P = $this->S->getCurrentPage();
-		
-			$output = $this->getTemplate();
-			$output = $this->processTemplate($output);
-			$output = $this->modulateUrls($output);	
-			
-			// Write the rendered HTML to the cache.
-			$C->writeCache($output);
-		
-			echo $output;
-			
-			Debug::pr('Template: Theme path: ' . $this->S->getThemePath());
-			Debug::pr('Template: Template file: ' . $this->P->getTemplatePath($this->S->getThemePath()));
-			Debug::pr(array_keys($this->S->getCollection()));
-		
-		} 	
-		
-		Debug::pr('Template: BASE_URL: ' . BASE_URL);
-		Debug::pr('Template: Pretty URLs: ' . var_export(!(boolean)INDEX, true));
-		Debug::pr(get_defined_constants(true)['user']);
-				
 	}	
 	
 	
