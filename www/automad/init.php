@@ -37,8 +37,8 @@
 define('AUTOMAD', true);
 
 
-// Load lonfiguration
-include AM_BASE_DIR . '/config/overrides.php';
+// Load configuration
+include AM_BASE_DIR . '/config/const.php';
 
 
 // Load defaults
