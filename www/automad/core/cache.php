@@ -234,7 +234,7 @@ class Cache {
 	 *	@return The full cached HTML of the page. 
 	 */
 	
-	public function readCache() {
+	public function readPageFromCache() {
 		
 		Debug::pr('Cache: Read: ' . $this->pageCacheFile);
 		return file_get_contents($this->pageCacheFile);
@@ -246,7 +246,7 @@ class Cache {
 	 *	Write the rendered HTML output to the cache file.
 	 */
 	
-	public function writeCache($output) {
+	public function writePageToCache($output) {
 		
 		if (AM_CACHE_ENABLED) {
 		

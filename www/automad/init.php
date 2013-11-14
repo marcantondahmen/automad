@@ -84,7 +84,7 @@ if ($C->pageCacheIsApproved()) {
 
 	// If cache is up to date and the cached file exists,
 	// just get the page from the cache.
-	$output = $C->readCache();
+	$output = $C->readPageFromCache();
 	
 } else {
 	
@@ -93,7 +93,7 @@ if ($C->pageCacheIsApproved()) {
 	$S = new Site();
 	$T = new Template($S);
 	$output = $T->render();
-	$C->writeCache($output);
+	$C->writePageToCache($output);
 	
 }
 
