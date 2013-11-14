@@ -54,15 +54,22 @@ if (isset($_SERVER['PATH_INFO'])) {
 }	
 
 
-// Autoload classes
-spl_autoload_register(function ($class) {
-	$class = strtolower($class);
-	include AM_BASE_DIR . '/automad/core/' . $class . '.php';	
+// Autoload core classes and libraries
+spl_autoload_register(function($class) {
+	
+	$class = strtolower($class);	
+	$possibleFiles = 	array(
+					AM_BASE_DIR . '/automad/core/' . $class . '.php',
+					AM_BASE_DIR . '/automad/libraries/' . $class . '/' . $class . '.php' 
+				);
+	
+	foreach($possibleFiles as $file) {
+		if (file_exists($file)) {
+			require_once $file;	
+		}	
+	}
+	
 });
-
-
-// Load 3rd party libs
-include AM_BASE_DIR . '/automad/libraries/parsedown/Parsedown.php';
 
 
 // Setup basic debugging
