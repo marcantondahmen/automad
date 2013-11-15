@@ -104,7 +104,7 @@ echo $output;
 
 // Display execution time and user constants
 Debug::timerEnd();
-Debug::pr(get_defined_constants(true)['user']);
+Debug::log(get_defined_constants(true)['user']);
 
 
 ?>

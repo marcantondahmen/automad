@@ -50,13 +50,24 @@ class Debug {
 	 *	@param mixed $var
 	 */
 	
-	public static function pr($var) {
+	public static function log($var) {
 		
 		if (AM_DEBUG_ENABLED) {
 			
-			echo '<pre>';
-			print_r($var);
-			echo '</pre>';
+			if (AM_DEBUG_CONSOLE) {
+			
+				echo '<script>console.log(';
+				echo json_encode($var);
+				echo ');</script>';
+				
+				
+			} else {
+			
+				echo '<pre>';
+				print_r($var);
+				echo '</pre>';
+			
+			}
 			
 		}
 		
@@ -103,7 +114,7 @@ class Debug {
 		if (AM_DEBUG_ENABLED) {
 			
 			$seconds = microtime(true) - AM_DEBUG_TIMER_START;
-			Debug::pr('Time for execution: ' . $seconds . ' seconds');
+			Debug::log('Time for execution: ' . $seconds . ' seconds');
 			
 		}
 		

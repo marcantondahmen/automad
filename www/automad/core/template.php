@@ -90,7 +90,7 @@ class Template {
 		$this->P = $site->getCurrentPage();
 		$this->template = $this->P->getTemplatePath($this->S->getThemePath());
 		
-		Debug::pr('Template: New instance created!');
+		Debug::log('Template: New instance created!');
 		
 	}
 		
@@ -216,7 +216,7 @@ class Template {
 	
 	public function render() {
 		
-		Debug::pr('Template: Render template: ' . $this->template);
+		Debug::log('Template: Render template: ' . $this->template);
 		
 		$output = $this->loadTemplate($this->template);
 		$output = $this->processTemplate($output);

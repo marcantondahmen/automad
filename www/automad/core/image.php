@@ -305,8 +305,8 @@ class Image {
 		imagesavealpha($dest, true);
 		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
 			
-		Debug::pr($this);
-		Debug::pr('Image: Save: ' . $this->fileFullPath);
+		Debug::log($this);
+		Debug::log('Image: Save: ' . $this->fileFullPath);
 		
 		switch($this->type){
 		
@@ -368,7 +368,7 @@ class Image {
 		
 		$file = AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
 		
-		Debug::pr('Image: Hash data: ' . $hashData);
+		Debug::log('Image: Hash data: ' . $hashData);
 		
 		return $file;
 		

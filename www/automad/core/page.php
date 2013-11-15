@@ -120,14 +120,14 @@ class Page {
 		// If there is no matching template file in the theme folder,
 		// the default template location is used, if both locations are not equal already.
 		if (!file_exists($templatePath) && $themePath != AM_DIR_DEFAULT_TEMPLATES) {
-			Debug::pr('Page: No matching template file for "' . $this->template . '" found in "' . dirname($templatePath) . '"! Trying default template folder ...');
+			Debug::log('Page: No matching template file for "' . $this->template . '" found in "' . dirname($templatePath) . '"! Trying default template folder ...');
 			$templatePath = AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/' . $this->template . '.php';						
 		}
 		
 		// If there is also no match in the default folder,
 		// the default template file is used. 
 		if (!file_exists($templatePath)) {	
-			Debug::pr('Page: No matching template file for "' . $this->template . '" found in "' . dirname($templatePath) . '"! The default template file will be used!');
+			Debug::log('Page: No matching template file for "' . $this->template . '" found in "' . dirname($templatePath) . '"! The default template file will be used!');
 			$templatePath = AM_FILE_DEFAULT_TEMPLATE;	
 		}
 		

@@ -220,7 +220,7 @@ class Site {
 		
 		} else {
 			
-			Debug::pr('No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '/" - Skipped directory!');
+			Debug::log('No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '/" - Skipped directory!');
 		
 		}
 			
@@ -236,7 +236,7 @@ class Site {
 		$this->parseSiteSettings();
 		$this->collectPages();
 		
-		Debug::pr('Site: New Instance created! Pages collected!');
+		Debug::log('Site: New Instance created! Pages collected!');
 		
 	}
 
@@ -292,7 +292,7 @@ class Site {
 			return $themePath;
 		} else {
 			// If not, use the default template location.
-			Debug::pr('Site: Theme "' . $theme . '" not found! Default template folder will be used!');
+			Debug::log('Site: Theme "' . $theme . '" not found! Default template folder will be used!');
 			return AM_DIR_DEFAULT_TEMPLATES;
 		}
 		
