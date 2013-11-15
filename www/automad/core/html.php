@@ -43,6 +43,51 @@ class Html {
 	
 	
 	/**
+	 *	Add an image with an optional link.
+	 *
+	 *	The requested image can be optionally resized and cropped. 
+	 *	If only a file is specified, the placed image keeps its original size and has no link.
+	 *	If the image is a JPG and the description field in its EXIF data is defined, that description is used for the title attribute.
+	 *
+	 *	@param string $file
+	 *	@param string $w
+	 *	@param string $h
+	 *	@param boolean $crop
+	 *	@param string $link
+	 *	@param string $target
+	 *	@return the HTML of an img tag (optionally wrapped by the given link)
+	 */
+	
+	public static function addImage($file, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+		
+		if ($file) {
+							
+			$img = new Image($file, $w, $h, $crop);
+			
+			if ($target) {
+				$target = ' target="' . $target . '"';
+			}
+			
+			$html = '';
+		
+			if ($link) {
+				$html .= '<a href="' . $link . '"' . $target . '>';
+			}
+			
+			$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+			
+			if ($link) {
+				$html .= '</a>';
+			}
+			
+			return $html;
+		
+		}
+		
+	}
+	
+	
+	/**
 	 *	Add link to $page and check, if $page is the current page or within the current path.
 	 *
 	 *	@param object $page
@@ -53,15 +98,15 @@ class Html {
 	public static function addLink($page, $classes = '') {
 	
 		if ($page->isHome()) {	
-			$classes .= ' ' . HTML_CLASS_HOME;	
+			$classes .= ' ' . AM_HTML_CLASS_HOME;	
 		} 
 		
 		if ($page->isCurrent()) {	
-			$classes .= ' ' . HTML_CLASS_CURRENT;
+			$classes .= ' ' . AM_HTML_CLASS_CURRENT;
 		} 
 		
 		if ($page->isInCurrentPath() && !$page->isHome()) {
-			$classes .= ' ' . HTML_CLASS_CURRENT_PATH;	
+			$classes .= ' ' . AM_HTML_CLASS_CURRENT_PATH;	
 		} 
 		
 		$classes = trim($classes);
@@ -98,7 +143,7 @@ class Html {
 			$pagesKeys = array_keys($pages);
 			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
 		
-			$html = '<ul class="' . HTML_CLASS_TREE . $level . '">';	
+			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
 		
 			foreach ($pages as $page) {
 			
@@ -132,16 +177,16 @@ class Html {
 	
 	public static function generateBreadcrumbs($pages) {
 		
-		$html = '<div class="' . HTML_CLASS_BREADCRUMBS . '">';
+		$html = '<div class="' . AM_HTML_CLASS_BREADCRUMBS . '">';
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . HTML_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
 			
 		}
 		
 		// Remove last separator again
-		$html = rtrim($html, HTML_BREADCRUMB_SEPARATOR);
+		$html = rtrim($html, AM_HTML_STR_BREADCRUMB_SEPARATOR);
 		
 		$html .= '</div>';
 		
@@ -165,7 +210,7 @@ class Html {
 			$query = self::getQueryArray();
 			$current = self::getQueryKey('filter');
 		
-			$html = '<ul class="' . HTML_CLASS_FILTER . '">';			
+			$html = '<ul class="' . AM_HTML_CLASS_FILTER . '">';			
 		
 			// If there is no $tagetPage in the options, the filters will be used to filter a page list 
 			// on the current page without leaving the page after selecting a tag.
@@ -175,9 +220,9 @@ class Html {
 			if (!$targetPage) {
 			
 				// Check if current query is empty. 
-				// No query means no filter - in that case the HTML_CLASS_CURRENT gets applied to the "All" button.
+				// No query means no filter - in that case the AM_HTML_CLASS_CURRENT gets applied to the "All" button.
 				if (!$current) {
-					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+					$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 				} else {
 					$class = ' ';
 				}
@@ -187,7 +232,7 @@ class Html {
 				
 				ksort($query);
 					
-				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . HTML_FILTERS_ALL . '</a></li>';
+				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . AM_HTML_TEXT_FILTER_ALL . '</a></li>';
 			
 			}
 		
@@ -195,7 +240,7 @@ class Html {
 			
 				// Check if $tag equals current filter in query
 				if ($current == $tag) {
-					$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+					$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 				} else {
 					$class = ' ';
 				}
@@ -227,21 +272,15 @@ class Html {
 	 *	The function is private and is not supposed to be included in a template.
 	 *
 	 *	@param array $pages (selected pages)
-	 *	@param string $optionStr (variable to output in the list, comma separated)
+	 *	@param array $vars (variables to output in the list)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $optionStr) {
+	public static function generateList($pages, $vars) {
 		
-		if ($pages) {
-		
-			if (!$optionStr) {
-				$optionStr = 'title';
-			}	
-					
-			$vars = Parse::toolOptions($optionStr);
-			
-			$html = '<ul class="' . HTML_CLASS_LIST . '">';
+		if ($pages) {			
+						
+			$html = '<ul class="' . AM_HTML_CLASS_LIST . '">';
 		
 			foreach ($pages as $page) {
 			
@@ -253,13 +292,13 @@ class Html {
 						
 						$text = strip_tags($page->data[$var]);
 						
-						// Shorten $text to maximal HTML_MAX_LIST_STR_LENGTH characters (full words).
-						if (strlen($text) > HTML_LIST_MAX_STR_LENGTH) {
+						// Shorten $text to maximal characters (full words).
+						if (strlen($text) > AM_HTML_LIST_MAX_CHARS) {
 							// Cut $text to max chars
-							$text = substr($text, 0, HTML_LIST_MAX_STR_LENGTH);
+							$text = substr($text, 0, AM_HTML_LIST_MAX_CHARS);
 							// Find last space and get position
 							$pos = strrpos($text, ' ');
-							// Cut $text again at last space's position (< HTML_LIST_MAX_STR_LENGTH)
+							// Cut $text again at last space's position (< AM_HTML_LIST_MAX_CHARS)
 							$text = substr($text, 0, $pos) . ' ...';
 						}
 					
@@ -299,7 +338,7 @@ class Html {
 		
 		if ($pages) {
 		
-			$html = '<ul class="' . HTML_CLASS_NAV . '">';
+			$html = '<ul class="' . AM_HTML_CLASS_NAV . '">';
 		
 			foreach($pages as $page) {
 			
@@ -319,21 +358,14 @@ class Html {
 	/**
 	 * 	Generate search field.
 	 *	
-	 *	@param string $url (absolute URL of the results page)
-	 *	@param string $optionStr (placeholder text)
+	 *	@param string $url (URL of the results page)
+	 *	@param string $placeholderText (placeholder text)
 	 *	@return the HTML for the search field
 	 */
 	
-	public static function generateSearchField($url, $optionStr) {
+	public static function generateSearchField($url, $placeholderText) {
 		
-		// Don't parse $optionStr, since it can be only a string.
-		if (!$optionStr) {
-			$optionStr = HTML_SEARCH_PLACEHOLDER;
-		}
-		
-		$html = '<form class="' . HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $optionStr . '" /></form>';
-	
-		return $html;
+		return '<form class="' . AM_HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $placeholderText . '" /></form>';
 			
 	}
 
@@ -341,32 +373,25 @@ class Html {
 	/**
 	 *	Generate ascending/descending buttons for sorting.
 	 *
-	 *	@param string $optionStr
+	 *	@param array $options - An array with the text for each direction: array('SORT_ASC' => 'asc', 'SORT_DESC' => 'desc')
 	 *	@return the HTML for the buttons
 	 */
 	
-	public static function generateSortDirectionMenu($optionStr) {
+	public static function generateSortDirectionMenu($options) {
 		
 		$query = self::getQueryArray();
 		$current = self::getQueryKey('sort_dir');
 				
 		if (!$current) {
-			$current = HTML_DEFAULT_SORT_DIR;
+			$current = AM_TOOL_DEFAULT_SORT_DIR;
 		}
 		
-		$options = Parse::toolOptions($optionStr);
-		
-		$defaults["SORT_ASC"] = HTML_SORT_ASC;
-		$defaults["SORT_DESC"] = HTML_SORT_DESC;
-		
-		$options = array_merge($defaults, $options);
-		
-		$html = '<ul class="' . HTML_CLASS_SORT . '">';
+		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
 		
 		// Ascending buttom		
 		if ($current == "sort_asc") {
-			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 		} else {
 			$class = ' ';
 		}
@@ -378,7 +403,7 @@ class Html {
 		
 		// Descending button
 		if ($current == "sort_desc") {
-			$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 		} else {
 			$class = ' ';
 		}
@@ -394,34 +419,34 @@ class Html {
 
 	
 	/**
-	 *	Generate the menu to select the sort type from the given types ($optionStr).
+	 *	Generate the menu to select the sort type from the given types ($options).
 	 *
-	 *	@param string $optionStr
+	 *	@param array $options -	An array with the variables to "sort by", where the key is the variable and the value its description. 
+	 *				An array item with a numeric key will be taken for the original order: array('Original', 'title' => 'By Title', 'tags' => 'By Tags').
 	 *	@return the HTML of the menu
 	 */
 	
-	public static function generateSortTypeMenu($optionStr) {
+	public static function generateSortTypeMenu($options) {
 
 		$query = self::getQueryArray();
-		$current = self::getQueryKey('sort_type');		
-		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(HTML_DEFAULT_SORT_TYPES);		
-		$options = array_merge($defaults, $options);
+		$current = self::getQueryKey('sort_type');
 		
+		// All option array items with numeric keys get merged into one item (last one kept).
+		// That way the text for the 'Original Order' button can be defined with just adding a "keyless" value to the array. 
 		for($i=0; isset($options[$i]); $i++){
 			$options[''] = $options[$i];
 			unset($options[$i]);
 		}
-		
+				
 		ksort($options);
 		
-		$html = '<ul class="' . HTML_CLASS_SORT . '">';
+		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
 		foreach ($options as $key => $value) {
 							
 			// Check if $value equals current filter in query
 			if ($current == $key) {
-				$class = ' class="' . HTML_CLASS_CURRENT . '" ';
+				$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
 			} else {
 				$class = ' ';
 			}
@@ -491,7 +516,7 @@ class Html {
 	
 	private static function getQueryKey($key) {
 	
-		// Save currently passed filter query to determine current filter when generating list
+		// Save currently passed filter query to determine current filter/sort_dir when generating list
 		if (isset($_GET[$key])) {
 			$queryKey = $_GET[$key];
 		} else {
@@ -501,7 +526,7 @@ class Html {
 		return $queryKey;
 	
 	}
-	
+		
 	
 }
 

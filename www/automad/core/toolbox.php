@@ -35,11 +35,11 @@
 
 
 /**
- * 	The Tool class holds all methods to be used within the template files.
+ * 	The Toolbox class holds all methods to be used within the template files.
  */
 
 
-class Tool {
+class Toolbox {
 	
 
 	/**
@@ -110,7 +110,7 @@ class Tool {
 		if (isset($_GET['sort_dir'])) {
 			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
 		} else {
-			$this->sortDirection = constant(strtoupper(HTML_DEFAULT_SORT_DIR));
+			$this->sortDirection = constant(strtoupper(AM_TOOL_DEFAULT_SORT_DIR));
 		}
 		
 	}
@@ -126,6 +126,44 @@ class Tool {
 		
 		return Html::generateFilterMenu($this->P->tags, $this->P->parentRelUrl);
 		
+	}
+	
+
+	/**
+	 *	Place an image with an optional link.
+	 *
+	 *	@param string $optionStr - (file: path/to/file, width: px, height: px, crop: 1, link: url, target: _blank)
+	 *	@return HTML for the image output
+	 */
+	
+	public function img($optionStr) {
+		
+		$options = Parse::toolOptions($optionStr);	
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_IMG);
+		$options = array_merge($defaults, $options);
+		$file = $options[AM_TOOL_OPTION_KEY_FILENAME];
+				
+		if ($file) {
+			
+			if (strpos($file, '/') === 0) {
+				// Relative to root
+				$file = AM_BASE_DIR . $file;
+			} else {
+				// Relative to page
+				$path = ltrim($this->P->relPath . '/', '/');
+				$file = AM_BASE_DIR . AM_DIR_PAGES . '/' . $path . $file;
+			}
+		
+			$w = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
+			$h = intval($options[AM_TOOL_OPTION_KEY_HEIGHT]);
+			$crop = (boolean)intval($options[AM_TOOL_OPTION_KEY_CROP]);
+			$link = $options[AM_TOOL_OPTION_KEY_LINK];
+			$target = $options[AM_TOOL_OPTION_KEY_TARGET];
+		
+			return Html::addImage($file, $w, $h, $crop, $link, $target);
+			
+		}
+
 	}
 	
 	
@@ -158,7 +196,7 @@ class Tool {
 		
 		// Check if there is a previous page and return HTML
 		if (isset($pages['prev'])) {
-			return Html::addLink($pages['prev'], HTML_CLASS_PREV);
+			return Html::addLink($pages['prev'], AM_HTML_CLASS_PREV);
 		}
 		
 	}
@@ -179,7 +217,7 @@ class Tool {
 		
 		// Check if there is a next page and return HTML
 		if (isset($pages['next'])) {
-			return Html::addLink($pages['next'], HTML_CLASS_NEXT);
+			return Html::addLink($pages['next'], AM_HTML_CLASS_NEXT);
 		}
 		
 	}
@@ -195,6 +233,12 @@ class Tool {
 	
 	public function listAll($optionStr) {
 	
+		$vars = Parse::toolOptions($optionStr);
+		
+		if (empty($vars)) {
+			$vars = array('title');
+		}
+
 		$selection = new Selection($this->collection);	
 		$selection->filterByTag($this->filter);
 		$selection->sortPages($this->sortType, $this->sortDirection);
@@ -203,7 +247,7 @@ class Tool {
 		// Remove current page from selecion
 		unset($pages[$this->P->relUrl]);
 	
-		return Html::generateList($pages, $optionStr);	
+		return Html::generateList($pages, $vars);	
 		
 	}
 
@@ -218,18 +262,24 @@ class Tool {
 	
 	public function listChildren($optionStr) {
 		
+		$vars = Parse::toolOptions($optionStr);
+		
+		if (empty($vars)) {
+			$vars = array('title');
+		}
+		
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($this->P->relUrl);
 		$selection->filterByTag($this->filter);
 		$selection->sortPages($this->sortType, $this->sortDirection);
 		
-		return Html::generateList($selection->getSelection(), $optionStr);
+		return Html::generateList($selection->getSelection(), $vars);
 		
 	}
 	
 
 	/**
-	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Tool::listAll()
+	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Toolbox::listAll()
 	 *
 	 *	This method should be used together with the listAll() method.
 	 *
@@ -261,7 +311,7 @@ class Tool {
 
 
 	/**
-	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Tool::listChildren()
+	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Toolbox::listChildren()
 	 *
 	 *	This method should be used together with the listChildren() method.
 	 *
@@ -291,7 +341,7 @@ class Tool {
 
 	
 	/**
-	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Tool::listChildren() and Tool::listAll()
+	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
 	 *	@return the HTML for the sort menu
@@ -299,14 +349,18 @@ class Tool {
 	
 	public function menuSortDirection($optionStr) {
 		
-		// $this->sortDirection gets passed as well to let Html know what flag is set to apply the correct "current" class to the HTML tag
-		return Html::generateSortDirectionMenu($this->sortDirection, $optionStr);
+		$options = Parse::toolOptions($optionStr);
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_DIR);
+		$options = array_merge($defaults, $options);
+		
+		return Html::generateSortDirectionMenu($options);
 		
 	}
 		
 
 	/**
-	 *	Place a set of sort options. The menu only affects lists of pages created by Tool::listChildren() and Tool::listAll()
+	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll().
+	 *	If the $optionStr is missing, the default options are used.
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
@@ -314,7 +368,11 @@ class Tool {
 
 	public function menuSortType($optionStr) {
 		
-		return Html::generateSortTypeMenu($optionStr);
+		$options = Parse::toolOptions($optionStr);
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_TYPE);		
+		$options = array_merge($defaults, $options);
+		
+		return Html::generateSortTypeMenu($options);
 		
 	}
 
@@ -469,6 +527,12 @@ class Tool {
 	
 	public function relatedPages($optionStr) {
 		
+		$vars = Parse::toolOptions($optionStr);
+		
+		if (empty($vars)) {
+			$vars = array('title');
+		}
+		
 		$pages = array();
 		$tags = $this->P->tags;
 		
@@ -488,7 +552,7 @@ class Tool {
 		$selection = new Selection($pages);
 		$selection->sortPagesByPath();
 		
-		return Html::generateList($selection->getSelection(), $optionStr);
+		return Html::generateList($selection->getSelection(), $vars);
 				
 	}
 	
@@ -496,13 +560,18 @@ class Tool {
 	/**
 	 * 	Place a search field with placeholder text.
 	 *
-	 *	@param string $optionStr (optional) - placeholder text
+	 *	@param string $optionStr (optional) - placeholder text, just a simple string
 	 *	@return the HTML of the searchfield
 	 */
 	
 	public function searchField($optionStr) {
 		
-		return Html::generateSearchField(SITE_RESULTS_PAGE_URL, $optionStr);
+		// Don't parse $optionStr, since it can be only a string.
+		if (!$optionStr) {
+			$optionStr = AM_TOOL_OPTIONS_SEARCH;
+		}
+		
+		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $optionStr);
 		
 	}
 
@@ -518,6 +587,12 @@ class Tool {
 		
 		if (isset($_GET["search"])) {
 			
+			$vars = Parse::toolOptions($optionStr);
+		
+			if (empty($vars)) {
+				$vars = array('title');
+			}
+			
 			$search = $_GET["search"];
 			
 			$selection = new Selection($this->collection);
@@ -526,7 +601,7 @@ class Tool {
 			
 			$pages = $selection->getSelection();
 			
-			return Html::generateList($pages, $optionStr);
+			return Html::generateList($pages, $vars);
 			
 		}
 		
@@ -536,7 +611,7 @@ class Tool {
 	/**
 	 * 	Return any item from the site settings file (/shared/site.txt).
 	 *
-	 *	@param string $optionStr
+	 *	@param string $optionStr - Any variable key from the site settings file (/shared/site.txt)
 	 *	@return site data item
 	 */
 	

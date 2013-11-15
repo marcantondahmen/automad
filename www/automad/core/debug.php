@@ -37,7 +37,7 @@
 /**
  *	The Debug class holds all methods to help debugging while development.
  *	
- *	The output of all the contained methods can be activated/deactivated with defining the DEBUG_MODE constant.
+ *	The output of all the contained methods can be activated/deactivated with defining the AM_DEBUG_ENABLED constant.
  */
 
 
@@ -50,13 +50,24 @@ class Debug {
 	 *	@param mixed $var
 	 */
 	
-	public static function pr($var) {
+	public static function log($var) {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 			
-			echo '<pre>';
-			print_r($var);
-			echo '</pre>';
+			if (AM_DEBUG_CONSOLE) {
+			
+				echo "<script type='text/javascript'>console.log(";
+				echo json_encode($var);
+				echo ");</script>\n";
+				
+				
+			} else {
+			
+				echo "<pre>";
+				print_r($var);
+				echo "</pre>\n";
+			
+			}
 			
 		}
 		
@@ -69,7 +80,7 @@ class Debug {
 	
 	public static function reportAllErrors() {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 		
 			error_reporting(E_ALL);
 			
@@ -84,9 +95,9 @@ class Debug {
 	
 	public static function timerStart() {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 			
-			define('DEBUG_TIMER_START', microtime(true));
+			define('AM_DEBUG_TIMER_START', microtime(true));
 			
 		}	
 		
@@ -94,16 +105,16 @@ class Debug {
 	
 	
 	/**
-	 *	Substract the initial microtime (stored in DEBUG_TIMER_START) from the current microtime 
+	 *	Substract the initial microtime (stored in AM_DEBUG_TIMER_START) from the current microtime 
 	 *	and print out the difference.
 	 */
 	
 	public static function timerEnd() {
 		
-		if (DEBUG_MODE) {
+		if (AM_DEBUG_ENABLED) {
 			
-			$seconds = microtime(true) - DEBUG_TIMER_START;
-			Debug::pr('Time for execution: ' . $seconds . ' seconds');
+			$seconds = microtime(true) - AM_DEBUG_TIMER_START;
+			Debug::log('Time for execution: ' . $seconds . ' seconds');
 			
 		}
 		
