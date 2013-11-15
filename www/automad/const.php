@@ -52,6 +52,9 @@ if (file_exists(AM_BASE_DIR . '/.htaccess')) {
 if (!defined('AM_DEBUG_ENABLED')) {
 	define('AM_DEBUG_ENABLED', false);
 }
+if (!defined('AM_DEBUG_CONSOLE')) {
+	define('AM_DEBUG_CONSOLE', false);
+}
 
 
 // DIR
@@ -82,9 +85,13 @@ if (!defined('AM_DIR_DEFAULT_TEMPLATES')) {
 if (!defined('AM_FILE_SITE_SETTINGS')) {
 	define('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.txt'); 
 }
-// Site modification time last checked
+// Site modification time
 if (!defined('AM_FILE_SITE_MTIME')) {
 	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/site_mtime');
+}
+// Site object cache
+if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
+	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/site_object');
 }
 // Default template
 if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
