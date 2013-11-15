@@ -198,19 +198,19 @@ if (!defined('AM_TOOL_DEFAULT_SORT_DIR')) {
 
 
 // TEMPLATE DEFAULTS
-// Left delimiter for template variables
+// Left delimiter for page variables
 if (!defined('AM_TMPLT_DEL_VAR_L')) {
-	define('AM_TMPLT_DEL_VAR_L', '[');
+	define('AM_TMPLT_DEL_VAR_L', 'p[');
 }
-// Right delimiter for template variables
+// Right delimiter for page variables
 if (!defined('AM_TMPLT_DEL_VAR_R')) {
 	define('AM_TMPLT_DEL_VAR_R', ']');
 }
-// Left delimiter for template functions
+// Left delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_L')) {
-	define('AM_TMPLT_DEL_TOOL_L', '$[');
+	define('AM_TMPLT_DEL_TOOL_L', 't[');
 }
-// Right delimiter for template functions
+// Right delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_R')) {
 	define('AM_TMPLT_DEL_TOOL_R', ']');
 }
