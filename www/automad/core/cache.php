@@ -35,22 +35,37 @@
 
 
 /**
- *	The Cache class holds all methods for evaluating, reading and writing the HTML output from/to AM_DIR_CACHE.
+ *	The Cache class holds all methods for evaluating, reading and writing the HTML output and the Site object from/to AM_DIR_CACHE.
+ *	Basically there are three things which get cached - the latest modification time of all the site's files and directories (site's mTime), the page's HTML and the Site object.
  *
- *	First a virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO, the QUERY_STRING and the SERVER_NAME.
+ *	The workflow:
+ *	
+ *	1. 
+ *	A virtual file name of a possibly existing cached version of the visited page gets determined from the PATH_INFO, the QUERY_STRING and the SERVER_NAME.
  *	To keep the whole site portable, the SERVER_NAME within the path is very important, to make sure, that all links/URLs are relative to the correct root directory.
  *	("sub.domain.com/" and "www.domain.com/sub" will return different root relative URLs > "/" and "/sub", but may host the same site > each will get its own /cache/directory)
  *
- *	In a second step, the existance of that file gets verified.
- *
- *	Third, the mtime of the site (last modified page mtime) gets determined and compared with the cache file's mtime. (That process gets limited by a certain delay)
- *	If the cache file mtime is smaller than the latest mtime (site), false gets returned.
- *
- *	To determine the latest changed page from all the existing pages, all directories under /pages and all *.txt files get collected in an array.
- *	The mtime for each item in that array gets stored in a new array ($mTimes[$item]). After sorting, all keys are stored in $mTimesKeys.
+ *	2. 
+ *	The site's mTime gets determined. To keep things fast, the mTime gets only re-calculated after a certain delay and then stored in AM_FILE_SITE_MTIME. 
+ *	In between the mTime just gets loaded from that file. That means that not later then AM_CACHE_MONITOR_DELAY seconds, all pages will be up to date again.
+ *	To determine the latest changed item, all directories and files under /pages, /shared, /themes and /config get collected in an array.
+ *	The filemtime for each item in that array gets stored in a new array ($mTimes[$item]). After sorting, all keys are stored in $mTimesKeys.
  *	The last modified item is then = end($mTimesKeys), and its mtime is $mTimes[$lastItem].
  *	Compared to using max() on the $mTime array, this method is a bit more complicated, but also determines, which of the items was last edited and not only its mtime.
  *	(That gives a bit more control for debugging)
+ *
+ *	3.
+ *	When calling now Cache::pageCacheIsApproved() from outside, true will be returned if the cached file exists and is newer than the site's mTime (and of course caching is active).
+ *	If the cache is validated, Cache::readPageFromCache() can return the full HTML to be echoed.
+ *	
+ *	4. 
+ *	In case the page's cached HTML is deprecated, Cache::siteObjectCacheIsApproved() can be called to verify the status of the Site object cache (a file holding the serialized Site object ($S)).
+ *	If the Site object cache is approved, Cache::readSiteObjectFromCache() returns the unserialized Site object to be used to create an updated page from a template (outside of Cache).
+ *	That step is very helpful, since the current page's cache might be outdated, but other pages might be already up to date again and therefore the Site object cache might be updated also in the mean time.
+ *	So when something got changed across the Site, the Site object only has to be created once to be reused to update all pages. 
+ *
+ *	5.
+ *	In case the page and the Site object are deprecated, after creating both, they can be saved to cache using Cache::writePageToCache() and Cache::writeSiteObjectToCache().
  */
 
 
@@ -63,6 +78,13 @@ class Cache {
 	
 	private $pageCacheFile;
 	
+
+	/**
+	 *	The latest modification time of the whole website (any file or directory).
+	 */
+	
+	private $siteMTime;
+	
 	
 	/**
 	 *	The constructor just determines $pageCacheFile to make it available within the instance.
@@ -70,7 +92,18 @@ class Cache {
 	
 	public function __construct() {
 		
-		$this->pageCacheFile = $this->getPageCacheFilePath();
+		if (AM_CACHE_ENABLED) {
+			
+			Debug::log('Cache: New Instance created!');
+			
+			$this->pageCacheFile = $this->getPageCacheFilePath();
+			$this->siteMTime = $this->getSiteMTime();
+		
+		} else {
+			
+			Debug::log('Cache: Caching is disabled!');
+			
+		}
 		
 	}
 	
@@ -85,55 +118,87 @@ class Cache {
 		
 		if (AM_CACHE_ENABLED) {
 	
-			if (file_exists($this->pageCacheFile)) {
-		
-				if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
-
-					// The modification times get only checked every AM_CACHE_MONITOR_DELAY seconds, since
-					// the process of collecting all mtimes itself takes some time too.
-					// After scanning, the mTime gets written to a file.
-					$siteMTime = $this->getSiteMTime();
-					file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));			
-					Debug::log('Cache: Scanned all pages and saved Site-mTime: ' . date('d. M Y, H:i:s', $siteMTime));
+			if (file_exists($this->pageCacheFile)) {	
 					
-				} else {
-					
-					// In between it just gets loaded from a file.
-					$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-					Debug::log('Cache: Load Site-mTime from file: ' . date('d. M Y, H:i:s', $siteMTime));
-			
-				}
-			
 				$cacheMTime = filemtime($this->pageCacheFile);
 			
-				if ($cacheMTime < $siteMTime) {
+				if ($cacheMTime < $this->siteMTime) {
 					
 					// If the cached page is older than the site's mTime,
 					// the cache gets no approval.
-					Debug::log('Cache: Cached version is deprecated! Cache-mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+					Debug::log('Cache: Page cache is deprecated!'); 
+					Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
 					return false;
 					
 				} else {
 					
 					// If the cached page is newer, it gets approved.
-					Debug::log('Cache: Cached version got approved! Cache-mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+					Debug::log('Cache: Page cache got approved!');
+					Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
 					return true;
 					
 				}
 	
 			} else {
 		
-				Debug::log('Cache: Cached file does not exist!');
+				Debug::log('Cache: Page cache does not exist!');
 				return false;
 		
 			}
 	
 		} else {
 			
-			Debug::log('Cache: Caching is disabled!');
+			Debug::log('Cache: Caching is disabled! Not checking page cache!');
 			return false;
 			
 		}
+		
+	}
+
+
+	/**
+	 *	Verify if the cached version of the Site object is existingand  still up to date.
+	 *
+	 *	@return boolean 
+	 */
+
+	public function siteObjectCacheIsApproved() {
+		
+		if (AM_CACHE_ENABLED) {
+		
+			if (file_exists(AM_FILE_SITE_OBJECT_CACHE)) {
+		
+				$siteObjectMTime = filemtime(AM_FILE_SITE_OBJECT_CACHE);
+			
+				if ($siteObjectMTime < $this->siteMTime) {
+				
+					Debug::log('Cache: Site object cache is deprecated!');
+					Debug::log('       Site object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
+					return false;
+				
+				} else {
+					
+					Debug::log('Cache: Site object cache got approved!');
+					Debug::log('       Site object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
+					return true;
+					
+				}
+			
+			} else {
+				
+				Debug::log('Cache: Site object cache does not exist!');
+				return false;
+				
+			}
+			
+			
+		} else {
+			
+			Debug::log('Cache: Caching is disabled! Not checking site object!');
+			return false;
+			
+		}
+		
 		
 	}
 
@@ -169,59 +234,80 @@ class Cache {
 	/**
 	 *	Get an array of all subdirectories and *.txt files under /pages and determine the latest mtime among all these items.
 	 *	That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.
+	 *	To be efficient under heavy traffic, the Site-mTime only gets re-determined after a certain delay.
 	 *
 	 *	@return The latest found mtime, which equal basically the site's modification time.
 	 */
 	
 	private function getSiteMTime() {
 		
-		$arrayDirsAndFiles = array();
+		if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 		
-		// The following directories are monitored for any changes.
-		$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_THEMES, AM_DIR_SHARED, '/config');
+			// The modification times get only checked every AM_CACHE_MONITOR_DELAY seconds, since
+			// the process of collecting all mtimes itself takes some time too.
+			// After scanning, the mTime gets written to a file. 
 		
-		foreach($monitoredDirs as $monitoredDir) {
+			$arrayDirsAndFiles = array();
 		
-			// Get all directories below the monitored directory (including the monitored directory).
+			// The following directories are monitored for any changes.
+			$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_THEMES, AM_DIR_SHARED, '/config');
+		
+			foreach($monitoredDirs as $monitoredDir) {
+		
+				// Get all directories below the monitored directory (including the monitored directory).
 			
-			// Add base dir to string.
-			$dir = AM_BASE_DIR . $monitoredDir;
+				// Add base dir to string.
+				$dir = AM_BASE_DIR . $monitoredDir;
 			
-			// Also add the directory itself, to monitor the top level.	
-			$arrayDirs = array($dir);
+				// Also add the directory itself, to monitor the top level.	
+				$arrayDirs = array($dir);
 	
-			while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
-				$dir .= '/*';
-				$arrayDirs = array_merge($arrayDirs, $dirs);
-			}
+				while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
+					$dir .= '/*';
+					$arrayDirs = array_merge($arrayDirs, $dirs);
+				}
 
-			// Get all files
-			$arrayFiles = array();
+				// Get all files
+				$arrayFiles = array();
 	
-			foreach ($arrayDirs as $d) {
-				$arrayFiles = array_merge($arrayFiles, array_filter(glob($d . '/*'), 'is_file'));
+				foreach ($arrayDirs as $d) {
+					$arrayFiles = array_merge($arrayFiles, array_filter(glob($d . '/*'), 'is_file'));
+				}
+		
+				// Merge all files and dirs into the full collection.
+				$arrayDirsAndFiles = array_merge($arrayDirsAndFiles, $arrayDirs, $arrayFiles);
+
 			}
 		
-			// Merge all files and dirs into the full collection.
-			$arrayDirsAndFiles = array_merge($arrayDirsAndFiles, $arrayDirs, $arrayFiles);
-
-		}
+			// Collect all modification times and find last modified item
+			$mTimes = array();
+	
+			foreach ($arrayDirsAndFiles as $item) {
+				$mTimes[$item] = filemtime($item);
+			}
+	
+			// Needs to be that complicated to get the key and the mtime for debugging.
+			// Can't use max() for that.
+			asort($mTimes);
+			$mTimesKeys = array_keys($mTimes);
+			$lastModifiedItem = end($mTimesKeys);
+			$siteMTime = $mTimes[$lastModifiedItem];
+			
+			// Save mTime
+			file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));
+			
+			Debug::log('Cache: Scanned directories and saved Site-mTime.');
+			Debug::log('       Last modified item: ' . $lastModifiedItem); 
+			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
 		
-		// Collect all modification times and find last modified item
-		$mTimes = array();
-	
-		foreach ($arrayDirsAndFiles as $item) {
-			$mTimes[$item] = filemtime($item);
+		} else {
+			
+			// In between this delay, it just gets loaded from a file.
+			$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
+			Debug::log('Cache: Load Site-mTime from file.');
+			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
+			
 		}
-	
-		// Needs to be that complicated to get the key and the mtime for debugging.
-		// Can't use max() for that.
-		asort($mTimes);
-		$mTimesKeys = array_keys($mTimes);
-		$lastModifiedItem = end($mTimesKeys);
-		$siteMTime = $mTimes[$lastModifiedItem];
-	
-		Debug::log('Cache: Last modified: "' . $lastModifiedItem . '" - ' . date('d. M Y, H:i:s', $siteMTime));
 		
 		return $siteMTime;
 		
@@ -236,8 +322,26 @@ class Cache {
 	
 	public function readPageFromCache() {
 		
-		Debug::log('Cache: Read: ' . $this->pageCacheFile);
+		Debug::log('Cache: Read page: ' . $this->pageCacheFile);
 		return file_get_contents($this->pageCacheFile);
+		
+	}
+	
+	
+	/**
+	 *	 Read (unserialize) the Site object from AM_FILE_SITE_OBJECT_CACHE.
+	 *
+	 *	@return Site object
+	 */
+	
+	public function readSiteObjectFromCache() {
+		
+		$site = unserialize(file_get_contents(AM_FILE_SITE_OBJECT_CACHE));
+		
+		Debug::log('Cache: Read site object: ' . AM_FILE_SITE_OBJECT_CACHE);
+		Debug::log($site->getCollection());
+		
+		return $site;
 		
 	}
 	
@@ -255,10 +359,37 @@ class Cache {
 		    	}
 		
 			file_put_contents($this->pageCacheFile, $output);
+			Debug::log('Cache: Write page: ' . $this->pageCacheFile);
 		
-			Debug::log('Cache: Write: ' . $this->pageCacheFile);
-		
+		} else {
+			
+			Debug::log('Cache: Caching is disabled! Not writing page to cache!');
+			
 		}
+		
+	}
+	
+	
+	/**
+	 *	Write (serialize) the Site object to AM_FILE_SITE_OBJECT_CACHE.
+	 */
+	
+	public function writeSiteObjectToCache($site) {
+		
+		if (AM_CACHE_ENABLED) {
+		
+			if(!file_exists(dirname(AM_FILE_SITE_OBJECT_CACHE))) {
+				mkdir(dirname(AM_FILE_SITE_OBJECT_CACHE), 0700, true);
+		    	}
+		
+			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($site));
+			Debug::log('Cache: Write site object: ' . AM_FILE_SITE_OBJECT_CACHE);
+		
+		} else {
+			
+			Debug::log('Cache: Caching is disabled! Not writing site object to cache!');
+			
+		}	
 		
 	}
 	
