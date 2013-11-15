@@ -87,11 +87,11 @@ if (!defined('AM_FILE_SITE_SETTINGS')) {
 }
 // Site modification time
 if (!defined('AM_FILE_SITE_MTIME')) {
-	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/site_mtime');
+	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/cached_site_mtime');
 }
 // Site object cache
 if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
-	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/site_object');
+	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/cached_site_object');
 }
 // Default template
 if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
