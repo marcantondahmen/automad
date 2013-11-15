@@ -88,11 +88,25 @@ if ($C->pageCacheIsApproved()) {
 	
 } else {
 	
-	// If the cache is not approved,
-	// everything has to be re-rendered.
-	$S = new Site();
+	// Else check if the site object cache is ok...
+	if ($C->siteObjectCacheIsApproved()) {
+		
+		// If approved, load site from cache...
+		$S = $C->readSiteObjectFromCache();
+		
+	} else {
+	
+		// Else create new Site.
+		$S = new Site();
+		$C->writeSiteObjectToCache($S);
+	
+	}
+	
+	// Render template
 	$T = new Template($S);
 	$output = $T->render();
+	
+	// Save output to cache...
 	$C->writePageToCache($output);
 	
 }
@@ -104,6 +118,7 @@ echo $output;
 
 // Display execution time and user constants
 Debug::timerEnd();
+Debug::log('User constants:');
 Debug::log(get_defined_constants(true)['user']);
 
 
