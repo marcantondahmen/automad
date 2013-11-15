@@ -16,6 +16,9 @@ define('AM_HTML_LIST_MAX_CHARS', 80);
 // Activate debugging
 define('AM_DEBUG_ENABLED', true);
 
+// Use console.log for debugging
+define('AM_DEBUG_CONSOLE', true);
+
 // Cache settings
 define('AM_CACHE_ENABLED', true);
 define('AM_CACHE_MONITOR_DELAY', 60);
