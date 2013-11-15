@@ -56,16 +56,16 @@ class Debug {
 			
 			if (AM_DEBUG_CONSOLE) {
 			
-				echo '<script>console.log(';
+				echo "<script type='text/javascript'>console.log(";
 				echo json_encode($var);
-				echo ');</script>';
+				echo ");</script>\n";
 				
 				
 			} else {
 			
-				echo '<pre>';
+				echo "<pre>";
 				print_r($var);
-				echo '</pre>';
+				echo "</pre>\n";
 			
 			}
 			
