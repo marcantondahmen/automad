@@ -150,8 +150,7 @@ class Toolbox {
 				$file = AM_BASE_DIR . $file;
 			} else {
 				// Relative to page
-				$path = ltrim($this->P->relPath . '/', '/');
-				$file = AM_BASE_DIR . AM_DIR_PAGES . '/' . $path . $file;
+				$file = AM_BASE_DIR . AM_DIR_PAGES . $this->P->relPath . $file;
 			}
 		
 			$w = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
