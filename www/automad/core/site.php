@@ -151,9 +151,9 @@ class Site {
 	 *	@param string $parentRelUrl
 	 */
 	 
-	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
+	private function collectPages($relPath = '/', $level = 0, $parentRelUrl = '') {
 		
-		$fullPath = rtrim(AM_BASE_DIR . AM_DIR_PAGES . '/' . $relPath, '/');
+		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $relPath;
 		
 		Debug::log('      ' . $fullPath);
 		
@@ -170,8 +170,8 @@ class Site {
 		
 					if (!in_array($item, $ignore)) {
 					
-						$itemFullPath = $fullPath . '/' . $item;
-									
+						$itemFullPath = $fullPath . $item;
+						
 						// If $item is a file with the AM_FILE_EXT_DATA, $item gets added to the index.
 						// In case there are more than one matching file, the last accessed gets added.
 						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == AM_FILE_EXT_DATA) {
@@ -208,8 +208,8 @@ class Site {
 						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
 						if (is_dir($itemFullPath)) {
 						
-							$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
-						
+							$this->collectPages($relPath . $item . '/', $level + 1, $relUrl);
+							
 						}
 						
 					}
