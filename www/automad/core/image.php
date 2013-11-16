@@ -115,7 +115,7 @@ class Image {
 	 *	The full file system path to the generated image.
 	 */
 	
-	public $fileFullPath;
+	private $fileFullPath;
 	
 	
 	/**
