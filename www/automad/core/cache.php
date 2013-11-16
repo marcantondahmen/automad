@@ -232,7 +232,8 @@ class Cache {
 	
 	
 	/**
-	 *	Get an array of all subdirectories and *.txt files under /pages and determine the latest mtime among all these items.
+	 *	Get an array of all subdirectories and all files under /pages, /shared, /themes and /config (and the version.php) 
+	 *	and determine the latest mtime among all these items.
 	 *	That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.
 	 *	To be efficient under heavy traffic, the Site-mTime only gets re-determined after a certain delay.
 	 *
@@ -247,7 +248,12 @@ class Cache {
 			// the process of collecting all mtimes itself takes some time too.
 			// After scanning, the mTime gets written to a file. 
 		
-			$arrayDirsAndFiles = array();
+			// $arrayDirsAndFiles will collect all relevant files and dirs to be monitored for changes.
+			// At first, since it it just a single file, it will hold version.php. 
+			// (This file always exists and there is no can needed to add it to the array)
+			// The version file represents all changes to the core files, since it will always be increased with a changeset,
+			// so the core itself doesn't need to be scanned.
+			$arrayDirsAndFiles = array(AM_BASE_DIR . '/automad/version.php');
 		
 			// The following directories are monitored for any changes.
 			$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_THEMES, AM_DIR_SHARED, '/config');
