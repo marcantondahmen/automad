@@ -155,6 +155,8 @@ class Site {
 		
 		$fullPath = rtrim(AM_BASE_DIR . AM_DIR_PAGES . '/' . $relPath, '/');
 		
+		Debug::log('      ' . $fullPath);
+		
 		// Test if the directory actually has a data file.		
 		if (count(glob($fullPath . '/*.' . AM_FILE_EXT_DATA)) > 0) {
 						
@@ -233,11 +235,11 @@ class Site {
 	
 	public function __construct() {
 		
+		Debug::log('Site: New Instance created!');
+		Debug::log('Site: Scan directories for page content:');
+		
 		$this->parseSiteSettings();
 		$this->collectPages();
-		
-		Debug::log('Site: New Instance created!');
-		Debug::log('Site: Pages collected!');
 		
 	}
 
