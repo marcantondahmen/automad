@@ -146,8 +146,8 @@ if (!defined('AM_IMG_JPG_QUALITY')) {
 
 // TOOL KEYS
 // String to be used within the options to define a filename/filepath
-if (!defined('AM_TOOL_OPTION_KEY_FILENAME')) {
-	define('AM_TOOL_OPTION_KEY_FILENAME', 'file');
+if (!defined('AM_TOOL_OPTION_KEY_FILE_GLOB')) {
+	define('AM_TOOL_OPTION_KEY_FILE_GLOB', 'file');
 }
 // String to be used within the options to define a width
 if (!defined('AM_TOOL_OPTION_KEY_WIDTH')) {
@@ -182,11 +182,11 @@ if (!defined('AM_TOOL_OPTION_KEY_TEMPLATE')) {
 // TOOL OPTIONS
 // Default list options
 if (!defined('AM_TOOL_OPTIONS_LIST')) {
-	define('AM_TOOL_OPTIONS_LIST', AM_TOOL_OPTION_KEY_CHILDREN_ONLY . ': 0, title');
+	define('AM_TOOL_OPTIONS_LIST', 'title');
 }
 // Default img options
 if (!defined('AM_TOOL_OPTIONS_IMG')) {
-	define('AM_TOOL_OPTIONS_IMG', AM_TOOL_OPTION_KEY_FILENAME . ': , ' . AM_TOOL_OPTION_KEY_WIDTH . ': , ' . AM_TOOL_OPTION_KEY_HEIGHT . ': , ' . AM_TOOL_OPTION_KEY_CROP . ': 0, ' . AM_TOOL_OPTION_KEY_LINK . ': , ' . AM_TOOL_OPTION_KEY_TARGET . ': ');
+	define('AM_TOOL_OPTIONS_IMG', AM_TOOL_OPTION_KEY_FILE_GLOB . ': , ' . AM_TOOL_OPTION_KEY_WIDTH . ': , ' . AM_TOOL_OPTION_KEY_HEIGHT . ': , ' . AM_TOOL_OPTION_KEY_CROP . ': 0, ' . AM_TOOL_OPTION_KEY_LINK . ': , ' . AM_TOOL_OPTION_KEY_TARGET . ': ');
 }
 // Placeholder text for search field
 if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
