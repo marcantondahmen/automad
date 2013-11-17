@@ -181,9 +181,11 @@ class Site {
 							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 							// In case the title is missig for the home page, use the site name instead.
 							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-								if ($relUrl) {
-									$data['title'] = ucwords(basename($relUrl));
+								if (trim($relUrl, '/')) {
+									// If page is not the home page...
+									$data['title'] = ucwords(str_replace(array('_', '-'), ' ', basename($relUrl)));
 								} else {
+									// If page is home page...
 									$data['title'] = $this->getSiteName();
 								}
 							} 
