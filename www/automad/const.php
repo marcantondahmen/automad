@@ -169,10 +169,22 @@ if (!defined('AM_TOOL_OPTION_KEY_LINK')) {
 if (!defined('AM_TOOL_OPTION_KEY_TARGET')) {
 	define('AM_TOOL_OPTION_KEY_TARGET', 'target');
 }
+// String to be used within the options to define display children only
+if (!defined('AM_TOOL_OPTION_KEY_CHILDREN_ONLY')) {
+	define('AM_TOOL_OPTION_KEY_CHILDREN_ONLY', 'children_only');
+}
+// String to be used within the options to define a page template
+if (!defined('AM_TOOL_OPTION_KEY_TEMPLATE')) {
+	define('AM_TOOL_OPTION_KEY_TEMPLATE', 'template');
+}
 
 
 // TOOL OPTIONS
-// Default Tool options
+// Default list options
+if (!defined('AM_TOOL_OPTIONS_LIST')) {
+	define('AM_TOOL_OPTIONS_LIST', AM_TOOL_OPTION_KEY_CHILDREN_ONLY . ': 0, title');
+}
+// Default img options
 if (!defined('AM_TOOL_OPTIONS_IMG')) {
 	define('AM_TOOL_OPTIONS_IMG', AM_TOOL_OPTION_KEY_FILENAME . ': , ' . AM_TOOL_OPTION_KEY_WIDTH . ': , ' . AM_TOOL_OPTION_KEY_HEIGHT . ': , ' . AM_TOOL_OPTION_KEY_CROP . ': 0, ' . AM_TOOL_OPTION_KEY_LINK . ': , ' . AM_TOOL_OPTION_KEY_TARGET . ': ');
 }
