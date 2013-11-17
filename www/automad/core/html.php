@@ -283,10 +283,11 @@ class Html {
 	 *
 	 *	@param array $pages (selected pages)
 	 *	@param array $vars (variables to output in the list)
+	 *	@param array $imageOptions (options for displaying an image based on a glob pattern)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars) {
+	public static function generateList($pages, $vars, $imageOptions) {
 		
 		if ($pages) {			
 						
@@ -295,6 +296,22 @@ class Html {
 			foreach ($pages as $page) {
 			
 				$html .= '<li><a href="' . $page->relUrl . '">';
+				
+				if ($imageOptions) {
+					
+					$glob = $imageOptions['glob'];
+					
+					if (strpos($glob, '/') === 0) {
+						// Relative to root
+						$glob = AM_BASE_DIR . $glob;
+					} else {
+						// Relative to page
+						$glob = AM_BASE_DIR . AM_DIR_PAGES . $page->relPath . $glob;
+					}
+					
+					$html .= Html::addImage($glob, $imageOptions['width'], $imageOptions['height'], $imageOptions['crop']);
+					
+				}
 			
 				foreach ($vars as $var) {
 				
