@@ -84,10 +84,7 @@ class Selection {
 		
 		if (array_key_exists($url, $this->selection)) {
 			unset($this->selection[$url]);
-			Debug::log('Removed ' . $url  . ' from Selection!');
-		} else {
-			Debug::log($url . ' not in selection!');
-		}
+		} 
 		
 	}
 	
