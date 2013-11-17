@@ -85,6 +85,20 @@ class Toolbox {
 	
 	
 	/**
+	 *	List options
+	 */
+	
+	private $listOptionArray;
+	
+	
+	/**
+	 *	Selection of pages to be listed
+	 */
+	
+	private $listSelection;
+	
+	
+	/**
 	 * 	The Site object is passed as an argument. It shouldn't be created again (performance).
 	 */
 		
@@ -223,130 +237,127 @@ class Toolbox {
 
 
 	/**
-	 * 	Return the HTML for a list of all pages excluding the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($optionStr).
-	 *
-	 *	@param string $optionStr - All variables from the page's text file which should be included in the output. Expample: $[listAll(title, subtitle, date)]
-	 *	@return the HTML of the list
+	 *	Define the options for a following page list.
+	 *	The options are defined in one comma separated string.
+	 *	Key:Pair item define optional parameters (filter by template or display only children pages) while all single items (title, tags ...)
+	 *	define the set of variables from the listed page's txt file to be displayed.
+	 *	Example:
+	 *	("children_only: 1, template: page, title, subtitle, tags") 
+	 *	will set up a list which only shows its children (children_only: 1), which use the "page" template (template: page).
+	 *	The data displayed for every page are the title, subtitle and the tags (title, subtitle, tags). 
+	 *	
+	 *	@param string $optionStr ("children_only: 0, template: page, title, subtitle, tags")
 	 */
-	
-	public function listAll($optionStr) {
-	
-		$vars = Parse::toolOptions($optionStr);
-		
-		if (empty($vars)) {
-			$vars = array('title');
-		}
 
+	public function listOptions($optionStr) {
+		
+		// Parse options and defaults.
+		$options = Parse::toolOptions($optionStr);
+		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_LIST);
+		$options = array_merge($defaults, $options);
+		
+		// Make the children_only option an integer.
+		$options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY] = intval($options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY]);
+		
+		// Set up an empty array for all displayed variables.
+		$options['vars'] = array();
+		foreach($options as $key => $value) {
+			if (is_int($key)) {
+				$options['vars'][] = $value;
+				unset($options[$key]);
+			}
+		}
+	
+		// Create a selection.
+		// Filtering by tag and sorting has to be handled by listPages() since that filters should not
+		// influence listFilters menu itself.
 		$selection = new Selection($this->collection);	
+		
+		// Exclude curretn page.
+		$selection->excludePage($this->P->relUrl);
+		
+		// Filters which influence both (listPages & listFilters) can be handled here:
+		// Filter the selection optionally by the current page as parent (children_only = 1).
+		if ($options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY]) {
+			$selection->filterByParentUrl($this->P->relUrl);
+		}
+		// Filter the selection optionally by a template name.
+		if (isset($options[AM_TOOL_OPTION_KEY_TEMPLATE])) {
+			$selection->filterByTemplate($options[AM_TOOL_OPTION_KEY_TEMPLATE]);
+		}
+		
+		$this->listSelection = $selection;
+		$this->listOptionArray = $options;
+		
+		Debug::log('Toolbox: List options:');
+		Debug::log($options);
+		Debug::log('Toolbox: List pages:');
+		Debug::log($selection->getSelection());
+
+	}
+
+
+	/**
+	 *	Create a page list from the given options defined in Toolbox::listOptions().
+	 *
+	 *	@return The HTML of the page list.
+	 */
+
+	public function listPages() {	
+	
+		$options = $this->listOptionArray;
+		$selection = $this->listSelection;
+		
+		// Filter by tag.
 		$selection->filterByTag($this->filter);
-		$selection->sortPages($this->sortType, $this->sortDirection);
-		$pages = $selection->getSelection();
-	
-		// Remove current page from selecion
-		unset($pages[$this->P->relUrl]);
-	
-		return Html::generateList($pages, $vars);	
 		
-	}
-
-	
-	/**
-	 * 	Return the HTML for a list of pages below the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($optionStr).
-	 *
-	 *	@param string $optionStr - All variables from the page's text file which should be included in the output. Expample: $[listAll(title, subtitle, date)]
-	 *	@return the HTML of the list
-	 */
-	
-	public function listChildren($optionStr) {
-		
-		$vars = Parse::toolOptions($optionStr);
-		
-		if (empty($vars)) {
-			$vars = array('title');
-		}
-		
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($this->P->relUrl);
-		$selection->filterByTag($this->filter);
+		// Sort selection.
 		$selection->sortPages($this->sortType, $this->sortDirection);
 		
-		return Html::generateList($selection->getSelection(), $vars);
-		
-	}
-	
-
-	/**
-	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Toolbox::listAll()
-	 *
-	 *	This method should be used together with the listAll() method.
-	 *
-	 *	@return the HTML of the filter menu
-	 */
-	
-	public function menuFilterAll() {
-		
-		$selection = new Selection($this->collection);
+		// Get pages.
 		$pages = $selection->getSelection();
 		
-		// Remove current page from selecion
-		unset($pages[$this->P->relUrl]);
-		
-		$tags = array();
-		
-		foreach ($pages as $page) {
-			
-			$tags = array_merge($tags, $page->tags);
-			
-		}
-		
-		$tags = array_unique($tags);
-		sort($tags);
-		
-		return Html::generateFilterMenu($tags);
+		return Html::generateList($pages, $options['vars']);	
 		
 	}
 
 
 	/**
-	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Toolbox::listChildren()
+	 *	Create a filter menu to filter a page list created by Toolbox::listPages() regarding the options defined by Toolbox::listOptions().
 	 *
-	 *	This method should be used together with the listChildren() method.
-	 *
-	 *	@return the HTML of the filter menu
+	 *	@return The HTML for the filter menu.
 	 */
-	
-	public function menuFilterChildren() {
+
+	public function listFilters() {
 		
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($this->P->relUrl);
-		$pages = $selection->getSelection();
+		// Get relevant pages to determine the relevant tags.
+		$pages = $this->listSelection->getSelection();
 		
-		$tags = array();
+		if ($pages) {
 		
-		foreach ($pages as $page) {
-			
-			$tags = array_merge($tags, $page->tags);
-			
+			$tags = array();
+			foreach ($pages as $page) {
+				$tags = array_merge($tags, $page->tags);
+			}
+		
+			$tags = array_unique($tags);
+			sort($tags);
+		
+			return Html::generateFilterMenu($tags);
+		
 		}
-		
-		$tags = array_unique($tags);
-		sort($tags);
-		
-		return Html::generateFilterMenu($tags);
 		
 	}
 
 	
 	/**
-	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll()
+	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listPages()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
 	 *	@return the HTML for the sort menu
 	 */
 	
-	public function menuSortDirection($optionStr) {
+	public function listSortDirection($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);
 		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_DIR);
@@ -358,14 +369,14 @@ class Toolbox {
 		
 
 	/**
-	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll().
+	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listPages().
 	 *	If the $optionStr is missing, the default options are used.
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
 	 */
 
-	public function menuSortType($optionStr) {
+	public function listSortTypes($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);
 		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_TYPE);		
