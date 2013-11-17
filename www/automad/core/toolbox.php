@@ -127,6 +127,9 @@ class Toolbox {
 			$this->sortDirection = constant(strtoupper(AM_TOOL_DEFAULT_SORT_DIR));
 		}
 		
+		// Set default list options
+		$this->listOptions();
+		
 	}
 	
 	
@@ -146,7 +149,7 @@ class Toolbox {
 	/**
 	 *	Place an image with an optional link.
 	 *
-	 *	@param string $optionStr - (file: path/to/file, width: px, height: px, crop: 1, link: url, target: _blank)
+	 *	@param string $optionStr - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1, link: url, target: _blank)
 	 *	@return HTML for the image output
 	 */
 	
@@ -155,16 +158,16 @@ class Toolbox {
 		$options = Parse::toolOptions($optionStr);	
 		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_IMG);
 		$options = array_merge($defaults, $options);
-		$file = $options[AM_TOOL_OPTION_KEY_FILENAME];
+		$glob = $options[AM_TOOL_OPTION_KEY_FILE_GLOB];
 				
-		if ($file) {
+		if ($glob) {
 			
-			if (strpos($file, '/') === 0) {
+			if (strpos($glob, '/') === 0) {
 				// Relative to root
-				$file = AM_BASE_DIR . $file;
+				$glob = AM_BASE_DIR . $glob;
 			} else {
 				// Relative to page
-				$file = AM_BASE_DIR . AM_DIR_PAGES . $this->P->relPath . $file;
+				$glob = AM_BASE_DIR . AM_DIR_PAGES . $this->P->relPath . $glob;
 			}
 		
 			$w = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
@@ -173,7 +176,7 @@ class Toolbox {
 			$link = $options[AM_TOOL_OPTION_KEY_LINK];
 			$target = $options[AM_TOOL_OPTION_KEY_TARGET];
 		
-			return Html::addImage($file, $w, $h, $crop, $link, $target);
+			return Html::addImage($glob, $w, $h, $crop, $link, $target);
 			
 		}
 
@@ -245,19 +248,58 @@ class Toolbox {
 	 *	("children_only: 1, template: page, title, subtitle, tags") 
 	 *	will set up a list which only shows its children (children_only: 1), which use the "page" template (template: page).
 	 *	The data displayed for every page are the title, subtitle and the tags (title, subtitle, tags). 
+	 *
+	 *	The method doesn't return any variable, but it will define the $listSelection and the $listOptionArray.
+	 *	The $listOptionArray is a multidimensional array with the following elements:
+	 *	"children_only", "template", "image" (array with image options) and "vars" (array with the txt variables to display).
 	 *	
 	 *	@param string $optionStr ("children_only: 0, template: page, title, subtitle, tags")
 	 */
 
-	public function listOptions($optionStr) {
+	public function listOptions($optionStr = '') {
 		
 		// Parse options and defaults.
 		$options = Parse::toolOptions($optionStr);
 		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_LIST);
 		$options = array_merge($defaults, $options);
 		
-		// Make the children_only option an integer.
-		$options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY] = intval($options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY]);
+		// Make the boolean options boolean.
+		if (array_key_exists(AM_TOOL_OPTION_KEY_CHILDREN_ONLY, $options)) {
+			$options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY] = (boolean)intval($options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY]);
+		} else {
+			$options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY] = false;
+		}
+		
+		// Set up image options.
+		$options['image'] = array();
+	
+		if (array_key_exists(AM_TOOL_OPTION_KEY_FILE_GLOB, $options)) {
+			
+			$options['image']['glob'] = $options[AM_TOOL_OPTION_KEY_FILE_GLOB];
+			unset($options[AM_TOOL_OPTION_KEY_FILE_GLOB]);
+			
+			if (array_key_exists(AM_TOOL_OPTION_KEY_WIDTH, $options)) {
+				$options['image']['width'] = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
+				unset($options[AM_TOOL_OPTION_KEY_WIDTH]);
+			} else {
+				$options['image']['width'] = false;
+			}
+			
+			if (array_key_exists(AM_TOOL_OPTION_KEY_HEIGHT, $options)) {
+				$options['image']['height'] = intval($options[AM_TOOL_OPTION_KEY_HEIGHT]);
+				unset($options[AM_TOOL_OPTION_KEY_HEIGHT]);
+			} else {
+				$options['image']['height'] = false;
+			}
+			
+			if (array_key_exists(AM_TOOL_OPTION_KEY_CROP, $options)) {
+				$options['image']['crop'] = (boolean)intval($options[AM_TOOL_OPTION_KEY_CROP]);
+				unset($options[AM_TOOL_OPTION_KEY_CROP]);
+			} else {
+				$options['image']['crop'] = false;
+			}
+			
+		}
 		
 		// Set up an empty array for all displayed variables.
 		$options['vars'] = array();
@@ -317,7 +359,7 @@ class Toolbox {
 		// Get pages.
 		$pages = $selection->getSelection();
 		
-		return Html::generateList($pages, $options['vars']);	
+		return Html::generateList($pages, $options['vars'], $options['image']);	
 		
 	}
 
@@ -347,6 +389,38 @@ class Toolbox {
 		
 		}
 		
+	}
+	
+	
+	/**
+	 * 	Generate a list of pages having at least one tag in common with the current page regarding the options defined by Toolbox::listOptions().
+	 *
+	 *	@return html of the generated list
+	 */
+	
+	public function listRelated() {
+		
+		$options = $this->listOptionArray;
+		
+		$pages = array();
+		$tags = $this->P->tags;
+		
+		// Get pages
+		foreach ($tags as $tag) {
+			
+			$selection = new Selection($this->collection);
+			$selection->filterByTag($tag);			
+			$pages = array_merge($pages, $selection->getSelection());
+						
+		}
+		
+		// Sort pages & remove current page from selecion
+		$selection = new Selection($pages);
+		$selection->excludePage($this->P->relUrl);
+		$selection->sortPagesByPath();
+		
+		return Html::generateList($selection->getSelection(), $options['vars'], $options['image']);
+				
 	}
 
 	
@@ -527,45 +601,6 @@ class Toolbox {
 	
 	}
 
-	
-	/**
-	 * 	Generate a list of pages having at least one tag in common with the current page.
-	 *
-	 *	@param string $optionStr - Variables from the text files to be included in the output. Example: $[relatedPages(title, date)]
-	 *	@return html of the generated list
-	 */
-	
-	public function relatedPages($optionStr) {
-		
-		$vars = Parse::toolOptions($optionStr);
-		
-		if (empty($vars)) {
-			$vars = array('title');
-		}
-		
-		$pages = array();
-		$tags = $this->P->tags;
-		
-		// Get pages
-		foreach ($tags as $tag) {
-			
-			$selection = new Selection($this->collection);
-			$selection->filterByTag($tag);			
-			$pages = array_merge($pages, $selection->getSelection());
-						
-		}
-		
-		// Remove current page from selecion
-		unset($pages[$this->P->relUrl]);
-		
-		// Sort pages
-		$selection = new Selection($pages);
-		$selection->sortPagesByPath();
-		
-		return Html::generateList($selection->getSelection(), $vars);
-				
-	}
-	
 		
 	/**
 	 * 	Place a search field with placeholder text.
