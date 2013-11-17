@@ -75,6 +75,24 @@ class Selection {
 	
 	
 	/**
+	 *	Remove a page from the selection.
+	 *
+	 *	@param string $url
+	 */
+	
+	public function excludePage($url) {
+		
+		if (array_key_exists($url, $this->selection)) {
+			unset($this->selection[$url]);
+			Debug::log('Removed ' . $url  . ' from Selection!');
+		} else {
+			Debug::log($url . ' not in selection!');
+		}
+		
+	}
+	
+	
+	/**
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@return array $this->selection
@@ -131,6 +149,27 @@ class Selection {
 			$this->selection = $filtered;
 		
 		} 
+		
+	}
+
+	
+	/**
+	 *	Filter $this->selection by the template of the parent page.
+	 *
+	 *	@param string $template
+	 */
+	
+	public function filterByTemplate($template) {
+		
+		$filtered = array();
+		
+		foreach ($this->selection as $key => $page) {
+			if ($page->template == $template) {
+				$filtered[$key] = $page;
+			}
+		}
+		
+		$this->selection = $filtered;
 		
 	}
 	
