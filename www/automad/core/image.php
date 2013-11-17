@@ -336,8 +336,13 @@ class Image {
 	
 	private function getDescription() {
 		
-		if ($this->type == 'image/jpeg') {	
-			return exif_read_data($this->originalFile)['ImageDescription'];
+		if ($this->type == 'image/jpeg') {
+			$exif = exif_read_data($this->originalFile);
+			if (array_key_exists('ImageDescription', $exif)) {
+				return $exif['ImageDescription'];
+			} else {
+				return '';
+			}
 		} else {
 			return '';
 		}
