@@ -44,12 +44,13 @@ class Html {
 	
 	/**
 	 *	Add an image with an optional link.
+	 *	A glob pattern can be passed as an image. The first match will then be used.
 	 *
 	 *	The requested image can be optionally resized and cropped. 
 	 *	If only a file is specified, the placed image keeps its original size and has no link.
 	 *	If the image is a JPG and the description field in its EXIF data is defined, that description is used for the title attribute.
 	 *
-	 *	@param string $file
+	 *	@param string $glob
 	 *	@param string $w
 	 *	@param string $h
 	 *	@param boolean $crop
@@ -58,7 +59,16 @@ class Html {
 	 *	@return the HTML of an img tag (optionally wrapped by the given link)
 	 */
 	
-	public static function addImage($file, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+		
+		if ($glob) {
+			
+			$files = glob($glob);	
+			$file = reset($files);
+			
+			Debug::log('Html: First image matching ' . basename($glob) . ' is ' . $file);
+			
+		}
 		
 		if ($file) {
 							
