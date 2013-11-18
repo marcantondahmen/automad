@@ -155,12 +155,27 @@ class Toolbox {
 	
 	public function img($optionStr) {
 		
-		$options = Parse::toolOptions($optionStr);	
-		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_IMG);
-		$options = array_merge($defaults, $options);
-		$glob = $options[AM_TOOL_OPTION_KEY_FILE_GLOB];
-				
-		if ($glob) {
+		// Defaults options array
+		$defaults = 	array(
+					'file' => '',
+					'width' => false,
+					'height' => false,
+					'crop' => false,
+					'link' => false,
+					'target' => false
+				);
+		
+		// Merge options with defaults				
+		$options = array_merge($defaults, Parse::toolOptions($optionStr));
+		
+		// Turn relevant vars into integer
+		foreach(array('width', 'height', 'crop') as $key) {
+			$options[$key] = intval($options[$key]);
+		}
+			
+		if ($options['file']) {
+			
+			$glob = $options['file'];
 			
 			if (strpos($glob, '/') === 0) {
 				// Relative to root
@@ -170,13 +185,7 @@ class Toolbox {
 				$glob = AM_BASE_DIR . AM_DIR_PAGES . $this->P->relPath . $glob;
 			}
 		
-			$w = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
-			$h = intval($options[AM_TOOL_OPTION_KEY_HEIGHT]);
-			$crop = (boolean)intval($options[AM_TOOL_OPTION_KEY_CROP]);
-			$link = $options[AM_TOOL_OPTION_KEY_LINK];
-			$target = $options[AM_TOOL_OPTION_KEY_TARGET];
-		
-			return Html::addImage($glob, $w, $h, $crop, $link, $target);
+			return Html::addImage($glob, $options['width'], $options['height'], $options['crop'], $options['link'], $options['target']);
 			
 		}
 
@@ -260,41 +269,41 @@ class Toolbox {
 		
 		// Parse options and defaults.
 		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_LIST);
+		$defaults = array('title');
 		$options = array_merge($defaults, $options);
 		
 		// Make the boolean options boolean.
-		if (array_key_exists(AM_TOOL_OPTION_KEY_CHILDREN_ONLY, $options)) {
-			$options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY] = (boolean)intval($options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY]);
+		if (array_key_exists('children_only', $options)) {
+			$options['children_only'] = (boolean)intval($options['children_only']);
 		} else {
-			$options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY] = false;
+			$options['children_only'] = false;
 		}
 		
 		// Set up image options.
 		$options['image'] = array();
 	
-		if (array_key_exists(AM_TOOL_OPTION_KEY_FILE_GLOB, $options)) {
+		if (array_key_exists('file', $options)) {
 			
-			$options['image']['glob'] = $options[AM_TOOL_OPTION_KEY_FILE_GLOB];
-			unset($options[AM_TOOL_OPTION_KEY_FILE_GLOB]);
+			$options['image']['glob'] = $options['file'];
+			unset($options['file']);
 			
-			if (array_key_exists(AM_TOOL_OPTION_KEY_WIDTH, $options)) {
-				$options['image']['width'] = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
-				unset($options[AM_TOOL_OPTION_KEY_WIDTH]);
+			if (array_key_exists('width', $options)) {
+				$options['image']['width'] = intval($options['width']);
+				unset($options['width']);
 			} else {
 				$options['image']['width'] = false;
 			}
 			
-			if (array_key_exists(AM_TOOL_OPTION_KEY_HEIGHT, $options)) {
-				$options['image']['height'] = intval($options[AM_TOOL_OPTION_KEY_HEIGHT]);
-				unset($options[AM_TOOL_OPTION_KEY_HEIGHT]);
+			if (array_key_exists('height', $options)) {
+				$options['image']['height'] = intval($options['height']);
+				unset($options['height']);
 			} else {
 				$options['image']['height'] = false;
 			}
 			
-			if (array_key_exists(AM_TOOL_OPTION_KEY_CROP, $options)) {
-				$options['image']['crop'] = (boolean)intval($options[AM_TOOL_OPTION_KEY_CROP]);
-				unset($options[AM_TOOL_OPTION_KEY_CROP]);
+			if (array_key_exists('crop', $options)) {
+				$options['image']['crop'] = (boolean)intval($options['crop']);
+				unset($options['crop']);
 			} else {
 				$options['image']['crop'] = false;
 			}
@@ -320,12 +329,12 @@ class Toolbox {
 		
 		// Filters which influence both (listPages & listFilters) can be handled here:
 		// Filter the selection optionally by the current page as parent (children_only = 1).
-		if ($options[AM_TOOL_OPTION_KEY_CHILDREN_ONLY]) {
+		if ($options['children_only']) {
 			$selection->filterByParentUrl($this->P->relUrl);
 		}
 		// Filter the selection optionally by a template name.
-		if (isset($options[AM_TOOL_OPTION_KEY_TEMPLATE])) {
-			$selection->filterByTemplate($options[AM_TOOL_OPTION_KEY_TEMPLATE]);
+		if (isset($options['template'])) {
+			$selection->filterByTemplate($options['template']);
 		}
 		
 		$this->listSelection = $selection;
