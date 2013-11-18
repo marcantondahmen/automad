@@ -74,23 +74,27 @@ class Html {
 							
 			$img = new Image($file, $w, $h, $crop);
 			
-			if ($target) {
-				$target = ' target="' . $target . '"';
-			}
+			if ($img->file) {
 			
-			$html = '';
+				if ($target) {
+					$target = ' target="' . $target . '"';
+				}
+			
+				$html = '';
 		
-			if ($link) {
-				$html .= '<a href="' . $link . '"' . $target . '>';
-			}
+				if ($link) {
+					$html .= '<a href="' . $link . '"' . $target . '>';
+				}
 			
-			$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+				$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
 			
-			if ($link) {
-				$html .= '</a>';
-			}
+				if ($link) {
+					$html .= '</a>';
+				}
 			
-			return $html;
+				return $html;
+				
+			}	
 		
 		}
 		
