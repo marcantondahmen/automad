@@ -144,50 +144,7 @@ if (!defined('AM_IMG_JPG_QUALITY')) {
 }
 
 
-// TOOL KEYS
-// String to be used within the options to define a filename/filepath
-if (!defined('AM_TOOL_OPTION_KEY_FILE_GLOB')) {
-	define('AM_TOOL_OPTION_KEY_FILE_GLOB', 'file');
-}
-// String to be used within the options to define a width
-if (!defined('AM_TOOL_OPTION_KEY_WIDTH')) {
-	define('AM_TOOL_OPTION_KEY_WIDTH', 'width');
-}
-// String to be used within the options to define a height
-if (!defined('AM_TOOL_OPTION_KEY_HEIGHT')) {
-	define('AM_TOOL_OPTION_KEY_HEIGHT', 'height');
-}
-// String to be used within the options to define the crop parameter
-if (!defined('AM_TOOL_OPTION_KEY_CROP')) {
-	define('AM_TOOL_OPTION_KEY_CROP', 'crop');
-}
-// String to be used within the options to define a link
-if (!defined('AM_TOOL_OPTION_KEY_LINK')) {
-	define('AM_TOOL_OPTION_KEY_LINK', 'link');
-}
-// String to be used within the options to define a link target
-if (!defined('AM_TOOL_OPTION_KEY_TARGET')) {
-	define('AM_TOOL_OPTION_KEY_TARGET', 'target');
-}
-// String to be used within the options to define display children only
-if (!defined('AM_TOOL_OPTION_KEY_CHILDREN_ONLY')) {
-	define('AM_TOOL_OPTION_KEY_CHILDREN_ONLY', 'children_only');
-}
-// String to be used within the options to define a page template
-if (!defined('AM_TOOL_OPTION_KEY_TEMPLATE')) {
-	define('AM_TOOL_OPTION_KEY_TEMPLATE', 'template');
-}
-
-
 // TOOL OPTIONS
-// Default list options
-if (!defined('AM_TOOL_OPTIONS_LIST')) {
-	define('AM_TOOL_OPTIONS_LIST', 'title');
-}
-// Default img options
-if (!defined('AM_TOOL_OPTIONS_IMG')) {
-	define('AM_TOOL_OPTIONS_IMG', AM_TOOL_OPTION_KEY_FILE_GLOB . ': , ' . AM_TOOL_OPTION_KEY_WIDTH . ': , ' . AM_TOOL_OPTION_KEY_HEIGHT . ': , ' . AM_TOOL_OPTION_KEY_CROP . ': 0, ' . AM_TOOL_OPTION_KEY_LINK . ': , ' . AM_TOOL_OPTION_KEY_TARGET . ': ');
-}
 // Placeholder text for search field
 if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
 	define('AM_TOOL_OPTIONS_SEARCH', 'Search ...');
