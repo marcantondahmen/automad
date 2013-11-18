@@ -149,34 +149,38 @@ class Image {
 			
 			$getimagesize = getimagesize($originalFile);
 			
-			$this->originalFile = $originalFile;
-			$this->originalWidth = $getimagesize[0];
-			$this->originalHeight = $getimagesize[1];	
-			$this->type = $getimagesize['mime'];
-			$this->description = $this->getDescription();
-			$this->crop = $crop;
-		
-			if ($requestedWidth) {
-				$this->requestedWidth = $requestedWidth;
-			} else {
-				$this->requestedWidth = $this->originalWidth;
-			}
-		
-			if ($requestedHeight) {
-				$this->requestedHeight = $requestedHeight;
-			} else {
-				$this->requestedHeight = $this->originalHeight;
-			}
-	
-			// Get the possible size for the generated image (based on crop and original size).
-			$this->calculateSize();
+			if ($getimagesize) {
 			
-			// Get the filename hash, based on the given settings, to check later, if the file exists.
-			$this->file = $this->getImageCacheFilePath();
-			$this->fileFullPath = AM_BASE_DIR . $this->file;
+				$this->originalFile = $originalFile;
+				$this->originalWidth = $getimagesize[0];
+				$this->originalHeight = $getimagesize[1];	
+				$this->type = $getimagesize['mime'];
+				$this->description = $this->getDescription();
+				$this->crop = $crop;
 		
-			// Check if an image with the generated hash exists already and create the file, when neccassary.
-			$this->verifyCachedImage();
+				if ($requestedWidth) {
+					$this->requestedWidth = $requestedWidth;
+				} else {
+					$this->requestedWidth = $this->originalWidth;
+				}
+		
+				if ($requestedHeight) {
+					$this->requestedHeight = $requestedHeight;
+				} else {
+					$this->requestedHeight = $this->originalHeight;
+				}
+	
+				// Get the possible size for the generated image (based on crop and original size).
+				$this->calculateSize();
+			
+				// Get the filename hash, based on the given settings, to check later, if the file exists.
+				$this->file = $this->getImageCacheFilePath();
+				$this->fileFullPath = AM_BASE_DIR . $this->file;
+		
+				// Check if an image with the generated hash exists already and create the file, when neccassary.
+				$this->verifyCachedImage();
+				
+			}
 			
 		}
 		
