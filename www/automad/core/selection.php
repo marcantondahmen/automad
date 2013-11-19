@@ -148,6 +148,40 @@ class Selection {
 		} 
 		
 	}
+	
+	
+	/**
+	 *	Filter all pages having one or more tag in common with $page.
+	 *
+	 *	@param object $page
+	 */
+	
+	public function filterRelated($page) {
+		
+		$tags = $page->tags;
+		
+		if ($tags) {
+		
+			$filtered = array();
+		
+			foreach ($tags as $tag) {
+			
+				foreach($this->selection as $key => $p) {
+		
+					if (in_array($tag, $p->tags)) {
+						$filtered[$key] = $p;
+					}			
+					
+				}		
+						
+			}
+	
+		}
+		
+		$this->selection = $filtered;
+		$this->excludePage($page->relUrl);
+		
+	}
 
 	
 	/**
@@ -158,15 +192,19 @@ class Selection {
 	
 	public function filterByTemplate($template) {
 		
-		$filtered = array();
+		if ($template) {
 		
-		foreach ($this->selection as $key => $page) {
-			if ($page->template == $template) {
-				$filtered[$key] = $page;
+			$filtered = array();
+		
+			foreach ($this->selection as $key => $page) {
+				if ($page->template == $template) {
+					$filtered[$key] = $page;
+				}
 			}
-		}
 		
-		$this->selection = $filtered;
+			$this->selection = $filtered;
+		
+		}
 		
 	}
 	
@@ -310,6 +348,7 @@ class Selection {
 	public function sortPages($var, $order = SORT_ASC) {
 		
 		if ($var) {
+			
 			// If $var is set the selections is sorted by data[$var]
 			$arrayToSortBy = array();
 		
