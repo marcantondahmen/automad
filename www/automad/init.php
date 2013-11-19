@@ -47,7 +47,9 @@ include AM_BASE_DIR . '/automad/const.php';
 
 // Remove trailing slash from URL to keep relative links consistent
 if (isset($_SERVER['PATH_INFO'])) {
-	if (substr($_SERVER['PATH_INFO'], -1) == '/') {
+	// Test if PATH_INFO ends with '/' without just being '/',
+	// otherwise an infinite loop can be created when accessing the home page.
+	if (substr($_SERVER['PATH_INFO'], -1) == '/' && $_SERVER['PATH_INFO'] != '/') {
 		header('Location: ' . AM_BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
 		exit;	
 	}	
