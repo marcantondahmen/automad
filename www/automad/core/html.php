@@ -278,20 +278,18 @@ class Html {
 		
 	
 	/**
-	 * 	Generate the HTML for a page list out of a selection of pages and a string of variables.
-	 *
-	 *	The string of variables represents the variables used in the page's 
-	 *	text file which should be included in the HTML of the list.
-	 * 
-	 *	The function is private and is not supposed to be included in a template.
+	 *	Generate the HTML for a page list out of a selection of pages, an array of variables and optional image settings.
 	 *
 	 *	@param array $pages (selected pages)
 	 *	@param array $vars (variables to output in the list)
-	 *	@param array $imageOptions (options for displaying an image based on a glob pattern)
+	 *	@param string $glob (glob pattern to find a corresponding image within each page directory)
+	 *	@param integer $width
+	 *	@param integer $height
+	 *	@param integer $crop
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars, $imageOptions) {
+	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false) {
 		
 		if ($pages) {			
 						
@@ -301,19 +299,25 @@ class Html {
 			
 				$html .= '<li><a href="' . $page->relUrl . '">';
 				
-				if ($imageOptions) {
+				if ($glob) {
 					
-					$glob = $imageOptions['glob'];
+					// For each page, the glob pattern is matched against the page's direcory (if the glob is relative),
+					// to find a corresponding image as thumbnail.
+					// For example $glob = '*.jpg' will always use the first JPG in the page's directoy.
+					// To re-use $glob for every page in the loop, $glob can't be modified and 
+					// therefore $pageGlob will be used to build the full glob pattern.
+	
+					$pageGlob = $glob;
 					
-					if (strpos($glob, '/') === 0) {
+					if (strpos($pageGlob, '/') === 0) {
 						// Relative to root
-						$glob = AM_BASE_DIR . $glob;
+						$pageGlob = AM_BASE_DIR . $pageGlob;
 					} else {
 						// Relative to page
-						$glob = AM_BASE_DIR . AM_DIR_PAGES . $page->relPath . $glob;
+						$pageGlob = AM_BASE_DIR . AM_DIR_PAGES . $page->relPath . $pageGlob;
 					}
 					
-					$html .= Html::addImage($glob, $imageOptions['width'], $imageOptions['height'], $imageOptions['crop']);
+					$html .= Html::addImage($pageGlob, $width, $height, $crop);
 					
 				}
 			
