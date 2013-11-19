@@ -85,17 +85,10 @@ class Toolbox {
 	
 	
 	/**
-	 *	List options
+	 *	The Listing object to be used for all list* methods.
 	 */
 	
-	private $listOptionArray;
-	
-	
-	/**
-	 *	Selection of pages to be listed
-	 */
-	
-	private $listSelection;
+	private $L;
 	
 	
 	/**
@@ -127,8 +120,8 @@ class Toolbox {
 			$this->sortDirection = constant(strtoupper(AM_TOOL_DEFAULT_SORT_DIR));
 		}
 		
-		// Set default list options
-		$this->listOptions();
+		// Set up default Listing object
+		$this->listSetup();
 		
 	}
 	
@@ -155,7 +148,7 @@ class Toolbox {
 	
 	public function img($optionStr) {
 		
-		// Defaults options array
+		// Default options
 		$defaults = 	array(
 					'file' => '',
 					'width' => false,
@@ -249,126 +242,75 @@ class Toolbox {
 
 
 	/**
-	 *	Define the options for a following page list.
-	 *	The options are defined in one comma separated string.
-	 *	Key:Pair item define optional parameters (filter by template or display only children pages) while all single items (title, tags ...)
-	 *	define the set of variables from the listed page's txt file to be displayed.
-	 *	Example:
-	 *	("children_only: 1, template: page, title, subtitle, tags") 
-	 *	will set up a list which only shows its children (children_only: 1), which use the "page" template (template: page).
-	 *	The data displayed for every page are the title, subtitle and the tags (title, subtitle, tags). 
+	 *	Setup a new Listing object based on a string of comma separated options and the current filtering and sorting settings.
 	 *
-	 *	The method doesn't return any variable, but it will define the $listSelection and the $listOptionArray.
-	 *	The $listOptionArray is a multidimensional array with the following elements:
-	 *	"children_only", "template", "image" (array with image options) and "vars" (array with the txt variables to display).
+	 *	An example for such a string could be ("title, subtitle, type: children, template: page, file: *.jpg, width: 200, crop: 1") 
+	 *	and would create a Listing object including all pages below the current page with "page" as their template,
+	 *	showing the title and subtitle of each page along with an image, cropped to 200px width.
+	 *
+	 *	All options in that string are optional.<br>
+	 *	All options passed as a simple string (for example "title" without a ":") are interpreted as variables from the page's text file, like the title etc.
+	 *	and represent a variable in the Listing's output.<br> 
+	 *	So, a string like ("tilte, subtitle") will create a list where each page's title ans subtitle will show up.
 	 *	
-	 *	@param string $optionStr ("children_only: 0, template: page, title, subtitle, tags")
+	 *	All options passed as a "Key: Value" pair are interpreted as special options to format the Listing and specify the included pages. 
+	 *	Possible options are:
+	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
+	 *	- "template: name" 		(all pages matching that template)
+	 *	- "file: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
+	 *	- "width: pixels" 		(image width, passed as interger value without unit: "width: 100")
+	 *	- "height: pixels" 		(image height, passed as interger value without unit: "width: 100")
+	 *	- "crop: 0 | 1"			(crop image or not)
+	 *	
+	 *	@param string $optionStr 
 	 */
 
-	public function listOptions($optionStr = '') {
+	public function listSetup($optionStr = '') {
 		
-		// Parse options and defaults.
-		$options = Parse::toolOptions($optionStr);
-		$defaults = array('title');
-		$options = array_merge($defaults, $options);
-		
-		// Make the boolean options boolean.
-		if (array_key_exists('children_only', $options)) {
-			$options['children_only'] = (boolean)intval($options['children_only']);
-		} else {
-			$options['children_only'] = false;
-		}
-		
-		// Set up image options.
-		$options['image'] = array();
+		// Default setup
+		$defaults = 	array(
+					'type' => 'all',
+					'template' => false,
+					'file' => false,
+					'width' => false,
+					'height' => false,
+					'crop' => false,
+					'vars' => array('title')
+				);
 	
-		if (array_key_exists('file', $options)) {
-			
-			$options['image']['glob'] = $options['file'];
-			unset($options['file']);
-			
-			if (array_key_exists('width', $options)) {
-				$options['image']['width'] = intval($options['width']);
-				unset($options['width']);
-			} else {
-				$options['image']['width'] = false;
-			}
-			
-			if (array_key_exists('height', $options)) {
-				$options['image']['height'] = intval($options['height']);
-				unset($options['height']);
-			} else {
-				$options['image']['height'] = false;
-			}
-			
-			if (array_key_exists('crop', $options)) {
-				$options['image']['crop'] = (boolean)intval($options['crop']);
-				unset($options['crop']);
-			} else {
-				$options['image']['crop'] = false;
-			}
-			
+		// Merge defaults with options
+		$options = array_merge($defaults, Parse::toolOptions($optionStr));
+		
+		// Turn relevant vars into integer
+		foreach(array('width', 'height', 'crop') as $key) {
+			$options[$key] = intval($options[$key]);
 		}
 		
-		// Set up an empty array for all displayed variables.
-		$options['vars'] = array();
+		// Move numeric elements into vars array
 		foreach($options as $key => $value) {
 			if (is_int($key)) {
-				$options['vars'][] = $value;
+				$options['vars'][$key] = $value;
 				unset($options[$key]);
 			}
 		}
-	
-		// Create a selection.
-		// Filtering by tag and sorting has to be handled by listPages() since that filters should not
-		// influence listFilters menu itself.
-		$selection = new Selection($this->collection);	
 		
-		// Exclude curretn page.
-		$selection->excludePage($this->P->relUrl);
+		// Create new Listing out of $options and (!) the current filter and sort settings. 
+		$this->L = new Listing($this->S, $this->filter, $this->sortType, $this->sortDirection, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
 		
-		// Filters which influence both (listPages & listFilters) can be handled here:
-		// Filter the selection optionally by the current page as parent (children_only = 1).
-		if ($options['children_only']) {
-			$selection->filterByParentUrl($this->P->relUrl);
-		}
-		// Filter the selection optionally by a template name.
-		if (isset($options['template'])) {
-			$selection->filterByTemplate($options['template']);
-		}
-		
-		$this->listSelection = $selection;
-		$this->listOptionArray = $options;
-		
-		Debug::log('Toolbox: List options:');
-		Debug::log($options);
-		Debug::log('Toolbox: List pages:');
-		Debug::log($selection->getSelection());
-
 	}
 
 
 	/**
-	 *	Create a page list from the given options defined in Toolbox::listOptions().
+	 *	Return a page list from Listing object created by Toolbox::listSetup().
 	 *
-	 *	@return The HTML of the page list.
+	 *	@return The HTML for a page list.
 	 */
 
-	public function listPages() {	
+	public function listPages() {
 	
-		$options = $this->listOptionArray;
-		$selection = $this->listSelection;
-		
-		// Filter by tag.
-		$selection->filterByTag($this->filter);
-		
-		// Sort selection.
-		$selection->sortPages($this->sortType, $this->sortDirection);
-		
-		// Get pages.
-		$pages = $selection->getSelection();
-		
-		return Html::generateList($pages, $options['vars'], $options['image']);	
+		$L = $this->L;
+	
+		return Html::generateList($L->pages, $L->vars, $L->glob, $L->width, $L->height, $L->crop);	
 		
 	}
 
@@ -381,57 +323,10 @@ class Toolbox {
 
 	public function listFilters() {
 		
-		// Get relevant pages to determine the relevant tags.
-		$pages = $this->listSelection->getSelection();
-		
-		if ($pages) {
-		
-			$tags = array();
-			foreach ($pages as $page) {
-				$tags = array_merge($tags, $page->tags);
-			}
-		
-			$tags = array_unique($tags);
-			sort($tags);
-		
-			return Html::generateFilterMenu($tags);
-		
-		}
+		return Html::generateFilterMenu($this->L->tags);
 		
 	}
 	
-	
-	/**
-	 * 	Generate a list of pages having at least one tag in common with the current page regarding the options defined by Toolbox::listOptions().
-	 *
-	 *	@return html of the generated list
-	 */
-	
-	public function listRelated() {
-		
-		$options = $this->listOptionArray;
-		
-		$pages = array();
-		$tags = $this->P->tags;
-		
-		// Get pages
-		foreach ($tags as $tag) {
-			
-			$selection = new Selection($this->collection);
-			$selection->filterByTag($tag);			
-			$pages = array_merge($pages, $selection->getSelection());
-						
-		}
-		
-		// Sort pages & remove current page from selecion
-		$selection = new Selection($pages);
-		$selection->excludePage($this->P->relUrl);
-		$selection->sortPagesByPath();
-		
-		return Html::generateList($selection->getSelection(), $options['vars'], $options['image']);
-				
-	}
-
 	
 	/**
 	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listPages()
