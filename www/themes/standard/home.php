@@ -16,10 +16,13 @@
 	t[navPerLevel]	
 	<h1>p[title]</h1>
 	p[text]
-	t[menuFilterAll]
-	t[menuSortType(Date, title: Title)]
-	t[menuSortDirection]
-	t[listAll(title,tags)]
+	
+	t[listSetup(file: *.jpg, width: 250, title, tags, template: page)]
+	t[listFilters]
+	t[listSortTypes]
+	t[listSortDirection]
+	t[listPages]
+	
 	<br />
 	<p>t[navBreadcrumbs]</p>
 	<br />

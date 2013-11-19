@@ -19,11 +19,15 @@
 	<br />
 	<h1>p[title]</h1>
 	<h2>p[subtitle]</h2>
+	t[img(file: *.jpg, link: http://marcdahmen.de, target: _blank)]
 	t[filterParentByTags]
 	p[text]
 	<br />
 	<p>Related Pages:</p>
-	t[relatedPages(title, tags)]
+
+	t[listSetup(title, tags, type: related)]
+	t[listPages]
+
 	<br />
 	t[navBreadcrumbs]
 	<br />
