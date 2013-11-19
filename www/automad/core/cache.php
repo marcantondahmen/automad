@@ -300,11 +300,15 @@ class Cache {
 			$siteMTime = $mTimes[$lastModifiedItem];
 			
 			// Save mTime
+			$old = umask(0);
+			Debug::log('Cache: Changed umask: ' . umask());
 			file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));
+			umask($old);
 			
 			Debug::log('Cache: Scanned directories and saved Site-mTime.');
 			Debug::log('       Last modified item: ' . $lastModifiedItem); 
 			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
+			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
 			
@@ -359,13 +363,18 @@ class Cache {
 	public function writePageToCache($output) {
 		
 		if (AM_CACHE_ENABLED) {
+			
+			$old = umask(0);
+			Debug::log('Cache: Changed umask: ' . umask());
 		
 			if(!file_exists(dirname($this->pageCacheFile))) {
-				mkdir(dirname($this->pageCacheFile), 0700, true);
+				mkdir(dirname($this->pageCacheFile), 0777, true);
 		    	}
 		
 			file_put_contents($this->pageCacheFile, $output);
+			umask($old);
 			Debug::log('Cache: Write page: ' . $this->pageCacheFile);
+			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
 			
@@ -383,13 +392,18 @@ class Cache {
 	public function writeSiteObjectToCache($site) {
 		
 		if (AM_CACHE_ENABLED) {
-		
+			
+			$old = umask(0);
+			Debug::log('Cache: Changed umask: ' . umask());
+			
 			if(!file_exists(dirname(AM_FILE_SITE_OBJECT_CACHE))) {
-				mkdir(dirname(AM_FILE_SITE_OBJECT_CACHE), 0700, true);
+				mkdir(dirname(AM_FILE_SITE_OBJECT_CACHE), 0777, true);
 		    	}
 		
 			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($site));
+			umask($old);
 			Debug::log('Cache: Write site object: ' . AM_FILE_SITE_OBJECT_CACHE);
+			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
 			
