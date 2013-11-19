@@ -213,7 +213,8 @@ class Cache {
 	private function getPageCacheFilePath() {
 	
 		if (isset($_SERVER['PATH_INFO'])) {
-			$currentPath = '/' . trim($_SERVER['PATH_INFO'], '/');
+			// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
+			$currentPath = rtrim('/' . trim($_SERVER['PATH_INFO'], '/'), '/');
 		} else {
 			$currentPath = '';
 		}
