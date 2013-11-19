@@ -118,9 +118,10 @@ if ($C->pageCacheIsApproved()) {
 echo $output;
 
 
-// Display execution time and user constants
+// Display execution time and server info
 Debug::timerEnd();
-Debug::log('User constants:');
+Debug::log('Server:');
+Debug::log($_SERVER);
 
 
 ?>
