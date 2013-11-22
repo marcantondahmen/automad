@@ -154,6 +154,49 @@ class Parse {
 	
 	
 	/**
+	 *	Get the query string, if existing.
+	 *
+	 *	@return $query
+	 */
+	
+	public static function queryArray() {
+		
+		// First get existing query string to prevent overwriting existing settings passed already
+		// and store its data in $query.
+		if (isset($_GET)) {
+			$query = $_GET;
+		} else {
+			$query = array();
+		}
+		
+		return $query;
+		
+		
+	}
+	
+	
+	/**
+	 *	Test if a key exists in the query string and return that key.
+	 *
+	 *	@param string $key
+	 *	@return $queryKey
+	 */
+	
+	public static function queryKey($key) {
+	
+		// Save currently passed filter query to determine current filter/sort_dir when generating list
+		if (isset($_GET[$key])) {
+			$queryKey = $_GET[$key];
+		} else {
+			$queryKey = '';
+		}
+		
+		return $queryKey;
+	
+	}
+		
+	
+	/**
 	 *	Cleans up a string to be used as URL.
 	 *
 	 *	@param string $str
