@@ -56,6 +56,12 @@ if (isset($_SERVER['PATH_INFO'])) {
 }	
 
 
+// The cache folder must be writable (resized images), also when caching is disabled!
+if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
+	exit('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
+}
+
+
 // Autoload core classes and libraries
 spl_autoload_register(function($class) {
 	
