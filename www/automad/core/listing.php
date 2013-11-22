@@ -63,24 +63,24 @@ class Listing {
 	
 	
 	/**
-	 *	The passed current filter (from possible query settings)
+	 *	The current filter (from possible query settings)
 	 */
 	
-	private $filter;
+	public $filter;
 	
 	
 	/**
-	 *	The passed current sortType (from possible query settings)
+	 *	The current sortType (from possible query settings)
 	 */
 	
-	private $sortType;
+	public $sortType;
 	
 	
 	/**
-	 *	The passed current sortDirection (from possible query settings)
+	 *	The current sortDirection (from possible query settings)
 	 */
 	
-	private $sortDirection;
+	public $sortDirection;
 	
 	
 	/**
@@ -154,13 +154,11 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $filter, $sortType, $sortDirection, $vars = array('title'), $type = 'all', $template = false, $glob = false, $width = false, $height = false, $crop = false) {
+	public function __construct($site, $vars = array('title'), $type = 'all', $template = false, $glob = false, $width = false, $height = false, $crop = false) {
 		
+		// Set up properties from passed parameters
 		$this->S = $site;
 		$this->P = $site->getCurrentPage();
-		$this->filter = $filter;
-		$this->sortType = $sortType;
-		$this->sortDirection = $sortDirection;
 		$this->vars = $vars;
 		$this->type = $type;
 		$this->template = $template;
@@ -169,6 +167,17 @@ class Listing {
 		$this->height = $height;
 		$this->crop = $crop;
 		
+		// Set up filter and sort
+		$this->filter = Parse::queryKey('filter');
+		$this->sortType = Parse::queryKey('sort_type');
+		
+		if (Parse::queryKey('sort_dir')) {
+			$this->sortDirection = constant(strtoupper(Parse::queryKey('sort_dir')));
+		} else {
+			$this->sortDirection = constant(strtoupper(AM_LIST_DEFAULT_SORT_DIR));
+		}
+		
+		// Set up tags and pages
 		$listing = $this->setupListing();
 		$this->tags = $this->setupTags($listing);
 		$this->pages = $this->setupPages($listing);
