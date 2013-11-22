@@ -8,9 +8,13 @@
 <body>
 t[navTop]
 <h1>p[title]</h1>
-t[searchResults]
-<br />
-<p><?php echo $this->P->template; ?></p>
+
+t[listSetup(title, subtitle, tags, text)]
+t[listFilters]
+t[listSortTypes]
+t[listSortDirection]
+t[listPages]
+
 <br />
 <p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>

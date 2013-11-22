@@ -12,7 +12,13 @@
 	t[searchField()]
 	t[navTop]
 	<h1>p[title]</h1>
-	t[searchResults(title, subtitle, tags, text)]
+
+	t[listSetup(title, subtitle, tags, text)]
+	t[listFilters]
+	t[listSortTypes]
+	t[listSortDirection]
+	t[listPages]
+	
 	<br />
 	<p>t[navBreadcrumbs]</p>
 	<br />
