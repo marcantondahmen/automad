@@ -418,7 +418,7 @@ class Html {
 		$current = Parse::queryKey('sort_dir');
 				
 		if (!$current) {
-			$current = AM_TOOL_DEFAULT_SORT_DIR;
+			$current = AM_LIST_DEFAULT_SORT_DIR;
 		}
 		
 		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
