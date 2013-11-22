@@ -396,11 +396,6 @@ class Cache {
 			
 			$old = umask(0);
 			Debug::log('Cache: Changed umask: ' . umask());
-			
-			if(!file_exists(dirname(AM_FILE_SITE_OBJECT_CACHE))) {
-				mkdir(dirname(AM_FILE_SITE_OBJECT_CACHE), 0777, true);
-		    	}
-		
 			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($site));
 			umask($old);
 			Debug::log('Cache: Write site object: ' . AM_FILE_SITE_OBJECT_CACHE);
