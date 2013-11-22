@@ -101,25 +101,6 @@ class Toolbox {
 		$this->collection = $this->S->getCollection();
 		$this->P = $this->S->getCurrentPage();
 		
-		// Set up filter and sort
-		if (isset($_GET['filter'])) {
-			$this->filter = $_GET['filter'];
-		} else {
-			$this->filter = '';
-		}
-		
-		if (isset($_GET['sort_type'])) {
-			$this->sortType = $_GET['sort_type'];
-		} else {
-			$this->sortType = '';
-		}
-		
-		if (isset($_GET['sort_dir'])) {
-			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
-		} else {
-			$this->sortDirection = constant(strtoupper(AM_TOOL_DEFAULT_SORT_DIR));
-		}
-		
 		// Set up default Listing object
 		$this->listSetup();
 		
@@ -242,7 +223,7 @@ class Toolbox {
 
 
 	/**
-	 *	Setup a new Listing object based on a string of comma separated options and the current filtering and sorting settings.
+	 *	Setup a new Listing object based on a string of comma separated options and the current Site object.
 	 *
 	 *	An example for such a string could be ("title, subtitle, type: children, template: page, file: *.jpg, width: 200, crop: 1") 
 	 *	and would create a Listing object including all pages below the current page with "page" as their template,
@@ -295,7 +276,7 @@ class Toolbox {
 		}
 		
 		// Create new Listing out of $options and (!) the current filter and sort settings. 
-		$this->L = new Listing($this->S, $this->filter, $this->sortType, $this->sortDirection, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
+		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
 		
 	}
 
@@ -534,15 +515,15 @@ class Toolbox {
 	
 	public function searchResults($optionStr) {
 		
-		if (isset($_GET["search"])) {
+		$search = Parse::queryKey('search');
+		
+		if ($search) {
 			
 			$vars = Parse::toolOptions($optionStr);
 		
 			if (empty($vars)) {
 				$vars = array('title');
 			}
-			
-			$search = $_GET["search"];
 			
 			$selection = new Selection($this->collection);
 			$selection->filterByKeywords($search);
