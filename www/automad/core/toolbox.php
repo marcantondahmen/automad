@@ -127,19 +127,8 @@ class Toolbox {
 		}
 			
 		if ($options['file']) {
-			
-			$glob = $options['file'];
-			
-			if (strpos($glob, '/') === 0) {
-				// Relative to root
-				$glob = AM_BASE_DIR . $glob;
-			} else {
-				// Relative to page
-				$glob = AM_BASE_DIR . AM_DIR_PAGES . $this->P->relPath . $glob;
-			}
-		
+			$glob = Modulate::filePath($this->P->relPath, $options['file']);
 			return Html::addImage($glob, $options['width'], $options['height'], $options['crop'], $options['link'], $options['target']);
-			
 		}
 
 	}
