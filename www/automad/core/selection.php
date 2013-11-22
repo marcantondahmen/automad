@@ -151,7 +151,8 @@ class Selection {
 	
 	
 	/**
-	 *	Filter all pages having one or more tag in common with $page.
+	 *	Filter all pages having one or more tag in common with $page. If there are not tags defined for the passed page,
+	 *	the selection will be an empty array. (no tags = no related pages)
 	 *
 	 *	@param object $page
 	 */
@@ -160,9 +161,9 @@ class Selection {
 		
 		$tags = $page->tags;
 		
-		if ($tags) {
+		$filtered = array();
 		
-			$filtered = array();
+		if ($tags) {
 		
 			foreach ($tags as $tag) {
 			
@@ -185,7 +186,7 @@ class Selection {
 
 	
 	/**
-	 *	Filter $this->selection by the template of the parent page.
+	 *	Filter $this->selection by a template, if $template is not empty.
 	 *
 	 *	@param string $template
 	 */
@@ -210,7 +211,7 @@ class Selection {
 	
 		 
 	/**
-	 *	Filter $this->selection by multiple keywords (a search string).
+	 *	Filter $this->selection by multiple keywords (a search string), if $str is not empty.
 	 *
 	 *	@param string $str
 	 */
@@ -342,7 +343,6 @@ class Selection {
 	 
 	/**
 	 *	Sorts $this->selection based on any variable in the text files.
-	 *
 	 *	If the $var gets passed empty, $this->sortPagesByPath() will be used as fallback.
 	 *
 	 *	@param string $var (any variable from a text file)
