@@ -224,7 +224,7 @@ class Site {
 		
 		} else {
 			
-			Debug::log('No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '/" - Skipped directory!');
+			Debug::log('      No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '" - Skipped directory!');
 		
 		}
 			
