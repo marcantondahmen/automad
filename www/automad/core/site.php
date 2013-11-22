@@ -331,11 +331,11 @@ class Site {
 			// If page exists
 			return $this->siteCollection[$url];
 	
-		} elseif (isset($_GET["search"]) && $url == AM_PAGE_RESULTS_URL) {
+		} elseif (Parse::queryKey('search') && $url == AM_PAGE_RESULTS_URL) {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage('results', AM_PAGE_RESULTS_TITLE . ' / "' . $_GET["search"] . '"');
+			return $this->createPage('results', AM_PAGE_RESULTS_TITLE . ' / "' . Parse::queryKey('search') . '"');
 	
 		} else {
 	
