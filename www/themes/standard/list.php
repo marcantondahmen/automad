@@ -15,7 +15,7 @@
 	t[navPerLevel]
 	<h1>p[title]</h1>
 	
-	t[listSetup(title, tags, type: children, template_: page, file: *.jpg, width: 400, crop: 0)]
+	t[listSetup(title, tags, type: children, template: page, file: *.jpg, width: 400, crop: 0)]
 	t[listFilters]
 	t[listSortTypes]
 	t[listSortDirection]

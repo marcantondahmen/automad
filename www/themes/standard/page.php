@@ -19,7 +19,7 @@
 	<br />
 	<h1>p[title]</h1>
 	<h2>p[subtitle]</h2>
-	t[img(file: *.jpg, link: http://marcdahmen.de, target: _blank)]
+	t[imgSet(file: images/*.jpg, width: 200, height: 200, crop: 1)]
 	t[filterParentByTags]
 	p[text]
 	<br />

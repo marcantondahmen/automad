@@ -81,3 +81,11 @@ li .subtitle {
 	font-weight: bold;
 	font-size: 18px;
 }
+
+ul.imageset {
+	padding: 0px;;
+}
+
+ul.imageset li {
+	display: inline;
+}
