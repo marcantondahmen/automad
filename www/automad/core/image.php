@@ -309,6 +309,8 @@ class Image {
 		imagesavealpha($dest, true);
 		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
 			
+		$old = umask(0);
+		Debug::log('Image: Changed umask: ' . umask());
 		Debug::log($this);
 		Debug::log('Image: Save: ' . $this->fileFullPath);
 		
@@ -325,6 +327,9 @@ class Image {
 				break;
 		
 		}
+		
+		umask($old);
+		Debug::log('Image: Restored umask: ' . umask());
 		
 		ImageDestroy ($src);
 		ImageDestroy ($dest);
