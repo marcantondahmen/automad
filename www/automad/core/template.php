@@ -167,37 +167,10 @@ class Template {
 	
 	private function modulateUrls($output) {
 		
-		$P = $this->P;
+		$pagePath = $this->P->relPath;
 		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
-				function($match) use ($P) {
-					
-					$url = $match[2];
-					
-					if (strpos($url, '://') !== false) {
-												
-						// Absolute URL
-						return $match[0];
-						
-					} else if (strpos($url, '/') === 0) {
-						
-						// Relative to root	
-						if (Parse::isFileName($url)) {
-							return $match[1] . '="' . AM_BASE_URL . $url . '"';
-						} else {
-							return $match[1] . '="' . AM_BASE_URL . AM_INDEX . $url . '"';	
-						}
-												
-					} else {
-						
-						// Just a relative URL
-						if (Parse::isFileName($url)) {
-							return $match[1] . '="' . AM_BASE_URL . AM_DIR_PAGES . $P->relPath . $url . '"';
-						} else {
-							return $match[0];
-						}
-						
-					}
-					
+				function($match) use ($pagePath) {
+					return $match[1] . '="' . Modulate::url($pagePath, $match[2]) . '"';
 				},
 				$output);
 	
