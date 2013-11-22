@@ -135,6 +135,40 @@ class Toolbox {
 	
 	
 	/**
+	 *	Place a set of resized images, linking to their original sized version.
+	 *	This tool returns the basic HTML for a simple image gallery.
+	 *
+	 *	@param string $optionStr - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1)
+	 *	@return The HTML of a list of resized images with links to their bigger versions
+	 */
+	
+	public function imgSet($optionStr) {
+		
+		// Default options
+		$defaults = 	array(
+					'file' => '*.jpg',
+					'width' => false,
+					'height' => false,
+					'crop' => false
+				);
+		
+		// Merge options with defaults				
+		$options = array_merge($defaults, Parse::toolOptions($optionStr));
+		
+		// Turn relevant vars into integer
+		foreach(array('width', 'height', 'crop') as $key) {
+			$options[$key] = intval($options[$key]);
+		}
+			
+		if ($options['file']) {
+			$glob = Modulate::filePath($this->P->relPath, $options['file']);
+			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop']);
+		}
+		
+	}	
+	
+	
+	/**
 	 *	To place the homepage at the same level like all the other pages from the first level,
 	 *	includeHome() will modify $this->collection and move the homepage one level down: 0 -> 1
 	 */
