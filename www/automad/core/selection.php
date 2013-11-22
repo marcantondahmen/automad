@@ -217,39 +217,43 @@ class Selection {
 	
 	public function filterByKeywords($str) {
 		
-		$filtered = array();
-		
-		$keywords = explode(' ', strip_tags($str));
-		
-		// generate pattern
-		$pattern = '/^';
-		foreach ($keywords as $keyword) {
-			$pattern .= '(?=.*' . $keyword . ')';
-		}
-		// case-insensitive and multiline
-		$pattern .= '/is';
-		
-		// loop elements in $this->selection
-		foreach ($this->selection as $key => $page) {
+		if ($str) {
 			
-			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
-			// even if the keywords are distributed over different variables in $page[data]. 
-			$dataAsString = strip_tags(implode(" ", $page->data));
-								
-			// search
-			if (preg_match($pattern, $dataAsString) == 1) {
-				$filtered[$key] = $page;
+			$filtered = array();
+
+			$keywords = explode(' ', strip_tags($str));
+		
+			// generate pattern
+			$pattern = '/^';
+			foreach ($keywords as $keyword) {
+				$pattern .= '(?=.*' . $keyword . ')';
 			}
+			// case-insensitive and multiline
+			$pattern .= '/is';
+		
+			// loop elements in $this->selection
+			foreach ($this->selection as $key => $page) {
+			
+				// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
+				// even if the keywords are distributed over different variables in $page[data]. 
+				$dataAsString = strip_tags(implode(' ', $page->data));
+								
+				// search
+				if (preg_match($pattern, $dataAsString) == 1) {
+					$filtered[$key] = $page;
+				}
+			
+			}
+		
+			$this->selection = $filtered;
 			
 		}
-		
-		$this->selection = $filtered;
 		
 	}
 	
 	
 	/**
-	 *	Filter out the neighbors (prevoius and next page) to the passed URL under the same parent URL.
+	 *	Filter out the neighbors (previous and next page) to the passed URL under the same parent URL.
 	 *
 	 *	$this->selection only holds two pages after completion with the keys ['prev'] and ['next'] instead of the URL-key.
 	 *	If there is only one page in the array (has no siblings), the selection will be empty. For two pages, it will only
