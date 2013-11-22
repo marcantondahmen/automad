@@ -221,8 +221,8 @@ class Html {
 
 		if ($tags) {
 
-			$query = self::getQueryArray();
-			$current = self::getQueryKey('filter');
+			$query = Parse::queryArray();
+			$current = Parse::queryKey('filter');
 		
 			$html = '<ul class="' . AM_HTML_CLASS_FILTER . '">';			
 		
@@ -414,8 +414,8 @@ class Html {
 	
 	public static function generateSortDirectionMenu($options) {
 		
-		$query = self::getQueryArray();
-		$current = self::getQueryKey('sort_dir');
+		$query = Parse::queryArray();
+		$current = Parse::queryKey('sort_dir');
 				
 		if (!$current) {
 			$current = AM_TOOL_DEFAULT_SORT_DIR;
@@ -463,8 +463,8 @@ class Html {
 	
 	public static function generateSortTypeMenu($options) {
 
-		$query = self::getQueryArray();
-		$current = self::getQueryKey('sort_type');
+		$query = Parse::queryArray();
+		$current = Parse::queryKey('sort_type');
 		
 		// All option array items with numeric keys get merged into one item (last one kept).
 		// That way the text for the 'Original Order' button can be defined with just adding a "keyless" value to the array. 
@@ -519,49 +519,6 @@ class Html {
 		
 	}
 	
-	
-	/**
-	 *	Get the query string, if existing.
-	 *
-	 *	@return $query
-	 */
-	
-	private static function getQueryArray() {
-		
-		// First get existing query string to prevent overwriting existing settings passed already
-		// and store its data in $query.
-		if (isset($_GET)) {
-			$query = $_GET;
-		} else {
-			$query = array();
-		}
-		
-		return $query;
-		
-		
-	}
-	
-	
-	/**
-	 *	Test if a key exists in the query string and return that key.
-	 *
-	 *	@param string $key
-	 *	@return $queryKey
-	 */
-	
-	private static function getQueryKey($key) {
-	
-		// Save currently passed filter query to determine current filter/sort_dir when generating list
-		if (isset($_GET[$key])) {
-			$queryKey = $_GET[$key];
-		} else {
-			$queryKey = '';
-		}
-		
-		return $queryKey;
-	
-	}
-		
 	
 }
 
