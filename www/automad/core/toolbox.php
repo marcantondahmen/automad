@@ -64,27 +64,6 @@ class Toolbox {
 	
 	
 	/**
-	 *	Filter for the page lists.
-	 */
-	
-	private $filter;
-	
-	
-	/**
-	 * 	The type defines the way the pages within the lists gets sortet.
-	 */
-	
-	private $sortType;
-	
-	
-	/**
-	 * 	Sort order for lists.
-	 */
-	
-	private $sortDirection;
-	
-	
-	/**
 	 *	The Listing object to be used for all list* methods.
 	 */
 	
@@ -275,7 +254,7 @@ class Toolbox {
 			}
 		}
 		
-		// Create new Listing out of $options and (!) the current filter and sort settings. 
+		// Create new Listing out of $options. 
 		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
 		
 	}
