@@ -159,10 +159,10 @@ if (!defined('AM_TOOL_OPTIONS_SORT_DIR')) {
 }
 
 
-// TOOL DEFAULTS
+// LISTING DEFAULTS
 // Default sort direction
-if (!defined('AM_TOOL_DEFAULT_SORT_DIR')) {
-	define('AM_TOOL_DEFAULT_SORT_DIR', 'sort_asc');
+if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
+	define('AM_LIST_DEFAULT_SORT_DIR', 'sort_asc');
 }
 
 
