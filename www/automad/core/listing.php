@@ -63,38 +63,17 @@ class Listing {
 	
 	
 	/**
-	 *	The current filter (from possible query settings)
-	 */
-	
-	public $filter;
-	
-	
-	/**
-	 *	The current sortType (from possible query settings)
-	 */
-	
-	public $sortType;
-	
-	
-	/**
-	 *	The current sortDirection (from possible query settings)
-	 */
-	
-	public $sortDirection;
-	
-	
-	/**
 	 *	The listing's type (all pages, children pages or related pages)
 	 */
 	
-	private $type;
+	public $type;
 	
 	
 	/**
 	 *	The template to filter by the listing.
 	 */
 	
-	private $template;
+	public $template;
 	
 	
 	/**
@@ -133,6 +112,34 @@ class Listing {
 	
 	
 	/**
+	 *	The current filter (from possible query settings)
+	 */
+	
+	public $filter;
+	
+	
+	/**
+	 *	The current sortType (from possible query settings)
+	 */
+	
+	public $sortType;
+	
+	
+	/**
+	 *	The current sortDirection (from possible query settings)
+	 */
+	
+	public $sortDirection;
+	
+	
+	/**
+	 *	The search string to filter pages
+	 */
+	
+	public $search;
+	
+	
+	/**
 	 *	A set of all tags which occur at least on one of the listing's pages. 
 	 *	That includes also the filtered out pages, to keep the filter menu complete.
 	 *	So basically the tags are taken from all pages within the constructor variable $listing, 
@@ -167,7 +174,7 @@ class Listing {
 		$this->height = $height;
 		$this->crop = $crop;
 		
-		// Set up filter and sort
+		// Set up filter, sort and search
 		$this->filter = Parse::queryKey('filter');
 		$this->sortType = Parse::queryKey('sort_type');
 		
@@ -176,6 +183,8 @@ class Listing {
 		} else {
 			$this->sortDirection = constant(strtoupper(AM_LIST_DEFAULT_SORT_DIR));
 		}
+		
+		$this->search = Parse::queryKey('search');
 		
 		// Set up tags and pages
 		$listing = $this->setupListing();
@@ -189,10 +198,10 @@ class Listing {
 	
 	
 	/**
-	 *	Collect all pages matching $type & $template. 
-	 *	(Without filtering and sorting!)
+	 *	Collect all pages matching $type, $template & $search (optional). 
+	 *	(Without filtering by tag and sorting!)
 	 *	The returned pages have to be used to get all relevant tags.
-	 *	It is important, that the pages are not filtered here, because that would also eliminate the non-selected tags itself when filtering.
+	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.
 	 *
 	 *	@return An array of all Page objects matching $type & $template excludng the current page. 
 	 */
@@ -216,6 +225,9 @@ class Listing {
 	
 		// Filter by template
 		$selection->filterByTemplate($this->template);
+		
+		// Filter by keywords (for search results)
+		$selection->filterByKeywords($this->search);
 		
 		return $selection->getSelection();
 			
