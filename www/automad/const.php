@@ -210,6 +210,10 @@ if (!defined('AM_HTML_CLASS_TREE')) {
 if (!defined('AM_HTML_CLASS_LIST')) {
 	define('AM_HTML_CLASS_LIST', 'list');
 }
+// Page image set class
+if (!defined('AM_HTML_CLASS_IMAGESET')) {
+	define('AM_HTML_CLASS_IMAGESET', 'imageset');
+}
 // Sort menu class
 if (!defined('AM_HTML_CLASS_SORT')) {
 	define('AM_HTML_CLASS_SORT', 'sort');
