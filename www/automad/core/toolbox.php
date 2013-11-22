@@ -504,38 +504,6 @@ class Toolbox {
 		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $optionStr);
 		
 	}
-
-	
-	/**
-	 * 	Generate a list of search results.
-	 *
-	 *	@param string $optionStr (optional) - Variables from the text files to be included in the output. Example: $[searchResults(title, date)]
-	 *	@return the HTML for the results list
-	 */
-	
-	public function searchResults($optionStr) {
-		
-		$search = Parse::queryKey('search');
-		
-		if ($search) {
-			
-			$vars = Parse::toolOptions($optionStr);
-		
-			if (empty($vars)) {
-				$vars = array('title');
-			}
-			
-			$selection = new Selection($this->collection);
-			$selection->filterByKeywords($search);
-			$selection->sortPagesByPath();
-			
-			$pages = $selection->getSelection();
-			
-			return Html::generateList($pages, $vars);
-			
-		}
-		
-	}
 		
 
 	/**
