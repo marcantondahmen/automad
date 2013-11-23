@@ -12,7 +12,7 @@
 	t[img(file: /shared/MAD-Logo.png, height: 100, link: http://marcdahmen.de, target: _blank)]
 	<br /><br />
 	t[includeHome]
-	t[searchField(Search me...)]
+	t[search(Search me...)]
 	t[navPerLevel]	
 	<h1>p[title]</h1>
 	p[text]

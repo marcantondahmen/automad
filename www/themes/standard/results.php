@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	t[searchField()]
+	t[search]
 	t[navTop]
 	<h1>p[title]</h1>
 

@@ -10,7 +10,7 @@
 
 <body>
 	t[includeHome]
-	t[searchField()]
+	t[search]
 	t[navTreeCurrent]
 	t[navPerLevel(2)]
 	<br />		

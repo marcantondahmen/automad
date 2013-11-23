@@ -10,7 +10,7 @@
 
 <body>
 	t[includeHome]
-	t[searchField(Search this Site ...)]
+	t[search(Search this Site ...)]
 	t[navTreeCurrent]
 	t[navPerLevel]
 	<h1>p[title]</h1>

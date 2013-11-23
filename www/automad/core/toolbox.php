@@ -496,7 +496,7 @@ class Toolbox {
 	 *	@return the HTML of the searchfield
 	 */
 	
-	public function searchField($optionStr) {
+	public function search($optionStr) {
 		
 		// Don't parse $optionStr, since it can be only a string.
 		if (!$optionStr) {
