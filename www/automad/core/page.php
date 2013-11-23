@@ -76,7 +76,7 @@ class Page {
 	 * 	The relative path in the file system.
 	 */
 	
-	public $relPath;
+	public $path;
 	
 	
 	/**

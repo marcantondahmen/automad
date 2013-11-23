@@ -332,7 +332,7 @@ class Selection {
 		
 		foreach ($this->selection as $key => $page) {
 			
-			$arrayToSortBy[$key] = $page->relPath;
+			$arrayToSortBy[$key] = $page->path;
 			
 		}
 				

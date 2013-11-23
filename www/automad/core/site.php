@@ -140,20 +140,20 @@ class Site {
 	
 	
 	/**
-	 *	Searches $relPath recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
+	 *	Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
 	 *
 	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
 	 *	To access the data of a specific page within the $siteCollection array, the page's url serves as the key: $this->siteCollection['/path/to/page']
 	 *
-	 *	@param string $relPath 
+	 *	@param string $path 
 	 *	@param number $level 
 	 *	@param string $parentUrl
 	 */
 	 
-	private function collectPages($relPath = '/', $level = 0, $parentUrl = '') {
+	private function collectPages($path = '/', $level = 0, $parentUrl = '') {
 		
-		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $relPath;
+		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $path;
 		
 		Debug::log('      ' . $fullPath);
 		
@@ -164,7 +164,7 @@ class Site {
 				
 			if ($dh = opendir($fullPath)) {
 			
-				$url = $this->makeUrl($parentUrl, basename($relPath));
+				$url = $this->makeUrl($parentUrl, basename($path));
 		
 				while (false !== ($item = readdir($dh))) {
 		
@@ -199,7 +199,7 @@ class Site {
 							$P->data = $data;
 							$P->tags = $tags;
 							$P->url = $url;
-							$P->relPath = $relPath;
+							$P->path = $path;
 							$P->level = $level;
 							$P->parentUrl = $parentUrl;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
@@ -210,7 +210,7 @@ class Site {
 						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
 						if (is_dir($itemFullPath)) {
 						
-							$this->collectPages($relPath . $item . '/', $level + 1, $url);
+							$this->collectPages($path . $item . '/', $level + 1, $url);
 							
 						}
 						

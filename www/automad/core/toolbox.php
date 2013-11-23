@@ -127,7 +127,7 @@ class Toolbox {
 		}
 			
 		if ($options['file']) {
-			$glob = Modulate::filePath($this->P->relPath, $options['file']);
+			$glob = Modulate::filePath($this->P->path, $options['file']);
 			return Html::addImage($glob, $options['width'], $options['height'], $options['crop'], $options['link'], $options['target']);
 		}
 
@@ -161,7 +161,7 @@ class Toolbox {
 		}
 			
 		if ($options['file']) {
-			$glob = Modulate::filePath($this->P->relPath, $options['file']);
+			$glob = Modulate::filePath($this->P->path, $options['file']);
 			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop']);
 		}
 		

@@ -167,7 +167,7 @@ class Template {
 	
 	private function modulateUrls($output) {
 		
-		$pagePath = $this->P->relPath;
+		$pagePath = $this->P->path;
 		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
 				function($match) use ($pagePath) {
 					return $match[1] . '="' . Modulate::url($pagePath, $match[2]) . '"';

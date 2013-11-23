@@ -340,7 +340,7 @@ class Html {
 					// For example $glob = '*.jpg' will always use the first JPG in the page's directoy.
 					// To re-use $glob for every page in the loop, $glob can't be modified and 
 					// therefore $pageGlob will be used to build the full glob pattern.
-					$pageGlob = Modulate::filePath($page->relPath, $glob);		
+					$pageGlob = Modulate::filePath($page->path, $glob);		
 					$html .= Html::addImage($pageGlob, $width, $height, $crop);
 					
 				}
