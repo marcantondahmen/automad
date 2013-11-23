@@ -273,6 +273,10 @@ if (!defined('AM_PARSE_TAG_SEPARATOR')) {
 if (!defined('AM_PARSE_TAGS_KEY')) {
 	define('AM_PARSE_TAGS_KEY', 'tags');
 }
+// URL key (to identify an URL in the page's txt file)
+if (!defined('AM_PARSE_URL_KEY')) {
+	define('AM_PARSE_URL_KEY', 'url');
+}
 // List of file extensions to identify file in URL
 if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {
 	define('AM_PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3')));
