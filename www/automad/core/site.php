@@ -164,7 +164,7 @@ class Site {
 				
 			if ($dh = opendir($fullPath)) {
 			
-				$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
+				$url = $this->makeUrl($parentRelUrl, basename($relPath));
 		
 				while (false !== ($item = readdir($dh))) {
 		
@@ -181,9 +181,9 @@ class Site {
 							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 							// In case the title is missig for the home page, use the site name instead.
 							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-								if (trim($relUrl, '/')) {
+								if (trim($url, '/')) {
 									// If page is not the home page...
-									$data['title'] = ucwords(str_replace(array('_', '-'), ' ', basename($relUrl)));
+									$data['title'] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 								} else {
 									// If page is home page...
 									$data['title'] = $this->getSiteName();
@@ -193,24 +193,24 @@ class Site {
 							// Extract tags
 							$tags = Parse::extractTags($data);
 						
-							// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
+							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
 							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
 							$P = new Page();
 							$P->data = $data;
 							$P->tags = $tags;
-							$P->relUrl = $relUrl;
+							$P->url = $url;
 							$P->relPath = $relPath;
 							$P->level = $level;
 							$P->parentRelUrl = $parentRelUrl;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
-							$this->siteCollection[$relUrl] = $P;
+							$this->siteCollection[$url] = $P;
 							
 						}
 					
 						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
 						if (is_dir($itemFullPath)) {
 						
-							$this->collectPages($relPath . $item . '/', $level + 1, $relUrl);
+							$this->collectPages($relPath . $item . '/', $level + 1, $url);
 							
 						}
 						

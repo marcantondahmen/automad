@@ -180,7 +180,7 @@ class Selection {
 		}
 		
 		$this->selection = $filtered;
-		$this->excludePage($page->relUrl);
+		$this->excludePage($page->url);
 		
 	}
 

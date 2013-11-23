@@ -211,12 +211,12 @@ class Listing {
 		$selection = new Selection($this->S->getCollection());
 		
 		// Always exclude current page
-		$selection->excludePage($this->P->relUrl);
+		$selection->excludePage($this->P->url);
 		
 		// Filter by type
 		switch($this->type){
 			case 'children':
-				$selection->filterByParentUrl($this->P->relUrl);
+				$selection->filterByParentUrl($this->P->url);
 				break;
 			case 'related':
 				$selection->filterRelated($this->P);

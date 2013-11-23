@@ -191,7 +191,7 @@ class Toolbox {
 	public function linkPrev() {
 		
 		$selection = new Selection($this->collection);
-		$selection->filterPrevAndNextToUrl($this->P->relUrl);
+		$selection->filterPrevAndNextToUrl($this->P->url);
 		
 		$pages = $selection->getSelection();
 		
@@ -212,7 +212,7 @@ class Toolbox {
 	public function linkNext() {
 		
 		$selection = new Selection($this->collection);
-		$selection->filterPrevAndNextToUrl($this->P->relUrl);
+		$selection->filterPrevAndNextToUrl($this->P->url);
 		
 		$pages = $selection->getSelection();
 		
@@ -375,7 +375,7 @@ class Toolbox {
 	public function navBreadcrumbs() {
 		
 		$pages = array();
-		$urlSegments = explode('/', $this->P->relUrl);
+		$urlSegments = explode('/', $this->P->url);
 		$urlSegments = array_unique($urlSegments);
 		$tempUrl = '';
 		
@@ -399,7 +399,7 @@ class Toolbox {
 	
 	public function navChildren() {
 	
-		return $this->navBelow($this->P->relUrl);
+		return $this->navBelow($this->P->url);
 		
 	}
 	
@@ -414,7 +414,7 @@ class Toolbox {
 	public function navPerLevel($optionStr) {
 		
 		$maxLevel = (int)trim($optionStr);
-		$urlSegments = explode('/', $this->P->relUrl);
+		$urlSegments = explode('/', $this->P->url);
 		$urlSegments = array_unique($urlSegments);
 		$tempUrl = '';
 		$html = '';

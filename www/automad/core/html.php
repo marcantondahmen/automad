@@ -129,7 +129,7 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		return '<a' . $classes . ' href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>';
+		return '<a' . $classes . ' href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>';
 		
 	}
 
@@ -165,9 +165,9 @@ class Html {
 			
 				// There would be an infinite loop if the parentRelUrl equals the relUlr.
 				// That is the case if the current page is the homepage and the homepage moved to the first level. 
-				if ($page->parentRelUrl != $page->relUrl) {			
+				if ($page->parentRelUrl != $page->url) {			
 					if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-						$html .= self::branch($page->relUrl, $expandAll, $collection);
+						$html .= self::branch($page->url, $expandAll, $collection);
 					}
 				}
 			
@@ -195,7 +195,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
 			
 		}
 		
@@ -331,7 +331,7 @@ class Html {
 		
 			foreach ($pages as $page) {
 			
-				$html .= '<li><a href="' . $page->relUrl . '">';
+				$html .= '<li><a href="' . $page->url . '">';
 				
 				if ($glob) {
 					
