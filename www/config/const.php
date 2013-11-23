@@ -20,7 +20,7 @@ define('AM_DEBUG_ENABLED', true);
 define('AM_DEBUG_CONSOLE', true);
 
 // Cache settings
-define('AM_CACHE_ENABLED', false);
+define('AM_CACHE_ENABLED', true);
 define('AM_CACHE_MONITOR_DELAY', 60);
 
 
