@@ -35,13 +35,28 @@
 
 
 /**
- *	An object of the Listing class represents a bundle of all information describing a filterable and sortable page listing.
+ *	A Listing object represents a set of Page objects (matching certain criterias) 
+ *	and additional information for displaying that selection in a filterable and sortable list.
  *
- *	That includes: 
- *	- A selection of $pages (filtered)
- *	- An array of $tags (not filtered, but only from pages matching $type)
+ *	The main properties of a Listing object are: 
+ *	- A selection of Page objects (filtered)
+ *	- An array of tags (not filtered, but only from pages matching $type)
  *	- The set of variables to be displayed
  *	- Image settings
+ *
+ *	The criterias for the selection of Page objects are:
+ *	- $type (all, children or related)
+ *	- $template (if passed, only pages with that template get included)
+ *	- the 'search' element from the query string (if existant, the selection gets filtered by these keywords)
+ *
+ *	Since the selection of pages will also be filtered by the keywords passed as the 'search' element in the query string, 
+ *	this object can easily be used on a the search results page.
+ *	Basically a search results page can just be a normal page with a Listing object, where a search box passes the 'search' value to.
+ *
+ *	The visibility and order of the pages get influenced by the following elements within a query string:
+ *	- filter
+ *	- sortType
+ *	- sortDirection
  */
 
 
@@ -112,28 +127,28 @@ class Listing {
 	
 	
 	/**
-	 *	The current filter (from possible query settings)
+	 *	The current filter (from possible query string).
 	 */
 	
 	public $filter;
 	
 	
 	/**
-	 *	The current sortType (from possible query settings)
+	 *	The current sortType (from possible query string).
 	 */
 	
 	public $sortType;
 	
 	
 	/**
-	 *	The current sortDirection (from possible query settings)
+	 *	The current sortDirection (from possible query string).
 	 */
 	
 	public $sortDirection;
 	
 	
 	/**
-	 *	The search string to filter pages
+	 *	The search string to filter pages (from possible query string).
 	 */
 	
 	public $search;

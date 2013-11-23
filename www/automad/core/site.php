@@ -155,10 +155,10 @@ class Site {
 		
 		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $path;
 		
-		Debug::log('      ' . $fullPath);
-		
 		// Test if the directory actually has a data file.		
 		if (count(glob($fullPath . '/*.' . AM_FILE_EXT_DATA)) > 0) {
+			
+			Debug::log('      ' . $fullPath);
 						
 			$ignore = array('.', '..', '@eaDir');
 				
@@ -229,7 +229,7 @@ class Site {
 		
 		} else {
 			
-			Debug::log('      No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '" - Skipped directory!');
+			Debug::log('Skip  ' . $fullPath . ' (No .' . AM_FILE_EXT_DATA . ' file found!)');
 		
 		}
 			

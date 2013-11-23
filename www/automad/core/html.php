@@ -44,7 +44,10 @@ class Html {
 	
 	/**
 	 *	Add an image with an optional link.
+	 *
 	 *	A glob pattern can be passed as an image. The first match will then be used.
+	 *	For example, using a glob pattern has the advantage of being able to display the first image of every page (as a logo or thumbnail),
+	 *	by just passing '*.jpg' or '*.png', without naming all the images the same. 
 	 *
 	 *	The requested image can be optionally resized and cropped. 
 	 *	If only a file is specified, the placed image keeps its original size and has no link.
