@@ -192,6 +192,11 @@ class Site {
 						
 							// Extract tags
 							$tags = Parse::extractTags($data);
+							
+							// Check for an URL in $data and use that URL instead.
+							if (array_key_exists(AM_PARSE_URL_KEY, $data)) {
+								$url = $data[AM_PARSE_URL_KEY];
+							}
 						
 							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
 							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
