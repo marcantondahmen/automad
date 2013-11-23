@@ -137,16 +137,16 @@ class Html {
 	/**
 	 *	Branch out recursively below a certain relative URL.
 	 *
-	 *	@param string $parentRelUrl
+	 *	@param string $parentUrl
 	 *	@param boolean $expandAll
 	 *	@param array $collection (all pages)
 	 *	@return the HTML for the branch/tree (recursive)
 	 */
 
-	private static function branch($parentRelUrl, $expandAll, $collection) {
+	private static function branch($parentUrl, $expandAll, $collection) {
 		
 		$selection = new Selection($collection);
-		$selection->filterByParentUrl($parentRelUrl);
+		$selection->filterByParentUrl($parentUrl);
 		$selection->sortPagesByPath();
 		
 		$pages = $selection->getSelection();
@@ -163,9 +163,9 @@ class Html {
 			
 				$html .= '<li>' . self::addLink($page) . '</li>';
 			
-				// There would be an infinite loop if the parentRelUrl equals the relUlr.
+				// There would be an infinite loop if the parentUrl equals the relUlr.
 				// That is the case if the current page is the homepage and the homepage moved to the first level. 
-				if ($page->parentRelUrl != $page->url) {			
+				if ($page->parentUrl != $page->url) {			
 					if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
 						$html .= self::branch($page->url, $expandAll, $collection);
 					}

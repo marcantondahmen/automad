@@ -90,7 +90,7 @@ class Page {
 	 * 	The relative URL of the parent page.
 	 */
 	
-	public $parentRelUrl;
+	public $parentUrl;
 	
 	
 	/**

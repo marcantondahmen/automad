@@ -148,10 +148,10 @@ class Site {
 	 *
 	 *	@param string $relPath 
 	 *	@param number $level 
-	 *	@param string $parentRelUrl
+	 *	@param string $parentUrl
 	 */
 	 
-	private function collectPages($relPath = '/', $level = 0, $parentRelUrl = '') {
+	private function collectPages($relPath = '/', $level = 0, $parentUrl = '') {
 		
 		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $relPath;
 		
@@ -164,7 +164,7 @@ class Site {
 				
 			if ($dh = opendir($fullPath)) {
 			
-				$url = $this->makeUrl($parentRelUrl, basename($relPath));
+				$url = $this->makeUrl($parentUrl, basename($relPath));
 		
 				while (false !== ($item = readdir($dh))) {
 		
@@ -201,7 +201,7 @@ class Site {
 							$P->url = $url;
 							$P->relPath = $relPath;
 							$P->level = $level;
-							$P->parentRelUrl = $parentRelUrl;
+							$P->parentUrl = $parentUrl;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
 							$this->siteCollection[$url] = $P;
 							
@@ -380,7 +380,7 @@ class Site {
 		$page = new Page();
 		$page->template = $template;
 		$page->data['title'] = $title;
-		$page->parentRelUrl = '';
+		$page->parentUrl = '';
 		
 		return $page;
 		

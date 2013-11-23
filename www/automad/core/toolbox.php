@@ -94,7 +94,7 @@ class Toolbox {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->P->tags, $this->P->parentRelUrl);
+		return Html::generateFilterMenu($this->P->tags, $this->P->parentUrl);
 		
 	}
 	
@@ -441,7 +441,7 @@ class Toolbox {
 	
 	public function navSiblings() {
 		
-		return $this->navBelow($this->P->parentRelUrl);
+		return $this->navBelow($this->P->parentUrl);
 		
 	}
 	

@@ -113,7 +113,7 @@ class Selection {
 		$filtered = array();
 		
 		foreach ($this->selection as $key => $page) {
-			if ($page->parentRelUrl == $parent) {
+			if ($page->parentUrl == $parent) {
 				$filtered[$key] = $page;
 			}
 		}
@@ -266,7 +266,7 @@ class Selection {
 	public function filterPrevAndNextToUrl($url) {
 		
 		// Narrow down selection to pages with the same parentUrl
-		$this->filterByParentUrl($this->selection[$url]->parentRelUrl);
+		$this->filterByParentUrl($this->selection[$url]->parentUrl);
 		$this->sortPagesByPath();
 		
 		$keys = array_keys($this->selection);
@@ -311,7 +311,7 @@ class Selection {
 		if (array_key_exists('/', $this->selection)) {
 			
 			$home = clone $this->selection['/'];
-			$home->parentRelUrl = '/';
+			$home->parentUrl = '/';
 			$home->level = 1;
 			$this->selection['/'] = $home;
 			
