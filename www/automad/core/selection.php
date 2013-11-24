@@ -109,7 +109,7 @@ class Selection {
 	 */
 	
 	public function filterBreadcrumbs($url) {
-		
+			
 		if (strpos($url, '/') === 0) {
 		
 			$pages = array();
@@ -129,7 +129,14 @@ class Selection {
 			// Reverse the $pages array and pass it to $this->selection.
 			$this->selection = array_reverse($pages);
 		
-		} 
+		} else {
+			
+			// If $url is not a valid URL, only add the home page to the selection.
+			// This might be the case for "virtual pages", like the "error" or "search results" pages, 
+			// which don't have a $page->url.
+			$this->selection = array($this->selection['/']);
+			
+		}
 		
 	}
 	
