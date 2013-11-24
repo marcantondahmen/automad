@@ -75,6 +75,21 @@ class Selection {
 	
 	
 	/**
+	 *	Remove a page from the selection.
+	 *
+	 *	@param string $url
+	 */
+	
+	public function excludePage($url) {
+		
+		if (array_key_exists($url, $this->selection)) {
+			unset($this->selection[$url]);
+		} 
+		
+	}
+	
+	
+	/**
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@return array $this->selection
@@ -83,6 +98,38 @@ class Selection {
 	public function getSelection() {
 		
 		return $this->selection;
+		
+	}
+	
+	
+	/**
+	 *	Collect all pages along a given URL.
+	 *
+	 *	@param string $url
+	 */
+	
+	public function filterBreadcrumbs($url) {
+		
+		if (strpos($url, '/') === 0) {
+		
+			$pages = array();
+			
+			// While $url is not the home page, strip each segement one by one and
+			// add the corresponding Page object to $pages.
+			while ($url != '/') {
+				
+				$pages[$url] = $this->selection[$url];
+				$url = '/' . trim(substr($url, 0, strrpos($url, '/')), '/');
+				
+			}
+			
+			// Add home page
+			$pages['/'] = $this->selection['/'];
+			
+			// Reverse the $pages array and pass it to $this->selection.
+			$this->selection = array_reverse($pages);
+		
+		} 
 		
 	}
 	
@@ -98,7 +145,7 @@ class Selection {
 		$filtered = array();
 		
 		foreach ($this->selection as $key => $page) {
-			if ($page->parentRelUrl == $parent) {
+			if ($page->parentUrl == $parent) {
 				$filtered[$key] = $page;
 			}
 		}
@@ -134,48 +181,77 @@ class Selection {
 		
 	}
 	
+		
+	/**
+	 *	Filter $this->selection by a template, if $template is not empty.
+	 *
+	 *	@param string $template
+	 */
+	
+	public function filterByTemplate($template) {
+		
+		if ($template) {
+		
+			$filtered = array();
+		
+			foreach ($this->selection as $key => $page) {
+				if ($page->template == $template) {
+					$filtered[$key] = $page;
+				}
+			}
+		
+			$this->selection = $filtered;
+		
+		}
+		
+	}
+	
 		 
 	/**
-	 *	Filter $this->selection by multiple keywords (a search string).
+	 *	Filter $this->selection by multiple keywords (a search string), if $str is not empty.
 	 *
 	 *	@param string $str
 	 */
 	
 	public function filterByKeywords($str) {
 		
-		$filtered = array();
-		
-		$keywords = explode(' ', strip_tags($str));
-		
-		// generate pattern
-		$pattern = '/^';
-		foreach ($keywords as $keyword) {
-			$pattern .= '(?=.*' . $keyword . ')';
-		}
-		// case-insensitive and multiline
-		$pattern .= '/is';
-		
-		// loop elements in $this->selection
-		foreach ($this->selection as $key => $page) {
+		if ($str) {
 			
-			// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
-			// even if the keywords are distributed over different variables in $page[data]. 
-			$dataAsString = strip_tags(implode(" ", $page->data));
-								
-			// search
-			if (preg_match($pattern, $dataAsString) == 1) {
-				$filtered[$key] = $page;
+			$filtered = array();
+
+			$keywords = explode(' ', strip_tags($str));
+		
+			// generate pattern
+			$pattern = '/^';
+			foreach ($keywords as $keyword) {
+				$pattern .= '(?=.*' . $keyword . ')';
 			}
+			// case-insensitive and multiline
+			$pattern .= '/is';
+		
+			// loop elements in $this->selection
+			foreach ($this->selection as $key => $page) {
+			
+				// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
+				// even if the keywords are distributed over different variables in $page[data]. 
+				$dataAsString = strip_tags(implode(' ', $page->data));
+								
+				// search
+				if (preg_match($pattern, $dataAsString) == 1) {
+					$filtered[$key] = $page;
+				}
+			
+			}
+		
+			$this->selection = $filtered;
 			
 		}
-		
-		$this->selection = $filtered;
 		
 	}
 	
 	
 	/**
-	 *	Filter out the neighbors (prevoius and next page) to the passed URL under the same parent URL.
+	 *	Filter out the neighbors (previous and next page) to the passed URL under the same parent URL.
 	 *
 	 *	$this->selection only holds two pages after completion with the keys ['prev'] and ['next'] instead of the URL-key.
 	 *	If there is only one page in the array (has no siblings), the selection will be empty. For two pages, it will only
@@ -187,7 +263,7 @@ class Selection {
 	public function filterPrevAndNextToUrl($url) {
 		
 		// Narrow down selection to pages with the same parentUrl
-		$this->filterByParentUrl($this->selection[$url]->parentRelUrl);
+		$this->filterByParentUrl($this->selection[$url]->parentUrl);
 		$this->sortPagesByPath();
 		
 		$keys = array_keys($this->selection);
@@ -222,6 +298,41 @@ class Selection {
 		
 	}
 	
+	
+	/**
+	 *	Filter all pages having one or more tag in common with $page. If there are not tags defined for the passed page,
+	 *	the selection will be an empty array. (no tags = no related pages)
+	 *
+	 *	@param object $page
+	 */
+	
+	public function filterRelated($page) {
+		
+		$tags = $page->tags;
+		
+		$filtered = array();
+		
+		if ($tags) {
+		
+			foreach ($tags as $tag) {
+			
+				foreach($this->selection as $key => $p) {
+		
+					if (in_array($tag, $p->tags)) {
+						$filtered[$key] = $p;
+					}			
+					
+				}		
+						
+			}
+	
+		}
+		
+		$this->selection = $filtered;
+		$this->excludePage($page->url);
+		
+	}
+		
 	 
 	/**
 	 * 	Makes the Home Page a neighbor of all level 1 pages. Useful for filtering the top level pages all together.
@@ -232,7 +343,7 @@ class Selection {
 		if (array_key_exists('/', $this->selection)) {
 			
 			$home = clone $this->selection['/'];
-			$home->parentRelUrl = '/';
+			$home->parentUrl = '/';
 			$home->level = 1;
 			$this->selection['/'] = $home;
 			
@@ -253,7 +364,7 @@ class Selection {
 		
 		foreach ($this->selection as $key => $page) {
 			
-			$arrayToSortBy[$key] = $page->relPath;
+			$arrayToSortBy[$key] = $page->path;
 			
 		}
 				
@@ -264,7 +375,6 @@ class Selection {
 	 
 	/**
 	 *	Sorts $this->selection based on any variable in the text files.
-	 *
 	 *	If the $var gets passed empty, $this->sortPagesByPath() will be used as fallback.
 	 *
 	 *	@param string $var (any variable from a text file)
@@ -274,6 +384,7 @@ class Selection {
 	public function sortPages($var, $order = SORT_ASC) {
 		
 		if ($var) {
+			
 			// If $var is set the selections is sorted by data[$var]
 			$arrayToSortBy = array();
 		

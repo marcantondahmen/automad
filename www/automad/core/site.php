@@ -140,36 +140,38 @@ class Site {
 	
 	
 	/**
-	 *	Searches $relPath recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
+	 *	Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
 	 *
 	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
 	 *	To access the data of a specific page within the $siteCollection array, the page's url serves as the key: $this->siteCollection['/path/to/page']
 	 *
-	 *	@param string $relPath 
+	 *	@param string $path 
 	 *	@param number $level 
-	 *	@param string $parentRelUrl
+	 *	@param string $parentUrl
 	 */
 	 
-	private function collectPages($relPath = '', $level = 0, $parentRelUrl = '') {
+	private function collectPages($path = '/', $level = 0, $parentUrl = '') {
 		
-		$fullPath = rtrim(AM_BASE_DIR . AM_DIR_PAGES . '/' . $relPath, '/');
+		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $path;
 		
 		// Test if the directory actually has a data file.		
 		if (count(glob($fullPath . '/*.' . AM_FILE_EXT_DATA)) > 0) {
+			
+			Debug::log('      ' . $fullPath);
 						
 			$ignore = array('.', '..', '@eaDir');
 				
 			if ($dh = opendir($fullPath)) {
 			
-				$relUrl = $this->makeUrl($parentRelUrl, basename($relPath));
+				$url = $this->makeUrl($parentUrl, basename($path));
 		
 				while (false !== ($item = readdir($dh))) {
 		
 					if (!in_array($item, $ignore)) {
 					
-						$itemFullPath = $fullPath . '/' . $item;
-									
+						$itemFullPath = $fullPath . $item;
+						
 						// If $item is a file with the AM_FILE_EXT_DATA, $item gets added to the index.
 						// In case there are more than one matching file, the last accessed gets added.
 						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == AM_FILE_EXT_DATA) {
@@ -179,35 +181,42 @@ class Site {
 							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 							// In case the title is missig for the home page, use the site name instead.
 							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-								if ($relUrl) {
-									$data['title'] = ucwords(basename($relUrl));
+								if (trim($url, '/')) {
+									// If page is not the home page...
+									$data['title'] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 								} else {
+									// If page is home page...
 									$data['title'] = $this->getSiteName();
 								}
 							} 
 						
 							// Extract tags
 							$tags = Parse::extractTags($data);
+							
+							// Check for an URL in $data and use that URL instead.
+							if (array_key_exists(AM_PARSE_URL_KEY, $data)) {
+								$url = $data[AM_PARSE_URL_KEY];
+							}
 						
-							// The relative URL ($relUrl) of the page becomes the key (in $siteCollection). 
+							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
 							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
 							$P = new Page();
 							$P->data = $data;
 							$P->tags = $tags;
-							$P->relUrl = $relUrl;
-							$P->relPath = $relPath;
+							$P->url = $url;
+							$P->path = $path;
 							$P->level = $level;
-							$P->parentRelUrl = $parentRelUrl;
+							$P->parentUrl = $parentUrl;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
-							$this->siteCollection[$relUrl] = $P;
+							$this->siteCollection[$url] = $P;
 							
 						}
 					
 						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
 						if (is_dir($itemFullPath)) {
 						
-							$this->collectPages(ltrim($relPath . '/' . $item, '/'), $level + 1, $relUrl);
-						
+							$this->collectPages($path . $item . '/', $level + 1, $url);
+							
 						}
 						
 					}
@@ -220,7 +229,7 @@ class Site {
 		
 		} else {
 			
-			Debug::log('No file with the extension ".' . AM_FILE_EXT_DATA . '" found in "' . $fullPath . '/" - Skipped directory!');
+			Debug::log('Skip  ' . $fullPath . ' (No .' . AM_FILE_EXT_DATA . ' file found!)');
 		
 		}
 			
@@ -233,11 +242,11 @@ class Site {
 	
 	public function __construct() {
 		
+		Debug::log('Site: New Instance created!');
+		Debug::log('Site: Scan directories for page content:');
+		
 		$this->parseSiteSettings();
 		$this->collectPages();
-		
-		Debug::log('Site: New Instance created!');
-		Debug::log('Site: Pages collected!');
 		
 	}
 
@@ -327,11 +336,11 @@ class Site {
 			// If page exists
 			return $this->siteCollection[$url];
 	
-		} elseif (isset($_GET["search"]) && $url == AM_PAGE_RESULTS_URL) {
+		} elseif (Parse::queryKey('search') && $url == AM_PAGE_RESULTS_URL) {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage('results', AM_PAGE_RESULTS_TITLE . ' / "' . $_GET["search"] . '"');
+			return $this->createPage('results', AM_PAGE_RESULTS_TITLE . ' / "' . Parse::queryKey('search') . '"');
 	
 		} else {
 	
@@ -376,7 +385,7 @@ class Site {
 		$page = new Page();
 		$page->template = $template;
 		$page->data['title'] = $title;
-		$page->parentRelUrl = '';
+		$page->parentUrl = '';
 		
 		return $page;
 		

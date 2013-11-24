@@ -69,14 +69,14 @@ class Page {
 	 *	The relative URL of the page (PATH_INFO).
 	 */
 	
-	public $relUrl;
+	public $url;
 	
 	
 	/**
 	 * 	The relative path in the file system.
 	 */
 	
-	public $relPath;
+	public $path;
 	
 	
 	/**
@@ -90,7 +90,7 @@ class Page {
 	 * 	The relative URL of the parent page.
 	 */
 	
-	public $parentRelUrl;
+	public $parentUrl;
 	
 	
 	/**
@@ -150,7 +150,7 @@ class Page {
 			$currentPath = '/';
 		}
 		
-		if ($currentPath == $this->relUrl) {
+		if ($currentPath == $this->url) {
 			return true;
 		} else {
 			return false;
@@ -173,11 +173,11 @@ class Page {
 			$currentPath = '/';
 		}
 		
-		// Test if $currentPath starts with $this->relUrl.
-		// The trailing slash is very important ($this->relUrl . '/'), since without that slash,
+		// Test if $currentPath starts with $this->url.
+		// The trailing slash is very important ($this->url . '/'), since without that slash,
 		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage, 
 		// while /path/to/page/ would not match.
-		if (strpos($currentPath, $this->relUrl . '/') === 0 && !$this->isCurrent()) {
+		if (strpos($currentPath, $this->url . '/') === 0 && !$this->isCurrent()) {
 			return true;
 		} else {
 			return false;
@@ -194,7 +194,7 @@ class Page {
 	
 	public function isHome() {
 		
-		if ($this->relUrl == '/') {
+		if ($this->url == '/') {
 			return true;
 		} else {
 			return false;

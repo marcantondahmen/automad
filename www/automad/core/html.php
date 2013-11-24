@@ -45,11 +45,15 @@ class Html {
 	/**
 	 *	Add an image with an optional link.
 	 *
+	 *	A glob pattern can be passed as an image. The first match will then be used.
+	 *	For example, using a glob pattern has the advantage of being able to display the first image of every page (as a logo or thumbnail),
+	 *	by just passing '*.jpg' or '*.png', without naming all the images the same. 
+	 *
 	 *	The requested image can be optionally resized and cropped. 
 	 *	If only a file is specified, the placed image keeps its original size and has no link.
 	 *	If the image is a JPG and the description field in its EXIF data is defined, that description is used for the title attribute.
 	 *
-	 *	@param string $file
+	 *	@param string $glob
 	 *	@param string $w
 	 *	@param string $h
 	 *	@param boolean $crop
@@ -58,29 +62,42 @@ class Html {
 	 *	@return the HTML of an img tag (optionally wrapped by the given link)
 	 */
 	
-	public static function addImage($file, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+		
+		if ($glob) {
+			
+			$files = glob($glob);	
+			$file = reset($files);
+			
+			Debug::log('Html: First image matching ' . basename($glob) . ' is ' . $file);
+			
+		}
 		
 		if ($file) {
 							
 			$img = new Image($file, $w, $h, $crop);
 			
-			if ($target) {
-				$target = ' target="' . $target . '"';
-			}
+			if ($img->file) {
 			
-			$html = '';
+				if ($target) {
+					$target = ' target="' . $target . '"';
+				}
+			
+				$html = '';
 		
-			if ($link) {
-				$html .= '<a href="' . $link . '"' . $target . '>';
-			}
+				if ($link) {
+					$html .= '<a href="' . $link . '"' . $target . '>';
+				}
 			
-			$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+				$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
 			
-			if ($link) {
-				$html .= '</a>';
-			}
+				if ($link) {
+					$html .= '</a>';
+				}
 			
-			return $html;
+				return $html;
+				
+			}	
 		
 		}
 		
@@ -115,7 +132,7 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		return '<a' . $classes . ' href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>';
+		return '<a' . $classes . ' href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>';
 		
 	}
 
@@ -123,16 +140,16 @@ class Html {
 	/**
 	 *	Branch out recursively below a certain relative URL.
 	 *
-	 *	@param string $parentRelUrl
+	 *	@param string $parentUrl
 	 *	@param boolean $expandAll
 	 *	@param array $collection (all pages)
 	 *	@return the HTML for the branch/tree (recursive)
 	 */
 
-	private static function branch($parentRelUrl, $expandAll, $collection) {
+	private static function branch($parentUrl, $expandAll, $collection) {
 		
 		$selection = new Selection($collection);
-		$selection->filterByParentUrl($parentRelUrl);
+		$selection->filterByParentUrl($parentUrl);
 		$selection->sortPagesByPath();
 		
 		$pages = $selection->getSelection();
@@ -149,11 +166,11 @@ class Html {
 			
 				$html .= '<li>' . self::addLink($page) . '</li>';
 			
-				// There would be an infinite loop if the parentRelUrl equals the relUlr.
+				// There would be an infinite loop if the parentUrl equals the relUlr.
 				// That is the case if the current page is the homepage and the homepage moved to the first level. 
-				if ($page->parentRelUrl != $page->relUrl) {			
+				if ($page->parentUrl != $page->url) {			
 					if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-						$html .= self::branch($page->relUrl, $expandAll, $collection);
+						$html .= self::branch($page->url, $expandAll, $collection);
 					}
 				}
 			
@@ -181,7 +198,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->relUrl . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
 			
 		}
 		
@@ -207,8 +224,8 @@ class Html {
 
 		if ($tags) {
 
-			$query = self::getQueryArray();
-			$current = self::getQueryKey('filter');
+			$query = Parse::queryArray();
+			$current = Parse::queryKey('filter');
 		
 			$html = '<ul class="' . AM_HTML_CLASS_FILTER . '">';			
 		
@@ -261,22 +278,55 @@ class Html {
 		}
 		
 	}
+	
+
+	/**
+	 *	Generate the HTML for a list of resized images linking to their bigger versions.
+	 *
+	 *	@param string $glob
+	 *	@param integer $width
+	 *	@param integer $height
+	 *	@param integer $crop
+	 *	@return The HTML of a list of images as links to their bigger versions.
+	 */
+	
+	public static function generateImageSet($glob, $width = false, $height = false, $crop = false) {
+			
+		$files = glob($glob);
 		
+		if ($files) {
+			
+			$html = '<ul class="' . AM_HTML_CLASS_IMAGESET . '">';
+			
+			foreach($files as $file) {
+				
+				$bigImage = new Image($file);
+				$html .= '<li>' . self::addImage($file, $width, $height, $crop, $bigImage->file) . '</li>';
+				
+			}
+			
+			$html .= '</ul>';
+			
+			return $html;
+			
+		}
+	
+	}
+	
 	
 	/**
-	 * 	Generate the HTML for a page list out of a selection of pages and a string of variables.
-	 *
-	 *	The string of variables represents the variables used in the page's 
-	 *	text file which should be included in the HTML of the list.
-	 * 
-	 *	The function is private and is not supposed to be included in a template.
+	 *	Generate the HTML for a page list out of a selection of pages, an array of variables and optional image settings.
 	 *
 	 *	@param array $pages (selected pages)
 	 *	@param array $vars (variables to output in the list)
+	 *	@param string $glob (glob pattern to find a corresponding image within each page directory)
+	 *	@param integer $width
+	 *	@param integer $height
+	 *	@param integer $crop
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars) {
+	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false) {
 		
 		if ($pages) {			
 						
@@ -284,7 +334,19 @@ class Html {
 		
 			foreach ($pages as $page) {
 			
-				$html .= '<li><a href="' . $page->relUrl . '">';
+				$html .= '<li><a href="' . $page->url . '">';
+				
+				if ($glob) {
+					
+					// For each page, the glob pattern is matched against the page's direcory (if the glob is relative),
+					// to find a corresponding image as thumbnail.
+					// For example $glob = '*.jpg' will always use the first JPG in the page's directoy.
+					// To re-use $glob for every page in the loop, $glob can't be modified and 
+					// therefore $pageGlob will be used to build the full glob pattern.
+					$pageGlob = Modulate::filePath($page->path, $glob);		
+					$html .= Html::addImage($pageGlob, $width, $height, $crop);
+					
+				}
 			
 				foreach ($vars as $var) {
 				
@@ -379,11 +441,11 @@ class Html {
 	
 	public static function generateSortDirectionMenu($options) {
 		
-		$query = self::getQueryArray();
-		$current = self::getQueryKey('sort_dir');
+		$query = Parse::queryArray();
+		$current = Parse::queryKey('sort_dir');
 				
 		if (!$current) {
-			$current = AM_TOOL_DEFAULT_SORT_DIR;
+			$current = AM_LIST_DEFAULT_SORT_DIR;
 		}
 		
 		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
@@ -428,8 +490,8 @@ class Html {
 	
 	public static function generateSortTypeMenu($options) {
 
-		$query = self::getQueryArray();
-		$current = self::getQueryKey('sort_type');
+		$query = Parse::queryArray();
+		$current = Parse::queryKey('sort_type');
 		
 		// All option array items with numeric keys get merged into one item (last one kept).
 		// That way the text for the 'Original Order' button can be defined with just adding a "keyless" value to the array. 
@@ -484,49 +546,6 @@ class Html {
 		
 	}
 	
-	
-	/**
-	 *	Get the query string, if existing.
-	 *
-	 *	@return $query
-	 */
-	
-	private static function getQueryArray() {
-		
-		// First get existing query string to prevent overwriting existing settings passed already
-		// and store its data in $query.
-		if (isset($_GET)) {
-			$query = $_GET;
-		} else {
-			$query = array();
-		}
-		
-		return $query;
-		
-		
-	}
-	
-	
-	/**
-	 *	Test if a key exists in the query string and return that key.
-	 *
-	 *	@param string $key
-	 *	@return $queryKey
-	 */
-	
-	private static function getQueryKey($key) {
-	
-		// Save currently passed filter query to determine current filter/sort_dir when generating list
-		if (isset($_GET[$key])) {
-			$queryKey = $_GET[$key];
-		} else {
-			$queryKey = '';
-		}
-		
-		return $queryKey;
-	
-	}
-		
 	
 }
 

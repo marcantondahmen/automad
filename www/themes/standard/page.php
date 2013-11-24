@@ -3,29 +3,33 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-	<title>$[siteName] / [title]</title>
+	<title>t[siteName] / p[title]</title>
 	<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
-	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
+	<link rel="stylesheet" type="text/css" href="t[themeURL]/style.css" />
 </head>
 
 <body>
-	$[includeHome]
-	$[searchField()]
-	$[navTreeCurrent]
-	$[navPerLevel(2)]
+	t[includeHome]
+	t[search]
+	t[navTreeCurrent]
+	t[navPerLevel(2)]
 	<br />		
-	$[linkPrev]
-	$[linkNext]
+	t[linkPrev]
+	t[linkNext]
 	<br />
-	<h1>[title]</h1>
-	<h2>[subtitle]</h2>
-	$[filterParentByTags]
-	[text]
+	<h1>p[title]</h1>
+	<h2>p[subtitle]</h2>
+	t[imgSet(file: images/*.jpg, width: 200, height: 200, crop: 1)]
+	t[filterParentByTags]
+	p[text]
 	<br />
 	<p>Related Pages:</p>
-	$[relatedPages(title, tags)]
+
+	t[listSetup(title, tags, type: related)]
+	t[listPages]
+
 	<br />
-	$[navBreadcrumbs]
+	t[navBreadcrumbs]
 	<br />
 	<p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>

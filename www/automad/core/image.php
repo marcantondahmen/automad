@@ -115,7 +115,7 @@ class Image {
 	 *	The full file system path to the generated image.
 	 */
 	
-	public $fileFullPath;
+	private $fileFullPath;
 	
 	
 	/**
@@ -149,34 +149,38 @@ class Image {
 			
 			$getimagesize = getimagesize($originalFile);
 			
-			$this->originalFile = $originalFile;
-			$this->originalWidth = $getimagesize[0];
-			$this->originalHeight = $getimagesize[1];	
-			$this->type = $getimagesize['mime'];
-			$this->description = $this->getDescription();
-			$this->crop = $crop;
-		
-			if ($requestedWidth) {
-				$this->requestedWidth = $requestedWidth;
-			} else {
-				$this->requestedWidth = $this->originalWidth;
-			}
-		
-			if ($requestedHeight) {
-				$this->requestedHeight = $requestedHeight;
-			} else {
-				$this->requestedHeight = $this->originalHeight;
-			}
-	
-			// Get the possible size for the generated image (based on crop and original size).
-			$this->calculateSize();
+			if ($getimagesize) {
 			
-			// Get the filename hash, based on the given settings, to check later, if the file exists.
-			$this->file = $this->getImageCacheFilePath();
-			$this->fileFullPath = AM_BASE_DIR . $this->file;
+				$this->originalFile = $originalFile;
+				$this->originalWidth = $getimagesize[0];
+				$this->originalHeight = $getimagesize[1];	
+				$this->type = $getimagesize['mime'];
+				$this->description = $this->getDescription();
+				$this->crop = $crop;
 		
-			// Check if an image with the generated hash exists already and create the file, when neccassary.
-			$this->verifyCachedImage();
+				if ($requestedWidth) {
+					$this->requestedWidth = $requestedWidth;
+				} else {
+					$this->requestedWidth = $this->originalWidth;
+				}
+		
+				if ($requestedHeight) {
+					$this->requestedHeight = $requestedHeight;
+				} else {
+					$this->requestedHeight = $this->originalHeight;
+				}
+	
+				// Get the possible size for the generated image (based on crop and original size).
+				$this->calculateSize();
+			
+				// Get the filename hash, based on the given settings, to check later, if the file exists.
+				$this->file = $this->getImageCacheFilePath();
+				$this->fileFullPath = AM_BASE_DIR . $this->file;
+		
+				// Check if an image with the generated hash exists already and create the file, when neccassary.
+				$this->verifyCachedImage();
+				
+			}
 			
 		}
 		
@@ -305,6 +309,8 @@ class Image {
 		imagesavealpha($dest, true);
 		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
 			
+		$old = umask(0);
+		Debug::log('Image: Changed umask: ' . umask());
 		Debug::log($this);
 		Debug::log('Image: Save: ' . $this->fileFullPath);
 		
@@ -322,6 +328,9 @@ class Image {
 		
 		}
 		
+		umask($old);
+		Debug::log('Image: Restored umask: ' . umask());
+		
 		ImageDestroy ($src);
 		ImageDestroy ($dest);
 		
@@ -336,8 +345,13 @@ class Image {
 	
 	private function getDescription() {
 		
-		if ($this->type == 'image/jpeg') {	
-			return exif_read_data($this->originalFile)['ImageDescription'];
+		if ($this->type == 'image/jpeg') {
+			$exif = exif_read_data($this->originalFile);
+			if (array_key_exists('ImageDescription', $exif)) {
+				return $exif['ImageDescription'];
+			} else {
+				return '';
+			}
 		} else {
 			return '';
 		}

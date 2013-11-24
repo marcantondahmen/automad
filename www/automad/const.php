@@ -144,38 +144,7 @@ if (!defined('AM_IMG_JPG_QUALITY')) {
 }
 
 
-// TOOL KEYS
-// String to be used within the options to define a filename/filepath
-if (!defined('AM_TOOL_OPTION_KEY_FILENAME')) {
-	define('AM_TOOL_OPTION_KEY_FILENAME', 'file');
-}
-// String to be used within the options to define a width
-if (!defined('AM_TOOL_OPTION_KEY_WIDTH')) {
-	define('AM_TOOL_OPTION_KEY_WIDTH', 'width');
-}
-// String to be used within the options to define a height
-if (!defined('AM_TOOL_OPTION_KEY_HEIGHT')) {
-	define('AM_TOOL_OPTION_KEY_HEIGHT', 'height');
-}
-// String to be used within the options to define the crop parameter
-if (!defined('AM_TOOL_OPTION_KEY_CROP')) {
-	define('AM_TOOL_OPTION_KEY_CROP', 'crop');
-}
-// String to be used within the options to define a link
-if (!defined('AM_TOOL_OPTION_KEY_LINK')) {
-	define('AM_TOOL_OPTION_KEY_LINK', 'link');
-}
-// String to be used within the options to define a link target
-if (!defined('AM_TOOL_OPTION_KEY_TARGET')) {
-	define('AM_TOOL_OPTION_KEY_TARGET', 'target');
-}
-
-
 // TOOL OPTIONS
-// Default Tool options
-if (!defined('AM_TOOL_OPTIONS_IMG')) {
-	define('AM_TOOL_OPTIONS_IMG', AM_TOOL_OPTION_KEY_FILENAME . ': , ' . AM_TOOL_OPTION_KEY_WIDTH . ': , ' . AM_TOOL_OPTION_KEY_HEIGHT . ': , ' . AM_TOOL_OPTION_KEY_CROP . ': 0, ' . AM_TOOL_OPTION_KEY_LINK . ': , ' . AM_TOOL_OPTION_KEY_TARGET . ': ');
-}
 // Placeholder text for search field
 if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
 	define('AM_TOOL_OPTIONS_SEARCH', 'Search ...');
@@ -190,27 +159,27 @@ if (!defined('AM_TOOL_OPTIONS_SORT_DIR')) {
 }
 
 
-// TOOL DEFAULTS
+// LISTING DEFAULTS
 // Default sort direction
-if (!defined('AM_TOOL_DEFAULT_SORT_DIR')) {
-	define('AM_TOOL_DEFAULT_SORT_DIR', 'sort_asc');
+if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
+	define('AM_LIST_DEFAULT_SORT_DIR', 'sort_asc');
 }
 
 
 // TEMPLATE DEFAULTS
-// Left delimiter for template variables
+// Left delimiter for page variables
 if (!defined('AM_TMPLT_DEL_VAR_L')) {
-	define('AM_TMPLT_DEL_VAR_L', '[');
+	define('AM_TMPLT_DEL_VAR_L', 'p[');
 }
-// Right delimiter for template variables
+// Right delimiter for page variables
 if (!defined('AM_TMPLT_DEL_VAR_R')) {
 	define('AM_TMPLT_DEL_VAR_R', ']');
 }
-// Left delimiter for template functions
+// Left delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_L')) {
-	define('AM_TMPLT_DEL_TOOL_L', '$[');
+	define('AM_TMPLT_DEL_TOOL_L', 't[');
 }
-// Right delimiter for template functions
+// Right delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_R')) {
 	define('AM_TMPLT_DEL_TOOL_R', ']');
 }
@@ -240,6 +209,10 @@ if (!defined('AM_HTML_CLASS_TREE')) {
 // Page list class
 if (!defined('AM_HTML_CLASS_LIST')) {
 	define('AM_HTML_CLASS_LIST', 'list');
+}
+// Page image set class
+if (!defined('AM_HTML_CLASS_IMAGESET')) {
+	define('AM_HTML_CLASS_IMAGESET', 'imageset');
 }
 // Sort menu class
 if (!defined('AM_HTML_CLASS_SORT')) {
@@ -299,6 +272,10 @@ if (!defined('AM_PARSE_TAG_SEPARATOR')) {
 // Tags key (to identify tags in the page's txt file)
 if (!defined('AM_PARSE_TAGS_KEY')) {
 	define('AM_PARSE_TAGS_KEY', 'tags');
+}
+// URL key (to identify an URL in the page's txt file)
+if (!defined('AM_PARSE_URL_KEY')) {
+	define('AM_PARSE_URL_KEY', 'url');
 }
 // List of file extensions to identify file in URL
 if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {

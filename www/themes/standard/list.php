@@ -3,25 +3,26 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-	<title>$[siteName] / [title]</title>
+	<title>t[siteName] / p[title]</title>
 	<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
-	<link rel="stylesheet" type="text/css" href="$[themeURL]/style.css" />
+	<link rel="stylesheet" type="text/css" href="t[themeURL]/style.css" />
 </head>
 
 <body>
-	$[includeHome]
-	$[searchField(Search this Site ...)]
-	$[navTreeCurrent]
-	$[navPerLevel]
-	<h1>[title]</h1>
+	t[includeHome]
+	t[search(Search this Site ...)]
+	t[navTreeCurrent]
+	t[navPerLevel]
+	<h1>p[title]</h1>
 	
-	$[menuFilterChildren]
-	$[menuSortType(title: Title)]
-	$[menuSortDirection]
-	$[listChildren(title, subtitle, tags, text)]
+	t[listSetup(title, tags, type: children, template: page, file: *.jpg, width: 400, crop: 0)]
+	t[listFilters]
+	t[listSortTypes]
+	t[listSortDirection]
+	t[listPages]
 	
 	<br />
-	<p>$[navBreadcrumbs]</p>
+	<p>t[navBreadcrumbs]</p>
 	<br />
 	<p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>

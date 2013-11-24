@@ -64,24 +64,10 @@ class Toolbox {
 	
 	
 	/**
-	 *	Filter for the page lists.
+	 *	The Listing object to be used for all list* methods.
 	 */
 	
-	private $filter;
-	
-	
-	/**
-	 * 	The type defines the way the pages within the lists gets sortet.
-	 */
-	
-	private $sortType;
-	
-	
-	/**
-	 * 	Sort order for lists.
-	 */
-	
-	private $sortDirection;
+	private $L;
 	
 	
 	/**
@@ -94,24 +80,8 @@ class Toolbox {
 		$this->collection = $this->S->getCollection();
 		$this->P = $this->S->getCurrentPage();
 		
-		// Set up filter and sort
-		if (isset($_GET['filter'])) {
-			$this->filter = $_GET['filter'];
-		} else {
-			$this->filter = '';
-		}
-		
-		if (isset($_GET['sort_type'])) {
-			$this->sortType = $_GET['sort_type'];
-		} else {
-			$this->sortType = '';
-		}
-		
-		if (isset($_GET['sort_dir'])) {
-			$this->sortDirection = constant(strtoupper($_GET['sort_dir']));
-		} else {
-			$this->sortDirection = constant(strtoupper(AM_TOOL_DEFAULT_SORT_DIR));
-		}
+		// Set up default Listing object
+		$this->listSetup();
 		
 	}
 	
@@ -124,7 +94,7 @@ class Toolbox {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->P->tags, $this->P->parentRelUrl);
+		return Html::generateFilterMenu($this->P->tags, $this->P->parentUrl);
 		
 	}
 	
@@ -132,39 +102,70 @@ class Toolbox {
 	/**
 	 *	Place an image with an optional link.
 	 *
-	 *	@param string $optionStr - (file: path/to/file, width: px, height: px, crop: 1, link: url, target: _blank)
+	 *	@param string $optionStr - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1, link: url, target: _blank)
 	 *	@return HTML for the image output
 	 */
 	
 	public function img($optionStr) {
 		
-		$options = Parse::toolOptions($optionStr);	
-		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_IMG);
-		$options = array_merge($defaults, $options);
-		$file = $options[AM_TOOL_OPTION_KEY_FILENAME];
-				
-		if ($file) {
-			
-			if (strpos($file, '/') === 0) {
-				// Relative to root
-				$file = AM_BASE_DIR . $file;
-			} else {
-				// Relative to page
-				$path = ltrim($this->P->relPath . '/', '/');
-				$file = AM_BASE_DIR . AM_DIR_PAGES . '/' . $path . $file;
-			}
+		// Default options
+		$defaults = 	array(
+					'file' => '',
+					'width' => false,
+					'height' => false,
+					'crop' => false,
+					'link' => false,
+					'target' => false
+				);
 		
-			$w = intval($options[AM_TOOL_OPTION_KEY_WIDTH]);
-			$h = intval($options[AM_TOOL_OPTION_KEY_HEIGHT]);
-			$crop = (boolean)intval($options[AM_TOOL_OPTION_KEY_CROP]);
-			$link = $options[AM_TOOL_OPTION_KEY_LINK];
-			$target = $options[AM_TOOL_OPTION_KEY_TARGET];
+		// Merge options with defaults				
+		$options = array_merge($defaults, Parse::toolOptions($optionStr));
 		
-			return Html::addImage($file, $w, $h, $crop, $link, $target);
+		// Turn relevant vars into integer
+		foreach(array('width', 'height', 'crop') as $key) {
+			$options[$key] = intval($options[$key]);
+		}
 			
+		if ($options['file']) {
+			$glob = Modulate::filePath($this->P->path, $options['file']);
+			return Html::addImage($glob, $options['width'], $options['height'], $options['crop'], $options['link'], $options['target']);
 		}
 
 	}
+	
+	
+	/**
+	 *	Place a set of resized images, linking to their original sized version.
+	 *	This tool returns the basic HTML for a simple image gallery.
+	 *
+	 *	@param string $optionStr - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1)
+	 *	@return The HTML of a list of resized images with links to their bigger versions
+	 */
+	
+	public function imgSet($optionStr) {
+		
+		// Default options
+		$defaults = 	array(
+					'file' => '*.jpg',
+					'width' => false,
+					'height' => false,
+					'crop' => false
+				);
+		
+		// Merge options with defaults				
+		$options = array_merge($defaults, Parse::toolOptions($optionStr));
+		
+		// Turn relevant vars into integer
+		foreach(array('width', 'height', 'crop') as $key) {
+			$options[$key] = intval($options[$key]);
+		}
+			
+		if ($options['file']) {
+			$glob = Modulate::filePath($this->P->path, $options['file']);
+			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop']);
+		}
+		
+	}	
 	
 	
 	/**
@@ -190,7 +191,7 @@ class Toolbox {
 	public function linkPrev() {
 		
 		$selection = new Selection($this->collection);
-		$selection->filterPrevAndNextToUrl($this->P->relUrl);
+		$selection->filterPrevAndNextToUrl($this->P->url);
 		
 		$pages = $selection->getSelection();
 		
@@ -211,7 +212,7 @@ class Toolbox {
 	public function linkNext() {
 		
 		$selection = new Selection($this->collection);
-		$selection->filterPrevAndNextToUrl($this->P->relUrl);
+		$selection->filterPrevAndNextToUrl($this->P->url);
 		
 		$pages = $selection->getSelection();
 		
@@ -224,130 +225,100 @@ class Toolbox {
 
 
 	/**
-	 * 	Return the HTML for a list of all pages excluding the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($optionStr).
+	 *	Setup a new Listing object based on a string of comma separated options and the current Site object.
 	 *
-	 *	@param string $optionStr - All variables from the page's text file which should be included in the output. Expample: $[listAll(title, subtitle, date)]
-	 *	@return the HTML of the list
+	 *	An example for such a string could be ("title, subtitle, type: children, template: page, file: *.jpg, width: 200, crop: 1") 
+	 *	and would create a Listing object including all pages below the current page with "page" as their template,
+	 *	showing the title and subtitle of each page along with an image, cropped to 200px width.
+	 *
+	 *	All options in that string are optional.<br>
+	 *	All options passed as a simple string (for example "title" without a ":") are interpreted as variables from the page's text file, like the title etc.
+	 *	and represent a variable in the Listing's output.<br> 
+	 *	So, a string like ("tilte, subtitle") will create a list where each page's title ans subtitle will show up.
+	 *	
+	 *	All options passed as a "Key: Value" pair are interpreted as special options to format the Listing and specify the included pages. 
+	 *	Possible options are:
+	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
+	 *	- "template: name" 		(all pages matching that template)
+	 *	- "file: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
+	 *	- "width: pixels" 		(image width, passed as interger value without unit: "width: 100")
+	 *	- "height: pixels" 		(image height, passed as interger value without unit: "width: 100")
+	 *	- "crop: 0 | 1"			(crop image or not)
+	 *	
+	 *	@param string $optionStr 
 	 */
-	
-	public function listAll($optionStr) {
-	
-		$vars = Parse::toolOptions($optionStr);
-		
-		if (empty($vars)) {
-			$vars = array('title');
-		}
 
-		$selection = new Selection($this->collection);	
-		$selection->filterByTag($this->filter);
-		$selection->sortPages($this->sortType, $this->sortDirection);
-		$pages = $selection->getSelection();
+	public function listSetup($optionStr = '') {
+		
+		// Default setup
+		$defaults = 	array(
+					'type' => 'all',
+					'template' => false,
+					'file' => false,
+					'width' => false,
+					'height' => false,
+					'crop' => false,
+					'vars' => array('title')
+				);
 	
-		// Remove current page from selecion
-		unset($pages[$this->P->relUrl]);
-	
-		return Html::generateList($pages, $vars);	
+		// Merge defaults with options
+		$options = array_merge($defaults, Parse::toolOptions($optionStr));
 		
-	}
-
-	
-	/**
-	 * 	Return the HTML for a list of pages below the current page.
-	 *	The variables to be included in the output are set in a comma separated parameter string ($optionStr).
-	 *
-	 *	@param string $optionStr - All variables from the page's text file which should be included in the output. Expample: $[listAll(title, subtitle, date)]
-	 *	@return the HTML of the list
-	 */
-	
-	public function listChildren($optionStr) {
-		
-		$vars = Parse::toolOptions($optionStr);
-		
-		if (empty($vars)) {
-			$vars = array('title');
-		}
-		
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($this->P->relUrl);
-		$selection->filterByTag($this->filter);
-		$selection->sortPages($this->sortType, $this->sortDirection);
-		
-		return Html::generateList($selection->getSelection(), $vars);
-		
-	}
-	
-
-	/**
-	 *	Place a set of all tags (sitewide) to filter the full page list. The filter only affects lists of pages created by Toolbox::listAll()
-	 *
-	 *	This method should be used together with the listAll() method.
-	 *
-	 *	@return the HTML of the filter menu
-	 */
-	
-	public function menuFilterAll() {
-		
-		$selection = new Selection($this->collection);
-		$pages = $selection->getSelection();
-		
-		// Remove current page from selecion
-		unset($pages[$this->P->relUrl]);
-		
-		$tags = array();
-		
-		foreach ($pages as $page) {
-			
-			$tags = array_merge($tags, $page->tags);
-			
+		// Turn relevant vars into integer
+		foreach(array('width', 'height', 'crop') as $key) {
+			$options[$key] = intval($options[$key]);
 		}
 		
-		$tags = array_unique($tags);
-		sort($tags);
+		// Move numeric elements into vars array
+		foreach($options as $key => $value) {
+			if (is_int($key)) {
+				$options['vars'][$key] = $value;
+				unset($options[$key]);
+			}
+		}
 		
-		return Html::generateFilterMenu($tags);
+		// Create new Listing out of $options. 
+		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
 		
 	}
 
 
 	/**
-	 *	Place a set of all tags included in the children pages to filter the list of children pages. The filter only affects lists of pages created by Toolbox::listChildren()
+	 *	Return a page list from Listing object created by Toolbox::listSetup().
 	 *
-	 *	This method should be used together with the listChildren() method.
-	 *
-	 *	@return the HTML of the filter menu
+	 *	@return The HTML for a page list.
 	 */
+
+	public function listPages() {
 	
-	public function menuFilterChildren() {
-		
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($this->P->relUrl);
-		$pages = $selection->getSelection();
-		
-		$tags = array();
-		
-		foreach ($pages as $page) {
-			
-			$tags = array_merge($tags, $page->tags);
-			
-		}
-		
-		$tags = array_unique($tags);
-		sort($tags);
-		
-		return Html::generateFilterMenu($tags);
+		$L = $this->L;
+	
+		return Html::generateList($L->pages, $L->vars, $L->glob, $L->width, $L->height, $L->crop);	
 		
 	}
 
+
+	/**
+	 *	Create a filter menu to filter a page list created by Toolbox::listPages() regarding the options defined by Toolbox::listOptions().
+	 *
+	 *	@return The HTML for the filter menu.
+	 */
+
+	public function listFilters() {
+		
+		return Html::generateFilterMenu($this->L->tags);
+		
+	}
+	
 	
 	/**
-	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll()
+	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listPages()
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
 	 *	@return the HTML for the sort menu
 	 */
 	
-	public function menuSortDirection($optionStr) {
+	public function listSortDirection($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);
 		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_DIR);
@@ -359,14 +330,14 @@ class Toolbox {
 		
 
 	/**
-	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listChildren() and Toolbox::listAll().
+	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listPages().
 	 *	If the $optionStr is missing, the default options are used.
 	 *
 	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
 	 *	@return the HTML for the sort menu
 	 */
 
-	public function menuSortType($optionStr) {
+	public function listSortTypes($optionStr) {
 		
 		$options = Parse::toolOptions($optionStr);
 		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_TYPE);		
@@ -402,20 +373,11 @@ class Toolbox {
 	 */
 	
 	public function navBreadcrumbs() {
-		
-		$pages = array();
-		$urlSegments = explode('/', $this->P->relUrl);
-		$urlSegments = array_unique($urlSegments);
-		$tempUrl = '';
-		
-		foreach ($urlSegments as $urlSegment) {
 			
-			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');
-			$pages[] = $this->S->getPageByUrl($tempUrl); 
-			
-		}
+		$selection = new Selection($this->collection);
+		$selection->filterBreadcrumbs($this->P->url);
 		
-		return Html::generateBreadcrumbs($pages);
+		return Html::generateBreadcrumbs($selection->getSelection());
 		
 	}
 	
@@ -428,7 +390,7 @@ class Toolbox {
 	
 	public function navChildren() {
 	
-		return $this->navBelow($this->P->relUrl);
+		return $this->navBelow($this->P->url);
 		
 	}
 	
@@ -442,23 +404,32 @@ class Toolbox {
 	
 	public function navPerLevel($optionStr) {
 		
-		$maxLevel = (int)trim($optionStr);
-		$urlSegments = explode('/', $this->P->relUrl);
-		$urlSegments = array_unique($urlSegments);
-		$tempUrl = '';
+		$maxLevel = intval(trim($optionStr));
+		$level = 0;
+		
+		$selection = new Selection($this->collection);
+		$selection->filterBreadcrumbs($this->P->url);
+		$pages = $selection->getSelection();
+		
 		$html = '';
-				
-		foreach ($urlSegments as $urlSegment) {
+		
+		foreach ($pages as $page) {
 			
-			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');	
-			
-			if ((int)$this->S->getPageByUrl($tempUrl)->level < $maxLevel || !$maxLevel) {
-				$html .= $this->navBelow($tempUrl);
+			// Since the homepage's level might be changed by $selection->makeHomePageFirstLevel(),
+			// a separate counter has to be used to be independend from the page's level and to avoid problems
+			// when setting $maxLevel to 1.
+			// If the page's level would be used and the homepage got shifted to the first level before, 
+			// navPerLevel(1) wouldn't output anything (1 > 1 = false), not even the first level. 
+			if (!$maxLevel || $maxLevel > $level) {
+				$html .= $this->navBelow($page->url);
 			}
+			
+			$level++;
+			
 		}
 		
 		return $html;
-		
+
 	}
 	
 	
@@ -470,7 +441,7 @@ class Toolbox {
 	
 	public function navSiblings() {
 		
-		return $this->navBelow($this->P->parentRelUrl);
+		return $this->navBelow($this->P->parentUrl);
 		
 	}
 	
@@ -517,45 +488,6 @@ class Toolbox {
 	
 	}
 
-	
-	/**
-	 * 	Generate a list of pages having at least one tag in common with the current page.
-	 *
-	 *	@param string $optionStr - Variables from the text files to be included in the output. Example: $[relatedPages(title, date)]
-	 *	@return html of the generated list
-	 */
-	
-	public function relatedPages($optionStr) {
-		
-		$vars = Parse::toolOptions($optionStr);
-		
-		if (empty($vars)) {
-			$vars = array('title');
-		}
-		
-		$pages = array();
-		$tags = $this->P->tags;
-		
-		// Get pages
-		foreach ($tags as $tag) {
-			
-			$selection = new Selection($this->collection);
-			$selection->filterByTag($tag);			
-			$pages = array_merge($pages, $selection->getSelection());
-						
-		}
-		
-		// Remove current page from selecion
-		unset($pages[$this->P->relUrl]);
-		
-		// Sort pages
-		$selection = new Selection($pages);
-		$selection->sortPagesByPath();
-		
-		return Html::generateList($selection->getSelection(), $vars);
-				
-	}
-	
 		
 	/**
 	 * 	Place a search field with placeholder text.
@@ -564,7 +496,7 @@ class Toolbox {
 	 *	@return the HTML of the searchfield
 	 */
 	
-	public function searchField($optionStr) {
+	public function search($optionStr) {
 		
 		// Don't parse $optionStr, since it can be only a string.
 		if (!$optionStr) {
@@ -572,38 +504,6 @@ class Toolbox {
 		}
 		
 		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $optionStr);
-		
-	}
-
-	
-	/**
-	 * 	Generate a list of search results.
-	 *
-	 *	@param string $optionStr (optional) - Variables from the text files to be included in the output. Example: $[searchResults(title, date)]
-	 *	@return the HTML for the results list
-	 */
-	
-	public function searchResults($optionStr) {
-		
-		if (isset($_GET["search"])) {
-			
-			$vars = Parse::toolOptions($optionStr);
-		
-			if (empty($vars)) {
-				$vars = array('title');
-			}
-			
-			$search = $_GET["search"];
-			
-			$selection = new Selection($this->collection);
-			$selection->filterByKeywords($search);
-			$selection->sortPagesByPath();
-			
-			$pages = $selection->getSelection();
-			
-			return Html::generateList($pages, $vars);
-			
-		}
 		
 	}
 		
