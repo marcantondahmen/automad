@@ -507,33 +507,6 @@ class Toolbox {
 		
 	}
 		
-
-	/**
-	 * 	Return any item from the site settings file (/shared/site.txt).
-	 *
-	 *	@param string $optionStr - Any variable key from the site settings file (/shared/site.txt)
-	 *	@return site data item
-	 */
-	
-	public function siteData($optionStr) {
-		
-		return $this->S->getSiteData($optionStr);
-		
-	}
-
-
-	/**
-	 * 	Return the site name.
-	 *
-	 *	@return site name
-	 */
-	
-	public function siteName() {
-		
-		return $this->S->getSiteName();
-		
-	}
-	
 	
 	/**
 	 * 	Return the URL of the page theme.
