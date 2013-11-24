@@ -373,20 +373,11 @@ class Toolbox {
 	 */
 	
 	public function navBreadcrumbs() {
-		
-		$pages = array();
-		$urlSegments = explode('/', $this->P->url);
-		$urlSegments = array_unique($urlSegments);
-		$tempUrl = '';
-		
-		foreach ($urlSegments as $urlSegment) {
 			
-			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');
-			$pages[] = $this->S->getPageByUrl($tempUrl); 
-			
-		}
+		$selection = new Selection($this->collection);
+		$selection->filterBreadcrumbs($this->P->url);
 		
-		return Html::generateBreadcrumbs($pages);
+		return Html::generateBreadcrumbs($selection->getSelection());
 		
 	}
 	
@@ -413,23 +404,32 @@ class Toolbox {
 	
 	public function navPerLevel($optionStr) {
 		
-		$maxLevel = (int)trim($optionStr);
-		$urlSegments = explode('/', $this->P->url);
-		$urlSegments = array_unique($urlSegments);
-		$tempUrl = '';
+		$maxLevel = intval(trim($optionStr));
+		$level = 0;
+		
+		$selection = new Selection($this->collection);
+		$selection->filterBreadcrumbs($this->P->url);
+		$pages = $selection->getSelection();
+		
 		$html = '';
-				
-		foreach ($urlSegments as $urlSegment) {
+		
+		foreach ($pages as $page) {
 			
-			$tempUrl = '/' . trim($tempUrl . '/' . $urlSegment, '/');	
-			
-			if ((int)$this->S->getPageByUrl($tempUrl)->level < $maxLevel || !$maxLevel) {
-				$html .= $this->navBelow($tempUrl);
+			// Since the homepage's level might be changed by $selection->makeHomePageFirstLevel(),
+			// a separate counter has to be used to be independend from the page's level and to avoid problems
+			// when setting $maxLevel to 1.
+			// If the page's level would be used and the homepage got shifted to the first level before, 
+			// navPerLevel(1) wouldn't output anything (1 > 1 = false), not even the first level. 
+			if (!$maxLevel || $maxLevel > $level) {
+				$html .= $this->navBelow($page->url);
 			}
+			
+			$level++;
+			
 		}
 		
 		return $html;
-		
+
 	}
 	
 	
