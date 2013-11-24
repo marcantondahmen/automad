@@ -113,23 +113,22 @@ class Selection {
 		if (strpos($url, '/') === 0) {
 		
 			$pages = array();
-		
-			while (strrpos($url, '/') !== false) {
-					
-				$pages[$url] = $this->selection[$url];
+			
+			// While $url is not the home page, strip each segement one by one and
+			// add the corresponding Page object to $pages.
+			while ($url != '/') {
 				
-				// Remove last part of $url, similar to dirname(),
-				// but more reliable on Windows servers.
-				$url = substr($url, 0, strrpos($url, '/'));
+				$pages[$url] = $this->selection[$url];
+				$url = '/' . trim(substr($url, 0, strrpos($url, '/')), '/');
 				
 			}
 			
-			// Append also the homepage to the $pages array.
+			// Add home page
 			$pages['/'] = $this->selection['/'];
 			
 			// Reverse the $pages array and pass it to $this->selection.
 			$this->selection = array_reverse($pages);
-			
+		
 		} 
 		
 	}
