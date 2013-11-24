@@ -175,6 +175,14 @@ if (!defined('AM_TMPLT_DEL_PAGE_VAR_L')) {
 if (!defined('AM_TMPLT_DEL_PAGE_VAR_R')) {
 	define('AM_TMPLT_DEL_PAGE_VAR_R', '}');
 }
+// Left delimiter for site variables
+if (!defined('AM_TMPLT_DEL_SITE_VAR_L')) {
+	define('AM_TMPLT_DEL_SITE_VAR_L', 's{');
+}
+// Right delimiter for site variables
+if (!defined('AM_TMPLT_DEL_SITE_VAR_R')) {
+	define('AM_TMPLT_DEL_SITE_VAR_R', '}');
+}
 // Left delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_L')) {
 	define('AM_TMPLT_DEL_TOOL_L', 't{');
