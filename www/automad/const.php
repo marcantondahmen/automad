@@ -166,14 +166,14 @@ if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
 }
 
 
-// TEMPLATE DEFAULTS
+// TEMPLATE DELIMITERS
 // Left delimiter for page variables
-if (!defined('AM_TMPLT_DEL_VAR_L')) {
-	define('AM_TMPLT_DEL_VAR_L', 'p{');
+if (!defined('AM_TMPLT_DEL_PAGE_VAR_L')) {
+	define('AM_TMPLT_DEL_PAGE_VAR_L', 'p{');
 }
 // Right delimiter for page variables
-if (!defined('AM_TMPLT_DEL_VAR_R')) {
-	define('AM_TMPLT_DEL_VAR_R', '}');
+if (!defined('AM_TMPLT_DEL_PAGE_VAR_R')) {
+	define('AM_TMPLT_DEL_PAGE_VAR_R', '}');
 }
 // Left delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_L')) {
