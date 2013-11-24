@@ -122,7 +122,8 @@ class Template {
 	 */
 	
 	private function processTemplate($output) {
-
+		
+		// Tools:
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
 		$toolbox = new Toolbox($this->S); 
@@ -138,10 +139,20 @@ class Template {
 					}
 				}, 
 				$output);
-							
-		// Replace vars in data array			
+		
+		// Site:
+		// Replace vars from /shared/site.txt
+		$site = $this->S;
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
+				function($matches) use($site) {
+					return $site->getSiteData($matches[1]);
+				},
+				$output);
+			
+		// Page:					
+		// Replace vars from the page's data array			
 		$data = $this->P->data;
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_VAR_R) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
 				function($matches) use($data) {
 					if (array_key_exists($matches[1], $data)) {
 						return $data[$matches[1]];
