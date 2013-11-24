@@ -103,6 +103,39 @@ class Selection {
 	
 	
 	/**
+	 *	Collect all pages along a given URL.
+	 *
+	 *	@param string $url
+	 */
+	
+	public function filterBreadcrumbs($url) {
+		
+		if (strpos($url, '/') === 0) {
+		
+			$pages = array();
+		
+			while (strrpos($url, '/') !== false) {
+					
+				$pages[$url] = $this->selection[$url];
+				
+				// Remove last part of $url, similar to dirname(),
+				// but more reliable on Windows servers.
+				$url = substr($url, 0, strrpos($url, '/'));
+				
+			}
+			
+			// Append also the homepage to the $pages array.
+			$pages['/'] = $this->selection['/'];
+			
+			// Reverse the $pages array and pass it to $this->selection.
+			$this->selection = array_reverse($pages);
+			
+		} 
+		
+	}
+	
+	
+	/**
 	 *	Filter $this->selection by relative url of the parent page.
 	 *
 	 *	@param string $parent
@@ -149,42 +182,7 @@ class Selection {
 		
 	}
 	
-	
-	/**
-	 *	Filter all pages having one or more tag in common with $page. If there are not tags defined for the passed page,
-	 *	the selection will be an empty array. (no tags = no related pages)
-	 *
-	 *	@param object $page
-	 */
-	
-	public function filterRelated($page) {
 		
-		$tags = $page->tags;
-		
-		$filtered = array();
-		
-		if ($tags) {
-		
-			foreach ($tags as $tag) {
-			
-				foreach($this->selection as $key => $p) {
-		
-					if (in_array($tag, $p->tags)) {
-						$filtered[$key] = $p;
-					}			
-					
-				}		
-						
-			}
-	
-		}
-		
-		$this->selection = $filtered;
-		$this->excludePage($page->url);
-		
-	}
-
-	
 	/**
 	 *	Filter $this->selection by a template, if $template is not empty.
 	 *
@@ -301,6 +299,41 @@ class Selection {
 		
 	}
 	
+	
+	/**
+	 *	Filter all pages having one or more tag in common with $page. If there are not tags defined for the passed page,
+	 *	the selection will be an empty array. (no tags = no related pages)
+	 *
+	 *	@param object $page
+	 */
+	
+	public function filterRelated($page) {
+		
+		$tags = $page->tags;
+		
+		$filtered = array();
+		
+		if ($tags) {
+		
+			foreach ($tags as $tag) {
+			
+				foreach($this->selection as $key => $p) {
+		
+					if (in_array($tag, $p->tags)) {
+						$filtered[$key] = $p;
+					}			
+					
+				}		
+						
+			}
+	
+		}
+		
+		$this->selection = $filtered;
+		$this->excludePage($page->url);
+		
+	}
+		
 	 
 	/**
 	 * 	Makes the Home Page a neighbor of all level 1 pages. Useful for filtering the top level pages all together.
