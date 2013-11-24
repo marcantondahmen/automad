@@ -3,24 +3,24 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-	<title>t[siteName] / p[title]</title>
+	<title>t{siteName} / p{title}</title>
 	<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
-	<link rel="stylesheet" type="text/css" href="t[themeURL]/style.css" />
+	<link rel="stylesheet" type="text/css" href="t{themeURL}/style.css" />
 </head>
 
 <body>
-	t[search]
-	t[navTop]
-	<h1>p[title]</h1>
+	t{search}
+	t{navTop}
+	<h1>p{title}</h1>
 
-	t[listSetup(title, subtitle, tags, text)]
-	t[listFilters]
-	t[listSortTypes]
-	t[listSortDirection]
-	t[listPages]
+	t{listSetup(title, subtitle, tags, text)}
+	t{listFilters}
+	t{listSortTypes}
+	t{listSortDirection}
+	t{listPages}
 	
 	<br />
-	<p>t[navBreadcrumbs]</p>
+	<p>t{navBreadcrumbs}</p>
 	<br />
 	<p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>

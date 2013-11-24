@@ -3,30 +3,30 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-	<title>t[siteName] / p[title]</title>
+	<title>t{siteName} / p{title}</title>
 	<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
-	<link rel="stylesheet" type="text/css" href="t[themeURL]/style.css" />
+	<link rel="stylesheet" type="text/css" href="t{themeURL}/style.css" />
 </head>
 
 <body>	
-	t[img(file: /shared/MAD-Logo.png, height: 100, link: http://marcdahmen.de, target: _blank)]
+	t{img(file: /shared/MAD-Logo.png, height: 100, link: http://marcdahmen.de, target: _blank)}
 	<br /><br />
-	t[includeHome]
-	t[search(Search me...)]
-	t[navPerLevel]	
-	<h1>p[title]</h1>
-	p[text]
+	t{includeHome}
+	t{search(Search me...)}
+	t{navPerLevel}	
+	<h1>p{title}</h1>
+	p{text}
 	
-	t[listSetup(file: *.jpg, width: 250, title, tags, template: page)]
-	t[listFilters]
-	t[listSortTypes]
-	t[listSortDirection]
-	t[listPages]
+	t{listSetup(file: *.jpg, width: 250, title, tags, template: page)}
+	t{listFilters}
+	t{listSortTypes}
+	t{listSortDirection}
+	t{listPages}
 	
 	<br />
-	<p>t[navBreadcrumbs]</p>
+	<p>t{navBreadcrumbs}</p>
 	<br />
-	<p>&copy t[year] by <a href="/">t[siteData(owner)]</a></p>
+	<p>&copy t{year} by <a href="/">t{siteData(owner)}</a></p>
 	<br />
 	<p>Made with Automad <?php echo AM_VERSION; ?></p>
 </body>
