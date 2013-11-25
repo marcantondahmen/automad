@@ -3,7 +3,7 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-	<title>t{siteName} / p{title}</title>
+	<title>s{sitename} / p{title}</title>
 	<meta name="app" content="Automad <?php echo AM_VERSION; ?>">
 	<link rel="stylesheet" type="text/css" href="t{themeURL}/style.css" />
 </head>
