@@ -150,7 +150,7 @@ class Html {
 		
 		$selection = new Selection($collection);
 		$selection->filterByParentUrl($parentUrl);
-		$selection->sortPagesByPath();
+		$selection->sortPagesByBasename();
 		
 		$pages = $selection->getSelection();
 		

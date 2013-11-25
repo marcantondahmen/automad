@@ -359,7 +359,7 @@ class Toolbox {
 				
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($optionStr);
-		$selection->sortPagesByPath();
+		$selection->sortPagesByBasename();
 		
 		return Html::generateNav($selection->getSelection());
 		
@@ -456,7 +456,7 @@ class Toolbox {
 	
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl('/');
-		$selection->sortPagesByPath();
+		$selection->sortPagesByBasename();
 		
 		return Html::generateNav($selection->getSelection());
 		

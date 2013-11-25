@@ -271,7 +271,7 @@ class Selection {
 		
 		// Narrow down selection to pages with the same parentUrl
 		$this->filterByParentUrl($this->selection[$url]->parentUrl);
-		$this->sortPagesByPath();
+		$this->sortPagesByBasename();
 		
 		$keys = array_keys($this->selection);
 		$keyIndexes = array_flip($keys);
@@ -365,7 +365,7 @@ class Selection {
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
 	 */ 
 	 
-	public function sortPagesByPath($order = SORT_ASC) {
+	public function sortPagesByBasename($order = SORT_ASC) {
 		
 		$arrayToSortBy = array();
 		
@@ -382,7 +382,7 @@ class Selection {
 	 
 	/**
 	 *	Sorts $this->selection based on any variable in the text files.
-	 *	If the $var gets passed empty, $this->sortPagesByPath() will be used as fallback.
+	 *	If the $var gets passed empty, $this->sortPagesByBasename() will be used as fallback.
 	 *
 	 *	@param string $var (any variable from a text file)
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
@@ -410,7 +410,7 @@ class Selection {
 		
 		} else {
 			// else the selection is sorted by the file system path
-			$this->sortPagesByPath($order);
+			$this->sortPagesByBasename($order);
 		}
 		
 	} 
