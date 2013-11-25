@@ -371,7 +371,7 @@ class Selection {
 		
 		foreach ($this->selection as $key => $page) {
 			
-			$arrayToSortBy[$key] = $page->path;
+			$arrayToSortBy[$key] = basename($page->path);
 			
 		}
 				
