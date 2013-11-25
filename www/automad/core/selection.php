@@ -360,7 +360,7 @@ class Selection {
 	
 	  
 	/**
-	 *	Sorts the $this->selection based on the file system path.
+	 *	Sorts the $this->selection based on the file system path's basename.
 	 *
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
 	 */ 
@@ -392,7 +392,7 @@ class Selection {
 		
 		if ($var) {
 			
-			// If $var is set the selections is sorted by data[$var]
+			// If $var is set, the selections is sorted by data[$var]
 			$arrayToSortBy = array();
 		
 			foreach ($this->selection as $key => $page) {
@@ -409,7 +409,7 @@ class Selection {
 			array_multisort($arrayToSortBy, $order, $this->selection);
 		
 		} else {
-			// else the selection is sorted by the file system path
+			// else the selection is sorted by the file system path's basename
 			$this->sortPagesByBasename($order);
 		}
 		
