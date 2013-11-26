@@ -115,13 +115,34 @@ class Template {
 	
 		
 	/**
-	 * 	Replace all vars in template with values from $this->currentPage and all function shortcuts with functions from the Toolbox class.
+	 * 	The template output gets scanned for regex patterns to replace variables, include PHP files or call Toolbox methods.
 	 *
 	 *	@param string $output
 	 *	@return string $output
 	 */
 	
 	private function processTemplate($output) {
+		
+		// Includes:
+		// Include only (!) PHP files relative to the template file.
+		// Useful to keep header and footer in separate files.
+		$templateDir = dirname($this->template);
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_INC_L) . '([A-Za-z0-9_\.\/\-]+)' . preg_quote(AM_TMPLT_DEL_INC_R) . '/',
+				function($matches) use($templateDir) {
+					
+					$file = $templateDir . '/' . $matches[1];
+					if (file_exists($file)) {
+						
+						Debug::log('Template: Include: ' . $file);
+						ob_start();
+						include $file;
+						$inc = ob_get_contents();
+						ob_end_clean();
+						return $inc;
+						
+					}
+				},
+				$output);
 		
 		// Tools:
 		// Call functions dynamically with optional parameter in () or without () for no options.
@@ -140,7 +161,7 @@ class Template {
 				}, 
 				$output);
 		
-		// Site:
+		// Site vars:
 		// Replace vars from /shared/site.txt
 		$site = $this->S;
 		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
@@ -149,7 +170,7 @@ class Template {
 				},
 				$output);
 			
-		// Page:					
+		// Page vars:					
 		// Replace vars from the page's data array			
 		$data = $this->P->data;
 		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
