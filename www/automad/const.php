@@ -167,6 +167,14 @@ if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
 
 
 // TEMPLATE DELIMITERS
+// Left delimiter for includes
+if (!defined('AM_TMPLT_DEL_INC_L')) {
+	define('AM_TMPLT_DEL_INC_L', 'i{');
+}
+// Right delimiter for includes
+if (!defined('AM_TMPLT_DEL_INC_R')) {
+	define('AM_TMPLT_DEL_INC_R', '}');
+}
 // Left delimiter for page variables
 if (!defined('AM_TMPLT_DEL_PAGE_VAR_L')) {
 	define('AM_TMPLT_DEL_PAGE_VAR_L', 'p{');
