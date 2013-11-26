@@ -93,13 +93,29 @@ class Template {
 		Debug::log('Template: New instance created!');
 		
 	}
-		
 	
+
+	/**
+	 *	Add Meta tags to the head of $output.
+	 *
+	 *	@param string $output
+	 *	@return $output
+	 */
+	
+	private function addMetaTags($output) {
+		
+		$meta = "\n\t" . '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+		
+		return str_replace('<head>', '<head>' . $meta, $output);
+		
+	}
+	
+		
 	/**
 	 *	Load the unmodified template file and return its output.
 	 *
 	 *	@param string $template
-	 *	@return $ouput 
+	 *	@return $output 
 	 */
 	
 	private function loadTemplate($template) {
@@ -223,6 +239,7 @@ class Template {
 		
 		$output = $this->loadTemplate($this->template);
 		$output = $this->processTemplate($output);
+		$output = $this->addMetaTags($output);
 		$output = $this->modulateUrls($output);	
 	
 		return $output;	
