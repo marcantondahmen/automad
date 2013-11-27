@@ -194,16 +194,20 @@ class Html {
 	
 	public static function generateBreadcrumbs($pages) {
 		
+		$i = 1;
+		
 		$html = '<div class="' . AM_HTML_CLASS_BREADCRUMBS . '">';
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>' . AM_HTML_STR_BREADCRUMB_SEPARATOR;
+			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>';
 			
-		}
+			// Add separator for all but the last page.	
+			if ($i++ < count($pages)) {
+				$html .= AM_HTML_STR_BREADCRUMB_SEPARATOR;
+			}
 		
-		// Remove last separator again
-		$html = rtrim($html, AM_HTML_STR_BREADCRUMB_SEPARATOR);
+		}
 		
 		$html .= '</div>';
 		
