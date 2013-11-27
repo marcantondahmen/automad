@@ -112,7 +112,7 @@ class Html {
 	 *	@return the HTML tag for the link to the given page
 	 */
 
-	public static function addLink($page, $classes = '') {
+	public static function addLink($page, $classes = '', $title = '') {
 	
 		if ($page->isHome()) {	
 			$classes .= ' ' . AM_HTML_CLASS_HOME;	
@@ -132,7 +132,11 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		return '<a' . $classes . ' href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>';
+		if (!$title) {
+			$title = strip_tags($page->data['title']);
+		}
+				
+		return '<a' . $classes . ' href="' . $page->url . '">' . $title . '</a>';
 		
 	}
 
