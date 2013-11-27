@@ -185,10 +185,11 @@ class Toolbox {
 	/**
 	 *	Place a link to the previous sibling.
 	 *
+	 *	@param string $optionStr - optional link text (for example a simple '<')
 	 *	@return the HTML for the link.
 	 */
 
-	public function linkPrev() {
+	public function linkPrev($optionStr) {
 		
 		$selection = new Selection($this->collection);
 		$selection->filterPrevAndNextToUrl($this->P->url);
@@ -197,7 +198,7 @@ class Toolbox {
 		
 		// Check if there is a previous page and return HTML
 		if (isset($pages['prev'])) {
-			return Html::addLink($pages['prev'], AM_HTML_CLASS_PREV);
+			return Html::addLink($pages['prev'], AM_HTML_CLASS_PREV, $optionStr);
 		}
 		
 	}
@@ -206,10 +207,11 @@ class Toolbox {
 	/**
 	 *	Place a link to the previous sibling.
 	 *
+	 *	@param string $optionStr - optional link text (for example a simple '>')
 	 *	@return the HTML for the link.
 	 */
 	
-	public function linkNext() {
+	public function linkNext($optionStr) {
 		
 		$selection = new Selection($this->collection);
 		$selection->filterPrevAndNextToUrl($this->P->url);
@@ -218,7 +220,7 @@ class Toolbox {
 		
 		// Check if there is a next page and return HTML
 		if (isset($pages['next'])) {
-			return Html::addLink($pages['next'], AM_HTML_CLASS_NEXT);
+			return Html::addLink($pages['next'], AM_HTML_CLASS_NEXT, $optionStr);
 		}
 		
 	}
