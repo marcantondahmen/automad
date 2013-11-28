@@ -435,7 +435,11 @@ class Html {
 	
 	public static function generateSearchField($url, $placeholderText) {
 		
-		return '<form class="' . AM_HTML_CLASS_SEARCH . '" method="get" action="' . $url . '"><input type="text" name="search" placeholder="' . $placeholderText . '" /></form>';
+		$html =  '<form class="' . AM_HTML_CLASS_SEARCH . '" method="get" action="' . $url . '">';
+		$html .= '<input type="text" name="search" value="' . $placeholderText . '" onfocus="if (this.value==\'' . $placeholderText . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $placeholderText . '\'; }" />';
+		$html .= '</form>';
+		
+		return $html;
 			
 	}
 
