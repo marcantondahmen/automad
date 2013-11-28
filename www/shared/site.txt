@@ -1,8 +1,8 @@
-sitename: Automad CMS
+sitename: Automad
 
 ---
 
-theme: standard
+theme: light
 
 ---
 
