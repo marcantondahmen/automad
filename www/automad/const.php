@@ -256,7 +256,7 @@ if (!defined('AM_HTML_CLASS_SEARCH')) {
 }
 // Breadcrumbs items separator
 if (!defined('AM_HTML_STR_BREADCRUMB_SEPARATOR')) {
-	define('AM_HTML_STR_BREADCRUMB_SEPARATOR', ' &gt; ');
+	define('AM_HTML_STR_BREADCRUMB_SEPARATOR', '<span class="separator"> &gt; </span>');
 }
 // Filter menu text for "all items"
 if (!defined('AM_HTML_TEXT_FILTER_ALL')) {
