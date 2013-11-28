@@ -472,7 +472,7 @@ class Html {
 		
 		$query['sort_dir'] = "sort_asc";
 		ksort($query);
-		$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
+		$html .= '<li class="sort_asc"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
 		
 		
 		// Descending button
@@ -483,7 +483,7 @@ class Html {
 		}
 		
 		$query['sort_dir'] = "sort_desc";
-		$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_DESC"] . '</a></li>';
+		$html .= '<li class="sort_desc"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_DESC"] . '</a></li>';
 		
 		$html .= '</ul>';
 	
