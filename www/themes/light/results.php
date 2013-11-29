@@ -13,7 +13,7 @@ i{elements/header.php}
 		<h3 class="results">p{title}</h3>
 
 		t{listSetup(title, subtitle, file: *.jpg, width: 250, height: 150, crop: 1)}
-		t{listSortTypes}
+		t{listSortTypes(By Name, subtitle: By Subtitle, tags: By Tags)}
 		t{listSortDirection}
 	
 	</div>

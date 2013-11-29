@@ -16,9 +16,9 @@ i{elements/header.php}
 
 		<div class="text">p{text}</div>
 
-		t{listSetup(title, subtitle, tags, template: page, file: *.jpg, width: 250, height: 150, crop: 1)}
+		t{listSetup(title, subtitle, tags, template: project, file: *.jpg, width: 250, height: 150, crop: 1)}
 		t{listFilters}
-		t{listSortTypes}
+		t{listSortTypes(By Name, subtitle: By Subtitle, tags: By Tags)}
 		t{listSortDirection}
 	
 	</div>
