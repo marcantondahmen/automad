@@ -1,9 +1,9 @@
-title: Hello, I am Automad
+title: Home
 
 ---
 
-tags: Home
+subtitle: I don't like databases!
 
 ---
 
-text: I don't like databases!
+text: Welcome to the Automad Demo Site!
