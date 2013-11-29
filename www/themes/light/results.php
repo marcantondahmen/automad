@@ -10,14 +10,15 @@ i{elements/header.php}
 		t{navTop}
 		t{search(Search)}
 		
-		<h3 class="results">p{title}</h3>
-
 		t{listSetup(title, subtitle, file: *.jpg, width: 250, height: 150, crop: 1)}
+		
+		<h3 class="results">p{title} (t{listCount})</h3>
+
 		t{listSortTypes(By Name, subtitle: By Subtitle, tags: By Tags)}
 		t{listSortDirection}
 	
 	</div>
-
+	
 	t{listPages}
 	
 i{elements/footer.php}
