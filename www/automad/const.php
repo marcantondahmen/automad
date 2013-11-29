@@ -151,7 +151,7 @@ if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
 }
 // Default sort types
 if (!defined('AM_TOOL_OPTIONS_SORT_TYPE')) {
-	define('AM_TOOL_OPTIONS_SORT_TYPE', 'Original Order, title: By Title');
+	define('AM_TOOL_OPTIONS_SORT_TYPE', 'Original Order');
 }
 // Default sort directions text
 if (!defined('AM_TOOL_OPTIONS_SORT_DIR')) {
