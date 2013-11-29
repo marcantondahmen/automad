@@ -306,13 +306,13 @@ ul.sort {
 
 .left {
 	width: 550px;
-	padding: 20px 50px 60px 0;
+	padding: 20px 50px 20px 0;
 	float: left;
 }
 
 .right {
 	width: 250;
-	padding: 20px 0 60px 0;
+	padding: 20px 0;
 	float: left;
 }
 
