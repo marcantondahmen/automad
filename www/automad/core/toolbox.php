@@ -286,6 +286,19 @@ class Toolbox {
 
 
 	/**
+	 *	Return the number of pages in the Listing object.
+	 *
+	 *	@return count($this->L->pages)
+	 */
+	
+	public function listCount() {
+		
+		return count($this->L->pages);
+		
+	}
+
+
+	/**
 	 *	Return a page list from Listing object created by Toolbox::listSetup().
 	 *
 	 *	@return The HTML for a page list.
