@@ -14,7 +14,7 @@ i{elements/header.php}
 	
 	</div>
 	
-	<div class="text">
+	<div class="content">
 		<p>The requested page can't be found on this server!</p>
 	</div>
 	

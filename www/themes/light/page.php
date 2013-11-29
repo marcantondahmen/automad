@@ -16,7 +16,7 @@ i{elements/header.php}
 
 	</div>
 
-	<div class="text">		
+	<div class="content">		
 		p{text}	
 	</div>
 	

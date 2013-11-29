@@ -29,11 +29,11 @@ i{elements/header.php}
 
 	<div class="container">
 
-		<div class="text left">		
+		<div class="content left">		
 			p{text}	
 		</div>
 	
-		<div class="text right">
+		<div class="content right">
 			t{navSiblings}
 		</div>
 	
