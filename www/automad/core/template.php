@@ -88,9 +88,11 @@ class Template {
 		
 		$this->S = $site;
 		$this->P = $site->getCurrentPage();
-		$this->template = $this->P->getTemplatePath($this->S->getThemePath());
+		$this->template = $this->P->getTemplate();
 		
 		Debug::log('Template: New instance created!');
+		Debug::log('Template: Current Page:');
+		Debug::log($this->P);
 		
 	}
 	
