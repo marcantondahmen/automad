@@ -1,8 +1,12 @@
-title: About
+title: Info
 
 ---
 
 subtitle: Automad Demo Site 
+
+---
+
+theme: dark
 
 ---
 

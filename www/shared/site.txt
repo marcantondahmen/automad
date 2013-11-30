@@ -1,9 +1,5 @@
-sitename: Automad
+sitename: Automad CMS
 
 ---
 
 theme: light
-
----
-
-owner: Your Name
