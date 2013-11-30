@@ -2,10 +2,6 @@ i{elements/header.php}
 
 	<div class="top">
 	
-		<div class="sitename">
-			<a href="/">s{sitename}</a>
-		</div>
-	
 		t{includeHome}
 		t{navPerLevel(1)}
 		t{search(Search)}	
