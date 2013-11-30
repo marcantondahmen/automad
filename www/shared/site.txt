@@ -6,8 +6,4 @@ theme: light
 
 ---
 
-owner: Marc
-
----
-
-email: test@test.de
+owner: Your Name
