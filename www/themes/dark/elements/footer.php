@@ -2,8 +2,9 @@
 			
 			t{navBreadcrumbs}
 			
-			<p>&copy t{year} by <a href="/">s{owner}</a></p>
-			<p class="automad">Made with Automad <?php echo AM_VERSION; ?></p>
+			<p>&copy t{year} by <a href="/">s{sitename}</a></p>
+			
+			<p class="automad">Made with Automad</p>
 			
 		</div>
 		
