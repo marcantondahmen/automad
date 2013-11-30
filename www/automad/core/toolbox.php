@@ -531,7 +531,7 @@ class Toolbox {
 	
 	public function themeURL() {
 		
-		return $this->S->getThemePath();
+		return $this->P->getTheme();
 		
 	}
 	
