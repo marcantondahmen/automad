@@ -197,6 +197,13 @@ class Site {
 							if (array_key_exists(AM_PARSE_URL_KEY, $data)) {
 								$url = $data[AM_PARSE_URL_KEY];
 							}
+							
+							// Check for a theme in $data and use that as override for the site theme.
+							if (array_key_exists(AM_PARSE_THEME_KEY, $data)) {
+								$theme = $data[AM_PARSE_THEME_KEY];
+							} else {
+								$theme = $this->getSiteData('theme');;
+							}
 						
 							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
 							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
@@ -207,6 +214,7 @@ class Site {
 							$P->path = $path;
 							$P->level = $level;
 							$P->parentUrl = $parentUrl;
+							$P->theme = $theme;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
 							$this->siteCollection[$url] = $P;
 							
@@ -276,35 +284,6 @@ class Site {
 	public function getSiteName() {
 		
 		return $this->getSiteData('sitename');
-		
-	}
-	
-	
-	/**
-	 * 	Return the path to the theme for the website.
-	 *
-	 *	If the theme is not defined or not existing in the file system, 
-	 *	the default template location will be returned instead.
-	 *
-	 *	@return theme path
-	 */
-	
-	public function getThemePath() {
-		
-		$theme = $this->getSiteData('theme');
-		$themePath = AM_DIR_THEMES . '/' . $theme;
-		
-		// To verify the existence of $themePath, AM_BASE_DIR has to be prepended,
-		// because $themePath must NOT contain the AM_BASE_DIR to be more flexible.
-		// Also $theme has to be tested, just to check if it is actually not empty. 
-		if ($theme && is_dir(AM_BASE_DIR . $themePath)) {	
-			// If $theme is not '' and also exists in the file system as a folder, use that path.		
-			return $themePath;
-		} else {
-			// If not, use the default template location.
-			Debug::log('Site: Theme "' . $theme . '" not found! Default template folder will be used!');
-			return AM_DIR_DEFAULT_TEMPLATES;
-		}
 		
 	}
 	
