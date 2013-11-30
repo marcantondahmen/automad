@@ -293,6 +293,10 @@ if (!defined('AM_PARSE_TAGS_KEY')) {
 if (!defined('AM_PARSE_URL_KEY')) {
 	define('AM_PARSE_URL_KEY', 'url');
 }
+// Theme key (to identify a theme in the page's txt file)
+if (!defined('AM_PARSE_THEME_KEY')) {
+	define('AM_PARSE_THEME_KEY', 'theme');
+}
 // List of file extensions to identify file in URL
 if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {
 	define('AM_PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3')));
