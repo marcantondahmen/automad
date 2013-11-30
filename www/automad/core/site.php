@@ -362,6 +362,7 @@ class Site {
 	private function createPage($template, $title) {
 		
 		$page = new Page();
+		$page->theme = $this->getSiteData('theme');
 		$page->template = $template;
 		$page->data['title'] = $title;
 		$page->parentUrl = '';
