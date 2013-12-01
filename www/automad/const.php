@@ -70,6 +70,10 @@ if (!defined('AM_DIR_SHARED')) {
 if (!defined('AM_DIR_THEMES')) {
 	define('AM_DIR_THEMES', '/themes');
 }
+// Extensions
+if (!defined('AM_DIR_EXTENSIONS')) {
+	define('AM_DIR_EXTENSIONS', '/extensions');
+}
 // Cache
 if (!defined('AM_DIR_CACHE')) {
 	define('AM_DIR_CACHE', '/cache');
@@ -198,6 +202,14 @@ if (!defined('AM_TMPLT_DEL_TOOL_L')) {
 // Right delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_R')) {
 	define('AM_TMPLT_DEL_TOOL_R', '}');
+}
+// Left delimiter for extensions
+if (!defined('AM_TMPLT_DEL_XTNSN_L')) {
+	define('AM_TMPLT_DEL_XTNSN_L', 'x{');
+}
+// Right delimiter for extensions
+if (!defined('AM_TMPLT_DEL_XTNSN_R')) {
+	define('AM_TMPLT_DEL_XTNSN_R', '}');
 }
 
 
