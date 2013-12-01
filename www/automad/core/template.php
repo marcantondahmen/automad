@@ -78,7 +78,7 @@ class Template {
 	 */
 	
 	private $template;
-
+	
 	
 	/**
 	 *	Define $S, $P and $theme.
@@ -161,7 +161,7 @@ class Template {
 					}
 				},
 				$output);
-		
+				
 		// Tools:
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
@@ -176,6 +176,21 @@ class Template {
 						}
 						return $toolbox->$matches[1](trim($matches[2],'()'));
 					}
+				}, 
+				$output);
+		
+		// Extensions:
+		$extender = new Extender($this->S);
+		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
+		$output = $extender->addHeaderElements($output);
+		// Call extension methods.
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '(.+)::([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', 
+				function($matches) use($extender) {
+					if (!isset($matches[3])) {
+						// If there are no options passed.
+						$matches[3] = '';
+					}
+					return $extender->callMethod($matches[1], $matches[2], trim($matches[3],'()'));
 				}, 
 				$output);
 		
