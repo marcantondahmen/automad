@@ -101,17 +101,17 @@ class Extender {
 		
 		// Add the HTML for all items to the $html string.
 		foreach ($css as $item) {
-			$html .= "\n\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $item) . '" />';
+			$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $item) . '" />' . "\n";
 			Debug::log('Extender: Added "' . $item . '" to header');	
 		}
 				
 		foreach ($js as $item) {	
-			$html .= "\n\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $item) . '"></script>';
+			$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $item) . '"></script>' . "\n";
 			Debug::log('Extender: Added "' . $item . '" to header');
 		}
 		
-		// Append all items ($html) to the opening <head> tag.
-		return str_replace('<head>', '<head>' . $html, $output);
+		// Prepend all items ($html) to the closing </head> tag.
+		return str_replace('</head>', $html . '</head>', $output);
 		
 	}
 	
