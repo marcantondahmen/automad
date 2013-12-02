@@ -1,9 +1,4 @@
 <?php
-
-
-namespace mad;
-
-
 /**
  *	SLIDER
  *	Extension for the Automad CMS
@@ -13,6 +8,9 @@ namespace mad;
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Mad;
 
 
 /**
@@ -75,7 +73,7 @@ class Slider {
 		
 		// Build full glob pattern
 		$P = $this->S->getCurrentPage();
-		$glob = \Modulate::filePath($P->path, $options['glob']);
+		$glob = \Core\Modulate::filePath($P->path, $options['glob']);
 		
 		// Get files.
 		$files = glob($glob);
@@ -85,7 +83,7 @@ class Slider {
 				
 		foreach ($files as $file) {
 			
-			$html .= \Html::addImage($file, $options['width'], $options['height'], true);
+			$html .= \Core\Html::addImage($file, $options['width'], $options['height'], true);
 						
 		}
 		
