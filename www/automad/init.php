@@ -33,6 +33,9 @@
  *	Licensed under the MIT license.
  */
  
+ 
+namespace Core;
+
 
 define('AUTOMAD', true);
 
@@ -65,18 +68,9 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 // Autoload core classes and libraries
 spl_autoload_register(function($class) {
 		
-	$class = str_replace('\\', '/', $class);
-	$possibleFiles = 	array(
-					AM_BASE_DIR . '/automad/core/' . strtolower($class) . '.php',
-					AM_BASE_DIR . '/automad/libraries/' . $class . '.php' 
-				);
-	
-	foreach($possibleFiles as $file) {
-		if (file_exists($file)) {
-			require_once $file;
-			Debug::log('Load Class: ' . $file);	
-		}	
-	}
+	$file = AM_BASE_DIR . '/automad/' . strtolower(str_replace('\\', '/', $class)) . '.php';
+	require_once $file;
+	Debug::log('Load Class: "' . $class . '" (' . $file . ')');
 	
 });
 
