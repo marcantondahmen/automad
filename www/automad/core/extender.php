@@ -90,10 +90,14 @@ class Extender {
 		// Collect all css/js files in each extension directory.
 		foreach ($extensions[1] as $extension) {
 			
+			// Adding the extension namespace to the called class, to make sure,
+			// that only classes from the /extensions directory get used.
+			$extension = AM_NAMESPACE_EXTENSIONS . '\\' . $extension;
+			
 			Debug::log('Extender: Getting CSS/JS for "' . $extension . '"');	
 			
 			// Extension directory	
-			$path = dirname(AM_BASE_DIR . AM_DIR_EXTENSIONS . '/' . str_replace('\\', '/', $extension));
+			$path = dirname(AM_BASE_DIR . strtolower(str_replace('\\', '/', $extension)));
 			
 			// Get files
 			$css = array_merge($css, glob($path . '/*.css'));
@@ -133,8 +137,12 @@ class Extender {
 	
 	public function callMethod($class, $method, $optionStr) {
 		
+		// Adding the extension namespace to the called class here, to make sure,
+		// that only classes from the /extensions directory and within the \Extension namespace get used.
+		$class = AM_NAMESPACE_EXTENSIONS . '\\' . $class;
+		
 		// Building the extension's file path.
-		$file = AM_BASE_DIR . AM_DIR_EXTENSIONS . '/' . strtolower(str_replace('\\', '/', $class)) . '.php';
+		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class)) . '.php';
 		
 		if (file_exists($file)) {
 							
