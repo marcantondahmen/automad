@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -32,6 +32,12 @@
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
@@ -128,7 +134,7 @@ class Extender {
 	public function callMethod($class, $method, $optionStr) {
 		
 		// Building the extension's file path.
-		$file = AM_BASE_DIR . AM_DIR_EXTENSIONS . '/' . str_replace('\\', '/', $class) . '.php';
+		$file = AM_BASE_DIR . AM_DIR_EXTENSIONS . '/' . strtolower(str_replace('\\', '/', $class)) . '.php';
 		
 		if (file_exists($file)) {
 							

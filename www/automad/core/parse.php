@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -32,6 +32,12 @@
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
  
  
 /**
@@ -140,7 +146,7 @@ class Parse {
 			 
 				if (strpos($var, "\n") !== false) {
 					// If $var has line breaks (is multiline)
-					return Michelf\MarkdownExtra::defaultTransform($var); 
+					return \Lib\Michelf\MarkdownExtra::defaultTransform($var); 
 				} else {
 					// If $var is a single line, skip parsing
 					return $var;
