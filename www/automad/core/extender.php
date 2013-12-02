@@ -85,7 +85,7 @@ class Extender {
 		$html = '';
 		
 		// Find extensions in $output.
-		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '(.+)::.*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', $output, $extensions);
+		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9\-_\\\\]+):.*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', $output, $extensions);
 			
 		// Collect all css/js files in each extension directory.
 		foreach ($extensions[1] as $extension) {
