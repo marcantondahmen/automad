@@ -11,7 +11,7 @@ i{elements/header.php}
 		<h2>p{subtitle}</h2>
 
 		<div class="images">
-			x{mad\slider::generate(glob: /pages/02.projects/*/*.jpg, width: 850, height: 450, duration: 1500)}
+			x{Mad\Slider:generate(glob: /pages/02.projects/*/*.jpg, width: 850, height: 450, duration: 1500)}
 		</div>
 
 		<div class="content">p{text}</div>
