@@ -70,10 +70,6 @@ if (!defined('AM_DIR_SHARED')) {
 if (!defined('AM_DIR_THEMES')) {
 	define('AM_DIR_THEMES', '/themes');
 }
-// Extensions
-if (!defined('AM_DIR_EXTENSIONS')) {
-	define('AM_DIR_EXTENSIONS', '/extensions');
-}
 // Cache
 if (!defined('AM_DIR_CACHE')) {
 	define('AM_DIR_CACHE', '/cache');
@@ -210,6 +206,13 @@ if (!defined('AM_TMPLT_DEL_XTNSN_L')) {
 // Right delimiter for extensions
 if (!defined('AM_TMPLT_DEL_XTNSN_R')) {
 	define('AM_TMPLT_DEL_XTNSN_R', '}');
+}
+
+
+// EXTENDER
+// Extensions namespace
+if (!defined('AM_NAMESPACE_EXTENSIONS')) {
+	define('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
 }
 
 
