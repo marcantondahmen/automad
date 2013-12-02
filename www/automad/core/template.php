@@ -189,8 +189,8 @@ class Template {
 		$extender = new Extender($this->S);
 		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
 		$output = $extender->addHeaderElements($output);
-		// Call extension methods.
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '(.+)::([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', 
+		// Call extension methods. Match: x{Extension\Name:Method(Options)}
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9\-_\\\\]+):([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', 
 				function($matches) use($extender) {
 					if (!isset($matches[3])) {
 						// If there are no options passed.
