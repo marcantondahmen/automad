@@ -16,11 +16,11 @@ i{elements/header.php}
 		<h2>p{subtitle}</h2>
 	
 		t{filterParentByTags}		
-	
+		
 		<div class="images">
-			t{img(file: *.jpg, width: 850, height: 450, crop: 1)}
+			x{mad\slider::generate(glob: *.jpg, width: 850, height: 450, duration: 3000)}
 		</div>
-
+			
 	</div>
 
 	<div class="container">

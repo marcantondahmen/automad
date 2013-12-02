@@ -4,7 +4,8 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
 	<title>s{sitename} / p{title}</title>
-	<link rel="stylesheet" type="text/css" href="t{themeURL}/style.css" />
+	<script type="text/javascript" src="t{themeURL}/jquery-2.0.3.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="t{themeURL}/style.css" />
 </head>
 
 
