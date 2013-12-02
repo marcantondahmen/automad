@@ -10,7 +10,7 @@
  */
 
 
-namespace Mad;
+namespace Extensions\Mad;
 
 
 /**
