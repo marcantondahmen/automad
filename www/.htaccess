@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
 
+
 # --- AUTOMAD --- #
 
 # DO NOT MODIFY!
@@ -17,9 +18,15 @@ RewriteEngine On
 # The correct rewriting will be figured out automatically.
 RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME} !-f
 
-# To keep the app portable (can be moved around without configuartion),
+
+
+# Pretty URLs:
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# To keep the app portable (can be moved around without configuration),
 # the full path for the actual rewriting has to be determined, 
 # since the RewriteBase stays always '/'.
 
@@ -44,6 +51,22 @@ RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 # ( www.yoursite.com ) + "index.php/" + page/path
 RewriteRule ^(.*)$ %2index.php/$1 [L]
 
+
+
+
+# Block .txt files and directories:
+
+RewriteCond %{REQUEST_FILENAME} .txt$ [OR] 
+RewriteCond %{REQUEST_FILENAME} -d
+
+# Reuse the method described above to keep the app portable.
+RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
+
+# Redirect to "-" which will display the 404 page.
+RewriteRule ^(.*)$ %2index.php/- [L]
+
+
 # --------------- #
+
 
 </IfModule>
