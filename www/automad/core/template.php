@@ -165,6 +165,7 @@ class Template {
 						return $inc;
 						
 					}
+					
 				},
 				$output);
 				
@@ -174,14 +175,18 @@ class Template {
 		$toolbox = new Toolbox($this->S); 
 		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/', 
 				function($matches) use($toolbox) {
+					
 					if (method_exists($toolbox, $matches[1])) {
+						
 						if (!isset($matches[2])) {
 							// If there is no parameter passed (no brackets),
 							// an empty string will be passed as an argument
 							$matches[2] = '';
 						}
+						
 						return $toolbox->$matches[1](trim($matches[2],'()'));
 					}
+					
 				}, 
 				$output);
 		
@@ -189,14 +194,18 @@ class Template {
 		$extender = new Extender($this->S);
 		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
 		$output = $extender->addHeaderElements($output);
-		// Call extension methods. Match: x{Extension\Name:Method(Options)}
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9\-_\\\\]+):([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', 
+		// Call extension methods. Match: x{Extension(Options)}
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', 
 				function($matches) use($extender) {
-					if (!isset($matches[3])) {
+				
+					if (!isset($matches[2])) {
 						// If there are no options passed.
-						$matches[3] = '';
+						$matches[2] = '';
 					}
-					return $extender->callMethod($matches[1], $matches[2], trim($matches[3],'()'));
+				
+					$options = Parse::toolOptions(trim($matches[2],'()'));					
+					return $extender->callExtension($matches[1], $options);
+				
 				}, 
 				$output);
 		
@@ -205,7 +214,9 @@ class Template {
 		$site = $this->S;
 		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
 				function($matches) use($site) {
+					
 					return $site->getSiteData($matches[1]);
+				
 				},
 				$output);
 			
@@ -214,9 +225,11 @@ class Template {
 		$data = $this->P->data;
 		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
 				function($matches) use($data) {
+					
 					if (array_key_exists($matches[1], $data)) {
 						return $data[$matches[1]];
 					}
+					
 				},
 				$output);
 				
