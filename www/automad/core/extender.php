@@ -85,19 +85,15 @@ class Extender {
 		$html = '';
 		
 		// Find extensions in $output.
-		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9\-_\\\\]+):.*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', $output, $extensions);
+		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', $output, $extensions);
 			
 		// Collect all css/js files in each extension directory.
 		foreach ($extensions[1] as $extension) {
 			
-			// Adding the extension namespace to the called class, to make sure,
-			// that only classes from the /extensions directory get used.
-			$extension = AM_NAMESPACE_EXTENSIONS . '\\' . $extension;
-			
-			Debug::log('Extender: Getting CSS/JS for "' . $extension . '"');	
-			
 			// Extension directory	
-			$path = dirname(AM_BASE_DIR . strtolower(str_replace('\\', '/', $extension)));
+			$path = AM_BASE_DIR . strtolower(str_replace('\\', '/', AM_NAMESPACE_EXTENSIONS) . '/' . $extension);
+			
+			Debug::log('Extender: Getting CSS/JS for "' . $extension . '" in: ' . $path);
 			
 			// Get files
 			$css = array_merge($css, glob($path . '/*.css'));
@@ -129,53 +125,55 @@ class Extender {
 	/**
 	 *	Call extension method from template dynamically.
 	 *
-	 *	@param string $class
-	 *	@param string $method
-	 *	@param string $optionStr
+	 *	@param string $name
+	 *	@param array $options
 	 *	@return The returned value from the called method
 	 */
 	
-	public function callMethod($class, $method, $optionStr) {
+	public function callExtension($name, $options) {
 		
 		// Adding the extension namespace to the called class here, to make sure,
 		// that only classes from the /extensions directory and within the \Extension namespace get used.
-		$class = AM_NAMESPACE_EXTENSIONS . '\\' . $class;
+		$class = AM_NAMESPACE_EXTENSIONS . '\\' . $name;
 		
 		// Building the extension's file path.
-		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class)) . '.php';
+		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class) . '/' . $name) . '.php';
 		
 		if (file_exists($file)) {
 							
 			// Load class.				
-			Debug::log('Extender: Loading ' . $file);
+			Debug::log('Extender: Require once ' . $file);
 			require_once $file;
 			
-			if (class_exists($class)) {
+			if (class_exists($class, false)) {
 				
 				// Create instance of class dynamically.
-				// The Site object gets passed to be available within the extension.
-				$extension = new $class($this->S);
+				$object = new $class();
 				Debug::log('Extender: Created instance of class "' . $class . '"');
 		
-				if (method_exists($extension, $method)) {
+				if (method_exists($object, $name)) {
 					
-					// Parse options
-					$options = Parse::toolOptions($optionStr);
-					
-					// Call method dynamically and pass $options.
-					Debug::log('Extender: Calling method "' . $method . '"');
-					return $extension->$method($options);
+					// Call method dynamically and pass $options & Site.
+					Debug::log('Extender: Calling method "' . $name . '" and passing the following options:');
+					Debug::log($options);
+					return $object->$name($options, $this->S);
 		
 				} else {
-					Debug::log('Extender: Method "' . $method . '" not existing!');	
+					
+					Debug::log('Extender: Method "' . $name . '" not existing!');	
+				
 				}
 		
 			} else {
+				
 				Debug::log('Extender: Class "' . $class . '" not existing!');		
+			
 			}
 		
 		} else {
+			
 			Debug::log('Extender: ' . $file . ' not found!');
+		
 		}
 		
 	}
