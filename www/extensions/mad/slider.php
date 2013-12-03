@@ -66,11 +66,6 @@ class Slider {
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
 		
-		// Make pixels integer values
-		foreach (array('width', 'height') as $key) {
-			$options[$key] = intval($options[$key]);
-		}
-		
 		// Build full glob pattern
 		$P = $this->S->getCurrentPage();
 		$glob = \Core\Modulate::filePath($P->path, $options['glob']);
