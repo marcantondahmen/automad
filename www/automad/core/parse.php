@@ -160,6 +160,24 @@ class Parse {
 	
 	
 	/**
+	 *	Turn numeric string into a float value.
+	 *
+	 *	@param string $str
+	 *	@return $str (string or float)
+	 */
+	
+	public static function numToFloat($str) {
+		
+		if (is_numeric($str)) {	
+			$str = floatval($str);
+		}
+		
+		return $str;
+		
+	}
+	
+	
+	/**
 	 *	Get the query string, if existing.
 	 *
 	 *	@return $query
@@ -176,7 +194,6 @@ class Parse {
 		}
 		
 		return $query;
-		
 		
 	}
 	
@@ -269,12 +286,12 @@ class Parse {
 			
 					// If it is a pair of $key: $value, it goes like that into the new array.
 					list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $option, 2);
-					$parsedOptions[trim($key)] = trim($value);
+					$parsedOptions[trim($key)] = Parse::numToFloat(trim($value));
 				
 				} else {
 				
 					// Else the whole string goes into the array and gets just an index and not a key.
-					$parsedOptions[] = trim($option);
+					$parsedOptions[] = Parse::numToFloat(trim($option));
 				
 				}
 			
