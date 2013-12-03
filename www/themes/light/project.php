@@ -18,7 +18,7 @@ i{elements/header.php}
 		t{filterParentByTags}		
 		
 		<div class="images">
-			x{Mad\Slider:generate(glob: *.jpg, width: 850, height: 450, duration: 3000)}
+			x{Slider(glob: *.jpg, width: 850, height: 450, duration: 3000)}
 		</div>
 			
 	</div>
