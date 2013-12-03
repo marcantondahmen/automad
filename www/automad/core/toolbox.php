@@ -126,11 +126,6 @@ class Toolbox {
 		
 		// Merge options with defaults				
 		$options = array_merge($defaults, Parse::toolOptions($optionStr));
-		
-		// Turn relevant vars into integer
-		foreach(array('width', 'height', 'crop') as $key) {
-			$options[$key] = intval($options[$key]);
-		}
 			
 		if ($options['file']) {
 			$glob = Modulate::filePath($this->P->path, $options['file']);
@@ -160,11 +155,6 @@ class Toolbox {
 		
 		// Merge options with defaults				
 		$options = array_merge($defaults, Parse::toolOptions($optionStr));
-		
-		// Turn relevant vars into integer
-		foreach(array('width', 'height', 'crop') as $key) {
-			$options[$key] = intval($options[$key]);
-		}
 			
 		if ($options['file']) {
 			$glob = Modulate::filePath($this->P->path, $options['file']);
@@ -271,12 +261,7 @@ class Toolbox {
 	
 		// Merge defaults with options
 		$options = array_merge($defaults, Parse::toolOptions($optionStr));
-		
-		// Turn relevant vars into integer
-		foreach(array('width', 'height', 'crop') as $key) {
-			$options[$key] = intval($options[$key]);
-		}
-		
+				
 		// Move numeric elements into vars array
 		foreach($options as $key => $value) {
 			if (is_int($key)) {
