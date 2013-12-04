@@ -41,27 +41,30 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Load configuration
-include AM_BASE_DIR . '/config/const.php';
-
-
-// Load defaults
-include AM_BASE_DIR . '/automad/const.php';
+require AM_BASE_DIR . '/config/const.php';
+require AM_BASE_DIR . '/automad/const.php';
 
 
 // Remove trailing slash from URL to keep relative links consistent
 if (isset($_SERVER['PATH_INFO'])) {
+	
 	// Test if PATH_INFO ends with '/' without just being '/',
 	// otherwise an infinite loop can be created when accessing the home page.
 	if (substr($_SERVER['PATH_INFO'], -1) == '/' && $_SERVER['PATH_INFO'] != '/') {
+		
 		header('Location: ' . AM_BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
-		exit;	
-	}	
+		die;
+			
+	}
+		
 }	
 
 
 // The cache folder must be writable (resized images), also when caching is disabled!
 if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
-	exit('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
+	
+	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
+	
 }
 
 
@@ -119,8 +122,9 @@ if ($C->pageCacheIsApproved()) {
 echo $output;
 
 
-// Display execution time and server info
+// Display execution time, user constants and server info
 Debug::timerEnd();
+Debug::uc();
 Debug::log('Server:');
 Debug::log($_SERVER);
 
