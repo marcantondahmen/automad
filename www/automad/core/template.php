@@ -151,7 +151,7 @@ class Template {
 		// Include only (!) PHP files relative to the template file.
 		// Useful to keep header and footer in separate files.
 		$templateDir = dirname($this->template);
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_INC_L) . '([A-Za-z0-9_\.\/\-]+)' . preg_quote(AM_TMPLT_DEL_INC_R) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_INC_L) . '\s*([A-Za-z0-9_\.\/\-]+)\s*' . preg_quote(AM_TMPLT_DEL_INC_R) . '/',
 				function($matches) use($templateDir) {
 					
 					$file = $templateDir . '/' . $matches[1];
@@ -173,7 +173,7 @@ class Template {
 		// Call functions dynamically with optional parameter in () or without () for no options.
 		// For example $[function(parameter)] or just $[function]
 		$toolbox = new Toolbox($this->S); 
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/', 
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*(\(.*?\))?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
 				function($matches) use($toolbox) {
 					
 					if (method_exists($toolbox, $matches[1])) {
@@ -184,7 +184,13 @@ class Template {
 							$matches[2] = '';
 						}
 						
-						return $toolbox->$matches[1](trim($matches[2],'()'));
+						// Pass options as string and not parsed to be more flexible 
+						// in case a tool expects a string instead of an array.
+						$optionStr = trim(trim($matches[2],'()'));
+						
+						Debug::log('Template: Matched tool: "' . $matches[1] . '"');
+						return $toolbox->$matches[1]($optionStr);
+						
 					}
 					
 				}, 
@@ -195,7 +201,7 @@ class Template {
 		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
 		$output = $extender->addHeaderElements($output);
 		// Call extension methods. Match: x{Extension(Options)}
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/', 
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*(\(.*?\))?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
 				function($matches) use($extender) {
 				
 					if (!isset($matches[2])) {
@@ -203,7 +209,9 @@ class Template {
 						$matches[2] = '';
 					}
 				
-					$options = Parse::toolOptions(trim($matches[2],'()'));					
+					$options = Parse::toolOptions(trim($matches[2],'()'));	
+					
+					Debug::log('Template: Matched extension: "' . $matches[1] . '"');				
 					return $extender->callExtension($matches[1], $options);
 				
 				}, 
@@ -212,7 +220,7 @@ class Template {
 		// Site vars:
 		// Replace vars from /shared/site.txt
 		$site = $this->S;
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
 				function($matches) use($site) {
 					
 					return $site->getSiteData($matches[1]);
@@ -223,7 +231,7 @@ class Template {
 		// Page vars:					
 		// Replace vars from the page's data array			
 		$data = $this->P->data;
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
 				function($matches) use($data) {
 					
 					if (array_key_exists($matches[1], $data)) {
