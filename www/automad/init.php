@@ -37,7 +37,7 @@
 namespace Core;
 
 
-define('AUTOMAD', true);
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Load configuration
