@@ -272,6 +272,34 @@ class Template {
 	
 	
 	/**
+	 *	Obfuscate all eMail addresses matched in $output.
+	 *	
+	 *	@param string $output
+	 *	@return $output
+	 */
+	
+	public function obfuscateEmails($output) {
+		
+		$output = 	preg_replace_callback('/([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', 
+				function($matches) {
+				
+					Debug::log('Template: Obfuscating: ' . $matches[1]);
+					
+					$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
+					$html .= strrev($matches[1]);
+					$html .= "</a>&#x200E;";
+		
+					return $html;
+					
+				}, 
+				$output);
+				
+		return $output;
+				
+	}
+
+	
+	/**
 	 * 	Render the current page.
 	 *
 	 *	@return The fully rendered HTML for the current page.
@@ -285,6 +313,7 @@ class Template {
 		$output = $this->processTemplate($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->modulateUrls($output);	
+		$output = $this->obfuscateEmails($output);
 	
 		return $output;	
 		
