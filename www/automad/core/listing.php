@@ -212,7 +212,7 @@ class Listing {
 		$this->tags = $this->setupTags($listing);
 		$this->pages = $this->setupPages($listing);
 		
-		Debug::log('Listing:');
+		Debug::log('Listing: Created a Listing object with the following properties:');
 		Debug::log($this);
 		
 	}
