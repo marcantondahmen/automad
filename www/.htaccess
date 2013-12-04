@@ -21,6 +21,12 @@ RewriteBase /
 
 
 
+# Exclude home page from rewriting
+RewriteRule ^$ - [L]
+
+
+
+
 # Pretty URLs:
 
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -31,7 +37,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # since the RewriteBase stays always '/'.
 
 # To make that possible, the following RewriteCond is a dummy condition 
-# which is always true and is only used to figure out the base url.
+# which is always true and is only used to figure out the base url 
+# by using back-references. (http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html)
+
+# Note: The RewriteRule is checked before (!) its RewriteConds. That actually
+# makes the back-reference to (.*) available in the condition.
 
 # For example the full URL is: www.yoursite.com/page/path
 
@@ -54,16 +64,16 @@ RewriteRule ^(.*)$ %2index.php/$1 [L]
 
 
 
-# Block .txt files and directories:
+# Block .txt files and subdirectories:
 
-RewriteCond %{REQUEST_FILENAME} .txt$ [OR] 
+RewriteCond %{REQUEST_FILENAME} \.txt$ [OR] 
 RewriteCond %{REQUEST_FILENAME} -d
 
 # Reuse the method described above to keep the app portable.
 RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 
 # Redirect to "-" which will display the 404 page.
-RewriteRule ^(.*)$ %2index.php/- [L]
+RewriteRule ^(.*)$ %2index.php/_ [L]
 
 
 # --------------- #
