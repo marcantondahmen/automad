@@ -127,6 +127,24 @@ class Debug {
 	}
 	
 	
+	/**
+	 *	Log all user constants for get_defined_constants().
+	 */
+	
+	public static function uc() {
+		
+		if (AM_DEBUG_ENABLED) {
+		
+			$definedConstants = get_defined_constants(true);
+			$userConstants = $definedConstants['user'];
+			Debug::log('User constants:');
+			Debug::log($userConstants);
+			
+		}
+		
+	}
+	
+	
 }
 
 
