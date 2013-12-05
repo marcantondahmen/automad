@@ -81,33 +81,37 @@ if (!defined('AM_DIR_DEFAULT_TEMPLATES')) {
 
 
 // FILE
-// Sidewide settings/variable
-if (!defined('AM_FILE_SITE_SETTINGS')) {
-	define('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.txt'); 
-}
-// Site modification time
-if (!defined('AM_FILE_SITE_MTIME')) {
-	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/cached_site_mtime');
-}
-// Site object cache
-if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
-	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/cached_site_object');
-}
-// Default template
-if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
-	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
+// Data file extension
+if (!defined('AM_FILE_EXT_DATA')) {
+	// Changing that constant will also require updating the .htaccess file!
+	// (for blocking direct access)
+	define('AM_FILE_EXT_DATA', 'txt');
 }
 // Cache file prefix
 if (!defined('AM_FILE_PREFIX_CACHE')) {
+	// Changing that constant will also require updating the .htaccess file!
+	// (for blocking direct access)
 	define('AM_FILE_PREFIX_CACHE', 'cached');
 }
 // Cache file extension
 if (!defined('AM_FILE_EXT_PAGE_CACHE')) {
 	define('AM_FILE_EXT_PAGE_CACHE', 'html');
 }
-// Data file extension
-if (!defined('AM_FILE_EXT_DATA')) {
-	define('AM_FILE_EXT_DATA', 'txt');
+// Sidewide settings/variable
+if (!defined('AM_FILE_SITE_SETTINGS')) {
+	define('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.' . AM_FILE_EXT_DATA); 
+}
+// Site modification time
+if (!defined('AM_FILE_SITE_MTIME')) {
+	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
+}
+// Site object cache
+if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
+	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_object');
+}
+// Default template
+if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
+	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
 }
 
 
