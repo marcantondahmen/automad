@@ -278,7 +278,7 @@ class Template {
 	 *	@return $output
 	 */
 	
-	public function obfuscateEmails($output) {
+	private function obfuscateEmails($output) {
 		
 		$output = 	preg_replace_callback('/([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', 
 				function($matches) {
