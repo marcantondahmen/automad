@@ -315,13 +315,14 @@ class Cache {
 			Debug::log('Cache: Scanned directories and saved Site-mTime.');
 			Debug::log('       Last modified item: ' . $lastModifiedItem); 
 			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
+			Debug::log('       Write Site-mTime: ' . AM_FILE_SITE_MTIME);
 			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
 			
 			// In between this delay, it just gets loaded from a file.
 			$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-			Debug::log('Cache: Load Site-mTime from file.');
+			Debug::log('Cache: Read Site-mTime: ' . AM_FILE_SITE_MTIME);
 			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
 			
 		}
