@@ -64,15 +64,22 @@ RewriteRule ^(.*)$ %2index.php/$1 [L]
 
 
 
-# Block .txt files and subdirectories:
+# Redirect blocked files to the 404 page. 
 
+# Redirect all non-image cache files.
+RewriteCond %{REQUEST_FILENAME} !\.(jpg|gif|png)$
+RewriteCond %{REQUEST_FILENAME} cached [OR]
+
+# Redirect all .txt files.
 RewriteCond %{REQUEST_FILENAME} \.txt$ [OR] 
+
+# Redirect all subdirectories.
 RewriteCond %{REQUEST_FILENAME} -d
 
 # Reuse the method described above to keep the app portable.
 RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 
-# Redirect to "-" which will display the 404 page.
+# Redirect to "_" which will display the 404 page.
 RewriteRule ^(.*)$ %2index.php/_ [L]
 
 
