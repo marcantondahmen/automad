@@ -289,8 +289,9 @@ if (!defined('AM_HTML_LIST_MAX_CHARS')) {
 
 // PARSE
 // Block separator - separates all key/value pairs
+// Must be used as the only string in a line within the template files.
 if (!defined('AM_PARSE_BLOCK_SEPARATOR')) {
-	define('AM_PARSE_BLOCK_SEPARATOR', '---');
+	define('AM_PARSE_BLOCK_SEPARATOR', '-');
 }
 // Pair separator - separates the key from the value
 if (!defined('AM_PARSE_PAIR_SEPARATOR')) {
