@@ -210,7 +210,15 @@ class Site {
 							} else {
 								$theme = $this->getSiteData(AM_PARSE_THEME_KEY);;
 							}
-						
+							
+							// Check if the page should be hidden from selections.
+							$hidden = false;
+							if (array_key_exists(AM_PARSE_HIDDEN_KEY, $data)) {
+								if ($data[AM_PARSE_HIDDEN_KEY] === 'true' || $data[AM_PARSE_HIDDEN_KEY] === '1') {
+									$hidden = true;
+								}
+							}
+							
 							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
 							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
 							$P = new Page();
@@ -222,6 +230,7 @@ class Site {
 							$P->parentUrl = $parentUrl;
 							$P->theme = $theme;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
+							$P->hidden = $hidden;
 							$this->siteCollection[$url] = $P;
 							
 						}
