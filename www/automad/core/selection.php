@@ -66,9 +66,7 @@ class Selection {
 	
 	
 	/**
-	 * 	Gets the collection or a previously created selection (array) of pages.
-	 *
-	 *	Basically $pages means Site::getCollection(), assuming $site is an instance of Site.
+	 * 	Pass a set of pages to $this->selection excluding all hidden pages.
 	 *	
 	 *	@param array $pages (normally Site::getCollection() or any other selection array)
 	 */
@@ -76,6 +74,24 @@ class Selection {
 	public function __construct($pages) {
 		
 		$this->selection = $pages;
+		$this->excludeHidden();
+		
+	}
+	
+	
+	/**
+	 *	Exclude all hidden pages from the selection.
+	 */
+	
+	private function excludeHidden() {
+		
+		foreach ($this->selection as $url => $page) {
+			
+			if ($page->hidden) {
+				unset($this->selection[$url]);
+			}
+			
+		}
 		
 	}
 	
@@ -116,7 +132,10 @@ class Selection {
 	
 	public function filterBreadcrumbs($url) {
 			
-		if (strpos($url, '/') === 0) {
+		// Test wheter $url is the URL of a real page.
+		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
+		// For all other $url, just the home page will be returned.	
+		if (strpos($url, '/') === 0 && array_key_exists($url, $this->selection)) {
 		
 			$pages = array();
 			
