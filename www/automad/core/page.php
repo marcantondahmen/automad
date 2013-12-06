@@ -112,6 +112,13 @@ class Page {
 	
 	public $template;
 	
+	
+	/**
+	 *	The visibility status of a page within selections.
+	 */
+	
+	public $hidden;
+	
 
 	/**
 	 *	Return the theme path (root relative) of the page.
