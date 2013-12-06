@@ -80,7 +80,7 @@ class Site {
 		// Define default settings.
 		// Basically that is only the site name, because that is the only really needed value.		
 		$defaults = 	array(	
-					'sitename' => $_SERVER['SERVER_NAME']  
+					AM_PARSE_SITENAME_KEY => $_SERVER['SERVER_NAME']  
 				);
 		
 		// Merge defaults with settings from file.
@@ -208,7 +208,7 @@ class Site {
 							if (array_key_exists(AM_PARSE_THEME_KEY, $data)) {
 								$theme = $data[AM_PARSE_THEME_KEY];
 							} else {
-								$theme = $this->getSiteData('theme');;
+								$theme = $this->getSiteData(AM_PARSE_THEME_KEY);;
 							}
 						
 							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
@@ -282,14 +282,14 @@ class Site {
 	
 	
 	/**
-	 *	Return the name of the website - shortcut for $this->getSiteData('sitename').
+	 *	Return the name of the website - shortcut for $this->getSiteData(AM_PARSE_SITENAME_KEY).
 	 *
-	 *	@return string $this->getSiteData('sitename')
+	 *	@return string $this->getSiteData(AM_PARSE_SITENAME_KEY)
 	 */
 	
 	public function getSiteName() {
 		
-		return $this->getSiteData('sitename');
+		return $this->getSiteData(AM_PARSE_SITENAME_KEY);
 		
 	}
 	
@@ -368,7 +368,7 @@ class Site {
 	private function createPage($template, $title) {
 		
 		$page = new Page();
-		$page->theme = $this->getSiteData('theme');
+		$page->theme = $this->getSiteData(AM_PARSE_THEME_KEY);
 		$page->template = $template;
 		$page->data[AM_PARSE_TITLE_KEY] = $title;
 		$page->parentUrl = '';
