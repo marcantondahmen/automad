@@ -313,9 +313,13 @@ if (!defined('AM_PARSE_TAGS_KEY')) {
 if (!defined('AM_PARSE_THEME_KEY')) {
 	define('AM_PARSE_THEME_KEY', 'theme');
 }
-// Theme key (to identify a title in the page's txt file)
+// Title key (to identify a title in the page's txt file)
 if (!defined('AM_PARSE_TITLE_KEY')) {
 	define('AM_PARSE_TITLE_KEY', 'title');
+}
+// Sitename key (to identify the sitename in the site's txt file)
+if (!defined('AM_PARSE_SITENAME_KEY')) {
+	define('AM_PARSE_SITENAME_KEY', 'sitename');
 }
 // URL key (to identify an URL in the page's txt file)
 if (!defined('AM_PARSE_URL_KEY')) {
