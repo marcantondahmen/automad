@@ -305,6 +305,10 @@ if (!defined('AM_PARSE_OPTION_SEPARATOR')) {
 if (!defined('AM_PARSE_TAG_SEPARATOR')) {
 	define('AM_PARSE_TAG_SEPARATOR', ',');
 }
+// Hidden key (to identify the visibility status of a page in its txt file)
+if (!defined('AM_PARSE_HIDDEN_KEY')) {
+	define('AM_PARSE_HIDDEN_KEY', 'hidden');
+}
 // Tags key (to identify tags in the page's txt file)
 if (!defined('AM_PARSE_TAGS_KEY')) {
 	define('AM_PARSE_TAGS_KEY', 'tags');
