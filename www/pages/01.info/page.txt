@@ -1,14 +1,14 @@
 title: Info
 
----
+-
 
 subtitle: Automad Demo Site 
 
----
+-
 
 theme: dark
 
----
+-
 
 text: This site is just a little demo for the **Automad Content Management System**. 
 To show some of the main features, a small collection of geometric shapes will be used as sample [projects](/projects).

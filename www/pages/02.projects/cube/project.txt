@@ -1,14 +1,14 @@
 title: Cube
 
----
+-
 
 subtitle: Hexahedron. Here stacked!
 
----
+-
 
 tags: Rectangular, Simple
 
----
+-
 
 text: In [geometry](http://en.wikipedia.org/wiki/Geometry), a cube is a three-dimensional solid object bounded by six square faces, facets or sides, with three meeting at each vertex.
 The cube is the only regular hexahedron and is one of the five Platonic solids.

@@ -1,14 +1,14 @@
 title: Cylinder
 
----
+-
 
 subtitle: Ruled Surface
 
----
+-
 
 tags: Extruded, Round, Simple
 
----
+-
 
 text: A cylinder (from Greek κύλινδρος – kulindros, "roller, tumbler") is one of the most basic curvilinear geometric shapes, the surface formed by the points at a fixed distance from a given line segment, the axis of the cylinder. The solid enclosed by this surface and by two planes perpendicular to the axis is also called a cylinder. The surface area and the volume of a cylinder have been known since deep antiquity.
 

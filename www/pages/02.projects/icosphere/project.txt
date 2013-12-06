@@ -1,14 +1,14 @@
 title: Icosphere
 
----
+-
 
 subtitle: Icosahedron
 
----
+-
 
 tags: Triangular Faces
 
----
+-
 
 text: In geometry, an icosahedron is a polyhedron with 20 triangular faces, 30 edges and 12 vertices. A regular icosahedron with identical equilateral faces is often meant because of its geometrical significance as one of the five Platonic solids.
 It has five triangular faces meeting at each vertex. It can be represented by its vertex figure as 3.3.3.3.3 or 35, and also by Schläfli symbol {3,5}. It is the dual of the dodecahedron, which is represented by {5,3}, having three pentagonal faces around each vertex.
