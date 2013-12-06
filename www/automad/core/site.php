@@ -186,13 +186,13 @@ class Site {
 						
 							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 							// In case the title is missig for the home page, use the site name instead.
-							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
+							if (!array_key_exists(AM_PARSE_TITLE_KEY, $data) || ($data[AM_PARSE_TITLE_KEY] == '')) {
 								if (trim($url, '/')) {
 									// If page is not the home page...
-									$data['title'] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+									$data[AM_PARSE_TITLE_KEY] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 								} else {
 									// If page is home page...
-									$data['title'] = $this->getSiteName();
+									$data[AM_PARSE_TITLE_KEY] = $this->getSiteName();
 								}
 							} 
 						
@@ -370,7 +370,7 @@ class Site {
 		$page = new Page();
 		$page->theme = $this->getSiteData('theme');
 		$page->template = $template;
-		$page->data['title'] = $title;
+		$page->data[AM_PARSE_TITLE_KEY] = $title;
 		$page->parentUrl = '';
 		
 		return $page;

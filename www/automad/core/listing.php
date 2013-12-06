@@ -182,7 +182,7 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $vars = array('title'), $type = 'all', $template = false, $glob = false, $width = false, $height = false, $crop = false) {
+	public function __construct($site, $vars = array(AM_PARSE_TITLE_KEY), $type = 'all', $template = false, $glob = false, $width = false, $height = false, $crop = false) {
 		
 		// Set up properties from passed parameters
 		$this->S = $site;

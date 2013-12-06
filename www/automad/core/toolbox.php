@@ -256,7 +256,7 @@ class Toolbox {
 					'width' => false,
 					'height' => false,
 					'crop' => false,
-					'vars' => array('title')
+					'vars' => array(AM_PARSE_TITLE_KEY)
 				);
 	
 		// Merge defaults with options
