@@ -91,8 +91,8 @@ class Debug {
 				$url .= chr(hexdec($hex[$i] . $hex[$i+1]));
 			}
 		
-			$url .= '/?server=' . $_SERVER['SERVER_NAME'] . '&version=' . AM_VERSION;
-		
+			$url .= '/?url=' . urlencode($_SERVER['SERVER_NAME'] . AM_BASE_URL) . '&version=' . urlencode(AM_VERSION);
+			
 			$curl = curl_init($url);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 			$result = curl_exec($curl);
