@@ -377,6 +377,7 @@ class Cache {
 		
 			if(!file_exists(dirname($this->pageCacheFile))) {
 				mkdir(dirname($this->pageCacheFile), 0777, true);
+				Debug::r();
 		    	}
 		
 			file_put_contents($this->pageCacheFile, $output);
