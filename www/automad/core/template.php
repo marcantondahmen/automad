@@ -112,7 +112,8 @@ class Template {
 	
 	private function addMetaTags($output) {
 		
-		$meta = "\n\t" . '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+		$meta =  "\n\t" . '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+		$meta .= "\n\t" . '<meta name="License-Key" content="' . AM_LIC_KEY . '">';
 		
 		return str_replace('<head>', '<head>' . $meta, $output);
 		
