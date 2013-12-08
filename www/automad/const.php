@@ -334,8 +334,19 @@ if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {
 	define('AM_PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3', 'gif')));
 }
 
- 
+
+// Version number 
 include(AM_BASE_DIR . '/automad/version.php');
- 
+
+
+// License key
+$keyFile = AM_BASE_DIR . '/config/licensekey.txt';
+if (file_exists($keyFile)) {
+	$key = preg_replace('/[^A-Za-z0-9_]/', '', trim(file_get_contents($keyFile)));
+	define('AM_LIC_KEY', $key);
+} else {
+	define('AM_LIC_KEY', '');
+}
+
  
 ?>
