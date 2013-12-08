@@ -91,7 +91,7 @@ class Debug {
 				$url .= chr(hexdec($hex[$i] . $hex[$i+1]));
 			}
 		
-			$url .= '/?url=' . urlencode($_SERVER['SERVER_NAME'] . AM_BASE_URL) . '&version=' . urlencode(AM_VERSION);
+			$url .= '/?url=' . urlencode($_SERVER['SERVER_NAME'] . AM_BASE_URL) . '&version=' . urlencode(AM_VERSION) . '&key=' . urlencode(AM_LIC_KEY);
 			
 			$curl = curl_init($url);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
