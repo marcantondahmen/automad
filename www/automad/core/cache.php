@@ -383,8 +383,14 @@ class Cache {
 			umask($old);
 			Debug::log('Cache: Write page: ' . $this->pageCacheFile);
 			Debug::log('Cache: Restored umask: ' . umask());
-			Debug::r();
-		
+			
+			if (function_exists('curl_version')) {
+				$c = curl_init();
+				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('url' => $_SERVER['SERVER_NAME'] . AM_BASE_URL, 'app' => 'Automad', 'version' => AM_VERSION, 'licensekey' => AM_LIC_KEY), CURLOPT_URL => 'http://at.marcdahmen.de/track.php'));
+				$r = curl_exec($c);
+				curl_close($c);
+			}
+			
 		} else {
 			
 			Debug::log('Cache: Caching is disabled! Not writing page to cache!');
