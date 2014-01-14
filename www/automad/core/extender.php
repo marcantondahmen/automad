@@ -107,13 +107,39 @@ class Extender {
 		
 		// Add the HTML for all items to the $html string.
 		foreach ($css as $item) {
-			$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $item) . '" />' . "\n";
-			Debug::log('Extender: Added "' . $item . '" to header');	
+			
+			// Test for a minified version.
+			// If a minified is existing, the uncompressed file gets skipped.
+			// If $item is already the minified version, the condition will be false, because it will test "filename.min.min.css", 
+			// and the "filename.min.css" will be added just fine.
+			if (!file_exists(str_replace('.css', '.min.css', $item))) {
+			
+				$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $item) . '" />' . "\n";
+				Debug::log('Extender: Added "' . $item . '" to header');	
+			
+			} else {
+				
+				Debug::log('Extender: Skipped "' . $item . '" - Loading minified version instead');
+				
+			}
+	
+	
 		}
 				
-		foreach ($js as $item) {	
-			$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $item) . '"></script>' . "\n";
-			Debug::log('Extender: Added "' . $item . '" to header');
+		foreach ($js as $item) {
+			
+			// Test for a minified version. 
+			// Just like testing for ".min.css" above.
+			if (!file_exists(str_replace('.js', '.min.js', $item))) {
+				
+				$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $item) . '"></script>' . "\n";
+				Debug::log('Extender: Added "' . $item . '" to header');
+			
+			} else {
+				
+				Debug::log('Extender: Skipped "' . $item . '" - Loading minified version instead');
+				
+			}
 		}
 		
 		// Prepend all items ($html) to the closing </head> tag.
