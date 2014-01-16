@@ -1,4 +1,4 @@
-/**
+/*!
  *	SLIDER
  *	Extension for the Automad CMS
  *
