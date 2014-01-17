@@ -408,6 +408,8 @@ class Selection {
 	/**
 	 *	Sorts $this->selection based on any variable in the text files.
 	 *	If the $var gets passed empty, $this->sortPagesByBasename() will be used as fallback.
+	 *	If a variable doesn't exist for page, that page's value in $arrayToSortBy will be set to its basename.
+	 *	That allows for simply sorting a selection by original order from the HTML class by passing an invalid var like "-" or "orig" etc.
 	 *
 	 *	@param string $var (any variable from a text file)
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
@@ -425,17 +427,20 @@ class Selection {
 				if (isset($page->data[$var])) {
 					$arrayToSortBy[$key] = strtolower($page->data[$var]);
 				} else {
-					// If data[$var] doesn't exists, an empty string will be added
-					$arrayToSortBy[$key] = '';
+					// If data[$var] doesn't exists, the page's path's basename will be used.
+					// That way it is possible to order by basename with simply passing a non-existing var (for example "orig" or something else).
+					$arrayToSortBy[$key] = basename($page->path);
 				}
 			
 			}
-				
+	
 			array_multisort($arrayToSortBy, $order, $this->selection);
-		
+					
 		} else {
+			
 			// else the selection is sorted by the file system path's basename
 			$this->sortPagesByBasename($order);
+			
 		}
 		
 	} 
