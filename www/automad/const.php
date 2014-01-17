@@ -148,21 +148,6 @@ if (!defined('AM_IMG_JPG_QUALITY')) {
 }
 
 
-// TOOL OPTIONS
-// Placeholder text for search field
-if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
-	define('AM_TOOL_OPTIONS_SEARCH', 'Search ...');
-}
-// Default sort types
-if (!defined('AM_TOOL_OPTIONS_SORT_TYPE')) {
-	define('AM_TOOL_OPTIONS_SORT_TYPE', 'Original Order');
-}
-// Default sort directions text
-if (!defined('AM_TOOL_OPTIONS_SORT_DIR')) {
-	define('AM_TOOL_OPTIONS_SORT_DIR', 'SORT_ASC: Sort Ascending, SORT_DESC: Sort Descending');
-}
-
-
 // LISTING DEFAULTS
 // Default sort direction
 if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
@@ -173,43 +158,43 @@ if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
 // TEMPLATE DELIMITERS
 // Left delimiter for includes
 if (!defined('AM_TMPLT_DEL_INC_L')) {
-	define('AM_TMPLT_DEL_INC_L', 'i{');
+	define('AM_TMPLT_DEL_INC_L', 'i(');
 }
 // Right delimiter for includes
 if (!defined('AM_TMPLT_DEL_INC_R')) {
-	define('AM_TMPLT_DEL_INC_R', '}');
+	define('AM_TMPLT_DEL_INC_R', ')');
 }
 // Left delimiter for page variables
 if (!defined('AM_TMPLT_DEL_PAGE_VAR_L')) {
-	define('AM_TMPLT_DEL_PAGE_VAR_L', 'p{');
+	define('AM_TMPLT_DEL_PAGE_VAR_L', 'p(');
 }
 // Right delimiter for page variables
 if (!defined('AM_TMPLT_DEL_PAGE_VAR_R')) {
-	define('AM_TMPLT_DEL_PAGE_VAR_R', '}');
+	define('AM_TMPLT_DEL_PAGE_VAR_R', ')');
 }
 // Left delimiter for site variables
 if (!defined('AM_TMPLT_DEL_SITE_VAR_L')) {
-	define('AM_TMPLT_DEL_SITE_VAR_L', 's{');
+	define('AM_TMPLT_DEL_SITE_VAR_L', 's(');
 }
 // Right delimiter for site variables
 if (!defined('AM_TMPLT_DEL_SITE_VAR_R')) {
-	define('AM_TMPLT_DEL_SITE_VAR_R', '}');
+	define('AM_TMPLT_DEL_SITE_VAR_R', ')');
 }
 // Left delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_L')) {
-	define('AM_TMPLT_DEL_TOOL_L', 't{');
+	define('AM_TMPLT_DEL_TOOL_L', 't(');
 }
 // Right delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_R')) {
-	define('AM_TMPLT_DEL_TOOL_R', '}');
+	define('AM_TMPLT_DEL_TOOL_R', ')');
 }
 // Left delimiter for extensions
 if (!defined('AM_TMPLT_DEL_XTNSN_L')) {
-	define('AM_TMPLT_DEL_XTNSN_L', 'x{');
+	define('AM_TMPLT_DEL_XTNSN_L', 'x(');
 }
 // Right delimiter for extensions
 if (!defined('AM_TMPLT_DEL_XTNSN_R')) {
-	define('AM_TMPLT_DEL_XTNSN_R', '}');
+	define('AM_TMPLT_DEL_XTNSN_R', ')');
 }
 
 
@@ -297,13 +282,9 @@ if (!defined('AM_PARSE_BLOCK_SEPARATOR')) {
 if (!defined('AM_PARSE_PAIR_SEPARATOR')) {
 	define('AM_PARSE_PAIR_SEPARATOR', ':');
 }
-// Tool options separator
-if (!defined('AM_PARSE_OPTION_SEPARATOR')) {
-	define('AM_PARSE_OPTION_SEPARATOR', ',');
-}
 // Tags separator
-if (!defined('AM_PARSE_TAG_SEPARATOR')) {
-	define('AM_PARSE_TAG_SEPARATOR', ',');
+if (!defined('AM_PARSE_STR_SEPARATOR')) {
+	define('AM_PARSE_STR_SEPARATOR', ',');
 }
 // Hidden key (to identify the visibility status of a page in its txt file)
 if (!defined('AM_PARSE_HIDDEN_KEY')) {
