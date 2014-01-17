@@ -480,7 +480,9 @@ class Toolbox {
 	 *	@return the HTML of the tree
 	 */
 	
-	public function navTree($options = array('all' => true)) {
+	public function navTree($options) {
+				
+		$options = array_merge(array('all' => true), $options);
 				
 		return Html::generateTree($this->collection, $options['all']);
 	
