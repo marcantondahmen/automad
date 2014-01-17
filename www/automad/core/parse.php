@@ -64,7 +64,7 @@ class Parse {
 			if ($key == AM_PARSE_TAGS_KEY) {
 	
 				// All tags are splitted into an array
-				$tags = explode(AM_PARSE_TAG_SEPARATOR, $value);
+				$tags = explode(AM_PARSE_STR_SEPARATOR, $value);
 				// Trim & strip tags
 				$tags = array_map(function($tag) {
 						return trim(strip_tags($tag)); 
@@ -158,25 +158,7 @@ class Parse {
 		
 	}
 	
-	
-	/**
-	 *	Turn numeric string into a float value.
-	 *
-	 *	@param string $str
-	 *	@return $str (string or float)
-	 */
-	
-	public static function numToFloat($str) {
 		
-		if (is_numeric($str)) {	
-			$str = floatval($str);
-		}
-		
-		return $str;
-		
-	}
-	
-	
 	/**
 	 *	Get the query string, if existing.
 	 *
@@ -281,38 +263,26 @@ class Parse {
 	/**
 	 *	Parse $optionStr and return a (mixed) array of options
 	 *
-	 *	@param string $optionStr
-	 *	@return $parsedOptions
+	 *	@param string $str
+	 *	@return $options - associative array
 	 */
 
-	public static function toolOptions($optionStr) {
+	public static function toolOptions($str) {
 		
-		$parsedOptions = array();
+		$options = array();
 		
-		if ($optionStr) {
-		
-			$options = explode(AM_PARSE_OPTION_SEPARATOR, $optionStr);
-		
-			foreach ($options as $option) {
+		if ($str) {
 			
-				if (strpos($option, AM_PARSE_PAIR_SEPARATOR) !== false) {
+			// Clean up "dirty" JSON by replacing single with double quotes and
+			// wrapping all keys in double quotes.
+			$str = str_replace("'", '"', $str);
+			$str = preg_replace('/([{,]+)\s*([^":\s]+)\s*:/i', '\1"\2":', $str);
 			
-					// If it is a pair of $key: $value, it goes like that into the new array.
-					list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $option, 2);
-					$parsedOptions[trim($key)] = Parse::numToFloat(trim($value));
-				
-				} else {
-				
-					// Else the whole string goes into the array and gets just an index and not a key.
-					$parsedOptions[] = Parse::numToFloat(trim($option));
-				
-				}
+			$options = json_decode($str, true);
 			
-			}
-		
 		}
 		
-		return $parsedOptions;
+		return $options;
 		
 	}
  	
