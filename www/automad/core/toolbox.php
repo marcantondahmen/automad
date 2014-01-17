@@ -467,12 +467,8 @@ class Toolbox {
 	 */
 	
 	public function navTop() {
-	
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl('/');
-		$selection->sortPagesByBasename();
 		
-		return Html::generateNav($selection->getSelection());
+		return $this->navBelow(array('parent' => '/'));
 		
 	}
 	
