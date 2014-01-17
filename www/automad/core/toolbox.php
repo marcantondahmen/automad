@@ -364,16 +364,15 @@ class Toolbox {
 	
 	/**
 	 *	Generate a list for the navigation below a given URL.
-	 *	This is a private function and not to be called directly from a template, since in most cases, the $parent needs to be a dynamic value.
 	 *
-	 *	@param string $parent - the URL of the parent page of the displayed pages.
+	 *	@param array $options - (parent: the URL of the parent page of the displayed pages)
 	 *	@return html of the generated list	
 	 */
 	
-	private function navBelow($parent) {
+	public function navBelow($options) {
 				
 		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($parent);
+		$selection->filterByParentUrl($options['parent']);
 		$selection->sortPagesByBasename();
 		
 		return Html::generateNav($selection->getSelection());
@@ -405,7 +404,7 @@ class Toolbox {
 	
 	public function navChildren() {
 	
-		return $this->navBelow($this->P->url);
+		return $this->navBelow(array('parent' => $this->P->url));
 		
 	}
 	
@@ -436,7 +435,7 @@ class Toolbox {
 			// If the page's level would be used and the homepage got shifted to the first level before, 
 			// navPerLevel(1) wouldn't output anything (1 > 1 = false), not even the first level. 
 			if (!$maxLevel || $maxLevel > $level) {
-				$html .= $this->navBelow($page->url);
+				$html .= $this->navBelow(array('parent' => $page->url));
 			}
 			
 			$level++;
@@ -456,7 +455,7 @@ class Toolbox {
 	
 	public function navSiblings() {
 		
-		return $this->navBelow($this->P->parentUrl);
+		return $this->navBelow(array('parent' => $this->P->parentUrl));
 		
 	}
 	
