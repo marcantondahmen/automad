@@ -170,10 +170,12 @@ class Template {
 				$output);
 				
 		// Tools:
-		// Call functions dynamically with optional parameter in () or without () for no options.
-		// For example $[function(parameter)] or just $[function]
+		// Call functions dynamically with optional parameters.
+		// For example t(function{JSON-options}) or just t(function)
+		// The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
+		// The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
 		$toolbox = new Toolbox($this->S); 
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*(\(.*?\))?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
 				function($matches) use($toolbox) {
 					
 					if (method_exists($toolbox, $matches[1])) {
@@ -181,15 +183,13 @@ class Template {
 						if (!isset($matches[2])) {
 							// If there is no parameter passed (no brackets),
 							// an empty string will be passed as an argument
-							$matches[2] = '';
+							$matches[2] = false;
 						}
 						
-						// Pass options as string and not parsed to be more flexible 
-						// in case a tool expects a string instead of an array.
-						$optionStr = trim(trim($matches[2],'()'));
+						$options = Parse::toolOptions($matches[2]);
 						
 						Debug::log('Template: Matched tool: "' . $matches[1] . '"');
-						return $toolbox->$matches[1]($optionStr);
+						return $toolbox->$matches[1]($options);
 						
 					}
 					
@@ -200,16 +200,17 @@ class Template {
 		$extender = new Extender($this->S);
 		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
 		$output = $extender->addHeaderElements($output);
-		// Call extension methods. Match: x{Extension(Options)}
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*(\(.*?\))?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
+		// Call extension methods. Match: x(Extension{Options})
+		// The options have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
 				function($matches) use($extender) {
 				
 					if (!isset($matches[2])) {
 						// If there are no options passed.
-						$matches[2] = '';
+						$matches[2] = false;
 					}
 				
-					$options = Parse::toolOptions(trim($matches[2],'()'));	
+					$options = Parse::toolOptions($matches[2]);	
 					
 					Debug::log('Template: Matched extension: "' . $matches[1] . '"');				
 					return $extender->callExtension($matches[1], $options);
