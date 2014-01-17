@@ -481,28 +481,16 @@ class Toolbox {
 	/**
 	 * 	Generate full navigation tree.
 	 *
+	 *	@param array $options - (all: expand all pages (boolean))
 	 *	@return the HTML of the tree
 	 */
 	
-	public function navTree() {
+	public function navTree($options = array('all' => true)) {
 				
-		return Html::generateTree($this->collection);
+		return Html::generateTree($this->collection, $options['all']);
 	
 	}
 	
-	
-	/**
-	 * 	Generate navigation tree expanded only along the current page's path.
-	 *
-	 *	@return the HTML of the tree
-	 */
-	
-	public function navTreeCurrent() {
-				
-		return Html::generateTree($this->collection, false);
-	
-	}
-
 		
 	/**
 	 * 	Place a search field with placeholder text.
