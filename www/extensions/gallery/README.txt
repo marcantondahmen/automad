@@ -1,6 +1,6 @@
 To use the Gallery extension, simply put 
 
-	x{ Gallery }
+	x(Gallery)
 	
 somewhere in your markup.
 
@@ -13,8 +13,8 @@ There are several parameters to modify the the gallery:
 
 For example:
 
-	x{ Gallery (
-		glob: /pages/*/*/*.jpg, 
+	x(Gallery {
+		glob: "/pages/*/*/*.jpg", 
 		width: 250, 
 		height: 250
-	) }
+	}) 
