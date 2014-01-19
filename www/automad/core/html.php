@@ -464,36 +464,30 @@ class Html {
 	public static function generateSortDirectionMenu($options) {
 		
 		$query = Parse::queryArray();
-		$current = Parse::queryKey('sort_dir');
-				
-		if (!$current) {
-			$current = AM_LIST_DEFAULT_SORT_DIR;
-		}
 		
+		// Make first option current, when nothing is set in the query string.
+		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
+		if (!$current = Parse::queryKey('sort_dir')) {
+			$current = key($options);
+		}
+				
 		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
-		
-		// Ascending buttom		
-		if ($current == "sort_asc") {
-			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
-		} else {
-			$class = ' ';
+		foreach ($options as $key => $value) {
+			
+			if ($current == $key) {
+				$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
+			} else {
+				$class = ' ';
+			}
+			
+			$query['sort_dir'] = $key;
+			
+			ksort($query);
+			
+			$html .= '<li class="' . $key . '"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options[$key] . '</a></li>';
+			
 		}
-		
-		$query['sort_dir'] = "sort_asc";
-		ksort($query);
-		$html .= '<li class="sort_asc"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
-		
-		
-		// Descending button
-		if ($current == "sort_desc") {
-			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
-		} else {
-			$class = ' ';
-		}
-		
-		$query['sort_dir'] = "sort_desc";
-		$html .= '<li class="sort_desc"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_DESC"] . '</a></li>';
 		
 		$html .= '</ul>';
 	
@@ -505,25 +499,20 @@ class Html {
 	/**
 	 *	Generate the menu to select the sort type from the given types ($options).
 	 *
-	 *	@param array $options -	An array with the variables to "sort by", where the key is the variable and the value its description. 
-	 *				An array item with a numeric key will be taken for the original order: array('Original', 'title' => 'By Title', 'tags' => 'By Tags').
+	 *	@param array $options -	An array with the variables to show up in the menu.
 	 *	@return the HTML of the menu
 	 */
 	
 	public static function generateSortTypeMenu($options) {
 
 		$query = Parse::queryArray();
-		$current = Parse::queryKey('sort_type');
-		
-		// All option array items with numeric keys get merged into one item (last one kept).
-		// That way the text for the 'Original Order' button can be defined with just adding a "keyless" value to the array. 
-		for($i=0; isset($options[$i]); $i++){
-			$options[''] = $options[$i];
-			unset($options[$i]);
+
+		// Make first option current, when nothing is actually selected.
+		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
+		if (!$current = Parse::queryKey('sort_type')) {
+			$current = key($options);
 		}
 				
-		ksort($options);
-		
 		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
 		foreach ($options as $key => $value) {
