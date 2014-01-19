@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	- Image settings
  *
  *	The criterias for the selection of Page objects are:
- *	- $type (all, children or related)
+ *	- $type (false (all pages), "children" or "related")
  *	- $template (if passed, only pages with that template get included)
  *	- the 'search' element from the query string (if existant, the selection gets filtered by these keywords)
  *
@@ -84,6 +84,13 @@ class Listing {
 	
 	
 	/**
+	 *	The array of variables from the page's text file to display along with each page.
+	 */
+	
+	public $vars;
+	
+	
+	/**
 	 *	The listing's type (all pages, children pages or related pages)
 	 */
 	
@@ -95,13 +102,6 @@ class Listing {
 	 */
 	
 	public $template;
-	
-	
-	/**
-	 *	The array of variables from the page's text file to display along with each page.
-	 */
-	
-	public $vars;
 	
 	
 	/**
@@ -182,7 +182,7 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $vars = array(AM_PARSE_TITLE_KEY), $type = 'all', $template = false, $glob = false, $width = false, $height = false, $crop = false) {
+	public function __construct($site, $vars, $type, $template, $glob, $width, $height, $crop, $sortType, $sortDirection) {
 		
 		// Set up properties from passed parameters
 		$this->S = $site;
@@ -195,16 +195,22 @@ class Listing {
 		$this->height = $height;
 		$this->crop = $crop;
 		
-		// Set up filter, sort and search
-		$this->filter = Parse::queryKey('filter');
-		$this->sortType = Parse::queryKey('sort_type');
-		
-		if (Parse::queryKey('sort_dir')) {
-			$this->sortDirection = constant(strtoupper(Parse::queryKey('sort_dir')));
-		} else {
-			$this->sortDirection = constant(strtoupper(AM_LIST_DEFAULT_SORT_DIR));
+		// Set up sort type
+		// If there is a query string, use that parameter. If not use the passed parameter (which is basically the menu's first value).
+		if (!$this->sortType = Parse::queryKey('sort_type')) {
+			$this->sortType = $sortType;
 		}
 		
+		// Set up sort direction
+		// If there is a query string, use that parameter. If not use the passed parameter (which is basically the menu's first value).
+		if (!$this->sortDirection = Parse::queryKey('sort_dir')) {
+			$this->sortDirection = $sortDirection;
+		} 
+		
+		// Set up filter
+		$this->filter = Parse::queryKey('filter');
+		
+		// Set search
 		$this->search = Parse::queryKey('search');
 		
 		// Set up tags and pages
@@ -274,8 +280,7 @@ class Listing {
 		sort($tags);
 		
 		return $tags;
-		
-		
+			
 	}
 	
 	
@@ -290,7 +295,7 @@ class Listing {
 		
 		$selection = new Selection($listing);
 		$selection->filterByTag($this->filter);
-		$selection->sortPages($this->sortType, $this->sortDirection);
+		$selection->sortPages($this->sortType, constant(strtoupper('sort_' . $this->sortDirection)));
 	
 		return $selection->getSelection();
 			
