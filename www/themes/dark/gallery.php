@@ -1,17 +1,25 @@
 i(elements/header.php)
 
 	<div class="top">
-
+		
 		t(includeHome)
 		t(navTop)
 		t(search)
 		
 		<h1>p(title)</h1>
-	
+		
+		<h2>p(subtitle)</h2>		
+
 	</div>
-	
-	<div class="content">
-		<p>The requested page can't be found on this server!</p>
+
+	<div class="content">		
+		
+		x(Gallery {
+			glob: "/pages/*/*/*.jpg", 
+			width: 250, 
+			height: 250
+		})
+		
 	</div>
 	
 i(elements/footer.php)
