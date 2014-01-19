@@ -151,7 +151,7 @@ if (!defined('AM_IMG_JPG_QUALITY')) {
 // LISTING DEFAULTS
 // Default sort direction
 if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
-	define('AM_LIST_DEFAULT_SORT_DIR', 'sort_asc');
+	define('AM_LIST_DEFAULT_SORT_DIR', 'desc');
 }
 
 
