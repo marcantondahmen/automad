@@ -1,19 +1,19 @@
-i{elements/header.php}
+i(elements/header.php)
 
 	<div class="top">
 		
-		t{includeHome}
-		t{navTop}
-		t{search(Search)}
+		t(includeHome)
+		t(navTop)
+		t(search)
 		
-		<h1>p{title}</h1>
+		<h1>p(title)</h1>
 		
-		<h2>p{subtitle}</h2>		
+		<h2>p(subtitle)</h2>		
 
 	</div>
 
 	<div class="content">		
-		p{text}	
+		p(text)	
 	</div>
 	
-i{elements/footer.php}
+i(elements/footer.php)
