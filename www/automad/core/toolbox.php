@@ -235,25 +235,21 @@ class Toolbox {
 
 
 	/**
-	 *	Setup a new Listing object based on a string of comma separated options and the current Site object.
+	 *	Set up a list of pages. In case of $this->L (the Toolbox's Listing object) is already existing, 
+	 *	its existing properties will be used as default values to be merged with the specified options.
+	 *	So basically, when using that method with only a few options, the resulting Listing object is an updated version of the previous one.
+	 *	That way, for example the sorting menus can update the list by changing the default sorting paramters without modifying any other option.
 	 *
-	 *	An example for such a string could be ("title, subtitle, type: children, template: page, file: *.jpg, width: 200, crop: 1") 
-	 *	and would create a Listing object including all pages below the current page with "page" as their template,
-	 *	showing the title and subtitle of each page along with an image, cropped to 200px width.
-	 *
-	 *	All options in that string are optional.<br>
-	 *	All options passed as a simple string (for example "title" without a ":") are interpreted as variables from the page's text file, like the title etc.
-	 *	and represent a variable in the Listing's output.<br> 
-	 *	So, a string like ("tilte, subtitle") will create a list where each page's title ans subtitle will show up.
-	 *	
-	 *	All options passed as a "Key: Value" pair are interpreted as special options to format the Listing and specify the included pages. 
 	 *	Possible options are:
+	 *	- "vars: Vars to display"	(can be passed as string or array)
 	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
 	 *	- "template: name" 		(all pages matching that template)
-	 *	- "file: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
+	 *	- "glob: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
 	 *	- "width: pixels" 		(image width, passed as interger value without unit: "width: 100")
 	 *	- "height: pixels" 		(image height, passed as interger value without unit: "width: 100")
 	 *	- "crop: 0 | 1"			(crop image or not)
+	 *	- "sortType: Var to sort by"	(default sort type, when there is no query string passed)
+	 *	- "sortDirection: asc | desc"	(default sort direction, when there is no query string passed)
 	 *	
 	 *	@param array $options 
 	 */
@@ -262,24 +258,35 @@ class Toolbox {
 		
 		// Default setup
 		$defaults = 	array(
-					'type' => 'all',
+					'vars' => AM_PARSE_TITLE_KEY,
+					'type' => false,
 					'template' => false,
-					'file' => false,
+					'glob' => false,
 					'width' => false,
 					'height' => false,
 					'crop' => false,
-					'vars' => AM_PARSE_TITLE_KEY
+					'sortType' => false,
+					'sortDirection' => AM_LIST_DEFAULT_SORT_DIR
 				);
 	
+		// If listing exists already, get defaults from current properties.
+		// That means basically updating by creating a new object with taken the previous setting for all non-specified paramters.
+		if (isset($this->L)) {
+			$defaults = array_intersect_key((array)$this->L, $defaults);
+		}
+		
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
 			
-		// Explode vars
-		$options['vars'] = explode(AM_PARSE_STR_SEPARATOR, $options['vars']);
-		$options['vars'] = array_map('trim', $options['vars']);
+		// Explode vars in case they get passed as string (template).
+		// (must be tested, since vars might be already an array, if listSetup is only called to update the listing)
+		if (!is_array($options['vars'])) {
+			$options['vars'] = explode(AM_PARSE_STR_SEPARATOR, $options['vars']);
+			$options['vars'] = array_map('trim', $options['vars']);
+		}
 		
-		// Create new Listing out of $options. 
-		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
+		// Create new Listing. 
+		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['sortType'], $options['sortDirection']);
 		
 	}
 
@@ -328,18 +335,32 @@ class Toolbox {
 	/**
 	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listPages()
 	 *
-	 *	@param array $options - Example: {SORT_DESC: "descending", SORT_ASC: "ascending"} 
+	 *	@param array $options - Example: {desc: "descending", asc: "ascending"} 
 	 *	@return the HTML for the sort menu
 	 */
 	
 	public function listSortDirection($options) {
 		
+		// Provide defaults, since the sort direction is a very simple menu and therefore most of the times specific options are unneeded.
 		$defaults = array(
-			'SORT_DESC' => 'Descending',
-			'SORT_ASC' => 'Ascending'
+			'desc' => 'Descending',
+			'asc' => 'Ascending'
 		);
 		
-		$options = array_merge($defaults, $options);
+		// Merge defaults with options and keep order of keys.
+		// Since the order of the keys is important for setting the default value,
+		// it is not possible to use array_merge (would always use the default order).
+		foreach (array('desc', 'asc') as $key) {
+			if (!isset($options[$key])) {
+				$options[$key] = $defaults[$key];
+			}
+		}
+		
+		// Only keep asc/desc in options
+		$options = array_intersect_key($options, $defaults);
+		
+		// Update Listing with first key of options for default sorting...
+		$this->listSetup(array('sortDirection' => key($options)));
 		
 		return Html::generateSortDirectionMenu($options);
 		
@@ -350,13 +371,15 @@ class Toolbox {
 	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listPages().
 	 *	If the $optionStr is missing, the default options are used.
 	 *
-	 *	@param array $options - The options array consists of "variable: display text" pairs, where the key is the variable to be sorted by and the value the text to be displayed in the menu.
-	 *				Passing a non-existing variable will sort the list by the basename of the path.  
+	 *	@param array $options - The options array consists of variable: "display text" pairs, where the key is the variable to be sorted by and the value the text to be displayed in the menu. Passing a non-existing variable will sort the list by the basename of the path.  
 	 *	@return the HTML for the sort menu
 	 */
 
 	public function listSortTypes($options) {
-				
+		
+		// Update Listing with first key of options for default sorting...
+		$this->listSetup(array('sortType' => key($options)));
+		
 		return Html::generateSortTypeMenu($options);
 		
 	}
