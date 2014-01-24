@@ -179,6 +179,19 @@ class Toolbox {
 	
 
 	/**
+	 *	Load Jquery JS library.
+	 *
+	 *	@return the script tag to include Jquery
+	 */
+	
+	public function jquery() {
+		
+		return '<script type="text/javascript" src="/automad/lib/jquery/jquery-2.0.3.min.js"></script>';
+		
+	}
+
+
+	/**
 	 *	Place a link to the previous sibling.
 	 *
 	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
