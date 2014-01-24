@@ -9,8 +9,8 @@
 # When finishing a release or hotfix with hg-flow, the number will be taken from the flow argument.
 # When doing a normal commit, the version is generated from the latest tagged revision (on all branches, not like --template {latesttag})
 # and the distance to the next committed revision (working copy parent +1).
-# Example: 1.2.3-r4 > After the next commit the "next" revision will be 4 commits away from the tag 1.2.3 (the latest found, execpt tip).
-# Generating the version number with --template {latesttag}-r{latesttagdistance} is not possible when using hg-flow, since the latest tags 
+# Example: 1.2.3 > After the next commit the "next" revision will be 3 commits away from the tag 1.2 (the latest found, execpt tip).
+# Generating the version number with --template {latesttag}.{latesttagdistance} is not possible when using hg-flow, since the latest tags 
 # on branch default won't be visible to a working copy on branch develop before merging.
  
 
