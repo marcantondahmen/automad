@@ -41,7 +41,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Load configuration
-require AM_BASE_DIR . '/config/const.php';
+require AM_BASE_DIR . '/config/config.php';
 require AM_BASE_DIR . '/automad/const.php';
 
 
