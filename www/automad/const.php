@@ -287,28 +287,28 @@ if (!defined('AM_PARSE_STR_SEPARATOR')) {
 	define('AM_PARSE_STR_SEPARATOR', ',');
 }
 // Hidden key (to identify the visibility status of a page in its txt file)
-if (!defined('AM_PARSE_HIDDEN_KEY')) {
-	define('AM_PARSE_HIDDEN_KEY', 'hidden');
+if (!defined('AM_KEY_HIDDEN')) {
+	define('AM_KEY_HIDDEN', 'hidden');
 }
 // Tags key (to identify tags in the page's txt file)
-if (!defined('AM_PARSE_TAGS_KEY')) {
-	define('AM_PARSE_TAGS_KEY', 'tags');
+if (!defined('AM_KEY_TAGS')) {
+	define('AM_KEY_TAGS', 'tags');
 }
 // Theme key (to identify a theme in the page's txt file)
-if (!defined('AM_PARSE_THEME_KEY')) {
-	define('AM_PARSE_THEME_KEY', 'theme');
+if (!defined('AM_KEY_THEME')) {
+	define('AM_KEY_THEME', 'theme');
 }
 // Title key (to identify a title in the page's txt file)
-if (!defined('AM_PARSE_TITLE_KEY')) {
-	define('AM_PARSE_TITLE_KEY', 'title');
+if (!defined('AM_KEY_TITLE')) {
+	define('AM_KEY_TITLE', 'title');
 }
 // Sitename key (to identify the sitename in the site's txt file)
-if (!defined('AM_PARSE_SITENAME_KEY')) {
-	define('AM_PARSE_SITENAME_KEY', 'sitename');
+if (!defined('AM_KEY_SITENAME')) {
+	define('AM_KEY_SITENAME', 'sitename');
 }
 // URL key (to identify an URL in the page's txt file)
-if (!defined('AM_PARSE_URL_KEY')) {
-	define('AM_PARSE_URL_KEY', 'url');
+if (!defined('AM_KEY_URL')) {
+	define('AM_KEY_URL', 'url');
 }
 // List of file extensions to identify file in URL
 if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {

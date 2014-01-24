@@ -140,10 +140,10 @@ class Html {
 		} 
 				
 		if (!$text) {
-			$text = strip_tags($page->data[AM_PARSE_TITLE_KEY]);
+			$text = strip_tags($page->data[AM_KEY_TITLE]);
 			$title = '';
 		} else {
-			$title = ' title="' . strip_tags($page->data[AM_PARSE_TITLE_KEY]) . '"';
+			$title = ' title="' . strip_tags($page->data[AM_KEY_TITLE]) . '"';
 		}
 				
 		return '<a' . $classes . $title . ' href="' . $page->url . '">' . $text . '</a>';
@@ -214,7 +214,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data[AM_PARSE_TITLE_KEY]) . '</a>';
+			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data[AM_KEY_TITLE]) . '</a>';
 			
 			// Add separator for all but the last page.	
 			if ($i++ < count($pages)) {

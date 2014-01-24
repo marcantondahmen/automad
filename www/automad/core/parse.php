@@ -61,7 +61,7 @@ class Parse {
 		
 		foreach ($data as $key => $value) {
 		
-			if ($key == AM_PARSE_TAGS_KEY) {
+			if ($key == AM_KEY_TAGS) {
 	
 				// All tags are splitted into an array
 				$tags = explode(AM_PARSE_STR_SEPARATOR, $value);

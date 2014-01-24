@@ -80,7 +80,7 @@ class Site {
 		// Define default settings.
 		// Basically that is only the site name, because that is the only really needed value.		
 		$defaults = 	array(	
-					AM_PARSE_SITENAME_KEY => $_SERVER['SERVER_NAME']  
+					AM_KEY_SITENAME => $_SERVER['SERVER_NAME']  
 				);
 		
 		// Merge defaults with settings from file.
@@ -186,13 +186,13 @@ class Site {
 						
 							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 							// In case the title is missig for the home page, use the site name instead.
-							if (!array_key_exists(AM_PARSE_TITLE_KEY, $data) || ($data[AM_PARSE_TITLE_KEY] == '')) {
+							if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
 								if (trim($url, '/')) {
 									// If page is not the home page...
-									$data[AM_PARSE_TITLE_KEY] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+									$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 								} else {
 									// If page is home page...
-									$data[AM_PARSE_TITLE_KEY] = $this->getSiteName();
+									$data[AM_KEY_TITLE] = $this->getSiteName();
 								}
 							} 
 						
@@ -200,21 +200,21 @@ class Site {
 							$tags = Parse::extractTags($data);
 							
 							// Check for an URL in $data and use that URL instead.
-							if (array_key_exists(AM_PARSE_URL_KEY, $data)) {
-								$url = $data[AM_PARSE_URL_KEY];
+							if (array_key_exists(AM_KEY_URL, $data)) {
+								$url = $data[AM_KEY_URL];
 							}
 							
 							// Check for a theme in $data and use that as override for the site theme.
-							if (array_key_exists(AM_PARSE_THEME_KEY, $data)) {
-								$theme = $data[AM_PARSE_THEME_KEY];
+							if (array_key_exists(AM_KEY_THEME, $data)) {
+								$theme = $data[AM_KEY_THEME];
 							} else {
-								$theme = $this->getSiteData(AM_PARSE_THEME_KEY);;
+								$theme = $this->getSiteData(AM_KEY_THEME);;
 							}
 							
 							// Check if the page should be hidden from selections.
 							$hidden = false;
-							if (array_key_exists(AM_PARSE_HIDDEN_KEY, $data)) {
-								if ($data[AM_PARSE_HIDDEN_KEY] === 'true' || $data[AM_PARSE_HIDDEN_KEY] === '1') {
+							if (array_key_exists(AM_KEY_HIDDEN, $data)) {
+								if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
 									$hidden = true;
 								}
 							}
@@ -291,14 +291,14 @@ class Site {
 	
 	
 	/**
-	 *	Return the name of the website - shortcut for $this->getSiteData(AM_PARSE_SITENAME_KEY).
+	 *	Return the name of the website - shortcut for $this->getSiteData(AM_KEY_SITENAME).
 	 *
-	 *	@return string $this->getSiteData(AM_PARSE_SITENAME_KEY)
+	 *	@return string $this->getSiteData(AM_KEY_SITENAME)
 	 */
 	
 	public function getSiteName() {
 		
-		return $this->getSiteData(AM_PARSE_SITENAME_KEY);
+		return $this->getSiteData(AM_KEY_SITENAME);
 		
 	}
 	
@@ -377,9 +377,9 @@ class Site {
 	private function createPage($template, $title) {
 		
 		$page = new Page();
-		$page->theme = $this->getSiteData(AM_PARSE_THEME_KEY);
+		$page->theme = $this->getSiteData(AM_KEY_THEME);
 		$page->template = $template;
-		$page->data[AM_PARSE_TITLE_KEY] = $title;
+		$page->data[AM_KEY_TITLE] = $title;
 		$page->parentUrl = '';
 		
 		return $page;

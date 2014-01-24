@@ -57,7 +57,7 @@ class Page {
 	 *	Out of all possible keys ther are two very special ones:
 	 *
 	 *	- "title": 				The title of the page - will also be used for sorting
-	 *	- "tags" (or better AM_PARSE_TAGS_KEY): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
+	 *	- "tags" (or better AM_KEY_TAGS): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
 	 *						The original string will remain in the $data array for seaching
 	 */
 	

@@ -271,7 +271,7 @@ class Toolbox {
 		
 		// Default setup
 		$defaults = 	array(
-					'vars' => AM_PARSE_TITLE_KEY,
+					'vars' => AM_KEY_TITLE,
 					'type' => false,
 					'template' => false,
 					'glob' => false,
