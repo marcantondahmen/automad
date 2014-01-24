@@ -74,7 +74,7 @@ class Slider {
 		$files = glob($glob);
 		
 		// The duration option gets passed as a data attribute.
-		$html = '<div class="slider" data-duration="' . $options['duration'] . '">';
+		$html = '<div class="slider" data-duration="' . $options['duration'] . '" style="width: ' . $options['width'] . 'px; height: ' . $options['height'] . 'px;">';
 				
 		foreach ($files as $file) {
 			
