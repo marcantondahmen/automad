@@ -1,6 +1,6 @@
 <?php
 
-if ((version_compare(PHP_VERSION, '5.3') >= 0)) {
+if (version_compare(PHP_VERSION, '5.3') >= 0) {
 
 	define('AUTOMAD', true);
 	define('AM_BASE_DIR', __DIR__);
