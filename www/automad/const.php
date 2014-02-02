@@ -119,6 +119,8 @@ if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
 if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
 	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
 }
+// User accounts file
+define('AM_FILE_ACCOUNTS', '/config/accounts.txt');
 
 
 // PAGE
