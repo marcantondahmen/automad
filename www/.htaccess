@@ -5,6 +5,8 @@
 
 # DO NOT MODIFY!
 
+Options -Indexes
+
 # To enable Pretty URLs just keep this file in the base folder. 
 # (next to the automad folder and the index.php)
 # As long as you keep these files all togehter, you can even move 
