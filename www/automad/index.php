@@ -42,7 +42,7 @@ define('AUTOMAD', true);
 require 'gui/elements/base.php';
 
 
-$G->pageTitle = 'Welcome';
+$G->guiTitle = 'Welcome';
 $G->element('header-400');
 
 
