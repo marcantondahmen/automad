@@ -63,7 +63,7 @@ if ($_POST) {
 }
 
 
-$G->pageTitle = 'Log In';
+$G->guiTitle = 'Log In';
 $G->element('header-400');
 
 

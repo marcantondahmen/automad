@@ -46,7 +46,7 @@ unset($_SESSION);
 session_destroy();
 
 
-$G->pageTitle = 'Logged Out';
+$G->guiTitle = 'Logged Out';
 $G->element('header-400');
 
 

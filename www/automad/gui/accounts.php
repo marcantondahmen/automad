@@ -134,7 +134,7 @@ if (isset($_POST['delete'])) {
 }
 
 
-$G->pageTitle = 'User Accounts';
+$G->guiTitle = 'User Accounts';
 $G->element('header-1200');
 
 
