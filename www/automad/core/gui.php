@@ -59,7 +59,7 @@ class GUI {
 	 *	Content for the modalDialog() method, which gets called in elements/footer.php. 
 	 */
 	
-	public $modalMessage = '';
+	public $modalDialogContent = '';
 	
 	
 	/**
@@ -116,15 +116,15 @@ class GUI {
 
 	
 	/**
-	 *	Echo dialog window with $this->modalMessage as content. (Jquery UI Dialog)
+	 *	Echo dialog window with $this->modalDialogContent as content. (Jquery UI Dialog)
 	 */
 		
 	public function modalDialog() {
 		
-		if ($this->modalMessage) {
+		if ($this->modalDialogContent) {
 			
 			echo 	'<script>' .
-				'$("<div>' . $this->modalMessage . '</div>")' .
+				'$("<div>' . $this->modalDialogContent . '</div>")' .
 				'.dialog({title: "Automad", width: 300, position: { my: "center", at: "center top+35%", of: window }, resizable: false, modal: true, buttons: {Ok: function() {$(this).dialog("close");}}});</script>';
 			
 		}

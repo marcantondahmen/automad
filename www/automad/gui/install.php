@@ -65,7 +65,7 @@ if ($_POST) {
 		
 	} else {
 		
-		$G->modalMessage = 'Make sure to specify a username and twice the same password!';
+		$G->modalDialogContent = 'Make sure to specify a username and twice the same password!';
 	
 	}
 	

@@ -60,20 +60,20 @@ if (isset($_POST['changepassword'])) {
 			$accounts[$user] = $G->passwordHash($new1);
 			
 			if ($G->saveAccounts($accounts)) {
-				$G->modalMessage = 'Successfully changed your password!';
+				$G->modalDialogContent = 'Successfully changed your password!';
 			} else {
-				$G->modalMessage = 'Error while saving account data...';
+				$G->modalDialogContent = 'Error while saving account data...';
 			}
 			
 		} else {
 			
-			$G->modalMessage = 'Please enter twice the same value for the new password!';
+			$G->modalDialogContent = 'Please enter twice the same value for the new password!';
 			
 		}
 		
 	} else {
 		
-		$G->modalMessage = 'Invalid password!';
+		$G->modalDialogContent = 'Invalid password!';
 		
 	}
 	
@@ -96,20 +96,20 @@ if (isset($_POST['new'])) {
 			ksort($accounts);
 			
 			if ($G->saveAccounts($accounts)) {
-				$G->modalMessage = 'Successfully added <b>\"' . $new['username'] . '\"</b>!';
+				$G->modalDialogContent = 'Successfully added <b>\"' . $new['username'] . '\"</b>!';
 			} else {
-				$G->modalMessage = 'Error while saving account data!';
+				$G->modalDialogContent = 'Error while saving account data!';
 			}
 		
 		} else {
 		
-			$G->modalMessage = 'Please fill in all required fields to add a new user!';
+			$G->modalDialogContent = 'Please fill in all required fields to add a new user!';
 		
 		}
 	
 	} else {
 		
-		$G->modalMessage = 'User <b>\"' . $new['username'] . '\"</b> already exists!';
+		$G->modalDialogContent = 'User <b>\"' . $new['username'] . '\"</b> already exists!';
 		
 	}
 	
@@ -126,9 +126,9 @@ if (isset($_POST['delete'])) {
 	}
 	
 	if ($G->saveAccounts($accounts)) {
-		$G->modalMessage = 'Successfully deleted:<br /><b>\"' . implode('\", \"', $_POST['delete']) . '\"</b>';
+		$G->modalDialogContent = 'Successfully deleted:<br /><b>\"' . implode('\", \"', $_POST['delete']) . '\"</b>';
 	} else {
-		$G->modalMessage = 'Error while saving account data!';
+		$G->modalDialogContent = 'Error while saving account data!';
 	}
 	
 }

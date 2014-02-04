@@ -56,7 +56,7 @@ if ($_POST) {
 		
 	} else {
 		
-		$G->modalMessage = 'Invalid username or password!';
+		$G->modalDialogContent = 'Invalid username or password!';
 		
 	}
 		
