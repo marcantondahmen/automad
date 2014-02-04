@@ -34,7 +34,7 @@
  */
 
 /**
- *	The Automad GUI header. 
+ *	The Automad GUI header for 400px pages. 
  */
 
 
@@ -55,11 +55,8 @@ Debug::timerStart();
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
-<title><?php echo $this->siteName(); ?> / Automad / <?php echo $this->pageTitle; ?></title>
-<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-ui/jquery-ui-1.10.4.min.js"></script>
-<link type="text/css" rel="stylesheet" href="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-ui/jquery-ui-1.10.4.min.css" />
-<link type="text/css" rel="stylesheet" href="<?php echo AM_BASE_URL; ?>/automad/gui/gui.css" />
+<title><?php echo $this->siteName(); ?> / Automad / <?php echo $this->guiTitle; ?></title>
+<?php $this->element('header-items'); ?> 
 </head>
 
 
@@ -74,7 +71,7 @@ Debug::timerStart();
 
 ?></div>	
 
-<div class="title"><h1><b>Automad</b></h1><h3><?php echo $this->siteName(); ?></h3><br /><h2><?php echo $this->pageTitle; ?></h2></div>
+<div class="title"><h1><b>Automad</b></h1><h3><?php echo $this->siteName(); ?></h3><br /><h2><?php echo $this->guiTitle; ?></h2></div>
 
 <div class="main">
 
