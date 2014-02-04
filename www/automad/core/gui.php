@@ -56,7 +56,7 @@ class GUI {
 	
 	
 	/**
-	 *	Content for the modalDialog() method, which gets called in elements/footer.php. 
+	 *	Content for the Jquery UI dialog, called in elements/footer.php. 
 	 */
 	
 	public $modalDialogContent = '';
@@ -93,41 +93,6 @@ class GUI {
 	public function element($element) {
 		
 		require AM_BASE_DIR . '/automad/gui/elements/' . $element . '.php';
-		
-	}
-
-
-	/**
-	 *	Echo confirm window for form submissions. (Jquery UI Dialog)
-	 *
-	 *	@param string $id (#...)
-	 *	@param string $message
-	 */
-
-	public function modalConfirm($id, $message) {
-		
-		echo 	'<script>' .
-			'$("' . $id . '")' . 
-			'.submit(function (e) {e.preventDefault(); $("<div>' . $message . '</div>")' .
-			'.dialog({title: "Automad", width: 300, position: { my: "center", at: "center top+35%", of: window }, resizable: false, modal: true, buttons: {Yes: function () {e.target.submit();}, No: function () {$(this).dialog("close");}}});});' .
-			'</script>';
-		
-	}
-
-	
-	/**
-	 *	Echo dialog window with $this->modalDialogContent as content. (Jquery UI Dialog)
-	 */
-		
-	public function modalDialog() {
-		
-		if ($this->modalDialogContent) {
-			
-			echo 	'<script>' .
-				'$("<div>' . $this->modalDialogContent . '</div>")' .
-				'.dialog({title: "Automad", width: 300, position: { my: "center", at: "center top+35%", of: window }, resizable: false, modal: true, buttons: {Ok: function() {$(this).dialog("close");}}});</script>';
-			
-		}
 		
 	}
 
@@ -180,10 +145,11 @@ class GUI {
 	 *
 	 *	@param string $parent
 	 *	@param array $collection
+	 *	@param boolean $hideCurrent
 	 *	@return the branch's HTML
 	 */
 	
-	public function siteTree($parent, $collection) {
+	public function siteTree($parent, $collection, $hideCurrent = false) {
 		
 		$selection = new Selection($collection);
 		$selection->filterByParentUrl($parent);
@@ -201,24 +167,28 @@ class GUI {
 			
 			foreach ($pages as $page) {
 				
-				if (!$title = basename($page->path)) {
-					$title = 'home';	
-				}
+				if ($page->url != $selected || !$hideCurrent) {
 				
-				// Check if page is currently selected page
-				if ($page->url == $selected) {
-					$class = ' class="selected"';
-				} else {
-					$class = '';
-				}
+					if (!$title = basename($page->path)) {
+						$title = 'home';	
+					}
 				
-				$html .= 	'<li>' . 
-						'<form action="' . AM_BASE_URL . '/automad/gui/pages.php' . '" method="post">' . 
-						'<input type="hidden" name="url" value="' . $page->url . '" />' . 
-						'<input' . $class . ' type="submit" value="' . $title . '" />' . 
-						'</form>' .
-						$this->siteTree($page->url, $collection) .
-						'</li>';
+					// Check if page is currently selected page
+					if ($page->url == $selected) {
+						$class = ' class="selected"';
+					} else {
+						$class = '';
+					}
+				
+					$html .= 	'<li>' . 
+							'<form action="' . AM_BASE_URL . '/automad/gui/pages.php' . '" method="post">' . 
+							'<input type="hidden" name="url" value="' . $page->url . '" />' . 
+							'<input' . $class . ' type="submit" value="' . $title . '" />' . 
+							'</form>' .
+							$this->siteTree($page->url, $collection, $hideCurrent) .
+							'</li>';
+				
+				}
 				
 			}
 			
