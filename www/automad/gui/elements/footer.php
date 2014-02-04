@@ -48,19 +48,32 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 ?>
 </div> <!-- close main -->
 
-<div class="footer"><?php 
-if ($this->user()) {
+<div class="footer"><?php if ($this->user()) {
 	echo 'Version ' . AM_VERSION . ' | Logged in as <b>' . ucwords($this->user()) . '</b>';
-}
-?></div>
+} ?></div>
 
 </div> <!-- close wrapper -->
 
-<?php
-
-
-// Dialog Box
-$this->modalDialog();
+<?php if ($this->modalDialogContent) { ?>
+<script>
+	$("<div><?php echo $this->modalDialogContent; ?></div>").dialog({
+		title: "<?php echo $this->guiTitle; ?>", 
+		width: 300, 
+		position: { 
+			my: "center", 
+			at: "center top+35%", 
+			of: window 
+		}, 
+		resizable: false, 
+		modal: true, 
+		buttons: {
+			Ok: function() {
+				$(this).dialog("close");
+			}
+		}
+	});	
+</script>
+<?php }
 
 
 // Display execution time, user constants and server info
