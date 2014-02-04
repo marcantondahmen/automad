@@ -50,6 +50,14 @@ class Site {
 	
 	
 	/**
+	 *	Boolean, if true, the site's structure gets scanned as well as the site's content. 
+	 *	Setting that variable to false will skip all txt files and its content parsing.
+	 */
+	
+	private $parseTxt;
+	
+	
+	/**
 	 * 	Array holding the site's settings.
 	 */
 	
@@ -182,55 +190,67 @@ class Site {
 						// In case there are more than one matching file, the last accessed gets added.
 						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == AM_FILE_EXT_DATA) {
 						
-							$data = Parse::markdownFile($itemFullPath);
-						
-							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-							// In case the title is missig for the home page, use the site name instead.
-							if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
-								if (trim($url, '/')) {
-									// If page is not the home page...
-									$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
-								} else {
-									// If page is home page...
-									$data[AM_KEY_TITLE] = $this->getSiteName();
-								}
-							} 
-						
-							// Extract tags
-							$tags = Parse::extractTags($data);
-							
-							// Check for an URL in $data and use that URL instead.
-							if (array_key_exists(AM_KEY_URL, $data)) {
-								$url = $data[AM_KEY_URL];
-							}
-							
-							// Check for a theme in $data and use that as override for the site theme.
-							if (array_key_exists(AM_KEY_THEME, $data)) {
-								$theme = $data[AM_KEY_THEME];
-							} else {
-								$theme = $this->getSiteData(AM_KEY_THEME);;
-							}
-							
-							// Check if the page should be hidden from selections.
-							$hidden = false;
-							if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-								if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
-									$hidden = true;
-								}
-							}
-							
-							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
-							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
 							$P = new Page();
-							$P->data = $data;
-							$P->tags = $tags;
+						
+							// If $this->parseTxt is true (default), then all txt files get parsed as well and 
+							// the corresponding properties of $P get defined. 
+							// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
+							if ($this->parseTxt) {
+						
+								$data = Parse::markdownFile($itemFullPath);
+						
+								// In case the title is not set in the data file or is empty, use the slug of the URL instead.
+								// In case the title is missig for the home page, use the site name instead.
+								if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
+									if (trim($url, '/')) {
+										// If page is not the home page...
+										$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+									} else {
+										// If page is home page...
+										$data[AM_KEY_TITLE] = $this->getSiteName();
+									}
+								} 
+						
+								// Extract tags
+								$tags = Parse::extractTags($data);
+							
+								// Check for an URL in $data and use that URL instead.
+								if (array_key_exists(AM_KEY_URL, $data)) {
+									$url = $data[AM_KEY_URL];
+								}
+							
+								// Check for a theme in $data and use that as override for the site theme.
+								if (array_key_exists(AM_KEY_THEME, $data)) {
+									$theme = $data[AM_KEY_THEME];
+								} else {
+									$theme = $this->getSiteData(AM_KEY_THEME);;
+								}
+							
+								// Check if the page should be hidden from selections.
+								$hidden = false;
+								if (array_key_exists(AM_KEY_HIDDEN, $data)) {
+									if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
+										$hidden = true;
+									}
+								}
+							
+								// Set Page properties from txt file.
+								$P->data = $data;
+								$P->tags = $tags;
+								$P->theme = $theme;
+								$P->hidden = $hidden;
+							
+							}
+							
+							// Set all main Page properties
 							$P->url = $url;
 							$P->path = $path;
 							$P->level = $level;
 							$P->parentUrl = $parentUrl;
-							$P->theme = $theme;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
-							$P->hidden = $hidden;
+							
+							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
+							// That way it is impossible to create twice the same url and it is very easy to access the page's data.
 							$this->siteCollection[$url] = $P;
 							
 						}
@@ -260,15 +280,23 @@ class Site {
 		
 	
 	/** 
-	 *	Parse sitewide settings and create $siteCollection
+	 *	Parse sitewide settings and create $siteCollection. 
+	 *	If $parseTxt is false, parsing the content and the settings get skipped and only the site's structure gets determined. (Useful for GUI)
+	 *
+	 *	@param boolean $parseTxt
 	 */
 	
-	public function __construct() {
+	public function __construct($parseTxt = true) {
 		
 		Debug::log('Site: New Instance created!');
 		Debug::log('Site: Scan directories for page content:');
 		
-		$this->parseSiteSettings();
+		$this->parseTxt = $parseTxt;
+		
+		if ($parseTxt) {
+			$this->parseSiteSettings();
+		}
+		
 		$this->collectPages();
 		
 	}
