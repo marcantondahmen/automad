@@ -52,7 +52,7 @@ class GUI {
 	 *	Page title (used within elements/header.php).
 	 */
 	
-	public $pageTitle = '';
+	public $guiTitle = '';
 	
 	
 	/**
@@ -60,8 +60,30 @@ class GUI {
 	 */
 	
 	public $modalMessage = '';
-
-
+	
+	
+	/**
+	 *	The Site's data and settings.
+	 */
+	
+	public $siteData = array();
+	
+	
+	/**
+	 *	Get global site's data.
+	 */
+	
+	public function __construct() {
+		
+		$defaults = 	array(	
+					AM_KEY_SITENAME => $_SERVER['SERVER_NAME']  
+				);
+		
+		$this->siteData = array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
+		
+	}
+	
+	
 	/**
 	 *	Load GUI element from automad/gui/elements.
 	 *
@@ -151,6 +173,63 @@ class GUI {
 		
 	}
 	
+		
+	/**
+	 *	Create recursive site tree for editing a page. 
+	 *	Every page link sends a post request to gui/pages.php containing the page's url.
+	 *
+	 *	@param string $parent
+	 *	@param array $collection
+	 *	@return the branch's HTML
+	 */
+	
+	public function siteTree($parent, $collection) {
+		
+		$selection = new Selection($collection);
+		$selection->filterByParentUrl($parent);
+		$selection->sortPagesByBasename();
+		
+		if ($pages = $selection->getSelection()) {
+			
+			$html = '<ul class="' . AM_HTML_CLASS_TREE . '">';
+			
+			if (isset($_POST['url'])) {
+				$selected = $_POST['url'];
+			} else {
+				$selected = false;
+			}
+			
+			foreach ($pages as $page) {
+				
+				if (!$title = basename($page->path)) {
+					$title = 'home';	
+				}
+				
+				// Check if page is currently selected page
+				if ($page->url == $selected) {
+					$class = ' class="selected"';
+				} else {
+					$class = '';
+				}
+				
+				$html .= 	'<li>' . 
+						'<form action="' . AM_BASE_URL . '/automad/gui/pages.php' . '" method="post">' . 
+						'<input type="hidden" name="url" value="' . $page->url . '" />' . 
+						'<input' . $class . ' type="submit" value="' . $title . '" />' . 
+						'</form>' .
+						$this->siteTree($page->url, $collection) .
+						'</li>';
+				
+			}
+			
+			$html .= '</ul>';
+		
+			return $html;
+			
+		}
+		
+	}
+	
 
 	/**
 	 *	Return the Site's name.
@@ -160,7 +239,7 @@ class GUI {
 	
 	public function siteName() {
 		
-		return $_SERVER['SERVER_NAME'];
+		return $this->siteData[AM_KEY_SITENAME];
 		
 	}
 
