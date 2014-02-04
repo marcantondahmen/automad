@@ -176,7 +176,30 @@ if (count($accounts) > 1) {
 		<input type="reset" value="Clear">
 		<input type="submit" value="Delete Selected" />
 	</form>
-	<?php $G->modalConfirm('#delete', 'Do you really want to delete the selected users?'); ?> 
+	<script>
+	$('#delete').submit(function (e) {
+		e.preventDefault(); 
+		$("<div>Do you really want to delete the selected users?</div>").dialog({
+			title: "Automad", 
+			width: 300, 
+			position: { 
+				my: "center", 
+				at: "center top+35%", 
+				of: window 
+			}, 
+			resizable: false, 
+			modal: true, 
+			buttons: {
+				Yes: function () {
+					e.target.submit();
+				}, 
+				No: function () {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+	</script>
 </div>
 
 <?php
