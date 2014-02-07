@@ -80,11 +80,11 @@ $G->element('header-400');
 
 <div class="box">
 	
-	<form class="section" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-		<input type="text" name="username" placeholder="Username" />	
-		<input type="password" name="password1" placeholder="Password" /> 
-		<input type="password" name="password2" placeholder="Repeat Password" />
-		<input type="submit" value="Create Accounts File" />
+	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<input class="item bg input" type="text" name="username" placeholder="Username" />	
+		<input class="item bg input" type="password" name="password1" placeholder="Password" /> 
+		<input class="item bg input" type="password" name="password2" placeholder="Repeat Password" />
+		<input class="item bg button" type="submit" value="Create Accounts File" />
 	</form>
 	
 </div>
