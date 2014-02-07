@@ -141,22 +141,22 @@ $G->element('header-1200');
 ?>
 
 <div class="box">
-	<h2 class="section">Change Your Password</h2>
-	<form class="section" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-		<input type="password" name="changepassword[currentpassword]" placeholder="Current Password" />	
-		<input type="password" name="changepassword[newpassword1]" placeholder="New Password" />
-		<input type="password" name="changepassword[newpassword2]" placeholder="Repeat New Password" />
-		<input type="submit" value="Change Password" />
+	<h3 class="item text bg">Change Your Password</h3>
+	<form class="item" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<input class="item input bg" type="password" name="changepassword[currentpassword]" placeholder="Current Password" />	
+		<input class="item input bg" type="password" name="changepassword[newpassword1]" placeholder="New Password" />
+		<input class="item input bg" type="password" name="changepassword[newpassword2]" placeholder="Repeat New Password" />
+		<input class="item button bg" type="submit" value="Change Password" />
 	</form>
 </div>
 
 <div class="box">
-	<h2 class="section">Add User</h2>
-	<form class="section" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-		<input type="text" name="new[username]" placeholder="Username" />	
-		<input type="password" name="new[password1]" placeholder="Password" />
-		<input type="password" name="new[password2]" placeholder="Repeat Password" />
-		<input type="submit" value="Add New User" />
+	<h3 class="item text bg">Add User</h3>
+	<form class="item" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<input class="item input bg" type="text" name="new[username]" placeholder="Username" />	
+		<input class="item input bg" type="password" name="new[password1]" placeholder="Password" />
+		<input class="item input bg" type="password" name="new[password2]" placeholder="Repeat Password" />
+		<input class="item button bg" type="submit" value="Add New User" />
 	</form>
 </div>
 
@@ -164,43 +164,22 @@ $G->element('header-1200');
 if (count($accounts) > 1) {
 ?>
 <div class="box">
-	<h2 class="section">Delete Users</h2>
-	<form class="section" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="delete">
+	<h3 class="item text bg">Delete Users</h3>
+	<form class="item" id="delete" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		<?php	
 		foreach (array_keys($accounts) as $user) {
 			if ($user != $G->user()) {
-				echo '<div class="checkbox"><input type="checkbox" name="delete[]" value="' . $user . '"> ' . ucwords($user) . '</div>';
+				echo '<div class="checkbox item bg input"><input type="checkbox" name="delete[]" value="' . $user . '"> ' . ucwords($user) . '</div>';
 			}
 		}
 		?>
-		<input type="reset" value="Clear">
-		<input type="submit" value="Delete Selected" />
+		<input class="item button bg" type="reset" value="Clear">
+		<input class="item button bg" type="submit" value="Delete Selected" />
 	</form>
-	<script>
-	$('#delete').submit(function (e) {
-		e.preventDefault(); 
-		$("<div>Do you really want to delete the selected users?</div>").dialog({
-			title: "Automad", 
-			width: 300, 
-			position: { 
-				my: "center", 
-				at: "center top+35%", 
-				of: window 
-			}, 
-			resizable: false, 
-			modal: true, 
-			buttons: {
-				Yes: function () {
-					e.target.submit();
-				}, 
-				No: function () {
-					$(this).dialog("close");
-				}
-			}
-		});
-	});
-	</script>
+	
 </div>
+
+<script>guiAccounts();</script>
 
 <?php
 }
