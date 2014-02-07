@@ -52,7 +52,7 @@ $G->element('header-400');
 
 ?>
 
-<div class="menu"><a href="../">Log In Again</a></div>
+<div class="menu"><a class="item bg button" href="../">Log In Again</a></div>
 
 <?php
 	
