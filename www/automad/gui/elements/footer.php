@@ -56,19 +56,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 <?php if ($this->modalDialogContent) { ?>
 <script>
-	$("<div><?php echo $this->modalDialogContent; ?></div>").dialog({
-		title: "<?php echo $this->guiTitle; ?>", 
+	$('<div><span class="text"><?php echo $this->modalDialogContent; ?></span></div>').dialog({
+		title: '<?php echo $this->guiTitle; ?>', 
 		width: 300, 
 		position: { 
-			my: "center", 
-			at: "center top+35%", 
+			my: 'center', 
+			at: 'center top+35%', 
 			of: window 
 		}, 
 		resizable: false, 
 		modal: true, 
 		buttons: {
 			Ok: function() {
-				$(this).dialog("close");
+				$(this).dialog('close');
 			}
 		}
 	});	
