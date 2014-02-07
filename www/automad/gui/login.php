@@ -71,10 +71,10 @@ $G->element('header-400');
 
 <div class="box">
 
-	<form class="section" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-		<input type="text" name="username" placeholder="Username" />
-		<input type="password" name="password" placeholder="Password" />
-		<input type="submit" value="Log In" />
+	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<input class="item bg input" type="text" name="username" placeholder="Username" />
+		<input class="item bg input" type="password" name="password" placeholder="Password" />
+		<input class="item bg button" type="submit" value="Log In" />
 	</form>
 
 </div>
