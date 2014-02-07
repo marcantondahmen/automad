@@ -181,7 +181,7 @@ class GUI {
 					}
 				
 					$html .= 	'<li>' . 
-							'<form action="' . AM_BASE_URL . '/automad/gui/pages.php' . '" method="post">' . 
+							'<form method="post">' . 
 							'<input type="hidden" name="url" value="' . $page->url . '" />' . 
 							'<input' . $class . ' type="submit" value="' . $title . '" />' . 
 							'</form>' .
