@@ -42,7 +42,7 @@ define('AUTOMAD', true);
 require 'elements/base.php';
 
 
-$accounts = unserialize(file_get_contents(AM_BASE_DIR . AM_FILE_ACCOUNTS));
+$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
 
 
 // Change password of logged in user
