@@ -120,7 +120,7 @@ if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
 	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
 }
 // User accounts file
-define('AM_FILE_ACCOUNTS', '/config/accounts.txt');
+define('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.txt');
 
 
 // PAGE
