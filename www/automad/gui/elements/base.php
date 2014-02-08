@@ -55,7 +55,6 @@ define('AM_BASE_DIR', realpath(__DIR__ . '/../../../'));
 
 
 // Load configuration
-require AM_BASE_DIR . '/config/config.php';
 require AM_BASE_DIR . '/automad/const.php';
 
 
@@ -84,7 +83,7 @@ switch ($page) {
 		
 		// If the current page is the login page, first test, if ths gui is installed, by searching for the users.txt file.
 		// If the file can't be found, redirect to the installation page.
-		if (!file_exists(AM_BASE_DIR . AM_FILE_ACCOUNTS)) {
+		if (!file_exists(AM_FILE_ACCOUNTS)) {
 			header('Location: http://' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . '/automad/gui/install.php');
 			die;
 		}
@@ -94,7 +93,7 @@ switch ($page) {
 	case 'install':
 	
 		// If the GUI is already installed, just redirect to automad/index.php (only for direct access of the install page after installing)
-		if (file_exists(AM_BASE_DIR . AM_FILE_ACCOUNTS)) {
+		if (file_exists(AM_FILE_ACCOUNTS)) {
 			header('Location: http://' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . '/automad');
 			die;
 		}
