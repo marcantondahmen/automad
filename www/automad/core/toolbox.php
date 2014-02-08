@@ -165,20 +165,6 @@ class Toolbox {
 	
 	
 	/**
-	 *	To place the homepage at the same level like all the other pages from the first level,
-	 *	includeHome() will modify $this->collection and move the homepage one level down: 0 -> 1
-	 */
-	
-	public function includeHome() {
-		
-		$selection = new Selection($this->collection);
-		$selection->makeHomePageFirstLevel();
-		$this->collection = $selection->getSelection();
-		
-	}
-	
-
-	/**
 	 *	Load Jquery JS library.
 	 *
 	 *	@return the script tag to include Jquery
