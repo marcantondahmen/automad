@@ -46,7 +46,7 @@ if ($_POST) {
 	
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$accounts = unserialize(file_get_contents(AM_BASE_DIR . AM_FILE_ACCOUNTS));
+	$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
 	
 	if (isset($accounts[$username]) && $G->passwordVerified($password, $accounts[$username])) {
 		
