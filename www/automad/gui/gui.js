@@ -109,6 +109,41 @@ function guiPages() {
 	addRemoveCustomVariableButtons();
 	
 	
+	// Check if page has a title, befor saving
+	editPage.submit(function (e) {
+		
+		e.preventDefault(); 
+		
+		if ($(this).find('#edit-data-title').val()) {
+			
+			e.target.submit();
+			
+		} else {
+			
+			$('<div><span class="text">The page has not title!</span></div>').dialog({
+			
+				title: 'Title Missing', 
+				width: 300, 
+				position: { 
+					my: 'center', 
+					at: 'center top+35%', 
+					of: window 
+				}, 
+				resizable: false, 
+				modal: true, 
+				buttons: {
+					Close: function () {
+						$(this).dialog('close');
+					}
+				}
+			
+			});
+			
+		}
+		
+	});
+	
+	
 	// Confirmation dialog when deleting a page
 	deletePage.submit(function (e) {
 		
