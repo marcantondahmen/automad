@@ -115,6 +115,21 @@ class Cache {
 	
 
 	/**
+	 *	Clearing the cache is done by simply deleting the stored Site's mTime file. That will trigger a full cache rebuild.
+	 */
+
+	public function clear() {
+		
+		if (file_exists(AM_FILE_SITE_MTIME)) {
+			
+			unlink(AM_FILE_SITE_MTIME);
+			
+		}
+		
+	}
+
+
+	/**
 	 *	Verify if the cached version of the visited page is existing and still up to date.
 	 *
 	 *	@return boolean - true, if the cached version is valid.
