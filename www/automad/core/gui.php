@@ -134,7 +134,7 @@ class GUI {
 	
 	public function saveAccounts($array) {
 		
-		return file_put_contents(AM_BASE_DIR . AM_FILE_ACCOUNTS, serialize($array));
+		return file_put_contents(AM_FILE_ACCOUNTS, serialize($array));
 		
 	}
 	
@@ -145,11 +145,12 @@ class GUI {
 	 *
 	 *	@param string $parent
 	 *	@param array $collection
+	 *	@param string $current (URL)
 	 *	@param boolean $hideCurrent
 	 *	@return the branch's HTML
 	 */
 	
-	public function siteTree($parent, $collection, $hideCurrent = false) {
+	public function siteTree($parent, $collection, $current, $hideCurrent = false) {
 		
 		$selection = new Selection($collection);
 		$selection->filterByParentUrl($parent);
@@ -159,22 +160,16 @@ class GUI {
 			
 			$html = '<ul class="' . AM_HTML_CLASS_TREE . '">';
 			
-			if (isset($_POST['url'])) {
-				$selected = $_POST['url'];
-			} else {
-				$selected = false;
-			}
-			
 			foreach ($pages as $page) {
 				
-				if ($page->url != $selected || !$hideCurrent) {
+				if ($page->url != $current || !$hideCurrent) {
 				
 					if (!$title = basename($page->path)) {
 						$title = 'home';	
 					}
 				
 					// Check if page is currently selected page
-					if ($page->url == $selected) {
+					if ($page->url == $current) {
 						$class = ' class="selected"';
 					} else {
 						$class = '';
@@ -185,7 +180,7 @@ class GUI {
 							'<input type="hidden" name="url" value="' . $page->url . '" />' . 
 							'<input' . $class . ' type="submit" value="' . $title . '" />' . 
 							'</form>' .
-							$this->siteTree($page->url, $collection, $hideCurrent) .
+							$this->siteTree($page->url, $collection, $current, $hideCurrent) .
 							'</li>';
 				
 				}
