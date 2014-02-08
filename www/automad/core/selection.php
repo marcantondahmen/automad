@@ -74,7 +74,6 @@ class Selection {
 	public function __construct($pages) {
 		
 		$this->selection = $pages;
-		$this->excludeHidden();
 		
 	}
 	
@@ -118,6 +117,8 @@ class Selection {
 	 */
 	
 	public function getSelection() {
+		
+		$this->excludeHidden();
 		
 		return $this->selection;
 		
@@ -293,6 +294,15 @@ class Selection {
 	 */	
 	
 	public function filterPrevAndNextToUrl($url) {
+		
+		// To be able to hide the hidden pages as neighbors and jump directly to the closest non-hidden pages (both sides),
+		// in case one or both neigbors is/are hidden, $this->excludeHidden() has to be called here already, because only excluding the hidden pages
+		// later, when calling getSelection(), will cause a "gap" in the neighbors-array, which will lead to a missing link, for a hidden neighbor.
+		// To handle hidden pages correctly, the current page has to be temporary stored in $current, in case the current page itself is hidden, because the 
+		// curretn page is needed, even when hidden, to determine the closest neighbors.
+		$current = $this->selection[$url];
+		$this->excludeHidden();
+		$this->selection[$url] = $current;
 		
 		// Narrow down selection to pages with the same parentUrl
 		$this->filterByParentUrl($this->selection[$url]->parentUrl);
