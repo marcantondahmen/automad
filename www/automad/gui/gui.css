@@ -37,6 +37,7 @@ body,
 a,
 textarea,
 input,
+.tree input:focus,
 .ui-button.ui-button-text-only {
 	color: #7c8891;
 }
