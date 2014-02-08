@@ -133,7 +133,7 @@ ul .tree li {
 }
 
 #wrapper-1200 h1 {
-	font-size: 32px;
+	font-size: 36px;
 	font-weight: 100;
 }
 
@@ -155,7 +155,7 @@ a.button,
 .tree input,
 input.button,
 .ui-button.ui-widget.ui-corner-all {
-	font-weight: 400;
+	font-weight: 500;
 }
 
 #prefix input,
@@ -200,7 +200,7 @@ input.button,
 }
 
 #wrapper-1200 .logo {
-	padding: 7px 10px;
+	padding: 12px 10px;
 	position: absolute;
 	right: 0;
 }
