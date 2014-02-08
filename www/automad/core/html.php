@@ -150,57 +150,6 @@ class Html {
 		
 	}
 
-
-	/**
-	 *	Branch out recursively below a certain relative URL.
-	 *
-	 *	@param string $parentUrl
-	 *	@param boolean $expandAll
-	 *	@param array $collection (all pages)
-	 *	@return the HTML for the branch/tree (recursive)
-	 */
-
-	private static function branch($parentUrl, $expandAll, $collection) {
-		
-		$selection = new Selection($collection);
-		$selection->filterByParentUrl($parentUrl);
-		$selection->sortPagesByBasename();
-		
-		$pages = $selection->getSelection();
-		
-		if ($pages) {
-				
-			// Use first element in $pages to determine the current level.
-			$pagesKeys = array_keys($pages);
-			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
-		
-			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
-		
-			foreach ($pages as $page) {
-			
-				$html .= '<li>';
-				$html .= self::addLink($page);
-				
-				// There would be an infinite loop if the parentUrl equals the relUlr.
-				// That is the case if the current page is the homepage and the homepage moved to the first level. 
-				if ($page->parentUrl != $page->url) {			
-					if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-						$html .= self::branch($page->url, $expandAll, $collection);
-					}
-				}
-				
-				$html .= '</li>';
-			
-			}
-
-			$html .= '</ul>';
-		
-			return $html;
-		
-		}
-		
-	}
-	
 		
 	/**
 	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
@@ -544,22 +493,51 @@ class Html {
 	
 	
 	/**
-	 * 	Generate the HTML for a full site tree.
+	 *	Branch out recursively below a certain relative URL.
 	 *
-	 *	@param array $collection (all pages)
+	 *	@param string $parentUrl
 	 *	@param boolean $expandAll
-	 *	@return the HTML of the tree
+	 *	@param array $collection (all pages)
+	 *	@return the HTML for the branch/tree (recursive)
 	 */
-	
-	public static function generateTree($collection, $expandAll = true) {
+
+	public static function generateTree($parentUrl, $expandAll, $collection) {
 		
-		// The tree starts on level 1. By default the homepage will not be included.
-		// To include the homepage, it has to be moved to the first level by using Selection::makeHomePageFirstLevel()
-		// or $[includeHome] from the templates.
-		return self::branch('/', $expandAll, $collection);
+		$selection = new Selection($collection);
+		$selection->filterByParentUrl($parentUrl);
+		$selection->sortPagesByBasename();
+		
+		$pages = $selection->getSelection();
+		
+		if ($pages) {
+				
+			// Use first element in $pages to determine the current level.
+			$pagesKeys = array_keys($pages);
+			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
+		
+			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
+		
+			foreach ($pages as $page) {
+			
+				$html .= '<li>';
+				$html .= self::addLink($page);
+								
+				if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
+					$html .= self::generateTree($page->url, $expandAll, $collection);
+				}
+			
+				$html .= '</li>';
+			
+			}
+
+			$html .= '</ul>';
+		
+			return $html;
+		
+		}
 		
 	}
-	
+
 	
 }
 
