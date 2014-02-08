@@ -169,39 +169,99 @@ if (isset($_POST['action'])) {
 		}
 		
 		
-		// Clear the cache to make sure, the changes get reflected on the website directly.
-		$C = new Core\Cache();
-		$C->clear();
+	}
+	
+	
+	// Move page to a new location.
+	if ($_POST['action'] == 'move') {
 		
-			
-		// Rebuild Site object, since the file structure might be different now.
-		$S = new Core\Site(false);
-		$collection = $S->getCollection();
 		
-
-		// Find the page again, to get the correctly determined URL (Site::collectPages()).
-		// Therefore the page needs to be found by path ($newPagePath).
-		foreach ($collection as $p) {
+		if (isset($_POST['parentUrl']) && $_POST['parentUrl']) {
+				
+			// Get new path by the posted parentUrl.
+			foreach ($collection as $parentUrl => $parentPage) {
+				
+				if ($parentUrl == $_POST['parentUrl']) {
+					
+					$newParentPath = $parentPage->path;					
+					break;
+					
+				}
+				
+			}
 			
-			if ($p->path == $newPagePath) {
-				$page = $p;
-				break;
+			// Set new path.
+			$newPagePath = $newParentPath . basename($page->path) . '/';
+			
+			// Continue only, if the new path is actually different.
+			if ($newPagePath != $page->path) {
+			
+				// Get basename without the prefix, to be able to increase the prefix, if the new path exists already.
+				$title = str_replace($prefix . '.', '', basename($page->path));
+				
+				$i = 1;
+				$origPrefix = $prefix;
+			
+				// In case the path exists already.
+				while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
+				
+					// Build/update prefix - The '-' gets trimmed, if there is no prefix set.
+					$prefix = ltrim($origPrefix . '-' . $i, '-');
+				
+					// Build path again - with updated prefix
+					$newPagePath = $newParentPath . $prefix . '.' . $title . '/';
+			
+					$i++;
+				
+				}
+					
+				rename(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . $newPagePath);
+			
 			}
 			
 		}
 		
-		// Set $url to the new URL form the rebuild Page object.
-		$url = $page->url;
 		
 	}
 	
-
-} else {
-
-	// If there was no action, just load the data from the txt file.
-	$data = Core\Parse::textFile($pageFile);
 	
-}
+	// After all the actions, 
+	// the Site object has to be rebuilt, the cache has to be cleared and the filename for the page's text file has to be updated.
+	
+	// Clear the cache to make sure, the changes get reflected on the website directly.
+	$C = new Core\Cache();
+	$C->clear();
+	
+		
+	// Rebuild Site object, since the file structure might be different now.
+	$S = new Core\Site(false);
+	$collection = $S->getCollection();
+	
+
+	// Find the page again and get the correctly determined URL (Site::collectPages()).
+	// Therefore the page needs to be found by path ($newPagePath).
+	foreach ($collection as $u => $p) {
+		
+		if ($p->path == $newPagePath) {
+			$page = $p;
+			$url = $u;
+			break;
+		}
+		
+	}
+	
+	
+	// Update page file - the path got already defined and used above, but might be different now, depending on the previous action.
+	$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
+	
+	
+} 
+
+
+
+
+// Load/Reload all data from the text file of the current page.
+$data = Core\Parse::textFile($pageFile);
 
 
 
