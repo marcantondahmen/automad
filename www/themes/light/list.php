@@ -2,8 +2,7 @@ i(elements/header.php)
 
 	<div class="top">
 	
-		t(includeHome)
-		t(navPerLevel {levels: 1})
+		t(navPerLevel {levels: 1, homepage: true})
 		t(search {placeholder: "Search this site"})	
 	
 		<h1>p(title)</h1>
