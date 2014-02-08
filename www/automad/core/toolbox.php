@@ -392,12 +392,21 @@ class Toolbox {
 	 */
 	
 	public function navBelow($options) {
+		
+		$options = array_merge(array('parent' => $this->P->url, 'homepage' => false), $options);
 				
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($options['parent']);
 		$selection->sortPagesByBasename();
 		
-		return Html::generateNav($selection->getSelection());
+		$pages = $selection->getSelection();
+		
+		// Add Homepage to first-level navigation if parent is the homepage and the option 'homepage' is true.
+		if ($options['parent'] == '/' && $options['homepage']) {
+			$pages = array('/' => $this->collection['/']) + $pages;
+		}
+		
+		return Html::generateNav($pages);
 		
 	}
 	
@@ -434,14 +443,14 @@ class Toolbox {
 	/**
 	 *	Generate a seperate navigation menu for each level within the current path.
 	 *
-	 *	@param array $options - (levels: The maximal level to display)
+	 *	@param array $options - (levels: The maximal level to display, homepage: show the homepage for the 1st level)
 	 *	@return the HTML for the seperate navigations
 	 */
 	
 	public function navPerLevel($options) {
 		
+		$options = array_merge(array('levels' => false), $options);
 		$maxLevel = intval($options['levels']);
-		$level = 0;
 		
 		$selection = new Selection($this->collection);
 		$selection->filterBreadcrumbs($this->P->url);
@@ -451,16 +460,11 @@ class Toolbox {
 		
 		foreach ($pages as $page) {
 			
-			// Since the homepage's level might be changed by $selection->makeHomePageFirstLevel(),
-			// a separate counter has to be used to be independend from the page's level and to avoid problems
-			// when setting $maxLevel to 1.
-			// If the page's level would be used and the homepage got shifted to the first level before, 
-			// navPerLevel(1) wouldn't output anything (1 > 1 = false), not even the first level. 
-			if (!$maxLevel || $maxLevel > $level) {
-				$html .= $this->navBelow(array('parent' => $page->url));
+			if (!$maxLevel || $maxLevel > $page->level) {
+				
+				// Pass current 'parent' along with all other original options.			
+				$html .= $this->navBelow(array_merge($options, array('parent' => $page->url)));
 			}
-			
-			$level++;
 			
 		}
 		
@@ -472,12 +476,14 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below the current page's parent.
 	 *
+	 *	@param array $options - $options['homepage'] = true/false (Show the homepage as well with the 1st level siblings)
 	 *	@return html of the generated list	
 	 */
 	
-	public function navSiblings() {
+	public function navSiblings($options) {
 		
-		return $this->navBelow(array('parent' => $this->P->parentUrl));
+		// Set parent to current parentUrl and overwrite passed options
+		return $this->navBelow(array_merge($options, array('parent' => $this->P->parentUrl)));
 		
 	}
 	
@@ -485,12 +491,14 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation at the top level including the home page (level 0 & 1).
 	 *
+	 *	@param array $options - $options['homepage'] = true/false (Show the homepage as well in the naviagtion)
 	 *	@return html of the generated list	
 	 */
 	
-	public function navTop() {
+	public function navTop($options) {
 		
-		return $this->navBelow(array('parent' => '/'));
+		// Set parent to '/' and overwrite passed options
+		return $this->navBelow(array_merge($options, array('parent' => '/')));
 		
 	}
 	
@@ -498,15 +506,15 @@ class Toolbox {
 	/**
 	 * 	Generate full navigation tree.
 	 *
-	 *	@param array $options - (all: expand all pages (boolean))
+	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl")
 	 *	@return the HTML of the tree
 	 */
 	
 	public function navTree($options) {
 				
-		$options = array_merge(array('all' => true), $options);
+		$options = array_merge(array('parent' => '', 'all' => true), $options);
 				
-		return Html::generateTree($this->collection, $options['all']);
+		return Html::generateTree($options['parent'], $options['all'], $this->collection);
 	
 	}
 	
