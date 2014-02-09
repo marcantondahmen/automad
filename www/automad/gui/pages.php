@@ -64,7 +64,7 @@ $collection = $S->getCollection();
 $page = $collection[$url];
 
 // Extract the prefix from the directory name.
-$prefix = substr(basename($page->path), 0, strpos(basename($page->path), '.'));
+$prefix = $G->extractPrefixFromPath($page->path);
 
 // Determine the path to the data file.	
 $pageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
@@ -124,50 +124,25 @@ if (isset($_POST['action'])) {
 		file_put_contents($newPageFile, $content);
 		
 		
-		// If the title or the prefix has changed, 
+		// If the title or the prefix have changed and the page is not the homepage, 
 		// rename the page's directory including all children and all files, after saving.
-		
-		// Normalize and overwrite previous determined $prefix (above) to match the passed modification.
-		if (!isset($edit['prefix'])) {
-			$prefix = '';
-		} else {
-			$prefix = $edit['prefix'];
-		}
-		
-		// Determine the actual path name by the (possibly updated) prefix & title, 
-		// if the page is not the homepage (homepage will always be '/').
 		if ($url != '/') {
-			$newPagePath = rtrim(dirname($page->path), '/') . '/' . ltrim($prefix . '.', '.') . preg_replace('/[^\w]+/', '-', strtolower($edit['data']['title'])) . '/';
-		} else {
-			$newPagePath = '/';
-		}
-		
-		// Check if the determined path differs from the existing path and rename the directory accordingly.
-		if ($newPagePath != $page->path) {
 			
-			// In case the new path is already occupied by another page, prepend an index or append an index to the prefix (if existing).
-			// The index has to be part of the prefix, since it must be also reproducible and also modifyable by the user.
-			// That wouldn't be the case, if the index would simply be appended to the full path. For every re-save, that index would change (actaully alternating).
-			// $origPrefix stores here the passed value for the prefix to be re-used within the while-loop.
-			$i = 1;
-			$origPrefix = $prefix;
-			
-			while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
-				
-				// Build/update prefix - The '-' gets trimmed, if there is no prefix set.
-				$prefix = ltrim($origPrefix . '-' . $i, '-');
-				
-				// Build path again - with updated prefix
-				$newPagePath = rtrim(dirname($page->path), '/') . '/' . $prefix . '.' . preg_replace('/[^\w]+/', '-', strtolower($edit['data']['title'])) . '/';
-			
-				$i++;
-				
+			// Normalize and overwrite previous determined $prefix (above) to match the passed modification.
+			if (!isset($edit['prefix'])) {
+				$prefix = '';
+			} else {
+				$prefix = $edit['prefix'];
 			}
+		
+			$newPagePath = $G->movePage($page->path, dirname($page->path), $prefix, $edit['data']['title']);
 			
-			rename(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . $newPagePath);
+		} else {
+			
+			$newPagePath = '/';
 			
 		}
-		
+	
 		
 	}
 	
@@ -190,38 +165,15 @@ if (isset($_POST['action'])) {
 				
 			}
 			
-			// Set new path.
-			$newPagePath = $newParentPath . basename($page->path) . '/';
+			// Get the title from the basename.
+			$title = str_replace($prefix . '.', '', basename($page->path));
 			
-			// Continue only, if the new path is actually different.
-			if ($newPagePath != $page->path) {
-			
-				// Get basename without the prefix, to be able to increase the prefix, if the new path exists already.
-				$title = str_replace($prefix . '.', '', basename($page->path));
-				
-				$i = 1;
-				$origPrefix = $prefix;
-			
-				// In case the path exists already.
-				while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
-				
-					// Build/update prefix - The '-' gets trimmed, if there is no prefix set.
-					$prefix = ltrim($origPrefix . '-' . $i, '-');
-				
-					// Build path again - with updated prefix
-					$newPagePath = $newParentPath . $prefix . '.' . $title . '/';
-			
-					$i++;
-				
-				}
-					
-				rename(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . $newPagePath);
-			
-			}
+			// Move page directory
+			$newPagePath = $G->movePage($page->path, $newParentPath, $prefix, $title);
 			
 		}
 		
-		
+
 	}
 	
 	
@@ -250,6 +202,8 @@ if (isset($_POST['action'])) {
 		
 	}
 	
+	// Update prefix
+	$prefix = $G->extractPrefixFromPath($newPagePath);
 	
 	// Update page file - the path got already defined and used above, but might be different now, depending on the previous action.
 	$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
