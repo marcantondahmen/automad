@@ -98,6 +98,64 @@ class GUI {
 
 
 	/**
+	 *	Extract the deepest directory's prefix from a given path.
+	 *
+	 *	@return Prefix
+	 */
+
+	public function extractPrefixFromPath($path) {
+		
+		return substr(basename($path), 0, strpos(basename($path), '.'));
+			
+	}
+
+
+	/**
+	 *	Move a page's directory to a new location.
+	 *	The final path is composed of the parent directoy, the prefix and the title.
+	 *	In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
+	 *
+	 *	@param string $oldPath
+	 *	@param string $newParentPath (destination)
+	 *	@param string $prefix
+	 *	@param string $title
+	 *	@return $newPath
+	 */
+
+	public function movePage($oldPath, $newParentPath, $prefix, $title) {
+		
+		// Normalize & sanitize parts.
+		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
+		$prefix = ltrim($this->sanitize($prefix) . '.', '.');
+		$title = $this->sanitize($title) . '/';
+
+		// Build new path.
+		$newPath = $newParentPath . $prefix . $title;
+			
+		// Contiune only if old and new paths are different.	
+		if ($oldPath != $newPath) {
+			
+			$i = 1;
+			
+			// Check if path exists already
+			while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPath)) {
+				
+				$newPrefix = ltrim(trim($prefix, '.') . '-' . $i, '-') . '.';
+				$newPath = $newParentPath . $newPrefix . $title;
+				$i++;
+				
+			}
+			
+			rename(AM_BASE_DIR . AM_DIR_PAGES . $oldPath, AM_BASE_DIR . AM_DIR_PAGES . $newPath);
+			
+		}
+		
+		return $newPath;
+		
+	}
+
+
+	/**
 	 *	Create hash from password to store in accounts.txt.
 	 *
 	 *	@param string $password
@@ -127,6 +185,23 @@ class GUI {
 		
 	}
 
+	
+	/**
+	 *	Sanitize a string to be valid as pathname.
+	 *
+	 *	@param string $str
+	 *	@return Sanitized string
+	 */
+	
+	private function sanitize($str) {
+			
+		$search  = array(' ','&'  ,'/','*','+'  ,'@','ä','ö','ü','å','ø','á','à','é','è');
+		$replace = array('_','and','-','x','and','_at_','a','o','u','a','o','a','a','e','e');
+		
+		return preg_replace('/[^\w_\-]/', '_',str_replace($search, $replace, strtolower(trim($str))));
+		
+	}
+	
 	
 	/**
 	 *	Save the user accounts as serialized array to config/accounts.txt.
