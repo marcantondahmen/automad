@@ -156,6 +156,20 @@ class GUI {
 
 
 	/**
+	 *	Return the full file system path of a page's data file.
+	 *
+	 *	@param object $page
+	 *	@return Filename
+	 */
+
+	public function pageFile($page) {
+		
+		return AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
+	
+	}
+
+
+	/**
 	 *	Create hash from password to store in accounts.txt.
 	 *
 	 *	@param string $password
