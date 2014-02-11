@@ -132,13 +132,9 @@ if (isset($_POST['action'])) {
 				$prefix = $edit['prefix'];
 			}
 		
-			$newPagePath = $G->movePage(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . dirname($page->path), $prefix, $edit['data']['title']);
+			$newPagePath = $G->movePage($page->path, dirname($page->path), $prefix, $edit['data']['title']);
 			
-		} else {
-			
-			$newPagePath = '/';
-			
-		}
+		} 
 	
 		
 	}
@@ -164,7 +160,7 @@ if (isset($_POST['action'])) {
 			}
 			
 			// Move page directory
-			$newPagePath = $G->movePage(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . $newParentPath, $G->extractPrefixFromPath($page->path), $move['title']);
+			$newPagePath = $G->movePage($page->path, $newParentPath, $G->extractPrefixFromPath($page->path), $move['title']);
 			
 		}
 		
@@ -177,7 +173,7 @@ if (isset($_POST['action'])) {
 		
 		if (isset($_POST['delete']['title']) && $_POST['delete']['title']) {
 			
-			$G->movePage(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_TRASH . dirname($page->path), $G->extractPrefixFromPath($page->path), $_POST['delete']['title']);
+			$G->movePage($page->path, '..' . AM_DIR_TRASH . dirname($page->path), $G->extractPrefixFromPath($page->path), $_POST['delete']['title']);
 			
 		}
 		
@@ -202,19 +198,26 @@ if (isset($_POST['action'])) {
 	// Find the page again and get the correctly determined URL (Site::collectPages()).
 	// Therefore the page needs to be found by path ($newPagePath).
 	if (isset($newPagePath)) {
+		
+		// If $newPagePath got defined before.
 		foreach ($collection as $u => $p) {
+			
 			if ($p->path == $newPagePath) {
 				$page = $p;
 				$url = $u;
 				break;
 			}
+			
 		}
 		
 	} else {
+		
 		// If $newPagePath is not set, just make the homepage current.
 		$url = '/';
 		$page = $collection[$url];
+		
 	}
+	
 	
 } 
 
