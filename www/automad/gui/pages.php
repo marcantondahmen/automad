@@ -63,12 +63,6 @@ $collection = $S->getCollection();
 // Get the page object (without the data), to determine the path to the data file.
 $page = $collection[$url];
 
-// Extract the prefix from the directory name.
-$prefix = $G->extractPrefixFromPath($page->path);
-
-// Determine the path to the data file.	
-$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
-
 
 
 
@@ -101,10 +95,6 @@ if (isset($_POST['action'])) {
 		} else {
 			unset($data['theme']);
 		}
-		
-		// Get the path of the data file by appending the basename of 'theme_template' to $page->path.
-		$newPageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . str_replace('.php', '', basename($edit['theme_template'])) . '.' . AM_FILE_EXT_DATA;
-		
 					
 		// Build file content to be written to the txt file.
 		$pairs = array();
@@ -113,22 +103,27 @@ if (isset($_POST['action'])) {
 			$pairs[] = $key . ': ' . $value;
 		}
 		
-		$content = implode("\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n", $pairs);
+		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
 		
 		
 		// Delete old file, in case, the template has changed.
-		unlink($pageFile);
+		unlink($G->pageFile($page));
+		
+		
+		// Build the path of the data file by appending the basename of 'theme_template' to $page->path.
+		$newPageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . str_replace('.php', '', basename($edit['theme_template'])) . '.' . AM_FILE_EXT_DATA;
+		
 		
 		// Save new file within current directory, even when the prefix/title changed. 
 		// Renaming/moving is done in a later step, to keep files and subpages bundled to the current text file.
 		file_put_contents($newPageFile, $content);
 		
 		
-		// If the title or the prefix have changed and the page is not the homepage, 
-		// rename the page's directory including all children and all files, after saving.
+		// If the page is not the homepage, 
+		// rename the page's directory including all children and all files, after saving according to title and prefix.
+		// movePage() will check if renaming is needed, and will skip moving, when old and new path are equal.
 		if ($url != '/') {
 			
-			// Normalize and overwrite previous determined $prefix (above) to match the passed modification.
 			if (!isset($edit['prefix'])) {
 				$prefix = '';
 			} else {
@@ -150,13 +145,14 @@ if (isset($_POST['action'])) {
 	// Move page to a new location.
 	if ($_POST['action'] == 'move') {
 		
+		$move = $_POST['move'];
 		
-		if (isset($_POST['parentUrl']) && $_POST['parentUrl']) {
+		if (isset($move['parentUrl']) && $move['parentUrl']) {
 				
 			// Get new path by the posted parentUrl.
 			foreach ($collection as $parentUrl => $parentPage) {
 				
-				if ($parentUrl == $_POST['parentUrl']) {
+				if ($parentUrl == $move['parentUrl']) {
 					
 					$newParentPath = $parentPage->path;					
 					break;
@@ -165,11 +161,8 @@ if (isset($_POST['action'])) {
 				
 			}
 			
-			// Get the title from the basename.
-			$title = str_replace($prefix . '.', '', basename($page->path));
-			
 			// Move page directory
-			$newPagePath = $G->movePage($page->path, $newParentPath, $prefix, $title);
+			$newPagePath = $G->movePage($page->path, $newParentPath, $G->extractPrefixFromPath($page->path), $move['title']);
 			
 		}
 		
@@ -202,12 +195,6 @@ if (isset($_POST['action'])) {
 		
 	}
 	
-	// Update prefix
-	$prefix = $G->extractPrefixFromPath($newPagePath);
-	
-	// Update page file - the path got already defined and used above, but might be different now, depending on the previous action.
-	$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
-	
 	
 } 
 
@@ -215,7 +202,7 @@ if (isset($_POST['action'])) {
 
 
 // Load/Reload all data from the text file of the current page.
-$data = Core\Parse::textFile($pageFile);
+$data = Core\Parse::textFile($G->pageFile($page));
 
 
 
@@ -280,7 +267,8 @@ $G->element('header-1200');
 		<form class="item" id="move" method="post">
 			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
 			<input type="hidden" name="action" value="move" />
-			<input type="hidden" name="parentUrl" value="" />
+			<input type="hidden" name="move[parentUrl]" value="" />
+			<input type="hidden" name="move[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
 			<input class="bg button" type="submit" value="Move Page" />
 		</form>
 	
@@ -318,7 +306,7 @@ $G->element('header-1200');
 				<input id="edit-data-title" class="bg input" type="text" name="edit[data][<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" />
 			</div><div id="prefix">
 				<label for="edit-prefix" class="bg input">Index</label>
-				<input id="edit-prefix" class="bg input" type="text" name="edit[prefix]" value="<?php echo $prefix; ?>" <?php if ($page->path == '/') { echo 'disabled'; } else { echo 'placeholder="optional"'; } ?> onkeypress="return event.keyCode != 13;" />
+				<input id="edit-prefix" class="bg input" type="text" name="edit[prefix]" value="<?php echo $G->extractPrefixFromPath($page->path); ?>" <?php if ($page->path == '/') { echo 'disabled'; } else { echo 'placeholder="optional"'; } ?> onkeypress="return event.keyCode != 13;" />
 			</div>
 		</div>
 	
