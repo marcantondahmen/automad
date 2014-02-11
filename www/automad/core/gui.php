@@ -138,24 +138,24 @@ class GUI {
 			$i = 1;
 			
 			// Check if path exists already
-			while (file_exists($newPath)) {
+			while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPath)) {
 				
 				$newPrefix = ltrim(trim($prefix, '.') . '-' . $i, '-') . '.';
 				$newPath = $newParentPath . $newPrefix . $title;
 				$i++;
 				
 			}
-			
+		
 			$old = umask(0);		
 			
-			if(!file_exists($newParentPath)) {
-				mkdir($newParentPath, 0777, true);
+			if (!file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newParentPath)) {
+				mkdir(AM_BASE_DIR . AM_DIR_PAGES . $newParentPath, 0777, true);
 			}
 			
-			rename($oldPath, $newPath);
+			rename(AM_BASE_DIR . AM_DIR_PAGES . $oldPath, AM_BASE_DIR . AM_DIR_PAGES . $newPath);
 			
 			umask($old);
-			
+		
 		}
 		
 		return $newPath;
