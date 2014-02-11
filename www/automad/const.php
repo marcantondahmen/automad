@@ -80,6 +80,10 @@ if (!defined('AM_DIR_THEMES')) {
 if (!defined('AM_DIR_CACHE')) {
 	define('AM_DIR_CACHE', '/cache');
 }
+// Trash
+if (!defined('AM_DIR_TRASH')) {
+	define('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
+}
 // Default template directory
 if (!defined('AM_DIR_DEFAULT_TEMPLATES')) {
 	define('AM_DIR_DEFAULT_TEMPLATES', '/automad/templates');
