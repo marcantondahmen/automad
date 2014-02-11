@@ -124,10 +124,12 @@ class GUI {
 
 	public function movePage($oldPath, $newParentPath, $prefix, $title) {
 		
-		// Normalize & sanitize parts.
+		// Normalize parent path.
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
-		$prefix = ltrim($this->sanitize($prefix) . '.', '.');
-		$title = $this->sanitize($title) . '/';
+		
+		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
+		$prefix = ltrim(Parse::sanitize(str_replace('.', '_', $prefix)) . '.', '.');
+		$title = Parse::sanitize(str_replace('.', '_', $title)) . '/';
 
 		// Build new path.
 		$newPath = $newParentPath . $prefix . $title;
@@ -207,24 +209,7 @@ class GUI {
 		
 	}
 
-	
-	/**
-	 *	Sanitize a string to be valid as pathname.
-	 *
-	 *	@param string $str
-	 *	@return Sanitized string
-	 */
-	
-	private function sanitize($str) {
-			
-		$search  = array(' ','&'  ,'/','*','+'  ,'@','ä','ö','ü','å','ø','á','à','é','è');
-		$replace = array('_','and','-','x','and','_at_','a','o','u','a','o','a','a','e','e');
 		
-		return preg_replace('/[^\w_\-]/', '_',str_replace($search, $replace, strtolower(trim($str))));
-		
-	}
-	
-	
 	/**
 	 *	Save the user accounts as serialized array to config/accounts.txt.
 	 */
