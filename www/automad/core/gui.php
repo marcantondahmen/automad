@@ -138,7 +138,7 @@ class GUI {
 			$i = 1;
 			
 			// Check if path exists already
-			while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPath)) {
+			while (file_exists($newPath)) {
 				
 				$newPrefix = ltrim(trim($prefix, '.') . '-' . $i, '-') . '.';
 				$newPath = $newParentPath . $newPrefix . $title;
@@ -146,7 +146,15 @@ class GUI {
 				
 			}
 			
-			rename(AM_BASE_DIR . AM_DIR_PAGES . $oldPath, AM_BASE_DIR . AM_DIR_PAGES . $newPath);
+			$old = umask(0);		
+			
+			if(!file_exists($newParentPath)) {
+				mkdir($newParentPath, 0777, true);
+			}
+			
+			rename($oldPath, $newPath);
+			
+			umask($old);
 			
 		}
 		
