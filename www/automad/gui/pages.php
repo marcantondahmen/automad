@@ -116,7 +116,9 @@ if (isset($_POST['action'])) {
 		
 		// Save new file within current directory, even when the prefix/title changed. 
 		// Renaming/moving is done in a later step, to keep files and subpages bundled to the current text file.
+		$old = umask(0);
 		file_put_contents($newPageFile, $content);
+		umask($old);
 		
 		
 		// If the page is not the homepage, 
@@ -130,7 +132,7 @@ if (isset($_POST['action'])) {
 				$prefix = $edit['prefix'];
 			}
 		
-			$newPagePath = $G->movePage($page->path, dirname($page->path), $prefix, $edit['data']['title']);
+			$newPagePath = $G->movePage(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . dirname($page->path), $prefix, $edit['data']['title']);
 			
 		} else {
 			
@@ -162,12 +164,26 @@ if (isset($_POST['action'])) {
 			}
 			
 			// Move page directory
-			$newPagePath = $G->movePage($page->path, $newParentPath, $G->extractPrefixFromPath($page->path), $move['title']);
+			$newPagePath = $G->movePage(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_PAGES . $newParentPath, $G->extractPrefixFromPath($page->path), $move['title']);
 			
 		}
 		
 
 	}
+	
+	
+	// Move a page to the trash
+	if ($_POST['action'] == 'delete' && $url != '/') {
+		
+		if (isset($_POST['delete']['title']) && $_POST['delete']['title']) {
+			
+			$G->movePage(AM_BASE_DIR . AM_DIR_PAGES . $page->path, AM_BASE_DIR . AM_DIR_TRASH . dirname($page->path), $G->extractPrefixFromPath($page->path), $_POST['delete']['title']);
+			
+		}
+		
+	}
+	
+	
 	
 	
 	// After all the actions, 
@@ -185,16 +201,20 @@ if (isset($_POST['action'])) {
 
 	// Find the page again and get the correctly determined URL (Site::collectPages()).
 	// Therefore the page needs to be found by path ($newPagePath).
-	foreach ($collection as $u => $p) {
-		
-		if ($p->path == $newPagePath) {
-			$page = $p;
-			$url = $u;
-			break;
+	if (isset($newPagePath)) {
+		foreach ($collection as $u => $p) {
+			if ($p->path == $newPagePath) {
+				$page = $p;
+				$url = $u;
+				break;
+			}
 		}
 		
+	} else {
+		// If $newPagePath is not set, just make the homepage current.
+		$url = '/';
+		$page = $collection[$url];
 	}
-	
 	
 } 
 
@@ -261,6 +281,7 @@ $G->element('header-1200');
 		<form class="item" id="delete" title="<?php echo $data[AM_KEY_TITLE]; ?>" method="post">
 			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
 			<input type="hidden" name="action" value="delete" />
+			<input type="hidden" name="delete[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
 			<input class="bg button" type="submit" value="Delete Page" />
 		</form>
 
