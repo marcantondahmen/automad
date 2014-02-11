@@ -268,7 +268,7 @@ function guiPages() {
 		// Check if page has changed already
 		if(!editFormHasChanged) {
 		
-			var 	movePageParentUrlInput = $(this).find('input[name="parentUrl"]'),
+			var 	movePageParentUrlInput = $(this).find('input[name="move[parentUrl]"]'),
 				moveTreeDialog = moveTree.dialog({
 					
 					title: 'Move this page and its subpages to:', 
