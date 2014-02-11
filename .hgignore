@@ -1,3 +1,4 @@
 syntax: glob
 cached*
 accounts.txt
+www/cache/trash
