@@ -202,7 +202,12 @@ class Parse {
 		
 	
 	/**
-	 *	Cleans up a string to be used as URL.
+	 *	Cleans up a string to be used as URL, directory or file name. 
+	 *	The returned string constists of the following characters: a-z, A-Z, -, _ and a dot (.)
+	 *	That means, this method is safe to be used with filenames as well, since it keeps the dots as suffix separators.
+	 *
+	 *	Note: To produce fully safe prefixes and directory names, 
+	 *	possible dots should be removed separatly from this method by just calling the standard str_replace('.', '_', $str) before. 
 	 *
 	 *	@param string $str
 	 *	@return $str
@@ -210,11 +215,11 @@ class Parse {
 	
 	public static function sanitize($str) {
 		
-		$search  = array(" ","&"  ,"/","=","*","+"  ,"ä","ö","ü","å","ø","á","à","é","è","Ä","Ö","Ü","Å","Ø","Á","À","É","È");
-		$replace = array("-","and","-","_","x","and","a","o","u","a","o","a","a","e","e","A","O","U","A","O","A","A","E","E");
+		$search  = array('&'  ,'/','*','+'  ,'@'   ,'ä','ö','ü','å','ø','á','à','é','è','Ä','Ö','Ü','Å','Ø','Á','À','É','È');
+		$replace = array('and','-','x','and','_at_','a','o','u','a','o','a','a','e','e','A','O','U','A','O','A','A','E','E');
 		
-		return strtolower(str_replace($search, $replace, html_entity_decode($str)));
-
+		return preg_replace('/[^\w\.\-]/', '_', strtolower(str_replace($search, $replace, trim($str))));
+		
 	}
 	
 	
