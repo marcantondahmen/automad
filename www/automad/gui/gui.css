@@ -539,8 +539,14 @@ input:-moz-placeholder {
 	margin-top: 2px;
 }
 
-.ui-dialog-content.ui-widget-content input {
+.ui-dialog-content.ui-widget-content input,
+.ui-dialog-content.ui-widget-content select {
 	font-family: inherit;
+	font-size: inherit;
+}
+
+.ui-dialog-content.ui-widget-content select {
+	width: inherit;
 }
 
 .ui-dialog-buttonset {
