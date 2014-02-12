@@ -75,5 +75,12 @@ Debug::timerStart();
 
 <?php $this->element('menu'); ?>
 
-<div class="main">
+<div id="noscript" class="main"><div class="box"><h3 class="text bg">JavaScript must be enabled!</h3></div></div>
+
+<div class="main" style="display: none;">
 		
+<script>
+	$('#noscript').remove();
+	$('.main').css('display', 'block');
+</script>
+	
