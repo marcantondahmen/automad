@@ -224,7 +224,7 @@ class Site {
 								}
 							
 								// Check for a theme in $data and use that as override for the site theme.
-								if (array_key_exists(AM_KEY_THEME, $data)) {
+								if (array_key_exists(AM_KEY_THEME, $data) && $data[AM_KEY_THEME]) {
 									$theme = $data[AM_KEY_THEME];
 								} else {
 									$theme = $this->getSiteData(AM_KEY_THEME);;
