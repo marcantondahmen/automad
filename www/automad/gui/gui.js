@@ -237,63 +237,63 @@ function guiPages() {
 		addCustomVar.click(function() {
 		
 		
-			var  	editPrefix = 		'edit-data-',
-				addVariableForm = 	$('<form onkeypress="return event.keyCode != 13;"><input class="item bg input" type="text" name="newkey" value="" placeholder="Variable Name" /></form>')
-							.hide()
-							.appendTo('body'),
-							
-				addVariableFormDialog =	addVariableForm.dialog({
-	
-					title: 'Add Custom Variable', 
-					width: 398, 
-					position: { 
-						my: 'center', 
-						at: 'center top+35%', 
-						of: window 
-					}, 
-					resizable: true, 
-					modal: true, 
-					buttons: {
+			var  	editPrefix = 		'edit-data-';
+			
+			
+			$('<form onkeypress="return event.keyCode != 13;"><input class="item bg input" type="text" name="newkey" value="" placeholder="Variable Name" /></form>').dialog({
+
+				title: 'Add Custom Variable', 
+				width: 398, 
+				position: { 
+					my: 'center', 
+					at: 'center top+35%', 
+					of: window 
+				}, 
+				resizable: true, 
+				modal: true, 
+				buttons: {
+					
+					Add: function() {
 						
-						Add: function() {
+						var 	newkey = $(this).find('input[name="newkey"]').val().replace(/[^\w]/g, '_').toLowerCase();
+						
+						alert(newkey);
+						
+						// Check if variable exists already.
+						if ($('#' + editPrefix + newkey).length == 0){
 							
-							var 	newkey = addVariableForm.find('input[name="newkey"]').val();
-							
-							// Check if variable exists already.
-							if ($('#' + editPrefix + newkey).length == 0){
+							// Check if variable name is not empty.
+							if (newkey != '') {
 								
-								// Check if variable name is not empty.
-								if (newkey != '') {
-									
-									$('<div class="custom item"><label for="' + editPrefix + newkey + '" class="bg input">' 
-										+ newkey.charAt(0).toUpperCase() + newkey.slice(1) 
-										+ '</label><textarea id="' + editPrefix + newkey + '" class="bg input" name="edit[data][' + newkey + ']" rows="8"></textarea></div>')
-										.insertBefore(addCustomVar);
-									
-									addRemoveCustomVariableButtons();
-									$(this).dialog("close");
-									
-								}
+								$('<div class="custom item"><label for="' + editPrefix + newkey + '" class="bg input">' 
+									+ newkey.charAt(0).toUpperCase() + newkey.slice(1) 
+									+ '</label><textarea id="' + editPrefix + newkey + '" class="bg input" name="edit[data][' + newkey + ']" rows="8"></textarea></div>')
+									.insertBefore(addCustomVar);
 								
-							} else {
-								
-								$(this).dialog({
-									title: 'Variable exists already!'
-								});
+								addRemoveCustomVariableButtons();
+								$(this).dialog("close");
 								
 							}
 							
-						},
-						
-						Cancel: function() {
+						} else {
 							
-							$(this).dialog('close');
+							$(this).dialog({
+								title: 'Variable exists already!'
+							});
 							
 						}
 						
+					},
+					
+					Cancel: function() {
+						
+						$(this).dialog('close');
+						
 					}
-				
-				});
+					
+				}
+			
+			});
 				
 						
 		});
