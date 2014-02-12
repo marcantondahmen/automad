@@ -292,6 +292,64 @@ class GUI {
 
 
 	/**
+	 *	Create a select box containing all installed themes/templates to be included in a HTML form.
+	 *
+	 *	@param string $id (HTML id)
+	 *	@param string $name (Fieldname)
+	 *	@param string $selectedTheme
+	 *	@param string $selectedTemplate
+	 *	@return The HTML for the select box including a label and a wrapping div.
+	 */
+
+	public function templateSelectBox($id = '', $name = '', $selectedTheme = false, $selectedTemplate = false) {
+		
+		
+		// Find all templates of currently used site theme (set in site.txt).
+		$siteThemeTemplates = 	array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->siteData[AM_KEY_THEME] . '/*.php'), function($file) {
+						return false === in_array(basename($file), array('error.php', 'results.php'));
+					});
+
+		// Find all templates of all installed themes.
+		$templates = 		array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/*/*.php'), function($file) {
+						return false === in_array(basename($file), array('error.php', 'results.php'));
+					});
+		
+		// Create HTML
+		$html = '<label for="' . $id . '" class="bg input">Theme</label><div class="selectbox bg input"><select id="' . $id . '" name="' . $name . '" size="1">'; 
+		
+		// List templates of current sitewide theme
+		foreach($siteThemeTemplates as $template) {
+
+			$html .= '<option';
+
+			if (!$selectedTheme && basename($template) === $selectedTemplate . '.php') {
+				 $html .= ' selected';
+			}
+
+			$html .= ' value="' . basename($template) . '">' . ucwords(str_replace('.php', '', basename($template))) . ' (Theme from Site Settings)</option>';
+
+		}
+
+		// List all found template along with their theme folder
+		foreach($templates as $template) {
+
+			$html .= '<option';
+
+			if ($selectedTheme === basename(dirname($template)) && basename($template) === $selectedTemplate . '.php') {
+				 $html .= ' selected';
+			}
+
+			$html .= ' value="' . basename(dirname($template)) . '/' . basename($template) . '">' . ucwords(basename(dirname($template))) . ' Theme > ' . ucwords(str_replace('.php', '', basename($template))) . '</option>';
+		}
+		
+		$html .= '</select></div>';
+		
+		return $html;
+		
+	}
+
+
+	/**
 	 *	Return the currently logged in user.
 	 * 
 	 *	@return username
