@@ -343,8 +343,8 @@ $G->element('header-1200');
 		</form>
 		
 		<form id="add-dialog" style="display: none;" onkeypress="return event.keyCode != 13;">
-			<input type="text" name="title" value="" placeholder="Title">
-			<?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?>
+			<input class="item bg input" type="text" name="title" value="" placeholder="Title">
+			<div class="item"><?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?></div>
 		</form>
 
 		<form class="item" method="post">
