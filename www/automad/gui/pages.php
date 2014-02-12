@@ -70,6 +70,50 @@ $page = $collection[$url];
 if (isset($_POST['action'])) {
 	
 	
+	if ($_POST['action'] == 'add') {
+		
+		
+		$title = $_POST['add']['title'];
+		$theme_template = $_POST['add']['theme_template'];
+		
+		// Get theme name.
+		if (dirname($theme_template) != '.') {
+			$theme = dirname($theme_template);
+		} else {
+			$theme = '';
+		}
+		
+		// Build initial content for data file.
+		$content = AM_KEY_TITLE . AM_PARSE_PAIR_SEPARATOR . ' ' . $title . "\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n" . AM_KEY_THEME . AM_PARSE_PAIR_SEPARATOR . ' ' . $theme;
+		
+		// Save new subpage		
+		$subdir = str_replace('.', '_', Core\Parse::sanitize($title)) . '/';
+		$newPagePath = $page->path . $subdir;
+		
+		$i = 1;
+		
+		// In case page exists already...
+		while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
+			$newPagePath = $page->path . $i . '.' . $subdir;		
+			$i++;	
+		}
+		
+		$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $newPagePath . str_replace('.php', '', basename($theme_template)) . '.' . AM_FILE_EXT_DATA;
+		
+		$old = umask(0);
+		
+		if (!file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
+			mkdir(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath, 0777, true);
+		}
+		
+		file_put_contents($pageFile, $content);
+		
+		umask($old);
+		
+		
+	}
+	
+	
 	// If the page got edited, update the txt file and rename/move the directory according to a possibly changed name or prefix.	
 	if ($_POST['action'] == 'edit') {
 			
@@ -100,7 +144,7 @@ if (isset($_POST['action'])) {
 		$pairs = array();
 		
 		foreach ($data as $key => $value) {
-			$pairs[] = $key . ': ' . $value;
+			$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
 		}
 		
 		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
@@ -247,19 +291,6 @@ if (!$data[AM_KEY_TITLE]) {
 
 
 
-// Find all templates of currently used site theme (set in site.txt).
-$siteThemeTemplates = array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/' . $G->siteData[AM_KEY_THEME] . '/*.php'), function($file) {
-	return false === in_array(basename($file), array('error.php', 'results.php'));
-});
-
-// Find all templates of all installed themes.
-$templates = array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/*/*.php'), function($file) {
-	return false === in_array(basename($file), array('error.php', 'results.php'));
-});
-
-
-
-
 $G->guiTitle = 'Edit Page "' . $data[AM_KEY_TITLE] . '"';
 $G->element('header-1200');
 
@@ -303,10 +334,17 @@ $G->element('header-1200');
 
 		<?php } ?>
 
-		<form class="item" method="post">
+		<form class="item" id="add" method="post">
 			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
 			<input type="hidden" name="action" value="add" />
-			<input class="bg button" type="submit" value="Add Sub-Page" />
+			<input type="hidden" name="add[title]" value="" />
+			<input type="hidden" name="add[theme_template]" value="" />
+			<input class="bg button" type="submit" value="Add Subpage" />
+		</form>
+		
+		<form id="add-dialog" style="display: none;" onkeypress="return event.keyCode != 13;">
+			<input type="text" name="title" value="" placeholder="Title">
+			<?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?>
 		</form>
 
 		<form class="item" method="post">
@@ -355,39 +393,7 @@ $G->element('header-1200');
 	
 		<div class="item">
 			<div id="template">
-				<label for="edit-theme_template" class="bg input">Theme</label>
-				<div class="selectbox bg input">
-					<select id="edit-theme_template" name="edit[theme_template]" size="1">
-					<?php
-							
-					// List templates of current sitewide theme
-					foreach($siteThemeTemplates as $template) {
-		
-						echo '<option';
-
-						if (!$data[AM_KEY_THEME] && basename($template) === $page->template . '.php') {
-							 echo ' selected';
-						}
-		
-						echo ' value="' . basename($template) . '">' . ucwords(str_replace('.php', '', basename($template))) . ' (Theme from Site Settings)</option>';
-
-					}
-	
-					// List all found template along with their theme folder
-					foreach($templates as $template) {
-		
-						echo '<option';
-	
-						if ($data[AM_KEY_THEME] === basename(dirname($template)) && basename($template) === $page->template . '.php') {
-							 echo ' selected';
-						}
-	
-						echo ' value="' . basename(dirname($template)) . '/' . basename($template) . '">' . ucwords(basename(dirname($template))) . ' Theme > ' . ucwords(str_replace('.php', '', basename($template))) . '</option>';
-					}
-					
-					?> 
-					</select>   	
-				</div>
+				<?php echo $G->templateSelectBox('edit-theme_template', 'edit[theme_template]', $data[AM_KEY_THEME], $page->template); ?>
 			</div><div id="hidden">
 				<label for="edit-hidden" class="bg input">Visibility</label>
 				<div class="checkbox bg input"><input id="edit-hidden" type="checkbox" name="edit[<?php echo AM_KEY_HIDDEN; ?>]"<?php 
