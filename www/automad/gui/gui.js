@@ -75,6 +75,82 @@ function guiPages() {
 	
 	var	editFormHasChanged = false;
 	
+	
+	function setupAddForm() {
+		
+		
+		var	addPage =	$('#add');
+		
+		
+		addPage.submit(function(e) {
+		
+			e.preventDefault();
+		
+			// Check if page has changed already
+			if(!editFormHasChanged) {
+		
+				var	addPageDialog =	$('#add-dialog').dialog({
+				
+						title: 'Add Subpage', 
+						width: 398, 
+						position: { 
+							my: 'center', 
+							at: 'center top+35%', 
+							of: window 
+						}, 
+						resizable: false, 
+						modal: true, 
+						buttons: {
+							Add: function () {
+							
+								var	title = 		$(this).find('input[name="title"]').val(),
+									theme_template =	$(this).find('select[name="theme_template"]').val();
+							
+								if (title != '') {
+							
+									addPage.find('input[name="add[title]"]').attr('value', title);
+									addPage.find('input[name="add[theme_template]"]').attr('value', theme_template);
+									e.target.submit();
+								
+								}
+							
+							}, 
+							Cancel: function () {
+								$(this).dialog('close');
+							}
+						}
+				
+				
+					});
+					
+			} else {
+				
+				$('<div><span class="text">To be able to add a subpage to the current page, you must save or discard your latest changes first!</span></div>').dialog({
+				
+					title: 'Unsaved Changes', 
+					width: 300, 
+					position: { 
+						my: 'center', 
+						at: 'center top+35%', 
+						of: window 
+					}, 
+					resizable: false, 
+					modal: true, 
+					buttons: {
+						Close: function () {
+							$(this).dialog('close');
+						}
+					}
+				
+				});
+				
+			}
+			
+		});
+		
+		
+	}
+	
 			
 	function setupEditForm() {
 		
@@ -394,6 +470,7 @@ function guiPages() {
 	
 	
 	setupEditForm();
+	setupAddForm();
 	setupDeleteForm();
 	setupMoveForm();
 	setupSiteTree();
