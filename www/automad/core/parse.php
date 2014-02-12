@@ -106,7 +106,7 @@ class Parse {
 		if (count($parts > 1)) {
 			
 			$str = end($parts);	
-			$fileExtensions = unserialize(AM_PARSE_REGISTERED_FILE_EXTENSIONS);
+			$fileExtensions = unserialize(AM_ALLOWED_FILE_TYPES);
 			
 			if (in_array($str, $fileExtensions)) {
 				

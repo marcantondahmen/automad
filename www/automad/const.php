@@ -125,6 +125,10 @@ if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
 }
 // User accounts file
 define('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.txt');
+// List of file extensions to identify a file in an URL and to list files in the GUI
+if (!defined('AM_ALLOWED_FILE_TYPES')) {
+	define('AM_ALLOWED_FILE_TYPES', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3', 'gif')));
+}
 
 
 // PAGE
@@ -298,6 +302,9 @@ if (!defined('AM_PARSE_PAIR_SEPARATOR')) {
 if (!defined('AM_PARSE_STR_SEPARATOR')) {
 	define('AM_PARSE_STR_SEPARATOR', ',');
 }
+
+
+// KEYS
 // Hidden key (to identify the visibility status of a page in its txt file)
 if (!defined('AM_KEY_HIDDEN')) {
 	define('AM_KEY_HIDDEN', 'hidden');
@@ -321,10 +328,6 @@ if (!defined('AM_KEY_SITENAME')) {
 // URL key (to identify an URL in the page's txt file)
 if (!defined('AM_KEY_URL')) {
 	define('AM_KEY_URL', 'url');
-}
-// List of file extensions to identify file in URL
-if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {
-	define('AM_PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3', 'gif')));
 }
 
 
