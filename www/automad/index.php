@@ -43,7 +43,7 @@ require 'gui/elements/base.php';
 
 
 $G->guiTitle = 'Welcome';
-$G->element('header-400');
+$G->element('header_400');
 
 
 echo $G->element('menu');

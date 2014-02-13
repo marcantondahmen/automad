@@ -73,7 +73,7 @@ if ($_POST) {
 
 
 $G->guiTitle = 'Installation';
-$G->element('header-400');
+$G->element('header_400');
 
 
 ?>

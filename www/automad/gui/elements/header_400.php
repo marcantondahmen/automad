@@ -56,7 +56,7 @@ Debug::timerStart();
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 <title><?php echo $this->siteName(); ?> / Automad / <?php echo $this->guiTitle; ?></title>
-<?php $this->element('header-items'); ?> 
+<?php $this->element('header_items'); ?> 
 </head>
 
 

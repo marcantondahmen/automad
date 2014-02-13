@@ -292,7 +292,7 @@ if (!$data[AM_KEY_TITLE]) {
 
 
 $G->guiTitle = 'Edit Page "' . $data[AM_KEY_TITLE] . '"';
-$G->element('header-1200');
+$G->element('header_1200');
 
 
 ?>
