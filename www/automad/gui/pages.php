@@ -312,7 +312,7 @@ $G->element('header-1200');
 
 		<?php if ($page->path != '/') { ?>
 	
-		<form class="item" id="delete" title="<?php echo $data[AM_KEY_TITLE]; ?>" method="post">
+		<form class="item" id="delete" method="post">
 			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
 			<input type="hidden" name="action" value="delete" />
 			<input type="hidden" name="delete[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
@@ -347,7 +347,7 @@ $G->element('header-1200');
 			<div class="item"><?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?></div>
 		</form>
 
-		<form class="item" method="post">
+		<form class="item" id="files">
 			<input class="bg button" type="button" value="Manage Files" />
 		</form>
 
@@ -434,7 +434,12 @@ $G->element('header-1200');
 
 </div>
 
-<script>guiPages();</script>
+<script>
+guiPages({
+	title: '<?php echo $data[AM_KEY_TITLE]; ?>',
+	path: '<?php echo AM_BASE_DIR . AM_DIR_PAGES . $page->path; ?>'
+});
+</script>
 
 <?php 
 
