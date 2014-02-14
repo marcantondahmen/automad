@@ -190,24 +190,15 @@ if (isset($_POST['action'])) {
 		$move = $_POST['move'];
 		
 		if (isset($move['parentUrl']) && $move['parentUrl']) {
+			
+			if (array_key_exists($move['parentUrl'], $collection)) {
 				
-			// Get new path by the posted parentUrl.
-			foreach ($collection as $parentUrl => $parentPage) {
-				
-				if ($parentUrl == $move['parentUrl']) {
-					
-					$newParentPath = $parentPage->path;					
-					break;
-					
-				}
+				$newParentPage = $collection[$move['parentUrl']];
+				$newPagePath = $G->movePage($page->path, $newParentPage->path, $G->extractPrefixFromPath($page->path), $move['title']);
 				
 			}
 			
-			// Move page directory
-			$newPagePath = $G->movePage($page->path, $newParentPath, $G->extractPrefixFromPath($page->path), $move['title']);
-			
 		}
-		
 
 	}
 	
