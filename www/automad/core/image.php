@@ -58,14 +58,14 @@ class Image {
 	 *	The width of the source image.
 	 */
 	
-	private $originalWidth;
+	public $originalWidth;
 	
 	
 	/**
 	 *	The height of the source image.
 	 */
 	
-	private $originalHeight;
+	public $originalHeight;
 	
 	
 	/**
