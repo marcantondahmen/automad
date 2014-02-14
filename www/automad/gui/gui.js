@@ -33,6 +33,81 @@
  */
 
 
+// File manager dialog
+function ajaxFileManager(options) {
+	
+
+	// Merge options/defaults into settings.
+	var	defaults = 	{
+					title: '',
+					path: '',
+					message: ''
+				},
+				
+		settings = 	$.extend({}, defaults, options);
+	
+	
+	// AJAX request (file list)
+	$.post('ajax/list_files.php', {path: settings.path}, function(list_files_data) {
+	
+		var	fileManager = $('<div></div>');
+
+		// As the callback, start the dialog to display first the status message and then the actual file list.	
+		fileManager.append(settings.message).append(list_files_data).dialog({
+		
+			title: settings.title, 
+			width: 800, 
+			position: { 
+				my: 'center', 
+				at: 'center top+35%', 
+				of: window 
+			}, 
+			resizable: false, 
+			modal: true, 
+			buttons: [
+				{
+					id: 'filemanager-delete-selected',
+					text: 'Delete Selected',
+					click: function() {
+						
+						$formData = $(this).find('form').serialize();
+						$.post('ajax/delete_files.php', $formData, function(delete_files_data) {
+							settings.message = delete_files_data;
+							fileManager.dialog('close');
+							fileManager.remove();
+							ajaxFileManager(settings);
+						});
+						
+					}
+				},
+				{
+					id: 'filemanager-close',
+					text: 'Close',
+					click: function() {
+						
+						fileManager.dialog('close');
+						fileManager.remove();
+						
+					}
+				}
+			] 
+			
+		});
+		
+		// Remove delete button when no files are found (no checkbox = no file)!
+		if (fileManager.find('input[type="checkbox"]').length == 0) {
+			$('button#filemanager-delete-selected').remove();
+		}
+		
+		// Set focus to close button
+		$('button#filemanager-close').focus();
+		
+	});
+
+	
+}
+
+
 // Run all needed JS for the accounts page
 function guiAccounts() {
 	
@@ -58,6 +133,7 @@ function guiAccounts() {
 				}, 
 				No: function () {
 					$(this).dialog('close');
+					$(this).remove();
 				}
 			}
 			
@@ -70,7 +146,7 @@ function guiAccounts() {
 
 
 // Run all needed JS for the pages page
-function guiPages() {
+function guiPages(page) {
 	
 	
 	var	editFormHasChanged = false;
@@ -139,6 +215,7 @@ function guiPages() {
 					buttons: {
 						Close: function () {
 							$(this).dialog('close');
+							$(this).remove();
 						}
 					}
 				
@@ -223,6 +300,7 @@ function guiPages() {
 					buttons: {
 						Close: function () {
 							$(this).dialog('close');
+							$(this).remove();
 						}
 					}
 			
@@ -257,8 +335,6 @@ function guiPages() {
 						
 						var 	newkey = $(this).find('input[name="newkey"]').val().replace(/[^\w]/g, '_').toLowerCase();
 						
-						alert(newkey);
-						
 						// Check if variable exists already.
 						if ($('#' + editPrefix + newkey).length == 0){
 							
@@ -272,6 +348,7 @@ function guiPages() {
 								
 								addRemoveCustomVariableButtons();
 								$(this).dialog("close");
+								$(this).remove();
 								
 							}
 							
@@ -288,6 +365,7 @@ function guiPages() {
 					Cancel: function() {
 						
 						$(this).dialog('close');
+						$(this).remove();
 						
 					}
 					
@@ -304,20 +382,15 @@ function guiPages() {
 
 	function setupDeleteForm() {
 		
-		
-		var	deletePage = $('#delete');
-		
-		
+	
 		// Confirmation dialog when deleting a page
-		deletePage.submit(function (e) {
-		
-			var 	title = deletePage.attr('title');
+		$('#delete').submit(function (e) {
 		
 			e.preventDefault(); 
 		
-			$('<div><span class="text">Do you really want to delete the page <b>' + title + '</b>?</span></div>').dialog({
+			$('<div><span class="text">Do you really want to delete the page <b>"' + page.title + '"</b> and all of its subpages?</span></div>').dialog({
 			
-				title: title, 
+				title: 'Deleting "' + page.title + '"', 
 				width: 300, 
 				position: { 
 					my: 'center', 
@@ -332,6 +405,7 @@ function guiPages() {
 					}, 
 					No: function () {
 						$(this).dialog('close');
+						$(this).remove();
 					}
 				}
 			
@@ -360,7 +434,7 @@ function guiPages() {
 				var 	movePageParentUrlInput = $(this).find('input[name="move[parentUrl]"]'),
 					moveTreeDialog = moveTree.dialog({
 					
-						title: 'Move this page and its subpages to:', 
+						title: 'Move "' + page.title + '" and its subpages to:', 
 						width: 398, 
 						position: { 
 							my: 'center', 
@@ -399,7 +473,7 @@ function guiPages() {
 		
 			} else {
 			
-				$('<div><span class="text">To be able to move this page, you must save or discard your latest changes first!</span></div>').dialog({
+				$('<div><span class="text">To be able to move <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</span></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -413,6 +487,7 @@ function guiPages() {
 					buttons: {
 						Close: function () {
 							$(this).dialog('close');
+							$(this).remove();
 						}
 					}
 				
@@ -439,7 +514,7 @@ function guiPages() {
 			
 				e.preventDefault();
 			
-				$('<div><span class="text">Leave page without saving and discard changes?</span></div>').dialog({
+				$('<div><span class="text">Do you really want to leave without saving your changes for <b>"' + page.title + '"</b>?</span></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -456,6 +531,7 @@ function guiPages() {
 						}, 
 						No: function () {
 							$(this).dialog('close');
+							$(this).remove();
 						}
 					}
 				
@@ -469,11 +545,27 @@ function guiPages() {
 	}
 	
 	
+	function setupFileManager() {
+	
+			
+		$('#files').find('input[type="button"]').click(function() {
+			
+			ajaxFileManager({
+				title: 'Manage Files for "' + page.title + '"',
+				path: page.path
+			});
+		
+		});
+		
+	
+	}
+	
+	
 	setupEditForm();
 	setupAddForm();
 	setupDeleteForm();
 	setupMoveForm();
 	setupSiteTree();
-	
+	setupFileManager();
 	
 }
