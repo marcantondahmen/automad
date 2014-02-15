@@ -152,7 +152,7 @@ function guiPages(page) {
 	var	editFormHasChanged = false;
 	
 	
-	function setupAddForm() {
+	(function setupAddForm() {
 		
 		
 		var	addPage =	$('#add');
@@ -226,10 +226,10 @@ function guiPages(page) {
 		});
 		
 		
-	}
+	})();
 	
 			
-	function setupEditForm() {
+	(function setupEditForm() {
 		
 		
 		var	editPage = 	$('#edit'),
@@ -377,10 +377,10 @@ function guiPages(page) {
 		});
 	
 		
-	}
+	})();
 	
 
-	function setupDeleteForm() {
+	(function setupDeleteForm() {
 		
 	
 		// Confirmation dialog when deleting a page
@@ -414,10 +414,10 @@ function guiPages(page) {
 		});
 		
 		
-	}
+	})();
 	
 	
-	function setupMoveForm() {
+	(function setupMoveForm() {
 		
 		
 		var	movePage = 	$('#move'),
@@ -498,10 +498,10 @@ function guiPages(page) {
 		});
 		
 		
-	}
+	})();
 	
 	
-	function setupSiteTree() {
+	(function setupSiteTree() {
 		
 		
 		var 	tree = 	$('#tree');
@@ -542,10 +542,10 @@ function guiPages(page) {
 		});
 		
 		
-	}
+	})();
 	
 	
-	function setupFileManager() {
+	(function setupFileManager() {
 	
 			
 		$('#files').find('input[type="button"]').click(function() {
@@ -558,14 +558,7 @@ function guiPages(page) {
 		});
 		
 	
-	}
+	})();
 	
-	
-	setupEditForm();
-	setupAddForm();
-	setupDeleteForm();
-	setupMoveForm();
-	setupSiteTree();
-	setupFileManager();
-	
+
 }
