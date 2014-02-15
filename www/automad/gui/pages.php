@@ -73,42 +73,44 @@ if (isset($_POST['action'])) {
 	if ($_POST['action'] == 'add') {
 		
 		
-		$title = $_POST['add']['title'];
-		$theme_template = $_POST['add']['theme_template'];
+		// Only add page if title and template is set.
+		if ($title = $_POST['add']['title'] && $theme_template = $_POST['add']['theme_template']) {
 		
-		// Get theme name.
-		if (dirname($theme_template) != '.') {
-			$theme = dirname($theme_template);
-		} else {
-			$theme = '';
-		}
+			// Get theme name.
+			if (dirname($theme_template) != '.') {
+				$theme = dirname($theme_template);
+			} else {
+				$theme = '';
+			}
 		
-		// Build initial content for data file.
-		$content = AM_KEY_TITLE . AM_PARSE_PAIR_SEPARATOR . ' ' . $title . "\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n" . AM_KEY_THEME . AM_PARSE_PAIR_SEPARATOR . ' ' . $theme;
+			// Build initial content for data file.
+			$content = AM_KEY_TITLE . AM_PARSE_PAIR_SEPARATOR . ' ' . $title . "\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n" . AM_KEY_THEME . AM_PARSE_PAIR_SEPARATOR . ' ' . $theme;
 		
-		// Save new subpage		
-		$subdir = str_replace('.', '_', Core\Parse::sanitize($title)) . '/';
-		$newPagePath = $page->path . $subdir;
+			// Save new subpage		
+			$subdir = str_replace('.', '_', Core\Parse::sanitize($title)) . '/';
+			$newPagePath = $page->path . $subdir;
 		
-		$i = 1;
+			$i = 1;
 		
-		// In case page exists already...
-		while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
-			$newPagePath = $page->path . $i . '.' . $subdir;		
-			$i++;	
-		}
+			// In case page exists already...
+			while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
+				$newPagePath = $page->path . $i . '.' . $subdir;		
+				$i++;	
+			}
 		
-		$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $newPagePath . str_replace('.php', '', basename($theme_template)) . '.' . AM_FILE_EXT_DATA;
+			$pageFile = AM_BASE_DIR . AM_DIR_PAGES . $newPagePath . str_replace('.php', '', basename($theme_template)) . '.' . AM_FILE_EXT_DATA;
 		
-		$old = umask(0);
+			$old = umask(0);
 		
-		if (!file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
-			mkdir(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath, 0777, true);
-		}
+			if (!file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
+				mkdir(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath, 0777, true);
+			}
 		
-		file_put_contents($pageFile, $content);
+			file_put_contents($pageFile, $content);
 		
-		umask($old);
+			umask($old);
+		
+		} 
 		
 		
 	}
