@@ -157,7 +157,7 @@ class Image {
 			
 			if ($getimagesize) {
 			
-				$this->originalFile = $originalFile;
+				$this->originalFile = strtolower($originalFile);
 				$this->originalWidth = $getimagesize[0];
 				$this->originalHeight = $getimagesize[1];	
 				$this->type = $getimagesize['mime'];
@@ -377,7 +377,7 @@ class Image {
 	
 	private function getImageCacheFilePath() {
 		
-		$extension = substr($this->originalFile, strrpos($this->originalFile, '.')+1);
+		$extension = pathinfo($this->originalFile, PATHINFO_EXTENSION);
 		
 		// Create unique filename in the cache folder:
 		// The hash makes it possible to clearly identify an unchanged file in the cache, 
