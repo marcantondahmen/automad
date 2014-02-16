@@ -42,9 +42,12 @@ define('AUTOMAD', true);
 require '../elements/base.php';
 
 
+$output = array();
+
+
 if (isset($_POST['delete'])) {
 
-	$html = '<div class="item text bg">Successfully deleted the following files:<br /><b>';
+	$output['html'] = '<div class="item text bg">';
 
 	foreach ($_POST['delete'] as $file) {
 
@@ -54,22 +57,22 @@ if (isset($_POST['delete'])) {
 			if (is_writable(dirname($file))) {
 			
 				if (unlink($file)) {
-					$html .= basename($file) . '<br />';
+					$output['html'] .= 'Deleted "<b>' . basename($file) . '</b>"<br />';
 				}
 				
 			}
 		
 		} else {
 			
-			die('<div class="item bg text"><b>' . realpath($file) . '</b> is not a valid file!</div>');
+			$output['html'] .= '"<b>' . realpath($file) . '</b>" is not a valid file!<br />';
 			
 		}
 		
 	}
 
-	$html .= '</b></div>';
+	$output['html'] .= '</div>';
 
-	echo $html;
+	echo json_encode($output);
 
 }
 
