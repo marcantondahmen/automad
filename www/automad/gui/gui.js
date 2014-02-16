@@ -36,76 +36,273 @@
 // File manager dialog
 function ajaxFileManager(options) {
 	
+	
+	var	defaults = 	{title: '', path: ''},
+		settings = 	$.extend({}, defaults, options),
+		fileManager = $('<div></div>');
 
-	// Merge options/defaults into settings.
-	var	defaults = 	{
-					title: '',
-					path: '',
-					message: ''
-				},
-				
-		settings = 	$.extend({}, defaults, options);
-	
-	
-	// AJAX request (file list)
-	$.post('ajax/list_files.php', {path: settings.path}, function(list_files_data) {
-	
-		var	fileManager = $('<div></div>');
 
-		// As the callback, start the dialog to display first the status message and then the actual file list.	
-		fileManager.append(settings.message).append(list_files_data).dialog({
+	// Function to position the dialog, after updating its html.
+	function positionManager() {
 		
-			title: settings.title, 
-			width: 800, 
+		fileManager.dialog({
 			position: { 
 				my: 'center', 
 				at: 'center top+35%', 
 				of: window 
-			}, 
-			resizable: false, 
-			modal: true, 
-			buttons: [
-				{
-					id: 'filemanager-delete-selected',
-					text: 'Delete Selected',
-					click: function() {
-						
-						$formData = $(this).find('form').serialize();
-						$.post('ajax/delete_files.php', $formData, function(delete_files_data) {
-							settings.message = delete_files_data;
-							fileManager.dialog('close');
-							fileManager.remove();
-							ajaxFileManager(settings);
-						});
-						
-					}
-				},
-				{
-					id: 'filemanager-close',
-					text: 'Close',
-					click: function() {
-						
-						fileManager.dialog('close');
-						fileManager.remove();
-						
-					}
-				}
-			] 
-			
+			} 
 		});
 		
-		// Remove delete button when no files are found (no checkbox = no file)!
-		if (fileManager.find('input[type="checkbox"]').length == 0) {
-			$('button#filemanager-delete-selected').remove();
-		}
+	};
+
+	
+	// Replace the Manager's html.
+	function populateManager(status) {
 		
-		// Set focus to close button
-		$('button#filemanager-close').focus();
+		// Temporary HTML while waiting for ajax response.
+		fileManager.html('<div class="item bg text">Updating ...</div>' + fileManager.html());
+		
+		// Send request.
+		$.post('ajax/list_files.php', {path: settings.path}, function(listFilesData) {
+
+			// Build html out of the passed status message and the ajax response.
+			if (status) {
+				html = status + listFilesData.html;
+			} else {
+				html = listFilesData.html;
+			}
+			
+			// Replace the Manager's html.
+			fileManager.html(html);
+			
+			// Set focus to close button
+			$('button#filemanager-close').focus();
+	
+			// Remove delete button when no files are found (no checkbox = no file)!
+			if (fileManager.find('input[type="checkbox"]').length == 0) {
+				$('button#filemanager-delete-selected').hide();
+			} else {
+				$('button#filemanager-delete-selected').show();
+			}
+			
+			positionManager();
+			
+		}, 'json');
+	
+	};	
+
+
+	// File upload.
+	function ajaxFileUpload() {
+	
+		// Prevent the default action when a file is dropped on the window
+		$(document).on('drop dragover', function (e) {
+			e.preventDefault();
+		});
+		
+		
+		var	fileUploader = 	$('<form id="upload"></form>'),
+			input = 	$('<input id="upload-input" type="file" name="files[]" multiple />').appendTo(fileUploader).hide(),
+			dropzone = 	$('<div href="#" id="upload-dropzone" class="item bg"><div class="text">Click or drop files here!</div></div>').appendTo(fileUploader).height('300px');
+		
+		
+		function positionUpload() {
+	
+			fileUploader.dialog({ 
+				position: { 
+					my: 'center', 
+					at: 'center top+35%', 
+					of: window 
+				} 
+			});
+	
+		};
+	
+	
+		function fileSize(bytes) {
+		
+			if (typeof bytes !== 'number') {
+				return '';
+			}
+
+			if (bytes >= 1000000000) {
+				return (bytes / 1000000000).toFixed(2) + ' GB';
+			}
+
+			if (bytes >= 1000000) {
+				return (bytes / 1000000).toFixed(2) + ' MB';
+			}
+
+			return (bytes / 1000).toFixed(2) + ' KB';
+	
+		};
+	
+	
+		// Create upload dialog.
+		fileUploader.dialog({
+			title: 'Upload Files', 
+			width: 400,  
+			resizable: false, 
+			modal: true, 
+			buttons: [{
+				id: 'upload-close',	
+				text: 'Close',
+				click: function() {
+					$(this).dialog('close');
+					$(this).remove();
+					populateManager();
+				}
+			}],
+			closeOnEscape: false
+		});
+	
+		positionUpload();
+	
+	
+		// Use dropzone to open file browser.
+		dropzone.click(function() {	
+			fileUploader.find('input').click();
+			return false;
+		});
+
+	
+		// Init fileupload plugin.
+		input.fileupload({
+		
+			url: 'ajax/upload_files.php',
+			dataType: 'json',
+			dropZone: dropzone,
+			sequentialUploads: true,
+			singleFileUploads: true,
+			
+			// Send also the current page path.
+			formData: [{name: 'path', value: settings.path}],
+		
+			add: function(e, data) {
+		
+				var	text = '';
+			
+				// As fallback when using IframeTransport and the files are uploaded in one go, the text will include all filenames and sizes.
+				// In the normal case that always will be only one elements, since the all files from a selection are sent in a single request each.
+				$.each(data.files, function(i) {
+					text = text + '<b>' + data.files[i].name + '</b><br />' + fileSize(data.files[i].size) + '<br />';
+				});
+		
+				data.context = $('<div class="item"></div>').appendTo(fileUploader);
+		
+				$('<div class="item text bg filename">' + text + '<span class="status"></span></div>').appendTo(data.context);	
+				$('<div class="item bg progress"><div class="bg bar"></div></div>').appendTo(data.context);
+			
+				data.context.find('.status').text('Waiting ...');
+				data.context.find('.bar').height('5px').width('0px');
+			
+				data.submit();
+				
+				positionUpload();
+				
+			    	// Disable the close button for every added file.
+				// When all uploads are done, the button gets enabled again (always callback).
+			    	$('#upload-close').text('Uploading ...').prop('disabled', true);
+			
+			},
+		
+			progress: function(e, data){
+
+				var 	progress = parseInt(data.loaded / data.total * 100, 10);
+
+				data.context.find('.status').text(progress + ' %');
+				data.context.find('.bar').animate({width: progress + '%'}, 300, function() {
+				
+					if (progress == 100){
+						data.context.find('.progress').remove();		
+						positionUpload();
+					}
+				
+				});
+			 
+			},
+			
+			always: function (e, data) {
+				
+				// If all uploads are done, or iframe transport is used, enable the close button again.
+				// Check first, if iframe-transport is used for upload, otherwise "input.fileupload('active')" is not available.
+				if (data.dataType.indexOf('iframe') < 0) {
+				
+					// Check for running uploads.
+					if (input.fileupload('active') <= 1) {
+						$('#upload-close').text('Close').prop('disabled', false);
+					}
+				
+				} else {
+					
+					$('#upload-close').text('Close').prop('disabled', false);
+				
+				}
+				
+		    	},
+		
+			done: function (e, data) {
+				
+				data.context.find('.status').html(data.result.status);	
+		    	
+			},
+			
+			fail: function (e, data) {
+			
+				data.context.find('.status').text('Upload failed!');
+			
+			}
+		
+		});
+	
+	}
+
+
+	// Create dialog.		
+	fileManager.html('<div class="item bg text">Getting files ...</div>').dialog({
+		
+		title: settings.title, 
+		width: 600,  
+		resizable: false, 
+		modal: true, 
+		buttons: [
+			{
+				id: 'filemanager-delete-selected',
+				text: 'Delete Selected',
+				click: function() {
+					$formData = $(this).find('form').serialize();
+					$.post('ajax/delete_files.php', $formData, function(deleteFilesData) {
+						populateManager(deleteFilesData.html);
+					}, 'json');
+				}
+			},
+			{
+				text: 'Upload Files',
+				click: function() {
+					ajaxFileUpload(settings.path);
+				}
+			},
+			{
+				id: 'filemanager-close',
+				text: 'Close',
+				click: function() {
+					fileManager.dialog('close');
+					fileManager.remove();
+				}
+			}
+		] 
 		
 	});
 
+
+	// Populate the manager the first time.
+	populateManager();
 	
+		
 }
+
+
+
 
 
 // Run all needed JS for the accounts page
