@@ -111,6 +111,26 @@ class GUI {
 
 
 	/**
+	 *	Test if a given path resolves to a path below the base directory, to validate a user's input.
+	 *
+	 *	@param string $path
+	 *	@return true/false
+	 */
+
+	public function isBelowBaseDir($path) {
+		
+		$real = realpath($path);
+		
+		if (substr($real, 0, strlen(AM_BASE_DIR)) == AM_BASE_DIR) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+
+	/**
 	 *	Move a page's directory to a new location.
 	 *	The final path is composed of the parent directoy, the prefix and the title.
 	 *	In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
