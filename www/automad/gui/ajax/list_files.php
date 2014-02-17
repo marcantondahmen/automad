@@ -43,23 +43,22 @@ define('AUTOMAD', true);
 require '../elements/base.php';
 
 
-// Get the allowed file types from const.php.
-$allowedFileTypes = unserialize(AM_ALLOWED_FILE_TYPES);
-
-
-// Define image file extensions. 
-$imageTypes = array('jpg', 'png', 'gif');
-
-
 $output = array();
 
 
-// Verify if posted path is actually an existing directory below Automad's root directory for security.
-if (strpos(realpath($_POST['path']), AM_BASE_DIR) !== false) {
+// Verify if posted path is actually an existing directory below Automad's base directory.
+if ($G->isBelowBaseDir($_POST['path'])) {
+	
+	
+	// Get the allowed file types from const.php.
+	$allowedFileTypes = unserialize(AM_ALLOWED_FILE_TYPES);
 
+	// Define image file extensions. 
+	$imageTypes = array('jpg', 'png', 'gif');
+		
+	// Get files for each allowed file type.
 	$files = array();
 	
-	// Get files for each allowed file type.
 	foreach ($allowedFileTypes as $type) {	
 		// Since glob is case sensitive, both, lowercase and uppercase types get searched. 	
 		$files = array_merge($files, glob($_POST['path'] . '*.' . strtolower($type)));
@@ -112,7 +111,7 @@ if (strpos(realpath($_POST['path']), AM_BASE_DIR) !== false) {
 	
 } else {
 	
-	$output['html'] = '<div class="item bg text">Error: "<b>' . $_POST['path'] . '</b>" is not a valid path!</div>';
+	$output['html'] = '<div class="item bg text">Error: "<b>' . realpath($_POST['path']) . '</b>" is not a valid path!</div>';
 	
 }
 
