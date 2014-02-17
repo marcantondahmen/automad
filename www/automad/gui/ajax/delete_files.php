@@ -51,8 +51,8 @@ if (isset($_POST['delete'])) {
 
 	foreach ($_POST['delete'] as $file) {
 
-		// Verify, that the current file is located below Automad's root directory for security.
-		if (strpos(realpath($file), AM_BASE_DIR) !== false) {
+		// Verify, that the current file is located below Automad's base directory.
+		if ($G->isBelowBaseDir($file)) {
 		
 			if (is_writable(dirname($file))) {
 			
