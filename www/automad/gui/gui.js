@@ -39,7 +39,7 @@ function ajaxFileManager(options) {
 	
 	var	defaults = 	{title: '', path: ''},
 		settings = 	$.extend({}, defaults, options),
-		fileManager = $('<div></div>');
+		fileManager = $('<div id="filemanager"></div>');
 
 
 	// Function to position the dialog, after updating its html.
@@ -101,9 +101,9 @@ function ajaxFileManager(options) {
 		});
 		
 		
-		var	fileUploader = 	$('<form id="upload"></form>'),
+		var	fileUploader = 	$('<form id="upload"><div id="upload-dropzone-text" class="bg"><h2>Click or drop files here!</h2></div></form>'),
 			input = 	$('<input id="upload-input" type="file" name="files[]" multiple />').appendTo(fileUploader).hide(),
-			dropzone = 	$('<div href="#" id="upload-dropzone" class="item bg"><div class="text">Click or drop files here!</div></div>').appendTo(fileUploader).height('300px');
+			dropzone = 	$('<div id="upload-dropzone" class="item bg"></div>').appendTo(fileUploader);
 		
 		
 		function positionUpload() {
