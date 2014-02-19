@@ -73,8 +73,12 @@ if (isset($_POST['action'])) {
 	if ($_POST['action'] == 'add') {
 		
 		
+		$title = $_POST['add']['title'];
+		$theme_template = $_POST['add']['theme_template'];
+		
+		
 		// Only add page if title and template is set.
-		if ($title = $_POST['add']['title'] && $theme_template = $_POST['add']['theme_template']) {
+		if ($title && $theme_template) {
 		
 			// Get theme name.
 			if (dirname($theme_template) != '.') {
@@ -309,7 +313,7 @@ $G->element('header_1200');
 			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
 			<input type="hidden" name="action" value="delete" />
 			<input type="hidden" name="delete[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
-			<input class="bg button" type="submit" value="Delete Page" />
+			<button class="bg button" type="submit">Delete Page</button>
 		</form>
 
 		<form class="item" id="move" method="post">
@@ -317,7 +321,7 @@ $G->element('header_1200');
 			<input type="hidden" name="action" value="move" />
 			<input type="hidden" name="move[parentUrl]" value="" />
 			<input type="hidden" name="move[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
-			<input class="bg button" type="submit" value="Move Page" />
+			<button class="bg button" type="submit">Move Page</button>
 		</form>
 	
 		<div id="move-tree" style="display: none;"><?php 
@@ -332,7 +336,7 @@ $G->element('header_1200');
 			<input type="hidden" name="action" value="add" />
 			<input type="hidden" name="add[title]" value="" />
 			<input type="hidden" name="add[theme_template]" value="" />
-			<input class="bg button" type="submit" value="Add Subpage" />
+			<button class="bg button" type="submit">Add Subpage</button>
 		</form>
 		
 		<form id="add-dialog" style="display: none;" onkeypress="return event.keyCode != 13;">
@@ -340,9 +344,9 @@ $G->element('header_1200');
 			<div class="item"><?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?></div>
 		</form>
 
-		<form class="item" id="files">
-			<input class="bg button" type="button" value="Manage Files" />
-		</form>
+		<div class="item">
+			<button id="files" class="bg button">Manage Files</button>
+		</div>
 
 	</div>	
 
@@ -382,8 +386,8 @@ $G->element('header_1200');
 		
 		?>
 	
-		<input id="edit-addCustom" class="item bg button" type="button" value="Add another variable" />
-	
+		<button id="edit-addCustom" class="item bg button" type="button">Add another variable</button>
+		
 		<div class="item">
 			<div id="template">
 				<?php echo $G->templateSelectBox('edit-theme_template', 'edit[theme_template]', $data[AM_KEY_THEME], $page->template); ?>
@@ -410,18 +414,14 @@ $G->element('header_1200');
 			<input id="edit-redirect" class="bg input" type="text" name="edit[data][<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" placeholder="optional" onkeypress="return event.keyCode != 13;" />
 		</div>
 	
-		<div class="item">
-			<input id="edit-save" class="bg button" type="submit" value="Save" />
-		</div>
-		
+		<button class="item bg button" type="submit">Save</button>
+			
 	</form>
 
 	<form class="item" method="post">
 	
-		<div class="item">
-			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
-			<input type="submit" class="bg button" value="Discard Changes" />
-		</div>
+		<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
+		<button class="bg button" type="submit">Discard Changes</button>
 	
 	</form>
 
