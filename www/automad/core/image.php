@@ -287,7 +287,7 @@ class Image {
 	
 	
 	/**
-	 *	Create a new (resized and cropped) image from the source image and save that image in the AM_DIR_CACHE.
+	 *	Create a new (resized and cropped) image from the source image and save that image in AM_DIR_CACHE_IMAGES.
 	 */
 	
 	private function createImage() {
@@ -319,6 +319,11 @@ class Image {
 		Debug::log('Image: Changed umask: ' . umask());
 		Debug::log($this);
 		Debug::log('Image: Save: ' . $this->fileFullPath);
+		
+		// Create cache directory, if not existing.
+		if (!file_exists(AM_BASE_DIR . AM_DIR_CACHE_IMAGES)) {
+			mkdir(AM_BASE_DIR . AM_DIR_CACHE_IMAGES, 0777, true);
+		}
 		
 		switch($this->type){
 		
@@ -386,7 +391,7 @@ class Image {
 		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
 		$hash = hash('md5', $hashData);
 		
-		$file = AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
+		$file = AM_DIR_CACHE_IMAGES . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
 		
 		Debug::log('Image: Hash data: ' . $hashData);
 		
