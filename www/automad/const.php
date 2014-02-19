@@ -80,6 +80,14 @@ if (!defined('AM_DIR_THEMES')) {
 if (!defined('AM_DIR_CACHE')) {
 	define('AM_DIR_CACHE', '/cache');
 }
+// Page Cache
+if (!defined('AM_DIR_CACHE_PAGES')) {
+	define('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
+}
+// Image Cache
+if (!defined('AM_DIR_CACHE_IMAGES')) {
+	define('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
+}
 // Trash
 if (!defined('AM_DIR_TRASH')) {
 	define('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
