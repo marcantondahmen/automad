@@ -246,7 +246,7 @@ class Cache {
 			$queryString = '';
 		}
 		
-		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
+		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/pages/' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
 		
 		return $pageCacheFile;
 		
