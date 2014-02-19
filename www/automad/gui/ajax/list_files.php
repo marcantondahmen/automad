@@ -69,33 +69,38 @@ if ($G->isBelowBaseDir($_POST['path'])) {
 	
 		sort($files);
 	
-		$output['html'] = '<form class="item bg"><table>';
+		$output['html'] = '<form class="item"><table>';
 	
 		// Create table row for each file.
 		foreach ($files as $file) {
 		
-			$output['html'] .= '<tr><td><a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>';
+			$output['html'] .= '<tr class="bg"><td class="preview text"><a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>';
 	
 			$extension = pathinfo($file, PATHINFO_EXTENSION);
 	
 			if (in_array(strtolower($extension), $imageTypes)) {
 				
 				// Images
-				$img = new Core\Image($file, 120, 120, true);
+				$img = new Core\Image($file, 160, 120, true);
 				$output['html'] .= '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
-				$info = $img->originalWidth . 'px / ' . $img->originalHeight . 'px';	
+				
+				if ($info = $img->description) {
+					$info = '"' . $info . '"<br />';
+				}
+				
+				$info .= '<br />Width: ' . $img->originalWidth . 'px <br />Height: ' . $img->originalHeight . 'px';	
 			
 			} else {
 			
 				// All other files
-				$output['html'] .= '<div class=filetype>' . strtoupper($extension) . '</div>';
+				$output['html'] .= '<div class=filetype text>' . strtoupper($extension) . '</div>';
 				$info = strtoupper($extension) . '-File';
 			
 			}
 		
 			$output['html'] .= '</a></td>';
-			$output['html'] .= '<td>' . basename($file) . '<br />' . $info . '</td>';	
-			$output['html'] .= '<td><input type="checkbox" name="delete[]" value="' . $file . '" tabindex=-1 /></td>';
+			$output['html'] .= '<td class="info text"><b>' . basename($file) . '</b><br />' . $info . '</td>';	
+			$output['html'] .= '<td class="select text"><input type="checkbox" name="delete[]" value="' . $file . '" tabindex=-1 /></td>';
 			$output['html'] .= '</tr>';
 		
 		}
