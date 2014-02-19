@@ -302,9 +302,6 @@ function ajaxFileManager(options) {
 }
 
 
-
-
-
 // Run all needed JS for the accounts page
 function guiAccounts() {
 	
@@ -313,7 +310,7 @@ function guiAccounts() {
 		
 		e.preventDefault(); 
 		
-		$('<div><span class="text">Do you really want to delete the selected users?</span></div>').dialog({
+		$('<div><div class="text">Do you really want to delete the selected users?</div></div>').dialog({
 			
 			title: 'Delete Users', 
 			width: 300, 
@@ -398,7 +395,7 @@ function guiPages(page) {
 					
 			} else {
 				
-				$('<div><span class="text">To be able to add a subpage to the current page, you must save or discard your latest changes first!</span></div>').dialog({
+				$('<div><div class="text">To be able to add a subpage to <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</div></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -465,7 +462,7 @@ function guiPages(page) {
 			
 		});
 	
-		editPage.find('a, input[type="button"]').click(function() {
+		editPage.find('a, button').click(function() {
 			
 			editFormHasChanged = true;	
 		
@@ -483,7 +480,7 @@ function guiPages(page) {
 			
 			} else {
 			
-				$('<div><span class="text">The page has not title!</span></div>').dialog({
+				$('<div><div class="text">The page has not title!</div></div>').dialog({
 			
 					title: 'Title Missing', 
 					width: 300, 
@@ -511,9 +508,7 @@ function guiPages(page) {
 		// Setup button to add custom variables to the edit form.
 		addCustomVar.click(function() {
 		
-		
-			var  	editPrefix = 		'edit-data-';
-			
+			var  	editPrefix = 'edit-data-';
 			
 			$('<form onkeypress="return event.keyCode != 13;"><input class="item bg input" type="text" name="newkey" value="" placeholder="Variable Name" /></form>').dialog({
 
@@ -585,7 +580,7 @@ function guiPages(page) {
 		
 			e.preventDefault(); 
 		
-			$('<div><span class="text">Do you really want to delete the page <b>"' + page.title + '"</b> and all of its subpages?</span></div>').dialog({
+			$('<div><div class="text">Do you really want to delete the page <b>"' + page.title + '"</b> and all of its subpages?</div></div>').dialog({
 			
 				title: 'Deleting "' + page.title + '"', 
 				width: 300, 
@@ -670,7 +665,7 @@ function guiPages(page) {
 		
 			} else {
 			
-				$('<div><span class="text">To be able to move <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</span></div>').dialog({
+				$('<div><div class="text">To be able to move <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</div></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -711,7 +706,7 @@ function guiPages(page) {
 			
 				e.preventDefault();
 			
-				$('<div><span class="text">Do you really want to leave without saving your changes for <b>"' + page.title + '"</b>?</span></div>').dialog({
+				$('<div><div class="text">Do you really want to leave without saving your changes for <b>"' + page.title + '"</b>?</div></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -745,7 +740,7 @@ function guiPages(page) {
 	(function setupFileManager() {
 	
 			
-		$('#files').find('input[type="button"]').click(function() {
+		$('#files').click(function() {
 			
 			ajaxFileManager({
 				title: 'Manage Files for "' + page.title + '"',
