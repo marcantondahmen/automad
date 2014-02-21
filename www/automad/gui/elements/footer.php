@@ -46,17 +46,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 ?>
-</div> <!-- close main -->
+</div> <!-- close container -->
 
 <div class="footer"><?php if ($this->user()) {
-	echo 'Version ' . AM_VERSION . ' | Logged in as <b>' . ucwords($this->user()) . '</b>';
+	echo $_SERVER['SERVER_NAME'] . '<br />Automad ' . AM_VERSION . '<br />Logged in as <b>' . ucwords($this->user()) . '</b>';
 } ?></div>
 
 </div> <!-- close wrapper -->
 
 <?php if ($this->modalDialogContent) { ?>
 <script>
-	$('<div><span class="text"><?php echo $this->modalDialogContent; ?></span></div>').dialog({
+	$('<div><div class="item bg text"><?php echo $this->modalDialogContent; ?></div></div>').dialog({
 		title: '<?php echo $this->guiTitle; ?>', 
 		width: 300, 
 		position: { 
