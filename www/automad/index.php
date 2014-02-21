@@ -46,7 +46,13 @@ $G->guiTitle = 'Welcome';
 $G->element('header_400');
 
 
-echo $G->element('menu');
+?>
+
+<div class="box">
+	<?php $G->element('menu'); ?>
+</div>
+
+<?php
 
 
 $G->element('footer');
