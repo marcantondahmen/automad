@@ -109,7 +109,7 @@ if ($G->isBelowBaseDir($_POST['path'])) {
 		
 	} else {
 		
-		$output['html'] = '<div class="item text bg"><b>No files found for this page!</b></div>';
+		$output['html'] = '<div class="item text bg">No files found for this page!</div>';
 		
 	}
 	
