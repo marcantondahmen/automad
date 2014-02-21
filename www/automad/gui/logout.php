@@ -48,11 +48,16 @@ session_destroy();
 
 $G->guiTitle = 'Logged Out';
 $G->element('header_400');
+$G->modalDialogContent = 'Logged out succesfully!';
 
 
 ?>
 
-<div class="menu"><a class="item bg button" href="../">Log In Again</a></div>
+<div class="box">
+	<ul id="main-menu">
+		<li class="item"><a class="bg button" href="">Log in again</a></li>	
+	</ul>
+</div>
 
 <?php
 	
