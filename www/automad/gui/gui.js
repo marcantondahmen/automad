@@ -33,6 +33,50 @@
  */
 
 
+// Jquery Plugins
+(function($) {
+ 
+	// Plugin to auto-fit a textarea to its content on keyup event.
+	$.fn.textAreaResize = function() {
+		
+		return $(this).each(function() {
+		        
+			var	ta = 		$(this),
+				
+				// The hidden clone will be used to determine the actual height.
+				clone =		$('<div></div>')
+						.appendTo('body')
+						.hide()
+						.width(ta.width())
+						.css({
+							'white-space': 'pre-wrap',
+							'word-wrap': 'break-word',
+							'overflow-wrap': 'break-word'
+						});
+				
+			ta.css({
+				'resize': 'none',
+				'overflow': 'hidden'
+			});
+			
+			ta.on('keyup', function() {	
+			
+				var	content =	ta.val().replace(/\n/g, '<br />');
+			
+				clone.html(content + ' ');
+				ta.height(clone.height() + 5);
+				
+			});
+				
+			ta.trigger('keyup');
+			
+		});
+
+	};
+ 
+}(jQuery));
+
+
 // File manager dialog
 function ajaxFileManager(options) {
 	
@@ -101,9 +145,10 @@ function ajaxFileManager(options) {
 		});
 		
 		
-		var	fileUploader = 	$('<form id="upload"><div id="upload-dropzone-text" class="bg"><h2>Click or drop files here!</h2></div></form>'),
-			input = 	$('<input id="upload-input" type="file" name="files[]" multiple />').appendTo(fileUploader).hide(),
-			dropzone = 	$('<div id="upload-dropzone" class="item bg"></div>').appendTo(fileUploader);
+		var	fileUploader = 	$('<div></div>'),
+			uploadBox =	$('<form id="upload" class="bg item"><div id="upload-dropzone-text" class="bg"><h2>Drop files here!</h2>Or click to browse!</div></form>').appendTo(fileUploader),
+			input = 	$('<input type="file" name="files[]" multiple />').appendTo(uploadBox).hide(),
+			dropzone = 	$('<div id="upload-dropzone" class="item"></div>').appendTo(uploadBox);
 		
 		
 		function positionUpload() {
@@ -190,8 +235,8 @@ function ajaxFileManager(options) {
 		
 				data.context = $('<div class="item"></div>').appendTo(fileUploader);
 		
-				$('<div class="item text bg filename">' + text + '<span class="status"></span></div>').appendTo(data.context);	
-				$('<div class="item bg progress"><div class="bg bar"></div></div>').appendTo(data.context);
+				$('<div class="item text bg">' + text + '<span class="status"></span></div>').appendTo(data.context);	
+				$('<div class="item bg progress"><div class="bar"></div></div>').appendTo(data.context);
 			
 				data.context.find('.status').text('Waiting ...');
 				data.context.find('.bar').height('5px').width('0px');
@@ -395,7 +440,7 @@ function guiPages(page) {
 					
 			} else {
 				
-				$('<div><div class="text">To be able to add a subpage to <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</div></div>').dialog({
+				$('<div><div class="bg text">To be able to add a subpage to <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</div></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -453,6 +498,10 @@ function guiPages(page) {
 		
 		// Add the remove-button to pre-existing custom vars
 		addRemoveCustomVariableButtons();
+		
+
+		// Auto-Resize existing textareas
+		$('textarea').textAreaResize();
 		
 		
 		// Register changes or user input.
@@ -535,8 +584,9 @@ function guiPages(page) {
 								
 								$('<div class="custom item"><label for="' + editPrefix + newkey + '" class="bg input">' 
 									+ newkey.charAt(0).toUpperCase() + newkey.slice(1) 
-									+ '</label><textarea id="' + editPrefix + newkey + '" class="bg input" name="edit[data][' + newkey + ']" rows="8"></textarea></div>')
-									.insertBefore(addCustomVar);
+									+ '</label><textarea id="' + editPrefix + newkey + '" class="bg input" name="edit[data][' + newkey + ']" rows="10"></textarea></div>')
+									.insertBefore(addCustomVar)
+									.find('textarea').textAreaResize();
 								
 								addRemoveCustomVariableButtons();
 								$(this).dialog("close");
@@ -580,7 +630,7 @@ function guiPages(page) {
 		
 			e.preventDefault(); 
 		
-			$('<div><div class="text">Do you really want to delete the page <b>"' + page.title + '"</b> and all of its subpages?</div></div>').dialog({
+			$('<div><div class="bg text">Do you really want to delete the page <b>"' + page.title + '"</b> and all of its subpages?</div></div>').dialog({
 			
 				title: 'Deleting "' + page.title + '"', 
 				width: 300, 
@@ -626,7 +676,7 @@ function guiPages(page) {
 				var 	movePageParentUrlInput = $(this).find('input[name="move[parentUrl]"]'),
 					moveTreeDialog = moveTree.dialog({
 					
-						title: 'Move "' + page.title + '" and its subpages to:', 
+						title: 'Move "' + page.title + '" to:', 
 						width: 398, 
 						position: { 
 							my: 'center', 
@@ -659,13 +709,13 @@ function guiPages(page) {
 					moveTree.find('.selected').removeClass('selected');
 			
 					// Add .selected to clicked element in tree
-					$(this).find('input[type="submit"]').addClass('selected');
+					$(this).closest('li').addClass('selected');
 			
 				});
 		
 			} else {
 			
-				$('<div><div class="text">To be able to move <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</div></div>').dialog({
+				$('<div><div class="bg text">To be able to move <b>"' + page.title + '"</b>, you must save or discard your latest changes first!</div></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
@@ -706,7 +756,7 @@ function guiPages(page) {
 			
 				e.preventDefault();
 			
-				$('<div><div class="text">Do you really want to leave without saving your changes for <b>"' + page.title + '"</b>?</div></div>').dialog({
+				$('<div><div class="bg text">Do you really want to leave without saving your changes for <b>"' + page.title + '"</b>?</div></div>').dialog({
 				
 					title: 'Unsaved Changes', 
 					width: 300, 
