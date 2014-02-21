@@ -64,14 +64,14 @@ Debug::timerStart();
 	
 <div id="wrapper-400">
 
-<div class="logo"><?php 
-	 
-	$logo = new Image(AM_BASE_DIR . '/automad/gui/images/am-logo.png', 200, 200, false);
-	echo '<img src="' . AM_BASE_URL . $logo->file . '" width="' . $logo->width . '" height="' . $logo->height . '">';
+<div class="container">
+	
+	<div class="box">
+		<h1 class="text"><a href="<?php echo AM_BASE_URL; ?>/automad"><b>Automad</b></a><br /><a href="<?php echo AM_BASE_URL; ?>/" target="_blank"><?php echo $this->siteName(); ?></a></h1>
+	</div>
 
-?></div>	
+</div>
 
-<div class="title"><h1><b>Automad</b></h1><h3><?php echo $this->siteName(); ?></h3><br /><h2><?php echo $this->guiTitle; ?></h2></div>
-
-<div class="main">
-
+<div class="container">
+	
+	
