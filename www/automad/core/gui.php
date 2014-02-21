@@ -272,15 +272,15 @@ class GUI {
 				
 					// Check if page is currently selected page
 					if ($page->url == $current) {
-						$class = ' class="selected"';
+						$class = ' class="bg selected"';
 					} else {
-						$class = '';
+						$class = ' class="bg"';
 					}
 				
-					$html .= 	'<li>' . 
+					$html .= 	'<li ' . $class . '>' . 
 							'<form method="post">' . 
 							'<input type="hidden" name="url" value="' . $page->url . '" />' . 
-							'<input' . $class . ' type="submit" value="' . $title . '" />' . 
+							'<input type="submit" value="' . $title . '" tabindex="-1" />' . 
 							'</form>' .
 							$this->siteTree($page->url, $collection, $current, $hideCurrent) .
 							'</li>';
@@ -335,7 +335,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<label for="' . $id . '" class="bg input">Theme</label><div class="selectbox bg input"><select id="' . $id . '" name="' . $name . '" size="1">'; 
+		$html = '<label for="' . $id . '" class="bg">Theme</label><div class="selectbox bg"><select id="' . $id . '" name="' . $name . '" size="1">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
