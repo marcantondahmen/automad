@@ -42,28 +42,27 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $items = array(
-	'Site' => '',
+	'Shared' => '',
 	'Pages' => 'pages.php',
 	'System' => '',
-	'User Accounts' => 'accounts.php',
 	'Log Out' => 'logout.php'
 );
 
 
-?><div id="tabs" class="menu"><?php
+?><ul id="main-menu"><?php
 
 
 foreach ($items as $title => $file) {
 
-	echo '<a href="' . AM_BASE_URL . '/automad/gui/' . $file . '" class="item bg button';
+	echo '<li class="item"><a href="' . AM_BASE_URL . '/automad/gui/' . $file . '" class="bg button';
 
 	if ($file == basename($_SERVER['SCRIPT_NAME'])) {
 		echo ' selected';
 	}
 
-	echo '">' . $title . '</a>';
+	echo '">' . $title . '</a></li>';
 
 }
 
 
-?></div>
+?></ul>
