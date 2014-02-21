@@ -64,23 +64,25 @@ Debug::timerStart();
 
 <div id="wrapper-1200">
 
-<div class="logo"><?php 
-	 
-	$logo = new Image(AM_BASE_DIR . '/automad/gui/images/am-logo.png', 70, 70, false);
-	echo '<img src="' . AM_BASE_URL . $logo->file . '" width="' . $logo->width . '" height="' . $logo->height . '">';
+<div class="container">
+	
+	<div class="box full">
+		<h1 class="text"><a href="<?php echo AM_BASE_URL; ?>/automad"><b>Automad</b></a> <a href="<?php echo AM_BASE_URL; ?>/" target="_blank"><?php echo $this->siteName(); ?></a></h1>
+	</div>
 
-?></div>	
-
-<div class="title"><h1><a href="<?php echo AM_BASE_URL; ?>/automad"><b>Automad</b> | <?php echo $this->siteName(); ?></a></h1></div>
-
-<?php $this->element('menu'); ?>
+</div>
 
 <div id="noscript" class="main"><div class="box"><h3 class="text bg">JavaScript must be enabled!</h3></div></div>
 
-<div class="main" style="display: none;">
+<div id="script" class="container" style="display: none;">
 		
 <script>
 	$('#noscript').remove();
-	$('.main').css('display', 'block');
+	$('#script').css('display', 'block');
 </script>
+
+<div class="box full">
+	<?php $this->element('menu'); ?>
+</div>
+
 	
