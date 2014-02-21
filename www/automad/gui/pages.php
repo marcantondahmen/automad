@@ -312,63 +312,61 @@ $G->element('header_1200');
 
 
 <div class="box">
-	<div id="tree" class="bg"><?php echo $G->siteTree('', $collection, $url); ?></div>
+	<div id="tree"><?php echo $G->siteTree('', $collection, $url); ?></div>
 </div>
 
 <div class="box big">
-	<h2 class="text bg"><b><?php echo $page->url; ?></b></h2>
-</div>	
-
-<div class="box big">
-
-	<div class="menu" id="page-menu">
-
-		<?php if ($page->path != '/') { ?>
 	
-		<form class="item" id="delete" method="post">
-			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
-			<input type="hidden" name="action" value="delete" />
-			<input type="hidden" name="delete[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
-			<button class="bg button" type="submit">Delete Page</button>
-		</form>
+	<h2 class="item text bg"><?php echo $page->url; ?></h2>
 
-		<form class="item" id="move" method="post">
-			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
-			<input type="hidden" name="action" value="move" />
-			<input type="hidden" name="move[parentUrl]" value="" />
-			<input type="hidden" name="move[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
-			<button class="bg button" type="submit">Move Page</button>
-		</form>
+	<div class="item">
 	
-		<div id="move-tree" style="display: none;"><?php 
-			// Re-Use the siteTree() method to get the tree of potential parent pages and change form submission action in JS.
-			echo $G->siteTree('', $collection, $url, true); 
-		?></div>
+		<div id="page-menu">
 
-		<?php } ?>
+			<?php if ($page->path != '/') { ?>
+	
+			<form class="item" id="delete" method="post">
+				<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
+				<input type="hidden" name="action" value="delete" />
+				<input type="hidden" name="delete[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
+				<button class="bg button" type="submit">Delete Page</button>
+			</form>
 
-		<form class="item" id="add" method="post">
-			<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
-			<input type="hidden" name="action" value="add" />
-			<input type="hidden" name="add[title]" value="" />
-			<input type="hidden" name="add[theme_template]" value="" />
-			<button class="bg button" type="submit">Add Subpage</button>
-		</form>
+			<form class="item" id="move" method="post">
+				<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
+				<input type="hidden" name="action" value="move" />
+				<input type="hidden" name="move[parentUrl]" value="" />
+				<input type="hidden" name="move[title]" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
+				<button class="bg button" type="submit">Move Page</button>
+			</form>
+	
+			<div id="move-tree" style="display: none;"><?php 
+				// Re-Use the siteTree() method to get the tree of potential parent pages and change form submission action in JS.
+				echo $G->siteTree('', $collection, $url, true); 
+			?></div>
+
+			<?php } ?>
+
+			<form class="item" id="add" method="post">
+				<input type="hidden" name="url" value="<?php echo $page->url; ?>" />
+				<input type="hidden" name="action" value="add" />
+				<input type="hidden" name="add[title]" value="" />
+				<input type="hidden" name="add[theme_template]" value="" />
+				<button class="bg button" type="submit">Add Subpage</button>
+			</form>
 		
-		<form id="add-dialog" style="display: none;" onkeypress="return event.keyCode != 13;">
-			<input class="item bg input" type="text" name="title" value="" placeholder="Title">
-			<div class="item"><?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?></div>
-		</form>
+			<form id="add-dialog" style="display: none;" onkeypress="return event.keyCode != 13;">
+				<input class="item bg input" type="text" name="title" value="" placeholder="Title">
+				<div class="item"><?php echo $G->templateSelectBox('add-dialog-select', 'theme_template'); ?></div>
+			</form>
 
-		<div class="item">
-			<button id="files" class="bg button">Manage Files</button>
-		</div>
+			<div class="item">
+				<button id="files" class="bg button">Manage Files</button>
+			</div>
 
-	</div>	
-
-</div>	
-
-<div class="box big">
+		</div>	
+		
+	</div>
 
 	<form id="edit" class="item" method="post">
 	
@@ -376,17 +374,17 @@ $G->element('header_1200');
 		<input type="hidden" name="action" value="edit" />
 	
 		<div class="item">
-			<div id="title">
-				<label for="edit-data-title" class="bg input"><?php echo ucwords(AM_KEY_TITLE); ?></label>
+			<div id="edit-title-box">
+				<label for="edit-data-title" class="bg"><?php echo ucwords(AM_KEY_TITLE); ?></label>
 				<input id="edit-data-title" class="bg input" type="text" name="edit[data][<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" />
-			</div><div id="prefix">
-				<label for="edit-prefix" class="bg input">Prefix</label>
+			</div><div id="edit-prefix-box">
+				<label for="edit-prefix" class="bg">Prefix</label>
 				<input id="edit-prefix" class="bg input" type="text" name="edit[prefix]" value="<?php echo $G->extractPrefixFromPath($page->path); ?>" <?php if ($page->path == '/') { echo 'disabled'; } ?> onkeypress="return event.keyCode != 13;" />
 			</div>
 		</div>
 	
 		<div class="item">
-			<label for="edit-data-tags" class="bg input"><?php echo ucwords(AM_KEY_TAGS); ?> (comma separated)</label>
+			<label for="edit-data-tags" class="bg"><?php echo ucwords(AM_KEY_TAGS); ?> (comma separated)</label>
 			<input id="edit-data-tags" class="bg input" type="text" name="edit[data][<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
 		</div>
 	
@@ -396,7 +394,7 @@ $G->element('header_1200');
 			// Only user defined vars
 			// Standard vars are processed separately
 			if (!in_array($key, $standardKeys)) {
-				echo '<div class="custom item"><label for="edit-data-' . $key . '" class="bg input">' . ucwords($key) . '</label><textarea id="edit-data-' . $key . '" class="bg input" name="edit[data][' . $key . ']" rows="8">' . $value . '</textarea></div>';	
+				echo '<div class="custom item"><label for="edit-data-' . $key . '" class="bg">' . ucwords($key) . '</label><textarea id="edit-data-' . $key . '" class="bg input" name="edit[data][' . $key . ']" rows="10">' . $value . '</textarea></div>';	
 			}
 		}
 		
@@ -405,11 +403,11 @@ $G->element('header_1200');
 		<button id="edit-addCustom" class="item bg button" type="button">Add another variable</button>
 		
 		<div class="item">
-			<div id="template">
+			<div id="edit-template-box">
 				<?php echo $G->templateSelectBox('edit-theme_template', 'edit[theme_template]', $data[AM_KEY_THEME], $page->template); ?>
-			</div><div id="hidden">
-				<label for="edit-hidden" class="bg input">Visibility</label>
-				<div class="checkbox bg input"><input id="edit-hidden" type="checkbox" name="edit[<?php echo AM_KEY_HIDDEN; ?>]"<?php 
+			</div><div id="edit-hidden-box">
+				<label for="edit-hidden" class="bg">Visibility</label>
+				<div class="checkbox bg"><input id="edit-hidden" type="checkbox" name="edit[<?php echo AM_KEY_HIDDEN; ?>]"<?php 
 					
 						// Check checkbox
 						if (isset($data[AM_KEY_HIDDEN]) && $data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] != 'false') {
@@ -426,7 +424,7 @@ $G->element('header_1200');
 		</div>
 	
 		<div class="item">
-			<label for="edit-redirect" class="bg input">To redirect this page to another location instead of showing its content, just fill in any URL</label>
+			<label for="edit-redirect" class="bg">To redirect this page to another location instead of showing its content, just fill in any URL</label>
 			<input id="edit-redirect" class="bg input" type="text" name="edit[data][<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" onkeypress="return event.keyCode != 13;" />
 		</div>
 	
