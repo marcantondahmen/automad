@@ -26,9 +26,6 @@ RewriteBase /
 # Exclude home page from rewriting
 RewriteRule ^$ - [L]
 
-# Exclude Automad GUI from rewriting
-RewriteRule ^automad - [L]
-
 
 
 
