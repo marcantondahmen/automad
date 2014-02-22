@@ -35,13 +35,7 @@
 
 
 // Base URL for all URLs relative to the root
-if (strpos($_SERVER['SCRIPT_NAME'], '/automad/gui') !== false) {
-	// For all GUI pages, '/automad/gui/*' will be removed
-	define('AM_BASE_URL', substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], '/automad/gui')));
-} else {
-	// For index.php (normal pages) and automad/index.php
-	define('AM_BASE_URL', str_replace(array('/automad/index.php', '/index.php'), '', $_SERVER['SCRIPT_NAME']));
-}
+define('AM_BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
 
 
 // Pretty URLs
