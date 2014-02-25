@@ -46,6 +46,7 @@ require AM_BASE_DIR . '/automad/const.php';
 
 
 // Remove trailing slash from URL to keep relative links consistent
+// and test whether a regular page or the GUI is requested.
 if (isset($_SERVER['PATH_INFO'])) {
 	
 	// Test if PATH_INFO ends with '/' without just being '/',
@@ -54,10 +55,17 @@ if (isset($_SERVER['PATH_INFO'])) {
 		
 		header('Location: ' . AM_BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
 		die;
-			
-	}
 		
-}	
+	}
+	
+	// Test if PATH_INFO is the GUI page and AM_PAGE_GUI is defined (GUI active).
+	if ($_SERVER['PATH_INFO'] == AM_PAGE_GUI && AM_PAGE_GUI) {
+		
+		$gui = true;
+		
+	}
+	
+} 
 
 
 // The cache folder must be writable (resized images), also when caching is disabled!
@@ -78,55 +86,64 @@ spl_autoload_register(function($class) {
 });
 
 
-// Setup basic debugging
-Debug::reportAllErrors();
-Debug::timerStart();
-
-
-// Load page from cache or process template
-$C = new Cache;
-
-if ($C->pageCacheIsApproved()) {
-
-	// If cache is up to date and the cached file exists,
-	// just get the page from the cache.
-	$output = $C->readPageFromCache();
+// Split GUI form regular pages
+if (isset($gui)) {
+	
+	new GUI();
 	
 } else {
+
+	// Setup basic debugging
+	Debug::reportAllErrors();
+	Debug::timerStart();
+
+
+	// Load page from cache or process template
+	$C = new Cache();
+
+	if ($C->pageCacheIsApproved()) {
+
+		// If cache is up to date and the cached file exists,
+		// just get the page from the cache.
+		$output = $C->readPageFromCache();
 	
-	// Else check if the site object cache is ok...
-	if ($C->siteObjectCacheIsApproved()) {
-		
-		// If approved, load site from cache...
-		$S = $C->readSiteObjectFromCache();
-		
 	} else {
 	
-		// Else create new Site.
-		$S = new Site();
-		$C->writeSiteObjectToCache($S);
+		// Else check if the site object cache is ok...
+		if ($C->siteObjectCacheIsApproved()) {
+		
+			// If approved, load site from cache...
+			$S = $C->readSiteObjectFromCache();
+		
+		} else {
+	
+			// Else create new Site.
+			$S = new Site();
+			$C->writeSiteObjectToCache($S);
+	
+		}
+	
+		// Render template
+		$T = new Template($S);
+		$output = $T->render();
+	
+		// Save output to cache...
+		$C->writePageToCache($output);
 	
 	}
-	
-	// Render template
-	$T = new Template($S);
-	$output = $T->render();
-	
-	// Save output to cache...
-	$C->writePageToCache($output);
-	
+
+
+	// Display page
+	echo $output;
+
+
+	// Display execution time, user constants and server info
+	Debug::timerEnd();
+	Debug::uc();
+	Debug::log('Server:');
+	Debug::log($_SERVER);
+
 }
-
-
-// Display page
-echo $output;
-
-
-// Display execution time, user constants and server info
-Debug::timerEnd();
-Debug::uc();
-Debug::log('Server:');
-Debug::log($_SERVER);
 
 
 ?>
