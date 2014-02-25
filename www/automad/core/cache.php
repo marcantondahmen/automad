@@ -262,7 +262,7 @@ class Cache {
 	 *	@return The latest found mtime, which equal basically the site's modification time.
 	 */
 	
-	private function getSiteMTime() {
+	public function getSiteMTime() {
 		
 		if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 		
