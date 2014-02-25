@@ -146,6 +146,10 @@ if (!defined('AM_PAGE_RESULTS_TITLE')) {
 if (!defined('AM_PAGE_RESULTS_URL')) {
 	define('AM_PAGE_RESULTS_URL', '/results');
 }
+// GUI
+if (!defined('AM_PAGE_GUI')) {
+	define('AM_PAGE_GUI', '/gui');
+}
 
 
 // CACHE
