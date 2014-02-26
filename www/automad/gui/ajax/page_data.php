@@ -276,7 +276,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 				<div class="btn-group col-md-12">
 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> Add Variable</button>
 					<a href="" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Discard Changes</a>
-					<button type="submit" class="btn btn-success" data-loading-text="Loading..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
+					<button type="submit" class="btn btn-success" data-loading-text="Saving Changes ..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
 				</div>
 			</div>
 
