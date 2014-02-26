@@ -319,7 +319,7 @@ class GUI {
 						$class = '';
 					}
 				
-					$html .= 	'<li' . $class . '><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"> ' . $title . '</a>' . 
+					$html .= 	'<li' . $class . '><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;' . $title . '</a>' . 
 							$this->siteTree($page->url, $collection, $current, $parameters, $hideCurrent) . '</li>';
 				
 				}
