@@ -227,8 +227,10 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 				<input id="input-prefix" class="form-control input-sm" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" <?php if ($P->path == '/') { echo 'disabled'; } ?> onkeypress="return event.keyCode != 13;" />
 			</div>
 
-			<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $P->template); ?>
-
+			<div class="col-md-6">
+				<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $P->template); ?>
+			</div>
+			
 			<div class="form-group col-md-2">
 				<label for="input-hidden" class="text-muted">Hide page</label>
 				<input id="input-hidden" class="form-control input-sm" type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php 
@@ -290,13 +292,15 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="automad-add-variable-name">Variable Name</label>
-								<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
+								<label for="automad-add-variable-name" class="text-muted">Variable Name</label>
+								<input type="text" class="form-control" id="automad-add-variable-name" />
 							</div>	
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="automad-add-variable-button">Add</button>
+							<div class="btn-group">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" id="automad-add-variable-button">Add</button>
+							</div>
 						</div>
 					</div>
 				</div>
