@@ -85,9 +85,15 @@ $this->element('header');
 					<div class="list-group-item clearfix">
 						
 						<div class="pull-right">
+							
 							<div class="btn-group">
+								
 								<a class="btn btn-default" href="<?php echo AM_BASE_URL . $P->url; ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> Visit Page</a>
-								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Subpage</button>
+								
+								<!-- Add Subpage Button -->
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#automad-add-subpage-modal">
+									<span class="glyphicon glyphicon-plus"></span> Add Subpage
+								</button>
 								
 								<?php if ($P->path != '/') { ?>
 									 
@@ -95,31 +101,60 @@ $this->element('header');
 								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#automad-move-page-modal">
 									<span class="glyphicon glyphicon-arrow-right"></span> Move Page
 								</button>
-								
-								<!-- Move Page Modal -->
-								<div class="modal fade" id="automad-move-page-modal" data-automad-move-page='{"url": "<?php echo $P->url; ?>", "title": "<?php echo $data[AM_KEY_TITLE]; ?>"}'>
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-												<h4 class="modal-title"><span class="glyphicon glyphicon-arrow-right"></span> Move Page to a New Location</h4>
-											</div>
-											<div class="modal-body">
-												<h5>Select a destination page:</h5>
-												<?php echo $this->siteTree('', $this->collection, $P->url, array(), true); ?>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								
+									
 								<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete Page</button>
 								
 								<?php } ?> 
 								
 							</div>
+							
+							<!-- Add Subpage Modal -->
+							<div class="modal fade" id="automad-add-subpage-modal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title">Add Subpage</h4>
+										</div>
+										<form class="automad-form" data-automad-ajax-handler="add_page" role="form">
+											<div class="modal-body">
+												<input type="hidden" name="url" value="<?php echo $P->url; ?>" />
+												<div class="form-group">
+													<label for="add-subpage-title" class="text-muted">Title</label>
+													<input id="add-subpage-title" class="form-control" type="text" name="subpage[<?php echo AM_KEY_TITLE; ?>]" value="" onkeypress="return event.keyCode != 13;" required />
+												</div>
+												<?php echo $this->templateSelectBox('add-subpage-theme_template', 'subpage[theme_template]'); ?>
+											</div>
+											<div class="modal-footer">
+												<div class="btn-group">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Subpage</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Move Page Modal -->
+							<div class="modal fade" id="automad-move-page-modal" data-automad-move-page='{"url": "<?php echo $P->url; ?>", "title": "<?php echo $data[AM_KEY_TITLE]; ?>"}'>
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title">Move Page</h4>
+										</div>
+										<div class="modal-body">
+											<h5>Select a destination:</h5>
+											<?php echo $this->siteTree('', $this->collection, $P->url, array(), true); ?>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 						</div>
 						
 					</div>
