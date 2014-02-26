@@ -88,10 +88,37 @@ $this->element('header');
 							<div class="btn-group">
 								<a class="btn btn-default" href="<?php echo AM_BASE_URL . $P->url; ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> Visit Page</a>
 								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Subpage</button>
-								<?php if ($P->path != '/') { ?> 
-								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> Move Page</button>
+								
+								<?php if ($P->path != '/') { ?>
+									 
+								<!-- Move Page Button -->
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#automad-move-page-modal">
+									<span class="glyphicon glyphicon-arrow-right"></span> Move Page
+								</button>
+								
+								<!-- Move Page Modal -->
+								<div class="modal fade" id="automad-move-page-modal" data-automad-move-page='{"url": "<?php echo $P->url; ?>", "title": "<?php echo $data[AM_KEY_TITLE]; ?>"}'>
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												<h4 class="modal-title"><span class="glyphicon glyphicon-arrow-right"></span> Move Page to a New Location</h4>
+											</div>
+											<div class="modal-body">
+												<h5>Select a destination page:</h5>
+												<?php echo $this->siteTree('', $this->collection, $P->url, array(), true); ?>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								
 								<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete Page</button>
+								
 								<?php } ?> 
+								
 							</div>
 						</div>
 						
