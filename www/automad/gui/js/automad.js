@@ -140,7 +140,7 @@ $(document).on('submit', '.automad-form', function(e) {
 	
 	// Post form data to the handler.
 	$.post('?ajax=' + handler, form.serialize(), function(data) {
-	
+		
 		// In case the returned JSON contains a redirect URL, simply redirect the page.
 		// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 		if (data.redirect) {
@@ -149,7 +149,14 @@ $(document).on('submit', '.automad-form', function(e) {
 		
 		// Display error, if existing.
 		if (data.error) {
-			$('<div class="col-md-12 alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').insertBefore(form);
+			
+			// Check if form is wrapped in a modal window, to determine the insertion point for the alert box.
+			if (form.parents('.modal-dialog').length !== 0) {
+				$('<div class="alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').prependTo(form.find('.modal-body'));
+			} else {
+				$('<div class="alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').insertBefore(form);
+			}
+			
 		}
 		
 		// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
@@ -222,7 +229,7 @@ $(document).ready(function() {
 	$('#script').show();
 
 	// Submit automad forms to get initial AJAX content.
-	$('.automad-form').trigger('submit');
+	$('#data .automad-form').trigger('submit');
 	
 });
 
