@@ -372,7 +372,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group col-md-6"><label for="' . $id . '" class="text-muted">Theme</label><select id="' . $id . '" class="form-control input-sm" name="' . $name . '" size="1">'; 
+		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">Theme</label><select id="' . $id . '" class="form-control input-sm" name="' . $name . '" size="1">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
