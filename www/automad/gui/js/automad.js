@@ -78,6 +78,41 @@ $(document).on('click', '#automad-add-variable-button', function() {
 
 
 // ===================================================
+// Button: Move Page (Select Destination from Tree) 
+// ===================================================
+
+$(document).on('click', '#automad-move-page-modal a', function() {
+	
+	var	modal =		$('#automad-move-page-modal'),
+		modalBody =	modal.find('.modal-body'),
+		// Get the URL and title from the current page.
+		page =		modal.data('automadMovePage'),
+		// Get the destination from the clicked link within the tree.
+		destination =	decodeURIComponent($(this).attr('href').split('=')[1]);
+		
+	// Post request.
+	$.post('?ajax=move_page', {url: page.url, title: page.title, destination: destination}, function(data) {
+		
+		// Redirect on success to updated page.
+		if (data.redirect) {
+			window.location.href = data.redirect;
+		}
+		
+		// Error message.
+		if (data.error) {
+			$('<div class="alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').prependTo(modalBody);
+		}
+		
+	}, 'json');
+	
+	return false;
+	
+});
+
+
+
+
+// ===================================================
 // Button: Remove parent container
 // ===================================================
 
