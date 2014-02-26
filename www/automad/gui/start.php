@@ -57,7 +57,7 @@ $this->element('header');
 
 		<div class="row">
 
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-8 col-md-offset-2">
 
 				<div class="list-group">
 					
@@ -71,11 +71,21 @@ $this->element('header');
 						<h5>Your site got modified the last time on<br /><strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.</h5>	
 					</div>
 					
-					<a class="list-group-item" href="?context=system_settings"><h5><span class="glyphicon glyphicon-cog"></span> System Settings</h5></a>
+					<a class="list-group-item" href="?context=system_settings">
+						<h4><span class="glyphicon glyphicon-cog"></span> System Settings</h4>
+						<p class="text-muted">Cache Settings / User Accounts / Configuration Overrides</p>
+					</a>
 					
-					<a class="list-group-item" href="?context=edit_shared"><h5><span class="glyphicon glyphicon-globe"></span> Global Content &amp; Settings</h5></a>
+					<a class="list-group-item" href="?context=edit_shared">
+						<h4><span class="glyphicon glyphicon-globe"></span> Global Content &amp; Settings</h4>
+						<p class="text-muted">Site Name / Global Files / Global Theme / Global Variables</p>
+					</a>
 					
-					<a class="list-group-item" href="#" data-toggle="modal" data-target="#pagesModal"><h5><span class="label label-default"><?php echo count($this->collection); ?></span> Pages</h5></a>
+					<a class="list-group-item" href="#" data-toggle="modal" data-target="#pagesModal">
+						<span class="badge"><?php echo count($this->collection); ?></span>
+						<h4><span class="glyphicon glyphicon-list"></span> Pages</h4>
+						<p class="text-muted">Move, Add or Delete Pages / Manage Page Content, Files and Settings</p>
+					</a>
 
 					<!-- Modal -->
 					<div class="modal fade" id="pagesModal" tabindex="-1" role="dialog" aria-labelledby="pagesModalLabel" aria-hidden="true">
@@ -83,7 +93,7 @@ $this->element('header');
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="pagesModalLabel">Edit Page</h4>
+									<h4 class="modal-title" id="pagesModalLabel">Select Page</h4>
 								</div>
 								<div class="modal-body">
 									<?php echo $this->siteTree('', $this->collection, Parse::queryKey('url'), array('context' => 'edit_page'), false); ?>
@@ -95,7 +105,7 @@ $this->element('header');
 						</div>
 					</div>		
 					
-					<a class="list-group-item" href="?context=logout"><h5><span class="glyphicon glyphicon-off"></span> Log Out "<?php echo ucwords($this->user()); ?>"</h5></a>
+					<a class="list-group-item" href="?context=logout"><h5 class="text-muted"><span class="glyphicon glyphicon-off"></span> Log Out "<?php echo ucwords($this->user()); ?>"</h5></a>
 				
 				</div>
 
