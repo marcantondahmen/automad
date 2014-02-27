@@ -101,8 +101,11 @@ $this->element('header');
 								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#automad-move-page-modal">
 									<span class="glyphicon glyphicon-arrow-right"></span> Move Page
 								</button>
-									
-								<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete Page</button>
+								
+								<!-- Delete Page Button -->	
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#automad-delete-page-modal">
+									<span class="glyphicon glyphicon-trash"></span> Delete Page
+								</button>
 								
 								<?php } ?> 
 								
@@ -155,6 +158,32 @@ $this->element('header');
 								</div>
 							</div>
 							
+							<!-- Delete Page Confirm Modal -->
+							<div class="modal fade" id="automad-delete-page-modal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title">Delete Page</h4>
+										</div>
+										<form class="automad-form" data-automad-ajax-handler="delete_page" role="form">
+											<input type="hidden" name="url" value="<?php echo $P->url; ?>" />
+											<input type="hidden" name="title" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
+											<div class="modal-body">
+												<h4>Are you sure you want to move "<?php echo $data[AM_KEY_TITLE]; ?>" to the trash bin?</h4>
+												<p>The page and all of its subpages will be moved to "<?php echo AM_DIR_TRASH; ?>", in case you want to restore the page's directory later.</p>
+											</div>
+											<div class="modal-footer">
+												<div class="btn-group">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+													<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete Page</button>
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+							</div>
+						
 						</div>
 						
 					</div>
