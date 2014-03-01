@@ -227,7 +227,7 @@ class Site {
 								if (array_key_exists(AM_KEY_THEME, $data) && $data[AM_KEY_THEME]) {
 									$theme = $data[AM_KEY_THEME];
 								} else {
-									$theme = $this->getSiteData(AM_KEY_THEME);;
+									$theme = $this->getSiteData(AM_KEY_THEME);
 								}
 							
 								// Check if the page should be hidden from selections.

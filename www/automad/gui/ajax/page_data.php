@@ -299,10 +299,8 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					</ul>
 				</div>
 
-				<div class="list-group-item clearfix">
-						
+				<div class="list-group-item clearfix">	
 					<button type="submit" class="btn btn-success btn-block" data-loading-text="Saving Changes ..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
-					
 				</div>
 
 			</div>
