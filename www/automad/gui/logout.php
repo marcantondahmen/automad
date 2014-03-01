@@ -58,15 +58,14 @@ $this->element('header');
 	<div class="row">
 
 		<div class="col-md-4 col-md-offset-4">
+			
+			<?php $this->element('title'); ?>
 	
 			<div class="list-group">
 				
-				<?php $this->element('title'); ?>
-				
-				<div class="list-group-item list-group-item-success">
-					<span class="glyphicon glyphicon-off"></span> Logged Out Successfully!
+				<div class="list-group-item">
+					<h4>Logged Out!</h4>
 				</div>
-				
 				
 				<div class="list-group-item clearfix">
 					<div class="pull-right">
