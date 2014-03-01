@@ -46,6 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $output = array();
+$output['debug'] = $_POST;
 
 
 // Validate $_POST.
@@ -54,6 +55,9 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection) &
 	$P = $this->collection[$_POST['url']];
 	$this->movePage($P->path, '..' . AM_DIR_TRASH . dirname($P->path), $this->extractPrefixFromPath($P->path), $_POST['title']);
 	$output['redirect'] = '?context=edit_page&url=' . urlencode($P->parentUrl);
+	
+	$C = new Cache();
+	$C->clear();
 	
 } else {
 	
