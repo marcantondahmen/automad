@@ -41,7 +41,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The GUI Login Page. As part of the GUI, this file is only to be included via GUI::context().
+ *	The GUI Login Page. As part of the GUI, this file is only to be included via the GUI class.
  */
 
 
@@ -75,16 +75,16 @@ $this->element('header');
 	<div class="row">
 	
 		<div class="col-md-4 col-md-offset-4">
+			
+			<?php $this->element('title'); ?>
+			
+			<?php if (isset($error)) { ?><div class="alert alert-danger"><?php echo $error; ?></div><?php } ?>
 		
 			<div class="list-group">
 				
-				<?php $this->element('title'); ?>
-				
-				<div class="list-group-item list-group-item-info">
+				<div class="list-group-item">
 					<h4>Login</h4>			
 				</div>
-      
-      			  	<?php if (isset($error)) { ?><div class="list-group-item list-group-item-danger"><?php echo $error; ?></div><?php } ?>
       
 				<div class="list-group-item clearfix">
 			      
