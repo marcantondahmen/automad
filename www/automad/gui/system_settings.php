@@ -41,7 +41,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The GUI Sytem Settings' Page. As part of the GUI, this file is only to be included via GUI::context().
+ *	The GUI Sytem Settings' Page. As part of the GUI, this file is only to be included via the GUI class.
  */
 
 
