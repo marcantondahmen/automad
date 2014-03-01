@@ -46,6 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $output = array();
+$output['debug'] = $_POST;
 
 
 // Validation of $_POST.
