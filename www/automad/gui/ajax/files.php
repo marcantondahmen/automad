@@ -41,8 +41,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	File Manager. In case the submitted form contains a hidden URL-Field, the files of that page will be managed.
- *	If there is NO hidden URL-Field, the files under "/shared" will be managed instead.
+ *	File Manager. In case $_POST['url'] is defined, the files of that page will be managed.
+ *	Else, the files under "/shared" will be managed instead.
  *
  *	Basically the inner (!) HTML form the calling form will be replaced with the updated file list. 
  *	So that means, that the outer form tags are NOT part of the HTML output!
@@ -114,6 +114,10 @@ foreach ($allowedFileTypes as $type) {
 ?>
 
 <div class="list-group">
+	
+	<div class="list-group-item">
+		<h5 class="text-muted"><?php echo $path; ?></h5>
+	</div>
 	
 	<?php
 
