@@ -37,5 +37,5 @@
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-?><a class="list-group-item" href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>"><h4>Automad</h4></a><a class="list-group-item" href="<?php echo AM_BASE_URL; ?>/" target="_blank"><h5><?php echo $this->siteName(); ?></h5></a>
+?><div class="list-group"><a class="list-group-item" href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>"><h2>Automad</h2></a><a class="list-group-item" href="<?php echo AM_BASE_URL; ?>/" target="_blank"><h4><?php echo $this->siteName(); ?></h4></a></div>
 		
