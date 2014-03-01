@@ -49,12 +49,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The form already exists on the "client side".
  *
  *	When only "$_POST['url']" got submitted, that means, the the form on the "client side" is still empty and therefore it must be an initial page loading request, which then will return 
- *	the page's data as the form HTML.	
+ *	the page's data as the form HTML.
+ *
+ *	NOTE: Only the inner elements of the form are returned. To keep the outer form information lose form the processing here, there must be an outer form existing on the page to wrap that HTML output.	
  */
 
 
 // Array for returned JSON data.
 $output = array();
+$output['debug'] = $_POST;
 
 
 // Verify page's URL - The URL must exist in the site's collection.
@@ -204,82 +207,104 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		if (!$data[AM_KEY_TITLE]) {
 			$data[AM_KEY_TITLE] = basename($P->url);
 		}
+		
+		// Check if page is hidden.
+		if (isset($data[AM_KEY_HIDDEN]) && $data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] != 'false') {
+			$hidden = true;
+		} else {
+			$hidden = false;
+		} 
 	
 		// Start buffering the HTML.
 		ob_start();
 
 		?>
-
-			<input type="hidden" name="url" value="<?php echo $P->url; ?>" />
-
-			<div class="form-group col-md-12">
-				<label for="input-data-title" class="text-muted"><?php echo ucwords(AM_KEY_TITLE); ?></label>
-				<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
-			</div>
-
-			<div class="form-group col-md-12">
-				<label for="input-data-tags" class="text-muted"><?php echo ucwords(AM_KEY_TAGS); ?> (comma separated)</label>
-				<input id="input-data-tags" class="form-control input-sm" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
-			</div>
-
-			<div class="form-group col-md-4">
-				<label for="input-prefix" class="text-muted">Prefix (Order in Navigation)</label>
-				<input id="input-prefix" class="form-control input-sm" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" <?php if ($P->path == '/') { echo 'disabled'; } ?> onkeypress="return event.keyCode != 13;" />
-			</div>
-
-			<div class="col-md-6">
-				<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $P->template); ?>
-			</div>
 			
-			<div class="form-group col-md-2">
-				<label for="input-hidden" class="text-muted">Hide page</label>
-				<input id="input-hidden" class="form-control input-sm" type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php 
+			<div class="list-group">
+			
+				<div class="list-group-item">
+			
+					<div class="row">
+			
+						<h4 class="col-md-12">Main Properties</h4>
+									
+						<div class="form-group col-md-12">
+							<label for="input-data-title" class="text-muted"><?php echo ucwords(AM_KEY_TITLE); ?></label>
+							<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
+						</div>
 
-					// Check checkbox
-					if (isset($data[AM_KEY_HIDDEN]) && $data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] != 'false') {
-						echo ' checked';
-					}; 
+						<div class="form-group col-md-12">
+							<label for="input-data-tags" class="text-muted"><?php echo ucwords(AM_KEY_TAGS); ?> (comma separated)</label>
+							<input id="input-data-tags" class="form-control input-sm" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
+						</div>
 
-					// Disable for home page
-					if ($P->path == '/') { 
-						echo ' disabled'; 
-					}
+						<?php if ($P->path != '/') { ?>
 
-				?> />
-
-			</div>
-
-			<div class="form-group col-md-12">
-				<label for="input-redirect" class="text-muted">Redirect URL</label>
-				<input id="input-redirect" class="form-control input-sm" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" placeholder="http://" onkeypress="return event.keyCode != 13;" />
-			</div>
-
-			<div id="automad-custom-variables">
-				<?php
-
-				foreach ($data as $key => $value) {
+						<div class="form-group col-md-4">
+							<label for="input-prefix" class="text-muted">Prefix (Order in Navigation)</label>
+							<input id="input-prefix" class="form-control input-sm" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" onkeypress="return event.keyCode != 13;" />
+						</div>
+			
+						<div class="col-md-2">
+							<label>&nbsp;</label>
+							<div class="btn-group btn-group-justified" data-toggle="buttons">
+								<label class="btn btn-sm btn-default<?php if ($hidden) { echo ' active'; } ?>"><span class="glyphicon glyphicon-eye-close"></span> Hide page
+									<input type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
+								</label>
+							</div>
+						</div>
+			
+						<div class="col-md-6">
+				
+						<?php } else { ?><div class="col-md-12"><?php } ?>
+							<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $P->template); ?>
+						</div>
+			
+						<div class="form-group col-md-12">
+							<label for="input-redirect" class="text-muted">Redirect URL</label>
+							<input id="input-redirect" class="form-control input-sm" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" placeholder="http://" onkeypress="return event.keyCode != 13;" />
+						</div>
 					
-					// Only user defined custom variables.
-					// Standard vars are processed separately
-					if (!in_array($key, $standardKeys)) {
-						echo 	'<div class="form-group col-md-12">' . 
-							'<label for="input-data-' . $key . '" class="text-muted">' . ucwords($key) . '</label>' .
-							'<button type="button" class="close automad-remove-parent">&times;</button>' .
-							'<textarea id="input-data-' . $key . '" class="form-control input-sm" name="data[' . $key . ']" rows="10">' . $value . '</textarea>' .
-							'</div>';	
-					}
+					</div>
 					
-				}
-
-				?>
-			</div>
-
-			<div class="pull-right">
-				<div class="btn-group col-md-12">
-					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> Add Variable</button>
-					<a href="" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Discard Changes</a>
-					<button type="submit" class="btn btn-success" data-loading-text="Saving Changes ..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
 				</div>
+
+				<div class="list-group-item" id="automad-custom-variables">
+					
+					<h4>Custom Content</h4>
+					
+					<?php
+
+					foreach ($data as $key => $value) {
+					
+						// Only user defined custom variables.
+						// Standard vars are processed separately
+						if (!in_array($key, $standardKeys)) {
+							echo 	'<div class="form-group">' . 
+								'<label for="input-data-' . $key . '" class="text-muted">' . ucwords($key) . '</label>' .
+								'<button type="button" class="close automad-remove-parent">&times;</button>' .
+								'<textarea id="input-data-' . $key . '" class="form-control input-sm" name="data[' . $key . ']" rows="10">' . $value . '</textarea>' .
+								'</div>';	
+						}
+					
+					}
+
+					?>
+				</div>
+
+				<div class="list-group-item">
+					<ul class="nav nav-pills nav-justified">
+						<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> Add Variable</a></li>
+						<li><a href=""><span class="glyphicon glyphicon-remove"></span> Discard Changes</a></li>
+					</ul>
+				</div>
+
+				<div class="list-group-item clearfix">
+						
+					<button type="submit" class="btn btn-success btn-block" data-loading-text="Saving Changes ..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
+					
+				</div>
+
 			</div>
 
 			<!-- Add Variable Modal -->	
@@ -293,7 +318,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="automad-add-variable-name" class="text-muted">Variable Name</label>
-								<input type="text" class="form-control" id="automad-add-variable-name" />
+								<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
 							</div>	
 						</div>
 						<div class="modal-footer">
@@ -313,7 +338,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		$output['html'] = ob_get_contents();
 		ob_end_clean();
 			
-		
+	
 	}
 	
 	
