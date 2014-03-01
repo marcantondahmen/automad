@@ -80,6 +80,9 @@ class GUI {
 	 *	When there is no context passed via get, it gets checked for "ajax", to possibly call a matching ajax module.
 	 *	If both is negative, the start page's module gets included.
 	 *
+	 *	Example: 	http://domain.com/gui?context=edit_page will include automad/gui/edit_page.php
+	 *	Example Ajax:	http://domain.com/gui?ajax=page_data will include automad/gui/ajax/page_data.php
+	 *
 	 *	Since every request for the gui (pages and ajax) gets still routed over "/index.php" > "/automad/init.php" > new GUI(), 
 	 *	all the session/login checking needs only to be done here once, simply because all modules get includede here.   
 	 */
@@ -148,26 +151,6 @@ class GUI {
 		
 		return substr(basename($path), 0, strpos(basename($path), '.'));
 			
-	}
-
-
-	/**
-	 *	Test if a given path resolves to a path below the base directory, to validate a user's input.
-	 *
-	 *	@param string $path
-	 *	@return true/false
-	 */
-
-	public function isBelowBaseDir($path) {
-		
-		$real = realpath($path);
-		
-		if (substr($real, 0, strlen(AM_BASE_DIR)) == AM_BASE_DIR) {
-			return true;
-		} else {
-			return false;
-		}
-		
 	}
 
 
@@ -372,7 +355,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">Theme</label><select id="' . $id . '" class="form-control input-sm" name="' . $name . '" size="1">'; 
+		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">Template</label><select id="' . $id . '" class="form-control input-sm" name="' . $name . '" size="1">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
