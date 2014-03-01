@@ -80,8 +80,8 @@ class GUI {
 	 *	When there is no context passed via get, it gets checked for "ajax", to possibly call a matching ajax module.
 	 *	If both is negative, the start page's module gets included.
 	 *
-	 *	Example: 	http://domain.com/gui?context=edit_page will include automad/gui/edit_page.php
-	 *	Example Ajax:	http://domain.com/gui?ajax=page_data will include automad/gui/ajax/page_data.php
+	 *	Example Context: 	http://domain.com/gui?context=edit_page will include 	automad/gui/context/edit_page.php
+	 *	Example Ajax:		http://domain.com/gui?ajax=page_data will include 	automad/gui/ajax/page_data.php
 	 *
 	 *	Since every request for the gui (pages and ajax) gets still routed over "/index.php" > "/automad/init.php" > new GUI(), 
 	 *	all the session/login checking needs only to be done here once, simply because all modules get includede here.   
@@ -102,28 +102,28 @@ class GUI {
 			$this->collection = $S->getCollection();
 				
 			// Check if context/ajax matches an existing .php file.
-			// If there is no (or no matchin context), load start page.
-			if (in_array(AM_BASE_DIR . '/automad/gui/' . Parse::queryKey('context') . '.php', glob(AM_BASE_DIR . '/automad/gui/*.php'))) {		
-				$context = Parse::queryKey('context');
+			// If there is no (or no matching context), load the start page.
+			if (in_array(AM_BASE_DIR . '/automad/gui/context/' . Parse::queryKey('context') . '.php', glob(AM_BASE_DIR . '/automad/gui/context/*.php'))) {		
+				$inc = 'context/' . Parse::queryKey('context');
 			} else if (in_array(AM_BASE_DIR . '/automad/gui/ajax/' . Parse::queryKey('ajax') . '.php', glob(AM_BASE_DIR . '/automad/gui/ajax/*.php'))) {		
-				$context = 'ajax/' . Parse::queryKey('ajax');
+				$inc = 'ajax/' . Parse::queryKey('ajax');
 			} else {
-				$context = 'start';
+				$inc = 'start';
 			}
 	
 		} else {
 	
-			// If no user is logged in, check if accounts.txt exists. If yes, set the context to the login page, else to the installer.
+			// If no user is logged in, check if accounts.txt exists. If yes, set $inc to the login page, else to the installer.
 			if (file_exists(AM_FILE_ACCOUNTS)) {
-				$context = 'login';
+				$inc = 'login';
 			} else {
-				$context = 'install';
+				$inc = 'install';
 			}
 
 		}
 		
 		// Load page according to the current context.
-		require AM_BASE_DIR . '/automad/gui/' . $context . '.php';	
+		require AM_BASE_DIR . '/automad/gui/' . $inc . '.php';	
 		
 	}
 	
@@ -366,7 +366,7 @@ class GUI {
 				 $html .= ' selected';
 			}
 
-			$html .= ' value="' . basename($template) . '">' . ucwords(str_replace('.php', '', basename($template))) . ' (Theme from Site Settings)</option>';
+			$html .= ' value="' . basename($template) . '">' . ucwords(str_replace('.php', '', basename($template))) . ' (Global Theme)</option>';
 
 		}
 
