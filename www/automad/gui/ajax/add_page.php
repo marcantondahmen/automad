@@ -46,6 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $output = array();
+$output['debug'] = $_POST;
 
 
 // Validation of $_POST. URL, title and template must exist and != false.
@@ -61,15 +62,14 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection) &
 	$theme_template = $_POST['subpage']['theme_template'];
 
 
+	// Build initial content for data file.
+	$content = AM_KEY_TITLE . AM_PARSE_PAIR_SEPARATOR . ' ' . $title;
+	
+
 	// The new page's theme.
 	if (dirname($theme_template) != '.') {
-		$theme = dirname($theme_template);
-	} else {
-		$theme = '';
-	}
-
-	// Build initial content for data file.
-	$content = AM_KEY_TITLE . AM_PARSE_PAIR_SEPARATOR . ' ' . $title . "\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n" . AM_KEY_THEME . AM_PARSE_PAIR_SEPARATOR . ' ' . $theme;
+		$content .= "\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n" . AM_KEY_THEME . AM_PARSE_PAIR_SEPARATOR . ' ' . dirname($theme_template);
+	} 
 
 
 	// Save new subpage below the current page's path.		
