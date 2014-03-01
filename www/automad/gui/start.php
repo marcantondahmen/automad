@@ -41,7 +41,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The GUI Start Page. As part of the GUI, this file is only to be included via GUI::context().
+ *	The GUI Start Page. As part of the GUI, this file is only to be included via the GUI class.
  */
 
 
@@ -57,20 +57,24 @@ $this->element('header');
 
 		<div class="row">
 
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-6 col-md-offset-3">
+
+				<?php $this->element('title'); ?>
 
 				<div class="list-group">
 					
-					<?php $this->element('title'); ?>
-					
-					<div class="list-group-item list-group-item-info">
+					<div class="list-group-item">
 						<h3>Welcome <strong><?php echo ucwords($this->user()); ?></strong></h3>
 					</div>	
 					
-					<div class="list-group-item list-group-item-info">	
+					<div class="list-group-item">	
 						<h5>Your site got modified the last time on<br /><strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.</h5>	
 					</div>
 					
+				</div>	
+					
+				<div class="list-group">	
+				
 					<a class="list-group-item" href="?context=system_settings">
 						<h4><span class="glyphicon glyphicon-cog"></span> System Settings</h4>
 						<p class="text-muted">Cache Settings / User Accounts / Configuration Overrides</p>
