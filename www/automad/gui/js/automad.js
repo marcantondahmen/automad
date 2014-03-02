@@ -213,6 +213,20 @@ $(document).on('submit', '.automad-form', function(e) {
 	
 });
 
+// Disable Save/Delete buttons for #data and #files when ajax completes.
+$(document).ajaxComplete(function() {
+	$('#data [type="submit"], #files [type="submit"]').prop('disabled', true).removeClass('btn-success btn-danger');
+});
+
+// Re-enable after touching any form element.
+$(document).on('change click', '#data form *', function() {
+	$('#data [type="submit"]').prop('disabled', false).addClass('btn-success');
+});
+
+$(document).on('change', '#files input', function() {
+	$('#files [type="submit"]').prop('disabled', false).addClass('btn-danger');
+});
+
 
 
 
@@ -434,7 +448,7 @@ $(document).ready(function() {
 
 	// Submit automad forms to get initial AJAX content.
 	$('#data .automad-form, #files .automad-form').trigger('submit');
-	
+
 });
 
 
