@@ -53,9 +53,6 @@ $output = array();
 $output['debug'] = $_POST;
 
 
-ob_start();
-
-
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, the submitting form needs a hidden URL field.
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
@@ -75,6 +72,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 // Delete file in $_POST['delete'].
 if (isset($_POST['delete'])) {
 	
+	$success = array();
 	$errors = array();
 	
 	foreach ($_POST['delete'] as $f) {
@@ -83,13 +81,16 @@ if (isset($_POST['delete'])) {
 		$file = $path . basename($f);
 		
 		if (is_writable($file)) {
-			unlink($file);
+			if (unlink($file)) {
+				$success[] = 'Successfully deleted <strong>' . basename($file) . '</strong>';
+			}
 		} else {
-			$errors[] = 'Can not delete "' . basename($file) . '"';
+			$errors[] = 'Can not delete <strong>' . basename($file) . '</strong>';
 		} 
 	
 	}
 	
+	$output['success'] = implode('<br />', $success);
 	$output['error'] = implode('<br />', $errors);
 
 }
@@ -109,6 +110,9 @@ $files = array();
 foreach ($allowedFileTypes as $type) {	 	
 	$files = array_merge($files, glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE));
 }
+
+
+ob_start();
 
 
 ?>
