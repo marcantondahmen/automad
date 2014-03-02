@@ -189,6 +189,18 @@ $(document).on('submit', '.automad-form', function(e) {
 			
 		}
 		
+		// Display success, if existing.
+		if (data.success) {
+			
+			// Check if form is wrapped in a modal window, to determine the insertion point for the alert box.
+			if (form.parents('.modal-dialog').length !== 0) {
+				$('<div class="alert alert-success alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.success + '</div>').prependTo(form.find('.modal-body'));
+			} else {
+				$('<div class="alert alert-success alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.success + '</div>').insertBefore(form);
+			}
+			
+		}
+		
 		// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
 		if (data.html) {
 			form.html(data.html);
