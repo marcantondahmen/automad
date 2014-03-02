@@ -148,27 +148,28 @@ $(document).on('submit', '.automad-form', function(e) {
 		btn =		form.find('button[type="submit"]'),
 		// Action
 		handler = 	form.data('automadHandler'),
-		// Page "ID"
-		url =		form.data('automadUrl');
+		// Optional URL parameter.
+		// Only needed, to identify a page, in case the form relates to a certain page (edit_page.php).
+		// Can be omitted for general form actions.
+		url =		form.data('automadUrl'),
+		param =		form.serializeArray();
 			
 	
-	// Build request string
-	if (form.serialize()) {
-		var 	request = 'url=' + encodeURIComponent(url) + '&' +form.serialize();
-	} else {
-		var 	request = 'url=' + encodeURIComponent(url);
+	// Add URL to parameters, if existing.	
+	if (url) {
+		param.push({name: 'url', value: url});
 	}
-	
+
 		
 	// Set loading state for the submit button.	
 	btn.button('loading');
 	
 	
 	// Post form data to the handler.
-	$.post('?ajax=' + handler, request, function(data) {
+	$.post('?ajax=' + handler, param, function(data) {
 		
 		// Debug
-		console.log(data);
+		console.log(data.debug);
 			
 		// In case the returned JSON contains a redirect URL, simply redirect the page.
 		// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
