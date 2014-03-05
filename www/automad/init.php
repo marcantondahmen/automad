@@ -88,14 +88,10 @@ spl_autoload_register(function($class) {
 // Split GUI form regular pages
 if (isset($gui)) {
 	
-	new GUI();
+	$G = new GUI();
+	$output = $G->output;
 	
 } else {
-
-	// Setup basic debugging
-	Debug::reportAllErrors();
-	Debug::timerStart();
-
 
 	// Load page from cache or process template
 	$C = new Cache();
@@ -130,19 +126,12 @@ if (isset($gui)) {
 		$C->writePageToCache($output);
 	
 	}
-
-
-	// Display page
-	echo $output;
-
-
-	// Display execution time, user constants and server info
-	Debug::timerEnd();
-	Debug::uc();
-	Debug::log('Server:');
-	Debug::log($_SERVER);
-
+	
 }
+
+
+// If debug is enabled, prepend the logged information to the closing </body> tag and echo the page.
+echo str_replace('</body>', Debug::getLog() . '</body>', $output);
 
 
 ?>
