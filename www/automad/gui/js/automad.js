@@ -432,6 +432,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 	// Show modal
 	modal.modal({
 		show: true,
+		backdrop: 'static',
 		keyboard: false
         });
 	
