@@ -82,7 +82,7 @@ $this->element('header');
 			
 					<a class="list-group-item" href="<?php echo AM_BASE_URL . $P->url; ?>" target="_blank"><h4><?php echo $P->url; ?></h4></a>
 					
-					<div class="list-group-item clearfix">
+					<div class="list-group-item">
 						
 						<ul class="nav nav-pills nav-justified">
 							
