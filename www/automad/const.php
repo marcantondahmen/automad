@@ -34,6 +34,16 @@
  */
 
 
+// Set config file
+define('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
+
+
+// Parse AM_CONFIG to set user overrides for the below defined constants.
+foreach (json_decode(file_get_contents(AM_CONFIG), true) as $key => $value) {
+	define($key, $value);	
+}
+
+
 // Base URL for all URLs relative to the root
 define('AM_BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
 
@@ -51,9 +61,6 @@ if (file_exists(AM_BASE_DIR . '/.htaccess')) {
 // DEBUG
 if (!defined('AM_DEBUG_ENABLED')) {
 	define('AM_DEBUG_ENABLED', false);
-}
-if (!defined('AM_DEBUG_CONSOLE')) {
-	define('AM_DEBUG_CONSOLE', false);
 }
 
 
@@ -338,7 +345,7 @@ if (!defined('AM_KEY_URL')) {
 
 
 // Version number 
-include(AM_BASE_DIR . '/automad/version.php');
+include AM_BASE_DIR . '/automad/version.php';
 
 
 // License key
