@@ -42,8 +42,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  *	The Debug class holds all methods to help debugging while development.
- *	
  *	The output of all the contained methods can be activated/deactivated with defining the AM_DEBUG_ENABLED constant.
+ *	All logged information will be stored in $buffer as JS's console.log() items.
  */
 
 
@@ -51,7 +51,48 @@ class Debug {
 	
 	
 	/**
-	 *	Output any variable or object formatted
+	 *	Log buffer.
+	 */
+	
+	private static $buffer = '';
+	
+	
+	/**
+	 *	Timestamp when script started.
+	 */
+	
+	private static $time = NULL;
+	
+	
+	/**
+	 *	Stop timer, calculate execution time, get user & server constants and return the log buffer.
+	 */
+	
+	public static function getLog() {
+		
+		if (AM_DEBUG_ENABLED) {
+			
+			// Stop timer.	
+			if (self::$time) {
+				$executionTime = microtime(true) - self::$time;
+				self::log('TIMER END');
+				self::log('Time for execution: ' . $executionTime . ' seconds');
+			}	
+			
+			// Get user & server constants.
+			self::uc();
+			self::log('Server:');
+			self::log($_SERVER);
+			
+			return self::$buffer;
+			
+		}
+		
+	}
+	
+	
+	/**
+	 *	Log any kind of variable and append it as JS console.log item to $buffer.
 	 *
 	 *	@param mixed $var
 	 */
@@ -60,67 +101,13 @@ class Debug {
 		
 		if (AM_DEBUG_ENABLED) {
 			
-			if (AM_DEBUG_CONSOLE) {
-			
-				echo "<script type='text/javascript'>console.log(";
-				echo json_encode($var);
-				echo ");</script>\n";
-				
-				
-			} else {
-			
-				echo "<pre>";
-				print_r($var);
-				echo "</pre>\n";
-			
+			// Start timer on first call.
+			if (!self::$time) {
+				self::$time = microtime(true);
+				self::log('TIMER START');
 			}
 			
-		}
-		
-	}
-		 
-	
-	/**
-	 *	Turn on error reporting.
-	 */
-	
-	public static function reportAllErrors() {
-		
-		if (AM_DEBUG_ENABLED) {
-		
-			error_reporting(E_ALL);
-			
-		}
-		
-	}
-	
-	
-	/**
-	 *	Save the current microtime to a constant. 
-	 */
-	
-	public static function timerStart() {
-		
-		if (AM_DEBUG_ENABLED) {
-			
-			define('AM_DEBUG_TIMER_START', microtime(true));
-			
-		}	
-		
-	}
-	
-	
-	/**
-	 *	Substract the initial microtime (stored in AM_DEBUG_TIMER_START) from the current microtime 
-	 *	and print out the difference.
-	 */
-	
-	public static function timerEnd() {
-		
-		if (AM_DEBUG_ENABLED) {
-			
-			$seconds = microtime(true) - AM_DEBUG_TIMER_START;
-			Debug::log('Time for execution: ' . $seconds . ' seconds');
+			self::$buffer .= "<script type='text/javascript'>console.log(" . json_encode($var) . ");</script>\n";
 			
 		}
 		
@@ -133,14 +120,10 @@ class Debug {
 	
 	public static function uc() {
 		
-		if (AM_DEBUG_ENABLED) {
-		
-			$definedConstants = get_defined_constants(true);
-			$userConstants = $definedConstants['user'];
-			Debug::log('User constants:');
-			Debug::log($userConstants);
-			
-		}
+		$definedConstants = get_defined_constants(true);
+		$userConstants = $definedConstants['user'];
+		self::log('Automad constants:');
+		self::log($userConstants);	
 		
 	}
 	
