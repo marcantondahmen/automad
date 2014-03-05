@@ -61,6 +61,13 @@ class GUI {
 	
 	public $guiTitle = 'Automad';
 	
+	
+	/**
+	 *	The GUI's buffered HTML.
+	 */
+	
+	public $output;
+		
 		
 	/**
 	 *	The Site's data and settings.
@@ -122,8 +129,14 @@ class GUI {
 
 		}
 		
+		// Buffer the HTML to merge the output with the debug log in init.php.
+		ob_start();
+		
 		// Load page according to the current context.
 		require AM_BASE_DIR . '/automad/gui/' . $inc . '.php';	
+		
+		$this->output = ob_get_contents();
+		ob_end_clean();
 		
 	}
 	
