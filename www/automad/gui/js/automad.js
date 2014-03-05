@@ -206,6 +206,11 @@ $(document).on('submit', '.automad-form', function(e) {
 			form.html(data.html);
 		}
 		
+		// Close on success, if '.automad-close-on-success' is applied to a modal and the form is actually wrapped in a modal.
+		if (!data.error) {
+			form.closest('.automad-close-on-success').modal('hide');
+		}
+		
 		// Reset the button.
 		btn.button('reset');
 		
