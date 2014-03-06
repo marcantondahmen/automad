@@ -137,10 +137,53 @@ $(document).on('click', '.automad-remove-parent', function() {
 // ===================================================
 
 $(document).on('submit', '.automad-form', function(e) {
+		
+	/*
 	
-	// All forms with class '.automad-form' applied 
-	// will use 'data-automad-handler' as form action and
-	// will prepend 'data-automad-url' (the page's URL) to the request for identification.
+	Generally, all forms with class ".automad-form" will be sumbitted to their AJAX handler, 
+	specified in "data-automad-handler" (within the <form> tag).
+	
+	For example: 
+	"<form class="automad-form" data-automad-handler="page_data"></form>"
+	will submit the form to "?ajax=page_data"
+	
+	==============================================
+	
+	Since this function should work with all Automad forms, it has some options to be specified:
+	
+	1. 	URL
+		To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
+	 	included in the request.
+		Therefore the data attribute "data-automad-url" must be added to the form tag. 
+
+	2.	CLOSE MODAL	
+		To automatically close a wrapping modal window after a successful request, 
+		the modal's main DIV must have ".automad-close-on-success" added.
+	
+	3.	RESET FORM
+		To automatically reset a form after a successful request, ".automad-reset" has to be added to the form.
+	
+	==============================================
+	
+	Server Data:
+	The function expects the data from the server to be in JSON format.
+	
+	1.	data.REDIRECT
+		will redirect the page to the given URL.
+	
+	2.	data.ERROR
+		will alert the error in a boostrap alert box.
+	
+	3.	data.SUCCESS
+		same as ERROR, in a green box.
+	
+	4.	data.HTML
+		if any string in data.html gets returned from the server, the form's (inner) HTML will be replaced.
+		
+	5.	data.DEBUG
+		sends any debug information to the console.
+	
+	*/
 	
 	e.preventDefault();
 	
@@ -169,12 +212,19 @@ $(document).on('submit', '.automad-form', function(e) {
 	$.post('?ajax=' + handler, param, function(data) {
 		
 		// Debug
-		console.log(data.debug);
+		if (data.debug) {
+			console.log(data.debug);
+		}
 			
 		// In case the returned JSON contains a redirect URL, simply redirect the page.
 		// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 		if (data.redirect) {
 			window.location.href = data.redirect;
+		}
+
+		// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
+		if (data.html) {
+			form.html(data.html);
 		}
 		
 		// Display error, if existing.
@@ -201,14 +251,17 @@ $(document).on('submit', '.automad-form', function(e) {
 			
 		}
 		
-		// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
-		if (data.html) {
-			form.html(data.html);
-		}
-		
-		// Close on success, if '.automad-close-on-success' is applied to a modal and the form is actually wrapped in a modal.
+		// On success ...
 		if (!data.error) {
+			
+			// If '.automad-close-on-success' is applied to a modal and the form is actually wrapped in a modal.
 			form.closest('.automad-close-on-success').modal('hide');
+			
+			// If form has '.automad-reset' class added, reset the form's values.			
+			form.filter('.automad-reset').each(function() {
+				this.reset();
+			});
+			
 		}
 		
 		// Reset the button.
@@ -218,9 +271,9 @@ $(document).on('submit', '.automad-form', function(e) {
 	
 });
 
-// Disable Save/Delete buttons for #data and #files when ajax completes.
+// Disable Save/Delete buttons for #users, #data and #files when ajax completes.
 $(document).ajaxComplete(function() {
-	$('#data [type="submit"], #files [type="submit"]').prop('disabled', true).removeClass('btn-success btn-danger');
+	$('#data [type="submit"], #files [type="submit"], #users [type="submit"]').prop('disabled', true).removeClass('btn-success btn-danger');
 });
 
 // Re-enable after touching any form element.
@@ -228,8 +281,8 @@ $(document).on('change click', '#data input, #data textarea, #data select, #data
 	$('#data [type="submit"]').prop('disabled', false).addClass('btn-success');
 });
 
-$(document).on('change', '#files input', function() {
-	$('#files [type="submit"]').prop('disabled', false).addClass('btn-danger');
+$(document).on('change', '#files input, #users input', function() {
+	$('#files [type="submit"], #users [type="submit"]').prop('disabled', false).addClass('btn-danger');
 });
 
 
@@ -452,8 +505,13 @@ $(document).ready(function() {
 	$('#noscript').remove();
 	$('#script').show();
 
-	// Submit automad forms to get initial AJAX content.
-	$('#data .automad-form, #files .automad-form').trigger('submit');
+	// All forms with class ".automad-init" get submitted when page is ready to get initial content via AJAX.
+	// If the form is wrapped in a modal, it also gets "refreshed", when opening the modal window.
+	$('.automad-init').trigger('submit');
+	
+	$('.modal').on('show.bs.modal', function (e) {
+		$(this).find('.automad-init').submit();
+	});
 
 });
 
