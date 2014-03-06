@@ -73,7 +73,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 		
 			<div class="list-group">
 				<div class="list-group-item">
-					<h4><span class="glyphicon glyphicon-hdd"></span> Cache</h4>
+					<h5><span class="glyphicon glyphicon-hdd"></span> Cache</h5>
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
@@ -89,7 +89,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 			
 			<div class="list-group">
 				<div class="list-group-item">
-					<h4><span class="glyphicon glyphicon-ok-sign"></span> Allowed File Types</h4>
+					<h5><span class="glyphicon glyphicon-ok-sign"></span> Allowed File Types</h5>
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
@@ -100,7 +100,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 			
 			<div class="list-group">
 				<div class="list-group-item">
-					<h4><span class="glyphicon glyphicon-info-sign"></span> Debugging</h4>
+					<h5><span class="glyphicon glyphicon-info-sign"></span> Debugging</h5>
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
@@ -114,7 +114,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 		<div class="col-md-4">
 			<div class="list-group">
 				<div class="list-group-item">
-					<h4><span class="glyphicon glyphicon-user"></span> Users</h4>
+					<h5><span class="glyphicon glyphicon-user"></span> Users</h5>
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
@@ -128,7 +128,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#remove-users-modal"><span class="glyphicon glyphicon-trash"></span> Remove Users</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#users-modal"><span class="glyphicon glyphicon-user"></span> Registered Users</a></li>
 					</ul>
 				</div>
 			</div>
@@ -191,7 +191,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-default btn-block" data-loading-text="Saving ..."><span class="glyphicon glyphicon-ok"></span> Ok</button>
+						<button type="submit" class="btn btn-primary" data-loading-text="Saving ..."><span class="glyphicon glyphicon-ok"></span> Ok</button>
 					</div>
 				</form>
 			</div>
@@ -209,7 +209,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 					</div>
 				</form>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
 				</div>
 			</div>
 		</div>
@@ -225,12 +225,11 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 				</div>
 				<form class="automad-form" data-automad-handler="update_config">
 					<div class="modal-body">
-						<p class="text-muted">Add preferred extensions, separated by commas.<br />Leaving the field empty will reset the list to the default values!</p>
+						<p>Add preferred extensions, separated by commas.<br />Leaving the field empty will reset the list to the default values!</p>
 						<input type="text" class="form-control" name="file-types" value="<?php echo implode(AM_PARSE_STR_SEPARATOR . ' ', unserialize($config['AM_ALLOWED_FILE_TYPES'])); ?>" />
-						
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-default btn-block" data-loading-text="Saving ..."><span class="glyphicon glyphicon-ok"></span> Ok</button>
+						<button type="submit" class="btn btn-primary" data-loading-text="Saving ..."><span class="glyphicon glyphicon-ok"></span> Ok</button>
 					</div>
 				</form>
 		
@@ -248,6 +247,9 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 				</div>
 				<form class="automad-form" data-automad-handler="update_config">
 					<div class="modal-body">
+						<p>When debugging is enabled, all of Automad's processes will be logged to your browser's console.</p>
+						<p>Debugging is only needed for development or troubleshooting and should be disabled in all other cases.</p>
+						<br />
 						<div class="btn-group btn-group-justified" data-toggle="buttons">
 							<label class="btn btn-default btn-lg<?php if ($config['AM_DEBUG_ENABLED']) { echo ' active'; } ?>">
 								<input type="radio" name="debug" value="on"<?php if ($config['AM_DEBUG_ENABLED']) { echo ' checked'; } ?> />On
@@ -258,7 +260,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-default btn-block" data-loading-text="Saving ..."><span class="glyphicon glyphicon-ok"></span> Ok</button>
+						<button type="submit" class="btn btn-primary" data-loading-text="Saving ..."><span class="glyphicon glyphicon-ok"></span> Ok</button>
 					</div>
 				</form>
 			</div>
@@ -273,15 +275,28 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Change Your Password</h4>
 				</div>
-				<div class="modal-body">
-					<p>One fine body&hellip;</p>
-				</div>
-				<div class="modal-footer">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save</button>
+				<form class="automad-form automad-reset" data-automad-handler="change_password">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="change-current-password" class="text-muted">Your Current Password</label>
+							<input id="change-current-password" class="form-control" type="password" name="current-password" required />
+						</div>
+						<div class="form-group">
+							<label for="change-new-password1" class="text-muted">New Password</label>
+							<input id="change-new-password1" class="form-control" type="password" name="new-password1" required />
+						</div>
+						<div class="form-group">
+							<label for="change-new-password2" class="text-muted">Repeat New Password</label>
+							<input id="change-new-password2" class="form-control" type="password" name="new-password2" required />
+						</div>
 					</div>
-				</div>
+					<div class="modal-footer">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+							<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -294,36 +309,43 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Add User</h4>
 				</div>
-				<div class="modal-body">
-					<p>One fine body&hellip;</p>
-				</div>
-				<div class="modal-footer">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Add</button>
+				<form class="automad-form automad-reset" data-automad-handler="add_user">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="add-username" class="text-muted">Username</label>
+							<input id="add-username" class="form-control" type="text" name="username" required />
+						</div>
+						<div class="form-group">
+							<label for="add-password1" class="text-muted">Password</label>
+							<input id="add-password1" class="form-control" type="password" name="password1" required />
+						</div>
+						<div class="form-group">
+							<label for="add-password2" class="text-muted">Repeat Password</label>
+							<input id="add-password2" class="form-control" type="password" name="password2" required />
+						</div>
 					</div>
-				</div>
+					<div class="modal-footer">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 	
-	<!-- Remove Users -->
-	<div class="modal fade" id="remove-users-modal" tabindex="-1">
+	<!-- Users -->
+	<div class="modal fade" id="users-modal" tabindex="-1">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Remove Users</h4>
+					<h4 class="modal-title">Registered Users</h4>
 				</div>
-				<div class="modal-body">
-					<p>One fine body&hellip;</p>
-				</div>
-				<div class="modal-footer">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger">Remove Selected</button>
-					</div>
-				</div>
+				<form id="users" class="automad-form automad-init" data-automad-handler="users">
+					<div class="modal-body"></div>
+				</form>
 			</div>
 		</div>
 	</div>
