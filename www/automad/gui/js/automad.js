@@ -211,6 +211,9 @@ $(document).on('submit', '.automad-form', function(e) {
 	// Post form data to the handler.
 	$.post('?ajax=' + handler, param, function(data) {
 		
+		// Remove previous alerts
+		form.parent().find('.alert').remove();
+		
 		// Debug
 		if (data.debug) {
 			console.log(data.debug);
