@@ -80,6 +80,39 @@ class Parse {
 	
 	
 	/**
+	 *	Scan a string for "i(filename.php)" to include template elements recursively.
+	 *
+	 *	@param string $str (the string which has to be scanned)
+	 *	@param string $directory (the base directory for including the files)
+	 *	@return The recursively scanned output including the content of all matched includes.
+	 */
+	
+	public static function getNestedIncludes($str, $directory) {
+		
+		return 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_INC_L) . '\s*([A-Za-z0-9_\.\/\-]+)\s*' . preg_quote(AM_TMPLT_DEL_INC_R) . '/',
+		
+			function($matches) use($directory) {
+					
+				$file = $directory . '/' . $matches[1];
+				if (file_exists($file)) {
+						
+					Debug::log('Template: Include: ' . $file);
+					ob_start();
+					include $file;
+					$content = ob_get_contents();
+					ob_end_clean();
+					return Parse::getNestedIncludes($content, dirname($file));
+						
+				}
+					
+			},
+			
+			$str);
+		
+	}
+	
+	
+	/**
 	 *	Tests if a string is a file name.
 	 *
 	 *	Basically a possibly existing file extension is checked against the array of registered file extensions.
