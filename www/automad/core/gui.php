@@ -266,18 +266,7 @@ class GUI {
 		
 	}
 
-		
-	/**
-	 *	Save the user accounts as serialized array to config/accounts.txt.
-	 */
-	
-	public function saveAccounts($array) {
-		
-		return file_put_contents(AM_FILE_ACCOUNTS, serialize($array));
-		
-	}
-	
-		
+			
 	/**
 	 *	Create recursive site tree for editing a page. 
 	 *	Every page link sends a post request to gui/pages.php containing the page's url.
