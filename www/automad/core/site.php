@@ -74,30 +74,6 @@ class Site {
 	
 	
 	/**
-	 * 	Parse Site settings to replace defaults.
-	 *
-	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
-	 *	in the root of the /shared directory.
-	 *	
-	 *	The settings file (by default /shared/site.txt) can basically hold any key/value pair.
-	 *	These variables can be later access sidewide via the Site::getSiteData() method.
-	 */
-	
-	private function parseSiteSettings() {
-		
-		// Define default settings.
-		// Basically that is only the site name, because that is the only really needed value.		
-		$defaults = 	array(	
-					AM_KEY_SITENAME => $_SERVER['SERVER_NAME']  
-				);
-		
-		// Merge defaults with settings from file.
-		$this->siteData = array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
-		
-	}
-	
-	
-	/**
 	 *	Builds an URL out of the parent URL and the actual file system folder name.
 	 *
 	 *	It is important to only transform the actual folder name (slug) and not the whole path,
@@ -298,7 +274,7 @@ class Site {
 		$this->parseTxt = $parseTxt;
 		
 		if ($parseTxt) {
-			$this->parseSiteSettings();
+			$this->siteData = Parse::siteData();
 		}
 		
 		$this->collectPages();
