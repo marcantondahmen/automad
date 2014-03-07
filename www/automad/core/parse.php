@@ -257,6 +257,30 @@ class Parse {
 	
 	
 	/**
+	 * 	Parse Site Data to replace defaults.
+	 *
+	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
+	 *	in the root of the /shared directory.
+	 *
+	 *	@return Array with the site's settings
+	 */
+	
+	public static function siteData() {
+		
+		// Define default settings.
+		// Use the server name as default site name and the first found theme folder as default theme.		
+		$defaults = 	array(	
+					AM_KEY_SITENAME => $_SERVER['SERVER_NAME'],
+					AM_KEY_THEME => basename(reset(glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR)))  
+				);
+		
+		// Merge defaults with settings from file.
+		return array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
+		
+	}
+
+	
+	/**
 	 *	Loads and parses a text file.
 	 *
 	 *	First it separates the different blocks into simple key/value pairs.
