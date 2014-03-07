@@ -112,8 +112,6 @@ if (isset($_POST['data'])) {
 	
 			<div class="list-group-item">
 			
-				<h4>Main Properties</h4>
-
 				<div class="form-group">
 					<label for="input-data-sitename" class="text-muted"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
 					<input id="input-data-sitename" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo $data[AM_KEY_SITENAME]; ?>" onkeypress="return event.keyCode != 13;" />
@@ -143,27 +141,13 @@ if (isset($_POST['data'])) {
 			</div>
 		
 			<div class="list-group-item" id="automad-custom-variables">
-			
-				<h4>Custom Content</h4>
-			
+				<h4 class="text-muted">Sitewide Variables</h4>
 				<?php
-
-				foreach ($data as $key => $value) {
-			
-					// Only user defined custom variables.
-					// Standard vars are processed separately above.
-					if (!in_array($key, array(AM_KEY_SITENAME, AM_KEY_THEME))) {
-						echo 	'<div class="form-group">' . 
-							'<label for="input-data-' . $key . '" class="text-muted">' . ucwords($key) . '</label>' .
-							'<button type="button" class="close automad-remove-parent">&times;</button>' .
-							'<textarea id="input-data-' . $key . '" class="form-control input-sm" name="data[' . $key . ']" rows="10">' . $value . '</textarea>' .
-							'</div>';	
-					}
-			
-				}
-
+				// All site-wide variable except the site's name and the theme.
+				foreach (array_diff(array_keys($data), array(AM_KEY_SITENAME, AM_KEY_THEME)) as $key) {
+					echo $this->varTextArea($key, $data[$key], true);
+				}				
 				?>
-			
 			</div>
 		
 			<div class="list-group-item">
