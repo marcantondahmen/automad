@@ -52,14 +52,14 @@ class GUI {
 	 *	The Site's collection.
 	 */	
 		
-	public $collection;
+	private $collection;
 	
 	
 	/**
 	 *	The GUI page's title.
 	 */
 	
-	public $guiTitle = 'Automad';
+	private $guiTitle = 'Automad';
 	
 	
 	/**
@@ -73,7 +73,7 @@ class GUI {
 	 *	The Site's data and settings.
 	 */
 	
-	public $siteData;
+	private $siteData;
 	
 	
 	/**
@@ -97,7 +97,7 @@ class GUI {
 	public function __construct() {
 		
 		$defaults = array(AM_KEY_SITENAME => $_SERVER['SERVER_NAME']);
-		$this->siteData = array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
+		$this->siteData = Parse::siteData();
 		
 		session_start();
 		
@@ -147,7 +147,7 @@ class GUI {
 	 *	@param string $element
 	 */
 	
-	public function element($element) {
+	private function element($element) {
 		
 		require AM_BASE_DIR . '/automad/gui/elements/' . $element . '.php';
 		
@@ -160,9 +160,43 @@ class GUI {
 	 *	@return Prefix
 	 */
 
-	public function extractPrefixFromPath($path) {
+	private function extractPrefixFromPath($path) {
 		
 		return substr(basename($path), 0, strpos(basename($path), '.'));
+			
+	}
+
+
+	/**
+	 *	Get a list (array) of all variables used in a template file and its nested elements.
+	 *
+	 *	@param string $theme
+	 *	@param string $template
+	 *	@return Array of matched variables
+	 */
+
+	private function getTemplateVars($theme, $template) {
+		
+		// Get template form the Site's theme, if $theme is false.
+		if (!$theme) {
+			$theme = $this->siteData[AM_KEY_THEME];
+		}
+		
+		$file = AM_BASE_DIR . AM_DIR_THEMES . '/' . $theme . '/' . $template . '.php';
+		
+		// Get template file content including all nested elements.
+		ob_start();
+		include $file;
+		$content = ob_get_contents();
+		ob_end_clean();
+		$content = Parse::getNestedIncludes($content, dirname($file));
+		
+		// Find variables.
+		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/', $content, $matches);
+		
+		sort($matches[1]);
+		
+		return array_unique($matches[1]);
 			
 	}
 
@@ -179,7 +213,7 @@ class GUI {
 	 *	@return $newPath
 	 */
 
-	public function movePage($oldPath, $newParentPath, $prefix, $title) {
+	private function movePage($oldPath, $newParentPath, $prefix, $title) {
 		
 		// Normalize parent path.
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
@@ -229,7 +263,7 @@ class GUI {
 	 *	@return Filename
 	 */
 
-	public function pageFile($page) {
+	private function pageFile($page) {
 		
 		return AM_BASE_DIR . AM_DIR_PAGES . $page->path . $page->template . '.' . AM_FILE_EXT_DATA;
 	
@@ -243,7 +277,7 @@ class GUI {
 	 *	@return Hashed/salted password
 	 */
 
-	public function passwordHash($password) {
+	private function passwordHash($password) {
 		
 		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
 		
@@ -260,7 +294,7 @@ class GUI {
 	 *	@return true/false 
 	 */
 
-	public function passwordVerified($password, $hash) {
+	private function passwordVerified($password, $hash) {
 		
 		return ($hash === crypt($password, $hash));
 		
@@ -279,7 +313,7 @@ class GUI {
 	 *	@return the branch's HTML
 	 */
 	
-	public function siteTree($parent, $collection, $current, $parameters, $hideCurrent = false) {
+	private function siteTree($parent, $collection, $current, $parameters, $hideCurrent = false) {
 		
 		$selection = new Selection($collection);
 		$selection->filterByParentUrl($parent);
@@ -326,7 +360,7 @@ class GUI {
 	 *	@return Site's name
 	 */
 	
-	public function siteName() {
+	private function siteName() {
 		
 		return $this->siteData[AM_KEY_SITENAME];
 		
@@ -343,7 +377,7 @@ class GUI {
 	 *	@return The HTML for the select box including a label and a wrapping div.
 	 */
 
-	public function templateSelectBox($id = '', $name = '', $selectedTheme = false, $selectedTemplate = false) {
+	private function templateSelectBox($id = '', $name = '', $selectedTheme = false, $selectedTemplate = false) {
 		
 		
 		// Find all templates of currently used site theme (set in site.txt).
@@ -357,7 +391,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">Template</label><select id="' . $id . '" class="form-control input-sm" name="' . $name . '" size="1">'; 
+		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">Theme &amp; Template</label><select id="' . $id . '" class="form-control" name="' . $name . '" size="1">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
@@ -397,11 +431,35 @@ class GUI {
 	 *	@return username
 	 */
 
-	public function user() {
+	private function user() {
 		
 		if (isset($_SESSION['username'])) {
 			return $_SESSION['username'];
 		}
+		
+	}
+	
+	
+	/**
+	 *	Create textarea for page/shared variables with optional button for removal.
+	 *	
+	 *	@param string $key (name)
+	 *	@param string $value (value)
+	 *	@param boolean $removeButton
+	 *	@return The HTML for the textarea
+	 */
+	
+	private function varTextArea($key, $value, $removeButton = false) {
+		
+		$html =  '<div class="form-group"><label for="input-data-' . $key . '" class="text-muted">' . ucwords(str_replace('_', ' ', $key)) . '</label>';
+		
+		if ($removeButton) {
+			$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
+		}
+		
+		$html .= '<textarea id="input-data-' . $key . '" class="form-control input-sm" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
+		
+		return $html;
 		
 	}
 	
