@@ -68,7 +68,20 @@ $this->element('header');
 					</div>	
 					
 					<div class="list-group-item">	
-						<h5>Your site got modified the last time on<br /><strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.</h5>	
+						Last edit: <?php echo date('l, j. F Y, G:i', $lastEdit); ?>h.
+					</div>
+					
+					<div class="list-group-item">
+						Automad <?php echo AM_VERSION; ?>
+					</div>
+					
+					<div class="list-group-item">	
+						<span class="automad-status" data-automad-status="cache"></span><br />
+						<span class="automad-status" data-automad-status="debug"></span>
+					</div>
+					
+					<div class="list-group-item">
+						<span class="automad-status" data-automad-status="users"></span>
 					</div>
 					
 				</div>	
@@ -77,23 +90,20 @@ $this->element('header');
 				
 					<a class="list-group-item" href="?context=system_settings">
 						<h4><span class="glyphicon glyphicon-cog"></span> System Settings</h4>
-						<p class="text-muted">Cache Settings / User Accounts / Configuration Overrides</p>
 					</a>
 					
 					<a class="list-group-item" href="?context=edit_shared">
 						<h4><span class="glyphicon glyphicon-globe"></span> Global Content &amp; Settings</h4>
-						<p class="text-muted">Site Name / Global Files / Global Theme / Global Variables</p>
 					</a>
 					
 					<a class="list-group-item" href="#" data-toggle="modal" data-target="#pagesModal">
 						<span class="badge"><?php echo count($this->collection); ?></span>
-						<h4><span class="glyphicon glyphicon-list"></span> Pages</h4>
-						<p class="text-muted">Move, Add or Delete Pages / Manage Page Content, Files and Settings</p>
+						<h4><span class="glyphicon glyphicon-list-alt"></span> Pages</h4>
 					</a>
 
 					<!-- Modal -->
 					<div class="modal fade" id="pagesModal" tabindex="-1" role="dialog" aria-labelledby="pagesModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
+						<div class="modal-dialog modal-sm">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -109,7 +119,7 @@ $this->element('header');
 						</div>
 					</div>		
 					
-					<a class="list-group-item" href="?context=logout"><h5 class="text-muted"><span class="glyphicon glyphicon-off"></span> Log Out "<?php echo ucwords($this->user()); ?>"</h5></a>
+					<a class="list-group-item" href="?context=logout"><h5 class="text-muted"><span class="glyphicon glyphicon-off"></span> Log Out</h5></a>
 				
 				</div>
 
