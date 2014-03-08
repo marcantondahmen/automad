@@ -290,7 +290,58 @@ $(document).on('change', '#files input, #users input', function() {
 	$('#files [type="submit"], #users [type="submit"]').prop('disabled', false);
 });
 
+// Auto Init
+$(document).ready(function() {
 
+	// All forms with class ".automad-init" get submitted when page is ready to get initial content via AJAX.
+	// If the form is wrapped in a modal, it also gets "refreshed", when opening the modal window.
+	$('.automad-init').trigger('submit');
+	
+	$('.modal').on('show.bs.modal', function (e) {
+		$(this).find('.automad-init').submit();
+	});
+
+});
+
+
+
+
+// ===================================================
+// System Status
+// ===================================================
+
+function getStatus() {
+	
+	$('.automad-status').each(function() {
+	
+		// To get the status of any config setting (constant),
+		// the container has to have the class '.automad-status'.
+		// The requested item for each container is passed via 
+		// 'data-automad-status="item"'. 
+		
+		var 	container = $(this),
+			item = container.data('automadStatus');
+		
+		$.post('?ajax=status', {"item": item}, function(data) {
+			container.html(data.status);		
+		}, 'json');
+		
+	});
+	
+}
+
+$(document).ready(function() {
+	getStatus();
+});
+
+$(document).ajaxComplete(function(e, xhr, settings) {
+	// Make sure the status doesn't get triggert by itself in an infinite loop.
+	if (settings.url != '?ajax=status') {
+		getStatus();
+	}
+});	
+	
+	
 
 
 // ===================================================
@@ -336,9 +387,9 @@ $(document).ajaxComplete(function() {
 
 
 
-// ---------------------------------
+// ===================================================
 // File Uploader
-// ---------------------------------
+// ===================================================
 
 $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 	
@@ -500,23 +551,15 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 
 
 
-// ---------------------------------
-// DOCUMENT READY
-// ---------------------------------
+// ===================================================
+// JavaScript check
+// ===================================================
 	
 $(document).ready(function() {
 
 	// Make main container visible.
 	$('#noscript').remove();
 	$('#script').show();
-
-	// All forms with class ".automad-init" get submitted when page is ready to get initial content via AJAX.
-	// If the form is wrapped in a modal, it also gets "refreshed", when opening the modal window.
-	$('.automad-init').trigger('submit');
-	
-	$('.modal').on('show.bs.modal', function (e) {
-		$(this).find('.automad-init').submit();
-	});
 
 });
 
