@@ -77,7 +77,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#cache-settings-modal"><span class="glyphicon glyphicon-hdd"></span> Cache Settings</a></li>
+						<li><a href="#" class="automad-status" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a></li>
 					</ul>
 				</div>
 				<div class="list-group-item">
@@ -89,49 +89,56 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 			
 			<div class="list-group">
 				<div class="list-group-item">
-					<h5><span class="glyphicon glyphicon-ok-sign"></span> Allowed File Types</h5>
+					<h5><span class="glyphicon glyphicon-file"></span> Allowed File Types</h5>
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#file-types-modal"><span class="glyphicon glyphicon-th-list"></span> Edit The List of Allowed File Types</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#file-types-modal"><span class="glyphicon glyphicon-pencil"></span> Edit Allowed File Types</a></li>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="list-group">
 				<div class="list-group-item">
-					<h5><span class="glyphicon glyphicon-info-sign"></span> Debugging</h5>
+					<h5><span class="glyphicon glyphicon-info-sign"></span> Debug Mode</h5>
 				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#debug-modal"><span class="glyphicon glyphicon-record"></span> Enable Debug Mode</a></li>
+						<li><a href="#" class="automad-status" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a></li>
 					</ul>
 				</div>
 			</div>
-		
+			
 		</div>
 		
 		<div class="col-md-4">
+			
 			<div class="list-group">
+				
 				<div class="list-group-item">
 					<h5><span class="glyphicon glyphicon-user"></span> Users</h5>
 				</div>
+				
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
 						<li><a href="#" data-toggle="modal" data-target="#change-password-modal"><span class="glyphicon glyphicon-lock"></span> Change Your Password</a></li>
 					</ul>
 				</div>
+				
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
 						<li><a href="#" data-toggle="modal" data-target="#add-user-modal"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
 					</ul>
 				</div>
+				
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#users-modal"><span class="glyphicon glyphicon-user"></span> Registered Users</a></li>
+						<li><a href="#" class="automad-status" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a></li>
 					</ul>
 				</div>
+				
 			</div>
+						
 		</div>
 
 	</div>
@@ -158,7 +165,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 							</label>
 						</div>
 						<br />
-						<p class="text-muted">Scan for Changes Every</p>
+						<p class="text-muted">Cache Life Time</p>
 						<div class="btn-group btn-group-justified" data-toggle="buttons">
 							<?php
 						
