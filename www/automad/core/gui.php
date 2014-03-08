@@ -96,7 +96,6 @@ class GUI {
 	
 	public function __construct() {
 		
-		$defaults = array(AM_KEY_SITENAME => $_SERVER['SERVER_NAME']);
 		$this->siteData = Parse::siteData();
 		
 		session_start();
