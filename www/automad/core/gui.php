@@ -329,17 +329,18 @@ class GUI {
 					if (!$title = basename($page->path)) {
 						$title = 'home';	
 					}
-				
+					
 					// Check if page is currently selected page
 					if ($page->url == $current) {
-						$class = ' class="active"';
+						$html .= '<li class="active"><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;' . $title . '</a>';
 					} else {
-						$class = '';
+						$html .= '<li><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;' . $title . '</a>';
 					}
-				
-					$html .= 	'<li' . $class . '><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;' . $title . '</a>' . 
-							$this->siteTree($page->url, $collection, $current, $parameters, $hideCurrent) . '</li>';
-				
+					
+					$html .= $this->siteTree($page->url, $collection, $current, $parameters, $hideCurrent);
+					
+					$html .= '</li>';
+					
 				}
 				
 			}
