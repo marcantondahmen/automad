@@ -196,22 +196,22 @@ ob_start();
 	<div class="list-group-item">		
 		<button type="submit" class="btn btn-danger btn-block" data-loading-text="Processing ..."><span class="glyphicon glyphicon-trash"></span> Delete Selected</button>	
 	</div>
+	
+</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>">
-      		<div class="modal-dialog modal-sm">
-			<div class="modal-content"> 
-				<div class="modal-header"> 
-					<h4 class="modal-title" id="myModalLabel">Upload Files</h4> 
-				</div>
-				<div id="automad-upload" class="modal-body"></div>	
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" data-loading-text="Uploading ...">Close</button>
-				</div>
+<!-- Modal -->
+<div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<h4 class="modal-title" id="myModalLabel">Upload Files</h4> 
+			</div>
+			<div id="automad-upload" class="modal-body"></div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-loading-text="Uploading ...">Close</button>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <?php
