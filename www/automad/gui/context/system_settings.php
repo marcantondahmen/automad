@@ -64,6 +64,12 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 ?>
 
 	<div class="row">
+		<div class="col-md-12">
+			<?php $this->element('title'); ?>
+		</div>
+	</div>
+
+	<div class="row">
 
 		<div class="col-md-4">
 			<?php $this->element('navigation');?>
