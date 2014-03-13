@@ -1,0 +1,369 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD CMS
+ *
+ *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ * 
+ *	Based on Bootstrap v3.1.1 (http://getbootstrap.com)
+ */
+
+
+
+// =============================
+// Variables 
+// =============================
+
+@group-padding: 	15px;
+@item-gap: 		2px;
+@item-padding:		15px;
+@shadow-offset-big:	5px;
+@shadow-offset-small:	3px;
+@shadow-darken:		7%;
+@hover-darken:		7%;
+
+// Colors
+@body-color:		#888;
+@body-bg-color:		#e7e7e7;
+@group-bg-color: 	#fafafa;
+@inverted-color:	#fff;
+
+@default-color:		@body-color;	
+@primary-color:		#7E949E;
+@success-color:		#AEC2AB;
+@danger-color: 		#FC7765;
+
+@form-color:		#888888;
+@form-bg-color:		lighten(@group-bg-color, 20%);
+@form-border-color:	darken(@group-bg-color, 20%);
+
+@active-color:		@primary-color;
+@link-color: 		@primary-color;
+
+
+
+
+// =============================
+// Mixins
+// =============================
+
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.box-shadow(@x: 0; @y: 0; @blur: 0px; @color: #000) {
+  -webkit-box-shadow: @arguments;
+     -moz-box-shadow: @arguments;
+          box-shadow: @arguments;
+}
+
+.box-shadow-inset(@x: 0; @y: 0; @blur: 0px; @color: #000) {
+  -webkit-box-shadow: inset @arguments;
+     -moz-box-shadow: inset @arguments;
+          box-shadow: inset @arguments;
+}
+
+.button(@text; @bg; @border) {
+	
+	color: @text;
+	border-color: @border;
+	background-color: @bg;
+	
+	&:active,
+	&.active,
+	&:hover {
+		color: @text;
+		border-color: darken(@border, @hover-darken);
+		background-color: darken(@bg, @hover-darken);
+	}
+	
+	&:active,
+	&.active {
+		border-top-color: darken(darken(@border, @hover-darken), @shadow-darken);
+		border-left-color: darken(darken(@border, @hover-darken), @shadow-darken);
+		.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(darken(@bg, @hover-darken), @shadow-darken));
+	}
+	
+}
+
+
+
+
+// =============================
+// Body & Grid
+// =============================
+
+body {
+	color: @body-color;
+	background-color: @body-bg-color;
+}
+
+.col-xs-1, 
+.col-sm-1, 
+.col-md-1, 
+.col-lg-1 {
+	padding: 0 @group-padding;
+}
+
+.columns(@n, @i: 2) when (@i =< @n) {
+	
+	.col-xs-@{i}, .col-sm-@{i}, .col-md-@{i}, .col-lg-@{i} {
+		&:extend(.col-xs-1);
+	}
+	
+  	.columns(@n, (@i + 1));
+}
+
+.columns(12);
+
+
+
+
+// =============================
+// List Groups
+// =============================
+
+.list-group-item:first-child,
+.list-group-item:last-child { 
+	.border-radius(0px);
+}
+
+.list-group {
+	margin: 0;
+	padding: @group-padding 0;
+	background-color: @body-bg-color;
+	
+}
+
+.list-group-item {
+	background-color: @group-bg-color;
+	border-color: transparent;
+	padding: @item-padding;
+	margin-bottom: @item-gap;
+	.box-shadow(@shadow-offset-big; @shadow-offset-big; 0; darken(@body-bg-color, @shadow-darken));
+}
+
+.list-group-item > .row {
+	margin-left: 0 - @item-padding;
+	margin-right: 0 - @item-padding;
+}
+
+
+
+
+// =============================
+// Navigation
+// =============================
+
+a {
+	color: @link-color;
+	
+	&:hover  {
+		color: darken(@link-color, @hover-darken);
+	}
+
+	&.list-group-item.active {
+		color: @inverted-color;
+		border-color: @active-color;
+		background-color: @active-color;
+		z-index: 0;
+		
+		&:hover {
+			color: @inverted-color;
+			border-color: darken(@active-color, @hover-darken);
+			background-color: darken(@active-color, @hover-darken);
+			z-index: 0;
+		}
+		
+	}
+
+}
+
+.nav-stacked {
+	
+	margin-left: -10px;
+	
+	
+	& ul {
+		margin-left: 20px;
+	}
+	
+	& > li > a {
+		margin: 1px 0;
+		padding: 5px 10px;
+	}
+	
+	
+}
+
+.nav-pills li {
+	
+	& a {
+		.border-radius(0px);
+	}
+	
+	& a:hover {
+		background-color: darken(@group-bg-color, @hover-darken);
+	}
+	
+	& > a:active,
+	&.active > a,
+	&.active > a:hover {
+		color: @inverted-color;
+		background-color: @active-color;
+		.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(@active-color, @shadow-darken));
+	}
+	
+	&.active > a:hover {
+		background-color: darken(@active-color, @hover-darken);
+		.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(darken(@active-color, @shadow-darken), @hover-darken));
+	}
+	
+	
+}
+
+
+
+
+// =============================
+// Forms
+// =============================
+
+.form-control {
+	color: @form-color;
+	background-color: @form-bg-color;
+	border-color: @form-border-color;
+	.border-radius(0px);
+	.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(@form-bg-color, @shadow-darken));
+}
+
+
+
+
+// =============================
+// Buttons
+// =============================
+
+.btn-group > .btn:hover {
+	z-index: 0;
+}
+
+.btn,
+.btn[disabled] {
+	.border-radius(0px);
+	.box-shadow(@shadow-offset-small; @shadow-offset-small; 0; darken(@group-bg-color, @shadow-darken));
+}	
+	
+.btn-default,
+.btn-default[disabled] {
+	.button(@default-color; @group-bg-color; lighten(@default-color, 30%));
+}
+	
+.btn-primary,
+.btn-primary[disabled] {
+	.button(@inverted-color; @primary-color; @primary-color);
+}
+	
+.btn-success,
+.btn-success[disabled] {
+	.button(@inverted-color; @success-color; @success-color);
+}
+	
+.btn-danger,
+.btn-danger[disabled] {
+	.button(@inverted-color; @danger-color; @danger-color);
+}
+		
+
+
+// =============================
+// Modal
+// =============================
+
+.modal-backdrop {
+	background-color: @body-bg-color;
+}
+
+.modal-backdrop.in {
+	opacity: 0.8;
+}
+
+.modal-content {
+	.border-radius(0px);
+	border-width: 0px;
+	background-color: transparent;
+	.box-shadow(0; 0; 0; #000);
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+	position: relative;
+	border-width: 0px;
+	background-color: @group-bg-color;
+	margin: 0 0 @item-gap 0;
+	padding: @item-padding;
+	.box-shadow(@shadow-offset-big; @shadow-offset-big; 0; darken(@body-bg-color, @shadow-darken));
+	z-index: 0;
+}
+
+.modal-footer {
+	z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
