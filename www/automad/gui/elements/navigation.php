@@ -42,8 +42,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 ?>
 			
-				<?php $this->element('title'); ?>
-			
 				<div class="list-group">
 					
 					<a class="list-group-item<?php if (Parse::queryKey('context') == 'system_settings') { echo ' active'; }?>" href="?context=system_settings"><h5><span class="glyphicon glyphicon-cog"></span> System Settings</h5></a>
