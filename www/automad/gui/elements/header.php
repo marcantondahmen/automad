@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	<title><?php echo $this->guiTitle; ?></title>
 
 	<link href="<?php echo AM_BASE_URL; ?>/automad/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/css/automad.css" rel="stylesheet">
+	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/css/bootstrap.automad.css" rel="stylesheet">
 	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/bootstrap/js/bootstrap.min.js"></script>
