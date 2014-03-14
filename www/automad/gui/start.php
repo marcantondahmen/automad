@@ -64,15 +64,11 @@ $this->element('header');
 				<div class="list-group">
 					
 					<div class="list-group-item">
-						<h3>Welcome <strong><?php echo ucwords($this->user()); ?></strong></h3>
+						<h3>Hello <?php echo ucwords($this->user()); ?></h3>
 					</div>	
 					
 					<div class="list-group-item">	
-						Last edit: <?php echo date('l, j. F Y, G:i', $lastEdit); ?>h.
-					</div>
-					
-					<div class="list-group-item">
-						Automad <?php echo AM_VERSION; ?>
+						Last Edit: <strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.
 					</div>
 					
 					<div class="list-group-item">	
@@ -80,8 +76,8 @@ $this->element('header');
 						<span class="automad-status" data-automad-status="debug"></span>
 					</div>
 					
-					<div class="list-group-item">
-						<span class="automad-status" data-automad-status="users"></span>
+					<div class="list-group-item text-muted">
+						Automad Version: <strong><?php echo AM_VERSION; ?></strong>
 					</div>
 					
 				</div>	
@@ -89,16 +85,16 @@ $this->element('header');
 				<div class="list-group">	
 				
 					<a class="list-group-item" href="?context=system_settings">
-						<h4><span class="glyphicon glyphicon-cog"></span> System Settings</h4>
+						<h5><span class="glyphicon glyphicon-cog"></span> System Settings</h5>
 					</a>
 					
 					<a class="list-group-item" href="?context=edit_shared">
-						<h4><span class="glyphicon glyphicon-globe"></span> Global Content &amp; Settings</h4>
+						<h5><span class="glyphicon glyphicon-globe"></span> Global Content &amp; Settings</h5>
 					</a>
 					
 					<a class="list-group-item" href="#" data-toggle="modal" data-target="#pagesModal">
 						<span class="badge"><?php echo count($this->collection); ?></span>
-						<h4><span class="glyphicon glyphicon-list-alt"></span> Pages</h4>
+						<h5><span class="glyphicon glyphicon-list-alt"></span> Pages</h5>
 					</a>
 
 					<!-- Modal -->
@@ -119,7 +115,7 @@ $this->element('header');
 						</div>
 					</div>		
 					
-					<a class="list-group-item" href="?context=logout"><h5 class="text-muted"><span class="glyphicon glyphicon-off"></span> Log Out</h5></a>
+					<a class="list-group-item" href="?context=logout"><h5><span class="glyphicon glyphicon-off"></span> Log Out</h5></a>
 				
 				</div>
 
