@@ -53,6 +53,12 @@ if (array_key_exists(Parse::queryKey('url'), $this->collection)) {
 	if (!isset($data[AM_KEY_TITLE]) || !$data[AM_KEY_TITLE]) {
 		$data[AM_KEY_TITLE] = basename($P->url);
 	}
+	
+	if (isset($data[AM_KEY_URL])) {
+		$url = $data[AM_KEY_URL];
+	} else {
+		$url = AM_BASE_URL . $P->url;
+	}
 
 	$this->guiTitle = $this->guiTitle . ' / ' . $data[AM_KEY_TITLE];
 
@@ -86,13 +92,11 @@ $this->element('header');
 			
 				<div class="list-group">
 			
-					<a class="list-group-item" href="<?php echo AM_BASE_URL . $P->url; ?>" target="_blank"><h4><?php echo $P->url; ?></h4></a>
+					<a class="list-group-item" href="<?php echo $url; ?>" target="_blank"><h5><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></h5></a>
 					
 					<div class="list-group-item">
 						
 						<ul class="nav nav-pills nav-justified">
-							
-							<li><a href="<?php echo AM_BASE_URL . $P->url; ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> Visit Page</a></li>
 							
 							<!-- Add Subpage Button -->
 							<li><a href="#" data-toggle="modal" data-target="#automad-add-subpage-modal"><span class="glyphicon glyphicon-plus"></span> Add Subpage</a></li>
@@ -127,7 +131,7 @@ $this->element('header');
 										</div>
 										<div class="modal-footer">
 											<div class="btn-group">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
 												<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Subpage</button>
 											</div>
 										</div>
@@ -138,7 +142,7 @@ $this->element('header');
 						
 						<!-- Move Page Modal -->
 						<div class="modal fade" id="automad-move-page-modal" data-automad-url="<?php echo $P->url; ?>" data-automad-title="<?php echo $data[AM_KEY_TITLE]; ?>">
-							<div class="modal-dialog">
+							<div class="modal-dialog modal-sm">
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -149,7 +153,7 @@ $this->element('header');
 										<?php echo $this->siteTree('', $this->collection, $P->url, array(), true); ?>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
 									</div>
 								</div>
 							</div>
@@ -171,7 +175,7 @@ $this->element('header');
 										</div>
 										<div class="modal-footer">
 											<div class="btn-group">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
 												<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 											</div>
 										</div>
@@ -185,8 +189,8 @@ $this->element('header');
 					<div class="list-group-item">
 						<!-- Nav tabs -->
 						<ul class="nav nav-pills nav-justified">
-							<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> Data &amp; Settings</a></li>
-							<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> Files</a></li>
+							<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> Data &amp; Settings</a></li>
+							<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Files</a></li>
 						</ul>
 					</div>
 					
