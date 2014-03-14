@@ -120,7 +120,7 @@ ob_start();
 <div class="list-group">
 	
 	<div class="list-group-item">
-		<h5 class="text-muted"><?php echo $path; ?></h5>
+		<h5 class="text-muted"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<?php echo $path; ?></h5>
 	</div>
 	
 	<?php
