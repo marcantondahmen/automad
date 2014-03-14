@@ -215,10 +215,11 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 	<div class="modal fade" id="cache-clear-modal" tabindex="-1">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<br />
 				<form class="automad-form" data-automad-handler="clear_cache">
 					<div class="modal-body">
+						<br />
 						<button type="submit" class="btn btn-default btn-block btn-lg"><span class="glyphicon glyphicon-repeat"></span> Clear Cache Now</button>
+						<br />
 					</div>
 				</form>
 				<div class="modal-footer">
