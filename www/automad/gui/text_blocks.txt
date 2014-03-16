@@ -1,0 +1,392 @@
+btn_accounts_file: Download Accounts File
+
+-
+
+btn_add: Add
+
+-
+
+btn_add_page: Add Subpage
+
+-
+
+btn_add_var: Add Variable
+
+-
+
+btn_apply_reload: Apply &amp; Reload
+
+-
+
+btn_browse: Browse
+
+-
+
+btn_close: Close
+
+-
+
+btn_data: Data &amp; Settings
+
+-
+
+btn_delete_page: Delete Page
+
+-
+
+btn_discard: Discard Changes
+
+-
+
+btn_files: Files
+
+-
+
+btn_hide_page: Hide Page From Navigation
+
+-
+
+btn_loading: Wait ...
+
+-
+
+btn_login: Log In
+
+-
+
+btn_move_page: Move Page
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_remove_selected: Remove Selected
+
+-
+
+btn_save: Save
+
+-
+
+btn_upload: Upload
+
+-
+
+
+
+
+
+
+
+
+dropzone: Dropzone
+
+-
+
+
+
+
+
+
+
+
+error_existing: already exists!
+
+-
+
+error_file_format: Unsupported file type:
+
+-
+
+error_form: **Incomplete or incorrect data!**  
+  
+All fields are required and have to be completed as described!
+
+-
+
+error_login: Invalid username or password
+
+-
+
+error_no_files: No files found!
+
+-
+
+error_page_not_found: Page Not Found!
+
+-
+
+error_page_title: Title missing!
+
+-
+
+error_permission: **Permission denied!**
+     
+Please verify the permission settings of your Automad installation!
+
+-
+
+error_remove: Could not remove 
+
+-
+
+error_var_exists: There is already a variable with that name!
+
+-
+
+error_var_name: You can not add a variable without a name!
+
+-
+
+
+
+
+
+
+
+
+install_help: ###Registration  
+Before you can make use of Automad's GUI, you have to register a first user by following these steps:  
+				
+1. Create an user account using the form below and download the created file to your computer 
+2. Upload the downloaded file to the **"/config"** directory within your Automad installation via FTP or SSH 
+				
+After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo above. 
+
+-
+
+install_title: Registration
+
+-
+
+
+
+
+
+
+
+
+login_title: Login
+
+-
+
+log_out_title: Log Out
+
+-
+
+
+
+
+
+
+
+
+page_confirm_delete: ####Are you sure you want to delete the current page?  
+  
+The page and all of its subpages will be moved to **/cache/trash**, in case you want to restore the page's directory later.
+
+-
+
+page_move_destination: Select a destination:
+
+-
+
+page_prefix: Prefix (Order in Navigation)
+
+-
+
+page_redirect: Redirect page to another URL
+
+-
+
+page_tags: Tags (Separate multiple tags by comma)
+
+-
+
+page_theme_template: Theme / Template
+
+-
+
+page_var_name: Variable Name
+
+-
+
+page_vars_used: Variables used by the current template
+
+- 
+
+page_vars_unused: Unused variables
+
+- 
+
+page_visibility: Visibility
+
+-
+
+pages_title: Pages
+
+-
+
+
+
+
+
+
+
+
+shared_title: Shared Content &amp; Settings
+
+-
+
+shared_vars: Shared Variables
+
+-
+
+shared_var_name: Variable Name
+
+-
+
+
+
+
+
+
+
+
+start_title: Welcome
+
+-
+
+start_last_edit: Last Edit:
+
+-
+
+
+
+
+
+
+
+
+success_added: Successfully added
+
+-
+
+success_cache_cleared: The page cache got cleared successfully!
+
+-
+
+success_password_changed: Your password got changed successfully!
+
+-
+
+success_log_out: Logged Out Successfully
+
+-
+
+success_remove: Successfully removed 
+
+-
+
+
+
+
+
+
+
+
+sys_cache: Cache
+
+-
+
+sys_cache_clear: Clear Cache
+
+-
+
+sys_cache_enabled: Page Caching is Enabled
+
+-
+
+sys_cache_disabled: Page Caching is Disabled
+
+-
+
+sys_cache_lifetime: Lifetime
+
+-
+
+sys_debug: Debug Mode
+
+-
+
+sys_debug_help: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
+Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
+
+-
+
+sys_debug_enabled: Debug Mode is Enabled
+
+-
+
+sys_debug_disabled: Debug Mode is Disabled
+
+-
+
+sys_file_types: Allowed File Types
+
+-
+
+sys_file_types_edit: Edit Whitelist For File Types
+
+-
+
+sys_file_types_help: Add preferred extensions, separated by commas.  
+Leaving the field empty will reset the list to the default values!
+
+-
+
+sys_title: System Settings
+
+-
+
+sys_user: Users
+
+-
+
+sys_user_change_password: Change Your Password
+
+-
+
+sys_user_change_password_current: Current Password
+
+-
+
+sys_user_change_password_new: New Password<br />Do not use your current password!
+
+-
+
+sys_user_change_password_repeat: Repeat Password
+
+-
+
+sys_user_add: Add User
+
+-
+
+sys_user_add_name: Username
+
+-
+
+sys_user_add_password: Password
+
+-
+
+sys_user_add_repeat: Repeat Password
+
+-
+
+sys_user_registered: Registered User(s)
+
+
