@@ -59,11 +59,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection) &
 	$C = new Cache();
 	$C->clear();
 	
-} else {
-	
-	$output['error'] = 'This page can not be deleted!';
-	
-}
+} 
 
 
 echo json_encode($output);
