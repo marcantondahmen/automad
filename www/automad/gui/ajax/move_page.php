@@ -53,7 +53,7 @@ $output['debug'] = $_POST;
 // To avoid all kinds of unexpected trouble, the URL and the destination must exist in the Site's collection and a title must be present.
 if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination']) && array_key_exists($_POST['url'], $this->collection) && array_key_exists($_POST['destination'], $this->collection) && $_POST['title']) {
 	
-	
+	// The home page can't be moved!	
 	if ($_POST['url'] != '/') {
 		
 		$P = $this->collection[$_POST['url']];
@@ -82,16 +82,11 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 
 		}
 		
-	} else {
-		
-		$output['error'] = 'Can not move the home page!';
-		
-	}
-		
+	} 	
 
 } else {
 	
-	$output['error'] = 'Invalid URL!'; 
+	$output['error'] = $this->tb['error_page_not_found']; 
 	
 }
 

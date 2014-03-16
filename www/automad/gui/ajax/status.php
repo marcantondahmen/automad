@@ -55,9 +55,9 @@ if (isset($_POST['item'])) {
 	if ($item == 'cache') {
 		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = '<span class="text-success"><span class="glyphicon glyphicon-ok"></span> Page Caching is Enabled</span>';
+			$output['status'] = '<span class="text-success"><span class="glyphicon glyphicon-ok"></span> ' . $this->tb['sys_cache_enabled'] . '</span>';
 		} else {
-			$output['status'] = '<span class="text-muted"><span class="glyphicon glyphicon-ban-circle"></span> Page Caching is Disabled</span>';
+			$output['status'] = '<span class="text-muted"><span class="glyphicon glyphicon-ban-circle"></span> ' . $this->tb['sys_cache_disabled'] . '</span>';
 		}
 		
 	}
@@ -65,23 +65,18 @@ if (isset($_POST['item'])) {
 	if ($item == 'debug') {
 		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = '<span class="text-success"><span class="glyphicon glyphicon-ok"></span> Debug Mode is Enabled</span>';
+			$output['status'] = '<span class="text-success"><span class="glyphicon glyphicon-ok"></span> ' . $this->tb['sys_debug_enabled'] . '</span>';
 		} else {
-			$output['status'] = '<span class="text-muted"><span class="glyphicon glyphicon-ban-circle"></span> Debug Mode is Disabled</span>';
+			$output['status'] = '<span class="text-muted"><span class="glyphicon glyphicon-ban-circle"></span> ' . $this->tb['sys_debug_disabled'] . '</span>';
 		}
 		
 	}
 	
 	if ($item == 'users') {
 		
-		$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
-		
-		if (count($accounts) == 1) {
-			$output['status'] = '<span class="badge">1</span> Registered User';
-		} else {
-			$output['status'] = '<span class="badge">' . count($accounts) . '</span> Registered Users';
-		}
-		
+		$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));		
+		$output['status'] = '<span class="badge">' . count($accounts) . '</span> ' . $this->tb['sys_user_registered'];
+
 	}
 	
 }

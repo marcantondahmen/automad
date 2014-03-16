@@ -118,7 +118,7 @@ if (is_writable(AM_CONFIG)) {
 
 } else {
 
-	$output['error'] = 'Error while saving changes!';
+	$output['error'] = $this->tb['error_permission'];
 
 }
 

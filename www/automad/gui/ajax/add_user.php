@@ -67,30 +67,30 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']
 				
 				// Write array with all accounts back to file.
 				if (file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
-					$output['success'] = 'Successfully added <strong>' . $_POST['username'] . '</strong>';
+					$output['success'] = $this->tb['success_added'] . ' <strong>' . $_POST['username'] . '</strong>';
 				}
 				
 			} else {
 				
-				$output['error'] = 'Error saving new user!';
+				$output['error'] = $this->tb['error_permission'];
 				
 			}
 			
 		} else {
 		
-			$output['error'] = 'User <strong>' . $_POST['username'] . '</strong> already exists!';	
+			$output['error'] = '<strong>' . $_POST['username'] . '</strong> ' . $this->tb['error_existing'];	
 			
 		}
 		
 	} else {
 		
-		$output['error'] = 'Please enter twice the same password!';
+		$output['error'] = $this->tb['error_form'];
 		
 	}
 	
 } else {
 	
-	$output['error'] = 'All fields are required!';
+	$output['error'] = $this->tb['error_form'];
 	
 }
 

@@ -59,14 +59,14 @@ if ($_POST) {
 		
 	} else {
 		
-		$error = 'Invalid username or password!';
+		$error = $this->tb['error_login'];
 		
 	}
 		
 }
 
 
-$this->guiTitle = $this->guiTitle . ' / Login';
+$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['login_title'];
 $this->element('header');
 
 
@@ -78,36 +78,32 @@ $this->element('header');
 			
 			<?php $this->element('title'); ?>
 			
-			<?php if (isset($error)) { ?><div class="alert alert-danger"><?php echo $error; ?></div><?php } ?>
-		
-			<div class="list-group">
+			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?>
+			
+      			<form role="form" method="post">
 				
-				<div class="list-group-item">
-					<h4>Login</h4>			
-				</div>
+				<div class="list-group">
       
-				<div class="list-group-item clearfix">
-			      
-					<form role="form" method="post">
-					
-						<div class="input-group">
-							<span class="input-group-addon">Username</span>
-							<input class="form-control" type="text" name="username" placeholder="Username" />
+					<div class="list-group-item">
+						<div class="form-group">
+							<label for="username" class="text-muted">Username</label>
+							<input id="username" class="form-control" type="text" name="username" placeholder="Username" />
 						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Password</span>	
-							<input class="form-control" type="password" name="password" placeholder="Password" />
+						<div class="form-group">
+							<label for="password" class="text-muted">Password</label>	
+							<input id="password" class="form-control" type="password" name="password" placeholder="Password" />
 						</div>		
-						<br />
+					</div>
+					
+					<div class="list-group-item clearfix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary">Log In</button>
+							<button type="submit" class="btn btn-primary"><?php echo $this->tb['btn_login']; ?></button>
 						</div>
-						
-					</form>
-	
+					</div>
+				
 				</div>
-
-			</div>
+				
+			</form>
 
 		</div>
 

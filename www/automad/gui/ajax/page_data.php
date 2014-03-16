@@ -181,7 +181,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		} else {
 		
 			// If the title is missing, just return an error.
-			$output['error'] = 'You can not save a page without a title.';
+			$output['error'] = $this->tb['error_page_title'];
 		
 		}
 	
@@ -236,7 +236,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			
 				<div class="list-group-item">
 					
-					<label class="text-muted">Theme &amp; Template</label>
+					<label class="text-muted"><?php echo $this->tb['page_theme_template']; ?></label>
 					<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default btn-block btn-lg"><?php echo ucwords(ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $P->template); ?></button>
 					
 					<!-- Select Template Modal -->	
@@ -248,8 +248,8 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 								</div>
 								<div class="modal-footer">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-										<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Apply &amp; Reload</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+										<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_apply_reload']; ?></button>
 									</div>
 								</div>
 							</div>
@@ -269,14 +269,14 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 						<?php if ($P->path != '/') { ?>
 						<div class="form-group col-md-6">
-							<label for="input-prefix" class="text-muted"><span class="glyphicon glyphicon-sort-by-attributes"></span> Prefix (Order in Navigation)</label>
+							<label for="input-prefix" class="text-muted"><span class="glyphicon glyphicon-sort-by-attributes"></span> <?php echo $this->tb['page_prefix']; ?></label>
 							<input id="input-prefix" class="form-control input-sm" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" onkeypress="return event.keyCode != 13;" />
 						</div>
 			
 						<div class="col-md-6">
-							<label class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> Visibility</label>
+							<label class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> <?php echo $this->tb['page_visibility']; ?></label>
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
-								<label class="btn btn-sm btn-default<?php if ($hidden) { echo ' active'; } ?>">Hide Page From Navigation
+								<label class="btn btn-sm btn-default<?php if ($hidden) { echo ' active'; } ?>"><?php echo $this->tb['btn_hide_page']; ?> 
 									<input type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
 								</label>
 							</div>
@@ -284,12 +284,12 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 						<?php } ?>
 						
 						<div class="form-group col-md-12">
-							<label for="input-data-tags" class="text-muted"><span class="glyphicon glyphicon-tags"></span> <?php echo ucwords(AM_KEY_TAGS); ?> (comma separated)</label>
+							<label for="input-data-tags" class="text-muted"><span class="glyphicon glyphicon-tags"></span> <?php echo $this->tb['page_tags']; ?></label>
 							<input id="input-data-tags" class="form-control input-sm" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
 						</div>
 			
 						<div class="form-group col-md-12">
-							<label for="input-redirect" class="text-muted"><span class="glyphicon glyphicon-link"></span> Redirect URL</label>
+							<label for="input-redirect" class="text-muted"><span class="glyphicon glyphicon-link"></span> <?php echo $this->tb['page_redirect']; ?></label>
 							<input id="input-redirect" class="form-control input-sm" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" placeholder="http://" onkeypress="return event.keyCode != 13;" />
 						</div>
 					
@@ -298,7 +298,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 				</div>
 				
 				<div class="list-group-item">
-					<h4 class="text-muted">Currently Used Variables</h4>
+					<h4 class="text-muted"><?php echo $this->tb['page_vars_used']; ?></h4>
 					<?php
 					
 					// Add textareas for all variables in $data, which are used in the currently selected template and are not part of the $standardKeys array 
@@ -315,7 +315,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 				</div>
 				
 				<div class="list-group-item" id="automad-custom-variables">
-					<h4 class="text-muted">Unused Variables</h4>	
+					<h4 class="text-muted"><?php echo $this->tb['page_vars_unused']; ?></h4>	
 					<?php
 					
 					// Add textareas for all left over variables $data, which don't show up in the template.
@@ -330,13 +330,13 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> Add Custom Variable</a></li>
-						<li><a href=""><span class="glyphicon glyphicon-remove"></span> Discard Changes</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a></li>
+						<li><a href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></li>
 					</ul>
 				</div>
 
 				<div class="list-group-item">	
-					<button type="submit" class="btn btn-success btn-block" data-loading-text="Saving Changes ..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
+					<button type="submit" class="btn btn-success btn-block" data-loading-text="<?php echo $this->tb['btn_loading']?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
 				</div>
 
 			</div>
@@ -347,18 +347,20 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Add Custom Variable</h4>
+							<h4 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h4>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="automad-add-variable-name" class="text-muted">Variable Name</label>
+								<label for="automad-add-variable-name" class="text-muted"><?php echo $this->tb['page_var_name']; ?></label>
 								<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
 							</div>	
 						</div>
 						<div class="modal-footer">
 							<div class="btn-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-								<button type="button" class="btn btn-primary" id="automad-add-variable-button"><span class="glyphicon glyphicon-plus"></span> Add</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+								<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
+									<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -378,7 +380,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	
 } else {
 	
-	$output['error'] = 'Error! Page not found!';
+	$output['error'] = $this->tb['error_page_not_found'];
 	
 }
 

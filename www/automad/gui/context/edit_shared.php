@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$this->guiTitle = $this->guiTitle . ' / Global Content &amp; Settings';
+$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['shared_title'];
 $this->element('header');
 
 
@@ -67,13 +67,13 @@ $this->element('header');
 				
 				<div class="list-group">
 				
-					<a class="list-group-item" href=""><h4><?php echo AM_DIR_SHARED; ?></h4></a>
+					<div class="list-group-item" href=""><h5><?php echo $this->tb['shared_title']; ?></h5></div>
 				
 					<div class="list-group-item">
 						<!-- Nav tabs -->
 						<ul class="nav nav-pills nav-justified">
-							<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> Data &amp; Settings</a></li>
-							<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> Files</a></li>
+							<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> <?php echo $this->tb['btn_data']; ?></a></li>
+							<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> <?php echo $this->tb['btn_files']; ?></a></li>
 						</ul>
 					</div>
 

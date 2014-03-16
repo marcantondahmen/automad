@@ -66,14 +66,14 @@ if ($_POST) {
 		
 	} else {
 		
-		$error = 'Make sure to specify a <b>username</b> and twice the same <b>password</b>!';
+		$error = $this->tb['error_form'];
 	
 	}
 	
 }
 
 
-$this->guiTitle = $this->guiTitle . ' / Install';
+$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['install_title'];
 $this->element('header');
 
 
@@ -85,40 +85,42 @@ $this->element('header');
 			
 			<?php $this->element('title'); ?>
 			
-			<?php if (isset($error)) { ?><div class="alert alert-danger"><?php echo $error; ?></div><?php } ?>
-
-			<div class="list-group">
-				
-				<div class="list-group-item">
-					<h4>Installation</h4>
-				</div>
-	      
-				<div class="list-group-item clearfix">
-				      
-					<form role="form" method="post">
+			<div class="alert alert-info"><?php echo $this->tb['install_help']; ?></div>
 			
-						<div class="input-group">
-							<span class="input-group-addon">Username</span>
-							<input class="form-control" type="text" name="username" placeholder="Username" />	
+			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?>
+
+			<form role="form" method="post">
+
+				<div class="list-group">
+					 
+					<div class="list-group-item">
+				      
+						<div class="form-group">
+							<label for="username" class="text-muted"><?php echo $this->tb['sys_user_add_name']; ?></label>
+							<input id="username" class="form-control" type="text" name="username" required />	
 						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Password</span>
-							<input class="form-control" type="password" name="password1" placeholder="Password" /> 
+						<div class="form-group">
+							<label for="password1" class="text-muted"><?php echo $this->tb['sys_user_add_password']; ?></label>
+							<input id="password1" class="form-control" type="password" name="password1" required /> 
 						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Password</span>
-							<input class="form-control" type="password" name="password2" placeholder="Repeat Password" />
-						</div>
-						<br />
-						<div class="pull-right">
-							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Download Accounts File</button>
+						<div class="form-group">
+							<label for="password2" class="text-muted"><?php echo $this->tb['sys_user_add_repeat']; ?></label>
+							<input id="password2" class="form-control" type="password" name="password2" required />
 						</div>
 						
-					</form>
-		
-				</div>
+					</div>	
+						
+					<div class="list-group-item clearfix">	
+						
+						<div class="pull-right">
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> <?php echo $this->tb['btn_accounts_file']; ?></button>
+						</div>
+						
+					</div>
 	
-			</div>
+				</div>
+			
+			</form>
 	
 		</div>
 

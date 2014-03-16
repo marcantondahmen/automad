@@ -141,7 +141,7 @@ if (isset($_POST['data'])) {
 			</div>
 		
 			<div class="list-group-item" id="automad-custom-variables">
-				<h4 class="text-muted">Sitewide Variables</h4>
+				<h4 class="text-muted"><?php echo $this->tb['shared_vars']; ?></h4>
 				<?php
 				// All site-wide variable except the site's name and the theme.
 				foreach (array_diff(array_keys($data), array(AM_KEY_SITENAME, AM_KEY_THEME)) as $key) {
@@ -152,13 +152,13 @@ if (isset($_POST['data'])) {
 		
 			<div class="list-group-item">
 				<ul class="nav nav-pills nav-justified">
-					<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> Add Variable</a></li>
-					<li><a href=""><span class="glyphicon glyphicon-remove"></span> Discard Changes</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a></li>
+					<li><a href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></li>
 				</ul>
 			</div>
 
 			<div class="list-group-item clearfix">	
-				<button type="submit" class="btn btn-success btn-block" data-loading-text="Saving Changes ..."><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
+				<button type="submit" class="btn btn-success btn-block" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
 			</div>
 		
 		
@@ -170,18 +170,20 @@ if (isset($_POST['data'])) {
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Add Custom Variable</h4>
+						<h4 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="automad-add-variable-name" class="text-muted">Variable Name</label>
+							<label for="automad-add-variable-name" class="text-muted"><?php echo $this->tb['shared_var_name']; ?></label>
 							<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
 						</div>	
 					</div>
 					<div class="modal-footer">
 						<div class="btn-group">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="automad-add-variable-button">Add</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+							<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
+								<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add']; ?> 
+							</button>
 						</div>
 					</div>
 				</div>

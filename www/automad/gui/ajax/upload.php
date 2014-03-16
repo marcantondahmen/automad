@@ -85,7 +85,7 @@ if (isset($_FILES['files']['name'])) {
 		
 		} else {
 		
-			$errors[] = 'Unsupported file format (' . $_FILES['files']['name'][$i] . ')';
+			$errors[] = $this->tb['error_file_format'] . ' <strong>' . $extension . '</strong>';
 		
 		}
 	

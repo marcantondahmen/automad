@@ -72,12 +72,12 @@ if (isset($_POST['delete'])) {
 
 		// Write array with all accounts back to file.
 		if (file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
-			$output['success'] = 'Successfully deleted <strong>' . implode(', ', $deleted) . '</strong>';
+			$output['success'] = $this->tb['success_remove'] . ' <strong>' . implode(', ', $deleted) . '</strong>';
 		}
 		
 	} else {
 		
-		$output['error'] = 'Error while deleting the selected users!';
+		$output['error'] = $this->tb['error_permission'];
 		
 	}
 	
@@ -100,7 +100,7 @@ ob_start();
 			<div class="col-xs-2">
 			<?php if ($user != $this->user()) { ?>
 				<div class="pull-right btn-group" data-toggle="buttons">
-					<label class="btn btn-default" title="Mark user for deletion">
+					<label class="btn btn-default">
 						<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-trash"></span>
 					</label>
 				</div>
@@ -114,8 +114,8 @@ ob_start();
 		<?php } ?>	
 			
 		<div class="btn-group pull-right">
-			<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-			<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Remove</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+			<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>
 		</div>
 		
 	</div>

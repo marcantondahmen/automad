@@ -66,36 +66,36 @@ if (isset($_POST['current-password']) && $_POST['current-password'] && isset($_P
 					
 					// Write array with all accounts back to file.
 					if (file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
-						$output['success'] = 'Your password got changed successfully!<br /><br /><a class="alert-link" href="?context=logout"><strong>Log out</strong></a>';
+						$output['success'] = $this->tb['success_password_changed']; 
 					}
 					
 				} else {
 					
-					$output['error'] = 'Error while saving your password!';
+					$output['error'] = $this->tb['error_permission'];
 					
 				}
 				
 			} else {
 				
-				$output['error'] = 'Please enter your current password!';
+				$output['error'] = $this->tb['error_form'];
 				
 			}
 						
 		} else {
 			
-			$output['error'] = 'You can not use your current password!';
+			$output['error'] = $this->tb['error_form'];;
 			
 		}
 		
 	} else {
 		
-		$output['error'] = 'Please enter twice the same new password!';
+		$output['error'] = $this->tb['error_form'];
 		
 	}
 	
 } else {
 	
-	$output['error'] = 'All fields are required!';
+	$output['error'] = $this->tb['error_form'];
 	
 }
 

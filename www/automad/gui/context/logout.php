@@ -49,7 +49,7 @@ unset($_SESSION);
 session_destroy();
 
 
-$this->guiTitle = $this->guiTitle . ' / Logged Out Successfully!';
+$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['log_out_title'];
 $this->element('header');
 
 
@@ -64,12 +64,12 @@ $this->element('header');
 			<div class="list-group">
 				
 				<div class="list-group-item">
-					<h4>Logged Out!</h4>
+					<h4><?php echo $this->tb['success_log_out']; ?></h4>
 				</div>
 				
 				<div class="list-group-item clearfix">
 					<div class="pull-right">
-						<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-primary">Log in again</a>
+						<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-primary"><?php echo $this->tb['btn_login']; ?></a>
 					</div>
 				</div>
 				

@@ -82,10 +82,10 @@ if (isset($_POST['delete'])) {
 		
 		if (is_writable($file)) {
 			if (unlink($file)) {
-				$success[] = 'Successfully deleted <strong>' . basename($file) . '</strong>';
+				$success[] = $this->tb['success_remove'] . ' <strong>' . basename($file) . '</strong>';
 			}
 		} else {
-			$errors[] = 'Can not delete <strong>' . basename($file) . '</strong>';
+			$errors[] = $this->tb['error_remove'] . ' <strong>' . basename($file) . '</strong>';
 		} 
 	
 	}
@@ -181,7 +181,7 @@ ob_start();
 	
 	} else {
 	
-		?><div class="list-group-item"><h4>No files!</h4></div><?php
+		?><div class="list-group-item"><h4><?php echo $this->tb['error_no_files']; ?></h4></div><?php
 		
 	}
 
@@ -189,26 +189,26 @@ ob_start();
 	
 	<div class="list-group-item">
 		<ul class="nav nav-pills nav-justified">	
-			<li><a href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> Upload Files</a></li>
+			<li><a href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo $this->tb['btn_upload']; ?></a></li>
 		</ul>	
 	</div>
 	
 	<div class="list-group-item">		
-		<button type="submit" class="btn btn-danger btn-block" data-loading-text="Processing ..."><span class="glyphicon glyphicon-trash"></span> Delete Selected</button>	
+		<button type="submit" class="btn btn-danger btn-block" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>	
 	</div>
 	
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>">
+<div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>" data-automad-dropzone-text="<?php echo $this->tb['dropzone']; ?>" data-automad-browse-text="<?php echo $this->tb['btn_browse']; ?>">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content"> 
 			<div class="modal-header"> 
-				<h4 class="modal-title" id="myModalLabel">Upload Files</h4> 
+				<h4 class="modal-title" id="myModalLabel"><?php echo $this->tb['btn_upload']; ?></h4> 
 			</div>
 			<div id="automad-upload" class="modal-body"></div>	
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" data-loading-text="Uploading ...">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
 			</div>
 		</div>
 	</div>

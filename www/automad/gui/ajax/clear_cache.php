@@ -53,7 +53,7 @@ $C = new Cache();
 $C->clear();
 
 
-$output['success'] = 'The page cache got cleared successfully!';
+$output['success'] = $this->tb['success_cache_cleared'];
 
 
 echo json_encode($output);

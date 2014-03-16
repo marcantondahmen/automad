@@ -49,7 +49,7 @@ $C = new Cache();
 $lastEdit = $C->getSiteMTime();
 
 
-$this->guiTitle = $this->guiTitle . ' / Welcome';
+$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['start_title'] . ' ' . ucwords($this->user());
 $this->element('header');
 
 
@@ -64,11 +64,11 @@ $this->element('header');
 				<div class="list-group">
 					
 					<div class="list-group-item">
-						<h3>Hello <?php echo ucwords($this->user()); ?></h3>
+						<h3><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h3>
 					</div>	
 					
 					<div class="list-group-item">	
-						Last Edit: <strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.
+						<?php echo $this->tb['start_last_edit']; ?> <strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.
 					</div>
 					
 					<div class="list-group-item">	
@@ -85,16 +85,16 @@ $this->element('header');
 				<div class="list-group">	
 				
 					<a class="list-group-item" href="?context=system_settings">
-						<h5><span class="glyphicon glyphicon-cog"></span> System Settings</h5>
+						<h5><span class="glyphicon glyphicon-cog"></span> <?php echo $this->tb['sys_title']; ?></h5>
 					</a>
 					
 					<a class="list-group-item" href="?context=edit_shared">
-						<h5><span class="glyphicon glyphicon-globe"></span> Global Content &amp; Settings</h5>
+						<h5><span class="glyphicon glyphicon-globe"></span> <?php echo $this->tb['shared_title']; ?></h5>
 					</a>
 					
 					<a class="list-group-item" href="#" data-toggle="modal" data-target="#pagesModal">
 						<span class="badge"><?php echo count($this->collection); ?></span>
-						<h5><span class="glyphicon glyphicon-list-alt"></span> Pages</h5>
+						<h5><span class="glyphicon glyphicon-list-alt"></span> <?php echo $this->tb['pages_title']; ?></h5>
 					</a>
 
 					<!-- Modal -->
@@ -103,19 +103,19 @@ $this->element('header');
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="pagesModalLabel">Select Page</h4>
+									<h4 class="modal-title" id="pagesModalLabel"><?php echo $this->tb['pages_title']; ?></h4>
 								</div>
 								<div class="modal-body">
 									<?php echo $this->siteTree('', $this->collection, Parse::queryKey('url'), array('context' => 'edit_page'), false); ?>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
 								</div>
 							</div>
 						</div>
 					</div>		
 					
-					<a class="list-group-item" href="?context=logout"><h5><span class="glyphicon glyphicon-off"></span> Log Out</h5></a>
+					<a class="list-group-item" href="?context=logout"><h5><span class="glyphicon glyphicon-off"></span> <?php echo $this->tb['log_out_title']; ?></h5></a>
 				
 				</div>
 
