@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/js/automad.js"></script>
+	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/js/automad.min.js"></script>
 	
 </head>
 
