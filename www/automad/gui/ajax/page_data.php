@@ -273,7 +273,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 							<input id="input-prefix" class="form-control input-sm" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" onkeypress="return event.keyCode != 13;" />
 						</div>
 			
-						<div class="col-md-6">
+						<div class="form-group col-md-6">
 							<label class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> <?php echo $this->tb['page_visibility']; ?></label>
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
 								<label class="btn btn-sm btn-default<?php if ($hidden) { echo ' active'; } ?>"><?php echo $this->tb['btn_hide_page']; ?> 
