@@ -40,31 +40,44 @@
 // Variables 
 // =============================
 
-@group-padding: 	15px;
-@item-gap: 		2px;
+@group-padding: 	12px;
+@item-gap: 		1px;
 @item-padding:		15px;
-@shadow-offset-big:	5px;
+@shadow-offset-big:	4px;
 @shadow-offset-small:	3px;
 @shadow-darken:		7%;
-@hover-darken:		7%;
+@hover-darken:		4%;
+@disabled-lighten:	20%;
+
+// Corners
+@group-radius:		4px;
+@pill-radius:		3px;
+@form-radius:		@pill-radius;
+@button-radius:		@pill-radius;
+@alert-radius:		@pill-radius;
+
 
 // Colors
-@body-color:		#888;
+@body-color:		#909D9E;
 @body-bg-color:		#e7e7e7;
-@group-bg-color: 	#fafafa;
+@group-bg-color: 	#fff;
 @inverted-color:	#fff;
 
 @default-color:		@body-color;	
-@primary-color:		#7E949E;
-@success-color:		#AEC2AB;
-@danger-color: 		#FC7765;
+@primary-color:		@body-color;
+@success-color:		#87BDB1;
+@danger-color: 		#FF6B6B;
+@warning-color:		#FF9E9D;
 
-@form-color:		#888888;
-@form-bg-color:		lighten(@group-bg-color, 20%);
-@form-border-color:	darken(@group-bg-color, 20%);
+@form-color:		@body-color;
+@form-bg-color:		darken(@group-bg-color, 2%);
+@form-border-color:	darken(@group-bg-color, 16%);
 
+@title-color:		lighten(@primary-color, 10%);
 @active-color:		@primary-color;
 @link-color: 		@primary-color;
+
+@muted-color:		lighten(@default-color, 10%);
 
 
 
@@ -73,10 +86,10 @@
 // Mixins
 // =============================
 
-.border-radius(@radius) {
-  -webkit-border-radius: @radius;
-     -moz-border-radius: @radius;
-          border-radius: @radius;
+.border-radius(@radius, @corner: -) {
+  -webkit-border@{corner}radius: @radius;
+     -moz-border@{corner}radius: @radius;
+          border@{corner}radius: @radius;
 }
 
 .box-shadow(@x: 0; @y: 0; @blur: 0px; @color: #000) {
@@ -112,6 +125,18 @@
 		.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(darken(@bg, @hover-darken), @shadow-darken));
 	}
 	
+	&.disabled,
+	&[disabled],
+	&.disabled:active,
+	&[disabled]:active,
+	&.disabled:hover,
+	&[disabled]:hover {
+		opacity: 1;
+		color: lighten(@text, @disabled-lighten);
+		border-color: lighten(@border, @disabled-lighten);
+		background-color: lighten(@bg, @disabled-lighten);
+	}
+	
 }
 
 
@@ -124,6 +149,11 @@
 body {
 	color: @body-color;
 	background-color: @body-bg-color;
+}
+
+.container {
+	margin-top: @item-padding;
+	margin-bottom: @item-padding;
 }
 
 .col-xs-1, 
@@ -148,32 +178,124 @@ body {
 
 
 // =============================
-// List Groups
+// Header
 // =============================
 
-.list-group-item:first-child,
-.list-group-item:last-child { 
-	.border-radius(0px);
+#header {
+	
+	padding: @item-padding;
+	
+	& a {
+		text-decoration: none;
+		color: @title-color;
+		
+		&:hover {
+			color: darken(@title-color, @hover-darken);
+		}
+		
+	}
+	
 }
+
+@font-face {
+	font-family: 'automad-logo';
+	src:	url('../fonts/automad-logo.eot?oyzf45');
+	src:	url('../fonts/automad-logo.eot?#iefixoyzf45') format('embedded-opentype'),
+		url('../fonts/automad-logo.woff?oyzf45') format('woff'),
+		url('../fonts/automad-logo.ttf?oyzf45') format('truetype'),
+		url('../fonts/automad-logo.svg?oyzf45#automad-logo') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.automad-logo {
+	font-family: 'automad-logo';
+	font-size: 36px;
+	margin-left: -2px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.site-name {
+	margin: 0;
+	display: inline-block;
+}
+
+
+
+
+// =============================
+// Typography
+// =============================
+
+h3 {
+	margin: 10px 0;
+	font-weight: 400;
+}
+
+
+
+
+// =============================
+// Lists
+// =============================
+
+ol {
+	margin: 0;
+	padding: 10px 20px;
+	
+	& li {
+		padding: 5px 0;
+	}
+}
+
+
+
+
+// =============================
+// List Groups
+// =============================
 
 .list-group {
 	margin: 0;
 	padding: @group-padding 0;
 	background-color: @body-bg-color;
-	
 }
 
 .list-group-item {
+	
 	background-color: @group-bg-color;
 	border-color: transparent;
 	padding: @item-padding;
 	margin-bottom: @item-gap;
 	.box-shadow(@shadow-offset-big; @shadow-offset-big; 0; darken(@body-bg-color, @shadow-darken));
-}
+	
+	a& {
+		
+		color: @link-color;
+		word-wrap: break-word;
+		
+		&:hover {
+			background-color: darken(@group-bg-color, @hover-darken);
+		}
+		
+	}
+	
+	&:first-child { 
+		.border-radius(@group-radius, -top-left-);
+		.border-radius(@group-radius, -top-right-);
+	}
 
-.list-group-item > .row {
-	margin-left: 0 - @item-padding;
-	margin-right: 0 - @item-padding;
+	&:last-child { 
+		.border-radius(@group-radius, -bottom-left-);
+		.border-radius(@group-radius, -bottom-right-);
+	}
+	
+	& > .row {
+		margin-left: 0 - @group-padding;
+		margin-right: 0 - @group-padding;
+	}
+	
 }
 
 
@@ -211,7 +333,6 @@ a {
 	
 	margin-left: -10px;
 	
-	
 	& ul {
 		margin-left: 20px;
 	}
@@ -221,21 +342,24 @@ a {
 		padding: 5px 10px;
 	}
 	
-	
 }
 
 .nav-pills li {
 	
 	& a {
-		.border-radius(0px);
+		.border-radius(@pill-radius);
 	}
 	
 	& a:hover {
 		background-color: darken(@group-bg-color, @hover-darken);
 	}
 	
-	& > a:active,
+	& a:active {
+		.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(@group-bg-color, @shadow-darken));
+	}
+	
 	&.active > a,
+	&.active > a:focus,
 	&.active > a:hover {
 		color: @inverted-color;
 		background-color: @active-color;
@@ -257,12 +381,42 @@ a {
 // Forms
 // =============================
 
+label {
+	font-weight: 400;
+	font-size: 11px;
+	text-transform: uppercase;
+	
+	&.btn {
+		text-transform: none;
+	}
+	
+}
+
 .form-control {
 	color: @form-color;
 	background-color: @form-bg-color;
 	border-color: @form-border-color;
-	.border-radius(0px);
+	.border-radius(@form-radius);
 	.box-shadow-inset(@shadow-offset-small; @shadow-offset-small; 0; darken(@form-bg-color, @shadow-darken));
+	
+	
+	&::-webkit-input-placeholder {
+		color: lighten(@form-color, 20%);
+	}
+
+	&:-moz-placeholder {
+		color: lighten(@form-color, 20%);
+	}
+
+	&::-moz-placeholder {
+		color: lighten(@form-color, 20%);
+	}
+
+	&:-ms-input-placeholder {  
+		color: lighten(@form-color, 20%);
+	}
+	
+	
 }
 
 
@@ -277,31 +431,29 @@ a {
 }
 
 .btn,
+.btn.disabled,
 .btn[disabled] {
-	.border-radius(0px);
+	.border-radius(@button-radius);
 	.box-shadow(@shadow-offset-small; @shadow-offset-small; 0; darken(@group-bg-color, @shadow-darken));
 }	
 	
-.btn-default,
-.btn-default[disabled] {
-	.button(@default-color; @group-bg-color; lighten(@default-color, 30%));
+.btn-default {
+	.button(@default-color; @group-bg-color; lighten(@default-color, 20%));
 }
 	
-.btn-primary,
-.btn-primary[disabled] {
+.btn-primary {
 	.button(@inverted-color; @primary-color; @primary-color);
 }
 	
-.btn-success,
-.btn-success[disabled] {
+.btn-success {
 	.button(@inverted-color; @success-color; @success-color);
 }
 	
-.btn-danger,
-.btn-danger[disabled] {
+.btn-danger {
 	.button(@inverted-color; @danger-color; @danger-color);
 }
 		
+
 
 
 // =============================
@@ -317,7 +469,6 @@ a {
 }
 
 .modal-content {
-	.border-radius(0px);
 	border-width: 0px;
 	background-color: transparent;
 	.box-shadow(0; 0; 0; #000);
@@ -335,35 +486,116 @@ a {
 	z-index: 0;
 }
 
+.modal-header,
+#cache-clear-modal .modal-body,
+#select-template-modal .modal-body {
+	.border-radius(@group-radius, -top-left-);
+	.border-radius(@group-radius, -top-right-);
+}
+
+#users-modal .modal-body,
 .modal-footer {
+	.border-radius(@group-radius, -bottom-left-);
+	.border-radius(@group-radius, -bottom-right-);
 	z-index: 1;
+}
+
+hr {
+	border-top-width: @item-gap;
+	border-color: darken(@body-bg-color, @shadow-darken);
 }
 
 
 
 
+// =============================
+// Images
+// =============================
+
+.img-thumbnail {
+	.box-shadow(@shadow-offset-small; @shadow-offset-small; 0; darken(@group-bg-color, @shadow-darken));
+}
 
 
 
 
+// =============================
+// Alerts, Badges, Labels, Progress ...
+// =============================
 
+.alert {
+	
+	font-weight: 400;
+	.border-radius(@alert-radius);
+	color: @inverted-color;
+	margin: @group-padding 0;
+	
+	// Standard shadow from body bg color
+	.box-shadow(@shadow-offset-small; @shadow-offset-small; 0; darken(@body-bg-color, @shadow-darken));
 
+	// Shadow within form (modals) get lighter color (group bg color)
+	form & {
+		.box-shadow(@shadow-offset-small; @shadow-offset-small; 0; darken(@group-bg-color, @shadow-darken));
+	}
 
+	& .close {
+		color: @inverted-color;
+		opacity: 0.5;
+	}
 
+	&-info {
+		border-color: @primary-color;
+		background-color: @primary-color;
+	}
 
+	&-danger {
+		border-color: @danger-color;
+		background-color: @danger-color;
+	}
+	
+	&-success {
+		border-color: @success-color;
+		background-color: @success-color;
+	}
+	
+	&-warning {
+		border-color: @warning-color;
+		background-color: @warning-color;
+	}
 
+}
 
+.badge {
+	background-color: @link-color;
+}
 
+.label-default {
+	background-color: @default-color;
+}
 
+.text-muted {
+	color: @muted-color;
+}
 
+.text-success {
+	color: @success-color;
+}
 
+.progress-bar {
+	background-color: @primary-color;
+	
+	&-success {
+		background-color: @success-color;
+	}
 
+	&-danger {
+		background-color: @danger-color;
+	}
 
-
-
-
-
-
-
+	&-warning {
+		background-color: @warning-color;
+	}
+	
+}
 
 
