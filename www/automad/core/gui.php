@@ -77,6 +77,13 @@ class GUI {
 	
 	
 	/**
+	 *	Text blocks to be used for feedback, button text and alerts.
+	 */
+	
+	private $tb = array();
+	
+	
+	/**
 	 *	Load the site's global data and include modules according to the current context.
 	 *
 	 *	When a the GUI gets initialize, at first it gets verified, if an user is logged in or not. That has the highest priority.
@@ -96,8 +103,13 @@ class GUI {
 	
 	public function __construct() {
 		
+		// Get Site data.
 		$this->siteData = Parse::siteData();
 		
+		// Get all GUI text blocks.
+		$this->tb = Parse::markdownFile(AM_BASE_DIR . '/automad/gui/text_blocks.txt');
+		
+		// Start Session.
 		session_start();
 		
 		// Check if an user is logged in.
@@ -391,7 +403,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">Theme &amp; Template</label><select id="' . $id . '" class="form-control" name="' . $name . '" size="1">'; 
+		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">' . $this->tb['pages_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '" size="1">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
