@@ -403,7 +403,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">' . $this->tb['pages_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '" size="1">'; 
+		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">' . $this->tb['page_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '" size="1">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
