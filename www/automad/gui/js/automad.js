@@ -63,14 +63,14 @@ $(document).on('click', '#automad-add-variable-button', function() {
 			
 		} else {
 			
-			$('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You can not add a variable without a name!</div>')
+			$('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + $(this).data('automadErrorName') + '</div>')
 			.prependTo($('#automad-add-variable-modal .modal-body'));
 			
 		}
 	
 	} else {
 		
-		$('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>There is already a variable with that name!</div>')
+		$('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + $(this).data('automadErrorExists') + '</div>')
 		.prependTo($('#automad-add-variable-modal .modal-body'));
 		
 	}
@@ -398,14 +398,18 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 	
 		// If an URL exists as data-attribute for the modal window, ot will be used as additional form data.
 		url = 		modal.data('automadUrl'),
+		
+		// Text
+		dropzoneText =	modal.data('automadDropzoneText'),
+		browseText =	modal.data('automadBrowseText'),
 	
 		// Find Upload-Container and reset the HTML from previuos calls!
 		uploader =	modal.find('#automad-upload').html(''),
 		
 		// Dropzone
-		dropzone =	$('<div class="well well-lg"><h2 class="center-block text-muted" style="text-align: center;">Drop Files here</h2></div>').appendTo(uploader),
+		dropzone =	$('<div class="well well-lg"><h2 class="center-block text-muted" style="text-align: center;">' + dropzoneText + '</h2></div>').appendTo(uploader),
 		input =		$('<input type="file" multiple />').appendTo(dropzone).hide(),
-		browse =	$('<button class="btn btn-lg btn-default center-block">or browse</button>').click(function() {
+		browse =	$('<button class="btn btn-default center-block">' + browseText + '</button>').click(function() {
 					// Make a button click trigger the file input for browsing.
 					input.click();
 					return false;
@@ -512,7 +516,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 				
 			// In case of an server-side error, add alert message.		
 			if (data.result.error) {	
-				data.context.find('.progress-bar').text('Upload completed with errors').addClass('progress-bar-warning');
+				data.context.find('.progress-bar').addClass('progress-bar-warning');
 				data.context.find('.progress').after('<div class="alert alert-warning">' + data.result.error + '</div>');
 			} else {
 				data.context.find('.progress-bar').addClass('progress-bar-success');
@@ -525,7 +529,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 		
 		fail: function (e, data) {
 		
-			data.context.find('.progress-bar').text('Upload failed').addClass('progress-bar-danger');
+			data.context.find('.progress-bar').text('Error').addClass('progress-bar-danger');
 		
 		}
 		
