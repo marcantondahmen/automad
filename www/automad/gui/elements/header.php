@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	  
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title><?php echo $this->guiTitle; ?></title>
 
 	<link href="<?php echo AM_BASE_URL; ?>/automad/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +61,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	
 	<div id="noscript" class="container">
 		<div class="row">
-			<div class="alert alert-danger col-md-4 col-md-offset-4">
-				<h4>JavaScript needs to be enabled!</h4>
+			<div class="col-md-4 col-md-offset-4">
+				<div class="alert alert-info"><h3>JavaScript must be enabled!</h3></div>
 			</div>
 		</div>
 	</div>
