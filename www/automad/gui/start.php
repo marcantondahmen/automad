@@ -61,14 +61,12 @@ $this->element('header');
 
 				<?php $this->element('title'); ?>
 
+				<div class="alert alert-info"><h3><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h3></div>
+
 				<div class="list-group">
 					
-					<div class="list-group-item">
-						<h3><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h3>
-					</div>	
-					
-					<div class="list-group-item">	
-						<?php echo $this->tb['start_last_edit']; ?> <strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>.
+					<div class="list-group-item text-muted">	
+						<?php echo $this->tb['start_last_edit']; ?> <strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>
 					</div>
 					
 					<div class="list-group-item">	
