@@ -49,10 +49,13 @@ $output = array();
 $output['debug'] = $_POST;
 
 
-// Get config from json file.
-$config = json_decode(file_get_contents(AM_CONFIG), true);
-ksort($config);
-
+// Get config from json file, if exsiting.
+if (file_exists(AM_CONFIG)) {
+	$config = json_decode(file_get_contents(AM_CONFIG), true);
+	ksort($config);
+} else {
+	$config = array();
+}
 
 
 
@@ -67,7 +70,7 @@ if (isset($_POST['cache'])) {
 		$config['AM_CACHE_ENABLED'] = false;
 	}
 	
-	$config['AM_CACHE_MONITOR_DELAY'] = $cache['monitor-delay'];
+	$config['AM_CACHE_MONITOR_DELAY'] = intval($cache['monitor-delay']);
 	
 }
 
@@ -101,7 +104,7 @@ if (isset($_POST['debug'])) {
 
 
 // Write config file.
-if (is_writable(AM_CONFIG)) {
+if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(AM_CONFIG)) {
 
 	$old = umask(0);
 	file_put_contents(AM_CONFIG, json_encode($config, JSON_PRETTY_PRINT));
