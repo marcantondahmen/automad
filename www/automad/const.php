@@ -136,7 +136,7 @@ if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
 define('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.txt');
 // List of file extensions to identify a file in an URL and to list files in the GUI
 if (!defined('AM_ALLOWED_FILE_TYPES')) {
-	define('AM_ALLOWED_FILE_TYPES', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3', 'gif')));
+	define('AM_ALLOWED_FILE_TYPES', 'css, jpg, zip, png, svg, js, pdf, mp3, gif');
 }
 
 
