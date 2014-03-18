@@ -39,8 +39,10 @@ define('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
 
 
 // Parse AM_CONFIG to set user overrides for the below defined constants.
-foreach (json_decode(file_get_contents(AM_CONFIG), true) as $key => $value) {
-	define($key, $value);	
+if (file_exists(AM_CONFIG)) {
+	foreach (json_decode(file_get_contents(AM_CONFIG), true) as $key => $value) {
+		define($key, $value);	
+	}
 }
 
 
