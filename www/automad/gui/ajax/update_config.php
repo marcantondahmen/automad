@@ -76,20 +76,11 @@ if (isset($_POST['cache'])) {
 if (isset($_POST['file-types'])) {
 	
 	if ($_POST['file-types']) {
-	
-		// If there string actually contains file types.
-		$fileTypes = explode(AM_PARSE_STR_SEPARATOR, $_POST['file-types']);
-		$fileTypes = array_map(function($type) {
-					return trim($type); 
-				}, $fileTypes);
-	
-		$config['AM_ALLOWED_FILE_TYPES'] = serialize($fileTypes);
-	
+		// If there string actually contains file types and is not empty.
+		$config['AM_ALLOWED_FILE_TYPES'] = $_POST['file-types'];
 	} else {
-		
 		// If the string is empty, remove the variable from the config, to not overwrite the defaults.
 		unset($config['AM_ALLOWED_FILE_TYPES']);
-		
 	}
 	
 }
