@@ -68,7 +68,7 @@ if (isset($_FILES['files']['name'])) {
 	$errors = array();
 
 	// Get the allowed file types from const.php.
-	$allowedFileTypes = unserialize(AM_ALLOWED_FILE_TYPES);
+	$allowedFileTypes = Parse::allowedFileTypes();
 
 	// Get number of files.
 	$fileCount = count($_FILES['files']['name']);
