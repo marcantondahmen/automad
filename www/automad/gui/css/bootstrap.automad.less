@@ -427,9 +427,19 @@ label {
 // Buttons
 // =============================
 
-.btn-group > .btn:hover {
-	z-index: 0;
-}
+.btn-group > .btn {
+	
+	border-left-width: 0px;
+	
+	&:first-child {
+		border-left-width: 1px;
+	}
+	
+	&:hover {
+		z-index: 0;
+	}
+	
+} 
 
 .btn,
 .btn.disabled,
