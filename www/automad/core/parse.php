@@ -133,9 +133,9 @@ class Parse {
 	
 	
 	/**
-	 *	Tests if a string is a file name.
+	 *	Tests if a string is a file name (with an allowed file extension).
 	 *
-	 *	Basically a possibly existing file extension is checked against the array of registered file extensions.
+	 *	Basically a possibly existing file extension is checked against the array of allowed file extensions.
 	 *
 	 *	"/url/file.jpg" will return true, "/url/file" or "/url/file.something" will return false.
 	 *	
@@ -151,30 +151,13 @@ class Parse {
 		// Get just the basename
 		$str = basename($str);
 		
-		// Explode to name / type
-		// If there is actually an extension will be checked below
-		$parts = explode('.', $str);
+		// Possible extension		
+		$extension = strtolower(pathinfo($str, PATHINFO_EXTENSION));
 		
-		// Check if an extensions exists and if that extensions is on of the registered (known) extensions.
-		if (count($parts > 1)) {
-			
-			$str = end($parts);	
-			$fileExtensions = Parse::allowedFileTypes();
-			
-			if (in_array($str, $fileExtensions)) {
-				
-				return true;
-				
-			} else {
-				
-				return false;
-				
-			}
-			
+		if (in_array($extension, Parse::allowedFileTypes())) {
+			return true;
 		} else {
-			
 			return false;
-			
 		}
 		
 	}
