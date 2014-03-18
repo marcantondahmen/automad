@@ -49,18 +49,6 @@ $this->guiTitle = $this->guiTitle . ' / ' . $this->tb['sys_title'];
 $this->element('header');
 
 
-// Get config from json file.
-$config = json_decode(file_get_contents(AM_CONFIG), true);
-
-
-// Normalize $config and get missing items from defaults in const.php
-foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY', 'AM_ALLOWED_FILE_TYPES') as $const) {	
-	if (!isset($config[$const])) {
-		$config[$const] = constant($const);
-	}
-}
-
-
 ?>
 
 	<div class="row">
@@ -163,11 +151,11 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 				<form class="automad-form" data-automad-handler="update_config">
 					<div class="modal-body">
 						<div class="btn-group btn-group-justified" data-toggle="buttons">
-							<label class="btn btn-default btn-lg<?php if ($config['AM_CACHE_ENABLED']) { echo ' active'; } ?>">
-								<input type="radio" name="cache[enabled]" value="on"<?php if ($config['AM_CACHE_ENABLED']) { echo ' checked'; } ?> />On
+							<label class="btn btn-default btn-lg<?php if (AM_CACHE_ENABLED) { echo ' active'; } ?>">
+								<input type="radio" name="cache[enabled]" value="on"<?php if (AM_CACHE_ENABLED) { echo ' checked'; } ?> />On
 							</label>
-							<label class="btn btn-default btn-lg<?php if (!$config['AM_CACHE_ENABLED']) { echo ' active'; } ?>">
-								<input type="radio" name="cache[enabled]" value="off"<?php if (!$config['AM_CACHE_ENABLED']) { echo ' checked'; } ?> />Off
+							<label class="btn btn-default btn-lg<?php if (!AM_CACHE_ENABLED) { echo ' active'; } ?>">
+								<input type="radio" name="cache[enabled]" value="off"<?php if (!AM_CACHE_ENABLED) { echo ' checked'; } ?> />Off
 							</label>
 						</div>
 						<br />
@@ -177,22 +165,17 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 						
 							$delays = array(120, 600, 3600, 7200);
 							
-							// Set default, in case $config['AM_CACHE_MONITOR_DELAY'] is not in $delays.
-							if (!in_array($config['AM_CACHE_MONITOR_DELAY'], $delays)) {
-								$config['AM_CACHE_MONITOR_DELAY'] = end($delays);
-							}
-							
 							foreach ($delays as $seconds) {
 							
 								echo '<label class="btn btn-default btn-sm';
 							
-								if ($seconds == $config['AM_CACHE_MONITOR_DELAY']) {
+								if ($seconds == AM_CACHE_MONITOR_DELAY) {
 									echo ' active';
 								}
 							
 								echo '"><input type="radio" name="cache[monitor-delay]" value="' . $seconds . '"';
 							
-								if ($seconds == $config['AM_CACHE_MONITOR_DELAY']) {
+								if ($seconds == AM_CACHE_MONITOR_DELAY) {
 									echo ' checked';
 								}
 							
@@ -240,7 +223,7 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 				<form class="automad-form" data-automad-handler="update_config">
 					<div class="modal-body">
 						<?php echo $this->tb['sys_file_types_help']; ?> 
-						<input type="text" class="form-control" name="file-types" value="<?php echo implode(AM_PARSE_STR_SEPARATOR . ' ', unserialize($config['AM_ALLOWED_FILE_TYPES'])); ?>" />
+						<input type="text" class="form-control" name="file-types" value="<?php echo AM_ALLOWED_FILE_TYPES; ?>" />
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_ok']; ?></button>
@@ -264,11 +247,11 @@ foreach (array('AM_DEBUG_ENABLED', 'AM_CACHE_ENABLED', 'AM_CACHE_MONITOR_DELAY',
 						<?php echo $this->tb['sys_debug_help']; ?>
 						<br />
 						<div class="btn-group btn-group-justified" data-toggle="buttons">
-							<label class="btn btn-default btn-lg<?php if ($config['AM_DEBUG_ENABLED']) { echo ' active'; } ?>">
-								<input type="radio" name="debug" value="on"<?php if ($config['AM_DEBUG_ENABLED']) { echo ' checked'; } ?> />On
+							<label class="btn btn-default btn-lg<?php if (AM_DEBUG_ENABLED) { echo ' active'; } ?>">
+								<input type="radio" name="debug" value="on"<?php if (AM_DEBUG_ENABLED) { echo ' checked'; } ?> />On
 							</label>
-							<label class="btn btn-default btn-lg<?php if (!$config['AM_DEBUG_ENABLED']) { echo ' active'; } ?>">
-								<input type="radio" name="debug" value="off"<?php if (!$config['AM_DEBUG_ENABLED']) { echo ' checked'; } ?> />Off
+							<label class="btn btn-default btn-lg<?php if (!AM_DEBUG_ENABLED) { echo ' active'; } ?>">
+								<input type="radio" name="debug" value="off"<?php if (!AM_DEBUG_ENABLED) { echo ' checked'; } ?> />Off
 							</label>
 						</div>
 					</div>
