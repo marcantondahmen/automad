@@ -165,17 +165,24 @@ $this->element('header');
 						
 							$delays = array(120, 600, 3600, 7200);
 							
+							// Set default delay, if the current setting is not in $delays, to prevent submitting an empty value for cache[monitor-delay].
+							if (in_array(AM_CACHE_MONITOR_DELAY, $delays)) {
+								$current = AM_CACHE_MONITOR_DELAY;
+							} else {
+								$current = end($delays);
+							}
+							
 							foreach ($delays as $seconds) {
 							
 								echo '<label class="btn btn-default btn-sm';
 							
-								if ($seconds == AM_CACHE_MONITOR_DELAY) {
+								if ($seconds == $current) {
 									echo ' active';
 								}
 							
 								echo '"><input type="radio" name="cache[monitor-delay]" value="' . $seconds . '"';
 							
-								if ($seconds == AM_CACHE_MONITOR_DELAY) {
+								if ($seconds == $current) {
 									echo ' checked';
 								}
 							
