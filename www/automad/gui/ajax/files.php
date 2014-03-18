@@ -97,7 +97,7 @@ if (isset($_POST['delete'])) {
 
 
 // Get the allowed file types from const.php.
-$allowedFileTypes = unserialize(AM_ALLOWED_FILE_TYPES);
+$allowedFileTypes = Parse::allowedFileTypes();
 
 
 // Define image file extensions. 
