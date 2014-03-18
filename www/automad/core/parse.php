@@ -48,6 +48,26 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class Parse {
 	
 
+	/**
+	 *	Return an array with the allowed file types.
+	 *
+	 *	@return Array of file types
+	 */
+
+	public static function allowedFileTypes() {
+		
+		// Split string
+		$types = explode(AM_PARSE_STR_SEPARATOR, AM_ALLOWED_FILE_TYPES);
+		// Trim items
+		$types = array_map(function($type) {
+				return trim($type);
+		         }, $types);
+		
+		return $types;
+		
+	}
+
+
  	/**
  	 *	Extracts the tags string out of a given array and returns an array with these tags.
  	 *
@@ -139,7 +159,7 @@ class Parse {
 		if (count($parts > 1)) {
 			
 			$str = end($parts);	
-			$fileExtensions = unserialize(AM_ALLOWED_FILE_TYPES);
+			$fileExtensions = Parse::allowedFileTypes();
 			
 			if (in_array($str, $fileExtensions)) {
 				
