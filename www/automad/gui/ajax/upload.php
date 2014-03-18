@@ -49,7 +49,8 @@ $output = array();
 $output['debug'] = $_POST + $_FILES;
 
 
-// Set path
+// Set path.
+// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
 	
 	$P = $this->collection[$_POST['url']];
@@ -67,25 +68,18 @@ if (isset($_FILES['files']['name'])) {
 
 	$errors = array();
 
-	// Get the allowed file types from const.php.
-	$allowedFileTypes = Parse::allowedFileTypes();
-
-	// Get number of files.
-	$fileCount = count($_FILES['files']['name']);
-
 	// In case the $_FILES array consists of multiple files (IE uploads!).
-	for ($i = 0; $i < $fileCount; $i++) {
+	for ($i = 0; $i < count($_FILES['files']['name']); $i++) {
 	
-		$extension = pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION);
-	
-		if (in_array(strtolower($extension), $allowedFileTypes)) {
+		// Check if file has a valid filename (allowed file type).
+		if (Parse::isFileName($_FILES['files']['name'][$i])) {
 		
 			$newFile = $path . Parse::sanitize($_FILES['files']['name'][$i]);
 			move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
 		
 		} else {
 		
-			$errors[] = $this->tb['error_file_format'] . ' <strong>' . $extension . '</strong>';
+			$errors[] = $this->tb['error_file_format'] . ' <strong>' . pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION) . '</strong>';
 		
 		}
 	
