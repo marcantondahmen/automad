@@ -58,30 +58,48 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 		
 		$P = $this->collection[$_POST['url']];
 		$dest = $this->collection[$_POST['destination']];
-	
-		// Move page
-		$newPagePath = $this->movePage($P->path, $dest->path, $this->extractPrefixFromPath($P->path), $_POST['title']);
-	
-		// Clear the cache to make sure, the changes get reflected on the website directly.
-		$C = new Cache();
-		$C->clear();
-	
-		// Rebuild Site object, since the file structure has changed.
-		$S = new Site(false);
-		$collection = $S->getCollection();
-
-		// Find new URL and return redirect query string.
-		foreach ($collection as $key => $page) {
-
-			if ($page->path == $newPagePath) {
 		
-				$output['redirect'] = '?context=edit_page&url=' . urlencode($key);
-				break;
+		// Check if new parent directory is writable.
+		if (is_writable(AM_BASE_DIR . AM_DIR_PAGES . $dest->path)) {
+	
+			// Check if the current page's directory and parent directory is writable.
+			if (is_writable(dirname($this->pageFile($P))) && is_writable(dirname(dirname($this->pageFile($P))))) {
+	
+				// Move page
+				$newPagePath = $this->movePage($P->path, $dest->path, $this->extractPrefixFromPath($P->path), $_POST['title']);
+	
+				// Clear the cache to make sure, the changes get reflected on the website directly.
+				$C = new Cache();
+				$C->clear();
+	
+				// Rebuild Site object, since the file structure has changed.
+				$S = new Site(false);
+				$collection = $S->getCollection();
+
+				// Find new URL and return redirect query string.
+				foreach ($collection as $key => $page) {
+
+					if ($page->path == $newPagePath) {
 		
+						$output['redirect'] = '?context=edit_page&url=' . urlencode($key);
+						break;
+		
+					}
+
+				}
+		
+			} else {
+				
+				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($P))) . '</p>';
+				
 			}
-
-		}
 		
+		} else {
+			
+			$output['error'] = $this->tb['error_permission'] . '<p>' . AM_BASE_DIR . AM_DIR_PAGES . rtrim($dest->path, '/') . '</p>';
+			
+		}
+			
 	} 	
 
 } else {
