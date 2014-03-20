@@ -54,7 +54,7 @@ $output['debug'] = $_POST;
 
 
 // Check if file from a specified page or the shared files will be listed and managed.
-// To display a file list of a certain page, the submitting form needs a hidden URL field.
+// To display a file list of a certain page, its URL has to be submitted along with the form data.
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
 	
 	$url = $_POST['url'];
@@ -72,26 +72,35 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 // Delete file in $_POST['delete'].
 if (isset($_POST['delete'])) {
 	
-	$success = array();
-	$errors = array();
+	// Check if directory is writable.
+	if (is_writable($path)) {
 	
-	foreach ($_POST['delete'] as $f) {
-		
-		// Make sure submitted filename has no '../' (basename).
-		$file = $path . basename($f);
-		
-		if (is_writable($file)) {
-			if (unlink($file)) {
-				$success[] = $this->tb['success_remove'] . ' <strong>' . basename($file) . '</strong>';
-			}
-		} else {
-			$errors[] = $this->tb['error_remove'] . ' <strong>' . basename($file) . '</strong>';
-		} 
+		$success = array();
+		$errors = array();
 	
+		foreach ($_POST['delete'] as $f) {
+		
+			// Make sure submitted filename has no '../' (basename).
+			$file = $path . basename($f);
+		
+			if (is_writable($file)) {
+				if (unlink($file)) {
+					$success[] = $this->tb['success_remove'] . ' <strong>' . basename($file) . '</strong>';
+				}
+			} else {
+				$errors[] = $this->tb['error_remove'] . ' <strong>' . basename($file) . '</strong>';
+			} 
+	
+		}
+	
+		$output['success'] = implode('<br />', $success);
+		$output['error'] = implode('<br />', $errors);
+
+	} else {
+		
+		$output['error'] = $this->tb['error_permission'] . '<p>' . $path . '</p>';
+		
 	}
-	
-	$output['success'] = implode('<br />', $success);
-	$output['error'] = implode('<br />', $errors);
 
 }
 
