@@ -112,7 +112,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 
 } else {
 
-	$output['error'] = $this->tb['error_permission'];
+	$output['error'] = $this->tb['error_permission'] . '<p>' . AM_CONFIG . '</p>';
 
 }
 
