@@ -75,7 +75,11 @@ if (isset($_POST['data'])) {
 
 	// Write file.
 	$old = umask(0);
-	file_put_contents(AM_FILE_SITE_SETTINGS, $content);
+	
+	if (!@file_put_contents(AM_FILE_SITE_SETTINGS, $content)) {
+		$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_SITE_SETTINGS . '</p>';
+	}
+	
 	umask($old);
 	
 	
