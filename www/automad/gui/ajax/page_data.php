@@ -81,100 +81,122 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		// A title is required for building the page's path.
 		// If there is no title provided, an error will be returned instead of saving and moving the page.
 		if ($data['title']) {
+			
+		
+			// Check if the parent directory is writable.
+			if (is_writable(dirname(dirname($this->pageFile($P))))) {
 	
+			
+				// Check if the page's file and the page's directory is writable.
+				if (is_writable($this->pageFile($P)) && is_writable(dirname($this->pageFile($P)))) {
+			
 	
-			// Remove empty data.
-			// Needs to be done here, to be able to simply test for empty title field.
-			$data = array_filter($data);
+					// Remove empty data.
+					// Needs to be done here, to be able to simply test for empty title field.
+					$data = array_filter($data);
 		
 		
-			// Set hidden parameter within the $data array. 
-			// Since it is a checkbox, it must get parsed separately.
-			if (isset($_POST['hidden'])) {
-				$data['hidden'] = 1;
-			}
+					// Set hidden parameter within the $data array. 
+					// Since it is a checkbox, it must get parsed separately.
+					if (isset($_POST['hidden'])) {
+						$data['hidden'] = 1;
+					}
 	
 	
-			// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
-			// That information has to be parsed first and "subdivided".
+					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
+					// That information has to be parsed first and "subdivided".
 
-			// Get correct theme name.
-			// If the theme is not set and there is no slash passed within 'theme_template', the resulting dirname is just a dot.
-			// In that case, $data['theme'] gets removed (no theme - use site theme). 
-			if (dirname($_POST['theme_template']) != '.') {
-				$data['theme'] = dirname($_POST['theme_template']);
-			} else {
-				unset($data['theme']);
-			}
+					// Get correct theme name.
+					// If the theme is not set and there is no slash passed within 'theme_template', the resulting dirname is just a dot.
+					// In that case, $data['theme'] gets removed (no theme - use site theme). 
+					if (dirname($_POST['theme_template']) != '.') {
+						$data['theme'] = dirname($_POST['theme_template']);
+					} else {
+						unset($data['theme']);
+					}
 	
 	
-			// Build file content to be written to the txt file.
-			$pairs = array();
+					// Build file content to be written to the txt file.
+					$pairs = array();
 
-			foreach ($data as $key => $value) {
-				$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
-			}
+					foreach ($data as $key => $value) {
+						$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
+					}
 
-			$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
+					$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
 	
 
-			// Delete old (current) file, in case, the template has changed.
-			unlink($this->pageFile($P));
+					// Delete old (current) file, in case, the template has changed.
+					unlink($this->pageFile($P));
 
 
-			// Build the path of the data file by appending the basename of 'theme_template' to $page->path.
-			$newPageFile = AM_BASE_DIR . AM_DIR_PAGES . $P->path . str_replace('.php', '', basename($_POST['theme_template'])) . '.' . AM_FILE_EXT_DATA;
+					// Build the path of the data file by appending the basename of 'theme_template' to $page->path.
+					$newPageFile = AM_BASE_DIR . AM_DIR_PAGES . $P->path . str_replace('.php', '', basename($_POST['theme_template'])) . '.' . AM_FILE_EXT_DATA;
 	
 	
-			// Save new file within current directory, even when the prefix/title changed. 
-			// Renaming/moving is done in a later step, to keep files and subpages bundled to the current text file.
-			$old = umask(0);
-			file_put_contents($newPageFile, $content);
-			umask($old);
+					// Save new file within current directory, even when the prefix/title changed. 
+					// Renaming/moving is done in a later step, to keep files and subpages bundled to the current text file.
+					$old = umask(0);
+					file_put_contents($newPageFile, $content);
+					umask($old);
 	
 	
-			// If the page is not the homepage, 
-			// rename the page's directory including all children and all files, after saving according to the (new) title and prefix.
-			// $this->movePage() will check if renaming is needed, and will skip moving, when old and new path are equal.
-			if ($url != '/') {
+					// If the page is not the homepage, 
+					// rename the page's directory including all children and all files, after saving according to the (new) title and prefix.
+					// $this->movePage() will check if renaming is needed, and will skip moving, when old and new path are equal.
+					if ($url != '/') {
 	
-				if (!isset($_POST['prefix'])) {
-					$prefix = '';
+						if (!isset($_POST['prefix'])) {
+							$prefix = '';
+						} else {
+							$prefix = $_POST['prefix'];
+						}
+
+						$newPagePath = $this->movePage($P->path, dirname($P->path), $prefix, $data['title']);
+	
+					} else {
+			
+						// In case the page is the home page, the path is just '/'.
+						$newPagePath = '/';
+			
+					}
+	
+
+					// Clear the cache to make sure, the changes get reflected on the website directly.
+					$C = new Cache();
+					$C->clear();
+	
+
+					// Rebuild Site object, since the file structure might be different now.
+					$S = new Site(false);
+					$collection = $S->getCollection();
+
+	
+					// Find new URL.
+					foreach ($collection as $key => $page) {
+		
+						if ($page->path == $newPagePath) {
+				
+							// Just return a redirect URL (might be the old URL), to also reflect the possible renaming in all the GUI's navigation.
+							$output['redirect'] = '?context=edit_page&url=' . urlencode($key);
+							break;
+				
+						}
+		
+					}
+	
+	
 				} else {
-					$prefix = $_POST['prefix'];
+					
+					$output['error'] = $this->tb['error_permission'] . '<p>' . dirname($this->pageFile($P)) . '</p>';
+					
 				}
-
-				$newPagePath = $this->movePage($P->path, dirname($P->path), $prefix, $data['title']);
+	
 	
 			} else {
-			
-				// In case the page is the home page, the path is just '/'.
-				$newPagePath = '/';
-			
-			}
-	
-
-			// Clear the cache to make sure, the changes get reflected on the website directly.
-			$C = new Cache();
-			$C->clear();
-	
-
-			// Rebuild Site object, since the file structure might be different now.
-			$S = new Site(false);
-			$collection = $S->getCollection();
-
-	
-			// Find new URL.
-			foreach ($collection as $key => $page) {
-		
-				if ($page->path == $newPagePath) {
 				
-					// Just return a redirect URL (might be the old URL), to also reflect the possible renaming in all the GUI's navigation.
-					$output['redirect'] = '?context=edit_page&url=' . urlencode($key);
-					break;
+				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($P))) . '</p>';
 				
-				}
-		
 			}
 	
 	
