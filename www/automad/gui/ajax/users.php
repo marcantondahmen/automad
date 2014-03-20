@@ -55,6 +55,10 @@ $accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
 // Delete selected users.
 if (isset($_POST['delete'])) {
 	
+	// Only delete users from list, if accounts.txt is writable.
+	// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
+	// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
+	// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
 	if (is_writable(AM_FILE_ACCOUNTS)) {
 	
 		$deleted = array();
@@ -77,7 +81,7 @@ if (isset($_POST['delete'])) {
 		
 	} else {
 		
-		$output['error'] = $this->tb['error_permission'];
+		$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 		
 	}
 	
