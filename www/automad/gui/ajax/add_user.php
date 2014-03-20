@@ -62,17 +62,15 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']
 			// Add user to accounts array.
 			$accounts[$_POST['username']] = $this->passwordHash($_POST['password1']);
 			ksort($accounts);
-			
-			if (is_writable(AM_FILE_ACCOUNTS)) {
 				
-				// Write array with all accounts back to file.
-				if (file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
-					$output['success'] = $this->tb['success_added'] . ' <strong>' . $_POST['username'] . '</strong>';
-				}
+			// Write array with all accounts back to file.
+			if (@file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
+				
+				$output['success'] = $this->tb['success_added'] . ' <strong>' . $_POST['username'] . '</strong>';
 				
 			} else {
-				
-				$output['error'] = $this->tb['error_permission'];
+	
+				$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 				
 			}
 			
