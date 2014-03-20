@@ -61,18 +61,16 @@ if (isset($_POST['current-password']) && $_POST['current-password'] && isset($_P
 				
 				// Change entry for current user with accounts array.
 				$accounts[$this->user()] = $this->passwordHash($_POST['new-password1']);
-
-				if (is_writable(AM_FILE_ACCOUNTS)) {
 					
-					// Write array with all accounts back to file.
-					if (file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
-						$output['success'] = $this->tb['success_password_changed']; 
-					}
+				// Write array with all accounts back to file.
+				if (@file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
+					
+					$output['success'] = $this->tb['success_password_changed']; 
 					
 				} else {
 					
-					$output['error'] = $this->tb['error_permission'];
-					
+					$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+				
 				}
 				
 			} else {
