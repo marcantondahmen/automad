@@ -122,9 +122,8 @@ error_page_title: Title missing!
 
 -
 
-error_permission: **Permission denied!**
-     
-Please verify the permission settings of your Automad installation!
+error_permission: **Permission 
+denied!**
 
 -
 
