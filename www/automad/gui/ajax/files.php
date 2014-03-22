@@ -129,7 +129,7 @@ ob_start();
 <div class="list-group">
 	
 	<div class="list-group-item">
-		<h5 class="text-muted"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<?php echo $path; ?></h5>
+		<a class="btn btn-default btn-lg" href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo $this->tb['btn_upload']; ?></a>
 	</div>
 	
 	<?php
@@ -154,25 +154,25 @@ ob_start();
 		
 						$img = new Image($file, 95, 95, true);
 		
-						echo 	'<div class="col-md-2 col-xs-4"><a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
+						echo 	'<div class="col-xs-2"><a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
 							'<img class="img-thumbnail" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
 							'</a></div>' .		
-							'<div class="col-md-9 col-xs-6"><h5>' . basename($file) . '</h5>' .
+							'<div class="col-xs-9"><h5>' . basename($file) . '</h5>' .
 							'<h6>' . $img->description . '</h6>' .
 							'<h6 class="label label-default">' . $img->originalWidth . 'x' . $img->originalHeight . '</h6></div>';
 				
 					} else { 
 		
-						echo 	'<div class="col-md-2 col-xs-4"><a class="btn btn-default btn-block" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
+						echo 	'<div class="col-xs-2"><a class="btn btn-default btn-block" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
 							'<h1><span class="glyphicon glyphicon-file"></span></h1>' .
 							'</a></div>' .
-							'<div class="col-md-9 col-xs-6"><h5>' . basename($file) . '</h5></div>';
+							'<div class="col-xs-9"><h5>' . basename($file) . '</h5></div>';
 		 
 					} 
 	
 					?> 
 					
-					<div class="col-md-1 col-xs-2">
+					<div class="col-xs-1">
 						<div class="pull-right btn-group" data-toggle="buttons">
 							<label class="btn btn-default" title="Mark file for deletion">
 								<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>"><span class="glyphicon glyphicon-trash"></span>
@@ -196,21 +196,15 @@ ob_start();
 
 	?> 
 	
-	<div class="list-group-item">
-		<ul class="nav nav-pills nav-justified">	
-			<li><a href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo $this->tb['btn_upload']; ?></a></li>
-		</ul>	
-	</div>
-	
 	<div class="list-group-item">		
-		<button type="submit" class="btn btn-danger btn-block" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>	
+		<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>	
 	</div>
 	
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>" data-automad-dropzone-text="<?php echo $this->tb['dropzone']; ?>" data-automad-browse-text="<?php echo $this->tb['btn_browse']; ?>">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog">
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<h4 class="modal-title" id="myModalLabel"><?php echo $this->tb['btn_upload']; ?></h4> 
