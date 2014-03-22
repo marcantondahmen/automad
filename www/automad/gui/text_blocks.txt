@@ -70,7 +70,11 @@ btn_save: Save
 
 -
 
-btn_upload: Upload
+btn_upload: Upload Files
+
+-
+
+btn_visit_page: Visit Page
 
 -
 
@@ -204,7 +208,7 @@ page_tags: Tags (Separate multiple tags by comma)
 
 -
 
-page_theme_template: Theme / Template
+page_theme_template: Template
 
 -
 
@@ -221,10 +225,6 @@ page_vars_unused: Unused variables
 - 
 
 page_visibility: Visibility
-
--
-
-pages_title: Pages
 
 -
 
