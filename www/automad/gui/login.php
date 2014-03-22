@@ -72,9 +72,9 @@ $this->element('header');
 
 ?>
 
-	<div class="row">
+	<div class="column single">
 	
-		<div class="col-md-4 col-md-offset-4">
+		<div class="inner">
 			
 			<?php $this->element('title'); ?>
 			
@@ -87,11 +87,11 @@ $this->element('header');
 					<div class="list-group-item">
 						<div class="form-group">
 							<label for="username" class="text-muted">Username</label>
-							<input id="username" class="form-control" type="text" name="username" placeholder="Username" />
+							<input id="username" class="form-control" type="text" name="username" />
 						</div>
 						<div class="form-group">
 							<label for="password" class="text-muted">Password</label>	
-							<input id="password" class="form-control" type="password" name="password" placeholder="Password" />
+							<input id="password" class="form-control" type="password" name="password" />
 						</div>		
 					</div>
 					
