@@ -45,7 +45,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="robots" content="noindex">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	
 	<title><?php echo $this->guiTitle; ?></title>
 
@@ -61,13 +60,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 <body>
 	
-	<div id="noscript" class="container">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+	<div id="noscript" class="wrapper">
+		<div class="column content">
+			<div class="inner">
 				<div class="alert alert-info"><h3>JavaScript must be enabled!</h3></div>
 			</div>
 		</div>
 	</div>
 	
-	<div id="script" class="container" style="display: none;">
+	<div id="script" class="wrapper" style="display: none;">
 		
