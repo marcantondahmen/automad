@@ -55,9 +55,9 @@ $this->element('header');
 
 ?>
 
-	<div class="row">
+	<div class="column single">
 
-		<div class="col-md-4 col-md-offset-4">
+		<div class="inner">
 			
 			<?php $this->element('title'); ?>
 	
