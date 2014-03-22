@@ -258,8 +258,9 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			
 				<div class="list-group-item">
 					
-					<label class="text-muted"><?php echo $this->tb['page_theme_template']; ?></label>
-					<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default btn-block btn-lg"><?php echo ucwords(ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $P->template); ?></button>
+					<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default btn-lg">
+						<span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['page_theme_template'] . ': ' . ucwords(ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $P->template); ?> 
+					</button>
 					
 					<!-- Select Template Modal -->	
 					<div id="select-template-modal" class="modal fade">
@@ -290,12 +291,12 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 						</div>
 
 						<?php if ($P->path != '/') { ?>
-						<div class="form-group col-md-6">
+						<div class="form-group col-xs-6">
 							<label for="input-prefix" class="text-muted"><span class="glyphicon glyphicon-sort-by-attributes"></span> <?php echo $this->tb['page_prefix']; ?></label>
 							<input id="input-prefix" class="form-control input-sm" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" onkeypress="return event.keyCode != 13;" />
 						</div>
 			
-						<div class="form-group col-md-6">
+						<div class="form-group col-xs-6">
 							<label class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> <?php echo $this->tb['page_visibility']; ?></label>
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
 								<label class="btn btn-sm btn-default<?php if ($hidden) { echo ' active'; } ?>"><?php echo $this->tb['btn_hide_page']; ?> 
@@ -347,25 +348,23 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 						echo $this->varTextArea($key, $data[$key], true);
 					}
 					
-					?>
-				</div>
-
-				<div class="list-group-item">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a></li>
-						<li><a href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></li>
-					</ul>
+					?> 
+					<br />
+					<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
 				</div>
 
 				<div class="list-group-item">	
-					<button type="submit" class="btn btn-success btn-block" data-loading-text="<?php echo $this->tb['btn_loading']?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
+					<div class="btn-group">
+						<a class="btn btn-default" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a>
+						<button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
+					</div>
 				</div>
 
 			</div>
 			
 			<!-- Add Variable Modal -->	
 			<div id="automad-add-variable-modal" class="modal fade">
-				<div class="modal-dialog modal-sm">
+				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
