@@ -51,50 +51,36 @@ $this->element('header');
 
 ?>
 
-		<div class="row">
-			<div class="col-md-12">
-				<?php $this->element('title'); ?>
-			</div>
+		<div class="column nav">
+			<?php $this->element('navigation');?>
 		</div>
-
-		<div class="row">
-
-			<div class="col-md-4">
-				<?php $this->element('navigation');?>
-			</div>
-			
-			<div class="col-md-8">
-				
-				<div class="list-group">
-				
-					<div class="list-group-item" href=""><h5><?php echo $this->tb['shared_title']; ?></h5></div>
-				
-					<div class="list-group-item">
-						<!-- Nav tabs -->
-						<ul class="nav nav-pills nav-justified">
-							<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> <?php echo $this->tb['btn_data']; ?></a></li>
-							<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> <?php echo $this->tb['btn_files']; ?></a></li>
-						</ul>
-					</div>
-
-				</div>	
-				
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div id="data" class="tab-pane fade in active">
-						<form class="clearfix automad-form automad-init" data-automad-handler="shared_data" role="form"></form>
-					</div>
-					<div id="files" class="tab-pane fade">
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
-						<form class="clearfix automad-form automad-init" data-automad-handler="files" role="form"></form>
-					</div>
+		
+		<div class="column subnav">
+			<div class="list-group">
+				<div class="list-group-item">
+					<!-- Nav tabs -->
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> <?php echo $this->tb['btn_data']; ?></a></li>
+						<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> <?php echo $this->tb['btn_files']; ?></a></li>
+					</ul>
 				</div>
-			
-			</div>	
-	
+			</div>
 		</div>
+		
+		<div class="column content">
+			<!-- Tab panes -->
+			<div class="inner tab-content">
+				<div id="data" class="tab-pane fade in active">
+					<form class="clearfix automad-form automad-init" data-automad-handler="shared_data" role="form"></form>
+				</div>
+				<div id="files" class="tab-pane fade">
+					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
+					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
+					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
+					<form class="clearfix automad-form automad-init" data-automad-handler="files" role="form"></form>
+				</div>
+			</div>
+		</div>	
 
 <?php
 
