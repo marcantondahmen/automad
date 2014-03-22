@@ -151,18 +151,16 @@ if (isset($_POST['data'])) {
 				foreach (array_diff(array_keys($data), array(AM_KEY_SITENAME, AM_KEY_THEME)) as $key) {
 					echo $this->varTextArea($key, $data[$key], true);
 				}				
-				?>
-			</div>
-		
-			<div class="list-group-item">
-				<ul class="nav nav-pills nav-justified">
-					<li><a href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a></li>
-					<li><a href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></li>
-				</ul>
+				?> 
+				<br />
+				<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
 			</div>
 
 			<div class="list-group-item clearfix">	
-				<button type="submit" class="btn btn-success btn-block" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
+				<div class="btn-group">
+					<a class="btn btn-default" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a>
+					<button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
+				</div>
 			</div>
 		
 		
