@@ -95,17 +95,19 @@ ob_start();
 	
 	<div class="modal-body clearfix">	
 		
+		<div class="row"><hr></div>
+		
 		<?php foreach ($accounts as $user => $hash) { ?>	
 
 		<div class="row">	
 	
 			<h5 class="col-xs-2"><span class="glyphicon glyphicon-user"></span></h5>
-			<h5 class="col-xs-8"><?php echo $user; ?></h5>
+			<div class="col-xs-8"><?php echo $user; ?></div>
 			<div class="col-xs-2">
 			<?php if ($user != $this->user()) { ?>
 				<div class="pull-right btn-group" data-toggle="buttons">
-					<label class="btn btn-default">
-						<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-trash"></span>
+					<label class="btn btn-default btn-xs">
+						<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-ok"></span>
 					</label>
 				</div>
 			<?php } ?>	
