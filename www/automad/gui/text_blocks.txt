@@ -151,12 +151,12 @@ error_var_name: You can not add a variable without a name!
 
 
 install_help: ###Registration  
-Before you can make use of Automad's GUI, you have to register a first user by following these steps:  
-				
+Before you can make use of Automad's GUI, you have to register a first user by following these steps:    
+      				
 1. Create an user account using the form below and download the created file to your computer 
 2. Upload the downloaded file to the **"/config"** directory within your Automad installation via FTP or SSH 
 				
-After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo above. 
+After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo on the left. 
 
 -
 
@@ -186,13 +186,17 @@ log_out_title: Log Out
 
 
 
-page_confirm_delete: ####Are you sure you want to delete the current page?  
+page_confirm_delete: **Are you sure you want to delete the current page?**  
   
 The page and all of its subpages will be moved to **/cache/trash**, in case you want to restore the page's directory later.
 
 -
 
 page_move_destination: Select a destination:
+
+-
+
+page_settings: Settings
 
 -
 
@@ -235,7 +239,7 @@ page_visibility: Visibility
 
 
 
-shared_title: Shared Content &amp; Settings
+shared_title: Global Data &amp; Settings
 
 -
 
@@ -258,7 +262,7 @@ start_title: Welcome
 
 -
 
-start_last_edit: Last Edit:
+start_last_edit: Last Edit
 
 -
 
