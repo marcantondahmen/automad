@@ -50,10 +50,6 @@ $this->element('header');
 
 
 ?>
-
-		<div class="column nav">
-			<?php $this->element('navigation');?>
-		</div>
 		
 		<div class="column subnav">
 			<div class="list-group">
@@ -195,9 +191,7 @@ $this->element('header');
 				<div class="modal-content">
 					<form class="automad-form" data-automad-handler="clear_cache">
 						<div class="modal-body">
-							<br />
 							<button type="submit" class="btn btn-default btn-block btn-lg" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-repeat"></span> <?php echo $this->tb['sys_cache_clear']; ?></button>
-							<br />
 						</div>
 					</form>
 					<div class="modal-footer">
@@ -258,7 +252,7 @@ $this->element('header');
 	
 		<!-- Change Password -->
 		<div class="modal fade" id="change-password-modal" tabindex="-1">
-			<div class="modal-dialog modal-sm">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -292,7 +286,7 @@ $this->element('header');
 	
 		<!-- Add User -->
 		<div class="modal fade" id="add-user-modal" tabindex="-1">
-			<div class="modal-dialog modal-sm">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -326,7 +320,7 @@ $this->element('header');
 	
 		<!-- Users -->
 		<div class="modal fade" id="users-modal" tabindex="-1">
-			<div class="modal-dialog modal-sm">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
