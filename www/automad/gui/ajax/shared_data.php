@@ -123,7 +123,7 @@ if (isset($_POST['data'])) {
 
 				<div class="form-group">
 					<label for="input-data-theme" class="text-muted">Theme</label>
-					<select id="input-data-theme" class="form-control input-sm" name="data[<?php echo AM_KEY_THEME; ?>]" size="1">
+					<select id="input-data-theme" class="form-control" name="data[<?php echo AM_KEY_THEME; ?>]">
 						<?php
 					
 						foreach ($themes as $theme) {
@@ -144,15 +144,17 @@ if (isset($_POST['data'])) {
 
 			</div>
 		
-			<div class="list-group-item" id="automad-custom-variables">
+			<div class="list-group-item">
 				<h4 class="text-muted"><?php echo $this->tb['shared_vars']; ?></h4>
-				<?php
-				// All site-wide variable except the site's name and the theme.
-				foreach (array_diff(array_keys($data), array(AM_KEY_SITENAME, AM_KEY_THEME)) as $key) {
-					echo $this->varTextArea($key, $data[$key], true);
-				}				
-				?> 
 				<br />
+				<div id="automad-custom-variables">
+					<?php
+					// All site-wide variable except the site's name and the theme.
+					foreach (array_diff(array_keys($data), array(AM_KEY_SITENAME, AM_KEY_THEME)) as $key) {
+						echo $this->varTextArea($key, $data[$key], true);
+					}				
+					?> 
+				</div>
 				<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
 			</div>
 
@@ -168,7 +170,7 @@ if (isset($_POST['data'])) {
 
 		<!-- Add Variable Modal -->	
 		<div id="automad-add-variable-modal" class="modal fade">
-			<div class="modal-dialog modal-sm">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
