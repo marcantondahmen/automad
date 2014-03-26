@@ -49,7 +49,7 @@ $output = array();
 $output['debug'] = $_POST;
 
 
-$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
+$accounts = $this->accountsGetArray();
 
 
 // Delete selected users.
@@ -75,7 +75,7 @@ if (isset($_POST['delete'])) {
 		}
 
 		// Write array with all accounts back to file.
-		if (file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
+		if ($this->accountsSaveArray($accounts)) {
 			$output['success'] = $this->tb['success_remove'] . ' <strong>' . implode(', ', $deleted) . '</strong>';
 		}
 		
