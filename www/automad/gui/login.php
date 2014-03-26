@@ -49,7 +49,7 @@ if ($_POST) {
 	
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
+	$accounts = $this->accountsGetArray();
 	
 	if (isset($accounts[$username]) && $this->passwordVerified($password, $accounts[$username])) {
 		
