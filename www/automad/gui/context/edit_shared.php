@@ -51,10 +51,6 @@ $this->element('header');
 
 ?>
 
-		<div class="column nav">
-			<?php $this->element('navigation');?>
-		</div>
-		
 		<div class="column subnav">
 			<div class="list-group">
 				<div class="list-group-item">
