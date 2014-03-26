@@ -45,6 +45,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 			<?php $this->element('title'); ?> 
 			<div class="list-group">
 				<div class="list-group-item">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="<?php echo AM_BASE_URL; ?>/" target="_blank"><span class="glyphicon glyphicon-home"></span> <?php echo $this->siteName(); ?></a></li>
+					</ul>
+				</div>
+				<?php if ($this->user()) { ?>
+				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">	
 						<li class="<?php if (Parse::queryKey('context') == 'system_settings') { echo ' active'; }?>"><a href="?context=system_settings"><span class="glyphicon glyphicon-cog"></span> <?php echo $this->tb['sys_title']; ?></a></li>
 					</ul>
@@ -62,4 +68,5 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li><a href="?context=logout"><span class="glyphicon glyphicon-off"></span> <?php echo $this->tb['log_out_title']; ?> "<?php echo ucwords($this->user()); ?>"</a></li>
 					</ul>
 				</div>
+				<?php } ?>
 			</div>
