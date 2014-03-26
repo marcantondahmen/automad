@@ -55,7 +55,7 @@ if (isset($_POST['current-password']) && $_POST['current-password'] && isset($_P
 		if ($_POST['current-password'] != $_POST['new-password1']) {
 			
 			// Get all accounts from file.
-			$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
+			$accounts = $this->accountsGetArray();
 			
 			if ($this->passwordVerified($_POST['current-password'], $accounts[$this->user()])) {
 				
@@ -63,7 +63,7 @@ if (isset($_POST['current-password']) && $_POST['current-password'] && isset($_P
 				$accounts[$this->user()] = $this->passwordHash($_POST['new-password1']);
 					
 				// Write array with all accounts back to file.
-				if (@file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
+				if ($this->accountsSaveArray($accounts)) {
 					
 					$output['success'] = $this->tb['success_password_changed']; 
 					
