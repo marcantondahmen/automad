@@ -54,26 +54,22 @@ $this->element('header');
 
 
 ?>
-
-			<div class="column nav">
-				<?php $this->element('navigation'); ?>
-			</div>
 		
 			<div class="column content">
 				<div class="inner">
 					<div class="list-group">
 						<div class="list-group-item">
-							<h3><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h3>
+							<h2><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h2>
 						</div>
 						<div class="list-group-item">	
-							<?php echo $this->tb['start_last_edit']; ?> <strong><?php echo date('l, j. F Y, G:i', $lastEdit); ?>h</strong>
+							<?php echo $this->tb['start_last_edit']; ?> <span class="badge"><?php echo date('j. F Y, G:i', $lastEdit); ?>h</span>
 						</div>
 						<div class="list-group-item">	
 							<span class="automad-status" data-automad-status="cache"></span><br />
 							<span class="automad-status" data-automad-status="debug"></span>
 						</div>
 						<div class="list-group-item">
-							Automad Version: <strong><?php echo AM_VERSION; ?></strong>
+							Automad Version <span class="badge"><?php echo AM_VERSION; ?></span>
 						</div>
 					</div>	
 				</div>	
