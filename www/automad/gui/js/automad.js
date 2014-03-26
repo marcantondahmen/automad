@@ -237,7 +237,7 @@ $(document).on('submit', '.automad-form', function(e) {
 			if (form.parents('.modal-dialog').length !== 0) {
 				$('<div class="alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').prependTo(form.find('.modal-body'));
 			} else {
-				$('<div class="alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').insertBefore(form);
+				$('<div class="alert alert-danger alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + '</div>').prependTo(form);
 			}
 			
 		}
@@ -249,7 +249,7 @@ $(document).on('submit', '.automad-form', function(e) {
 			if (form.parents('.modal-dialog').length !== 0) {
 				$('<div class="alert alert-success alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.success + '</div>').prependTo(form.find('.modal-body'));
 			} else {
-				$('<div class="alert alert-success alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.success + '</div>').insertBefore(form);
+				$('<div class="alert alert-success alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.success + '</div>').prependTo(form);
 			}
 			
 		}
@@ -464,7 +464,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 			// As fallback when using IframeTransport and the files are uploaded in one go, the text will include all filenames and sizes.
 			// In the normal case that always will be only one elements, since the all files from a selection are sent in a single request each.
 			$.each(data.files, function(i) {
-				text = text + '<h5><span class="label label-default">' + fileSize(data.files[i].size) + '</span> ' + data.files[i].name + '</h5>';
+				text = text + '<h5><span class="badge">' + fileSize(data.files[i].size) + '</span> ' + data.files[i].name + '</h5>';
 			});
 	
 			data.context = $('<div class="file"></div>').appendTo(uploader);
