@@ -54,7 +54,7 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']
 	if ($_POST['password1'] == $_POST['password2']) {
 		
 		// Get all accounts from file.
-		$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));
+		$accounts = $this->accountsGetArray();
 		
 		// Check, if user exists already.
 		if (!isset($accounts[$_POST['username']])) {
@@ -64,7 +64,7 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']
 			ksort($accounts);
 				
 			// Write array with all accounts back to file.
-			if (@file_put_contents(AM_FILE_ACCOUNTS, serialize($accounts))) {
+			if ($this->accountsSaveArray($accounts)) {
 				
 				$output['success'] = $this->tb['success_added'] . ' <strong>' . $_POST['username'] . '</strong>';
 				
