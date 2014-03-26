@@ -79,51 +79,26 @@ $this->element('header');
 
 ?>
 
-	<div class="column single">
-		
+	<div class="column content">
 		<div class="inner">
-			
-			<?php $this->element('title'); ?>
-			
 			<div class="alert alert-info"><?php echo $this->tb['install_help']; ?></div>
-			
-			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?>
-
+			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?> 
 			<form role="form" method="post">
-
-				<div class="list-group">
-					 
-					<div class="list-group-item">
-				      
-						<div class="form-group">
-							<label for="username" class="text-muted"><?php echo $this->tb['sys_user_add_name']; ?></label>
-							<input id="username" class="form-control" type="text" name="username" required />	
-						</div>
-						<div class="form-group">
-							<label for="password1" class="text-muted"><?php echo $this->tb['sys_user_add_password']; ?></label>
-							<input id="password1" class="form-control" type="password" name="password1" required /> 
-						</div>
-						<div class="form-group">
-							<label for="password2" class="text-muted"><?php echo $this->tb['sys_user_add_repeat']; ?></label>
-							<input id="password2" class="form-control" type="password" name="password2" required />
-						</div>
-						
-					</div>	
-						
-					<div class="list-group-item clearfix">	
-						
-						<div class="pull-right">
-							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> <?php echo $this->tb['btn_accounts_file']; ?></button>
-						</div>
-						
-					</div>
-	
+				<div class="form-group">
+					<label for="username" class="text-muted"><?php echo $this->tb['sys_user_add_name']; ?></label>
+					<input id="username" class="form-control" type="text" name="username" required />	
 				</div>
-			
+				<div class="form-group">
+					<label for="password1" class="text-muted"><?php echo $this->tb['sys_user_add_password']; ?></label>
+					<input id="password1" class="form-control" type="password" name="password1" required /> 
+				</div>
+				<div class="form-group">
+					<label for="password2" class="text-muted"><?php echo $this->tb['sys_user_add_repeat']; ?></label>
+					<input id="password2" class="form-control" type="password" name="password2" required />
+				</div>	
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> <?php echo $this->tb['btn_accounts_file']; ?></button>
 			</form>
-	
 		</div>
-
 	</div>
 
 <?php
