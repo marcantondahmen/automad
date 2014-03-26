@@ -74,7 +74,7 @@ if (isset($_POST['item'])) {
 	
 	if ($item == 'users') {
 		
-		$accounts = unserialize(file_get_contents(AM_FILE_ACCOUNTS));		
+		$accounts = $this->accountsGetArray();		
 		$output['status'] = '<span class="badge">' . count($accounts) . '</span> ' . $this->tb['sys_user_registered'];
 
 	}
