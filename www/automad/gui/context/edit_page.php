@@ -74,9 +74,6 @@ $this->element('header');
 
 ?>
 
-		<div class="column nav">
-			<?php $this->element('navigation');?>  
-		</div>
 		<?php if ($P) { ?> 
 		<div class="column subnav">
 			<div class="list-group">
@@ -90,7 +87,7 @@ $this->element('header');
 						<!-- Data -->
 						<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> <?php echo $this->tb['btn_data']; ?></a></li>
 						<!-- Files -->
-						<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<?php echo $this->tb['btn_files']; ?></a></li>
+						<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $this->tb['btn_files']; ?></a></li>
 					</ul>
 				</div>
 				<div class="list-group-item">
@@ -171,7 +168,7 @@ $this->element('header');
 
 		<!-- Delete Page Confirm Modal -->
 		<div class="modal fade" id="automad-delete-page-modal">
-			<div class="modal-dialog modal-sm">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
