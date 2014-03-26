@@ -344,9 +344,9 @@ class GUI {
 					
 					// Check if page is currently selected page
 					if ($page->url == $current) {
-						$html .= '<li class="active"><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;' . $title . '</a>';
+						$html .= '<li class="active"><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"></span> ' . $title . '</a>';
 					} else {
-						$html .= '<li><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;' . $title . '</a>';
+						$html .= '<li><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-close"></span> ' . $title . '</a>';
 					}
 					
 					$html .= $this->siteTree($page->url, $collection, $current, $parameters, $hideCurrent);
@@ -403,7 +403,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">' . $this->tb['page_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '" size="1">'; 
+		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">' . $this->tb['page_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
@@ -469,7 +469,7 @@ class GUI {
 			$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
 		}
 		
-		$html .= '<textarea id="input-data-' . $key . '" class="form-control input-sm" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
+		$html .= '<textarea id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
 		
 		return $html;
 		
