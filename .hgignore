@@ -1,5 +1,5 @@
 syntax: glob
 cached*
-accounts.txt
 www/cache/trash
-config.json
+www/config/accounts.php
+www/config/config.json
