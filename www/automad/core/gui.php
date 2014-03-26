@@ -153,6 +153,51 @@ class GUI {
 	
 	
 	/**
+	 *	Generate the PHP code for the accounts file. Basically the code returns the unserialized serialized array with all users.
+	 *	That way, the accounts array can be stored as PHP.
+	 *	The accounts file has to be a PHP file for security reasons. When trying to access the file directly via the browser, 
+	 *	it gets executed instead of revealing any user names.
+	 *	
+	 *	@param array $accounts
+	 *	@return The PHP code as string
+	 */
+	
+	private function accountsGeneratePHP($accounts) {
+		
+		return 	"<?php defined('AUTOMAD') or die('Direct access not permitted!');\n" .
+			'return unserialize(\'' . serialize($accounts) . '\');' .
+			"\n?>";
+			
+	} 
+	
+	
+	/**
+	 *	Get the accounts array by including the accounts PHP file.
+	 *
+	 *	@return The accounts array
+	 */
+	
+	private function accountsGetArray() {
+		
+		return (include AM_FILE_ACCOUNTS);
+		
+	}
+	
+	
+	/**
+	 *	Save the accounts array as PHP to AM_FILE_ACCOUNTS.
+	 *
+	 *	@return Success (true/false)
+	 */
+
+	private function accountsSaveArray($accounts) {
+		
+		return @file_put_contents(AM_FILE_ACCOUNTS, $this->accountsGeneratePHP($accounts));
+		
+	}
+	
+	
+	/**
 	 *	Load GUI element from automad/gui/elements.
 	 *
 	 *	@param string $element
