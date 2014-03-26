@@ -72,41 +72,21 @@ $this->element('header');
 
 ?>
 
-	<div class="column single">
-	
+	<div class="column content">
 		<div class="inner">
-			
-			<?php $this->element('title'); ?>
-			
-			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?>
-			
+			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?> 
       			<form role="form" method="post">
-				
-				<div class="list-group">
-      
-					<div class="list-group-item">
-						<div class="form-group">
-							<label for="username" class="text-muted">Username</label>
-							<input id="username" class="form-control" type="text" name="username" />
-						</div>
-						<div class="form-group">
-							<label for="password" class="text-muted">Password</label>	
-							<input id="password" class="form-control" type="password" name="password" />
-						</div>		
-					</div>
-					
-					<div class="list-group-item clearfix">
-						<div class="pull-right">
-							<button type="submit" class="btn btn-primary"><?php echo $this->tb['btn_login']; ?></button>
-						</div>
-					</div>
-				
+				<div class="form-group">
+					<label for="username" class="text-muted">Username</label>
+					<input id="username" class="form-control" type="text" name="username" />
 				</div>
-				
+				<div class="form-group">
+					<label for="password" class="text-muted">Password</label>	
+					<input id="password" class="form-control" type="password" name="password" />
+				</div>	
+				<button type="submit" class="btn btn-primary"><?php echo $this->tb['btn_login']; ?></button>
 			</form>
-
 		</div>
-
 	</div>	
 					
 <?php
