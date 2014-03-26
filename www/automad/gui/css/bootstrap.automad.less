@@ -43,39 +43,52 @@
 
 @width-nav:		320px;
 @width-subnav:		240px;
-@width-content:		640px;
-@width-single:		360px;
+@width-content:		720px;
 
 @min-width-nav:		280px;
 @min-width-subnav:	200px;
 @min-width-content:	512px;
 
-@height-header:		100px;
+@height-header:		120px;
 
-@padding-content:	16px;
-@padding-y-group-item:  16px;
-@padding-pill:		16px;
-@padding-y-pill-pages:	12px;
+@padding-content:	30px;
+@padding-y-group-item:  24px;
+@padding-pill:		18px;
+@padding-y-pill-pages:	8px;
+@padding-modal-item:	24px;
 
-@margin-x-pill:		12px;
+@margin-x-pill:		18px;
 @margin-y-pill:		2px;
 
-@color-nav:		#aaa;
-@color-subnav:		#aaa;
-@color-content:		#000;
 
-@bg-color-nav:		#222;
-@bg-color-nav-hover:	lighten(@bg-color-nav, 2%);
-@bg-color-subnav:	#383838;
-@bg-color-subnav-hover:	lighten(@bg-color-subnav, 4%);
-@bg-color-content:	#fff;
+// Colors
+@color-default:		#556270;
+@color-success:		#64c3b2;
+@color-warning:		#ff6b6b;
+@color-danger:		#ff6b6b;
+@color-muted:		lighten(@color-default, 35%);
 
-@border-color-nav:	lighten(@bg-color-nav, 5%);
-@border-color-subnav:	lighten(@bg-color-subnav, 5%);
-@border-color-content:	darken(@bg-color-content, 15%);
+@color-nav:		lighten(@color-default, 18%);
+@color-subnav:		lighten(@color-nav, 2%);
+@color-content:		@color-default;
 
-@shadow-color-nav:	darken(@bg-color-nav, 5%);
+@bg-color-nav:		darken(@color-default, 15%);
+@bg-color-nav-hover:	darken(@color-default, 12%);
+@bg-color-subnav:	darken(@color-default, 10%);
+@bg-color-subnav-hover:	darken(@color-default, 7%);
+@bg-color-content:	lighten(@color-default, 59%);
+@bg-color-form:		#ffffff;
+
+@border-color-nav:	darken(@color-default, 12%);
+@border-color-subnav:	darken(@color-default, 7%);
+@border-color-content:	lighten(@color-default, 50%);
+@border-color-form:	lighten(@color-default, 50%);
+
+@shadow-color-nav:	darken(@bg-color-nav, 7%);
 @shadow-color-subnav:	darken(@bg-color-subnav, 60%);
+
+@hover-darken:		3%;
+@disabled-lighten:	15%;
 
 
 
@@ -102,11 +115,52 @@
           box-shadow: inset @arguments;
 }
 
+.button(@text; @bg; @border) {
+	
+	color: @text;
+	border-color: @border;
+	background-color: @bg;
+	
+	&:active,
+	&.active,
+	&:hover {
+		color: @text;
+		border-color: darken(@border, @hover-darken);
+		background-color: darken(@bg, @hover-darken);
+	}
+	
+	&.disabled,
+	&[disabled],
+	&.disabled:active,
+	&[disabled]:active,
+	&.disabled:hover,
+	&[disabled]:hover {
+		opacity: 1;
+		color: lighten(@text, @disabled-lighten);
+		border-color: lighten(@border, @disabled-lighten);
+		background-color: lighten(@bg, @disabled-lighten);
+	}
+	
+}
+
+.alert-box(@color) {
+	
+	color: @color;
+	background-color: #ffffff;
+	border-color: lighten(@color, 15%);
+	
+	& .close {
+		color: @color;
+		margin-top: -3px;
+	}
+	
+}
+
 
 
 
 // =============================
-// Columns
+// Body & Wrapper
 // =============================
 
 html,
@@ -114,19 +168,38 @@ body,
 .wrapper {
 	height: 100%;
 	min-height: 100%;
+	color: @color-content;
+	background-color: @bg-color-content;
+}
+
+a {
+	
+	color: @color-content;
+	
+	&:hover {
+		color: darken(@color-content, @hover-darken);
+		text-decoration: none;
+	}
+
 }
 
 .wrapper {
+	
 	display: table;
 	width: 100%;
-	color: @color-content;
-	background-color: @bg-color-content;
 	
 	& .list-group-item {
 		border-color: @border-color-content;
 	}
 	
 }
+
+
+
+
+// =============================
+// Columns
+// =============================
 
 .column {
 	
@@ -230,18 +303,6 @@ body,
 		}
 		
 	}
-	
-	&.single {
-		
-		width: 100%;
-		
-		& .inner {
-			width: @width-single;
-			padding: (@padding-pill + @margin-y-pill) @padding-content;
-			margin: auto;
-		}
-		
-	}
 		
 }
 
@@ -251,16 +312,6 @@ body,
 // =============================
 // Header
 // =============================
-
-#header {
-
-	height: @height-header;
-
-	.nav & {
-		padding: (@padding-pill + @margin-y-pill) (@padding-pill + @margin-x-pill);
-	}
-
-}
 
 @font-face {
 	font-family: 'automad-logo';
@@ -273,26 +324,28 @@ body,
 	font-style: normal;
 }
 
-.automad-logo {
-	
-	&:before {
-		content: 'a';
-		font-family: 'automad-logo';
-		font-size: 28px;
-		margin-left: -2px;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-	
-	&:hover {
-		text-decoration: none;
-	}
-	
-}
+#header {
 
-.site-name {
-	margin: 0;
-	display: inline-block;
+	height: @height-header;
+	padding: @padding-content (@padding-pill + @margin-x-pill);
+
+	& .automad-logo {
+	
+		color: @color-danger;
+	
+		&:before {
+			content: 'a';
+			font-family: 'automad-logo';
+			font-size: 30px;
+			margin-left: -2px;
+		}
+	
+		&:hover:before {
+			content: 'A';
+		}
+		
+	}
+		
 }
 
 
@@ -305,9 +358,20 @@ body,
 .list-group {
 	
 	&-item {
+		
 		background-color: transparent;
 		border-width: 0;
 		padding: @padding-y-group-item 0;
+		
+		.nav &,
+		.subnav & {
+			padding: (@padding-y-group-item - @padding-pill) 0;
+		}
+		
+		&:first-child {
+			padding-top: 0;
+		}
+		
 	}
 	
 	&-item + &-item {
@@ -364,17 +428,46 @@ body,
 
 
 // =============================
-// Headline
+// Buttons
 // =============================
 
-h1, 
-h2, 
-h3, 
-h4, 
-h5 {
-	&:first-child {
-		margin-top: 0;
+.btn-group {
+	
+	& .btn {
+		
+		border-left-width: 0;
+		
+		&:first-child {
+			border-left-width: 1px;
+		}
+		
 	}
+	
+}
+
+.btn {
+	
+	&-default {
+		.button(@color-default, @bg-color-content, lighten(@color-default, 35%));
+	}
+	
+	&-primary {
+		.button(#ffffff, lighten(@color-default, 5%), lighten(@color-default, 5%));
+	}
+	
+	&-success {
+		.button(#ffffff, @color-success, @color-success);
+	}
+	
+	&-danger {
+		.button(#ffffff, @color-danger, @color-danger);
+	}
+	
+	// Checkboxes
+	label&.btn-xs.active {
+		.button(#ffffff, lighten(@color-default, 30%), lighten(@color-default, 30%));
+	}
+	
 }
 
 
@@ -384,8 +477,20 @@ h5 {
 // Forms
 // =============================
 
+label {
+	font-weight: normal;
+	font-size: 12px;
+}
+
 .form-group:last-child {
 	margin: 0;
+}
+
+.form-control {
+	color: @color-content;
+	border-color: @border-color-form;
+	background-color: @bg-color-form;
+	.box-shadow(0,0,0,0,rgba(0,0,0,0));
 }
 
 
@@ -396,8 +501,170 @@ h5 {
 // =============================
 
 .modal {
+	
 	overflow: auto;
+		
+	&-header,
+	&-body,
+	&-footer {
+		padding: @padding-modal-item;
+		padding-bottom: 0;
+		border-width: 0;
+	}
+	
+	&-content {
+		
+		background-color: @bg-color-content;
+		
+		& > :last-child {
+			padding-bottom: @padding-modal-item;
+		}
+		
+	} 
+	
+	& .nav-pills a:hover {
+		color: @color-default;
+		background-color: @bg-color-form;
+	}
+	
+	& .row {
+		
+		margin: 0 (0 - @padding-modal-item);
+		
+		// Users list
+		&:first-child hr {
+			margin-top: 0;
+		}
+		
+	}
+	
+	& hr {
+		border-color: @border-color-content;
+	}
+	
 }
+
+
+
+
+// =============================
+// Icons / Text / Alerts / Badges / Progress Bars / Wells / FileTypes
+// =============================
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5,
+h6 {
+	
+	font-weight: normal;
+	
+	&:first-child {
+		margin-top: 0;
+	}
+	
+}
+
+.glyphicon {
+	
+	padding-right: 4px;
+	
+	.btn-xs & {
+		padding-right: 0px;
+	}
+	
+}
+
+.text {
+
+	&-muted {
+		color: @color-muted;
+	}
+	
+	&-success {
+		color: @color-success;
+	}
+	
+}
+
+.badge {
+	
+	&,
+	.btn-default & {
+		font-size: 75%;
+		background-color: lighten(@color-default, 5%);
+	}
+	
+	.btn-default & {
+		font-weight: 400;
+	}
+	
+	.list-group-item > & {
+		float: none;
+	}
+
+}
+
+.alert {
+	
+	&.alert-info {
+		.alert-box(@color-default);
+	}
+	
+	&.alert-success {
+		.alert-box(@color-success);
+	}
+	
+	&.alert-danger {
+		.alert-box(@color-danger);
+	}
+	
+	&.alert-warning {
+		.alert-box(@color-warning);
+	}
+	
+}
+
+.progress-bar {
+	
+	&-success {
+		background-color: @color-success;
+	}
+	
+	&-danger {
+		background-color: @color-danger;
+	}
+	
+	&-warning {
+		background-color: @color-warning;
+	}
+	
+}
+
+.well {
+	background-color: @bg-color-form;
+	border-color: @border-color-form;
+	.box-shadow-inset(1px; 1px; 8px; 0; darken(@bg-color-form, 10%));
+}
+
+.filetype {
+	width: 125px;
+	height: 125px;
+	display: inline-block;
+	text-align: center;
+	padding-top: 45px;
+	border-width: 1px;
+	border-color: @border-color-form;
+	border-style: solid;
+	background-color: @bg-color-form;
+	font-size: 20px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+
+
 
 
 
