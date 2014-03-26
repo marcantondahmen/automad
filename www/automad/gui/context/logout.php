@@ -55,28 +55,11 @@ $this->element('header');
 
 ?>
 
-	<div class="column single">
-
+	<div class="column content">
 		<div class="inner">
-			
-			<?php $this->element('title'); ?>
-	
-			<div class="list-group">
-				
-				<div class="list-group-item">
-					<h4><?php echo $this->tb['success_log_out']; ?></h4>
-				</div>
-				
-				<div class="list-group-item clearfix">
-					<div class="pull-right">
-						<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-primary"><?php echo $this->tb['btn_login']; ?></a>
-					</div>
-				</div>
-				
-			</div>
-
+			<div class="alert alert-success"><?php echo $this->tb['success_log_out']; ?></div>			
+			<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-default"><?php echo $this->tb['btn_login']; ?></a>
 		</div>
-
 	</div>
 
 <?php
