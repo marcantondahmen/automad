@@ -52,8 +52,8 @@ if ($_POST) {
 		
 		$accounts = array();
 		$accounts[$_POST['username']] = $this->passwordHash($_POST['password1']);
-				
-		// Download accounts.txt
+		
+		// Download accounts.php
 		header('Expires: -1');
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
@@ -61,7 +61,7 @@ if ($_POST) {
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
 		ob_end_flush();
-		echo serialize($accounts);
+		echo $this->accountsGeneratePHP($accounts);
 		die;
 		
 	} else {
