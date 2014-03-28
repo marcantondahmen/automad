@@ -18,7 +18,7 @@ btn_apply_reload: Apply &amp; Reload
 
 -
 
-btn_browse: Browse
+btn_browse: Or Browse
 
 -
 
@@ -85,7 +85,7 @@ btn_visit_page: Visit Page
 
 
 
-dropzone: Dropzone
+dropzone: Drop Files Here
 
 -
 
@@ -150,17 +150,18 @@ error_var_name: You can not add a variable without a name!
 
 
 
-install_help: ###Registration  
-Before you can make use of Automad's GUI, you have to register a first user by following these steps:    
+install_help: ###Create User Account  
+Before you can make use of Automad's GUI, you have to register the first user by following these steps:    
       				
 1. Create an user account using the form below and download the created file to your computer 
 2. Upload the downloaded file to the **"/config"** directory within your Automad installation via FTP or SSH 
 				
-After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo on the left. 
+After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo on the left.   
+Other users can be added later via the system preferences.
 
 -
 
-install_title: Registration
+install_title: Create User Account
 
 -
 
