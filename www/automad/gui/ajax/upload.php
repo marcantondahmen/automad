@@ -88,10 +88,12 @@ if (isset($_FILES['files']['name'])) {
 	
 		}
 
-		if ($errors) {
-	
-			$output['error'] = implode('<br />', $errors);
+		// Clear cache to update galleries and sliders.
+		$C = new Cache();
+		$C->clear();
 		
+		if ($errors) {
+			$output['error'] = implode('<br />', $errors);
 		} 
 
 	} else {
