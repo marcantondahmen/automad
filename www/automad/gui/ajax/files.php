@@ -69,7 +69,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 }
 
 
-// Delete file in $_POST['delete'].
+// Delete files in $_POST['delete'].
 if (isset($_POST['delete'])) {
 	
 	// Check if directory is writable.
@@ -92,6 +92,10 @@ if (isset($_POST['delete'])) {
 			} 
 	
 		}
+	
+		// Clear cache to update galleries and sliders.
+		$C = new Cache();
+		$C->clear();
 	
 		$output['success'] = implode('<br />', $success);
 		$output['error'] = implode('<br />', $errors);
@@ -154,12 +158,20 @@ ob_start();
 		
 						$img = new Image($file, 125, 125, true);
 		
-						echo 	'<div class="col-xs-3"><a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
+						echo 	'<div class="col-xs-3">' .
+							'<a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
 							'<img class="img-rounded img-responsive" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
-							'</a></div>' .		
-							'<div class="col-xs-8"><h5>' . basename($file) . '</h5>' .
-							'<h6>' . $img->description . '</h6>' .
-							'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div></div>';
+							'</a>' . 
+							'</div>' .		
+							'<div class="col-xs-8">' . 
+							'<h5>' . basename($file) . '</h5>';
+						
+						if (strtolower($extension) == 'jpg') {
+							echo	'<h6>Exif Description: ' . $img->description . '</h6>';	
+						}
+							
+						echo	'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
+							'</div>';
 				
 					} else { 
 		
