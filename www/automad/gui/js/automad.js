@@ -368,12 +368,8 @@ $(document).on('keyup', 'textarea:visible', function() {
 					'line-height': ta.css('line-height'),
 					'letter-spacing': ta.css('letter-spacing')
 				});
-			
-			
-	ta.css({
-		'resize': 'none',
-		'overflow': 'hidden'
-	}).height(clone.height() + 20);
+					
+	ta.height(clone.height());
 		
 	clone.remove();
 	
@@ -381,6 +377,11 @@ $(document).on('keyup', 'textarea:visible', function() {
 
 // Update also when AJAX completes.
 $(document).ajaxComplete(function() {
+	$('textarea').trigger('keyup');
+});
+
+// Update also on resize.
+$(window).resize(function() {
 	$('textarea').trigger('keyup');
 });
 
@@ -407,7 +408,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 		uploader =	modal.find('#automad-upload').html(''),
 		
 		// Dropzone
-		dropzone =	$('<div class="well well-lg"><h2 class="center-block text-muted" style="text-align: center;">' + dropzoneText + '</h2></div>').appendTo(uploader),
+		dropzone =	$('<div class="dropzone well well-lg"><div class="dropzone-text center-block text-muted" style="text-align: center;">' + dropzoneText + '</div></div>').appendTo(uploader),
 		input =		$('<input type="file" multiple />').appendTo(dropzone).hide(),
 		browse =	$('<button class="btn btn-default center-block">' + browseText + '</button>').click(function() {
 					// Make a button click trigger the file input for browsing.
