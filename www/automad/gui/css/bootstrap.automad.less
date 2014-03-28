@@ -85,7 +85,7 @@
 @border-color-form:	lighten(@color-default, 50%);
 
 @shadow-color-nav:	darken(@bg-color-nav, 7%);
-@shadow-color-subnav:	darken(@bg-color-subnav, 60%);
+@shadow-color-subnav:	darken(@bg-color-subnav, 7%);
 
 @hover-darken:		3%;
 @disabled-lighten:	15%;
@@ -331,21 +331,41 @@ a {
 
 	& .automad-logo {
 	
-		color: @color-danger;
+		color: @color-success;
 	
 		&:before {
-			content: 'a';
+			content: 'A';
 			font-family: 'automad-logo';
 			font-size: 30px;
 			margin-left: -2px;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
 		}
 	
 		&:hover:before {
-			content: 'A';
+			content: 'a';
 		}
 		
 	}
 		
+}
+
+
+
+
+// =============================
+// Lists
+// =============================
+
+ol {
+	
+	margin: 0;
+	padding: 20px;	
+	
+	& li + li {
+		margin-top: 8px;
+	}
+	
 }
 
 
@@ -493,6 +513,11 @@ label {
 	.box-shadow(0,0,0,0,rgba(0,0,0,0));
 }
 
+textarea {
+	overflow: hidden;
+	resize: none;
+}
+
 
 
 
@@ -540,6 +565,24 @@ label {
 	
 	& hr {
 		border-color: @border-color-content;
+	}
+	
+}
+
+
+
+
+// =============================
+// File Upload
+// =============================
+
+.dropzone {
+	
+	padding: 50px 0;
+	
+	&-text {
+		font-size: 28px;
+		padding: 0 0 25px 0;
 	}
 	
 }
@@ -645,7 +688,7 @@ h6 {
 .well {
 	background-color: @bg-color-form;
 	border-color: @border-color-form;
-	.box-shadow-inset(1px; 1px; 8px; 0; darken(@bg-color-form, 10%));
+	.box-shadow-inset(1px; 1px; 8px; 0; darken(@bg-color-form, 20%));
 }
 
 .filetype {
@@ -662,11 +705,6 @@ h6 {
 	font-weight: 400;
 	text-transform: uppercase;
 }
-
-
-
-
-
 
 
 
