@@ -53,6 +53,7 @@ if ($_POST) {
 	
 	if (isset($accounts[$username]) && $this->passwordVerified($password, $accounts[$username])) {
 		
+		session_regenerate_id(true);
 		$_SESSION['username'] = $username;
 		header('Location: http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 		die;
