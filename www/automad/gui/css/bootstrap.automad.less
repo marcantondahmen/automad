@@ -453,7 +453,7 @@ ol {
 
 .btn-group {
 	
-	& .btn {
+	&-justified .btn {
 		
 		border-left-width: 0;
 		
@@ -466,6 +466,11 @@ ol {
 }
 
 .btn {
+	
+	&:active,
+	&.active {
+		.box-shadow-inset(0, 3px, 5px, 0, rgba(0,0,0,0.25));
+	}
 	
 	&-default {
 		.button(@color-default, @bg-color-content, lighten(@color-default, 35%));
