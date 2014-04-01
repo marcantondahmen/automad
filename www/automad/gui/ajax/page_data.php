@@ -57,7 +57,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 // Array for returned JSON data.
 $output = array();
-$output['debug'] = $_POST;
 
 
 // Verify page's URL - The URL must exist in the site's collection.
