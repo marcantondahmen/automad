@@ -374,24 +374,6 @@ class Selection {
 		$this->excludePage($page->url);
 		
 	}
-		
-	 
-	/**
-	 * 	Makes the Home Page a neighbor of all level 1 pages. Useful for filtering the top level pages all together.
-	 */
-	
-	public function makeHomePageFirstLevel() {
-		
-		if (array_key_exists('/', $this->selection)) {
-			
-			$home = clone $this->selection['/'];
-			$home->parentUrl = '/';
-			$home->level = 1;
-			$this->selection['/'] = $home;
-			
-		}
-		
-	}
 	
 	  
 	/**
