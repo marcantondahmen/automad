@@ -99,9 +99,6 @@ $(document).on('click', '#automad-move-page-modal a', function() {
 	// Post request.
 	$.post('?ajax=move_page', {url: url, title: title, destination: destination}, function(data) {
 		
-		// Debug
-		console.log(data);
-		
 		// Redirect on success to updated page.
 		if (data.redirect) {
 			window.location.href = data.redirect;
@@ -213,11 +210,6 @@ $(document).on('submit', '.automad-form', function(e) {
 		
 		// Remove previous alerts
 		form.parent().find('.alert').remove();
-		
-		// Debug
-		if (data.debug) {
-			console.log(data.debug);
-		}
 			
 		// In case the returned JSON contains a redirect URL, simply redirect the page.
 		// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
@@ -507,9 +499,6 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 				close.button('reset');
 			
 			}
-			
-			// Debug 
-			console.log(data.result);
 			
 	    	},
 	
