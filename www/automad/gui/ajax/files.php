@@ -50,7 +50,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $output = array();
-$output['debug'] = $_POST;
 
 
 // Check if file from a specified page or the shared files will be listed and managed.
