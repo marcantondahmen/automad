@@ -387,7 +387,7 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below a given URL.
 	 *
-	 *	@param array $options - (parent: the URL of the parent page of the displayed pages)
+	 *	@param array $options - (parent: the URL of the parent page of the displayed pages; homepage: add the homepage, if parent is '/' (true/false))
 	 *	@return html of the generated list	
 	 */
 	
