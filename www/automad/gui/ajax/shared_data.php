@@ -52,8 +52,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 // Array for returned JSON data.
 $output = array();
-$output['debug'] = $_POST;
-
 
 
 if (isset($_POST['data'])) {
