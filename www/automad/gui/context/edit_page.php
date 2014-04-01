@@ -85,7 +85,7 @@ $this->element('header');
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">
 						<!-- Data -->
-						<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> <?php echo $this->tb['btn_data']; ?></a></li>
+						<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> <?php echo $this->tb['btn_data']; ?></a></li>
 						<!-- Files -->
 						<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $this->tb['btn_files']; ?></a></li>
 					</ul>
