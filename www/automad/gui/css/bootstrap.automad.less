@@ -263,8 +263,13 @@ a {
 			border-color: @border-color-subnav;	
 		}
 		
-		& .nav-pills a:hover {
-			background-color: @bg-color-subnav-hover;
+		& .nav-pills a {
+			
+			&:focus,
+			&:hover {
+				background-color: @bg-color-subnav-hover;
+			}
+			
 		}
 		
 		& .active > a {
