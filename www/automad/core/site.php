@@ -219,11 +219,15 @@ class Site {
 			Debug::log('      ' . $path . ' >>> ' . $P->url);
 			
 			// $path gets only scanned for sub-pages, in case it contains a data file.
-			// That way it is impossible to generate pages without a parent page.		
-			foreach (glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR) as $dir) {
+			// That way it is impossible to generate pages without a parent page.
+			$dirs = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR);
 			
+			// Sort $dirs array again to be independent from glob's default behavior in case of any inconsistency.
+			sort($dirs);
+			
+			// Scan each directory recursively.	
+			foreach ($dirs as $dir) {
 				$this->collectPages($path . basename($dir) . '/', $level + 1, $url);
-				
 			}
 			
 		}
