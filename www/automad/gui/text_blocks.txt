@@ -26,7 +26,7 @@ btn_close: Close
 
 -
 
-btn_data: Data &amp; Settings
+btn_data: Data / Settings
 
 -
 
@@ -35,6 +35,10 @@ btn_delete_page: Delete Page
 -
 
 btn_discard: Discard Changes
+
+-
+
+btn_docs: Documentation
 
 -
 
@@ -240,7 +244,7 @@ page_visibility: Visibility
 
 
 
-shared_title: Global Data &amp; Settings
+shared_title: Site Settings / Shared Files
 
 -
 
