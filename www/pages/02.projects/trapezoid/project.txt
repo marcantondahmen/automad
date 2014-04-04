@@ -1,14 +1,14 @@
 title: Trapezoid
 
----
+-
 
 subtitle: Half a Pyramid
 
----
+-
 
 tags: Simple
 
----
+-
 
 text: In *Euclidean geometry*, a convex [quadrilateral](http://en.wikipedia.org/wiki/Quadrilateral) with at least one pair of parallel sides is referred to as a trapezoid in American English and as a trapezium in English outside North America. The parallel sides are called the bases of the trapezoid and the other two sides are called the legs or the lateral sides (if they are not parallel; otherwise there are two pairs of bases). A scalene trapezoid is a trapezoid with no sides of equal measure, in contrast to the special cases below. 
 

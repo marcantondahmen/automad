@@ -1,24 +1,37 @@
-i{elements/header.php}
+i(elements/header.php)
 
 	<div class="top">
 
-		t{includeHome}
-		t{navTop}
-		t{search(Search)}
+		t(navTop {homepage: true})
+		t(search {placeholder: "Search this site!"})		
 		
-		<h1>p{title}</h1>
+		<h1>p(title)</h1>
 		
-		<h2>p{subtitle}</h2>
+		<h2>p(subtitle)</h2>
 
-		<div class="content">p{text}</div>
+		<div class="content">p(text)</div>
 
-		t{listSetup(title, subtitle, tags, template: project, file: *.jpg, width: 250, height: 150, crop: 1)}
-		t{listFilters}
-		t{listSortTypes(By Name, subtitle: By Subtitle, tags: By Tags)}
-		t{listSortDirection}
+		t(listSetup {
+			vars: "title, subtitle, tags", 
+			template: "project", 
+			glob: "*.jpg", 
+			width: 250, 
+			height: 150, 
+			crop: 1
+		})
+		
+		t(listFilters)
+		
+		t(listSortTypes {
+			title: "By Name", 
+			subtitle: "By Subtitle", 
+			tags: "By Tags"
+		})
+		
+		t(listSortDirection {asc: "Ascending", desc: "Descending"})
 	
 	</div>
 
-	t{listPages}
+	t(listPages)
 	
-i{elements/footer.php}
+i(elements/footer.php)

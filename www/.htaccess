@@ -1,8 +1,11 @@
 <IfModule mod_rewrite.c>
 
+
 # --- AUTOMAD --- #
 
 # DO NOT MODIFY!
+
+Options -Indexes
 
 # To enable Pretty URLs just keep this file in the base folder. 
 # (next to the automad folder and the index.php)
@@ -17,14 +20,30 @@ RewriteEngine On
 # The correct rewriting will be figured out automatically.
 RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME} !-f
 
-# To keep the app portable (can be moved around without configuartion),
+
+
+# Exclude home page from rewriting
+RewriteRule ^$ - [L]
+
+
+
+
+# Pretty URLs:
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# To keep the app portable (can be moved around without configuration),
 # the full path for the actual rewriting has to be determined, 
 # since the RewriteBase stays always '/'.
 
 # To make that possible, the following RewriteCond is a dummy condition 
-# which is always true and is only used to figure out the base url.
+# which is always true and is only used to figure out the base url 
+# by using back-references. (http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html)
+
+# Note: The RewriteRule is checked before (!) its RewriteConds. That actually
+# makes the back-reference to (.*) available in the condition.
 
 # For example the full URL is: www.yoursite.com/page/path
 
@@ -44,6 +63,29 @@ RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 # ( www.yoursite.com ) + "index.php/" + page/path
 RewriteRule ^(.*)$ %2index.php/$1 [L]
 
+
+
+
+# Redirect blocked files to the 404 page. 
+
+# Redirect all non-image cache files.
+RewriteCond %{REQUEST_FILENAME} !\.(jpg|gif|png)$
+RewriteCond %{REQUEST_FILENAME} cached [OR]
+
+# Redirect all .txt files.
+RewriteCond %{REQUEST_FILENAME} \.txt$ [OR] 
+
+# Redirect all subdirectories.
+RewriteCond %{REQUEST_FILENAME} -d
+
+# Reuse the method described above to keep the app portable.
+RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
+
+# Redirect to "_" which will display the 404 page.
+RewriteRule ^(.*)$ %2index.php/_ [L]
+
+
 # --------------- #
+
 
 </IfModule>

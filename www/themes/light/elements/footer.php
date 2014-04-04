@@ -1,8 +1,8 @@
 		<div class="footer">
 			
-			t{navBreadcrumbs}
+			t(navBreadcrumbs)
 			
-			<p>&copy t{year} by <a href="/">s{sitename}</a></p>
+			<p>&copy t(year) by <a href="/">s(sitename)</a> / <a href="/imprint">Imprint</a></p>
 			
 			<p class="automad">Made with Automad</p>
 			

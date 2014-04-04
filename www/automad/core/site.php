@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -34,6 +34,12 @@
  */
 
 
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+
 /**
  *	The Site class includes all methods and properties regarding the site, structure and pages.
  *	A Site object is the "main" object. It consists of many single Page objects and holds also additional data like the site's name and theme.
@@ -41,6 +47,14 @@
 
  
 class Site {
+	
+	
+	/**
+	 *	Boolean, if true, the site's structure gets scanned as well as the site's content. 
+	 *	Setting that variable to false will skip all txt files and its content parsing.
+	 */
+	
+	private $parseTxt;
 	
 	
 	/**
@@ -57,30 +71,6 @@ class Site {
 	 */
 	
 	private $siteCollection = array();
-	
-	
-	/**
-	 * 	Parse Site settings to replace defaults.
-	 *
-	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
-	 *	in the root of the /shared directory.
-	 *	
-	 *	The settings file (by default /shared/site.txt) can basically hold any key/value pair.
-	 *	These variables can be later access sidewide via the Site::getSiteData() method.
-	 */
-	
-	private function parseSiteSettings() {
-		
-		// Define default settings.
-		// Basically that is only the site name, because that is the only really needed value.		
-		$defaults = 	array(	
-					'sitename' => $_SERVER['SERVER_NAME']  
-				);
-		
-		// Merge defaults with settings from file.
-		$this->siteData = array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
-		
-	}
 	
 	
 	/**
@@ -176,46 +166,71 @@ class Site {
 						// In case there are more than one matching file, the last accessed gets added.
 						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == AM_FILE_EXT_DATA) {
 						
-							$data = Parse::markdownFile($itemFullPath);
-						
-							// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-							// In case the title is missig for the home page, use the site name instead.
-							if (!array_key_exists('title', $data) || ($data['title'] == '')) {
-								if (trim($url, '/')) {
-									// If page is not the home page...
-									$data['title'] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
-								} else {
-									// If page is home page...
-									$data['title'] = $this->getSiteName();
-								}
-							} 
-						
-							// Extract tags
-							$tags = Parse::extractTags($data);
-							
-							// Check for an URL in $data and use that URL instead.
-							if (array_key_exists(AM_PARSE_URL_KEY, $data)) {
-								$url = $data[AM_PARSE_URL_KEY];
-							}
-							
-							// Check for a theme in $data and use that as override for the site theme.
-							if (array_key_exists(AM_PARSE_THEME_KEY, $data)) {
-								$theme = $data[AM_PARSE_THEME_KEY];
-							} else {
-								$theme = $this->getSiteData('theme');;
-							}
-						
-							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
-							// That way it is impossible to create twice the same url and it is very easy to access the page's data. 	
 							$P = new Page();
-							$P->data = $data;
-							$P->tags = $tags;
+							
+							// Directly set URL here as first property, 
+							// to be able to overwrite that url with an optional redirect-url from the data file. 
 							$P->url = $url;
+						
+							// If $this->parseTxt is true (default), then all txt files get parsed as well and 
+							// the corresponding properties of $P get defined. 
+							// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
+							if ($this->parseTxt) {
+						
+								$data = Parse::markdownFile($itemFullPath);
+						
+								// In case the title is not set in the data file or is empty, use the slug of the URL instead.
+								// In case the title is missig for the home page, use the site name instead.
+								if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
+									if (trim($url, '/')) {
+										// If page is not the home page...
+										$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+									} else {
+										// If page is home page...
+										$data[AM_KEY_TITLE] = $this->getSiteName();
+									}
+								} 
+						
+								// Extract tags
+								$tags = Parse::extractTags($data);
+							
+								// Check for an URL in $data and use that URL instead.
+								if (array_key_exists(AM_KEY_URL, $data)) {
+									$P->url = $data[AM_KEY_URL];
+								}
+							
+								// Check for a theme in $data and use that as override for the site theme.
+								if (array_key_exists(AM_KEY_THEME, $data) && $data[AM_KEY_THEME]) {
+									$theme = $data[AM_KEY_THEME];
+								} else {
+									$theme = $this->getSiteData(AM_KEY_THEME);
+								}
+							
+								// Check if the page should be hidden from selections.
+								$hidden = false;
+								if (array_key_exists(AM_KEY_HIDDEN, $data)) {
+									if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
+										$hidden = true;
+									}
+								}
+							
+								// Set Page properties from txt file.
+								$P->data = $data;
+								$P->tags = $tags;
+								$P->theme = $theme;
+								$P->hidden = $hidden;
+							
+							}
+							
+							// Set all main Page properties
 							$P->path = $path;
 							$P->level = $level;
 							$P->parentUrl = $parentUrl;
-							$P->theme = $theme;
 							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
+							
+							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
+							// That way it is impossible to create twice the same url and it is very easy to access the page's data.
+							// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $P->url instead).
 							$this->siteCollection[$url] = $P;
 							
 						}
@@ -245,15 +260,23 @@ class Site {
 		
 	
 	/** 
-	 *	Parse sitewide settings and create $siteCollection
+	 *	Parse sitewide settings and create $siteCollection. 
+	 *	If $parseTxt is false, parsing the content and the settings get skipped and only the site's structure gets determined. (Useful for GUI)
+	 *
+	 *	@param boolean $parseTxt
 	 */
 	
-	public function __construct() {
+	public function __construct($parseTxt = true) {
 		
 		Debug::log('Site: New Instance created!');
 		Debug::log('Site: Scan directories for page content:');
 		
-		$this->parseSiteSettings();
+		$this->parseTxt = $parseTxt;
+		
+		if ($parseTxt) {
+			$this->siteData = Parse::siteData();
+		}
+		
 		$this->collectPages();
 		
 	}
@@ -276,14 +299,14 @@ class Site {
 	
 	
 	/**
-	 *	Return the name of the website - shortcut for $this->getSiteData('sitename').
+	 *	Return the name of the website - shortcut for $this->getSiteData(AM_KEY_SITENAME).
 	 *
-	 *	@return string $this->getSiteData('sitename')
+	 *	@return string $this->getSiteData(AM_KEY_SITENAME)
 	 */
 	
 	public function getSiteName() {
 		
-		return $this->getSiteData('sitename');
+		return $this->getSiteData(AM_KEY_SITENAME);
 		
 	}
 	
@@ -362,9 +385,9 @@ class Site {
 	private function createPage($template, $title) {
 		
 		$page = new Page();
-		$page->theme = $this->getSiteData('theme');
+		$page->theme = $this->getSiteData(AM_KEY_THEME);
 		$page->template = $template;
-		$page->data['title'] = $title;
+		$page->data[AM_KEY_TITLE] = $title;
 		$page->parentUrl = '';
 		
 		return $page;

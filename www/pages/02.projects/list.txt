@@ -1,6 +1,6 @@
 title: Projects
 
----
+-
 
 subtitle: Geometric Shapes
 

@@ -1,14 +1,14 @@
 title: Complex Icosphere
 
----
+-
 
 subtitle: A Subdivided Icosahedron
 
----
+-
 
 tags: Triangular Faces, Complex
 
----
+-
 
 text: The *Complex Icosphere* is a [Icosphere](icosphere) with more
 triangles.

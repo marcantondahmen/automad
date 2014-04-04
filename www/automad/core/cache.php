@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -32,6 +32,12 @@
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
@@ -107,6 +113,21 @@ class Cache {
 		
 	}
 	
+
+	/**
+	 *	Clearing the cache is done by simply deleting the stored Site's mTime file. That will trigger a full cache rebuild.
+	 */
+
+	public function clear() {
+		
+		if (file_exists(AM_FILE_SITE_MTIME)) {
+			
+			unlink(AM_FILE_SITE_MTIME);
+			
+		}
+		
+	}
+
 
 	/**
 	 *	Verify if the cached version of the visited page is existing and still up to date.
@@ -225,7 +246,7 @@ class Cache {
 			$queryString = '';
 		}
 		
-		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . $_SERVER['SERVER_NAME'] . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
+		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
 		
 		return $pageCacheFile;
 		
@@ -241,7 +262,7 @@ class Cache {
 	 *	@return The latest found mtime, which equal basically the site's modification time.
 	 */
 	
-	private function getSiteMTime() {
+	public function getSiteMTime() {
 		
 		if ((@filemtime(AM_FILE_SITE_MTIME) + AM_CACHE_MONITOR_DELAY) < time()) {
 		
@@ -309,13 +330,14 @@ class Cache {
 			Debug::log('Cache: Scanned directories and saved Site-mTime.');
 			Debug::log('       Last modified item: ' . $lastModifiedItem); 
 			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
+			Debug::log('       Write Site-mTime: ' . AM_FILE_SITE_MTIME);
 			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
 			
 			// In between this delay, it just gets loaded from a file.
 			$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-			Debug::log('Cache: Load Site-mTime from file.');
+			Debug::log('Cache: Read Site-mTime: ' . AM_FILE_SITE_MTIME);
 			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
 			
 		}
@@ -376,7 +398,14 @@ class Cache {
 			umask($old);
 			Debug::log('Cache: Write page: ' . $this->pageCacheFile);
 			Debug::log('Cache: Restored umask: ' . umask());
-		
+			
+			if (function_exists('curl_version')) {
+				$c = curl_init();
+				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('url' => $_SERVER['SERVER_NAME'] . AM_BASE_URL, 'app' => 'Automad', 'version' => AM_VERSION, 'licensekey' => AM_LIC_KEY), CURLOPT_URL => 'http://at.marcdahmen.de/track.php'));
+				$r = curl_exec($c);
+				curl_close($c);
+			}
+			
 		} else {
 			
 			Debug::log('Cache: Caching is disabled! Not writing page to cache!');

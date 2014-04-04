@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -32,6 +32,12 @@
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
@@ -78,7 +84,7 @@ class Template {
 	 */
 	
 	private $template;
-
+	
 	
 	/**
 	 *	Define $S, $P and $theme.
@@ -106,7 +112,7 @@ class Template {
 	
 	private function addMetaTags($output) {
 		
-		$meta = "\n\t" . '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+		$meta =  "\n\t" . '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
 		
 		return str_replace('<head>', '<head>' . $meta, $output);
 		
@@ -141,61 +147,79 @@ class Template {
 	
 	private function processTemplate($output) {
 		
-		// Includes:
-		// Include only (!) PHP files relative to the template file.
-		// Useful to keep header and footer in separate files.
-		$templateDir = dirname($this->template);
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_INC_L) . '([A-Za-z0-9_\.\/\-]+)' . preg_quote(AM_TMPLT_DEL_INC_R) . '/',
-				function($matches) use($templateDir) {
-					
-					$file = $templateDir . '/' . $matches[1];
-					if (file_exists($file)) {
+		// Include all (nested) elements.
+		$output = Parse::getNestedIncludes($output, dirname($this->template));
 						
-						Debug::log('Template: Include: ' . $file);
-						ob_start();
-						include $file;
-						$inc = ob_get_contents();
-						ob_end_clean();
-						return $inc;
-						
-					}
-				},
-				$output);
-		
 		// Tools:
-		// Call functions dynamically with optional parameter in () or without () for no options.
-		// For example $[function(parameter)] or just $[function]
+		// Call functions dynamically with optional parameters.
+		// For example t(function{JSON-options}) or just t(function)
+		// The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
+		// The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
 		$toolbox = new Toolbox($this->S); 
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '([A-Za-z0-9_\-]+)(\(.*\))?' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/', 
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
 				function($matches) use($toolbox) {
+					
 					if (method_exists($toolbox, $matches[1])) {
+						
 						if (!isset($matches[2])) {
 							// If there is no parameter passed (no brackets),
 							// an empty string will be passed as an argument
-							$matches[2] = '';
+							$matches[2] = false;
 						}
-						return $toolbox->$matches[1](trim($matches[2],'()'));
+						
+						$options = Parse::toolOptions($matches[2]);
+						
+						Debug::log('Template: Matched tool: "' . $matches[1] . '"');
+						return $toolbox->$matches[1]($options);
+						
 					}
+					
+				}, 
+				$output);
+		
+		// Extensions:
+		$extender = new Extender($this->S);
+		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
+		$output = $extender->addHeaderElements($output);
+		// Call extension methods. Match: x(Extension{Options})
+		// The options have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
+		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
+				function($matches) use($extender) {
+				
+					if (!isset($matches[2])) {
+						// If there are no options passed.
+						$matches[2] = false;
+					}
+				
+					$options = Parse::toolOptions($matches[2]);	
+					
+					Debug::log('Template: Matched extension: "' . $matches[1] . '"');				
+					return $extender->callExtension($matches[1], $options);
+				
 				}, 
 				$output);
 		
 		// Site vars:
 		// Replace vars from /shared/site.txt
 		$site = $this->S;
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
 				function($matches) use($site) {
+					
 					return $site->getSiteData($matches[1]);
+				
 				},
 				$output);
 			
 		// Page vars:					
 		// Replace vars from the page's data array			
 		$data = $this->P->data;
-		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '([A-Za-z0-9_\-]+)' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
+		$output =	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
 				function($matches) use($data) {
+					
 					if (array_key_exists($matches[1], $data)) {
 						return $data[$matches[1]];
 					}
+					
 				},
 				$output);
 				
@@ -230,6 +254,34 @@ class Template {
 	
 	
 	/**
+	 *	Obfuscate all eMail addresses matched in $output.
+	 *	
+	 *	@param string $output
+	 *	@return $output
+	 */
+	
+	private function obfuscateEmails($output) {
+		
+		$output = 	preg_replace_callback('/([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', 
+				function($matches) {
+				
+					Debug::log('Template: Obfuscating: ' . $matches[1]);
+					
+					$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
+					$html .= strrev($matches[1]);
+					$html .= "</a>&#x200E;";
+		
+					return $html;
+					
+				}, 
+				$output);
+				
+		return $output;
+				
+	}
+
+	
+	/**
 	 * 	Render the current page.
 	 *
 	 *	@return The fully rendered HTML for the current page.
@@ -243,6 +295,7 @@ class Template {
 		$output = $this->processTemplate($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->modulateUrls($output);	
+		$output = $this->obfuscateEmails($output);
 	
 		return $output;	
 		

@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -32,6 +32,12 @@
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
@@ -102,11 +108,11 @@ class Toolbox {
 	/**
 	 *	Place an image with an optional link.
 	 *
-	 *	@param string $optionStr - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1, link: url, target: _blank)
+	 *	@param array $options - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1, link: url, target: _blank)
 	 *	@return HTML for the image output
 	 */
 	
-	public function img($optionStr) {
+	public function img($options) {
 		
 		// Default options
 		$defaults = 	array(
@@ -119,12 +125,7 @@ class Toolbox {
 				);
 		
 		// Merge options with defaults				
-		$options = array_merge($defaults, Parse::toolOptions($optionStr));
-		
-		// Turn relevant vars into integer
-		foreach(array('width', 'height', 'crop') as $key) {
-			$options[$key] = intval($options[$key]);
-		}
+		$options = array_merge($defaults, $options);
 			
 		if ($options['file']) {
 			$glob = Modulate::filePath($this->P->path, $options['file']);
@@ -138,30 +139,25 @@ class Toolbox {
 	 *	Place a set of resized images, linking to their original sized version.
 	 *	This tool returns the basic HTML for a simple image gallery.
 	 *
-	 *	@param string $optionStr - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1)
+	 *	@param array $options - (glob: path/to/file (or glob pattern), width: px, height: px, crop: 1)
 	 *	@return The HTML of a list of resized images with links to their bigger versions
 	 */
 	
-	public function imgSet($optionStr) {
+	public function imgSet($options) {
 		
 		// Default options
 		$defaults = 	array(
-					'file' => '*.jpg',
+					'glob' => '*.jpg',
 					'width' => false,
 					'height' => false,
 					'crop' => false
 				);
 		
 		// Merge options with defaults				
-		$options = array_merge($defaults, Parse::toolOptions($optionStr));
-		
-		// Turn relevant vars into integer
-		foreach(array('width', 'height', 'crop') as $key) {
-			$options[$key] = intval($options[$key]);
-		}
+		$options = array_merge($defaults, $options);
 			
-		if ($options['file']) {
-			$glob = Modulate::filePath($this->P->path, $options['file']);
+		if ($options['glob']) {
+			$glob = Modulate::filePath($this->P->path, $options['glob']);
 			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop']);
 		}
 		
@@ -169,118 +165,127 @@ class Toolbox {
 	
 	
 	/**
-	 *	To place the homepage at the same level like all the other pages from the first level,
-	 *	includeHome() will modify $this->collection and move the homepage one level down: 0 -> 1
+	 *	Load Jquery JS library.
+	 *
+	 *	@return the script tag to include Jquery
 	 */
 	
-	public function includeHome() {
+	public function jquery() {
 		
-		$selection = new Selection($this->collection);
-		$selection->makeHomePageFirstLevel();
-		$this->collection = $selection->getSelection();
+		return '<script type="text/javascript" src="/automad/lib/jquery/jquery-2.0.3.min.js"></script>';
 		
 	}
-	
+
 
 	/**
 	 *	Place a link to the previous sibling.
 	 *
-	 *	@param string $optionStr - optional link text (for example a simple '<')
+	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
 	 *	@return the HTML for the link.
 	 */
 
-	public function linkPrev($optionStr) {
+	public function linkPrev($options) {
 		
 		$selection = new Selection($this->collection);
 		$selection->filterPrevAndNextToUrl($this->P->url);
 		
 		$pages = $selection->getSelection();
+		
+		if (isset($options['text'])) {
+			$text = $options['text'];
+		} else {
+			$text = false;
+		}
 		
 		// Check if there is a previous page and return HTML
 		if (isset($pages['prev'])) {
-			return Html::addLink($pages['prev'], AM_HTML_CLASS_PREV, $optionStr);
+			return Html::addLink($pages['prev'], AM_HTML_CLASS_PREV, $text);
 		}
 		
 	}
 	
 	
 	/**
-	 *	Place a link to the previous sibling.
+	 *	Place a link to the next sibling.
 	 *
-	 *	@param string $optionStr - optional link text (for example a simple '>')
+	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
 	 *	@return the HTML for the link.
 	 */
 	
-	public function linkNext($optionStr) {
+	public function linkNext($options) {
 		
 		$selection = new Selection($this->collection);
 		$selection->filterPrevAndNextToUrl($this->P->url);
 		
 		$pages = $selection->getSelection();
 		
+		if (isset($options['text'])) {
+			$text = $options['text'];
+		} else {
+			$text = false;
+		}
+		
 		// Check if there is a next page and return HTML
 		if (isset($pages['next'])) {
-			return Html::addLink($pages['next'], AM_HTML_CLASS_NEXT, $optionStr);
+			return Html::addLink($pages['next'], AM_HTML_CLASS_NEXT, $text);
 		}
 		
 	}
 
 
 	/**
-	 *	Setup a new Listing object based on a string of comma separated options and the current Site object.
+	 *	Set up a list of pages. In case of $this->L (the Toolbox's Listing object) is already existing, 
+	 *	its existing properties will be used as default values to be merged with the specified options.
+	 *	So basically, when using that method with only a few options, the resulting Listing object is an updated version of the previous one.
+	 *	That way, for example the sorting menus can update the list by changing the default sorting paramters without modifying any other option.
 	 *
-	 *	An example for such a string could be ("title, subtitle, type: children, template: page, file: *.jpg, width: 200, crop: 1") 
-	 *	and would create a Listing object including all pages below the current page with "page" as their template,
-	 *	showing the title and subtitle of each page along with an image, cropped to 200px width.
-	 *
-	 *	All options in that string are optional.<br>
-	 *	All options passed as a simple string (for example "title" without a ":") are interpreted as variables from the page's text file, like the title etc.
-	 *	and represent a variable in the Listing's output.<br> 
-	 *	So, a string like ("tilte, subtitle") will create a list where each page's title ans subtitle will show up.
-	 *	
-	 *	All options passed as a "Key: Value" pair are interpreted as special options to format the Listing and specify the included pages. 
 	 *	Possible options are:
+	 *	- "vars: Vars to display"	(can be passed as string or array)
 	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
 	 *	- "template: name" 		(all pages matching that template)
-	 *	- "file: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
+	 *	- "glob: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
 	 *	- "width: pixels" 		(image width, passed as interger value without unit: "width: 100")
 	 *	- "height: pixels" 		(image height, passed as interger value without unit: "width: 100")
 	 *	- "crop: 0 | 1"			(crop image or not)
+	 *	- "sortType: Var to sort by"	(default sort type, when there is no query string passed)
+	 *	- "sortDirection: asc | desc"	(default sort direction, when there is no query string passed)
 	 *	
-	 *	@param string $optionStr 
+	 *	@param array $options 
 	 */
 
-	public function listSetup($optionStr = '') {
+	public function listSetup($options = array()) {
 		
 		// Default setup
 		$defaults = 	array(
-					'type' => 'all',
+					'vars' => AM_KEY_TITLE,
+					'type' => false,
 					'template' => false,
-					'file' => false,
+					'glob' => false,
 					'width' => false,
 					'height' => false,
 					'crop' => false,
-					'vars' => array('title')
+					'sortType' => false,
+					'sortDirection' => AM_LIST_DEFAULT_SORT_DIR
 				);
 	
+		// If listing exists already, get defaults from current properties.
+		// That means basically updating by creating a new object with taken the previous setting for all non-specified paramters.
+		if (isset($this->L)) {
+			$defaults = array_intersect_key((array)$this->L, $defaults);
+		}
+		
 		// Merge defaults with options
-		$options = array_merge($defaults, Parse::toolOptions($optionStr));
-		
-		// Turn relevant vars into integer
-		foreach(array('width', 'height', 'crop') as $key) {
-			$options[$key] = intval($options[$key]);
+		$options = array_merge($defaults, $options);
+			
+		// Explode vars in case they get passed as string (template).
+		// (must be tested, since vars might be already an array, if listSetup is only called to update the listing)
+		if (!is_array($options['vars'])) {
+			$options['vars'] = explode(AM_PARSE_STR_SEPARATOR, $options['vars']);
+			$options['vars'] = array_map('trim', $options['vars']);
 		}
 		
-		// Move numeric elements into vars array
-		foreach($options as $key => $value) {
-			if (is_int($key)) {
-				$options['vars'][$key] = $value;
-				unset($options[$key]);
-			}
-		}
-		
-		// Create new Listing out of $options. 
-		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['file'], $options['width'], $options['height'], $options['crop']);
+		// Create new Listing. 
+		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['sortType'], $options['sortDirection']);
 		
 	}
 
@@ -329,15 +334,32 @@ class Toolbox {
 	/**
 	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listPages()
 	 *
-	 *	@param string $optionStr (optional) - Example: $[menuSortDirection(SORT_ASC: Up, SORT_DESC: Down)] 
+	 *	@param array $options - Example: {desc: "descending", asc: "ascending"} 
 	 *	@return the HTML for the sort menu
 	 */
 	
-	public function listSortDirection($optionStr) {
+	public function listSortDirection($options) {
 		
-		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_DIR);
-		$options = array_merge($defaults, $options);
+		// Provide defaults, since the sort direction is a very simple menu and therefore most of the times specific options are unneeded.
+		$defaults = array(
+			'desc' => 'Descending',
+			'asc' => 'Ascending'
+		);
+		
+		// Merge defaults with options and keep order of keys.
+		// Since the order of the keys is important for setting the default value,
+		// it is not possible to use array_merge (would always use the default order).
+		foreach (array('desc', 'asc') as $key) {
+			if (!isset($options[$key])) {
+				$options[$key] = $defaults[$key];
+			}
+		}
+		
+		// Only keep asc/desc in options
+		$options = array_intersect_key($options, $defaults);
+		
+		// Update Listing with first key of options for default sorting...
+		$this->listSetup(array('sortDirection' => key($options)));
 		
 		return Html::generateSortDirectionMenu($options);
 		
@@ -348,15 +370,14 @@ class Toolbox {
 	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listPages().
 	 *	If the $optionStr is missing, the default options are used.
 	 *
-	 *	@param string $optionStr (optional) - Example: $[menuSortType(Original, title: Title, date: Date, variablename: Title ...)]  
+	 *	@param array $options - The options array consists of variable: "display text" pairs, where the key is the variable to be sorted by and the value the text to be displayed in the menu. Passing a non-existing variable will sort the list by the basename of the path.  
 	 *	@return the HTML for the sort menu
 	 */
 
-	public function listSortTypes($optionStr) {
+	public function listSortTypes($options) {
 		
-		$options = Parse::toolOptions($optionStr);
-		$defaults = Parse::toolOptions(AM_TOOL_OPTIONS_SORT_TYPE);		
-		$options = array_merge($defaults, $options);
+		// Update Listing with first key of options for default sorting...
+		$this->listSetup(array('sortType' => key($options)));
 		
 		return Html::generateSortTypeMenu($options);
 		
@@ -366,17 +387,26 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below a given URL.
 	 *
-	 *	@param string $optionStr - the URL of the parent page of the displayed pages.
+	 *	@param array $options - (parent: the URL of the parent page of the displayed pages; homepage: add the homepage, if parent is '/' (true/false))
 	 *	@return html of the generated list	
 	 */
 	
-	public function navBelow($optionStr) {
+	public function navBelow($options) {
+		
+		$options = array_merge(array('parent' => $this->P->url, 'homepage' => false), $options);
 				
 		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($optionStr);
+		$selection->filterByParentUrl($options['parent']);
 		$selection->sortPagesByBasename();
 		
-		return Html::generateNav($selection->getSelection());
+		$pages = $selection->getSelection();
+		
+		// Add Homepage to first-level navigation if parent is the homepage and the option 'homepage' is true.
+		if ($options['parent'] == '/' && $options['homepage']) {
+			$pages = array('/' => $this->collection['/']) + $pages;
+		}
+		
+		return Html::generateNav($pages);
 		
 	}
 	
@@ -405,7 +435,7 @@ class Toolbox {
 	
 	public function navChildren() {
 	
-		return $this->navBelow($this->P->url);
+		return $this->navBelow(array('parent' => $this->P->url));
 		
 	}
 	
@@ -413,14 +443,14 @@ class Toolbox {
 	/**
 	 *	Generate a seperate navigation menu for each level within the current path.
 	 *
-	 *	@param string $optionStr (optional) - The maximal level to display.
+	 *	@param array $options - (levels: The maximal level to display, homepage: show the homepage for the 1st level)
 	 *	@return the HTML for the seperate navigations
 	 */
 	
-	public function navPerLevel($optionStr) {
+	public function navPerLevel($options) {
 		
-		$maxLevel = intval(trim($optionStr));
-		$level = 0;
+		$options = array_merge(array('levels' => false), $options);
+		$maxLevel = intval($options['levels']);
 		
 		$selection = new Selection($this->collection);
 		$selection->filterBreadcrumbs($this->P->url);
@@ -430,16 +460,11 @@ class Toolbox {
 		
 		foreach ($pages as $page) {
 			
-			// Since the homepage's level might be changed by $selection->makeHomePageFirstLevel(),
-			// a separate counter has to be used to be independend from the page's level and to avoid problems
-			// when setting $maxLevel to 1.
-			// If the page's level would be used and the homepage got shifted to the first level before, 
-			// navPerLevel(1) wouldn't output anything (1 > 1 = false), not even the first level. 
-			if (!$maxLevel || $maxLevel > $level) {
-				$html .= $this->navBelow($page->url);
+			if (!$maxLevel || $maxLevel > $page->level) {
+				
+				// Pass current 'parent' along with all other original options.			
+				$html .= $this->navBelow(array_merge($options, array('parent' => $page->url)));
 			}
-			
-			$level++;
 			
 		}
 		
@@ -451,12 +476,14 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below the current page's parent.
 	 *
+	 *	@param array $options - $options['homepage'] = true/false (Show the homepage as well with the 1st level siblings)
 	 *	@return html of the generated list	
 	 */
 	
-	public function navSiblings() {
+	public function navSiblings($options) {
 		
-		return $this->navBelow($this->P->parentUrl);
+		// Set parent to current parentUrl and overwrite passed options
+		return $this->navBelow(array_merge($options, array('parent' => $this->P->parentUrl)));
 		
 	}
 	
@@ -464,16 +491,14 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation at the top level including the home page (level 0 & 1).
 	 *
+	 *	@param array $options - $options['homepage'] = true/false (Show the homepage as well in the naviagtion)
 	 *	@return html of the generated list	
 	 */
 	
-	public function navTop() {
-	
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl('/');
-		$selection->sortPagesByBasename();
+	public function navTop($options) {
 		
-		return Html::generateNav($selection->getSelection());
+		// Set parent to '/' and overwrite passed options
+		return $this->navBelow(array_merge($options, array('parent' => '/')));
 		
 	}
 	
@@ -481,44 +506,31 @@ class Toolbox {
 	/**
 	 * 	Generate full navigation tree.
 	 *
+	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl")
 	 *	@return the HTML of the tree
 	 */
 	
-	public function navTree() {
+	public function navTree($options) {
 				
-		return Html::generateTree($this->collection);
+		$options = array_merge(array('parent' => '', 'all' => true), $options);
+				
+		return Html::generateTree($options['parent'], $options['all'], $this->collection);
 	
 	}
 	
-	
-	/**
-	 * 	Generate navigation tree expanded only along the current page's path.
-	 *
-	 *	@return the HTML of the tree
-	 */
-	
-	public function navTreeCurrent() {
-				
-		return Html::generateTree($this->collection, false);
-	
-	}
-
 		
 	/**
 	 * 	Place a search field with placeholder text.
 	 *
-	 *	@param string $optionStr (optional) - placeholder text, just a simple string
+	 *	@param array $options - Only $options['placeholder']
 	 *	@return the HTML of the searchfield
 	 */
 	
-	public function search($optionStr) {
+	public function search($options) {
 		
-		// Don't parse $optionStr, since it can be only a string.
-		if (!$optionStr) {
-			$optionStr = AM_TOOL_OPTIONS_SEARCH;
-		}
+		$options = array_merge(array('placeholder' => 'Search ...'), $options);
 		
-		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $optionStr);
+		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $options['placeholder']);
 		
 	}
 		

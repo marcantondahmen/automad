@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -33,6 +33,12 @@
  *	Licensed under the MIT license.
  */
 
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
  
 /**
  *	The Page class holds all properties and methods of a single page.
@@ -51,7 +57,7 @@ class Page {
 	 *	Out of all possible keys ther are two very special ones:
 	 *
 	 *	- "title": 				The title of the page - will also be used for sorting
-	 *	- "tags" (or better AM_PARSE_TAGS_KEY): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
+	 *	- "tags" (or better AM_KEY_TAGS): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page 
 	 *						The original string will remain in the $data array for seaching
 	 */
 	
@@ -105,6 +111,13 @@ class Page {
 	 */
 	
 	public $template;
+	
+	
+	/**
+	 *	The visibility status of a page within selections.
+	 */
+	
+	public $hidden;
 	
 
 	/**

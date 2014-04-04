@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -34,6 +34,12 @@
  */
 
 
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+
 /**
  * 	The Selection class holds all methods to filter and sort the collection of pages and return them as a new selection.
  *
@@ -60,9 +66,7 @@ class Selection {
 	
 	
 	/**
-	 * 	Gets the collection or a previously created selection (array) of pages.
-	 *
-	 *	Basically $pages means Site::getCollection(), assuming $site is an instance of Site.
+	 * 	Pass a set of pages to $this->selection excluding all hidden pages.
 	 *	
 	 *	@param array $pages (normally Site::getCollection() or any other selection array)
 	 */
@@ -70,6 +74,23 @@ class Selection {
 	public function __construct($pages) {
 		
 		$this->selection = $pages;
+		
+	}
+	
+	
+	/**
+	 *	Exclude all hidden pages from the selection.
+	 */
+	
+	private function excludeHidden() {
+		
+		foreach ($this->selection as $url => $page) {
+			
+			if ($page->hidden) {
+				unset($this->selection[$url]);
+			}
+			
+		}
 		
 	}
 	
@@ -97,6 +118,8 @@ class Selection {
 	
 	public function getSelection() {
 		
+		$this->excludeHidden();
+		
 		return $this->selection;
 		
 	}
@@ -110,7 +133,10 @@ class Selection {
 	
 	public function filterBreadcrumbs($url) {
 			
-		if (strpos($url, '/') === 0) {
+		// Test wheter $url is the URL of a real page.
+		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
+		// For all other $url, just the home page will be returned.	
+		if (strpos($url, '/') === 0 && array_key_exists($url, $this->selection)) {
 		
 			$pages = array();
 			
@@ -269,6 +295,15 @@ class Selection {
 	
 	public function filterPrevAndNextToUrl($url) {
 		
+		// To be able to hide the hidden pages as neighbors and jump directly to the closest non-hidden pages (both sides),
+		// in case one or both neigbors is/are hidden, $this->excludeHidden() has to be called here already, because only excluding the hidden pages
+		// later, when calling getSelection(), will cause a "gap" in the neighbors-array, which will lead to a missing link, for a hidden neighbor.
+		// To handle hidden pages correctly, the current page has to be temporary stored in $current, in case the current page itself is hidden, because the 
+		// curretn page is needed, even when hidden, to determine the closest neighbors.
+		$current = $this->selection[$url];
+		$this->excludeHidden();
+		$this->selection[$url] = $current;
+		
 		// Narrow down selection to pages with the same parentUrl
 		$this->filterByParentUrl($this->selection[$url]->parentUrl);
 		$this->sortPagesByBasename();
@@ -339,24 +374,6 @@ class Selection {
 		$this->excludePage($page->url);
 		
 	}
-		
-	 
-	/**
-	 * 	Makes the Home Page a neighbor of all level 1 pages. Useful for filtering the top level pages all together.
-	 */
-	
-	public function makeHomePageFirstLevel() {
-		
-		if (array_key_exists('/', $this->selection)) {
-			
-			$home = clone $this->selection['/'];
-			$home->parentUrl = '/';
-			$home->level = 1;
-			$this->selection['/'] = $home;
-			
-		}
-		
-	}
 	
 	  
 	/**
@@ -383,6 +400,8 @@ class Selection {
 	/**
 	 *	Sorts $this->selection based on any variable in the text files.
 	 *	If the $var gets passed empty, $this->sortPagesByBasename() will be used as fallback.
+	 *	If a variable doesn't exist for page, that page's value in $arrayToSortBy will be set to its basename.
+	 *	That allows for simply sorting a selection by original order from the HTML class by passing an invalid var like "-" or "orig" etc.
 	 *
 	 *	@param string $var (any variable from a text file)
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
@@ -400,17 +419,20 @@ class Selection {
 				if (isset($page->data[$var])) {
 					$arrayToSortBy[$key] = strtolower($page->data[$var]);
 				} else {
-					// If data[$var] doesn't exists, an empty string will be added
-					$arrayToSortBy[$key] = '';
+					// If data[$var] doesn't exists, the page's path's basename will be used.
+					// That way it is possible to order by basename with simply passing a non-existing var (for example "orig" or something else).
+					$arrayToSortBy[$key] = basename($page->path);
 				}
 			
 			}
-				
+	
 			array_multisort($arrayToSortBy, $order, $this->selection);
-		
+					
 		} else {
+			
 			// else the selection is sorted by the file system path's basename
 			$this->sortPagesByBasename($order);
+			
 		}
 		
 	} 

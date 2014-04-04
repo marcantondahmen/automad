@@ -1,41 +1,53 @@
-i{elements/header.php}
+i(elements/header.php)
 
 	<div class="top">
 		
-		t{includeHome}
-		t{navTop}
-		t{search(Search)}
+		t(navTop {homepage: true})
+		t(search {placeholder: "Search this site"})
 		
 		<div class="neighbors">
-			t{linkPrev(<)}
-			t{linkNext(>)}
+			t(linkPrev {text: "<"}) 
+			t(linkNext {text: ">"})
 		</div>
 		
-		<h1>p{title}</h1>
+		<h1>p(title)</h1>
 		
-		<h2>p{subtitle}</h2>
+		<h2>p(subtitle)</h2>
 	
-		t{filterParentByTags}		
-	
+		t(filterParentByTags)		
+		
 		<div class="images">
-			t{img(file: *.jpg, width: 850, height: 450, crop: 1)}
+			x(Slider {
+				glob: "*.jpg", 
+				width: 850, 
+				height: 450, 
+				duration: 3000
+			}) 
 		</div>
-
+			
 	</div>
 
 	<div class="container">
 
 		<div class="content left">		
-			p{text}	
+			p(text)	
 		</div>
 	
 		<div class="content right">
-			t{navSiblings}
+			t(navSiblings)
 		</div>
 	
 	</div>
 	
-	t{listSetup(title, subtitle, tags, type: related, file: *.jpg, width: 250, height: 150, crop: 1)}
-	t{listPages}
+	t(listSetup {
+		vars: "title, subtitle, tags", 
+		type: "related", 
+		glob: "*.jpg", 
+		width: 250, 
+		height: 150, 
+		crop: true
+	})
 	
-i{elements/footer.php}
+	t(listPages)
+	
+i(elements/footer.php)

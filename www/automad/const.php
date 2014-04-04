@@ -34,6 +34,18 @@
  */
 
 
+// Set config file
+define('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
+
+
+// Parse AM_CONFIG to set user overrides for the below defined constants.
+if (file_exists(AM_CONFIG)) {
+	foreach (json_decode(file_get_contents(AM_CONFIG), true) as $key => $value) {
+		define($key, $value);	
+	}
+}
+
+
 // Base URL for all URLs relative to the root
 define('AM_BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
 
@@ -51,9 +63,6 @@ if (file_exists(AM_BASE_DIR . '/.htaccess')) {
 // DEBUG
 if (!defined('AM_DEBUG_ENABLED')) {
 	define('AM_DEBUG_ENABLED', false);
-}
-if (!defined('AM_DEBUG_CONSOLE')) {
-	define('AM_DEBUG_CONSOLE', false);
 }
 
 
@@ -74,6 +83,18 @@ if (!defined('AM_DIR_THEMES')) {
 if (!defined('AM_DIR_CACHE')) {
 	define('AM_DIR_CACHE', '/cache');
 }
+// Page Cache
+if (!defined('AM_DIR_CACHE_PAGES')) {
+	define('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
+}
+// Image Cache
+if (!defined('AM_DIR_CACHE_IMAGES')) {
+	define('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
+}
+// Trash
+if (!defined('AM_DIR_TRASH')) {
+	define('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
+}
 // Default template directory
 if (!defined('AM_DIR_DEFAULT_TEMPLATES')) {
 	define('AM_DIR_DEFAULT_TEMPLATES', '/automad/templates');
@@ -81,33 +102,43 @@ if (!defined('AM_DIR_DEFAULT_TEMPLATES')) {
 
 
 // FILE
-// Sidewide settings/variable
-if (!defined('AM_FILE_SITE_SETTINGS')) {
-	define('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.txt'); 
-}
-// Site modification time
-if (!defined('AM_FILE_SITE_MTIME')) {
-	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/cached_site_mtime');
-}
-// Site object cache
-if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
-	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/cached_site_object');
-}
-// Default template
-if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
-	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
+// Data file extension
+if (!defined('AM_FILE_EXT_DATA')) {
+	// Changing that constant will also require updating the .htaccess file!
+	// (for blocking direct access)
+	define('AM_FILE_EXT_DATA', 'txt');
 }
 // Cache file prefix
 if (!defined('AM_FILE_PREFIX_CACHE')) {
+	// Changing that constant will also require updating the .htaccess file!
+	// (for blocking direct access)
 	define('AM_FILE_PREFIX_CACHE', 'cached');
 }
 // Cache file extension
 if (!defined('AM_FILE_EXT_PAGE_CACHE')) {
 	define('AM_FILE_EXT_PAGE_CACHE', 'html');
 }
-// Data file extension
-if (!defined('AM_FILE_EXT_DATA')) {
-	define('AM_FILE_EXT_DATA', 'txt');
+// Sidewide settings/variable
+if (!defined('AM_FILE_SITE_SETTINGS')) {
+	define('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.' . AM_FILE_EXT_DATA); 
+}
+// Site modification time
+if (!defined('AM_FILE_SITE_MTIME')) {
+	define('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
+}
+// Site object cache
+if (!defined('AM_FILE_SITE_OBJECT_CACHE')) {
+	define('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_object');
+}
+// Default template
+if (!defined('AM_FILE_DEFAULT_TEMPLATE')) {
+	define('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
+}
+// User accounts file
+define('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
+// List of file extensions to identify a file in an URL and to list files in the GUI
+if (!defined('AM_ALLOWED_FILE_TYPES')) {
+	define('AM_ALLOWED_FILE_TYPES', 'css, jpg, zip, png, svg, js, pdf, mp3, gif');
 }
 
 
@@ -123,6 +154,10 @@ if (!defined('AM_PAGE_RESULTS_TITLE')) {
 // URL of search results page
 if (!defined('AM_PAGE_RESULTS_URL')) {
 	define('AM_PAGE_RESULTS_URL', '/results');
+}
+// GUI
+if (!defined('AM_PAGE_GUI')) {
+	define('AM_PAGE_GUI', '/gui');
 }
 
 
@@ -144,60 +179,60 @@ if (!defined('AM_IMG_JPG_QUALITY')) {
 }
 
 
-// TOOL OPTIONS
-// Placeholder text for search field
-if (!defined('AM_TOOL_OPTIONS_SEARCH')) {
-	define('AM_TOOL_OPTIONS_SEARCH', 'Search ...');
-}
-// Default sort types
-if (!defined('AM_TOOL_OPTIONS_SORT_TYPE')) {
-	define('AM_TOOL_OPTIONS_SORT_TYPE', 'Original Order');
-}
-// Default sort directions text
-if (!defined('AM_TOOL_OPTIONS_SORT_DIR')) {
-	define('AM_TOOL_OPTIONS_SORT_DIR', 'SORT_ASC: Sort Ascending, SORT_DESC: Sort Descending');
-}
-
-
 // LISTING DEFAULTS
 // Default sort direction
 if (!defined('AM_LIST_DEFAULT_SORT_DIR')) {
-	define('AM_LIST_DEFAULT_SORT_DIR', 'sort_asc');
+	define('AM_LIST_DEFAULT_SORT_DIR', 'desc');
 }
 
 
 // TEMPLATE DELIMITERS
 // Left delimiter for includes
 if (!defined('AM_TMPLT_DEL_INC_L')) {
-	define('AM_TMPLT_DEL_INC_L', 'i{');
+	define('AM_TMPLT_DEL_INC_L', 'i(');
 }
 // Right delimiter for includes
 if (!defined('AM_TMPLT_DEL_INC_R')) {
-	define('AM_TMPLT_DEL_INC_R', '}');
+	define('AM_TMPLT_DEL_INC_R', ')');
 }
 // Left delimiter for page variables
 if (!defined('AM_TMPLT_DEL_PAGE_VAR_L')) {
-	define('AM_TMPLT_DEL_PAGE_VAR_L', 'p{');
+	define('AM_TMPLT_DEL_PAGE_VAR_L', 'p(');
 }
 // Right delimiter for page variables
 if (!defined('AM_TMPLT_DEL_PAGE_VAR_R')) {
-	define('AM_TMPLT_DEL_PAGE_VAR_R', '}');
+	define('AM_TMPLT_DEL_PAGE_VAR_R', ')');
 }
 // Left delimiter for site variables
 if (!defined('AM_TMPLT_DEL_SITE_VAR_L')) {
-	define('AM_TMPLT_DEL_SITE_VAR_L', 's{');
+	define('AM_TMPLT_DEL_SITE_VAR_L', 's(');
 }
 // Right delimiter for site variables
 if (!defined('AM_TMPLT_DEL_SITE_VAR_R')) {
-	define('AM_TMPLT_DEL_SITE_VAR_R', '}');
+	define('AM_TMPLT_DEL_SITE_VAR_R', ')');
 }
 // Left delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_L')) {
-	define('AM_TMPLT_DEL_TOOL_L', 't{');
+	define('AM_TMPLT_DEL_TOOL_L', 't(');
 }
 // Right delimiter for toolbox functions
 if (!defined('AM_TMPLT_DEL_TOOL_R')) {
-	define('AM_TMPLT_DEL_TOOL_R', '}');
+	define('AM_TMPLT_DEL_TOOL_R', ')');
+}
+// Left delimiter for extensions
+if (!defined('AM_TMPLT_DEL_XTNSN_L')) {
+	define('AM_TMPLT_DEL_XTNSN_L', 'x(');
+}
+// Right delimiter for extensions
+if (!defined('AM_TMPLT_DEL_XTNSN_R')) {
+	define('AM_TMPLT_DEL_XTNSN_R', ')');
+}
+
+
+// EXTENDER
+// Extensions namespace
+if (!defined('AM_NAMESPACE_EXTENSIONS')) {
+	define('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
 }
 
 
@@ -270,40 +305,53 @@ if (!defined('AM_HTML_LIST_MAX_CHARS')) {
 
 // PARSE
 // Block separator - separates all key/value pairs
+// Must be used as the only string in a line within the template files.
 if (!defined('AM_PARSE_BLOCK_SEPARATOR')) {
-	define('AM_PARSE_BLOCK_SEPARATOR', '---');
+	define('AM_PARSE_BLOCK_SEPARATOR', '-');
 }
 // Pair separator - separates the key from the value
 if (!defined('AM_PARSE_PAIR_SEPARATOR')) {
 	define('AM_PARSE_PAIR_SEPARATOR', ':');
 }
-// Tool options separator
-if (!defined('AM_PARSE_OPTION_SEPARATOR')) {
-	define('AM_PARSE_OPTION_SEPARATOR', ',');
-}
 // Tags separator
-if (!defined('AM_PARSE_TAG_SEPARATOR')) {
-	define('AM_PARSE_TAG_SEPARATOR', ',');
-}
-// Tags key (to identify tags in the page's txt file)
-if (!defined('AM_PARSE_TAGS_KEY')) {
-	define('AM_PARSE_TAGS_KEY', 'tags');
-}
-// URL key (to identify an URL in the page's txt file)
-if (!defined('AM_PARSE_URL_KEY')) {
-	define('AM_PARSE_URL_KEY', 'url');
-}
-// Theme key (to identify a theme in the page's txt file)
-if (!defined('AM_PARSE_THEME_KEY')) {
-	define('AM_PARSE_THEME_KEY', 'theme');
-}
-// List of file extensions to identify file in URL
-if (!defined('AM_PARSE_REGISTERED_FILE_EXTENSIONS')) {
-	define('AM_PARSE_REGISTERED_FILE_EXTENSIONS', serialize(array('css', 'jpg', 'zip', 'png', 'svg', 'js', 'pdf', 'mp3')));
+if (!defined('AM_PARSE_STR_SEPARATOR')) {
+	define('AM_PARSE_STR_SEPARATOR', ',');
 }
 
- 
-include(AM_BASE_DIR . '/automad/version.php');
- 
+
+// KEYS
+// Hidden key (to identify the visibility status of a page in its txt file)
+if (!defined('AM_KEY_HIDDEN')) {
+	define('AM_KEY_HIDDEN', 'hidden');
+}
+// Tags key (to identify tags in the page's txt file)
+if (!defined('AM_KEY_TAGS')) {
+	define('AM_KEY_TAGS', 'tags');
+}
+// Theme key (to identify a theme in the page's txt file)
+if (!defined('AM_KEY_THEME')) {
+	define('AM_KEY_THEME', 'theme');
+}
+// Title key (to identify a title in the page's txt file)
+if (!defined('AM_KEY_TITLE')) {
+	define('AM_KEY_TITLE', 'title');
+}
+// Sitename key (to identify the sitename in the site's txt file)
+if (!defined('AM_KEY_SITENAME')) {
+	define('AM_KEY_SITENAME', 'sitename');
+}
+// URL key (to identify an URL in the page's txt file)
+if (!defined('AM_KEY_URL')) {
+	define('AM_KEY_URL', 'url');
+}
+
+
+// Version number 
+include AM_BASE_DIR . '/automad/version.php';
+
+
+// License key
+define('AM_LIC_KEY', '');
+
  
 ?>

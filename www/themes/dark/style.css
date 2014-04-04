@@ -251,11 +251,11 @@ ul.sort {
 	content: 'Ξ';
 }
 
-.sort .sort_asc a:before {
+.sort .asc a:before {
 	content: '∧';
 }
 
-.sort .sort_desc a:before {
+.sort .desc a:before {
 	content: '∨';
 }
 

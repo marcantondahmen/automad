@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -32,6 +32,12 @@
  *
  *	Licensed under the MIT license.
  */
+
+
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
@@ -109,10 +115,11 @@ class Html {
 	 *
 	 *	@param object $page
 	 *	@param string $classes - additional classes to add to the link (separated by space as one string)
+	 *	@param string $text - optional link text instead of page title
 	 *	@return the HTML tag for the link to the given page
 	 */
 
-	public static function addLink($page, $classes = '', $title = '') {
+	public static function addLink($page, $classes = '', $text = '') {
 	
 		if ($page->isHome()) {	
 			$classes .= ' ' . AM_HTML_CLASS_HOME;	
@@ -132,62 +139,17 @@ class Html {
 			$classes = ' class="' . $classes . '"';
 		} 
 				
-		if (!$title) {
-			$title = strip_tags($page->data['title']);
+		if (!$text) {
+			$text = strip_tags($page->data[AM_KEY_TITLE]);
+			$title = '';
+		} else {
+			$title = ' title="' . strip_tags($page->data[AM_KEY_TITLE]) . '"';
 		}
 				
-		return '<a' . $classes . ' href="' . $page->url . '">' . $title . '</a>';
+		return '<a' . $classes . $title . ' href="' . $page->url . '">' . $text . '</a>';
 		
 	}
 
-
-	/**
-	 *	Branch out recursively below a certain relative URL.
-	 *
-	 *	@param string $parentUrl
-	 *	@param boolean $expandAll
-	 *	@param array $collection (all pages)
-	 *	@return the HTML for the branch/tree (recursive)
-	 */
-
-	private static function branch($parentUrl, $expandAll, $collection) {
-		
-		$selection = new Selection($collection);
-		$selection->filterByParentUrl($parentUrl);
-		$selection->sortPagesByBasename();
-		
-		$pages = $selection->getSelection();
-		
-		if ($pages) {
-				
-			// Use first element in $pages to determine the current level.
-			$pagesKeys = array_keys($pages);
-			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
-		
-			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
-		
-			foreach ($pages as $page) {
-			
-				$html .= '<li>' . self::addLink($page) . '</li>';
-			
-				// There would be an infinite loop if the parentUrl equals the relUlr.
-				// That is the case if the current page is the homepage and the homepage moved to the first level. 
-				if ($page->parentUrl != $page->url) {			
-					if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-						$html .= self::branch($page->url, $expandAll, $collection);
-					}
-				}
-			
-			}
-
-			$html .= '</ul>';
-		
-			return $html;
-		
-		}
-		
-	}
-	
 		
 	/**
 	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
@@ -204,7 +166,7 @@ class Html {
 		
 		foreach ($pages as $page) {
 			
-			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data['title']) . '</a>';
+			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data[AM_KEY_TITLE]) . '</a>';
 			
 			// Add separator for all but the last page.	
 			if ($i++ < count($pages)) {
@@ -454,36 +416,30 @@ class Html {
 	public static function generateSortDirectionMenu($options) {
 		
 		$query = Parse::queryArray();
-		$current = Parse::queryKey('sort_dir');
-				
-		if (!$current) {
-			$current = AM_LIST_DEFAULT_SORT_DIR;
-		}
 		
+		// Make first option current, when nothing is set in the query string.
+		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
+		if (!$current = Parse::queryKey('sort_dir')) {
+			$current = key($options);
+		}
+				
 		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
-		
-		// Ascending buttom		
-		if ($current == "sort_asc") {
-			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
-		} else {
-			$class = ' ';
+		foreach ($options as $key => $value) {
+			
+			if ($current == $key) {
+				$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
+			} else {
+				$class = ' ';
+			}
+			
+			$query['sort_dir'] = $key;
+			
+			ksort($query);
+			
+			$html .= '<li class="' . $key . '"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options[$key] . '</a></li>';
+			
 		}
-		
-		$query['sort_dir'] = "sort_asc";
-		ksort($query);
-		$html .= '<li class="sort_asc"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_ASC"] . '</a></li>';
-		
-		
-		// Descending button
-		if ($current == "sort_desc") {
-			$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
-		} else {
-			$class = ' ';
-		}
-		
-		$query['sort_dir'] = "sort_desc";
-		$html .= '<li class="sort_desc"><a' . $class . 'href="?' . http_build_query($query) . '">' . $options["SORT_DESC"] . '</a></li>';
 		
 		$html .= '</ul>';
 	
@@ -495,25 +451,20 @@ class Html {
 	/**
 	 *	Generate the menu to select the sort type from the given types ($options).
 	 *
-	 *	@param array $options -	An array with the variables to "sort by", where the key is the variable and the value its description. 
-	 *				An array item with a numeric key will be taken for the original order: array('Original', 'title' => 'By Title', 'tags' => 'By Tags').
+	 *	@param array $options -	An array with the variables to show up in the menu.
 	 *	@return the HTML of the menu
 	 */
 	
 	public static function generateSortTypeMenu($options) {
 
 		$query = Parse::queryArray();
-		$current = Parse::queryKey('sort_type');
-		
-		// All option array items with numeric keys get merged into one item (last one kept).
-		// That way the text for the 'Original Order' button can be defined with just adding a "keyless" value to the array. 
-		for($i=0; isset($options[$i]); $i++){
-			$options[''] = $options[$i];
-			unset($options[$i]);
+
+		// Make first option current, when nothing is actually selected.
+		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
+		if (!$current = Parse::queryKey('sort_type')) {
+			$current = key($options);
 		}
 				
-		ksort($options);
-		
 		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
 		
 		foreach ($options as $key => $value) {
@@ -542,22 +493,51 @@ class Html {
 	
 	
 	/**
-	 * 	Generate the HTML for a full site tree.
+	 *	Branch out recursively below a certain relative URL.
 	 *
-	 *	@param array $collection (all pages)
+	 *	@param string $parentUrl
 	 *	@param boolean $expandAll
-	 *	@return the HTML of the tree
+	 *	@param array $collection (all pages)
+	 *	@return the HTML for the branch/tree (recursive)
 	 */
-	
-	public static function generateTree($collection, $expandAll = true) {
+
+	public static function generateTree($parentUrl, $expandAll, $collection) {
 		
-		// The tree starts on level 1. By default the homepage will not be included.
-		// To include the homepage, it has to be moved to the first level by using Selection::makeHomePageFirstLevel()
-		// or $[includeHome] from the templates.
-		return self::branch('/', $expandAll, $collection);
+		$selection = new Selection($collection);
+		$selection->filterByParentUrl($parentUrl);
+		$selection->sortPagesByBasename();
+		
+		$pages = $selection->getSelection();
+		
+		if ($pages) {
+				
+			// Use first element in $pages to determine the current level.
+			$pagesKeys = array_keys($pages);
+			$level = ' level-' . $pages[array_shift($pagesKeys)]->level;
+		
+			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
+		
+			foreach ($pages as $page) {
+			
+				$html .= '<li>';
+				$html .= self::addLink($page);
+								
+				if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
+					$html .= self::generateTree($page->url, $expandAll, $collection);
+				}
+			
+				$html .= '</li>';
+			
+			}
+
+			$html .= '</ul>';
+		
+			return $html;
+		
+		}
 		
 	}
-	
+
 	
 }
 

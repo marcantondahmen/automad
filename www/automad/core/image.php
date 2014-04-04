@@ -1,4 +1,4 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!');
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -34,6 +34,12 @@
  */
 
 
+namespace Core;
+
+
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+
 /**
  *	The Image object represents a resized (and cropped) copy of a given image.
  */
@@ -52,14 +58,14 @@ class Image {
 	 *	The width of the source image.
 	 */
 	
-	private $originalWidth;
+	public $originalWidth;
 	
 	
 	/**
 	 *	The height of the source image.
 	 */
 	
-	private $originalHeight;
+	public $originalHeight;
 	
 	
 	/**
@@ -281,7 +287,7 @@ class Image {
 	
 	
 	/**
-	 *	Create a new (resized and cropped) image from the source image and save that image in the AM_DIR_CACHE.
+	 *	Create a new (resized and cropped) image from the source image and save that image in AM_DIR_CACHE_IMAGES.
 	 */
 	
 	private function createImage() {
@@ -313,6 +319,11 @@ class Image {
 		Debug::log('Image: Changed umask: ' . umask());
 		Debug::log($this);
 		Debug::log('Image: Save: ' . $this->fileFullPath);
+		
+		// Create cache directory, if not existing.
+		if (!file_exists(AM_BASE_DIR . AM_DIR_CACHE_IMAGES)) {
+			mkdir(AM_BASE_DIR . AM_DIR_CACHE_IMAGES, 0777, true);
+		}
 		
 		switch($this->type){
 		
@@ -371,7 +382,7 @@ class Image {
 	
 	private function getImageCacheFilePath() {
 		
-		$extension = substr($this->originalFile, strrpos($this->originalFile, '.')+1);
+		$extension = strtolower(pathinfo($this->originalFile, PATHINFO_EXTENSION));
 		
 		// Create unique filename in the cache folder:
 		// The hash makes it possible to clearly identify an unchanged file in the cache, 
@@ -380,7 +391,7 @@ class Image {
 		$hashData = $this->originalFile . '-' . $this->width . 'x' . $this->height . '-' . filemtime($this->originalFile) . '-' . var_export($this->crop, true);
 		$hash = hash('md5', $hashData);
 		
-		$file = AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
+		$file = AM_DIR_CACHE_IMAGES . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
 		
 		Debug::log('Image: Hash data: ' . $hashData);
 		
