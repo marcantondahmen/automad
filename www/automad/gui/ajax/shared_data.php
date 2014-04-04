@@ -144,7 +144,6 @@ if (isset($_POST['data'])) {
 		
 			<div class="list-group-item">
 				<h4 class="text-muted"><?php echo $this->tb['shared_vars']; ?></h4>
-				<br />
 				<div id="automad-custom-variables">
 					<?php
 					// All site-wide variable except the site's name and the theme.
@@ -153,6 +152,7 @@ if (isset($_POST['data'])) {
 					}				
 					?> 
 				</div>
+				<br />
 				<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
 			</div>
 
