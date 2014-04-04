@@ -49,7 +49,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li><a href="<?php echo AM_BASE_URL; ?>/" target="_blank"><span class="glyphicon glyphicon-home"></span> <?php echo $this->siteName(); ?></a></li>
 					</ul>
 				</div>
-				<?php if ($this->user()) { ?>
+				<?php if ($this->user()) { ?> 
+				<div class="list-group-item">
+					<ul class="nav nav-pills nav-stacked">		
+						<li><a href="?context=logout"><span class="glyphicon glyphicon-off"></span> <?php echo $this->tb['log_out_title']; ?> "<?php echo ucwords($this->user()); ?>"</a></li>
+					</ul>
+				</div>
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">	
 						<li class="<?php if (Parse::queryKey('context') == 'system_settings') { echo ' active'; }?>"><a href="?context=system_settings"><span class="glyphicon glyphicon-cog"></span> <?php echo $this->tb['sys_title']; ?></a></li>
@@ -62,11 +67,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				</div>		
 				<div class="list-group-item pages">	
 					<?php echo $this->siteTree('', $this->collection, Parse::queryKey('url'), array('context' => 'edit_page'), false); ?> 	
-				</div>			
+				</div>	
 				<div class="list-group-item">
-					<ul class="nav nav-pills nav-stacked">		
-						<li><a href="?context=logout"><span class="glyphicon glyphicon-off"></span> <?php echo $this->tb['log_out_title']; ?> "<?php echo ucwords($this->user()); ?>"</a></li>
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="http://automad.marcdahmen.de" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> <?php echo $this->tb['btn_docs']; ?></a></li>
 					</ul>
-				</div>
-				<?php } ?>
+				</div>		
+				<?php } ?> 
 			</div>
+			
