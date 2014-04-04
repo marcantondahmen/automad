@@ -109,7 +109,7 @@ $this->element('header');
 			<!-- Tab panes -->
 			<div class="inner tab-content">
 				<div id="data" class="tab-pane fade in active">
-					<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $P->url; ?>" role="form"></form>
+					<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $P->url; ?>" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo $this->tb['btn_loading']; ?></form>
 				</div>
 				<div id="files" class="tab-pane fade">
 					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
@@ -191,7 +191,9 @@ $this->element('header');
 		</div>
 		<?php } else { ?> 
 		<div class="column content">
-			<div class="inner alert alert-danger"><h4><?php echo $this->tb['error_page_not_found']; ?><br /><br /><strong><?php echo Parse::queryKey('url');?></strong></h4></div>
+			<div class="inner">
+				<div class="alert alert-danger"><h4><?php echo $this->tb['error_page_not_found']; ?><br /><br /><strong><?php echo Parse::queryKey('url');?></strong></h4></div>
+			</div>
 		</div>	
 		<?php } ?>
 		
