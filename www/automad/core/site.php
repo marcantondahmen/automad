@@ -143,117 +143,89 @@ class Site {
 	 
 	private function collectPages($path = '/', $level = 0, $parentUrl = '') {
 		
-		$fullPath = AM_BASE_DIR . AM_DIR_PAGES . $path;
-		
-		// Test if the directory actually has a data file.		
-		if (count(glob($fullPath . '/*.' . AM_FILE_EXT_DATA)) > 0) {
+		// First check, if $path contains any data files.
+		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
+		if ($file = reset(glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA))) {
 			
-			Debug::log('      ' . $fullPath);
-						
-			$ignore = array('.', '..', '@eaDir');
-				
-			if ($dh = opendir($fullPath)) {
+			$url = $this->makeUrl($parentUrl, basename($path));
 			
-				$url = $this->makeUrl($parentUrl, basename($path));
+			$P = new Page();
+			
+			// Directly set URL here as first property, 
+			// to be able to overwrite that url with an optional redirect-url from the data file. 
+			$P->url = $url;
 		
-				while (false !== ($item = readdir($dh))) {
+			// If $this->parseTxt is true (default), then all txt files get parsed as well and 
+			// the corresponding properties of $P get defined. 
+			// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
+			if ($this->parseTxt) {
 		
-					if (!in_array($item, $ignore)) {
-					
-						$itemFullPath = $fullPath . $item;
-						
-						// If $item is a file with the AM_FILE_EXT_DATA, $item gets added to the index.
-						// In case there are more than one matching file, the last accessed gets added.
-						if (is_file($itemFullPath) && strtolower(substr($item, strrpos($item, '.') + 1)) == AM_FILE_EXT_DATA) {
-						
-							$P = new Page();
-							
-							// Directly set URL here as first property, 
-							// to be able to overwrite that url with an optional redirect-url from the data file. 
-							$P->url = $url;
-						
-							// If $this->parseTxt is true (default), then all txt files get parsed as well and 
-							// the corresponding properties of $P get defined. 
-							// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
-							if ($this->parseTxt) {
-						
-								$data = Parse::markdownFile($itemFullPath);
-						
-								// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-								// In case the title is missig for the home page, use the site name instead.
-								if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
-									if (trim($url, '/')) {
-										// If page is not the home page...
-										$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
-									} else {
-										// If page is home page...
-										$data[AM_KEY_TITLE] = $this->getSiteName();
-									}
-								} 
-						
-								// Extract tags
-								$tags = Parse::extractTags($data);
-							
-								// Check for an URL in $data and use that URL instead.
-								if (array_key_exists(AM_KEY_URL, $data)) {
-									$P->url = $data[AM_KEY_URL];
-								}
-							
-								// Check for a theme in $data and use that as override for the site theme.
-								if (array_key_exists(AM_KEY_THEME, $data) && $data[AM_KEY_THEME]) {
-									$theme = $data[AM_KEY_THEME];
-								} else {
-									$theme = $this->getSiteData(AM_KEY_THEME);
-								}
-							
-								// Check if the page should be hidden from selections.
-								$hidden = false;
-								if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-									if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
-										$hidden = true;
-									}
-								}
-							
-								// Set Page properties from txt file.
-								$P->data = $data;
-								$P->tags = $tags;
-								$P->theme = $theme;
-								$P->hidden = $hidden;
-							
-							}
-							
-							// Set all main Page properties
-							$P->path = $path;
-							$P->level = $level;
-							$P->parentUrl = $parentUrl;
-							$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', $item);
-							
-							// The relative URL ($url) of the page becomes the key (in $siteCollection). 
-							// That way it is impossible to create twice the same url and it is very easy to access the page's data.
-							// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $P->url instead).
-							$this->siteCollection[$url] = $P;
-							
-						}
-					
-						// If $item is a folder, $this->collectPages gets again executed for that folder (recursively).
-						if (is_dir($itemFullPath)) {
-						
-							$this->collectPages($path . $item . '/', $level + 1, $url);
-							
-						}
-						
+				$data = Parse::markdownFile($file);
+		
+				// In case the title is not set in the data file or is empty, use the slug of the URL instead.
+				// In case the title is missig for the home page, use the site name instead.
+				if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
+					if (trim($url, '/')) {
+						// If page is not the home page...
+						$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
+					} else {
+						// If page is home page...
+						$data[AM_KEY_TITLE] = $this->getSiteName();
 					}
+				} 
+		
+				// Extract tags
+				$tags = Parse::extractTags($data);
 			
+				// Check for an URL in $data and use that URL instead.
+				if (array_key_exists(AM_KEY_URL, $data)) {
+					$P->url = $data[AM_KEY_URL];
 				}
 			
-				closedir($dh);	
+				// Check for a theme in $data and use that as override for the site theme.
+				if (array_key_exists(AM_KEY_THEME, $data) && $data[AM_KEY_THEME]) {
+					$theme = $data[AM_KEY_THEME];
+				} else {
+					$theme = $this->getSiteData(AM_KEY_THEME);
+				}
+			
+				// Check if the page should be hidden from selections.
+				$hidden = false;
+				if (array_key_exists(AM_KEY_HIDDEN, $data)) {
+					if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
+						$hidden = true;
+					}
+				}
+			
+				// Set Page properties from txt file.
+				$P->data = $data;
+				$P->tags = $tags;
+				$P->theme = $theme;
+				$P->hidden = $hidden;
 			
 			}
-		
-		} else {
 			
-			Debug::log('Skip  ' . $fullPath . ' (No .' . AM_FILE_EXT_DATA . ' file found!)');
-		
+			// Set all main Page properties
+			$P->path = $path;
+			$P->level = $level;
+			$P->parentUrl = $parentUrl;
+			$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
+			
+			// The relative URL ($url) of the page becomes the key (in $siteCollection). 
+			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
+			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $P->url instead).
+			$this->siteCollection[$url] = $P;
+			
+			Debug::log('      ' . $path . ' >>> ' . $P->url);
+			
+			// $path gets only scanned for sub-pages, in case it contains a data file.
+			// That way it is impossible to generate pages without a parent page.		
+			foreach (glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR) as $dir) {
+			
+				$this->collectPages($path . basename($dir) . '/', $level + 1, $url);
+				
+			}
+			
 		}
 			
 	}
@@ -269,13 +241,14 @@ class Site {
 	public function __construct($parseTxt = true) {
 		
 		Debug::log('Site: New Instance created!');
-		Debug::log('Site: Scan directories for page content:');
 		
 		$this->parseTxt = $parseTxt;
 		
 		if ($parseTxt) {
 			$this->siteData = Parse::siteData();
 		}
+		
+		Debug::log('Site: Scan directories for page content:');
 		
 		$this->collectPages();
 		
