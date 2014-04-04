@@ -50,10 +50,14 @@ $output = array();
 
 // Get config from json file, if exsiting.
 if (file_exists(AM_CONFIG)) {
+	
 	$config = json_decode(file_get_contents(AM_CONFIG), true);
 	ksort($config);
+
 } else {
+
 	$config = array();
+
 }
 
 
@@ -104,9 +108,16 @@ if (isset($_POST['debug'])) {
 
 // Write config file.
 if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(AM_CONFIG)) {
-
+	
+	// Check PHP version. For version 5.4+, the option JSON_PRETTY_PRINT can be used to make the file more human-readable.
+	if (version_compare(PHP_VERSION, '5.4') >= 0) {
+		$json = json_encode($config, JSON_PRETTY_PRINT);
+	} else {
+		$json = json_encode($config);
+	}
+	
 	$old = umask(0);
-	file_put_contents(AM_CONFIG, json_encode($config, JSON_PRETTY_PRINT));
+	file_put_contents(AM_CONFIG, $json);
 	umask($old);
 
 } else {
