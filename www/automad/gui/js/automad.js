@@ -52,7 +52,7 @@ $(document).on('click', '#automad-add-variable-button', function() {
 			var	newFormGroup = 	$('<div class="form-group"><label for="' + idPrefix + name + '" class="text-muted">' 
 						+ name.charAt(0).toUpperCase() + name.slice(1) 
 						+ '</label><button type="button" class="close automad-remove-parent">&times;</button>' 
-						+ '<textarea id="' + idPrefix + name + '" class="form-control input-sm" name="data[' + name + ']" rows="10"></textarea></div>')
+						+ '<textarea id="' + idPrefix + name + '" class="form-control" name="data[' + name + ']" rows="10"></textarea></div>')
 						.appendTo($('#automad-custom-variables'));
 						
 			$('#automad-add-variable-modal').modal('hide');
