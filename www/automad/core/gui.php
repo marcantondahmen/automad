@@ -245,7 +245,7 @@ class GUI {
 		include $file;
 		$content = ob_get_contents();
 		ob_end_clean();
-		$content = Parse::getNestedIncludes($content, dirname($file));
+		$content = Parse::templateNestedIncludes($content, dirname($file));
 		
 		// Find variables.
 		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/', $content, $matches);
