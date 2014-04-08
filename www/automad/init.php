@@ -80,7 +80,6 @@ spl_autoload_register(function($class) {
 		
 	$file = AM_BASE_DIR . '/automad/' . strtolower(str_replace('\\', '/', $class)) . '.php';
 	require_once $file;
-	Debug::log('Load Class: "' . $class . '" (' . $file . ')');
 	
 });
 
