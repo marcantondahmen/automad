@@ -121,11 +121,39 @@ class Parse {
 		// Possible extension		
 		$extension = strtolower(pathinfo($str, PATHINFO_EXTENSION));
 		
-		if (in_array($extension, Parse::allowedFileTypes())) {
+		if (in_array($extension, self::allowedFileTypes())) {
 			return true;
 		} else {
 			return false;
 		}
+		
+	}
+	
+	
+	/**
+	 *	Parse a (dirty) JSON string and return an associative, filtered array
+	 *
+	 *	@param string $str
+	 *	@return $options - associative array
+	 */
+
+	public static function jsonOptions($str) {
+		
+		$options = array();
+		
+		if ($str) {
+			
+			// Clean up "dirty" JSON by replacing single with double quotes and
+			// wrapping all keys in double quotes.
+			$str = str_replace("'", '"', $str);
+			$str = preg_replace('/([{,]+)\s*([^":\s]+)\s*:/i', '\1"\2":', $str);
+				
+			// Remove all empty elements.
+			$options = array_filter(json_decode($str, true));
+			
+		}
+		
+		return $options;
 		
 	}
 	
@@ -245,7 +273,74 @@ class Parse {
 				);
 		
 		// Merge defaults with settings from file.
-		return array_merge($defaults, Parse::textFile(AM_FILE_SITE_SETTINGS));
+		return array_merge($defaults, self::textFile(AM_FILE_SITE_SETTINGS));
+		
+	}
+
+
+	/**
+	 *	Call Toolbox methods and Extension dynamically with optional parameters. Additionally add all CSS/JS files of the matched extensions to the header.
+	 *	For example t(Tool{JSON-options}) or x(Extension{JSON-options}).
+	 *	The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}.
+	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
+	 *	
+	 *	@param string $str (the string to be parsed)
+	 *	@param object $site
+	 *	@return The parsed $str
+	 */
+
+	public static function templateMethods($str, $site) {
+		
+		// Toolbox methods
+		$use = array('toolbox' => new Toolbox($site), 'site' => $site);	
+		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
+				function($matches) use($use) {	
+					if (method_exists($use['toolbox'], $matches[1])) {
+					
+						if (!isset($matches[2])) {
+							// If there is no parameter passed (no brackets),
+							// an empty string will be passed as an argument
+							$matches[2] = false;
+						}
+						
+						// Parse the options JSON and also find and replace included variables within the JSON string.
+						$options = self::jsonOptions(self::templateVariables($matches[2], $use['site'], true));
+						Debug::log('Parse: Matched tool: "' . $matches[1] . '" and passing the following options:');
+						Debug::log($options);	
+						
+						return $use['toolbox']->$matches[1]($options);
+						
+					}
+				}, 
+				$str);		
+		
+		// Extensions
+		$extender = new Extender($site);
+		
+		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
+		$str = $extender->addHeaderElements($str);
+		
+		// Call extension methods. Match: x(Extension{Options})
+		// The options have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
+		$use = array('extender' => $extender, 'site' => $site);
+		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
+				function($matches) use($use) {
+				
+					if (!isset($matches[2])) {
+						// If there are no options passed.
+						$matches[2] = false;
+					}
+					
+					// Parse the options JSON and also find and replace included variables within the JSON string.
+					$options = self::jsonOptions(self::templateVariables($matches[2], $use['site'], true));
+					Debug::log('Parse: Matched extension: "' . $matches[1] . '"');
+									
+					return $use['extender']->callExtension($matches[1], $options);
+				
+				}, 
+				$str);
+				
+		return $str;
 		
 	}
 
@@ -267,12 +362,12 @@ class Parse {
 				$file = $directory . '/' . $matches[1];
 				if (file_exists($file)) {
 						
-					Debug::log('Template: Include: ' . $file);
+					Debug::log('Parse: Include: ' . $file);
 					ob_start();
 					include $file;
 					$content = ob_get_contents();
 					ob_end_clean();
-					return Parse::templateNestedIncludes($content, dirname($file));
+					return self::templateNestedIncludes($content, dirname($file));
 						
 				}
 					
@@ -280,6 +375,54 @@ class Parse {
 			
 			$str);
 		
+	}
+	
+
+	/**
+	 *	Replace all page vars "p(variable)" with content from the current page and all site vars "s(variable)" with content from site.txt.
+	 *	Optionally all quotes and double quotes can be stripped from the replacement values.
+	 *
+	 *	@param string $str
+	 *	@param object $site
+	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values)
+	 *	@return The parsed $str
+	 */
+	
+	public static function templateVariables($str, $site, $jsonSafe = false) {
+		
+		// Page variables
+		$P = $site->getCurrentPage();
+		$use = array('data' => $P->data, 'jsonSafe' => $jsonSafe);
+		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
+				function($matches) use($use) {	
+					if (array_key_exists($matches[1], $use['data'])) {
+						
+						if ($use['jsonSafe']) {
+							return str_replace(array('"', "'"), '', $use['data'][$matches[1]]);
+						} else {
+							return $use['data'][$matches[1]];
+						}
+						
+					}
+				},
+				$str);
+		
+		// Site variables
+		$use = array('site' => $site, 'jsonSafe' => $jsonSafe);
+		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
+				function($matches) use($use) {
+					
+					if ($use['jsonSafe']) {
+						return str_replace(array('"', "'"), '', $use['site']->getSiteData($matches[1]));
+					} else {
+						return $use['site']->getSiteData($matches[1]);
+					}
+								
+				},
+				$str);
+						
+		return $str;
+
 	}
 	
 	
@@ -324,34 +467,7 @@ class Parse {
 		
 	}
  
- 
-	/**
-	 *	Parse $optionStr and return a (mixed) array of options
-	 *
-	 *	@param string $str
-	 *	@return $options - associative array
-	 */
 
-	public static function toolOptions($str) {
-		
-		$options = array();
-		
-		if ($str) {
-			
-			// Clean up "dirty" JSON by replacing single with double quotes and
-			// wrapping all keys in double quotes.
-			$str = str_replace("'", '"', $str);
-			$str = preg_replace('/([{,]+)\s*([^":\s]+)\s*:/i', '\1"\2":', $str);
-			
-			$options = json_decode($str, true);
-			
-		}
-		
-		return $options;
-		
-	}
- 	
- 
 }
  
  
