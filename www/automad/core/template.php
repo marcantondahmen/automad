@@ -118,46 +118,6 @@ class Template {
 		
 	}
 	
-	
-	/**
-	 *	Call Extension dynamically with optional parameters and add all found CSS/JS files to the header.
-	 *	For example x(Extension{JSON-options}).
-	 *	The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}.
-	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
-	 *	
-	 *	@param string $output (the buffered output of the template file)
-	 *	@return The parsed $output
-	 */
-	
-	private function extensions($output) {
-		
-		$extender = new Extender($this->S);
-		
-		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
-		$output = $extender->addHeaderElements($output);
-		
-		// Call extension methods. Match: x(Extension{Options})
-		// The options have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
-		$output = 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
-				function($matches) use($extender) {
-				
-					if (!isset($matches[2])) {
-						// If there are no options passed.
-						$matches[2] = false;
-					}
-				
-					$options = Parse::toolOptions($matches[2]);	
-					
-					Debug::log('Template: Matched extension: "' . $matches[1] . '"');				
-					return $extender->callExtension($matches[1], $options);
-				
-				}, 
-				$output);
-				
-		return $output;
-		
-	}
-	
 		
 	/**
 	 *	Load the unmodified template file and return its output.
@@ -229,29 +189,7 @@ class Template {
 		return $output;
 				
 	}
-	
-	
-	/**
-	 *	Replace all page vars "p(variable)" with content from the current page.
-	 *
-	 *	@param string $output
-	 *	@return The parsed $output
-	 */
-	
-	private function pageVars($output) {
 		
-		$data = $this->P->data;
-		
-		return	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
-				function($matches) use($data) {	
-					if (array_key_exists($matches[1], $data)) {
-						return $data[$matches[1]];
-					}
-				},
-				$output);
-					
-	}
-	
 	
 	/**
 	 * 	Render the current page.
@@ -266,11 +204,8 @@ class Template {
 		$output = $this->loadTemplate($this->template);
 		
 		$output = Parse::templateNestedIncludes($output, dirname($this->template));
-		
-		$output = $this->tools($output);
-		$output = $this->extensions($output);
-		$output = $this->pageVars($output);
-		$output = $this->siteVars($output);
+		$output = Parse::templateMethods($output, $this->S);
+		$output = Parse::templateVariables($output, $this->S);
 		
 		$output = $this->addMetaTags($output);
 		$output = $this->modulateUrls($output);	
@@ -279,62 +214,7 @@ class Template {
 		return $output;	
 		
 	}	
-	
-	
-	/**
-	 *	Replace all site vars "s(variable)" with content from site.txt.
-	 *
-	 *	@param string $output
-	 *	@return The parsed $output
-	 */
-	
-	private function siteVars($output) {
-			
-		$site = $this->S;
-			
-		return	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
-				function($matches) use($site) {
-					return $site->getSiteData($matches[1]);				
-				},
-				$output);
-	
-	}
-
-	
-	/**
-	 *	Call Toolbox methods dynamically with optional parameters.
-	 *	For example t(function{JSON-options}) or just t(function).
-	 *	The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}.
-	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
-	 *	
-	 *	@param string $output (the buffered output of the template file)
-	 *	@return The parsed $output
-	 */
-	
-	private function tools($output) {
 		
-		$toolbox = new Toolbox($this->S);
-		
-		return 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
-				function($matches) use($toolbox) {	
-					if (method_exists($toolbox, $matches[1])) {
-					
-						if (!isset($matches[2])) {
-							// If there is no parameter passed (no brackets),
-							// an empty string will be passed as an argument
-							$matches[2] = false;
-						}
-						
-						$options = Parse::toolOptions($matches[2]);	
-						Debug::log('Template: Matched tool: "' . $matches[1] . '"');
-						return $toolbox->$matches[1]($options);
-						
-					}
-				}, 
-				$output);		
-
-	}
-	
 	
 }
 
