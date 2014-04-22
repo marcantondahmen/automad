@@ -5,6 +5,8 @@
 	<meta content="utf-8" http-equiv="encoding">
 	<title>s(sitename) / p(title)</title>
 	t(jquery)
+	t(bootstrapJS)
+	t(bootstrapCSS)
 	<link type="text/css" rel="stylesheet" href="t(themeURL)/style.css" />
 </head>
 

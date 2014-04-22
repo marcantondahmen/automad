@@ -3,7 +3,7 @@ i(elements/header.php)
 	<div class="top">
 		
 		t(navPerLevel {levels: 2, homepage: true})
-		t(search {placeholder: "Search this site"})
+		t(search)
 		
 		<div class="neighbors">
 			t(linkPrev {text: "<"}) 
@@ -17,8 +17,8 @@ i(elements/header.php)
 		t(filterParentByTags)		
 		
 		<div class="images">
-			x(Slider {
-				glob: "*.jpg", 
+			x(Carousel {
+				glob: "p(carousel_file_pattern)", 
 				width: 850, 
 				height: 450, 
 				duration: 3000

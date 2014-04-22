@@ -52,7 +52,7 @@ input {
 }
 
 .wrapper {
-	max-width: 850px;
+	max-width: 970px;
 	margin: auto;
 	padding: 0 60px 20px 60px;
 }
@@ -289,20 +289,21 @@ ul.sort {
 
 .container {
 	zoom: 1;
+	width: 100%;
 }
 
-.left {
+.content.left {
 	width: 550px;
 	padding-right: 50px;
 	float: left;
 }
 
-.right {
+.content.right {
 	width: 250;
 	float: left;
 }
 
-.right ul.nav {
+.content.right ul.nav {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
