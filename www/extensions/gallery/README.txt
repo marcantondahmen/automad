@@ -4,7 +4,7 @@ To use the Gallery extension, simply put
 	
 somewhere in your markup.
 
-There are several parameters to modify the the gallery:
+There are several parameters to modify the gallery:
 
 - glob:		The file pattern
 - width:	The thumbnails' width
