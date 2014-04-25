@@ -108,7 +108,7 @@ class Carousel {
 				}
 			
 				$html .= '">' . \Core\Html::addImage($file, $options['width'], $options['height'], true) .
-					 '<div class="carousel-caption">' . AM_TMPLT_DEL_PAGE_VAR_L . 'carousel_caption_' . \Core\Parse::sanitize(basename($file)) . AM_TMPLT_DEL_PAGE_VAR_R . '</div>' .
+					 '<div class="carousel-caption">' . \Core\Html::addVariable('carousel_caption_' . \Core\Parse::sanitize(basename($file))) . '</div>' .
 					 '</div>';			
 			
 			}
