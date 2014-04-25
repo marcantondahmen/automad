@@ -150,7 +150,23 @@ class Html {
 		
 	}
 
+
+	/**
+	 *	Add a page variable to the HTML of a template. 
+	 * 	In case an extension needs to generate a variable by itself automatically, this method can be used to generate the correct syntax for the variable markup,
+	 *	since all extensions will be parsed before the variables.
+	 * 
+	 *	@param string $name
+	 *	@return The markup for the variable
+	 */
+
+	public function addVariable($name) {
 		
+		return AM_TMPLT_DEL_PAGE_VAR_L . $name . AM_TMPLT_DEL_PAGE_VAR_R;
+	
+	}
+
+	
 	/**
 	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
 	 *	
