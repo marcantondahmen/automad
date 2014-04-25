@@ -55,7 +55,7 @@ if [[ $arg != *"$flowCommitMessage"* ]]; then
 		echo "---"
 		echo
 		
-		/Applications/SourceTree.app/Contents/Resources/mercurial_local/hg_local commit -m "$flowCommitMessage $version"
+		hg commit -m "$flowCommitMessage $version"
 	
 	# Normal commit
 	elif [[ ! $arg =~ ^flow.* ]]; then
@@ -65,17 +65,17 @@ if [[ $arg != *"$flowCommitMessage"* ]]; then
 		echo "Generate version number from normal Commit"
 		echo
 		
-		tagsOutput=$(/Applications/SourceTree.app/Contents/Resources/mercurial_local/hg_local tags | sed -n '2 p')
+		tagsOutput=$(hg tags | sed -n '2 p')
 		tag=${tagsOutput%% *}
 		echo "Find latest tag across all branches: $tag"
 		
 		# $nextRev is the future revision number from the next commit (tip +1)
-		nextRev=$(($(/Applications/SourceTree.app/Contents/Resources/mercurial_local/hg_local tip --template "{rev}") + 1))
+		nextRev=$(($(hg tip --template "{rev}") + 1))
 		echo "Next revision will be: $nextRev"
 
 		if [[ $tag != "" ]]; then
 
-			taggedRev=$(/Applications/SourceTree.app/Contents/Resources/mercurial_local/hg_local log -r "$tag" --template "{rev}\n")
+			taggedRev=$(hg log -r "$tag" --template "{rev}\n")
 			echo "Revsion number for $tag is: $taggedRev"
 			
 			distance=$(($nextRev - $taggedRev))
