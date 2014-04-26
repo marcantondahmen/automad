@@ -245,7 +245,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		// Get variable keys from selected template file, which are not part of the $standardKeys.
 		// If one of these keys is not a key in $data, its textarea gets automatically created in the form, to make it easier for the user to understand, 
 		// what variables are available without having to add them manually. (below)
-		$templateKeys = array_diff($this->getTemplateVars($data[AM_KEY_THEME], $P->template), $standardKeys);
+		$templateKeys = array_diff($this->getPageVarsInTemplate($data[AM_KEY_THEME], $P->template), $standardKeys);
 	
 	
 		// Start buffering the HTML.
