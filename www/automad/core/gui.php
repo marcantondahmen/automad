@@ -271,6 +271,43 @@ class GUI {
 
 
 	/**
+	 *	Collect all site variables used in any .php file below the /themes directory.
+	 *	
+	 *	@return Array with site variables
+	 */
+
+	private function getSiteVarsInThemes() {
+
+		// Collect all .php files below "/themes"
+		$dir = AM_BASE_DIR . AM_DIR_THEMES;	
+		$arrayDirs = array();
+		$arrayFiles = array();
+		
+		while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
+			$dir .= '/*';
+			$arrayDirs = array_merge($arrayDirs, $dirs);
+		}
+		
+		foreach ($arrayDirs as $d) {
+			$arrayFiles = array_merge($arrayFiles, glob($d . '/*.php'));
+		}
+
+		// Scan content of all the files for site variables.
+		$content = '';
+		
+		foreach ($arrayFiles as $file) {
+			$content .= file_get_contents($file);
+		}
+
+		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/', $content, $matches);
+		sort($matches[1]);
+
+		return array_unique($matches[1]);
+		
+	}
+
+
+	/**
 	 *	Move a page's directory to a new location.
 	 *	The final path is composed of the parent directoy, the prefix and the title.
 	 *	In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
