@@ -248,7 +248,11 @@ shared_title: Site Settings / Shared Files
 
 -
 
-shared_vars: Shared Variables
+shared_vars_used: Shared variables used by the installed themes
+
+-
+
+shared_vars_unused: Unused shared variables
 
 -
 
