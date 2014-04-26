@@ -104,10 +104,16 @@ if (isset($_POST['data'])) {
 	// Get available themes.
 	$themes = glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR);
 	
+	// Array of the standard variable keys, which are always needed.
+	$standardKeys = array(AM_KEY_SITENAME, AM_KEY_THEME);
+	
+	// Collect all keys of all shared site variables, which are found in the template files.
+	$themesKeys = array_diff($this->getSiteVarsInThemes(), $standardKeys);
+	
 	// Start buffering the HTML.
 	ob_start();
 	
-
+	
 	?>
 	
 		<div class="list-group">
@@ -143,11 +149,26 @@ if (isset($_POST['data'])) {
 			</div>
 		
 			<div class="list-group-item">
-				<h4 class="text-muted"><?php echo $this->tb['shared_vars']; ?></h4>
+				<h4 class="text-muted"><?php echo $this->tb['shared_vars_used']; ?></h4>
+				<?php
+				// Add textareas for all variables in $data, which are used in the currently installed themes and are not part of the $standardKeys array 
+				// and create empty textareas for those keys found in the themes, but are not defined in $data.
+				foreach ($themesKeys as $key) {
+					if (isset($data[$key])) {
+						echo $this->varTextArea($key, $data[$key]);
+					} else {
+						echo $this->varTextArea($key, '');
+					}
+				}
+				?>
+			</div>
+		
+			<div class="list-group-item">
+				<h4 class="text-muted"><?php echo $this->tb['shared_vars_unused']; ?></h4>
 				<div id="automad-custom-variables">
 					<?php
-					// All site-wide variable except the site's name and the theme.
-					foreach (array_diff(array_keys($data), array(AM_KEY_SITENAME, AM_KEY_THEME)) as $key) {
+					// All unused site-wide variables.
+					foreach (array_diff(array_keys($data), $standardKeys, $themesKeys) as $key) {
 						echo $this->varTextArea($key, $data[$key], true);
 					}				
 					?> 
