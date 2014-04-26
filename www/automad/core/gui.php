@@ -231,7 +231,7 @@ class GUI {
 	 *	@return Array of matched variables
 	 */
 
-	private function getTemplateVars($theme, $template) {
+	private function getPageVarsInTemplate($theme, $template) {
 		
 		// Get template form the Site's theme, if $theme is false.
 		if (!$theme) {
