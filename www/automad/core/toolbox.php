@@ -282,6 +282,8 @@ class Toolbox {
 	public function listSetup($options = array()) {
 		
 		// Default setup
+		// It is important, that all keys within the $defaults array match the actual properties of the Listing object to be reused as defaults,
+		// when updating an existing Listing object (below).
 		$defaults = 	array(
 					'vars' => AM_KEY_TITLE,
 					'type' => false,
