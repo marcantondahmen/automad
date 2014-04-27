@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	- the 'search' element from the query string (if existant, the selection gets filtered by these keywords)
  *
  *	Since the selection of pages will also be filtered by the keywords passed as the 'search' element in the query string, 
- *	this object can easily be used on a the search results page.
+ *	this object can easily be used on a search results page.
  *	Basically a search results page can just be a normal page with a Listing object, where a search box passes the 'search' value to.
  *
  *	The visibility and order of the pages get influenced by the following elements within a query string:
@@ -182,7 +182,7 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $vars, $type, $template, $glob, $width, $height, $crop, $sortType, $sortDirection) {
+	public function __construct($site, $vars, $type, $template, $glob, $width, $height, $crop, $defaultSortType, $defaultSortDirection) {
 		
 		// Set up properties from passed parameters
 		$this->S = $site;
@@ -196,15 +196,15 @@ class Listing {
 		$this->crop = $crop;
 		
 		// Set up sort type
-		// If there is a query string, use that parameter. If not use the passed parameter (which is basically the menu's first value).
+		// If there is a query string, use that parameter. If not use the passed default parameter (which is basically the menu's first value).
 		if (!$this->sortType = Parse::queryKey('sort_type')) {
-			$this->sortType = $sortType;
+			$this->sortType = $defaultSortType;
 		}
 		
 		// Set up sort direction
-		// If there is a query string, use that parameter. If not use the passed parameter (which is basically the menu's first value).
+		// If there is a query string, use that parameter. If not use the passed default parameter (which is basically the menu's first value).
 		if (!$this->sortDirection = Parse::queryKey('sort_dir')) {
-			$this->sortDirection = $sortDirection;
+			$this->sortDirection = $defaultSortDirection;
 		} 
 		
 		// Set up filter
