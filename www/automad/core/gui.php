@@ -225,6 +225,7 @@ class GUI {
 
 	/**
 	 *	Get a list (array) of all variables used in a template file and its nested elements.
+	 * 	This method also parses extensions and toolbox methods and therefore also finds all variables created dynamically by these methods. 
 	 *
 	 *	@param string $theme
 	 *	@param string $template
@@ -272,6 +273,11 @@ class GUI {
 
 	/**
 	 *	Collect all site variables used in any .php file below the /themes directory.
+	 * 	
+	 * 	Note: Unlike getPageVarsInTemplate(), this method doesn't parse any extensions or tools, since there is no current page when editing global settings.
+	 * 	Therefore it is not possible to find any shared variable which gets created by an extension or a toolbox method.
+	 * 	Only variables which are hardcoded in the template files or its nested elements get collected.
+	 * 	As a good practice, it should be avoided within any extension to create site variables dynamically. That should only be done with page variables.
 	 *	
 	 *	@return Array with site variables
 	 */
