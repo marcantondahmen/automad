@@ -169,13 +169,17 @@ ob_start();
 							echo	'<h6>Exif Description: ' . $img->description . '</h6>';	
 						}
 							
-						echo	'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
+						echo	'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span>' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
+							'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
 							'</div>';
 				
 					} else { 
 		
 						echo 	'<div class="col-xs-3"><a class="filetype img-rounded img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
-							'<div class="col-xs-8"><h5>' . basename($file) . '</h5></div>';
+							'<div class="col-xs-8">' . 
+							'<h5>' . basename($file) . '</h5>' .
+							'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span>' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
+							'</div>';
 		 
 					} 
 	
