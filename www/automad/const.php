@@ -99,7 +99,7 @@ Config::set('AM_CACHE_MONITOR_DELAY', 60);
 Config::set('AM_IMG_JPG_QUALITY', 90);
 
 // LISTING DEFAULTS
-Config::set('AM_LIST_DEFAULT_SORT_DIR', 'desc');
+Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
 // TEMPLATE DELIMITERS
 // Includes
