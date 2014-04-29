@@ -220,7 +220,7 @@ class Parse {
 	
 	public static function queryKey($key) {
 	
-		// Save currently passed filter query to determine current filter/sort_dir when generating list
+		// Save currently passed filter query to determine current filter/sort_order when generating list
 		if (isset($_GET[$key])) {
 			$queryKey = $_GET[$key];
 		} else {
