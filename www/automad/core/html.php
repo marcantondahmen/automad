@@ -425,17 +425,17 @@ class Html {
 	/**
 	 *	Generate ascending/descending buttons for sorting.
 	 *
-	 *	@param array $options - An array with the text for each direction: array('SORT_ASC' => 'asc', 'SORT_DESC' => 'desc')
+	 *	@param array $options - An array with the text for each order: array('SORT_ASC' => 'asc', 'SORT_DESC' => 'desc')
 	 *	@return the HTML for the buttons
 	 */
 	
-	public static function generateSortDirectionMenu($options) {
+	public static function generateSortOrderMenu($options) {
 		
 		$query = Parse::queryArray();
 		
 		// Make first option current, when nothing is set in the query string.
 		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
-		if (!$current = Parse::queryKey('sort_dir')) {
+		if (!$current = Parse::queryKey('sort_order')) {
 			$current = key($options);
 		}
 				
@@ -449,7 +449,7 @@ class Html {
 				$class = ' ';
 			}
 			
-			$query['sort_dir'] = $key;
+			$query['sort_order'] = $key;
 			
 			ksort($query);
 			
@@ -465,19 +465,19 @@ class Html {
 
 	
 	/**
-	 *	Generate the menu to select the sort type from the given types ($options).
+	 *	Generate the menu to select the sort item from the given types ($options).
 	 *
 	 *	@param array $options -	An array with the variables to show up in the menu.
 	 *	@return the HTML of the menu
 	 */
 	
-	public static function generateSortTypeMenu($options) {
+	public static function generateSortItemMenu($options) {
 
 		$query = Parse::queryArray();
 
 		// Make first option current, when nothing is actually selected.
 		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
-		if (!$current = Parse::queryKey('sort_type')) {
+		if (!$current = Parse::queryKey('sort_item')) {
 			$current = key($options);
 		}
 				
@@ -492,8 +492,8 @@ class Html {
 				$class = ' ';
 			}
 		
-			// Only change the ['sort_type'] key
-			$query['sort_type'] = $key;
+			// Only change the ['sort_item'] key
+			$query['sort_item'] = $key;
 			
 			ksort($query);
 	
