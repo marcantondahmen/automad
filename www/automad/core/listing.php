@@ -61,8 +61,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  *	The visibility and order of the pages get influenced by the following elements within a query string:
  *	- filter
- *	- sortType
- *	- sortDirection
+ *	- sortItem
+ *	- sortOrder
  */
 
 
@@ -140,17 +140,17 @@ class Listing {
 	
 	
 	/**
-	 *	The current sortType (from possible query string).
+	 *	The current sortItem (from possible query string).
 	 */
 	
-	public $sortType;
+	public $sortItem;
 	
 	
 	/**
-	 *	The current sortDirection (from possible query string).
+	 *	The current sortOrder (from possible query string).
 	 */
 	
-	public $sortDirection;
+	public $sortOrder;
 	
 	
 	/**
@@ -182,7 +182,7 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $vars, $type, $template, $glob, $width, $height, $crop, $defaultSortType, $defaultSortDirection) {
+	public function __construct($site, $vars, $type, $template, $glob, $width, $height, $crop, $defaultSortItem, $defaultSortOrder) {
 		
 		// Set up properties from passed parameters
 		$this->S = $site;
@@ -195,16 +195,16 @@ class Listing {
 		$this->height = $height;
 		$this->crop = $crop;
 		
-		// Set up sort type
+		// Set up sort item
 		// If there is a query string, use that parameter. If not use the passed default parameter (which is basically the menu's first value).
-		if (!$this->sortType = Parse::queryKey('sort_type')) {
-			$this->sortType = $defaultSortType;
+		if (!$this->sortItem = Parse::queryKey('sort_item')) {
+			$this->sortItem = $defaultSortItem;
 		}
 		
-		// Set up sort direction
+		// Set up sort order
 		// If there is a query string, use that parameter. If not use the passed default parameter (which is basically the menu's first value).
-		if (!$this->sortDirection = Parse::queryKey('sort_dir')) {
-			$this->sortDirection = $defaultSortDirection;
+		if (!$this->sortOrder = Parse::queryKey('sort_order')) {
+			$this->sortOrder = $defaultSortOrder;
 		} 
 		
 		// Set up filter
@@ -295,7 +295,7 @@ class Listing {
 		
 		$selection = new Selection($listing);
 		$selection->filterByTag($this->filter);
-		$selection->sortPages($this->sortType, constant(strtoupper('sort_' . $this->sortDirection)));
+		$selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
 		return $selection->getSelection();
 			
