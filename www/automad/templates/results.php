@@ -11,8 +11,8 @@ t{navTop}
 
 t{listSetup(title, subtitle, tags, text)}
 t{listFilters}
-t{listSortTypes}
-t{listSortDirection}
+t{listSortItems}
+t{listSortOrder}
 t{listPages}
 
 <br />
