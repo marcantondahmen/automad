@@ -21,13 +21,13 @@ i(elements/header.php)
 		})
 		
 		t(listFilters)
-		t(listSortTypes {
+		t(listSortItems {
 			title: "Title", 
 			subtitle: "By Subtitle", 
 			tags: "By Tags"
 		})
 		
-		t(listSortDirection {asc: "Asc", desc: "Desc"})
+		t(listSortOrder {asc: "Asc", desc: "Desc"})
 		
 	</div>
 		
