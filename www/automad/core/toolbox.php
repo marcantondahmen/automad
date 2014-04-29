@@ -273,8 +273,8 @@ class Toolbox {
 	 *	- "width: pixels" 		(image width, passed as interger value without unit: "width: 100")
 	 *	- "height: pixels" 		(image height, passed as interger value without unit: "width: 100")
 	 *	- "crop: 0 | 1"			(crop image or not)
-	 *	- "sortType: Var to sort by"	(default sort type, when there is no query string passed)
-	 *	- "sortDirection: asc | desc"	(default sort direction, when there is no query string passed)
+	 *	- "sortItem: Var to sort by"	(default sort item, when there is no query string passed)
+	 *	- "sortOrder: asc | desc"	(default sort order, when there is no query string passed)
 	 *	
 	 *	@param array $options 
 	 */
@@ -292,8 +292,8 @@ class Toolbox {
 					'width' => false,
 					'height' => false,
 					'crop' => false,
-					'sortType' => false,
-					'sortDirection' => AM_LIST_DEFAULT_SORT_DIR
+					'sortItem' => false,
+					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER
 				);
 	
 		// If listing exists already, get defaults from current properties.
@@ -313,7 +313,7 @@ class Toolbox {
 		}
 		
 		// Create new Listing. 
-		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['sortType'], $options['sortDirection']);
+		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['sortItem'], $options['sortOrder']);
 		
 	}
 
@@ -360,15 +360,15 @@ class Toolbox {
 	
 	
 	/**
-	 *	Place a menu to select the sort direction. The menu only affects lists of pages created by Toolbox::listPages()
+	 *	Place a menu to select the sort order. The menu only affects lists of pages created by Toolbox::listPages()
 	 *
 	 *	@param array $options - Example: {desc: "descending", asc: "ascending"} 
 	 *	@return the HTML for the sort menu
 	 */
 	
-	public function listSortDirection($options) {
+	public function listSortOrder($options) {
 		
-		// Provide defaults, since the sort direction is a very simple menu and therefore most of the times specific options are unneeded.
+		// Provide defaults, since the sort order is a very simple menu and therefore most of the times specific options are unneeded.
 		$defaults = array(
 			'desc' => 'Descending',
 			'asc' => 'Ascending'
@@ -387,9 +387,9 @@ class Toolbox {
 		$options = array_intersect_key($options, $defaults);
 		
 		// Update Listing with first key of options for default sorting...
-		$this->listSetup(array('sortDirection' => key($options)));
+		$this->listSetup(array('sortOrder' => key($options)));
 		
-		return Html::generateSortDirectionMenu($options);
+		return Html::generateSortOrderMenu($options);
 		
 	}
 		
@@ -402,12 +402,12 @@ class Toolbox {
 	 *	@return the HTML for the sort menu
 	 */
 
-	public function listSortTypes($options) {
+	public function listSortItems($options) {
 		
 		// Update Listing with first key of options for default sorting...
-		$this->listSetup(array('sortType' => key($options)));
+		$this->listSetup(array('sortItem' => key($options)));
 		
-		return Html::generateSortTypeMenu($options);
+		return Html::generateSortItemMenu($options);
 		
 	}
 
