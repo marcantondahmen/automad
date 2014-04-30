@@ -195,18 +195,19 @@ class Listing {
 		$this->height = $height;
 		$this->crop = $crop;
 		
-		// Set up sort item
-		// If there is a query string, use that parameter. If not use the passed default parameter (which is basically the menu's first value).
-		if (!$this->sortItem = Parse::queryKey('sort_item')) {
-			$this->sortItem = $defaultSortItem;
+		// Set up sorting by merging the default sorting options with the query string's options.
+		// Note: Is is important, not to use Parse::queryKey here, because the 'sortItem' could be empty (false) to sort by basename.
+		// Parse::queryKey() can not distinguish between false and not defined. 
+		// So merging the array is much safer, since the existing (but false) options will be used instead of the defaults.
+		$opt = array_merge(array('sortItem' => $defaultSortItem, 'sortOrder' => $defaultSortOrder), Parse::queryArray());
+		$this->sortItem = $opt['sortItem'];
+		$this->sortOrder = $opt['sortOrder'];
+		
+		// Set sortOrder to the default order, if its value is invalid.
+		if (!in_array($this->sortOrder, array('asc', 'desc'))) {
+			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
-		
-		// Set up sort order
-		// If there is a query string, use that parameter. If not use the passed default parameter (which is basically the menu's first value).
-		if (!$this->sortOrder = Parse::queryKey('sort_order')) {
-			$this->sortOrder = $defaultSortOrder;
-		} 
-		
+				
 		// Set up filter
 		$this->filter = Parse::queryKey('filter');
 		
