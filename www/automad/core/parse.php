@@ -212,15 +212,16 @@ class Parse {
 	
 	
 	/**
-	 *	Test if a key exists in the query string and return that key.
-	 *
+	 *	Return value of a query string parameter or any empty string, if that parameter doesn't exist.
+	 *	Note: Since this method always returns a string, it should not be used to test whether a parameter exists in the query string, 
+	 * 	because a non-existing parameter and an empty string as a parameter's value will return the same.
+	 * 
 	 *	@param string $key
 	 *	@return $queryKey
 	 */
 	
 	public static function queryKey($key) {
 	
-		// Save currently passed filter query to determine current filter/sort_order when generating list
 		if (isset($_GET[$key])) {
 			$queryKey = $_GET[$key];
 		} else {
