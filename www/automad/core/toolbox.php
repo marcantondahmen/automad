@@ -404,60 +404,7 @@ class Toolbox {
 	
 	}
 	
-	
-	/**
-	 *	Place a menu to select the sort order. The menu only affects lists of pages created by Toolbox::listPages()
-	 *
-	 *	@param array $options - Example: {desc: "descending", asc: "ascending"} 
-	 *	@return the HTML for the sort menu
-	 */
-	
-	public function listSortOrder($options) {
 		
-		// Provide defaults, since the sort order is a very simple menu and therefore most of the times specific options are unneeded.
-		$defaults = array(
-			'desc' => 'Descending',
-			'asc' => 'Ascending'
-		);
-		
-		// Merge defaults with options and keep order of keys.
-		// Since the order of the keys is important for setting the default value,
-		// it is not possible to use array_merge (would always use the default order).
-		foreach (array('desc', 'asc') as $key) {
-			if (!isset($options[$key])) {
-				$options[$key] = $defaults[$key];
-			}
-		}
-		
-		// Only keep asc/desc in options
-		$options = array_intersect_key($options, $defaults);
-		
-		// Update Listing with first key of options for default sorting...
-		$this->listSetup(array('sortOrder' => key($options)));
-		
-		return Html::generateSortOrderMenu($options);
-		
-	}
-		
-
-	/**
-	 *	Place a set of sort options. The menu only affects lists of pages created by Toolbox::listPages().
-	 *	If the $optionStr is missing, the default options are used.
-	 *
-	 *	@param array $options - The options array consists of variable: "display text" pairs, where the key is the variable to be sorted by and the value the text to be displayed in the menu. Passing a non-existing variable will sort the list by the basename of the path.  
-	 *	@return the HTML for the sort menu
-	 */
-
-	public function listSortItems($options) {
-		
-		// Update Listing with first key of options for default sorting...
-		$this->listSetup(array('sortItem' => key($options)));
-		
-		return Html::generateSortItemMenu($options);
-		
-	}
-
-	
 	/**
 	 *	Generate a list for the navigation below a given URL.
 	 *
