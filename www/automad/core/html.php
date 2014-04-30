@@ -421,6 +421,48 @@ class Html {
 			
 	}
 
+
+	/**
+	 *	Generate the HTML for a list of sort buttons (item & order).
+	 * 
+	 * 	@param array $options
+	 * 	@return The sort menu's HTML
+	 */
+
+	public static function generateSortMenu($options) {
+		
+		// Get all items from the query string to keep the current filters/search items when building the links. 
+		$query = Parse::queryArray();
+		
+		// Determine the current sort settings, by merging the default options with possible items from the query string.
+		$current = array_merge(reset($options), $query);
+			
+		$html = '<ul class="' . AM_HTML_CLASS_SORT . '">';
+	
+		foreach ($options as $text => $opt) {
+			
+			// Test. whether the current "button" matches the current sort settings.
+			if ($current['sortItem'] == $opt['sortItem'] && $current['sortOrder'] == $opt['sortOrder']) {
+				$class = ' class="' . AM_HTML_CLASS_CURRENT . '" ';
+			} else {
+				$class = ' ';
+			}
+			
+			// Merge query with sorting options. The second array just makes sure, 
+			// that both items (item & order) are overwritten in the current "button", even if $opt doesn't have both keys. 
+			$query = array_merge($query, array('sortItem' => '', 'sortOrder' => false), $opt);
+			ksort($query);
+	
+			$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $text . '</a></li>';
+	
+		}
+
+		$html .= '</ul>';
+		
+		return $html;
+		
+	}
+
 	
 	/**
 	 *	Generate ascending/descending buttons for sorting.
@@ -435,7 +477,7 @@ class Html {
 		
 		// Make first option current, when nothing is set in the query string.
 		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
-		if (!$current = Parse::queryKey('sort_order')) {
+		if (!$current = Parse::queryKey('sortOrder')) {
 			$current = key($options);
 		}
 				
@@ -449,7 +491,7 @@ class Html {
 				$class = ' ';
 			}
 			
-			$query['sort_order'] = $key;
+			$query['sortOrder'] = $key;
 			
 			ksort($query);
 			
@@ -477,7 +519,7 @@ class Html {
 
 		// Make first option current, when nothing is actually selected.
 		// When setting up a listing, the Toolbox method is doing the same by always passing the first key as default.
-		if (!$current = Parse::queryKey('sort_item')) {
+		if (!$current = Parse::queryKey('sortItem')) {
 			$current = key($options);
 		}
 				
@@ -492,8 +534,8 @@ class Html {
 				$class = ' ';
 			}
 		
-			// Only change the ['sort_item'] key
-			$query['sort_item'] = $key;
+			// Only change the ['sortItem'] key
+			$query['sortItem'] = $key;
 			
 			ksort($query);
 	
