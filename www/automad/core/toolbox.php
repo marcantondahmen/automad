@@ -360,6 +360,52 @@ class Toolbox {
 	
 	
 	/**
+	 *	Create a menu of buttons for sorting a page list (item & order combined).
+	 * 
+	 * 	Example: 
+	 * 	t(listSort {
+	 * 		"Original": { sortOrder: "asc" },
+	 * 		"Title": { sortItem: "title", sortOrder: "asc" },
+	 * 		"Tags":	{ sortItem: "tags", sortOrder: "asc" }
+	 * 	})
+	 *	
+	 * 	To have a button to sort the pages by basename, the 'sortItem' just has to be skipped or set to any non-existing variable.
+	 *  
+	 * 	@param array $options - A multidimensional array of buttons and their sort settings
+	 * 	@return The menu's HTML
+	 */
+	
+	public function listSort($options) {
+		
+		if (is_array($options) && is_array(reset($options))) {
+				
+			// Sanitize $options
+			foreach ($options as $key => $opt) {
+			
+				// Remove all unneeded array items.
+				$opt = array_intersect_key($opt, array_flip(array('sortItem', 'sortOrder')));
+			
+				// Make sure both required item (sortItem and sortOrder) are existing within $options[$key].
+				$options[$key] = array_merge(array('sortItem' => '', 'sortOrder' => false), $opt);
+				
+				// Set sortOrder to the default order, if its value is invalid.
+				if (!in_array($options[$key]['sortOrder'], array('asc', 'desc'))) {
+					$options[$key]['sortOrder'] = AM_LIST_DEFAULT_SORT_ORDER;
+				}
+				
+			}
+			
+			// Set list defaults.
+			$this->listSetup(reset($options));
+			
+			return Html::generateSortMenu($options);
+			
+		}
+	
+	}
+	
+	
+	/**
 	 *	Place a menu to select the sort order. The menu only affects lists of pages created by Toolbox::listPages()
 	 *
 	 *	@param array $options - Example: {desc: "descending", asc: "ascending"} 
