@@ -417,7 +417,7 @@ class Selection {
 			foreach ($this->selection as $key => $page) {
 			
 				if (isset($page->data[$var])) {
-					$arrayToSortBy[$key] = strtolower($page->data[$var]);
+					$arrayToSortBy[$key] = strtolower(strip_tags($page->data[$var]));
 				} else {
 					// If data[$var] doesn't exists, the page's path's basename will be used.
 					// That way it is possible to order by basename with simply passing a non-existing var (for example "orig" or something else).
