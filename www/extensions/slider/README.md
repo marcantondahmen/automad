@@ -1,9 +1,19 @@
+#Slider
+
+The Slider extensions creates a simple image slideshow.
+
+---
+
+###Markup
+
 To use the Slider extension, simply put the following line into you template file:
 
 	x(Slider) 
 			
-			
-That will create a slideshow with the default settings.
+---
+
+###Options			
+
 There are several parameters to modify the Slider:
 
 - glob: 	the pattern to match image files to be displayed (for example "*.png" or "image*.jpg")
@@ -11,8 +21,11 @@ There are several parameters to modify the Slider:
 - height:	the height
 - duration:	the duration in milliseconds	
 
+---
 
-For example the following lines will create a Slider showing all JPG files of the current page in 850x450 pixels for 3 seconds.
+###Examples
+
+The following markup will create a Slider showing all JPG files of the current page in 850x450 pixels for 3 seconds.
 
 	x(Slider {
 		glob: "*.jpg", 
