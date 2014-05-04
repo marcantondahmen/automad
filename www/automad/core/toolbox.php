@@ -564,7 +564,7 @@ class Toolbox {
 	
 	public function themeURL() {
 		
-		return $this->P->getTheme();
+		return AM_DIR_THEMES . '/' . $this->P->theme;
 		
 	}
 	
