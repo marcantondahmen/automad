@@ -121,28 +121,6 @@ class Page {
 	
 
 	/**
-	 *	Return the theme path (root relative) of the page.
-	 *
-	 *	@return The path of the theme relative to the site's root.
-	 */
-	
-	public function getTheme() {
-		
-		$themePath = AM_DIR_THEMES . '/' . $this->theme;
-		
-		if (!file_exists(AM_BASE_DIR . $themePath) || !$this->theme) {
-			
-			Debug::log('Page: Theme "' . $themePath . '" not found! Will try default template directory instead...');
-			$themePath = AM_DIR_DEFAULT_TEMPLATES;
-			
-		}
-		
-		return $themePath;
-		
-	}
-	
-
-	/**
 	 * 	Return the template of the page.
 	 *
 	 *	@return The full file system path of the template file.
@@ -150,17 +128,14 @@ class Page {
 	
 	public function getTemplate() {
 		
-		$templatePath = AM_BASE_DIR . $this->getTheme() . '/' . $this->template . '.php';
+		$templatePath = AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->theme . '/' . $this->template . '.php';
 		
-		if (!file_exists($templatePath)) {
-			
-			Debug::log('Page: Template "' . $templatePath . '" not found! Will use default template instead!');
-			$templatePath = AM_FILE_DEFAULT_TEMPLATE;
-			
+		if (file_exists($templatePath)) {
+			return $templatePath;
+		} else {
+			exit('Template "' . $templatePath . '" not found!');
 		}
 	
-		return $templatePath;
-		
 	}
 	
 	
