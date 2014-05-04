@@ -381,11 +381,11 @@ class Parse {
 
 	/**
 	 *	Replace all page vars "p(variable)" with content from the current page and all site vars "s(variable)" with content from site.txt.
-	 *	Optionally all quotes and double quotes can be stripped from the replacement values.
+	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
 	 *
 	 *	@param string $str
 	 *	@param object $site
-	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values)
+	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values and the values get wrapped in double quotes, to avoid parsing errors, when a value is empty "")
 	 *	@return The parsed $str
 	 */
 	
@@ -395,16 +395,24 @@ class Parse {
 		$P = $site->getCurrentPage();
 		$use = array('data' => $P->data, 'jsonSafe' => $jsonSafe);
 		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
-				function($matches) use($use) {	
+				function($matches) use($use) {
+						
 					if (array_key_exists($matches[1], $use['data'])) {
 						
 						if ($use['jsonSafe']) {
-							return str_replace(array('"', "'"), '', $use['data'][$matches[1]]);
+							return '"' . str_replace(array('"', "'"), '', $use['data'][$matches[1]]) . '"';
 						} else {
 							return $use['data'][$matches[1]];
 						}
 						
+					} else {
+				
+						if ($use['jsonSafe']) { 
+							return '""';
+						}	
+				
 					}
+							
 				},
 				$str);
 		
@@ -414,7 +422,7 @@ class Parse {
 				function($matches) use($use) {
 					
 					if ($use['jsonSafe']) {
-						return str_replace(array('"', "'"), '', $use['site']->getSiteData($matches[1]));
+						return '"' . str_replace(array('"', "'"), '', $use['site']->getSiteData($matches[1])) . '"';
 					} else {
 						return $use['site']->getSiteData($matches[1]);
 					}
