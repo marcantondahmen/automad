@@ -72,7 +72,6 @@ Config::set('AM_DIR_CACHE', '/cache');
 Config::set('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
 Config::set('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
 Config::set('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
-Config::set('AM_DIR_DEFAULT_TEMPLATES', '/automad/templates');
 
 // FILE
 Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)	
@@ -81,7 +80,6 @@ Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
 Config::set('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.' . AM_FILE_EXT_DATA); 
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 Config::set('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_object');
-Config::set('AM_FILE_DEFAULT_TEMPLATE', AM_BASE_DIR . AM_DIR_DEFAULT_TEMPLATES . '/default.php');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_ALLOWED_FILE_TYPES', 'css, jpg, zip, png, svg, js, pdf, mp3, gif');
 
