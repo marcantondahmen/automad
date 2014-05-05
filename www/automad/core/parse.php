@@ -148,8 +148,8 @@ class Parse {
 			$str = str_replace("'", '"', $str);
 			$str = preg_replace('/([{,]+)\s*([^":\s]+)\s*:/i', '\1"\2":', $str);
 				
-			// Remove all empty elements.
-			$options = array_filter(json_decode($str, true));
+			// Decode JSON.
+			$options = json_decode($str, true);
 			
 		}
 		
