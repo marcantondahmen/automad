@@ -334,14 +334,17 @@ class Toolbox {
 	/**
 	 *	Return a page list from Listing object created by Toolbox::listSetup().
 	 *
+	 * 	@param array $options - Options: class: optional class for list items
 	 *	@return The HTML for a page list.
 	 */
 
-	public function listPages() {
+	public function listPages($options) {
+	
+		$options = array_merge(array('class' => false), $options);
 	
 		$L = $this->L;
 	
-		return Html::generateList($L->pages, $L->vars, $L->glob, $L->width, $L->height, $L->crop);	
+		return Html::generateList($L->pages, $L->vars, $L->glob, $L->width, $L->height, $L->crop, $options['class']);	
 		
 	}
 
