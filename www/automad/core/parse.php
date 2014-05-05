@@ -151,6 +151,11 @@ class Parse {
 			// Decode JSON.
 			$options = json_decode($str, true);
 			
+			// Remove empty ('') strings, but leave false values (false, 0 or "0").
+			$options = 	array_filter($options, function($value) {
+						return ($value !== '');
+					}); 
+						
 		}
 		
 		return $options;
