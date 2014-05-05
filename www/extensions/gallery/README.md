@@ -19,9 +19,9 @@ somewhere in your markup.
 
 There are several parameters to modify the gallery:
 
-- glob:		The file pattern
-- width:	The thumbnails' width
-- height:	The thumbnails' height
+- glob:	`/path/to/images` - The file pattern, relative or absolute path (default: `"*.jpg"`)
+- width: `integer` - The thumbnails' width in pixels (default: `200`)
+- height: `integer` - The thumbnails' height in pixels (default: `200`)
 
 ---
 

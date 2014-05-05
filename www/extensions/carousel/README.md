@@ -31,10 +31,10 @@ to your template's head section.
 
 There are several options available to modify the carousel:
 
-- glob (default "*.jpg")
-- width (default 400)
-- height (default 300)
-- duration (default 3000)
+- glob: `/path/to/images/*` - File pattern (default: `"*.jpg"`)
+- width: `integer` - Image width in pixels (default: `400`)
+- height: `integer` - Image height in pixels (default: `300`)
+- duration: `integer` - Duration in milliseconds for each image (default: `3000`)
 
 The options must be specified in **JSON** format. 
 It is also possible to pass any value as a normal page variable "p(variable)" to be defined differently for every page using the template.

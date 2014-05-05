@@ -16,10 +16,10 @@ To use the Slider extension, simply put the following line into you template fil
 
 There are several parameters to modify the Slider:
 
-- glob: 	the pattern to match image files to be displayed (for example "*.png" or "image*.jpg")
-- width:	the width of the slider
-- height:	the height
-- duration:	the duration in milliseconds	
+- glob: `/path/to/images/*` - File pattern (default: `"*.jpg"`)
+- width: `integer` - Image width in pixels (default: `400`)
+- height: `integer` - Image height in pixels (default: `300`)
+- duration: `integer` - Duration in milliseconds for each image (default: `3000`)
 
 ---
 
