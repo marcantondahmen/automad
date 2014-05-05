@@ -319,12 +319,12 @@ class Site {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage('results', AM_PAGE_RESULTS_TITLE . ' / "' . Parse::queryKey('search') . '"');
+			return $this->createPage(AM_PAGE_RESULTS_TEMPLATE, AM_PAGE_RESULTS_TITLE . ' / "' . Parse::queryKey('search') . '"');
 	
 		} else {
 	
 			// Else return error page
-			return $this->createPage('error', AM_PAGE_ERROR_TITLE);
+			return $this->createPage(AM_PAGE_ERROR_TEMPLATE, AM_PAGE_ERROR_TITLE);
 	
 		}
 		
