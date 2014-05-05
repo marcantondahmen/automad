@@ -495,12 +495,12 @@ class GUI {
 		
 		// Find all templates of currently used site theme (set in site.txt).
 		$siteThemeTemplates = 	array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->siteData[AM_KEY_THEME] . '/*.php'), function($file) {
-						return false === in_array(basename($file), array('error.php', 'results.php'));
+						return false === in_array(basename($file), array(AM_PAGE_ERROR_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
 					});
 
 		// Find all templates of all installed themes.
 		$templates = 		array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/*/*.php'), function($file) {
-						return false === in_array(basename($file), array('error.php', 'results.php'));
+						return false === in_array(basename($file), array(AM_PAGE_ERROR_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
 					});
 		
 		// Create HTML
@@ -515,7 +515,7 @@ class GUI {
 				 $html .= ' selected';
 			}
 
-			$html .= ' value="' . basename($template) . '">' . ucwords(str_replace('.php', '', basename($template))) . ' (Global Theme)</option>';
+			$html .= ' value="' . basename($template) . '">' . ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . ' (Global Theme)</option>';
 
 		}
 
@@ -528,7 +528,9 @@ class GUI {
 				 $html .= ' selected';
 			}
 
-			$html .= ' value="' . basename(dirname($template)) . '/' . basename($template) . '">' . ucwords(basename(dirname($template))) . ' Theme > ' . ucwords(str_replace('.php', '', basename($template))) . '</option>';
+			$html .= ' value="' . basename(dirname($template)) . '/' . basename($template) . '">' . 
+				 ucwords(str_replace('_', ' ', basename(dirname($template)))) . ' Theme > ' . ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
+				 '</option>';
 		}
 		
 		$html .= '</select></div>';
