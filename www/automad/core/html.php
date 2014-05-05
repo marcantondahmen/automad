@@ -309,18 +309,23 @@ class Html {
 	 *	@param integer $width
 	 *	@param integer $height
 	 *	@param integer $crop
+	 * 	@param string $class (optional class for list items)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false) {
+	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false, $class = false) {
 		
 		if ($pages) {			
+						
+			if ($class) {
+				$class = ' ' . $class;
+			}
 						
 			$html = '<ul class="' . AM_HTML_CLASS_LIST . '">';
 		
 			foreach ($pages as $page) {
 			
-				$html .= '<li><a href="' . $page->url . '">';
+				$html .= '<li class="' . AM_HTML_CLASS_LIST_ITEM . $class . '"><a href="' . $page->url . '">';
 				
 				if ($glob) {
 					
@@ -333,6 +338,8 @@ class Html {
 					$html .= Html::addImage($pageGlob, $width, $height, $crop);
 					
 				}
+			
+				$html .= '<div class="' . AM_HTML_CLASS_LIST_ITEM_DATA . '">';
 			
 				foreach ($vars as $var) {
 				
@@ -358,7 +365,7 @@ class Html {
 				
 				}
 			
-				$html .= '</a></li>';
+				$html .= '</div></a></li>';
 			
 			}
 		
