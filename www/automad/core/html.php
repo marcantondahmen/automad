@@ -65,10 +65,11 @@ class Html {
 	 *	@param boolean $crop
 	 *	@param string $link
 	 *	@param string $target
+	 * 	@param string $class
 	 *	@return the HTML of an img tag (optionally wrapped by the given link)
 	 */
 	
-	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = '', $target = '') {
+	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = '', $target = '', $class = '') {
 		
 		if ($glob) {
 			
@@ -94,8 +95,12 @@ class Html {
 				if ($link) {
 					$html .= '<a href="' . $link . '"' . $target . '>';
 				}
+				
+				if ($class) {
+					$class = ' class="' . $class . '"';
+				}
 			
-				$html .= '<img src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+				$html .= '<img' . $class . ' src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
 			
 				if ($link) {
 					$html .= '</a>';
@@ -335,7 +340,7 @@ class Html {
 					// To re-use $glob for every page in the loop, $glob can't be modified and 
 					// therefore $pageGlob will be used to build the full glob pattern.
 					$pageGlob = Modulate::filePath($page->path, $glob);		
-					$html .= Html::addImage($pageGlob, $width, $height, $crop);
+					$html .= Html::addImage($pageGlob, $width, $height, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
 					
 				}
 			
