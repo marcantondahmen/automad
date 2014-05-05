@@ -128,6 +128,8 @@ Config::set('AM_HTML_CLASS_NEXT', 'next');
 Config::set('AM_HTML_CLASS_FILTER', 'filter');
 Config::set('AM_HTML_CLASS_TREE', 'tree');
 Config::set('AM_HTML_CLASS_LIST', 'list');
+Config::set('AM_HTML_CLASS_LIST_ITEM', 'item');
+Config::set('AM_HTML_CLASS_LIST_ITEM_DATA', 'data');
 Config::set('AM_HTML_CLASS_IMAGESET', 'imageset');
 Config::set('AM_HTML_CLASS_SORT', 'sort');
 Config::set('AM_HTML_CLASS_HOME', 'home');
