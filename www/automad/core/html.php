@@ -165,7 +165,7 @@ class Html {
 	 *	@return The markup for the variable
 	 */
 
-	public function addVariable($name) {
+	public static function addVariable($name) {
 		
 		return AM_TMPLT_DEL_PAGE_VAR_L . $name . AM_TMPLT_DEL_PAGE_VAR_R;
 	
