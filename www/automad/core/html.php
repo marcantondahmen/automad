@@ -176,10 +176,11 @@ class Html {
 	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
 	 *	
 	 *	@param array $pages
+	 * 	@param string $separator
 	 *	@return the HTML of the breadcrumbs
 	 */
 	
-	public static function generateBreadcrumbs($pages) {
+	public static function generateBreadcrumbs($pages, $separator = '') {
 		
 		$i = 1;
 		
@@ -191,7 +192,7 @@ class Html {
 			
 			// Add separator for all but the last page.	
 			if ($i++ < count($pages)) {
-				$html .= AM_HTML_STR_BREADCRUMB_SEPARATOR;
+				$html .= ' ' . $separator . ' ';
 			}
 		
 		}
