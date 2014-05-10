@@ -138,7 +138,7 @@ Config::set('AM_HTML_CLASS_CURRENT', 'current');
 Config::set('AM_HTML_CLASS_CURRENT_PATH', 'currentPath');
 Config::set('AM_HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
 Config::set('AM_HTML_CLASS_SEARCH', 'search');
-Config::set('AM_HTML_STR_BREADCRUMB_SEPARATOR', '<span class="separator"> &gt; </span>');
+Config::set('AM_HTML_STR_BREADCRUMB_SEPARATOR', '&gt;');
 Config::set('AM_HTML_TEXT_FILTER_ALL', 'All');
 Config::set('AM_HTML_LIST_MAX_CHARS', 150);
 
