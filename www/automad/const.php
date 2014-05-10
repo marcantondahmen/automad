@@ -84,8 +84,8 @@ Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_ALLOWED_FILE_TYPES', 'css, jpg, zip, png, svg, js, pdf, mp3, gif');
 
 // PAGE
-Config::set('AM_PAGE_ERROR_TEMPLATE', 'error');
-Config::set('AM_PAGE_ERROR_TITLE', '404');
+Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
+Config::set('AM_PAGE_NOT_FOUND_TITLE', 'Page Not Found!');
 Config::set('AM_PAGE_RESULTS_TEMPLATE', 'search_results');
 Config::set('AM_PAGE_RESULTS_TITLE', 'Search Results');
 Config::set('AM_PAGE_RESULTS_URL', '/search_results');
