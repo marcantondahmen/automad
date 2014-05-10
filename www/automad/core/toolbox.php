@@ -438,15 +438,18 @@ class Toolbox {
 	/**
 	 * 	Generate breadcrumbs to current page.
 	 *
+	 * 	@param array $options - (separator: "string")
 	 *	@return html of breadcrumb navigation
 	 */
 	
-	public function navBreadcrumbs() {
+	public function navBreadcrumbs($options) {
+			
+		$options = array_merge(array('separator' => AM_HTML_STR_BREADCRUMB_SEPARATOR), $options);
 			
 		$selection = new Selection($this->collection);
 		$selection->filterBreadcrumbs($this->P->url);
 		
-		return Html::generateBreadcrumbs($selection->getSelection());
+		return Html::generateBreadcrumbs($selection->getSelection(), $options['separator']);
 		
 	}
 	
