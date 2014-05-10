@@ -495,12 +495,12 @@ class GUI {
 		
 		// Find all templates of currently used site theme (set in site.txt).
 		$siteThemeTemplates = 	array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->siteData[AM_KEY_THEME] . '/*.php'), function($file) {
-						return false === in_array(basename($file), array(AM_PAGE_ERROR_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
+						return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
 					});
 
 		// Find all templates of all installed themes.
 		$templates = 		array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/*/*.php'), function($file) {
-						return false === in_array(basename($file), array(AM_PAGE_ERROR_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
+						return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
 					});
 		
 		// Create HTML
