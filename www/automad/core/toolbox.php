@@ -266,13 +266,8 @@ class Toolbox {
 	 *	That way, for example the sorting menus can update the list by changing the default sorting paramters without modifying any other option.
 	 *
 	 *	Possible options are:
-	 *	- "vars: Vars to display"	(can be passed as string or array)
 	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
 	 *	- "template: name" 		(all pages matching that template)
-	 *	- "glob: glob-pattern" 		(a glob pattern to match image files in a page's folder, for example "*.jpg" will output always the first JPG found in a page directory)
-	 *	- "width: pixels" 		(image width, passed as interger value without unit: "width: 100")
-	 *	- "height: pixels" 		(image height, passed as interger value without unit: "width: 100")
-	 *	- "crop: 0 | 1"			(crop image or not)
 	 *	- "sortItem: Var to sort by"	(default sort item, when there is no query string passed)
 	 *	- "sortOrder: asc | desc"	(default sort order, when there is no query string passed)
 	 *	
@@ -285,13 +280,8 @@ class Toolbox {
 		// It is important, that all keys within the $defaults array match the actual properties of the Listing object to be reused as defaults,
 		// when updating an existing Listing object (below).
 		$defaults = 	array(
-					'vars' => AM_KEY_TITLE,
 					'type' => false,
 					'template' => false,
-					'glob' => false,
-					'width' => false,
-					'height' => false,
-					'crop' => false,
 					'sortItem' => false,
 					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER
 				);
@@ -305,15 +295,8 @@ class Toolbox {
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
 			
-		// Explode vars in case they get passed as string (template).
-		// (must be tested, since vars might be already an array, if listSetup is only called to update the listing)
-		if (!is_array($options['vars'])) {
-			$options['vars'] = explode(AM_PARSE_STR_SEPARATOR, $options['vars']);
-			$options['vars'] = array_map('trim', $options['vars']);
-		}
-		
 		// Create new Listing. 
-		$this->L = new Listing($this->S, $options['vars'], $options['type'], $options['template'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['sortItem'], $options['sortOrder']);
+		$this->L = new Listing($this->S, $options['type'], $options['template'], $options['sortItem'], $options['sortOrder']);
 		
 	}
 
@@ -333,18 +316,37 @@ class Toolbox {
 
 	/**
 	 *	Return a page list from Listing object created by Toolbox::listSetup().
+	 * 
+	 * 	Possible options are:
+	 * 	- class: Wrapping class for all list items
+	 * 	- variables: Variables to be displayed
+	 * 	- glob:	File patter to match thumbnail image
+	 * 	- width: The thumbnails' width
+	 * 	- height: The thumbnails' height
+	 *  	- crop: Cropping parameter for thumbnails
 	 *
-	 * 	@param array $options - Options: class: optional class for list items
+	 * 	@param array $options
 	 *	@return The HTML for a page list.
 	 */
 
 	public function listPages($options) {
 	
-		$options = array_merge(array('class' => false), $options);
+		$defaults = 	array(
+					'variables' => AM_KEY_TITLE,
+					'glob' => false,
+					'width' => false,
+					'height' => false,
+					'crop' => false,
+					'class' => false
+				);
 	
-		$L = $this->L;
+		$options = array_merge($defaults, $options);
+
+		// Explode list of variables.
+		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
+		$options['variables'] = array_map('trim', $options['variables']);
 	
-		return Html::generateList($L->pages, $L->vars, $L->glob, $L->width, $L->height, $L->crop, $options['class']);	
+		return Html::generateList($this->L->pages, $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class']);	
 		
 	}
 
