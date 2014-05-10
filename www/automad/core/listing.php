@@ -41,14 +41,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	A Listing object represents a set of Page objects (matching certain criterias) 
- *	and additional information for displaying that selection in a filterable and sortable list.
+ *	A Listing object represents a set of Page objects (matching certain criterias).
  *
  *	The main properties of a Listing object are: 
  *	- A selection of Page objects (filtered)
- *	- An array of tags (not filtered, but only from pages matching $type)
- *	- The set of variables to be displayed
- *	- Image settings
+ *	- An array of tags (not filtered, but only from pages matching $type, $template & $search)
  *
  *	The criterias for the selection of Page objects are:
  *	- $type (false (all pages), "children" or "related")
@@ -61,6 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  *	The visibility and order of the pages get influenced by the following elements within a query string:
  *	- filter
+ * 	- search
  *	- sortItem
  *	- sortOrder
  */
@@ -84,13 +82,6 @@ class Listing {
 	
 	
 	/**
-	 *	The array of variables from the page's text file to display along with each page.
-	 */
-	
-	public $vars;
-	
-	
-	/**
 	 *	The listing's type (all pages, children pages or related pages)
 	 */
 	
@@ -103,35 +94,7 @@ class Listing {
 	
 	public $template;
 	
-	
-	/**
-	 *	The glob pattern to match an image within a page's folder to display together with that page.
-	 */
-	
-	public $glob;
-	
-	
-	/**
-	 *	The width of a possibly displayed image.
-	 */
-	
-	public $width;
-	
-	
-	/**
-	 *	The height of a possibly displayed image.
-	 */
-	
-	public $height;
-	
-	
-	/**
-	 *	The cropping setting of a possibly displayed image.
-	 */
-	
-	public $crop;
-	
-	
+		
 	/**
 	 *	The current filter (from possible query string).
 	 */
@@ -182,18 +145,13 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $vars, $type, $template, $glob, $width, $height, $crop, $defaultSortItem, $defaultSortOrder) {
+	public function __construct($site, $type, $template, $defaultSortItem, $defaultSortOrder) {
 		
 		// Set up properties from passed parameters
 		$this->S = $site;
 		$this->P = $site->getCurrentPage();
-		$this->vars = $vars;
 		$this->type = $type;
 		$this->template = $template;
-		$this->glob = $glob;
-		$this->width = $width;
-		$this->height = $height;
-		$this->crop = $crop;
 		
 		// Set up sorting by merging the default sorting options with the query string's options.
 		// Note: Is is important, not to use Parse::queryKey here, because the 'sortItem' could be empty (false) to sort by basename.
