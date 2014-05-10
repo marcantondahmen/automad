@@ -324,7 +324,7 @@ class Site {
 		} else {
 	
 			// Else return error page
-			return $this->createPage(AM_PAGE_ERROR_TEMPLATE, AM_PAGE_ERROR_TITLE);
+			return $this->createPage(AM_PAGE_NOT_FOUND_TEMPLATE, AM_PAGE_NOT_FOUND_TITLE);
 	
 		}
 		
