@@ -37,7 +37,7 @@ There are several options available to modify the Navbar:
 - logoWidth: `integer` - Width of the logo in pixels (default: `100`)
 - logoHeight: `integer` - Height of the logo in pixels (default: `100`)
 - search: `Placeholder text for search box` or `false` to hide the search box - (default: `"Search"`)
-- levels: `integer` - Maximum number of sublevels to be displayed (default: `2`)
+- levels: `integer` - Maximum number of sublevels to be displayed (default: `1` (1 sublevel = 2 rows))
 
 The options must be specified in **JSON** format. 
 It is also possible to pass any value as a normal page variable "p(variable)" or shared (side-wide) variable "s(variable)".
