@@ -392,19 +392,22 @@ class Html {
 	 *	additional classe will be added to the representing element.
 	 *	
 	 *	@param array $pages
+	 * 	@param string $class - optional wrapping class for the <ul>
 	 *	@return the HTML of the navigation
 	 */
 	
-	public static function generateNav($pages) {
+	public static function generateNav($pages, $class = false) {
 		
 		if ($pages) {
 		
-			$html = '<ul class="' . AM_HTML_CLASS_NAV . '">';
+			if (!$class) {
+				$class = AM_HTML_CLASS_NAV;
+			}
+		
+			$html = '<ul class="' . $class . '">';
 		
 			foreach($pages as $page) {
-			
 				$html .= '<li>' . self::addLink($page) . '</li>'; 
-			
 			}
 		
 			$html .= '</ul>';
