@@ -14,7 +14,7 @@ namespace Extensions;
 
 
 /**
- *	The Navbar extension creates the markup of a Twitter Bootstrap Navbar as a menu for all first level pages.
+ *	The Navbar extension creates the markup of a Twitter Bootstrap Navbar for multiple levels.
  *	To be used, Twitter's Bootstrap CSS and JS files are required.
  */
 
@@ -56,34 +56,34 @@ class Navbar {
 					'logo' => false,
 					'logoWidth' => 100,
 					'logoHeight' => 100,
-					'search' => 'Search'
+					'search' => 'Search',
+					'levels' => 2
 				);
 		
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
-		
-		// Get first level pages
-		$selection = new \Core\Selection($site->getCollection());
-		$selection->filterByParentUrl('/');
-		$selection->sortPagesByBasename();
-		$pages = $selection->getSelection();
-		
-		// Generate HTML
+			
+		// Main wrapper
 		$html = '<nav class="navbar navbar-default';
 		
 		if ($options['fixedToTop']) {
 			$html .= ' navbar-fixed-top';
 		}
 		
-		$html .= '" role="navigation"><div class="container';
+		$html .= '" role="navigation">' .
+			 '<div class="container';
 			
 		if ($options['fluid']) {
 			$html .= '-fluid';
 		}
 			
-		$html .= '">' .
-			 '<div class="navbar-header">' .
-			 '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>' .
+		$html .= '">';
+		
+		// Header (brand and collapse button)
+		$html .= '<div class="navbar-header">' .
+			 '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">' .
+			 '<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>' .
+			 '</button>' .
 			 '<a class="navbar-brand" href="/">';
 			
 		if ($options['logo']) {
@@ -93,33 +93,68 @@ class Navbar {
 		}
 	  
 		$html .= '</a>' .
-			 '</div>' .
-			 '<div class="collapse navbar-collapse" id="navbar">' . 
-			 '<ul class="nav navbar-nav">';
-			
-		foreach ($pages as $P) {
+			 '</div>';
+			 	
+		// Pages
+		// To determine all pages for each row, first the "breadcrumbs" get filtered.		 
+		$P = $site->getCurrentPage();
+		$selection = new \Core\Selection($site->getCollection());
+		$selection->filterBreadcrumbs($P->url);
+		$breadcrumbs = $selection->getSelection();
 		
-			$html .= '<li';
+		// Remove homepage from array, since that page gets represented already by the brand.
+		unset($breadcrumbs['/']);
+		
+		// Generate rows.		
+		foreach ($breadcrumbs as $breadcrumb) {
+		
+			// Limit levels to $options['levels'].
+			if ($breadcrumb->level <= $options['levels']) {
 			
-			if ($P->isCurrent()) {
-				$html .= ' class="active"';
+				$selection = new \Core\Selection($site->getCollection());
+				$selection->filterByParentUrl($breadcrumb->parentUrl);
+				$selection->sortPagesByBasename();
+			
+				// Nav row
+				$html .= '<div class="collapse navbar-collapse">';
+				
+				// List
+				$html .= '<ul class="nav navbar-nav level-' . $breadcrumb->level . '">';
+		
+				foreach ($selection->getSelection() as $page) {
+					
+					$html .= '<li';
+			
+					if ($page->isCurrent()) {
+						$html .= ' class="active"';
+					}
+					
+					$html .= '>' . \Core\Html::addLink($page) . '</li>';
+					
+				}
+				
+				// Close list
+				$html .= '</ul>';
+				
+				// Include search box, if level == 1 and $options['search'] is defined.
+				if ($breadcrumb->level == 1 && $options['search']) {
+				
+					$html .= '<form class="navbar-form navbar-left" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
+						 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
+						 'onfocus="if (this.value==\'' . $options['search'] . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $options['search'] . '\'; }" />' .
+						 '</form>';
+					
+				} 
+				
+				// Close row
+				$html .= '</div>';
+			
 			}
-			
-			$html .= '>' . \Core\Html::addLink($P) . '</li>';
-			
-		}	
-			
-		$html .= '</ul>';
 		
-		if ($options['search']) {
-			$html .= '<form class="navbar-form navbar-right" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
-				 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
-				 'onfocus="if (this.value==\'' . $options['search'] . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $options['search'] . '\'; }" />' .
-				 '</form>';
 		}
 		
+		// Close wrapper
 		$html .= '</div>' .
-			 '</div>' .
 			 '</nav>';
 		
 		return $html;
