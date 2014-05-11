@@ -413,13 +413,19 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below a given URL.
 	 *
-	 *	@param array $options - (parent: the URL of the parent page of the displayed pages; homepage: add the homepage, if parent is '/' (true/false))
+	 *	@param array $options - (parent: the URL of the parent page of the displayed pages; homepage: add the homepage, if parent is '/' (true/false); class: wrapping class)
 	 *	@return html of the generated list	
 	 */
 	
 	public function navBelow($options) {
 		
-		$options = array_merge(array('parent' => $this->P->url, 'homepage' => false), $options);
+		$defaults = 	array(
+					'parent' => $this->P->url, 
+					'homepage' => false,
+					'class' => false
+				);
+		
+		$options = array_merge($defaults, $options);
 				
 		$selection = new Selection($this->collection);
 		$selection->filterByParentUrl($options['parent']);
@@ -432,7 +438,7 @@ class Toolbox {
 			$pages = array('/' => $this->collection['/']) + $pages;
 		}
 		
-		return Html::generateNav($pages);
+		return Html::generateNav($pages, $options['class']);
 		
 	}
 	
@@ -459,12 +465,14 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below the current page.
 	 *
+	 * 	@param array $options - options to be passed to navBelow() (basically only 'class')
 	 *	@return html of the generated list	
 	 */
 	
-	public function navChildren() {
+	public function navChildren($options) {
 	
-		return $this->navBelow(array('parent' => $this->P->url));
+		// Always set 'parent' to the current page's parent URL by merging that parameter with the other specified options.
+		return $this->navBelow(array_merge($options, array('parent' => $this->P->url)));
 		
 	}
 	
