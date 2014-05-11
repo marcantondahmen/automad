@@ -57,7 +57,7 @@ class Navbar {
 					'logoWidth' => 100,
 					'logoHeight' => 100,
 					'search' => 'Search',
-					'levels' => 2
+					'levels' => 1
 				);
 		
 		// Merge defaults with options
@@ -102,17 +102,16 @@ class Navbar {
 		$selection->filterBreadcrumbs($P->url);
 		$breadcrumbs = $selection->getSelection();
 		
-		// Remove homepage from array, since that page gets represented already by the brand.
-		unset($breadcrumbs['/']);
-		
 		// Generate rows.		
 		foreach ($breadcrumbs as $breadcrumb) {
 		
 			// Limit levels to $options['levels'].
+			// The level reperesents the level of the parent page: 
+			// $options['levels'] == 1 would display all pages below level 0 & level 1 = 2 rows.
 			if ($breadcrumb->level <= $options['levels']) {
 			
 				$selection = new \Core\Selection($site->getCollection());
-				$selection->filterByParentUrl($breadcrumb->parentUrl);
+				$selection->filterByParentUrl($breadcrumb->url);
 				$selection->sortPagesByBasename();
 			
 				// Nav row
@@ -136,8 +135,8 @@ class Navbar {
 				// Close list
 				$html .= '</ul>';
 				
-				// Include search box, if level == 1 and $options['search'] is defined.
-				if ($breadcrumb->level == 1 && $options['search']) {
+				// Include search box, if level == 0 and $options['search'] is defined.
+				if ($breadcrumb->level === 0 && $options['search']) {
 				
 					$html .= '<form class="navbar-form navbar-left" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
 						 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
