@@ -204,6 +204,19 @@ class Toolbox {
 
 
 	/**
+	 * 	Return the level of the current page.
+	 * 
+	 * 	@return level
+	 */
+	 
+	public function level() {
+		
+		return $this->P->level;
+		
+	}
+
+
+	/**
 	 *	Place a link to the previous sibling.
 	 *
 	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
