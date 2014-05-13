@@ -26,7 +26,8 @@ class Gallery {
 		$defaults = 	array(
 					'glob' => '*.jpg',
 					'width' => 200,
-					'height' => 200
+					'height' => 200,
+					'class' => ''
 				);
 		
 		// Merge defaults with options
@@ -38,7 +39,7 @@ class Gallery {
 		
 		// Generate HTML		
 		$html = '<div class="gallery">';	
-		$html .= \Core\Html::generateImageSet($glob, $options['width'], $options['height'], false);
+		$html .= \Core\Html::generateImageSet($glob, $options['width'], $options['height'], true, $options['class']);
 		$html .= '</div>';
 				
 		return $html;
