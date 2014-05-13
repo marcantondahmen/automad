@@ -100,7 +100,7 @@ class Html {
 					$class = ' class="' . $class . '"';
 				}
 			
-				$html .= '<img' . $class . ' src="' . $img->file . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+				$html .= '<img' . $class . ' src="' . $img->file . '" alt="' . $img->description . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
 			
 				if ($link) {
 					$html .= '</a>';
