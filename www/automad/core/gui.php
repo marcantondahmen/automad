@@ -445,9 +445,9 @@ class GUI {
 					
 					// Check if page is currently selected page
 					if ($page->url == $current) {
-						$html .= '<li class="active"><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-open"></span> ' . $title . '</a>';
+						$html .= '<li class="active"><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '"><span class="glyphicon glyphicon-folder-open"></span> ' . $title . '</a>';
 					} else {
-						$html .= '<li><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url))) . '"><span class="glyphicon glyphicon-folder-close"></span> ' . $title . '</a>';
+						$html .= '<li><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '"><span class="glyphicon glyphicon-folder-close"></span> ' . $title . '</a>';
 					}
 					
 					$html .= $this->siteTree($page->url, $collection, $current, $parameters, $hideCurrent);
