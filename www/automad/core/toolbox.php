@@ -457,7 +457,7 @@ class Toolbox {
 	
 
 	/**
-	 * 	Generate breadcrumbs to current page.
+	 * 	Generate breadcrumbs to the current page, if the page's level is > 0 (not homepage / search results / page not found).
 	 *
 	 * 	@param array $options - (separator: "string")
 	 *	@return html of breadcrumb navigation
@@ -465,12 +465,16 @@ class Toolbox {
 	
 	public function navBreadcrumbs($options) {
 			
-		$options = array_merge(array('separator' => AM_HTML_STR_BREADCRUMB_SEPARATOR), $options);
+		if ($this->P->level > 0) {	
+				
+			$options = array_merge(array('separator' => AM_HTML_STR_BREADCRUMB_SEPARATOR), $options);
+				
+			$selection = new Selection($this->collection);
+			$selection->filterBreadcrumbs($this->P->url);
 			
-		$selection = new Selection($this->collection);
-		$selection->filterBreadcrumbs($this->P->url);
-		
-		return Html::generateBreadcrumbs($selection->getSelection(), $options['separator']);
+			return Html::generateBreadcrumbs($selection->getSelection(), $options['separator']);
+			
+		}
 		
 	}
 	
