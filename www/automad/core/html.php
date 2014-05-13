@@ -241,7 +241,7 @@ class Html {
 				
 				ksort($query);
 					
-				$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . AM_HTML_TEXT_FILTER_ALL . '</a></li>';
+				$html .= '<li><a' . $class . 'href="?' . http_build_query($query, '', '&amp;') . '">' . AM_HTML_TEXT_FILTER_ALL . '</a></li>';
 			
 			}
 		
@@ -259,7 +259,7 @@ class Html {
 				
 				ksort($query);
 		
-				$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query) . '">' . $tag . '</a></li>';
+				$html .= '<li><a' . $class . 'href="' . $targetPage . '?' . http_build_query($query, '', '&amp;') . '">' . $tag . '</a></li>';
 		
 			}
 		
@@ -469,7 +469,7 @@ class Html {
 			$query = array_merge($query, array('sortItem' => '', 'sortOrder' => false), $opt);
 			ksort($query);
 	
-			$html .= '<li><a' . $class . 'href="?' . http_build_query($query) . '">' . $text . '</a></li>';
+			$html .= '<li><a' . $class . 'href="?' . http_build_query($query, '', '&amp;') . '">' . $text . '</a></li>';
 	
 		}
 
