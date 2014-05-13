@@ -1,35 +1,13 @@
-.gallery ul {
-	position: relative;
-	display: block;
-	margin: 0 -25px;
-	padding: 0;
-}
-
-.gallery li {
-	display: inline-block;
-	margin: 0;
-	padding: 25px;
-	width: 250px;
-}
-
-.gallery a {
-	display: block;	
-	height: auto;
-	margin: 0;
-	padding: 0;
-	border: none;
-	background-color: transparent;
-}
-
-.gallery a:hover {
-	background-color: transparent;
-	margin: 0;
-	padding: 0;
-}
-
-
-/* Slideshow */
-
+/*!
+ *	GALLERY
+ *	Extension for the Automad CMS
+ *
+ *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+ 
 /*
 
 Arrow-Icons:
@@ -46,9 +24,15 @@ Arrow-Icons:
 	font-style: normal;
 }
 
-#gallerySlideshow {
+.gallery img {
+	width: 100%;
+	height: auto;
+
+}
+
+.gallerySlideshow {
 	position: fixed;
-	z-index: 1000;
+	z-index: 9000;
 	top: 0px;
 	left: 0px;
 	width: 100%;
@@ -57,17 +41,17 @@ Arrow-Icons:
 	overflow: hidden; 	 
 }
 
-#gallerySlideshow,
-#gallerySlideshow a {
+.gallerySlideshow,
+.gallerySlideshow a {
 	color: #ffffff;
 }
 
-#gallerySlideshow a:hover {
+.gallerySlideshow a:hover {
 	color: #eeeeee;
 	background-color: transparent;
 }
  
-#gallerySlideshow .overlay {
+.gallerySlideshow .overlay {
 	background-color: rgba(0,0,0,0.5);
 	position: fixed;
 	z-index: 1; 
@@ -78,14 +62,14 @@ Arrow-Icons:
 	margin:	0px;	
 }
 
-#gallerySlideshow img {
+.gallerySlideshow img {
 	position: fixed;
 	z-index: 2;	
 	border: none;
 	max-width:none;
 }
  
-#gallerySlideshow .closeSlideshow {
+.gallerySlideshow .closeSlideshow {
 	position: fixed;
 	display: block;
 	z-index: 4;
@@ -101,16 +85,16 @@ Arrow-Icons:
 	filter: alpha(opacity=1);
 }
 
-#gallerySlideshow .prevImage {
+.gallerySlideshow .prevImage {
 	left: 15px;
 }	
 
-#gallerySlideshow .nextImage {
+.gallerySlideshow .nextImage {
 	right: 15px;
 }
 
-#gallerySlideshow .prevImage,
-#gallerySlideshow .nextImage {
+.gallerySlideshow .prevImage,
+.gallerySlideshow .nextImage {
 	position: fixed;
 	z-index: 5;
 	top: 50%;
@@ -120,7 +104,7 @@ Arrow-Icons:
 	font-size: 64px;					
 }
 
-#gallerySlideshow .caption {
+.gallerySlideshow .caption {
 	position: fixed;
 	z-index: 3;
 	bottom: 15px;
@@ -128,7 +112,7 @@ Arrow-Icons:
 	margin-right: -50%;
 }
 
-#gallerySlideshow .captionText {
+.gallerySlideshow .captionText {
 	display: inline-block;
 	text-align: center;
 	margin-left: -50%;
@@ -136,8 +120,8 @@ Arrow-Icons:
 	padding: 10px;
 }
 
-#gallerySlideshow a,
-#gallerySlideshow .captionText {
+.gallerySlideshow a,
+.gallerySlideshow .captionText {
 	text-shadow: 	0px 0px 3px rgba(0,0,0,0.4),
 			0px 0px 10px rgba(0,0,0,0.4);
 	    		
