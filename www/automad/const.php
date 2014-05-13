@@ -131,7 +131,6 @@ Config::set('AM_HTML_CLASS_LIST', 'list');
 Config::set('AM_HTML_CLASS_LIST_ITEM', 'item');
 Config::set('AM_HTML_CLASS_LIST_ITEM_IMG', 'img-responsive');
 Config::set('AM_HTML_CLASS_LIST_ITEM_DATA', 'data');
-Config::set('AM_HTML_CLASS_IMAGESET', 'imageset');
 Config::set('AM_HTML_CLASS_SORT', 'sort');
 Config::set('AM_HTML_CLASS_HOME', 'home');
 Config::set('AM_HTML_CLASS_CURRENT', 'current');
