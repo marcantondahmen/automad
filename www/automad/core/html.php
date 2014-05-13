@@ -273,31 +273,34 @@ class Html {
 	
 
 	/**
-	 *	Generate the HTML for a list of resized images linking to their bigger versions.
+	 *	Generate the HTML for a set of resized images linking to their bigger versions.
 	 *
 	 *	@param string $glob
 	 *	@param integer $width
 	 *	@param integer $height
 	 *	@param integer $crop
+	 * 	@param string $class
 	 *	@return The HTML of a list of images as links to their bigger versions.
 	 */
 	
-	public static function generateImageSet($glob, $width = false, $height = false, $crop = false) {
+	public static function generateImageSet($glob, $width = false, $height = false, $crop = false, $class = '') {
 			
 		$files = glob($glob);
 		
 		if ($files) {
 			
-			$html = '<ul class="' . AM_HTML_CLASS_IMAGESET . '">';
+			if ($class) {
+				$class = ' class="' . $class . '"';
+			}
+			
+			$html = '';
 			
 			foreach($files as $file) {
 				
 				$bigImage = new Image($file);
-				$html .= '<li>' . self::addImage($file, $width, $height, $crop, $bigImage->file) . '</li>';
+				$html .= '<div' . $class . '>' . self::addImage($file, $width, $height, $crop, $bigImage->file) . '</div>';
 				
 			}
-			
-			$html .= '</ul>';
 			
 			return $html;
 			
