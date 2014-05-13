@@ -165,7 +165,7 @@ class Toolbox {
 	 *	Place a set of resized images, linking to their original sized version.
 	 *	This tool returns the basic HTML for a simple image gallery.
 	 *
-	 *	@param array $options - (glob: path/to/file (or glob pattern), width: px, height: px, crop: 1)
+	 *	@param array $options - (glob: path/to/file (or glob pattern), width: px, height: px, crop: 1, class: wrapping class)
 	 *	@return The HTML of a list of resized images with links to their bigger versions
 	 */
 	
@@ -176,7 +176,8 @@ class Toolbox {
 					'glob' => '*.jpg',
 					'width' => false,
 					'height' => false,
-					'crop' => false
+					'crop' => false,
+					'class' => ''
 				);
 		
 		// Merge options with defaults				
@@ -184,7 +185,7 @@ class Toolbox {
 			
 		if ($options['glob']) {
 			$glob = Modulate::filePath($this->P->path, $options['glob']);
-			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop']);
+			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop'], $options['class']);
 		}
 		
 	}	
