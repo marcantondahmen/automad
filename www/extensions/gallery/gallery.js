@@ -17,7 +17,7 @@
 	
 		if (images.length > 0) {
 			
-			var	slideshow =	$('<div id="gallerySlideshow"></div>').appendTo('body').hide(),
+			var	slideshow =	$('<div class="gallerySlideshow"></div>').appendTo('body').hide(),
 				overlay =	$('<div class="overlay"></div>').appendTo(slideshow).fadeTo(0,0.9),
 				caption =	$('<div class="caption"></div>').appendTo(slideshow),
 				captionText =	$('<h2 class="captionText"></h2>').appendTo(caption),
@@ -25,9 +25,6 @@
 				prev =		$('<a class="prevImage" href="#"><</a>').appendTo(slideshow),
 				next =		$('<a class="nextImage" href="#">></a>').appendTo(slideshow),
 				isVisible =	false,		// Slideshow is visible
-				smallWidth,			// Thumbnail width
-				smallHeight,			// Thumbnail height
-				smallPos,			// Thumbnail position
 				origWidth,			// Original width of image
 				origHeight,			// Original height of image
 				current;			// index of current image
@@ -108,32 +105,15 @@
 					bigLeft = 0;
 				}
 				
-							
-				// Set Size
-				if (isVisible) {
-					// Slideshow is visible
-					bigImage.css({
-						width:	bigWidth + 'px',
-						height:	bigHeight + 'px',
-						top:	bigTop,
-						left:	bigLeft
-					});
-					bigImage.fadeIn(300);
-				} else {
-					// Slideshow has to be opened > ZoomIn animation
-					// resize bigImage to size of thumbnail and set position to thumbnail's position
-					bigImage.width(smallWidth);
-					bigImage.height(smallHeight);
-					bigImage.offset({ top: smallPos.top, left: smallPos.left });
-					// Scale
-					bigImage.fadeIn(200).animate({
-						width:	bigWidth + 'px',
-						height:	bigHeight + 'px',
-						top:	bigTop,
-						left:	bigLeft
-					}, 300);
-				}
-			
+				bigImage.css({
+					width:	bigWidth + 'px',
+					height:	bigHeight + 'px',
+					top:	bigTop,
+					left:	bigLeft
+				});
+
+				bigImage.fadeIn(300);
+						
 			};
 		
 
@@ -149,12 +129,7 @@
 				
 					// Set current index to clicked image
 					current = i;
-					
-					// Save size/position of thumbnail for zoom in animation
-					smallWidth =	$this.width();
-					smallHeight =	$this.height();
-					smallPos =	$this.offset();
-						
+							
 					bigImage =	$('<img alt="">')
 							.appendTo(slideshow)
 							.hide()
