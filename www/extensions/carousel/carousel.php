@@ -44,7 +44,7 @@ class Carousel {
 	 *
 	 *	@param array $options
 	 *	@param object $site
-	 *	@return The generated HTML of the slider. 
+	 *	@return The generated HTML of the Carousel. 
 	 */
 	
 	public function Carousel($options, $site) {
