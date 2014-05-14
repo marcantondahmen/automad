@@ -165,11 +165,12 @@ ob_start();
 							'<div class="col-xs-8">' . 
 							'<h5>' . basename($file) . '</h5>';
 						
-						if (strtolower($extension) == 'jpg') {
-							echo	'<h6>Exif Description: ' . $img->description . '</h6>';	
+						if (strtolower($extension) == 'jpg' && $img->description) {
+							echo '<h6 title="Exif description"><span class="glyphicon glyphicon-comment"></span> ' . $img->description . '</h6>';	
 						}
 							
-						echo	'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span>' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
+						echo	'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' . 
+							'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
 							'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
 							'</div>';
 				
@@ -178,7 +179,8 @@ ob_start();
 						echo 	'<div class="col-xs-3"><a class="filetype img-rounded img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
 							'<div class="col-xs-8">' . 
 							'<h5>' . basename($file) . '</h5>' .
-							'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span>' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
+							'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' .
+							'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
 							'</div>';
 		 
 					} 
