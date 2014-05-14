@@ -423,6 +423,27 @@ class Toolbox {
 	
 	}
 	
+	
+	/**
+	 * 	Create the meta title tag form the site name and the page title. 
+	 * 	If the 'title' option is defined, use that title instead to override the default site/page combination.
+	 * 
+	 * 	@param array $options ('title')
+	 * 	@return The meta title tag
+	 */
+	
+	public function metaTitle($options) {
+		
+		$defaults = 	array(
+					'title' => $this->S->getSiteName() . ' / ' . $this->P->data['title']
+				);
+		
+		$options = array_merge($defaults, $options);
+				
+		return '<title>' . $options['title'] . '</title>';
+					
+	}
+	
 		
 	/**
 	 *	Generate a list for the navigation below a given URL.
