@@ -1,0 +1,20 @@
+/* Mixins */
+
+.border-radius(@radius, @corner: -) {
+-webkit-border@{corner}radius: @radius;
+   -moz-border@{corner}radius: @radius;
+	border@{corner}radius: @radius;
+}
+
+.box-shadow(@x: 0; @y: 0; @blur: 0; @spread: 0; @color: #000) {
+-webkit-box-shadow+: @arguments;
+   -moz-box-shadow+: @arguments;
+	box-shadow+: @arguments;
+}
+
+.font-face(@family; @file; @weight; @style) {
+	font-family: '@{family}';
+	src: url('../fonts/@{file}.woff') format('woff'), url('../fonts/@{file}.ttf') format('truetype');
+	font-weight: @weight;
+	font-style: @style;
+}

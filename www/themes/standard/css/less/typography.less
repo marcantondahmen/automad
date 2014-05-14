@@ -1,0 +1,123 @@
+/* Typography */
+
+@font-face {
+	.font-face('OpenSans'; 'OpenSans-Light-webfont'; 300; normal);
+}
+
+@font-face {
+	.font-face('OpenSans'; 'OpenSans-LightItalic-webfont'; 300; italic);
+}
+
+@font-face {
+	.font-face('OpenSans'; 'OpenSans-Regular-webfont'; normal; normal);
+}
+
+@font-face {
+	.font-face('OpenSans'; 'OpenSans-Italic-webfont'; normal; italic);
+}
+
+@font-face {
+	.font-face('OpenSans'; 'OpenSans-Bold-webfont'; bold; normal);
+}
+
+@font-face {
+	.font-face('OpenSans'; 'OpenSans-BoldItalic-webfont'; bold; italic);
+}
+
+body {
+	font-family: 'OpenSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 14px;
+	line-height: normal;
+}
+
+p a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.navbar-brand {
+	font-weight: bold;
+}
+	
+h1 {
+	font-weight: bold;
+	line-height: 1;
+	text-rendering: optimizeLegibility;
+}
+
+h2 {
+	font-weight: 300;
+	line-height: 1;
+	text-rendering: optimizeLegibility;
+}
+	
+#title {
+	
+	& h1 {
+		font-size: 30px;
+		font-weight: bold;
+		line-height: 1;
+		margin: 0;
+	}
+	
+	& h2 {
+		font-size: 30px;
+		font-weight: 300;
+		line-height: 1;
+		margin: 0; 
+	}
+	
+}
+
+.text-only .data {
+
+	& .title {
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 1;
+	}
+	
+	& .subtitle {
+		font-size: 24px;
+		font-weight: 300;
+		line-height: 1;
+	}
+
+}
+
+.image .data {
+
+	& .title {
+		font-size: 18px;
+		font-weight: bold;
+		line-height: 1.2;
+	}
+	
+	& .subtitle {
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 1.2;
+	}
+
+}
+
+a.current,
+a.currentPath {
+	font-weight: bold;
+}
+
+.tree {
+
+	&.level-1 {
+		font-weight: bold;
+		//font-size: 16px;
+	}
+	
+	&.level-2 {
+		font-weight: normal;
+		//font-size: 14px;
+	}
+
+}
