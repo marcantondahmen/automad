@@ -53,7 +53,8 @@ class Carousel {
 					'glob' => '*.jpg',
 					'width' => 400,
 					'height' => 300,
-					'duration' => 3000
+					'duration' => 3000,
+					'controls' => true
 				);
 		
 		// Merge defaults with options
@@ -76,7 +77,7 @@ class Carousel {
 			$html = '<div id="' . $id . '" class="carousel slide" data-ride="carousel" data-interval="' . $options['duration'] . '">';
 		
 			// Indicators
-			if (count($files) > 1) {
+			if (count($files) > 1 && $options['controls']) {
 			
 				$html .= '<ol class="carousel-indicators">';
 			
@@ -116,7 +117,7 @@ class Carousel {
 			$html .= '</div>';
 		
 			// Controls
-			if (count($files) > 1) {
+			if (count($files) > 1 && $options['controls']) {
 				$html .= '<a class="left carousel-control" href="#' . $id . '" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>' . 
 					 '<a class="right carousel-control" href="#' . $id . '" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>';
 			}
