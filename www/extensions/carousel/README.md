@@ -35,6 +35,7 @@ There are several options available to modify the carousel:
 - width: `integer` - Image width in pixels (default: `400`)
 - height: `integer` - Image height in pixels (default: `300`)
 - duration: `integer` - Duration in milliseconds for each image (default: `3000`)
+- controls: `boolean` - Enable/disable controls (default: `true`)
 
 The options must be specified in **JSON** format. 
 It is also possible to pass any value as a normal page variable "p(variable)" to be defined differently for every page using the template.
@@ -43,11 +44,23 @@ It is also possible to pass any value as a normal page variable "p(variable)" to
 
 ###Example
 
+Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
+
 	x(Carousel {
 		glob: p(carousel_file_pattern), 
 		width: 850, 
 		height: 450, 
 		duration: 3000
+	}) 
+
+The same carousel without controls:
+
+	x(Carousel {
+		glob: p(carousel_file_pattern), 
+		width: 850, 
+		height: 450, 
+		duration: 3000,
+		controls: false
 	}) 
 
 
