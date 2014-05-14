@@ -100,84 +100,89 @@ class Navbar {
 				$selection = new \Core\Selection($site->getCollection());
 				$selection->filterByParentUrl($breadcrumb->url);
 				$selection->sortPagesByBasename();
+				$pages = $selection->getSelection();
 			
-				if ($breadcrumb->level === 0) {
-						
-					// First level navigation
-					$html .= '<div class="level-' . ($breadcrumb->level + 1) . '">';
-					
-					// Wrapping container
-					$html .= '<div class="' . $container . '">';
-					
-					// Header (brand and collapse button)
-					$html .= '<div class="navbar-header">' .
-						 '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>' .
-						 '<a class="navbar-brand" href="/">' . $brand . '</a>' .
-						 '</div>';
-					
-					// Collapsable
-					$html .= '<div class="collapse navbar-collapse">';
-					
-					// Page's List
-					$html .= '<ul class="nav navbar-nav">';
-					
-					foreach ($selection->getSelection() as $page) {
-						
-						$html .= '<li';
+				if ($pages) {
 				
-						if ($page->isCurrent()) {
-							$html .= ' class="active"';
+					if ($breadcrumb->level === 0) {
+							
+						// First level navigation
+						$html .= '<div class="level-' . ($breadcrumb->level + 1) . '">';
+						
+						// Wrapping container
+						$html .= '<div class="' . $container . '">';
+						
+						// Header (brand and collapse button)
+						$html .= '<div class="navbar-header">' .
+							 '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>' .
+							 '<a class="navbar-brand" href="/">' . $brand . '</a>' .
+							 '</div>';
+						
+						// Collapsable
+						$html .= '<div class="collapse navbar-collapse">';
+						
+						// Page's List
+						$html .= '<ul class="nav navbar-nav">';
+						
+						foreach ($pages as $page) {
+							
+							$html .= '<li';
+					
+							if ($page->isCurrent()) {
+								$html .= ' class="active"';
+							}
+							
+							$html .= '>' . \Core\Html::addLink($page) . '</li>';
+							
 						}
 						
-						$html .= '>' . \Core\Html::addLink($page) . '</li>';
+						$html .= '</ul>';
 						
-					}
-					
-					$html .= '</ul>';
-					
-					// Search box
-					if ($options['search']) {
-					
-						$html .= '<form class="navbar-form navbar-left" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
-							 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
-							 'onfocus="if (this.value==\'' . $options['search'] . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $options['search'] . '\'; }" />' .
-							 '</form>';
+						// Search box
+						if ($options['search']) {
 						
-					} 
-					
-					// Close collapse
-					$html .= '</div>';
-					
-					// Close container
-					$html .= '</div>';
-					
-					// Close level
-					$html .= '</div>';
-					
-				} else {
-					
-					// All other levels (>1)
-					$html .= '<div class="level-' . ($breadcrumb->level + 1) . '">'. 
-						 '<div class="' . $container . '">' .
-						 '<div class="collapse navbar-collapse">' .
-						 '<ul class="nav navbar-nav">';
-					
-					foreach ($selection->getSelection() as $page) {
+							$html .= '<form class="navbar-form navbar-left" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
+								 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
+								 'onfocus="if (this.value==\'' . $options['search'] . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $options['search'] . '\'; }" />' .
+								 '</form>';
+							
+						} 
 						
-						$html .= '<li';
-				
-						if ($page->isCurrent()) {
-							$html .= ' class="active"';
+						// Close collapse
+						$html .= '</div>';
+						
+						// Close container
+						$html .= '</div>';
+						
+						// Close level
+						$html .= '</div>';
+						
+					} else {
+						
+						// All other levels (>1)
+						$html .= '<div class="level-' . ($breadcrumb->level + 1) . '">'. 
+							 '<div class="' . $container . '">' .
+							 '<div class="collapse navbar-collapse">' .
+							 '<ul class="nav navbar-nav">';
+						
+						foreach ($pages as $page) {
+							
+							$html .= '<li';
+					
+							if ($page->isCurrent()) {
+								$html .= ' class="active"';
+							}
+							
+							$html .= '>' . \Core\Html::addLink($page) . '</li>';
+							
 						}
 						
-						$html .= '>' . \Core\Html::addLink($page) . '</li>';
+						$html .= '</ul>' .
+							 '</div>' .
+							 '</div>' .
+							 '</div>';
 						
 					}
-					
-					$html .= '</ul>' .
-						 '</div>' .
-						 '</div>' .
-						 '</div>';
 					
 				}
 					
