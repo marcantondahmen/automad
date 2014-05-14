@@ -44,7 +44,7 @@
 			// Close
 			close.click(function() {
 				
-				slideshow.fadeOut(500, function() {
+				slideshow.fadeOut(300, function() {
 					bigImage.remove();
 				});
 				isVisible = false;
@@ -146,7 +146,7 @@
 							})
 							.attr("src", url);		
 
-					slideshow.fadeIn(500);	
+					slideshow.fadeIn(300);	
 							
 					return false;
 			
