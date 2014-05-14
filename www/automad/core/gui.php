@@ -263,9 +263,9 @@ class GUI {
 		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/', $content, $matches);
 		
 		$vars = array_merge($vars, $matches[1]);
-		sort($vars);
 		
 		// Clean up before returning to remove all doubled items due to parsing twice (before parsing methods and after).
+		// All variables are stored in $vars in order of appearance.
 		return array_unique($vars);
 			
 	}
