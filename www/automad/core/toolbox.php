@@ -440,7 +440,7 @@ class Toolbox {
 		
 		$options = array_merge($defaults, $options);
 				
-		return '<title>' . $options['title'] . '</title>';
+		return '<title>' . strip_tags($options['title']) . '</title>';
 					
 	}
 	
