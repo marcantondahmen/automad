@@ -70,7 +70,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				</div>	
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="http://automad.marcdahmen.de" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> <?php echo $this->tb['btn_docs']; ?></a></li>
+						<li><a href="http://automad.org" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> <?php echo $this->tb['btn_docs']; ?></a></li>
 					</ul>
 				</div>		
 				<?php } ?> 
