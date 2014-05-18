@@ -367,6 +367,14 @@ $(document).on('keyup', 'textarea:visible', function() {
 	
 });
 
+// Update also on drop, but with timeout.
+// The timeout is needed to make sure the dropped text gets recognized.
+$(document).on('drop', 'textarea:visible', function() {
+	setTimeout(function() {
+		$('textarea').trigger('keyup');
+	}, 50);
+})
+
 // Update also when AJAX completes.
 $(document).ajaxComplete(function() {
 	$('textarea').trigger('keyup');
