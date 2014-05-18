@@ -274,7 +274,7 @@ $(document).ajaxComplete(function() {
 });
 
 // Re-enable after touching any form element.
-$(document).on('change click', '#data input, #data textarea, #data select, #data button', function() {
+$(document).on('change click drop', '#data input, #data textarea, #data select, #data button', function() {
 	$('#data [type="submit"]').prop('disabled', false);
 });
 
