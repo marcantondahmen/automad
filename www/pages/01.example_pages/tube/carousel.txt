@@ -1,0 +1,24 @@
+title: Tube
+
+-
+
+tags: Extruded, Round
+
+-
+
+subtitle: A hollow "Cylinder"
+
+-
+
+text: A tube is not more than just a hollow ["Cylinder"](cylinder).
+That's it!
+
+In common usage the words pipe and tube are usually interchangeable, but in industry and engineering, the terms are uniquely defined. Depending on the applicable standard to which it is manufactured, pipe is generally specified by a nominal diameter with a constant outside diameter (OD) and a schedule that defines the thickness. Tube is most often specified by the OD and wall thickness, but may be specified by any two of OD, inside diameter (ID), and wall thickness. 
+
+Pipe is generally manufactured to one of several international and national industrial standards. While similar standards exist for specific industry application tubing, tube is often made to custom sizes and a broader range of diameters and tolerances. Many industrial and government standards exist for the production of pipe and tubing.
+
+-
+
+text_2: The term "tube" is also commonly applied to non-cylindrical sections, i.e., square or rectangular tubing. In general, "pipe" is the more common term in most of the world, whereas "tube" is more widely used in the United States.
+
+*Taken from [Wikipedia](http://en.wikipedia.org/wiki/Pipe)*

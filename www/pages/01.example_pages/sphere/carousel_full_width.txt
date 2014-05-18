@@ -1,0 +1,27 @@
+title: Sphere
+
+-
+
+tags: Round, Simple
+
+-
+
+subtitle: Ball
+
+-
+
+text: A sphere (from Greek σφαῖρα — sphaira, "globe, ball") is a perfectly round geometrical object in three-dimensional space. Like a circle, its two-dimensional analog, a sphere is defined mathematically as the set of points that are all the same distance r from a given point in three-dimensional space. This distance r is the radius of the sphere, and the given point is the center of the sphere. The maximum straight distance through the sphere passes through the centre and is thus twice the radius; it is the diameter.
+
+-
+
+text_2: In mathematics, a distinction is made between the sphere (a two-dimensional closed surface embedded in three-dimensional Euclidean space) and the ball (a three-dimensional shape that includes the interior of a sphere).
+
+*Taken from [Wikipedia](http://en.wikipedia.org/wiki/Sphere)*
+
+-
+
+carousel_caption_ball.jpg: Sphere
+
+-
+
+carousel_caption_ball2.jpg: Sphere

@@ -1,0 +1,22 @@
+title: Complex Icosphere
+
+-
+
+tags: Triangular Faces, Complex
+
+-
+
+subtitle: A Subdivided Icosahedron
+
+-
+
+text: The *Complex Icosphere* is a [Icosphere](icosphere) with more
+triangles.
+
+-
+
+carousel_caption_complex-icosphere.jpg: Complex Icosphere
+
+-
+
+carousel_caption_complex-icosphere2.jpg: Complex Icosphere

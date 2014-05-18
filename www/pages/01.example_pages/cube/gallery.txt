@@ -1,0 +1,30 @@
+title: Cube
+
+-
+
+tags: Rectangular, Simple
+
+-
+
+subtitle: Hexahedron. Here stacked!
+
+-
+
+text: In [geometry](http://en.wikipedia.org/wiki/Geometry), a cube is a three-dimensional solid object bounded by six square faces, facets or sides, with three meeting at each vertex.
+The cube is the only regular hexahedron and is one of the five Platonic solids.
+ 
+The cube is also a square parallelepiped, an equilateral cuboid and a right rhombohedron. It is a regular square prism in three orientations, and a trigonal trapezohedron in four orientations.
+The cube is dual to the [octahedron](http://en.wikipedia.org/wiki/Octahedron). It has cubical or octahedral symmetry.
+
+### Geometric relations
+
+These familiar six-sided dice are cube-shaped.
+A cube has eleven nets: that is, there are eleven ways to flatten a hollow cube by cutting seven edges. To color the cube so that no two adjacent faces have the same color, one would need at least three colors.
+
+-
+
+text_2: The cube is the cell of the only regular tiling of three-dimensional Euclidean space. It is also unique among the Platonic solids in having faces with an even number of sides and, consequently, it is the only member of that group that is a zonohedron (every face has point symmetry).
+ 
+The cube can be cut into six identical [square pyramids](http://en.wikipedia.org/wiki/Square_pyramid). If these square pyramids are then attached to the faces of a second cube, a rhombic dodecahedron is obtained (with pairs of coplanar triangles combined into rhombic faces.)
+
+*Taken from [Wikipedia](http://en.wikipedia.org/wiki/Cube)*

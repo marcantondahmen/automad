@@ -1,9 +1,0 @@
-title: Automad
-
--
-
-subtitle: I don't like databases!
-
--
-
-text: Welcome to the Automad Demo Site!

@@ -1,0 +1,33 @@
+title: Icosphere
+
+-
+
+tags: Triangular Faces
+
+-
+
+subtitle: Icosahedron
+
+-
+
+text: In geometry, an icosahedron is a polyhedron with 20 triangular faces, 30 edges and 12 vertices. A regular icosahedron with identical equilateral faces is often meant because of its geometrical significance as one of the five Platonic solids.
+It has five triangular faces meeting at each vertex. It can be represented by its vertex figure as 3.3.3.3.3 or 35, and also by Schläfli symbol {3,5}. It is the dual of the dodecahedron, which is represented by {5,3}, having three pentagonal faces around each vertex.
+ 
+A regular icosahedron is a gyroelongated pentagonal bipyramid and a biaugmented [pentagonal antiprism](http://en.wikipedia.org/wiki/Pentagonal_antiprism) in any of six orientations.
+The name comes from the Greek: εικοσάεδρον, from είκοσι (eíkosi) "twenty" and ἕδρα (hédra) "seat". The plural can be either "icosahedrons" or "icosahedra".
+ 
+### Geometric relations
+ 
+There are distortions of the icosahedron that, while no longer regular, are nevertheless vertex-uniform. These are invariant under the same rotations as the tetrahedron, and are somewhat analogous to the snub cube and snub dodecahedron, including some forms which are chiral and some with Th-symmetry, i.e. have different planes of symmetry from the tetrahedron. The icosahedron has a large number of stellations, including one of the Kepler–Poinsot polyhedra and some of the regular compounds, which could be discussed here.
+ 
+The icosahedron is unique among the Platonic solids in possessing a dihedral angle not less than 120°. Its dihedral angle is approximately 138.19°. Thus, just as hexagons have angles not less than 120° and cannot be used as the faces of a convex regular polyhedron because such a construction would not meet the requirement that at least three faces meet at a vertex and leave a positive defect for folding in three dimensions, icosahedra cannot be used as the cells of a convex regular polychoron because, similarly, at least three cells must meet at an edge and leave a positive defect for folding in four dimensions (in general for a convex polytope in n dimensions, at least three facets must meet at a peak and leave a positive defect for folding in n-space). However, when combined with suitable cells having smaller dihedral angles, icosahedra can be used as cells in semi-regular polychora (for example the snub 24-cell), just as hexagons can be used as faces in semi-regular polyhedra (for example the truncated icosahedron). 
+
+*Taken from [Wikipedia](http://en.wikipedia.org/wiki/Icosphere)*
+
+-
+
+carousel_caption_icosphere.jpg: Icosphere
+
+-
+
+carousel_caption_icosphere2.jpg: Icosphere

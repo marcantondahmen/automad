@@ -1,5 +1,13 @@
-sitename: Automad CMS
+sitename: Automad Demo
 
 -
 
-theme: light
+theme: standard
+
+-
+
+brand: Your Brand
+
+-
+
+email: email@yourdomain.com

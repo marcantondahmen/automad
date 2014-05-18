@@ -1,0 +1,21 @@
+title: Trapezoid
+
+-
+
+tags: Simple
+
+-
+
+subtitle: Half a Pyramid
+
+-
+
+text: In *Euclidean geometry*, a convex [quadrilateral](http://en.wikipedia.org/wiki/Quadrilateral) with at least one pair of parallel sides is referred to as a trapezoid in American English and as a trapezium in English outside North America. The parallel sides are called the bases of the trapezoid and the other two sides are called the legs or the lateral sides (if they are not parallel; otherwise there are two pairs of bases). A scalene trapezoid is a trapezoid with no sides of equal measure, in contrast to the special cases below. 
+
+
+
+-
+
+text_2: There is some disagreement whether _parallelograms_, which have two pairs of parallel sides, should be counted as trapezoids. Some define a trapezoid as a quadrilateral having **exactly** one pair of parallel sides (the exclusive definition), thereby excluding parallelograms. Others define a trapezoid as a quadrilateral with at least one pair of parallel sides (the inclusive definition[3]), making the parallelogram a special type of **trapezoid**. The latter definition is consistent with its uses in higher mathematics such as calculus. The former definition would make such concepts as the [trapezoidal approximation](http://en.wikipedia.org/wiki/Trapezoidal_approximation) to a definite integral ill-defined. This article uses the inclusive definition and considers parallelograms as special cases of a trapezoid. This is also advocated in the taxonomy of quadrilaterals.
+
+*Taken from [Wikipedia](http://en.wikipedia.org/wiki/Trapezoid)*

@@ -1,0 +1,30 @@
+title: Cylinder
+
+-
+
+tags: Extruded, Round, Simple
+
+-
+
+subtitle: Ruled Surface
+
+-
+
+text: A cylinder (from Greek κύλινδρος – kulindros, "roller, tumbler") is one of the most basic curvilinear geometric shapes, the surface formed by the points at a fixed distance from a given line segment, the axis of the cylinder. The solid enclosed by this surface and by two planes perpendicular to the axis is also called a cylinder. The surface area and the volume of a cylinder have been known since deep antiquity.
+
+In [differential geometry](http://en.wikipedia.org/wiki/Differential_geometry), a cylinder is defined more broadly as any ruled surface spanned by a one-parameter family of parallel lines. A cylinder whose cross section is an ellipse, parabola, or hyperbola is called an elliptic cylinder, parabolic cylinder, or hyperbolic cylinder respectively.
+The open cylinder is topologically equivalent to both the open annulus and the punctured plane.
+
+-
+
+text_2: In common use a cylinder is taken to mean a finite section of a right circular cylinder, i.e., the cylinder with the generating lines perpendicular to the bases, with its ends closed to form two circular surfaces, as in the figure (right). If the cylinder has a radius r and length (height) h, then its volume is given by ...
+
+*Taken from [Wikipedia](http://en.wikipedia.org/wiki/Cylinder)*
+
+-
+
+carousel_caption_cylinder.jpg: Cylinder
+
+-
+
+carousel_caption_cylinder2.jpg: Cylinder
