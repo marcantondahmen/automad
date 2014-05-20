@@ -157,7 +157,7 @@ $this->element('header');
 					</div>
 					<div class="modal-body pages">
 						<h5><?php echo $this->tb['page_move_destination']; ?></h5>
-						<?php echo $this->siteTree('', $this->collection, $P->url, array(), true); ?>
+						<?php echo $this->siteTree('', $this->collection, array(), true); ?>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
