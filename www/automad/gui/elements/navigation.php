@@ -66,7 +66,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					</ul>
 				</div>		
 				<div class="list-group-item pages">	
-					<?php echo $this->siteTree('', $this->collection, Parse::queryKey('url'), array('context' => 'edit_page'), false); ?> 	
+					<?php echo $this->siteTree('', $this->collection, array('context' => 'edit_page'), false); ?> 	
 				</div>	
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">
