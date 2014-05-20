@@ -54,6 +54,7 @@
 @padding-content:	30px;
 @padding-y-group-item:  24px;
 @padding-pill:		18px;
+@padding-x-pill-pages:	7px;
 @padding-y-pill-pages:	8px;
 @padding-modal-item:	24px;
 
@@ -179,7 +180,8 @@ a {
 	
 	color: @color-content;
 	
-	&:hover {
+	&:hover,
+	&:focus {
 		color: darken(@color-content, @hover-darken);
 		text-decoration: none;
 	}
@@ -213,6 +215,7 @@ a {
 	&.nav {
 		
 		width: @width-nav;
+		max-width: @width-nav;
 		min-width: @min-width-nav;
 		.box-shadow-inset(-11px; 1px; 5px; -10px; @shadow-color-nav);
 		
@@ -440,19 +443,93 @@ ol {
 	
 }
 
+
+
+
+// =============================
+// Site Tree
+// =============================
+
 .pages {
 	
-	& > ul {
-		padding: (@padding-pill - @padding-y-pill-pages) 0;
+	& .nav-pills {
+	
+		& ul {
+		
+			padding: 0 0 0 22px;
+				
+			&:before {
+				content: ' ';
+				position: absolute;
+				display: block;
+				top: 37px;
+				bottom: 20px;
+				left: 30px;
+				border-left-width: 1px;
+				border-left-style: solid;
+				border-left-color: fade(@color-nav, 50%);
+			}
+			
+			& li:before {
+				content: ' ';
+				position: absolute;
+				display: block;
+				top: 17px;
+				left: 9px;
+				width: 10px;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+				border-bottom-color: fade(@color-nav, 50%);
+			}
+				
+		}
+	
+		& a {
+		
+			padding: @padding-y-pill-pages @padding-x-pill-pages;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			
+			&.expand {
+			
+				font-size: 11px;
+				position: absolute;
+				top: 3px;
+				left: -22px;
+	
+				&,
+				&:hover,
+				&:focus {
+					.box-shadow(0; 0; 0; 0; transparent);
+					background-color: transparent;
+					outline: none;
+				}
+				
+				& span {
+					background-color: @bg-color-nav;
+					padding: 0;
+				}
+							
+			}
+			
+		}
+	
 	}
 	
-	& .nav-pills a {
-		padding: @padding-y-pill-pages @padding-pill;
+	.column.nav & > .nav-pills {
+		
+		padding: (@padding-pill - @padding-y-pill-pages) 0 (@padding-pill - @padding-y-pill-pages) (@padding-pill - @padding-x-pill-pages);
+		
+		& > li > a {
+			padding-left: @padding-pill;
+			margin-left: (@padding-x-pill-pages - @padding-pill + @margin-x-pill);
+		}
+		
 	}
 	
-	& ul ul.nav-pills {
-		margin: 0 0 0 20px;
-		padding: 0;
+	.modal & > .nav-pills {
+		margin: @padding-y-group-item 0 @padding-y-group-item -(@padding-x-pill-pages + @margin-x-pill);
 	}
 	
 }
