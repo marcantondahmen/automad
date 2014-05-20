@@ -419,13 +419,14 @@ class GUI {
 	 *
 	 *	@param string $parent
 	 *	@param array $collection
-	 *	@param string $current (URL)
 	 *	@param array $parameters (additional query string parameters to be passed along with the url)
 	 *	@param boolean $hideCurrent
 	 *	@return the branch's HTML
 	 */
 	
-	private function siteTree($parent, $collection, $current, $parameters, $hideCurrent = false) {
+	private function siteTree($parent, $collection, $parameters, $hideCurrent = false) {
+		
+		$current = Parse::queryKey('url');
 		
 		$selection = new Selection($collection);
 		$selection->filterByParentUrl($parent);
@@ -450,7 +451,7 @@ class GUI {
 						$html .= '<li><a href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '"><span class="glyphicon glyphicon-folder-close"></span> ' . $title . '</a>';
 					}
 					
-					$html .= $this->siteTree($page->url, $collection, $current, $parameters, $hideCurrent);
+					$html .= $this->siteTree($page->url, $collection, $parameters, $hideCurrent);
 					
 					$html .= '</li>';
 					
