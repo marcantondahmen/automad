@@ -129,6 +129,23 @@ class Parse {
 		
 	}
 	
+
+	/**
+	 * 	Escape a string to be used within a JSON string.
+	 *	
+	 *	@param string $str
+	 *	@return Escaped, JSON-safe string
+	 */
+
+	public static function jsonEscape($str) {
+		
+		$search = array('"',   "'",  "\n", "\r");
+		$replace = array('\"', "\'", ' ',  ' ');
+		
+		return str_replace($search, $replace, $str);
+		
+	}
+
 	
 	/**
 	 *	Parse a (dirty) JSON string and return an associative, filtered array
@@ -405,7 +422,7 @@ class Parse {
 					if (array_key_exists($matches[1], $use['data'])) {
 						
 						if ($use['jsonSafe']) {
-							return '"' . str_replace(array('"', "'"), '', $use['data'][$matches[1]]) . '"';
+							return '"' . self::jsonEscape($use['data'][$matches[1]]) . '"';
 						} else {
 							return $use['data'][$matches[1]];
 						}
@@ -427,7 +444,7 @@ class Parse {
 				function($matches) use($use) {
 					
 					if ($use['jsonSafe']) {
-						return '"' . str_replace(array('"', "'"), '', $use['site']->getSiteData($matches[1])) . '"';
+						return '"' . self::jsonEscape($use['site']->getSiteData($matches[1])) . '"';
 					} else {
 						return $use['site']->getSiteData($matches[1]);
 					}
