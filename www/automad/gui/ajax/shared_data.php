@@ -138,7 +138,7 @@ if (isset($_POST['data'])) {
 								echo ' selected';
 							}
 						
-							echo ' value="' . basename($theme) . '">' . ucwords(basename($theme)) . '</option>';
+							echo ' value="' . basename($theme) . '">' . ucwords(str_replace('_', ' ', basename($theme))) . '</option>';
 						
 						}
 				
