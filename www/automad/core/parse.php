@@ -402,7 +402,7 @@ class Parse {
 	
 
 	/**
-	 *	Replace all page vars "p(variable)" with content from the current page and all site vars "s(variable)" with content from site.txt.
+	 *	Replace all site vars "s(variable)" with content from site.txt and all page vars "p(variable)" with content from the current page.
 	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
 	 *
 	 *	@param string $str
@@ -412,6 +412,20 @@ class Parse {
 	 */
 	
 	public static function templateVariables($str, $site, $jsonSafe = false) {
+		
+		// Site variables
+		$use = array('site' => $site, 'jsonSafe' => $jsonSafe);
+		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
+				function($matches) use($use) {
+					
+					if ($use['jsonSafe']) {
+						return '"' . self::jsonEscape($use['site']->getSiteData($matches[1])) . '"';
+					} else {
+						return $use['site']->getSiteData($matches[1]);
+					}
+								
+				},
+				$str);
 		
 		// Page variables
 		$P = $site->getCurrentPage();
@@ -435,20 +449,6 @@ class Parse {
 				
 					}
 							
-				},
-				$str);
-		
-		// Site variables
-		$use = array('site' => $site, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
-				function($matches) use($use) {
-					
-					if ($use['jsonSafe']) {
-						return '"' . self::jsonEscape($use['site']->getSiteData($matches[1])) . '"';
-					} else {
-						return $use['site']->getSiteData($matches[1]);
-					}
-								
 				},
 				$str);
 						
