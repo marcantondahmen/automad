@@ -57,6 +57,7 @@ class Navbar {
 					'logoWidth' => 100,
 					'logoHeight' => 100,
 					'search' => 'Search',
+					'searchPosition' => 'left',
 					'levels' => 2
 				);
 		
@@ -141,7 +142,7 @@ class Navbar {
 						// Search box
 						if ($options['search']) {
 						
-							$html .= '<form class="navbar-form navbar-left" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
+							$html .= '<form class="navbar-form navbar-' . $options['searchPosition'] . '" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
 								 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
 								 'onfocus="if (this.value==\'' . $options['search'] . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $options['search'] . '\'; }" />' .
 								 '</form>';

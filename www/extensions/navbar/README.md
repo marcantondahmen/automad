@@ -37,6 +37,7 @@ There are several options available to modify the Navbar:
 - logoWidth: `integer` - Width of the logo in pixels (default: `100`)
 - logoHeight: `integer` - Height of the logo in pixels (default: `100`)
 - search: `Placeholder text for search box` or `false` to hide the search box - (default: `"Search"`)
+- searchPosition: `"left"` or `"right"` - Position of the search box - (default: `"left"`)
 - levels: `integer` - Maximum number of levels to be displayed (default: `2`)
 
 The options must be specified in **JSON** format. 
