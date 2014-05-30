@@ -319,15 +319,20 @@ class Html {
 	 *	@param integer $height
 	 *	@param integer $crop
 	 * 	@param string $class (optional class for list items)
+	 *	@param integer $maxChars (maximum number of characters to be displayed for each variable)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false, $class = false) {
+	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false, $class = false, $maxChars = false) {
 		
 		if ($pages) {			
 						
 			if ($class) {
 				$class = ' ' . $class;
+			}
+			
+			if (!$maxChars) {
+				$maxChars = AM_HTML_LIST_MAX_CHARS;
 			}
 						
 			$html = '<ul class="' . AM_HTML_CLASS_LIST . '">';
@@ -357,12 +362,12 @@ class Html {
 						$text = strip_tags($page->data[$var]);
 						
 						// Shorten $text to maximal characters (full words).
-						if (strlen($text) > AM_HTML_LIST_MAX_CHARS) {
+						if (strlen($text) > $maxChars) {
 							// Cut $text to max chars
-							$text = substr($text, 0, AM_HTML_LIST_MAX_CHARS);
+							$text = substr($text, 0, $maxChars);
 							// Find last space and get position
 							$pos = strrpos($text, ' ');
-							// Cut $text again at last space's position (< AM_HTML_LIST_MAX_CHARS)
+							// Cut $text again at last space's position (< $maxChars)
 							$text = substr($text, 0, $pos) . ' ...';
 						}
 					
