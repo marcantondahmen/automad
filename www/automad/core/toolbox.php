@@ -611,7 +611,20 @@ class Toolbox {
 		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $options['placeholder']);
 		
 	}
+	
+	
+	/**
+	 *	Return the template name used by the  current page.
+	 *
+	 *	@return template name
+	 */
+	
+	public function template() {
 		
+		return $this->P->template;
+		
+	}
+	
 	
 	/**
 	 * 	Return the URL of the page theme.
