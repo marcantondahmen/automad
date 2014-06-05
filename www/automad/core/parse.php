@@ -296,7 +296,7 @@ class Parse {
 				);
 		
 		// Merge defaults with settings from file.
-		return array_merge($defaults, self::textFile(AM_FILE_SITE_SETTINGS));
+		return array_merge($defaults, self::markdownFile(AM_FILE_SITE_SETTINGS));
 		
 	}
 
