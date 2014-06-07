@@ -584,15 +584,45 @@ class Toolbox {
 	/**
 	 * 	Generate full navigation tree.
 	 *
-	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl")
+	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl", rootLevel: integer)
 	 *	@return the HTML of the tree
 	 */
 	
 	public function navTree($options) {
 				
-		$options = array_merge(array('parent' => '', 'all' => true), $options);
+		$defaults = 	array( 
+					'all' => true,
+					'parent' => '',
+					'rootLevel' => false
+				);
 				
-		return Html::generateTree($options['parent'], $options['all'], $this->collection);
+		$options = array_merge($defaults, $options);
+		
+		// If 'rootLevel' is not false (!==, can be 0), 
+		// the tree always starts below the given level within the breadcrumb trail to the current page.
+		// So, $parent gets dynamically determined in contrast to defining 'parent' within the options.
+		// When 'rootLevel' is defined and is valid (matches a page), the 'parent' option will be ignored.
+		if ($options['rootLevel'] !== false) {
+			
+			$selection = new Selection($this->collection);
+			$selection->filterBreadcrumbs($this->P->url);
+			
+			foreach ($selection->getSelection() as $breadcrumb) {
+				
+				if ($breadcrumb->level == $options['rootLevel']) {
+					$parent = $breadcrumb->url;
+				}
+				
+			}
+			
+		} 
+		
+		// The 'parent' options will be ignored, when $parent is already defined by using the 'rootLevel' option.
+		if (!isset($parent)) {
+			$parent = $options['parent'];
+		}
+				
+		return Html::generateTree($parent, $options['all'], $this->collection);
 	
 	}
 	
