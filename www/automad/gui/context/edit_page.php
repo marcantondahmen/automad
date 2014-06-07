@@ -130,6 +130,7 @@ $this->element('header');
 					</div>
 					<form class="automad-form" data-automad-handler="add_page" data-automad-url="<?php echo $P->url; ?>" role="form">
 						<div class="modal-body">
+							<div class="alert alert-info"><span class="glyphicon glyphicon-arrow-right"></span> <b><?php echo $P->url; ?>/</b></div>
 							<div class="form-group">
 								<label for="add-subpage-title" class="text-muted">Title</label>
 								<input id="add-subpage-title" class="form-control" type="text" name="subpage[<?php echo AM_KEY_TITLE; ?>]" value="" onkeypress="return event.keyCode != 13;" required />
@@ -156,6 +157,7 @@ $this->element('header');
 						<h4 class="modal-title"><?php echo $this->tb['btn_move_page']; ?></h4>
 					</div>
 					<div class="modal-body pages">
+						<div class="alert alert-info"><span class="glyphicon glyphicon-move"></span> <b><?php echo $P->url; ?></b></div>
 						<h5><?php echo $this->tb['page_move_destination']; ?></h5>
 						<?php echo $this->siteTree('', $this->collection, array(), true); ?>
 					</div>
@@ -177,6 +179,7 @@ $this->element('header');
 					<form class="automad-form" data-automad-handler="delete_page" data-automad-url="<?php echo $P->url; ?>" role="form">
 						<input type="hidden" name="title" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
 						<div class="modal-body">
+							<div class="alert alert-danger"><span class="glyphicon glyphicon-trash"></span> <b><?php echo $P->url; ?></b></div>
 							<?php echo $this->tb['page_confirm_delete']; ?>  
 						</div>
 						<div class="modal-footer">
