@@ -320,10 +320,11 @@ class Html {
 	 *	@param integer $crop
 	 * 	@param string $class (optional class for list items)
 	 *	@param integer $maxChars (maximum number of characters to be displayed for each variable)
+	 *	@param string $header (the list's header)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false, $class = false, $maxChars = false) {
+	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false, $class = false, $maxChars = false, $header = false) {
 		
 		if ($pages) {			
 						
@@ -334,8 +335,14 @@ class Html {
 			if (!$maxChars) {
 				$maxChars = AM_HTML_LIST_MAX_CHARS;
 			}
+			
+			$html = '';
+			
+			if ($header) {
+				$html .= '<div class="' . AM_HTML_CLASS_LIST_HEADER . '">' . $header . '</div>';
+			}
 						
-			$html = '<ul class="' . AM_HTML_CLASS_LIST . '">';
+			$html .= '<ul class="' . AM_HTML_CLASS_LIST . '">';
 		
 			foreach ($pages as $page) {
 			
