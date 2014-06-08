@@ -55,7 +55,7 @@ if ($_POST) {
 		
 		session_regenerate_id(true);
 		$_SESSION['username'] = $username;
-		header('Location: http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+		header('Location: ' . $_SERVER['REQUEST_URI']);
 		die;
 		
 	} else {
