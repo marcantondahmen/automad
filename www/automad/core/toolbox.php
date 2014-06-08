@@ -339,6 +339,7 @@ class Toolbox {
 	 * 	- height: The thumbnails' height
 	 *  	- crop: Cropping parameter for thumbnails
 	 *	- maxChars: Maximum number of characters for each variable
+	 *	- header: The list's header text
 	 *
 	 * 	@param array $options
 	 *	@return The HTML for a page list.
@@ -353,7 +354,8 @@ class Toolbox {
 					'height' => false,
 					'crop' => false,
 					'class' => false,
-					'maxChars' => false
+					'maxChars' => false,
+					'header' => false
 				);
 	
 		$options = array_merge($defaults, $options);
@@ -362,7 +364,7 @@ class Toolbox {
 		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
 		$options['variables'] = array_map('trim', $options['variables']);
 	
-		return Html::generateList($this->L->pages, $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars']);	
+		return Html::generateList($this->L->pages, $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
 		
 	}
 
