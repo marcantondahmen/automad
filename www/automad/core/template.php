@@ -87,13 +87,20 @@ class Template {
 	
 	
 	/**
-	 *	Define $S, $P and $theme.
+	 *	Define $S and $P, check if the page gets redirected and get the template name. 
 	 */
 	
 	public function __construct($site) {
 		
 		$this->S = $site;
 		$this->P = $site->getCurrentPage();
+		
+		// Redirect page, if an URL is defined.
+		if (isset($this->P->data[AM_KEY_URL])) {
+			header('Location: ' . Modulate::url($this->P->path, $this->P->url));
+			die;
+		}
+	
 		$this->template = $this->P->getTemplate();
 		
 		Debug::log('Template: New instance created!');
