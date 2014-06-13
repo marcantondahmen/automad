@@ -116,7 +116,14 @@ class Modulate {
 			if (Parse::isFileName($url)) {
 				return AM_BASE_URL . AM_DIR_PAGES . $pagePath . $url;
 			} else {
-				return $url;
+				// Even though all trailing slashes get stripped out of beauty reasons, any page must still be understood as a directory instead of a file.
+				// Therefore it should be possible to link to a subpage with just href="subpage". Due to the missing trailing slash, that link would actually link to
+				// a page called subpage, but being a sibling of the current page instead of really being a child.
+				// Exampe: 
+				// The current page is "http://domain.com/page" and has a link href="subpage". 
+				// Just returning that link would reslove to "http://domain.com/subpage", which is wrong. It should be "http://domain.com/page/subpage".
+				// Therefore "/page/" has to be added here. 
+				return $_SERVER['REQUEST_URI'] . '/' . $url;
 			}
 			
 		}
