@@ -475,11 +475,11 @@ class Parse {
 		// So basically every line, only containing a single AM_PARSE_BLOCK_SEPARATOR, will be used to explode $text.
 		$del = "\n" . AM_PARSE_BLOCK_SEPARATOR . "\n";
 	
-		// Normalize line endings and remove whitespace around AM_PARSE_BLOCK_SEPARATOR to match $del.
-		// So, one AM_PARSE_BLOCK_SEPARATOR, wrapped in new line charachters (and optional spaces)
+		// Normalize line endings and remove trailing whitespace from AM_PARSE_BLOCK_SEPARATOR to match $del.
+		// So, one AM_PARSE_BLOCK_SEPARATOR, followed by optional spaces and wrapped in new line charachters
 		// will be replaced with the simplified $del.
 		// "\R" is used to match all line endings (CRLF, LF, CR).
-		$text = preg_replace('/\R\s*' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '\s*\R/s', $del, $text);
+		$text = preg_replace('/\R' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '\s*\R/s', $del, $text);
 			
 		// split $file into data blocks
 		$pairs = explode($del, $text);
