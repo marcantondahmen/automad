@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  *	CAROUSEL
  *	Extension for the Automad CMS
  *
@@ -35,20 +35,20 @@ class Carousel {
 	 *	- class: 	Carousel
 	 *	- method:	Carousel 
 	 *	
-	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Carousel($options, $site)
+	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Carousel($options, $T)
 	 *	- $options:	An array with all the options
-	 *	- $site:	The Site object, to make all data available for the extension
+	 *	- $T:		The Toolbox object, to make all Toolbox methods and variables available for the extension
 	 *	
 	 *	Note: The Carousel method is not a kind of constructor (like it would be in PHP 4). Since this is a namespaced class,
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
 	 *	@param array $options
-	 *	@param object $site
+	 *	@param object $T
 	 *	@return The generated HTML of the Carousel. 
 	 */
 	
-	public function Carousel($options, $site) {
-		
+	public function Carousel($options, $T) {
+			
 		$defaults = 	array(
 					'glob' => '*.jpg',
 					'width' => 400,
@@ -61,8 +61,7 @@ class Carousel {
 		$options = array_merge($defaults, $options);
 		
 		// Build full glob pattern
-		$page = $site->getCurrentPage();
-		$glob = \Core\Modulate::filePath($page->path, $options['glob']);
+		$glob = \Core\Modulate::filePath($T->P->path, $options['glob']);
 		
 		// Get files.
 		$files = glob($glob);
