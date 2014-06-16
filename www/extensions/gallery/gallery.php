@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  *	GALLERY
  *	Extension for the Automad CMS
  *
@@ -38,9 +38,9 @@ class Gallery {
 	 *	- class: 	Gallery
 	 *	- method:	Gallery 
 	 *	
-	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Gallery($options, $site)
+	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Gallery($options, $T)
 	 *	- $options:	An array with all the options
-	 *	- $site:	The Site object, to make all data available for the extension
+	 *	- $T:		The Toolbox object, to make all Toolbox methods and variables available for the extension
 	 *	
 	 *	The example method below basically generates and returns the HTML for a simple image slideshow.
 	 *	The main method of an extension must always return the output for the template.
@@ -49,11 +49,11 @@ class Gallery {
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
 	 *	@param array $options
-	 *	@param object $site
+	 *	@param object $T
 	 *	@return The generated HTML of the gallery. 
 	 */
 
-	public function Gallery($options, $site) {
+	public function Gallery($options, $T) {
 		
 		$defaults = 	array(
 					'glob' => '*.jpg',
@@ -66,8 +66,7 @@ class Gallery {
 		$options = array_merge($defaults, $options);
 		
 		// Build full glob pattern
-		$page = $site->getCurrentPage();
-		$glob = \Core\Modulate::filePath($page->path, $options['glob']);
+		$glob = \Core\Modulate::filePath($T->P->path, $options['glob']);
 		
 		// Generate HTML		
 		$html = '<div class="gallery">';	
