@@ -167,7 +167,7 @@ class Html {
 
 	public static function addVariable($name) {
 		
-		return AM_TMPLT_DEL_PAGE_VAR_L . $name . AM_TMPLT_DEL_PAGE_VAR_R;
+		return AM_PLACEHOLDER_PAGE_VAR . '(' . $name . ')';
 	
 	}
 
