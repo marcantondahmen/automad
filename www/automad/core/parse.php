@@ -313,58 +313,58 @@ class Parse {
 	 */
 
 	public static function templateMethods($str, $site) {
+				
+		$toolbox = new Toolbox($site);
+		$extender = new Extender($toolbox);
+
+		$use = 	array(
+				'toolbox' => $toolbox,  
+				'extender' => $extender, 
+				'site' => $site
+			);	
 		
-		// Toolbox methods
-		$use = array('toolbox' => new Toolbox($site), 'site' => $site);	
-		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_TOOL_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_TOOL_R) . '/s', 
-				function($matches) use($use) {	
-					if (method_exists($use['toolbox'], $matches[1])) {
-					
-						if (!isset($matches[2])) {
-							// If there is no parameter passed (no brackets),
-							// an empty string will be passed as an argument
-							$matches[2] = false;
-						}
-						
-						// Parse the options JSON and also find and replace included variables within the JSON string.
-						$options = self::jsonOptions(self::templateVariables($matches[2], $use['site'], true));
-						Debug::log('Parse: Matched tool: "' . $matches[1] . '" and passing the following options:');
-						Debug::log($options);	
-						
-						return $use['toolbox']->$matches[1]($options);
-						
-					}
-				}, 
-				$str);		
-		
-		// Extensions
-		$extender = new Extender($site);
-		
-		// Scan $output for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
+		// Scan $str for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
 		$str = $extender->addHeaderElements($str);
 		
-		// Call extension methods. Match: x(Extension{Options})
-		// The options have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}
-		$use = array('extender' => $extender, 'site' => $site);
-		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', 
-				function($matches) use($use) {
-				
-					if (!isset($matches[2])) {
-						// If there are no options passed.
-						$matches[2] = false;
+		// Toolbox methods and Extensions MUST be parsed at the same time, since the Extensions use also Toolbox properties. 
+		// Tools and Extensions must be able to influence each other - therefore the order of parsing is very important.
+		return preg_replace_callback(AM_REGEX_METHODS, function($matches) use ($use) {
+					
+					$delimiter = $matches[1];
+					$method = $matches[2];
+					
+					if (isset($matches[3])) {
+						// Parse the options JSON and also find and replace included variables within the JSON string.
+						$options = self::jsonOptions(self::templateVariables($matches[3], $use['site'], true));
+					} else {
+						$options = array();
 					}
 					
-					// Parse the options JSON and also find and replace included variables within the JSON string.
-					$options = self::jsonOptions(self::templateVariables($matches[2], $use['site'], true));
-					Debug::log('Parse: Matched extension: "' . $matches[1] . '"');
+					// Call methods depending on placeholder type (Toolbox or Extension)
+					if ($delimiter == AM_PLACEHOLDER_TOOL) {
+						
+						// Toolbox method
+						if (method_exists($use['toolbox'], $method)) {
+					
+							Debug::log('Parse: Matched tool: "' . $method . '" and passing the following options:');
+							Debug::log($options);	
+						
+							return $use['toolbox']->$method($options);
+						
+						}
+						
+					} else {
+						
+						// Extension
+						Debug::log('Parse: Matched extension: "' . $method . '"');
 									
-					return $use['extender']->callExtension($matches[1], $options);
-				
-				}, 
-				$str);
-				
-		return $str;
-		
+						return $use['extender']->callExtension($method, $options);
+						
+						
+					}
+					
+				}, $str);		
+	
 	}
 
 
@@ -378,9 +378,7 @@ class Parse {
 	
 	public static function templateNestedIncludes($str, $directory) {
 		
-		return 	preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_INC_L) . '\s*([A-Za-z0-9_\.\/\-]+)\s*' . preg_quote(AM_TMPLT_DEL_INC_R) . '/',
-		
-			function($matches) use($directory) {
+		return 	preg_replace_callback(AM_REGEX_INC, function($matches) use ($directory) {
 					
 				$file = $directory . '/' . $matches[1];
 				if (file_exists($file)) {
@@ -394,9 +392,7 @@ class Parse {
 						
 				}
 					
-			},
-			
-			$str);
+			}, $str);
 		
 	}
 	
@@ -415,8 +411,7 @@ class Parse {
 		
 		// Site variables
 		$use = array('site' => $site, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_SITE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_SITE_VAR_R) . '/',
-				function($matches) use($use) {
+		$str = preg_replace_callback(AM_REGEX_SITE_VAR, function($matches) use ($use) {
 					
 					if ($use['jsonSafe']) {
 						return '"' . self::jsonEscape($use['site']->getSiteData($matches[1])) . '"';
@@ -424,14 +419,12 @@ class Parse {
 						return $use['site']->getSiteData($matches[1]);
 					}
 								
-				},
-				$str);
+				}, $str);
 		
 		// Page variables
 		$P = $site->getCurrentPage();
 		$use = array('data' => $P->data, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback('/' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_L) . '\s*([A-Za-z0-9_\.\-]+)\s*' . preg_quote(AM_TMPLT_DEL_PAGE_VAR_R) . '/',
-				function($matches) use($use) {
+		$str = preg_replace_callback(AM_REGEX_PAGE_VAR, function($matches) use ($use) {
 						
 					if (array_key_exists($matches[1], $use['data'])) {
 						
@@ -449,8 +442,7 @@ class Parse {
 				
 					}
 							
-				},
-				$str);
+				}, $str);
 						
 		return $str;
 
