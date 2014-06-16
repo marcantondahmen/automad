@@ -42,8 +42,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  *	The Extender class servers as an interface for calling extension methods via the template syntax.
- *
- *	
  */
 
 
@@ -51,19 +49,19 @@ class Extender {
 
 	
 	/**
-	 *	The Site object.
+	 *	The Toolbox object.
 	 */
 	
-	private $S;
+	private $T;
 
 	
 	/**
-	 *	The constructor just makes $S available.
+	 *	The constructor just makes the Toolbox object available.
 	 */
 
-	public function __construct($site) {
+	public function __construct($toolbox) {
 		
-		$this->S = $site;
+		$this->T = $toolbox;
 		
 	}
 
@@ -85,7 +83,7 @@ class Extender {
 		$html = '';
 		
 		// Find extensions in $output.
-		preg_match_all('/' . preg_quote(AM_TMPLT_DEL_XTNSN_L) . '\s*([A-Za-z0-9_\-]+)\s*({.*?})?\s*' . preg_quote(AM_TMPLT_DEL_XTNSN_R) . '/s', $output, $extensions);
+		preg_match_all(AM_REGEX_XTNSN, $output, $extensions);
 			
 		// Collect all css/js files in each extension directory.
 		foreach ($extensions[1] as $extension) {
@@ -182,7 +180,7 @@ class Extender {
 					// Call method dynamically and pass $options & Site.
 					Debug::log('Extender: Calling method "' . $name . '" and passing the following options:');
 					Debug::log($options);
-					return $object->$name($options, $this->S);
+					return $object->$name($options, $this->T);
 		
 				} else {
 					
