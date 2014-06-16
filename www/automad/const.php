@@ -101,22 +101,21 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 // LISTING DEFAULTS
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
-// TEMPLATE DELIMITERS
-// Includes
-Config::set('AM_TMPLT_DEL_INC_L', 'i(');
-Config::set('AM_TMPLT_DEL_INC_R', ')');
-// Page Variables
-Config::set('AM_TMPLT_DEL_PAGE_VAR_L', 'p(');
-Config::set('AM_TMPLT_DEL_PAGE_VAR_R', ')');
-// Site Variables
-Config::set('AM_TMPLT_DEL_SITE_VAR_L', 's(');
-Config::set('AM_TMPLT_DEL_SITE_VAR_R', ')');
-// Toolbox
-Config::set('AM_TMPLT_DEL_TOOL_L', 't(');
-Config::set('AM_TMPLT_DEL_TOOL_R', ')');
-// Extensions
-Config::set('AM_TMPLT_DEL_XTNSN_L', 'x(');
-Config::set('AM_TMPLT_DEL_XTNSN_R', ')');
+// PLACEHOLDER TYPE IDENTIFIER
+Config::set('AM_PLACEHOLDER_INC',      	'i');
+Config::set('AM_PLACEHOLDER_PAGE_VAR', 	'p');
+Config::set('AM_PLACEHOLDER_SITE_VAR', 	's');
+Config::set('AM_PLACEHOLDER_TOOL', 	't');
+Config::set('AM_PLACEHOLDER_XTNSN', 	'x');
+
+// REGEX
+// There is no single regex for only matching tools. Instead, Tools get matched together with Extensions to maintain a correct order when parsing.
+// The regex for Extensions only is used when scanning a template for .css/.js files.
+Config::set('AM_REGEX_METHODS',  '/(' . AM_PLACEHOLDER_TOOL . '|' . AM_PLACEHOLDER_XTNSN . ')\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s'); 	// (t|x)((...)({...})) Tools & Extensions
+Config::set('AM_REGEX_XTNSN',    '/' . AM_PLACEHOLDER_XTNSN . 	 '\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s');					// x((...)({...})) Extensions Only
+Config::set('AM_REGEX_INC'     , '/' . AM_PLACEHOLDER_INC . 	 '\(\s*([\w\.\/\-]+)\s*\)/');						// i((...))
+Config::set('AM_REGEX_PAGE_VAR', '/' . AM_PLACEHOLDER_PAGE_VAR . '\(\s*([\w\.\-]+)\s*\)/');						// p((...))
+Config::set('AM_REGEX_SITE_VAR', '/' . AM_PLACEHOLDER_SITE_VAR . '\(\s*([\w\.\-]+)\s*\)/');						// s((...))
 
 // EXTENDER
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
