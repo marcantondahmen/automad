@@ -52,28 +52,28 @@ class Toolbox {
 	 * 	Site object.
 	 */
 	
-	private $S;
+	public $S;
 	
 	
 	/**
 	 *	The full collection of pages.
 	 */
 	
-	private $collection;
+	public $collection;
 	
 	
 	/**
 	 * 	Current Page object.
 	 */
 	
-	private $P;
+	public $P;
 	
 	
 	/**
 	 *	The Listing object to be used for all list* methods.
 	 */
 	
-	private $L;
+	public $L;
 	
 	
 	/**
