@@ -60,7 +60,7 @@ if (isset($_SERVER['PATH_INFO'])) {
 	// Test if PATH_INFO is the GUI page and AM_PAGE_GUI is defined (GUI active).
 	if ($_SERVER['PATH_INFO'] == AM_PAGE_GUI && AM_PAGE_GUI) {
 		
-		$gui = true;
+		$guiEnabled = true;
 		
 	}
 	
@@ -85,44 +85,44 @@ spl_autoload_register(function($class) {
 
 
 // Split GUI form regular pages
-if (isset($gui)) {
+if (isset($guiEnabled)) {
 	
-	$G = new GUI();
-	$output = $G->output;
+	$GUI = new GUI();
+	$output = $GUI->output;
 	
 } else {
 
 	// Load page from cache or process template
-	$C = new Cache();
+	$Cache = new Cache();
 
-	if ($C->pageCacheIsApproved()) {
+	if ($Cache->pageCacheIsApproved()) {
 
 		// If cache is up to date and the cached file exists,
 		// just get the page from the cache.
-		$output = $C->readPageFromCache();
+		$output = $Cache->readPageFromCache();
 	
 	} else {
 	
 		// Else check if the site object cache is ok...
-		if ($C->siteObjectCacheIsApproved()) {
+		if ($Cache->siteObjectCacheIsApproved()) {
 		
 			// If approved, load site from cache...
-			$S = $C->readSiteObjectFromCache();
+			$Site = $Cache->readSiteObjectFromCache();
 		
 		} else {
 	
 			// Else create new Site.
-			$S = new Site();
-			$C->writeSiteObjectToCache($S);
+			$Site = new Site();
+			$Cache->writeSiteObjectToCache($Site);
 	
 		}
 	
 		// Render template
-		$T = new Template($S);
-		$output = $T->render();
+		$Template = new Template($Site);
+		$output = $Template->render();
 	
 		// Save output to cache...
-		$C->writePageToCache($output);
+		$Cache->writePageToCache($output);
 	
 	}
 	
