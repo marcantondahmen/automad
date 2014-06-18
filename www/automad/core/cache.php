@@ -65,7 +65,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	If the cache is validated, Cache::readPageFromCache() can return the full HTML to be echoed.
  *	
  *	4. 
- *	In case the page's cached HTML is deprecated, Cache::siteObjectCacheIsApproved() can be called to verify the status of the Site object cache (a file holding the serialized Site object ($S)).
+ *	In case the page's cached HTML is deprecated, Cache::siteObjectCacheIsApproved() can be called to verify the status of the Site object cache (a file holding the serialized Site object ($Site)).
  *	If the Site object cache is approved, Cache::readSiteObjectFromCache() returns the unserialized Site object to be used to create an updated page from a template (outside of Cache).
  *	That step is very helpful, since the current page's cache might be outdated, but other pages might be already up to date again and therefore the Site object cache might be updated also in the mean time.
  *	So when something got changed across the Site, the Site object only has to be created once to be reused to update all pages. 
@@ -369,12 +369,12 @@ class Cache {
 	
 	public function readSiteObjectFromCache() {
 		
-		$site = unserialize(file_get_contents(AM_FILE_SITE_OBJECT_CACHE));
+		$Site = unserialize(file_get_contents(AM_FILE_SITE_OBJECT_CACHE));
 		
 		Debug::log('Cache: Read site object: ' . AM_FILE_SITE_OBJECT_CACHE);
-		Debug::log($site->getCollection());
+		Debug::log($Site->getCollection());
 		
-		return $site;
+		return $Site;
 		
 	}
 	
@@ -419,13 +419,13 @@ class Cache {
 	 *	Write (serialize) the Site object to AM_FILE_SITE_OBJECT_CACHE.
 	 */
 	
-	public function writeSiteObjectToCache($site) {
+	public function writeSiteObjectToCache($Site) {
 		
 		if (AM_CACHE_ENABLED) {
 			
 			$old = umask(0);
 			Debug::log('Cache: Changed umask: ' . umask());
-			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($site));
+			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($Site));
 			umask($old);
 			Debug::log('Cache: Write site object: ' . AM_FILE_SITE_OBJECT_CACHE);
 			Debug::log('Cache: Restored umask: ' . umask());
