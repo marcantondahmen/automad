@@ -82,8 +82,8 @@ if (isset($_POST['data'])) {
 	
 	
 	// Clear the cache.
-	$C = new Cache();
-	$C->clear();
+	$Cache = new Cache();
+	$Cache->clear();
 	
 		
 } else {
