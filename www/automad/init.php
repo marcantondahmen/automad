@@ -34,7 +34,7 @@
  */
  
  
-namespace Core;
+namespace Automad\Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -77,10 +77,18 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 
 // Autoload core classes and libraries
 spl_autoload_register(function($class) {
-		
-	$file = AM_BASE_DIR . '/automad/' . strtolower(str_replace('\\', '/', $class)) . '.php';
-	require_once $file;
 	
+	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
+		
+	if (strpos($file, 'automad') === 0) {	
+		// Load Automad class
+		require_once AM_BASE_DIR . '/' . $file;
+		
+	} else {	
+		// Load 3rd party library
+		require_once AM_BASE_DIR . '/automad/lib/' . $file;
+	}
+		
 });
 
 
