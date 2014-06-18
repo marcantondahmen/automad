@@ -71,14 +71,14 @@ class Listing {
 	 *	The passed Site object.
 	 */
 	
-	private $S;
+	private $Site;
 	
 	
 	/**
 	 *	The current page's object.
 	 */
 	
-	private $P;
+	private $Page;
 	
 	
 	/**
@@ -145,11 +145,11 @@ class Listing {
 	 *	Initialize the Listing by setting up all properties.
 	 */
 	
-	public function __construct($site, $type, $template, $defaultSortItem, $defaultSortOrder) {
+	public function __construct($Site, $type, $template, $defaultSortItem, $defaultSortOrder) {
 		
 		// Set up properties from passed parameters
-		$this->S = $site;
-		$this->P = $site->getCurrentPage();
+		$this->Site = $Site;
+		$this->Page = $Site->getCurrentPage();
 		$this->type = $type;
 		$this->template = $template;
 		
@@ -194,28 +194,28 @@ class Listing {
 	
 	private function setupListing() {
 				
-		$selection = new Selection($this->S->getCollection());
+		$Selection = new Selection($this->Site->getCollection());
 		
 		// Always exclude current page
-		$selection->excludePage($this->P->url);
+		$Selection->excludePage($this->Page->url);
 		
 		// Filter by type
 		switch($this->type){
 			case 'children':
-				$selection->filterByParentUrl($this->P->url);
+				$Selection->filterByParentUrl($this->Page->url);
 				break;
 			case 'related':
-				$selection->filterRelated($this->P);
+				$Selection->filterRelated($this->Page);
 				break;
 		}
 	
 		// Filter by template
-		$selection->filterByTemplate($this->template);
+		$Selection->filterByTemplate($this->template);
 		
 		// Filter by keywords (for search results)
-		$selection->filterByKeywords($this->search);
+		$Selection->filterByKeywords($this->search);
 		
-		return $selection->getSelection();
+		return $Selection->getSelection();
 			
 	}
 	
@@ -252,11 +252,11 @@ class Listing {
 	
 	private function setupPages($listing) {
 		
-		$selection = new Selection($listing);
-		$selection->filterByTag($this->filter);
-		$selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
+		$Selection = new Selection($listing);
+		$Selection->filterByTag($this->filter);
+		$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
-		return $selection->getSelection();
+		return $Selection->getSelection();
 			
 	}
 
