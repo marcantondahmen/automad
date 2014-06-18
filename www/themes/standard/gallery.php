@@ -36,7 +36,7 @@ i(elements/header.php)
 		<hr>
 			
 		<div class="row">
-			t(listSetup {type: "related" })
+			t(listConfig {type: "related" })
 			t(listPages {
 				variables: "title, subtitle",
 				crop: true,

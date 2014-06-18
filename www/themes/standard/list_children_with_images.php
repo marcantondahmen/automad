@@ -14,7 +14,7 @@ i(elements/header.php)
 		</div>		
 				
 		<div class="row">
-			t(listSetup { type: "children" })
+			t(listConfig { type: "children" })
 			<div class="col-md-6">
 				t(listFilters)
 			</div>		
