@@ -52,16 +52,16 @@ class Extender {
 	 *	The Toolbox object.
 	 */
 	
-	private $T;
+	private $Toolbox;
 
 	
 	/**
 	 *	The constructor just makes the Toolbox object available.
 	 */
 
-	public function __construct($toolbox) {
+	public function __construct($Toolbox) {
 		
-		$this->T = $toolbox;
+		$this->Toolbox = $Toolbox;
 		
 	}
 
@@ -180,7 +180,7 @@ class Extender {
 					// Call method dynamically and pass $options & Site.
 					Debug::log('Extender: Calling method "' . $name . '" and passing the following options:');
 					Debug::log($options);
-					return $object->$name($options, $this->T);
+					return $object->$name($options, $this->Toolbox);
 		
 				} else {
 					
