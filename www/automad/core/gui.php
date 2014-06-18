@@ -116,8 +116,8 @@ class GUI {
 		if ($this->user()) {
 	
 			// If user is logged in, continue with getting the Site object and the collection.
-			$S = new Site(false);
-			$this->collection = $S->getCollection();
+			$Site = new Site(false);
+			$this->collection = $Site->getCollection();
 				
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the start page.
