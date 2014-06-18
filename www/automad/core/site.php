@@ -48,6 +48,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  
 class Site {
 	
+
+	/**
+	 *	The Site's Listing object.
+	 *	
+	 *	The object is part of the Site class to allow to access always the same instance of the Listing class for all objects using the Site object as parameter. 
+	 */
+	
+	private $Listing = false;
+		
 	
 	/**
 	 *	Boolean, if true, the site's structure gets scanned as well as the site's content. 
@@ -244,7 +253,7 @@ class Site {
 	
 	public function __construct($parseTxt = true) {
 		
-		Debug::log('Site: New Instance created!');
+		Debug::log('Site: New instance created!');
 		
 		$this->parseTxt = $parseTxt;
 		
@@ -357,6 +366,23 @@ class Site {
 			
 	} 
 	
+
+	/**
+	 *	Return the Site's instance of the Listing class and create instance when accessed for the first time.
+	 *
+	 *	@return Listing object
+	 */
+	
+	public function getListing() {
+		
+		if (!$this->Listing) {
+			$this->Listing = new Listing($this);
+		}
+		
+		return $this->Listing;
+		
+	}
+
 	
 	/**
 	 * 	Create a temporary page on the fly (for example error page or search results).
