@@ -275,7 +275,7 @@ class Toolbox {
 	 *	@param array $options 
 	 */
 
-	public function listSetup($options = array()) {
+	public function listConfig($options = array()) {
 			
 		$Listing = $this->Site->getListing();
 		$Listing->config($options);
@@ -391,7 +391,7 @@ class Toolbox {
 			}
 			
 			// Set list defaults.
-			$this->listSetup(reset($options));
+			$this->listConfig(reset($options));
 			
 			return Html::generateSortMenu($options);
 			
