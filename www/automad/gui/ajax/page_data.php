@@ -67,7 +67,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	
 	
 	// The currently edited page.
-	$P = $this->collection[$url];
+	$Page = $this->collection[$url];
 	
 	
 	// If the posted form contains any "data", save the form's data to the page file.
@@ -83,11 +83,11 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			
 		
 			// Check if the parent directory is writable.
-			if (is_writable(dirname(dirname($this->pageFile($P))))) {
+			if (is_writable(dirname(dirname($this->pageFile($Page))))) {
 	
 			
 				// Check if the page's file and the page's directory is writable.
-				if (is_writable($this->pageFile($P)) && is_writable(dirname($this->pageFile($P)))) {
+				if (is_writable($this->pageFile($Page)) && is_writable(dirname($this->pageFile($Page)))) {
 			
 	
 					// Remove empty data.
@@ -126,11 +126,11 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	
 
 					// Delete old (current) file, in case, the template has changed.
-					unlink($this->pageFile($P));
+					unlink($this->pageFile($Page));
 
 
 					// Build the path of the data file by appending the basename of 'theme_template' to $page->path.
-					$newPageFile = AM_BASE_DIR . AM_DIR_PAGES . $P->path . str_replace('.php', '', basename($_POST['theme_template'])) . '.' . AM_FILE_EXT_DATA;
+					$newPageFile = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . str_replace('.php', '', basename($_POST['theme_template'])) . '.' . AM_FILE_EXT_DATA;
 	
 	
 					// Save new file within current directory, even when the prefix/title changed. 
@@ -151,7 +151,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 							$prefix = $_POST['prefix'];
 						}
 
-						$newPagePath = $this->movePage($P->path, dirname($P->path), $prefix, $data['title']);
+						$newPagePath = $this->movePage($Page->path, dirname($Page->path), $prefix, $data['title']);
 	
 					} else {
 			
@@ -162,13 +162,13 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	
 
 					// Clear the cache to make sure, the changes get reflected on the website directly.
-					$C = new Cache();
-					$C->clear();
+					$Cache = new Cache();
+					$Cache->clear();
 	
 
 					// Rebuild Site object, since the file structure might be different now.
-					$S = new Site(false);
-					$collection = $S->getCollection();
+					$Site = new Site(false);
+					$collection = $Site->getCollection();
 
 	
 					// Find new URL.
@@ -187,14 +187,14 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	
 				} else {
 					
-					$output['error'] = $this->tb['error_permission'] . '<p>' . dirname($this->pageFile($P)) . '</p>';
+					$output['error'] = $this->tb['error_permission'] . '<p>' . dirname($this->pageFile($Page)) . '</p>';
 					
 				}
 	
 	
 			} else {
 				
-				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($P))) . '</p>';
+				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
 				
 			}
 	
@@ -214,7 +214,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		// get the page's data from its .txt file and return a form's inner HTML containing these information.
 		
 		// Get page's data.
-		$data = Parse::textFile($this->pageFile($P));
+		$data = Parse::textFile($this->pageFile($Page));
 
 
 		// Set up all standard variables.
@@ -231,7 +231,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 		// Set title, in case the variable is not set (when editing the text file in an editor and the title wasn't set correctly)
 		if (!$data[AM_KEY_TITLE]) {
-			$data[AM_KEY_TITLE] = basename($P->url);
+			$data[AM_KEY_TITLE] = basename($Page->url);
 		}
 		
 		// Check if page is hidden.
@@ -245,7 +245,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		// Get variable keys from selected template file, which are not part of the $standardKeys.
 		// If one of these keys is not a key in $data, its textarea gets automatically created in the form, to make it easier for the user to understand, 
 		// what variables are available without having to add them manually. (below)
-		$templateKeys = array_diff($this->getPageVarsInTemplate($data[AM_KEY_THEME], $P->template), $standardKeys);
+		$templateKeys = array_diff($this->getPageVarsInTemplate($data[AM_KEY_THEME], $Page->template), $standardKeys);
 	
 	
 		// Start buffering the HTML.
@@ -258,7 +258,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 				<div class="list-group-item">
 					
 					<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default btn-lg">
-						<?php echo $this->tb['page_theme_template']; ?> <span class="badge"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $P->template)); ?></span> 
+						<?php echo $this->tb['page_theme_template']; ?> <span class="badge"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)); ?></span> 
 					</button>
 					
 					<!-- Select Template Modal -->	
@@ -266,7 +266,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-body">
-									<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $P->template); ?>
+									<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $Page->template); ?>
 								</div>
 								<div class="modal-footer">
 									<div class="btn-group">
@@ -291,13 +291,13 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					</div>
 				</div>	
 			
-				<?php if ($P->path != '/') { ?> 
+				<?php if ($Page->path != '/') { ?> 
 				<div class="list-group-item">
 					<h4 class="text-muted"><?php echo $this->tb['page_settings']; ?></h4>
 					<div class="row">	
 						<div class="form-group col-xs-6">
 							<label for="input-prefix" class="text-muted"><span class="glyphicon glyphicon-sort-by-attributes"></span> <?php echo $this->tb['page_prefix']; ?></label>
-							<input id="input-prefix" class="form-control" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($P->path); ?>" onkeypress="return event.keyCode != 13;" />
+							<input id="input-prefix" class="form-control" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($Page->path); ?>" onkeypress="return event.keyCode != 13;" />
 						</div>
 						<div class="form-group col-xs-6">
 							<label class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> <?php echo $this->tb['page_visibility']; ?></label>
