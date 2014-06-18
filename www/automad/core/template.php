@@ -69,14 +69,14 @@ class Template {
 	 * 	The Site object.
 	 */
 	
-	private $S;
+	private $Site;
 	
 	
 	/**
 	 * 	The current Page object.
 	 */
 
-	private $P;
+	private $Page;
 	
 	
 	/**
@@ -87,25 +87,25 @@ class Template {
 	
 	
 	/**
-	 *	Define $S and $P, check if the page gets redirected and get the template name. 
+	 *	Define $Site and $Page, check if the page gets redirected and get the template name. 
 	 */
 	
-	public function __construct($site) {
+	public function __construct($Site) {
 		
-		$this->S = $site;
-		$this->P = $site->getCurrentPage();
+		$this->Site = $Site;
+		$this->Page = $Site->getCurrentPage();
 		
 		// Redirect page, if an URL is defined.
-		if (isset($this->P->data[AM_KEY_URL])) {
-			header('Location: ' . Modulate::url($this->P->path, $this->P->url));
+		if (isset($this->Page->data[AM_KEY_URL])) {
+			header('Location: ' . Modulate::url($this->Page->path, $this->Page->url));
 			die;
 		}
 	
-		$this->template = $this->P->getTemplate();
+		$this->template = $this->Page->getTemplate();
 		
 		Debug::log('Template: New instance created!');
 		Debug::log('Template: Current Page:');
-		Debug::log($this->P);
+		Debug::log($this->Page);
 		
 	}
 	
@@ -158,7 +158,7 @@ class Template {
 	
 	private function modulateUrls($output) {
 		
-		$pagePath = $this->P->path;
+		$pagePath = $this->Page->path;
 		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
 				function($match) use ($pagePath) {
 					return $match[1] . '="' . Modulate::url($pagePath, $match[2]) . '"';
@@ -211,8 +211,8 @@ class Template {
 		$output = $this->loadTemplate($this->template);
 		
 		$output = Parse::templateNestedIncludes($output, dirname($this->template));
-		$output = Parse::templateMethods($output, $this->S);
-		$output = Parse::templateVariables($output, $this->S);
+		$output = Parse::templateMethods($output, $this->Site);
+		$output = Parse::templateVariables($output, $this->Site);
 		
 		$output = $this->addMetaTags($output);
 		$output = $this->modulateUrls($output);	
