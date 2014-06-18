@@ -34,7 +34,7 @@
  */
 
 
-namespace Core;
+namespace Automad\Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
