@@ -35,24 +35,24 @@ class Navbar {
 	 *	- class: 	Navbar
 	 *	- method:	Navbar 
 	 *	
-	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Navbar($options, $T)
+	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Navbar($options, $Site)
 	 *	- $options:	An array with all the options
-	 *	- $T:		The Toolbox object, to make all data the Toolbox's variables (including the Site object) available for the extension
+	 *	- $Site:	The Site object, to make all the Site's data available for the extension
 	 *	
 	 *	Note: The Navbar method is not a kind of constructor (like it would be in PHP 4). Since this is a namespaced class,
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
 	 *	@param array $options
-	 *	@param object $T (Toolbox)
+	 *	@param object $Site (Site)
 	 *	@return The generated HTML. 
 	 */
 	
-	public function Navbar($options, $T) {
+	public function Navbar($options, $Site) {
 		
 		$defaults = 	array(
 					'fluid' => true,
 					'fixedToTop' => false,
-					'brand' => $T->S->getSiteName(),
+					'brand' => $Site->getSiteName(),
 					'logo' => false,
 					'logoWidth' => 100,
 					'logoHeight' => 100,
@@ -85,10 +85,11 @@ class Navbar {
 		// Main nav wrapper
 		$html = '<nav class="navbar navbar-default' . $fixed . '" role="navigation">';
 			
-		// To determine all pages for each row, first the "breadcrumbs" get filtered.		 
-		$selection = new \Core\Selection($T->collection);
-		$selection->filterBreadcrumbs($T->P->url);
-		$breadcrumbs = $selection->getSelection();
+		// To determine all pages for each row, first the "breadcrumbs" get filtered.	
+		$Page = $Site->getCurrentPage();	 
+		$Selection = new \Core\Selection($Site->getCollection());
+		$Selection->filterBreadcrumbs($Page->url);
+		$breadcrumbs = $Selection->getSelection();
 		
 		// Generate rows.		
 		foreach ($breadcrumbs as $breadcrumb) {
@@ -97,10 +98,10 @@ class Navbar {
 			// $options['levels'] == 2 > 2 rows (levels 0 & 1).
 			if ($breadcrumb->level < $options['levels']) {
 				
-				$selection = new \Core\Selection($T->collection);
-				$selection->filterByParentUrl($breadcrumb->url);
-				$selection->sortPagesByBasename();
-				$pages = $selection->getSelection();
+				$Selection = new \Core\Selection($Site->getCollection());
+				$Selection->filterByParentUrl($breadcrumb->url);
+				$Selection->sortPagesByBasename();
+				$pages = $Selection->getSelection();
 			
 				if ($pages) {
 				
