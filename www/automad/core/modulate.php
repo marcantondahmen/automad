@@ -86,6 +86,7 @@ class Modulate {
 	 *	Modulate an URL according to its type.
 	 * 
 	 *	Absolute URLs: 		not modified
+	 *	Only query string:	not modified (starts with "?")
 	 *	Root-relative URLs: 	AM_BASE_URL is prepended (and AM_INDEX in case of pages)
 	 *	Relative URLs:		the full path gets prepended and all '../' and './' get resolved
 	 *	
@@ -96,9 +97,9 @@ class Modulate {
 
 	public static function url($pagePath, $url) {
 		
-		if (strpos($url, '://') !== false) {
+		if (strpos($url, '://') !== false || strpos($url, '?') === 0) {
 									
-			// Absolute URL
+			// Absolute URL or query string only
 			return $url;
 			
 		} else if (strpos($url, '/') === 0) {
