@@ -205,7 +205,7 @@ class GUI {
 	
 	private function element($element) {
 		
-		require AM_BASE_DIR . '/automad/gui/inc/elements/' . $element . '.php';
+		require AM_BASE_DIR . AM_DIR_GUI_INC . '/elements/' . $element . '.php';
 		
 	}
 
