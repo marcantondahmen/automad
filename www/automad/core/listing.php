@@ -66,14 +66,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class Listing {
 	
-
+	
 	/**
-	 *	The passed Site object.
+	 *	The collection of all existing pages.
 	 */
 	
-	private $Site;
+	private $collection;
 	
-
+	
+	/**
+	 *	The current Page.
+	 */
+	
+	private $Page;
+	
+	
 	/**
 	 *	The default set of options.
 	 */
@@ -130,12 +137,16 @@ class Listing {
 	
 	/**
 	 *	Initialize the Listing.
+	 *
+	 *	@param array $collection
+	 *	@param object $Page
 	 */
 	
-	public function __construct($Site) {
+	public function __construct($collection, $Page) {
 		
 		Debug::log('Listing: New instance created!');
-		$this->Site = $Site;
+		$this->collection = $collection;
+		$this->Page = $Page;
 		$this->config($this->defaults);
 		
 	}
@@ -188,21 +199,19 @@ class Listing {
 	 */
 	
 	private function getRelevant() {
-		
-		$Page = $this->Site->getCurrentPage();
 				
-		$Selection = new Selection($this->Site->getCollection());
+		$Selection = new Selection($this->collection);
 		
 		// Always exclude current page
-		$Selection->excludePage($Page->url);
+		$Selection->excludePage($this->Page->url);
 		
 		// Filter by type
 		switch($this->type){
 			case 'children':
-				$Selection->filterByParentUrl($Page->url);
+				$Selection->filterByParentUrl($this->Page->url);
 				break;
 			case 'related':
-				$Selection->filterRelated($Page);
+				$Selection->filterRelated($this->Page);
 				break;
 		}
 	
