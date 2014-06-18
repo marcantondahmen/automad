@@ -53,8 +53,8 @@ $output['debug'] = $_POST + $_FILES;
 // If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
 	
-	$P = $this->collection[$_POST['url']];
-	$path = AM_BASE_DIR . AM_DIR_PAGES . $P->path;
+	$Page = $this->collection[$_POST['url']];
+	$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
 	
 } else {
 	
@@ -89,8 +89,8 @@ if (isset($_FILES['files']['name'])) {
 		}
 
 		// Clear cache to update galleries and sliders.
-		$C = new Cache();
-		$C->clear();
+		$Cache = new Cache();
+		$Cache->clear();
 		
 		if ($errors) {
 			$output['error'] = implode('<br />', $errors);
