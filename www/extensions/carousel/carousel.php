@@ -62,7 +62,7 @@ class Carousel {
 		
 		// Build full glob pattern
 		$Page = $Site->getCurrentPage();
-		$glob = \Core\Modulate::filePath($Page->path, $options['glob']);
+		$glob = \Automad\Core\Modulate::filePath($Page->path, $options['glob']);
 		
 		// Get files.
 		$files = glob($glob);
@@ -108,8 +108,8 @@ class Carousel {
 					$html .= ' active';
 				}
 			
-				$html .= '">' . \Core\Html::addImage($file, $options['width'], $options['height'], true) .
-					 '<div class="carousel-caption">' . \Core\Html::addVariable('carousel_caption_' . \Core\Parse::sanitize(basename($file))) . '</div>' .
+				$html .= '">' . \Automad\Core\Html::addImage($file, $options['width'], $options['height'], true) .
+					 '<div class="carousel-caption">' . \Automad\Core\Html::addVariable('carousel_caption_' . \Automad\Core\Parse::sanitize(basename($file))) . '</div>' .
 					 '</div>';			
 			
 			}
