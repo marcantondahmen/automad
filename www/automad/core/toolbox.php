@@ -52,28 +52,21 @@ class Toolbox {
 	 * 	Site object.
 	 */
 	
-	public $Site;
+	private $Site;
 	
 	
 	/**
 	 *	The full collection of pages.
 	 */
 	
-	public $collection;
+	private $collection;
 	
 	
 	/**
 	 * 	Current Page object.
 	 */
 	
-	public $Page;
-	
-	
-	/**
-	 *	The Listing object to be used for all list* methods.
-	 */
-	
-	public $Listing;
+	private $Page;
 	
 	
 	/**
@@ -85,10 +78,7 @@ class Toolbox {
 		$this->Site = $Site;
 		$this->collection = $this->Site->getCollection();
 		$this->Page = $this->Site->getCurrentPage();
-		
-		// Set up default Listing object
-		$this->listSetup();
-		
+				
 	}
 	
 	
@@ -274,10 +264,7 @@ class Toolbox {
 
 
 	/**
-	 *	Set up a list of pages. In case of $this->Listing (the Toolbox's Listing object) is already existing, 
-	 *	its existing properties will be used as default values to be merged with the specified options.
-	 *	So basically, when using that method with only a few options, the resulting Listing object is an updated version of the previous one.
-	 *	That way, for example the sorting menus can update the list by changing the default sorting paramters without modifying any other option.
+	 *	Change of configuration for the Site's Listing object.
 	 *
 	 *	Possible options are:
 	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
@@ -289,28 +276,9 @@ class Toolbox {
 	 */
 
 	public function listSetup($options = array()) {
-		
-		// Default setup
-		// It is important, that all keys within the $defaults array match the actual properties of the Listing object to be reused as defaults,
-		// when updating an existing Listing object (below).
-		$defaults = 	array(
-					'type' => false,
-					'template' => false,
-					'sortItem' => false,
-					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER
-				);
-	
-		// If listing exists already, get defaults from current properties.
-		// That means basically updating by creating a new object with taken the previous setting for all non-specified paramters.
-		if (isset($this->Listing)) {
-			$defaults = array_intersect_key((array)$this->Listing, $defaults);
-		}
-		
-		// Merge defaults with options
-		$options = array_merge($defaults, $options);
 			
-		// Create new Listing. 
-		$this->Listing = new Listing($this->Site, $options['type'], $options['template'], $options['sortItem'], $options['sortOrder']);
+		$Listing = $this->Site->getListing();
+		$Listing->config($options);
 		
 	}
 
@@ -323,13 +291,14 @@ class Toolbox {
 	
 	public function listCount() {
 		
-		return count($this->Listing->pages);
+		$Listing = $this->Site->getListing();
+		return count($Listing->getPages());
 		
 	}
 
 
 	/**
-	 *	Return a page list from Listing object created by Toolbox::listSetup().
+	 *	Return a page list from Listing object.
 	 * 
 	 * 	Possible options are:
 	 * 	- class: Wrapping class for all list items
@@ -346,7 +315,7 @@ class Toolbox {
 	 */
 
 	public function listPages($options) {
-	
+		
 		$defaults = 	array(
 					'variables' => AM_KEY_TITLE,
 					'glob' => false,
@@ -363,21 +332,24 @@ class Toolbox {
 		// Explode list of variables.
 		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
 		$options['variables'] = array_map('trim', $options['variables']);
+		
+		$Listing = $this->Site->getListing();
 	
-		return Html::generateList($this->Listing->pages, $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
+		return Html::generateList($Listing->getPages(), $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
 		
 	}
 
 
 	/**
-	 *	Create a filter menu to filter a page list created by Toolbox::listPages() regarding the options defined by Toolbox::listOptions().
+	 *	Create a filter menu for the pages in the Site's Listing object.
 	 *
 	 *	@return The HTML for the filter menu.
 	 */
 
 	public function listFilters() {
 		
-		return Html::generateFilterMenu($this->Listing->tags);
+		$Listing = $this->Site->getListing();	
+		return Html::generateFilterMenu($Listing->getTags());
 		
 	}
 	
