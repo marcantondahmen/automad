@@ -54,7 +54,7 @@ class Gallery {
 	 */
 
 	public function Gallery($options, $Site) {
-		
+			
 		$defaults = 	array(
 					'glob' => '*.jpg',
 					'width' => 200,
@@ -67,11 +67,11 @@ class Gallery {
 		
 		// Build full glob pattern
 		$Page = $Site->getCurrentPage();
-		$glob = \Core\Modulate::filePath($Page->path, $options['glob']);
+		$glob = \Automad\Core\Modulate::filePath($Page->path, $options['glob']);
 		
 		// Generate HTML		
 		$html = '<div class="gallery">';	
-		$html .= \Core\Html::generateImageSet($glob, $options['width'], $options['height'], true, $options['class']);
+		$html .= \Automad\Core\Html::generateImageSet($glob, $options['width'], $options['height'], true, $options['class']);
 		$html .= '</div>';
 				
 		return $html;
