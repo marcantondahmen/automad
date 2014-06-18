@@ -48,8 +48,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-$C = new Cache();
-$C->clear();
+$Cache = new Cache();
+$Cache->clear();
 
 
 $output['success'] = $this->tb['success_cache_cleared'];
