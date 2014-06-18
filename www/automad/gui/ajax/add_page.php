@@ -54,10 +54,10 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title'] && isset($_POST['subpage']['theme_template']) && $_POST['subpage']['theme_template']) {
 		
 		// The current page, where the subpage has to be added to, becomes the parent page for the new page.
-		$P = $this->collection[$_POST['url']];
+		$Page = $this->collection[$_POST['url']];
 	
 		// Check if the current page's directory is writable.
-		if (is_writable(dirname($this->pageFile($P)))) {
+		if (is_writable(dirname($this->pageFile($Page)))) {
 	
 	
 			// The new page's properties
@@ -77,14 +77,14 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 			// Save new subpage below the current page's path.		
 			$subdir = str_replace('.', '_', Parse::sanitize($title)) . '/';
-			$newPagePath = $P->path . $subdir;
+			$newPagePath = $Page->path . $subdir;
 
 
 			$i = 1;
 
 			// In case page exists already...
 			while (file_exists(AM_BASE_DIR . AM_DIR_PAGES . $newPagePath)) {
-				$newPagePath = $P->path . $i . '.' . $subdir;		
+				$newPagePath = $Page->path . $i . '.' . $subdir;		
 				$i++;	
 			}
 
@@ -106,12 +106,12 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 
 			// Clear the cache to make sure, the changes get reflected on the website directly.
-			$C = new Cache();
-			$C->clear();
+			$Cache = new Cache();
+			$Cache->clear();
 
 			// Rebuild Site object, since the file structure has changed.
-			$S = new Site(false);
-			$collection = $S->getCollection();
+			$Site = new Site(false);
+			$collection = $Site->getCollection();
 
 			// Find new URL and return redirect query string.
 			foreach ($collection as $key => $page) {
@@ -128,7 +128,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		
 		} else {
 			
-			$output['error'] = $this->tb['error_permission'] . '<p>' . dirname($this->pageFile($P)) . '</p>';
+			$output['error'] = $this->tb['error_permission'] . '<p>' . dirname($this->pageFile($Page)) . '</p>';
 			
 		}
 		
