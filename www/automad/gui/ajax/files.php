@@ -57,8 +57,8 @@ $output = array();
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
 	
 	$url = $_POST['url'];
-	$P = $this->collection[$url];
-	$path = AM_BASE_DIR . AM_DIR_PAGES . $P->path;
+	$Page = $this->collection[$url];
+	$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
 	
 } else {
 	
@@ -93,8 +93,8 @@ if (isset($_POST['delete'])) {
 		}
 	
 		// Clear cache to update galleries and sliders.
-		$C = new Cache();
-		$C->clear();
+		$Cache = new Cache();
+		$Cache->clear();
 	
 		$output['success'] = implode('<br />', $success);
 		$output['error'] = implode('<br />', $errors);
