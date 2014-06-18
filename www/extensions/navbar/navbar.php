@@ -77,7 +77,7 @@ class Navbar {
 		}
 		
 		if ($options['logo']) {
-			$brand = \Core\Html::addImage(AM_BASE_DIR . $options['logo'], $options['logoWidth'], $options['logoHeight']);
+			$brand = \Automad\Core\Html::addImage(AM_BASE_DIR . $options['logo'], $options['logoWidth'], $options['logoHeight']);
 		} else {
 			$brand = $options['brand'];
 		}
@@ -87,7 +87,7 @@ class Navbar {
 			
 		// To determine all pages for each row, first the "breadcrumbs" get filtered.	
 		$Page = $Site->getCurrentPage();	 
-		$Selection = new \Core\Selection($Site->getCollection());
+		$Selection = new \Automad\Core\Selection($Site->getCollection());
 		$Selection->filterBreadcrumbs($Page->url);
 		$breadcrumbs = $Selection->getSelection();
 		
@@ -98,7 +98,7 @@ class Navbar {
 			// $options['levels'] == 2 > 2 rows (levels 0 & 1).
 			if ($breadcrumb->level < $options['levels']) {
 				
-				$Selection = new \Core\Selection($Site->getCollection());
+				$Selection = new \Automad\Core\Selection($Site->getCollection());
 				$Selection->filterByParentUrl($breadcrumb->url);
 				$Selection->sortPagesByBasename();
 				$pages = $Selection->getSelection();
@@ -133,7 +133,7 @@ class Navbar {
 								$html .= ' class="active"';
 							}
 							
-							$html .= '>' . \Core\Html::addLink($page) . '</li>';
+							$html .= '>' . \Automad\Core\Html::addLink($page) . '</li>';
 							
 						}
 						
@@ -174,7 +174,7 @@ class Navbar {
 								$html .= ' class="active"';
 							}
 							
-							$html .= '>' . \Core\Html::addLink($page) . '</li>';
+							$html .= '>' . \Automad\Core\Html::addLink($page) . '</li>';
 							
 						}
 						
