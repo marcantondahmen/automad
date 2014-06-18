@@ -149,14 +149,14 @@ class Site {
 			
 			$url = $this->makeUrl($parentUrl, basename($path));
 			
-			$P = new Page();
+			$Page = new Page();
 			
 			// Directly set URL here as first property, 
 			// to be able to overwrite that url with an optional redirect-url from the data file. 
-			$P->url = $url;
+			$Page->url = $url;
 		
 			// If $this->parseTxt is true (default), then all txt files get parsed as well and 
-			// the corresponding properties of $P get defined. 
+			// the corresponding properties of $Page get defined. 
 			// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
 			if ($this->parseTxt) {
 		
@@ -179,7 +179,7 @@ class Site {
 			
 				// Check for an URL in $data and use that URL instead.
 				if (array_key_exists(AM_KEY_URL, $data)) {
-					$P->url = $data[AM_KEY_URL];
+					$Page->url = $data[AM_KEY_URL];
 				}
 			
 				// Check for a theme in $data and use that as override for the site theme.
@@ -198,25 +198,25 @@ class Site {
 				}
 			
 				// Set Page properties from txt file.
-				$P->data = $data;
-				$P->tags = $tags;
-				$P->theme = $theme;
-				$P->hidden = $hidden;
+				$Page->data = $data;
+				$Page->tags = $tags;
+				$Page->theme = $theme;
+				$Page->hidden = $hidden;
 			
 			}
 			
 			// Set all main Page properties
-			$P->path = $path;
-			$P->level = $level;
-			$P->parentUrl = $parentUrl;
-			$P->template = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
+			$Page->path = $path;
+			$Page->level = $level;
+			$Page->parentUrl = $parentUrl;
+			$Page->template = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
 			
 			// The relative URL ($url) of the page becomes the key (in $siteCollection). 
 			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
-			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $P->url instead).
-			$this->siteCollection[$url] = $P;
+			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url instead).
+			$this->siteCollection[$url] = $Page;
 			
-			Debug::log('      ' . $path . ' >>> ' . $P->url);
+			Debug::log('      ' . $path . ' >>> ' . $Page->url);
 			
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
