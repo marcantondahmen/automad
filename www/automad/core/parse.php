@@ -315,12 +315,12 @@ class Parse {
 	public static function templateMethods($str, $Site) {
 				
 		$Toolbox = new Toolbox($Site);
-		$Extender = new Extender($Toolbox);
+		$Extender = new Extender($Site);
 
 		$use = 	array(
+				'site' => $Site,
 				'toolbox' => $Toolbox,  
-				'extender' => $Extender, 
-				'site' => $Site
+				'extender' => $Extender
 			);	
 		
 		// Scan $str for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
