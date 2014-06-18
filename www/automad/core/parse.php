@@ -308,23 +308,23 @@ class Parse {
 	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
 	 *	
 	 *	@param string $str (the string to be parsed)
-	 *	@param object $site
+	 *	@param object $Site
 	 *	@return The parsed $str
 	 */
 
-	public static function templateMethods($str, $site) {
+	public static function templateMethods($str, $Site) {
 				
-		$toolbox = new Toolbox($site);
-		$extender = new Extender($toolbox);
+		$Toolbox = new Toolbox($Site);
+		$Extender = new Extender($Toolbox);
 
 		$use = 	array(
-				'toolbox' => $toolbox,  
-				'extender' => $extender, 
-				'site' => $site
+				'toolbox' => $Toolbox,  
+				'extender' => $Extender, 
+				'site' => $Site
 			);	
 		
 		// Scan $str for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
-		$str = $extender->addHeaderElements($str);
+		$str = $Extender->addHeaderElements($str);
 		
 		// Toolbox methods and Extensions MUST be parsed at the same time, since the Extensions use also Toolbox properties. 
 		// Tools and Extensions must be able to influence each other - therefore the order of parsing is very important.
@@ -402,15 +402,15 @@ class Parse {
 	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
 	 *
 	 *	@param string $str
-	 *	@param object $site
+	 *	@param object $Site
 	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values and the values get wrapped in double quotes, to avoid parsing errors, when a value is empty "")
 	 *	@return The parsed $str
 	 */
 	
-	public static function templateVariables($str, $site, $jsonSafe = false) {
+	public static function templateVariables($str, $Site, $jsonSafe = false) {
 		
 		// Site variables
-		$use = array('site' => $site, 'jsonSafe' => $jsonSafe);
+		$use = array('site' => $Site, 'jsonSafe' => $jsonSafe);
 		$str = preg_replace_callback(AM_REGEX_SITE_VAR, function($matches) use ($use) {
 					
 					if ($use['jsonSafe']) {
@@ -422,8 +422,8 @@ class Parse {
 				}, $str);
 		
 		// Page variables
-		$P = $site->getCurrentPage();
-		$use = array('data' => $P->data, 'jsonSafe' => $jsonSafe);
+		$Page = $Site->getCurrentPage();
+		$use = array('data' => $Page->data, 'jsonSafe' => $jsonSafe);
 		$str = preg_replace_callback(AM_REGEX_PAGE_VAR, function($matches) use ($use) {
 						
 					if (array_key_exists($matches[1], $use['data'])) {
