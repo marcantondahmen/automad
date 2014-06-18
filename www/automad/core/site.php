@@ -376,7 +376,7 @@ class Site {
 	public function getListing() {
 		
 		if (!$this->Listing) {
-			$this->Listing = new Listing($this);
+			$this->Listing = new Listing($this->siteCollection, $this->getCurrentPage());
 		}
 		
 		return $this->Listing;
