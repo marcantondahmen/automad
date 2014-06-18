@@ -38,9 +38,9 @@ class Gallery {
 	 *	- class: 	Gallery
 	 *	- method:	Gallery 
 	 *	
-	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Gallery($options, $T)
+	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Gallery($options, $Site)
 	 *	- $options:	An array with all the options
-	 *	- $T:		The Toolbox object, to make all Toolbox methods and variables available for the extension
+	 *	- $Site:	The Site object, to make all Site methods and variables available for the extension
 	 *	
 	 *	The example method below basically generates and returns the HTML for a simple image slideshow.
 	 *	The main method of an extension must always return the output for the template.
@@ -49,11 +49,11 @@ class Gallery {
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
 	 *	@param array $options
-	 *	@param object $T
+	 *	@param object $Site
 	 *	@return The generated HTML of the gallery. 
 	 */
 
-	public function Gallery($options, $T) {
+	public function Gallery($options, $Site) {
 		
 		$defaults = 	array(
 					'glob' => '*.jpg',
@@ -66,7 +66,8 @@ class Gallery {
 		$options = array_merge($defaults, $options);
 		
 		// Build full glob pattern
-		$glob = \Core\Modulate::filePath($T->P->path, $options['glob']);
+		$Page = $Site->getCurrentPage();
+		$glob = \Core\Modulate::filePath($Page->path, $options['glob']);
 		
 		// Generate HTML		
 		$html = '<div class="gallery">';	
