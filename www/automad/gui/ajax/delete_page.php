@@ -51,20 +51,20 @@ $output = array();
 // Validate $_POST.
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection) && $_POST['url'] != '/' && isset($_POST['title']) && $_POST['title']) {
 
-	$P = $this->collection[$_POST['url']];
+	$Page = $this->collection[$_POST['url']];
 
 	// Check if the page's directory and parent directory are wirtable.
-	if (is_writable(dirname($this->pageFile($P))) && is_writable(dirname(dirname($this->pageFile($P))))) {
+	if (is_writable(dirname($this->pageFile($Page))) && is_writable(dirname(dirname($this->pageFile($Page))))) {
 
-		$this->movePage($P->path, '..' . AM_DIR_TRASH . dirname($P->path), $this->extractPrefixFromPath($P->path), $_POST['title']);
-		$output['redirect'] = '?context=edit_page&url=' . urlencode($P->parentUrl);
+		$this->movePage($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
+		$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
 
-		$C = new Cache();
-		$C->clear();
+		$Cache = new Cache();
+		$Cache->clear();
 
 	} else {
 		
-		$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($P))) . '</p>';
+		$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
 		
 	}
 	
