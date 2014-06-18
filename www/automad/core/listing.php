@@ -73,115 +73,110 @@ class Listing {
 	
 	private $Site;
 	
-	
+
 	/**
-	 *	The current page's object.
+	 *	The default set of options.
 	 */
 	
-	private $Page;
+	private $defaults = 	array(
+					'type' => false,
+					'template' => false,
+					'sortItem' => false,
+					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER
+				);
 	
 	
 	/**
 	 *	The listing's type (all pages, children pages or related pages)
 	 */
 	
-	public $type;
+	private $type;
 	
 	
 	/**
 	 *	The template to filter by the listing.
 	 */
 	
-	public $template;
-	
-		
-	/**
-	 *	The current filter (from possible query string).
-	 */
-	
-	public $filter;
+	private $template;
 	
 	
 	/**
 	 *	The current sortItem (from possible query string).
 	 */
 	
-	public $sortItem;
+	private $sortItem;
 	
 	
 	/**
 	 *	The current sortOrder (from possible query string).
 	 */
 	
-	public $sortOrder;
+	private $sortOrder;
+	
+	
+	/**
+	 *	The current filter (from possible query string).
+	 */
+	
+	private $filter = false;
 	
 	
 	/**
 	 *	The search string to filter pages (from possible query string).
 	 */
 	
-	public $search;
-	
-	
-	/**
-	 *	A set of all tags which occur at least on one of the listing's pages. 
-	 *	That includes also the filtered out pages, to keep the filter menu complete.
-	 *	So basically the tags are taken from all pages within the constructor variable $listing, 
-	 *	before the pages get filtered according to the query filter.
-	 */
-	
-	public $tags;
-	
-	
-	/**
-	 *	All pages matching the criteria ($type & $template) after (!) filtering and sorting (query settings).
-	 *	So basically the final set of pages to be displayed.
-	 */
-	
-	public $pages;
-	
-	
-	/**
-	 *	Initialize the Listing by setting up all properties.
-	 */
-	
-	public function __construct($Site, $type, $template, $defaultSortItem, $defaultSortOrder) {
+	private $search = false;
 		
-		// Set up properties from passed parameters
+	
+	/**
+	 *	Initialize the Listing.
+	 */
+	
+	public function __construct($Site) {
+		
+		Debug::log('Listing: New instance created!');
 		$this->Site = $Site;
-		$this->Page = $Site->getCurrentPage();
-		$this->type = $type;
-		$this->template = $template;
+		$this->config($this->defaults);
 		
-		// Set up sorting by merging the default sorting options with the query string's options.
-		// Note: Is is important, not to use Parse::queryKey here, because the 'sortItem' could be empty (false) to sort by basename.
-		// Parse::queryKey() can not distinguish between false and not defined. 
-		// So merging the array is much safer, since the existing (but false) options will be used instead of the defaults.
-		$opt = array_merge(array('sortItem' => $defaultSortItem, 'sortOrder' => $defaultSortOrder), Parse::queryArray());
-		$this->sortItem = $opt['sortItem'];
-		$this->sortOrder = $opt['sortOrder'];
+	}
+	
+	
+	/**
+	 *	Set or change the configuration of the listing.
+	 *	
+	 *	@param array $options
+	 */
+	
+	public function config($options) {
+		
+		// Turn all (but only) array items in $options into class properties.
+		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
+		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
+			$this->$key = $value;
+		}
+		
+		// Override settings with current query string options (filter, search and sort)
+		$overrides = Parse::queryArray();
+		
+		Debug::log('Listing: Use overrides from query string:');
+		Debug::log($overrides);
+		
+		foreach (array('filter', 'search', 'sortItem', 'sortOrder') as $key) {
+			if (isset($overrides[$key])) {
+				$this->$key = $overrides[$key];
+			}
+		}
 		
 		// Set sortOrder to the default order, if its value is invalid.
 		if (!in_array($this->sortOrder, array('asc', 'desc'))) {
 			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
-				
-		// Set up filter
-		$this->filter = Parse::queryKey('filter');
 		
-		// Set search
-		$this->search = Parse::queryKey('search');
-		
-		// Set up tags and pages
-		$listing = $this->setupListing();
-		$this->tags = $this->setupTags($listing);
-		$this->pages = $this->setupPages($listing);
-		
-		Debug::log('Listing: Created a Listing object with the following properties:');
-		Debug::log($this);
-		
-	}
+		Debug::log('Listing: Current config:');
+		Debug::log(get_object_vars($this));
 	
+	}
+
 	
 	/**
 	 *	Collect all pages matching $type, $template & $search (optional). 
@@ -192,20 +187,22 @@ class Listing {
 	 *	@return An array of all Page objects matching $type & $template excludng the current page. 
 	 */
 	
-	private function setupListing() {
+	private function getRelevant() {
+		
+		$Page = $this->Site->getCurrentPage();
 				
 		$Selection = new Selection($this->Site->getCollection());
 		
 		// Always exclude current page
-		$Selection->excludePage($this->Page->url);
+		$Selection->excludePage($Page->url);
 		
 		// Filter by type
 		switch($this->type){
 			case 'children':
-				$Selection->filterByParentUrl($this->Page->url);
+				$Selection->filterByParentUrl($Page->url);
 				break;
 			case 'related':
-				$Selection->filterRelated($this->Page);
+				$Selection->filterRelated($Page);
 				break;
 		}
 	
@@ -221,18 +218,17 @@ class Listing {
 	
 	
 	/**
-	 *	Collect all tags from tha pages in $listing in an array.
+	 *	Return all tags from all pages in $relevant as array.
 	 *
-	 *	@param array $listing (Array of Page objects)
 	 *	@return A sorted array with the relevant tags.
 	 */
 	
-	private function setupTags($listing) {
+	public function getTags() {
 				
 		$tags = array();
 
-		foreach ($listing as $page) {
-			$tags = array_merge($tags, $page->tags);
+		foreach ($this->getRelevant() as $Page) {
+			$tags = array_merge($tags, $Page->tags);
 		}
 					
 		$tags = array_unique($tags);
@@ -246,13 +242,12 @@ class Listing {
 	/**
 	 *	The final set of Page objects - filtered and sorted.
 	 * 
-	 *	@param array $listing (unfiltered array of Page objects)
 	 *	@return The filtered and sorted array of Page objects
 	 */
 	
-	private function setupPages($listing) {
-		
-		$Selection = new Selection($listing);
+	public function getPages() {
+			
+		$Selection = new Selection($this->getRelevant());
 		$Selection->filterByTag($this->filter);
 		$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
