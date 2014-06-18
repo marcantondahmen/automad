@@ -55,25 +55,25 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 	// The home page can't be moved!	
 	if ($_POST['url'] != '/') {
 		
-		$P = $this->collection[$_POST['url']];
+		$Page = $this->collection[$_POST['url']];
 		$dest = $this->collection[$_POST['destination']];
 		
 		// Check if new parent directory is writable.
 		if (is_writable(AM_BASE_DIR . AM_DIR_PAGES . $dest->path)) {
 	
 			// Check if the current page's directory and parent directory is writable.
-			if (is_writable(dirname($this->pageFile($P))) && is_writable(dirname(dirname($this->pageFile($P))))) {
+			if (is_writable(dirname($this->pageFile($Page))) && is_writable(dirname(dirname($this->pageFile($Page))))) {
 	
 				// Move page
-				$newPagePath = $this->movePage($P->path, $dest->path, $this->extractPrefixFromPath($P->path), $_POST['title']);
+				$newPagePath = $this->movePage($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);
 	
 				// Clear the cache to make sure, the changes get reflected on the website directly.
-				$C = new Cache();
-				$C->clear();
+				$Cache = new Cache();
+				$Cache->clear();
 	
 				// Rebuild Site object, since the file structure has changed.
-				$S = new Site(false);
-				$collection = $S->getCollection();
+				$Site = new Site(false);
+				$collection = $Site->getCollection();
 
 				// Find new URL and return redirect query string.
 				foreach ($collection as $key => $page) {
@@ -89,7 +89,7 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 		
 			} else {
 				
-				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($P))) . '</p>';
+				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
 				
 			}
 		
