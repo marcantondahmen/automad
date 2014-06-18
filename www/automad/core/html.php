@@ -116,25 +116,25 @@ class Html {
 	
 	
 	/**
-	 *	Add link to $page and check, if $page is the current page or within the current path.
+	 *	Add link to $Page and check, if $Page is the current page or within the current path.
 	 *
-	 *	@param object $page
+	 *	@param object $Page
 	 *	@param string $classes - additional classes to add to the link (separated by space as one string)
 	 *	@param string $text - optional link text instead of page title
 	 *	@return the HTML tag for the link to the given page
 	 */
 
-	public static function addLink($page, $classes = '', $text = '') {
+	public static function addLink($Page, $classes = '', $text = '') {
 	
-		if ($page->isHome()) {	
+		if ($Page->isHome()) {	
 			$classes .= ' ' . AM_HTML_CLASS_HOME;	
 		} 
 		
-		if ($page->isCurrent()) {	
+		if ($Page->isCurrent()) {	
 			$classes .= ' ' . AM_HTML_CLASS_CURRENT;
 		} 
 		
-		if ($page->isInCurrentPath() && !$page->isHome()) {
+		if ($Page->isInCurrentPath() && !$Page->isHome()) {
 			$classes .= ' ' . AM_HTML_CLASS_CURRENT_PATH;	
 		} 
 		
@@ -145,13 +145,13 @@ class Html {
 		} 
 				
 		if (!$text) {
-			$text = strip_tags($page->data[AM_KEY_TITLE]);
+			$text = strip_tags($Page->data[AM_KEY_TITLE]);
 			$title = '';
 		} else {
-			$title = ' title="' . strip_tags($page->data[AM_KEY_TITLE]) . '"';
+			$title = ' title="' . strip_tags($Page->data[AM_KEY_TITLE]) . '"';
 		}
 				
-		return '<a' . $classes . $title . ' href="' . $page->url . '">' . $text . '</a>';
+		return '<a' . $classes . $title . ' href="' . $Page->url . '">' . $text . '</a>';
 		
 	}
 
@@ -186,9 +186,9 @@ class Html {
 		
 		$html = '<div class="' . AM_HTML_CLASS_BREADCRUMBS . '">';
 		
-		foreach ($pages as $page) {
+		foreach ($pages as $Page) {
 			
-			$html .= '<a href="' . $page->url . '">' . strip_tags($page->data[AM_KEY_TITLE]) . '</a>';
+			$html .= '<a href="' . $Page->url . '">' . strip_tags($Page->data[AM_KEY_TITLE]) . '</a>';
 			
 			// Add separator for all but the last page.	
 			if ($i++ < count($pages)) {
@@ -344,9 +344,9 @@ class Html {
 						
 			$html .= '<ul class="' . AM_HTML_CLASS_LIST . '">';
 		
-			foreach ($pages as $page) {
+			foreach ($pages as $Page) {
 			
-				$html .= '<li class="' . AM_HTML_CLASS_LIST_ITEM . $class . '"><a href="' . $page->url . '">';
+				$html .= '<li class="' . AM_HTML_CLASS_LIST_ITEM . $class . '"><a href="' . $Page->url . '">';
 				
 				if ($glob) {
 					
@@ -355,7 +355,7 @@ class Html {
 					// For example $glob = '*.jpg' will always use the first JPG in the page's directoy.
 					// To re-use $glob for every page in the loop, $glob can't be modified and 
 					// therefore $pageGlob will be used to build the full glob pattern.
-					$pageGlob = Modulate::filePath($page->path, $glob);		
+					$pageGlob = Modulate::filePath($Page->path, $glob);		
 					$html .= Html::addImage($pageGlob, $width, $height, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
 					
 				}
@@ -364,9 +364,9 @@ class Html {
 			
 				foreach ($vars as $var) {
 				
-					if (isset($page->data[$var])) {
+					if (isset($Page->data[$var])) {
 						
-						$text = strip_tags($page->data[$var]);
+						$text = strip_tags($Page->data[$var]);
 						
 						// Shorten $text to maximal characters (full words).
 						if (strlen($text) > $maxChars) {
@@ -421,8 +421,8 @@ class Html {
 		
 			$html = '<ul class="' . $class . '">';
 		
-			foreach($pages as $page) {
-				$html .= '<li>' . self::addLink($page) . '</li>'; 
+			foreach($pages as $Page) {
+				$html .= '<li>' . self::addLink($Page) . '</li>'; 
 			}
 		
 			$html .= '</ul>';
@@ -506,11 +506,11 @@ class Html {
 
 	public static function generateTree($parentUrl, $expandAll, $collection) {
 		
-		$selection = new Selection($collection);
-		$selection->filterByParentUrl($parentUrl);
-		$selection->sortPagesByBasename();
+		$Selection = new Selection($collection);
+		$Selection->filterByParentUrl($parentUrl);
+		$Selection->sortPagesByBasename();
 		
-		$pages = $selection->getSelection();
+		$pages = $Selection->getSelection();
 		
 		if ($pages) {
 				
@@ -520,13 +520,13 @@ class Html {
 		
 			$html = '<ul class="' . AM_HTML_CLASS_TREE . $level . '">';	
 		
-			foreach ($pages as $page) {
+			foreach ($pages as $Page) {
 			
 				$html .= '<li>';
-				$html .= self::addLink($page);
+				$html .= self::addLink($Page);
 								
-				if ($expandAll || $page->isCurrent() || $page->isInCurrentPath()) {			
-					$html .= self::generateTree($page->url, $expandAll, $collection);
+				if ($expandAll || $Page->isCurrent() || $Page->isInCurrentPath()) {			
+					$html .= self::generateTree($Page->url, $expandAll, $collection);
 				}
 			
 				$html .= '</li>';
