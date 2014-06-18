@@ -35,19 +35,19 @@ class Carousel {
 	 *	- class: 	Carousel
 	 *	- method:	Carousel 
 	 *	
-	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Carousel($options, $T)
+	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Carousel($options, $Site)
 	 *	- $options:	An array with all the options
-	 *	- $T:		The Toolbox object, to make all Toolbox methods and variables available for the extension
+	 *	- $Site:	The Site object, to make all Site methods and variables available for the extension
 	 *	
 	 *	Note: The Carousel method is not a kind of constructor (like it would be in PHP 4). Since this is a namespaced class,
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
 	 *	@param array $options
-	 *	@param object $T
+	 *	@param object $Site
 	 *	@return The generated HTML of the Carousel. 
 	 */
 	
-	public function Carousel($options, $T) {
+	public function Carousel($options, $Site) {
 			
 		$defaults = 	array(
 					'glob' => '*.jpg',
@@ -61,7 +61,8 @@ class Carousel {
 		$options = array_merge($defaults, $options);
 		
 		// Build full glob pattern
-		$glob = \Core\Modulate::filePath($T->P->path, $options['glob']);
+		$Page = $Site->getCurrentPage();
+		$glob = \Core\Modulate::filePath($Page->path, $options['glob']);
 		
 		// Get files.
 		$files = glob($glob);
