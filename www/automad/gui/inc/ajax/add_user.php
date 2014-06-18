@@ -34,9 +34,6 @@
  */
 
 
-namespace Core;
-
-
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
