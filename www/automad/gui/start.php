@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$C = new Cache();
-$lastEdit = $C->getSiteMTime();
+$Cache = new Cache();
+$lastEdit = $Cache->getSiteMTime();
 
 
 $this->guiTitle = $this->guiTitle . ' / ' . $this->tb['start_title'] . ' ' . ucwords($this->user());
