@@ -52,7 +52,7 @@ class Toolbox {
 	 * 	Site object.
 	 */
 	
-	public $S;
+	public $Site;
 	
 	
 	/**
@@ -66,25 +66,25 @@ class Toolbox {
 	 * 	Current Page object.
 	 */
 	
-	public $P;
+	public $Page;
 	
 	
 	/**
 	 *	The Listing object to be used for all list* methods.
 	 */
 	
-	public $L;
+	public $Listing;
 	
 	
 	/**
 	 * 	The Site object is passed as an argument. It shouldn't be created again (performance).
 	 */
 		
-	public function __construct($site) {
+	public function __construct($Site) {
 		
-		$this->S = $site;
-		$this->collection = $this->S->getCollection();
-		$this->P = $this->S->getCurrentPage();
+		$this->Site = $Site;
+		$this->collection = $this->Site->getCollection();
+		$this->Page = $this->Site->getCurrentPage();
 		
 		// Set up default Listing object
 		$this->listSetup();
@@ -126,7 +126,7 @@ class Toolbox {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->P->tags, $this->P->parentUrl);
+		return Html::generateFilterMenu($this->Page->tags, $this->Page->parentUrl);
 		
 	}
 	
@@ -154,7 +154,7 @@ class Toolbox {
 		$options = array_merge($defaults, $options);
 			
 		if ($options['file']) {
-			$glob = Modulate::filePath($this->P->path, $options['file']);
+			$glob = Modulate::filePath($this->Page->path, $options['file']);
 			return Html::addImage($glob, $options['width'], $options['height'], $options['crop'], $options['link'], $options['target']);
 		}
 
@@ -184,7 +184,7 @@ class Toolbox {
 		$options = array_merge($defaults, $options);
 			
 		if ($options['glob']) {
-			$glob = Modulate::filePath($this->P->path, $options['glob']);
+			$glob = Modulate::filePath($this->Page->path, $options['glob']);
 			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop'], $options['class']);
 		}
 		
@@ -212,7 +212,7 @@ class Toolbox {
 	 
 	public function level() {
 		
-		return $this->P->level;
+		return $this->Page->level;
 		
 	}
 
@@ -226,10 +226,10 @@ class Toolbox {
 
 	public function linkPrev($options) {
 		
-		$selection = new Selection($this->collection);
-		$selection->filterPrevAndNextToUrl($this->P->url);
+		$Selection = new Selection($this->collection);
+		$Selection->filterPrevAndNextToUrl($this->Page->url);
 		
-		$pages = $selection->getSelection();
+		$pages = $Selection->getSelection();
 		
 		if (isset($options['text'])) {
 			$text = $options['text'];
@@ -254,10 +254,10 @@ class Toolbox {
 	
 	public function linkNext($options) {
 		
-		$selection = new Selection($this->collection);
-		$selection->filterPrevAndNextToUrl($this->P->url);
+		$Selection = new Selection($this->collection);
+		$Selection->filterPrevAndNextToUrl($this->Page->url);
 		
-		$pages = $selection->getSelection();
+		$pages = $Selection->getSelection();
 		
 		if (isset($options['text'])) {
 			$text = $options['text'];
@@ -274,7 +274,7 @@ class Toolbox {
 
 
 	/**
-	 *	Set up a list of pages. In case of $this->L (the Toolbox's Listing object) is already existing, 
+	 *	Set up a list of pages. In case of $this->Listing (the Toolbox's Listing object) is already existing, 
 	 *	its existing properties will be used as default values to be merged with the specified options.
 	 *	So basically, when using that method with only a few options, the resulting Listing object is an updated version of the previous one.
 	 *	That way, for example the sorting menus can update the list by changing the default sorting paramters without modifying any other option.
@@ -302,15 +302,15 @@ class Toolbox {
 	
 		// If listing exists already, get defaults from current properties.
 		// That means basically updating by creating a new object with taken the previous setting for all non-specified paramters.
-		if (isset($this->L)) {
-			$defaults = array_intersect_key((array)$this->L, $defaults);
+		if (isset($this->Listing)) {
+			$defaults = array_intersect_key((array)$this->Listing, $defaults);
 		}
 		
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
 			
 		// Create new Listing. 
-		$this->L = new Listing($this->S, $options['type'], $options['template'], $options['sortItem'], $options['sortOrder']);
+		$this->Listing = new Listing($this->Site, $options['type'], $options['template'], $options['sortItem'], $options['sortOrder']);
 		
 	}
 
@@ -318,12 +318,12 @@ class Toolbox {
 	/**
 	 *	Return the number of pages in the Listing object.
 	 *
-	 *	@return count($this->L->pages)
+	 *	@return count($this->Listing->pages)
 	 */
 	
 	public function listCount() {
 		
-		return count($this->L->pages);
+		return count($this->Listing->pages);
 		
 	}
 
@@ -364,7 +364,7 @@ class Toolbox {
 		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
 		$options['variables'] = array_map('trim', $options['variables']);
 	
-		return Html::generateList($this->L->pages, $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
+		return Html::generateList($this->Listing->pages, $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
 		
 	}
 
@@ -377,7 +377,7 @@ class Toolbox {
 
 	public function listFilters() {
 		
-		return Html::generateFilterMenu($this->L->tags);
+		return Html::generateFilterMenu($this->Listing->tags);
 		
 	}
 	
@@ -439,7 +439,7 @@ class Toolbox {
 	public function metaTitle($options) {
 		
 		$defaults = 	array(
-					'title' => $this->S->getSiteName() . ' / ' . $this->P->data['title']
+					'title' => $this->Site->getSiteName() . ' / ' . $this->Page->data['title']
 				);
 		
 		$options = array_merge($defaults, $options);
@@ -459,18 +459,18 @@ class Toolbox {
 	public function navBelow($options) {
 		
 		$defaults = 	array(
-					'parent' => $this->P->url, 
+					'parent' => $this->Page->url, 
 					'homepage' => false,
 					'class' => false
 				);
 		
 		$options = array_merge($defaults, $options);
 				
-		$selection = new Selection($this->collection);
-		$selection->filterByParentUrl($options['parent']);
-		$selection->sortPagesByBasename();
+		$Selection = new Selection($this->collection);
+		$Selection->filterByParentUrl($options['parent']);
+		$Selection->sortPagesByBasename();
 		
-		$pages = $selection->getSelection();
+		$pages = $Selection->getSelection();
 		
 		// Add Homepage to first-level navigation if parent is the homepage and the option 'homepage' is true.
 		if ($options['parent'] == '/' && $options['homepage']) {
@@ -491,14 +491,14 @@ class Toolbox {
 	
 	public function navBreadcrumbs($options) {
 			
-		if ($this->P->level > 0) {	
+		if ($this->Page->level > 0) {	
 				
 			$options = array_merge(array('separator' => AM_HTML_STR_BREADCRUMB_SEPARATOR), $options);
 				
-			$selection = new Selection($this->collection);
-			$selection->filterBreadcrumbs($this->P->url);
+			$Selection = new Selection($this->collection);
+			$Selection->filterBreadcrumbs($this->Page->url);
 			
-			return Html::generateBreadcrumbs($selection->getSelection(), $options['separator']);
+			return Html::generateBreadcrumbs($Selection->getSelection(), $options['separator']);
 			
 		}
 		
@@ -515,7 +515,7 @@ class Toolbox {
 	public function navChildren($options) {
 	
 		// Always set 'parent' to the current page's parent URL by merging that parameter with the other specified options.
-		return $this->navBelow(array_merge($options, array('parent' => $this->P->url)));
+		return $this->navBelow(array_merge($options, array('parent' => $this->Page->url)));
 		
 	}
 	
@@ -532,9 +532,9 @@ class Toolbox {
 		$options = array_merge(array('levels' => false), $options);
 		$maxLevel = intval($options['levels']);
 		
-		$selection = new Selection($this->collection);
-		$selection->filterBreadcrumbs($this->P->url);
-		$pages = $selection->getSelection();
+		$Selection = new Selection($this->collection);
+		$Selection->filterBreadcrumbs($this->Page->url);
+		$pages = $Selection->getSelection();
 		
 		$html = '';
 		
@@ -563,7 +563,7 @@ class Toolbox {
 	public function navSiblings($options) {
 		
 		// Set parent to current parentUrl and overwrite passed options
-		return $this->navBelow(array_merge($options, array('parent' => $this->P->parentUrl)));
+		return $this->navBelow(array_merge($options, array('parent' => $this->Page->parentUrl)));
 		
 	}
 	
@@ -606,10 +606,10 @@ class Toolbox {
 		// When 'rootLevel' is defined and is valid (matches a page), the 'parent' option will be ignored.
 		if ($options['rootLevel'] !== false) {
 			
-			$selection = new Selection($this->collection);
-			$selection->filterBreadcrumbs($this->P->url);
+			$Selection = new Selection($this->collection);
+			$Selection->filterBreadcrumbs($this->Page->url);
 			
-			foreach ($selection->getSelection() as $breadcrumb) {
+			foreach ($Selection->getSelection() as $breadcrumb) {
 				
 				if ($breadcrumb->level == $options['rootLevel']) {
 					$parent = $breadcrumb->url;
@@ -653,7 +653,7 @@ class Toolbox {
 	
 	public function template() {
 		
-		return $this->P->template;
+		return $this->Page->template;
 		
 	}
 	
@@ -666,7 +666,7 @@ class Toolbox {
 	
 	public function themeURL() {
 		
-		return AM_DIR_THEMES . '/' . $this->P->theme;
+		return AM_DIR_THEMES . '/' . $this->Page->theme;
 		
 	}
 	
