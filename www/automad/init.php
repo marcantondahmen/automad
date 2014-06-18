@@ -95,7 +95,7 @@ spl_autoload_register(function($class) {
 // Split GUI form regular pages
 if (isset($guiEnabled)) {
 	
-	$GUI = new GUI();
+	$GUI = new \Automad\GUI\GUI();
 	$output = $GUI->output;
 	
 } else {
