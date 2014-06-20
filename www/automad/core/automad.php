@@ -41,18 +41,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Site class includes all methods and properties regarding the site, structure and pages.
- *	A Site object is the "main" object. It consists of many single Page objects and holds also additional data like the site's name and theme.
+ *	The Automad class includes all methods and properties regarding the site, structure and pages.
+ *	A Automad object is the "main" object. It consists of many single Page objects and holds also additional data like the site's name and theme.
  */
 
  
-class Site {
+class Automad {
 	
 
 	/**
-	 *	The Site's Listing object.
+	 *	Automad's Listing object.
 	 *	
-	 *	The object is part of the Site class to allow to access always the same instance of the Listing class for all objects using the Site object as parameter. 
+	 *	The object is part of the Automad class to allow to access always the same instance of the Listing class for all objects using the Automad object as parameter. 
 	 */
 	
 	private $Listing = false;
@@ -253,7 +253,7 @@ class Site {
 	
 	public function __construct($parseTxt = true) {
 		
-		Debug::log('Site: New instance created!');
+		Debug::log('Automad: New instance created!');
 		
 		$this->parseTxt = $parseTxt;
 		
@@ -261,7 +261,7 @@ class Site {
 			$this->siteData = Parse::siteData();
 		}
 		
-		Debug::log('Site: Scan directories for page content:');
+		Debug::log('Automad: Scan directories for page content:');
 		
 		$this->collectPages();
 		
@@ -368,7 +368,7 @@ class Site {
 	
 
 	/**
-	 *	Return the Site's instance of the Listing class and create instance when accessed for the first time.
+	 *	Return Automad's instance of the Listing class and create instance when accessed for the first time.
 	 *
 	 *	@return Listing object
 	 */
