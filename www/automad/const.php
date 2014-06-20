@@ -80,7 +80,7 @@ Config::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will al
 Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
 Config::set('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.' . AM_FILE_EXT_DATA); 
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
-Config::set('AM_FILE_SITE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_object');
+Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_ALLOWED_FILE_TYPES', 'css, jpg, zip, png, svg, js, pdf, mp3, gif');
 
