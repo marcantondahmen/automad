@@ -38,9 +38,9 @@ class Gallery {
 	 *	- class: 	Gallery
 	 *	- method:	Gallery 
 	 *	
-	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Gallery($options, $Site)
+	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Gallery($options, $Automad)
 	 *	- $options:	An array with all the options
-	 *	- $Site:	The Site object, to make all Site methods and variables available for the extension
+	 *	- $Automad:	The Automad object
 	 *	
 	 *	The example method below basically generates and returns the HTML for a simple image slideshow.
 	 *	The main method of an extension must always return the output for the template.
@@ -49,11 +49,11 @@ class Gallery {
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
 	 *	@param array $options
-	 *	@param object $Site
+	 *	@param object $Automad
 	 *	@return The generated HTML of the gallery. 
 	 */
 
-	public function Gallery($options, $Site) {
+	public function Gallery($options, $Automad) {
 			
 		$defaults = 	array(
 					'glob' => '*.jpg',
@@ -66,7 +66,7 @@ class Gallery {
 		$options = array_merge($defaults, $options);
 		
 		// Build full glob pattern
-		$Page = $Site->getCurrentPage();
+		$Page = $Automad->getCurrentPage();
 		$glob = \Automad\Core\Modulate::filePath($Page->path, $options['glob']);
 		
 		// Generate HTML		
