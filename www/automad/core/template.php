@@ -66,10 +66,10 @@ class Template {
 	
 	
 	/**
-	 * 	The Site object.
+	 * 	The Automad object.
 	 */
 	
-	private $Site;
+	private $Automad;
 	
 	
 	/**
@@ -87,13 +87,13 @@ class Template {
 	
 	
 	/**
-	 *	Define $Site and $Page, check if the page gets redirected and get the template name. 
+	 *	Define $Automad and $Page, check if the page gets redirected and get the template name. 
 	 */
 	
-	public function __construct($Site) {
+	public function __construct($Automad) {
 		
-		$this->Site = $Site;
-		$this->Page = $Site->getCurrentPage();
+		$this->Automad = $Automad;
+		$this->Page = $Automad->getCurrentPage();
 		
 		// Redirect page, if an URL is defined.
 		if (isset($this->Page->data[AM_KEY_URL])) {
@@ -123,25 +123,6 @@ class Template {
 		
 		return str_replace('<head>', '<head>' . $meta, $output);
 		
-	}
-	
-		
-	/**
-	 *	Load the unmodified template file and return its output.
-	 *
-	 *	@param string $template
-	 *	@return $output 
-	 */
-	
-	private function loadTemplate($template) {
-		
-		ob_start();
-		require_once $template;
-		$output = ob_get_contents();
-		ob_end_clean();
-		
-		return $output;
-	
 	}
 	
 		
@@ -208,11 +189,10 @@ class Template {
 		
 		Debug::log('Template: Render template: ' . $this->template);
 		
-		$output = $this->loadTemplate($this->template);
-		
-		$output = Parse::templateNestedIncludes($output, dirname($this->template));
-		$output = Parse::templateMethods($output, $this->Site);
-		$output = Parse::templateVariables($output, $this->Site);
+		$output = Parse::templateBuffer($this->template, $this->Automad);
+		$output = Parse::templateNestedIncludes($output, dirname($this->template), $this->Automad);
+		$output = Parse::templateMethods($output, $this->Automad);
+		$output = Parse::templateVariables($output, $this->Automad);
 		
 		$output = $this->addMetaTags($output);
 		$output = $this->modulateUrls($output);	
