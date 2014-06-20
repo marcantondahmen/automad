@@ -49,19 +49,19 @@ class Extender {
 
 	
 	/**
-	 *	The Site object.
+	 *	The Automad object.
 	 */
 	
-	private $Site;
+	private $Automad;
 
 	
 	/**
-	 *	The constructor just makes the Site object available.
+	 *	The constructor just makes the Automad object available.
 	 */
 
-	public function __construct($Site) {
+	public function __construct($Automad) {
 		
-		$this->Site = $Site;
+		$this->Automad = $Automad;
 		
 	}
 
@@ -177,10 +177,10 @@ class Extender {
 		
 				if (method_exists($object, $name)) {
 					
-					// Call method dynamically and pass $options & Site.
+					// Call method dynamically and pass $options & Automad.
 					Debug::log('Extender: Calling method "' . $name . '" and passing the following options:');
 					Debug::log($options);
-					return $object->$name($options, $this->Site);
+					return $object->$name($options, $this->Automad);
 		
 				} else {
 					
