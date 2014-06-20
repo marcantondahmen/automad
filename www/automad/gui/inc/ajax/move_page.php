@@ -49,7 +49,7 @@ $output = array();
 
 
 // Validation of $_POST.
-// To avoid all kinds of unexpected trouble, the URL and the destination must exist in the Site's collection and a title must be present.
+// To avoid all kinds of unexpected trouble, the URL and the destination must exist in the Automad's collection and a title must be present.
 if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination']) && array_key_exists($_POST['url'], $this->collection) && array_key_exists($_POST['destination'], $this->collection) && $_POST['title']) {
 	
 	// The home page can't be moved!	
@@ -71,9 +71,9 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 				$Cache = new Cache();
 				$Cache->clear();
 	
-				// Rebuild Site object, since the file structure has changed.
-				$Site = new Site(false);
-				$collection = $Site->getCollection();
+				// Rebuild Automad object, since the file structure has changed.
+				$Automad = new Automad(false);
+				$collection = $Automad->getCollection();
 
 				// Find new URL and return redirect query string.
 				foreach ($collection as $key => $page) {
