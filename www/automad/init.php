@@ -112,21 +112,21 @@ if (isset($guiEnabled)) {
 	} else {
 	
 		// Else check if the site object cache is ok...
-		if ($Cache->siteObjectCacheIsApproved()) {
+		if ($Cache->automadObjectCacheIsApproved()) {
 		
 			// If approved, load site from cache...
-			$Site = $Cache->readSiteObjectFromCache();
+			$Automad = $Cache->readAutomadObjectFromCache();
 		
 		} else {
 	
-			// Else create new Site.
-			$Site = new Site();
-			$Cache->writeSiteObjectToCache($Site);
+			// Else create new Automad.
+			$Automad = new Automad();
+			$Cache->writeAutomadObjectToCache($Automad);
 	
 		}
 	
 		// Render template
-		$Template = new Template($Site);
+		$Template = new Template($Automad);
 		$output = $Template->render();
 	
 		// Save output to cache...
