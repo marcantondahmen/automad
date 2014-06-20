@@ -302,23 +302,47 @@ class Parse {
 
 
 	/**
+	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
+	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.
+	 *
+	 *	Note that even when the it is possible to use plain PHP in a atemplate file, all that code will be parsed first when buffering, before any of the Automad markup is getting parsed.
+	 *	That means also, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
+	 *
+	 *	@param string $file
+	 *	@param object $Automad
+	 *	@return the parsed content 
+	 */
+
+	public static function templateBuffer($file, $Automad) {
+		
+		ob_start();
+		require $file;
+		$output = ob_get_contents();
+		ob_end_clean();
+		
+		return $output;
+		
+	}
+
+
+	/**
 	 *	Call Toolbox methods and Extension dynamically with optional parameters. Additionally add all CSS/JS files of the matched extensions to the header.
 	 *	For example t(Tool{JSON-options}) or x(Extension{JSON-options}).
 	 *	The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}.
 	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
 	 *	
 	 *	@param string $str (the string to be parsed)
-	 *	@param object $Site
+	 *	@param object $Automad
 	 *	@return The parsed $str
 	 */
 
-	public static function templateMethods($str, $Site) {
+	public static function templateMethods($str, $Automad) {
 				
-		$Toolbox = new Toolbox($Site);
-		$Extender = new Extender($Site);
+		$Toolbox = new Toolbox($Automad);
+		$Extender = new Extender($Automad);
 
 		$use = 	array(
-				'site' => $Site,
+				'automad' => $Automad,
 				'toolbox' => $Toolbox,  
 				'extender' => $Extender
 			);	
@@ -335,7 +359,7 @@ class Parse {
 					
 					if (isset($matches[3])) {
 						// Parse the options JSON and also find and replace included variables within the JSON string.
-						$options = self::jsonOptions(self::templateVariables($matches[3], $use['site'], true));
+						$options = self::jsonOptions(self::templateVariables($matches[3], $use['automad'], true));
 					} else {
 						$options = array();
 					}
@@ -369,26 +393,26 @@ class Parse {
 
 
 	/**
-	 *	Scan a string for "i(filename.php)" to include template elements recursively.
+	 *	Scan a string for "i(filename.php)" to include template elements recursively. The Automad object gets passed as well to be able to access the site's data also form template elements included by i().
 	 *
 	 *	@param string $str (the string which has to be scanned)
 	 *	@param string $directory (the base directory for including the files)
+	 *	@param object $Automad
 	 *	@return The recursively scanned output including the content of all matched includes.
 	 */
 	
-	public static function templateNestedIncludes($str, $directory) {
+	public static function templateNestedIncludes($str, $directory, $Automad) {
 		
-		return 	preg_replace_callback(AM_REGEX_INC, function($matches) use ($directory) {
+		$use = array('directory' => $directory, 'automad' => $Automad);
+		
+		return 	preg_replace_callback(AM_REGEX_INC, function($matches) use ($use) {
 					
-				$file = $directory . '/' . $matches[1];
+				$file = $use['directory'] . '/' . $matches[1];
 				if (file_exists($file)) {
 						
-					Debug::log('Parse: Include: ' . $file);
-					ob_start();
-					include $file;
-					$content = ob_get_contents();
-					ob_end_clean();
-					return self::templateNestedIncludes($content, dirname($file));
+					Debug::log('Parse: Include: ' . $file);				
+					$content = self::templateBuffer($file, $use['automad']);
+					return self::templateNestedIncludes($content, dirname($file), $use['automad']);
 						
 				}
 					
@@ -402,27 +426,27 @@ class Parse {
 	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
 	 *
 	 *	@param string $str
-	 *	@param object $Site
+	 *	@param object $Automad
 	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values and the values get wrapped in double quotes, to avoid parsing errors, when a value is empty "")
 	 *	@return The parsed $str
 	 */
 	
-	public static function templateVariables($str, $Site, $jsonSafe = false) {
+	public static function templateVariables($str, $Automad, $jsonSafe = false) {
 		
 		// Site variables
-		$use = array('site' => $Site, 'jsonSafe' => $jsonSafe);
+		$use = array('automad' => $Automad, 'jsonSafe' => $jsonSafe);
 		$str = preg_replace_callback(AM_REGEX_SITE_VAR, function($matches) use ($use) {
 					
 					if ($use['jsonSafe']) {
-						return '"' . self::jsonEscape($use['site']->getSiteData($matches[1])) . '"';
+						return '"' . self::jsonEscape($use['automad']->getSiteData($matches[1])) . '"';
 					} else {
-						return $use['site']->getSiteData($matches[1]);
+						return $use['automad']->getSiteData($matches[1]);
 					}
 								
 				}, $str);
 		
 		// Page variables
-		$Page = $Site->getCurrentPage();
+		$Page = $Automad->getCurrentPage();
 		$use = array('data' => $Page->data, 'jsonSafe' => $jsonSafe);
 		$str = preg_replace_callback(AM_REGEX_PAGE_VAR, function($matches) use ($use) {
 						
