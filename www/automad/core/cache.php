@@ -41,8 +41,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Cache class holds all methods for evaluating, reading and writing the HTML output and the Site object from/to AM_DIR_CACHE.
- *	Basically there are three things which get cached - the latest modification time of all the site's files and directories (site's mTime), the page's HTML and the Site object.
+ *	The Cache class holds all methods for evaluating, reading and writing the HTML output and the Automad object from/to AM_DIR_CACHE.
+ *	Basically there are three things which get cached - the latest modification time of all the site's files and directories (site's mTime), the page's HTML and the Automad object.
  *
  *	The workflow:
  *	
@@ -61,17 +61,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	(That gives a bit more control for debugging)
  *
  *	3.
- *	When calling now Cache::pageCacheIsApproved() from outside, true will be returned if the cached file exists and is newer than the site's mTime (and of course caching is active).
- *	If the cache is validated, Cache::readPageFromCache() can return the full HTML to be echoed.
+ *	When calling now pageCacheIsApproved() from outside, true will be returned if the cached file exists and is newer than the site's mTime (and of course caching is active).
+ *	If the cache is validated, readPageFromCache() can return the full HTML to be echoed.
  *	
  *	4. 
- *	In case the page's cached HTML is deprecated, Cache::siteObjectCacheIsApproved() can be called to verify the status of the Site object cache (a file holding the serialized Site object ($Site)).
- *	If the Site object cache is approved, Cache::readSiteObjectFromCache() returns the unserialized Site object to be used to create an updated page from a template (outside of Cache).
- *	That step is very helpful, since the current page's cache might be outdated, but other pages might be already up to date again and therefore the Site object cache might be updated also in the mean time.
- *	So when something got changed across the Site, the Site object only has to be created once to be reused to update all pages. 
+ *	In case the page's cached HTML is deprecated, automadObjectCacheIsApproved() can be called to verify the status of the Automad object cache (a file holding the serialized Automad object ($Automad)).
+ *	If the Automad object cache is approved, readAutomadObjectFromCache() returns the unserialized Automad object to be used to create an updated page from a template (outside of Cache).
+ *	That step is very helpful, since the current page's cache might be outdated, but other pages might be already up to date again and therefore the Automad object cache might be updated also in the mean time.
+ *	So when something got changed across the Automad, the Automad object only has to be created once to be reused to update all pages. 
  *
  *	5.
- *	In case the page and the Site object are deprecated, after creating both, they can be saved to cache using Cache::writePageToCache() and Cache::writeSiteObjectToCache().
+ *	In case the page and the Automad object are deprecated, after creating both, they can be saved to cache using writePageToCache() and writeAutomadObjectToCache().
  */
 
 
@@ -178,12 +178,12 @@ class Cache {
 
 
 	/**
-	 *	Verify if the cached version of the Site object is existingand  still up to date.
+	 *	Verify if the cached version of the Automad object is existingand  still up to date.
 	 *
 	 *	@return boolean 
 	 */
 
-	public function siteObjectCacheIsApproved() {
+	public function automadObjectCacheIsApproved() {
 		
 		if (AM_CACHE_ENABLED) {
 		
@@ -193,21 +193,21 @@ class Cache {
 			
 				if ($siteObjectMTime < $this->siteMTime) {
 				
-					Debug::log('Cache: Site object cache is deprecated!');
-					Debug::log('       Site object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
+					Debug::log('Cache: Automad object cache is deprecated!');
+					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
 					return false;
 				
 				} else {
 					
-					Debug::log('Cache: Site object cache got approved!');
-					Debug::log('       Site object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
+					Debug::log('Cache: Automad object cache got approved!');
+					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
 					return true;
 					
 				}
 			
 			} else {
 				
-				Debug::log('Cache: Site object cache does not exist!');
+				Debug::log('Cache: Automad object cache does not exist!');
 				return false;
 				
 			}
@@ -362,19 +362,19 @@ class Cache {
 	
 	
 	/**
-	 *	 Read (unserialize) the Site object from AM_FILE_SITE_OBJECT_CACHE.
+	 *	 Read (unserialize) the Automad object from AM_FILE_SITE_OBJECT_CACHE.
 	 *
-	 *	@return Site object
+	 *	@return Automad object
 	 */
 	
-	public function readSiteObjectFromCache() {
+	public function readAutomadObjectFromCache() {
 		
-		$Site = unserialize(file_get_contents(AM_FILE_SITE_OBJECT_CACHE));
+		$Automad = unserialize(file_get_contents(AM_FILE_SITE_OBJECT_CACHE));
 		
 		Debug::log('Cache: Read site object: ' . AM_FILE_SITE_OBJECT_CACHE);
-		Debug::log($Site->getCollection());
+		Debug::log($Automad->getCollection());
 		
-		return $Site;
+		return $Automad;
 		
 	}
 	
@@ -416,16 +416,16 @@ class Cache {
 	
 	
 	/**
-	 *	Write (serialize) the Site object to AM_FILE_SITE_OBJECT_CACHE.
+	 *	Write (serialize) the Automad object to AM_FILE_SITE_OBJECT_CACHE.
 	 */
 	
-	public function writeSiteObjectToCache($Site) {
+	public function writeAutomadObjectToCache($Automad) {
 		
 		if (AM_CACHE_ENABLED) {
 			
 			$old = umask(0);
 			Debug::log('Cache: Changed umask: ' . umask());
-			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($Site));
+			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($Automad));
 			umask($old);
 			Debug::log('Cache: Write site object: ' . AM_FILE_SITE_OBJECT_CACHE);
 			Debug::log('Cache: Restored umask: ' . umask());
