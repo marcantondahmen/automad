@@ -49,10 +49,10 @@ class Toolbox {
 	
 
 	/**
-	 * 	Site object.
+	 * 	Automad object.
 	 */
 	
-	private $Site;
+	private $Automad;
 	
 	
 	/**
@@ -70,14 +70,14 @@ class Toolbox {
 	
 	
 	/**
-	 * 	The Site object is passed as an argument. It shouldn't be created again (performance).
+	 * 	The Automad object is passed as an argument. It shouldn't be created again (performance).
 	 */
 		
-	public function __construct($Site) {
+	public function __construct($Automad) {
 		
-		$this->Site = $Site;
-		$this->collection = $this->Site->getCollection();
-		$this->Page = $this->Site->getCurrentPage();
+		$this->Automad = $Automad;
+		$this->collection = $this->Automad->getCollection();
+		$this->Page = $this->Automad->getCurrentPage();
 				
 	}
 	
@@ -128,7 +128,7 @@ class Toolbox {
 	 *	@return HTML for the image output
 	 */
 	
-	public function img($options) {
+	public function img($options = array()) {
 		
 		// Default options
 		$defaults = 	array(
@@ -159,7 +159,7 @@ class Toolbox {
 	 *	@return The HTML of a list of resized images with links to their bigger versions
 	 */
 	
-	public function imgSet($options) {
+	public function imgSet($options = array()) {
 		
 		// Default options
 		$defaults = 	array(
@@ -214,7 +214,7 @@ class Toolbox {
 	 *	@return the HTML for the link.
 	 */
 
-	public function linkPrev($options) {
+	public function linkPrev($options = array()) {
 		
 		$Selection = new Selection($this->collection);
 		$Selection->filterPrevAndNextToUrl($this->Page->url);
@@ -242,7 +242,7 @@ class Toolbox {
 	 *	@return the HTML for the link.
 	 */
 	
-	public function linkNext($options) {
+	public function linkNext($options = array()) {
 		
 		$Selection = new Selection($this->collection);
 		$Selection->filterPrevAndNextToUrl($this->Page->url);
@@ -264,7 +264,7 @@ class Toolbox {
 
 
 	/**
-	 *	Change of configuration for the Site's Listing object.
+	 *	Change of configuration for Automad's Listing object.
 	 *
 	 *	Possible options are:
 	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
@@ -277,7 +277,7 @@ class Toolbox {
 
 	public function listConfig($options = array()) {
 			
-		$Listing = $this->Site->getListing();
+		$Listing = $this->Automad->getListing();
 		$Listing->config($options);
 		
 	}
@@ -291,7 +291,7 @@ class Toolbox {
 	
 	public function listCount() {
 		
-		$Listing = $this->Site->getListing();
+		$Listing = $this->Automad->getListing();
 		return count($Listing->getPages());
 		
 	}
@@ -314,7 +314,7 @@ class Toolbox {
 	 *	@return The HTML for a page list.
 	 */
 
-	public function listPages($options) {
+	public function listPages($options = array()) {
 		
 		$defaults = 	array(
 					'variables' => AM_KEY_TITLE,
@@ -333,7 +333,7 @@ class Toolbox {
 		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
 		$options['variables'] = array_map('trim', $options['variables']);
 		
-		$Listing = $this->Site->getListing();
+		$Listing = $this->Automad->getListing();
 	
 		return Html::generateList($Listing->getPages(), $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
 		
@@ -341,14 +341,14 @@ class Toolbox {
 
 
 	/**
-	 *	Create a filter menu for the pages in the Site's Listing object.
+	 *	Create a filter menu for the pages in Automad's Listing object.
 	 *
 	 *	@return The HTML for the filter menu.
 	 */
 
 	public function listFilters() {
 		
-		$Listing = $this->Site->getListing();	
+		$Listing = $this->Automad->getListing();	
 		return Html::generateFilterMenu($Listing->getTags());
 		
 	}
@@ -370,7 +370,7 @@ class Toolbox {
 	 * 	@return The menu's HTML
 	 */
 	
-	public function listSort($options) {
+	public function listSort($options = array()) {
 		
 		if (is_array($options) && is_array(reset($options))) {
 				
@@ -408,10 +408,10 @@ class Toolbox {
 	 * 	@return The meta title tag
 	 */
 	
-	public function metaTitle($options) {
+	public function metaTitle($options = array()) {
 		
 		$defaults = 	array(
-					'title' => $this->Site->getSiteName() . ' / ' . $this->Page->data['title']
+					'title' => $this->Automad->getSiteName() . ' / ' . $this->Page->data['title']
 				);
 		
 		$options = array_merge($defaults, $options);
@@ -428,7 +428,7 @@ class Toolbox {
 	 *	@return html of the generated list	
 	 */
 	
-	public function navBelow($options) {
+	public function navBelow($options = array()) {
 		
 		$defaults = 	array(
 					'parent' => $this->Page->url, 
@@ -461,7 +461,7 @@ class Toolbox {
 	 *	@return html of breadcrumb navigation
 	 */
 	
-	public function navBreadcrumbs($options) {
+	public function navBreadcrumbs($options = array()) {
 			
 		if ($this->Page->level > 0) {	
 				
@@ -484,7 +484,7 @@ class Toolbox {
 	 *	@return html of the generated list	
 	 */
 	
-	public function navChildren($options) {
+	public function navChildren($options = array()) {
 	
 		// Always set 'parent' to the current page's parent URL by merging that parameter with the other specified options.
 		return $this->navBelow(array_merge($options, array('parent' => $this->Page->url)));
@@ -499,7 +499,7 @@ class Toolbox {
 	 *	@return the HTML for the seperate navigations
 	 */
 	
-	public function navPerLevel($options) {
+	public function navPerLevel($options = array()) {
 		
 		$options = array_merge(array('levels' => false), $options);
 		$maxLevel = intval($options['levels']);
@@ -532,7 +532,7 @@ class Toolbox {
 	 *	@return html of the generated list	
 	 */
 	
-	public function navSiblings($options) {
+	public function navSiblings($options = array()) {
 		
 		// Set parent to current parentUrl and overwrite passed options
 		return $this->navBelow(array_merge($options, array('parent' => $this->Page->parentUrl)));
@@ -547,7 +547,7 @@ class Toolbox {
 	 *	@return html of the generated list	
 	 */
 	
-	public function navTop($options) {
+	public function navTop($options = array()) {
 		
 		// Set parent to '/' and overwrite passed options
 		return $this->navBelow(array_merge($options, array('parent' => '/')));
@@ -562,7 +562,7 @@ class Toolbox {
 	 *	@return the HTML of the tree
 	 */
 	
-	public function navTree($options) {
+	public function navTree($options = array()) {
 				
 		$defaults = 	array( 
 					'all' => true,
@@ -608,7 +608,7 @@ class Toolbox {
 	 *	@return the HTML of the searchfield
 	 */
 	
-	public function search($options) {
+	public function search($options = array()) {
 		
 		$options = array_merge(array('placeholder' => 'Search ...'), $options);
 		
