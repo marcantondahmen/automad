@@ -109,9 +109,9 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			$Cache = new Cache();
 			$Cache->clear();
 
-			// Rebuild Site object, since the file structure has changed.
-			$Site = new Site(false);
-			$collection = $Site->getCollection();
+			// Rebuild Automad object, since the file structure has changed.
+			$Automad = new Automad(false);
+			$collection = $Automad->getCollection();
 
 			// Find new URL and return redirect query string.
 			foreach ($collection as $key => $page) {
