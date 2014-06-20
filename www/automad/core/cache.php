@@ -187,9 +187,9 @@ class Cache {
 		
 		if (AM_CACHE_ENABLED) {
 		
-			if (file_exists(AM_FILE_SITE_OBJECT_CACHE)) {
+			if (file_exists(AM_FILE_OBJECT_CACHE)) {
 		
-				$siteObjectMTime = filemtime(AM_FILE_SITE_OBJECT_CACHE);
+				$siteObjectMTime = filemtime(AM_FILE_OBJECT_CACHE);
 			
 				if ($siteObjectMTime < $this->siteMTime) {
 				
@@ -362,16 +362,16 @@ class Cache {
 	
 	
 	/**
-	 *	 Read (unserialize) the Automad object from AM_FILE_SITE_OBJECT_CACHE.
+	 *	 Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE.
 	 *
 	 *	@return Automad object
 	 */
 	
 	public function readAutomadObjectFromCache() {
 		
-		$Automad = unserialize(file_get_contents(AM_FILE_SITE_OBJECT_CACHE));
+		$Automad = unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
 		
-		Debug::log('Cache: Read site object: ' . AM_FILE_SITE_OBJECT_CACHE);
+		Debug::log('Cache: Read site object: ' . AM_FILE_OBJECT_CACHE);
 		Debug::log($Automad->getCollection());
 		
 		return $Automad;
@@ -416,7 +416,7 @@ class Cache {
 	
 	
 	/**
-	 *	Write (serialize) the Automad object to AM_FILE_SITE_OBJECT_CACHE.
+	 *	Write (serialize) the Automad object to AM_FILE_OBJECT_CACHE.
 	 */
 	
 	public function writeAutomadObjectToCache($Automad) {
@@ -425,9 +425,9 @@ class Cache {
 			
 			$old = umask(0);
 			Debug::log('Cache: Changed umask: ' . umask());
-			file_put_contents(AM_FILE_SITE_OBJECT_CACHE, serialize($Automad));
+			file_put_contents(AM_FILE_OBJECT_CACHE, serialize($Automad));
 			umask($old);
-			Debug::log('Cache: Write site object: ' . AM_FILE_SITE_OBJECT_CACHE);
+			Debug::log('Cache: Write site object: ' . AM_FILE_OBJECT_CACHE);
 			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
