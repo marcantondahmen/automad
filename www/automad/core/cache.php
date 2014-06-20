@@ -189,18 +189,18 @@ class Cache {
 		
 			if (file_exists(AM_FILE_OBJECT_CACHE)) {
 		
-				$siteObjectMTime = filemtime(AM_FILE_OBJECT_CACHE);
+				$automadObjectMTime = filemtime(AM_FILE_OBJECT_CACHE);
 			
-				if ($siteObjectMTime < $this->siteMTime) {
+				if ($automadObjectMTime < $this->siteMTime) {
 				
 					Debug::log('Cache: Automad object cache is deprecated!');
-					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
+					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
 					return false;
 				
 				} else {
 					
 					Debug::log('Cache: Automad object cache got approved!');
-					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $siteObjectMTime));
+					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
 					return true;
 					
 				}
@@ -215,7 +215,7 @@ class Cache {
 			
 		} else {
 			
-			Debug::log('Cache: Caching is disabled! Not checking site object!');
+			Debug::log('Cache: Caching is disabled! Not checking automad object!');
 			return false;
 			
 		}
@@ -371,7 +371,7 @@ class Cache {
 		
 		$Automad = unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
 		
-		Debug::log('Cache: Read site object: ' . AM_FILE_OBJECT_CACHE);
+		Debug::log('Cache: Read Automad object: ' . AM_FILE_OBJECT_CACHE);
 		Debug::log($Automad->getCollection());
 		
 		return $Automad;
@@ -427,12 +427,12 @@ class Cache {
 			Debug::log('Cache: Changed umask: ' . umask());
 			file_put_contents(AM_FILE_OBJECT_CACHE, serialize($Automad));
 			umask($old);
-			Debug::log('Cache: Write site object: ' . AM_FILE_OBJECT_CACHE);
+			Debug::log('Cache: Write Automad object: ' . AM_FILE_OBJECT_CACHE);
 			Debug::log('Cache: Restored umask: ' . umask());
 		
 		} else {
 			
-			Debug::log('Cache: Caching is disabled! Not writing site object to cache!');
+			Debug::log('Cache: Caching is disabled! Not writing Automad object to cache!');
 			
 		}	
 		
