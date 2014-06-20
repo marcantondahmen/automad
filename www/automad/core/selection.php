@@ -43,8 +43,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * 	The Selection class holds all methods to filter and sort the collection of pages and return them as a new selection.
  *
- *	Every instance can return a filtered and sorted array of pages without hurting the original Site object.
- *	That means the Site class object has to be created only once. 
+ *	Every instance can return a filtered and sorted array of pages without hurting the original Automad object.
+ *	That means the Automad class object has to be created only once. 
  *	To get multiple different (sorted and filtered) collections, this class can be used by just passing the collection array.
  *
  *	All the filter function directly modify $this->selection. After all modifications to that selection, 
@@ -59,7 +59,7 @@ class Selection {
 	 * 	Initially holds the whole collection.
 	 *	
 	 *	$selection is basically the internal working copy of the collection array.
-	 *	It can be sorted and filtered without hurting the Site::siteCollection.
+	 *	It can be sorted and filtered without hurting the Automad::siteCollection.
 	 */
 	
 	private $selection = array();
@@ -68,7 +68,7 @@ class Selection {
 	/**
 	 * 	Pass a set of pages to $this->selection excluding all hidden pages.
 	 *	
-	 *	@param array $pages (normally Site::getCollection() or any other selection array)
+	 *	@param array $pages (normally Automad::getCollection() or any other selection array)
 	 */
 	
 	public function __construct($pages) {
@@ -84,9 +84,9 @@ class Selection {
 	
 	private function excludeHidden() {
 		
-		foreach ($this->selection as $url => $page) {
+		foreach ($this->selection as $url => $Page) {
 			
-			if ($page->hidden) {
+			if ($Page->hidden) {
 				unset($this->selection[$url]);
 			}
 			
@@ -177,9 +177,9 @@ class Selection {
 		
 		$filtered = array();
 		
-		foreach ($this->selection as $key => $page) {
-			if ($page->parentUrl == $parent) {
-				$filtered[$key] = $page;
+		foreach ($this->selection as $key => $Page) {
+			if ($Page->parentUrl == $parent) {
+				$filtered[$key] = $Page;
 			}
 		}
 		
@@ -200,10 +200,10 @@ class Selection {
 		
 			$filtered = array();
 		
-			foreach ($this->selection as $key => $page) {
+			foreach ($this->selection as $key => $Page) {
 			
-				if (in_array($tag, $page->tags)) {
-					$filtered[$key] = $page;
+				if (in_array($tag, $Page->tags)) {
+					$filtered[$key] = $Page;
 				}
 			
 			}
@@ -227,9 +227,9 @@ class Selection {
 		
 			$filtered = array();
 		
-			foreach ($this->selection as $key => $page) {
-				if ($page->template == $template) {
-					$filtered[$key] = $page;
+			foreach ($this->selection as $key => $Page) {
+				if ($Page->template == $template) {
+					$filtered[$key] = $Page;
 				}
 			}
 		
@@ -263,15 +263,15 @@ class Selection {
 			$pattern .= '/is';
 		
 			// loop elements in $this->selection
-			foreach ($this->selection as $key => $page) {
+			foreach ($this->selection as $key => $Page) {
 			
 				// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
-				// even if the keywords are distributed over different variables in $page[data]. 
-				$dataAsString = strip_tags(implode(' ', $page->data));
+				// even if the keywords are distributed over different variables in $Page[data]. 
+				$dataAsString = strip_tags(implode(' ', $Page->data));
 								
 				// search
 				if (preg_match($pattern, $dataAsString) == 1) {
-					$filtered[$key] = $page;
+					$filtered[$key] = $Page;
 				}
 			
 			}
@@ -342,15 +342,15 @@ class Selection {
 	
 	
 	/**
-	 *	Filter all pages having one or more tag in common with $page. If there are not tags defined for the passed page,
+	 *	Filter all pages having one or more tag in common with $Page. If there are not tags defined for the passed page,
 	 *	the selection will be an empty array. (no tags = no related pages)
 	 *
-	 *	@param object $page
+	 *	@param object $Page
 	 */
 	
-	public function filterRelated($page) {
+	public function filterRelated($Page) {
 		
-		$tags = $page->tags;
+		$tags = $Page->tags;
 		
 		$filtered = array();
 		
@@ -371,7 +371,7 @@ class Selection {
 		}
 		
 		$this->selection = $filtered;
-		$this->excludePage($page->url);
+		$this->excludePage($Page->url);
 		
 	}
 	
@@ -386,9 +386,9 @@ class Selection {
 		
 		$arrayToSortBy = array();
 		
-		foreach ($this->selection as $key => $page) {
+		foreach ($this->selection as $key => $Page) {
 			
-			$arrayToSortBy[$key] = basename($page->path);
+			$arrayToSortBy[$key] = basename($Page->path);
 			
 		}
 				
@@ -414,14 +414,14 @@ class Selection {
 			// If $var is set, the selections is sorted by data[$var]
 			$arrayToSortBy = array();
 		
-			foreach ($this->selection as $key => $page) {
+			foreach ($this->selection as $key => $Page) {
 			
-				if (isset($page->data[$var])) {
-					$arrayToSortBy[$key] = strtolower(strip_tags($page->data[$var]));
+				if (isset($Page->data[$var])) {
+					$arrayToSortBy[$key] = strtolower(strip_tags($Page->data[$var]));
 				} else {
 					// If data[$var] doesn't exists, the page's path's basename will be used.
 					// That way it is possible to order by basename with simply passing a non-existing var (for example "orig" or something else).
-					$arrayToSortBy[$key] = basename($page->path);
+					$arrayToSortBy[$key] = basename($Page->path);
 				}
 			
 			}
