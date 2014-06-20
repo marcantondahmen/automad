@@ -42,8 +42,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  
 /**
  *	The Page class holds all properties and methods of a single page.
- *	A Page object describes an entry in the collection of all pages in the Site class.
- *	Basically the Site object consists of many Page objects.
+ *	A Page object describes an entry in the collection of all pages in the Automad class.
+ *	Basically the Automad object consists of many Page objects.
  */
 
 
