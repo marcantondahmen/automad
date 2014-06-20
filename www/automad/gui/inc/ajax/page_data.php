@@ -166,9 +166,9 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					$Cache->clear();
 	
 
-					// Rebuild Site object, since the file structure might be different now.
-					$Site = new Site(false);
-					$collection = $Site->getCollection();
+					// Rebuild Automad object, since the file structure might be different now.
+					$Automad = new Automad(false);
+					$collection = $Automad->getCollection();
 
 	
 					// Find new URL.
