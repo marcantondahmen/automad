@@ -65,7 +65,9 @@ $this->element('header');
 							<?php echo $this->tb['start_last_edit']; ?> <span class="badge"><?php echo date('j. F Y, G:i', $lastEdit); ?>h</span>
 						</div>
 						<div class="list-group-item">	
-							<span class="automad-status" data-automad-status="cache"></span><br />
+							<span class="automad-status" data-automad-status="cache"></span>
+						</div>
+						<div class="list-group-item">	
 							<span class="automad-status" data-automad-status="debug"></span>
 						</div>
 						<div class="list-group-item">
