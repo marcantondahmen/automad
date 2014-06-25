@@ -317,14 +317,6 @@ sys_cache_clear: Clear Cache
 
 -
 
-sys_cache_enabled: Page Caching is Enabled
-
--
-
-sys_cache_disabled: Page Caching is Disabled
-
--
-
 sys_cache_lifetime: Lifetime
 
 -
@@ -338,14 +330,6 @@ Debugging is only needed for development or troubleshooting and should be disabl
 
 -
 
-sys_debug_enabled: Debug Mode is Enabled
-
--
-
-sys_debug_disabled: Debug Mode is Disabled
-
--
-
 sys_file_types: Allowed File Types
 
 -
@@ -356,6 +340,14 @@ sys_file_types_edit: Edit Whitelist For File Types
 
 sys_file_types_help: Add preferred extensions, separated by commas.  
 Leaving the field empty will reset the list to the default values!
+
+-
+
+sys_status_enabled: Enabled
+
+-
+
+sys_status_disabled: Disabled
 
 -
 
@@ -399,6 +391,6 @@ sys_user_add_repeat: Repeat Password
 
 -
 
-sys_user_registered: Registered User(s)
+sys_user_registered: Registered Users
 
 
