@@ -52,9 +52,9 @@ if (isset($_POST['item'])) {
 	if ($item == 'cache') {
 		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = '<span class="text-success"><span class="glyphicon glyphicon-ok"></span> ' . $this->tb['sys_cache_enabled'] . '</span>';
+			$output['status'] = $this->tb['sys_cache'] . ' <span class="badge on"><span class="glyphicon glyphicon-ok"></span> ' . $this->tb['sys_status_enabled'] . '</span>';
 		} else {
-			$output['status'] = '<span class="text-muted"><span class="glyphicon glyphicon-ban-circle"></span> ' . $this->tb['sys_cache_disabled'] . '</span>';
+			$output['status'] = $this->tb['sys_cache'] . ' <span class="badge off"><span class="glyphicon glyphicon-ban-circle"></span> ' . $this->tb['sys_status_disabled'] . '</span>';
 		}
 		
 	}
@@ -62,9 +62,9 @@ if (isset($_POST['item'])) {
 	if ($item == 'debug') {
 		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = '<span class="text-success"><span class="glyphicon glyphicon-ok"></span> ' . $this->tb['sys_debug_enabled'] . '</span>';
+			$output['status'] = $this->tb['sys_debug'] . ' <span class="badge on"><span class="glyphicon glyphicon-ok"></span> ' . $this->tb['sys_status_enabled'] . '</span>';
 		} else {
-			$output['status'] = '<span class="text-muted"><span class="glyphicon glyphicon-ban-circle"></span> ' . $this->tb['sys_debug_disabled'] . '</span>';
+			$output['status'] = $this->tb['sys_debug'] . ' <span class="badge off"><span class="glyphicon glyphicon-ban-circle"></span> ' . $this->tb['sys_status_disabled'] . '</span>';
 		}
 		
 	}
@@ -72,7 +72,7 @@ if (isset($_POST['item'])) {
 	if ($item == 'users') {
 		
 		$accounts = $this->accountsGetArray();		
-		$output['status'] = '<span class="badge">' . count($accounts) . '</span> ' . $this->tb['sys_user_registered'];
+		$output['status'] = $this->tb['sys_user_registered'] . ' <span class="badge on">' . count($accounts) . '</span>';
 
 	}
 	
