@@ -70,7 +70,7 @@ $this->element('header');
 							<h4><span class="glyphicon glyphicon-hdd"></span> <?php echo $this->tb['sys_cache']; ?></h4>
 						</div>
 						<div class="list-group-item">
-							<a href="#" class="automad-status btn btn-default" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a>
+							<a href="#" class="automad-status btn btn-lg btn-default" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a>
 						</div>
 						<div class="list-group-item">	
 							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#cache-clear-modal"><span class="glyphicon glyphicon-refresh"></span> <?php echo $this->tb['sys_cache_clear']; ?></a>
@@ -90,7 +90,7 @@ $this->element('header');
 							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#add-user-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['sys_user_add']; ?></a>
 						</div>
 						<div class="list-group-item">
-							<a href="#" class="automad-status btn btn-default" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a>
+							<a href="#" class="automad-status btn btn-lg btn-default" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a>
 						</div>
 					</div>
 				</div>
@@ -112,7 +112,7 @@ $this->element('header');
 						<div class="list-group-item">
 							<?php echo $this->tb['sys_debug_help']; ?>
 							<br />
-							<a href="#" class="automad-status btn btn-default" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a>
+							<a href="#" class="automad-status btn btn-lg btn-default" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a>
 						</div>
 					</div>
 				</div>
