@@ -258,7 +258,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 				<div class="list-group-item">
 					
 					<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default btn-lg">
-						<?php echo $this->tb['page_theme_template']; ?> <span class="badge"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)); ?></span> 
+						<?php echo $this->tb['page_theme_template']; ?> <span class="badge on"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)); ?></span> 
 					</button>
 					
 					<!-- Select Template Modal -->	
