@@ -57,7 +57,7 @@ if (array_key_exists(Parse::queryKey('url'), $this->collection)) {
 	if (isset($data[AM_KEY_URL])) {
 		$url = $data[AM_KEY_URL];
 	} else {
-		$url = AM_BASE_URL . $Page->url;
+		$url = $Page->url;
 	}
 
 	$this->guiTitle = $this->guiTitle . ' / ' . $data[AM_KEY_TITLE];
@@ -79,7 +79,7 @@ $this->element('header');
 			<div class="list-group">
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="<?php echo $url; ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
+						<li><a href="<?php echo Modulate::url($Page->path, $url); ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
 					</ul>	
 				</div>
 				<div class="list-group-item">
@@ -106,17 +106,24 @@ $this->element('header');
 		</div>
 		
 		<div class="column content">
-			<!-- Tab panes -->
-			<div class="inner tab-content">
-				<div id="data" class="tab-pane fade in active">
-					<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $Page->url; ?>" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo $this->tb['btn_loading']; ?></form>
+			<div class="inner">
+				<div class="url">
+					<a class="text-muted" href="<?php echo Modulate::url($Page->path, $url); ?>" target="_blank">
+						<span class="glyphicon glyphicon-link"></span> <?php echo $url; ?>
+					</a>
 				</div>
-				<div id="files" class="tab-pane fade">
-					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
-					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
-					<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
-					<form class="automad-form automad-init" data-automad-handler="files" data-automad-url="<?php echo $Page->url; ?>" role="form"></form>
-				</div>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div id="data" class="tab-pane fade in active">
+						<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $Page->url; ?>" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo $this->tb['btn_loading']; ?></form>
+					</div>
+					<div id="files" class="tab-pane fade">
+						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
+						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
+						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
+						<form class="automad-form automad-init" data-automad-handler="files" data-automad-url="<?php echo $Page->url; ?>" role="form"></form>
+					</div>
+				</div>	
 			</div>
 		</div>
 		
@@ -130,7 +137,7 @@ $this->element('header');
 					</div>
 					<form class="automad-form" data-automad-handler="add_page" data-automad-url="<?php echo $Page->url; ?>" role="form">
 						<div class="modal-body">
-							<div class="alert alert-info"><span class="glyphicon glyphicon-arrow-right"></span> <b><?php echo $Page->url; ?>/</b></div>
+							<div class="alert alert-info"><span class="glyphicon glyphicon-arrow-right"></span> <b><?php echo rtrim($Page->url, '/'); ?>/</b></div>
 							<div class="form-group">
 								<label for="add-subpage-title" class="text-muted">Title</label>
 								<input id="add-subpage-title" class="form-control" type="text" name="subpage[<?php echo AM_KEY_TITLE; ?>]" value="" onkeypress="return event.keyCode != 13;" required />
