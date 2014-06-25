@@ -63,19 +63,20 @@
 
 
 // Colors
-@color-default:		#556270;
-@color-success:		#64c3b2;
+@color-default:		#5f5f5f;
+@color-primary:		#66D9EF;
+@color-success:		#65E6C5;
 @color-warning:		#ff6b6b;
 @color-danger:		#ff6b6b;
 @color-muted:		lighten(@color-default, 35%);
 
-@color-nav:		lighten(@color-default, 18%);
+@color-nav:		lighten(@color-default, 14%);
 @color-subnav:		lighten(@color-nav, 2%);
 @color-content:		@color-default;
 
-@bg-color-nav:		darken(@color-default, 15%);
+@bg-color-nav:		darken(@color-default, 18%);
 @bg-color-nav-hover:	darken(@color-default, 12%);
-@bg-color-subnav:	darken(@color-default, 10%);
+@bg-color-subnav:	darken(@color-default, 12%);
 @bg-color-subnav-hover:	darken(@color-default, 7%);
 @bg-color-content:	lighten(@color-default, 59%);
 @bg-color-form:		#ffffff;
@@ -151,7 +152,7 @@
 	
 	color: @color;
 	background-color: #ffffff;
-	border-color: lighten(@color, 15%);
+	border-color: lighten(@color, 18%);
 	
 	& .close {
 		color: @color;
@@ -184,6 +185,12 @@ a {
 	&:focus {
 		color: darken(@color-content, @hover-darken);
 		text-decoration: none;
+	}
+	
+	&,
+	&:focus,
+	&:active {
+		outline: none !important;
 	}
 
 }
@@ -233,6 +240,7 @@ a {
 			
 			&:focus,
 			&:hover {
+				color: @bg-color-content;
 				background-color: @bg-color-nav-hover;
 			}
 			
@@ -243,7 +251,7 @@ a {
 			&, 
 			&:hover,
 			&:focus {
-				color: @color-subnav;
+				color: @bg-color-content;
 				background-color: @bg-color-subnav;
 				.box-shadow(1px; 1px; 5px; 0; @shadow-color-nav);
 			}
@@ -273,6 +281,7 @@ a {
 			
 			&:focus,
 			&:hover {
+				color: @bg-color-content;
 				background-color: @bg-color-subnav-hover;
 			}
 			
@@ -318,6 +327,14 @@ a {
 			}
 		}
 		
+		& .url {
+			padding-bottom: 24px;
+			margin-bottom: 24px;
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+			border-bottom-color: @border-color-content;
+		}
+		
 	}
 		
 }
@@ -352,14 +369,14 @@ a {
 		&:before {
 			content: 'A';
 			font-family: 'automad-logo';
-			font-size: 30px;
+			font-size: 38px;
 			margin-left: -2px;
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 		}
 	
-		&:hover:before {
-			content: 'a';
+		&:hover {
+			color: @color-nav;
 		}
 		
 	}
@@ -475,7 +492,7 @@ ol {
 					border-bottom-style: solid;
 	
 					.column.nav & {
-						border-color: fade(@color-nav, 70%);
+						border-color: fade(@color-nav, 50%);
 					}
 					
 					.modal & {
@@ -486,13 +503,12 @@ ol {
 			
 				&:before {
 					top: -2px;
-					width: 20px;
+					width: 10px;
 					height: 22px;
-					.border-radius(5px; -bottom-left-);
 				}
 			
 				&:after {
-					top: 17px;
+					top: 20px;
 					bottom: 0px;
 				}
 				
@@ -574,9 +590,19 @@ ol {
 		
 	}
 	
+	& > .btn:hover {
+		z-index: 0;
+	}
+	
 }
 
 .btn {
+	
+	.border-radius(6px);
+	
+	&.btn-lg {
+		.border-radius(8px);
+	}
 	
 	&:active,
 	&.active {
@@ -584,11 +610,11 @@ ol {
 	}
 	
 	&-default {
-		.button(@color-default, @bg-color-content, lighten(@color-default, 35%));
+		.button(@color-default, @bg-color-content, lighten(@color-default, 40%));
 	}
 	
 	&-primary {
-		.button(#ffffff, lighten(@color-default, 5%), lighten(@color-default, 5%));
+		.button(#ffffff, lighten(@color-primary, 5%), lighten(@color-primary, 5%));
 	}
 	
 	&-success {
@@ -600,10 +626,16 @@ ol {
 	}
 	
 	// Checkboxes
-	label&.btn-xs.active {
-		.button(#ffffff, lighten(@color-default, 30%), lighten(@color-default, 30%));
+	label&.btn-xs {
+		
+		padding: 2px 5px;
+		
+		&.active {
+			.button(#ffffff, @color-danger, @color-danger);
+		}
+		
 	}
-	
+		
 }
 
 
@@ -749,18 +781,26 @@ h6 {
 
 .badge {
 	
+	font-weight: 400;
+	padding: 5px 10px;
+	.border-radius(20px);
+	
 	&,
 	.btn-default & {
 		font-size: 75%;
 		background-color: lighten(@color-default, 5%);
 	}
 	
-	.btn-default & {
-		font-weight: 400;
-	}
-	
 	.list-group-item > & {
 		float: none;
+	}
+	
+	&.on {
+		background-color: @color-success;
+	}
+	
+	&.off {
+		background-color: @color-muted;
 	}
 
 }
@@ -768,7 +808,7 @@ h6 {
 .alert {
 	
 	&.alert-info {
-		.alert-box(@color-default);
+		.alert-box(@color-primary);
 	}
 	
 	&.alert-success {
