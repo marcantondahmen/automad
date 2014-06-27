@@ -97,7 +97,7 @@ class Template {
 		
 		// Redirect page, if an URL is defined.
 		if (isset($this->Page->data[AM_KEY_URL])) {
-			header('Location: ' . Modulate::url($this->Page->path, $this->Page->url));
+			header('Location: ' . Modulate::url($this->Page, $this->Page->url));
 			die;
 		}
 	
@@ -139,10 +139,10 @@ class Template {
 	
 	private function modulateUrls($output) {
 		
-		$pagePath = $this->Page->path;
+		$Page = $this->Page;
 		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
-				function($match) use ($pagePath) {
-					return $match[1] . '="' . Modulate::url($pagePath, $match[2]) . '"';
+				function($match) use ($Page) {
+					return $match[1] . '="' . Modulate::url($Page, $match[2]) . '"';
 				},
 				$output);
 	
