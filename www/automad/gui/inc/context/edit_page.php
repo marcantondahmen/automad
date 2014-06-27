@@ -79,7 +79,7 @@ $this->element('header');
 			<div class="list-group">
 				<div class="list-group-item">
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="<?php echo Modulate::url($Page->path, $url); ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
+						<li><a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
 					</ul>	
 				</div>
 				<div class="list-group-item">
@@ -108,7 +108,7 @@ $this->element('header');
 		<div class="column content">
 			<div class="inner">
 				<div class="url">
-					<a class="text-muted" href="<?php echo Modulate::url($Page->path, $url); ?>" target="_blank">
+					<a class="text-muted" href="<?php echo Modulate::url($Page, $url); ?>" target="_blank">
 						<span class="glyphicon glyphicon-link"></span> <?php echo $url; ?>
 					</a>
 				</div>
