@@ -64,7 +64,6 @@
 
 // Colors
 @color-default:		#5f5f5f;
-@color-primary:		#66D9EF;
 @color-success:		#65E6C5;
 @color-warning:		#ff6b6b;
 @color-danger:		#ff6b6b;
@@ -614,7 +613,7 @@ ol {
 	}
 	
 	&-primary {
-		.button(#ffffff, lighten(@color-primary, 5%), lighten(@color-primary, 5%));
+		.button(#ffffff, lighten(@color-default, 8%), lighten(@color-default, 8%));
 	}
 	
 	&-success {
@@ -788,7 +787,7 @@ h6 {
 	&,
 	.btn-default & {
 		font-size: 75%;
-		background-color: lighten(@color-default, 5%);
+		background-color: lighten(@color-default, 8%);
 	}
 	
 	.list-group-item > & {
@@ -808,7 +807,7 @@ h6 {
 .alert {
 	
 	&.alert-info {
-		.alert-box(@color-primary);
+		.alert-box(lighten(@color-default, 8%));
 	}
 	
 	&.alert-success {
