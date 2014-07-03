@@ -75,40 +75,28 @@ $this->element('header');
 ?>
 
 		<?php if ($Page) { ?> 
-		<div class="column subnav">
-			<div class="list-group">
-				<div class="list-group-item">
-					<ul class="nav nav-pills nav-stacked">
-						<li><a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
-					</ul>	
-				</div>
-				<div class="list-group-item">
-					<ul class="nav nav-pills nav-stacked">
-						<!-- Data -->
-						<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> <?php echo $this->tb['btn_data']; ?></a></li>
-						<!-- Files -->
-						<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $this->tb['btn_files']; ?></a></li>
-					</ul>
-				</div>
-				<div class="list-group-item">
-					<ul class="nav nav-pills nav-stacked">
-						<!-- Add Subpage Button -->
-						<li><a href="#" data-toggle="modal" data-target="#automad-add-subpage-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_page']; ?></a></li>
-						<?php if ($Page->path != '/') { ?> 
-						<!-- Move Page Button -->
-						<li><a href="#" data-toggle="modal" data-target="#automad-move-page-modal"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_move_page']; ?></a></li>
-						<!-- Delete Page Button -->
-						<li><a href="#" data-toggle="modal" data-target="#automad-delete-page-modal"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_delete_page']; ?></a></li>
-						<?php } ?> 
-					</ul>	
-				</div>
-			</div>
+		<div class="column subnav">	
+			<ul class="nav nav-pills nav-stacked">
+				<li><a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
+				<!-- Data -->
+				<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['btn_data']; ?></a></li>
+				<!-- Files -->
+				<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $this->tb['btn_files']; ?></a></li>
+				<!-- Add Subpage Button -->
+				<li><a href="#" data-toggle="modal" data-target="#automad-add-subpage-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_page']; ?></a></li>
+				<?php if ($Page->path != '/') { ?> 
+				<!-- Move Page Button -->
+				<li><a href="#" data-toggle="modal" data-target="#automad-move-page-modal"><span class="glyphicon glyphicon-move"></span> <?php echo $this->tb['btn_move_page']; ?></a></li>
+				<!-- Delete Page Button -->
+				<li><a href="#" data-toggle="modal" data-target="#automad-delete-page-modal"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_delete_page']; ?></a></li>
+				<?php } ?> 
+			</ul>	
 		</div>
 		
 		<div class="column content">
 			<div class="inner">
 				<div class="url">
-					<a class="text-muted" href="<?php echo Modulate::url($Page, $url); ?>" target="_blank">
+					<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank">
 						<span class="glyphicon glyphicon-link"></span> <?php echo $url; ?>
 					</a>
 				</div>
