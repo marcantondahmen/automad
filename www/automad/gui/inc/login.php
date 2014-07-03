@@ -81,8 +81,9 @@ $this->element('header');
 				<div class="form-group">
 					<label for="password" class="text-muted">Password</label>	
 					<input id="password" class="form-control" type="password" name="password" />
-				</div>	
-				<button type="submit" class="btn btn-primary"><?php echo $this->tb['btn_login']; ?></button>
+				</div>
+				<br />	
+				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_login']; ?></button>
 			</form>
 		</div>
 	</div>	
