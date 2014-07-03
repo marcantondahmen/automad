@@ -70,7 +70,4 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	
 	<div id="script" class="wrapper" style="display: none;">
 		
-		<div class="column nav">
-			<?php $this->element('navigation'); ?> 
-		</div>
-		
+		<?php $this->element('navigation'); ?> 
