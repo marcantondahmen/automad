@@ -438,25 +438,19 @@ class GUI {
 				if ($page->url != $current || !$hideCurrent) {
 				
 					if (!$title = basename($page->path)) {
-						$title = 'Home';	
+						$title = '<span class="glyphicon glyphicon-home"></span> Home';	
 					}
+	
+					$html .= '<li';
 					
 					// Check if page is currently selected page
 					if ($page->url == $current) {
-						$html .= '<li class="active">' .
-							 '<a title="' . $title . '" href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '">' .
-							 '<span class="glyphicon glyphicon-folder-open"></span> ' . $title . 
-							 '</a>';
-					} else {
-						$html .= '<li>' .
-							 '<a title="' . $title . '" href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '">' .
-							 '<span class="glyphicon glyphicon-folder-close"></span> ' . $title . 
-							 '</a>';
+						$html .= ' class="active"';
 					}
 					
-					$html .= $this->siteTree($page->url, $collection, $parameters, $hideCurrent);
-					
-					$html .= '</li>';
+					$html .= '><a title="' . basename($page->path) . '" href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '">' . $title . '</a>' .
+						 $this->siteTree($page->url, $collection, $parameters, $hideCurrent) .
+						 '</li>';
 					
 				}
 				
