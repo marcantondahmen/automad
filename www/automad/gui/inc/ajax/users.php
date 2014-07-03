@@ -91,29 +91,35 @@ ob_start();
 	
 	<div class="modal-body clearfix">	
 		
-		<div class="row"><hr></div>
+		<br />
 		
-		<?php foreach ($accounts as $user => $hash) { ?>	
+		<div class="list-group">
+		
+			<?php foreach ($accounts as $user => $hash) { ?>	
 
-		<div class="row">	
+			<div class="list-group-item">
+
+				<div class="row">	
 	
-			<h5 class="col-xs-2"><span class="glyphicon glyphicon-user"></span></h5>
-			<div class="col-xs-8"><?php echo $user; ?></div>
-			<div class="col-xs-2">
-			<?php if ($user != $this->user()) { ?>
-				<div class="pull-right btn-group" data-toggle="buttons">
-					<label class="btn btn-default btn-xs">
-						<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-ok"></span>
-					</label>
-				</div>
-			<?php } ?>	
-			</div>
+					<h3 class="col-xs-1"><span class="glyphicon glyphicon-user"></span></h3>
+					<div class="col-xs-9"><b><?php echo $user; ?></b></div>
+					<div class="col-xs-2">
+					<?php if ($user != $this->user()) { ?>
+						<div class="pull-right btn-group" data-toggle="buttons">
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-ok"></span>
+							</label>
+						</div>
+					<?php } ?>	
+					</div>
 			
-		</div>	
+				</div>	
+			
+			</div>	
 		
-		<div class="row"><hr></div>	
-	
-		<?php } ?>	
+			<?php } ?>
+		
+		</div>		
 			
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
