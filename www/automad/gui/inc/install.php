@@ -93,7 +93,8 @@ $this->element('header');
 					<label for="password2" class="text-muted"><?php echo $this->tb['sys_user_add_repeat']; ?></label>
 					<input id="password2" class="form-control" type="password" name="password2" required />
 				</div>	
-				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> <?php echo $this->tb['btn_accounts_file']; ?></button>
+				<br />
+				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> <?php echo $this->tb['btn_accounts_file']; ?></button>
 			</form>
 		</div>
 	</div>
