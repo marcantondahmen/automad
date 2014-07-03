@@ -159,7 +159,7 @@ ob_start();
 		
 						echo 	'<div class="col-xs-3">' .
 							'<a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
-							'<img class="img-rounded img-responsive" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
+							'<img class="img-responsive" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
 							'</a>' . 
 							'</div>' .		
 							'<div class="col-xs-8">' . 
@@ -176,7 +176,7 @@ ob_start();
 				
 					} else { 
 		
-						echo 	'<div class="col-xs-3"><a class="filetype img-rounded img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
+						echo 	'<div class="col-xs-3"><a class="filetype img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
 							'<div class="col-xs-8">' . 
 							'<h5>' . basename($file) . '</h5>' .
 							'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' .
@@ -213,7 +213,7 @@ ob_start();
 	
 	} else {
 	
-		?><div class="list-group-item"><h4><?php echo $this->tb['error_no_files']; ?></h4></div><?php
+		?><div class="list-group-item"><div class="alert alert-warning"><?php echo $this->tb['error_no_files']; ?></div></div><?php
 		
 	}
 
@@ -230,7 +230,7 @@ ob_start();
 			</div>
 			<div id="automad-upload" class="modal-body"></div>	
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
 			</div>
 		</div>
 	</div>
