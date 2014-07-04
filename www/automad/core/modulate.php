@@ -97,9 +97,9 @@ class Modulate {
 
 	public static function url($Page, $url) {
 		
-		if (strpos($url, '://') !== false || strpos($url, '?') === 0) {
+		if (strpos($url, '://') !== false || strpos($url, '?') === 0 || strpos($url, '#') === 0) {
 									
-			// Absolute URL or query string only
+			// Absolute URL, query string or anchor link only
 			return $url;
 			
 		} else if (strpos($url, '/') === 0) {
