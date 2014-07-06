@@ -154,7 +154,9 @@ class Automad {
 		
 		// First check, if $path contains any data files.
 		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
-		if ($file = reset(glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA))) {
+		if ($files = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
+			
+			$file = reset($files);
 			
 			$url = $this->makeUrl($parentUrl, basename($path));
 			
@@ -229,14 +231,16 @@ class Automad {
 			
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
-			$dirs = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR);
-			
-			// Sort $dirs array again to be independent from glob's default behavior in case of any inconsistency.
-			sort($dirs);
-			
-			// Scan each directory recursively.	
-			foreach ($dirs as $dir) {
-				$this->collectPages($path . basename($dir) . '/', $level + 1, $url);
+			if ($dirs = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR)) {
+				
+				// Sort $dirs array again to be independent from glob's default behavior in case of any inconsistency.
+				sort($dirs);
+				
+				// Scan each directory recursively.	
+				foreach ($dirs as $dir) {
+					$this->collectPages($path . basename($dir) . '/', $level + 1, $url);
+				}
+				
 			}
 			
 		}
