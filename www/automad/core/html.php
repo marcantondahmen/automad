@@ -71,16 +71,11 @@ class Html {
 	
 	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = '', $target = '', $class = '') {
 		
-		if ($glob) {
+		if ($files = glob($glob)) {
 			
-			$files = glob($glob);	
 			$file = reset($files);
 			
 			Debug::log('Html: First image matching ' . basename($glob) . ' is ' . $file);
-			
-		}
-		
-		if ($file) {
 							
 			$img = new Image($file, $w, $h, $crop);
 			
@@ -285,9 +280,7 @@ class Html {
 	
 	public static function generateImageSet($glob, $width = false, $height = false, $crop = false, $class = '') {
 			
-		$files = glob($glob);
-		
-		if ($files) {
+		if ($files = glob($glob)) {
 			
 			if ($class) {
 				$class = ' class="' . $class . '"';
