@@ -299,7 +299,9 @@ class Cache {
 				$arrayFiles = array();
 	
 				foreach ($arrayDirs as $d) {
-					$arrayFiles = array_merge($arrayFiles, array_filter(glob($d . '/*'), 'is_file'));
+					if ($f = glob($d . '/*')) {
+						$arrayFiles = array_merge($arrayFiles, array_filter($f, 'is_file'));
+					}
 				}
 		
 				// Merge all files and dirs into the full collection.
