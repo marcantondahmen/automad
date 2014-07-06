@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /automad/
+Disallow: /cache/
+Disallow: /extensions/
+Disallow: /themes/
