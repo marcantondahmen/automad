@@ -93,9 +93,15 @@ class Extender {
 			
 			Debug::log('Extender: Getting CSS/JS for "' . $extension . '" in: ' . $path);
 			
-			// Get files
-			$css = array_merge($css, glob($path . '/*.css'));
-			$js = array_merge($js, glob($path . '/*.js'));	
+			// Get CSS files
+			if ($c = glob($path . '/*.css')) {
+				$css = array_merge($css, $c);
+			}
+			
+			// Get JS files
+			if ($j = glob($path . '/*.js')) {
+				$js = array_merge($js, $j);
+			}
 			
 		}
 		
