@@ -113,12 +113,15 @@ class Selection {
 	/**
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
+	 *	@param boolean $excludeHidden
 	 *	@return array $this->selection
 	 */
 	
-	public function getSelection() {
+	public function getSelection($excludeHidden = true) {
 		
-		$this->excludeHidden();
+		if ($excludeHidden) {
+			$this->excludeHidden();
+		}
 		
 		return $this->selection;
 		
