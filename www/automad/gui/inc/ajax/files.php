@@ -119,8 +119,12 @@ $imageTypes = array('jpg', 'png', 'gif');
 // Get files for each allowed file type.
 $files = array();
 
-foreach ($allowedFileTypes as $type) {	 	
-	$files = array_merge($files, glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE));
+foreach ($allowedFileTypes as $type) {
+	
+	if ($f = glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE)) {
+		$files = array_merge($files, $f);
+	}
+	
 }
 
 
