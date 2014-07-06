@@ -292,7 +292,9 @@ class GUI {
 		}
 		
 		foreach ($arrayDirs as $d) {
-			$arrayFiles = array_merge($arrayFiles, glob($d . '/*.php'));
+			if ($f = glob($d . '/*.php')) {
+				$arrayFiles = array_merge($arrayFiles, $f);
+			}
 		}
 
 		// Scan content of all the files for site variables.
