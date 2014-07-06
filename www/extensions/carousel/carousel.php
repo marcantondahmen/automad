@@ -65,10 +65,9 @@ class Carousel {
 		$glob = \Automad\Core\Modulate::filePath($Page->path, $options['glob']);
 		
 		// Get files.
-		$files = glob($glob);
-		sort($files);
-		
-		if ($files) {
+		if ($files = glob($glob)) {
+			
+			sort($files);
 		
 			// Generate unique ID, in case more than one carousel get used on one page.
 			$id = 'carousel-' . crc32(uniqid('', true));
