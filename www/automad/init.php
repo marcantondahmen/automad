@@ -131,6 +131,9 @@ if (isset($guiEnabled)) {
 	
 		// Save output to cache...
 		$Cache->writePageToCache($output);
+		
+		// Generate sitemap.xml
+		new Sitemap($Automad->getCollection());
 	
 	}
 	
