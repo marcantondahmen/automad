@@ -13,8 +13,8 @@ This is a publish-only repository and all pull requests are ignored.
 
 ---
 
-Automad is licensed under the [MIT license](http://automad.org/license).   
+Automad is released under the [MIT license](http://automad.org/license).   
 
 ---
 
-&copy; 2014 [Marc Anton Dahmen](http://marcdahmen.de)
+© 2014 [Marc Anton Dahmen](http://marcdahmen.de)
