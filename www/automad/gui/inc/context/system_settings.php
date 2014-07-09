@@ -144,7 +144,7 @@ $this->element('header');
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
 								<?php
 						
-								$delays = array(120, 600, 3600, 7200);
+								$delays = array(60, 120, 300);
 							
 								// Set default delay, if the current setting is not in $delays, to prevent submitting an empty value for cache[monitor-delay].
 								if (in_array(AM_CACHE_MONITOR_DELAY, $delays)) {
