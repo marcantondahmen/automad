@@ -1,25 +1,25 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-&i(elements/header.php)
+@i(elements/header.php)
 	
 	<div class="container">
 		
 		<div class="row">
 			<div id="title" class="col-md-6">
-				<h1>&p(title)</h1>
-				<h2>&p(subtitle)</h2>
+				<h1>@p(title)</h1>
+				<h2>@p(subtitle)</h2>
 			</div>	
 			<div class="col-md-6">
-				&p(text)
+				@p(text)
 			</div>	
 		</div>		
 				
 		<div class="row">
-			&t(listConfig { type: "children" })
+			@t(listConfig { type: "children" })
 			<div class="col-md-6">
-				&t(listFilters)
+				@t(listFilters)
 			</div>		
 			<div class="col-md-6">
-				&t(listSort {
+				@t(listSort {
 					"Title": {
 						sortItem: "title",
 						sortOrder: "asc"
@@ -33,7 +33,7 @@
 		</div>	
 		
 		<div class="row">
-			&t(listPages {
+			@t(listPages {
 				variables: "title, subtitle",
 				glob: "*.jpg",
 				width: 350,
@@ -49,4 +49,4 @@
 			
 	</div>
 
-&i(elements/footer.php)
+@i(elements/footer.php)
