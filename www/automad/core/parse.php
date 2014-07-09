@@ -484,23 +484,11 @@ class Parse {
 	 */
 	 
 	public static function textFile($file) {
-		
-		$text = file_get_contents($file);
-		
-		// Define full delimiter for splitting the data blocks.
-		// So basically every line, only containing a single AM_PARSE_BLOCK_SEPARATOR, will be used to explode $text.
-		$del = "\n" . AM_PARSE_BLOCK_SEPARATOR . "\n";
-	
-		// Normalize line endings and remove trailing whitespace from AM_PARSE_BLOCK_SEPARATOR to match $del.
-		// So, one AM_PARSE_BLOCK_SEPARATOR, followed by optional spaces and wrapped in new line charachters
-		// will be replaced with the simplified $del.
-		// "\R" is used to match all line endings (CRLF, LF, CR).
-		$text = preg_replace('/\R' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '\s*\R/s', $del, $text);
 			
-		// split $file into data blocks
-		$pairs = explode($del, $text);
+		// Split $file into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace. 
+		$pairs = preg_split('/\R' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\R(?=[\w\.\-]+:)/s', file_get_contents($file));
 		
-		// split $pairs into an array of vars
+		// Split $pairs into an array of vars.
 		$vars = array();
 		foreach ($pairs as $pair) {
 		
