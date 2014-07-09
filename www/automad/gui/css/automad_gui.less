@@ -61,16 +61,16 @@
 @color-success:		@color-primary;
 @color-warning:		#FF6B6B;
 @color-danger:		@color-warning;
-@color-muted:		#D2D2D2;
+@color-muted:		#C2C2C2;
 @color-active:		@color-primary;
 
 @bg-color-default:	#F8F8F8;
 @bg-color-form:		#FFFFFF;
 @bg-color-alert:	#ECECEC;
 
-@border-color-default:	@color-muted;
+@border-color-default:	#D2D2D2;
 @border-color-form:	lighten(@color-default, 40%);
-@border-color-item:	fade(@color-muted, 50%);
+@border-color-item:	fade(@border-color-default, 70%);
 
 
 
@@ -687,14 +687,21 @@ textarea {
 /* File Upload */
 
 .dropzone {
-	
+
+	border-style: dashed;
+	border-color: @color-primary;
+	border-width: 4px;
+	.box-shadow(none);
+	.border-radius(15px);
 	padding: 50px 0;
+	margin-bottom: 25px;
 	
-	&-text {
+	& .text-muted {
 		font-size: 28px;
 		padding: 0 0 25px 0;
+		text-align: center;
 	}
-	
+
 }
 
 
@@ -842,14 +849,6 @@ h6 {
 
 }
 
-.well {
-	background-color: @bg-color-form;
-	border-color: @color-primary;
-	border-width: 4px;
-	.box-shadow(none);
-	.border-radius(0);
-}
-
 #files {
 	
 	& h6 {
@@ -865,20 +864,15 @@ h6 {
 		font-style: italic;
 		font-size: 16px;
 		color: @color-muted;
-		border-width: 1px;
-		border-style: solid;
-		border-color: @border-color-default;
 	}
 	
 	& .filetype,
 	& .img-responsive {
 		.border-radius(12px);
-		
+		border-width: 1px;
+		border-style: solid;
+		border-color: @border-color-default;
 	}
 	
 }
-
-
-
-
 
