@@ -443,7 +443,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 		uploader =	modal.find('#automad-upload').html(''),
 		
 		// Dropzone
-		dropzone =	$('<div class="dropzone well well-lg"><div class="dropzone-text center-block text-muted" style="text-align: center;">' + dropzoneText + '</div></div>').appendTo(uploader),
+		dropzone =	$('<div class="dropzone"><div class="text-muted">' + dropzoneText + '</div></div>').appendTo(uploader),
 		input =		$('<input type="file" multiple />').appendTo(dropzone).hide(),
 		browse =	$('<button class="btn btn-default center-block">' + browseText + '</button>').click(function() {
 					// Make a button click trigger the file input for browsing.
