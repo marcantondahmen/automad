@@ -162,7 +162,7 @@ class Html {
 
 	public static function addVariable($name) {
 		
-		return AM_PLACEHOLDER_PAGE_VAR . '(' . $name . ')';
+		return AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_PAGE_VAR . '(' . $name . ')';
 	
 	}
 
