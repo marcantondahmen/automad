@@ -131,106 +131,97 @@ foreach ($allowedFileTypes as $type) {
 ob_start();
 
 
-?>
-
-<div class="list-group">
+if ($files) {
 	
-	<div class="list-group-item">
-		<a class="btn btn-default btn-lg" href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo $this->tb['btn_upload']; ?></a>
-	</div>
-	
-	<?php
+	sort($files);
 
-	if ($files) {
+	foreach ($files as $file) { 
 		
-		sort($files);
-	
-		foreach ($files as $file) { 
+		?>
+		
+		<div class="box">
 			
-			?>
-			
-			<div class="list-group-item">
+			<div class="row">
 				
-				<div class="row">
+				<?php 
+	
+				$extension = pathinfo($file, PATHINFO_EXTENSION);
+	
+				if (in_array(strtolower($extension), $imageTypes)) { 
+	
+					$img = new Image($file, 125, 125, true);
+	
+					echo 	'<div class="col-xs-3">' .
+						'<a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
+						'<img class="img-responsive" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
+						'</a>' . 
+						'</div>' .		
+						'<div class="col-xs-8">' . 
+						'<h4>' . basename($file) . '</h4>';
 					
-					<?php 
-		
-					$extension = pathinfo($file, PATHINFO_EXTENSION);
-		
-					if (in_array(strtolower($extension), $imageTypes)) { 
-		
-						$img = new Image($file, 125, 125, true);
-		
-						echo 	'<div class="col-xs-3">' .
-							'<a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
-							'<img class="img-responsive" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
-							'</a>' . 
-							'</div>' .		
-							'<div class="col-xs-8">' . 
-							'<h5>' . basename($file) . '</h5>';
+					if (strtolower($extension) == 'jpg' && $img->description) {
+						echo '<h6 title="Exif description"><span class="glyphicon glyphicon-comment"></span> ' . $img->description . '</h6>';	
+					}
 						
-						if (strtolower($extension) == 'jpg' && $img->description) {
-							echo '<h6 title="Exif description"><span class="glyphicon glyphicon-comment"></span> ' . $img->description . '</h6>';	
-						}
-							
-						echo	'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' . 
-							'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
-							'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
-							'</div>';
-				
-					} else { 
-		
-						echo 	'<div class="col-xs-3"><a class="filetype img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
-							'<div class="col-xs-8">' . 
-							'<h5>' . basename($file) . '</h5>' .
-							'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' .
-							'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
-							'</div>';
-		 
-					} 
+					echo	'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' . 
+						'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
+						'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
+						'</div>';
+			
+				} else { 
 	
-					?> 
-					
-					<div class="col-xs-1">
-						<div class="pull-right btn-group" data-toggle="buttons">
-							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>"><span class="glyphicon glyphicon-ok"></span>
-							</label>
-						</div>
-					</div>
-		
-				</div>
-				
-			</div>
-					
-			<?php 
+					echo 	'<div class="col-xs-3"><a class="filetype img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
+						'<div class="col-xs-8">' . 
+						'<h4>' . basename($file) . '</h4>' .
+						'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' .
+						'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
+						'</div>';
+	 
+				} 
 
-		}
-		
-		?> 
-		
-		<div class="list-group-item">		
-			<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>	
+				?> 
+				
+				<div class="col-xs-1">
+					<div class="pull-right btn-group" data-toggle="buttons">
+						<label class="btn btn-default btn-xs">
+							<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>"><span class="glyphicon glyphicon-ok"></span>
+						</label>
+					</div>
+				</div>
+	
+			</div>
+			
 		</div>
-		
-		<?php
-	
-	} else {
-	
-		?><div class="list-group-item"><div class="alert alert-warning"><?php echo $this->tb['error_no_files']; ?></div></div><?php
-		
+				
+		<?php 
+
 	}
 
-	?> 
+} else {
+
+	?><div class="alert alert-warning"><?php echo $this->tb['error_no_files']; ?></div><?php
 	
+}
+
+?> 
+
+<hr>
+
+<div class="btn-group btn-group-justified">
+	<div class="btn-group">
+		<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>
+	</div>
+	<div class="btn-group">
+		<a class="btn btn-primary" href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo $this->tb['btn_upload']; ?></a>
+	</div>
 </div>
 
 <!-- Upload Modal -->
 <div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>" data-automad-dropzone-text="<?php echo $this->tb['dropzone']; ?>" data-automad-browse-text="<?php echo $this->tb['btn_browse']; ?>">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog">
 		<div class="modal-content"> 
 			<div class="modal-header"> 
-				<h4 class="modal-title" id="myModalLabel"><?php echo $this->tb['btn_upload']; ?></h4> 
+				<h3 class="modal-title"><?php echo $this->tb['btn_upload']; ?></h3> 
 			</div>
 			<div id="automad-upload" class="modal-body"></div>	
 			<div class="modal-footer">
