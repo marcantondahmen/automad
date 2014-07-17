@@ -49,72 +49,47 @@ $this->element('header');
 ?>
 		
 		<div class="column subnav">
-			<div class="list-group">
-				<div class="list-group-item">
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="#cache" data-toggle="tab"><span class="glyphicon glyphicon-hdd"></span> <?php echo $this->tb['sys_cache']; ?></a></li>
-						<li><a href="#users" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> <?php echo $this->tb['sys_user']; ?></a></li>
-						<li><a href="#file_types" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['sys_file_types']; ?></a></li>
-						<li><a href="#debug" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> <?php echo $this->tb['sys_debug']; ?></a></li>
-					</ul>
-				</div>
-			</div>			
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#cache" data-toggle="tab"><span class="glyphicon glyphicon-hdd"></span> <?php echo $this->tb['sys_cache']; ?></a></li>
+				<li><a href="#users" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> <?php echo $this->tb['sys_user']; ?></a></li>
+				<li><a href="#file_types" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['sys_file_types']; ?></a></li>
+				<li><a href="#debug" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> <?php echo $this->tb['sys_debug']; ?></a></li>
+			</ul>		
 		</div>
 		
 		<div class="column content">
 			<!-- Tab panes -->
 			<div class="inner tab-content">
-				<div id="cache" class="tab-pane fade in active">
-					<div class="list-group">
-						<div class="list-group-item">
-							<h4><span class="glyphicon glyphicon-hdd"></span> <?php echo $this->tb['sys_cache']; ?></h4>
-						</div>
-						<div class="list-group-item">
-							<a href="#" class="automad-status btn btn-lg btn-default" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a>
-						</div>
-						<div class="list-group-item">	
-							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#cache-clear-modal"><span class="glyphicon glyphicon-refresh"></span> <?php echo $this->tb['sys_cache_clear']; ?></a>
-							
-						</div>
-					</div>
+				<div id="cache" class="tab-pane fade in active">	
+					<div class="alert alert-info">
+						<h3><?php echo $this->tb['sys_cache']; ?></h3>
+						<?php echo $this->tb['sys_cache_info']; ?> 
+					</div>	
+					<a href="#" class="automad-status btn btn-default" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a>	
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#cache-clear-modal"><span class="glyphicon glyphicon-refresh"></span> <?php echo $this->tb['sys_cache_clear']; ?></a>
 				</div>	
-				<div id="users" class="tab-pane fade">
-					<div class="list-group">
-						<div class="list-group-item">
-							<h4><span class="glyphicon glyphicon-user"></span> <?php echo $this->tb['sys_user']; ?></h4>
-						</div>
-						<div class="list-group-item">
-							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#change-password-modal"><span class="glyphicon glyphicon-lock"></span> <?php echo $this->tb['sys_user_change_password']; ?></a>
-						</div>
-						<div class="list-group-item">
-							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#add-user-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['sys_user_add']; ?></a>
-						</div>
-						<div class="list-group-item">
-							<a href="#" class="automad-status btn btn-default" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a>
-						</div>
-					</div>
+				<div id="users" class="tab-pane fade">	
+					<div class="alert alert-info">
+						<h3><?php echo $this->tb['sys_user']; ?></h3>
+						<?php echo $this->tb['sys_user_info']; ?> 
+					</div>		
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#change-password-modal"><span class="glyphicon glyphicon-lock"></span> <?php echo $this->tb['sys_user_change_password']; ?></a>		
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#add-user-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['sys_user_add']; ?></a>
+					<a href="#" class="automad-status btn btn-default" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a>
 				</div>
 				<div id="file_types" class="tab-pane fade">
-					<div class="list-group">
-						<div class="list-group-item">
-							<h4><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['sys_file_types']; ?></h4>
-						</div>
-						<div class="list-group-item">
-							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#file-types-modal"><span class="glyphicon glyphicon-pencil"></span> <?php echo $this->tb['sys_file_types_edit']; ?></a>
-						</div>
-					</div>
+					<div class="alert alert-info">	
+						<h3><?php echo $this->tb['sys_file_types']; ?></h3>
+						<?php echo $this->tb['sys_file_types_info']; ?> 
+					</div>		
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#file-types-modal"><span class="glyphicon glyphicon-pencil"></span> <?php echo $this->tb['sys_file_types_edit']; ?></a>
 				</div>
 				<div id="debug" class="tab-pane fade">
-					<div class="list-group">
-						<div class="list-group-item">
-							<h4><span class="glyphicon glyphicon-info-sign"></span> <?php echo $this->tb['sys_debug']; ?></h4>
-						</div>
-						<div class="list-group-item">
-							<?php echo $this->tb['sys_debug_help']; ?>
-							<br />
-							<a href="#" class="automad-status btn btn-lg btn-default" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a>
-						</div>
+					<div class="alert alert-info">
+						<h3><?php echo $this->tb['sys_debug']; ?></h3>
+						<?php echo $this->tb['sys_debug_info']; ?>
 					</div>
+					<a href="#" class="automad-status btn btn-default" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a>
 				</div>
 			</div>				
 		</div>
@@ -127,7 +102,7 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['sys_cache']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['sys_cache']; ?></h3>
 					</div>
 					<form class="automad-form" data-automad-handler="update_config">
 						<div class="modal-body">
@@ -140,7 +115,7 @@ $this->element('header');
 								</label>
 							</div>
 							<br />
-							<p class="text-muted"><?php echo $this->tb['sys_cache_lifetime']; ?></p>
+							<label><?php echo $this->tb['sys_cache_lifetime']; ?></label>
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
 								<?php
 						
@@ -188,7 +163,7 @@ $this->element('header');
 				<div class="modal-content">
 					<form class="automad-form" data-automad-handler="clear_cache">
 						<div class="modal-body">
-							<button type="submit" class="btn btn-default btn-block btn-lg" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-repeat"></span> <?php echo $this->tb['sys_cache_clear']; ?></button>
+							<button type="submit" class="btn btn-primary btn-block" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-repeat"></span> <?php echo $this->tb['sys_cache_clear']; ?></button>
 						</div>
 					</form>
 					<div class="modal-footer">
@@ -204,7 +179,7 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['sys_file_types']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['sys_file_types']; ?></h3>
 					</div>
 					<form class="automad-form" data-automad-handler="update_config">
 						<div class="modal-body">
@@ -226,7 +201,7 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['sys_debug']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['sys_debug']; ?></h3>
 					</div>
 					<form class="automad-form" data-automad-handler="update_config">
 						<div class="modal-body">
@@ -253,27 +228,31 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['sys_user_change_password']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['sys_user_change_password']; ?></h3>
 					</div>
 					<form class="automad-form automad-reset" data-automad-handler="change_password">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="change-current-password" class="text-muted"><?php echo $this->tb['sys_user_change_password_current']; ?></label>
+								<label for="change-current-password"><?php echo $this->tb['sys_user_change_password_current']; ?></label>
 								<input id="change-current-password" class="form-control" type="password" name="current-password" required />
 							</div>
 							<div class="form-group">
-								<label for="change-new-password1" class="text-muted"><?php echo $this->tb['sys_user_change_password_new']; ?></label>
+								<label for="change-new-password1"><?php echo $this->tb['sys_user_change_password_new']; ?></label>
 								<input id="change-new-password1" class="form-control" type="password" name="new-password1" required />
 							</div>
 							<div class="form-group">
-								<label for="change-new-password2" class="text-muted"><?php echo $this->tb['sys_user_change_password_repeat']; ?></label>
+								<label for="change-new-password2"><?php echo $this->tb['sys_user_change_password_repeat']; ?></label>
 								<input id="change-new-password2" class="form-control" type="password" name="new-password2" required />
 							</div>
 						</div>
 						<div class="modal-footer">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-								<button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+								</div>
+								<div class="btn-group">
+									<button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -287,27 +266,31 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['sys_user_add']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['sys_user_add']; ?></h3>
 					</div>
 					<form class="automad-form automad-reset" data-automad-handler="add_user">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="add-username" class="text-muted"><?php echo $this->tb['sys_user_add_name']; ?></label>
+								<label for="add-username"><?php echo $this->tb['sys_user_add_name']; ?></label>
 								<input id="add-username" class="form-control" type="text" name="username" required />
 							</div>
 							<div class="form-group">
-								<label for="add-password1" class="text-muted"><?php echo $this->tb['sys_user_add_password']; ?></label>
+								<label for="add-password1"><?php echo $this->tb['sys_user_add_password']; ?></label>
 								<input id="add-password1" class="form-control" type="password" name="password1" required />
 							</div>
 							<div class="form-group">
-								<label for="add-password2" class="text-muted"><?php echo $this->tb['sys_user_add_repeat']; ?></label>
+								<label for="add-password2"><?php echo $this->tb['sys_user_add_repeat']; ?></label>
 								<input id="add-password2" class="form-control" type="password" name="password2" required />
 							</div>
 						</div>
 						<div class="modal-footer">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-								<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add']; ?></button>
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+								</div>
+								<div class="btn-group">
+									<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add']; ?></button>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -321,11 +304,9 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['sys_user_registered']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['sys_user_registered']; ?></h3>
 					</div>
-					<form id="users" class="automad-form automad-init" data-automad-handler="users">
-						<div class="modal-body"></div>
-					</form>
+					<form id="users" class="automad-form automad-init" data-automad-handler="users"></form>
 				</div>
 			</div>
 		</div>
