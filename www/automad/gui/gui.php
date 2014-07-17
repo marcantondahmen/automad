@@ -433,7 +433,7 @@ class GUI {
 		
 		if ($pages = $selection->getSelection()) {
 			
-			$html = '<ul class="nav nav-pills nav-stacked">';
+			$html = '<ul class="nav nav-pills nav-stacked pages">';
 			
 			foreach ($pages as $page) {
 				
@@ -443,14 +443,14 @@ class GUI {
 						$title = '<span class="glyphicon glyphicon-home"></span> Home';	
 					}
 	
-					$html .= '<li';
-					
 					// Check if page is currently selected page
 					if ($page->url == $current) {
-						$html .= ' class="active"';
+						$html .= '<li class="active"><div class="connector"></div>';
+					} else {
+						$html .= '<li>';
 					}
 					
-					$html .= '><a title="' . basename($page->path) . '" href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '">' . $title . '</a>' .
+					$html .= '<a title="' . basename($page->path) . '" href="?' . http_build_query(array_merge($parameters, array('url' => $page->url)), '', '&amp;') . '">' . $title . '</a>' .
 						 $this->siteTree($page->url, $collection, $parameters, $hideCurrent) .
 						 '</li>';
 					
@@ -504,7 +504,7 @@ class GUI {
 					});
 		
 		// Create HTML
-		$html = '<div class="form-group"><label for="' . $id . '" class="text-muted">' . $this->tb['page_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '">'; 
+		$html = '<div class="form-group"><label for="' . $id . '">' . $this->tb['page_theme_template'] . '</label><select id="' . $id . '" class="form-control" name="' . $name . '">'; 
 		
 		// List templates of current sitewide theme
 		foreach($siteThemeTemplates as $template) {
@@ -566,7 +566,7 @@ class GUI {
 	
 	private function varTextArea($key, $value, $removeButton = false) {
 		
-		$html =  '<div class="form-group"><label for="input-data-' . $key . '" class="text-muted">' . ucwords(str_replace('_', ' ', $key)) . '</label>';
+		$html =  '<div class="form-group"><label for="input-data-' . $key . '">' . ucwords(str_replace('_', ' ', $key)) . '</label>';
 		
 		if ($removeButton) {
 			$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
