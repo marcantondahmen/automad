@@ -89,43 +89,34 @@ ob_start();
 
 ?>
 	
-	<div class="modal-body clearfix">	
-		
-		<br />
-		
-		<div class="list-group">
-		
-			<?php foreach ($accounts as $user => $hash) { ?>	
-
-			<div class="list-group-item">
-
-				<div class="row">	
-	
-					<h3 class="col-xs-1"><span class="glyphicon glyphicon-user"></span></h3>
-					<div class="col-xs-9"><b><?php echo $user; ?></b></div>
-					<div class="col-xs-2">
-					<?php if ($user != $this->user()) { ?>
-						<div class="pull-right btn-group" data-toggle="buttons">
-							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-ok"></span>
-							</label>
-						</div>
-					<?php } ?>	
+	<div class="modal-body">	
+		<?php foreach ($accounts as $user => $hash) { ?>	
+		<div class="box">
+			<div class="row">	
+				<div class="col-xs-10"><h4><span class="glyphicon glyphicon-user"></span> <?php echo $user; ?></h4></div>
+				<div class="col-xs-2">
+				<?php if ($user != $this->user()) { ?>
+					<div class="pull-right btn-group" data-toggle="buttons">
+						<label class="btn btn-default btn-xs">
+							<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-ok"></span>
+						</label>
 					</div>
-			
-				</div>	
-			
+				<?php } ?>	
+				</div>
 			</div>	
-		
-			<?php } ?>
-		
-		</div>		
-			
-		<div class="btn-group pull-right">
-			<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-			<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>
+		</div>	
+		<?php } ?> 
+	</div>
+
+	<div class="modal-footer">			
+		<div class="btn-group btn-group-justified">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+			</div>
+			<div class="btn-group">
+				<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>
+			</div>
 		</div>
-		
 	</div>
 
 <?php
