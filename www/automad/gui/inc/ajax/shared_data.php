@@ -116,97 +116,94 @@ if (isset($_POST['data'])) {
 	
 	?>
 	
-		<div class="list-group">
-	
-			<div class="list-group-item">
-			
-				<div class="form-group">
-					<label for="input-data-sitename" class="text-muted"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
-					<input id="input-data-sitename" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo $data[AM_KEY_SITENAME]; ?>" onkeypress="return event.keyCode != 13;" />
-				</div>
-
-				<div class="form-group">
-					<label for="input-data-theme" class="text-muted">Theme</label>
-					<select id="input-data-theme" class="form-control" name="data[<?php echo AM_KEY_THEME; ?>]">
-						<?php
-					
-						foreach ($themes as $theme) {
-						
-							echo '<option'; 
-						
-							if (basename($theme) == $data[AM_KEY_THEME]) {
-								echo ' selected';
-							}
-						
-							echo ' value="' . basename($theme) . '">' . ucwords(str_replace('_', ' ', basename($theme))) . '</option>';
-						
-						}
-				
-						?> 	
-					</select>
-				</div>
-
-			</div>
+		<div class="form-group">
+			<label for="input-data-sitename"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
+			<input id="input-data-sitename" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo $data[AM_KEY_SITENAME]; ?>" onkeypress="return event.keyCode != 13;" />
+		</div>
 		
-			<div class="list-group-item">
-				<h4 class="text-muted"><?php echo $this->tb['shared_vars_used']; ?></h4>
+		<div class="form-group">
+			<label for="input-data-theme">Theme</label>
+			<select id="input-data-theme" class="form-control" name="data[<?php echo AM_KEY_THEME; ?>]">
 				<?php
-				// Add textareas for all variables in $data, which are used in the currently installed themes and are not part of the $standardKeys array 
-				// and create empty textareas for those keys found in the themes, but are not defined in $data.
-				foreach ($themesKeys as $key) {
-					if (isset($data[$key])) {
-						echo $this->varTextArea($key, $data[$key]);
-					} else {
-						echo $this->varTextArea($key, '');
+			
+				foreach ($themes as $theme) {
+				
+					echo '<option'; 
+				
+					if (basename($theme) == $data[AM_KEY_THEME]) {
+						echo ' selected';
 					}
+				
+					echo ' value="' . basename($theme) . '">' . ucwords(str_replace('_', ' ', basename($theme))) . '</option>';
+				
 				}
-				?>
-			</div>
 		
-			<div class="list-group-item">
-				<h4 class="text-muted"><?php echo $this->tb['shared_vars_unused']; ?></h4>
-				<div id="automad-custom-variables">
-					<?php
-					// All unused site-wide variables.
-					foreach (array_diff(array_keys($data), $standardKeys, $themesKeys) as $key) {
-						echo $this->varTextArea($key, $data[$key], true);
-					}				
-					?> 
-				</div>
-				<br />
-				<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
-			</div>
+				?> 	
+			</select>
+		</div>
 
-			<div class="list-group-item clearfix">	
-				<div class="btn-group">
-					<a class="btn btn-default" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a>
-					<button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
-				</div>
-			</div>
-		
-		
-		</div>	
+		<hr>
 
+		<h3><?php echo $this->tb['shared_vars_used']; ?></h3>
+		<?php
+		// Add textareas for all variables in $data, which are used in the currently installed themes and are not part of the $standardKeys array 
+		// and create empty textareas for those keys found in the themes, but are not defined in $data.
+		foreach ($themesKeys as $key) {
+			if (isset($data[$key])) {
+				echo $this->varTextArea($key, $data[$key]);
+			} else {
+				echo $this->varTextArea($key, '');
+			}
+		}
+		?>
+	
+		<hr>
+
+		<h3><?php echo $this->tb['shared_vars_unused']; ?></h3>
+		<div id="automad-custom-variables">
+			<?php
+			// All unused site-wide variables.
+			foreach (array_diff(array_keys($data), $standardKeys, $themesKeys) as $key) {
+				echo $this->varTextArea($key, $data[$key], true);
+			}				
+			?> 
+		</div>
+		<br />
+		<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
+		
+		<hr>
+	
+		<div class="btn-group btn-group-justified">
+			<div class="btn-group"><a class="btn btn-danger" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></div>
+			<div class="btn-group"><button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button></div>
+		</div>
+	
 		<!-- Add Variable Modal -->	
 		<div id="automad-add-variable-modal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h3>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="automad-add-variable-name" class="text-muted"><?php echo $this->tb['shared_var_name']; ?></label>
+							<label for="automad-add-variable-name"><?php echo $this->tb['shared_var_name']; ?></label>
 							<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
 						</div>	
 					</div>
 					<div class="modal-footer">
-						<div class="btn-group">
-							<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-							<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
-								<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add']; ?> 
-							</button>
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?>
+								</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
+									<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add']; ?> 
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
