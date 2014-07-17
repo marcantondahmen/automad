@@ -49,7 +49,7 @@ $(document).on('click', '#automad-add-variable-button', function() {
 	
 		if (name) {
 			
-			var	newFormGroup = 	$('<div class="form-group"><label for="' + idPrefix + name + '" class="text-muted">' 
+			var	newFormGroup = 	$('<div class="form-group"><label for="' + idPrefix + name + '">' 
 						+ name.charAt(0).toUpperCase() + name.slice(1) 
 						+ '</label><button type="button" class="close automad-remove-parent">&times;</button>' 
 						+ '<textarea id="' + idPrefix + name + '" class="form-control" name="data[' + name + ']" rows="10"></textarea></div>')
@@ -445,11 +445,11 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 		// Dropzone
 		dropzone =	$('<div class="dropzone"><div class="text-muted">' + dropzoneText + '</div></div>').appendTo(uploader),
 		input =		$('<input type="file" multiple />').appendTo(dropzone).hide(),
-		browse =	$('<button class="btn btn-default center-block">' + browseText + '</button>').click(function() {
+		browse =	$('<button class="btn btn-primary"><span class="glyphicon glyphicon-folder-open"></span> ' + browseText + '</button>').click(function() {
 					// Make a button click trigger the file input for browsing.
 					input.click();
 					return false;
-				}).appendTo(dropzone),
+				}).insertAfter(dropzone),
 		
 		// The modal's close buttons
 		close =		modal.find('[data-dismiss="modal"]'); 	
@@ -503,7 +503,7 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 				text = text + '<h5><span class="badge">' + fileSize(data.files[i].size) + '</span> ' + data.files[i].name + '</h5>';
 			});
 	
-			data.context = $('<div class="file"></div>').appendTo(uploader);
+			data.context = $('<div class="box"></div>').appendTo(uploader);
 	
 			$(text).appendTo(data.context);	
 			$('<div class="progress progress-striped active"><div class="progress-bar"></div></div>').appendTo(data.context);
