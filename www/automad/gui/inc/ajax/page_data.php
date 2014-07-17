@@ -253,110 +253,104 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		
 		?>
 			
-			<div class="list-group">
+			<div class="form-group">
+				<label for="input-data-title"><?php echo ucwords(AM_KEY_TITLE); ?></label>
+				<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
+			</div>
+			<div class="form-group">
+				<label for="input-data-tags"><?php echo $this->tb['page_tags']; ?></label>
+				<input id="input-data-tags" class="form-control" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
+			</div>
 			
-				<div class="list-group-item">
-					
-					<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default btn-lg">
-						<?php echo $this->tb['page_theme_template']; ?> <span class="badge on"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)); ?></span> 
-					</button>
-					
-					<!-- Select Template Modal -->	
-					<div id="select-template-modal" class="modal fade">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-body">
-									<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $Page->template); ?>
+			<hr>
+			
+			<h3><?php echo $this->tb['page_settings']; ?></h3>
+			<div class="form-group">	
+				<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default">
+					<?php echo $this->tb['page_theme_template']; ?> <span class="badge"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)); ?></span> 
+				</button>
+			</div>
+			<!-- Select Template Modal -->	
+			<div id="select-template-modal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body">
+							<?php echo $this->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $Page->template); ?>
+						</div>
+						<div class="modal-footer">
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
 								</div>
-								<div class="modal-footer">
-									<div class="btn-group">
-										<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-										<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_apply_reload']; ?></button>
-									</div>
+								<div class="btn-group">
+									<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_apply_reload']; ?></button>
 								</div>
 							</div>
 						</div>
 					</div>
-					
 				</div>
+			</div>
+			<?php if ($Page->path != '/') { ?> 	
+			<div class="row">	
+				<div class="form-group col-xs-6">
+					<label for="input-prefix"><?php echo $this->tb['page_prefix']; ?></label>
+					<input id="input-prefix" class="form-control" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($Page->path); ?>" onkeypress="return event.keyCode != 13;" />
+				</div>
+				<div class="form-group col-xs-6">
+					<label><?php echo $this->tb['page_visibility']; ?></label>
+					<div class="btn-group btn-group-justified" data-toggle="buttons">
+						<label class="btn btn-default<?php if ($hidden) { echo ' active'; } ?>"><?php echo $this->tb['btn_hide_page']; ?> 
+							<input type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-redirect"><?php echo $this->tb['page_redirect']; ?></label>
+				<input id="input-redirect" class="form-control" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" onkeypress="return event.keyCode != 13;" />
+			</div>
+			<?php } ?> 
+		
+			<hr>
 			
-				<div class="list-group-item">
-					<div class="form-group">
-						<label for="input-data-title" class="text-muted"><span class="glyphicon glyphicon-exclamation-sign"></span> <?php echo ucwords(AM_KEY_TITLE); ?></label>
-						<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
-					</div>
-					<div class="form-group">
-						<label for="input-data-tags" class="text-muted"><span class="glyphicon glyphicon-tags"></span> <?php echo $this->tb['page_tags']; ?></label>
-						<input id="input-data-tags" class="form-control" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
-					</div>
-				</div>	
+			<h3><?php echo $this->tb['page_vars_used']; ?></h3>
+			<?php
 			
-				<?php if ($Page->path != '/') { ?> 
-				<div class="list-group-item">
-					<h4 class="text-muted"><?php echo $this->tb['page_settings']; ?></h4>
-					<div class="row">	
-						<div class="form-group col-xs-6">
-							<label for="input-prefix" class="text-muted"><span class="glyphicon glyphicon-sort-by-attributes"></span> <?php echo $this->tb['page_prefix']; ?></label>
-							<input id="input-prefix" class="form-control" type="text" name="prefix" value="<?php echo $this->extractPrefixFromPath($Page->path); ?>" onkeypress="return event.keyCode != 13;" />
-						</div>
-						<div class="form-group col-xs-6">
-							<label class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> <?php echo $this->tb['page_visibility']; ?></label>
-							<div class="btn-group btn-group-justified" data-toggle="buttons">
-								<label class="btn btn-default<?php if ($hidden) { echo ' active'; } ?>"><?php echo $this->tb['btn_hide_page']; ?> 
-									<input type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="input-redirect" class="text-muted"><span class="glyphicon glyphicon-link"></span> <?php echo $this->tb['page_redirect']; ?></label>
-						<input id="input-redirect" class="form-control" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" onkeypress="return event.keyCode != 13;" />
-					</div>
-				</div>
-				<?php } ?> 
-				
-				<div class="list-group-item">
-					<h4 class="text-muted"><?php echo $this->tb['page_vars_used']; ?></h4>
-					<?php
-					
-					// Add textareas for all variables in $data, which are used in the currently selected template and are not part of the $standardKeys array 
-					// and create empty textareas for those keys found in the template, but are not defined in $data.
-					foreach ($templateKeys as $key) {
-						if (isset($data[$key])) {
-							echo $this->varTextArea($key, $data[$key]);
-						} else {
-							echo $this->varTextArea($key, '');
-						}	
-					}
-					
-					?>
-				</div>
-				
-				<div class="list-group-item">
-					<h4 class="text-muted"><?php echo $this->tb['page_vars_unused']; ?></h4>
-					<div id="automad-custom-variables">	
-						<?php
-					
-						// Add textareas for all left over variables $data, which don't show up in the template.
-						// The left over vars get also a remove button, since they are optional.
-						// Even when these vars are not used in the current template, they might be used in another template and should therefore still be present.
-						foreach (array_diff(array_keys($data), $templateKeys, $standardKeys) as $key) {
-							echo $this->varTextArea($key, $data[$key], true);
-						}
-					
-						?> 
-					</div>
-					<br />
-					<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
-				</div>
-
-				<div class="list-group-item">	
-					<div class="btn-group">
-						<a class="btn btn-default" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a>
-						<button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button>
-					</div>
-				</div>
-
+			// Add textareas for all variables in $data, which are used in the currently selected template and are not part of the $standardKeys array 
+			// and create empty textareas for those keys found in the template, but are not defined in $data.
+			foreach ($templateKeys as $key) {
+				if (isset($data[$key])) {
+					echo $this->varTextArea($key, $data[$key]);
+				} else {
+					echo $this->varTextArea($key, '');
+				}	
+			}
+			
+			?>
+		
+			<hr>
+		
+			<h3><?php echo $this->tb['page_vars_unused']; ?></h3>
+			<div id="automad-custom-variables">	
+				<?php
+			
+				// Add textareas for all left over variables $data, which don't show up in the template.
+				// The left over vars get also a remove button, since they are optional.
+				// Even when these vars are not used in the current template, they might be used in another template and should therefore still be present.
+				foreach (array_diff(array_keys($data), $templateKeys, $standardKeys) as $key) {
+					echo $this->varTextArea($key, $data[$key], true);
+				}
+			
+				?> 
+			</div>
+			<br />
+			<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
+		
+			<hr>
+			
+			<div class="btn-group btn-group-justified">
+				<div class="btn-group"><a class="btn btn-danger" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></div>
+				<div class="btn-group"><button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button></div>
 			</div>
 			
 			<!-- Add Variable Modal -->	
@@ -365,20 +359,26 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h4>
+							<h3 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h3>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="automad-add-variable-name" class="text-muted"><?php echo $this->tb['page_var_name']; ?></label>
+								<label for="automad-add-variable-name"><?php echo $this->tb['page_var_name']; ?></label>
 								<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
 							</div>	
 						</div>
 						<div class="modal-footer">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-								<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
-									<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?>
-								</button>
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?>
+									</button>
+								</div>
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
+										<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
