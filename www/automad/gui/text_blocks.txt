@@ -26,7 +26,7 @@ btn_close: Close
 
 -
 
-btn_data: Data / Settings
+btn_data: Data &amp; Settings
 
 -
 
@@ -244,7 +244,7 @@ page_visibility: Visibility
 
 
 
-shared_title: Site Settings / Shared Files
+shared_title: Site Settings &amp; Shared Files
 
 -
 
@@ -313,6 +313,11 @@ sys_cache: Cache
 
 -
 
+sys_cache_info: Caching is essential to speed up your site and should generally be enabled. 
+However under some circumstances you might want to disable or clear your cache.
+
+-
+
 sys_cache_clear: Clear Cache
 
 -
@@ -325,12 +330,17 @@ sys_debug: Debug Mode
 
 -
 
-sys_debug_help: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
+sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
 Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
 
 -
 
 sys_file_types: Allowed File Types
+
+-
+
+sys_file_types_info: In case you want to link to any type of media files - images, archives, videos or audio files - you have to make sure, that the file's extensions is registered here. 
+Most common file types are registered by default.
 
 -
 
@@ -356,6 +366,11 @@ sys_title: System Settings
 -
 
 sys_user: Users
+
+-
+
+sys_user_info: You can add/remove more users or 
+change your password here.
 
 -
 
