@@ -95,10 +95,8 @@ $this->element('header');
 		
 		<div class="column content">
 			<div class="inner">
-				<div class="url">
-					<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank">
-						<span class="glyphicon glyphicon-link"></span> <?php echo $url; ?>
-					</a>
+				<div class="alert alert-info">
+					<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
 				</div>
 				<!-- Tab panes -->
 				<div class="tab-content">
@@ -121,21 +119,21 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['btn_add_page']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['btn_add_page']; ?></h3>
 					</div>
 					<form class="automad-form" data-automad-handler="add_page" data-automad-url="<?php echo $Page->url; ?>" role="form">
 						<div class="modal-body">
 							<div class="alert alert-info"><span class="glyphicon glyphicon-arrow-right"></span> <b><?php echo rtrim($Page->url, '/'); ?>/</b></div>
 							<div class="form-group">
-								<label for="add-subpage-title" class="text-muted">Title</label>
+								<label for="add-subpage-title">Title</label>
 								<input id="add-subpage-title" class="form-control" type="text" name="subpage[<?php echo AM_KEY_TITLE; ?>]" value="" onkeypress="return event.keyCode != 13;" required />
 							</div>
 							<?php echo $this->templateSelectBox('add-subpage-theme_template', 'subpage[theme_template]'); ?>
 						</div>
 						<div class="modal-footer">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-								<button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_page']; ?></button>
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button></div>
+								<div class="btn-group"><button type="submit" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_page']; ?></button></div>
 							</div>
 						</div>
 					</form>
@@ -149,11 +147,11 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['btn_move_page']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['btn_move_page']; ?></h3>
 					</div>
-					<div class="modal-body pages">
+					<div class="modal-body">
 						<div class="alert alert-info"><span class="glyphicon glyphicon-move"></span> <b><?php echo $Page->url; ?></b></div>
-						<h5><?php echo $this->tb['page_move_destination']; ?></h5>
+						<h4><?php echo $this->tb['page_move_destination']; ?></h4>
 						<?php echo $this->siteTree('', $this->collection, array(), true); ?>
 					</div>
 					<div class="modal-footer">
@@ -169,7 +167,7 @@ $this->element('header');
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"><?php echo $this->tb['btn_delete_page']; ?></h4>
+						<h3 class="modal-title"><?php echo $this->tb['btn_delete_page']; ?></h3>
 					</div>
 					<form class="automad-form" data-automad-handler="delete_page" data-automad-url="<?php echo $Page->url; ?>" role="form">
 						<input type="hidden" name="title" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
@@ -178,9 +176,9 @@ $this->element('header');
 							<?php echo $this->tb['page_confirm_delete']; ?>  
 						</div>
 						<div class="modal-footer">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
-								<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_delete_page']; ?></button>
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button></div>
+								<div class="btn-group"><button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_delete_page']; ?></button></div>
 							</div>
 						</div>
 					</form>	
