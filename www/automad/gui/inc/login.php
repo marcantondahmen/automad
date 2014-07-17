@@ -75,11 +75,11 @@ $this->element('header');
 			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?> 
       			<form role="form" method="post">
 				<div class="form-group">
-					<label for="username" class="text-muted">Username</label>
+					<label for="username">Username</label>
 					<input id="username" class="form-control" type="text" name="username" />
 				</div>
 				<div class="form-group">
-					<label for="password" class="text-muted">Password</label>	
+					<label for="password">Password</label>	
 					<input id="password" class="form-control" type="password" name="password" />
 				</div>
 				<br />	
