@@ -50,7 +50,7 @@ $this->element('header');
 
 		<div class="column subnav">
 			<!-- Nav tabs -->
-			<ul class="nav nav-pills nav-stacked">
+			<ul class="nav nav-pills nav-stacked fixed">
 				<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span> <?php echo $this->tb['btn_data']; ?></a></li>
 				<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $this->tb['btn_files']; ?></a></li>
 			</ul>
