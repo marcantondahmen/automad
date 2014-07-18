@@ -68,6 +68,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		</div>
 	</div>
 	
+	<?php $this->element('navbar'); ?> 
+	
 	<div id="script" class="wrapper" style="display: none;">
 		
-		<?php $this->element('navigation'); ?> 
+		<?php $this->element('sidebar'); ?> 
