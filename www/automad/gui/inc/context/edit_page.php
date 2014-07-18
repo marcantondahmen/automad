@@ -76,7 +76,7 @@ $this->element('header');
 
 		<?php if ($Page) { ?> 
 		<div class="column subnav">	
-			<ul class="nav nav-pills nav-stacked">
+			<ul class="nav nav-pills nav-stacked fixed">
 				<li><a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
 				<!-- Data -->
 				<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['btn_data']; ?></a></li>
