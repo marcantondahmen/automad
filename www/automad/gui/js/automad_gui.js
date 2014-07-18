@@ -355,10 +355,10 @@ $(document).ready(function() {
 		}
 		
 		// Toggle class and visibility.
-		button.click(function() {
+		button.click(function(e) {
+			e.preventDefault();
 			children.toggle();
 			button.children('.glyphicon').toggleClass('glyphicon-plus-sign glyphicon-minus-sign');
-			return false;
 		});
 		
 	});
