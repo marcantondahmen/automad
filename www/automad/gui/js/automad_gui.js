@@ -358,6 +358,7 @@ $(document).ready(function() {
 		button.click(function() {
 			children.toggle();
 			button.children('.glyphicon').toggleClass('glyphicon-plus-sign glyphicon-minus-sign');
+			return false;
 		});
 		
 	});
