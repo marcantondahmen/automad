@@ -49,7 +49,7 @@ $this->element('header');
 ?>
 		
 		<div class="column subnav">
-			<ul class="nav nav-pills nav-stacked">
+			<ul class="nav nav-pills nav-stacked fixed">
 				<li class="active"><a href="#cache" data-toggle="tab"><span class="glyphicon glyphicon-hdd"></span> <?php echo $this->tb['sys_cache']; ?></a></li>
 				<li><a href="#users" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> <?php echo $this->tb['sys_user']; ?></a></li>
 				<li><a href="#file_types" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['sys_file_types']; ?></a></li>
