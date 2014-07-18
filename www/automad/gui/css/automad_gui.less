@@ -366,27 +366,39 @@ h6,
 
 	&.nav {
 		
-		z-index: 2;
 		width: @widthNav;
 		max-width: @widthNav;
 		min-width: @minWidthNav;
 		
-		& > ul {
-			background-color: @colorNavBg;
-			margin-bottom: (2 * @paddingColumn);
-			padding: @paddingBox;	
-			width: (@widthNav - (2 * @paddingColumn));
+		& .fixed {
+			
+			// .fixed is the wrapping class to apply position: fixed via JS in case the list are small enough. 
+			overflow: hidden;
+			margin-right: -((2 * @paddingColumn) + @connectorWidth);
+
+			& > ul {
+				background-color: @colorNavBg;
+				margin-bottom: (2 * @paddingColumn);
+				padding: @paddingBox;	
+				width: (@widthNav - (2 * @paddingColumn));
+			}
+			
 		}
 		
 	}
 	
 	&.subnav {
 			
-		z-index: 1;
 		width: @widthSubnav;
 		min-width: @minWidthSubnav;
-		
+	
 		& > ul {
+			// The to border is just needed to cover the connector when .nav is scrolled while .subnav is fixed.
+			position: relative;
+			top: -(2 * @paddingColumn);
+			border-top-width: (2 * @paddingColumn);
+			border-top-color: @colorBodyBg;
+			border-top-style: solid;
 			background-color: @colorSubNavBg;
 			padding: @paddingBox;
 		}
