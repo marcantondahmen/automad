@@ -299,6 +299,40 @@ $(document).ready(function() {
 
 
 // ===================================================
+// Navigation: Fixed Position
+// ===================================================
+
+$(window).on('resize load click', function() {
+	
+	$('.fixed').each(function() {
+		
+		// Remove inline styles first to get current left offset and width after resize.
+		$(this).removeAttr('style');
+		
+		// Get original properties for current window.
+		var	offset = $(this).offset(),
+			height = $(this).outerHeight(),
+			width = $(this).outerWidth();
+		
+		if ((height + offset.top) < $(window).height()) {
+	
+			$(this).css({
+				position: 'fixed',
+				top: offset.top + 'px',
+				left: offset.left + 'px',
+				width: width + 'px'
+			});
+
+		} 
+		
+	});
+		
+});
+	
+	
+	
+
+// ===================================================
 // Site Tree: Collapse/Expand
 // ===================================================
 
