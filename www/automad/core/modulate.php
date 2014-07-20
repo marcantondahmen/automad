@@ -85,10 +85,9 @@ class Modulate {
 	/**
 	 *	Modulate an URL according to its type.
 	 * 
-	 *	Absolute URLs: 		not modified
-	 *	Only query string:	not modified (starts with "?")
-	 *	Root-relative URLs: 	AM_BASE_URL is prepended (and AM_INDEX in case of pages)
-	 *	Relative URLs:		the full path gets prepended and all '../' and './' get resolved
+	 *	Absolute URLs, query strings, anchors or mails:	not modified
+	 *	Root-relative URLs: 				AM_BASE_URL is prepended (and AM_INDEX in case of pages)
+	 *	Relative URLs:					the full path gets prepended and all '../' and './' get resolved
 	 *	
 	 *	@param object $Page
 	 *	@param string $url
@@ -97,9 +96,9 @@ class Modulate {
 
 	public static function url($Page, $url) {
 		
-		if (strpos($url, '://') !== false || strpos($url, '?') === 0 || strpos($url, '#') === 0) {
+		if (strpos($url, '://') !== false || strpos($url, '?') === 0 || strpos($url, '#') === 0 || strpos($url, 'mailto:') === 0 || strpos($url, '&#') === 0) {
 									
-			// Absolute URL, query string or anchor link only
+			// Absolute URL ('://'), query string ('?'), anchor link ('#') or mailto links ('mailto:' and obfuscated '&#...').
 			return $url;
 			
 		} else if (strpos($url, '/') === 0) {
