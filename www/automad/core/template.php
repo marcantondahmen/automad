@@ -160,7 +160,7 @@ class Template {
 	
 	private function obfuscateEmails($output) {
 		
-		$output = 	preg_replace_callback('/([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', 
+		$output = 	preg_replace_callback('/(?<!mailto:)\b([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', 
 				function($matches) {
 				
 					Debug::log('Template: Obfuscating: ' . $matches[1]);
