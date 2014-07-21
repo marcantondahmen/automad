@@ -413,7 +413,7 @@ $(document).ajaxComplete(function(e, xhr, settings) {
 $(document).on('keyup', 'textarea:visible', function() {
 	
 	var	ta = 		$(this),
-		content =	ta.val().replace(/\n/g, '<br />'),
+		content =	ta.val().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />'),
 		
 		// The hidden clone will be used to determine the actual height.
 		clone =		$('<div></div>')
