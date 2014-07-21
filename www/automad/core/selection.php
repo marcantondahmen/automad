@@ -255,12 +255,13 @@ class Selection {
 			
 			$filtered = array();
 
-			$keywords = explode(' ', strip_tags($str));
+			// Explode keywords and also remove any tags and - most important - all "/", since they will be used as regex delimiters!
+			$keywords = explode(' ', str_replace('/', ' ', strip_tags($str)));
 		
 			// generate pattern
 			$pattern = '/^';
 			foreach ($keywords as $keyword) {
-				$pattern .= '(?=.*' . $keyword . ')';
+				$pattern .= '(?=.*' . preg_quote($keyword) . ')';
 			}
 			// case-insensitive and multiline
 			$pattern .= '/is';
