@@ -129,8 +129,16 @@ if (isset($guiEnabled)) {
 		$Template = new Template($Automad);
 		$output = $Template->render();
 	
-		// Save output to cache...
-		$Cache->writePageToCache($output);
+		// Save output to cache if page actually exists.
+		if ($Automad->currentPageExists()) {
+			
+			$Cache->writePageToCache($output);
+			
+		} else {
+			
+			Debug::log('Page does not exist, caching will be skipped!');
+			
+		}
 		
 		// Generate sitemap.xml
 		new Sitemap($Automad->getCollection());
