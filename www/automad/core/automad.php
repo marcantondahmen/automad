@@ -408,7 +408,22 @@ class Automad {
 		return $page;
 		
 	}
-		 	 
+	
+	
+	/**
+	 *	Tests wheter the currently requested page actually exists.
+	 *
+	 *	@return true if existing
+	 */
+	
+	public function currentPageExists() {
+		
+		$Page = $this->getCurrentPage();
+		
+		return ($Page->template != AM_PAGE_NOT_FOUND_TEMPLATE);
+		
+	} 	 
+
 	 
 }
 
