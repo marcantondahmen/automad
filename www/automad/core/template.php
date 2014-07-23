@@ -62,7 +62,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In a last step, all URLs within the generated HTML get modulated to the be relative to the server's root (or absolute), before $output gets returned.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

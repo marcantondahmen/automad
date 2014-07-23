@@ -19,7 +19,7 @@ namespace Extensions;
  *	To be used, Twitter's Bootstrap CSS and JS files are required.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

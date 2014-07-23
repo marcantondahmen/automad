@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Sitemap class handles the generating process for a site's sitemap.xml.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

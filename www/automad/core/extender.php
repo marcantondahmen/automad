@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Extender class servers as an interface for calling extension methods via the template syntax.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

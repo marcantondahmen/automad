@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	A Automad object is the "main" object. It consists of many single Page objects and holds also additional data like the site's name and theme.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	Basically the Automad object consists of many Page objects.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
