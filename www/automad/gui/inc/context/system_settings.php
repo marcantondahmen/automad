@@ -115,7 +115,7 @@ $this->element('header');
 								</label>
 							</div>
 							<br />
-							<label><?php echo $this->tb['sys_cache_lifetime']; ?></label>
+							<label><?php echo $this->tb['sys_cache_monitor']; ?></label>
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
 								<?php
 						
