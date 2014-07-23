@@ -1,12 +1,13 @@
 <?php
 /*
  *	CAROUSEL
- *	Extension for the Automad CMS
+ *	Extension for Automad
  *
  *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -16,8 +17,11 @@ namespace Extensions;
 /**
  *	The Carousel extension creates the markup for a Twitter Bootstrap carousel and automatically generates page variables for each matched image.
  *	To be used, Twitter's Bootstrap CSS and JS files are required.
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
-
 
 class Carousel {
 	

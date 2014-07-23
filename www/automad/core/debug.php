@@ -25,12 +25,13 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
- *	Copyright (c) 2013 by Marc Anton Dahmen
+ *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -44,8 +45,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Debug class holds all methods to help debugging while development.
  *	The output of all the contained methods can be activated/deactivated with defining the AM_DEBUG_ENABLED constant.
  *	All logged information will be stored in $buffer as JS's console.log() items.
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
-
 
 class Debug {
 	

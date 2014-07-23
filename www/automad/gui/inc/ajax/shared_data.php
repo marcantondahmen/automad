@@ -25,12 +25,13 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
  *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -40,7 +41,7 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/**
+/*
  * 	All ajax requests regarding the site's shared data file get processed here.
  *	Basically that means "Saving" as the first option and "Loading" as the second option.
  *

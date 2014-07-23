@@ -25,12 +25,13 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
- *	Copyright (c) 2013 by Marc Anton Dahmen
+ *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -49,8 +50,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  *	All the filter function directly modify $this->selection. After all modifications to that selection, 
  *	it can be returned once by $this->getSelection().
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
-
 
 class Selection {
 	

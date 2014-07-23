@@ -25,12 +25,13 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
  *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -40,7 +41,7 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/**
+/*
  *	File Manager. In case $_POST['url'] is defined, the files of that page will be managed.
  *	Else, the files under "/shared" will be managed instead.
  *

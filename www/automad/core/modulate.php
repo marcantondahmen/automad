@@ -25,12 +25,13 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
- *	Copyright (c) 2013 by Marc Anton Dahmen
+ *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -46,8 +47,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	to point to a valid location. 
  *	For example a relative file name to an image wouldn't be a valid link, since the URL of the page is not
  *	the real file system path to the page's files.
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
-
 
 class Modulate {
 	

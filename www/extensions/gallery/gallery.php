@@ -1,12 +1,13 @@
 <?php
 /*
  *	GALLERY
- *	Extension for the Automad CMS
+ *	Extension for Automad
  *
  *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -15,8 +16,11 @@ namespace Extensions;
 
 /**
  *	Create a simple gallery out of a set of images defined by a glob pattern.
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
-
 
 class Gallery {
 	

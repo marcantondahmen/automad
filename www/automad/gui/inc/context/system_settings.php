@@ -25,19 +25,20 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
  *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/**
+/*
  *	The GUI Sytem Settings' Page. As part of the GUI, this file is only to be included via the GUI class.
  */
 

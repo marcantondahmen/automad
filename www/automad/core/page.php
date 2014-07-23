@@ -25,12 +25,13 @@
  *	               ''''  '''''
  *	
  *
- *	AUTOMAD CMS
+ *	AUTOMAD
  *
- *	Copyright (c) 2013 by Marc Anton Dahmen
+ *	Copyright (c) 2014 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
@@ -44,8 +45,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Page class holds all properties and methods of a single page.
  *	A Page object describes an entry in the collection of all pages in the Automad class.
  *	Basically the Automad object consists of many Page objects.
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
-
 
 class Page {
 	
