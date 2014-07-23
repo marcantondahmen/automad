@@ -322,7 +322,7 @@ sys_cache_clear: Clear Cache
 
 -
 
-sys_cache_lifetime: Lifetime
+sys_cache_monitor: Check for changes every 
 
 -
 
