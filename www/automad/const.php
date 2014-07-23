@@ -95,6 +95,7 @@ Config::set('AM_PAGE_GUI', '/gui');
 // CACHE
 Config::set('AM_CACHE_ENABLED', true);
 Config::set('AM_CACHE_MONITOR_DELAY', 120);
+Config::set('AM_CACHE_LIFETIME', 3600);
 
 // IMAGE
 Config::set('AM_IMG_JPG_QUALITY', 90);
