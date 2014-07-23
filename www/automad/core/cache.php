@@ -61,7 +61,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	(That gives a bit more control for debugging)
  *
  *	3.
- *	When calling now pageCacheIsApproved() from outside, true will be returned if the cached file exists and is newer than the site's mTime (and of course caching is active).
+ *	When calling now pageCacheIsApproved() from outside, true will be returned if the cached file exists, didn't reach the maximum lifetime and is newer than the site's mTime (and of course caching is active).
  *	If the cache is validated, readPageFromCache() can return the full HTML to be echoed.
  *	
  *	4. 
@@ -132,6 +132,11 @@ class Cache {
 	/**
 	 *	Verify if the cached version of the visited page is existing and still up to date.
 	 *
+	 *	A page gets approved as long as it is newer than the site's mTime and didn't reach the cache's lifetime. 
+	 *	When reaching the cache's lifetime, the page cache always gets rebuilt, also if the site's content didn't change.
+	 *	This enforced rebuilt is needed to avoid issues when deploying a site via tools like rsync and therefore possibly having inconsistent timestamps.
+	 *	The lifetime therefore makes sure, that - after a certain period - the page gets rendered correctly in all cases.
+	 *
 	 *	@return boolean - true, if the cached version is valid.
 	 */
 
@@ -143,23 +148,35 @@ class Cache {
 					
 				$cacheMTime = filemtime($this->pageCacheFile);
 			
-				if ($cacheMTime < $this->siteMTime) {
+				// Check if page didn't reach the cache's lifetime yet.
+				if (($cacheMTime + AM_CACHE_LIFETIME) > time()) {
 					
-					// If the cached page is older than the site's mTime,
-					// the cache gets no approval.
-					Debug::log('Cache: Page cache is deprecated!'); 
+					// Check if page is newer than the site's mTime.
+					if ($cacheMTime > $this->siteMTime) {
+						
+						// If the cached page is newer and didn't reach the cache's lifetime, it gets approved.
+						Debug::log('Cache: Page cache got approved!');
+						Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+						return true;
+						
+					} else {
+						
+						// If the cached page is older than the site's mTime,
+						// the cache gets no approval.
+						Debug::log('Cache: Page cache is deprecated! (Site got modified)'); 
+						Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+						return false;
+						
+					}
+				
+				} else {	
+					
+					Debug::log('Cache: Page cache is deprecated! (Reached maximum lifetime)'); 
 					Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
 					return false;
 					
-				} else {
-					
-					// If the cached page is newer, it gets approved.
-					Debug::log('Cache: Page cache got approved!');
-					Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
-					return true;
-					
-				}
-	
+				}	
+				
 			} else {
 		
 				Debug::log('Cache: Page cache does not exist!');
@@ -180,6 +197,11 @@ class Cache {
 	/**
 	 *	Verify if the cached version of the Automad object is existingand  still up to date.
 	 *
+	 *	The object cache gets approved as long as it is newer than the site's mTime and didn't reach the cache's lifetime. 
+	 *	When reaching the cache's lifetime, the Automad object cache always gets rebuilt, also if the site's content didn't change.
+	 *	This enforced rebuilt is needed to avoid issues when deploying a site via tools like rsync and therefore possibly having inconsistent timestamps.
+	 *	The lifetime therefore makes sure, that - after a certain period - the object gets created correctly in all cases.
+	 *
 	 *	@return boolean 
 	 */
 
@@ -190,28 +212,38 @@ class Cache {
 			if (file_exists(AM_FILE_OBJECT_CACHE)) {
 		
 				$automadObjectMTime = filemtime(AM_FILE_OBJECT_CACHE);
-			
-				if ($automadObjectMTime < $this->siteMTime) {
 				
-					Debug::log('Cache: Automad object cache is deprecated!');
-					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
-					return false;
+				// Check if object didn't reach the cache's lifetime yet.
+				if (($automadObjectMTime + AM_CACHE_LIFETIME) > time()) {
+				
+					// Check if object is newer than the site's mTime.
+					if ($automadObjectMTime > $this->siteMTime) {
+						
+						Debug::log('Cache: Automad object cache got approved!');
+						Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
+						return true;
+						
+					} else {
+						
+						Debug::log('Cache: Automad object cache is deprecated! (Site got modified)');
+						Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
+						return false;
+					}
 				
 				} else {
-					
-					Debug::log('Cache: Automad object cache got approved!');
+								
+					Debug::log('Cache: Automad object cache is deprecated! (Reached maximum lifetime)');
 					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
-					return true;
-					
-				}
+					return false;
 			
+				}
+				
 			} else {
 				
 				Debug::log('Cache: Automad object cache does not exist!');
 				return false;
 				
 			}
-			
 			
 		} else {
 			
