@@ -10,7 +10,7 @@
 			</div>
 			<div class="col-md-12">
 				@x(carousel {
-					glob: @p(carousel_image_glob),
+					files: @p(carousel_files),
 					width: 1200,
 					height: 675
 				})

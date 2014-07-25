@@ -18,7 +18,7 @@
 			<div class="col-md-12 no-vertical-padding">
 				<div class="row">
 					@x(Gallery {
-						glob: @p(gallery_glob),
+						files: @p(gallery_files),
 						width: 240,
 						height: 240,
 						class: "col-xs-4 col-sm-3 col-md-2 col-lg-2"
