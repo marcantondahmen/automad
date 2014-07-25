@@ -102,7 +102,36 @@ class Parse {
 		
 	}
 	
-	
+
+	/**
+	 *	Parse a file declaration string where multiple glob patterns can be separated by one ore more spaces and return an array with the resolved file paths.
+	 * 
+	 *	@param string $str
+	 *	@param object $Page (current page)
+	 *	@return Array with resolved file paths
+	 */
+
+	public static function fileDeclaration($str, $Page) {
+		
+		$files = array();
+		
+		foreach (preg_split('/\s+/', $str, null, PREG_SPLIT_NO_EMPTY) as $glob) {
+					
+			if ($f = glob(Modulate::filePath($Page->path, trim($glob)))) {
+				$files = array_merge($files, $f);
+			}
+			
+		}
+		
+		array_walk($files, function(&$file) { 
+			$file = realpath($file); 
+		});
+		
+		return $files;
+		
+	}
+
+
 	/**
 	 *	Tests if a string is a file name (with an allowed file extension).
 	 *
