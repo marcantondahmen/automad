@@ -54,9 +54,10 @@ class Carousel {
 	public function Carousel($options, $Automad) {
 			
 		$defaults = 	array(
-					'glob' => '*.jpg',
+					'files' => '*.jpg',
 					'width' => 400,
 					'height' => 300,
+					'order' => false,
 					'duration' => 3000,
 					'controls' => true
 				);
@@ -64,15 +65,21 @@ class Carousel {
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
 		
-		// Build full glob pattern
-		$Page = $Automad->getCurrentPage();
-		$glob = \Automad\Core\Modulate::filePath($Page->path, $options['glob']);
+		// Get file list.
+		$files = \Automad\Core\Parse::fileDeclaration($options['files'], $Automad->getCurrentPage());
 		
-		// Get files.
-		if ($files = glob($glob)) {
+		// Sort images.
+		if ($options['order'] == 'asc') {
+			sort($files, SORT_NATURAL);
+		}
+		
+		if ($options['order'] == 'desc') {
+			rsort($files, SORT_NATURAL);
+		}
+
+		// HTML
+		if ($files) {
 			
-			sort($files);
-		
 			// Generate unique ID, in case more than one carousel get used on one page.
 			$id = 'carousel-' . crc32(uniqid('', true));
 		

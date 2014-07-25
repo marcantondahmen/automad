@@ -31,9 +31,10 @@ to your template's head section.
 
 There are several options available to modify the carousel:
 
-- glob: `/path/to/images/*` - File pattern (default: `"*.jpg"`)
+- files: `/path/to/images` - The file pattern or list of files, relative or absolute path (default: `"*.jpg"`)
 - width: `integer` - Image width in pixels (default: `400`)
 - height: `integer` - Image height in pixels (default: `300`)
+- order: `"asc"`, `"desc"` or `false` - Set the order of images (default: `false`)
 - duration: `integer` - Duration in milliseconds for each image (default: `3000`)
 - controls: `boolean` - Enable/disable controls (default: `true`)
 
@@ -47,16 +48,16 @@ It is also possible to pass any value as a normal page variable "p(variable)" to
 Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
 
 	x(Carousel {
-		glob: p(carousel_file_pattern), 
+		files: p(carousel_file_pattern), 
 		width: 850, 
 		height: 450, 
 		duration: 3000
 	}) 
 
-The same carousel without controls:
+The same carousel without controls and a list of files:
 
 	x(Carousel {
-		glob: p(carousel_file_pattern), 
+		files: "image1.jpg image2.jpg", 
 		width: 850, 
 		height: 450, 
 		duration: 3000,
