@@ -60,22 +60,31 @@ class Gallery {
 	public function Gallery($options, $Automad) {
 			
 		$defaults = 	array(
-					'glob' => '*.jpg',
+					'files' => '*.jpg',
 					'width' => 200,
 					'height' => 200,
+					'order' => false, 
 					'class' => ''
 				);
 		
 		// Merge defaults with options
 		$options = array_merge($defaults, $options);
 		
-		// Build full glob pattern
-		$Page = $Automad->getCurrentPage();
-		$glob = \Automad\Core\Modulate::filePath($Page->path, $options['glob']);
+		// Get file list.
+		$files = \Automad\Core\Parse::fileDeclaration($options['files'], $Automad->getCurrentPage());
+		
+		// Sort images.
+		if ($options['order'] == 'asc') {
+			sort($files, SORT_NATURAL);
+		}
+		
+		if ($options['order'] == 'desc') {
+			rsort($files, SORT_NATURAL);
+		}
 		
 		// Generate HTML		
 		$html = '<div class="gallery">';	
-		$html .= \Automad\Core\Html::generateImageSet($glob, $options['width'], $options['height'], true, $options['class']);
+		$html .= \Automad\Core\Html::generateImageSet($files, $options['width'], $options['height'], true, $options['class']);
 		$html .= '</div>';
 				
 		return $html;

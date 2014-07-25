@@ -19,16 +19,18 @@ somewhere in your markup.
 
 There are several parameters to modify the gallery:
 
-- glob:	`/path/to/images` - The file pattern, relative or absolute path (default: `"*.jpg"`)
+- files: `/path/to/images` - The file pattern or list of files, relative or absolute path (default: `"*.jpg"`)
 - width: `integer` - The thumbnails' width in pixels (default: `200`)
 - height: `integer` - The thumbnails' height in pixels (default: `200`)
+- order: `"asc"`, `"desc"` or `false` - Set the order of images (default: `false`)
+- class: `classname` - Custom class to wrap each image (defaulf: `""`)
 
 ---
 
 ###Example
 
 	x(Gallery {
-		glob: "/pages/*/*/*.jpg", 
+		files: "/pages/*/*/*.jpg", 
 		width: 250, 
 		height: 250
 	}) 
@@ -36,7 +38,7 @@ There are several parameters to modify the gallery:
 It is also possible to use a page variable for any of the options:
 
 	x(Gallery {
-		glob: p(glob), 
+		files: p(files), 
 		width: p(width), 
 		height: p(height)
 	}) 
