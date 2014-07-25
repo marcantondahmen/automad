@@ -274,7 +274,7 @@ class Html {
 	/**
 	 *	Generate the HTML for a set of resized images linking to their bigger versions.
 	 *
-	 *	@param string $glob
+	 *	@param array $files (array with file names)
 	 *	@param integer $width
 	 *	@param integer $height
 	 *	@param integer $crop
@@ -282,9 +282,9 @@ class Html {
 	 *	@return The HTML of a list of images as links to their bigger versions.
 	 */
 	
-	public static function generateImageSet($glob, $width = false, $height = false, $crop = false, $class = '') {
+	public static function generateImageSet($files, $width = false, $height = false, $crop = false, $class = '') {
 			
-		if ($files = glob($glob)) {
+		if (is_array($files)) {
 			
 			if ($class) {
 				$class = ' class="' . $class . '"';
