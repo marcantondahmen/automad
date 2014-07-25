@@ -159,7 +159,15 @@ class Toolbox {
 	 *	Place a set of resized images, linking to their original sized version.
 	 *	This tool returns the basic HTML for a simple image gallery.
 	 *
-	 *	@param array $options - (glob: path/to/file (or glob pattern), width: px, height: px, crop: 1, class: wrapping class)
+	 * 	Possible options:
+	 * 	- files: filepath/glob (multiple separated by space)
+	 * 	- width: pixels 
+	 * 	- height: pixels
+	 * 	- crop: false
+	 * 	- order: "asc", "desc" or false 
+	 * 	- class: wrapping class
+	 *
+	 *	@param array $options
 	 *	@return The HTML of a list of resized images with links to their bigger versions
 	 */
 	
@@ -167,20 +175,29 @@ class Toolbox {
 		
 		// Default options
 		$defaults = 	array(
-					'glob' => '*.jpg',
+					'files' => '*.jpg',
 					'width' => false,
 					'height' => false,
 					'crop' => false,
+					'order' => false,
 					'class' => ''
 				);
 		
 		// Merge options with defaults				
 		$options = array_merge($defaults, $options);
-			
-		if ($options['glob']) {
-			$glob = Modulate::filePath($this->Page->path, $options['glob']);
-			return Html::generateImageSet($glob, $options['width'], $options['height'], $options['crop'], $options['class']);
+				
+		$files = Parse::fileDeclaration($options['files'], $this->Page);
+		
+		// Sort images.
+		if ($options['order'] == 'asc') {
+			sort($files, SORT_NATURAL);
 		}
+		
+		if ($options['order'] == 'desc') {
+			rsort($files, SORT_NATURAL);
+		}	
+			
+		return Html::generateImageSet($files, $options['width'], $options['height'], $options['crop'], $options['class']);
 		
 	}	
 	
@@ -271,10 +288,10 @@ class Toolbox {
 	 *	Change of configuration for Automad's Listing object.
 	 *
 	 *	Possible options are:
-	 *	- "type: chidren | related" 	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
-	 *	- "template: name" 		(all pages matching that template)
-	 *	- "sortItem: Var to sort by"	(default sort item, when there is no query string passed)
-	 *	- "sortOrder: asc | desc"	(default sort order, when there is no query string passed)
+	 *	- type: chidren | related	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
+	 *	- template: name 		(all pages matching that template)
+	 *	- sortItem: Var to sort by	(default sort item, when there is no query string passed)
+	 *	- sortOrder: asc | desc 	(default sort order, when there is no query string passed)
 	 *	
 	 *	@param array $options 
 	 */
@@ -310,7 +327,7 @@ class Toolbox {
 	 * 	- glob:	File patter to match thumbnail image
 	 * 	- width: The thumbnails' width
 	 * 	- height: The thumbnails' height
-	 *  	- crop: Cropping parameter for thumbnails
+	 * 	- crop: Cropping parameter for thumbnails
 	 *	- maxChars: Maximum number of characters for each variable
 	 *	- header: The list's header text
 	 *
