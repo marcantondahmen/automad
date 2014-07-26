@@ -51,7 +51,7 @@ Centered navbar with optional brand as shared variable:
 
 	@x(Navbar {
 		fluid: false,
-		brand: s(brand),
+		brand: @s(brand),
 		search: "Search"
 	})
 	
@@ -59,7 +59,7 @@ Full-width, fixed to the top and with an optional logo as shared variable, but w
 
 	@x(Navbar {
 		fixedToTop: true,
-		logo: s(logo),
+		logo: @s(logo),
 		logoWidth: 300,
 		search: false
 	})

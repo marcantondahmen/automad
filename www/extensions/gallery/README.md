@@ -30,7 +30,7 @@ There are several parameters to modify the gallery:
 ###Example
 
 	@x(Gallery {
-		files: "/pages/*/*/*.jpg", 
+		files: "/pages/*/*/*.jpg /shared/*.jpg", 
 		width: 250, 
 		height: 250
 	}) 
@@ -38,7 +38,7 @@ There are several parameters to modify the gallery:
 It is also possible to use a page variable for any of the options:
 
 	@x(Gallery {
-		files: p(files), 
-		width: p(width), 
-		height: p(height)
+		files: @p(files), 
+		width: @p(width), 
+		height: @p(height)
 	}) 

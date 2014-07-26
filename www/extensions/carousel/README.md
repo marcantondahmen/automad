@@ -48,7 +48,7 @@ It is also possible to pass any value as a normal page variable "p(variable)" to
 Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
 
 	@x(Carousel {
-		files: p(carousel_file_pattern), 
+		files: @p(carousel_file_pattern), 
 		width: 850, 
 		height: 450, 
 		duration: 3000
