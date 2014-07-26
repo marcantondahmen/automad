@@ -9,7 +9,7 @@ For any matched image, a page variable `carousel_caption_FILENAME` will be added
 
 To use the Carousel extension, simply add 
 
-	x(Carousel)
+	@x(Carousel)
 	
 somewhere to your template's HTML body markup.
 
@@ -20,8 +20,8 @@ somewhere to your template's HTML body markup.
 The Carousel extension requires *Twitter's Bootstrap* CSS and Javascript.
 Since Bootstrap gets shipped with Automad, you can include all needed files by adding
 
-	t(bootstrapCSS)
-	t(bootstrapJS)
+	@t(bootstrapCSS)
+	@t(bootstrapJS)
 	
 to your template's head section.
 
@@ -47,7 +47,7 @@ It is also possible to pass any value as a normal page variable "p(variable)" to
 
 Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
 
-	x(Carousel {
+	@x(Carousel {
 		files: p(carousel_file_pattern), 
 		width: 850, 
 		height: 450, 
@@ -56,7 +56,7 @@ Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
 
 The same carousel without controls and a list of files:
 
-	x(Carousel {
+	@x(Carousel {
 		files: "image1.jpg image2.jpg", 
 		width: 850, 
 		height: 450, 

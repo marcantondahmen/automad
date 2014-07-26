@@ -8,7 +8,7 @@ The Navbar extension creates a responsive and collapsable Bootstrap Navbar for m
 
 To use the Navbar extension, simply add 
 
-	x(Navbar)
+	@x(Navbar)
 	
 somewhere to your template's HTML body markup.
 
@@ -19,8 +19,8 @@ somewhere to your template's HTML body markup.
 This extension requires *Twitter's Bootstrap* CSS and Javascript.
 Since Bootstrap gets shipped with Automad, you can include all needed files by adding
 
-	t(bootstrapCSS)
-	t(bootstrapJS)
+	@t(bootstrapCSS)
+	@t(bootstrapJS)
 	
 to your template's head section.	
 
@@ -49,7 +49,7 @@ It is also possible to pass any value as a normal page variable "p(variable)" or
 
 Centered navbar with optional brand as shared variable:
 
-	x(Navbar {
+	@x(Navbar {
 		fluid: false,
 		brand: s(brand),
 		search: "Search"
@@ -57,7 +57,7 @@ Centered navbar with optional brand as shared variable:
 	
 Full-width, fixed to the top and with an optional logo as shared variable, but without a search box:
 
-	x(Navbar {
+	@x(Navbar {
 		fixedToTop: true,
 		logo: s(logo),
 		logoWidth: 300,
