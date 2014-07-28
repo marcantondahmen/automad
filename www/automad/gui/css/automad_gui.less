@@ -225,7 +225,7 @@ a {
 	&:focus,
 	&:active {
 		outline: 0 !important;
-		text-decoration: none !important;
+		text-decoration: none;
 	}
 	
 }
@@ -771,7 +771,27 @@ textarea {
 
 
 /* Files */
+
+#files .box a {
 	
+	color: @colorBox;
+	text-decoration: none;
+	
+	& .glyphicon {
+		font-size: 80%;
+	}
+	
+	&:hover {
+		
+		&,
+		& .glyphicon {
+			text-decoration: underline;
+		}
+
+	}
+		
+}	
+
 .filetype {
 	width: 125px;
 	height: 125px;
