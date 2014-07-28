@@ -70,6 +70,10 @@ btn_remove_selected: Remove Selected
 
 -
 
+btn_rename_file: Rename File
+
+-
+
 btn_save: Save
 
 -
@@ -105,6 +109,10 @@ error_existing: already exists!
 -
 
 error_file_format: Unsupported file type:
+
+-
+
+error_filename: Invalid filename!
 
 -
 
