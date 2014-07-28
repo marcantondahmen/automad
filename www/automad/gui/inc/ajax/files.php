@@ -158,7 +158,7 @@ if ($files) {
 						'</a>' . 
 						'</div>' .		
 						'<div class="col-xs-8">' . 
-						'<h4>' . basename($file) . '</h4>';
+						'<h4><a title="' . $this->tb['btn_rename_file'] . '" href="#" data-target="#automad-rename-file-modal" data-toggle="modal" data-file="' . basename($file) . '">' . basename($file) . ' <span class="glyphicon glyphicon-pencil"></span></a></h4>';
 					
 					if (strtolower($extension) == 'jpg' && $img->description) {
 						echo '<h6 title="Exif description"><span class="glyphicon glyphicon-comment"></span> ' . $img->description . '</h6>';	
@@ -171,9 +171,13 @@ if ($files) {
 			
 				} else { 
 	
-					echo 	'<div class="col-xs-3"><a class="filetype img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1><span class="glyphicon glyphicon-file"></span> ' . $extension . '</a></div>' .
+					echo 	'<div class="col-xs-3">' .
+						'<a class="filetype img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
+						'<span class="glyphicon glyphicon-file"></span> ' . $extension . 
+						'</a>' .
+						'</div>' .
 						'<div class="col-xs-8">' . 
-						'<h4>' . basename($file) . '</h4>' .
+						'<h4><a title="' . $this->tb['btn_rename_file'] . '" href="#" data-target="#automad-rename-file-modal" data-toggle="modal" data-file="' . basename($file) . '">' . basename($file) . ' <span class="glyphicon glyphicon-pencil"></span></a></h4>' .
 						'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' .
 						'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
 						'</div>';
@@ -216,6 +220,26 @@ if ($files) {
 		<a class="btn btn-primary" href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo $this->tb['btn_upload']; ?></a>
 	</div>
 </div>
+
+
+<!-- Rename File Modal -->
+<div class="modal fade" id="automad-rename-file-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>">
+	<div class="modal-dialog">
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<h3 class="modal-title"><?php echo $this->tb['btn_rename_file']; ?></h3> 
+			</div>
+			<div class="modal-body"><!-- Input fields get created by JS --></div>	
+			<div class="modal-footer">
+				<div class="btn-group btn-group-justified">
+					<div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button></div>
+					<div class="btn-group"><button id="rename-file" type="button" class="btn btn-primary" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_rename_file']; ?></button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <!-- Upload Modal -->
 <div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>" data-automad-dropzone-text="<?php echo $this->tb['dropzone']; ?>" data-automad-browse-text="<?php echo $this->tb['btn_browse']; ?>">
