@@ -318,10 +318,28 @@ class Html {
 	 * 	@param string $class (optional class for list items)
 	 *	@param integer $maxChars (maximum number of characters to be displayed for each variable)
 	 *	@param string $header (the list's header)
+	 *	@param array $style (an array of css properties like { property: "page_variable_name", ... } to override the site's CSS on per item basis via inline styles)
+	 *	@param integer $firstWidth (width for the image of the first list item)
+	 *	@param integer $firstHeight (height for the image of the first list item)
+	 *	@param string $firstClass (wrapping class for the first list item)
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList($pages, $vars, $glob, $width = false, $height = false, $crop = false, $class = false, $maxChars = false, $header = false) {
+	public static function generateList(
+					$pages, 
+					$vars, 
+					$glob = false, 
+					$width = false, 
+					$height = false, 
+					$crop = false, 
+					$class = false, 
+					$maxChars = false, 
+					$header = false, 
+					$style = false, 
+					$firstWidth = false, 
+					$firstHeight = false, 
+					$firstClass = false
+				) {
 		
 		if ($pages) {			
 						
@@ -341,10 +359,55 @@ class Html {
 						
 			$html .= '<ul class="' . AM_HTML_CLASS_LIST . '">';
 		
+			// Set $first to true to determine first element in forach loop.
+			$first = true;
+		
 			foreach ($pages as $Page) {
-			
-				$html .= '<li class="' . AM_HTML_CLASS_LIST_ITEM . $class . '"><a href="' . $Page->url . '">';
 				
+				// Define $cls, $w and $h per item to avoid overwriting originals and allow special values for the first item.
+				$cls = $class;
+				$w = $width;
+				$h = $height;
+				
+				// First item only.
+				if ($first) {
+			
+					if ($firstClass) {
+						$cls = ' ' . $firstClass;
+					}
+					
+					if ($firstWidth) {
+						$w = $firstWidth;
+					}
+					
+					if ($firstHeight) {
+						$h = $firstHeight;
+					}
+					
+					$first = false;
+					
+				}
+				
+				// Build string for inline styles to override the site's CSS.
+				$styleAttribute = '';
+				
+				if (is_array($style)) {
+						
+					foreach ($style as $property => $propertyVariable) {
+						if (isset($Page->data[$propertyVariable])) {
+							$styleAttribute .= $property . ': ' . $Page->data[$propertyVariable] . '; ';
+						}
+					}
+					
+					if ($styleAttribute) {	
+						$styleAttribute = ' style="' . trim($styleAttribute) . '"';
+					}
+					
+				}
+				
+				$html .= '<li class="' . AM_HTML_CLASS_LIST_ITEM . $cls . '"><a href="' . $Page->url . '"' . $styleAttribute . '>';
+				
+				// Image
 				if ($glob) {
 					
 					// For each page, the glob pattern is matched against the page's direcory (if the glob is relative),
@@ -353,12 +416,13 @@ class Html {
 					// To re-use $glob for every page in the loop, $glob can't be modified and 
 					// therefore $pageGlob will be used to build the full glob pattern.
 					$pageGlob = Modulate::filePath($Page->path, $glob);		
-					$html .= Html::addImage($pageGlob, $width, $height, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
+					$html .= Html::addImage($pageGlob, $w, $h, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
 					
 				}
 			
 				$html .= '<div class="' . AM_HTML_CLASS_LIST_ITEM_DATA . '">';
 			
+				// Variables
 				foreach ($vars as $var) {
 				
 					if (isset($Page->data[$var])) {
