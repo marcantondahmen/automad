@@ -330,6 +330,10 @@ class Toolbox {
 	 * 	- crop: Cropping parameter for thumbnails
 	 *	- maxChars: Maximum number of characters for each variable
 	 *	- header: The list's header text
+	 *	- style: An array of inline styles of each item, where the key is the property and the value is the name of the page variable - for example: { color: "color_var", background-color: "bg_color_var"}
+	 *	- firstClass: special class for the first item of the list
+	 *	- firstWidth: width for the image of the first list item
+	 *	- firstHeight: height for the image of the first list item
 	 *
 	 * 	@param array $options
 	 *	@return The HTML for a page list.
@@ -345,7 +349,11 @@ class Toolbox {
 					'crop' => false,
 					'class' => false,
 					'maxChars' => false,
-					'header' => false
+					'header' => false,
+					'style' => false,
+					'firstWidth' => false,
+					'firstHeight' => false,
+					'firstClass' => false
 				);
 	
 		$options = array_merge($defaults, $options);
@@ -356,7 +364,21 @@ class Toolbox {
 		
 		$Listing = $this->Automad->getListing();
 	
-		return Html::generateList($Listing->getPages(), $options['variables'], $options['glob'], $options['width'], $options['height'], $options['crop'], $options['class'], $options['maxChars'], $options['header']);	
+		return 		Html::generateList(
+					$Listing->getPages(), 
+					$options['variables'], 
+					$options['glob'], 
+					$options['width'], 
+					$options['height'], 
+					$options['crop'], 
+					$options['class'], 
+					$options['maxChars'], 
+					$options['header'],
+					$options['style'],
+					$options['firstWidth'],
+					$options['firstHeight'],
+					$options['firstClass']
+				);	
 		
 	}
 
