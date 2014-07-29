@@ -44,7 +44,7 @@ $(document).on('click', '#automad-add-variable-button', function() {
 	// within the page's markup. The created variable input will be appended to that target container.
 	
 	var  	idPrefix = 'input-data-',
-		name = $('#automad-add-variable-name').val().replace(/[^\w]/g, '_').toLowerCase();
+		name = $('#automad-add-variable-name').val().replace(/[^\w\.\-]/g, '_').toLowerCase();
 
 	if ($('#' + idPrefix + name).length == 0){
 	
