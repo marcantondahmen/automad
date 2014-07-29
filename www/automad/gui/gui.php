@@ -570,7 +570,7 @@ class GUI {
 	
 	private function varTextArea($key, $value, $removeButton = false) {
 		
-		$html =  '<div class="form-group"><label for="input-data-' . $key . '">' . ucwords(str_replace('_', ' ', $key)) . '</label>';
+		$html =  '<div class="form-group"><label for="input-data-' . $key . '">' . $key . '</label>';
 		
 		if ($removeButton) {
 			$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
