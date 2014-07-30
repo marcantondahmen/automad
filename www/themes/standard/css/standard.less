@@ -20,18 +20,19 @@ body {
 
 	color: @colorDark;
 	background-color: @colorLight;
-	padding: 80px 0;
-		
-	&.level-0 {
-		padding-top: 50px;
-	}
-	
-	@media (max-width: 768px) {
-		padding-top: 50px;
-	}
+	padding: 0;
 	
 	& > .container {
 		padding-top: (@paddingCol * 2);
+	}
+	
+	& nav + .container {
+		padding-top: ((@paddingCol * 2) + 80px);
+	}
+	
+	& > .container:last-child {
+		padding-bottom: 80px;
+		
 	}
 		
 }
@@ -214,6 +215,15 @@ hr {
 		.box-shadow(0; 0; 0; 0; transparent);
 	}
 	
+}
+
+
+
+
+/* Jumbotron */
+
+.jumbotron {
+	margin: 50px 0 0 0;
 }
 
 

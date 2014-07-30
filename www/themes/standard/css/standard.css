@@ -115,18 +115,16 @@ a.currentPath {
 body {
   color: #383838;
   background-color: #ffffff;
-  padding: 80px 0;
-}
-body.level-0 {
-  padding-top: 50px;
-}
-@media (max-width: 768px) {
-  body {
-    padding-top: 50px;
-  }
+  padding: 0;
 }
 body > .container {
   padding-top: 30px;
+}
+body nav + .container {
+  padding-top: 110px;
+}
+body > .container:last-child {
+  padding-bottom: 80px;
 }
 a {
   color: #383838;
@@ -265,6 +263,10 @@ hr {
   -webkit-box-shadow: 0 0 0 0 transparent;
   -moz-box-shadow: 0 0 0 0 transparent;
   box-shadow: 0 0 0 0 transparent;
+}
+/* Jumbotron */
+.jumbotron {
+  margin: 50px 0 0 0;
 }
 /* Menus */
 .filter a,
