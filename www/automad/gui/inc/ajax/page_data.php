@@ -268,7 +268,24 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			<h3><?php echo $this->tb['page_settings']; ?></h3>
 			<div class="form-group">	
 				<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default">
-					<?php echo $this->tb['page_theme_template']; ?> <span class="badge"><?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)); ?></span> 
+					<?php
+					
+					if ($data[AM_KEY_THEME]) {
+						$theme = $data[AM_KEY_THEME];
+					} else {
+						$theme = $this->siteData[AM_KEY_THEME];
+					}
+					
+					echo $this->tb['page_theme_template'];	
+					
+					// Give feedback in template button whether the template exists or not.	
+					if (file_exists(AM_BASE_DIR . AM_DIR_THEMES . '/' . $theme . '/' . $Page->template . '.php')) {
+						echo ' <span class="badge">' . ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)) . '</span>';
+					} else {
+						echo ' <span class="badge off">' . ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)) . ' - ' . $this->tb['error_template_missing'] . '</span>';
+					}
+						
+					?> 
 				</button>
 			</div>
 			<!-- Select Template Modal -->	
