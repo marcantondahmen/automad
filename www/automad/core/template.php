@@ -132,10 +132,6 @@ class Template {
 		
 	/**
 	 *	Find all links/URLs in $output and modulate the matches according to their type.
-	 * 
-	 *	Absolute URLs: 		not modified
-	 *	Root-relative URLs: 	AM_BASE_URL is prepended (and AM_INDEX in case of pages)
-	 *	Relative URLs:		Only URLs of files are modified - the full file system path gets prepended
 	 *	
 	 *	@param string $output
 	 *	@return $output
@@ -144,9 +140,18 @@ class Template {
 	private function modulateUrls($output) {
 		
 		$Page = $this->Page;
+		
+		// action, href and src
 		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
 				function($match) use ($Page) {
 					return $match[1] . '="' . Modulate::url($Page, $match[2]) . '"';
+				},
+				$output);
+				
+		// Inline styles (like background-image)
+		$output = 	preg_replace_callback('/url\(\'(.+?)\'\)/',
+				function($match) use ($Page) {
+					return 'url(\'' . Modulate::url($Page, $match[1]) . '\')';
 				},
 				$output);
 	
