@@ -147,6 +147,10 @@ error_remove: Could not remove
 
 -
 
+error_template_missing: Missing!
+
+-
+
 error_var_exists: There is already a variable with that name!
 
 -
