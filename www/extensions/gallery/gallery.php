@@ -64,7 +64,10 @@ class Gallery {
 					'width' => 200,
 					'height' => 200,
 					'order' => false, 
-					'class' => ''
+					'class' => false,
+					'firstWidth' => false,
+					'firstHeight' => false,
+					'firstClass' => false
 				);
 		
 		// Merge defaults with options
@@ -84,7 +87,16 @@ class Gallery {
 		
 		// Generate HTML		
 		$html = '<div class="gallery">';	
-		$html .= \Automad\Core\Html::generateImageSet($files, $options['width'], $options['height'], true, $options['class']);
+		$html .= 	\Automad\Core\Html::generateImageSet(
+					$files, 
+					$options['width'], 
+					$options['height'], 
+					true, 
+					$options['class'], 
+					$options['firstWidth'], 
+					$options['firstHeight'], 
+					$options['firstClass']
+				);
 		$html .= '</div>';
 				
 		return $html;
