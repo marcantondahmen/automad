@@ -112,10 +112,14 @@ a.currentPath {
 .tree.level-2 {
   font-weight: normal;
 }
+html {
+  height: 100%;
+}
 body {
   color: #383838;
   background-color: #ffffff;
   padding: 0;
+  height: 100%;
 }
 body > .container {
   padding-top: 30px;

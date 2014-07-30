@@ -15,12 +15,16 @@
 @import (reference) 'less/mixins.less';
 @import 'less/typography.less';
 
+html {
+	height: 100%;
+}
 
 body {
 
 	color: @colorDark;
 	background-color: @colorLight;
 	padding: 0;
+	height: 100%;
 	
 	& > .container {
 		padding-top: (@paddingCol * 2);
