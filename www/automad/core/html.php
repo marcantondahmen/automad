@@ -279,23 +279,62 @@ class Html {
 	 *	@param integer $height
 	 *	@param integer $crop
 	 * 	@param string $class
+	 *	@param integer $firstWidth (width for the first image)
+	 *	@param integer $firstHeight (height for the first image)
+	 *	@param string $firstClass (wrapping class for the first image)
 	 *	@return The HTML of a list of images as links to their bigger versions.
 	 */
 	
-	public static function generateImageSet($files, $width = false, $height = false, $crop = false, $class = '') {
+	public static function generateImageSet(
+					$files, 
+					$width = false, 
+					$height = false, 
+					$crop = false, 
+					$class = false,
+					$firstWidth = false, 
+					$firstHeight = false, 
+					$firstClass = false
+				) {
 			
 		if (is_array($files)) {
 			
-			if ($class) {
-				$class = ' class="' . $class . '"';
-			}
-			
 			$html = '';
+			$first = true;
 			
 			foreach($files as $file) {
 				
+				// Save $class, $width and $hight in temporary variables for standard images, to keep original parameters untouched and avoid overwriting these in case the first image has special values.
+				if ($class) {
+					$classAttribute = ' class="' . $class . '"';
+				} else {
+					$classAttribute = '';
+				}
+				
+				$w = $width;
+				$h = $height;
+				
+				// Temporary variables can (if defined) be overwritten here for the first image.
+				if ($first) {
+					
+					if ($firstClass) {
+						$classAttribute = ' class="' . $firstClass . '"';
+					}
+					
+					if ($firstWidth) {
+						$w = $firstWidth;
+					}
+					
+					if ($firstHeight) {
+						$h = $firstHeight;
+					}
+					
+					$first = false;
+					
+				}
+				
+				// Add image.
 				$bigImage = new Image($file);
-				$html .= '<div' . $class . '>' . self::addImage($file, $width, $height, $crop, $bigImage->file) . '</div>';
+				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $bigImage->file) . '</div>';
 				
 			}
 			
@@ -341,7 +380,7 @@ class Html {
 					$firstClass = false
 				) {
 		
-		if ($pages) {			
+		if ($pages) {
 						
 			if ($class) {
 				$class = ' ' . $class;
