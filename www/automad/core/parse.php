@@ -349,7 +349,7 @@ class Parse {
 	public static function templateBuffer($file, $Automad) {
 		
 		ob_start();
-		require $file;
+		@include $file;
 		$output = ob_get_contents();
 		ob_end_clean();
 		
