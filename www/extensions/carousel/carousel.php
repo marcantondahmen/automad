@@ -57,6 +57,7 @@ class Carousel {
 					'files' => '*.jpg',
 					'width' => 400,
 					'height' => 300,
+					'fullscreen' => false,
 					'order' => false,
 					'duration' => 3000,
 					'controls' => true
@@ -82,9 +83,16 @@ class Carousel {
 			
 			// Generate unique ID, in case more than one carousel get used on one page.
 			$id = 'carousel-' . crc32(uniqid('', true));
+			
+			// Add "fullscreen" class, if $options['fullscreen'] is true.
+			if ($options['fullscreen']) {
+				$classAttribute = ' class="carousel fullscreen slide"';
+			} else {
+				$classAttribute = ' class="carousel slide"';
+			}
 		
 			// The duration option gets passed as a data attribute.
-			$html = '<div id="' . $id . '" class="carousel slide" data-ride="carousel" data-interval="' . $options['duration'] . '">';
+			$html = '<div id="' . $id . '"' . $classAttribute . ' data-ride="carousel" data-interval="' . $options['duration'] . '">';
 		
 			// Indicators
 			if (count($files) > 1 && $options['controls']) {
@@ -111,19 +119,27 @@ class Carousel {
 			$html .= '<div class="carousel-inner">';		
 		
 			foreach ($files as $i => $file) {
-			
+		
 				$html .= '<div class="item';
-			
+		
 				if ($i == 0) {
 					$html .= ' active';
 				}
-			
-				$html .= '">' . \Automad\Core\Html::addImage($file, $options['width'], $options['height'], true) .
-					 '<div class="carousel-caption">' . \Automad\Core\Html::addVariable('carousel_caption_' . \Automad\Core\Parse::sanitize(basename($file))) . '</div>' .
-					 '</div>';			
-			
-			}
 		
+				$html .= '">';
+				
+				if ($options['fullscreen']) {
+					$image = new \Automad\Core\Image($file, $options['width'], $options['height'], false);
+					$html .= '<div class="image" style="background-image: url(\'' . $image->file . '\');"></div>';
+				} else {
+					$html .= \Automad\Core\Html::addImage($file, $options['width'], $options['height'], true);
+				}
+				
+				$html .= '<div class="carousel-caption">' . \Automad\Core\Html::addVariable('carousel_caption_' . \Automad\Core\Parse::sanitize(basename($file))) . '</div>' .
+					 '</div>';			
+		
+			}
+			
 			$html .= '</div>';
 		
 			// Controls

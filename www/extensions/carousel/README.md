@@ -34,6 +34,7 @@ There are several options available to modify the carousel:
 - files: `/path/to/images` - The file pattern or list of files, relative or absolute path (default: `"*.jpg"`)
 - width: `integer` - Image width in pixels (default: `400`)
 - height: `integer` - Image height in pixels (default: `300`)
+- fullscreen: `boolean` - Full width and height of parent element (for example body, default: `false`)
 - order: `"asc"`, `"desc"` or `false` - Set the order of images (default: `false`)
 - duration: `integer` - Duration in milliseconds for each image (default: `3000`)
 - controls: `boolean` - Enable/disable controls (default: `true`)

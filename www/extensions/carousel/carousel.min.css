@@ -1,0 +1,10 @@
+/*!
+ *	CAROUSEL
+ *	Extension for Automad
+ *
+ *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ *	http://automad.org/license
+ */html,body{height:100%}.carousel.fullscreen,.carousel.fullscreen .carousel-inner,.carousel.fullscreen .item{height:100%}.carousel.fullscreen .image{width:100%;height:100%;background-position:center;background-size:cover}
