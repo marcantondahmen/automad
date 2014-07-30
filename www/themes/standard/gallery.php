@@ -4,10 +4,6 @@
 	<div class="container">
 		
 		<div class="row">
-			<div class="col-md-12 prev-next">	
-				@t(linkPrev)
-				<div class="pull-right">@t(linkNext)</div>		
-			</div>
 			<div id="title" class="col-md-12">
 				<h1>@p(title)</h1>
 				<h2>@p(subtitle)</h2>
@@ -21,7 +17,10 @@
 						files: @p(gallery_files),
 						width: 240,
 						height: 240,
-						class: "col-xs-4 col-sm-3 col-md-2 col-lg-2"
+						class: "col-xs-4 col-sm-3 col-md-2 col-lg-2",
+						firstWidth: 480,
+						firstHeight: 480,
+						firstClass: "col-xs-8 col-sm-6 col-md-4 col-lg-4"
 					})
 				</div>
 			</div>
