@@ -390,7 +390,7 @@ hr {
 }
 .list .image a {
   display: block;
-  margin: -6px;
+  margin: -6px -6px -5px -6px;
   min-height: 70px;
 }
 .list .image a .data {
