@@ -15,7 +15,7 @@
 			</div>
 			@t(listPages {
 				variables: "title, subtitle, text",
-				class: "text-only col-xs-12 col-sm-10 col-md-8"
+				class: "item text-only col-xs-12 col-sm-10 col-md-8"
 			}) 
 		</div>	
 		
