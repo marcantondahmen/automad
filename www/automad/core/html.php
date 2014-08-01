@@ -70,10 +70,11 @@ class Html {
 	 *	@param string $link
 	 *	@param string $target
 	 * 	@param string $class
+	 *	@param boolean $addCaption
 	 *	@return the HTML of an img tag (optionally wrapped by the given link)
 	 */
 	
-	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = '', $target = '', $class = '') {
+	public static function addImage($glob, $w = false, $h = false, $crop = false, $link = false, $target = false, $class = false, $addCaption = false) {
 		
 		if ($files = glob($glob)) {
 			
@@ -98,8 +99,14 @@ class Html {
 				if ($class) {
 					$class = ' class="' . $class . '"';
 				}
+				
+				if ($addCaption) {
+					$caption = ' data-caption="' . self::addVariable('image_caption_' . basename($file)) . '"';
+				} else {
+					$caption = '';
+				}
 			
-				$html .= '<img' . $class . ' src="' . $img->file . '" alt="' . $img->description . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '">';
+				$html .= '<img' . $class . ' src="' . $img->file . '" alt="' . $img->description . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '"' . $caption . '>';
 			
 				if ($link) {
 					$html .= '</a>';
@@ -334,7 +341,7 @@ class Html {
 				
 				// Add image.
 				$bigImage = new Image($file);
-				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $bigImage->file) . '</div>';
+				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $bigImage->file, false, false, true) . '</div>';
 				
 			}
 			
