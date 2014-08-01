@@ -20,7 +20,7 @@
 			var	slideshow =	$('<div class="gallerySlideshow"></div>').appendTo('body').hide(),
 				overlay =	$('<div class="overlay"></div>').appendTo(slideshow).fadeTo(0,0.9),
 				caption =	$('<div class="caption"></div>').appendTo(slideshow),
-				captionText =	$('<h2 class="captionText"></h2>').appendTo(caption),
+				captionText =	$('<div class="captionText"></div>').appendTo(caption),
 				close = 	$('<a class="closeSlideshow" href="#"></a>').appendTo(slideshow),
 				prev =		$('<a class="prevImage" href="#"><</a>').appendTo(slideshow),
 				next =		$('<a class="nextImage" href="#">></a>').appendTo(slideshow),
@@ -31,11 +31,9 @@
 				
 			
 			// Caption 
-			displayCaption = function(txt) {
-				if (txt != '') {
-					captionText.text(txt);
-					caption.fadeIn(300);
-				} 
+			displayCaption = function(str) {
+				captionText.html(str);
+				caption.fadeIn(300);
 			}
 		
 			
@@ -122,8 +120,13 @@
 			images.each(function(i) {
 				
 				var	$this =		$(this),
-					url =		$this.attr("href"),
-					title =		$this.find("img").attr("title");
+					url =		$this.attr('href'),
+					dataCaption =	$this.find('img').data('caption');
+					
+				// Use image title as fallback for caption	
+				if (!dataCaption) {
+					dataCaption = 	$this.find('img').attr('title');
+				}
 						
 				$this.click(function() {
 				
@@ -133,18 +136,18 @@
 					bigImage =	$('<img alt="">')
 							.appendTo(slideshow)
 							.hide()
-							.one("load", function() {
+							.one('load', function() {
 								
 								// Save original size after loading to determine real dimenaions after resizing
 								origWidth = bigImage.width();
 								origHeight = bigImage.height();
 								
 								setImageSizeAndFadeIn();
-								displayCaption(title);
+								displayCaption(dataCaption);
 								isVisible = true;
 							
 							})
-							.attr("src", url);		
+							.attr('src', url);		
 
 					slideshow.fadeIn(300);	
 							
@@ -159,8 +162,13 @@
 			// Slideshow is open already
 			var	changeImage = 	function(i) {
 	
-				var	url = 	images.eq(i).attr("href"),
-					title =	images.eq(i).find("img").attr("title");	
+				var	url = 		images.eq(i).attr('href'),
+					dataCaption =	images.eq(i).find('img').data('caption');	
+				
+				// Use image title as fallback for caption
+				if (!dataCaption) {
+					dataCaption = 	images.eq(i).find('img').attr('title');
+				}
 				
 				// fade out curren image and caption
 				bigImage.fadeOut(200);
@@ -176,17 +184,17 @@
 					bigImage =	$('<img alt="">')
 							.appendTo(slideshow)
 							.hide()
-							.one("load", function() {
+							.one('load', function() {
 								
 								// Save original size
 								origWidth = bigImage.width();
 								origHeight = bigImage.height();	
 								
 								setImageSizeAndFadeIn();
-								displayCaption(title);
+								displayCaption(dataCaption);
 		
 							})
-							.attr("src", url);
+							.attr('src', url);
 					
 				}, 200);
 				
