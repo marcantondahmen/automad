@@ -22,6 +22,7 @@ There are several parameters to modify the gallery:
 - files: `/path/to/images` - The file pattern or list of files, relative or absolute path (default: `"*.jpg"`)
 - width: `integer` - The thumbnails' width in pixels (default: `200`)
 - height: `integer` - The thumbnails' height in pixels (default: `200`)
+- crop: `boolean` - Crop image to defined width and height (default: `true`)
 - order: `"asc"`, `"desc"` or `false` - Set the order of images (default: `false`)
 - class: `classname` - Custom class to wrap each image (default: `false`)
 - firstWidth: `integer` - The thumbnails' width in pixels of the first item (default: `false`)
