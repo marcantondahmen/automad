@@ -357,7 +357,7 @@ class Html {
 	 *
 	 *	@param array $pages (selected pages)
 	 *	@param array $vars (variables to output in the list)
-	 *	@param string $glob (glob pattern to find a corresponding image within each page directory)
+	 *	@param string $glob (one or more glob patterns to find a corresponding image within each page directory)
 	 *	@param integer $width
 	 *	@param integer $height
 	 *	@param integer $crop
@@ -389,8 +389,8 @@ class Html {
 		
 		if ($pages) {
 						
-			if ($class) {
-				$class = ' ' . $class;
+			if (!$class) {
+				$class = AM_HTML_CLASS_LIST_ITEM;
 			}
 			
 			if (!$maxChars) {
@@ -419,7 +419,7 @@ class Html {
 				if ($first) {
 			
 					if ($firstClass) {
-						$cls = ' ' . $firstClass;
+						$cls = $firstClass;
 					}
 					
 					if ($firstWidth) {
@@ -451,18 +451,16 @@ class Html {
 					
 				}
 				
-				$html .= '<li class="' . AM_HTML_CLASS_LIST_ITEM . $cls . '"><a href="' . $Page->url . '"' . $styleAttribute . '>';
+				$html .= '<li class="' . $cls . '"><a href="' . $Page->url . '"' . $styleAttribute . '>';
 				
 				// Image
 				if ($glob) {
 					
-					// For each page, the glob pattern is matched against the page's direcory (if the glob is relative),
+					// For each page, the file pattern(s) is (are) matched against the page's direcory (if the glob is relative),
 					// to find a corresponding image as thumbnail.
-					// For example $glob = '*.jpg' will always use the first JPG in the page's directoy.
-					// To re-use $glob for every page in the loop, $glob can't be modified and 
-					// therefore $pageGlob will be used to build the full glob pattern.
-					$pageGlob = Modulate::filePath($Page->path, $glob);		
-					$html .= Html::addImage($pageGlob, $w, $h, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
+					// For example $glob = '*.jpg *.png' will always use the first JPG in the page's directoy and if nothing is found, it will try the first PNG.
+					$image = reset(Parse::fileDeclaration($glob, $Page));		
+					$html .= Html::addImage($image, $w, $h, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
 					
 				}
 			
