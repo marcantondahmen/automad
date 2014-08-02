@@ -27,10 +27,10 @@ Arrow-Icons:
 .gallery img {
 	width: 100%;
 	height: auto;
-
 }
 
 .gallerySlideshow {
+	
 	position: fixed;
 	z-index: 9000;
 	top: 0px;
@@ -38,91 +38,106 @@ Arrow-Icons:
 	width: 100%;
 	height: 100%;
 	margin:	0px;
-	overflow: hidden; 	 
-}
-
-.gallerySlideshow,
-.gallerySlideshow a {
-	color: #ffffff;
-}
-
-.gallerySlideshow a:hover {
-	color: #eeeeee;
-	background-color: transparent;
-}
- 
-.gallerySlideshow .overlay {
-	background-color: rgba(0,0,0,0.5);
-	position: fixed;
-	z-index: 1; 
-	top: 0px;
-	left: 0px;							
-	width: 100%;
-	height:	100%;
-	margin:	0px;	
-}
-
-.gallerySlideshow img {
-	position: fixed;
-	z-index: 2;	
-	border: none;
-	max-width:none;
-}
- 
-.gallerySlideshow .closeSlideshow {
-	position: fixed;
-	display: block;
-	z-index: 4;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height:	100%;
-	margin:	0px;
+	overflow: hidden; 
 	
-	/* IE Hack for transparent buttons (1% opacity) */
-	background-color: #fff;
-	opacity: 0;
-	filter: alpha(opacity=1);
-}
-
-.gallerySlideshow .prevImage {
-	left: 15px;
-}	
-
-.gallerySlideshow .nextImage {
-	right: 15px;
-}
-
-.gallerySlideshow .prevImage,
-.gallerySlideshow .nextImage {
-	position: fixed;
-	z-index: 5;
-	top: 50%;
-	padding: 25px;
-	margin: -55px 0 0 0;
-	font-family: 'slideshow-arrows';
-	font-size: 64px;					
-}
-
-.gallerySlideshow .caption {
-	position: fixed;
-	z-index: 3;
-	bottom: 15px;
-	margin-left: 50%;
-	margin-right: -50%;
-}
-
-.gallerySlideshow .captionText {
-	display: inline-block;
-	text-align: center;
-	margin-left: -50%;
-	margin-right: 50%;
-	padding: 10px;
-}
-
-.gallerySlideshow a,
-.gallerySlideshow .captionText {
-	text-shadow: 	0px 0px 3px rgba(0,0,0,0.4),
-			0px 0px 10px rgba(0,0,0,0.4);
+	&,
+	& a {
+		color: #ffffff;
+	}
+	
+	& a:hover {
+		color: #eeeeee;
+		background-color: transparent;
+	}
+	
+	& .overlay {
+		background-color: rgba(0,0,0,0.5);
+		position: fixed;
+		z-index: 1; 
+		top: 0px;
+		left: 0px;							
+		width: 100%;
+		height:	100%;
+		margin:	0px;	
+	}
+	
+	& img {
+		position: fixed;
+		z-index: 2;	
+		border: none;
+		max-width:none;
+	}
+	
+	& .closeSlideshow {
+		position: fixed;
+		display: block;
+		z-index: 4;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height:	100%;
+		margin:	0px;
+	
+		/* IE Hack for transparent buttons (1% opacity) */
+		background-color: #fff;
+		opacity: 0;
+		filter: alpha(opacity=1);
+	}
+	
+	& .prevImage,
+	& .nextImage {
+		position: fixed;
+		z-index: 5;
+		top: 50%;
+		padding: 25px;
+		margin: -55px 0 0 0;
+		font-family: 'slideshow-arrows';
+		font-size: 64px;					
+	}
+	
+	& .prevImage {
+		
+		left: 15px;
+		
+		&:before {
+			content: '<';
+		}
+		
+	}
+	
+	& .nextImage {
+		
+		right: 15px;
+		
+		&:before {
+			content: '>';
+		}
+		
+	}
+	
+	& .caption {
+		position: fixed;
+		z-index: 3;
+		bottom: 15px;
+		margin-left: 50%;
+		margin-right: -50%;
+	}
+	
+	& .captionText {
+		display: inline-block;
+		text-align: center;
+		margin-left: -50%;
+		margin-right: 50%;
+		padding: 10px;
+	}
+	
+	& a,
+	& .captionText {
+		text-shadow: 	0px 0px 3px rgba(0,0,0,0.4),
+				0px 0px 10px rgba(0,0,0,0.4);
 	    		
+	}
+		 
 }
+
+

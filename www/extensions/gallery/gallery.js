@@ -22,8 +22,8 @@
 				caption =	$('<div class="caption"></div>').appendTo(slideshow),
 				captionText =	$('<div class="captionText"></div>').appendTo(caption),
 				close = 	$('<a class="closeSlideshow" href="#"></a>').appendTo(slideshow),
-				prev =		$('<a class="prevImage" href="#"><</a>').appendTo(slideshow),
-				next =		$('<a class="nextImage" href="#">></a>').appendTo(slideshow),
+				prev =		$('<a class="prevImage" href="#"></a>').appendTo(slideshow),
+				next =		$('<a class="nextImage" href="#"></a>').appendTo(slideshow),
 				isVisible =	false,		// Slideshow is visible
 				origWidth,			// Original width of image
 				origHeight,			// Original height of image
