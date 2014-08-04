@@ -100,9 +100,9 @@ class Modulate {
 
 	public static function url($Page, $url) {
 		
-		if (strpos($url, '://') !== false || strpos($url, '?') === 0 || strpos($url, '#') === 0 || strpos($url, 'mailto:') === 0 || strpos($url, '&#') === 0) {
+		if (strpos($url, '://') !== false || strpos($url, '//') === 0 || strpos($url, '?') === 0 || strpos($url, '#') === 0 || strpos($url, 'mailto:') === 0 || strpos($url, '&#') === 0) {
 									
-			// Absolute URL ('://'), query string ('?'), anchor link ('#') or mailto links ('mailto:' and obfuscated '&#...').
+			// Absolute URL (contains '://' or starts with '//'), query string ('?'), anchor link ('#') or mailto link ('mailto:' and obfuscated '&#...').
 			return $url;
 			
 		} else if (strpos($url, '/') === 0) {
