@@ -462,7 +462,7 @@ body > .carousel .item {
   }
 }
 /* Gallery */
-.gallery div {
+.gallery > div {
   padding: 9px;
 }
 /* Breadcrumbs */
