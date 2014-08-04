@@ -106,7 +106,7 @@ class Html {
 					$caption = '';
 				}
 			
-				$html .= '<img' . $class . ' src="' . $img->file . '" alt="' . $img->description . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '"' . $caption . '>';
+				$html .= '<div class="' . AM_HTML_CLASS_IMAGE_WRAPPER . '"><img' . $class . ' src="' . $img->file . '" alt="' . $img->description . '" title="' . $img->description . '" width="' . $img->width . '" height="' . $img->height . '"' . $caption . ' /></div>';
 			
 				if ($link) {
 					$html .= '</a>';
@@ -341,7 +341,7 @@ class Html {
 				
 				// Add image.
 				$bigImage = new Image($file);
-				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $bigImage->file, false, false, true) . '</div>';
+				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $bigImage->file, false, AM_HTML_CLASS_LIST_ITEM_IMG, true) . '</div>';
 				
 			}
 			
