@@ -130,6 +130,7 @@ Config::set('AM_HTML_CLASS_PREV', 'prev');
 Config::set('AM_HTML_CLASS_NEXT', 'next');
 Config::set('AM_HTML_CLASS_FILTER', 'filter');
 Config::set('AM_HTML_CLASS_TREE', 'tree');
+Config::set('AM_HTML_CLASS_IMAGE_WRAPPER', 'img-wrapper');
 Config::set('AM_HTML_CLASS_LIST', 'list');
 Config::set('AM_HTML_CLASS_LIST_HEADER', 'list-header');
 Config::set('AM_HTML_CLASS_LIST_ITEM', 'item');
