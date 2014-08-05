@@ -372,7 +372,7 @@ hr {
 	margin: 0;
 	padding: 0;
 	
-	& .item {
+	& li {
 		list-style-type: none;
 	}
 	
@@ -452,56 +452,8 @@ hr {
 
 .carousel {
 	
-	margin: -@paddingText;
-	
-	& img {
-		width: 100%;
-	}
-	
-	/* Full-width carousels (body > .carousel) with 1600x900px images */
-	body > & {
-	
-		margin: 0;
-	
-		& .item {
-			max-width: 100%;
-			overflow: hidden;		
-		}
-	
-		@media (min-width: 1400px) {
-		
-			& img {
-				margin: -8% 0;
-			}
-	
-		}
-	
-		@media (min-width: 1900px) {
-		
-			& img {
-				margin: -11% 0;
-			}
-		
-		}
-		
-		@media (max-width: 992px) {
-		
-			& img {
-				min-width: 120%;
-				margin: 0 -10%;
-			}
-			
-		}
-		
-		@media (max-width: 768px) {
-		
-			& img {
-				min-width: 140%;
-				margin: 0 -20%;
-			}
-			
-		}
-	
+	.row & {
+		margin: -@paddingText;
 	}
 	
 }

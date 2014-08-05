@@ -377,7 +377,7 @@ hr {
   /* List with only text */
   /* List with Thumbnails */
 }
-.list .item {
+.list li {
   list-style-type: none;
 }
 .list .text-only a .title,
@@ -425,41 +425,8 @@ hr {
   box-shadow: 6px 0 0 0 #ffffff, -6px 0 0 0 #ffffff;
 }
 /* Carousel */
-.carousel {
+.row .carousel {
   margin: -6px;
-  /* Full-width carousels (body > .carousel) with 1600x900px images */
-}
-.carousel img {
-  width: 100%;
-}
-body > .carousel {
-  margin: 0;
-}
-body > .carousel .item {
-  max-width: 100%;
-  overflow: hidden;
-}
-@media (min-width: 1400px) {
-  body > .carousel img {
-    margin: -8% 0;
-  }
-}
-@media (min-width: 1900px) {
-  body > .carousel img {
-    margin: -11% 0;
-  }
-}
-@media (max-width: 992px) {
-  body > .carousel img {
-    min-width: 120%;
-    margin: 0 -10%;
-  }
-}
-@media (max-width: 768px) {
-  body > .carousel img {
-    min-width: 140%;
-    margin: 0 -20%;
-  }
 }
 /* Gallery */
 .gallery > div {
