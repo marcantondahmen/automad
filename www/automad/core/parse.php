@@ -104,7 +104,7 @@ class Parse {
 	
 
 	/**
-	 *	Parse a file declaration string where multiple glob patterns can be separated by one ore more spaces and return an array with the resolved file paths.
+	 *	Parse a file declaration string where multiple glob patterns can be separated by a comma and return an array with the resolved file paths.
 	 * 
 	 *	@param string $str
 	 *	@param object $Page (current page)
@@ -115,7 +115,7 @@ class Parse {
 		
 		$files = array();
 		
-		foreach (preg_split('/\s+/', $str, null, PREG_SPLIT_NO_EMPTY) as $glob) {
+		foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
 					
 			if ($f = glob(Modulate::filePath($Page->path, trim($glob)))) {
 				$files = array_merge($files, $f);
