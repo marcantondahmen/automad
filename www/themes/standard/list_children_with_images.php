@@ -35,7 +35,7 @@
 		<div class="row">
 			@t(listPages {
 				variables: "title, subtitle",
-				glob: "*.jpg *.png",
+				glob: "*.jpg, *.png",
 				width: 350,
 				height: 350,
 				crop: true,
