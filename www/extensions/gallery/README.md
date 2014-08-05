@@ -34,7 +34,7 @@ There are several parameters to modify the gallery:
 ###Example
 
 	@x(Gallery {
-		files: "/pages/*/*/*.jpg /shared/*.jpg", 
+		files: "/pages/*/*/*.jpg, /shared/*.jpg", 
 		width: 250, 
 		height: 250
 	}) 

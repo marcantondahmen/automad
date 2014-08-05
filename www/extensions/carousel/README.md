@@ -58,7 +58,7 @@ Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
 The same carousel without controls and a list of files:
 
 	@x(Carousel {
-		files: "image1.jpg image2.jpg", 
+		files: "image1.jpg, image2.jpg", 
 		width: 850, 
 		height: 450, 
 		duration: 3000,
