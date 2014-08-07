@@ -50,6 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  *	The criterias for the selection of Page objects are:
  *	- $type (false (all pages), "children" or "related")
+ *	- $parent (is only used, when $type is "children" - default is the current page)
  *	- $template (if passed, only pages with that template get included)
  *	- the 'search' element from the query string (if existant, the selection gets filtered by these keywords)
  *
@@ -91,6 +92,7 @@ class Listing {
 	
 	private $defaults = 	array(
 					'type' => false,
+					'parent' => false,
 					'template' => false,
 					'sortItem' => false,
 					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER
@@ -102,6 +104,13 @@ class Listing {
 	 */
 	
 	private $type;
+	
+	
+	/**
+	 *	In case $type is set to "children", the $parent URL can be used as well to change the parent from the current page to any page.
+	 */
+	
+	private $parent;
 	
 	
 	/**
@@ -164,7 +173,7 @@ class Listing {
 	
 	public function config($options) {
 		
-		// Turn all (but only) array items in $options into class properties.
+		// Turn all (but only) array items in $defaults into class properties.
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
 			$this->$key = $value;
@@ -194,7 +203,7 @@ class Listing {
 
 	
 	/**
-	 *	Collect all pages matching $type, $template & $search (optional). 
+	 *	Collect all pages matching $type (& optional $parent), $template & $search (optional). 
 	 *	(Without filtering by tag and sorting!)
 	 *	The returned pages have to be used to get all relevant tags.
 	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.
@@ -209,10 +218,16 @@ class Listing {
 		// Always exclude current page
 		$Selection->excludePage($this->Page->url);
 		
+		// Set parent, in case type is "children".
+		// The default is always the current page.
+		if (!$this->parent) {
+			$this->parent = $this->Page->url;
+		}
+		
 		// Filter by type
 		switch($this->type){
 			case 'children':
-				$Selection->filterByParentUrl($this->Page->url);
+				$Selection->filterByParentUrl($this->parent);
 				break;
 			case 'related':
 				$Selection->filterRelated($this->Page);
