@@ -288,10 +288,11 @@ class Toolbox {
 	 *	Change of configuration for Automad's Listing object.
 	 *
 	 *	Possible options are:
-	 *	- type: chidren | related	(sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags))
-	 *	- template: name 		(all pages matching that template)
-	 *	- sortItem: Var to sort by	(default sort item, when there is no query string passed)
-	 *	- sortOrder: asc | desc 	(default sort order, when there is no query string passed)
+	 *	- type: sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags)
+	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
+	 *	- template: include only pages matching that template
+	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
+	 *	- sortOrder: "asc" or "desc" - default sort order, when there is no query string passed
 	 *	
 	 *	@param array $options 
 	 */
