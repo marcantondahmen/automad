@@ -294,25 +294,11 @@ $(document).on('click', '[data-target="#automad-upload-modal"]', function() {
 		 
 		},
 		
-		always: function (e, data) {
-			
-			// If all uploads are done, or iframe transport is used, enable the close button again.
-			// Check first, if iframe-transport is used for upload, otherwise "input.fileupload('active')" is not available.
-			if (data.dataType.indexOf('iframe') < 0) {
-			
-				// Check for running uploads.
-				if (input.fileupload('active') <= 1) {
-					close.button('reset');
-				}
-			
-			} else {
-				
-				close.button('reset');
-			
-			}
-			
-	    	},
-	
+		stop: function (e) {
+			// When all uploads have finished enable the close button again.
+			close.button('reset');
+		},
+		
 		done: function (e, data) {
 				
 			// In case of an server-side error, add alert message.		
