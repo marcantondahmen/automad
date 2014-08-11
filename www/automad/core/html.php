@@ -471,9 +471,7 @@ class Html {
 				
 					if (isset($Page->data[$var])) {
 						
-						// Remove all HTML tags to make sure, there are no open tags when shortening a text block and to avoid having <a></a> within the list item.
-						// All new lines are then converted into <br> for allowing multi-line subtitles.
-						$text = nl2br(strip_tags($Page->data[$var]));
+						$text = strip_tags($Page->data[$var]);
 						
 						// Shorten $text to maximal characters (full words).
 						if (strlen($text) > $maxChars) {
