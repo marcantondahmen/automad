@@ -289,6 +289,8 @@ class Html {
 	 *	@param integer $firstWidth (width for the first image)
 	 *	@param integer $firstHeight (height for the first image)
 	 *	@param string $firstClass (wrapping class for the first image)
+	 *	@param integer $enlargedWidth (maximum width of enlarged images)
+	 *	@param integer $enlargedHeight (maximum height of enlarged images)
 	 *	@return The HTML of a list of images as links to their bigger versions.
 	 */
 	
@@ -300,7 +302,9 @@ class Html {
 					$class = false,
 					$firstWidth = false, 
 					$firstHeight = false, 
-					$firstClass = false
+					$firstClass = false,
+					$enlargedWidth = false,
+					$enlargedHeight = false
 				) {
 			
 		if (is_array($files)) {
@@ -340,8 +344,8 @@ class Html {
 				}
 				
 				// Add image.
-				$bigImage = new Image($file);
-				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $bigImage->file, false, AM_HTML_CLASS_LIST_ITEM_IMG, true) . '</div>';
+				$enlargedImage = new Image($file, $enlargedWidth, $enlargedHeight);
+				$html .= '<div' . $classAttribute . '>' . self::addImage($file, $w, $h, $crop, $enlargedImage->file, false, AM_HTML_CLASS_LIST_ITEM_IMG, true) . '</div>';
 				
 			}
 			
