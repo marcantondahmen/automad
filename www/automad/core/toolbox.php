@@ -166,6 +166,11 @@ class Toolbox {
 	 * 	- crop: false
 	 * 	- order: "asc", "desc" or false 
 	 * 	- class: wrapping class
+	 *	- firstWidth: width of first image
+	 *	- firstHeight: height of firste image
+	 *	- firstClass: wrapping class of first image
+	 *	- enlargedWidth: width of enlarged image
+	 *	- enlargedHeight: height of enlarged image
 	 *
 	 *	@param array $options
 	 *	@return The HTML of a list of resized images with links to their bigger versions
@@ -180,7 +185,12 @@ class Toolbox {
 					'height' => false,
 					'crop' => false,
 					'order' => false,
-					'class' => ''
+					'class' => false,
+					'firstWidth' => false,
+					'firstHeight' => false,
+					'firstClass' => false,
+					'enlargedWidth' => false,
+					'enlargedHeight' => false
 				);
 		
 		// Merge options with defaults				
@@ -197,7 +207,18 @@ class Toolbox {
 			rsort($files, SORT_NATURAL);
 		}	
 			
-		return Html::generateImageSet($files, $options['width'], $options['height'], $options['crop'], $options['class']);
+		return Html::generateImageSet(
+					$files, 
+					$options['width'], 
+					$options['height'], 
+					$options['crop'], 
+					$options['class'],
+					$options['firstWidth'],
+					$options['firstHeight'],
+					$options['firstClass'],
+					$options['enlargedWidth'],
+					$options['enlargedHeight']
+				);
 		
 	}	
 	
