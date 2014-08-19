@@ -28,6 +28,8 @@ There are several parameters to modify the gallery:
 - firstWidth: `integer` - The thumbnails' width in pixels of the first item (default: `false`)
 - firstHeight: `integer` - The thumbnails' height in pixels of the first item (default: `false`)
 - firstClass: `classname` - Custom class to wrap the first image (default: `false`)
+- enlargedWidth: `integer` - Maximum width of enlarged image (default: `false`)
+- enlargedHeight: `integer` - Maximum height of enlarged image (default: `false`)
 
 ---
 

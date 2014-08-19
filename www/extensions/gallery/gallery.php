@@ -68,7 +68,9 @@ class Gallery {
 					'class' => false,
 					'firstWidth' => false,
 					'firstHeight' => false,
-					'firstClass' => false
+					'firstClass' => false,
+					'enlargedWidth' => false,
+					'enlargedHeight' => false
 				);
 		
 		// Merge defaults with options
@@ -96,7 +98,9 @@ class Gallery {
 					$options['class'], 
 					$options['firstWidth'], 
 					$options['firstHeight'], 
-					$options['firstClass']
+					$options['firstClass'],
+					$options['enlargedWidth'],
+					$options['enlargedHeight']
 				);
 		$html .= '</div>';
 				
