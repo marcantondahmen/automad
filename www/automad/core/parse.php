@@ -392,7 +392,7 @@ class Parse {
 					
 					if (isset($matches[3])) {
 						// Parse the options JSON and also find and replace included variables within the JSON string.
-						$options = self::jsonOptions(self::templateVariables($matches[3], $use['automad'], true));
+						$options = Parse::jsonOptions(Parse::templateVariables($matches[3], $use['automad'], true));
 					} else {
 						$options = array();
 					}
@@ -444,8 +444,8 @@ class Parse {
 				if (file_exists($file)) {
 						
 					Debug::log('Parse: Include: ' . $file);				
-					$content = self::templateBuffer($file, $use['automad']);
-					return self::templateNestedIncludes($content, dirname($file), $use['automad']);
+					$content = Parse::templateBuffer($file, $use['automad']);
+					return Parse::templateNestedIncludes($content, dirname($file), $use['automad']);
 						
 				}
 					
@@ -471,7 +471,7 @@ class Parse {
 		$str = preg_replace_callback(AM_REGEX_SITE_VAR, function($matches) use ($use) {
 					
 					if ($use['jsonSafe']) {
-						return '"' . self::jsonEscape($use['automad']->getSiteData($matches[1])) . '"';
+						return '"' . Parse::jsonEscape($use['automad']->getSiteData($matches[1])) . '"';
 					} else {
 						return $use['automad']->getSiteData($matches[1]);
 					}
@@ -486,7 +486,7 @@ class Parse {
 					if (array_key_exists($matches[1], $use['data'])) {
 						
 						if ($use['jsonSafe']) {
-							return '"' . self::jsonEscape($use['data'][$matches[1]]) . '"';
+							return '"' . Parse::jsonEscape($use['data'][$matches[1]]) . '"';
 						} else {
 							return $use['data'][$matches[1]];
 						}
