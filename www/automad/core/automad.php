@@ -355,21 +355,12 @@ class Automad {
 	 */ 
 	
 	public function getCurrentPage() {
-		
-		if (isset($_SERVER['PATH_INFO'])) {
 			
-			// Check whether the GUI is requesting the currently edited page.
-			if ($_SERVER['PATH_INFO'] && $_SERVER['PATH_INFO'] == AM_PAGE_GUI && isset($_POST['url'])) {
-				return $this->getPageByUrl($_POST['url']);
-			} else {
-				return $this->getPageByUrl('/' . trim($_SERVER['PATH_INFO'], '/'));
-			}
-			
+		// Check whether the GUI is requesting the currently edited page.
+		if (AM_PATH_INFO && AM_PATH_INFO == AM_PAGE_GUI && isset($_POST['url'])) {
+			return $this->getPageByUrl($_POST['url']);
 		} else {
-				
-			// Return the homepage, if PATH_INFO isn't set.
-			return $this->getPageByUrl('/');
-	
+			return $this->getPageByUrl('/' . trim(AM_PATH_INFO, '/'));
 		}
 			
 	} 
