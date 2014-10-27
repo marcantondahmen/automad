@@ -151,11 +151,7 @@ class Page {
 	
 	public function isCurrent() {
 		
-		if (isset($_SERVER["PATH_INFO"])) {
-			$currentPath = '/' . trim($_SERVER["PATH_INFO"], '/');
-		} else {
-			$currentPath = '/';
-		}
+		$currentPath = '/' . trim(AM_PATH_INFO, '/');
 		
 		if ($currentPath == $this->url) {
 			return true;
@@ -173,13 +169,9 @@ class Page {
 	 */
 	
 	public function isInCurrentPath() {
-		
-		if (isset($_SERVER["PATH_INFO"])) {
-			$currentPath = '/' . trim($_SERVER["PATH_INFO"], '/');
-		} else {
-			$currentPath = '/';
-		}
-		
+				
+		$currentPath = '/' . trim(AM_PATH_INFO, '/');
+	
 		// Test if $currentPath starts with $this->url.
 		// The trailing slash is very important ($this->url . '/'), since without that slash,
 		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage, 
