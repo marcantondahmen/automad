@@ -268,13 +268,9 @@ class Cache {
 	 */
 	
 	private function getPageCacheFilePath() {
-	
-		if (isset($_SERVER['PATH_INFO'])) {
-			// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
-			$currentPath = rtrim('/' . trim($_SERVER['PATH_INFO'], '/'), '/');
-		} else {
-			$currentPath = '';
-		}
+			
+		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
+		$currentPath = rtrim('/' . trim(AM_PATH_INFO, '/'), '/');
 		
 		if ($_SERVER['QUERY_STRING']) {
 			$queryString = '_' . Parse::sanitize($_SERVER['QUERY_STRING']);
@@ -282,7 +278,16 @@ class Cache {
 			$queryString = '';
 		}
 		
-		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
+		// For proxies, use HTTP_X_FORWARDED_SERVER as server name. The actual server name is then already part of the AM_BASE_URL.
+		// For example: https://someproxy.com/domain.com/baseurl
+		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
+		if (!isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+			$serverName = $_SERVER['SERVER_NAME'];
+		} else {
+			$serverName = $_SERVER['HTTP_X_FORWARDED_SERVER'];
+		}
+		
+		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $serverName . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
 		
 		return $pageCacheFile;
 		
@@ -437,7 +442,8 @@ class Cache {
 			Debug::log('Cache: Write page: ' . $this->pageCacheFile);
 			Debug::log('Cache: Restored umask: ' . umask());
 			
-			if (function_exists('curl_version')) {
+			// Only non-forwarded (no proxy) sites.
+			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
 				$c = curl_init();
 				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('url' => $_SERVER['SERVER_NAME'] . AM_BASE_URL, 'app' => 'Automad', 'version' => AM_VERSION, 'licensekey' => AM_LIC_KEY), CURLOPT_URL => 'http://at.marcdahmen.de/track.php'));
 				$r = curl_exec($c);
