@@ -45,34 +45,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 require AM_BASE_DIR . '/automad/const.php';
 
 
-// Remove trailing slash from URL to keep relative links consistent
-// and test whether a regular page or the GUI is requested.
-if (isset($_SERVER['PATH_INFO'])) {
-	
-	// Test if PATH_INFO ends with '/' without just being '/',
-	// otherwise an infinite loop can be created when accessing the home page.
-	if (substr($_SERVER['PATH_INFO'], -1) == '/' && $_SERVER['PATH_INFO'] != '/') {
-		
-		header('Location: ' . AM_BASE_URL . rtrim($_SERVER['PATH_INFO'], '/'), false, 301);
-		die;
-		
-	}
-	
-	// Test if PATH_INFO is the GUI page and AM_PAGE_GUI is defined (GUI active).
-	if ($_SERVER['PATH_INFO'] == AM_PAGE_GUI && AM_PAGE_GUI) {
-		
-		$guiEnabled = true;
-		
-	}
-	
-} 
+// Remove trailing slash from URL to keep relative links consistent.
+if (substr(AM_PATH_INFO, -1) == '/' && AM_PATH_INFO != '/') {
+	header('Location: ' . AM_BASE_URL . rtrim(AM_PATH_INFO, '/'), false, 301);
+	die;
+}
 
+
+// Test if PATH_INFO is the GUI page and AM_PAGE_GUI is defined (GUI active).
+if (AM_PATH_INFO == AM_PAGE_GUI && AM_PAGE_GUI) {	
+	$guiEnabled = true;
+}
+	
 
 // The cache folder must be writable (resized images), also when caching is disabled!
-if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
-	
+if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {	
 	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
-	
 }
 
 
