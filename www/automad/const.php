@@ -50,8 +50,23 @@ Config::set('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
 // Parse AM_CONFIG to set user overrides for the below defined constants.
 Config::json(AM_CONFIG);
 
+
 // Base URL for all URLs relative to the root
-Config::set('AM_BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
+if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) || isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+	// Add domain name in case the site is behind a proxy. 
+	Config::set('AM_BASE_URL', '/' . $_SERVER['HTTP_HOST'] . str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
+} else {
+	Config::set('AM_BASE_URL', str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));
+}
+
+
+// Determine PATH_INFO or equivalent, in case PATH_INFO is not set.
+if (isset($_SERVER['PATH_INFO'])) {
+	Config::set('AM_PATH_INFO', $_SERVER['PATH_INFO']);
+} else {
+	Config::set('AM_PATH_INFO', str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PHP_SELF']));
+}
+
 
 // Pretty URLs
 if (file_exists(AM_BASE_DIR . '/.htaccess')) {
