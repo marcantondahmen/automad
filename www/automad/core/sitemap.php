@@ -59,14 +59,21 @@ class Sitemap {
 	 */
 	
 	public function __construct($collection) {
-				
-		$sitemap = AM_BASE_DIR . '/sitemap.xml';
 		
-		// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
-		if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
-			$this->generate($collection, $sitemap);
+		// Skip sitemap for Proxies.
+		if (!isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+				
+			$sitemap = AM_BASE_DIR . '/sitemap.xml';
+		
+			// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
+			if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
+				$this->generate($collection, $sitemap);
+			} else {
+				Debug::log('Sitemap: Permissions denied!');
+			}
+			
 		} else {
-			Debug::log('Sitemap: Permissions denied!');
+			Debug::log('Sitemap: Skipped generating sitemap.xml! (Proxy)');
 		}
 		
 	}
