@@ -63,6 +63,8 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) || isset($_SERVER['HTTP_X_FORWARDED
 // Determine PATH_INFO or equivalent, in case PATH_INFO is not set.
 if (isset($_SERVER['PATH_INFO'])) {
 	Config::set('AM_PATH_INFO', $_SERVER['PATH_INFO']);
+} else if (isset($_SERVER['ORIG_PATH_INFO'])) {
+	Config::set('AM_PATH_INFO', $_SERVER['ORIG_PATH_INFO']);
 } else {
 	Config::set('AM_PATH_INFO', str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PHP_SELF']));
 }
