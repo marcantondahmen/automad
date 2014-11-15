@@ -517,12 +517,16 @@ class Parse {
 	 */
 	 
 	public static function textFile($file) {
+		
+		$vars = array();
 			
-		// Split $file into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace. 
-		$pairs = preg_split('/\R' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\R(?=[\w\.\-]+:)/s', file_get_contents($file));
+		// Get file content and normalize line breaks.
+		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));	
+			
+		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line. 
+		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=[\w\.\-]+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content);
 		
 		// Split $pairs into an array of vars.
-		$vars = array();
 		foreach ($pairs as $pair) {
 		
 			list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $pair, 2);
