@@ -256,11 +256,11 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			
 			<div class="form-group">
 				<label for="input-data-title"><?php echo ucwords(AM_KEY_TITLE); ?></label>
-				<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo $data[AM_KEY_TITLE]; ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
+				<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TITLE]); ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
 			</div>
 			<div class="form-group">
 				<label for="input-data-tags"><?php echo $this->tb['page_tags']; ?></label>
-				<input id="input-data-tags" class="form-control" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo $data[AM_KEY_TAGS]; ?>" onkeypress="return event.keyCode != 13;" />
+				<input id="input-data-tags" class="form-control" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TAGS]); ?>" onkeypress="return event.keyCode != 13;" />
 			</div>
 			
 			<hr>
