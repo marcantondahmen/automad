@@ -119,7 +119,7 @@ if (isset($_POST['data'])) {
 	
 		<div class="form-group">
 			<label for="input-data-sitename"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
-			<input id="input-data-sitename" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo $data[AM_KEY_SITENAME]; ?>" onkeypress="return event.keyCode != 13;" />
+			<input id="input-data-sitename" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_SITENAME]); ?>" onkeypress="return event.keyCode != 13;" />
 		</div>
 		
 		<div class="form-group">
