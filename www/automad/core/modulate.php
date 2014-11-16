@@ -117,8 +117,8 @@ class Modulate {
 				if ($url != '/') {
 					return AM_BASE_URL . AM_INDEX . $url;
 				} else {
-					// Only return base URL for links to the homepage.
-					return AM_BASE_URL;
+					// Don't add a possible "/index.php" for links to the homepage.
+					return AM_BASE_URL . '/';
 				}
 					
 			}
