@@ -108,19 +108,12 @@ class Modulate {
 		} else if (strpos($url, '/') === 0) {
 			
 			// Relative to root	
-			if (Parse::isFileName($url)) {
-				
+			if (Parse::isFileName($url) || $url == '/' || strpos($url, '/?') === 0 || strpos($url, '/#') === 0) {
+				// Skip adding a possible '/index.php' when linking to files and to the homepage (possibly including a query string or anchor link), 
+				// also if rewriting is disabled.
 				return AM_BASE_URL . $url;
-				
-			} else {
-				
-				if ($url != '/') {
-					return AM_BASE_URL . AM_INDEX . $url;
-				} else {
-					// Don't add a possible "/index.php" for links to the homepage.
-					return AM_BASE_URL . '/';
-				}
-					
+			} else {	
+				return AM_BASE_URL . AM_INDEX . $url;	
 			}
 									
 		} else {
