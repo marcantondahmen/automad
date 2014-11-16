@@ -41,13 +41,29 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-// Load configuration
+// Autoload core classes and libraries.
+spl_autoload_register(function($class) {
+	
+	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
+		
+	if (strpos($file, 'automad') === 0) {	
+		// Load Automad class.
+		require_once AM_BASE_DIR . '/' . $file;
+	} else {	
+		// Load 3rd party library.
+		require_once AM_BASE_DIR . '/automad/lib/' . $file;
+	}
+		
+});
+
+
+// Load configuration.
 require AM_BASE_DIR . '/automad/const.php';
 
 
 // Remove trailing slash from URL to keep relative links consistent.
 if (substr(AM_PATH_INFO, -1) == '/' && AM_PATH_INFO != '/') {
-	header('Location: ' . AM_BASE_URL . rtrim(AM_PATH_INFO, '/'), false, 301);
+	header('Location: ' . AM_BASE_URL . AM_INDEX . rtrim(AM_PATH_INFO, '/'), false, 301);
 	die;
 }
 
@@ -64,21 +80,8 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 }
 
 
-// Autoload core classes and libraries
-spl_autoload_register(function($class) {
-	
-	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
-		
-	if (strpos($file, 'automad') === 0) {	
-		// Load Automad class
-		require_once AM_BASE_DIR . '/' . $file;
-		
-	} else {	
-		// Load 3rd party library
-		require_once AM_BASE_DIR . '/automad/lib/' . $file;
-	}
-		
-});
+// Enable full error reporting, when debugging is enabled.
+Debug::errorReporting();
 
 
 // Split GUI form regular pages
