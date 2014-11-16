@@ -463,7 +463,8 @@ class Html {
 					// For each page, the file pattern(s) is (are) matched against the page's direcory (if the glob is relative),
 					// to find a corresponding image as thumbnail.
 					// For example $glob = '*.jpg *.png' will always use the first JPG in the page's directoy and if nothing is found, it will try the first PNG.
-					$image = reset(Parse::fileDeclaration($glob, $Page));		
+					$images = Parse::fileDeclaration($glob, $Page);
+					$image = reset($images);		
 					$html .= Html::addImage($image, $w, $h, $crop, false, false, AM_HTML_CLASS_LIST_ITEM_IMG);
 					
 				}
