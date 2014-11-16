@@ -109,9 +109,18 @@ class Modulate {
 			
 			// Relative to root	
 			if (Parse::isFileName($url)) {
+				
 				return AM_BASE_URL . $url;
+				
 			} else {
-				return AM_BASE_URL . AM_INDEX . $url;	
+				
+				if ($url != '/') {
+					return AM_BASE_URL . AM_INDEX . $url;
+				} else {
+					// Only return base URL for links to the homepage.
+					return AM_BASE_URL;
+				}
+					
 			}
 									
 		} else {
