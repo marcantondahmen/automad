@@ -322,10 +322,11 @@ class Parse {
 	public static function siteData() {
 		
 		// Define default settings.
-		// Use the server name as default site name and the first found theme folder as default theme.		
+		// Use the server name as default site name and the first found theme folder as default theme.	
+		$themes = glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR);	
 		$defaults = 	array(	
 					AM_KEY_SITENAME => $_SERVER['SERVER_NAME'],
-					AM_KEY_THEME => basename(reset(glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR)))  
+					AM_KEY_THEME => basename(reset($themes))  
 				);
 		
 		// Merge defaults with settings from file.
