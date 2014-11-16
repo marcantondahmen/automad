@@ -69,6 +69,19 @@ class Debug {
 	
 	
 	/**
+	 *	Enable full error reporting, when debugging is enabled.
+	 */
+	
+	public static function errorReporting() {
+		
+		if (AM_DEBUG_ENABLED) {
+			error_reporting(E_ALL);
+		}
+		
+	}
+	
+	
+	/**
 	 *	Stop timer, calculate execution time, get user & server constants and return the log buffer.
 	 */
 	
