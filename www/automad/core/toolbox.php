@@ -314,6 +314,8 @@ class Toolbox {
 	 *	- template: include only pages matching that template
 	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
 	 *	- sortOrder: "asc" or "desc" - default sort order, when there is no query string passed
+	 *	- offset: offset the within the array of all relevant pages
+	 *	- limit: limit the object's array of relevant pages
 	 *	
 	 *	@param array $options 
 	 */
@@ -356,6 +358,8 @@ class Toolbox {
 	 *	- firstClass: special class for the first item of the list
 	 *	- firstWidth: width for the image of the first list item
 	 *	- firstHeight: height for the image of the first list item
+	 *	- offset: offset within the array of filtered/sorted pages
+	 *	- limit: limit the output of listed pages
 	 *
 	 * 	@param array $options
 	 *	@return The HTML for a page list.
@@ -375,7 +379,9 @@ class Toolbox {
 					'style' => false,
 					'firstWidth' => false,
 					'firstHeight' => false,
-					'firstClass' => false
+					'firstClass' => false,
+					'offset' => 0,
+					'limit' => NULL
 				);
 	
 		$options = array_merge($defaults, $options);
@@ -387,7 +393,7 @@ class Toolbox {
 		$Listing = $this->Automad->getListing();
 	
 		return 		Html::generateList(
-					$Listing->getPages(), 
+					$Listing->getPages($options['offset'], $options['limit']), 
 					$options['variables'], 
 					$options['glob'], 
 					$options['width'], 
