@@ -118,16 +118,18 @@ class Selection {
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@param boolean $excludeHidden
+	 *	@param integer $offset
+	 *	@param integer $limit
 	 *	@return array $this->selection
 	 */
 	
-	public function getSelection($excludeHidden = true) {
+	public function getSelection($excludeHidden = true, $offset = 0, $limit = NULL) {
 		
 		if ($excludeHidden) {
 			$this->excludeHidden();
 		}
 		
-		return $this->selection;
+		return array_slice($this->selection, $offset, $limit);
 		
 	}
 	
