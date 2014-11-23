@@ -95,7 +95,9 @@ class Listing {
 					'parent' => false,
 					'template' => false,
 					'sortItem' => false,
-					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER
+					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER,
+					'offset' => 0,
+					'limit' => NULL
 				);
 	
 	
@@ -206,7 +208,10 @@ class Listing {
 	 *	Collect all pages matching $type (& optional $parent), $template & $search (optional). 
 	 *	(Without filtering by tag and sorting!)
 	 *	The returned pages have to be used to get all relevant tags.
-	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.
+	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.   
+	 *	
+	 *	Also note that $this->offset & $this->limit reduces the set of all relevant pages and tags of the listing object while using the $offset or $limit parameters of
+	 *	$this->getPages() only reduces the output and will not affect the relevant pages and the collected tags.    
 	 *
 	 *	@return An array of all Page objects matching $type & $template excludng the current page. 
 	 */
@@ -240,7 +245,7 @@ class Listing {
 		// Filter by keywords (for search results)
 		$Selection->filterByKeywords($this->search);
 		
-		return $Selection->getSelection();
+		return $Selection->getSelection(true, $this->offset, $this->limit);
 			
 	}
 	
@@ -268,18 +273,24 @@ class Listing {
 	
 	
 	/**
-	 *	The final set of Page objects - filtered and sorted.
-	 * 
+	 *	The final set of Page objects - filtered and sorted.    
+	 *
+	 *	Note that $offset & $limit only reduce the output and not the array of relevant pages! Using the getTags() method will still output all tags, 
+	 *	even if pages with such tags are not returned due to the limit. Sorting a listing will also sort all pages and therefore the set of returned pages might
+	 *	always be different.
+	 *
+	 *	@param integer $offset
+	 *	@param integer $limit
 	 *	@return The filtered and sorted array of Page objects
 	 */
 	
-	public function getPages() {
+	public function getPages($offset = 0, $limit = NULL) {
 			
 		$Selection = new Selection($this->getRelevant());
 		$Selection->filterByTag($this->filter);
 		$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
-		return $Selection->getSelection();
+		return $Selection->getSelection(true, $offset, $limit);
 			
 	}
 
