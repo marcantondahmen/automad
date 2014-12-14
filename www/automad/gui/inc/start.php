@@ -56,7 +56,8 @@ $this->element('header');
 
 ?>
 		
-			<div class="column content">
+		<div class="column content">
+			<div class="scroll">
 				<div class="inner">
 					<div class="start">
 						<h1><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h1>
@@ -67,6 +68,7 @@ $this->element('header');
 					</div>	
 				</div>	
 			</div>
+		</div>
 
 <?php
 
