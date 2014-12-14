@@ -50,49 +50,71 @@ $this->element('header');
 ?>
 		
 		<div class="column subnav">
-			<ul class="nav nav-pills nav-stacked fixed">
-				<li class="active"><a href="#cache" data-toggle="tab"><span class="glyphicon glyphicon-hdd"></span> <?php echo $this->tb['sys_cache']; ?></a></li>
-				<li><a href="#users" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> <?php echo $this->tb['sys_user']; ?></a></li>
-				<li><a href="#file_types" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['sys_file_types']; ?></a></li>
-				<li><a href="#debug" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> <?php echo $this->tb['sys_debug']; ?></a></li>
-			</ul>		
+			<div class="scroll">
+				<div class="inner">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active">
+							<a href="#cache" data-toggle="tab">
+								<span class="glyphicon glyphicon-hdd"></span><span class="hidden-md"> <?php echo $this->tb['sys_cache']; ?></span>
+							</a>
+						</li>
+						<li>
+							<a href="#users" data-toggle="tab">
+								<span class="glyphicon glyphicon-user"></span><span class="hidden-md"> <?php echo $this->tb['sys_user']; ?></span>
+							</a>
+						</li>
+						<li>
+							<a href="#file_types" data-toggle="tab">
+								<span class="glyphicon glyphicon-picture"></span><span class="hidden-md"> <?php echo $this->tb['sys_file_types']; ?></span>
+							</a>
+						</li>
+						<li>
+							<a href="#debug" data-toggle="tab">
+								<span class="glyphicon glyphicon-info-sign"></span><span class="hidden-md"> <?php echo $this->tb['sys_debug']; ?></span>
+							</a>
+						</li>
+					</ul>	
+				</div>	
+			</div>	
 		</div>
 		
 		<div class="column content">
-			<!-- Tab panes -->
-			<div class="inner tab-content">
-				<div id="cache" class="tab-pane fade in active">	
-					<div class="alert alert-info">
-						<h3><?php echo $this->tb['sys_cache']; ?></h3>
-						<?php echo $this->tb['sys_cache_info']; ?> 
+			<div class="scroll">
+				<!-- Tab panes -->
+				<div class="inner tab-content">
+					<div id="cache" class="tab-pane fade in active">	
+						<div class="alert alert-info">
+							<h3><?php echo $this->tb['sys_cache']; ?></h3>
+							<?php echo $this->tb['sys_cache_info']; ?> 
+						</div>	
+						<a href="#" class="automad-status btn btn-default" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a>	
+						<a href="#" class="btn btn-default" data-toggle="modal" data-target="#cache-clear-modal"><span class="glyphicon glyphicon-refresh"></span> <?php echo $this->tb['sys_cache_clear']; ?></a>
 					</div>	
-					<a href="#" class="automad-status btn btn-default" data-automad-status="cache" data-toggle="modal" data-target="#cache-settings-modal"></a>	
-					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#cache-clear-modal"><span class="glyphicon glyphicon-refresh"></span> <?php echo $this->tb['sys_cache_clear']; ?></a>
-				</div>	
-				<div id="users" class="tab-pane fade">	
-					<div class="alert alert-info">
-						<h3><?php echo $this->tb['sys_user']; ?></h3>
-						<?php echo $this->tb['sys_user_info']; ?> 
-					</div>		
-					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#change-password-modal"><span class="glyphicon glyphicon-lock"></span> <?php echo $this->tb['sys_user_change_password']; ?></a>		
-					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#add-user-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['sys_user_add']; ?></a>
-					<a href="#" class="automad-status btn btn-default" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a>
-				</div>
-				<div id="file_types" class="tab-pane fade">
-					<div class="alert alert-info">	
-						<h3><?php echo $this->tb['sys_file_types']; ?></h3>
-						<?php echo $this->tb['sys_file_types_info']; ?> 
-					</div>		
-					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#file-types-modal"><span class="glyphicon glyphicon-pencil"></span> <?php echo $this->tb['sys_file_types_edit']; ?></a>
-				</div>
-				<div id="debug" class="tab-pane fade">
-					<div class="alert alert-info">
-						<h3><?php echo $this->tb['sys_debug']; ?></h3>
-						<?php echo $this->tb['sys_debug_info']; ?>
+					<div id="users" class="tab-pane fade">	
+						<div class="alert alert-info">
+							<h3><?php echo $this->tb['sys_user']; ?></h3>
+							<?php echo $this->tb['sys_user_info']; ?> 
+						</div>		
+						<a href="#" class="btn btn-default" data-toggle="modal" data-target="#change-password-modal"><span class="glyphicon glyphicon-lock"></span> <?php echo $this->tb['sys_user_change_password']; ?></a>		
+						<a href="#" class="btn btn-default" data-toggle="modal" data-target="#add-user-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['sys_user_add']; ?></a>
+						<a href="#" class="automad-status btn btn-default" data-automad-status="users" data-toggle="modal" data-target="#users-modal"></a>
 					</div>
-					<a href="#" class="automad-status btn btn-default" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a>
-				</div>
-			</div>				
+					<div id="file_types" class="tab-pane fade">
+						<div class="alert alert-info">	
+							<h3><?php echo $this->tb['sys_file_types']; ?></h3>
+							<?php echo $this->tb['sys_file_types_info']; ?> 
+						</div>		
+						<a href="#" class="btn btn-default" data-toggle="modal" data-target="#file-types-modal"><span class="glyphicon glyphicon-pencil"></span> <?php echo $this->tb['sys_file_types_edit']; ?></a>
+					</div>
+					<div id="debug" class="tab-pane fade">
+						<div class="alert alert-info">
+							<h3><?php echo $this->tb['sys_debug']; ?></h3>
+							<?php echo $this->tb['sys_debug_info']; ?>
+						</div>
+						<a href="#" class="automad-status btn btn-default" data-automad-status="debug" data-toggle="modal" data-target="#debug-modal"></a>
+					</div>
+				</div>	
+			</div>			
 		</div>
 
 		<!-- Modals -->
