@@ -39,7 +39,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 ?>
-	</div> <!-- Wrapper -->
+	</div> 
 	
 </body>
 </html>
