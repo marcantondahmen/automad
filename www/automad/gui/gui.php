@@ -338,8 +338,8 @@ class GUI {
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
-		$prefix = ltrim(\Automad\Core\Parse::sanitize(str_replace('.', '_', $prefix)) . '.', '.');
-		$title = \Automad\Core\Parse::sanitize(str_replace('.', '_', $title)) . '/';
+		$prefix = ltrim(\Automad\Core\Parse::sanitize($prefix, true) . '.', '.');
+		$title = \Automad\Core\Parse::sanitize($title, true) . '/';
 
 		// Build new path.
 		$newPath = $newParentPath . $prefix . $title;
