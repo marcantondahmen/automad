@@ -76,41 +76,73 @@ $this->element('header');
 ?>
 
 		<?php if ($Page) { ?> 
-		<div class="column subnav">	
-			<ul class="nav nav-pills nav-stacked fixed">
-				<li><a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_visit_page']; ?></a></li>
-				<!-- Data -->
-				<li class="active"><a href="#data" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> <?php echo $this->tb['btn_data']; ?></a></li>
-				<!-- Files -->
-				<li><a href="#files" data-toggle="tab"><span class="glyphicon glyphicon-folder-open"></span> <?php echo $this->tb['btn_files']; ?></a></li>
-				<!-- Add Subpage Button -->
-				<li><a href="#" data-toggle="modal" data-target="#automad-add-subpage-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_page']; ?></a></li>
-				<?php if ($Page->path != '/') { ?> 
-				<!-- Move Page Button -->
-				<li><a href="#" data-toggle="modal" data-target="#automad-move-page-modal"><span class="glyphicon glyphicon-move"></span> <?php echo $this->tb['btn_move_page']; ?></a></li>
-				<!-- Delete Page Button -->
-				<li><a href="#" data-toggle="modal" data-target="#automad-delete-page-modal"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_delete_page']; ?></a></li>
-				<?php } ?> 
-			</ul>	
+		<div class="column subnav">
+			<div class="scroll">	
+				<div class="inner">
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank">
+								<span class="glyphicon glyphicon-arrow-right"></span><span class="hidden-md"> <?php echo $this->tb['btn_visit_page']; ?></span>
+							</a>
+						</li>
+						<!-- Data -->
+						<li class="active">
+							<a href="#data" data-toggle="tab">
+								<span class="glyphicon glyphicon-align-left"></span><span class="hidden-md"> <?php echo $this->tb['btn_data']; ?></span>
+							</a>
+						</li>
+						<!-- Files -->
+						<li>
+							<a href="#files" data-toggle="tab">
+								<span class="glyphicon glyphicon-folder-open"></span><span class="hidden-md"> <?php echo $this->tb['btn_files']; ?></span>
+							</a>
+						</li>
+						<!-- Add Subpage Button -->
+						<li>
+							<a href="#" data-toggle="modal" data-target="#automad-add-subpage-modal">
+								<span class="glyphicon glyphicon-plus"></span><span class="hidden-md"> <?php echo $this->tb['btn_add_page']; ?></span>
+							</a>
+						</li>
+						<?php if ($Page->path != '/') { ?> 
+						<!-- Move Page Button -->
+						<li>
+							<a href="#" data-toggle="modal" data-target="#automad-move-page-modal">
+								<span class="glyphicon glyphicon-move"></span><span class="hidden-md"> <?php echo $this->tb['btn_move_page']; ?></span>
+							</a>
+						</li>
+						<!-- Delete Page Button -->
+						<li>
+							<a href="#" data-toggle="modal" data-target="#automad-delete-page-modal">
+								<span class="glyphicon glyphicon-trash"></span><span class="hidden-md"> <?php echo $this->tb['btn_delete_page']; ?></span>
+							</a>
+						</li>
+						<?php } ?> 
+					</ul>
+				</div>	
+			</div>		
 		</div>
 		
 		<div class="column content">
-			<div class="inner">
-				<div class="alert alert-info">
-					<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
+			<div class="scroll">
+				<div class="inner">
+					<div class="alert alert-info">
+						<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
+					</div>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div id="data" class="tab-pane fade in active">
+							<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $Page->url; ?>" role="form">
+								<span class="glyphicon glyphicon-time"></span> <?php echo $this->tb['btn_loading']; ?>
+							</form>
+						</div>
+						<div id="files" class="tab-pane fade">
+							<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
+							<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
+							<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
+							<form class="automad-form automad-init" data-automad-handler="files" data-automad-url="<?php echo $Page->url; ?>" role="form"></form>
+						</div>
+					</div>	
 				</div>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div id="data" class="tab-pane fade in active">
-						<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $Page->url; ?>" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo $this->tb['btn_loading']; ?></form>
-					</div>
-					<div id="files" class="tab-pane fade">
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
-						<form class="automad-form automad-init" data-automad-handler="files" data-automad-url="<?php echo $Page->url; ?>" role="form"></form>
-					</div>
-				</div>	
 			</div>
 		</div>
 		
