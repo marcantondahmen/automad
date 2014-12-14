@@ -71,23 +71,25 @@ $this->element('header');
 
 ?>
 
-	<div class="column content">
-		<div class="inner">
-			<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?> 
-      			<form role="form" method="post">
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input id="username" class="form-control" type="text" name="username" />
+		<div class="column content">
+			<div class="scroll">
+				<div class="inner">
+					<?php if (isset($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?> 
+		      			<form role="form" method="post">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input id="username" class="form-control" type="text" name="username" />
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>	
+							<input id="password" class="form-control" type="password" name="password" />
+						</div>
+						<br />	
+						<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_login']; ?></button>
+					</form>
 				</div>
-				<div class="form-group">
-					<label for="password">Password</label>	
-					<input id="password" class="form-control" type="password" name="password" />
-				</div>
-				<br />	
-				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> <?php echo $this->tb['btn_login']; ?></button>
-			</form>
-		</div>
-	</div>	
+			</div>
+		</div>	
 					
 <?php
 
