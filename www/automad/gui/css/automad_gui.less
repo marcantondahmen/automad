@@ -39,14 +39,6 @@
 
 /* Variables */
 
-@widthNav:		320px;
-@widthSubnav:		240px;
-@widthContent:		720px;
-
-@minWidthNav:		280px;
-@minWidthSubnav:	200px;
-@minWidthContent:	512px;
-
 @paddingColumn:		15px;
 @paddingBox:		15px;
 @paddingItem:		15px;
@@ -71,6 +63,7 @@
 @colorBoxBg:		#EEE;
 @colorFiletypeBg:	#DDD;
 @colorLabel:		#FFF;
+@colorBadgeBg:		@colorNavBg;
 
 @colorPrimary:		#5BD3F3;
 @colorDefault:		#FFFFFF;
@@ -78,7 +71,7 @@
 @colorWarning:		#FF5842;
 @colorDanger:		@colorWarning;
 @colorMuted:		#BDBDBD;
-@colorSeparator:	#CCC;
+@colorSeparator:	#C4C4C4;
 
 @separatorMargin: 	30px;
 @separatorWidth:	70px;
@@ -178,16 +171,21 @@
 
 /* Body & Wrapper */
 
+html,
+body {
+	height: 100%;
+	min-height: 100%;
+}
+
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
 	font-size: 14px;
 	line-height: 1.5;
-	padding: 58px 0 30px 0;
-	min-width: 1280px;
 	color: @colorDefault;
 	background-color: @colorBodyBg;
+	overflow: hidden;
 }
 
 body,
@@ -196,16 +194,19 @@ input {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.wrapper {
-	display: table;
-	width: 100%;
-	// Hide Active border from site tree by 0 padding-top, double column-width margin and overflow: hidden.
-	padding: 0 @paddingColumn @paddingColumn @paddingColumn;
-	margin-top: (2 * @paddingColumn);
-	overflow: hidden;
+.container {
+		
+	padding: 0 @paddingColumn;
+
+	// Only the main container - not the navbar-container.
+	body > & {
+		height: 100%;
+		max-height: 100%;
+		padding: (@paddingColumn + 58px) @paddingColumn @paddingColumn @paddingColumn;
+		overflow: hidden;
+	}
+		
 }
-
-
 
 
 /* General Styles */
@@ -294,7 +295,6 @@ h6,
 
 .navbar {
 	
-	min-width: 1280px;
 	background-color: @colorBodyBg;
 	border: none;
 	
@@ -304,28 +304,33 @@ h6,
 	}
 	
 	& .logo a:hover {
-		color: @colorPrimary;
+		color: @colorNavItem;
 	}
 	
 	&&-default li a {
 		
 		padding: @paddingItem;
 		font-size: 16px;
+		max-width: 300px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: @colorNavItemActiveBg;
 			color: @colorNavItem;
 		}
 	
 	}
 	
-	& .container-fluid {
-		padding: 0 (2 * @paddingColumn);	
+	& .container {	
 		background-color: @colorBodyBg;
 	}
 	
 	& .inner {
 		height: 58px;
+		margin: 0 @paddingColumn;
 		padding: 0 @paddingBox;
 		background-color: @colorNavbarBg;
 	}
@@ -358,89 +363,114 @@ h6,
 
 
 
+/* Scrollbars */
+
+.mCustomScrollBox,
+.mCSB_container {
+	overflow: visible !important;
+}
+
+.mCSB_scrollTools_vertical {
+	right: -23px !important;
+}
+
+
+
+
 /* Columns */
 
 .column {
 	
-	display: table-cell;
-	vertical-align: top;
-	position: relative;
-	// Hide active page's border by setting padding-top: 0.
-	padding: 0 @paddingColumn @paddingColumn @paddingColumn;
-
-	&.nav {
-		
-		width: @widthNav;
-		max-width: @widthNav;
-		min-width: @minWidthNav;
-		
-		& .fixed {
-			
-			// .fixed is the wrapping class to apply position: fixed via JS in case the list are small enough. 
-			overflow: hidden;
-			margin-right: -((2 * @paddingColumn) + @connectorWidth);
-
-			& > ul {
-				background-color: @colorNavBg;
-				margin-bottom: (2 * @paddingColumn);
-				padding: @paddingBox;	
-				width: (@widthNav - (2 * @paddingColumn));
-			}
-			
-		}
-		
+	height: 100%;
+	float: left;
+	padding: 0 @paddingColumn;
+	overflow-x: visible !important;
+	
+	& .scroll {
+		position: relative;
+		overflow-y: auto;
+		overflow-x: visible;
+		height: 100%;
+		overflow-x: visible !important;
 	}
 	
-	&.subnav {
-			
-		width: @widthSubnav;
-		min-width: @minWidthSubnav;
-	
+	& .inner {
+		overflow-x: visible !important;
+		padding: @paddingColumn 0;
+	}
+		
+	&.nav .inner {
+		 
 		& > ul {
-			// The to border is just needed to cover the connector when .nav is scrolled while .subnav is fixed.
-			position: relative;
-			top: -(2 * @paddingColumn);
-			border-top-width: (2 * @paddingColumn);
-			border-top-color: @colorBodyBg;
-			border-top-style: solid;
-			background-color: @colorSubNavBg;
-			padding: @paddingBox;
+			background-color: @colorNavBg;
+			padding: @paddingBox;	
+		}
+		
+		& > ul + ul {
+			margin-top: (2 * @paddingColumn);
 		}
 		
 	}
+					
+	&.subnav .inner > ul {
+		position: relative;
+		background-color: @colorSubNavBg;
+		padding: @paddingBox;
+		// The to border is just needed to cover the connector when .nav is scrolled while .subnav is fixed.
+		top: -(2 * @paddingColumn);
+		border-top-width: (2 * @paddingColumn);
+		border-top-color: @colorBodyBg;
+		border-top-style: solid;
+	}
 	
-	&.content {
+	// If there is only a .content column, that column gets centered.
+	&.content:first-child {
+		margin: auto;
+		float: none;
+	}
 	
-		width: auto;
-		
-		& .inner {
-			max-width: @widthContent;
-			min-width: @minWidthContent;
-			margin: auto;	
-		}
-
-		.nav + & .inner {
-			
-			margin: 0;
-			
-			@media (min-width: ((2 * (@widthNav + (2 * @paddingColumn))) + @widthContent)) {		
-				position: relative;
-				left: -(@widthNav / 2);
-				margin: auto;
-			}
-			
+	// Set the width of the columns based on the bootstrap breakpoint for medium devices.
+	@media (min-width: 992px) { 
+	
+		// All together 970px.
+		&.nav {
+			width: 280px;
 		}
 		
-		.subnav + & .inner {
-			
-			margin: 0;
-			
-			@media (min-width: ((2 * (@widthNav + @widthSubnav + (2 * @paddingColumn))) + @widthContent)) {		
-				position: relative;
-				left: -((@widthNav + @widthSubnav) / 2);
-				margin: auto;
-			}
-			
+		&.subnav {
+			width: 105px;
+		}
+		
+		&.content {
+			width: 555px;
+		}
+		
+		// If there is no .subnav, the subnav-width get added to the .content column.
+		&.nav + &.content {
+			width: 660px;
+		}
+	
+	}
+	
+	// Set the width of the columns based on the bootstrap breakpoint for large devices.
+	@media (min-width: 1200px) { 
+		
+		// All together 1170px.
+		&.nav {
+			width: 300px;
+		}
+		
+		&.subnav {
+			width: 240px;
+		}
+		
+		&.content {
+			width: 600px;
+		}
+		
+		// If there is no .subnav, the subnav-width get added to the .content column.
+		&.nav + &.content {
+			width: 840px;
 		}
 		
 	}
@@ -538,13 +568,13 @@ h6,
 			}
 			
 			&:before {
-				top: -1px;
+				top: 0px;
 				width: (@paddingPages + 4px);
-				height: (@paddingPages + 13px);
+				height: (@paddingPages + 11px);
 			}
 	
 			&:after {
-				top: (@paddingPages + 12px);
+				top: (@paddingPages + 11px);
 				bottom: -1px;
 			}
 		
@@ -772,25 +802,44 @@ textarea {
 
 /* Files */
 
-#files .box a {
+#files .box {
 	
-	color: @colorBox;
-	text-decoration: none;
+	& a {
 	
-	& .glyphicon {
-		font-size: 80%;
-	}
+		color: @colorBox;
+		text-decoration: none;
 	
-	&:hover {
-		
-		&,
 		& .glyphicon {
-			text-decoration: underline;
+			font-size: 80%;
 		}
-
-	}
+	
+		&:hover {
 		
-}	
+			&,
+			& .glyphicon {
+				text-decoration: underline;
+			}
+
+		}
+		
+	}
+	
+	& h6 {
+		
+		position: relative;
+		padding-left: 20px;
+		
+		& .glyphicon {
+			display: inline-block;
+			position: absolute;
+			left: 0;
+		}
+		
+	}
+	
+}
+
+	
 
 .filetype {
 	width: 125px;
@@ -864,7 +913,7 @@ textarea {
 
 .badge {
 	
-	background-color: @colorNavBg;
+	background-color: @colorBadgeBg;
 	padding: 5px 8px;
 	margin: -5px 0;
 	.border-radius(20px);
