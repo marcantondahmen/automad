@@ -77,7 +77,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 
 			// Save new subpage below the current page's path.		
-			$subdir = str_replace('.', '_', Parse::sanitize($title)) . '/';
+			$subdir = Parse::sanitize($title, true) . '/';
 			$newPagePath = $Page->path . $subdir;
 
 
