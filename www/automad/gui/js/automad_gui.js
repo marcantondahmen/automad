@@ -521,37 +521,38 @@ $(document).ready(function() {
 
 
 // ===================================================
-// Navigation: Fixed Position
+// ScrollBars
 // ===================================================
 
-$(window).on('resize load click', function() {
+$(document).ready(function() {
 	
-	$('.fixed').each(function() {
-		
-		// Remove inline styles first to get current left offset and width after resize.
-		$(this).removeAttr('style');
-		
-		// Get original properties for current window.
-		var	offset = $(this).offset(),
-			height = $(this).outerHeight(),
-			width = $(this).outerWidth();
-		
-		if ((height + offset.top) < $(window).height()) {
-	
-			$(this).css({
-				position: 'fixed',
-				top: offset.top + 'px',
-				left: offset.left + 'px',
-				width: width + 'px'
-			});
-
-		} 
-		
+	$('.scroll').mCustomScrollbar({
+		scrollbarPosition: 'outside',
+		theme: 'inset',
+		autoHideScrollbar: true,
+		scrollInertia: 400,
+		scrollButtons: { 
+			enable: true 
+		}
 	});
+	
+	setTimeout(function() {
+		
+		var activePage = $('.column.nav li.active');
+		
+		if ((activePage.offset().top + 80) > $(window).height()) {
+			
+			$('.column.nav .scroll').mCustomScrollbar('scrollTo', function() {
+				return activePage.offset().top - $(window).height() + 80;
+			}, { scrollInertia: 150 });
+			
+		}
+		
+	}, 100);
 		
 });
-	
-	
+
+
 	
 
 // ===================================================
@@ -681,6 +682,34 @@ $(window).resize(function() {
 
 
 // ===================================================
+// Textareas: Tabs
+// ===================================================
+
+$(document).on('keydown', 'textarea', function(e) {
+	
+	// Insert \t at caret when TAB is pressed, instead of jumping to the next textarea or button.
+	if (e.keyCode === 9) { 
+		
+		var 	start = this.selectionStart,
+		 	end = this.selectionEnd,
+			value = $(this).val();
+
+		// Set textarea value to text before caret + tab + text after caret.
+		$(this).val(value.substring(0, start) + "\t" + value.substring(end));
+
+		// Put caret at right position again (add one for the tab).
+		this.selectionStart = this.selectionEnd = start + 1;
+
+		// Prevent the focus lose.
+		e.preventDefault();
+	}
+	
+});
+
+
+
+
+// ===================================================
 // JavaScript check
 // ===================================================
 	
@@ -688,7 +717,7 @@ $(document).ready(function() {
 
 	// Make main container visible.
 	$('#noscript').remove();
-	$('#script').show();
+	$('#script').removeClass('hidden');
 
 });
 
