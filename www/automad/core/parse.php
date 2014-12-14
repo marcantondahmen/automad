@@ -290,22 +290,45 @@ class Parse {
 	
 	/**
 	 *	Cleans up a string to be used as URL, directory or file name. 
-	 *	The returned string constists of the following characters: a-z, A-Z, -, _ and a dot (.)
-	 *	That means, this method is safe to be used with filenames as well, since it keeps the dots as suffix separators.
+	 *	The returned string constists of the following characters: a-z, A-Z, -, _ and and optionally dot (.)
+	 *	That means, this method is safe to be used with filenames as well, since it keeps by default the dots as suffix separators.
 	 *
 	 *	Note: To produce fully safe prefixes and directory names, 
-	 *	possible dots should be removed separatly from this method by just calling the standard str_replace('.', '_', $str) before. 
+	 *	possible dots should be removed by setting $removeDots = true. 
 	 *
 	 *	@param string $str
-	 *	@return $str
+	 *	@param boolean $removeDots	
+	 *	@return the sanitized string
 	 */
 	
-	public static function sanitize($str) {
+	public static function sanitize($str, $removeDots = false) {
 		
-		$search  = array('&'  ,'/','*','+'  ,'@'   ,'ä','ö','ü','å','ø','á','à','é','è','Ä','Ö','Ü','Å','Ø','Á','À','É','È');
-		$replace = array('and','-','x','and','_at_','a','o','u','a','o','a','a','e','e','A','O','U','A','O','A','A','E','E');
+		// Transliterate string.
+		$sanitized = \JBroadway\URLify::downcode(trim($str));
 		
-		return preg_replace('/[^\w\.\-]/', '_', strtolower(str_replace($search, $replace, trim($str))));
+		// Lower case.
+		$sanitized = strtolower($sanitized);
+		
+		// Remove a/an/the.
+		$sanitized = preg_replace('/\b(a|an|the)\b/', '', $sanitized);
+		
+		// Replace special chars.
+		$search  = array('&'  ,'/','*','+'  ,'@'   );
+		$replace = array('and','-','x','and','_at_');
+		$sanitized = str_replace($search, $replace, $sanitized);
+		
+		// Replace all unneeded chars with underscores.
+		if ($removeDots) {
+			$sanitized = preg_replace('/[^\w\-]/', '_', $sanitized);
+		} else {
+			$sanitized = preg_replace('/[^\w\.\-]/', '_', $sanitized);
+		}
+		
+		// Trim leading dots to prevent creating hidden files.
+		$sanitized = ltrim($sanitized, '.');
+		
+		// Merge / trim all underscores and hyphens.
+		return preg_replace('/([_\-])\1+/', '$1', trim($sanitized, '_-')); 
 		
 	}
 	
