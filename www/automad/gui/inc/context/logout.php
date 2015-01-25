@@ -54,11 +54,9 @@ $this->element('header');
 ?>
 
 		<div class="column content">
-			<div class="scroll">
-				<div class="inner">
-					<div class="alert alert-success"><?php echo $this->tb['success_log_out']; ?></div>			
-					<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-default"><?php echo $this->tb['btn_login']; ?></a>
-				</div>
+			<div class="inner">
+				<div class="alert alert-success"><?php echo $this->tb['success_log_out']; ?></div>			
+				<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-default"><?php echo $this->tb['btn_login']; ?></a>
 			</div>
 		</div>
 
