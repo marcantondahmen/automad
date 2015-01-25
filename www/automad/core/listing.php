@@ -237,6 +237,8 @@ class Listing {
 			case 'related':
 				$Selection->filterRelated($this->Page);
 				break;
+			case 'siblings':
+				$Selection->filterByParentUrl($this->Page->parentUrl);
 		}
 	
 		// Filter by template
