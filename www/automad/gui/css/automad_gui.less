@@ -45,7 +45,14 @@
 @paddingPages:		8px;
 @paddingNested:		22px;
 
-@connectorWidth:	10px;
+@widthNavMd: 		280px;
+@widthSubNavMd: 	105px;
+@widthContentMd: 	555px;
+@widthNavLg: 		300px;
+@widthSubNavLg: 	240px;
+@widthContentLg: 	600px;
+
+@widthConnector:	10px;
 
 @colorBodyBg:		#D2D2D2;
 @colorNavbarBg:		#C5C5C5;
@@ -73,9 +80,9 @@
 @colorMuted:		#BDBDBD;
 @colorSeparator:	#C4C4C4;
 
-@separatorMargin: 	30px;
-@separatorWidth:	70px;
-@separatorHeight:	5px;
+@marginSeparator: 	30px;
+@widthSeparator:	70px;
+@heightSeparator:	5px;
 
 
 
@@ -171,12 +178,6 @@
 
 /* Body & Wrapper */
 
-html,
-body {
-	height: 100%;
-	min-height: 100%;
-}
-
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 500;
@@ -185,7 +186,6 @@ body {
 	line-height: 1.5;
 	color: @colorDefault;
 	background-color: @colorBodyBg;
-	overflow: hidden;
 }
 
 body,
@@ -196,15 +196,11 @@ input {
 
 .container {
 		
-	padding: 0 @paddingColumn;
-
-	// Only the main container - not the navbar-container.
-	body > & {
-		height: 100%;
-		max-height: 100%;
-		padding: (@paddingColumn + 58px) @paddingColumn @paddingColumn @paddingColumn;
-		overflow: hidden;
-	}
+	padding: (@paddingColumn + 58px) @paddingColumn @paddingColumn @paddingColumn;
+		
+	.navbar & {
+		padding: 0 @paddingColumn;
+	}	
 		
 }
 
@@ -212,9 +208,9 @@ input {
 /* General Styles */
 
 hr {
-	margin: @separatorMargin 0;
-	width: @separatorWidth;
-	border-top-width: @separatorHeight;
+	margin: @marginSeparator 0;
+	width: @widthSeparator;
+	border-top-width: @heightSeparator;
 	border-color: @colorSeparator;
 }
 
@@ -381,21 +377,30 @@ h6,
 
 .column {
 	
-	height: 100%;
-	float: left;
 	padding: 0 @paddingColumn;
-	overflow-x: visible !important;
+	
+	&.nav,
+	&.subnav {
+		position: fixed;
+		top: 0;
+		left: 50%;
+		overflow-x: visible !important;
+		height: 100%;
+		padding-top: (58px + @paddingColumn);
+	}
+	
+	&.content {
+		position: relative;
+	}
 	
 	& .scroll {
 		position: relative;
 		overflow-y: auto;
-		overflow-x: visible;
 		height: 100%;
 		overflow-x: visible !important;
 	}
 	
 	& .inner {
-		overflow-x: visible !important;
 		padding: @paddingColumn 0;
 	}
 		
@@ -423,31 +428,28 @@ h6,
 		border-top-style: solid;
 	}
 	
-	// If there is only a .content column, that column gets centered.
-	&.content:first-child {
-		margin: auto;
-		float: none;
-	}
-	
 	// Set the width of the columns based on the bootstrap breakpoint for medium devices.
 	@media (min-width: 992px) { 
 	
-		// All together 970px.
 		&.nav {
-			width: 280px;
+			margin-left: -((970px / 2) - @paddingColumn);
+			width: @widthNavMd;
 		}
 		
 		&.subnav {
-			width: 105px;
+			margin-left: -((970px / 2) - @paddingColumn - @widthNavMd);
+			width: @widthSubNavMd;
 		}
 		
 		&.content {
-			width: 555px;
+			left: (@widthNavMd + @widthSubNavMd);
+			width: @widthContentMd;
 		}
 		
 		// If there is no .subnav, the subnav-width get added to the .content column.
 		&.nav + &.content {
-			width: 660px;
+			left: @widthNavMd;
+			width: (@widthContentMd + @widthSubNavMd);
 		}
 	
 	}
@@ -455,24 +457,33 @@ h6,
 	// Set the width of the columns based on the bootstrap breakpoint for large devices.
 	@media (min-width: 1200px) { 
 		
-		// All together 1170px.
 		&.nav {
-			width: 300px;
+			margin-left: -((1170px / 2) - @paddingColumn);
+			width: @widthNavLg;
 		}
 		
 		&.subnav {
-			width: 240px;
+			margin-left: -((1170px / 2) - @paddingColumn - @widthNavLg);
+			width: @widthSubNavLg;
 		}
 		
 		&.content {
-			width: 600px;
+			left: (@widthNavLg + @widthSubNavLg);
+			width: @widthContentLg;
 		}
 		
 		// If there is no .subnav, the subnav-width get added to the .content column.
 		&.nav + &.content {
-			width: 840px;
+			left: @widthNavLg;
+			width: (@widthContentLg + @widthSubNavLg);
 		}
 		
+	}
+	
+	// If there is only a .content column, that column gets centered.
+	&.content:first-child {
+		margin: auto;
+		left: 0;
 	}
 		
 }
@@ -521,7 +532,7 @@ h6,
 	.nav.column & .active {
 		
 		& > a[href*="?context"] {
-			margin-right: -(@paddingBox + (2 * @paddingColumn) + @connectorWidth);
+			margin-right: -(@paddingBox + (2 * @paddingColumn) + @widthConnector);
 			color: @colorNavItemActive;
 			background-color: @colorSubNavBg;
 		}
@@ -530,8 +541,8 @@ h6,
 			position: absolute;
 			height: 99999px;
 			top: -99999px;
-			right: -(@paddingBox + (2 * @paddingColumn) + @connectorWidth);
-			border-right-width: @connectorWidth;
+			right: -(@paddingBox + (2 * @paddingColumn) + @widthConnector);
+			border-right-width: @widthConnector;
 			border-right-style: solid;
 			border-right-color: @colorSubNavBg;
 		}
