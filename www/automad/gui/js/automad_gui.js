@@ -528,11 +528,11 @@ $(document).ready(function() {
 	
 	$('.scroll').mCustomScrollbar({
 		scrollbarPosition: 'outside',
-		theme: 'inset',
+		theme: 'minimal-dark',
 		autoHideScrollbar: true,
-		scrollInertia: 400,
+		scrollInertia: 300,
 		scrollButtons: { 
-			enable: true 
+			enable: false 
 		}
 	});
 	
