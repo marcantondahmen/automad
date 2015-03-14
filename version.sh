@@ -22,7 +22,7 @@ if [[ $arg == "" ]]; then
 
 	echo
 	echo "---"	
-	echo 'Add the following lines to .hg/hgrc to automatically generate a version numer with Mercurial:'
+	echo 'Add the following lines to .hg/hgrc to automatically generate a version number with Mercurial:'
 	echo 
 	echo '[hooks]'
 	echo 'pre-commit = ./version.sh "$HG_ARGS"'
