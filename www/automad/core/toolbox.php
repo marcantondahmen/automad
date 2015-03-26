@@ -141,15 +141,26 @@ class Toolbox {
 					'height' => false,
 					'crop' => false,
 					'link' => false,
-					'target' => false
+					'target' => false,
+					'class' => false
 				);
 		
 		// Merge options with defaults				
 		$options = array_merge($defaults, $options);
 			
 		if ($options['file']) {
+			
 			$glob = Modulate::filePath($this->Page->path, $options['file']);
-			return Html::addImage($glob, $options['width'], $options['height'], $options['crop'], $options['link'], $options['target']);
+			return Html::addImage(
+					$glob, 
+					$options['width'], 
+					$options['height'], 
+					$options['crop'], 
+					$options['link'], 
+					$options['target'], 
+					$options['class']
+				);
+				
 		}
 
 	}
@@ -646,28 +657,28 @@ class Toolbox {
 		// If 'rootLevel' is not false (!==, can be 0), 
 		// the tree always starts below the given level within the breadcrumb trail to the current page.
 		// So, $parent gets dynamically determined in contrast to defining 'parent' within the options.
-		// When 'rootLevel' is defined and is valid (matches a page), the 'parent' option will be ignored.
+		// When 'rootLevel' is defined, the 'parent' option will be ignored.
 		if ($options['rootLevel'] !== false) {
 			
 			$Selection = new Selection($this->collection);
 			$Selection->filterBreadcrumbs($this->Page->url);
 			
 			foreach ($Selection->getSelection() as $breadcrumb) {
-				
 				if ($breadcrumb->level == $options['rootLevel']) {
 					$parent = $breadcrumb->url;
 				}
-				
 			}
-			
-		} 
-		
-		// The 'parent' options will be ignored, when $parent is already defined by using the 'rootLevel' option.
-		if (!isset($parent)) {
+				
+		} else {
+			// If the 'rootLevel' option is set to false, the 'parent' option will be used.
 			$parent = $options['parent'];
 		}
-				
-		return Html::generateTree($parent, $options['all'], $this->collection);
+		
+		// The tree only gets generated, if $parent is defined, because in case the 'rootLevel' option is 
+		// defined and greater than the actual level of the current page, $parent won't be defined.
+		if (isset($parent)) {	
+			return Html::generateTree($parent, $options['all'], $this->collection);
+		}
 	
 	}
 	
