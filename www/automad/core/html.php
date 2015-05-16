@@ -548,17 +548,16 @@ class Html {
 	 * 	Generate search field.
 	 *	
 	 *	@param string $url (URL of the results page)
-	 *	@param string $placeholderText (placeholder text)
+	 *	@param string $placeholder (placeholder text)
+	 *	@param string $class (class for the form element)
 	 *	@return the HTML for the search field
 	 */
 	
-	public static function generateSearchField($url, $placeholderText) {
+	public static function generateSearchField($url, $placeholder, $class) {
 		
-		$html =  '<form class="' . AM_HTML_CLASS_SEARCH . '" method="get" action="' . $url . '">';
-		$html .= '<input type="text" name="search" value="' . $placeholderText . '" onfocus="if (this.value==\'' . $placeholderText . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $placeholderText . '\'; }" />';
-		$html .= '</form>';
-		
-		return $html;
+		return 	'<form class="' . $class . '" method="get" action="' . $url . '">' .
+			'<input type="text" name="search" value="' . $placeholder . '" onfocus="if (this.value==\'' . $placeholder . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $placeholder . '\'; }" />' .
+			'</form>';
 			
 	}
 
