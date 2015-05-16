@@ -692,9 +692,14 @@ class Toolbox {
 	
 	public function search($options = array()) {
 		
-		$options = array_merge(array('placeholder' => 'Search ...'), $options);
+		$defaults = 	array(
+					'placeholder' => 'Search', 
+					'class' => AM_HTML_CLASS_SEARCH
+				);
 		
-		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $options['placeholder']);
+		$options = array_merge($defaults, $options);
+		
+		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $options['placeholder'], $options['class']);
 		
 	}
 	
