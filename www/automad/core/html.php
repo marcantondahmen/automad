@@ -549,16 +549,36 @@ class Html {
 	 *	
 	 *	@param string $url (URL of the results page)
 	 *	@param string $placeholder (placeholder text)
-	 *	@param string $class (class for the form element)
+	 *	@param string $formClass	
+	 *	@param string $inputClass 
+	 *	@param string $button (button text)
+	 *	@param string $buttonClass
 	 *	@return the HTML for the search field
 	 */
 	
-	public static function generateSearchField($url, $placeholder, $class) {
+	public static function generateSearchField($url, $placeholder, $formClass = false, $inputClass = false, $button = false, $buttonClass = false) {
 		
-		return 	'<form class="' . $class . '" method="get" action="' . $url . '">' .
-			'<input type="text" name="search" value="' . $placeholder . '" onfocus="if (this.value==\'' . $placeholder . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $placeholder . '\'; }" />' .
+		if ($formClass) {
+			$formClass = ' class="' . $formClass . '"';
+		}
+		
+		if ($inputClass) {
+			$inputClass = ' class="' . $inputClass . '"';
+		}
+		
+		if ($buttonClass) {
+			$buttonClass = ' class="' . $buttonClass . '"';
+		}
+		
+		if ($button) {
+			$button = '<button' . $buttonClass . ' type="submit">' . $button . '</button>';
+		}
+		
+		return 	'<form' . $formClass . ' method="get" action="' . $url . '">' .
+			'<input' . $inputClass . ' type="text" name="search" value="' . $placeholder . '" onfocus="if (this.value==\'' . $placeholder . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $placeholder . '\'; }" />' .
+			$button .
 			'</form>';
-			
+
 	}
 
 
