@@ -686,7 +686,7 @@ class Toolbox {
 	/**
 	 * 	Place a search field with placeholder text.
 	 *
-	 *	@param array $options - Only $options['placeholder']
+	 *	@param array $options
 	 *	@return the HTML of the searchfield
 	 */
 	
@@ -694,12 +694,22 @@ class Toolbox {
 		
 		$defaults = 	array(
 					'placeholder' => 'Search', 
-					'class' => AM_HTML_CLASS_SEARCH
+					'formClass' => AM_HTML_CLASS_SEARCH,
+					'inputClass' => AM_HTML_CLASS_SEARCH_INPUT,
+					'button' => false,
+					'buttonClass' => AM_HTML_CLASS_SEARCH_BUTTON
 				);
 		
 		$options = array_merge($defaults, $options);
 		
-		return Html::generateSearchField(AM_PAGE_RESULTS_URL, $options['placeholder'], $options['class']);
+		return Html::generateSearchField(
+					AM_PAGE_RESULTS_URL, 
+					$options['placeholder'], 
+					$options['formClass'],
+					$options['inputClass'],
+					$options['button'],
+					$options['buttonClass']
+				);
 		
 	}
 	
