@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Modulate class holds all methods to modulate URLs and file paths.
+ *	The Resolve class holds all methods to modulate URLs and file paths.
  *	Since all page URLs are not URLs to real directories, all non-absolute links and file paths have to be modulated, 
  *	to point to a valid location. 
  *	For example a relative file name to an image wouldn't be a valid link, since the URL of the page is not
@@ -53,11 +53,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - http://automad.org/license
  */
 
-class Modulate {
+class Resolve {
 	
 
 	/**
-	 *	Modulate a file path or glob pattern according to its type (root relative or relative).
+	 *	Resolve a file path or glob pattern according to its type (root relative or relative).
 	 *
 	 *	If a file path begins with a '/', it is treated like a root relative path and the only AM_BASE_DIR gets prepended.
 	 *	In all other cases, the full path to the page gets prepended.
@@ -87,7 +87,7 @@ class Modulate {
 
 
 	/**
-	 *	Modulate an URL according to its type.
+	 *	Resolve an URL according to its type.
 	 * 
 	 *	Absolute URLs, query strings, anchors or mails:	not modified
 	 *	Root-relative URLs: 				AM_BASE_URL is prepended (and AM_INDEX in case of pages)
