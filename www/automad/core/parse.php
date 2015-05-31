@@ -117,7 +117,7 @@ class Parse {
 		
 		foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
 					
-			if ($f = glob(Modulate::filePath($Page->path, trim($glob)))) {
+			if ($f = glob(Resolve::filePath($Page->path, trim($glob)))) {
 				$files = array_merge($files, $f);
 			}
 			
