@@ -81,7 +81,7 @@ $this->element('header');
 				<div class="inner">
 					<ul class="nav nav-pills nav-stacked">
 						<li>
-							<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank">
+							<a href="<?php echo Resolve::url($Page, $url); ?>" target="_blank">
 								<span class="glyphicon glyphicon-arrow-right"></span><span class="hidden-md"> <?php echo $this->tb['btn_visit_page']; ?></span>
 							</a>
 						</li>
@@ -125,7 +125,7 @@ $this->element('header');
 		<div class="column content">
 			<div class="inner">
 				<div class="alert alert-info">
-					<a href="<?php echo Modulate::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
+					<a href="<?php echo Resolve::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
 				</div>
 				<!-- Tab panes -->
 				<div class="tab-content">
