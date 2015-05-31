@@ -150,7 +150,7 @@ class Toolbox {
 			
 		if ($options['file']) {
 			
-			$glob = Modulate::filePath($this->Page->path, $options['file']);
+			$glob = Resolve::filePath($this->Page->path, $options['file']);
 			return Html::addImage(
 					$glob, 
 					$options['width'], 
