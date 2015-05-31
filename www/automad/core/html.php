@@ -556,7 +556,11 @@ class Html {
 	 *	@return the HTML for the search field
 	 */
 	
-	public static function generateSearchField($url, $placeholder, $formClass = false, $inputClass = false, $button = false, $buttonClass = false) {
+	public static function generateSearchField($url, $placeholder = false, $formClass = false, $inputClass = false, $button = false, $buttonClass = false) {
+		
+		if ($placeholder) {
+			$placeholder = ' placeholder="' . $placeholder . '"';
+		}
 		
 		if ($formClass) {
 			$formClass = ' class="' . $formClass . '"';
@@ -574,8 +578,8 @@ class Html {
 			$button = '<button' . $buttonClass . ' type="submit">' . $button . '</button>';
 		}
 		
-		return 	'<form' . $formClass . ' method="get" action="' . $url . '">' .
-			'<input' . $inputClass . ' type="text" name="search" value="' . $placeholder . '" onfocus="if (this.value==\'' . $placeholder . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $placeholder . '\'; }" />' .
+		return 	'<form' . $formClass . ' method="get" action="' . $url . '" onsubmit="return (this.search.value.length > 0)">' .
+			'<input' . $inputClass . ' type="text" name="search"' . $placeholder . ' value="" />' .
 			$button .
 			'</form>';
 
