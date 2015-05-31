@@ -101,7 +101,7 @@ class Template {
 		
 		// Redirect page, if an URL is defined.
 		if (isset($this->Page->data[AM_KEY_URL])) {
-			header('Location: ' . Modulate::url($this->Page, $this->Page->url));
+			header('Location: ' . Resolve::url($this->Page, $this->Page->url));
 			die;
 		}
 	
@@ -144,14 +144,14 @@ class Template {
 		// action, href and src
 		$output = 	preg_replace_callback('/(action|href|src)="(.+?)"/',
 				function($match) use ($Page) {
-					return $match[1] . '="' . Modulate::url($Page, $match[2]) . '"';
+					return $match[1] . '="' . Resolve::url($Page, $match[2]) . '"';
 				},
 				$output);
 				
 		// Inline styles (like background-image)
 		$output = 	preg_replace_callback('/url\(\'(.+?)\'\)/',
 				function($match) use ($Page) {
-					return 'url(\'' . Modulate::url($Page, $match[1]) . '\')';
+					return 'url(\'' . Resolve::url($Page, $match[1]) . '\')';
 				},
 				$output);
 	
