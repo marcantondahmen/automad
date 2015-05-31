@@ -268,6 +268,18 @@ hr {
   -moz-box-shadow: 0 0 0 0 transparent;
   box-shadow: 0 0 0 0 transparent;
 }
+::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+:-moz-placeholder {
+  color: #ffffff !important;
+}
+::-moz-placeholder {
+  color: #ffffff !important;
+}
+:-ms-input-placeholder {
+  color: #ffffff !important;
+}
 /* Jumbotron */
 .jumbotron {
   margin: 50px 0 0 0;
