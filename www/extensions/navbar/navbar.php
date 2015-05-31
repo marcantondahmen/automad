@@ -87,7 +87,7 @@ class Navbar {
 		}
 		
 		// Main nav wrapper
-		$html = '<nav class="navbar navbar-default' . $fixed . '" role="navigation">';
+		$html = '<nav class="navbar navbar-default' . $fixed . '">';
 			
 		// To determine all pages for each row, first the "breadcrumbs" get filtered.	
 		$Page = $Automad->getCurrentPage();	 
@@ -145,12 +145,14 @@ class Navbar {
 						
 						// Search box
 						if ($options['search']) {
-						
-							$html .= '<form class="navbar-form navbar-' . $options['searchPosition'] . '" role="search" method="get" action="' . AM_PAGE_RESULTS_URL . '">' . 
-								 '<input class="form-control" type="text" name="search" value="' . $options['search'] . '" ' .
-								 'onfocus="if (this.value==\'' . $options['search'] . '\') { this.value=\'\'; }" onblur="if (this.value==\'\') { this.value=\'' . $options['search'] . '\'; }" />' .
-								 '</form>';
 							
+							$html .= \Automad\Core\Html::generateSearchField(
+									AM_PAGE_RESULTS_URL, 
+									$options['search'], 
+									'navbar-form navbar-' . $options['searchPosition'], 
+									'form-control'
+								);
+								
 						} 
 						
 						// Close collapse
