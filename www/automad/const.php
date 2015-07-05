@@ -49,7 +49,7 @@ define('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
 // Parse AM_CONFIG to set user overrides for the below defined constants.
 Config::json(AM_CONFIG);
 
-// Define debugging already here to be available when parsing the requested page (AM_PATH_INFO).
+// Define debugging already here to be available when parsing the request.
 Config::set('AM_DEBUG_ENABLED', false);
 
 
@@ -78,40 +78,8 @@ if (file_exists(AM_BASE_DIR . '/.htaccess')) {
 
 
 
-// Determine PATH_INFO or equivalent, in case PATH_INFO is not set.
-$pathInfo = '';
-
-if (isset($_SERVER['PATH_INFO'])) {
-		
-	$pathInfo = $_SERVER['PATH_INFO'];
-	Debug::log('Getting request from PATH_INFO');
-	
-} else if (isset($_SERVER['ORIG_PATH_INFO'])) {	
-	
-	$pathInfo = $_SERVER['ORIG_PATH_INFO'];
-	Debug::log('Getting request from ORIG_PATH_INFO');
-	
-} else if (isset($_SERVER['REQUEST_URI'])) {
-		
-	$pathInfo = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
-	Debug::log('Getting request from REQUEST_URI');
-	
-} else if (isset($_SERVER['REDIRECT_URL'])) {
-	
-	$pathInfo = $_SERVER['REDIRECT_URL'];
-	Debug::log('Getting request from REDIRECT_URL');
-	
-} else if (isset($_SERVER['PHP_SELF'])) {
-	
-	$pathInfo = $_SERVER['PHP_SELF'];
-	Debug::log('Getting request from PHP_SELF');
-	
-}
-
-$pathInfo = str_replace(AM_BASE_URL, '', $pathInfo);
-$pathInfo = str_replace('/index.php', '', $pathInfo);
-
-define('AM_PATH_INFO', $pathInfo);
+// Get the requested URL.
+define('AM_REQUEST', Parse::request());
 
 
 
