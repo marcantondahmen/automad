@@ -151,13 +151,7 @@ class Page {
 	
 	public function isCurrent() {
 		
-		$currentPath = '/' . trim(AM_PATH_INFO, '/');
-		
-		if ($currentPath == $this->url) {
-			return true;
-		} else {
-			return false;
-		}
+		return (AM_REQUEST == $this->url);
 		
 	}
 	
@@ -170,17 +164,11 @@ class Page {
 	
 	public function isInCurrentPath() {
 				
-		$currentPath = '/' . trim(AM_PATH_INFO, '/');
-	
-		// Test if $currentPath starts with $this->url.
+		// Test if AM_REQUEST starts with $this->url.
 		// The trailing slash is very important ($this->url . '/'), since without that slash,
 		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage, 
 		// while /path/to/page/ would not match.
-		if (strpos($currentPath, $this->url . '/') === 0 && !$this->isCurrent()) {
-			return true;
-		} else {
-			return false;
-		}
+		return (strpos(AM_REQUEST, $this->url . '/') === 0 && !$this->isCurrent());
 		
 	}
 	
@@ -193,11 +181,7 @@ class Page {
 	
 	public function isHome() {
 		
-		if ($this->url == '/') {
-			return true;
-		} else {
-			return false;
-		}
+		return ($this->url == '/');
 		
 	}
 	
