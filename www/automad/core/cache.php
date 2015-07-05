@@ -270,7 +270,7 @@ class Cache {
 	private function getPageCacheFilePath() {
 			
 		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
-		$currentPath = rtrim('/' . trim(AM_PATH_INFO, '/'), '/');
+		$currentPath = rtrim(AM_REQUEST, '/');
 		
 		if ($_SERVER['QUERY_STRING']) {
 			$queryString = '_' . Parse::sanitize($_SERVER['QUERY_STRING']);
