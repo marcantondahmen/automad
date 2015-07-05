@@ -287,7 +287,57 @@ class Parse {
 	
 	}
 		
+
+	/**
+	 *	Return the current page request as equivalent to the $_SERVER['PATH_INFO'] variable.
+	 *	
+	 *	@return The requested URL
+	 */
+
+	public static function request() {
+		
+		$request = '';
+
+		if (isset($_SERVER['PATH_INFO'])) {
+		
+			$request = $_SERVER['PATH_INFO'];
+			Debug::log('Parse: Getting request from PATH_INFO');
 	
+		} else if (isset($_SERVER['ORIG_PATH_INFO'])) {	
+	
+			$request = $_SERVER['ORIG_PATH_INFO'];
+			Debug::log('Parse: Getting request from ORIG_PATH_INFO');
+	
+		} else if (isset($_SERVER['REQUEST_URI'])) {
+		
+			$request = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
+			Debug::log('Parse: Getting request from REQUEST_URI');
+	
+		} else if (isset($_SERVER['REDIRECT_URL'])) {
+	
+			$request = $_SERVER['REDIRECT_URL'];
+			Debug::log('Parse: Getting request from REDIRECT_URL');
+	
+		}
+
+		$request = str_replace(AM_BASE_URL, '', $request);
+		$request = str_replace('/index.php', '', $request);
+		
+		// Remove trailing slash from URL to keep relative links consistent.
+		if (substr($request, -1) == '/' && $request != '/') {
+			header('Location: ' . AM_BASE_URL . AM_INDEX . rtrim($request, '/'), false, 301);
+			die;
+		}
+		
+		$request = '/' . trim($request, '/');
+		
+		Debug::log('Parse: Request: ' . $request);
+		
+		return $request; 
+		
+	}
+
+
 	/**
 	 *	Cleans up a string to be used as URL, directory or file name. 
 	 *	The returned string constists of the following characters: a-z, A-Z, -, _ and and optionally dot (.)
