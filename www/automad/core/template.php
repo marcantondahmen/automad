@@ -131,13 +131,13 @@ class Template {
 	
 		
 	/**
-	 *	Find all links/URLs in $output and modulate the matches according to their type.
+	 *	Find all links/URLs in $output and resolve the matches according to their type.
 	 *	
 	 *	@param string $output
 	 *	@return $output
 	 */
 	
-	private function modulateUrls($output) {
+	private function resolveUrls($output) {
 		
 		$Page = $this->Page;
 		
@@ -204,7 +204,7 @@ class Template {
 		$output = Parse::templateVariables($output, $this->Automad);
 		
 		$output = $this->addMetaTags($output);
-		$output = $this->modulateUrls($output);	
+		$output = $this->resolveUrls($output);	
 		$output = $this->obfuscateEmails($output);
 	
 		return $output;	
