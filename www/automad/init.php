@@ -57,19 +57,12 @@ spl_autoload_register(function($class) {
 });
 
 
-// Load configuration.
+// Load configuration and define constants.
 require AM_BASE_DIR . '/automad/const.php';
 
 
-// Remove trailing slash from URL to keep relative links consistent.
-if (substr(AM_PATH_INFO, -1) == '/' && AM_PATH_INFO != '/') {
-	header('Location: ' . AM_BASE_URL . AM_INDEX . rtrim(AM_PATH_INFO, '/'), false, 301);
-	die;
-}
-
-
-// Test if PATH_INFO is the GUI page and AM_PAGE_GUI is defined (GUI active).
-if (AM_PATH_INFO == AM_PAGE_GUI && AM_PAGE_GUI) {	
+// Test if AM_REQUEST is the GUI page and AM_PAGE_GUI is defined (GUI active).
+if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {	
 	$guiEnabled = true;
 }
 	
