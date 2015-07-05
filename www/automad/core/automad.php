@@ -357,10 +357,10 @@ class Automad {
 	public function getCurrentPage() {
 			
 		// Check whether the GUI is requesting the currently edited page.
-		if (AM_PATH_INFO && AM_PATH_INFO == AM_PAGE_GUI && isset($_POST['url'])) {
+		if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
 			return $this->getPageByUrl($_POST['url']);
 		} else {
-			return $this->getPageByUrl('/' . trim(AM_PATH_INFO, '/'));
+			return $this->getPageByUrl(AM_REQUEST);
 		}
 			
 	} 
