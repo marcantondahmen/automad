@@ -289,7 +289,7 @@ class Parse {
 		
 
 	/**
-	 *	Return the current page request as equivalent to the $_SERVER['PATH_INFO'] variable.
+	 *	Return the URL of the currently requested page.
 	 *	
 	 *	@return The requested URL
 	 */
@@ -298,28 +298,72 @@ class Parse {
 		
 		$request = '';
 
-		if (isset($_SERVER['PATH_INFO'])) {
-		
-			$request = $_SERVER['PATH_INFO'];
-			Debug::log('Parse: Getting request from PATH_INFO');
-	
-		} else if (isset($_SERVER['ORIG_PATH_INFO'])) {	
-	
-			$request = $_SERVER['ORIG_PATH_INFO'];
-			Debug::log('Parse: Getting request from ORIG_PATH_INFO');
-	
-		} else if (isset($_SERVER['REQUEST_URI'])) {
-		
-			$request = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
-			Debug::log('Parse: Getting request from REQUEST_URI');
-	
-		} else if (isset($_SERVER['REDIRECT_URL'])) {
-	
-			$request = $_SERVER['REDIRECT_URL'];
-			Debug::log('Parse: Getting request from REDIRECT_URL');
-	
+		if (!isset($_SERVER['QUERY_STRING'])) {
+			$_SERVER['QUERY_STRING'] = '';
 		}
-
+		
+		// Check if the query string starts with a '/'. 
+		// That is the case if the requested page gets passed as part of the query string when rewriting is enabled (.htaccess or nginx.conf).
+		if (strncmp($_SERVER['QUERY_STRING'], '/', 1) === 0) {
+			
+			// The requested page gets passed as part of the query string when pretty URLs are enabled and requests get rewritten like:
+			// domain.com/page -> domain.com/index.php?/page 
+			// Or with a query string: 
+			// domain.com/page?key=value -> domain.com/index.php?/page&key=value
+			// Depending on the rewrite rules and environment, the query string can also look like:
+			// domain.com/page?key=vaule -> domain.com/index.php?/page?key=value (note the 2nd "?"!)
+			$query = preg_split('/[&\?]/', $_SERVER['QUERY_STRING'], 2);
+			$request = $query[0];
+			Debug::log('Parse: Request: Getting request from QUERY_STRING: ' . $_SERVER['QUERY_STRING']);
+			Debug::log('Parse: Request: Split Query String: ' . var_export($query, true));
+			
+			// In case there is no real query string except the requested page.
+			if (!isset($query[1])) {
+				$query[1] = '';
+			}
+			
+			// Rebuild correct $_GET array without requested page.
+			parse_str($query[1], $_GET);
+			
+			// Remove request from QUERY_STRING.
+			$_SERVER['QUERY_STRING'] = $query[1];
+			
+			Debug::log('Parse: Request: $_GET: ' . var_export($_GET, true));
+			
+		} else {
+				
+			// The requested page gets passed 'index.php/page/path'.
+			// That can be the case if rewriting is disabled and AM_INDEX equals '/index.php'.
+			if (isset($_SERVER['PATH_INFO'])) {
+		
+				$request = $_SERVER['PATH_INFO'];
+				Debug::log('Parse: Request: Getting request from PATH_INFO');
+	
+			} else if (isset($_SERVER['ORIG_PATH_INFO'])) {	
+	
+				$request = $_SERVER['ORIG_PATH_INFO'];
+				Debug::log('Parse: Request: Getting request from ORIG_PATH_INFO');
+	
+			} else if (isset($_SERVER['REQUEST_URI'])) {
+		
+				$request = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
+				Debug::log('Parse: Request: Getting request from REQUEST_URI');
+	
+			} else if (isset($_SERVER['REDIRECT_URL'])) {
+	
+				$request = $_SERVER['REDIRECT_URL'];
+				Debug::log('Parse: Request: Getting request from REDIRECT_URL');
+			
+			} else if (isset($_SERVER['PHP_SELF'])) {
+	
+				$request = $_SERVER['PHP_SELF'];
+				Debug::log('Parse: Request: Getting request from PHP_SELF');
+	
+			}
+			
+		}
+	
+		// Remove unwanted components from the request.
 		$request = str_replace(AM_BASE_URL, '', $request);
 		$request = str_replace('/index.php', '', $request);
 		
