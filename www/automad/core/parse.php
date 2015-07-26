@@ -218,7 +218,7 @@ class Parse {
 	 *	
 	 *	If a variable in that file has a multiline string as its value, that string will be then parsed as markdown.
 	 *	If the variable string is just a single line, markdown parsing is skipped.
-	 *	In a second step, all URLs are checked and fixed, in case they point to the website's root.
+	 *	If the variable is a multiline string, but starts and ends with a <head> element, markdown parsing will be skipped as well.
 	 *	
 	 *	@param string $file
 	 *	@return Array of variables
@@ -230,8 +230,10 @@ class Parse {
 			
 		$vars = array_map(function($var) {
 			 
-				if (strpos($var, "\n") !== false) {
-					// If $var has line breaks (is multiline)
+				$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
+			 
+				if (strpos($var, "\n") !== false && !preg_match($regexTag, $var)) {
+					// If $var has line breaks (is multiline) and is not only one or more tags (meta, script, link tags ...).
 					return \Michelf\MarkdownExtra::defaultTransform($var); 
 				} else {
 					// If $var is a single line, skip parsing
