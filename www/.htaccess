@@ -60,8 +60,8 @@ RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 
 # Everything after the base url (virtual page path) will be redirected to 
 # the second match "%2" from the above condition: 
-# ( www.yoursite.com ) + "index.php"
-RewriteRule ^(.*)$ %2index.php [L]
+# ( www.yoursite.com ) + "index.php?/" + page/path
+RewriteRule ^(.*)$ %2index.php?/$1 [QSA,L]
 
 
 
