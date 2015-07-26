@@ -147,9 +147,10 @@ class Resolve {
 			
 			$url = implode('/', $resolvedParts);
 			
-			// Trim trailing slashes, also with query string appended.
-			$url = rtrim($url, '/');
+			// Trim trailing slashes, also with query string or anchor links appended.
 			$url = str_replace('/?', '?', $url);
+			$url = str_replace('/#', '#', $url);
+			$url = '/' . trim($url, '/');
 			
 			return $url;
 				
