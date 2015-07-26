@@ -41,6 +41,10 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
+// Set default timezone if not set.
+date_default_timezone_set(@date_default_timezone_get());
+
+
 // Autoload core classes and libraries.
 spl_autoload_register(function($class) {
 	
@@ -61,12 +65,6 @@ spl_autoload_register(function($class) {
 require AM_BASE_DIR . '/automad/const.php';
 
 
-// Test if AM_REQUEST is the GUI page and AM_PAGE_GUI is defined (GUI active).
-if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {	
-	$guiEnabled = true;
-}
-	
-
 // The cache folder must be writable (resized images), also when caching is disabled!
 if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {	
 	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
@@ -77,8 +75,8 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 Debug::errorReporting();
 
 
-// Split GUI form regular pages
-if (isset($guiEnabled)) {
+// Split GUI form regular pages.
+if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 	
 	$GUI = new \Automad\GUI\GUI();
 	$output = $GUI->output;
