@@ -131,8 +131,6 @@ class Resolve {
 				$url = AM_BASE_URL . AM_INDEX . rtrim($Page->url, '/') . '/' . $url;
 			}
 			
-			$url = rtrim($url, '/');
-			
 			// Resolve '../' and './'
 			$parts = explode('/', $url);
 			$resolvedParts = array();
@@ -148,7 +146,11 @@ class Resolve {
 			}
 			
 			$url = implode('/', $resolvedParts);
-		
+			
+			// Trim trailing slashes, also with query string appended.
+			$url = rtrim($url, '/');
+			$url = str_replace('/?', '?', $url);
+			
 			return $url;
 				
 		}
