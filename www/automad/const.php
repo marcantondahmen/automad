@@ -66,13 +66,17 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) || isset($_SERVER['HTTP_X_FORWARDED
 
 
 
+@Debug::log('Server Software: ' . $_SERVER['SERVER_SOFTWARE']);
+
 // Check whether pretty URLs are enabled.
-if (file_exists(AM_BASE_DIR . '/.htaccess')) {
-	// If .htaccess exists, assume that pretty URLs are enabled and AM_INDEX is empty.
-	define('AM_INDEX', '');
+if ((strpos(@strtolower($_SERVER['SERVER_SOFTWARE']), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(@strtolower($_SERVER['SERVER_SOFTWARE']), 'nginx') !== false) {
+	// If .htaccess exists on Apache or the server software is Nginx, assume that pretty URLs are enabled and AM_INDEX is empty.
+	Config::set('AM_INDEX', '');
+	Debug::log('Pretty URLs are enabled.');
 } else {
-	// If not, AM_INDEX will be defined.
-	define('AM_INDEX', '/index.php');
+	// For all other environments, AM_INDEX will be defined as fallback and pretty URLs are disabled.
+	Config::set('AM_INDEX', '/index.php');
+	Debug::log('Pretty URLs are disabled');
 }
 
 
