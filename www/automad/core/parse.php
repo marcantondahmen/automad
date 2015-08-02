@@ -407,6 +407,9 @@ class Parse {
 		// Extend char list.
 		\JBroadway\URLify::add_chars(array('=' => '-', '&' => '-'));
 		
+		// Reset the default remove list to keep all words in URLs.
+		\JBroadway\URLify::$remove_list = array();
+		
 		// Since all possible dots got removed above (if $removeDots is true), 
 		// $str should be filtered as filename to keep dots if there are still in $str. 
 		return \JBroadway\URLify::filter($str, 100, '', true);
