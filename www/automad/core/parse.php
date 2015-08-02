@@ -233,10 +233,10 @@ class Parse {
 				$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
 			 
 				if (strpos($var, "\n") !== false && !preg_match($regexTag, $var)) {
-					// If $var has line breaks (is multiline) and is not only one or more tags (meta, script, link tags ...).
+					// If $var is a multiline string and not only one or more tags (meta, script, link tags ...).
 					return \Michelf\MarkdownExtra::defaultTransform($var); 
 				} else {
-					// If $var is a single line, skip parsing
+					// If $var is just a single line or just one or more <head> element(s), skip parsing.
 					return $var;
 				}
 				
@@ -398,33 +398,18 @@ class Parse {
 	 */
 	
 	public static function sanitize($str, $removeDots = false) {
-		
-		// Transliterate string.
-		$sanitized = \JBroadway\URLify::downcode(trim($str));
-		
-		// Lower case.
-		$sanitized = strtolower($sanitized);
-		
-		// Remove a/an/the.
-		$sanitized = preg_replace('/\b(a|an|the)\b/', '', $sanitized);
-		
-		// Replace special chars.
-		$search  = array('&'  ,'/','*','+'  ,'@'   );
-		$replace = array('and','-','x','and','_at_');
-		$sanitized = str_replace($search, $replace, $sanitized);
-		
-		// Replace all unneeded chars with underscores.
+			
+		// If dots should be removed from $str, replace them with '-', since URLify::filter() only removes them fully without replacing.
 		if ($removeDots) {
-			$sanitized = preg_replace('/[^\w\-]/', '_', $sanitized);
-		} else {
-			$sanitized = preg_replace('/[^\w\.\-]/', '_', $sanitized);
+			$str = str_replace('.', '-', $str);
 		}
 		
-		// Trim leading dots to prevent creating hidden files.
-		$sanitized = ltrim($sanitized, '.');
+		// Extend char list.
+		\JBroadway\URLify::add_chars(array('=' => '-', '&' => '-'));
 		
-		// Merge / trim all underscores and hyphens.
-		return preg_replace('/([_\-])\1+/', '$1', trim($sanitized, '_-')); 
+		// Since all possible dots got removed above (if $removeDots is true), 
+		// $str should be filtered as filename to keep dots if there are still in $str. 
+		return \JBroadway\URLify::filter($str, 100, '', true);
 		
 	}
 	
