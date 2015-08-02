@@ -120,7 +120,7 @@ class Resolve {
 			
 			// Relative URL
 			if (Parse::isFileName($url)) {
-				$url = AM_BASE_URL . AM_DIR_PAGES . $Page->path . $url;
+				$url = $Page->path . $url;
 			} else {
 				// Even though all trailing slashes get stripped out of beauty reasons, any page must still be understood as a directory instead of a file.
 				// Therefore it should be possible to link to a subpage with just href="subpage". Due to the missing trailing slash, that link would actually link to
@@ -128,7 +128,8 @@ class Resolve {
 				// Exampe: 
 				// The current page is "http://domain.com/page" and has a link href="subpage". 
 				// Just returning that link would reslove to "http://domain.com/subpage", which is wrong. It should be "http://domain.com/page/subpage".
-				$url = AM_BASE_URL . AM_INDEX . rtrim($Page->url, '/') . '/' . $url;
+				// Therefore resolving that URL is also necessary.
+				$url = rtrim($Page->url, '/') . '/' . $url;
 			}
 			
 			// Resolve '../' and './'
@@ -146,13 +147,19 @@ class Resolve {
 			}
 			
 			$url = implode('/', $resolvedParts);
-			
-			// Trim trailing slashes, also with query string or anchor links appended.
-			$url = str_replace('/?', '?', $url);
-			$url = str_replace('/#', '#', $url);
+	
+			// Remove slashes preceding query string or anchor links.
+			$url = str_replace(array('/?', '/#'), array('?', '#'), $url);
+	
+			// Trim trailing slashes, but always keep a leading one.
 			$url = '/' . trim($url, '/');
-			
-			return $url;
+	
+			// Prepend base.
+			if (Parse::isFileName($url)) {
+				return AM_BASE_URL . AM_DIR_PAGES . $url;
+			} else {
+				return AM_BASE_URL . AM_INDEX . $url;
+			}
 				
 		}
 		
