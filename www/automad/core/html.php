@@ -101,7 +101,7 @@ class Html {
 				}
 				
 				if ($addCaption) {
-					$caption = ' data-caption="' . self::addVariable('image_caption_' . basename($file)) . '"';
+					$caption = ' data-caption="' . self::addVariable('image_caption_' . Parse::sanitize(basename($file))) . '"';
 				} else {
 					$caption = '';
 				}
