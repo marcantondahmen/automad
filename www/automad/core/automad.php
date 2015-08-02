@@ -399,6 +399,7 @@ class Automad {
 		$page->template = $template;
 		$page->data[AM_KEY_TITLE] = $title;
 		$page->parentUrl = '';
+		$page->level = 0;
 		
 		return $page;
 		
