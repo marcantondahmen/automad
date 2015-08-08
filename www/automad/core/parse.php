@@ -386,7 +386,7 @@ class Parse {
 
 	/**
 	 *	Cleans up a string to be used as URL, directory or file name. 
-	 *	The returned string constists of the following characters: a-z, A-Z, -, _ and and optionally dot (.)
+	 *	The returned string constists of the following characters: a-z, A-Z, - and optional dots (.)
 	 *	That means, this method is safe to be used with filenames as well, since it keeps by default the dots as suffix separators.
 	 *
 	 *	Note: To produce fully safe prefixes and directory names, 
@@ -404,10 +404,15 @@ class Parse {
 			$str = str_replace('.', '-', $str);
 		}
 		
-		// Extend char list.
-		\JBroadway\URLify::add_chars(array('=' => '-', '&' => '-'));
+		// Convert slashes separately to avoid issues with regex in URLify.
+		$str = str_replace('/', '-', $str);
 		
-		// Reset the default remove list to keep all words in URLs.
+		// Configure URLify. 
+		// Add non-word chars and reset the remove list.
+		// Note: $maps gets directly manipulated without using URLify::add_chars(). 
+		// Using the add_chars() method would extend $maps every time, Parse::sanitize() gets called. 
+		// Adding a new array to $maps using a key avoids that and just overwrites that same array after the first call without adding new elements.
+		\JBroadway\URLify::$maps['nonWordChars'] = array('=' => '-', '&' => '-and-', '+' => '-plus-', '@' => '-at-', '|' => '-', '*' => '-x-');
 		\JBroadway\URLify::$remove_list = array();
 		
 		// Since all possible dots got removed above (if $removeDots is true), 
