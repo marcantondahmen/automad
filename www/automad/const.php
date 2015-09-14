@@ -128,24 +128,25 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 // LISTING DEFAULTS
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
-// PLACEHOLDER TYPE IDENTIFIERS
-Config::set('AM_PLACEHOLDER_PREFIX', 	'@');
-Config::set('AM_PLACEHOLDER_INC',      	'i');
-Config::set('AM_PLACEHOLDER_PAGE_VAR', 	'p');
-Config::set('AM_PLACEHOLDER_SITE_VAR', 	's');
-Config::set('AM_PLACEHOLDER_TOOL', 	't');
-Config::set('AM_PLACEHOLDER_XTNSN', 	'x');
+// ELEMENT IDENTIFIERS
+Config::set('AM_ID_INC',      	'@i');
+Config::set('AM_ID_PAGE_VAR', 	'@p');
+Config::set('AM_ID_SITE_VAR', 	'@s');
+Config::set('AM_ID_TOOL', 	'@t');
+Config::set('AM_ID_XTNSN', 	'@x');
 
 // REGEX
-// There is no single regex for only matching tools. Instead, Tools get matched together with Extensions to maintain a correct order when parsing.
-// The regex for Extensions only is used when scanning a template for .css/.js files.
-Config::set('AM_REGEX_METHODS',  '/' . AM_PLACEHOLDER_PREFIX . '(' . AM_PLACEHOLDER_TOOL . '|' . AM_PLACEHOLDER_XTNSN . ')\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s'); 	// @(t|x)((...)({...})) Tools & Extensions
-Config::set('AM_REGEX_XTNSN',    '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_XTNSN . 	 '\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s');					// @x((...)({...})) Extensions Only
-Config::set('AM_REGEX_INC'     , '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_INC . 	 '\(\s*([\w\.\/\-]+)\s*\)/');						// @i((...))
-Config::set('AM_REGEX_PAGE_VAR', '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_PAGE_VAR . '\(\s*([\w\.\-]+)\s*\)/');						// @p((...))
-Config::set('AM_REGEX_SITE_VAR', '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_SITE_VAR . '\(\s*([\w\.\-]+)\s*\)/');						// @s((...))
+Config::set('AM_STATEMENT_OPEN', '[[');
+Config::set('AM_STATEMENT_CLOSE', ']]');
+// Tools, extensions and includes have to be matched at the same time with only one regex to enable chronological interaction between tools, extensions and includes.
+// (@t|@x)( (...) ({...}) ([[[[ (...) ]]]]) | @i( (...) ) 
+Config::set('AM_REGEX_CONSTRUCTS',	'/(' . AM_ID_TOOL . '|' . AM_ID_XTNSN . ')\(\s*([\w\-]+)\s*(\{.*?\})?\s*(?:' . preg_quote(AM_STATEMENT_OPEN . AM_STATEMENT_OPEN) . '(.*?)' . preg_quote(AM_STATEMENT_CLOSE . AM_STATEMENT_CLOSE) . ')?\s*\)|' . AM_ID_INC . '\(\s*([\w\.\/\-]+)\s*\)/s'); 
+// Page variables
+Config::set('AM_REGEX_PAGE_VAR', 	'/' . AM_ID_PAGE_VAR . '\(\s*([\w\.\-]+)\s*\)/'); // @p((...))
+// Site variables
+Config::set('AM_REGEX_SITE_VAR', 	'/' . AM_ID_SITE_VAR . '\(\s*([\w\.\-]+)\s*\)/'); // @s((...))
 
-// EXTENDER
+// EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
 
 // HTML
