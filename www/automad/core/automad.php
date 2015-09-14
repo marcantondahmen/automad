@@ -54,6 +54,13 @@ class Automad {
 	
 
 	/**
+	 * 	The current context to be defined to change the current page while executing statements.
+	 */
+
+	private $context = false;
+
+
+	/**
 	 *	Automad's Listing object.
 	 *	
 	 *	The object is part of the Automad class to allow to access always the same instance of the Listing class for all objects using the Automad object as parameter. 
@@ -192,9 +199,11 @@ class Automad {
 				// Extract tags
 				$tags = Parse::extractTags($data);
 			
-				// Check for an URL in $data and use that URL instead.
+				// Check for an URL in $data and use that URL instead. If no URL is defined as override, add an URL var with the page's URL to $data to be used as variable as well.
 				if (array_key_exists(AM_KEY_URL, $data)) {
 					$Page->url = $data[AM_KEY_URL];
+				} else {
+					$data[AM_KEY_URL] = $Page->url;
 				}
 			
 				// Check for a theme in $data and use that as override for the site theme.
@@ -272,6 +281,7 @@ class Automad {
 		Debug::log('Automad: Scan directories for page content:');
 		
 		$this->collectPages();
+		$this->setContext();
 		
 	}
 
@@ -347,22 +357,50 @@ class Automad {
 		
 	} 
 
+
+	/**
+	 * 	Sets the current context.
+	 *
+	 *	The context defines basically what page should be considered as current.
+	 *	To reset the context back to the current URL, just call the method without passing $url.
+	 *
+	 *	@param string $url
+	 */
+
+	public function setContext($url = false) {
+		
+		// If $url is set, the context will be changed to that specified URL. 
+		// If $url is false, the currently requeset page will be the context.
+		if ($url) {
+			
+			$this->context = $url;
+			
+		} else {
+			
+			// Check whether the GUI is requesting the currently edited page.
+			if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
+				$this->context = $_POST['url'];
+			} else {
+				$this->context = AM_REQUEST;
+			}
+			
+		}
+		
+		Debug::log('Automad: Context set to: ' . $this->context);
+			
+	}
+
 	 
 	/**
-	 * 	Return the page object for the current page.
+	 * 	Return the page object for the current page depending on the context.
 	 *
 	 *	@return object $currentPage
 	 */ 
 	
 	public function getCurrentPage() {
-			
-		// Check whether the GUI is requesting the currently edited page.
-		if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
-			return $this->getPageByUrl($_POST['url']);
-		} else {
-			return $this->getPageByUrl(AM_REQUEST);
-		}
-			
+		
+		return $this->getPageByUrl($this->context);
+				
 	} 
 	
 
