@@ -472,37 +472,76 @@ class Parse {
 
 
 	/**
-	 *	Call Toolbox methods and Extension dynamically with optional parameters. Additionally add all CSS/JS files of the matched extensions to the header.
-	 *	For example t(Tool{JSON-options}) or x(Extension{JSON-options}).
-	 *	The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}.
-	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
-	 *	
-	 *	@param string $str (the string to be parsed)
+	 * 	Call Toolbox methods, call Extensions and include template elements recursively.
+	 *
+	 *	For example: @t( listEach { options } [[ statement ]] ) or @i( filename.php )
+	 *
+	 *	@param string $str - The string to be parsed
 	 *	@param object $Automad
-	 *	@return The parsed $str
+	 *	@param string $directory - The directory of the currently included file/template
+	 *	@return the parsed string	
 	 */
 
-	public static function templateMethods($str, $Automad) {
-				
-		$Toolbox = new Toolbox($Automad);
-		$Extender = new Extender($Automad);
-
+	public static function templateConstructs($str, $Automad, $directory) {
+		
 		$use = 	array(
+				'directory' => $directory,
 				'automad' => $Automad,
-				'toolbox' => $Toolbox,  
-				'extender' => $Extender
-			);	
+				'toolbox' => new Toolbox($Automad)
+			);
 		
-		// Scan $str for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
-		$str = $Extender->addHeaderElements($str);
-		
-		// Toolbox methods and Extensions MUST be parsed at the same time, since the Extensions use also Toolbox properties. 
-		// Tools and Extensions must be able to influence each other - therefore the order of parsing is very important.
-		return preg_replace_callback(AM_REGEX_METHODS, function($matches) use ($use) {
+		// Preparse statement delimiters.
+		// To enable recursive statements, first $str has to be preparsed to identify the outer wrapping statement (depth 0).
+		// The outer wrapping delimiters [[ ... ]] get doubled [[[[ ... ]]]] to be easily match in the later regex. 
+		$depth = 0;
+		$str = 	preg_replace_callback('/(' . preg_quote(AM_STATEMENT_OPEN) . '|' . preg_quote(AM_STATEMENT_CLOSE) . ')/s', function($match) use (&$depth) {
+			
+				$delimiter = $match[1];
+				
+				if ($delimiter == AM_STATEMENT_OPEN) {
+			
+					if ($depth === 0) {
+						$delimiter .= $delimiter;
+					}
+				
+					$depth++;
 					
-					$delimiter = $matches[1];
+				} else {
+				
+					$depth--;
+				
+					if ($depth === 0) {
+						$delimiter .= $delimiter;
+					}
+				
+				}
+			
+				return $delimiter;
+			
+			}, $str);
+		
+		// In a second step the actual constructs get matched.
+		return 	preg_replace_callback(AM_REGEX_CONSTRUCTS, function($matches) use ($use) {
+			
+				// Get the type of the matched construct (the part until the first "(" - @t, @x or @i).
+				$type = substr($matches[0], 0, strpos($matches[0], '('));
+				
+				if ($type == AM_ID_INC) {
+					
+					$file = $use['directory'] . '/' . $matches[5];
+					
+					if (file_exists($file)) {
+						
+						Debug::log('Parse: Include: ' . $file);				
+						return Parse::templateConstructs(Parse::templateBuffer($file, $use['automad']), $use['automad'], dirname($file));
+						
+					}
+					
+				} else if ($type == AM_ID_TOOL) {
+					
 					$method = $matches[2];
-					
+				
+					// Options
 					if (isset($matches[3])) {
 						// Parse the options JSON and also find and replace included variables within the JSON string.
 						$options = Parse::jsonOptions(Parse::templateVariables($matches[3], $use['automad'], true));
@@ -510,62 +549,47 @@ class Parse {
 						$options = array();
 					}
 					
-					// Call methods depending on placeholder type (Toolbox or Extension)
-					if ($delimiter == AM_PLACEHOLDER_TOOL) {
-						
-						// Toolbox method
-						if (method_exists($use['toolbox'], $method)) {
-					
-							Debug::log('Parse: Matched tool: "' . $method . '" and passing the following options:');
-							Debug::log($options);	
-						
-							return $use['toolbox']->$method($options);
-						
-						}
-						
+					// Statement 
+					if (isset($matches[4])) {
+						$statement = $matches[4];
 					} else {
+						$statement = '';
+					}
 						
-						// Extension
-						Debug::log('Parse: Matched extension: "' . $method . '"');
-									
-						return $use['extender']->callExtension($method, $options);
+					// Toolbox method
+					if (method_exists($use['toolbox'], $method)) {
+					
+						Debug::log('Parse: Matched tool: "' . $method . '" and passing the following options:');
+						Debug::log($options);	
 						
+						// To handle recursive patterns, also the directory of the currently included file has to be passed to the toolbox,
+						// in case the called method has a statement.
+						return $use['toolbox']->$method($options, $statement, $use['directory']);
 						
 					}
-					
-				}, $str);		
-	
-	}
-
-
-	/**
-	 *	Scan a string for "i(filename.php)" to include template elements recursively. The Automad object gets passed as well to be able to access the site's data also form template elements included by i().
-	 *
-	 *	@param string $str (the string which has to be scanned)
-	 *	@param string $directory (the base directory for including the files)
-	 *	@param object $Automad
-	 *	@return The recursively scanned output including the content of all matched includes.
-	 */
-	
-	public static function templateNestedIncludes($str, $directory, $Automad) {
-		
-		$use = array('directory' => $directory, 'automad' => $Automad);
-		
-		return 	preg_replace_callback(AM_REGEX_INC, function($matches) use ($use) {
-					
-				$file = $use['directory'] . '/' . $matches[1];
-				if (file_exists($file)) {
 						
-					Debug::log('Parse: Include: ' . $file);				
-					$content = Parse::templateBuffer($file, $use['automad']);
-					return Parse::templateNestedIncludes($content, dirname($file), $use['automad']);
-						
+				} else if ($type == AM_ID_XTNSN) {
+					
+					$method = $matches[2];
+					
+					// Options
+					if (isset($matches[3])) {
+						// Parse the options JSON and also find and replace included variables within the JSON string.
+						$options = Parse::jsonOptions(Parse::templateVariables($matches[3], $use['automad'], true));
+					} else {
+						$options = array();
+					}
+					
+					Debug::log('Parse: Matched extension: "' . $method . '"');
+								
+					return Extension::call($method, $options, $use['automad']);
+					
 				}
-					
+			
 			}, $str);
-		
-	}
 	
+	}
+
 
 	/**
 	 *	Replace all site vars "s(variable)" with content from site.txt and all page vars "p(variable)" with content from the current page.
