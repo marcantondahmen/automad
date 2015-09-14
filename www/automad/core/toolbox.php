@@ -78,7 +78,7 @@ class Toolbox {
 	 */
 		
 	public function __construct($Automad) {
-		
+				
 		$this->Automad = $Automad;
 		$this->collection = $this->Automad->getCollection();
 		$this->Page = $this->Automad->getCurrentPage();
@@ -350,6 +350,44 @@ class Toolbox {
 		$Listing = $this->Automad->getListing();
 		return count($Listing->getPages());
 		
+	}
+
+
+	/**
+	 * 	Execute a statement for each page in $Listing. The $Listing can directly be configured by defining $options.
+	 *
+	 *	@param array $options
+	 *	@param string $statement
+	 *	@param string $directory - The directory of the currently included template
+	 */
+
+	public function listEach($options, $statement, $directory) {
+		
+		$Listing = $this->Automad->getListing();
+		
+		// Configure the Listing object.
+		$Listing->config($options);
+		
+		$html = '';
+		
+		foreach (array_keys($Listing->getPages()) as $url) {
+			
+			// Set context to the current page in the loop.
+			$this->Automad->setContext($url);
+			
+			// Parse statement.
+			$each = $statement;
+			$each = Parse::templateConstructs($each, $this->Automad, $directory);
+			$each = Parse::templateVariables($each, $this->Automad);
+			$html .= $each;
+				
+		}
+		
+		// Set context back to the currenlty requested URL.
+		$this->Automad->setContext();
+		
+		return $html;
+			
 	}
 
 
