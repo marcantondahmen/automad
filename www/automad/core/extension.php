@@ -42,129 +42,117 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Extender class serves as an interface for calling extension methods via the template syntax.
+ *	The Extension class serves as an interface for calling extension methods via the template syntax.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
  *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Extender {
+class Extension {
 
+	
 	
 	/**
-	 *	The Automad object.
+	 * 	Multidimensional array of collected assets grouped by type (CSS/JS).
 	 */
 	
-	private $Automad;
-
+	private static $assets = array();
 	
+
 	/**
-	 *	The constructor just makes the Automad object available.
+	 * 	Create the HTML tags for each file in $assest and prepend them to the closing </head> tag.
+	 *	
+	 *	@param string $str
+	 *	@return $str
 	 */
-
-	public function __construct($Automad) {
-		
-		$this->Automad = $Automad;
-		
-	}
-
 	
-	/**
-	 *	Scan $output for extensions and add all additional CSS/JS files to the page's <head>.
-	 *	First, all the used extensions get collected in the $extensions[1] array.
-	 *	Second, the directory of each extension gets scanned for .css and .js files. These files get collected in $css and $js.
-	 *	Third, each item in $css and $js get appended to the opening <head> tag of $output.
-	 *
-	 *	@param string $output
-	 *	@return $output - The full HTML including the linked css/js files.
-	 */
-
-	public function addHeaderElements($output) {
+	public static function createAssetTags($str) {
 		
-		$css = array();
-		$js = array();
+		Debug::log('Extension: Assets: ' . var_export(Extension::$assets, true));
+		
 		$html = '';
 		
-		// Find extensions in $output.
-		preg_match_all(AM_REGEX_XTNSN, $output, $extensions);
+		if (isset(Extension::$assets['css'])) {
 			
-		// Collect all css/js files in each extension directory.
-		foreach ($extensions[1] as $extension) {
+			foreach (Extension::$assets['css'] as $file) {
 			
-			// Extension directory	
-			$path = AM_BASE_DIR . strtolower(str_replace('\\', '/', AM_NAMESPACE_EXTENSIONS) . '/' . $extension);
+				$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $file) . '" />' . "\n";
+				Debug::log('Extension: Added "' . $file . '" to header');	
 			
-			Debug::log('Extender: Getting CSS/JS for "' . $extension . '" in: ' . $path);
-			
-			// Get CSS files
-			if ($c = glob($path . '/*.css')) {
-				$css = array_merge($css, $c);
-			}
-			
-			// Get JS files
-			if ($j = glob($path . '/*.js')) {
-				$js = array_merge($js, $j);
 			}
 			
 		}
 		
-		// Clean up arrays
-		$css = array_unique($css);
-		$js = array_unique($js);
+		if (isset(Extension::$assets['js'])) {
+			
+			foreach (Extension::$assets['js'] as $file) {
 		
-		// Add the HTML for all items to the $html string.
-		foreach ($css as $item) {
-			
-			// Test for a minified version.
-			// If a minified is existing, the uncompressed file gets skipped.
-			// If $item is already the minified version, the condition will be false, because it will test "filename.min.min.css", 
-			// and the "filename.min.css" will be added just fine.
-			if (!file_exists(str_replace('.css', '.min.css', $item))) {
-			
-				$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $item) . '" />' . "\n";
-				Debug::log('Extender: Added "' . $item . '" to header');	
-			
-			} else {
-				
-				Debug::log('Extender: Skipped "' . $item . '" - Loading minified version instead');
-				
+				$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $file) . '"></script>' . "\n";
+				Debug::log('Extension: Added "' . $file . '" to header');
+		
 			}
-	
-	
-		}
-				
-		foreach ($js as $item) {
 			
-			// Test for a minified version. 
-			// Just like testing for ".min.css" above.
-			if (!file_exists(str_replace('.js', '.min.js', $item))) {
-				
-				$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $item) . '"></script>' . "\n";
-				Debug::log('Extender: Added "' . $item . '" to header');
-			
-			} else {
-				
-				Debug::log('Extender: Skipped "' . $item . '" - Loading minified version instead');
-				
-			}
 		}
 		
 		// Prepend all items ($html) to the closing </head> tag.
-		return str_replace('</head>', $html . '</head>', $output);
+		return str_replace('</head>', $html . '</head>', $str);
 		
 	}
 	
 	
+	/**
+	 * 	Collect all assets (CSS & JS files) belonging to $extension and store them in $assets.
+	 *	
+	 *	@param string $extension
+	 */
+	
+	private static function collectAssets($extension) {
+			
+		$path = AM_BASE_DIR . strtolower(str_replace('\\', '/', AM_NAMESPACE_EXTENSIONS) . '/' . $extension);
+		
+		Debug::log('Extension: Getting assets for "' . $extension . '" in: ' . $path);
+		
+		foreach (glob($path . '/*.css') as $file) {
+			
+			// Only add the minified version, if existing.
+			if (!file_exists(str_replace('.css', '.min.css', $file))) {
+			
+				// Use $file also as key to keep elemtens unique.
+				Extension::$assets['css'][$file] = $file;
+			
+			}
+			
+		}
+		
+		foreach (glob($path . '/*.js') as $file) {
+			
+			// Only add the minified version, if existing.
+			if (!file_exists(str_replace('.js', '.min.js', $file))) {
+			
+				// Use $file also as key to keep elemtens unique.
+				Extension::$assets['js'][$file] = $file;
+			
+			}
+			
+		}
+		
+	}
+	
+
 	/**
 	 *	Call extension method from template dynamically.
 	 *
 	 *	@param string $name
 	 *	@param array $options
+	 *	@param object $Automad
 	 *	@return The returned value from the called method
 	 */
 	
-	public function callExtension($name, $options) {
+	public static function call($name, $options, $Automad) {
+		
+		// Collect assets.
+		Extension::collectAssets($name);
 		
 		// Adding the extension namespace to the called class here, to make sure,
 		// that only classes from the /extensions directory and within the \Extension namespace get used.
@@ -176,37 +164,37 @@ class Extender {
 		if (file_exists($file)) {
 							
 			// Load class.				
-			Debug::log('Extender: Require once ' . $file);
+			Debug::log('Extension: Require once ' . $file);
 			require_once $file;
 			
 			if (class_exists($class, false)) {
 				
 				// Create instance of class dynamically.
 				$object = new $class();
-				Debug::log('Extender: Created instance of class "' . $class . '"');
+				Debug::log('Extension: Created instance of class "' . $class . '"');
 		
 				if (method_exists($object, $name)) {
 					
 					// Call method dynamically and pass $options & Automad.
-					Debug::log('Extender: Calling method "' . $name . '" and passing the following options:');
+					Debug::log('Extension: Calling method "' . $name . '" and passing the following options:');
 					Debug::log($options);
-					return $object->$name($options, $this->Automad);
+					return $object->$name($options, $Automad);
 		
 				} else {
 					
-					Debug::log('Extender: Method "' . $name . '" not existing!');	
+					Debug::log('Extension: Method "' . $name . '" not existing!');	
 				
 				}
 		
 			} else {
 				
-				Debug::log('Extender: Class "' . $class . '" not existing!');		
+				Debug::log('Extension: Class "' . $class . '" not existing!');		
 			
 			}
 		
 		} else {
 			
-			Debug::log('Extender: ' . $file . ' not found!');
+			Debug::log('Extension: ' . $file . ' not found!');
 		
 		}
 		
