@@ -100,7 +100,7 @@ class Template {
 		$this->Page = $Automad->getCurrentPage();
 		
 		// Redirect page, if an URL is defined.
-		if (isset($this->Page->data[AM_KEY_URL])) {
+		if ($this->Page->data[AM_KEY_URL] != AM_REQUEST) {
 			header('Location: ' . Resolve::url($this->Page, $this->Page->url));
 			die;
 		}
@@ -199,10 +199,9 @@ class Template {
 		Debug::log('Template: Render template: ' . $this->template);
 		
 		$output = Parse::templateBuffer($this->template, $this->Automad);
-		$output = Parse::templateNestedIncludes($output, dirname($this->template), $this->Automad);
-		$output = Parse::templateMethods($output, $this->Automad);
+		$output = Parse::templateConstructs($output, $this->Automad, dirname($this->template));
 		$output = Parse::templateVariables($output, $this->Automad);
-		
+		$output = Extension::createAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->resolveUrls($output);	
 		$output = $this->obfuscateEmails($output);
