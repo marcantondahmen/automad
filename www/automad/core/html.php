@@ -173,7 +173,7 @@ class Html {
 
 	public static function addVariable($name) {
 		
-		return AM_ID_PAGE_VAR . '(' . $name . ')';
+		return AM_ID_VAR . '(' . $name . ')';
 	
 	}
 
