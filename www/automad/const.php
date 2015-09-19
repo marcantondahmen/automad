@@ -128,23 +128,23 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 // LISTING DEFAULTS
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
-// ELEMENT IDENTIFIERS
-Config::set('AM_ID_INC',      	'@i');
-Config::set('AM_ID_PAGE_VAR', 	'@p');
-Config::set('AM_ID_SITE_VAR', 	'@s');
-Config::set('AM_ID_TOOL', 	'@t');
-Config::set('AM_ID_XTNSN', 	'@x');
-
-// REGEX
-Config::set('AM_STATEMENT_OPEN', '[[');
-Config::set('AM_STATEMENT_CLOSE', ']]');
-// Tools, extensions and includes have to be matched at the same time with only one regex to enable chronological interaction between tools, extensions and includes.
-// (@t|@x)( (...) ({...}) ([[[[ (...) ]]]]) | @i( (...) ) 
-Config::set('AM_REGEX_CONSTRUCTS',	'/(' . AM_ID_TOOL . '|' . AM_ID_XTNSN . ')\(\s*([\w\-]+)\s*(\{.*?\})?\s*(?:' . preg_quote(AM_STATEMENT_OPEN . AM_STATEMENT_OPEN) . '(.*?)' . preg_quote(AM_STATEMENT_CLOSE . AM_STATEMENT_CLOSE) . ')?\s*\)|' . AM_ID_INC . '\(\s*([\w\.\/\-]+)\s*\)/s'); 
-// Page variables
-Config::set('AM_REGEX_PAGE_VAR', 	'/' . AM_ID_PAGE_VAR . '\(\s*([\w\.\-]+)\s*\)/'); // @p((...))
-// Site variables
-Config::set('AM_REGEX_SITE_VAR', 	'/' . AM_ID_SITE_VAR . '\(\s*([\w\.\-]+)\s*\)/'); // @s((...))
+// TEMPLATE SYNTAX & REGEX
+Config::set('AM_ID_VAR', '$');
+Config::set('AM_ID_STATEMENT', '@');
+Config::set('AM_SNIPPET_OPEN', '[[');
+Config::set('AM_SNIPPET_CLOSE', ']]');
+$var = preg_quote(AM_ID_VAR) . '\(\s*([\w\.\-]+)\s*\)';
+$snippet = preg_quote(AM_SNIPPET_OPEN . AM_SNIPPET_OPEN) . '(.*?)' . preg_quote(AM_SNIPPET_CLOSE . AM_SNIPPET_CLOSE);
+Config::set('AM_REGEX_VAR', '/' . $var . '/s');										// $( var )
+Config::set('AM_REGEX_STATEMENT', 	'/' . preg_quote(AM_ID_STATEMENT) . '\(\s*' . 
+					'(?:' . 
+					'([\w\/\-\.]+\.php)' . '|' . 							// include
+					'([\w\-]+)\s*(\{.*?\})?' . '|' .						// method
+					'foreach\s+in\s+list\s*' . $snippet . '|' .					// foreach in list
+					'foreach\s+in\s+"([^"]*?)"\s*' . $snippet . '|' .				// foreach in files
+					'if\s+(!)?' . $var . '\s*' . $snippet . '(?:\s*else\s*' . $snippet . ')?' .	// if ... else ... 	
+					')' . 
+					'\s*\)/s'); 	
 
 // EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
