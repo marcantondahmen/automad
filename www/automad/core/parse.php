@@ -466,15 +466,34 @@ class Parse {
 		$output = ob_get_contents();
 		ob_end_clean();
 		
+		// Backwards compatibility.
+		$output = str_replace(array('@s(', '@p(', '@i(', '@t(', '@x('), array('$(', '$(', '@(', '@(', '@('), $output);
+		
 		return $output;
 		
 	}
 
 
 	/**
-	 * 	Call Toolbox methods, call Extensions and include template elements recursively.
+	 * 	Parses all statements and variables within a template snippet.
 	 *
-	 *	For example: @t( listEach { options } [[ statement ]] ) or @i( filename.php )
+	 *	@param string $snippet
+	 *	@param object $Automad
+	 *	@param string $directory
+	 *	@return the fully parsed snippet
+	 */
+
+	public static function templateSnippet($snippet, $Automad, $directory) {
+		
+		return Parse::templateVariables(Parse::templateStatements($snippet, $Automad, $directory), $Automad);
+		
+	}
+
+
+	/**
+	 * 	Call Toolbox methods, call Extensions, execute statements and include template elements recursively.
+	 *
+	 *	For example @(file.php), @(method{ options }), @(foreach in list [[ ... ]]) or @(if !$(var) [[ ... ]] else [[ ... ]])
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param object $Automad
@@ -482,7 +501,7 @@ class Parse {
 	 *	@return the parsed string	
 	 */
 
-	public static function templateConstructs($str, $Automad, $directory) {
+	public static function templateStatements($str, $Automad, $directory) {
 		
 		$use = 	array(
 				'directory' => $directory,
@@ -490,15 +509,15 @@ class Parse {
 				'toolbox' => new Toolbox($Automad)
 			);
 		
-		// Preparse statement delimiters.
-		// To enable recursive statements, first $str has to be preparsed to identify the outer wrapping statement (depth 0).
+		// Preparse snippet delimiters.
+		// To enable recursive snippets, first $str has to be preparsed to identify the outer wrapping snippet (depth 0).
 		// The outer wrapping delimiters [[ ... ]] get doubled [[[[ ... ]]]] to be easily match in the later regex. 
 		$depth = 0;
-		$str = 	preg_replace_callback('/(' . preg_quote(AM_STATEMENT_OPEN) . '|' . preg_quote(AM_STATEMENT_CLOSE) . ')/s', function($match) use (&$depth) {
+		$str = 	preg_replace_callback('/(' . preg_quote(AM_SNIPPET_OPEN) . '|' . preg_quote(AM_SNIPPET_CLOSE) . ')/s', function($match) use (&$depth) {
 			
 				$delimiter = $match[1];
 				
-				if ($delimiter == AM_STATEMENT_OPEN) {
+				if ($delimiter == AM_SNIPPET_OPEN) {
 			
 					if ($depth === 0) {
 						$delimiter .= $delimiter;
@@ -520,28 +539,60 @@ class Parse {
 			
 			}, $str);
 		
-		// In a second step the actual constructs get matched.
-		return 	preg_replace_callback(AM_REGEX_CONSTRUCTS, function($matches) use ($use) {
+		// In a second step the actual statements get matched.
+		return 	preg_replace_callback(AM_REGEX_STATEMENT, function($matches) use ($use) {			
+							
+				/*
+				
+				The $matches array can have the following elements:
 			
-				// Get the type of the matched construct (the part until the first "(" - @t, @x or @i).
-				$type = substr($matches[0], 0, strpos($matches[0], '('));
+				0:	The full matched string
+			
+				Includes
+				1:	The filename to include.
+			
+				Methods
+				2:	Method name
+				3:	Optional JSON formatted options
+			
+				Foreach loop (pages)
+				4:	The outer snippet in double-delimiters to execute [[[[ ... ]]]]
+			
+				Foreach loop (files)
+				5:	The glob pattern(s)
+				6:	The outer snippet in double-delimiters to execute [[[[ ... ]]]]
+			
+				If statement (boolean only)
+				7:	Optional "!" to invert the condition
+				8:	The variable to test.
+				9:	The first snippet (if ...)
+				10:	Optional second snippet (else ...)
+						
+				*/
 				
-				if ($type == AM_ID_INC) {
-					
-					$file = $use['directory'] . '/' . $matches[5];
-					
+				// Include
+				if (!empty($matches[1])) {
+				
+					// Include
+					Debug::log('Parse: Statements: Matched include "' . $matches[1] . '"');
+					$file = $use['directory'] . '/' . $matches[1];
+				
 					if (file_exists($file)) {
-						
-						Debug::log('Parse: Include: ' . $file);				
-						return Parse::templateConstructs(Parse::templateBuffer($file, $use['automad']), $use['automad'], dirname($file));
-						
+						Debug::log('Parse: Statements: Including "' . $file . '"');				
+						return Parse::templateStatements(Parse::templateBuffer($file, $use['automad']), $use['automad'], dirname($file));
+					} else {
+						Debug::log('Parse: Statements: File "' . $file . '" not found!');
 					}
 					
-				} else if ($type == AM_ID_TOOL) {
+				} 
+				
+				// Method (Toolbox or extension)
+				if (!empty($matches[2])) {
 					
+					Debug::log('Parse: Statements: Matched method "' . $matches[2] . '"');
 					$method = $matches[2];
 				
-					// Options
+					// Check if options exist.
 					if (isset($matches[3])) {
 						// Parse the options JSON and also find and replace included variables within the JSON string.
 						$options = Parse::jsonOptions(Parse::templateVariables($matches[3], $use['automad'], true));
@@ -549,50 +600,83 @@ class Parse {
 						$options = array();
 					}
 					
-					// Statement 
-					if (isset($matches[4])) {
-						$statement = $matches[4];
-					} else {
-						$statement = '';
-					}
-						
-					// Toolbox method
+					// Call method.
 					if (method_exists($use['toolbox'], $method)) {
-					
-						Debug::log('Parse: Matched tool: "' . $method . '" and passing the following options:');
-						Debug::log($options);	
-						
-						// To handle recursive patterns, also the directory of the currently included file has to be passed to the toolbox,
-						// in case the called method has a statement.
-						return $use['toolbox']->$method($options, $statement, $use['directory']);
-						
-					}
-						
-				} else if ($type == AM_ID_XTNSN) {
-					
-					$method = $matches[2];
-					
-					// Options
-					if (isset($matches[3])) {
-						// Parse the options JSON and also find and replace included variables within the JSON string.
-						$options = Parse::jsonOptions(Parse::templateVariables($matches[3], $use['automad'], true));
+						// Try calling a matching toolbox method. 
+						Debug::log('Parse: Statements: Calling method: "' . $method . '" and passing the following options: ' . "\n" . var_export($options, true));	
+						return $use['toolbox']->$method($options);
 					} else {
-						$options = array();
+						// Try extension, if no toolbox method was found.
+						Debug::log('Parse: Statements: Method "' . $matches[2] . '" is not a core method. Will look for a matching extension ...');
+						return Extension::call($method, $options, $use['automad']);
 					}
+						
+				}
+				
+				// Foreach loop (pages)
+				if (!empty($matches[4])) {
 					
-					Debug::log('Parse: Matched extension: "' . $method . '"');
-								
-					return Extension::call($method, $options, $use['automad']);
+					$html = '';
+		
+					foreach (array_keys($use['automad']->getListing()->getPages()) as $url) {
+						Debug::log('Parse: Statements: Executing snippet for page "' . $url . '"');
+						// Set context to the current page in the loop.
+						$use['automad']->setContext($url);
+						// Parse snippet.
+						$html .= Parse::templateSnippet($matches[4], $use['automad'], $use['directory']);
+					}
+		
+					// Set context back to the actually requested URL.
+					$use['automad']->setContext();
+		
+					return $html;
 					
 				}
-			
+				
+				// Foreach loop (files)
+				if (!empty($matches[5]) && !empty($matches[6])) {
+					
+					$html = '';
+					
+					foreach (Parse::fileDeclaration($matches[5], $use['automad']->getCurrentPage()) as $file) {
+						$file = '"' . str_replace(AM_BASE_DIR, '', $file) . '"';
+						Debug::log('Parse: Statements: Executing snippet for file "' . $file . '"');
+						$html .= Parse::templateSnippet(str_replace('$(file)', $file, $matches[6]), $use['automad'], $use['directory']);
+					}
+					
+					return $html;
+					
+				}
+				
+				// If ... else ...
+				if (!empty($matches[8]) && !empty($matches[9])) {
+					
+					// If EMPTY NOT == NOT EMPTY Value.
+					if (empty($matches[7]) == !empty($use['automad']->getCurrentPage()->data[$matches[8]])) {
+						
+						Debug::log('Parse: Statements: Evaluating condition: "' . $matches[7] . '$(' . $matches[8] . ')" > TRUE');
+						return Parse::templateSnippet($matches[9], $use['automad'], $use['directory']);
+						
+					} else {
+						
+						Debug::log('Parse: Statements: Evaluating condition: "' . $matches[7] . '$(' . $matches[8] . ')" > FALSE');
+						
+						if (!empty($matches[10])) {
+							return Parse::templateSnippet($matches[10], $use['automad'], $use['directory']);
+						}
+						
+					}
+						
+				}
+				
 			}, $str);
 	
 	}
 
 
 	/**
-	 *	Replace all site vars "s(variable)" with content from site.txt and all page vars "p(variable)" with content from the current page.
+	 *	Find and replace all variables with values from either the current page or, if not defined there, from the site data.
+	 *	By first checking the page data, basically all site data variables can be easily overridden by a page. 
 	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
 	 *
 	 *	@param string $str
@@ -603,40 +687,30 @@ class Parse {
 	
 	public static function templateVariables($str, $Automad, $jsonSafe = false) {
 		
-		// Site variables
-		$use = array('automad' => $Automad, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback(AM_REGEX_SITE_VAR, function($matches) use ($use) {
-					
-					if ($use['jsonSafe']) {
-						return '"' . Parse::jsonEscape($use['automad']->getSiteData($matches[1])) . '"';
-					} else {
-						return $use['automad']->getSiteData($matches[1]);
-					}
-								
-				}, $str);
+		$use = 	array(
+				'automad' => $Automad, 
+				'data' => $Automad->getCurrentPage()->data, 
+				'jsonSafe' => $jsonSafe
+			);
 		
-		// Page variables
-		$Page = $Automad->getCurrentPage();
-		$use = array('data' => $Page->data, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback(AM_REGEX_PAGE_VAR, function($matches) use ($use) {
-						
-					if (array_key_exists($matches[1], $use['data'])) {
-						
-						if ($use['jsonSafe']) {
-							return '"' . Parse::jsonEscape($use['data'][$matches[1]]) . '"';
-						} else {
-							return $use['data'][$matches[1]];
-						}
-						
-					} else {
+		$str = 	preg_replace_callback(AM_REGEX_VAR, function($matches) use ($use) {
+					
+				$key = $matches[1];
 				
-						if ($use['jsonSafe']) { 
-							return '""';
-						}	
+				// First try if the variable is defined for the current page, before trying the site data.
+				if (array_key_exists($key, $use['data'])) {
+					$value = $use['data'][$key];
+				} else {
+					$value = $use['automad']->getSiteData($key);
+				}
 				
-					}
-							
-				}, $str);
+				if ($use['jsonSafe']) {
+					$value = '"' . Parse::jsonEscape($value) . '"';		
+				}
+					
+				return $value;
+								
+			}, $str);
 						
 		return $str;
 
