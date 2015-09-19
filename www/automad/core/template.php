@@ -199,8 +199,7 @@ class Template {
 		Debug::log('Template: Render template: ' . $this->template);
 		
 		$output = Parse::templateBuffer($this->template, $this->Automad);
-		$output = Parse::templateConstructs($output, $this->Automad, dirname($this->template));
-		$output = Parse::templateVariables($output, $this->Automad);
+		$output = Parse::templateSnippet($output, $this->Automad, dirname($this->template));
 		$output = Extension::createAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->resolveUrls($output);	
