@@ -151,9 +151,6 @@ class Extension {
 	
 	public static function call($name, $options, $Automad) {
 		
-		// Collect assets.
-		Extension::collectAssets($name);
-		
 		// Adding the extension namespace to the called class here, to make sure,
 		// that only classes from the /extensions directory and within the \Extension namespace get used.
 		$class = AM_NAMESPACE_EXTENSIONS . '\\' . $name;
@@ -175,9 +172,11 @@ class Extension {
 		
 				if (method_exists($object, $name)) {
 					
+					// Collect assets.
+					Extension::collectAssets($name);
+					
 					// Call method dynamically and pass $options & Automad.
-					Debug::log('Extension: Calling method "' . $name . '" and passing the following options:');
-					Debug::log($options);
+					Debug::log('Extension: Calling method "' . $name . '" and passing the following options: ' . "\n" . var_export($options, true));
 					return $object->$name($options, $Automad);
 		
 				} else {
