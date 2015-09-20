@@ -617,8 +617,12 @@ class Parse {
 				if (!empty($matches[4])) {
 					
 					$html = '';
-		
-					foreach (array_keys($use['automad']->getListing()->getPages()) as $url) {
+					$pages = $use['automad']->getListing()->getPages();
+					
+					// Save context.
+					$context = $use['automad']->getContext();
+					
+					foreach (array_keys($pages) as $url) {
 						Debug::log('Parse: Statements: Executing snippet for page "' . $url . '"');
 						// Set context to the current page in the loop.
 						$use['automad']->setContext($url);
@@ -626,8 +630,8 @@ class Parse {
 						$html .= Parse::templateSnippet($matches[4], $use['automad'], $use['directory']);
 					}
 		
-					// Set context back to the actually requested URL.
-					$use['automad']->setContext();
+					// Restore context.
+					$use['automad']->setContext($context);
 		
 					return $html;
 					
