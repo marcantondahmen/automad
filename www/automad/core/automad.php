@@ -389,8 +389,21 @@ class Automad {
 		Debug::log('Automad: Context set to: ' . $this->context);
 			
 	}
+	
+	
+	/**
+	 *	Return the current context URL.
+	 *
+	 *	@return $this->context
+	 */
+	
+	public function getContext() {
+		
+		return $this->context;
+		
+	}
 
-	 
+ 
 	/**
 	 * 	Return the page object for the current page depending on the context.
 	 *
