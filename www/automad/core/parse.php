@@ -541,7 +541,7 @@ class Parse {
 		
 		// In a second step the actual statements get matched.
 		return 	preg_replace_callback(AM_REGEX_STATEMENT, function($matches) use ($use) {			
-							
+				
 				/*
 				
 				The $matches array can have the following elements:
@@ -612,31 +612,31 @@ class Parse {
 					}
 						
 				}
-				
+			
 				// Foreach loop (pages)
 				if (!empty($matches[4])) {
-					
+			
 					$html = '';
-					$pages = $use['automad']->getListing()->getPages();
+						$pages = $use['automad']->getListing()->getPages();
 					
-					// Save context.
-					$context = $use['automad']->getContext();
+						// Save context.
+						$context = $use['automad']->getContext();
 					
-					foreach (array_keys($pages) as $url) {
-						Debug::log('Parse: Statements: Executing snippet for page "' . $url . '"');
-						// Set context to the current page in the loop.
-						$use['automad']->setContext($url);
-						// Parse snippet.
+						foreach (array_keys($pages) as $url) {
+							Debug::log('Parse: Statements: Executing snippet for page "' . $url . '"');
+							// Set context to the current page in the loop.
+							$use['automad']->setContext($url);
+							// Parse snippet.
 						$html .= Parse::templateSnippet($matches[4], $use['automad'], $use['directory']);
-					}
+						}
 		
-					// Restore context.
-					$use['automad']->setContext($context);
-		
+						// Restore context.
+						$use['automad']->setContext($context);
+			
 					return $html;
+						
+					}
 					
-				}
-				
 				// Foreach loop (files)
 				if (!empty($matches[5]) && !empty($matches[6])) {
 					
@@ -672,7 +672,7 @@ class Parse {
 					}
 						
 				}
-				
+			
 			}, $str);
 	
 	}
@@ -681,25 +681,39 @@ class Parse {
 	/**
 	 *	Find and replace all variables with values from either the current page or, if not defined there, from the site data.
 	 *	By first checking the page data, basically all site data variables can be easily overridden by a page. 
-	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
+	 *	Optionally all values can be parsed as "JSON safe", by escaping all quotes.
+	 *	In case a variable is used as an option value for any method and is not within a string, that variable doesn't need to be 
+	 *	wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
 	 *
 	 *	@param string $str
 	 *	@param object $Automad
-	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values and the values get wrapped in double quotes, to avoid parsing errors, when a value is empty "")
+	 *	@param boolean $escape 
 	 *	@return The parsed $str
 	 */
 	
-	public static function templateVariables($str, $Automad, $jsonSafe = false) {
+	public static function templateVariables($str, $Automad, $escape = false) {
 		
 		$use = 	array(
 				'automad' => $Automad, 
 				'data' => $Automad->getCurrentPage()->data, 
-				'jsonSafe' => $jsonSafe
+				'escape' => $escape
 			);
 		
-		$str = 	preg_replace_callback(AM_REGEX_VAR, function($matches) use ($use) {
-					
-				$key = $matches[1];
+		return 	preg_replace_callback(AM_REGEX_VAR, function($matches) use ($use) {
+				
+				/*
+				
+				Possible items in $matches:
+				
+				0:	Full match
+				1:	Normal variable in any other context
+				2:	Variable is a method paramter without beeing wrapped in double quotes, like: @( img { file: @(file) })
+				 
+				*/
+				
+				// Get the last item in the array. If $matches[2] only exists, if $matches[1] is empty. Either [1] or [2] will return the matched key.
+				// The distinction between $matches[1] and $matches[2] is only made to check, if $value must be wrapped in quotes (see below).
+				$key = end($matches);
 				
 				// First try if the variable is defined for the current page, before trying the site data.
 				if (array_key_exists($key, $use['data'])) {
@@ -708,16 +722,20 @@ class Parse {
 					$value = $use['automad']->getSiteData($key);
 				}
 				
-				if ($use['jsonSafe']) {
-					$value = '"' . Parse::jsonEscape($value) . '"';		
+				// In case $value will be used as option, some chars have to be escaped to work within a JSON formatted string.
+				if ($use['escape']) {
+					$value = Parse::jsonEscape($value);	
 				}
-					
+				
+				// In case the variable is an "stand-alone" value in a JSON formatted string ($matches[2] will be defined then), it has to be wrapped in double quotes.
+				if (!empty($matches[2])) {
+					$value = '"' . $value . '"';
+				}
+									
 				return $value;
-								
+							
 			}, $str);
 						
-		return $str;
-
 	}
 	
 	
