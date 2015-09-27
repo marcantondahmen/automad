@@ -679,7 +679,10 @@ class Parse {
 
 
 	/**
-	 *	Find and replace all variables with values from either the current page or, if not defined there, from the site data.
+	 *	Find and replace all variables with values from either the current page data array or, if not defined there, from the site data array 
+	 *	or - only those starting with a "?" - from the $_REQUEST array.    
+	 *	When matching $( var ) the parser will check first the page data and then the site data.      
+	 *	When matching $( ?var ), the parser will only check the $_REQUEST array.      
 	 *	By first checking the page data, basically all site data variables can be easily overridden by a page. 
 	 *	Optionally all values can be parsed as "JSON safe", by escaping all quotes.
 	 *	In case a variable is used as an option value for any method and is not within a string, that variable doesn't need to be 
@@ -715,11 +718,26 @@ class Parse {
 				// The distinction between $matches[1] and $matches[2] is only made to check, if $value must be wrapped in quotes (see below).
 				$key = end($matches);
 				
-				// First try if the variable is defined for the current page, before trying the site data.
-				if (array_key_exists($key, $use['data'])) {
-					$value = $use['data'][$key];
+				// Check whether the $key is considered a query string parameter or an item from the page/site array.
+				if (strpos($key, '?') === 0) {
+					
+					$key = substr($key, 1);
+					
+					if (array_key_exists($key, $_REQUEST)) {
+						$value = htmlspecialchars($_REQUEST[$key]);
+					} else {
+						$value = false;
+					}
+					
 				} else {
-					$value = $use['automad']->getSiteData($key);
+					
+					// First try if the variable is defined for the current page, before trying the site data.
+					if (array_key_exists($key, $use['data'])) {
+						$value = $use['data'][$key];
+					} else {
+						$value = $use['automad']->getSiteData($key);
+					}
+					
 				}
 				
 				// In case $value will be used as option, some chars have to be escaped to work within a JSON formatted string.
