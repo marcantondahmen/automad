@@ -133,7 +133,7 @@ Config::set('AM_ID_VAR', '$');
 Config::set('AM_ID_STATEMENT', '@');
 Config::set('AM_SNIPPET_OPEN', '[[');
 Config::set('AM_SNIPPET_CLOSE', ']]');
-$var = preg_quote(AM_ID_VAR) . '\(\s*([\w\.\-]+)\s*\)';
+$var = preg_quote(AM_ID_VAR) . '\(\s*([\?\w\.\-]+)\s*\)';
 $snippet = preg_quote(AM_SNIPPET_OPEN . AM_SNIPPET_OPEN) . '(.*?)' . preg_quote(AM_SNIPPET_CLOSE . AM_SNIPPET_CLOSE);		// Note the doubled delimiters [[[[ ... ]]]] to identify the outer brackets.
 Config::set('AM_REGEX_VAR', 		'/(?:' . 
 					$var . '|' .					// simple variable "$(var)"
@@ -141,11 +141,11 @@ Config::set('AM_REGEX_VAR', 		'/(?:' .
 					')/s');										
 Config::set('AM_REGEX_STATEMENT', 	'/' . preg_quote(AM_ID_STATEMENT) . '\(\s*' . 
 					'(?:' . 
-					'([\w\/\-\.]+\.php)' . '|' . 										// include
-					'([\w\-]+)\s*(\{.*?\})?' . '|' .									// method
+					'([\w\/\-\.]+\.php)' . '|' . 							// include
+					'([\w\-]+)\s*(\{.*?\})?' . '|' .						// method
 					'foreach\s+in\s+list\s*' . $snippet . '|' .					// foreach in list
 					'foreach\s+in\s+"([^"]*?)"\s*' . $snippet . '|' .				// foreach in files
-					'if\s+(!)?' . $var . '\s*' . $snippet . '(?:\s*else\s*' . $snippet . ')?' .				// if ... else ... 	
+					'if\s+(!)?' . $var . '\s*' . $snippet . '(?:\s*else\s*' . $snippet . ')?' .	// if ... else ... 	
 					')' . 
 					'\s*\)/s'); 	
 
