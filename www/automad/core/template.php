@@ -99,7 +99,7 @@ class Template {
 		$this->Automad = $Automad;
 		$this->Page = $Automad->getCurrentPage();
 		
-		// Redirect page, if an URL is defined.
+		// Redirect page, if the defined URL variable differs from AM_REQUEST.
 		if ($this->Page->data[AM_KEY_URL] != AM_REQUEST) {
 			header('Location: ' . Resolve::url($this->Page, $this->Page->url));
 			die;
