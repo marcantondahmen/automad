@@ -193,6 +193,8 @@ class Parse {
 		
 		if ($str) {
 			
+			Debug::log('Parse: JSON: String: ' . $str);
+			
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
 			$str = str_replace("'", '"', $str);
@@ -205,6 +207,8 @@ class Parse {
 			$options = 	array_filter($options, function($value) {
 						return ($value !== '');
 					}); 
+			
+			Debug::log('Parse: JSON: Array: ' . "\n" . var_export($options, true));
 						
 		}
 		
@@ -491,9 +495,11 @@ class Parse {
 
 
 	/**
-	 * 	Call Toolbox methods, call Extensions, execute statements and include template elements recursively.
-	 *
-	 *	For example @(file.php), @(method{ options }), @(foreach in list [[ ... ]]) or @(if !$(var) [[ ... ]] else [[ ... ]])
+	 * 	Call Toolbox methods, call Extensions, execute statements and include template elements recursively.     
+	 *	For example @(file.php), @(method{ options }), @(foreach in list [[ ... ]]) or @(if !$(var) [[ ... ]] else [[ ... ]]).   
+	 *	Inside a "foreach in list" loop the context changes with each iteration and the active page in the loop becomes the current page.    
+	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).
+	 *	Inside other loops there are special variables available to be used within a snippet: $( :filter ), $( :tag ), $( :file ) and $( :basename ).
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param object $Automad
@@ -541,7 +547,7 @@ class Parse {
 		
 		// In a second step the actual statements get matched.
 		return 	preg_replace_callback(AM_REGEX_STATEMENT, function($matches) use ($use) {			
-				
+					
 				/*
 				
 				The $matches array can have the following elements:
@@ -549,25 +555,29 @@ class Parse {
 				0:	The full matched string
 			
 				Includes
-				1:	The filename to include.
+				1:	The filename to include
 			
 				Methods
 				2:	Method name
 				3:	Optional JSON formatted options
-			
-				Foreach loop (pages)
-				4:	The outer snippet in double-delimiters to execute [[[[ ... ]]]]
-			
-				Foreach loop (files)
-				5:	The glob pattern(s)
-				6:	The outer snippet in double-delimiters to execute [[[[ ... ]]]]
-			
-				If statement (boolean only)
-				7:	Optional "!" to invert the condition
-				8:	The variable to test.
-				9:	The first snippet (if ...)
-				10:	Optional second snippet (else ...)
-						
+				
+				Foreach loop 
+				4:	The array/type of content to iterate over
+				5:	A file pattern - the foreach loop will iterate over a set of files matching that pattern
+				6:	A variable defining a file pattern (basically the same like [5])
+				7:	The snippet for each item to be used within the loop
+				
+				Conditions
+				8:	Optional "!" for a boolean condition
+				9:	The variable to test in a boolean condition
+				10:	The left side of an equation (string)
+				11:	The left side of an equation (variable)
+				12:	Optional "!" for an equation (a != b)
+				13:	The right side of an equation (string)
+				14:	The right side of an equation (variable)
+				15:	The "if" snippet
+				16:	The "else" snippet
+				
 				*/
 				
 				// Include
@@ -613,66 +623,154 @@ class Parse {
 						
 				}
 			
-				// Foreach loop (pages)
-				if (!empty($matches[4])) {
+				// Foreach loop
+				if (!empty($matches[4]) && !empty($matches[7])) {
 			
+					$type = $matches[4];
+					$snippet = $matches[7];
 					$html = '';
+					
+					// Listing
+					if ($type == 'list') {
+						
 						$pages = $use['automad']->getListing()->getPages();
 					
 						// Save context.
 						$context = $use['automad']->getContext();
 					
 						foreach (array_keys($pages) as $url) {
-							Debug::log('Parse: Statements: Executing snippet for page "' . $url . '"');
+							Debug::log('Parse: Statements: Executing snippet in loop for page "' . $url . '"');
 							// Set context to the current page in the loop.
 							$use['automad']->setContext($url);
 							// Parse snippet.
-						$html .= Parse::templateSnippet($matches[4], $use['automad'], $use['directory']);
+							$html .= Parse::templateSnippet($snippet, $use['automad'], $use['directory']);
 						}
 		
 						// Restore context.
 						$use['automad']->setContext($context);
-			
-					return $html;
+						
+					}	
+					
+					// Filters (tags of the pages in the listing)
+					// Each filter can be used as $( :filter ) within a snippet
+					if ($type == 'filters') {
+				
+						foreach ($use['automad']->getListing()->getTags() as $filter) {
+							Debug::log('Parse: Statements: Executing snippet in loop for filter "' . $filter . '"');
+							// Store current filter in the data array to be picked up by templateVariables().
+							$use['automad']->getCurrentPage()->data[':filter'] = $filter;
+							$html .= Parse::templateSnippet($snippet, $use['automad'], $use['directory']);
+						}
+						
+						unset($use['automad']->getCurrentPage()->data[':filter']);
 						
 					}
 					
-				// Foreach loop (files)
-				if (!empty($matches[5]) && !empty($matches[6])) {
+					// Tags (of the current page)	
+					// Each tag can be used as $( :tag ) within a snippet
+					if ($type == 'tags') {
+				
+						foreach ($use['automad']->getCurrentPage()->tags as $tag) {
+							Debug::log('Parse: Statements: Executing snippet in loop for tag "' . $tag . '"');
+							// Store current tag in the data array to be picked up by templateVariables().
+							$use['automad']->getCurrentPage()->data[':tag'] = $tag;
+							$html .= Parse::templateSnippet($snippet, $use['automad'], $use['directory']);
+						}
+						
+						unset($use['automad']->getCurrentPage()->data[':tag']);
+						
+					}	
 					
-					$html = '';
-					
-					foreach (Parse::fileDeclaration($matches[5], $use['automad']->getCurrentPage()) as $file) {
-						$file = '"' . str_replace(AM_BASE_DIR, '', $file) . '"';
-						Debug::log('Parse: Statements: Executing snippet for file "' . $file . '"');
-						$html .= Parse::templateSnippet(str_replace('$(file)', $file, $matches[6]), $use['automad'], $use['directory']);
+					// Files
+					// Find matching files, in case a string (including variables) is the given argument for the foreach loop.
+					if (!empty($matches[5])) {
+						// Also parse possible variables within the string.
+						$files = Parse::fileDeclaration(Parse::templateVariables($matches[5], $use['automad']), $use['automad']->getCurrentPage());
 					}
 					
-					return $html;
+					// Find matching files, in case a variable is the given argument for the foreach loop. 
+					if (!empty($matches[6])) {
+						$files = Parse::fileDeclaration($use['automad']->getValue($matches[6]), $use['automad']->getCurrentPage());	
+					}
 					
+					// The full file path and the basename can be used like $( :file ) and $( :basename ) within a snippet.	
+					if (!empty($files)) {
+						
+						foreach ($files as $file) {
+							Debug::log('Parse: Statements: Executing snippet in loop for file "' . $file . '"');
+							// Store current filename and its basename in the data array to be picked up by templateVariables().
+							$use['automad']->getCurrentPage()->data[':file'] = str_replace(AM_BASE_DIR, '', $file);
+							$use['automad']->getCurrentPage()->data[':basename'] = basename($file);
+							$html .= Parse::templateSnippet($snippet, $use['automad'], $use['directory']);
+						}
+						
+						unset($use['automad']->getCurrentPage()->data[':file']);
+						unset($use['automad']->getCurrentPage()->data[':basename']);
+						
+					}
+						
+					return $html;
+						
 				}
 				
-				// If ... else ...
-				if (!empty($matches[8]) && !empty($matches[9])) {
+				// Boolean condition
+				if (!empty($matches[9]) && !empty($matches[15])) {
 					
 					// If EMPTY NOT == NOT EMPTY Value.
-					if (empty($matches[7]) == !empty($use['automad']->getCurrentPage()->data[$matches[8]])) {
+					if (empty($matches[8]) == !empty($use['automad']->getValue($matches[9]))) {
 						
-						Debug::log('Parse: Statements: Evaluating condition: "' . $matches[7] . '$(' . $matches[8] . ')" > TRUE');
-						return Parse::templateSnippet($matches[9], $use['automad'], $use['directory']);
+						Debug::log('Parse: Statements: Evaluating boolean condition: "' . $matches[8] . '$(' . $matches[9] . ')" > TRUE');
+						return Parse::templateSnippet($matches[15], $use['automad'], $use['directory']);
 						
 					} else {
 						
-						Debug::log('Parse: Statements: Evaluating condition: "' . $matches[7] . '$(' . $matches[8] . ')" > FALSE');
+						Debug::log('Parse: Statements: Evaluating condition: "' . $matches[8] . '$(' . $matches[9] . ')" > FALSE');
 						
-						if (!empty($matches[10])) {
-							return Parse::templateSnippet($matches[10], $use['automad'], $use['directory']);
+						if (!empty($matches[16])) {
+							return Parse::templateSnippet($matches[16], $use['automad'], $use['directory']);
 						}
 						
 					}
-						
+					
 				}
-			
+				
+				// Equation
+				if ((!empty($matches[10]) || !empty($matches[11])) && (!empty($matches[13]) || !empty($matches[14])) && !empty($matches[15])) {
+					
+					// Get left side.
+					if (!empty($matches[10])) {
+						$left = Parse::templateVariables($matches[10], $use['automad']);
+					} else {
+						$left = $use['automad']->getValue($matches[11]);
+					}
+				
+					// Get right side.
+					if (!empty($matches[13])) {
+						$right = Parse::templateVariables($matches[13], $use['automad']);
+					} else {
+						$right = $use['automad']->getValue($matches[14]);
+					}
+					
+					// If EMPTY NOT == (LEFT == RIGHT).
+					if (empty($matches[12]) == ($left == $right)) {
+					
+						// True
+						Debug::log('Parse: Statements: Evaluating equation: "' . $left . ' ' . $matches[12] . '= ' . $right . '" > TRUE');
+						return Parse::templateSnippet($matches[15], $use['automad'], $use['directory']);
+					
+					} else {
+					
+						// False
+						Debug::log('Parse: Statements: Evaluating equation: "' . $left . ' ' . $matches[12] . '= ' . $right . '" > FALSE');
+					
+						if (!empty($matches[16])) {
+							return Parse::templateSnippet($matches[16], $use['automad'], $use['directory']);
+						}
+					
+					}
+					
+				}
+				
 			}, $str);
 	
 	}
@@ -710,42 +808,23 @@ class Parse {
 				
 				0:	Full match
 				1:	Normal variable in any other context
-				2:	Variable is a method paramter without beeing wrapped in double quotes, like: @( img { file: @(file) })
+				2:	Variable is a method paramter without beeing wrapped in double quotes.
+					The regex will match $(var) only if there is a ":" before and a "," or a "}" after the variable (whitespace is allowed),
+					like: @( img { file: @(file) })
 				 
 				*/
 				
-				// Get the last item in the array. If $matches[2] only exists, if $matches[1] is empty. Either [1] or [2] will return the matched key.
+				// Use the last item in the array to get the requested value. If $matches[2] only exists, if $matches[1] is empty. Either [1] or [2] will return the matched key.
 				// The distinction between $matches[1] and $matches[2] is only made to check, if $value must be wrapped in quotes (see below).
-				$key = end($matches);
-				
-				// Check whether the $key is considered a query string parameter or an item from the page/site array.
-				if (strpos($key, '?') === 0) {
-					
-					$key = substr($key, 1);
-					
-					if (array_key_exists($key, $_REQUEST)) {
-						$value = htmlspecialchars($_REQUEST[$key]);
-					} else {
-						$value = false;
-					}
-					
-				} else {
-					
-					// First try if the variable is defined for the current page, before trying the site data.
-					if (array_key_exists($key, $use['data'])) {
-						$value = $use['data'][$key];
-					} else {
-						$value = $use['automad']->getSiteData($key);
-					}
-					
-				}
+				$value = $use['automad']->getValue(end($matches));
 				
 				// In case $value will be used as option, some chars have to be escaped to work within a JSON formatted string.
 				if ($use['escape']) {
 					$value = Parse::jsonEscape($value);	
 				}
 				
-				// In case the variable is an "stand-alone" value in a JSON formatted string ($matches[2] will be defined then), it has to be wrapped in double quotes.
+				// In case the variable is an "stand-alone" value in a JSON formatted string ($matches[2] will be defined then - regex ": $(var) ,|}" ), 
+				// it has to be wrapped in double quotes.
 				if (!empty($matches[2])) {
 					$value = '"' . $value . '"';
 				}
