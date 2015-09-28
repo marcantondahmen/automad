@@ -316,6 +316,40 @@ class Automad {
 	
 	
 	/**
+	 *	Get the value of a given variable key - either from the page data, the site data or from the $_REQUEST array.
+	 *
+	 *	@param string $key
+	 *	@return The value
+	 */
+	
+	public function getValue($key) {
+		
+		// Check whether the $key is considered a query string parameter or an item from the page/site array.
+		if (strpos($key, '?') === 0) {
+			
+			$key = substr($key, 1);
+			
+			if (array_key_exists($key, $_REQUEST)) {
+				return htmlspecialchars($_REQUEST[$key]);
+			} 
+			
+		} else {
+			
+			$data = $this->getCurrentPage()->data;
+			
+			// First try if the variable is defined for the current page, before trying the site data.
+			if (array_key_exists($key, $data)) {
+				return $data[$key];
+			} else {
+				return $this->getSiteData($key);
+			}
+			
+		}
+			
+	}
+	
+	
+	/**
 	 * 	Return $siteCollection array.
 	 *
 	 * 	@return array $this->siteCollection
