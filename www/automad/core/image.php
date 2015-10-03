@@ -157,7 +157,7 @@ class Image {
 		
 		if ($originalFile) {
 			
-			$getimagesize = getimagesize($originalFile);
+			$getimagesize = @getimagesize($originalFile);
 			
 			if ($getimagesize) {
 			
