@@ -58,6 +58,15 @@ class Automad {
 	 */
 
 	private $context = false;
+	
+	
+	/**
+	 * 	Automad's Filelist object
+	 *
+	 *	The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter. 
+	 */
+	
+	private $Filelist = false;
 
 
 	/**
@@ -316,7 +325,7 @@ class Automad {
 	
 	
 	/**
-	 *	Get the value of a given variable key - either from the page data, the site data or from the $_REQUEST array.
+	 *	Get the value of a given variable key - either from the page data, the site data or from the $_GET array.
 	 *
 	 *	@param string $key
 	 *	@return The value
@@ -329,8 +338,8 @@ class Automad {
 			
 			$key = substr($key, 1);
 			
-			if (array_key_exists($key, $_REQUEST)) {
-				return htmlspecialchars($_REQUEST[$key]);
+			if (array_key_exists($key, $_GET)) {
+				return htmlspecialchars($_GET[$key]);
 			} 
 			
 		} else {
@@ -452,6 +461,23 @@ class Automad {
 	
 
 	/**
+	 *	Return Automad's instance of the Filelist class and create instance when accessed for the first time.
+	 *
+	 *	@return Filelist object
+	 */
+
+	public function getFilelist() {
+		
+		if (!$this->Filelist) {
+			$this->Filelist = new Filelist($this->getCurrentPage());
+		}
+		
+		return $this->Filelist;
+		
+	}
+
+
+	/**
 	 *	Return Automad's instance of the Listing class and create instance when accessed for the first time.
 	 *
 	 *	@return Listing object
@@ -473,7 +499,6 @@ class Automad {
 	 *
 	 *	@param string $template
 	 *	@param string $title
-	 *	@param string $parent
 	 *	@return temporary page object
 	 */
 	
