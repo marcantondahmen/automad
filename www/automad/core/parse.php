@@ -105,13 +105,15 @@ class Parse {
 
 	/**
 	 *	Parse a file declaration string where multiple glob patterns can be separated by a comma and return an array with the resolved file paths.
+	 *	If $stripBaseDir is true, the base directory will be stripped from the path and each path gets resolved to be relative to the Automad installation directory.
 	 * 
 	 *	@param string $str
 	 *	@param object $Page (current page)
+	 *	@param boolean $stripBaseDir
 	 *	@return Array with resolved file paths
 	 */
 
-	public static function fileDeclaration($str, $Page) {
+	public static function fileDeclaration($str, $Page, $stripBaseDir = false) {
 		
 		$files = array();
 		
@@ -123,8 +125,14 @@ class Parse {
 			
 		}
 		
-		array_walk($files, function(&$file) { 
+		array_walk($files, function(&$file) use ($stripBaseDir) { 
+			
 			$file = realpath($file); 
+			
+			if ($stripBaseDir) {
+				$file = str_replace(AM_BASE_DIR, '', $file);
+			}
+			
 		});
 		
 		return $files;
@@ -469,7 +477,7 @@ class Parse {
 		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));	
 			
 		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line. 
-		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=[\w\.\-]+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content);
+		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . AM_CHARCLASS_VAR_CONTENT . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content);
 		
 		// Split $pairs into an array of vars.
 		foreach ($pairs as $pair) {
