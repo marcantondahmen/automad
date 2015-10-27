@@ -67,13 +67,6 @@ class Toolbox {
 	
 	
 	/**
-	 * 	Current Page object.
-	 */
-	
-	private $Page;
-	
-	
-	/**
 	 * 	The Automad object is passed as an argument. It shouldn't be created again (performance).
 	 */
 		
@@ -81,7 +74,6 @@ class Toolbox {
 				
 		$this->Automad = $Automad;
 		$this->collection = $this->Automad->getCollection();
-		$this->Page = $this->Automad->getCurrentPage();
 				
 	}
 	
@@ -113,6 +105,19 @@ class Toolbox {
 	
 	
 	/**
+	 * 	Configure the filelist to be used in foreach loops.
+	 *	
+	 *	@param array $options
+	 */
+	
+	public function filelist($options = array()) {
+		
+		$this->Automad->getFilelist()->config($options);
+		
+	}
+	
+
+	/**
 	 *	Place a set of the current page's tags and link back to the parent page passing each tag as a filter.
 	 *
 	 *	@return the HTML of the filters
@@ -120,7 +125,7 @@ class Toolbox {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->Page->tags, $this->Page->parentUrl);
+		return Html::generateFilterMenu($this->Automad->getCurrentPage()->tags, $this->Automad->getCurrentPage()->parentUrl);
 		
 	}
 	
@@ -150,7 +155,7 @@ class Toolbox {
 			
 		if ($options['file']) {
 			
-			$glob = Resolve::filePath($this->Page->path, $options['file']);
+			$glob = Resolve::filePath($this->Automad->getCurrentPage()->path, $options['file']);
 			return Html::addImage(
 					$glob, 
 					$options['width'], 
@@ -207,7 +212,7 @@ class Toolbox {
 		// Merge options with defaults				
 		$options = array_merge($defaults, $options);
 				
-		$files = Parse::fileDeclaration($options['files'], $this->Page);
+		$files = Parse::fileDeclaration($options['files'], $this->Automad->getCurrentPage());
 		
 		// Sort images.
 		if ($options['order'] == 'asc') {
@@ -255,7 +260,7 @@ class Toolbox {
 	 
 	public function level() {
 		
-		return $this->Page->level;
+		return $this->Automad->getCurrentPage()->level;
 		
 	}
 
@@ -270,7 +275,7 @@ class Toolbox {
 	public function linkPrev($options = array()) {
 		
 		$Selection = new Selection($this->collection);
-		$Selection->filterPrevAndNextToUrl($this->Page->url);
+		$Selection->filterPrevAndNextToUrl($this->Automad->getCurrentPage()->url);
 		
 		$pages = $Selection->getSelection();
 		
@@ -298,7 +303,7 @@ class Toolbox {
 	public function linkNext($options = array()) {
 		
 		$Selection = new Selection($this->collection);
-		$Selection->filterPrevAndNextToUrl($this->Page->url);
+		$Selection->filterPrevAndNextToUrl($this->Automad->getCurrentPage()->url);
 		
 		$pages = $Selection->getSelection();
 		
@@ -493,7 +498,7 @@ class Toolbox {
 	public function metaTitle($options = array()) {
 		
 		$defaults = 	array(
-					'title' => $this->Automad->getSiteName() . ' / ' . $this->Page->data['title']
+					'title' => $this->Automad->getSiteName() . ' / ' . $this->Automad->getCurrentPage()->data['title']
 				);
 		
 		$options = array_merge($defaults, $options);
@@ -513,7 +518,7 @@ class Toolbox {
 	public function navBelow($options = array()) {
 		
 		$defaults = 	array(
-					'parent' => $this->Page->url, 
+					'parent' => $this->Automad->getCurrentPage()->url, 
 					'homepage' => false,
 					'class' => false
 				);
@@ -545,12 +550,12 @@ class Toolbox {
 	
 	public function navBreadcrumbs($options = array()) {
 			
-		if ($this->Page->level > 0) {	
+		if ($this->Automad->getCurrentPage()->level > 0) {	
 				
 			$options = array_merge(array('separator' => AM_HTML_STR_BREADCRUMB_SEPARATOR), $options);
 				
 			$Selection = new Selection($this->collection);
-			$Selection->filterBreadcrumbs($this->Page->url);
+			$Selection->filterBreadcrumbs($this->Automad->getCurrentPage()->url);
 			
 			return Html::generateBreadcrumbs($Selection->getSelection(), $options['separator']);
 			
@@ -569,7 +574,7 @@ class Toolbox {
 	public function navChildren($options = array()) {
 	
 		// Always set 'parent' to the current page's parent URL by merging that parameter with the other specified options.
-		return $this->navBelow(array_merge($options, array('parent' => $this->Page->url)));
+		return $this->navBelow(array_merge($options, array('parent' => $this->Automad->getCurrentPage()->url)));
 		
 	}
 	
@@ -587,7 +592,7 @@ class Toolbox {
 		$maxLevel = intval($options['levels']);
 		
 		$Selection = new Selection($this->collection);
-		$Selection->filterBreadcrumbs($this->Page->url);
+		$Selection->filterBreadcrumbs($this->Automad->getCurrentPage()->url);
 		$pages = $Selection->getSelection();
 		
 		$html = '';
@@ -617,7 +622,7 @@ class Toolbox {
 	public function navSiblings($options = array()) {
 		
 		// Set parent to current parentUrl and overwrite passed options
-		return $this->navBelow(array_merge($options, array('parent' => $this->Page->parentUrl)));
+		return $this->navBelow(array_merge($options, array('parent' => $this->Automad->getCurrentPage()->parentUrl)));
 		
 	}
 	
@@ -661,7 +666,7 @@ class Toolbox {
 		if ($options['rootLevel'] !== false) {
 			
 			$Selection = new Selection($this->collection);
-			$Selection->filterBreadcrumbs($this->Page->url);
+			$Selection->filterBreadcrumbs($this->Automad->getCurrentPage()->url);
 			
 			foreach ($Selection->getSelection() as $breadcrumb) {
 				if ($breadcrumb->level == $options['rootLevel']) {
@@ -722,7 +727,7 @@ class Toolbox {
 	
 	public function template() {
 		
-		return $this->Page->template;
+		return $this->Automad->getCurrentPage()->template;
 		
 	}
 	
@@ -735,7 +740,7 @@ class Toolbox {
 	
 	public function themeURL() {
 		
-		return AM_DIR_THEMES . '/' . $this->Page->theme;
+		return AM_DIR_THEMES . '/' . $this->Automad->getCurrentPage()->theme;
 		
 	}
 	
