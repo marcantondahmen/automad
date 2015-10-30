@@ -128,25 +128,17 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 // LISTING DEFAULTS
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
-// TEMPLATE SYNTAX & REGEX
-Config::set('AM_ID_VAR', '$');
-Config::set('AM_ID_STATEMENT', '@');
-Config::set('AM_SNIPPET_OPEN', '[[');
-Config::set('AM_SNIPPET_CLOSE', ']]');
-$var = preg_quote(AM_ID_VAR) . '\(\s*([:\?\w\.\-]+)\s*\)';
-$snippet = preg_quote(AM_SNIPPET_OPEN . AM_SNIPPET_OPEN) . '(.*?)' . preg_quote(AM_SNIPPET_CLOSE . AM_SNIPPET_CLOSE);		// Note the doubled delimiters [[[[ ... ]]]] to identify the outer brackets.
-Config::set('AM_REGEX_VAR', 		'/(?:' . 
-					$var . '|' .					// simple variable "$(var)"
-					'(?<=\:)\s*' . $var . '\s*(?=,|\})' . 		// a variable as method parameter while being not wrapped in quotes ": $(var) ,|}"			
-					')/s');										
-Config::set('AM_REGEX_STATEMENT', 	'/' . preg_quote(AM_ID_STATEMENT) . '\(\s*' . 
-					'(?:' . 
-					'([\w\/\-\.]+\.php)' . '|' . 																// include
-					'([\w\-]+)\s*(\{.*?\})?' . '|' .															// method
-					'foreach\s+in\s+(list|filters|tags|"([^"]*?)"|' . $var . ')\s*' . $snippet . '|' .									// foreach in list|filters|tags|"..."|$(var)
-					'if\s+(?:(!)?' . $var . '|(?:"([^"]*?)"|' . $var . ')\s*(!)?=\s*(?:"([^"]*?)"|' . $var . '))\s*' . $snippet . '(?:\s*else\s*' . $snippet . ')?' .	// if ... else ... 	
-					')' . 
-					'\s*\)/s'); 	
+// TEMPLATE DELIMITERS & CHARACTER CLASSES
+Config::set('AM_DEL_VAR_OPEN', '{[');
+Config::set('AM_DEL_VAR_CLOSE', ']}');
+Config::set('AM_DEL_STATEMENT_OPEN', '{@');
+Config::set('AM_DEL_STATEMENT_CLOSE', '@}');
+Config::set('AM_DEL_COMMENT_OPEN', '{*');
+Config::set('AM_DEL_COMMENT_CLOSE', '*}');
+// Charachter class for variable keys in text files.
+Config::set('AM_CHARCLASS_VAR_CONTENT', '[\w\.\-]');
+// Charachter class for all kind if variable keys, such as text file content, read-only vars and query string keys.
+Config::set('AM_CHARCLASS_VAR_ALL', '[:\?\w\.\-]');
 
 // EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
