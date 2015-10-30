@@ -163,8 +163,8 @@ class Html {
 
 
 	/**
-	 *	Add a page variable to the HTML of a template. 
-	 * 	In case an extension needs to generate a variable by itself automatically, this method can be used to generate the correct syntax for the variable markup,
+	 *	Add a variable to the HTML of a template. 
+	 *	In case an extension needs to generate a variable by itself automatically, this method can be used to generate the correct syntax for the variable markup,
 	 *	since all extensions will be parsed before the variables.
 	 * 
 	 *	@param string $name
@@ -173,7 +173,7 @@ class Html {
 
 	public static function addVariable($name) {
 		
-		return AM_ID_VAR . '(' . $name . ')';
+		return AM_DEL_VAR_OPEN . $name . AM_DEL_VAR_CLOSE;
 	
 	}
 
