@@ -42,9 +42,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	A Listing object represents a set of Page objects (matching certain criterias).
+ *	A Pagelist object represents a set of Page objects (matching certain criterias).
  *
- *	The main properties of a Listing object are: 
+ *	The main properties of a Pagelist object are: 
  *	- A selection of Page objects (filtered)
  *	- An array of tags (not filtered, but only from pages matching $type, $template & $search)
  *
@@ -56,11 +56,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  *	Since the selection of pages will also be filtered by the keywords passed as the 'search' element in the query string, 
  *	this object can easily be used on a search results page.
- *	Basically a search results page can just be a normal page with a Listing object, where a search box passes the 'search' value to.
+ *	Basically a search results page can just be a normal page with a Pagelist object, where a search box passes the 'search' value to.
  *
  *	The visibility and order of the pages get influenced by the following elements within a query string:
  *	- filter
- * 	- search
+ *	- search
  *	- sortItem
  *	- sortOrder
  *
@@ -69,7 +69,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - http://automad.org/license
  */
 
-class Listing {
+class Pagelist {
 	
 	
 	/**
@@ -102,7 +102,7 @@ class Listing {
 	
 	
 	/**
-	 *	The listing's type (all pages, children pages or related pages)
+	 *	The pagelist's type (all pages, children pages or related pages)
 	 */
 	
 	private $type;
@@ -116,7 +116,7 @@ class Listing {
 	
 	
 	/**
-	 *	The template to filter by the listing.
+	 *	The template to filter by the pagelist.
 	 */
 	
 	private $template;
@@ -151,7 +151,7 @@ class Listing {
 		
 	
 	/**
-	 *	Initialize the Listing.
+	 *	Initialize the Pagelist.
 	 *
 	 *	@param array $collection
 	 *	@param object $Page
@@ -159,7 +159,7 @@ class Listing {
 	
 	public function __construct($collection, $Page) {
 		
-		Debug::log('Listing: New instance created!');
+		Debug::log('Pagelist: New instance created!');
 		$this->collection = $collection;
 		$this->Page = $Page;
 		$this->config($this->defaults);
@@ -168,7 +168,7 @@ class Listing {
 	
 	
 	/**
-	 *	Set or change the configuration of the listing.
+	 *	Set or change the configuration of the pagelist.
 	 *	
 	 *	@param array $options
 	 */
@@ -184,7 +184,7 @@ class Listing {
 		// Override settings with current query string options (filter, search and sort)
 		$overrides = Parse::queryArray();
 		
-		Debug::log('Listing: Use overrides from query string:');
+		Debug::log('Pagelist: Use overrides from query string:');
 		Debug::log($overrides);
 		
 		foreach (array('filter', 'search', 'sortItem', 'sortOrder') as $key) {
@@ -198,7 +198,7 @@ class Listing {
 			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
 		
-		Debug::log('Listing: Current config:');
+		Debug::log('Pagelist: Current config:');
 		Debug::log(get_object_vars($this));
 	
 	}
@@ -210,7 +210,7 @@ class Listing {
 	 *	The returned pages have to be used to get all relevant tags.
 	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.   
 	 *	
-	 *	Also note that $this->offset & $this->limit reduces the set of all relevant pages and tags of the listing object while using the $offset or $limit parameters of
+	 *	Also note that $this->offset & $this->limit reduces the set of all relevant pages and tags of the pagelist object while using the $offset or $limit parameters of
 	 *	$this->getPages() only reduces the output and will not affect the relevant pages and the collected tags.    
 	 *
 	 *	@return An array of all Page objects matching $type & $template excludng the current page. 
@@ -278,7 +278,7 @@ class Listing {
 	 *	The final set of Page objects - filtered and sorted.    
 	 *
 	 *	Note that $offset & $limit only reduce the output and not the array of relevant pages! Using the getTags() method will still output all tags, 
-	 *	even if pages with such tags are not returned due to the limit. Sorting a listing will also sort all pages and therefore the set of returned pages might
+	 *	even if pages with such tags are not returned due to the limit. Sorting a pagelist will also sort all pages and therefore the set of returned pages might
 	 *	always be different.
 	 *
 	 *	@param integer $offset
