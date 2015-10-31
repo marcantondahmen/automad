@@ -425,7 +425,7 @@ class Template {
 						// Pagelist
 						
 						// Get pages.
-						$pages = $this->Automad->getListing()->getPages();
+						$pages = $this->Automad->getPagelist()->getPages();
 					
 						// Save context.
 						$context = $this->Automad->getContext();
@@ -443,10 +443,10 @@ class Template {
 							
 					} else if ($matches['foreach'] == 'filters') {
 						
-						// Filters (tags of the pages in the listing)
+						// Filters (tags of the pages in the pagelist)
 						// Each filter can be used as $( :filter ) within a snippet.
 						
-						foreach ($this->Automad->getListing()->getTags() as $filter) {
+						foreach ($this->Automad->getPagelist()->getTags() as $filter) {
 							Debug::log('Template: Statements: Processing snippet in loop for filter "' . $filter . '"');
 							// Store current filter in the data array to be picked up by templateVariables().
 							$this->Automad->getCurrentPage()->data[AM_KEY_FILTER] = $filter;
