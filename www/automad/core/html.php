@@ -375,7 +375,7 @@ class Html {
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList(
+	public static function generatePagelist(
 					$pages, 
 					$vars, 
 					$glob = false, 
