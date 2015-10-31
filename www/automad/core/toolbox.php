@@ -322,10 +322,10 @@ class Toolbox {
 
 
 	/**
-	 *	Change of configuration for Automad's Listing object.
+	 *	Change of configuration for Automad's Pagelist object.
 	 *
 	 *	Possible options are:
-	 *	- type: sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags)
+	 *	- type: sets the type of pagelist (default is all pages), "children" (only pages below the current), "related" (all pages with common tags)
 	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
 	 *	- template: include only pages matching that template
 	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
@@ -338,28 +338,28 @@ class Toolbox {
 
 	public function listConfig($options = array()) {
 			
-		$Listing = $this->Automad->getListing();
-		$Listing->config($options);
+		$Pagelist = $this->Automad->getPagelist();
+		$Pagelist->config($options);
 		
 	}
 
 
 	/**
-	 *	Return the number of pages in the Listing object.
+	 *	Return the number of pages in the Pagelist object.
 	 *
-	 *	@return count($this->Listing->pages)
+	 *	@return count($this->Pagelist->pages)
 	 */
 	
 	public function listCount() {
 		
-		$Listing = $this->Automad->getListing();
-		return count($Listing->getPages());
+		$Pagelist = $this->Automad->getPagelist();
+		return count($Pagelist->getPages());
 		
 	}
 
 
 	/**
-	 *	Return a page list from Listing object.
+	 *	Return a page list from Pagelist object.
 	 * 
 	 * 	Possible options are:
 	 * 	- class: Wrapping class for all list items
@@ -406,10 +406,10 @@ class Toolbox {
 		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
 		$options['variables'] = array_map('trim', $options['variables']);
 		
-		$Listing = $this->Automad->getListing();
+		$Pagelist = $this->Automad->getPagelist();
 	
 		return 		Html::generateList(
-					$Listing->getPages($options['offset'], $options['limit']), 
+					$Pagelist->getPages($options['offset'], $options['limit']), 
 					$options['variables'], 
 					$options['glob'], 
 					$options['width'], 
@@ -428,15 +428,15 @@ class Toolbox {
 
 
 	/**
-	 *	Create a filter menu for the pages in Automad's Listing object.
+	 *	Create a filter menu for the pages in Automad's Pagelist object.
 	 *
 	 *	@return The HTML for the filter menu.
 	 */
 
 	public function listFilters() {
 		
-		$Listing = $this->Automad->getListing();	
-		return Html::generateFilterMenu($Listing->getTags());
+		$Pagelist = $this->Automad->getPagelist();	
+		return Html::generateFilterMenu($Pagelist->getTags());
 		
 	}
 	
