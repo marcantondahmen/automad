@@ -408,7 +408,7 @@ class Toolbox {
 		
 		$Pagelist = $this->Automad->getPagelist();
 	
-		return 		Html::generateList(
+		return 		Html::generatePagelist(
 					$Pagelist->getPages($options['offset'], $options['limit']), 
 					$options['variables'], 
 					$options['glob'], 
