@@ -155,10 +155,12 @@ class Template {
 
 	/**
 	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
-	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.
+	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.    
+	 *	
+	 *	Before returning the markup, the old Automad template syntax gets translated into the new syntax and all comments {* ... *} get stripped.
 	 *
 	 *	Note that even when the it is possible to use plain PHP in a template file, all that code will be parsed first when buffering, before any of the Automad markup is getting parsed.
-	 *	That means also, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
+	 *	That also means, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
 	 *
 	 *	@param string $file
 	 *	@return the buffered output 
