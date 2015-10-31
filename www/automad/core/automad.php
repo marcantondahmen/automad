@@ -70,12 +70,12 @@ class Automad {
 
 
 	/**
-	 *	Automad's Listing object.
+	 *	Automad's Pagelist object.
 	 *	
-	 *	The object is part of the Automad class to allow to access always the same instance of the Listing class for all objects using the Automad object as parameter. 
+	 *	The object is part of the Automad class to allow to access always the same instance of the Pagelist class for all objects using the Automad object as parameter. 
 	 */
 	
-	private $Listing = false;
+	private $Pagelist = false;
 		
 	
 	/**
@@ -478,18 +478,18 @@ class Automad {
 
 
 	/**
-	 *	Return Automad's instance of the Listing class and create instance when accessed for the first time.
+	 *	Return Automad's instance of the Pagelist class and create instance when accessed for the first time.
 	 *
-	 *	@return Listing object
+	 *	@return Pagelist object
 	 */
 	
-	public function getListing() {
+	public function getPagelist() {
 		
-		if (!$this->Listing) {
-			$this->Listing = new Listing($this->siteCollection, $this->getCurrentPage());
+		if (!$this->Pagelist) {
+			$this->Pagelist = new Pagelist($this->siteCollection, $this->getCurrentPage());
 		}
 		
-		return $this->Listing;
+		return $this->Pagelist;
 		
 	}
 
