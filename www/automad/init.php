@@ -61,6 +61,11 @@ spl_autoload_register(function($class) {
 });
 
 
+// Start the timer and enable full error reporting, when debugging is enabled.
+Debug::timer();
+Debug::errorReporting();
+
+
 // Load configuration and define constants.
 require AM_BASE_DIR . '/automad/const.php';
 
@@ -69,10 +74,6 @@ require AM_BASE_DIR . '/automad/const.php';
 if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {	
 	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
 }
-
-
-// Enable full error reporting, when debugging is enabled.
-Debug::errorReporting();
 
 
 // Split GUI form regular pages.
