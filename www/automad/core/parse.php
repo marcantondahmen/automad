@@ -201,7 +201,7 @@ class Parse {
 		
 		if ($str) {
 			
-			Debug::log('Parse: JSON: String: ' . $str);
+			$debug['String'] = $str;
 			
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
@@ -216,7 +216,9 @@ class Parse {
 						return ($value !== '');
 					}); 
 			
-			Debug::log('Parse: JSON: Array: ' . "\n" . var_export($options, true));
+			$debug['JSON'] = $options;
+			
+			Debug::log($debug);
 						
 		}
 		
@@ -328,8 +330,7 @@ class Parse {
 			// domain.com/page?key=vaule -> domain.com/index.php?/page?key=value (note the 2nd "?"!)
 			$query = preg_split('/[&\?]/', $_SERVER['QUERY_STRING'], 2);
 			$request = $query[0];
-			Debug::log('Parse: Request: Getting request from QUERY_STRING: ' . $_SERVER['QUERY_STRING']);
-			Debug::log('Parse: Request: Split Query String: ' . var_export($query, true));
+			Debug::log($query, 'Getting request from QUERY_STRING "' . $_SERVER['QUERY_STRING'] . '"');
 			
 			// In case there is no real query string except the requested page.
 			if (!isset($query[1])) {
@@ -342,7 +343,7 @@ class Parse {
 			// Remove request from QUERY_STRING.
 			$_SERVER['QUERY_STRING'] = $query[1];
 			
-			Debug::log('Parse: Request: $_GET: ' . var_export($_GET, true));
+			Debug::log($_GET, '$_GET');
 			
 		} else {
 				
@@ -351,27 +352,27 @@ class Parse {
 			if (isset($_SERVER['PATH_INFO'])) {
 		
 				$request = $_SERVER['PATH_INFO'];
-				Debug::log('Parse: Request: Getting request from PATH_INFO');
+				Debug::log('Getting request from PATH_INFO');
 	
 			} else if (isset($_SERVER['ORIG_PATH_INFO'])) {	
 	
 				$request = $_SERVER['ORIG_PATH_INFO'];
-				Debug::log('Parse: Request: Getting request from ORIG_PATH_INFO');
+				Debug::log('Getting request from ORIG_PATH_INFO');
 	
 			} else if (isset($_SERVER['REQUEST_URI'])) {
 		
 				$request = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
-				Debug::log('Parse: Request: Getting request from REQUEST_URI');
+				Debug::log('Getting request from REQUEST_URI');
 	
 			} else if (isset($_SERVER['REDIRECT_URL'])) {
 	
 				$request = $_SERVER['REDIRECT_URL'];
-				Debug::log('Parse: Request: Getting request from REDIRECT_URL');
+				Debug::log('Getting request from REDIRECT_URL');
 			
 			} else if (isset($_SERVER['PHP_SELF'])) {
 	
 				$request = $_SERVER['PHP_SELF'];
-				Debug::log('Parse: Request: Getting request from PHP_SELF');
+				Debug::log('Getting request from PHP_SELF');
 	
 			}
 			
@@ -389,7 +390,7 @@ class Parse {
 		
 		$request = '/' . trim($request, '/');
 		
-		Debug::log('Parse: Request: ' . $request);
+		Debug::log($request, 'Requested page');
 		
 		return $request; 
 		
