@@ -61,13 +61,12 @@ spl_autoload_register(function($class) {
 });
 
 
-// Start the timer and enable full error reporting, when debugging is enabled.
-Debug::timer();
-Debug::errorReporting();
-
-
 // Load configuration and define constants.
 require AM_BASE_DIR . '/automad/const.php';
+
+
+// Enable full error reporting, when debugging is enabled.
+Debug::errorReporting();
 
 
 // The cache folder must be writable (resized images), also when caching is disabled!
