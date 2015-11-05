@@ -90,10 +90,7 @@ class Debug {
 		if (AM_DEBUG_ENABLED) {
 			
 			// Stop timer.	
-			if (self::$time) {
-				$executionTime = microtime(true) - self::$time;
-				self::log($executionTime . ' seconds', 'TIMER END - Time for execution');
-			}	
+			self::timerStop();	
 			
 			// Get user & server constants.
 			self::uc();
@@ -116,6 +113,9 @@ class Debug {
 	public static function log($element, $description = '') {
 		
 		if (AM_DEBUG_ENABLED) {
+			
+			// Start timer. self::timerStart() only saves the time on the first call.
+			self::timerStart();
 			
 			// Get backtrace.
 			$backtraceAll = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
@@ -147,18 +147,29 @@ class Debug {
 	
 	
 	/**
-	 *	Start the timer to calculate the execution time when getLog() gets called. 
+	 *	Start the timer on the first call to calculate the execution time when getLog() gets called. 
 	 */
 	
-	public static function timer() {
+	private static function timerStart() {
 		
-		if (AM_DEBUG_ENABLED) { 
-			
-			if (!self::$time) {
-				self::$time = microtime(true);
-				self::log('TIMER START');
-			}
+		// Only save time on first call.	
+		if (!self::$time) {
+			self::$time = microtime(true);
+			self::log(date('d. M Y, H:i:s'));
+		}
 		
+	}
+	
+	
+	/**
+	 * 	Stop the timer and log the execution time.
+	 */
+	
+	private static function timerStop() {
+		
+		if (self::$time) {
+			$executionTime = microtime(true) - self::$time;
+			self::log($executionTime . ' seconds', 'Time for execution');
 		}
 		
 	}
@@ -168,7 +179,7 @@ class Debug {
 	 *	Log all user constants for get_defined_constants().
 	 */
 	
-	public static function uc() {
+	private static function uc() {
 		
 		$definedConstants = get_defined_constants(true);
 		$userConstants = $definedConstants['user'];
