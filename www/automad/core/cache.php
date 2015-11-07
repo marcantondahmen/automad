@@ -104,14 +104,14 @@ class Cache {
 		
 		if (AM_CACHE_ENABLED) {
 			
-			Debug::log('Cache: New Instance created!');
+			Debug::log('New Instance created!');
 			
 			$this->pageCacheFile = $this->getPageCacheFilePath();
 			$this->siteMTime = $this->getSiteMTime();
 		
 		} else {
 			
-			Debug::log('Cache: Caching is disabled!');
+			Debug::log('Caching is disabled!');
 			
 		}
 		
@@ -154,43 +154,40 @@ class Cache {
 			
 				// Check if page didn't reach the cache's lifetime yet.
 				if (($cacheMTime + AM_CACHE_LIFETIME) > time()) {
-					
+									
 					// Check if page is newer than the site's mTime.
 					if ($cacheMTime > $this->siteMTime) {
 						
 						// If the cached page is newer and didn't reach the cache's lifetime, it gets approved.
-						Debug::log('Cache: Page cache got approved!');
-						Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache got approved! Page cache mTime');
 						return true;
 						
 					} else {
 						
 						// If the cached page is older than the site's mTime,
-						// the cache gets no approval.
-						Debug::log('Cache: Page cache is deprecated! (Site got modified)'); 
-						Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+						// the cache gets no approval. 
+						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The site got modified! Page cache mTime');
 						return false;
 						
 					}
 				
 				} else {	
 					
-					Debug::log('Cache: Page cache is deprecated! (Reached maximum lifetime)'); 
-					Debug::log('       Page cache mTime: ' . date('d. M Y, H:i:s', $cacheMTime));
+					Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The cached page reached maximum lifetime! Page cache mTime'); 
 					return false;
 					
 				}	
 				
 			} else {
 		
-				Debug::log('Cache: Page cache does not exist!');
+				Debug::log('Page cache does not exist!');
 				return false;
 		
 			}
 	
 		} else {
 			
-			Debug::log('Cache: Caching is disabled! Not checking page cache!');
+			Debug::log('Caching is disabled! Not checking page cache!');
 			return false;
 			
 		}
@@ -199,7 +196,7 @@ class Cache {
 
 
 	/**
-	 *	Verify if the cached version of the Automad object is existingand  still up to date.
+	 *	Verify if the cached version of the Automad object is existing and still up to date.
 	 *
 	 *	The object cache gets approved as long as it is newer than the site's mTime and didn't reach the cache's lifetime. 
 	 *	When reaching the cache's lifetime, the Automad object cache always gets rebuilt, also if the site's content didn't change.
@@ -223,35 +220,32 @@ class Cache {
 					// Check if object is newer than the site's mTime.
 					if ($automadObjectMTime > $this->siteMTime) {
 						
-						Debug::log('Cache: Automad object cache got approved!');
-						Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
+						Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache got approved! Object cache mTime');
 						return true;
 						
 					} else {
 						
-						Debug::log('Cache: Automad object cache is deprecated! (Site got modified)');
-						Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
+						Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the site got modified! Object cache mTime');
 						return false;
 					}
 				
 				} else {
 								
-					Debug::log('Cache: Automad object cache is deprecated! (Reached maximum lifetime)');
-					Debug::log('       Automad object mTime: ' . date('d. M Y, H:i:s', $automadObjectMTime));
+					Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the cached object reached maximum lifetime! Object cache mTime');
 					return false;
 			
 				}
 				
 			} else {
 				
-				Debug::log('Cache: Automad object cache does not exist!');
+				Debug::log('Automad object cache does not exist!');
 				return false;
 				
 			}
 			
 		} else {
 			
-			Debug::log('Cache: Caching is disabled! Not checking automad object!');
+			Debug::log('Caching is disabled! Not checking automad object!');
 			return false;
 			
 		}
@@ -366,22 +360,22 @@ class Cache {
 			
 			// Save mTime
 			$old = umask(0);
-			Debug::log('Cache: Changed umask: ' . umask());
+			Debug::log(umask(), 'Changed umask');
 			file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));
 			umask($old);
 			
-			Debug::log('Cache: Scanned directories and saved Site-mTime.');
-			Debug::log('       Last modified item: ' . $lastModifiedItem); 
-			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
-			Debug::log('       Write Site-mTime: ' . AM_FILE_SITE_MTIME);
-			Debug::log('Cache: Restored umask: ' . umask());
+			Debug::log('Scanned directories and saved Site-mTime.');
+			Debug::log($lastModifiedItem, 'Last modified item'); 
+			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime');
+			Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+			Debug::log(umask(), 'Restored umask');
 		
 		} else {
 			
 			// In between this delay, it just gets loaded from a file.
 			$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-			Debug::log('Cache: Read Site-mTime: ' . AM_FILE_SITE_MTIME);
-			Debug::log('       Site-mTime:  ' . date('d. M Y, H:i:s', $siteMTime));
+			Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime is');
 			
 		}
 		
@@ -398,24 +392,26 @@ class Cache {
 	
 	public function readPageFromCache() {
 		
-		Debug::log('Cache: Read page: ' . $this->pageCacheFile);
+		Debug::log($this->pageCacheFile, 'Reading cached page from');
 		return file_get_contents($this->pageCacheFile);
 		
 	}
 	
 	
 	/**
-	 *	 Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE.
+	 *	 Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE and update the context to the requested page.
 	 *
 	 *	@return Automad object
 	 */
 	
 	public function readAutomadObjectFromCache() {
 		
+		// Get object from cache.
 		$Automad = unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
+		Debug::log($Automad->getCollection(), 'Reading cached Automad object from "' . AM_FILE_OBJECT_CACHE . '"');
 		
-		Debug::log('Cache: Read Automad object: ' . AM_FILE_OBJECT_CACHE);
-		Debug::log($Automad->getCollection());
+		// Update the context to the requested page.
+		$Automad->Context->set($Automad->getRequestedPage());
 		
 		return $Automad;
 		
@@ -431,7 +427,7 @@ class Cache {
 		if (AM_CACHE_ENABLED) {
 			
 			$old = umask(0);
-			Debug::log('Cache: Changed umask: ' . umask());
+			Debug::log(umask(), 'Changed umask');
 		
 			if(!file_exists(dirname($this->pageCacheFile))) {
 				mkdir(dirname($this->pageCacheFile), 0777, true);
@@ -439,8 +435,8 @@ class Cache {
 		
 			file_put_contents($this->pageCacheFile, $output);
 			umask($old);
-			Debug::log('Cache: Write page: ' . $this->pageCacheFile);
-			Debug::log('Cache: Restored umask: ' . umask());
+			Debug::log($this->pageCacheFile, 'Page written to');
+			Debug::log(umask(), 'Restored umask');
 			
 			// Only non-forwarded (no proxy) sites.
 			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
@@ -452,7 +448,7 @@ class Cache {
 			
 		} else {
 			
-			Debug::log('Cache: Caching is disabled! Not writing page to cache!');
+			Debug::log('Caching is disabled! Not writing page to cache!');
 			
 		}
 		
@@ -468,15 +464,15 @@ class Cache {
 		if (AM_CACHE_ENABLED) {
 			
 			$old = umask(0);
-			Debug::log('Cache: Changed umask: ' . umask());
+			Debug::log(umask(), 'Changed umask');
 			file_put_contents(AM_FILE_OBJECT_CACHE, serialize($Automad));
 			umask($old);
-			Debug::log('Cache: Write Automad object: ' . AM_FILE_OBJECT_CACHE);
-			Debug::log('Cache: Restored umask: ' . umask());
+			Debug::log(AM_FILE_OBJECT_CACHE, 'Automad object written to');
+			Debug::log(umask(), 'Restored umask');
 		
 		} else {
 			
-			Debug::log('Cache: Caching is disabled! Not writing Automad object to cache!');
+			Debug::log('Caching is disabled! Not writing Automad object to cache!');
 			
 		}	
 		
