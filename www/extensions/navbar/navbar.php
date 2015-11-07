@@ -90,7 +90,7 @@ class Navbar {
 		$html = '<nav class="navbar navbar-default' . $fixed . '">';
 			
 		// To determine all pages for each row, first the "breadcrumbs" get filtered.	
-		$Page = $Automad->getCurrentPage();	 
+		$Page = $Automad->Context->get();	 
 		$Selection = new \Automad\Core\Selection($Automad->getCollection());
 		$Selection->filterBreadcrumbs($Page->url);
 		$breadcrumbs = $Selection->getSelection();
