@@ -100,7 +100,7 @@ class Template {
 		
 		$this->Automad = $Automad;
 		$this->Toolbox = new Toolbox($Automad);
-		$Page = $Automad->getCurrentPage();
+		$Page = $Automad->Context->get();
 		
 		// Redirect page, if the defined URL variable differs from AM_REQUEST.
 		if (!empty($Page->url)) {
@@ -112,9 +112,7 @@ class Template {
 		
 		$this->template = $Page->getTemplate();
 		
-		Debug::log('Template: New instance created!');
-		Debug::log('Template: Current Page:');
-		Debug::log($Page);
+		Debug::log($Page, 'New instance created for the current page');
 		
 	}
 	
@@ -313,7 +311,7 @@ class Template {
 	 *	For example {@ file.php @}, {@ method{ options } @}, {@ foreach in ... @} ... {@ end @} or {@ if {[ var ]} @} ... {@ else @} ... {@ end @}.   
 	 *	Inside a "foreach in pagelist" loop the context changes with each iteration and the active page in the loop becomes the current page.    
 	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).
-	 *	Inside other loops there are special variables available to be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]}.
+	 *	Inside other loops there are special variables available to be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]} and the index {[ :i ]}.
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param string $directory - The directory of the currently included file/template
@@ -375,14 +373,14 @@ class Template {
 				// Include
 				if (!empty($matches['file'])) {
 					
-					Debug::log('Template: Statements: Matched include "' . $matches['file'] . '"');
+					Debug::log($matches['file'], 'Matched include');
 					$file = $directory . '/' . $matches['file'];
 				
 					if (file_exists($file)) {
-						Debug::log('Template: Statements: Including "' . $file . '"');	
+						Debug::log($file, 'Including');	
 						return $this->processMarkup($this->loadTemplate($file), dirname($file));
 					} else {
-						Debug::log('Template: Statements: File "' . $file . '" not found!');
+						Debug::log($file, 'File not found');
 					}
 						
 				}
@@ -391,7 +389,7 @@ class Template {
 				if (!empty($matches['method'])) {
 					
 					$method = $matches['method'];
-					Debug::log('Template: Statements: Matched method "' . $method . '"');
+					Debug::log($method, 'Matched method');
 					
 					// Check if options exist.
 					if (isset($matches['options'])) {
@@ -404,11 +402,11 @@ class Template {
 					// Call method.
 					if (method_exists($this->Toolbox, $method)) {
 						// Try calling a matching toolbox method. 
-						Debug::log('Template: Statements: Calling method: "' . $method . '" and passing the following options: ' . "\n" . var_export($options, true));	
+						Debug::log($options, 'Calling method: "' . $method . '" and passing the following options');	
 						return $this->Toolbox->$method($options);
 					} else {
 						// Try extension, if no toolbox method was found.
-						Debug::log('Template: Statements: Method "' . $method . '" is not a core method. Will look for a matching extension ...');
+						Debug::log('"' . $method . '" is not a core method. Will look for a matching extension ...');
 						return Extension::call($method, $options, $this->Automad);
 					}
 					
@@ -417,9 +415,18 @@ class Template {
 				// Foreach loop
 				if (!empty($matches['foreach'])) {
 						
+					$Context = $this->Automad->Context;
 					$snippet = $matches['foreachSnippet'];
 					$html = '';
-				
+					$i = 1;
+					
+					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
+					if (isset($Context->get()->data[AM_KEY_INDEX])) {
+						$indexBeforeLoop = $Context->get()->data[AM_KEY_INDEX];
+					} else {
+						$indexBeforeLoop = NULL;
+					}
+					
 					if ($matches['foreach'] == 'pagelist') {
 						
 						// Pagelist
@@ -427,52 +434,59 @@ class Template {
 						// Get pages.
 						$pages = $this->Automad->getPagelist()->getPages();
 					
-						// Save context.
-						$context = $this->Automad->getContext();
-					
-						foreach (array_keys($pages) as $url) {
-							Debug::log('Template: Statements: Processing snippet in loop for page "' . $url . '"');
+						// Save context page.
+						$contextPageBeforeLoop = $Context->get();
+						
+						foreach ($pages as $Page) {
 							// Set context to the current page in the loop.
-							$this->Automad->setContext($url);
+							$Context->set($Page);
+							// Set index for current page in context. The index can be used as {[ :i ]}.
+							$Page->data[AM_KEY_INDEX] = $i++;
 							// Parse snippet.
+							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 							$html .= $this->processMarkup($snippet, $directory);
+							unset($Page->data[AM_KEY_INDEX]);
 						}
 		
 						// Restore context.
-						$this->Automad->setContext($context);
+						$Context->set($contextPageBeforeLoop);
 							
 					} else if ($matches['foreach'] == 'filters') {
 						
 						// Filters (tags of the pages in the pagelist)
-						// Each filter can be used as $( :filter ) within a snippet.
+						// Each filter can be used as {[ :filter ]} within a snippet.
 						
 						foreach ($this->Automad->getPagelist()->getTags() as $filter) {
-							Debug::log('Template: Statements: Processing snippet in loop for filter "' . $filter . '"');
-							// Store current filter in the data array to be picked up by templateVariables().
-							$this->Automad->getCurrentPage()->data[AM_KEY_FILTER] = $filter;
+							Debug::log($filter, 'Processing snippet in loop for filter');
+							// Store current filter in the data array to be picked up by processContent().
+							$Context->get()->data[AM_KEY_FILTER] = $filter;
+							// Set index. The index can be used as {[ :i ]}.
+							$Context->get()->data[AM_KEY_INDEX] = $i++;
 							$html .= $this->processMarkup($snippet, $directory);
 						}
 						
-						unset($this->Automad->getCurrentPage()->data[AM_KEY_FILTER]);
+						unset($Context->get()->data[AM_KEY_FILTER]);
 							
 					} else if ($matches['foreach'] == 'tags') {
 
 						// Tags (of the current page)	
-						// Each tag can be used as $( :tag ) within a snippet.
+						// Each tag can be used as {[ :tag ]} within a snippet.
 
-						foreach ($this->Automad->getCurrentPage()->tags as $tag) {
-							Debug::log('Template: Statements: Processing snippet in loop for tag "' . $tag . '"');
-							// Store current tag in the data array to be picked up by templateVariables().
-							$this->Automad->getCurrentPage()->data[AM_KEY_TAG] = $tag;
+						foreach ($Context->get()->tags as $tag) {
+							Debug::log($tag, 'Processing snippet in loop for tag');
+							// Store current tag in the data array to be picked up by processContent().
+							$Context->get()->data[AM_KEY_TAG] = $tag;
+							// Set index. The index can be used as {[ :i ]}.
+							$Context->get()->data[AM_KEY_INDEX] = $i++;
 							$html .= $this->processMarkup($snippet, $directory);
 						}
 						
-						unset($this->Automad->getCurrentPage()->data[AM_KEY_TAG]);
+						unset($Context->get()->data[AM_KEY_TAG]);
 	
 					} else {
 						
 						// Files
-						// The file path and the basename can be used like $( :file ) and $( :basename ) within a snippet.
+						// The file path and the basename can be used like {[ :file ]} and {[ :basename ]} within a snippet.
 						
 						if ($matches['foreach'] == 'filelist') {
 							// Use files from filelist.
@@ -480,21 +494,26 @@ class Template {
 						} else {
 							// Merge and parse given glob pattern within any kind of quotes or from a variable value. 
 							// Only one of the following matches is not an empty string, but all three are always defined. Therefore they can simply get parsed as one concatenated string. 
-							$files = Parse::fileDeclaration($this->processContent($matches['foreachInDoubleQuotes'] . $matches['foreachInSingleQuotes'] . $matches['foreachInVar']), $this->Automad->getCurrentPage(), true);
+							$files = Parse::fileDeclaration($this->processContent($matches['foreachInDoubleQuotes'] . $matches['foreachInSingleQuotes'] . $matches['foreachInVar']), $Context->get(), true);
 						}
 						
 						foreach ($files as $file) {
-							Debug::log('Template: Statements: Processing snippet in loop for file "' . $file . '"');
-							// Store current filename and its basename in the data array to be picked up by templateVariables().
-							$this->Automad->getCurrentPage()->data[AM_KEY_FILE] = $file;
-							$this->Automad->getCurrentPage()->data[AM_KEY_BASENAME] = basename($file);
+							Debug::log($file, 'Processing snippet in loop for file');
+							// Store current filename and its basename in the data array to be picked up by processContent().
+							$Context->get()->data[AM_KEY_FILE] = $file;
+							$Context->get()->data[AM_KEY_BASENAME] = basename($file);
+							// Set index. The index can be used as {[ :i ]}.
+							$Context->get()->data[AM_KEY_INDEX] = $i++;
 							$html .= $this->processMarkup($snippet, $directory);
 						}
 						
-						unset($this->Automad->getCurrentPage()->data[AM_KEY_FILE]);
-						unset($this->Automad->getCurrentPage()->data[AM_KEY_BASENAME]);
+						unset($Context->get()->data[AM_KEY_FILE]);
+						unset($Context->get()->data[AM_KEY_BASENAME]);
 							
 					}
+					
+					// Restore index.
+					$Context->get()->data[AM_KEY_INDEX] = $indexBeforeLoop;
 					
 					return $html;
 					
@@ -519,10 +538,10 @@ class Template {
 						
 						// If EMPTY NOT == NOT EMPTY Value.
 						if (empty($matches['ifNot']) == !empty($ifVar)) {
-							Debug::log('Template: Statements: Evaluating boolean condition: "' . $matches['ifNot'] . '$(' . $matches['ifVar'] . ')" > TRUE');
+							Debug::log('TRUE', 'Evaluating boolean condition: "' . $matches['ifNot'] . AM_DEL_VAR_OPEN . $matches['ifVar'] . AM_DEL_VAR_CLOSE . '"');
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
-							Debug::log('Template: Statements: Evaluating boolean condition: "' . $matches['ifNot'] . '$(' . $matches['ifVar'] . ')" > FALSE');
+							Debug::log('FALSE', 'Evaluating boolean condition: "' . $matches['ifNot'] . AM_DEL_VAR_OPEN . $matches['ifVar'] . AM_DEL_VAR_CLOSE . '"');
 							return $this->processMarkup($elseSnippet, $directory);
 						}
 					
@@ -565,10 +584,10 @@ class Template {
 						
 						// Evaluate the expression.
 						if ($expression) {
-							Debug::log('Template: Statements: Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '" is TRUE');
+							Debug::log('TRUE', 'Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '"');
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
-							Debug::log('Template: Statements: Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '" is FALSE');
+							Debug::log('FALSE', 'Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '"');
 							return $this->processMarkup($elseSnippet, $directory);
 						}
 						
@@ -590,7 +609,7 @@ class Template {
 	
 	private function resolveUrls($str) {
 		
-		$Page = $this->Automad->getCurrentPage();
+		$Page = $this->Automad->Context->get();
 		
 		// action, href and src
 		$str = 	preg_replace_callback('/(action|href|src)="(.+?)"/', function($match) use ($Page) {
@@ -618,7 +637,7 @@ class Template {
 		
 		return 	preg_replace_callback('/(?<!mailto:)\b([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', function($matches) {
 				
-				Debug::log('Template: Obfuscating: ' . $matches[1]);
+				Debug::log($matches[1], 'Obfuscating email');
 					
 				$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
 				$html .= strrev($matches[1]);
@@ -639,7 +658,7 @@ class Template {
 	
 	public function render() {
 		
-		Debug::log('Template: Render template: ' . $this->template);
+		Debug::log($this->template, 'Render template');
 		
 		$output = $this->loadTemplate($this->template);
 		$output = $this->processMarkup($output, dirname($this->template));
