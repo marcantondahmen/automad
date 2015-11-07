@@ -119,7 +119,7 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 			
 		} else {
 			
-			Debug::log('Page does not exist, caching will be skipped!');
+			Debug::log(AM_REQUEST, 'Page not found! Caching will be skipped!');
 			
 		}
 		
