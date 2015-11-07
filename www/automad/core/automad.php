@@ -54,10 +54,12 @@ class Automad {
 	
 
 	/**
-	 * 	The current context to be defined to change the current page while executing statements.
+	 * 	Automad's Context object.
+	 *
+	 *	The object is part of the Automad class to allow to access always the same instance of the Context class for all objects using the Automad object as parameter. 
 	 */
 
-	private $context = false;
+	public $Context;
 	
 	
 	/**
@@ -249,7 +251,7 @@ class Automad {
 			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url instead).
 			$this->siteCollection[$url] = $Page;
 			
-			Debug::log('      ' . $path . ' >>> ' . $Page->url);
+			Debug::log($Page->url, $path);
 			
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
@@ -271,7 +273,7 @@ class Automad {
 		
 	
 	/** 
-	 *	Parse sitewide settings and create $siteCollection. 
+	 *	Parse sitewide settings, create $siteCollection and set the context to the currently requested page. 
 	 *	If $parseTxt is false, parsing the content and the settings get skipped and only the site's structure gets determined. (Useful for GUI)
 	 *
 	 *	@param boolean $parseTxt
@@ -279,7 +281,7 @@ class Automad {
 	
 	public function __construct($parseTxt = true) {
 		
-		Debug::log('Automad: New instance created!');
+		Debug::log('New instance created!');
 		
 		$this->parseTxt = $parseTxt;
 		
@@ -287,10 +289,11 @@ class Automad {
 			$this->siteData = Parse::siteData();
 		}
 		
-		Debug::log('Automad: Scan directories for page content:');
-		
+		// Collect pages.
 		$this->collectPages();
-		$this->setContext();
+		
+		// Set the context initially to the requested page.
+		$this->Context = new Context($this->getRequestedPage());
 		
 	}
 
@@ -344,7 +347,7 @@ class Automad {
 			
 		} else {
 			
-			$data = $this->getCurrentPage()->data;
+			$data = $this->Context->get()->data;
 			
 			// First try if the variable is defined for the current page, before trying the site data.
 			if (array_key_exists($key, $data)) {
@@ -378,7 +381,7 @@ class Automad {
 	 *	@return object $page
 	 */ 
 
-	public function getPageByUrl($url) {
+	private function getPageByUrl($url) {
 		
 		if (array_key_exists($url, $this->siteCollection)) {
 			
@@ -402,60 +405,19 @@ class Automad {
 
 
 	/**
-	 * 	Sets the current context.
-	 *
-	 *	The context defines basically what page should be considered as current.
-	 *	To reset the context back to the current URL, just call the method without passing $url.
-	 *
-	 *	@param string $url
-	 */
-
-	public function setContext($url = false) {
-		
-		// If $url is set, the context will be changed to that specified URL. 
-		// If $url is false, the currently requeset page will be the context.
-		if ($url) {
-			
-			$this->context = $url;
-			
-		} else {
-			
-			// Check whether the GUI is requesting the currently edited page.
-			if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
-				$this->context = $_POST['url'];
-			} else {
-				$this->context = AM_REQUEST;
-			}
-			
-		}
-		
-		Debug::log('Automad: Context set to: ' . $this->context);
-			
-	}
-	
-	
-	/**
-	 *	Return the current context URL.
-	 *
-	 *	@return $this->context
-	 */
-	
-	public function getContext() {
-		
-		return $this->context;
-		
-	}
-
- 
-	/**
-	 * 	Return the page object for the current page depending on the context.
+	 * 	Return the page object for the requested page.
 	 *
 	 *	@return object $currentPage
 	 */ 
 	
-	public function getCurrentPage() {
+	public function getRequestedPage() {
 		
-		return $this->getPageByUrl($this->context);
+		// Check whether the GUI is requesting the currently edited page.
+		if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
+			return $this->getPageByUrl($_POST['url']);
+		} else {
+			return $this->getPageByUrl(AM_REQUEST);
+		}
 				
 	} 
 	
@@ -469,7 +431,7 @@ class Automad {
 	public function getFilelist() {
 		
 		if (!$this->Filelist) {
-			$this->Filelist = new Filelist($this->getCurrentPage());
+			$this->Filelist = new Filelist($this->Context);
 		}
 		
 		return $this->Filelist;
@@ -486,7 +448,7 @@ class Automad {
 	public function getPagelist() {
 		
 		if (!$this->Pagelist) {
-			$this->Pagelist = new Pagelist($this->siteCollection, $this->getCurrentPage());
+			$this->Pagelist = new Pagelist($this->siteCollection, $this->Context);
 		}
 		
 		return $this->Pagelist;
@@ -524,7 +486,7 @@ class Automad {
 	
 	public function currentPageExists() {
 		
-		$Page = $this->getCurrentPage();
+		$Page = $this->Context->get();
 		
 		return ($Page->template != AM_PAGE_NOT_FOUND_TEMPLATE);
 		
