@@ -66,7 +66,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) || isset($_SERVER['HTTP_X_FORWARDED
 
 
 
-@Debug::log('Server Software: ' . $_SERVER['SERVER_SOFTWARE']);
+@Debug::log($_SERVER['SERVER_SOFTWARE'], 'Server Software');
 
 // Check whether pretty URLs are enabled.
 if ((strpos(@strtolower($_SERVER['SERVER_SOFTWARE']), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(@strtolower($_SERVER['SERVER_SOFTWARE']), 'nginx') !== false) {
@@ -194,6 +194,7 @@ Config::set('AM_KEY_FILTER', ':filter');
 Config::set('AM_KEY_TAG', ':tag');
 Config::set('AM_KEY_FILE', ':file');
 Config::set('AM_KEY_BASENAME', ':basename');
+Config::set('AM_KEY_INDEX', ':i');
 
 // Version number 
 include AM_BASE_DIR . '/automad/version.php';
