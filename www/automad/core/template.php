@@ -72,6 +72,13 @@ class Template {
 	
 	
 	/**
+	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
+	 */
+	
+	private $extensionAssets = array();
+	
+	
+	/**
 	 * 	The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
 	 */
 	
@@ -132,6 +139,137 @@ class Template {
 		
 	}
 	
+
+	/**
+	 *	Call an extension method.
+	 *
+	 *	@param string $name
+	 *	@param array $options
+	 *	@return The returned content from the called method
+	 */
+	
+	private function callExtension($name, $options) {
+		
+		// Adding the extension namespace to the called class here, to make sure,
+		// that only classes from the /extensions directory and within the \Extension namespace get used.
+		$class = AM_NAMESPACE_EXTENSIONS . '\\' . $name;
+		
+		// Building the extension's file path.
+		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class) . '/' . $name) . '.php';
+		
+		if (file_exists($file)) {
+							
+			// Load class.				
+			Debug::log($file, 'Loading class');
+			require_once $file;
+			
+			if (class_exists($class, false)) {
+				
+				// Create instance of class dynamically.
+				$object = new $class();
+				Debug::log($class, 'New instance created of');
+		
+				if (method_exists($object, $name)) {
+					
+					// Collect assets.
+					$this->collectExtensionAssets($name);
+					
+					// Call method dynamically and pass $options & Automad.
+					Debug::log($options, 'Calling method "' . $name . '" and passing the following options');
+					return $object->$name($options, $this->Automad);
+		
+				} else {
+					
+					Debug::log($name, 'Method not existing!');	
+				
+				}
+		
+			} else {
+				
+				Debug::log($class, 'Class not existing!');		
+			
+			}
+		
+		} else {
+			
+			Debug::log($file, 'File not found!');
+		
+		}
+		
+	}
+
+
+	/**
+	 * 	Collect all assets (CSS & JS files) belonging to $extension and store them in $this->extensionAssets.
+	 *	
+	 *	@param string $extension
+	 */
+	
+	private function collectExtensionAssets($extension) {
+			
+		$path = AM_BASE_DIR . strtolower(str_replace('\\', '/', AM_NAMESPACE_EXTENSIONS) . '/' . $extension);
+		
+		Debug::log($path, 'Getting assets for "' . $extension . '" in');
+		
+		foreach (glob($path . '/*.css') as $file) {
+			
+			// Only add the minified version, if existing.
+			if (!file_exists(str_replace('.css', '.min.css', $file))) {
+			
+				// Use $file also as key to keep elemtens unique.
+				$this->extensionAssets['css'][$file] = $file;
+			
+			}
+			
+		}
+		
+		foreach (glob($path . '/*.js') as $file) {
+			
+			// Only add the minified version, if existing.
+			if (!file_exists(str_replace('.js', '.min.js', $file))) {
+			
+				// Use $file also as key to keep elemtens unique.
+				$this->extensionAssets['js'][$file] = $file;
+			
+			}
+			
+		}
+		
+	}
+
+
+	/**
+	 * 	Create the HTML tags for each file in $this->extensionAssets and prepend them to the closing </head> tag.
+	 *	
+	 *	@param string $str
+	 *	@return $str
+	 */
+	
+	private function createExtensionAssetTags($str) {
+		
+		Debug::log($this->extensionAssets, 'Assets');
+		
+		$html = '';
+		
+		if (isset($this->extensionAssets['css'])) {
+			foreach ($this->extensionAssets['css'] as $file) {
+				$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $file) . '" />' . "\n";
+				Debug::log($file, 'Created tag for');	
+			}
+		}
+		
+		if (isset($this->extensionAssets['js'])) {
+			foreach ($this->extensionAssets['js'] as $file) {
+				$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $file) . '"></script>' . "\n";
+				Debug::log($file, 'Created tag for');
+			}
+		}
+		
+		// Prepend all items ($html) to the closing </head> tag.
+		return str_replace('</head>', $html . '</head>', $str);
+		
+	}
+
 
 	/**
 	 * 	Convert legacy template syntax into the new syntax.
@@ -407,7 +545,7 @@ class Template {
 					} else {
 						// Try extension, if no toolbox method was found.
 						Debug::log('"' . $method . '" is not a core method. Will look for a matching extension ...');
-						return Extension::call($method, $options, $this->Automad);
+						return $this->callExtension($method, $options);
 					}
 					
 				}
@@ -662,7 +800,7 @@ class Template {
 		
 		$output = $this->loadTemplate($this->template);
 		$output = $this->processMarkup($output, dirname($this->template));
-		$output = Extension::createAssetTags($output);
+		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->resolveUrls($output);	
 		$output = $this->obfuscateEmails($output);
