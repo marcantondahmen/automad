@@ -43,6 +43,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  *	The Filelist object represents a set of files based on a file pattern.
+ *
+ *	@author Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2015 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
 
 
@@ -50,10 +54,10 @@ class Filelist {
 	
 	
 	/**
-	 * 	The base page for resolving relative paths.
+	 * 	The Context.
 	 */
 	
-	private $Page;
+	private $Context;
 	
 	
 	/**
@@ -75,12 +79,12 @@ class Filelist {
 	/**
 	 *	The constructor.
 	 *
-	 *	@param object $Page
+	 *	@param object $Context
 	 */
 	
-	public function __construct($Page) {
+	public function __construct($Context) {
 		
-		$this->Page = $Page;
+		$this->Context = $Context;
 		$this->config($this->defaults);
 		
 	}
@@ -98,7 +102,7 @@ class Filelist {
 		$options = array_merge($this->defaults, $options);
 		
 		// Find files.
-		$files = Parse::fileDeclaration($options['glob'], $this->Page, true);
+		$files = Parse::fileDeclaration($options['glob'], $this->Context->get(), true);
 
 		// Sorting files.
 		if ($options['sortOrder'] == 'asc') {
@@ -109,7 +113,7 @@ class Filelist {
 			rsort($files);
 		} 
 				
-		Debug::log('Filelist: Config: ' . "\n" . var_export($files, true));
+		Debug::log($files);
 		
 		$this->files = $files;
 		
