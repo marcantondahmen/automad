@@ -80,10 +80,10 @@ class Pagelist {
 	
 	
 	/**
-	 *	The current Page.
+	 *	The context.
 	 */
 	
-	private $Page;
+	private $Context;
 	
 	
 	/**
@@ -154,14 +154,13 @@ class Pagelist {
 	 *	Initialize the Pagelist.
 	 *
 	 *	@param array $collection
-	 *	@param object $Page
+	 *	@param object $Context
 	 */
 	
-	public function __construct($collection, $Page) {
+	public function __construct($collection, $Context) {
 		
-		Debug::log('Pagelist: New instance created!');
 		$this->collection = $collection;
-		$this->Page = $Page;
+		$this->Context = $Context;
 		$this->config($this->defaults);
 		
 	}
@@ -184,8 +183,7 @@ class Pagelist {
 		// Override settings with current query string options (filter, search and sort)
 		$overrides = Parse::queryArray();
 		
-		Debug::log('Pagelist: Use overrides from query string:');
-		Debug::log($overrides);
+		Debug::log($overrides, 'Use overrides from query string');
 		
 		foreach (array('filter', 'search', 'sortItem', 'sortOrder') as $key) {
 			if (isset($overrides[$key])) {
@@ -198,8 +196,7 @@ class Pagelist {
 			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
 		
-		Debug::log('Pagelist: Current config:');
-		Debug::log(get_object_vars($this));
+		Debug::log(get_object_vars($this), 'Current config');
 	
 	}
 
@@ -220,25 +217,24 @@ class Pagelist {
 				
 		$Selection = new Selection($this->collection);
 		
-		// Always exclude current page
-		$Selection->excludePage($this->Page->url);
-		
 		// Set parent, in case type is "children".
 		// The default is always the current page.
 		if (!$this->parent) {
-			$this->parent = $this->Page->url;
+			$this->parent = $this->Context->get()->url;
 		}
 		
 		// Filter by type
-		switch($this->type){
+		switch ($this->type) {
 			case 'children':
 				$Selection->filterByParentUrl($this->parent);
 				break;
 			case 'related':
-				$Selection->filterRelated($this->Page);
+				$Selection->filterRelated($this->Context->get());
 				break;
 			case 'siblings':
-				$Selection->filterByParentUrl($this->Page->parentUrl);
+				$Selection->filterByParentUrl($this->Context->get()->parentUrl);
+				$Selection->excludePage($this->Context->get()->url);
+				break;
 		}
 	
 		// Filter by template
@@ -292,7 +288,11 @@ class Pagelist {
 		$Selection->filterByTag($this->filter);
 		$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
-		return $Selection->getSelection(true, $offset, $limit);
+		$pages = $Selection->getSelection(true, $offset, $limit);
+		
+		Debug::log(array_keys($pages));
+		
+		return $pages;
 			
 	}
 
