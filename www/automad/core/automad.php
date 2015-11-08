@@ -98,10 +98,10 @@ class Automad {
 	/**
 	 * 	Array holding all the site's pages and the related data. 
 	 *	
-	 *	To access the data for a specific page, use the url as key: $this->siteCollection['url'].
+	 *	To access the data for a specific page, use the url as key: $this->collection['url'].
 	 */
 	
-	private $siteCollection = array();
+	private $collection = array();
 	
 	
 	/**
@@ -140,13 +140,13 @@ class Automad {
 		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
 	
 		// check if url already exists
-		if (array_key_exists($url, $this->siteCollection)) {
+		if (array_key_exists($url, $this->collection)) {
 							
 			$i = 0;
 			
 			$newUrl = $url;
 			
-			while (array_key_exists($newUrl, $this->siteCollection)) {
+			while (array_key_exists($newUrl, $this->collection)) {
 				$i++;
 				$newUrl = $url . "-" . $i;
 			}
@@ -161,11 +161,11 @@ class Automad {
 	
 	
 	/**
-	 *	Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
+	 *	Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $collection.
 	 *
-	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
+	 *	After successful indexing, the $collection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
-	 *	To access the data of a specific page within the $siteCollection array, the page's url serves as the key: $this->siteCollection['/path/to/page']
+	 *	To access the data of a specific page within the $collection array, the page's url serves as the key: $this->collection['/path/to/page']
 	 *
 	 *	@param string $path 
 	 *	@param number $level 
@@ -246,10 +246,10 @@ class Automad {
 			$Page->parentUrl = $parentUrl;
 			$Page->template = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
 			
-			// The relative URL ($url) of the page becomes the key (in $siteCollection). 
+			// The relative URL ($url) of the page becomes the key (in $collection). 
 			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
 			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url instead).
-			$this->siteCollection[$url] = $Page;
+			$this->collection[$url] = $Page;
 			
 			Debug::log($Page->url, $path);
 			
@@ -273,7 +273,7 @@ class Automad {
 		
 	
 	/** 
-	 *	Parse sitewide settings, create $siteCollection and set the context to the currently requested page. 
+	 *	Parse sitewide settings, create $collection and set the context to the currently requested page. 
 	 *	If $parseTxt is false, parsing the content and the settings get skipped and only the site's structure gets determined. (Useful for GUI)
 	 *
 	 *	@param boolean $parseTxt
@@ -362,14 +362,14 @@ class Automad {
 	
 	
 	/**
-	 * 	Return $siteCollection array.
+	 * 	Return $collection array.
 	 *
-	 * 	@return array $this->siteCollection
+	 * 	@return array $this->collection
 	 */
 	
 	public function getCollection() {
 		
-		return $this->siteCollection;
+		return $this->collection;
 		
 	}
 		 
@@ -383,10 +383,10 @@ class Automad {
 
 	private function getPageByUrl($url) {
 		
-		if (array_key_exists($url, $this->siteCollection)) {
+		if (array_key_exists($url, $this->collection)) {
 			
 			// If page exists
-			return $this->siteCollection[$url];
+			return $this->collection[$url];
 	
 		} elseif (Parse::queryKey('search') && $url == AM_PAGE_RESULTS_URL) {
 	
@@ -448,7 +448,7 @@ class Automad {
 	public function getPagelist() {
 		
 		if (!$this->Pagelist) {
-			$this->Pagelist = new Pagelist($this->siteCollection, $this->Context);
+			$this->Pagelist = new Pagelist($this->collection, $this->Context);
 		}
 		
 		return $this->Pagelist;
