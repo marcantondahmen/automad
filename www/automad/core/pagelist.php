@@ -167,14 +167,18 @@ class Pagelist {
 	
 	
 	/**
-	 *	Set or change the configuration of the pagelist.
+	 *	Set or change the configuration of the pagelist and return the current configuration as array.    
+	 *	To just get the config, call the method without passing $options.
 	 *	
 	 *	@param array $options
+	 *	@return Updated $options
 	 */
 	
-	public function config($options) {
+	public function config($options = array()) {
 		
-		// Turn all (but only) array items in $defaults into class properties.
+		Debug::log($options, 'Updating the configuration with the following options');
+		
+		// Turn all (but only) array items also existing in $defaults into class properties.
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
 			$this->$key = $value;
@@ -195,8 +199,11 @@ class Pagelist {
 		if (!in_array($this->sortOrder, array('asc', 'desc'))) {
 			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
+			
+		$configArray = array_intersect_key((array)get_object_vars($this), $this->defaults);
+		Debug::log($configArray, 'Current config');
 		
-		Debug::log(get_object_vars($this), 'Current config');
+		return $configArray;
 	
 	}
 
@@ -216,12 +223,6 @@ class Pagelist {
 	private function getRelevant() {
 				
 		$Selection = new Selection($this->collection);
-		
-		// Set parent, in case type is "children".
-		// The default is always the current page.
-		if (!$this->parent) {
-			$this->parent = $this->Context->get()->url;
-		}
 		
 		// Filter by type
 		switch ($this->type) {
