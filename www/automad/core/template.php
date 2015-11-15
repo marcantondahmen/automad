@@ -369,31 +369,36 @@ class Template {
 
 
 	/**
-	 *	Find and replace all variables with values from either the current page data array or, if not defined there, from the site data array 
-	 *	or - only those starting with a "?" - from the $_GET array.    
-	 *	When matching {[ var ]} the parser will check first the page data and then the site data.      
-	 *	When matching {[ ?var ]}, the parser will only check the $_GET array.      
+	 *	Process variables only.	
+	 *
+	 *	Find and replace all variables within $str with values from either the context page data array or, if not defined there, from the site data array, 
+	 *	from the system variables array (only those starting with ":") or from the $_GET array (only those starting with a "?").    
+	 *
+	 *	When matching {[ var ]} the parser will check first the page data and then the site data.     
+	 *	When matching {[ :var ]}, the parser will only check the system variables array.    
+	 *	When matching {[ ?var ]}, the parser will only check the $_GET array.   
+	 *   
 	 *	By first checking the page data, basically all site data variables can be easily overridden by a page. 
-	 *	Optionally all values can be parsed as "JSON safe", by escaping all quotes.
-	 *	In case a variable is used as an option value for any method and is not part of a string, that variable doesn't need to be 
+	 *	Optionally all values can be parsed as "JSON safe", by escaping all quotes and wrapping variable is quotes when needed.
+	 *	In case a variable is used as an option value for a method and is not part of a string, that variable doesn't need to be 
 	 *	wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
 	 *
 	 *	@param string $str
-	 *	@param boolean $escape 
+	 *	@param boolean $isJsonString 
 	 *	@return The processed $str
 	 */
 
-	private function processContent($str, $escape = false) {
+	private function processContent($str, $isJsonString = false) {
 		
 		$subpatternVar = preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . AM_CHARCLASS_VAR_ALL . '+)\s*' . preg_quote(AM_DEL_VAR_CLOSE);
 		$regexContent = '/(?:' . 
-				// Simple variable {[var]}
+				// Simple variable {[var]}.
 				$subpatternVar . '|' .	
-				// a variable as method parameter while being not wrapped in quotes ": {[var]} ,|}"				
+				// A variable as method parameter while being not wrapped in quotes ": {[var]} ,|}"				
 				'(?<=\:)\s*' . $subpatternVar . '\s*(?=,|\})' . 				
 				')/s';
 		
-		return 	preg_replace_callback($regexContent, function($matches) use ($escape) {
+		return 	preg_replace_callback($regexContent, function($matches) use ($isJsonString) {
 					
 				/*
 				
@@ -412,14 +417,16 @@ class Template {
 				$value = $this->Automad->getValue(end($matches));
 				
 				// In case $value will be used as option, some chars have to be escaped to work within a JSON formatted string.
-				if ($escape) {
+				if ($isJsonString) {
+					
 					$value = Parse::jsonEscape($value);	
-				}
-				
-				// In case the variable is an "stand-alone" value in a JSON formatted string ($matches[2] will be defined then - regex ": {[ var ]} ,|}" ), 
-				// it has to be wrapped in double quotes.
-				if (!empty($matches[2])) {
-					$value = '"' . $value . '"';
+					
+					// In case the variable is an "stand-alone" value in a JSON formatted string ($matches[2] will be defined then - regex ": {[ var ]} ,|}" ), 
+					// it has to be wrapped in double quotes.
+					if (!empty($matches[2])) {
+						$value = '"' . $value . '"';
+					}
+					
 				}
 									
 				return $value;
@@ -430,83 +437,76 @@ class Template {
 
 
 	/**
-	 * 	Process all statements and content within a markup string.
+	 *	Process the full markup - variables, includes, methods and other constructs.
 	 *
-	 *	@param string $str
-	 *	@param string $directory
-	 *	@return the fully processed markup
-	 */
-
-	private function processMarkup($str, $directory) {
-		
-		return $this->processContent($this->processStatements($str, $directory));
-		
-	}
-
-
-	/**
-	 * 	Call Toolbox methods, call Extensions, execute statements (loops and conditions) and include template elements recursively.     
+	 * 	Replace variable keys with its values, call Toolbox methods, call Extensions, execute statements (loops and conditions) and include template elements recursively.     
 	 *	For example {@ file.php @}, {@ method{ options } @}, {@ foreach in ... @} ... {@ end @} or {@ if {[ var ]} @} ... {@ else @} ... {@ end @}.   
 	 *	Inside a "foreach in pagelist" loop the context changes with each iteration and the active page in the loop becomes the current page.    
 	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).
-	 *	Inside other loops there are special variables available to be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]} and the index {[ :i ]}.
+	 *	Inside other loops there are special system variables available to be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]} and the index {[ :i ]}.
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param string $directory - The directory of the currently included file/template
 	 *	@return the processed string	
 	 */
 
-	private function processStatements($str, $directory) {
+	private function processMarkup($str, $directory) {
 	
 		// Identify the outer statements.
 		$str = $this->preProcessRecursiveStatements($str);
 	
 		$var = preg_quote(AM_DEL_VAR_OPEN) . '\s*' . AM_CHARCLASS_VAR_ALL . '+\s*' . preg_quote(AM_DEL_VAR_CLOSE);		
-		$open = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$close = preg_quote(AM_DEL_STATEMENT_CLOSE);
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 		
 		// The subpatterns don't include the wrapping delimiter: "{@ subpattern @}".
-		$subpatterns['include'] = '(?P<file>[\w\/\-\.]+\.php)';
+		$statementSubpatterns['include'] = '(?P<file>[\w\/\-\.]+\.php)';
 		
-		$subpatterns['method'] = '(?P<method>[\w\-]+)\s*(?P<options>\{.*?\})?';
+		$statementSubpatterns['method'] = '(?P<method>[\w\-]+)\s*(?P<options>\{.*?\})?';
 		
-		$subpatterns['loop'] = 	$this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-					'foreach\s+in\s+(?P<foreach>' . 
-					'pagelist|' . 
-					'filters|' . 
-					'tags|' . 
-					'filelist|' .
-					'"(?P<foreachInDoubleQuotes>[^"]*)"|' . 
-					"'(?P<foreachInSingleQuotes>[^']*)'" . 
-					'|(?P<foreachInVar>' . $var . ')' .
-					')' . 
-					'\s*' . $close . 
-					'(?P<foreachSnippet>.*?)' . 
-					$open . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-		
-		$subpatterns['condition'] = 	$this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-						'if\s+(?P<condition>' . 
-							
-						// Boolean
-						'(?P<ifNot>!)?(?<ifVar>' . $var . ')|' .
-								
-						// Comparison
-						// Left
-						'(?:"(?P<ifLeftDoubleQuotes>[^"]*)"|' . "'(?P<ifLeftSingleQuotes>[^']*)'" . '|(?P<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+))' .
-						// !=
-						'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' .
-						// Right
-						'(?:"(?P<ifRightDoubleQuotes>[^"]*)"|' . "'(?P<ifRightSingleQuotes>[^']*)'" . '|(?P<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+))' .
-						
+		$statementSubpatterns['loop'] = $this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
+						'foreach\s+in\s+(?P<foreach>' . 
+						'pagelist|' . 
+						'filters|' . 
+						'tags|' . 
+						'filelist|' .
+						'"(?P<foreachInDoubleQuotes>[^"]*)"|' . 
+						"'(?P<foreachInSingleQuotes>[^']*)'" . 
+						'|(?P<foreachInVar>' . $var . ')' .
 						')' . 
-						'\s*' . $close . 
-						'(?P<ifSnippet>.*?)' . 
-						'(?:' . $open . $this->outerStatementMarker . '\s*else\s*' . $close . '(?P<elseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
-						$open . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-				
-		$regexStatement = '/' . $open . '\s*(?:' . implode('|', $subpatterns) . ')\s*' . $close . '/s'; 
+						'\s*' . $statementClose . 
+						'(?P<foreachSnippet>.*?)' . 
+						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+		
+		$statementSubpatterns['condition'] = 	$this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
+							'if\s+(?P<condition>' . 
+							
+							// Boolean
+							'(?P<ifNot>!)?(?<ifVar>' . $var . ')|' .
+								
+							// Comparison
+							// Left
+							'(?:"(?P<ifLeftDoubleQuotes>[^"]*)"|' . "'(?P<ifLeftSingleQuotes>[^']*)'" . '|(?P<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+))' .
+							// !=
+							'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' .
+							// Right
+							'(?:"(?P<ifRightDoubleQuotes>[^"]*)"|' . "'(?P<ifRightSingleQuotes>[^']*)'" . '|(?P<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+))' .
+						
+							')' . 
+							'\s*' . $statementClose . 
+							'(?P<ifSnippet>.*?)' . 
+							'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<elseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
+							$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+		
+		// Variable or statement.		
+		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/s'; 
 			
-		return 	preg_replace_callback($regexStatement, function($matches) use ($directory) {	
+		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {	
+								
+				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
+				if (!empty($matches['var'])) {
+					return $this->processContent($matches['var']);
+				}
 							
 				// Include
 				if (!empty($matches['file'])) {
@@ -540,11 +540,11 @@ class Template {
 					// Call method.
 					if (method_exists($this->Toolbox, $method)) {
 						// Try calling a matching toolbox method. 
-						Debug::log($options, 'Calling method: "' . $method . '" and passing the following options');	
+						Debug::log($options, 'Calling method ' . $method . ' and passing the following options');	
 						return $this->Toolbox->$method($options);
 					} else {
 						// Try extension, if no toolbox method was found.
-						Debug::log('"' . $method . '" is not a core method. Will look for a matching extension ...');
+						Debug::log($method . ' is not a core method. Will look for a matching extension ...');
 						return $this->callExtension($method, $options);
 					}
 					
@@ -559,11 +559,7 @@ class Template {
 					$i = 1;
 					
 					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-					if (isset($Context->get()->data[AM_KEY_INDEX])) {
-						$indexBeforeLoop = $Context->get()->data[AM_KEY_INDEX];
-					} else {
-						$indexBeforeLoop = NULL;
-					}
+					$iBeforeLoop = $this->Automad->getSystemVar(AM_KEY_INDEX);
 					
 					if ($matches['foreach'] == 'pagelist') {
 						
@@ -571,23 +567,27 @@ class Template {
 						
 						// Get pages.
 						$pages = $this->Automad->getPagelist()->getPages();
-					
 						// Save context page.
-						$contextPageBeforeLoop = $Context->get();
+						$contextBeforeLoop = $Context->get();
+						
+						Debug::log($pages, 'Foreach in pagelist loop');
 						
 						foreach ($pages as $Page) {
+							// Cache the current pagelist configuration to be restored after processing the snippet.
+							$pagelistConfigCache = $this->Automad->getPagelist()->config();
 							// Set context to the current page in the loop.
 							$Context->set($Page);
-							// Set index for current page in context. The index can be used as {[ :i ]}.
-							$Page->data[AM_KEY_INDEX] = $i++;
+							// Set index for current page. The index can be used as {[ :i ]}.
+							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
 							// Parse snippet.
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 							$html .= $this->processMarkup($snippet, $directory);
-							unset($Page->data[AM_KEY_INDEX]);
+							// Restore pagelist configuration.
+							$this->Automad->getPagelist()->config($pagelistConfigCache);
 						}
-		
+						
 						// Restore context.
-						$Context->set($contextPageBeforeLoop);
+						$Context->set($contextBeforeLoop);
 							
 					} else if ($matches['foreach'] == 'filters') {
 						
@@ -596,14 +596,14 @@ class Template {
 						
 						foreach ($this->Automad->getPagelist()->getTags() as $filter) {
 							Debug::log($filter, 'Processing snippet in loop for filter');
-							// Store current filter in the data array to be picked up by processContent().
-							$Context->get()->data[AM_KEY_FILTER] = $filter;
+							// Store current filter in the system variable buffer.
+							$this->Automad->setSystemVar(AM_KEY_FILTER, $filter);
 							// Set index. The index can be used as {[ :i ]}.
-							$Context->get()->data[AM_KEY_INDEX] = $i++;
+							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
 							$html .= $this->processMarkup($snippet, $directory);
 						}
-						
-						unset($Context->get()->data[AM_KEY_FILTER]);
+	
+						$this->Automad->setSystemVar(AM_KEY_FILTER, NULL);
 							
 					} else if ($matches['foreach'] == 'tags') {
 
@@ -611,15 +611,15 @@ class Template {
 						// Each tag can be used as {[ :tag ]} within a snippet.
 
 						foreach ($Context->get()->tags as $tag) {
-							Debug::log($tag, 'Processing snippet in loop for tag');
-							// Store current tag in the data array to be picked up by processContent().
-							$Context->get()->data[AM_KEY_TAG] = $tag;
+							Debug::log($tag, 'Processing snippet in loop for tag');							
+							// Store current tag in the system variable buffer.
+							$this->Automad->setSystemVar(AM_KEY_TAG, $tag);							
 							// Set index. The index can be used as {[ :i ]}.
-							$Context->get()->data[AM_KEY_INDEX] = $i++;
+							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
 							$html .= $this->processMarkup($snippet, $directory);
 						}
 						
-						unset($Context->get()->data[AM_KEY_TAG]);
+						$this->Automad->setSystemVar(AM_KEY_TAG, NULL);
 	
 					} else {
 						
@@ -637,21 +637,21 @@ class Template {
 						
 						foreach ($files as $file) {
 							Debug::log($file, 'Processing snippet in loop for file');
-							// Store current filename and its basename in the data array to be picked up by processContent().
-							$Context->get()->data[AM_KEY_FILE] = $file;
-							$Context->get()->data[AM_KEY_BASENAME] = basename($file);
+							// Store current filename and its basename in the system variable buffer.
+							$this->Automad->setSystemVar(AM_KEY_FILE, $file);
+							$this->Automad->setSystemVar(AM_KEY_BASENAME, basename($file));
 							// Set index. The index can be used as {[ :i ]}.
-							$Context->get()->data[AM_KEY_INDEX] = $i++;
+							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
 							$html .= $this->processMarkup($snippet, $directory);
 						}
 						
-						unset($Context->get()->data[AM_KEY_FILE]);
-						unset($Context->get()->data[AM_KEY_BASENAME]);
+						$this->Automad->setSystemVar(AM_KEY_FILE, NULL);
+						$this->Automad->setSystemVar(AM_KEY_BASENAME, NULL);
 							
 					}
 					
 					// Restore index.
-					$Context->get()->data[AM_KEY_INDEX] = $indexBeforeLoop;
+					$this->Automad->setSystemVar(AM_KEY_INDEX, $iBeforeLoop);
 					
 					return $html;
 					
@@ -676,10 +676,10 @@ class Template {
 						
 						// If EMPTY NOT == NOT EMPTY Value.
 						if (empty($matches['ifNot']) == !empty($ifVar)) {
-							Debug::log('TRUE', 'Evaluating boolean condition: "' . $matches['ifNot'] . AM_DEL_VAR_OPEN . $matches['ifVar'] . AM_DEL_VAR_CLOSE . '"');
+							Debug::log('TRUE', 'Evaluating boolean condition: "' . $matches['ifNot'] . $matches['ifVar'] . '"');
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
-							Debug::log('FALSE', 'Evaluating boolean condition: "' . $matches['ifNot'] . AM_DEL_VAR_OPEN . $matches['ifVar'] . AM_DEL_VAR_CLOSE . '"');
+							Debug::log('FALSE', 'Evaluating boolean condition: "' . $matches['ifNot'] . $matches['ifVar'] . '"');
 							return $this->processMarkup($elseSnippet, $directory);
 						}
 					
