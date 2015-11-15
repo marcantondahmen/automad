@@ -92,7 +92,7 @@ class Pagelist {
 	
 	private $defaults = 	array(
 					'type' => false,
-					'parent' => false,
+					'parent' => AM_REQUEST,
 					'template' => false,
 					'sortItem' => false,
 					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER,
