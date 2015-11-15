@@ -165,10 +165,11 @@ class Page {
 	public function isInCurrentPath() {
 				
 		// Test if AM_REQUEST starts with $this->url.
-		// The trailing slash is very important ($this->url . '/'), since without that slash,
+		// The trailing slash in strpos() is very important (URL . /), since without that slash,
 		// /path/to/page and /path/to/page-1 would both match a current URL like /path/to/page-1/subpage, 
-		// while /path/to/page/ would not match.
-		return (strpos(AM_REQUEST, $this->url . '/') === 0 && !$this->isCurrent());
+		// while /path/to/page/ would not match. That also automatically exculdes the current page, since it will have one slash more that AM_REQUEST.
+		// To always include the homepage as well, rtrim($this->url, '/') avoids a double "//" for the URL "/". 
+		return (strpos(AM_REQUEST, rtrim($this->url, '/') . '/') === 0);
 		
 	}
 	
