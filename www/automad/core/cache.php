@@ -406,14 +406,8 @@ class Cache {
 	
 	public function readAutomadObjectFromCache() {
 		
-		// Get object from cache.
-		$Automad = unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
-		Debug::log($Automad->getCollection(), 'Reading cached Automad object from "' . AM_FILE_OBJECT_CACHE . '"');
-		
-		// Update the context to the requested page.
-		$Automad->Context->set($Automad->getRequestedPage());
-		
-		return $Automad;
+		Debug::log(AM_FILE_OBJECT_CACHE, 'Reading cached Automad object from');
+		return unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
 		
 	}
 	
