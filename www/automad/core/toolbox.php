@@ -255,6 +255,7 @@ class Toolbox {
 	/**
 	 * 	Return the level of the current page.
 	 * 
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 * 	@return level
 	 */
 	 
@@ -405,9 +406,13 @@ class Toolbox {
 	public function metaTitle($options = array()) {
 		
 		$defaults = 	array(
-					'title' => $this->Automad->getSiteName() . ' / ' . $this->Automad->Context->get()->data['title']
+					'title' => $this->Automad->getValue(AM_KEY_SITENAME) . ' / ' . $this->Automad->getValue(AM_KEY_TITLE)
 				);
 		
+		// Remove false items.	
+		$options = array_filter($options);
+		
+		// Merge filtered options with defaults.
 		$options = array_merge($defaults, $options);
 				
 		return '<title>' . strip_tags($options['title']) . '</title>';
@@ -703,11 +708,11 @@ class Toolbox {
 	 *	Create a menu of buttons for sorting a page list (item & order combined).
 	 * 
 	 * 	Example: 
-	 * 	t(listSort {
+	 * 	{@ pagelist {
 	 * 		"Original": { sortOrder: "asc" },
 	 * 		"Title": { sortItem: "title", sortOrder: "asc" },
 	 * 		"Tags":	{ sortItem: "tags", sortOrder: "asc" }
-	 * 	})
+	 * 	} @}
 	 *	
 	 * 	To have a button to sort the pages by basename, the 'sortItem' just has to be skipped or set to any non-existing variable.
 	 *  
