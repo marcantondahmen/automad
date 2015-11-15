@@ -105,6 +105,13 @@ class Automad {
 	
 	
 	/**
+	 * 	Array holding all temporary system variable (those starting with a ":", like {[ :file ]}) being created in loops.
+	 */
+	
+	private $systemVarBuffer = array();
+	
+	
+	/**
 	 *	Builds an URL out of the parent URL and the actual file system folder name.
 	 *
 	 *	It is important to only transform the actual folder name (slug) and not the whole path,
@@ -203,7 +210,7 @@ class Automad {
 						$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 					} else {
 						// If page is home page...
-						$data[AM_KEY_TITLE] = $this->getSiteName();
+						$data[AM_KEY_TITLE] = $this->getSiteData(AM_KEY_SITENAME);
 					}
 				} 
 		
@@ -250,9 +257,7 @@ class Automad {
 			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
 			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url instead).
 			$this->collection[$url] = $Page;
-			
-			Debug::log($Page->url, $path);
-			
+						
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
 			if ($dirs = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR)) {
@@ -281,8 +286,6 @@ class Automad {
 	
 	public function __construct($parseTxt = true) {
 		
-		Debug::log('New instance created!');
-		
 		$this->parseTxt = $parseTxt;
 		
 		if ($parseTxt) {
@@ -292,11 +295,39 @@ class Automad {
 		// Collect pages.
 		$this->collectPages();
 		
+		Debug::log(array('Site Data' => $this->siteData, 'Collection' => $this->collection), 'New instance created');
+		
 		// Set the context initially to the requested page.
 		$this->Context = new Context($this->getRequestedPage());
 		
 	}
 
+	
+	/**
+	 * 	Define properties to be cached.
+	 *
+	 *	@return $itemsToCache
+	 */
+	
+	public function __sleep() {
+		
+		$itemsToCache = array('collection', 'siteData');
+		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
+		return $itemsToCache;
+		
+	}
+	
+	/**
+	 * 	Set new Context after being restored from cache.
+	 */
+	
+	public function __wakeup() {
+		
+		Debug::log(get_object_vars($this), 'Automad object got unserialized');
+		$this->Context = new Context($this->getRequestedPage());
+		
+	}
+	
 	
 	/**
 	 *	Return a key from $this->siteData (sitename, theme, etc.).
@@ -315,18 +346,67 @@ class Automad {
 	
 	
 	/**
-	 *	Return the name of the website - shortcut for $this->getSiteData(AM_KEY_SITENAME).
+	 *	Return the requeste system variable.
+	 *	System variables are all variables created by Automad at runtime and are related things like the context, the filelist and the pagelist objects
+	 *	or they are generated during loop constructs (current items like :file, :tag, etc. or the index :i).
 	 *
-	 *	@return string $this->getSiteData(AM_KEY_SITENAME)
+	 *	@param string $var
+	 *	@return the value of $var
 	 */
 	
-	public function getSiteName() {
+	public function getSystemVar($var) {
 		
-		return $this->getSiteData(AM_KEY_SITENAME);
-		
+		// Check whether $var is generated within a loop and therefore stored in $systemVarBuffer or
+		// if $var is related to the context, filelist or pagelist object.
+		if (array_key_exists($var, $this->systemVarBuffer)) {
+			
+			return $this->systemVarBuffer[$var];
+			
+		} else {
+			
+			switch ($var) {
+				
+				case AM_KEY_LEVEL:
+					return $this->Context->get()->level;
+					
+				case AM_KEY_TEMPLATE:
+					return $this->Context->get()->template;
+				
+				case AM_KEY_CURRENT_PAGE:
+					return $this->Context->get()->isCurrent();
+				
+				case AM_KEY_CURRENT_PATH:
+					return $this->Context->get()->isInCurrentPath();
+					
+				case AM_KEY_FILELIST_COUNT:
+					// The filelist count represents the number of files within the last defined filelist. 
+					return count($this->getFilelist()->getFiles());
+					
+				case AM_KEY_PAGELIST_COUNT:
+					// The pagelist count represents the number of pages within the last defined pagelist. 
+					return count($this->getPagelist()->getPages());
+				
+			}
+				
+		}
+	
 	}
 	
 	
+	/**
+	 *	Set a system variable.
+	 *	
+	 *	@param string $var
+	 *	@param mixed $value
+	 */
+
+	public function setSystemVar($var, $value) {
+		
+		$this->systemVarBuffer[$var] = $value;
+		
+	}
+	
+
 	/**
 	 *	Get the value of a given variable key - either from the page data, the site data or from the $_GET array.
 	 *
@@ -336,7 +416,7 @@ class Automad {
 	
 	public function getValue($key) {
 		
-		// Check whether the $key is considered a query string parameter or an item from the page/site array.
+		// Check whether the $key is considered a query string parameter (starting with a "?"), a system variable (starting with ":") or an item from the page/site array.
 		if (strpos($key, '?') === 0) {
 			
 			$key = substr($key, 1);
@@ -344,6 +424,10 @@ class Automad {
 			if (array_key_exists($key, $_GET)) {
 				return htmlspecialchars($_GET[$key]);
 			} 
+			
+		} else if (strpos($key, ':') === 0) {
+			
+			return $this->getSystemVar($key);
 			
 		} else {
 			
