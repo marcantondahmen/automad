@@ -189,12 +189,18 @@ Config::set('AM_KEY_TITLE', 'title');
 Config::set('AM_KEY_SITENAME', 'sitename');
 // URL key (to identify an URL in the page's txt file)
 Config::set('AM_KEY_URL', 'url');
-// Read-only variable keys
+// System variable keys
 Config::set('AM_KEY_FILTER', ':filter');
 Config::set('AM_KEY_TAG', ':tag');
 Config::set('AM_KEY_FILE', ':file');
 Config::set('AM_KEY_BASENAME', ':basename');
 Config::set('AM_KEY_INDEX', ':i');
+Config::set('AM_KEY_FILELIST_COUNT', ':filelist-count');
+Config::set('AM_KEY_PAGELIST_COUNT', ':pagelist-count');
+Config::set('AM_KEY_CURRENT_PAGE', ':current');
+Config::set('AM_KEY_CURRENT_PATH', ':current-path');
+Config::set('AM_KEY_LEVEL', ':level');
+Config::set('AM_KEY_TEMPLATE', ':template');
 
 // Version number 
 include AM_BASE_DIR . '/automad/version.php';
