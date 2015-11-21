@@ -330,11 +330,11 @@ class Template {
 	 *	@return The preprocessed $str where all outer opening statement delimiters get an additional marker appended.
 	 */
 
-	private function preProcessRecursiveStatements($str) {
+	private function preProcessWrappingStatements($str) {
 		
 		$depth = 0;
 		$regex = 	'/(' . 
-				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|foreach).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
+				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|foreach|with).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
 				')/s';
@@ -453,8 +453,8 @@ class Template {
 	private function processMarkup($str, $directory) {
 	
 		// Identify the outer statements.
-		$str = $this->preProcessRecursiveStatements($str);
-	
+		$str = $this->preProcessWrappingStatements($str);
+		
 		$var = preg_quote(AM_DEL_VAR_OPEN) . '\s*' . AM_CHARCLASS_VAR_ALL . '+\s*' . preg_quote(AM_DEL_VAR_CLOSE);		
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
@@ -463,6 +463,14 @@ class Template {
 		$statementSubpatterns['include'] = '(?P<file>[\w\/\-\.]+\.php)';
 		
 		$statementSubpatterns['method'] = '(?P<method>[\w\-]+)\s*(?P<options>\{.*?\})?';
+		
+		$statementSubpatterns['with'] = $this->outerStatementMarker . '\s*' . // Note the additional preparsed marker!
+						'with\s+(?P<with>' .
+						'"([^"]*)"|' . "'([^']*)'|(" . $var . ')' .
+						')' . 
+						'\s*' . $statementClose . 
+						'(?P<withSnippet>.*?)' . 
+						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['loop'] = $this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
 						'foreach\s+in\s+(?P<foreach>' . 
@@ -541,12 +549,33 @@ class Template {
 					if (method_exists($this->Toolbox, $method)) {
 						// Try calling a matching toolbox method. 
 						Debug::log($options, 'Calling method ' . $method . ' and passing the following options');	
-						return $this->Toolbox->$method($options);
+						$html = $this->Toolbox->$method($options);
 					} else {
 						// Try extension, if no toolbox method was found.
 						Debug::log($method . ' is not a core method. Will look for a matching extension ...');
-						return $this->callExtension($method, $options);
+						$html = $this->callExtension($method, $options);
 					}
+					
+					// Process all variables created by methods or extensions in a second pass.
+					return $this->processContent($html);
+					
+				}
+				
+				// With
+				if (!empty($matches['with'])) {
+					
+					$url = trim($matches['with'], '\'"');
+					Debug::log($url, 'With page');
+					$Context = $this->Automad->Context;
+					// Save original context.
+					$contextBeforeWith = $Context->get();
+					// Set context to $url.
+					$Context->set($this->Automad->getPageByUrl($url));
+					// Parse snippet.
+					$html = $this->processMarkup($matches['withSnippet'], $directory);
+					// Restore original context.
+					$Context->set($contextBeforeWith);
+					return $html;
 					
 				}
 				
