@@ -465,7 +465,7 @@ class Automad {
 	 *	@return object $page
 	 */ 
 
-	private function getPageByUrl($url) {
+	public function getPageByUrl($url) {
 		
 		if (array_key_exists($url, $this->collection)) {
 			
