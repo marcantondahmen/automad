@@ -564,7 +564,7 @@ class Template {
 				// With
 				if (!empty($matches['with'])) {
 					
-					$url = trim($matches['with'], '\'"');
+					$url = $this->processContent(trim($matches['with'], '\'"'));	
 					Debug::log($url, 'With page');
 					$Context = $this->Automad->Context;
 					// Save original context.
