@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	- An array of tags (not filtered, but only from pages matching $type, $template & $search)
  *
  *	The criterias for the selection of Page objects are:
- *	- $type (false (all pages), "children" or "related")
+ *	- $type (false (all pages), "children", "related", "siblings" or "breadcrumbs")
  *	- $parent (is only used, when $type is "children" - default is the current page)
  *	- $template (if passed, only pages with that template get included)
  *	- the 'search' element from the query string (if existant, the selection gets filtered by these keywords)
@@ -234,7 +234,9 @@ class Pagelist {
 				break;
 			case 'siblings':
 				$Selection->filterByParentUrl($this->Context->get()->parentUrl);
-				$Selection->excludePage($this->Context->get()->url);
+				break;
+			case 'breadcrumbs':
+				$Selection->filterBreadcrumbs($this->Context->get()->url);
 				break;
 		}
 	
