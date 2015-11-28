@@ -210,7 +210,13 @@ class Parse {
 				
 			// Decode JSON.
 			$options = json_decode($str, true);
-
+			
+			// Remove all undefined items (empty string). 
+			// It is not possible to use array_filter($options, 'strlen') here, since an array item could be an array itself and strlen() only expects strings.
+			$options = 	array_filter($options, function($value) {
+						return ($value !== '');
+					});
+			
 			$debug['JSON'] = $options;
 			Debug::log($debug);
 						
@@ -481,6 +487,9 @@ class Parse {
 			$vars[trim($key)] = trim($value);	
 			
 		}
+		
+		// Remove undefined (empty) items.
+		$vars = array_filter($vars, 'strlen');
 		
 		return $vars;
 		
