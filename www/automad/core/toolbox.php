@@ -604,7 +604,12 @@ class Toolbox {
 	 *	Change of configuration for Automad's Pagelist object.
 	 *
 	 *	Possible options are:
-	 *	- type: sets the type of pagelist (default is all pages), "children" (only pages below the current), "related" (all pages with common tags)
+	 *	- type: sets the type of pagelist (default is all pages),
+	 *		- false (all)
+	 *		- "children" (only pages below the current)
+	 *		- "related" (all pages with common tags) 
+	 *		- "siblings" (same parent)
+	 *		- "breadcrumbs" (all (parent) pages in the current URL)
 	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
 	 *	- template: include only pages matching that template
 	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
