@@ -466,10 +466,11 @@ class Template {
 		
 		$statementSubpatterns['with'] = $this->outerStatementMarker . '\s*' . // Note the additional preparsed marker!
 						'with\s+(?P<with>' .
-						'"([^"]*)"|' . "'([^']*)'|(" . $var . ')' .
+						'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
 						')' . 
 						'\s*' . $statementClose . 
-						'(?P<withSnippet>.*?)' . 
+						'(?P<withSnippet>.*?)' . 	
+						'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
 						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['loop'] = $this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
@@ -503,14 +504,14 @@ class Template {
 							')' . 
 							'\s*' . $statementClose . 
 							'(?P<ifSnippet>.*?)' . 
-							'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<elseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
+							'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
 							$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		// Variable or statement.		
 		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/s'; 
 			
 		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {	
-								
+									
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				if (!empty($matches['var'])) {
 					return $this->processContent($matches['var']);
@@ -564,19 +565,67 @@ class Template {
 				// With
 				if (!empty($matches['with'])) {
 					
-					$url = $this->processContent(trim($matches['with'], '\'"'));	
-					Debug::log($url, 'With page');
 					$Context = $this->Automad->Context;
-					// Save original context.
-					$contextBeforeWith = $Context->get();
-					// Set context to $url.
-					$Context->set($this->Automad->getPageByUrl($url));
-					// Parse snippet.
-					$html = $this->processMarkup($matches['withSnippet'], $directory);
-					// Restore original context.
-					$Context->set($contextBeforeWith);
-					return $html;
+					$url = $this->processContent(trim($matches['with'], '\'"'));
 					
+					// Previous or next page. Use lowercase matches to be case insensitive.
+					if (strtolower($matches['with']) == 'prev' || strtolower($matches['with']) == 'next') {
+						
+						$Selection = new Selection($this->Automad->getCollection());
+						$Selection->filterPrevAndNextToUrl($Context->get()->url);
+						$pages = $Selection->getSelection();
+						
+						if (array_key_exists(strtolower($matches['with']), $pages)) {
+							$Page = $pages[strtolower($matches['with'])];
+						}
+						
+					}
+				
+					// Any existing page.
+					if (array_key_exists($url, $this->Automad->getCollection())) {
+						$Page = $this->Automad->getPageByUrl($url);
+					}
+						
+					// Process snippet for $Page.
+					if (!empty($Page)) {	
+						Debug::log($Page->url, 'With page');
+						// Save original context.
+						$contextBeforeWith = $Context->get();
+						// Set context to $url.
+						$Context->set($Page);
+						// Parse snippet.
+						$html = $this->processMarkup($matches['withSnippet'], $directory);
+						// Restore original context.
+						$Context->set($contextBeforeWith);
+						return $html;
+					} 
+										
+					// If no matching page exists, check for a file.
+					$files = Parse::fileDeclaration($url, $Context->get(), true);
+					
+					if (!empty($files)) {
+						
+						$file = $files[0];
+						Debug::log($file, 'With file');
+						// Store current filename and its basename in the system variable buffer.
+						$this->Automad->setSystemVar(AM_KEY_FILE, $file);
+						$this->Automad->setSystemVar(AM_KEY_BASENAME, basename($file));
+						// Process snippet.
+						$html = $this->processMarkup($matches['withSnippet'], $directory);
+						// Reset system variables.
+						$this->Automad->setSystemVar(AM_KEY_FILE, NULL);
+						$this->Automad->setSystemVar(AM_KEY_BASENAME, NULL);
+						return $html;
+						
+					} 
+						
+					// In case $url is not a page and also not a file (no 'return' was called before), process the 'withElseSnippet'.
+					Debug::log($url, 'With: No matching page or file found for');
+					
+					if (!empty($matches['withElseSnippet'])) {
+						return $this->processMarkup($matches['withElseSnippet'], $directory);
+					}
+	
 				}
 				
 				// Foreach loop
@@ -690,10 +739,10 @@ class Template {
 				if (!empty($matches['condition'])) {
 								
 					$ifSnippet = $matches['ifSnippet'];
-					$elseSnippet = '';
+					$ifElseSnippet = '';
 					
-					if (!empty($matches['elseSnippet'])) {
-						$elseSnippet = $matches['elseSnippet'];
+					if (!empty($matches['ifElseSnippet'])) {
+						$ifElseSnippet = $matches['ifElseSnippet'];
 					} 
 					
 					if (!empty($matches['ifVar'])) {
@@ -709,7 +758,7 @@ class Template {
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
 							Debug::log('FALSE', 'Evaluating boolean condition: "' . $matches['ifNot'] . $matches['ifVar'] . '"');
-							return $this->processMarkup($elseSnippet, $directory);
+							return $this->processMarkup($ifElseSnippet, $directory);
 						}
 					
 					} else {
@@ -755,7 +804,7 @@ class Template {
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
 							Debug::log('FALSE', 'Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '"');
-							return $this->processMarkup($elseSnippet, $directory);
+							return $this->processMarkup($ifElseSnippet, $directory);
 						}
 						
 					}
