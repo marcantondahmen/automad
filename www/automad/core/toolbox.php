@@ -269,6 +269,7 @@ class Toolbox {
 	/**
 	 *	Place a link to the previous sibling.
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
 	 *	@return the HTML for the link.
 	 */
@@ -276,6 +277,8 @@ class Toolbox {
 	public function linkPrev($options = array()) {
 		
 		$Selection = new Selection($this->collection);
+		$Selection->filterByParentUrl($this->Automad->Context->get()->parentUrl);
+		$Selection->sortPagesByBasename();
 		$Selection->filterPrevAndNextToUrl($this->Automad->Context->get()->url);
 		
 		$pages = $Selection->getSelection();
@@ -297,6 +300,7 @@ class Toolbox {
 	/**
 	 *	Place a link to the next sibling.
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
 	 *	@return the HTML for the link.
 	 */
@@ -304,6 +308,8 @@ class Toolbox {
 	public function linkNext($options = array()) {
 		
 		$Selection = new Selection($this->collection);
+		$Selection->filterByParentUrl($this->Automad->Context->get()->parentUrl);
+		$Selection->sortPagesByBasename();
 		$Selection->filterPrevAndNextToUrl($this->Automad->Context->get()->url);
 		
 		$pages = $Selection->getSelection();
