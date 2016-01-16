@@ -485,14 +485,13 @@ class Template {
 						')' . 
 						'\s*' . $statementClose . 
 						'(?P<foreachSnippet>.*?)' . 
+						'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
 						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['condition'] = 	$this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
 							'if\s+(?P<condition>' . 
-							
 							// Boolean
-							'(?P<ifNot>!)?(?<ifVar>' . $var . ')|' .
-								
+							'(?P<ifNot>!)?(?<ifVar>' . $var . ')|' .	
 							// Comparison
 							// Left
 							'(?:"(?P<ifLeftDoubleQuotes>[^"]*)"|' . "'(?P<ifLeftSingleQuotes>[^']*)'" . '|(?P<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+))' .
@@ -500,7 +499,6 @@ class Template {
 							'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' .
 							// Right
 							'(?:"(?P<ifRightDoubleQuotes>[^"]*)"|' . "'(?P<ifRightSingleQuotes>[^']*)'" . '|(?P<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+))' .
-						
 							')' . 
 							'\s*' . $statementClose . 
 							'(?P<ifSnippet>.*?)' . 
@@ -510,8 +508,8 @@ class Template {
 		// Variable or statement.		
 		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/s'; 
 			
-		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {	
-									
+		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {
+					
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				if (!empty($matches['var'])) {
 					return $this->processContent($matches['var']);
@@ -632,9 +630,15 @@ class Template {
 				if (!empty($matches['foreach'])) {
 						
 					$Context = $this->Automad->Context;
-					$snippet = $matches['foreachSnippet'];
+					$foreachSnippet = $matches['foreachSnippet'];
+					$foreachElseSnippet = '';
+					
+					if (!empty($matches['foreachElseSnippet'])) {
+						$foreachElseSnippet = $matches['foreachElseSnippet'];
+					}
+					
 					$html = '';
-					$i = 1;
+					$i = 0;
 					
 					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
 					$iBeforeLoop = $this->Automad->getSystemVar(AM_KEY_INDEX);
@@ -656,10 +660,10 @@ class Template {
 							// Set context to the current page in the loop.
 							$Context->set($Page);
 							// Set index for current page. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
+							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
 							// Parse snippet.
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
-							$html .= $this->processMarkup($snippet, $directory);
+							$html .= $this->processMarkup($foreachSnippet, $directory);
 							// Restore pagelist configuration.
 							$this->Automad->getPagelist()->config($pagelistConfigCache);
 						}
@@ -677,8 +681,8 @@ class Template {
 							// Store current filter in the system variable buffer.
 							$this->Automad->setSystemVar(AM_KEY_FILTER, $filter);
 							// Set index. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
-							$html .= $this->processMarkup($snippet, $directory);
+							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
 	
 						$this->Automad->setSystemVar(AM_KEY_FILTER, NULL);
@@ -693,8 +697,8 @@ class Template {
 							// Store current tag in the system variable buffer.
 							$this->Automad->setSystemVar(AM_KEY_TAG, $tag);							
 							// Set index. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
-							$html .= $this->processMarkup($snippet, $directory);
+							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
 						
 						$this->Automad->setSystemVar(AM_KEY_TAG, NULL);
@@ -719,8 +723,8 @@ class Template {
 							$this->Automad->setSystemVar(AM_KEY_FILE, $file);
 							$this->Automad->setSystemVar(AM_KEY_BASENAME, basename($file));
 							// Set index. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, $i++);
-							$html .= $this->processMarkup($snippet, $directory);
+							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
 						
 						$this->Automad->setSystemVar(AM_KEY_FILE, NULL);
@@ -730,6 +734,12 @@ class Template {
 					
 					// Restore index.
 					$this->Automad->setSystemVar(AM_KEY_INDEX, $iBeforeLoop);
+					
+					// If the counter ($i) is 0 (false), process the "else" snippet.
+					if (!$i) {
+						Debug::log($matches['foreach'], 'No elements in foreach loop. Processing else statement for');
+						$html .= $this->processMarkup($foreachElseSnippet, $directory);
+					}
 					
 					return $html;
 					
