@@ -92,7 +92,7 @@ class Pagelist {
 	
 	private $defaults = 	array(
 					'type' => false,
-					'parent' => AM_REQUEST,
+					'parent' => false,
 					'template' => false,
 					'sortItem' => false,
 					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER,
@@ -224,10 +224,21 @@ class Pagelist {
 				
 		$Selection = new Selection($this->collection);
 		
+		// In case $this->parent is an empty string or false, use the current context. 
+		// Therefore it is not possible to have a pagelist only including the homepage (parent: "").
+		// Since that kind of pagelist would always have only one element, that one can be accessed using the "with" statement instead.
+		// Note that $parent has to be defined with each call again, to leave $this->parent untouched - otherwise it would be defined on a second call and therefore would create
+		// an infinite loop on recursive pagelists.
+		if ($this->parent) {
+			$parent = $this->parent;
+		} else {
+			$parent = $this->Context->get()->url;
+		}
+		
 		// Filter by type
 		switch ($this->type) {
 			case 'children':
-				$Selection->filterByParentUrl($this->parent);
+				$Selection->filterByParentUrl($parent);
 				break;
 			case 'related':
 				$Selection->filterRelated($this->Context->get());
