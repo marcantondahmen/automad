@@ -509,7 +509,7 @@ class Template {
 		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/s'; 
 			
 		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {
-					
+							
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				if (!empty($matches['var'])) {
 					return $this->processContent($matches['var']);
@@ -569,7 +569,7 @@ class Template {
 					// Previous or next page. Use lowercase matches to be case insensitive.
 					if (strtolower($matches['with']) == 'prev' || strtolower($matches['with']) == 'next') {
 						
-						$Selection = new Selection($this->Automad->getCollection());
+						$Selection = new Selection($this->Automad->getPagelist()->getPages());
 						$Selection->filterPrevAndNextToUrl($Context->get()->url);
 						$pages = $Selection->getSelection();
 						
