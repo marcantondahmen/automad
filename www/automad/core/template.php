@@ -548,15 +548,12 @@ class Template {
 					if (method_exists($this->Toolbox, $method)) {
 						// Try calling a matching toolbox method. 
 						Debug::log($options, 'Calling method ' . $method . ' and passing the following options');	
-						$html = $this->Toolbox->$method($options);
+						return $this->Toolbox->$method($options);
 					} else {
 						// Try extension, if no toolbox method was found.
 						Debug::log($method . ' is not a core method. Will look for a matching extension ...');
-						$html = $this->callExtension($method, $options);
+						return $this->callExtension($method, $options);
 					}
-					
-					// Process all variables created by methods or extensions in a second pass.
-					return $this->processContent($html);
 					
 				}
 				
