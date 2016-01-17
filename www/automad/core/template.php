@@ -337,7 +337,7 @@ class Template {
 				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|foreach|with).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
-				')/s';
+				')/is';
 		
 		return 	preg_replace_callback($regex, function($match) use (&$depth) {
 						
@@ -439,11 +439,16 @@ class Template {
 	/**
 	 *	Process the full markup - variables, includes, methods and other constructs.
 	 *
-	 * 	Replace variable keys with its values, call Toolbox methods, call Extensions, execute statements (loops and conditions) and include template elements recursively.     
-	 *	For example {@ file.php @}, {@ method{ options } @}, {@ foreach in ... @} ... {@ end @} or {@ if {[ var ]} @} ... {@ else @} ... {@ end @}.   
-	 *	Inside a "foreach in pagelist" loop the context changes with each iteration and the active page in the loop becomes the current page.    
-	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).
-	 *	Inside other loops there are special system variables available to be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]} and the index {[ :i ]}.
+	 * 	Replace variable keys with its values, call Toolbox methods, call Extensions, execute statements (with, loops and conditions) and include template elements recursively.     
+	 *	For example {@ file.php @}, {@ method{ options } @}, {@ foreach in ... @} ... {@ end @} or {@ if {[ var ]} @} ... {@ else @} ... {@ end @}.    
+	 *
+	 *	The "with" statement makes data associated with a specified page or a file accessible.    
+	 *	With a page, the context changes to the given page, with files, the file's system variables (:file, :basename and :caption) can be used.      
+	 *
+	 *	Inside a "foreach in pagelist" loop, the context changes with each iteration and the active page in the loop becomes the current page.    
+	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).    
+	 *	Inside other loops, the following system variables can be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]}.  
+	 *	All loops also generate an index {[ :i ]} for each elements in the array. 
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param string $directory - The directory of the currently included file/template
@@ -506,7 +511,7 @@ class Template {
 							$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		// Variable or statement.		
-		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/s'; 
+		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/is'; 
 			
 		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {
 							
@@ -640,7 +645,7 @@ class Template {
 					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
 					$iBeforeLoop = $this->Automad->getSystemVar(AM_KEY_INDEX);
 					
-					if ($matches['foreach'] == 'pagelist') {
+					if (strtolower($matches['foreach']) == 'pagelist') {
 						
 						// Pagelist
 						
@@ -668,7 +673,7 @@ class Template {
 						// Restore context.
 						$Context->set($contextBeforeLoop);
 							
-					} else if ($matches['foreach'] == 'filters') {
+					} else if (strtolower($matches['foreach']) == 'filters') {
 						
 						// Filters (tags of the pages in the pagelist)
 						// Each filter can be used as {[ :filter ]} within a snippet.
@@ -684,7 +689,7 @@ class Template {
 	
 						$this->Automad->setSystemVar(AM_KEY_FILTER, NULL);
 							
-					} else if ($matches['foreach'] == 'tags') {
+					} else if (strtolower($matches['foreach']) == 'tags') {
 
 						// Tags (of the current page)	
 						// Each tag can be used as {[ :tag ]} within a snippet.
@@ -705,7 +710,7 @@ class Template {
 						// Files
 						// The file path and the basename can be used like {[ :file ]} and {[ :basename ]} within a snippet.
 						
-						if ($matches['foreach'] == 'filelist') {
+						if (strtolower($matches['foreach']) == 'filelist') {
 							// Use files from filelist.
 							$files = $this->Automad->getFilelist()->getFiles();
 						} else {
@@ -734,7 +739,7 @@ class Template {
 					
 					// If the counter ($i) is 0 (false), process the "else" snippet.
 					if (!$i) {
-						Debug::log($matches['foreach'], 'No elements in foreach loop. Processing else statement for');
+						Debug::log('foreach in ' . strtolower($matches['foreach']), 'No elements array. Processing else statement for');
 						$html .= $this->processMarkup($foreachElseSnippet, $directory);
 					}
 					
