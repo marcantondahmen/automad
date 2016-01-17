@@ -101,6 +101,7 @@ Config::set('AM_DIR_GUI_INC', '/automad/gui/inc');
 
 // FILE
 Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)	
+Config::set('AM_FILE_EXT_CAPTION', 'caption');
 Config::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
 Config::set('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.' . AM_FILE_EXT_DATA); 
@@ -194,6 +195,7 @@ Config::set('AM_KEY_FILTER', ':filter');
 Config::set('AM_KEY_TAG', ':tag');
 Config::set('AM_KEY_FILE', ':file');
 Config::set('AM_KEY_BASENAME', ':basename');
+Config::set('AM_KEY_CAPTION', ':caption');
 Config::set('AM_KEY_INDEX', ':i');
 Config::set('AM_KEY_FILELIST_COUNT', ':filelist-count');
 Config::set('AM_KEY_PAGELIST_COUNT', ':pagelist-count');
