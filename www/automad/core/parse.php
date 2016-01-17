@@ -72,6 +72,28 @@ class Parse {
 	}
 
 
+	/**
+	 *	Read a file's caption file and parse contained markdown syntax.
+	 *
+	 *	The caption filename is build out of the actual filename with the appended ".caption" extension, like "image.jpg.caption".
+	 *	
+	 *	@param string $file
+	 *	@return the caption string
+	 */
+	
+	public static function caption($file) {
+		
+		// Build filename of the caption file.
+		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+		Debug::log($captionFile);
+		
+		if (is_readable($captionFile)) {
+			return self::markdown(file_get_contents($captionFile));
+		}
+		
+	}
+
+
  	/**
  	 *	Extracts the tags string out of a given array and returns an array with these tags.
  	 *
@@ -228,36 +250,44 @@ class Parse {
 	
 	
 	/**
-	 *	Parses a text file including markdown syntax. 
+	 *	Parse a markdown string.
+	 *
+	 *	If the given string is a multiline string, it will then be parsed as markdown.
+	 *	If the string is just a single line, markdown parsing is skipped.
+	 *	If it is a multiline string, but starts and ends with a <head> element, markdown parsing will be skipped as well.
 	 *	
-	 *	If a variable in that file has a multiline string as its value, that string will be then parsed as markdown.
-	 *	If the variable string is just a single line, markdown parsing is skipped.
-	 *	If the variable is a multiline string, but starts and ends with a <head> element, markdown parsing will be skipped as well.
+	 *	@param string $str
+	 *	@return the parsed string
+	 */
+	
+	public static function markdown($str) {
+		
+		$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
+	 
+		if (strpos($str, "\n") !== false && !preg_match($regexTag, $str)) {
+			// If $var is a multiline string and not only one or more tags (meta, script, link tags ...).
+			return \Michelf\MarkdownExtra::defaultTransform($str); 
+		} else {
+			// If $var is just a single line or just one or more <head> element(s), skip parsing.
+			return $str;
+		}
+			
+	}
+	
+
+	/**
+	 *	Read a text file using Parse::textFile() and parse markdown syntax for all given variables. 
 	 *	
 	 *	@param string $file
 	 *	@return Array of variables
 	 */
 	
 	public static function markdownFile($file) {
-		
-		$vars = self::textFile($file);
 			
-		$vars = array_map(function($var) {
-			 
-				$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
-			 
-				if (strpos($var, "\n") !== false && !preg_match($regexTag, $var)) {
-					// If $var is a multiline string and not only one or more tags (meta, script, link tags ...).
-					return \Michelf\MarkdownExtra::defaultTransform($var); 
-				} else {
-					// If $var is just a single line or just one or more <head> element(s), skip parsing.
-					return $var;
-				}
-				
-			}, $vars);
+		return array_map(function($var) {
+				return self::markdown($var);
+			}, self::textFile($file));
 					
-		return $vars;
-		
 	}
 	
 		
