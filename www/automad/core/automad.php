@@ -385,6 +385,11 @@ class Automad {
 				case AM_KEY_PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist. 
 					return count($this->getPagelist()->getPages());
+					
+				case AM_KEY_CAPTION:
+					// Get the caption for the currently used ":file".
+					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
+					return Parse::caption(AM_BASE_DIR . $this->systemVarBuffer[AM_KEY_FILE]);
 				
 			}
 				
