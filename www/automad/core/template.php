@@ -471,7 +471,7 @@ class Template {
 		
 		$statementSubpatterns['with'] = $this->outerStatementMarker . '\s*' . // Note the additional preparsed marker!
 						'with\s+(?P<with>' .
-						'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
+							'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
 						')' . 
 						'\s*' . $statementClose . 
 						'(?P<withSnippet>.*?)' . 	
@@ -480,13 +480,11 @@ class Template {
 		
 		$statementSubpatterns['loop'] = $this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
 						'foreach\s+in\s+(?P<foreach>' . 
-						'pagelist|' . 
-						'filters|' . 
-						'tags|' . 
-						'filelist|' .
-						'"(?P<foreachInDoubleQuotes>[^"]*)"|' . 
-						"'(?P<foreachInSingleQuotes>[^']*)'" . 
-						'|(?P<foreachInVar>' . $var . ')' .
+							'pagelist|' . 
+							'filters|' . 
+							'tags|' . 
+							'filelist|' .
+							'"[^"]*"|' . "'[^']*'|" . $var . 		
 						')' . 
 						'\s*' . $statementClose . 
 						'(?P<foreachSnippet>.*?)' . 
@@ -494,17 +492,20 @@ class Template {
 						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['condition'] = 	$this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-							'if\s+(?P<condition>' . 
-							// Boolean
-							'(?P<ifNot>!)?(?<ifVar>' . $var . ')|' .	
-							// Comparison
-							// Left
-							'(?:"(?P<ifLeftDoubleQuotes>[^"]*)"|' . "'(?P<ifLeftSingleQuotes>[^']*)'" . '|(?P<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+))' .
-							// !=
-							'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' .
-							// Right
-							'(?:"(?P<ifRightDoubleQuotes>[^"]*)"|' . "'(?P<ifRightSingleQuotes>[^']*)'" . '|(?P<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+))' .
-							')' . 
+							'if\s+(?P<if>' .  
+								'(?P<ifBoolean>' .
+									'(?P<ifNot>!)?' . '(?<ifVar>' . $var . ')' .
+								')|' . 	
+								'(?P<ifComparison>' . 
+									'(?P<ifLeft>' . 
+										'(?P<ifLeftQuote>[\'"])(?P<ifLeftQuotedString>.*?[^\\\\])?\k<ifLeftQuote>' . '|(?<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+)' . 
+									')' .	
+									'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' . 		
+									'(?P<ifRight>' . 
+										'(?P<ifRightQuote>[\'"])(?P<ifRightQuotedString>.*?[^\\\\])?\k<ifRightQuote>' . '|(?<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+)' .
+									')' . 
+								')' .				
+							')' . 	
 							'\s*' . $statementClose . 
 							'(?P<ifSnippet>.*?)' . 
 							'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
@@ -514,7 +515,7 @@ class Template {
 		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/is'; 
 			
 		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {
-							
+											
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				if (!empty($matches['var'])) {
 					return $this->processContent($matches['var']);
@@ -714,9 +715,8 @@ class Template {
 							// Use files from filelist.
 							$files = $this->Automad->getFilelist()->getFiles();
 						} else {
-							// Merge and parse given glob pattern within any kind of quotes or from a variable value. 
-							// Only one of the following matches is not an empty string, but all three are always defined. Therefore they can simply get parsed as one concatenated string. 
-							$files = Parse::fileDeclaration($this->processContent($matches['foreachInDoubleQuotes'] . $matches['foreachInSingleQuotes'] . $matches['foreachInVar']), $Context->get(), true);
+							// Parse given glob pattern within any kind of quotes or from a variable value.  
+							$files = Parse::fileDeclaration($this->processContent(trim($matches['foreach'], '\'"')), $Context->get(), true);
 						}
 						
 						foreach ($files as $file) {
@@ -748,17 +748,17 @@ class Template {
 				}
 				
 				// Condition
-				if (!empty($matches['condition'])) {
-								
+				if (!empty($matches['if'])) {
+							
 					$ifSnippet = $matches['ifSnippet'];
 					$ifElseSnippet = '';
-					
+				
 					if (!empty($matches['ifElseSnippet'])) {
 						$ifElseSnippet = $matches['ifElseSnippet'];
 					} 
-					
-					if (!empty($matches['ifVar'])) {
-					
+				
+					if (!empty($matches['ifBoolean'])) {
+						
 						// Boolean condition.
 						
 						// Get the value of the given variable.
@@ -766,21 +766,21 @@ class Template {
 						
 						// If EMPTY NOT == NOT EMPTY Value.
 						if (empty($matches['ifNot']) == !empty($ifVar)) {
-							Debug::log('TRUE', 'Evaluating boolean condition: "' . $matches['ifNot'] . $matches['ifVar'] . '"');
+							Debug::log('TRUE', 'Evaluating boolean condition: if ' . $matches['ifBoolean']);
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
-							Debug::log('FALSE', 'Evaluating boolean condition: "' . $matches['ifNot'] . $matches['ifVar'] . '"');
+							Debug::log('FALSE', 'Evaluating boolean condition: if ' . $matches['ifBoolean']);
 							return $this->processMarkup($ifElseSnippet, $directory);
 						}
-					
+						
 					} else {
 						
 						// Comparison.
 						
-						// Parse both sides of the condition. Again, all possible matches for each side can get merged in to one string, since there will be only one item for left/right not empty.
-						$left = $this->processContent($matches['ifLeftDoubleQuotes'] . $matches['ifLeftSingleQuotes'] . $matches['ifLeftVar'] . $matches['ifLeftNumber']);
-						$right = $this->processContent($matches['ifRightDoubleQuotes'] . $matches['ifRightSingleQuotes'] . $matches['ifRightVar'] . $matches['ifRightNumber']);
-						
+						// Parse both sides of the condition. All possible matches for each side can get merged in to one string, since there will be only one item for left/right not empty.
+						$left = $this->processContent(stripslashes($matches['ifLeftQuotedString']) . $matches['ifLeftVar'] . $matches['ifLeftNumber']);
+						$right = $this->processContent(stripslashes($matches['ifRightQuotedString']) . $matches['ifRightVar'] . $matches['ifRightNumber']);
+					
 						// Build the expression.
 						switch ($matches['ifOperator']) {
 							
@@ -812,14 +812,14 @@ class Template {
 						
 						// Evaluate the expression.
 						if ($expression) {
-							Debug::log('TRUE', 'Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '"');
+							Debug::log('TRUE', 'Evaluating condition: if ' . $matches['ifComparison']);
 							return $this->processMarkup($ifSnippet, $directory);
 						} else {
-							Debug::log('FALSE', 'Evaluating condition: "' . $left . $matches['ifOperator'] . $right . '"');
+							Debug::log('FALSE', 'Evaluating condition: if ' . $matches['ifComparison']);
 							return $this->processMarkup($ifElseSnippet, $directory);
 						}
-						
-					}
+							
+					}				
 						
 				}
 				
