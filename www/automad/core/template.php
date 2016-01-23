@@ -86,6 +86,13 @@ class Template {
 	
 	
 	/**
+	 * 	An array of snippets defined within a template.
+	 */
+	
+	private $snippets = array();
+	
+	
+	/**
 	 * 	The Toolbox object.
 	 */
 	
@@ -334,7 +341,7 @@ class Template {
 		
 		$depth = 0;
 		$regex = 	'/(' . 
-				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|foreach|with).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
+				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|foreach|with|snippet).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
 				')/is';
@@ -467,7 +474,13 @@ class Template {
 		// The subpatterns don't include the wrapping delimiter: "{@ subpattern @}".
 		$statementSubpatterns['include'] = '(?P<file>[\w\/\-\.]+\.php)';
 		
-		$statementSubpatterns['method'] = '(?P<method>[\w\-]+)\s*(?P<options>\{.*?\})?';
+		$statementSubpatterns['call'] = '(?P<call>[\w\-]+)\s*(?P<options>\{.*?\})?';
+		
+		$statementSubpatterns['snippet'] = 	$this->outerStatementMarker . '\s*' . //Note the additional preparsed marker!
+							'snippet\s+(?P<snippet>[\w\-]+)' .
+							'\s*' . $statementClose . 
+							'(?P<snippetSnippet>.*?)' . 
+							$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['with'] = $this->outerStatementMarker . '\s*' . // Note the additional preparsed marker!
 						'with\s+(?P<with>' .
@@ -515,7 +528,7 @@ class Template {
 		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/is'; 
 			
 		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {
-											
+												
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				if (!empty($matches['var'])) {
 					return $this->processContent($matches['var']);
@@ -536,11 +549,11 @@ class Template {
 						
 				}
 				
-				// Method (Toolbox or extension)
-				if (!empty($matches['method'])) {
+				// Call a snippet or method (Toolbox or extension)
+				if (!empty($matches['call'])) {
 					
-					$method = $matches['method'];
-					Debug::log($method, 'Matched method');
+					$call = $matches['call'];
+					Debug::log($call, 'Matched call');
 					
 					// Check if options exist.
 					if (isset($matches['options'])) {
@@ -550,16 +563,28 @@ class Template {
 						$options = array();
 					}
 					
-					// Call method.
-					if (method_exists($this->Toolbox, $method)) {
-						// Try calling a matching toolbox method. 
-						Debug::log($options, 'Calling method ' . $method . ' and passing the following options');	
-						return $this->Toolbox->$method($options);
+					// Call snippet or method in order of priority: Snippets, Toolbox methods and extensions.
+					if (array_key_exists($call, $this->snippets)) {
+						// Process a registered snippet.
+						Debug::log($call, 'Process registered snippet');
+						return $this->processMarkup($this->snippets[$call], $directory);
+					} else if (method_exists($this->Toolbox, $call)) {
+						// Call a toolbox method, in case there is no matching snippet. 
+						Debug::log($options, 'Calling method ' . $call . ' and passing the following options');	
+						return $this->Toolbox->$call($options);
 					} else {
-						// Try extension, if no toolbox method was found.
-						Debug::log($method . ' is not a core method. Will look for a matching extension ...');
-						return $this->callExtension($method, $options);
+						// Try an extension, if no snippet or toolbox method was found.
+						Debug::log($call . ' is not a snippet or core method. Will look for a matching extension ...');
+						return $this->callExtension($call, $options);
 					}
+					
+				}
+				
+				// Define a snippet
+				if (!empty($matches['snippet'])) {
+					
+					$this->snippets[$matches['snippet']] = $matches['snippetSnippet'];
+					Debug::log($this->snippets, 'Registered snippet "' . $matches['snippet'] . '"');
 					
 				}
 				
