@@ -38,7 +38,13 @@
 					{@ end @}
 				{@ end @}
 				</div>
-				<br>
+				<nav>
+					<ul class="pager">
+						{@ pagelist { type: 'siblings' } @}
+						{@ with prev @}<li class="previous"><a href="{[ url ]}"><span aria-hidden="true">&larr;</span> {[ title ]}</a></li>{@ end @}
+						{@ with next @}<li class="next"><a href="{[ url ]}">{[ title ]} <span aria-hidden="true">&rarr;</span></a></li>{@ end @}
+					</ul>
+				</nav>
 			</div>
 		</div>
 		
