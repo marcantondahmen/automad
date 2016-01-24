@@ -23,11 +23,3 @@ There are distortions of the icosahedron that, while no longer regular, are neve
 The icosahedron is unique among the Platonic solids in possessing a dihedral angle not less than 120°. Its dihedral angle is approximately 138.19°. Thus, just as hexagons have angles not less than 120° and cannot be used as the faces of a convex regular polyhedron because such a construction would not meet the requirement that at least three faces meet at a vertex and leave a positive defect for folding in three dimensions, icosahedra cannot be used as the cells of a convex regular polychoron because, similarly, at least three cells must meet at an edge and leave a positive defect for folding in four dimensions (in general for a convex polytope in n dimensions, at least three facets must meet at a peak and leave a positive defect for folding in n-space). However, when combined with suitable cells having smaller dihedral angles, icosahedra can be used as cells in semi-regular polychora (for example the snub 24-cell), just as hexagons can be used as faces in semi-regular polyhedra (for example the truncated icosahedron). 
 
 *Taken from [Wikipedia](http://en.wikipedia.org/wiki/Icosphere)*
-
--
-
-carousel_caption_icosphere.jpg: Icosphere
-
--
-
-carousel_caption_icosphere2.jpg: Icosphere
