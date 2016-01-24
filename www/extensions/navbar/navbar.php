@@ -56,7 +56,7 @@ class Navbar {
 		$defaults = 	array(
 					'fluid' => true,
 					'fixedToTop' => false,
-					'brand' => $Automad->getSiteName(),
+					'brand' => $Automad->getValue(AM_KEY_SITENAME),
 					'logo' => false,
 					'logoWidth' => 100,
 					'logoHeight' => 100,
@@ -90,7 +90,7 @@ class Navbar {
 		$html = '<nav class="navbar navbar-default' . $fixed . '">';
 			
 		// To determine all pages for each row, first the "breadcrumbs" get filtered.	
-		$Page = $Automad->getCurrentPage();	 
+		$Page = $Automad->Context->get();	 
 		$Selection = new \Automad\Core\Selection($Automad->getCollection());
 		$Selection->filterBreadcrumbs($Page->url);
 		$breadcrumbs = $Selection->getSelection();

@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  *	The Resolve class holds all methods to modulate URLs and file paths.
- *	Since all page URLs are not URLs to real directories, all non-absolute links and file paths have to be modulated, 
+ *	Since all page URLs are not URLs to real directories, all non-absolute links and file paths have to be resolved, 
  *	to point to a valid location. 
  *	For example a relative file name to an image wouldn't be a valid link, since the URL of the page is not
  *	the real file system path to the page's files.
@@ -66,7 +66,7 @@ class Resolve {
 	 *
 	 *	@param string $pagePath
 	 *	@param string $filePath
-	 *	@return The modulated file path 
+	 *	@return The resolved file path 
 	 */
 
 	public static function filePath($pagePath, $filePath) {
@@ -95,7 +95,7 @@ class Resolve {
 	 *	
 	 *	@param object $Page
 	 *	@param string $url
-	 *	@return The modulated URL
+	 *	@return The resolved URL
 	 */
 
 	public static function url($Page, $url) {

@@ -21,7 +21,3 @@ text_2: In topology, a ring torus is homeomorphic to the Cartesian product of tw
 The word torus comes from the Latin word meaning cushion.
 
 *Taken from [Wikipedia](http://en.wikipedia.org/wiki/Torus)*
-
--
-
-carousel_caption_torus.jpg: Torus

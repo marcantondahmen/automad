@@ -66,7 +66,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) || isset($_SERVER['HTTP_X_FORWARDED
 
 
 
-@Debug::log('Server Software: ' . $_SERVER['SERVER_SOFTWARE']);
+@Debug::log($_SERVER['SERVER_SOFTWARE'], 'Server Software');
 
 // Check whether pretty URLs are enabled.
 if ((strpos(@strtolower($_SERVER['SERVER_SOFTWARE']), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(@strtolower($_SERVER['SERVER_SOFTWARE']), 'nginx') !== false) {
@@ -101,6 +101,7 @@ Config::set('AM_DIR_GUI_INC', '/automad/gui/inc');
 
 // FILE
 Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)	
+Config::set('AM_FILE_EXT_CAPTION', 'caption');
 Config::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
 Config::set('AM_FILE_SITE_SETTINGS', AM_BASE_DIR . AM_DIR_SHARED . '/site.' . AM_FILE_EXT_DATA); 
@@ -128,24 +129,19 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 // LISTING DEFAULTS
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
-// PLACEHOLDER TYPE IDENTIFIERS
-Config::set('AM_PLACEHOLDER_PREFIX', 	'@');
-Config::set('AM_PLACEHOLDER_INC',      	'i');
-Config::set('AM_PLACEHOLDER_PAGE_VAR', 	'p');
-Config::set('AM_PLACEHOLDER_SITE_VAR', 	's');
-Config::set('AM_PLACEHOLDER_TOOL', 	't');
-Config::set('AM_PLACEHOLDER_XTNSN', 	'x');
+// TEMPLATE DELIMITERS & CHARACTER CLASSES
+Config::set('AM_DEL_VAR_OPEN', '{[');
+Config::set('AM_DEL_VAR_CLOSE', ']}');
+Config::set('AM_DEL_STATEMENT_OPEN', '{@');
+Config::set('AM_DEL_STATEMENT_CLOSE', '@}');
+Config::set('AM_DEL_COMMENT_OPEN', '{*');
+Config::set('AM_DEL_COMMENT_CLOSE', '*}');
+// Charachter class for variable keys in text files.
+Config::set('AM_CHARCLASS_VAR_CONTENT', '[\w\.\-]');
+// Charachter class for all kind if variable keys, such as text file content, read-only vars and query string keys.
+Config::set('AM_CHARCLASS_VAR_ALL', '[:\?\w\.\-]');
 
-// REGEX
-// There is no single regex for only matching tools. Instead, Tools get matched together with Extensions to maintain a correct order when parsing.
-// The regex for Extensions only is used when scanning a template for .css/.js files.
-Config::set('AM_REGEX_METHODS',  '/' . AM_PLACEHOLDER_PREFIX . '(' . AM_PLACEHOLDER_TOOL . '|' . AM_PLACEHOLDER_XTNSN . ')\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s'); 	// @(t|x)((...)({...})) Tools & Extensions
-Config::set('AM_REGEX_XTNSN',    '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_XTNSN . 	 '\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s');					// @x((...)({...})) Extensions Only
-Config::set('AM_REGEX_INC'     , '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_INC . 	 '\(\s*([\w\.\/\-]+)\s*\)/');						// @i((...))
-Config::set('AM_REGEX_PAGE_VAR', '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_PAGE_VAR . '\(\s*([\w\.\-]+)\s*\)/');						// @p((...))
-Config::set('AM_REGEX_SITE_VAR', '/' . AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_SITE_VAR . '\(\s*([\w\.\-]+)\s*\)/');						// @s((...))
-
-// EXTENDER
+// EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
 
 // HTML
@@ -194,6 +190,19 @@ Config::set('AM_KEY_TITLE', 'title');
 Config::set('AM_KEY_SITENAME', 'sitename');
 // URL key (to identify an URL in the page's txt file)
 Config::set('AM_KEY_URL', 'url');
+// System variable keys
+Config::set('AM_KEY_FILTER', ':filter');
+Config::set('AM_KEY_TAG', ':tag');
+Config::set('AM_KEY_FILE', ':file');
+Config::set('AM_KEY_BASENAME', ':basename');
+Config::set('AM_KEY_CAPTION', ':caption');
+Config::set('AM_KEY_INDEX', ':i');
+Config::set('AM_KEY_FILELIST_COUNT', ':filelist-count');
+Config::set('AM_KEY_PAGELIST_COUNT', ':pagelist-count');
+Config::set('AM_KEY_CURRENT_PAGE', ':current');
+Config::set('AM_KEY_CURRENT_PATH', ':current-path');
+Config::set('AM_KEY_LEVEL', ':level');
+Config::set('AM_KEY_TEMPLATE', ':template');
 
 // Version number 
 include AM_BASE_DIR . '/automad/version.php';

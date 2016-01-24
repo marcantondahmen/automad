@@ -101,7 +101,7 @@ class Html {
 				}
 				
 				if ($addCaption) {
-					$caption = ' data-caption="' . self::addVariable('image_caption_' . Parse::sanitize(basename($file))) . '"';
+					$caption = ' data-caption="' . Parse::caption($file) . '"';
 				} else {
 					$caption = '';
 				}
@@ -162,22 +162,6 @@ class Html {
 	}
 
 
-	/**
-	 *	Add a page variable to the HTML of a template. 
-	 * 	In case an extension needs to generate a variable by itself automatically, this method can be used to generate the correct syntax for the variable markup,
-	 *	since all extensions will be parsed before the variables.
-	 * 
-	 *	@param string $name
-	 *	@return The markup for the variable
-	 */
-
-	public static function addVariable($name) {
-		
-		return AM_PLACEHOLDER_PREFIX . AM_PLACEHOLDER_PAGE_VAR . '(' . $name . ')';
-	
-	}
-
-	
 	/**
 	 * 	Generate the HTML for a breadcrumb navigation out of a selection of pages.
 	 *	
@@ -375,7 +359,7 @@ class Html {
 	 *	@return the HTML of the list
 	 */
 	
-	public static function generateList(
+	public static function generatePagelist(
 					$pages, 
 					$vars, 
 					$glob = false, 

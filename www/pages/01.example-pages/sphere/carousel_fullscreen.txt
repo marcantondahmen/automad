@@ -17,11 +17,3 @@ text: A sphere (from Greek σφαῖρα — sphaira, "globe, ball") is a perfec
 text_2: In mathematics, a distinction is made between the sphere (a two-dimensional closed surface embedded in three-dimensional Euclidean space) and the ball (a three-dimensional shape that includes the interior of a sphere).
 
 *Taken from [Wikipedia](http://en.wikipedia.org/wiki/Sphere)*
-
--
-
-carousel_caption_ball.jpg: Sphere
-
--
-
-carousel_caption_ball2.jpg: Sphere

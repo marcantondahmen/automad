@@ -20,11 +20,3 @@ The open cylinder is topologically equivalent to both the open annulus and the p
 text_2: In common use a cylinder is taken to mean a finite section of a right circular cylinder, i.e., the cylinder with the generating lines perpendicular to the bases, with its ends closed to form two circular surfaces, as in the figure (right). If the cylinder has a radius r and length (height) h, then its volume is given by ...
 
 *Taken from [Wikipedia](http://en.wikipedia.org/wiki/Cylinder)*
-
--
-
-carousel_caption_cylinder.jpg: Cylinder
-
--
-
-carousel_caption_cylinder2.jpg: Cylinder

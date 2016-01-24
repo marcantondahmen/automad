@@ -72,6 +72,28 @@ class Parse {
 	}
 
 
+	/**
+	 *	Read a file's caption file and parse contained markdown syntax.
+	 *
+	 *	The caption filename is build out of the actual filename with the appended ".caption" extension, like "image.jpg.caption".
+	 *	
+	 *	@param string $file
+	 *	@return the caption string
+	 */
+	
+	public static function caption($file) {
+		
+		// Build filename of the caption file.
+		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+		Debug::log($captionFile);
+		
+		if (is_readable($captionFile)) {
+			return self::markdown(file_get_contents($captionFile));
+		}
+		
+	}
+
+
  	/**
  	 *	Extracts the tags string out of a given array and returns an array with these tags.
  	 *
@@ -105,13 +127,15 @@ class Parse {
 
 	/**
 	 *	Parse a file declaration string where multiple glob patterns can be separated by a comma and return an array with the resolved file paths.
+	 *	If $stripBaseDir is true, the base directory will be stripped from the path and each path gets resolved to be relative to the Automad installation directory.
 	 * 
 	 *	@param string $str
 	 *	@param object $Page (current page)
+	 *	@param boolean $stripBaseDir
 	 *	@return Array with resolved file paths
 	 */
 
-	public static function fileDeclaration($str, $Page) {
+	public static function fileDeclaration($str, $Page, $stripBaseDir = false) {
 		
 		$files = array();
 		
@@ -123,8 +147,14 @@ class Parse {
 			
 		}
 		
-		array_walk($files, function(&$file) { 
+		array_walk($files, function(&$file) use ($stripBaseDir) { 
+			
 			$file = realpath($file); 
+			
+			if ($stripBaseDir) {
+				$file = str_replace(AM_BASE_DIR, '', $file);
+			}
+			
 		});
 		
 		return $files;
@@ -193,6 +223,8 @@ class Parse {
 		
 		if ($str) {
 			
+			$debug['String'] = $str;
+			
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
 			$str = str_replace("'", '"', $str);
@@ -201,10 +233,14 @@ class Parse {
 			// Decode JSON.
 			$options = json_decode($str, true);
 			
-			// Remove empty ('') strings, but leave false values (false, 0 or "0").
+			// Remove all undefined items (empty string). 
+			// It is not possible to use array_filter($options, 'strlen') here, since an array item could be an array itself and strlen() only expects strings.
 			$options = 	array_filter($options, function($value) {
 						return ($value !== '');
-					}); 
+					});
+			
+			$debug['JSON'] = $options;
+			Debug::log($debug);
 						
 		}
 		
@@ -214,36 +250,44 @@ class Parse {
 	
 	
 	/**
-	 *	Parses a text file including markdown syntax. 
+	 *	Parse a markdown string.
+	 *
+	 *	If the given string is a multiline string, it will then be parsed as markdown.
+	 *	If the string is just a single line, markdown parsing is skipped.
+	 *	If it is a multiline string, but starts and ends with a <head> element, markdown parsing will be skipped as well.
 	 *	
-	 *	If a variable in that file has a multiline string as its value, that string will be then parsed as markdown.
-	 *	If the variable string is just a single line, markdown parsing is skipped.
-	 *	If the variable is a multiline string, but starts and ends with a <head> element, markdown parsing will be skipped as well.
+	 *	@param string $str
+	 *	@return the parsed string
+	 */
+	
+	public static function markdown($str) {
+		
+		$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
+	 
+		if (strpos($str, "\n") !== false && !preg_match($regexTag, $str)) {
+			// If $var is a multiline string and not only one or more tags (meta, script, link tags ...).
+			return \Michelf\MarkdownExtra::defaultTransform($str); 
+		} else {
+			// If $var is just a single line or just one or more <head> element(s), skip parsing.
+			return $str;
+		}
+			
+	}
+	
+
+	/**
+	 *	Read a text file using Parse::textFile() and parse markdown syntax for all given variables. 
 	 *	
 	 *	@param string $file
 	 *	@return Array of variables
 	 */
 	
 	public static function markdownFile($file) {
-		
-		$vars = self::textFile($file);
 			
-		$vars = array_map(function($var) {
-			 
-				$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
-			 
-				if (strpos($var, "\n") !== false && !preg_match($regexTag, $var)) {
-					// If $var is a multiline string and not only one or more tags (meta, script, link tags ...).
-					return \Michelf\MarkdownExtra::defaultTransform($var); 
-				} else {
-					// If $var is just a single line or just one or more <head> element(s), skip parsing.
-					return $var;
-				}
-				
-			}, $vars);
+		return array_map(function($var) {
+				return self::markdown($var);
+			}, self::textFile($file));
 					
-		return $vars;
-		
 	}
 	
 		
@@ -316,8 +360,7 @@ class Parse {
 			// domain.com/page?key=vaule -> domain.com/index.php?/page?key=value (note the 2nd "?"!)
 			$query = preg_split('/[&\?]/', $_SERVER['QUERY_STRING'], 2);
 			$request = $query[0];
-			Debug::log('Parse: Request: Getting request from QUERY_STRING: ' . $_SERVER['QUERY_STRING']);
-			Debug::log('Parse: Request: Split Query String: ' . var_export($query, true));
+			Debug::log($query, 'Getting request from QUERY_STRING "' . $_SERVER['QUERY_STRING'] . '"');
 			
 			// In case there is no real query string except the requested page.
 			if (!isset($query[1])) {
@@ -330,7 +373,7 @@ class Parse {
 			// Remove request from QUERY_STRING.
 			$_SERVER['QUERY_STRING'] = $query[1];
 			
-			Debug::log('Parse: Request: $_GET: ' . var_export($_GET, true));
+			Debug::log($_GET, '$_GET');
 			
 		} else {
 				
@@ -339,27 +382,27 @@ class Parse {
 			if (isset($_SERVER['PATH_INFO'])) {
 		
 				$request = $_SERVER['PATH_INFO'];
-				Debug::log('Parse: Request: Getting request from PATH_INFO');
+				Debug::log('Getting request from PATH_INFO');
 	
 			} else if (isset($_SERVER['ORIG_PATH_INFO'])) {	
 	
 				$request = $_SERVER['ORIG_PATH_INFO'];
-				Debug::log('Parse: Request: Getting request from ORIG_PATH_INFO');
+				Debug::log('Getting request from ORIG_PATH_INFO');
 	
 			} else if (isset($_SERVER['REQUEST_URI'])) {
 		
 				$request = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
-				Debug::log('Parse: Request: Getting request from REQUEST_URI');
+				Debug::log('Getting request from REQUEST_URI');
 	
 			} else if (isset($_SERVER['REDIRECT_URL'])) {
 	
 				$request = $_SERVER['REDIRECT_URL'];
-				Debug::log('Parse: Request: Getting request from REDIRECT_URL');
+				Debug::log('Getting request from REDIRECT_URL');
 			
 			} else if (isset($_SERVER['PHP_SELF'])) {
 	
 				$request = $_SERVER['PHP_SELF'];
-				Debug::log('Parse: Request: Getting request from PHP_SELF');
+				Debug::log('Getting request from PHP_SELF');
 	
 			}
 			
@@ -377,7 +420,7 @@ class Parse {
 		
 		$request = '/' . trim($request, '/');
 		
-		Debug::log('Parse: Request: ' . $request);
+		Debug::log($request, 'Requested page');
 		
 		return $request; 
 		
@@ -446,178 +489,6 @@ class Parse {
 		
 	}
 
-
-	/**
-	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
-	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.
-	 *
-	 *	Note that even when the it is possible to use plain PHP in a atemplate file, all that code will be parsed first when buffering, before any of the Automad markup is getting parsed.
-	 *	That means also, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
-	 *
-	 *	@param string $file
-	 *	@param object $Automad
-	 *	@return the parsed content 
-	 */
-
-	public static function templateBuffer($file, $Automad) {
-		
-		ob_start();
-		@include $file;
-		$output = ob_get_contents();
-		ob_end_clean();
-		
-		return $output;
-		
-	}
-
-
-	/**
-	 *	Call Toolbox methods and Extension dynamically with optional parameters. Additionally add all CSS/JS files of the matched extensions to the header.
-	 *	For example t(Tool{JSON-options}) or x(Extension{JSON-options}).
-	 *	The optional parameters have to be passed in (dirty) JSON format, like {key1: "String", key2: 10, ...}.
-	 *	The parser understands dirty JSON, so wrapping the keys in double quotes is not needed.
-	 *	
-	 *	@param string $str (the string to be parsed)
-	 *	@param object $Automad
-	 *	@return The parsed $str
-	 */
-
-	public static function templateMethods($str, $Automad) {
-				
-		$Toolbox = new Toolbox($Automad);
-		$Extender = new Extender($Automad);
-
-		$use = 	array(
-				'automad' => $Automad,
-				'toolbox' => $Toolbox,  
-				'extender' => $Extender
-			);	
-		
-		// Scan $str for extensions and add all CSS & JS files for the matched classes to the HTML <head>.
-		$str = $Extender->addHeaderElements($str);
-		
-		// Toolbox methods and Extensions MUST be parsed at the same time, since the Extensions use also Toolbox properties. 
-		// Tools and Extensions must be able to influence each other - therefore the order of parsing is very important.
-		return preg_replace_callback(AM_REGEX_METHODS, function($matches) use ($use) {
-					
-					$delimiter = $matches[1];
-					$method = $matches[2];
-					
-					if (isset($matches[3])) {
-						// Parse the options JSON and also find and replace included variables within the JSON string.
-						$options = Parse::jsonOptions(Parse::templateVariables($matches[3], $use['automad'], true));
-					} else {
-						$options = array();
-					}
-					
-					// Call methods depending on placeholder type (Toolbox or Extension)
-					if ($delimiter == AM_PLACEHOLDER_TOOL) {
-						
-						// Toolbox method
-						if (method_exists($use['toolbox'], $method)) {
-					
-							Debug::log('Parse: Matched tool: "' . $method . '" and passing the following options:');
-							Debug::log($options);	
-						
-							return $use['toolbox']->$method($options);
-						
-						}
-						
-					} else {
-						
-						// Extension
-						Debug::log('Parse: Matched extension: "' . $method . '"');
-									
-						return $use['extender']->callExtension($method, $options);
-						
-						
-					}
-					
-				}, $str);		
-	
-	}
-
-
-	/**
-	 *	Scan a string for "i(filename.php)" to include template elements recursively. The Automad object gets passed as well to be able to access the site's data also form template elements included by i().
-	 *
-	 *	@param string $str (the string which has to be scanned)
-	 *	@param string $directory (the base directory for including the files)
-	 *	@param object $Automad
-	 *	@return The recursively scanned output including the content of all matched includes.
-	 */
-	
-	public static function templateNestedIncludes($str, $directory, $Automad) {
-		
-		$use = array('directory' => $directory, 'automad' => $Automad);
-		
-		return 	preg_replace_callback(AM_REGEX_INC, function($matches) use ($use) {
-					
-				$file = $use['directory'] . '/' . $matches[1];
-				if (file_exists($file)) {
-						
-					Debug::log('Parse: Include: ' . $file);				
-					$content = Parse::templateBuffer($file, $use['automad']);
-					return Parse::templateNestedIncludes($content, dirname($file), $use['automad']);
-						
-				}
-					
-			}, $str);
-		
-	}
-	
-
-	/**
-	 *	Replace all site vars "s(variable)" with content from site.txt and all page vars "p(variable)" with content from the current page.
-	 *	Optionally all values can be parsed as "JSON safe", by stripping all quotes and wrapping each value in double quotes.
-	 *
-	 *	@param string $str
-	 *	@param object $Automad
-	 *	@param boolean $jsonSafe (if true, all quotes get removed from the variable values and the values get wrapped in double quotes, to avoid parsing errors, when a value is empty "")
-	 *	@return The parsed $str
-	 */
-	
-	public static function templateVariables($str, $Automad, $jsonSafe = false) {
-		
-		// Site variables
-		$use = array('automad' => $Automad, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback(AM_REGEX_SITE_VAR, function($matches) use ($use) {
-					
-					if ($use['jsonSafe']) {
-						return '"' . Parse::jsonEscape($use['automad']->getSiteData($matches[1])) . '"';
-					} else {
-						return $use['automad']->getSiteData($matches[1]);
-					}
-								
-				}, $str);
-		
-		// Page variables
-		$Page = $Automad->getCurrentPage();
-		$use = array('data' => $Page->data, 'jsonSafe' => $jsonSafe);
-		$str = preg_replace_callback(AM_REGEX_PAGE_VAR, function($matches) use ($use) {
-						
-					if (array_key_exists($matches[1], $use['data'])) {
-						
-						if ($use['jsonSafe']) {
-							return '"' . Parse::jsonEscape($use['data'][$matches[1]]) . '"';
-						} else {
-							return $use['data'][$matches[1]];
-						}
-						
-					} else {
-				
-						if ($use['jsonSafe']) { 
-							return '""';
-						}	
-				
-					}
-							
-				}, $str);
-						
-		return $str;
-
-	}
-	
 	
 	/**
 	 *	Loads and parses a text file.
@@ -637,7 +508,7 @@ class Parse {
 		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));	
 			
 		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line. 
-		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=[\w\.\-]+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content);
+		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . AM_CHARCLASS_VAR_CONTENT . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, NULL, PREG_SPLIT_NO_EMPTY);
 		
 		// Split $pairs into an array of vars.
 		foreach ($pairs as $pair) {
@@ -646,6 +517,9 @@ class Parse {
 			$vars[trim($key)] = trim($value);	
 			
 		}
+		
+		// Remove undefined (empty) items.
+		$vars = array_filter($vars, 'strlen');
 		
 		return $vars;
 		

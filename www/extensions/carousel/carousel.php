@@ -67,7 +67,7 @@ class Carousel {
 		$options = array_merge($defaults, $options);
 		
 		// Get file list.
-		$files = \Automad\Core\Parse::fileDeclaration($options['files'], $Automad->getCurrentPage());
+		$files = \Automad\Core\Parse::fileDeclaration($options['files'], $Automad->Context->get());
 		
 		// Sort images.
 		if ($options['order'] == 'asc') {
@@ -135,7 +135,7 @@ class Carousel {
 					$html .= \Automad\Core\Html::addImage($file, $options['width'], $options['height'], true);
 				}
 				
-				$html .= '<div class="carousel-caption">' . \Automad\Core\Html::addVariable('carousel_caption_' . \Automad\Core\Parse::sanitize(basename($file))) . '</div>' .
+				$html .= '<div class="carousel-caption">' . \Automad\Core\Parse::caption($file) . '</div>' .
 					 '</div>';			
 		
 			}

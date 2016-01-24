@@ -77,7 +77,7 @@ class Gallery {
 		$options = array_merge($defaults, $options);
 		
 		// Get file list.
-		$files = \Automad\Core\Parse::fileDeclaration($options['files'], $Automad->getCurrentPage());
+		$files = \Automad\Core\Parse::fileDeclaration($options['files'], $Automad->Context->get());
 		
 		// Sort images.
 		if ($options['order'] == 'asc') {

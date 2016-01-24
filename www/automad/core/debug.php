@@ -90,18 +90,13 @@ class Debug {
 		if (AM_DEBUG_ENABLED) {
 			
 			// Stop timer.	
-			if (self::$time) {
-				$executionTime = microtime(true) - self::$time;
-				self::log('TIMER END');
-				self::log('Time for execution: ' . $executionTime . ' seconds');
-			}	
+			self::timerStop();	
 			
 			// Get user & server constants.
 			self::uc();
-			self::log('Server:');
-			self::log($_SERVER);
+			self::log($_SERVER, 'Server');
 			
-			return self::$buffer;
+			return '<script type="text/javascript">' . "\n" . self::$buffer . '</script>' . "\n";
 			
 		}
 		
@@ -111,21 +106,70 @@ class Debug {
 	/**
 	 *	Log any kind of variable and append it as JS console.log item to $buffer.
 	 *
-	 *	@param mixed $var
+	 *	@param mixed $element (The actual content to log)
+	 *	@param string $description (Basic info, class, method etc.)
 	 */
 	
-	public static function log($var) {
+	public static function log($element, $description = '') {
 		
 		if (AM_DEBUG_ENABLED) {
 			
-			// Start timer on first call.
-			if (!self::$time) {
-				self::$time = microtime(true);
-				self::log('TIMER START');
+			// Start timer. self::timerStart() only saves the time on the first call.
+			self::timerStart();
+			
+			// Get backtrace.
+			$backtraceAll = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+			
+			// Remove all backtrace items without any class defined (standard PHP functions) and the items with the functions Debug::log() and {closure} 
+			// To get a clean array with only the relevant Automad methods in the backtrace.
+			$ignoreFunctions = array('log', __NAMESPACE__ . '\{closure}');
+			$backtrace = 	array_filter($backtraceAll, function($item) use ($ignoreFunctions) {	
+						return (isset($item['class'], $item['type'], $item['function']) && !in_array($item['function'], $ignoreFunctions));
+					});
+						
+			// If class, type & method exist, use them to build the description prefix. Else use just the file name from the full backtrace. 
+			if (count($backtrace) > 0) {
+				// When the backtrace array got reduced to the actually relevant items in the backtrace, take the first element (the one calling Debug::log()).
+				$backtrace = array_shift($backtrace);		
+				$prefix = basename(str_replace('\\', '/', $backtrace['class'])) . $backtrace['type'] . $backtrace['function'] . '(): ';
+			} else {
+				$prefix = basename($backtraceAll[0]['file']) . ': ';
 			}
 			
-			self::$buffer .= "<script type='text/javascript'>console.log(" . json_encode($var) . ");</script>\n";
+			// Prepend the method to $description.
+			$description = trim($prefix . $description, ': ');
 			
+			self::$buffer .= "console.log(" . json_encode(array($description => $element)) . ");\n";
+			
+		}
+		
+	}
+	
+	
+	/**
+	 *	Start the timer on the first call to calculate the execution time when getLog() gets called. 
+	 */
+	
+	private static function timerStart() {
+		
+		// Only save time on first call.	
+		if (!self::$time) {
+			self::$time = microtime(true);
+			self::log(date('d. M Y, H:i:s'));
+		}
+		
+	}
+	
+	
+	/**
+	 * 	Stop the timer and log the execution time.
+	 */
+	
+	private static function timerStop() {
+		
+		if (self::$time) {
+			$executionTime = microtime(true) - self::$time;
+			self::log($executionTime . ' seconds', 'Time for execution');
 		}
 		
 	}
@@ -135,12 +179,11 @@ class Debug {
 	 *	Log all user constants for get_defined_constants().
 	 */
 	
-	public static function uc() {
+	private static function uc() {
 		
 		$definedConstants = get_defined_constants(true);
 		$userConstants = $definedConstants['user'];
-		self::log('Automad constants:');
-		self::log($userConstants);	
+		self::log($userConstants, 'Automad constants');	
 		
 	}
 	

@@ -65,14 +65,14 @@ spl_autoload_register(function($class) {
 require AM_BASE_DIR . '/automad/const.php';
 
 
+// Enable full error reporting, when debugging is enabled.
+Debug::errorReporting();
+
+
 // The cache folder must be writable (resized images), also when caching is disabled!
 if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {	
 	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
 }
-
-
-// Enable full error reporting, when debugging is enabled.
-Debug::errorReporting();
 
 
 // Split GUI form regular pages.
@@ -119,7 +119,7 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 			
 		} else {
 			
-			Debug::log('Page does not exist, caching will be skipped!');
+			Debug::log(AM_REQUEST, 'Page not found! Caching will be skipped!');
 			
 		}
 		

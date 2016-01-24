@@ -187,7 +187,8 @@ class Selection {
 		$filtered = array();
 		
 		foreach ($this->selection as $key => $Page) {
-			if ($Page->parentUrl == $parent) {
+			// Use identical comparison operator (===) here to avoid getting all pages in case $parent is set true.
+			if ($Page->parentUrl === $parent) {
 				$filtered[$key] = $Page;
 			}
 		}
@@ -294,7 +295,7 @@ class Selection {
 	
 	
 	/**
-	 *	Filter out the neighbors (previous and next page) to the passed URL under the same parent URL.
+	 *	Filter out the neighbors (previous and next page) to the passed URL.
 	 *
 	 *	$this->selection only holds two pages after completion with the keys ['prev'] and ['next'] instead of the URL-key.
 	 *	If there is only one page in the array (has no siblings), the selection will be empty. For two pages, it will only
@@ -313,10 +314,6 @@ class Selection {
 		$current = $this->selection[$url];
 		$this->excludeHidden();
 		$this->selection[$url] = $current;
-		
-		// Narrow down selection to pages with the same parentUrl
-		$this->filterByParentUrl($this->selection[$url]->parentUrl);
-		$this->sortPagesByBasename();
 		
 		$keys = array_keys($this->selection);
 		$keyIndexes = array_flip($keys);

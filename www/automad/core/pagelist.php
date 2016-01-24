@@ -42,25 +42,25 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	A Listing object represents a set of Page objects (matching certain criterias).
+ *	A Pagelist object represents a set of Page objects (matching certain criterias).
  *
- *	The main properties of a Listing object are: 
+ *	The main properties of a Pagelist object are: 
  *	- A selection of Page objects (filtered)
  *	- An array of tags (not filtered, but only from pages matching $type, $template & $search)
  *
  *	The criterias for the selection of Page objects are:
- *	- $type (false (all pages), "children" or "related")
+ *	- $type (false (all pages), "children", "related", "siblings" or "breadcrumbs")
  *	- $parent (is only used, when $type is "children" - default is the current page)
  *	- $template (if passed, only pages with that template get included)
  *	- the 'search' element from the query string (if existant, the selection gets filtered by these keywords)
  *
  *	Since the selection of pages will also be filtered by the keywords passed as the 'search' element in the query string, 
  *	this object can easily be used on a search results page.
- *	Basically a search results page can just be a normal page with a Listing object, where a search box passes the 'search' value to.
+ *	Basically a search results page can just be a normal page with a Pagelist object, where a search box passes the 'search' value to.
  *
  *	The visibility and order of the pages get influenced by the following elements within a query string:
  *	- filter
- * 	- search
+ *	- search
  *	- sortItem
  *	- sortOrder
  *
@@ -69,7 +69,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - http://automad.org/license
  */
 
-class Listing {
+class Pagelist {
 	
 	
 	/**
@@ -80,10 +80,10 @@ class Listing {
 	
 	
 	/**
-	 *	The current Page.
+	 *	The context.
 	 */
 	
-	private $Page;
+	private $Context;
 	
 	
 	/**
@@ -102,7 +102,7 @@ class Listing {
 	
 	
 	/**
-	 *	The listing's type (all pages, children pages or related pages)
+	 *	The pagelist's type (all pages, children pages or related pages)
 	 */
 	
 	private $type;
@@ -116,7 +116,7 @@ class Listing {
 	
 	
 	/**
-	 *	The template to filter by the listing.
+	 *	The template to filter by the pagelist.
 	 */
 	
 	private $template;
@@ -151,31 +151,34 @@ class Listing {
 		
 	
 	/**
-	 *	Initialize the Listing.
+	 *	Initialize the Pagelist.
 	 *
 	 *	@param array $collection
-	 *	@param object $Page
+	 *	@param object $Context
 	 */
 	
-	public function __construct($collection, $Page) {
+	public function __construct($collection, $Context) {
 		
-		Debug::log('Listing: New instance created!');
 		$this->collection = $collection;
-		$this->Page = $Page;
+		$this->Context = $Context;
 		$this->config($this->defaults);
 		
 	}
 	
 	
 	/**
-	 *	Set or change the configuration of the listing.
+	 *	Set or change the configuration of the pagelist and return the current configuration as array.    
+	 *	To just get the config, call the method without passing $options.
 	 *	
 	 *	@param array $options
+	 *	@return Updated $options
 	 */
 	
-	public function config($options) {
+	public function config($options = array()) {
 		
-		// Turn all (but only) array items in $defaults into class properties.
+		Debug::log($options, 'Updating the configuration with the following options');
+		
+		// Turn all (but only) array items also existing in $defaults into class properties.
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
 			$this->$key = $value;
@@ -184,8 +187,7 @@ class Listing {
 		// Override settings with current query string options (filter, search and sort)
 		$overrides = Parse::queryArray();
 		
-		Debug::log('Listing: Use overrides from query string:');
-		Debug::log($overrides);
+		Debug::log($overrides, 'Use overrides from query string');
 		
 		foreach (array('filter', 'search', 'sortItem', 'sortOrder') as $key) {
 			if (isset($overrides[$key])) {
@@ -197,9 +199,11 @@ class Listing {
 		if (!in_array($this->sortOrder, array('asc', 'desc'))) {
 			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
+			
+		$configArray = array_intersect_key((array)get_object_vars($this), $this->defaults);
+		Debug::log($configArray, 'Current config');
 		
-		Debug::log('Listing: Current config:');
-		Debug::log(get_object_vars($this));
+		return $configArray;
 	
 	}
 
@@ -210,7 +214,7 @@ class Listing {
 	 *	The returned pages have to be used to get all relevant tags.
 	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.   
 	 *	
-	 *	Also note that $this->offset & $this->limit reduces the set of all relevant pages and tags of the listing object while using the $offset or $limit parameters of
+	 *	Also note that $this->offset & $this->limit reduces the set of all relevant pages and tags of the pagelist object while using the $offset or $limit parameters of
 	 *	$this->getPages() only reduces the output and will not affect the relevant pages and the collected tags.    
 	 *
 	 *	@return An array of all Page objects matching $type & $template excludng the current page. 
@@ -220,25 +224,31 @@ class Listing {
 				
 		$Selection = new Selection($this->collection);
 		
-		// Always exclude current page
-		$Selection->excludePage($this->Page->url);
-		
-		// Set parent, in case type is "children".
-		// The default is always the current page.
-		if (!$this->parent) {
-			$this->parent = $this->Page->url;
+		// In case $this->parent is an empty string or false, use the current context. 
+		// Therefore it is not possible to have a pagelist only including the homepage (parent: "").
+		// Since that kind of pagelist would always have only one element, that one can be accessed using the "with" statement instead.
+		// Note that $parent has to be defined with each call again, to leave $this->parent untouched - otherwise it would be defined on a second call and therefore would create
+		// an infinite loop on recursive pagelists.
+		if ($this->parent) {
+			$parent = $this->parent;
+		} else {
+			$parent = $this->Context->get()->url;
 		}
 		
 		// Filter by type
-		switch($this->type){
+		switch ($this->type) {
 			case 'children':
-				$Selection->filterByParentUrl($this->parent);
+				$Selection->filterByParentUrl($parent);
 				break;
 			case 'related':
-				$Selection->filterRelated($this->Page);
+				$Selection->filterRelated($this->Context->get());
 				break;
 			case 'siblings':
-				$Selection->filterByParentUrl($this->Page->parentUrl);
+				$Selection->filterByParentUrl($this->Context->get()->parentUrl);
+				break;
+			case 'breadcrumbs':
+				$Selection->filterBreadcrumbs($this->Context->get()->url);
+				break;
 		}
 	
 		// Filter by template
@@ -278,7 +288,7 @@ class Listing {
 	 *	The final set of Page objects - filtered and sorted.    
 	 *
 	 *	Note that $offset & $limit only reduce the output and not the array of relevant pages! Using the getTags() method will still output all tags, 
-	 *	even if pages with such tags are not returned due to the limit. Sorting a listing will also sort all pages and therefore the set of returned pages might
+	 *	even if pages with such tags are not returned due to the limit. Sorting a pagelist will also sort all pages and therefore the set of returned pages might
 	 *	always be different.
 	 *
 	 *	@param integer $offset
@@ -292,7 +302,11 @@ class Listing {
 		$Selection->filterByTag($this->filter);
 		$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
-		return $Selection->getSelection(true, $offset, $limit);
+		$pages = $Selection->getSelection(true, $offset, $limit);
+		
+		Debug::log(array_keys($pages));
+		
+		return $pages;
 			
 	}
 

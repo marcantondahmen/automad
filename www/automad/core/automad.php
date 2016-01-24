@@ -54,12 +54,30 @@ class Automad {
 	
 
 	/**
-	 *	Automad's Listing object.
-	 *	
-	 *	The object is part of the Automad class to allow to access always the same instance of the Listing class for all objects using the Automad object as parameter. 
+	 * 	Automad's Context object.
+	 *
+	 *	The object is part of the Automad class to allow to access always the same instance of the Context class for all objects using the Automad object as parameter. 
+	 */
+
+	public $Context;
+	
+	
+	/**
+	 * 	Automad's Filelist object
+	 *
+	 *	The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter. 
 	 */
 	
-	private $Listing = false;
+	private $Filelist = false;
+
+
+	/**
+	 *	Automad's Pagelist object.
+	 *	
+	 *	The object is part of the Automad class to allow to access always the same instance of the Pagelist class for all objects using the Automad object as parameter. 
+	 */
+	
+	private $Pagelist = false;
 		
 	
 	/**
@@ -80,10 +98,17 @@ class Automad {
 	/**
 	 * 	Array holding all the site's pages and the related data. 
 	 *	
-	 *	To access the data for a specific page, use the url as key: $this->siteCollection['url'].
+	 *	To access the data for a specific page, use the url as key: $this->collection['url'].
 	 */
 	
-	private $siteCollection = array();
+	private $collection = array();
+	
+	
+	/**
+	 * 	Array holding all temporary system variable (those starting with a ":", like {[ :file ]}) being created in loops.
+	 */
+	
+	private $systemVarBuffer = array();
 	
 	
 	/**
@@ -122,13 +147,13 @@ class Automad {
 		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
 	
 		// check if url already exists
-		if (array_key_exists($url, $this->siteCollection)) {
+		if (array_key_exists($url, $this->collection)) {
 							
 			$i = 0;
 			
 			$newUrl = $url;
 			
-			while (array_key_exists($newUrl, $this->siteCollection)) {
+			while (array_key_exists($newUrl, $this->collection)) {
 				$i++;
 				$newUrl = $url . "-" . $i;
 			}
@@ -143,11 +168,11 @@ class Automad {
 	
 	
 	/**
-	 *	Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $siteCollection.
+	 *	Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $collection.
 	 *
-	 *	After successful indexing, the $siteCollection holds basically all information (except media files) from all pages of the whole site.
+	 *	After successful indexing, the $collection holds basically all information (except media files) from all pages of the whole site.
 	 *	This makes searching and filtering very easy since all data is stored in one place.
-	 *	To access the data of a specific page within the $siteCollection array, the page's url serves as the key: $this->siteCollection['/path/to/page']
+	 *	To access the data of a specific page within the $collection array, the page's url serves as the key: $this->collection['/path/to/page']
 	 *
 	 *	@param string $path 
 	 *	@param number $level 
@@ -185,16 +210,18 @@ class Automad {
 						$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 					} else {
 						// If page is home page...
-						$data[AM_KEY_TITLE] = $this->getSiteName();
+						$data[AM_KEY_TITLE] = $this->getSiteData(AM_KEY_SITENAME);
 					}
 				} 
 		
 				// Extract tags
 				$tags = Parse::extractTags($data);
 			
-				// Check for an URL in $data and use that URL instead.
+				// Check for an URL in $data and use that URL instead. If no URL is defined as override, add an URL var with the page's URL to $data to be used as variable as well.
 				if (array_key_exists(AM_KEY_URL, $data)) {
 					$Page->url = $data[AM_KEY_URL];
+				} else {
+					$data[AM_KEY_URL] = $Page->url;
 				}
 			
 				// Check for a theme in $data and use that as override for the site theme.
@@ -226,13 +253,11 @@ class Automad {
 			$Page->parentUrl = $parentUrl;
 			$Page->template = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
 			
-			// The relative URL ($url) of the page becomes the key (in $siteCollection). 
+			// The relative URL ($url) of the page becomes the key (in $collection). 
 			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
 			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url instead).
-			$this->siteCollection[$url] = $Page;
-			
-			Debug::log('      ' . $path . ' >>> ' . $Page->url);
-			
+			$this->collection[$url] = $Page;
+						
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
 			if ($dirs = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR)) {
@@ -253,7 +278,7 @@ class Automad {
 		
 	
 	/** 
-	 *	Parse sitewide settings and create $siteCollection. 
+	 *	Parse sitewide settings, create $collection and set the context to the currently requested page. 
 	 *	If $parseTxt is false, parsing the content and the settings get skipped and only the site's structure gets determined. (Useful for GUI)
 	 *
 	 *	@param boolean $parseTxt
@@ -261,20 +286,48 @@ class Automad {
 	
 	public function __construct($parseTxt = true) {
 		
-		Debug::log('Automad: New instance created!');
-		
 		$this->parseTxt = $parseTxt;
 		
 		if ($parseTxt) {
 			$this->siteData = Parse::siteData();
 		}
 		
-		Debug::log('Automad: Scan directories for page content:');
-		
+		// Collect pages.
 		$this->collectPages();
+		
+		Debug::log(array('Site Data' => $this->siteData, 'Collection' => $this->collection), 'New instance created');
+		
+		// Set the context initially to the requested page.
+		$this->Context = new Context($this->getRequestedPage());
 		
 	}
 
+	
+	/**
+	 * 	Define properties to be cached.
+	 *
+	 *	@return $itemsToCache
+	 */
+	
+	public function __sleep() {
+		
+		$itemsToCache = array('collection', 'siteData');
+		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
+		return $itemsToCache;
+		
+	}
+	
+	/**
+	 * 	Set new Context after being restored from cache.
+	 */
+	
+	public function __wakeup() {
+		
+		Debug::log(get_object_vars($this), 'Automad object got unserialized');
+		$this->Context = new Context($this->getRequestedPage());
+		
+	}
+	
 	
 	/**
 	 *	Return a key from $this->siteData (sitename, theme, etc.).
@@ -293,27 +346,119 @@ class Automad {
 	
 	
 	/**
-	 *	Return the name of the website - shortcut for $this->getSiteData(AM_KEY_SITENAME).
+	 *	Return the requeste system variable.
+	 *	System variables are all variables created by Automad at runtime and are related things like the context, the filelist and the pagelist objects
+	 *	or they are generated during loop constructs (current items like :file, :tag, etc. or the index :i).
 	 *
-	 *	@return string $this->getSiteData(AM_KEY_SITENAME)
+	 *	@param string $var
+	 *	@return the value of $var
 	 */
 	
-	public function getSiteName() {
+	public function getSystemVar($var) {
 		
-		return $this->getSiteData(AM_KEY_SITENAME);
-		
+		// Check whether $var is generated within a loop and therefore stored in $systemVarBuffer or
+		// if $var is related to the context, filelist or pagelist object.
+		if (array_key_exists($var, $this->systemVarBuffer)) {
+			
+			return $this->systemVarBuffer[$var];
+			
+		} else {
+			
+			switch ($var) {
+				
+				case AM_KEY_LEVEL:
+					return $this->Context->get()->level;
+					
+				case AM_KEY_TEMPLATE:
+					return $this->Context->get()->template;
+				
+				case AM_KEY_CURRENT_PAGE:
+					return $this->Context->get()->isCurrent();
+				
+				case AM_KEY_CURRENT_PATH:
+					return $this->Context->get()->isInCurrentPath();
+					
+				case AM_KEY_FILELIST_COUNT:
+					// The filelist count represents the number of files within the last defined filelist. 
+					return count($this->getFilelist()->getFiles());
+					
+				case AM_KEY_PAGELIST_COUNT:
+					// The pagelist count represents the number of pages within the last defined pagelist. 
+					return count($this->getPagelist()->getPages());
+					
+				case AM_KEY_CAPTION:
+					// Get the caption for the currently used ":file".
+					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
+					return Parse::caption(AM_BASE_DIR . $this->systemVarBuffer[AM_KEY_FILE]);
+				
+			}
+				
+		}
+	
 	}
 	
 	
 	/**
-	 * 	Return $siteCollection array.
+	 *	Set a system variable.
+	 *	
+	 *	@param string $var
+	 *	@param mixed $value
+	 */
+
+	public function setSystemVar($var, $value) {
+		
+		$this->systemVarBuffer[$var] = $value;
+		
+	}
+	
+
+	/**
+	 *	Get the value of a given variable key - either from the page data, the site data or from the $_GET array.
 	 *
-	 * 	@return array $this->siteCollection
+	 *	@param string $key
+	 *	@return The value
+	 */
+	
+	public function getValue($key) {
+		
+		// Check whether the $key is considered a query string parameter (starting with a "?"), a system variable (starting with ":") or an item from the page/site array.
+		if (strpos($key, '?') === 0) {
+			
+			$key = substr($key, 1);
+			
+			if (array_key_exists($key, $_GET)) {
+				return htmlspecialchars($_GET[$key]);
+			} 
+			
+		} else if (strpos($key, ':') === 0) {
+			
+			return $this->getSystemVar($key);
+			
+		} else {
+			
+			$data = $this->Context->get()->data;
+			
+			// First try if the variable is defined for the current page, before trying the site data.
+			if (array_key_exists($key, $data)) {
+				return $data[$key];
+			} else {
+				return $this->getSiteData($key);
+			}
+			
+		}
+			
+	}
+	
+	
+	/**
+	 * 	Return $collection array.
+	 *
+	 * 	@return array $this->collection
 	 */
 	
 	public function getCollection() {
 		
-		return $this->siteCollection;
+		return $this->collection;
 		
 	}
 		 
@@ -327,10 +472,10 @@ class Automad {
 
 	public function getPageByUrl($url) {
 		
-		if (array_key_exists($url, $this->siteCollection)) {
+		if (array_key_exists($url, $this->collection)) {
 			
 			// If page exists
-			return $this->siteCollection[$url];
+			return $this->collection[$url];
 	
 		} elseif (Parse::queryKey('search') && $url == AM_PAGE_RESULTS_URL) {
 	
@@ -347,38 +492,55 @@ class Automad {
 		
 	} 
 
-	 
+
 	/**
-	 * 	Return the page object for the current page.
+	 * 	Return the page object for the requested page.
 	 *
 	 *	@return object $currentPage
 	 */ 
 	
-	public function getCurrentPage() {
-			
+	public function getRequestedPage() {
+		
 		// Check whether the GUI is requesting the currently edited page.
 		if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
 			return $this->getPageByUrl($_POST['url']);
 		} else {
 			return $this->getPageByUrl(AM_REQUEST);
 		}
-			
+				
 	} 
 	
 
 	/**
-	 *	Return Automad's instance of the Listing class and create instance when accessed for the first time.
+	 *	Return Automad's instance of the Filelist class and create instance when accessed for the first time.
 	 *
-	 *	@return Listing object
+	 *	@return Filelist object
 	 */
-	
-	public function getListing() {
+
+	public function getFilelist() {
 		
-		if (!$this->Listing) {
-			$this->Listing = new Listing($this->siteCollection, $this->getCurrentPage());
+		if (!$this->Filelist) {
+			$this->Filelist = new Filelist($this->Context);
 		}
 		
-		return $this->Listing;
+		return $this->Filelist;
+		
+	}
+
+
+	/**
+	 *	Return Automad's instance of the Pagelist class and create instance when accessed for the first time.
+	 *
+	 *	@return Pagelist object
+	 */
+	
+	public function getPagelist() {
+		
+		if (!$this->Pagelist) {
+			$this->Pagelist = new Pagelist($this->collection, $this->Context);
+		}
+		
+		return $this->Pagelist;
 		
 	}
 
@@ -388,7 +550,6 @@ class Automad {
 	 *
 	 *	@param string $template
 	 *	@param string $title
-	 *	@param string $parent
 	 *	@return temporary page object
 	 */
 	
@@ -414,7 +575,7 @@ class Automad {
 	
 	public function currentPageExists() {
 		
-		$Page = $this->getCurrentPage();
+		$Page = $this->Context->get();
 		
 		return ($Page->template != AM_PAGE_NOT_FOUND_TEMPLATE);
 		

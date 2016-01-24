@@ -67,21 +67,13 @@ class Toolbox {
 	
 	
 	/**
-	 * 	Current Page object.
-	 */
-	
-	private $Page;
-	
-	
-	/**
 	 * 	The Automad object is passed as an argument. It shouldn't be created again (performance).
 	 */
 		
 	public function __construct($Automad) {
-		
+				
 		$this->Automad = $Automad;
 		$this->collection = $this->Automad->getCollection();
-		$this->Page = $this->Automad->getCurrentPage();
 				
 	}
 	
@@ -113,6 +105,19 @@ class Toolbox {
 	
 	
 	/**
+	 * 	Configure the filelist to be used in foreach loops.
+	 *	
+	 *	@param array $options
+	 */
+	
+	public function filelist($options = array()) {
+		
+		$this->Automad->getFilelist()->config($options);
+		
+	}
+	
+
+	/**
 	 *	Place a set of the current page's tags and link back to the parent page passing each tag as a filter.
 	 *
 	 *	@return the HTML of the filters
@@ -120,7 +125,7 @@ class Toolbox {
 
 	public function filterParentByTags() {
 		
-		return Html::generateFilterMenu($this->Page->tags, $this->Page->parentUrl);
+		return Html::generateFilterMenu($this->Automad->Context->get()->tags, $this->Automad->Context->get()->parentUrl);
 		
 	}
 	
@@ -150,7 +155,7 @@ class Toolbox {
 			
 		if ($options['file']) {
 			
-			$glob = Resolve::filePath($this->Page->path, $options['file']);
+			$glob = Resolve::filePath($this->Automad->Context->get()->path, $options['file']);
 			return Html::addImage(
 					$glob, 
 					$options['width'], 
@@ -207,7 +212,7 @@ class Toolbox {
 		// Merge options with defaults				
 		$options = array_merge($defaults, $options);
 				
-		$files = Parse::fileDeclaration($options['files'], $this->Page);
+		$files = Parse::fileDeclaration($options['files'], $this->Automad->Context->get());
 		
 		// Sort images.
 		if ($options['order'] == 'asc') {
@@ -250,12 +255,13 @@ class Toolbox {
 	/**
 	 * 	Return the level of the current page.
 	 * 
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 * 	@return level
 	 */
 	 
 	public function level() {
 		
-		return $this->Page->level;
+		return $this->Automad->Context->get()->level;
 		
 	}
 
@@ -263,6 +269,7 @@ class Toolbox {
 	/**
 	 *	Place a link to the previous sibling.
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
 	 *	@return the HTML for the link.
 	 */
@@ -270,7 +277,9 @@ class Toolbox {
 	public function linkPrev($options = array()) {
 		
 		$Selection = new Selection($this->collection);
-		$Selection->filterPrevAndNextToUrl($this->Page->url);
+		$Selection->filterByParentUrl($this->Automad->Context->get()->parentUrl);
+		$Selection->sortPagesByBasename();
+		$Selection->filterPrevAndNextToUrl($this->Automad->Context->get()->url);
 		
 		$pages = $Selection->getSelection();
 		
@@ -291,6 +300,7 @@ class Toolbox {
 	/**
 	 *	Place a link to the next sibling.
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@param array $options - (text: Text to be displayed instead of page title (optional))
 	 *	@return the HTML for the link.
 	 */
@@ -298,7 +308,9 @@ class Toolbox {
 	public function linkNext($options = array()) {
 		
 		$Selection = new Selection($this->collection);
-		$Selection->filterPrevAndNextToUrl($this->Page->url);
+		$Selection->filterByParentUrl($this->Automad->Context->get()->parentUrl);
+		$Selection->sortPagesByBasename();
+		$Selection->filterPrevAndNextToUrl($this->Automad->Context->get()->url);
 		
 		$pages = $Selection->getSelection();
 		
@@ -317,171 +329,78 @@ class Toolbox {
 
 
 	/**
-	 *	Change of configuration for Automad's Listing object.
+	 * 	Alias for pagelist().
 	 *
-	 *	Possible options are:
-	 *	- type: sets the type of listing (default is all pages), "children" (only pages below the current), "related" (all pages with common tags)
-	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
-	 *	- template: include only pages matching that template
-	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
-	 *	- sortOrder: "asc" or "desc" - default sort order, when there is no query string passed
-	 *	- offset: offset the within the array of all relevant pages
-	 *	- limit: limit the object's array of relevant pages
-	 *	
-	 *	@param array $options 
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
+	 *	@param array $options
 	 */
-
+	
 	public function listConfig($options = array()) {
-			
-		$Listing = $this->Automad->getListing();
-		$Listing->config($options);
+		
+		$this->pagelist($options);
 		
 	}
-
+	
 
 	/**
-	 *	Return the number of pages in the Listing object.
+	 *	Return the number of pages in the Pagelist object.
 	 *
-	 *	@return count($this->Listing->pages)
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
+	 *	@return count($this->Pagelist->pages)
 	 */
 	
 	public function listCount() {
 		
-		$Listing = $this->Automad->getListing();
-		return count($Listing->getPages());
+		$Pagelist = $this->Automad->getPagelist();
+		return count($Pagelist->getPages());
 		
 	}
 
-
+	
 	/**
-	 *	Return a page list from Listing object.
-	 * 
-	 * 	Possible options are:
-	 * 	- class: Wrapping class for all list items
-	 * 	- variables: Variables to be displayed
-	 * 	- glob:	File patter to match thumbnail image
-	 * 	- width: The thumbnails' width
-	 * 	- height: The thumbnails' height
-	 * 	- crop: Cropping parameter for thumbnails
-	 *	- maxChars: Maximum number of characters for each variable
-	 *	- header: The list's header text
-	 *	- style: An array of inline styles of each item, where the key is the property and the value is the name of the page variable - for example: { color: "color_var", background-color: "bg_color_var"}
-	 *	- firstClass: special class for the first item of the list
-	 *	- firstWidth: width for the image of the first list item
-	 *	- firstHeight: height for the image of the first list item
-	 *	- offset: offset within the array of filtered/sorted pages
-	 *	- limit: limit the output of listed pages
+	 * 	Alias for pagelistMarkup().
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 * 	@param array $options
 	 *	@return The HTML for a page list.
 	 */
-
+	
 	public function listPages($options = array()) {
 		
-		$defaults = 	array(
-					'variables' => AM_KEY_TITLE,
-					'glob' => false,
-					'width' => false,
-					'height' => false,
-					'crop' => false,
-					'class' => false,
-					'maxChars' => false,
-					'header' => false,
-					'style' => false,
-					'firstWidth' => false,
-					'firstHeight' => false,
-					'firstClass' => false,
-					'offset' => 0,
-					'limit' => NULL
-				);
-	
-		$options = array_merge($defaults, $options);
-
-		// Explode list of variables.
-		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
-		$options['variables'] = array_map('trim', $options['variables']);
-		
-		$Listing = $this->Automad->getListing();
-	
-		return 		Html::generateList(
-					$Listing->getPages($options['offset'], $options['limit']), 
-					$options['variables'], 
-					$options['glob'], 
-					$options['width'], 
-					$options['height'], 
-					$options['crop'], 
-					$options['class'], 
-					$options['maxChars'], 
-					$options['header'],
-					$options['style'],
-					$options['firstWidth'],
-					$options['firstHeight'],
-					$options['firstClass']
-				);	
+		return $this->pagelistMarkup($options);
 		
 	}
-
-
+	
+	
 	/**
-	 *	Create a filter menu for the pages in Automad's Listing object.
+	 *	Alias for pagelistFilters().
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@return The HTML for the filter menu.
 	 */
-
+	
 	public function listFilters() {
 		
-		$Listing = $this->Automad->getListing();	
-		return Html::generateFilterMenu($Listing->getTags());
+		return $this->pagelistFilters();
 		
 	}
 	
-	
+		
 	/**
-	 *	Create a menu of buttons for sorting a page list (item & order combined).
-	 * 
-	 * 	Example: 
-	 * 	t(listSort {
-	 * 		"Original": { sortOrder: "asc" },
-	 * 		"Title": { sortItem: "title", sortOrder: "asc" },
-	 * 		"Tags":	{ sortItem: "tags", sortOrder: "asc" }
-	 * 	})
-	 *	
-	 * 	To have a button to sort the pages by basename, the 'sortItem' just has to be skipped or set to any non-existing variable.
-	 *  
+	 * 	Alias for pagelistSort().
+	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 * 	@param array $options - A multidimensional array of buttons and their sort settings
 	 * 	@return The menu's HTML
 	 */
 	
 	public function listSort($options = array()) {
 		
-		if (is_array($options) && is_array(reset($options))) {
-				
-			// Sanitize $options
-			foreach ($options as $key => $opt) {
-			
-				// Remove all unneeded array items.
-				$opt = array_intersect_key($opt, array_flip(array('sortItem', 'sortOrder')));
-			
-				// Make sure both required item (sortItem and sortOrder) are existing within $options[$key].
-				$options[$key] = array_merge(array('sortItem' => '', 'sortOrder' => false), $opt);
-				
-				// Set sortOrder to the default order, if its value is invalid.
-				if (!in_array($options[$key]['sortOrder'], array('asc', 'desc'))) {
-					$options[$key]['sortOrder'] = AM_LIST_DEFAULT_SORT_ORDER;
-				}
-				
-			}
-			
-			// Set list defaults.
-			$this->listConfig(reset($options));
-			
-			return Html::generateSortMenu($options);
-			
-		}
-	
+		return $this->pagelistSort($options);
+		
 	}
 	
-	
+		
 	/**
 	 * 	Create the meta title tag form the site name and the page title. 
 	 * 	If the 'title' option is defined, use that title instead to override the default site/page combination.
@@ -493,9 +412,13 @@ class Toolbox {
 	public function metaTitle($options = array()) {
 		
 		$defaults = 	array(
-					'title' => $this->Automad->getSiteName() . ' / ' . $this->Page->data['title']
+					'title' => $this->Automad->getValue(AM_KEY_SITENAME) . ' / ' . $this->Automad->getValue(AM_KEY_TITLE)
 				);
 		
+		// Remove false items.	
+		$options = array_filter($options);
+		
+		// Merge filtered options with defaults.
 		$options = array_merge($defaults, $options);
 				
 		return '<title>' . strip_tags($options['title']) . '</title>';
@@ -513,7 +436,7 @@ class Toolbox {
 	public function navBelow($options = array()) {
 		
 		$defaults = 	array(
-					'parent' => $this->Page->url, 
+					'parent' => $this->Automad->Context->get()->url, 
 					'homepage' => false,
 					'class' => false
 				);
@@ -545,12 +468,12 @@ class Toolbox {
 	
 	public function navBreadcrumbs($options = array()) {
 			
-		if ($this->Page->level > 0) {	
+		if ($this->Automad->Context->get()->level > 0) {	
 				
 			$options = array_merge(array('separator' => AM_HTML_STR_BREADCRUMB_SEPARATOR), $options);
 				
 			$Selection = new Selection($this->collection);
-			$Selection->filterBreadcrumbs($this->Page->url);
+			$Selection->filterBreadcrumbs($this->Automad->Context->get()->url);
 			
 			return Html::generateBreadcrumbs($Selection->getSelection(), $options['separator']);
 			
@@ -569,7 +492,7 @@ class Toolbox {
 	public function navChildren($options = array()) {
 	
 		// Always set 'parent' to the current page's parent URL by merging that parameter with the other specified options.
-		return $this->navBelow(array_merge($options, array('parent' => $this->Page->url)));
+		return $this->navBelow(array_merge($options, array('parent' => $this->Automad->Context->get()->url)));
 		
 	}
 	
@@ -587,7 +510,7 @@ class Toolbox {
 		$maxLevel = intval($options['levels']);
 		
 		$Selection = new Selection($this->collection);
-		$Selection->filterBreadcrumbs($this->Page->url);
+		$Selection->filterBreadcrumbs($this->Automad->Context->get()->url);
 		$pages = $Selection->getSelection();
 		
 		$html = '';
@@ -617,7 +540,7 @@ class Toolbox {
 	public function navSiblings($options = array()) {
 		
 		// Set parent to current parentUrl and overwrite passed options
-		return $this->navBelow(array_merge($options, array('parent' => $this->Page->parentUrl)));
+		return $this->navBelow(array_merge($options, array('parent' => $this->Automad->Context->get()->parentUrl)));
 		
 	}
 	
@@ -661,7 +584,7 @@ class Toolbox {
 		if ($options['rootLevel'] !== false) {
 			
 			$Selection = new Selection($this->collection);
-			$Selection->filterBreadcrumbs($this->Page->url);
+			$Selection->filterBreadcrumbs($this->Automad->Context->get()->url);
 			
 			foreach ($Selection->getSelection() as $breadcrumb) {
 				if ($breadcrumb->level == $options['rootLevel']) {
@@ -678,6 +601,161 @@ class Toolbox {
 		// defined and greater than the actual level of the current page, $parent won't be defined.
 		if (isset($parent)) {	
 			return Html::generateTree($parent, $options['all'], $this->collection);
+		}
+	
+	}
+	
+	
+	/**
+	 *	Change of configuration for Automad's Pagelist object.
+	 *
+	 *	Possible options are:
+	 *	- type: sets the type of pagelist (default is all pages),
+	 *		- false (all)
+	 *		- "children" (only pages below the current)
+	 *		- "related" (all pages with common tags) 
+	 *		- "siblings" (same parent)
+	 *		- "breadcrumbs" (all (parent) pages in the current URL)
+	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
+	 *	- template: include only pages matching that template
+	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
+	 *	- sortOrder: "asc" or "desc" - default sort order, when there is no query string passed
+	 *	- offset: offset the within the array of all relevant pages
+	 *	- limit: limit the object's array of relevant pages
+	 *	
+	 *	@param array $options 
+	 */
+
+	public function pagelist($options = array()) {
+			
+		$this->Automad->getPagelist()->config($options);
+	
+	}
+	
+	
+	/**
+	 *	Create a filter menu for the pages in Automad's Pagelist object.
+	 *
+	 *	@return The HTML for the filter menu.
+	 */
+
+	public function pagelistFilters() {
+			
+		return Html::generateFilterMenu($this->Automad->getPagelist()->getTags());
+		
+	}
+	
+	
+	/**
+	 *	Return the markup for a page list from the Pagelist object.
+	 * 
+	 * 	Possible options are:
+	 * 	- class: Wrapping class for all list items
+	 * 	- variables: Variables to be displayed
+	 * 	- glob:	File patter to match thumbnail image
+	 * 	- width: The thumbnails' width
+	 * 	- height: The thumbnails' height
+	 * 	- crop: Cropping parameter for thumbnails
+	 *	- maxChars: Maximum number of characters for each variable
+	 *	- header: The list's header text
+	 *	- style: An array of inline styles of each item, where the key is the property and the value is the name of the page variable - for example: { color: "color_var", background-color: "bg_color_var"}
+	 *	- firstClass: special class for the first item of the list
+	 *	- firstWidth: width for the image of the first list item
+	 *	- firstHeight: height for the image of the first list item
+	 *	- offset: offset within the array of filtered/sorted pages
+	 *	- limit: limit the output of listed pages
+	 *
+	 * 	@param array $options
+	 *	@return The HTML for a page list.
+	 */
+
+	public function pagelistMarkup($options = array()) {
+		
+		$defaults = 	array(
+					'variables' => AM_KEY_TITLE,
+					'glob' => false,
+					'width' => false,
+					'height' => false,
+					'crop' => false,
+					'class' => false,
+					'maxChars' => false,
+					'header' => false,
+					'style' => false,
+					'firstWidth' => false,
+					'firstHeight' => false,
+					'firstClass' => false,
+					'offset' => 0,
+					'limit' => NULL
+				);
+	
+		$options = array_merge($defaults, $options);
+
+		// Explode list of variables.
+		$options['variables'] = explode(AM_PARSE_STR_SEPARATOR, $options['variables']);
+		$options['variables'] = array_map('trim', $options['variables']);
+		
+		$Pagelist = $this->Automad->getPagelist();
+	
+		return 		Html::generatePagelist(
+					$Pagelist->getPages($options['offset'], $options['limit']), 
+					$options['variables'], 
+					$options['glob'], 
+					$options['width'], 
+					$options['height'], 
+					$options['crop'], 
+					$options['class'], 
+					$options['maxChars'], 
+					$options['header'],
+					$options['style'],
+					$options['firstWidth'],
+					$options['firstHeight'],
+					$options['firstClass']
+				);	
+		
+	}
+	
+	
+	/**
+	 *	Create a menu of buttons for sorting a page list (item & order combined).
+	 * 
+	 * 	Example: 
+	 * 	{@ pagelist {
+	 * 		"Original": { sortOrder: "asc" },
+	 * 		"Title": { sortItem: "title", sortOrder: "asc" },
+	 * 		"Tags":	{ sortItem: "tags", sortOrder: "asc" }
+	 * 	} @}
+	 *	
+	 * 	To have a button to sort the pages by basename, the 'sortItem' just has to be skipped or set to any non-existing variable.
+	 *  
+	 * 	@param array $options - A multidimensional array of buttons and their sort settings
+	 * 	@return The menu's HTML
+	 */
+	
+	public function pagelistSort($options = array()) {
+		
+		if (is_array($options) && is_array(reset($options))) {
+				
+			// Sanitize $options
+			foreach ($options as $key => $opt) {
+			
+				// Remove all unneeded array items.
+				$opt = array_intersect_key($opt, array_flip(array('sortItem', 'sortOrder')));
+			
+				// Make sure both required item (sortItem and sortOrder) are existing within $options[$key].
+				$options[$key] = array_merge(array('sortItem' => '', 'sortOrder' => false), $opt);
+				
+				// Set sortOrder to the default order, if its value is invalid.
+				if (!in_array($options[$key]['sortOrder'], array('asc', 'desc'))) {
+					$options[$key]['sortOrder'] = AM_LIST_DEFAULT_SORT_ORDER;
+				}
+				
+			}
+			
+			// Set list defaults.
+			$this->listConfig(reset($options));
+			
+			return Html::generateSortMenu($options);
+			
 		}
 	
 	}
@@ -722,7 +800,7 @@ class Toolbox {
 	
 	public function template() {
 		
-		return $this->Page->template;
+		return $this->Automad->Context->get()->template;
 		
 	}
 	
@@ -735,7 +813,7 @@ class Toolbox {
 	
 	public function themeURL() {
 		
-		return AM_DIR_THEMES . '/' . $this->Page->theme;
+		return AM_DIR_THEMES . '/' . $this->Automad->Context->get()->theme;
 		
 	}
 	

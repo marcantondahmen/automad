@@ -69,11 +69,11 @@ class Sitemap {
 			if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
 				$this->generate($collection, $sitemap);
 			} else {
-				Debug::log('Sitemap: Permissions denied!');
+				Debug::log('Permissions denied!');
 			}
 			
 		} else {
-			Debug::log('Sitemap: Skipped generating sitemap.xml! (Proxy)');
+			Debug::log('Skipped generating sitemap.xml! (Proxy)');
 		}
 		
 	}
@@ -101,7 +101,7 @@ class Sitemap {
 		$xml .= '</urlset>';
 		
 		if (@file_put_contents($sitemap, $xml)) {
-			Debug::log('Sitemap: Successfully generated "' . $sitemap . '"');
+			Debug::log('Successfully generated "' . $sitemap . '"');
 		}
 		
 	}

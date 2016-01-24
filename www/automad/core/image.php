@@ -157,7 +157,7 @@ class Image {
 		
 		if ($originalFile) {
 			
-			$getimagesize = getimagesize($originalFile);
+			$getimagesize = @getimagesize($originalFile);
 			
 			if ($getimagesize) {
 			
@@ -320,9 +320,8 @@ class Image {
 		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
 			
 		$old = umask(0);
-		Debug::log('Image: Changed umask: ' . umask());
-		Debug::log($this);
-		Debug::log('Image: Save: ' . $this->fileFullPath);
+		Debug::log(umask(), 'Changed umask');
+		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');
 		
 		// Create cache directory, if not existing.
 		if (!file_exists(AM_BASE_DIR . AM_DIR_CACHE_IMAGES)) {
@@ -344,7 +343,7 @@ class Image {
 		}
 		
 		umask($old);
-		Debug::log('Image: Restored umask: ' . umask());
+		Debug::log(umask(), 'Restored umask');
 		
 		ImageDestroy ($src);
 		ImageDestroy ($dest);
@@ -397,7 +396,7 @@ class Image {
 		
 		$file = AM_DIR_CACHE_IMAGES . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
 		
-		Debug::log('Image: Hash data: ' . $hashData);
+		Debug::log($hashData, 'Hash data for "' . $hash . '"');
 		
 		return $file;
 		
