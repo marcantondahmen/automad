@@ -288,8 +288,8 @@ class Template {
 	private function convertLegacy($str) {
 		
 		$str = preg_replace('/@i\(\s*([\w\/\.\-]+\.php)\s*\)/s', AM_DEL_STATEMENT_OPEN . '$1' . AM_DEL_STATEMENT_CLOSE, $str);
-		$str = preg_replace('/@(s|p)\(\s*(' . AM_CHARCLASS_VAR_ALL . '+)\s*\)/s', AM_DEL_VAR_OPEN . '$2' . AM_DEL_VAR_CLOSE, $str);
-		$str = preg_replace('/@(t|x)\(\s*(' . AM_CHARCLASS_VAR_ALL . '+)\s*(\{.*?\})?\s*\)/s', AM_DEL_STATEMENT_OPEN . '$2$3' . AM_DEL_STATEMENT_CLOSE, $str);
+		$str = preg_replace('/@(s|p)\(\s*([\w\.\-]+)\s*\)/s', AM_DEL_VAR_OPEN . '$2' . AM_DEL_VAR_CLOSE, $str);
+		$str = preg_replace('/@(t|x)\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s', AM_DEL_STATEMENT_OPEN . '$2$3' . AM_DEL_STATEMENT_CLOSE, $str);
 		
 		return $str;
 		
