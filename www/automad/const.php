@@ -129,17 +129,13 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 // LISTING DEFAULTS
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
-// TEMPLATE DELIMITERS & CHARACTER CLASSES
+// TEMPLATE DELIMITERS
 Config::set('AM_DEL_VAR_OPEN', '{[');
 Config::set('AM_DEL_VAR_CLOSE', ']}');
 Config::set('AM_DEL_STATEMENT_OPEN', '{@');
 Config::set('AM_DEL_STATEMENT_CLOSE', '@}');
 Config::set('AM_DEL_COMMENT_OPEN', '{*');
 Config::set('AM_DEL_COMMENT_CLOSE', '*}');
-// Charachter class for variable keys in text files.
-Config::set('AM_CHARCLASS_VAR_CONTENT', '[\w\.\-]');
-// Charachter class for all kind if variable keys, such as text file content, read-only vars and query string keys.
-Config::set('AM_CHARCLASS_VAR_ALL', '[:\?\w\.\-]');
 
 // EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
