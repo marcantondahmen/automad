@@ -421,7 +421,7 @@ class Toolbox {
 		// Merge filtered options with defaults.
 		$options = array_merge($defaults, $options);
 				
-		return '<title>' . strip_tags($options['title']) . '</title>';
+		return '<title>' . String::stripTags($options['title']) . '</title>';
 					
 	}
 	
