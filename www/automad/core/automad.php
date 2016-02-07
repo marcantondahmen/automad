@@ -136,7 +136,7 @@ class Automad {
 		$slug = preg_replace($pattern, $replacement, $slug);
 		
 		// Clean up $slug
-		$slug = Parse::sanitize($slug);
+		$slug = String::sanitize($slug);
 		
 		// Build URL:
 		// The ltrim (/) is needed to prevent a double / in front of every url, 
@@ -200,7 +200,7 @@ class Automad {
 			// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
 			if ($this->parseTxt) {
 		
-				$data = Parse::markdownFile($file);
+				$data = Parse::textFile($file);
 		
 				// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 				// In case the title is missig for the home page, use the site name instead.
