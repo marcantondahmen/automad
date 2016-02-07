@@ -267,7 +267,7 @@ class Cache {
 		$currentPath = rtrim(AM_REQUEST, '/');
 		
 		if ($_SERVER['QUERY_STRING']) {
-			$queryString = '_' . Parse::sanitize($_SERVER['QUERY_STRING']);
+			$queryString = '_' . String::sanitize($_SERVER['QUERY_STRING']);
 		} else {
 			$queryString = '';
 		}
