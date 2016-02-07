@@ -88,7 +88,7 @@ class Parse {
 		Debug::log($captionFile);
 		
 		if (is_readable($captionFile)) {
-			return self::markdown(file_get_contents($captionFile));
+			return file_get_contents($captionFile);
 		}
 		
 	}
@@ -113,7 +113,7 @@ class Parse {
 				$tags = explode(AM_PARSE_STR_SEPARATOR, $value);
 				// Trim & strip tags
 				$tags = array_map(function($tag) {
-						return trim(strip_tags($tag)); 
+						return trim(String::stripTags($tag)); 
 					}, $tags);
 				
 			}		
@@ -194,23 +194,6 @@ class Parse {
 	
 
 	/**
-	 * 	Escape a string to be used within a JSON string.
-	 *	
-	 *	@param string $str
-	 *	@return Escaped, JSON-safe string
-	 */
-
-	public static function jsonEscape($str) {
-		
-		$search = array('"',   "'",  "\n", "\r");
-		$replace = array('\"', "\'", ' ',  ' ');
-		
-		return str_replace($search, $replace, $str);
-		
-	}
-
-	
-	/**
 	 *	Parse a (dirty) JSON string and return an associative, filtered array
 	 *
 	 *	@param string $str
@@ -235,9 +218,13 @@ class Parse {
 			
 			// Remove all undefined items (empty string). 
 			// It is not possible to use array_filter($options, 'strlen') here, since an array item could be an array itself and strlen() only expects strings.
-			$options = 	array_filter($options, function($value) {
-						return ($value !== '');
-					});
+			if (is_array($options)) {
+				$options = 	array_filter($options, function($value) {
+							return ($value !== '');
+						});
+			} else {
+				$options = array();
+			}
 			
 			$debug['JSON'] = $options;
 			Debug::log($debug);
@@ -246,48 +233,6 @@ class Parse {
 		
 		return $options;
 		
-	}
-	
-	
-	/**
-	 *	Parse a markdown string.
-	 *
-	 *	If the given string is a multiline string, it will then be parsed as markdown.
-	 *	If the string is just a single line, markdown parsing is skipped.
-	 *	If it is a multiline string, but starts and ends with a <head> element, markdown parsing will be skipped as well.
-	 *	
-	 *	@param string $str
-	 *	@return the parsed string
-	 */
-	
-	public static function markdown($str) {
-		
-		$regexTag = '/^<(!--|base|link|meta|script|style|title).*>$/is';
-	 
-		if (strpos($str, "\n") !== false && !preg_match($regexTag, $str)) {
-			// If $var is a multiline string and not only one or more tags (meta, script, link tags ...).
-			return \Michelf\MarkdownExtra::defaultTransform($str); 
-		} else {
-			// If $var is just a single line or just one or more <head> element(s), skip parsing.
-			return $str;
-		}
-			
-	}
-	
-
-	/**
-	 *	Read a text file using Parse::textFile() and parse markdown syntax for all given variables. 
-	 *	
-	 *	@param string $file
-	 *	@return Array of variables
-	 */
-	
-	public static function markdownFile($file) {
-			
-		return array_map(function($var) {
-				return self::markdown($var);
-			}, self::textFile($file));
-					
 	}
 	
 		
@@ -428,44 +373,6 @@ class Parse {
 
 
 	/**
-	 *	Cleans up a string to be used as URL, directory or file name. 
-	 *	The returned string constists of the following characters: a-z, A-Z, - and optional dots (.)
-	 *	That means, this method is safe to be used with filenames as well, since it keeps by default the dots as suffix separators.
-	 *
-	 *	Note: To produce fully safe prefixes and directory names, 
-	 *	possible dots should be removed by setting $removeDots = true. 
-	 *
-	 *	@param string $str
-	 *	@param boolean $removeDots	
-	 *	@return the sanitized string
-	 */
-	
-	public static function sanitize($str, $removeDots = false) {
-			
-		// If dots should be removed from $str, replace them with '-', since URLify::filter() only removes them fully without replacing.
-		if ($removeDots) {
-			$str = str_replace('.', '-', $str);
-		}
-		
-		// Convert slashes separately to avoid issues with regex in URLify.
-		$str = str_replace('/', '-', $str);
-		
-		// Configure URLify. 
-		// Add non-word chars and reset the remove list.
-		// Note: $maps gets directly manipulated without using URLify::add_chars(). 
-		// Using the add_chars() method would extend $maps every time, Parse::sanitize() gets called. 
-		// Adding a new array to $maps using a key avoids that and just overwrites that same array after the first call without adding new elements.
-		\JBroadway\URLify::$maps['nonWordChars'] = array('=' => '-', '&' => '-and-', '+' => '-plus-', '@' => '-at-', '|' => '-', '*' => '-x-');
-		\JBroadway\URLify::$remove_list = array();
-		
-		// Since all possible dots got removed above (if $removeDots is true), 
-		// $str should be filtered as filename to keep dots if there are still in $str. 
-		return \JBroadway\URLify::filter($str, 100, '', true);
-		
-	}
-	
-	
-	/**
 	 * 	Parse Site Data to replace defaults.
 	 *
 	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
@@ -485,7 +392,7 @@ class Parse {
 				);
 		
 		// Merge defaults with settings from file.
-		return array_merge($defaults, self::markdownFile(AM_FILE_SITE_SETTINGS));
+		return array_merge($defaults, self::textFile(AM_FILE_SITE_SETTINGS));
 		
 	}
 
@@ -508,7 +415,7 @@ class Parse {
 		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));	
 			
 		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line. 
-		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . AM_CHARCLASS_VAR_CONTENT . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, NULL, PREG_SPLIT_NO_EMPTY);
+		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . Regex::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, NULL, PREG_SPLIT_NO_EMPTY);
 		
 		// Split $pairs into an array of vars.
 		foreach ($pairs as $pair) {
