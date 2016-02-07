@@ -7,8 +7,9 @@
 		<div class="col-md-12">
 			{@ with {[ test-file ]} @}
 			{@ img { file: {[ :file ]}, width: 1200, class: "img-responsive img-rounded" } @}
-			<h4>{[ :caption ]}</h4>
-			<h5>{[ :basename ]}</h5>
+			<br>
+			{[ :caption | markdown ]}
+			<p>{[ :basename ]}</p>
 			{@ end @}
 		</div>
 	</div>	
