@@ -77,12 +77,12 @@ class Template {
 	
 	private $extensionAssets = array();
 	
-	
+		
 	/**
-	 * 	The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
+	 *	Whitelist of standard PHP string functions.
 	 */
 	
-	private $outerStatementMarker = '#';
+	private $phpStringFunctions = array('strlen', 'strtolower', 'strtoupper', 'ucwords');
 	
 	
 	/**
@@ -288,7 +288,7 @@ class Template {
 	private function convertLegacy($str) {
 		
 		$str = preg_replace('/@i\(\s*([\w\/\.\-]+\.php)\s*\)/s', AM_DEL_STATEMENT_OPEN . '$1' . AM_DEL_STATEMENT_CLOSE, $str);
-		$str = preg_replace('/@(s|p)\(\s*([\w\.\-]+)\s*\)/s', AM_DEL_VAR_OPEN . '$2' . AM_DEL_VAR_CLOSE, $str);
+		$str = preg_replace('/@(s|p)\(\s*([\w\.\-]+)\s*\)/s', AM_DEL_VAR_OPEN . '$2|markdown(true)' . AM_DEL_VAR_CLOSE, $str);
 		$str = preg_replace('/@(t|x)\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s', AM_DEL_STATEMENT_OPEN . '$2$3' . AM_DEL_STATEMENT_CLOSE, $str);
 		
 		return $str;
@@ -360,7 +360,7 @@ class Template {
 				
 				// Append a marker to the opening delimiter in case depth === 0.
 				if ($depth === 0) {
-					$return = str_replace(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_OPEN . $this->outerStatementMarker, $return);
+					$return = str_replace(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_OPEN . Regex::$outerStatementMarker, $return);
 				} 
 				
 				// Increase depth after (!) return was possible modified (in case depth === 0) in case the match is begin or else.
@@ -376,7 +376,7 @@ class Template {
 
 
 	/**
-	 *	Process variables only.	
+	 *	Process content variables and optional string functions. Like {[ var | function1 ( parameters ) | function2 | ... ]}	
 	 *
 	 *	Find and replace all variables within $str with values from either the context page data array or, if not defined there, from the site data array, 
 	 *	from the system variables array (only those starting with ":") or from the $_GET array (only those starting with a "?").    
@@ -397,47 +397,43 @@ class Template {
 
 	private function processContent($str, $isJsonString = false) {
 		
-		$subpatternVar = preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . AM_CHARCLASS_VAR_ALL . '+)\s*' . preg_quote(AM_DEL_VAR_CLOSE);
-		$regexContent = '/(?:' . 
-				// Simple variable {[var]}.
-				$subpatternVar . '|' .	
-				// A variable as method parameter while being not wrapped in quotes ": {[var]} ,|}"				
-				'(?<=\:)\s*' . $subpatternVar . '\s*(?=,|\})' . 				
-				')/s';
-		
+		// Build regex. Also match possible JSON elements like ":", "," and "}". They will be added to the output when returning the value if existing.
+		$regexContent = '/(?P<parameterStart>:\s*)?' . Regex::contentVariable('var') . '(?P<parameterEnd>\s*(,|\}))?/s';
+				
 		return 	preg_replace_callback($regexContent, function($matches) use ($isJsonString) {
-					
-				/*
 				
-				Possible items in $matches:
+				// Merge $matches with empty defaults to skip later checks whether an item exists.
+				$matches = array_merge(array('parameterStart' => '', 'parameterEnd' => '', 'varFunctions' => ''), $matches);
+						
+				// Get the value.
+				$value = $this->Automad->getValue($matches['varName']);
 				
-				0:	Full match
-				1:	Normal variable in any other context
-				2:	Variable is a method paramter without beeing wrapped in double quotes.
-					The regex will match {[ var ]} only if there is a ":" before and a "," or a "}" after the variable (whitespace is allowed),
-					like: {@ img { file: {[ file ]} } @}
-				 
-				*/
+				// Modify $value by processing all matched string functions.
+				$value = $this->processStringFunctions($value, $matches['varFunctions']);
 				
-				// Use the last item in the array to get the requested value. If $matches[2] only exists, if $matches[1] is empty. Either [1] or [2] will return the matched key.
-				// The distinction between $matches[1] and $matches[2] is only made to check, if $value must be wrapped in quotes (see below).
-				$value = $this->Automad->getValue(end($matches));
-				
-				// In case $value will be used as option, some chars have to be escaped to work within a JSON formatted string.
+				// In case $value will be used as an JSON option, some chars have to be escaped to work within a JSON formatted string.
 				if ($isJsonString) {
 					
-					$value = Parse::jsonEscape($value);	
+					$value = String::jsonEscape($value);
 					
-					// In case the variable is an "stand-alone" value in a JSON formatted string ($matches[2] will be defined then - regex ": {[ var ]} ,|}" ), 
+					// In case the variable is an "stand-alone" value in a JSON formatted string (regex ": {[ var ]} (,|})" ), 
 					// it has to be wrapped in double quotes.
-					if (!empty($matches[2])) {
+					// In that case $matches['parameterStart'] and $matches['parameterEnd'] are not empty.
+					if ($matches['parameterStart'] && $matches['parameterEnd']) {
 						$value = '"' . $value . '"';
+						Debug::log($value, 'Wrapping content in double quotes to be valid JSON');
 					}
 					
 				}
-									
+				
+				// Always wrap $value in parameterStart and parameterEnd! In case $value is not a parameter of a JSON string, they will be just empty strings.
+				// If $value is a stand-alone parameter, the output will look like:
+				// : "value", or : "value" } 
+				$value = $matches['parameterStart'] . $value . $matches['parameterEnd'];
+				Debug::log($value, $matches['varName'] . ' ' . $matches['varFunctions']);	
+					
 				return $value;
-							
+															
 			}, $str);
 		
 	}
@@ -467,67 +463,7 @@ class Template {
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
 		
-		$var = preg_quote(AM_DEL_VAR_OPEN) . '\s*' . AM_CHARCLASS_VAR_ALL . '+\s*' . preg_quote(AM_DEL_VAR_CLOSE);		
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
-		
-		// The subpatterns don't include the wrapping delimiter: "{@ subpattern @}".
-		$statementSubpatterns['include'] = '(?P<file>[\w\/\-\.]+\.php)';
-		
-		$statementSubpatterns['call'] = '(?P<call>[\w\-]+)\s*(?P<options>\{.*?\})?';
-		
-		$statementSubpatterns['snippet'] = 	$this->outerStatementMarker . '\s*' . //Note the additional preparsed marker!
-							'snippet\s+(?P<snippet>[\w\-]+)' .
-							'\s*' . $statementClose . 
-							'(?P<snippetSnippet>.*?)' . 
-							$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-		
-		$statementSubpatterns['with'] = $this->outerStatementMarker . '\s*' . // Note the additional preparsed marker!
-						'with\s+(?P<with>' .
-							'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
-						')' . 
-						'\s*' . $statementClose . 
-						'(?P<withSnippet>.*?)' . 	
-						'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
-						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-		
-		$statementSubpatterns['loop'] = $this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-						'foreach\s+in\s+(?P<foreach>' . 
-							'pagelist|' . 
-							'filters|' . 
-							'tags|' . 
-							'filelist|' .
-							'"[^"]*"|' . "'[^']*'|" . $var . 		
-						')' . 
-						'\s*' . $statementClose . 
-						'(?P<foreachSnippet>.*?)' . 
-						'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
-						$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-		
-		$statementSubpatterns['condition'] = 	$this->outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-							'if\s+(?P<if>' .  
-								'(?P<ifBoolean>' .
-									'(?P<ifNot>!)?' . '(?<ifVar>' . $var . ')' .
-								')|' . 	
-								'(?P<ifComparison>' . 
-									'(?P<ifLeft>' . 
-										'(?P<ifLeftQuote>[\'"])(?P<ifLeftQuotedString>.*?[^\\\\])?\k<ifLeftQuote>' . '|(?<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+)' . 
-									')' .	
-									'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' . 		
-									'(?P<ifRight>' . 
-										'(?P<ifRightQuote>[\'"])(?P<ifRightQuotedString>.*?[^\\\\])?\k<ifRightQuote>' . '|(?<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+)' .
-									')' . 
-								')' .				
-							')' . 	
-							'\s*' . $statementClose . 
-							'(?P<ifSnippet>.*?)' . 
-							'(?:' . $statementOpen . $this->outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
-							$statementOpen . $this->outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-		
-		// Variable or statement.		
-		$regexMarkup = '/((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')/is'; 
-			
-		return 	preg_replace_callback($regexMarkup, function($matches) use ($directory) {
+		return 	preg_replace_callback('/' . Regex::markup() . '/is', function($matches) use ($directory) {
 												
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				if (!empty($matches['var'])) {
@@ -852,7 +788,71 @@ class Template {
 		
 	}
 	
+
+	/**
+	 *	Modifiy $value by processing a string of matched string functions.     
+	 *	If a function name matches a String class method, that method is called, else if a function name is in the whitelist of PHP standard functions, that function is called.
+	 *	In case a function name is an integer value, the String::shorten() method is called and the integer value is passed as parameter.
+	 *	
+	 *	@param string $value
+	 *	@param string $functionsString - (like: | funtion (parameters) | function (parameters) | ...)
+	 *	@return the modified $value  
+	 */
+
+	private function processStringFunctions($value, $functionString) {
 		
+		preg_replace_callback('/'. Regex::stringFunction('function') . '/s', function($matches) use (&$value) {
+			
+			$function = $matches['functionName'];
+			$parameters = array();
+			
+			// Prepare function parameters.
+			if (isset($matches['functionParameters'])) {
+				
+				// Relpace single quotes when not escaped with double quotes.
+				$csv = preg_replace('/(?<!\\\\)(\')/', '"', $matches['functionParameters']);
+				
+				// Create $parameters array.
+				$parameters = str_getcsv($csv, ',', '"');
+				$parameters = array_map('trim', $parameters);
+				
+				// Cast boolean parameters correctly.
+				// To use "false" or "true" as strings, they have to be escaped like "\true" or "\false".
+				array_walk($parameters, function(&$param) {
+					if (in_array($param, array('true', 'false'))) {
+						$param = filter_var($param, FILTER_VALIDATE_BOOLEAN);
+					}
+				});
+				
+				$parameters = array_map('stripslashes', $parameters);
+				
+			} 
+			
+			// Add the actual $value to the parameters array as its first element.
+			$parameters = array_merge(array(0 => $value), $parameters);
+			
+			// Call string function.
+			if (method_exists('\Automad\Core\String', $function)) {
+				// Call a String class method.
+				$value = call_user_func_array('\Automad\Core\String::' . $function, $parameters);
+				Debug::log($parameters, 'Call String::' . $function);
+			} else if (in_array(strtolower($function), $this->phpStringFunctions)) {
+				// Call standard PHP string function.
+				$value = call_user_func_array($function, $parameters);
+				Debug::log($parameters, 'Call ' . $function);
+			} else if (is_numeric($function)) {
+				// In case $function is a number, call String::shorten() method and pass $function as paramter for the max number of characters.
+				Debug::log($value, 'Shorten content to max ' . $function . ' characters');
+				$value = String::shorten($value, $function);
+			}
+					
+		}, $functionString); 
+			
+		return $value;
+		
+	}
+
+	
 	/**
 	 *	Find all links/URLs in $str and resolve the matches according to their type.
 	 *	
