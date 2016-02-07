@@ -263,7 +263,7 @@ class Selection {
 			$filtered = array();
 
 			// Explode keywords and also remove any tags and - most important - all "/", since they will be used as regex delimiters!
-			$keywords = explode(' ', str_replace('/', ' ', strip_tags($str)));
+			$keywords = explode(' ', str_replace('/', ' ', String::stripTags($str)));
 		
 			// generate pattern
 			$pattern = '/^';
@@ -278,7 +278,7 @@ class Selection {
 			
 				// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
 				// even if the keywords are distributed over different variables in $Page[data]. 
-				$dataAsString = strip_tags(implode(' ', $Page->data));
+				$dataAsString = String::stripTags(implode(' ', $Page->data));
 								
 				// search
 				if (preg_match($pattern, $dataAsString) == 1) {
@@ -424,7 +424,7 @@ class Selection {
 			foreach ($this->selection as $key => $Page) {
 			
 				if (isset($Page->data[$var])) {
-					$arrayToSortBy[$key] = strtolower(strip_tags($Page->data[$var]));
+					$arrayToSortBy[$key] = strtolower(String::stripTags($Page->data[$var]));
 				} else {
 					// If data[$var] doesn't exists, the page's path's basename will be used.
 					// That way it is possible to order by basename with simply passing a non-existing var (for example "orig" or something else).
