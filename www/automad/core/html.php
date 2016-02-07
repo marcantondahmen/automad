@@ -101,7 +101,7 @@ class Html {
 				}
 				
 				if ($addCaption) {
-					$caption = ' data-caption="' . Parse::caption($file) . '"';
+					$caption = ' data-caption="' . String::stripTags(Parse::caption($file)) . '"';
 				} else {
 					$caption = '';
 				}
@@ -151,10 +151,10 @@ class Html {
 		} 
 				
 		if (!$text) {
-			$text = strip_tags($Page->data[AM_KEY_TITLE]);
+			$text = String::stripTags($Page->data[AM_KEY_TITLE]);
 			$title = '';
 		} else {
-			$title = ' title="' . strip_tags($Page->data[AM_KEY_TITLE]) . '"';
+			$title = ' title="' . String::stripTags($Page->data[AM_KEY_TITLE]) . '"';
 		}
 				
 		return '<a' . $classes . $title . ' href="' . $Page->url . '">' . $text . '</a>';
@@ -178,7 +178,7 @@ class Html {
 		
 		foreach ($pages as $Page) {
 			
-			$html .= '<a href="' . $Page->url . '">' . strip_tags($Page->data[AM_KEY_TITLE]) . '</a>';
+			$html .= '<a href="' . $Page->url . '">' . String::stripTags($Page->data[AM_KEY_TITLE]) . '</a>';
 			
 			// Add separator for all but the last page.	
 			if ($i++ < count($pages)) {
@@ -460,17 +460,8 @@ class Html {
 				
 					if (isset($Page->data[$var])) {
 						
-						$text = strip_tags($Page->data[$var]);
-						
-						// Shorten $text to maximal characters (full words).
-						if (strlen($text) > $maxChars) {
-							// Cut $text to max chars
-							$text = substr($text, 0, $maxChars);
-							// Find last space and get position
-							$pos = strrpos($text, ' ');
-							// Cut $text again at last space's position (< $maxChars)
-							$text = substr($text, 0, $pos) . ' ...';
-						}
+						// Shorten $text.
+						$text = String::shorten($Page->data[$var], $maxChars, ' ...');
 					
 						// Variable key is used to define the html class.
 						// That makes styling with CSS very customizable.
