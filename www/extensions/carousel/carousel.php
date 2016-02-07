@@ -135,7 +135,7 @@ class Carousel {
 					$html .= \Automad\Core\Html::addImage($file, $options['width'], $options['height'], true);
 				}
 				
-				$html .= '<div class="carousel-caption">' . \Automad\Core\Parse::caption($file) . '</div>' .
+				$html .= '<div class="carousel-caption">' . \Automad\Core\String::markdown(\Automad\Core\Parse::caption($file)) . '</div>' .
 					 '</div>';			
 		
 			}
