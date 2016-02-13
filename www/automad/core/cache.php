@@ -266,7 +266,7 @@ class Cache {
 		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
 		$currentPath = rtrim(AM_REQUEST, '/');
 		
-		if ($_SERVER['QUERY_STRING']) {
+		if (!empty($_SERVER['QUERY_STRING'])) {
 			$queryString = '_' . String::sanitize($_SERVER['QUERY_STRING']);
 		} else {
 			$queryString = '';
