@@ -795,6 +795,7 @@ class Toolbox {
 	/**
 	 *	Return the template name used by the  current page.
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@return template name
 	 */
 	
@@ -808,6 +809,7 @@ class Toolbox {
 	/**
 	 * 	Return the URL of the page theme.
 	 *
+	 *	@deprecated This method is deprecated since version 0.11 and will be removed in the future.
 	 *	@return page theme URL
 	 */
 	
