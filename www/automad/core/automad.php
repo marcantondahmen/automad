@@ -215,7 +215,7 @@ class Automad {
 				} 
 		
 				// Extract tags
-				$tags = Parse::extractTags($data);
+				$Page->tags = Parse::extractTags($data);
 			
 				// Check for an URL in $data and use that URL instead. If no URL is defined as override, add an URL var with the page's URL to $data to be used as variable as well.
 				if (array_key_exists(AM_KEY_URL, $data)) {
@@ -224,26 +224,25 @@ class Automad {
 					$data[AM_KEY_URL] = $Page->url;
 				}
 			
-				// Check for a theme in $data and use that as override for the site theme.
-				if (array_key_exists(AM_KEY_THEME, $data) && $data[AM_KEY_THEME]) {
-					$theme = $data[AM_KEY_THEME];
-				} else {
-					$theme = $this->getSiteData(AM_KEY_THEME);
+				// If no theme is defined in $data, set $data[AM_KEY_THEME] to the site theme.	
+				if (empty($data[AM_KEY_THEME])) {
+					$data[AM_KEY_THEME] = $this->getSiteData(AM_KEY_THEME);
 				}
-			
+				
+				// Set the property $Page->theme to $data[AM_KEY_THEME] to allow an easy internal access to the page theme. 
+				$Page->theme = $data[AM_KEY_THEME];
+				
 				// Check if the page should be hidden from selections.
-				$hidden = false;
+				$Page->hidden = false;
+				
 				if (array_key_exists(AM_KEY_HIDDEN, $data)) {
 					if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
-						$hidden = true;
+						$Page->hidden = true;
 					}
 				}
 			
-				// Set Page properties from txt file.
+				// Set Page data property.
 				$Page->data = $data;
-				$Page->tags = $tags;
-				$Page->theme = $theme;
-				$Page->hidden = $hidden;
 			
 			}
 			
