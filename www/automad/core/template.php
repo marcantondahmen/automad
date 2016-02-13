@@ -279,24 +279,6 @@ class Template {
 
 
 	/**
-	 * 	Convert legacy template syntax into the new syntax.
-	 *	
-	 *	@param string $str
-	 *	@return The converted template
-	 */
-
-	private function convertLegacy($str) {
-		
-		$str = preg_replace('/@i\(\s*([\w\/\.\-]+\.php)\s*\)/s', AM_DEL_STATEMENT_OPEN . '$1' . AM_DEL_STATEMENT_CLOSE, $str);
-		$str = preg_replace('/@(s|p)\(\s*([\w\.\-]+)\s*\)/s', AM_DEL_VAR_OPEN . '$2|markdown(true)' . AM_DEL_VAR_CLOSE, $str);
-		$str = preg_replace('/@(t|x)\(\s*([\w\-]+)\s*(\{.*?\})?\s*\)/s', AM_DEL_STATEMENT_OPEN . '$2$3' . AM_DEL_STATEMENT_CLOSE, $str);
-		
-		return $str;
-		
-	}
-
-
-	/**
 	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
 	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.    
 	 *	
@@ -318,9 +300,6 @@ class Template {
 		include $file;
 		$output = ob_get_contents();
 		ob_end_clean();
-		
-		// Backwards compatibility.
-		$output = $this->convertLegacy($output);
 		
 		// Strip comments.
 		$output = preg_replace('/(' . preg_quote(AM_DEL_COMMENT_OPEN) . '.*?' . preg_quote(AM_DEL_COMMENT_CLOSE) . ')/s', '', $output);
