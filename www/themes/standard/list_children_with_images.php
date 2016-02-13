@@ -1,25 +1,25 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-@i(elements/header.php)
+{@ elements/header.php @}
 	
 	<div class="container">
 		
 		<div class="row">
 			<div id="title" class="col-md-6">
-				<h1>@p(title)</h1>
-				<h2>@p(subtitle)</h2>
+				<h1>{[ title ]}</h1>
+				<h2>{[ subtitle ]}</h2>
 			</div>	
 			<div class="col-md-6">
-				@p(text)
+				{[ text | markdown ]}
 			</div>	
 		</div>		
 				
 		<div class="row">
-			@t(listConfig { type: "children" })
+			{@ pagelist { type: "children" } @}
 			<div class="col-md-6">
-				@t(listFilters)
+				{@ pagelistFilters @}
 			</div>		
 			<div class="col-md-6">
-				@t(listSort {
+				{@ pagelistSort {
 					"Title": {
 						sortItem: "title",
 						sortOrder: "asc"
@@ -28,12 +28,12 @@
 						sortItem: "subtitle",
 						sortOrder: "asc"
 					}
-				}) 
+				} @}
 			</div>
 		</div>	
 		
 		<div class="row">
-			@t(listPages {
+			{@ pagelistMarkup {
 				variables: "title, subtitle",
 				glob: "*.jpg, *.png",
 				width: 350,
@@ -43,9 +43,9 @@
 				firstWidth: 800,
 				firstHeight: 800,
 				firstClass: "item image col-xs-12 col-sm-12 col-md-8 col-lg-6"
-			}) 
+			} @}
 		</div>	
 			
 	</div>
 
-@i(elements/footer.php)
+{@ elements/footer.php @}
