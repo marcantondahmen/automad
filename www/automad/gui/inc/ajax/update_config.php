@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -120,7 +123,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 
 } else {
 
-	$output['error'] = $this->tb['error_permission'] . '<p>' . AM_CONFIG . '</p>';
+	$output['error'] = Text::get('error_permission') . '<p>' . AM_CONFIG . '</p>';
 
 }
 
