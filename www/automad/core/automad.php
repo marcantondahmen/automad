@@ -81,14 +81,6 @@ class Automad {
 		
 	
 	/**
-	 *	Boolean, if true, the site's structure gets scanned as well as the site's content. 
-	 *	Setting that variable to false will skip all txt files and its content parsing.
-	 */
-	
-	private $parseTxt;
-	
-	
-	/**
 	 * 	Array holding the site's settings.
 	 */
 	
@@ -195,58 +187,50 @@ class Automad {
 			// to be able to overwrite that url with an optional redirect-url from the data file. 
 			$Page->url = $url;
 		
-			// If $this->parseTxt is true (default), then all txt files get parsed as well and 
-			// the corresponding properties of $Page get defined. 
-			// Skipping the parsing can be useful when just the structure is needed and not the content (GUI).
-			if ($this->parseTxt) {
-		
-				$data = Parse::textFile($file);
-		
-				// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-				// In case the title is missig for the home page, use the site name instead.
-				if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
-					if (trim($url, '/')) {
-						// If page is not the home page...
-						$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
-					} else {
-						// If page is home page...
-						$data[AM_KEY_TITLE] = $this->getSiteData(AM_KEY_SITENAME);
-					}
-				} 
-		
-				// Extract tags
-				$Page->tags = Parse::extractTags($data);
-			
-				// Check for an URL in $data and use that URL instead. If no URL is defined as override, add an URL var with the page's URL to $data to be used as variable as well.
-				if (array_key_exists(AM_KEY_URL, $data)) {
-					$Page->url = $data[AM_KEY_URL];
+			// Parse text file.
+			$data = Parse::textFile($file);
+	
+			// In case the title is not set in the data file or is empty, use the slug of the URL instead.
+			// In case the title is missig for the home page, use the site name instead.
+			if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
+				if (trim($url, '/')) {
+					// If page is not the home page...
+					$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 				} else {
-					$data[AM_KEY_URL] = $Page->url;
+					// If page is home page...
+					$data[AM_KEY_TITLE] = $this->getSiteData(AM_KEY_SITENAME);
 				}
-			
-				// If no theme is defined in $data, set $data[AM_KEY_THEME] to the site theme.	
-				if (empty($data[AM_KEY_THEME])) {
-					$data[AM_KEY_THEME] = $this->getSiteData(AM_KEY_THEME);
-				}
-				
-				// Set the property $Page->theme to $data[AM_KEY_THEME] to allow an easy internal access to the page theme. 
-				$Page->theme = $data[AM_KEY_THEME];
-				
-				// Check if the page should be hidden from selections.
-				$Page->hidden = false;
-				
-				if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-					if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
-						$Page->hidden = true;
-					}
-				}
-			
-				// Set Page data property.
-				$Page->data = $data;
-			
+			} 
+	
+			// Extract tags
+			$Page->tags = Parse::extractTags($data);
+		
+			// Check for an URL in $data and use that URL instead. If no URL is defined as override, add an URL var with the page's URL to $data to be used as variable as well.
+			if (array_key_exists(AM_KEY_URL, $data)) {
+				$Page->url = $data[AM_KEY_URL];
+			} else {
+				$data[AM_KEY_URL] = $Page->url;
+			}
+		
+			// If no theme is defined in $data, set $data[AM_KEY_THEME] to the site theme.	
+			if (empty($data[AM_KEY_THEME])) {
+				$data[AM_KEY_THEME] = $this->getSiteData(AM_KEY_THEME);
 			}
 			
-			// Set all main Page properties
+			// Set the property $Page->theme to $data[AM_KEY_THEME] to allow an easy internal access to the page theme. 
+			$Page->theme = $data[AM_KEY_THEME];
+			
+			// Check if the page should be hidden from selections.
+			$Page->hidden = false;
+			
+			if (array_key_exists(AM_KEY_HIDDEN, $data)) {
+				if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
+					$Page->hidden = true;
+				}
+			}
+		
+			// Set Page properties.
+			$Page->data = $data;
 			$Page->path = $path;
 			$Page->level = $level;
 			$Page->parentUrl = $parentUrl;
@@ -277,21 +261,12 @@ class Automad {
 		
 	
 	/** 
-	 *	Parse sitewide settings, create $collection and set the context to the currently requested page. 
-	 *	If $parseTxt is false, parsing the content and the settings get skipped and only the site's structure gets determined. (Useful for GUI)
-	 *
-	 *	@param boolean $parseTxt
+	 *	Parse sitewide settings, create $collection and set the context to the currently requested page.
 	 */
 	
-	public function __construct($parseTxt = true) {
+	public function __construct() {
 		
-		$this->parseTxt = $parseTxt;
-		
-		if ($parseTxt) {
-			$this->siteData = Parse::siteData();
-		}
-		
-		// Collect pages.
+		$this->siteData = Parse::siteData();
 		$this->collectPages();
 		
 		Debug::log(array('Site Data' => $this->siteData, 'Collection' => $this->collection), 'New instance created');
@@ -579,6 +554,34 @@ class Automad {
 		return ($Page->template != AM_PAGE_NOT_FOUND_TEMPLATE);
 		
 	} 	 
+
+
+	/**
+	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
+	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.    
+	 *	
+	 *	Before returning the markup, the old Automad template syntax gets translated into the new syntax and all comments {* ... *} get stripped.
+	 *
+	 *	Note that even when the it is possible to use plain PHP in a template file, all that code will be parsed first when buffering, before any of the Automad markup is getting parsed.
+	 *	That also means, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
+	 *
+	 *	@param string $file
+	 *	@return the buffered output 
+	 */
+
+	public function loadTemplate($file) {
+		
+		$Automad = $this;
+		
+		ob_start();
+		include $file;
+		$output = ob_get_contents();
+		ob_end_clean();
+		
+		// Strip comments before return.
+		return preg_replace('/(' . preg_quote(AM_DEL_COMMENT_OPEN) . '.*?' . preg_quote(AM_DEL_COMMENT_CLOSE) . ')/s', '', $output);
+				
+	}
 
 	 
 }
