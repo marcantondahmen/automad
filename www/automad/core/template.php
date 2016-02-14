@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * 	The Template class holds all methods to render the current page using a template file.
  *	
- *	When render() is called, first the template file gets loaded by loadTemplate().
+ *	When render() is called, first the template file gets loaded.
  *	The output, basically the raw template HTML (including the generated HTML by PHP in the template file) 
  *	gets stored in $output.
  *
@@ -279,37 +279,6 @@ class Template {
 
 
 	/**
-	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
-	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.    
-	 *	
-	 *	Before returning the markup, the old Automad template syntax gets translated into the new syntax and all comments {* ... *} get stripped.
-	 *
-	 *	Note that even when the it is possible to use plain PHP in a template file, all that code will be parsed first when buffering, before any of the Automad markup is getting parsed.
-	 *	That also means, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
-	 *
-	 *	@param string $file
-	 *	@return the buffered output 
-	 */
-
-	private function loadTemplate($file) {
-		
-		// Provide an interface to the Automad object for the templates to be used with plain PHP.
-		$Automad = $this->Automad;
-		
-		ob_start();
-		include $file;
-		$output = ob_get_contents();
-		ob_end_clean();
-		
-		// Strip comments.
-		$output = preg_replace('/(' . preg_quote(AM_DEL_COMMENT_OPEN) . '.*?' . preg_quote(AM_DEL_COMMENT_CLOSE) . ')/s', '', $output);
-				
-		return $output;
-		
-	}
-
-
-	/**
 	 * 	Preprocess recursive statements to identify the top-level (outer) statements within a parsed string. 
 	 *
 	 *	@param $str
@@ -457,7 +426,7 @@ class Template {
 				
 					if (file_exists($file)) {
 						Debug::log($file, 'Including');	
-						return $this->processMarkup($this->loadTemplate($file), dirname($file));
+						return $this->processMarkup($this->Automad->loadTemplate($file), dirname($file));
 					} else {
 						Debug::log($file, 'File not found');
 					}
@@ -892,7 +861,7 @@ class Template {
 		
 		Debug::log($this->template, 'Render template');
 		
-		$output = $this->loadTemplate($this->template);
+		$output = $this->Automad->loadTemplate($this->template);
 		$output = $this->processMarkup($output, dirname($this->template));
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
