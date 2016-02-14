@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -71,28 +71,28 @@ if (isset($_POST['old-name']) && isset($_POST['new-name'])) {
 		if ($_POST['new-name'] != $_POST['old-name']) {
 			
 			$oldFile = $path . basename($_POST['old-name']);
-			$newFile = $path . Parse::sanitize(basename($_POST['new-name']));
+			$newFile = $path . \Automad\Core\String::sanitize(basename($_POST['new-name']));
 			
 			if (is_writable($path) && is_writable($oldFile)) {
 				
 				if (!file_exists($newFile)) {
 					rename($oldFile, $newFile);
 				} else {
-					$output['error'] = '"' . $newFile . '" ' . $this->tb['error_existing'];
+					$output['error'] = '"' . $newFile . '" ' . Text::get('error_existing');
 				}
 				
 			} else {
-				$output['error'] = $this->tb['error_permission'];
+				$output['error'] = Text::get('error_permission');
 			}
 			
 		}
 		
 	} else {
-		$output['error'] = $this->tb['error_filename'];
+		$output['error'] = Text::get('error_filename');
 	}
 	
 } else {
-	$output['error'] = $this->tb['error_form'];
+	$output['error'] = Text::get('error_form');
 }
 
 
