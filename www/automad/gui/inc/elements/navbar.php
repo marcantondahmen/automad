@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -54,12 +57,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					</li>
 					<li>
 						<a href="http://automad.org" target="_blank">
-							<span class="glyphicon glyphicon-question-sign"></span><span class="hidden-md"> <?php echo $this->tb['btn_docs']; ?></span>
+							<span class="glyphicon glyphicon-question-sign"></span><span class="hidden-md"> <?php echo Text::get('btn_docs'); ?></span>
 						</a>
 					</li>
 					<?php if ($this->user()) { ?><li>
 						<a href="?context=logout">
-							<span class="glyphicon glyphicon-off"></span> <?php echo $this->tb['log_out_title']; ?> "<?php echo ucwords($this->user()); ?>"
+							<span class="glyphicon glyphicon-off"></span> <?php echo Text::get('log_out_title'); ?> "<?php echo ucwords($this->user()); ?>"
 						</a>
 					</li><?php } ?> 
 				</ul>
