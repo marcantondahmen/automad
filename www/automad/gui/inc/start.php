@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -46,11 +46,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$Cache = new Cache();
+$Cache = new \Automad\Core\Cache();
 $lastEdit = $Cache->getSiteMTime();
 
 
-$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['start_title'] . ' ' . ucwords($this->user());
+$this->guiTitle = $this->guiTitle . ' / ' . Text::get('start_title') . ' ' . ucwords($this->user());
 $this->element('header');
 
 
@@ -59,8 +59,8 @@ $this->element('header');
 		<div class="column content">
 			<div class="inner">
 				<div class="start">
-					<h1><?php echo $this->tb['start_title'] . ' ' . ucwords($this->user()); ?></h1>
-					<h4><?php echo $this->tb['start_last_edit']; ?> <span class="badge"><?php echo date('j. F Y, G:i', $lastEdit); ?>h</span></h4>
+					<h1><?php echo Text::get('start_title') . ' ' . ucwords($this->user()); ?></h1>
+					<h4><?php echo Text::get('start_last_edit'); ?> <span class="badge"><?php echo date('j. F Y, G:i', $lastEdit); ?>h</span></h4>
 					<h4><span class="automad-status" data-automad-status="cache"></span></h4>
 					<h4><span class="automad-status" data-automad-status="debug"></span></h4>
 					<h4>Automad Version <span class="badge"><?php echo AM_VERSION; ?></span></h4>
