@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -73,12 +76,12 @@ if (isset($_POST['delete'])) {
 
 		// Write array with all accounts back to file.
 		if ($this->accountsSaveArray($accounts)) {
-			$output['success'] = $this->tb['success_remove'] . ' <strong>' . implode(', ', $deleted) . '</strong>';
+			$output['success'] = Text::get('success_remove') . ' <strong>' . implode(', ', $deleted) . '</strong>';
 		}
 		
 	} else {
 		
-		$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+		$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 		
 	}
 	
@@ -112,10 +115,10 @@ ob_start();
 	<div class="modal-footer">			
 		<div class="btn-group btn-group-justified">
 			<div class="btn-group">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button>
 			</div>
 			<div class="btn-group">
-				<button type="submit" class="btn btn-danger" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo $this->tb['btn_remove_selected']; ?></button>
+				<button type="submit" class="btn btn-danger" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo Text::get('btn_remove_selected'); ?></button>
 			</div>
 		</div>
 	</div>
