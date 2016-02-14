@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,12 +60,12 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection) &
 		$this->movePage($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
 		$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
 
-		$Cache = new Cache();
+		$Cache = new \Automad\Core\Cache();
 		$Cache->clear();
 
 	} else {
 		
-		$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
+		$output['error'] = Text::get('error_permission') . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
 		
 	}
 	
