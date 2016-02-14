@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -49,11 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-$Cache = new Cache();
+$Cache = new \Automad\Core\Cache();
 $Cache->clear();
 
 
-$output['success'] = $this->tb['success_cache_cleared'];
+$output['success'] = Text::get('success_cache_cleared');
 
 
 echo json_encode($output);
