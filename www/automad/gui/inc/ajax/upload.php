@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -76,21 +76,21 @@ if (isset($_FILES['files']['name'])) {
 		for ($i = 0; $i < count($_FILES['files']['name']); $i++) {
 	
 			// Check if file has a valid filename (allowed file type).
-			if (Parse::isFileName($_FILES['files']['name'][$i])) {
+			if (\Automad\Core\Parse::isFileName($_FILES['files']['name'][$i])) {
 		
-				$newFile = $path . Parse::sanitize($_FILES['files']['name'][$i]);
+				$newFile = $path . \Automad\Core\String::sanitize($_FILES['files']['name'][$i]);
 				move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
 		
 			} else {
 		
-				$errors[] = $this->tb['error_file_format'] . ' <strong>' . pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION) . '</strong>';
+				$errors[] = Text::get('error_file_format') . ' <strong>' . pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION) . '</strong>';
 		
 			}
 	
 		}
 
 		// Clear cache to update galleries and sliders.
-		$Cache = new Cache();
+		$Cache = new \Automad\Core\Cache();
 		$Cache->clear();
 		
 		if ($errors) {
@@ -99,7 +99,7 @@ if (isset($_FILES['files']['name'])) {
 
 	} else {
 		
-		$output['error'] = $this->tb['error_permission'] . '<p>' . $path . '</p>';
+		$output['error'] = Text::get('error_permission') . '<p>' . $path . '</p>';
 				
 	}
 
