@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -77,7 +77,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 
 			// Save new subpage below the current page's path.		
-			$subdir = Parse::sanitize($title, true) . '/';
+			$subdir = \Automad\Core\String::sanitize($title, true) . '/';
 			$newPagePath = $Page->path . $subdir;
 
 
@@ -107,11 +107,11 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 
 
 			// Clear the cache to make sure, the changes get reflected on the website directly.
-			$Cache = new Cache();
+			$Cache = new \Automad\Core\Cache();
 			$Cache->clear();
 
 			// Rebuild Automad object, since the file structure has changed.
-			$Automad = new Automad(false);
+			$Automad = new \Automad\Core\Automad();
 			$collection = $Automad->getCollection();
 
 			// Find new URL and return redirect query string.
@@ -129,19 +129,19 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		
 		} else {
 			
-			$output['error'] = $this->tb['error_permission'] . '<p>' . dirname($this->pageFile($Page)) . '</p>';
+			$output['error'] = Text::get('error_permission') . '<p>' . dirname($this->pageFile($Page)) . '</p>';
 			
 		}
 		
 	} else {
 	
-		$output['error'] = $this->tb['error_page_title'];
+		$output['error'] = Text::get('error_page_title');
 	
 	}	
 	
 } else {
 	
-	$output['error'] = $this->tb['error_page_not_found'];
+	$output['error'] = Text::get('error_page_not_found');
 	
 }	
 
