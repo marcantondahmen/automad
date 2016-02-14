@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -63,35 +66,35 @@ if (isset($_POST['current-password']) && $_POST['current-password'] && isset($_P
 				// Write array with all accounts back to file.
 				if ($this->accountsSaveArray($accounts)) {
 					
-					$output['success'] = $this->tb['success_password_changed']; 
+					$output['success'] = Text::get('success_password_changed'); 
 					
 				} else {
 					
-					$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+					$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 				
 				}
 				
 			} else {
 				
-				$output['error'] = $this->tb['error_form'];
+				$output['error'] = Text::get('error_form');
 				
 			}
 						
 		} else {
 			
-			$output['error'] = $this->tb['error_form'];;
+			$output['error'] = Text::get('error_form');;
 			
 		}
 		
 	} else {
 		
-		$output['error'] = $this->tb['error_form'];
+		$output['error'] = Text::get('error_form');
 		
 	}
 	
 } else {
 	
-	$output['error'] = $this->tb['error_form'];
+	$output['error'] = Text::get('error_form');
 	
 }
 
