@@ -61,7 +61,7 @@ if ($_POST) {
 		
 	} else {
 		
-		$error = $this->tb['error_login'];
+		$error = Text::get('error_login');
 		
 	}
 		
