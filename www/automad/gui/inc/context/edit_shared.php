@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -43,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['shared_title'];
+$this->guiTitle = $this->guiTitle . ' / ' . Text::get('shared_title');
 $this->element('header');
 
 
@@ -56,12 +59,12 @@ $this->element('header');
 					<ul class="nav nav-pills nav-stacked">
 						<li class="active">
 							<a href="#data" data-toggle="tab">
-								<span class="glyphicon glyphicon-align-left"></span><span class="hidden-md"> <?php echo $this->tb['btn_data']; ?></span>
+								<span class="glyphicon glyphicon-align-left"></span><span class="hidden-md"> <?php echo Text::get('btn_data'); ?></span>
 							</a>
 						</li>
 						<li>
 							<a href="#files" data-toggle="tab">
-								<span class="glyphicon glyphicon-folder-open"></span><span class="hidden-md"> <?php echo $this->tb['btn_files']; ?></span>
+								<span class="glyphicon glyphicon-folder-open"></span><span class="hidden-md"> <?php echo Text::get('btn_files'); ?></span>
 							</a>
 						</li>
 					</ul>
@@ -72,12 +75,12 @@ $this->element('header');
 		<div class="column content">
 			<div class="inner">
 				<div class="alert alert-info">
-					<h3><?php echo $this->tb['shared_title']; ?></h3>
+					<h3><?php echo Text::get('shared_title'); ?></h3>
 				</div>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div id="data" class="tab-pane fade in active">
-						<form class="automad-form automad-init" data-automad-handler="shared_data" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo $this->tb['btn_loading']; ?></form>
+						<form class="automad-form automad-init" data-automad-handler="shared_data" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo Text::get('btn_loading'); ?></form>
 					</div>
 					<div id="files" class="tab-pane fade">
 						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
