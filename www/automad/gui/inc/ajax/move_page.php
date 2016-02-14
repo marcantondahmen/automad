@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,11 +69,11 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 				$newPagePath = $this->movePage($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);
 	
 				// Clear the cache to make sure, the changes get reflected on the website directly.
-				$Cache = new Cache();
+				$Cache = new \Automad\Core\Cache();
 				$Cache->clear();
 	
 				// Rebuild Automad object, since the file structure has changed.
-				$Automad = new Automad(false);
+				$Automad = new \Automad\Core\Automad();
 				$collection = $Automad->getCollection();
 
 				// Find new URL and return redirect query string.
@@ -90,13 +90,13 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 		
 			} else {
 				
-				$output['error'] = $this->tb['error_permission'] . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
+				$output['error'] = Text::get('error_permission') . '<p>' . dirname(dirname($this->pageFile($Page))) . '</p>';
 				
 			}
 		
 		} else {
 			
-			$output['error'] = $this->tb['error_permission'] . '<p>' . AM_BASE_DIR . AM_DIR_PAGES . rtrim($dest->path, '/') . '</p>';
+			$output['error'] = Text::get('error_permission') . '<p>' . AM_BASE_DIR . AM_DIR_PAGES . rtrim($dest->path, '/') . '</p>';
 			
 		}
 			
@@ -104,7 +104,7 @@ if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination'
 
 } else {
 	
-	$output['error'] = $this->tb['error_page_not_found']; 
+	$output['error'] = Text::get('error_page_not_found'); 
 	
 }
 
