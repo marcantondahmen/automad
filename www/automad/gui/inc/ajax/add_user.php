@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -64,29 +67,29 @@ if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']
 			// Write array with all accounts back to file.
 			if ($this->accountsSaveArray($accounts)) {
 				
-				$output['success'] = $this->tb['success_added'] . ' <strong>' . $_POST['username'] . '</strong>';
+				$output['success'] = Text::get('success_added') . ' <strong>' . $_POST['username'] . '</strong>';
 				
 			} else {
 	
-				$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+				$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 				
 			}
 			
 		} else {
 		
-			$output['error'] = '<strong>' . $_POST['username'] . '</strong> ' . $this->tb['error_existing'];	
+			$output['error'] = '<strong>' . $_POST['username'] . '</strong> ' . Text::get('error_existing');	
 			
 		}
 		
 	} else {
 		
-		$output['error'] = $this->tb['error_form'];
+		$output['error'] = Text::get('error_form');
 		
 	}
 	
 } else {
 	
-	$output['error'] = $this->tb['error_form'];
+	$output['error'] = Text::get('error_form');
 	
 }
 
