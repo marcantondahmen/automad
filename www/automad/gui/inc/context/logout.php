@@ -35,6 +35,9 @@
  */
 
 
+namespace Automad\GUI;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -47,7 +50,7 @@ unset($_SESSION);
 session_destroy();
 
 
-$this->guiTitle = $this->guiTitle . ' / ' . $this->tb['log_out_title'];
+$this->guiTitle = $this->guiTitle . ' / ' . Text::get('log_out_title');
 $this->element('header');
 
 
@@ -55,8 +58,8 @@ $this->element('header');
 
 		<div class="column content">
 			<div class="inner">
-				<div class="alert alert-success"><?php echo $this->tb['success_log_out']; ?></div>			
-				<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-default"><?php echo $this->tb['btn_login']; ?></a>
+				<div class="alert alert-success"><?php echo Text::get('success_log_out'); ?></div>			
+				<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="btn btn-default"><?php echo Text::get('btn_login'); ?></a>
 			</div>
 		</div>
 
