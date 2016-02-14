@@ -67,7 +67,7 @@ if ($_POST) {
 		
 	} else {
 		
-		$error = $this->tb['error_form'];
+		$error = Text::get('error_form');
 	
 	}
 	
