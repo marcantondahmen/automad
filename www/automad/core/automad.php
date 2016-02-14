@@ -104,6 +104,13 @@ class Automad {
 	
 	
 	/**
+	 *	An array of existing directories within the base directory (/automad, /config, /pages etc.)
+	 */
+	
+	private $realDirs = array();
+	
+	
+	/**
 	 *	Builds an URL out of the parent URL and the actual file system folder name.
 	 *
 	 *	It is important to only transform the actual folder name (slug) and not the whole path,
@@ -137,15 +144,25 @@ class Automad {
 		// at the beginning of the URL. 
 		// The leading slash is better to have in case of the home page where the key becomes [/] insted of just [] 
 		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
-	
+			
+		// Build an array of already taken URLs.
+		// First create an array of existing directories, in case it doesn't exist already.
+		if (empty($this->realDirs)) {
+			foreach (glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
+				$this->realDirs[] = '/' . basename($dir);
+			}
+		}
+		
+		// Merge real directories with already used URLs in the collection.
+		$takenUrls = array_merge($this->realDirs, array_keys($this->collection));
+		
 		// check if url already exists
-		if (array_key_exists($url, $this->collection)) {
+		if (in_array($url, $takenUrls)) {
 							
 			$i = 0;
-			
 			$newUrl = $url;
 			
-			while (array_key_exists($newUrl, $this->collection)) {
+			while (in_array($newUrl, $takenUrls)) {
 				$i++;
 				$newUrl = $url . "-" . $i;
 			}
