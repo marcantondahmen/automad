@@ -61,6 +61,8 @@ class Html {
 	
 	/**
 	 *	Set $this->Automad when creating an instance.
+	 *
+	 *	@param object $Automad
 	 */
 	
 	public function __construct($Automad) {
@@ -188,27 +190,34 @@ class Html {
 	/**
 	 *	Create textarea for page/shared variables with optional button for removal.
 	 *	
-	 *	@param string $key (name)
+	 *	@param string $title
+	 *	@param array $keys
 	 *	@param array $data
 	 *	@param boolean $removeButton
 	 *	@return The HTML for the textarea
 	 */
 	
-	public function varTextArea($key, $data, $removeButton = false) {
+	public function textAreas($title, $keys, $data, $removeButton = false) {
 		
-		$value = '';
+		$html = '<h3>' . $title . '</h3>';
 		
-		if (!empty($data[$key])) {
-			$value = $data[$key];
+		foreach ($keys as $key) {
+			
+			$value = '';
+		
+			if (!empty($data[$key])) {
+				$value = $data[$key];
+			}
+		
+			$html .=  '<div class="form-group"><label for="input-data-' . $key . '">' . $key . '</label>';
+		
+			if ($removeButton) {
+				$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
+			}
+		
+			$html .= '<textarea placeholder="' . htmlentities($this->Automad->getSiteData($key)) . '" id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
+			
 		}
-		
-		$html =  '<div class="form-group"><label for="input-data-' . $key . '">' . $key . '</label>';
-		
-		if ($removeButton) {
-			$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
-		}
-		
-		$html .= '<textarea placeholder="' . $this->Automad->getSiteData($key) . '" id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
 		
 		return $html;
 		
