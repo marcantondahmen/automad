@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,14 +49,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 			<div class="scroll">
 				<div class="inner">
 					<ul class="nav nav-pills nav-stacked">	
-						<li class="<?php if (\Automad\Core\Parse::queryKey('context') == 'system_settings') { echo ' active'; }?>">
+						<li class="<?php if (Core\Parse::queryKey('context') == 'system_settings') { echo ' active'; }?>">
 							<a href="?context=system_settings"><span class="glyphicon glyphicon-cog hidden-md"></span> <?php echo Text::get('sys_title'); ?></a>
 						</li>			
-						<li class="<?php if (\Automad\Core\Parse::queryKey('context') == 'edit_shared') { echo ' active'; }?>">
+						<li class="<?php if (Core\Parse::queryKey('context') == 'edit_shared') { echo ' active'; }?>">
 							<a href="?context=edit_shared"><span class="glyphicon glyphicon-globe hidden-md"></span> <?php echo Text::get('shared_title'); ?></a>
 						</li>	
 					</ul>
-					<?php echo $this->siteTree('', $this->collection, array('context' => 'edit_page'), false); ?> 
+					<?php echo $this->Html->siteTree('', $this->collection, array('context' => 'edit_page'), false); ?> 
 				</div>
 			</div>
 		</div>
