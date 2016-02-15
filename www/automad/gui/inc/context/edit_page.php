@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -46,11 +47,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-if (array_key_exists(\Automad\Core\Parse::queryKey('url'), $this->collection)) {
+if (array_key_exists(Core\Parse::queryKey('url'), $this->collection)) {
 	
-	$url = \Automad\Core\Parse::queryKey('url');
+	$url = Core\Parse::queryKey('url');
 	$Page = $this->collection[$url];
-	$data = \Automad\Core\Parse::textFile($this->pageFile($Page));
+	$data = Core\Parse::textFile($this->Content->getPageFilePath($Page));
 
 	if (!isset($data[AM_KEY_TITLE]) || !$data[AM_KEY_TITLE]) {
 		$data[AM_KEY_TITLE] = basename($url);
@@ -76,7 +77,7 @@ $this->element('header');
 				<div class="inner">
 					<ul class="nav nav-pills nav-stacked">
 						<li>
-							<a href="<?php echo \Automad\Core\Resolve::url($Page, $url); ?>" target="_blank">
+							<a href="<?php echo Core\Resolve::url($Page, $url); ?>" target="_blank">
 								<span class="glyphicon glyphicon-arrow-right"></span><span class="hidden-md"> <?php echo Text::get('btn_visit_page'); ?></span>
 							</a>
 						</li>
@@ -120,7 +121,7 @@ $this->element('header');
 		<div class="column content">
 			<div class="inner">
 				<div class="alert alert-info">
-					<a href="<?php echo \Automad\Core\Resolve::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
+					<a href="<?php echo Core\Resolve::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
 				</div>
 				<!-- Tab panes -->
 				<div class="tab-content">
@@ -154,7 +155,7 @@ $this->element('header');
 								<label for="add-subpage-title">Title</label>
 								<input id="add-subpage-title" class="form-control" type="text" name="subpage[<?php echo AM_KEY_TITLE; ?>]" value="" onkeypress="return event.keyCode != 13;" required />
 							</div>
-							<?php echo $this->templateSelectBox('add-subpage-theme_template', 'subpage[theme_template]'); ?>
+							<?php echo $this->Html->templateSelectBox('add-subpage-theme_template', 'subpage[theme_template]'); ?>
 						</div>
 						<div class="modal-footer">
 							<div class="btn-group btn-group-justified">
@@ -178,7 +179,7 @@ $this->element('header');
 					<div class="modal-body">
 						<div class="alert alert-info"><span class="glyphicon glyphicon-move"></span> <b><?php echo $url; ?></b></div>
 						<h4><?php echo Text::get('page_move_destination'); ?></h4>
-						<?php echo $this->siteTree('', $this->collection, array(), true); ?>
+						<?php echo $this->Html->siteTree('', $this->collection, array(), true); ?>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button>
@@ -214,7 +215,7 @@ $this->element('header');
 		<?php } else { ?> 
 		<div class="column content">
 			<div class="inner">
-				<div class="alert alert-danger"><h4><?php echo Text::get('error_page_not_found'); ?><br /><br /><strong><?php echo \Automad\Core\Parse::queryKey('url');?></strong></h4></div>
+				<div class="alert alert-danger"><h4><?php echo Text::get('error_page_not_found'); ?><br /><br /><strong><?php echo Core\Parse::queryKey('url');?></strong></h4></div>
 			</div>
 		</div>	
 		<?php } ?>
