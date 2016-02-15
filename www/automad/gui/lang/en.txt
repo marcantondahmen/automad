@@ -237,7 +237,11 @@ page_var_name: Variable Name
 
 -
 
-page_vars_used: Variables used by the current template
+page_vars_in_template: Variables used by the current template
+
+- 
+
+page_vars_in_other_templates: Variables used in other templates
 
 - 
 
