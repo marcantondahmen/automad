@@ -97,13 +97,6 @@ class Automad {
 	
 	
 	/**
-	 * 	Array holding all temporary system variable (those starting with a ":", like {[ :file ]}) being created in loops.
-	 */
-	
-	private $systemVarBuffer = array();
-	
-	
-	/**
 	 *	An array of existing directories within the base directory (/automad, /config, /pages etc.)
 	 */
 	
@@ -196,17 +189,12 @@ class Automad {
 			
 			$file = reset($files);
 			
+			// Set URL.
 			$url = $this->makeUrl($parentUrl, basename($path));
 			
-			$Page = new Page();
+			// Merge site data with content from the txt files. The site data get always stored in the Page object and serve as defaults which can be overridden on per page basis.
+			$data = array_merge($this->siteData, Parse::textFile($file));
 			
-			// Directly set URL here as first property, 
-			// to be able to overwrite that url with an optional redirect-url from the data file. 
-			$Page->url = $url;
-		
-			// Parse text file.
-			$data = Parse::textFile($file);
-	
 			// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 			// In case the title is missig for the home page, use the site name instead.
 			if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
@@ -218,45 +206,31 @@ class Automad {
 					$data[AM_KEY_TITLE] = $this->getSiteData(AM_KEY_SITENAME);
 				}
 			} 
-	
-			// Extract tags
-			$Page->tags = Parse::extractTags($data);
-		
-			// Check for an URL in $data and use that URL instead. If no URL is defined as override, add an URL var with the page's URL to $data to be used as variable as well.
-			if (array_key_exists(AM_KEY_URL, $data)) {
-				$Page->url = $data[AM_KEY_URL];
-			} else {
-				$data[AM_KEY_URL] = $Page->url;
-			}
-		
-			// If no theme is defined in $data, set $data[AM_KEY_THEME] to the site theme.	
-			if (empty($data[AM_KEY_THEME])) {
-				$data[AM_KEY_THEME] = $this->getSiteData(AM_KEY_THEME);
+			
+			// Check for an URL override in $data and use that URL if existing. If no URL is defined as override, add the created $url above to $data to be used as a page variable.
+			if (empty($data[AM_KEY_URL])) {
+				$data[AM_KEY_URL] = $url;
 			}
 			
-			// Set the property $Page->theme to $data[AM_KEY_THEME] to allow an easy internal access to the page theme. 
-			$Page->theme = $data[AM_KEY_THEME];
-			
-			// Check if the page should be hidden from selections.
-			$Page->hidden = false;
-			
+			// Convert hidden value to boolean.
 			if (array_key_exists(AM_KEY_HIDDEN, $data)) {
 				if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
-					$Page->hidden = true;
+					$data[AM_KEY_HIDDEN] = true;
+				} else {
+					$data[AM_KEY_HIDDEN] = false;
 				}
 			}
-		
-			// Set Page properties.
-			$Page->data = $data;
-			$Page->path = $path;
-			$Page->level = $level;
-			$Page->parentUrl = $parentUrl;
-			$Page->template = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
 			
+			// Set read-only variables.
+			$data[AM_KEY_PATH] = $path;
+			$data[AM_KEY_LEVEL] = $level;
+			$data[AM_KEY_PARENT] = $parentUrl;
+			$data[AM_KEY_TEMPLATE] = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
+						
 			// The relative URL ($url) of the page becomes the key (in $collection). 
 			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
-			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url instead).
-			$this->collection[$url] = $Page;
+			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url and $data instead).
+			$this->collection[$url] = new Page($data);
 						
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
@@ -331,111 +305,6 @@ class Automad {
 		
 		if (array_key_exists($key, $this->siteData)) {
 			return $this->siteData[$key];
-		}
-			
-	}
-	
-	
-	/**
-	 *	Return the requeste system variable.
-	 *	System variables are all variables created by Automad at runtime and are related things like the context, the filelist and the pagelist objects
-	 *	or they are generated during loop constructs (current items like :file, :tag, etc. or the index :i).
-	 *
-	 *	@param string $var
-	 *	@return the value of $var
-	 */
-	
-	public function getSystemVar($var) {
-		
-		// Check whether $var is generated within a loop and therefore stored in $systemVarBuffer or
-		// if $var is related to the context, filelist or pagelist object.
-		if (array_key_exists($var, $this->systemVarBuffer)) {
-			
-			return $this->systemVarBuffer[$var];
-			
-		} else {
-			
-			switch ($var) {
-				
-				case AM_KEY_LEVEL:
-					return $this->Context->get()->level;
-					
-				case AM_KEY_TEMPLATE:
-					return $this->Context->get()->template;
-				
-				case AM_KEY_CURRENT_PAGE:
-					return $this->Context->get()->isCurrent();
-				
-				case AM_KEY_CURRENT_PATH:
-					return $this->Context->get()->isInCurrentPath();
-					
-				case AM_KEY_FILELIST_COUNT:
-					// The filelist count represents the number of files within the last defined filelist. 
-					return count($this->getFilelist()->getFiles());
-					
-				case AM_KEY_PAGELIST_COUNT:
-					// The pagelist count represents the number of pages within the last defined pagelist. 
-					return count($this->getPagelist()->getPages());
-					
-				case AM_KEY_CAPTION:
-					// Get the caption for the currently used ":file".
-					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
-					return Parse::caption(AM_BASE_DIR . $this->systemVarBuffer[AM_KEY_FILE]);
-				
-			}
-				
-		}
-	
-	}
-	
-	
-	/**
-	 *	Set a system variable.
-	 *	
-	 *	@param string $var
-	 *	@param mixed $value
-	 */
-
-	public function setSystemVar($var, $value) {
-		
-		$this->systemVarBuffer[$var] = $value;
-		
-	}
-	
-
-	/**
-	 *	Get the value of a given variable key - either from the page data, the site data or from the $_GET array.
-	 *
-	 *	@param string $key
-	 *	@return The value
-	 */
-	
-	public function getValue($key) {
-		
-		// Check whether the $key is considered a query string parameter (starting with a "?"), a system variable (starting with ":") or an item from the page/site array.
-		if (strpos($key, '?') === 0) {
-			
-			$key = substr($key, 1);
-			
-			if (array_key_exists($key, $_GET)) {
-				return htmlspecialchars($_GET[$key]);
-			} 
-			
-		} else if (strpos($key, ':') === 0) {
-			
-			return $this->getSystemVar($key);
-			
-		} else {
-			
-			$data = $this->Context->get()->data;
-			
-			// First try if the variable is defined for the current page, before trying the site data.
-			if (array_key_exists($key, $data)) {
-				return $data[$key];
-			} else {
-				return $this->getSiteData($key);
-			}
-			
 		}
 			
 	}
@@ -546,14 +415,13 @@ class Automad {
 	
 	private function createPage($template, $title) {
 		
-		$page = new Page();
-		$page->theme = $this->getSiteData(AM_KEY_THEME);
-		$page->template = $template;
-		$page->data[AM_KEY_TITLE] = $title;
-		$page->parentUrl = '';
-		$page->level = 0;
+		$data = $this->siteData;
+		$data[AM_KEY_TITLE] = $title;
+		$data[AM_KEY_TEMPLATE] = $template;
+		$data[AM_KEY_LEVEL] = 0;
+		$data[AM_KEY_PARENT] = '';
 		
-		return $page;
+		return new Page($data);
 		
 	}
 	
