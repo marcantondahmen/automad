@@ -107,6 +107,13 @@ class Template {
 	
 	
 	/**
+	 * 	Array holding all temporary independent system variables (those starting with a ":", like {[ :file ]}) being created in loops.
+	 */
+	
+	private $independentSystemVars = array();
+	
+	
+	/**
 	 *	Define $Automad and $Page, check if the page gets redirected and get the template name. 
 	 */
 	
@@ -279,6 +286,114 @@ class Template {
 
 
 	/**
+	 *	Return the requeste system variable.
+	 *	System variables are all variables created by Automad at runtime and are related things like the context, the filelist and the pagelist objects
+	 *	or they are generated during loop constructs (current items like :file, :tag, etc. or the index :i).
+	 *
+	 *	@param string $var
+	 *	@return the value of $var
+	 */
+	
+	private function getIndependentSystemVar($var) {
+		
+		// Check whether $var is generated within a loop and therefore stored in $independentSystemVars or
+		// if $var is related to the context, filelist or pagelist object.
+		if (array_key_exists($var, $this->independentSystemVars)) {
+			
+			return $this->independentSystemVars[$var];
+			
+		} else {
+			
+			switch ($var) {
+					
+				case AM_KEY_FILELIST_COUNT:
+					// The filelist count represents the number of files within the last defined filelist. 
+					return count($this->getFilelist()->getFiles());
+					
+				case AM_KEY_PAGELIST_COUNT:
+					// The pagelist count represents the number of pages within the last defined pagelist. 
+					return count($this->getPagelist()->getPages());
+					
+				case AM_KEY_CAPTION:
+					// Get the caption for the currently used ":file".
+					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
+					if (isset($this->independentSystemVars[AM_KEY_FILE])) {
+						return Parse::caption(AM_BASE_DIR . $this->independentSystemVars[AM_KEY_FILE]);
+					} else {
+						return false;
+					}
+					
+			}
+				
+		}
+	
+	}
+
+
+	/**
+	 *	Set a system variable.
+	 *	
+	 *	@param string $var
+	 *	@param mixed $value
+	 */
+
+	private function setIndependentSystemVar($var, $value) {
+		
+		$this->independentSystemVars[$var] = $value;
+		
+	}
+
+
+	/**
+	 *	Check whether a requested $key represents an independent system variable.
+	 *
+	 *	@param string $key
+	 *	@return boolean true/false
+	 */
+
+	private function isIndependentSystemVar($key) {
+		
+		$systemVarKeys = array_merge(array_keys($this->independentSystemVars), array(AM_KEY_FILELIST_COUNT, AM_KEY_PAGELIST_COUNT, AM_KEY_CAPTION));
+		
+		return (in_array($key, $systemVarKeys));
+		
+	}
+	
+	
+	/**
+	 *	Get the value of a given variable key depending on the current context - either from the page data, the system variables or from the $_GET array.
+	 *
+	 *	@param string $key
+	 *	@return The value
+	 */
+	
+	private function getValue($key) {
+		
+		if (strpos($key, '?') === 0) {
+			
+			// Query string parameter.
+			$key = substr($key, 1);
+			
+			if (isset($_GET[$key])) {
+				return htmlspecialchars($_GET[$key]);
+			} 
+	
+		} else {
+			
+			if ($this->isIndependentSystemVar($key)) {
+				// Independent system variable.
+				return $this->getIndependentSystemVar($key);
+			} else {
+				// Page data and system variables depending on the current context.
+				return $this->Automad->Context->get()->get($key);
+			}
+			
+		}
+			
+	}
+
+
+	/**
 	 * 	Preprocess recursive statements to identify the top-level (outer) statements within a parsed string. 
 	 *
 	 *	@param $str
@@ -354,7 +469,7 @@ class Template {
 				$matches = array_merge(array('parameterStart' => '', 'parameterEnd' => '', 'varFunctions' => ''), $matches);
 						
 				// Get the value.
-				$value = $this->Automad->getValue($matches['varName']);
+				$value = $this->getValue($matches['varName']);
 				
 				// Modify $value by processing all matched string functions.
 				$value = $this->processStringFunctions($value, $matches['varFunctions']);
@@ -518,13 +633,13 @@ class Template {
 						$file = $files[0];
 						Debug::log($file, 'With file');
 						// Store current filename and its basename in the system variable buffer.
-						$this->Automad->setSystemVar(AM_KEY_FILE, $file);
-						$this->Automad->setSystemVar(AM_KEY_BASENAME, basename($file));
+						$this->setIndependentSystemVar(AM_KEY_FILE, $file);
+						$this->setIndependentSystemVar(AM_KEY_BASENAME, basename($file));
 						// Process snippet.
 						$html = $this->processMarkup($matches['withSnippet'], $directory);
 						// Reset system variables.
-						$this->Automad->setSystemVar(AM_KEY_FILE, NULL);
-						$this->Automad->setSystemVar(AM_KEY_BASENAME, NULL);
+						$this->setIndependentSystemVar(AM_KEY_FILE, NULL);
+						$this->setIndependentSystemVar(AM_KEY_BASENAME, NULL);
 						return $html;
 						
 					} 
@@ -553,7 +668,7 @@ class Template {
 					$i = 0;
 					
 					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-					$iBeforeLoop = $this->Automad->getSystemVar(AM_KEY_INDEX);
+					$iBeforeLoop = $this->getIndependentSystemVar(AM_KEY_INDEX);
 					
 					if (strtolower($matches['foreach']) == 'pagelist') {
 						
@@ -572,7 +687,7 @@ class Template {
 							// Set context to the current page in the loop.
 							$Context->set($Page);
 							// Set index for current page. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
 							// Parse snippet.
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 							$html .= $this->processMarkup($foreachSnippet, $directory);
@@ -591,13 +706,13 @@ class Template {
 						foreach ($this->Automad->getPagelist()->getTags() as $filter) {
 							Debug::log($filter, 'Processing snippet in loop for filter');
 							// Store current filter in the system variable buffer.
-							$this->Automad->setSystemVar(AM_KEY_FILTER, $filter);
+							$this->setIndependentSystemVar(AM_KEY_FILTER, $filter);
 							// Set index. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
 							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
 	
-						$this->Automad->setSystemVar(AM_KEY_FILTER, NULL);
+						$this->setIndependentSystemVar(AM_KEY_FILTER, NULL);
 							
 					} else if (strtolower($matches['foreach']) == 'tags') {
 
@@ -607,13 +722,13 @@ class Template {
 						foreach ($Context->get()->tags as $tag) {
 							Debug::log($tag, 'Processing snippet in loop for tag');							
 							// Store current tag in the system variable buffer.
-							$this->Automad->setSystemVar(AM_KEY_TAG, $tag);							
+							$this->setIndependentSystemVar(AM_KEY_TAG, $tag);							
 							// Set index. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
 							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
 						
-						$this->Automad->setSystemVar(AM_KEY_TAG, NULL);
+						$this->setIndependentSystemVar(AM_KEY_TAG, NULL);
 	
 					} else {
 						
@@ -631,20 +746,20 @@ class Template {
 						foreach ($files as $file) {
 							Debug::log($file, 'Processing snippet in loop for file');
 							// Store current filename and its basename in the system variable buffer.
-							$this->Automad->setSystemVar(AM_KEY_FILE, $file);
-							$this->Automad->setSystemVar(AM_KEY_BASENAME, basename($file));
+							$this->setIndependentSystemVar(AM_KEY_FILE, $file);
+							$this->setIndependentSystemVar(AM_KEY_BASENAME, basename($file));
 							// Set index. The index can be used as {[ :i ]}.
-							$this->Automad->setSystemVar(AM_KEY_INDEX, ++$i);
+							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
 							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
 						
-						$this->Automad->setSystemVar(AM_KEY_FILE, NULL);
-						$this->Automad->setSystemVar(AM_KEY_BASENAME, NULL);
+						$this->setIndependentSystemVar(AM_KEY_FILE, NULL);
+						$this->setIndependentSystemVar(AM_KEY_BASENAME, NULL);
 							
 					}
 					
 					// Restore index.
-					$this->Automad->setSystemVar(AM_KEY_INDEX, $iBeforeLoop);
+					$this->setIndependentSystemVar(AM_KEY_INDEX, $iBeforeLoop);
 					
 					// If the counter ($i) is 0 (false), process the "else" snippet.
 					if (!$i) {
