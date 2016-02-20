@@ -278,7 +278,7 @@ class Toolbox {
 		
 		$Selection = new Selection($this->collection);
 		$Selection->filterByParentUrl($this->Automad->Context->get()->parentUrl);
-		$Selection->sortPagesByBasename();
+		$Selection->sortPages();
 		$Selection->filterPrevAndNextToUrl($this->Automad->Context->get()->url);
 		
 		$pages = $Selection->getSelection();
@@ -309,7 +309,7 @@ class Toolbox {
 		
 		$Selection = new Selection($this->collection);
 		$Selection->filterByParentUrl($this->Automad->Context->get()->parentUrl);
-		$Selection->sortPagesByBasename();
+		$Selection->sortPages();
 		$Selection->filterPrevAndNextToUrl($this->Automad->Context->get()->url);
 		
 		$pages = $Selection->getSelection();
@@ -412,7 +412,7 @@ class Toolbox {
 	public function metaTitle($options = array()) {
 		
 		$defaults = 	array(
-					'title' => $this->Automad->getValue(AM_KEY_SITENAME) . ' / ' . $this->Automad->getValue(AM_KEY_TITLE)
+					'title' => $this->Automad->Context->get()->get(AM_KEY_SITENAME) . ' / ' . $this->Automad->Context->get()->get(AM_KEY_TITLE)
 				);
 		
 		// Remove false items.	
@@ -445,7 +445,7 @@ class Toolbox {
 				
 		$Selection = new Selection($this->collection);
 		$Selection->filterByParentUrl($options['parent']);
-		$Selection->sortPagesByBasename();
+		$Selection->sortPages();
 		
 		$pages = $Selection->getSelection();
 		
