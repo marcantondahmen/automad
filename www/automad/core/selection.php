@@ -382,66 +382,38 @@ class Selection {
 		
 	}
 	
-	  
-	/**
-	 *	Sorts the $this->selection based on the file system path's basename.
-	 *
-	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
-	 */ 
-	 
-	public function sortPagesByBasename($order = SORT_ASC) {
-		
-		$arrayToSortBy = array();
-		
-		foreach ($this->selection as $key => $Page) {
-			
-			$arrayToSortBy[$key] = basename($Page->path);
-			
-		}
-				
-		array_multisort($arrayToSortBy, $order, $this->selection);
-				
-	}
-
 	 
 	/**
-	 *	Sorts $this->selection based on any variable in the text files.
-	 *	If the $var gets passed empty, $this->sortPagesByBasename() will be used as fallback.
-	 *	If a variable doesn't exist for page, that page's value in $arrayToSortBy will be set to its basename.
-	 *	That allows for simply sorting a selection by original order from the HTML class by passing an invalid var like "-" or "orig" etc.
+	 *	Sorts $this->selection based on any page variable. If $var is not set, use the page basename as default.
 	 *
-	 *	@param string $var (any variable from a text file)
+	 *	@param string $var 
 	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
 	 */  
 	 
-	public function sortPages($var, $order = SORT_ASC) {
+	public function sortPages($var = false, $order = SORT_ASC) {
 		
-		if ($var) {
-			
-			// If $var is set, the selections is sorted by data[$var]
-			$arrayToSortBy = array();
-		
-			foreach ($this->selection as $key => $Page) {
-			
-				if (isset($Page->data[$var])) {
-					$arrayToSortBy[$key] = strtolower(String::stripTags($Page->data[$var]));
-				} else {
-					// If data[$var] doesn't exists, the page's path's basename will be used.
-					// That way it is possible to order by basename with simply passing a non-existing var (for example "orig" or something else).
-					$arrayToSortBy[$key] = basename($Page->path);
-				}
-			
-			}
-	
-			array_multisort($arrayToSortBy, $order, $this->selection);
-					
-		} else {
-			
-			// else the selection is sorted by the file system path's basename
-			$this->sortPagesByBasename($order);
-			
+		// If $var is not set use the basename as default.
+		if (empty($var)) {
+			$var = AM_KEY_BASENAME;
 		}
 		
+		$arrayToSortBy = array();
+	
+		foreach ($this->selection as $key => $Page) {
+			
+			$value = trim(strtolower(String::stripTags($Page->get($var))));
+			
+			// In case $value is an empty string, use the page basename instead.
+			if (strlen($value) === 0) {
+				$value = trim(strtolower(String::stripTags($Page->get(AM_KEY_BASENAME))));
+			}
+			
+			$arrayToSortBy[$key] = $value;
+			
+		}
+
+		array_multisort($arrayToSortBy, $order, $this->selection);
+					
 	} 
 	 
 	
