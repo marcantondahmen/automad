@@ -56,7 +56,7 @@ class Navbar {
 		$defaults = 	array(
 					'fluid' => true,
 					'fixedToTop' => false,
-					'brand' => $Automad->getValue(AM_KEY_SITENAME),
+					'brand' => $Automad->Context->get()->get(AM_KEY_SITENAME),
 					'logo' => false,
 					'logoWidth' => 100,
 					'logoHeight' => 100,
@@ -104,7 +104,7 @@ class Navbar {
 				
 				$Selection = new \Automad\Core\Selection($Automad->getCollection());
 				$Selection->filterByParentUrl($breadcrumb->url);
-				$Selection->sortPagesByBasename();
+				$Selection->sortPages();
 				$pages = $Selection->getSelection();
 			
 				if ($pages) {
