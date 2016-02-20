@@ -94,37 +94,6 @@ class Parse {
 	}
 
 
- 	/**
- 	 *	Extracts the tags string out of a given array and returns an array with these tags.
- 	 *
- 	 *	@param array $data
- 	 *	@return array $tags
- 	 */
-	
-	public static function extractTags($data) {
-		
-		$tags = array();
-		
-		foreach ($data as $key => $value) {
-		
-			if ($key == AM_KEY_TAGS) {
-	
-				// All tags are splitted into an array
-				$tags = explode(AM_PARSE_STR_SEPARATOR, $value);
-				// Trim & strip tags
-				$tags = array_map(function($tag) {
-						return trim(String::stripTags($tag)); 
-					}, $tags);
-				
-			}		
-			
-		}
-		
-		return $tags;
-		
-	}
-	
-
 	/**
 	 *	Parse a file declaration string where multiple glob patterns can be separated by a comma and return an array with the resolved file paths.
 	 *	If $stripBaseDir is true, the base directory will be stripped from the path and each path gets resolved to be relative to the Automad installation directory.
