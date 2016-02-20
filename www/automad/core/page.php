@@ -55,7 +55,7 @@ class Page {
 	
 	
 	/**
-	 * 	The $data array holds all the information stored as "key: value" in the text file.
+	 * 	The $data array holds all the information stored as "key: value" in the text file and some other system generated information (:path, :level, :template ...).
 	 *	
 	 *	The key can be everything alphanumeric as long as there is a matching var set in the template files.
 	 *	Out of all possible keys ther are two very special ones:
@@ -104,13 +104,6 @@ class Page {
 	
 	
 	/**
-	 *	The theme used to provide the template file.
-	 */
-	
-	public $theme;
-	
-	
-	/**
 	 * 	The template used to render the page (just the filename of the text file without the suffix).
 	 */
 	
@@ -123,7 +116,117 @@ class Page {
 	
 	public $hidden;
 	
-
+	
+	/**
+	 *	Set main properties.
+	 *
+	 *	@param array $data
+	 */
+	
+	public function __construct($data) {
+		
+		$this->data = $data;
+		$this->tags = $this->extractTags();
+		
+		// Set basic page properties to be accessible directly without using the get() method.
+		$this->url = $this->get(AM_KEY_URL);
+		$this->path = $this->get(AM_KEY_PATH);
+		$this->parentUrl = $this->get(AM_KEY_PARENT);
+		$this->template = $this->get(AM_KEY_TEMPLATE);
+		$this->level = $this->get(AM_KEY_LEVEL);
+		$this->hidden = $this->get(AM_KEY_HIDDEN);
+		
+	}
+	
+	
+ 	/**
+ 	 *	Extracts the tags string out of a given array and returns an array with these tags.
+ 	 *
+ 	 *	@return array $tags
+ 	 */
+	
+	private function extractTags() {
+		
+		$tags = array();
+		
+		if (isset($this->data[AM_KEY_TAGS])) {
+			
+			// All tags are splitted into an array
+			$tags = explode(AM_PARSE_STR_SEPARATOR, $this->data[AM_KEY_TAGS]);
+			// Trim & strip tags
+			$tags = array_map(function($tag) {
+					return trim(String::stripTags($tag)); 
+				}, $tags);
+			
+		}
+		
+		return $tags;
+		
+	}
+	
+	
+	/**
+	 *	Return requested page data. Note that not all data is stored in the data array. 
+	 *	Some data (:mtime, :basename ...) should only be generated when requested out of performance reasons.
+	 *
+	 *	@param string $key
+	 *	@return the requested value
+	 */
+	
+	public function get($key) {
+		
+		// Check whether the requested data is part of the data array or has to be generated.
+		if (array_key_exists($key, $this->data)) {
+			
+			// Return value from the data array.
+			return $this->data[$key];
+			
+		} else {
+			
+			// Generate system variable value or return false.
+			switch ($key) {
+				
+				case AM_KEY_CURRENT_PAGE:
+					return $this->isCurrent();
+				case AM_KEY_CURRENT_PATH:
+					return $this->isInCurrentPath();
+				case AM_KEY_BASENAME:
+					return basename($this->path);
+				case AM_KEY_MTIME:
+					return $this->getMtime();
+				default:
+					return false;
+					
+			}
+			
+		}
+			
+	}
+	
+	
+	/**
+	 *	Get the modification time/date of the page. 
+	 *	To determine to correct mtime, the page directory mtime (to check if any files got added) and the page data file mtime will be checked and the highest value will be returned.
+	 * 
+	 *	@return the max mtime (directory and data file)
+	 */
+	
+	public function getMtime() {
+		
+		$path = AM_BASE_DIR . AM_DIR_PAGES . $this->path;
+		$mtimes = array();
+		
+		foreach (array($path, $path . $this->template . '.' . AM_FILE_EXT_DATA) as $item) {
+			if (file_exists($item)) {
+				$mtimes[] = date ('Y-m-d H:i:s', filemtime($item));
+			}
+		}
+		
+		return max($mtimes);
+		
+	}
+	
+	
 	/**
 	 * 	Return the template of the page.
 	 *
@@ -132,7 +235,7 @@ class Page {
 	
 	public function getTemplate() {
 		
-		$templatePath = AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->theme . '/' . $this->template . '.php';
+		$templatePath = AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
 		
 		if (file_exists($templatePath)) {
 			return $templatePath;
