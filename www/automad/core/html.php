@@ -151,10 +151,10 @@ class Html {
 		} 
 				
 		if (!$text) {
-			$text = String::stripTags($Page->data[AM_KEY_TITLE]);
+			$text = String::stripTags($Page->get(AM_KEY_TITLE));
 			$title = '';
 		} else {
-			$title = ' title="' . String::stripTags($Page->data[AM_KEY_TITLE]) . '"';
+			$title = ' title="' . String::stripTags($Page->get(AM_KEY_TITLE)) . '"';
 		}
 				
 		return '<a' . $classes . $title . ' href="' . $Page->url . '">' . $text . '</a>';
@@ -178,7 +178,7 @@ class Html {
 		
 		foreach ($pages as $Page) {
 			
-			$html .= '<a href="' . $Page->url . '">' . String::stripTags($Page->data[AM_KEY_TITLE]) . '</a>';
+			$html .= '<a href="' . $Page->url . '">' . String::stripTags($Page->get(AM_KEY_TITLE)) . '</a>';
 			
 			// Add separator for all but the last page.	
 			if ($i++ < count($pages)) {
@@ -428,9 +428,7 @@ class Html {
 				if (is_array($style)) {
 						
 					foreach ($style as $property => $propertyVariable) {
-						if (isset($Page->data[$propertyVariable])) {
-							$styleAttribute .= $property . ': ' . $Page->data[$propertyVariable] . '; ';
-						}
+						$styleAttribute .= $property . ': ' . $Page->get($propertyVariable) . '; ';
 					}
 					
 					if ($styleAttribute) {	
@@ -458,10 +456,10 @@ class Html {
 				// Variables
 				foreach ($vars as $var) {
 				
-					if (isset($Page->data[$var])) {
+					if ($Page->get($var)) {
 						
 						// Shorten $text.
-						$text = String::shorten($Page->data[$var], $maxChars, ' ...');
+						$text = String::shorten($Page->get($var), $maxChars, ' ...');
 					
 						// Variable key is used to define the html class.
 						// That makes styling with CSS very customizable.
@@ -616,7 +614,7 @@ class Html {
 		
 		$Selection = new Selection($collection);
 		$Selection->filterByParentUrl($parentUrl);
-		$Selection->sortPagesByBasename();
+		$Selection->sortPages();
 		
 		$pages = $Selection->getSelection();
 		
