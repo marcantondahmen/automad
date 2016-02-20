@@ -308,11 +308,11 @@ class Template {
 					
 				case AM_KEY_FILELIST_COUNT:
 					// The filelist count represents the number of files within the last defined filelist. 
-					return count($this->getFilelist()->getFiles());
+					return count($this->Automad->getFilelist()->getFiles());
 					
 				case AM_KEY_PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist. 
-					return count($this->getPagelist()->getPages());
+					return count($this->Automad->getPagelist()->getPages());
 					
 				case AM_KEY_CAPTION:
 					// Get the caption for the currently used ":file".
