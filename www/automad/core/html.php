@@ -463,7 +463,7 @@ class Html {
 					
 						// Variable key is used to define the html class.
 						// That makes styling with CSS very customizable.
-						$html .= '<div class="' . $var . '">' . $text . '</div>';
+						$html .= '<div class="' . String::sanitize($var, true) . '">' . $text . '</div>';
 						
 					}
 				
