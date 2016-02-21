@@ -170,7 +170,7 @@ class String {
 			$str = substr($str, 0, $pos) . $ellipsis;
 		}
 		
-		return $str;
+		return trim($str);
 		
 	}
 	
