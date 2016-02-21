@@ -180,7 +180,9 @@ class Parse {
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
 			$str = str_replace("'", '"', $str);
-			$str = preg_replace('/(?<=[{,])\s*(' . Regex::$charClassTextFileVariables . '+)\s*(?=:)\s*/is', '"\1"', $str);
+			$str = preg_replace('/(?<=[{,])\s*([\w\-]+)\s*(?=:)/', '"\1"', $str);
+			
+			$debug['Clean'] = $str;
 				
 			// Decode JSON.
 			$options = json_decode($str, true);
