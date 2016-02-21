@@ -180,7 +180,7 @@ class Parse {
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
 			$str = str_replace("'", '"', $str);
-			$str = preg_replace('/([{,]+)\s*([^":\s]+)\s*:/i', '\1"\2":', $str);
+			$str = preg_replace('/(?<=[{,])\s*(' . Regex::$charClassTextFileVariables . '+)\s*(?=:)\s*/is', '"\1"', $str);
 				
 			// Decode JSON.
 			$options = json_decode($str, true);
@@ -341,31 +341,6 @@ class Parse {
 	}
 
 
-	/**
-	 * 	Parse Site Data to replace defaults.
-	 *
-	 *	Get all sitewide settings (like site name, the theme etc.) from the main settings file 
-	 *	in the root of the /shared directory.
-	 *
-	 *	@return Array with the site's settings
-	 */
-	
-	public static function siteData() {
-		
-		// Define default settings.
-		// Use the server name as default site name and the first found theme folder as default theme.	
-		$themes = glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR);	
-		$defaults = 	array(	
-					AM_KEY_SITENAME => $_SERVER['SERVER_NAME'],
-					AM_KEY_THEME => basename(reset($themes))  
-				);
-		
-		// Merge defaults with settings from file.
-		return array_merge($defaults, self::textFile(AM_FILE_SITE_SETTINGS));
-		
-	}
-
-	
 	/**
 	 *	Loads and parses a text file.
 	 *
