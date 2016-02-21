@@ -63,6 +63,15 @@ class Automad {
 	
 	
 	/**
+	 *	Automad's Shared object.
+	 *
+	 *	The Shared object is passed also to all Page objects to allow for access of global data from within a page without needing access to the full Automad object.
+	 */
+	
+	public $Shared;
+	
+	
+	/**
 	 * 	Automad's Filelist object
 	 *
 	 *	The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter. 
@@ -79,13 +88,6 @@ class Automad {
 	
 	private $Pagelist = false;
 		
-	
-	/**
-	 * 	Array holding the site's settings.
-	 */
-	
-	private $siteData = array();
-	
 	
 	/**
 	 * 	Array holding all the site's pages and the related data. 
@@ -192,8 +194,8 @@ class Automad {
 			// Set URL.
 			$url = $this->makeUrl($parentUrl, basename($path));
 			
-			// Merge site data with content from the txt files. The site data get always stored in the Page object and serve as defaults which can be overridden on per page basis.
-			$data = array_merge($this->siteData, Parse::textFile($file));
+			// Get content from text file.
+			$data = Parse::textFile($file);
 			
 			// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 			// In case the title is missig for the home page, use the site name instead.
@@ -203,7 +205,7 @@ class Automad {
 					$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
 				} else {
 					// If page is home page...
-					$data[AM_KEY_TITLE] = $this->getSiteData(AM_KEY_SITENAME);
+					$data[AM_KEY_TITLE] = $this->Shared->get(AM_KEY_SITENAME);
 				}
 			} 
 			
@@ -230,7 +232,7 @@ class Automad {
 			// The relative URL ($url) of the page becomes the key (in $collection). 
 			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
 			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url and $data instead).
-			$this->collection[$url] = new Page($data);
+			$this->collection[$url] = new Page($data, $this->Shared);
 						
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
@@ -257,10 +259,10 @@ class Automad {
 	
 	public function __construct() {
 		
-		$this->siteData = Parse::siteData();
+		$this->Shared = new Shared();
 		$this->collectPages();
 		
-		Debug::log(array('Site Data' => $this->siteData, 'Collection' => $this->collection), 'New instance created');
+		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 		
 		// Set the context initially to the requested page.
 		$this->Context = new Context($this->getRequestedPage());
@@ -276,7 +278,7 @@ class Automad {
 	
 	public function __sleep() {
 		
-		$itemsToCache = array('collection', 'siteData');
+		$itemsToCache = array('collection', 'Shared');
 		Debug::log($itemsToCache, 'Preparing Automad object for serialization! Caching the following items');
 		return $itemsToCache;
 		
@@ -291,22 +293,6 @@ class Automad {
 		Debug::log(get_object_vars($this), 'Automad object got unserialized');
 		$this->Context = new Context($this->getRequestedPage());
 		
-	}
-	
-	
-	/**
-	 *	Return a key from $this->siteData (sitename, theme, etc.).
-	 *
-	 *	@param string $key
-	 *	@return string $this->siteData[$key]
-	 */
-	
-	public function getSiteData($key) {
-		
-		if (array_key_exists($key, $this->siteData)) {
-			return $this->siteData[$key];
-		}
-			
 	}
 	
 	
@@ -415,13 +401,12 @@ class Automad {
 	
 	private function createPage($template, $title) {
 		
-		$data = $this->siteData;
 		$data[AM_KEY_TITLE] = $title;
 		$data[AM_KEY_TEMPLATE] = $template;
 		$data[AM_KEY_LEVEL] = 0;
 		$data[AM_KEY_PARENT] = '';
 		
-		return new Page($data);
+		return new Page($data, $this->Shared);
 		
 	}
 	
