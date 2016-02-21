@@ -69,6 +69,13 @@ class Page {
 	
 	
 	/**
+	 *	The Shared data object.
+	 */
+	
+	public $Shared;
+	
+	
+	/**
 	 * 	The $tags get also extracted from the text file (see $data).
 	 */
 	
@@ -121,11 +128,13 @@ class Page {
 	 *	Set main properties.
 	 *
 	 *	@param array $data
+	 *	@param object $Shared
 	 */
 	
-	public function __construct($data) {
+	public function __construct($data, $Shared) {
 		
 		$this->data = $data;
+		$this->Shared = $Shared;
 		$this->tags = $this->extractTags();
 		
 		// Set basic page properties to be accessible directly without using the get() method.
@@ -166,7 +175,11 @@ class Page {
 	
 	
 	/**
-	 *	Return requested page data. Note that not all data is stored in the data array. 
+	 *	Return requested data - from the page data array, from the shared data array or as generated system variable. 
+	 *	
+	 *	The local page data array gets used as first and the shared data array gets used as second source for the requested variable. 
+	 *	That way it is possible to override a shared data value on a per page basis.
+	 *	Note that not all data is stored in the data arrays. 
 	 *	Some data (:mtime, :basename ...) should only be generated when requested out of performance reasons.
 	 *
 	 *	@param string $key
@@ -180,6 +193,11 @@ class Page {
 			
 			// Return value from the data array.
 			return $this->data[$key];
+			
+		} else if (array_key_exists($key, $this->Shared->data)) {	
+			
+			// Return value from the Shared data array.
+			return $this->Shared->data[$key];
 			
 		} else {
 			
