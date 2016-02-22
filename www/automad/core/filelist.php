@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Filelist object represents a set of files based on a file pattern.
+ *	The Filelist object represents a set of files based on a file pattern depending on the current context.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
  *	@copyright Copyright (c) 2015 Marc Anton Dahmen <hello@marcdahmen.de>
@@ -54,28 +54,22 @@ class Filelist {
 	
 	
 	/**
-	 * 	The Context.
+	 *	The Context.
 	 */
 	
 	private $Context;
 	
-	
+				
 	/**
-	 * 	The default options.
+	 *	The options array.
 	 */
 	
-	private $defaults =	array(
+	private $options = 	array(
 					'glob' => '*.jpg, *.png, *.gif',
 					'sortOrder' => 'asc'
 				);
 	
-	/**
-	 *	The set of matched files. 
-	 */
-	
-	private $files = array();
-	
-	
+
 	/**
 	 *	The constructor.
 	 *
@@ -85,50 +79,53 @@ class Filelist {
 	public function __construct($Context) {
 		
 		$this->Context = $Context;
-		$this->config($this->defaults);
 		
 	}
 	
 	
 	/**
-	 * 	Configure the files array.
+	 *	Configure the filelist.
 	 *	
 	 *	@param array $options
 	 */
 	
 	public function config($options) {
 		
-		// Merge defaults and options.
-		$options = array_merge($this->defaults, $options);
-		
-		// Find files.
-		$files = Parse::fileDeclaration($options['glob'], $this->Context->get(), true);
-
-		// Sorting files.
-		if ($options['sortOrder'] == 'asc') {
-			sort($files);
-		} 
-		
-		if ($options['sortOrder'] == 'desc') {
-			rsort($files);
-		} 
-				
-		Debug::log($files);
-		
-		$this->files = $files;
+		$this->options = array_merge($this->options, $options);
 		
 	}
 	
 	
 	/**
-	 * 	Return the files array.
+	 *	Return the files array.    
+	 *    
+	 *	Note that the returned filelist depends on the current context.    
+	 *	Changing the context will change the filelist as long as the glob pattern is relative.
 	 *
 	 *	@return The array of matched files.
 	 */
 	
 	public function getFiles() {
 		
-		return $this->files;
+		// Find files.
+		$files = Parse::fileDeclaration($this->options['glob'], $this->Context->get(), true);
+
+		// Sort files.	
+		switch ($this->options['sortOrder']) {
+			
+			case 'asc':
+				sort($files);
+				break;
+				
+			case 'desc':
+				rsort($files);
+				break;
+			
+		}
+				
+		Debug::log($files);
+		
+		return $files;
 		
 	}
 	
