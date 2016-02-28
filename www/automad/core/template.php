@@ -286,9 +286,8 @@ class Template {
 
 
 	/**
-	 *	Return the requeste system variable.
-	 *	System variables are all variables created by Automad at runtime and are related things like the context, the filelist and the pagelist objects
-	 *	or they are generated during loop constructs (current items like :file, :tag, etc. or the index :i).
+	 *	Return the requested independent system variable.
+	 *	Independent system variables are all variables created by Automad at runtime and independent from the Context and Shared objects. 
 	 *
 	 *	@param string $var
 	 *	@return the value of $var
@@ -441,14 +440,10 @@ class Template {
 	/**
 	 *	Process content variables and optional string functions. Like {[ var | function1 ( parameters ) | function2 | ... ]}	
 	 *
-	 *	Find and replace all variables within $str with values from either the context page data array or, if not defined there, from the site data array, 
-	 *	from the system variables array (only those starting with ":") or from the $_GET array (only those starting with a "?").    
-	 *
-	 *	When matching {[ var ]} the parser will check first the page data and then the site data.     
-	 *	When matching {[ :var ]}, the parser will only check the system variables array.    
-	 *	When matching {[ ?var ]}, the parser will only check the $_GET array.   
+	 *	Find and replace all variables within $str with values from either the context page data array or, if not defined there, from the shared data array, 
+	 *	or from the $_GET array (only those starting with a "?").      
 	 *   
-	 *	By first checking the page data, basically all site data variables can be easily overridden by a page. 
+	 *	By first checking the page data (handled by the Page class), basically all shared data variables can be easily overridden by a page. 
 	 *	Optionally all values can be parsed as "JSON safe", by escaping all quotes and wrapping variable is quotes when needed.
 	 *	In case a variable is used as an option value for a method and is not part of a string, that variable doesn't need to be 
 	 *	wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
@@ -461,7 +456,7 @@ class Template {
 	private function processContent($str, $isJsonString = false) {
 		
 		// Build regex. Also match possible JSON elements like ":", "," and "}". They will be added to the output when returning the value if existing.
-		$regexContent = '/(?P<parameterStart>:\s*)?' . Regex::contentVariable('var') . '(?P<parameterEnd>\s*(,|\}))?/s';
+		$regexContent = '/(?P<parameterStart>:\s*)?' . Regex::variable('var') . '(?P<parameterEnd>\s*(,|\}))?/s';
 				
 		return 	preg_replace_callback($regexContent, function($matches) use ($isJsonString) {
 				
@@ -773,77 +768,115 @@ class Template {
 				
 				// Condition
 				if (!empty($matches['if'])) {
-							
+					
 					$ifSnippet = $matches['ifSnippet'];
 					$ifElseSnippet = '';
 				
 					if (!empty($matches['ifElseSnippet'])) {
 						$ifElseSnippet = $matches['ifElseSnippet'];
 					} 
-				
-					if (!empty($matches['ifBoolean'])) {
-						
-						// Boolean condition.
-						
-						// Get the value of the given variable.
-						$ifVar = $this->processContent($matches['ifVar']);
-						
-						// If EMPTY NOT == NOT EMPTY Value.
-						if (empty($matches['ifNot']) == !empty($ifVar)) {
-							Debug::log('TRUE', 'Evaluating boolean condition: if ' . $matches['ifBoolean']);
-							return $this->processMarkup($ifSnippet, $directory);
+					
+					// Match each part of a logically combined expression separately.
+					preg_match_all('/(?P<operator>^|' . Regex::$logicalOperator . '\s+)' . Regex::expression('expression') . '/is', trim($matches['if']), $parts, PREG_SET_ORDER);
+					
+					// Process each part and merge the partial result with the final result.
+					foreach ($parts as $part) {
+							
+						// Separate comparisons from boolean expressions and get a partial result.
+						if (!empty($part['expressionOperator'])) {
+							
+							// Comparison.
+							
+							// Merge default keys with $part to make sure each key exists in $part without testing.
+							$part = 	array_merge(
+										array(
+											'expressionLeftDoubleQuoted' => '', 
+											'expressionLeftSingleQuoted' => '',
+											'expressionLeftNumber' => '',
+											'expressionLeftVar' => '',
+											'expressionRightDoubleQuoted' => '',
+											'expressionRightSingleQuoted' => '',
+											'expressionRightNumber' => '',
+											'expressionRightVar' => ''
+										),
+										$part
+									);
+							
+							// Parse both sides of the expression. All possible matches for each side can get merged in to one string, since there will be only one item for left/right not empty.
+							$left = 	$this->processContent(
+										stripslashes($part['expressionLeftDoubleQuoted']) .
+										stripslashes($part['expressionLeftSingleQuoted']) .
+										$part['expressionLeftNumber'] .
+										$part['expressionLeftVar']
+									);
+							$right = 	$this->processContent(
+										stripslashes($part['expressionRightDoubleQuoted']) .
+										stripslashes($part['expressionRightSingleQuoted']) .
+										$part['expressionRightNumber'] .
+										$part['expressionRightVar']
+									);
+								
+							// Build and evaluate the expression.
+							switch ($part['expressionOperator']) {
+								case '=':
+									$partialResult = ($left == $right);
+									break;
+								case '!=':
+									$partialResult = ($left != $right);
+									break;
+								case '>':
+									$partialResult = ($left > $right);
+									break;
+								case '>=':
+									$partialResult = ($left >= $right);
+									break;
+								case '<':
+									$partialResult = ($left < $right);
+									break;
+								case '<=':
+									$partialResult = ($left <= $right);
+									break;
+							}
+							
 						} else {
-							Debug::log('FALSE', 'Evaluating boolean condition: if ' . $matches['ifBoolean']);
-							return $this->processMarkup($ifElseSnippet, $directory);
+							
+							// Boolean.
+									
+							// Get the value of the given variable.
+							$expressionVar = $this->processContent($part['expressionVar']);
+							
+							// If EMPTY NOT == NOT EMPTY Value.
+							$partialResult = (empty($part['expressionNot']) == !empty($expressionVar));
+							
 						}
+						
+						// Combine results based on logical operator - note that for the first part, the operator will be empty of course.
+						switch (strtolower(trim($part['operator']))) {
+							case '':
+								$result = $partialResult;
+								break;
+							case 'and':
+								$result = ($result && $partialResult);
+								break;
+							case 'or':
+								$result = ($result || $partialResult);
+								break;
+						}
+					
+					}
+					
+					// Process snippet depending on $result.			
+					if ($result) {
+						
+						Debug::log('TRUE', 'Evaluating condition: if ' . $matches['if']);
+						return $this->processMarkup($ifSnippet, $directory);
 						
 					} else {
 						
-						// Comparison.
+						Debug::log('FALSE', 'Evaluating condition: if ' . $matches['if']);
+						return $this->processMarkup($ifElseSnippet, $directory);
 						
-						// Parse both sides of the condition. All possible matches for each side can get merged in to one string, since there will be only one item for left/right not empty.
-						$left = $this->processContent(stripslashes($matches['ifLeftQuotedString']) . $matches['ifLeftVar'] . $matches['ifLeftNumber']);
-						$right = $this->processContent(stripslashes($matches['ifRightQuotedString']) . $matches['ifRightVar'] . $matches['ifRightNumber']);
-					
-						// Build the expression.
-						switch ($matches['ifOperator']) {
-							
-							case '=':
-								$expression = ($left == $right);
-								break;
-							
-							case '!=':
-								$expression = ($left != $right);
-								break;
-								
-							case '>':
-								$expression = ($left > $right);
-								break;
-								
-							case '>=':
-								$expression = ($left >= $right);
-								break;
-								
-							case '<':
-								$expression = ($left < $right);
-								break;
-								
-							case '<=':
-								$expression = ($left <= $right);
-								break;
-							
-						}
-						
-						// Evaluate the expression.
-						if ($expression) {
-							Debug::log('TRUE', 'Evaluating condition: if ' . $matches['ifComparison']);
-							return $this->processMarkup($ifSnippet, $directory);
-						} else {
-							Debug::log('FALSE', 'Evaluating condition: if ' . $matches['ifComparison']);
-							return $this->processMarkup($ifElseSnippet, $directory);
-						}
-							
-					}				
+					}
 						
 				}
 				
