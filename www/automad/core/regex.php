@@ -67,12 +67,61 @@ class Regex {
 		
 
 	/**
+	 *	Logical operand "and" or "or".
+	 */
+
+	public static $logicalOperator = '(?:and|or)';
+
+	
+	/**
+	 *	Number (integer and float).
+	 */
+
+	public static $number = '\d+(?:\.\d+)?';
+
+	/**
 	 * 	The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
 	 */
 	
 	public static $outerStatementMarker = '#';
 
 
+	/**
+	 *	Return the regex pattern for a single expression.   
+	 *	    
+	 *	Valid expressions are:    
+	 *	
+	 *	-	{[ var ]} >= 5
+	 *	-	{[ var ]} != "Text ..."
+	 *	-	{[ var ]} = 'Text'
+	 *	-	not {[ var ]}
+	 *	-	!{[ var ]}
+	 *	
+	 *	@param string $namedReferencePrefix
+	 *	@return the regex
+	 */
+	
+	public static function expression($namedReferencePrefix = false) {
+		
+		if ($namedReferencePrefix) {
+			$left = $namedReferencePrefix . 'Left';
+			$operator = '?P<' . $namedReferencePrefix . 'Operator>';
+			$right = $namedReferencePrefix . 'Right';
+			$not = '?P<' . $namedReferencePrefix . 'Not>';
+			$var = '?P<' . $namedReferencePrefix . 'Var>';
+		} else {
+			$left = false;
+			$operator = '?:';
+			$right = false;
+			$not = '?:';
+			$var = '?:';
+		}
+		
+		return '(?:' . Regex::operand($left) . '\s*(' . $operator . '!?=|>=?|<=?)\s*' . Regex::operand($right) . '|(' . $not . '!|not\s+)?(' . $var . Regex::variable() . '))';
+		
+	}
+
+	
 	/**
 	 *	Return the regex to match any kind of Automad markup such as variables, toolbox methods, includes, extensions, snippets, loops and conditions.
 	 *
@@ -81,7 +130,7 @@ class Regex {
 	
 	public static function markup() {
 		
-		$var = Regex::contentVariable();	
+		$var = Regex::variable();	
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 		
@@ -119,20 +168,7 @@ class Regex {
 						$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['condition'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-							'if\s+(?P<if>' .  
-								'(?P<ifBoolean>' .
-									'(?P<ifNot>!)?' . '(?<ifVar>' . $var . ')' .
-								')|' . 	
-								'(?P<ifComparison>' . 
-									'(?P<ifLeft>' . 
-										'(?P<ifLeftQuote>[\'"])(?P<ifLeftQuotedString>.*?[^\\\\])?\k<ifLeftQuote>' . '|(?<ifLeftVar>' . $var . ')|(?P<ifLeftNumber>[\d\.]+)' . 
-									')' .	
-									'\s*(?P<ifOperator>!?=|>=?|<=?)\s*' . 		
-									'(?P<ifRight>' . 
-										'(?P<ifRightQuote>[\'"])(?P<ifRightQuotedString>.*?[^\\\\])?\k<ifRightQuote>' . '|(?<ifRightVar>' . $var . ')|(?P<ifRightNumber>[\d\.]+)' .
-									')' . 
-								')' .				
-							')' . 	
+							'if\s+(?P<if>' . Regex::expression() . '(\s+' . Regex::$logicalOperator . '\s+' . Regex::expression() . ')*)' . 	
 							'\s*' . $statementClose . 
 							'(?P<ifSnippet>.*?)' . 
 							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
@@ -141,6 +177,41 @@ class Regex {
 		// (variable | statements)		
 		return '((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')'; 
 			
+	}
+
+
+	/**
+	 *	Return the regex to match one operand of an expression.   
+	 *	     
+	 *	Valid operands are:
+	 *
+	 *	-	{[ var ]}
+	 *	-	"Text ..."
+	 *	-	'Text ...'
+	 *	-	"Text and {[ var ]}"
+	 *	-	5
+	 *	-	1.5
+	 *	
+	 *	@param string $namedReferencePrefix
+	 *	@return the regex
+	 */
+
+	public static function operand($namedReferencePrefix = false) {
+		
+		if ($namedReferencePrefix) { 
+			$doubleQuoted = '?P<' . $namedReferencePrefix . 'DoubleQuoted>';
+			$singleQuoted = '?P<' . $namedReferencePrefix . 'SingleQuoted>';
+			$num = '?P<' . $namedReferencePrefix . 'Number>';
+			$var = '?P<' . $namedReferencePrefix . 'Var>';
+		} else {
+			$doubleQuoted = '?:';
+			$singleQuoted = '?:';
+			$num = '?:';
+			$var = '?:';
+		}
+		
+		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . Regex::$number . ')|(' . $var . Regex::variable() . '))';
+		
 	}
 
 
@@ -158,8 +229,8 @@ class Regex {
 			$name = 	'?P<' . $namedReferencePrefix . 'Name>';
 			$parameters =	'?P<' . $namedReferencePrefix . 'Parameters>';
 		} else {
-			$name = '';
-			$parameters = '';
+			$name = '?:';
+			$parameters = '?:';
 		}
 		
 		// Parameter pattern. Quoted strings (double or single quotes are allowed) or boolean/number values.
@@ -169,7 +240,7 @@ class Regex {
 			// Function name.
 			'\s*(' . $name . '[\w\-]+)\s*' .
 			// Parameters. 
-			'(\(' . 
+			'(?:\(' . 
 				'(' . $parameters . $regexParameter . '(?:,' . $regexParameter . ')*?)' . 
 			'\)\s*)?';
 			
@@ -184,17 +255,17 @@ class Regex {
 	 *	@return The regex to match variables.
 	 */
 	
-	public static function contentVariable($namedReferencePrefix = false) {
+	public static function variable($namedReferencePrefix = false) {
 		
 		if ($namedReferencePrefix) {
 			$name = 	'?P<' . $namedReferencePrefix . 'Name>';
 			$functions =	'?P<' . $namedReferencePrefix . 'Functions>';
 		} else {
-			$name = '';
-			$functions = '';
+			$name = '?:';
+			$functions = '?:';
 		}
 		
-		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . Regex::$charClassAllVariables . '+)\s*' . '(' . $functions . '(' . Regex::stringFunction() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
+		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . Regex::$charClassAllVariables . '+)\s*' . '(' . $functions . '(?:' . Regex::stringFunction() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
 		
 	}
 	
