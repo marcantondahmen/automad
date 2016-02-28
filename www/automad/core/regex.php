@@ -135,9 +135,9 @@ class Regex {
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 		
 		// The subpatterns don't include the wrapping delimiter: "{@ subpattern @}".
-		$statementSubpatterns['include'] = '(?P<file>[\w\/\-\.]+\.php)';
+		$statementSubpatterns['include'] = 	'(?P<file>[\w\/\-\.]+\.php)';
 		
-		$statementSubpatterns['call'] = '(?P<call>[\w\-]+)\s*(?P<options>\{.*?\})?';
+		$statementSubpatterns['call'] = 	'(?P<call>[\w\-]+)\s*(?P<options>\{.*?\})?';
 		
 		$statementSubpatterns['snippet'] = 	Regex::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
 							'snippet\s+(?P<snippet>[\w\-]+)' .
@@ -145,27 +145,33 @@ class Regex {
 							'(?P<snippetSnippet>.*?)' . 
 							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
-		$statementSubpatterns['with'] = Regex::$outerStatementMarker . '\s*' . // Note the additional preparsed marker!
-						'with\s+(?P<with>' .
-							'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
-						')' . 
-						'\s*' . $statementClose . 
-						'(?P<withSnippet>.*?)' . 	
-						'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
-						$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+		$statementSubpatterns['with'] = 	Regex::$outerStatementMarker . '\s*' . // Note the additional preparsed marker!
+							'with\s+(?P<with>' .
+								'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
+							')' . 
+							'\s*' . $statementClose . 
+							'(?P<withSnippet>.*?)' . 	
+							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
+							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
-		$statementSubpatterns['loop'] = Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-						'foreach\s+in\s+(?P<foreach>' . 
-							'pagelist|' . 
-							'filters|' . 
-							'tags|' . 
-							'filelist|' .
-							'"[^"]*"|' . "'[^']*'|" . $var . 		
-						')' . 
-						'\s*' . $statementClose . 
-						'(?P<foreachSnippet>.*?)' . 
-						'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
-						$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+		$statementSubpatterns['for'] =	Regex::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
+							'for\s+(?P<forStart>' . Regex::variable() . '|' . Regex::$number . ')\s+to\s+(?P<forEnd>' . Regex::variable() . '|' . Regex::$number . ')' . 
+							'\s*' . $statementClose .
+							'(?P<forSnippet>.*?)' .
+							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+		
+		$statementSubpatterns['foreach'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
+							'foreach\s+in\s+(?P<foreach>' . 
+								'pagelist|' . 
+								'filters|' . 
+								'tags|' . 
+								'filelist|' .
+								'"[^"]*"|' . "'[^']*'|" . $var . 		
+							')' . 
+							'\s*' . $statementClose . 
+							'(?P<foreachSnippet>.*?)' . 
+							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
+							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['condition'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
 							'if\s+(?P<if>' . Regex::expression() . '(\s+' . Regex::$logicalOperator . '\s+' . Regex::expression() . ')*)' . 	
