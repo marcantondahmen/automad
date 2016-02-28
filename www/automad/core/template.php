@@ -403,7 +403,7 @@ class Template {
 		
 		$depth = 0;
 		$regex = 	'/(' . 
-				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|foreach|with|snippet).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
+				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
 				'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
 				')/is';
@@ -646,6 +646,34 @@ class Template {
 						return $this->processMarkup($matches['withElseSnippet'], $directory);
 					}
 	
+				}
+				
+				// For loop
+				// To test whether the matched statement is a for loop, $matches['forSnippet'] has to be checked, 
+				// because both other matches (forStart and forEnd) could be set to 0 (!empty() = false)!
+				if (!empty($matches['forSnippet'])) {
+					
+					$start = intval($this->processContent($matches['forStart']));
+					$end = intval($this->processContent($matches['forEnd']));
+					$html = '';
+					
+					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
+					$iBeforeLoop = $this->getIndependentSystemVar(AM_KEY_INDEX);
+					
+					// The loop.
+					for ($i = $start; $i <= $end; $i++) {
+						// Set index variable. The index can be used as {[ :i ]}.
+						$this->setIndependentSystemVar(AM_KEY_INDEX, $i);
+						// Parse snippet.
+						Debug::log($i, 'Processing snippet in loop for index');
+						$html .= $this->processMarkup($matches['forSnippet'], $directory);
+					}
+					
+					// Restore index.
+					$this->setIndependentSystemVar(AM_KEY_INDEX, $iBeforeLoop);
+					
+					return $html;
+					
 				}
 				
 				// Foreach loop
