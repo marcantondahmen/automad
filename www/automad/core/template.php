@@ -897,16 +897,20 @@ class Template {
 
 	private function processStringFunctions($value, $functionString) {
 		
-		preg_replace_callback('/'. Regex::stringFunction('function') . '/s', function($matches) use (&$value) {
+		// Match functions.
+		preg_match_all('/' . Regex::stringFunction('function') . '/s', $functionString, $matches, PREG_SET_ORDER);
+		
+		// Process functions.
+		foreach ($matches as $match) {
 			
-			$function = $matches['functionName'];
+			$function = $match['functionName'];
 			$parameters = array();
 			
 			// Prepare function parameters.
-			if (isset($matches['functionParameters'])) {
+			if (isset($match['functionParameters'])) {
 				
 				// Relpace single quotes when not escaped with double quotes.
-				$csv = preg_replace('/(?<!\\\\)(\')/', '"', $matches['functionParameters']);
+				$csv = preg_replace('/(?<!\\\\)(\')/', '"', $match['functionParameters']);
 				
 				// Create $parameters array.
 				$parameters = str_getcsv($csv, ',', '"');
@@ -941,8 +945,8 @@ class Template {
 				Debug::log($value, 'Shorten content to max ' . $function . ' characters');
 				$value = String::shorten($value, $function);
 			}
-					
-		}, $functionString); 
+				
+		}
 			
 		return $value;
 		
