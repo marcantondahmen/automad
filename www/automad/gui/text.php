@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,10 +66,10 @@ class Text {
 	
 	public static function parseModules() {
 		
-		Text::$modules = \Automad\Core\Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
+		Text::$modules = Core\Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
 		
 		array_walk(Text::$modules, function(&$item) {
-			$item = \Automad\Core\String::markdown($item, true);
+			$item = Core\String::markdown($item, true);
 		});
 			
 	}
