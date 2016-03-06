@@ -45,28 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The GUI Login Page. As part of the GUI, this file is only to be included via the GUI class.
  */
 
-
-if ($_POST) {
-	
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$accounts = $this->accountsGetArray();
-	
-	if (isset($accounts[$username]) && $this->passwordVerified($password, $accounts[$username])) {
-		
-		session_regenerate_id(true);
-		$_SESSION['username'] = $username;
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		die;
-		
-	} else {
-		
-		$error = Text::get('error_login');
-		
-	}
-		
-}
-
+$error = User::login();
 
 $this->guiTitle = $this->guiTitle . ' / ' . Text::get('login_title');
 $this->element('header');
