@@ -184,16 +184,18 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			<?php } ?> 
 			<hr>
 			<!-- Vars in template -->
-			<?php echo $this->Html->textAreas(Text::get('page_vars_in_template'), $this->Keys->inCurrentTemplate(), $data); ?>
+			<?php echo $this->Html->formFields(Text::get('page_vars_in_template'), $this->Keys->inCurrentTemplate(), $data); ?>
 			<hr>
 			<!-- Vars in other templates -->
-			<?php echo $this->Html->textAreas(Text::get('page_vars_in_other_templates'), $this->Keys->inOtherTemplates(), $data); ?>
+			<?php echo $this->Html->formFields(Text::get('page_vars_in_other_templates'), $this->Keys->inOtherTemplates(), $data); ?>
 			<hr>
 			<!-- Vars in in data but not in any template -->
-			<?php 
-				$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
-				echo $this->Html->textAreas(Text::get('page_vars_unused'), $unusedDataKeys, $data, true); 
-			?>
+			<div id="automad-custom-variables">
+				<?php 
+					$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
+					echo $this->Html->formFields(Text::get('page_vars_unused'), $unusedDataKeys, $data, true); 
+				?>
+			</div>
 			<br />
 			<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo Text::get('btn_add_var'); ?></a>
 		
