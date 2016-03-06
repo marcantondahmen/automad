@@ -35,7 +35,8 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -57,59 +58,13 @@ $output = array();
 
 if (isset($_POST['data'])) {
 
-
-	// If the posted form contains any "data", save the form's data to the page file.
-	$data = array_filter($_POST['data']);
-
-		
-	// Build file content to be written to the txt file.
-	$pairs = array();
-
-	foreach ($data as $key => $value) {
-		$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
-	}
-
-	$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
-	
-
-	// Write file.
-	$old = umask(0);
-	
-	if (!@file_put_contents(AM_FILE_SITE_SETTINGS, $content)) {
-		$output['error'] = $this->tb['error_permission'] . '<p>' . AM_FILE_SITE_SETTINGS . '</p>';
-	}
-	
-	umask($old);
-	
-	
-	// Clear the cache.
-	$Cache = new Cache();
-	$Cache->clear();
-	
-		
+	// Save changes.
+	$output = $this->Content->saveSharedData($_POST['data']);
+			
 } else {
 	
-	
-	// Else get the data from the .txt file and return a form's inner HTML containing its information.
-	$data = Parse::textFile(AM_FILE_SITE_SETTINGS);
-	
-	// Set main properties
-	$data[AM_KEY_SITENAME] = $this->siteName();
-	
-	if (isset($this->siteData[AM_KEY_THEME])) {
-		$data[AM_KEY_THEME] = $this->siteData[AM_KEY_THEME];
-	} else {
-		$data[AM_KEY_THEME] = false;
-	}
-	
-	// Get available themes.
-	$themes = glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR);
-	
-	// Array of the standard variable keys, which are always needed.
-	$standardKeys = array(AM_KEY_SITENAME, AM_KEY_THEME);
-	
-	// Collect all keys of all shared site variables, which are found in the template files.
-	$themesKeys = array_diff($this->getSiteVarsInThemes(), $standardKeys);
+	// Get shared data from Shared object.
+	$data = $this->Automad->Shared->data;
 	
 	// Start buffering the HTML.
 	ob_start();
@@ -126,6 +81,9 @@ if (isset($_POST['data'])) {
 			<label for="input-data-theme">Theme</label>
 			<select id="input-data-theme" class="form-control" name="data[<?php echo AM_KEY_THEME; ?>]">
 				<?php
+			
+				// Get available themes.
+				$themes = glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR);
 			
 				foreach ($themes as $theme) {
 				
@@ -145,38 +103,26 @@ if (isset($_POST['data'])) {
 
 		<hr>
 
-		<h3><?php echo $this->tb['shared_vars_used']; ?></h3>
-		<?php
-		// Add textareas for all variables in $data, which are used in the currently installed themes and are not part of the $standardKeys array 
-		// and create empty textareas for those keys found in the themes, but are not defined in $data.
-		foreach ($themesKeys as $key) {
-			if (isset($data[$key])) {
-				echo $this->varTextArea($key, $data[$key]);
-			} else {
-				echo $this->varTextArea($key, '');
-			}
-		}
-		?>
+		<!-- Used shared variables -->
+		<?php echo $this->Html->formFields(Text::get('shared_vars_used'), $this->Keys->inAllTemplates(), $data, false, false); ?>
 	
 		<hr>
 
-		<h3><?php echo $this->tb['shared_vars_unused']; ?></h3>
+		<!-- Unused shared variables -->
 		<div id="automad-custom-variables">
 			<?php
-			// All unused site-wide variables.
-			foreach (array_diff(array_keys($data), $standardKeys, $themesKeys) as $key) {
-				echo $this->varTextArea($key, $data[$key], true);
-			}				
+				$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
+				echo $this->Html->formFields(Text::get('shared_vars_unused'), $unusedDataKeys, $data, true, false);				
 			?> 
 		</div>
 		<br />
-		<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add_var']; ?></a>
+		<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo Text::get('btn_add_var'); ?></a>
 		
 		<hr>
 	
 		<div class="btn-group btn-group-justified">
-			<div class="btn-group"><a class="btn btn-danger" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_discard']; ?></a></div>
-			<div class="btn-group"><button type="submit" class="btn btn-success" data-loading-text="<?php echo $this->tb['btn_loading']; ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->tb['btn_save']; ?></button></div>
+			<div class="btn-group"><a class="btn btn-danger" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_discard'); ?></a></div>
+			<div class="btn-group"><button type="submit" class="btn btn-success" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo Text::get('btn_save'); ?></button></div>
 		</div>
 	
 		<!-- Add Variable Modal -->	
@@ -185,11 +131,11 @@ if (isset($_POST['data'])) {
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="modal-title"><?php echo $this->tb['btn_add_var']; ?></h3>
+						<h3 class="modal-title"><?php echo Text::get('btn_add_var'); ?></h3>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="automad-add-variable-name"><?php echo $this->tb['shared_var_name']; ?></label>
+							<label for="automad-add-variable-name"><?php echo Text::get('shared_var_name'); ?></label>
 							<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
 						</div>	
 					</div>
@@ -197,12 +143,12 @@ if (isset($_POST['data'])) {
 						<div class="btn-group btn-group-justified">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span class="glyphicon glyphicon-remove"></span> <?php echo $this->tb['btn_close']; ?>
+									<span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?>
 								</button>
 							</div>
 							<div class="btn-group">
-								<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo $this->tb['error_var_exists']; ?>" data-automad-error-name="<?php echo $this->tb['error_var_name']; ?>">
-									<span class="glyphicon glyphicon-plus"></span> <?php echo $this->tb['btn_add']; ?> 
+								<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo Text::get('error_var_exists'); ?>" data-automad-error-name="<?php echo Text::get('error_var_name'); ?>">
+									<span class="glyphicon glyphicon-plus"></span> <?php echo Text::get('btn_add'); ?> 
 								</button>
 							</div>
 						</div>
