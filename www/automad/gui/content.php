@@ -511,6 +511,47 @@ class Content {
 		
 	}
 	
+
+	/**
+	 *	Save shared data.
+	 *
+	 *	@param array $data
+	 *	@return $output array (error)
+	 */
+	
+	public function saveSharedData($data) {
+		
+		$output = array();
+		
+		// Filter empty values.
+		$data = array_filter($_POST['data']);
+
+		// Build file content to be written to the txt file.
+		$pairs = array();
+
+		foreach ($data as $key => $value) {
+			$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
+		}
+
+		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
+	
+		// Write file.
+		$old = umask(0);
+	
+		if (!@file_put_contents(AM_FILE_SHARED_DATA, $content)) {
+			$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_SHARED_DATA . '</p>';
+		}
+	
+		umask($old);
+	
+		// Clear the cache.
+		$Cache = new Core\Cache();
+		$Cache->clear();
+	
+		return $output;
+		
+	}
+
 	
 }
 
