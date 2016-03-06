@@ -122,6 +122,9 @@ class Loader {
 	
 	public function __construct() {
 		
+		// Create Automad object.
+		$this->Automad = new Core\Automad();
+		
 		// Load text modules.
 		Text::parseModules();
 		
@@ -132,7 +135,6 @@ class Loader {
 		if (User::get()) {
 	
 			// If user is logged in, continue with getting the Automad object and the collection.
-			$this->Automad = new Core\Automad();
 			$this->collection = $this->Automad->getCollection();
 			
 			// Create objects.
@@ -150,9 +152,14 @@ class Loader {
 				$inc = 'start';
 			}
 	
+		} else if (Core\Parse::queryKey('ajax')) {
+			
+			// Send a redirect URL as answer to an Ajax request when nobody is logged in.
+			die(json_encode(array('redirect' => AM_BASE_URL . AM_PAGE_GUI)));
+			
 		} else {
 	
-			// If no user is logged in, check if accounts.txt exists. If yes, set $inc to the login page, else to the installer.
+			// If no user is logged in and there is no Ajax request, check if accounts.txt exists. If yes, set $inc to the login page, else to the installer.
 			if (file_exists(AM_FILE_ACCOUNTS)) {
 				$inc = 'login';
 			} else {
