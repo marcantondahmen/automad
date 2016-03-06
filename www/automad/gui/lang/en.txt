@@ -126,6 +126,10 @@ error_login: Invalid username or password
 
 -
 
+error_log_out: Log out failed!
+
+-
+
 error_no_files: No files found!
 
 -
