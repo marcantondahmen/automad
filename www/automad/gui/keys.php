@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -68,6 +69,8 @@ class Keys {
 	
 	/**
 	 *	Set $this->Automad when creating an instance.
+	 *
+	 *	@param object $Automad
 	 */
 	
 	public function __construct($Automad) {
@@ -96,37 +99,41 @@ class Keys {
 		
 		$directory = dirname($file);
 
-		preg_replace_callback('/' . \Automad\Core\Regex::markup() . '/is', function($matches) use ($directory, &$keys) {
+		// Match markup to get includes and variables.
+		preg_match_all('/' . Core\Regex::markup() . '/is', $this->Automad->loadTemplate($file), $matches, PREG_SET_ORDER);
 		
+		foreach ($matches as $match) {
+			
 			// Variable key.
-			if (!empty($matches['var'])) {
-				preg_match('/' . \Automad\Core\Regex::contentVariable('var') . '/s' ,$matches['var'], $var);
-				$keys[] = $var['varName'];
+			if (!empty($match['var'])) {
+				
+				// Note the second parameter in Regex::variable() is true to only match variables in text files.
+				preg_match('/' . Core\Regex::variable('var', true) . '/s', $match['var'], $var);
+				
+				if (!empty($var)) {
+					$keys[] = $var['varName'];
+				}
+				
 			}
 			
 			// Recursive include.
-			if (!empty($matches['file'])) {
+			if (!empty($match['file'])) {
 	
-				$file = $directory . '/' . $matches['file'];
+				$include = $directory . '/' . $match['file'];
 
-				if (file_exists($file)) {
-					$keys = array_merge($keys, $this->inCurrentTemplate($file));
+				if (file_exists($include)) {
+					$keys = array_merge($keys, $this->inCurrentTemplate($include));
 				} 
 		
 			}
-		
-		}, $this->Automad->loadTemplate($file));
-		
-		// Remove system vars and query string parameters.
-		$keys = array_filter($keys, function($key) {
-			return (strpos($key, ':') !== 0 && strpos($key, '?') !== 0);
-		});
+			
+		}
 		
 		// Remove reserved keys.
 		$keys = array_diff($keys, $this->reserved);
 		
 		sort($keys);
-		
+			
 		return array_unique($keys);
 		
 	}
@@ -161,14 +168,10 @@ class Keys {
 		// Search each template and add matches to the $keys array.
 		foreach ($arrayFiles as $file) {
 			$content = file_get_contents($file);
-			preg_match_all('/' . \Automad\Core\Regex::contentVariable('var') . '/is', $content, $matches);
+			// Note the second parameter in Regex::variable() is true to only match variable keys in text files.
+			preg_match_all('/' . Core\Regex::variable('var', true) . '/is', $content, $matches);
 			$keys = array_merge($keys, $matches['varName']);
 		}
- 		
-		// Remove system vars and query string parameters.
-		$keys = array_filter($keys, function($key) {
-			return (strpos($key, ':') !== 0 && strpos($key, '?') !== 0);
-		});
 		
 		// Remove reserved keys.
 		$keys = array_diff($keys, $this->reserved);
