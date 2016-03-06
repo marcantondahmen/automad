@@ -63,7 +63,7 @@ class Selection {
 	 * 	Initially holds the whole collection.
 	 *	
 	 *	$selection is basically the internal working copy of the collection array.
-	 *	It can be sorted and filtered without hurting the Automad::siteCollection.
+	 *	It can be sorted and filtered without hurting the original collection.
 	 */
 	
 	private $selection = array();
@@ -405,7 +405,7 @@ class Selection {
 			
 			// In case $value is an empty string, use the page basename instead.
 			if (strlen($value) === 0) {
-				$value = trim(strtolower(String::stripTags($Page->get(AM_KEY_BASENAME))));
+				$value = $Page->get(AM_KEY_BASENAME);
 			}
 			
 			$arrayToSortBy[$key] = $value;
