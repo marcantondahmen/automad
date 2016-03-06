@@ -188,16 +188,17 @@ class Html {
 	
 	
 	/**
-	 *	Create textarea for page/shared variables with optional button for removal.
+	 *	Create a form field for page/shared variables with optional button for removal and optional placeholder content (shared data).
 	 *	
 	 *	@param string $title
 	 *	@param array $keys
 	 *	@param array $data
 	 *	@param boolean $removeButton
+	 *	@param boolean $sharedDataPlaceholder
 	 *	@return The HTML for the textarea
 	 */
 	
-	public function formFields($title, $keys, $data, $removeButton = false) {
+	public function formFields($title, $keys, $data, $removeButton = false, $sharedDataPlaceholder = true) {
 		
 		$html = '<h3>' . $title . '</h3>';
 		
@@ -215,7 +216,13 @@ class Html {
 				$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
 			}
 		
-			$html .= '<textarea placeholder="' . htmlentities($this->Automad->Shared->get($key)) . '" id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
+			if ($sharedDataPlaceholder) {
+				$placeholder = ' placeholder="' . htmlentities($this->Automad->Shared->get($key)) . '"';
+			} else {
+				$placeholder = '';
+			}
+		
+			$html .= '<textarea' . $placeholder . ' id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
 			
 		}
 		
