@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<a href="<?php echo AM_BASE_URL; ?>/" target="_blank">
-							<span class="glyphicon glyphicon-home"></span><span class="hidden-md"> <?php echo $this->siteName(); ?></span>
+							<span class="glyphicon glyphicon-home"></span><span class="hidden-md"> <?php echo $this->Automad->Shared->get(AM_KEY_SITENAME); ?></span>
 						</a>
 					</li>
 					<li>
@@ -60,9 +60,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							<span class="glyphicon glyphicon-question-sign"></span><span class="hidden-md"> <?php echo Text::get('btn_docs'); ?></span>
 						</a>
 					</li>
-					<?php if ($this->user()) { ?><li>
+					<?php if (User::get()) { ?><li>
 						<a href="?context=logout">
-							<span class="glyphicon glyphicon-off"></span> <?php echo Text::get('log_out_title'); ?> "<?php echo ucwords($this->user()); ?>"
+							<span class="glyphicon glyphicon-off"></span> <?php echo Text::get('log_out_title'); ?> "<?php echo ucwords(User::get()); ?>"
 						</a>
 					</li><?php } ?> 
 				</ul>
