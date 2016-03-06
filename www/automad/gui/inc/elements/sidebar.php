@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 ?>
 
-		<?php if ($this->user()) { ?> 
+		<?php if (User::get()) { ?> 
 		<div class="column nav">
 			<div class="scroll">
 				<div class="inner">
