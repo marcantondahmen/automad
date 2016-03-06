@@ -47,31 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-if ($_POST) {
-	
-	if ($_POST['username'] && $_POST['password1'] && ($_POST['password1'] === $_POST['password2'])) {
-		
-		$accounts = array();
-		$accounts[$_POST['username']] = $this->passwordHash($_POST['password1']);
-		
-		// Download accounts.php
-		header('Expires: -1');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Content-Type: application/octet-stream');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
-		ob_end_flush();
-		echo $this->accountsGeneratePHP($accounts);
-		die;
-		
-	} else {
-		
-		$error = Text::get('error_form');
-	
-	}
-	
-}
+$error = Accounts::install();
 
 
 $this->guiTitle = $this->guiTitle . ' / ' . Text::get('install_title');
