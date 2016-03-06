@@ -78,7 +78,7 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 // Split GUI form regular pages.
 if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 	
-	$GUI = new \Automad\GUI\GUI();
+	$GUI = new \Automad\GUI\Loader();
 	$output = $GUI->output;
 	
 } else {
