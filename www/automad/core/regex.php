@@ -254,14 +254,16 @@ class Regex {
 	
 	
 	/**
-	 *	Return the regex for content variables. A prefix can be defined to create named backreferences for each capturing group.
+	 *	Return the regex for content variables. A prefix can be defined as the first parameter to create named backreferences for each capturing group. 
+	 *	The second parameter can be used to limit the charachter class of the variable names to just match keys in text files.
 	 *	Like: {[ var | function1 (...) | function2 (...) | ... ]}
 	 *
 	 *	@param string $namedReferencePrefix
+	 *	@param boolean $textFileOnly
 	 *	@return The regex to match variables.
 	 */
 	
-	public static function variable($namedReferencePrefix = false) {
+	public static function variable($namedReferencePrefix = false, $textFileOnly = false) {
 		
 		if ($namedReferencePrefix) {
 			$name = 	'?P<' . $namedReferencePrefix . 'Name>';
@@ -271,7 +273,13 @@ class Regex {
 			$functions = '?:';
 		}
 		
-		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . Regex::$charClassAllVariables . '+)\s*' . '(' . $functions . '(?:' . Regex::stringFunction() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
+		if ($textFileOnly) {
+			$charClass = Regex::$charClassTextFileVariables;
+		} else {
+			$charClass = Regex::$charClassAllVariables;
+		}
+		
+		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . $charClass . '+)\s*' . '(' . $functions . '(?:' . Regex::stringFunction() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
 		
 	}
 	
