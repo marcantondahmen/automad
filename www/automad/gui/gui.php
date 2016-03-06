@@ -54,6 +54,13 @@ class GUI {
 	
 	
 	/**
+	 *	The Automad object.
+	 */
+	
+	private $Automad;
+	
+	
+	/**
 	 *	The Content object.
 	 */
 	
@@ -93,13 +100,6 @@ class GUI {
 	 */
 	
 	public $output;
-		
-		
-	/**
-	 *	The Site's data and settings.
-	 */
-	
-	private $siteData;
 	
 
 	/**
@@ -122,9 +122,6 @@ class GUI {
 	
 	public function __construct() {
 		
-		// Get Site data.
-		$this->siteData = Core\Parse::siteData();
-		
 		// Load text modules.
 		Text::parseModules();
 		
@@ -132,16 +129,16 @@ class GUI {
 		session_start();
 		
 		// Check if an user is logged in.
-		if ($this->user()) {
+		if (User::get()) {
 	
 			// If user is logged in, continue with getting the Automad object and the collection.
-			$Automad = new Core\Automad();
-			$this->collection = $Automad->getCollection();
+			$this->Automad = new Core\Automad();
+			$this->collection = $this->Automad->getCollection();
 			
 			// Create objects.
-			$this->Content = new Content($Automad);
-			$this->Html = new Html($Automad);
-			$this->Keys = new Keys($Automad);
+			$this->Content = new Content($this->Automad);
+			$this->Html = new Html($this->Automad);
+			$this->Keys = new Keys($this->Automad);
 					
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the start page.
@@ -175,52 +172,7 @@ class GUI {
 		
 	}
 	
-	
-	/**
-	 *	Generate the PHP code for the accounts file. Basically the code returns the unserialized serialized array with all users.
-	 *	That way, the accounts array can be stored as PHP.
-	 *	The accounts file has to be a PHP file for security reasons. When trying to access the file directly via the browser, 
-	 *	it gets executed instead of revealing any user names.
-	 *	
-	 *	@param array $accounts
-	 *	@return The PHP code as string
-	 */
-	
-	private function accountsGeneratePHP($accounts) {
-		
-		return 	"<?php defined('AUTOMAD') or die('Direct access not permitted!');\n" .
-			'return unserialize(\'' . serialize($accounts) . '\');' .
-			"\n?>";
-			
-	} 
-	
-	
-	/**
-	 *	Get the accounts array by including the accounts PHP file.
-	 *
-	 *	@return The accounts array
-	 */
-	
-	private function accountsGetArray() {
-		
-		return (include AM_FILE_ACCOUNTS);
-		
-	}
-	
-	
-	/**
-	 *	Save the accounts array as PHP to AM_FILE_ACCOUNTS.
-	 *
-	 *	@return Success (true/false)
-	 */
 
-	private function accountsSaveArray($accounts) {
-		
-		return @file_put_contents(AM_FILE_ACCOUNTS, $this->accountsGeneratePHP($accounts));
-		
-	}
-	
-	
 	/**
 	 *	Load GUI element from automad/gui/elements.
 	 *
@@ -233,65 +185,6 @@ class GUI {
 		
 	}
 
-
-	/**
-	 *	Create hash from password to store in accounts.txt.
-	 *
-	 *	@param string $password
-	 *	@return Hashed/salted password
-	 */
-
-	private function passwordHash($password) {
-		
-		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
-		
-		return crypt($password, $salt);
-		
-	}
-
-
-	/**
-	 *	Verify if a password matches its hashed version.
-	 *
-	 *	@param string $password (clear text)
-	 *	@param string $hash (hashed password)
-	 *	@return true/false 
-	 */
-
-	private function passwordVerified($password, $hash) {
-		
-		return ($hash === crypt($password, $hash));
-		
-	}
-
-			
-	/**
-	 *	Return the Site's name.
-	 *
-	 *	@return Site's name
-	 */
-	
-	private function siteName() {
-		
-		return $this->siteData[AM_KEY_SITENAME];
-		
-	}
-
-
-	/**
-	 *	Return the currently logged in user.
-	 * 
-	 *	@return username
-	 */
-
-	private function user() {
-		
-		if (isset($_SESSION['username'])) {
-			return $_SESSION['username'];
-		}
-		
-	}
-	
 
 }
 
