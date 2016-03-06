@@ -89,7 +89,7 @@ class Html {
 		
 		$selection = new \Automad\Core\Selection($collection);
 		$selection->filterByParentUrl($parent);
-		$selection->sortPagesByBasename();
+		$selection->sortPages();
 		
 		if ($pages = $selection->getSelection()) {
 			
@@ -140,8 +140,8 @@ class Html {
 	public function templateSelectBox($id = '', $name = '', $selectedTheme = false, $selectedTemplate = false) {
 		
 		
-		// Find all templates of currently used site theme (set in site.txt).
-		$siteThemeTemplates = 	array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->Automad->getSiteData(AM_KEY_THEME) . '/*.php'), function($file) {
+		// Find all templates of currently used site theme (set in /shared/data.txt).
+		$siteThemeTemplates = 	array_filter(glob(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->Automad->Shared->get(AM_KEY_THEME) . '/*.php'), function($file) {
 						return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php', AM_PAGE_RESULTS_TEMPLATE . '.php'));
 					});
 
@@ -215,7 +215,7 @@ class Html {
 				$html .= '<button type="button" class="close automad-remove-parent">&times;</button>';
 			}
 		
-			$html .= '<textarea placeholder="' . htmlentities($this->Automad->getSiteData($key)) . '" id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
+			$html .= '<textarea placeholder="' . htmlentities($this->Automad->Shared->get($key)) . '" id="input-data-' . $key . '" class="form-control" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
 			
 		}
 		
