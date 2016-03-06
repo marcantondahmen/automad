@@ -197,7 +197,7 @@ class Html {
 	 *	@return The HTML for the textarea
 	 */
 	
-	public function textAreas($title, $keys, $data, $removeButton = false) {
+	public function formFields($title, $keys, $data, $removeButton = false) {
 		
 		$html = '<h3>' . $title . '</h3>';
 		
