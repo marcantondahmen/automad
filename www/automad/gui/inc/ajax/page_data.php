@@ -127,7 +127,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					if ($data[AM_KEY_THEME]) {
 						$theme = $data[AM_KEY_THEME];
 					} else {
-						$theme = $this->siteData[AM_KEY_THEME];
+						$theme = $this->Automad->Shared->get(AM_KEY_THEME);
 					}
 					
 					echo Text::get('page_theme_template');	
