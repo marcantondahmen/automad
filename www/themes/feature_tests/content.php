@@ -18,13 +18,13 @@
 			<h4>Shortened to max 30 chars and sanitized without dots</h4>
 			{[ test | 30 | sanitize (true) ]}
 			<hr>
-			<h4>Stripped Tags and shotened to 70 chars</h4>
+			<h4>Stripped tags and shortened to 70 chars</h4>
 			{[ test | stripTags | 70 ]}
 			<hr>
-			<h4>Stripped Tags and shotened to 70 chars with a replacement for the standard ellipsis</h4>
+			<h4>Stripped tags and shortened to 70 chars with a replacement for the standard ellipsis</h4>
 			{[ test | stripTags | shorten (70, "<br><br>Read more ...") ]}
 			<hr>
-			<h4>Stripped Tags, shortened and uppercased</h4>
+			<h4>Stripped tags, shortened and uppercased</h4>
 			{[ test | stripTags | 70 | strtoupper ]}
 			<hr>
 			<h4>String lenght</h4>
