@@ -2,10 +2,6 @@ title: Content
 
 -
 
-theme: feature_tests
-
--
-
 test: This is a content test. It also includes some [Markdown](https://daringfireball.net/projects/markdown/) markup.   
 Like this list:
 
@@ -17,3 +13,6 @@ Or this:
 
 	<div>Test</div>
 
+-
+
+theme: feature_tests
