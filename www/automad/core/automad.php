@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  *	The Automad class includes all methods and properties regarding the site, structure and pages.
- *	A Automad object is the "main" object. It consists of many single Page objects and holds also additional data like the site's name and theme.
+ *	A Automad object is the "main" object. It consists of many single Page objects, the Shared object and holds also additional data like the Filelist and Pagelist objects.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
  *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
@@ -215,12 +215,10 @@ class Automad {
 			}
 			
 			// Convert hidden value to boolean.
-			if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-				if ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1') {
-					$data[AM_KEY_HIDDEN] = true;
-				} else {
-					$data[AM_KEY_HIDDEN] = false;
-				}
+			if (array_key_exists(AM_KEY_HIDDEN, $data)) {	
+				$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1');
+			} else {
+				$data[AM_KEY_HIDDEN] = false;
 			}
 			
 			// Set read-only variables.
