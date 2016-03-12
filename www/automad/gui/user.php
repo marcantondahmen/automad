@@ -53,6 +53,70 @@ class User {
 	
 	
 	/**
+	 *	Change the password of the currently logged in user based on $_POST.
+	 *
+	 *	@return $output (error/success)
+	 */
+	
+	public static function changePassword() {
+		
+		$output = array();
+
+		if (!empty($_POST['current-password']) && !empty($_POST['new-password1']) && !empty($_POST['new-password2'])) {
+	
+			if ($_POST['new-password1'] == $_POST['new-password2']) {
+		
+				if ($_POST['current-password'] != $_POST['new-password1']) {
+			
+					// Get all accounts from file.
+					$accounts = Accounts::get();
+			
+					if (Accounts::passwordVerified($_POST['current-password'], $accounts[User::get()])) {
+				
+						// Change entry for current user with accounts array.
+						$accounts[User::get()] = Accounts::passwordHash($_POST['new-password1']);
+					
+						// Write array with all accounts back to file.
+						if (Accounts::write($accounts)) {
+					
+							$output['success'] = Text::get('success_password_changed'); 
+					
+						} else {
+					
+							$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+				
+						}
+				
+					} else {
+				
+						$output['error'] = Text::get('error_form');
+				
+					}
+						
+				} else {
+			
+					$output['error'] = Text::get('error_form');;
+			
+				}
+		
+			} else {
+		
+				$output['error'] = Text::get('error_form');
+		
+			}
+	
+		} else {
+	
+			$output['error'] = Text::get('error_form');
+	
+		}
+		
+		return $output;
+		
+	}
+	
+	
+	/**
 	 *	Return the currently logged in user.
 	 * 
 	 *	@return username
@@ -68,7 +132,7 @@ class User {
 	
 	
 	/**
-	 *	Verify login information.
+	 *	Verify login information based on $_POST.
 	 *
 	 *	@return Error message in case of an error.
 	 */
