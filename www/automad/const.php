@@ -175,17 +175,12 @@ Config::set('AM_PARSE_PAIR_SEPARATOR', ':');
 Config::set('AM_PARSE_STR_SEPARATOR', ',');
 
 // KEYS
-// Hidden key (to identify the visibility status of a page in its txt file)
+// Variables used in txt files in /pages or /shared
 Config::set('AM_KEY_HIDDEN', 'hidden');
-// Tags key (to identify tags in the page's txt file)
 Config::set('AM_KEY_TAGS', 'tags');
-// Theme key (to identify a theme in the page's txt file)
 Config::set('AM_KEY_THEME', 'theme');
-// Title key (to identify a title in the page's txt file)
 Config::set('AM_KEY_TITLE', 'title');
-// Sitename key (to identify the sitename in the site's txt file)
 Config::set('AM_KEY_SITENAME', 'sitename');
-// URL key (to identify an URL in the page's txt file)
 Config::set('AM_KEY_URL', 'url');
 // System variables depending on a context.
 Config::set('AM_KEY_PATH', ':path');
