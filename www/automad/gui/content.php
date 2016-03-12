@@ -183,6 +183,57 @@ class Content {
 	
 	
 	/**
+	 *	Delete files.
+	 *
+	 *	@param array $files
+	 *	@param string $path
+	 *	@return $output
+	 */
+	
+	public function deleteFiles($files, $path) {
+		
+		$output = array();
+		
+		// Check if directory is writable.
+		if (is_writable($path)) {
+	
+			$success = array();
+			$errors = array();
+	
+			foreach ($files as $f) {
+		
+				// Make sure submitted filename has no '../' (basename).
+				$file = $path . basename($f);
+		
+				if (is_writable($file)) {
+					if (unlink($file)) {
+						$success[] = Text::get('success_remove') . ' <strong>' . basename($file) . '</strong>';
+					}
+				} else {
+					$errors[] = Text::get('error_remove') . ' <strong>' . basename($file) . '</strong>';
+				} 
+	
+			}
+	
+			// Clear cache to update galleries and sliders.
+			$Cache = new Core\Cache();
+			$Cache->clear();
+	
+			$output['success'] = implode('<br />', $success);
+			$output['error'] = implode('<br />', $errors);
+
+		} else {
+		
+			$output['error'] = Text::get('error_permission') . '<p>' . $path . '</p>';
+		
+		}
+		
+		return $output;
+		
+	}
+	
+	
+	/**
 	 *	Delete page based on $_POST.
 	 *
 	 *	@return $output array (AJAX response)
@@ -383,6 +434,72 @@ class Content {
 	
 	
 	/**
+	 *	Rename file based on $_POST.
+	 *	
+	 *	@return $output
+	 */
+	
+	public function renameFile() {
+		
+		$output = array();
+
+		// Get correct path of file by the posted URL. For security reasons the file path gets build here and not on the client side.
+		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
+	
+			$url = $_POST['url'];
+			$Page = $this->Automad->getPageByUrl($url);
+			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
+			
+		} else {
+	
+			$url = '';
+			$path = AM_BASE_DIR . AM_DIR_SHARED . '/';
+	
+		}
+
+		if (isset($_POST['old-name']) && isset($_POST['new-name'])) {
+	
+			if ($_POST['new-name']) {
+		
+				if ($_POST['new-name'] != $_POST['old-name']) {
+			
+					$oldFile = $path . basename($_POST['old-name']);
+					$newFile = $path . Core\String::sanitize(basename($_POST['new-name']));
+			
+					if (is_writable($path) && is_writable($oldFile)) {
+				
+						if (!file_exists($newFile)) {
+							rename($oldFile, $newFile);
+						} else {
+							$output['error'] = '"' . $newFile . '" ' . Text::get('error_existing');
+						}
+				
+					} else {
+						
+						$output['error'] = Text::get('error_permission');
+						
+					}
+			
+				}
+		
+			} else {
+				
+				$output['error'] = Text::get('error_filename');
+				
+			}
+	
+		} else {
+			
+			$output['error'] = Text::get('error_form');
+			
+		}
+
+		return $output;
+				
+	}
+
+
+	/**
 	 *	Save a page.
 	 *	
 	 *	@param string $url
@@ -552,6 +669,68 @@ class Content {
 		
 	}
 
+	
+	/**
+	 *	Upload handler based on $_POST and $_FILES.
+	 *
+	 *	@return $output
+	 */
+	
+	public function upload() {
+		
+		$output = array();
+		$output['debug'] = $_POST + $_FILES;
+
+		// Set path.
+		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
+		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
+			$Page = $this->Automad->getPageByUrl($_POST['url']);
+			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
+		} else {
+			$path = AM_BASE_DIR . AM_DIR_SHARED . '/';
+		}
+
+		// Move uploaded files
+		if (isset($_FILES['files']['name'])) {
+	
+			// Check if upload destination is writable.
+			if (is_writable($path)) {
+	
+				$errors = array();
+
+				// In case the $_FILES array consists of multiple files (IE uploads!).
+				for ($i = 0; $i < count($_FILES['files']['name']); $i++) {
+	
+					// Check if file has a valid filename (allowed file type).
+					if (Core\Parse::isFileName($_FILES['files']['name'][$i])) {
+						$newFile = $path . Core\String::sanitize($_FILES['files']['name'][$i]);
+						move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
+					} else {
+						$errors[] = Text::get('error_file_format') . ' <strong>' . pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION) . '</strong>';
+					}
+	
+				}
+
+				// Clear cache to update galleries and sliders.
+				$Cache = new Core\Cache();
+				$Cache->clear();
+		
+				if ($errors) {
+					$output['error'] = implode('<br />', $errors);
+				} 
+
+			} else {
+		
+				$output['error'] = Text::get('error_permission') . '<p>' . $path . '</p>';
+				
+			}
+
+		}
+		
+		return $output;
+			
+	}
+	
 	
 }
 
