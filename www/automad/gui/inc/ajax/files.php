@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -72,45 +73,9 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 // Delete files in $_POST['delete'].
 if (isset($_POST['delete'])) {
 	
-	// Check if directory is writable.
-	if (is_writable($path)) {
-	
-		$success = array();
-		$errors = array();
-	
-		foreach ($_POST['delete'] as $f) {
-		
-			// Make sure submitted filename has no '../' (basename).
-			$file = $path . basename($f);
-		
-			if (is_writable($file)) {
-				if (unlink($file)) {
-					$success[] = Text::get('success_remove') . ' <strong>' . basename($file) . '</strong>';
-				}
-			} else {
-				$errors[] = Text::get('error_remove') . ' <strong>' . basename($file) . '</strong>';
-			} 
-	
-		}
-	
-		// Clear cache to update galleries and sliders.
-		$Cache = new \Automad\Core\Cache();
-		$Cache->clear();
-	
-		$output['success'] = implode('<br />', $success);
-		$output['error'] = implode('<br />', $errors);
-
-	} else {
-		
-		$output['error'] = Text::get('error_permission') . '<p>' . $path . '</p>';
-		
-	}
+	$output = $this->Content->deleteFiles($_POST['delete'], $path);
 
 }
-
-
-// Get the allowed file types from const.php.
-$allowedFileTypes = \Automad\Core\Parse::allowedFileTypes();
 
 
 // Define image file extensions. 
@@ -120,7 +85,7 @@ $imageTypes = array('jpg', 'png', 'gif');
 // Get files for each allowed file type.
 $files = array();
 
-foreach ($allowedFileTypes as $type) {
+foreach (Core\Parse::allowedFileTypes() as $type) {
 	
 	if ($f = glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE)) {
 		$files = array_merge($files, $f);
