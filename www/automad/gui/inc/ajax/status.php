@@ -74,9 +74,8 @@ if (isset($_POST['item'])) {
 	}
 	
 	if ($item == 'users') {
-		
-		$accounts = $this->accountsGetArray();		
-		$output['status'] = Text::get('sys_user_registered') . ' <span class="badge on">' . count($accounts) . '</span>';
+				
+		$output['status'] = Text::get('sys_user_registered') . ' <span class="badge on">' . count(Accounts::get()) . '</span>';
 
 	}
 	
