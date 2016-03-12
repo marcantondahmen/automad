@@ -53,6 +53,116 @@ class Accounts {
 	
 	
 	/**
+	 *	Add user account based on $_POST.
+	 *
+	 *	@return $output (error/success)
+	 */
+	
+	public static function add() {
+		
+		$output = array();
+
+		if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']) && $_POST['password1'] && isset($_POST['password2']) && $_POST['password2']) {
+	
+			// Check if password1 equals password2.
+			if ($_POST['password1'] == $_POST['password2']) {
+		
+				// Get all accounts from file.
+				$accounts = Accounts::get();
+		
+				// Check, if user exists already.
+				if (!isset($accounts[$_POST['username']])) {
+		
+					// Add user to accounts array.
+					$accounts[$_POST['username']] = Accounts::passwordHash($_POST['password1']);
+					ksort($accounts);
+				
+					// Write array with all accounts back to file.
+					if (Accounts::write($accounts)) {
+				
+						$output['success'] = Text::get('success_added') . ' <strong>' . $_POST['username'] . '</strong>';
+				
+					} else {
+	
+						$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+				
+					}
+			
+				} else {
+		
+					$output['error'] = '<strong>' . $_POST['username'] . '</strong> ' . Text::get('error_existing');	
+			
+				}
+		
+			} else {
+		
+				$output['error'] = Text::get('error_form');
+		
+			}
+	
+		} else {
+	
+			$output['error'] = Text::get('error_form');
+	
+		}
+		
+		return $output;
+		
+	}
+	
+	
+	/**
+	 *	Delete one ore more user accounts.
+	 *
+	 *	@param array $users
+	 *	@return $output (error/success)
+	 */
+	
+	public static function delete($users) {
+	
+		$output = array();
+	
+		if (is_array($users)) {
+			
+			// Only delete users from list, if accounts.txt is writable.
+			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
+			// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
+			// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
+			if (is_writable(AM_FILE_ACCOUNTS)) {
+				
+				$accounts = Accounts::get();
+				$deleted = array();
+	
+				foreach ($users as $userToDelete) {
+		
+					if (isset($accounts[$userToDelete])) {
+			
+						unset($accounts[$userToDelete]);
+						$deleted[] = $userToDelete;
+			
+					}
+		
+				}
+
+				// Write array with all accounts back to file.
+				if (Accounts::write($accounts)) {
+					$output['success'] = Text::get('success_remove') . ' <strong>' . implode(', ', $deleted) . '</strong>';
+				}
+		
+			} else {
+		
+				$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+		
+			}
+			
+		}
+	
+		return $output;
+		
+	}
+	
+	
+	/**
 	 *	Install the first user account.
 	 *
 	 *	@return Error message in case of an error.
