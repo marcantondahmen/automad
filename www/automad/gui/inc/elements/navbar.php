@@ -36,9 +36,19 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
+
+
+if (isset($this->Automad)) {
+	$sitename = $this->Automad->Shared->get(AM_KEY_SITENAME);
+} else {
+	// Create Shared object in case no user is logged in and the Automad object didn't get created.
+	$Shared = new Core\Shared();
+	$sitename = $Shared->get(AM_KEY_SITENAME);
+}
 
 
 ?>
@@ -52,7 +62,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<a href="<?php echo AM_BASE_URL; ?>/" target="_blank">
-							<span class="glyphicon glyphicon-home"></span><span class="hidden-md"> <?php echo $this->Automad->Shared->get(AM_KEY_SITENAME); ?></span>
+							<span class="glyphicon glyphicon-home"></span><span class="hidden-md"> <?php echo $sitename; ?></span>
 						</a>
 					</li>
 					<li>
