@@ -105,8 +105,10 @@ class Loader {
 	/**
 	 *	Load the site's global data and include modules according to the current context.
 	 *
-	 *	When a the GUI gets initialize, at first it gets verified, if an user is logged in or not. That has the highest priority.
+	 *	When a the GUI gets initialized, at first it gets verified, if an user is logged in or not. That has the highest priority.
 	 *	If no user is logged in, the existance of "config/accounts.txt" gets checked and either the login or the install module gets loaded.
+	 *	In case an ajax request is sent while a user got already logged out (in another browser tab or window), the response will be a 'redirect' to the GUI 
+	 *	start page, to log in there.
 	 *
 	 *	If an user is logged in, the Automad object gets created and the current "context" gets determined from the GET parameters.
 	 *	According that context, the matching module gets loaded after verifying its exsistance. 
@@ -116,14 +118,11 @@ class Loader {
 	 *	Example Context: 	http://domain.com/gui?context=edit_page will include 	automad/gui/context/edit_page.php
 	 *	Example Ajax:		http://domain.com/gui?ajax=page_data will include 	automad/gui/ajax/page_data.php
 	 *
-	 *	Since every request for the gui (pages and ajax) gets still routed over "/index.php" > "/automad/init.php" > new GUI(), 
+	 *	Since every request for the gui (pages and ajax) gets still routed over "/index.php" > "/automad/init.php" > new GUI\Loader(), 
 	 *	all the session/login checking needs only to be done here once, simply because all modules get includede here.   
 	 */
 	
 	public function __construct() {
-		
-		// Create Automad object.
-		$this->Automad = new Core\Automad();
 		
 		// Load text modules.
 		Text::parseModules();
@@ -133,6 +132,9 @@ class Loader {
 		
 		// Check if an user is logged in.
 		if (User::get()) {
+			
+			// Create Automad object.
+			$this->Automad = new Core\Automad();
 	
 			// If user is logged in, continue with getting the Automad object and the collection.
 			$this->collection = $this->Automad->getCollection();
