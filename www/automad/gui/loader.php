@@ -128,6 +128,7 @@ class Loader {
 		Text::parseModules();
 		
 		// Start Session.
+		session_name('Automad');
 		session_start();
 		
 		// Check if an user is logged in.
