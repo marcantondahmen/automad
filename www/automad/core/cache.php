@@ -399,7 +399,7 @@ class Cache {
 	
 	
 	/**
-	 *	 Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE and update the context to the requested page.
+	 *	Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE and update the context to the requested page.
 	 *
 	 *	@return Automad object
 	 */
@@ -414,6 +414,8 @@ class Cache {
 	
 	/**
 	 *	Write the rendered HTML output to the cache file.
+	 *	
+	 *	@param string $output
 	 */
 	
 	public function writePageToCache($output) {
@@ -432,14 +434,6 @@ class Cache {
 			Debug::log($this->pageCacheFile, 'Page written to');
 			Debug::log(umask(), 'Restored umask');
 			
-			// Only non-forwarded (no proxy) sites.
-			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
-				$c = curl_init();
-				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('url' => $_SERVER['SERVER_NAME'] . AM_BASE_URL, 'app' => 'Automad', 'version' => AM_VERSION, 'licensekey' => AM_LIC_KEY), CURLOPT_URL => 'http://at.marcdahmen.de/track.php'));
-				$r = curl_exec($c);
-				curl_close($c);
-			}
-			
 		} else {
 			
 			Debug::log('Caching is disabled! Not writing page to cache!');
@@ -451,6 +445,8 @@ class Cache {
 	
 	/**
 	 *	Write (serialize) the Automad object to AM_FILE_OBJECT_CACHE.
+	 *	
+	 *	@param object $Automad
 	 */
 	
 	public function writeAutomadObjectToCache($Automad) {
@@ -463,7 +459,15 @@ class Cache {
 			umask($old);
 			Debug::log(AM_FILE_OBJECT_CACHE, 'Automad object written to');
 			Debug::log(umask(), 'Restored umask');
-		
+			
+			// Only non-forwarded (no proxy) sites.
+			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+				$c = curl_init();
+				curl_setopt_array($c, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_TIMEOUT => 2, CURLOPT_POST => true, CURLOPT_POSTFIELDS => array('app' => 'Automad', 'url' => getenv('SERVER_NAME') . AM_BASE_URL, 'version' => AM_VERSION, 'serverSoftware' => getenv('SERVER_SOFTWARE')), CURLOPT_URL => 'http://acid.automad.org/index.php'));
+				curl_exec($c);
+				curl_close($c);
+			}
+			
 		} else {
 			
 			Debug::log('Caching is disabled! Not writing Automad object to cache!');
