@@ -203,8 +203,5 @@ Config::set('AM_KEY_PAGELIST_COUNT', ':pagelist-count');
 // Version number 
 include AM_BASE_DIR . '/automad/version.php';
 
-// License key
-Config::set('AM_LIC_KEY', '');
-
  
 ?>
