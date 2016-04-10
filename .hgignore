@@ -3,3 +3,4 @@ cached*
 www/cache/trash
 www/config/accounts.php
 sitemap.xml
+node_modules
