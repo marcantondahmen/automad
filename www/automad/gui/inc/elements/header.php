@@ -50,14 +50,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	
 	<title><?php echo $this->guiTitle; ?></title>
 
-	<link href="<?php echo AM_BASE_URL; ?>/automad/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo AM_BASE_URL; ?>/automad/lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.min.css" rel="stylesheet">
-	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/css/automad_gui.min.css" rel="stylesheet">
+	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/automad.min.css" rel="stylesheet">
 	
-	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery/jquery-2.0.3.min.js"></script>
-	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/js/automad_gui.min.js"></script>
+	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.js"></script>
+	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/gui.min.js"></script>
 	
 </head>
 
