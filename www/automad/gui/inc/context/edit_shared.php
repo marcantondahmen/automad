@@ -83,9 +83,6 @@ $this->element('header');
 						<form class="automad-form automad-init" data-automad-handler="shared_data" role="form"><span class="glyphicon glyphicon-time"></span> <?php echo Text::get('btn_loading'); ?></form>
 					</div>
 					<div id="files" class="tab-pane fade">
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.fileupload.js" type="text/javascript" charset="utf-8"></script>
-						<script src="<?php echo AM_BASE_URL; ?>/automad/lib/jquery-file-upload/jquery.iframe-transport.js" type="text/javascript" charset="utf-8"></script>
 						<form class="automad-form automad-init" data-automad-handler="files" role="form"></form>
 					</div>
 				</div>
