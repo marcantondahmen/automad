@@ -102,7 +102,7 @@ class Automad {
 	 *	An array of existing directories within the base directory (/automad, /config, /pages etc.)
 	 */
 	
-	private $realDirs = array();
+	private $reservedUrls;
 	
 	
 	/**
@@ -139,17 +139,9 @@ class Automad {
 		// at the beginning of the URL. 
 		// The leading slash is better to have in case of the home page where the key becomes [/] insted of just [] 
 		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
-			
-		// Build an array of already taken URLs.
-		// First create an array of existing directories, in case it doesn't exist already.
-		if (empty($this->realDirs)) {
-			foreach (glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
-				$this->realDirs[] = '/' . basename($dir);
-			}
-		}
 		
-		// Merge real directories with already used URLs in the collection.
-		$takenUrls = array_merge($this->realDirs, array_keys($this->collection));
+		// Merge reserved URLs with already used URLs in the collection.
+		$takenUrls = array_merge($this->reservedUrls, array_keys($this->collection));
 		
 		// check if url already exists
 		if (in_array($url, $takenUrls)) {
@@ -257,6 +249,7 @@ class Automad {
 	
 	public function __construct() {
 		
+		$this->getReservedUrls();
 		$this->Shared = new Shared();
 		$this->collectPages();
 		
@@ -354,6 +347,27 @@ class Automad {
 				
 	} 
 	
+
+	/**
+	 *	Get an array of reseverd URLs - all real directories within the base directory and the GUI URL. 
+	 */
+
+	private function getReservedUrls() {
+		
+		// Get all real directories.
+		foreach (glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
+			$this->reservedUrls[] = '/' . basename($dir);
+		}
+		
+		// Add the GUI URL if enabled.
+		if (!empty(AM_PAGE_GUI)) {
+			$this->reservedUrls[] = AM_PAGE_GUI;
+		}
+		
+		Debug::log($this->reservedUrls);
+		
+	}
+
 
 	/**
 	 *	Return Automad's instance of the Filelist class and create instance when accessed for the first time.
