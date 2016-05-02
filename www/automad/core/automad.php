@@ -360,7 +360,7 @@ class Automad {
 		}
 		
 		// Add the GUI URL if enabled.
-		if (!empty(AM_PAGE_GUI)) {
+		if (AM_PAGE_GUI) {
 			$this->reservedUrls[] = AM_PAGE_GUI;
 		}
 		
