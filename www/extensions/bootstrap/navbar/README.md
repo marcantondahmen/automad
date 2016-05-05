@@ -1,4 +1,4 @@
-#Navbar
+#Bootstrap/Navbar
 
 The Navbar extension creates a responsive and collapsable Bootstrap Navbar for multiple levels, including an optional search box.
 
@@ -8,7 +8,7 @@ The Navbar extension creates a responsive and collapsable Bootstrap Navbar for m
 
 To use the Navbar extension, simply add 
 
-	@x(Navbar)
+	{@ bootstrap/navbar @}
 	
 somewhere to your template's HTML body markup.
 
@@ -17,10 +17,10 @@ somewhere to your template's HTML body markup.
 ###Dependencies
 
 This extension requires *Twitter's Bootstrap* CSS and Javascript.
-Since Bootstrap gets shipped with Automad, you can include all needed files by adding
+You can include all needed files by adding
 
-	@t(bootstrapCSS)
-	@t(bootstrapJS)
+	{@ bootstrap/css @}
+	{@ bootstrap/js @}
 	
 to your template's head section.	
 
@@ -41,25 +41,24 @@ There are several options available to modify the Navbar:
 - levels: `integer` - Maximum number of levels to be displayed (default: `2`)
 
 The options must be specified in **JSON** format. 
-It is also possible to pass any value as a normal page variable "p(variable)" or shared (side-wide) variable "s(variable)".
 
 ---
 
 ###Example
 
-Centered navbar with optional brand as shared variable:
+Centered navbar with optional brand as variable:
 
-	@x(Navbar {
+	{@ bootstrap/navbar {
 		fluid: false,
-		brand: @s(brand),
+		brand: {[ brand ]},
 		search: "Search"
-	})
+	} @}
 	
-Full-width, fixed to the top and with an optional logo as shared variable, but without a search box:
+Full-width, fixed to the top and with an optional logo as variable, but without a search box:
 
-	@x(Navbar {
+	{@ bootstrap/navbar {
 		fixedToTop: true,
-		logo: @s(logo),
+		logo: {[ logo ]},
 		logoWidth: 300,
 		search: false
-	})
+	} @}
