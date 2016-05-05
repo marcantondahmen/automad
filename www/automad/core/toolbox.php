@@ -79,32 +79,6 @@ class Toolbox {
 	
 	
 	/**
-	 *	Load Twitter's Bootstrap CSS.
-	 *
-	 *	@return the script tag to include the minified bootstrap CSS
-	 */
-	
-	public function bootstrapCSS() {
-		
-		return '<link type="text/css" rel="stylesheet" href="/automad/lib/bootstrap/css/bootstrap.min.css" />';
-		
-	}
-	
-	
-	/**
-	 *	Load Twitter's Bootstrap JavaScript.
-	 *
-	 *	@return the script tag to include the minified bootstrap JS
-	 */
-	
-	public function bootstrapJS() {
-		
-		return '<script type="text/javascript" src="/automad/lib/bootstrap/js/bootstrap.min.js"></script>';
-		
-	}
-	
-	
-	/**
 	 * 	Configure the filelist to be used in foreach loops.
 	 *	
 	 *	@param array $options
