@@ -137,7 +137,7 @@ class Regex {
 		// The subpatterns don't include the wrapping delimiter: "{@ subpattern @}".
 		$statementSubpatterns['include'] = 	'(?P<file>[\w\/\-\.]+\.php)';
 		
-		$statementSubpatterns['call'] = 	'(?P<call>[\w\-]+)\s*(?P<options>\{.*?\})?';
+		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<options>\{.*?\})?';
 		
 		$statementSubpatterns['snippet'] = 	Regex::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
 							'snippet\s+(?P<snippet>[\w\-]+)' .
