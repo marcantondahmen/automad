@@ -1,9 +1,9 @@
 <?php
 /*
- *	NAVBAR
+ *	BOOTSTRAP\NAVBAR
  *	Extension for Automad
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -11,7 +11,7 @@
  */
 
 
-namespace Extensions;
+namespace Extensions\Bootstrap;
 
 
 /**
@@ -19,7 +19,7 @@ namespace Extensions;
  *	To be used, Twitter's Bootstrap CSS and JS files are required.
  *
  *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@copyright Copyright (c) 2014-2016 Marc Anton Dahmen <hello@marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -30,19 +30,19 @@ class Navbar {
 	 *	Every extension has one main method which will be called when parsing a template file.
 	 *	The name of that method is the same name as the name of the class and subnamespace (case insensitive).
 	 *	The .php file of the class gets simply the same name as the containing folder:
-	 *	/extensions/navbar/navbar.php
+	 *	/extensions/bootstrap/navbar/navbar.php
 	 *	
 	 *	In this case the naming pattern looks like:
-	 *	- namespace: 	Extensions
-	 *	- directory:	/extensions/navbar
-	 *	- class file:	/extensions/navbar/navbar.php
+	 *	- namespace: 	Extensions\Bootstrap
+	 *	- directory:	/extensions/bootstrap/navbar
+	 *	- class file:	/extensions/bootstrap/navbar/navbar.php
 	 *	- class: 	Navbar
 	 *	- method:	Navbar 
 	 *	
 	 *	This main method must always have two parameters, which will be passed automatically when calling the extension: $obj->Navbar($options, $Automad)
 	 *	- $options:	An array with all the options
 	 *	- $Automad:	The Automad object, to make all the Site's data available for the extension
-	 *	
+	 *
 	 *	Note: The Navbar method is not a kind of constructor (like it would be in PHP 4). Since this is a namespaced class,
 	 *	a method with the same name as the last part of the namespace isn't called when creating an instance of the class (PHP 5.3+).
 	 *
