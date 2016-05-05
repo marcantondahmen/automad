@@ -7,15 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{@ metaTitle { title: {[ meta_title ]} } @}
 	{@ jquery @}
-	{@ bootstrapJS @}
-	{@ bootstrapCSS @}
+	{@ bootstrap/js @}
+	{@ bootstrap/css @}
 	<link type="text/css" rel="stylesheet" href="/themes/{[ theme ]}/css/standard.min.css" />
 </head>
 
 
 <body class="level-{[ :level ]}">
 	
-	{@ Navbar {
+	{@ bootstrap/navbar {
 		brand: {[ brand ]},
 		fluid: false,
 		fixedToTop: true,
