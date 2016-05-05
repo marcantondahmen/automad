@@ -1,7 +1,7 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 {@ elements/header.php @}
 
-	{@ carousel {
+	{@ bootstrap/carousel {
 		files: {[ carousel_files ]},
 		width: 1600,
 		height: 900,
