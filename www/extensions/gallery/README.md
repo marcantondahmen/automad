@@ -9,7 +9,7 @@ If an image contains an Exif description tag, that tag will be used as the overl
 
 To use the Gallery extension, simply put 
 
-	@x(Gallery)
+	{@ Gallery @}
 	
 somewhere in your markup.
 
@@ -35,16 +35,8 @@ There are several parameters to modify the gallery:
 
 ###Example
 
-	@x(Gallery {
+	{@ Gallery {
 		files: "/pages/*/*/*.jpg, /shared/*.jpg", 
 		width: 250, 
 		height: 250
-	}) 
-	
-It is also possible to use a page variable for any of the options:
-
-	@x(Gallery {
-		files: @p(files), 
-		width: @p(width), 
-		height: @p(height)
-	}) 
+	} @}
