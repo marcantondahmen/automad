@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{@ metaTitle @}	
 	{@ jQuery @}
-	{@ bootstrapJS @}
-	{@ bootstrapCSS @}
+	{@ bootstrap/js @}
+	{@ bootstrap/css @}
 </head>
 
 <body style="padding-top: 90px;">
