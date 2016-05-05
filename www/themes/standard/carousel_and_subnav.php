@@ -9,7 +9,7 @@
 				<div class="pull-right">{@ linkNext @}</div>		
 			</div>
 			<div class="col-md-12">
-				{@ carousel {
+				{@ bootstrap/carousel {
 					files: {[ carousel_files ]},
 					width: 1200,
 					height: 675
