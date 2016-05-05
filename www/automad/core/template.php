@@ -155,26 +155,58 @@ class Template {
 	
 
 	/**
-	 *	Call an extension method.
+	 *	Call an extension.     
 	 *
-	 *	@param string $name
+	 *	Extensions are basically called by the subdirectory name within the "/extensions" directory. 
+	 *	The file name within that subdirectory must have the basename of that directory followed by ".php".
+	 *	Both, class and method name, must be the basename of the directory as well.    
+	 *
+	 *	The namespace must start with "Extensions".     
+	 *	In case of extensions grouped in a subdirectory of "/extensions", the name of that directory has to be added to the namespace as well, 
+	 *	in that way that the namespace reflects the actual directory structure without the last directory containing the actual .php file.    
+	 *          
+	 *	Example 1 - Single extension:     
+	 *	An extension call like {@ example1 @} would load the file "/extensions/example1/example1.php", 
+	 *	create an instance of the class "\Extensions\example1" ($object) and call the method "$object->example1()" of that class.
+	 *	The namespace would just be "Extensions".  
+	 *	The full naming scheme would be:    
+	 *	- namespace:	Extensions
+	 *	- directory:	/extensions/example1 (must be lowercase)
+	 *	- file:		/extensions/example1/example1.php (must be lowercase)
+	 *	- class:	Example1
+	 *	- method:	Example1
+	 *          
+	 *	Example 2 - Extension in a subdirectory (possibly grouped with others):     
+	 *	An extension call like {@ group/example2 @} would load the file "/extensions/group/example2/example2.php",
+	 *	create an instance of the class "\Extensions\group\example2" ($object) and call the method "$object->example2()" of that class.
+	 *	The namespace in this case would be "Extensions\group". 
+	 *	The full naming scheme would be:    
+	 *	- namespace:	Extensions\Group   
+	 *	- directory:	/extensions/group/example2 (must be lowercase)
+	 *	- file:		/extensions/group/example2/example2.php (must be lowercase)
+	 *	- class:	Example2
+	 *	- method:	Example2
+	 *        
+	 *	@param string $extension
 	 *	@param array $options
-	 *	@return The returned content from the called method
+	 *	@return The returned markup of the called method
 	 */
 	
-	private function callExtension($name, $options) {
+	private function callExtension($extension, $options) {
 		
-		// Adding the extension namespace to the called class here, to make sure,
-		// that only classes from the /extensions directory and within the \Extension namespace get used.
-		$class = AM_NAMESPACE_EXTENSIONS . '\\' . $name;
+		// Building the class name.
+		$class = AM_NAMESPACE_EXTENSIONS . '\\' . str_replace('/', '\\', $extension);
+		
+		// Extract the basename of the given $extension to be used as the method name, in case the extension is grouped with other extensions in a subdirectory.
+		$method = basename($extension);
 		
 		// Building the extension's file path.
-		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class) . '/' . $name) . '.php';
+		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class) . '/' . $method) . '.php';
 		
 		if (file_exists($file)) {
 							
 			// Load class.				
-			Debug::log($file, 'Loading class');
+			Debug::log($file, 'Loading');
 			require_once $file;
 			
 			if (class_exists($class, false)) {
@@ -182,31 +214,31 @@ class Template {
 				// Create instance of class dynamically.
 				$object = new $class();
 				Debug::log($class, 'New instance created of');
-		
-				if (method_exists($object, $name)) {
+				
+				if (method_exists($object, $method)) {
 					
 					// Collect assets.
-					$this->collectExtensionAssets($name);
+					$this->collectExtensionAssets($extension);
 					
 					// Call method dynamically and pass $options & Automad.
-					Debug::log($options, 'Calling method "' . $name . '" and passing the following options');
-					return $object->$name($options, $this->Automad);
+					Debug::log($options, 'Calling method "' . $method . '" and passing the following options');
+					return $object->$method($options, $this->Automad);
 		
 				} else {
 					
-					Debug::log($name, 'Method not existing!');	
+					Debug::log($method, 'Method not existing in class "' . $class . '"');	
 				
 				}
 		
 			} else {
 				
-				Debug::log($class, 'Class not existing!');		
+				Debug::log($class, 'Class not existing');		
 			
 			}
 		
 		} else {
 			
-			Debug::log($file, 'File not found!');
+			Debug::log($file, 'File not found');
 		
 		}
 		
@@ -225,26 +257,23 @@ class Template {
 		
 		Debug::log($path, 'Getting assets for "' . $extension . '" in');
 		
-		foreach (glob($path . '/*.css') as $file) {
+		foreach (array('.css', '.js') as $type) {
 			
-			// Only add the minified version, if existing.
-			if (!file_exists(str_replace('.css', '.min.css', $file))) {
-			
-				// Use $file also as key to keep elemtens unique.
-				$this->extensionAssets['css'][$file] = $file;
-			
-			}
-			
-		}
-		
-		foreach (glob($path . '/*.js') as $file) {
-			
-			// Only add the minified version, if existing.
-			if (!file_exists(str_replace('.js', '.min.js', $file))) {
-			
-				// Use $file also as key to keep elemtens unique.
-				$this->extensionAssets['js'][$file] = $file;
-			
+			foreach (glob($path . '/*' . $type) as $file) {
+				
+				// Only add the non-minified version, if no minified version exists.
+				if (!file_exists(str_replace($type, '.min' . $type, $file))) {
+					
+					// Use $file also as key to keep elemtens unique.
+					$this->extensionAssets[$type][$file] = $file;
+					Debug::log($file, 'Adding ' . basename($file) . ' for ' . $extension);
+					
+				} else {
+					
+					Debug::log($file, 'Skipping ' . basename($file) . ' for ' . $extension . ' due to minified version');
+					
+				}
+						
 			}
 			
 		}
@@ -265,15 +294,15 @@ class Template {
 		
 		$html = '';
 		
-		if (isset($this->extensionAssets['css'])) {
-			foreach ($this->extensionAssets['css'] as $file) {
+		if (isset($this->extensionAssets['.css'])) {
+			foreach ($this->extensionAssets['.css'] as $file) {
 				$html .= "\t" . '<link type="text/css" rel="stylesheet" href="' . str_replace(AM_BASE_DIR, '', $file) . '" />' . "\n";
 				Debug::log($file, 'Created tag for');	
 			}
 		}
 		
-		if (isset($this->extensionAssets['js'])) {
-			foreach ($this->extensionAssets['js'] as $file) {
+		if (isset($this->extensionAssets['.js'])) {
+			foreach ($this->extensionAssets['.js'] as $file) {
 				$html .= "\t" . '<script type="text/javascript" src="' . str_replace(AM_BASE_DIR, '', $file) . '"></script>' . "\n";
 				Debug::log($file, 'Created tag for');
 			}
