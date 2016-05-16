@@ -268,7 +268,7 @@ class Selection {
 			// generate pattern
 			$pattern = '/^';
 			foreach ($keywords as $keyword) {
-				$pattern .= '(?=.*' . preg_quote($keyword) . ')';
+				$pattern .= '(?=.*' . preg_quote(trim($keyword)) . ')';
 			}
 			// case-insensitive and multiline
 			$pattern .= '/is';
