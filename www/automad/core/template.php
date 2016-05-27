@@ -77,13 +77,6 @@ class Template {
 	
 	private $extensionAssets = array();
 	
-		
-	/**
-	 *	Whitelist of standard PHP string functions.
-	 */
-	
-	private $phpStringFunctions = array('strlen', 'strtolower', 'strtoupper', 'ucwords');
-	
 	
 	/**
 	 * 	An array of snippets defined within a template.
@@ -496,7 +489,7 @@ class Template {
 				$value = $this->getValue($matches['varName']);
 				
 				// Modify $value by processing all matched string functions.
-				$value = $this->processStringFunctions($value, $matches['varFunctions']);
+				$value = Pipe::process($value, $matches['varFunctions']);
 				
 				// In case $value will be used as an JSON option, some chars have to be escaped to work within a JSON formatted string.
 				if ($isJsonString) {
@@ -941,74 +934,6 @@ class Template {
 		
 	}
 	
-
-	/**
-	 *	Modifiy $value by processing a string of matched string functions.     
-	 *	If a function name matches a String class method, that method is called, else if a function name is in the whitelist of PHP standard functions, that function is called.
-	 *	In case a function name is an integer value, the String::shorten() method is called and the integer value is passed as parameter.
-	 *	
-	 *	@param string $value
-	 *	@param string $functionsString - (like: | funtion (parameters) | function (parameters) | ...)
-	 *	@return the modified $value  
-	 */
-
-	private function processStringFunctions($value, $functionString) {
-		
-		// Match functions.
-		preg_match_all('/' . Regex::stringFunction('function') . '/s', $functionString, $matches, PREG_SET_ORDER);
-		
-		// Process functions.
-		foreach ($matches as $match) {
-			
-			$function = $match['functionName'];
-			$parameters = array();
-			
-			// Prepare function parameters.
-			if (isset($match['functionParameters'])) {
-				
-				// Relpace single quotes when not escaped with double quotes.
-				$csv = preg_replace('/(?<!\\\\)(\')/', '"', $match['functionParameters']);
-				
-				// Create $parameters array.
-				$parameters = str_getcsv($csv, ',', '"');
-				$parameters = array_map('trim', $parameters);
-				
-				// Cast boolean parameters correctly.
-				// To use "false" or "true" as strings, they have to be escaped like "\true" or "\false".
-				array_walk($parameters, function(&$param) {
-					if (in_array($param, array('true', 'false'))) {
-						$param = filter_var($param, FILTER_VALIDATE_BOOLEAN);
-					}
-				});
-				
-				$parameters = array_map('stripslashes', $parameters);
-				
-			} 
-			
-			// Add the actual $value to the parameters array as its first element.
-			$parameters = array_merge(array(0 => $value), $parameters);
-			
-			// Call string function.
-			if (method_exists('\Automad\Core\String', $function)) {
-				// Call a String class method.
-				$value = call_user_func_array('\Automad\Core\String::' . $function, $parameters);
-				Debug::log($parameters, 'Call String::' . $function);
-			} else if (in_array(strtolower($function), $this->phpStringFunctions)) {
-				// Call standard PHP string function.
-				$value = call_user_func_array($function, $parameters);
-				Debug::log($parameters, 'Call ' . $function);
-			} else if (is_numeric($function)) {
-				// In case $function is a number, call String::shorten() method and pass $function as paramter for the max number of characters.
-				Debug::log($value, 'Shorten content to max ' . $function . ' characters');
-				$value = String::shorten($value, $function);
-			}
-				
-		}
-			
-		return $value;
-		
-	}
-
 	
 	/**
 	 *	Find all links/URLs in $str and resolve the matches according to their type.
