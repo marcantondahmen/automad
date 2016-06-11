@@ -222,14 +222,14 @@ class Regex {
 
 
 	/**
-	 *	Return the regex for the string functions of content variables.     
+	 *	Return the regex for a piped string function of content variables.     
 	 *	Like: | name (parameters)
 	 *
 	 *	@param string $namedReferencePrefix
 	 *	@return The regex to match functions and their parameters
 	 */
 	
-	public static function stringFunction($namedReferencePrefix = false) {
+	public static function pipe($namedReferencePrefix = false) {
 		
 		if ($namedReferencePrefix) {
 			$name = 	'?P<' . $namedReferencePrefix . 'Name>';
@@ -279,7 +279,7 @@ class Regex {
 			$charClass = Regex::$charClassAllVariables;
 		}
 		
-		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . $charClass . '+)\s*' . '(' . $functions . '(?:' . Regex::stringFunction() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
+		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . $charClass . '+)\s*' . '(' . $functions . '(?:' . Regex::pipe() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
 		
 	}
 	
