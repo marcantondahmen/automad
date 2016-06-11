@@ -66,14 +66,14 @@ class Pipe {
 	 *	In case a function name is an integer value, the String::shorten() method is called and the integer value is passed as parameter.
 	 *	
 	 *	@param string $value
-	 *	@param string $pipe - (like: | funtion (parameters) | function (parameters) | ...)
+	 *	@param string $pipe - (like: | function (parameters) | function (parameters) | ...)
 	 *	@return the modified $value 
 	 */
 
 	public static function process($value, $pipe) {
 		
 		// Match functions.
-		preg_match_all('/' . Regex::stringFunction('function') . '/s', $pipe, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . Regex::pipe('function') . '/s', $pipe, $matches, PREG_SET_ORDER);
 		
 		// Process functions.
 		foreach ($matches as $match) {
