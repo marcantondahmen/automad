@@ -53,6 +53,26 @@ class String {
 	
 	
 	/**
+	 *	Change format of a given date.
+	 *
+	 *	In case a date variable is set in a txt file, its format can be different to a timestamp (mtime) of a file or page.
+	 *	To be independent on the given format without explicitly specifying it, strtotime() is used generate a proper input date.
+	 *	To use DateTime::createFromFormat() instead would require a third parameter (the original format)
+	 *	and would therefore make things more complicated than needed.
+	 *
+	 *	@param string $date
+	 *	@param string $format
+	 *	@return the formatted date
+	 */
+
+	public static function dateFormat($date, $format) {
+
+		return date($format, strtotime($date));
+
+	}
+
+
+	/**
 	 *	Set a default value for $str.
 	 *	
 	 *	@param string $str
