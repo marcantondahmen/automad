@@ -135,12 +135,12 @@ Config::set('AM_IMG_JPG_QUALITY', 90);
 Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
 
 // TEMPLATE DELIMITERS
-Config::set('AM_DEL_VAR_OPEN', '{[');
-Config::set('AM_DEL_VAR_CLOSE', ']}');
-Config::set('AM_DEL_STATEMENT_OPEN', '{@');
-Config::set('AM_DEL_STATEMENT_CLOSE', '@}');
-Config::set('AM_DEL_COMMENT_OPEN', '{*');
-Config::set('AM_DEL_COMMENT_CLOSE', '*}');
+Config::set('AM_DEL_VAR_OPEN', '@{');
+Config::set('AM_DEL_VAR_CLOSE', '}');
+Config::set('AM_DEL_STATEMENT_OPEN', '<@');
+Config::set('AM_DEL_STATEMENT_CLOSE', '@>');
+Config::set('AM_DEL_COMMENT_OPEN', '<#');
+Config::set('AM_DEL_COMMENT_CLOSE', '#>');
 
 // EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
