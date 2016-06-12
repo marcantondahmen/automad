@@ -2,11 +2,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<hr>
-				{@ breadcrumbs.php @}
+				<@ breadcrumbs.php @>
 			</div>
 		</div>
 	
-	</div> {* Container End *}
+	</div> <# Container End #>
 
 </body>
 </html>

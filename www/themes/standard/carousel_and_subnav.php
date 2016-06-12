@@ -1,53 +1,53 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-{@ elements/header.php @}
+<@ elements/header.php @>
 
 	<div class="container">
-		
+
 		<div class="row">
-			<div class="col-md-12 prev-next">	
-				{@ linkPrev @}
-				<div class="pull-right">{@ linkNext @}</div>		
+			<div class="col-md-12 prev-next">
+				<@ linkPrev @>
+				<div class="pull-right"><@ linkNext @></div>
 			</div>
 			<div class="col-md-12">
-				{@ bootstrap/carousel {
-					files: {[ carousel_files ]},
+				<@ bootstrap/carousel {
+					files: @{carousel_files},
 					width: 1200,
 					height: 675
-				} @}
+				} @>
 			</div>
 			<div class="col-md-8 no-vertical-padding">
 				<div class="row">
 					<div id="title" class="col-md-12">
-						<h1>{[ title ]}</h1>
-						<h2>{[ subtitle ]}</h2>
+						<h1>@{title}</h1>
+						<h2>@{subtitle}</h2>
 					</div>
 					<div class="col-md-12">
-						{@ filterParentByTags @}
+						<@ filterParentByTags @>
 					</div>
 					<div class="col-md-12">
-						{[ text | markdown ]}
+						@{text | markdown}
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="col-md-4 col-lg-offset-1 col-lg-3 no-vertical-padding">
 				<div class="row">
-					<div class="col-md-12">{@ navTree { parent: '/', all: false } @}</div>
+					<div class="col-md-12"><@ navTree { parent: '/', all: false } @></div>
 				</div>
 			</div>
-		</div>		
-		
+		</div>
+
 		<hr>
-			
+
 		<div class="row">
-			{@ pagelist { type: "related" } @}
-			{@ pagelistMarkup {
+			<@ pagelist { type: "related" } @>
+			<@ pagelistMarkup {
 				variables: "title, subtitle",
 				crop: true,
 				class: "text-only col-xs-6 col-sm-6 col-md-4 col-lg-3"
-			} @} 
-		</div>	
+			} @>
+		</div>
 
-	</div>		
-	
-{@ elements/footer.php @}
+	</div>
+
+<@ elements/footer.php @>
