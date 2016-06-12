@@ -6,10 +6,10 @@ The Navbar extension creates a responsive and collapsable Bootstrap Navbar for m
 
 ###Markup
 
-To use the Navbar extension, simply add 
+To use the Navbar extension, simply add
 
-	{@ bootstrap/navbar @}
-	
+	<@ bootstrap/navbar @>
+
 somewhere to your template's HTML body markup.
 
 ---
@@ -19,10 +19,10 @@ somewhere to your template's HTML body markup.
 This extension requires *Twitter's Bootstrap* CSS and Javascript.
 You can include all needed files by adding
 
-	{@ bootstrap/css @}
-	{@ bootstrap/js @}
-	
-to your template's head section.	
+	<@ bootstrap/css @>
+	<@ bootstrap/js @>
+
+to your template's head section.
 
 ---
 
@@ -40,7 +40,7 @@ There are several options available to modify the Navbar:
 - searchPosition: `"left"` or `"right"` - Position of the search box - (default: `"left"`)
 - levels: `integer` - Maximum number of levels to be displayed (default: `2`)
 
-The options must be specified in **JSON** format. 
+The options must be specified in **JSON** format.
 
 ---
 
@@ -48,17 +48,17 @@ The options must be specified in **JSON** format.
 
 Centered navbar with optional brand as variable:
 
-	{@ bootstrap/navbar {
+	<@ bootstrap/navbar {
 		fluid: false,
-		brand: {[ brand ]},
+		brand: @{brand},
 		search: "Search"
-	} @}
-	
+	} @>
+
 Full-width, fixed to the top and with an optional logo as variable, but without a search box:
 
-	{@ bootstrap/navbar {
+	<@ bootstrap/navbar {
 		fixedToTop: true,
-		logo: {[ logo ]},
+		logo: @{logo},
 		logoWidth: 300,
 		search: false
-	} @}
+	} @>

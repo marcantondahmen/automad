@@ -6,10 +6,10 @@ The Carousel extension creates a slideshow using Twitter's Bootstrap framework o
 
 ###Markup
 
-To use the Carousel extension, simply add 
+To use the Carousel extension, simply add
 
-	{@ bootstrap/carousel @}
-	
+	<@ bootstrap/carousel @>
+
 somewhere to your template's HTML body markup.
 
 ---
@@ -19,9 +19,9 @@ somewhere to your template's HTML body markup.
 The Carousel extension requires *Twitter's Bootstrap* CSS and Javascript.
 You can include all needed files by adding
 
-	{@ bootstrap/css @}
-	{@ bootstrap/js @}
-	
+	<@ bootstrap/css @>
+	<@ bootstrap/js @>
+
 to your template's head section.
 
 ---
@@ -38,7 +38,7 @@ There are several options available to modify the carousel:
 - duration: `integer` - Duration in milliseconds for each image (default: `3000`)
 - controls: `boolean` - Enable/disable controls (default: `true`)
 
-The options must be specified in **JSON** format. 
+The options must be specified in **JSON** format.
 
 ---
 
@@ -46,21 +46,19 @@ The options must be specified in **JSON** format.
 
 Carousel 850x450px, 3 seconds per slide and a variable for the glob pattern:
 
-	{@ bootstrap/carousel {
-		files: {[ carousel_file_pattern ]}, 
-		width: 850, 
-		height: 450, 
+	<@ bootstrap/carousel {
+		files: @{carousel_file_pattern},
+		width: 850,
+		height: 450,
 		duration: 3000
-	} @} 
+	} @>
 
 The same carousel without controls and a list of files:
 
-	{@ bootstrap/carousel {
-		files: "image1.jpg, image2.jpg", 
-		width: 850, 
-		height: 450, 
+	<@ bootstrap/carousel {
+		files: "image1.jpg, image2.jpg",
+		width: 850,
+		height: 450,
 		duration: 3000,
 		controls: false
-	} @} 
-
-
+	} @>
