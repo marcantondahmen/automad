@@ -295,7 +295,7 @@ class Selection {
 	
 	
 	/**
-	 *	Filter out the neighbors (previous and next page) to the passed URL.
+	 *	Filter out the non-hidden neighbors (previous and next page) to the passed URL.
 	 *
 	 *	$this->selection only holds two pages after completion with the keys ['prev'] and ['next'] instead of the URL-key.
 	 *	If there is only one page in the array (has no siblings), the selection will be empty. For two pages, it will only
@@ -306,44 +306,52 @@ class Selection {
 	
 	public function filterPrevAndNextToUrl($url) {
 		
-		// To be able to hide the hidden pages as neighbors and jump directly to the closest non-hidden pages (both sides),
-		// in case one or both neigbors is/are hidden, $this->excludeHidden() has to be called here already, because only excluding the hidden pages
-		// later, when calling getSelection(), will cause a "gap" in the neighbors-array, which will lead to a missing link, for a hidden neighbor.
-		// To handle hidden pages correctly, the current page has to be temporary stored in $current, in case the current page itself is hidden, because the 
-		// curretn page is needed, even when hidden, to determine the closest neighbors.
-		$current = $this->selection[$url];
-		$this->excludeHidden();
-		$this->selection[$url] = $current;
+		if (array_key_exists($url, $this->selection)) {
 		
-		$keys = array_keys($this->selection);
-		$keyIndexes = array_flip($keys);
+			// To be able to hide the hidden pages as neighbors and jump directly to the closest non-hidden pages (both sides),
+			// in case one or both neigbors is/are hidden, $this->excludeHidden() has to be called here already, because only excluding the hidden pages
+			// later, when calling getSelection(), will cause a "gap" in the neighbors-array, which will lead to a missing link, for a hidden neighbor.
+			// To keep the correct position of the current page within the selection, even if the current page itself is hidden, 
+			// $Page-hidden has to be set temporary to false. 
+			$Page = $this->selection[$url];
+			// Cache the original value for $Page->hidden.
+			$hiddenCache = $Page->hidden;
+			$Page->hidden = false;
+			$this->excludeHidden();
+			// Restore the original value for $Page->hidden.
+			$Page->hidden = $hiddenCache;
 		
-		$neighbors = array();
-		
-		// Check number of pages
-		if (sizeof($keys) > 1) {
-	
-			if (sizeof($keys) > 2) {
-		
-				// Previous
-				if (isset($keys[$keyIndexes[$url]-1])) {
-					$neighbors['prev'] = $this->selection[$keys[$keyIndexes[$url]-1]];
-				} else {
-					$neighbors['prev'] = $this->selection[$keys[sizeof($keys)-1]];
+			$keys = array_keys($this->selection);
+			$keyIndexes = array_flip($keys);
+			
+			$neighbors = array();
+			
+			// Check number of pages
+			if (sizeof($keys) > 1) {
+				
+				if (sizeof($keys) > 2) {
+					
+					// Previous
+					if (isset($keys[$keyIndexes[$url]-1])) {
+						$neighbors['prev'] = $this->selection[$keys[$keyIndexes[$url]-1]];
+					} else {
+						$neighbors['prev'] = $this->selection[$keys[sizeof($keys)-1]];
+					}
+					
 				}
-			
+				
+				// Next
+				if (isset($keys[$keyIndexes[$url]+1])) {
+					$neighbors['next'] = $this->selection[$keys[$keyIndexes[$url]+1]];
+				} else {
+					$neighbors['next'] = $this->selection[$keys[0]];
+				}
+				
 			}
 			
-  		       	// Next
-		  	if (isset($keys[$keyIndexes[$url]+1])) {
-				$neighbors['next'] = $this->selection[$keys[$keyIndexes[$url]+1]];
-			} else {
-				$neighbors['next'] = $this->selection[$keys[0]];
-			}
-		
+			$this->selection = $neighbors;
+			
 		}
-		
-		$this->selection = $neighbors;
 		
 	}
 	
