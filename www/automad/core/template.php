@@ -519,9 +519,17 @@ class Template {
 					// Previous or next page. Use lowercase matches to be case insensitive.
 					if (strtolower($matches['with']) == 'prev' || strtolower($matches['with']) == 'next') {
 						
+						// Cache the current pagelist config and temporary disable the excludeHidden parameter to also
+						// get the neighbors of a hidden page.
+						$pagelistConfigCache = $this->Automad->getPagelist()->config();
+						$this->Automad->getPagelist()->config(array('excludeHidden' => false));
+						
 						$Selection = new Selection($this->Automad->getPagelist()->getPages());
 						$Selection->filterPrevAndNextToUrl($Context->get()->url);
 						$pages = $Selection->getSelection();
+						
+						// Restore the original pagelist config.
+						$this->Automad->getPagelist()->config($pagelistConfigCache);
 						
 						if (array_key_exists(strtolower($matches['with']), $pages)) {
 							$Page = $pages[strtolower($matches['with'])];
