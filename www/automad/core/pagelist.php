@@ -96,6 +96,7 @@ class Pagelist {
 					'template' => false,
 					'sortItem' => false,
 					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER,
+					'excludeHidden' => true,
 					'offset' => 0,
 					'limit' => NULL
 				);
@@ -134,6 +135,30 @@ class Pagelist {
 	 */
 	
 	private $sortOrder;
+	
+	
+	/**
+	 * 	Defines whether the pagelist excludes hidden pages or not. 
+	 */
+	
+	private $excludeHidden;
+	
+	
+	/**
+	 * 	Defines the offset within the array of relevant pages. Note that this offest reduces the content of the pagelist and not its output. 
+	 * 	To only reduce the output without reducing the pagelist itself, the $this->getPages() method provides also offset and limit parameters.  
+	 */
+	
+	private $offset;
+	
+	
+	/**
+	 *	Defines the maximum number of pages in the pagelist. Also that limit reduces the pagelist content and not the returned array. 
+	 *	To limit the number in the returned array only while keeping all relevant pages in the pagelist object, the $this->getPages() 
+	 *	method provides its own set of offset and limit parameters.
+	 */
+	
+	private $limit;
 	
 	
 	/**
@@ -176,8 +201,6 @@ class Pagelist {
 	
 	public function config($options = array()) {
 		
-		Debug::log($options, 'Updating the configuration with the following options');
-		
 		// Turn all (but only) array items also existing in $defaults into class properties.
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
@@ -186,8 +209,6 @@ class Pagelist {
 		
 		// Override settings with current query string options (filter, search and sort)
 		$overrides = Parse::queryArray();
-		
-		Debug::log($overrides, 'Use overrides from query string');
 		
 		foreach (array('filter', 'search', 'sortItem', 'sortOrder') as $key) {
 			if (isset($overrides[$key])) {
@@ -201,7 +222,11 @@ class Pagelist {
 		}
 			
 		$configArray = array_intersect_key((array)get_object_vars($this), $this->defaults);
-		Debug::log($configArray, 'Current config');
+		
+		// Only log debug info in case $options is not empty.
+		if (!empty($options)) {
+			Debug::log(array('Options' => $options, 'Current Config' => $configArray), json_encode($options, JSON_UNESCAPED_SLASHES));
+		}
 		
 		return $configArray;
 	
@@ -257,7 +282,7 @@ class Pagelist {
 		// Filter by keywords (for search results)
 		$Selection->filterByKeywords($this->search);
 		
-		return $Selection->getSelection(true, $this->offset, $this->limit);
+		return $Selection->getSelection($this->excludeHidden, $this->offset, $this->limit);
 			
 	}
 	
@@ -302,7 +327,7 @@ class Pagelist {
 		$Selection->filterByTag($this->filter);
 		$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 	
-		$pages = $Selection->getSelection(true, $offset, $limit);
+		$pages = $Selection->getSelection($this->excludeHidden, $offset, $limit);
 		
 		Debug::log(array_keys($pages));
 		
