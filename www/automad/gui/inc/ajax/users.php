@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -57,39 +57,26 @@ if (isset($_POST['delete'])) {
 ob_start();
 
 
-?>
+foreach (Accounts::get() as $user => $hash) { 
 	
-	<div class="modal-body">	
-		<?php foreach (Accounts::get() as $user => $hash) { ?>	
-		<div class="box">
-			<div class="row">	
-				<div class="col-xs-10"><h4><span class="glyphicon glyphicon-user"></span> <?php echo $user; ?></h4></div>
-				<div class="col-xs-2">
-				<?php if ($user != User::get()) { ?>
-					<div class="pull-right btn-group" data-toggle="buttons">
-						<label class="btn btn-default btn-xs">
-							<input type="checkbox" name="delete[]" value="<?php echo $user; ?>"><span class="glyphicon glyphicon-ok"></span>
-						</label>
-					</div>
-				<?php } ?>	
-				</div>
-			</div>	
-		</div>	
-		<?php } ?> 
-	</div>
-
-	<div class="modal-footer">			
-		<div class="btn-group btn-group-justified">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button>
-			</div>
-			<div class="btn-group">
-				<button type="submit" class="btn btn-danger" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo Text::get('btn_remove_selected'); ?></button>
-			</div>
+?>
+		
+	<div class="uk-panel uk-panel-box uk-margin-small-bottom">
+		<i class="uk-icon-user"></i>&nbsp;&nbsp;<?php echo $user; ?>
+		<div class="uk-float-right">
+			<?php if ($user != User::get()) { ?>
+			<label data-automad-toggle>
+				<input type="checkbox" name="delete[]" value="<?php echo $user; ?>" />
+			</label>
+			<?php } else { ?>
+			<span class="uk-text-muted"><?php echo Text::get('sys_user_you'); ?></span>
+			<?php } ?>
 		</div>
-	</div>
+	</div>	
+	
+<?php 
 
-<?php
+}
 
 
 $output['html'] = ob_get_contents();
