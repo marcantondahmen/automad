@@ -34,12 +34,14 @@
  */
 
 
-// JavaScript check
+/*
+ *	Check if JS is enabled. 
+ */
 	
-$(document).ready(function() {
-
-	// Make main container visible.
-	$('#noscript').remove();
-	$('#script').removeClass('hidden');
-
-});
++function($) {
+	
+	$(document).ready(function() {
+		$('#automad-no-js').remove();
+	});
+	
+}(jQuery);
