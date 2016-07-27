@@ -70,6 +70,8 @@ class Text {
 		
 		array_walk(Text::$modules, function(&$item) {
 			$item = Core\String::markdown($item, true);
+			// Remove all line breaks to avoid problems when using text modules in JS notify.
+			$item = str_replace(array("\n", "\r"), '', $item);
 		});
 			
 	}
