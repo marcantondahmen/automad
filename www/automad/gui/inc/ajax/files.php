@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -97,131 +97,116 @@ foreach (Core\Parse::allowedFileTypes() as $type) {
 ob_start();
 
 
-if ($files) {
+if ($files) { ?>
 	
-	sort($files);
-
-	foreach ($files as $file) { 
-		
-		?>
-		
-		<div class="box">
-			
-			<div class="row">
-				
-				<?php 
-	
-				$extension = pathinfo($file, PATHINFO_EXTENSION);
-	
-				if (in_array(strtolower($extension), $imageTypes)) { 
-	
-					$img = new \Automad\Core\Image($file, 125, 125, true);
-	
-					echo 	'<div class="col-xs-3">' .
-						'<a href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
-						'<img class="img-responsive" src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />' .
-						'</a>' . 
-						'</div>' .		
-						'<div class="col-xs-8">' . 
-						'<h4><a title="' . Text::get('btn_rename_file') . '" href="#" data-target="#automad-rename-file-modal" data-toggle="modal" data-file="' . basename($file) . '">' . basename($file) . ' <span class="glyphicon glyphicon-pencil"></span></a></h4>';
-					
-					if (strtolower($extension) == 'jpg' && $img->description) {
-						echo '<h6 title="Exif description"><span class="glyphicon glyphicon-comment"></span> ' . $img->description . '</h6>';	
-					}
-						
-					echo	'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' . 
-						'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
-						'<div class="badge">' . $img->originalWidth . 'x' . $img->originalHeight . '</div>' .
-						'</div>';
-			
-				} else { 
-	
-					echo 	'<div class="col-xs-3">' .
-						'<a class="filetype img-responsive" href="' . str_replace(AM_BASE_DIR, AM_BASE_URL, $file) . '" target="_blank" title="Download" tabindex=-1>' .
-						'<span class="glyphicon glyphicon-file"></span> ' . $extension . 
-						'</a>' .
-						'</div>' .
-						'<div class="col-xs-8">' . 
-						'<h4><a title="' . Text::get('btn_rename_file') . '" href="#" data-target="#automad-rename-file-modal" data-toggle="modal" data-file="' . basename($file) . '">' . basename($file) . ' <span class="glyphicon glyphicon-pencil"></span></a></h4>' .
-						'<h6 title="Modification time"><span class="glyphicon glyphicon-time"></span> ' . date('F j, Y / H:i', filemtime($file)) . '</h6>' .
-						'<h6 title="Path relative to the Automad base directory"><span class="glyphicon glyphicon-hdd"></span> ' . str_replace(AM_BASE_DIR, '', $file) . '</h6>' .
-						'</div>';
-	 
-				} 
-
-				?> 
-				
-				<div class="col-xs-1">
-					<div class="pull-right btn-group" data-toggle="buttons">
-						<label class="btn btn-default btn-xs">
-							<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>"><span class="glyphicon glyphicon-ok"></span>
-						</label>
-					</div>
-				</div>
-	
-			</div>
-			
+		<div class="uk-text-right uk-margin-bottom">
+			<a href="#automad-upload-modal" class="uk-button" data-uk-modal="{bgclose: false, keyboard: false}">
+				<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php echo Text::get('btn_upload'); ?>
+			</a>
+			<button class="uk-button uk-button-danger" data-automad-submit="files">
+				<i class="uk-icon-trash"></i>&nbsp;&nbsp;<?php echo Text::get('btn_remove_selected'); ?>
+			</button>
 		</div>
-				
+	
 		<?php 
+		
+		sort($files);
 
-	}
+		foreach ($files as $file) { 
+			
+			$extension = pathinfo($file, PATHINFO_EXTENSION);
+			
+			if (in_array(strtolower($extension), $imageTypes)) { 
 
-} else {
-
-	?><div class="alert alert-warning"><?php echo Text::get('error_no_files'); ?></div><?php
+				$img = new \Automad\Core\Image($file, 90, 90, true);
+				$info = '<div class="uk-text-small">' . 
+					$img->originalWidth . ' <i class="uk-icon-times"></i> ' . $img->originalHeight . 
+					'</div>';
+				$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
+				
+			} else {
+				
+				$info = '';
+				$icon = '<div class="uk-vertical-align-middle uk-text-muted"><i class="uk-icon-file-o"></i><br /><span class="automad-files-extension">' . $extension . '</span></div>';
+				
+			}
+			
+		?>
 	
-}
-
-?> 
-
-<hr>
-
-<div class="btn-group btn-group-justified">
-	<div class="btn-group">
-		<button type="submit" class="btn btn-danger" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo Text::get('btn_remove_selected'); ?></button>
-	</div>
-	<div class="btn-group">
-		<a class="btn btn-primary" href="#" data-target="#automad-upload-modal"><span class="glyphicon glyphicon-open"></span> <?php echo Text::get('btn_upload'); ?></a>
-	</div>
-</div>
-
-
-<!-- Rename File Modal -->
-<div class="modal fade" id="automad-rename-file-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>">
-	<div class="modal-dialog">
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<h3 class="modal-title"><?php echo Text::get('btn_rename_file'); ?></h3> 
+		<div class="uk-panel uk-panel-box uk-margin-small-top">	
+			<div class="automad-files-icon uk-border-rounded uk-overflow-hidden">
+				<a class="uk-vertical-align uk-text-center" href="<?php echo str_replace(AM_BASE_DIR, AM_BASE_URL, $file); ?>" target="_blank" title="Download">
+					<?php echo $icon; ?>
+				</a>
 			</div>
-			<div class="modal-body"><!-- Input fields get created by JS --></div>	
-			<div class="modal-footer">
-				<div class="btn-group btn-group-justified">
-					<div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button></div>
-					<div class="btn-group"><button id="rename-file" type="button" class="btn btn-primary" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo Text::get('btn_rename_file'); ?></button></div>
+			<div class="automad-files-info">
+				<div class="uk-panel-title uk-text-truncate">
+					<a class="uk-link-muted" href="#automad-rename-file-modal" title="<?php echo Text::get('btn_rename_file'); ?>" data-uk-modal data-automad-file="<?php echo basename($file); ?>">
+						<?php echo basename($file) ?>&nbsp;&nbsp;<i class="uk-icon-pencil"></i>
+					</a>
+				</div>
+				<div class="uk-text-small uk-text-truncate">
+					<?php echo date('M j, Y H:i', filemtime($file)); ?>
+				</div>
+				<div class="uk-text-small uk-text-truncate">
+					<a class="uk-link-muted" href="<?php echo str_replace(AM_BASE_DIR, AM_BASE_URL, $file); ?>" target="_blank">
+						<?php echo str_replace(AM_BASE_DIR, '', $file) ?>
+					</a>
+				</div>
+				<?php echo $info; ?>   
+			</div>
+			<div class="uk-panel-badge">
+				<label data-automad-toggle>
+					<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>" />
+				</label>
+			</div>	
+		</div>
+				
+		<?php } ?> 
+		
+		<!-- Rename File Modal -->
+		<div id="automad-rename-file-modal" class="uk-modal" data-automad-url="<?php echo $url; ?>">
+			<div class="uk-modal-dialog">
+				<div class="uk-modal-header">
+					<?php echo Text::get('btn_rename_file'); ?>
+				</div>
+				<!-- Input fields get created by JS -->
+				<div class="uk-modal-footer uk-text-right">
+					<button type="button" class="uk-modal-close uk-button">
+						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?>
+					</button>
+					<button id="automad-rename-file-submit" type="button" class="uk-button uk-button-primary">
+						<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php echo Text::get('btn_rename_file'); ?>
+					</button>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	
+<?php } else { ?>
 
+		<a href="#automad-upload-modal" class="uk-button uk-button-large uk-width-1-1" data-uk-modal="{bgclose: false, keyboard: false}">
+			<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php echo Text::get('btn_upload'); ?>
+		</a>
+	
+<?php } ?> 
 
-<!-- Upload Modal -->
-<div class="modal fade" id="automad-upload-modal" tabindex="-1" data-automad-url="<?php echo $url; ?>" data-automad-dropzone-text="<?php echo Text::get('dropzone'); ?>" data-automad-browse-text="<?php echo Text::get('btn_browse'); ?>">
-	<div class="modal-dialog">
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<h3 class="modal-title"><?php echo Text::get('btn_upload'); ?></h3> 
-			</div>
-			<div id="automad-upload" class="modal-body"></div>	
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button>
+		<!-- Upload Modal -->
+		<div id="automad-upload-modal" class="uk-modal" data-automad-url="<?php echo $url; ?>" data-automad-dropzone-text="<?php echo Text::get('dropzone'); ?>" data-automad-browse-text="<?php echo Text::get('btn_browse'); ?>">
+			<div class="uk-modal-dialog">
+				<div class="uk-modal-header">
+					<?php echo Text::get('btn_upload'); ?>
+				</div>
+				<div id="automad-upload-container"></div>
+				<div class="uk-modal-footer uk-text-right">
+					<button type="button" class="uk-modal-close uk-button">
+						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?>
+					</button>
+				</div>
+				
 			</div>
 		</div>
-	</div>
-</div>
 
-<?php
+<?php 
 
 
 $output['html'] = ob_get_contents();
