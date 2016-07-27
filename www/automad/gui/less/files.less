@@ -1,0 +1,101 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@automad-files-icon-size-large:	90px;
+@automad-files-icon-size-small:	45px;
+
+
+.automad-files {
+	
+	&-icon {
+			
+		float: left;
+		width: @automad-files-icon-size-small;
+		height: @automad-files-icon-size-small;
+		min-width: @automad-files-icon-size-small;
+		
+		& a {
+			display: block;
+			background-color: #fff;
+			height: 100%;
+			line-height: 1;
+		}
+	
+		& .automad-files-extension {
+			font-size: 12px;
+		}
+		
+		@media (min-width: @breakpoint-small) {
+			
+			width: @automad-files-icon-size-large;
+			height: @automad-files-icon-size-large;
+			
+			& i {
+				font-size: 32px;
+				line-height: 42px;
+			}
+			
+			& .automad-files-extension {
+				font-size: 16px;
+			}
+			
+		}
+		
+	}
+	
+	&-info {
+		
+		float: left;
+		width: 100%;
+		box-sizing: border-box;
+		margin-left: -@automad-files-icon-size-small;
+		padding-left: (@automad-files-icon-size-small + @utility-margin);
+		padding-right: 15px;
+		
+		@media (min-width: @breakpoint-small) {
+			margin-left: -@automad-files-icon-size-large;
+			padding-left: (@automad-files-icon-size-large + @utility-margin);
+		}
+		
+	}
+	
+	&-dropzone {
+		
+		height: 200px;
+		background-color: #eee;
+		
+	}
+	
+}
