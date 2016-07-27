@@ -34,8 +34,20 @@
  */
 
 
-// Button: Remove parent container
+/*
+ *	Remove parent element and trigger change event on contained inputs/textareas before. 
+ */
 
-$(document).on('click', '.automad-remove-parent', function() {
-	$(this).parent().remove();
-});
++function($) {
+	
+	$(document).on('click', '.automad-remove-parent', function() {
+		
+		var	$parent = $(this).parent();
+		
+		// Trigger change event on removal to detect removed form fields.
+		$parent.find('input, textarea').trigger('change');
+		$parent.remove();
+		
+	});
+	
+}(jQuery);
