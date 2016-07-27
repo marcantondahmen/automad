@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -56,9 +56,9 @@ if (isset($_POST['item'])) {
 	if ($item == 'cache') {
 		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = Text::get('sys_cache') . ' <span class="badge on"><span class="glyphicon glyphicon-ok"></span> ' . Text::get('sys_status_enabled') . '</span>';
+			$output['status'] = Text::get('sys_cache') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-success">' . Text::get('sys_status_enabled') . '</span>';
 		} else {
-			$output['status'] = Text::get('sys_cache') . ' <span class="badge off"><span class="glyphicon glyphicon-ban-circle"></span> ' . Text::get('sys_status_disabled') . '</span>';
+			$output['status'] = Text::get('sys_cache') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-danger">' . Text::get('sys_status_disabled') . '</span>';
 		}
 		
 	}
@@ -66,16 +66,16 @@ if (isset($_POST['item'])) {
 	if ($item == 'debug') {
 		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = Text::get('sys_debug') . ' <span class="badge on"><span class="glyphicon glyphicon-ok"></span> ' . Text::get('sys_status_enabled') . '</span>';
+			$output['status'] = Text::get('sys_debug') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-success">' . Text::get('sys_status_enabled') . '</span>';
 		} else {
-			$output['status'] = Text::get('sys_debug') . ' <span class="badge off"><span class="glyphicon glyphicon-ban-circle"></span> ' . Text::get('sys_status_disabled') . '</span>';
+			$output['status'] = Text::get('sys_debug') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-danger">' . Text::get('sys_status_disabled') . '</span>';
 		}
 		
 	}
 	
 	if ($item == 'users') {
 				
-		$output['status'] = Text::get('sys_user_registered') . ' <span class="badge on">' . count(Accounts::get()) . '</span>';
+		$output['status'] = '<i class="uk-icon-user"></i>&nbsp;&nbsp;' . Text::get('sys_user_registered') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification">' . count(Accounts::get()) . '</span>';
 
 	}
 	
