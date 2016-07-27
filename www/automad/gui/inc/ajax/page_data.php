@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -108,20 +108,34 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 		
 		?>
 			
-			<div class="form-group">
-				<label for="input-data-title"><?php echo ucwords(AM_KEY_TITLE); ?></label>
-				<input id="input-data-title" class="form-control input-lg" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TITLE]); ?>" onkeypress="return event.keyCode != 13;" placeholder="Required" required />
+			<div class="uk-form-row">
+				<label for="automad-input-data-title" class="uk-form-label"><?php echo ucwords(AM_KEY_TITLE); ?></label>
+				<input id="automad-input-data-title" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TITLE]); ?>" placeholder="Required" required />
 			</div>
-			<div class="form-group">
-				<label for="input-data-tags"><?php echo Text::get('page_tags'); ?></label>
-				<input id="input-data-tags" class="form-control" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TAGS]); ?>" onkeypress="return event.keyCode != 13;" />
+			<div class="uk-form-row">
+				<label for="automad-input-data-tags" class="uk-form-label"><?php echo Text::get('page_tags'); ?></label>
+				<input id="automad-input-data-tags" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TAGS]); ?>" />
 			</div>
 			
-			<hr>
+			<hr />
 			
-			<h3><?php echo Text::get('page_settings'); ?></h3>
-			<div class="form-group">	
-				<button type="button" data-toggle="modal" data-target="#select-template-modal" class="btn btn-default">
+			<h3><?php echo Text::get('page_settings'); ?></h3>	
+			<!-- Select Template Modal -->	
+			<div id="automad-select-template-modal" class="uk-modal">
+				<div class="uk-modal-dialog">
+					<div class="uk-modal-header">
+						<h3><?php echo Text::get('page_theme_template'); ?></h3>
+					</div>	
+					<?php echo $this->Html->templateSelectBox('theme_template', $data[AM_KEY_THEME], $Page->template); ?>	
+					<div class="uk-modal-footer uk-text-right">
+						<button class="uk-modal-close uk-button"><i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?></button>
+						<button class="uk-button uk-button-primary" type="submit"><i class="uk-icon-check"></i>&nbsp;&nbsp;<?php echo Text::get('btn_apply_reload'); ?></button>
+					</div>
+				</div>
+			</div>
+			<!-- Select Template Button -->	
+			<div class="uk-form-row">
+				<a href="#automad-select-template-modal" type="button" data-uk-modal class="uk-button uk-button-large uk-width-1-1">
 					<?php
 					
 					if ($data[AM_KEY_THEME]) {
@@ -134,110 +148,56 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					
 					// Give feedback in template button whether the template exists or not.	
 					if (file_exists(AM_BASE_DIR . AM_DIR_THEMES . '/' . $theme . '/' . $Page->template . '.php')) {
-						echo ' <span class="badge">' . ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)) . '</span>';
+						echo ' <span class="uk-badge uk-badge-notification">' . ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)) . '</span>';
 					} else {
-						echo ' <span class="badge off">' . ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)) . ' - ' . Text::get('error_template_missing') . '</span>';
+						echo ' <span class="uk-badge uk-badge-notification uk-badge-danger">' . ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' > ', '> ') . $Page->template)) . ' - ' . Text::get('error_template_missing') . '</span>';
 					}
 						
 					?> 
-				</button>
+				</a>
 			</div>
-			<!-- Select Template Modal -->	
-			<div id="select-template-modal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body">
-							<?php echo $this->Html->templateSelectBox('theme_template', 'theme_template', $data[AM_KEY_THEME], $Page->template); ?>
-						</div>
-						<div class="modal-footer">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group">
-									<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button>
-								</div>
-								<div class="btn-group">
-									<button type="submit" class="btn btn-primary" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo Text::get('btn_apply_reload'); ?></button>
-								</div>
-							</div>
-						</div>
+			<?php if ($Page->path != '/') { ?> 
+			<div class="uk-form-row">	
+				<div class="uk-grid" data-uk-grid-margin>
+					<div class="uk-width-1-1 uk-width-medium-1-2">
+						<label for="automad-input-prefix" class="uk-form-label uk-text-truncate"><?php echo Text::get('page_prefix'); ?></label>
+						<input id="automad-input-prefix" class="uk-form-controls uk-width-1-1" type="text" name="prefix" value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" />
 					</div>
-				</div>
-			</div>
-			<?php if ($Page->path != '/') { ?> 	
-			<div class="row">	
-				<div class="form-group col-xs-6">
-					<label for="input-prefix"><?php echo Text::get('page_prefix'); ?></label>
-					<input id="input-prefix" class="form-control" type="text" name="prefix" value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" onkeypress="return event.keyCode != 13;" />
-				</div>
-				<div class="form-group col-xs-6">
-					<label><?php echo Text::get('page_visibility'); ?></label>
-					<div class="btn-group btn-group-justified" data-toggle="buttons">
-						<label class="btn btn-default<?php if ($hidden) { echo ' active'; } ?>"><?php echo Text::get('btn_hide_page'); ?> 
-							<input type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
+					<div class="uk-width-1-1 uk-width-medium-1-2">
+						<label for="automad-checkbox-hidden" class="uk-form-label"><?php echo Text::get('page_visibility'); ?></label>
+						<label class="uk-button" data-automad-toggle>
+							<?php echo Text::get('btn_hide_page'); ?>
+							<input id="automad-checkbox-hidden" type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
 						</label>
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="input-redirect"><?php echo Text::get('page_redirect'); ?></label>
-				<input id="input-redirect" class="form-control" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" onkeypress="return event.keyCode != 13;" />
+			<div class="uk-form-row">
+				<label for="automad-input-redirect" class="uk-form-label"><?php echo Text::get('page_redirect'); ?></label>
+				<input id="automad-input-redirect" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" />
 			</div>
 			<?php } ?> 
-			<hr>
-			<!-- Vars in template -->
-			<?php echo $this->Html->formFields(Text::get('page_vars_in_template'), $this->Keys->inCurrentTemplate(), $data); ?>
-			<hr>
-			<!-- Vars in other templates -->
-			<?php echo $this->Html->formFields(Text::get('page_vars_in_other_templates'), $this->Keys->inOtherTemplates(), $data); ?>
-			<hr>
-			<!-- Vars in in data but not in any template -->
-			<div id="automad-custom-variables">
-				<?php 
-					$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
-					echo $this->Html->formFields(Text::get('page_vars_unused'), $unusedDataKeys, $data, true); 
-				?>
-			</div>
-			<br />
-			<a class="btn btn-default" href="#" data-toggle="modal" data-target="#automad-add-variable-modal"><span class="glyphicon glyphicon-plus"></span> <?php echo Text::get('btn_add_var'); ?></a>
-		
-			<hr>
 			
-			<div class="btn-group btn-group-justified">
-				<div class="btn-group"><a class="btn btn-danger" href=""><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_discard'); ?></a></div>
-				<div class="btn-group"><button type="submit" class="btn btn-success" data-loading-text="<?php echo Text::get('btn_loading')?>"><span class="glyphicon glyphicon-ok"></span> <?php echo Text::get('btn_save'); ?></button></div>
-			</div>
+			<hr />
 			
-			<!-- Add Variable Modal -->	
-			<div id="automad-add-variable-modal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><?php echo Text::get('btn_add_var'); ?></h3>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="automad-add-variable-name"><?php echo Text::get('page_var_name'); ?></label>
-								<input type="text" class="form-control" id="automad-add-variable-name" onkeypress="return event.keyCode != 13;" />
-							</div>	
-						</div>
-						<div class="modal-footer">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group">
-									<button type="button" class="btn btn-default" data-dismiss="modal">
-										<span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?>
-									</button>
-								</div>
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary" id="automad-add-variable-button" data-automad-error-exists="<?php echo Text::get('error_var_exists'); ?>" data-automad-error-name="<?php echo Text::get('error_var_name'); ?>">
-										<span class="glyphicon glyphicon-plus"></span> <?php echo Text::get('btn_add_var'); ?>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<!-- Content -->
+			<h3><?php echo Text::get('page_content'); ?></h3>
+			
+			<?php 
+			
+			// Vars in selected template.
+			echo $this->Html->formFields($this->Keys->inCurrentTemplate(), $data, Text::get('page_vars_in_template')); 
+			
+			// Vars in other templates.
+			echo $this->Html->formFields($this->Keys->inOtherTemplates(), $data, Text::get('page_vars_in_other_templates')); 
+					
+			// Vars in data but not in any template	
+			$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
+			// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
+			echo $this->Html->formFields($unusedDataKeys, $data, Text::get('page_vars_unused'), true, false, 'automad-add-variable'); 
+					
+			?>
+				
 		<?php	
 	
 		// Save buffer to JSON array.
@@ -246,11 +206,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 	
 	}
 		
-} else {
-	
-	$output['error'] = Text::get('error_page_not_found');
-	
-}
+} 
 
 echo json_encode($output);
 
