@@ -1,0 +1,87 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+// Only apply the data-automad-toggle attribute to a label and place the input inside.
+// No special markup needed.
+
+label[data-automad-toggle] {
+	
+	& input {
+		display: none;
+	}
+	
+	&:before {
+		content: '\f111'; // .uk-icon-circle
+		position: relative;
+		top: 0;
+		&:extend([class*='uk-icon-']);
+	}
+
+	&.uk-active:before {
+		content: '\f058'; // .uk-icon-check-circle
+	}
+	
+	&:hover {
+		cursor: pointer;
+	}
+	
+	// In combination with the default .uk-button class, the label
+	// turns into a button-like panel with toggle icons.
+	
+	&.uk-button {
+		
+		width: 100%;
+		
+		&:before {
+			content: '\f204'; // .uk-icon-toggle-off
+			padding-right: 4px;
+		}
+		
+		&.uk-active:before {
+			content: '\f205'; // .uk-icon-toggle-on
+		}
+		
+	}
+	
+}
+
+// Remove animation form icons in toggle button.
+
+[data-uk-toggle] i {
+	
+	-webkit-animation-duration: 0s !important;
+    	animation-duration: 0s !important;
+	
+}
