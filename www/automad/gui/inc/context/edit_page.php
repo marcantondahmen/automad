@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -67,154 +67,180 @@ if (array_key_exists(Core\Parse::queryKey('url'), $this->collection)) {
 
 
 $this->element('header');
+$this->element('title');
 
 
 ?>
 
-		<?php if ($Page) { ?> 
-		<div class="column subnav">
-			<div class="scroll">	
-				<div class="inner">
-					<ul class="nav nav-pills nav-stacked">
-						<li>
-							<a href="<?php echo Core\Resolve::url($Page, $url); ?>" target="_blank">
-								<span class="glyphicon glyphicon-arrow-right"></span><span class="hidden-md"> <?php echo Text::get('btn_visit_page'); ?></span>
-							</a>
-						</li>
+		<div class="automad-navbar" data-uk-sticky>
+			
+			<?php $this->element('searchbar'); ?>
+			
+			<?php if ($Page) { ?>
+			<div class="automad-navbar-context uk-width-1-1">
+				<?php echo $this->Html->breadcrumbs(); ?>
+			</div>	
+			<!-- Menu -->
+			<div class="uk-grid uk-grid-small">
+				<!-- Content Switcher -->
+				<div class="uk-width-2-5">
+					<div class="uk-grid uk-grid-small" data-uk-switcher="{connect:'#automad-page-content', toggle:'> div > button', animation: 'uk-animation-fade'}">
 						<!-- Data -->
-						<li class="active">
-							<a href="#data" data-toggle="tab">
-								<span class="glyphicon glyphicon-align-left"></span><span class="hidden-md"> <?php echo Text::get('btn_data'); ?></span>
-							</a>
-						</li>
+						<div class="uk-width-1-2">
+							<button class="uk-button uk-width-1-1 uk-text-truncate" type="button">
+								<i class="uk-icon-file-text-o"></i>
+								<span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_data'); ?></span>
+							</button>
+						</div>
 						<!-- Files -->
-						<li>
-							<a href="#files" data-toggle="tab">
-								<span class="glyphicon glyphicon-folder-open"></span><span class="hidden-md"> <?php echo Text::get('btn_files'); ?></span>
-							</a>
-						</li>
-						<!-- Add Subpage Button -->
-						<li>
-							<a href="#" data-toggle="modal" data-target="#automad-add-subpage-modal">
-								<span class="glyphicon glyphicon-plus"></span><span class="hidden-md"> <?php echo Text::get('btn_add_page'); ?></span>
-							</a>
-						</li>
-						<?php if ($Page->path != '/') { ?> 
-						<!-- Move Page Button -->
-						<li>
-							<a href="#" data-toggle="modal" data-target="#automad-move-page-modal">
-								<span class="glyphicon glyphicon-move"></span><span class="hidden-md"> <?php echo Text::get('btn_move_page'); ?></span>
-							</a>
-						</li>
-						<!-- Delete Page Button -->
-						<li>
-							<a href="#" data-toggle="modal" data-target="#automad-delete-page-modal">
-								<span class="glyphicon glyphicon-trash"></span><span class="hidden-md"> <?php echo Text::get('btn_delete_page'); ?></span>
-							</a>
-						</li>
-						<?php } ?> 
-					</ul>
-				</div>	
-			</div>		
+						<div class="uk-width-1-2">
+							<button class="uk-button uk-width-1-1 uk-text-truncate" type="button">
+								<i class="uk-icon-folder-open-o"></i>
+								<span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_files'); ?></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- Add Subpage -->
+				<div class="uk-width-1-5">
+					<a class="uk-button uk-width-1-1 uk-text-truncate" href="#automad-add-subpage-modal" data-uk-modal>
+						<i class="uk-icon-plus"></i>
+						<span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_add_page'); ?></span>
+					</a>
+					<!-- Add Subpage Modal -->
+					<div id="automad-add-subpage-modal" class="uk-modal">
+						<div class="uk-modal-dialog">
+							<form class="uk-form" data-automad-handler="add_subpage" data-automad-url="<?php echo $url; ?>">
+								<div class="uk-modal-header">
+									<?php echo Text::get('btn_add_page'); ?>
+								</div>
+								<div class="uk-margin-small-bottom">
+									<input class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="subpage[title]" value="" placeholder="Title" required data-automad-enter="#automad-add-subpage-submit" />
+								</div>
+								<?php echo $this->Html->templateSelectBox('subpage[theme_template]'); ?>
+								<div class="uk-modal-footer uk-text-right">
+									<button type="button" class="uk-modal-close uk-button">
+										<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?>
+									</button>
+									<button id="automad-add-subpage-submit" type="submit" class="uk-button uk-button-primary">
+										<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php echo Text::get('btn_add'); ?>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- Dropdown -->
+				<div class="uk-width-1-5 uk-button-dropdown" data-uk-dropdown="{pos:'bottom-center',mode:'click'}">	
+					<button class="uk-button uk-width-1-1" type="button" <?php if ($url == '/') { echo 'disabled'; } ?>>
+						<span class="uk-hidden-small">
+							<i class="uk-icon-clone"></i>&nbsp;&nbsp;
+							<i class="uk-icon-arrows"></i>&nbsp;&nbsp;
+							<i class="uk-icon-trash"></i>
+						</span>
+						<i class="uk-icon-ellipsis-h uk-visible-small"></i>
+					</button>
+					<div class="uk-dropdown uk-dropdown-close">
+						<ul class="uk-nav uk-nav-dropdown">
+							<!-- Duplicate Page -->
+							<li>
+								<a href="#" data-automad-submit="duplicate_page">
+									<i class="uk-icon-clone"></i>&nbsp;&nbsp;<?php echo Text::get('btn_duplicate_page'); ?>
+								</a>
+								<form data-automad-handler="duplicate_page" data-automad-url="<?php echo $url; ?>"></form>
+							</li>
+							<!-- Move Page -->
+							<li>
+								<a href="#automad-move-page-modal" data-uk-modal>
+									<i class="uk-icon-arrows"></i>&nbsp;&nbsp;<?php echo Text::get('btn_move_page'); ?>
+								</a>
+							</li>
+							<!-- Delete Page -->
+							<li>
+								<a href="#" data-automad-submit="delete_page">
+									<i class="uk-icon-trash"></i>&nbsp;&nbsp;<?php echo Text::get('btn_delete_page'); ?>
+								</a>
+								<form data-automad-handler="delete_page" data-automad-url="<?php echo $url; ?>" data-automad-confirm="<?php echo Text::get('confirm_delete_page'); ?>">
+									<input type="hidden" name="title" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
+								</form>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				<!-- Save -->
+				<div class="uk-width-1-5">
+					<button class="uk-button uk-button-success uk-width-1-1 uk-text-truncate" type="button" data-automad-submit="page_data">
+						<i class="uk-icon-save"></i><span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_save'); ?></span>
+					</button>
+				</div>
+			</div>
+			<?php } ?>
+			
 		</div>
 		
-		<div class="column content">
-			<div class="inner">
-				<div class="alert alert-info">
-					<a href="<?php echo Core\Resolve::url($Page, $url); ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $url; ?></a>
-				</div>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div id="data" class="tab-pane fade in active">
-						<form class="automad-form automad-init" data-automad-handler="page_data" data-automad-url="<?php echo $url; ?>" role="form">
-							<span class="glyphicon glyphicon-time"></span> <?php echo Text::get('btn_loading'); ?>
-						</form>
-					</div>
-					<div id="files" class="tab-pane fade">
-						<form class="automad-form automad-init" data-automad-handler="files" data-automad-url="<?php echo $url; ?>" role="form"></form>
-					</div>
-				</div>	
-			</div>
-		</div>
-		
-		<!-- Add Subpage Modal -->
-		<div class="modal fade" id="automad-add-subpage-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="modal-title"><?php echo Text::get('btn_add_page'); ?></h3>
-					</div>
-					<form class="automad-form" data-automad-handler="add_page" data-automad-url="<?php echo $url; ?>" role="form">
-						<div class="modal-body">
-							<div class="alert alert-info"><span class="glyphicon glyphicon-arrow-right"></span> <b><?php echo rtrim($url, '/'); ?>/</b></div>
-							<div class="form-group">
-								<label for="add-subpage-title">Title</label>
-								<input id="add-subpage-title" class="form-control" type="text" name="subpage[<?php echo AM_KEY_TITLE; ?>]" value="" onkeypress="return event.keyCode != 13;" required />
-							</div>
-							<?php echo $this->Html->templateSelectBox('add-subpage-theme_template', 'subpage[theme_template]'); ?>
-						</div>
-						<div class="modal-footer">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button></div>
-								<div class="btn-group"><button type="submit" class="btn btn-primary" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-plus"></span> <?php echo Text::get('btn_add_page'); ?></button></div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
+		<?php if ($Page) { ?>
+					
+		<div class="uk-block">
+			<a href="<?php echo AM_BASE_URL . $Page->url; ?>" class="uk-text-truncate uk-text-left uk-button uk-button-large uk-button-primary uk-width-1-1" target="_blank">
+				<i class="uk-icon-share"></i>&nbsp;&nbsp;<span class="uk-hidden-small"><?php echo AM_BASE_URL; ?></span><?php echo $Page->url; ?>
+			</a>
 		</div>
 
+		<!-- Content -->
+		<ul id="automad-page-content" class="uk-switcher">
+			<!-- Data -->
+		    	<li>
+				<form class="uk-form uk-form-stacked" data-automad-init data-automad-handler="page_data" data-automad-url="<?php echo $url; ?>">
+					<div class="uk-text-center">
+						<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-top"></i>
+					</div>
+				</form>
+		    	</li>
+			<!-- Files -->
+			<li>
+				<form class="uk-form uk-form-stacked" data-automad-init data-automad-handler="files" data-automad-url="<?php echo $url; ?>" data-automad-confirm="<?php echo Text::get('confirm_delete_files'); ?>">
+					<div class="uk-text-center">
+						<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-text-muted uk-margin-top"></i>
+					</div>
+				</form>
+			</li>
+		</ul>
+		
 		<!-- Move Page Modal -->
-		<div class="modal fade" id="automad-move-page-modal" data-automad-url="<?php echo $url; ?>" data-automad-title="<?php echo $data[AM_KEY_TITLE]; ?>">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="modal-title"><?php echo Text::get('btn_move_page'); ?></h3>
-					</div>
-					<div class="modal-body">
-						<div class="alert alert-info"><span class="glyphicon glyphicon-move"></span> <b><?php echo $url; ?></b></div>
-						<h4><?php echo Text::get('page_move_destination'); ?></h4>
-						<?php echo $this->Html->siteTree('', $this->collection, array(), true); ?>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button>
-					</div>
+		<div id="automad-move-page-modal" class="uk-modal">
+			<div class="uk-modal-dialog">
+				<div class="uk-modal-header">
+					<?php echo Text::get('btn_move_page'); ?>
+				</div>
+				<div class="uk-panel uk-panel-box" data-automad-tree="#automad-move-page-input">
+					<?php echo $this->Html->siteTree('', $this->collection, array(), true, Text::get('page_move_destination')); ?>
+				</div>
+				<form data-automad-handler="move_page" data-automad-url="<?php echo $url; ?>">
+					<input type="hidden" name="title" value="<?php echo $Page->get(AM_KEY_TITLE); ?>" />
+					<input id="automad-move-page-input" type="hidden" name="destination" value="" />
+				</form>
+				<div class="uk-modal-footer uk-text-right">
+					<button type="button" class="uk-modal-close uk-button">
+						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?>
+					</button>
+					<button type="button" class="uk-button uk-button-primary" data-automad-submit="move_page">
+						<i class="uk-icon-arrows"></i>&nbsp;&nbsp;<?php echo Text::get('btn_move_page'); ?>
+					</button>
 				</div>
 			</div>
 		</div>
-
-		<!-- Delete Page Confirm Modal -->
-		<div class="modal fade" id="automad-delete-page-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="modal-title"><?php echo Text::get('btn_delete_page'); ?></h3>
-					</div>
-					<form class="automad-form" data-automad-handler="delete_page" data-automad-url="<?php echo $url; ?>" role="form">
-						<input type="hidden" name="title" value="<?php echo $data[AM_KEY_TITLE]; ?>" />
-						<div class="modal-body">
-							<div class="alert alert-danger"><span class="glyphicon glyphicon-trash"></span> <b><?php echo $url; ?></b></div>
-							<?php echo Text::get('page_confirm_delete'); ?>  
-						</div>
-						<div class="modal-footer">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo Text::get('btn_close'); ?></button></div>
-								<div class="btn-group"><button type="submit" class="btn btn-danger" data-loading-text="<?php echo Text::get('btn_loading'); ?>"><span class="glyphicon glyphicon-trash"></span> <?php echo Text::get('btn_delete_page'); ?></button></div>
-							</div>
-						</div>
-					</form>	
-				</div>
+		
+		<?php } else { ?>
+		
+		<div class="uk-block">
+			<div class="uk-alert uk-alert-danger">
+				<?php echo Text::get('error_page_not_found'); ?><br /><strong><?php echo Core\Parse::queryKey('url'); ?></strong>
 			</div>
 		</div>
-		<?php } else { ?> 
-		<div class="column content">
-			<div class="inner">
-				<div class="alert alert-danger"><h4><?php echo Text::get('error_page_not_found'); ?><br /><br /><strong><?php echo Core\Parse::queryKey('url');?></strong></h4></div>
-			</div>
-		</div>	
+				
+			
+			
 		<?php } ?>
 		
 <?php
