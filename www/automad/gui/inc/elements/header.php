@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,12 +35,16 @@
  */
 
 
+namespace Automad\GUI;
+use Automad\Core as Core;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="uk-height-1-1">
 <head>
 	  
 	<meta charset="utf-8">
@@ -58,26 +62,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 </head>
 
 
-<body>
+<body class="uk-height-1-1">
 	
-	<div id="noscript" class="container">
-		<div class="column content">
-			<div class="inner">
-				<div class="alert alert-warning"><h3>JavaScript must be enabled!</h3></div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="container hidden-md hidden-lg">
-		<div class="column content">
-			<div class="inner">
-				<div class="alert alert-warning"><h3>Your browser window is too small!</h3></div>
-			</div>
-		</div>
-	</div>
-
-	<?php $this->element('navbar'); ?> 
-	
-	<div id="script" class="container hidden hidden-sm hidden-xs">
+	<?php $this->element('sidebar'); ?>
 		
-		<?php $this->element('sidebar'); ?> 
+	<div class="automad-sidebar-push uk-container uk-container-center">
+	
