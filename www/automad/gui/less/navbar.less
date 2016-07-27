@@ -1,0 +1,72 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.automad-navbar {
+	
+	background-color: @base-body-background;
+	z-index: 10;
+	
+	& > div {
+		margin-top: @grid-gutter-small-vertical;
+		margin-bottom: @grid-gutter-small-vertical;	
+	}
+	
+	&-context {
+		height: 30px;
+		background-color: @button-background;
+		padding: @subnav-margin-vertical @subnav-margin-horizontal;
+	}
+	
+	&-breadcrumbs {
+		
+		position: relative;
+		
+		& > li {
+		
+			max-width: 33%;
+		
+			@media (min-width: @breakpoint-medium) {
+				max-width: 19%;
+			}
+			
+			& > a {
+				max-width: 100%;
+			}
+			
+		}
+		
+	}
+	
+}
