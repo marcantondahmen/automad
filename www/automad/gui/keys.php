@@ -94,45 +94,50 @@ class Keys {
 		// Since this is a recursive method, initially there should not be any file defined and the template from the requested page should be used instead.
 		if (!$file) {
 			$Page = $this->Automad->getRequestedPage();
-			$file = $Page->getTemplate();
+			// Don't use $Page->getTemplate() to prevent exit on errors.
+			$file = AM_BASE_DIR . AM_DIR_THEMES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
 		}
 		
-		$directory = dirname($file);
-
-		// Match markup to get includes and variables.
-		preg_match_all('/' . Core\Regex::markup() . '/is', $this->Automad->loadTemplate($file), $matches, PREG_SET_ORDER);
-		
-		foreach ($matches as $match) {
+		if (file_exists($file)) {
 			
-			// Variable key.
-			if (!empty($match['var'])) {
+			$directory = dirname($file);
+
+			// Match markup to get includes and variables.
+			preg_match_all('/' . Core\Regex::markup() . '/is', $this->Automad->loadTemplate($file), $matches, PREG_SET_ORDER);
+		
+			foreach ($matches as $match) {
+			
+				// Variable key.
+				if (!empty($match['var'])) {
 				
-				// Note the second parameter in Regex::variable() is true to only match variables in text files.
-				preg_match('/' . Core\Regex::variable('var', true) . '/s', $match['var'], $var);
+					// Note the second parameter in Regex::variable() is true to only match variables in text files.
+					preg_match('/' . Core\Regex::variable('var', true) . '/s', $match['var'], $var);
 				
-				if (!empty($var)) {
-					$keys[] = $var['varName'];
+					if (!empty($var)) {
+						$keys[] = $var['varName'];
+					}
+				
 				}
-				
-			}
 			
-			// Recursive include.
-			if (!empty($match['file'])) {
+				// Recursive include.
+				if (!empty($match['file'])) {
 	
-				$include = $directory . '/' . $match['file'];
+					$include = $directory . '/' . $match['file'];
 
-				if (file_exists($include)) {
-					$keys = array_merge($keys, $this->inCurrentTemplate($include));
-				} 
+					if (file_exists($include)) {
+						$keys = array_merge($keys, $this->inCurrentTemplate($include));
+					} 
 		
+				}
+			
 			}
+		
+			// Remove reserved keys.
+			$keys = array_diff($keys, $this->reserved);
+		
+			sort($keys);
 			
 		}
-		
-		// Remove reserved keys.
-		$keys = array_diff($keys, $this->reserved);
-		
-		sort($keys);
 			
 		return array_unique($keys);
 		
