@@ -34,32 +34,67 @@
  */
 
 
-// ScrollBars
+/*
+ *	Inistialize Scrollbars plugin. 
+ */
 
-$(document).ready(function() {
++function(Automad, $) {
 	
-	$('.scroll').mCustomScrollbar({
-		scrollbarPosition: 'outside',
-		theme: 'minimal-dark',
-		autoHideScrollbar: true,
-		scrollInertia: 300,
-		scrollButtons: { 
-			enable: false 
+	Automad.scrollbars = {
+		
+		defaults: { 
+				'scrollToItem': false					
+		},
+		
+		dataAttr: 'data-automad-scroll-box',
+		
+		init: function() {
+			
+			var	s = Automad.scrollbars,
+				u = Automad.util;
+			
+			$('[' + s.dataAttr + ']').each(function() {
+			
+				var	$box = $(this),
+					options = $box.data(u.dataCamelCase(s.dataAttr)),
+					settings =  $.extend({}, s.defaults, options);
+				
+				// Apply scrollbar plugin.
+				$box.mCustomScrollbar({
+					scrollbarPosition: 'outside',
+					theme: 'minimal-dark',
+					autoHideScrollbar: true,
+					scrollInertia: 50,
+					scrollButtons: { 
+						enable: false 
+					}
+				});
+				
+				// If "scrollToItem" is set, initially scroll to that item.
+				if (settings.scrollToItem) {
+					
+					var 	$item = $box.find(settings.scrollToItem);
+					
+					if ($item.length) {
+						
+						setTimeout(function() {
+							if (($item.offset().top + 80) > $(window).height()) {
+								$box.mCustomScrollbar('scrollTo', function() {
+									return $item.offset().top - $(window).height() + 80;
+								}, { scrollInertia: 200 });
+							}
+						}, 50);
+						
+					} 
+						
+				}
+					
+			});
+			
 		}
-	});
+		
+	};
 	
-	setTimeout(function() {
-		
-		var activePage = $('.column.nav li.active');
-		
-		if ((activePage.offset().top + 80) > $(window).height()) {
-			
-			$('.column.nav .scroll').mCustomScrollbar('scrollTo', function() {
-				return activePage.offset().top - $(window).height() + 80;
-			}, { scrollInertia: 150 });
-			
-		}
-		
-	}, 100);
-		
-});
+	$(document).ready(Automad.scrollbars.init);
+	
+}(window.Automad = window.Automad || {}, jQuery);
