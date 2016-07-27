@@ -6,7 +6,7 @@ btn_add: Add
 
 -
 
-btn_add_page: Add Subpage
+btn_add_page: Add Page
 
 -
 
@@ -26,7 +26,7 @@ btn_close: Close
 
 -
 
-btn_data: Data &amp; Settings
+btn_data: Data
 
 -
 
@@ -34,11 +34,11 @@ btn_delete_page: Delete Page
 
 -
 
-btn_discard: Discard Changes
+btn_docs: Documentation
 
 -
 
-btn_docs: Documentation
+btn_duplicate_page: Duplicate Page
 
 -
 
@@ -50,7 +50,7 @@ btn_hide_page: Hide Page From Navigation
 
 -
 
-btn_loading: Wait ...
+btn_log_out: Log Out
 
 -
 
@@ -82,7 +82,41 @@ btn_upload: Upload Files
 
 -
 
-btn_visit_page: Visit Page
+
+
+
+
+
+
+
+confirm_delete_files: Are you sure to delete the selected files?
+
+-
+
+confirm_delete_page: Are you sure you want to delete the current page?
+
+-
+
+confirm_delete_users: Are you sure to delete the selected users?
+
+-
+
+
+
+
+
+
+
+
+dashboard_recently_edited: Recently Edited Pages
+
+-
+
+dashboard_title: Dashboard
+
+-
+
+dashboard_welcome: Welcome
 
 -
 
@@ -116,7 +150,7 @@ error_filename: Invalid filename!
 
 -
 
-error_form: **Incomplete or incorrect data!**  
+error_form: **Incomplete or incorrect data!** 
   
 All fields are required and have to be completed as described!
 
@@ -130,7 +164,9 @@ error_log_out: Log out failed!
 
 -
 
-error_no_files: No files found!
+error_no_js: ##JavaScript is disabled!
+
+Please enabled **JavaScript** in your browser to use the GUI!
 
 -
 
@@ -142,8 +178,19 @@ error_page_title: Title missing!
 
 -
 
-error_permission: **Permission 
-denied!**
+error_password_current: The current password is wrong!
+
+-
+
+error_password_repeat: Please enter twice the same new password!
+
+-
+
+error_password_reuse: Don't reuse your old password!
+
+-
+
+error_permission: Permission denied!
 
 -
 
@@ -170,14 +217,19 @@ error_var_name: You can not add a variable without a name!
 
 
 
-install_help: ###Create User Account  
-Before you can make use of Automad's GUI, you have to register the first user by following these steps:    
+install_help: ###1. Create User Account  
+Before you can make use of the **Automad** GUI, you have to register the first user by following these steps:    
       				
 1. Create an user account using the form below and download the created file to your computer 
 2. Upload the downloaded file to the **"/config"** directory within your Automad installation via FTP or SSH 
 				
 After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo on the left.   
 Other users can be added later via the system preferences.
+
+-
+
+install_login: ###2. Login   
+Please move now the downloaded file to your **"/config"** directory. After you have successfully finished this installation process, you can login to the GUI.
 
 -
 
@@ -196,7 +248,15 @@ login_title: Login
 
 -
 
-log_out_title: Log Out
+login_username: Username
+
+-
+
+login_password: Password
+
+-
+
+log_out_title: Logged Out
 
 -
 
@@ -207,9 +267,7 @@ log_out_title: Log Out
 
 
 
-page_confirm_delete: **Are you sure you want to delete the current page?**  
-  
-The page and all of its subpages will be moved to **/cache/trash**, in case you want to restore the page's directory later.
+page_add_destination: Create Subpage in:
 
 -
 
@@ -218,6 +276,10 @@ page_move_destination: Select a destination:
 -
 
 page_settings: Settings
+
+-
+
+page_content: Content
 
 -
 
@@ -264,7 +326,26 @@ page_visibility: Visibility
 
 
 
+sidebar_header_site: Site
+
+-
+
+sidebar_header_pages: Pages
+
+-
+
+
+
+
+
+
+
+
 shared_title: Site Settings &amp; Shared Files
+
+-
+
+shared_content: Content
 
 -
 
@@ -287,11 +368,15 @@ shared_var_name: Variable Name
 
 
 
-start_title: Welcome
+search_no_results: No pages found!
 
 -
 
-start_last_edit: Last Edit
+search_placeholder: Search or go to page
+
+-
+
+search_title: Search Results
 
 -
 
@@ -307,6 +392,10 @@ success_added: Successfully added
 -
 
 success_cache_cleared: The page cache got cleared successfully!
+
+-
+
+success_config_update: Successfully updated configuration!
 
 -
 
@@ -333,7 +422,7 @@ sys_cache: Cache
 
 -
 
-sys_cache_info: Caching is essential to speed up your site and should generally be enabled. 
+sys_cache_info: Caching is essential to speed up your site and should generally be enabled.    
 However under some circumstances you might want to disable or clear your cache.
 
 -
@@ -343,6 +432,10 @@ sys_cache_clear: Clear Cache
 -
 
 sys_cache_monitor: Check for changes every 
+
+-
+
+sys_cache_lifetime: Maximum cache lifetime
 
 -
 
@@ -373,11 +466,11 @@ Leaving the field empty will reset the list to the default values!
 
 -
 
-sys_status_enabled: Enabled
+sys_status_enabled: On
 
 -
 
-sys_status_disabled: Disabled
+sys_status_disabled: Off
 
 -
 
@@ -402,7 +495,7 @@ sys_user_change_password_current: Current Password
 
 -
 
-sys_user_change_password_new: New Password<br />Do not use your current password!
+sys_user_change_password_new: New Password
 
 -
 
@@ -427,5 +520,9 @@ sys_user_add_repeat: Repeat Password
 -
 
 sys_user_registered: Registered Users
+
+-
+
+sys_user_you: You
 
 
