@@ -34,76 +34,110 @@
  */
 
 
-// Textareas: Auto Resize
+/*
+ *	Textarea auto-resizing and tab-handling. 
+ */
 
-$(document).on('keyup', 'textarea:visible', function() {
++function(Automad, $) {
 	
-	var	ta = 		$(this),
-		content =	ta.val().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />'),
+	Automad.textarea = {
 		
-		// The hidden clone will be used to determine the actual height.
-		clone =		$('<div></div>')
-				.appendTo('body')
-				.hide()
-				.width(ta.width())
-				.html(content + ' ')
-				.css({
-					'white-space': 'pre-wrap',
-					'word-wrap': 'break-word',
-					'overflow-wrap': 'break-word',
-					'font-family': ta.css('font-family'),
-					'font-size': ta.css('font-size'),
-					'line-height': ta.css('line-height'),
-					'letter-spacing': ta.css('letter-spacing')
-				});
-					
-	ta.height(clone.height());
+		handleTabs: function(e) {
 		
-	clone.remove();
-	
-});
+			// Insert \t at caret when TAB is pressed, instead of jumping to the next textarea or button.
+			if (e.keyCode === 9) { 
+				
+				e.preventDefault();
+				
+				var 	start = this.selectionStart,
+				 	end = this.selectionEnd,
+					$ta = $(e.target),
+					value = $ta.val();
 
-// Update also on drop, but with timeout.
-// The timeout is needed to make sure the dropped text gets recognized.
-$(document).on('drop', 'textarea:visible', function() {
-	setTimeout(function() {
-		$('textarea').trigger('keyup');
-	}, 50);
-})
+				// Set textarea value to text before caret + tab + text after caret.
+				$ta.val(value.substring(0, start) + "\t" + value.substring(end));
 
-// Update also when AJAX completes.
-$(document).ajaxComplete(function() {
-	$('textarea').trigger('keyup');
-});
-
-// Update also on resize.
-$(window).resize(function() {
-	$('textarea').trigger('keyup');
-});
-
-
-
-
-// Textareas: Tabs
-
-$(document).on('keydown', 'textarea', function(e) {
-	
-	// Insert \t at caret when TAB is pressed, instead of jumping to the next textarea or button.
-	if (e.keyCode === 9) { 
+				// Put caret at right position again (add one for the tab).
+				this.selectionStart = this.selectionEnd = start + 1;
+			
+			}
+			
+		},
 		
-		var 	start = this.selectionStart,
-		 	end = this.selectionEnd,
-			value = $(this).val();
-
-		// Set textarea value to text before caret + tab + text after caret.
-		$(this).val(value.substring(0, start) + "\t" + value.substring(end));
-
-		// Put caret at right position again (add one for the tab).
-		this.selectionStart = this.selectionEnd = start + 1;
-
-		// Prevent the focus lose.
-		e.preventDefault();
-	}
+		init: function() {
+		
+			var	t = Automad.textarea,
+				$doc = $(document);
+				
+			// On keyup.
+			$doc.on('keyup focus focusout update.automad.textarea', 'textarea', t.resize);
+			
+			// Update also on drop, but with timeout.
+			// The timeout is needed to make sure the dropped text gets recognized.
+			$doc.on('drop cut paste', 'textarea', function(e) {
+				
+				var	$ta = $(e.target);
+				
+				setTimeout(function(e) {
+					$ta.trigger('update.automad.textarea');
+				}, 50);
+				
+			})
+			
+			// Update also when AJAX completes.
+			$doc.ajaxComplete(function() {
+				$('textarea').trigger('update.automad.textarea');
+			});
+				
+			// Update also on resize.
+			$(window).resize(function() {
+				$('textarea').trigger('update.automad.textarea');
+			});
+			
+			// Tabs
+			$doc.on('keydown', 'textarea', t.handleTabs);	
+				
+		},
+		
+		resize: function(e) {
+		
+			var	$ta = 		$(e.target),
+				content =	$ta.val().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />'),
+				
+				// The spaceBottom is needed when textarea is focused to handle 'jumping' text caused by height transitions.
+				// That extra space buffers the resize and the text doesn't jump when creating a new line.
+				spaceBottom =	30,
+				
+				// The hidden clone will be used to determine the actual height.
+				$clone =	$('<div></div>')
+						.appendTo('body')
+						.hide()
+						.width($ta.width())
+						.html(content + ' ')
+						.css({
+							'white-space': 'pre-wrap',
+							'word-wrap': 'break-word',
+							'overflow-wrap': 'break-word',
+							'font-family': $ta.css('font-family'),
+							'font-size': $ta.css('font-size'),
+							'line-height': $ta.css('line-height'),
+							'letter-spacing': $ta.css('letter-spacing')
+						});
+							
+			
+			// Remove bottom space on 'focusout' and the namespaced 'update' event.
+			if (e.type == 'focusout' || e.type == 'update') {
+				spaceBottom = 0;
+			}
+							
+			$ta.height($clone.height() + spaceBottom);
+				
+			$clone.remove();
+			
+		}
+		
+	};
 	
-});
-
+	Automad.textarea.init();
+	
+}(window.Automad = window.Automad || {}, jQuery);
