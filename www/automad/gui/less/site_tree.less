@@ -1,0 +1,87 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+[data-automad-tree] {
+	
+	#automad-sidebar & .uk-nav {
+		&:extend(.uk-nav-side all);
+	}
+	
+	& ul li {
+		position: relative;	
+	}
+	
+	& ul ul li {
+		padding-left: 3px;
+	}
+	
+	& .uk-active > a .uk-icon-folder-o:before {
+		content: '\f07c';
+	}
+	
+}
+
+.automad-tree-toggle {
+	
+	&:extend(.uk-button, .uk-button-mini);
+	position: absolute !important;
+	z-index: 2;
+	padding: 2px 2px 2px 4px !important;
+	
+	&,
+	&:focus,
+	&:hover,
+	&:active {
+		background-color: transparent !important;
+	}
+	
+}
+
+[class*='automad-tree-icon-'] {
+	&:extend([class*='uk-icon-'] all);
+}
+
+.automad-tree-icon {
+	
+	&-open {
+		&:extend(.uk-icon-chevron-right all);
+		margin-top: 5px;
+	}
+	
+	&-close {
+		&:extend(.uk-icon-chevron-down all);
+	}
+	
+}
