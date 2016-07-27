@@ -34,44 +34,80 @@
  */
 
 
-// Button: Add Custom Variable (page & shared)
+/*
+ * 	Add Custom Variable (page & shared)
+ */
 
-$(document).on('click', '#automad-add-variable-button', function() {	
++function(Automad, $) {
 	
-	// There must be an existing target container with the ID '#automad-custom-variables' 
-	// within the page's markup. The created variable input will be appended to that target container.
-	
-	var  	idPrefix = 'input-data-',
-		name = $('#automad-add-variable-name').val().replace(/[^\w\.\-]/g, '_').toLowerCase();
-
-	if ($('#' + idPrefix + name).length == 0){
-	
-		if (name) {
+	Automad.addVariable = {
+		
+		selectors: {
 			
-			var	newFormGroup = 	$('<div class="form-group"><label for="' + idPrefix + name + '">' 
-						+ name.charAt(0).toUpperCase() + name.slice(1) 
-						+ '</label><button type="button" class="close automad-remove-parent">&times;</button>' 
-						+ '<textarea id="' + idPrefix + name + '" class="form-control" name="data[' + name + ']" rows="10"></textarea></div>')
-						.appendTo($('#automad-custom-variables'));
+			container: 	'#automad-add-variable-container',
+			modal: 		'#automad-add-variable-modal',
+			modalInput: 	'#automad-add-variable-input',
+			submit:		'#automad-add-variable-submit'
+			
+		},
+		
+		dataAttr: {
+			
+			errorName: 	'data-automad-error-name',
+			errorExists: 	'data-automad-error-exists'
+			
+		},
+		
+		append: function(e) {
+			
+			// There must be an existing target container with the ID '#automad-custom-variables' 
+			// within the page's markup. The created variable input will be appended to that target container.
+			
+			var	a = Automad.addVariable,
+				u = Automad.util,
+				$submit = $(e.target),
+				$container = $(a.selectors.container),
+				$modalInput = $(a.selectors.modalInput),
+				idPrefix = 'automad-input-data-',
+				name = $modalInput.val().replace(/[^\w\.\-]/g, '_').toLowerCase();
+			
+			// Check if there is already a variable with the same name.
+			if ($('#' + idPrefix + name).length == 0){
+			
+				if (name) {
+					
+					$.post('?ajax=add_variable', {name: name}, function(html) {
 						
-			$('#automad-add-variable-modal').modal('hide');
-			$('#automad-add-variable-name').val('');
-			
-			// Trigger key up event once to resize textarea
-			newFormGroup.find('textarea').trigger('keyup');
-			
-		} else {
-			
-			$('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + $(this).data('automadErrorName') + '</div>')
-			.prependTo($('#automad-add-variable-modal .modal-body'));
-			
+						// Hide modal on success.
+						UIkit.modal(a.selectors.modal).hide();
+						
+						// Reset value.
+						$modalInput.val('');
+						
+						// Append field to data form.
+						$container.append(html);
+						
+						// Focus new input.
+						$('#' + idPrefix + name).focus();
+						
+					});
+					
+				} else {
+					
+					Automad.notify.error($submit.data(u.dataCamelCase(a.dataAttr.errorName)));
+					
+				}	
+					
+			} else {
+				
+				Automad.notify.error($submit.data(u.dataCamelCase(a.dataAttr.errorExists)));
+				
+			}
+				
 		}
-	
-	} else {
-		
-		$('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + $(this).data('automadErrorExists') + '</div>')
-		.prependTo($('#automad-add-variable-modal .modal-body'));
-		
+			
 	}
 	
-});
+	$(document).on('click', Automad.addVariable.selectors.submit, Automad.addVariable.append);
+	
+}(window.Automad = window.Automad || {}, jQuery);
