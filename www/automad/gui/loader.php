@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -86,6 +86,13 @@ class Loader {
 	 */	
 		
 	private $collection;
+
+
+	/**
+	 *      The site name.
+	 */
+	
+	private $sitename;
 	
 	
 	/**
@@ -108,12 +115,12 @@ class Loader {
 	 *	When a the GUI gets initialized, at first it gets verified, if an user is logged in or not. That has the highest priority.
 	 *	If no user is logged in, the existance of "config/accounts.txt" gets checked and either the login or the install module gets loaded.
 	 *	In case an ajax request is sent while a user got already logged out (in another browser tab or window), the response will be a 'redirect' to the GUI 
-	 *	start page, to log in there.
+	 *	login page, to log in there.
 	 *
 	 *	If an user is logged in, the Automad object gets created and the current "context" gets determined from the GET parameters.
-	 *	According that context, the matching module gets loaded after verifying its exsistance. 
+	 *	According to that context, the matching module gets loaded after verifying its exsistence. 
 	 *	When there is no context passed via get, it gets checked for "ajax", to possibly call a matching ajax module.
-	 *	If both is negative, the start page's module gets included.
+	 *	If both is negative, the dashboard module gets included.
 	 *
 	 *	Example Context: 	http://domain.com/gui?context=edit_page will include 	automad/gui/context/edit_page.php
 	 *	Example Ajax:		http://domain.com/gui?ajax=page_data will include 	automad/gui/ajax/page_data.php
@@ -126,6 +133,11 @@ class Loader {
 		
 		// Load text modules.
 		Text::parseModules();
+		
+		// Create temporary Shared object before a user gets logged in and 
+		// the Automad object didn't get created to always have a value for sitename. 
+		$Shared = new Core\Shared();
+		$this->sitename = $Shared->get(AM_KEY_SITENAME);
 		
 		// Start Session.
 		session_name('Automad');
@@ -146,13 +158,13 @@ class Loader {
 			$this->Keys = new Keys($this->Automad);
 					
 			// Check if context/ajax matches an existing .php file.
-			// If there is no (or no matching context), load the start page.
+			// If there is no (or no matching context), load the dashboard page.
 			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Parse::queryKey('context') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
 				$inc = 'context/' . Core\Parse::queryKey('context');
 			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Parse::queryKey('ajax') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
 				$inc = 'ajax/' . Core\Parse::queryKey('ajax');
 			} else {
-				$inc = 'start';
+				$inc = 'dashboard';
 			}
 	
 		} else if (Core\Parse::queryKey('ajax')) {
