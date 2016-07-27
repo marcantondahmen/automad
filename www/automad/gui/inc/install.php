@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -56,28 +56,43 @@ $this->element('header');
 
 ?>
 
-		<div class="column content">
-			<div class="inner">
-				<div class="alert alert-info"><?php echo Text::get('install_help'); ?></div>
-				<?php if (!empty($error)) { ?><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><?php echo $error; ?></div><?php } ?> 
-				<form role="form" method="post">
-					<div class="form-group">
-						<label for="username"><?php echo Text::get('sys_user_add_name'); ?></label>
-						<input id="username" class="form-control" type="text" name="username" required />	
+		<div class="uk-width-medium-1-2 uk-container-center uk-margin-top">
+			<div class="uk-animation-fade">
+				<div class="uk-panel uk-panel-box uk-margin-bottom">
+					<div class="uk-panel-title">
+						<i class="uk-icon-user uk-icon-medium"></i>
 					</div>
-					<div class="form-group">
-						<label for="password1"><?php echo Text::get('sys_user_add_password'); ?></label>
-						<input id="password1" class="form-control" type="password" name="password1" required /> 
+					<?php echo Text::get('install_help'); ?>
+				</div>
+				<form class="uk-form" method="post">
+					<input class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-bottom" type="text" name="username" placeholder="<?php echo Text::get('sys_user_add_name'); ?>" />
+					<input class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" type="password" name="password1" placeholder="<?php echo Text::get('sys_user_add_password'); ?>" />
+					<input class="uk-form-controls uk-width-1-1 uk-margin-bottom" type="password" name="password2" placeholder="<?php echo Text::get('sys_user_add_repeat'); ?>" />
+					<div class="uk-text-right">
+						<button type="submit" class="uk-button uk-button-primary" data-uk-toggle="{target:'.uk-animation-fade'}">
+							<i class="uk-icon-download"></i>&nbsp;&nbsp;<?php echo Text::get('btn_accounts_file'); ?>
+						</button>
 					</div>
-					<div class="form-group">
-						<label for="password2"><?php echo Text::get('sys_user_add_repeat'); ?></label>
-						<input id="password2" class="form-control" type="password" name="password2" required />
-					</div>	
-					<br />
-					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> <?php echo Text::get('btn_accounts_file'); ?></button>
 				</form>
 			</div>
-		</div>
+			<div class="uk-animation-fade uk-hidden">
+				<div class="uk-panel uk-panel-box uk-margin-bottom">
+					<div class="uk-panel-title">
+						<i class="uk-icon-user uk-icon-medium"></i>
+					</div>
+					<?php echo Text::get('install_login'); ?>
+				</div>
+				<div class="uk-text-right">
+					<a href="" class="uk-button uk-button-primary"><i class="uk-icon-sign-in"></i>&nbsp;&nbsp;<?php echo Text::get('btn_login'); ?></a>
+				</div>
+			</div>
+		</div>		
+		<?php if (!empty($error)) { ?>
+		<script type="text/javascript">
+			Automad.notify.error("<?php echo $error; ?>");
+			$('form input').first().focus();
+		</script>	
+		<?php } ?>
 
 <?php
 
