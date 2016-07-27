@@ -1,0 +1,64 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@form-padding:			4px @subnav-margin-horizontal;
+@form-large-padding: 		8px @subnav-margin-horizontal;
+@form-border-width:		0;
+@form-background:       	@button-background;
+
+@form-focus-border:		#99baca;
+@form-focus-background:		darken(@button-background, 5%);
+@form-focus-color:		#444;
+
+@form-disabled-border:		#ddd;
+@form-disabled-background:	#f5f5f5;
+@form-disabled-color:		#999;
+
+@form-placeholder-color:	#999;
+
+.uk-form textarea {
+	
+	overflow: hidden;
+	resize: none;
+	
+	&:not(:focus) {
+		max-height: 5em; 		
+	}
+
+}
+
+.uk-form-row {
+	position: relative;
+}
