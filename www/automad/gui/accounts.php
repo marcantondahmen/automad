@@ -80,7 +80,7 @@ class Accounts {
 					// Write array with all accounts back to file.
 					if (Accounts::write($accounts)) {
 				
-						$output['success'] = Text::get('success_added') . ' <strong>' . $_POST['username'] . '</strong>';
+						$output['success'] = Text::get('success_added') . ' <strong>"' . $_POST['username'] . '"</strong>';
 				
 					} else {
 	
@@ -90,13 +90,13 @@ class Accounts {
 			
 				} else {
 		
-					$output['error'] = '<strong>' . $_POST['username'] . '</strong> ' . Text::get('error_existing');	
+					$output['error'] = '<strong>"' . $_POST['username'] . '"</strong> ' . Text::get('error_existing');	
 			
 				}
 		
 			} else {
 		
-				$output['error'] = Text::get('error_form');
+				$output['error'] = Text::get('error_password_repeat');
 		
 			}
 	
