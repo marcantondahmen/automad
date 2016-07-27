@@ -89,19 +89,19 @@ class User {
 				
 					} else {
 				
-						$output['error'] = Text::get('error_form');
+						$output['error'] = Text::get('error_password_current');
 				
 					}
 						
 				} else {
 			
-					$output['error'] = Text::get('error_form');;
+					$output['error'] = Text::get('error_password_reuse');
 			
 				}
 		
 			} else {
 		
-				$output['error'] = Text::get('error_form');
+				$output['error'] = Text::get('error_password_repeat');
 		
 			}
 	
