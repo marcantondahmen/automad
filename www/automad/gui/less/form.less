@@ -48,15 +48,27 @@
 
 @form-placeholder-color:	#999;
 
-.uk-form textarea {
-	
+
+// All textareas but not the HTML editors.
+.uk-form textarea:not([data-uk-htmleditor]) {
+
 	overflow: hidden;
 	resize: none;
 	
+	// Disable height transitions.
+	-webkit-transition: height 0s;  
+    	-moz-transition: height 0s;  
+    	-o-transition: height 0s;  
+    	transition: height 0s; 
+	
 	&:not(:focus) {
-		max-height: 5em; 		
+		max-height: 5em; 
 	}
+	
+}
 
+.uk-modal textarea {
+	max-height: none !important;
 }
 
 .uk-form-row {
