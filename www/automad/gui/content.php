@@ -194,14 +194,12 @@ class Content {
 				// Make sure submitted filename has no '../' (basename).
 				$file = $path . basename($f);
 		
-				if (is_writable($file)) {
-					if (unlink($file)) {
-						$success[] = Text::get('success_remove') . ' <strong>' . basename($file) . '</strong>';
-					}
+				if ($error = FileSystem::deleteMedia($file)) {
+					$errors[] = $error;
 				} else {
-					$errors[] = Text::get('error_remove') . ' <strong>' . basename($file) . '</strong>';
-				} 
-	
+					$success[] = Text::get('success_remove') . ' "' . basename($file) . '"';
+				}
+				
 			}
 	
 			$this->clearCache();
@@ -211,7 +209,7 @@ class Content {
 
 		} else {
 		
-			$output['error'] = Text::get('error_permission') . '<p>' . $path . '</p>';
+			$output['error'] = Text::get('error_permission') . ' "' . basename($path) . '"';
 		
 		}
 		
@@ -309,6 +307,75 @@ class Content {
 	
 
 	/**
+	 *	Edit file information (file name and caption) based on $_POST.
+	 *	
+	 *	@return $output
+	 */
+	
+	public function editFileInfo() {
+		
+		$output = array();
+
+		if (!empty($_POST['old-name']) && !empty($_POST['new-name']) && isset($_POST['caption'])) {
+	
+			if ($_POST['new-name']) {
+				
+				$path = $this->getPathByPostUrl();
+				$oldFile = $path . basename($_POST['old-name']);
+				$newFile = $path . Core\String::sanitize(basename($_POST['new-name']));
+				
+				$caption = $_POST['caption'];
+				$ext = FileSystem::getExtension($newFile);
+				
+				if (in_array($ext, Core\Parse::allowedFileTypes())) {
+					
+					// Rename file and caption if needed.
+					if ($newFile != $oldFile) {
+						$output['error'] = FileSystem::renameMedia($oldFile, $newFile);
+					}
+					
+					// Write caption.
+					if (empty($output['error'])) {
+						
+						$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
+						
+						// Only if file exists already or $caption is empty.
+						if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {
+							$old = umask(0);
+							file_put_contents($newCaptionFile, $caption);
+							umask($old);
+						} else {
+							$output['error'] = Text::get('error_file_save') . ' "' . basename($newCaptionFile) . '"';
+						}
+						
+					}
+				
+					$this->clearCache();
+					 
+				} else {
+			
+					$output['error'] = Text::get('error_file_format') . ' "' . $ext . '"';
+				
+				}
+				
+			} else {
+				
+				$output['error'] = Text::get('error_file_name');
+				
+			}
+	
+		} else {
+			
+			$output['error'] = Text::get('error_form');
+			
+		}
+
+		return $output;
+				
+	}
+
+
+	/**
 	 *	Extract the deepest directory's prefix from a given path.
 	 *
 	 * 	@param string $path
@@ -353,6 +420,34 @@ class Content {
 	
 	
 	/**
+	 * 	Get a preview version of an image file based on $_POST.
+	 *
+	 *      @return The $output to be used as response for an AJAX request.
+	 */
+	
+	public function getFilePreview() {
+		
+		$output = array();
+		
+		if (!empty($_POST['file']) && isset($_POST['url']) && !empty($_POST['height'] && !empty($_POST['width']))) {
+			
+			$path = $this->getPathByPostUrl();
+			$file = $path . $_POST['file'];
+			$ext = FileSystem::getExtension($file);
+			
+			if (in_array($ext, array('jpg', 'png', 'gif'))) {
+				$Image = new Core\Image($file, $_POST['width'], $_POST['height'], true);
+				$output['html'] = '<div class="uk-text-center"><img src="' . AM_BASE_URL . $Image->file . '" /></div>';
+			} 
+			
+		}
+		
+		return $output;
+		
+	}
+	
+	
+	/**
 	 *	Return the full file system path of a page's data file.
 	 *
 	 *	@param object $Page
@@ -363,6 +458,30 @@ class Content {
 		
 		return FileSystem::fullPagePath($Page->path) . $Page->template . '.' . AM_FILE_EXT_DATA;
 	
+	}
+
+
+	/**
+	 *      Return the file path for a based on $_POST['url']. In case URL is empty, return the '/shared' directory.
+	 *      
+	 *      @return The full path to the related directory.
+	 */
+	
+	public function getPathByPostUrl() {
+		
+		// Check if file from a specified page or the shared files will be listed and managed.
+		// To display a file list of a certain page, its URL has to be submitted along with the form data.
+		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
+			
+			$Page = $this->Automad->getPageByUrl($_POST['url']);
+			return FileSystem::fullPagePath($Page->path);
+			
+		} else {
+			
+			return AM_BASE_DIR . AM_DIR_SHARED . '/';
+			
+		}
+		
 	}
 
 
@@ -391,7 +510,7 @@ class Content {
 				$Selection = new Core\Selection($collection);
 				$Selection->filterByKeywords($query);
 				$Selection->sortPages(AM_KEY_MTIME, SORT_DESC);
-				$pages = $Selection->getSelection();
+				$pages = $Selection->getSelection(false);
 			
 			}
 	
@@ -493,78 +612,6 @@ class Content {
 	}
 	
 	
-	/**
-	 *	Rename file based on $_POST.
-	 *	
-	 *	@return $output
-	 */
-	
-	public function renameFile() {
-		
-		$output = array();
-
-		// Get correct path of file by the posted URL. For security reasons the file path gets build here and not on the client side.
-		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
-	
-			$url = $_POST['url'];
-			$Page = $this->Automad->getPageByUrl($url);
-			$path = FileSystem::fullPagePath($Page->path);
-			
-		} else {
-	
-			$url = '';
-			$path = AM_BASE_DIR . AM_DIR_SHARED . '/';
-	
-		}
-
-		if (isset($_POST['old-name']) && isset($_POST['new-name'])) {
-	
-			if ($_POST['new-name']) {
-		
-				if ($_POST['new-name'] != $_POST['old-name']) {
-			
-					$oldFile = $path . basename($_POST['old-name']);
-					$newFile = $path . Core\String::sanitize(basename($_POST['new-name']));
-			
-					if (is_writable($path) && is_writable($oldFile)) {
-				
-						if (!file_exists($newFile)) {
-							
-							rename($oldFile, $newFile);
-							
-							$this->clearCache();
-							
-						} else {
-							
-							$output['error'] = '"' . $newFile . '" ' . Text::get('error_existing');
-							
-						}
-				
-					} else {
-						
-						$output['error'] = Text::get('error_permission');
-						
-					}
-			
-				}
-		
-			} else {
-				
-				$output['error'] = Text::get('error_filename');
-				
-			}
-	
-		} else {
-			
-			$output['error'] = Text::get('error_form');
-			
-		}
-
-		return $output;
-				
-	}
-
-
 	/**
 	 *	Save a page.
 	 *	
@@ -725,13 +772,8 @@ class Content {
 
 		// Set path.
 		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
-		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
-			$Page = $this->Automad->getPageByUrl($_POST['url']);
-			$path = FileSystem::fullPagePath($Page->path);
-		} else {
-			$path = AM_BASE_DIR . AM_DIR_SHARED . '/';
-		}
-
+		$path = $this->getPathByPostUrl();
+		
 		// Move uploaded files
 		if (isset($_FILES['files']['name'])) {
 	
@@ -748,7 +790,7 @@ class Content {
 						$newFile = $path . Core\String::sanitize($_FILES['files']['name'][$i]);
 						move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
 					} else {
-						$errors[] = Text::get('error_file_format') . ' <strong>' . pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION) . '</strong>';
+						$errors[] = Text::get('error_file_format') . ' "' . FileSystem::getExtension($_FILES['files']['name'][$i]) . '"';
 					}
 	
 				}
@@ -761,7 +803,7 @@ class Content {
 
 			} else {
 		
-				$output['error'] = Text::get('error_permission') . '<p>' . $path . '</p>';
+				$output['error'] = Text::get('error_permission') . ' "' . basename($path) . '"';
 				
 			}
 
