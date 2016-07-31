@@ -142,15 +142,85 @@ class Html {
 	
 	
 	/**
+	 *      Create a form field depending on the name.
+	 *      
+	 *      @param string $key          
+	 *      @param string $value        
+	 *      @param boolean $removeButton 
+	 *      @return The generated HTML            
+	 */
+	
+	public function formField($key = '', $value = '', $removeButton = false) {
+		
+		// The field ID.
+		$id = 'automad-input-data-' . $key;
+	
+		$html = '<div class="uk-form-row">' .
+			'<label class="uk-form-label" for="' . $id . '">' . 
+			$key . 
+			 '</label>';
+
+		if ($removeButton) {
+			$html .= '<button type="button" class="automad-remove-parent uk-position-top-right uk-close"></button>';
+		}
+
+		// Build attribute string.
+		$attr = 'id="' . $id . '" name="data[' . $key . ']"';
+
+		// Append placeholder to $attr when editing a page. Therefore check if any URL is set in $_POST.
+		if (!empty($_POST['url'])) {
+			$attr .= ' placeholder="' . htmlentities($this->Automad->Shared->get($key)) . '"';
+		} 
+		
+		// Create field dependig on the start of $key.
+		if (strpos($key, 'text') === 0) {
+			
+			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor="{markdown:true}">' . 
+					$value . 
+					'</textarea>';
+			
+		} else if (strpos($key, 'date') === 0) {
+			
+			$attr .= 	' value="' . $value . '"';
+			
+			$html .=	'<div class="uk-form-icon uk-width-1-1">' . 
+					'<i class="uk-icon-calendar"></i>' .
+					'<input ' . $attr . ' type="text" class="uk-width-1-1" data-uk-datepicker="{format:\'YYYY-MM-DD\'}" />' .
+					'</div>';
+			
+		} else if (strpos($key, 'checkbox') === 0) {
+			
+			if ($value) {
+				$attr .= ' checked';
+			}
+			
+			$html .=	'<label class="uk-button" data-automad-toggle>' . 
+					ucwords(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key))) . 
+					'<input ' . $attr . ' type="checkbox"  />' .
+					'</label>';
+			
+		} else {
+			
+			// The default is a simple textarea.
+			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10">' . 
+					$value . 
+					'</textarea>';
+			
+		}
+		
+		$html .= '</div>';
+		
+		return $html;
+		
+	}
+	
+
+	/**
 	 *	Create form fields for page/shared variables.     
 	 *
 	 *      By passing any text for the parameter $wrapper, all inputs get wrapped in a toggle box with a 
 	 *      related button using the parameter's value as text.    
-	 *      
-	 *      Setting $removeButton = true will create a little 'x' button for each input for removal.     
-	 *       
-	 *      Setting $sharedDataPlaceholder = true will use values matching the given 
-	 *      key in the Shared object as placeholders.   
+	 *      Setting $open = true keeps the container open on load.      
 	 *      
 	 *      Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
 	 *      Note used prefix must match the ID selectors defined in 'add_variable.js'.
@@ -158,39 +228,27 @@ class Html {
 	 *	@param array $keys
 	 *	@param array $data
 	 *	@param string $wrapper (wrapper button text)
-	 *	@param boolean $removeButton
-	 *	@param boolean $sharedDataPlaceholder
+	 *	@param boolean $open (initially open wrapper)
 	 *	@param string $addVariableIdPrefix (automatically prefies all IDs for the HTML elements needed for the modal to add variables)
 	 *	@return The HTML for the textarea
 	 */
 	
-	public function formFields($keys, $data = array(), $wrapper = false, $removeButton = false, $sharedDataPlaceholder = true, $addVariableIdPrefix = false) {
+	public function formGroup($keys, $data = array(), $wrapper = false, $open = false, $addVariableIdPrefix = false) {
 			
 		$html = '';
 		
 		// The HTML for the variable fields.
 		foreach ($keys as $key) {
 		
-			$value = '';
-	
 			if (isset($data[$key])) {
 				$value = $data[$key];
-			}
-	
-			$html .=  '<div class="uk-form-row"><label class="uk-form-label" for="automad-input-data-' . $key . '">' . $key . '</label>';
-	
-			if ($removeButton) {
-				$html .= '<button type="button" class="automad-remove-parent uk-position-top-right uk-close"></button>';
-			}
-	
-			if ($sharedDataPlaceholder) {
-				$placeholder = ' placeholder="' . htmlentities($this->Automad->Shared->get($key)) . '"';
 			} else {
-				$placeholder = '';
+				$value = '';
 			}
 	
-			$html .= '<textarea' . $placeholder . ' id="automad-input-data-' . $key . '" class="uk-form-controls uk-width-1-1" name="data[' . $key . ']" rows="10">' . $value . '</textarea></div>';
-		
+			// Note that passing $addVariableIdPrefix only to create remove buttons if string is not empty.
+			$html .= $this->formField($key, $value, $addVariableIdPrefix);
+			
 		}
 		
 		// Optionally create the HTML for a dialog to add more variables to the form.
@@ -230,19 +288,47 @@ class Html {
 			
 			$wrapperClass = 'automad-' . Core\String::sanitize($wrapper, true);
 			
+			if ($open) {
+				$hidden = '';
+				// If the container should be open, set the open icon to be hidden and only show the hide icon.
+				$open =  ' uk-hidden';
+			} else {
+				$hidden = ' uk-hidden';
+			}
+			
 			$html = 	// Toggle button.
-					'<button type="button" class="uk-button uk-button-primary uk-margin-bottom uk-text-left uk-width-1-1" data-uk-toggle="{target:\'.' . $wrapperClass . '\', animation:\'uk-animation-fade\'}">' . 
-					'<i class="' . $wrapperClass . ' uk-icon-chevron-down"></i>' .
-					'<i class="' . $wrapperClass . ' uk-icon-chevron-up uk-hidden"></i>' .
-					'&nbsp;&nbsp;' . $wrapper . ' (<strong>' . count($keys) . '</strong>)' .
+					'<button type="button" class="uk-button uk-margin-bottom uk-text-left uk-width-1-1" data-uk-toggle="{target:\'.' . $wrapperClass . '\', animation:\'uk-animation-fade\'}">' . 
+					'<i class="' . $wrapperClass . $open . ' uk-icon-chevron-down"></i>' .
+					'<i class="' . $wrapperClass . $hidden . ' uk-icon-chevron-up"></i>' .
+					'&nbsp;&nbsp;' . $wrapper . 
 					'</button>' .
 					// The toggle container.
-					'<div class="' . $wrapperClass . ' uk-hidden uk-margin-bottom">' . $html . '</div>';
+					'<div class="' . $wrapperClass . $hidden . ' uk-margin-bottom">' . $html . '</div>';
 			
 		} 
 		
 		return $html;
 			
+	}
+	
+	
+	/**
+	 *      Generate thumbnail for page grid.
+	 *      
+	 *      @param string $file  
+	 *      @param float $w     
+	 *      @param float $h     
+	 *      @param string $gridW (uk-width-* suffix) 
+	 *      @return The generated markup
+	 */
+	
+	private function gridThumbnail($file, $w, $h, $gridW) {
+		
+		$img = new Core\Image($file, $w, $h, true);
+		return 	'<li class="uk-width-' . $gridW . '">' .
+			'<img src="' . AM_BASE_URL . $img->file . '" alt="' . basename($img->file) . '" width="' . $img->width . '" height="' . $img->height . '">' .
+			'</li>';
+	
 	}
 	
 	
@@ -255,33 +341,100 @@ class Html {
 	
 	public function pageGrid($pages) {
 	
-		$html = '<ul class="uk-grid uk-grid-small uk-grid-width-1-2 uk-grid-width-medium-1-3" data-uk-grid="{animation: false}">';
+		$html = '<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3" data-uk-grid="{animation:false}">';
 		
 		foreach ($pages as $key => $Page) {
 			
 			$html .= 	'<li>' . 
-					'<div class="uk-position-relative uk-margin-small-bottom">' . 
+					'<div class="uk-position-relative uk-margin-bottom">' . 
 					
 					// Panel.
-					'<div class="uk-panel uk-panel-box ">';
+					'<div class="uk-panel uk-panel-box">';
 			
-			// Get thumbnail of page.
+			// Build file grid with up to 4 images.
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
 			$files = glob($path . '{*.jpg, *.png, *.gif}', GLOB_BRACE);
 			
-			if ($files) {
-				$file = reset($files);
-				$img = new Core\Image($file, 450);
-				$html .= '<img class="uk-border-rounded" src="' . AM_BASE_URL . $img->file . '" alt="' . basename($img->file) . '">';
+			if (!empty($files)) {
+				
+				$count = count($files);
+				$wFull = 400;
+				$hFull = 300;
+
+				// File grid.
+				$html .= '<ul class="uk-grid uk-grid-collapse uk-border-rounded uk-overflow-hidden">';
+				
+				if ($count == 1) {
+					$html .= $this->gridThumbnail($files[0], $wFull, $hFull, '1-1');
+				}
+				
+				if ($count == 2) {
+					$html .= $this->gridThumbnail($files[0], $wFull/2, $hFull, '1-2');
+					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull, '1-2');
+				}
+				
+				if ($count == 3) {
+					$html .= $this->gridThumbnail($files[0], $wFull, $hFull/2, '1-1');
+					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[2], $wFull/2, $hFull/2, '1-2');
+				}
+				
+				if ($count == 4) {
+					$html .= $this->gridThumbnail($files[0], $wFull, $hFull/2, '1-1');
+					$html .= $this->gridThumbnail($files[1], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/2, '1-3');
+				}
+				
+				if ($count == 5) {
+					$html .= $this->gridThumbnail($files[0], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/2, '1-3');
+				}
+				
+				if ($count == 6) {
+					$html .= $this->gridThumbnail($files[0], $wFull, $hFull/2, '1-1');
+					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[2], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[5], $wFull/3, $hFull/3, '1-3');
+				}
+				
+				if ($count == 7) {
+					$html .= $this->gridThumbnail($files[0], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[5], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[6], $wFull/2, $hFull/2, '1-2');
+				}
+				
+				if ($count >= 8) {
+					$html .= $this->gridThumbnail($files[0], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[1], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[3], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[4], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[5], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[6], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[7], $wFull/3, $hFull/3, '1-3');
+				}
+				
+				$html .= '</ul>';
+				
 			} else {
 				
-				$html .= 	'<div class="uk-panel uk-panel-box uk-panel-box-secondary uk-border-rounded">' .
-						'<i class="uk-text-muted uk-icon-file-text-o uk-icon-medium"></i>' .
+				$html .= 	'<div class="uk-panel uk-panel-box uk-panel-box-secondary uk-border-rounded uk-text-center">' .
+						'<i class="uk-block uk-text-muted uk-icon-eye-slash uk-icon-large"></i>' .
 						'</div>';
-				
 			}
 			
-			$html .= 	'<div class="uk-panel-title uk-margin-small-bottom uk-margin-top">' . $Page->get(AM_KEY_TITLE) . '</div>' .
+			$html .= 	// Title & date.
+			 		'<div class="uk-panel-title uk-margin-small-bottom uk-margin-top">' . $Page->get(AM_KEY_TITLE) . '</div>' .
 					'<div class="uk-text-small uk-text-muted">' . Core\String::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
 					'</div>' . 
 					
