@@ -55,7 +55,7 @@ $results = $this->Content->getSearchResults();
 
 ?>
 
-		<div class="automad-navbar" data-uk-sticky>
+		<div class="automad-navbar" data-uk-sticky="{showup:true,animation:'uk-animation-slide-top'}">
 			<?php $this->element('searchbar'); ?>
 		</div>
 		<div class="uk-block">
