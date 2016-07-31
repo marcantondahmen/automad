@@ -33,28 +33,31 @@
  */
 
 
-@automad-files-icon-size-large:	90px;
-@automad-files-icon-size-small:	45px;
+@automad-files-icon-size-large:	95px;
+@automad-files-icon-size-small:	50px;
 
 
 .automad-files {
 	
 	&-icon {
-			
-		float: left;
+		
+		position: absolute;
+		top: @panel-box-padding;
+		left: @panel-box-padding;
 		width: @automad-files-icon-size-small;
 		height: @automad-files-icon-size-small;
 		min-width: @automad-files-icon-size-small;
 		
-		& a {
+		& > div {
 			display: block;
-			background-color: #fff;
+			background-color: @panel-box-secondary-background;
+			color: @panel-box-secondary-color;
 			height: 100%;
 			line-height: 1;
 		}
-	
+		
 		& .automad-files-extension {
-			font-size: 12px;
+			font-size: 10px;
 		}
 		
 		@media (min-width: @breakpoint-small) {
@@ -68,7 +71,7 @@
 			}
 			
 			& .automad-files-extension {
-				font-size: 16px;
+				font-size: 14px;
 			}
 			
 		}
@@ -77,18 +80,31 @@
 	
 	&-info {
 		
-		float: left;
 		width: 100%;
+		min-height: @automad-files-icon-size-large;
 		box-sizing: border-box;
-		margin-left: -@automad-files-icon-size-small;
 		padding-left: (@automad-files-icon-size-small + @utility-margin);
-		padding-right: 15px;
+		padding-right: 25px;
 		
-		@media (min-width: @breakpoint-small) {
-			margin-left: -@automad-files-icon-size-large;
-			padding-left: (@automad-files-icon-size-large + @utility-margin);
+		&-edit {
+			position: absolute;
+			bottom: @panel-box-padding;
+			left: @panel-box-padding;
 		}
 		
+		@media (min-width: @breakpoint-small) {
+			
+			min-height: @automad-files-icon-size-large;
+			padding-left: (@automad-files-icon-size-large + @utility-margin);
+			
+			&-edit {
+				position: absolute;
+				bottom: (@panel-box-padding + 5);
+				left: (@panel-box-padding + 5);
+			}
+			
+		}
+			
 	}
 	
 	&-dropzone {
