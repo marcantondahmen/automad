@@ -110,11 +110,11 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			
 			<div class="uk-form-row">
 				<label for="automad-input-data-title" class="uk-form-label"><?php echo ucwords(AM_KEY_TITLE); ?></label>
-				<input id="automad-input-data-title" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TITLE]); ?>" placeholder="Required" required />
+				<input id="automad-input-data-title" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_TITLE]); ?>" placeholder="Required" required />
 			</div>
 			<div class="uk-form-row">
 				<label for="automad-input-data-tags" class="uk-form-label"><?php echo Text::get('page_tags'); ?></label>
-				<input id="automad-input-data-tags" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_TAGS]); ?>" />
+				<input id="automad-input-data-tags" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_TAGS]); ?>" />
 			</div>
 			
 			<hr />
@@ -178,7 +178,7 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			</div>
 			<div class="uk-form-row">
 				<label for="automad-input-redirect" class="uk-form-label"><?php echo Text::get('page_redirect'); ?></label>
-				<input id="automad-input-redirect" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo $data[AM_KEY_URL]; ?>" />
+				<input id="automad-input-redirect" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_URL]); ?>" />
 			</div>
 			<?php } ?> 
 			
