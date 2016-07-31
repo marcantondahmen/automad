@@ -45,9 +45,19 @@ gulp.task('bump', function() {
 // Concat and minify the GUI js.
 gulp.task('gui-js', ['bump'], function() {
 	
+	var	uglifyOptions = { 
+			compress: { 
+				hoist_funs: false, 
+				hoist_vars: false 
+			},
+			output: {
+				max_line_len: 1000
+			}
+		};
+	
 	return 	gulp.src('js/*.js')
 		.pipe(concat('gui.min.js'))
-		.pipe(uglify({ compress: { hoist_funs: false, hoist_vars: false } }))
+		.pipe(uglify(uglifyOptions))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(gulp.dest(destination));
 	
@@ -57,24 +67,52 @@ gulp.task('gui-js', ['bump'], function() {
 // Concat and minify all required js libraries.
 gulp.task('lib-js', ['bump'], function() {
 	
+	var	uglifyOptions = { 
+			preserveComments: 'license', 
+			output: { 
+				max_line_len: 1000
+			} 
+		};
+	
 	return 	merge2(
-			// jQuery, UIkit and Scrollbar plugin - already minified.
+			// jQuery first.
 			gulp.src([
-				'../lib/jquery/jquery-2.0.3.min.js',
-				'../lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js',
+				'../lib/jquery/jquery-2.0.3.min.js'
+			]),
+			// CodeMirror. To be minified.
+			gulp.src([
+				'../lib/codemirror/lib/codemirror.js',
+				'../lib/codemirror/mode/markdown/markdown.js',
+				'../lib/codemirror/addon/mode/overlay.js',
+				'../lib/codemirror/mode/xml/xml.js',
+				'../lib/codemirror/mode/gfm/gfm.js'
+			])
+			.pipe(uglify(uglifyOptions)),
+			// Scrollbars.
+			gulp.src([
+				'../lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js'
+			]),
+			// Marked (for HTML editor).
+			gulp.src([
+				'../lib/marked/marked.min.js'
+			]),
+			// UIkit core and components.
+			gulp.src([
 				'../lib/uikit/js/uikit.min.js',
 				'../lib/uikit/js/components/autocomplete.min.js',
+				'../lib/uikit/js/components/datepicker.min.js',
 				'../lib/uikit/js/components/grid.min.js',
+				'../lib/uikit/js/components/htmleditor.min.js',
 				'../lib/uikit/js/components/notify.min.js',
-				'../lib/uikit/js/components/sticky.min.js'
+				'../lib/uikit/js/components/sticky.min.js',
 			]),
-			// To be minified.
+			// File upload. To be minified.
 			gulp.src([
 				'../lib/jquery-file-upload/jquery.ui.widget.js',
 				'../lib/jquery-file-upload/jquery.fileupload.js',
-				'../lib/jquery-file-upload/jquery.iframe-transport.js'
+				'../lib/jquery-file-upload/jquery.iframe-transport.js'	
 			])
-			.pipe(uglify({ preserveComments: 'license' }))
+			.pipe(uglify(uglifyOptions))
 		)
 		.pipe(concat('libs.min.js', { newLine: '\r\n\r\n' } ))
 		.pipe(gulp.dest(destination));
@@ -88,7 +126,7 @@ gulp.task('less', ['bump'], function() {
 	return 	gulp.src('less/automad.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS())
+		.pipe(cleanCSS({ keepBreaks: true }))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest(destination));
