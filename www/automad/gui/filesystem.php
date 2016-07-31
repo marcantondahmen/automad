@@ -131,6 +131,64 @@ class FileSystem {
 	
 	
 	/**
+	 *      Deletes a file and its caption (if existing).
+	 *      
+	 *      @param string $file
+	 *      @return Only error messages - false in case no errors occured!
+	 */
+	
+	public static function deleteMedia($file) {
+		
+		if (is_writable($file)) {
+			
+			if (unlink($file)) {
+				 
+				$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+				
+				if (file_exists($captionFile)) {
+					if (is_writable($captionFile)) {
+						if (!unlink($captionFile)) {
+							return Text::get('error_permission') . ' "' . basename($captionFile) . '"';
+						}
+					} else {
+						return Text::get('error_permission') . ' "' . basename($captionFile) . '"';
+					}
+				}
+				
+			} else {
+				
+				return Text::get('error_permission') . ' "' . basename($file) . '"';
+				
+			}
+			
+		} else {
+			
+			return Text::get('error_permission') . ' "' . basename($file) . '"';
+			
+		}
+			
+	}
+
+
+	/**
+	 *      Return the extension for a given file.
+	 *      
+	 *      @param string $file
+	 *      @return the extension
+	 */
+	
+	public static function getExtension($file) {
+		
+		$pathInfo = pathinfo($file);
+		
+		if (!empty($pathInfo['extension'])) {
+			return $pathInfo['extension'];
+		}
+		
+	}
+
+
+	/**
 	 *	Move a directory to a new location.
 	 *	The final path is composed of the parent directoy, the prefix and the title.
 	 *	In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
@@ -207,6 +265,65 @@ class FileSystem {
 		
 	}
 	
+	
+	/**
+	 *      Renames a file and its caption (if existing).
+	 *      
+	 *      @param string $oldFile
+	 *      @param string $newFile
+	 *      @return Only error messages - false in case no errors occured!          
+	 */
+	
+	public static function renameMedia($oldFile, $newFile) {
+		
+		if (is_writable(dirname($oldFile))) {
+			
+			if (is_writable($oldFile)) {
+				
+				if (!file_exists($newFile)) {
+				
+					if (rename($oldFile, $newFile)) {
+						
+						// Set new mtime to force refresh of page cache in case the new name was belonging to a delete file before.
+						touch($newFile);
+						
+						$oldCaptionFile = $oldFile . '.' . AM_FILE_EXT_CAPTION;
+						$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
+						
+						if (file_exists($oldCaptionFile)) {
+							if (is_writable($oldCaptionFile) && (is_writable($newCaptionFile) || !file_exists($newCaptionFile))) {
+								rename($oldCaptionFile, $newCaptionFile);
+							} else {
+								return Text::get('error_permission') . ' "' . basename($newCaptionFile) . '"';
+							}
+						} 
+						
+					} else {
+						
+						return Text::get('error_permission') . ' "' . basename($oldFile) . '"';
+						
+					}
+				
+				} else {
+					
+					return '"' . $newFile . '" ' . Text::get('error_existing');
+					
+				}
+			
+			} else {
+				
+				return Text::get('error_permission') . ' "' . basename($oldFile) . '"';
+				
+			}
+			
+		} else {
+			
+			return Text::get('error_permission') . ' "' . basename(dirname($oldFile)) . '"';
+			
+		}
+				
+	}
+
 	
 	/**
 	 *      Creates an unique suffix for a path to avoid conflicts with existing directories.
