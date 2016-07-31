@@ -107,7 +107,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					</div>
 					<?php echo $this->Html->templateSelectBox('subpage[theme_template]'); ?>
 				</form>
-				<div class="uk-margin-top uk-panel uk-panel-box" data-automad-tree="#automad-add-page-input">
+				<div class="uk-margin-small-top uk-panel uk-panel-box" data-automad-tree="#automad-add-page-input">
 					<?php echo $this->Html->siteTree('', $this->collection, array(), true, Text::get('page_add_destination')); ?>
 				</div>
 				<div class="uk-modal-footer uk-text-right">
