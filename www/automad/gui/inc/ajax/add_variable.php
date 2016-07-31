@@ -44,8 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 if (!empty($_POST['name'])) {
 
-	// To only add one single field, just pass an array with only one element and set the wrapper text to false.
-	echo $this->Html->formFields(array($_POST['name']), array(), false, true);
+	echo $this->Html->formField($_POST['name'], '', true);
 	
 }
 
