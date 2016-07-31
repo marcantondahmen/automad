@@ -128,8 +128,12 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 					</div>	
 					<?php echo $this->Html->templateSelectBox('theme_template', $data[AM_KEY_THEME], $Page->template); ?>	
 					<div class="uk-modal-footer uk-text-right">
-						<button class="uk-modal-close uk-button"><i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?></button>
-						<button class="uk-button uk-button-primary" type="submit"><i class="uk-icon-check"></i>&nbsp;&nbsp;<?php echo Text::get('btn_apply_reload'); ?></button>
+						<button class="uk-modal-close uk-button">
+							<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?>
+						</button>
+						<button class="uk-button uk-button-primary" type="button" data-automad-submit="page_data">
+							<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php echo Text::get('btn_apply_reload'); ?>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -186,15 +190,30 @@ if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) 
 			<?php 
 			
 			// Vars in selected template.
-			echo $this->Html->formFields($this->Keys->inCurrentTemplate(), $data, Text::get('page_vars_in_template')); 
+			echo 	$this->Html->formGroup(
+					$this->Keys->inCurrentTemplate(), 
+					$data, 
+					Text::get('page_vars_in_template'), 
+					true
+				); 
 			
 			// Vars in other templates.
-			echo $this->Html->formFields($this->Keys->inOtherTemplates(), $data, Text::get('page_vars_in_other_templates')); 
+			echo 	$this->Html->formGroup(
+					$this->Keys->inOtherTemplates(), 
+					$data, 
+					Text::get('page_vars_in_other_templates')
+				); 
 					
 			// Vars in data but not in any template	
 			$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
 			// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-			echo $this->Html->formFields($unusedDataKeys, $data, Text::get('page_vars_unused'), true, false, 'automad-add-variable'); 
+			echo 	$this->Html->formGroup(
+					$unusedDataKeys, 
+					$data, 
+					Text::get('page_vars_unused'), 
+					false, 
+					'automad-add-variable'
+				); 
 					
 			?>
 				
