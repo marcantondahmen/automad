@@ -47,13 +47,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-
-
-
 $Selection = new Core\Selection($this->Automad->getCollection());
 $pagesCount = count($Selection->getSelection(false));
 $Selection->sortPages(AM_KEY_MTIME, SORT_DESC);
-$latestPages = $Selection->getSelection(false, 0, 10);
+$latestPages = $Selection->getSelection(false, 0, 15);
 
 
 $this->guiTitle = $this->guiTitle . ' / ' . Text::get('dashboard_title');
@@ -62,11 +59,14 @@ $this->element('header');
 
 ?>
 
-		<div class="uk-block uk-block-muted uk-margin-top">
+		<div class="uk-hidden-large">
+			<?php $this->element('title'); ?>
+		</div>
+		<div class="uk-block uk-block-muted uk-margin-top uk-hidden-small uk-hidden-medium">
 			<h2><?php echo $this->sitename; ?></h2>
 			<h1><?php echo Text::get('dashboard_welcome') . ' ' . ucwords(User::get()); ?></h1>
 		</div>
-		<div class="automad-navbar" data-uk-sticky>
+		<div class="automad-navbar" data-uk-sticky="{showup:true,animation:'uk-animation-slide-top'}">
 			<?php $this->element('searchbar'); ?>
 		</div>
 		<div class="uk-block uk-block-muted uk-margin-small-top">
@@ -78,15 +78,15 @@ $this->element('header');
 			</ul>
 		</div>
 		<div class="uk-block">
+			<div class="uk-panel uk-panel-box uk-margin-small-bottom">
+				<i class="uk-icon-clock-o"></i>&nbsp;&nbsp;<?php echo Text::get('dashboard_recently_edited'); ?>
+			</div>
 			<a href="#automad-add-page-modal" class="uk-button uk-button-large uk-width-1-1" data-uk-modal>
 				<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php echo Text::get('btn_add_page'); ?>
 			</a>
-			<div class="uk-panel uk-panel-box uk-margin-small-top uk-margin-small-bottom">
-				<i class="uk-icon-clock-o"></i>&nbsp;&nbsp;<?php echo Text::get('dashboard_recently_edited'); ?>
-			</div>
-			<?php echo $this->Html->pageGrid($latestPages); ?>		
 		</div>
-	
+		<?php echo $this->Html->pageGrid($latestPages); ?>		
+		
 <?php
 
 
