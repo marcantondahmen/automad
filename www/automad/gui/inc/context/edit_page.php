@@ -72,7 +72,7 @@ $this->element('title');
 
 ?>
 
-		<div class="automad-navbar" data-uk-sticky>
+		<div class="automad-navbar" data-uk-sticky="{showup:true,animation:'uk-animation-slide-top'}">
 			
 			<?php $this->element('searchbar'); ?>
 			
@@ -96,7 +96,10 @@ $this->element('title');
 						<div class="uk-width-1-2">
 							<button class="uk-button uk-width-1-1 uk-text-truncate" type="button">
 								<i class="uk-icon-folder-open-o"></i>
-								<span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_files'); ?></span>
+								<span class="uk-hidden-small">
+									&nbsp;&nbsp;<?php echo Text::get('btn_files'); ?>&nbsp;&nbsp;
+									<span class="uk-badge uk-badge-notification" data-automad-count=".automad-files-info"></span>
+								</span>
 							</button>
 						</div>
 					</div>
@@ -182,7 +185,7 @@ $this->element('title');
 		<?php if ($Page) { ?>
 					
 		<div class="uk-block">
-			<a href="<?php echo AM_BASE_URL . $Page->url; ?>" class="uk-text-truncate uk-text-left uk-button uk-button-large uk-button-primary uk-width-1-1" target="_blank">
+			<a href="<?php echo AM_BASE_URL . $Page->url; ?>" class="uk-text-truncate uk-text-left uk-button uk-text-muted uk-width-1-1" target="_blank">
 				<i class="uk-icon-share"></i>&nbsp;&nbsp;<span class="uk-hidden-small"><?php echo AM_BASE_URL; ?></span><?php echo $Page->url; ?>
 			</a>
 		</div>
