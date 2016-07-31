@@ -57,17 +57,13 @@ $output = array();
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, its URL has to be submitted along with the form data.
 if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
-	
 	$url = $_POST['url'];
-	$Page = $this->collection[$url];
-	$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
-	
 } else {
-	
 	$url = '';
-	$path = AM_BASE_DIR . AM_DIR_SHARED . '/';
-	
 }
+
+
+$path = $this->Content->getPathByPostUrl();
 
 
 // Delete files in $_POST['delete'].
@@ -93,18 +89,19 @@ foreach (Core\Parse::allowedFileTypes() as $type) {
 	
 }
 
-
 ob_start();
 
 
 if ($files) { ?>
 	
-		<div class="uk-text-right uk-margin-bottom">
-			<a href="#automad-upload-modal" class="uk-button" data-uk-modal="{bgclose: false, keyboard: false}">
-				<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php echo Text::get('btn_upload'); ?>
+		<div class="uk-text-right">
+			<a href="#automad-upload-modal" class="uk-button uk-margin-bottom" data-uk-modal="{bgclose: false, keyboard: false}">
+				<span class="uk-hidden-small"><i class="uk-icon-upload"></i>&nbsp;&nbsp;</span>
+				<?php echo Text::get('btn_upload'); ?>
 			</a>
-			<button class="uk-button uk-button-danger" data-automad-submit="files">
-				<i class="uk-icon-trash"></i>&nbsp;&nbsp;<?php echo Text::get('btn_remove_selected'); ?>
+			<button class="uk-button uk-button-danger uk-margin-bottom" data-automad-submit="files">
+				<span class="uk-hidden-small"><i class="uk-icon-trash"></i>&nbsp;&nbsp;</span>
+				<?php echo Text::get('btn_remove_selected'); ?>
 			</button>
 		</div>
 	
@@ -114,46 +111,58 @@ if ($files) { ?>
 
 		foreach ($files as $file) { 
 			
-			$extension = pathinfo($file, PATHINFO_EXTENSION);
+			$ext = FileSystem::getExtension($file);
 			
-			if (in_array(strtolower($extension), $imageTypes)) { 
+			if (in_array(strtolower($ext), $imageTypes)) { 
 
-				$img = new \Automad\Core\Image($file, 90, 90, true);
-				$info = '<div class="uk-text-small">' . 
+				$img = new \Automad\Core\Image($file, 95, 95, true);
+				$size = '<div class="uk-text-muted uk-text-small">' . 
+					'<i class="uk-icon-expand uk-icon-justify"></i>&nbsp;&nbsp;' .
 					$img->originalWidth . ' <i class="uk-icon-times"></i> ' . $img->originalHeight . 
 					'</div>';
 				$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 				
 			} else {
 				
-				$info = '';
-				$icon = '<div class="uk-vertical-align-middle uk-text-muted"><i class="uk-icon-file-o"></i><br /><span class="automad-files-extension">' . $extension . '</span></div>';
+				$size = '';
+				$icon = '<div class="uk-vertical-align-middle uk-text-muted"><i class="uk-icon-eye-slash"></i><br /><span class="automad-files-extension">' . $ext . '</span></div>';
 				
 			}
 			
+			$caption = Core\Parse::caption($file);
+			$editLink = 'href="#automad-edit-file-info-modal" data-uk-modal data-automad-caption="' . htmlspecialchars($caption) . '" data-automad-file="' . basename($file) . '"';
+			
 		?>
-	
+		
 		<div class="uk-panel uk-panel-box uk-margin-small-top">	
 			<div class="automad-files-icon uk-border-rounded uk-overflow-hidden">
-				<a class="uk-vertical-align uk-text-center" href="<?php echo str_replace(AM_BASE_DIR, AM_BASE_URL, $file); ?>" target="_blank" title="Download">
+				<div class="uk-vertical-align uk-text-center">
 					<?php echo $icon; ?>
-				</a>
+				</div>
 			</div>
 			<div class="automad-files-info">
 				<div class="uk-panel-title uk-text-truncate">
-					<a class="uk-link-muted" href="#automad-rename-file-modal" title="<?php echo Text::get('btn_rename_file'); ?>" data-uk-modal data-automad-file="<?php echo basename($file); ?>">
-						<?php echo basename($file) ?>&nbsp;&nbsp;<i class="uk-icon-pencil"></i>
-					</a>
+					<?php echo basename($file); ?>
+				</div>
+				
+				<?php if ($caption) { ?>
+				<div class="uk-text-muted uk-text-small uk-text-truncate">
+					<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;&nbsp;"<?php echo Core\String::shorten($caption, 100); ?>"
+				</div>
+				<?php } ?>
+				
+				<div class="uk-text-muted uk-text-small uk-text-truncate">
+					<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;&nbsp;<?php echo date('M j, Y H:i', filemtime($file)); ?>
 				</div>
 				<div class="uk-text-small uk-text-truncate">
-					<?php echo date('M j, Y H:i', filemtime($file)); ?>
-				</div>
-				<div class="uk-text-small uk-text-truncate">
-					<a class="uk-link-muted" href="<?php echo str_replace(AM_BASE_DIR, AM_BASE_URL, $file); ?>" target="_blank">
-						<?php echo str_replace(AM_BASE_DIR, '', $file) ?>
+					<a class="uk-text-muted" href="<?php echo str_replace(AM_BASE_DIR, AM_BASE_URL, $file); ?>" download>
+						<i class="uk-icon-download uk-icon-justify"></i>&nbsp;&nbsp;<?php echo str_replace(AM_BASE_DIR, '', $file) ?>
 					</a>
 				</div>
-				<?php echo $info; ?>   
+				<?php echo $size; ?>   
+				<div class="automad-files-info-edit">
+					<a href="#automad-edit-file-info-modal" class="uk-icon-button uk-icon-pencil" <?php echo $editLink; ?>></a>
+				</div>
 			</div>
 			<div class="uk-panel-badge">
 				<label data-automad-toggle>
@@ -164,19 +173,21 @@ if ($files) { ?>
 				
 		<?php } ?> 
 		
-		<!-- Rename File Modal -->
-		<div id="automad-rename-file-modal" class="uk-modal" data-automad-url="<?php echo $url; ?>">
+		<!-- Edit Modal -->
+		<div id="automad-edit-file-info-modal" class="uk-modal" data-automad-url="<?php echo $url; ?>">
 			<div class="uk-modal-dialog">
 				<div class="uk-modal-header">
-					<?php echo Text::get('btn_rename_file'); ?>
+					<?php echo Text::get('btn_edit_file_info'); ?>
 				</div>
-				<!-- Input fields get created by JS -->
+				<div id="automad-edit-file-info-container" class="uk-position-relative">
+					<!-- Input fields get created by JS -->
+				</div>
 				<div class="uk-modal-footer uk-text-right">
 					<button type="button" class="uk-modal-close uk-button">
 						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php echo Text::get('btn_close'); ?>
 					</button>
-					<button id="automad-rename-file-submit" type="button" class="uk-button uk-button-primary">
-						<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php echo Text::get('btn_rename_file'); ?>
+					<button id="automad-edit-file-info-submit" type="button" class="uk-button uk-button-primary">
+						<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php echo Text::get('btn_ok'); ?>
 					</button>
 				</div>
 			</div>
