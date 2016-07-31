@@ -43,7 +43,7 @@ label[data-automad-toggle] {
 	}
 	
 	&:before {
-		content: '\f111'; // .uk-icon-circle
+		content: '\f1db'; // .uk-icon-circle-o-thin
 		position: relative;
 		top: 0;
 		&:extend([class*='uk-icon-']);
@@ -57,9 +57,23 @@ label[data-automad-toggle] {
 		cursor: pointer;
 	}
 	
+	// Checkbox toggles.
+	&:not(.uk-button) {
+		
+		&:before {
+			color: @text-muted-color;
+			font-size: 18px;
+		}
+		
+		&.uk-active:before {
+			color: inherit;
+		}
+		
+	}
+	
+	// Button toggles.
 	// In combination with the default .uk-button class, the label
 	// turns into a button-like panel with toggle icons.
-	
 	&.uk-button {
 		
 		width: 100%;
