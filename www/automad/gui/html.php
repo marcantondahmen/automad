@@ -152,6 +152,9 @@ class Html {
 	
 	public function formField($key = '', $value = '', $removeButton = false) {
 		
+		// Escape $value.
+		$value = htmlspecialchars($value);
+		
 		// The field ID.
 		$id = 'automad-input-data-' . $key;
 	
@@ -169,7 +172,7 @@ class Html {
 
 		// Append placeholder to $attr when editing a page. Therefore check if any URL is set in $_POST.
 		if (!empty($_POST['url'])) {
-			$attr .= ' placeholder="' . htmlentities($this->Automad->Shared->get($key)) . '"';
+			$attr .= ' placeholder="' . htmlspecialchars($this->Automad->Shared->get($key)) . '"';
 		} 
 		
 		// Create field dependig on the start of $key.
