@@ -74,7 +74,7 @@ if (isset($_POST['data'])) {
 	
 		<div class="uk-form-row">
 			<label for="automad-input-data-sitename" class="uk-form-label"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
-			<input id="automad-input-data-sitename" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo str_replace('"', '&quot;', $data[AM_KEY_SITENAME]); ?>" />
+			<input id="automad-input-data-sitename" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" />
 		</div>
 		<div class="uk-form-row">
 			<label for="automad-input-data-theme" class="uk-form-label">Theme</label>
