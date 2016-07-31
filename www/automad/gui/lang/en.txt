@@ -42,6 +42,10 @@ btn_duplicate_page: Duplicate Page
 
 -
 
+btn_edit_file_info: Edit File Info
+
+-
+
 btn_files: Files
 
 -
@@ -67,10 +71,6 @@ btn_ok: Ok
 -
 
 btn_remove_selected: Remove Selected
-
--
-
-btn_rename_file: Rename File
 
 -
 
@@ -142,11 +142,15 @@ error_existing: already exists!
 
 -
 
-error_file_format: Unsupported file type:
+error_file_save: Could not save 
 
 -
 
-error_filename: Invalid filename!
+error_file_format: Unsupported file type
+
+-
+
+error_file_name: Invalid filename!
 
 -
 
@@ -190,11 +194,7 @@ error_password_reuse: Don't reuse your old password!
 
 -
 
-error_permission: Permission denied!
-
--
-
-error_remove: Could not remove 
+error_permission: Permission denied:
 
 -
 
