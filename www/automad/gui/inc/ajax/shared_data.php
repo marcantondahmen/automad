@@ -108,12 +108,22 @@ if (isset($_POST['data'])) {
 		<?php 
 		
 		// Used shared variables.
-		echo $this->Html->formFields($this->Keys->inAllTemplates(), $data, Text::get('shared_vars_used'), false, false);
+		echo 	$this->Html->formGroup(
+				$this->Keys->inAllTemplates(), 
+				$data, 
+				Text::get('shared_vars_used')
+			);
 		
 		// Unused shared variables.
 		$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
 		// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-		echo $this->Html->formFields($unusedDataKeys, $data, Text::get('shared_vars_unused'), true, false, 'automad-add-variable');
+		echo 	$this->Html->formGroup(
+				$unusedDataKeys, 
+				$data, 
+				Text::get('shared_vars_unused'), 
+				false, 
+				'automad-add-variable'
+			);
 		
 		?>
 	
