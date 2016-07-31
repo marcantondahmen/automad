@@ -42,6 +42,9 @@
 	
 	Automad.textarea = {
 		
+		// Do not select textareas of HTML editors!
+		selector: 'textarea:not([data-uk-htmleditor])',
+		
 		handleTabs: function(e) {
 		
 			// Insert \t at caret when TAB is pressed, instead of jumping to the next textarea or button.
@@ -70,11 +73,11 @@
 				$doc = $(document);
 				
 			// On keyup.
-			$doc.on('keyup focus focusout update.automad.textarea', 'textarea', t.resize);
+			$doc.on('keyup focus focusout update.automad.textarea', t.selector, t.resize);
 			
 			// Update also on drop, but with timeout.
 			// The timeout is needed to make sure the dropped text gets recognized.
-			$doc.on('drop cut paste', 'textarea', function(e) {
+			$doc.on('drop cut paste', t.selector, function(e) {
 				
 				var	$ta = $(e.target);
 				
@@ -86,16 +89,21 @@
 			
 			// Update also when AJAX completes.
 			$doc.ajaxComplete(function() {
-				$('textarea').trigger('update.automad.textarea');
+				$(t.selector).trigger('update.automad.textarea');
+			});
+			
+			// Also trigger resizing on toggles to fix issues with hidden textareas.
+			$doc.on('click', '[data-uk-toggle]', function() {
+				$(t.selector).trigger('update.automad.textarea');
 			});
 				
 			// Update also on resize.
 			$(window).resize(function() {
-				$('textarea').trigger('update.automad.textarea');
-			});
-			
+				$(t.selector).trigger('update.automad.textarea');
+			});	
+				
 			// Tabs
-			$doc.on('keydown', 'textarea', t.handleTabs);	
+			$doc.on('keydown', t.selector, t.handleTabs);	
 				
 		},
 		
@@ -103,10 +111,6 @@
 		
 			var	$ta = 		$(e.target),
 				content =	$ta.val().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />'),
-				
-				// The spaceBottom is needed when textarea is focused to handle 'jumping' text caused by height transitions.
-				// That extra space buffers the resize and the text doesn't jump when creating a new line.
-				spaceBottom =	30,
 				
 				// The hidden clone will be used to determine the actual height.
 				$clone =	$('<div></div>')
@@ -123,14 +127,8 @@
 							'line-height': $ta.css('line-height'),
 							'letter-spacing': $ta.css('letter-spacing')
 						});
-							
-			
-			// Remove bottom space on 'focusout' and the namespaced 'update' event.
-			if (e.type == 'focusout' || e.type == 'update') {
-				spaceBottom = 0;
-			}
-							
-			$ta.height($clone.height() + spaceBottom);
+						
+			$ta.height($clone.height());
 				
 			$clone.remove();
 			
@@ -140,4 +138,13 @@
 	
 	Automad.textarea.init();
 	
+	// Override CodeMirror defaults.
+	UIkit.on('beforeready.uk.dom', function(){
+		
+		$.extend(UIkit.components.htmleditor.prototype.defaults, {
+			height: 250
+		});
+		
+	});
+		
 }(window.Automad = window.Automad || {}, jQuery);
