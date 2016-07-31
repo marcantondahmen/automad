@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2016 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -42,11 +42,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /*
- *	Rename a file.
+ *	Edit file information (file name and caption).
  */
 
 
-echo json_encode($this->Content->renameFile());
+echo json_encode($this->Content->editFileInfo());
 
 
 ?>
