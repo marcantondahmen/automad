@@ -303,7 +303,7 @@
 			// Watch changes - handle button status and prevent leaving page with unsaved changes.
 			
 			// Automatically submit forms with attribute data-automad-auto-submit on changes.
-			$doc.on('change drop', '[' + da.autoSubmit + '] input, [' + da.autoSubmit + '] textarea', function(e) {
+			$doc.on('change drop cut paste', '[' + da.autoSubmit + '] input, [' + da.autoSubmit + '] textarea, [' + da.autoSubmit + '] select', function(e) {
 				$(e.target).closest('form').submit();
 			});
 			
@@ -326,7 +326,7 @@
 			
 			// Add 'automad-unsaved-{handler}' class to the <html> element on form changes
 			// and re-enable related (only!) submit buttons after touching any form element.
-			$doc.on('change drop', '[' + da.handler + ']:not([' + da.autoSubmit + ']) input, [' + da.handler + ']:not([' + da.autoSubmit + ']) textarea', function() {
+			$doc.on('change drop cut paste', '[' + da.handler + ']:not([' + da.autoSubmit + ']) input, [' + da.handler + ']:not([' + da.autoSubmit + ']) textarea, [' + da.handler + ']:not([' + da.autoSubmit + ']) select', function() {
 				
 				var 	$form = $(this).closest('[' + da.handler + ']'),
 					handler = $form.data(Automad.util.dataCamelCase(da.handler));
@@ -354,7 +354,38 @@
 				
 			}
 			
+			
+			// CodeMirror events.
+			
+			// Trigger 'change' event on original textareas when a CodeMirror instance fires its 'change' event.	
+			$doc.on('ready ajaxComplete', function(){
+				
+				setTimeout(function(){
+					
+					// Only select instance once (:not(.automad-change-event)) to avoid stacking events.
+					$('.CodeMirror:not(.automad-change-event)').each(function(){
 						
+						var 	$cm = $(this),
+							cm = $cm[0].CodeMirror,
+							
+							// Find textareas before to trigger change event on.
+							$ta = $cm.prev();
+							
+						// Apply '.automad-change-event' class to avoid re-adding the event on every ajaxComplete event.
+						// Note that only '.CodeMirror:not(.automad-change-event)' get selected above.
+						$cm.addClass('automad-change-event');
+					
+						cm.on('change', function() {
+							$ta.trigger('change');	
+						});
+						
+					})
+					
+				}, 500);
+				
+			});	
+			
+							
 		},
 		
 		// Modal actions. (hide & show)
@@ -413,5 +444,5 @@
 	};
 
 	Automad.form.init();
-		
+	
 }(window.Automad = window.Automad || {}, jQuery);
