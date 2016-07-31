@@ -53,7 +53,7 @@ $this->element('title');
 
 ?>
 
-		<div class="automad-navbar" data-uk-sticky>
+		<div class="automad-navbar" data-uk-sticky="{showup:true,animation:'uk-animation-slide-top'}">
 			<?php $this->element('searchbar'); ?>
 			<div class="automad-navbar-context uk-width-1-1">
 				<ul class="uk-subnav">
