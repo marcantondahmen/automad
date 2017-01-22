@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -38,16 +38,16 @@
  *	Get system status items. 
  *	
  *	To get the status of any config setting (constant),
- * 	the container has to have a 'data-automad-status' attribute.
+ * 	the container has to have a 'data-am-status' attribute.
  *  	The requested item for each container is then passed via 
- *  	'data-automad-status="item"'. 
+ *  	'data-am-status="item"'. 
  */
 
 +function(Automad, $) {
 	
 	Automad.status = {
 		
-		dataAttr: 'data-automad-status',
+		dataAttr: 'data-am-status',
 		
 		get: function() {
 		
