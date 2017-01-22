@@ -26,49 +26,53 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-// Only apply the data-automad-toggle attribute to a label and place the input inside.
+// Only apply the data-am-toggle attribute to a label and place the input inside.
 // No special markup needed.
-
-label[data-automad-toggle] {
+label[data-am-toggle] {
 	
 	& input {
 		display: none;
 	}
 	
+	// Checkbox toggles.
 	&:before {
-		content: '\f1db'; // .uk-icon-circle-o-thin
+		content: '\f111'; // .uk-icon-circle
+		font-size: 18px;
 		position: relative;
 		top: 0;
 		&:extend([class*='uk-icon-']);
 	}
-
+	
 	&.uk-active:before {
 		content: '\f058'; // .uk-icon-check-circle
 	}
 	
-	&:hover {
-		cursor: pointer;
-	}
-	
-	// Checkbox toggles.
-	&:not(.uk-button) {
+	// Make unchecked checkboxes grey.
+	&:not(.uk-active):not(.uk-button) {
 		
 		&:before {
-			color: @text-muted-color;
-			font-size: 18px;
+			color: darken(@am-grey, 10%);
 		}
 		
-		&.uk-active:before {
-			color: inherit;
+		&:hover:before {
+			color: darken(@am-grey, 14%);
 		}
 		
+	}
+
+	.am-panel-bottom & {		
+		height: 18px;
+	}
+
+	&:hover {
+		cursor: pointer;
 	}
 	
 	// Button toggles.
@@ -76,26 +80,76 @@ label[data-automad-toggle] {
 	// turns into a button-like panel with toggle icons.
 	&.uk-button {
 		
-		width: 100%;
+		text-align: left;
 		
-		&:before {
-			content: '\f204'; // .uk-icon-toggle-off
-			padding-right: 4px;
+		:not(.am-toggle-radios) > &.uk-active {
+			
+			background-color: @button-success-background;
+			
+			&:hover {
+				background-color: @button-success-hover-background;
+			}
+			
 		}
 		
+		&:before {
+			content: '\f00d'; // .uk-icon-times
+			padding-right: 2px;
+			font-size: inherit;
+			width: 1em;
+			line-height: inherit;
+			
+		}
+
 		&.uk-active:before {
-			content: '\f205'; // .uk-icon-toggle-on
+			content: '\f00c'; // .uk-icon-check
+		}
+		
+		// Radio toggles.
+		.am-toggle-radios & {
+	
+			&:before {
+				content: '\f10c'; // .uk-icon-circle-o
+			}
+		
+			&.uk-active:before {
+				content: '\f192'; // .uk-icon-dot-circle-o
+			}
+			
+		}
+		
+	}
+		
+}
+
+// Radios.
+.am-toggle-radios {
+	
+	& .uk-button {
+		
+		border-radius: 0;
+		
+		&:first-child {
+			border-top-left-radius: @am-radius;
+			border-top-right-radius: @am-radius;
+		}
+		
+		&:last-child {
+			border-bottom-left-radius: @am-radius;
+			border-bottom-right-radius: @am-radius;
 		}
 		
 	}
 	
 }
 
-// Remove animation form icons in toggle button.
-
-[data-uk-toggle] i {
+// Fade in active container.
+.am-toggle-container {
 	
-	-webkit-animation-duration: 0s !important;
-    	animation-duration: 0s !important;
+	.fade-out;
+	
+	&.uk-active {
+		.fade-in;
+	}
 	
 }
