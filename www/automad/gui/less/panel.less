@@ -26,18 +26,85 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@panel-title-margin-bottom:		10px;
-@panel-title-font-size:			16px;
-@panel-title-line-height: 		18px;
-@panel-box-padding:			15px;
-@panel-box-badge-top: 			12px;
-@panel-box-badge-right: 		@panel-box-padding;
+@panel-box-padding:			@utility-margin;
+@panel-box-color:			#FFFFFF;
+@panel-box-title-color:			@panel-box-color;
+@panel-box-background:			darken(@am-grey, 4%);
+@panel-box-badge-top:                   13px;
+@panel-box-badge-right:                 10px;
 
-@panel-box-secondary-background:	#e8e8e8;
+@panel-box-primary-background:		@am-blue;
+@panel-box-primary-color: 		#FFFFFF;
+@panel-box-primary-hover-color: 	@panel-box-primary-color;
+@panel-box-primary-title-color: 	@panel-box-primary-color;
+
+
+.hook-panel-box() {
+	
+	margin: @utility-margin-large 0;
+	border-radius: @am-radius;
+	overflow: hidden;
+	
+	.uk-grid & {
+		margin: 0;
+	}
+
+	& a {
+		color: @panel-box-color;
+	}
+
+}
+
+.am-panel {
+	
+	&-icon {
+		
+		display: block;
+		position: relative;
+		height: 0;
+		// Keep icon responsive.
+		padding-top: 75%;
+
+		background-color: darken(@panel-box-background, 5%);
+		
+		& > * {
+			position: absolute;
+			display: block;
+			width: 100%;
+			top: 50%;
+			margin-top: -20px;
+			font-size: 42px;
+			line-height: 38px;
+			color: darken(@panel-box-background, 8%);
+			text-align: center;
+		} 
+		
+	}
+
+	&-bottom {
+		
+		display: block;
+		height: 30px;
+		margin-top: @utility-margin;
+		
+		& > * {
+			
+			position: absolute;
+			bottom: @panel-box-padding;
+			
+			&.am-panel-bottom-right {
+				right: @panel-box-padding;
+			}
+			
+		}
+		
+	}
+
+}
