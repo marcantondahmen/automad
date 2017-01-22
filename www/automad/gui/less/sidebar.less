@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -34,10 +34,10 @@
 
 
 // Push the neighbor when sidebar is open.
-.automad-sidebar-push {
-	
-	@media (min-width: @breakpoint-large) and (max-width: ((2 * @offcanvas-bar-width) + @utility-container-max-width)) {
-		margin: 0 0 0 @offcanvas-bar-width;
+.am-sidebar-push {
+		
+	@media (min-width: @breakpoint-large) and (max-width: ((2 * @offcanvas-bar-width) + @utility-container-max-width + 30)) {
+		margin: 0 0 0 (@offcanvas-bar-width + 15);
 	}
 	
 }
