@@ -1,0 +1,277 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+@am-cm-transition-delay: 			0.1s;
+
+@htmleditor-navbar-background:                  @button-background;
+
+@htmleditor-navbar-nav-height:                  40px;
+@htmleditor-navbar-nav-padding-horizontal:      15px;
+@htmleditor-navbar-nav-line-height:             @htmleditor-navbar-nav-height;
+@htmleditor-navbar-nav-color:                   #FFFFFF;
+
+@htmleditor-navbar-nav-hover-background:        @button-hover-background;
+@htmleditor-navbar-nav-hover-color:             @button-hover-color;
+@htmleditor-navbar-nav-onclick-background:      @button-active-background;
+@htmleditor-navbar-nav-onclick-color:           @button-active-color;
+@htmleditor-navbar-nav-active-background:       @button-active-background;
+@htmleditor-navbar-nav-active-color:            @button-active-color;
+ 
+@htmleditor-content-background:                 #FFFFFF;
+@htmleditor-content-padding:                    8px (@am-nav-padding - @am-border-width);
+@htmleditor-content-split-border:               @am-grey;
+
+@htmleditor-fullscreen-z-index:                 990;
+@htmleditor-fullscreen-content-top:             @htmleditor-navbar-nav-height;
+@htmleditor-fullscreen-icon-resize:             "\f066";
+
+
+.hook-htmleditor() {
+	border: none;
+}
+
+.hook-htmleditor-navbar() {
+	
+	margin-bottom: @utility-margin-small;
+	border-radius: @am-radius;
+	overflow: hidden;
+	
+	@media (max-width: @breakpoint-small-max) {
+		display: none;
+	}
+	
+}
+
+.hook-htmleditor-content() {
+	border: none;
+	background-color: transparent;
+}
+
+.uk-htmleditor .CodeMirror {
+	font-family: inherit;
+	color: @form-focus-color;
+	background-color: @form-focus-background;
+	padding: @htmleditor-content-padding;
+	box-sizing: border-box;
+}
+
+[data-mode='split'] .uk-htmleditor-code { 
+	border-right: @am-border-width solid @htmleditor-content-split-border; 
+}
+
+:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content .cm-s-default {
+	
+	color: @form-color;
+	background-color: @form-background;
+	border: @am-border-width solid transparent;
+	border-radius: @am-radius;
+	
+	// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
+	&,
+	& * {
+		.transition(color 0.2s @am-cm-transition-delay, background-color 0.2s @am-cm-transition-delay, border-color 0.2s @am-cm-transition-delay, box-shadow 0.2s @am-cm-transition-delay;);
+	}
+	
+	&.CodeMirror-focused {
+		color: @form-focus-color;
+		background-color: @form-focus-background;
+		border-color: @am-blue;
+	}
+
+}
+
+.uk-htmleditor-preview {
+	
+	background-color: @form-focus-background;
+	
+	:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content > & {
+		border: @am-border-width solid transparent;
+		border-radius: @am-radius;
+	}
+
+	& * {
+		color: @form-color;
+	}
+	
+}
+
+.uk-htmleditor-fullscreen {
+	
+	& .cm-s-default,
+	& .uk-htmleditor-preview {
+		padding: 40px;
+	}
+	
+}
+
+.CodeMirror-lines {
+	padding: 0; // Vertical padding around content.
+}
+
+.CodeMirror pre {
+	padding: 0; // Horizontal padding of content.
+}
+
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+	background-color: #FFFFFF; // The little square between H and V scrollbars.
+}
+
+.cm-s-default {
+	
+	& .cm-header {
+		color: inherit;
+	}
+
+	& .cm-quote {
+		color: inherit;
+	}
+	
+	& .cm-keyword {
+		color: inherit;
+		
+	}
+	
+	& .cm-atom {
+		color: inherit;
+		
+	}
+	
+	& .cm-number {
+		color: inherit;
+	}
+	
+	& .cm-def {
+		color: inherit;
+	}
+	
+	& .cm-variable,
+	& .cm-punctuation,
+	& .cm-property,
+	& .cm-operator {}
+		
+	& .cm-variable-2 {
+		color: @am-blue;
+	}
+	
+	& .cm-variable-3 {
+		color: inherit;
+	}
+	
+	& .cm-comment {
+		font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+		font-size: 13px;
+		color: @am-blue;
+	}
+	
+	& .cm-string {
+		color: @am-blue;
+		font-style: italic;
+	}
+	
+	& .cm-string-2 {
+		color: inherit;
+	}
+	
+	& .cm-meta {
+		color: inherit;
+	}
+	
+	& .cm-qualifier {
+		color: inherit;
+	}
+	
+	& .cm-builtin {
+		color: inherit;
+	}
+	
+	& .cm-bracket {
+		color: inherit;
+	}
+	
+	& .cm-tag {
+		color: inherit;
+	}
+	
+	& .cm-attribute {
+		color: inherit;
+	}
+	
+	& .cm-hr {
+		color: inherit;
+	}
+	
+	& .cm-link {
+		color: @am-blue;
+		font-weight: bold;
+	}
+
+	& .cm-error {
+		color: @am-red;
+	}
+	
+}
+
+.cm-negative {
+	color: @am-red;
+}
+
+.cm-positive {
+	color: @am-green;
+}
+
+.cm-header, 
+.cm-strong {
+	font-weight: bold;
+}
+
+.cm-em {
+	font-style: italic;
+}
+
+.cm-link {
+	text-decoration: underline;
+}
+
+.cm-strikethrough {
+	text-decoration: line-through;
+}
+
+
+.cm-invalidchar {
+	color: @am-red;
+}
+
+.CodeMirror-composing { 
+	border-bottom: @am-border-width solid; 
+}
