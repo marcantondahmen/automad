@@ -1,0 +1,63 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@badge-background:			@am-blue;
+@badge-padding-horizontal:		6px;
+@badge-font-size:			11px;
+@badge-font-weight:			900;
+@badge-line-height:			18px;
+@badge-color:				#FFFFFF;
+@badge-text-transform:			none;
+@badge-hover-color:			@badge-color;
+
+@badge-notification-font-size:		12px;
+@badge-notification-line-height:	25px;
+
+@badge-success-background:		@am-green;
+@badge-warning-background:		@am-red;
+@badge-danger-background:		@am-red;
+
+
+.hook-badge() {
+	margin-top: -3px;
+	border-radius: 50px;
+	min-width: @badge-line-height - (2 * @badge-padding-horizontal) + 1;
+	line-height: 1.6;
+}
+
+.uk-badge-notification {
+	margin-top: 0;
+	padding: 0 10px;
+}
