@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,23 +44,23 @@
 		
 		selectors: {
 			
-			container: 	'#automad-add-variable-container',
-			modal: 		'#automad-add-variable-modal',
-			modalInput: 	'#automad-add-variable-input',
-			submit:		'#automad-add-variable-submit'
+			container: 	'#am-add-variable-container',
+			modal: 		'#am-add-variable-modal',
+			modalInput: 	'#am-add-variable-input',
+			submit:		'#am-add-variable-submit'
 			
 		},
 		
 		dataAttr: {
 			
-			errorName: 	'data-automad-error-name',
-			errorExists: 	'data-automad-error-exists'
+			errorName: 	'data-am-error-name',
+			errorExists: 	'data-am-error-exists'
 			
 		},
 		
 		append: function(e) {
 			
-			// There must be an existing target container with the ID '#automad-custom-variables' 
+			// There must be an existing target container with the ID '#am-custom-variables' 
 			// within the page's markup. The created variable input will be appended to that target container.
 			
 			var	a = Automad.addVariable,
@@ -68,7 +68,7 @@
 				$submit = $(e.target),
 				$container = $(a.selectors.container),
 				$modalInput = $(a.selectors.modalInput),
-				idPrefix = 'automad-input-data-',
+				idPrefix = 'am-input-data-',
 				name = $modalInput.val().replace(/[^\w\.\-]/g, '_').toLowerCase();
 			
 			// Check if there is already a variable with the same name.
