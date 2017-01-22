@@ -1,0 +1,90 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@alert-margin-vertical:  	@utility-margin-large;
+@alert-padding: 		@am-nav-padding * 1.5;
+@alert-background: 		@am-blue;
+@alert-color:			#FFFFFF;
+
+@alert-success-background:	@am-green;
+@alert-success-color:		#FFFFFF;
+
+@alert-danger-background: 	@am-red;
+@alert-danger-color: 		#FFFFFF;
+
+@alert-large-padding: 		@am-nav-padding;
+
+
+.hook-alert() {	
+	
+	border-radius: @am-radius;
+	
+	&.uk-alert-success,
+	&.uk-alert-danger {
+		
+		position: relative;
+		padding-left: 50px;
+		
+		&:before {	
+			position: absolute;
+			left: @alert-padding;
+			top: @alert-padding - 1;
+			font-family: FontAwesome;
+			display: block;
+			font-weight: normal;
+			font-style: normal;
+			font-size: 22px;
+			line-height: 22px;
+			vertical-align: baseline;
+			padding-right: 10px;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		
+	}
+		
+}
+
+.hook-alert-success() {
+	&:before {
+		content: '\f00c';
+	}
+}
+
+.hook-alert-danger() {
+	&:before {
+		content: '\f00d';
+	}
+}
