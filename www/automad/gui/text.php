@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Text class provides all methods related to the text modules used in the GUI. 
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
  *	@license MIT license - http://automad.org/license
  */
 
@@ -58,6 +58,19 @@ class Text {
 	 */
 	
 	private static $modules = array();
+	
+	
+	/**
+	 *      Short version of echo Text::get().
+	 *
+	 *      @param string $key
+	 */
+	
+	public static function e($key) {
+		
+		echo Text::get($key);
+		
+	}
 	
 	
 	/**
