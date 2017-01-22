@@ -26,23 +26,101 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@button-padding-horizontal:		12px;
-@button-mini-padding-horizontal:	@button-padding-horizontal;
+@button-color:				#FFFFFF;
+@button-background:			darken(@am-grey, 5%);
+@button-hover-color:			#FFFFFF;
+@button-hover-background:		darken(@am-grey, 7%);
+@button-active-color:			#FFFFFF;
+@button-active-background:		darken(@am-grey, 9%);
+
+@button-primary-color:			#FFFFFF;
+@button-primary-background:		@am-blue;
+@button-primary-hover-color:		#FFFFFF;
+@button-primary-hover-background:	darken(@am-blue, 6%);
+@button-primary-active-color:		@button-primary-hover-color;
+@button-primary-active-background:	darken(@am-blue, 12%);
+
+@button-success-color:			#FFFFFF;
+@button-success-background:		@am-green;
+@button-success-hover-color: 		#FFFFFF;
+@button-success-hover-background: 	darken(@am-green, 6%);
+@button-success-active-color: 		@button-success-hover-color;
+@button-success-active-background:	darken(@am-green, 12%);
+
+@button-danger-color:			#FFFFFF;
+@button-danger-background:		@am-red;
+@button-danger-hover-color: 		#FFFFFF;
+@button-danger-hover-background:	darken(@am-red, 6%);
+@button-danger-active-color:		@button-danger-hover-color;
+@button-danger-active-background:       darken(@am-red, 12%);
+
+@button-disabled-color:			darken(@button-disabled-background, 10%);
+@button-disabled-background:		darken(@am-grey, 6%);
+
+@button-height:				32px;
+@button-mini-height:			20px;
+@button-small-height:			25px;
+@button-large-height:			42px;
+
+@button-line-height: 			@button-height;
+@button-mini-line-height: 		@button-mini-height;
+@button-small-line-height: 		@button-small-height;
+@button-large-line-height: 		@button-large-height;
+
+@button-padding-horizontal:		@am-nav-padding;
+@button-mini-padding-horizontal:	7px;
+@button-small-padding-horizontal:	@button-padding-horizontal;
 @button-large-padding-horizontal:	@button-padding-horizontal;
 
-.hook-button {
+
+.hook-button() {
+	box-sizing: border-box;
+	position: relative;
+	border-radius: @am-radius;
+}
+
+.hook-button-primary() {
 	
 	& .uk-badge {
-		
-		margin-top: -4px;
-		
+		color: @am-blue;
+		background-color: #FFFFFF;
+	}
+	
+}
+
+.uk-button-group {
+	
+	// Keep properties for border radius even when radius is zero
+	// to be flexible.
+	border-radius: @am-radius;
+
+	& .uk-button {
+		border-radius: 0;
+	}
+
+	// The second selector is needed in case the buttons distributed over multiple containers like in the sticky switcher/dropdown menu.
+	& > :first-child,
+	& > :first-child [class*="uk-button"]:first-of-type {
+		border-top-left-radius: @am-radius;
+		border-bottom-left-radius: @am-radius;
+	}
+	
+	// The second selector is needed in case the buttons distributed over multiple containers like in the sticky switcher/dropdown menu.
+	& > :last-child,
+	& > :last-child [class*="uk-button"]:last-of-type {
+		border-top-right-radius: @am-radius;
+		border-bottom-right-radius: @am-radius;
+	}
+	
+	[data-uk-sticky].uk-active > & {
+		.shadow;
 	}
 	
 }
