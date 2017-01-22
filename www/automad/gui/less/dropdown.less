@@ -26,25 +26,36 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@dropdown-width:	100%;
+@dropdown-z-index: 			970;
+@dropdown-width:			100%;
+@dropdown-margin-top:			12px;
+@dropdown-padding:			@am-radius;
+@dropdown-background:			@button-primary-background;
+@dropdown-color:			#FFFFFF;
+@dropdown-font-size: 			1rem;
+@dropdown-animation:			uk-fade;
+
+@dropdown-small-padding: 		@dropdown-padding;
+
+@dropdown-scrollable-height: 		200px;
 
 
 .hook-dropdown() {
 	
-	min-width: 200px;
-	background-color: @form-focus-background;
+	margin-top: @dropdown-margin-top;
+	border-radius: @am-radius;
+	.shadow;
 	
-	.uk-autocomplete & .uk-nav a {
-		width: 100%;
-		max-width: 100%;
-		box-sizing: border-box;
+	&:not(.uk-datepicker) {
+		min-width: 100%;
+		width: auto;
 	}
 	
 }
