@@ -2,10 +2,13 @@ var 	gulp = require('gulp'),
 	bump = require('gulp-bump'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
+	googleFonts = require('gulp-google-webfonts'),
 	header = require('gulp-header'),
 	merge2 = require('merge2'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
+	replace = require('gulp-replace'),
+	sequence = require('gulp-sequence'),
 	uglify = require('gulp-uglify'),
 	gutil = require('gulp-util'),
 	fs = require('fs'),
@@ -99,12 +102,13 @@ gulp.task('lib-js', ['bump'], function() {
 			// UIkit core and components.
 			gulp.src([
 				'../lib/uikit/js/uikit.min.js',
+				'../lib/uikit/js/components/accordion.min.js',
 				'../lib/uikit/js/components/autocomplete.min.js',
 				'../lib/uikit/js/components/datepicker.min.js',
 				'../lib/uikit/js/components/grid.min.js',
 				'../lib/uikit/js/components/htmleditor.min.js',
 				'../lib/uikit/js/components/notify.min.js',
-				'../lib/uikit/js/components/sticky.min.js',
+				'../lib/uikit/js/components/sticky.min.js'
 			]),
 			// File upload. To be minified.
 			gulp.src([
@@ -126,7 +130,7 @@ gulp.task('less', ['bump'], function() {
 	return 	gulp.src('less/automad.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS({ keepBreaks: true }))
+		.pipe(cleanCSS({ keepBreaks: true, rebase: false }))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest(destination));
@@ -141,6 +145,54 @@ gulp.task('watch', function() {
 	gulp.watch('less/*.less', ['less']);
 	
 });
+
+
+// Download fonts from Google.
+gulp.task('google-fonts-download', function() {
+
+	var	libDir = '../../lib/google/fonts/', // Note: the path is relative to gulp.dest
+		fontsList = './fonts.list',
+		options = {
+			fontsDir: libDir,
+			cssDir: libDir,
+			cssFilename: 'fonts.css'
+		},
+		woff = Object.assign({}, options, { format: 'woff' }),
+		woff2 = Object.assign({}, options, { format: 'woff2' }),
+		ttf = Object.assign({}, options, { format: 'ttf' });
+
+	return	merge2(
+			gulp.src(fontsList)
+			.pipe(googleFonts(woff)),
+			gulp.src(fontsList)
+			.pipe(googleFonts(woff2)),
+			gulp.src(fontsList)
+			.pipe(googleFonts(ttf))
+		)
+		.pipe(gulp.dest(destination));	
+		
+});
+
+
+// Add all formats to the fonts.css file. 
+// The gulp-google-webfonts plugin can only create a .css file for one format.
+// Therefore that file will be processed in a second step.
+gulp.task('google-fonts-css', function() {
+
+	var	rgx = /(src\: url\(([^\)]+?)\.ttf\) format\(\'truetype\'\);)/g,
+		rpl = 	"src: url($2.woff2) format('woff2');" +
+			"\n\tsrc: url($2.woff) format('woff');" + 
+			"\n\t$1";
+
+	return	gulp.src('../lib/google/fonts/fonts.css')
+		.pipe(replace(rgx, rpl))
+		.pipe(gulp.dest('../lib/google/fonts'))
+	
+});
+
+
+// Run both google font tasks as a sequence.
+gulp.task('google-fonts', sequence('google-fonts-download', 'google-fonts-css'));
 
 
 // The default task.
