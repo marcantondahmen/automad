@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -43,7 +43,7 @@
 	Automad.util = {
 		
 		// Convert data attribute string in dataAPI string. 
-		// For example "data-automad-handler" gets converted into "automadHandler".
+		// For example "data-am-handler" gets converted into "amHandler".
 		dataCamelCase: function(str) {
 			
 			str = str.replace(/data-/g, '');
