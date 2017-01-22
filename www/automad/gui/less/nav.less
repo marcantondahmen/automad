@@ -26,15 +26,57 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@nav-padding-horizontal:		20px;
-@nav-nested-padding-horizontal: 	@nav-padding-horizontal;
-
+@nav-side-color:			#ffffff;
+@nav-side-hover-color:			@nav-side-color;
+@nav-side-hover-background:		@am-nav-bg-hover;
+@nav-side-active-color:			@am-nav-active;
+@nav-side-active-background: 		@am-nav-bg-active;
 @nav-side-nested-color:   		@nav-side-color;
 @nav-side-nested-hover-color:       	@nav-side-hover-color;
+@nav-side-header-color:			@am-muted;
+@nav-side-divider-border:		@am-border-color;
+@nav-side-divider-border-width:		@am-border-width;
+
+@nav-header-font-weight:		500;
+@nav-header-text-transform:		none;
+@nav-header-padding-vertical:		4px;
+@nav-header-padding-horizontal:		@nav-padding-horizontal;
+@nav-header-margin-top:			0;
+
+@nav-padding-vertical:			8px;
+@nav-padding-horizontal:		@am-nav-padding;
+
+@nav-nested-padding-vertical:		6px;
+@nav-nested-padding-horizontal:		6px;
+@nav-nested-padding-left:	 	12px;
+
+@nav-divider-margin-vertical:		@utility-margin;
+@nav-divider-margin-horizontal:		@nav-padding-horizontal;
+
+@nav-dropdown-color: 			@button-primary-color;
+@nav-dropdown-hover-background:  	@button-primary-hover-background;
+@nav-dropdown-hover-color:  		@button-primary-hover-color;
+
+
+.hook-nav-side-header() {
+	font-size: @text-small-font-size;
+}
+
+.hook-nav-side-divider() {
+	border: none;	
+}
+
+.hook-nav-side-active() {
+	
+	&:not(.am-tree-toggle) {
+		color: @am-nav-active !important;
+	}
+
+}
