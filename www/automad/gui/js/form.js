@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -42,7 +42,7 @@
 
 	Automad.form = {
 		
-		unsavedClassPrefix: 'automad-unsaved-',
+		unsavedClassPrefix: 'am-unsaved-',
 		
 		dataAttr: {
 			
@@ -52,51 +52,54 @@
 			 *
 			 * 	FORM ATTRIBUTES:
 			 *	
-			 * 	data-automad-handler="handler"		Generally, all forms with a [data-automad-handler] attribute will be sumbitted to their AJAX handler, 
-			 *						specified in "data-automad-handler".
+			 * 	data-am-handler="handler"		Generally, all forms with a [data-am-handler] attribute will be sumbitted to their AJAX handler, 
+			 *						specified in "data-am-handler".
 			 *						For example: 
-			 * 						"<form data-automad-handler="page_data"></form>"
+			 * 						"<form data-am-handler="page_data"></form>"
 			 *						will submit the form to "?ajax=page_data"
 			 *
 			 *      					Note that a page can only (!) have once a handler with the same name.
 			 *      					Having multiple forms with the same handler confuses button and watch states.
 			 *
-			 * 	data-automad-url="page"			To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
+			 * 	data-am-url="page"			To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
 			 *						included in the request.
-			 *						Therefore the data attribute "data-automad-url" must be added to the form tag. 
+			 *						Therefore the data attribute "data-am-url" must be added to the form tag. 
 			 *						
-			 *	data-automad-init			Automatically submit form when a page gets loaded.
+			 *	data-am-init				Automatically submit form when a page gets loaded.
 			 *
-			 * 	data-automad-auto-submit		Automatically submit form on changes. Must be added to a button.
+			 * 	data-am-auto-submit			Automatically submit form on changes. Must be added to a button.
 			 *
-			 * 	data-automad-close-on-success="#form"	Closes a modal window with the given ID on success.
+			 * 	data-am-close-on-success="#form"	Closes a modal window with the given ID on success.
 			 *
-			 * 	data-automad-confirm="Text..."		Confirm submission
+			 * 	data-am-confirm="Text..."		Confirm submission
 			 *
 			 * 
 			 * 	INPUT ATTRIBUTES:
 			 *
-			 *	data-automad-enter="#button"		Trigger click event on pressing the enter key. Must be added to an input field.
+			 *	data-am-enter="#button"			Trigger click event on pressing the enter key. Must be added to an input field.
 			 *
-			 * 	data-automad-default="..."		Set a default value for an input to be used if the field gets cleared by the user.
+			 * 	data-am-default="..."			Set a default value for an input to be used if the field gets cleared by the user.
+			 *
+			 *      data-am-watch-exclude			Exclude field from being watched for changes.
 			 *
 			 *
 			 * 	BUTTON ATTRIBUTES:
 			 *
-			 *	data-automad-submit="handler"		A button or link with that attribute will be used as submit button for a form having a
-			 * 						"data-automad-handler" attribute set to the given handler value.
-			 * 						Note that those buttons automatically get disabled on load and re-enable on changes.					
+			 *	data-am-submit="handler"		A button or link with that attribute will be used as submit button for a form having a
+			 * 						"data-am-handler" attribute set to the given handler value.
+			 * 						Note that those buttons automatically get disabled on load and re-enable on changes.
 			 */
 			
-			handler: 	'data-automad-handler',
-			url:		'data-automad-url',
-			submit:		'data-automad-submit',
-			init:		'data-automad-init',
-			autoSubmit:	'data-automad-auto-submit',
-			close:		'data-automad-close-on-success',
-			confirm:	'data-automad-confirm',
-			enter:		'data-automad-enter',
-			defaultValue:	'data-automad-default'
+			handler: 	'data-am-handler',
+			url:		'data-am-url',
+			submit:		'data-am-submit',
+			init:		'data-am-init',
+			autoSubmit:	'data-am-auto-submit',
+			close:		'data-am-close-on-success',
+			confirm:	'data-am-confirm',
+			enter:		'data-am-enter',
+			defaultValue:	'data-am-default',
+			watchExclude:	'data-am-watch-exclude'
 			
 		},
 		
@@ -104,11 +107,11 @@
 		ajaxPost: function(e) {
 			
 			/*
-			 *	Generally, all forms with a [data-automad-handler] attribute will be sumbitted to their AJAX handler,
-			 * 	specified in "data-automad-handler".
+			 *	Generally, all forms with a [data-am-handler] attribute will be sumbitted to their AJAX handler,
+			 * 	specified in "data-am-handler".
 			 *
 			 * 	For example: 
-			 *  	"<form data-automad-handler="page_data"></form>"
+			 *  	"<form data-am-handler="page_data"></form>"
 			 *   	will submit the form to "?ajax=page_data"
 			 *
 			 * 	Server Data:
@@ -192,10 +195,10 @@
 				}
 				
 				// If the request returns no error, optionally close wrapping modal.
-				// Note that this can be done with adding 'data-automad-close-on-success="#modal"' attribute to a form.
+				// Note that this can be done with adding 'data-am-close-on-success="#modal"' attribute to a form.
 				if (!data.error) {
 							
-					// Close wrapping modal if form has 'data-automad-close-on-success="#modal"' attribute. 
+					// Close wrapping modal if form has 'data-am-close-on-success="#modal"' attribute. 
 					var modalSelector = $form.data(Automad.util.dataCamelCase(f.dataAttr.close));
 					
 					if (modalSelector) {
@@ -218,7 +221,7 @@
 				confirmMessage =	$form.data(Automad.util.dataCamelCase(f.dataAttr.confirm));
 			
 			// If confirmation is required (confirmMessage is not empty) 
-			// and the form is not empty (avoid confirm box for data-automad-init forms).
+			// and the form is not empty (avoid confirm box for data-am-init forms).
 			if (confirmMessage && $form.find('input').length > 0) {
 				
 				// Wait for confirmation.	
@@ -249,7 +252,7 @@
 			// Handle AJAX post on submit event.
 		 	$doc.on('submit', '[' + da.handler + ']', f.confirm);
 			
-			// Submit forms when clicking buttons (possibly outside the form) having "data-automad-submit" attribute.
+			// Submit forms when clicking buttons (possibly outside the form) having "data-am-submit" attribute.
 			$doc.on('click', '[' + da.submit + ']', function(e) {
 				
 				var	handler = $(this).data(Automad.util.dataCamelCase(da.submit));
@@ -259,22 +262,18 @@
 				
 			});
 			
-			// Submit forms with a data-automad-init attribute automatically on load.
+			// Submit forms with a data-am-init attribute automatically on load.
 			$doc.ready(function() {
 
-				// All forms with attribute [data-automad-init] get submitted when page is ready to get initial content via AJAX.
+				// All forms with attribute [data-am-init] get submitted when page is ready to get initial content via AJAX.
 			 	$('[' + Automad.form.dataAttr.init + ']').trigger('submit');
 
 			});
 			
-			
-			// Handle modal events.
-			$doc.on('ready ajaxComplete', f.modalEvents);
-			
-			
+
 			// Handle enter key.
 			
-			// Disable form submission on pressing enter in input field in general, if form has 'data-automad-handler' attribute.
+			// Disable form submission on pressing enter in input field in general, if form has 'data-am-handler' attribute.
 			// Prevent accidental submission of parent form when pressing enter in nested and injected input fields 
 			// such as the file rename dialog.
 			$doc.on('keydown', '[' + da.handler + '] input', function(e) {
@@ -285,7 +284,7 @@
 				
 			});
 			
-			// Explictly enable submission of form when pressing enter key in input with 'data-automad-enter' attribute
+			// Explictly enable submission of form when pressing enter key in input with 'data-am-enter' attribute
 			// by triggering a click event on the given button id.
 			$doc.on('keydown', '[' + da.enter + ']', function(e) {
 				
@@ -302,17 +301,18 @@
 			
 			// Watch changes - handle button status and prevent leaving page with unsaved changes.
 			
-			// Automatically submit forms with attribute data-automad-auto-submit on changes.
+			// Automatically submit forms with attribute data-am-auto-submit on changes.
 			$doc.on('change drop cut paste', '[' + da.autoSubmit + '] input, [' + da.autoSubmit + '] textarea, [' + da.autoSubmit + '] select', function(e) {
 				$(e.target).closest('form').submit();
 			});
 			
-			// Disable all submit buttons with a data-automad-submit attribute initially when ajax completes or the document is ready.
+			// Disable all submit buttons with a data-am-submit attribute initially when ajax completes or the document is ready.
 			// Note that only buttons get disabled. If in some cases it is not wanted to disable a <button> (for example "Delete Page" button),
 			// a normal <a> tag can be used instead to submt the form. The <a> link will never be disabled.
 			$doc.on('ready', function() {
 				$('button[' + da.submit + ']').prop('disabled', true);
 			});
+			
 			$doc.on('ajaxComplete', function(e, xhr, settings) {
 				
 				// On an 'ajaxComplete' event it is important to actually only disabled the related submit button and
@@ -324,19 +324,24 @@
 				
 			});
 			
-			// Add 'automad-unsaved-{handler}' class to the <html> element on form changes
+			// Add 'am-unsaved-{handler}' class to the <html> element on form changes
 			// and re-enable related (only!) submit buttons after touching any form element.
-			$doc.on('change drop cut paste', '[' + da.handler + ']:not([' + da.autoSubmit + ']) input, [' + da.handler + ']:not([' + da.autoSubmit + ']) textarea, [' + da.handler + ']:not([' + da.autoSubmit + ']) select', function() {
+			$doc.on('change drop cut paste keydown', 
+				'[' + da.handler + ']:not([' + da.autoSubmit + ']) input:not([' + da.watchExclude + ']), ' +
+				'[' + da.handler + ']:not([' + da.autoSubmit + ']) textarea:not([' + da.watchExclude + ']), ' +
+				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + '])', 
+				function() {
 				
-				var 	$form = $(this).closest('[' + da.handler + ']'),
-					handler = $form.data(Automad.util.dataCamelCase(da.handler));
+					var 	$form = $(this).closest('[' + da.handler + ']'),
+						handler = $form.data(Automad.util.dataCamelCase(da.handler));
+					
+					$('html').addClass(f.unsavedClassPrefix + handler);
+					$('button[' + da.submit + '="' + handler + '"]:disabled').prop('disabled', false);
 				
-				$('html').addClass(f.unsavedClassPrefix + handler);
-				$('button[' + da.submit + '="' + handler + '"]').prop('disabled', false);
-				
-			});
+				}
+			);
 			
-			// Remove 'automad-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.
+			// Remove 'am-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.
 			$doc.on('submit', '[' + da.handler + ']', function(){
 				
 				var 	handler = $(this).data(Automad.util.dataCamelCase(da.handler));
@@ -348,22 +353,28 @@
 			// Define onbeforeunload function.
 			window.onbeforeunload = function() {
 				
-				if ($('html[class*="automad-unsaved-"]').length) {
+				if ($('html[class*="am-unsaved-"]').length) {
 					return 'You have unsaved chages!';
 				}
 				
 			}
 			
 			
-			// CodeMirror events.
+			// Events.
 			
-			// Trigger 'change' event on original textareas when a CodeMirror instance fires its 'change' event.	
+			// Handle modal events.
+			$doc.on('ready ajaxComplete', f.modalEvents);
+			
+			// Hide placeholder on focus.
+			$doc.on('ready ajaxComplete', f.placeholderEvents); 
+			
+			// CodeMirror - trigger 'change' event on original textareas when a CodeMirror instance fires its 'change' event.	
 			$doc.on('ready ajaxComplete', function(){
 				
 				setTimeout(function(){
 					
-					// Only select instance once (:not(.automad-change-event)) to avoid stacking events.
-					$('.CodeMirror:not(.automad-change-event)').each(function(){
+					// Only select instance once (:not(.am-change-event)) to avoid stacking events.
+					$('.CodeMirror:not(.am-change-event)').each(function(){
 						
 						var 	$cm = $(this),
 							cm = $cm[0].CodeMirror,
@@ -371,9 +382,9 @@
 							// Find textareas before to trigger change event on.
 							$ta = $cm.prev();
 							
-						// Apply '.automad-change-event' class to avoid re-adding the event on every ajaxComplete event.
-						// Note that only '.CodeMirror:not(.automad-change-event)' get selected above.
-						$cm.addClass('automad-change-event');
+						// Apply '.am-change-event' class to avoid re-adding the event on every ajaxComplete event.
+						// Note that only '.CodeMirror:not(.am-change-event)' get selected above.
+						$cm.addClass('am-change-event');
 					
 						cm.on('change', function() {
 							$ta.trigger('change');	
@@ -384,17 +395,17 @@
 				}, 500);
 				
 			});	
-			
-							
+
+				
 		},
 		
 		// Modal actions. (hide & show)
-		// Reset a form when closing the wrapping modal window and refresh a form[data-automad-init] when opening.
+		// Reset a form when closing the wrapping modal window and refresh a form[data-am-init] when opening.
 		modalEvents: function() {
 		
 			var 	$modal = $('.uk-modal');
 			
-			// Remove all events before adding agian, since the 'ajaxComplete' event will be trigger multiple times.
+			// Remove all events before adding again, since the 'ajaxComplete' event will be trigger multiple times.
 			$modal.off('show.uk.modal.automad.form');
 			$modal.off('hide.uk.modal.automad.form');
 			
@@ -403,11 +414,11 @@
 				
 				'show.uk.modal.automad.form': function(){
 				
-					// Update [data-automad-init] forms inside (!) a modal window.
+					// Update [data-am-init] forms inside (!) a modal window.
 				
 					// Content can have changed after closing a modal before. When re-opening the modal,
 					// the form might have outdated values inside. To update that information, 
-					// forms with a 'data-automad-init' attribute must be cleared and re-submitted to
+					// forms with a 'data-am-init' attribute must be cleared and re-submitted to
 					// pull updates. 
 					// Clearing the form is important to avoid auto-submitting unwanted changes 
 					// before updateing the form.
@@ -416,7 +427,7 @@
 					});
 					
 					// Focus first input (not disabled).
-					$(this).find('input:not(:disabled)').first().focus();
+					$(this).find('input:not(:disabled, [type="hidden"])').first().focus();
 					
 				},
 				
@@ -439,7 +450,29 @@
 				
 			});
 			
-		} 
+		},
+		
+		// Hide placeholder when focused.
+		placeholderEvents: function() {
+			
+			var $fields = $('input, textarea');
+			
+			$fields.off('focus.automad.form.placeholder');
+			$fields.off('blur.automad.form.placeholder');
+			
+			$fields.on({
+				
+				'focus.automad.form.placeholder': function() {
+					$(this).data('placeholder', $(this).attr('placeholder')).attr('placeholder', '');
+				},
+				
+				'blur.automad.form.placeholder': function() {
+					$(this).attr('placeholder', $(this).data('placeholder'));
+				}
+				
+			});
+				
+		}
 		
 	};
 
