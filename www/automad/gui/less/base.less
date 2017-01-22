@@ -1,0 +1,138 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+// Automad colors.
+@am-blue:			#5BD3F3;
+@am-red:			#FF5842;
+@am-green:			#7EDC7B;
+@am-grey:			#D2D2D2;
+@am-text:			#999999;
+@am-muted:			#ADADAD;
+
+
+// Specific Automad theme variables.
+@am-body-padding-bottom:	40px; 
+
+@am-nav-padding:		12px;
+
+@am-border-width:		2px;
+@am-border-color:		darken(@am-grey, 5%);
+
+@am-nav-border-vertical-width:	@am-border-width;
+@am-nav-active:			#FFFFFF;
+@am-nav-bg-active:		darken(@am-grey, 6%);
+@am-nav-bg-hover:		darken(@am-grey, 4%);
+
+// Keep radius as variable to be able to quickly switch to a theme with rounded corners.
+// Therefore the border-radius should be defined in all elements.
+@am-radius:			0px;
+
+
+// UIkit base variables.
+@base-body-color: 		@am-text;
+@base-body-background:		@am-grey;
+
+@base-margin-vertical:		@utility-margin-large;
+
+@base-hr-margin-vertical:	@utility-margin-large;
+@base-hr-border:		@am-border-color;
+@base-hr-border-width:		@am-border-width;
+
+@base-body-font-family:		"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@base-body-font-weight:         500;
+@base-body-font-size:		14px;
+@base-body-line-height:		18px;
+
+@base-heading-font-family:  	@base-body-font-family;
+@base-heading-color:		#FFFFFF;
+@base-heading-text-transform: 	none;
+@base-heading-margin-top: 	@base-margin-vertical;
+@base-h1-font-size:  		36px;
+@base-h1-line-height: 		36px;
+@base-h2-font-size: 		24px;
+@base-h2-line-height:  		25px;
+@base-h3-font-size:   		18px;
+@base-h3-line-height:     	21px;
+@base-h4-font-size:     	16px;
+@base-h4-line-height:    	20px;
+@base-h5-font-size:       	14px;
+@base-h5-line-height:     	20px;
+@base-h6-font-size:       	12px;
+@base-h6-line-height:     	18px;
+
+@base-list-padding-left:      	30px;
+
+@base-selection-background:	@am-red;
+@base-selection-color:  	#FFFFFF;
+
+
+body {
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;	
+	
+}
+
+div:empty {
+	margin: 0 !important;
+}
+
+h1 {
+	font-weight: 300;
+}
+
+h2 {
+	font-weight: 400;
+}
+
+h3,
+h4 {
+	font-weight: 500;
+}
+
+a {
+	text-decoration: none !important;	
+}
+
+a, 
+nav,
+ul,
+button,
+label,
+label:before,
+textarea,
+input { 
+	.transition(color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s;);
+}
