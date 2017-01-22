@@ -26,30 +26,26 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@offcanvas-z-index:                             900;
-@offcanvas-background:                          fade(@base-body-background, 30%);
+@offcanvas-z-index:                             985;
+@offcanvas-background:                          fade(@am-grey, 30%);
 
-@offcanvas-bar-width:                           300px;
-@offcanvas-bar-background:                      #333;
+@offcanvas-bar-width:                           340px;
+@offcanvas-bar-background:                      @am-grey;
 
 @offcanvas-panel-margin:                        0;
-@offcanvas-panel-color:                         #777;
-@offcanvas-panel-link-color:                    #ccc;
-@offcanvas-panel-link-hover-color:              #fff;
-@offcanvas-panel-title-color:                   @offcanvas-panel-link-color;
+@offcanvas-panel-color:                         #FFFFFF;
 
-
-/* Show off-canvas bar on large screens. */
 
 .hook-offcanvas() {
 	
+	// Show off-canvas bar on large screens.
 	@media (min-width: @breakpoint-large) {
 		display: block;
 		width: 0px;
@@ -57,12 +53,14 @@
 		
 }
 
-
 .hook-offcanvas-bar() {
 	
-	max-width: 85%;
+	max-width: 90%;
 	min-height: 100%;
-	overflow: hidden;
+	
+	& i.uk-icon-automad {
+		color: #FFFFFF;
+	}
 	
 	@media (min-width: @breakpoint-large) {
 		-webkit-transform: translateX(0%);
@@ -70,7 +68,6 @@
 	}
 	
 }
-
 
 .hook-offcanvas-misc() {
 	
