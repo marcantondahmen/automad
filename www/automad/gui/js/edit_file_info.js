@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -42,138 +42,98 @@
 	
 	Automad.editFileInfo = {
 		
-		selectors: {
-			modal: '#automad-edit-file-info-modal',
-			button:	'#automad-edit-file-info-submit',
-			infoContainer: '#automad-edit-file-info-container'
+		dataAttr: {
+			fileInfo: 'data-am-file-info',
+			url: 'data-am-url',
+			ext: 'data-am-extension'
 		},
 		
-		previewHeight: 320,
-		previewWidth: 560,
+		selectors: {
+			modal: '#am-edit-file-info-modal',
+			button:	'#am-edit-file-info-submit',
+			img: '#am-edit-file-info-img',
+			icon: '#am-edit-file-info-icon',
+			oldName: '#am-edit-file-info-old-name',
+			newName: '#am-edit-file-info-new-name',
+			caption: '#am-edit-file-info-caption',
+			download: '#am-edit-file-info-download'
+		},
 		
-		// Define modal and parentForm within info.init() to make sure the DOM is ready, when a user clicks a edit button.
-		$modal: '',
-		$parentForm: '',
-		$infoContainer: '',
-		$preview: '',
-		
-		$nameOld: $('<input>', {
-			'type': 'hidden', 
-			'name': 'old-name'
-		})
-		.prop('disabled', true),
-		
-		$nameNew: $('<input>', {
-			'type': 'text', 
-			'name': 'new-name', 
-			'class': 'uk-form-controls uk-form-large uk-width-1-1 uk-margin-small-bottom'
-		}),
-		
-		$caption: $('<textarea></textarea>', {
-			'class': 'uk-form-controls uk-width-1-1 uk-margin-small-top',
-			'rows': 1,
-			'placeholder': 'Caption' 
-		}),
-		
-		getPreview: function(file, url) {
+		// Since the modal window is nested within the actual file list form, it is very important to 
+		// reset all input fields of the edit dialog before submitting the files form.
+		destroy: function() {
 			
-			var	efi = 	Automad.editFileInfo,
-				icon =	'<i class="uk-icon-eye-slash uk-icon-medium"></i>',
-				param =	{
-						'url': url, // If URL is empty, the "/shared" files will be managed.
-						'file': file,
-						'height': efi.previewHeight,
-						'width': efi.previewWidth
-					};
+			var	efi = Automad.editFileInfo,
+				da = efi.dataAttr,
+				s = efi.selectors;
 			
-			$.post('?ajax=get_file_preview', param, function(data) {
-				
-				if (data.html) {
-					
-					efi.$preview.fadeOut(300, function() {
-						$preview = $(data.html).hide().fadeIn(300);
-						efi.$preview.replaceWith($preview);
-					});
-					
-				} else {
-					
-					efi.$preview.find('i').fadeOut(300, function() {
-						$icon = $(icon).hide().fadeIn(300);
-						$(this).replaceWith($icon);
-					});
-					
-				}
-				
-			}, 'json');		
+			$(s.img).attr('src', '')
+				.removeAttr('width')
+				.removeAttr('height');
+			$(s.icon).attr(da.ext, '');
+			$(s.download).attr('href', '');
+			$(s.oldName).val('');
+			$(s.newName).val('');
+			$(s.caption).val('').trigger('keyup');	// Trigger keyup to reset textarea resizing.
 			
 		},
 		
 		// Initialize the modal window by adding the info for old and new names and also define the required properties.
-		init: function(e) {
-		
-			var 	efi = 		Automad.editFileInfo,
-				file = 		$(this).data('automadFile'),
-				caption =	$(this).data('automadCaption');
+		init: function() {
+			
+			var	efi = Automad.editFileInfo,
+				u = Automad.util,
+				da = efi.dataAttr,
+				s = efi.selectors,
+				$panel = $(this).closest('[' + da.fileInfo + ']'),
+				info = $panel.data(u.dataCamelCase(da.fileInfo)),
+				$modal = $(s.modal);
 				
-			// Define modal and parentForm after a user action (click) to make sure DOM is ready when looking for the modal and form elements.
-			efi.$modal = $(efi.selectors.modal);
-			efi.$parentForm = efi.$modal.closest('form');
-			efi.$infoContainer = $(efi.selectors.infoContainer);	
+			// Only set extension if no image exists. The icon is only used as fallback.
+			// It willl be hidden by CSS when the extension attribute will stay empty.
+			if (info.img) {
+				$(s.img).attr('src', info.img.src)
+					.attr('width', info.img.width)
+					.attr('height', info.img.height);
+			} else {
+				$(s.icon).attr(da.ext, info.extension);
+			}
+		
+			$(s.oldName).val(info.filename);
+			$(s.newName).val(info.filename);
+			$(s.caption).val(info.caption).trigger('keyup');	
+			$(s.download).attr('href', info.download);
 			
-			var	url =		efi.$modal.data('automadUrl'),
-				loader =	'<div class="uk-block uk-text-muted uk-text-center uk-panel uk-panel-box uk-panel-box-secondary">' +
-						'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-medium"></i>' +
-						'</div>';
-			
-			// Loading icon.	
-			efi.$preview = $(loader);
-			
-			// Insert info items into the container.
-			efi.$nameOld.appendTo(efi.$infoContainer).val(file);
-			efi.$nameNew.appendTo(efi.$infoContainer).focus().val(file);
-			efi.$preview.appendTo(efi.$infoContainer);
-			efi.$caption.appendTo(efi.$infoContainer).val(caption).trigger('focusout');
-			
-			setTimeout(function(){
-				efi.getPreview(file, url);
-			}, 400);
-			
+			// Events.
 			// Remove previously attached events.
-			efi.$modal.off('hide.uk.modal.automad.editFileInfo');
+			$modal.off('hide.uk.modal.automad.editFileInfo');
 			
 			// Define event to destroy info on hide (Close button or esc key - without submission).
-			efi.$modal.on('hide.uk.modal.automad.editFileInfo', efi.destroy);
-					
-		},
-		
-		// Since the modal window is nested within the actual file list form, it is very important to 
-		// remove any input fields of the edit dialog before submitting the files form.
-		destroy: function() {
-			
-			Automad.editFileInfo.$infoContainer.empty();
+			$modal.on('hide.uk.modal.automad.editFileInfo', efi.destroy);
 			
 		},
 		
 		// The actual AJAX call to edit the current file.
 		submit: function(e) {
 			
-			var	efi = 		Automad.editFileInfo,
-				button = 	$(e.target),
-				param =		{
-							'url': efi.$modal.data('automadUrl'), // If URL is empty, the "/shared" files will be managed.
-							'old-name': efi.$nameOld.val(),
-							'new-name': efi.$nameNew.val(),
-							'caption': efi.$caption.val()
-						};
+			var	efi = Automad.editFileInfo,
+				s = efi.selectors,
+				$button = $(e.target),
+				param =	{
+						'url': $(s.modal).data(Automad.util.dataCamelCase(efi.dataAttr.url)), // If URL is empty, the "/shared" files will be managed.
+						'old-name': $(s.oldName).val(),
+						'new-name': $(s.newName).val(),
+						'caption': $(s.caption).val()
+					};
 			
 			// Temporary disable button to avoid submitting the form twice.
-			button.prop('disabled', true);
+			$button.prop('disabled', true);
 			
 			// Post form data to the handler.
 			$.post('?ajax=edit_file_info', param, function(data) {
 				
 				// Re-enable button again after AJAX call.
-				button.prop('disabled', false);
+				$button.prop('disabled', false);
 				
 				if (data.error) {
 					Automad.notify.error(data.error);
@@ -182,29 +142,30 @@
 				// Wait for the modal to be hidden before refreshing the filelist, 
 				// otherwise the modal class wouldn't be removed from the <html> element
 				// and the UI will stay blocked.
-				efi.$modal.on('hide.uk.modal.automad.editFileInfo', function() {
+				$(s.modal).on('hide.uk.modal.automad.editFileInfo', function() {
 				
 					// Remove info before refreshing the file list.
 					efi.destroy();
 					// Refresh file list (empty & submit).
-					efi.$parentForm.empty().submit();
+					$(s.modal).closest('form').empty().submit();
 					
 				});
 				
 				// Close modal.
-				UIkit.modal(efi.selectors.modal).hide();
-				
+				UIkit.modal(s.modal).hide();
 				
 			}, 'json');	
 			
 		}
-				
+		
 	};
-	
+		
+				
 	// Modal setup.
 	$(document).on('click', 'a[href="' + Automad.editFileInfo.selectors.modal + '"]', Automad.editFileInfo.init); 
-	
-	// AJAX call.
-	$(document).on('click', Automad.editFileInfo.selectors.button, Automad.editFileInfo.submit);
+		
+	// Submit AJAX call.
+	$(document).on('click', Automad.editFileInfo.selectors.button, Automad.editFileInfo.submit);	
+		
 	
 }(window.Automad = window.Automad || {}, jQuery);
