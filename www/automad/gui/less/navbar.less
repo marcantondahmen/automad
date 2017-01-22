@@ -1,73 +1,207 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
+ *			  ....
+ *			.:   '':.
+ *			::::     ':..
+ *			::.	 ''..
  *	     .:'.. ..':.:::'    . :.   '':.
  *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
+ *	    ::::.	..':.. .''':::::  .
  *	    :::::::..    '..::::  :. ::::  :
  *	    ::'':::::::.    ':::.'':.::::  :
  *	    :..   ''::::::....':     ''::  :
  *	    :::::.    ':::::   :     .. '' .
  *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
+ *	 :..:::'':::::  :::::...:''	:..:
+ *	 ::::::. '::::  ::::::::  ..::	.
  *	 ::::::::.::::  ::::::::  :'':.::   .''
  *	 ::: '::::::::.' '':::::  :.' '':  :
  *	 :::   :::::::::..' ::::  ::...'   .
  *	 :::  .::::::::::   ::::  ::::  .:'
  *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
+ *		    '::::   ::::  :''  .:
+ *		     ::::   ::::    ..''
+ *		     :::: ..:::: .:''
+ *		       ''''  '''''
  *	
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-.automad-navbar {
+@navbar-color:			#FFFFFF;
+@navbar-background:		@am-grey;
+
+@navbar-nav-color:		@navbar-color;
+@navbar-nav-hover-color:	#F0F0F0;
+@navbar-nav-active-color:	#E0E0E0;
+
+@navbar-nav-height:		55px;
+@navbar-nav-padding-horizontal: 12px;
+
+
+.am-navbar {
 	
-	background-color: @base-body-background;
-	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0 @utility-container-padding-horizontal;
+	z-index: 990;
+	width: 100%;
+	height: @navbar-nav-height;
+	background-color: @navbar-background;
 	
-	& > div,
-	& > ul {
-		margin-top: @grid-gutter-small-vertical;
-		margin-bottom: @grid-gutter-small-vertical;	
+	.am-scrolled & {
+		.shadow;
 	}
 	
-	&-context {
-		height: 30px;
-		background-color: @button-background;
-		padding: @subnav-margin-vertical @subnav-margin-horizontal;
-	}
-	
-	&-breadcrumbs {
+	&-nav {
 		
-		position: relative;
+		display: table;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+		margin-left: -@navbar-nav-padding-horizontal;
 		
 		& > li {
-		
-			max-width: 33%;
-		
-			@media (min-width: @breakpoint-medium) {
-				max-width: 19%;
-			}
+			display: table-cell;
+			vertical-align: middle;
+			width: auto;
+			padding: 0;
+			padding-left: @navbar-nav-padding-horizontal;
+		}
 			
-			& > a {
-				max-width: 100%;
+	}
+	
+	&-icon,
+	& .uk-button {
+		white-space: nowrap;
+	}
+	
+	&-icon {
+		
+		display: block;
+		height: 30px;
+		width: 30px;
+		margin-right: -7px;
+		line-height: 30px;
+		text-align: center;
+		border-radius: 100%;
+		font-size: 16px;
+		color: @navbar-nav-color;		
+		background-color: @am-grey;
+		
+		&:hover,
+		&:focus {
+			color: @navbar-nav-hover-color;
+			background-color: @am-nav-bg-hover;
+		}
+		
+		&:active {
+			color: @navbar-nav-active-color;
+			background-color: @am-nav-bg-hover;
+		}
+		
+		a[data-am-toggle-sidebar]&  {
+			
+			&:focus {
+				color: @navbar-color;
+				background-color: @am-grey;
 			}
 			
 		}
 		
 	}
 	
+	& &-logo {
+		
+		@media (max-width: @breakpoint-small-max) {
+			width: 100%;
+		}
+		
+		& a {
+			
+			color: @navbar-nav-color;
+			
+			&:hover,
+			&:focus {
+				color: @navbar-nav-hover-color;
+			}
+			
+			&:active {
+				color: @navbar-nav-active-color;
+			}
+			
+		}
+		
+		& .uk-icon-automad {
+			font-size: 20px;
+			
+			position: relative;
+			top: 2px;
+			margin: 0 -1px;
+		}
+		
+	}
+	
+	& &-search {
+		
+		width: 100%;
+		
+		@media (max-width: @breakpoint-small-max) {
+			display: none;
+		}
+		
+		& form {
+			padding: 0 @utility-margin;
+		}
+		
+		& .uk-form-icon i {
+			color: @navbar-color;
+		}
+		
+		& .uk-form-controls {
+			
+			border: none;
+			color: @navbar-color;
+			background-color: @panel-box-background;
+			
+			&:not(:focus) {
+				cursor: pointer;
+			}
+			
+			&:hover,
+			&:focus {
+				color: @navbar-color;
+				background-color: @button-active-background;
+	
+			}
+			
+		}
+		
+		&:not(:focus) :-ms-input-placeholder { 
+			color: @navbar-color ; 
+		}
+		
+		&:not(:focus) ::-moz-placeholder { 
+			color: @navbar-color; 
+		}
+		
+		&:not(:focus) ::-webkit-input-placeholder { 
+			color: @navbar-color; 
+		}
+		
+	}
+
+	&-push {
+		box-sizing: border-box;
+		padding-top: @navbar-nav-height;
+	}
+		
 }
