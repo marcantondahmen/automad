@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -43,7 +43,10 @@
 	Automad.textarea = {
 		
 		// Do not select textareas of HTML editors!
-		selector: 'textarea:not([data-uk-htmleditor])',
+		// Since CodeMirror also creates textareas, it is not enough to just filter by ':not([data-uk-htmleditor])'.
+		// Those textareas created by CodeMirror don't have the '.uk-form-controls' class, so that class must be part of the
+		// selector as well.
+		selector: 'textarea.uk-form-controls:not([data-uk-htmleditor])',
 		
 		handleTabs: function(e) {
 		
