@@ -26,28 +26,69 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@form-padding:			4px @subnav-margin-horizontal;
-@form-large-padding: 		8px @subnav-margin-horizontal;
-@form-border-width:		0;
-@form-background:       	@button-background;
+@form-height:			32px;
+@form-large-height: 		42px;
+@form-padding:			4px (@am-nav-padding - @am-border-width);
+@form-large-padding: 		5px (@am-nav-padding - @am-border-width);
+@form-border:			transparent;
+@form-border-width:		@am-border-width;
+@form-color:			@am-text;
+@form-background:       	#FFFFFF;
 
-@form-focus-border:		#99baca;
-@form-focus-background:		darken(@button-background, 5%);
-@form-focus-color:		#444;
+@form-focus-border:		@am-blue;
+@form-focus-background:		#FFFFFF;
+@form-focus-color:		@am-text;
 
-@form-disabled-border:		#ddd;
-@form-disabled-background:	#f5f5f5;
-@form-disabled-color:		#999;
+@form-stacked-font-weight:	500;
+@form-stacked-margin-bottom:	@utility-margin-small;
 
-@form-placeholder-color:	#999;
+@form-placeholder-color:	#CCCCCC;
 
+@form-icon-color:		@form-color;
+
+.hook-form() {
+	border-radius: @am-radius;
+	box-sizing: border-box;
+	min-height: @form-height;	
+}
+
+.hook-form-focus {
+	
+	.uk-modal-dialog-lightbox & {
+		border-color: transparent;
+	}
+	
+}
+
+.hook-form-stacked-label() {
+	font-size: @text-small-font-size;
+	font-weight: inherit;
+	color: @am-muted;
+	margin-bottom: 0;
+	padding-bottom: @form-stacked-margin-bottom;
+}
+
+.uk-form select {
+	
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	text-indent: 0.01px;
+	
+	&:-moz-focusring {
+	    color: transparent;
+	    text-shadow: 0 0 0 @form-focus-color;
+	    .transition(color 0s;)
+	}
+	
+}
 
 // All textareas but not the HTML editors.
 .uk-form textarea:not([data-uk-htmleditor]) {
@@ -55,14 +96,23 @@
 	overflow: hidden;
 	resize: none;
 	
-	// Disable height transitions.
-	-webkit-transition: height 0s;  
-    	-moz-transition: height 0s;  
-    	-o-transition: height 0s;  
-    	transition: height 0s; 
+	// Disable height transitions. 
+	.transition(height 0s, color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;);
 	
 	&:not(:focus) {
 		max-height: 5em; 
+	}
+	
+}
+
+.uk-form-icon {
+	
+	& > [class*="uk-icon-"] {
+		left: @am-nav-padding - 7;
+	}
+	
+	&:not(.uk-form-icon-flip) > input {
+		padding-left: (@form-icon-width + @am-nav-padding - 7px) !important;	
 	}
 	
 }
