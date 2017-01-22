@@ -26,92 +26,151 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@automad-files-icon-size-large:	95px;
-@automad-files-icon-size-small:	50px;
+@am-file-info-width: 		400px;
+@am-file-info-breakpoint:	1000px;
+@am-file-info-max-width-small:	750px;
 
 
-.automad-files {
+.am-files {
 	
-	&-icon {
+	// File edit modal.
+	&-modal {
 		
-		position: absolute;
-		top: @panel-box-padding;
-		left: @panel-box-padding;
-		width: @automad-files-icon-size-small;
-		height: @automad-files-icon-size-small;
-		min-width: @automad-files-icon-size-small;
-		
-		& > div {
-			display: block;
-			background-color: @panel-box-secondary-background;
-			color: @panel-box-secondary-color;
-			height: 100%;
-			line-height: 1;
-		}
-		
-		& .automad-files-extension {
-			font-size: 10px;
-		}
-		
-		@media (min-width: @breakpoint-small) {
+		// Wrapper for image/icon and info panel.
+		&-container {
 			
-			width: @automad-files-icon-size-large;
-			height: @automad-files-icon-size-large;
-			
-			& i {
-				font-size: 32px;
-				line-height: 42px;
+			display: inline-block;
+			box-sizing: border-box;
+			text-align: left;
+			padding: @modal-dialog-margin-vertical @utility-margin-large;
+	
+			@media (max-width: (@am-file-info-breakpoint - 1)) {
+				max-width: @am-file-info-max-width-small;
 			}
 			
-			& .automad-files-extension {
-				font-size: 14px;
+		}
+	
+		// Image or icon.
+		&-preview {
+			
+			vertical-align: top;
+			margin-bottom: @utility-margin-large;
+			
+			@media (min-width: @am-file-info-breakpoint) {
+				float: left;
+				margin-right: @am-file-info-width + @utility-margin-large + 5;
+				margin-bottom: 0;
+			}
+			
+			// Image.
+			& > img {
+				
+				border-radius: @am-radius;
+				
+				// Hide img tag with empty src attribute.
+				&[src=""] {
+					display: none;
+				}
+				
+			}
+			
+			// Fallback icon for non-image files.
+			& > div {
+				
+				position: relative;
+				width: @am-file-info-max-width-small - (2 * @utility-margin-large);
+				max-width: 100%;
+				height: 0;
+				padding-top: 60%;
+				background-color: @panel-box-background;
+				border-radius: @am-radius;
+				
+				@media (min-width: @am-file-info-breakpoint) {
+					width: @am-file-info-width * 1.5;
+					padding-top: 75%;
+				}
+				
+				// Hide icon without extension attribute.
+				&[data-am-extension=""] {
+					display: none;
+				}
+				
+				// File icon.
+				&:before {
+					
+					&:extend([class*='uk-icon-']);
+					content: '\f15b';
+					display: block;
+					position: absolute;
+					top: 50%;
+					width: 100%;
+					text-align: center;
+					margin-top: -40px;
+					font-size: 80px;
+					color: darken(@panel-box-background, 5%);
+					
+					@media (min-width: @breakpoint-medium) {
+						margin-top: -90px;
+						font-size: 160px;
+					}
+					
+				}
+				
+				// Extension text on top of file icon.
+				&:after {
+					
+					content: attr(data-am-extension);
+					display: block;
+					position: absolute;
+					z-index: 10;
+					top: 50%;
+					width: 100%;
+					text-align: center;
+					margin-top: 2px;
+					font-size: 25px;
+					color: @panel-box-background;
+					
+					@media (min-width: @breakpoint-medium) {
+						margin-top: 0;
+						font-size: 50px;
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		&-info {
+			
+			vertical-align: top;
+			width: 100%;
+			
+			@media (min-width: @am-file-info-breakpoint) {
+				float: right;
+				width: @am-file-info-width;
+				margin-left: -(@am-file-info-width + 5);
 			}
 			
 		}
 		
 	}
 	
-	&-info {
-		
-		width: 100%;
-		min-height: @automad-files-icon-size-large;
-		box-sizing: border-box;
-		padding-left: (@automad-files-icon-size-small + @utility-margin);
-		padding-right: 25px;
-		
-		&-edit {
-			position: absolute;
-			bottom: @panel-box-padding;
-			left: @panel-box-padding;
-		}
-		
-		@media (min-width: @breakpoint-small) {
-			
-			min-height: @automad-files-icon-size-large;
-			padding-left: (@automad-files-icon-size-large + @utility-margin);
-			
-			&-edit {
-				position: absolute;
-				bottom: (@panel-box-padding + 5);
-				left: (@panel-box-padding + 5);
-			}
-			
-		}
-			
-	}
-	
+	// Upload dropzone.
 	&-dropzone {
-		
-		height: 200px;
-		background-color: #eee;
-		
+		border: @am-border-width dashed @am-border-color;
+		border-radius: 20px;
+		text-align: center;
+		padding: 150px 0;
+		color: darken(@am-grey, 4%);
+		font-size: 32px;
 	}
 	
 }
