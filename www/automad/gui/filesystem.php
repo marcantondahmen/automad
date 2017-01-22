@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The FileSystem class provides all methods related to file system operations. 
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
  *	@license MIT license - http://automad.org/license
  */
 
@@ -206,8 +206,8 @@ class FileSystem {
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
-		$prefix = ltrim(Core\String::sanitize($prefix, true) . '.', '.');
-		$title = Core\String::sanitize($title, true);
+		$prefix = ltrim(Core\String::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
+		$title = Core\String::sanitize($title, true, AM_DIRNAME_MAX_LEN);
 		
 		// If the title is an empty string after sanitizing, set it to 'untitled'.
 		if (!$title) {
