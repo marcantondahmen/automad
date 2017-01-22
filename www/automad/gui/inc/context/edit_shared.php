@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -48,79 +48,48 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $this->guiTitle = $this->guiTitle . ' / ' . Text::get('shared_title');
 $this->element('header');
-$this->element('title');
 
 
 ?>
-
-		<div class="automad-navbar" data-uk-sticky="{showup:true,animation:'uk-animation-slide-top'}">
-			
-			<?php $this->element('searchbar'); ?>
-			
-			<div class="automad-navbar-context uk-width-1-1">
-				<ul class="uk-subnav">
-					<li>
-						<a href="?context=edit_shared" class="uk-text-truncate">
-							<i class="uk-icon-globe uk-icon-justify"></i>&nbsp;&nbsp;<?php echo Text::get('shared_title'); ?>
-						</a>
-					</li>
-				</ul>
-			</div>	
-			<!-- Menu -->
-			<div class="uk-grid uk-grid-small">
-				<!-- Content Switcher -->
-				<div class="uk-width-2-3">
-					<div class="uk-grid uk-grid-small" data-uk-switcher="{connect:'#automad-shared-content', toggle:'> div > button', animation: 'uk-animation-fade'}">
-						<!-- Data -->
-						<div class="uk-width-1-2">
-							<button class="uk-button uk-width-1-1 uk-text-truncate" type="button">
-								<i class="uk-icon-file-text-o"></i>
-								<span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_data'); ?></span>
-							</button>
-						</div>
-						<!-- Files -->
-						<div class="uk-width-1-2">
-							<button class="uk-button uk-width-1-1 uk-text-truncate" type="button">
-								<i class="uk-icon-folder-open-o"></i>
-								<span class="uk-hidden-small">
-									&nbsp;&nbsp;<?php echo Text::get('btn_files'); ?>&nbsp;&nbsp;
-									<span class="uk-badge uk-badge-notification" data-automad-count=".automad-files-info"></span>
-								</span>
-							</button>
-						</div>
-					</div>	
-				</div>
-				<!-- Save -->
-				<div class="uk-width-1-3">
-					<button class="uk-button uk-button-success uk-width-1-1 uk-text-truncate" type="button" data-automad-submit="shared_data">
-						<i class="uk-icon-save"></i><span class="uk-hidden-small">&nbsp;&nbsp;<?php echo Text::get('btn_save'); ?></span>
-					</button>
-				</div>
-			</div>
-			
-		</div>
-		
+	
+		<ul class="uk-subnav uk-subnav-pill uk-margin-large-top uk-margin-bottom">
+			<li class="uk-disabled"><i class="uk-icon-globe"></i></li>
+			<li><a href=""><?php Text::e('shared_title'); ?></a></li>
+		</ul>
+	
+		<!-- Menu -->
+		<?php 
+			echo $this->Html->stickySwitcher('#am-shared-content', array(
+				array(
+					'icon' => '<i class="uk-icon-pencil"></i>',
+					'text' => Text::get('btn_data')
+				),
+				array(
+					'icon' => '<i class="uk-icon-files-o"></i>&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>',
+					'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
+				)
+			));
+		?>
+	
 		<!-- Content -->
-		<div class="uk-block uk-padding-bottom-remove">
-			<ul id="automad-shared-content" class="uk-switcher">
-				<!-- Data -->
-			    	<li>
-					<form class="uk-form uk-form-stacked" data-automad-init data-automad-handler="shared_data">
-						<div class="uk-text-center">
-							<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-top"></i>
-						</div>
-					</form>
-			    	</li>
-				<!-- Files -->
-				<li>
-					<form class="uk-form uk-form-stacked" data-automad-init data-automad-handler="files" data-automad-confirm="<?php echo Text::get('confirm_delete_files'); ?>">
-						<div class="uk-text-center">
-							<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-text-muted uk-margin-top"></i>
-						</div>
-					</form>
-				</li>
-			</ul>
-		</div>
+		<ul id="am-shared-content" class="uk-switcher uk-margin-large-top">
+			<!-- Data -->
+			<li>
+				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="shared_data">
+					<div class="uk-text-center">
+						<i class="am-text-white uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
+					</div>
+				</form>
+			</li>
+			<!-- Files -->
+			<li>
+				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="files" data-am-confirm="<?php Text::e('confirm_delete_files'); ?>">
+					<div class="uk-text-center">
+						<i class="am-text-white uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
+					</div>
+				</form>
+			</li>
+		</ul>
 		
 <?php
 
