@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -41,7 +41,7 @@
 +function($) {
 	
 	$(document).ready(function() {
-		$('#automad-no-js').remove();
+		$('#am-no-js').remove();
 	});
 	
 }(jQuery);
