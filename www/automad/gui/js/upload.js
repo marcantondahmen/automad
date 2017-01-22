@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -42,9 +42,15 @@
 	
 	Automad.upload = {
 		
+		dataAttr: {
+			url: 'data-am-url',
+			dropzoneText: 'data-am-dropzone-text',
+			browseText: 'data-am-browse-text'
+		},
+		
 		selectors: {
-			modal: '#automad-upload-modal',
-			container: '#automad-upload-container'
+			modal: '#am-upload-modal',
+			container: '#am-upload-container'
 		},
 	
 		// Get defined in init function.
@@ -54,7 +60,7 @@
 		page: 		'',
 		
 		// Dropzone.
-		$dropzone: 	$('<div></div>', { 'class': 'automad-files-dropzone' }),
+		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone' }),
 		$input:		$('<input type="file" multiple />'),
 		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-primary uk-width-1-1 uk-margin-top' })
 				.click(function() {
@@ -74,12 +80,12 @@
 			u.$container = $(u.selectors.container).empty();
 			
 			// If an URL exists as data-attribute for the modal window, it will be used as additional form data.
-			u.page = u.$modal.data('automadUrl');
+			u.page = u.$modal.data(Automad.util.dataCamelCase(u.dataAttr.url));
 			
 			// Dropzone.
-			u.$dropzone.text(u.$modal.data('automadDropzoneText')).appendTo(u.$container);
+			u.$dropzone.text(u.$modal.data(Automad.util.dataCamelCase(u.dataAttr.dropzoneText))).appendTo(u.$container);
 			u.$input.appendTo(u.$dropzone).hide();
-			u.$browse.text(u.$modal.data('automadBrowseText')).insertAfter(u.$dropzone);
+			u.$browse.text(u.$modal.data(Automad.util.dataCamelCase(u.dataAttr.browseText))).insertAfter(u.$dropzone);
 			
 			// The modal's close buttons
 			u.$close = u.$modal.find('.uk-modal-close'); 	
@@ -115,17 +121,17 @@
 				
 				add: function(e, data) {
 			
-					var info = '<hr>';
+					var info = '';
 				
 					// As fallback when using IframeTransport and the files are uploaded in one go, the text will include all filenames and sizes.
 					// In the normal case that always will be only one elements, since the all files from a selection are sent in a single request each.
 					$.each(data.files, function(i) {
-						info += '<div class="uk-margin-small-bottom uk-text-truncate"><span class="uk-badge uk-badge-notification">' + 
+						info += '<div class="am-text-white uk-margin-small-bottom uk-text-truncate"><span class="uk-badge">' + 
 							Automad.util.formatBytes(data.files[i].size) + '</span>&nbsp;&nbsp;' + data.files[i].name + 
 							'</div>';
 					});
 			
-					data.context = $('<div></div>', { 'class': 'uk-margin-large-top uk-margin-large-bottom'}).appendTo(u.$container);
+					data.context = $('<div></div>', { 'class': 'uk-margin-large-top' }).appendTo(u.$container);
 			
 					$(info).appendTo(data.context);	
 					$('<div class="uk-progress uk-progress-striped uk-active"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
@@ -138,7 +144,7 @@
 					// When all uploads are done, the button gets enabled again (always callback).
 				    	u.$close.prop('disabled', true);
 					u.$close.find('i').removeClass('uk-icon-close').addClass('uk-icon-circle-o-notch uk-icon-spin');
-				
+					
 				},
 				
 				progress: function(e, data){
@@ -162,10 +168,9 @@
 					// Deactivate progress bar.
 					data.context.find('.uk-progress').removeClass('uk-progress-striped uk-active');
 						
-					// In case of an server-side error, add alert message.		
+					// In case of an server-side error, show error message in progress bar.		
 					if (data.result.error) {	
-						data.context.find('.uk-progress').addClass('uk-progress-warning');
-						data.context.find('.uk-progress').after('<div class="uk-alert uk-alert-warning">' + data.result.error + '</div>');
+						data.context.find('.uk-progress').addClass('uk-progress-danger').find('.uk-progress-bar').text(data.result.error);
 					} else {
 						data.context.find('.uk-progress').addClass('uk-progress-success');
 					}
