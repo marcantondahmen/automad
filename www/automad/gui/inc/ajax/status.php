@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -56,9 +56,13 @@ if (isset($_POST['item'])) {
 	if ($item == 'cache') {
 		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = Text::get('sys_cache') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-success">' . Text::get('sys_status_enabled') . '</span>';
+			$output['status'] = '<a href="?context=system_settings#0" class="uk-button uk-button-large uk-button-success uk-width-1-1"><i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+					    Text::get('sys_status_cache_enabled') . 
+					    '</a>';
 		} else {
-			$output['status'] = Text::get('sys_cache') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-danger">' . Text::get('sys_status_disabled') . '</span>';
+			$output['status'] = '<a href="?context=system_settings#0" class="uk-button uk-button-large uk-width-1-1"><i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
+					    Text::get('sys_status_cache_disabled') . 
+					    '</a>';
 		}
 		
 	}
@@ -66,16 +70,20 @@ if (isset($_POST['item'])) {
 	if ($item == 'debug') {
 		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = Text::get('sys_debug') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-success">' . Text::get('sys_status_enabled') . '</span>';
+			$output['status'] = '<a href="?context=system_settings#3" class="uk-button uk-button-large uk-button-success uk-width-1-1"><i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+					    Text::get('sys_status_debug_enabled') . 
+					    '</a>';
 		} else {
-			$output['status'] = Text::get('sys_debug') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification uk-badge-danger">' . Text::get('sys_status_disabled') . '</span>';
+			$output['status'] = '<a href="?context=system_settings#3" class="uk-button uk-button-large uk-width-1-1"><i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
+					    Text::get('sys_status_debug_disabled') . 
+					    '</a>';
 		}
 		
 	}
 	
 	if ($item == 'users') {
 				
-		$output['status'] = '<i class="uk-icon-user"></i>&nbsp;&nbsp;' . Text::get('sys_user_registered') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-notification">' . count(Accounts::get()) . '</span>';
+		$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . count(Accounts::get()) . ' ' . Text::get('sys_user_registered');
 
 	}
 	
