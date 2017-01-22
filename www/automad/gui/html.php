@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Html class provides all methods to generate HTML markup for the GUI. 
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
  *	@license MIT license - http://automad.org/license
  */
 
@@ -85,7 +85,9 @@ class Html {
 		$Selection->filterBreadcrumbs(Core\Parse::queryKey('url'));
 		$pages = $Selection->getSelection(false);
 		
-		$html = '<ul class="automad-navbar-breadcrumbs uk-subnav">';
+		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill">';
+		$html .= '<li class="uk-disabled uk-hidden-small"><i class="uk-icon-folder-open"></i></li>';
+		
 		$i = count($pages);
 		
 		$small = 2;
@@ -93,15 +95,15 @@ class Html {
 		$large = 4;
 		
 		if ($i > $small) {
-			$html .= '<li class="uk-visible-small uk-disabled"><span>...</span></li>';
+			$html .= '<li class="uk-visible-small uk-disabled"><i class="uk-icon-angle-double-right"></i></li>';
 		}
 		
 		if ($i > $medium) {
-			$html .= '<li class="uk-visible-medium uk-disabled"><span>...</span></li>';
+			$html .= '<li class="uk-visible-medium uk-disabled"><i class="uk-icon-angle-double-right"></i></li>';
 		}
 		
 		if ($i > $large) {
-			$html .= '<li class="uk-visible-large uk-disabled"><span>...</span></li>';
+			$html .= '<li class="uk-visible-large uk-disabled"><i class="uk-icon-angle-double-right"></i></li>';
 		}
 		
 		foreach ($pages as $url => $Page) {
@@ -126,7 +128,7 @@ class Html {
 					$class = ' class="uk-active"';
 				}
 			
-				$html .= '<li' . $class . '><a class="uk-text-truncate" href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
+				$html .= '<li' . $class . '><a href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
 				
 			}
 			
@@ -156,7 +158,7 @@ class Html {
 		$value = htmlspecialchars($value);
 		
 		// The field ID.
-		$id = 'automad-input-data-' . $key;
+		$id = 'am-input-data-' . $key;
 	
 		$html = '<div class="uk-form-row">' .
 			'<label class="uk-form-label" for="' . $id . '">' . 
@@ -164,7 +166,7 @@ class Html {
 			 '</label>';
 
 		if ($removeButton) {
-			$html .= '<button type="button" class="automad-remove-parent uk-position-top-right uk-close"></button>';
+			$html .= '<button type="button" class="am-remove-parent uk-position-top-right uk-close"></button>';
 		}
 
 		// Build attribute string.
@@ -197,7 +199,7 @@ class Html {
 				$attr .= ' checked';
 			}
 			
-			$html .=	'<label class="uk-button" data-automad-toggle>' . 
+			$html .=	'<label class="uk-button uk-width-1-1" data-am-toggle>&nbsp;' . 
 					ucwords(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key))) . 
 					'<input ' . $attr . ' type="checkbox"  />' .
 					'</label>';
@@ -219,24 +221,18 @@ class Html {
 	
 
 	/**
-	 *	Create form fields for page/shared variables.     
-	 *
-	 *      By passing any text for the parameter $wrapper, all inputs get wrapped in a toggle box with a 
-	 *      related button using the parameter's value as text.    
-	 *      Setting $open = true keeps the container open on load.      
+	 *	Create form fields for page/shared variables.         
 	 *      
 	 *      Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
 	 *      Note used prefix must match the ID selectors defined in 'add_variable.js'.
 	 *
 	 *	@param array $keys
 	 *	@param array $data
-	 *	@param string $wrapper (wrapper button text)
-	 *	@param boolean $open (initially open wrapper)
 	 *	@param string $addVariableIdPrefix (automatically prefies all IDs for the HTML elements needed for the modal to add variables)
 	 *	@return The HTML for the textarea
 	 */
 	
-	public function formGroup($keys, $data = array(), $wrapper = false, $open = false, $addVariableIdPrefix = false) {
+	public function formGroup($keys, $data = array(), $addVariableIdPrefix = false) {
 			
 		$html = '';
 		
@@ -265,49 +261,27 @@ class Html {
 			
 			$html =		'<div id="' . $addVarContainerId . '" class="uk-margin-bottom">' . $html . '</div>' .
 					// The modal button.
-					'<a type="button" href="#' . $addVarModalId . '" class="uk-button uk-button-large uk-width-1-1" data-uk-modal>' .
+					'<a type="button" href="#' . $addVarModalId . '" class="uk-button uk-button-primary" data-uk-modal>' .
 					'<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
 					'</a>' . 
 					// The actual modal.
 					'<div id="' . $addVarModalId . '" class="uk-modal">' .
 					'<div class="uk-modal-dialog">' .
 					'<div class="uk-modal-header">' . Text::get('btn_add_var') . '</div>' .	
-					'<input id="' . $addVarInputlId . '" type="text" class="uk-form-controls uk-width-1-1" placeholder="' . Text::get('page_var_name') . '" required data-automad-enter="#' . $addVarSubmitId . '" />' .
+					'<input id="' . $addVarInputlId . '" type="text" class="uk-form-controls uk-width-1-1" ' .
+						'placeholder="' . Text::get('page_var_name') . '" required ' .
+						'data-am-enter="#' . $addVarSubmitId . '" data-am-watch-exclude />' .
 					'<div class="uk-modal-footer uk-text-right">' .
 						'<button type="button" class="uk-modal-close uk-button">' .
 							'<i class="uk-icon-close"></i>&nbsp;&nbsp;' . Text::get('btn_close') .
-						'</button>' .
-						'<button id="' . $addVarSubmitId . '" type="button" class="uk-button uk-button-primary" data-automad-error-exists="' . Text::get('error_var_exists') . '" data-automad-error-name="' . Text::get('error_var_name') . '">
+						'</button>&nbsp;' .
+						'<button id="' . $addVarSubmitId . '" type="button" class="uk-button uk-button-primary" data-am-error-exists="' . Text::get('error_var_exists') . '" data-am-error-name="' . Text::get('error_var_name') . '">
 							<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
 						'</button>' .
 					'</div>' .
 					'</div>' .
 					'</div>';
 								
-		} 
-		
-		// Wrap the HTML into a div and create a toggle button in case $wrapper is defined. 
-		if ($wrapper) {
-			
-			$wrapperClass = 'automad-' . Core\String::sanitize($wrapper, true);
-			
-			if ($open) {
-				$hidden = '';
-				// If the container should be open, set the open icon to be hidden and only show the hide icon.
-				$open =  ' uk-hidden';
-			} else {
-				$hidden = ' uk-hidden';
-			}
-			
-			$html = 	// Toggle button.
-					'<button type="button" class="uk-button uk-margin-bottom uk-text-left uk-width-1-1" data-uk-toggle="{target:\'.' . $wrapperClass . '\', animation:\'uk-animation-fade\'}">' . 
-					'<i class="' . $wrapperClass . $open . ' uk-icon-chevron-down"></i>' .
-					'<i class="' . $wrapperClass . $hidden . ' uk-icon-chevron-up"></i>' .
-					'&nbsp;&nbsp;' . $wrapper . 
-					'</button>' .
-					// The toggle container.
-					'<div class="' . $wrapperClass . $hidden . ' uk-margin-bottom">' . $html . '</div>';
-			
 		} 
 		
 		return $html;
@@ -344,15 +318,15 @@ class Html {
 	
 	public function pageGrid($pages) {
 	
-		$html = '<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3" data-uk-grid="{animation:false}">';
+		$html = '<ul class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" data-uk-grid-match="{target:\'.uk-panel\'}" data-uk-grid-margin>';
 		
 		foreach ($pages as $key => $Page) {
 			
+			$link = '?context=edit_page&url=' . urlencode($key);
+			
 			$html .= 	'<li>' . 
-					'<div class="uk-position-relative uk-margin-bottom">' . 
-					
-					// Panel.
-					'<div class="uk-panel uk-panel-box">';
+					'<div class="uk-panel uk-panel-box">' . 
+					'<a href="' . $link . '" class="uk-panel-teaser uk-display-block">'; 
 			
 			// Build file grid with up to 4 images.
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
@@ -361,11 +335,11 @@ class Html {
 			if (!empty($files)) {
 				
 				$count = count($files);
-				$wFull = 400;
-				$hFull = 300;
+				$wFull = 320;
+				$hFull = 240;
 
 				// File grid.
-				$html .= '<ul class="uk-grid uk-grid-collapse uk-border-rounded uk-overflow-hidden">';
+				$html .= '<ul class="uk-grid uk-grid-collapse">';
 				
 				if ($count == 1) {
 					$html .= $this->gridThumbnail($files[0], $wFull, $hFull, '1-1');
@@ -383,10 +357,10 @@ class Html {
 				}
 				
 				if ($count == 4) {
-					$html .= $this->gridThumbnail($files[0], $wFull, $hFull/2, '1-1');
-					$html .= $this->gridThumbnail($files[1], $wFull/3, $hFull/2, '1-3');
-					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/2, '1-3');
-					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[0], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[2], $wFull/2, $hFull/2, '1-2');
+					$html .= $this->gridThumbnail($files[3], $wFull/2, $hFull/2, '1-2');
 				}
 				
 				if ($count == 5) {
@@ -397,67 +371,82 @@ class Html {
 					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/2, '1-3');
 				}
 				
-				if ($count == 6) {
-					$html .= $this->gridThumbnail($files[0], $wFull, $hFull/2, '1-1');
-					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[2], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[5], $wFull/3, $hFull/3, '1-3');
-				}
-				
-				if ($count == 7) {
-					$html .= $this->gridThumbnail($files[0], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[1], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[5], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[6], $wFull/2, $hFull/2, '1-2');
-				}
-				
-				if ($count >= 8) {
+				if ($count >= 6) {
 					$html .= $this->gridThumbnail($files[0], $wFull/3, $hFull/2, '1-3');
 					$html .= $this->gridThumbnail($files[1], $wFull/3, $hFull/2, '1-3');
 					$html .= $this->gridThumbnail($files[2], $wFull/3, $hFull/2, '1-3');
-					$html .= $this->gridThumbnail($files[3], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[4], $wFull/2, $hFull/2, '1-2');
-					$html .= $this->gridThumbnail($files[5], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[6], $wFull/3, $hFull/3, '1-3');
-					$html .= $this->gridThumbnail($files[7], $wFull/3, $hFull/3, '1-3');
+					$html .= $this->gridThumbnail($files[3], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[4], $wFull/3, $hFull/2, '1-3');
+					$html .= $this->gridThumbnail($files[5], $wFull/3, $hFull/2, '1-3');
 				}
 				
 				$html .= '</ul>';
 				
 			} else {
 				
-				$html .= 	'<div class="uk-panel uk-panel-box uk-panel-box-secondary uk-border-rounded uk-text-center">' .
-						'<i class="uk-block uk-text-muted uk-icon-eye-slash uk-icon-large"></i>' .
-						'</div>';
+				$html .= '<div class="am-panel-icon"><i class="uk-icon-align-left"></i></div>';
+				
 			}
 			
-			$html .= 	// Title & date.
-			 		'<div class="uk-panel-title uk-margin-small-bottom uk-margin-top">' . $Page->get(AM_KEY_TITLE) . '</div>' .
-					'<div class="uk-text-small uk-text-muted">' . Core\String::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
-					'</div>' . 
-					
-					// Overlay icon link.
-					'<a href="?context=edit_page&url=' . urlencode($key) . '" class="uk-overlay uk-overlay-hover uk-position-absolute uk-position-top-left uk-height-1-1 uk-width-1-1">' .
-					'<div class="uk-height-1-1 uk-overlay-panel uk-overlay-background uk-overlay-fade uk-overlay-icon"></div>' .
-					'</a>' .
-					
+			$html .= 	'</a>' .
+					// Title & date. 
+					$Page->get(AM_KEY_TITLE) . 
+					'<div class="uk-margin-small-top uk-text-small">' . Core\String::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
+					'<div class="am-panel-bottom">' .
+					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil"></a>' .
+					'</div>' .
 					'</div>' .
 					'</li>';
 				
 		}
 		
-		$html .= '</ul>';
+		$html .= 	'</ul>';
 		
 		return $html;
 		
 	}
 	
 	
+	/**
+	 *      Create a set of radio button.
+	 *
+	 *      @param string $name
+	 *      @param array $values
+	 *      @param string $checked
+	 *      @return the HTML for the buttons
+	 */
+	
+	public function radios($name, $values, $checked) {
+		
+		// Set checked value, if $checked is not in $values, to prevent submitting an empty value.
+		if (!in_array($checked, $values)) {
+			$checked = reset($values);
+		}
+		
+		$html = '<div class="am-toggle-radios">';
+		
+		foreach ($values as $text => $value) {
+			
+			if ($value === $checked) {
+				$attrChecked = ' checked';
+			} else {
+				$attrChecked = '';
+			}
+			
+			$html .= 	'<label class="uk-button uk-width-1-1" data-am-toggle>&nbsp;' . 
+					$text .
+					'<input type="radio" name="' . $name . '" value="' . $value . '"' . $attrChecked . ' />' .
+					'</label>';
+				
+		}
+		
+		$html .= '</div>';
+		
+		return $html;
+		
+	}
+	
+
 	/**
 	 *	Create recursive site tree for editing a page. 
 	 *	Every page link sends a post request to gui/pages.php containing the page's url.
@@ -494,7 +483,7 @@ class Html {
 				if ($Page->url == '/') {
 					$icon = '<i class="uk-icon-home"></i>&nbsp;&nbsp;';
 				} else {   
-					$icon = '<i class="uk-icon-folder-o"></i>&nbsp;&nbsp;';
+					$icon = '<i class="uk-icon-folder uk-icon-justify"></i>&nbsp;&nbsp;';
 				}
 				
 				if ($key != $current || !$hideCurrent) {
@@ -507,13 +496,14 @@ class Html {
 					}
 					
 					// Set title in tree.
-					$title = $Page->get(AM_KEY_TITLE);
+					$title = htmlspecialchars($Page->get(AM_KEY_TITLE));
+					$prefix = $Content->extractPrefixFromPath($Page->path);
 					
-					if ($prefix = $Content->extractPrefixFromPath($Page->path)) {
+					if (strlen($prefix) > 0) {
 						$title = $prefix . ' - ' . $title;
 					}
 					
-					$html .= '<a class="uk-text-truncate" title="' . $Page->url . '" href="?' . http_build_query(array_merge($parameters, array('url' => $key)), '', '&amp;') . '">' . 
+					$html .= '<a class="uk-text-truncate" title="' . $Page->path . '" href="?' . http_build_query(array_merge($parameters, array('url' => $key)), '', '&amp;') . '">' . 
 						 $icon . $title . 
 						 '</a>' .
 						 $this->siteTree($key, $collection, $parameters, $hideCurrent) .
@@ -529,6 +519,68 @@ class Html {
 			
 		}
 		
+	}
+	
+	
+	/**
+	 *      Create a sticky switcher menu with an optional dropdown menu.
+	 *
+	 *      @param string $target
+	 *      @param array $items Main menu items
+	 *      @param array $dropdown Dropdown menu items
+	 *      @return string The rendered menu HTML
+	 */
+	
+	public function stickySwitcher($target, $items = array(), $dropdown = array()) {
+		
+		$n = count($items);
+		
+		if ($dropdown) {
+			$n++;
+		}
+		
+		$html = '<div data-uk-sticky="{top:65,showup:true,animation:\'uk-animation-slide-top\'}">' .
+			'<div class="uk-button-group uk-width-1-1">';
+
+		// Switcher Menu. 
+		// Note that the number of items is limited to the grid classes of UIkit (6).
+		$switcherWidth = 'uk-width-' . count($items) . '-' . $n . ' uk-grid-width-1-' . count($items);
+		$html .= '<div class="' . $switcherWidth . '" data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\'}">';
+	
+		foreach ($items as $item) {
+			$html .= '<button class="uk-button uk-button-primary">' . 
+				 '<span class="uk-visible-small">' . $item['icon'] . '</span>' .
+				 '<span class="uk-hidden-small">' . $item['text'] . '</span>' .
+				 '</button>';
+		}
+	
+		$html .= '</div>';
+	
+		// Dropdown.
+		if ($dropdown) {
+			$html .= '<div class="uk-position-relative uk-width-1-' . $n . '" data-uk-dropdown="{mode:\'click\',pos:\'bottom-right\'}">' . 
+	        		 '<a href="#" class="uk-button uk-button-primary uk-width-1-1">' .
+				 '<span class="uk-hidden-small">' . Text::get('btn_more') . '&nbsp;&nbsp;</span><i class="uk-icon-chevron-down"></i>' .
+				 '</a>' .
+	        		 '<div class="uk-dropdown">' .
+	            		 '<ul class="uk-nav uk-nav-dropdown">';
+	                
+	            
+		    	foreach ($dropdown as $item) {
+		    		$html .= '<li>' . $item . '</li>';
+		    	}
+		    
+		    
+		    	$html .= '</ul>' . 
+				 '</div>' . 
+				 '</div>';
+		}
+	
+		$html .= '</div>' .
+			 '</div>';
+	
+		return $html;
+			
 	}
 	
 	
