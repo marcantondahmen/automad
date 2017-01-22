@@ -1,0 +1,91 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@accordion-title-margin-bottom:                 0;
+@accordion-title-padding-vertical:              6px;
+@accordion-title-padding-horizontal:            6px;
+@accordion-title-font-size:                     1rem;
+@accordion-title-line-height:                   @base-body-line-height;
+@accordion-title-background:                    @am-grey;
+
+@accordion-content-padding-horizontal:		0;
+@accordion-content-padding-bottom:              0;
+ 
+ 
+.uk-accordion {
+	margin-top: (2 * @utility-margin) + @accordion-title-padding-vertical;
+}
+
+.hook-accordion-title() {
+	
+	position: relative;
+	margin-top: (2 * (@utility-margin - @accordion-title-padding-vertical)) ;
+	margin-left: 18px;
+	border-radius: @am-radius;
+	color: #FFFFFF;
+	.transition(background-color 0.2s);
+	
+	&:hover,
+	&:focus {
+		background-color: @am-nav-bg-hover;
+	}
+	
+	&:before {
+		content: '\f078';
+		position: absolute;
+		top: 8px;
+		left: -18px;
+		&:extend([class*='uk-icon-'] all);
+	}
+	
+	&.uk-active:before {
+		content: '\f077';
+	}
+	
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		top: -(@utility-margin - @accordion-title-padding-vertical);
+		left: -18px;
+		right: 0;
+		border-top: @am-border-width solid @am-border-color;
+	}
+	
+}
+ 
+.hook-accordion-content() {
+	padding: @utility-margin 0;
+}
