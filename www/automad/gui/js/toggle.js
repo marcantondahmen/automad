@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -38,14 +38,14 @@
  *	Handle custom checkboxes/radios (label-input combinations). 
  *	An active class gets added/removed to the label when a checkbox/radio gets checked/unchecked.
  *
- * 	It is also possible to set data-automad-toggle to an ID of another element 
+ * 	It is also possible to set data-am-toggle to an ID of another element 
  * 	to also toggle visibility of that element according to the checkbox status.
  * 
- *	To toggle the active class on a label, it must have a "data-automad-toggle"
+ *	To toggle the active class on a label, it must have a "data-am-toggle"
  *	attribute and the input must be placed inside. 
  *	The full markup must look like this:
  *
- *	<label data-automad-toggle>
+ *	<label data-am-toggle>
  *		<input type="checkbox" name="..." />
  *	</label>
  */
@@ -54,8 +54,12 @@
 
 	Automad.toggle = {
 		
-		labelDataAttr: 'data-automad-toggle',
-		activeClass: 'uk-active',
+		labelDataAttr: 'data-am-toggle',
+		
+		class: {
+			active: 'uk-active',
+			toggleContainer: 'am-toggle-container'
+		},
 
 		// Toggle checkboxes.
 		checkbox: function(e) {
@@ -64,7 +68,7 @@
 	
 		},
 
-		// Initially update all inputs with a data-automad-toggle attribute
+		// Initially update all inputs with a data-am-toggle attribute
 		// to update visibility status of related containers and labels.
 		init: function() {
 			
@@ -87,26 +91,26 @@
 		// Update the label of a nested input and the visibility of an optional element.
 		update: function($input) {
 		
-			var 	active = Automad.toggle.activeClass,
+			var 	t = Automad.toggle,
 				$label = $input.parent(),
-				toggleContainer = $label.data(Automad.util.dataCamelCase(Automad.toggle.labelDataAttr));
+				toggleContainer = $label.data(Automad.util.dataCamelCase(t.labelDataAttr));
 		
 			// Update label.
 			if ($input.is(':checked')) {
-				$label.addClass(active);
+				$label.addClass(t.class.active);
 			} else {
-				$label.removeClass(active);
+				$label.removeClass(t.class.active);
 			}
 			
 			// Update optional container.
 			if (toggleContainer) {
 				
-				var 	$toggleContainer = $(toggleContainer);
-				
+				var 	$toggleContainer = $(toggleContainer).addClass(t.class.toggleContainer);
+								
 				if ($input.is(':checked')) {
-					$toggleContainer.show();
+					$toggleContainer.addClass(t.class.active);
 				} else {
-					$toggleContainer.hide();
+					$toggleContainer.removeClass(t.class.active);
 				}
 				
 			}
