@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -49,23 +49,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Core\Parse::queryKey('query') . '"';
 $this->element('header');
-$this->element('title');
+
+
 $results = $this->Content->getSearchResults();
 
 
 ?>
-
-		<div class="automad-navbar" data-uk-sticky="{showup:true,animation:'uk-animation-slide-top'}">
-			<?php $this->element('searchbar'); ?>
-		</div>
-		<div class="uk-block">
-			<div class="uk-panel uk-panel-box uk-panel-box-primary">
-				<?php echo Text::get('search_title'); ?>&nbsp;&nbsp;
-				<i class="uk-icon-angle-right"></i>&nbsp;&nbsp;
-				"<?php echo Core\Parse::queryKey('query'); ?>" (<?php echo count($results); ?>)
-			</div>
-		</div>
-
+	
+		<ul class="uk-subnav uk-subnav-pill uk-margin-large-top">
+			<li class="uk-disabled"><i class="uk-icon-search"></i></li>
+			<li><a href=""><?php Text::e('search_title'); ?></a></li>
+		</ul>
+		<h3 class="uk-margin-top">
+			<i class="uk-icon-angle-double-left"></i>&nbsp;
+			<i><?php echo Core\Parse::queryKey('query'); ?></i>&nbsp;
+			<i class="uk-icon-angle-double-right"></i>
+			<span class="uk-badge uk-float-right_"><?php echo count($results); ?></span>
+		</h3>
+		
 <?php
 
 if ($results) {
@@ -74,11 +75,11 @@ if ($results) {
 	
 } else {
 	
-	?>
+?>
 		
-		<div class="uk-alert uk-alert-danger uk-margin-remove"><?php echo Text::get('search_no_results'); ?></div>
+		<div class="uk-alert uk-alert-danger uk-margin-remove"><?php Text::e('search_no_results'); ?></div>
 			
-	<?php
+<?php
 	
 }
 
