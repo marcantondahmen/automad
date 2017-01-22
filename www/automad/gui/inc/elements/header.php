@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -64,7 +64,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 <body class="uk-height-1-1">
 	
-	<?php $this->element('sidebar'); ?>
+	<?php 
+	
+	$this->element('navbar'); 
+	$this->element('sidebar'); 
+	
+	?>
 		
-	<div class="automad-sidebar-push uk-container uk-container-center">
+	<div class="<?php if (User::get()) { ?>am-sidebar-push <?php } ?>am-navbar-push uk-container uk-container-center">
 	
