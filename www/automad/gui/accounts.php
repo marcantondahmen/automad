@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Accounts class provides all methods for creating and loading user accounts. 
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
  *	@license MIT license - http://automad.org/license
  */
 
@@ -80,7 +80,7 @@ class Accounts {
 					// Write array with all accounts back to file.
 					if (Accounts::write($accounts)) {
 				
-						$output['success'] = Text::get('success_added') . ' <strong>"' . $_POST['username'] . '"</strong>';
+						$output['success'] = Text::get('success_added') . ' <strong>' . $_POST['username'] . '</strong>';
 				
 					} else {
 	
