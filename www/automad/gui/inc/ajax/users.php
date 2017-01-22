@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -61,15 +61,16 @@ foreach (Accounts::get() as $user => $hash) {
 	
 ?>
 		
-	<div class="uk-panel uk-panel-box uk-margin-small-bottom">
-		<i class="uk-icon-user"></i>&nbsp;&nbsp;<?php echo $user; ?>
+	<div class="uk-panel uk-panel-box uk-margin-small-bottom uk-margin-small-top">
+		<span class="uk-hidden-small"><i class="uk-icon-user"></i>&nbsp;</span>
+		<?php echo $user; ?>
 		<div class="uk-float-right">
 			<?php if ($user != User::get()) { ?>
-			<label data-automad-toggle>
+			<label data-am-toggle>
 				<input type="checkbox" name="delete[]" value="<?php echo $user; ?>" />
 			</label>
 			<?php } else { ?>
-			<span class="uk-text-muted"><?php echo Text::get('sys_user_you'); ?></span>
+			<?php Text::e('sys_user_you'); ?>
 			<?php } ?>
 		</div>
 	</div>	
