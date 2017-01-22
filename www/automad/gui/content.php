@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Content class provides all methods to add, modify, move or delete content (pages, shared data and files). 
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
  *	@license MIT license - http://automad.org/license
  */
 
@@ -101,7 +101,7 @@ class Content {
 					$template = basename($theme_template);
 					
 					// Save new subpage below the current page's path.		
-					$subdir = Core\String::sanitize($title, true);
+					$subdir = Core\String::sanitize($title, true, AM_DIRNAME_MAX_LEN);
 					
 					// If $subdir is an empty string after sanitizing, set it to 'untitled'.
 					if (!$subdir) {
@@ -150,7 +150,7 @@ class Content {
 	
 		} else {
 	
-			$output['error'] = Text::get('error_page_not_found');
+			$output['error'] = Text::get('error_no_destination');
 	
 		}	
 		
@@ -197,14 +197,14 @@ class Content {
 				if ($error = FileSystem::deleteMedia($file)) {
 					$errors[] = $error;
 				} else {
-					$success[] = Text::get('success_remove') . ' "' . basename($file) . '"';
+					$success[] = '"' . basename($file) . '"';
 				}
 				
 			}
 	
 			$this->clearCache();
 	
-			$output['success'] = implode('<br />', $success);
+			$output['success'] = Text::get('success_remove') . '<br />' . implode('<br />', $success);
 			$output['error'] = implode('<br />', $errors);
 
 		} else {
@@ -420,34 +420,6 @@ class Content {
 	
 	
 	/**
-	 * 	Get a preview version of an image file based on $_POST.
-	 *
-	 *      @return The $output to be used as response for an AJAX request.
-	 */
-	
-	public function getFilePreview() {
-		
-		$output = array();
-		
-		if (!empty($_POST['file']) && isset($_POST['url']) && !empty($_POST['height'] && !empty($_POST['width']))) {
-			
-			$path = $this->getPathByPostUrl();
-			$file = $path . $_POST['file'];
-			$ext = FileSystem::getExtension($file);
-			
-			if (in_array($ext, array('jpg', 'png', 'gif'))) {
-				$Image = new Core\Image($file, $_POST['width'], $_POST['height'], true);
-				$output['html'] = '<div class="uk-text-center"><img src="' . AM_BASE_URL . $Image->file . '" /></div>';
-			} 
-			
-		}
-		
-		return $output;
-		
-	}
-	
-	
-	/**
 	 *	Return the full file system path of a page's data file.
 	 *
 	 *	@param object $Page
@@ -462,15 +434,14 @@ class Content {
 
 
 	/**
-	 *      Return the file path for a based on $_POST['url']. In case URL is empty, return the '/shared' directory.
+	 *      Return the file system path for the directory of a page based on $_POST['url'].   
+	 *      In case URL is empty, return the '/shared' directory.
 	 *      
 	 *      @return The full path to the related directory.
 	 */
 	
 	public function getPathByPostUrl() {
 		
-		// Check if file from a specified page or the shared files will be listed and managed.
-		// To display a file list of a certain page, its URL has to be submitted along with the form data.
 		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
 			
 			$Page = $this->Automad->getPageByUrl($_POST['url']);
@@ -576,7 +547,7 @@ class Content {
 
 		} else {
 	
-			$output['error'] = Text::get('error_page_not_found'); 
+			$output['error'] = Text::get('error_no_destination'); 
 	
 		}
 		
@@ -730,30 +701,15 @@ class Content {
 	public function saveSharedData($data) {
 		
 		$output = array();
-		
-		// Filter empty values.
-		$data = array_filter($_POST['data']);
-
-		// Build file content to be written to the txt file.
-		$pairs = array();
-
-		foreach ($data as $key => $value) {
-			$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
+	
+		if (is_writable(AM_FILE_SHARED_DATA)) {
+			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
+			$this->clearCache();
+			$output['redirect'] = '?context=edit_shared';
+		} else {
+			$output['error'] = Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>';
 		}
 
-		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
-	
-		// Write file.
-		$old = umask(0);
-	
-		if (!@file_put_contents(AM_FILE_SHARED_DATA, $content)) {
-			$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_SHARED_DATA . '</p>';
-		}
-	
-		umask($old);
-	
-		$this->clearCache();
-	
 		return $output;
 		
 	}
