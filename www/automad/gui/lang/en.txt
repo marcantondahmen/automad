@@ -26,7 +26,7 @@ btn_close: Close
 
 -
 
-btn_data: Data
+btn_data: Data & Settings
 
 -
 
@@ -34,7 +34,7 @@ btn_delete_page: Delete Page
 
 -
 
-btn_docs: Documentation
+btn_download_file: Download
 
 -
 
@@ -46,6 +46,10 @@ btn_edit_file_info: Edit File Info
 
 -
 
+btn_edit_page: Edit Page
+
+-
+
 btn_files: Files
 
 -
@@ -54,11 +58,15 @@ btn_hide_page: Hide Page From Navigation
 
 -
 
-btn_log_out: Log Out
+btn_log_out: Log out
 
 -
 
 btn_login: Log In
+
+-
+
+btn_more: More
 
 -
 
@@ -79,6 +87,10 @@ btn_save: Save
 -
 
 btn_upload: Upload Files
+
+-
+
+btn_visit_page: Visit Page
 
 -
 
@@ -108,15 +120,23 @@ confirm_delete_users: Are you sure to delete the selected users?
 
 
 
+dashboard_memory: Memory usage: 
+
+-
+
+dashboard_modified: Lastest Activity
+
+-
+
 dashboard_recently_edited: Recently Edited Pages
 
 -
 
-dashboard_title: Dashboard
+dashboard_server: Server
 
 -
 
-dashboard_welcome: Welcome
+dashboard_title: Dashboard
 
 -
 
@@ -154,9 +174,7 @@ error_file_name: Invalid filename!
 
 -
 
-error_form: **Incomplete or incorrect data!** 
-  
-All fields are required and have to be completed as described!
+error_form: Incomplete or incorrect data!<br />All fields are required and have to be completed as described!
 
 -
 
@@ -168,9 +186,13 @@ error_log_out: Log out failed!
 
 -
 
+error_no_destination: Please select a page as destination!
+
+-
+
 error_no_js: ##JavaScript is disabled!
 
-Please enabled **JavaScript** in your browser to use the GUI!
+Please enabled **JavaScript** in your browser to use the Dashboard!
 
 -
 
@@ -198,7 +220,7 @@ error_permission: Permission denied:
 
 -
 
-error_template_missing: Missing!
+error_template_missing: Missing
 
 -
 
@@ -217,19 +239,35 @@ error_var_name: You can not add a variable without a name!
 
 
 
-install_help: ###1. Create User Account  
-Before you can make use of the **Automad** GUI, you have to register the first user by following these steps:    
+file_name: Filename
+
+-
+
+file_caption: Caption
+
+-
+
+
+
+
+
+
+
+
+install_help: ###Create User Account  
+Before you can make use of the **Automad** dashboard, you have to register the first user by following these steps:    
       				
-1. Create an user account using the form below and download the created file to your computer 
-2. Upload the downloaded file to the **"/config"** directory within your Automad installation via FTP or SSH 
+1. 	Create an user account using the form below and download the created file to your computer. 
+2. 	Move the downloaded file to the **"/config"** directory within your Automad installation.   
+	(via a file browser, FTP or SSH) 
 				
-After completing these steps, the GUI should be ready to use and you should be able to log in by clicking the Automad logo on the left.   
+After completing these steps, the dashboard should be ready to use. 
 Other users can be added later via the system preferences.
 
 -
 
-install_login: ###2. Login   
-Please move now the downloaded file to your **"/config"** directory. After you have successfully finished this installation process, you can login to the GUI.
+install_login: ###Move Account File   
+Please move now the downloaded file to your **"/config"** directory. After you have successfully finished this installation process, you can login to the dashboard.
 
 -
 
@@ -267,19 +305,15 @@ log_out_title: Logged Out
 
 
 
-page_add_destination: Create Subpage in:
+page_add_location: Select a location for the new page
 
 -
 
-page_move_destination: Select a destination:
+page_move_destination: Select a destination
 
 -
 
 page_settings: Settings
-
--
-
-page_content: Content
 
 -
 
@@ -303,17 +337,17 @@ page_var_name: Variable Name
 
 -
 
-page_vars_in_template: Variables used by the current template
+page_vars_in_template: Data used by the current template
 
 - 
 
-page_vars_in_other_templates: Variables used in other templates
+page_vars_in_other_templates: Data used in other templates
 
 - 
 
-page_vars_unused: Unused variables
+page_vars_unused: Unused data
 
-- 
+-
 
 page_visibility: Visibility
 
@@ -326,7 +360,7 @@ page_visibility: Visibility
 
 
 
-sidebar_header_site: Site
+sidebar_header_global: Global
 
 -
 
@@ -341,11 +375,7 @@ sidebar_header_pages: Pages
 
 
 
-shared_title: Site Settings &amp; Shared Files
-
--
-
-shared_content: Content
+shared_title: Shared Data & Files
 
 -
 
@@ -372,7 +402,7 @@ search_no_results: No pages found!
 
 -
 
-search_placeholder: Search or go to page
+search_placeholder: Search
 
 -
 
@@ -431,6 +461,10 @@ sys_cache_clear: Clear Cache
 
 -
 
+sys_cache_enable: Enable Caching
+
+-
+
 sys_cache_monitor: Check for changes every 
 
 -
@@ -440,6 +474,10 @@ sys_cache_lifetime: Maximum cache lifetime
 -
 
 sys_debug: Debug Mode
+
+-
+
+sys_debug_enable: Enable Debug Mode
 
 -
 
@@ -466,11 +504,19 @@ Leaving the field empty will reset the list to the default values!
 
 -
 
-sys_status_enabled: On
+sys_status_cache_enabled: Caching is enabled
 
 -
 
-sys_status_disabled: Off
+sys_status_cache_disabled: Caching is disabled
+
+-
+
+sys_status_debug_enabled: Debug mode is enabled
+
+-
+
+sys_status_debug_disabled: Debug mode is disabled
 
 -
 
