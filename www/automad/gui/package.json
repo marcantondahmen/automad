@@ -1,6 +1,6 @@
 {
   "name": "automad-gui",
-  "version": "16.07.27",
+  "version": "17.01.22",
   "description": "Automad GUI",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
@@ -11,9 +11,12 @@
     "gulp-bump": "^2.1.0",
     "gulp-clean-css": "^2.0.5",
     "gulp-concat": "^2.6.0",
+    "gulp-google-webfonts": "0.0.14",
     "gulp-header": "^1.7.1",
     "gulp-less": "^3.0.5",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "merge2": "^1.0.2"
