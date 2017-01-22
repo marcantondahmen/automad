@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2016 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -73,12 +73,12 @@ if (isset($_POST['data'])) {
 	?>
 	
 		<div class="uk-form-row">
-			<label for="automad-input-data-sitename" class="uk-form-label"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
-			<input id="automad-input-data-sitename" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" />
+			<label for="am-input-data-sitename" class="uk-form-label"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
+			<input id="am-input-data-sitename" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" />
 		</div>
-		<div class="uk-form-row">
-			<label for="automad-input-data-theme" class="uk-form-label">Theme</label>
-			<select id="automad-input-data-theme" class="uk-form-controls uk-width-1-1" name="data[<?php echo AM_KEY_THEME; ?>]">
+		<div class="uk-form-row uk-margin-large-bottom">
+			<label for="am-input-data-theme" class="uk-form-label">Theme</label>
+			<select id="am-input-data-theme" class="uk-form-controls uk-width-1-1" name="data[<?php echo AM_KEY_THEME; ?>]">
 				<?php
 			
 				// Get available themes.
@@ -100,33 +100,30 @@ if (isset($_POST['data'])) {
 			</select>
 		</div>
 
-		<hr />
-
-		<!-- Content -->
-		<h3><?php echo Text::get('shared_content'); ?></h3>
-
-		<?php 
+		<!-- Content -->		
+		<div class="uk-accordion" data-uk-accordion="{duration:200,showfirst:false}">
+			<!-- Used shared variables -->
+			<div type="button" class="uk-accordion-title">
+				<?php Text::e('shared_vars_used'); ?>
+			</div>
+			<div class="uk-accordion-content">
+				<?php echo $this->Html->formGroup($this->Keys->inAllTemplates(), $data); ?>
+			</div>
+			<!-- Unused shared variables -->
+			<div type="button" class="uk-accordion-title">
+				<?php Text::e('shared_vars_unused'); ?>
+			</div>
+			<div class="uk-accordion-content">
+				<?php 
+				
+				$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
+				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
+				echo $this->Html->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+				
+				?>
+			</div>
+		</div>
 		
-		// Used shared variables.
-		echo 	$this->Html->formGroup(
-				$this->Keys->inAllTemplates(), 
-				$data, 
-				Text::get('shared_vars_used')
-			);
-		
-		// Unused shared variables.
-		$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
-		// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-		echo 	$this->Html->formGroup(
-				$unusedDataKeys, 
-				$data, 
-				Text::get('shared_vars_unused'), 
-				false, 
-				'automad-add-variable'
-			);
-		
-		?>
-	
 	<?php	
 
 
