@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -42,7 +42,7 @@
 	
 	Automad.count = {
 		
-		dataAttr: 'data-automad-count',
+		dataAttr: 'data-am-count',
 		
 		get: function(e) {
 			
