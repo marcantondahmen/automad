@@ -46,24 +46,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<!-- Footer -->
 		<div class="am-footer uk-position-bottom">
 			<?php if (User::get()) { ?>
-			<!-- <hr class="uk-margin-remove" /> -->
-			<ul class="uk-grid uk-grid-width-1-1 uk-grid-width-medium-1-2">
-				<li class="uk-margin-top">
-					<a href="http://automad.org" class="uk-text-muted" target="_blank">
-						<i class="uk-icon-automad"></i>&nbsp;&nbsp;
-						<span class="uk-text-small"><?php echo AM_VERSION; ?></span>
-					</a>
-				</li>
-				<li class="uk-margin-top uk-text-muted uk-text-right uk-text-left-small">
-					<i class="uk-icon-user"></i>&nbsp;&nbsp;
-					<?php echo User::get(); ?>&nbsp;&nbsp;
-					<a href="?context=logout" class="uk-float-right uk-icon-button uk-icon-power-off" title="<?php Text::e('btn_log_out'); ?>"></a>
-				</li>
-			</ul>
+			<a href="http://automad.org" class="uk-text-muted" target="_blank">
+				<i class="uk-icon-automad"></i>&nbsp;
+				<span class="uk-text-small"><?php echo AM_VERSION; ?></span>
+			</a>	
 			<?php } else { ?>
-				<div class="uk-text-center uk-text-muted uk-margin-top">
-					<i class="uk-icon-automad"></i>
-				</div>
+			<div class="uk-text-center uk-text-muted">
+				<i class="uk-icon-automad"></i>
+			</div>
 			<?php } ?>
 		</div>
 		
