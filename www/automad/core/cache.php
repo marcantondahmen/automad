@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -74,8 +74,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	5.
  *	In case the page and the Automad object are deprecated, after creating both, they can be saved to cache using writePageToCache() and writeAutomadObjectToCache().
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -257,6 +257,8 @@ class Cache {
 	/**
 	 *	Determine the corresponding file in the cache for the visited page in consideration of a possible query string.
 	 *	A page gets for each possible query string (to handle sort/filter) an unique cache file.
+	 *	To avoid issues with very deep structures, an md5 hash of the requested URL (incl. query string) will be used as
+	 *	an unique identifier.
 	 *
 	 *	@return The determined file name of the matching cached version of the visited page.
 	 */
@@ -267,7 +269,7 @@ class Cache {
 		$currentPath = rtrim(AM_REQUEST, '/');
 		
 		if (!empty($_SERVER['QUERY_STRING'])) {
-			$queryString = '_' . String::sanitize($_SERVER['QUERY_STRING']);
+			$queryString = '_' . md5($_SERVER['QUERY_STRING']);
 		} else {
 			$queryString = '';
 		}
@@ -282,6 +284,7 @@ class Cache {
 		}
 		
 		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $serverName . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
+		Debug::log($pageCacheFile);
 		
 		return $pageCacheFile;
 		
@@ -360,7 +363,6 @@ class Cache {
 			
 			// Save mTime
 			$old = umask(0);
-			Debug::log(umask(), 'Changed umask');
 			file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));
 			umask($old);
 			
@@ -368,7 +370,6 @@ class Cache {
 			Debug::log($lastModifiedItem, 'Last modified item'); 
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime');
 			Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
-			Debug::log(umask(), 'Restored umask');
 		
 		} else {
 			
@@ -423,7 +424,6 @@ class Cache {
 		if (AM_CACHE_ENABLED) {
 			
 			$old = umask(0);
-			Debug::log(umask(), 'Changed umask');
 		
 			if(!file_exists(dirname($this->pageCacheFile))) {
 				mkdir(dirname($this->pageCacheFile), 0777, true);
@@ -432,7 +432,6 @@ class Cache {
 			file_put_contents($this->pageCacheFile, $output);
 			umask($old);
 			Debug::log($this->pageCacheFile, 'Page written to');
-			Debug::log(umask(), 'Restored umask');
 			
 		} else {
 			
@@ -454,11 +453,9 @@ class Cache {
 		if (AM_CACHE_ENABLED) {
 			
 			$old = umask(0);
-			Debug::log(umask(), 'Changed umask');
 			file_put_contents(AM_FILE_OBJECT_CACHE, serialize($Automad));
 			umask($old);
 			Debug::log(AM_FILE_OBJECT_CACHE, 'Automad object written to');
-			Debug::log(umask(), 'Restored umask');
 			
 			// Only non-forwarded (no proxy) sites.
 			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
