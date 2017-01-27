@@ -96,6 +96,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						echo $this->Html->siteTree('', $this->collection, array('context' => 'edit_page'), false, $header); 
 					
 					?> 
+					<ul class="uk-nav uk-nav-side uk-hidden-large">
+						<li class="uk-nav-divider"></li>
+						<li class="uk-nav-header"><?php echo Text::get('sidebar_header_logged_in') . ' ' . User::get(); ?></li>
+						<li>
+							<a href="?context=logout">
+								<i class="uk-icon-sign-out"></i>&nbsp;
+								<?php Text::e('btn_log_out'); ?>
+							</a>
+						</li>
+					</ul>
 				</div>	
 			</div>
 		</div>	
