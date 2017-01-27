@@ -94,6 +94,30 @@ if (User::get()) {
 					<i class="uk-icon-search"></i>
 				</a>
 			</li>
+			<!-- User -->
+			<li class="uk-visible-large">
+				<div class="uk-position-relative" data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+					<div class="am-navbar-icon">
+						<i class="uk-icon-user"></i>
+					</div>
+					<div class="uk-dropdown uk-dropdown-small">
+						<ul class="uk-nav uk-nav-dropdown">
+							<li>
+								<a href="?context=logout">
+									<i class="uk-icon-sign-out"></i>&nbsp;
+									<?php echo Text::get('btn_log_out') . ' ' . User::get(); ?>
+								</a>
+							</li>
+							<li>
+								<a href="?context=system_settings#1">
+									<i class="uk-icon-users"></i>&nbsp;
+									<?php Text::e('btn_manage_users'); ?>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
 			<!-- Sidebar -->
 			<li class="uk-hidden-large">
 				<a href="#" class="am-navbar-icon" data-am-toggle-sidebar="#am-sidebar">
