@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * 	The String class holds all string methods.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -137,11 +137,12 @@ class String {
 	 *	possible dots should be removed by setting $removeDots = true. 
 	 *
 	 *	@param string $str
-	 *	@param boolean $removeDots	
+	 *	@param boolean $removeDots
+	 *	@param number $maxChars	
 	 *	@return the sanitized string
 	 */
 	
-	public static function sanitize($str, $removeDots = false) {
+	public static function sanitize($str, $removeDots = false, $maxChars = 100) {
 			
 		// If dots should be removed from $str, replace them with '-', since URLify::filter() only removes them fully without replacing.
 		if ($removeDots) {
@@ -161,7 +162,7 @@ class String {
 		
 		// Since all possible dots got removed already above (if $removeDots is true), 
 		// $str should be filtered as filename to keep dots if they are still in $str and $removeDots is false. 
-		return \JBroadway\URLify::filter($str, 100, '', true);
+		return \JBroadway\URLify::filter($str, $maxChars, '', true);
 		
 	}
 	
