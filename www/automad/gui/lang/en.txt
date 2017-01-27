@@ -66,6 +66,10 @@ btn_login: Log In
 
 -
 
+btn_manage_users: Manage Users
+
+-
+
 btn_more: More
 
 -
@@ -367,6 +371,10 @@ sidebar_header_global: Global
 sidebar_header_pages: Pages
 
 -
+
+sidebar_header_logged_in: Logged in as
+
+- 
 
 
 
