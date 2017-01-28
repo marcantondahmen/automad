@@ -170,7 +170,7 @@
 			
 				// Debug info.
 				if (data.debug) {
-					console.log(data.debug);
+					console.log({ Ajax: handler, Debug: data.debug });
 				}
 				
 				// In case the returned JSON contains a redirect URL, simply redirect the page.
