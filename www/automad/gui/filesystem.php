@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The FileSystem class provides all methods related to file system operations. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -171,6 +171,24 @@ class FileSystem {
 
 
 	/**
+	 *      Get the full file system path for the given path.
+	 *      
+	 *      @param string $path
+	 *      @return the full path.
+	 */
+
+	public static function fullPagePath($path) {
+		
+		if (strpos($path, AM_BASE_DIR . AM_DIR_PAGES) !== 0) {
+			$path = AM_BASE_DIR . AM_DIR_PAGES . $path;
+		}
+		
+		return '/' . trim($path, '/') . '/';
+		
+	}
+
+
+	/**
 	 *      Return the extension for a given file.
 	 *      
 	 *      @param string $file
@@ -247,25 +265,53 @@ class FileSystem {
 		
 	}
 	
-	
+
 	/**
-	 *      Get the full file system path for the given path.
-	 *      
-	 *      @param string $path
-	 *      @return the full path.
+	 *      Move all items in /cache to the PHP temp directory.
+	 *
+	 *      @return string $tmp
 	 */
-	
-	public static function fullPagePath($path) {
+
+	public function purgeCache() {
 		
-		if (strpos($path, AM_BASE_DIR . AM_DIR_PAGES) !== 0) {
-			$path = AM_BASE_DIR . AM_DIR_PAGES . $path;
+		// Check if the temp dir is actually writable.
+		if (is_writable(sys_get_temp_dir()) && is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
+			
+			$sysTmp = rtrim(sys_get_temp_dir(), '/');
+			$dir = '/automad-tmp';
+			$tmp = $sysTmp . $dir;
+			$n = 0;
+			
+			// Create unique subdirectory in temp.
+			while (is_dir($tmp)) {
+				$n++;
+				$tmp = $sysTmp . $dir . '-' . $n;
+			}
+			
+			if (mkdir($tmp)) {
+			
+				// Collect items to be removed.
+				$cacheItems = array_merge(
+					glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
+					glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
+				);
+				
+				foreach ($cacheItems as $item) {
+					if (!rename($item, $tmp . '/' . basename($item))) {
+						return false;
+					}
+				}
+			
+				// Return $tmp on success.
+				return $tmp;
+				
+			}	
+			
 		}
-		
-		return '/' . trim($path, '/') . '/';
-		
+				
 	}
-	
-	
+
+
 	/**
 	 *      Renames a file and its caption (if existing).
 	 *      
