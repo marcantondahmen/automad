@@ -117,6 +117,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 	umask($old);
 	
 	$output['success'] = Text::get('success_config_update');
+	$output['debug'] = $config;
 
 } else {
 
