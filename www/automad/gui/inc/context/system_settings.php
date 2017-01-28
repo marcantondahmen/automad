@@ -90,7 +90,7 @@ $this->element('header');
 				<form class="uk-form uk-form-stacked" data-am-handler="update_config" data-am-auto-submit>
 					<!-- Cache Enable -->
 					<input type="hidden" name="type" value="cache" />		
-					<label class="uk-button uk-button-large" data-am-toggle="#am-cache-settings, [data-am-handler='clear_cache']">
+					<label class="uk-button uk-button-large" data-am-toggle="#am-cache-settings, #am-cache-actions">
 						<?php Text::e('sys_cache_enable'); ?>
 						<input type="checkbox" name="cache[enabled]" value="on"<?php if (AM_CACHE_ENABLED) { echo ' checked'; } ?> />
 					</label>
@@ -126,13 +126,33 @@ $this->element('header');
 						</li>
 					</ul>	
 				</form>
-				<!-- Clear Cache -->	
-				<form data-am-handler="clear_cache">
+				<div id="am-cache-actions">
 					<hr />
-					<button type="submit" class="uk-button uk-button-danger uk-button-large">
-						<i class="uk-icon-refresh"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_clear'); ?>
-					</button>
-				</form>
+					<ul class="uk-grid uk-grid-width-1-1 uk-grid-width-medium-1-2">
+						<li>
+							<!-- Clear Cache -->	
+							<form data-am-handler="clear_cache">
+								<button type="submit" class="uk-button uk-button-primary">
+									<i class="uk-icon-refresh"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_clear'); ?>
+								</button>
+							</form>	
+							<div class="uk-block">
+								<?php Text::e('sys_cache_clear_info'); ?>
+							</div>
+						</li>
+						<li>
+							<!-- Purge Cache -->
+							<form data-am-handler="purge_cache">
+								<button type="submit" class="uk-button uk-button-danger">
+									<i class="uk-icon-remove"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_purge'); ?>
+								</button>
+							</form>
+							<div class="uk-block">
+								<?php Text::e('sys_cache_purge_info'); ?>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</li>
 			<!-- User -->
 			<li>
