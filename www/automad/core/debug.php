@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The output of all the contained methods can be activated/deactivated with defining the AM_DEBUG_ENABLED constant.
  *	All logged information will be stored in $buffer as JS's console.log() items.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -91,6 +91,9 @@ class Debug {
 			
 			// Stop timer.	
 			self::timerStop();	
+			
+			// Memory usage.
+			self::memory();
 			
 			// Get user & server constants.
 			self::uc();
@@ -142,6 +145,17 @@ class Debug {
 			self::$buffer .= "console.log(" . json_encode(array($description => $element)) . ");\n";
 			
 		}
+		
+	}
+	
+
+	/**
+	 *      Provide info about memory usage.
+	 */
+	
+	private static function memory() {
+		
+		self::log((memory_get_peak_usage(true) / 1048576) . 'M of ' . ini_get('memory_limit'), 'Memory used');
 		
 	}
 	
