@@ -162,6 +162,10 @@ dropzone: Drop Files Here
 
 
 
+error_cache_purged: Could not purge the cache directory!
+
+-
+
 error_existing: already exists!
 
 -
@@ -433,6 +437,10 @@ success_cache_cleared: The page cache got cleared successfully!
 
 -
 
+success_cache_purged: The cache directory got purged successfully!
+
+-
+
 success_config_update: Successfully updated configuration!
 
 -
@@ -460,12 +468,17 @@ sys_cache: Cache
 
 -
 
-sys_cache_info: Caching is essential to speed up your site and should generally be enabled.    
+sys_cache_info: Caching is essential to speed up your site and should generally be enabled.     
 However under some circumstances you might want to disable or clear your cache.
 
 -
 
 sys_cache_clear: Clear Cache
+
+-
+
+sys_cache_clear_info: Clear the site cache to force a rescan for updated pages and files. 
+This action will not remove any page files or images from the cache directory.
 
 -
 
@@ -478,6 +491,15 @@ sys_cache_monitor: Check for changes every
 -
 
 sys_cache_lifetime: Maximum cache lifetime
+
+-
+
+sys_cache_purge: Purge Cache Directory
+
+-
+
+sys_cache_purge_info: In contrast to clearing the cache, purging will remove all files and images from the cache directory. 
+This will force a full rebuild of the image cache as well as clean up of all deleted pages.
 
 -
 
