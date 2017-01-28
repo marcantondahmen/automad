@@ -63,6 +63,21 @@
 		});
 	});
 	
+	// Check if the hash value matches the active tab and update the switcher if needed.
+	// That will be the case, when a link outside the actual switcher tries to change the active tab.
+	$(window).on('hashchange', function() {
+		
+		var 	$switcher = $('[data-uk-switcher]'),
+			$active = $switcher.children('.uk-active'),
+			hash = Automad.switcher.getActiveTab();
+		
+		// Only update if the hash doesn't match the active tab.	
+		if ($active.index() != hash) {
+			$switcher.children('button').eq(hash).click();
+		}
+			
+	});
+	
 	// Update the hash on change event.
 	$(document).on('ready', function() {
 		$('[data-uk-switcher]').on('show.uk.switcher', function(event, tab) {
