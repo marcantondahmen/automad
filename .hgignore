@@ -1,6 +1,8 @@
 syntax: glob
 cached*
+node_modules
+sitemap.xml
 www/cache/trash
 www/config/accounts.php
-sitemap.xml
-node_modules
+www/pages/test
+www/themes/test
