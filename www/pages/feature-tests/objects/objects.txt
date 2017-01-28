@@ -1,5 +1,0 @@
-title: Objects
-
--
-
-theme: feature_tests

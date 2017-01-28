@@ -1,5 +1,0 @@
-title: Feature Tests
-
--
-
-theme: feature_tests

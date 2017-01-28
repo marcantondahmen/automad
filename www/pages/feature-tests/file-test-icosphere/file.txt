@@ -1,9 +1,0 @@
-title: File Test: Icosphere
-
--
-
-test-file: /pages/01.example-pages/icosphere/icosphere.jpg
-
--
-
-theme: feature_tests

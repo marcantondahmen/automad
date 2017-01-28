@@ -1,9 +1,0 @@
-title: File Test: Cubes
-
--
-
-theme: feature_tests
-
-- 
-
-test-file: /pages/01.example-pages/cube/*.jpg
