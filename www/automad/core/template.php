@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2015 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -56,8 +56,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *
  *	In a last step, all URLs within the generated HTML get resolved to be relative to the server's root (or absolute), before $output gets returned.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2015 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -78,6 +78,13 @@ class Template {
 	private $extensionAssets = array();
 	
 	
+	/**
+	 *      The Runtime object.
+	 */
+	
+	private $Runtime;
+	
+
 	/**
 	 * 	An array of snippets defined within a template.
 	 */
@@ -100,19 +107,13 @@ class Template {
 	
 	
 	/**
-	 * 	Array holding all temporary independent system variables (those starting with a ":", like {[ :file ]}) being created in loops.
-	 */
-	
-	private $independentSystemVars = array();
-	
-	
-	/**
 	 *	Define $Automad and $Page, check if the page gets redirected and get the template name. 
 	 */
 	
 	public function __construct($Automad) {
 		
 		$this->Automad = $Automad;
+		$this->Runtime = new Runtime($Automad);
 		$this->Toolbox = new Toolbox($Automad);
 		$Page = $Automad->Context->get();
 		
@@ -206,80 +207,6 @@ class Template {
 
 	
 	/**
-	 *	Return the requested independent system variable.
-	 *	Independent system variables are all variables created by Automad at runtime and independent from the Context and Shared objects. 
-	 *
-	 *	@param string $var
-	 *	@return the value of $var
-	 */
-	
-	private function getIndependentSystemVar($var) {
-		
-		// Check whether $var is generated within a loop and therefore stored in $independentSystemVars or
-		// if $var is related to the context, filelist or pagelist object.
-		if (array_key_exists($var, $this->independentSystemVars)) {
-			
-			return $this->independentSystemVars[$var];
-			
-		} else {
-			
-			switch ($var) {
-					
-				case AM_KEY_FILELIST_COUNT:
-					// The filelist count represents the number of files within the last defined filelist. 
-					return count($this->Automad->getFilelist()->getFiles());
-					
-				case AM_KEY_PAGELIST_COUNT:
-					// The pagelist count represents the number of pages within the last defined pagelist. 
-					return count($this->Automad->getPagelist()->getPages());
-					
-				case AM_KEY_CAPTION:
-					// Get the caption for the currently used ":file".
-					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
-					if (isset($this->independentSystemVars[AM_KEY_FILE])) {
-						return Parse::caption(AM_BASE_DIR . $this->independentSystemVars[AM_KEY_FILE]);
-					} else {
-						return false;
-					}
-					
-			}
-				
-		}
-	
-	}
-
-
-	/**
-	 *	Set a system variable.
-	 *	
-	 *	@param string $var
-	 *	@param mixed $value
-	 */
-
-	private function setIndependentSystemVar($var, $value) {
-		
-		$this->independentSystemVars[$var] = $value;
-		
-	}
-
-
-	/**
-	 *	Check whether a requested $key represents an independent system variable.
-	 *
-	 *	@param string $key
-	 *	@return boolean true/false
-	 */
-
-	private function isIndependentSystemVar($key) {
-		
-		$systemVarKeys = array_merge(array_keys($this->independentSystemVars), array(AM_KEY_FILELIST_COUNT, AM_KEY_PAGELIST_COUNT, AM_KEY_CAPTION));
-		
-		return (in_array($key, $systemVarKeys));
-		
-	}
-	
-	
-	/**
 	 *	Get the value of a given variable key depending on the current context - either from the page data, the system variables or from the $_GET array.
 	 *
 	 *	@param string $key
@@ -299,9 +226,9 @@ class Template {
 	
 		} else {
 			
-			if ($this->isIndependentSystemVar($key)) {
-				// Independent system variable.
-				return $this->getIndependentSystemVar($key);
+			if ($this->Runtime->isRuntimeVar($key)) {
+				// Runtime variable.
+				return $this->Runtime->get($key);
 			} else {
 				// Page data and system variables depending on the current context.
 				return $this->Automad->Context->get()->get($key);
@@ -418,18 +345,77 @@ class Template {
 
 
 	/**
+	 *      Process a file related snippet like <@ foreach "*.jpg" { options } @> ... <@ end @>.
+	 *      
+	 *      @param string $file
+	 *      @param array $options  
+	 *      @param string $snippet  
+	 *      @param string $directory
+	 *      @return string $html           
+	 */
+	
+	private function processFileSnippet($file, $options, $snippet, $directory) {
+		
+		// Shelve runtime data.
+		$runtimeShelf = $this->Runtime->shelve();
+		
+		// Store current filename and its basename in the system variable buffer.
+		$this->Runtime->set(AM_KEY_FILE, $file);
+		$this->Runtime->set(AM_KEY_BASENAME, basename($file));
+		
+		// If $file is an image, also provide width and height (and possibly a new filename after a resize).
+		if (in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), array('jpg', 'jpeg', 'png', 'gif'))) {
+			
+			// The Original file size.
+			$imgSize = getimagesize(AM_BASE_DIR . $file);
+			$this->Runtime->set(AM_KEY_WIDTH, $imgSize[0]);
+			$this->Runtime->set(AM_KEY_HEIGHT, $imgSize[1]);
+			
+			// If any options are given, create a resized version of the image.
+			if (!empty($options)) {
+		
+				$options = array_merge(
+						array(
+							'width' => false, 
+							'height' => false, 
+							'crop' => false
+						), 
+						$options
+					);
+				
+				$img = new Image(AM_BASE_DIR . $file, $options['width'], $options['height'], $options['crop']);
+				$this->Runtime->set(AM_KEY_FILE_RESIZED, $img->file);
+				$this->Runtime->set(AM_KEY_WIDTH_RESIZED, $img->width);
+				$this->Runtime->set(AM_KEY_HEIGHT_RESIZED, $img->height);
+				
+			}
+			
+		} 
+		
+		// Process snippet.
+		$html = $this->processMarkup($snippet, $directory);
+		
+		// Unshelve runtime data.
+		$this->Runtime->unshelve($runtimeShelf);
+
+		return $html;
+			
+	}
+
+
+	/**
 	 *	Process the full markup - variables, includes, methods and other constructs.
 	 *
 	 * 	Replace variable keys with its values, call Toolbox methods, call Extensions, execute statements (with, loops and conditions) and include template elements recursively.     
-	 *	For example {@ file.php @}, {@ method{ options } @}, {@ foreach in ... @} ... {@ end @} or {@ if {[ var ]} @} ... {@ else @} ... {@ end @}.    
+	 *	For example <@ file.php @>, <@ method { options } @>, <@ foreach in ... @> ... <@ end @> or <@ if @{var} @> ... <@ else @> ... <@ end @>.    
 	 *
 	 *	The "with" statement makes data associated with a specified page or a file accessible.    
 	 *	With a page, the context changes to the given page, with files, the file's system variables (:file, :basename and :caption) can be used.      
 	 *
 	 *	Inside a "foreach in pagelist" loop, the context changes with each iteration and the active page in the loop becomes the current page.    
 	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).    
-	 *	Inside other loops, the following system variables can be used within a snippet: {[ :filter ]}, {[ :tag ]}, {[ :file ]} and {[ :basename ]}.  
-	 *	All loops also generate an index {[ :i ]} for each elements in the array. 
+	 *	Inside other loops, the following system variables can be used within a snippet: @{:filter}, @{:tag}, @{:file} and @{:basename}.  
+	 *	All loops also generate an index @{:i} for each elements in the array. 
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param string $directory - The directory of the currently included file/template
@@ -470,9 +456,9 @@ class Template {
 					Debug::log($call, 'Matched call');
 					
 					// Check if options exist.
-					if (isset($matches['options'])) {
+					if (isset($matches['callOptions'])) {
 						// Parse the options JSON and also find and replace included variables within the JSON string.
-						$options = Parse::jsonOptions($this->processContent($matches['options'], true));
+						$options = Parse::jsonOptions($this->processContent($matches['callOptions'], true));
 					} else {
 						$options = array();
 					}
@@ -546,13 +532,13 @@ class Template {
 					if (!empty($Page)) {	
 						Debug::log($Page->url, 'With page');
 						// Save original context.
-						$contextBeforeWith = $Context->get();
+						$contextShelf = $Context->get();
 						// Set context to $url.
 						$Context->set($Page);
 						// Parse snippet.
 						$html = $this->processMarkup($matches['withSnippet'], $directory);
 						// Restore original context.
-						$Context->set($contextBeforeWith);
+						$Context->set($contextShelf);
 						return $html;
 					} 
 										
@@ -563,15 +549,13 @@ class Template {
 						
 						$file = $files[0];
 						Debug::log($file, 'With file');
-						// Store current filename and its basename in the system variable buffer.
-						$this->setIndependentSystemVar(AM_KEY_FILE, $file);
-						$this->setIndependentSystemVar(AM_KEY_BASENAME, basename($file));
-						// Process snippet.
-						$html = $this->processMarkup($matches['withSnippet'], $directory);
-						// Reset system variables.
-						$this->setIndependentSystemVar(AM_KEY_FILE, NULL);
-						$this->setIndependentSystemVar(AM_KEY_BASENAME, NULL);
-						return $html;
+						
+						return $this->processFileSnippet(
+							$file, 
+							Parse::jsonOptions($matches['withOptions']), 
+							$matches['withSnippet'], 
+							$directory
+						);
 						
 					} 
 						
@@ -594,19 +578,19 @@ class Template {
 					$html = '';
 					
 					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-					$iBeforeLoop = $this->getIndependentSystemVar(AM_KEY_INDEX);
+					$runtimeShelf = $this->Runtime->shelve();
 					
 					// The loop.
 					for ($i = $start; $i <= $end; $i++) {
-						// Set index variable. The index can be used as {[ :i ]}.
-						$this->setIndependentSystemVar(AM_KEY_INDEX, $i);
+						// Set index variable. The index can be used as @{:i}.
+						$this->Runtime->set(AM_KEY_INDEX, $i);
 						// Parse snippet.
 						Debug::log($i, 'Processing snippet in loop for index');
 						$html .= $this->processMarkup($matches['forSnippet'], $directory);
 					}
 					
 					// Restore index.
-					$this->setIndependentSystemVar(AM_KEY_INDEX, $iBeforeLoop);
+					$this->Runtime->unshelve($runtimeShelf);
 					
 					return $html;
 					
@@ -627,7 +611,7 @@ class Template {
 					$i = 0;
 					
 					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
-					$iBeforeLoop = $this->getIndependentSystemVar(AM_KEY_INDEX);
+					$runtimeShelf = $this->Runtime->shelve();
 					
 					if (strtolower($matches['foreach']) == 'pagelist') {
 						
@@ -636,7 +620,7 @@ class Template {
 						// Get pages.
 						$pages = $this->Automad->getPagelist()->getPages();
 						// Save context page.
-						$contextBeforeLoop = $Context->get();
+						$contextShelf = $Context->get();
 						
 						Debug::log($pages, 'Foreach in pagelist loop');
 						
@@ -645,8 +629,8 @@ class Template {
 							$pagelistConfigCache = $this->Automad->getPagelist()->config();
 							// Set context to the current page in the loop.
 							$Context->set($Page);
-							// Set index for current page. The index can be used as {[ :i ]}.
-							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
+							// Set index for current page. The index can be used as @{:i}.
+							$this->Runtime->set(AM_KEY_INDEX, ++$i);
 							// Parse snippet.
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 							$html .= $this->processMarkup($foreachSnippet, $directory);
@@ -655,44 +639,40 @@ class Template {
 						}
 						
 						// Restore context.
-						$Context->set($contextBeforeLoop);
+						$Context->set($contextShelf);
 							
 					} else if (strtolower($matches['foreach']) == 'filters') {
 						
 						// Filters (tags of the pages in the pagelist)
-						// Each filter can be used as {[ :filter ]} within a snippet.
+						// Each filter can be used as @{:filter} within a snippet.
 						
 						foreach ($this->Automad->getPagelist()->getTags() as $filter) {
 							Debug::log($filter, 'Processing snippet in loop for filter');
 							// Store current filter in the system variable buffer.
-							$this->setIndependentSystemVar(AM_KEY_FILTER, $filter);
-							// Set index. The index can be used as {[ :i ]}.
-							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
+							$this->Runtime->set(AM_KEY_FILTER, $filter);
+							// Set index. The index can be used as @{:i}.
+							$this->Runtime->set(AM_KEY_INDEX, ++$i);
 							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
-	
-						$this->setIndependentSystemVar(AM_KEY_FILTER, NULL);
 							
 					} else if (strtolower($matches['foreach']) == 'tags') {
 
 						// Tags (of the current page)	
-						// Each tag can be used as {[ :tag ]} within a snippet.
+						// Each tag can be used as @{:tag} within a snippet.
 
 						foreach ($Context->get()->tags as $tag) {
 							Debug::log($tag, 'Processing snippet in loop for tag');							
 							// Store current tag in the system variable buffer.
-							$this->setIndependentSystemVar(AM_KEY_TAG, $tag);							
-							// Set index. The index can be used as {[ :i ]}.
-							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
+							$this->Runtime->set(AM_KEY_TAG, $tag);							
+							// Set index. The index can be used as @{:i}.
+							$this->Runtime->set(AM_KEY_INDEX, ++$i);
 							$html .= $this->processMarkup($foreachSnippet, $directory);
 						}
-						
-						$this->setIndependentSystemVar(AM_KEY_TAG, NULL);
 	
 					} else {
 						
 						// Files
-						// The file path and the basename can be used like {[ :file ]} and {[ :basename ]} within a snippet.
+						// The file path and the basename can be used like @{:file} and @{:basename} within a snippet.
 						
 						if (strtolower($matches['foreach']) == 'filelist') {
 							// Use files from filelist.
@@ -704,22 +684,21 @@ class Template {
 						
 						foreach ($files as $file) {
 							Debug::log($file, 'Processing snippet in loop for file');
-							// Store current filename and its basename in the system variable buffer.
-							$this->setIndependentSystemVar(AM_KEY_FILE, $file);
-							$this->setIndependentSystemVar(AM_KEY_BASENAME, basename($file));
-							// Set index. The index can be used as {[ :i ]}.
-							$this->setIndependentSystemVar(AM_KEY_INDEX, ++$i);
-							$html .= $this->processMarkup($foreachSnippet, $directory);
+							// Set index. The index can be used as @{:i}.
+							$this->Runtime->set(AM_KEY_INDEX, ++$i);
+							$html .= $this->processFileSnippet(
+									$file, 
+									Parse::jsonOptions($matches['foreachOptions']), 
+									$foreachSnippet, 
+									$directory
+							);
 						}
-						
-						$this->setIndependentSystemVar(AM_KEY_FILE, NULL);
-						$this->setIndependentSystemVar(AM_KEY_BASENAME, NULL);
 							
 					}
 					
-					// Restore index.
-					$this->setIndependentSystemVar(AM_KEY_INDEX, $iBeforeLoop);
-					
+					// Restore runtime.
+					$this->Runtime->unshelve($runtimeShelf);
+				
 					// If the counter ($i) is 0 (false), process the "else" snippet.
 					if (!$i) {
 						Debug::log('foreach in ' . strtolower($matches['foreach']), 'No elements array. Processing else statement for');
