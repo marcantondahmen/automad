@@ -114,8 +114,8 @@ Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PRE
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/en.txt');
-Config::set('AM_ALLOWED_FILE_TYPES', 			'css, jpg, zip, png, ico, svg, js, pdf, mp3, gif');
-Config::set('AM_ALLOWED_FILE_TYPES_DEFAULT_GUI', 	'css, jpg, zip, png, ico, svg, js, pdf, mp3, gif'); // To be used in case a user overrides the values above and wants to restore the original settings.
+Config::set('AM_ALLOWED_FILE_TYPES', 			'css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif');
+Config::set('AM_ALLOWED_FILE_TYPES_DEFAULT_GUI', 	'css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif'); // To be used in case a user overrides the values above and wants to restore the original settings.
 
 // PAGE
 Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
@@ -201,6 +201,11 @@ Config::set('AM_KEY_MTIME', ':mtime');
 Config::set('AM_KEY_FILTER', ':filter');
 Config::set('AM_KEY_TAG', ':tag');
 Config::set('AM_KEY_FILE', ':file');
+Config::set('AM_KEY_WIDTH', ':width');
+Config::set('AM_KEY_HEIGHT', ':height');
+Config::set('AM_KEY_FILE_RESIZED', ':file-resized');
+Config::set('AM_KEY_WIDTH_RESIZED', ':width-resized');
+Config::set('AM_KEY_HEIGHT_RESIZED', ':height-resized');
 Config::set('AM_KEY_CAPTION', ':caption');
 Config::set('AM_KEY_INDEX', ':i');
 Config::set('AM_KEY_FILELIST_COUNT', ':filelist-count');
