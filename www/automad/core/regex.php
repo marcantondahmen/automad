@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * 	The Regex class holds all methods relating regular expressions.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -91,11 +91,11 @@ class Regex {
 	 *	    
 	 *	Valid expressions are:    
 	 *	
-	 *	-	{[ var ]} >= 5
-	 *	-	{[ var ]} != "Text ..."
-	 *	-	{[ var ]} = 'Text'
-	 *	-	not {[ var ]}
-	 *	-	!{[ var ]}
+	 *	-	@{var} >= 5
+	 *	-	@{var} != "Text ..."
+	 *	-	@{var} = 'Text'
+	 *	-	not @{var}
+	 *	-	!@{var}
 	 *	
 	 *	@param string $namedReferencePrefix
 	 *	@return the regex
@@ -134,10 +134,10 @@ class Regex {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 		
-		// The subpatterns don't include the wrapping delimiter: "{@ subpattern @}".
+		// The subpatterns don't include the wrapping delimiter <@ subpattern @>.
 		$statementSubpatterns['include'] = 	'(?P<file>[\w\/\-\.]+\.php)';
 		
-		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<options>\{.*?\})?';
+		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?';
 		
 		$statementSubpatterns['snippet'] = 	Regex::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
 							'snippet\s+(?P<snippet>[\w\-]+)' .
@@ -149,12 +149,13 @@ class Regex {
 							'with\s+(?P<with>' .
 								'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
 							')' . 
+							'\s*(?P<withOptions>\{.*?\})?' .
 							'\s*' . $statementClose . 
 							'(?P<withSnippet>.*?)' . 	
 							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
 							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
-		$statementSubpatterns['for'] =	Regex::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
+		$statementSubpatterns['for'] =		Regex::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
 							'for\s+(?P<forStart>' . Regex::variable() . '|' . Regex::$number . ')\s+to\s+(?P<forEnd>' . Regex::variable() . '|' . Regex::$number . ')' . 
 							'\s*' . $statementClose .
 							'(?P<forSnippet>.*?)' .
@@ -168,6 +169,7 @@ class Regex {
 								'filelist|' .
 								'"[^"]*"|' . "'[^']*'|" . $var . 		
 							')' . 
+							'\s*(?P<foreachOptions>\{.*?\})?' .
 							'\s*' . $statementClose . 
 							'(?P<foreachSnippet>.*?)' . 
 							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
@@ -191,10 +193,10 @@ class Regex {
 	 *	     
 	 *	Valid operands are:
 	 *
-	 *	-	{[ var ]}
+	 *	-	@{var}
 	 *	-	"Text ..."
 	 *	-	'Text ...'
-	 *	-	"Text and {[ var ]}"
+	 *	-	"Text and @{var}"
 	 *	-	5
 	 *	-	1.5
 	 *	
@@ -256,7 +258,7 @@ class Regex {
 	/**
 	 *	Return the regex for content variables. A prefix can be defined as the first parameter to create named backreferences for each capturing group. 
 	 *	The second parameter can be used to limit the charachter class of the variable names to just match keys in text files.
-	 *	Like: {[ var | function1 (...) | function2 (...) | ... ]}
+	 *	Like: @{var|function1(...)|function2(...)| ... }
 	 *
 	 *	@param string $namedReferencePrefix
 	 *	@param boolean $textFileOnly
