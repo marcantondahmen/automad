@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Parse class holds all parsing methods.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
  
@@ -208,45 +208,22 @@ class Parse {
 	
 		
 	/**
-	 *	Get the query string, if existing.
-	 *
-	 *	@return $query
-	 */
-	
-	public static function queryArray() {
-		
-		// First get existing query string to prevent overwriting existing settings passed already
-		// and store its data in $query.
-		if (isset($_GET)) {
-			$query = $_GET;
-		} else {
-			$query = array();
-		}
-		
-		return $query;
-		
-	}
-	
-	
-	/**
 	 *	Return value of a query string parameter or any empty string, if that parameter doesn't exist.
 	 *	Note: Since this method always returns a string, it should not be used to test whether a parameter exists in the query string, 
 	 * 	because a non-existing parameter and an empty string as a parameter's value will return the same.
 	 * 
 	 *	@param string $key
-	 *	@return $queryKey
+	 *	@return string The value for the requested query key
 	 */
 	
-	public static function queryKey($key) {
+	public static function query($key) {
 	
 		if (isset($_GET[$key])) {
-			$queryKey = $_GET[$key];
+			return $_GET[$key];
 		} else {
-			$queryKey = '';
+			return '';
 		}
 		
-		return $queryKey;
-	
 	}
 		
 
