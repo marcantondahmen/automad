@@ -85,7 +85,7 @@ class Runtime {
 	 *	Return the requested runtime variable. 
 	 *
 	 *	@param string $key
-	 *	@return string The value of $key
+	 *	@return string The value of $key or NULL if the requested variable doesn't exsist
 	 */
 	
 	public function get($key) {
@@ -118,6 +118,8 @@ class Runtime {
 					}
 				
 				default:
+					// Return NULL in case the requested $key doesn't match any runtime variable
+					// to distinguish false values from not existing keys.
 					return NULL;
 					
 			}
@@ -126,25 +128,6 @@ class Runtime {
 	
 	}
 
-	
-	/**
-	 *	Check whether a requested $key represents an runtime variable.
-	 *
-	 *	@param string $key
-	 *	@return boolean true/false
-	 */
-
-	public function isRuntimeVar($key) {
-		
-		$runtimeKeys = array_merge(
-			array_keys($this->data), 
-			array(AM_KEY_FILELIST_COUNT, AM_KEY_PAGELIST_COUNT, AM_KEY_CAPTION)
-		);
-		
-		return (in_array($key, $runtimeKeys));
-		
-	}	
-	
 	
 	/**
 	 *	Set a runtime variable.
