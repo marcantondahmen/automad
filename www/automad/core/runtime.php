@@ -99,6 +99,10 @@ class Runtime {
 		} else {
 			
 			switch ($key) {
+				
+				case AM_KEY_NOW:
+					// The current date/time.
+					return date(DATE_ATOM);
 					
 				case AM_KEY_FILELIST_COUNT:
 					// The filelist count represents the number of files within the last defined filelist. 
