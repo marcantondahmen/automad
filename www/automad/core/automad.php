@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Automad class includes all methods and properties regarding the site, structure and pages.
  *	A Automad object is the "main" object. It consists of many single Page objects, the Shared object and holds also additional data like the Filelist and Pagelist objects.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -314,11 +314,11 @@ class Automad {
 			// If page exists
 			return $this->collection[$url];
 	
-		} elseif (Parse::queryKey('search') && $url == AM_PAGE_RESULTS_URL) {
+		} elseif (Parse::query('search') && $url == AM_PAGE_RESULTS_URL) {
 	
 			// If not, but it has the URL of the search results page (settings) and has a query (!).
 			// An empty query for a results page doesn't make sense.
-			return $this->createPage(AM_PAGE_RESULTS_TEMPLATE, AM_PAGE_RESULTS_TITLE . ' / "' . htmlspecialchars(Parse::queryKey('search')) . '"');
+			return $this->createPage(AM_PAGE_RESULTS_TEMPLATE, AM_PAGE_RESULTS_TITLE . ' / "' . htmlspecialchars(Parse::query('search')) . '"');
 	
 		} else {
 	
