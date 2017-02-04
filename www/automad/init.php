@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -109,8 +109,8 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 		}
 	
 		// Render template
-		$Template = new Template($Automad);
-		$output = $Template->render();
+		$View = new View($Automad);
+		$output = $View->render();
 	
 		// Save output to cache if page actually exists.
 		if ($Automad->currentPageExists()) {
