@@ -42,7 +42,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- * 	The Template class holds all methods to render the current page using a template file.
+ * 	The View class holds all methods to render the current page using a template file.
  *	
  *	When render() is called, first the template file gets loaded.
  *	The output, basically the raw template HTML (including the generated HTML by PHP in the template file) 
@@ -61,7 +61,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - http://automad.org/license
  */
 
-class Template {
+class View {
 	
 	
 	/**
