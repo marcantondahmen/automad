@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  * 	The Toolbox class holds all methods to be used within the template files.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -734,7 +734,21 @@ class Toolbox {
 	
 	}
 	
+	
+	/**
+	 *      Merge passed key-value pairs ($options) with current query string.
+	 *
+	 *      @param array $options
+	 *      @return string The merged query string
+	 */
+	
+	public function queryStringMerge($options) {
 		
+		return http_build_query(array_merge($_GET, $options));
+		
+	}
+	
+	
 	/**
 	 * 	Place a search field with placeholder text.
 	 *
