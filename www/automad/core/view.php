@@ -223,13 +223,15 @@ class View {
 			
 		} else {
 			
-			if ($this->Runtime->isRuntimeVar($key)) {
-				// Runtime variable.
-				return $this->Runtime->get($key);
-			} else {
-				// Page data and system variables depending on the current context.
-				return $this->Automad->Context->get()->get($key);
-			}
+			// First try to get the value from the current Runtime object.
+			$value = $this->Runtime->get($key);
+			
+			// If $value is NULL (!), try the current context.
+			if (is_null($value)) {
+				$value = $this->Automad->Context->get()->get($key);
+			} 
+			
+			return $value;
 			
 		}
 			
