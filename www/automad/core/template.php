@@ -219,11 +219,8 @@ class Template {
 			
 			// Query string parameter.
 			$key = substr($key, 1);
+			return htmlspecialchars(Parse::query($key));
 			
-			if (isset($_GET[$key])) {
-				return htmlspecialchars($_GET[$key]);
-			} 
-	
 		} else {
 			
 			if ($this->Runtime->isRuntimeVar($key)) {
@@ -393,7 +390,7 @@ class Template {
 		} 
 		
 		// Process snippet.
-		$html = $this->processMarkup($snippet, $directory);
+		$html = $this->interpret($snippet, $directory);
 		
 		// Unshelve runtime data.
 		$this->Runtime->unshelve($runtimeShelf);
@@ -422,7 +419,7 @@ class Template {
 	 *	@return the processed string	
 	 */
 
-	private function processMarkup($str, $directory) {
+	private function interpret($str, $directory) {
 	
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
@@ -442,7 +439,7 @@ class Template {
 				
 					if (file_exists($file)) {
 						Debug::log($file, 'Including');	
-						return $this->processMarkup($this->Automad->loadTemplate($file), dirname($file));
+						return $this->interpret($this->Automad->loadTemplate($file), dirname($file));
 					} else {
 						Debug::log($file, 'File not found');
 					}
@@ -468,7 +465,7 @@ class Template {
 						
 						// Process a registered snippet.
 						Debug::log($call, 'Process registered snippet');
-						return $this->processMarkup($this->snippets[$call], $directory);
+						return $this->interpret($this->snippets[$call], $directory);
 						
 					} else if (method_exists($this->Toolbox, $call)) {
 						
@@ -536,7 +533,7 @@ class Template {
 						// Set context to $url.
 						$Context->set($Page);
 						// Parse snippet.
-						$html = $this->processMarkup($matches['withSnippet'], $directory);
+						$html = $this->interpret($matches['withSnippet'], $directory);
 						// Restore original context.
 						$Context->set($contextShelf);
 						return $html;
@@ -563,7 +560,7 @@ class Template {
 					Debug::log($url, 'With: No matching page or file found for');
 					
 					if (!empty($matches['withElseSnippet'])) {
-						return $this->processMarkup($matches['withElseSnippet'], $directory);
+						return $this->interpret($matches['withElseSnippet'], $directory);
 					}
 	
 				}
@@ -586,7 +583,7 @@ class Template {
 						$this->Runtime->set(AM_KEY_INDEX, $i);
 						// Parse snippet.
 						Debug::log($i, 'Processing snippet in loop for index');
-						$html .= $this->processMarkup($matches['forSnippet'], $directory);
+						$html .= $this->interpret($matches['forSnippet'], $directory);
 					}
 					
 					// Restore index.
@@ -633,7 +630,7 @@ class Template {
 							$this->Runtime->set(AM_KEY_INDEX, ++$i);
 							// Parse snippet.
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
-							$html .= $this->processMarkup($foreachSnippet, $directory);
+							$html .= $this->interpret($foreachSnippet, $directory);
 							// Restore pagelist configuration.
 							$this->Automad->getPagelist()->config($pagelistConfigCache);
 						}
@@ -652,7 +649,7 @@ class Template {
 							$this->Runtime->set(AM_KEY_FILTER, $filter);
 							// Set index. The index can be used as @{:i}.
 							$this->Runtime->set(AM_KEY_INDEX, ++$i);
-							$html .= $this->processMarkup($foreachSnippet, $directory);
+							$html .= $this->interpret($foreachSnippet, $directory);
 						}
 							
 					} else if (strtolower($matches['foreach']) == 'tags') {
@@ -666,7 +663,7 @@ class Template {
 							$this->Runtime->set(AM_KEY_TAG, $tag);							
 							// Set index. The index can be used as @{:i}.
 							$this->Runtime->set(AM_KEY_INDEX, ++$i);
-							$html .= $this->processMarkup($foreachSnippet, $directory);
+							$html .= $this->interpret($foreachSnippet, $directory);
 						}
 	
 					} else {
@@ -702,7 +699,7 @@ class Template {
 					// If the counter ($i) is 0 (false), process the "else" snippet.
 					if (!$i) {
 						Debug::log('foreach in ' . strtolower($matches['foreach']), 'No elements array. Processing else statement for');
-						$html .= $this->processMarkup($foreachElseSnippet, $directory);
+						$html .= $this->interpret($foreachElseSnippet, $directory);
 					}
 					
 					return $html;
@@ -812,12 +809,12 @@ class Template {
 					if ($result) {
 						
 						Debug::log('TRUE', 'Evaluating condition: if ' . $matches['if']);
-						return $this->processMarkup($ifSnippet, $directory);
+						return $this->interpret($ifSnippet, $directory);
 						
 					} else {
 						
 						Debug::log('FALSE', 'Evaluating condition: if ' . $matches['if']);
-						return $this->processMarkup($ifElseSnippet, $directory);
+						return $this->interpret($ifElseSnippet, $directory);
 						
 					}
 						
@@ -889,7 +886,7 @@ class Template {
 		Debug::log($this->template, 'Render template');
 		
 		$output = $this->Automad->loadTemplate($this->template);
-		$output = $this->processMarkup($output, dirname($this->template));
+		$output = $this->interpret($output, dirname($this->template));
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->resolveUrls($output);	
