@@ -477,7 +477,7 @@ sys_cache_clear: Clear Cache
 
 -
 
-sys_cache_clear_info: Clear the site cache to force a rescan for updated pages and files. 
+sys_cache_clear_info: Clearing the site cache forces a rescan for updated pages and files. 
 This action will not remove any page files or images from the cache directory.
 
 -
@@ -498,8 +498,10 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: In contrast to clearing the cache, purging will remove all files and images from the cache directory. 
-This will force a full rebuild of the image cache as well as clean up of all deleted pages.
+sys_cache_purge_info: In contrast to clearing the cache, purging will move all files and images from the **cache** directory into the system **temp** directory.   
+This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages.          
+On most systems the **temp** directory will be cleaned up by the system automatically from time to time or on reboot. 
+However, on some systems that directory has to be cleaned up manually.
 
 -
 
