@@ -207,6 +207,28 @@ class FileSystem {
 
 
 	/**
+	 *      Return the path of the temp dir if it is writable by the webserver.
+	 *      In any case, '/tmp' is the preferred dir, because of automatic cleanup at reboot.
+	 *
+	 *      @return string The path to the temp dir
+	 */
+	
+	public static function getTmpDir() {
+		
+		$tmp = '/tmp';
+		
+		if (is_writable($tmp)) {
+			return $tmp;
+		}
+		
+		if (is_writable(sys_get_temp_dir())) {
+			return rtrim(sys_get_temp_dir(), '/');
+		}
+		
+	}
+
+
+	/**
 	 *	Move a directory to a new location.
 	 *	The final path is composed of the parent directoy, the prefix and the title.
 	 *	In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
@@ -272,23 +294,22 @@ class FileSystem {
 	 *      @return string $tmp
 	 */
 
-	public function purgeCache() {
+	public static function purgeCache() {
 		
 		// Check if the temp dir is actually writable.
-		if (is_writable(sys_get_temp_dir()) && is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
+		if ($tmp = FileSystem::getTmpDir()) {
 			
-			$sysTmp = rtrim(sys_get_temp_dir(), '/');
-			$dir = '/automad-tmp';
-			$tmp = $sysTmp . $dir;
+			$tmpSubDir = '/automad-trash';
+			$trash = $tmp . $tmpSubDir;
 			$n = 0;
 			
 			// Create unique subdirectory in temp.
-			while (is_dir($tmp)) {
+			while (is_dir($trash)) {
 				$n++;
-				$tmp = $sysTmp . $dir . '-' . $n;
+				$trash = $tmp . $tmpSubDir . '-' . $n;
 			}
 			
-			if (mkdir($tmp)) {
+			if (mkdir($trash)) {
 			
 				// Collect items to be removed.
 				$cacheItems = array_merge(
@@ -297,13 +318,13 @@ class FileSystem {
 				);
 				
 				foreach ($cacheItems as $item) {
-					if (!rename($item, $tmp . '/' . basename($item))) {
+					if (!rename($item, $trash . '/' . basename($item))) {
 						return false;
 					}
 				}
 			
-				// Return $tmp on success.
-				return $tmp;
+				// Return $trash on success.
+				return $trash;
 				
 			}	
 			
