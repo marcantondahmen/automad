@@ -128,30 +128,24 @@ $this->element('header');
 				</form>
 				<div id="am-cache-actions">
 					<hr />
-					<ul class="uk-grid uk-grid-width-1-1 uk-grid-width-medium-1-2">
-						<li>
-							<!-- Clear Cache -->	
-							<form data-am-handler="clear_cache">
-								<button type="submit" class="uk-button uk-button-primary">
-									<i class="uk-icon-refresh"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_clear'); ?>
-								</button>
-							</form>	
-							<div class="uk-block">
-								<?php Text::e('sys_cache_clear_info'); ?>
-							</div>
-						</li>
-						<li>
-							<!-- Purge Cache -->
-							<form data-am-handler="purge_cache">
-								<button type="submit" class="uk-button uk-button-danger">
-									<i class="uk-icon-remove"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_purge'); ?>
-								</button>
-							</form>
-							<div class="uk-block">
-								<?php Text::e('sys_cache_purge_info'); ?>
-							</div>
-						</li>
-					</ul>
+					<!-- Clear Cache -->	
+					<?php Text::e('sys_cache_clear_info'); ?>
+					<form data-am-handler="clear_cache">
+						<button type="submit" class="uk-button uk-button-primary uk-button-large">
+							<i class="uk-icon-refresh"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_clear'); ?>
+						</button>
+					</form>	
+					<?php if ($tmp = FileSystem::getTmpDir()) { ?>
+					<hr />
+					<!-- Purge Cache -->
+					<?php Text::e('sys_cache_purge_info'); ?>
+					<form data-am-handler="purge_cache">
+						<button type="submit" class="uk-button uk-button-danger uk-button-large">
+							<span class="uk-badge"><?php echo $tmp; ?></span>
+							&nbsp;<?php Text::e('sys_cache_purge'); ?>
+						</button>
+					</form>
+					<?php } ?>
 				</div>
 			</li>
 			<!-- User -->
