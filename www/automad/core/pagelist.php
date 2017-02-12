@@ -239,8 +239,10 @@ class Pagelist {
 			$parent = $this->Context->get()->url;
 		}
 		
-		// Filter by type
-		switch ($this->type) {
+		// Filter by type.
+		// To allow mixed types (o and false) and not only strings, 
+		// $this->type has to be casted to a string!
+		switch ((string)$this->type) {
 			case 'children':
 				$Selection->filterByParentUrl($parent);
 				break;
@@ -256,7 +258,8 @@ class Pagelist {
 		}
 		
 		// Filter only if type is not 'breadcrumbs'.
-		if ($this->type != 'breadcrumbs') {
+		// Note that there must be a strict comparison, since the type could be (false or 0).
+		if ($this->type !== 'breadcrumbs') {
 			$Selection->filterByTemplate($this->template);
 			$Selection->filterByKeywords($this->search);
 		}
@@ -306,7 +309,9 @@ class Pagelist {
 		$Selection = new Selection($this->getRelevant());
 		
 		// Only sort, filter and limit the pagelist output if type is not 'breadcrumbs'.
-		if ($this->type != 'breadcrumbs') {
+		// Note the strict comparison to allow other types then strings as well as possible values
+		// for $this->type (0 or false).
+		if ($this->type !== 'breadcrumbs') {
 			
 			$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 			$Selection->filterByTag($this->filter);
