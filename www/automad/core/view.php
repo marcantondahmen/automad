@@ -509,7 +509,7 @@ class View {
 						$pagelistConfigCache = $this->Automad->getPagelist()->config();
 						$this->Automad->getPagelist()->config(array('excludeHidden' => false));
 						
-						$Selection = new Selection($this->Automad->getPagelist()->getPages());
+						$Selection = new Selection($this->Automad->getPagelist()->getPages(true));
 						$Selection->filterPrevAndNextToUrl($Context->get()->url);
 						$pages = $Selection->getSelection();
 						
@@ -900,6 +900,3 @@ class View {
 		
 	
 }
-
-
-?>
