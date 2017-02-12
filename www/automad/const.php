@@ -147,30 +147,6 @@ Config::set('AM_DEL_COMMENT_CLOSE', '#>');
 // EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
 
-// HTML
-Config::set('AM_HTML_CLASS_NAV', 'nav');
-Config::set('AM_HTML_CLASS_PREV', 'prev');
-Config::set('AM_HTML_CLASS_NEXT', 'next');
-Config::set('AM_HTML_CLASS_FILTER', 'filter');
-Config::set('AM_HTML_CLASS_TREE', 'tree');
-Config::set('AM_HTML_CLASS_IMAGE_WRAPPER', 'img-wrapper');
-Config::set('AM_HTML_CLASS_LIST', 'list');
-Config::set('AM_HTML_CLASS_LIST_HEADER', 'list-header');
-Config::set('AM_HTML_CLASS_LIST_ITEM', 'item');
-Config::set('AM_HTML_CLASS_LIST_ITEM_IMG', 'img-responsive');
-Config::set('AM_HTML_CLASS_LIST_ITEM_DATA', 'data');
-Config::set('AM_HTML_CLASS_SORT', 'sort');
-Config::set('AM_HTML_CLASS_HOME', 'home');
-Config::set('AM_HTML_CLASS_CURRENT', 'current');
-Config::set('AM_HTML_CLASS_CURRENT_PATH', 'currentPath');
-Config::set('AM_HTML_CLASS_BREADCRUMBS', 'breadcrumbs');
-Config::set('AM_HTML_CLASS_SEARCH', 'search');
-Config::set('AM_HTML_CLASS_SEARCH_INPUT', 'search-input');
-Config::set('AM_HTML_CLASS_SEARCH_BUTTON', 'search-button');
-Config::set('AM_HTML_STR_BREADCRUMB_SEPARATOR', '&gt;');
-Config::set('AM_HTML_TEXT_FILTER_ALL', 'All');
-Config::set('AM_HTML_LIST_MAX_CHARS', 150);
-
 // PARSE
 // Block separator - separates all key/value pairs
 // Must be used as the only string in a line within the template files.
@@ -214,6 +190,3 @@ Config::set('AM_KEY_NOW', ':now');
 
 // Version number 
 include AM_BASE_DIR . '/automad/version.php';
-
- 
-?>
