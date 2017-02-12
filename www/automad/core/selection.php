@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -51,8 +51,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	All the filter function directly modify $this->selection. After all modifications to that selection, 
  *	it can be returned once by $this->getSelection().
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -226,19 +226,21 @@ class Selection {
 	
 		
 	/**
-	 *	Filter $this->selection by a template, if $template is not empty.
+	 *	Filter $this->selection by template. A regex can be used as filter string.    
+	 *	For example passing 'page|home' as parameter will include all pages with a template that 
+	 *	contains 'page' or 'home' as substrings.
 	 *
 	 *	@param string $template
 	 */
 	
-	public function filterByTemplate($template) {
+	public function filterByTemplate($regex) {
 		
-		if ($template) {
+		if ($regex) {
 		
 			$filtered = array();
 		
 			foreach ($this->selection as $key => $Page) {
-				if ($Page->template == $template) {
+				if (preg_match('/(' . $regex . ')/i', $Page->template)) {
 					$filtered[$key] = $Page;
 				}
 			}
@@ -426,6 +428,3 @@ class Selection {
 	 
 	
 }
-
-
-?>
