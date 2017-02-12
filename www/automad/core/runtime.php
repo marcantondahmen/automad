@@ -110,7 +110,7 @@ class Runtime {
 					
 				case AM_KEY_PAGELIST_COUNT:
 					// The pagelist count represents the number of pages within the last defined pagelist. 
-					return count($this->Automad->getPagelist()->getPages());
+					return count($this->Automad->getPagelist()->getPages(true));
 					
 				case AM_KEY_CAPTION:
 					// Get the caption for the currently used ":file".
@@ -174,5 +174,3 @@ class Runtime {
 
 
 }
-
-?>
