@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	A Page object describes an entry in the collection of all pages in the Automad class.
  *	Basically the Automad object consists of many Page objects.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2014-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -296,19 +296,4 @@ class Page {
 	}
 	
 	
-	/**
-	 *	Check if page is the home page.
-	 *
-	 *	@return boolean
-	 */
-	
-	public function isHome() {
-		
-		return ($this->url == '/');
-		
-	}
-	
 } 
- 
- 
-?>
