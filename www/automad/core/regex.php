@@ -224,33 +224,43 @@ class Regex {
 
 
 	/**
-	 *	Return the regex for a piped string function of content variables.     
-	 *	Like: | name (parameters)
+	 *	Return the regex for a piped string function or math operation of content variables.     
+	 *	Like: 
+	 *	- "| name (parameters)" 
+	 *	- "| +5"
 	 *
 	 *	@param string $namedReferencePrefix
-	 *	@return The regex to match functions and their parameters
+	 *	@return string The regex to match functions and their parameters or math operations
 	 */
 	
 	public static function pipe($namedReferencePrefix = false) {
 		
 		if ($namedReferencePrefix) {
-			$name = 	'?P<' . $namedReferencePrefix . 'Name>';
+			$function = 	'?P<' . $namedReferencePrefix . 'Function>';
 			$parameters =	'?P<' . $namedReferencePrefix . 'Parameters>';
+			$operator = 	'?P<' . $namedReferencePrefix . 'Operator>';
+			$num = 		'?P<' . $namedReferencePrefix . 'Number>';
 		} else {
-			$name = '?:';
+			$function = '?:';
 			$parameters = '?:';
+			$operator = '?:';
+			$num = '?:';
 		}
 		
 		// Parameter pattern. Quoted strings (double or single quotes are allowed) or boolean/number values.
 		$regexParameter = '\s*(?:"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\w*)\s*';
 		
-		return	'\|' . 
+		return	'\|(' . 
 			// Function name.
-			'\s*(' . $name . '[\w\-]+)\s*' .
+			'\s*(' . $function . '[\w][\w\-]*)\s*' .
 			// Parameters. 
 			'(?:\(' . 
 				'(' . $parameters . $regexParameter . '(?:,' . $regexParameter . ')*?)' . 
-			'\)\s*)?';
+			'\)\s*)?' . 
+			'|' .
+			// Math.
+			'\s*(' . $operator . '[\+\-\*\/])\s*(' . $num . Regex::$number . ')\s*' . 
+			')';
 			
 	}
 	
@@ -287,6 +297,3 @@ class Regex {
 	
 	
 }
-
-
-?>
