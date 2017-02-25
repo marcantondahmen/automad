@@ -127,7 +127,22 @@ class String {
 		
 	}
 	
+	
+	/**
+	 *      Perform a regex match.
+	 *      
+	 *      @param string $str
+	 *      @param string $regex
+	 *      @return integer (1 or 0)
+	 */
+	
+	public static function match($str, $regex = '') {
 		
+		return preg_match('/' . $regex . '/', $str);
+		
+	}
+	
+	
 	/**
 	 *	Cleans up a string to be used as URL, directory or file name. 
 	 *	The returned string constists of the following characters: a-z, A-Z, - and optional dots (.)
