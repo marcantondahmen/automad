@@ -71,52 +71,18 @@ class Pagelist {
 	 */
 	
 	private $defaults = 	array(
-					'type' => false,
-					'parent' => false,
-					'template' => false,
+					'excludeHidden' => true,
 					'filter' => false,
+					'limit' => NULL,
+					'offset' => 0,
+					'page' => false,
+					'parent' => false,
 					'search' => false,
 					'sortItem' => false,
 					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER,
-					'excludeHidden' => true,
-					'offset' => 0,
-					'limit' => NULL
+					'template' => false,
+					'type' => false
 				);
-	
-	
-	/**
-	 *	The pagelist's type (all pages, children pages or related pages)
-	 */
-	
-	private $type;
-	
-	
-	/**
-	 *	In case $type is set to "children", the $parent URL can be used as well to change the parent from the current page to any page.
-	 */
-	
-	private $parent;
-	
-	
-	/**
-	 *	The template to filter by the pagelist.
-	 */
-	
-	private $template;
-	
-	
-	/**
-	 *	The current sortItem.
-	 */
-	
-	private $sortItem;
-	
-	
-	/**
-	 *	The current sortOrder.
-	 */
-	
-	private $sortOrder;
 	
 	
 	/**
@@ -127,10 +93,10 @@ class Pagelist {
 	
 	
 	/**
-	 * 	Defines the offset within the array of pages returned by getPages(). 
+	 *	The current filter.
 	 */
 	
-	private $offset;
+	private $filter;
 	
 	
 	/**
@@ -141,18 +107,60 @@ class Pagelist {
 	
 	
 	/**
-	 *	The current filter.
+	 * 	Defines the offset within the array of pages returned by getPages(). 
 	 */
 	
-	private $filter = false;
+	private $offset;
+	
+	
+	/**
+	 *      The current page of the pagination.
+	 */
+	
+	private $page;
+	
+	
+	/**
+	 *	In case $type is set to "children", the $parent URL can be used as well to change the parent from the current page to any page.
+	 */
+	
+	private $parent;
 	
 	
 	/**
 	 *	The search string to filter pages.
 	 */
 	
-	private $search = false;
-		
+	private $search;
+	
+	
+	/**
+	 *	The current sortItem.
+	 */
+	
+	private $sortItem;	
+	
+	
+	/**
+	 *	The current sortOrder.
+	 */
+	
+	private $sortOrder;	
+	
+	
+	/**
+	 *	The template to filter by the pagelist.
+	 */
+	
+	private $template;
+	
+	
+	/**
+	 *	The pagelist's type (all pages, children pages or related pages)
+	 */
+	
+	private $type;
+	
 	
 	/**
 	 *	Initialize the Pagelist.
@@ -175,17 +183,18 @@ class Pagelist {
 	 *	To just get the config, call the method without passing $options.
 	 *
 	 *      Options:
-	 *      - type: false
-	 *      - parent: false
-	 *      - template: false
+	 *      - excludeHidden: true
 	 *      - filter: false
+	 *      - limit: NULL (limit the pagelist array returned by getPages())
+	 *      - offset: 0 (offset the pagelist array returned by getPages())
+	 *      - page: false (the current page in the pagination - to be used with the limit parameter)
+	 *      - parent: false
 	 *      - search: false
 	 *      - sortItem: false
 	 *      - sortOrder: AM_LIST_DEFAULT_SORT_ORDER
-	 *      - excludeHidden: true
-	 *      - offset: 0 (offset the pagelist array returned by getPages())
-	 *      - limit: NULL (limit the pagelist array returned by getPages())
-	 *	
+	 *      - template: false
+	 *      - type: false
+	 *      
 	 *	@param array $options
 	 *	@return array Updated $options
 	 */
@@ -316,10 +325,18 @@ class Pagelist {
 			$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
 			$Selection->filterByTag($this->filter);
 			
-			// Set limit & offset to the config values if $ignoreLimit is false and $type is not 'breadcrumbs'.
-			if (!$ignoreLimit) {
-				$offset = $this->offset;
+			// Set limit & offset to the config values if $ignoreLimit is false, $this->limit is not false and $type is not 'breadcrumbs'.
+			if (!$ignoreLimit && $this->limit) {
+				
 				$limit = $this->limit;
+				
+				// If $this->page is not false, calculate the offset by the current pagination page: (page - 1) * limit.
+				if ($this->page) {
+					$offset = ($this->page - 1) * $this->limit;
+				} else {
+					$offset = $this->offset;
+				}
+				
 			}
 			
 		}
@@ -331,6 +348,23 @@ class Pagelist {
 		return $pages;
 			
 	}
-
 	
+	
+	/**
+	 *      Calculate the last page of the pagination.
+	 *      
+	 *      @return integer The last page number of the current pagelist.
+	 */
+	
+	public function getPaginationLast() {
+		
+		if ($this->limit) {
+			return ceil(count($this->getPages(true)) / $this->limit);
+		} else {
+			return 1;
+		}
+			
+	}
+	
+
 }
