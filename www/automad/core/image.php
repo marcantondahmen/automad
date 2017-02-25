@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,8 +44,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Image object represents a resized (and cropped) copy of a given image.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -127,14 +127,7 @@ class Image {
 	
 	private $fileFullPath;
 	
-	
-	/**
-	 *	The image's description, read from the source image's exif data.
-	 */
-	
-	public $description;
-	
-	
+		
 	/**
 	 *	The width of the generated image.
 	 */
@@ -165,7 +158,6 @@ class Image {
 				$this->originalWidth = $getimagesize[0];
 				$this->originalHeight = $getimagesize[1];	
 				$this->type = $getimagesize['mime'];
-				$this->description = $this->getDescription();
 				$this->crop = $crop;
 		
 				if ($requestedWidth) {
@@ -350,29 +342,7 @@ class Image {
 		
 	}
 	
-	
-	/**
-	 *	Return the description from the JPG's exif data.
-	 *
-	 *	@return The description string.
-	 */
-	
-	private function getDescription() {
 		
-		if ($this->type == 'image/jpeg') {
-			$exif = @exif_read_data($this->originalFile);
-			if (array_key_exists('ImageDescription', $exif)) {
-				return $exif['ImageDescription'];
-			} else {
-				return '';
-			}
-		} else {
-			return '';
-		}
-	
-	}
-	
-	
 	/**
 	 *	Determine the corresponding image file to a source file based on a md5 hash.
 	 *	That hash is based on the source image's path, mtime, the new width and height and the cropping parameter.
@@ -386,6 +356,10 @@ class Image {
 	private function getImageCacheFilePath() {
 		
 		$extension = strtolower(pathinfo($this->originalFile, PATHINFO_EXTENSION));
+		
+		if ($extension == 'jpeg') {
+			$extension = 'jpg';
+		}
 		
 		// Create unique filename in the cache folder:
 		// The hash makes it possible to clearly identify an unchanged file in the cache, 
@@ -420,6 +394,3 @@ class Image {
 		
 	
 }
-
-
-?>
