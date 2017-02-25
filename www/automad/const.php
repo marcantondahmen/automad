@@ -186,6 +186,7 @@ Config::set('AM_KEY_CAPTION', ':caption');
 Config::set('AM_KEY_INDEX', ':i');
 Config::set('AM_KEY_FILELIST_COUNT', ':filelist-count');
 Config::set('AM_KEY_PAGELIST_COUNT', ':pagelist-count');
+Config::set('AM_KEY_PAGINATION_LAST', ':pagination-last');
 Config::set('AM_KEY_NOW', ':now');
 
 // Version number 
