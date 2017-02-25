@@ -80,7 +80,7 @@ class String {
 	 *	@return The string or the default value.
 	 */
 
-	public static function defaultValue($str, $defaultValue) {
+	public static function def($str, $defaultValue) {
 				
 		if (trim($str) === '') {
 			$str = $defaultValue;
@@ -211,6 +211,3 @@ class String {
 		
 	
 }
-
-
-?>
