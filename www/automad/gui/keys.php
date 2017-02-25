@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Keys class provides all methods to search all kind of content variables (keys of the data array) used in templates. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -89,8 +89,6 @@ class Keys {
 	
 	public function inCurrentTemplate($file = false) {
 		
-		$keys = array();
-		
 		// Since this is a recursive method, initially there should not be any file defined and the template from the requested page should be used instead.
 		if (!$file) {
 			$Page = $this->Automad->getRequestedPage();
@@ -100,29 +98,21 @@ class Keys {
 		
 		if (file_exists($file)) {
 			
-			$directory = dirname($file);
-
-			// Match markup to get includes and variables.
+			// Find all variable keys in the template file.
+			$content = file_get_contents($file);
+			// Note the second parameter in Regex::variable() is true to only match variable keys in text files.
+			preg_match_all('/' . Core\Regex::variable('var', true) . '/is', $content, $matches);
+			$keys = $matches['varName'];
+			
+			// Match markup to get includes recursively.
 			preg_match_all('/' . Core\Regex::markup() . '/is', $this->Automad->loadTemplate($file), $matches, PREG_SET_ORDER);
 		
 			foreach ($matches as $match) {
 			
-				// Variable key.
-				if (!empty($match['var'])) {
-				
-					// Note the second parameter in Regex::variable() is true to only match variables in text files.
-					preg_match('/' . Core\Regex::variable('var', true) . '/s', $match['var'], $var);
-				
-					if (!empty($var)) {
-						$keys[] = $var['varName'];
-					}
-				
-				}
-			
 				// Recursive include.
 				if (!empty($match['file'])) {
 	
-					$include = $directory . '/' . $match['file'];
+					$include = dirname($file) . '/' . $match['file'];
 
 					if (file_exists($include)) {
 						$keys = array_merge($keys, $this->inCurrentTemplate($include));
@@ -202,6 +192,3 @@ class Keys {
 	
 	
 }
-
-
-?>
