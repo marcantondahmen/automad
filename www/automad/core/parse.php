@@ -55,7 +55,7 @@ class Parse {
 	/**
 	 *	Return an array with the allowed file types.
 	 *
-	 *	@return Array of file types
+	 *	@return array An array of file types
 	 */
 
 	public static function allowedFileTypes() {
@@ -78,7 +78,7 @@ class Parse {
 	 *	The caption filename is build out of the actual filename with the appended ".caption" extension, like "image.jpg.caption".
 	 *	
 	 *	@param string $file
-	 *	@return the caption string
+	 *	@return string The caption string
 	 */
 	
 	public static function caption($file) {
@@ -101,7 +101,7 @@ class Parse {
 	 *	@param string $str
 	 *	@param object $Page (current page)
 	 *	@param boolean $stripBaseDir
-	 *	@return Array with resolved file paths
+	 *	@return array An array with resolved file paths
 	 */
 
 	public static function fileDeclaration($str, $Page, $stripBaseDir = false) {
@@ -166,7 +166,7 @@ class Parse {
 	 *	Parse a (dirty) JSON string and return an associative, filtered array
 	 *
 	 *	@param string $str
-	 *	@return $options - associative array
+	 *	@return array $options - associative array
 	 */
 
 	public static function jsonOptions($str) {
@@ -230,7 +230,7 @@ class Parse {
 	/**
 	 *	Return the URL of the currently requested page.
 	 *	
-	 *	@return The requested URL
+	 *	@return string The requested URL
 	 */
 
 	public static function request() {
@@ -357,6 +357,3 @@ class Parse {
  
 
 }
- 
- 
-?>
