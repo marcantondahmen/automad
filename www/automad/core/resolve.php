@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -48,8 +48,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	For example a relative file name to an image wouldn't be a valid link, since the URL of the page is not
  *	the real file system path to the page's files.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2014 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -66,7 +66,7 @@ class Resolve {
 	 *
 	 *	@param string $pagePath
 	 *	@param string $filePath
-	 *	@return The resolved file path 
+	 *	@return string The resolved file path 
 	 */
 
 	public static function filePath($pagePath, $filePath) {
@@ -95,7 +95,7 @@ class Resolve {
 	 *	
 	 *	@param object $Page
 	 *	@param string $url
-	 *	@return The resolved URL
+	 *	@return string The resolved URL
 	 */
 
 	public static function url($Page, $url) {
@@ -167,6 +167,3 @@ class Resolve {
 
 	
 }
-
-
-?>
