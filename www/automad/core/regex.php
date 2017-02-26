@@ -98,7 +98,7 @@ class Regex {
 	 *	-	!@{var}
 	 *	
 	 *	@param string $namedReferencePrefix
-	 *	@return the regex
+	 *	@return string The regex
 	 */
 	
 	public static function expression($namedReferencePrefix = false) {
@@ -125,7 +125,7 @@ class Regex {
 	/**
 	 *	Return the regex to match any kind of Automad markup such as variables, toolbox methods, includes, extensions, snippets, loops and conditions.
 	 *
-	 *	@return The markup regex
+	 *	@return string The markup regex
 	 */
 	
 	public static function markup() {
@@ -201,7 +201,7 @@ class Regex {
 	 *	-	1.5
 	 *	
 	 *	@param string $namedReferencePrefix
-	 *	@return the regex
+	 *	@return string The regex
 	 */
 
 	public static function operand($namedReferencePrefix = false) {
@@ -272,7 +272,7 @@ class Regex {
 	 *
 	 *	@param string $namedReferencePrefix
 	 *	@param boolean $textFileOnly
-	 *	@return The regex to match variables.
+	 *	@return string The regex to match variables.
 	 */
 	
 	public static function variable($namedReferencePrefix = false, $textFileOnly = false) {
