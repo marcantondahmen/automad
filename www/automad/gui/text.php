@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Text class provides all methods related to the text modules used in the GUI. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -94,7 +94,7 @@ class Text {
 	 *	Return the requested text module.
 	 *
 	 *	@param string $key
-	 *	@return The requested text module
+	 *	@return string The requested text module
 	 */
 	
 	public static function get($key) {
@@ -107,6 +107,3 @@ class Text {
 	
 	
 }
-
-
-?>
