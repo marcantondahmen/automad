@@ -144,6 +144,11 @@ class Image {
 	
 	/**
 	 *	The constructor defines the main object properties from the given parameters and initiates the main methods.
+	 *
+	 *      @param string $originalFile    
+	 *      @param integer $requestedWidth  
+	 *      @param integer $requestedHeight 
+	 *      @param boolean $crop            
 	 */
 	
 	public function __construct($originalFile = false, $requestedWidth = false, $requestedHeight = false, $crop = false) {
@@ -350,7 +355,7 @@ class Image {
 	 *	Since the mtime is part of the hash, also any modification to the source image will be reflected in a different name.
 	 *	For each size and cropping setting, a unique filename will be returned, to clearly identify that setting.
 	 *
-	 *	@return the matching filename for the requested source image, based on its parameters
+	 *	@return string The matching filename for the requested source image, based on its parameters
 	 */
 	
 	private function getImageCacheFilePath() {
