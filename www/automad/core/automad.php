@@ -264,7 +264,7 @@ class Automad {
 	/**
 	 * 	Define properties to be cached.
 	 *
-	 *	@return $itemsToCache
+	 *	@return array $itemsToCache
 	 */
 	
 	public function __sleep() {
@@ -304,27 +304,13 @@ class Automad {
 	 * 	If existing, return the page object for the passed relative URL, else return error page.
 	 * 
 	 *	@param string $url
-	 *	@return object $page
+	 *	@return object $page or NULL
 	 */ 
 
-	public function getPageByUrl($url) {
+	public function getPage($url) {
 		
 		if (array_key_exists($url, $this->collection)) {
-			
-			// If page exists
 			return $this->collection[$url];
-	
-		} elseif (Parse::query('search') && $url == AM_PAGE_RESULTS_URL) {
-	
-			// If not, but it has the URL of the search results page (settings) and has a query (!).
-			// An empty query for a results page doesn't make sense.
-			return $this->createPage(AM_PAGE_RESULTS_TEMPLATE, AM_PAGE_RESULTS_TITLE . ' / "' . htmlspecialchars(Parse::query('search')) . '"');
-	
-		} else {
-	
-			// Else return error page
-			return $this->createPage(AM_PAGE_NOT_FOUND_TEMPLATE, AM_PAGE_NOT_FOUND_TITLE);
-	
 		}
 		
 	} 
@@ -333,16 +319,22 @@ class Automad {
 	/**
 	 * 	Return the page object for the requested page.
 	 *
-	 *	@return object $currentPage
+	 *	@return object A page object or NULL
 	 */ 
 	
-	public function getRequestedPage() {
+	private function getRequestedPage() {
 		
 		// Check whether the GUI is requesting the currently edited page.
-		if (AM_REQUEST == AM_PAGE_GUI && isset($_POST['url'])) {
-			return $this->getPageByUrl($_POST['url']);
+		if (AM_REQUEST == AM_PAGE_GUI) {
+			if (isset($_POST['url'])) {
+				return $this->getPage($_POST['url']);
+			}
 		} else {
-			return $this->getPageByUrl(AM_REQUEST);
+			if ($Page = $this->getPage(AM_REQUEST)) {
+				return $Page;
+			} else {
+				return $this->pageNotFound();
+			}
 		}
 				
 	} 
@@ -372,7 +364,7 @@ class Automad {
 	/**
 	 *	Return Automad's instance of the Filelist class and create instance when accessed for the first time.
 	 *
-	 *	@return Filelist object
+	 *	@return object Filelist object
 	 */
 
 	public function getFilelist() {
@@ -389,7 +381,7 @@ class Automad {
 	/**
 	 *	Return Automad's instance of the Pagelist class and create instance when accessed for the first time.
 	 *
-	 *	@return Pagelist object
+	 *	@return object Pagelist object
 	 */
 	
 	public function getPagelist() {
@@ -402,31 +394,11 @@ class Automad {
 		
 	}
 
-	
+		
 	/**
-	 * 	Create a temporary page on the fly (for example error page or search results).
+	 *	Tests wheter the currently requested page actually exists and is not an error page.
 	 *
-	 *	@param string $template
-	 *	@param string $title
-	 *	@return temporary page object
-	 */
-	
-	private function createPage($template, $title) {
-		
-		$data[AM_KEY_TITLE] = $title;
-		$data[AM_KEY_TEMPLATE] = $template;
-		$data[AM_KEY_LEVEL] = 0;
-		$data[AM_KEY_PARENT] = '';
-		
-		return new Page($data, $this->Shared);
-		
-	}
-	
-	
-	/**
-	 *	Tests wheter the currently requested page actually exists.
-	 *
-	 *	@return true if existing
+	 *	@return boolean True if existing
 	 */
 	
 	public function currentPageExists() {
@@ -442,13 +414,13 @@ class Automad {
 	 *	Load and buffer a template file and return its content as string. The Automad object gets passed as parameter to be available for all plain PHP within the included file.
 	 *	This is basically the base method to load a template without parsing the Automad markup. It just gets the parsed PHP content.    
 	 *	
-	 *	Before returning the markup, the old Automad template syntax gets translated into the new syntax and all comments {* ... *} get stripped.
+	 *	Before returning the markup, all comments <# ... #> get stripped.
 	 *
 	 *	Note that even when the it is possible to use plain PHP in a template file, all that code will be parsed first when buffering, before any of the Automad markup is getting parsed.
 	 *	That also means, that is not possible to make plain PHP code really interact with any of the Automad placeholder markup.
 	 *
 	 *	@param string $file
-	 *	@return the buffered output 
+	 *	@return string The buffered output 
 	 */
 
 	public function loadTemplate($file) {
@@ -465,8 +437,27 @@ class Automad {
 				
 	}
 
+
+	/**
+	 *      Create a temporary page for a missing page and send a 404 header.
+	 *      
+	 *      @return object The error page
+	 */
+	
+	private function pageNotFound() {
+		
+		header('HTTP/1.0 404 Not Found');
+		
+		if (file_exists(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->Shared->get(AM_KEY_THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
+			$data[AM_KEY_TEMPLATE] = AM_PAGE_NOT_FOUND_TEMPLATE;
+			$data[AM_KEY_LEVEL] = 0;
+			$data[AM_KEY_PARENT] = '';
+			return new Page($data, $this->Shared);
+		} else {
+			exit('<h1>Page not found!</h1>');
+		}
+		
+	}
+
 	 
 }
-
-
-?>
