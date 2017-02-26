@@ -183,7 +183,7 @@ class Page {
 	 *	Some data (:mtime, :basename ...) should only be generated when requested out of performance reasons.
 	 *
 	 *	@param string $key
-	 *	@return the requested value
+	 *	@return string The requested value
 	 */
 	
 	public function get($key) {
@@ -226,7 +226,7 @@ class Page {
 	 *	Get the modification time/date of the page. 
 	 *	To determine to correct mtime, the page directory mtime (to check if any files got added) and the page data file mtime will be checked and the highest value will be returned.
 	 * 
-	 *	@return the max mtime (directory and data file)
+	 *	@return string The max mtime (directory and data file)
 	 */
 	
 	public function getMtime() {
@@ -248,7 +248,7 @@ class Page {
 	/**
 	 * 	Return the template of the page.
 	 *
-	 *	@return The full file system path of the template file.
+	 *	@return string The full file system path of the template file.
 	 */
 	
 	public function getTemplate() {
