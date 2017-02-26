@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -74,11 +74,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	- class:	Example2
  *	- method:	Example2
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2016 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
-
 
 class Extension {
 	
@@ -202,7 +201,7 @@ class Extension {
 	/**
 	 *	Return an array of assets of the extension.
 	 *
-	 *	@return the array of files
+	 *	@return array The array of files
 	 */
 	
 	public function getAssets() {
@@ -215,7 +214,7 @@ class Extension {
 	/**
 	 *	Return the output of the extension.
 	 *
-	 *	@return the output returned by the extension
+	 *	@return string The output returned by the extension
 	 */
 	
 	public function getOutput() {
@@ -226,6 +225,3 @@ class Extension {
 	
 		
 }
-
-
-?>
