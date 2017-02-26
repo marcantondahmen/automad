@@ -101,7 +101,7 @@ class Filelist {
 	 *	Note that the returned filelist depends on the current context.    
 	 *	Changing the context will change the filelist as long as the glob pattern is relative.
 	 *
-	 *	@return The array of matched files.
+	 *	@return array The array of matched files.
 	 */
 	
 	public function getFiles() {
