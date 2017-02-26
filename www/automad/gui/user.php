@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The User class provides all methods related to a user account. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -55,7 +55,7 @@ class User {
 	/**
 	 *	Change the password of the currently logged in user based on $_POST.
 	 *
-	 *	@return $output (error/success)
+	 *	@return array $output (error/success)
 	 */
 	
 	public static function changePassword() {
@@ -119,7 +119,7 @@ class User {
 	/**
 	 *	Return the currently logged in user.
 	 * 
-	 *	@return username
+	 *	@return string Username
 	 */
 
 	public static function get() {
@@ -134,7 +134,7 @@ class User {
 	/**
 	 *	Verify login information based on $_POST.
 	 *
-	 *	@return Error message in case of an error.
+	 *	@return string Error message in case of an error.
 	 */
 	
 	public static function login() {
@@ -174,7 +174,7 @@ class User {
 	/**
 	 *	Log out user.
 	 *
-	 *	@return true on success.
+	 *	@return boolean true on success
 	 */
 	
 	public static function logout() {
@@ -192,6 +192,3 @@ class User {
 	
 	
 }
-
-
-?>
