@@ -141,7 +141,7 @@ class Cache {
 	 *	This enforced rebuilt is needed to avoid issues when deploying a site via tools like rsync and therefore possibly having inconsistent timestamps.
 	 *	The lifetime therefore makes sure, that - after a certain period - the page gets rendered correctly in all cases.
 	 *
-	 *	@return boolean - true, if the cached version is valid.
+	 *	@return boolean True, if the cached version is valid.
 	 */
 
 	public function pageCacheIsApproved() {
@@ -260,7 +260,7 @@ class Cache {
 	 *	To avoid issues with very deep structures, an md5 hash of the requested URL (incl. query string) will be used as
 	 *	an unique identifier.
 	 *
-	 *	@return The determined file name of the matching cached version of the visited page.
+	 *	@return string The determined file name of the matching cached version of the visited page.
 	 */
 	
 	private function getPageCacheFilePath() {
@@ -297,7 +297,7 @@ class Cache {
 	 *	That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.
 	 *	To be efficient under heavy traffic, the Site-mTime only gets re-determined after a certain delay.
 	 *
-	 *	@return The latest found mtime, which equal basically the site's modification time.
+	 *	@return number The latest found mtime, which equal basically the site's modification time.
 	 */
 	
 	public function getSiteMTime() {
@@ -388,7 +388,7 @@ class Cache {
 	/**
 	 *	Read the rendered page from the cached version.
 	 *
-	 *	@return The full cached HTML of the page. 
+	 *	@return string The full cached HTML of the page. 
 	 */
 	
 	public function readPageFromCache() {
@@ -402,7 +402,7 @@ class Cache {
 	/**
 	 *	Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE and update the context to the requested page.
 	 *
-	 *	@return Automad object
+	 *	@return object Automad object
 	 */
 	
 	public function readAutomadObjectFromCache() {
@@ -475,6 +475,3 @@ class Cache {
 	
 	
 }
-
-
-?>
