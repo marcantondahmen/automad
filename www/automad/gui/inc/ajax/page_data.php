@@ -61,12 +61,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-// Verify page's URL - The URL must exist in the site's collection.
-if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
+// Verify page's URL - The page must exist in the site's collection.
+if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 
-	// The currently edited page.
+	// The URL of the currently edited page.
 	$url = $_POST['url'];
-	$Page = $this->collection[$url];
 	
 	// If the posted form contains any "data", save the form's data to the page file.
 	if (isset($_POST['data'])) {
