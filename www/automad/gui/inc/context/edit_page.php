@@ -47,18 +47,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-if (array_key_exists(Core\Parse::queryKey('url'), $this->collection)) {
-	
-	$url = Core\Parse::queryKey('url');
-	$Page = $this->collection[$url];
-	$data = Core\Parse::textFile($this->Content->getPageFilePath($Page));
+$url = Core\Parse::query('url');
 
+
+if ($Page = $this->Automad->getPage($url)) {
 	$this->guiTitle = $this->guiTitle . ' / ' . $Page->get(AM_KEY_TITLE);
-
-} else {
-	
-	$Page = false;
-
 }
 
 
@@ -99,7 +92,7 @@ $this->element('header');
 					// Move Page.
 					'<a href="#am-move-page-modal" data-uk-modal><i class="uk-icon-arrows"></i>&nbsp;&nbsp;' . Text::get('btn_move_page') . '</a>',
 					// Delete Page.
-					'<a href="#" data-am-submit="delete_page"><i class="uk-icon-trash"></i>&nbsp;&nbsp;' . Text::get('btn_delete_page') . '</a>' .
+					'<a href="#" data-am-submit="delete_page"><i class="uk-icon-remove"></i>&nbsp;&nbsp;' . Text::get('btn_delete_page') . '</a>' .
 					'<form data-am-handler="delete_page" data-am-url="' . $url . '" data-am-confirm="' . Text::get('confirm_delete_page') . '">' .
 					'<input type="hidden" name="title" value="' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '" />' .
 					'</form>'
@@ -161,7 +154,7 @@ $this->element('header');
 		<?php } else { ?>
 		
 		<div class="uk-alert uk-alert-danger uk-margin-large-top">
-			<?php Text::e('error_page_not_found'); ?><br /><strong><?php echo Core\Parse::queryKey('url'); ?></strong>
+			<?php Text::e('error_page_not_found'); ?><br /><strong><?php echo Core\Parse::query('url'); ?></strong>
 		</div>
 			
 		<?php } ?>
