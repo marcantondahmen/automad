@@ -133,10 +133,10 @@ class View {
 	
 
 	/**
-	 *	Add Meta tags to the head of $str.
+	 *	Add meta tags to the head of $str.
 	 *
 	 *	@param string $str
-	 *	@return $str
+	 *	@return string The meta tag
 	 */
 	
 	private function addMetaTags($str) {
@@ -152,7 +152,7 @@ class View {
 	 * 	Create the HTML tags for each file in $this->extensionAssets and prepend them to the closing </head> tag.
 	 *	
 	 *	@param string $str
-	 *	@return $str
+	 *	@return string The processed string
 	 */
 	
 	private function createExtensionAssetTags($str) {
@@ -210,7 +210,7 @@ class View {
 	 *	Get the value of a given variable key depending on the current context - either from the page data, the system variables or from the $_GET array.
 	 *
 	 *	@param string $key
-	 *	@return The value
+	 *	@return string The value
 	 */
 	
 	private function getValue($key) {
@@ -241,8 +241,8 @@ class View {
 	/**
 	 * 	Preprocess recursive statements to identify the top-level (outer) statements within a parsed string. 
 	 *
-	 *	@param $str
-	 *	@return The preprocessed $str where all outer opening statement delimiters get an additional marker appended.
+	 *	@param string $str
+	 *	@return string The preprocessed $str where all outer opening statement delimiters get an additional marker appended.
 	 */
 
 	private function preProcessWrappingStatements($str) {
@@ -296,7 +296,7 @@ class View {
 	 *
 	 *	@param string $str
 	 *	@param boolean $isJsonString 
-	 *	@return The processed $str
+	 *	@return string The processed $str
 	 */
 
 	private function processContent($str, $isJsonString = false) {
@@ -403,22 +403,40 @@ class View {
 
 
 	/**
-	 *	Process the full markup - variables, includes, methods and other constructs.
-	 *
+	 *	Process the full markup - variables, includes, methods and other constructs.   
+	 *       
 	 * 	Replace variable keys with its values, call Toolbox methods, call Extensions, execute statements (with, loops and conditions) and include template elements recursively.     
 	 *	For example <@ file.php @>, <@ method { options } @>, <@ foreach in ... @> ... <@ end @> or <@ if @{var} @> ... <@ else @> ... <@ end @>.    
-	 *
-	 *	The "with" statement makes data associated with a specified page or a file accessible.    
-	 *	With a page, the context changes to the given page, with files, the file's system variables (:file, :basename and :caption) can be used.      
-	 *
-	 *	Inside a "foreach in pagelist" loop, the context changes with each iteration and the active page in the loop becomes the current page.    
-	 *	Therefore all variables of the active page in the loop can be accessed using the standard template syntax like $( var ).    
-	 *	Inside other loops, the following system variables can be used within a snippet: @{:filter}, @{:tag}, @{:file} and @{:basename}.  
-	 *	All loops also generate an index @{:i} for each elements in the array. 
+	 *        
+	 *	With and foreach:   
+	 *         
+	 *	Pages:   
+	 *	Within a <@ with "/url" @> statement or a <@ foreach in pagelist @> loop the context changes (with each iteration in loops)
+	 *	and the active page becomes the current page. Therefore all variables of that active page inside the with statements or loop
+	 *	can simply be accessed using the standard template syntax like @{var}.    
+	 *         
+	 *      Files:   
+	 *	The <@ with "image.jpg" {options} @> statement and the <@ foreach in filelist {options} @> or <@ foreach in "*.jpg" {options} @> loop
+	 *	make data associated with files accessible. The following runtime vars can be used inside:    
+	 *	- @{:basename}   
+	 *	- @{:file}   
+	 *	- @{:width}   
+	 *	- @{:height}   
+	 *	- @{:file-resized}   
+	 *	- @{:width-resized}   
+	 *	- @{:height-resized}   
+	 *	- @{:caption}   
+	 *       
+	 *      Tags/Filters:    
+	 *	Inside other foreach loops, the following runtime variables can be used within a snippet:   
+	 *	- @{:filter}  
+	 *	- @{:tag}  
+	 *		 
+	 *	All loops also generate an index @{:i} for each elements in the array.   
 	 *
 	 *	@param string $str - The string to be parsed
 	 *	@param string $directory - The directory of the currently included file/template
-	 *	@return the processed string	
+	 *	@return string The interpreted string	
 	 */
 
 	private function interpret($str, $directory) {
@@ -523,8 +541,10 @@ class View {
 					}
 				
 					// Any existing page.
+					// To avoid overriding $Page (next/prev), it has to be tested explicitly whether
+					// the URL actually exists.
 					if (array_key_exists($url, $this->Automad->getCollection())) {
-						$Page = $this->Automad->getPageByUrl($url);
+						$Page = $this->Automad->getPage($url);
 					}
 						
 					// Process snippet for $Page.
@@ -831,7 +851,7 @@ class View {
 	 *	Find all links/URLs in $str and resolve the matches according to their type.
 	 *	
 	 *	@param string $str
-	 *	@return $str
+	 *	@return string The processed string
 	 */
 	
 	private function resolveUrls($str) {
@@ -857,7 +877,7 @@ class View {
 	 *	Obfuscate all eMail addresses matched in $str.
 	 *	
 	 *	@param string $str
-	 *	@return $str
+	 *	@return string The processed string
 	 */
 	
 	private function obfuscateEmails($str) {
@@ -880,7 +900,7 @@ class View {
 	/**
 	 * 	Render the current page.
 	 *
-	 *	@return The fully rendered HTML for the current page.
+	 *	@return string The fully rendered HTML for the current page.
 	 */
 	
 	public function render() {
