@@ -62,7 +62,7 @@ class String {
 	 *
 	 *	@param string $date
 	 *	@param string $format
-	 *	@return the formatted date
+	 *	@return string The formatted date
 	 */
 
 	public static function dateFormat($date, $format) {
@@ -73,11 +73,11 @@ class String {
 
 
 	/**
-	 *	Set a default value for $str.
+	 *	Set a default value for $str in case $str is empty.
 	 *	
 	 *	@param string $str
 	 *	@param string $default
-	 *	@return The string or the default value.
+	 *	@return string The default value
 	 */
 
 	public static function def($str, $defaultValue) {
@@ -95,7 +95,7 @@ class String {
 	 * 	Escape a string to be used within a JSON string.
 	 *	
 	 *	@param string $str
-	 *	@return Escaped, JSON-safe string
+	 *	@return string Escaped, JSON-safe string
 	 */
 
 	public static function jsonEscape($str) {
@@ -113,7 +113,7 @@ class String {
 	 *
 	 *	@param string $str
 	 *	@param boolean $multilineOnly
-	 *	@return The parsed string
+	 *	@return string The parsed string
 	 */
 	
 	public static function markdown($str, $multilineOnly = false) {
@@ -133,7 +133,7 @@ class String {
 	 *      
 	 *      @param string $str
 	 *      @param string $regex
-	 *      @return integer (1 or 0)
+	 *      @return number 1 or 0
 	 */
 	
 	public static function match($str, $regex = '') {
@@ -154,7 +154,7 @@ class String {
 	 *	@param string $str
 	 *	@param boolean $removeDots
 	 *	@param number $maxChars	
-	 *	@return the sanitized string
+	 *	@return string The sanitized string
 	 */
 	
 	public static function sanitize($str, $removeDots = false, $maxChars = 100) {
@@ -188,7 +188,7 @@ class String {
 	 *	@param string $str
 	 *	@param number $maxChars
 	 *	@param string $ellipsis
-	 *	@return The shortened string
+	 *	@return string The shortened string
 	 */
 	
 	public static function shorten($str, $maxChars, $ellipsis = ' ...') {
@@ -215,7 +215,7 @@ class String {
 	 *	Removes all HTML and Markdown (!) tags.
 	 *
 	 *	@param string $str
-	 *	@return The clean string
+	 *	@return string The clean string
 	 */
 	
 	public static function stripTags($str) {
