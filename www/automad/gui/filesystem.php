@@ -58,7 +58,7 @@ class FileSystem {
 	 *      
 	 *      @param string $path
 	 *      @param string $suffix
-	 *      @return the path with appended suffix.
+	 *      @return string The path with appended suffix
 	 */
 	
 	public static function appendSuffixToPath($path, $suffix) {
@@ -134,7 +134,7 @@ class FileSystem {
 	 *      Deletes a file and its caption (if existing).
 	 *      
 	 *      @param string $file
-	 *      @return Only error messages - false in case no errors occured!
+	 *      @return string Only error messages - false in case no errors occured!
 	 */
 	
 	public static function deleteMedia($file) {
@@ -174,7 +174,7 @@ class FileSystem {
 	 *      Get the full file system path for the given path.
 	 *      
 	 *      @param string $path
-	 *      @return the full path.
+	 *      @return string The full path
 	 */
 
 	public static function fullPagePath($path) {
@@ -192,7 +192,7 @@ class FileSystem {
 	 *      Return the extension for a given file.
 	 *      
 	 *      @param string $file
-	 *      @return the extension
+	 *      @return string The extension
 	 */
 	
 	public static function getExtension($file) {
@@ -208,7 +208,10 @@ class FileSystem {
 
 	/**
 	 *      Return the path of the temp dir if it is writable by the webserver.
-	 *      In any case, '/tmp' is the preferred dir, because of automatic cleanup at reboot.
+	 *      In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot, 
+	 *      while other locations like '/var/tmp' do not get purged by the system.
+	 *      But since '/tmp' is only available on macos and linux, 
+	 *      sys_get_temp_dir() is used as fallback.
 	 *
 	 *      @return string The path to the temp dir
 	 */
@@ -237,7 +240,7 @@ class FileSystem {
 	 *	@param string $newParentPath (destination)
 	 *	@param string $prefix
 	 *	@param string $title
-	 *	@return $newPath
+	 *	@return string $newPath
 	 */
 
 	public static function movePageDir($oldPath, $newParentPath, $prefix, $title) {
@@ -338,7 +341,7 @@ class FileSystem {
 	 *      
 	 *      @param string $oldFile
 	 *      @param string $newFile
-	 *      @return Only error messages - false in case no errors occured!          
+	 *      @return string Only error messages - false in case no errors occured!          
 	 */
 	
 	public static function renameMedia($oldFile, $newFile) {
@@ -397,7 +400,7 @@ class FileSystem {
 	 *      
 	 *      @param string $path
 	 *      @param string $prefix (prepended to the numerical suffix)
-	 *      @return the suffix
+	 *      @return string The suffix
 	 */
 	
 	public static function uniquePathSuffix($path, $prefix = '') {
@@ -446,6 +449,3 @@ class FileSystem {
 	
 	
 }
-
-
-?>
