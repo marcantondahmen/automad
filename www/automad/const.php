@@ -119,10 +119,6 @@ Config::set('AM_ALLOWED_FILE_TYPES_DEFAULT_GUI', 	'css, jpg, jpeg, zip, png, ico
 
 // PAGE
 Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
-Config::set('AM_PAGE_NOT_FOUND_TITLE', 'Page Not Found!');
-Config::set('AM_PAGE_RESULTS_TEMPLATE', 'search_results');
-Config::set('AM_PAGE_RESULTS_TITLE', 'Search Results');
-Config::set('AM_PAGE_RESULTS_URL', '/search-results');
 Config::set('AM_PAGE_GUI', '/gui');
 
 // CACHE
