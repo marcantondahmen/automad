@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2015 by Marc Anton Dahmen
+ *	Copyright (c) 2015-2017 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,11 +44,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Context represents the current page within statements (loops) or just the requested page.
  *
- *	@author Marc Anton Dahmen <hello@marcdahmen.de>
- *	@copyright Copyright (c) 2015 Marc Anton Dahmen <hello@marcdahmen.de>
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2015-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
-
 
 class Context {
 	
@@ -76,7 +75,7 @@ class Context {
 	/**
 	 * 	Return $Page.
 	 *
-	 *	@return $Page
+	 *	@return object $Page
 	 */
 	
 	public function get() {
@@ -104,6 +103,3 @@ class Context {
 	
 	
 }
-
-
-?>
