@@ -335,7 +335,7 @@ class Toolbox {
 	 *      - active: false (class of the active <li> element)
 	 *
 	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl", rootLevel: integer)
-	 *	@return the HTML of the tree
+	 *	@return string The HTML of the tree
 	 */
 	
 	public function navTree($options = array()) {
