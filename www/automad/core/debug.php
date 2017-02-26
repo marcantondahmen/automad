@@ -83,6 +83,8 @@ class Debug {
 	
 	/**
 	 *	Stop timer, calculate execution time, get user & server constants and return the log buffer.
+	 *
+	 *      @return string The Javascript console log
 	 */
 	
 	public static function getLog() {
@@ -203,6 +205,3 @@ class Debug {
 	
 	
 }
-
-
-?>
