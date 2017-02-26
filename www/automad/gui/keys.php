@@ -91,7 +91,7 @@ class Keys {
 		
 		// Since this is a recursive method, initially there should not be any file defined and the template from the requested page should be used instead.
 		if (!$file) {
-			$Page = $this->Automad->getRequestedPage();
+			$Page = $this->Automad->Context->get();
 			// Don't use $Page->getTemplate() to prevent exit on errors.
 			$file = AM_BASE_DIR . AM_DIR_THEMES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
 		}
