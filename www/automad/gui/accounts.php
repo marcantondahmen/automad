@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Accounts class provides all methods for creating and loading user accounts. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -55,7 +55,7 @@ class Accounts {
 	/**
 	 *	Add user account based on $_POST.
 	 *
-	 *	@return $output (error/success)
+	 *	@return array $output (error/success)
 	 */
 	
 	public static function add() {
@@ -115,7 +115,7 @@ class Accounts {
 	 *	Delete one ore more user accounts.
 	 *
 	 *	@param array $users
-	 *	@return $output (error/success)
+	 *	@return array $output (error/success)
 	 */
 	
 	public static function delete($users) {
@@ -165,7 +165,7 @@ class Accounts {
 	/**
 	 *	Install the first user account.
 	 *
-	 *	@return Error message in case of an error.
+	 *	@return string Error message in case of an error.
 	 */
 	
 	public static function install() {
@@ -206,7 +206,7 @@ class Accounts {
 	 *	it gets executed instead of revealing any user names.
 	 *	
 	 *	@param array $accounts
-	 *	@return The PHP code as string
+	 *	@return string The PHP code
 	 */
 	
 	public static function generatePHP($accounts) {
@@ -221,7 +221,7 @@ class Accounts {
 	/**
 	 *	Get the accounts array by including the accounts PHP file.
 	 *
-	 *	@return The accounts array
+	 *	@return array The registered accounts
 	 */
 	
 	public static function get() {
@@ -235,7 +235,7 @@ class Accounts {
 	 *	Create hash from password to store in accounts.txt.
 	 *
 	 *	@param string $password
-	 *	@return Hashed/salted password
+	 *	@return string Hashed/salted password
 	 */
 
 	public static function passwordHash($password) {
@@ -252,7 +252,7 @@ class Accounts {
 	 *
 	 *	@param string $password (clear text)
 	 *	@param string $hash (hashed password)
-	 *	@return true/false 
+	 *	@return boolean true/false 
 	 */
 
 	public static function passwordVerified($password, $hash) {
@@ -265,7 +265,7 @@ class Accounts {
 	/**
 	 *	Save the accounts array as PHP to AM_FILE_ACCOUNTS.
 	 *
-	 *	@return Success (true/false)
+	 *	@return boolean Success (true/false)
 	 */
 
 	public static function write($accounts) {
@@ -276,6 +276,3 @@ class Accounts {
 
 
 }
-
-
-?>
