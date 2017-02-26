@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Content class provides all methods to add, modify, move or delete content (pages, shared data and files). 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -76,7 +76,7 @@ class Content {
 	/**
 	 *	Add page based on $_POST.
 	 *
-	 *	@return $output array (AJAX response)
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function addPage() {
@@ -84,15 +84,15 @@ class Content {
 		$output = array();
 		
 		// Validation of $_POST. URL, title and template must exist and != false.
-		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
+		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 	
 			if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title'] && isset($_POST['subpage']['theme_template']) && $_POST['subpage']['theme_template']) {
 		
-				// The current page, where the subpage has to be added to, becomes the parent page for the new page.
-				$Page = $this->Automad->getPageByUrl($_POST['url']);
-	
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
+	
+					$output['debug']['page'] = $Page->url;
+					$output['debug']['new subpage'] = json_encode($_POST['subpage']);
 	
 					// The new page's properties.
 					$title = $_POST['subpage']['title'];
@@ -176,7 +176,7 @@ class Content {
 	 *
 	 *	@param array $files
 	 *	@param string $path
-	 *	@return $output
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function deleteFiles($files, $path) {
@@ -221,7 +221,7 @@ class Content {
 	/**
 	 *	Delete page based on $_POST.
 	 *
-	 *	@return $output array (AJAX response)
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function deletePage() {
@@ -229,15 +229,14 @@ class Content {
 		$output = array();
 
 		// Validate $_POST.
-		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection()) && $_POST['url'] != '/' && isset($_POST['title']) && $_POST['title']) {
-
-			$Page = $this->Automad->getPageByUrl($_POST['url']);
+		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url'])) && $_POST['url'] != '/' && !empty($_POST['title'])) {
 
 			// Check if the page's directory and parent directory are wirtable.
 			if (is_writable(dirname($this->getPageFilePath($Page))) && is_writable(dirname(dirname($this->getPageFilePath($Page))))) {
 
 				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
 				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
+				$output['debug'] = 'Deleting ' . $Page->url;
 
 				$this->clearCache();
 
@@ -247,7 +246,11 @@ class Content {
 		
 			}
 	
-		} 
+		} else {
+			
+			$output['error'] = Text::get('error_page_not_found');
+			
+		}
 		
 		return $output;
 		
@@ -257,7 +260,7 @@ class Content {
 	/**
 	 *      Duplicate a page based on $_POST.
 	 *      
-	 *      @return $output array (AJAX response) 
+	 *      @return array $output (AJAX response) 
 	 */
 	
 	public function duplicatePage() {
@@ -268,9 +271,7 @@ class Content {
 			
 			$url = $_POST['url'];
 			
-			if ($url && $url != '/' && array_key_exists($url, $this->Automad->getCollection())) {
-				
-				$Page = $this->Automad->getPageByUrl($url);
+			if ($url != '/' && ($Page = $this->Automad->getPage($url))) {
 				
 				// Check permissions.
 				if (is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
@@ -297,6 +298,10 @@ class Content {
 					
 				}
 				
+			} else {
+				
+				$output['error'] = Text::get('error_page_not_found');
+				
 			}
 			
 		}
@@ -309,7 +314,7 @@ class Content {
 	/**
 	 *	Edit file information (file name and caption) based on $_POST.
 	 *	
-	 *	@return $output
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function editFileInfo() {
@@ -379,7 +384,7 @@ class Content {
 	 *	Extract the deepest directory's prefix from a given path.
 	 *
 	 * 	@param string $path
-	 *	@return Prefix
+	 *	@return string Prefix
 	 */
 
 	public function extractPrefixFromPath($path) {
@@ -394,7 +399,7 @@ class Content {
 	 *	
 	 *	The collected data consists of all page titles, URLs and all available tags.
 	 *
-	 *	@return the JSON data
+	 *	@return string The JSON encoded autocomplete data
 	 */
 	
 	public function getAutoCompleteJSON() {
@@ -423,7 +428,7 @@ class Content {
 	 *	Return the full file system path of a page's data file.
 	 *
 	 *	@param object $Page
-	 *	@return Filename
+	 *	@return string The full file system path
 	 */
 
 	public function getPageFilePath($Page) {
@@ -437,20 +442,15 @@ class Content {
 	 *      Return the file system path for the directory of a page based on $_POST['url'].   
 	 *      In case URL is empty, return the '/shared' directory.
 	 *      
-	 *      @return The full path to the related directory.
+	 *      @return string The full path to the related directory
 	 */
 	
 	public function getPathByPostUrl() {
 		
-		if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->Automad->getCollection())) {
-			
-			$Page = $this->Automad->getPageByUrl($_POST['url']);
+		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 			return FileSystem::fullPagePath($Page->path);
-			
 		} else {
-			
 			return AM_BASE_DIR . AM_DIR_SHARED . '/';
-			
 		}
 		
 	}
@@ -459,22 +459,22 @@ class Content {
 	/**
 	 *	Get results for a search query from $_GET. In case there is only one match, redirect to the edit page for that URL. 
 	 *
-	 *	@return an array with matching pages. 
+	 *	@return array The matching pages 
 	 */
 
 	public function getSearchResults() {
 		
 		$pages = array();
 	
-		if ($query = Core\Parse::queryKey('query')) {
+		if ($query = Core\Parse::query('query')) {
 		
 			$collection = $this->Automad->getCollection();
 		
 			if (array_key_exists($query, $collection)) {
 			
 				// If $query matches an actual URL of an existing page, just get that page to be the only match in the $pages array.
-				// Since $pages has only one elements, the request gets directly redirected to the edit page (see below).
-				$pages = array($this->Automad->getPageByUrl($query));
+				// Since $pages has only one element, the request gets directly redirected to the edit page (see below).
+				$pages = array($this->Automad->getPage($query));
 							
 			} else {
 			
@@ -502,7 +502,7 @@ class Content {
 	/**
 	 *	Move a page based on $_POST.
 	 *	
-	 *	@return $output array (error/redirect)
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function movePage() {
@@ -511,13 +511,10 @@ class Content {
 
 		// Validation of $_POST.
 		// To avoid all kinds of unexpected trouble, the URL and the destination must exist in the Automad's collection and a title must be present.
-		if (isset($_POST['url']) && isset($_POST['title']) && isset($_POST['destination']) && array_key_exists($_POST['url'], $this->Automad->getCollection()) && array_key_exists($_POST['destination'], $this->Automad->getCollection()) && $_POST['title']) {
+		if (isset($_POST['url']) && isset($_POST['destination']) && !empty($_POST['title']) && ($Page = $this->Automad->getPage($_POST['url'])) && ($dest = $this->Automad->getPage($_POST['destination']))) {
 	
 			// The home page can't be moved!	
 			if ($_POST['url'] != '/') {
-		
-				$Page = $this->Automad->getPageByUrl($_POST['url']);
-				$dest = $this->Automad->getPageByUrl($_POST['destination']);
 		
 				// Check if new parent directory is writable.
 				if (is_writable(FileSystem::fullPagePath($dest->path))) {
@@ -528,6 +525,8 @@ class Content {
 						// Move page
 						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);	
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
+						$output['debug']['page'] = $Page->path;
+						$output['debug']['destination'] = $dest->path;
 						
 						$this->clearCache();
 		
@@ -560,7 +559,7 @@ class Content {
 	 *      Return updated context URL based on $path.
 	 *      
 	 *      @param string $path
-	 *      @return The context URL to the new page.
+	 *      @return string The context URL to the new page
 	 */
 	
 	private function contextUrlByPath($path) {
@@ -588,13 +587,13 @@ class Content {
 	 *	
 	 *	@param string $url
 	 *	@param array $data
-	 *	@return $output array (error/redirect)
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function savePage($url, $data) {
 		
 		$output = array();
-		$Page = $this->Automad->getPageByUrl($url);
+		$Page = $this->Automad->getPage($url);
 	
 		// A title is required for building the page's path.
 		// If there is no title provided, an error will be returned instead of saving and moving the page.
@@ -669,13 +668,13 @@ class Content {
 					
 				} else {
 					
-					$output['error'] = Text::get('error_permission') . '<br /><small>' . dirname($this->getPageFilePath($Page)) . '</small>';
+					$output['error'] = Text::get('error_permission');
 					
 				}
 	
 			} else {
 				
-				$output['error'] = Text::get('error_permission') . '<br /><small>' . dirname(dirname($this->getPageFilePath($Page))) . '</small>';
+				$output['error'] = Text::get('error_permission');
 				
 			}
 	
@@ -695,7 +694,7 @@ class Content {
 	 *	Save shared data.
 	 *
 	 *	@param array $data
-	 *	@return $output array (error)
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function saveSharedData($data) {
@@ -718,7 +717,7 @@ class Content {
 	/**
 	 *	Upload handler based on $_POST and $_FILES.
 	 *
-	 *	@return $output
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function upload() {
@@ -771,6 +770,3 @@ class Content {
 	
 	
 }
-
-
-?>
