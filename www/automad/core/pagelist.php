@@ -353,7 +353,7 @@ class Pagelist {
 	/**
 	 *      Calculate the last page of the pagination.
 	 *      
-	 *      @return integer The last page number of the current pagelist.
+	 *      @return number The last page number of the current pagelist.
 	 */
 	
 	public function getPaginationLast() {
