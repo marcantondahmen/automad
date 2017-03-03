@@ -524,7 +524,7 @@ class View {
 						
 						// Cache the current pagelist config and temporary disable the excludeHidden parameter to also
 						// get the neighbors of a hidden page.
-						$pagelistConfigCache = $this->Automad->getPagelist()->config();
+						$pagelistConfigShelf = $this->Automad->getPagelist()->config();
 						$this->Automad->getPagelist()->config(array('excludeHidden' => false));
 						
 						$Selection = new Selection($this->Automad->getPagelist()->getPages(true));
@@ -532,7 +532,7 @@ class View {
 						$pages = $Selection->getSelection();
 						
 						// Restore the original pagelist config.
-						$this->Automad->getPagelist()->config($pagelistConfigCache);
+						$this->Automad->getPagelist()->config($pagelistConfigShelf);
 						
 						if (array_key_exists(strtolower($matches['with']), $pages)) {
 							$Page = $pages[strtolower($matches['with'])];
@@ -550,14 +550,16 @@ class View {
 					// Process snippet for $Page.
 					if (!empty($Page)) {	
 						Debug::log($Page->url, 'With page');
-						// Save original context.
+						// Save original context and pagelist.
 						$contextShelf = $Context->get();
+						$pagelistConfigShelf = $this->Automad->getPagelist()->config();
 						// Set context to $url.
 						$Context->set($Page);
 						// Parse snippet.
 						$html = $this->interpret($matches['withSnippet'], $directory);
-						// Restore original context.
+						// Restore original context and pagelist.
 						$Context->set($contextShelf);
+						$this->Automad->getPagelist()->config($pagelistConfigShelf);
 						return $html;
 					} 
 										
@@ -629,7 +631,8 @@ class View {
 					$html = '';
 					$i = 0;
 					
-					// Save the index before any loop - the index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
+					// Shelve the runtime objetc before any loop. 
+					// The index will be overwritten when iterating over filter, tags and files and must be restored after the loop.
 					$runtimeShelf = $this->Runtime->shelve();
 					
 					if (strtolower($matches['foreach']) == 'pagelist') {
@@ -638,23 +641,32 @@ class View {
 						
 						// Get pages.
 						$pages = $this->Automad->getPagelist()->getPages();
-						// Save context page.
-						$contextShelf = $Context->get();
-						
 						Debug::log($pages, 'Foreach in pagelist loop');
 						
+						// Shelve context page and pagelist config.
+						$contextShelf = $Context->get();
+						$pagelistConfigShelf = $this->Automad->getPagelist()->config();
+						
+						// Calculate offset for index.
+						if ($pagelistPage = intval($pagelistConfigShelf['page'])) {
+							$offset = ($pagelistPage - 1) * intval($pagelistConfigShelf['limit']);
+						} else {
+							$offset = intval($pagelistConfigShelf['offset']);
+						}
+						
 						foreach ($pages as $Page) {
-							// Cache the current pagelist configuration to be restored after processing the snippet.
-							$pagelistConfigCache = $this->Automad->getPagelist()->config();
 							// Set context to the current page in the loop.
 							$Context->set($Page);
 							// Set index for current page. The index can be used as @{:i}.
-							$this->Runtime->set(AM_KEY_INDEX, ++$i);
+							$this->Runtime->set(AM_KEY_INDEX, ++$i + $offset);
 							// Parse snippet.
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 							$html .= $this->interpret($foreachSnippet, $directory);
-							// Restore pagelist configuration.
-							$this->Automad->getPagelist()->config($pagelistConfigCache);
+							// Note that the config only has to be shelved once before starting the loop, 
+							// but has to be restored after each snippet to provide the correct date (like :pagelist-count)
+							// for the next iteration, since a changed config would generate incorrect values in 
+							// recursive loops.
+							$this->Automad->getPagelist()->config($pagelistConfigShelf);
 						}
 						
 						// Restore context.
