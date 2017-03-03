@@ -301,7 +301,7 @@ class Automad {
 		 
 		 
 	/**
-	 * 	If existing, return the page object for the passed relative URL, else return error page.
+	 * 	If existing, return the page object for the passed relative URL.
 	 * 
 	 *	@param string $url
 	 *	@return object $page or NULL
