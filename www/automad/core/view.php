@@ -422,9 +422,9 @@ class View {
 	 *	- @{:file}   
 	 *	- @{:width}   
 	 *	- @{:height}   
-	 *	- @{:file-resized}   
-	 *	- @{:width-resized}   
-	 *	- @{:height-resized}   
+	 *	- @{:fileResized}   
+	 *	- @{:widthResized}   
+	 *	- @{:heightResized}   
 	 *	- @{:caption}   
 	 *       
 	 *      Tags/Filters:    
@@ -663,7 +663,7 @@ class View {
 							Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 							$html .= $this->interpret($foreachSnippet, $directory);
 							// Note that the config only has to be shelved once before starting the loop, 
-							// but has to be restored after each snippet to provide the correct date (like :pagelist-count)
+							// but has to be restored after each snippet to provide the correct data (like :pagelistCount)
 							// for the next iteration, since a changed config would generate incorrect values in 
 							// recursive loops.
 							$this->Automad->getPagelist()->config($pagelistConfigShelf);
