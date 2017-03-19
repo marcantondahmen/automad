@@ -101,6 +101,7 @@ class Sitemap {
 		$xml .= '</urlset>';
 		
 		if (@file_put_contents($sitemap, $xml)) {
+			chmod($sitemap, AM_PERM_FILE);
 			Debug::log('Successfully generated "' . $sitemap . '"');
 		}
 		
