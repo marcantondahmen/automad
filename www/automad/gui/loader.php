@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Loader class loads the required elements to handle all GUI requests. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2014-2017 Marc Anton Dahmen - http://marcdahmen.de
+ *	@copyright Copyright (c) 2014-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -159,15 +159,15 @@ class Loader {
 					
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the dashboard page.
-			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Parse::queryKey('context') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
-				$inc = 'context/' . Core\Parse::queryKey('context');
-			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Parse::queryKey('ajax') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
-				$inc = 'ajax/' . Core\Parse::queryKey('ajax');
+			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Parse::query('context') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
+				$inc = 'context/' . Core\Parse::query('context');
+			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Parse::query('ajax') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
+				$inc = 'ajax/' . Core\Parse::query('ajax');
 			} else {
 				$inc = 'dashboard';
 			}
 	
-		} else if (Core\Parse::queryKey('ajax')) {
+		} else if (Core\Parse::query('ajax')) {
 			
 			// Send a redirect URL as answer to an Ajax request when nobody is logged in.
 			die(json_encode(array('redirect' => AM_BASE_URL . AM_PAGE_GUI)));
@@ -209,6 +209,3 @@ class Loader {
 
 
 }
-
-
-?>
