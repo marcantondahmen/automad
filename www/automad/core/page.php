@@ -164,7 +164,7 @@ class Page {
 			$tags = explode(AM_PARSE_STR_SEPARATOR, $this->data[AM_KEY_TAGS]);
 			// Trim & strip tags
 			$tags = array_map(function($tag) {
-					return trim(String::stripTags($tag)); 
+					return trim(Str::stripTags($tag)); 
 				}, $tags);
 			
 		}
