@@ -42,14 +42,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- * 	The String class holds all string methods.
+ * 	The Str class holds all string methods.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class String {
+class Str {
 	
 	
 	/**
@@ -170,7 +170,7 @@ class String {
 		// Configure URLify. 
 		// Add non-word chars and reset the remove list.
 		// Note: $maps gets directly manipulated without using URLify::add_chars(). 
-		// Using the add_chars() method would extend $maps every time, String::sanitize() gets called. 
+		// Using the add_chars() method would extend $maps every time, Str::sanitize() gets called. 
 		// Adding a new array to $maps using a key avoids that and just overwrites that same array after the first call without adding new elements.
 		\JBroadway\URLify::$maps['nonWordChars'] = array('=' => '-', '&' => '-and-', '+' => '-plus-', '@' => '-at-', '|' => '-', '*' => '-x-');
 		\JBroadway\URLify::$remove_list = array();
@@ -193,7 +193,7 @@ class String {
 	
 	public static function shorten($str, $maxChars, $ellipsis = ' ...') {
 		
-		$str = String::stripTags($str);
+		$str = Str::stripTags($str);
 		$str = preg_replace('/[\n\r]+/s', ' ', $str);
 		
 		// Shorten $text to maximal characters (full words).
@@ -220,7 +220,7 @@ class String {
 	
 	public static function stripTags($str) {
 		
-		return strip_tags(String::markdown($str));
+		return strip_tags(Str::markdown($str));
 		
 	}
 		
