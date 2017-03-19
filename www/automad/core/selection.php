@@ -265,7 +265,7 @@ class Selection {
 			$filtered = array();
 
 			// Explode keywords and also remove any tags and - most important - all "/", since they will be used as regex delimiters!
-			$keywords = explode(' ', str_replace('/', ' ', String::stripTags($str)));
+			$keywords = explode(' ', str_replace('/', ' ', Str::stripTags($str)));
 		
 			// generate pattern
 			$pattern = '/^';
@@ -280,7 +280,7 @@ class Selection {
 			
 				// All the page's data get combined in on single string ($dataAsString), to make sure that a page gets returned, 
 				// even if the keywords are distributed over different variables in $Page[data]. 
-				$dataAsString = String::stripTags(implode(' ', $Page->data));
+				$dataAsString = Str::stripTags(implode(' ', $Page->data));
 								
 				// search
 				if (preg_match($pattern, $dataAsString) == 1) {
@@ -411,7 +411,7 @@ class Selection {
 	
 		foreach ($this->selection as $key => $Page) {
 			
-			$value = trim(strtolower(String::stripTags($Page->get($var))));
+			$value = trim(strtolower(Str::stripTags($Page->get($var))));
 			
 			// In case $value is an empty string, use the page basename instead.
 			if (strlen($value) === 0) {
