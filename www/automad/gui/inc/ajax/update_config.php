@@ -112,10 +112,8 @@ if (!empty($_POST['type'])) {
 if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(AM_CONFIG)) {
 	
 	$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-	$old = umask(0);
 	file_put_contents(AM_CONFIG, $json);
-	umask($old);
-	
+	chmod(AM_CONFIG, AM_PERM_FILE);
 	$output['success'] = Text::get('success_config_update');
 	$output['debug'] = $config;
 
