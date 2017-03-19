@@ -121,6 +121,10 @@ Config::set('AM_ALLOWED_FILE_TYPES_DEFAULT_GUI', 	'css, jpg, jpeg, zip, png, ico
 Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
 Config::set('AM_PAGE_GUI', '/gui');
 
+// PERMISSIONS
+Config::set('AM_PERM_DIR', 0755);
+Config::set('AM_PERM_FILE', 0644);
+
 // CACHE
 Config::set('AM_CACHE_ENABLED', true);
 Config::set('AM_CACHE_MONITOR_DELAY', 120);
