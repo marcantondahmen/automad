@@ -67,14 +67,17 @@ class Shared {
 		
 		// Define default settings.
 		// Use the server name as default site name and the first found theme folder as default theme.	
-		$themes = 	glob(AM_BASE_DIR . AM_DIR_THEMES . '/*', GLOB_ONLYDIR);	
+		$themes = \Automad\GUI\FileSystem::getThemes();
+		Debug::log($themes, 'Installed themes');
+		$defaultTheme = reset($themes);
 		$defaults = 	array(	
-					AM_KEY_SITENAME => $_SERVER['SERVER_NAME'],
-					AM_KEY_THEME => basename(reset($themes))  
+					AM_KEY_SITENAME => $_SERVER['SERVER_NAME'], 
+					AM_KEY_THEME => $defaultTheme->path
 				);
 		
 		// Merge defaults with settings from file.
 		$this->data = array_merge($defaults, Parse::textFile(AM_FILE_SHARED_DATA));
+		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 		
 	}
 	
