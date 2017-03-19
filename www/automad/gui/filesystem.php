@@ -115,17 +115,15 @@ class FileSystem {
 		$files = array_filter($files, 'is_file');
 		
 		// Create directoy and copy files.
-		$old = umask(0);
-	
 		if (!file_exists($dest)) {
-			mkdir($dest);
+			mkdir($dest, AM_PERM_DIR, true);
 		}
 		
 		foreach ($files as $file) {
-			copy($file, $dest . basename($file));
+			$copy = $dest . basename($file);
+			copy($file, $copy);
+			chmod($copy, AM_PERM_FILE);
 		}
-		
-		umask($old);
 		
 	}
 	
@@ -183,7 +181,7 @@ class FileSystem {
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $path;
 		}
 		
-		return '/' . trim($path, '/') . '/';
+		return rtrim($path, '/') . '/';
 		
 	}
 
@@ -202,6 +200,78 @@ class FileSystem {
 		if (!empty($pathInfo['extension'])) {
 			return $pathInfo['extension'];
 		}
+		
+	}
+
+
+	/**
+	 *      Get all installed themes.
+	 *
+	 *	A theme must be located below the "themes" directory.   
+	 *	It is possible to group themes in subdirectories, like "themes/theme" or "themes/subdir/theme".
+	 * 
+	 *	To be a valid theme, a diretcory must contain a "theme.json" file and at least one ".php" file.
+	 *      
+	 *      @param  string $path
+	 *      @return array An array containing all themes as objects.
+	 */
+	
+	public static function getThemes($path = false) {
+		
+		if (!$path) {
+			$path = AM_BASE_DIR . AM_DIR_THEMES;
+		}
+		
+		$themes = array();
+		$defaults = array(
+			'name' => false, 
+			'description' => false, 
+			'author' => false, 
+			'version' => false, 
+			'license' => false
+		);
+		
+		foreach (glob($path . '/*', GLOB_ONLYDIR) as $dir) {
+			
+			$themeFile = $dir . '/theme.json';
+			$templates = glob($dir . '/*.php');
+			
+			if (is_readable($themeFile) && is_array($templates) && $templates) {
+				
+				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
+				$json = @json_decode(file_get_contents($themeFile), true);
+				$path = str_replace(AM_BASE_DIR . AM_DIR_THEMES . '/', '', dirname($themeFile));
+				
+				// Set fallback name.
+				if (!is_array($json)) {
+					$json = array('name' => $path);
+				}
+				
+				// Remove the 'page not found' template from the array of templates. 
+				$templates = array_filter($templates, function($file) {
+					return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php'));
+				});
+				
+				// Add theme.
+				$themes[$path] = (object) array_merge(
+							$defaults, 
+							$json, 
+							array(
+								'path' => $path,
+								'templates' => $templates
+							)
+						);
+				
+			} else {
+				
+				// Else check subdirectories for theme.json files.
+				$themes = array_merge($themes, FileSystem::getThemes($dir));
+				
+			}
+			
+		}
+		
+		return $themes;
 		
 	}
 
@@ -245,12 +315,14 @@ class FileSystem {
 
 	public static function movePageDir($oldPath, $newParentPath, $prefix, $title) {
 		
-		// Normalize parent path.
+		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
+		// Therefore it is needed to convert all backslashes.
+		$newParentPath = str_replace('\\', '/', $newParentPath);
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
-		$prefix = ltrim(Core\String::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
-		$title = Core\String::sanitize($title, true, AM_DIRNAME_MAX_LEN);
+		$prefix = ltrim(Core\Str::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
+		$title = Core\Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
 		
 		// If the title is an empty string after sanitizing, set it to 'untitled'.
 		if (!$title) {
@@ -271,16 +343,12 @@ class FileSystem {
 			$newPath = FileSystem::appendSuffixToPath($newPath, $suffix); 
 			
 			// Move dir.
-			$old = umask(0);		
-		
 			if (!file_exists(FileSystem::fullPagePath($newParentPath))) {
-				mkdir(FileSystem::fullPagePath($newParentPath), 0777, true);
+				mkdir(FileSystem::fullPagePath($newParentPath), AM_PERM_DIR, true);
 			}
 			
 			rename(FileSystem::fullPagePath($oldPath), FileSystem::fullPagePath($newPath));
 			
-			umask($old);
-		
 			// Update the page title in the .txt file to reflect the actual path suffix.
 			FileSystem::appendSuffixToTitle($newPath, $suffix);
 		
@@ -440,10 +508,8 @@ class FileSystem {
 		} 
 	
 		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
-		
-		$old = umask(0);
 		file_put_contents($file, $content);
-		umask($old);
+		chmod($file, AM_PERM_FILE);
 		
 	}
 	
