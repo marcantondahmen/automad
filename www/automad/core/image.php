@@ -316,13 +316,11 @@ class Image {
 		imagesavealpha($dest, true);
 		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
 			
-		$old = umask(0);
-		Debug::log(umask(), 'Changed umask');
 		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');
 		
 		// Create cache directory, if not existing.
 		if (!file_exists(AM_BASE_DIR . AM_DIR_CACHE_IMAGES)) {
-			mkdir(AM_BASE_DIR . AM_DIR_CACHE_IMAGES, 0777, true);
+			mkdir(AM_BASE_DIR . AM_DIR_CACHE_IMAGES, AM_PERM_DIR, true);
 		}
 		
 		switch($this->type){
@@ -339,8 +337,7 @@ class Image {
 		
 		}
 		
-		umask($old);
-		Debug::log(umask(), 'Restored umask');
+		chmod($this->fileFullPath, AM_PERM_FILE);
 		
 		ImageDestroy ($src);
 		ImageDestroy ($dest);
