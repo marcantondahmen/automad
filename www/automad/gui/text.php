@@ -82,7 +82,7 @@ class Text {
 		Text::$modules = Core\Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
 		
 		array_walk(Text::$modules, function(&$item) {
-			$item = Core\String::markdown($item, true);
+			$item = Core\Str::markdown($item, true);
 			// Remove all line breaks to avoid problems when using text modules in JS notify.
 			$item = str_replace(array("\n", "\r"), '', $item);
 		});
