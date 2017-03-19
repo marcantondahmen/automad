@@ -362,9 +362,8 @@ class Cache {
 			$siteMTime = $mTimes[$lastModifiedItem];
 			
 			// Save mTime
-			$old = umask(0);
 			file_put_contents(AM_FILE_SITE_MTIME, serialize($siteMTime));
-			umask($old);
+			chmod(AM_FILE_SITE_MTIME, AM_PERM_FILE);
 			
 			Debug::log('Scanned directories and saved Site-mTime.');
 			Debug::log($lastModifiedItem, 'Last modified item'); 
@@ -423,14 +422,12 @@ class Cache {
 		
 		if (AM_CACHE_ENABLED) {
 			
-			$old = umask(0);
-		
 			if(!file_exists(dirname($this->pageCacheFile))) {
-				mkdir(dirname($this->pageCacheFile), 0777, true);
+				mkdir(dirname($this->pageCacheFile), AM_PERM_DIR, true);
 		    	}
 		
 			file_put_contents($this->pageCacheFile, $output);
-			umask($old);
+			chmod($this->pageCacheFile, AM_PERM_FILE);
 			Debug::log($this->pageCacheFile, 'Page written to');
 			
 		} else {
@@ -452,9 +449,8 @@ class Cache {
 		
 		if (AM_CACHE_ENABLED) {
 			
-			$old = umask(0);
 			file_put_contents(AM_FILE_OBJECT_CACHE, serialize($Automad));
-			umask($old);
+			chmod(AM_FILE_OBJECT_CACHE, AM_PERM_FILE);
 			Debug::log(AM_FILE_OBJECT_CACHE, 'Automad object written to');
 			
 			// Only non-forwarded (no proxy) sites.
