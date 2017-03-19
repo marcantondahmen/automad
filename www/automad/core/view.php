@@ -318,7 +318,7 @@ class View {
 				// In case $value will be used as an JSON option, some chars have to be escaped to work within a JSON formatted string.
 				if ($isJsonString) {
 					
-					$value = String::jsonEscape($value);
+					$value = Str::jsonEscape($value);
 					
 					// In case the variable is an "stand-alone" value in a JSON formatted string (regex ": {[ var ]} (,|})" ), 
 					// it has to be wrapped in double quotes.
