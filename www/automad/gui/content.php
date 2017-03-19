@@ -101,7 +101,7 @@ class Content {
 					$template = basename($theme_template);
 					
 					// Save new subpage below the current page's path.		
-					$subdir = Core\String::sanitize($title, true, AM_DIRNAME_MAX_LEN);
+					$subdir = Core\Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
 					
 					// If $subdir is an empty string after sanitizing, set it to 'untitled'.
 					if (!$subdir) {
@@ -124,9 +124,7 @@ class Content {
 					}
 					
 					// Create the page directory.
-					$old = umask(0);
-					mkdir(FileSystem::fullPagePath($newPagePath), 0777, true);
-					umask($old);
+					mkdir(FileSystem::fullPagePath($newPagePath), AM_PERM_DIR, true);
 					
 					// Build the file name and save the txt file. 
 					$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
@@ -327,7 +325,7 @@ class Content {
 				
 				$path = $this->getPathByPostUrl();
 				$oldFile = $path . basename($_POST['old-name']);
-				$newFile = $path . Core\String::sanitize(basename($_POST['new-name']));
+				$newFile = $path . Core\Str::sanitize(basename($_POST['new-name']));
 				
 				$caption = $_POST['caption'];
 				$ext = FileSystem::getExtension($newFile);
@@ -346,9 +344,8 @@ class Content {
 						
 						// Only if file exists already or $caption is empty.
 						if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {
-							$old = umask(0);
 							file_put_contents($newCaptionFile, $caption);
-							umask($old);
+							chmod($newCaptionFile, AM_PERM_FILE);
 						} else {
 							$output['error'] = Text::get('error_file_save') . ' "' . basename($newCaptionFile) . '"';
 						}
@@ -565,7 +562,7 @@ class Content {
 	private function contextUrlByPath($path) {
 		
 		// Rebuild Automad object, since the file structure has changed.
-		$Automad = new \Automad\Core\Automad();
+		$Automad = new Core\Automad();
 		
 		// Find new URL and return redirect query string.
 		foreach ($Automad->getCollection() as $key => $Page) {
@@ -742,7 +739,7 @@ class Content {
 	
 					// Check if file has a valid filename (allowed file type).
 					if (Core\Parse::isFileName($_FILES['files']['name'][$i])) {
-						$newFile = $path . Core\String::sanitize($_FILES['files']['name'][$i]);
+						$newFile = $path . Core\Str::sanitize($_FILES['files']['name'][$i]);
 						move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
 					} else {
 						$errors[] = Text::get('error_file_format') . ' "' . FileSystem::getExtension($_FILES['files']['name'][$i]) . '"';
