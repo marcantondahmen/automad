@@ -108,18 +108,18 @@ class Pipe {
 		$parameters = array_merge(array(0 => $value), $parameters);
 		
 		// Call string function.
-		if (method_exists('\Automad\Core\String', $function)) {
+		if (method_exists('\Automad\Core\Str', $function)) {
 			// Call a String class method.
-			$value = call_user_func_array('\Automad\Core\String::' . $function, $parameters);
-			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call String::' . $function);
+			$value = call_user_func_array('\Automad\Core\Str::' . $function, $parameters);
+			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call Str::' . $function);
 		} else if (in_array(strtolower($function), Pipe::$phpFunctions)) {
 			// Call standard PHP string function.
 			$value = call_user_func_array($function, $parameters);
 			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call ' . $function);
 		} else if (is_numeric($function)) {
-			// In case $function is a number, call String::shorten() method and pass $function as paramter for the max number of characters.
+			// In case $function is a number, call Str::shorten() method and pass $function as paramter for the max number of characters.
 			Debug::log($value, 'Shorten content to max ' . $function . ' characters');
-			$value = String::shorten($value, $function);
+			$value = Str::shorten($value, $function);
 		}
 		
 		return $value;
@@ -168,7 +168,7 @@ class Pipe {
 	 *	Process a chain of functions or mathematical operations to manipulate a given value. The output of each function is passed as the input value to the next one.
 	 *
 	 *	If a matched string matches a String class method, that method is called, else if that string is in the whitelist of PHP standard functions, that function is called.
-	 *	In case a match is just an integer value, the String::shorten() method is called and the integer value is passed as parameter.    
+	 *	In case a match is just an integer value, the Str::shorten() method is called and the integer value is passed as parameter.    
 	 *      In case a match is not a function name but an operator (+, -, * or /) followed by a number, the math method is called.
 	 *	
 	 *	@param string $value
