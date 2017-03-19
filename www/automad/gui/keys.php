@@ -89,6 +89,8 @@ class Keys {
 	
 	public function inCurrentTemplate($file = false) {
 		
+		$keys = array();
+		
 		// Since this is a recursive method, initially there should not be any file defined and the template from the requested page should be used instead.
 		if (!$file) {
 			$Page = $this->Automad->Context->get();
