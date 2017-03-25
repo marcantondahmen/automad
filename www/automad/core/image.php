@@ -319,9 +319,7 @@ class Image {
 		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');
 		
 		// Create cache directory, if not existing.
-		if (!file_exists(AM_BASE_DIR . AM_DIR_CACHE_IMAGES)) {
-			mkdir(AM_BASE_DIR . AM_DIR_CACHE_IMAGES, AM_PERM_DIR, true);
-		}
+		FileSystem::makeDir(AM_BASE_DIR . AM_DIR_CACHE_IMAGES);
 		
 		switch($this->type){
 		
