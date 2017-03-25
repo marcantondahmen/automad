@@ -67,7 +67,7 @@ class Shared {
 		
 		// Define default settings.
 		// Use the server name as default site name and the first found theme folder as default theme.	
-		$themes = \Automad\GUI\FileSystem::getThemes();
+		$themes = FileSystem::getThemes();
 		Debug::log($themes, 'Installed themes');
 		$defaultTheme = reset($themes);
 		$defaults = 	array(	
