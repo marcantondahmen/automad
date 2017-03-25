@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - http://automad.org/license
  */
 
-class FileSystem {
+class FileSystem extends Core\FileSystem {
 	
 	
 	/**
@@ -80,7 +80,7 @@ class FileSystem {
 		
 		if ($suffix) {
 			
-			$path = FileSystem::fullPagePath($path);
+			$path = self::fullPagePath($path);
 			$files = glob($path . '*.' . AM_FILE_EXT_DATA);
 			
 			if (!empty($files)) {
@@ -88,7 +88,7 @@ class FileSystem {
 				$file = reset($files);
 				$data = Core\Parse::textFile($file);
 				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
-				FileSystem::writeData($data, $file);
+				self::writeData($data, $file);
 						
 			}
 			
@@ -107,17 +107,15 @@ class FileSystem {
 	public static function copyPageFiles($source, $dest) {
 		
 		// Sanatize dirs.
-		$source = FileSystem::fullPagePath($source);
-		$dest = FileSystem::fullPagePath($dest);
+		$source = self::fullPagePath($source);
+		$dest = self::fullPagePath($dest);
 		
 		// Get files in directory to be copied.
 		$files = glob($source . '*');
 		$files = array_filter($files, 'is_file');
 		
 		// Create directoy and copy files.
-		if (!file_exists($dest)) {
-			mkdir($dest, AM_PERM_DIR, true);
-		}
+		self::makeDir($dest);
 		
 		foreach ($files as $file) {
 			$copy = $dest . basename($file);
@@ -205,78 +203,6 @@ class FileSystem {
 
 
 	/**
-	 *      Get all installed themes.
-	 *
-	 *	A theme must be located below the "themes" directory.   
-	 *	It is possible to group themes in subdirectories, like "themes/theme" or "themes/subdir/theme".
-	 * 
-	 *	To be a valid theme, a diretcory must contain a "theme.json" file and at least one ".php" file.
-	 *      
-	 *      @param  string $path
-	 *      @return array An array containing all themes as objects.
-	 */
-	
-	public static function getThemes($path = false) {
-		
-		if (!$path) {
-			$path = AM_BASE_DIR . AM_DIR_THEMES;
-		}
-		
-		$themes = array();
-		$defaults = array(
-			'name' => false, 
-			'description' => false, 
-			'author' => false, 
-			'version' => false, 
-			'license' => false
-		);
-		
-		foreach (glob($path . '/*', GLOB_ONLYDIR) as $dir) {
-			
-			$themeFile = $dir . '/theme.json';
-			$templates = glob($dir . '/*.php');
-			
-			if (is_readable($themeFile) && is_array($templates) && $templates) {
-				
-				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
-				$json = @json_decode(file_get_contents($themeFile), true);
-				$path = str_replace(AM_BASE_DIR . AM_DIR_THEMES . '/', '', dirname($themeFile));
-				
-				// Set fallback name.
-				if (!is_array($json)) {
-					$json = array('name' => $path);
-				}
-				
-				// Remove the 'page not found' template from the array of templates. 
-				$templates = array_filter($templates, function($file) {
-					return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php'));
-				});
-				
-				// Add theme.
-				$themes[$path] = (object) array_merge(
-							$defaults, 
-							$json, 
-							array(
-								'path' => $path,
-								'templates' => $templates
-							)
-						);
-				
-			} else {
-				
-				// Else check subdirectories for theme.json files.
-				$themes = array_merge($themes, FileSystem::getThemes($dir));
-				
-			}
-			
-		}
-		
-		return $themes;
-		
-	}
-
-
-	/**
 	 *      Return the path of the temp dir if it is writable by the webserver.
 	 *      In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot, 
 	 *      while other locations like '/var/tmp' do not get purged by the system.
@@ -339,18 +265,15 @@ class FileSystem {
 		if ($oldPath != $newPath) {
 			
 			// Get suffix in case the path is already taken.
-			$suffix = FileSystem::uniquePathSuffix($newPath);
-			$newPath = FileSystem::appendSuffixToPath($newPath, $suffix); 
+			$suffix = self::uniquePathSuffix($newPath);
+			$newPath = self::appendSuffixToPath($newPath, $suffix); 
 			
 			// Move dir.
-			if (!file_exists(FileSystem::fullPagePath($newParentPath))) {
-				mkdir(FileSystem::fullPagePath($newParentPath), AM_PERM_DIR, true);
-			}
-			
-			rename(FileSystem::fullPagePath($oldPath), FileSystem::fullPagePath($newPath));
+			self::makeDir(self::fullPagePath($newParentPath));
+			rename(self::fullPagePath($oldPath), self::fullPagePath($newPath));
 			
 			// Update the page title in the .txt file to reflect the actual path suffix.
-			FileSystem::appendSuffixToTitle($newPath, $suffix);
+			self::appendSuffixToTitle($newPath, $suffix);
 		
 		}
 		
@@ -368,7 +291,7 @@ class FileSystem {
 	public static function purgeCache() {
 		
 		// Check if the temp dir is actually writable.
-		if ($tmp = FileSystem::getTmpDir()) {
+		if ($tmp = self::getTmpDir()) {
 			
 			$tmpSubDir = '/automad-trash';
 			$trash = $tmp . $tmpSubDir;
@@ -380,7 +303,7 @@ class FileSystem {
 				$trash = $tmp . $tmpSubDir . '-' . $n;
 			}
 			
-			if (mkdir($trash)) {
+			if (self::makeDir($trash)) {
 			
 				// Collect items to be removed.
 				$cacheItems = array_merge(
@@ -476,7 +399,7 @@ class FileSystem {
 		$i = 1;
 		$suffix = $prefix;
 		
-		while (file_exists(FileSystem::appendSuffixToPath(FileSystem::fullPagePath($path), $suffix))) {
+		while (file_exists(self::appendSuffixToPath(self::fullPagePath($path), $suffix))) {
 			$suffix = $prefix . '-' . $i++;
 		}
 	
@@ -508,8 +431,7 @@ class FileSystem {
 		} 
 	
 		$content = implode("\r\n\r\n" . AM_PARSE_BLOCK_SEPARATOR . "\r\n\r\n", $pairs);
-		file_put_contents($file, $content);
-		chmod($file, AM_PERM_FILE);
+		self::write($file, $content);
 		
 	}
 	
