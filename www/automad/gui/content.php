@@ -123,9 +123,6 @@ class Content {
 						$data[AM_KEY_THEME] = $theme;
 					}
 					
-					// Create the page directory.
-					mkdir(FileSystem::fullPagePath($newPagePath), AM_PERM_DIR, true);
-					
 					// Build the file name and save the txt file. 
 					$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
 					FileSystem::writeData($data, $file);
@@ -326,11 +323,9 @@ class Content {
 				$path = $this->getPathByPostUrl();
 				$oldFile = $path . basename($_POST['old-name']);
 				$newFile = $path . Core\Str::sanitize(basename($_POST['new-name']));
-				
 				$caption = $_POST['caption'];
-				$ext = FileSystem::getExtension($newFile);
 				
-				if (in_array($ext, Core\Parse::allowedFileTypes())) {
+				if (FileSystem::isAllowedFileType($newFile)) {
 					
 					// Rename file and caption if needed.
 					if ($newFile != $oldFile) {
@@ -344,8 +339,7 @@ class Content {
 						
 						// Only if file exists already or $caption is empty.
 						if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {
-							file_put_contents($newCaptionFile, $caption);
-							chmod($newCaptionFile, AM_PERM_FILE);
+							FileSystem::write($newCaptionFile, $caption);
 						} else {
 							$output['error'] = Text::get('error_file_save') . ' "' . basename($newCaptionFile) . '"';
 						}
@@ -356,7 +350,7 @@ class Content {
 					 
 				} else {
 			
-					$output['error'] = Text::get('error_file_format') . ' "' . $ext . '"';
+					$output['error'] = Text::get('error_file_format') . ' "' . FileSystem::getExtension($newFile) . '"';
 				
 				}
 				
@@ -738,7 +732,7 @@ class Content {
 				for ($i = 0; $i < count($_FILES['files']['name']); $i++) {
 	
 					// Check if file has a valid filename (allowed file type).
-					if (Core\Parse::isFileName($_FILES['files']['name'][$i])) {
+					if (FileSystem::isAllowedFileType($_FILES['files']['name'][$i])) {
 						$newFile = $path . Core\Str::sanitize($_FILES['files']['name'][$i]);
 						move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
 					} else {
