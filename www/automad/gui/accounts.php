@@ -270,10 +270,7 @@ class Accounts {
 
 	public static function write($accounts) {
 		
-		if (@file_put_contents(AM_FILE_ACCOUNTS, Accounts::generatePHP($accounts))) {
-			chmod(AM_FILE_ACCOUNTS, AM_PERM_FILE);
-			return true;
-		}
+		return FileSystem::write(AM_FILE_ACCOUNTS, Accounts::generatePHP($accounts));
 		
 	}
 
