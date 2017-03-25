@@ -132,37 +132,6 @@ class Parse {
 
 
 	/**
-	 *	Tests if a string is a file name (with an allowed file extension).
-	 *
-	 *	Basically a possibly existing file extension is checked against the array of allowed file extensions.
-	 *
-	 *	"/url/file.jpg" will return true, "/url/file" or "/url/file.something" will return false.
-	 *	
-	 *	@param string $str
-	 *	@return boolean
-	 */
-	
-	public static function isFileName($str) {
-		
-		// Remove possible query string
-		$str = preg_replace('/\?.*/', '', $str);
-		
-		// Get just the basename
-		$str = basename($str);
-		
-		// Possible extension		
-		$extension = strtolower(pathinfo($str, PATHINFO_EXTENSION));
-		
-		if (in_array($extension, self::allowedFileTypes())) {
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
-	
-
-	/**
 	 *	Parse a (dirty) JSON string and return an associative, filtered array
 	 *
 	 *	@param string $str
