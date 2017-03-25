@@ -108,7 +108,7 @@ class Resolve {
 		} else if (strpos($url, '/') === 0) {
 			
 			// Relative to root	
-			if (Parse::isFileName($url) || $url == '/' || strpos($url, '/?') === 0 || strpos($url, '/#') === 0) {
+			if (FileSystem::isAllowedFileType($url) || $url == '/' || strpos($url, '/?') === 0 || strpos($url, '/#') === 0) {
 				// Skip adding a possible '/index.php' when linking to files and to the homepage (possibly including a query string or anchor link), 
 				// also if rewriting is disabled.
 				return AM_BASE_URL . $url;
@@ -119,7 +119,7 @@ class Resolve {
 		} else {
 			
 			// Relative URL
-			if (Parse::isFileName($url)) {
+			if (FileSystem::isAllowedFileType($url)) {
 				$url = $Page->path . $url;
 			} else {
 				// Even though all trailing slashes get stripped out of beauty reasons, any page must still be understood as a directory instead of a file.
@@ -155,7 +155,7 @@ class Resolve {
 			$url = '/' . trim($url, '/');
 	
 			// Prepend base.
-			if (Parse::isFileName($url)) {
+			if (FileSystem::isAllowedFileType($url)) {
 				return AM_BASE_URL . AM_DIR_PAGES . $url;
 			} else {
 				return AM_BASE_URL . AM_INDEX . $url;
