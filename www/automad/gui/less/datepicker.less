@@ -33,26 +33,28 @@
  */
 
 
-@datepicker-nav-color:			darken(@am-blue, 25%);
+@datepicker-nav-color:			@am-text;
 @datepicker-nav-hover-color:		#FFFFFF;
 
 @datepicker-table-color:		#FFFFFF;
-
 @datepicker-table-hover-background:	@button-primary-hover-background;
 @datepicker-table-hover-color:		@button-primary-hover-color;
 @datepicker-table-onclick-background:	@button-primary-active-background;
 @datepicker-table-onclick-color:	@button-primary-active-color;
+@datepicker-table-active-background: 	@button-primary-background;
+@datepicker-table-active-color: 	@button-primary-color;
+@datepicker-table-muted-color:		@am-muted;
 
-@datepicker-table-active-background: 	@button-primary-active-background;
-@datepicker-table-active-color: 	@button-primary-active-color;
-
-@datepicker-table-muted-color:		darken(@am-blue, 15%);
-
+.hook-datepicker-table-item() {
+	
+	border-radius: @am-radius;
+	
+}
 
 .hook-datepicker-misc() {
 	
 	.uk-datepicker {
-		padding: @am-nav-padding;
+		padding: 12px;
 	}
 	
 }
