@@ -35,23 +35,23 @@
 
 @form-height:			32px;
 @form-large-height: 		42px;
-@form-padding:			4px (@am-nav-padding - @am-border-width);
-@form-large-padding: 		5px (@am-nav-padding - @am-border-width);
+@form-padding:			5px 10px;
+@form-large-padding: 		5px 10px;
 @form-border:			transparent;
 @form-border-width:		@am-border-width;
-@form-color:			@am-text;
+@form-color:			darken(@am-grey, 25%);
 @form-background:       	#FFFFFF;
 
-@form-focus-border:		@am-blue;
+@form-focus-border:		transparent;
 @form-focus-background:		#FFFFFF;
-@form-focus-color:		@am-text;
+@form-focus-color:		@form-color;
 
 @form-stacked-font-weight:	500;
 @form-stacked-margin-bottom:	@utility-margin-small;
 
-@form-placeholder-color:	#CCCCCC;
+@form-placeholder-color:	@am-grey;
 
-@form-icon-color:		@form-color;
+@form-icon-color:		@am-grey;
 
 .hook-form() {
 	border-radius: @am-radius;
@@ -59,20 +59,25 @@
 	min-height: @form-height;	
 }
 
-.hook-form-focus {
-	
-	.uk-modal-dialog-lightbox & {
-		border-color: transparent;
-	}
-	
+.hook-form-focus() {
+	.focus;
 }
 
 .hook-form-stacked-label() {
+	
 	font-size: @text-small-font-size;
-	font-weight: inherit;
+	font-weight: 700;
 	color: @am-muted;
 	margin-bottom: 0;
 	padding-bottom: @form-stacked-margin-bottom;
+	
+	&.am-form-changed:after {
+		content: '\f111';
+		&:extend([class*='uk-icon-']);
+		padding-left: 5px;
+		color: @am-danger;
+	} 
+	
 }
 
 .uk-form select {
@@ -99,20 +104,16 @@
 	// Disable height transitions. 
 	.transition(height 0s, color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;);
 	
-	&:not(:focus) {
-		max-height: 5em; 
-	}
-	
 }
 
 .uk-form-icon {
 	
 	& > [class*="uk-icon-"] {
-		left: @am-nav-padding - 7;
+		left: 4px;
 	}
 	
 	&:not(.uk-form-icon-flip) > input {
-		padding-left: (@form-icon-width + @am-nav-padding - 7px) !important;	
+		padding-left: (@form-icon-width + 2px) !important;	
 	}
 	
 }
