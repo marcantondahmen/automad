@@ -35,113 +35,99 @@
 
 // Only apply the data-am-toggle attribute to a label and place the input inside.
 // No special markup needed.
-label[data-am-toggle] {
+[data-am-toggle] {
 	
 	& input {
 		display: none;
 	}
 	
-	// Checkbox toggles.
 	&:before {
-		content: '\f111'; // .uk-icon-circle
-		font-size: 18px;
-		position: relative;
-		top: 0;
-		&:extend([class*='uk-icon-']);
+		&:extend([class*='uk-icon-']);	
 	}
 	
-	&.uk-active:before {
-		content: '\f058'; // .uk-icon-check-circle
-	}
-	
-	// Make unchecked checkboxes grey.
-	&:not(.uk-active):not(.uk-button) {
-		
-		&:before {
-			color: darken(@am-grey, 10%);
-		}
-		
-		&:hover:before {
-			color: darken(@am-grey, 14%);
-		}
-		
-	}
-
-	.am-panel-bottom & {		
-		height: 18px;
-	}
-
 	&:hover {
 		cursor: pointer;
 	}
+
+	// Checkboxes.
+	&.am-toggle-checkbox {
+		
+		&:before {
+			content: '\f10c'; // .uk-icon-circle-o
+			font-size: 18px;
+			position: relative;
+			top: 2px;
+			color: darken(@am-grey, 12%);
+		}
+		
+		&:hover:before {
+			color: darken(@am-grey, 16%);
+		}
+		
+		&.uk-active:before {
+			content: '\f058'; // .uk-icon-check-circle
+			color: #FFFFFF;
+		}
+		
+		.am-panel-bottom & {		
+			height: 18px;
+		}
+		
+	}
 	
 	// Button toggles.
-	// In combination with the default .uk-button class, the label
-	// turns into a button-like panel with toggle icons.
 	&.uk-button {
 		
 		text-align: left;
-		
-		:not(.am-toggle-radios) > &.uk-active {
-			
-			background-color: @button-success-background;
-			
-			&:hover {
-				background-color: @button-success-hover-background;
-			}
-			
-		}
-		
+
 		&:before {
-			content: '\f00d'; // .uk-icon-times
 			padding-right: 2px;
 			font-size: inherit;
 			width: 1em;
-			line-height: inherit;
-			
-		}
-
-		&.uk-active:before {
-			content: '\f00c'; // .uk-icon-check
+			line-height: inherit;	
 		}
 		
-		// Radio toggles.
-		.am-toggle-radios & {
-	
+		// A single toggle button.
+		:not(.uk-button-group) > & {
+			
 			&:before {
-				content: '\f10c'; // .uk-icon-circle-o
+				content: '\f00d'; // .uk-icon-times
 			}
-		
-			&.uk-active:before {
-				content: '\f192'; // .uk-icon-dot-circle-o
+			
+			&.uk-active {
+				
+				color: @button-success-color;
+				background-color: @button-success-background;
+				
+				&:before {
+					content: '\f00c'; // .uk-icon-check
+				}
+				
+				&:hover {
+					background-color: @button-success-hover-background;
+				}
+				
 			}
 			
 		}
 		
 	}
-		
-}
-
-// Radios.
-.am-toggle-radios {
 	
-	& .uk-button {
+	// Radio icons.
+	.uk-button-group & {
 		
-		border-radius: 0;
-		
-		&:first-child {
-			border-top-left-radius: @am-radius;
-			border-top-right-radius: @am-radius;
+		&:before {
+			content: '\f10c'; // .uk-icon-circle-o
 		}
 		
-		&:last-child {
-			border-bottom-left-radius: @am-radius;
-			border-bottom-right-radius: @am-radius;
+		&.uk-active:before {
+			content: '\f192'; // .uk-icon-dot-circle-o
 		}
 		
 	}
-	
+				
 }
+
 
 // Fade in active container.
 .am-toggle-container {
