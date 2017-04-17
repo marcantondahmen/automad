@@ -68,10 +68,6 @@ $this->element('header');
 					'text' => Text::get('sys_user')
 				),
 				array(
-					'icon' => '<i class="uk-icon-files-o"></i>',
-					'text' => Text::get('sys_file_types')
-				),
-				array(
 					'icon' => '<i class="uk-icon-bug"></i>',
 					'text' => Text::get('sys_debug')
 				)
@@ -95,9 +91,9 @@ $this->element('header');
 						<input type="checkbox" name="cache[enabled]" value="on"<?php if (AM_CACHE_ENABLED) { echo ' checked'; } ?> />
 					</label>
 					<!-- Cache Settings -->
-					<ul id="am-cache-settings" class="uk-grid uk-grid-width-1-1 uk-grid-width-small-1-2">
+					<ul id="am-cache-settings" class="am-toggle-container uk-grid uk-grid-width-1-1 uk-grid-width-small-1-2">
 						<!-- Cache Monitor Delay -->
-						<li>			
+						<li>
 							<label class="uk-form-label uk-margin-large-top"><?php Text::e('sys_cache_monitor'); ?></label>		
 							<?php echo 	$this->Html->radios(
 										'cache[monitor-delay]',
@@ -111,7 +107,7 @@ $this->element('header');
 							?> 
 						</li>
 						<!-- Cache Lifetime -->
-						<li>			
+						<li>
 							<label class="uk-form-label uk-margin-large-top"><?php Text::e('sys_cache_lifetime'); ?></label>		
 							<?php echo 	$this->Html->radios(
 										'cache[lifetime]',
@@ -126,12 +122,12 @@ $this->element('header');
 						</li>
 					</ul>	
 				</form>
-				<div id="am-cache-actions">
+				<div id="am-cache-actions" class="am-toggle-container">
 					<hr />
 					<!-- Clear Cache -->	
 					<?php Text::e('sys_cache_clear_info'); ?>
 					<form data-am-handler="clear_cache">
-						<button type="submit" class="uk-button uk-button-primary uk-button-large">
+						<button type="submit" class="uk-button uk-button-large">
 							<i class="uk-icon-refresh"></i>&nbsp;&nbsp;<?php Text::e('sys_cache_clear'); ?>
 						</button>
 					</form>	
@@ -159,6 +155,7 @@ $this->element('header');
 					<div class="uk-modal-dialog">
 						<div class="uk-modal-header">
 							<?php Text::e('sys_user_registered'); ?>
+							<a href="#" class="uk-modal-close uk-close"></a>
 						</div>
 						<form class="uk-form" data-am-handler="users" data-am-init data-am-confirm="<?php Text::e('confirm_delete_users') ;?>"></form>
 						<div class="uk-modal-footer uk-text-right">
@@ -180,10 +177,11 @@ $this->element('header');
 				</a>
 				<div id="am-add-user-modal" class="uk-modal">
 					<div class="uk-modal-dialog">
-						<form class="uk-form" data-am-handler="add_user" data-am-close-on-success="#am-add-user-modal">
-							<div class="uk-modal-header">
-								<?php Text::e('sys_user_add'); ?>
-							</div>		
+						<div class="uk-modal-header">
+							<?php Text::e('sys_user_add'); ?>
+							<a href="#" class="uk-modal-close uk-close"></a>
+						</div>
+						<form class="uk-form" data-am-handler="add_user" data-am-close-on-success="#am-add-user-modal">		
 							<input class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="username" placeholder="<?php Text::e('sys_user_add_name'); ?>" required data-am-enter="#am-add-user-submit" />	
 							<input class="uk-form-controls uk-width-1-1 uk-margin-small-top" type="password" name="password1" placeholder="<?php Text::e('sys_user_add_password'); ?>" required data-am-enter="#am-add-user-submit" />		
 							<input class="uk-form-controls uk-width-1-1 uk-margin-small-top" type="password" name="password2" placeholder="<?php Text::e('sys_user_add_repeat'); ?>" required data-am-enter="#am-add-user-submit" />
@@ -205,10 +203,11 @@ $this->element('header');
 				</a>
 				<div id="am-change-password-modal" class="uk-modal">
 					<div class="uk-modal-dialog">
+						<div class="uk-modal-header">
+							<?php Text::e('sys_user_change_password'); ?>
+							<a href="#" class="uk-modal-close uk-close"></a>
+						</div>
 						<form class="uk-form" data-am-handler="change_password" data-am-close-on-success="#am-change-password-modal">
-							<div class="uk-modal-header">
-								<?php Text::e('sys_user_change_password'); ?>
-							</div>
 							<input class="uk-form-controls uk-width-1-1" type="password" name="current-password" placeholder="<?php Text::e('sys_user_change_password_current'); ?>" required data-am-enter="#am-change-password-submit" />
 							<input class="uk-form-controls uk-width-1-1 uk-margin-small-top" type="password" name="new-password1" placeholder="<?php Text::e('sys_user_change_password_new'); ?>" required data-am-enter="#am-change-password-submit" />
 							<input class="uk-form-controls uk-width-1-1 uk-margin-small-top" type="password" name="new-password2" placeholder="<?php Text::e('sys_user_change_password_repeat'); ?>" required data-am-enter="#am-change-password-submit" />
@@ -223,16 +222,6 @@ $this->element('header');
 						</form>
 					</div>
 				</div>
-			</li>
-			<!-- File Types -->
-			<li>
-				<div class="uk-block">
-					<?php echo Text::get('sys_file_types_info') . Text::get('sys_file_types_help'); ?>
-				</div>
-				<form class="uk-form" data-am-handler="update_config" data-am-auto-submit>
-					<input type="hidden" name="type" value="file-types" />
-					<input type="text" class="uk-form-controls uk-width-1-1" name="file-types" value="<?php echo AM_ALLOWED_FILE_TYPES; ?>" data-am-default="<?php echo AM_ALLOWED_FILE_TYPES_DEFAULT_GUI; ?>" />
-				</form>
 			</li>
 			<!-- Debug -->
 			<li>
