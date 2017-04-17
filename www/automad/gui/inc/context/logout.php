@@ -56,9 +56,7 @@ $this->element('header');
 ?>
 
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<div class="uk-block">
-				<h2><?php echo $this->sitename ?></h2>
-			</div>
+			<h2 class="uk-margin-large-top"><?php echo $this->sitename ?></h2>
 			<?php if ($loggedOut) { ?>
 			<div class="uk-alert uk-alert-success">
 				<?php Text::e('success_log_out'); ?>
