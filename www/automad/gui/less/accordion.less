@@ -35,7 +35,7 @@
 
 @accordion-title-margin-bottom:                 0;
 @accordion-title-padding-vertical:              6px;
-@accordion-title-padding-horizontal:            6px;
+@accordion-title-padding-horizontal:            8px;
 @accordion-title-font-size:                     1rem;
 @accordion-title-line-height:                   @base-body-line-height;
 @accordion-title-background:                    @am-grey;
@@ -45,16 +45,17 @@
  
  
 .uk-accordion {
-	margin-top: (2 * @utility-margin) + @accordion-title-padding-vertical;
+	margin-top: (2 * @utility-margin-large) + @accordion-title-padding-vertical;
 }
 
 .hook-accordion-title() {
 	
 	position: relative;
-	margin-top: (2 * (@utility-margin - @accordion-title-padding-vertical)) ;
-	margin-left: 18px;
+	margin-top: (2 * (@utility-margin-large - @accordion-title-padding-vertical)) ;
+	margin-left: 12px;
 	border-radius: @am-radius;
 	color: #FFFFFF;
+	font-weight: @am-nav-font-weight;
 	.transition(background-color 0.2s);
 	
 	&:hover,
@@ -63,22 +64,24 @@
 	}
 	
 	&:before {
-		content: '\f078';
+		content: '\f055';
 		position: absolute;
 		top: 8px;
-		left: -18px;
+		left: -12px;
 		&:extend([class*='uk-icon-'] all);
+		font-size: 12px;
+		color: @am-muted;
 	}
 	
 	&.uk-active:before {
-		content: '\f077';
+		content: '\f056';
 	}
 	
 	&:after {
 		content: '';
 		position: absolute;
 		display: block;
-		top: -(@utility-margin - @accordion-title-padding-vertical);
+		top: -(@utility-margin-large - @accordion-title-padding-vertical);
 		left: -18px;
 		right: 0;
 		border-top: @am-border-width solid @am-border-color;
@@ -87,5 +90,5 @@
 }
  
 .hook-accordion-content() {
-	padding: @utility-margin 0;
+	padding: @utility-margin-large 0;
 }
