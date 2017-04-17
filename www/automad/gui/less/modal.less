@@ -40,10 +40,14 @@
 
 
 .hook-modal-dialog() {
-	
+		
 	&:not(&-blank) {
-		border-radius: @am-radius;
-		.shadow;
+		
+		@media (min-width: @breakpoint-small) {
+			border-radius: @am-radius-large;
+			.shadow;	
+		}
+		
 	}
 
 	&-blank {
@@ -51,14 +55,35 @@
     		transform: translateY(0);
 		min-height: 100%;
 	}
-		
-}
+	
+	// Make dialogs behave like blank dialogs on small devices.	
+	@media (max-width: @breakpoint-small-max) {
+	
+		.uk-modal & {
+			margin: 0;
+			max-width: 100%;	
+			min-height: 100%;
+			-webkit-transform: translateY(0);
+    			transform: translateY(0);
+		}
 
-.hook-modal-dialog-lightbox {
-	min-height: 0;
+	}
+				
 }
 
 .hook-modal-header() {	
-	font-size: @button-large-font-size;
+
 	color: #FFFFFF;
+	font-size: 16px;
+	margin-bottom: @utility-margin-large;
+	
+	& .uk-close {
+		float: right;
+		font-size: 14px;
+	}
+	
+}
+
+.hook-modal-footer() {	
+	margin-top: @utility-margin-large;
 }
