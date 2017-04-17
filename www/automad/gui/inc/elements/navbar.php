@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 if (User::get()) {
 
 	// Get form handler to be submitted. If no matching handler exists, set an empty string.
-	$context = Core\Parse::queryKey('context');
+	$context = Core\Parse::query('context');
 	$handlers = array('edit_page' => 'page_data', 'edit_shared' => 'shared_data');
 
 	if (isset($handlers[$context])) {
@@ -53,6 +53,8 @@ if (User::get()) {
 	} else {
 		$submit = '';
 	}
+	
+	$searchPlaceholder = Text::get('search_placeholder') . ' ' . htmlspecialchars($this->sitename);
 		
 ?>
 	
@@ -69,14 +71,14 @@ if (User::get()) {
 					<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">
 						<div class="uk-form-icon uk-width-1-1">
 							<i class="uk-icon-search"></i>
-							<input class="uk-form-controls uk-form-large uk-width-1-1" name="query" type="text" placeholder="<?php echo Text::get('search_placeholder') . ' ' . htmlspecialchars($this->sitename); ?>" required>
+							<input class="uk-form-controls uk-form-large uk-width-1-1" name="query" type="text" placeholder="<?php echo $searchPlaceholder; ?>" required>
 						</div>
 					</div>
 				</form>
 			</li>
 			<!-- Add Page -->
 			<li class="uk-hidden-small">
-				<a href="#am-add-page-modal" class="uk-button uk-button-primary" data-uk-modal>
+				<a href="#am-add-page-modal" class="uk-button uk-button-danger" data-uk-modal>
 					<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add_page'); ?>
 				</a>
 			</li>
@@ -105,11 +107,14 @@ if (User::get()) {
 							<li>
 								<a href="?context=logout">
 									<i class="uk-icon-sign-out"></i>&nbsp;
-									<?php echo Text::get('btn_log_out') . ' ' . User::get(); ?>
+									<?php echo Text::get('btn_log_out'); ?>
+									<i class="uk-icon-angle-double-left"></i>
+									<?php echo ucwords(User::get()) ?>
+									<i class="uk-icon-angle-double-right"></i>
 								</a>
 							</li>
 							<li>
-								<a href="?context=system_settings#1">
+								<a href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_user'), true); ?>">
 									<i class="uk-icon-users"></i>&nbsp;
 									<?php Text::e('btn_manage_users'); ?>
 								</a>
@@ -129,16 +134,20 @@ if (User::get()) {
 	
 	<!-- Search modal for small screens -->
 	<div id="am-search-modal" class="uk-modal">
-		<div class="uk-modal-dialog uk-modal-dialog-lightbox">
+		<div class="uk-modal-dialog am-navbar-search-modal-dialog">
 			<form class="uk-form" action="" method="get">
 				<input type="hidden" name="context" value="search">	
 				<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">
 					<div class="uk-form-icon uk-width-1-1">
 						<i class="uk-icon-search"></i>
-						<input class="uk-form-controls uk-form-large uk-width-1-1" name="query" type="text" required>
+						<input class="uk-form-controls uk-form-large uk-width-1-1" name="query" type="text" placeholder="<?php echo $searchPlaceholder; ?>" required>
 					</div>	
 				</div>
 			</form>
+			<button type="button" class="uk-modal-close uk-button uk-button-primary uk-margin-top uk-width-1-1">
+				<i class="uk-icon-close"></i>&nbsp;
+				<?php Text::e('btn_close'); ?>
+			</button>
 		</div>
 	</div>
 	
