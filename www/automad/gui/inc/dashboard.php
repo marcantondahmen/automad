@@ -48,6 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $Cache = new Core\Cache();
+$mTime = $Cache->getSiteMTime();
 $Selection = new Core\Selection($this->Automad->getCollection());
 $Selection->sortPages(AM_KEY_MTIME, SORT_DESC);
 $latestPages = $Selection->getSelection(false, 0, 12);
@@ -58,58 +59,74 @@ $this->element('header');
 
 
 ?>
-
-		<div class="uk-block uk-padding-bottom-remove uk-margin-top">
-			<h1 class="uk-margin-small-top uk-margin-bottom-remove"><?php echo $this->sitename; ?></h1>
-			<h2 class="uk-margin-top"><?php Text::e('dashboard_title'); ?></h2>
+		
+		<div class="uk-block">
+			<h1 class="uk-margin-large-top"><?php echo $this->sitename; ?></h1>
 		</div>
-		<div class="uk-block uk-padding-bottom-remove">
-			<div class="uk-panel uk-panel-box">
-				<ul class="uk-grid uk-grid-width-small-1-3" data-uk-grid-margin>
-					<li>
-						<i class="uk-icon-heartbeat uk-icon-small uk-margin-bottom uk-margin-small-top"></i>
-						<div class="uk-text-small"><?php Text::e('dashboard_modified'); ?></div>
-						<?php echo date('j. M Y, G:i', $Cache->getSiteMTime()); ?> h
-					</li>
-					<li>
-						<i class="uk-icon-code-fork uk-icon-small uk-margin-bottom uk-margin-small-top"></i>
-						<div class="uk-text-small">Automad Version</div>
-						<?php echo AM_VERSION; ?>
-					</li>
-					<li class="uk-position-relative">
-						<i class="uk-icon-hdd-o uk-icon-small uk-margin-bottom uk-margin-small-top"></i>
-						<a href="#" class="uk-button uk-button-mini uk-button-primary uk-float-right" data-uk-toggle="{target:'#am-server-info', animation:'uk-animation-fade'}">
-							<?php Text::e('btn_more'); ?>
-						</a>
-						<div class="uk-text-small">
-							<?php Text::e('dashboard_server'); ?>
-							
-						</div>
-						<?php echo getenv('SERVER_NAME'); ?>
-					</li>
-				</ul>
-			</div>
-			<div id="am-server-info" class="uk-hidden uk-panel uk-panel-box uk-panel-box-primary">
-				<div class="uk-text-truncate" title="<?php echo htmlspecialchars(getenv('SERVER_SOFTWARE')); ?>">
-					<?php echo getenv('SERVER_SOFTWARE'); ?>
-				</div>
-				<div class="uk-text-truncate" title="<?php echo htmlspecialchars(php_uname('v')); ?>">
-					<?php echo php_uname('v'); ?>
-				</div>
-				PHP <?php echo phpversion(); ?> / <?php echo php_sapi_name(); ?>
-				<br />
-				<?php echo Text::get('dashboard_memory') . ' ' . (memory_get_peak_usage(true) / 1048576) . 'M  (' . (ini_get('memory_limit')) . ')'; ?>
-			</div>
-			<ul class="uk-grid uk-grid-width-medium-1-2">
-				<li class="uk-margin-large-bottom" data-am-status="cache"></li>
-				<li class="uk-margin-large-bottom" data-am-status="debug"></li>
+		<div class="uk-panel uk-panel-box uk-panel-box-primary">
+			<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3">
+				<li>
+					<i class="uk-icon-heartbeat uk-icon-small uk-margin-bottom"></i>
+					<div class="uk-text-small uk-text-bold uk-margin-small-bottom"><?php Text::e('dashboard_modified'); ?></div>
+					<?php echo date('j. M Y', $mTime); ?><span class="uk-hidden-small">, <?php echo date('G:i', $mTime); ?> h</span>
+				</li>
+				<li>
+					<i class="uk-icon-code-fork uk-icon-small uk-margin-bottom"></i>
+					<div class="uk-text-small uk-text-bold uk-margin-small-bottom">Automad Version</div>
+					<?php echo AM_VERSION; ?>
+				</li>
+				<li class="uk-position-relative uk-hidden-small">
+					<i class="uk-icon-hdd-o uk-icon-small uk-margin-bottom"></i>
+					<a href="#am-server-info-modal" class="uk-button uk-button-small uk-float-right" data-uk-modal>
+						<i class="uk-icon-plus-circle"></i>&nbsp;
+						<?php Text::e('btn_more'); ?>
+					</a>
+					<div class="uk-text-small uk-text-bold uk-margin-small-bottom">
+						<?php Text::e('dashboard_server'); ?>
+					</div>
+					<span class="uk-text-truncate"><?php echo getenv('SERVER_NAME'); ?></span>
+				</li>
 			</ul>
 		</div>
-		<div class="uk-block">
-			<h3><?php Text::e('dashboard_recently_edited'); ?></h3>			
+		<ul class="uk-grid uk-grid-width-medium-1-2 uk-margin-large-bottom">
+			<li class="uk-margin-small-bottom" data-am-status="cache"></li>
+			<li class="uk-margin-small-bottom" data-am-status="debug"></li>
+		</ul>
+		<div class="uk-block uk-padding-bottom-remove">
+			<h2 class="uk-margin-top"><?php Text::e('dashboard_recently_edited'); ?></h2>
 			<?php echo $this->Html->pageGrid($latestPages); ?>
 		</div>
-		
+
+		<!-- Server Info Modal -->
+		<div id="am-server-info-modal" class="uk-modal">
+			<div class="uk-modal-dialog">
+				<div class="uk-modal-header">
+					<?php Text::e('dashboard_server_info'); ?>
+					<a class="uk-modal-close uk-close"></a>
+				</div>
+				<div class="uk-margin-bottom">
+					Operating System:<br />
+					<?php echo php_uname('s') . ' / ' . php_uname('r'); ?>
+				</div>
+				<div class="uk-margin-bottom">
+					Server Software:<br />
+					<?php echo getenv('SERVER_SOFTWARE'); ?>
+				</div>
+				<div class="uk-margin-large-bottom">
+					PHP:<br /> 
+					<?php echo phpversion(); ?> / <?php echo php_sapi_name(); ?>
+				</div>
+				<span class="uk-badge uk-badge-notification">
+					<?php echo Text::get('dashboard_memory') . ' ' . (memory_get_peak_usage(true) / 1048576) . 'M  (' . ini_get('memory_limit') . ')'; ?>
+				</span>
+				<div class="uk-modal-footer uk-text-right">
+					<button type="button" class="uk-modal-close uk-button">
+						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
+					</button>
+				</div>
+			</div>
+		</div>
+	
 <?php
 
 
