@@ -105,7 +105,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 			<div class="uk-form-row uk-margin-large-bottom">
 				<label for="am-input-data-title" class="uk-form-label"><?php echo ucwords(AM_KEY_TITLE); ?></label>
 				<input id="am-input-data-title" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo htmlspecialchars($Page->get(AM_KEY_TITLE)); ?>" placeholder="Required" required />
-				<ul class="am-link uk-subnav uk-subnav-pill uk-margin-small-top uk-hidden-small">
+				<ul class="am-link uk-subnav uk-subnav-pill uk-margin-top uk-hidden-small">
 					<li class="uk-disabled"><i class="uk-icon-share"></i></li>
 					<li>
 						<a href="<?php echo AM_BASE_URL . $url; ?>" class="uk-text-truncate" target="_blank"><?php echo $url; ?></a>
@@ -124,7 +124,8 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					<div id="am-select-template-modal" class="uk-modal">
 						<div class="uk-modal-dialog">
 							<div class="uk-modal-header">
-								<h3><?php Text::e('page_theme_template'); ?></h3>
+								<?php Text::e('page_theme_template'); ?>
+								<a href="#" class="uk-modal-close uk-close"></a>
 							</div>	
 							<?php echo $this->Html->templateSelectBox('theme_template', $data[AM_KEY_THEME], $Page->template); ?>	
 							<div class="uk-modal-footer uk-text-right">
@@ -162,7 +163,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						<?php 
 						
 						if (file_exists($template)) {
-							$templateButtonClass = 'uk-button-primary';
+							$templateButtonClass = 'uk-button-success';
 							$templateIconClass = 'uk-icon-file-text';
 						} else {
 							$templateButtonClass = 'uk-button-danger';
@@ -172,7 +173,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						?>
 						<button type="button" class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1" data-uk-modal="{target:'#am-select-template-modal'}">
 							<i class="<?php echo $templateIconClass; ?>"></i>&nbsp;
-							<?php echo ucwords(str_replace('_', ' ', ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
+							<?php echo ucwords(str_replace(array('_', '/'), array(' ', ' / '), ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
 						</button>	
 					</div>
 					<?php if ($Page->path != '/') { ?> 
@@ -205,20 +206,25 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					</div>	
 				</div>
 				
+				<?php if ($keysInCurrentTemplate = $this->Keys->inCurrentTemplate()) { ?>
 				<!-- Vars in selected template -->
 				<div type="button" class="uk-accordion-title">
-					<?php Text::e('page_vars_in_template'); ?>
+					<?php Text::e('page_vars_in_template'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInCurrentTemplate); ?></span>
 				</div>
 				<div class="uk-accordion-content">
-					<?php echo $this->Html->formGroup($this->Keys->inCurrentTemplate(), $data); ?>
+					<?php echo $this->Html->formGroup($keysInCurrentTemplate, $data); ?>
 				</div>
+				<?php } ?>
 				
 				<!-- Vars in other templates -->
+				<?php $keysInOtherTemplates = $this->Keys->inOtherTemplates(); ?>
 				<div type="button" class="uk-accordion-title">
-					<?php Text::e('page_vars_in_other_templates'); ?>
+					<?php Text::e('page_vars_in_other_templates'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
 				</div>
 				<div class="uk-accordion-content">
-					<?php echo $this->Html->formGroup($this->Keys->inOtherTemplates(), $data); ?>
+					<?php echo $this->Html->formGroup($keysInOtherTemplates, $data); ?>
 				</div>
 				
 				<!-- Vars in data but not in any template -->
