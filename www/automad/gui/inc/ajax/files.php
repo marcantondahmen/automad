@@ -75,7 +75,7 @@ if (isset($_POST['delete'])) {
 
 
 // Define image file extensions. 
-$imageTypes = array('jpg', 'png', 'gif');
+$imageTypes = array('jpg', 'jpeg', 'png', 'gif');
 
 
 // Get files for each allowed file type.
@@ -95,15 +95,15 @@ ob_start();
 if ($files) { ?>
 	
 		<ul class="uk-grid">
-			<li class="uk-width-2-3 uk-width-medium-1-2">
+			<li class="uk-width-2-3 uk-width-small-1-2">
 				<a href="#am-upload-modal" class="uk-button uk-button-primary uk-width-1-1" data-uk-modal="{bgclose: false, keyboard: false}">
 					<span class="uk-hidden-small"><i class="uk-icon-upload"></i>&nbsp;</span>
 					<?php Text::e('btn_upload'); ?>
 				</a>
 			</li>
-			<li class="uk-width-1-3 uk-width-medium-1-2">
+			<li class="uk-width-1-3 uk-width-small-1-2">
 				<button class="uk-button uk-button-danger uk-width-1-1" data-am-submit="files">
-					<i class="uk-icon-trash"></i>
+					<i class="uk-icon-remove"></i>
 					<span class="uk-hidden-small">&nbsp;<?php Text::e('btn_remove_selected'); ?></span>
 				</button>
 			</li>
@@ -113,9 +113,11 @@ if ($files) { ?>
 			<?php 
 			
 			sort($files);
+			$i = 0;
 
 			foreach ($files as $file) { 
 				
+				$id = 'am-file-' . ++$i;
 				$ext = FileSystem::getExtension($file);
 				$caption = Core\Parse::caption($file);
 				
@@ -152,7 +154,7 @@ if ($files) { ?>
 						
 			?>  
 			<li>
-				<div class="uk-panel uk-panel-box" data-am-file-info='<?php echo json_encode($fileInfo); ?>'>
+				<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box" data-am-file-info='<?php echo json_encode($fileInfo); ?>'>
 					<a href="#am-edit-file-info-modal" class="uk-panel-teaser uk-display-block" data-uk-modal>
 						<?php echo $icon; ?>
 					</a>
@@ -160,17 +162,19 @@ if ($files) { ?>
 						<?php echo basename($file); ?>
 					</div>
 					<?php if ($caption) { ?>
-					<div class="uk-text-small uk-text-truncate uk-margin-small-top">
-						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;&nbsp;"<?php echo Core\String::shorten($caption, 100); ?>"
+					<div class="uk-text-small uk-text-truncate uk-margin-small-top uk-hidden-small">
+						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;&nbsp;"<?php echo Core\Str::shorten($caption, 100); ?>"
 					</div>
 					<?php } ?>
-					<div class="uk-text-small uk-text-truncate uk-margin-small-top">
+					<div class="uk-text-small uk-text-truncate uk-margin-small-top uk-hidden-small">
 						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;&nbsp;<?php echo date('M j, Y H:i', filemtime($file)); ?>
 					</div>
 					<?php echo $size; ?> 
 					<div class="am-panel-bottom">
 						<a href="#am-edit-file-info-modal" class="uk-icon-button uk-icon-pencil" title="<?php Text::e('btn_edit_file_info'); ?>" data-uk-modal></a>
-						<label class="am-panel-bottom-right" data-am-toggle><input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>" /></label>
+						<label class="am-toggle-checkbox am-panel-bottom-right" data-am-toggle="#<?php echo $id; ?>">
+							<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>" />
+						</label>
 					</div>
 				</div>	
 			</li>
@@ -187,9 +191,6 @@ if ($files) { ?>
 						<div id="am-edit-file-info-icon" data-am-extension=""></div>
 					</div>
 					<div class="am-files-modal-info">
-						<div class="uk-modal-header uk-hidden-small">
-							<?php Text::e('btn_edit_file_info'); ?>
-						</div>
 						<div class="uk-form uk-form-stacked">
 							<input id="am-edit-file-info-old-name" type="hidden" name="old-name" />	
 							<div class="uk-form-row">
@@ -206,13 +207,13 @@ if ($files) { ?>
 								<span class="uk-hidden-small"><i class="uk-icon-close"></i>&nbsp;</span>
 								<?php Text::e('btn_close'); ?>
 							</button>
-							<a id="am-edit-file-info-download" class="uk-button uk-button-primary" download>
+							<a id="am-edit-file-info-download" class="uk-button" download>
 								<span class="uk-hidden-small"><i class="uk-icon-download"></i>&nbsp;</span>
 								<?php Text::e('btn_download_file'); ?>
 							</a>
-							<button id="am-edit-file-info-submit" type="button" class="uk-button uk-button-success">
+							<button id="am-edit-file-info-submit" type="button" class="uk-button uk-button-primary">
 								<span class="uk-hidden-small"><i class="uk-icon-check"></i>&nbsp;</span>
-								<?php Text::e('btn_save'); ?>
+								<?php Text::e('btn_ok'); ?>
 							</button>
 						</div>
 					</div>
@@ -236,7 +237,7 @@ if ($files) { ?>
 				</div>
 				<div id="am-upload-container"></div>
 				<div class="uk-modal-footer uk-text-right">
-					<button type="button" class="uk-modal-close uk-button uk-button-primary uk-margin-top">
+					<button type="button" class="uk-modal-close uk-button">
 						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 					</button>
 				</div>
