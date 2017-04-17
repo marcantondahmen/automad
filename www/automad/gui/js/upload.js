@@ -60,7 +60,7 @@
 		page: 		'',
 		
 		// Dropzone.
-		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone' }),
+		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
 		$input:		$('<input type="file" multiple />'),
 		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-primary uk-width-1-1 uk-margin-top' })
 				.click(function() {
@@ -72,7 +72,11 @@
 		// Init the upload modal.
 		init: function(e) {
 			
-			var	u = Automad.upload;
+			var	u = Automad.upload,
+				util = Automad.util,
+				da = u.dataAttr,
+				iconDropzone = '<i class="uk-icon-mouse-pointer"></i>&nbsp;&nbsp;',
+				iconBrowse = '<i class="uk-icon-folder-open"></i>&nbsp;&nbsp;';
 			
 			u.$modal = $(u.selectors.modal);
 			
@@ -80,12 +84,14 @@
 			u.$container = $(u.selectors.container).empty();
 			
 			// If an URL exists as data-attribute for the modal window, it will be used as additional form data.
-			u.page = u.$modal.data(Automad.util.dataCamelCase(u.dataAttr.url));
+			u.page = u.$modal.data(util.dataCamelCase(da.url));
 			
 			// Dropzone.
-			u.$dropzone.text(u.$modal.data(Automad.util.dataCamelCase(u.dataAttr.dropzoneText))).appendTo(u.$container);
+			u.$dropzone.html(iconDropzone + u.$modal.data(util.dataCamelCase(da.dropzoneText)))
+				   .appendTo(u.$container);
 			u.$input.appendTo(u.$dropzone).hide();
-			u.$browse.text(u.$modal.data(Automad.util.dataCamelCase(u.dataAttr.browseText))).insertAfter(u.$dropzone);
+			u.$browse.html(iconBrowse + u.$modal.data(util.dataCamelCase(da.browseText)))
+				 .insertAfter(u.$dropzone);
 			
 			// The modal's close buttons
 			u.$close = u.$modal.find('.uk-modal-close'); 	
@@ -126,15 +132,18 @@
 					// As fallback when using IframeTransport and the files are uploaded in one go, the text will include all filenames and sizes.
 					// In the normal case that always will be only one elements, since the all files from a selection are sent in a single request each.
 					$.each(data.files, function(i) {
-						info += '<div class="am-text-white uk-margin-small-bottom uk-text-truncate"><span class="uk-badge">' + 
-							Automad.util.formatBytes(data.files[i].size) + '</span>&nbsp;&nbsp;' + data.files[i].name + 
+						info += '<div class="am-text-white uk-margin-small-bottom uk-text-truncate">' + 
+							data.files[i].name +  
+							'</div>' +
+							'<div class="uk-text-small uk-text-muted">' + 
+							Automad.util.formatBytes(data.files[i].size) + 
 							'</div>';
 					});
 			
 					data.context = $('<div></div>', { 'class': 'uk-margin-large-top' }).appendTo(u.$container);
 			
 					$(info).appendTo(data.context);	
-					$('<div class="uk-progress uk-progress-striped uk-active"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
+					$('<div class="uk-progress uk-active"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
 				
 					data.context.find('.uk-progress-bar').width('0px');
 				
