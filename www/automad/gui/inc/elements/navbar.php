@@ -134,7 +134,7 @@ if (User::get()) {
 	
 	<!-- Search modal for small screens -->
 	<div id="am-search-modal" class="uk-modal">
-		<div class="uk-modal-dialog am-navbar-search-modal-dialog">
+		<div class="uk-modal-dialog">
 			<form class="uk-form" action="" method="get">
 				<input type="hidden" name="context" value="search">	
 				<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">
