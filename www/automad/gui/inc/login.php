@@ -54,12 +54,10 @@ $this->element('header');
 ?>
 		
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<div class="uk-block">
-				<h2><?php echo $this->sitename; ?></h2>
-			</div>
-			<form class="uk-form uk-margin-large-top" method="post">
+			<h2 class="uk-margin-large-top"><?php echo $this->sitename; ?></h2>
+			<form class="uk-form" method="post">
 				<input class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-small-bottom" type="text" name="username" placeholder="<?php Text::e('login_username'); ?>" required />
-				<input class="uk-form-controls uk-width-1-1 uk-margin-bottom" type="password" name="password" placeholder="<?php Text::e('login_password'); ?>" required />
+				<input class="uk-form-controls uk-width-1-1 uk-margin-large-bottom" type="password" name="password" placeholder="<?php Text::e('login_password'); ?>" required />
 				<div class="uk-text-right">
 					<button type="submit" class="uk-button uk-button-primary">
 						<?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i>
