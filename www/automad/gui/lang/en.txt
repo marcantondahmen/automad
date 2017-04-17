@@ -18,7 +18,7 @@ btn_apply_reload: Apply &amp; Reload
 
 -
 
-btn_browse: Or Browse
+btn_browse: Browse Files
 
 -
 
@@ -137,6 +137,10 @@ dashboard_recently_edited: Recently Edited Pages
 -
 
 dashboard_server: Server
+
+-
+
+dashboard_server_info: Server info
 
 -
 
@@ -374,10 +378,6 @@ sidebar_header_global: Global
 
 sidebar_header_pages: Pages
 
--
-
-sidebar_header_logged_in: Logged in as
-
 - 
 
 
@@ -388,6 +388,10 @@ sidebar_header_logged_in: Logged in as
 
 
 shared_title: Shared Data & Files
+
+-
+
+shared_theme: Main theme
 
 -
 
@@ -486,7 +490,7 @@ sys_cache_enable: Enable Caching
 
 -
 
-sys_cache_monitor: Check for changes every 
+sys_cache_monitor: Check for changes every
 
 -
 
