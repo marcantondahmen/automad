@@ -78,8 +78,6 @@
 			 *
 			 *	data-am-enter="#button"			Trigger click event on pressing the enter key. Must be added to an input field.
 			 *
-			 * 	data-am-default="..."			Set a default value for an input to be used if the field gets cleared by the user.
-			 *
 			 *      data-am-watch-exclude			Exclude field from being watched for changes.
 			 *
 			 *
@@ -98,7 +96,6 @@
 			close:		'data-am-close-on-success',
 			confirm:	'data-am-confirm',
 			enter:		'data-am-enter',
-			defaultValue:	'data-am-default',
 			watchExclude:	'data-am-watch-exclude'
 			
 		},
@@ -145,18 +142,7 @@
 				// Only needed, to identify a page, in case the form relates to a certain page (edit_page.php).
 				// Can be omitted for general form actions.
 				url =		$form.data(Automad.util.dataCamelCase(f.dataAttr.url));
-					
-			// Handle default values.
-			$form.find('[' + da.defaultValue + ']').each(function(){
-				
-				var	$input = $(this);
-				
-				if (!$input.val()) {
-					$input.val($input.data(Automad.util.dataCamelCase(da.defaultValue)));
-				}
-				
-			});
-				
+							
 			// Get parameters.	
 			var	param =		$form.serializeArray();
 			
@@ -337,7 +323,12 @@
 					
 					$('html').addClass(f.unsavedClassPrefix + handler);
 					$('button[' + da.submit + '="' + handler + '"]:disabled').prop('disabled', false);
-				
+					
+					// Change label color to flag input as changed.
+					$(this).prevAll('.uk-form-label').addClass('am-form-changed');
+					$(this).closest('.uk-form-icon, .uk-htmleditor, [data-am-toggle]').prev('.uk-form-label').addClass('am-form-changed');
+					$(this).closest('.uk-grid').prev('.uk-form-label').addClass('am-form-changed');
+					
 				}
 			);
 			
@@ -364,10 +355,7 @@
 			
 			// Handle modal events.
 			$doc.on('ready ajaxComplete', f.modalEvents);
-			
-			// Hide placeholder on focus.
-			$doc.on('ready ajaxComplete', f.placeholderEvents); 
-			
+						
 			// CodeMirror - trigger 'change' event on original textareas when a CodeMirror instance fires its 'change' event.	
 			$doc.on('ready ajaxComplete', function(){
 				
@@ -450,28 +438,6 @@
 				
 			});
 			
-		},
-		
-		// Hide placeholder when focused.
-		placeholderEvents: function() {
-			
-			var $fields = $('input, textarea');
-			
-			$fields.off('focus.automad.form.placeholder');
-			$fields.off('blur.automad.form.placeholder');
-			
-			$fields.on({
-				
-				'focus.automad.form.placeholder': function() {
-					$(this).data('placeholder', $(this).attr('placeholder')).attr('placeholder', '');
-				},
-				
-				'blur.automad.form.placeholder': function() {
-					$(this).attr('placeholder', $(this).data('placeholder'));
-				}
-				
-			});
-				
 		}
 		
 	};
