@@ -40,7 +40,7 @@
 @panel-box-badge-top:                   13px;
 @panel-box-badge-right:                 10px;
 
-@panel-box-primary-background:		@am-blue;
+@panel-box-primary-background:		darken(@am-grey, 18%);
 @panel-box-primary-color: 		#FFFFFF;
 @panel-box-primary-hover-color: 	@panel-box-primary-color;
 @panel-box-primary-title-color: 	@panel-box-primary-color;
@@ -56,8 +56,8 @@
 		margin: 0;
 	}
 
-	& a {
-		color: @panel-box-color;
+	&.uk-active {
+		box-shadow: 0 0 0 3px @am-success;
 	}
 
 }
@@ -72,7 +72,7 @@
 		// Keep icon responsive.
 		padding-top: 75%;
 
-		background-color: darken(@panel-box-background, 5%);
+		background-color: darken(@panel-box-background, 4%);
 		
 		& > * {
 			position: absolute;
@@ -80,7 +80,8 @@
 			width: 100%;
 			top: 50%;
 			margin-top: -20px;
-			font-size: 42px;
+			font-size: 38px;
+			font-weight: 700;
 			line-height: 38px;
 			color: darken(@panel-box-background, 8%);
 			text-align: center;
@@ -93,6 +94,10 @@
 		display: block;
 		height: 30px;
 		margin-top: @utility-margin;
+		
+		&-small {
+			height: 15px;
+		}
 		
 		& > * {
 			
