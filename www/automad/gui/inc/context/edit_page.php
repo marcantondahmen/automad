@@ -71,11 +71,11 @@ $this->element('header');
 		
 			$items = array(
 				array(
-					'icon' => '<i class="uk-icon-pencil"></i>',
+					'icon' => '<i class="uk-icon-file-text"></i>',
 					'text' => Text::get('btn_data')
 				),
 				array(
-					'icon' => '<i class="uk-icon-files-o"></i>&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>',
+					'icon' => '<i class="uk-icon-folder-open"></i>&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>',
 					'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
 				)
 			);
@@ -109,7 +109,7 @@ $this->element('header');
 		    	<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="page_data" data-am-url="<?php echo $url; ?>">
 					<div class="uk-text-center">
-						<i class="am-text-white uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
+						<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
 					</div>
 				</form>
 		    	</li>
@@ -117,7 +117,7 @@ $this->element('header');
 			<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="files" data-am-url="<?php echo $url; ?>" data-am-confirm="<?php Text::e('confirm_delete_files'); ?>">
 					<div class="uk-text-center">
-						<i class="am-text-white uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
+						<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
 					</div>
 				</form>
 			</li>
@@ -128,6 +128,7 @@ $this->element('header');
 			<div class="uk-modal-dialog">
 				<div class="uk-modal-header">
 					<?php Text::e('btn_move_page'); ?>
+					<a href="#" class="uk-modal-close uk-close"></a>
 				</div>
 				<div class="uk-badge uk-badge-notification">
 					<i class="uk-icon-mouse-pointer"></i>&nbsp;
