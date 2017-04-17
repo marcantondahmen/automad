@@ -140,14 +140,5 @@
 	};
 	
 	Automad.textarea.init();
-	
-	// Override CodeMirror defaults.
-	UIkit.on('beforeready.uk.dom', function(){
-		
-		$.extend(UIkit.components.htmleditor.prototype.defaults, {
-			height: 250
-		});
-		
-	});
-		
+			
 }(window.Automad = window.Automad || {}, jQuery);
