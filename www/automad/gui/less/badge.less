@@ -33,31 +33,29 @@
  */
 
 
-@badge-background:			@am-blue;
-@badge-padding-horizontal:		6px;
+@badge-background:			darken(@am-grey, 22%);
+@badge-padding-horizontal:		7px;
 @badge-font-size:			11px;
 @badge-font-weight:			900;
-@badge-line-height:			18px;
+@badge-line-height:			1.8;
 @badge-color:				#FFFFFF;
 @badge-text-transform:			none;
 @badge-hover-color:			@badge-color;
 
 @badge-notification-font-size:		12px;
-@badge-notification-line-height:	25px;
+@badge-notification-line-height:	2.15;
 
-@badge-success-background:		@am-green;
-@badge-warning-background:		@am-red;
-@badge-danger-background:		@am-red;
+@badge-success-background:		@am-success;
+@badge-warning-background:		@am-danger;
+@badge-danger-background:		@am-danger;
 
 
 .hook-badge() {
 	margin-top: -3px;
 	border-radius: 50px;
-	min-width: @badge-line-height - (2 * @badge-padding-horizontal) + 1;
-	line-height: 1.6;
 }
 
 .uk-badge-notification {
 	margin-top: 0;
-	padding: 0 10px;
+	padding: 0 12px;
 }
