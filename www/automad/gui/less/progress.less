@@ -38,13 +38,13 @@
 @progress-margin-vertical: 		8px;
 @progress-background:  			@panel-box-background;
 
-@progress-bar-background:   		@am-blue;
+@progress-bar-background:   		mix(@progress-background, @progress-bar-success-background);
 @progress-bar-font-size: 		@text-small-font-size;
 @progress-bar-color:  			#FFFFFF;
 
-@progress-bar-success-background:	@am-green;
-@progress-bar-warning-background: 	@am-red;
-@progress-bar-danger-background: 	@am-red;
+@progress-bar-success-background:	@am-success;
+@progress-bar-warning-background: 	@am-danger;
+@progress-bar-danger-background: 	@am-danger;
 
 
 .hook-progress() {
