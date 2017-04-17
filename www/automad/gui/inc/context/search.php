@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Core\Parse::queryKey('query') . '"';
+$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Core\Parse::query('query') . '"';
 $this->element('header');
 
 
@@ -56,16 +56,18 @@ $results = $this->Content->getSearchResults();
 
 ?>
 	
-		<ul class="uk-subnav uk-subnav-pill uk-margin-large-top">
-			<li class="uk-disabled"><i class="uk-icon-search"></i></li>
-			<li><a href=""><?php Text::e('search_title'); ?></a></li>
-		</ul>
-		<h3 class="uk-margin-top">
-			<i class="uk-icon-angle-double-left"></i>&nbsp;
-			<i><?php echo Core\Parse::queryKey('query'); ?></i>&nbsp;
+		<div class="uk-position-relative uk-margin-large-top">
+			<ul class="uk-subnav uk-subnav-pill">
+				<li class="uk-disabled"><i class="uk-icon-search"></i></li>
+				<li><a href=""><?php Text::e('search_title'); ?></a></li>
+			</ul>
+			<span class="uk-badge uk-position-top-right"><?php echo count($results); ?></span>	
+		</div>
+		<h2 class="uk-margin-large-top">
+			<i class="uk-icon-angle-double-left"></i>
+			<?php echo Core\Parse::query('query'); ?>
 			<i class="uk-icon-angle-double-right"></i>
-			<span class="uk-badge uk-float-right_"><?php echo count($results); ?></span>
-		</h3>
+		</h2>
 		
 <?php
 
