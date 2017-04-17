@@ -52,6 +52,7 @@
 			padding: @modal-dialog-margin-vertical @utility-margin-large;
 	
 			@media (max-width: (@am-file-info-breakpoint - 1)) {
+				width: 100%;
 				max-width: @am-file-info-max-width-small;
 			}
 			
@@ -135,6 +136,7 @@
 					text-align: center;
 					margin-top: 2px;
 					font-size: 25px;
+					font-weight: 700;
 					color: @panel-box-background;
 					
 					@media (min-width: @breakpoint-medium) {
@@ -142,6 +144,17 @@
 						font-size: 50px;
 					}
 					
+				}
+				
+			}
+			
+			@media (max-width: @breakpoint-small-max) {
+				
+				margin: -@modal-dialog-margin-vertical -@utility-margin-large @utility-margin -@utility-margin-large;
+				
+				& > img,
+				& > div {
+					border-radius: 0;
 				}
 				
 			}
@@ -165,12 +178,20 @@
 	
 	// Upload dropzone.
 	&-dropzone {
-		border: @am-border-width dashed @am-border-color;
+		border: 2px dashed darken(@am-grey, 8%);
 		border-radius: 20px;
 		text-align: center;
 		padding: 150px 0;
-		color: darken(@am-grey, 4%);
+		color: darken(@am-grey, 5%);
 		font-size: 32px;
+		font-weight: 500;
+		cursor: default;
+		-webkit-touch-callout: none;
+    		-webkit-user-select: none;
+    		-khtml-user-select: none;
+    		-moz-user-select: none;
+    		-ms-user-select: none;
+    		user-select: none;
 	}
 	
 }
