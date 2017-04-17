@@ -37,10 +37,10 @@
 @navbar-background:		@am-grey;
 
 @navbar-nav-color:		@navbar-color;
-@navbar-nav-hover-color:	#F0F0F0;
-@navbar-nav-active-color:	#E0E0E0;
+@navbar-nav-hover-color:	@navbar-color;
+@navbar-nav-active-color:	@navbar-color;
 
-@navbar-nav-height:		55px;
+@navbar-nav-height:		58px;
 @navbar-nav-padding-horizontal: 12px;
 
 
@@ -143,7 +143,6 @@
 		
 		& .uk-icon-automad {
 			font-size: 20px;
-			
 			position: relative;
 			top: 2px;
 			margin: 0 -1px;
@@ -169,7 +168,6 @@
 		
 		& .uk-form-controls {
 			
-			border: none;
 			color: @navbar-color;
 			background-color: @panel-box-background;
 			
@@ -180,8 +178,7 @@
 			&:hover,
 			&:focus {
 				color: @navbar-color;
-				background-color: @button-active-background;
-	
+				background-color: darken(@panel-box-background, 4%);
 			}
 			
 		}
