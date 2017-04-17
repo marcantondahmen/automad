@@ -57,8 +57,7 @@
 		labelDataAttr: 'data-am-toggle',
 		
 		class: {
-			active: 'uk-active',
-			toggleContainer: 'am-toggle-container'
+			active: 'uk-active'
 		},
 
 		// Toggle checkboxes.
@@ -105,7 +104,7 @@
 			// Update optional container.
 			if (toggleContainer) {
 				
-				var 	$toggleContainer = $(toggleContainer).addClass(t.class.toggleContainer);
+				var 	$toggleContainer = $(toggleContainer);
 								
 				if ($input.is(':checked')) {
 					$toggleContainer.addClass(t.class.active);
