@@ -65,6 +65,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<div class="uk-modal-dialog">
 			<div class="uk-modal-header">
 				<?php Text::e('btn_add_page'); ?>
+				<a href="#" class="uk-modal-close uk-close"></a>
 			</div>
 			<form class="uk-form uk-form-stacked" data-am-handler="add_page">
 				<input id="am-add-page-input" type="hidden" name="url" value="" />
