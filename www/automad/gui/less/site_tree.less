@@ -35,7 +35,7 @@
 
 [data-am-tree] {
 	
-	& > a {
+	& .uk-button {
 		margin-left: @nav-padding-horizontal;
 	}
 	
@@ -55,7 +55,7 @@
 		border-radius: @am-radius;
 		width: auto;
 		margin-bottom: @am-border-width;
-		margin-right: @am-nav-padding;
+		margin-right: 12px;
 	}
 	
 	.uk-modal & {
@@ -65,7 +65,7 @@
 		}
 		
 		& .uk-active > a {
-			background-color: @am-blue;
+			background-color: @am-primary;
 		}
 		
 		& a:not(.am-tree-toggle) {
@@ -79,9 +79,9 @@
 	.uk-offcanvas-bar & {
 		
 		padding-left: @utility-container-padding-horizontal - @nav-padding-horizontal;
-		padding-right: @am-nav-border-vertical-width;
+		padding-right: @am-sidebar-border-width;
 		padding-bottom: @am-body-padding-bottom - @nav-padding-vertical;
-		margin: @utility-margin 0;
+		margin: (@utility-margin + @utility-margin-small) 0;
 		.active-border-vertical;
 	
 		& {
@@ -94,7 +94,7 @@
 			}
 			
 			& .uk-active > a:not(.am-tree-toggle) {
-				margin-right: -@am-nav-border-vertical-width;
+				margin-right: -@am-sidebar-border-width;
 			}
 			
 		}
@@ -128,17 +128,19 @@
 
 [class*='am-tree-icon-'] {
 	&:extend([class*='uk-icon-'] all);
+	font-size: 12px;
+	color: @am-muted;
+	margin-top: 3px;
 }
 
 .am-tree-icon {
 	
 	&-open {
-		&:extend(.uk-icon-chevron-right all);
-		margin-top: 5px;
+		&:extend(.uk-icon-plus-circle all);
 	}
 	
 	&-close {
-		&:extend(.uk-icon-chevron-down all);
+		&:extend(.uk-icon-minus-circle all);
 	}
 	
 }
