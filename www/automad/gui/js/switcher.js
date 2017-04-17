@@ -42,16 +42,21 @@
 		
 	Automad.switcher = {
 		
+		dataAttr: {
+			switcher: 'data-uk-switcher',
+			tab: 'data-am-tab'
+		},
+		
+		// Get the tab index from the given hash string.
+		// Note that the matching tab name is stored in a data attribute to avoid scrolling to a given anchor on load. 
 		getActiveTab: function() {
 			
-			var tab = 0;
-			
 			if (window.location.hash) {
-				tab = parseInt(window.location.hash.substring(1));
+				return $('[' + Automad.switcher.dataAttr.tab + '="' + window.location.hash.substr(1) + '"]').index();
+			} else {
+				return 0;
 			}
-			
-			return tab;
-			
+
 		}
 		
 	};
@@ -67,21 +72,21 @@
 	// That will be the case, when a link outside the actual switcher tries to change the active tab.
 	$(window).on('hashchange', function() {
 		
-		var 	$switcher = $('[data-uk-switcher]'),
+		var 	$switcher = $('[' + Automad.switcher.dataAttr.switcher + ']'),
 			$active = $switcher.children('.uk-active'),
-			hash = Automad.switcher.getActiveTab();
+			tab = Automad.switcher.getActiveTab();
 		
 		// Only update if the hash doesn't match the active tab.	
-		if ($active.index() != hash) {
-			$switcher.children('button').eq(hash).click();
+		if ($active.index() != tab) {
+			$switcher.children('button').eq(tab).click();
 		}
 			
 	});
 	
-	// Update the hash on change event.
+	// Update the hash on show event.
 	$(document).on('ready', function() {
-		$('[data-uk-switcher]').on('show.uk.switcher', function(event, tab) {
-			window.location.hash = tab.index();
+		$('[' + Automad.switcher.dataAttr.switcher + ']').on('show.uk.switcher', function(event, $tab) {
+			window.location.hash = $tab.data(Automad.util.dataCamelCase(Automad.switcher.dataAttr.tab));
 		});
 	});
 	
