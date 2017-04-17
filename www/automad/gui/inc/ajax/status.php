@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,12 +56,16 @@ if (isset($_POST['item'])) {
 	
 	if ($item == 'cache') {
 		
+		$tab = Core\Str::sanitize(Text::get('sys_cache'));
+		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = '<a href="?context=system_settings#0" class="uk-button uk-button-large uk-button-success uk-width-1-1"><i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-button-success uk-width-1-1">' .
+					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_cache_enabled') . 
 					    '</a>';
 		} else {
-			$output['status'] = '<a href="?context=system_settings#0" class="uk-button uk-button-large uk-width-1-1"><i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-width-1-1">' .
+					    '<i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_cache_disabled') . 
 					    '</a>';
 		}
@@ -69,12 +74,16 @@ if (isset($_POST['item'])) {
 	
 	if ($item == 'debug') {
 		
+		$tab = Core\Str::sanitize(Text::get('sys_debug'));
+		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = '<a href="?context=system_settings#3" class="uk-button uk-button-large uk-button-success uk-width-1-1"><i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-button-success uk-width-1-1">' .
+					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_debug_enabled') . 
 					    '</a>';
 		} else {
-			$output['status'] = '<a href="?context=system_settings#3" class="uk-button uk-button-large uk-width-1-1"><i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-width-1-1">' .
+					    '<i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_debug_disabled') . 
 					    '</a>';
 		}
