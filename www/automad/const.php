@@ -114,12 +114,11 @@ Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PRE
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/en.txt');
-Config::set('AM_ALLOWED_FILE_TYPES', 			'css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif');
-Config::set('AM_ALLOWED_FILE_TYPES_DEFAULT_GUI', 	'css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif'); // To be used in case a user overrides the values above and wants to restore the original settings.
+Config::set('AM_ALLOWED_FILE_TYPES', 'css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif');
 
 // PAGE
 Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
-Config::set('AM_PAGE_GUI', '/gui');
+Config::set('AM_PAGE_GUI', '/dashboard');
 
 // PERMISSIONS
 Config::set('AM_PERM_DIR', 0755);
