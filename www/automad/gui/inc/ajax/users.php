@@ -66,7 +66,7 @@ foreach (Accounts::get() as $user => $hash) {
 		<?php echo $user; ?>
 		<div class="uk-float-right">
 			<?php if ($user != User::get()) { ?>
-			<label data-am-toggle>
+			<label class="am-toggle-checkbox" data-am-toggle>
 				<input type="checkbox" name="delete[]" value="<?php echo $user; ?>" />
 			</label>
 			<?php } else { ?>
