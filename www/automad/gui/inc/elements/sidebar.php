@@ -94,7 +94,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					</ul>
 					<?php 
 					
-						$header = Text::get('sidebar_header_pages') . '&nbsp;&nbsp;<span class="uk-badge uk-badge-danger uk-float-right">' . count($this->collection) . '</span>';
+						$header = Text::get('sidebar_header_pages') . '&nbsp;&nbsp;<span class="uk-badge uk-float-right">' . count($this->collection) . '</span>';
 						echo $this->Html->siteTree('', $this->collection, array('context' => 'edit_page'), false, $header); 
 					
 					?> 
