@@ -33,7 +33,7 @@
  */
 
 
-@subnav-margin-horizontal:		2px;
+@subnav-margin-horizontal:		3px;
 @subnav-margin-vertical:		0;
 
 @subnav-color:				#FFFFFF;
@@ -41,8 +41,8 @@
 @subnav-active-color:			@subnav-color;
 @subnav-disabled-color:			@subnav-color;
 
-@subnav-pill-padding-vertical:		0px;
-@subnav-pill-padding-horizontal:	7px;
+@subnav-pill-padding-vertical:		0;
+@subnav-pill-padding-horizontal:	6px;
 @subnav-pill-hover-background:		@am-nav-bg-hover;
 @subnav-pill-hover-color:		@subnav-hover-color;
 @subnav-pill-active-background:		@am-grey;
@@ -51,8 +51,9 @@
 .hook-subnav-pill() {
 	
 	font-size: @text-small-font-size;
+	font-weight: @am-nav-font-weight;
 	line-height: @text-small-line-height + 2 !important;
-	border-radius: @text-small-line-height;
+	border-radius: @am-radius;
 	margin-top: -1px;
 	white-space: nowrap;
 	overflow: hidden;
