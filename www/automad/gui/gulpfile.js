@@ -13,7 +13,8 @@ var 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
-	destination = 'dist';
+	destination = 'dist',
+	prefix = 'am';
 
 
 // Error handling to prevent watch task to fail silently without restarting.
@@ -45,7 +46,7 @@ gulp.task('bump', function() {
 });
 
 
-// Concat and minify the GUI js.
+// Concat, minify and prefix the GUI js.
 gulp.task('gui-js', ['bump'], function() {
 	
 	var	uglifyOptions = { 
@@ -54,26 +55,29 @@ gulp.task('gui-js', ['bump'], function() {
 				hoist_vars: false 
 			},
 			output: {
-				max_line_len: 1000
+				max_line_len: 2000
 			}
 		};
 	
 	return 	gulp.src('js/*.js')
-		.pipe(concat('gui.min.js'))
+		.pipe(concat('automad.min.js'))
 		.pipe(uglify(uglifyOptions))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+		// Prefix all UIkit items.
+		.pipe(replace(/(uk-[a-z\d\-]+)/g, prefix + '-$1'))
+		.pipe(replace(/data-uk-/g, 'data-' + prefix + '-uk-'))
 		.pipe(gulp.dest(destination));
 	
 });
 
 
-// Concat and minify all required js libraries.
+// Concat minify and prefix all required js libraries.
 gulp.task('lib-js', ['bump'], function() {
 	
 	var	uglifyOptions = { 
 			preserveComments: 'license', 
 			output: { 
-				max_line_len: 1000
+				max_line_len: 2000
 			} 
 		};
 	
@@ -91,10 +95,6 @@ gulp.task('lib-js', ['bump'], function() {
 				'../lib/codemirror/mode/gfm/gfm.js'
 			])
 			.pipe(uglify(uglifyOptions)),
-			// Scrollbars.
-			gulp.src([
-				'../lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js'
-			]),
 			// Marked (for HTML editor).
 			gulp.src([
 				'../lib/marked/marked.min.js'
@@ -119,20 +119,26 @@ gulp.task('lib-js', ['bump'], function() {
 			.pipe(uglify(uglifyOptions))
 		)
 		.pipe(concat('libs.min.js', { newLine: '\r\n\r\n' } ))
+		// Prefix all UIkit items.
+		.pipe(replace(/(uk-[a-z\d\-]+)/g, prefix + '-$1'))
+		.pipe(replace(/data-uk-/g, 'data-' + prefix + '-uk-'))
 		.pipe(gulp.dest(destination));
 	
 });
 
 
-// Compile and minify automad.less.
+// Compile, minify and prefix automad.less.
 gulp.task('less', ['bump'], function() {
 
 	return 	gulp.src('less/automad.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS({ keepBreaks: true, rebase: false }))
+		.pipe(cleanCSS({ format: 'keep-breaks', rebase: false }))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
+		// Prefix all UIkit items.
+		.pipe(replace(/(uk-[a-z\d\-]+)/g, prefix + '-$1'))
+		.pipe(replace(/data-uk-/g, 'data-' + prefix + '-uk-'))
 		.pipe(gulp.dest(destination));
 	
 });
