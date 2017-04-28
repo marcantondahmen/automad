@@ -83,6 +83,9 @@ if ((strpos(strtolower(getenv('SERVER_SOFTWARE')), 'apache') !== false && file_e
 	Debug::log('Pretty URLs are disabled');
 }
 
+// Define AM_BASE_INDEX as the prefix for all page URLs.
+Config::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
+
 
 
 

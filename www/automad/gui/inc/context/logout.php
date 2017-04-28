@@ -62,7 +62,7 @@ $this->element('header');
 				<?php Text::e('success_log_out'); ?>
 			</div>
 			<div class="uk-text-right">
-				<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>" class="uk-button">
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button">
 					<?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i>
 				</a>
 			</div>

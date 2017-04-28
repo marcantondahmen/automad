@@ -90,7 +90,7 @@ class Resolve {
 	 *	Resolve an URL according to its type.
 	 * 
 	 *	Absolute URLs, query strings, anchors or mails:	not modified
-	 *	Root-relative URLs: 				AM_BASE_URL is prepended (and AM_INDEX in case of pages)
+	 *	Root-relative URLs: 				AM_BASE_URL or AM_BASE_INDEX are prepended
 	 *	Relative URLs:					the full path gets prepended and all '../' and './' get resolved
 	 *	
 	 *	@param object $Page
@@ -113,7 +113,7 @@ class Resolve {
 				// also if rewriting is disabled.
 				return AM_BASE_URL . $url;
 			} else {	
-				return AM_BASE_URL . AM_INDEX . $url;	
+				return AM_BASE_INDEX . $url;	
 			}
 									
 		} else {
@@ -158,7 +158,7 @@ class Resolve {
 			if (FileSystem::isAllowedFileType($url)) {
 				return AM_BASE_URL . AM_DIR_PAGES . $url;
 			} else {
-				return AM_BASE_URL . AM_INDEX . $url;
+				return AM_BASE_INDEX . $url;
 			}
 				
 		}

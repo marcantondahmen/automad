@@ -240,7 +240,7 @@ class Parse {
 		} else {
 				
 			// The requested page gets passed 'index.php/page/path'.
-			// That can be the case if rewriting is disabled and AM_INDEX equals '/index.php'.
+			// That can be the case if rewriting is disabled and AM_BASE_INDEX ends with '/index.php'.
 			if (isset($_SERVER['PATH_INFO'])) {
 		
 				$request = $_SERVER['PATH_INFO'];
@@ -276,7 +276,7 @@ class Parse {
 		
 		// Remove trailing slash from URL to keep relative links consistent.
 		if (substr($request, -1) == '/' && $request != '/') {
-			header('Location: ' . AM_BASE_URL . AM_INDEX . rtrim($request, '/'), false, 301);
+			header('Location: ' . AM_BASE_INDEX . rtrim($request, '/'), false, 301);
 			die;
 		}
 		

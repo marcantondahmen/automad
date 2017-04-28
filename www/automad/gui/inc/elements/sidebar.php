@@ -65,7 +65,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							</a>
 						</li>
 						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
-							<a href="<?php echo AM_BASE_URL . AM_INDEX . AM_PAGE_GUI; ?>">
+							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>">
 								<i class="uk-icon-th-large uk-icon-justify"></i>&nbsp;
 								<?php Text::e('dashboard_title'); ?>
 							</a>

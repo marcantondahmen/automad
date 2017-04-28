@@ -479,7 +479,7 @@ class Content {
 			// Redirect to edit mode for a single result or in case $query represents an actually existing URL.
 			if (count($pages) == 1) {
 				$Page = reset($pages);
-				header('Location: ' . AM_BASE_URL . AM_INDEX . AM_PAGE_GUI . '?context=edit_page&url=' . urlencode($Page->url));
+				header('Location: ' . AM_BASE_INDEX . AM_PAGE_GUI . '?context=edit_page&url=' . urlencode($Page->url));
 				die;	
 			}
 		

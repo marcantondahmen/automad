@@ -94,7 +94,7 @@ class Sitemap {
 		foreach ($collection as $Page) {
 			// Only include "real" URLs and not aliases.
 			if (strpos($Page->url, '/') === 0) {
-				$xml .= '<url><loc>http://' . $_SERVER['SERVER_NAME'] . AM_BASE_URL . AM_INDEX . $Page->url . '</loc></url>' . "\n";
+				$xml .= '<url><loc>http://' . $_SERVER['SERVER_NAME'] . AM_BASE_INDEX . $Page->url . '</loc></url>' . "\n";
 			}
 		}
 		

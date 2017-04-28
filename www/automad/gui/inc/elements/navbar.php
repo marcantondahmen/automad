@@ -62,7 +62,7 @@ if (User::get()) {
 		<ul class="am-navbar-nav">
 			<!-- Logo -->
 			<li class="am-navbar-logo">
-				<a href="<?php echo AM_BASE_URL . AM_PAGE_GUI; ?>"><i class="uk-icon-automad"></i></a>
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"><i class="uk-icon-automad"></i></a>
 			</li>
 			<!-- Search -->
 			<li class="am-navbar-search">
