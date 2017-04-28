@@ -1,4 +1,3 @@
-<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -35,30 +34,23 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core as Core;
-
-
-defined('AUTOMAD') or die('Direct access not permitted!');
-
-
 /*
- *	Purge cache directory.
+ *	Debug helper. 
  */
-
-
-$output = array();
-$tempDir = FileSystem::purgeCache();
-
-if ($tempDir) {
-	$output['success'] = Text::get('success_cache_purged');
-	Core\Debug::ajax($output, 'temp directory', $tempDir);
-} else {
-	$output['error'] = Text::get('error_cache_purged');
-}
-
-
-echo json_encode($output);
-
-
-?>
+	
++function(Automad, $) {
+	
+	Automad.debug = {
+		
+		log: function(handler, data) {
+			
+			var debug = {};
+			
+			debug['Ajax: ' + handler] = data;
+			console.log(debug);
+			
+		}
+		
+	}
+	
+}(window.Automad = window.Automad || {}, jQuery);

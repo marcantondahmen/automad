@@ -91,8 +91,8 @@ class Content {
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
 	
-					$output['debug']['page'] = $Page->url;
-					$output['debug']['new subpage'] = json_encode($_POST['subpage']);
+					Core\Debug::ajax($output, 'page', $Page->url);
+					Core\Debug::ajax($output, 'new subpage', $_POST['subpage']);
 	
 					// The new page's properties.
 					$title = $_POST['subpage']['title'];
@@ -231,7 +231,7 @@ class Content {
 
 				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
 				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
-				$output['debug'] = 'Deleting ' . $Page->url;
+				Core\Debug::ajax($output, 'deleted', $Page->url);
 
 				$this->clearCache();
 
@@ -516,8 +516,8 @@ class Content {
 						// Move page
 						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);	
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
-						$output['debug']['page'] = $Page->path;
-						$output['debug']['destination'] = $dest->path;
+						Core\Debug::ajax($output, 'page', $Page->path);
+						Core\Debug::ajax($output, 'destination', $dest->path);
 						
 						$this->clearCache();
 		
@@ -714,7 +714,7 @@ class Content {
 	public function upload() {
 		
 		$output = array();
-		$output['debug'] = $_POST + $_FILES;
+		Core\Debug::ajax($output, 'files', $_POST + $_FILES);
 
 		// Set path.
 		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.

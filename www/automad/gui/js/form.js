@@ -156,7 +156,7 @@
 			
 				// Debug info.
 				if (data.debug) {
-					console.log({ Ajax: handler, Debug: data.debug });
+					Automad.debug.log(handler, data.debug);
 				}
 				
 				// In case the returned JSON contains a redirect URL, simply redirect the page.

@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -114,7 +115,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 	$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 	FileSystem::write(AM_CONFIG, $json);
 	$output['success'] = Text::get('success_config_update');
-	$output['debug'] = $config;
+	Core\Debug::ajax($output, 'config', $config);
 
 } else {
 

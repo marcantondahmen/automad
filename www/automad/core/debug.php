@@ -69,6 +69,31 @@ class Debug {
 	
 	
 	/**
+	 *      Modify a given $output array (passed by reference) to be returned as JSON string (AJAX requests) 
+	 *      by extending the $output['debug'] array only when debugging is enabled.
+	 *      Note that this method doesn't return anything (false).
+	 *      
+	 *      @param array $output
+	 *      @param string $key
+	 *      @param mixed $value
+	 */
+	
+	public static function ajax(&$output, $key, $value = '') {
+		
+		if (AM_DEBUG_ENABLED) {
+			
+			if (!isset($output['debug'])) {
+				$output['debug'] = array();
+			}
+			
+			$output['debug'][$key] = $value;
+				
+		}
+		
+	}
+	
+	
+	/**
 	 *	Enable full error reporting, when debugging is enabled.
 	 */
 	
