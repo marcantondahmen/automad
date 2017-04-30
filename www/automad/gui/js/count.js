@@ -64,7 +64,7 @@
 			var	c = Automad.count,
 				$doc = $(document);
 				
-			$doc.on('ready ajaxComplete', c.get);	
+			$doc.on('ready ajaxComplete count.automad', c.get);	
 			
 		}
 		
