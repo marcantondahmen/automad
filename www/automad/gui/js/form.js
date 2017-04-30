@@ -38,7 +38,7 @@
  *	Handling forms. 
  */
 
-+function(Automad, $) {
++function(Automad, $, UIkit) {
 
 	Automad.form = {
 		
@@ -444,4 +444,4 @@
 
 	Automad.form.init();
 	
-}(window.Automad = window.Automad || {}, jQuery);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);

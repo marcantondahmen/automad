@@ -38,7 +38,7 @@
  *	Sidebar toggle. 
  */
 	
-+function(Automad, $) {
++function(Automad, $, UIkit) {
 	
 	Automad.sidebar = {
 		
@@ -88,4 +88,4 @@
 	$(document).on('ready', Automad.sidebar.init);
 	
 	
-}(window.Automad = window.Automad || {}, jQuery);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);

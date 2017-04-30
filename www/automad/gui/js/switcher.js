@@ -38,7 +38,7 @@
  * 	Override the UIkit switcher plugin to get/set the current tab from/to the window.location.hash.
  */
 
-+function(Automad, $) {
++function(Automad, $, UIkit) {
 		
 	Automad.switcher = {
 		
@@ -90,4 +90,4 @@
 		});
 	});
 	
-}(window.Automad = window.Automad || {}, jQuery);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);

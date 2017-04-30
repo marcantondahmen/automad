@@ -38,7 +38,7 @@
  * 	Add Custom Variable (page & shared)
  */
 
-+function(Automad, $) {
++function(Automad, $, UIkit) {
 	
 	Automad.addVariable = {
 		
@@ -110,4 +110,4 @@
 	
 	$(document).on('click', Automad.addVariable.selectors.submit, Automad.addVariable.append);
 	
-}(window.Automad = window.Automad || {}, jQuery);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);

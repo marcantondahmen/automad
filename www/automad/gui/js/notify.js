@@ -38,7 +38,7 @@
  * 	Wrapper for the UIkit notify plugin.
  */
 
-+function(Automad, $) {
++function(Automad, $, UIkit) {
 		
 	Automad.notify = {
 		
@@ -64,4 +64,4 @@
 		
 	}	
 	
-}(window.Automad = window.Automad || {}, jQuery);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);

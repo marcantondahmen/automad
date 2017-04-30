@@ -38,7 +38,7 @@
  * 	File information modal.
  */
 
-+function(Automad, $) {
++function(Automad, $, UIkit) {
 	
 	Automad.editFileInfo = {
 		
@@ -168,4 +168,4 @@
 	$(document).on('click', Automad.editFileInfo.selectors.button, Automad.editFileInfo.submit);	
 		
 	
-}(window.Automad = window.Automad || {}, jQuery);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);
