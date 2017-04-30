@@ -47,7 +47,7 @@ gulp.task('bump', function() {
 
 
 // Concat, minify and prefix the GUI js.
-gulp.task('gui-js', ['bump'], function() {
+gulp.task('automad-js', ['bump'], function() {
 	
 	var	uglifyOptions = { 
 			compress: { 
@@ -72,7 +72,7 @@ gulp.task('gui-js', ['bump'], function() {
 
 
 // Concat minify and prefix all required js libraries.
-gulp.task('lib-js', ['bump'], function() {
+gulp.task('libs-js', ['bump'], function() {
 	
 	var	uglifyOptions = { 
 			preserveComments: 'license', 
@@ -131,7 +131,7 @@ gulp.task('lib-js', ['bump'], function() {
 
 
 // Compile, minify and prefix automad.less.
-gulp.task('less', ['bump'], function() {
+gulp.task('automad-less', ['bump'], function() {
 
 	return 	gulp.src('less/automad.less')
 		.pipe(less())
@@ -150,8 +150,8 @@ gulp.task('less', ['bump'], function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('js/*.js', ['gui-js']);
-	gulp.watch('less/*.less', ['less']);
+	gulp.watch('js/*.js', ['automad-js']);
+	gulp.watch('less/*.less', ['automad-less']);
 	
 });
 
@@ -205,4 +205,4 @@ gulp.task('google-fonts', sequence('google-fonts-download', 'google-fonts-css'))
 
 
 // The default task.
-gulp.task('default', ['gui-js', 'lib-js', 'less']);
+gulp.task('default', ['automad-js', 'libs-js', 'automad-less']);
