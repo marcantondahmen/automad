@@ -76,17 +76,13 @@ $this->element('header');
 			<!-- Data -->
 			<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="shared_data">
-					<div class="uk-text-center">
-						<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
-					</div>
+					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
 				</form>
 			</li>
 			<!-- Files -->
 			<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="files" data-am-confirm="<?php Text::e('confirm_delete_files'); ?>">
-					<div class="uk-text-center">
-						<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small uk-margin-large-top"></i>
-					</div>
+					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
 				</form>
 			</li>
 		</ul>

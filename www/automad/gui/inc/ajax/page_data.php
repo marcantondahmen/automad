@@ -165,7 +165,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						<?php 
 						
 						if (file_exists($template)) {
-							$templateButtonClass = 'uk-button-success';
+							$templateButtonClass = 'uk-button-primary';
 							$templateIconClass = 'uk-icon-file-text';
 						} else {
 							$templateButtonClass = 'uk-button-danger';

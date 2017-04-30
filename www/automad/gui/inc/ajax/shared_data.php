@@ -89,7 +89,7 @@ if (isset($_POST['data'])) {
 					<?php 
 					
 					$themes = FileSystem::getThemes();
-					$output['debug']['themes'] = $themes;
+					Core\Debug::ajax($output, 'themes', $themes);
 					$i = 0;
 					
 					foreach ($themes as $theme) { 

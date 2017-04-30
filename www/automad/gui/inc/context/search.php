@@ -61,12 +61,12 @@ $results = $this->Content->getSearchResults();
 				<li class="uk-disabled"><i class="uk-icon-search"></i></li>
 				<li><a href=""><?php Text::e('search_title'); ?></a></li>
 			</ul>
-			<span class="uk-badge uk-position-top-right"><?php echo count($results); ?></span>	
 		</div>
 		<h2 class="uk-margin-large-top">
 			<i class="uk-icon-angle-double-left"></i>
 			<?php echo Core\Parse::query('query'); ?>
-			<i class="uk-icon-angle-double-right"></i>
+			<i class="uk-icon-angle-double-right"></i>&nbsp;
+			<span class="uk-badge"><?php echo count($results); ?></span>
 		</h2>
 		
 <?php

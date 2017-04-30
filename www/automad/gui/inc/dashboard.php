@@ -60,8 +60,8 @@ $this->element('header');
 
 ?>
 		
-		<div class="uk-block">
-			<h1 class="uk-margin-large-top"><?php echo $this->sitename; ?></h1>
+		<div class="uk-block uk-padding-bottom-remove">
+			<h1 class="uk-margin-large-top uk-margin-small-bottom"><?php echo $this->sitename; ?></h1>
 		</div>
 		<div class="uk-panel uk-panel-box uk-panel-box-primary">
 			<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3">
@@ -77,7 +77,7 @@ $this->element('header');
 				</li>
 				<li class="uk-position-relative uk-hidden-small">
 					<i class="uk-icon-hdd-o uk-icon-small uk-margin-bottom"></i>
-					<a href="#am-server-info-modal" class="uk-button uk-button-small uk-float-right" data-uk-modal>
+					<a href="#am-server-info-modal" class="uk-button uk-button-primary uk-button-mini uk-float-right" data-uk-modal>
 						<i class="uk-icon-plus-circle"></i>&nbsp;
 						<?php Text::e('btn_more'); ?>
 					</a>
@@ -88,11 +88,11 @@ $this->element('header');
 				</li>
 			</ul>
 		</div>
-		<ul class="uk-grid uk-grid-width-medium-1-2 uk-margin-large-bottom">
+		<ul class="uk-grid uk-grid-width-medium-1-2">
 			<li class="uk-margin-small-bottom" data-am-status="cache"></li>
-			<li class="uk-margin-small-bottom" data-am-status="debug"></li>
+			<li class="uk-margin-large-bottom" data-am-status="debug"></li>
 		</ul>
-		<hr />
+		<hr class="uk-margin-top-remove" />
 		<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-danger uk-button-large uk-width-1-1">
 			<i class="uk-icon-share"></i>&nbsp;
 			<?php Text::e('btn_inpage_edit'); ?>

@@ -92,7 +92,7 @@ if (User::get()) {
 			<?php } ?>
 			<!-- Search modal for small screens -->
 			<li class="uk-visible-small">
-				<a href="#am-search-modal" class="am-navbar-icon" data-uk-modal>
+				<a href="#am-search-modal" class="am-navbar-icon am-navbar-icon-danger" data-uk-modal>
 					<i class="uk-icon-search"></i>
 				</a>
 			</li>

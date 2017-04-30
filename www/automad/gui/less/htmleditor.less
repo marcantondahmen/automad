@@ -65,8 +65,10 @@
 
 	overflow: hidden;
 	
-	@media (max-width: @breakpoint-small-max) {
-		display: none;
+	&-flip {
+		@media (max-width: @breakpoint-small-max) {
+			display: none;
+		}	
 	}
 	
 	:not(.uk-htmleditor-fullscreen) > & {
@@ -133,7 +135,7 @@
 	
 	& .cm-s-default,
 	& .uk-htmleditor-preview {
-		padding: 40px;
+		padding: @utility-margin-large;
 	}
 	
 }
@@ -284,5 +286,5 @@
 // Autoresize editor.
 :not(.uk-htmleditor-fullscreen) > div > div > .CodeMirror {
   	height: auto !important;
-	min-height: 50px;
+	min-height: 80px;
 }

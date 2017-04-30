@@ -76,10 +76,10 @@
 @base-heading-color:		#FFFFFF;
 @base-heading-text-transform: 	none;
 @base-heading-margin-top: 	@base-margin-vertical;
-@base-h1-font-size:  		36px;
-@base-h1-line-height: 		36px;
-@base-h2-font-size: 		26px;
-@base-h2-line-height:  		30px;
+@base-h1-font-size:  		32px;
+@base-h1-line-height: 		32px;
+@base-h2-font-size: 		24px;
+@base-h2-line-height:  		28px;
 @base-h3-font-size:   		18px;
 @base-h3-line-height:     	21px;
 @base-h4-font-size:     	16px;
@@ -94,9 +94,14 @@
 @base-selection-background:	@am-border-color;
 @base-selection-color:  	#FFFFFF;
 
+html {
+	// Keep background-color transparent to avoid conflicts with the inpage-edit mode.
+	background-color: transparent;
+}
 
 body {
 	overflow-x: hidden;
+	background-color: @base-body-background;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;		
 }
@@ -107,7 +112,7 @@ div:empty {
 
 h1,
 h2 {
-	font-weight: 300;
+	font-weight: 400;
 }
 
 h3,

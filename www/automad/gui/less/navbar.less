@@ -87,16 +87,29 @@
 	&-icon {
 		
 		display: block;
-		height: 30px;
-		width: 30px;
+		height: @button-height;
+		width: @button-height;
 		margin-right: -7px;
-		line-height: 30px;
+		line-height: @button-height;
 		text-align: center;
-		border-radius: 100%;
+		border-radius: @am-radius;
 		font-size: 16px;
 		color: @navbar-nav-color;		
 		background-color: @am-grey;
 		cursor: pointer;
+		
+		&&-danger {
+			
+			margin-right: 0;
+			background-color: @button-danger-background;
+			font-size: 14px;
+			
+			&:hover,
+			&:focus {
+				background-color: @button-danger-hover-background;	
+			}
+			
+		}
 		
 		&:hover,
 		&:focus {
@@ -122,10 +135,6 @@
 	
 	& &-logo {
 		
-		@media (max-width: @breakpoint-small-max) {
-			width: 100%;
-		}
-		
 		& a {
 			
 			color: @navbar-nav-color;
@@ -142,10 +151,21 @@
 		}
 		
 		& .uk-icon-automad {
-			font-size: 20px;
 			position: relative;
-			top: 2px;
+			top: 1px;
 			margin: 0 -1px;
+			font-size: 21px;
+		}
+		
+		@media (max-width: @breakpoint-small-max) {
+			
+			width: 100%;
+			
+			& .uk-icon-automad {
+				top: 2px;
+				font-size: 18px;
+			}
+			
 		}
 		
 	}

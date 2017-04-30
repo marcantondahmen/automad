@@ -33,7 +33,7 @@
  */
 
 
-@badge-background:			darken(@am-grey, 22%);
+@badge-background:			@am-danger;
 @badge-padding-horizontal:		7px;
 @badge-font-size:			11px;
 @badge-font-weight:			900;
@@ -51,11 +51,18 @@
 
 
 .hook-badge() {
+	
 	margin-top: -3px;
 	border-radius: 50px;
+	
+	.am-panel-bottom & {
+		background-color: darken(@am-grey, 22%);
+	}
+	
 }
 
 .uk-badge-notification {
 	margin-top: 0;
 	padding: 0 12px;
+	background-color: darken(@am-grey, 22%);
 }
