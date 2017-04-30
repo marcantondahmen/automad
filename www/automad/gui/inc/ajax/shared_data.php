@@ -168,6 +168,7 @@ if (isset($_POST['data'])) {
 			<!-- Unused shared variables -->
 			<div type="button" class="uk-accordion-title">
 				<?php Text::e('shared_vars_unused'); ?>
+				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
