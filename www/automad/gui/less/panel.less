@@ -60,6 +60,15 @@
 		box-shadow: 0 0 0 3px @am-success;
 	}
 
+	& img {
+		background-color: @am-grey;
+		// Fallback for Safari.
+		filter: grayscale(100%);
+		mix-blend-mode: hard-light;
+		// Firefox & Chrome.
+		mix-blend-mode: luminosity;	
+	}
+	
 }
 
 .am-panel {
