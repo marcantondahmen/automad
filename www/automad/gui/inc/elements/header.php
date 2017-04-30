@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 ?>
 <!DOCTYPE html>
-<html lang="en" class="uk-height-1-1">
+<html lang="en" class="am-dashboard uk-height-1-1">
 <head>
 	  
 	<meta charset="utf-8">

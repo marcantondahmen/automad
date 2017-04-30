@@ -170,8 +170,8 @@ class InPage {
 				'<!-- Automad GUI end -->' . "\n";
 			
 		// Check if there is already any other script tag and try to prepend all assets as first items.
-		if (preg_match('/\<script.*\<\/head\>/is', $str)) {
-			return preg_replace('/(\<script.*\<\/head\>)/is', $assets . "\n$1", $str);
+		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
+			return preg_replace('/(\<(script|link).*\<\/head\>)/is', $assets . "\n$1", $str);
 		} else {
 			return str_replace('</head>', $assets . "\n</head>", $str);
 		}

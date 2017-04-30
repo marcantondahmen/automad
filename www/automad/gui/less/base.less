@@ -94,14 +94,12 @@
 @base-selection-background:	@am-border-color;
 @base-selection-color:  	#FFFFFF;
 
-html {
+html:not(.am-dashboard) {
 	// Keep background-color transparent to avoid conflicts with the inpage-edit mode.
 	background-color: transparent;
 }
 
 body {
-	overflow-x: hidden;
-	background-color: @base-body-background;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;		
 }
