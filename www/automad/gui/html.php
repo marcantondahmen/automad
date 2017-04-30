@@ -172,8 +172,8 @@ class Html {
 		// Build attribute string.
 		$attr = 'id="' . $id . '" name="data[' . $key . ']"';
 
-		// Append placeholder to $attr when editing a page. Therefore check if any URL is set in $_POST.
-		if (!empty($_POST['url'])) {
+		// Append placeholder to $attr when editing a page. Therefore check if any URL or context (inpage-edit) is set in $_POST.
+		if (!empty($_POST['url']) || !empty($_POST['context'])) {
 			$attr .= ' placeholder="' . htmlspecialchars($this->Automad->Shared->get($key)) . '"';
 		} 
 		
@@ -395,7 +395,10 @@ class Html {
 					$Page->get(AM_KEY_TITLE) . 
 					'<div class="uk-margin-small-top uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
 					'<div class="am-panel-bottom">' .
-					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil"></a>' .
+					'<span>' . 
+					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil"></a>&nbsp;' .
+					'<a href="' . AM_BASE_INDEX . $Page->url . '" title="' . Text::get('btn_inpage_edit') . '" class="uk-icon-button uk-icon-share"></a>' .
+					'</span>' .
 					'</div>' .
 					'</div>' .
 					'</li>';

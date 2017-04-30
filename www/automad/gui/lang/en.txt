@@ -42,6 +42,10 @@ btn_duplicate_page: Duplicate Page
 
 -
 
+btn_edit: Edit
+
+-
+
 btn_edit_file_info: Edit File Info
 
 -
@@ -55,6 +59,10 @@ btn_files: Files
 -
 
 btn_hide_page: Hide Page From Navigation
+
+-
+
+btn_inpage_edit: In-Page Edit Mode
 
 -
 
@@ -91,10 +99,6 @@ btn_save: Save
 -
 
 btn_upload: Upload Files
-
--
-
-btn_visit_page: Visit Page
 
 -
 
@@ -256,6 +260,16 @@ file_name: Filename
 -
 
 file_caption: Caption
+
+-
+
+
+
+
+
+
+
+inpage_edit_title: Edit Content
 
 -
 

@@ -84,8 +84,8 @@ $this->element('header');
 			
 			if ($url != '/') {
 				$dropdown = array(
-					// Visit page.
-					'<a href="' . AM_BASE_INDEX . $url . '" target="_blank"><i class="uk-icon-share"></i>&nbsp;&nbsp;' . Text::get('btn_visit_page') . '</a>', 
+					// Edit data inpage.
+					'<a href="' . AM_BASE_INDEX . $url . '"><i class="uk-icon-share"></i>&nbsp;&nbsp;' . Text::get('btn_inpage_edit') . '</a>', 
 					// Duplicate Page.
 					'<a href="#" data-am-submit="duplicate_page"><i class="uk-icon-clone"></i>&nbsp;&nbsp;' . Text::get('btn_duplicate_page') . '</a>' . 
 					'<form data-am-handler="duplicate_page" data-am-url="' . $url . '"></form>',

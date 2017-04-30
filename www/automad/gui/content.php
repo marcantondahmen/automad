@@ -58,6 +58,13 @@ class Content {
 	 */
 
 	private $Automad;
+
+
+	/**
+	 *      The Html object.
+	 */
+	
+	private $Html;
 	
 	
 	/**
@@ -69,6 +76,7 @@ class Content {
 	public function __construct($Automad) {
 		
 		$this->Automad = $Automad;
+		$this->Html = new Html($Automad);
 		
 	}
 	
@@ -487,6 +495,116 @@ class Content {
 		
 		return $pages;
 		
+	}
+	
+	
+	/**
+	 *      Handle AJAX request for editing a data variable in-page context.   
+	 *          
+	 *      If no data gets received, form fields to build up the editing dialog are send back. 
+	 *      Else the received data gets merged with the full data array of the requested context and 
+	 *      saved back into the .txt file. 
+	 *      In case the title variable gets modified, the page directory gets renamed accordingly.
+	 *      
+	 *      @return array $output (AJAX response)
+	 */
+	
+	public function inPageEdit() {
+		
+		$output = array();
+		
+		if (!empty($_POST['context'])) {
+		
+			// Check if page actually exists.
+			if ($Page = $this->Automad->getPage($_POST['context'])) {
+				
+				// If data gets received, merge and save.
+				// Else send back form fields.
+				if (isset($_POST['data'], $_POST['url']) && is_array($_POST['data'])) {
+					
+					// Merge and save data.
+					$data = array_merge(Core\Parse::textFile($this->getPageFilePath($Page)), $_POST['data']);
+					FileSystem::writeData($data, $this->getPageFilePath($Page));
+					Core\Debug::ajax($output, 'saved data', $data);
+					Core\Debug::ajax($output, 'data file', $this->getPageFilePath($Page));
+					
+					// If the title changed, the page directory has to be renamed.
+					if (!empty($_POST['data'][AM_KEY_TITLE])) {
+						
+						// Move directory.
+						$newPagePath = FileSystem::movePageDir(
+								$Page->path, 
+								dirname($Page->path), 
+								$this->extractPrefixFromPath($Page->path), 
+								$_POST['data'][AM_KEY_TITLE]
+							);
+						
+						Core\Debug::ajax($output, 'renamed page', $newPagePath);
+						
+					}
+					
+					// Clear cache to reflect changes.
+					$this->clearCache();
+					
+					// If the page directory got renamed, find the new URL.
+					if ($Page->url == $_POST['url'] && isset($newPagePath)) {
+						
+						// The page has to be redirected to a new url in case the edited context is actually 
+						// the requested page and the title of the page and therefore the URL has changed.
+						
+						// Rebuild Automad object, since the file structure has changed.
+						$Automad = new Core\Automad();
+						
+						// Find new URL and return redirect query string.
+						foreach ($Automad->getCollection() as $key => $Page) {
+
+							if ($Page->path == $newPagePath) {
+								$output['redirect'] = AM_BASE_INDEX . $key;
+							}
+
+						}
+							
+					} else {
+						
+						// There are two cases where the currently requested page has to be
+						// simply reloaded without redirection:
+						// 
+						// 1. 	The context of the edits is not the current page and another
+						// 	pages gets actually edited.
+						// 	That would be the case for edits of pages displayed in pagelists or menus.
+						// 	
+						// 2.	The context is the current page, but the title didn't change and
+						// 	therefore the URL stays the same.
+						$output['redirect'] = AM_BASE_INDEX . $_POST['url'];
+						
+					}
+								
+				} else {
+					
+					// Return form fields if key is defined.
+					if (!empty($_POST['key'])) {
+						
+						$value = '';
+						
+						if (!empty($Page->data[$_POST['key']])) {
+							$value = $Page->data[$_POST['key']];
+						}
+				
+						$output['html'] = 	'<div id="am-inpage-edit-fields">' .
+									'<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
+									$this->Html->formField($_POST['key'], $value) . 
+									'</div>';
+						
+					}
+			
+				}
+				
+			}
+				
+		}
+		
+		return $output;
+	
 	}
 	
 	

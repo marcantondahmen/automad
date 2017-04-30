@@ -62,9 +62,19 @@
 	};
 	
 	// Get autocomplete data.
-	$.post('?ajax=autocomplete', function(data) {
-		Automad.autocomplete.data = data;
-	}, 'json');
+	// Note that to prevent getting data when being in page editing context, the AJAX request is only
+	// submitted in case there is an actual autocomplete element on the page, meaning the current context is the dashboard.
+	$(document).on('ready', function() {
+		
+		if ($('[data-uk-autocomplete]').length > 0) {
+			
+			$.post('?ajax=autocomplete', function(data) {
+				Automad.autocomplete.data = data;
+			}, 'json');
+			
+		}
+		
+	});
 	
 	// Submit autocomplete form on hitting the return key.
 	$(document).on('keydown', '.uk-autocomplete input[type="text"]', function(e) {

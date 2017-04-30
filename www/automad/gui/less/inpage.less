@@ -1,0 +1,121 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+ .am-inpage {
+	 
+ 	&:extend(html);
+	line-height: inherit;
+	
+	body > & {
+		position: relative;	
+		z-index: 9000;
+	}
+	
+	&-menubar {
+		
+		display: inline-block;
+		position: fixed;
+		top: ~"calc(100vh - 58px)";
+		left: ~"calc(50vw - 180px)";
+		width: 360px;
+		
+		& .uk-button-group {
+			.shadow;	
+		}
+		
+		& .uk-icon-automad {
+			position: relative;
+			top: 1px;
+		}
+		
+		@media (max-width: 400px) {
+			
+			top: ~"calc(100vh - 50px)";
+			text-align: center;
+			
+			& .uk-button {
+				font-size: 14px !important;
+				min-height: 0;
+				line-height: 32px;
+				padding: 0 10px;
+			}
+			
+		}
+		
+		& .uk-button {
+			
+			background-color: @am-grey;
+			
+			&:hover,
+			&:active {
+				background-color: @am-nav-bg-hover;
+			}
+			
+		}
+		
+	}
+	
+	& > a {
+		margin-bottom: 2px;
+		vertical-align: text-bottom;
+		.shadow;
+	}
+	
+	& .uk-button.am-drag-handle {
+		
+		&,
+		&:hover,
+		&:active {
+			color: @am-muted;
+			background-color: @button-background;
+			box-shadow: none;
+			cursor: move;
+		}
+		
+	}
+	
+	& :-ms-input-placeholder { 
+		color: @form-placeholder-color !important; 
+	}
+	
+	& ::-moz-placeholder { 
+		color: @form-placeholder-color !important; 
+	}
+	
+	& ::-webkit-input-placeholder { 
+		color: @form-placeholder-color !important; 
+	}
+	
+ }

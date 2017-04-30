@@ -145,6 +145,8 @@ Config::set('AM_DEL_STATEMENT_OPEN', '<@');
 Config::set('AM_DEL_STATEMENT_CLOSE', '@>');
 Config::set('AM_DEL_COMMENT_OPEN', '<#');
 Config::set('AM_DEL_COMMENT_CLOSE', '#>');
+Config::set('AM_DEL_INPAGE_BUTTON_OPEN', '<<@@');
+Config::set('AM_DEL_INPAGE_BUTTON_CLOSE', '@@>>');
 
 // EXTENSIONS
 Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');

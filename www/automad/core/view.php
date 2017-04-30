@@ -36,6 +36,7 @@
 
 
 namespace Automad\Core;
+use Automad\GUI as GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -79,6 +80,13 @@ class View {
 	
 	
 	/**
+	 *      The InPage objetc.
+	 */
+	
+	private $InPage;
+	
+	
+	/**
 	 *      The Runtime object.
 	 */
 	
@@ -115,6 +123,7 @@ class View {
 		$this->Automad = $Automad;
 		$this->Runtime = new Runtime($Automad);
 		$this->Toolbox = new Toolbox($Automad);
+		$this->InPage = new GUI\InPage();
 		$Page = $Automad->Context->get();
 		
 		// Redirect page, if the defined URL variable differs from AM_REQUEST.
@@ -294,17 +303,21 @@ class View {
 	 *	In case a variable is used as an option value for a method and is not part of a string, that variable doesn't need to be 
 	 *	wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
 	 *
+	 *      By setting $inPageEdit to true, for every processed variable, a temporary markup for an edit button is appended to the actual value.
+	 *      That temporary button still has to be processed later by calling processInPageEditButtons(). 
+	 *
 	 *	@param string $str
 	 *	@param boolean $isJsonString 
+	 *	@param boolean $inPageEdit
 	 *	@return string The processed $str
 	 */
 
-	private function processContent($str, $isJsonString = false) {
+	private function processContent($str, $isJsonString = false, $inPageEdit = false) {
 		
 		// Build regex. Also match possible JSON elements like ":", "," and "}". They will be added to the output when returning the value if existing.
 		$regexContent = '/(?P<parameterStart>:\s*)?' . Regex::variable('var') . '(?P<parameterEnd>\s*(,|\}))?/s';
 				
-		return 	preg_replace_callback($regexContent, function($matches) use ($isJsonString) {
+		return 	preg_replace_callback($regexContent, function($matches) use ($isJsonString, $inPageEdit) {
 				
 				// Merge $matches with empty defaults to skip later checks whether an item exists.
 				$matches = array_merge(array('parameterStart' => '', 'parameterEnd' => '', 'varFunctions' => ''), $matches);
@@ -336,6 +349,18 @@ class View {
 				$value = $matches['parameterStart'] . $value . $matches['parameterEnd'];
 				Debug::log($value, $matches['varName'] . ' ' . $matches['varFunctions']);	
 					
+				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
+				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
+				if ($inPageEdit) {
+					
+					$value = $this->InPage->injectTemporaryEditButton(
+							$value, 
+							$matches['varName'], 
+							$this->Automad->Context
+						);
+						
+				}	
+				
 				return $value;
 															
 			}, $str);
@@ -447,8 +472,9 @@ class View {
 		return 	preg_replace_callback('/' . Regex::markup() . '/is', function($matches) use ($directory) {
 												
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
+				// In-page editing gets enabled here.
 				if (!empty($matches['var'])) {
-					return $this->processContent($matches['var']);
+					return $this->processContent($matches['var'], false, true);
 				}
 							
 				// Include
@@ -923,9 +949,10 @@ class View {
 		$output = $this->interpret($output, dirname($this->template));
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
-		$output = $this->resolveUrls($output);	
 		$output = $this->obfuscateEmails($output);
-	
+		$output = $this->resolveUrls($output);
+		$output = $this->InPage->createUI($output);
+		
 		return $output;	
 		
 	}	

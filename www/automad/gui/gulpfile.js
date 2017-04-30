@@ -116,6 +116,9 @@ gulp.task('lib-js', ['bump'], function() {
 				'../lib/jquery-file-upload/jquery.fileupload.js',
 				'../lib/jquery-file-upload/jquery.iframe-transport.js'	
 			])
+			.pipe(uglify(uglifyOptions)),
+			// Draggabilly.
+			gulp.src('../lib/draggabilly/draggabilly.pkgd.js')
 			.pipe(uglify(uglifyOptions))
 		)
 		.pipe(concat('libs.min.js', { newLine: '\r\n\r\n' } ))

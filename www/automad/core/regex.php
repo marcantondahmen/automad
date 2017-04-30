@@ -67,6 +67,13 @@ class Regex {
 		
 
 	/**
+	 *      Tags which can't contain in-page edit buttons.
+	 */
+	
+	public static $invalidInPageButtonTags = '\<(a|button|select|textarea).*?\<\/\1\>';
+
+
+	/**
 	 *	Logical operand "and" or "or".
 	 */
 
@@ -121,6 +128,32 @@ class Regex {
 		
 	}
 
+	
+	/**
+	 *      Return regex to match any temporary in-page edit button.
+	 *      
+	 *      @return string The regex
+	 */
+	
+	public static function inPageEditButton() {
+		
+		return preg_quote(AM_DEL_INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
+		
+	}
+	
+	
+	/**
+	 *      Return regex to match temporary in-page edit buttons inside a HTML tag (as attribute).
+	 *      
+	 *      @return string The regex
+	 */
+	
+	public static function inPageEditButtonInTag() {
+		
+		return '(\<[^>]*?)(' . self::inPageEditButton() . ')([^<]*?\>)';
+		
+	}
+	
 	
 	/**
 	 *	Return the regex to match any kind of Automad markup such as variables, toolbox methods, includes, extensions, snippets, loops and conditions.

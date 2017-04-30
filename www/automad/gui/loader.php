@@ -139,10 +139,6 @@ class Loader {
 		$Shared = new Core\Shared();
 		$this->sitename = $Shared->get(AM_KEY_SITENAME);
 		
-		// Start Session.
-		session_name('Automad');
-		session_start();
-		
 		// Check if an user is logged in.
 		if (User::get()) {
 			

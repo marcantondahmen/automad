@@ -92,6 +92,11 @@ $this->element('header');
 			<li class="uk-margin-small-bottom" data-am-status="cache"></li>
 			<li class="uk-margin-small-bottom" data-am-status="debug"></li>
 		</ul>
+		<hr />
+		<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-danger uk-button-large uk-width-1-1">
+			<i class="uk-icon-share"></i>&nbsp;
+			<?php Text::e('btn_inpage_edit'); ?>
+		</a>
 		<div class="uk-block uk-padding-bottom-remove">
 			<h2 class="uk-margin-top"><?php Text::e('dashboard_recently_edited'); ?></h2>
 			<?php echo $this->Html->pageGrid($latestPages); ?>

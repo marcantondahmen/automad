@@ -75,6 +75,11 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 }
 
 
+// Start Session.
+session_name('Automad');
+session_start();
+
+
 // Split GUI form regular pages.
 if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 	
