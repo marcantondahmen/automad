@@ -896,14 +896,16 @@ class View {
 		
 		$Page = $this->Automad->Context->get();
 		
-		// action, href and src
-		$str = 	preg_replace_callback('/(action|href|src)="(.+?)"/', function($match) use ($Page) {
+		// Find URLs in action, href and src attributes. 
+		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
+		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/', function($match) use ($Page) {
 				return $match[1] . '="' . Resolve::url($Page, $match[2]) . '"';
 			}, $str);
 				
-		// Inline styles (like background-image)
-		$str = 	preg_replace_callback('/url\(\'(.+?)\'\)/', function($match) use ($Page) {
-				return 'url(\'' . Resolve::url($Page, $match[1]) . '\')';
+		// Inline styles (like background-image).
+		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
+		$str = 	preg_replace_callback('/(<[^>]+)url\(\'(.+?)\'\)/', function($match) use ($Page) {
+				return $match[1] . 'url(\'' . Resolve::url($Page, $match[2]) . '\')';
 			}, $str);
 	
 		return $str;
