@@ -56,7 +56,7 @@ class Prefix {
 	 *	Array of GUI text modules.
 	 */
 	
-	private static $prefix = 'am';
+	private static $prefix = 'am-u-';
 	
 	
 	/**
@@ -68,8 +68,8 @@ class Prefix {
 	
 	public static function add($str) {
 		
-		$str = preg_replace('/(uk-[a-z\d\-]+)/', self::$prefix . '-$1', $str);
-		$str = preg_replace('/(data-uk-)/', 'data-' . self::$prefix . '-uk-', $str);
+		$str = preg_replace('/uk-([a-z\d\-]+)/', self::$prefix . '$1', $str);
+		$str = preg_replace('/data-uk-/', 'data-' . self::$prefix, $str);
 		
 		return $str;
 		

@@ -14,7 +14,18 @@ var 	gulp = require('gulp'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
 	destination = 'dist',
-	prefix = 'am';
+	// UIkit prefix. 
+	prefix = 'am-u-',
+	customize = {
+		cls: {
+			search: /uk-([a-z\d\-]+)/g,
+			replace: prefix + '$1'
+		},
+		da: {
+			search: /data-uk-/g,
+			replace: 'data-' + prefix
+		} 
+	};
 
 
 // Error handling to prevent watch task to fail silently without restarting.
@@ -64,8 +75,8 @@ gulp.task('automad-js', ['bump'], function() {
 		.pipe(uglify(uglifyOptions))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		// Prefix all UIkit items.
-		.pipe(replace(/(uk-[a-z\d\-]+)/g, prefix + '-$1'))
-		.pipe(replace(/data-uk-/g, 'data-' + prefix + '-uk-'))
+		.pipe(replace(customize.cls.search, customize.cls.replace))
+		.pipe(replace(customize.da.search, customize.da.replace))
 		.pipe(gulp.dest(destination));
 	
 });
@@ -124,8 +135,8 @@ gulp.task('libs-js', ['bump'], function() {
 		)
 		.pipe(concat('libs.min.js', { newLine: '\r\n\r\n' } ))
 		// Prefix all UIkit items.
-		.pipe(replace(/(uk-[a-z\d\-]+)/g, prefix + '-$1'))
-		.pipe(replace(/data-uk-/g, 'data-' + prefix + '-uk-'))
+		.pipe(replace(customize.cls.search, customize.cls.replace))
+		.pipe(replace(customize.da.search, customize.da.replace))
 		.pipe(gulp.dest(destination));
 	
 });
@@ -141,8 +152,8 @@ gulp.task('automad-less', ['bump'], function() {
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
 		// Prefix all UIkit items.
-		.pipe(replace(/(uk-[a-z\d\-]+)/g, prefix + '-$1'))
-		.pipe(replace(/data-uk-/g, 'data-' + prefix + '-uk-'))
+		.pipe(replace(customize.cls.search, customize.cls.replace))
+		.pipe(replace(customize.da.search, customize.da.replace))
 		.pipe(gulp.dest(destination));
 	
 });
