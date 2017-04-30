@@ -1,0 +1,54 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@tooltip-z-index: 		1030;
+@tooltip-max-width:		200px;
+@tooltip-padding-vertical: 	2px;
+@tooltip-padding-horizontal: 	5px;
+@tooltip-background: 		@am-primary;
+@tooltip-triangle-size: 	5px;
+
+@tooltip-color: 		mix(@am-grey, #FFFFFF);
+@tooltip-font-size: 		11px;
+@tooltip-line-height: 		14px;
+
+@tooltip-offset-horizontal: 	10px;
+
+
+.hook-tooltip() {
+	font-weight: 700;
+	border-radius: @am-radius;
+	filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)) drop-shadow(0 1px 10px rgba(0,0,0,0.25));
+}

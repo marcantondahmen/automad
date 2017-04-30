@@ -108,7 +108,8 @@ gulp.task('libs-js', ['bump'], function() {
 				'../lib/uikit/js/components/grid.min.js',
 				'../lib/uikit/js/components/htmleditor.min.js',
 				'../lib/uikit/js/components/notify.min.js',
-				'../lib/uikit/js/components/sticky.min.js'
+				'../lib/uikit/js/components/sticky.min.js',
+				'../lib/uikit/js/components/tooltip.min.js'
 			]),
 			// File upload. To be minified.
 			gulp.src([

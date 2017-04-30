@@ -109,11 +109,11 @@ class InPage {
 				// Menu.
 				'<div class="am-inpage-menubar">' .
 					'<div class="uk-button-group">' .
-						'<a href="' . $urlGui . '" class="uk-button uk-button-large"><i class="uk-icon-automad"></i></a>' .
-						'<a href="' . $urlData . '" class="uk-button uk-button-large"><i class="uk-icon-file-text"></i></a>' .
-						'<a href="' . $urlFiles . '" class="uk-button uk-button-large"><i class="uk-icon-folder-open"></i></a>' .
-						'<a href="' . $urlCache . '" class="uk-button uk-button-large"><i class="uk-icon-cog"></i></a>' .
-						'<a href="' . $urlLogout . '" class="uk-button uk-button-large"><i class="uk-icon-power-off"></i></a>' .
+						'<a href="' . $urlGui . '" class="uk-button uk-button-large" title="' . Text::get('dashboard_title') . '" data-uk-tooltip><i class="uk-icon-automad"></i></a>' .
+						'<a href="' . $urlData . '" class="uk-button uk-button-large" title="' . Text::get('btn_data') . '" data-uk-tooltip><i class="uk-icon-file-text"></i></a>' .
+						'<a href="' . $urlFiles . '" class="uk-button uk-button-large" title="' . Text::get('btn_files') . '" data-uk-tooltip><i class="uk-icon-folder-open"></i></a>' .
+						'<a href="' . $urlCache . '" class="uk-button uk-button-large" title="' . Text::get('sys_cache') . '" data-uk-tooltip><i class="uk-icon-cog"></i></a>' .
+						'<a href="' . $urlLogout . '" class="uk-button uk-button-large" title="' . Text::get('btn_log_out') . '" data-uk-tooltip><i class="uk-icon-power-off"></i></a>' .
 						'<a href="#" class="am-drag-handle uk-button uk-button-large"><i class="uk-icon-arrows"></i></a>' .
 					'</div>' .
 				'</div>' .

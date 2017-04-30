@@ -171,7 +171,7 @@ if ($files) { ?>
 					</div>
 					<?php echo $size; ?> 
 					<div class="am-panel-bottom">
-						<a href="#am-edit-file-info-modal" class="uk-icon-button uk-icon-pencil" title="<?php Text::e('btn_edit_file_info'); ?>" data-uk-modal></a>
+						<a href="#am-edit-file-info-modal" class="uk-icon-button uk-icon-pencil" title="<?php Text::e('btn_edit_file_info'); ?>" data-uk-modal data-uk-tooltip></a>
 						<label class="am-toggle-checkbox am-panel-bottom-right" data-am-toggle="#<?php echo $id; ?>">
 							<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>" />
 						</label>

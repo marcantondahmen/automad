@@ -396,8 +396,8 @@ class Html {
 					'<div class="uk-margin-small-top uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
 					'<div class="am-panel-bottom">' .
 					'<span>' . 
-					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil"></a>&nbsp;' .
-					'<a href="' . AM_BASE_INDEX . $Page->url . '" title="' . Text::get('btn_inpage_edit') . '" class="uk-icon-button uk-icon-share"></a>' .
+					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil" data-uk-tooltip></a>&nbsp;' .
+					'<a href="' . AM_BASE_INDEX . $Page->url . '" title="' . Text::get('btn_inpage_edit') . '" class="uk-icon-button uk-icon-share" data-uk-tooltip></a>' .
 					'</span>' .
 					'</div>' .
 					'</div>' .

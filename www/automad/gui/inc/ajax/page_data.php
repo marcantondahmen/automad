@@ -108,7 +108,9 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				<ul class="am-link uk-subnav uk-subnav-pill uk-margin-top uk-hidden-small">
 					<li class="uk-disabled"><i class="uk-icon-share"></i></li>
 					<li>
-						<a href="<?php echo AM_BASE_INDEX . $url; ?>" class="uk-text-truncate"><?php echo $url; ?></a>
+						<a href="<?php echo AM_BASE_INDEX . $url; ?>" class="uk-text-truncate" title="<?php Text::e('btn_inpage_edit'); ?>" data-uk-tooltip="pos:'bottom-left'">
+							<?php echo $url; ?>
+						</a>
 					</li>
 				</ul>
 			</div>
