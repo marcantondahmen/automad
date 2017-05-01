@@ -220,7 +220,7 @@ class Str {
 	
 	public static function stripTags($str) {
 		
-		return strip_tags(Str::markdown($str));
+		return trim(strip_tags(Str::markdown($str)));
 		
 	}
 		
