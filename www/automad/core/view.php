@@ -599,7 +599,7 @@ class View {
 						
 						return $this->processFileSnippet(
 							$file, 
-							Parse::jsonOptions($matches['withOptions']), 
+							Parse::jsonOptions($this->processContent($matches['withOptions'])), 
 							$matches['withSnippet'], 
 							$directory
 						);
