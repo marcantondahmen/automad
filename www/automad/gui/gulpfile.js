@@ -15,6 +15,8 @@ var 	gulp = require('gulp'),
 	pkg = require('./package.json'),
 	destination = 'dist',
 	// UIkit prefix. 
+	// The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
+	// would also match prefixed classes like am-uk-icon-*.
 	prefix = 'am-u-',
 	customize = {
 		cls: {

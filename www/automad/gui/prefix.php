@@ -53,7 +53,10 @@ class Prefix {
 	
 	
 	/**
-	 *	Array of GUI text modules.
+	 *	The prefix to replace 'uk-'.
+	 *	
+	 *	The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
+ 	 *	would also match prefixed classes like am-uk-icon-*.
 	 */
 	
 	private static $prefix = 'am-u-';
