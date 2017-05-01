@@ -67,13 +67,6 @@ class Regex {
 		
 
 	/**
-	 *      Tags which can't contain in-page edit buttons.
-	 */
-	
-	public static $invalidInPageButtonTags = '\<(a|button|head|script|select|textarea).*?\<\/\1\>';
-
-
-	/**
 	 *	Logical operand "and" or "or".
 	 */
 
@@ -138,19 +131,6 @@ class Regex {
 	public static function inPageEditButton() {
 		
 		return preg_quote(AM_DEL_INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
-		
-	}
-	
-	
-	/**
-	 *      Return regex to match temporary in-page edit buttons inside a HTML tag (as attribute).
-	 *      
-	 *      @return string The regex
-	 */
-	
-	public static function inPageEditButtonInTag() {
-		
-		return '(\<[^>]*?)(' . self::inPageEditButton() . ')([^<]*?\>)';
 		
 	}
 	

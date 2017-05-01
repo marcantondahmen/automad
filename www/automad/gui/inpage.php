@@ -215,10 +215,15 @@ class InPage {
 	private function processTemporaryEditButtons($str) {
 		
 		// Remove invalid buttons.
-		// Within HTML tags.
-		$str = 	preg_replace('/' . Core\Regex::inPageEditButtonInTag() .'/is', '$1$3', $str);
+		// Within HTML tags.	
+		// Like <div data-attr="...">
+		$str = 	preg_replace_callback('/\<[^>]+\>/is', function($matches) {
+				return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
+			}, $str);
+		
 		// In head, script, links, buttons etc.
-		$str = 	preg_replace_callback('/' . Core\Regex::$invalidInPageButtonTags . '/is', function($matches) {
+		// Like <head>...</head>
+		$str = 	preg_replace_callback('/\<(a|button|head|script|select|textarea).+?\<\/\1\>/is', function($matches) {
 				return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
 			}, $str);
 		
