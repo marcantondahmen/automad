@@ -82,7 +82,6 @@ class InPage {
 			$str = $this->injectAssets($str);
 			$str = $this->injectMarkup($str);
 			$str = $this->processTemporaryEditButtons($str);
-			$str = Prefix::add($str);
 		}
 		
 		return $str;
@@ -146,7 +145,7 @@ class InPage {
 				'</div>' .
 			'</div>';
 		
-		return str_replace('</body>', $html . '</body>', $str);
+		return str_replace('</body>', Prefix::add($html) . '</body>', $str);
 		
 	}
 	
@@ -232,8 +231,8 @@ class InPage {
 		$str = str_replace(
 			array(AM_DEL_INPAGE_BUTTON_OPEN, AM_DEL_INPAGE_BUTTON_CLOSE), 
 			array(
-				' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="uk-button uk-button-mini uk-button-primary" data-uk-modal data-am-inpage-content=\'', 
-				'\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;'
+				Prefix::add(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="uk-button uk-button-mini uk-button-primary" data-uk-modal data-am-inpage-content=\''), 
+				Prefix::add('\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;')
 			), 
 			$str
 		);
