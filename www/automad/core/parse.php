@@ -108,23 +108,27 @@ class Parse {
 		
 		$files = array();
 		
-		foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
-					
-			if ($f = glob(Resolve::filePath($Page->path, trim($glob)))) {
-				$files = array_merge($files, $f);
+		if ($str) {
+			
+			foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
+						
+				if ($f = glob(Resolve::filePath($Page->path, trim($glob)))) {
+					$files = array_merge($files, $f);
+				}
+				
 			}
+			
+			array_walk($files, function(&$file) use ($stripBaseDir) { 
+				
+				$file = realpath($file); 
+				
+				if ($stripBaseDir) {
+					$file = str_replace(AM_BASE_DIR, '', $file);
+				}
+				
+			});	
 			
 		}
-		
-		array_walk($files, function(&$file) use ($stripBaseDir) { 
-			
-			$file = realpath($file); 
-			
-			if ($stripBaseDir) {
-				$file = str_replace(AM_BASE_DIR, '', $file);
-			}
-			
-		});
 		
 		return $files;
 		
