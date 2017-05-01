@@ -70,7 +70,7 @@ class Regex {
 	 *      Tags which can't contain in-page edit buttons.
 	 */
 	
-	public static $invalidInPageButtonTags = '\<(a|button|select|textarea).*?\<\/\1\>';
+	public static $invalidInPageButtonTags = '\<(a|button|head|script|select|textarea).*?\<\/\1\>';
 
 
 	/**
