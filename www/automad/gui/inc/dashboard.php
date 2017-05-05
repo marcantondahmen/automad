@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $Cache = new Core\Cache();
 $mTime = $Cache->getSiteMTime();
 $Selection = new Core\Selection($this->Automad->getCollection());
-$Selection->sortPages(AM_KEY_MTIME, SORT_DESC);
+$Selection->sortPages(AM_KEY_MTIME . ' desc');
 $latestPages = $Selection->getSelection(false, 0, 12);
 
 

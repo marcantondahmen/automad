@@ -394,36 +394,76 @@ class Selection {
 	
 	 
 	/**
-	 *	Sorts $this->selection based on any page variable. If $var is not set, use the page basename as default.
+	 *	Sorts $this->selection based on a sorting options string.    
+	 *	
+	 *	The option string consists of multiple pairs of 
+	 *	a data key and a sort order, separated by a comma like this:    
+	 *	$Selection->sortPages('date desc, title asc')
+	 *      The above example will sort first all pages in the selection by 'date' (descending) and then by 'title' (ascending).   
+	 *           
+	 *      Valid values for the order are 'asc' and 'desc'.      
+	 *      In case a sort order is missing in a key/order combination, the 'asc' is used as a fallback.   
 	 *
-	 *	@param string $var 
-	 *	@param string $order (optional: SORT_ASC, SORT_DESC)
+	 *	@param string $options (comma separated list of keys and order)
 	 */  
 	 
-	public function sortPages($var = false, $order = SORT_ASC) {
+	public function sortPages($options = false) {
 		
-		// If $var is not set use the basename as default.
-		if (empty($var)) {
-			$var = AM_KEY_BASENAME;
+		$sort = array();
+		$parameters = array();
+		
+		// Define default option in case an empty string gets passed.
+		if (!$options) {
+			$options = AM_KEY_BASENAME . ' asc';
 		}
 		
-		$arrayToSortBy = array();
-	
-		foreach ($this->selection as $key => $Page) {
+		// Parse options string.
+		
+		// First create an array out of single key/order combinations (separated by comma).
+		$pairs = explode(AM_PARSE_STR_SEPARATOR, $options);
+		$pairs = array_map('trim', $pairs);
+		
+		// Append the default sorting order to each pair and create subarrays out of the first two space-separated items.  
+		foreach ($pairs as $pair) {
 			
-			$value = trim(strtolower(Str::stripTags($Page->get($var))));
+			// Add default order to avoid having a string without a given order
+			// and convert the first two separate strings into variables ($key and $order).
+			// If there is already an order, the default will simply be ignored as the third parameter. 
+			list($key, $order) = explode(' ', $pair . ' asc');
 			
-			// In case $value is an empty string, use the page basename instead.
-			if (strlen($value) === 0) {
-				$value = $Page->get(AM_KEY_BASENAME);
+			// Set order to the default order, if its value is invalid.
+			if (!in_array($order, array('asc', 'desc'))) {
+				$order = 'asc';
 			}
 			
-			$arrayToSortBy[$key] = $value;
+			// Create the actual subarray and convert the order into the real constant value.
+			$sort[] = array('key' => $key, 'order' => constant(strtoupper('sort_' . $order)));
 			
 		}
-
-		array_multisort($arrayToSortBy, $order, $this->selection);
-					
+		
+		// Add the values to sort by to each sort array.
+		foreach ($sort as $i => $sortItem) {
+			
+			$sort[$i]['values'] = array();
+			
+			foreach ($this->selection as $url => $Page) {
+				$sort[$i]['values'][] = trim(strtolower(Str::stripTags($Page->get($sortItem['key']))));
+			}
+			
+		}
+		
+		// Build parameters and call array_multisort function.
+		foreach ($sort as $sortItem) {
+			$parameters[] = $sortItem['values'];
+			$parameters[] = $sortItem['order'];
+			$parameters[] = SORT_NATURAL;
+		}
+		
+		Debug::log($parameters, 'Parameters');
+		
+		$parameters[] = &$this->selection;
+		call_user_func_array('array_multisort', $parameters);
+			
 	} 
 	 
 	

@@ -135,9 +135,6 @@ Config::set('AM_CACHE_LIFETIME', 3600);
 // IMAGE
 Config::set('AM_IMG_JPG_QUALITY', 90);
 
-// LISTING DEFAULTS
-Config::set('AM_LIST_DEFAULT_SORT_ORDER', 'desc');
-
 // TEMPLATE DELIMITERS
 Config::set('AM_DEL_VAR_OPEN', '@{');
 Config::set('AM_DEL_VAR_CLOSE', '}');

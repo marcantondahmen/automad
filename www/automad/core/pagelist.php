@@ -78,8 +78,7 @@ class Pagelist {
 					'page' => false,
 					'parent' => false,
 					'search' => false,
-					'sortItem' => false,
-					'sortOrder' => AM_LIST_DEFAULT_SORT_ORDER,
+					'sort' => false,
 					'template' => false,
 					'type' => false
 				);
@@ -135,17 +134,10 @@ class Pagelist {
 	
 	
 	/**
-	 *	The current sortItem.
+	 *      The sort options string.
 	 */
 	
-	private $sortItem;	
-	
-	
-	/**
-	 *	The current sortOrder.
-	 */
-	
-	private $sortOrder;	
+	private $sort;
 	
 	
 	/**
@@ -190,8 +182,7 @@ class Pagelist {
 	 *      - page: false (the current page in the pagination - to be used with the limit parameter)
 	 *      - parent: false
 	 *      - search: false
-	 *      - sortItem: false
-	 *      - sortOrder: AM_LIST_DEFAULT_SORT_ORDER
+	 *      - sort: false
 	 *      - template: false
 	 *      - type: false
 	 *      
@@ -205,11 +196,6 @@ class Pagelist {
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
 			$this->$key = $value;
-		}
-				
-		// Set sortOrder to the default order, if its value is invalid.
-		if (!in_array($this->sortOrder, array('asc', 'desc'))) {
-			$this->sortOrder = AM_LIST_DEFAULT_SORT_ORDER;
 		}
 			
 		$configArray = array_intersect_key((array)get_object_vars($this), $this->defaults);
@@ -322,7 +308,7 @@ class Pagelist {
 		// for $this->type (0 or false).
 		if ($this->type !== 'breadcrumbs') {
 			
-			$Selection->sortPages($this->sortItem, constant(strtoupper('sort_' . $this->sortOrder)));
+			$Selection->sortPages($this->sort);
 			$Selection->filterByTag($this->filter);
 			
 			// Set limit & offset to the config values if $ignoreLimit is false, $this->limit is not false and $type is not 'breadcrumbs'.

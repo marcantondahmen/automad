@@ -479,7 +479,7 @@ class Content {
 			
 				$Selection = new Core\Selection($collection);
 				$Selection->filterByKeywords($query);
-				$Selection->sortPages(AM_KEY_MTIME, SORT_DESC);
+				$Selection->sortPages(AM_KEY_MTIME . ' desc');
 				$pages = $Selection->getSelection(false);
 			
 			}

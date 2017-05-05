@@ -440,8 +440,7 @@ class Toolbox {
 	 *	- template: include only pages matching that template
 	 *	- filter: filter pages by tags
 	 *	- search: filter pages by search string
-	 *	- sortItem: Variable to sort by - default sort item, when there is no query string passed
-	 *	- sortOrder: "asc" or "desc" - default sort order, when there is no query string passed
+	 *	- sort: sorting options string, like "date desc, title asc"
 	 *	- offset: offset the within the array of all relevant pages
 	 *	- limit: limit the object's array of relevant pages
 	 *	
