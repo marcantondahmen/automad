@@ -36,7 +36,7 @@
 
 /*
  *	Get autocomplete data from AJAX request and 
- *	submit form when clicking on an autocomplete item or 
+ *	submit selected forms when clicking on an autocomplete item or 
  *	pressing enter when an autocomplete item is focused.      
  */
 
@@ -45,6 +45,10 @@
 	Automad.autocomplete = {
 		
 		data: {},
+		
+		selectors: {
+			submit: '[data-am-autocomplete-submit]'
+		},
 		
 		submitForm: function(e) {
 			
@@ -66,7 +70,7 @@
 	// submitted in case there is an actual autocomplete element on the page, meaning the current context is the dashboard.
 	$(document).on('ready', function() {
 		
-		if ($('[data-uk-autocomplete]').length > 0) {
+		if ($('.am-dashboard').length > 0) {
 			
 			$.post('?ajax=autocomplete', function(data) {
 				Automad.autocomplete.data = data;
@@ -77,7 +81,7 @@
 	});
 	
 	// Submit autocomplete form on hitting the return key.
-	$(document).on('keydown', '.uk-autocomplete input[type="text"]', function(e) {
+	$(document).on('keydown', Automad.autocomplete.selectors.submit + ' .uk-autocomplete input[type="text"]', function(e) {
 		
 		if (e.which == 13) {
 			Automad.autocomplete.submitForm(e);	
@@ -85,7 +89,7 @@
 		
 	});
 	
-	// Submit form when selecting an autocomplete value.
-	$(document).on('click', '.uk-form .uk-dropdown a', Automad.autocomplete.submitForm);
+	// Submit form when selecting an autocomplete value (navbar only).
+	$(document).on('click', Automad.autocomplete.selectors.submit + ' .uk-dropdown a', Automad.autocomplete.submitForm);
 	
 }(window.Automad = window.Automad || {}, jQuery);
