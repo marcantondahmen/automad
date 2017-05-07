@@ -33,11 +33,11 @@
  */
 
 
-@nav-side-color:			#ffffff;
+@nav-side-color:			@am-text;
 @nav-side-hover-color:			@nav-side-color;
 @nav-side-hover-background:		@am-nav-bg-hover;
-@nav-side-active-color:			#FFFFFF;
-@nav-side-active-background: 		@button-background;
+@nav-side-active-color:			@am-text;
+@nav-side-active-background: 		@am-nav-bg-active;
 @nav-side-nested-color:   		@nav-side-color;
 @nav-side-nested-hover-color:       	@nav-side-hover-color;
 @nav-side-header-color:			@am-muted;
@@ -60,9 +60,9 @@
 @nav-divider-margin-vertical:		@utility-margin;
 @nav-divider-margin-horizontal:		@nav-padding-horizontal;
 
-@nav-dropdown-color: 			@button-color;
-@nav-dropdown-hover-background:  	@button-hover-background;
-@nav-dropdown-hover-color:  		@button-hover-color;
+@nav-dropdown-color: 			@button-primary-color;
+@nav-dropdown-hover-background:  	@button-primary-hover-background;
+@nav-dropdown-hover-color:  		@button-primary-hover-color;
 
 
 .hook-nav-side() {
@@ -73,8 +73,8 @@
 	font-size: @text-small-font-size;
 }
 
-.hook-nav-side-divider() {
-	border: none;	
+.hook-nav-side-divider() {	
+	margin: @utility-margin-large 0 @utility-margin-large -(@utility-container-padding-horizontal - @nav-padding-horizontal);
 }
 
 .hook-nav-side-active() {

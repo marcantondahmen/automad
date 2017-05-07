@@ -41,6 +41,7 @@
 	}
 	
 	.uk-modal & {
+		
 		width: 15px;
 		line-height: 15px;
 		border-radius: 100%;
@@ -48,11 +49,17 @@
 		background-color: @am-danger;
 		opacity: 1;
 		font-size: 10px;
-	}
-	
-	.uk-modal &:hover {
-		color: #FFFFFF;
-		background-color: @button-danger-hover-background;
+		
+		&:hover {
+			color: #FFFFFF;
+			background-color: @button-danger-hover-background;
+		}
+		
+		&:disabled {
+			color: @button-disabled-color;
+			background-color: @button-disabled-background;
+		}
+		
 	}
 		
 }

@@ -33,26 +33,50 @@
  */
 
 
-@datepicker-z-index: 			9100;
-
-@datepicker-nav-color:			@am-text;
-@datepicker-nav-hover-color:		@am-text;
-
-@datepicker-table-color:		@am-text;
-@datepicker-table-hover-background:	@button-primary-hover-background;
-@datepicker-table-hover-color:		@button-primary-hover-color;
-@datepicker-table-onclick-background:	@button-primary-active-background;
-@datepicker-table-onclick-color:	@button-primary-active-color;
-@datepicker-table-active-background: 	@button-danger-background;
-@datepicker-table-active-color: 	@button-danger-color;
-@datepicker-table-muted-color:		darken(@am-grey, 4%);
-
-.hook-datepicker-misc() {
+.am-switcher {
 	
-	.uk-datepicker {
-		padding: 12px;
-		font-family: @base-body-font-family !important;
-		font-weight: @base-body-font-weight;
+	position: relative;
+	
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: -50vw;
+		width: 200vw;
+		border-bottom: @am-border-width solid @am-border-color;
 	}
+	
+	&.uk-active:before {
+		height: 100px;
+		background-color: @am-grey;
+	}
+	
+	& .uk-button-group {
+	
+		&:after {
+			content: '';
+			position: relative;
+			display: block;
+			width: 100%;
+			border-top: @am-border-thick-width solid @am-nav-bg-active;
+		}
+	
+		& .uk-button {
+			
+			background-color: @am-nav-bg;
+			
+			&:hover,
+			&:focus,
+			&:active  {
+				background-color: @am-nav-bg-hover;	
+			}
+			
+			&.uk-active {
+				background-color: @am-nav-bg-active;	
+			}
+			
+		}
+		
+	}	
 	
 }

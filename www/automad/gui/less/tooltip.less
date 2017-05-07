@@ -40,7 +40,7 @@
 @tooltip-background: 		@am-primary;
 @tooltip-triangle-size: 	5px;
 
-@tooltip-color: 		mix(@am-grey, #FFFFFF);
+@tooltip-color: 		@am-text;
 @tooltip-font-size: 		11px;
 @tooltip-line-height: 		14px;
 
@@ -48,7 +48,6 @@
 
 
 .hook-tooltip() {
-	font-weight: 700;
-	border-radius: @am-radius;
-	filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)) drop-shadow(0 1px 10px rgba(0,0,0,0.25));
+	font-weight: 500;
+	filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)) drop-shadow(0 1px 10px rgba(0,0,0,0.15));
 }

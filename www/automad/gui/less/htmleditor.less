@@ -71,11 +71,6 @@
 		}	
 	}
 	
-	:not(.uk-htmleditor-fullscreen) > & {
-		border-top-left-radius: @am-radius;
-		border-top-right-radius: @am-radius;
-	}
-	
 }
 
 .hook-htmleditor-content() {
@@ -99,9 +94,7 @@
 	
 	color: @form-color;
 	background-color: @form-background;
-	border: @am-border-width solid transparent;
-	border-bottom-left-radius: @am-radius;
-	border-bottom-right-radius: @am-radius;
+	border: @am-border-thick-width solid @form-border;
 	
 	// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
 	&,
@@ -110,7 +103,8 @@
 	}
 	
 	&.CodeMirror-focused {
-		.focus;
+		border-color: @form-focus-border;
+		.inset;
 	}
 
 }
@@ -121,8 +115,6 @@
 	
 	:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content > & {
 		border: @am-border-width solid transparent;
-		border-bottom-left-radius: @am-radius;
-		border-bottom-right-radius: @am-radius;
 	}
 
 	& * {

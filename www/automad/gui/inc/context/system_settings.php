@@ -198,7 +198,7 @@ $this->element('header');
 				</div>
 				<!-- Change Password -->
 				<hr />
-				<a href="#am-change-password-modal" class="uk-button" data-uk-modal>
+				<a href="#am-change-password-modal" class="uk-button uk-button-danger" data-uk-modal>
 					<i class="uk-icon-key"></i>&nbsp;&nbsp;<?php Text::e('sys_user_change_password'); ?>
 				</a>
 				<div id="am-change-password-modal" class="uk-modal">

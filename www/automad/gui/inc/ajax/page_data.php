@@ -173,7 +173,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						}
 						
 						?>
-						<button type="button" class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1" data-uk-modal="{target:'#am-select-template-modal'}">
+						<button type="button" class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1 uk-text-truncate" data-uk-modal="{target:'#am-select-template-modal'}">
 							<i class="<?php echo $templateIconClass; ?>"></i>&nbsp;
 							<?php echo ucwords(str_replace(array('_', '/'), array(' ', ' / '), ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
 						</button>	

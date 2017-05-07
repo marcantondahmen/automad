@@ -37,9 +37,9 @@
 @form-large-height: 		42px;
 @form-padding:			5px 10px;
 @form-large-padding: 		5px 10px;
-@form-border:			transparent;
-@form-border-width:		@am-border-width;
-@form-color:			darken(@am-grey, 25%);
+@form-border:			darken(@am-grey, 9.5%);
+@form-border-width:		@am-border-thick-width;
+@form-color:			@am-muted;
 @form-background:       	#FFFFFF;
 
 @form-focus-border:		transparent;
@@ -54,13 +54,12 @@
 @form-icon-color:		@am-grey;
 
 .hook-form() {
-	border-radius: @am-radius;
 	box-sizing: border-box;
-	min-height: @form-height;	
+	min-height: @form-height;
 }
 
 .hook-form-focus() {
-	.focus;
+	.inset;	
 }
 
 .hook-form-stacked-label() {

@@ -49,12 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<div class="uk-offcanvas-bar am-navbar-push">
 			<div data-am-scroll-box='{"scrollToItem": ".uk-active"}'>
 				<div data-am-tree>
-					<a href="#am-add-page-modal" class="uk-button uk-button-danger uk-visible-small uk-margin-small-bottom" data-uk-modal>
+					<a href="#am-add-page-modal" class="uk-button uk-button-danger uk-visible-small uk-margin-bottom" data-uk-modal>
 						<i class="uk-icon-plus"></i>&nbsp;
 						<?php Text::e('btn_add_page'); ?>
 					</a>
 					<ul class="uk-nav uk-nav-side">
-						<li class="uk-nav-divider"></li>
 						<li class="uk-nav-header">
 							<?php Text::e('sidebar_header_global'); ?>
 						</li>

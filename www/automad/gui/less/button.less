@@ -86,49 +86,25 @@
 	
 	box-sizing: border-box;
 	position: relative;
-	border-radius: @am-radius;
 	font-weight: @am-nav-font-weight;
 	border: @am-border-width solid transparent;
+	max-height: @button-height;
 	
 	&:active {
-		.active;
+		.inset;
 	}
 	
+}
+
+.hook-button-large() {
+	max-height: @button-large-height;
 }
 
 .hook-button-danger() {
+	
 	& .uk-badge {
 		color: @am-danger;
 		background-color: #FFFFFF;
-	}
-}
-
-.uk-button-group {
-	
-	// Keep properties for border radius even when radius is zero
-	// to be flexible.
-	border-radius: @am-radius;
-
-	& .uk-button {
-		border-radius: 0;
-	}
-
-	// The second selector is needed in case the buttons distributed over multiple containers like in the sticky switcher/dropdown menu.
-	& > :first-child,
-	& > :first-child [class*="uk-button"]:first-of-type {
-		border-top-left-radius: @am-radius;
-		border-bottom-left-radius: @am-radius;
-	}
-	
-	// The second selector is needed in case the buttons distributed over multiple containers like in the sticky switcher/dropdown menu.
-	& > :last-child,
-	& > :last-child [class*="uk-button"]:last-of-type {
-		border-top-right-radius: @am-radius;
-		border-bottom-right-radius: @am-radius;
-	}
-	
-	[data-uk-sticky].uk-active > & {
-		.shadow;
 	}
 	
 }

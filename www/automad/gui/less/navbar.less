@@ -40,7 +40,7 @@
 @navbar-nav-hover-color:	@navbar-color;
 @navbar-nav-active-color:	@navbar-color;
 
-@navbar-nav-height:		58px;
+@navbar-nav-height:		57px;
 @navbar-nav-padding-horizontal: 12px;
 
 
@@ -56,10 +56,7 @@
 	width: 100%;
 	height: @navbar-nav-height;
 	background-color: @navbar-background;
-	
-	.am-scrolled & {
-		.shadow;
-	}
+	border-bottom: @am-border-width solid @am-border-color;
 	
 	&-nav {
 		
@@ -92,17 +89,17 @@
 		margin-right: -7px;
 		line-height: @button-height;
 		text-align: center;
-		border-radius: @am-radius;
 		font-size: 16px;
 		color: @navbar-nav-color;		
 		background-color: @am-grey;
 		cursor: pointer;
 		
 		&&-danger {
-			
+	
 			margin-right: 0;
 			background-color: @button-danger-background;
 			font-size: 14px;
+			border-radius: 100%;
 			
 			&:hover,
 			&:focus {
@@ -162,8 +159,8 @@
 			width: 100%;
 			
 			& .uk-icon-automad {
-				top: 2px;
-				font-size: 18px;
+				top: 1px;
+				font-size: 19px;
 			}
 			
 		}
@@ -179,26 +176,40 @@
 		}
 		
 		& form {
-			padding: 0 @utility-margin;
+			
+			padding: 0 @navbar-nav-padding-horizontal;
+			
+			& > div {
+				height: @navbar-nav-height - @am-border-width;
+				border-left: @am-border-width solid @am-border-color;
+				border-right: @am-border-width solid @am-border-color;
+			}
+			
 		}
 		
 		& .uk-form-icon i {
 			color: @navbar-color;
+			padding-left: @navbar-nav-padding-horizontal;
+			top: (@navbar-nav-height / 2) - 1;
 		}
 		
 		& .uk-form-controls {
 			
+			height: @navbar-nav-height - @am-border-width;
+			padding-left: @navbar-nav-padding-horizontal + @form-icon-width + 5 !important;
 			color: @navbar-color;
-			background-color: @panel-box-background;
+			background-color: @navbar-background;
+			border-color: transparent;
 			
 			&:not(:focus) {
 				cursor: pointer;
+				box-shadow: none;
 			}
 			
 			&:hover,
 			&:focus {
 				color: @navbar-color;
-				background-color: darken(@panel-box-background, 4%);
+				background-color: darken(@navbar-background, 4%);
 			}
 			
 		}

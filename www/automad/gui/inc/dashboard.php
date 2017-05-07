@@ -60,34 +60,32 @@ $this->element('header');
 
 ?>
 		
-		<div class="uk-block uk-padding-bottom-remove">
-			<h1 class="uk-margin-large-top uk-margin-small-bottom"><?php echo $this->sitename; ?></h1>
+		<div class="uk-block">
+			<h1 class="uk-margin-large-top uk-margin-large-bottom"><?php echo $this->sitename; ?></h1>
 		</div>
-		<div class="uk-panel uk-panel-box uk-panel-box-primary">
-			<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3">
-				<li>
-					<i class="uk-icon-heartbeat uk-icon-small uk-margin-bottom"></i>
-					<div class="uk-text-small uk-text-bold uk-margin-small-bottom"><?php Text::e('dashboard_modified'); ?></div>
-					<?php echo date('j. M Y', $mTime); ?><span class="uk-hidden-small">, <?php echo date('G:i', $mTime); ?> h</span>
-				</li>
-				<li>
-					<i class="uk-icon-code-fork uk-icon-small uk-margin-bottom"></i>
-					<div class="uk-text-small uk-text-bold uk-margin-small-bottom">Automad Version</div>
-					<?php echo AM_VERSION; ?>
-				</li>
-				<li class="uk-position-relative uk-hidden-small">
-					<i class="uk-icon-hdd-o uk-icon-small uk-margin-bottom"></i>
-					<a href="#am-server-info-modal" class="uk-button uk-button-primary uk-button-mini uk-float-right" data-uk-modal>
-						<i class="uk-icon-plus-circle"></i>&nbsp;
-						<?php Text::e('btn_more'); ?>
-					</a>
-					<div class="uk-text-small uk-text-bold uk-margin-small-bottom">
-						<?php Text::e('dashboard_server'); ?>
-					</div>
-					<span class="uk-text-truncate"><?php echo getenv('SERVER_NAME'); ?></span>
-				</li>
-			</ul>
-		</div>
+		<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3 uk-margin-large-bottom">
+			<li>
+				<i class="uk-icon-heartbeat uk-icon-small uk-margin-bottom"></i>
+				<div class="uk-text-small uk-text-bold uk-margin-small-bottom"><?php Text::e('dashboard_modified'); ?></div>
+				<?php echo date('j. M Y', $mTime); ?><span class="uk-hidden-small">, <?php echo date('G:i', $mTime); ?> h</span>
+			</li>
+			<li>
+				<i class="uk-icon-code-fork uk-icon-small uk-margin-bottom"></i>
+				<div class="uk-text-small uk-text-bold uk-margin-small-bottom">Automad Version</div>
+				<?php echo AM_VERSION; ?>
+			</li>
+			<li class="uk-position-relative uk-hidden-small">
+				<i class="uk-icon-hdd-o uk-icon-small uk-margin-bottom"></i>
+				<a href="#am-server-info-modal" class="uk-button uk-button-mini uk-float-right" data-uk-modal>
+					<i class="uk-icon-plus-circle"></i>&nbsp;
+					<?php Text::e('btn_more'); ?>
+				</a>
+				<div class="uk-text-small uk-text-bold uk-margin-small-bottom">
+					<?php Text::e('dashboard_server'); ?>
+				</div>
+				<span class="uk-text-truncate"><?php echo getenv('SERVER_NAME'); ?></span>
+			</li>
+		</ul>
 		<ul class="uk-grid uk-grid-width-medium-1-2">
 			<li class="uk-margin-small-bottom" data-am-status="cache"></li>
 			<li class="uk-margin-large-bottom" data-am-status="debug"></li>

@@ -75,6 +75,14 @@ if (isset($_POST['data'])) {
 		<div class="uk-form-row uk-margin-large-bottom">
 			<label for="am-input-data-sitename" class="uk-form-label"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
 			<input id="am-input-data-sitename" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" />
+			<ul class="am-link uk-subnav uk-subnav-pill uk-margin-top uk-hidden-small">
+				<li class="uk-disabled"><i class="uk-icon-share"></i></li>
+				<li>
+					<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-text-truncate" title="<?php Text::e('btn_inpage_edit'); ?>" data-uk-tooltip="pos:'bottom-left'">
+						<?php echo getenv('SERVER_NAME'); ?>
+					</a>
+				</li>
+			</ul>
 		</div>
 
 		<!-- Content -->		

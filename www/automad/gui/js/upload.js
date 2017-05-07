@@ -62,7 +62,7 @@
 		// Dropzone.
 		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
 		$input:		$('<input type="file" multiple />'),
-		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-primary uk-width-1-1 uk-margin-top' })
+		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-primary uk-width-1-1 uk-margin-large-top' })
 				.click(function() {
 					// Make a button click trigger the file input for browsing.
 					Automad.upload.$input.click();
@@ -92,6 +92,7 @@
 			u.$input.appendTo(u.$dropzone).hide();
 			u.$browse.html(iconBrowse + u.$modal.data(util.dataCamelCase(da.browseText)))
 				 .insertAfter(u.$dropzone);
+			$('<hr />').appendTo(u.$container);
 			
 			// The modal's close buttons
 			u.$close = u.$modal.find('.uk-modal-close'); 	
@@ -143,7 +144,8 @@
 					data.context = $('<div></div>', { 'class': 'uk-margin-large-top' }).appendTo(u.$container);
 			
 					$(info).appendTo(data.context);	
-					$('<div class="uk-progress uk-active"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
+					$('<div class="uk-progress uk-progress-mini"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
+					$('<div></div>', { 'class': 'am-progress uk-text-small uk-text-muted' }).html('<i class="uk-icon-circle-o-notch uk-icon-spin"></i>').appendTo(data.context);
 				
 					data.context.find('.uk-progress-bar').width('0px');
 				
@@ -152,7 +154,6 @@
 				    	// Disable the close button for every added file.
 					// When all uploads are done, the button gets enabled again (always callback).
 				    	u.$close.prop('disabled', true);
-					u.$close.find('i').removeClass('uk-icon-close').addClass('uk-icon-circle-o-notch uk-icon-spin');
 					
 				},
 				
@@ -160,26 +161,27 @@
 
 					var 	progress = parseInt(data.loaded / data.total * 100, 10);
 
-					data.context.find('.uk-progress-bar').text(progress + ' %').width(progress + '%');
-				 
+					data.context.find('.am-progress').text(progress + ' %');
+				 	data.context.find('.uk-progress-bar').width(progress + '%');
+					
 				},
 				
 				stop: function (e) {
 					
 					// When all uploads have finished enable the close button again.
 					u.$close.prop('disabled', false);
-					u.$close.find('i').addClass('uk-icon-close').removeClass('uk-icon-circle-o-notch uk-icon-spin');
 					
 				},
 				
 				done: function (e, data) {
 					
 					// Deactivate progress bar.
-					data.context.find('.uk-progress').removeClass('uk-progress-striped uk-active');
+					data.context.find('.uk-progress');
 						
 					// In case of an server-side error, show error message in progress bar.		
 					if (data.result.error) {	
-						data.context.find('.uk-progress').addClass('uk-progress-danger').find('.uk-progress-bar').text(data.result.error);
+						data.context.find('.uk-progress').addClass('uk-progress-danger').find('.uk-progress-bar');
+						data.context.find('.am-progress').text(data.result.error);
 					} else {
 						data.context.find('.uk-progress').addClass('uk-progress-success');
 					}

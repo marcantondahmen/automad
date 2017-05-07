@@ -42,11 +42,13 @@
 @modal-dialog-large-width-large:	@modal-dialog-large-width;
 
 .hook-modal-dialog() {
+	
+	overflow-x: hidden;
 		
 	&:not(&-blank) {
 		
 		@media (min-width: @breakpoint-small) {
-			border-radius: @am-radius-large;
+			border-radius: 7px;
 			.shadow;	
 		}
 		
@@ -70,6 +72,12 @@
 		}
 
 	}
+	
+	hr {
+		width: ~"calc(100% + (2 * @{modal-dialog-padding}))";
+		margin-left: -@modal-dialog-padding;
+		margin-right: -@modal-dialog-padding;
+	}
 				
 }
 
@@ -77,13 +85,23 @@
 
 	color: #FFFFFF;
 	font-size: 16px;
+	margin: -@modal-dialog-padding;
 	margin-bottom: @utility-margin-large;
+	padding: @modal-dialog-padding;
+	border-bottom: @am-border-width solid @am-border-color;
+	
+	.uk-modal-dialog-blank & {
+		margin-left: -50vw;
+		padding-left: 50vw;	
+		margin-right: -50vw;
+		padding-right: 50vw;	
+	}
 	
 	& .uk-close {
 		float: right;
 		font-size: 14px;
 	}
-	
+		
 }
 
 .hook-modal-footer() {	

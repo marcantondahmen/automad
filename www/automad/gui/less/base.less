@@ -34,7 +34,7 @@
 
 
 // Automad colors.
-@am-grey:			#ADB2B8;
+@am-grey:			#AEB6BF;
 @am-text: 			#FFFFFF;
 @am-muted:			darken(@am-grey, 18%);
 @am-primary: 			darken(@am-grey, 30%);
@@ -45,16 +45,15 @@
 // Specific Automad theme variables.
 @am-body-padding-bottom:	30px; 
 
-@am-border-width:		2px;
-@am-border-color:		darken(@am-grey, 5%);
+@am-border-width:		1px;
+@am-border-color:		darken(@am-grey, 6%);
 
-@am-sidebar-border-width:	5px;
+@am-border-thick-width:		2px;
 
-@am-nav-bg-hover:		darken(@am-grey, 5%);
+@am-nav-bg: 			@button-background;
+@am-nav-bg-hover:		@button-hover-background;
+@am-nav-bg-active:		@button-active-background;
 @am-nav-font-weight:		500;
-
-@am-radius:			4px;
-@am-radius-large:		7px;
 
 
 // UIkit base variables.
@@ -100,8 +99,14 @@ html:not(.am-dashboard) {
 }
 
 body {
+	
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;		
+	
+	html.am-dashboard & {
+		overflow-x: hidden;
+	}
+	
 }
 
 div:empty {
@@ -135,4 +140,9 @@ label:before,
 textarea,
 input { 
 	.transition(color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s;);
+}
+
+.am-dashboard hr {
+	width: 200vw;
+	margin-left: -50vw;	
 }

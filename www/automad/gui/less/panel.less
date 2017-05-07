@@ -49,7 +49,6 @@
 .hook-panel-box() {
 	
 	margin: @utility-margin-large 0;
-	border-radius: @am-radius;
 	overflow: hidden;
 	
 	.uk-grid & {
@@ -57,7 +56,7 @@
 	}
 
 	&.uk-active {
-		box-shadow: 0 0 0 3px @am-success;
+		box-shadow: 0 0 0 @am-border-thick-width darken(@am-grey, 18%);
 	}
 
 	& img {

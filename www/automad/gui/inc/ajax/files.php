@@ -234,10 +234,11 @@ if ($files) { ?>
 			<div class="uk-modal-dialog">
 				<div class="uk-modal-header">
 					<?php Text::e('btn_upload'); ?>
+					<button type="button" class="uk-modal-close uk-close"></button>
 				</div>
 				<div id="am-upload-container"></div>
 				<div class="uk-modal-footer uk-text-right">
-					<button type="button" class="uk-modal-close uk-button">
+					<button type="button" class="uk-modal-close uk-button uk-button-danger">
 						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 					</button>
 				</div>

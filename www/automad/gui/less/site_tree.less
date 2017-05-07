@@ -52,53 +52,28 @@
 	}
 	
 	& a:not(.am-tree-toggle) {
-		border-radius: @am-radius;
 		width: auto;
 		margin-bottom: @am-border-width;
-		margin-right: 12px;
 	}
 	
 	.uk-modal & {
 		
 		& > .uk-nav-side {
 			margin: -@nav-padding-vertical @nav-padding-horizontal -@nav-padding-vertical -@nav-padding-horizontal;	
+			margin: 0 0 -@nav-padding-vertical -@nav-padding-horizontal;	
 		}
 		
-		& .uk-active > a {
-			background-color: @am-primary;
-		}
-		
-		& a:not(.am-tree-toggle) {
-			display: inline-block;
-			margin-bottom: -2px;
-			max-width: 100%;
+		& .uk-active > a:not(.am-tree-toggle) {	
+			background-color: @am-danger;
 		}
 		
 	}
 	
 	.uk-offcanvas-bar & {
-		
 		padding-left: @utility-container-padding-horizontal - @nav-padding-horizontal;
-		padding-right: @am-sidebar-border-width;
+		padding-right: 0;
 		padding-bottom: @am-body-padding-bottom - @nav-padding-vertical;
 		margin: (@utility-margin + @utility-margin-small) 0;
-		.active-border-vertical;
-	
-		& {
-			
-			& a:not(.am-tree-toggle):not([target='_blank']):not(href^="#") {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
-				max-width: 100%;
-				margin-right: 0;
-			}
-			
-			& .uk-active > a:not(.am-tree-toggle) {
-				margin-right: -@am-sidebar-border-width;
-			}
-			
-		}
-		
 	}
 
 	& .uk-active > a .uk-icon-folder:before {

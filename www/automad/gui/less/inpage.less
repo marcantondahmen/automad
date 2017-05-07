@@ -48,9 +48,8 @@
 		
 		display: inline-block;
 		position: fixed;
-		top: ~"calc(100vh - 58px)";
-		left: ~"calc(50vw - 180px)";
-		width: 360px;
+		top: 20px;
+		left: 20px;
 		
 		& .uk-button-group {
 			.shadow;	
@@ -61,9 +60,11 @@
 			top: 1px;
 		}
 		
-		@media (max-width: 400px) {
+		@media (max-width: 450px) {
 			
-			top: ~"calc(100vh - 50px)";
+			top: 10px;
+			left: ~"calc(50vw - 140px)";
+			width: 280px;
 			text-align: center;
 			
 			& .uk-button {
