@@ -69,14 +69,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 								<?php Text::e('dashboard_title'); ?>
 							</a>
 						</li>
-						<?php if (Core\Parse::query('context') == 'search') { ?>
-						<li class="uk-active">
-							<a href="">
-								<i class="uk-icon-search uk-icon-justify"></i>&nbsp;
-								<?php Text::e('search_title'); ?>
-							</a>
-						</li>
-						<?php } ?> 						
 						<li<?php if (Core\Parse::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
 							<a href="?context=system_settings">
 								<i class="uk-icon-cog uk-icon-justify"></i>&nbsp;
