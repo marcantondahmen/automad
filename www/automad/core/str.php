@@ -67,8 +67,10 @@ class Str {
 
 	public static function dateFormat($date, $format) {
 
-		return date($format, strtotime($date));
-
+		if ($date) {
+			return date($format, strtotime($date));	
+		}
+		
 	}
 
 
