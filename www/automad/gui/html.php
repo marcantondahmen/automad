@@ -174,11 +174,15 @@ class Html {
 
 		// Append placeholder to $attr when editing a page. Therefore check if any URL or context (inpage-edit) is set in $_POST.
 		if (!empty($_POST['url']) || !empty($_POST['context'])) {
-			$attr .= ' placeholder="' . htmlspecialchars($this->Automad->Shared->get($key)) . '"';
-		} 
+			$placeholder = ' placeholder="' . htmlspecialchars($this->Automad->Shared->get($key)) . '"';
+		} else {
+			$placeholder = '';
+		}
 		
 		// Create field dependig on the start of $key.
 		if (strpos($key, 'text') === 0) {
+			
+			$attr .= $placeholder;
 			
 			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor="{markdown:true}">' . 
 					$value . 
@@ -188,10 +192,26 @@ class Html {
 			
 			$attr .= 	' value="' . $value . '"';
 			
-			$html .=	'<div class="uk-form-icon uk-width-1-1">' . 
+			$html .=	'<div data-am-datetime>' .
+					// Actual combined date-time value (hidden).
+					'<input type="hidden" ' . $attr  . ' />' .
+					'<ul class="uk-grid uk-grid-small uk-grid-width-1-2">' .
+					// Date picker.
+					'<li>' .
+					'<div class="uk-form-icon uk-width-1-1">' . 
 					'<i class="uk-icon-calendar"></i>' .
-					'<input ' . $attr . ' type="text" class="uk-width-1-1" data-uk-datepicker="{format:\'YYYY-MM-DD\'}" />' .
-					'</div>';
+					'<input type="text" class="uk-width-1-1" value="' . Core\Str::dateFormat($value, 'Y-m-d') . '" data-uk-datepicker="{format:\'YYYY-MM-DD\'}" />' .
+					'</div>' .
+					'</li>' .
+					// Time picker.
+					'<li>' .
+					'<div class="uk-form-icon uk-width-1-1">' . 
+					'<i class="uk-icon-clock-o"></i>' .
+					'<input type="text" class="uk-width-1-1" value="' . Core\Str::dateFormat($value, 'H:i') . '" data-uk-timepicker="{format:\'24h\'}" />' .
+					'</div>' .
+					'</li>' .
+					'</ul>' .
+					'</div>';	
 			
 		} else if (strpos($key, 'checkbox') === 0) {
 			
@@ -205,6 +225,8 @@ class Html {
 					'</label>';
 			
 		} else {
+			
+			$attr .= $placeholder;
 			
 			// The default is a simple textarea.
 			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10">' . 
@@ -544,7 +566,7 @@ class Html {
 			$n++;
 		}
 		
-		$html = '<div data-uk-sticky="{top:65,showup:true,animation:\'uk-animation-slide-top\'}">' .
+		$html = '<div class="am-switcher" data-uk-sticky="{top:65,showup:true,animation:\'uk-animation-slide-top\'}">' .
 			'<div class="uk-button-group uk-width-1-1">';
 
 		// Switcher Menu. 
