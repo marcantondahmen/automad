@@ -190,7 +190,18 @@ class Html {
 			
 		} else if (strpos($key, 'date') === 0) {
 			
-			$attr .= 	' value="' . $value . '"';
+			$attr .= ' value="' . $value . '"';
+			
+			$formatDate = 'Y-m-d';
+			$formatTime = 'H:i';
+			
+			$attrDate = 'value="' . Core\Str::dateFormat($value, $formatDate) . '"';
+			$attrTime = 'value="' . Core\Str::dateFormat($value, $formatTime) . '"';
+			
+			if (!empty($_POST['url']) || !empty($_POST['context'])) {
+				$attrDate .= ' placeholder="' . Core\Str::dateFormat($this->Automad->Shared->get($key), $formatDate) . '"';
+				$attrTime .= ' placeholder="' . Core\Str::dateFormat($this->Automad->Shared->get($key), $formatTime) . '"';
+			}
 			
 			$html .=	'<div data-am-datetime>' .
 					// Actual combined date-time value (hidden).
@@ -200,14 +211,14 @@ class Html {
 					'<li>' .
 					'<div class="uk-form-icon uk-width-1-1">' . 
 					'<i class="uk-icon-calendar"></i>' .
-					'<input type="text" class="uk-width-1-1" value="' . Core\Str::dateFormat($value, 'Y-m-d') . '" data-uk-datepicker="{format:\'YYYY-MM-DD\'}" />' .
+					'<input type="text" class="uk-width-1-1" ' . $attrDate . ' data-uk-datepicker="{format:\'YYYY-MM-DD\'}" />' .
 					'</div>' .
 					'</li>' .
 					// Time picker.
 					'<li>' .
 					'<div class="uk-form-icon uk-width-1-1">' . 
 					'<i class="uk-icon-clock-o"></i>' .
-					'<input type="text" class="uk-width-1-1" value="' . Core\Str::dateFormat($value, 'H:i') . '" data-uk-timepicker="{format:\'24h\'}" />' .
+					'<input type="text" class="uk-width-1-1" ' . $attrTime . ' data-uk-timepicker="{format:\'24h\'}" />' .
 					'</div>' .
 					'</li>' .
 					'</ul>' .
