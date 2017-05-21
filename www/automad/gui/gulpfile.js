@@ -103,6 +103,7 @@ gulp.task('libs-js', ['bump'], function() {
 			gulp.src([
 				'../lib/codemirror/lib/codemirror.js',
 				'../lib/codemirror/mode/markdown/markdown.js',
+				'../lib/codemirror/addon/display/placeholder.js',
 				'../lib/codemirror/addon/mode/overlay.js',
 				'../lib/codemirror/mode/xml/xml.js',
 				'../lib/codemirror/mode/gfm/gfm.js'

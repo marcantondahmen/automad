@@ -79,11 +79,22 @@
 }
 
 .uk-htmleditor .CodeMirror {
+	
 	font-family: inherit;
 	color: @form-focus-color;
 	background-color: @form-focus-background;
 	padding: @htmleditor-content-padding;
 	box-sizing: border-box;
+		
+	& .CodeMirror-line,
+	& .CodeMirror-placeholder {
+		font-weight: @form-stacked-font-weight;
+	}
+
+	& .CodeMirror-placeholder {
+		color: @form-placeholder-color;
+	}
+
 }
 
 [data-mode='split'] .uk-htmleditor-code { 
