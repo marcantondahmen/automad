@@ -35,24 +35,56 @@
 
 [data-am-datetime] {
 	
-	& .uk-autocomplete {
-		
-		width: 100%;
-			
-		& .uk-dropdown {
-			min-width: 150px;
-		}
-		
+	background-color: @form-background;
+	border: @am-border-thick-width solid @form-border;
+	
+	&.uk-active {
+		background-color: @form-focus-background;
+		border-color: @form-focus-border;
+		.inset;
 	}
 	
 	& .uk-form-icon {
+	
+		& input {
+			
+			min-height: @form-height - (2 * @am-border-thick-width);
+			max-height: @form-height - (2 * @am-border-thick-width);
+			
+			&,
+			&:focus {
+				background-color: transparent;	
+				border-width: 0 !important;
+				box-shadow: none;
+			}
+			
+		}
+			
+		&:first-of-type {
+			width: 120px;
+			margin-left: -@am-border-thick-width;
+		}
+		
+		&:last-of-type {
+			width: ~"calc(100% - 120px)";	
+		}
 		
 		& > i {
 			z-index: 100;
 		}
 		
 		& .uk-autocomplete input {
-			padding-left: @form-icon-width !important;
+			padding-left: (@form-icon-width + 2) !important;
+		}
+		
+	}
+	
+	& .uk-autocomplete {
+		
+		width: 100%;
+			
+		& .uk-dropdown {
+			min-width: 150px;
 		}
 		
 	}

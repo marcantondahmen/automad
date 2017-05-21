@@ -326,7 +326,7 @@
 					
 					// Change label color to flag input as changed.
 					$(this).prevAll('.uk-form-label').addClass('am-form-changed');
-					$(this).closest('.uk-form-icon, .uk-htmleditor, [data-am-toggle]').prev('.uk-form-label').addClass('am-form-changed');
+					$(this).closest('.uk-form-icon, .uk-htmleditor, [data-am-toggle], [data-am-datetime]').prev('.uk-form-label').addClass('am-form-changed');
 					$(this).closest('.uk-grid').prev('.uk-form-label').addClass('am-form-changed');
 					
 				}

@@ -51,6 +51,22 @@
 			
 			$doc.on('change', dt.selector + ' [data-uk-datepicker]', dt.update.date);
 			$doc.on('change', dt.selector + ' [data-uk-timepicker]', dt.update.time);
+		
+			// Add .uk-active class to [data-am-datetime] when a child input is focused.
+			$doc.on('focus', dt.selector + ' input', function(e) {
+				
+				var 	$input = $(e.target),
+					$datetime = $input.closest(dt.selector);
+				
+				$datetime.addClass('uk-active');
+
+				$input.on('blur.automad', function() {
+					$datetime.removeClass('uk-active');
+					$input.off('blur.automad');	
+				});
+			
+			});
+						
 		},
 		
 		today: function() {
@@ -90,6 +106,8 @@
 					$timepicker.val('');
 					
 				}
+				
+				$datetime.trigger('change');
 					
 			},
 			
@@ -113,7 +131,7 @@
 					$datepicker.val(date);
 				}
 				
-				$datetime.val(date + ' ' + time + ':00');	
+				$datetime.val(date + ' ' + time + ':00').trigger('change');
 				
 			}
 			

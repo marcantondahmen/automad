@@ -206,22 +206,16 @@ class Html {
 			$html .=	'<div data-am-datetime>' .
 					// Actual combined date-time value (hidden).
 					'<input type="hidden" ' . $attr  . ' />' .
-					'<ul class="uk-grid uk-grid-small uk-grid-width-1-2">' .
 					// Date picker.
-					'<li>' .
-					'<div class="uk-form-icon uk-width-1-1">' . 
+					'<div class="uk-form-icon">' . 
 					'<i class="uk-icon-calendar"></i>' .
-					'<input type="text" class="uk-width-1-1" ' . $attrDate . ' data-uk-datepicker="{format:\'YYYY-MM-DD\'}" />' .
+					'<input type="text" class="uk-width-1-1" ' . $attrDate . ' data-uk-datepicker="{format:\'YYYY-MM-DD\',pos:\'bottom\'}" />' .
 					'</div>' .
-					'</li>' .
 					// Time picker.
-					'<li>' .
-					'<div class="uk-form-icon uk-width-1-1">' . 
+					'<div class="uk-form-icon">' . 
 					'<i class="uk-icon-clock-o"></i>' .
 					'<input type="text" class="uk-width-1-1" ' . $attrTime . ' data-uk-timepicker="{format:\'24h\'}" />' .
 					'</div>' .
-					'</li>' .
-					'</ul>' .
 					'</div>';	
 			
 		} else if (strpos($key, 'checkbox') === 0) {
