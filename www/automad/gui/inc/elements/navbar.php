@@ -69,9 +69,9 @@ if (User::get()) {
 				<form class="uk-form uk-width-1-1" action="" method="get" data-am-autocomplete-submit>
 					<input type="hidden" name="context" value="search">	
 					<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">
-						<div class="uk-form-icon uk-width-1-1">
+						<div class="uk-form-icon uk-width-1-1" title="Ctrl + Space" data-uk-tooltip>
 							<i class="uk-icon-search"></i>
-							<input class="uk-form-controls uk-form-large uk-width-1-1" name="query" type="text" placeholder="<?php echo $searchPlaceholder; ?>" required>
+							<input class="uk-form-controls uk-form-large uk-width-1-1" title="" name="query" type="text" placeholder="<?php echo $searchPlaceholder; ?>" required>
 						</div>
 					</div>
 				</form>
@@ -85,7 +85,7 @@ if (User::get()) {
 			<!-- Save -->
 			<?php if ($submit) { ?>
 			<li>
-				<button class="uk-button uk-button-success" data-am-submit="<?php echo $submit; ?>" disabled>
+				<button title="Cmd/Ctrl + S" class="uk-button uk-button-success" data-am-submit="<?php echo $submit; ?>" data-uk-tooltip disabled>
 					<span class="uk-hidden-small"><i class="uk-icon-check"></i>&nbsp;&nbsp;</span><?php Text::e('btn_save'); ?>
 				</button>
 			</li>
