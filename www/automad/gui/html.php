@@ -225,7 +225,7 @@ class Html {
 			}
 			
 			$html .=	'<label class="uk-button uk-width-1-1" data-am-toggle>&nbsp;' . 
-					ucwords(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key))) . 
+					ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
 					'<input ' . $attr . ' type="checkbox"  />' .
 					'</label>';
 			

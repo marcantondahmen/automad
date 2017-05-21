@@ -90,5 +90,12 @@
 }
  
 .hook-accordion-content() {
+	
 	padding: @utility-margin-large 0;
+	
+	// Hide content before accordion is initialized to avoid flicker.
+	:not([data-wrapper]) > & {
+		display: none;
+	}
+	
 }
