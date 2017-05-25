@@ -306,6 +306,10 @@ class Parse {
 	public static function textFile($file) {
 		
 		$vars = array();
+		
+		if (!file_exists($file)) {
+			return $vars;
+		}
 			
 		// Get file content and normalize line breaks.
 		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));	
