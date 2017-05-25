@@ -111,6 +111,9 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 			$Automad = new Automad();
 			$Cache->writeAutomadObjectToCache($Automad);
 	
+			// Generate new sitemap.
+			new Sitemap($Automad->getCollection());
+	
 		}
 	
 		// Render template
@@ -128,9 +131,6 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 			
 		}
 		
-		// Generate sitemap.xml
-		new Sitemap($Automad->getCollection());
-	
 	}
 	
 }
