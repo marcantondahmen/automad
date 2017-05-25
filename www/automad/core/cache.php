@@ -36,6 +36,7 @@
 
 
 namespace Automad\Core;
+use Automad\GUI as GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -148,6 +149,14 @@ class Cache {
 		
 		if (AM_CACHE_ENABLED) {
 	
+			if (GUI\User::get()) {
+				
+				// Return false and skip all other tests in case in-page edit mode is enabled.
+				Debug::log('In-page edit mode! Skipping cache!');
+				return false;
+				
+			}
+	
 			if (file_exists($this->pageCacheFile)) {	
 					
 				$cacheMTime = filemtime($this->pageCacheFile);
@@ -162,35 +171,27 @@ class Cache {
 						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache got approved! Page cache mTime');
 						return true;
 						
-					} else {
-						
-						// If the cached page is older than the site's mTime,
-						// the cache gets no approval. 
-						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The site got modified! Page cache mTime');
-						return false;
-						
 					}
-				
-				} else {	
 					
-					Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The cached page reached maximum lifetime! Page cache mTime'); 
+					// If the cached page is older than the site's mTime,
+					// the cache gets no approval. 
+					Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The site got modified! Page cache mTime');
 					return false;
-					
-				}	
 				
-			} else {
-		
-				Debug::log('Page cache does not exist!');
-				return false;
-		
+				}
+				
+				Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The cached page reached maximum lifetime! Page cache mTime'); 
+				return false;	
+				
 			}
-	
-		} else {
 			
-			Debug::log('Caching is disabled! Not checking page cache!');
+			Debug::log('Page cache does not exist!');
 			return false;
-			
-		}
+	
+		} 
+		
+		Debug::log('Caching is disabled! Not checking page cache!');
+		return false;
 		
 	}
 
@@ -223,33 +224,25 @@ class Cache {
 						Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache got approved! Object cache mTime');
 						return true;
 						
-					} else {
-						
-						Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the site got modified! Object cache mTime');
-						return false;
 					}
-				
-				} else {
-								
-					Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the cached object reached maximum lifetime! Object cache mTime');
+					
+					Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the site got modified! Object cache mTime');
 					return false;
-			
+				
 				}
 				
-			} else {
-				
-				Debug::log('Automad object cache does not exist!');
+				Debug::log(date('d. M Y, H:i:s', $automadObjectMTime), 'Automad object cache is deprecated - the cached object reached maximum lifetime! Object cache mTime');
 				return false;
 				
 			}
 			
-		} else {
-			
-			Debug::log('Caching is disabled! Not checking automad object!');
+			Debug::log('Automad object cache does not exist!');
 			return false;
 			
 		}
 		
+		Debug::log('Caching is disabled! Not checking Automad object!');
+		return false;
 		
 	}
 
@@ -419,6 +412,14 @@ class Cache {
 	public function writePageToCache($output) {
 		
 		if (AM_CACHE_ENABLED) {
+				
+			if (GUI\User::get()) {
+				
+				// Exit method in case in-page edit mode is enabled.
+				Debug::log('In-page edit mode! Not writing page to cache!');
+				return NULL;
+				
+			}
 			
 			FileSystem::write($this->pageCacheFile, $output);
 			Debug::log($this->pageCacheFile, 'Page written to');
