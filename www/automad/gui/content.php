@@ -555,11 +555,12 @@ class Content {
 						// Rebuild Automad object, since the file structure has changed.
 						$Automad = new Core\Automad();
 						
-						// Find new URL and return redirect query string.
+						// Find new URL and return redirect URL.
 						foreach ($Automad->getCollection() as $key => $Page) {
 
 							if ($Page->path == $newPagePath) {
 								$output['redirect'] = AM_BASE_INDEX . $key;
+								break;
 							}
 
 						}
@@ -577,6 +578,11 @@ class Content {
 						// 	therefore the URL stays the same.
 						$output['redirect'] = AM_BASE_INDEX . $_POST['url'];
 						
+					}
+					
+					// Append query string inf not empty.
+					if (!empty($_POST['query'])) {
+						$output['redirect'] .= '?' . $_POST['query'];
 					}
 								
 				} else {

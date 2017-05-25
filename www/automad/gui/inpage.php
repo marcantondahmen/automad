@@ -104,6 +104,12 @@ class InPage {
 		$urlCache = $urlGui . '?context=system_settings#' . Core\Str::sanitize(Text::get('sys_cache'));
 		$urlLogout = $urlGui . '?context=logout';
 		
+		$queryString = '';
+		
+		if (!empty($_SERVER['QUERY_STRING'])) {
+			$queryString = $_SERVER['QUERY_STRING'];
+		}
+		
 		$html = '<div class="am-inpage">' .
 				// Menu.
 				'<div class="am-inpage-menubar">' .
@@ -129,6 +135,7 @@ class InPage {
 									'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;<span id="am-inpage-edit-modal-title"></span>' .
 								'</div>' .
 								'<input type="hidden" name="url" value="' . AM_REQUEST . '" />' .
+								'<input type="hidden" name="query" value="' . $queryString . '" />' .
 								'<div class="uk-modal-footer">' . 
 									'<div class="uk-text-right">' .
 										'<button type="button" class="uk-modal-close uk-button">' .
