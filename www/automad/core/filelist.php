@@ -65,7 +65,7 @@ class Filelist {
 	
 	private $options = 	array(
 					'glob' => '*.jpg, *.jpeg, *.png, *.gif',
-					'sortOrder' => 'asc'
+					'sort' => 'asc'
 				);
 	
 
@@ -110,7 +110,7 @@ class Filelist {
 		$files = Parse::fileDeclaration($this->options['glob'], $this->Context->get(), true);
 
 		// Sort files.	
-		switch ($this->options['sortOrder']) {
+		switch ($this->options['sort']) {
 			
 			case 'asc':
 				sort($files);
