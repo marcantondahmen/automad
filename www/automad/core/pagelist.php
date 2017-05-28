@@ -209,7 +209,20 @@ class Pagelist {
 	
 	}
 
+
+	/**
+	 *      Return the default options array.
+	 *      
+	 *      @return array Default options
+	 */
 	
+	public function getDefaults() {
+		
+		return $this->defaults;
+		
+	}
+
+
 	/**
 	 *	Collect all pages matching $type (& optional $parent), $template & $search (optional). 
 	 *

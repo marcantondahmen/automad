@@ -427,6 +427,20 @@ class Toolbox {
 	
 	
 	/**
+	 *	Alias for calling the pagelist() method with the default options merged with the specified ones
+	 *	to override all previous configurations.
+	 *	
+	 *	@param array $options 
+	 */
+
+	public function newPagelist($options = array()) {
+		
+		$this->pagelist(array_merge($this->Automad->getPagelist()->getDefaults(), $options));
+	
+	}
+	
+	
+	/**
 	 *	Change of configuration for Automad's Pagelist object.
 	 *
 	 *	Options:
