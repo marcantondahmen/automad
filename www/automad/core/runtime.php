@@ -112,9 +112,9 @@ class Runtime {
 					// The pagelist count represents the number of pages within the last defined pagelist. 
 					return count($this->Automad->getPagelist()->getPages(true));
 					
-				case AM_KEY_PAGINATION_LAST:
+				case AM_KEY_PAGINATION_COUNT:
 					// The last page number of the pagination of the current pagelist.
-					return $this->Automad->getPagelist()->getPaginationLast();
+					return $this->Automad->getPagelist()->getPaginationCount();
 				
 				case AM_KEY_CAPTION:
 					// Get the caption for the currently used ":file".

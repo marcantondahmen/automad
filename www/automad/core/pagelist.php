@@ -350,12 +350,12 @@ class Pagelist {
 	
 	
 	/**
-	 *      Calculate the last page of the pagination.
+	 *      Calculate the number of pages of the pagination.
 	 *      
-	 *      @return number The last page number of the current pagelist.
+	 *      @return number The number of pages of the current pagelist.
 	 */
 	
-	public function getPaginationLast() {
+	public function getPaginationCount() {
 		
 		if ($this->limit) {
 			return ceil(count($this->getPages(true)) / $this->limit);
