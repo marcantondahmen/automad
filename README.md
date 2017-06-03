@@ -17,4 +17,4 @@ Automad is released under the [MIT license](http://automad.org/license).
 
 ---
 
-© 2014 [Marc Anton Dahmen](http://marcdahmen.de)
+© 2013-2017 [Marc Anton Dahmen](http://marcdahmen.de)
