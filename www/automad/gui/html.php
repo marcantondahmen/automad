@@ -161,8 +161,8 @@ class Html {
 		$id = 'am-input-data-' . $key;
 	
 		$html = '<div class="uk-form-row">' .
-			'<label class="uk-form-label" for="' . $id . '">' . 
-			$key . 
+			'<label class="uk-form-label" for="' . $id . '" title="' . $key . '" data-uk-tooltip="{pos:\'top-left\',offset:3}">' . 
+			ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key)))) . 
 			 '</label>';
 
 		if ($removeButton) {
