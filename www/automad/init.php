@@ -35,10 +35,18 @@
  */
  
  
-namespace Automad\Core;
-
-
 defined('AUTOMAD') or die('Direct access not permitted!');
+
+
+$requiredVersion = '5.4.0';
+
+if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
+	die('Please update your PHP version to at least ' . $requiredVersion . '!');
+}
+
+
+use Automad\Core as Core;
+use Automad\GUI as GUI;
 
 
 // Set default timezone if not set.
@@ -66,7 +74,7 @@ require AM_BASE_DIR . '/automad/const.php';
 
 
 // Enable full error reporting, when debugging is enabled.
-Debug::errorReporting();
+Core\Debug::errorReporting();
 
 
 // The cache folder must be writable (resized images), also when caching is disabled!
@@ -83,13 +91,13 @@ session_start();
 // Split GUI form regular pages.
 if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 	
-	$GUI = new \Automad\GUI\Loader();
+	$GUI = new GUI\Loader();
 	$output = $GUI->output;
 	
 } else {
 
 	// Load page from cache or process template
-	$Cache = new Cache();
+	$Cache = new Core\Cache();
 
 	if ($Cache->pageCacheIsApproved()) {
 
@@ -108,16 +116,16 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 		} else {
 	
 			// Else create new Automad.
-			$Automad = new Automad();
+			$Automad = new Core\Automad();
 			$Cache->writeAutomadObjectToCache($Automad);
 	
 			// Generate new sitemap.
-			new Sitemap($Automad->getCollection());
+			new Core\Sitemap($Automad->getCollection());
 	
 		}
 	
 		// Render template
-		$View = new View($Automad);
+		$View = new Core\View($Automad);
 		$output = $View->render();
 	
 		// Save output to cache if page actually exists.
@@ -127,7 +135,7 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 			
 		} else {
 			
-			Debug::log(AM_REQUEST, 'Page not found! Caching will be skipped!');
+			Core\Debug::log(AM_REQUEST, 'Page not found! Caching will be skipped!');
 			
 		}
 		
@@ -137,7 +145,7 @@ if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
 
 
 // If debug is enabled, prepend the logged information to the closing </body> tag and echo the page.
-echo str_replace('</body>', Debug::getLog() . '</body>', $output);
+echo str_replace('</body>', Core\Debug::getLog() . '</body>', $output);
 
 
 ?>
