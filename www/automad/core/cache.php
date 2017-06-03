@@ -267,13 +267,16 @@ class Cache {
 			$queryString = '';
 		}
 		
-		// For proxies, use HTTP_X_FORWARDED_SERVER as server name. The actual server name is then already part of the AM_BASE_URL.
+		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name. 
+		// The actual server name is then already part of the AM_BASE_URL.
 		// For example: https://someproxy.com/domain.com/baseurl
 		//				        ^---Proxy     ^--- AM_BASE_URL (set in const.php inlc. SERVER_NAME)
-		if (!isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
-			$serverName = $_SERVER['SERVER_NAME'];
+		if (getenv('HTTP_X_FORWARDED_SERVER')) {
+			$serverName = getenv('HTTP_X_FORWARDED_SERVER');
+		} else if (getenv('HTTP_X_FORWARDED_HOST')) {
+			$serverName = getenv('HTTP_X_FORWARDED_HOST');
 		} else {
-			$serverName = $_SERVER['HTTP_X_FORWARDED_SERVER'];
+			$serverName = getenv('SERVER_NAME');
 		}
 		
 		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $serverName . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;

@@ -151,7 +151,11 @@ class User {
 		
 					session_regenerate_id(true);
 					$_SESSION['username'] = $username;
-					header('Location: ' . $_SERVER['REQUEST_URI']);
+					
+					// In case of using a proxy, 
+					// it is safer to just refresh the current page instead of rebuilding the currently requested URL. 
+					header('Refresh:0');
+					
 					die;
 		
 				} else {
