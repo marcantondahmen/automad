@@ -261,10 +261,20 @@ class Cache {
 		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
 		$currentPath = rtrim(AM_REQUEST, '/');
 		
+		// Create string of parameters.
+		$parameters = '';
+		 
 		if (!empty($_SERVER['QUERY_STRING'])) {
-			$queryString = '_' . md5($_SERVER['QUERY_STRING']);
-		} else {
-			$queryString = '';
+			$parameters .= $_SERVER['QUERY_STRING'];
+		} 
+		
+		if (!empty($_POST)) {
+			$parameters .= json_encode($_POST);
+		} 
+		
+		// Hash parameters to create unique suffix.
+		if ($parameters) {
+			$parameters = '_' . md5($parameters);
 		}
 		
 		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name. 
@@ -279,7 +289,7 @@ class Cache {
 			$serverName = getenv('SERVER_NAME');
 		}
 		
-		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $serverName . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $queryString . '.' . AM_FILE_EXT_PAGE_CACHE;
+		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $serverName . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $parameters . '.' . AM_FILE_EXT_PAGE_CACHE;
 		Debug::log($pageCacheFile);
 		
 		return $pageCacheFile;
