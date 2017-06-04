@@ -49,7 +49,7 @@
 @htmleditor-navbar-nav-active-color:            @button-color;
  
 @htmleditor-content-background:                 #FFFFFF;
-@htmleditor-content-padding:                    5px @button-padding-horizontal;
+@htmleditor-content-padding:                    20px;
 @htmleditor-content-split-border:               @am-grey;
 
 @htmleditor-fullscreen-z-index:                 990;
@@ -95,37 +95,49 @@
 		color: @form-placeholder-color;
 	}
 
-}
-
-[data-mode='split'] .uk-htmleditor-code { 
-	border-right: @am-border-width solid @htmleditor-content-split-border; 
-}
-
-:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content .cm-s-default {
-	
-	color: @form-color;
-	background-color: @form-background;
-	border: @am-border-thick-width solid @form-border;
-	
 	// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
 	&,
 	& * {
 		.transition(color 0.2s @am-cm-transition-delay, background-color 0.2s @am-cm-transition-delay, border-color 0.2s @am-cm-transition-delay, box-shadow 0.2s @am-cm-transition-delay;);
 	}
-	
-	&.CodeMirror-focused {
-		border-color: @form-focus-border;
-		.inset;
-	}
 
+}
+
+.uk-htmleditor-code {
+	
+	font-family: @base-code-font-family;
+	
+	& .CodeMirror {
+		
+		color: @form-color;
+		background-color: @form-background;
+		border: @am-border-thick-width solid @form-border;
+		
+		:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content &.CodeMirror-focused {
+			border-color: @form-focus-border;
+			.inset;
+		}
+
+		[data-mode='split'] & {
+			border-right: none;
+		}
+
+	}
+	
+	[data-mode='split'] & { 
+		border-right-color: @form-border; 
+	}
+	
 }
 
 .uk-htmleditor-preview {
 	
-	background-color: @form-focus-background;
+	color: @form-color;
+	background-color: @form-background;
+	border: @am-border-thick-width solid @form-border;
 	
-	:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content > & {
-		border: @am-border-width solid transparent;
+	.uk-htmleditor-fullscreen & {
+		border-left: none;
 	}
 
 	& * {
@@ -138,7 +150,7 @@
 	
 	& .cm-s-default,
 	& .uk-htmleditor-preview {
-		padding: @utility-margin-large;
+		padding: 2 * @htmleditor-content-padding;
 	}
 	
 }

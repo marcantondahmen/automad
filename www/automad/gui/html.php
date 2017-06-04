@@ -184,7 +184,7 @@ class Html {
 			
 			$attr .= $placeholder;
 			
-			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor="{markdown:true}">' . 
+			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor>' . 
 					$value . 
 					'</textarea>';
 			
