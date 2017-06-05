@@ -62,6 +62,10 @@ btn_hide_page: Hide Page From Navigation
 
 -
 
+btn_home: Home
+
+-
+
 btn_inpage_edit: In-Page Edit Mode
 
 -

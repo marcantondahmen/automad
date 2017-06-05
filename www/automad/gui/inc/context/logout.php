@@ -57,13 +57,19 @@ $this->element('header');
 
 		<div class="uk-width-medium-1-2 uk-container-center">
 			<h2 class="uk-margin-large-top"><?php echo $this->sitename ?></h2>
+			<hr />
 			<?php if ($loggedOut) { ?>
 			<div class="uk-alert uk-alert-success">
 				<?php Text::e('success_log_out'); ?>
 			</div>
 			<div class="uk-text-right">
+				<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button">
+					<i class="uk-icon-home"></i>&nbsp;
+					<?php Text::e('btn_home'); ?>
+				</a>
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button">
-					<?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i>
+					<?php Text::e('btn_login'); ?>&nbsp;
+					<i class="uk-icon-sign-in"></i>
 				</a>
 			</div>
 			<?php } else { ?>
