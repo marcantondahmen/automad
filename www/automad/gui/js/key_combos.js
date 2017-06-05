@@ -49,7 +49,7 @@
 					switch (String.fromCharCode(e.which).toLowerCase()) {
 						case 's':
 							e.preventDefault();
-							$('.am-navbar [data-am-submit]').click();
+							$('.am-navbar [data-am-submit], .am-inpage .uk-open [type="submit"]').click();
 							break;
 						case ' ':
 							e.preventDefault();
