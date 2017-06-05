@@ -53,7 +53,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	in that way that the namespace reflects the actual directory structure without the last directory containing the actual .php file.    
  *          
  *	Example 1 - Single extension:     
- *	An extension call like {@ example1 @} would load the file "/extensions/example1/example1.php", 
+ *	An extension call like <@ example1 @> would load the file "/extensions/example1/example1.php", 
  *	create an instance of the class "\Extensions\example1" ($object) and call the method "$object->example1()" of that class.
  *	The namespace would just be "Extensions".  
  *	The full naming scheme would be:    
@@ -64,7 +64,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	- method:	Example1
  *          
  *	Example 2 - Extension in a subdirectory (possibly grouped with others):     
- *	An extension call like {@ group/example2 @} would load the file "/extensions/group/example2/example2.php",
+ *	An extension call like <@ group/example2 @> would load the file "/extensions/group/example2/example2.php",
  *	create an instance of the class "\Extensions\group\example2" ($object) and call the method "$object->example2()" of that class.
  *	The namespace in this case would be "Extensions\group". 
  *	The full naming scheme would be:    
