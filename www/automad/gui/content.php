@@ -528,8 +528,8 @@ class Content {
 					Core\Debug::ajax($output, 'saved data', $data);
 					Core\Debug::ajax($output, 'data file', $this->getPageFilePath($Page));
 					
-					// If the title changed, the page directory has to be renamed.
-					if (!empty($_POST['data'][AM_KEY_TITLE])) {
+					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
+					if (!empty($_POST['data'][AM_KEY_TITLE]) && $Page->url != '/') {
 						
 						// Move directory.
 						$newPagePath = FileSystem::movePageDir(
