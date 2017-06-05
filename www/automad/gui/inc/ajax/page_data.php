@@ -109,7 +109,15 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					<li class="uk-disabled"><i class="uk-icon-share"></i></li>
 					<li>
 						<a href="<?php echo AM_BASE_INDEX . $url; ?>" class="uk-text-truncate" title="<?php Text::e('btn_inpage_edit'); ?>" data-uk-tooltip="pos:'bottom-left'">
-							<?php echo $url; ?>
+							<?php 
+							
+							if ($url == '/') {
+								echo getenv('SERVER_NAME');
+							} else {
+								echo $url; 	
+							}
+		
+							?>
 						</a>
 					</li>
 				</ul>
