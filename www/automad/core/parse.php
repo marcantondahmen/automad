@@ -222,9 +222,7 @@ class Parse {
 			// domain.com/page -> domain.com/index.php?/page 
 			// Or with a query string: 
 			// domain.com/page?key=value -> domain.com/index.php?/page&key=value
-			// Depending on the rewrite rules and environment, the query string can also look like:
-			// domain.com/page?key=vaule -> domain.com/index.php?/page?key=value (note the 2nd "?"!)
-			$query = preg_split('/[&\?]/', $_SERVER['QUERY_STRING'], 2);
+			$query = explode('&', $_SERVER['QUERY_STRING'], 2);
 			$request = $query[0];
 			Debug::log($query, 'Getting request from QUERY_STRING "' . $_SERVER['QUERY_STRING'] . '"');
 			
@@ -233,13 +231,14 @@ class Parse {
 				$query[1] = '';
 			}
 			
-			// Rebuild correct $_GET array without requested page.
-			parse_str($query[1], $_GET);
-			
 			// Remove request from QUERY_STRING.
 			$_SERVER['QUERY_STRING'] = $query[1];
 			
+			// Remove request from global arrays.
+			unset($_GET[$request]);
+			unset($_REQUEST[$request]);
 			Debug::log($_GET, '$_GET');
+			Debug::log($_REQUEST, '$_REQUEST');
 			
 		} else {
 				
@@ -257,27 +256,26 @@ class Parse {
 	
 			} else if (isset($_SERVER['REQUEST_URI'])) {
 		
-				$request = trim(str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']), '?');
+				$request = Str::stripEnd($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+				$request = Str::stripStart($request, AM_BASE_URL);
+				$request = Str::stripStart($request, '/index.php');
 				Debug::log('Getting request from REQUEST_URI');
 	
 			} else if (isset($_SERVER['REDIRECT_URL'])) {
 	
-				$request = $_SERVER['REDIRECT_URL'];
+				$request = Str::stripStart($_SERVER['REDIRECT_URL'], AM_BASE_URL);
 				Debug::log('Getting request from REDIRECT_URL');
 			
 			} else if (isset($_SERVER['PHP_SELF'])) {
 	
-				$request = $_SERVER['PHP_SELF'];
+				$request = Str::stripStart($_SERVER['PHP_SELF'], AM_BASE_URL);
+				$request = Str::stripStart($request, '/index.php');
 				Debug::log('Getting request from PHP_SELF');
-	
+				
 			}
 			
 		}
 	
-		// Remove unwanted components from the request.
-		$request = str_replace(AM_BASE_URL, '', $request);
-		$request = str_replace('/index.php', '', $request);
-		
 		// Remove trailing slash from URL to keep relative links consistent.
 		if (substr($request, -1) == '/' && $request != '/') {
 			header('Location: ' . AM_BASE_INDEX . rtrim($request, '/'), false, 301);

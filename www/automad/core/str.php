@@ -214,6 +214,36 @@ class Str {
 	
 	
 	/**
+	 *      Strip substring from end of string.
+	 *      
+	 *      @param string $str
+	 *      @param string $end
+	 *      @return string The processed string
+	 */
+	
+	public static function stripEnd($str, $end) {
+		
+		return preg_replace('/' . preg_quote($end, '/') . '$/', '', $str);
+		
+	}
+	
+	
+	/**
+	 *      Strip substring from start of string.
+	 *      
+	 *      @param string $str
+	 *      @param string $start
+	 *      @return string The processed string
+	 */
+	
+	public static function stripStart($str, $start) {
+		
+		return preg_replace('/^' . preg_quote($start, '/') . '/', '', $str);
+	
+	}
+	
+	
+	/**
 	 *	Removes all HTML and Markdown (!) tags.
 	 *
 	 *	@param string $str
