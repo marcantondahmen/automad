@@ -261,20 +261,11 @@ class Cache {
 		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
 		$currentPath = rtrim(AM_REQUEST, '/');
 		
-		// Create string of parameters.
-		$parameters = '';
-		 
-		if (!empty($_SERVER['QUERY_STRING'])) {
-			$parameters .= $_SERVER['QUERY_STRING'];
-		} 
-		
-		if (!empty($_POST)) {
-			$parameters .= json_encode($_POST);
-		} 
-		
-		// Hash parameters to create unique suffix.
-		if ($parameters) {
-			$parameters = '_' . md5($parameters);
+		// Create hashed string of parameters.	
+		if (!empty($_REQUEST)) {
+			$parameters = '_' . md5(json_encode($_REQUEST));
+		} else {
+			$parameters = '';
 		}
 		
 		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name. 
