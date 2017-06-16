@@ -663,7 +663,7 @@ class Html {
 		// List all found templates along with their theme folder.
 		foreach($templates as $template) {
 
-			$theme = str_replace(AM_BASE_DIR . AM_DIR_THEMES . '/', '', dirname($template));
+			$theme = Core\Str::stripStart(dirname($template), AM_BASE_DIR . AM_DIR_THEMES . '/');
 			$html .= '<option';
 
 			if ($selectedTheme === $theme && basename($template) === $selectedTemplate . '.php') {

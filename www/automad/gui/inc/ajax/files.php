@@ -126,7 +126,7 @@ if ($files) { ?>
 					'filename' => basename($file), 
 					'caption' => htmlspecialchars($caption), 
 					'extension' => htmlspecialchars($ext),
-					'download' => str_replace(AM_BASE_DIR, AM_BASE_URL, $file)
+					'download' => AM_BASE_URL . Core\Str::stripStart($file, AM_BASE_DIR)
 				);
 				
 				if (in_array(strtolower($ext), $imageTypes)) { 

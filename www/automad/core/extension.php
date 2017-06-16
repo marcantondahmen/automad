@@ -179,7 +179,7 @@ class Extension {
 				if (!file_exists(str_replace($type, '.min' . $type, $file))) {
 					
 					// Remove base directory from file path.
-					$file = str_replace(AM_BASE_DIR, '', $file);
+					$file = Str::stripStart($file, AM_BASE_DIR);
 					
 					// Use $file also as key to keep elemtens unique.
 					$this->assets[$type][$file] = $file;

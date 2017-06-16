@@ -88,7 +88,7 @@ class FileSystem {
 				
 				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
 				$json = @json_decode(file_get_contents($themeFile), true);
-				$path = str_replace(AM_BASE_DIR . AM_DIR_THEMES . '/', '', dirname($themeFile));
+				$path = Str::stripStart(dirname($themeFile), AM_BASE_DIR . AM_DIR_THEMES . '/');
 				
 				// Set fallback name.
 				if (!is_array($json)) {

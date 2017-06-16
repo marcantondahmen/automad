@@ -123,7 +123,7 @@ class Parse {
 				$file = realpath($file); 
 				
 				if ($stripBaseDir) {
-					$file = str_replace(AM_BASE_DIR, '', $file);
+					$file = Str::stripStart($file, AM_BASE_DIR);
 				}
 				
 			});	
