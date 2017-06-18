@@ -83,6 +83,17 @@ class Selection {
 	
 	
 	/**
+	 *	Exclude the current page from the selection.
+	 */
+	
+	public function excludeCurrent() {
+		
+		$this->excludePage(AM_REQUEST);
+		
+	}
+	
+	
+	/**
 	 *	Exclude all hidden pages from the selection.
 	 */
 	
@@ -118,15 +129,20 @@ class Selection {
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@param boolean $excludeHidden
+	 *      @param boolean $excludeCurrent
 	 *	@param integer $offset
 	 *	@param integer $limit
 	 *	@return array $this->selection
 	 */
 	
-	public function getSelection($excludeHidden = true, $offset = 0, $limit = NULL) {
+	public function getSelection($excludeHidden = true, $excludeCurrent = false, $offset = 0, $limit = NULL) {
 		
 		if ($excludeHidden) {
 			$this->excludeHidden();
+		}
+		
+		if ($excludeCurrent) {
+			$this->excludeCurrent();
 		}
 		
 		return array_slice($this->selection, $offset, $limit);

@@ -443,21 +443,20 @@ class Toolbox {
 	/**
 	 *	Change of configuration for Automad's Pagelist object.
 	 *
-	 *	Options:
-	 *	- type: sets the type of pagelist (default is all pages),
-	 *		- false (all)
-	 *		- "children" (only pages below the current)
-	 *		- "related" (all pages with common tags) 
-	 *		- "siblings" (same parent)
-	 *		- "breadcrumbs" (all (parent) pages in the current URL)
-	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
-	 *	- template: include only pages matching that template
+	 *	Options:   
+	 *
+	 *	- excludeCurrent: default false
+	 *	- excludeHidden: default true
 	 *	- filter: filter pages by tags
+	 *	- limit: limit the object's array of relevant pages
+	 *	- offset: offset the within the array of all relevant pages
+	 *	- page: false (the current page in the pagination - to be used with the limit parameter)
+	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
 	 *	- search: filter pages by search string
 	 *	- sort: sorting options string, like "date desc, title asc"
-	 *	- offset: offset the within the array of all relevant pages
-	 *	- limit: limit the object's array of relevant pages
-	 *	
+	 *	- template: include only pages matching that template	
+	 *	- type: sets the type of pagelist (default is false) - valid types are false (all), "children", "related", "siblings" and "breadcrumbs"
+	 *  	
 	 *	@param array $options 
 	 */
 

@@ -71,6 +71,7 @@ class Pagelist {
 	 */
 	
 	private $defaults = 	array(
+					'excludeCurrent' => false,
 					'excludeHidden' => true,
 					'filter' => false,
 					'limit' => NULL,
@@ -82,6 +83,13 @@ class Pagelist {
 					'template' => false,
 					'type' => false
 				);
+	
+	
+	/**
+	 * 	Defines whether the pagelist excludes the current page or not. 
+	 */
+	
+	private $excludeCurrent;
 	
 	
 	/**
@@ -174,17 +182,19 @@ class Pagelist {
 	 *	Set or change the configuration of the pagelist and return the current configuration as array.    
 	 *	To just get the config, call the method without passing $options.
 	 *
-	 *      Options:
-	 *      - excludeHidden: true
-	 *      - filter: false
-	 *      - limit: NULL (limit the pagelist array returned by getPages())
-	 *      - offset: 0 (offset the pagelist array returned by getPages())
-	 *      - page: false (the current page in the pagination - to be used with the limit parameter)
-	 *      - parent: false
-	 *      - search: false
-	 *      - sort: false
-	 *      - template: false
-	 *      - type: false
+	 *	Options:   
+	 *
+	 *	- excludeCurrent: default false
+	 *	- excludeHidden: default true
+	 *	- filter: filter pages by tags
+	 *	- limit: limit the object's array of relevant pages
+	 *	- offset: offset the within the array of all relevant pages
+	 *	- page: false (the current page in the pagination - to be used with the limit parameter)
+	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
+	 *	- search: filter pages by search string
+	 *	- sort: sorting options string, like "date desc, title asc"
+	 *	- template: include only pages matching that template	
+	 *	- type: sets the type of pagelist (default is false) - valid types are false (all), "children", "related", "siblings" and "breadcrumbs"      
 	 *      
 	 *	@param array $options
 	 *	@return array Updated $options
@@ -272,7 +282,7 @@ class Pagelist {
 			$Selection->filterByKeywords($this->search);
 		}
 	
-		return $Selection->getSelection($this->excludeHidden);
+		return $Selection->getSelection($this->excludeHidden, $this->excludeCurrent);
 			
 	}
 	
@@ -340,7 +350,7 @@ class Pagelist {
 			
 		}
 		
-		$pages = $Selection->getSelection($this->excludeHidden, $offset, $limit);
+		$pages = $Selection->getSelection($this->excludeHidden, $this->excludeCurrent, $offset, $limit);
 		
 		Debug::log(array_keys($pages));
 		

@@ -51,7 +51,7 @@ $Cache = new Core\Cache();
 $mTime = $Cache->getSiteMTime();
 $Selection = new Core\Selection($this->Automad->getCollection());
 $Selection->sortPages(AM_KEY_MTIME . ' desc');
-$latestPages = $Selection->getSelection(false, 0, 12);
+$latestPages = $Selection->getSelection(false, false, 0, 12);
 
 
 $this->guiTitle = $this->guiTitle . ' / ' . Text::get('dashboard_title');
