@@ -258,7 +258,6 @@ class Parse {
 		
 				$request = Str::stripEnd($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 				$request = Str::stripStart($request, AM_BASE_URL);
-				$request = Str::stripStart($request, '/index.php');
 				Debug::log('Getting request from REQUEST_URI');
 	
 			} else if (isset($_SERVER['REDIRECT_URL'])) {
@@ -273,6 +272,8 @@ class Parse {
 				Debug::log('Getting request from PHP_SELF');
 				
 			}
+			
+			$request = Str::stripStart($request, '/index.php');
 			
 		}
 	
