@@ -599,7 +599,7 @@ class View {
 						
 						return $this->processFileSnippet(
 							$file, 
-							Parse::jsonOptions($this->processContent($matches['withOptions'])), 
+							Parse::jsonOptions($this->processContent($matches['withOptions'], true)), 
 							$matches['withSnippet'], 
 							$directory
 						);
@@ -745,7 +745,7 @@ class View {
 							$this->Runtime->set(AM_KEY_INDEX, ++$i);
 							$html .= $this->processFileSnippet(
 									$file, 
-									Parse::jsonOptions($matches['foreachOptions']), 
+									Parse::jsonOptions($this->processContent($matches['foreachOptions'], true)), 
 									$foreachSnippet, 
 									$directory
 							);
