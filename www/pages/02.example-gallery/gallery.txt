@@ -1,5 +1,0 @@
-title: Example Gallery
-
--
-
-gallery_files: /pages/*/*/*.jpg
