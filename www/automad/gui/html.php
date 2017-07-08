@@ -357,9 +357,9 @@ class Html {
 					'<div class="uk-panel uk-panel-box">' . 
 					'<a href="' . $link . '" class="uk-panel-teaser uk-display-block">'; 
 			
-			// Build file grid with up to 4 images.
+			// Build file grid with up to 6 images.
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
-			$files = glob($path . '{*.jpg, *.png, *.gif}', GLOB_BRACE);
+			$files = glob($path . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 			
 			if (!empty($files)) {
 				
