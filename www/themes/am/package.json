@@ -1,0 +1,19 @@
+{
+  "name": "am-themes",
+  "version": "1.0.0",
+  "description": "A collection of elegant Automad themes",
+  "main": "gulpfile.js",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
+    "merge2": "^1.0.3"
+  },
+  "author": "Marc Anton Dahmen",
+  "license": "MIT"
+}
