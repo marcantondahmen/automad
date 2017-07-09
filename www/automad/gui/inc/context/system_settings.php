@@ -68,6 +68,10 @@ $this->element('header');
 					'text' => Text::get('sys_user')
 				),
 				array(
+					'icon' => '<i class="uk-icon-refresh"></i>',
+					'text' => Text::get('sys_update')
+				),
+				array(
 					'icon' => '<i class="uk-icon-bug"></i>',
 					'text' => Text::get('sys_debug')
 				)
@@ -222,6 +226,14 @@ $this->element('header');
 						</form>
 					</div>
 				</div>
+			</li>
+			<!-- Update -->
+			<li>
+				<div class="uk-block">
+					<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
+						<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
+					</form>
+				</div>	
 			</li>
 			<!-- Debug -->
 			<li>

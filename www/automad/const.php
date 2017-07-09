@@ -190,5 +190,15 @@ Config::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
 Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
+// UPDATE
+$updateItems = array('/automad', '/index.php', '/extensions/am', '/themes/am');
+Config::set('AM_UPDATE_ITEMS', json_encode($updateItems, JSON_UNESCAPED_SLASHES));
+Config::set('AM_UPDATE_BRANCH', 'default');
+Config::set('AM_UPDATE_REPO_URL', 'https://bitbucket.org/marcantondahmen/automad');
+Config::set('AM_UPDATE_REPO_RAW_PATH', '/raw');
+Config::set('AM_UPDATE_REPO_GET_PATH', '/get');
+Config::set('AM_UPDATE_REPO_VERSION_FILE', '/www/automad/version.php');
+Config::set('AM_UPDATE_TEMP', AM_DIR_CACHE . '/update');
+
 // Version number 
 include AM_BASE_DIR . '/automad/version.php';
