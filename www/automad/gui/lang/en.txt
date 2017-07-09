@@ -244,6 +244,27 @@ error_template_missing: Missing
 
 -
 
+error_update_connection: Can't connect to the update server! This could typically be caused by a SSL certificate error or a missing CURL library.
+
+-
+
+error_update_download: Download of update failed! 
+
+-
+
+error_update_failed: Update failed! Please restore your installation from a backup. 
+
+-
+
+error_update_not_supported: Updates are not supported by your server! 
+The updater requires **CURL** and **ZIP** libraries to be installed.
+
+-
+
+error_update_permission: Can't run update! Permission denied! 
+
+-
+
 error_var_exists: There is already a variable with that name!
 
 -
@@ -479,6 +500,10 @@ success_remove: Successfully removed
 
 -
 
+success_update: Successfully updated Automad!
+
+-
+
 
 
 
@@ -575,6 +600,23 @@ sys_status_debug_disabled: Debug mode is disabled
 -
 
 sys_title: System Settings
+
+-
+
+sys_update: Update
+
+-
+
+sys_update_available: An update for your Automad installation is available!    
+Please **backup** your current installation before running the update!
+
+-
+
+sys_update_not_required: Your Automad installation is up to date!
+
+-
+
+sys_update_to: Update to
 
 -
 
