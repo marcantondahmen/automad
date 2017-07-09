@@ -249,9 +249,8 @@ class Cache {
 
 	/**
 	 *	Determine the corresponding file in the cache for the visited page in consideration of a possible query string.
-	 *	A page gets for each possible query string (to handle sort/filter) an unique cache file.
-	 *	To avoid issues with very deep structures, an md5 hash of the requested URL (incl. query string) will be used as
-	 *	an unique identifier.
+	 *	To get separate unique cache files for all kind of data within the $_REQUEST array, a hash of its JSON representation
+	 *	gets appended to cache file prefix like "cached_{md5-hash}.html" in case the array is not empty.
 	 *
 	 *	@return string The determined file name of the matching cached version of the visited page.
 	 */
@@ -267,6 +266,8 @@ class Cache {
 		} else {
 			$parameters = '';
 		}
+		
+		Debug::log($_REQUEST, '$_REQUEST');
 		
 		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name. 
 		// The actual server name is then already part of the AM_BASE_URL.
