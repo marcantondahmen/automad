@@ -94,6 +94,10 @@ btn_ok: Ok
 
 -
 
+btn_open_log: Open Log
+
+-
+
 btn_remove_selected: Remove Selected
 
 -

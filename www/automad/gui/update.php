@@ -54,6 +54,13 @@ class Update {
 	
 	
 	/**
+	 *	The update timestamp.
+	 */
+	
+	private static $timestamp = NULL;
+	
+	
+	/**
 	 *	Move currently installed items to /cache/update/backup.
 	 *	
 	 *	@return boolean True on success, false on error
@@ -63,9 +70,11 @@ class Update {
 		
 		self::preloadClasses();
 		
-		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . time();
+		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 		
 		FileSystem::makeDir($backup);
+		
+		self::log('Backing up current installation to ' . $backup);
 		
 		foreach(json_decode(AM_UPDATE_ITEMS) as $item) {
 			
@@ -75,6 +84,7 @@ class Update {
 			if (is_writable($itemPath) && is_writable(dirname($itemPath))) {
 				FileSystem::makeDir(dirname($backupPath));
 				$success = rename($itemPath, $backupPath);
+				self::log('Moved ' . $itemPath . ' to ' . $backupPath);
 			} else {
 				$success = false;
 			}
@@ -98,7 +108,7 @@ class Update {
 	
 	private static function getArchive() {
 		
-		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . time() . '.zip';
+		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
 		
 		FileSystem::makeDir(dirname($archive));
 		
@@ -117,8 +127,11 @@ class Update {
 		curl_setopt_array($curl, $options);
 		curl_exec($curl); 
 		
+		self::log('Downloading branch "' . AM_UPDATE_BRANCH . '" form ' . AM_UPDATE_REPO_URL);
+		
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
 			$archive = false;
+			self::log('Download failed!');
 		}
 		
 		curl_close($curl);
@@ -158,6 +171,24 @@ class Update {
 		curl_close($curl);
 		
 		return $version;
+		
+	}
+	
+	
+	/**
+	 *	Log events to the update log file.
+	 *
+	 *	@param string $data
+	 *	@return string The path to the log file
+	 */
+	
+	private static function log($data) {
+		
+		$file = AM_BASE_DIR . AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
+		FileSystem::makeDir(dirname($file));
+		file_put_contents($file, $data . "\r\n", FILE_APPEND);
+		
+		return $file;
 		
 	}
 	
@@ -209,6 +240,10 @@ class Update {
 			return $output;
 		}
 		
+		self::$timestamp = date('Ymd-His');
+		self::log('Starting update ' . date('c'));
+		self::log('Version to be updated: ' . AM_VERSION);
+		
 		if ($archive = self::getArchive()) {
 			
 			if (self::backupCurrent()) {
@@ -235,10 +270,30 @@ class Update {
 			}
 			
 			if ($success) {
+				
 				$output['html'] = '<div class="uk-alert uk-alert-success">' . Text::get('sys_update_not_required') . '</div>';
+				
+				$versionFile = AM_BASE_DIR . '/automad/version.php';
+				
+				if (is_readable($versionFile)) {
+					
+					preg_match('/\d+\.\d+\.\d+/', file_get_contents($versionFile), $matches);
+					$version = $matches[0];
+					$log = self::log('Successfully updated Automad to version ' . $version);
+					$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
+					$output['html'] .= '<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
+							   '<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' . 
+							   Text::get('btn_open_log') .
+							   '</a>';
+					
+				}
+				
 				$output['success'] = Text::get('success_update');
+				
 			} else {
+				
 				$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_failed') . '</div>';
+				
 			}
 			
 		} else {
@@ -293,7 +348,9 @@ class Update {
 					
 					if (zip_entry_open($zip, $zipEntry)) {
 						
-						if (!FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry)))) {
+						if (FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry)))) {
+							self::log('Extracted ' . $filename);
+						} else {
 							$success = false;
 						}
 						
