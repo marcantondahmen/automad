@@ -55,10 +55,21 @@ $this->element('header');
 		
 		<div class="uk-width-medium-1-2 uk-container-center">
 			<h2 class="uk-margin-large-top"><?php echo $this->sitename; ?></h2>
-			<hr />
 			<form class="uk-form" method="post">
-				<input class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-small-bottom" type="text" name="username" placeholder="<?php Text::e('login_username'); ?>" required />
-				<input class="uk-form-controls uk-width-1-1 uk-margin-large-bottom" type="password" name="password" placeholder="<?php Text::e('login_password'); ?>" required />
+				<input 
+				class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-small-bottom" 
+				type="text" 
+				name="username" 
+				placeholder="<?php Text::e('login_username'); ?>" 
+				required 
+				/>
+				<input 
+				class="uk-form-controls uk-width-1-1 uk-margin-large-bottom" 
+				type="password" 
+				name="password" 
+				placeholder="<?php Text::e('login_password'); ?>" 
+				required 
+				/>
 				<div class="uk-text-right">
 					<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button">
 						<i class="uk-icon-home"></i>&nbsp;

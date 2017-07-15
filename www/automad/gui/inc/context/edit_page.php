@@ -107,13 +107,24 @@ $this->element('header');
 		<ul id="am-page-content" class="uk-switcher uk-margin-large-top">
 			<!-- Data -->
 		    	<li>
-				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="page_data" data-am-url="<?php echo $url; ?>">
+				<form 
+				class="uk-form uk-form-stacked" 
+				data-am-init 
+				data-am-handler="page_data" 
+				data-am-url="<?php echo $url; ?>"
+				>
 					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
 				</form>
 		    	</li>
 			<!-- Files -->
 			<li>
-				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="files" data-am-url="<?php echo $url; ?>" data-am-confirm="<?php Text::e('confirm_delete_files'); ?>">
+				<form 
+				class="uk-form uk-form-stacked" 
+				data-am-init 
+				data-am-handler="files" 
+				data-am-url="<?php echo $url; ?>" 
+				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
+				>
 					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
 				</form>
 			</li>
@@ -134,15 +145,21 @@ $this->element('header');
 					<?php echo $this->Html->siteTree('', $this->collection, array(), true, false); ?>
 				</div>
 				<form data-am-handler="move_page" data-am-url="<?php echo $url; ?>">
-					<input type="hidden" name="title" value="<?php echo htmlspecialchars($Page->get(AM_KEY_TITLE)); ?>" />
+					<input 
+					type="hidden" 
+					name="title" 
+					value="<?php echo htmlspecialchars($Page->get(AM_KEY_TITLE)); ?>" 
+					/>
 					<input id="am-move-page-input" type="hidden" name="destination" value="" />
 				</form>
 				<div class="uk-modal-footer uk-text-right">
 					<button type="button" class="uk-modal-close uk-button">
-						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
+						<i class="uk-icon-close"></i>&nbsp;
+						<?php Text::e('btn_close'); ?>
 					</button>
 					<button type="button" class="uk-button uk-button-primary" data-am-submit="move_page">
-						<i class="uk-icon-arrows"></i>&nbsp;&nbsp;<?php Text::e('btn_move_page'); ?>
+						<i class="uk-icon-arrows"></i>&nbsp;
+						<?php Text::e('btn_move_page'); ?>
 					</button>
 				</div>
 			</div>
@@ -151,7 +168,8 @@ $this->element('header');
 		<?php } else { ?>
 		
 		<div class="uk-alert uk-alert-danger uk-margin-large-top">
-			<?php Text::e('error_page_not_found'); ?><br /><strong><?php echo Core\Parse::query('url'); ?></strong>
+			<?php Text::e('error_page_not_found'); ?><br />
+			<strong><?php echo Core\Parse::query('url'); ?></strong>
 		</div>
 			
 		<?php } ?>

@@ -66,33 +66,59 @@ if (User::get()) {
 			</li>
 			<!-- Search -->
 			<li class="am-navbar-search">
-				<form class="uk-form uk-width-1-1" action="" method="get" data-am-autocomplete-submit>
+				<form 
+				class="uk-form uk-width-1-1" 
+				action="" 
+				method="get" 
+				data-am-autocomplete-submit
+				>
 					<input type="hidden" name="context" value="search">	
-					<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">
+					<div 
+					class="uk-autocomplete uk-width-1-1" 
+					data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}"
+					>
 						<div class="uk-form-icon uk-width-1-1" title="Ctrl + Space" data-uk-tooltip>
 							<i class="uk-icon-search"></i>
-							<input class="uk-form-controls uk-form-large uk-width-1-1" title="" name="query" type="text" placeholder="<?php echo $searchPlaceholder; ?>" required>
+							<input 
+							class="uk-form-controls uk-form-large uk-width-1-1" 
+							title="" 
+							name="query" 
+							type="text" 
+							placeholder="<?php echo $searchPlaceholder; ?>" 
+							required
+							/>
 						</div>
 					</div>
 				</form>
 			</li>
 			<!-- Add Page -->
 			<li class="uk-hidden-small">
-				<a href="#am-add-page-modal" class="uk-button uk-button-danger" data-uk-modal>
+				<a 
+				href="#am-add-page-modal" 
+				class="uk-button uk-button-danger" 
+				data-uk-modal
+				>
 					<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add_page'); ?>
 				</a>
 			</li>
 			<!-- Save -->
 			<?php if ($submit) { ?>
 			<li>
-				<button title="Cmd/Ctrl + S" class="uk-button uk-button-success" data-am-submit="<?php echo $submit; ?>" data-uk-tooltip disabled>
-					<span class="uk-hidden-small"><i class="uk-icon-check"></i>&nbsp;&nbsp;</span><?php Text::e('btn_save'); ?>
+				<button 
+				title="Cmd/Ctrl + S" 
+				class="uk-button uk-button-success" 
+				data-am-submit="<?php echo $submit; ?>" 
+				data-uk-tooltip 
+				disabled
+				>
+					<span class="uk-hidden-small"><i class="uk-icon-check"></i>&nbsp;</span>
+					<?php Text::e('btn_save'); ?>
 				</button>
 			</li>
 			<?php } ?>
 			<!-- Search modal for small screens -->
 			<li class="uk-visible-small">
-				<a href="#am-search-modal" class="am-navbar-icon am-navbar-icon-danger" data-uk-modal>
+				<a href="#am-search-modal" class="am-navbar-icon" data-uk-modal>
 					<i class="uk-icon-search"></i>
 				</a>
 			</li>
@@ -106,7 +132,7 @@ if (User::get()) {
 						<ul class="uk-nav uk-nav-dropdown">
 							<li>
 								<a href="?context=logout">
-									<i class="uk-icon-sign-out"></i>&nbsp;
+									<i class="uk-icon-power-off"></i>&nbsp;
 									<?php echo Text::get('btn_log_out'); ?>
 									<i class="uk-icon-angle-double-left"></i>
 									<?php echo ucwords(User::get()) ?>
@@ -137,10 +163,19 @@ if (User::get()) {
 		<div class="uk-modal-dialog">
 			<form class="uk-form" action="" method="get" data-am-autocomplete-submit>
 				<input type="hidden" name="context" value="search">	
-				<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">
+				<div 
+				class="uk-autocomplete uk-width-1-1" 
+				data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}"
+				>
 					<div class="uk-form-icon uk-width-1-1">
 						<i class="uk-icon-search"></i>
-						<input class="uk-form-controls uk-form-large uk-width-1-1" name="query" type="text" placeholder="<?php echo $searchPlaceholder; ?>" required>
+						<input 
+						class="uk-form-controls uk-form-large uk-width-1-1" 
+						name="query" 
+						type="text" 
+						placeholder="<?php echo $searchPlaceholder; ?>" 
+						required
+						/>
 					</div>	
 				</div>
 			</form>

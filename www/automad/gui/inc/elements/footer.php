@@ -71,7 +71,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				<input id="am-add-page-input" type="hidden" name="url" value="" />
 				<div class="uk-form-row">
 					<label for="am-add-page-modal-input-title" class="uk-form-label">Title</label>
-					<input id="am-add-page-modal-input-title" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="subpage[title]" value="" required />
+					<input 
+					id="am-add-page-modal-input-title" 
+					class="uk-form-controls uk-form-large uk-width-1-1" 
+					type="text" 
+					name="subpage[title]" 
+					value="" 
+					required 
+					/>
 				</div>
 				<div class="uk-form-row">
 					<label class="uk-form-label"><?php Text::e('page_theme_template'); ?></label>

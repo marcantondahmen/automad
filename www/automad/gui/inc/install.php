@@ -65,12 +65,32 @@ $this->element('header');
 					<?php Text::e('install_help'); ?>
 				</div>
 				<form class="uk-form" method="post">
-					<input class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-bottom" type="text" name="username" placeholder="<?php Text::e('sys_user_add_name'); ?>" />
-					<input class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" type="password" name="password1" placeholder="<?php Text::e('sys_user_add_password'); ?>" />
-					<input class="uk-form-controls uk-width-1-1 uk-margin-large-bottom" type="password" name="password2" placeholder="<?php Text::e('sys_user_add_repeat'); ?>" />
+					<input 
+					class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-bottom" 
+					type="text" 
+					name="username" 
+					placeholder="<?php Text::e('sys_user_add_name'); ?>" 
+					/>
+					<input 
+					class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
+					type="password" 
+					name="password1" 
+					placeholder="<?php Text::e('sys_user_add_password'); ?>" 
+					/>
+					<input 
+					class="uk-form-controls uk-width-1-1 uk-margin-large-bottom" 
+					type="password" 
+					name="password2" 
+					placeholder="<?php Text::e('sys_user_add_repeat'); ?>" 
+					/>
 					<div class="uk-text-right">
-						<button type="submit" class="uk-button uk-button-primary" data-uk-toggle="{target:'.uk-animation-fade'}">
-							<i class="uk-icon-download"></i>&nbsp;&nbsp;<?php Text::e('btn_accounts_file'); ?>
+						<button 
+						type="submit" 
+						class="uk-button uk-button-primary" 
+						data-uk-toggle="{target:'.uk-animation-fade'}"
+						>
+							<i class="uk-icon-download"></i>&nbsp;
+							<?php Text::e('btn_accounts_file'); ?>
 						</button>
 					</div>
 				</form>
@@ -83,7 +103,9 @@ $this->element('header');
 					<?php Text::e('install_login'); ?>
 				</div>
 				<div class="uk-text-right">
-					<a href="" class="uk-button uk-button-primary"><?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i></a>
+					<a href="" class="uk-button uk-button-primary">
+						<?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i>
+					</a>
 				</div>
 			</div>
 		</div>		

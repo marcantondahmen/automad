@@ -75,13 +75,22 @@ $this->element('header');
 		<ul id="am-shared-content" class="uk-switcher uk-margin-large-top">
 			<!-- Data -->
 			<li>
-				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="shared_data">
+				<form 
+				class="uk-form uk-form-stacked" 
+				data-am-init 
+				data-am-handler="shared_data"
+				>
 					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
 				</form>
 			</li>
 			<!-- Files -->
 			<li>
-				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="files" data-am-confirm="<?php Text::e('confirm_delete_files'); ?>">
+				<form 
+				class="uk-form uk-form-stacked" 
+				data-am-init 
+				data-am-handler="files" 
+				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
+				>
 					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
 				</form>
 			</li>

@@ -73,12 +73,25 @@ if (isset($_POST['data'])) {
 	?>
 	
 		<div class="uk-form-row uk-margin-large-bottom">
-			<label for="am-input-data-sitename" class="uk-form-label"><?php echo ucwords(AM_KEY_SITENAME); ?></label>
-			<input id="am-input-data-sitename" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_SITENAME; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" />
-			<ul class="am-link uk-subnav uk-subnav-pill uk-margin-top uk-hidden-small">
+			<label for="am-input-data-sitename" class="uk-form-label">
+				<?php echo ucwords(AM_KEY_SITENAME); ?>
+			</label>
+			<input 
+			id="am-input-data-sitename" 
+			class="uk-form-controls uk-form-large uk-width-1-1" 
+			type="text" 
+			name="data[<?php echo AM_KEY_SITENAME; ?>]" 
+			value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" 
+			/>
+			<ul class="am-link uk-subnav uk-subnav-pill uk-margin-small-top uk-hidden-small">
 				<li class="uk-disabled"><i class="uk-icon-share"></i></li>
 				<li>
-					<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-text-truncate" title="<?php Text::e('btn_inpage_edit'); ?>" data-uk-tooltip="pos:'bottom-left'">
+					<a 
+					href="<?php echo AM_BASE_INDEX; ?>" 
+					class="uk-text-truncate" 
+					title="<?php Text::e('btn_inpage_edit'); ?>" 
+					data-uk-tooltip="pos:'bottom-left'"
+					>
 						<?php echo getenv('SERVER_NAME'); ?>
 					</a>
 				</li>
@@ -93,7 +106,11 @@ if (isset($_POST['data'])) {
 				<?php Text::e('shared_theme'); ?>
 			</div>
 			<div class="uk-accordion-content">
-				<ul class="uk-grid uk-grid-match uk-grid-width-1-1 uk-grid-width-medium-1-4" data-uk-grid-match="{target:'.uk-panel'}" data-uk-grid-margin>
+				<ul 
+				class="uk-grid uk-grid-match uk-grid-width-1-1 uk-grid-width-medium-1-4" 
+				data-uk-grid-match="{target:'.uk-panel'}" 
+				data-uk-grid-margin
+				>
 					<?php 
 					
 					$themes = FileSystem::getThemes();
@@ -155,8 +172,16 @@ if (isset($_POST['data'])) {
 									<i class="uk-icon-files-o"></i>&nbsp;
 									<?php echo count($theme->templates); ?>
 								</span>
-								<label class="am-toggle-checkbox am-panel-bottom-right" data-am-toggle="#<?php echo $id; ?>">
-									<input type="radio" name="data[<?php echo AM_KEY_THEME; ?>]" value="<?php echo $theme->path; ?>" <?php echo $attrChecked; ?> />
+								<label 
+								class="am-toggle-checkbox am-panel-bottom-right" 
+								data-am-toggle="#<?php echo $id; ?>"
+								>
+									<input 
+									type="radio" 
+									name="data[<?php echo AM_KEY_THEME; ?>]" 
+									value="<?php echo $theme->path; ?>" 
+									<?php echo $attrChecked; ?> 
+									/>
 								</label>
 							</div>
 						</div>

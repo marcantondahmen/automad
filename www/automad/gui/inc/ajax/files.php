@@ -96,7 +96,11 @@ if ($files) { ?>
 	
 		<ul class="uk-grid">
 			<li class="uk-width-2-3 uk-width-small-1-2">
-				<a href="#am-upload-modal" class="uk-button uk-button-primary uk-width-1-1" data-uk-modal="{bgclose: false, keyboard: false}">
+				<a 
+				href="#am-upload-modal" 
+				class="uk-button uk-button-primary uk-width-1-1" 
+				data-uk-modal="{bgclose: false, keyboard: false}"
+				>
 					<span class="uk-hidden-small"><i class="uk-icon-upload"></i>&nbsp;</span>
 					<?php Text::e('btn_upload'); ?>
 				</a>
@@ -109,7 +113,11 @@ if ($files) { ?>
 			</li>
 		</ul>
 			
-		<ul class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4" data-uk-grid-match="{target:'.uk-panel'}" data-uk-grid-margin>
+		<ul 
+		class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4" 
+		data-uk-grid-match="{target:'.uk-panel'}" 
+		data-uk-grid-margin
+		>
 			<?php 
 			
 			sort($files);
@@ -154,7 +162,11 @@ if ($files) { ?>
 						
 			?>  
 			<li>
-				<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box" data-am-file-info='<?php echo json_encode($fileInfo); ?>'>
+				<div 
+				id="<?php echo $id; ?>" 
+				class="uk-panel uk-panel-box" 
+				data-am-file-info='<?php echo json_encode($fileInfo); ?>'
+				>
 					<a href="#am-edit-file-info-modal" class="uk-panel-teaser uk-display-block" data-uk-modal>
 						<?php echo $icon; ?>
 					</a>
@@ -163,16 +175,27 @@ if ($files) { ?>
 					</div>
 					<?php if ($caption) { ?>
 					<div class="uk-text-small uk-text-truncate uk-margin-small-top uk-hidden-small">
-						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;&nbsp;"<?php echo Core\Str::shorten($caption, 100); ?>"
+						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
+						"<?php echo Core\Str::shorten($caption, 100); ?>"
 					</div>
 					<?php } ?>
 					<div class="uk-text-small uk-text-truncate uk-margin-small-top uk-hidden-small">
-						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;&nbsp;<?php echo date('M j, Y H:i', filemtime($file)); ?>
+						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;
+						<?php echo date('M j, Y H:i', filemtime($file)); ?>
 					</div>
 					<?php echo $size; ?> 
 					<div class="am-panel-bottom">
-						<a href="#am-edit-file-info-modal" class="uk-icon-button uk-icon-pencil" title="<?php Text::e('btn_edit_file_info'); ?>" data-uk-modal data-uk-tooltip></a>
-						<label class="am-toggle-checkbox am-panel-bottom-right" data-am-toggle="#<?php echo $id; ?>">
+						<a 
+						href="#am-edit-file-info-modal" 
+						class="uk-icon-button uk-icon-pencil" 
+						title="<?php Text::e('btn_edit_file_info'); ?>" 
+						data-uk-modal 
+						data-uk-tooltip
+						></a>
+						<label 
+						class="am-toggle-checkbox am-panel-bottom-right" 
+						data-am-toggle="#<?php echo $id; ?>"
+						>
 							<input type="checkbox" name="delete[]" value="<?php echo basename($file); ?>" />
 						</label>
 					</div>
@@ -194,12 +217,26 @@ if ($files) { ?>
 						<div class="uk-form uk-form-stacked">
 							<input id="am-edit-file-info-old-name" type="hidden" name="old-name" />	
 							<div class="uk-form-row">
-								<label for="am-edit-file-info-new-name" class="uk-form-label"><?php Text::e('file_name'); ?></label>
-								<input id="am-edit-file-info-new-name" name="new-name" class="uk-form-controls uk-form-large uk-width-1-1" data-am-watch-exclude />
+								<label for="am-edit-file-info-new-name" class="uk-form-label">
+									<?php Text::e('file_name'); ?>
+								</label>
+								<input 
+								id="am-edit-file-info-new-name" 
+								name="new-name" 
+								class="uk-form-controls uk-form-large uk-width-1-1" 
+								data-am-watch-exclude 
+								/>
 							</div>
 							<div class="uk-form-row">
-								<label for="am-edit-file-info-caption" class="uk-form-label"><?php Text::e('file_caption'); ?></label>
-								<textarea id="am-edit-file-info-caption" name="caption" class="uk-form-controls uk-width-1-1" data-am-watch-exclude></textarea>
+								<label for="am-edit-file-info-caption" class="uk-form-label">
+									<?php Text::e('file_caption'); ?>
+								</label>
+								<textarea 
+								id="am-edit-file-info-caption" 
+								name="caption" 
+								class="uk-form-controls uk-width-1-1" 
+								data-am-watch-exclude
+								></textarea>
 							</div>
 						</div>
 						<div class="uk-block uk-text-right">
@@ -223,14 +260,24 @@ if ($files) { ?>
 		
 <?php } else { ?>
 
-		<a href="#am-upload-modal" class="uk-button uk-button-primary uk-button-large uk-width-1-1" data-uk-modal="{bgclose: false, keyboard: false}">
+		<a 
+		href="#am-upload-modal" 
+		class="uk-button uk-button-primary uk-button-large uk-width-1-1" 
+		data-uk-modal="{bgclose: false, keyboard: false}"
+		>
 			<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php Text::e('btn_upload'); ?>
 		</a>
 	
 <?php } ?> 
 
 		<!-- Upload Modal -->
-		<div id="am-upload-modal" class="uk-modal" data-am-url="<?php echo $url; ?>" data-am-dropzone-text="<?php Text::e('dropzone'); ?>" data-am-browse-text="<?php Text::e('btn_browse'); ?>">
+		<div 
+		id="am-upload-modal" 
+		class="uk-modal" 
+		data-am-url="<?php echo $url; ?>" 
+		data-am-dropzone-text="<?php Text::e('dropzone'); ?>" 
+		data-am-browse-text="<?php Text::e('btn_browse'); ?>"
+		>
 			<div class="uk-modal-dialog">
 				<div class="uk-modal-header">
 					<?php Text::e('btn_upload'); ?>

@@ -79,7 +79,9 @@ if ($results) {
 	
 ?>
 		
-		<div class="uk-alert uk-alert-danger uk-margin-remove"><?php Text::e('search_no_results'); ?></div>
+		<div class="uk-alert uk-alert-danger uk-margin-remove">
+			<?php Text::e('search_no_results'); ?>
+		</div>
 			
 <?php
 	

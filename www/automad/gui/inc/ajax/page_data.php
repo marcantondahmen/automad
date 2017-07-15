@@ -103,12 +103,27 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 		?>
 			
 			<div class="uk-form-row uk-margin-large-bottom">
-				<label for="am-input-data-title" class="uk-form-label"><?php echo ucwords(AM_KEY_TITLE); ?></label>
-				<input id="am-input-data-title" class="uk-form-controls uk-form-large uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TITLE; ?>]" value="<?php echo htmlspecialchars($Page->get(AM_KEY_TITLE)); ?>" placeholder="Required" required />
-				<ul class="am-link uk-subnav uk-subnav-pill uk-margin-top uk-hidden-small">
+				<label for="am-input-data-title" class="uk-form-label">
+					<?php echo ucwords(AM_KEY_TITLE); ?>
+				</label>
+				<input 
+				id="am-input-data-title" 
+				class="uk-form-controls uk-form-large uk-width-1-1" 
+				type="text" 
+				name="data[<?php echo AM_KEY_TITLE; ?>]" 
+				value="<?php echo htmlspecialchars($Page->get(AM_KEY_TITLE)); ?>" 
+				placeholder="Required" 
+				required 
+				/>
+				<ul class="am-link uk-subnav uk-subnav-pill uk-margin-small-top uk-hidden-small">
 					<li class="uk-disabled"><i class="uk-icon-share"></i></li>
 					<li>
-						<a href="<?php echo AM_BASE_INDEX . $url; ?>" class="uk-text-truncate" title="<?php Text::e('btn_inpage_edit'); ?>" data-uk-tooltip="pos:'bottom-left'">
+						<a 
+						href="<?php echo AM_BASE_INDEX . $url; ?>" 
+						class="uk-text-truncate" 
+						title="<?php Text::e('btn_inpage_edit'); ?>" 
+						data-uk-tooltip="pos:'bottom-left'"
+						>
 							<?php 
 							
 							if ($url == '/') {
@@ -181,7 +196,11 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						}
 						
 						?>
-						<button type="button" class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1 uk-text-truncate" data-uk-modal="{target:'#am-select-template-modal'}">
+						<button 
+						type="button" 
+						class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1 uk-text-truncate" 
+						data-uk-modal="{target:'#am-select-template-modal'}"
+						>
 							<i class="<?php echo $templateIconClass; ?>"></i>&nbsp;
 							<?php echo ucwords(str_replace(array('_', '/'), array(' ', ' / '), ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
 						</button>	
@@ -190,29 +209,58 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					<ul class="uk-grid uk-grid-width-1-1 uk-grid-width-medium-1-2 uk-margin-top">
 						<!-- Visibility -->
 						<li class="uk-margin-bottom">
-							<label class="uk-form-label uk-text-truncate"><?php Text::e('page_visibility'); ?></label>
+							<label class="uk-form-label uk-text-truncate">
+								<?php Text::e('page_visibility'); ?>
+							</label>
 							<label class="uk-button uk-width-1-1" data-am-toggle>
 								<?php Text::e('btn_hide_page'); ?>
-								<input id="am-checkbox-hidden" type="checkbox" name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> />
+								<input 
+								id="am-checkbox-hidden" 
+								type="checkbox" 
+								name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> 
+								/>
 							</label>
 						</li>
 						<!-- Prefix -->
 						<li class="uk-margin-bottom">
-							<label for="am-input-prefix" class="uk-form-label uk-text-truncate"><?php Text::e('page_prefix'); ?></label>
-							<input id="am-input-prefix" class="uk-form-controls uk-width-1-1" type="text" name="prefix" value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" />
-						
+							<label for="am-input-prefix" class="uk-form-label uk-text-truncate">
+								<?php Text::e('page_prefix'); ?>
+							</label>
+							<input 
+							id="am-input-prefix" 
+							class="uk-form-controls uk-width-1-1" 
+							type="text" 
+							name="prefix" 
+							value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" 
+							/>
 						</li>
 					</ul>
 					<!-- Redirect -->
 					<div class="uk-form-row">
-						<label for="am-input-redirect" class="uk-form-label"><?php Text::e('page_redirect'); ?></label>
-						<input id="am-input-redirect" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_URL; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_URL]); ?>" />
+						<label for="am-input-redirect" class="uk-form-label">
+							<?php Text::e('page_redirect'); ?>
+						</label>
+						<input 
+						id="am-input-redirect" 
+						class="uk-form-controls uk-width-1-1" 
+						type="text" 
+						name="data[<?php echo AM_KEY_URL; ?>]" 
+						value="<?php echo htmlspecialchars($data[AM_KEY_URL]); ?>" 
+						/>
 					</div>
 					<?php } ?> 
 					<!-- Tags -->
 					<div class="uk-form-row">
-						<label for="am-input-data-tags" class="uk-form-label"><?php Text::e('page_tags'); ?></label>
-						<input id="am-input-data-tags" class="uk-form-controls uk-width-1-1" type="text" name="data[<?php echo AM_KEY_TAGS; ?>]" value="<?php echo htmlspecialchars($data[AM_KEY_TAGS]); ?>" />
+						<label for="am-input-data-tags" class="uk-form-label">
+							<?php Text::e('page_tags'); ?>
+						</label>
+						<input 
+						id="am-input-data-tags" 
+						class="uk-form-controls uk-width-1-1" 
+						type="text" 
+						name="data[<?php echo AM_KEY_TAGS; ?>]" 
+						value="<?php echo htmlspecialchars($data[AM_KEY_TAGS]); ?>" 
+						/>
 					</div>	
 				</div>
 				
