@@ -90,6 +90,26 @@ if (isset($_POST['item'])) {
 		
 	}
 	
+	if ($item == 'update') {
+		
+		$tab = Core\Str::sanitize(Text::get('sys_update'));
+		$updateVersion = Update::getVersion();
+		
+		if (version_compare(AM_VERSION, $updateVersion, '<')) {
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-small uk-margin-top uk-text-truncate">' .
+					    '<span class="uk-hidden-small"><i class="uk-icon-refresh"></i>&nbsp;&nbsp;</span>' . 
+					    Text::get('sys_status_update_available') . '&nbsp;&nbsp;' .
+					    $updateVersion . 
+					    '</a>';
+		} else {
+			$output['status'] = '<button class="uk-button uk-button-small uk-margin-top" disabled>' .
+					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+					    Text::get('sys_status_update_not_available') . 
+					    '</button>';
+		}
+		
+	}
+	
 	if ($item == 'users') {
 				
 		$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . count(Accounts::get()) . ' ' . Text::get('sys_user_registered');
