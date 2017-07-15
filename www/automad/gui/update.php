@@ -74,8 +74,6 @@ class Update {
 		
 		FileSystem::makeDir($backup);
 		
-		self::log('Backing up current installation to ' . $backup);
-		
 		foreach(json_decode(AM_UPDATE_ITEMS) as $item) {
 			
 			$itemPath = AM_BASE_DIR . $item;
@@ -84,7 +82,7 @@ class Update {
 			if (is_writable($itemPath) && is_writable(dirname($itemPath))) {
 				FileSystem::makeDir(dirname($backupPath));
 				$success = rename($itemPath, $backupPath);
-				self::log('Moved ' . $itemPath . ' to ' . $backupPath);
+				self::log('Backing up ' . Core\Str::stripStart($itemPath, AM_BASE_DIR) . ' to ' . Core\Str::stripStart($backupPath, AM_BASE_DIR));
 			} else {
 				$success = false;
 			}
@@ -349,7 +347,7 @@ class Update {
 					if (zip_entry_open($zip, $zipEntry)) {
 						
 						if (FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry)))) {
-							self::log('Extracted ' . $filename);
+							self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 						} else {
 							$success = false;
 						}
