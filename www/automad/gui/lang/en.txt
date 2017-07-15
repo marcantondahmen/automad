@@ -58,6 +58,10 @@ btn_files: Files
 
 -
 
+btn_getting_data: Getting Data ...
+
+-
+
 btn_hide_page: Hide Page From Navigation
 
 -
@@ -600,6 +604,14 @@ sys_status_debug_enabled: Debug mode is enabled
 -
 
 sys_status_debug_disabled: Debug mode is disabled
+
+-
+
+sys_status_update_available: Update to
+
+-
+
+sys_status_update_not_available: Up to date
 
 -
 
