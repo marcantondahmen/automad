@@ -620,6 +620,10 @@ sys_update_not_required: Your Automad installation is up to date!
 
 -
 
+sys_update_progress: Please wait and don't close the window while updating ...
+
+-
+
 sys_update_to: Update to
 
 -

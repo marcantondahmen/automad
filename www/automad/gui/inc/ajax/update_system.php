@@ -82,12 +82,16 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 						<button 
 						type="submit" 
 						class="uk-button uk-button-large uk-button-primary" 
-						data-uk-toggle="{target:'#am-update-spinner',cls:'uk-icon-spin'}"
+						data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
 						>
-							<i id="am-update-spinner" class="uk-icon-refresh"></i>&nbsp;
-							<?php Text::e('sys_update_to'); ?>&nbsp;
+							<i class="am-update-progress uk-icon-refresh uk-icon-spin uk-hidden"></i>
+							<i class="am-update-progress uk-icon-refresh"></i>
+							&nbsp;<?php Text::e('sys_update_to'); ?>&nbsp;
 							<span class="uk-badge"><?php echo $version; ?></span>
 						</button>
+						<div class="am-update-progress uk-text-muted uk-margin-top uk-hidden">
+							<?php Text::e('sys_update_progress'); ?>
+						</div>
 					</div>
 					<?php
 			
