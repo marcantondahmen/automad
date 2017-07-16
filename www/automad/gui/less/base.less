@@ -93,18 +93,11 @@
 @base-selection-background:	@am-border-color;
 @base-selection-color:  	#FFFFFF;
 
-html:not(.am-dashboard) {
-	// Keep background-color transparent to avoid conflicts with the inpage-edit mode.
-	background-color: transparent;
-}
 
-body {
-	
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;		
-	
-	html.am-dashboard & {
-		overflow-x: hidden;
+html.am-dashboard {
+
+	& body {
+		.smooth-fonts;
 	}
 	
 }
@@ -124,7 +117,7 @@ h4 {
 }
 
 a {
-	text-decoration: none !important;	
+	text-decoration: none !important;
 }
 
 strong {
@@ -144,6 +137,5 @@ input {
 }
 
 .am-dashboard hr {
-	width: 200vw;
-	margin-left: -50vw;	
+	.full-width;
 }

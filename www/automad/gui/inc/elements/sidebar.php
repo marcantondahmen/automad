@@ -49,7 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<div class="uk-offcanvas-bar am-navbar-push">
 			<div data-am-scroll-box='{"scrollToItem": ".uk-active"}'>
 				<div data-am-tree>
-					<a href="#am-add-page-modal" class="uk-button uk-button-danger uk-visible-small uk-margin-bottom" data-uk-modal>
+					<a 
+					href="#am-add-page-modal" 
+					class="uk-button uk-button-danger uk-visible-small uk-margin-bottom" 
+					data-uk-modal
+					>
 						<i class="uk-icon-plus"></i>&nbsp;
 						<?php Text::e('btn_add_page'); ?>
 					</a>
@@ -85,19 +89,31 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					</ul>
 					<?php 
 					
-						$header = Text::get('sidebar_header_pages') . '&nbsp;&nbsp;<span class="uk-badge uk-float-right">' . count($this->collection) . '</span>';
-						echo $this->Html->siteTree('', $this->collection, array('context' => 'edit_page'), false, $header); 
+						$header = Text::get('sidebar_header_pages') . 
+							  '&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
+							  count($this->collection) . 
+							  '</span>';
+						echo 	$this->Html->siteTree(
+								'', 
+								$this->collection, 
+								array('context' => 'edit_page'), 
+								false, 
+								$header
+							); 
 					
 					?> 
-					<div class="uk-hidden-large uk-margin-large-top">
-						<a href="?context=logout" class="uk-button uk-button-small uk-margin-top">
-							<i class="uk-icon-sign-out"></i>&nbsp;
-							<?php Text::e('btn_log_out'); ?>
-							<i class="uk-icon-angle-double-left"></i>
-							<?php echo ucwords(User::get()); ?>
-							<i class="uk-icon-angle-double-right"></i>
-						</a>
-					</div>
+					<ul class="uk-nav uk-nav-side uk-hidden-large">
+						<li class="uk-nav-divider"></li>
+						<li>
+							<a href="?context=logout">
+								<i class="uk-icon-power-off"></i>&nbsp;
+								<?php Text::e('btn_log_out'); ?>
+								<i class="uk-icon-angle-double-left"></i>
+								<?php echo ucwords(User::get()); ?>
+								<i class="uk-icon-angle-double-right"></i>
+							</a>
+						</li>	
+					</ul>
 				</div>	
 			</div>
 		</div>	

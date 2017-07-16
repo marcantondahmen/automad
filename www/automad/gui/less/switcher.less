@@ -41,9 +41,8 @@
 		content: '';
 		position: absolute;
 		bottom: 0;
-		left: -50vw;
-		width: 200vw;
 		border-bottom: @am-border-width solid @am-border-color;
+		.full-width;
 	}
 	
 	&.uk-active:before {
@@ -66,12 +65,12 @@
 			background-color: @am-nav-bg;
 			
 			&:hover,
-			&:focus,
-			&:active  {
+			&:focus {
 				background-color: @am-nav-bg-hover;	
 			}
 			
-			&.uk-active {
+			&.uk-active,
+			&:active {
 				background-color: @am-nav-bg-active;	
 			}
 			

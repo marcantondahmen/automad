@@ -76,7 +76,7 @@
 			});
 
 			$doc.ajaxComplete(function(e, xhr, settings) {
-				// Make sure the status doesn't get triggert by itself in an infinite loop.
+				// Make sure the status doesn't get triggered by itself in an infinite loop.
 				if (settings.url != '?ajax=status') {
 					s.get();
 				}

@@ -71,33 +71,35 @@
 @button-small-height:			25px;
 @button-large-height:			42px;
 
-@button-line-height: 			@button-height - (@am-border-width * 2);
-@button-mini-line-height: 		@button-mini-height - (@am-border-width * 2);
-@button-small-line-height: 		@button-small-height - (@am-border-width * 2);
-@button-large-line-height: 		@button-large-height - (@am-border-width * 2);
+@button-line-height: 			@button-height;
+@button-mini-line-height: 		@button-mini-height;
+@button-small-line-height: 		@button-small-height;
+@button-large-line-height: 		@button-large-height;
 
 @button-padding-horizontal:		10px;
 @button-mini-padding-horizontal:	5px;
-@button-small-padding-horizontal:	7px;
+@button-small-padding-horizontal:	8px;
 @button-large-padding-horizontal:	14px;
 
 
 .hook-button() {
-	
 	box-sizing: border-box;
 	position: relative;
 	font-weight: @am-nav-font-weight;
-	border: @am-border-width solid transparent;
 	max-height: @button-height;
-	
-	&:active {
-		.inset;
-	}
-	
 }
 
 .hook-button-large() {
 	max-height: @button-large-height;
+}
+
+.hook-button-primary() {
+	
+	& .uk-badge {
+		color: @am-primary;
+		background-color: #FFFFFF;
+	}
+	
 }
 
 .hook-button-danger() {

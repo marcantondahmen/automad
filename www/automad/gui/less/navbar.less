@@ -94,20 +94,6 @@
 		background-color: @am-grey;
 		cursor: pointer;
 		
-		&&-danger {
-	
-			margin-right: 0;
-			background-color: @button-danger-background;
-			font-size: 14px;
-			border-radius: 100%;
-			
-			&:hover,
-			&:focus {
-				background-color: @button-danger-hover-background;	
-			}
-			
-		}
-		
 		&:hover,
 		&:focus {
 			color: @navbar-nav-hover-color;
@@ -199,17 +185,17 @@
 			padding-left: @navbar-nav-padding-horizontal + @form-icon-width + 5 !important;
 			color: @navbar-color;
 			background-color: @navbar-background;
-			border-color: transparent;
+			border: (@am-border-thick-width - @am-border-width) solid transparent;
+			border-top-width: @am-border-thick-width;
 			
 			&:not(:focus) {
 				cursor: pointer;
-				box-shadow: none;
 			}
 			
-			&:hover,
 			&:focus {
+				box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
 				color: @navbar-color;
-				background-color: darken(@navbar-background, 4%);
+				background-color: @am-border-color;
 			}
 			
 		}

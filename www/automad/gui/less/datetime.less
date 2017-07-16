@@ -36,25 +36,22 @@
 [data-am-datetime] {
 	
 	background-color: @form-background;
-	border: @am-border-thick-width solid @form-border;
 	
 	&.uk-active {
 		background-color: @form-focus-background;
-		border-color: @form-focus-border;
-		.inset;
+		.focus;
 	}
 	
 	& .uk-form-icon {
 	
 		& input {
 			
-			min-height: @form-height - (2 * @am-border-thick-width);
-			max-height: @form-height - (2 * @am-border-thick-width);
+			min-height: @form-height;
+			max-height: @form-height;
 			
 			&,
 			&:focus {
 				background-color: transparent;	
-				border-width: 0 !important;
 				box-shadow: none;
 			}
 			

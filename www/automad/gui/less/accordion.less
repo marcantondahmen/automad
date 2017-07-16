@@ -55,6 +55,7 @@
 	margin-left: 12px;
 	color: #FFFFFF;
 	font-weight: @am-nav-font-weight;
+	line-height: 1.6;
 	.transition(background-color 0.2s);
 	
 	&:hover,
@@ -65,7 +66,7 @@
 	&:before {
 		content: '\f055';
 		position: absolute;
-		top: 9px;
+		top: 10px;
 		left: -12px;
 		&:extend([class*='uk-icon-'] all);
 		font-size: 12px;
@@ -81,10 +82,9 @@
 		position: absolute;
 		display: block;
 		top: -(@utility-margin-large - @accordion-title-padding-vertical);
-		left: -50vw;
-		right: 0;
-		width: 200vw;
+		left: -12px;
 		border-top: @am-border-width solid @am-border-color;
+		.full-width;
 	}
 	
 }

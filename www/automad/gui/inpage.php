@@ -137,7 +137,7 @@ class InPage {
 								'<input type="hidden" name="url" value="' . AM_REQUEST . '" />' .
 								'<input type="hidden" name="query" value="' . $queryString . '" />' .
 								'<div class="uk-modal-footer">' . 
-									'<div class="uk-text-right">' .
+									'<div class="uk-text-right uk-margin-large-bottom">' .
 										'<button type="button" class="uk-modal-close uk-button">' .
 											'<i class="uk-icon-close"></i>&nbsp;&nbsp;' . Text::get('btn_close') . 
 										'</button>&nbsp;' .
