@@ -5,8 +5,10 @@
 	<@ elements/pagelist_config.php @>
 	<@ if not @{ checkboxHideFilters } @>
 		<div class="uk-margin-large-top">
-			<@ elements/filters.php @>
-			<@ elements/search_title.php @>
+			<div class="am-two-buttons-stacked">
+				<@ elements/filters.php @>
+				<@ elements/search_title.php @>
+			</div>
 		</div>
 	<@ end @>
 	<ul class="am-msnry uk-grid">

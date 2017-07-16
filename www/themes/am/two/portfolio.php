@@ -5,9 +5,11 @@
 	<@ elements/pagelist_config.php @>
 	<@ if not @{ checkboxHideFiltersAndSort } @>
 		<div class="uk-margin-large-top">
-			<@ elements/filters.php @>
-			<@ elements/sort.php @>
-			<@ elements/search_title.php @>
+			<div class="am-two-buttons-stacked">
+				<@ elements/filters.php @>
+				<@ elements/sort.php @>
+				<@ elements/search_title.php @>
+			</div>
 		</div>
 	<@ end @>
 	<@ elements/pagelist.php @>
