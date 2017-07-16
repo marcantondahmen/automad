@@ -1,11 +1,15 @@
-var gulp = require('gulp'),
+var 	gulp = require('gulp'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	merge2 = require('merge2'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
 	uglify = require('gulp-uglify'),
-	gutil = require('gulp-util');
+	gutil = require('gulp-util'),
+	cleanCSSOptions = {
+		format: { wrapAt: 500 },
+		rebase: false
+	};
 	
 	
 // Error handling to prevent watch task to fail silently without restarting.
@@ -25,9 +29,9 @@ gulp.task('am-js', function() {
 				hoist_funs: false, 
 				hoist_vars: false 
 			},
-			preserveComments: 'license',
 			output: {
-				max_line_len: 2000
+				comments: /(license|copyright)/i,
+				max_line_len: 500
 			}
 		};
 	
@@ -59,7 +63,7 @@ gulp.task('am-one-less', function() {
 	return 	gulp.src('one/less/one.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS({ format: 'keep-breaks', rebase: false }))
+		.pipe(cleanCSS(cleanCSSOptions))
 		.pipe(rename({ prefix: 'am.', suffix: '.min' }))
 		.pipe(gulp.dest('one/dist'));
 	
@@ -71,7 +75,7 @@ gulp.task('am-two-less', function() {
 	return 	gulp.src('two/less/two.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS({ format: 'keep-breaks', rebase: false }))
+		.pipe(cleanCSS(cleanCSSOptions))
 		.pipe(rename({ prefix: 'am.', suffix: '.min' }))
 		.pipe(gulp.dest('two/dist'));
 	
