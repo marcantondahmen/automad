@@ -68,7 +68,7 @@ gulp.task('automad-js', ['bump'], function() {
 				hoist_vars: false 
 			},
 			output: {
-				max_line_len: 2000
+				max_line_len: 500
 			}
 		};
 	
@@ -88,9 +88,8 @@ gulp.task('automad-js', ['bump'], function() {
 gulp.task('libs-js', ['bump'], function() {
 	
 	var	uglifyOptions = { 
-			preserveComments: 'license', 
-			output: { 
-				max_line_len: 2000
+			output: {
+				comments: /(license|copyright)/i
 			} 
 		};
 	
@@ -121,7 +120,6 @@ gulp.task('libs-js', ['bump'], function() {
 				'../lib/uikit/js/components/accordion.min.js',
 				'../lib/uikit/js/components/autocomplete.min.js',
 				'../lib/uikit/js/components/datepicker.min.js',
-				'../lib/uikit/js/components/grid.min.js',
 				'../lib/uikit/js/components/htmleditor.min.js',
 				'../lib/uikit/js/components/notify.min.js',
 				'../lib/uikit/js/components/sticky.min.js',
@@ -154,7 +152,7 @@ gulp.task('automad-less', ['bump'], function() {
 	return 	gulp.src('less/automad.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS({ format: 'keep-breaks', rebase: false }))
+		.pipe(cleanCSS({ format: { wrapAt: 500 }, rebase: false }))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
 		// Prefix all UIkit items.
