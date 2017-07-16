@@ -49,8 +49,10 @@
 		
 		display: inline-block;
 		position: fixed;
-		top: 20px;
-		left: 20px;
+		bottom: 20px;
+		left: ~"calc(50vw - 170px)";
+		width: 340px;
+		text-align: center;
 		
 		& .uk-button-group {
 			.shadow;	
@@ -61,20 +63,9 @@
 			top: 1px;
 		}
 		
-		@media (max-width: 450px) {
-			
-			top: 10px;
-			left: ~"calc(50vw - 140px)";
-			width: 280px;
-			text-align: center;
-			
-			& .uk-button {
-				font-size: 14px !important;
-				min-height: 0;
-				line-height: 32px;
-				padding: 0 10px;
-			}
-			
+		@media (max-width: @breakpoint-small-max) {
+			left: ~"calc(50vw - 130px)";
+			width: 260px;	
 		}
 		
 		& .uk-button {

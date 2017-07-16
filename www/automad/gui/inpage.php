@@ -103,6 +103,7 @@ class InPage {
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
 		$urlCache = $urlGui . '?context=system_settings#' . Core\Str::sanitize(Text::get('sys_cache'));
 		$urlLogout = $urlGui . '?context=logout';
+		$attr = 'class="uk-button uk-button-large" data-uk-tooltip';
 		
 		$queryString = '';
 		
@@ -114,11 +115,14 @@ class InPage {
 				// Menu.
 				'<div class="am-inpage-menubar">' .
 					'<div class="uk-button-group">' .
-						'<a href="' . $urlGui . '" class="uk-button uk-button-large" title="' . Text::get('dashboard_title') . '" data-uk-tooltip><i class="uk-icon-automad"></i></a>' .
-						'<a href="' . $urlData . '" class="uk-button uk-button-large" title="' . Text::get('btn_data') . '" data-uk-tooltip><i class="uk-icon-file-text"></i></a>' .
-						'<a href="' . $urlFiles . '" class="uk-button uk-button-large" title="' . Text::get('btn_files') . '" data-uk-tooltip><i class="uk-icon-folder-open"></i></a>' .
-						'<a href="' . $urlCache . '" class="uk-button uk-button-large" title="' . Text::get('sys_cache') . '" data-uk-tooltip><i class="uk-icon-cog"></i></a>' .
-						'<a href="' . $urlLogout . '" class="uk-button uk-button-large" title="' . Text::get('btn_log_out') . '" data-uk-tooltip><i class="uk-icon-power-off"></i></a>' .
+						'<a href="' . $urlGui . '" title="' . Text::get('dashboard_title') . '" ' . $attr . '>' .
+							'<i class="uk-icon-automad uk-hidden-small"></i>' .
+							'<i class="uk-icon-th-large uk-visible-small"></i>' .
+						'</a>' .
+						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text"></i></a>' .
+						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open"></i></a>' .
+						'<a href="' . $urlCache . '" title="' . Text::get('sys_cache') . '" ' . $attr . '><i class="uk-icon-cog"></i></a>' .
+						'<a href="' . $urlLogout . '" title="' . Text::get('btn_log_out') . '" ' . $attr . '><i class="uk-icon-power-off"></i></a>' .
 						'<a href="#" class="am-drag-handle uk-button uk-button-large"><i class="uk-icon-arrows"></i></a>' .
 					'</div>' .
 				'</div>' .
