@@ -139,6 +139,7 @@ class Page {
 		
 		// Set basic page properties to be accessible directly without using the get() method.
 		$this->url = $this->get(AM_KEY_URL);
+		$this->origUrl = $this->get(AM_KEY_ORIG_URL);
 		$this->path = $this->get(AM_KEY_PATH);
 		$this->parentUrl = $this->get(AM_KEY_PARENT);
 		$this->template = $this->get(AM_KEY_TEMPLATE);

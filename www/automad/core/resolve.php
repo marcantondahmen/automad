@@ -87,49 +87,46 @@ class Resolve {
 
 
 	/**
-	 *	Resolve an URL according to its type.
-	 * 
-	 *	Absolute URLs, query strings, anchors or mails:	not modified
-	 *	Root-relative URLs: 				AM_BASE_URL or AM_BASE_INDEX are prepended
-	 *	Relative URLs:					the full path gets prepended and all '../' and './' get resolved
-	 *	
-	 *	@param object $Page
+	 *	Resolve relative URLs (starting with a character or .) to be absolute URLs, 
+	 *	using the base directory (where Automad is installed) as root.
+	 *
+	 *	Example:    
+	 *	image.png -> /pages/path/image.png or
+	 *	subpage   -> /parent/subpage or 
+	 *	../       -> /parent
+	 *
 	 *	@param string $url
+	 *	@param object $Page
 	 *	@return string The resolved URL
 	 */
 
-	public static function url($Page, $url) {
+	public static function relativeUrlToBase($url, $Page) {
 		
-		if (strpos($url, '://') !== false || strpos($url, '//') === 0 || strpos($url, '?') === 0 || strpos($url, '#') === 0 || strpos($url, 'mailto:') === 0 || strpos($url, '&#') === 0) {
-									
-			// Absolute URL (contains '://' or starts with '//'), query string ('?'), anchor link ('#') or mailto link ('mailto:' and obfuscated '&#...').
+		// Skip any protocol and mailto links.
+		if (strpos($url, '://') !== false || strpos($url, 'mailto:') === 0) {
+			
 			return $url;
 			
-		} else if (strpos($url, '/') === 0) {
+		}
+
+		// Check if $url is relative.
+		if (preg_match('/^[\w\.]/', $url)) {
 			
-			// Relative to root	
-			if (FileSystem::isAllowedFileType($url) || $url == '/' || strpos($url, '/?') === 0 || strpos($url, '/#') === 0) {
-				// Skip adding a possible '/index.php' when linking to files and to the homepage (possibly including a query string or anchor link), 
-				// also if rewriting is disabled.
-				return AM_BASE_URL . $url;
-			} else {	
-				return AM_BASE_INDEX . $url;	
-			}
-									
-		} else {
-			
-			// Relative URL
 			if (FileSystem::isAllowedFileType($url)) {
-				$url = $Page->path . $url;
+				
+				$url = AM_DIR_PAGES . $Page->path . $url;
+				
 			} else {
+				
 				// Even though all trailing slashes get stripped out of beauty reasons, any page must still be understood as a directory instead of a file.
 				// Therefore it should be possible to link to a subpage with just href="subpage". Due to the missing trailing slash, that link would actually link to
 				// a page called subpage, but being a sibling of the current page instead of really being a child.
 				// Exampe: 
 				// The current page is "http://domain.com/page" and has a link href="subpage". 
 				// Just returning that link would reslove to "http://domain.com/subpage", which is wrong. It should be "http://domain.com/page/subpage".
-				// Therefore resolving that URL is also necessary.
-				$url = rtrim($Page->url, '/') . '/' . $url;
+				// Therefore resolving that URL is also necessary.		
+				$url = rtrim($Page->origUrl, '/') . '/' . $url;
+				
 			}
 			
 			// Resolve '../' and './'
@@ -152,16 +149,50 @@ class Resolve {
 			$url = str_replace(array('/?', '/#'), array('?', '#'), $url);
 	
 			// Trim trailing slashes, but always keep a leading one.
-			$url = '/' . trim($url, '/');
-	
-			// Prepend base.
-			if (FileSystem::isAllowedFileType($url)) {
-				return AM_BASE_URL . AM_DIR_PAGES . $url;
-			} else {
-				return AM_BASE_INDEX . $url;
-			}
-				
+			return '/' . trim($url, '/');
+			
+		} 
+			
+		return $url;
+		
+	}
+
+
+	/**
+	 *	Resolve absolute URLs (starting with a slash) to root in case Automad is installed within a subdirectory.
+	 *
+	 *	Example:    
+	 *	/page -> /base-url/index.php/page or
+	 *	/page -> /base-url/page
+	 *
+	 *	@param string $url
+	 *	@return string The resolved URL
+	 */
+
+	public static function absoluteUrlToRoot($url) {
+		
+		// Skip URLs starting with "//".
+		if (strpos($url, '//') === 0) {
+			
+			return $url;
+			
 		}
+		
+		// All URLs starting with only one slash.
+		if (strpos($url, '/') === 0) {
+			
+			// Relative to root	
+			if (FileSystem::isAllowedFileType($url) || $url == '/' || strpos($url, '/?') === 0 || strpos($url, '/#') === 0) {
+				// Skip adding a possible '/index.php' when linking to files and to the homepage (possibly including a query string or anchor link), 
+				// also if rewriting is disabled.
+				return AM_BASE_URL . $url;
+			} else {	
+				return AM_BASE_INDEX . $url;	
+			}
+									
+		} 
+		
+		return $url;
 		
 	}
 

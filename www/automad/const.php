@@ -166,6 +166,7 @@ Config::set('AM_KEY_TITLE', 'title');
 Config::set('AM_KEY_SITENAME', 'sitename');
 Config::set('AM_KEY_URL', 'url');
 // System variables depending on a context.
+Config::set('AM_KEY_ORIG_URL', ':origUrl');
 Config::set('AM_KEY_PATH', ':path');
 Config::set('AM_KEY_BASENAME', ':basename');
 Config::set('AM_KEY_PARENT', ':parent');

@@ -129,7 +129,8 @@ class View {
 		// Redirect page, if the defined URL variable differs from AM_REQUEST.
 		if (!empty($Page->url)) {
 			if ($Page->url != AM_REQUEST) {
-				header('Location: ' . Resolve::url($Page, $Page->url));
+				$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($Page->url, $Page));
+				header('Location: ' . $url);
 				die;
 			}
 		}
@@ -469,7 +470,7 @@ class View {
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
 		
-		return 	preg_replace_callback('/' . Regex::markup() . '/is', function($matches) use ($directory) {
+		$str = preg_replace_callback('/' . Regex::markup() . '/is', function($matches) use ($directory) {
 												
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				// In-page editing gets enabled here.
@@ -881,35 +882,43 @@ class View {
 				}
 				
 			}, $str);
+			
+		return $this->resolveUrls($str, 'relativeUrlToBase', array($this->Automad->Context->get()));
 		
 	}
 	
 	
 	/**
-	 *	Find all links/URLs in $str and resolve the matches according to their type.
-	 *	
+	 *	Find and resolve URLs using the specified resolving method and parameters.
+	 *
 	 *	@param string $str
+	 *	@param string $method
+	 *	@param array $parameters
 	 *	@return string The processed string
 	 */
 	
-	private function resolveUrls($str) {
+	private function resolveUrls($str, $method, $parameters = array()) {
 		
-		$Page = $this->Automad->Context->get();
+		$method = '\Automad\Core\Resolve::' . $method;
 		
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/', function($match) use ($Page) {
-				return $match[1] . '="' . Resolve::url($Page, $match[2]) . '"';
+		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/', function($match) use ($method, $parameters) {
+				$parameters = array_merge(array(0 => $match[2]), $parameters);
+				$url = call_user_func_array($method, $parameters);
+				return $match[1] . '="' . $url . '"';
 			}, $str);
 				
 		// Inline styles (like background-image).
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+)url\(\'(.+?)\'\)/', function($match) use ($Page) {
-				return $match[1] . 'url(\'' . Resolve::url($Page, $match[2]) . '\')';
+		$str = 	preg_replace_callback('/(<[^>]+)url\(\'(.+?)\'\)/', function($match) use ($method, $parameters) {
+				$parameters = array_merge(array(0 => $match[2]), $parameters);
+				$url = call_user_func_array($method, $parameters);
+				return $match[1] . 'url(\'' . $url . '\')';
 			}, $str);
 	
 		return $str;
-		
+				
 	}
 	
 	
@@ -952,7 +961,7 @@ class View {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->obfuscateEmails($output);
-		$output = $this->resolveUrls($output);
+		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 		
 		return $output;	

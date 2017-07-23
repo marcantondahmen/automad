@@ -213,6 +213,10 @@ class Automad {
 				$data[AM_KEY_HIDDEN] = false;
 			}
 			
+			// Save original URL. 
+			// In case an URL for redirects is defined in the data file, the original URL will be used to resolve relative links.
+			$data[AM_KEY_ORIG_URL] = $url;
+			
 			// Set read-only variables.
 			$data[AM_KEY_PATH] = $path;
 			$data[AM_KEY_LEVEL] = $level;
