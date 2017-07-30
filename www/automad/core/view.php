@@ -931,7 +931,7 @@ class View {
 	
 	private function obfuscateEmails($str) {
 		
-		return 	preg_replace_callback('/(?<!mailto:)\b([\w\d\._\+\-]+@([a-zA-Z_\-\.]+)\.[a-zA-Z]{2,6})/', function($matches) {
+		return 	preg_replace_callback('/(?<!mailto:)\b([\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,})/', function($matches) {
 				
 				Debug::log($matches[1], 'Obfuscating email');
 					
