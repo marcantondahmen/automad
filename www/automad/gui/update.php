@@ -99,6 +99,22 @@ class Update {
 	
 	
 	/**
+	 *	Extract version number form content of version.php.
+	 *
+	 *	@param string $str
+	 *	@return string The version number
+	 */
+	
+	private static function extractVersion($str) {
+		
+		if (preg_match('/\(\'AM_VERSION\', \'([^\']+)\'\);/', $str, $matches)) {	
+			return $matches[1];
+		}
+		
+	}
+	
+	
+	/**
 	 * 	Download zip-archive to be installed.
 	 *	
 	 *	@return string Path to the downloaded archive or false on error
@@ -162,8 +178,8 @@ class Update {
 		curl_setopt_array($curl, $options);
 		$output = curl_exec($curl);
 		
-		if (preg_match('/\(\'AM_VERSION\', \'([^\']+)\'\);/', $output, $matches) && curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {	
-			$version = $matches[1];
+		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {	
+			$version = self::extractVersion($output);
 		}
 		
 		curl_close($curl);
@@ -275,8 +291,7 @@ class Update {
 				
 				if (is_readable($versionFile)) {
 					
-					preg_match('/\d+\.\d+\.\d+/', file_get_contents($versionFile), $matches);
-					$version = $matches[0];
+					$version = self::extractVersion(file_get_contents($versionFile));
 					$log = self::log('Successfully updated Automad to version ' . $version);
 					$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
 					$output['html'] .= '<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
