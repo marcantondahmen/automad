@@ -1,0 +1,25 @@
+title: Post Two
+
+-
+
+tags: Blog
+
+-
+
+date: 2017-07-25 12:00:00
+
+-
+
+imageTeaser: /pages/*portfolio/*one*/*.png
+
+-
+
+imagesSlideshow: /pages/*portfolio/*one*/image-*.png
+
+-
+
+text: The main content of your post goes here. When beeing logged in, just click the *Edit* button below to edit this text.
+
+-
+
+textTeaser: This post uses linked images from [Project One](/portfolio/project-one) as teaser and slideshow images. Therefore check out the *Image Teaser* and *Image Slideshow* [variables](/dashboard?context=edit_page&url=%2Fblog%2Fpost-two#data-and-settings). Of course you can [upload](/dashboard?context=edit_page&url=%2Fblog%2Fpost-two#files) other images as well, but before reset the image variables.

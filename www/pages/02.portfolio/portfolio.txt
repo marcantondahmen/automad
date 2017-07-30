@@ -1,0 +1,18 @@
+title: Portfolio
+
+-
+
+date: 2017-05-05 12:00:00
+
+-
+
+imageTeaser: */*.png
+
+-
+
+textTeaser: Like the landing page, this page uses a *Portfolio* template - here the one of the [Am/One](/dashboard?context=edit_shared#data-and-settings) theme.    
+Check out the [variables section](/dashboard?context=edit_page&url=%2Fportfolio#data-and-settings) to control the displayed elements like the *Teaser* and the *Filters* section.
+
+-
+
+theme: am/one

@@ -1,0 +1,17 @@
+title: Automad
+
+-
+
+url: http://automad.org
+
+-
+
+checkboxShowInFooter: on
+
+-
+
+checkboxShowInNavbar: on
+
+-
+
+hidden: 1

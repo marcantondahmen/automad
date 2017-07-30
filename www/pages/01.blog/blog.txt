@@ -1,0 +1,15 @@
+title: Blog
+
+-
+
+date: 2017-03-08 12:00:00
+
+-
+
+imageTeaser: /pages/*blog/*/*.png
+
+-
+
+textTeaser: This is the *blog* template. All pages created below will show up in the pagelist as previews. To make all pages on your site showing up here, activate the *Show All Pages in Pagelist* checkbox [here](/dashboard?context=edit_page&url=%2Fblog#data-and-settings).    
+There you will find also a bunch of other options to try out.    
+Note the *filter* button, to filter the shown pages by *tags*. Every page can have multiple tags.

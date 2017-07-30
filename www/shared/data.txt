@@ -2,12 +2,8 @@ sitename: Automad Demo
 
 -
 
-theme: standard
+theme: am/two
 
 -
 
-brand: Your Brand
-
--
-
-email: email@yourdomain.com
+urlSearchResults: /

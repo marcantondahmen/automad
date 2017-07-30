@@ -1,0 +1,17 @@
+title: Gallery
+
+-
+
+imagesGallery: /pages/*/*.png, /pages/*/*/*.png
+
+-
+
+textTeaser: This is a simple gallery. You can use (multiple) glob patterns to select all images to be included in the gallery.
+
+-
+
+date: 2017-03-12 12:00:00
+
+-
+
+imageTeaser: /pages/*portfolio/*/*3.png
