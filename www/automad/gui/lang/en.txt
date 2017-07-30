@@ -372,7 +372,7 @@ page_move_destination: Select a destination
 
 -
 
-page_settings: Settings
+page_settings: Page settings
 
 -
 
@@ -396,15 +396,15 @@ page_var_name: Variable Name
 
 -
 
-page_vars_in_template: Data used by the current template
+page_vars_in_template: Variables in current template
 
 - 
 
-page_vars_in_other_templates: Data used in other templates
+page_vars_in_other_templates: Variables in other templates
 
 - 
 
-page_vars_unused: Unused data
+page_vars_unused: Unused variables
 
 -
 
@@ -442,11 +442,11 @@ shared_theme: Main theme
 
 -
 
-shared_vars_used: Shared variables used by the installed themes
+shared_vars_used: Variables in installed themes
 
 -
 
-shared_vars_unused: Unused shared variables
+shared_vars_unused: Unused variables
 
 -
 
