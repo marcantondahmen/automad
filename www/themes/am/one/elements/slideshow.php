@@ -9,7 +9,7 @@
 				<ul class="uk-slideshow">
 					<@ foreach in filelist { 
 						width: 1100, 
-						height: @{ slideshowHeight | def(520) }, 
+						height: @{ slideshowHeight | def(640) }, 
 						crop: true 
 					} @>
 						<li>

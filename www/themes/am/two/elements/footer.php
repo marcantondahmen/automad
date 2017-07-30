@@ -21,10 +21,11 @@
 					<a href="/dashboard">Sign in</a>
 				</li>
 			</ul>
+			
+			<# Add optional footer items. #>
+			@{ itemsFooter }
+			
 		</div>
-	
-		<# Add optional footer items. #>
-		@{ itemsFooter }
 	
 	</div>
 	
