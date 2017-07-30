@@ -48,4 +48,14 @@ body > .uk-container-center {
 		padding: 0 @utility-container-padding-horizontal @am-body-padding-bottom @utility-container-padding-horizontal;
 	}
 	
+	@media (max-width: @breakpoint-small-max) {
+		
+		padding-bottom: (@am-footer-height + @utility-margin-large + @am-body-padding-bottom);
+		
+		& .am-footer {
+			padding-bottom: 0;
+		}
+		
+	}
+	
 }
