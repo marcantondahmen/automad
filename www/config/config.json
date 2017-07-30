@@ -1,7 +1,7 @@
 {
-    "AM_ALLOWED_FILE_TYPES": "css, jpg, zip, png, ico, svg, js, pdf, mp3, gif",
+    "AM_ALLOWED_FILE_TYPES": "css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif",
     "AM_CACHE_ENABLED": true,
+    "AM_CACHE_LIFETIME": 43200,
     "AM_CACHE_MONITOR_DELAY": 120,
-    "AM_DEBUG_ENABLED": false,
-    "AM_PAGE_GUI": "\/gui"
+    "AM_DEBUG_ENABLED": false
 }
