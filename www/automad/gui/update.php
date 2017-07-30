@@ -162,8 +162,8 @@ class Update {
 		curl_setopt_array($curl, $options);
 		$output = curl_exec($curl);
 		
-		if (preg_match('/\d+\.\d+\.\d+/', $output, $matches) && curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {	
-			$version = $matches[0];
+		if (preg_match('/\(\'AM_VERSION\', \'([^\']+)\'\);/', $output, $matches) && curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {	
+			$version = $matches[1];
 		}
 		
 		curl_close($curl);
