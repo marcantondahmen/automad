@@ -69,7 +69,7 @@
 	}
 	
 	&[class*="uk-icon-angle-double-right"] {
-		padding: 0 @subnav-pill-padding-horizontal;
+		padding: 0 0 0 @subnav-pill-padding-horizontal;
 	}
 	
 }
@@ -101,26 +101,39 @@
 		
 		min-width: 285px;
 		
-		& > li a {
+		& > li i:hover {
+			cursor: default;
+		}
 		
+		& > li a {
+	
 			// To make text-overflow work in every browser, 
 			// the max-width needs to be in pixels.
 			max-width: 105px;
-			
+		
 			@media (min-width: @breakpoint-small) {
 				max-width: 185px;
 			}
-			
+		
 			@media (min-width: @breakpoint-medium) {
 				max-width: 135px;
 			}
-			
+		
 			@media (min-width: @breakpoint-large) {
 				max-width: 170px;
 			}
-			
+		
 		}
 		
+	}
+	
+	& .am-breadcrumb-separator:after {
+		&:extend([class*='uk-icon-']);
+		content: '\f105';
+		padding-left: @subnav-pill-padding-horizontal - @subnav-margin-horizontal;
+		position: relative;
+		top: -5px;
+		font-size: @text-small-font-size;
 	}
 	
 	&.am-link {

@@ -110,25 +110,21 @@ class Html {
 			
 			if ($i <= $large) {
 				
-				$class= '';
+				$class= 'am-breadcrumb-separator';
 			
 				if ($i > $small) {
-					$class = ' class="uk-hidden-small"';
+					$class .= ' uk-hidden-small';
 				}
 			
 				if ($i > $medium) {
-					$class = ' class="uk-hidden-small uk-hidden-medium"';
+					$class .= ' uk-hidden-medium';
 				}
-				
-				if ($i < count($pages)) {
-					$html .= '<li' . $class . '><i class="uk-icon-angle-right"></i></li>';
-				}
-				
+		
 				if ($i == 1) {
-					$class = ' class="uk-active"';
+					$class = 'uk-active';
 				}
 			
-				$html .= '<li' . $class . '><a href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
+				$html .= '<li class="' . $class . '"><a href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
 				
 			}
 			
