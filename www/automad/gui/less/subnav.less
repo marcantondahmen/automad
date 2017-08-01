@@ -127,7 +127,7 @@
 		
 	}
 	
-	& .am-breadcrumb-separator:after {
+	& .am-breadcrumb-separator:not(:last-child):after {
 		&:extend([class*='uk-icon-']);
 		content: '\f105';
 		padding-left: @subnav-pill-padding-horizontal - @subnav-margin-horizontal;

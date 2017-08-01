@@ -119,11 +119,7 @@ class Html {
 				if ($i > $medium) {
 					$class .= ' uk-hidden-medium';
 				}
-		
-				if ($i == 1) {
-					$class = 'uk-active';
-				}
-			
+				
 				$html .= '<li class="' . $class . '"><a href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
 				
 			}
