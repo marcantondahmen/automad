@@ -63,10 +63,11 @@ class Update {
 	/**
 	 *	Move currently installed items to /cache/update/backup.
 	 *	
+	 *	@param array $items
 	 *	@return boolean True on success, false on error
 	 */
 	
-	private static function backupCurrent() {
+	private static function backupCurrent($items) {
 		
 		self::preloadClasses();
 		
@@ -74,7 +75,7 @@ class Update {
 		
 		FileSystem::makeDir($backup);
 		
-		foreach(json_decode(AM_UPDATE_ITEMS) as $item) {
+		foreach($items as $item) {
 			
 			$itemPath = AM_BASE_DIR . $item;
 			$backupPath = $backup . $item;
@@ -110,6 +111,37 @@ class Update {
 		if (preg_match('/\(\'AM_VERSION\', \'([^\']+)\'\);/', $str, $matches)) {	
 			return $matches[1];
 		}
+		
+	}
+	
+	
+	/**
+	 *	Get items to be updated from config.
+	 *
+	 *	@return array The array of items to be updated or false on error
+	 */
+	
+	private static function items() {
+		
+		$items = explode(AM_PARSE_STR_SEPARATOR, AM_UPDATE_ITEMS);
+		
+		if (is_array($items)) {
+			
+			$items = array_map(
+					function($item) {
+						return trim($item); 
+					}, $items
+				);
+		
+			$items = array_filter($items);
+			
+			if (!empty($items)) {
+				return $items;
+			}
+			
+		}
+		
+		return false;
 		
 	}
 	
@@ -212,12 +244,13 @@ class Update {
 	/**
 	 *	Test if permissions for all items to be updated are granted.
 	 *
+	 *	@param array $items
 	 *	@return boolean True on success, false on error
 	 */
 	
-	private static function permissionsGranted() {
+	private static function permissionsGranted($items) {
 		
-		foreach(json_decode(AM_UPDATE_ITEMS) as $item) {
+		foreach($items as $item) {
 			
 			$item = AM_BASE_DIR . $item;
 			
@@ -251,7 +284,14 @@ class Update {
 	
 	public static function run() {
 		
-		if (!self::permissionsGranted()) {
+		$items = self::items();
+		
+		if (!$items) {
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_items') . '</div>';
+			return $output;
+		}
+		
+		if (!self::permissionsGranted($items)) {
 			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_permission') . '</div>';
 			return $output;
 		}
@@ -259,12 +299,13 @@ class Update {
 		self::$timestamp = date('Ymd-His');
 		self::log('Starting update ' . date('c'));
 		self::log('Version to be updated: ' . AM_VERSION);
+		self::log('Updating items: ' . implode(', ', $items));
 		
 		if ($archive = self::getArchive()) {
 			
-			if (self::backupCurrent()) {
+			if (self::backupCurrent($items)) {
 				
-				if (self::unpack($archive)) {
+				if (self::unpack($archive, $items)) {
 					
 					$success = true;
 					
@@ -339,15 +380,16 @@ class Update {
 	 *	Unpack all item matching AM_UPDATE_ITEM.
 	 *
 	 *	@param string $archive
+	 *	@param array $items
 	 *	@return boolean True on success, false on error
 	 */
 	
-	private static function unpack($archive) {
+	private static function unpack($archive, $items) {
 
 		$success = true;
 		$zip = zip_open($archive);
 		$itemsMatchRegex = 	'/^[\w\-]+\/www(' . 
-					addcslashes(implode('|', json_decode(AM_UPDATE_ITEMS)), '/') . 
+					addcslashes(implode('|', $items), '/') . 
 					')/';
 		
 		if (is_resource($zip)) {

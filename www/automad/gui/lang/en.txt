@@ -260,6 +260,10 @@ error_update_download: Download of update failed!
 
 -
 
+error_update_items: Invalid list of items to be updated! 
+
+-
+
 error_update_failed: Update failed! Please restore your installation from a backup. 
 
 -
