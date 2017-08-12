@@ -89,11 +89,8 @@
 	height: 16px !important;
 	margin: 0 -(@subnav-pill-padding-horizontal + @subnav-margin-horizontal);
 	
-	& li {
+	& > li {
 		display: inline-block;
-	}
-		
-	& > * {
 		margin-bottom: @subnav-margin-vertical - 5;
 	}
 	
@@ -127,13 +124,18 @@
 		
 	}
 	
-	& .am-breadcrumb-separator:not(:last-child):after {
-		&:extend([class*='uk-icon-']);
-		content: '\f105';
-		padding-left: @subnav-pill-padding-horizontal - @subnav-margin-horizontal;
-		position: relative;
-		top: -5px;
-		font-size: @text-small-font-size;
+	& > li.am-breadcrumb-separator {
+		
+		&:not(:last-child):after {
+			&:extend([class*='uk-icon-']);
+			content: '\f105';
+			padding-left: @subnav-pill-padding-horizontal - @subnav-margin-horizontal;
+			position: relative;
+			height: 100% !important;
+			vertical-align: middle;
+			font-size: @text-small-font-size;
+		}
+		
 	}
 	
 	&.am-link {
