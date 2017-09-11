@@ -49,7 +49,7 @@ echo "Updating to branch develop ..."
 hg update develop
 echo
 echo "Writing and committing version.php ..."
-echo "<?php define('AM_VERSION', '$tag.0'); ?>" > $file
+echo "<?php define('AM_VERSION', '$tag'); ?>" > $file
 hg commit -m "Updated version number to $tag" $file
 echo
 echo "Updating to branch default ..."
