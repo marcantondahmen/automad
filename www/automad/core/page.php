@@ -83,48 +83,6 @@ class Page {
 	
 	
 	/**
-	 *	The relative URL of the page (PATH_INFO).
-	 */
-	
-	public $url;
-	
-	
-	/**
-	 * 	The relative path in the file system.
-	 */
-	
-	public $path;
-	
-	
-	/**
-	 * 	The level in the folder tree.
-	 */
-	
-	public $level;
-	
-	
-	/**
-	 * 	The relative URL of the parent page.
-	 */
-	
-	public $parentUrl;
-	
-	
-	/**
-	 * 	The template used to render the page (just the filename of the text file without the suffix).
-	 */
-	
-	public $template;
-	
-	
-	/**
-	 *	The visibility status of a page within selections.
-	 */
-	
-	public $hidden;
-	
-	
-	/**
 	 *	Set main properties.
 	 *
 	 *	@param array $data
@@ -137,14 +95,35 @@ class Page {
 		$this->Shared = $Shared;
 		$this->tags = $this->extractTags();
 		
-		// Set basic page properties to be accessible directly without using the get() method.
-		$this->url = $this->get(AM_KEY_URL);
-		$this->origUrl = $this->get(AM_KEY_ORIG_URL);
-		$this->path = $this->get(AM_KEY_PATH);
-		$this->parentUrl = $this->get(AM_KEY_PARENT);
-		$this->template = $this->get(AM_KEY_TEMPLATE);
-		$this->level = $this->get(AM_KEY_LEVEL);
-		$this->hidden = $this->get(AM_KEY_HIDDEN);
+	}
+	
+	
+	/**
+	 *      Make basic data items accessible as page properties.
+	 *      
+	 *      @param string $key The property name
+	 *      @return string The returned value from the data array
+	 */
+	
+	public function __get($key) {
+		
+		// Map property names to the defined keys of the data array.
+		$keyMap = array(
+			'hidden' => AM_KEY_HIDDEN,
+			'level' => AM_KEY_LEVEL,
+			'origUrl' => AM_KEY_ORIG_URL,
+			'parentUrl' => AM_KEY_PARENT,
+			'path' =>AM_KEY_PATH,
+			'template' => AM_KEY_TEMPLATE,
+			'url' => AM_KEY_URL
+		);
+		
+		if (array_key_exists($key, $keyMap)) {
+			return $this->get($keyMap[$key]);
+		} 
+		
+		// Trigger error for undefined properties.
+		trigger_error('Page property "' . $key . '" not defined!', E_USER_ERROR);
 		
 	}
 	
