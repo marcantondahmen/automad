@@ -85,7 +85,7 @@ class Html {
 		$Selection->filterBreadcrumbs(Core\Parse::query('url'));
 		$pages = $Selection->getSelection(false);
 		
-		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill">';
+		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill uk-margin-top">';
 		$html .= '<li class="uk-disabled uk-hidden-small"><i class="uk-icon-folder-open"></i></li>';
 		
 		$i = count($pages);
@@ -155,7 +155,7 @@ class Html {
 		$html = '<div class="uk-form-row">' .
 			'<label class="uk-form-label" for="' . $id . '" title="' . $key . '" data-uk-tooltip="{pos:\'top-left\',offset:3}">' . 
 			ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key)))) . 
-			 '</label>';
+			'</label>';
 
 		if ($removeButton) {
 			$html .= '<button type="button" class="am-remove-parent uk-position-top-right uk-close"></button>';
@@ -187,8 +187,8 @@ class Html {
 			$formatDate = 'Y-m-d';
 			$formatTime = 'H:i';
 			
-			$attrDate = 'value="' . Core\Str::dateFormat($value, $formatDate) . '"';
-			$attrTime = 'value="' . Core\Str::dateFormat($value, $formatTime) . '"';
+			$attrDate = 'value="' . Core\Str::dateFormat($value, $formatDate) . '" readonly="true"';
+			$attrTime = 'value="' . Core\Str::dateFormat($value, $formatTime) . '" readonly="true"';
 			
 			if (!empty($_POST['url']) || !empty($_POST['context'])) {
 				$attrDate .= ' placeholder="' . Core\Str::dateFormat($this->Automad->Shared->get($key), $formatDate) . '"';
@@ -208,6 +208,8 @@ class Html {
 					'<i class="uk-icon-clock-o"></i>' .
 					'<input type="text" class="uk-width-1-1" ' . $attrTime . ' data-uk-timepicker="{format:\'24h\'}" />' .
 					'</div>' .
+					// Reset button.
+					'<button type="button" class="uk-button" data-am-clear-date><i class="uk-icon-remove"></i></button>' .
 					'</div>';	
 			
 		} else if (strpos($key, 'checkbox') === 0) {
@@ -216,7 +218,7 @@ class Html {
 				$attr .= ' checked';
 			}
 			
-			$html .=	'<label class="uk-button uk-width-1-1" data-am-toggle>&nbsp;' . 
+			$html .=	'<label class="am-toggle-switch" data-am-toggle>&nbsp;' . 
 					ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
 					'<input ' . $attr . ' type="checkbox"  />' .
 					'</label>';
@@ -280,11 +282,9 @@ class Html {
 			
 			$html =		'<div id="' . $addVarContainerId . '" class="uk-margin-bottom">' . $html . '</div>' .
 					// The modal button.
-					'<div class="uk-text-right">' .
-					'<a href="#' . $addVarModalId . '" class="uk-button" data-uk-modal>' .
+					'<a href="#' . $addVarModalId . '" class="uk-button uk-button-primary uk-margin-small-top" data-uk-modal>' .
 					'<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
 					'</a>' . 
-					'</div>' .
 					// The actual modal.
 					'<div id="' . $addVarModalId . '" class="uk-modal">' .
 					'<div class="uk-modal-dialog">' .
@@ -405,14 +405,14 @@ class Html {
 				
 			} else {
 				
-				$html .= '<div class="am-panel-icon"><i class="uk-icon-align-left"></i></div>';
+				$html .= '<div class="am-panel-icon"><i class="uk-icon-file-text"></i></div>';
 				
 			}
 			
 			$html .= 	'</a>' .
 					// Title & date. 
 					$Page->get(AM_KEY_TITLE) . 
-					'<div class="uk-margin-small-top uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
+					'<div class="uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
 					'<div class="am-panel-bottom">' .
 					'<span>' . 
 					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil" data-uk-tooltip></a>&nbsp;' .
@@ -432,39 +432,138 @@ class Html {
 	
 	
 	/**
-	 *      Create a set of radio button.
+	 *      Create a search field.
+	 *      
+	 *      @param string $tooltip
+	 *      @return string The HTML for the search field
+	 */
+	
+	public function searchField($placeholder = '', $tooltip = '') {
+		
+		if ($tooltip) {
+			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip ';
+		}
+		
+		return  '<form class="uk-form uk-width-1-1" action="" method="get" data-am-autocomplete-submit>' .
+				'<input type="hidden" name="context" value="search">' .
+				'<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">' .
+					'<input ' .
+					'class="uk-form-controls uk-width-1-1" ' .
+					'name="query" ' .
+					'type="search" ' .
+					'placeholder="' . $placeholder . '" ' .
+					$tooltip .
+					'required ' .
+					'/>' .
+				'</div>' . 
+			'</form>';
+		
+	}
+	
+	
+	/**
+	 *      Create a select button.
 	 *
 	 *      @param string $name
 	 *      @param array $values
-	 *      @param string $checked
+	 *      @param string $selected
+	 *      @param string $prefix
 	 *      @return string The HTML for the buttons
 	 */
 	
-	public function radios($name, $values, $checked) {
+	public function select($name, $values, $selected, $prefix = '') {
 		
 		// Set checked value, if $checked is not in $values, to prevent submitting an empty value.
-		if (!in_array($checked, $values)) {
-			$checked = reset($values);
+		if (!in_array($selected, $values)) {
+			$selected = reset($values);
 		}
 		
-		$html = '<div class="uk-button-group uk-width-1-1">';
+		$html = '<div class="uk-button uk-form-select" data-uk-form-select>' . 
+			ltrim($prefix . ' ') . 
+			'<span></span>&nbsp;&nbsp;' .
+			'<i class="uk-icon-caret-down"></i>' . 
+			'<select name="' . $name . '">';
 		
 		foreach ($values as $text => $value) {
 			
-			if ($value === $checked) {
-				$attrChecked = ' checked';
+			if ($value === $selected) {
+				$attr = ' selected';
 			} else {
-				$attrChecked = '';
+				$attr = '';
 			}
 			
-			$html .= 	'<label class="uk-button uk-width-1-' . count($values) . '" data-am-toggle>&nbsp;' . 
-					$text .
-					'<input type="radio" name="' . $name . '" value="' . $value . '"' . $attrChecked . ' />' .
-					'</label>';
-				
+			$html .= '<option value="' . $value . '"' . $attr . '>' . $text . '</option>'; 	
+			
 		}
 		
-		$html .= '</div>';
+		$html .= '</select>' . 
+			 '</div>';
+		
+		return $html;
+		
+	}
+	
+	
+	/**
+	 *	Create a select box containing all installed themes/templates to be included in a HTML form.
+	 *
+	 *	@param string $name
+	 *	@param string $selectedTheme
+	 *	@param string $selectedTemplate
+	 *	@return string The HTML for the select box including a label and a wrapping div.
+	 */
+
+	public function selectTemplate($name = '', $selectedTheme = false, $selectedTemplate = false) {
+		
+		$themes = FileSystem::getThemes();
+		$sharedTheme = $themes[$this->Automad->Shared->get(AM_KEY_THEME)];
+		$templates = array();
+		
+		// Create HTML
+		$html = '<div class="uk-form-select uk-button uk-width-1-1 uk-text-left" data-uk-form-select>' . 
+			'<span></span>' .
+			'<select class="uk-width-1-1" name="' . $name . '">'; 
+		
+		// List templates of current sitewide theme
+		foreach($sharedTheme->templates as $template) {
+
+			$html .= '<option';
+
+			if (!$selectedTheme && basename($template) === $selectedTemplate . '.php') {
+				 $html .= ' selected';
+			}
+
+			$html .= ' value="' . basename($template) . '">' . 
+				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
+				 ' (Global Theme)</option>';
+
+		}
+
+		// Get all templates of all installed themes.
+		foreach ($themes as $theme) {
+			$templates = array_merge($templates, $theme->templates);
+		}
+
+		// List all found templates along with their theme folder.
+		foreach($templates as $template) {
+
+			$theme = Core\Str::stripStart(dirname($template), AM_BASE_DIR . AM_DIR_THEMES . '/');
+			$html .= '<option';
+
+			if ($selectedTheme === $theme && basename($template) === $selectedTemplate . '.php') {
+				 $html .= ' selected';
+			}
+
+			$html .= ' value="' . $theme . '/' . basename($template) . '">' . 
+				 ucwords(str_replace(array('_', '/'), array(' ', ' / '), $theme)) . 
+				 ' > ' . 
+				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
+				 '</option>';
+				 
+		}
+		
+		$html .= '</select>' .
+			 '</div>';
 		
 		return $html;
 		
@@ -527,7 +626,7 @@ class Html {
 						$title = $prefix . ' - ' . $title;
 					}
 					
-					$html .= '<a class="uk-text-truncate" title="' . $Page->path . '" href="?' . http_build_query(array_merge($parameters, array('url' => $key)), '', '&amp;') . '">' . 
+					$html .= '<a title="' . $Page->path . '" href="?' . http_build_query(array_merge($parameters, array('url' => $key)), '', '&amp;') . '">' . 
 						 $icon . $title . 
 						 '</a>' .
 						 $this->siteTree($key, $collection, $parameters, $hideCurrent) .
@@ -557,26 +656,16 @@ class Html {
 	
 	public function stickySwitcher($target, $items = array(), $dropdown = array()) {
 		
-		$n = count($items);
-		
-		if ($dropdown) {
-			$n++;
-		}
-		
-		$html = '<div class="am-switcher" data-uk-sticky="{top:65,showup:true,animation:\'uk-animation-slide-top\'}">' .
-			'<div class="uk-button-group uk-width-1-1">';
-
-		// Switcher Menu. 
-		// Note that the number of items is limited to the grid classes of UIkit (6).
-		$switcherWidth = 'uk-width-' . count($items) . '-' . $n . ' uk-grid-width-1-' . count($items);
-		$html .= '<div class="' . $switcherWidth . '" data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\'}">';
+		$html = '<div class="am-switcher" data-uk-sticky="{top:60}">' .
+			'<div class="am-switcher-buttons">' .
+		 	'<div data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\'}">';
 	
 		foreach ($items as $item) {
 			
 			// Clean up text to be used as id (also remove possible count badges).
 			$tab = Core\Str::sanitize(preg_replace('/&\w+;/', '', strip_tags($item['text'])), true);
 			
-			$html .= '<button class="uk-button" data-am-tab="' . $tab . '">' . 
+			$html .= '<button class="uk-button uk-button-large" data-am-tab="' . $tab . '">' . 
 				 '<span class="uk-visible-small">' . $item['icon'] . '</span>' .
 				 '<span class="uk-hidden-small">' . $item['text'] . '</span>' .
 				 '</button>';
@@ -587,19 +676,17 @@ class Html {
 	
 		// Dropdown.
 		if ($dropdown) {
-			$html .= '<div class="uk-position-relative uk-width-1-' . $n . '" data-uk-dropdown="{mode:\'click\',pos:\'bottom-right\'}">' . 
-	        		 '<a href="#" class="uk-button uk-width-1-1">' .
-				 '<span class="uk-hidden-small">' . Text::get('btn_more') . '&nbsp;&nbsp;</span><i class="uk-icon-chevron-down"></i>' .
+			$html .= '<div data-uk-dropdown="{mode:\'click\',pos:\'bottom-right\'}">' . 
+	        		 '<a href="#" class="uk-button uk-button-large">' .
+				 Text::get('btn_more') . '&nbsp;&nbsp;<i class="uk-icon-caret-down"></i>' .
 				 '</a>' .
-	        		 '<div class="uk-dropdown">' .
+	        		 '<div class="uk-dropdown uk-dropdown-small">' .
 	            		 '<ul class="uk-nav uk-nav-dropdown">';
-	                
-	            
+			
 		    	foreach ($dropdown as $item) {
 		    		$html .= '<li>' . $item . '</li>';
 		    	}
-		    
-		    
+			
 		    	$html .= '</ul>' . 
 				 '</div>' . 
 				 '</div>';
@@ -610,70 +697,6 @@ class Html {
 	
 		return $html;
 			
-	}
-	
-	
-	/**
-	 *	Create a select box containing all installed themes/templates to be included in a HTML form.
-	 *
-	 *	@param string $name
-	 *	@param string $selectedTheme
-	 *	@param string $selectedTemplate
-	 *	@return string The HTML for the select box including a label and a wrapping div.
-	 */
-
-	public function templateSelectBox($name = '', $selectedTheme = false, $selectedTemplate = false) {
-		
-		$themes = FileSystem::getThemes();
-		$sharedTheme = $themes[$this->Automad->Shared->get(AM_KEY_THEME)];
-		$templates = array();
-		
-		// Create HTML
-		$html = '<select class="uk-width-1-1" name="' . $name . '">'; 
-		
-		// List templates of current sitewide theme
-		foreach($sharedTheme->templates as $template) {
-
-			$html .= '<option';
-
-			if (!$selectedTheme && basename($template) === $selectedTemplate . '.php') {
-				 $html .= ' selected';
-			}
-
-			$html .= ' value="' . basename($template) . '">' .
-				 ' * > ' . 
-				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
-				 ' (Global Theme)</option>';
-
-		}
-
-		// Get all templates of all installed themes.
-		foreach ($themes as $theme) {
-			$templates = array_merge($templates, $theme->templates);
-		}
-
-		// List all found templates along with their theme folder.
-		foreach($templates as $template) {
-
-			$theme = Core\Str::stripStart(dirname($template), AM_BASE_DIR . AM_DIR_THEMES . '/');
-			$html .= '<option';
-
-			if ($selectedTheme === $theme && basename($template) === $selectedTemplate . '.php') {
-				 $html .= ' selected';
-			}
-
-			$html .= ' value="' . $theme . '/' . basename($template) . '">' . 
-				 ucwords(str_replace(array('_', '/'), array(' ', ' / '), $theme)) . 
-				 ' > ' . 
-				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
-				 '</option>';
-				 
-		}
-		
-		$html .= '</select>';
-		
-		return $html;
-		
 	}
 	
 	

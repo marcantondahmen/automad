@@ -33,39 +33,35 @@
  */
 
 
-@panel-box-padding:			@utility-margin;
+@panel-box-padding:			8px;
 @panel-box-color:			@am-text;
-@panel-box-title-color:			@panel-box-color;
-@panel-box-background:			darken(@am-grey, 4%);
+@panel-box-title-color:			@am-text;
+@panel-box-background:			#FFFFFF;
 @panel-box-badge-top:                   13px;
 @panel-box-badge-right:                 10px;
-
-@panel-box-primary-background:		darken(@am-grey, 18%);
-@panel-box-primary-color: 		@am-text;
-@panel-box-primary-hover-color: 	@panel-box-primary-color;
-@panel-box-primary-title-color: 	@panel-box-primary-color;
-
+@panel-teaser-margin-bottom:		@panel-box-padding;
 
 .hook-panel-box() {
 	
-	margin: @utility-margin-large 0;
 	overflow: hidden;
+	border-radius: @am-radius;
 	
 	.uk-grid & {
 		margin: 0;
 	}
 
 	&.uk-active {
-		box-shadow: 0 0 0 @am-border-thick-width darken(@am-grey, 18%);
+		box-shadow: 0 0 0 3px @am-bg, 0 0 0 6px @am-border-color;
 	}
 
-	& img {
-		background-color: @am-grey;
-		// Fallback for Safari.
-		filter: grayscale(100%);
-		mix-blend-mode: hard-light;
-		// Firefox & Chrome.
-		mix-blend-mode: luminosity;	
+	& .uk-panel-teaser {
+		overflow: hidden;
+		border: @am-border-image-width solid @panel-box-background;
+		border-radius: @am-radius;
+	}
+	
+	& + & {
+		margin-top: 4px;
 	}
 	
 }
@@ -79,19 +75,18 @@
 		height: 0;
 		// Keep icon responsive.
 		padding-top: 75%;
-
-		background-color: darken(@panel-box-background, 3%);
+		background-color: @am-bg;
 		
 		& > * {
 			position: absolute;
 			display: block;
 			width: 100%;
 			top: 50%;
-			margin-top: -20px;
-			font-size: 38px;
-			font-weight: 500;
-			line-height: 38px;
-			color: darken(@panel-box-background, 7%);
+			margin-top: -12px;
+			font-size: 24px;
+			font-weight: 300;
+			line-height: 24px;
+			color: @am-text;
 			text-align: center;
 		} 
 		
@@ -101,10 +96,10 @@
 		
 		display: block;
 		height: 30px;
-		margin-top: @utility-margin;
+		margin-top: @panel-box-padding;
 		
 		&-small {
-			height: 15px;
+			height: 20px;
 		}
 		
 		& > * {

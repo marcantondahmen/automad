@@ -49,7 +49,7 @@
 			display: inline-block;
 			box-sizing: border-box;
 			text-align: left;
-			padding: @modal-dialog-margin-vertical @utility-margin-large;
+			padding: (@modal-dialog-padding + @utility-margin) @modal-dialog-padding;
 	
 			@media (max-width: (@am-file-info-breakpoint - 1)) {
 				width: 100%;
@@ -61,13 +61,22 @@
 		// Image or icon.
 		&-preview {
 			
+			display: inline-block;
 			vertical-align: top;
-			margin-bottom: @utility-margin-large;
+			max-width: 100%;
+			margin-bottom: @utility-margin;
 			
 			@media (min-width: @am-file-info-breakpoint) {
 				float: left;
-				margin-right: @am-file-info-width + @utility-margin-large + 5;
+				margin-right: @am-file-info-width + @utility-margin;
 				margin-bottom: 0;
+			}
+			
+			& > * {
+				overflow: hidden;
+				box-sizing: border-box;
+				border: @am-border-image-width solid #FFFFFF;	
+				border-radius: @am-radius;
 			}
 			
 			// Image.
@@ -84,15 +93,15 @@
 			& > div {
 				
 				position: relative;
-				width: @am-file-info-max-width-small - (2 * @utility-margin-large);
+				width: @am-file-info-max-width-small - (2 * @modal-dialog-padding);
 				max-width: 100%;
 				height: 0;
 				padding-top: 60%;
-				background-color: @panel-box-background;
+				background-color: @am-bg;
 				
 				@media (min-width: @am-file-info-breakpoint) {
-					width: @am-file-info-width * 1.5;
-					padding-top: 75%;
+					width: @am-file-info-width * 0.75;
+					padding-top: 125%;
 				}
 				
 				// Hide icon without extension attribute.
@@ -102,7 +111,6 @@
 				
 				// File icon.
 				&:before {
-					
 					&:extend([class*='uk-icon-']);
 					content: '\f15b';
 					display: block;
@@ -110,20 +118,13 @@
 					top: 50%;
 					width: 100%;
 					text-align: center;
-					margin-top: -40px;
-					font-size: 80px;
-					color: darken(@panel-box-background, 5%);
-					
-					@media (min-width: @breakpoint-medium) {
-						margin-top: -90px;
-						font-size: 160px;
-					}
-					
+					margin-top: -30px;
+					font-size: 60px;
+					color: @am-text;	
 				}
 				
 				// Extension text on top of file icon.
 				&:after {
-					
 					content: attr(data-am-extension);
 					display: block;
 					position: absolute;
@@ -131,22 +132,11 @@
 					top: 50%;
 					width: 100%;
 					text-align: center;
-					margin-top: 2px;
-					font-size: 25px;
-					font-weight: 700;
-					color: @panel-box-background;
-					
-					@media (min-width: @breakpoint-medium) {
-						margin-top: 0;
-						font-size: 50px;
-					}
-					
+					font-size: 18px;
+					font-weight: 300;
+					color: @am-bg;	
 				}
 				
-			}
-			
-			@media (max-width: @breakpoint-small-max) {
-				margin: -@modal-dialog-margin-vertical -@utility-margin-large @utility-margin -@utility-margin-large;
 			}
 			
 		}
@@ -159,7 +149,7 @@
 			@media (min-width: @am-file-info-breakpoint) {
 				float: right;
 				width: @am-file-info-width;
-				margin-left: -(@am-file-info-width + 5);
+				margin-left: -@am-file-info-width;
 			}
 			
 		}
@@ -168,13 +158,13 @@
 	
 	// Upload dropzone.
 	&-dropzone {
-		border: @am-border-thick-width dashed darken(@am-grey, 4%);
+		border: 2px dashed darken(@am-bg, 8%);
 		border-radius: 20px;
 		text-align: center;
 		padding: 120px 0;
-		color: darken(@am-grey, 5%);
+		color: darken(@am-bg, 8%);
 		font-size: 32px;
-		font-weight: 500;
+		font-weight: 400;
 		cursor: default;
 		-webkit-touch-callout: none;
     		-webkit-user-select: none;

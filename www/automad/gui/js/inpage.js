@@ -68,7 +68,7 @@
 					$title = $(ip.selectors.title),
 					$form = $modal.find('form'),
 					handler = $form.data(u.dataCamelCase(ip.dataAttr.handler)),
-					$loader = $('<i></i>', { 'class': 'uk-icon-circle-o-notch uk-icon-spin uk-text-muted' })
+					$loader = $('<i></i>', { 'class': 'uk-icon-circle-o-notch uk-icon-spin' })
 						  .insertAfter($title.parent()),
 					$footer = $form.find('.uk-modal-footer');
 					

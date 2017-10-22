@@ -72,8 +72,8 @@ if (isset($_POST['data'])) {
 	
 	?>
 	
-		<div class="uk-form-row uk-margin-large-bottom">
-			<label for="am-input-data-sitename" class="uk-form-label">
+		<div class="uk-form-row uk-margin-bottom">
+			<label for="am-input-data-sitename" class="uk-form-label uk-margin-top-remove">
 				<?php echo ucwords(AM_KEY_SITENAME); ?>
 			</label>
 			<input 
@@ -83,23 +83,10 @@ if (isset($_POST['data'])) {
 			name="data[<?php echo AM_KEY_SITENAME; ?>]" 
 			value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" 
 			/>
-			<ul class="am-link uk-subnav uk-subnav-pill uk-margin-small-top uk-hidden-small">
-				<li class="uk-disabled"><i class="uk-icon-share"></i></li>
-				<li>
-					<a 
-					href="<?php echo AM_BASE_INDEX; ?>" 
-					class="uk-text-truncate" 
-					title="<?php Text::e('btn_inpage_edit'); ?>" 
-					data-uk-tooltip="pos:'bottom-left'"
-					>
-						<?php echo getenv('SERVER_NAME'); ?>
-					</a>
-				</li>
-			</ul>
 		</div>
 
 		<!-- Content -->		
-		<div class="uk-accordion" data-uk-accordion="{duration:200,showfirst:true}">
+		<div class="uk-accordion" data-uk-accordion="{duration: 200, showfirst: false}">
 			
 			<!-- Theme -->
 			<div type="button" class="uk-accordion-title">
@@ -107,7 +94,7 @@ if (isset($_POST['data'])) {
 			</div>
 			<div class="uk-accordion-content">
 				<ul 
-				class="uk-grid uk-grid-match uk-grid-width-1-1 uk-grid-width-medium-1-4" 
+				class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
 				data-uk-grid-match="{target:'.uk-panel'}" 
 				data-uk-grid-margin
 				>
@@ -141,28 +128,26 @@ if (isset($_POST['data'])) {
 					?>
 					<li>
 						<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
-							<div class="uk-panel-teaser uk-hidden-small">
+							<div class="uk-panel-teaser">
 								<?php echo $icon; ?>
 							</div>
 							<?php if ($theme->version) { ?> 
-							<div class="uk-panel-badge uk-badge uk-hidden-small">
+							<div class="uk-panel-badge uk-badge">
 								<?php echo $theme->version; ?>
 							</div>	
 							<?php } ?>
-							<div class="uk-margin-bottom">
-								<?php echo $theme->name; ?>
-							</div>
-							<div class="uk-text-small uk-margin-small-top uk-hidden-small">
+							<?php echo $theme->name; ?>
+							<div class="uk-text-small uk-text-muted uk-hidden-small">
 								<?php echo $theme->description; ?>
 							</div>
 							<?php if ($theme->author) { ?> 
-							<div class="uk-text-small uk-margin-small-top uk-hidden-small">
+							<div class="uk-text-small uk-text-muted uk-hidden-small">
 								<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
 								<?php echo $theme->author; ?>
 							</div>
 							<?php } ?>
 							<?php if ($theme->license) { ?>
-							<div class="uk-text-small uk-margin-small-top uk-hidden-small">
+							<div class="uk-text-small uk-text-muted uk-hidden-small">
 								<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
 								<?php echo $theme->license; ?>
 							</div>

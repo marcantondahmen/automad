@@ -34,43 +34,31 @@
 
 
 @accordion-title-margin-bottom:                 0;
-@accordion-title-padding-vertical:              6px;
-@accordion-title-padding-horizontal:            8px;
+@accordion-title-padding-vertical:              5px;
+@accordion-title-padding-horizontal:            10px;
 @accordion-title-font-size:                     1rem;
 @accordion-title-line-height:                   @base-body-line-height;
-@accordion-title-background:                    @am-grey;
+@accordion-title-background:                    @am-bg;
 
 @accordion-content-padding-horizontal:		0;
-@accordion-content-padding-bottom:              0;
+@accordion-content-padding-bottom:              @utility-margin-small;
  
  
-.uk-accordion {
-	margin-top: (2 * @utility-margin-large) + @accordion-title-padding-vertical;
-}
-
 .hook-accordion-title() {
 	
 	position: relative;
-	margin-top: (2 * (@utility-margin-large - @accordion-title-padding-vertical)) ;
-	margin-left: 12px;
-	color: #FFFFFF;
+	margin-top: @utility-margin;
+	color: @am-text;
 	font-weight: @am-nav-font-weight;
 	line-height: 1.6;
-	.transition(background-color 0.2s);
-	
-	&:hover,
-	&:focus {
-		background-color: @nav-side-hover-background;
-	}
+	border-radius: @am-radius;
+	background-color: @button-background;
 	
 	&:before {
 		content: '\f055';
-		position: absolute;
-		top: 10px;
-		left: -12px;
+		position: relative;
 		&:extend([class*='uk-icon-'] all);
-		font-size: 12px;
-		color: @am-muted;
+		padding-right: 5px;
 	}
 	
 	&.uk-active:before {
@@ -84,14 +72,11 @@
 		top: -(@utility-margin-large - @accordion-title-padding-vertical);
 		left: -12px;
 		border-top: @am-border-width solid @am-border-color;
-		.full-width;
 	}
 	
 }
  
 .hook-accordion-content() {
-	
-	padding: @utility-margin-large 0;
 	
 	// Hide content before accordion is initialized to avoid flicker.
 	:not([data-wrapper]) > & {

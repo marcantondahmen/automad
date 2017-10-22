@@ -81,7 +81,7 @@
 	});
 	
 	// Submit autocomplete form on hitting the return key.
-	$(document).on('keydown', Automad.autocomplete.selectors.submit + ' .uk-autocomplete input[type="text"]', function(e) {
+	$(document).on('keydown', Automad.autocomplete.selectors.submit + ' .uk-autocomplete input[type="search"]', function(e) {
 		
 		if (e.which == 13) {
 			Automad.autocomplete.submitForm(e);	

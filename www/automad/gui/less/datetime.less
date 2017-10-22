@@ -33,21 +33,27 @@
  */
 
 
+@am-datetime-inner-height: 	@form-height - (2 * @am-border-width);
+
 [data-am-datetime] {
 	
 	background-color: @form-background;
+	border: @am-border-width solid @form-border;
+	border-radius: @am-radius;
 	
 	&.uk-active {
 		background-color: @form-focus-background;
-		.focus;
+		border-color: @form-focus-border;
 	}
 	
 	& .uk-form-icon {
 	
 		& input {
 			
-			min-height: @form-height;
-			max-height: @form-height;
+			min-height: @am-datetime-inner-height;
+			max-height: @am-datetime-inner-height;
+			border: none;
+			padding-top: 4px;
 			
 			&,
 			&:focus {
@@ -59,11 +65,11 @@
 			
 		&:first-of-type {
 			width: 120px;
-			margin-left: -@am-border-thick-width;
+			margin-left: -@am-border-width;
 		}
 		
 		&:last-of-type {
-			width: ~"calc(100% - 120px)";	
+			width: ~"calc(100% - 120px - @{am-datetime-inner-height} + @{am-border-width})";	
 		}
 		
 		& > i {
@@ -74,6 +80,16 @@
 			padding-left: (@form-icon-width + 2) !important;
 		}
 		
+	}
+	
+	& [data-am-clear-date].uk-button {
+		min-height: @am-datetime-inner-height;
+		max-height: @am-datetime-inner-height;
+		max-width: @am-datetime-inner-height;
+		max-width: @am-datetime-inner-height;
+		line-height: @am-datetime-inner-height;
+		color: @am-muted;
+		background-color: transparent;
 	}
 	
 	& .uk-autocomplete {

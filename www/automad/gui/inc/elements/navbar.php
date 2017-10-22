@@ -53,8 +53,6 @@ if (User::get()) {
 	} else {
 		$submit = '';
 	}
-	
-	$searchPlaceholder = Text::get('search_placeholder') . ' ' . htmlspecialchars($this->sitename);
 		
 ?>
 	
@@ -62,129 +60,83 @@ if (User::get()) {
 		<ul class="am-navbar-nav">
 			<!-- Logo -->
 			<li class="am-navbar-logo">
-				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"><i class="uk-icon-automad"></i></a>
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>">
+					<i class="uk-icon-a"></i>
+				</a>
 			</li>
 			<!-- Search -->
 			<li class="am-navbar-search">
-				<form 
-				class="uk-form uk-width-1-1" 
-				action="" 
-				method="get" 
-				data-am-autocomplete-submit
-				>
-					<input type="hidden" name="context" value="search">	
-					<div 
-					class="uk-autocomplete uk-width-1-1" 
-					data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}"
+				<?php 
+					echo $this->Html->searchField(
+						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->sitename),
+						'Ctrl + Space'
+					);
+				?>
+			</li>
+			<!-- Buttons -->
+			<li class="am-navbar-buttons">
+				<div class="am-icon-buttons">
+					<!-- Add Page -->
+					<a 
+					href="#am-add-page-modal" 
+					class="uk-button uk-button-primary" 
+					title="<?php Text::e('btn_add_page'); ?>"
+					data-uk-modal
+					data-uk-tooltip
 					>
-						<div class="uk-form-icon uk-width-1-1" title="Ctrl + Space" data-uk-tooltip>
-							<i class="uk-icon-search"></i>
-							<input 
-							class="uk-form-controls uk-form-large uk-width-1-1" 
-							title="" 
-							name="query" 
-							type="text" 
-							placeholder="<?php echo $searchPlaceholder; ?>" 
-							required
-							/>
+						<i class="uk-icon-plus"></i>
+					</a>
+					<!-- Save -->
+					<?php if ($submit) { ?>
+					<button 
+					title="<?php Text::e('btn_save'); ?> (Cmd/Ctrl + S)" 
+					class="uk-button uk-button-success" 
+					data-am-submit="<?php echo $submit; ?>" 
+					data-uk-tooltip 
+					disabled
+					>
+						<i class="uk-icon-check"></i>
+					</button>
+					<?php } ?>	
+					<!-- User -->
+					<div 
+					class="uk-position-relative uk-visible-large" 
+					data-uk-dropdown="{mode:'click'}"
+					>
+						<div class="uk-button">
+							<i class="uk-icon-user"></i>
+						</div>
+						<div class="uk-dropdown uk-dropdown-small">
+							<ul class="uk-nav uk-nav-dropdown">
+								<li>
+									<a href="?context=logout">
+										<i class="uk-icon-power-off"></i>&nbsp;
+										<?php echo Text::get('btn_log_out'); ?>
+										<i class="uk-icon-angle-double-left"></i>
+										<?php echo ucwords(User::get()) ?>
+										<i class="uk-icon-angle-double-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_user'), true); ?>">
+										<i class="uk-icon-users"></i>&nbsp;
+										<?php Text::e('btn_manage_users'); ?>
+									</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-				</form>
-			</li>
-			<!-- Add Page -->
-			<li class="uk-hidden-small">
-				<a 
-				href="#am-add-page-modal" 
-				class="uk-button uk-button-danger" 
-				data-uk-modal
-				>
-					<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add_page'); ?>
-				</a>
-			</li>
-			<!-- Save -->
-			<?php if ($submit) { ?>
-			<li>
-				<button 
-				title="Cmd/Ctrl + S" 
-				class="uk-button uk-button-success" 
-				data-am-submit="<?php echo $submit; ?>" 
-				data-uk-tooltip 
-				disabled
-				>
-					<span class="uk-hidden-small"><i class="uk-icon-check"></i>&nbsp;</span>
-					<?php Text::e('btn_save'); ?>
-				</button>
-			</li>
-			<?php } ?>
-			<!-- Search modal for small screens -->
-			<li class="uk-visible-small">
-				<a href="#am-search-modal" class="am-navbar-icon" data-uk-modal>
-					<i class="uk-icon-search"></i>
-				</a>
-			</li>
-			<!-- User -->
-			<li class="uk-visible-large">
-				<div class="uk-position-relative" data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-					<div class="am-navbar-icon">
-						<i class="uk-icon-user"></i>
-					</div>
-					<div class="uk-dropdown uk-dropdown-small">
-						<ul class="uk-nav uk-nav-dropdown">
-							<li>
-								<a href="?context=logout">
-									<i class="uk-icon-power-off"></i>&nbsp;
-									<?php echo Text::get('btn_log_out'); ?>
-									<i class="uk-icon-angle-double-left"></i>
-									<?php echo ucwords(User::get()) ?>
-									<i class="uk-icon-angle-double-right"></i>
-								</a>
-							</li>
-							<li>
-								<a href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_user'), true); ?>">
-									<i class="uk-icon-users"></i>&nbsp;
-									<?php Text::e('btn_manage_users'); ?>
-								</a>
-							</li>
-						</ul>
-					</div>
+					<!-- Sidebar -->
+					<a href="#am-sidebar" 
+					class="uk-button uk-hidden-large" 
+					data-uk-modal
+					>
+						<i class="uk-icon-navicon uk-icon-justify"></i>
+					</a>
 				</div>
 			</li>
-			<!-- Sidebar -->
-			<li class="uk-hidden-large">
-				<a href="#" class="am-navbar-icon" data-am-toggle-sidebar="#am-sidebar">
-					<i class="uk-icon-navicon uk-icon-justify"></i>
-				</a>
-			</li>
-		</ul>
+		</ul>	
 	</nav>
-	
-	<!-- Search modal for small screens -->
-	<div id="am-search-modal" class="uk-modal">
-		<div class="uk-modal-dialog">
-			<form class="uk-form" action="" method="get" data-am-autocomplete-submit>
-				<input type="hidden" name="context" value="search">	
-				<div 
-				class="uk-autocomplete uk-width-1-1" 
-				data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}"
-				>
-					<div class="uk-form-icon uk-width-1-1">
-						<i class="uk-icon-search"></i>
-						<input 
-						class="uk-form-controls uk-form-large uk-width-1-1" 
-						name="query" 
-						type="text" 
-						placeholder="<?php echo $searchPlaceholder; ?>" 
-						required
-						/>
-					</div>	
-				</div>
-			</form>
-			<button type="button" class="uk-modal-close uk-button uk-button-primary uk-margin-top uk-width-1-1">
-				<i class="uk-icon-close"></i>&nbsp;
-				<?php Text::e('btn_close'); ?>
-			</button>
-		</div>
-	</div>
 	
 <?php 
 

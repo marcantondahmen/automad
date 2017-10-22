@@ -34,51 +34,50 @@
 
 
 // Automad colors.
-@am-grey:			#949EAA;
-@am-text: 			#FFFFFF;
-@am-muted:			darken(@am-grey, 15%);
-@am-primary: 			darken(@am-grey, 25%);
-@am-success: 			darken(@am-grey, 25%);
-@am-danger: 			#E9634F;
+@am-bg: 			#F0F0F0;
+@am-text: 			#484848;
+@am-muted: 			#9A9A9A;
+
+@am-primary:			@am-text;
+@am-danger:			#F15C65;
+@am-success:			#43D683;
 
 
 // Specific Automad theme variables.
 @am-body-padding-bottom:	@utility-margin-large; 
 
-@am-border-width:		1px;
-@am-border-color:		darken(@am-grey, 5%);
+@am-border-width:		2px;
+@am-border-color:		#D4D4D4;
+@am-border-image-width:		3px;
+@am-hairline: 			1px solid #DEDEDE;
 
-@am-border-thick-width:		2px;
+@am-nav-font-weight:		@base-body-font-weight;
 
-@am-nav-bg: 			@button-background;
-@am-nav-bg-hover:		@button-hover-background;
-@am-nav-bg-active:		@button-active-background;
-@am-nav-font-weight:		500;
-
+@am-radius: 			8px;
 
 // UIkit base variables.
 @base-body-color: 		@am-text;
-@base-body-background:		@am-grey;
+@base-body-background:		@am-bg;
 
-@base-margin-vertical:		@utility-margin-large;
+@base-margin-vertical:		@utility-margin-small;
 
-@base-hr-margin-vertical:	@utility-margin-large;
+@base-hr-margin-vertical:	@utility-margin-small;
 @base-hr-border:		@am-border-color;
 @base-hr-border-width:		@am-border-width;
 
-@base-body-font-family:		"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-@base-body-font-weight:         500;
+@base-body-font-family:		"Rubik", sans-serif;
+@base-body-font-weight:         400;
 @base-body-font-size:		14px;
-@base-body-line-height:		18px;
+@base-body-line-height:		20px;
 
 @base-heading-font-family:  	@base-body-font-family;
-@base-heading-color:		#FFFFFF;
+@base-heading-color:		@am-text;
 @base-heading-text-transform: 	none;
 @base-heading-margin-top: 	@base-margin-vertical;
-@base-h1-font-size:  		32px;
-@base-h1-line-height: 		32px;
-@base-h2-font-size: 		24px;
-@base-h2-line-height:  		28px;
+@base-h1-font-size:  		26px;
+@base-h1-line-height: 		28px;
+@base-h2-font-size: 		21px;
+@base-h2-line-height:  		24px;
 @base-h3-font-size:   		18px;
 @base-h3-line-height:     	21px;
 @base-h4-font-size:     	16px;
@@ -94,48 +93,40 @@
 @base-selection-color:  	#FFFFFF;
 
 
-html.am-dashboard {
+.am-dashboard,
+.am-inpage {
 
-	& body {
-		.smooth-fonts;
+	& div:empty {
+		margin: 0 !important;
+	}
+
+	& h1,
+	& h2,
+	& h3 {
+		font-weight: 300;
+	}
+
+	& h4 {
+		font-weight: 400;
+	}
+
+	& a {
+		text-decoration: none !important;
+	}
+
+	& a,
+	& button,
+	& label,
+	& textarea,
+	& input,
+	& .uk-button,
+	& .uk-badge {
+		.transition(color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s;);
 	}
 	
-}
-
-div:empty {
-	margin: 0 !important;
-}
-
-h1,
-h2 {
-	font-weight: 400;
-}
-
-h3,
-h4 {
-	font-weight: 500;
-}
-
-a {
-	text-decoration: none !important;
-}
-
-strong {
-	font-weight: 700;
-}
-
-a, 
-div,
-nav,
-ul,
-button,
-label,
-label:before,
-textarea,
-input { 
-	.transition(color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s;);
-}
-
-.am-dashboard hr {
-	.full-width;
+	& *,
+	& *:hover {
+		-webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+	}
+	
 }

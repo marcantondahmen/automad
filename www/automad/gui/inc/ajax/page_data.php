@@ -103,7 +103,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 		?>
 			
 			<div class="uk-form-row uk-margin-large-bottom">
-				<label for="am-input-data-title" class="uk-form-label">
+				<label for="am-input-data-title" class="uk-form-label uk-margin-top-remove">
 					<?php echo ucwords(AM_KEY_TITLE); ?>
 				</label>
 				<input 
@@ -115,30 +115,26 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				placeholder="Required" 
 				required 
 				/>
-				<ul class="am-link uk-subnav uk-subnav-pill uk-margin-small-top uk-hidden-small">
-					<li class="uk-disabled"><i class="uk-icon-share"></i></li>
-					<li>
-						<a 
-						href="<?php echo AM_BASE_INDEX . $url; ?>" 
-						class="uk-text-truncate" 
-						title="<?php Text::e('btn_inpage_edit'); ?>" 
-						data-uk-tooltip="pos:'bottom-left'"
-						>
-							<?php 
-							
-							if ($url == '/') {
-								echo getenv('SERVER_NAME');
-							} else {
-								echo $url; 	
-							}
-		
-							?>
-						</a>
-					</li>
-				</ul>
+				<a 
+				href="<?php echo AM_BASE_INDEX . $url; ?>" 
+				class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
+				title="<?php Text::e('btn_inpage_edit'); ?>" 
+				data-uk-tooltip="pos:'bottom-left'"
+				>
+					<i class="uk-icon-share"></i>&nbsp;
+					<?php 
+					
+					if ($url == '/') {
+						echo getenv('SERVER_NAME');
+					} else {
+						echo $url; 	
+					}
+
+					?> 
+				</a>
 			</div>
 			
-			<div class="uk-accordion" data-uk-accordion="{duration:200,showfirst:true}">
+			<div class="uk-accordion" data-uk-accordion="{duration: 200, showfirst: false}">
 				
 				<!-- Settings -->
 				<div type="button" class="uk-accordion-title">
@@ -152,7 +148,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								<?php Text::e('page_theme_template'); ?>
 								<a href="#" class="uk-modal-close uk-close"></a>
 							</div>	
-							<?php echo $this->Html->templateSelectBox('theme_template', $data[AM_KEY_THEME], $Page->template); ?>	
+							<?php echo $this->Html->selectTemplate('theme_template', $data[AM_KEY_THEME], $Page->template); ?>	
 							<div class="uk-modal-footer uk-text-right">
 								<button class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
@@ -189,52 +185,50 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						
 						if (file_exists($template)) {
 							$templateButtonClass = 'uk-button-primary';
-							$templateIconClass = 'uk-icon-file-text';
 						} else {
 							$templateButtonClass = 'uk-button-danger';
-							$templateIconClass = 'uk-icon-question-circle';
 						}
 						
 						?>
 						<button 
 						type="button" 
-						class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1 uk-text-truncate" 
+						class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1 uk-text-truncate uk-text-left" 
 						data-uk-modal="{target:'#am-select-template-modal'}"
 						>
-							<i class="<?php echo $templateIconClass; ?>"></i>&nbsp;
 							<?php echo ucwords(str_replace(array('_', '/'), array(' ', ' / '), ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
 						</button>	
 					</div>
 					<?php if ($Page->path != '/') { ?> 
-					<ul class="uk-grid uk-grid-width-1-1 uk-grid-width-medium-1-2 uk-margin-top">
-						<!-- Visibility -->
-						<li class="uk-margin-bottom">
-							<label class="uk-form-label uk-text-truncate">
-								<?php Text::e('page_visibility'); ?>
-							</label>
-							<label class="uk-button uk-width-1-1" data-am-toggle>
-								<?php Text::e('btn_hide_page'); ?>
-								<input 
-								id="am-checkbox-hidden" 
-								type="checkbox" 
-								name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> 
-								/>
-							</label>
-						</li>
-						<!-- Prefix -->
-						<li class="uk-margin-bottom">
-							<label for="am-input-prefix" class="uk-form-label uk-text-truncate">
-								<?php Text::e('page_prefix'); ?>
-							</label>
+					<!-- Visibility -->
+					<div class="uk-form-row">
+						<label class="uk-form-label uk-text-truncate">
+							<?php Text::e('page_visibility'); ?>
+						</label>
+						<label 
+						class="am-toggle-switch" 
+						data-am-toggle
+						>
+							<?php Text::e('btn_hide_page'); ?>
 							<input 
-							id="am-input-prefix" 
-							class="uk-form-controls uk-width-1-1" 
-							type="text" 
-							name="prefix" 
-							value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" 
+							id="am-checkbox-hidden" 
+							type="checkbox" 
+							name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> 
 							/>
-						</li>
-					</ul>
+						</label>
+					</div>	
+					<!-- Prefix -->
+					<div class="uk-form-row">
+						<label for="am-input-prefix" class="uk-form-label uk-text-truncate">
+							<?php Text::e('page_prefix'); ?>
+						</label>
+						<input 
+						id="am-input-prefix" 
+						class="uk-form-controls uk-width-1-1" 
+						type="text" 
+						name="prefix" 
+						value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" 
+						/>
+					</div>	
 					<!-- Redirect -->
 					<div class="uk-form-row">
 						<label for="am-input-redirect" class="uk-form-label">

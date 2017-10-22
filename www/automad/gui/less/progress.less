@@ -33,15 +33,19 @@
  */
 
 
-@progress-mini-height:                  @am-border-thick-width;
+@progress-height: 			16px;
+@progress-margin-vertical: 		5px;
+@progress-background:  			#FFFFFF;
 
-@progress-margin-vertical: 		@utility-margin-small;
-@progress-background:  			@button-background;
-
-@progress-bar-background:   		@am-danger;
+@progress-bar-background:   		@am-text;
 @progress-bar-font-size: 		@text-small-font-size;
 @progress-bar-color:  			#FFFFFF;
 
-@progress-bar-success-background:	@am-success;
-@progress-bar-warning-background: 	@am-danger;
-@progress-bar-danger-background: 	@am-danger;
+@progress-bar-success-background:	@am-text;
+@progress-bar-warning-background: 	@button-danger-background;
+@progress-bar-danger-background: 	@button-danger-background;
+
+
+.hook-progress() {
+	border-radius: @am-radius;
+}

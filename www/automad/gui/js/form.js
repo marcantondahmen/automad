@@ -414,8 +414,10 @@
 						$(this).empty().submit();
 					});
 					
-					// Focus first input (not disabled).
-					$(this).find('input:not(:disabled, [type="hidden"])').first().focus();
+					// Focus first input (not disabled and not on any touch device).
+					if ($('html.uk-notouch').length) {
+						$(this).find('input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
+					}
 					
 				},
 				

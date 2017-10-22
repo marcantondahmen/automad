@@ -66,7 +66,17 @@
 				});
 			
 			});
+			
+			// Clear button.
+			$doc.on('click', dt.selector + ' [data-am-clear-date]', function() {
+				
+				var	$datetime = $(this).closest(dt.selector);
 						
+				$datetime.find('[data-uk-timepicker]').val('');
+				$datetime.find('[data-uk-datepicker]').val('').trigger('change');
+				
+			});
+					
 		},
 		
 		today: function() {

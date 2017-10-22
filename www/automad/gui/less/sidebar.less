@@ -33,11 +33,81 @@
  */
 
 
-// Push the neighbor when sidebar is open.
-.am-sidebar-push {
+@am-sidebar-width: 	300px;
+
+.am-sidebar {
 		
-	@media (min-width: @breakpoint-large) and (max-width: ((2 * @offcanvas-bar-width) + @utility-container-max-width + 30)) {
-		margin: 0 0 0 (@offcanvas-bar-width + 15);
+	min-height: 100%;
+		
+	@media (min-width: @breakpoint-large) {
+		display: block !important;
+		width: @am-sidebar-width;
+		opacity: 1 !important;	
+	}	
+	
+	&-modal-dialog.uk-modal-dialog-blank {
+		
+		width: @am-sidebar-width;
+		// Always keep 50px free space at right to close sidebar.
+		max-width: ~"calc(100vw - 50px)";
+		
+		@media (max-width: @breakpoint-medium-max) {
+			
+			height: 100vh;
+			max-height: 100%;
+			-webkit-transform: translateX(-15%);
+		    	transform: translateX(-15%);
+			.transition(opacity 0.2s linear, transform 0.2s ease-out;);
+			.shadow; 
+			
+			.uk-open & {
+				-webkit-transform: translateX(0);
+			    	transform: translateX(0);	
+			}
+			
+		}
+		
+		@media (min-width: @breakpoint-large) {
+			display: block;
+			-webkit-transform: translateX(0);
+		    	transform: translateX(0);
+			opacity: 1;
+		}	
+		
+	}
+	
+	&-logo {
+		
+		position: absolute;
+		box-sizing: border-box;
+		top: 0;
+		padding: 8px 0 0 0;
+		font-size: 58px;
+		color: @am-text;
+		
+		&:hover,
+		&:active {
+			color: @am-muted;
+		}
+		
+	}
+	
+	&-search {
+		// Keep search aligned with navbar buttons and use negative margin to generate the 
+		// same horizontal and vertical space to the sidebar borders.
+		// Note that therefore the searchbar will not be aligned with any other sidebar elements on purpose. 
+		padding-top: 17px;
+		margin: 0 -3px;
+		width: auto;
+	}
+	
+	// Push the neighbor when sidebar is open.
+	&-push {
+		
+		@media (min-width: @breakpoint-large) and (max-width: ((2 * @am-sidebar-width) + @utility-container-max-width)) {
+			margin: 0 0 0 @am-sidebar-width;
+		}
+		
 	}
 	
 }

@@ -35,47 +35,29 @@
 
 [data-am-tree] {
 	
-	& .uk-button {
-		margin-left: @nav-padding-horizontal;
+	.am-sidebar & {
+		padding: 0 @utility-container-padding-horizontal @am-body-padding-bottom @utility-container-padding-horizontal;		
 	}
 	
-	& ul ul {
-		margin-left: 14px;
+	.uk-form-stacked & {
+		padding: 3px 12px;
+		background-color: @form-background;
+		border-radius: @am-radius;
 	}
 	
-	& ul ul ul {
-		margin-left: @nav-padding-horizontal - @nav-nested-padding-horizontal;
+	& > ul {
+		margin-left: -@nav-padding-horizontal;
+		margin-right: -@nav-padding-horizontal;
 	}
-	
+
 	& ul li {
 		position: relative;	
 	}
 	
 	& a:not(.am-tree-toggle) {
 		width: auto;
-		margin-bottom: @am-border-width;
 	}
 	
-	.uk-modal & {
-		
-		& > .uk-nav-side {
-			margin: -@nav-padding-vertical @nav-padding-horizontal -@nav-padding-vertical -@nav-padding-horizontal;	
-			margin: 0 0 -@nav-padding-vertical -@nav-padding-horizontal;	
-		}
-		
-		& .uk-active > a:not(.am-tree-toggle) {	
-			background-color: @am-danger;
-		}
-		
-	}
-	
-	.uk-offcanvas-bar & {
-		padding-left: @utility-container-padding-horizontal - @nav-padding-horizontal;
-		padding-right: 0;
-		padding-bottom: @am-body-padding-bottom - @nav-padding-vertical;
-		margin: (@utility-margin + @utility-margin-small) 0;
-	}
-
 	& .uk-active > a .uk-icon-folder:before {
 		content: '\f07c';
 	}
@@ -104,8 +86,7 @@
 [class*='am-tree-icon-'] {
 	&:extend([class*='uk-icon-'] all);
 	font-size: 12px;
-	color: @am-muted;
-	margin-top: 3px;
+	color: @am-text;
 }
 
 .am-tree-icon {

@@ -50,7 +50,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 	
 	$output['html'] = 	'<div class="uk-alert">' .
-				'<span class="uk-text-large"><i class="uk-icon-code-fork"></i>&nbsp;&nbsp;</span>' .
 				'Can\'t run updates within the development repository!' .
 				'</div>';
 	

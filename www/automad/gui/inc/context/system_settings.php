@@ -52,7 +52,7 @@ $this->element('header');
 
 ?>
 	
-		<ul class="uk-subnav uk-subnav-pill uk-margin-large-top uk-margin-bottom">
+		<ul class="uk-subnav uk-subnav-pill uk-margin-top">
 			<li class="uk-disabled"><i class="uk-icon-cog"></i></li>
 			<li><a href=""><?php Text::e('sys_title'); ?></a></li>
 		</ul>
@@ -83,9 +83,7 @@ $this->element('header');
 		<ul id="am-sys-content" class="uk-switcher">
 			<!-- Cache -->
 			<li>
-				<div class="uk-block">
-					<?php Text::e('sys_cache_info'); ?>
-				</div>
+				<?php Text::e('sys_cache_info'); ?>
 				<!-- Cache Enable / Settings -->
 				<form 
 				class="uk-form uk-form-stacked" 
@@ -95,7 +93,7 @@ $this->element('header');
 					<!-- Cache Enable -->
 					<input type="hidden" name="type" value="cache" />		
 					<label 
-					class="uk-button uk-button-large" 
+					class="am-toggle-switch-large" 
 					data-am-toggle="#am-cache-settings, #am-cache-actions"
 					>
 						<?php Text::e('sys_cache_enable'); ?>
@@ -106,53 +104,47 @@ $this->element('header');
 						/>
 					</label>
 					<!-- Cache Settings -->
-					<ul id="am-cache-settings" class="am-toggle-container uk-grid uk-grid-width-1-1 uk-grid-width-small-1-2">
+					<div id="am-cache-settings" class="am-toggle-container">
 						<!-- Cache Monitor Delay -->
-						<li>
-							<label class="uk-form-label uk-margin-large-top">
-								<?php Text::e('sys_cache_monitor'); ?>
-							</label>		
-							<?php echo 	$this->Html->radios(
-										'cache[monitor-delay]',
-										array(
-											'1 min' => 60,
-											'2 min' => 120,
-											'5 min' => 300
-										),
-										AM_CACHE_MONITOR_DELAY
-									); 
-							?> 
-						</li>
+						<p class="uk-margin-large-top"><?php Text::e('sys_cache_monitor_info') ?></p>
+						<?php echo 	$this->Html->select(
+									'cache[monitor-delay]',
+									array(
+										'1 min' => 60,
+										'2 min' => 120,
+										'5 min' => 300
+									),
+									AM_CACHE_MONITOR_DELAY,
+									Text::get('sys_cache_monitor')
+								); 
+						?>
 						<!-- Cache Lifetime -->
-						<li>
-							<label class="uk-form-label uk-margin-large-top">
-								<?php Text::e('sys_cache_lifetime'); ?>
-							</label>		
-							<?php echo 	$this->Html->radios(
-										'cache[lifetime]',
-										array(
-											'1 h' => 3600,
-											'6 h' => 21600,
-											'12 h' => 43200
-										),
-										AM_CACHE_LIFETIME
-									);
-							?> 
-						</li>
-					</ul>	
+						<p class="uk-margin-large-top"><?php Text::e('sys_cache_lifetime_info') ?></p>
+						<?php echo 	$this->Html->select(
+									'cache[lifetime]',
+									array(
+										'1 h' => 3600,
+										'6 h' => 21600,
+										'12 h' => 43200
+									),
+									AM_CACHE_LIFETIME,
+									Text::get('sys_cache_lifetime')
+								);
+						?> 
+					</div>	
 				</form>
-				<div id="am-cache-actions" class="am-toggle-container">
-					<hr />
+				<div id="am-cache-actions" class="am-toggle-container uk-margin-large-top">
+					
 					<!-- Clear Cache -->	
 					<?php Text::e('sys_cache_clear_info'); ?>
 					<form data-am-handler="clear_cache">
-						<button type="submit" class="uk-button uk-button-large">
+						<button type="submit" class="uk-button uk-margin-bottom">
 							<i class="uk-icon-refresh"></i>&nbsp;
 							<?php Text::e('sys_cache_clear'); ?>
 						</button>
 					</form>	
 					<?php if ($tmp = FileSystem::getTmpDir()) { ?>
-					<hr />
+					
 					<!-- Purge Cache -->
 					<?php Text::e('sys_cache_purge_info'); ?>
 					<form data-am-handler="purge_cache">
@@ -166,9 +158,7 @@ $this->element('header');
 			</li>
 			<!-- User -->
 			<li>
-				<div class="uk-block">
-					<?php Text::e('sys_user_info'); ?>
-				</div>
+				<?php Text::e('sys_user_info'); ?>
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
@@ -233,7 +223,7 @@ $this->element('header');
 							required
 							/>		
 							<input 
-							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+							class="uk-form-controls uk-width-1-1" 
 							type="password" 
 							name="password2" 
 							placeholder="<?php Text::e('sys_user_add_repeat'); ?>"  
@@ -252,10 +242,10 @@ $this->element('header');
 					</div>
 				</div>
 				<!-- Change Password -->
-				<hr />
+				<br />
 				<a 
 				href="#am-change-password-modal" 
-				class="uk-button uk-button-danger" 
+				class="uk-button uk-margin-small-top" 
 				data-uk-modal
 				>
 					<i class="uk-icon-key"></i>&nbsp;&nbsp;<?php Text::e('sys_user_change_password'); ?>
@@ -280,7 +270,7 @@ $this->element('header');
 							required
 							/>
 							<input 
-							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+							class="uk-form-controls uk-width-1-1" 
 							type="password" 
 							name="new-password1" 
 							placeholder="<?php Text::e('sys_user_change_password_new'); ?>"  
@@ -288,7 +278,7 @@ $this->element('header');
 							required
 							/>
 							<input 
-							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+							class="uk-form-controls uk-width-1-1" 
 							type="password" 
 							name="new-password2" 
 							placeholder="<?php Text::e('sys_user_change_password_repeat'); ?>"  
@@ -309,20 +299,16 @@ $this->element('header');
 			</li>
 			<!-- Update -->
 			<li>
-				<div class="uk-block">
-					<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
-						<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
-					</form>
-				</div>	
+				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
+					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
+				</form>
 			</li>
 			<!-- Debug -->
 			<li>
-				<div class="uk-block">
-					<?php Text::e('sys_debug_info'); ?>
-				</div>
+				<?php Text::e('sys_debug_info'); ?>
 				<form class="uk-form" data-am-handler="update_config" data-am-auto-submit>
 					<input type="hidden" name="type" value="debug" />
-					<label class="uk-button uk-button-large" data-am-toggle>
+					<label class="am-toggle-switch-large" data-am-toggle>
 						<?php Text::e('sys_debug_enable'); ?>
 						<input 
 						type="checkbox" 

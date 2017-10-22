@@ -45,24 +45,27 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 ?>
 	
 	<?php if (User::get()) { ?> 	
-	<div id="am-sidebar" class="uk-offcanvas">
-		<div class="uk-offcanvas-bar am-navbar-push">
+	<div id="am-sidebar" class="am-sidebar uk-modal">
+		<div class="am-sidebar-modal-dialog uk-modal-dialog uk-modal-dialog-blank">
 			<div data-am-scroll-box='{"scrollToItem": ".uk-active"}'>
 				<div data-am-tree>
-					<a 
-					href="#am-add-page-modal" 
-					class="uk-button uk-button-danger uk-visible-small uk-margin-bottom" 
-					data-uk-modal
-					>
-						<i class="uk-icon-plus"></i>&nbsp;
-						<?php Text::e('btn_add_page'); ?>
-					</a>
-					<ul class="uk-nav uk-nav-side">
+					<div class="am-navbar-push uk-visible-large uk-margin-bottom">
+						<a 
+						href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"
+						class="am-sidebar-logo"
+						>
+							<i class="uk-icon-a"></i>
+						</a>	
+					</div>
+					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
+						<?php echo $this->Html->searchField(Text::get('search_placeholder')); ?>
+					</div>
+					<ul class="uk-nav uk-nav-side uk-margin-small-top">
 						<li class="uk-nav-header">
 							<?php Text::e('sidebar_header_global'); ?>
 						</li>
 						<li>
-							<a href="<?php echo AM_BASE_URL ?>" class="uk-text-truncate">
+							<a href="<?php echo AM_BASE_URL ?>">
 								<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
 								<?php echo $this->sitename; ?>
 							</a>

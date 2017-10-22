@@ -33,75 +33,73 @@
  */
 
 
-@form-height:			32px;
-@form-large-height: 		42px;
-@form-padding:			7px 12px;
-@form-large-padding: 		5px 12px;
-@form-border:			transparent;
-@form-border-width:		0;
-@form-color:			@am-muted;
-@form-background:       	#FFFFFF;
+@form-height:			@button-large-height;
+@form-large-height: 		44px;
+@form-padding:			4px 10px;
+@form-large-padding: 		6px 14px;
+@form-border:			@form-background;
+@form-border-width:		@am-border-width;
+@form-color:			@am-text;
+@form-background:       	darken(@am-bg, 4%);
 
-@form-focus-border:		transparent;
+@form-gutter: 			0;
+
+@form-focus-border:		@form-background;
 @form-focus-background:		#FFFFFF;
 @form-focus-color:		@form-color;
 
-@form-stacked-font-weight:	500;
-@form-stacked-margin-bottom:	@utility-margin-small;
+@form-stacked-font-weight:	400;
+@form-stacked-margin-bottom:	4px;
 
-@form-placeholder-color:	@am-grey;
+@form-placeholder-color:	@am-muted;
 
-@form-icon-color:		@am-grey;
+@form-icon-color:		@form-color;
 
 .hook-form() {
 	box-sizing: border-box;
 	min-height: @form-height;
-}
-
-.hook-form-focus() {
-	.focus;	
+	line-height: @base-body-line-height;
+	border-radius: @am-radius;
 }
 
 .hook-form-stacked-label() {
 	
+	display: inline-block;
+	margin-top: @utility-margin;
+	margin-bottom: @form-stacked-margin-bottom;
+	padding: 4px 6px;
+	vertical-align: top;
 	font-size: @text-small-font-size;
-	font-weight: 700;
+	font-weight: @form-stacked-font-weight;
+	line-height: @text-small-font-size;
 	color: @am-muted;
-	margin-bottom: 0;
-	padding-bottom: @form-stacked-margin-bottom;
+	background-color: @form-background;
+	border-radius: @am-radius;
 	
 	&.am-form-changed:after {
 		content: '\f111';
 		&:extend([class*='uk-icon-']);
-		padding-left: 5px;
-		color: @am-danger;
+		padding-left: 4px;
+		color: @am-text;
 	} 
-	
-}
-
-.uk-form select {
-	
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	text-indent: 0.01px;
-	
-	&:-moz-focusring {
-	    color: transparent;
-	    text-shadow: 0 0 0 @form-focus-color;
-	    .transition(color 0s;)
-	}
 	
 }
 
 // All textareas but not the HTML editors.
 .uk-form textarea:not([data-uk-htmleditor]) {
-
 	overflow: hidden;
 	resize: none;
-	
+	padding-top: 6px;
+	padding-bottom: 6px;
 	// Disable height transitions. 
 	.transition(height 0s, color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;);
+}
+
+.uk-form-controls {
+	
+	& + & {
+		margin-top: 4px;
+	}
 	
 }
 
@@ -121,6 +119,3 @@
 	max-height: none !important;
 }
 
-.uk-form-row {
-	position: relative;
-}

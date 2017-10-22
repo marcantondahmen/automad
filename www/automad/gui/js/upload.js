@@ -62,7 +62,7 @@
 		// Dropzone.
 		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
 		$input:		$('<input type="file" multiple />'),
-		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-primary uk-width-1-1 uk-margin-large-top' })
+		$browse:	$('<button></button>', { 'class': 'uk-button uk-width-1-1 uk-margin-small-top' })
 				.click(function() {
 					// Make a button click trigger the file input for browsing.
 					Automad.upload.$input.click();
@@ -92,7 +92,6 @@
 			u.$input.appendTo(u.$dropzone).hide();
 			u.$browse.html(iconBrowse + u.$modal.data(util.dataCamelCase(da.browseText)))
 				 .insertAfter(u.$dropzone);
-			$('<hr />').appendTo(u.$container);
 			
 			// The modal's close buttons
 			u.$close = u.$modal.find('.uk-modal-close'); 	
@@ -133,7 +132,7 @@
 					// As fallback when using IframeTransport and the files are uploaded in one go, the text will include all filenames and sizes.
 					// In the normal case that always will be only one elements, since the all files from a selection are sent in a single request each.
 					$.each(data.files, function(i) {
-						info += '<div class="am-text-white uk-margin-small-bottom uk-text-truncate">' + 
+						info += '<div class="am-text-white uk-text-truncate">' + 
 							data.files[i].name +  
 							'</div>' +
 							'<div class="uk-text-small uk-text-muted">' + 
@@ -141,11 +140,10 @@
 							'</div>';
 					});
 			
-					data.context = $('<div></div>', { 'class': 'uk-margin-large-top' }).appendTo(u.$container);
+					data.context = $('<div></div>', { 'class': 'uk-margin-top' }).appendTo(u.$container);
 			
 					$(info).appendTo(data.context);	
-					$('<div class="uk-progress uk-progress-mini"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
-					$('<div></div>', { 'class': 'am-progress uk-text-small uk-text-muted' }).html('<i class="uk-icon-circle-o-notch uk-icon-spin"></i>').appendTo(data.context);
+					$('<div class="uk-progress uk-progress-striped uk-active"><div class="uk-progress-bar"></div></div>').appendTo(data.context);
 				
 					data.context.find('.uk-progress-bar').width('0px');
 				
@@ -161,8 +159,7 @@
 
 					var 	progress = parseInt(data.loaded / data.total * 100, 10);
 
-					data.context.find('.am-progress').text(progress + ' %');
-				 	data.context.find('.uk-progress-bar').width(progress + '%');
+				 	data.context.find('.uk-progress-bar').width(progress + '%').text(progress + ' %');
 					
 				},
 				
@@ -176,12 +173,11 @@
 				done: function (e, data) {
 					
 					// Deactivate progress bar.
-					data.context.find('.uk-progress');
+					data.context.find('.uk-progress').removeClass('uk-progress-striped uk-active');
 						
 					// In case of an server-side error, show error message in progress bar.		
 					if (data.result.error) {	
-						data.context.find('.uk-progress').addClass('uk-progress-danger').find('.uk-progress-bar');
-						data.context.find('.am-progress').text(data.result.error);
+						data.context.find('.uk-progress').addClass('uk-progress-danger').find('.uk-progress-bar').text(data.result.error);
 					} else {
 						data.context.find('.uk-progress').addClass('uk-progress-success');
 					}
@@ -195,7 +191,7 @@
 				
 				fail: function (e, data) {
 				
-					data.context.find('.uk-progress').addClass('uk-progress-danger');
+					data.context.find('.uk-progress').addClass('uk-progress-danger').removeClass('uk-progress-striped uk-active');
 					data.context.find('.uk-progress-bar').text('Error');
 				
 				}

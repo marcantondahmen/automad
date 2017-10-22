@@ -33,10 +33,12 @@
  */
 
 
-@modal-dialog-background:		@am-grey;
-@modal-dialog-padding:			20px;
-@modal-header-margin-bottom:		@modal-dialog-padding;
-@modal-footer-margin-top:		@modal-dialog-padding;
+@modal-background: 			rgba(0,0,0,0.1);
+
+@modal-dialog-background:		@am-bg;
+@modal-dialog-padding:			15px;
+@modal-header-margin-bottom:		@utility-margin;
+@modal-footer-margin-top:		@utility-margin;
 
 @modal-dialog-large-width: 		800px;
 @modal-dialog-large-width-large:	@modal-dialog-large-width;
@@ -46,64 +48,32 @@
 	overflow-x: hidden;
 		
 	&:not(&-blank) {
-		
-		@media (min-width: @breakpoint-small) {
-			border-radius: 7px;
-			.shadow;	
-		}
-		
+		border-radius: 12px;
+		.shadow;
 	}
 
 	&-blank {
+		box-sizing: border-box;
 		-webkit-transform: translateY(0);
     		transform: translateY(0);
-		min-height: 100%;
+		height: 100%;
+		padding-bottom: @utility-margin-large;
 	}
-	
-	// Make dialogs behave like blank dialogs on small devices.	
-	@media (max-width: @breakpoint-small-max) {
-	
-		.uk-modal & {
-			margin: 0;
-			max-width: 100%;	
-			min-height: 100%;
-			-webkit-transform: translateY(0);
-    			transform: translateY(0);
-		}
-
-	}
-	
-	hr {
-		width: ~"calc(100% + (2 * @{modal-dialog-padding}))";
-		margin-left: -@modal-dialog-padding;
-		margin-right: -@modal-dialog-padding;
-	}
-				
+			
 }
 
 .hook-modal-header() {	
 
-	color: #FFFFFF;
+	color: @am-text;
 	font-size: 16px;
-	margin: -@modal-dialog-padding;
-	margin-bottom: @utility-margin-large;
-	padding: @modal-dialog-padding;
-	border-bottom: @am-border-width solid @am-border-color;
-	
-	.uk-modal-dialog-blank & {
-		margin-left: -50vw;
-		padding-left: 50vw;	
-		margin-right: -50vw;
-		padding-right: 50vw;	
-	}
+	line-height: @base-body-line-height;
+	font-weight: inherit;
 	
 	& .uk-close {
 		float: right;
 		font-size: 14px;
+		line-height: @base-body-line-height;
+		margin-top: 2px;
 	}
-		
-}
-
-.hook-modal-footer() {	
-	margin-top: @utility-margin-large;
+	
 }

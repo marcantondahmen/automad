@@ -56,29 +56,29 @@ $this->element('header');
 
 ?>
 
-		<div class="uk-width-medium-1-2 uk-container-center uk-margin-top">
+		<div class="uk-width-medium-1-2 uk-container-center">
 			<div class="uk-animation-fade">
-				<div class="uk-panel uk-panel-box uk-panel-box-primary">
+				<div class="uk-panel uk-panel-box">
 					<div class="uk-panel-title">
 						<i class="uk-icon-user-plus uk-icon-medium"></i>
 					</div>
 					<?php Text::e('install_help'); ?>
 				</div>
-				<form class="uk-form" method="post">
+				<form class="uk-form uk-margin-small-top" method="post">
 					<input 
-					class="uk-form-controls uk-form-large uk-width-1-1 uk-margin-bottom" 
+					class="uk-form-controls uk-form-large uk-width-1-1" 
 					type="text" 
 					name="username" 
 					placeholder="<?php Text::e('sys_user_add_name'); ?>" 
 					/>
 					<input 
-					class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
+					class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
 					type="password" 
 					name="password1" 
 					placeholder="<?php Text::e('sys_user_add_password'); ?>" 
 					/>
 					<input 
-					class="uk-form-controls uk-width-1-1 uk-margin-large-bottom" 
+					class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
 					type="password" 
 					name="password2" 
 					placeholder="<?php Text::e('sys_user_add_repeat'); ?>" 
@@ -96,7 +96,7 @@ $this->element('header');
 				</form>
 			</div>
 			<div class="uk-animation-fade uk-hidden">
-				<div class="uk-panel uk-panel-box uk-panel-box-primary">
+				<div class="uk-panel uk-panel-box uk-margin-small-bottom">
 					<div class="uk-panel-title">
 						<i class="uk-icon-cloud-upload uk-icon-medium"></i>
 					</div>

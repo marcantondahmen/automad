@@ -33,12 +33,14 @@
  */
 
 
-@utility-container-max-width:                   860px;
+@utility-container-max-width:                   750px;
 @utility-container-padding-horizontal:          20px;
 
 @utility-container-large-max-width:             @utility-container-max-width;
 @utility-container-large-padding-horizontal:    @utility-container-padding-horizontal;
 
-@utility-margin:				15px;
-@utility-margin-small:				5px;
-@utility-margin-large:				25px;
+// Set values to add up to the next bigger step:
+// margin + margin-small = margin-large & margin-small + margin-small = margin
+@utility-margin:				30px;
+@utility-margin-small:				15px;
+@utility-margin-large:				45px;

@@ -33,12 +33,11 @@
  */
 
 
- .am-inpage {
+.am-inpage {
 	 
- 	&:extend(html);
+ 	&:extend(html all);
 	background: transparent;
 	line-height: inherit;
-	.smooth-fonts;
 	
 	body > & {
 		position: relative;	
@@ -50,44 +49,45 @@
 		display: inline-block;
 		position: fixed;
 		bottom: 20px;
-		left: ~"calc(50vw - 170px)";
-		width: 340px;
+		left: ~"calc(50vw - 150px)";
+		width: 300px;
 		text-align: center;
 		
 		& .uk-button-group {
+			
+			border-radius: @am-radius;
+			overflow: hidden;
+			background-color: @button-primary-background;
 			.shadow;	
-		}
-		
-		& .uk-icon-automad {
-			position: relative;
-			top: 1px;
-		}
-		
-		@media (max-width: @breakpoint-small-max) {
-			left: ~"calc(50vw - 130px)";
-			width: 260px;	
-		}
-		
-		& .uk-button {
 			
-			background-color: @am-grey;
-			
-			&:hover,
-			&:active {
-				background-color: @am-nav-bg-hover;
+			& > .uk-button {
+				min-width: @button-large-height;
+				max-width: @button-large-height;
+				margin-left: 0;
+				padding: 0;
+				text-align: center;
+				border-radius: 0;
 			}
 			
+		}
+		
+		& .uk-icon-a {
+			position: relative;
+			top: 2px;
+			left: 2px;
+			max-height: 16px;
+			vertical-align: baseline;
+			font-size: 20px;
+			line-height: 16px;
 		}
 		
 	}
 	
 	& > &-edit-button {
-		&:extend(.uk-button all, .uk-button-small all);
+		&:extend(.uk-button all, .uk-button-small all, .uk-button-primary all);
 		border: none !important;
 		margin-bottom: 2px;
 		vertical-align: text-bottom;
-		border-radius: 50px;
-		padding: 0 10px;
 		.shadow;
 	}
 	
@@ -97,11 +97,13 @@
 		&:hover,
 		&:active {
 			color: @am-muted;
-			background-color: @button-background;
-			box-shadow: none;
 			cursor: move;
 		}
 		
+	}
+	
+	& .uk-form-stacked .uk-form-label {
+		margin-top: 0;
 	}
 	
 	& :-ms-input-placeholder { 

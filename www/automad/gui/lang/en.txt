@@ -218,9 +218,7 @@ error_no_destination: Please select a page as destination!
 
 -
 
-error_no_js: ##JavaScript is disabled!
-
-Please enabled **JavaScript** in your browser to use the Dashboard!
+error_no_js: Please enabled JavaScript in your browser to use the Dashboard!
 
 -
 
@@ -318,10 +316,10 @@ inpage_edit_title: Edit Content
 
 
 install_help: ###Create User Account  
-Before you can make use of the **Automad** dashboard, you have to register the first user by following these steps:    
+Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
       				
 1. 	Create an user account using the form below and download the created file to your computer. 
-2. 	Move the downloaded file to the **"/config"** directory within your Automad installation.   
+2. 	Move the downloaded file to the "/config" directory within your Automad installation.   
 	(via a file browser, FTP or SSH) 
 				
 After completing these steps, the dashboard should be ready to use. 
@@ -330,7 +328,7 @@ Other users can be added later via the system preferences.
 -
 
 install_login: ###Move Account File   
-Please move now the downloaded file to your **"/config"** directory. After you have successfully finished this installation process, you can login to the dashboard.
+Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can login to the dashboard.
 
 -
 
@@ -541,7 +539,7 @@ This action will not remove any page files or images from the cache directory.
 
 -
 
-sys_cache_enable: Enable Caching
+sys_cache_enable: Caching
 
 -
 
@@ -549,7 +547,15 @@ sys_cache_monitor: Check for changes every
 
 -
 
-sys_cache_lifetime: Maximum cache lifetime
+sys_cache_monitor_info: When caching is enabled, Automad will check regularly for changes in the file system. The frequency of those checks can be defined here.
+
+-
+
+sys_cache_lifetime: Maximum cache lifetime is 
+
+-
+
+sys_cache_lifetime_info: All cached Automad data and pages have a maximum lifetime. After the lifetime of an object exceeds, its cache will be rebuilt when requested.   
 
 -
 
@@ -568,7 +574,7 @@ sys_debug: Debug Mode
 
 -
 
-sys_debug_enable: Enable Debug Mode
+sys_debug_enable: Debug Mode
 
 -
 
@@ -628,7 +634,7 @@ sys_update: Update
 -
 
 sys_update_available: An update for your Automad installation is available!    
-Please **backup** your current installation before running the update!
+Please backup your current installation before running the update!
 
 -
 

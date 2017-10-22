@@ -95,26 +95,32 @@ ob_start();
 if ($files) { ?>
 	
 		<ul class="uk-grid">
-			<li class="uk-width-2-3 uk-width-small-1-2">
+			<li class="uk-width-2-3">
 				<a 
 				href="#am-upload-modal" 
-				class="uk-button uk-button-primary uk-width-1-1" 
+				class="uk-button uk-button-primary" 
 				data-uk-modal="{bgclose: false, keyboard: false}"
 				>
-					<span class="uk-hidden-small"><i class="uk-icon-upload"></i>&nbsp;</span>
+					<i class="uk-icon-upload"></i>&nbsp;
 					<?php Text::e('btn_upload'); ?>
-				</a>
+				</a>	
 			</li>
-			<li class="uk-width-1-3 uk-width-small-1-2">
-				<button class="uk-button uk-button-danger uk-width-1-1" data-am-submit="files">
-					<i class="uk-icon-remove"></i>
-					<span class="uk-hidden-small">&nbsp;<?php Text::e('btn_remove_selected'); ?></span>
-				</button>
+			<li class="uk-width-1-3">
+				<div class="am-icon-buttons uk-text-right">
+					<button 
+					class="uk-button uk-button-danger" 
+					title="<?php Text::e('btn_remove_selected'); ?>"
+					data-am-submit="files"
+					data-uk-tooltip
+					>
+						<i class="uk-icon-remove"></i>
+					</button>
+				</div>
 			</li>
 		</ul>
-			
+		
 		<ul 
-		class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4" 
+		class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
 		data-uk-grid-match="{target:'.uk-panel'}" 
 		data-uk-grid-margin
 		>
@@ -170,16 +176,14 @@ if ($files) { ?>
 					<a href="#am-edit-file-info-modal" class="uk-panel-teaser uk-display-block" data-uk-modal>
 						<?php echo $icon; ?>
 					</a>
-					<div class="uk-margin-bottom">
-						<?php echo basename($file); ?>
-					</div>
+					<?php echo basename($file); ?>
 					<?php if ($caption) { ?>
-					<div class="uk-text-small uk-text-truncate uk-margin-small-top uk-hidden-small">
+					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
 						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
 						"<?php echo Core\Str::shorten($caption, 100); ?>"
 					</div>
 					<?php } ?>
-					<div class="uk-text-small uk-text-truncate uk-margin-small-top uk-hidden-small">
+					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
 						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;
 						<?php echo date('M j, Y H:i', filemtime($file)); ?>
 					</div>
@@ -209,15 +213,15 @@ if ($files) { ?>
 			<div class="uk-modal-dialog uk-modal-dialog-blank uk-text-center">
 				<a href="#" class="uk-modal-close uk-close"></a>
 				<div class="am-files-modal-container">
-					<div class="am-files-modal-preview">
+					<a href="#" class="am-files-modal-preview uk-modal-close">
 						<img id="am-edit-file-info-img" src="" />
 						<div id="am-edit-file-info-icon" data-am-extension=""></div>
-					</div>
+					</a>
 					<div class="am-files-modal-info">
 						<div class="uk-form uk-form-stacked">
 							<input id="am-edit-file-info-old-name" type="hidden" name="old-name" />	
 							<div class="uk-form-row">
-								<label for="am-edit-file-info-new-name" class="uk-form-label">
+								<label for="am-edit-file-info-new-name" class="uk-form-label uk-margin-top-remove">
 									<?php Text::e('file_name'); ?>
 								</label>
 								<input 
@@ -239,7 +243,7 @@ if ($files) { ?>
 								></textarea>
 							</div>
 						</div>
-						<div class="uk-block uk-text-right">
+						<div class="uk-margin-top uk-text-right">
 							<button type="button" class="uk-modal-close uk-button">
 								<span class="uk-hidden-small"><i class="uk-icon-close"></i>&nbsp;</span>
 								<?php Text::e('btn_close'); ?>
@@ -285,7 +289,7 @@ if ($files) { ?>
 				</div>
 				<div id="am-upload-container"></div>
 				<div class="uk-modal-footer uk-text-right">
-					<button type="button" class="uk-modal-close uk-button uk-button-danger">
+					<button type="button" class="uk-modal-close uk-button">
 						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 					</button>
 				</div>

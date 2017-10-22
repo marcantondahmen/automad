@@ -33,19 +33,19 @@
  */
 
 
-@subnav-margin-horizontal:		3px;
-@subnav-margin-vertical:		0;
+@subnav-margin-horizontal:		2px;
+@subnav-margin-vertical:		8px;
 
-@subnav-color:				#FFFFFF;
+@subnav-color:				@am-text;
 @subnav-hover-color:			@subnav-color;
 @subnav-active-color:			@subnav-color;
 @subnav-disabled-color:			@subnav-color;
 
 @subnav-pill-padding-vertical:		0;
 @subnav-pill-padding-horizontal:	6px;
-@subnav-pill-hover-background:		@am-nav-bg-hover;
-@subnav-pill-hover-color:		@subnav-hover-color;
-@subnav-pill-active-background:		@am-grey;
+@subnav-pill-hover-background:		#FFFFFF;
+@subnav-pill-hover-color:		@am-text;
+@subnav-pill-active-background:		#FFFFFF;
 @subnav-pill-active-color:		@subnav-active-color;
 
 .hook-subnav-pill() {
@@ -86,7 +86,6 @@
 .uk-subnav {
 	
 	position: relative;
-	height: 16px !important;
 	margin: 0 -(@subnav-pill-padding-horizontal + @subnav-margin-horizontal);
 	
 	& > li {
@@ -129,26 +128,11 @@
 		&:not(:last-child):after {
 			&:extend([class*='uk-icon-']);
 			content: '\f105';
-			padding-left: @subnav-pill-padding-horizontal - @subnav-margin-horizontal;
+			padding-left: @subnav-margin-horizontal;
 			position: relative;
 			height: 100% !important;
 			vertical-align: middle;
 			font-size: @text-small-font-size;
-		}
-		
-	}
-	
-	&.am-link {
-		
-		// Enable text truncation with icon in subnav.
-		& > li {
-			
-			max-width: ~"calc(100% - 50px)"; 
-			
-			& > a {
-				max-width: 100%;
-			}
-			
 		}
 		
 	}

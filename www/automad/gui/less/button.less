@@ -33,43 +33,48 @@
  */
 
 
-@button-color:				#FFFFFF;
-@button-background:			darken(@am-grey, 7%);
-@button-hover-color:			@button-color;
-@button-hover-background:		darken(@button-background, 3%);
-@button-active-color:			@button-color;
-@button-active-background:		darken(@button-background, 6%);
+@am-icon-button-margin-left: 		10px;
+
+@button-color:				@am-text;
+@button-background:			#FFFFFF;
+@button-hover-color:			#FFFFFF;
+@button-hover-background:		@am-text;
+@button-active-color:			#FFFFFF;
+@button-active-background:		@am-text;
 
 @button-primary-color:			#FFFFFF;
-@button-primary-background:		@am-primary;
-@button-primary-hover-color:		@button-primary-color;
-@button-primary-hover-background:	darken(@button-primary-background, 3%);
-@button-primary-active-color:		@button-primary-color;
-@button-primary-active-background:	darken(@button-primary-background, 6%);
+@button-primary-background:		@am-text;
+@button-primary-hover-color:		@am-text;
+@button-primary-hover-background:	#FFFFFF;
+@button-primary-active-color:		@am-text;
+@button-primary-active-background:	#FFFFFF;
 
 @button-success-color:			#FFFFFF;
 @button-success-background:		@am-success;
-@button-success-hover-color: 		@button-success-color;
-@button-success-hover-background: 	darken(@button-success-background, 3%);
-@button-success-active-color: 		@button-success-color;
-@button-success-active-background:	darken(@button-success-background, 6%);
+@button-success-hover-color: 		@am-success;
+@button-success-hover-background: 	#FFFFFF;
+@button-success-active-color: 		@am-success;
+@button-success-active-background:	#FFFFFF;
 
 @button-danger-color:			#FFFFFF;
 @button-danger-background:		@am-danger;
-@button-danger-hover-color: 		@button-danger-color;
-@button-danger-hover-background:	darken(@button-danger-background, 3%);
-@button-danger-active-color:		@button-danger-color;
-@button-danger-active-background:       darken(@button-danger-background, 6%);
+@button-danger-hover-color: 		@am-danger;
+@button-danger-hover-background:	#FFFFFF;
+@button-danger-active-color:		@am-danger;
+@button-danger-active-background:       #FFFFFF;
 
-@button-disabled-color:			darken(@button-disabled-background, 10%);
-@button-disabled-background:		darken(@am-grey, 5%);
+@button-disabled-color:			#FFFFFF;
+@button-disabled-background:		darken(@am-bg, 10%);
 
 @button-font-size:			14px;
+@button-mini-font-size: 		11px;
+@button-small-font-size: 		12px;
+@button-large-font-size: 		16px;
 
-@button-height:				32px;
+@button-height:				30px;
 @button-mini-height:			20px;
-@button-small-height:			25px;
-@button-large-height:			42px;
+@button-small-height:			24px;
+@button-large-height:			36px;
 
 @button-line-height: 			@button-height;
 @button-mini-line-height: 		@button-mini-height;
@@ -77,36 +82,96 @@
 @button-large-line-height: 		@button-large-height;
 
 @button-padding-horizontal:		10px;
-@button-mini-padding-horizontal:	5px;
+@button-mini-padding-horizontal:	6px;
 @button-small-padding-horizontal:	8px;
-@button-large-padding-horizontal:	14px;
+@button-large-padding-horizontal:	12px;
 
 
 .hook-button() {
+	
 	box-sizing: border-box;
 	position: relative;
-	font-weight: @am-nav-font-weight;
-	max-height: @button-height;
+	border-radius: @am-radius;
+	
+	& + & {
+		margin-left: 5px;
+	}
+	
 }
 
-.hook-button-large() {
-	max-height: @button-large-height;
+.hook-button-hover() {
+	
+	& .uk-badge {
+		color: @button-active-background;
+		background-color: @button-active-color;
+	}
+	
+}
+
+.hook-button-active() {
+	
+	& .uk-badge {
+		color: @button-active-background;
+		background-color: @button-active-color;
+	}
+	
 }
 
 .hook-button-primary() {
 	
-	& .uk-badge {
-		color: @am-primary;
-		background-color: #FFFFFF;
+	&:not(:hover):not(:active) .uk-badge {
+		color: @button-active-background;
+		background-color: @button-active-color;
+	}
+	
+	&:hover .uk-badge,
+	&:active .uk-badge {
+		color: @button-primary-color;
+		background-color: @button-primary-background;
+	}
+	
+	.uk-panel-box & {
+		
+		&:hover,
+		&:active {
+			background-color: @am-bg;
+		}
+		
 	}
 	
 }
 
 .hook-button-danger() {
 	
-	& .uk-badge {
-		color: @am-danger;
-		background-color: #FFFFFF;
+	&:not(:hover):not(:active) .uk-badge {
+		color: @button-danger-background;
+		background-color: @button-danger-color;
+	}
+
+	&:hover .uk-badge,
+	&:active .uk-badge {
+		color: @button-danger-color;
+		background-color: @button-danger-background;
+	}
+	
+}
+
+.am-icon-buttons {
+	
+	margin-left: -@am-icon-button-margin-left;
+	
+	& > * {
+		display: inline-block;
+	}
+	
+	& .uk-button {
+		min-width: @button-height;
+		max-width: @button-height;
+		text-align: center;
+		margin-left: @am-icon-button-margin-left;
+		padding-left: 0;
+		padding-right: 0;
+		border-radius: @button-height / 2;
 	}
 	
 }

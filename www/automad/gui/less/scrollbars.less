@@ -34,9 +34,15 @@
 
 
 [data-am-scroll-box] {
+	
 	position: relative;
-	height: 100%;
 	overflow: hidden;	
+	
+	// Only actually trigger custom scrollbars when sidebar is visible.
+	@media (min-width: @breakpoint-large) {
+		height: 100vh;	
+	}
+	
 }
 
 .mCS-minimal-dark .mCSB_dragger .mCSB_dragger_bar {

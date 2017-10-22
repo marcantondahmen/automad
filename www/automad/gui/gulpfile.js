@@ -120,6 +120,7 @@ gulp.task('libs-js', ['bump'], function() {
 				'../lib/uikit/js/components/accordion.min.js',
 				'../lib/uikit/js/components/autocomplete.min.js',
 				'../lib/uikit/js/components/datepicker.min.js',
+				'../lib/uikit/js/components/form-select.min.js',
 				'../lib/uikit/js/components/htmleditor.min.js',
 				'../lib/uikit/js/components/notify.min.js',
 				'../lib/uikit/js/components/sticky.min.js',

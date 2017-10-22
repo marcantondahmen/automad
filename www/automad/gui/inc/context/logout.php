@@ -56,23 +56,26 @@ $this->element('header');
 ?>
 
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<h2 class="uk-margin-large-top"><?php echo $this->sitename ?></h2>
+			<a href="<?php echo AM_BASE_INDEX; ?>">
+				<div class="uk-panel uk-panel-box">
+					<i class="uk-icon-medium uk-icon-user"></i>&nbsp;
+					<h3>
+						<?php echo $this->sitename; ?>
+					</h3>
+				</div>
+			</a>
 			<?php if ($loggedOut) { ?>
-			<div class="uk-alert uk-alert-success">
+			<div class="uk-alert uk-alert-success uk-margin-small-top uk-margin-small-bottom">
 				<?php Text::e('success_log_out'); ?>
 			</div>
 			<div class="uk-text-right">
-				<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button">
-					<i class="uk-icon-home"></i>&nbsp;
-					<?php Text::e('btn_home'); ?>
-				</a>
-				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button">
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button uk-button-primary">
 					<?php Text::e('btn_login'); ?>&nbsp;
 					<i class="uk-icon-sign-in"></i>
 				</a>
 			</div>
 			<?php } else { ?>
-			<div class="uk-alert uk-alert-danger">
+			<div class="uk-alert uk-alert-danger uk-margin-small-top">
 				<?php Text::e('error_log_out'); ?>
 			</div>
 			<?php } ?>

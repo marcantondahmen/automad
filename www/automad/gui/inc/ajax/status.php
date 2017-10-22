@@ -57,15 +57,16 @@ if (isset($_POST['item'])) {
 	if ($item == 'cache') {
 		
 		$tab = Core\Str::sanitize(Text::get('sys_cache'));
+		$button = 'uk-button uk-width-1-1 uk-text-left';
 		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-button-success uk-width-1-1">' .
-					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
+					    '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_cache_enabled') . 
 					    '</a>';
 		} else {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-width-1-1">' .
-					    '<i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
+					    '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_cache_disabled') . 
 					    '</a>';
 		}
@@ -75,15 +76,16 @@ if (isset($_POST['item'])) {
 	if ($item == 'debug') {
 		
 		$tab = Core\Str::sanitize(Text::get('sys_debug'));
+		$button = 'uk-button uk-width-1-1 uk-text-left';
 		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-button-success uk-width-1-1">' .
-					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
+					    '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_debug_enabled') . 
 					    '</a>';
 		} else {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-large uk-width-1-1">' .
-					    '<i class="uk-icon-times"></i>&nbsp;&nbsp;' . 
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
+					    '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_debug_disabled') . 
 					    '</a>';
 		}
@@ -96,13 +98,13 @@ if (isset($_POST['item'])) {
 		$updateVersion = Update::getVersion();
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-small uk-margin-top uk-text-truncate">' .
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-small uk-text-truncate">' .
 					    '<span class="uk-hidden-small"><i class="uk-icon-refresh"></i>&nbsp;&nbsp;</span>' . 
 					    Text::get('sys_status_update_available') . '&nbsp;&nbsp;' .
 					    $updateVersion . 
 					    '</a>';
 		} else {
-			$output['status'] = '<button class="uk-button uk-button-small uk-margin-top" disabled>' .
+			$output['status'] = '<button class="uk-button uk-button-small uk-text-truncate" disabled>' .
 					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
 					    Text::get('sys_status_update_not_available') . 
 					    '</button>';

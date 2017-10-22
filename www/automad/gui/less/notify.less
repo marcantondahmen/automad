@@ -32,37 +32,45 @@
  *	Licensed under the MIT license.
  */
 
+@notify-message-padding:		@alert-padding;
 
-@notify-message-success-background:	@am-success;
-@notify-message-success-color:		#FFFFFF;
+@notify-message-font-size: 		14px;
+@notify-message-line-height:  		@base-body-line-height;
 
-@notify-message-danger-background:	@am-danger;
-@notify-message-danger-color:		#FFFFFF;
+@notify-message-success-background:	#FFFFFF;
+@notify-message-success-color:		@am-text;
+
+@notify-message-danger-background:	#FFFFFF;
+@notify-message-danger-color:		@am-text;
 
 
 .hook-notify-message() {
 	
+	border-radius: @am-radius;
+	overflow: hidden;
 	.shadow;
 	
 	&.uk-notify-message-success,
 	&.uk-notify-message-danger {
 		
 		position: relative;
-		padding-left: 44px;
-		font-weight: 500;
+		padding-left: 50px;
 		
 		&:before {	
 			position: absolute;
-			left: @notify-message-padding;
-			top: @notify-message-padding - 1;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			padding: @notify-message-padding;
+			color: #FFFFFF;
 			font-family: FontAwesome;
 			display: block;
 			font-weight: normal;
 			font-style: normal;
-			font-size: 22px;
-			line-height: 22px;
+			font-size: 18px;
+			line-height: inherit;
 			vertical-align: baseline;
-			padding-right: 10px;
+			background-color: @am-text;
 			.smooth-fonts;
 		}
 		

@@ -60,14 +60,9 @@ $this->element('header');
 
 ?>
 		
-		<?php if ($Page) { ?>
+		<?php if ($Page) { 
 			
-		<div class="uk-margin-large-top uk-margin-bottom">
-			<?php echo $this->Html->breadcrumbs(); ?>
-		</div>
-		
-		<!-- Menu -->
-		<?php 
+			echo $this->Html->breadcrumbs();
 		
 			$items = array(
 				array(
@@ -75,7 +70,7 @@ $this->element('header');
 					'text' => Text::get('btn_data')
 				),
 				array(
-					'icon' => '<i class="uk-icon-folder-open"></i>&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>',
+					'icon' => '<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>',
 					'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
 				)
 			);
@@ -85,14 +80,14 @@ $this->element('header');
 			if ($url != '/') {
 				$dropdown = array(
 					// Edit data inpage.
-					'<a href="' . AM_BASE_INDEX . $url . '"><i class="uk-icon-share"></i>&nbsp;&nbsp;' . Text::get('btn_inpage_edit') . '</a>', 
+					'<a href="' . AM_BASE_INDEX . $url . '"><i class="uk-icon-share uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_inpage_edit') . '</a>', 
 					// Duplicate Page.
-					'<a href="#" data-am-submit="duplicate_page"><i class="uk-icon-clone"></i>&nbsp;&nbsp;' . Text::get('btn_duplicate_page') . '</a>' . 
+					'<a href="#" data-am-submit="duplicate_page"><i class="uk-icon-clone uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_duplicate_page') . '</a>' . 
 					'<form data-am-handler="duplicate_page" data-am-url="' . $url . '"></form>',
 					// Move Page.
-					'<a href="#am-move-page-modal" data-uk-modal><i class="uk-icon-arrows"></i>&nbsp;&nbsp;' . Text::get('btn_move_page') . '</a>',
+					'<a href="#am-move-page-modal" data-uk-modal><i class="uk-icon-arrows uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_move_page') . '</a>',
 					// Delete Page.
-					'<a href="#" data-am-submit="delete_page"><i class="uk-icon-remove"></i>&nbsp;&nbsp;' . Text::get('btn_delete_page') . '</a>' .
+					'<a href="#" data-am-submit="delete_page"><i class="uk-icon-remove uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_delete_page') . '</a>' .
 					'<form data-am-handler="delete_page" data-am-url="' . $url . '" data-am-confirm="' . Text::get('confirm_delete_page') . '">' .
 					'<input type="hidden" name="title" value="' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '" />' .
 					'</form>'
@@ -103,8 +98,7 @@ $this->element('header');
 			
 		?>
 	
-		<!-- Content -->
-		<ul id="am-page-content" class="uk-switcher uk-margin-large-top">
+		<ul id="am-page-content" class="uk-switcher">
 			<!-- Data -->
 		    	<li>
 				<form 
@@ -113,7 +107,7 @@ $this->element('header');
 				data-am-handler="page_data" 
 				data-am-url="<?php echo $url; ?>"
 				>
-					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
+					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>
 				</form>
 		    	</li>
 			<!-- Files -->
@@ -125,7 +119,7 @@ $this->element('header');
 				data-am-url="<?php echo $url; ?>" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
+					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>
 				</form>
 			</li>
 		</ul>

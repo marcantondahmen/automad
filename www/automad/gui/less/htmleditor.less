@@ -34,25 +34,25 @@
 
 @am-cm-transition-delay: 			0.1s;
 
-@htmleditor-navbar-background:                  @panel-box-background;
+@htmleditor-navbar-background:                  @form-background;
 
 @htmleditor-navbar-nav-height:                  @button-height;
-@htmleditor-navbar-nav-padding-horizontal:      15px;
+@htmleditor-navbar-nav-padding-horizontal:      12px;
 @htmleditor-navbar-nav-line-height:             @htmleditor-navbar-nav-height;
-@htmleditor-navbar-nav-color:                   #FFFFFF;
+@htmleditor-navbar-nav-color:                   @am-muted;
 
-@htmleditor-navbar-nav-hover-background:        @am-nav-bg-hover;
-@htmleditor-navbar-nav-hover-color:             @button-hover-color;
-@htmleditor-navbar-nav-onclick-background:      @button-background;
-@htmleditor-navbar-nav-onclick-color:           @button-color;
-@htmleditor-navbar-nav-active-background:       @button-background;
-@htmleditor-navbar-nav-active-color:            @button-color;
+@htmleditor-navbar-nav-hover-background:        @htmleditor-navbar-background;
+@htmleditor-navbar-nav-hover-color:             @am-text;
+@htmleditor-navbar-nav-onclick-background:      @htmleditor-navbar-background;
+@htmleditor-navbar-nav-onclick-color:           @am-text;
+@htmleditor-navbar-nav-active-background:       @htmleditor-navbar-background;
+@htmleditor-navbar-nav-active-color:            @am-text;
  
 @htmleditor-content-background:                 #FFFFFF;
-@htmleditor-content-padding:                    20px;
-@htmleditor-content-split-border:               @am-grey;
+@htmleditor-content-padding:                    @form-padding;
+@htmleditor-content-split-border:               @form-border;
 
-@htmleditor-fullscreen-z-index:                 990;
+@htmleditor-fullscreen-z-index:                 1020;
 @htmleditor-fullscreen-content-top:             @htmleditor-navbar-nav-height;
 @htmleditor-fullscreen-icon-resize:             "\f066";
 
@@ -64,8 +64,10 @@
 .hook-htmleditor-navbar() {
 
 	overflow: hidden;
-	
-	&-flip {
+	margin-bottom: @form-stacked-margin-bottom;
+	border-radius: @am-radius;
+
+	&-flip li[class*="-button-"] {
 		@media (max-width: @breakpoint-small-max) {
 			display: none;
 		}	
@@ -84,77 +86,86 @@
 	background-color: transparent;
 }
 
-.uk-htmleditor .CodeMirror {
-	
-	font-family: inherit;
-	color: @form-focus-color;
-	background-color: @form-focus-background;
-	padding: @htmleditor-content-padding;
-	box-sizing: border-box;
-		
-	& .CodeMirror-line,
-	& .CodeMirror-placeholder {
-		font-weight: @form-stacked-font-weight;
-	}
-
-	& .CodeMirror-placeholder {
-		color: @form-placeholder-color;
-	}
-
-	// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
-	&,
-	& * {
-		.transition(color 0.2s @am-cm-transition-delay, background-color 0.2s @am-cm-transition-delay, border-color 0.2s @am-cm-transition-delay, box-shadow 0.2s @am-cm-transition-delay;);
-	}
-
-}
-
 .uk-htmleditor-code {
-	
-	font-family: @base-code-font-family;
 	
 	& .CodeMirror {
 		
+		font-family: inherit;
+		padding: @htmleditor-content-padding;
+		padding-top: 6px;
+		padding-bottom: 6px;
 		color: @form-color;
 		background-color: @form-background;
+		border-radius: @am-radius;
+		border: @am-border-width solid @form-border;
 		
-		:not(.uk-htmleditor-fullscreen) > .uk-htmleditor-content &.CodeMirror-focused {
-			.focus;
+		&.CodeMirror-focused {
+			color: @form-focus-color;
+			background-color: @form-focus-background;
 		}
 
-		[data-mode='split'] & {
-			border-right: none;
+		& .CodeMirror-line,
+		& .CodeMirror-placeholder {
+			font-weight: @base-body-font-weight;
 		}
 
-	}
-	
-	[data-mode='split'] & { 
-		border-right-width: @am-border-thick-width;
-		border-right-color: @am-grey; 
+		& .CodeMirror-placeholder {
+			color: @form-placeholder-color;
+		}
+
+		// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
+		&,
+		& * {
+			.transition(color 0.2s @am-cm-transition-delay, background-color 0.2s @am-cm-transition-delay, border-color 0.2s @am-cm-transition-delay, box-shadow 0.2s @am-cm-transition-delay;);
+		}
+
 	}
 	
 }
 
 .uk-htmleditor-preview {
 	
-	color: @form-color;
-	background-color: @form-background;
-	
-	.uk-htmleditor-fullscreen & {
-		border-left: none;
-	}
+	padding-top: 6px;
+	padding-bottom: 6px;
+	color: @form-focus-color;
+	background-color: @form-focus-background;
+	border-radius: @am-radius;
+	border: @am-border-width solid @form-border;
 
 	& * {
-		color: @form-color;
+		color: inherit;
 	}
 	
 }
 
 .uk-htmleditor-fullscreen {
 	
+	min-height: 100vh;
+	
+	& .uk-htmleditor-navbar {
+		border-radius: 0;
+	}
+	
 	& .cm-s-default,
 	& .uk-htmleditor-preview {
-		padding: 2 * @htmleditor-content-padding;
+		min-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
+		max-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
+		padding: @utility-container-padding-horizontal;
+		color: @form-focus-color;
+		background-color: @form-focus-background;
+		border-radius: 0;
+		.transition(all 0s;);
+	}
+	
+	&[data-mode='split'] .uk-htmleditor-code {
+		
+		& .cm-s-default {
+			border-right: none;
+		}
+	}
+	
+	& .uk-htmleditor-preview {
+		border-left: none;
 	}
 	
 }
@@ -168,12 +179,12 @@
 }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
-	background-color: #FFFFFF; // The little square between H and V scrollbars.
+	background-color: inherit; // The little square between H and V scrollbars.
 }
 
 .cm-s-default {
 	
-	font-weight: 900;
+	font-weight: 400;
 	
 	& .cm-header {
 		color: inherit;
@@ -185,7 +196,6 @@
 	
 	& .cm-keyword {
 		color: inherit;
-		
 	}
 	
 	& .cm-atom {
@@ -204,10 +214,12 @@
 	& .cm-variable,
 	& .cm-punctuation,
 	& .cm-property,
-	& .cm-operator {}
+	& .cm-operator {
+		color: inherit;
+	}
 		
 	& .cm-variable-2 {
-		color: @am-primary;
+		color: inherit;
 	}
 	
 	& .cm-variable-3 {
@@ -215,13 +227,13 @@
 	}
 	
 	& .cm-comment {
-		font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+		font-family: @base-code-font-family;
 		font-size: 13px;
-		color: @am-primary;
+		color: inherit;
 	}
 	
 	& .cm-string {
-		color: @am-primary;
+		color: inherit;
 		font-style: italic;
 	}
 	
@@ -258,27 +270,23 @@
 	}
 	
 	& .cm-link {
-		color: @am-primary;
-		font-weight: bold;
+		color: inherit;
+		font-weight: 500;
 	}
 
 	& .cm-error {
-		color: @am-danger;
+		color: inherit;
 	}
 	
 }
 
 .cm-negative {
-	color: @am-danger;
-}
-
-.cm-positive {
-	color: @am-success;
+	color: inherit;
 }
 
 .cm-header, 
 .cm-strong {
-	font-weight: 900;
+	font-weight: 500;
 }
 
 .cm-em {
@@ -295,11 +303,7 @@
 
 
 .cm-invalidchar {
-	color: @am-danger;
-}
-
-.CodeMirror-composing { 
-	border-bottom: @am-border-width solid; 
+	color: inherit;
 }
 
 // Autoresize editor.

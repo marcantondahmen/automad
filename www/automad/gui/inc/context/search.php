@@ -55,14 +55,12 @@ $results = $this->Content->getSearchResults();
 
 
 ?>
-	
-		<div class="uk-position-relative uk-margin-large-top">
-			<ul class="uk-subnav uk-subnav-pill">
-				<li class="uk-disabled"><i class="uk-icon-search"></i></li>
-				<li><a href=""><?php Text::e('search_title'); ?></a></li>
-			</ul>
-		</div>
-		<h2 class="uk-margin-large-top">
+		
+		<ul class="uk-subnav uk-subnav-pill uk-margin-top">
+			<li class="uk-disabled"><i class="uk-icon-search"></i></li>
+			<li><a href=""><?php Text::e('search_title'); ?></a></li>
+		</ul>
+		<h2 class="uk-margin-top-remove">
 			<i class="uk-icon-angle-double-left"></i>
 			<?php echo Core\Parse::query('query'); ?>
 			<i class="uk-icon-angle-double-right"></i>&nbsp;

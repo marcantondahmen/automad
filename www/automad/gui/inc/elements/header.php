@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 ?>
 <!DOCTYPE html>
-<html lang="en" class="am-dashboard uk-height-1-1">
+<html lang="en" class="am-dashboard">
 <head>
 	  
 	<meta charset="utf-8">
@@ -63,7 +63,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 </head>
 
 
-<body class="uk-height-1-1">
+<body>
 	
 	<?php 
 	

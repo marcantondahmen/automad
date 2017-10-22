@@ -61,8 +61,8 @@ foreach (Accounts::get() as $user => $hash) {
 	
 ?>
 		
-	<div class="uk-panel uk-panel-box uk-margin-small-bottom uk-margin-small-top">
-		<span class="uk-hidden-small"><i class="uk-icon-user"></i>&nbsp;</span>
+	<div class="uk-panel uk-panel-box">
+		<i class="uk-icon-user"></i>&nbsp;
 		<?php echo $user; ?>
 		<div class="uk-float-right">
 			<?php if ($user != User::get()) { ?>
@@ -70,7 +70,7 @@ foreach (Accounts::get() as $user => $hash) {
 				<input type="checkbox" name="delete[]" value="<?php echo $user; ?>" />
 			</label>
 			<?php } else { ?>
-			<?php Text::e('sys_user_you'); ?>
+			<span class="uk-text-muted"><?php Text::e('sys_user_you'); ?></span>
 			<?php } ?>
 		</div>
 	</div>	

@@ -33,49 +33,55 @@
  */
 
 
+@am-switcher-padding-vertical: 	7px;
+
+
 .am-switcher {
 	
-	position: relative;
+	background-color: @am-bg;
+	padding: @am-switcher-padding-vertical 0;
+	// Cover overlapping content (like selected panels) below with shadow when switcher is sticky.
+	box-shadow: 20px 0 0 @am-bg, -20px 0 0 @am-bg;
 	
-	&:before {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		border-bottom: @am-border-width solid @am-border-color;
-		.full-width;
+	&.uk-active:after {
+		.hairline-bottom;
 	}
 	
-	&.uk-active:before {
-		height: 100px;
-		background-color: @am-grey;
-	}
-	
-	& .uk-button-group {
-	
-		&:after {
-			content: '';
-			position: relative;
-			display: block;
-			width: 100%;
-			border-top: @am-border-thick-width solid @am-nav-bg-active;
-		}
-	
-		& .uk-button {
-			
-			background-color: @am-nav-bg;
-			
-			&:hover,
-			&:focus {
-				background-color: @am-nav-bg-hover;	
-			}
-			
-			&.uk-active,
-			&:active {
-				background-color: @am-nav-bg-active;	
-			}
-			
+	&-buttons {
+		
+		border-radius: @am-radius;
+		background-color: @button-background;
+		
+		& > div {
+			display: inline-block;
 		}
 		
-	}	
+		& .uk-button {
+			margin: 0;
+			border-radius: 0;
+		}
+		
+		& > div:first-child > button:first-child {
+			border-top-left-radius: 8px;
+			border-bottom-left-radius: 8px;
+		}
+		
+	}
 	
+	& [data-uk-dropdown] {
+		
+		position: relative;
+		float: right;
+		
+		& .uk-button {
+			border-top-right-radius: @am-radius;
+			border-bottom-right-radius: @am-radius;
+		}	
+		
+	}
+	
+}
+
+.uk-switcher {	
+	margin-top: @utility-margin-large - @am-switcher-padding-vertical;
 }

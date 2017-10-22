@@ -103,7 +103,7 @@ class InPage {
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
 		$urlCache = $urlGui . '?context=system_settings#' . Core\Str::sanitize(Text::get('sys_cache'));
 		$urlLogout = $urlGui . '?context=logout';
-		$attr = 'class="uk-button uk-button-large" data-uk-tooltip';
+		$attr = 'class="uk-button uk-button-primary uk-button-large" data-uk-tooltip';
 		
 		$queryString = '';
 		
@@ -116,27 +116,26 @@ class InPage {
 				'<div class="am-inpage-menubar">' .
 					'<div class="uk-button-group">' .
 						'<a href="' . $urlGui . '" title="' . Text::get('dashboard_title') . '" ' . $attr . '>' .
-							'<i class="uk-icon-automad uk-hidden-small"></i>' .
-							'<i class="uk-icon-th-large uk-visible-small"></i>' .
+							'<i class="uk-icon-a"></i>' .
 						'</a>' .
 						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text"></i></a>' .
 						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open"></i></a>' .
 						'<a href="' . $urlCache . '" title="' . Text::get('sys_cache') . '" ' . $attr . '><i class="uk-icon-cog"></i></a>' .
 						'<a href="' . $urlLogout . '" title="' . Text::get('btn_log_out') . '" ' . $attr . '><i class="uk-icon-power-off"></i></a>' .
-						'<a href="#" class="am-drag-handle uk-button uk-button-large"><i class="uk-icon-arrows"></i></a>' .
+						'<a href="#" class="am-drag-handle uk-button uk-button-primary uk-button-large"><i class="uk-icon-arrows"></i></a>' .
 					'</div>' .
 				'</div>' .
 				// Modal.
 				'<div id="am-inpage-edit-modal" class="uk-modal">' .
 					'<div class="uk-modal-dialog uk-modal-dialog-blank">' .
 						'<div class="uk-container uk-container-center">' .
-							'<form class="uk-form uk-form-stacked uk-margin-large-top" data-am-inpage-handler="' . AM_BASE_INDEX . AM_PAGE_GUI . '?ajax=inpage_edit">' .
+							'<form class="uk-form uk-form-stacked uk-margin-top" data-am-inpage-handler="' . AM_BASE_INDEX . AM_PAGE_GUI . '?ajax=inpage_edit">' .
 								'<div class="uk-modal-header">' . 
 									Text::get('inpage_edit_title') . '&nbsp;' .
 									'<a href="#" class="uk-modal-close uk-close"></a>' .
 								'</div>' .
-								'<div class="uk-margin-bottom uk-text-muted">' . 
-									'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;<span id="am-inpage-edit-modal-title"></span>' .
+								'<div class="uk-margin-bottom">' . 
+									'<i class="uk-icon-file-text"></i>&nbsp;&nbsp;<span id="am-inpage-edit-modal-title"></span>' .
 								'</div>' .
 								'<input type="hidden" name="url" value="' . AM_REQUEST . '" />' .
 								'<input type="hidden" name="query" value="' . $queryString . '" />' .
