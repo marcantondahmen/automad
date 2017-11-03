@@ -53,27 +53,6 @@
 	.transition(visibility 0s linear 0s, opacity @duration linear, max-height 0s linear 0s;);
 }
 
-.hairline-bottom() {
-	
-	content: '';
-	position: absolute;
-	bottom: -1px;
-	left: -@utility-container-padding-horizontal;
-	right: -@utility-container-padding-horizontal;
-	border-bottom: @am-hairline;
-	
-	@media (max-width: @breakpoint-medium-max) {
-		min-width: 100vw;
-		left: -50vw;
-		margin-left: 50%;
-	}
-	
-	@media (min-width: @breakpoint-large) {
-		max-width: @utility-container-max-width;	
-	}
-	
-}
-
 .smooth-fonts() {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

@@ -45,11 +45,16 @@
 		opacity: 1 !important;	
 	}	
 	
+	&.uk-modal {
+		background-color: fade(@am-bg, 70%);
+	}
+	
 	&-modal-dialog.uk-modal-dialog-blank {
 		
 		width: @am-sidebar-width;
 		// Always keep 50px free space at right to close sidebar.
-		max-width: ~"calc(100vw - 50px)";
+		max-width: ~"calc(100vw - 60px)";
+		border-right: @am-hairline;
 		
 		@media (max-width: @breakpoint-medium-max) {
 			
@@ -58,7 +63,6 @@
 			-webkit-transform: translateX(-15%);
 		    	transform: translateX(-15%);
 			.transition(opacity 0.2s linear, transform 0.2s ease-out;);
-			.shadow; 
 			
 			.uk-open & {
 				-webkit-transform: translateX(0);

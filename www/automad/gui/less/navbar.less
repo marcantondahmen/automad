@@ -58,19 +58,8 @@
 	background-color: @navbar-background;
 	
 	html.am-scrolled & {
-		
-		@media (max-width: @breakpoint-medium-max) {
-			&:after {
-				.hairline-bottom;
-			}	
-		}
-		
-		@media (min-width: @breakpoint-large) {
-			&-search form:after {
-				.hairline-bottom;
-			}	
-		}
-		
+		height: @navbar-nav-height + 1px;
+		border-bottom: @am-hairline;
 	}
 	
 	&-nav {

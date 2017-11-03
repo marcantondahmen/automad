@@ -44,7 +44,28 @@
 	box-shadow: 20px 0 0 @am-bg, -20px 0 0 @am-bg;
 	
 	&.uk-active:after {
-		.hairline-bottom;
+		
+		content: '';
+		position: absolute;
+		bottom: -1px;
+		width: 100vw;
+		margin-left: -@utility-container-padding-horizontal;
+		border-bottom: @am-hairline;
+		
+		@media (min-width: @utility-container-max-width) {
+			margin-left: ~"calc(((100vw - @{utility-container-max-width}) / -2) - @{utility-container-padding-horizontal})";
+		}
+		
+		@media (min-width: @breakpoint-large) {
+			width: ~"calc(100vw - @{am-sidebar-width})";
+			margin-left: ~"calc(((100vw - @{utility-container-max-width}) / -2) + @{am-sidebar-width} - @{utility-container-padding-horizontal})";
+		}
+		
+		@media (min-width: @breakpoint-large) and (max-width: ((2 * @am-sidebar-width) + @utility-container-max-width)) {
+			width: ~"calc(100vw - @{am-sidebar-width})";
+			margin-left: -@utility-container-padding-horizontal;
+		}
+		
 	}
 	
 	&-buttons {
@@ -62,8 +83,8 @@
 		}
 		
 		& > div:first-child > button:first-child {
-			border-top-left-radius: 8px;
-			border-bottom-left-radius: 8px;
+			border-top-left-radius: @am-radius;
+			border-bottom-left-radius: @am-radius;
 		}
 		
 	}
