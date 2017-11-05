@@ -98,7 +98,7 @@ if (isset($_POST['item'])) {
 		$updateVersion = Update::getVersion();
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-small uk-text-truncate">' .
+			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-primary uk-button-small uk-text-truncate">' .
 					    '<span class="uk-hidden-small"><i class="uk-icon-refresh"></i>&nbsp;&nbsp;</span>' . 
 					    Text::get('sys_status_update_available') . '&nbsp;&nbsp;' .
 					    $updateVersion . 

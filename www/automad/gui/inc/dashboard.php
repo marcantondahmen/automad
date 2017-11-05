@@ -84,7 +84,7 @@ $this->element('header');
 					<?php echo date('j. M Y', $mTime); ?>
 					<span class="uk-hidden-small">, <?php echo date('G:i', $mTime); ?> h</span>
 					<div class="uk-margin-small-top">
-						<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-primary uk-button-small uk-text-truncate">
+						<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-success uk-button-small uk-text-truncate">
 							<span class="uk-hidden-small"><i class="uk-icon-share"></i>&nbsp;</span>
 							<?php Text::e('btn_inpage_edit'); ?>
 						</a>
