@@ -480,5 +480,24 @@ class Toolbox {
 		
 	}
 	
+	
+	/**
+	 *      Redirect page.
+	 *      
+	 *      @param array $options
+	 */
+	
+	public function redirect($options) {
+		
+		$options = array_merge(array(
+				'url' => false,
+				'code' => 302
+		), $options);
+		
+		header('Location: ' . $options['url'], true, $options['code']);
+		exit();
+		
+	}
+	
 		
 }
