@@ -494,7 +494,9 @@ class Toolbox {
 				'code' => 302
 		), $options);
 		
-		header('Location: ' . $options['url'], true, $options['code']);
+		$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($options['url'], $this->Automad->Context->get()));
+		
+		header('Location: ' . $url, true, $options['code']);
 		exit();
 		
 	}
