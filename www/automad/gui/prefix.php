@@ -63,23 +63,35 @@ class Prefix {
 	
 	
 	/**
-	 *      Replace the prefix of all UIkit classes and data attributes.
+	 *      Replace the prefixes of UIkit classes and data attributes in a string.
 	 *      
 	 *      @param string $str
 	 *      @return string The processed $str
 	 */
 	
-	public static function replace($str) {
+	public static function attributes($str) {
+		
+		// Also match escaped quotes to handle AJAX requests.
+		$regex = '/(class=[\\\\"\']+[\w\s\-]+|data\-[\w\-]+(=[\\\\"\']+(\{[^\}]+|[^\\\\"\']+))?)/is';
+		return preg_replace_callback($regex, function($matches) {	
+			return str_replace('uk-', self::$prefix, $matches[0]);
+		}, $str);
+		
+	}
+	
+	
+	/**
+	 *      Search for HTML tags in a string and replace the prefixes of UIkit classes and data attributes.
+	 *      
+	 *      @param string $str
+	 *      @return string The processed $str
+	 */
+	
+	public static function tags($str) {
 		
 		// Only replace prefixes within real HTML tags (not escaped) and therefore avoid possible collisions with user content.
 		return preg_replace_callback('/<\w+[^>]*>/is', function($matches) {	
-			
-			// Also match escaped quotes to handle AJAX requests.
-			$regex = '/(class=[\\\\"\']+[\w\s\-]+|data\-[\w\-]+(=[\\\\"\']+(\{[^\}]+|[^\\\\"\']+))?)/is';
-			return preg_replace_callback($regex, function($matches) {	
-				return str_replace('uk-', self::$prefix, $matches[0]);
-			}, $matches[0]);
-			
+			return self::attributes($matches[0]);
 		}, $str);
 		
 	}

@@ -155,7 +155,7 @@ class InPage {
 				'</div>' .
 			'</div>';
 		
-		return str_replace('</body>', Prefix::replace($html) . '</body>', $str);
+		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);
 		
 	}
 	
@@ -241,8 +241,8 @@ class InPage {
 		$str = str_replace(
 			array(AM_DEL_INPAGE_BUTTON_OPEN, AM_DEL_INPAGE_BUTTON_CLOSE), 
 			array(
-				Prefix::replace(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="am-inpage-edit-button" data-uk-modal data-am-inpage-content=\''), 
-				Prefix::replace('\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;')
+				Prefix::attributes(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="am-inpage-edit-button" data-uk-modal data-am-inpage-content=\''), 
+				Prefix::attributes('\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;')
 			), 
 			$str
 		);
