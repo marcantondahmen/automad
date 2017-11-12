@@ -74,8 +74,8 @@ class Prefix {
 		// Only replace prefixes within real HTML tags (not escaped) and therefore avoid possible collisions with user content.
 		return preg_replace_callback('/<\w+[^>]*>/is', function($matches) {	
 			
-			// Note that [^\w\s\-]+ is used instead of quotes to handle possibly escaped quotes in JSON strings.
-			$regex = '/(class=[^\w\s\-]+[\w\s\-]+|data\-uk\-[\w\-]+(=[^\w\s\-]+\{[^\}]+\})?)/is';
+			// Also match escaped quotes to handle AJAX requests.
+			$regex = '/(class=[\\\\"\']+[\w\s\-]+|data\-[\w\-]+(=[\\\\"\']+(\{[^\}]+|[^\\\\"\']+))?)/is';
 			return preg_replace_callback($regex, function($matches) {	
 				return str_replace('uk-', self::$prefix, $matches[0]);
 			}, $matches[0]);
