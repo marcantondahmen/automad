@@ -56,16 +56,13 @@ $this->element('header');
 ?>
 
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<a href="<?php echo AM_BASE_INDEX; ?>">
-				<div class="uk-panel uk-panel-box">
-					<i class="uk-icon-medium uk-icon-user"></i>&nbsp;
-					<h3>
-						<?php echo $this->sitename; ?>
-					</h3>
-				</div>
+			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-mini">
+				<i class="uk-icon-chevron-left"></i>&nbsp;
+				<?php Text::e('btn_home'); ?>
 			</a>
+			<h2><?php echo $this->sitename; ?></h2>
 			<?php if ($loggedOut) { ?>
-			<div class="uk-alert uk-alert-success uk-margin-small-top uk-margin-small-bottom">
+			<div class="uk-alert uk-alert-success uk-margin-top uk-margin-small-bottom">
 				<?php Text::e('success_log_out'); ?>
 			</div>
 			<div class="uk-text-right">
@@ -75,7 +72,7 @@ $this->element('header');
 				</a>
 			</div>
 			<?php } else { ?>
-			<div class="uk-alert uk-alert-danger uk-margin-small-top">
+			<div class="uk-alert uk-alert-danger uk-margin-top">
 				<?php Text::e('error_log_out'); ?>
 			</div>
 			<?php } ?>

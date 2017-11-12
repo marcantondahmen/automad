@@ -60,81 +60,42 @@ $this->element('header');
 
 ?>
 		
-		
-		<h1 class="uk-margin-large-top uk-margin-small-bottom">
+		<h1 class="uk-margin-large-top uk-margin-large-bottom">
 			<?php echo $this->sitename; ?>
 		</h1>
-		
-		<a 
-		href="#am-server-info-modal" 
-		class="uk-button uk-button-small uk-margin-small-bottom uk-visible-small uk-text-truncate" 
-		data-uk-modal
-		>
-			<i class="uk-icon-hdd-o"></i>&nbsp;
-			<?php echo getenv('SERVER_NAME'); ?>
-		</a>
-		
-		<div class="uk-panel uk-panel-box uk-margin-top">
-			<ul class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-3">
-				<li>
-					<i class="uk-icon-heartbeat uk-icon-medium uk-margin-small-bottom"></i>
-					<div class="uk-text-small">
-						<?php Text::e('dashboard_modified'); ?>
-					</div>
-					<?php echo date('j. M Y', $mTime); ?>
-					<span class="uk-hidden-small">, <?php echo date('G:i', $mTime); ?> h</span>
-					<div class="uk-margin-small-top">
-						<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-success uk-button-small uk-text-truncate">
-							<span class="uk-hidden-small"><i class="uk-icon-share"></i>&nbsp;</span>
-							<?php Text::e('btn_inpage_edit'); ?>
-						</a>
-					</div>
-				</li>
-				<li>
-					<i class="uk-icon-code-fork uk-icon-medium uk-margin-small-bottom"></i>
-					<div class="uk-text-small">
-						Automad Version
-					</div>
-					<?php echo AM_VERSION; ?>
-					<div class="uk-margin-small-top" data-am-status="update">
-						<button class="uk-button uk-button-small" disabled>
-							<i class="uk-icon-circle-o-notch uk-icon-spin"></i>&nbsp;
-							<?php Text::e('btn_getting_data'); ?>
-						</button>
-					</div>
-				</li>
-				<li class="uk-position-relative uk-hidden-small">
-					<i class="uk-icon-hdd-o uk-icon-medium uk-margin-small-bottom"></i>
-					<div class="uk-text-small">
-						<?php Text::e('dashboard_server'); ?>
-					</div>
-					<span class="uk-text-truncate"><?php echo getenv('SERVER_NAME'); ?></span>
-					<div class="uk-margin-small-top">
-						<a href="#am-server-info-modal" class="uk-button uk-button-primary uk-button-small" data-uk-modal>
-							<i class="uk-icon-pie-chart"></i>&nbsp;
-							<?php Text::e('dashboard_server_info'); ?>
-						</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-		
-		<ul class="uk-grid uk-grid-width-medium-1-2">
-			<li class="uk-margin-small-top" data-am-status="cache">
-				<button class="uk-button uk-width-1-1 uk-text-left" disabled>
-					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>&nbsp;
-					<?php Text::e('btn_getting_data'); ?>
-				</button>
+		<p>
+			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-primary uk-button-large">
+				<i class="uk-icon-share"></i>&nbsp;
+				<?php Text::e('btn_inpage_edit'); ?>
+			</a>
+		</p>
+		<p>
+			<a 
+			href="#am-server-info-modal" 
+			class="uk-button uk-button-small uk-text-truncate" 
+			data-uk-modal
+			>
+				<i class="uk-icon-hdd-o"></i>&nbsp;
+				<?php echo getenv('SERVER_NAME'); ?>
+			</a>
+		</p>
+		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-large-top">
+			<li class="uk-margin-small-bottom">
+				<?php echo $this->Html->statusPanel('cache', Core\Str::sanitize(Text::get('sys_cache')), 'uk-icon-rocket'); ?>
 			</li>
-			<li class="uk-margin-small-top uk-margin-bottom" data-am-status="debug">
-				<button class="uk-button uk-width-1-1 uk-text-left" disabled>
-					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>&nbsp;
-					<?php Text::e('btn_getting_data'); ?>
-				</button>
+			<li class="uk-margin-small-bottom">
+				<?php echo $this->Html->statusPanel('debug', Core\Str::sanitize(Text::get('sys_debug')), 'uk-icon-bug'); ?>
+			</li>
+			<li class="uk-margin-small-bottom">
+				<?php echo $this->Html->statusPanel('update', Core\Str::sanitize(Text::get('sys_update')), 'uk-icon-a'); ?>
 			</li>
 		</ul>
-		
-		<div class="uk-margin-top">
+		<div class="uk-panel uk-panel-box">
+			<i class="uk-icon-heartbeat uk-icon-justify uk-icon-small"></i>&nbsp;&nbsp;
+			<span class="uk-hidden-small"><?php Text::e('dashboard_modified'); ?></span>
+			<?php echo date('F jS Y, G:i', $mTime); ?>h
+		</div>
+		<div class="uk-margin-large-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
 			<?php echo $this->Html->pageGrid($latestPages); ?>
 		</div>

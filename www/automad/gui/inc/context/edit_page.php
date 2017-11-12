@@ -107,7 +107,7 @@ $this->element('header');
 				data-am-handler="page_data" 
 				data-am-url="<?php echo $url; ?>"
 				>
-					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>
+					<?php echo $this->Html->loading(); ?>
 				</form>
 		    	</li>
 			<!-- Files -->
@@ -119,7 +119,7 @@ $this->element('header');
 				data-am-url="<?php echo $url; ?>" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>
+					<?php echo $this->Html->loading(); ?>
 				</form>
 			</li>
 		</ul>

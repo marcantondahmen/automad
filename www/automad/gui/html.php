@@ -331,6 +331,19 @@ class Html {
 	
 	
 	/**
+	 *      Create loading icon.
+	 *      
+	 *      @return string The HTML of the loading icon
+	 */
+	
+	public function loading() {
+		
+		return '<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>';
+		
+	}
+	
+	
+	/**
 	 *	Create a grid based page list for the given array of pages.
 	 *
 	 *	@param array $pages
@@ -569,6 +582,49 @@ class Html {
 		
 	}
 	
+	
+	/**
+	 *      Create a panel for an AJAX status request with loading animation.
+	 *      
+	 *      @param string $status
+	 *      @param string $tab
+	 *      @param string $icon
+	 *      @return string The HTML for the status panel
+	 */
+	
+	public function statusPanel($status, $tab, $icon) {
+		
+		return	'<a href="?context=system_settings#' . $tab . '">' .
+				'<div class="uk-panel uk-panel-box" data-am-status="' . $status . '">' .
+					$this->status(
+						$icon, 
+						'', 
+						'uk-icon-circle-o-notch uk-icon-spin', 
+						Text::get('btn_getting_data')
+					) .
+				'</div>' . 
+			'</a>';
+				
+	}
+
+
+	/**
+	 *      Create the inner HTML of a status panel.
+	 *      
+	 *      @param string $iconTop
+	 *      @param string $textTop
+	 *      @param string $iconBottom
+	 *      @param string $textBottom
+	 *      @return string The inner HTML for a status panel
+	 */
+	
+	public function status($iconTop, $textTop, $iconBottom, $textBottom) {
+		
+		return 	'<p class="uk-hidden-small"><i class="' . $iconTop . ' uk-icon-small uk-icon-justify"></i>&nbsp;&nbsp;&nbsp;' . $textTop . '</p>' . 
+			'<i class="' . $iconBottom . ' uk-icon-small uk-icon-justify"></i>&nbsp;&nbsp;&nbsp;' . $textBottom;
+		
+	}
+
 
 	/**
 	 *	Create recursive site tree for editing a page. 

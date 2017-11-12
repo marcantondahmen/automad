@@ -300,7 +300,7 @@ $this->element('header');
 			<!-- Update -->
 			<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
-					<i class="uk-icon-circle-o-notch uk-icon-spin uk-text-muted"></i>
+					<?php echo $this->Html->loading(); ?>
 				</form>
 			</li>
 			<!-- Debug -->

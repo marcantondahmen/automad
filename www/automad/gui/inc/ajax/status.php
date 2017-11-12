@@ -56,58 +56,62 @@ if (isset($_POST['item'])) {
 	
 	if ($item == 'cache') {
 		
-		$tab = Core\Str::sanitize(Text::get('sys_cache'));
-		$button = 'uk-button uk-width-1-1 uk-text-left';
-		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
-					    '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					    Text::get('sys_status_cache_enabled') . 
-					    '</a>';
+			$output['status'] = $this->Html->status(
+						'uk-icon-rocket',
+						'', 
+						'uk-icon-toggle-on',
+						Text::get('sys_status_cache_enabled')
+					);
 		} else {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
-					    '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					    Text::get('sys_status_cache_disabled') . 
-					    '</a>';
+			$output['status'] = $this->Html->status(
+						'uk-icon-rocket',
+						'',
+						'uk-icon-toggle-off',
+						Text::get('sys_status_cache_disabled')
+					);
 		}
 		
 	}
 	
 	if ($item == 'debug') {
 		
-		$tab = Core\Str::sanitize(Text::get('sys_debug'));
-		$button = 'uk-button uk-width-1-1 uk-text-left';
-		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
-					    '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					    Text::get('sys_status_debug_enabled') . 
-					    '</a>';
+			$output['status'] = $this->Html->status(
+						'uk-icon-bug',
+						'',
+						'uk-icon-toggle-on',
+						Text::get('sys_status_debug_enabled')
+					);
 		} else {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="' . $button . '">' .
-					    '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					    Text::get('sys_status_debug_disabled') . 
-					    '</a>';
+			$output['status'] = $this->Html->status(
+						'uk-icon-bug',
+						'',
+						'uk-icon-toggle-off',
+						Text::get('sys_status_debug_disabled')
+					);
 		}
 		
 	}
 	
 	if ($item == 'update') {
 		
-		$tab = Core\Str::sanitize(Text::get('sys_update'));
 		$updateVersion = Update::getVersion();
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
-			$output['status'] = '<a href="?context=system_settings#' . $tab . '" class="uk-button uk-button-primary uk-button-small uk-text-truncate">' .
-					    '<span class="uk-hidden-small"><i class="uk-icon-refresh"></i>&nbsp;&nbsp;</span>' . 
-					    Text::get('sys_status_update_available') . '&nbsp;&nbsp;' .
-					    $updateVersion . 
-					    '</a>';
+			$output['status'] = $this->Html->status(
+						'uk-icon-a',
+						AM_VERSION,
+						'uk-icon-refresh',
+						'<span class="uk-badge">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
+					);		
 		} else {
-			$output['status'] = '<button class="uk-button uk-button-small uk-text-truncate" disabled>' .
-					    '<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
-					    Text::get('sys_status_update_not_available') . 
-					    '</button>';
+			$output['status'] = $this->Html->status(
+						'uk-icon-a',
+						AM_VERSION,
+						'uk-icon-check',
+						Text::get('sys_status_update_not_available')
+					);
 		}
 		
 	}

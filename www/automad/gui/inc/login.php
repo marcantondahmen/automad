@@ -54,15 +54,12 @@ $this->element('header');
 ?>
 		
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<a href="<?php echo AM_BASE_INDEX; ?>">
-				<div class="uk-panel uk-panel-box">
-					<i class="uk-icon-medium uk-icon-user"></i>&nbsp;
-					<h3>
-						<?php echo $this->sitename; ?>
-					</h3>
-				</div>
+			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-mini">
+				<i class="uk-icon-chevron-left"></i>&nbsp;
+				<?php Text::e('btn_home'); ?>
 			</a>
-			<form class="uk-form uk-margin-small-top" method="post">
+			<h2><?php echo $this->sitename; ?></h2>
+			<form class="uk-form uk-margin-top" method="post">
 				<input 
 				class="uk-form-controls uk-width-1-1" 
 				type="text" 

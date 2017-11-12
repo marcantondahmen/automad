@@ -46,13 +46,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<!-- Footer -->
 		<div class="am-footer uk-position-bottom">
 			<?php if (User::get()) { ?>
-			<a href="http://automad.org" target="_blank">
-				<i class="uk-icon-automad"></i>&nbsp;
-				<span class="uk-text-small"><?php echo AM_VERSION; ?></span>
+			<a href="http://automad.org" class="uk-text-small" target="_blank">
+				Automad <?php echo AM_VERSION; ?>
 			</a>	
 			<?php } else { ?>
 			<div class="uk-text-center">
-				<i class="uk-icon-automad"></i>
+				<i class="uk-icon-a uk-icon-small"></i>
 			</div>
 			<?php } ?>
 		</div>

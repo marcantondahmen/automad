@@ -144,15 +144,11 @@ dashboard_memory: Memory usage:
 
 -
 
-dashboard_modified: Lastest Activity
+dashboard_modified: Lastest Activity on
 
 -
 
 dashboard_recently_edited: Recently Edited Pages
-
--
-
-dashboard_server: Server
 
 -
 
@@ -609,11 +605,11 @@ sys_status_cache_disabled: Caching is disabled
 
 -
 
-sys_status_debug_enabled: Debug mode is enabled
+sys_status_debug_enabled: Debugging is enabled
 
 -
 
-sys_status_debug_disabled: Debug mode is disabled
+sys_status_debug_disabled: Debugging is disabled
 
 -
 

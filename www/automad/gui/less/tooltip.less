@@ -35,12 +35,12 @@
 
 @tooltip-z-index: 		1030;
 @tooltip-max-width:		200px;
-@tooltip-padding-vertical: 	3px;
-@tooltip-padding-horizontal: 	6px;
-@tooltip-background: 		#FFFFFF;
+@tooltip-padding-vertical: 	4px;
+@tooltip-padding-horizontal: 	8px;
+@tooltip-background: 		@am-text;
 @tooltip-triangle-size: 	5px;
 
-@tooltip-color: 		@am-text;
+@tooltip-color: 		#FFFFFF;
 @tooltip-font-size: 		11px;
 @tooltip-line-height: 		14px;
 
@@ -50,5 +50,4 @@
 .hook-tooltip() {
 	font-weight: 400;
 	border-radius: @am-radius;
-	filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)) drop-shadow(0 1px 10px rgba(0,0,0,0.15));
 }

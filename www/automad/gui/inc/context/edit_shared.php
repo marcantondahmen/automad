@@ -78,7 +78,7 @@ $this->element('header');
 				data-am-init 
 				data-am-handler="shared_data"
 				>
-					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>
+					<?php echo $this->Html->loading(); ?>
 				</form>
 			</li>
 			<!-- Files -->
@@ -89,7 +89,7 @@ $this->element('header');
 				data-am-handler="files" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<i class="uk-icon-circle-o-notch uk-icon-spin"></i>
+					<?php echo $this->Html->loading(); ?>
 				</form>
 			</li>
 		</ul>
