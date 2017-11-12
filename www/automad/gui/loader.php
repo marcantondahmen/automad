@@ -185,7 +185,7 @@ class Loader {
 		// Load page according to the current context.
 		require AM_BASE_DIR . AM_DIR_GUI_INC . '/' . $inc . '.php';	
 		
-		$this->output = Prefix::add(ob_get_contents());
+		$this->output = Prefix::replace(ob_get_contents());
 		ob_end_clean();
 		
 	}
