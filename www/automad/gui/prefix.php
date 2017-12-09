@@ -89,7 +89,7 @@ class Prefix {
 	
 	public static function tags($str) {
 		
-		// Only replace prefixes within real HTML tags (not escaped) and therefore avoid possible collisions with user content.
+		// Only replace prefixes within real HTML tags (not converted to HTML entities) and therefore avoid possible collisions with user content.
 		return preg_replace_callback('/<\w+[^>]*>/is', function($matches) {	
 			return self::attributes($matches[0]);
 		}, $str);

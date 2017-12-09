@@ -146,7 +146,7 @@ class Html {
 	
 	public function formField($key = '', $value = '', $removeButton = false) {
 		
-		// Escape $value.
+		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 		
 		// The field ID.
