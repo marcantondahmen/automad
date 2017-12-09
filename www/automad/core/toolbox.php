@@ -189,19 +189,6 @@ class Toolbox {
 
 	}
 	
-	
-	/**
-	 *	Load Jquery JS library.
-	 *
-	 *	@return string The script tag to include Jquery
-	 */
-	
-	public function jquery() {
-		
-		return '<script type="text/javascript" src="/automad/lib/jquery/jquery-2.0.3.min.js"></script>';
-		
-	}
-		
 		
 	/**
 	 *	Generate a list for the navigation below a given URL.
