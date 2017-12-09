@@ -138,9 +138,25 @@ class Str {
 	 *      @return number 1 or 0
 	 */
 	
-	public static function match($str, $regex = '') {
+	public static function match($str, $regex) {
 		
-		return preg_match('/' . $regex . '/', $str);
+		return preg_match($regex, $str);
+		
+	}
+	
+	
+	/**
+	 *      Search and replace by regex.
+	 *      
+	 *      @param string $str
+	 *      @param string $regex  
+	 *      @param string $replace 
+	 *      @return string The processed string          
+	 */
+	
+	public static function replace($str, $regex, $replace) {
+		
+		return preg_replace($regex, $replace, $str);
 		
 	}
 	

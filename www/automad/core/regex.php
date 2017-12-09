@@ -242,6 +242,8 @@ class Regex {
 	 *	- "| name (parameters)" 
 	 *	- "| +5"
 	 *
+	 *      Parameters can be strings wrapped in quotes, single words without quotes and numbers.
+	 *
 	 *	@param string $namedReferencePrefix
 	 *	@return string The regex to match functions and their parameters or math operations
 	 */
@@ -260,7 +262,9 @@ class Regex {
 			$num = '?:';
 		}
 		
-		// Parameter pattern. Quoted strings (double or single quotes are allowed) or boolean/number values.
+		// Parameter pattern. Quoted strings (double or single quotes are allowed) or single words / boolean / number values.
+		// Like: 
+		// | function ("Some Text with non-word chars") | function (word)
 		$regexParameter = '\s*(?:"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\w*)\s*';
 		
 		return	'\|(' . 
