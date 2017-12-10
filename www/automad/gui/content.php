@@ -403,22 +403,30 @@ class Content {
 	
 	public function getAutoCompleteJSON() {
 		
-		$data = array();
+		$titles = array();
+		$urls = array();
 		$tags = array();
+		$values = array();
 		
 		foreach ($this->Automad->getCollection() as $Page) {
-			$data[]['value'] = $Page->get(AM_KEY_TITLE);
-			$data[]['value'] = $Page->url;
+			$titles[] = $Page->get(AM_KEY_TITLE);
+			$urls[] = $Page->origUrl;
 			$tags = array_merge($tags, $Page->tags);
 		}
 		
+		$titles = array_unique($titles);
 		$tags = array_unique($tags);
 		
-		foreach ($tags as $tag) {
-			$data[]['value'] = $tag;
+		// Sort arrays separately to keep titles, urls and tags grouped.
+		sort($titles);
+		sort($tags);
+		sort($urls);
+		
+		foreach (array_merge($titles, $tags, $urls) as $value) {
+			$values[]['value'] = $value;
 		}
 		
-		return json_encode($data, JSON_UNESCAPED_SLASHES);
+		return json_encode($values, JSON_UNESCAPED_SLASHES);
 		
 	}
 	
