@@ -158,7 +158,7 @@ class Html {
 			'</label>';
 
 		if ($removeButton) {
-			$html .= '<button type="button" class="am-remove-parent uk-position-top-right uk-close"></button>';
+			$html .= '<button type="button" class="am-remove-parent uk-position-top-right uk-margin-top uk-close"></button>';
 		}
 
 		// Build attribute string.

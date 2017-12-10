@@ -131,12 +131,13 @@ $this->element('header');
 					<?php Text::e('btn_move_page'); ?>
 					<a href="#" class="uk-modal-close uk-close"></a>
 				</div>
-				<div class="uk-badge uk-badge-notification">
-					<i class="uk-icon-mouse-pointer"></i>&nbsp;
-					<?php Text::e('page_move_destination'); ?>
-				</div>
-				<div class="uk-margin-top" data-am-tree="#am-move-page-input">
-					<?php echo $this->Html->siteTree('', $this->collection, array(), true, false); ?>
+				<div class="uk-form-stacked">
+					<label class="uk-form-label uk-margin-top-remove">
+						<?php Text::e('page_move_destination'); ?>
+					</label>
+					<div data-am-tree="#am-move-page-input">
+						<?php echo $this->Html->siteTree('', $this->collection, array(), true, false); ?>
+					</div>
 				</div>
 				<form data-am-handler="move_page" data-am-url="<?php echo $url; ?>">
 					<input 

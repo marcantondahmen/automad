@@ -64,8 +64,8 @@
 .hook-htmleditor-navbar() {
 
 	overflow: hidden;
-	margin-bottom: @form-stacked-margin-bottom;
-	border-radius: @am-radius;
+	border-top-left-radius: @am-radius;
+	border-top-right-radius: @am-radius;
 
 	&-flip li[class*="-button-"] {
 		@media (max-width: @breakpoint-small-max) {
@@ -86,6 +86,17 @@
 	background-color: transparent;
 }
 
+// Autoresize editor and preview.
+:not(.uk-htmleditor-fullscreen) > div {
+	
+	& > div > .CodeMirror,
+	& > .uk-htmleditor-preview {
+	  	height: auto !important;
+		min-height: @form-height;
+	}
+
+}
+
 .uk-htmleditor-code {
 	
 	& .CodeMirror {
@@ -96,7 +107,8 @@
 		padding-bottom: 6px;
 		color: @form-color;
 		background-color: @form-background;
-		border-radius: @am-radius;
+		border-bottom-left-radius: @am-radius;
+		border-bottom-right-radius: @am-radius;
 		border: @am-border-width solid @form-border;
 		
 		&.CodeMirror-focused {
@@ -113,6 +125,15 @@
 			color: @form-placeholder-color;
 		}
 
+		& .CodeMirror-scroll {
+			box-sizing: border-box;
+			overflow-x: hidden !important;
+		}
+		
+		& .CodeMirror-sizer {
+			margin: 0 !important;
+		}
+
 		// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
 		&,
 		& * {
@@ -127,9 +148,11 @@
 	
 	padding-top: 6px;
 	padding-bottom: 6px;
+	overflow: hidden;
 	color: @form-focus-color;
 	background-color: @form-focus-background;
-	border-radius: @am-radius;
+	border-bottom-left-radius: @am-radius;
+	border-bottom-right-radius: @am-radius;
 	border: @am-border-width solid @form-border;
 
 	& * {
@@ -304,10 +327,4 @@
 
 .cm-invalidchar {
 	color: inherit;
-}
-
-// Autoresize editor.
-:not(.uk-htmleditor-fullscreen) > div > div > .CodeMirror {
-  	height: auto !important;
-	min-height: 80px;
 }

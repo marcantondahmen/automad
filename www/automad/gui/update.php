@@ -191,7 +191,6 @@ class Update {
 	
 	/**
 	 *	Download version file and extract version number.    
-	 *	The version number must match the pattern "\d+\.\d+\.\d+".
 	 *
 	 *	@return string Version number or false on error.
 	 */
