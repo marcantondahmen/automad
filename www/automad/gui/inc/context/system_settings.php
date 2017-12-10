@@ -134,7 +134,6 @@ $this->element('header');
 					</div>	
 				</form>
 				<div id="am-cache-actions" class="am-toggle-container uk-margin-large-top">
-					
 					<!-- Clear Cache -->	
 					<?php Text::e('sys_cache_clear_info'); ?>
 					<form data-am-handler="clear_cache">
@@ -144,7 +143,6 @@ $this->element('header');
 						</button>
 					</form>	
 					<?php if ($tmp = FileSystem::getTmpDir()) { ?>
-					
 					<!-- Purge Cache -->
 					<?php Text::e('sys_cache_purge_info'); ?>
 					<form data-am-handler="purge_cache">

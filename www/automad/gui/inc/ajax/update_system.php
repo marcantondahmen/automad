@@ -76,21 +76,19 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 					Text::e('sys_update_available');
 		
 					?>
-					<div class="uk-margin-large-top">
-						<input type="hidden" name="update" value="run" />
-						<button 
-						type="submit" 
-						class="uk-button uk-button-large uk-button-primary" 
-						data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
-						>
-							<i class="am-update-progress uk-icon-refresh uk-icon-spin uk-hidden"></i>
-							<i class="am-update-progress uk-icon-refresh"></i>
-							&nbsp;<?php Text::e('sys_update_to'); ?>&nbsp;
-							<span class="uk-badge"><?php echo $version; ?></span>
-						</button>
-						<div class="am-update-progress uk-text-muted uk-margin-top uk-hidden">
-							<?php Text::e('sys_update_progress'); ?>
-						</div>
+					<input type="hidden" name="update" value="run" />
+					<button 
+					type="submit" 
+					class="uk-button uk-button-large uk-button-primary" 
+					data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
+					>
+						<i class="am-update-progress uk-icon-refresh uk-icon-spin uk-hidden"></i>
+						<i class="am-update-progress uk-icon-refresh"></i>
+						&nbsp;<?php Text::e('sys_update_to'); ?>&nbsp;
+						<span class="uk-badge"><?php echo $version; ?></span>
+					</button>
+					<div class="am-update-progress uk-text-muted uk-margin-top uk-hidden">
+						<?php Text::e('sys_update_progress'); ?>
 					</div>
 					<?php
 			
