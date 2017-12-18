@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 			</a>	
 			<?php } else { ?>
 			<div class="uk-text-center">
-				<i class="uk-icon-a uk-icon-small"></i>
+				<i class="uk-icon-automad uk-icon-small"></i>
 			</div>
 			<?php } ?>
 		</div>

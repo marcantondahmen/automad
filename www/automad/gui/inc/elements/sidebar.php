@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"
 						class="am-sidebar-logo"
 						>
-							<i class="uk-icon-a"></i>
+							<i class="uk-icon-automad-inverted"></i>
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">

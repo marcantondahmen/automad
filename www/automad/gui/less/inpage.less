@@ -57,24 +57,23 @@
 			
 			border-radius: @am-radius;
 			overflow: hidden;
-			background-color: @button-primary-background;
 			.shadow;	
 			
 			& > .uk-button {
-				min-width: @button-large-height;
-				max-width: @button-large-height;
+				min-width: @button-large-height + 4;
+				max-width: @button-large-height + 4;
 				margin-left: 0;
-				padding: 0;
+				padding: 2px;
 				text-align: center;
 				border-radius: 0;
 			}
 			
 		}
 		
-		& .uk-icon-a {
+		& .uk-icon-automad {
 			position: relative;
-			top: 2px;
-			left: 2px;
+			top: 4px;
+			left: 1px;
 			max-height: 16px;
 			vertical-align: baseline;
 			font-size: 20px;
@@ -84,7 +83,7 @@
 	}
 	
 	& > &-edit-button {
-		&:extend(.uk-button all, .uk-button-small all, .uk-button-primary all);
+		&:extend(.uk-button all, .uk-button-success all);
 		border: none !important;
 		margin-bottom: 2px;
 		vertical-align: text-bottom;

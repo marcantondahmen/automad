@@ -53,6 +53,25 @@
 	.transition(visibility 0s linear 0s, opacity @duration linear, max-height 0s linear 0s;);
 }
 
+.logo-color() {
+	
+	&,
+	&:hover,
+	&:active,
+	&:focus {
+		
+		& i {
+			width: 1em;
+			color: #FFFFFF;
+			background-color: @am-text;
+			border-radius: 50%;
+			.transition(color 0.2s, background-color 0.2s;);
+		}
+		
+	}
+		
+}
+
 .smooth-fonts() {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

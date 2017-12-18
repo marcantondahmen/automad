@@ -116,7 +116,7 @@ class InPage {
 				'<div class="am-inpage-menubar">' .
 					'<div class="uk-button-group">' .
 						'<a href="' . $urlGui . '" title="' . Text::get('dashboard_title') . '" ' . $attr . '>' .
-							'<i class="uk-icon-a"></i>' .
+							'<i class="uk-icon-automad"></i>' .
 						'</a>' .
 						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text"></i></a>' .
 						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open"></i></a>' .

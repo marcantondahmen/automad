@@ -90,17 +90,12 @@
 		& a {
 			
 			display: inline-block;
-			margin: 0;
-			padding: 0 @navbar-nav-padding-horizontal 0 @utility-container-padding-horizontal;	
-			color: @navbar-nav-color;
+			margin: -2px -1px;
+			padding: 6px @navbar-nav-padding-horizontal 0 @utility-container-padding-horizontal;	
 			position: relative;
-			font-size: 37px;
-			line-height: 37px;
-			
-			&:hover,
-			&:active {
-				color: @navbar-nav-hover-color;
-			}
+			font-size: 40px;
+			line-height: 40px;
+			.logo-color();
 			
 			@media (min-width: @breakpoint-large) {
 				display: none;
