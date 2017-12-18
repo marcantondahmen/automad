@@ -87,7 +87,7 @@ $this->element('header');
 				<?php echo $this->Html->statusPanel('debug', Core\Str::sanitize(Text::get('sys_debug')), 'uk-icon-bug'); ?>
 			</li>
 			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->statusPanel('update', Core\Str::sanitize(Text::get('sys_update')), 'uk-icon-a'); ?>
+				<?php echo $this->Html->statusPanel('update', Core\Str::sanitize(Text::get('sys_update')), 'uk-icon-code-fork'); ?>
 			</li>
 		</ul>
 		<div class="uk-panel uk-panel-box">

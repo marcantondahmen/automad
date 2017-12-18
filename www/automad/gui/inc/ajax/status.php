@@ -100,14 +100,14 @@ if (isset($_POST['item'])) {
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
 			$output['status'] = $this->Html->status(
-						'uk-icon-a',
+						'uk-icon-code-fork',
 						AM_VERSION,
 						'uk-icon-refresh',
 						'<span class="uk-badge">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
 					);		
 		} else {
 			$output['status'] = $this->Html->status(
-						'uk-icon-a',
+						'uk-icon-code-fork',
 						AM_VERSION,
 						'uk-icon-check',
 						Text::get('sys_status_update_not_available')
