@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -60,15 +60,9 @@ $this->element('header');
 
 ?>
 		
-		<h1 class="uk-margin-large-top uk-margin-large-bottom">
+		<h1 class="uk-margin-large-top uk-margin-bottom">
 			<?php echo $this->sitename; ?>
 		</h1>
-		<p>
-			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-primary uk-button-large">
-				<i class="uk-icon-share"></i>&nbsp;
-				<?php Text::e('btn_inpage_edit'); ?>
-			</a>
-		</p>
 		<p>
 			<a 
 			href="#am-server-info-modal" 
@@ -77,6 +71,12 @@ $this->element('header');
 			>
 				<i class="uk-icon-hdd-o"></i>&nbsp;
 				<?php echo getenv('SERVER_NAME'); ?>
+			</a>
+		</p>
+		<p>
+			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-success uk-button-large">
+				<i class="uk-icon-share"></i>&nbsp;
+				<?php Text::e('btn_inpage_edit'); ?>
 			</a>
 		</p>
 		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-large-top">
@@ -104,7 +104,7 @@ $this->element('header');
 		<div id="am-server-info-modal" class="uk-modal">
 			<div class="uk-modal-dialog">
 				<div class="uk-modal-header">
-					<?php Text::e('dashboard_server_info'); ?>
+					<?php echo getenv('SERVER_NAME'); ?>
 					<a class="uk-modal-close uk-close"></a>
 				</div>
 				<div class="uk-panel uk-panel-box uk-margin-small-bottom">
@@ -121,7 +121,7 @@ $this->element('header');
 						<?php echo phpversion(); ?> / <?php echo php_sapi_name(); ?>
 					</p>
 				</div>
-				<span class="uk-badge uk-badge-notification">
+				<span class="uk-badge uk-badge-success uk-badge-notification">
 					<?php echo Text::get('dashboard_memory') . ' ' . (memory_get_peak_usage(true) / 1048576) . 'M  (' . ini_get('memory_limit') . ')'; ?>
 				</span>
 				<div class="uk-modal-footer uk-text-right">

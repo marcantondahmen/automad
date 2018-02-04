@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -44,16 +44,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 ?>
 		
 		<!-- Footer -->
-		<div class="am-footer uk-position-bottom">
-			<?php if (User::get()) { ?>
+		<div 
+		class="am-footer uk-position-bottom<?php if (!User::get()) { ?> uk-text-center<?php } ?>"
+		>
 			<a href="http://automad.org" class="uk-text-small" target="_blank">
 				Automad <?php echo AM_VERSION; ?>
 			</a>	
-			<?php } else { ?>
-			<div class="uk-text-center">
-				<i class="uk-icon-automad uk-icon-small"></i>
-			</div>
-			<?php } ?>
 		</div>
 		
 	</div> <!-- .uk-container -->	
@@ -96,7 +92,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				<button type="button" class="uk-modal-close uk-button">
 					<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 				</button>
-				<button type="button" class="uk-button uk-button-primary" data-am-submit="add_page">
+				<button type="button" class="uk-button uk-button-success" data-am-submit="add_page">
 					<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add_page'); ?>
 				</button>
 			</div>

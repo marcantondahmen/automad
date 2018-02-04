@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -51,25 +51,6 @@
 	max-height: 5000px;
 	overflow: visible;
 	.transition(visibility 0s linear 0s, opacity @duration linear, max-height 0s linear 0s;);
-}
-
-.logo-color() {
-	
-	&,
-	&:hover,
-	&:active,
-	&:focus {
-		
-		& i {
-			width: 1em;
-			color: #FFFFFF;
-			background-color: @am-text;
-			border-radius: 50%;
-			.transition(color 0.2s, background-color 0.2s;);
-		}
-		
-	}
-		
 }
 
 .smooth-fonts() {

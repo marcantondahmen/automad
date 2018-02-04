@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 // To prevent accidental updates within the development repository, exit updater in case the base directoy contains "/automad-dev".
 if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 	
-	$output['html'] = 	'<div class="uk-alert">' .
+	$output['html'] = 	'<div class="uk-alert uk-alert-danger">' .
 				'Can\'t run updates within the development repository!' .
 				'</div>';
 	

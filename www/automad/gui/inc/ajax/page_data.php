@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -117,7 +117,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				/>
 				<a 
 				href="<?php echo AM_BASE_INDEX . $url; ?>" 
-				class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
+				class="uk-button uk-button-success uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
 				title="<?php Text::e('btn_inpage_edit'); ?>" 
 				data-uk-tooltip="pos:'bottom-left'"
 				>
@@ -153,7 +153,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								<button class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 								</button>
-								<button class="uk-button uk-button-primary" type="button" data-am-submit="page_data">
+								<button class="uk-button uk-button-success" type="button" data-am-submit="page_data">
 									<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_apply_reload'); ?>
 								</button>
 							</div>
@@ -184,7 +184,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						<?php 
 						
 						if (file_exists($template)) {
-							$templateButtonClass = 'uk-button-primary';
+							$templateButtonClass = 'uk-button-success';
 						} else {
 							$templateButtonClass = 'uk-button-danger';
 						}

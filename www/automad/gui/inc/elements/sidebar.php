@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -52,9 +52,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<div class="am-navbar-push uk-visible-large uk-margin-bottom">
 						<a 
 						href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"
-						class="am-sidebar-logo"
+						class="am-logo am-sidebar-logo"
 						>
-							<i class="uk-icon-automad-inverted"></i>
+							<i class="uk-icon-automad"></i>
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
@@ -93,7 +93,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<?php 
 					
 						$header = Text::get('sidebar_header_pages') . 
-							  '&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
+							  '&nbsp;&nbsp;&nbsp;<span class="uk-badge uk-badge-success">' . 
 							  count($this->collection) . 
 							  '</span>';
 						echo 	$this->Html->siteTree(

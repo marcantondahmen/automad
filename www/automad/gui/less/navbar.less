@@ -1,46 +1,46 @@
 /*
- *			  ....
- *			.:   '':.
- *			::::     ':..
- *			::.	 ''..
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
  *	     .:'.. ..':.:::'    . :.   '':.
  *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.	..':.. .''':::::  .
+ *	    ::::.        ..':.. .''':::::  .
  *	    :::::::..    '..::::  :. ::::  :
  *	    ::'':::::::.    ':::.'':.::::  :
  *	    :..   ''::::::....':     ''::  :
  *	    :::::.    ':::::   :     .. '' .
  *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''	:..:
- *	 ::::::. '::::  ::::::::  ..::	.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
  *	 ::::::::.::::  ::::::::  :'':.::   .''
  *	 ::: '::::::::.' '':::::  :.' '':  :
  *	 :::   :::::::::..' ::::  ::...'   .
  *	 :::  .::::::::::   ::::  ::::  .:'
  *	  '::'  '':::::::   ::::  : ::  :
- *		    '::::   ::::  :''  .:
- *		     ::::   ::::    ..''
- *		     :::: ..:::: .:''
- *		       ''''  '''''
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
  *	
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@am-navbar-padding-top: 	10px;
+@am-navbar-padding-top: 		10px;
 
-@navbar-color:			@am-text;
-@navbar-background: 		@am-bg;
-@navbar-nav-color:		@navbar-color;
-@navbar-nav-hover-color:	@am-muted;
+@navbar-color:					@am-text;
+@navbar-background: 			@am-bg;
+@navbar-nav-color:				@navbar-color;
+@navbar-nav-hover-color:		@am-muted;
 
-@navbar-nav-height:		60px;
+@navbar-nav-height:				60px;
 @navbar-nav-padding-horizontal: 25px;
 
 
@@ -90,12 +90,9 @@
 		& a {
 			
 			display: inline-block;
-			margin: -2px -1px;
-			padding: 6px @navbar-nav-padding-horizontal 0 @utility-container-padding-horizontal;	
+			margin: 0;
+			padding: 0 @navbar-nav-padding-horizontal 4px @utility-container-padding-horizontal;	
 			position: relative;
-			font-size: 40px;
-			line-height: 40px;
-			.logo-color();
 			
 			@media (min-width: @breakpoint-large) {
 				display: none;
@@ -114,6 +111,13 @@
 		
 		& div {
 			text-align: left;
+		}
+		
+		& .uk-button {
+			max-height: @button-height;
+			line-height: @button-font-size;
+			padding-top: (@button-height - @button-font-size) / 2;
+			padding-bottom: (@button-height - @button-font-size) / 2;
 		}
 		
 	}

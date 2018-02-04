@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -163,14 +163,18 @@
 		border-radius: 0;
 	}
 	
-	& .cm-s-default,
+    & .cm-s-default {
+        padding: 0;
+        border-radius: 0;
+    }
+    
+	& .uk-htmleditor-code .CodeMirror-scroll,
 	& .uk-htmleditor-preview {
 		min-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
 		max-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
 		padding: @utility-container-padding-horizontal;
 		color: @form-focus-color;
 		background-color: @form-focus-background;
-		border-radius: 0;
 		.transition(all 0s;);
 	}
 	

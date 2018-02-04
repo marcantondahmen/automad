@@ -26,22 +26,22 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
-@notify-message-padding:		@alert-padding;
+@notify-message-padding:			@alert-padding;
 
-@notify-message-font-size: 		14px;
+@notify-message-font-size: 			14px;
 @notify-message-line-height:  		@base-body-line-height;
 
-@notify-message-success-background:	#FFFFFF;
-@notify-message-success-color:		@am-text;
+@notify-message-success-background:	@am-success;
+@notify-message-success-color:		#FFFFFF;
 
-@notify-message-danger-background:	#FFFFFF;
-@notify-message-danger-color:		@am-text;
+@notify-message-danger-background:	@am-danger;
+@notify-message-danger-color:		#FFFFFF;
 
 
 .hook-notify-message() {
@@ -54,7 +54,7 @@
 	&.uk-notify-message-danger {
 		
 		position: relative;
-		padding-left: 50px;
+		padding-left: 40px;
 		
 		&:before {	
 			position: absolute;
@@ -62,15 +62,14 @@
 			top: 0;
 			bottom: 0;
 			padding: @notify-message-padding;
-			color: #FFFFFF;
 			font-family: FontAwesome;
 			display: block;
 			font-weight: normal;
 			font-style: normal;
 			font-size: 18px;
 			line-height: inherit;
-			vertical-align: baseline;
-			background-color: @am-text;
+			color: inherit;
+			background-color: inherit;
 			.smooth-fonts;
 		}
 		

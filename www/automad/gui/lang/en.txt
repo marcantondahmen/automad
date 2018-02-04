@@ -152,10 +152,6 @@ dashboard_recently_edited: Recently Edited Pages
 
 -
 
-dashboard_server_info: Server info
-
--
-
 dashboard_title: Dashboard
 
 -

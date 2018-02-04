@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,53 +35,53 @@
 
 @am-icon-button-margin-left: 		10px;
 
-@button-color:				@am-text;
-@button-background:			#FFFFFF;
-@button-hover-color:			#FFFFFF;
-@button-hover-background:		@am-text;
-@button-active-color:			#FFFFFF;
-@button-active-background:		@am-text;
+@button-color:						@am-text;
+@button-background:					#FFFFFF;
+@button-hover-color:				#FFFFFF;
+@button-hover-background:			@am-text;
+@button-active-color:				#FFFFFF;
+@button-active-background:			@am-text;
 
-@button-primary-color:			#FFFFFF;
-@button-primary-background:		@am-text;
-@button-primary-hover-color:		@am-text;
+@button-primary-color:				#FFFFFF;
+@button-primary-background:			@am-primary;
+@button-primary-hover-color:		@am-primary;
 @button-primary-hover-background:	#FFFFFF;
-@button-primary-active-color:		@am-text;
+@button-primary-active-color:		@am-primary;
 @button-primary-active-background:	#FFFFFF;
 
-@button-success-color:			#FFFFFF;
-@button-success-background:		@am-success;
+@button-success-color:				#FFFFFF;
+@button-success-background:			@am-success;
 @button-success-hover-color: 		@am-success;
 @button-success-hover-background: 	#FFFFFF;
 @button-success-active-color: 		@am-success;
 @button-success-active-background:	#FFFFFF;
 
-@button-danger-color:			#FFFFFF;
-@button-danger-background:		@am-danger;
+@button-danger-color:				#FFFFFF;
+@button-danger-background:			@am-danger;
 @button-danger-hover-color: 		@am-danger;
 @button-danger-hover-background:	#FFFFFF;
 @button-danger-active-color:		@am-danger;
-@button-danger-active-background:       #FFFFFF;
+@button-danger-active-background:	#FFFFFF;
 
-@button-disabled-color:			#FFFFFF;
+@button-disabled-color:				#FFFFFF;
 @button-disabled-background:		darken(@am-bg, 10%);
 
-@button-font-size:			14px;
-@button-mini-font-size: 		11px;
-@button-small-font-size: 		12px;
-@button-large-font-size: 		16px;
+@button-font-size:					14px;
+@button-mini-font-size: 			11px;
+@button-small-font-size: 			12px;
+@button-large-font-size: 			16px;
 
-@button-height:				30px;
-@button-mini-height:			20px;
-@button-small-height:			24px;
-@button-large-height:			36px;
+@button-height:						30px;
+@button-mini-height:				20px;
+@button-small-height:				24px;
+@button-large-height:				36px;
 
-@button-line-height: 			@button-height;
-@button-mini-line-height: 		@button-mini-height;
-@button-small-line-height: 		@button-small-height;
-@button-large-line-height: 		@button-large-height;
+@button-line-height: 				@button-height;
+@button-mini-line-height: 			@button-mini-height;
+@button-small-line-height: 			@button-small-height;
+@button-large-line-height: 			@button-large-height;
 
-@button-padding-horizontal:		10px;
+@button-padding-horizontal:			10px;
 @button-mini-padding-horizontal:	6px;
 @button-small-padding-horizontal:	8px;
 @button-large-padding-horizontal:	12px;
@@ -137,6 +137,21 @@
 			background-color: @am-bg;
 		}
 		
+	}
+	
+}
+
+.hook-button-success() {
+	
+	&:not(:hover):not(:active) .uk-badge {
+		color: @button-success-background;
+		background-color: @button-success-color;
+	}
+
+	&:hover .uk-badge,
+	&:active .uk-badge {
+		color: @button-success-color;
+		background-color: @button-success-background;
 	}
 	
 }

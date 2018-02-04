@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -52,23 +52,20 @@
 	// Checkboxes.
 	&.am-toggle-checkbox {
 		
-		height: 20px;
+		height: 18px;
 		vertical-align: baseline;
+		color: @am-muted;
 		
 		&:before {
 			content: '\f1db'; // .uk-icon-circle-thin
 			position: relative;
 			top: 1px;
-			font-size: 20px;
+			font-size: 18px;
 		}
 		
 		&.uk-active:before {
 			content: '\f058'; // .uk-icon-check-circle
-			
-		}
-		
-		.am-panel-bottom & {		
-			height: 20px;
+			color: @am-success;
 		}
 		
 	}

@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -152,7 +152,7 @@ $this->element('header');
 						<i class="uk-icon-close"></i>&nbsp;
 						<?php Text::e('btn_close'); ?>
 					</button>
-					<button type="button" class="uk-button uk-button-primary" data-am-submit="move_page">
+					<button type="button" class="uk-button uk-button-success" data-am-submit="move_page">
 						<i class="uk-icon-arrows"></i>&nbsp;
 						<?php Text::e('btn_move_page'); ?>
 					</button>
@@ -164,7 +164,7 @@ $this->element('header');
 		
 		<div class="uk-alert uk-alert-danger uk-margin-large-top">
 			<?php Text::e('error_page_not_found'); ?><br />
-			<strong><?php echo Core\Parse::query('url'); ?></strong>
+			"<?php echo Core\Parse::query('url'); ?>"
 		</div>
 			
 		<?php } ?>

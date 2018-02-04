@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -80,7 +80,7 @@ class Accounts {
 					// Write array with all accounts back to file.
 					if (Accounts::write($accounts)) {
 				
-						$output['success'] = Text::get('success_added') . ' <strong>' . $_POST['username'] . '</strong>';
+						$output['success'] = Text::get('success_added') . ' "' . $_POST['username'] . '"';
 				
 					} else {
 	
@@ -90,7 +90,7 @@ class Accounts {
 			
 				} else {
 		
-					$output['error'] = '<strong>"' . $_POST['username'] . '"</strong> ' . Text::get('error_existing');	
+					$output['error'] = '"' . $_POST['username'] . '" ' . Text::get('error_existing');	
 			
 				}
 		
@@ -146,7 +146,7 @@ class Accounts {
 
 				// Write array with all accounts back to file.
 				if (Accounts::write($accounts)) {
-					$output['success'] = Text::get('success_remove') . ' <strong>' . implode(', ', $deleted) . '</strong>';
+					$output['success'] = Text::get('success_remove') . ' "' . implode('", "', $deleted) . '"';
 				}
 		
 			} else {

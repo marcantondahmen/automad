@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -62,7 +62,7 @@
 		// Dropzone.
 		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
 		$input:		$('<input type="file" multiple />'),
-		$browse:	$('<button></button>', { 'class': 'uk-button uk-width-1-1 uk-margin-small-top' })
+		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-success uk-button-large uk-width-1-1 uk-margin-small-top' })
 				.click(function() {
 					// Make a button click trigger the file input for browsing.
 					Automad.upload.$input.click();

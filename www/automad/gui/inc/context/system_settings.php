@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -137,7 +137,7 @@ $this->element('header');
 					<!-- Clear Cache -->	
 					<?php Text::e('sys_cache_clear_info'); ?>
 					<form data-am-handler="clear_cache">
-						<button type="submit" class="uk-button uk-margin-bottom">
+						<button type="submit" class="uk-button uk-button-success uk-button-large uk-margin-bottom">
 							<i class="uk-icon-refresh"></i>&nbsp;
 							<?php Text::e('sys_cache_clear'); ?>
 						</button>
@@ -146,9 +146,10 @@ $this->element('header');
 					<!-- Purge Cache -->
 					<?php Text::e('sys_cache_purge_info'); ?>
 					<form data-am-handler="purge_cache">
-						<button type="submit" class="uk-button uk-button-danger uk-button-large">
-							<span class="uk-badge"><?php echo $tmp; ?></span>
-							&nbsp;<?php Text::e('sys_cache_purge'); ?>
+						<button type="submit" class="uk-button uk-button-success uk-button-large">
+							<?php Text::e('sys_cache_purge'); ?>&nbsp;
+							<i class="uk-icon-angle-right"></i>
+							&nbsp;<span class="uk-badge"><?php echo $tmp; ?></span>
 						</button>
 					</form>
 					<?php } ?>
@@ -160,7 +161,7 @@ $this->element('header');
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
-				class="uk-button uk-button-large uk-button-primary" 
+				class="uk-button uk-button-large uk-button-success" 
 				data-uk-modal 
 				data-am-status="users"
 				></a>
@@ -232,7 +233,7 @@ $this->element('header');
 								<button type="button" class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 								</button>
-								<button id="am-add-user-submit" type="submit" class="uk-button uk-button-primary">
+								<button id="am-add-user-submit" type="submit" class="uk-button uk-button-success">
 									<i class="uk-icon-user-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add'); ?>
 								</button>
 							</div>
@@ -287,7 +288,7 @@ $this->element('header');
 								<button type="button" class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 								</button>
-								<button id="am-change-password-submit" type="submit" class="uk-button uk-button-primary">
+								<button id="am-change-password-submit" type="submit" class="uk-button uk-button-success">
 									<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_save'); ?>
 								</button>
 							</div>

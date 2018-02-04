@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -60,8 +60,11 @@ if (User::get()) {
 		<ul class="am-navbar-nav">
 			<!-- Logo -->
 			<li class="am-navbar-logo">
-				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>">
-					<i class="uk-icon-automad-inverted"></i>
+				<a 
+				href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"
+				class="am-logo"
+				>
+					<i class="uk-icon-automad"></i>
 				</a>
 			</li>
 			<!-- Search -->
@@ -82,7 +85,7 @@ if (User::get()) {
 					class="uk-button uk-button-primary" 
 					title="<?php Text::e('btn_add_page'); ?>"
 					data-uk-modal
-					data-uk-tooltip
+					data-uk-tooltip="{pos:'bottom'}"
 					>
 						<i class="uk-icon-plus"></i>
 					</a>
@@ -92,7 +95,7 @@ if (User::get()) {
 					title="<?php Text::e('btn_save'); ?> (Cmd/Ctrl + S)" 
 					class="uk-button uk-button-success" 
 					data-am-submit="<?php echo $submit; ?>" 
-					data-uk-tooltip 
+					data-uk-tooltip="{pos:'bottom'}" 
 					disabled
 					>
 						<i class="uk-icon-check"></i>

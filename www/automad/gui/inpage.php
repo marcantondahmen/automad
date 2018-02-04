@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -103,7 +103,7 @@ class InPage {
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
 		$urlCache = $urlGui . '?context=system_settings#' . Core\Str::sanitize(Text::get('sys_cache'));
 		$urlLogout = $urlGui . '?context=logout';
-		$attr = 'class="uk-button uk-button-primary uk-button-large" data-uk-tooltip';
+		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		
 		$queryString = '';
 		
@@ -115,14 +115,14 @@ class InPage {
 				// Menu.
 				'<div class="am-inpage-menubar">' .
 					'<div class="uk-button-group">' .
-						'<a href="' . $urlGui . '" title="' . Text::get('dashboard_title') . '" ' . $attr . '>' .
+						'<a href="' . $urlGui . '" class="am-inpage-menu-button">' .
 							'<i class="uk-icon-automad"></i>' .
 						'</a>' .
 						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text"></i></a>' .
 						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open"></i></a>' .
 						'<a href="' . $urlCache . '" title="' . Text::get('sys_cache') . '" ' . $attr . '><i class="uk-icon-cog"></i></a>' .
 						'<a href="' . $urlLogout . '" title="' . Text::get('btn_log_out') . '" ' . $attr . '><i class="uk-icon-power-off"></i></a>' .
-						'<a href="#" class="am-drag-handle uk-button uk-button-primary uk-button-large"><i class="uk-icon-arrows"></i></a>' .
+						'<a href="#" class="am-drag-handle am-inpage-menu-button"><i class="uk-icon-arrows"></i></a>' .
 					'</div>' .
 				'</div>' .
 				// Modal.
@@ -144,7 +144,7 @@ class InPage {
 										'<button type="button" class="uk-modal-close uk-button">' .
 											'<i class="uk-icon-close"></i>&nbsp;&nbsp;' . Text::get('btn_close') . 
 										'</button>&nbsp;' .
-										'<button type="submit" class="uk-button uk-button-primary">' .
+										'<button type="submit" class="uk-button uk-button-success">' .
 											'<i class="uk-icon-check"></i>&nbsp;&nbsp;' . Text::get('btn_save') . 
 										'</button>' .
 									'</div>' .

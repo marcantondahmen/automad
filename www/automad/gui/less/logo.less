@@ -26,54 +26,27 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
-
-@modal-background: 				rgba(0,0,0,0.1);
-
-@modal-dialog-background:		@am-bg;
-@modal-dialog-padding:			15px;
-@modal-header-margin-bottom:	@utility-margin;
-@modal-footer-margin-top:		@utility-margin;
-
-@modal-dialog-large-width: 		800px;
-@modal-dialog-large-width-large:@modal-dialog-large-width;
-
-.hook-modal-dialog() {
+.am-logo {
 	
-	overflow-x: hidden;
-		
-	&:not(&-blank) {
-		border-radius: 12px;
-		.shadow;
-	}
-
-	&-blank {
-		box-sizing: border-box;
-		-webkit-transform: translateY(0);
-    			transform: translateY(0);
-		height: 100%;
-		padding-bottom: @utility-margin-large;
-	}
-			
-}
-
-.hook-modal-header() {	
-
-	color: @am-text;
 	font-size: 16px;
-	line-height: @base-body-line-height;
-	font-weight: inherit;
+	line-height: 18px;
+		
+	@media (min-width: @breakpoint-medium) {
+		font-size: 18px;
+		line-height: 21px;
+	}
 	
-	& .uk-close {
-		float: right;
-		font-size: 14px;
-		line-height: @base-body-line-height;
-		margin-top: 2px;
+	&,
+	&:hover,
+	&:active,
+	&:focus {
+		color: @am-text;
 	}
 	
 }

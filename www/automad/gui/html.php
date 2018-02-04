@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -282,7 +282,7 @@ class Html {
 			
 			$html =		'<div id="' . $addVarContainerId . '" class="uk-margin-bottom">' . $html . '</div>' .
 					// The modal button.
-					'<a href="#' . $addVarModalId . '" class="uk-button uk-button-primary uk-margin-small-top" data-uk-modal>' .
+					'<a href="#' . $addVarModalId . '" class="uk-button uk-button-success uk-margin-small-top" data-uk-modal>' .
 					'<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
 					'</a>' . 
 					// The actual modal.
@@ -296,7 +296,7 @@ class Html {
 						'<button type="button" class="uk-modal-close uk-button">' .
 							'<i class="uk-icon-close"></i>&nbsp;&nbsp;' . Text::get('btn_close') .
 						'</button>&nbsp;' .
-						'<button id="' . $addVarSubmitId . '" type="button" class="uk-button uk-button-primary" data-am-error-exists="' . Text::get('error_var_exists') . '" data-am-error-name="' . Text::get('error_var_name') . '">
+						'<button id="' . $addVarSubmitId . '" type="button" class="uk-button uk-button-success" data-am-error-exists="' . Text::get('error_var_exists') . '" data-am-error-name="' . Text::get('error_var_name') . '">
 							<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
 						'</button>' .
 					'</div>' .
@@ -454,7 +454,7 @@ class Html {
 	public function searchField($placeholder = '', $tooltip = '') {
 		
 		if ($tooltip) {
-			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip ';
+			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 		
 		return  '<form class="uk-form uk-width-1-1" action="" method="get" data-am-autocomplete-submit>' .
@@ -491,7 +491,7 @@ class Html {
 			$selected = reset($values);
 		}
 		
-		$html = '<div class="uk-button uk-form-select" data-uk-form-select>' . 
+		$html = '<div class="uk-button uk-form-select" data-uk-form-select="{activeClass:\'\'}">' . 
 			ltrim($prefix . ' ') . 
 			'<span></span>&nbsp;&nbsp;' .
 			'<i class="uk-icon-caret-down"></i>' . 
@@ -533,9 +533,10 @@ class Html {
 		$templates = array();
 		
 		// Create HTML
-		$html = '<div class="uk-form-select uk-button uk-width-1-1 uk-text-left" data-uk-form-select>' . 
-			'<span></span>' .
-			'<select class="uk-width-1-1" name="' . $name . '">'; 
+		$html = '<div class="uk-form-select uk-button uk-button-success uk-width-1-1 uk-text-left" data-uk-form-select="{activeClass:\'\'}">' . 
+				'<span></span>&nbsp;&nbsp;' .
+				'<span class="uk-float-right"><i class="uk-icon-caret-down"></i></span>' .
+				'<select class="uk-width-1-1" name="' . $name . '">'; 
 		
 		// List templates of current sitewide theme
 		foreach($sharedTheme->templates as $template) {
@@ -569,7 +570,7 @@ class Html {
 
 			$html .= ' value="' . $theme . '/' . basename($template) . '">' . 
 				 ucwords(str_replace(array('_', '/'), array(' ', ' / '), $theme)) . 
-				 ' > ' . 
+				 ' / ' . 
 				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
 				 '</option>';
 				 
@@ -595,15 +596,15 @@ class Html {
 	public function statusPanel($status, $tab, $icon) {
 		
 		return	'<a href="?context=system_settings#' . $tab . '">' .
-				'<div class="uk-panel uk-panel-box" data-am-status="' . $status . '">' .
-					$this->status(
-						$icon, 
-						'', 
-						'uk-icon-circle-o-notch uk-icon-spin', 
-						Text::get('btn_getting_data')
-					) .
-				'</div>' . 
-			'</a>';
+					'<div class="uk-panel uk-panel-box" data-am-status="' . $status . '">' .
+						$this->status(
+							$icon, 
+							'', 
+							'uk-icon-circle-o-notch uk-icon-spin', 
+							Text::get('btn_getting_data')
+						) .
+					'</div>' . 
+				'</a>';
 				
 	}
 

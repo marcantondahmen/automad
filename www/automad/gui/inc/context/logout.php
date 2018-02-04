@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -56,17 +56,17 @@ $this->element('header');
 ?>
 
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-mini">
-				<i class="uk-icon-chevron-left"></i>&nbsp;
-				<?php Text::e('btn_home'); ?>
-			</a>
-			<h2><?php echo $this->sitename; ?></h2>
+			<h1><?php echo $this->sitename; ?></h1>
 			<?php if ($loggedOut) { ?>
 			<div class="uk-alert uk-alert-success uk-margin-top uk-margin-small-bottom">
 				<?php Text::e('success_log_out'); ?>
 			</div>
 			<div class="uk-text-right">
-				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button uk-button-primary">
+				<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button">
+					<i class="uk-icon-home"></i>&nbsp;
+					<?php Text::e('btn_home'); ?>
+				</a>
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button">
 					<?php Text::e('btn_login'); ?>&nbsp;
 					<i class="uk-icon-sign-in"></i>
 				</a>

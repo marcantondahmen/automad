@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -48,8 +48,8 @@
 		
 		display: inline-block;
 		position: fixed;
-		bottom: 20px;
-		left: ~"calc(50vw - 150px)";
+		top: ~"calc(100% - 55px)";
+		left: ~"calc(50% - 150px)";
 		width: 300px;
 		text-align: center;
 		
@@ -59,46 +59,47 @@
 			overflow: hidden;
 			.shadow;	
 			
-			& > .uk-button {
-				min-width: @button-large-height + 4;
-				max-width: @button-large-height + 4;
+			& > a {
 				margin-left: 0;
-				padding: 2px;
-				text-align: center;
-				border-radius: 0;
 			}
 			
 		}
 		
 		& .uk-icon-automad {
 			position: relative;
-			top: 4px;
-			left: 1px;
-			max-height: 16px;
+			top: -1px;
 			vertical-align: baseline;
-			font-size: 20px;
-			line-height: 16px;
+			font-size: 14px;
+		}
+		
+	}
+	
+	&-menu-button {
+		
+		&:extend(.uk-button all, .uk-button-large all);
+		background-color: @am-bg;
+		border-radius: 0;
+		
+		&.am-drag-handle {
+			
+			&,
+			&:hover,
+			&:active {
+				color: @am-muted;
+				background-color: @am-bg;
+				cursor: move;
+			}
+			
 		}
 		
 	}
 	
 	& > &-edit-button {
-		&:extend(.uk-button all, .uk-button-success all);
+		&:extend(.uk-button all, .uk-button-small all, .uk-button-success all);
 		border: none !important;
 		margin-bottom: 2px;
 		vertical-align: text-bottom;
 		.shadow;
-	}
-	
-	& .uk-button.am-drag-handle {
-		
-		&,
-		&:hover,
-		&:active {
-			color: @am-muted;
-			cursor: move;
-		}
-		
 	}
 	
 	& .uk-form-stacked .uk-form-label {

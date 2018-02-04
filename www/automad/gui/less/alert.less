@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -34,15 +34,15 @@
 
 
 @alert-margin-vertical:  	@utility-margin-large;
-@alert-padding: 		10px;
-@alert-background: 		#FFFFFF;
-@alert-color:			@am-text;
+@alert-padding: 			10px;
+@alert-background: 			@am-success;
+@alert-color:				#FFFFFF;
 
-@alert-success-background:	#FFFFFF;
-@alert-success-color:		@am-text;
+@alert-success-background:	@am-success;
+@alert-success-color:		#FFFFFF;
 
-@alert-danger-background: 	#FFFFFF;
-@alert-danger-color: 		@am-text;
+@alert-danger-background: 	@am-danger;
+@alert-danger-color: 		#FFFFFF;
 
 @alert-large-padding: 		@alert-padding;
 
@@ -52,7 +52,7 @@
 	border-radius: @am-radius;
 	overflow: hidden;
 	position: relative;
-	padding-left: 50px;
+	padding-left: 40px;
 	
 	&:before {	
 		content: '\f06d';
@@ -61,15 +61,14 @@
 		top: 0;
 		bottom: 0;
 		padding: @alert-padding;
-		color: #FFFFFF;
 		font-family: FontAwesome;
 		display: block;
 		font-weight: normal;
 		font-style: normal;
 		font-size: 18px;
 		line-height: inherit;
-		vertical-align: baseline;
-		background-color: @am-text;
+		color: inherit;
+		background-color: inherit;
 		.smooth-fonts;
 	}
 		
@@ -79,7 +78,6 @@
 	
 	&:before {
 		content: '\f00c';
-		background-color: @alert-success-color;
 	}
 	
 }
@@ -88,7 +86,6 @@
 	
 	&:before {
 		content: '\f071';
-		background-color: @alert-danger-color;
 	}
 	
 }

@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -95,17 +95,24 @@ ob_start();
 if ($files) { ?>
 	
 		<ul class="uk-grid">
-			<li class="uk-width-2-3">
+			<li class="uk-width-2-3 uk-width-medium-1-1">
 				<a 
 				href="#am-upload-modal" 
-				class="uk-button uk-button-primary" 
+				class="uk-button uk-button-success" 
 				data-uk-modal="{bgclose: false, keyboard: false}"
 				>
 					<i class="uk-icon-upload"></i>&nbsp;
 					<?php Text::e('btn_upload'); ?>
 				</a>	
+				<button 
+				class="uk-button uk-button-danger uk-hidden-small" 
+				data-am-submit="files"
+				>
+					<i class="uk-icon-remove"></i>&nbsp;
+					<?php Text::e('btn_remove_selected'); ?>
+				</button>
 			</li>
-			<li class="uk-width-1-3">
+			<li class="uk-width-1-3 uk-visible-small">
 				<div class="am-icon-buttons uk-text-right">
 					<button 
 					class="uk-button uk-button-danger" 
@@ -252,9 +259,9 @@ if ($files) { ?>
 								<span class="uk-hidden-small"><i class="uk-icon-download"></i>&nbsp;</span>
 								<?php Text::e('btn_download_file'); ?>
 							</a>
-							<button id="am-edit-file-info-submit" type="button" class="uk-button uk-button-primary">
+							<button id="am-edit-file-info-submit" type="button" class="uk-button uk-button-success">
 								<span class="uk-hidden-small"><i class="uk-icon-check"></i>&nbsp;</span>
-								<?php Text::e('btn_ok'); ?>
+								<?php Text::e('btn_save'); ?>
 							</button>
 						</div>
 					</div>
@@ -266,7 +273,7 @@ if ($files) { ?>
 
 		<a 
 		href="#am-upload-modal" 
-		class="uk-button uk-button-primary uk-button-large uk-width-1-1" 
+		class="uk-button uk-button-success uk-button-large" 
 		data-uk-modal="{bgclose: false, keyboard: false}"
 		>
 			<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php Text::e('btn_upload'); ?>

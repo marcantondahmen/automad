@@ -153,7 +153,7 @@ gulp.task('automad-less', ['bump'], function() {
 	return 	gulp.src('less/automad.less')
 		.pipe(less())
 		.on('error', onError)
-		.pipe(cleanCSS({ format: 'keep-breaks', rebase: false }))
+		.pipe(cleanCSS({ rebase: false }))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
 		// Prefix all UIkit items.
