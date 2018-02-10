@@ -207,6 +207,12 @@ if ($files) { ?>
 											<?php Text::e('btn_edit_file_info'); ?>
 										</a>
 									</li>
+									<li>
+										<a href="#" data-am-clipboard="<?php echo $fileInfo['download']; ?>">
+											<i class="uk-icon-link"></i>&nbsp;
+											<?php Text::e('btn_copy_url_clipboard'); ?>
+										</a>
+									</li>
 									<?php if (Core\Parse::fileIsImage($file)) { ?>
 									<li>
 										<a href="#am-copy-resized-modal"

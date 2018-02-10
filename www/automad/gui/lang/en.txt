@@ -26,6 +26,10 @@ btn_close: Close
 
 -
 
+btn_copy_url_clipboard: Copy URL To Clipboard
+
+-
+
 btn_copy_resized: Copy Resized
 
 -
