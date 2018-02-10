@@ -86,41 +86,36 @@ class Html {
 		$pages = $Selection->getSelection(false);
 		
 		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill uk-margin-top">';
-		$html .= '<li class="uk-disabled uk-hidden-small"><i class="uk-icon-folder-open"></i></li>';
+		$html .= '<li class="uk-hidden-small"><i class="uk-icon-folder-open"></i></li>';
 		
 		$i = count($pages);
 		
 		$small = 2;
-		$medium = 4;
 		$large = 4;
 		
 		if ($i > $small) {
-			$html .= '<li class="uk-visible-small uk-disabled"><i class="uk-icon-angle-double-right"></i></li>';
-		}
-		
-		if ($i > $medium) {
-			$html .= '<li class="uk-visible-medium uk-disabled"><i class="uk-icon-angle-double-right"></i></li>';
+			$html .= '<li class="uk-visible-small"><i class="uk-icon-angle-double-right"></i></li>';
 		}
 		
 		if ($i > $large) {
-			$html .= '<li class="uk-visible-large uk-disabled"><i class="uk-icon-angle-double-right"></i></li>';
+			$html .= '<li class="uk-hidden-small"><i class="uk-icon-angle-double-right"></i></li>';
 		}
 		
 		foreach ($pages as $url => $Page) {
 			
 			if ($i <= $large) {
 				
-				$class= 'am-breadcrumb-separator';
+				$class= '';
 			
 				if ($i > $small) {
-					$class .= ' uk-hidden-small';
-				}
-			
-				if ($i > $medium) {
-					$class .= ' uk-hidden-medium';
+					$class .= ' class="uk-hidden-small"';
 				}
 				
-				$html .= '<li class="' . $class . '"><a href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
+				$html .= '<li' . $class . '><a href="?context=edit_page&url=' . urlencode($url) . '">' . $Page->get(AM_KEY_TITLE) . '</a></li>';
+				
+				if ($i > 1) {
+					$html .= '<li' . $class . '><i class="uk-icon-angle-right"></i></li>';
+				}
 				
 			}
 			
