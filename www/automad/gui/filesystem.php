@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -180,24 +180,6 @@ class FileSystem extends Core\FileSystem {
 		}
 		
 		return rtrim($path, '/') . '/';
-		
-	}
-
-
-	/**
-	 *      Return the extension for a given file.
-	 *      
-	 *      @param string $file
-	 *      @return string The extension
-	 */
-	
-	public static function getExtension($file) {
-		
-		$pathInfo = pathinfo($file);
-		
-		if (!empty($pathInfo['extension'])) {
-			return $pathInfo['extension'];
-		}
 		
 	}
 

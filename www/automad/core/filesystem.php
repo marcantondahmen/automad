@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -53,15 +53,33 @@ class FileSystem {
 	
 	
 	/**
-	 *      Get all installed themes.
+	 *	Return the extension for a given file.
+	 *      
+	 *	@param string $file
+	 *	@return string The extension
+	 */
+	
+	public static function getExtension($file) {
+		
+		$pathInfo = pathinfo($file);
+		
+		if (!empty($pathInfo['extension'])) {
+			return $pathInfo['extension'];
+		}
+		
+	}
+	
+	
+	/**
+	 * 	Get all installed themes.
 	 *
 	 *	A theme must be located below the "themes" directory.   
 	 *	It is possible to group themes in subdirectories, like "themes/theme" or "themes/subdir/theme".
 	 * 
 	 *	To be a valid theme, a diretcory must contain a "theme.json" file and at least one ".php" file.
 	 *      
-	 *      @param  string $path
-	 *      @return array An array containing all themes as objects.
+	 *	@param  string $path
+	 *  @return array An array containing all themes as objects.
 	 */
 	
 	public static function getThemes($path = false) {

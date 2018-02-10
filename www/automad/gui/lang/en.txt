@@ -26,6 +26,10 @@ btn_close: Close
 
 -
 
+btn_copy_resized: Copy Resized
+
+-
+
 btn_data: Data & Settings
 
 -
@@ -194,6 +198,14 @@ error_file_name: Invalid filename!
 
 -
 
+error_file_not_found: File not found!
+
+-
+
+error_file_size: Invalid file size!
+
+-
+
 error_form: Incomplete or incorrect data!<br />All fields are required and have to be completed as described!
 
 -
@@ -287,6 +299,25 @@ file_name: Filename
 -
 
 file_caption: Caption
+
+-
+
+
+
+
+
+
+
+
+image_crop: Crop Image
+
+-
+
+image_height_px: Height (Pixels)
+
+-
+
+image_width_px: Width (Pixels)
 
 -
 
@@ -487,6 +518,10 @@ success_cache_purged: The cache directory got purged successfully!
 -
 
 success_config_update: Successfully updated configuration!
+
+-
+
+success_created: Successfully created<br> 
 
 -
 

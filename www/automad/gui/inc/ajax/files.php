@@ -74,10 +74,6 @@ if (isset($_POST['delete'])) {
 }
 
 
-// Define image file extensions. 
-$imageTypes = array('jpg', 'jpeg', 'png', 'gif');
-
-
 // Get files for each allowed file type.
 $files = array();
 
@@ -150,12 +146,12 @@ if ($files) { ?>
 					'download' => AM_BASE_URL . Core\Str::stripStart($file, AM_BASE_DIR)
 				);
 				
-				if (in_array(strtolower($ext), $imageTypes)) { 
+				if (Core\Parse::fileIsImage($file)) { 
 
 					$imgPanel = new Core\Image($file, 220, 165, true);
 					$size = '<div class="uk-panel-badge uk-badge">' . 
-						$imgPanel->originalWidth . ' <i class="uk-icon-times"></i> ' . $imgPanel->originalHeight . 
-						'</div>';
+							$imgPanel->originalWidth . ' <i class="uk-icon-times"></i> ' . $imgPanel->originalHeight . 
+							'</div>';
 					$icon = '<img src="' . AM_BASE_URL . $imgPanel->file . '" width="' . $imgPanel->width . '" height="' . $imgPanel->height . '" />';
 					$imgModal = new Core\Image($file, 1000, 800, false);
 			
@@ -163,7 +159,9 @@ if ($files) { ?>
 					$fileInfo['img'] = array(
 						'src' => AM_BASE_URL . $imgModal->file,
 						'width' => $imgModal->width,
-						'height' => $imgModal->height
+						'height' => $imgModal->height,
+						'originalWidth' => $imgPanel->originalWidth,
+						'originalHeight' => $imgPanel->originalHeight
 					);
 					
 				} else {
@@ -196,13 +194,32 @@ if ($files) { ?>
 					</div>
 					<?php echo $size; ?> 
 					<div class="am-panel-bottom">
-						<a 
-						href="#am-edit-file-info-modal" 
-						class="uk-icon-button uk-icon-pencil" 
-						title="<?php Text::e('btn_edit_file_info'); ?>" 
-						data-uk-modal 
-						data-uk-tooltip
-						></a>
+						<div data-uk-dropdown>
+							<div class="uk-icon-button uk-icon-ellipsis-v"></div>
+							<div class="uk-dropdown uk-dropdown-small">
+								<ul class="uk-nav uk-nav-dropdown">
+									<li>
+										<a 
+										href="#am-edit-file-info-modal" 
+										data-uk-modal 
+										>
+											<i class="uk-icon-pencil"></i>&nbsp;
+											<?php Text::e('btn_edit_file_info'); ?>
+										</a>
+									</li>
+									<?php if (Core\Parse::fileIsImage($file)) { ?>
+									<li>
+										<a href="#am-copy-resized-modal"
+										data-uk-modal
+										>
+											<i class="uk-icon-crop"></i>&nbsp;
+											<?php Text::e('btn_copy_resized'); ?>
+										</a>
+									</li>
+									<?php } ?>
+								</ul>
+							</div>
+						</div>
 						<label 
 						class="am-toggle-checkbox am-panel-bottom-right" 
 						data-am-toggle="#<?php echo $id; ?>"
@@ -214,6 +231,83 @@ if ($files) { ?>
 			</li>
 			<?php } ?> 		
 		</ul>
+		
+		<!-- Copy Resized Modal -->
+		<div id="am-copy-resized-modal" class="uk-modal" data-am-url="<?php echo $url; ?>">
+			<div class="uk-modal-dialog">
+				<div class="uk-modal-header">
+					<?php Text::e('btn_copy_resized'); ?>
+					<a href="#" class="uk-modal-close uk-close"></a>
+				</div>
+				<div class="uk-form uk-form-stacked">
+					<input 
+					id="am-copy-resized-filename"
+					class="uk-form-controls uk-form-large uk-width-1-1" 
+					type="text" 
+					value="" 
+					disabled 
+					readonly 
+					data-am-watch-exclude
+					/>
+					<ul class="uk-grid uk-grid-width-1-2">
+						<li>
+							<label 
+							for="am-copy-resized-width" 
+							class="uk-form-label uk-margin-small-top"
+							>
+								<?php Text::e('image_width_px'); ?>
+							</label>
+							<input 
+							id="am-copy-resized-width" 
+							class="uk-form-controls uk-width-1-1"
+							type="number" 
+							step="10"
+							name="width" 
+							value=""
+							data-am-watch-exclude
+							>
+						</li>
+						<li>
+							<label 
+							for="am-copy-resized-height" 
+							class="uk-form-label uk-margin-small-top"
+							>
+								<?php Text::e('image_height_px'); ?>
+							</label>
+							<input 
+							id="am-copy-resized-height" 
+							class="uk-form-controls uk-width-1-1"
+							type="number" 
+							step="10" 
+							name="height" 
+							value=""
+							data-am-watch-exclude
+							>
+						</li>
+					</ul>
+					<div class="uk-form-row uk-margin-small-top">
+						<label class="am-toggle-switch" data-am-toggle>
+							<?php Text::e('image_crop'); ?>
+							<input 
+							id="am-copy-resized-crop"
+							type="checkbox" 
+							name="crop" 
+							value="" 
+							data-am-watch-exclude
+							>
+						</label>
+					</div>
+				</div>
+				<div class="uk-modal-footer uk-text-right">
+					<button type="button" class="uk-modal-close uk-button">
+						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
+					</button>
+					<button id="am-copy-resized-submit" type="button" class="uk-button uk-button-success">
+						<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_ok'); ?>
+					</button>
+				</div>
+			</div>
+		</div>
 		
 		<!-- Edit Modal -->
 		<div id="am-edit-file-info-modal" class="uk-modal" data-am-url="<?php echo $url; ?>">

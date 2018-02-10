@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -133,6 +133,20 @@ class Parse {
 		return $files;
 		
 	}
+
+
+    /**
+     *  Parse a filename to check whether a file is an image or not.
+     *
+     *  @param string $file
+     *  @return boolean True if $file is an image file
+     */
+
+    public static function fileIsImage($file) {
+        
+        return (in_array(FileSystem::getExtension($file), array('jpg', 'jpeg', 'png', 'gif')));
+        
+    } 
 
 
 	/**

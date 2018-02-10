@@ -173,7 +173,86 @@ class Content {
 		
 	}
 	
+	
+	/**
+	 *	Copy an image resized based on $_POST.
+	 *
+	 *	@param string $filename
+	 *	@param string $url
+	 *	@return array $output (AJAX response)
+	 */
+	
+	public function copyResized() {
 		
+		$output = array();
+		
+		$options = array_merge(
+				array(
+					'url' => '',
+					'filename' => '',
+					'width' => false,
+					'height' => false,
+					'crop' => false
+				),
+				$_POST
+		);
+		
+		$width = $options['width'];
+		$height = $options['height'];
+		
+		if (!((is_numeric($width) || is_bool($width)) && (is_numeric($height) || is_bool($height)))) {
+			$output['error'] = Text::get('error_file_size');
+			return $output;
+		}
+		
+		if ($options['filename']) {
+		
+			// Get parent directory.
+			if ($options['url']) {
+				$Page = $this->Automad->getPage($options['url']);
+				$directory = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
+			} else {
+				$directory = AM_BASE_DIR . AM_DIR_SHARED;
+			}
+		
+			$file = $directory . $options['filename'];
+		
+			Core\Debug::ajax($output, 'file', $file);
+			Core\Debug::ajax($output, 'options', $options);
+				
+			if (file_exists($file)) {
+				
+				if (is_writable($directory)) {
+					
+					$img = new Core\Image(
+							$file, 
+							$width, 
+							$height,
+							boolval($options['crop'])
+						);
+					
+					$cachedFile = AM_BASE_DIR . $img->file;
+					$resizedFile = preg_replace('/(\.\w{3,4})$/', '-' . $img->width . 'x' . $img->height . '$1', $file);
+					
+					if (!$output['error'] = FileSystem::renameMedia($cachedFile, $resizedFile)) {
+						$output['success'] = Text::get('success_created') . ' "' . basename($resizedFile) . '"';
+					}
+					
+				} else {
+					$output['error'] = Text::get('error_permission') . ' "' . $directory . '"';
+				}
+				
+			} else {
+				$output['error'] = Text::get('error_file_not_found');
+			}
+		
+		}
+		
+		return $output;
+		
+	}
+	
+	
 	/**
 	 *	Delete files.
 	 *

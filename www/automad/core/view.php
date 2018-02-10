@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -389,7 +389,7 @@ class View {
 		$this->Runtime->set(AM_KEY_BASENAME, basename($file));
 		
 		// If $file is an image, also provide width and height (and possibly a new filename after a resize).
-		if (in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), array('jpg', 'jpeg', 'png', 'gif'))) {
+		if (Parse::fileIsImage($file)) {
 			
 			// The Original file size.
 			$imgSize = getimagesize(AM_BASE_DIR . $file);
