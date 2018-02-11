@@ -40,10 +40,14 @@
 @icon-button-color:				@button-color;
 @icon-button-background:        @am-bg;
 @icon-button-hover-color:		@button-hover-color;
-@icon-button-hover-background:	@button-hover-background;
+@icon-button-hover-background:	@icon-button-background;
 @icon-button-active-color:		@button-active-color;
-@icon-button-active-background:	@button-active-background;
+@icon-button-active-background:	@icon-button-hover-background;
 
+
+.hook-icon-button() {
+	cursor: pointer;
+}
 
 @font-face {
 	font-family: 'Automad';

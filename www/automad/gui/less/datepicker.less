@@ -26,31 +26,37 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017 by Marc Anton Dahmen
+ *	Copyright (c) 2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@datepicker-z-index: 			9100;
+@datepicker-z-index: 					9100;
 
-@datepicker-nav-color:			@am-text;
-@datepicker-nav-hover-color:		@am-text;
+@datepicker-nav-color:					@button-color;
+@datepicker-nav-hover-color:			@button-hover-color;
 
-@datepicker-table-color:		@am-text;
-@datepicker-table-hover-background:	@button-hover-background;
-@datepicker-table-hover-color:		@button-hover-color;
-@datepicker-table-onclick-background:	@button-active-background;
-@datepicker-table-onclick-color:	@button-active-color;
-@datepicker-table-active-background: 	@button-active-background;
-@datepicker-table-active-color: 	@button-active-color;
-@datepicker-table-muted-color:		@am-muted;
+@datepicker-table-color:				@am-text;
+@datepicker-table-hover-background:		@button-primary-background;
+@datepicker-table-hover-color:			@button-primary-color;
+@datepicker-table-onclick-background:	@button-primary-background;
+@datepicker-table-onclick-color:		@button-primary-color;
+@datepicker-table-active-background: 	@button-success-background;
+@datepicker-table-active-color: 		@button-success-color;
+@datepicker-table-muted-color:			@am-muted;
 
 .hook-datepicker-nav() {
 	
 	& .uk-form-select {
-		color: @am-text;
+		
+		color: @button-color;
+		
+		&:hover {
+			color: @button-hover-color;
+		}
+		
 	}
 	
 }

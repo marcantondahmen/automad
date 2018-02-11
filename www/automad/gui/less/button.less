@@ -37,31 +37,31 @@
 
 @button-color:						@am-text;
 @button-background:					#FFFFFF;
-@button-hover-color:				#FFFFFF;
-@button-hover-background:			@am-text;
-@button-active-color:				#FFFFFF;
-@button-active-background:			@am-text;
+@button-hover-color:				lighten(@button-color, 20%);
+@button-hover-background:			#FFFFFF;
+@button-active-color:				@button-hover-color;
+@button-active-background:			#FFFFFF;
 
 @button-primary-color:				#FFFFFF;
 @button-primary-background:			@am-primary;
-@button-primary-hover-color:		@am-primary;
-@button-primary-hover-background:	#FFFFFF;
-@button-primary-active-color:		@am-primary;
-@button-primary-active-background:	#FFFFFF;
+@button-primary-hover-color:		#FFFFFF;
+@button-primary-hover-background:	lighten(@button-primary-background, 5%);
+@button-primary-active-color:		#FFFFFF;
+@button-primary-active-background:	@button-primary-hover-background;
 
 @button-success-color:				#FFFFFF;
 @button-success-background:			@am-success;
-@button-success-hover-color: 		@am-success;
-@button-success-hover-background: 	#FFFFFF;
-@button-success-active-color: 		@am-success;
-@button-success-active-background:	#FFFFFF;
+@button-success-hover-color: 		#FFFFFF;
+@button-success-hover-background: 	darken(@button-success-background, 5%);
+@button-success-active-color: 		#FFFFFF;
+@button-success-active-background:	@button-success-hover-background;
 
 @button-danger-color:				#FFFFFF;
 @button-danger-background:			@am-danger;
-@button-danger-hover-color: 		@am-danger;
-@button-danger-hover-background:	#FFFFFF;
-@button-danger-active-color:		@am-danger;
-@button-danger-active-background:	#FFFFFF;
+@button-danger-hover-color: 		#FFFFFF;
+@button-danger-hover-background:	darken(@button-danger-background, 5%);
+@button-danger-active-color:		#FFFFFF;
+@button-danger-active-background:	@button-danger-hover-background;
 
 @button-disabled-color:				#FFFFFF;
 @button-disabled-background:		darken(@am-bg, 10%);
@@ -99,74 +99,11 @@
 	
 }
 
-.hook-button-hover() {
-	
-	& .uk-badge {
-		color: @button-active-background;
-		background-color: @button-active-color;
-	}
-	
-}
-
-.hook-button-active() {
-	
-	& .uk-badge {
-		color: @button-active-background;
-		background-color: @button-active-color;
-	}
-	
-}
-
-.hook-button-primary() {
-	
-	&:not(:hover):not(:active) .uk-badge {
-		color: @button-active-background;
-		background-color: @button-active-color;
-	}
-	
-	&:hover .uk-badge,
-	&:active .uk-badge {
-		color: @button-primary-color;
-		background-color: @button-primary-background;
-	}
-	
-	.uk-panel-box & {
-		
-		&:hover,
-		&:active {
-			background-color: @am-bg;
-		}
-		
-	}
-	
-}
-
 .hook-button-success() {
 	
-	&:not(:hover):not(:active) .uk-badge {
+	& .uk-badge {
 		color: @button-success-background;
 		background-color: @button-success-color;
-	}
-
-	&:hover .uk-badge,
-	&:active .uk-badge {
-		color: @button-success-color;
-		background-color: @button-success-background;
-	}
-	
-}
-
-.hook-button-danger() {
-	
-	&:not(:hover):not(:active) .uk-badge {
-		color: @button-danger-background;
-		background-color: @button-danger-color;
-	}
-
-	&:hover .uk-badge,
-	&:active .uk-badge {
-		color: @button-danger-color;
-		background-color: @button-danger-background;
 	}
 	
 }
