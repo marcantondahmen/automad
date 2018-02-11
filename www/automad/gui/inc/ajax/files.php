@@ -214,7 +214,7 @@ if ($files) { ?>
 										</a>
 									</li>
 									<li>
-										<a href="#" data-am-clipboard="<?php echo $fileInfo['download']; ?>">
+										<a href="#" data-am-clipboard="<?php echo Core\Str::stripStart($file, AM_BASE_DIR); ?>">
 											<i class="uk-icon-link"></i>&nbsp;
 											<?php Text::e('btn_copy_url_clipboard'); ?>
 										</a>
