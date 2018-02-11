@@ -167,7 +167,9 @@ if ($files) { ?>
 				} else {
 					
 					$size = '';
-					$icon = '<div class="am-panel-icon"><span>' . $ext . '</span></div>';
+					$icon = '<div class="am-panel-icon">' .
+							'<i class="uk-icon-file-o am-files-icon-' . $ext . '"></i>' .
+							'</div>';
 					
 				}
 						
@@ -178,7 +180,11 @@ if ($files) { ?>
 				class="uk-panel uk-panel-box" 
 				data-am-file-info='<?php echo json_encode($fileInfo); ?>'
 				>
-					<a href="#am-edit-file-info-modal" class="uk-panel-teaser uk-display-block" data-uk-modal>
+					<a 
+					href="#am-edit-file-info-modal" 
+					class="uk-panel-teaser uk-display-block" 
+					data-uk-modal
+					>
 						<?php echo $icon; ?>
 					</a>
 					<?php echo basename($file); ?>

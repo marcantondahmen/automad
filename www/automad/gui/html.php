@@ -413,7 +413,7 @@ class Html {
 				
 			} else {
 				
-				$html .= '<div class="am-panel-icon"><i class="uk-icon-file-text"></i></div>';
+				$html .= '<div class="am-panel-icon"><i class="uk-icon-folder-open"></i></div>';
 				
 			}
 			

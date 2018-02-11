@@ -63,11 +63,14 @@
 			
 			display: inline-block;
 			vertical-align: top;
+			width: 100%;
 			max-width: 100%;
+			text-align: center;
 			margin-bottom: @utility-margin;
 			
 			@media (min-width: @am-file-info-breakpoint) {
 				float: left;
+				width: auto;
 				margin-right: @am-file-info-width + @utility-margin;
 				margin-bottom: 0;
 			}
@@ -113,20 +116,18 @@
 				}
 				
 				// File icon.
-				&:before {
-					&:extend([class*='uk-icon-']);
-					content: '\f15b';
+				& [class*="uk-icon-"] {
 					display: block;
 					position: absolute;
 					top: 50%;
 					width: 100%;
 					text-align: center;
 					margin-top: -30px;
-					font-size: 60px;
+					font-size: 48px;
 					color: @am-text;	
 				}
 				
-				// Extension text on top of file icon.
+				// Extension text below file icon.
 				&:after {
 					content: attr(data-am-extension);
 					display: block;
@@ -134,12 +135,14 @@
 					z-index: 10;
 					top: 50%;
 					width: 100%;
+					margin-top: 30px;
 					text-align: center;
-					font-size: 18px;
-					font-weight: 300;
-					color: @am-bg;	
+					font-size: 12px;
+					font-weight: 400;
+					text-transform: uppercase;
+					color: @am-text;	
 				}
-				
+			
 			}
 			
 		}
@@ -175,6 +178,58 @@
     		-moz-user-select: none;
     		-ms-user-select: none;
     		user-select: none;
+	}
+	
+	// Filetype icons.
+	.uk-icon-file-o&-icon {
+		
+		&-pdf:before {
+			content: '\f1c1' ;
+		}
+		
+		&-aiff,
+		&-m4a,
+		&-mp3,
+		&-ogg,
+		&-wav {
+			&:before {
+				content: '\f1c7' ;
+			}
+		}
+		
+		&-dmg,
+		&-iso,
+		&-rar,
+		&-tar,
+		&-zip {
+			&:before {
+				content: '\f1c6' ;
+			}
+		}
+		
+		&-ai,
+		&-dxf,
+		&-eps,
+		&-ico,
+		&-psd,
+		&-svg,
+		&-tga,
+		&-tiff {
+			&:before {
+				content: '\f1c5' ;
+			}
+		}
+		
+		&-avi,
+		&-flv,
+		&-mov,
+		&-mp4,
+		&-mpeg {
+			&:before {
+				content: '\f1c8' ;
+			}
+		}
+		
 	}
 	
 }

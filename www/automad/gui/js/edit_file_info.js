@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -68,9 +68,9 @@
 				s = efi.selectors;
 			
 			$(s.img).attr('src', '')
-				.removeAttr('width')
-				.removeAttr('height');
-			$(s.icon).attr(da.ext, '');
+					.removeAttr('width')
+					.removeAttr('height');
+			$(s.icon).attr(da.ext, '').html('');
 			$(s.download).attr('href', '');
 			$(s.oldName).val('');
 			$(s.newName).val('');
@@ -92,11 +92,14 @@
 			// Only set extension if no image exists. The icon is only used as fallback.
 			// It willl be hidden by CSS when the extension attribute will stay empty.
 			if (info.img) {
-				$(s.img).attr('src', info.img.src)
-					.attr('width', info.img.width)
-					.attr('height', info.img.height);
+				$(s.img)
+				.attr('src', info.img.src)
+				.attr('width', info.img.width)
+				.attr('height', info.img.height);
 			} else {
-				$(s.icon).attr(da.ext, info.extension);
+				$(s.icon)
+				.attr(da.ext, info.extension)
+				.append($('<i></i>', { class: 'uk-icon-file-o am-files-icon-' + info.extension }));
 			}
 		
 			$(s.oldName).val(info.filename);
