@@ -117,7 +117,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				/>
 				<a 
 				href="<?php echo AM_BASE_INDEX . $url; ?>" 
-				class="uk-button uk-button-success uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
+				class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
 				title="<?php Text::e('btn_inpage_edit'); ?>" 
 				data-uk-tooltip="pos:'bottom-left'"
 				>

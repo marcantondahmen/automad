@@ -64,7 +64,7 @@ $results = $this->Content->getSearchResults();
 			<i class="uk-icon-angle-double-left"></i>
 			<?php echo Core\Parse::query('query'); ?>
 			<i class="uk-icon-angle-double-right"></i>&nbsp;
-			<span class="uk-badge uk-badge-success"><?php echo count($results); ?></span>
+			<span class="uk-badge"><?php echo count($results); ?></span>
 		</h2>
 		
 <?php

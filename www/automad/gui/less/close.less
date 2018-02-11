@@ -37,14 +37,15 @@
 	
 	&,
 	&:hover {
-		color: @am-text;
+		color: inherit;
 	}
 	
 	&:after {
 		.smooth-fonts;
 	}
 	
-	.uk-modal & {
+	.uk-modal-dialog > &,
+	.uk-modal-header > & {
 		
 		line-height: 16px;
 		font-size: 16px;
@@ -61,7 +62,7 @@
 	}
 	
 	.uk-notify-message:hover > & {
-		color: @am-text;
+		color: inherit;
 	}
 		
 }

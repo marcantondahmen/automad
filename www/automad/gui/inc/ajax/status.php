@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -103,7 +103,7 @@ if (isset($_POST['item'])) {
 						'uk-icon-code-fork',
 						AM_VERSION,
 						'uk-icon-refresh',
-						'<span class="uk-badge">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
+						'<span class="uk-badge uk-badge-success">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
 					);		
 		} else {
 			$output['status'] = $this->Html->status(

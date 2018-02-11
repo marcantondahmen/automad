@@ -200,7 +200,7 @@ if ($files) { ?>
 					</div>
 					<?php echo $size; ?> 
 					<div class="am-panel-bottom">
-						<div data-uk-dropdown>
+						<div data-uk-dropdown="{mode:'click'}">
 							<div class="uk-icon-button uk-icon-ellipsis-v"></div>
 							<div class="uk-dropdown uk-dropdown-small">
 								<ul class="uk-nav uk-nav-dropdown">

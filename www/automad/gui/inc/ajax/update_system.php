@@ -50,8 +50,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 	
 	$output['html'] = 	'<div class="uk-alert uk-alert-danger">' .
-				'Can\'t run updates within the development repository!' .
-				'</div>';
+						'Can\'t run updates within the development repository!' .
+						'</div>';
 	
 } else {
 	
@@ -79,7 +79,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 					<input type="hidden" name="update" value="run" />
 					<button 
 					type="submit" 
-					class="uk-button uk-button-large uk-button-primary" 
+					class="uk-button uk-button-large uk-button-success" 
 					data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
 					>
 						<i class="am-update-progress uk-icon-refresh uk-icon-spin uk-hidden"></i>

@@ -93,7 +93,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<?php 
 					
 						$header = Text::get('sidebar_header_pages') . 
-							  '&nbsp;&nbsp;&nbsp;<span class="uk-badge uk-badge-success">' . 
+							  '&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
 							  count($this->collection) . 
 							  '</span>';
 						echo 	$this->Html->siteTree(
