@@ -177,8 +177,6 @@ class Content {
 	/**
 	 *	Copy an image resized based on $_POST.
 	 *
-	 *	@param string $filename
-	 *	@param string $url
 	 *	@return array $output (AJAX response)
 	 */
 	
@@ -212,7 +210,7 @@ class Content {
 				$Page = $this->Automad->getPage($options['url']);
 				$directory = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
 			} else {
-				$directory = AM_BASE_DIR . AM_DIR_SHARED;
+				$directory = AM_BASE_DIR . AM_DIR_SHARED . '/';
 			}
 		
 			$file = $directory . $options['filename'];
@@ -232,7 +230,7 @@ class Content {
 						);
 					
 					$cachedFile = AM_BASE_DIR . $img->file;
-					$resizedFile = preg_replace('/(\.\w{3,4})$/', '-' . $img->width . 'x' . $img->height . '$1', $file);
+					$resizedFile = preg_replace('/(\.\w{3,4})$/', '-' . floor($img->width) . 'x' . floor($img->height) . '$1', $file);
 					
 					if (!$output['error'] = FileSystem::renameMedia($cachedFile, $resizedFile)) {
 						$output['success'] = Text::get('success_created') . ' "' . basename($resizedFile) . '"';
