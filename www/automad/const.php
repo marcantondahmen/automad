@@ -117,7 +117,12 @@ Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PRE
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/en.txt');
-Config::set('AM_ALLOWED_FILE_TYPES', 'css, jpg, jpeg, zip, png, ico, svg, js, pdf, mp3, gif');
+$formatsArchive = ['dmg', 'iso', 'rar', 'tar', 'zip'];
+$formatsAudio = ['aiff', 'm4a', 'mp3', 'ogg', 'wav'];
+$formatsGraphic = ['ai', 'dxf', 'eps', 'gif', 'ico', 'jpg', 'jpeg', 'png', 'psd', 'svg', 'tga' , 'tiff'];
+$formatsVideo = ['avi', 'flv', 'mov', 'mp4', 'mpeg'];
+$formatsMisc = ['css', 'js', 'md', 'pdf'];
+Config::set('AM_ALLOWED_FILE_TYPES', implode(', ', array_merge($formatsArchive, $formatsAudio, $formatsGraphic, $formatsVideo, $formatsMisc)));
 
 // PAGE
 Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
