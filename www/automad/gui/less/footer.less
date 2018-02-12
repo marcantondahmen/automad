@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -42,6 +42,13 @@ body > .uk-container-center {
 	position: relative;
 	min-height: 100vh;
 	padding-bottom: (@am-footer-height + @am-footer-padding-top + @am-body-padding-bottom);
+	
+	// Fixing vh unit bug on iOS (and other) touch devices.
+	// Since iOS UI elements overlap the window initially before scrolling down, 
+	// the min-height gets reduced by 70px.
+	.uk-touch & {
+		min-height: ~"calc(100vh - 70px)";
+	}
 	
 	& .am-footer {
 		
