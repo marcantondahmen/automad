@@ -40,8 +40,8 @@
 .fade-out(@duration: 0.3s) {
 	visibility: hidden;
   	opacity: 0;
-	max-height: 0px;
-	overflow: visible;
+	max-height: 0;
+	overflow: hidden;
 	.transition(visibility 0s linear @duration, opacity @duration linear, max-height 0s linear @duration;);
 }
 

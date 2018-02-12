@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -86,7 +86,7 @@ $this->element('header');
 					<div class="uk-text-right">
 						<button 
 						type="submit" 
-						class="uk-button uk-button-primary" 
+						class="uk-button uk-button-success" 
 						data-uk-toggle="{target:'.uk-animation-fade'}"
 						>
 							<i class="uk-icon-download"></i>&nbsp;
@@ -103,7 +103,7 @@ $this->element('header');
 					<?php Text::e('install_login'); ?>
 				</div>
 				<div class="uk-text-right">
-					<a href="" class="uk-button uk-button-primary">
+					<a href="" class="uk-button uk-button-success">
 						<?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i>
 					</a>
 				</div>
