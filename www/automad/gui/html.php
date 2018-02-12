@@ -452,7 +452,7 @@ class Html {
 			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 		
-		return  '<form class="uk-form uk-width-1-1" action="" method="get" data-am-autocomplete-submit>' .
+		return  '<form class="uk-form uk-width-1-1" action="' . AM_BASE_URL . AM_PAGE_GUI . '" method="get" data-am-autocomplete-submit>' .
 				'<input type="hidden" name="context" value="search">' .
 				'<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">' .
 					'<input ' .
