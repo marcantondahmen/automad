@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The FileSystem class.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2017 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2017-2018 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -66,78 +66,6 @@ class FileSystem {
 		if (!empty($pathInfo['extension'])) {
 			return $pathInfo['extension'];
 		}
-		
-	}
-	
-	
-	/**
-	 * 	Get all installed themes.
-	 *
-	 *	A theme must be located below the "themes" directory.   
-	 *	It is possible to group themes in subdirectories, like "themes/theme" or "themes/subdir/theme".
-	 * 
-	 *	To be a valid theme, a diretcory must contain a "theme.json" file and at least one ".php" file.
-	 *      
-	 *	@param  string $path
-	 *  @return array An array containing all themes as objects.
-	 */
-	
-	public static function getThemes($path = false) {
-		
-		if (!$path) {
-			$path = AM_BASE_DIR . AM_DIR_THEMES;
-		}
-		
-		$themes = array();
-		$defaults = array(
-			'name' => false, 
-			'description' => false, 
-			'author' => false, 
-			'version' => false, 
-			'license' => false
-		);
-		
-		foreach (glob($path . '/*', GLOB_ONLYDIR) as $dir) {
-			
-			$themeFile = $dir . '/theme.json';
-			$templates = glob($dir . '/*.php');
-			
-			if (is_readable($themeFile) && is_array($templates) && $templates) {
-				
-				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
-				$json = @json_decode(file_get_contents($themeFile), true);
-				$path = Str::stripStart(dirname($themeFile), AM_BASE_DIR . AM_DIR_THEMES . '/');
-				
-				// Set fallback name.
-				if (!is_array($json)) {
-					$json = array('name' => $path);
-				}
-				
-				// Remove the 'page not found' template from the array of templates. 
-				$templates = array_filter($templates, function($file) {
-					return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php'));
-				});
-				
-				// Add theme.
-				$themes[$path] = (object) array_merge(
-							$defaults, 
-							$json, 
-							array(
-								'path' => $path,
-								'templates' => $templates
-							)
-						);
-				
-			} else {
-				
-				// Else check subdirectories for theme.json files.
-				$themes = array_merge($themes, self::getThemes($dir));
-				
-			}
-			
-		}
-		
-		return $themes;
 		
 	}
 	

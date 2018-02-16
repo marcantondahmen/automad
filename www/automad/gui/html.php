@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Html class provides all methods to generate HTML markup for the GUI. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2016-2018 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -523,7 +523,7 @@ class Html {
 
 	public function selectTemplate($name = '', $selectedTheme = false, $selectedTemplate = false) {
 		
-		$themes = FileSystem::getThemes();
+		$themes = $this->Automad->getThemelist()->getThemes();
 		$sharedTheme = $themes[$this->Automad->Shared->get(AM_KEY_THEME)];
 		$templates = array();
 		

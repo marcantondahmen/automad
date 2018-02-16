@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	A Automad object is the "main" object. It consists of many single Page objects, the Shared object and holds also additional data like the Filelist and Pagelist objects.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2017 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2013-2018 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -87,7 +87,13 @@ class Automad {
 	 */
 	
 	private $Pagelist = false;
-		
+	
+	
+	/**
+	 * 	Automad's Themelist object.
+	 */	
+	
+	private $Themelist = false;
 	
 	/**
 	 * 	Array holding all the site's pages and the related data. 
@@ -255,8 +261,16 @@ class Automad {
 		
 		$this->getReservedUrls();
 		$this->Shared = new Shared();
-		$this->collectPages();
 		
+		// Define fallback theme if no theme is defined in the Shared object data.
+		if (!$this->Shared->get(AM_KEY_THEME)) {
+			$themes = $this->getThemelist()->getThemes();
+			$defaultTheme = reset($themes);
+			$this->Shared->data[AM_KEY_THEME] = $defaultTheme->path;
+			Debug::log($defaultTheme->path, 'Defined fallback theme');
+		}
+		
+		$this->collectPages();
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 		
 		// Set the context initially to the requested page.
@@ -397,8 +411,25 @@ class Automad {
 		return $this->Pagelist;
 		
 	}
-
+	
+	
+	/**
+	 * 	Return Automad's instance of the Themelist class and create instance when accessed for the first time.
+	 *
+	 * 	@return object Themelist object
+	 */
+	
+	public function getThemelist() {
 		
+		if (!$this->Themelist) {
+			$this->Themelist = new Themelist();
+		}
+		
+		return $this->Themelist;
+			
+	}
+	
+	
 	/**
 	 *	Tests wheter the currently requested page actually exists and is not an error page.
 	 *

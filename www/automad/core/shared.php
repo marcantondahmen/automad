@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Shared class represents a collection of all shared site-wide data.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2017 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2016-2018 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -65,15 +65,10 @@ class Shared {
 	
 	public function __construct() {
 		
-		// Define default settings.
-		// Use the server name as default site name and the first found theme folder as default theme.	
-		$themes = FileSystem::getThemes();
-		Debug::log($themes, 'Installed themes');
-		$defaultTheme = reset($themes);
-		$defaults = 	array(	
-					AM_KEY_SITENAME => $_SERVER['SERVER_NAME'], 
-					AM_KEY_THEME => $defaultTheme->path
-				);
+		// Use the server name as default site name.
+		$defaults = array(	
+						AM_KEY_SITENAME => $_SERVER['SERVER_NAME'] 
+					);
 		
 		// Merge defaults with settings from file.
 		$this->data = array_merge($defaults, Parse::textFile(AM_FILE_SHARED_DATA));

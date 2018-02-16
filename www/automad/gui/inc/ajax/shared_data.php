@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -100,7 +100,7 @@ if (isset($_POST['data'])) {
 				>
 					<?php 
 					
-					$themes = FileSystem::getThemes();
+					$themes = $this->Automad->getThemelist()->getThemes();
 					Core\Debug::ajax($output, 'themes', $themes);
 					$i = 0;
 					
