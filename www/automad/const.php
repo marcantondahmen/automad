@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -132,7 +132,7 @@ Config::set('AM_ALLOWED_FILE_TYPES',
 
 // PAGE
 Config::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
-Config::set('AM_PAGE_GUI', '/dashboard');
+Config::set('AM_PAGE_DASHBOARD', '/dashboard');
 
 // PERMISSIONS
 Config::set('AM_PERM_DIR', 0755);

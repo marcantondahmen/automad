@@ -66,7 +66,7 @@ $this->element('header');
 					<i class="uk-icon-home"></i>&nbsp;
 					<?php Text::e('btn_home'); ?>
 				</a>
-				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>" class="uk-button">
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>" class="uk-button">
 					<?php Text::e('btn_login'); ?>&nbsp;
 					<i class="uk-icon-sign-in"></i>
 				</a>

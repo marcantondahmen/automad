@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				<div data-am-tree>
 					<div class="am-navbar-push uk-visible-large uk-margin-bottom">
 						<a 
-						href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"
+						href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>"
 						class="am-logo am-sidebar-logo"
 						>
 							<i class="uk-icon-automad"></i>
@@ -71,7 +71,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							</a>
 						</li>
 						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
-							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>">
+							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 								<i class="uk-icon-th-large uk-icon-justify"></i>&nbsp;
 								<?php Text::e('dashboard_title'); ?>
 							</a>

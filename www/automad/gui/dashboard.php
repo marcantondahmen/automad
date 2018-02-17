@@ -174,7 +174,7 @@ class Dashboard {
 		} else if (Core\Parse::query('ajax')) {
 			
 			// Send a redirect URL as answer to an Ajax request when nobody is logged in.
-			die(json_encode(array('redirect' => AM_BASE_INDEX . AM_PAGE_GUI)));
+			die(json_encode(array('redirect' => AM_BASE_INDEX . AM_PAGE_DASHBOARD)));
 			
 		} else {
 	

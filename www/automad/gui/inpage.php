@@ -98,7 +98,7 @@ class InPage {
 	
 	private function injectMarkup($str) {
 		
-		$urlGui = AM_BASE_INDEX . AM_PAGE_GUI;
+		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlData = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_data'));
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
 		$urlCache = $urlGui . '?context=system_settings#' . Core\Str::sanitize(Text::get('sys_cache'));
@@ -129,7 +129,7 @@ class InPage {
 				'<div id="am-inpage-edit-modal" class="uk-modal">' .
 					'<div class="uk-modal-dialog uk-modal-dialog-blank">' .
 						'<div class="uk-container uk-container-center">' .
-							'<form class="uk-form uk-form-stacked uk-margin-top" data-am-inpage-handler="' . AM_BASE_INDEX . AM_PAGE_GUI . '?ajax=inpage_edit">' .
+							'<form class="uk-form uk-form-stacked uk-margin-top" data-am-inpage-handler="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?ajax=inpage_edit">' .
 								'<div class="uk-modal-header">' . 
 									Text::get('inpage_edit_title') . '&nbsp;' .
 									'<a href="#" class="uk-modal-close uk-close"></a>' .

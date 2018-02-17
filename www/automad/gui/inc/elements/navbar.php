@@ -61,7 +61,7 @@ if (User::get()) {
 			<!-- Logo -->
 			<li class="am-navbar-logo">
 				<a 
-				href="<?php echo AM_BASE_INDEX . AM_PAGE_GUI; ?>"
+				href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>"
 				class="am-logo"
 				>
 					<i class="uk-icon-automad"></i>

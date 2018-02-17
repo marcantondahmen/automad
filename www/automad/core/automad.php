@@ -328,7 +328,7 @@ class Automad {
 	private function getRequestedPage() {
 		
 		// Check whether the GUI is requesting the currently edited page.
-		if (AM_REQUEST == AM_PAGE_GUI) {
+		if (AM_REQUEST == AM_PAGE_DASHBOARD) {
 			if (isset($_POST['url'])) {
 				return $this->getPage($_POST['url']);
 			}
@@ -355,8 +355,8 @@ class Automad {
 		}
 		
 		// Add the GUI URL if enabled.
-		if (AM_PAGE_GUI) {
-			$this->reservedUrls[] = AM_PAGE_GUI;
+		if (AM_PAGE_DASHBOARD) {
+			$this->reservedUrls[] = AM_PAGE_DASHBOARD;
 		}
 		
 		Debug::log($this->reservedUrls);

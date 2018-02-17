@@ -89,7 +89,7 @@ session_start();
 
 
 // Split GUI form regular pages.
-if (AM_REQUEST == AM_PAGE_GUI && AM_PAGE_GUI) {
+if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 	
 	$Dashboard = new GUI\Dashboard();
 	$output = $Dashboard->output;
