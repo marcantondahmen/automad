@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Loader class loads the required elements to handle all GUI requests. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2014-2017 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2014-2018 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -79,6 +79,13 @@ class Loader {
 	 */
 	
 	private $Keys;
+	
+	
+	/**
+	 * 	The Themelist object.
+	 */
+	
+	private $Themelist;
 	
 	
 	/**
@@ -152,6 +159,7 @@ class Loader {
 			$this->Content = new Content($this->Automad);
 			$this->Html = new Html($this->Automad);
 			$this->Keys = new Keys($this->Automad);
+			$this->Themelist = new Themelist();
 					
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the dashboard page.

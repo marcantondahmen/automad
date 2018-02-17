@@ -77,7 +77,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				</div>
 				<div class="uk-form-row">
 					<label class="uk-form-label"><?php Text::e('page_theme_template'); ?></label>
-					<?php echo $this->Html->selectTemplate('subpage[theme_template]'); ?>
+					<?php 
+						echo $this->Html->selectTemplate(
+							$this->Themelist,
+							'subpage[theme_template]'
+						); 
+					?>
 				</div>
 			</form>
 			<div class="uk-form-stacked">

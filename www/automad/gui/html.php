@@ -515,15 +515,16 @@ class Html {
 	/**
 	 *	Create a select box containing all installed themes/templates to be included in a HTML form.
 	 *
+	 * 	@param object $Themelist
 	 *	@param string $name
 	 *	@param string $selectedTheme
 	 *	@param string $selectedTemplate
 	 *	@return string The HTML for the select box including a label and a wrapping div.
 	 */
 
-	public function selectTemplate($name = '', $selectedTheme = false, $selectedTemplate = false) {
+	public function selectTemplate($Themelist, $name = '', $selectedTheme = false, $selectedTemplate = false) {
 		
-		$themes = $this->Automad->getThemelist()->getThemes();
+		$themes = $Themelist->getThemes();
 		$sharedTheme = $themes[$this->Automad->Shared->get(AM_KEY_THEME)];
 		$templates = array();
 		

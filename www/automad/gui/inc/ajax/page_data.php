@@ -148,7 +148,14 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								<?php Text::e('page_theme_template'); ?>
 								<a href="#" class="uk-modal-close uk-close"></a>
 							</div>	
-							<?php echo $this->Html->selectTemplate('theme_template', $data[AM_KEY_THEME], $Page->template); ?>	
+							<?php 
+								echo $this->Html->selectTemplate(
+									$this->Themelist,
+									'theme_template', 
+									$data[AM_KEY_THEME], 
+									$Page->template
+								); 
+							?>	
 							<div class="uk-modal-footer uk-text-right">
 								<button class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>

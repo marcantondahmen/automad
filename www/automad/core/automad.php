@@ -90,12 +90,6 @@ class Automad {
 	
 	
 	/**
-	 * 	Automad's Themelist object.
-	 */	
-	
-	private $Themelist = false;
-	
-	/**
 	 * 	Array holding all the site's pages and the related data. 
 	 *	
 	 *	To access the data for a specific page, use the url as key: $this->collection['url'].
@@ -261,15 +255,6 @@ class Automad {
 		
 		$this->getReservedUrls();
 		$this->Shared = new Shared();
-		
-		// Define fallback theme if no theme is defined in the Shared object data.
-		if (!$this->Shared->get(AM_KEY_THEME)) {
-			$themes = $this->getThemelist()->getThemes();
-			$defaultTheme = reset($themes);
-			$this->Shared->data[AM_KEY_THEME] = $defaultTheme->path;
-			Debug::log($defaultTheme->path, 'Defined fallback theme');
-		}
-		
 		$this->collectPages();
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 		
@@ -410,23 +395,6 @@ class Automad {
 		
 		return $this->Pagelist;
 		
-	}
-	
-	
-	/**
-	 * 	Return Automad's instance of the Themelist class and create instance when accessed for the first time.
-	 *
-	 * 	@return object Themelist object
-	 */
-	
-	public function getThemelist() {
-		
-		if (!$this->Themelist) {
-			$this->Themelist = new Themelist();
-		}
-		
-		return $this->Themelist;
-			
 	}
 	
 	

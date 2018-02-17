@@ -100,7 +100,7 @@ if (isset($_POST['data'])) {
 				>
 					<?php 
 					
-					$themes = $this->Automad->getThemelist()->getThemes();
+					$themes = $this->Themelist->getThemes();
 					Core\Debug::ajax($output, 'themes', $themes);
 					$i = 0;
 					

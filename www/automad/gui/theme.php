@@ -35,7 +35,8 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -68,7 +69,7 @@ class Theme {
 	public function __construct($themeJSON) {
 		
 		$json = false;
-		$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_THEMES . '/');
+		$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_THEMES . '/');
 		$defaults = array(
 						'name' => $path, 
 						'description' => false, 
@@ -101,7 +102,7 @@ class Theme {
 						)
 					);
 		
-		Debug::log($this->data, $path);
+		Core\Debug::log($this->data, $path);
 		
 	}
 	

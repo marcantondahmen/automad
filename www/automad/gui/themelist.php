@@ -35,7 +35,8 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,8 +66,7 @@ class Themelist {
 	
 	public function __construct() {
 		
-		$this->themes = $this->collectThemes(); 
-		Debug::log($this->themes);
+		Core\Debug::log($this, 'New instance created');
 		
 	}
 
@@ -99,7 +99,7 @@ class Themelist {
 			if (is_readable($themeJSON) && is_array($templates) && $templates) {
 				
 				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
-				$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_THEMES . '/');
+				$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_THEMES . '/');
 				$themes[$path] = new Theme($themeJSON);
 				
 			} else {
@@ -117,12 +117,20 @@ class Themelist {
 	
 	
 	/**
-	 * 	Return the Theme objects array.
+	 * 	Return the Theme objects array. 
+	 * 	
+	 * 	In case the method is called the first time, 
+	 * 	all themes get collected from the theme directory first.
 	 *
 	 * 	@return array The array of Theme objects
 	 */
 	
 	public function getThemes() {
+		
+		if (!$this->themes) {
+			$this->themes = $this->collectThemes();
+			Core\Debug::log($this->themes);
+		}
 		
 		return $this->themes;
 		
