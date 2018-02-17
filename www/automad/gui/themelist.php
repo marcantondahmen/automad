@@ -117,6 +117,24 @@ class Themelist {
 	
 	
 	/**
+	 * 	Get the theme object for a given page object.
+	 *
+	 *  @param object $Page
+	 *  @return object The theme object related to the given page
+	 */
+	
+	public function getPageTheme($Page) {
+		
+		$themes = $this->getThemes();
+		
+		if (array_key_exists($Page->get(AM_KEY_THEME), $themes)) {
+			return $themes[$Page->get(AM_KEY_THEME)];
+		} 
+		
+	}
+	
+	
+	/**
 	 * 	Return the Theme objects array. 
 	 * 	
 	 * 	In case the method is called the first time, 
@@ -129,7 +147,7 @@ class Themelist {
 		
 		if (!$this->themes) {
 			$this->themes = $this->collectThemes();
-			Core\Debug::log($this->themes);
+			Core\Debug::log($this->themes, 'Collecting themes');
 		}
 		
 		return $this->themes;

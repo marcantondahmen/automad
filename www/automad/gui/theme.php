@@ -57,7 +57,7 @@ class Theme {
 	 * 	Theme data.
 	 */
 	
-	private $data = array();
+	public $data = array();
 	
 	
 	/**
@@ -75,7 +75,8 @@ class Theme {
 						'description' => false, 
 						'author' => false, 
 						'version' => false, 
-						'license' => false
+						'license' => false,
+						'tooltips' => array()
 					);
 		
 		if (is_readable($themeJSON)) {
@@ -102,8 +103,6 @@ class Theme {
 						)
 					);
 		
-		Core\Debug::log($this->data, $path);
-		
 	}
 	
 	
@@ -119,6 +118,22 @@ class Theme {
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
 		} 
+		
+	}
+	
+	
+	/**
+	 * 	Return the tooltip for the requested variable name (key in the data array).
+	 *
+	 * 	@param string $key
+	 * 	@return string The tooltip text
+	 */
+	
+	public function getTooltip($key) {
+		
+		if (array_key_exists($key, $this->data['tooltips'])) {
+			return htmlentities(htmlentities($this->data['tooltips'][$key]));
+		}
 		
 	}
 	

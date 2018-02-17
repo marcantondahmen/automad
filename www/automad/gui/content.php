@@ -590,11 +590,12 @@ class Content {
 	 *      Else the received data gets merged with the full data array of the requested context and 
 	 *      saved back into the .txt file. 
 	 *      In case the title variable gets modified, the page directory gets renamed accordingly.
-	 *      
+	 *
+	 * 		@param object $Themelist
 	 *      @return array $output (AJAX response)
 	 */
 	
-	public function inPageEdit() {
+	public function inPageEdit($Themelist) {
 		
 		$output = array();
 		
@@ -655,17 +656,17 @@ class Content {
 						// There are two cases where the currently requested page has to be
 						// simply reloaded without redirection:
 						// 
-						// 1. 	The context of the edits is not the current page and another
-						// 	pages gets actually edited.
-						// 	That would be the case for edits of pages displayed in pagelists or menus.
+						// 1.	The context of the edits is not the current page and another
+						// 		pages gets actually edited.
+						// 		That would be the case for edits of pages displayed in pagelists or menus.
 						// 	
 						// 2.	The context is the current page, but the title didn't change and
-						// 	therefore the URL stays the same.
+						// 		therefore the URL stays the same.
 						$output['redirect'] = AM_BASE_INDEX . $_POST['url'];
 						
 					}
 					
-					// Append query string inf not empty.
+					// Append query string if not empty.
 					if (!empty($_POST['query'])) {
 						$output['redirect'] .= '?' . $_POST['query'];
 					}
@@ -680,11 +681,19 @@ class Content {
 						if (!empty($Page->data[$_POST['key']])) {
 							$value = $Page->data[$_POST['key']];
 						}
-				
-						$output['html'] = 	'<div id="am-inpage-edit-fields">' .
-									'<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
-									$this->Html->formField($_POST['key'], $value) . 
-									'</div>';
+						
+						if ($tooltip = $Themelist->getPageTheme($Page)->getTooltip($_POST['key'])) {
+							$tooltip = '<div class="uk-alert uk-margin-small-bottom" data-uk-alert>' .
+							 		   '<a href="" class="uk-alert-close uk-close"></a>' .
+									   $tooltip . 
+									   '</div>';
+						}
+						
+						$output['html'] = '<div id="am-inpage-edit-fields">' .
+										  $tooltip .
+										  '<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
+										  $this->Html->formField($_POST['key'], $value) . 
+										  '</div>';
 						
 					}
 			

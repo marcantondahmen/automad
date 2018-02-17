@@ -272,7 +272,14 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					<span class="uk-badge"><?php echo count($keysInCurrentTemplate); ?></span>
 				</div>
 				<div class="uk-accordion-content">
-					<?php echo $this->Html->formGroup($keysInCurrentTemplate, $data); ?>
+					<?php 
+						echo $this->Html->formGroup(
+							$keysInCurrentTemplate, 
+							$data, 
+							false, 
+							$this->Themelist->getPageTheme($Page)
+						); 
+					?>
 				</div>
 				<?php } ?>
 				

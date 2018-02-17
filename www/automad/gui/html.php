@@ -136,10 +136,11 @@ class Html {
 	 *      @param string $key          
 	 *      @param string $value        
 	 *      @param boolean $removeButton 
+	 *      @param object $Theme
 	 *      @return string The generated HTML            
 	 */
 	
-	public function formField($key = '', $value = '', $removeButton = false) {
+	public function formField($key = '', $value = '', $removeButton = false, $Theme = false) {
 		
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
@@ -148,12 +149,18 @@ class Html {
 		$id = 'am-input-data-' . $key;
 	
 		$html = '<div class="uk-form-row">' .
-			'<label class="uk-form-label" for="' . $id . '" title="' . $key . '" data-uk-tooltip="{pos:\'top-left\',offset:3}">' . 
-			ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key)))) . 
-			'</label>';
+				'<label class="uk-form-label" for="' . $id . '">' . 
+				ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key)))) . 
+				'</label>';
 
 		if ($removeButton) {
 			$html .= '<button type="button" class="am-remove-parent uk-position-top-right uk-margin-top uk-close"></button>';
+		}
+
+		$tooltip = '';
+		
+		if ($Theme) {
+			$tooltip = ' title="' . $Theme->getTooltip($key) . '" data-uk-tooltip';
 		}
 
 		// Build attribute string.
@@ -171,9 +178,11 @@ class Html {
 			
 			$attr .= $placeholder;
 			
-			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor>' . 
-					$value . 
-					'</textarea>';
+			$html .= '<div' . $tooltip . '>' .
+					 '<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor>' . 
+					 $value . 
+					 '</textarea>' .
+					 '</div>';
 			
 		} else if (strpos($key, 'date') === 0) {
 			
@@ -190,22 +199,22 @@ class Html {
 				$attrTime .= ' placeholder="' . Core\Str::dateFormat($this->Automad->Shared->get($key), $formatTime) . '"';
 			}
 			
-			$html .=	'<div data-am-datetime>' .
-					// Actual combined date-time value (hidden).
-					'<input type="hidden" ' . $attr  . ' />' .
-					// Date picker.
-					'<div class="uk-form-icon">' . 
-					'<i class="uk-icon-calendar"></i>' .
-					'<input type="text" class="uk-width-1-1" ' . $attrDate . ' data-uk-datepicker="{format:\'YYYY-MM-DD\',pos:\'bottom\'}" />' .
-					'</div>' .
-					// Time picker.
-					'<div class="uk-form-icon">' . 
-					'<i class="uk-icon-clock-o"></i>' .
-					'<input type="text" class="uk-width-1-1" ' . $attrTime . ' data-uk-timepicker="{format:\'24h\'}" />' .
-					'</div>' .
-					// Reset button.
-					'<button type="button" class="uk-button" data-am-clear-date><i class="uk-icon-remove"></i></button>' .
-					'</div>';	
+			$html .= '<div data-am-datetime' . $tooltip . '>' .
+					 // Actual combined date-time value (hidden).
+					 '<input type="hidden" ' . $attr  . ' />' .
+					 // Date picker.
+					 '<div class="uk-form-icon">' . 
+					 '<i class="uk-icon-calendar"></i>' .
+					 '<input type="text" class="uk-width-1-1" ' . $attrDate . ' data-uk-datepicker="{format:\'YYYY-MM-DD\',pos:\'bottom\'}" />' .
+					 '</div>' .
+					 // Time picker.
+					 '<div class="uk-form-icon">' . 
+					 '<i class="uk-icon-clock-o"></i>' .
+					 '<input type="text" class="uk-width-1-1" ' . $attrTime . ' data-uk-timepicker="{format:\'24h\'}" />' .
+					 '</div>' .
+					 // Reset button.
+					 '<button type="button" class="uk-button" data-am-clear-date><i class="uk-icon-remove"></i></button>' .
+					 '</div>';	
 			
 		} else if (strpos($key, 'checkbox') === 0) {
 			
@@ -213,14 +222,14 @@ class Html {
 				$attr .= ' checked';
 			}
 			
-			$html .=	'<label class="am-toggle-switch" data-am-toggle>&nbsp;' . 
-					ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
-					'<input ' . $attr . ' type="checkbox"  />' .
-					'</label>';
+			$html .= '<label class="am-toggle-switch" data-am-toggle' . $tooltip . '>&nbsp;' . 
+					 ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
+					 '<input ' . $attr . ' type="checkbox"  />' .
+					 '</label>';
 			
 		} else {
 			
-			$attr .= $placeholder;
+			$attr .= $placeholder . $tooltip;
 			
 			// The default is a simple textarea.
 			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10">' . 
@@ -245,10 +254,11 @@ class Html {
 	 *	@param array $keys
 	 *	@param array $data
 	 *	@param string $addVariableIdPrefix (automatically prefies all IDs for the HTML elements needed for the modal to add variables)
+	 *	@param object $Theme
 	 *	@return string The HTML for the textarea
 	 */
 	
-	public function formGroup($keys, $data = array(), $addVariableIdPrefix = false) {
+	public function formGroup($keys, $data = array(), $addVariableIdPrefix = false, $Theme = false) {
 			
 		$html = '';
 		
@@ -262,7 +272,7 @@ class Html {
 			}
 	
 			// Note that passing $addVariableIdPrefix only to create remove buttons if string is not empty.
-			$html .= $this->formField($key, $value, $addVariableIdPrefix);
+			$html .= $this->formField($key, $value, $addVariableIdPrefix, $Theme);
 			
 		}
 		
