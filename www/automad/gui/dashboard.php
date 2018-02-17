@@ -43,14 +43,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Loader class loads the required elements to handle all GUI requests. 
+ *	The Dashboard class loads the required dashboard elements for the requested context. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2014-2018 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Loader {
+class Dashboard {
 	
 	
 	/**
@@ -132,7 +132,7 @@ class Loader {
 	 *	Example Context: 	http://domain.com/gui?context=edit_page will include 	automad/gui/context/edit_page.php
 	 *	Example Ajax:		http://domain.com/gui?ajax=page_data will include 	automad/gui/ajax/page_data.php
 	 *
-	 *	Since every request for the gui (pages and ajax) gets still routed over "/index.php" > "/automad/init.php" > new GUI\Loader(), 
+	 *	Since every request for the gui (pages and ajax) gets still routed over "/index.php" > "/automad/init.php" > new GUI\Dashboard(), 
 	 *	all the session/login checking needs only to be done here once, simply because all modules get includede here.   
 	 */
 	
@@ -168,7 +168,7 @@ class Loader {
 			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Parse::query('ajax') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
 				$inc = 'ajax/' . Core\Parse::query('ajax');
 			} else {
-				$inc = 'dashboard';
+				$inc = 'start';
 			}
 	
 		} else if (Core\Parse::query('ajax')) {
