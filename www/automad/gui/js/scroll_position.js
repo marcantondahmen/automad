@@ -63,7 +63,7 @@
 			// Handle scrolled event.
 			$(window).on('load scrolled.automad', function() {
 				
-				var 	scrolled = $doc.scrollTop(),
+				var scrolled = $doc.scrollTop(),
 					cls = 'am-scrolled';
 				
 				if (scrolled > 30) {

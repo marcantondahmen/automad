@@ -43,19 +43,15 @@
 	Automad.addVariable = {
 		
 		selectors: {
-			
 			container: 	'#am-add-variable-container',
 			modal: 		'#am-add-variable-modal',
-			modalInput: 	'#am-add-variable-input',
+			modalInput: '#am-add-variable-input',
 			submit:		'#am-add-variable-submit'
-			
 		},
 		
 		dataAttr: {
-			
-			errorName: 	'data-am-error-name',
+			errorName: 		'data-am-error-name',
 			errorExists: 	'data-am-error-exists'
-			
 		},
 		
 		append: function(e) {

@@ -90,7 +90,7 @@
 		// Update the label of a nested input and the visibility of an optional element.
 		update: function($input) {
 		
-			var 	t = Automad.toggle,
+			var t = Automad.toggle,
 				$label = $input.parent(),
 				toggleContainer = $label.data(Automad.util.dataCamelCase(t.labelDataAttr));
 		
@@ -104,7 +104,7 @@
 			// Update optional container.
 			if (toggleContainer) {
 				
-				var 	$toggleContainer = $(toggleContainer);
+				var $toggleContainer = $(toggleContainer);
 								
 				if ($input.is(':checked')) {
 					$toggleContainer.addClass(t.class.active);

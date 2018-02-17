@@ -107,29 +107,31 @@ $this->element('header');
 					<div id="am-cache-settings" class="am-toggle-container">
 						<!-- Cache Monitor Delay -->
 						<p class="uk-margin-large-top"><?php Text::e('sys_cache_monitor_info') ?></p>
-						<?php echo 	$this->Html->select(
-									'cache[monitor-delay]',
-									array(
-										'1 min' => 60,
-										'2 min' => 120,
-										'5 min' => 300
-									),
-									AM_CACHE_MONITOR_DELAY,
-									Text::get('sys_cache_monitor')
-								); 
+						<?php 
+							echo $this->Html->select(
+								'cache[monitor-delay]',
+								array(
+									'1 min' => 60,
+									'2 min' => 120,
+									'5 min' => 300
+								),
+								AM_CACHE_MONITOR_DELAY,
+								Text::get('sys_cache_monitor')
+							); 
 						?>
 						<!-- Cache Lifetime -->
 						<p class="uk-margin-large-top"><?php Text::e('sys_cache_lifetime_info') ?></p>
-						<?php echo 	$this->Html->select(
-									'cache[lifetime]',
-									array(
-										'1 h' => 3600,
-										'6 h' => 21600,
-										'12 h' => 43200
-									),
-									AM_CACHE_LIFETIME,
-									Text::get('sys_cache_lifetime')
-								);
+						<?php 
+							echo $this->Html->select(
+								'cache[lifetime]',
+								array(
+									'1 h' => 3600,
+									'6 h' => 21600,
+									'12 h' => 43200
+								),
+								AM_CACHE_LIFETIME,
+								Text::get('sys_cache_lifetime')
+							);
 						?> 
 					</div>	
 				</form>

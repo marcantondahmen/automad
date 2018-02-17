@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /*
- *	The GUI Start Page. As part of the GUI, this file is only to be included via the GUI class.
+ *	The Dashboard Start Page. As part of the dashboard, this file is only to be included via the Dashboard class.
  */
 
 

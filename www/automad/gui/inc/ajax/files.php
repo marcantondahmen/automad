@@ -138,13 +138,13 @@ if ($files) { ?>
 				$ext = FileSystem::getExtension($file);
 				$caption = Core\Parse::caption($file);
 				
-				$fileInfo = array(
-					'img' => false, 
-					'filename' => basename($file), 
-					'caption' => htmlspecialchars($caption), 
-					'extension' => htmlspecialchars($ext),
-					'download' => AM_BASE_URL . Core\Str::stripStart($file, AM_BASE_DIR)
-				);
+				$fileInfo = 	array(
+									'img' => false, 
+									'filename' => basename($file), 
+									'caption' => htmlspecialchars($caption), 
+									'extension' => htmlspecialchars($ext),
+									'download' => AM_BASE_URL . Core\Str::stripStart($file, AM_BASE_DIR)
+								);
 				
 				if (Core\Parse::fileIsImage($file)) { 
 
@@ -156,13 +156,13 @@ if ($files) { ?>
 					$imgModal = new Core\Image($file, 1000, 800, false);
 			
 					// Update file info with image.
-					$fileInfo['img'] = array(
-						'src' => AM_BASE_URL . $imgModal->file,
-						'width' => $imgModal->width,
-						'height' => $imgModal->height,
-						'originalWidth' => $imgPanel->originalWidth,
-						'originalHeight' => $imgPanel->originalHeight
-					);
+					$fileInfo['img'] = 	array(
+											'src' => AM_BASE_URL . $imgModal->file,
+											'width' => $imgModal->width,
+											'height' => $imgModal->height,
+											'originalWidth' => $imgPanel->originalWidth,
+											'originalHeight' => $imgPanel->originalHeight
+										);
 					
 				} else {
 					

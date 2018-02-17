@@ -131,13 +131,13 @@ class Html {
 	
 	
 	/**
-	 *      Create a form field depending on the name.
+	 *	Create a form field depending on the name.
 	 *      
-	 *      @param string $key          
-	 *      @param string $value        
-	 *      @param boolean $removeButton 
-	 *      @param object $Theme
-	 *      @return string The generated HTML            
+	 *  @param string $key          
+	 *  @param string $value        
+	 *  @param boolean $removeButton 
+	 *  @param object $Theme
+	 *  @return string The generated HTML            
 	 */
 	
 	public function formField($key = '', $value = '', $removeButton = false, $Theme = false) {
@@ -248,8 +248,8 @@ class Html {
 	/**
 	 *	Create form fields for page/shared variables.         
 	 *      
-	 *      Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
-	 *      Note used prefix must match the ID selectors defined in 'add_variable.js'.
+	 *  Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
+	 *  Note used prefix must match the ID selectors defined in 'add_variable.js'.
 	 *
 	 *	@param array $keys
 	 *	@param array $data
@@ -285,7 +285,7 @@ class Html {
 			$addVarInputlId = $addVariableIdPrefix . '-input';
 			$addVarContainerId = $addVariableIdPrefix . '-container';
 			
-			$html =		'<div id="' . $addVarContainerId . '" class="uk-margin-bottom">' . $html . '</div>' .
+			$html =	'<div id="' . $addVarContainerId . '" class="uk-margin-bottom">' . $html . '</div>' .
 					// The modal button.
 					'<a href="#' . $addVarModalId . '" class="uk-button uk-button-success uk-margin-small-top" data-uk-modal>' .
 					'<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
@@ -316,29 +316,29 @@ class Html {
 	
 	
 	/**
-	 *      Generate thumbnail for page grid.
+	 *	Generate thumbnail for page grid.
 	 *      
-	 *      @param string $file  
-	 *      @param float $w     
-	 *      @param float $h     
-	 *      @param string $gridW (uk-width-* suffix) 
-	 *      @return string The generated markup
+	 *  @param string $file  
+	 *  @param float $w     
+	 *  @param float $h     
+	 *  @param string $gridW (uk-width-* suffix) 
+	 *  @return string The generated markup
 	 */
 	
 	private function gridThumbnail($file, $w, $h, $gridW) {
 		
 		$img = new Core\Image($file, $w, $h, true);
 		return 	'<li class="uk-width-' . $gridW . '">' .
-			'<img src="' . AM_BASE_URL . $img->file . '" alt="' . basename($img->file) . '" width="' . $img->width . '" height="' . $img->height . '">' .
-			'</li>';
+				'<img src="' . AM_BASE_URL . $img->file . '" alt="' . basename($img->file) . '" width="' . $img->width . '" height="' . $img->height . '">' .
+				'</li>';
 	
 	}
 	
 	
 	/**
-	 *      Create loading icon.
+	 *	Create loading icon.
 	 *      
-	 *      @return string The HTML of the loading icon
+	 * 	@return string The HTML of the loading icon
 	 */
 	
 	public function loading() {
@@ -428,21 +428,21 @@ class Html {
 			}
 			
 			$html .= 	'</a>' .
-					// Title & date. 
-					$Page->get(AM_KEY_TITLE) . 
-					'<div class="uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
-					'<div class="am-panel-bottom">' .
-					'<span>' . 
-					'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil" data-uk-tooltip></a>&nbsp;' .
-					'<a href="' . AM_BASE_INDEX . $Page->url . '" title="' . Text::get('btn_inpage_edit') . '" class="uk-icon-button uk-icon-share" data-uk-tooltip></a>' .
-					'</span>' .
-					'</div>' .
-					'</div>' .
-					'</li>';
+						// Title & date. 
+						$Page->get(AM_KEY_TITLE) . 
+						'<div class="uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
+						'<div class="am-panel-bottom">' .
+						'<span>' . 
+						'<a href="' . $link . '" title="' . Text::get('btn_edit_page') . '" class="uk-icon-button uk-icon-pencil" data-uk-tooltip></a>&nbsp;' .
+						'<a href="' . AM_BASE_INDEX . $Page->url . '" title="' . Text::get('btn_inpage_edit') . '" class="uk-icon-button uk-icon-share" data-uk-tooltip></a>' .
+						'</span>' .
+						'</div>' .
+						'</div>' .
+						'</li>';
 				
 		}
 		
-		$html .= 	'</ul>';
+		$html .= '</ul>';
 		
 		return $html;
 		
@@ -450,10 +450,10 @@ class Html {
 	
 	
 	/**
-	 *      Create a search field.
+	 *	Create a search field.
 	 *      
-	 *      @param string $tooltip
-	 *      @return string The HTML for the search field
+	 *  @param string $tooltip
+	 *  @return string The HTML for the search field
 	 */
 	
 	public function searchField($placeholder = '', $tooltip = '') {
@@ -463,30 +463,30 @@ class Html {
 		}
 		
 		return  '<form class="uk-form uk-width-1-1" action="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '" method="get" data-am-autocomplete-submit>' .
-				'<input type="hidden" name="context" value="search" />' .
-				'<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">' .
-					'<input ' .
-					'class="uk-form-controls uk-width-1-1" ' .
-					'name="query" ' .
-					'type="search" ' .
-					'placeholder="' . $placeholder . '" ' .
-					$tooltip .
-					'required ' .
-					'/>' .
-				'</div>' . 
-			'</form>';
+					'<input type="hidden" name="context" value="search" />' .
+					'<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">' .
+						'<input ' .
+						'class="uk-form-controls uk-width-1-1" ' .
+						'name="query" ' .
+						'type="search" ' .
+						'placeholder="' . $placeholder . '" ' .
+						$tooltip .
+						'required ' .
+						'/>' .
+					'</div>' . 
+				'</form>';
 		
 	}
 	
 	
 	/**
-	 *      Create a select button.
+	 *	Create a select button.
 	 *
-	 *      @param string $name
-	 *      @param array $values
-	 *      @param string $selected
-	 *      @param string $prefix
-	 *      @return string The HTML for the buttons
+	 *  @param string $name
+	 *  @param array $values
+	 *  @param string $selected
+	 *  @param string $prefix
+	 *  @return string The HTML for the buttons
 	 */
 	
 	public function select($name, $values, $selected, $prefix = '') {
@@ -497,10 +497,10 @@ class Html {
 		}
 		
 		$html = '<div class="uk-button uk-form-select" data-uk-form-select="{activeClass:\'\'}">' . 
-			ltrim($prefix . ' ') . 
-			'<span></span>&nbsp;&nbsp;' .
-			'<i class="uk-icon-caret-down"></i>' . 
-			'<select name="' . $name . '">';
+				ltrim($prefix . ' ') . 
+				'<span></span>&nbsp;&nbsp;' .
+				'<i class="uk-icon-caret-down"></i>' . 
+				'<select name="' . $name . '">';
 		
 		foreach ($values as $text => $value) {
 			
@@ -515,7 +515,7 @@ class Html {
 		}
 		
 		$html .= '</select>' . 
-			 '</div>';
+			 	 '</div>';
 		
 		return $html;
 		
@@ -591,12 +591,12 @@ class Html {
 	
 	
 	/**
-	 *      Create a panel for an AJAX status request with loading animation.
+	 *  Create a panel for an AJAX status request with loading animation.
 	 *      
-	 *      @param string $status
-	 *      @param string $tab
-	 *      @param string $icon
-	 *      @return string The HTML for the status panel
+	 *  @param string $status
+	 *  @param string $tab
+	 *  @param string $icon
+	 *  @return string The HTML for the status panel
 	 */
 	
 	public function statusPanel($status, $tab, $icon) {
@@ -616,13 +616,13 @@ class Html {
 
 
 	/**
-	 *      Create the inner HTML of a status panel.
+	 *  Create the inner HTML of a status panel.
 	 *      
-	 *      @param string $iconTop
-	 *      @param string $textTop
-	 *      @param string $iconBottom
-	 *      @param string $textBottom
-	 *      @return string The inner HTML for a status panel
+	 *  @param string $iconTop
+	 *  @param string $textTop
+	 *  @param string $iconBottom
+	 *  @param string $textBottom
+	 *  @return string The inner HTML for a status panel
 	 */
 	
 	public function status($iconTop, $textTop, $iconBottom, $textBottom) {
@@ -709,19 +709,19 @@ class Html {
 	
 	
 	/**
-	 *      Create a sticky switcher menu with an optional dropdown menu.
+	 *  Create a sticky switcher menu with an optional dropdown menu.
 	 *
-	 *      @param string $target
-	 *      @param array $items Main menu items
-	 *      @param array $dropdown Dropdown menu items
-	 *      @return string The rendered menu HTML
+	 *  @param string $target
+	 *  @param array $items Main menu items
+	 *  @param array $dropdown Dropdown menu items
+	 *  @return string The rendered menu HTML
 	 */
 	
 	public function stickySwitcher($target, $items = array(), $dropdown = array()) {
 		
 		$html = '<div class="am-switcher" data-uk-sticky="{top:60}">' .
-			'<div class="am-switcher-buttons">' .
-		 	'<div data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\'}">';
+				'<div class="am-switcher-buttons">' .
+		 		'<div data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\'}">';
 	
 		foreach ($items as $item) {
 			
@@ -729,9 +729,9 @@ class Html {
 			$tab = Core\Str::sanitize(preg_replace('/&\w+;/', '', strip_tags($item['text'])), true);
 			
 			$html .= '<button class="uk-button uk-button-large" data-am-tab="' . $tab . '">' . 
-				 '<span class="uk-visible-small">' . $item['icon'] . '</span>' .
-				 '<span class="uk-hidden-small">' . $item['text'] . '</span>' .
-				 '</button>';
+				 	 '<span class="uk-visible-small">' . $item['icon'] . '</span>' .
+				 	 '<span class="uk-hidden-small">' . $item['text'] . '</span>' .
+				  	 '</button>';
 				 
 		}
 	
@@ -741,22 +741,22 @@ class Html {
 		if ($dropdown) {
 			$html .= '<div data-uk-dropdown="{mode:\'click\',pos:\'bottom-right\'}">' . 
 	        		 '<a href="#" class="uk-button uk-button-large">' .
-				 Text::get('btn_more') . '&nbsp;&nbsp;<i class="uk-icon-caret-down"></i>' .
-				 '</a>' .
+				 	 Text::get('btn_more') . '&nbsp;&nbsp;<i class="uk-icon-caret-down"></i>' .
+				 	 '</a>' .
 	        		 '<div class="uk-dropdown uk-dropdown-small">' .
-	            		 '<ul class="uk-nav uk-nav-dropdown">';
+	            	 '<ul class="uk-nav uk-nav-dropdown">';
 			
 		    	foreach ($dropdown as $item) {
 		    		$html .= '<li>' . $item . '</li>';
 		    	}
 			
 		    	$html .= '</ul>' . 
-				 '</div>' . 
-				 '</div>';
+				 		 '</div>' . 
+				 	 	 '</div>';
 		}
 	
 		$html .= '</div>' .
-			 '</div>';
+			 	 '</div>';
 	
 		return $html;
 			

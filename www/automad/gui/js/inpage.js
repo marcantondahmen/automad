@@ -69,7 +69,7 @@
 					$form = $modal.find('form'),
 					handler = $form.data(u.dataCamelCase(ip.dataAttr.handler)),
 					$loader = $('<i></i>', { 'class': 'uk-icon-circle-o-notch uk-icon-spin uk-icon-small' })
-						  .insertAfter($title.parent()),
+						  	  .insertAfter($title.parent()),
 					$footer = $form.find('.uk-modal-footer');
 					
 				// Remove possible title and inputs from previous call.
@@ -81,7 +81,7 @@
 							
 					if (data.html) {
 						
-						var 	$fields = $(data.html).insertBefore($footer).hide(),
+						var $fields = $(data.html).insertBefore($footer).hide(),
 							context = $fields.find('[name="context"]').val();
 						
 						// Set context in modal title.
@@ -135,7 +135,7 @@
 			
 			init: function() {
 				
-				var 	ips = Automad.inPage.selectors,
+				var ips = Automad.inPage.selectors,
 					$menubar = $(ips.menubar).draggabilly({
 							handle: ips.dragHandle
 					});

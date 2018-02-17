@@ -52,50 +52,50 @@
 			 *
 			 * 	FORM ATTRIBUTES:
 			 *	
-			 * 	data-am-handler="handler"		Generally, all forms with a [data-am-handler] attribute will be sumbitted to their AJAX handler, 
-			 *						specified in "data-am-handler".
-			 *						For example: 
-			 * 						"<form data-am-handler="page_data"></form>"
-			 *						will submit the form to "?ajax=page_data"
+			 * 	data-am-handler="handler"			Generally, all forms with a [data-am-handler] attribute will be sumbitted to their AJAX handler, 
+			 *										specified in "data-am-handler".
+			 *										For example: 
+			 * 										"<form data-am-handler="page_data"></form>"
+			 *										will submit the form to "?ajax=page_data"
 			 *
-			 *      					Note that a page can only (!) have once a handler with the same name.
-			 *      					Having multiple forms with the same handler confuses button and watch states.
+			 *      								Note that a page can only (!) have once a handler with the same name.
+			 *      								Having multiple forms with the same handler confuses button and watch states.
 			 *
-			 * 	data-am-url="page"			To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
-			 *						included in the request.
-			 *						Therefore the data attribute "data-am-url" must be added to the form tag. 
+			 * 	data-am-url="page"					To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
+			 *										included in the request.
+			 *										Therefore the data attribute "data-am-url" must be added to the form tag. 
 			 *						
-			 *	data-am-init				Automatically submit form when a page gets loaded.
+			 *	data-am-init						Automatically submit form when a page gets loaded.
 			 *
-			 * 	data-am-auto-submit			Automatically submit form on changes. Must be added to a button.
+			 * 	data-am-auto-submit					Automatically submit form on changes. Must be added to a button.
 			 *
 			 * 	data-am-close-on-success="#form"	Closes a modal window with the given ID on success.
 			 *
-			 * 	data-am-confirm="Text..."		Confirm submission
+			 * 	data-am-confirm="Text..."			Confirm submission
 			 *
 			 * 
 			 * 	INPUT ATTRIBUTES:
 			 *
-			 *	data-am-enter="#button"			Trigger click event on pressing the enter key. Must be added to an input field.
+			 *	data-am-enter="#button"				Trigger click event on pressing the enter key. Must be added to an input field.
 			 *
 			 *      data-am-watch-exclude			Exclude field from being watched for changes.
 			 *
 			 *
 			 * 	BUTTON ATTRIBUTES:
 			 *
-			 *	data-am-submit="handler"		A button or link with that attribute will be used as submit button for a form having a
-			 * 						"data-am-handler" attribute set to the given handler value.
-			 * 						Note that those buttons automatically get disabled on load and re-enable on changes.
+			 *	data-am-submit="handler"			A button or link with that attribute will be used as submit button for a form having a
+			 * 										"data-am-handler" attribute set to the given handler value.
+			 * 										Note that those buttons automatically get disabled on load and re-enable on changes.
 			 */
 			
-			handler: 	'data-am-handler',
-			url:		'data-am-url',
-			submit:		'data-am-submit',
-			init:		'data-am-init',
-			autoSubmit:	'data-am-auto-submit',
-			close:		'data-am-close-on-success',
-			confirm:	'data-am-confirm',
-			enter:		'data-am-enter',
+			handler: 		'data-am-handler',
+			url:			'data-am-url',
+			submit:			'data-am-submit',
+			init:			'data-am-init',
+			autoSubmit:		'data-am-auto-submit',
+			close:			'data-am-close-on-success',
+			confirm:		'data-am-confirm',
+			enter:			'data-am-enter',
 			watchExclude:	'data-am-watch-exclude'
 			
 		},
@@ -108,43 +108,43 @@
 			 * 	specified in "data-am-handler".
 			 *
 			 * 	For example: 
-			 *  	"<form data-am-handler="page_data"></form>"
-			 *   	will submit the form to "?ajax=page_data"
+			 *  "<form data-am-handler="page_data"></form>"
+			 *  will submit the form to "?ajax=page_data"
 			 *
 			 * 	Server Data:
-			 *  	The function expects the data from the server to be in JSON format.
+			 * 	The function expects the data from the server to be in JSON format.
 			 *  	
-			 *   	1.	data.redirect
-			 *   		will redirect the page to the given URL.
+			 *  1.	data.redirect
+			 *   	will redirect the page to the given URL.
 			 *
 			 * 	2.	data.html
 			 * 		if any string in data.html gets returned from the server, 
 			 * 		the form's (inner) HTML will be replaced.
 			 * 		
-			 *   	3.	data.error
-			 *   		will alert the error message in a notification box.
+			 *  3.	data.error
+			 *   	will alert the error message in a notification box.
 			 *
 			 * 	4.	data.success
 			 * 		will alert the success message in a notification box.
 			 *
-			 *      5.	data.debug
-			 *      	Outputs debug info to the console.
+			 *  5.	data.debug
+			 *      Outputs debug info to the console.
 			 */
 			
-			var	f = 		Automad.form,
-				da = 		f.dataAttr,
-				$form = 	$(e.target),
+			var	f = Automad.form,
+				da = f.dataAttr,
+				$form = $(e.target),
 				
 				// Action
-				handler = 	$form.data(Automad.util.dataCamelCase(f.dataAttr.handler)),
+				handler = $form.data(Automad.util.dataCamelCase(f.dataAttr.handler)),
 				
 				// Optional URL parameter.
 				// Only needed, to identify a page, in case the form relates to a certain page (edit_page.php).
 				// Can be omitted for general form actions.
-				url =		$form.data(Automad.util.dataCamelCase(f.dataAttr.url));
+				url = $form.data(Automad.util.dataCamelCase(f.dataAttr.url));
 							
 			// Get parameters.	
-			var	param =		$form.serializeArray();
+			var	param =	$form.serializeArray();
 			
 			// Add URL to parameters, if existing.	
 			if (url) {
@@ -202,9 +202,9 @@
 			
 			e.preventDefault();
 				
-			var	f = 			Automad.form,
-				$form = 		$(e.target),
-				confirmMessage =	$form.data(Automad.util.dataCamelCase(f.dataAttr.confirm));
+			var	f = Automad.form,
+				$form = $(e.target),
+				confirmMessage = $form.data(Automad.util.dataCamelCase(f.dataAttr.confirm));
 			
 			// If confirmation is required (confirmMessage is not empty) 
 			// and the form is not empty (avoid confirm box for data-am-init forms).
@@ -335,7 +335,7 @@
 			// Remove 'am-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.
 			$doc.on('submit', '[' + da.handler + ']', function(){
 				
-				var 	handler = $(this).data(Automad.util.dataCamelCase(da.handler));
+				var handler = $(this).data(Automad.util.dataCamelCase(da.handler));
 				
 				$('html').removeClass(f.unsavedClassPrefix + handler);
 				
@@ -364,7 +364,7 @@
 					// Only select instance once (:not(.am-change-event)) to avoid stacking events.
 					$('.CodeMirror:not(.am-change-event)').each(function(){
 						
-						var 	$cm = $(this),
+						var $cm = $(this),
 							cm = $cm[0].CodeMirror,
 							
 							// Find textareas before to trigger change event on.
@@ -391,7 +391,7 @@
 		// Reset a form when closing the wrapping modal window and refresh a form[data-am-init] when opening.
 		modalEvents: function() {
 		
-			var 	$modal = $('.uk-modal');
+			var $modal = $('.uk-modal');
 			
 			// Remove all events before adding again, since the 'ajaxComplete' event will be trigger multiple times.
 			$modal.off('show.uk.modal.automad.form');
@@ -426,7 +426,7 @@
 					// Clear registered changes class from html and reset the form.
 					$(this).find('form').each(function() {
 						
-						var 	handler = $(this).data(Automad.util.dataCamelCase(Automad.form.dataAttr.handler));
+						var handler = $(this).data(Automad.util.dataCamelCase(Automad.form.dataAttr.handler));
 						
 						// Remove unsaved class from html element.
 						$('html').removeClass(Automad.form.unsavedClassPrefix + handler);

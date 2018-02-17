@@ -81,7 +81,7 @@
 				// If "scrollToItem" is set, initially scroll to that item.
 				if (settings.scrollToItem) {
 					
-					var 	$item = $box.find(settings.scrollToItem);
+					var $item = $box.find(settings.scrollToItem);
 					
 					if ($item.length) {
 						

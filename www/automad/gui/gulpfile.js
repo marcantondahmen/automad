@@ -31,12 +31,12 @@ var 	gulp = require('gulp'),
 
 
 // Error handling to prevent watch task to fail silently without restarting.
-var 	onError = function(err) {
-			gutil.log(gutil.colors.red('ERROR', err.plugin), err.message);
-			gutil.beep();
-			new gutil.PluginError(err.plugin, err, {showStack: true})
-			this.emit('end');
-		};
+var onError = function(err) {
+		gutil.log(gutil.colors.red('ERROR', err.plugin), err.message);
+		gutil.beep();
+		new gutil.PluginError(err.plugin, err, {showStack: true})
+		this.emit('end');
+	};
 
 
 // Set version in package.json to the current date (YY.MM.DD).
@@ -53,8 +53,8 @@ gulp.task('bump', function() {
 	pkg.version = y + '.' + m + '.' + d;
 	
 	return	gulp.src('./package.json')
-		.pipe(bump( { version: pkg.version } ))
-		.pipe(gulp.dest('./'));
+			.pipe(bump( { version: pkg.version } ))
+			.pipe(gulp.dest('./'));
 	
 });
 
@@ -73,13 +73,13 @@ gulp.task('automad-js', ['bump'], function() {
 		};
 	
 	return 	gulp.src('js/*.js')
-		.pipe(concat('automad.min.js'))
-		.pipe(uglify(uglifyOptions))
-		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
-		// Prefix all UIkit items.
-		.pipe(replace(customize.cls.search, customize.cls.replace))
-		.pipe(replace(customize.da.search, customize.da.replace))
-		.pipe(gulp.dest(destination));
+			.pipe(concat('automad.min.js'))
+			.pipe(uglify(uglifyOptions))
+			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			// Prefix all UIkit items.
+			.pipe(replace(customize.cls.search, customize.cls.replace))
+			.pipe(replace(customize.da.search, customize.da.replace))
+			.pipe(gulp.dest(destination));
 	
 });
 
@@ -151,15 +151,15 @@ gulp.task('libs-js', ['bump'], function() {
 gulp.task('automad-less', ['bump'], function() {
 
 	return 	gulp.src('less/automad.less')
-		.pipe(less())
-		.on('error', onError)
-		.pipe(cleanCSS({ rebase: false }))
-		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
-		.pipe(rename({ suffix: '.min' }))
-		// Prefix all UIkit items.
-		.pipe(replace(customize.cls.search, customize.cls.replace))
-		.pipe(replace(customize.da.search, customize.da.replace))
-		.pipe(gulp.dest(destination));
+			.pipe(less())
+			.on('error', onError)
+			.pipe(cleanCSS({ rebase: false }))
+			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			.pipe(rename({ suffix: '.min' }))
+			// Prefix all UIkit items.
+			.pipe(replace(customize.cls.search, customize.cls.replace))
+			.pipe(replace(customize.da.search, customize.da.replace))
+			.pipe(gulp.dest(destination));
 	
 });
 
@@ -188,14 +188,14 @@ gulp.task('google-fonts-download', function() {
 		ttf = Object.assign({}, options, { format: 'ttf' });
 
 	return	merge2(
-			gulp.src(fontsList)
-			.pipe(googleFonts(woff)),
-			gulp.src(fontsList)
-			.pipe(googleFonts(woff2)),
-			gulp.src(fontsList)
-			.pipe(googleFonts(ttf))
-		)
-		.pipe(gulp.dest(destination));	
+				gulp.src(fontsList)
+				.pipe(googleFonts(woff)),
+				gulp.src(fontsList)
+				.pipe(googleFonts(woff2)),
+				gulp.src(fontsList)
+				.pipe(googleFonts(ttf))
+			)
+			.pipe(gulp.dest(destination));	
 		
 });
 
@@ -207,12 +207,12 @@ gulp.task('google-fonts-css', function() {
 
 	var	rgx = /(src\: url\(([^\)]+?)\.ttf\) format\(\'truetype\'\);)/g,
 		rpl = 	"src: url($2.woff2) format('woff2');" +
-			"\n\tsrc: url($2.woff) format('woff');" + 
-			"\n\t$1";
+				"\n\tsrc: url($2.woff) format('woff');" + 
+				"\n\t$1";
 
 	return	gulp.src('../lib/google/fonts/fonts.css')
-		.pipe(replace(rgx, rpl))
-		.pipe(gulp.dest('../lib/google/fonts'))
+			.pipe(replace(rgx, rpl))
+			.pipe(gulp.dest('../lib/google/fonts'))
 	
 });
 

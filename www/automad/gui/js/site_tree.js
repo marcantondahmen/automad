@@ -34,34 +34,32 @@
  */
 
 
- /*
-  *	Initialize the site tree having a 'data-am-tree' attribute by creating toggle buttons 
-  *	for all nodes and collapsing all inactive ones.
-  *
-  *     The site tree can also be used to select pages and inject their URL in to an input field 
-  *     instead of just navigating to that page. 
-  *     To use a site tree for selection only, the 'data-am-tree' attribute must be 
-  *     set to the selector of the input field.
-  *
-  *     Leaving the attribute empty will disable selection and keep the default link behavior instead.
-  *
-  *	<div data-am-tree="#am-move-page-input">
-  *		...
-  *	</div>
-  *      
-  */
+/*
+ *	Initialize the site tree having a 'data-am-tree' attribute by creating toggle buttons 
+ *	for all nodes and collapsing all inactive ones.
+ *
+ * 	The site tree can also be used to select pages and inject their URL in to an input field 
+ * 	instead of just navigating to that page. 
+ * 	To use a site tree for selection only, the 'data-am-tree' attribute must be 
+ *  set to the selector of the input field.
+ *
+ *  Leaving the attribute empty will disable selection and keep the default link behavior instead.
+ *
+ *	<div data-am-tree="#am-move-page-input">
+ *		...
+ *	</div>
+ *      
+ */
 
 +function(Automad, $) {
 
 	Automad.siteTree = {
 		
 		class: {
-			
 			active: 'uk-active',
 			iconOpen: 'am-tree-icon-open',
 			iconClose: 'am-tree-icon-close',
-			toggle: 'am-tree-toggle'
-			
+			toggle: 'am-tree-toggle'	
 		},
 		
 		dataAttr: 'data-am-tree',
@@ -116,10 +114,10 @@
 				
 				$tree.find('li li').has('li').each(function() {
 
-					var 	$node = 	$(this),
-						$children = 	$node.children('ul'),
-						$button = 	$('<a></a>', { class: t.class.toggle, href: '#' }).prependTo($node),
-						$icon =		$('<i></i>').prependTo($button);
+					var $node = $(this),
+						$children = $node.children('ul'),
+						$button = $('<a></a>', { class: t.class.toggle, href: '#' }).prependTo($node),
+						$icon =	$('<i></i>').prependTo($button);
 				
 					// Collapse the tree only for the non-active pages/path.
 					if ($node.hasClass(t.class.active) || $node.find('.' + t.class.active).length > 0) {

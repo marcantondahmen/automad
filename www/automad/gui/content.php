@@ -61,7 +61,7 @@ class Content {
 
 
 	/**
-	 *      The Html object.
+	 *  The Html object.
 	 */
 	
 	private $Html;
@@ -163,7 +163,7 @@ class Content {
 	
 	
 	/**
-	 *      Clear the page cache.
+	 *	Clear the page cache.
 	 */
 	
 	private function clearCache() {
@@ -185,14 +185,14 @@ class Content {
 		$output = array();
 		
 		$options = array_merge(
-				array(
-					'url' => '',
-					'filename' => '',
-					'width' => false,
-					'height' => false,
-					'crop' => false
-				),
-				$_POST
+			array(
+				'url' => '',
+				'filename' => '',
+				'width' => false,
+				'height' => false,
+				'crop' => false
+			),
+			$_POST
 		);
 		
 		$width = $options['width'];
@@ -223,11 +223,11 @@ class Content {
 				if (is_writable($directory)) {
 					
 					$img = new Core\Image(
-							$file, 
-							$width, 
-							$height,
-							boolval($options['crop'])
-						);
+						$file, 
+						$width, 
+						$height,
+						boolval($options['crop'])
+					);
 					
 					$cachedFile = AM_BASE_DIR . $img->file;
 					$resizedFile = preg_replace('/(\.\w{3,4})$/', '-' . floor($img->width) . 'x' . floor($img->height) . '$1', $file);
@@ -338,9 +338,9 @@ class Content {
 	
 	
 	/**
-	 *      Duplicate a page based on $_POST.
+	 *	Duplicate a page based on $_POST.
 	 *      
-	 *      @return array $output (AJAX response) 
+	 * 	@return array $output (AJAX response) 
 	 */
 	
 	public function duplicatePage() {
@@ -523,10 +523,10 @@ class Content {
 
 
 	/**
-	 *      Return the file system path for the directory of a page based on $_POST['url'].   
-	 *      In case URL is empty, return the '/shared' directory.
+	 *  Return the file system path for the directory of a page based on $_POST['url'].   
+	 *  In case URL is empty, return the '/shared' directory.
 	 *      
-	 *      @return string The full path to the related directory
+	 *  @return string The full path to the related directory
 	 */
 	
 	public function getPathByPostUrl() {
@@ -584,15 +584,15 @@ class Content {
 	
 	
 	/**
-	 *      Handle AJAX request for editing a data variable in-page context.   
+	 *	Handle AJAX request for editing a data variable in-page context.   
 	 *          
-	 *      If no data gets received, form fields to build up the editing dialog are send back. 
-	 *      Else the received data gets merged with the full data array of the requested context and 
-	 *      saved back into the .txt file. 
-	 *      In case the title variable gets modified, the page directory gets renamed accordingly.
+	 *  If no data gets received, form fields to build up the editing dialog are send back. 
+	 *  Else the received data gets merged with the full data array of the requested context and 
+	 *  saved back into the .txt file. 
+	 *  In case the title variable gets modified, the page directory gets renamed accordingly.
 	 *
-	 * 		@param object $Themelist
-	 *      @return array $output (AJAX response)
+	 * 	@param object $Themelist
+	 *  @return array $output (AJAX response)
 	 */
 	
 	public function inPageEdit($Themelist) {
@@ -619,11 +619,11 @@ class Content {
 						
 						// Move directory.
 						$newPagePath = FileSystem::movePageDir(
-								$Page->path, 
-								dirname($Page->path), 
-								$this->extractPrefixFromPath($Page->path), 
-								$_POST['data'][AM_KEY_TITLE]
-							);
+							$Page->path, 
+							dirname($Page->path), 
+							$this->extractPrefixFromPath($Page->path), 
+							$_POST['data'][AM_KEY_TITLE]
+						);
 						
 						Core\Debug::ajax($output, 'renamed page', $newPagePath);
 						
@@ -765,10 +765,10 @@ class Content {
 	
 	
 	/**
-	 *      Return updated context URL based on $path.
+	 *	Return updated context URL based on $path.
 	 *      
-	 *      @param string $path
-	 *      @return string The context URL to the new page
+	 *  @param string $path
+	 *  @return string The context URL to the new page
 	 */
 	
 	private function contextUrlByPath($path) {

@@ -54,7 +54,7 @@ class InPage {
 	
 	
 	/**
-	 *      The constructor.
+	 *  The constructor.
 	 */
 	
 	public function __construct() {
@@ -70,10 +70,10 @@ class InPage {
 	
 	
 	/**
-	 *      Process the page markup and inject all needed GUI markup if an user is logged in.
+	 *  Process the page markup and inject all needed GUI markup if an user is logged in.
 	 *      
-	 *      @param string $str
-	 *      @return string The processed $str
+	 *  @param string $str
+	 *  @return string The processed $str
 	 */
 	
 	public function createUI($str) {
@@ -90,10 +90,10 @@ class InPage {
 	
 	
 	/**
-	 *      Inject GUI markup like bottom menu and modal dialogs.
+	 *	Inject GUI markup like bottom menu and modal dialogs.
 	 *      
-	 *      @param string $str
-	 *      @return string The processed $str
+	 *  @param string $str
+	 *  @return string The processed $str
 	 */
 	
 	private function injectMarkup($str) {
@@ -161,22 +161,22 @@ class InPage {
 	
 	
 	/**
-	 *      Add all needed assets for inpage-editing to the <head> element. 
+	 *	Add all needed assets for inpage-editing to the <head> element. 
 	 *      
-	 *      @param string $str
-	 *      @return string The processed markup
+	 *  @param string $str
+	 *  @return string The processed markup
 	 */
 	
 	private function injectAssets($str) {
 		
 		$assets = 	"\n" .
-				'<!-- Automad GUI -->' . "\n" .
-				'<link href="' . AM_BASE_URL . '/automad/gui/dist/automad.min.css" rel="stylesheet">' . "\n" .
-				'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js"></script>' . "\n" .
-				'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js"></script>' . "\n" .
-				// Cleanup window object by removing jQuery and UIkit.
-				'<script type="text/javascript">$.noConflict(true);delete window.UIkit;</script>' . "\n" .
-				'<!-- Automad GUI end -->' . "\n";
+					'<!-- Automad GUI -->' . "\n" .
+					'<link href="' . AM_BASE_URL . '/automad/gui/dist/automad.min.css" rel="stylesheet">' . "\n" .
+					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js"></script>' . "\n" .
+					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js"></script>' . "\n" .
+					// Cleanup window object by removing jQuery and UIkit.
+					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;</script>' . "\n" .
+					'<!-- Automad GUI end -->' . "\n";
 			
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
@@ -189,12 +189,12 @@ class InPage {
 	
 	
 	/**
-	 *      Inject a temporary markup for an edit button.
+	 *  Inject a temporary markup for an edit button.
 	 *      
-	 *      @param string $value
-	 *      @param string $key
-	 *      @param object $Context
-	 *      @return string The processed $value 
+	 *  @param string $value
+	 *  @param string $key
+	 *  @param object $Context
+	 *  @return string The processed $value 
 	 */
 	
 	public function injectTemporaryEditButton($value, $key, $Context) {
@@ -202,11 +202,11 @@ class InPage {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^\w/', $key) && User::get()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN . 
-					json_encode(array(
-						'context' => $Context->get()->url, 
-						'key' => $key
-					), JSON_UNESCAPED_SLASHES) . 
-					AM_DEL_INPAGE_BUTTON_CLOSE;
+						json_encode(array(
+							'context' => $Context->get()->url, 
+							'key' => $key
+						), JSON_UNESCAPED_SLASHES) . 
+						AM_DEL_INPAGE_BUTTON_CLOSE;
 		}	
 		
 		return $value;
@@ -215,11 +215,11 @@ class InPage {
 	
 	
 	/**
-	 *      Process the temporary buttons to edit variable in the page. 
-	 *      All invalid buttons (within tags and in links) will be removed.
+	 * 	Process the temporary buttons to edit variable in the page. 
+	 *  All invalid buttons (within tags and in links) will be removed.
 	 *      
-	 *      @param string $str
-	 *      @return string The processed markup
+	 *  @param string $str
+	 *  @return string The processed markup
 	 */
 	
 	private function processTemporaryEditButtons($str) {
@@ -227,15 +227,15 @@ class InPage {
 		// Remove invalid buttons.
 		// Within HTML tags.	
 		// Like <div data-attr="...">
-		$str = 	preg_replace_callback('/\<[^>]+\>/is', function($matches) {
-				return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
-			}, $str);
+		$str = preg_replace_callback('/\<[^>]+\>/is', function($matches) {
+			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
+		}, $str);
 		
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
-		$str = 	preg_replace_callback('/\<(a|button|head|script|select|textarea).+?\<\/\1\>/is', function($matches) {
-				return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
-			}, $str);
+		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea).+?\<\/\1\>/is', function($matches) {
+			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
+		}, $str);
 		
 		// Enable valid buttons.
 		$str = str_replace(

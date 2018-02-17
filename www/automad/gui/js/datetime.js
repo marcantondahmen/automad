@@ -55,7 +55,7 @@
 			// Add .uk-active class to [data-am-datetime] when a child input is focused.
 			$doc.on('focus', dt.selector + ' input', function(e) {
 				
-				var 	$input = $(e.target),
+				var $input = $(e.target),
 					$datetime = $input.closest(dt.selector);
 				
 				$datetime.addClass('uk-active');
@@ -81,7 +81,7 @@
 		
 		today: function() {
 			
-			var 	date = new Date(),
+			var date = new Date(),
 				month = date.getMonth() + 1,
 				day = date.getDate();
 

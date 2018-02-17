@@ -92,17 +92,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					</ul>
 					<?php 
 					
-						$header = Text::get('sidebar_header_pages') . 
-							  '&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
-							  count($this->collection) . 
-							  '</span>';
-						echo 	$this->Html->siteTree(
-								'', 
-								$this->collection, 
-								array('context' => 'edit_page'), 
-								false, 
-								$header
-							); 
+						$header = 	Text::get('sidebar_header_pages') . 
+							  		'&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
+							  		count($this->collection) . 
+							  		'</span>';
+									
+						echo $this->Html->siteTree(
+							'', 
+							$this->collection, 
+							array('context' => 'edit_page'), 
+							false, 
+							$header
+						); 
 					
 					?> 
 					<ul class="uk-nav uk-nav-side uk-hidden-large">

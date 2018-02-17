@@ -123,9 +123,9 @@ class Regex {
 
 	
 	/**
-	 *      Return regex to match any temporary in-page edit button.
+	 *	Return regex to match any temporary in-page edit button.
 	 *      
-	 *      @return string The regex
+	 * 	@return string The regex
 	 */
 	
 	public static function inPageEditButton() {
@@ -153,47 +153,47 @@ class Regex {
 		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?';
 		
 		$statementSubpatterns['snippet'] = 	Regex::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
-							'snippet\s+(?P<snippet>[\w\-]+)' .
-							'\s*' . $statementClose . 
-							'(?P<snippetSnippet>.*?)' . 
-							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											'snippet\s+(?P<snippet>[\w\-]+)' .
+											'\s*' . $statementClose . 
+											'(?P<snippetSnippet>.*?)' . 
+											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['with'] = 	Regex::$outerStatementMarker . '\s*' . // Note the additional preparsed marker!
-							'with\s+(?P<with>' .
-								'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
-							')' . 
-							'\s*(?P<withOptions>\{.*?\})?' .
-							'\s*' . $statementClose . 
-							'(?P<withSnippet>.*?)' . 	
-							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
-							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											'with\s+(?P<with>' .
+												'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
+											')' . 
+											'\s*(?P<withOptions>\{.*?\})?' .
+											'\s*' . $statementClose . 
+											'(?P<withSnippet>.*?)' . 	
+											'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
+											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['for'] =		Regex::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
-							'for\s+(?P<forStart>' . Regex::variable() . '|' . Regex::$number . ')\s+to\s+(?P<forEnd>' . Regex::variable() . '|' . Regex::$number . ')' . 
-							'\s*' . $statementClose .
-							'(?P<forSnippet>.*?)' .
-							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											'for\s+(?P<forStart>' . Regex::variable() . '|' . Regex::$number . ')\s+to\s+(?P<forEnd>' . Regex::variable() . '|' . Regex::$number . ')' . 
+											'\s*' . $statementClose .
+											'(?P<forSnippet>.*?)' .
+											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['foreach'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-							'foreach\s+in\s+(?P<foreach>' . 
-								'pagelist|' . 
-								'filters|' . 
-								'tags|' . 
-								'filelist|' .
-								'"[^"]*"|' . "'[^']*'|" . $var . 		
-							')' . 
-							'\s*(?P<foreachOptions>\{.*?\})?' .
-							'\s*' . $statementClose . 
-							'(?P<foreachSnippet>.*?)' . 
-							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
-							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											'foreach\s+in\s+(?P<foreach>' . 
+												'pagelist|' . 
+												'filters|' . 
+												'tags|' . 
+												'filelist|' .
+												'"[^"]*"|' . "'[^']*'|" . $var . 		
+											')' . 
+											'\s*(?P<foreachOptions>\{.*?\})?' .
+											'\s*' . $statementClose . 
+											'(?P<foreachSnippet>.*?)' . 
+											'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?'. // Note the additional preparsed marker!
+											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		$statementSubpatterns['condition'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-							'if\s+(?P<if>' . Regex::expression() . '(\s+' . Regex::$logicalOperator . '\s+' . Regex::expression() . ')*)' . 	
-							'\s*' . $statementClose . 
-							'(?P<ifSnippet>.*?)' . 
-							'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
-							$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+												'if\s+(?P<if>' . Regex::expression() . '(\s+' . Regex::$logicalOperator . '\s+' . Regex::expression() . ')*)' . 	
+												'\s*' . $statementClose . 
+												'(?P<ifSnippet>.*?)' . 
+												'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!	
+												$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 		
 		// (variable | statements)		
 		return '((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')'; 
@@ -206,12 +206,12 @@ class Regex {
 	 *	     
 	 *	Valid operands are:
 	 *
-	 *	-	@{var}
-	 *	-	"Text ..."
-	 *	-	'Text ...'
-	 *	-	"Text and @{var}"
-	 *	-	5
-	 *	-	1.5
+	 *	- @{var}
+	 *	- "Text ..."
+	 *	- 'Text ...'
+	 *	- "Text and @{var}"
+	 *	- 5
+	 *	- 1.5
 	 *	
 	 *	@param string $namedReferencePrefix
 	 *	@return string The regex
@@ -242,7 +242,7 @@ class Regex {
 	 *	- "| name (parameters)" 
 	 *	- "| +5"
 	 *
-	 *      Parameters can be strings wrapped in quotes, single words without quotes and numbers.
+	 * 	Parameters can be strings wrapped in quotes, single words without quotes and numbers.
 	 *
 	 *	@param string $namedReferencePrefix
 	 *	@return string The regex to match functions and their parameters or math operations
@@ -268,16 +268,16 @@ class Regex {
 		$regexParameter = '\s*(?:"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\w*)\s*';
 		
 		return	'\|(' . 
-			// Function name.
-			'\s*(' . $function . '[\w][\w\-]*)\s*' .
-			// Parameters. 
-			'(?:\(' . 
+				// Function name.
+				'\s*(' . $function . '[\w][\w\-]*)\s*' .
+				// Parameters. 
+				'(?:\(' . 
 				'(' . $parameters . $regexParameter . '(?:,' . $regexParameter . ')*?)' . 
-			'\)\s*)?' . 
-			'|' .
-			// Math.
-			'\s*(' . $operator . '[\+\-\*\/])\s*(' . $num . Regex::$number . ')\s*' . 
-			')';
+				'\)\s*)?' . 
+				'|' .
+				// Math.
+				'\s*(' . $operator . '[\+\-\*\/])\s*(' . $num . Regex::$number . ')\s*' . 
+				')';
 			
 	}
 	

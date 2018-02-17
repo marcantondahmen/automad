@@ -129,7 +129,7 @@ class Selection {
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@param boolean $excludeHidden
-	 *      @param boolean $excludeCurrent
+	 * 	@param boolean $excludeCurrent
 	 *	@param integer $offset
 	 *	@param integer $limit
 	 *	@return array $this->selection
@@ -415,10 +415,10 @@ class Selection {
 	 *	The option string consists of multiple pairs of 
 	 *	a data key and a sort order, separated by a comma like this:    
 	 *	$Selection->sortPages('date desc, title asc')
-	 *      The above example will sort first all pages in the selection by 'date' (descending) and then by 'title' (ascending).   
+	 * 	The above example will sort first all pages in the selection by 'date' (descending) and then by 'title' (ascending).   
 	 *           
-	 *      Valid values for the order are 'asc' and 'desc'.      
-	 *      In case a sort order is missing in a key/order combination, the 'asc' is used as a fallback.   
+	 * 	Valid values for the order are 'asc' and 'desc'.      
+	 * 	In case a sort order is missing in a key/order combination, the 'asc' is used as a fallback.   
 	 *
 	 *	@param string $options (comma separated list of keys and order)
 	 */  

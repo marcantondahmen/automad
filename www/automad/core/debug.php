@@ -69,13 +69,13 @@ class Debug {
 	
 	
 	/**
-	 *      Modify a given $output array (passed by reference) to be returned as JSON string (AJAX requests) 
-	 *      by extending the $output['debug'] array only when debugging is enabled.
-	 *      Note that this method doesn't return anything (false).
+	 *	Modify a given $output array (passed by reference) to be returned as JSON string (AJAX requests) 
+	 * 	by extending the $output['debug'] array only when debugging is enabled.
+	 * 	Note that this method doesn't return anything (false).
 	 *      
-	 *      @param array $output
-	 *      @param string $key
-	 *      @param mixed $value
+	 * 	@param array $output
+	 * 	@param string $key
+	 * 	@param mixed $value
 	 */
 	
 	public static function ajax(&$output, $key, $value = '') {
@@ -109,7 +109,7 @@ class Debug {
 	/**
 	 *	Stop timer, calculate execution time, get user & server constants and return the log buffer.
 	 *
-	 *      @return string The Javascript console log
+	 * 	@return string The Javascript console log
 	 */
 	
 	public static function getLog() {
@@ -177,7 +177,7 @@ class Debug {
 	
 
 	/**
-	 *      Provide info about memory usage.
+	 *	Provide info about memory usage.
 	 */
 	
 	private static function memory() {

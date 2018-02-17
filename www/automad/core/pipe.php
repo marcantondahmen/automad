@@ -56,24 +56,24 @@ class Pipe {
 	 *	Whitelist of standard PHP functions.
 	 */
 	
-	private static $phpFunctions = array(
-					'ceil',
-					'floor',
-					'round',
-					'strlen',
-					'strtolower',
-					'strtoupper',
-					'ucwords'
-				);
+	private static $phpFunctions = 	array(
+										'ceil',
+										'floor',
+										'round',
+										'strlen',
+										'strtolower',
+										'strtoupper',
+										'ucwords'
+									);
 	
 
 	/**
-	 *      Apply string function to $value.
+	 *	Apply string function to $value.
 	 *      
-	 *      @param string $function
-	 *      @param string $paramString
-	 *      @param string $value
-	 *      @return string $value
+	 * 	@param string $function
+	 * 	@param string $paramString
+	 * 	@param string $value
+	 * 	@return string $value
 	 */
 	
 	private static function stringFunction($function, $paramString, $value) {
@@ -128,12 +128,12 @@ class Pipe {
 
 
 	/**
-	 *      Simple math operations.
+	 *	Simple math operations.
 	 *      
-	 *      @param string $operator
-	 *      @param string $number
-	 *      @param string $value
-	 *      @return number $value
+	 * 	@param string $operator
+	 * 	@param string $number
+	 * 	@param string $value
+	 * 	@return number $value
 	 */
 	
 	private static function math($operator, $number, $value) {
@@ -169,7 +169,7 @@ class Pipe {
 	 *
 	 *	If a matched string matches a String class method, that method is called, else if that string is in the whitelist of PHP standard functions, that function is called.
 	 *	In case a match is just an integer value, the Str::shorten() method is called and the integer value is passed as parameter.    
-	 *      In case a match is not a function name but an operator (+, -, * or /) followed by a number, the math method is called.
+	 * 	In case a match is not a function name but an operator (+, -, * or /) followed by a number, the math method is called.
 	 *	
 	 *	@param string $value
 	 *	@param string $pipe - (like: | function (parameters) | function (parameters) | ...)

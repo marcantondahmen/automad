@@ -58,18 +58,18 @@ if (isset($_POST['item'])) {
 		
 		if (AM_CACHE_ENABLED) {
 			$output['status'] = $this->Html->status(
-						'uk-icon-rocket',
-						'', 
-						'uk-icon-toggle-on',
-						Text::get('sys_status_cache_enabled')
-					);
+									'uk-icon-rocket',
+									'', 
+									'uk-icon-toggle-on',
+									Text::get('sys_status_cache_enabled')
+								);
 		} else {
 			$output['status'] = $this->Html->status(
-						'uk-icon-rocket',
-						'',
-						'uk-icon-toggle-off',
-						Text::get('sys_status_cache_disabled')
-					);
+									'uk-icon-rocket',
+									'',
+									'uk-icon-toggle-off',
+									Text::get('sys_status_cache_disabled')
+								);
 		}
 		
 	}
@@ -78,18 +78,18 @@ if (isset($_POST['item'])) {
 		
 		if (AM_DEBUG_ENABLED) {
 			$output['status'] = $this->Html->status(
-						'uk-icon-bug',
-						'',
-						'uk-icon-toggle-on',
-						Text::get('sys_status_debug_enabled')
-					);
+									'uk-icon-bug',
+									'',
+									'uk-icon-toggle-on',
+									Text::get('sys_status_debug_enabled')
+								);
 		} else {
 			$output['status'] = $this->Html->status(
-						'uk-icon-bug',
-						'',
-						'uk-icon-toggle-off',
-						Text::get('sys_status_debug_disabled')
-					);
+									'uk-icon-bug',
+									'',
+									'uk-icon-toggle-off',
+									Text::get('sys_status_debug_disabled')
+								);
 		}
 		
 	}
@@ -100,18 +100,18 @@ if (isset($_POST['item'])) {
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
 			$output['status'] = $this->Html->status(
-						'uk-icon-code-fork',
-						AM_VERSION,
-						'uk-icon-refresh',
-						'<span class="uk-badge uk-badge-success">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
-					);		
+									'uk-icon-code-fork',
+									AM_VERSION,
+									'uk-icon-refresh',
+									'<span class="uk-badge uk-badge-success">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
+								);		
 		} else {
 			$output['status'] = $this->Html->status(
-						'uk-icon-code-fork',
-						AM_VERSION,
-						'uk-icon-check',
-						Text::get('sys_status_update_not_available')
-					);
+									'uk-icon-code-fork',
+									AM_VERSION,
+									'uk-icon-check',
+									Text::get('sys_status_update_not_available')
+								);
 		}
 		
 	}

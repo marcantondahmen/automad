@@ -70,19 +70,19 @@ class Pagelist {
 	 *	The default set of options.
 	 */
 	
-	private $defaults = 	array(
-					'excludeCurrent' => false,
-					'excludeHidden' => true,
-					'filter' => false,
-					'limit' => NULL,
-					'offset' => 0,
-					'page' => false,
-					'parent' => false,
-					'search' => false,
-					'sort' => false,
-					'template' => false,
-					'type' => false
-				);
+	private $defaults = array(
+							'excludeCurrent' => false,
+							'excludeHidden' => true,
+							'filter' => false,
+							'limit' => NULL,
+							'offset' => 0,
+							'page' => false,
+							'parent' => false,
+							'search' => false,
+							'sort' => false,
+							'template' => false,
+							'type' => false
+						);
 	
 	
 	/**
@@ -121,7 +121,7 @@ class Pagelist {
 	
 	
 	/**
-	 *      The current page of the pagination.
+	 *	The current page of the pagination.
 	 */
 	
 	private $page;
@@ -142,7 +142,7 @@ class Pagelist {
 	
 	
 	/**
-	 *      The sort options string.
+	 *	The sort options string.
 	 */
 	
 	private $sort;
@@ -221,9 +221,9 @@ class Pagelist {
 
 
 	/**
-	 *      Return the default options array.
+	 *	Return the default options array.
 	 *      
-	 *      @return array Default options
+	 * 	@return array Default options
 	 */
 	
 	public function getDefaults() {
@@ -360,9 +360,9 @@ class Pagelist {
 	
 	
 	/**
-	 *      Calculate the number of pages of the pagination.
+	 *	Calculate the number of pages of the pagination.
 	 *      
-	 *      @return number The number of pages of the current pagelist.
+	 * 	@return number The number of pages of the current pagelist.
 	 */
 	
 	public function getPaginationCount() {

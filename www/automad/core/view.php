@@ -80,14 +80,14 @@ class View {
 	
 	
 	/**
-	 *      The InPage objetc.
+	 *	The InPage objetc.
 	 */
 	
 	private $InPage;
 	
 	
 	/**
-	 *      The Runtime object.
+	 *	The Runtime object.
 	 */
 	
 	private $Runtime;
@@ -259,10 +259,10 @@ class View {
 		
 		$depth = 0;
 		$regex = 	'/(' . 
-				'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
-				'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
-				'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
-				')/is';
+					'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet).*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
+					'(?P<else>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*else\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
+					'(?P<end>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*end\s*' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')' .
+					')/is';
 		
 		return 	preg_replace_callback($regex, function($match) use (&$depth) {
 						
@@ -304,8 +304,8 @@ class View {
 	 *	In case a variable is used as an option value for a method and is not part of a string, that variable doesn't need to be 
 	 *	wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
 	 *
-	 *      By setting $inPageEdit to true, for every processed variable, a temporary markup for an edit button is appended to the actual value.
-	 *      That temporary button still has to be processed later by calling processInPageEditButtons(). 
+	 *  By setting $inPageEdit to true, for every processed variable, a temporary markup for an edit button is appended to the actual value.
+	 *  That temporary button still has to be processed later by calling processInPageEditButtons(). 
 	 *
 	 *	@param string $str
 	 *	@param boolean $isJsonString 
@@ -354,11 +354,11 @@ class View {
 				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
 				if ($inPageEdit) {
 					
-					$value = $this->InPage->injectTemporaryEditButton(
-							$value, 
-							$matches['varName'], 
-							$this->Automad->Context
-						);
+					$value = 	$this->InPage->injectTemporaryEditButton(
+									$value, 
+									$matches['varName'], 
+									$this->Automad->Context
+								);
 						
 				}	
 				
@@ -370,13 +370,13 @@ class View {
 
 
 	/**
-	 *      Process a file related snippet like <@ foreach "*.jpg" { options } @> ... <@ end @>.
+	 *	Process a file related snippet like <@ foreach "*.jpg" { options } @> ... <@ end @>.
 	 *      
-	 *      @param string $file
-	 *      @param array $options  
-	 *      @param string $snippet  
-	 *      @param string $directory
-	 *      @return string $html           
+	 *  @param string $file
+	 *  @param array $options  
+	 *  @param string $snippet  
+	 *  @param string $directory
+	 *  @return string $html           
 	 */
 	
 	private function processFileSnippet($file, $options, $snippet, $directory) {
@@ -399,14 +399,14 @@ class View {
 			// If any options are given, create a resized version of the image.
 			if (!empty($options)) {
 		
-				$options = array_merge(
-						array(
-							'width' => false, 
-							'height' => false, 
-							'crop' => false
-						), 
-						$options
-					);
+				$options = 	array_merge(
+								array(
+									'width' => false, 
+									'height' => false, 
+									'crop' => false
+								), 
+								$options
+							);
 				
 				$img = new Image(AM_BASE_DIR . $file, $options['width'], $options['height'], $options['crop']);
 				$this->Runtime->set(AM_KEY_FILE_RESIZED, $img->file);
@@ -441,7 +441,7 @@ class View {
 	 *	and the active page becomes the current page. Therefore all variables of that active page inside the with statements or loop
 	 *	can simply be accessed using the standard template syntax like @{var}.    
 	 *         
-	 *      Files:   
+	 *  Files:   
 	 *	The <@ with "image.jpg" {options} @> statement and the <@ foreach in filelist {options} @> or <@ foreach in "*.jpg" {options} @> loop
 	 *	make data associated with files accessible. The following runtime vars can be used inside:    
 	 *	- @{:basename}   
@@ -453,7 +453,7 @@ class View {
 	 *	- @{:heightResized}   
 	 *	- @{:caption}   
 	 *       
-	 *      Tags/Filters:    
+	 *  Tags/Filters:    
 	 *	Inside other foreach loops, the following runtime variables can be used within a snippet:   
 	 *	- @{:filter}  
 	 *	- @{:tag}  
@@ -789,7 +789,7 @@ class View {
 							// Comparison.
 							
 							// Merge default keys with $part to make sure each key exists in $part without testing.
-							$part = 	array_merge(
+							$part = array_merge(
 										array(
 											'expressionLeftDoubleQuoted' => '', 
 											'expressionLeftSingleQuoted' => '',
@@ -804,18 +804,18 @@ class View {
 									);
 							
 							// Parse both sides of the expression. All possible matches for each side can get merged in to one string, since there will be only one item for left/right not empty.
-							$left = 	$this->processContent(
+							$left = $this->processContent(
 										stripslashes($part['expressionLeftDoubleQuoted']) .
 										stripslashes($part['expressionLeftSingleQuoted']) .
 										$part['expressionLeftNumber'] .
 										$part['expressionLeftVar']
 									);
-							$right = 	$this->processContent(
+							$right = $this->processContent(
 										stripslashes($part['expressionRightDoubleQuoted']) .
 										stripslashes($part['expressionRightSingleQuoted']) .
 										$part['expressionRightNumber'] .
 										$part['expressionRightVar']
-									);
+									 );
 								
 							// Build and evaluate the expression.
 							switch ($part['expressionOperator']) {

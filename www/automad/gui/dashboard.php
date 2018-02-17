@@ -96,7 +96,7 @@ class Dashboard {
 
 
 	/**
-	 *      The site name.
+	 * 	The site name.
 	 */
 	
 	private $sitename;

@@ -102,10 +102,10 @@ class FileSystem {
 	
 	
 	/**
-	 *      Create directory if not existing.
+	 *	Create directory if not existing.
 	 *
-	 *      @param string $path
-	 *      @return boolean True on success, else false
+	 * 	@param string $path
+	 * 	@return boolean True on success, else false
 	 */
 	
 	public static function makeDir($path) {
@@ -122,11 +122,11 @@ class FileSystem {
 	
 	
 	/**
-	 *      Write content to a file and create the parent directory if needed.
+	 *	Write content to a file and create the parent directory if needed.
 	 *
-	 *      @param string $file
-	 *      @param string $content
-	 *      @return boolean True on success, else false
+	 * 	@param string $file
+	 * 	@param string $content
+	 * 	@return boolean True on success, else false
 	 */
 	
 	public static function write($file, $content) {

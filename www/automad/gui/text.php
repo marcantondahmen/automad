@@ -61,9 +61,9 @@ class Text {
 	
 	
 	/**
-	 *      Short version of echo Text::get().
+	 *  Short version of echo Text::get().
 	 *
-	 *      @param string $key
+	 *  @param string $key
 	 */
 	
 	public static function e($key) {

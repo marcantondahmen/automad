@@ -60,14 +60,14 @@
 		page: 		'',
 		
 		// Dropzone.
-		$dropzone: 	$('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
-		$input:		$('<input type="file" multiple />'),
-		$browse:	$('<button></button>', { 'class': 'uk-button uk-button-success uk-button-large uk-width-1-1 uk-margin-small-top' })
-				.click(function() {
+		$dropzone: $('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
+		$input:	$('<input type="file" multiple />'),
+		$browse: $('<button></button>', { 'class': 'uk-button uk-button-success uk-button-large uk-width-1-1 uk-margin-small-top' })
+				 .click(function() {
 					// Make a button click trigger the file input for browsing.
 					Automad.upload.$input.click();
 					return false;
-				}),
+				 }),
 				
 		// Init the upload modal.
 		init: function(e) {
@@ -88,10 +88,10 @@
 			
 			// Dropzone.
 			u.$dropzone.html(iconDropzone + u.$modal.data(util.dataCamelCase(da.dropzoneText)))
-				   .appendTo(u.$container);
+				   	   .appendTo(u.$container);
 			u.$input.appendTo(u.$dropzone).hide();
 			u.$browse.html(iconBrowse + u.$modal.data(util.dataCamelCase(da.browseText)))
-				 .insertAfter(u.$dropzone);
+				 	 .insertAfter(u.$dropzone);
 			
 			// The modal's close buttons
 			u.$close = u.$modal.find('.uk-modal-close'); 	
@@ -157,7 +157,7 @@
 				
 				progress: function(e, data){
 
-					var 	progress = parseInt(data.loaded / data.total * 100, 10);
+					var progress = parseInt(data.loaded / data.total * 100, 10);
 
 				 	data.context.find('.uk-progress-bar').width(progress + '%').text(progress + ' %');
 					

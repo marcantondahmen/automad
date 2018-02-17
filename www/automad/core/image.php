@@ -145,10 +145,10 @@ class Image {
 	/**
 	 *	The constructor defines the main object properties from the given parameters and initiates the main methods.
 	 *
-	 *      @param string $originalFile    
-	 *      @param integer $requestedWidth  
-	 *      @param integer $requestedHeight 
-	 *      @param boolean $crop            
+	 * 	@param string $originalFile    
+	 * 	@param integer $requestedWidth  
+	 * 	@param integer $requestedHeight 
+	 * 	@param boolean $crop            
 	 */
 	
 	public function __construct($originalFile = false, $requestedWidth = false, $requestedHeight = false, $crop = false) {

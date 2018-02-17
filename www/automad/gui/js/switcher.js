@@ -72,7 +72,7 @@
 	// That will be the case, when a link outside the actual switcher tries to change the active tab.
 	$(window).on('hashchange', function() {
 		
-		var 	$switcher = $('[' + Automad.switcher.dataAttr.switcher + ']'),
+		var $switcher = $('[' + Automad.switcher.dataAttr.switcher + ']'),
 			$active = $switcher.children('.uk-active'),
 			tab = Automad.switcher.getActiveTab();
 		

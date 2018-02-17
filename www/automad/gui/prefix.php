@@ -63,10 +63,10 @@ class Prefix {
 	
 	
 	/**
-	 *      Replace the prefixes of UIkit classes and data attributes in a string.
+	 *  Replace the prefixes of UIkit classes and data attributes in a string.
 	 *      
-	 *      @param string $str
-	 *      @return string The processed $str
+	 *  @param string $str
+	 *  @return string The processed $str
 	 */
 	
 	public static function attributes($str) {
@@ -81,10 +81,10 @@ class Prefix {
 	
 	
 	/**
-	 *      Search for HTML tags in a string and replace the prefixes of UIkit classes and data attributes.
+	 *  Search for HTML tags in a string and replace the prefixes of UIkit classes and data attributes.
 	 *      
-	 *      @param string $str
-	 *      @return string The processed $str
+	 *  @param string $str
+	 *  @return string The processed $str
 	 */
 	
 	public static function tags($str) {

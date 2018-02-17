@@ -131,11 +131,11 @@ class Str {
 	
 	
 	/**
-	 *      Perform a regex match.
+	 *	Perform a regex match.
 	 *      
-	 *      @param string $str
-	 *      @param string $regex
-	 *      @return number 1 or 0
+	 * 	@param string $str
+	 * 	@param string $regex
+	 * 	@return number 1 or 0
 	 */
 	
 	public static function match($str, $regex) {
@@ -146,12 +146,12 @@ class Str {
 	
 	
 	/**
-	 *      Search and replace by regex.
+	 *	Search and replace by regex.
 	 *      
-	 *      @param string $str
-	 *      @param string $regex  
-	 *      @param string $replace 
-	 *      @return string The processed string          
+	 * 	@param string $str
+	 * 	@param string $regex  
+	 * 	@param string $replace 
+	 * 	@return string The processed string          
 	 */
 	
 	public static function replace($str, $regex, $replace) {
@@ -230,11 +230,11 @@ class Str {
 	
 	
 	/**
-	 *      Strip substring from end of string.
+	 *	Strip substring from end of string.
 	 *      
-	 *      @param string $str
-	 *      @param string $end
-	 *      @return string The processed string
+	 * 	@param string $str
+	 * 	@param string $end
+	 * 	@return string The processed string
 	 */
 	
 	public static function stripEnd($str, $end) {
@@ -245,11 +245,11 @@ class Str {
 	
 	
 	/**
-	 *      Strip substring from start of string.
+	 *	Strip substring from start of string.
 	 *      
-	 *      @param string $str
-	 *      @param string $start
-	 *      @return string The processed string
+	 * 	@param string $str
+	 * 	@param string $start
+	 * 	@return string The processed string
 	 */
 	
 	public static function stripStart($str, $start) {

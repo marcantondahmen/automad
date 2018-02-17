@@ -81,9 +81,9 @@ class Toolbox {
 	/**
 	 * 	Generate breadcrumbs to the current page, if the page's level is > 0 (not homepage / search results / page not found).
 	 *
-	 *      Options:
-	 *      - class: false (class of <ul> element)
-	 *      - excludeHidden: false (exclude hidden pages)
+	 * 	Options:
+	 * 	- class: false (class of <ul> element)
+	 * 	- excludeHidden: false (exclude hidden pages)
 	 *      
 	 * 	@param array $options
 	 *	@return string The HTML of a breadcrumb navigation
@@ -93,13 +93,13 @@ class Toolbox {
 		
 		if ($this->Automad->Context->get()->level > 0) {	
 				
-			$options = array_merge(
-					array(
-						'class' => false, 
-						'excludeHidden' => false
-					), 
-					$options
-				);
+			$options = 	array_merge(
+							array(
+								'class' => false, 
+								'excludeHidden' => false
+							), 
+							$options
+						);
 				
 			$Selection = new Selection($this->collection);
 			$Selection->filterBreadcrumbs($this->Automad->Context->get()->url);
@@ -141,12 +141,12 @@ class Toolbox {
 	/**
 	 *	Place an image.
 	 *
-	 *      Options:
-	 *      - file: false (filepath or glob pattern - when using a glob pattern, the first match is used)
-	 *      - width: false (width in pixels)
-	 *      - height: false (height in pixels)
-	 *      - crop: false (crop image)
-	 *      - class: false (class for the <img /> element)
+	 * 	Options:
+	 *  - file: false (filepath or glob pattern - when using a glob pattern, the first match is used)
+	 *  - width: false (width in pixels)
+	 *  - height: false (height in pixels)
+	 *  - crop: false (crop image)
+	 *  - class: false (class for the <img /> element)
 	 *
 	 *	@param array $options - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1)
 	 *	@return string The HTML for the image output
@@ -156,12 +156,12 @@ class Toolbox {
 		
 		// Default options
 		$defaults = 	array(
-					'file' => false,
-					'width' => false,
-					'height' => false,
-					'crop' => false,
-					'class' => false
-				);
+							'file' => false,
+							'width' => false,
+							'height' => false,
+							'crop' => false,
+							'class' => false
+						);
 		
 		// Merge options with defaults				
 		$options = array_merge($defaults, $options);
@@ -193,12 +193,12 @@ class Toolbox {
 	/**
 	 *	Generate a list for the navigation below a given URL.
 	 *
-	 *      Options:
-	 *      - parent: '/' (The parent URL)
-	 *      - hompage: false (include homepage to first-level nav)
-	 *      - excludeHidden: true (exclude hidden pages)
-	 *      - class: false (class of the <ul> element)
-	 *      - active: false (class of the active <li> element)
+	 * 	Options:
+	 * 	- parent: '/' (The parent URL)
+	 *  - hompage: false (include homepage to first-level nav)
+	 *  - excludeHidden: true (exclude hidden pages)
+	 *  - class: false (class of the <ul> element)
+	 *  - active: false (class of the active <li> element)
 	 *
 	 *	@param array $options
 	 *	@return string The HTML of a navigation list	
@@ -207,12 +207,12 @@ class Toolbox {
 	public function nav($options = array()) {
 		
 		$defaults = 	array(
-					'parent' => '/', 
-					'homepage' => false,
-					'excludeHidden' => true,
-					'class' => false,
-					'active' => false
-				);
+							'parent' => '/', 
+							'homepage' => false,
+							'excludeHidden' => true,
+							'class' => false,
+							'active' => false
+						);
 		
 		$options = array_merge($defaults, $options);
 		
@@ -264,7 +264,7 @@ class Toolbox {
 	
 	/**
 	 *	Generate a list for the navigation below the current page.   
-	 *      Options are the same like those for nav() except the 'parent' option.
+	 *  Options are the same like those for nav() except the 'parent' option.
 	 *
 	 * 	@param array $options
 	 *	@return string The HTML of the navigation list	
@@ -280,7 +280,7 @@ class Toolbox {
 	
 	/**
 	 *	Generate a list for the navigation below the current page's parent.   
-	 *      Options are the same like those for nav() except the 'parent' option.
+	 *  Options are the same like those for nav() except the 'parent' option.
 	 *
 	 *	@param array $options
 	 *	@return string The HTML of the navigation list	
@@ -313,13 +313,13 @@ class Toolbox {
 	/**
 	 * 	Generate full navigation tree.
 	 *
-	 *      Options:
-	 *      - all: true (expand all pages or only in current path)
-	 *      - parent: '' (parent URL)
-	 *      - rootLevel: false (a kind of flexible parent page at a given level)
-	 *      - excludeHidden: true (exclude hidden pages)
-	 *      - class: false (class of the <ul> element)
-	 *      - active: false (class of the active <li> element)
+	 *  Options:
+	 *  - all: true (expand all pages or only in current path)
+	 *  - parent: '' (parent URL)
+	 *  - rootLevel: false (a kind of flexible parent page at a given level)
+	 *  - excludeHidden: true (exclude hidden pages)
+	 *  - class: false (class of the <ul> element)
+	 *  - active: false (class of the active <li> element)
 	 *
 	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl", rootLevel: integer)
 	 *	@return string The HTML of the tree
@@ -328,13 +328,13 @@ class Toolbox {
 	public function navTree($options = array()) {
 				
 		$defaults = 	array( 
-					'all' => true,
-					'parent' => '',
-					'rootLevel' => false,
-					'excludeHidden' => true,
-					'class' => false,
-					'active' => false
-				);
+							'all' => true,
+							'parent' => '',
+							'rootLevel' => false,
+							'excludeHidden' => true,
+							'class' => false,
+							'active' => false
+						);
 				
 		$options = array_merge($defaults, $options);
 		
@@ -388,13 +388,13 @@ class Toolbox {
 									
 					if ($options['all'] || $Page->isCurrent() || $Page->isInCurrentPath()) {
 						
-						$html .= $this->navTree(array_merge(
-								$options,
-								array(
-									'parent' => $Page->url, 
-									'rootLevel' => false
-								)
-							));
+						$html .= 	$this->navTree(array_merge(
+										$options,
+										array(
+											'parent' => $Page->url, 
+											'rootLevel' => false
+										)
+									));
 							
 					}
 				
@@ -455,10 +455,10 @@ class Toolbox {
 	
 	
 	/**
-	 *      Merge passed key-value pairs ($options) with current query string.
+	 *	Merge passed key-value pairs ($options) with current query string.
 	 *
-	 *      @param array $options
-	 *      @return string The merged query string
+	 *  @param array $options
+	 *  @return string The merged query string
 	 */
 	
 	public function queryStringMerge($options) {
@@ -469,17 +469,17 @@ class Toolbox {
 	
 	
 	/**
-	 *      Redirect page.
+	 *	Redirect page.
 	 *      
-	 *      @param array $options
+	 *  @param array $options
 	 */
 	
 	public function redirect($options) {
 		
-		$options = array_merge(array(
-				'url' => false,
-				'code' => 302
-		), $options);
+		$options = 	array_merge(array(
+						'url' => false,
+						'code' => 302
+					), $options);
 		
 		$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($options['url'], $this->Automad->Context->get()));
 		

@@ -54,23 +54,23 @@ class Runtime {
 	
 	
 	/**
-	 *      The Automad object.
+	 *	The Automad object.
 	 */
 	
 	private $Automad;
 	
 	
 	/**
-	 *      The runtime data array.
+	 *	The runtime data array.
 	 */
 	
 	private $data = array();
 	
 	
 	/**
-	 *      The constructor.
+	 *	The constructor.
 	 *
-	 *      @param object $Automad
+	 * 	@param object $Automad
 	 */
 	
 	public function __construct($Automad) {
@@ -152,7 +152,9 @@ class Runtime {
 	
 	
 	/**
-	 *      Get the $data array to be shelved and restored at a later point.
+	 *	Get the $data array to be shelved and restored at a later point.
+	 *
+	 * 	@return array The runtime data array
 	 */
 	
 	public function shelve() {
@@ -164,9 +166,9 @@ class Runtime {
 	
 	
 	/**
-	 *      Restore shelved $data array by replacing it with the passed $shelf array.
+	 *	Restore shelved $data array by replacing it with the passed $shelf array.
 	 *
-	 *      @param array $shelf
+	 *  @param array $shelf
 	 */
 	
 	public function unshelve($shelf) {

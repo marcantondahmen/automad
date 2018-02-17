@@ -149,12 +149,12 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								<a href="#" class="uk-modal-close uk-close"></a>
 							</div>	
 							<?php 
-								echo $this->Html->selectTemplate(
-									$this->Themelist,
-									'theme_template', 
-									$data[AM_KEY_THEME], 
-									$Page->template
-								); 
+								echo 	$this->Html->selectTemplate(
+											$this->Themelist,
+											'theme_template', 
+											$data[AM_KEY_THEME], 
+											$Page->template
+										); 
 							?>	
 							<div class="uk-modal-footer uk-text-right">
 								<button class="uk-modal-close uk-button">
@@ -273,12 +273,12 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo $this->Html->formGroup(
-							$keysInCurrentTemplate, 
-							$data, 
-							false, 
-							$this->Themelist->getPageTheme($Page)
-						); 
+						echo 	$this->Html->formGroup(
+									$keysInCurrentTemplate, 
+									$data, 
+									false, 
+									$this->Themelist->getPageTheme($Page)
+								); 
 					?>
 				</div>
 				<?php } ?>

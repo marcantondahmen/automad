@@ -442,9 +442,9 @@ class Automad {
 
 
 	/**
-	 *      Create a temporary page for a missing page and send a 404 header.
+	 *	Create a temporary page for a missing page and send a 404 header.
 	 *      
-	 *      @return object The error page
+	 * 	@return object The error page
 	 */
 	
 	private function pageNotFound() {

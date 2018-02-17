@@ -55,7 +55,7 @@
 				
 				e.preventDefault();
 				
-				var 	start = this.selectionStart,
+				var start = this.selectionStart,
 				 	end = this.selectionEnd,
 					$ta = $(e.target),
 					value = $ta.val();
@@ -112,11 +112,11 @@
 		
 		resize: function(e) {
 		
-			var	$ta = 		$(e.target),
-				content =	$ta.val().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />'),
+			var	$ta = $(e.target),
+				content = $ta.val().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />'),
 				
 				// The hidden clone will be used to determine the actual height.
-				$clone =	$('<div></div>')
+				$clone = $('<div></div>')
 						.appendTo('body')
 						.hide()
 						.width($ta.width())
