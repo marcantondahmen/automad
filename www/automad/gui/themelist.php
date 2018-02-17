@@ -57,7 +57,7 @@ class Themelist {
 	 * 	The Theme objects array.
 	 */
 	
-	private $themes = false;
+	private $themes;
 	
 	
 	/**
@@ -66,7 +66,8 @@ class Themelist {
 	
 	public function __construct() {
 		
-		Core\Debug::log($this, 'New instance created');
+		$this->themes = $this->collectThemes();
+		Core\Debug::log($this->themes, 'New instance created');
 		
 	}
 
@@ -125,10 +126,8 @@ class Themelist {
 	
 	public function getPageTheme($Page) {
 		
-		$themes = $this->getThemes();
-		
-		if (array_key_exists($Page->get(AM_KEY_THEME), $themes)) {
-			return $themes[$Page->get(AM_KEY_THEME)];
+		if (array_key_exists($Page->get(AM_KEY_THEME), $this->themes)) {
+			return $this->themes[$Page->get(AM_KEY_THEME)];
 		} 
 		
 	}
@@ -136,19 +135,11 @@ class Themelist {
 	
 	/**
 	 * 	Return the Theme objects array. 
-	 * 	
-	 * 	In case the method is called the first time, 
-	 * 	all themes get collected from the theme directory first.
 	 *
 	 * 	@return array The array of Theme objects
 	 */
 	
 	public function getThemes() {
-		
-		if (!$this->themes) {
-			$this->themes = $this->collectThemes();
-			Core\Debug::log($this->themes, 'Collecting themes');
-		}
 		
 		return $this->themes;
 		
