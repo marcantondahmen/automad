@@ -80,17 +80,34 @@ $this->element('header');
 			if ($url != '/') {
 				$dropdown = array(
 					// Edit data inpage.
-					'<a href="' . AM_BASE_INDEX . $url . '"><i class="uk-icon-share uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_inpage_edit') . '</a>', 
+					'<a href="' . AM_BASE_INDEX . $url . '">' . 
+						'<i class="uk-icon-share uk-icon-justify"></i>&nbsp;&nbsp;' . 
+						Text::get('btn_inpage_edit') . 
+					'</a>', 
 					// Duplicate Page.
-					'<a href="#" data-am-submit="duplicate_page"><i class="uk-icon-clone uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_duplicate_page') . '</a>' . 
+					'<a href="#" data-am-submit="duplicate_page">' . 
+						'<i class="uk-icon-clone uk-icon-justify"></i>&nbsp;&nbsp;' . 
+						Text::get('btn_duplicate_page') . 
+					'</a>' . 
 					'<form data-am-handler="duplicate_page" data-am-url="' . $url . '"></form>',
 					// Move Page.
-					'<a href="#am-move-page-modal" data-uk-modal><i class="uk-icon-arrows uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_move_page') . '</a>',
+					'<a href="#am-move-page-modal" data-uk-modal>' .
+						'<i class="uk-icon-arrows uk-icon-justify"></i>&nbsp;&nbsp;' . 
+						Text::get('btn_move_page') . 
+					'</a>',
 					// Delete Page.
-					'<a href="#" data-am-submit="delete_page"><i class="uk-icon-remove uk-icon-justify"></i>&nbsp;&nbsp;' . Text::get('btn_delete_page') . '</a>' .
+					'<a href="#" data-am-submit="delete_page">' .
+						'<i class="uk-icon-remove uk-icon-justify"></i>&nbsp;&nbsp;' . 
+						Text::get('btn_delete_page') . 
+					'</a>' .
 					'<form data-am-handler="delete_page" data-am-url="' . $url . '" data-am-confirm="' . Text::get('confirm_delete_page') . '">' .
 					'<input type="hidden" name="title" value="' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '" />' .
-					'</form>'
+					'</form>',
+					// Copy page URL to clipboard.
+					'<a href="#" data-am-clipboard="' . $url . '">' .
+						'<i class="uk-icon-link uk-icon-justify"></i>&nbsp;&nbsp;' . 
+						Text::get('btn_copy_url_clipboard') . 
+					'</a>'
 				);
 			}
 		
