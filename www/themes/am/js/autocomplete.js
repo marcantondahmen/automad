@@ -1,6 +1,6 @@
 /*!	
  * 	am.autocomplete
- *	Copyright (c) 2017 by Marc Anton Dahmen - http://marcdahmen.de - MIT license
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen - http://marcdahmen.de - MIT license
  */
 
 +function(am, $) {

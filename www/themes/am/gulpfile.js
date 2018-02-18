@@ -1,4 +1,4 @@
-var 	gulp = require('gulp'),
+var gulp = require('gulp'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	merge2 = require('merge2'),
@@ -61,11 +61,11 @@ gulp.task('am-js', function() {
 gulp.task('am-one-less', function() {
 
 	return 	gulp.src('one/less/one.less')
-		.pipe(less())
-		.on('error', onError)
-		.pipe(cleanCSS(cleanCSSOptions))
-		.pipe(rename({ prefix: 'am.', suffix: '.min' }))
-		.pipe(gulp.dest('one/dist'));
+			.pipe(less())
+			.on('error', onError)
+			.pipe(cleanCSS(cleanCSSOptions))
+			.pipe(rename({ prefix: 'am.', suffix: '.min' }))
+			.pipe(gulp.dest('one/dist'));
 	
 });
 
@@ -73,11 +73,11 @@ gulp.task('am-one-less', function() {
 gulp.task('am-two-less', function() {
 
 	return 	gulp.src('two/less/two.less')
-		.pipe(less())
-		.on('error', onError)
-		.pipe(cleanCSS(cleanCSSOptions))
-		.pipe(rename({ prefix: 'am.', suffix: '.min' }))
-		.pipe(gulp.dest('two/dist'));
+			.pipe(less())
+			.on('error', onError)
+			.pipe(cleanCSS(cleanCSSOptions))
+			.pipe(rename({ prefix: 'am.', suffix: '.min' }))
+			.pipe(gulp.dest('two/dist'));
 	
 });
 
