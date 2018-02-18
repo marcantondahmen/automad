@@ -1,4 +1,4 @@
-var 	gulp = require('gulp'),
+var gulp = require('gulp'),
 	bump = require('gulp-bump'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
@@ -14,6 +14,10 @@ var 	gulp = require('gulp'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
 	destination = 'dist',
+	cleanCSSOptions = {
+		format: { wrapAt: 500 },
+		rebase: false
+	},
 	// UIkit prefix. 
 	// The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
 	// would also match prefixed classes like am-uk-icon-*.
@@ -153,7 +157,7 @@ gulp.task('automad-less', ['bump'], function() {
 	return 	gulp.src('less/automad.less')
 			.pipe(less())
 			.on('error', onError)
-			.pipe(cleanCSS({ rebase: false }))
+			.pipe(cleanCSS(cleanCSSOptions))
 			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 			.pipe(rename({ suffix: '.min' }))
 			// Prefix all UIkit items.
