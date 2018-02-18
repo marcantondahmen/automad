@@ -277,7 +277,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 									$keysInCurrentTemplate, 
 									$data, 
 									false, 
-									$this->Themelist->getPageTheme($Page)
+									$this->Themelist->getThemeByKey($Page->get(AM_KEY_THEME))
 								); 
 					?>
 				</div>

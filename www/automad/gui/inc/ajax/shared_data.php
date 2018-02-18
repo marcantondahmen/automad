@@ -181,7 +181,14 @@ if (isset($_POST['data'])) {
 				<span class="uk-badge"><?php echo count($keysInAllTemplates); ?></span>
 			</div>
 			<div class="uk-accordion-content">
-				<?php echo $this->Html->formGroup($keysInAllTemplates, $data); ?>
+				<?php 
+					echo $this->Html->formGroup(
+						$keysInAllTemplates, 
+						$data,
+						false,
+						$this->Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME))
+					); 
+				?>
 			</div>
 			<!-- Unused shared variables -->
 			<div type="button" class="uk-accordion-title">

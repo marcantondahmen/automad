@@ -682,7 +682,7 @@ class Content {
 							$value = $Page->data[$_POST['key']];
 						}
 						
-						if ($tooltip = $Themelist->getPageTheme($Page)->getTooltip($_POST['key'])) {
+						if ($tooltip = $Themelist->getThemeByKey($Page->get(AM_KEY_THEME))->getTooltip($_POST['key'])) {
 							$tooltip = '<div class="uk-alert uk-margin-small-bottom" data-uk-alert>' .
 							 		   '<a href="" class="uk-alert-close uk-close"></a>' .
 									   $tooltip . 

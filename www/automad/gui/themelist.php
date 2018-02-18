@@ -118,16 +118,17 @@ class Themelist {
 	
 	
 	/**
-	 * 	Get the theme object for a given page object.
+	 * 	Get the theme object by the key in the themelist array 
+	 * 	corresponding to the AM_KEY_THEME variable.
 	 *
-	 *  @param object $Page
-	 *  @return object The theme object related to the given page
+	 *  @param string $key
+	 *  @return object The requested theme object
 	 */
 	
-	public function getPageTheme($Page) {
+	public function getThemeByKey($key) {
 		
-		if (array_key_exists($Page->get(AM_KEY_THEME), $this->themes)) {
-			return $this->themes[$Page->get(AM_KEY_THEME)];
+		if (array_key_exists($key, $this->themes)) {
+			return $this->themes[$key];
 		} 
 		
 	}
