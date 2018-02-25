@@ -37,20 +37,20 @@
 @form-large-height: 		44px;
 @form-padding:				4px 10px;
 @form-large-padding: 		6px 14px;
-@form-border:				@form-background;
+@form-border:				@am-border-color;
 @form-border-width:			@am-border-width;
 @form-color:				@am-text;
-@form-background:       	darken(@am-bg, 4%);
+@form-background:       	#F7F7F7;
 
 @form-gutter: 				0;
 
-@form-focus-border:			@form-background;
-@form-focus-background:		#FFFFFF;
+@form-focus-border:			@am-success;
+@form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
-@form-disabled-border:      @form-background;
-@form-disabled-background:  @am-bg;
-@form-disabled-color:		@am-muted;
+@form-disabled-border:      @form-border;
+@form-disabled-background:  @form-background;
+@form-disabled-color:		@button-disabled-color;
 
 @form-stacked-font-weight:	400;
 @form-stacked-margin-bottom:4px;
@@ -66,6 +66,10 @@
 	border-radius: @am-radius;
 }
 
+.hook-form-disabled() {
+	cursor: not-allowed;
+}
+
 .hook-form-stacked-label() {
 	
 	display: inline-block;
@@ -77,8 +81,8 @@
 	font-weight: @form-stacked-font-weight;
 	line-height: @text-small-font-size;
 	color: @am-muted;
-	background-color: @form-background;
-	border-radius: @am-radius;
+	background-color: @button-background;
+	border-radius: @am-radius-small;
 	
 	&.am-form-changed:after {
 		content: '\f111';

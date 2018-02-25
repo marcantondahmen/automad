@@ -136,7 +136,9 @@ if (isset($_POST['data'])) {
 								<?php echo $theme->version; ?>
 							</div>	
 							<?php } ?>
-							<?php echo $theme->name; ?>
+							<div class="uk-panel-title">
+								<?php echo $theme->name; ?>
+							</div>
 							<div class="uk-text-small uk-text-muted uk-hidden-small">
 								<?php echo $theme->description; ?>
 							</div>

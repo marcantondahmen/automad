@@ -35,7 +35,7 @@
 
 @accordion-title-margin-bottom:         0;
 @accordion-title-padding-vertical:      5px;
-@accordion-title-padding-horizontal:    10px;
+@accordion-title-padding-horizontal:    0;
 @accordion-title-font-size:             1rem;
 @accordion-title-line-height:           @base-body-line-height;
 @accordion-title-background:            @am-bg;
@@ -51,9 +51,7 @@
 	color: @am-text;
 	font-weight: @am-nav-font-weight;
 	line-height: 1.6;
-	border-radius: @am-radius;
-	background-color: @button-background;
-	
+    
 	&:before {
 		content: '\f055';
 		position: relative;
@@ -64,16 +62,7 @@
 	&.uk-active:before {
 		content: '\f056';
 	}
-	
-	&:after {
-		content: '';
-		position: absolute;
-		display: block;
-		top: -(@utility-margin-large - @accordion-title-padding-vertical);
-		left: -12px;
-		border-top: @am-border-width solid @am-border-color;
-	}
-	
+
 }
  
 .hook-accordion-content() {

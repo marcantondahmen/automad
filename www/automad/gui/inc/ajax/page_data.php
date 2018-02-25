@@ -212,7 +212,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 							<?php Text::e('page_visibility'); ?>
 						</label>
 						<label 
-						class="am-toggle-switch" 
+						class="am-toggle-switch uk-button" 
 						data-am-toggle
 						>
 							<?php Text::e('btn_hide_page'); ?>

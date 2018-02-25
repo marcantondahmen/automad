@@ -34,7 +34,7 @@
 
 @am-cm-transition-delay: 			            0.1s;
 
-@htmleditor-navbar-background:                  @form-background;
+@htmleditor-navbar-background:                  @form-border;
 
 @htmleditor-navbar-nav-height:                  @button-height;
 @htmleditor-navbar-nav-padding-horizontal:      12px;
@@ -108,6 +108,7 @@
 		&.CodeMirror-focused {
 			color: @form-focus-color;
 			background-color: @form-focus-background;
+            border-color: @form-focus-border;
 		}
 
 		& .CodeMirror-line,
@@ -163,6 +164,11 @@
 		border-radius: 0;
 	}
 	
+    & .CodeMirror,
+    & .uk-htmleditor-preview  {
+        border: none !important;
+    }
+ 
     & .cm-s-default {
         padding: 0;
         border-radius: 0;
@@ -175,6 +181,7 @@
 		padding: @utility-container-padding-horizontal;
 		color: @form-focus-color;
 		background-color: @form-focus-background;
+        border-radius: 0;
 		.transition(all 0s;);
 	}
 	

@@ -57,19 +57,11 @@ if (isset($_POST['item'])) {
 	if ($item == 'cache') {
 		
 		if (AM_CACHE_ENABLED) {
-			$output['status'] = $this->Html->status(
-									'uk-icon-rocket',
-									'', 
-									'uk-icon-toggle-on',
-									Text::get('sys_status_cache_enabled')
-								);
+			$output['status'] = '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
+								Text::get('sys_status_cache_enabled');
 		} else {
-			$output['status'] = $this->Html->status(
-									'uk-icon-rocket',
-									'',
-									'uk-icon-toggle-off',
-									Text::get('sys_status_cache_disabled')
-								);
+			$output['status'] = '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
+								Text::get('sys_status_cache_disabled');
 		}
 		
 	}
@@ -77,19 +69,11 @@ if (isset($_POST['item'])) {
 	if ($item == 'debug') {
 		
 		if (AM_DEBUG_ENABLED) {
-			$output['status'] = $this->Html->status(
-									'uk-icon-bug',
-									'',
-									'uk-icon-toggle-on',
-									Text::get('sys_status_debug_enabled')
-								);
+			$output['status'] = '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
+								Text::get('sys_status_debug_enabled');
 		} else {
-			$output['status'] = $this->Html->status(
-									'uk-icon-bug',
-									'',
-									'uk-icon-toggle-off',
-									Text::get('sys_status_debug_disabled')
-								);
+			$output['status'] = '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
+								Text::get('sys_status_debug_disabled');
 		}
 		
 	}
@@ -99,19 +83,15 @@ if (isset($_POST['item'])) {
 		$updateVersion = Update::getVersion();
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
-			$output['status'] = $this->Html->status(
-									'uk-icon-code-fork',
-									AM_VERSION,
-									'uk-icon-refresh',
-									'<span class="uk-badge uk-badge-success">' . Text::get('sys_status_update_available') . '&nbsp;' . $updateVersion . '</span>'
-								);		
+			$output['status'] = '<i class="uk-icon-refresh uk-icon-justify"></i>&nbsp;&nbsp;' .
+								'<span class="uk-badge uk-badge-danger">' . AM_VERSION . '&nbsp;&nbsp;/&nbsp;&nbsp;' .
+								Text::get('sys_status_update_available') . ' ' . $updateVersion .
+								'</span>';
 		} else {
-			$output['status'] = $this->Html->status(
-									'uk-icon-code-fork',
-									AM_VERSION,
-									'uk-icon-check',
-									Text::get('sys_status_update_not_available')
-								);
+			$output['status'] = '<i class="uk-icon-code-fork uk-icon-justify"></i>&nbsp;&nbsp;' .
+								'<span class="uk-badge">' . AM_VERSION . '&nbsp;&nbsp;/&nbsp;&nbsp;' .
+								Text::get('sys_status_update_not_available') .
+								'</span>';
 		}
 		
 	}

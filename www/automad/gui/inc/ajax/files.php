@@ -187,7 +187,9 @@ if ($files) { ?>
 					>
 						<?php echo $icon; ?>
 					</a>
-					<?php echo basename($file); ?>
+					<div class="uk-panel-title">
+						<?php echo basename($file); ?>
+					</div>
 					<?php if ($caption) { ?>
 					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
 						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
@@ -213,12 +215,6 @@ if ($files) { ?>
 											<?php Text::e('btn_edit_file_info'); ?>
 										</a>
 									</li>
-									<li>
-										<a href="#" data-am-clipboard="<?php echo Core\Str::stripStart($file, AM_BASE_DIR); ?>">
-											<i class="uk-icon-link"></i>&nbsp;
-											<?php Text::e('btn_copy_url_clipboard'); ?>
-										</a>
-									</li>
 									<?php if (Core\Parse::fileIsImage($file)) { ?>
 									<li>
 										<a href="#am-copy-resized-modal"
@@ -229,6 +225,12 @@ if ($files) { ?>
 										</a>
 									</li>
 									<?php } ?>
+									<li>
+										<a href="#" data-am-clipboard="<?php echo Core\Str::stripStart($file, AM_BASE_DIR); ?>">
+											<i class="uk-icon-link"></i>&nbsp;
+											<?php Text::e('btn_copy_url_clipboard'); ?>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -298,7 +300,7 @@ if ($files) { ?>
 						</li>
 					</ul>
 					<div class="uk-form-row uk-margin-small-top">
-						<label class="am-toggle-switch" data-am-toggle>
+						<label class="am-toggle-switch uk-button" data-am-toggle>
 							<?php Text::e('image_crop'); ?>
 							<input 
 							id="am-copy-resized-crop"

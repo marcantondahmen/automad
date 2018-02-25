@@ -222,7 +222,7 @@ class Html {
 				$attr .= ' checked';
 			}
 			
-			$html .= '<label class="am-toggle-switch" data-am-toggle' . $tooltip . '>&nbsp;' . 
+			$html .= '<label class="am-toggle-switch uk-button" data-am-toggle' . $tooltip . '>&nbsp;' . 
 					 ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
 					 '<input ' . $attr . ' type="checkbox"  />' .
 					 '</label>';
@@ -363,9 +363,9 @@ class Html {
 			
 			$link = '?context=edit_page&url=' . urlencode($key);
 			
-			$html .= 	'<li>' . 
-					'<div class="uk-panel uk-panel-box">' . 
-					'<a href="' . $link . '" class="uk-panel-teaser uk-display-block">'; 
+			$html .= '<li>' . 
+					 '<div class="uk-panel uk-panel-box">' . 
+					 '<a href="' . $link . '" class="uk-panel-teaser uk-display-block">'; 
 			
 			// Build file grid with up to 6 images.
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
@@ -429,7 +429,9 @@ class Html {
 			
 			$html .= 	'</a>' .
 						// Title & date. 
+						'<div class="uk-panel-title">' .
 						$Page->get(AM_KEY_TITLE) . 
+						'</div>' .
 						'<div class="uk-text-small">' . Core\Str::dateFormat($Page->getMtime(), 'j. M Y') . '</div>' .
 						'<div class="am-panel-bottom">' .
 						'<span>' . 
@@ -591,47 +593,26 @@ class Html {
 	
 	
 	/**
-	 *  Create a panel for an AJAX status request with loading animation.
+	 *  Create a status button for an AJAX status request with loading animation.
 	 *      
 	 *  @param string $status
 	 *  @param string $tab
-	 *  @param string $icon
-	 *  @return string The HTML for the status panel
+	 *  @return string The HTML for the status button
 	 */
 	
-	public function statusPanel($status, $tab, $icon) {
+	public function status($status, $tab) {
 		
-		return	'<a href="?context=system_settings#' . $tab . '">' .
-					'<div class="uk-panel uk-panel-box" data-am-status="' . $status . '">' .
-						$this->status(
-							$icon, 
-							'', 
-							'uk-icon-circle-o-notch uk-icon-spin', 
-							Text::get('btn_getting_data')
-						) .
-					'</div>' . 
+		return	'<a '.
+		 		'href="?context=system_settings#' . $tab . '" ' .
+				'class="uk-button uk-button-large uk-width-1-1 uk-text-left" ' .
+				'data-am-status="' . $status . '"' .
+		 		'>' .
+					'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp;&nbsp;' . 
+					Text::get('btn_getting_data') .
 				'</a>';
 				
 	}
-
-
-	/**
-	 *  Create the inner HTML of a status panel.
-	 *      
-	 *  @param string $iconTop
-	 *  @param string $textTop
-	 *  @param string $iconBottom
-	 *  @param string $textBottom
-	 *  @return string The inner HTML for a status panel
-	 */
 	
-	public function status($iconTop, $textTop, $iconBottom, $textBottom) {
-		
-		return 	'<p class="uk-hidden-small"><i class="' . $iconTop . ' uk-icon-small uk-icon-justify"></i>&nbsp;&nbsp;&nbsp;' . $textTop . '</p>' . 
-			'<i class="' . $iconBottom . ' uk-icon-small uk-icon-justify"></i>&nbsp;&nbsp;&nbsp;' . $textBottom;
-		
-	}
-
 
 	/**
 	 *	Create recursive site tree for editing a page. 

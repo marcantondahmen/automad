@@ -40,9 +40,17 @@
 	}
 	
 	.uk-form-stacked & {
+		
 		padding: 3px 12px;
 		background-color: @form-background;
 		border-radius: @am-radius;
+		
+		& li.uk-active > a,
+		& li a:not(.am-tree-toggle):hover {
+			color: @button-success-color;
+			background-color: @button-success-background;
+		}
+		
 	}
 	
 	& > ul {

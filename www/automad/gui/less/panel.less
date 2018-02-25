@@ -32,14 +32,18 @@
  *	Licensed under the MIT license.
  */
 
+@panel-title-margin-bottom:     0;
+@panel-title-font-size:         inherit;
+@panel-title-line-height:       inherit;
+@panel-title-font-weight:		inherit;
 
 @panel-box-padding:				8px;
 @panel-box-color:				@am-text;
 @panel-box-title-color:			@am-text;
-@panel-box-background:			#FFFFFF;
+@panel-box-background:			#F7F7F7;
 @panel-box-badge-top:          	13px;
 @panel-box-badge-right:			10px;
-@panel-teaser-margin-bottom:	@panel-box-padding;
+@panel-teaser-margin-bottom:	0;
 
 .hook-panel-box() {
 	
@@ -55,7 +59,7 @@
 
 	& .uk-panel-teaser {
 		overflow: hidden;
-		border: @am-border-image-width solid @panel-box-background;
+		border: 3px solid @panel-box-background;
 		border-radius: @am-radius;
 	}
 	
@@ -63,6 +67,16 @@
 		margin-top: 4px;
 	}
 	
+	& .uk-icon-button {
+		background-color: darken(@panel-box-background, 4%);
+	}
+	
+}
+
+.hook-panel-title() {
+	margin: 0 -@panel-box-padding;
+	padding: @panel-box-padding;
+	padding-bottom: 5px;
 }
 
 .am-panel {
@@ -74,7 +88,6 @@
 		height: 0;
 		// Keep icon responsive.
 		padding-top: 75%;
-		background-color: @am-bg;
 		
 		& > * {
 			position: absolute;

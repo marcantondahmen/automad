@@ -36,11 +36,11 @@
 @am-icon-button-margin-left: 		10px;
 
 @button-color:						@am-text;
-@button-background:					#FFFFFF;
-@button-hover-color:				lighten(@button-color, 20%);
-@button-hover-background:			#FFFFFF;
+@button-background:					#F4F4F4;
+@button-hover-color:				@button-color;
+@button-hover-background:			darken(@button-background, 4%);
 @button-active-color:				@button-hover-color;
-@button-active-background:			#FFFFFF;
+@button-active-background:			@button-hover-background;
 
 @button-primary-color:				#FFFFFF;
 @button-primary-background:			@am-primary;
@@ -63,8 +63,8 @@
 @button-danger-active-color:		#FFFFFF;
 @button-danger-active-background:	@button-danger-hover-background;
 
-@button-disabled-color:				#FFFFFF;
-@button-disabled-background:		darken(@am-bg, 10%);
+@button-disabled-color:				#CFCFCF;
+@button-disabled-background:		@button-background;
 
 @button-font-size:					14px;
 @button-mini-font-size: 			11px;
@@ -95,6 +95,11 @@
 	
 	& + & {
 		margin-left: 5px;
+	}
+	
+	&.uk-button-mini,
+	&.uk-button-small {
+		border-radius: @am-radius-small;
 	}
 	
 }

@@ -91,16 +91,20 @@
 		}
 		
 		.uk-form-row > & {
+			
 			display: block;
-			box-sizing: border-box;
-			border: @am-border-width solid transparent;
+			max-height: @form-height;
 			padding: @form-padding;
 			padding-top: 0;
 			padding-bottom: 0;
-			background-color: @form-background;
-			max-height: @form-height;
-			line-height: @form-height - (2 * @am-border-width);
-			border-radius: @am-radius;
+			text-align: left;
+			line-height: @form-height;
+			
+			&:before {
+				font-size: 1.1em;
+				width: 1.5em;
+			}
+		
 		}
 		
 	}

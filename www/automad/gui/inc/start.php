@@ -79,23 +79,23 @@ $this->element('header');
 				<?php Text::e('btn_inpage_edit'); ?>
 			</a>
 		</p>
-		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-large-top">
-			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->statusPanel('cache', Core\Str::sanitize(Text::get('sys_cache')), 'uk-icon-rocket'); ?>
-			</li>
-			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->statusPanel('debug', Core\Str::sanitize(Text::get('sys_debug')), 'uk-icon-bug'); ?>
-			</li>
-			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->statusPanel('update', Core\Str::sanitize(Text::get('sys_update')), 'uk-icon-code-fork'); ?>
-			</li>
-		</ul>
-		<div class="uk-panel uk-panel-box">
+		<div class="uk-margin-large-top">
 			<i class="uk-icon-heartbeat uk-icon-justify uk-icon-small"></i>&nbsp;&nbsp;
 			<span class="uk-hidden-small"><?php Text::e('dashboard_modified'); ?></span>
 			<?php echo date('F jS Y, G:i', $mTime); ?>h
 		</div>
-		<div class="uk-margin-large-top">
+		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-top">
+			<li class="uk-margin-small-bottom">
+				<?php echo $this->Html->status('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
+			</li>
+			<li class="uk-margin-small-bottom">
+				<?php echo $this->Html->status('debug', Core\Str::sanitize(Text::get('sys_debug'))); ?>
+			</li>
+			<li class="uk-margin-small-bottom">
+				<?php echo $this->Html->status('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
+			</li>
+		</ul>
+		<div class="uk-margin-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
 			<?php echo $this->Html->pageGrid($latestPages); ?>
 		</div>
