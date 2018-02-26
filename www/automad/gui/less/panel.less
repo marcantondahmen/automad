@@ -40,9 +40,9 @@
 @panel-box-padding:				8px;
 @panel-box-color:				@am-text;
 @panel-box-title-color:			@am-text;
-@panel-box-background:			#F7F7F7;
-@panel-box-badge-top:          	13px;
-@panel-box-badge-right:			10px;
+@panel-box-background:			#F6F6F6;
+@panel-box-badge-top:          	12px;
+@panel-box-badge-right:			9px;
 @panel-teaser-margin-bottom:	0;
 
 .hook-panel-box() {
@@ -68,6 +68,15 @@
 	}
 	
 	& .uk-icon-button {
+		background-color: darken(@panel-box-background, 4%);
+	}
+	
+}
+
+.hook-panel-badge() {
+	
+	&.uk-badge {
+		color: @am-text;
 		background-color: darken(@panel-box-background, 4%);
 	}
 	

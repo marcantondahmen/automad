@@ -48,9 +48,9 @@
 @form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
-@form-disabled-border:      @form-border;
-@form-disabled-background:  @form-background;
-@form-disabled-color:		@button-disabled-color;
+@form-disabled-border:      transparent;
+@form-disabled-background:  @panel-box-background;
+@form-disabled-color:		@panel-box-color;
 
 @form-stacked-font-weight:	400;
 @form-stacked-margin-bottom:4px;
@@ -67,7 +67,9 @@
 }
 
 .hook-form-disabled() {
-	cursor: not-allowed;
+	// Fix iOS disabled input styles.
+	opacity: 1;
+	-webkit-text-fill-color: @form-disabled-color;
 }
 
 .hook-form-stacked-label() {

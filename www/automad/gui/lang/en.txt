@@ -652,7 +652,7 @@ sys_status_update_available: Update to
 
 -
 
-sys_status_update_not_available: Up to date
+sys_status_update_not_available: Automad is up to date
 
 -
 

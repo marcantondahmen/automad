@@ -155,10 +155,6 @@ if (isset($_POST['data'])) {
 							</div>
 							<?php } ?>
 							<div class="am-panel-bottom am-panel-bottom-small">
-								<span class="uk-badge">
-									<i class="uk-icon-files-o"></i>&nbsp;
-									<?php echo count($theme->templates); ?>
-								</span>
 								<label 
 								class="am-toggle-checkbox am-panel-bottom-right" 
 								data-am-toggle="#<?php echo $id; ?>"

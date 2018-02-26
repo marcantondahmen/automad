@@ -84,14 +84,11 @@ if (isset($_POST['item'])) {
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
 			$output['status'] = '<i class="uk-icon-refresh uk-icon-justify"></i>&nbsp;&nbsp;' .
-								'<span class="uk-badge uk-badge-danger">' . AM_VERSION . '&nbsp;&nbsp;/&nbsp;&nbsp;' .
-								Text::get('sys_status_update_available') . ' ' . $updateVersion .
-								'</span>';
+								Text::get('sys_status_update_available') . 
+								'&nbsp;&nbsp;<span class="uk-badge uk-badge-success">' . $updateVersion . '</span>';
 		} else {
-			$output['status'] = '<i class="uk-icon-code-fork uk-icon-justify"></i>&nbsp;&nbsp;' .
-								'<span class="uk-badge">' . AM_VERSION . '&nbsp;&nbsp;/&nbsp;&nbsp;' .
-								Text::get('sys_status_update_not_available') .
-								'</span>';
+			$output['status'] = '<i class="uk-icon-check uk-icon-justify"></i>&nbsp;&nbsp;' .
+								Text::get('sys_status_update_not_available');
 		}
 		
 	}
