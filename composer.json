@@ -1,0 +1,18 @@
+{
+    "name": "automad/automad",
+    "description": "A file-based content management system and template engine",
+    "keywords": ["cms"],
+    "homepage": "http://automad.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Anton Dahmen",
+            "email": "hello@marcdahmen.de",
+            "homepage": "http://marcdahmen.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.4"
+    }
+}
