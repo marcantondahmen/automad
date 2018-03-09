@@ -2,7 +2,7 @@ syntax: glob
 cached*
 node_modules
 sitemap.xml
-www/cache/trash
-www/config/accounts.php
-www/pages/test
-www/themes/test
+cache/trash
+config/accounts.php
+pages/test
+themes/test

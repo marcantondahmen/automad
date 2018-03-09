@@ -18,7 +18,7 @@
 # Generating the version number with --template {latesttag}.{latesttagdistance} is not possible, since the latest tags 
 # on branch default won't be visible to a working copy on branch develop before merging.
  
-file="www/automad/version.php"
+file="automad/version.php"
 
 echo
 echo "---"

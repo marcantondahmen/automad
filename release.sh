@@ -8,7 +8,7 @@
 # This script handles the release process by writing a new version number to version.php, 
 # merging the develop branch into default and creating a tag.
 
-file=www/automad/version.php
+file=automad/version.php
 
 # Get current version.
 latestTag=$(hg tags | sed -n '2 p' | cut -d ' ' -f 1)
