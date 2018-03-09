@@ -37,17 +37,17 @@ gulp.task('am-js', function() {
 	
 	return 	merge2(
 			gulp.src([
-				'../../automad/lib/jquery/jquery-2.0.3.min.js',
-				'../../automad/lib/uikit/js/uikit.min.js',
-				'../../automad/lib/uikit/js/components/autocomplete.min.js',
-				'../../automad/lib/uikit/js/components/lightbox.min.js',
-				'../../automad/lib/uikit/js/components/pagination.min.js',
-				'../../automad/lib/uikit/js/components/slider.min.js',
-				'../../automad/lib/uikit/js/components/slideshow.min.js',
-				'../../automad/lib/uikit/js/components/sticky.min.js',
-				'../../automad/lib/uikit/js/components/tooltip.min.js',
-				'lib/imagesloaded/imagesloaded.pkgd.min.js',
-				'lib/masonry/masonry.pkgd.min.js'
+				'node_modules/jquery/dist/jquery.min.js',
+				'node_modules/uikit/dist/js/uikit.min.js',
+				'node_modules/uikit/dist/js/components/autocomplete.min.js',
+				'node_modules/uikit/dist/js/components/lightbox.min.js',
+				'node_modules/uikit/dist/js/components/pagination.min.js',
+				'node_modules/uikit/dist/js/components/slider.min.js',
+				'node_modules/uikit/dist/js/components/slideshow.min.js',
+				'node_modules/uikit/dist/js/components/sticky.min.js',
+				'node_modules/uikit/dist/js/components/tooltip.min.js',
+				'node_modules/imagesloaded/imagesloaded.pkgd.min.js',
+				'node_modules/masonry/dist/masonry.pkgd.min.js'
 			]),
 			gulp.src('js/*.js')
 			.pipe(uglify(uglifyOptions))
