@@ -1,0 +1,8 @@
+{
+    "name": "automad/lib",
+    "description": "Automad dependencies",
+    "require": {
+        "jbroadway/urlify": "^1.1",
+        "michelf/php-markdown": "^1.8"
+    }
+}
