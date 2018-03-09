@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2017 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2018 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -53,17 +53,17 @@ use Automad\GUI as GUI;
 date_default_timezone_set(@date_default_timezone_get());
 
 
-// Autoload core classes and libraries.
+// Composer autoload.
+require AM_BASE_DIR . '/lib/vendor/autoload.php';
+
+
+// Autoload Automad classes.
 spl_autoload_register(function($class) {
 	
 	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
 		
 	if (strpos($file, 'automad') === 0) {	
-		// Load Automad class.
 		require_once AM_BASE_DIR . '/' . $file;
-	} else {	
-		// Load 3rd party library.
-		require_once AM_BASE_DIR . '/automad/lib/' . $file;
 	}
 		
 });
