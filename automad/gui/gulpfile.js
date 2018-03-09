@@ -100,46 +100,50 @@ gulp.task('libs-js', ['bump'], function() {
 	return 	merge2(
 			// jQuery first.
 			gulp.src([
-				'../lib/jquery/jquery-2.0.3.min.js'
+				'node_modules/jquery/dist/jquery.min.js'
 			]),
 			// CodeMirror. To be minified.
 			gulp.src([
-				'../lib/codemirror/lib/codemirror.js',
-				'../lib/codemirror/mode/markdown/markdown.js',
-				'../lib/codemirror/addon/display/placeholder.js',
-				'../lib/codemirror/addon/edit/closebrackets.js',
-				'../lib/codemirror/addon/edit/closetag.js',
-				'../lib/codemirror/addon/mode/overlay.js',
-				'../lib/codemirror/mode/xml/xml.js',
-				'../lib/codemirror/mode/gfm/gfm.js'
+				'node_modules/codemirror/lib/codemirror.js',
+				'node_modules/codemirror/mode/markdown/markdown.js',
+				'node_modules/codemirror/addon/display/placeholder.js',
+				'node_modules/codemirror/addon/edit/closebrackets.js',
+				'node_modules/codemirror/addon/edit/closetag.js',
+				'node_modules/codemirror/addon/mode/overlay.js',
+				'node_modules/codemirror/mode/xml/xml.js',
+				'node_modules/codemirror/mode/gfm/gfm.js'
 			])
 			.pipe(uglify(uglifyOptions)),
 			// Marked (for HTML editor).
 			gulp.src([
-				'../lib/marked/marked.min.js'
+				'node_modules/marked/marked.min.js'
+			]),
+			// Scrollbars.
+			gulp.src([
+				'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'
 			]),
 			// UIkit core and components.
 			gulp.src([
-				'../lib/uikit/js/uikit.min.js',
-				'../lib/uikit/js/components/accordion.min.js',
-				'../lib/uikit/js/components/autocomplete.min.js',
-				'../lib/uikit/js/components/datepicker.min.js',
-				'../lib/uikit/js/components/form-select.min.js',
-				'../lib/uikit/js/components/htmleditor.min.js',
-				'../lib/uikit/js/components/notify.min.js',
-				'../lib/uikit/js/components/sticky.min.js',
-				'../lib/uikit/js/components/timepicker.min.js',
-				'../lib/uikit/js/components/tooltip.min.js'
+				'node_modules/uikit/dist/js/uikit.min.js',
+				'node_modules/uikit/dist/js/components/accordion.min.js',
+				'node_modules/uikit/dist/js/components/autocomplete.min.js',
+				'node_modules/uikit/dist/js/components/datepicker.min.js',
+				'node_modules/uikit/dist/js/components/form-select.min.js',
+				'node_modules/uikit/dist/js/components/htmleditor.min.js',
+				'node_modules/uikit/dist/js/components/notify.min.js',
+				'node_modules/uikit/dist/js/components/sticky.min.js',
+				'node_modules/uikit/dist/js/components/timepicker.min.js',
+				'node_modules/uikit/dist/js/components/tooltip.min.js'
 			]),
 			// File upload. To be minified.
 			gulp.src([
-				'../lib/jquery-file-upload/jquery.ui.widget.js',
-				'../lib/jquery-file-upload/jquery.fileupload.js',
-				'../lib/jquery-file-upload/jquery.iframe-transport.js'	
+				'node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+				'node_modules/blueimp-file-upload/js/jquery.fileupload.js',
+				'node_modules/blueimp-file-upload/js/jquery.iframe-transport.js'	
 			])
 			.pipe(uglify(uglifyOptions)),
 			// Draggabilly.
-			gulp.src('../lib/draggabilly/draggabilly.pkgd.js')
+			gulp.src('node_modules/draggabilly/dist/draggabilly.pkgd.js')
 			.pipe(uglify(uglifyOptions))
 		)
 		.pipe(concat('libs.min.js', { newLine: '\r\n\r\n' } ))
