@@ -180,7 +180,7 @@ gulp.task('watch', function() {
 // Download fonts from Google.
 gulp.task('google-fonts-download', function() {
 
-	var	libDir = '../../lib/google/fonts/', // Note: the path is relative to gulp.dest
+	var	libDir = '../../../lib/fonts/google', // Note: the path is relative to gulp.dest
 		fontsList = './fonts.list',
 		options = {
 			fontsDir: libDir,
@@ -214,9 +214,9 @@ gulp.task('google-fonts-css', function() {
 				"\n\tsrc: url($2.woff) format('woff');" + 
 				"\n\t$1";
 
-	return	gulp.src('../lib/google/fonts/fonts.css')
+	return	gulp.src('../../lib/fonts/google/fonts.css')
 			.pipe(replace(rgx, rpl))
-			.pipe(gulp.dest('../lib/google/fonts'))
+			.pipe(gulp.dest('../../lib/fonts/google'))
 	
 });
 
