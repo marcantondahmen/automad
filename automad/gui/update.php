@@ -387,9 +387,9 @@ class Update {
 
 		$success = true;
 		$zip = zip_open($archive);
-		$itemsMatchRegex = 	'/^[\w\-]+\/www(' . 
-					addcslashes(implode('|', $items), '/') . 
-					')/';
+		$itemsMatchRegex = 	'/^[\w\-]+(' . 
+							addcslashes(implode('|', $items), '/') . 
+							')/';
 		
 		if (is_resource($zip)) {
 			
@@ -400,7 +400,7 @@ class Update {
 				
 				if (preg_match($itemsMatchRegex, $filename)) {
 					
-					$filename = preg_replace('/^([\w\-]+\/www)/', AM_BASE_DIR, $filename); 
+					$filename = preg_replace('/^([\w\-]+)/', AM_BASE_DIR, $filename); 
 					
 					if (zip_entry_open($zip, $zipEntry)) {
 						

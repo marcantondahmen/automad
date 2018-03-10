@@ -203,12 +203,12 @@ Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
 // UPDATE
-Config::set('AM_UPDATE_ITEMS', '/automad, /index.php, /extensions/am, /themes/am');
+Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /extensions/am, /themes/am');
 Config::set('AM_UPDATE_BRANCH', 'default');
 Config::set('AM_UPDATE_REPO_URL', 'https://bitbucket.org/marcantondahmen/automad');
 Config::set('AM_UPDATE_REPO_RAW_PATH', '/raw');
 Config::set('AM_UPDATE_REPO_GET_PATH', '/get');
-Config::set('AM_UPDATE_REPO_VERSION_FILE', '/www/automad/version.php');
+Config::set('AM_UPDATE_REPO_VERSION_FILE', '/automad/version.php');
 Config::set('AM_UPDATE_TEMP', AM_DIR_CACHE . '/update');
 
 // Version number 
