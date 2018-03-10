@@ -288,11 +288,13 @@ class Update {
 		
 		if (!$items) {
 			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_items') . '</div>';
+			$output['cli'] = 'Invalid list of items to be updated!';
 			return $output;
 		}
 		
 		if (!self::permissionsGranted($items)) {
 			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_permission') . '</div>';
+			$output['cli'] = 'Permission denied!';
 			return $output;
 		}
 		
@@ -345,6 +347,7 @@ class Update {
 				}
 				
 				$output['success'] = GUI\Text::get('success_update');
+				$output['cli'] = 'Successfully updated to version ' . $version;
 				
 			} else {
 				
