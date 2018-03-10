@@ -53,20 +53,8 @@ use Automad\GUI as GUI;
 date_default_timezone_set(@date_default_timezone_get());
 
 
-// Composer autoload.
-require AM_BASE_DIR . '/lib/vendor/autoload.php';
-
-
-// Autoload Automad classes.
-spl_autoload_register(function($class) {
-	
-	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
-		
-	if (strpos($file, 'automad') === 0) {	
-		require_once AM_BASE_DIR . '/' . $file;
-	}
-		
-});
+// Autoloading.
+require AM_BASE_DIR . '/automad/autoload.php';
 
 
 // Load configuration and define constants.
