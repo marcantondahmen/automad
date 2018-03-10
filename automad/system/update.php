@@ -35,8 +35,9 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\System;
 use Automad\Core as Core;
+use Automad\GUI as GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -73,7 +74,7 @@ class Update {
 		
 		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 		
-		FileSystem::makeDir($backup);
+		Core\FileSystem::makeDir($backup);
 		
 		foreach($items as $item) {
 			
@@ -81,7 +82,7 @@ class Update {
 			$backupPath = $backup . $item;
 			
 			if (is_writable($itemPath) && is_writable(dirname($itemPath))) {
-				FileSystem::makeDir(dirname($backupPath));
+				Core\FileSystem::makeDir(dirname($backupPath));
 				$success = rename($itemPath, $backupPath);
 				self::log('Backing up ' . Core\Str::stripStart($itemPath, AM_BASE_DIR) . ' to ' . Core\Str::stripStart($backupPath, AM_BASE_DIR));
 			} else {
@@ -156,7 +157,7 @@ class Update {
 		
 		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
 		
-		FileSystem::makeDir(dirname($archive));
+		Core\FileSystem::makeDir(dirname($archive));
 		
 		set_time_limit(0);
 		
@@ -232,7 +233,7 @@ class Update {
 	private static function log($data) {
 		
 		$file = AM_BASE_DIR . AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
-		FileSystem::makeDir(dirname($file));
+		Core\FileSystem::makeDir(dirname($file));
 		file_put_contents($file, $data . "\r\n", FILE_APPEND);
 		
 		return $file;
@@ -286,12 +287,12 @@ class Update {
 		$items = self::items();
 		
 		if (!$items) {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_items') . '</div>';
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_items') . '</div>';
 			return $output;
 		}
 		
 		if (!self::permissionsGranted($items)) {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_permission') . '</div>';
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_permission') . '</div>';
 			return $output;
 		}
 		
@@ -327,7 +328,7 @@ class Update {
 			
 			if ($success) {
 				
-				$output['html'] = '<div class="uk-alert uk-alert-success">' . Text::get('sys_update_not_required') . '</div>';
+				$output['html'] = '<div class="uk-alert uk-alert-success">' . GUI\Text::get('sys_update_not_required') . '</div>';
 				
 				$versionFile = AM_BASE_DIR . '/automad/version.php';
 				
@@ -338,22 +339,22 @@ class Update {
 					$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
 					$output['html'] .= '<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
 							   '<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' . 
-							   Text::get('btn_open_log') .
+							   GUI\Text::get('btn_open_log') .
 							   '</a>';
 					
 				}
 				
-				$output['success'] = Text::get('success_update');
+				$output['success'] = GUI\Text::get('success_update');
 				
 			} else {
 				
-				$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_failed') . '</div>';
+				$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_failed') . '</div>';
 				
 			}
 			
 		} else {
 			
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_download') . '</div>';
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_download') . '</div>';
 			
 		}
 		
@@ -404,7 +405,7 @@ class Update {
 					
 					if (zip_entry_open($zip, $zipEntry)) {
 						
-						if (FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry)))) {
+						if (Core\FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry)))) {
 							self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 						} else {
 							$success = false;

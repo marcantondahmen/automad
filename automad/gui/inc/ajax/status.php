@@ -37,6 +37,8 @@
 
 namespace Automad\GUI;
 use Automad\Core as Core;
+use Automad\System as System;
+
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -80,7 +82,7 @@ if (isset($_POST['item'])) {
 	
 	if ($item == 'update') {
 		
-		$updateVersion = Update::getVersion();
+		$updateVersion = System\Update::getVersion();
 		
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
 			$output['status'] = '<i class="uk-icon-refresh uk-icon-justify"></i>&nbsp;&nbsp;' .

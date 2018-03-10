@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\System as System;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,11 +57,11 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 } else {
 	
 	// Test if server supports all required functions/extensions.
-	if (Update::supported()) {
+	if (System\Update::supported()) {
 		
 		if (!empty($_POST['update'])) {
 		
-			$output = Update::run();
+			$output = System\Update::run();
 		
 		} else {
 		
@@ -68,7 +69,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 			ob_start();
 	
 			// Get version and test connection.
-			if ($version = Update::getVersion()) {
+			if ($version = System\Update::getVersion()) {
 		
 				// Check if an the current installation is outdated.
 				if (version_compare(AM_VERSION, $version, '<')) {
