@@ -47,7 +47,7 @@ gulp.task('am-js', function() {
 				'node_modules/uikit/dist/js/components/sticky.min.js',
 				'node_modules/uikit/dist/js/components/tooltip.min.js',
 				'node_modules/imagesloaded/imagesloaded.pkgd.min.js',
-				'node_modules/masonry/dist/masonry.pkgd.min.js'
+				'node_modules/masonry-layout/dist/masonry.pkgd.min.js'
 			]),
 			gulp.src('js/*.js')
 			.pipe(uglify(uglifyOptions))
