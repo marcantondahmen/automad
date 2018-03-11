@@ -436,8 +436,7 @@ class Selection {
 		// Parse options string.
 		
 		// First create an array out of single key/order combinations (separated by comma).
-		$pairs = explode(AM_PARSE_STR_SEPARATOR, $options);
-		$pairs = array_map('trim', $pairs);
+		$pairs = Parse::csv($options);
 		
 		// Append the default sorting order to each pair and create subarrays out of the first two space-separated items.  
 		foreach ($pairs as $pair) {

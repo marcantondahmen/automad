@@ -124,16 +124,10 @@ class Update {
 	
 	private static function items() {
 		
-		$items = explode(AM_PARSE_STR_SEPARATOR, AM_UPDATE_ITEMS);
+		$items = Core\Parse::csv(AM_UPDATE_ITEMS);
 		
 		if (is_array($items)) {
 			
-			$items = array_map(
-					function($item) {
-						return trim($item); 
-					}, $items
-				);
-		
 			$items = array_filter($items);
 			
 			if (!empty($items)) {

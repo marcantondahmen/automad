@@ -60,14 +60,7 @@ class Parse {
 
 	public static function allowedFileTypes() {
 		
-		// Split string
-		$types = explode(AM_PARSE_STR_SEPARATOR, AM_ALLOWED_FILE_TYPES);
-		// Trim items
-		$types = array_map(function($type) {
-				return trim($type);
-		         }, $types);
-		
-		return $types;
+		return self::csv(AM_ALLOWED_FILE_TYPES);
 		
 	}
 
@@ -92,6 +85,21 @@ class Parse {
 		}
 		
 	}
+
+
+    /**
+     *  Split and trim comma separated string.
+     *  
+     *  @param string $str
+     *  @return array The array of separate and trimmed strings
+     */
+    
+    public static function csv($str) {
+        
+        $array = explode(AM_PARSE_STR_SEPARATOR, $str);
+        return array_map('trim', $array);
+        
+    }
 
 
 	/**
