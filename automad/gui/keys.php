@@ -95,7 +95,7 @@ class Keys {
 		if (!$file) {
 			$Page = $this->Automad->Context->get();
 			// Don't use $Page->getTemplate() to prevent exit on errors.
-			$file = AM_BASE_DIR . AM_DIR_THEMES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
+			$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
 		}
 		
 		if (file_exists($file)) {
@@ -147,7 +147,7 @@ class Keys {
 		$keys = array();
 		
 		// Collect all .php files below "/themes"
-		$dir = AM_BASE_DIR . AM_DIR_THEMES;	
+		$dir = AM_BASE_DIR . AM_DIR_PACKAGES;	
 		$arrayDirs = array();
 		$arrayFiles = array();
 		

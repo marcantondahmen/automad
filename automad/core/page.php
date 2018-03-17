@@ -233,7 +233,7 @@ class Page {
 	
 	public function getTemplate() {
 		
-		$templatePath = AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
+		$templatePath = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
 		
 		if (file_exists($templatePath)) {
 			return $templatePath;

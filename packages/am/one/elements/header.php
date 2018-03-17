@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>@{ sitename } / @{ title }</title>
 	<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,latin-ext" rel="stylesheet">
-	<link href="/themes/am/one/dist/am.one.min.css" rel="stylesheet">
-	<script src="/themes/am/dist/am.min.js"></script>
+	<link href="/packages/am/one/dist/am.one.min.css" rel="stylesheet">
+	<script src="/packages/am/dist/am.min.js"></script>
 	<# Add optional header items. #>
 	@{ itemsHeader }
 </head>

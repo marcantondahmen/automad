@@ -69,7 +69,7 @@ class Theme {
 	public function __construct($themeJSON) {
 		
 		$json = false;
-		$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_THEMES . '/');
+		$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 		$defaults = array(
 						'name' => $path, 
 						'description' => false, 

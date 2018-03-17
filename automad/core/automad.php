@@ -451,7 +451,7 @@ class Automad {
 		
 		header('HTTP/1.0 404 Not Found');
 		
-		if (file_exists(AM_BASE_DIR . AM_DIR_THEMES . '/' . $this->Shared->get(AM_KEY_THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
+		if (file_exists(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->Shared->get(AM_KEY_THEME) . '/' . AM_PAGE_NOT_FOUND_TEMPLATE . '.php')) {
 			$data[AM_KEY_TEMPLATE] = AM_PAGE_NOT_FOUND_TEMPLATE;
 			$data[AM_KEY_LEVEL] = 0;
 			$data[AM_KEY_PARENT] = '';

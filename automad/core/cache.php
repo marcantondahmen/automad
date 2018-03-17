@@ -314,7 +314,7 @@ class Cache {
 			$arrayDirsAndFiles = array(AM_BASE_DIR . '/automad/version.php');
 		
 			// The following directories are monitored for any changes.
-			$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_THEMES, AM_DIR_SHARED, '/config');
+			$monitoredDirs = array(AM_DIR_PAGES, AM_DIR_PACKAGES, AM_DIR_SHARED, '/config');
 		
 			foreach($monitoredDirs as $monitoredDir) {
 		

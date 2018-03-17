@@ -99,7 +99,7 @@ define('AM_REQUEST', Parse::request());
 // DIR
 Config::set('AM_DIR_PAGES', '/pages');
 Config::set('AM_DIR_SHARED', '/shared');
-Config::set('AM_DIR_THEMES', '/themes');
+Config::set('AM_DIR_PACKAGES', '/packages');
 Config::set('AM_DIR_CACHE', '/cache');
 Config::set('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
 Config::set('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
@@ -157,7 +157,7 @@ Config::set('AM_DEL_INPAGE_BUTTON_OPEN', '{{@@');
 Config::set('AM_DEL_INPAGE_BUTTON_CLOSE', '@@}}');
 
 // EXTENSIONS
-Config::set('AM_NAMESPACE_EXTENSIONS', '\\Extensions');
+Config::set('AM_NAMESPACE_EXTENSIONS', '\\Packages');
 
 // PARSE
 // Block separator - separates all key/value pairs
@@ -203,7 +203,7 @@ Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
 // UPDATE
-Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /extensions/am, /themes/am');
+Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/am');
 Config::set('AM_UPDATE_BRANCH', 'default');
 Config::set('AM_UPDATE_REPO_URL', 'https://bitbucket.org/marcantondahmen/automad');
 Config::set('AM_UPDATE_REPO_RAW_PATH', '/raw');

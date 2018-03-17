@@ -87,7 +87,7 @@ class Themelist {
 	private function collectThemes($path = false) {
 		
 		if (!$path) {
-			$path = AM_BASE_DIR . AM_DIR_THEMES;
+			$path = AM_BASE_DIR . AM_DIR_PACKAGES;
 		}
 		
 		$themes = array();
@@ -100,7 +100,7 @@ class Themelist {
 			if (is_readable($themeJSON) && is_array($templates) && $templates) {
 				
 				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
-				$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_THEMES . '/');
+				$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 				$themes[$path] = new Theme($themeJSON);
 				
 			} else {

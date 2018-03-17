@@ -179,7 +179,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								$theme = $this->Automad->Shared->get(AM_KEY_THEME);
 							}
 							
-							$template = AM_BASE_DIR . AM_DIR_THEMES . '/' . $theme . '/' . $Page->template . '.php';
+							$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $theme . '/' . $Page->template . '.php';
 							
 							// Give feedback whether the template exists or not.	
 							if (!file_exists($template)) {

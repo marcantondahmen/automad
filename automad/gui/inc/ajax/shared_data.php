@@ -106,7 +106,7 @@ if (isset($_POST['data'])) {
 					
 					foreach ($themes as $theme) { 
 					
-						$path = AM_BASE_DIR . AM_DIR_THEMES . '/' . $theme->path;
+						$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $theme->path;
 						$files = glob($path . '/*');
 						$id = 'am-theme-' . ++$i;
 					
