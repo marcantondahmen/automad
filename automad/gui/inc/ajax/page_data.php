@@ -134,7 +134,10 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				</a>
 			</div>
 			
-			<div class="uk-accordion" data-uk-accordion="{duration: 200, showfirst: false}">
+			<div 
+			class="uk-accordion" 
+			data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
+			>
 				
 				<!-- Settings -->
 				<div type="button" class="uk-accordion-title">

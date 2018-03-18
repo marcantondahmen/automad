@@ -809,7 +809,7 @@ class Content {
 		if ($data[AM_KEY_TITLE]) {
 			
 			// Check if the parent directory is writable for all pages but the homepage.
-			// Since the directory of the homepage is just "www/pages" and its parent directory is the base directory (normally "www"),
+			// Since the directory of the homepage is just "pages" and its parent directory is the base directory,
 			// it should not be necessary to set the base directoy permissions to 777, since the homepage directory will never be renamed or moved.
 			if ($url =='/' || is_writable(dirname(dirname($this->getPageFilePath($Page))))) {
 	

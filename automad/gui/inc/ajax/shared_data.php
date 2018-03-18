@@ -86,7 +86,10 @@ if (isset($_POST['data'])) {
 		</div>
 
 		<!-- Content -->		
-		<div class="uk-accordion" data-uk-accordion="{duration: 200, showfirst: false}">
+		<div 
+		class="uk-accordion" 
+		data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
+		>
 			
 			<!-- Theme -->
 			<div type="button" class="uk-accordion-title">
