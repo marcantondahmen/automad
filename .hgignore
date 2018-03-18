@@ -6,3 +6,15 @@ cache/trash
 config/accounts.php
 pages/test
 themes/test
+uikit/docs
+uikit/tests
+uikit/themes
+uikit/vendor
+uikit/.npmignore
+uikit/.gitignore
+uikit/bower.json
+uikit/circle.yml
+uikit/gulpfile.js
+uikit/index.html
+uikit/CONTRIBUTING.md
+uikit/CHANGELOG.md

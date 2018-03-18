@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "173ce32fd25afa7d2baca408dde610b5",
+    "content-hash": "5cd362f6fe410274cd81a814f1e134dc",
     "packages": [
         {
             "name": "jbroadway/urlify",
@@ -105,6 +105,34 @@
                 "markdown"
             ],
             "time": "2018-01-15T00:49:33+00:00"
+        },
+        {
+            "name": "uikit/uikit",
+            "version": "2.27.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uikit/uikit.git",
+                "reference": "6f7d7723e274b2eacb1d3301e92b0d32fcd83d28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uikit/uikit/zipball/6f7d7723e274b2eacb1d3301e92b0d32fcd83d28",
+                "reference": "6f7d7723e274b2eacb1d3301e92b0d32fcd83d28",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.27-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "UIkit is a lightweight and modular front-end framework for developing fast and powerful web interfaces.",
+            "homepage": "http://getuikit.com/",
+            "time": "2018-01-19T10:50:20+00:00"
         }
     ],
     "packages-dev": [],

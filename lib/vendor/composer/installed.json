@@ -102,5 +102,35 @@
         "keywords": [
             "markdown"
         ]
+    },
+    {
+        "name": "uikit/uikit",
+        "version": "2.27.5",
+        "version_normalized": "2.27.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/uikit/uikit.git",
+            "reference": "6f7d7723e274b2eacb1d3301e92b0d32fcd83d28"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/uikit/uikit/zipball/6f7d7723e274b2eacb1d3301e92b0d32fcd83d28",
+            "reference": "6f7d7723e274b2eacb1d3301e92b0d32fcd83d28",
+            "shasum": ""
+        },
+        "time": "2018-01-19T10:50:20+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.27-dev"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "UIkit is a lightweight and modular front-end framework for developing fast and powerful web interfaces.",
+        "homepage": "http://getuikit.com/"
     }
 ]
