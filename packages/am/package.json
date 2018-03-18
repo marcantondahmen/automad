@@ -8,6 +8,7 @@
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.5",
     "gulp-less": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2",
@@ -15,8 +16,7 @@
     "imagesloaded": "^4.1.4",
     "jquery": "^2.2.4",
     "masonry-layout": "^4.2.1",
-    "merge2": "^1.0.3",
-    "uikit": "^2.27.4"
+    "merge2": "^1.0.3"
   },
   "author": "Marc Anton Dahmen",
   "license": "MIT"
