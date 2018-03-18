@@ -251,16 +251,43 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					</div>
 					<?php } ?> 
 					<!-- Tags -->
-					<div class="uk-form-row">
-						<label for="am-input-data-tags" class="uk-form-label">
+					<div class="uk-form-row">	
+						<?php 	
+						
+							$tags = Core\Parse::csv(htmlspecialchars($data[AM_KEY_TAGS]));
+							sort($tags);
+							
+							$Pagelist = $this->Automad->getPagelist();
+							$Pagelist->config(
+								array_merge(
+									$Pagelist->getDefaults(),
+									array('excludeHidden' => false)
+								)
+							);
+							
+							$allTags = $Pagelist->getTags();
+							sort($allTags);
+							
+							foreach ($allTags as $tag) {
+								$allTagsAutocomplete[]['value'] = $tag;
+							}
+							
+						?>
+						<label class="uk-form-label">
 							<?php Text::e('page_tags'); ?>
 						</label>
-						<input 
-						id="am-input-data-tags" 
-						class="uk-form-controls uk-width-1-1" 
-						type="text" 
+						<div 
+						id="am-taggle" 
+						data-am-tags='{
+							"tags": <?php echo json_encode($tags); ?>,
+							"autocomplete": <?php echo json_encode($allTagsAutocomplete); ?>
+						}'
+						></div>
+						<input  
+						id="am-input-data-tags"
+						type="hidden" 
 						name="data[<?php echo AM_KEY_TAGS; ?>]" 
-						value="<?php echo htmlspecialchars($data[AM_KEY_TAGS]); ?>" 
+						value="" 
 						/>
 					</div>	
 				</div>

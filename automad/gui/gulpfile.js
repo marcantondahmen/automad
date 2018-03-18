@@ -144,6 +144,9 @@ gulp.task('libs-js', ['bump'], function() {
 			.pipe(uglify(uglifyOptions)),
 			// Draggabilly.
 			gulp.src('node_modules/draggabilly/dist/draggabilly.pkgd.js')
+			.pipe(uglify(uglifyOptions)),
+			// Taggle. To be minified.
+			gulp.src('node_modules/taggle/src/taggle.js')
 			.pipe(uglify(uglifyOptions))
 		)
 		.pipe(concat('libs.min.js', { newLine: '\r\n\r\n' } ))

@@ -97,6 +97,7 @@ class Parse {
     public static function csv($str) {
         
         $array = explode(AM_PARSE_STR_SEPARATOR, $str);
+        $array = array_filter($array, 'strlen');
         return array_map('trim', $array);
         
     }

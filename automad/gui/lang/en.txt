@@ -413,7 +413,7 @@ page_redirect: Redirect page to another URL
 
 -
 
-page_tags: Tags (Separate multiple tags by comma)
+page_tags: Tags (Separate multiple tags by comma or tab)
 
 -
 

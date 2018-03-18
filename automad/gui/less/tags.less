@@ -1,0 +1,132 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2018 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+@am-tag-font-size: 	@button-small-font-size;
+@am-tag-height: 	@button-small-height;
+@am-tag-padding: 	0 @button-small-padding-horizontal;
+@am-tag-radius:  	@am-tag-height;
+@am-tag-margin: 	4px;
+
+[data-am-tags] {
+	box-sizing: border-box;
+	min-height: @form-height;
+	padding: @am-tag-margin 0 0 @am-tag-margin;
+	background-color: @form-background;
+	border: @am-border-width solid @form-border;
+	border-radius: @am-radius;
+}
+
+.taggle {
+	
+	&_list {
+		
+		padding: 0;
+		margin: 0;
+		
+		& > li {
+			
+			display: inline-block;
+			white-space: nowrap;
+			max-height: @am-tag-height;
+			margin: 0 @am-tag-margin @am-tag-margin 0;
+			font-size: @am-tag-font-size;
+			line-height: @am-tag-height;
+			border-radius: @am-tag-radius;
+			
+			&.taggle {
+							
+				padding: @am-tag-padding;
+				color: @badge-color;
+				background-color: @badge-success-background;
+				
+				& .close {
+					&:extend(.uk-close);
+					margin-right: -6px;
+					cursor: pointer;
+					font-size: 14px;
+				}
+				
+				&:before {
+					content: '\f02b';
+					padding-right: 5px;
+					font-family: FontAwesome;
+					.smooth-fonts;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	& .uk-autocomplete {
+		display: inline-block;
+		max-height: @am-tag-height !important;
+		height: @am-tag-height !important;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.uk-autocomplete input[type="text"]&_input {
+		
+		display: inline-block;
+		box-sizing: border-box;
+		position: relative;
+		top: -1px;
+		width: 120px !important;
+		height: @am-tag-height;
+		min-height: 0;
+		margin: 0;
+		padding: @am-tag-padding !important;
+		font-size: @am-tag-font-size;
+		line-height: @am-tag-height - (2 * @am-border-width);
+		border-radius: @am-tag-radius;
+		
+		&:not(:focus) {
+			border-style: dashed;
+		}
+		
+	}
+	
+	&_sizer {
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		top: -500px;
+		z-index: -1;
+		visibility: hidden;
+	}
+	
+}
