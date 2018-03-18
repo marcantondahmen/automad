@@ -26,7 +26,6 @@
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "marked": "^0.3.17",
     "merge2": "^1.0.2",
-    "taggle": "^1.13.0",
-    "uikit": "^2.27.4"
+    "taggle": "^1.13.0"
   }
 }
