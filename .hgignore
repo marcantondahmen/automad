@@ -14,7 +14,6 @@ uikit/.npmignore
 uikit/.gitignore
 uikit/bower.json
 uikit/circle.yml
-uikit/gulpfile.js
 uikit/index.html
 uikit/CONTRIBUTING.md
 uikit/CHANGELOG.md
