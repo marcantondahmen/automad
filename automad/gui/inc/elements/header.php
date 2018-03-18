@@ -53,7 +53,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
 	<title><?php echo $this->guiTitle; ?></title>
-
+	
+	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.css" rel="stylesheet">
 	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/automad.min.css" rel="stylesheet">
 	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.js"></script>	

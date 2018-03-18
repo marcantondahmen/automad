@@ -95,7 +95,8 @@ gulp.task('libs-js', ['bump'], function() {
 			output: {
 				comments: /(license|copyright)/i
 			} 
-		};
+		},
+		pkgUIkit = require('../../lib/vendor/uikit/uikit/package.json');
 	
 	return 	merge2(
 			// jQuery first.
@@ -124,17 +125,38 @@ gulp.task('libs-js', ['bump'], function() {
 			]),
 			// UIkit core and components.
 			gulp.src([
-				'node_modules/uikit/dist/js/uikit.min.js',
-				'node_modules/uikit/dist/js/components/accordion.min.js',
-				'node_modules/uikit/dist/js/components/autocomplete.min.js',
-				'node_modules/uikit/dist/js/components/datepicker.min.js',
-				'node_modules/uikit/dist/js/components/form-select.min.js',
-				'node_modules/uikit/dist/js/components/htmleditor.min.js',
-				'node_modules/uikit/dist/js/components/notify.min.js',
-				'node_modules/uikit/dist/js/components/sticky.min.js',
-				'node_modules/uikit/dist/js/components/timepicker.min.js',
-				'node_modules/uikit/dist/js/components/tooltip.min.js'
-			]),
+				// Core. 
+				// Order of files taken from lib/vendor/uikit/uikit/gulpfile.js
+				'../../lib/vendor/uikit/uikit/src/js/core/core.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/touch.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/utility.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/smooth-scroll.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/scrollspy.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/toggle.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/alert.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/button.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/dropdown.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/grid.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/modal.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/nav.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/offcanvas.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/switcher.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/tab.js',
+				'../../lib/vendor/uikit/uikit/src/js/core/cover.js',
+				// Selected components.
+				'../../lib/vendor/uikit/uikit/src/js/components/accordion.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/autocomplete.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/datepicker.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/form-select.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/htmleditor.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/notify.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/sticky.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/timepicker.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
+			])
+			.pipe(uglify(uglifyOptions))
+			.pipe(concat('uikit.js', { newLine: '\r\n\r\n' } )) // Doesn't get saved to disk.
+			.pipe(header('/*! <%= pkg.title %> <%= pkg.version %> | <%= pkg.homepage %> | (c) 2014 YOOtheme | MIT License */\n', { 'pkg' : pkgUIkit } )),
 			// File upload. To be minified.
 			gulp.src([
 				'node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
@@ -170,6 +192,20 @@ gulp.task('automad-less', ['bump'], function() {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
+			.pipe(gulp.dest(destination));
+	
+});
+
+
+// Concat all css files used by npm dependencies.
+gulp.task('libs-css', ['bump'], function() {
+	
+	return 	gulp.src([
+				'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
+				'node_modules/codemirror/lib/codemirror.css'
+			])
+			.pipe(cleanCSS(cleanCSSOptions))
+			.pipe(concat('libs.min.css', { newLine: '\r\n\r\n' } ))
 			.pipe(gulp.dest(destination));
 	
 });
@@ -233,4 +269,4 @@ gulp.task('google-fonts', sequence('google-fonts-download', 'google-fonts-css'))
 
 
 // The default task.
-gulp.task('default', ['automad-js', 'libs-js', 'automad-less']);
+gulp.task('default', ['automad-js', 'libs-js', 'automad-less', 'libs-css']);
