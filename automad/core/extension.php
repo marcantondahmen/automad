@@ -44,35 +44,34 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 /**
  *	The Extension class provides an interface for calling an extension from a template file.
  *
- *	An extension is basically called by the subdirectory name within the "/extensions" directory. 
+ *	An extension is basically called by the subdirectory name within the "/packages" directory. 
  *	The file name within that subdirectory must have the basename of that directory followed by ".php".
  *	Both, class and method name, must be the basename of the directory as well.    
- *
- *	The namespace must start with "Extensions".     
- *	In case of extensions grouped in a subdirectory of "/extensions", the name of that directory has to be added to the namespace as well, 
+ *     
+ *	In case of extensions grouped in a subdirectory of "/packages", the name of that directory has to be the namespace, 
  *	in that way that the namespace reflects the actual directory structure without the last directory containing the actual .php file.    
  *          
  *	Example 1 - Single extension:     
- *	An extension call like <@ example1 @> would load the file "/extensions/example1/example1.php", 
- *	create an instance of the class "\Extensions\example1" ($object) and call the method "$object->example1()" of that class.
- *	The namespace would just be "Extensions".  
+ *	An extension call like <@ example1 @> would load the file "/packages/example1/example1.php", 
+ *	create an instance of the class "\example1" ($object) and call the method "$object->example1()" of that class.
+ *	The namespace would just be "\".  
  *	The full naming scheme would be:    
- *	- namespace:	Extensions
- *	- directory:	/extensions/example1 (must be lowercase)
- *	- file:		/extensions/example1/example1.php (must be lowercase)
- *	- class:	Example1
- *	- method:	Example1
+ *	- namespace:	\
+ *	- directory:	/packages/example1 (must be lowercase)
+ *	- file:			/packages/example1/example1.php (must be lowercase)
+ *	- class:		Example1
+ *	- method:		Example1
  *          
- *	Example 2 - Extension in a subdirectory (possibly grouped with others):     
- *	An extension call like <@ group/example2 @> would load the file "/extensions/group/example2/example2.php",
- *	create an instance of the class "\Extensions\group\example2" ($object) and call the method "$object->example2()" of that class.
- *	The namespace in this case would be "Extensions\group". 
+ *	Example 2 - Extension in a subdirectory (like a vendor name):     
+ *	An extension call like <@ vendor/example2 @> would load the file "/packages/vendor/example2/example2.php",
+ *	create an instance of the class "\vendor\example2" ($object) and call the method "$object->example2()" of that class.
+ *	The namespace in this case would be "\vendor". 
  *	The full naming scheme would be:    
- *	- namespace:	Extensions\Group   
- *	- directory:	/extensions/group/example2 (must be lowercase)
- *	- file:		/extensions/group/example2/example2.php (must be lowercase)
- *	- class:	Example2
- *	- method:	Example2
+ *	- namespace:	\vendor   
+ *	- directory:	/packages/vendor/example2 (must be lowercase)
+ *	- file:			/packages/vendor/example2/example2.php (must be lowercase)
+ *	- class:		Example2
+ *	- method:		Example2
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2016-2018 by Marc Anton Dahmen - <http://marcdahmen.de>
@@ -109,13 +108,13 @@ class Extension {
 		Debug::log($extension);
 		
 		// Building the class name.
-		$class = AM_NAMESPACE_EXTENSIONS . '\\' . str_replace('/', '\\', $extension);
+		$class = '\\' . str_replace('/', '\\', $extension);
 		
-		// Extract the basename of the given $extension to be used as the method name, in case the extension is grouped with other extensions in a subdirectory.
+		// Extract the basename of the given $extension to be used as the method name, in case the extension is grouped with other extensions in a vendor directory.
 		$method = basename($extension);
 		
 		// Building the extension's file path.
-		$file = AM_BASE_DIR . strtolower(str_replace('\\', '/', $class) . '/' . $method) . '.php';
+		$file = AM_BASE_DIR . AM_DIR_PACKAGES . strtolower(str_replace('\\', '/', $class) . '/' . $method) . '.php';
 		
 		if (file_exists($file)) {
 							
@@ -135,12 +134,12 @@ class Extension {
 					$this->collectAssets($extension);
 					
 					// Call method dynamically and pass $options & Automad. The returned output will be stored in $this->output.
-					Debug::log($options, 'Calling method "' . $method . '" and passing the following options');
+					Debug::log($options, 'Calling method ' . $method . ' and passing the following options');
 					$this->output = $object->$method($options, $Automad);
 		
 				} else {
 					
-					Debug::log($method, 'Method not existing in class "' . $class . '"');	
+					Debug::log($method, 'Method not existing in class ' . $class);	
 				
 				}
 		
@@ -167,9 +166,9 @@ class Extension {
 	
 	private function collectAssets($extension) {
 		
-		$path = AM_BASE_DIR . strtolower(str_replace('\\', '/', AM_NAMESPACE_EXTENSIONS) . '/' . $extension);
+		$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . strtolower($extension);
 		
-		Debug::log($path, 'Getting assets for "' . $extension . '" in');
+		Debug::log($path, 'Getting assets for ' . $extension . ' in');
 		
 		foreach (array('.css', '.js') as $type) {
 			

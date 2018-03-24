@@ -12,7 +12,7 @@
  */
 
 
-namespace Packages\AM;
+namespace Am;
 
 
 /**
@@ -33,7 +33,7 @@ class Mail {
 	 *	/packages/am/mail/mail.php
 	 *	
 	 *	In this case the naming pattern looks like:
-	 *	- namespace: 	Packages\AM
+	 *	- namespace: 	\Am
 	 *	- directory:	/packages/am/mail
 	 *	- class file:	/packages/am/mail/mail.php
 	 *	- class: 		Mail
@@ -55,8 +55,8 @@ class Mail {
 		
 		$defaults = array(
 			'to' => false,
-			'error' => '<b>Please fill out alls fields!</b>',
-			'success' => '<b>Successfully send email!</b>'
+			'error' => '<b>Please fill out all fields!</b>',
+			'success' => '<b>Successfully sent email!</b>'
 		);
 		
 		// Merge defaults with options.
