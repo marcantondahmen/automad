@@ -4,7 +4,7 @@
 	<@ elements/teaser.php @>
 	<@ am/mail {
 		to: @{ email },
-		success: '<h2>Successfully send email!</h2>',
+		success: '<h2>Successfully sent email!</h2>',
 		error: '<h2>Please fill out all fields!</h2>'
 	} @>
 	<form class="uk-form uk-margin-large-top" action="@{ url }" method="post">
