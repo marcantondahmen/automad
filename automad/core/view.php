@@ -911,7 +911,7 @@ class View {
 				
 		// Inline styles (like background-image).
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+)url\(\'(.+?)\'\)/', function($match) use ($method, $parameters) {
+		$str = 	preg_replace_callback('/(<[^>]+)url\(\'?(.+?)\'?\)/', function($match) use ($method, $parameters) {
 				$parameters = array_merge(array(0 => $match[2]), $parameters);
 				$url = call_user_func_array($method, $parameters);
 				return $match[1] . 'url(\'' . $url . '\')';
