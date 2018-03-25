@@ -1,8 +1,8 @@
-sitename: Automad Demo
+sitename: My Site
 
 -
 
-theme: am/two
+theme: am/theme_02
 
 -
 

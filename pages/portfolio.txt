@@ -19,5 +19,5 @@ itemsPerPage: 10
 -
 
 textTeaser: Welcome to the landing page of your Automad installation. Log in [here](/dashboard) to add your content and create pages.    
-This page uses the *Portfolio* template of the *Am/Two* theme shipped with Automad. You can change the sidewide theme for your website at any time [here](/dashboard?context=edit_shared#data-and-settings). To change the content and settings for this page, just click [here](/dashboard?context=edit_page&url=%2F#data-and-settings).    
+This page uses the *Portfolio* template of *Theme 02* shipped with Automad. You can change the sidewide theme for your website at any time [here](/dashboard?context=edit_shared#data-and-settings). To change the content and settings for this page, just click [here](/dashboard?context=edit_page&url=%2F#data-and-settings).    
 Browse the pagelist below to get an overview how the different templates work.

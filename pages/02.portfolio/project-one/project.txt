@@ -23,4 +23,4 @@ textTeaser: The *Project* template provides an easy way to present your design p
 
 -
 
-theme: am/one
+theme: am/theme_01

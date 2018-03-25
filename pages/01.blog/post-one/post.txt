@@ -14,9 +14,9 @@ text: The main content of your post goes here. When beeing logged in, just click
 
 -
 
-textTeaser: This is the *Text Teaser* of the *Post* template of the *Am/One* theme. [Upload](/dashboard?context=edit_page&url=%2Fblog%2Fpost-one#files) images to show up in the slideshow and define one of them as your teaser image by [setting](/dashboard?context=edit_page&url=%2Fblog%2Fpost-one#data-and-settings) the *Image Teaser* variable.    
+textTeaser: This is the *Text Teaser* of the *Post* template of *Theme 01*. [Upload](/dashboard?context=edit_page&url=%2Fblog%2Fpost-one#files) images to show up in the slideshow and define one of them as your teaser image by [setting](/dashboard?context=edit_page&url=%2Fblog%2Fpost-one#data-and-settings) the *Image Teaser* variable.    
 Note the other blog post to the right. You can define *tags* for every page or post in the [Page Settings](/dashboard?context=edit_page&url=%2Fblog%2Fpost-one#data-and-settings). Pages having tags in common with the current page will be shown as related pages.
 
 -
 
-theme: am/one
+theme: am/theme_01

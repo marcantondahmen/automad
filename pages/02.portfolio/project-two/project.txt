@@ -22,4 +22,4 @@ text: Place your main description text of your project here.
 
 -
 
-textTeaser: This page uses the other *Project* template of the *Am/Two* theme. Like with the [Post Two](/blog/post-two), all shown images are linked. Check out the [Images Slideshow](/dashboard?context=edit_page&url=%2Fportfolio%2Fproject-two#data-and-settings) variable, to understand how links to images work.
+textTeaser: This page uses the other *Project* template of *Theme 02*. Like with the [Post Two](/blog/post-two), all shown images are linked. Check out the [Images Slideshow](/dashboard?context=edit_page&url=%2Fportfolio%2Fproject-two#data-and-settings) variable, to understand how links to images work.
