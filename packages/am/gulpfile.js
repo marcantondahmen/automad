@@ -82,27 +82,27 @@ gulp.task('am-js', function() {
 	
 });	
 	
-// Compile, minify and prefix one.less.
-gulp.task('am-one-less', function() {
+// Compile, minify and prefix theme_01.less.
+gulp.task('theme-01-less', function() {
 
-	return 	gulp.src('one/less/one.less')
+	return 	gulp.src('theme_01/less/theme_01.less')
 			.pipe(less())
 			.on('error', onError)
 			.pipe(cleanCSS(cleanCSSOptions))
-			.pipe(rename({ prefix: 'am.', suffix: '.min' }))
-			.pipe(gulp.dest('one/dist'));
+			.pipe(rename({ suffix: '.min' }))
+			.pipe(gulp.dest('theme_01/dist'));
 	
 });
 
-// Compile, minify and prefix two.less.
-gulp.task('am-two-less', function() {
+// Compile, minify and prefix theme_02.less.
+gulp.task('theme-02-less', function() {
 
-	return 	gulp.src('two/less/two.less')
+	return 	gulp.src('theme_02/less/theme_02.less')
 			.pipe(less())
 			.on('error', onError)
 			.pipe(cleanCSS(cleanCSSOptions))
-			.pipe(rename({ prefix: 'am.', suffix: '.min' }))
-			.pipe(gulp.dest('two/dist'));
+			.pipe(rename({ suffix: '.min' }))
+			.pipe(gulp.dest('theme_02/dist'));
 	
 });
 
@@ -110,12 +110,12 @@ gulp.task('am-two-less', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('one/less/*.less', ['am-one-less']);
-	gulp.watch('two/less/*.less', ['am-two-less']);
+	gulp.watch('theme_01/less/*.less', ['theme-01-less']);
+	gulp.watch('theme_02/less/*.less', ['theme-02-less']);
 	gulp.watch('js/*.js', ['am-js']);
 	
 });
 
 
 // The default task.
-gulp.task('default', ['am-js', 'am-one-less', 'am-two-less']);
+gulp.task('default', ['am-js', 'theme-01-less', 'theme-02-less']);
