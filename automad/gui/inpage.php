@@ -171,6 +171,7 @@ class InPage {
 		
 		$assets = 	"\n" .
 					'<!-- Automad GUI -->' . "\n" .
+					'<link href="' . AM_BASE_URL . '/automad/gui/dist/libs.min.css" rel="stylesheet">' . "\n" .
 					'<link href="' . AM_BASE_URL . '/automad/gui/dist/automad.min.css" rel="stylesheet">' . "\n" .
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js"></script>' . "\n" .
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js"></script>' . "\n" .
