@@ -148,7 +148,7 @@ class Html {
 		// The field ID.
 		$id = 'am-input-data-' . $key;
 	
-		$html = '<div class="uk-form-row">' .
+		$html = '<div class="uk-form-row uk-position-relative">' .
 				'<label class="uk-form-label" for="' . $id . '">' . 
 				ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key)))) . 
 				'</label>';
