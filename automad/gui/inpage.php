@@ -176,7 +176,7 @@ class InPage {
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js"></script>' . "\n" .
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js"></script>' . "\n" .
 					// Cleanup window object by removing jQuery and UIkit.
-					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;</script>' . "\n" .
+					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
 					'<!-- Automad GUI end -->' . "\n";
 			
 		// Check if there is already any other script tag and try to prepend all assets as first items.
