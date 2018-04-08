@@ -187,7 +187,10 @@ if ($files) { ?>
 					>
 						<?php echo $icon; ?>
 					</a>
-					<div class="uk-panel-title">
+					<div 
+					class="uk-panel-title" 
+					title="<?php echo basename($file); ?>" 
+					>
 						<?php echo basename($file); ?>
 					</div>
 					<?php if ($caption) { ?>
