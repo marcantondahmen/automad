@@ -40,11 +40,29 @@
 	
 +function($, UIkit) {
 	
-	UIkit.on('beforeready.uk.dom', function(){
+	UIkit.on('beforeready.uk.dom', function() {
 		
 		$.extend(UIkit.components.htmleditor.prototype.defaults, {
 			markdown: true,
-			toolbar : [ 'bold', 'italic', 'link', 'image', 'blockquote', 'listUl', 'listOl' ]
+			codemirror: { 
+				mode: 'gfm', 
+				lineWrapping: true, 
+				dragDrop: false, 
+				autoCloseTags: false, 
+				matchTags: false, 
+				autoCloseBrackets: true, 
+				matchBrackets: true, 
+				indentUnit: 4, 
+				indentWithTabs: false, 
+				tabSize: 4, 
+				hintOptions: {
+					completionSingle: false
+				},
+				extraKeys: {
+					"Enter": "newlineAndIndentContinueMarkdownList"
+				}
+			},
+			toolbar: [ 'bold', 'italic', 'link', 'image', 'blockquote', 'listUl', 'listOl' ]
 		});
 		
 	});

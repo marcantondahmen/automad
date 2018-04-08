@@ -109,7 +109,8 @@ gulp.task('libs-js', ['bump'], function() {
 				'node_modules/codemirror/mode/markdown/markdown.js',
 				'node_modules/codemirror/addon/display/placeholder.js',
 				'node_modules/codemirror/addon/edit/closebrackets.js',
-				'node_modules/codemirror/addon/edit/closetag.js',
+				'node_modules/codemirror/addon/edit/matchbrackets.js',
+				'node_modules/codemirror/addon/edit/continuelist.js',
 				'node_modules/codemirror/addon/mode/overlay.js',
 				'node_modules/codemirror/mode/xml/xml.js',
 				'node_modules/codemirror/mode/gfm/gfm.js'

@@ -33,6 +33,7 @@
  */
 
 @am-cm-transition-delay: 			            0.1s;
+@am-cm-selection-background:                    darken(@form-background, 7%);
 
 @htmleditor-navbar-background:                  @form-border;
 
@@ -228,7 +229,6 @@
 	
 	& .cm-atom {
 		color: inherit;
-		
 	}
 	
 	& .cm-number {
@@ -247,7 +247,7 @@
 	}
 		
 	& .cm-variable-2 {
-		color: inherit;
+		color: @am-success;
 	}
 	
 	& .cm-variable-3 {
@@ -298,14 +298,38 @@
 	}
 	
 	& .cm-link {
-		color: inherit;
-		font-weight: 500;
+		color: @am-danger;
 	}
+    
+    & .cm-url {
+        color: @am-muted;
+    }
 
 	& .cm-error {
 		color: inherit;
 	}
 	
+    &.CodeMirror .CodeMirror-matchingbracket {
+        color: @am-danger;
+        font-weight: 500;
+    }
+    
+    & .CodeMirror-selected { 
+        background-color: @am-cm-selection-background; 
+    }
+    
+    & .CodeMirror-line::selection, 
+    & .CodeMirror-line > span::selection, 
+    & .CodeMirror-line > span > span::selection { 
+        background-color: @am-cm-selection-background;
+    }
+    
+    & .CodeMirror-line::-moz-selection, 
+    & .CodeMirror-line > span::-moz-selection, 
+    & .CodeMirror-line > span > span::-moz-selection { 
+        background-color: @am-cm-selection-background;
+    }
+    
 }
 
 .cm-negative {
@@ -328,7 +352,6 @@
 .cm-strikethrough {
 	text-decoration: line-through;
 }
-
 
 .cm-invalidchar {
 	color: inherit;
