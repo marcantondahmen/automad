@@ -74,7 +74,7 @@ $this->element('header');
 			</a>
 		</p>
 		<p>
-			<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button uk-button-primary uk-button-large">
+			<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large">
 				<i class="uk-icon-share"></i>&nbsp;
 				<?php Text::e('btn_inpage_edit'); ?>
 			</a>

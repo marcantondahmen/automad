@@ -71,7 +71,7 @@ $this->element('header');
 				required 
 				/>
 				<div class="uk-text-right">
-					<a href="<?php echo AM_BASE_INDEX; ?>" class="uk-button">
+					<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button">
 						<i class="uk-icon-home"></i>&nbsp;
 						<?php Text::e('btn_home'); ?>
 					</a>
