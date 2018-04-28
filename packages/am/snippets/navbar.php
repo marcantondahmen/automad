@@ -53,7 +53,7 @@
 				<@ if @{ urlSearchResults } @>
 				<form class="uk-form uk-width-1-1 uk-width-medium-1-2 uk-margin-large-top" action="@{ urlSearchResults }" method="get">
 					<script>
-						var autocomplete = <@ ../../elements/autocomplete.php @>
+						var autocomplete = <@ autocomplete.php @>
 					</script>
 					<div 
 					class="uk-autocomplete uk-width-1-1" 

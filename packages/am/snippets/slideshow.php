@@ -1,6 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 
-	<@ if @{ :filelistCount } @>
 		<div 
 		class="uk-slidenav-position uk-overlay-hover" 
 		data-uk-slideshow="{autoplay:true,autoplayInterval:3000,animation:'scroll'}"
@@ -40,4 +39,3 @@
 				></a>
 			<@ end @>
 		</div>
-	<@ end @>

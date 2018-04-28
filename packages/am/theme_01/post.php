@@ -1,17 +1,21 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
 
-	<@ elements/prev_next.php @>
+	<@ ../snippets/prev_next.php @>
 	<h1 class="uk-margin-small-bottom">@{ title }</h1>
-	<@ elements/date.php @>
-	<@ elements/tags.php @>
+	<@ ../snippets/date.php @>
+	<@ ../snippets/tags.php @>
 	<ul class="masonry uk-grid uk-margin-small-top">
 		<li class="masonry-item masonry-item-large uk-width-large-2-3">
 			<@ filelist { 
 				glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
 				sort: 'asc' 
 			} @>
-			<@ elements/slideshow.php @>
+			<@ if @{ :filelistCount } @>
+				<div class="uk-panel uk-panel-box">	
+					<@ ../snippets/slideshow.php @>
+				</div>
+			<@ end @>
 			<div class="content uk-width-large-9-10 uk-margin-bottom">
 				<div class="uk-text-large uk-margin-small-top">
 					@{ textTeaser | markdown }
@@ -27,7 +31,7 @@
 			<li class="masonry-item uk-width-small-1-2 uk-width-large-1-3">
 				<div class="uk-panel uk-panel-box">
 					<h3>@{ title }</h3>
-					<@ elements/date.php @>
+					<@ ../snippets/date.php @>
 					<@ with @{ imageTeaser | def('*.jpg, *.png, *.gif') } { width: 450 } @>
 						<a 
 						href="@{ url }" 
@@ -52,6 +56,6 @@
 			</li>	
 		<@ end @>
 	</ul>
-	<@ elements/pagination.php @>
+	<@ ../snippets/pagination.php @>
 
 <@ elements/footer.php @>

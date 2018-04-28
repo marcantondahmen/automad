@@ -1,7 +1,7 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
 
-	<@ elements/teaser.php @>
+	<@ ../snippets/teaser.php @>
 	<@ filelist { glob: @{ imagesGallery }, sort: 'asc' } @>
 	<ul class="masonry uk-grid uk-grid-width-medium-1-3">
 		<@ foreach in filelist @>

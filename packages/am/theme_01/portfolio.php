@@ -1,20 +1,20 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
 
-	<@ elements/teaser.php @>
-	<@ elements/pagelist_config.php @>
+	<@ ../snippets/teaser.php @>
+	<@ ../snippets/pagelist_config.php @>
 	<@ if not @{ checkboxHideFiltersAndSort } @>
 		<div class="uk-margin-top">
 			<div class="buttons-stacked">
-				<@ elements/filters.php @>
-				<@ elements/sort.php @>
-				<@ elements/search_title.php @>
+				<@ ../snippets/filters.php @>
+				<@ ../snippets/sort.php @>
+				<@ ../snippets/search_title.php @>
 			</div>
 		</div>
 	<@ end @>
 	<div class="uk-margin-small-top">
 		<@ elements/pagelist.php @>
-		<@ elements/pagination.php @>
+		<@ ../snippets/pagination.php @>
 	</div>
 	
 <@ elements/footer.php @>

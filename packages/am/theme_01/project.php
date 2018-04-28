@@ -1,20 +1,24 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
 
-	<@ elements/prev_next.php @>
+	<@ ../snippets/prev_next.php @>
 	<h1>@{ title }</h1>
 	<div class="uk-text-muted uk-margin-small-top uk-margin-large-bottom">
 		<span class="uk-text-muted">@{ date | dateFormat('F Y') }</span>
-		<@ elements/tags.php @>
+		<@ ../snippets/tags.php @>
 	</div>
 	<@ filelist { 
 		glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
 		sort: 'asc' 
 	} @>
-	<@ if @{ checkboxSingleImageSlideshow } @>
-		<@ elements/slideshow.php @>
-	<@ else @>
-		<@ elements/slider.php @>
+	<@ if @{ :filelistCount } @>
+		<div class="uk-panel uk-panel-box">	
+			<@ if @{ checkboxSingleImageSlideshow } @>
+				<@ ../snippets/slideshow.php @>
+			<@ else @>
+				<@ ../snippets/slider.php @>
+			<@ end @>
+		</div>
 	<@ end @>
 	<div class="content uk-text-large uk-margin-top">
 		@{ textTeaser | markdown }

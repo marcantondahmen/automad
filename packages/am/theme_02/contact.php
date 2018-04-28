@@ -1,7 +1,7 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
 
-	<@ elements/teaser.php @>
+	<@ ../snippets/teaser.php @>
 	<@ am/mail {
 		to: @{ email },
 		success: '<h2>Successfully sent email!</h2>',

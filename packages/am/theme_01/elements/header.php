@@ -17,4 +17,4 @@
 
 	<div class="uk-container uk-container-center">
 		
-		<@ navbar.php @>	
+		<@ ../../snippets/navbar.php @>	
