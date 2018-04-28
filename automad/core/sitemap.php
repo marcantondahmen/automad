@@ -88,13 +88,19 @@ class Sitemap {
 	
 	private function generate($collection, $sitemap) {
 			
+		$protocol = 'http';
+		
+		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+			$protocol = 'https';
+		}
+		
 		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . 
-			'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 		
 		foreach ($collection as $Page) {
 			// Only include "real" URLs and not aliases.
 			if (strpos($Page->url, '/') === 0) {
-				$xml .= '<url><loc>http://' . $_SERVER['SERVER_NAME'] . AM_BASE_INDEX . $Page->url . '</loc></url>' . "\n";
+				$xml .= '<url><loc>' . $protocol . '://' . $_SERVER['SERVER_NAME'] . AM_BASE_INDEX . $Page->url . '</loc></url>' . "\n";
 			}
 		}
 		
