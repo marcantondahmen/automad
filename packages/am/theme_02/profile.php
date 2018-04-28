@@ -3,7 +3,7 @@
 
 	<h1>@{ title }</h1>
 	<ul class="uk-grid">
-		<li class="am-02-content uk-width-medium-2-3">
+		<li class="content uk-width-medium-2-3">
 			<div class="uk-margin-bottom uk-text-large uk-width-medium-9-10">
 				@{ text | markdown }
 			</div>

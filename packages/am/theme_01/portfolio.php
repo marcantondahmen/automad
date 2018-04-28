@@ -5,7 +5,7 @@
 	<@ elements/pagelist_config.php @>
 	<@ if not @{ checkboxHideFiltersAndSort } @>
 		<div class="uk-margin-top">
-			<div class="am-01-buttons-stacked">
+			<div class="buttons-stacked">
 				<@ elements/filters.php @>
 				<@ elements/sort.php @>
 				<@ elements/search_title.php @>

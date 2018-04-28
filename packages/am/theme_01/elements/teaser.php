@@ -3,7 +3,7 @@
 	<@ if not @{ checkboxHideTeaser } @>
 		<h1>@{ title }</h1>
 		<@ if @{ textTeaser } @>
-			<div class="am-01-content uk-text-large uk-margin-top">
+			<div class="content uk-text-large uk-margin-top">
 				@{ textTeaser | markdown }
 			</div>	
 		<@ end @>	

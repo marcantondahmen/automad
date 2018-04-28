@@ -10,12 +10,12 @@
 		init: function() {
 			
 			// Masonry
-			var 	$masonry = $('.am-msnry');
+			var 	$masonry = $('.masonry');
 			
 			// Init masonry
 			$masonry.masonry({
-				columnWidth: $('.am-msnry-item').not('.am-msnry-item-large').get(0),
-				itemSelector: '.am-msnry-item',
+				columnWidth: $('.masonry-item').not('.masonry-item-large').get(0),
+				itemSelector: '.masonry-item',
 				transitionDuration: 0
 			});
 			

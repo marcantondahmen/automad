@@ -13,7 +13,7 @@
 	@{ itemsHeader }
 </head>
 
-<body class="am-01-@{ :template | sanitize }">
+<body class="@{ :template | sanitize }">
 
 	<div class="uk-container uk-container-center">
 		

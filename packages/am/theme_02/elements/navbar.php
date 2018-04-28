@@ -1,10 +1,10 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 
 	<# Navbar #>		
-	<ul class="am-02-navbar uk-grid uk-margin-large-bottom">
+	<ul class="navbar uk-grid uk-margin-large-bottom">
 		<# Logo or sitename. #>
 		<li class="uk-width-2-4 uk-width-medium-1-4">
-			<a href="/" class="am-02-brand">
+			<a href="/" class="brand">
 				<@ with @{ logo | def('/shared/*logo*') } { height: @{ logoHeight | def(80) } } @>
 					<img src="@{ :fileResized }" alt="@{ :basename }">
 				<@ else @>
@@ -29,7 +29,7 @@
 						<@ end @>
 					</ul>
 					<a 
-					href="#am-02-modal-nav" 
+					href="#modal-nav" 
 					class="uk-navbar-toggle" 
 					data-uk-modal
 					></a>
@@ -39,7 +39,7 @@
 	</ul>
 
 	<# Modal with site tree and search. #>
-	<div id="am-02-modal-nav" class="uk-modal">		
+	<div id="modal-nav" class="uk-modal">		
 		<div class="uk-modal-dialog uk-modal-dialog-blank">
 			<div class="uk-container uk-container-center">
 				<a 

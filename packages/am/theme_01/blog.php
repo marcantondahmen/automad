@@ -5,16 +5,16 @@
 	<@ elements/pagelist_config.php @>
 	<@ if not @{ checkboxHideFilters } @>
 		<div class="uk-margin-top">
-			<div class="am-01-buttons-stacked">
+			<div class="buttons-stacked">
 				<@ elements/filters.php @>
 				<@ elements/search_title.php @>
 			</div>
 		</div>
 	<@ end @>
-	<ul class="am-msnry uk-grid uk-margin-small-top">
+	<ul class="masonry uk-grid uk-margin-small-top">
 		<@ foreach in pagelist @>
 			<@ if @{ :i } = 1 @>
-				<li class="am-msnry-item am-msnry-item-large uk-width-large-2-3">
+				<li class="masonry-item masonry-item-large uk-width-large-2-3">
 					<div class="uk-panel uk-panel-box">
 						<h3>@{ title }</h3>
 						<@ elements/date.php @>
@@ -27,7 +27,7 @@
 							</a>
 						<@ end @>
 						<@ if @{ textTeaser } @>
-							<div class="am-01-content uk-text-muted uk-text-large uk-margin-small-top">
+							<div class="content uk-text-muted uk-text-large uk-margin-small-top">
 								@{ textTeaser | markdown }
 							</div>
 						<@ end @>
@@ -38,7 +38,7 @@
 					</div>
 				</li>
 			<@ else @>
-				<li class="am-msnry-item uk-width-small-1-2 uk-width-large-1-3">
+				<li class="masonry-item uk-width-small-1-2 uk-width-large-1-3">
 					<div class="uk-panel uk-panel-box">
 						<h3>@{ title }</h3>
 						<@ elements/date.php @>
@@ -48,7 +48,7 @@
 							</a>
 						<@ end @>
 						<@ if @{ textTeaser } @>
-							<div class="am-01-content uk-text-muted uk-margin-small-top">
+							<div class="content uk-text-muted uk-margin-small-top">
 								@{ textTeaser | markdown }
 							</div>
 						<@ end @>

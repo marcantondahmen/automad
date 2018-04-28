@@ -1,7 +1,7 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 	
 	<@ newPagelist { type: 'siblings' } @>
-	<div class="am-02-slidenav uk-visible-large">
+	<div class="slidenav uk-visible-large">
 		<@ with prev @>
 			<a 
 			href="@{ url }" 

@@ -16,10 +16,10 @@
 	<@ else @>
 		<@ elements/slider.php @>
 	<@ end @>
-	<div class="am-02-content uk-text-large uk-margin-top">
+	<div class="content uk-text-large uk-margin-top">
 		@{ textTeaser | markdown }
 	</div>
-	<div class="am-02-content uk-margin-top uk-margin-large-bottom uk-column-large-1-2">
+	<div class="content uk-margin-top uk-margin-large-bottom uk-column-large-1-2">
 		@{ text | markdown }
 	</div>
 	<@ newPagelist { type: 'related' } @>
