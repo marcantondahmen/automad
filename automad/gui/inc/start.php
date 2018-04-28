@@ -109,6 +109,10 @@ $this->element('header');
 				</div>
 				<div class="uk-panel uk-panel-box uk-margin-small-bottom">
 					<p>
+						Automad Version:<br />
+						<?php echo AM_VERSION; ?>
+					</p>
+					<p>
 						Operating System:<br />
 						<?php echo php_uname('s') . ' / ' . php_uname('r'); ?>
 					</p>

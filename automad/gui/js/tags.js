@@ -74,7 +74,7 @@
 						}
 					}),
 					setValue = function() {		
-						$input.val(taggle.getTagValues().join(', '));
+						$input.val(taggle.getTagValues().sort().join(', '));
 					};
 				
 				// Initially set value to hidden input field.

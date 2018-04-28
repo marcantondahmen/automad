@@ -35,7 +35,7 @@
 
 @am-tag-font-size: 	@button-small-font-size;
 @am-tag-height: 	@button-small-height;
-@am-tag-padding: 	0 @button-small-padding-horizontal;
+@am-tag-padding: 	0 10px;
 @am-tag-radius:  	@am-tag-height;
 @am-tag-margin: 	4px;
 
@@ -70,19 +70,23 @@
 				padding: @am-tag-padding;
 				color: @badge-color;
 				background-color: @badge-success-background;
+				cursor: default;
 				
 				& .close {
+					
 					&:extend(.uk-close);
-					margin-right: -6px;
+					margin-left: -1px;
+					margin-right: -9px;
+					padding: 0 3px;
 					cursor: pointer;
 					font-size: 14px;
-				}
-				
-				&:before {
-					content: '\f02b';
-					padding-right: 5px;
-					font-family: FontAwesome;
-					.smooth-fonts;
+					line-height: inherit;
+					vertical-align: top;
+					
+					&:hover {
+						opacity: 1;
+					}
+					
 				}
 				
 			}

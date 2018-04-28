@@ -57,7 +57,7 @@
 
 @form-placeholder-color:	@am-muted;
 
-@form-icon-color:			@form-color;
+@form-icon-color:			mix(@am-muted, @am-border-color);
 
 .hook-form() {
 	box-sizing: border-box;
@@ -120,7 +120,7 @@
 	}
 	
 	&:not(.uk-form-icon-flip) > input {
-		padding-left: (@form-icon-width + 2px) !important;	
+		padding-left: (@form-icon-width + 4px) !important;	
 	}
 	
 }
