@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<@ snippets/header.php @>
 
 	<@ ../snippets/teaser.php @>
 	<@ filelist { glob: @{ imagesGallery }, sort: 'asc' } @>
@@ -27,4 +27,4 @@
 		<@ end @>
 	</ul>
 	
-<@ elements/footer.php @>
+<@ snippets/footer.php @>

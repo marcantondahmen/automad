@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<@ snippets/header.php @>
 
 	<@ ../snippets/teaser.php @>
 	<@ ../snippets/pagelist_config.php @>
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	<@ end @>
-	<@ elements/pagelist.php @>
+	<@ snippets/pagelist.php @>
 	<@ ../snippets/pagination.php @>
 	
-<@ elements/footer.php @>
+<@ snippets/footer.php @>

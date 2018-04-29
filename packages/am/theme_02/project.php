@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<@ snippets/header.php @>
 
 	<@ ../snippets/prev_next.php @>
 	<h1>@{ title }</h1>
@@ -27,7 +27,7 @@
 	<@ newPagelist { type: 'related' } @>
 	<@ if @{ :pagelistCount } @>
 		<h2 class="uk-margin-large-top">Related</h2>
-		<@ elements/pagelist.php @>
+		<@ snippets/pagelist.php @>
 	<@ end @>
 	
-<@ elements/footer.php @>
+<@ snippets/footer.php @>

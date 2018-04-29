@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<@ snippets/header.php @>
 
 	<@ ../snippets/teaser.php @>
 	<@ am/mail {
@@ -41,4 +41,4 @@
 		</button>
 	</form>
 	
-<@ elements/footer.php @>
+<@ snippets/footer.php @>

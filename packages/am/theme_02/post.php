@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<@ snippets/header.php @>
 
 	<@ ../snippets/prev_next.php @>
 	<h1 class="uk-margin-small-bottom">@{ title }</h1>
@@ -54,4 +54,4 @@
 	</ul>
 	<@ ../snippets/pagination.php @>
 
-<@ elements/footer.php @>
+<@ snippets/footer.php @>

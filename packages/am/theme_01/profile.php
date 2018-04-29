@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<@ snippets/header.php @>
 
 	<h1>@{ title }</h1>
 	<ul class="uk-grid uk-margin-small-top">
@@ -25,4 +25,4 @@
 		</li>	
 	</ul>
 	
-<@ elements/footer.php @>
+<@ snippets/footer.php @>
