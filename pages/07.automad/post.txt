@@ -10,8 +10,4 @@ checkboxShowInFooter: on
 
 -
 
-checkboxShowInNavbar: on
-
--
-
 hidden: 1

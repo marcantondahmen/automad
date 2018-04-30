@@ -1,0 +1,17 @@
+title: Navigation
+
+-
+
+tags: Tutorial
+
+-
+
+textTeaser: A simple example for a tree navigation. Learn how to define recursive snippets of code to be used in loops and create dynamic menus of any depth.
+
+-
+
+date: 2018-04-30 12:00:00
+
+-
+
+theme: tutorials
