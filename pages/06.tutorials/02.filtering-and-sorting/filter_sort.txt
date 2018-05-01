@@ -14,4 +14,8 @@ textTeaser: A configurable pagelist is the basis for every navigation. This temp
 
 -
 
+hidden: 1
+
+-
+
 theme: tutorials
