@@ -21,26 +21,26 @@ class Source {
 		);
 		$source = preg_replace(
 			'/(&lt;@.*?@&gt;)/is', 
-			'<span class="has-text-info has-text-weight-semibold">$1</span>',
+			'<span class="has-text-link">$1</span>',
 			$source
 		);
 		$source = preg_replace(
 			'/(@\{.*?\})/is', 
-			'<span class="has-text-info has-text-weight-bold">$1</span>',
+			'<span class="has-text-link">$1</span>',
 			$source
 		);
 		$source = preg_replace(
 			'/(&lt;\?php.*?\?&gt;)/is', 
-			'<span class="has-text-info has-text-weight-semibold">$1</span>',
+			'<span class="has-text-link">$1</span>',
 			$source
 		);
 		$source = preg_replace(
 			'/(\/\/.*?\\n)/is', 
-			'<span class="has-text-grey-light has-text-weight-normal">$1</span>',
+			'<span class="has-text-grey-light">$1</span>',
 			$source
 		);
 		
-		return '<pre><code class="has-text-grey">' . $source . '</code></pre>';
+		return '<pre><code class="has-text-grey-dark">' . $source . '</code></pre>';
 		
 	}
 	
