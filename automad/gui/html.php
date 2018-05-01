@@ -702,7 +702,7 @@ class Html {
 		
 		$html = '<div class="am-switcher" data-uk-sticky="{top:60}">' .
 				'<div class="am-switcher-buttons">' .
-		 		'<div data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\'}">';
+		 		'<div data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\',swiping:false}">';
 	
 		foreach ($items as $item) {
 			
