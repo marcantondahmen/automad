@@ -39,7 +39,7 @@ across multiple templates.
 							modify the filter parameter within an existing query string without resetting other options. 
 							#>
 							href="?<@ queryStringMerge { filter: false } @>" 
-							class="button is-info<@ if not @{?filter} @> is-active<@ end @>">
+							class="button is-info<@ if not @{ ?filter } @> is-active<@ end @>">
 								All
 							</a>
 						</p>
@@ -70,7 +70,7 @@ across multiple templates.
 							<a 
 							<# The concept of creating the sorting menu is the same as for the filters. #>
 							href="?<@ queryStringMerge { sort: 'date desc' } @>" 
-							class="button is-info<@ if not @{?sort} or @{?sort} = 'date desc' @> is-active<@ end @>">
+							class="button is-info<@ if not @{ ?sort } or @{ ?sort } = 'date desc' @> is-active<@ end @>">
 								<span class="icon is-small">
 									<i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
 								</span>&nbsp;
@@ -80,7 +80,7 @@ across multiple templates.
 						<p class="control">
 							<a 
 							href="?<@ queryStringMerge { sort: 'title asc' } @>" 
-							class="button is-info<@ if @{?sort} = 'title asc' @> is-active<@ end @>"
+							class="button is-info<@ if @{ ?sort } = 'title asc' @> is-active<@ end @>"
 							>
 								<span class="icon is-small">
 									<i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
@@ -136,7 +136,7 @@ across multiple templates.
 							Multiple pipe functions can be chained. 
 							Here, all tags get stripped before shortening the content to 120 characters.
 							#>
-							@{ textTeaser | stripTags | 120 }
+							@{ textTeaser | stripTags | 100 }
 						</div>
 						<a href="@{ url }" class="button is-light is-small">More</a>
 					</div>

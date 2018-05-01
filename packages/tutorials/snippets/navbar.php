@@ -25,7 +25,11 @@
 								Introduction
 							</a>
 							<hr class="dropdown-divider" />
-							<@ newPagelist { filter: 'Tutorial'} @>
+							<@ newPagelist { 
+								type: 'children',
+								parent: @{ urlTutorials },
+								excludeHidden: false
+							} @>
 							<@ foreach in pagelist @>
 								<a href="@{ url }" class="dropdown-item">
 									@{ title }

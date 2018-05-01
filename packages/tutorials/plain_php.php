@@ -136,7 +136,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							</span>
 						</div>
 						<div class="field is-size-6">
-							<?php echo Str::shorten(Str::stripTags($Page->get('textTeaser')), 120); ?>
+							<?php echo Str::shorten(Str::stripTags($Page->get('textTeaser')), 100); ?>
 						</div>
 						<a 
 						href="<?php echo $Page->get('url'); ?>" 

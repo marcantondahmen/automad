@@ -6,7 +6,10 @@
 	</section>
 	<section class="section">
 		<div class="columns is-multiline is-8 is-variable">
-			<@ newPagelist { type: 'children' } @>
+			<@ newPagelist { 
+				type: 'children',
+				excludeHidden: false 
+			} @>
 			<@ foreach in pagelist @>
 				<div class="column is-one-third">
 					<hr />

@@ -63,7 +63,10 @@ across multiple templates.
 							</ul>
 						<@ end @>
 						<# Before actually calling the snippet, the pagelist is configured. #>
-						<@ newPagelist { type: 'children' } @>
+						<@ newPagelist { 
+							type: 'children',
+							excludeHidden: false 
+						} @>
 						<# 
 						To create the tree markup, the navigation snippet is called once initially
 						within the context of the homepage.
