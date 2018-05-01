@@ -7,3 +7,7 @@ theme: am/theme_02
 -
 
 urlSearchResults: /
+
+-
+
+urlTutorials: /tutorials

@@ -1,0 +1,17 @@
+title: Filtering & Sorting
+
+-
+
+tags: Tutorial
+
+-
+
+date: 2018-04-29 12:00:00
+
+-
+
+textTeaser: A configurable pagelist is the basis for every navigation. This template illustrates the main concepts of filtering, sorting and searching in Automad pagelists.
+
+-
+
+theme: tutorials

@@ -1,0 +1,17 @@
+title: Plain PHP
+
+-
+
+tags: Tutorial
+
+-
+
+date: 2018-05-01 12:00:00
+
+-
+
+textTeaser: While Automad ships with an built-in template language, experienced PHP developers might prefer to develop templates in plain PHP. This example demonstrates the implementation of the [Filtering & Sorting](../filtering-and-sorting) template in PHP. Compared to the Automad template language, the plain PHP looks is slightly longer and more complicated. For standard templates, it is therefore recommended to use the Automad Syntax.
+
+-
+
+theme: tutorials
