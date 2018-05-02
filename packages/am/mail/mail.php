@@ -14,6 +14,7 @@
 
 namespace Am;
 
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
  *	The Mail extension provides a basic wrapper for the PHP function mail(), including optional human verification using a honeypot. 
