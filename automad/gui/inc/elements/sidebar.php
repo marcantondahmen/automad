@@ -65,7 +65,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							<?php Text::e('sidebar_header_global'); ?>
 						</li>
 						<li>
-							<a href="<?php echo AM_BASE_URL ?>">
+							<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
 								<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
 								<?php echo $this->sitename; ?>
 							</a>
