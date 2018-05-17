@@ -18,4 +18,4 @@ hidden: 1
 
 -
 
-theme: tutorials
+theme: tutorial
