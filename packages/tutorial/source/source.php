@@ -1,6 +1,6 @@
 <?php
 
-namespace Tutorials;
+namespace Tutorial;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

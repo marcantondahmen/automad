@@ -6,7 +6,7 @@
 				<span class="tag is-light">/packages/@{ theme }/@{ :template }.php</span>
 			</div>
 			<div class="content">
-				<@ tutorials/source { 
+				<@ tutorial/source { 
 					file: '/packages/@{ theme }/@{ :template }.php' 
 				} @>
 			</div>
