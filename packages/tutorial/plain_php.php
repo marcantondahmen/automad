@@ -86,7 +86,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							class="button is-info<?php if (!Parse::query('sort') || Parse::query('sort') == 'date desc') { ?> is-active<?php } ?>"
 							>
 								<span class="icon is-small">
-									<i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
+									<i class="fas fa-sort-numeric-down" aria-hidden="true"></i>
 								</span>&nbsp;
 								Date
 							</a>
@@ -97,7 +97,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							class="button is-info<?php if (Parse::query('sort') == 'title asc') { ?> is-active<?php } ?>"
 							>
 								<span class="icon is-small">
-									<i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+									<i class="fas fa-sort-alpha-up" aria-hidden="true"></i>
 								</span>&nbsp;
 								Title
 							</a>

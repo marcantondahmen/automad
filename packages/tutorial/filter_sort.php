@@ -72,7 +72,7 @@ across multiple templates.
 							href="?<@ queryStringMerge { sort: 'date desc' } @>" 
 							class="button is-info<@ if not @{ ?sort } or @{ ?sort } = 'date desc' @> is-active<@ end @>">
 								<span class="icon is-small">
-									<i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
+									<i class="fas fa-sort-numeric-down" aria-hidden="true"></i>
 								</span>&nbsp;
 								Date
 							</a>
@@ -83,7 +83,7 @@ across multiple templates.
 							class="button is-info<@ if @{ ?sort } = 'title asc' @> is-active<@ end @>"
 							>
 								<span class="icon is-small">
-									<i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+									<i class="fas fa-sort-alpha-up" aria-hidden="true"></i>
 								</span>&nbsp;
 								Title
 							</a>

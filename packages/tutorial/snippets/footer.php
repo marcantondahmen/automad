@@ -14,7 +14,10 @@
 		<section class="section">	
 			<nav class="breadcrumb" aria-label="breadcrumbs">
 				<ul>
-					<@ newPagelist { type: 'breadcrumbs' } @>
+					<@ newPagelist { 
+						type: 'breadcrumbs',
+						excludeHidden: false
+					} @>
 					<@ foreach in pagelist @>
 						<li><a href="@{ url }">@{ title }</a></li>
 					<@ end @>
