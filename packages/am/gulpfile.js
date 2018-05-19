@@ -68,7 +68,6 @@ gulp.task('am-js', function() {
 				'../../lib/vendor/uikit/uikit/src/js/components/pagination.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/slider.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/sticky.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
 			])
 			.pipe(uglify(uglifyOptions))

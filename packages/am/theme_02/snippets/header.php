@@ -14,7 +14,5 @@
 </head>
 
 <body class="@{ :template | sanitize }">
-
-	<div class="uk-container uk-container-center">
-		
-		<@ ../../snippets/navbar.php @>	
+	<@ ../../snippets/navbar.php @>
+	<div class="uk-container uk-container-center navbar-push">

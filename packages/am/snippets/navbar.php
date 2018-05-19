@@ -1,57 +1,48 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 
-	<# Navbar #>		
-	<ul class="navbar uk-grid uk-margin-large-bottom">
-		<# Logo or sitename. #>
-		<li class="uk-width-2-4 uk-width-medium-1-4">
-			<a href="/" class="brand">
-				<@ with @{ logo | def('/shared/*logo*') } { height: @{ logoHeight | def(80) } } @>
-					<img src="@{ :fileResized }" alt="@{ :basename }">
-				<@ else @>
-					@{ sitename }
-				<@ end @>
-			</a>
-		</li>
-		<# Menu with pages with checked "checkboxShowInNavbar". #>
-		<li class="uk-width-2-4 uk-width-medium-3-4">
-			<nav 
-			class="uk-navbar" 
-			data-uk-sticky="{top:25,showup:true,animation:'uk-animation-slide-top'}">
-				<div class="uk-navbar-flip">
-					<ul class="uk-navbar-nav">
+	<div class="navbar">
+		<div class="uk-container uk-container-center">
+			<nav class="uk-navbar">
+				<a href="/" class="uk-navbar-brand"><@ 
+					with @{ logo | def('/shared/*logo*') } { height: 50 } 
+						@><img src="@{ :fileResized }" alt="@{ :basename }"><@ 
+					else 
+						@>@{ sitename }<@ 
+					end 
+				@></a>
+			    <div class="uk-navbar-flip">
+			        <ul class="uk-navbar-nav uk-visible-large">
 						<@ newPagelist { excludeHidden: false } @>
 						<@ foreach in pagelist @>
 							<@ if @{ checkboxShowInNavbar } @>
 							<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-								<a href="@{ url }" class="uk-visible-large">@{ title }</a>
+								<a href="@{ url }">@{ title }</a>
 							</li>
 							<@ end @>
-						<@ end @>
-					</ul>
+						<@ end @>				
+			        </ul>
 					<a 
-					href="#modal-nav" 
-					class="uk-navbar-toggle" 
-					data-uk-modal
-					></a>
-				</div>
+					href="#modal-nav"
+					class="navbar-toggle uk-navbar-content" 
+					data-modal-toggle="#modal-nav"
+					>
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+					</a>
+			    </div>
 			</nav>
-		</li>
-	</ul>
+
+		</div>
+	</div>
 
 	<# Modal with site tree and search. #>
 	<div id="modal-nav" class="uk-modal">		
 		<div class="uk-modal-dialog uk-modal-dialog-blank">
-			<div class="uk-container uk-container-center">
-				<a 
-				href="#" 
-				class="uk-margin-large-top uk-button uk-modal-close"
-				>
-					<i class="uk-icon-close"></i>&nbsp;
-					Close
-				</a>
+			<div class="uk-container uk-container-center navbar-push">
 				<# Search. #>
 				<@ if @{ urlSearchResults } @>
-				<form class="uk-form uk-width-1-1 uk-width-medium-1-2 uk-margin-large-top" action="@{ urlSearchResults }" method="get">
+				<form class="uk-form uk-width-1-1 uk-width-medium-1-2" action="@{ urlSearchResults }" method="get">
 					<script>
 						var autocomplete = <@ autocomplete.php @>
 					</script>
