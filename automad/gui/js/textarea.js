@@ -95,6 +95,11 @@
 				$(t.selector).trigger('update.automad.textarea');
 			});
 			
+			// Update also when doc is ready.
+			$doc.on('ready', function() {
+				$(t.selector).trigger('update.automad.textarea');
+			});
+			
 			// Also trigger resizing on toggles to fix issues with hidden textareas.
 			$doc.on('click', '[data-uk-toggle]', function() {
 				$(t.selector).trigger('update.automad.textarea');
