@@ -1,0 +1,70 @@
+/*
+ *	Standard / Bravo
+ *  Automad Theme
+ *
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@panel-box-padding:                 25px;
+@panel-box-padding-large:           50px;
+
+@panel-box-background:              #FFFFFF;
+@panel-box-color:                   @base-body-color;
+@panel-box-hover-color:             @panel-box-color;
+
+@panel-teaser-margin-bottom:        @panel-box-padding;
+
+@panel-box-teaser-margin:           -@panel-box-padding;
+@panel-box-teaser-margin-large:     -@panel-box-padding-large;
+
+@panel-title-margin-bottom:         0;
+@panel-title-font-size:             16px;
+@panel-title-line-height:           18px;
+@panel-title-font-weight:           500;
+@panel-title-color:                 @panel-box-color;
+@panel-box-title-color:             @panel-box-color;
+
+
+.hook-panel-misc() {
+
+    .uk-panel-box > .uk-panel-teaser {
+        margin-top: 0;
+    }
+    
+    @media (min-width: @breakpoint-xlarge) {
+        .uk-panel-box > .uk-panel-teaser {
+            margin-left: @panel-box-teaser-margin-large;
+            margin-right: @panel-box-teaser-margin-large;    
+        }
+    }
+    
+}
+
+.hook-panel-box() {
+	
+	margin: 0 -@panel-box-padding;
+	margin-bottom: @gutter !important;
+    padding: 0 @panel-box-padding;
+    
+    @media (min-width: @breakpoint-xlarge) {
+        margin: 0 -@panel-box-padding-large;
+        padding: 0 @panel-box-padding-large;
+    }
+    
+	a& {
+		
+		.transition(opacity 0.2s;);
+		
+		&:hover {
+			opacity: 0.8;
+		}
+		
+	}
+	
+}

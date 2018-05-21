@@ -200,7 +200,7 @@ Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
 // UPDATE
-Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/am, /packages/tutorial');
+Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');
 Config::set('AM_UPDATE_BRANCH', 'default');
 Config::set('AM_UPDATE_REPO_URL', 'https://bitbucket.org/marcantondahmen/automad');
 Config::set('AM_UPDATE_REPO_RAW_PATH', '/raw');

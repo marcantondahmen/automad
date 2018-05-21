@@ -1,0 +1,25 @@
+/*
+ *	Standard / Bravo
+ *  Automad Theme
+ *
+ *	Copyright (c) 2018 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@overlay-panel-color: 		@base-body-color;
+@overlay-panel-background:	fade(#FFFFFF, 90%);
+@overlay-panel-padding: 	@panel-box-padding;
+
+
+.hook-overlay-panel() {
+	
+	@media (min-width: @breakpoint-large) {
+		padding: @panel-box-padding @panel-box-padding-large;
+	}
+	
+}

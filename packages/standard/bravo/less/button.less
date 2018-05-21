@@ -1,0 +1,47 @@
+/*
+ *	Standard / Bravo
+ *  Automad Theme
+ *
+ *	Copyright (c) 2017-2018 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@button-background:					transparent;
+@button-color:              		@base-body-color;
+@button-hover-background:   		@base-body-color;
+@button-hover-color:        		#FFFFFF;
+@button-active-background:  		@button-hover-background;
+@button-active-color:       		@button-hover-color;
+
+@button-height:	 					30px;
+@button-line-height: 				26px;
+@button-padding-horizontal: 		10px;
+
+@button-small-height:				25px;
+@button-small-line-height:			21px;
+@button-small-padding-horizontal:	8px;
+
+.hook-button {
+	box-sizing: border-box;
+	border-radius: 20px;
+	border: 2px solid @base-body-color;
+}
+
+.hook-button-misc() {
+	
+	.buttons-stacked {
+		
+		margin-top: -3px;
+		
+		& > * {
+			margin-top: 3px;
+		}
+		
+	}
+	
+}
