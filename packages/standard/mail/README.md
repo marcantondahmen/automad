@@ -9,7 +9,7 @@ The *Mail* extension provides a basic wrapper for the PHP function mail(), inclu
 The basic markup requires the method call as well as a contact form.    
 Note that the names of the form fields must match the following example:
 
-	<@ am/mail { to: @{ email } } @>
+	<@ standard/mail { to: @{ email } } @>
 
 	<form action="@{ url }" method="post">
 	
@@ -36,7 +36,7 @@ The following options can be specified:
 
 A markup with all options specified:
 
-	<@ am/mail { 
+	<@ standard/mail { 
 		to: @{ email },
 		error: 'Error Message ...',
 		success: 'Success Message ...'
