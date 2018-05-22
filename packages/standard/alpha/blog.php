@@ -1,32 +1,13 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ snippets/header.php @>
-
+	
+	<@ snippets/teaser.php @>
 	<@ ../snippets/pagelist_config.php @>
-	<@ if not @{ checkboxHideTeaser } or not @{ checkboxHideFilters } @>
-		<@ if not @{ checkboxHideTeaser } @>
-			<div class="uk-block">
-				<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
-					<@ if not @{ checkboxHideTitle } @>
-						<li>
-							<h1>@{ title }</h1>
-						</li>
-					<@ end @>
-					<@ if @{ textTeaser } @>
-						<li class="content">
-							@{ textTeaser | markdown }
-						</li>	
-					<@ end @>
-				</ul>
-			</div>
-		<@ end @>
-	<@ end @>
 	<div class="uk-block">
 		<@ if not @{ checkboxHideFilters } @>
-			<div class="uk-margin-bottom">
-				<div class="buttons-stacked">
-					<@ ../snippets/filters.php @>
-					<@ ../snippets/clear_search.php @>
-				</div>
+			<div class="buttons-stacked uk-margin-bottom">
+				<@ ../snippets/filters.php @>
+				<@ ../snippets/clear_search.php @>
 			</div>
 		<@ end @>
 		<ul class="masonry uk-grid">

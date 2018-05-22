@@ -2,39 +2,41 @@
 <@ snippets/header.php @>
 
 	<div class="uk-block">
-		<ul class="uk-grid">
-			<li class="uk-block uk-width-1-1">
-				<div class="uk-panel uk-panel-box">	
-					<ul class="uk-grid uk-grid-width-large-1-2" data-uk-margin>
-						<li>
-							<h1 class="uk-margin-small-bottom">@{ title }</h1>
-							<@ ../snippets/date.php @>
-							<@ ../snippets/tags.php @>
-						</li>
-						<@ if @{ textTeaser } @>
-							<div class="content">
-								@{ textTeaser | markdown }
-							</div>	
-						<@ end @>
-					</ul>			
-					<@ filelist { 
-						glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
-						sort: 'asc' 
-					} @>
-					<@ if @{ :filelistCount } @>
-						<div class="uk-panel-teaser uk-margin-top">	
-							<@ ../snippets/slideshow.php @>
-						</div>		
-					<@ end @>
-					<div class="content uk-margin-top uk-column-large-1-2">
-						@{ text | markdown }
-					</div>
-				</div>
+		<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
+			<li>
+				<h1 class="uk-margin-small-bottom">@{ title }</h1>
+				<@ ../snippets/date.php @>
+				<@ ../snippets/tags.php @>
 			</li>
-			<# Related pages. #>
+			<@ if @{ textTeaser } @>
+				<div class="content">
+					@{ textTeaser | markdown }
+				</div>	
+			<@ end @>
+		</ul>
+	</div>
+	<@ filelist { 
+		glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
+		sort: 'asc' 
+	} @>
+	<@ if @{ :filelistCount } @>
+		<div class="uk-block">
+			<div class="uk-panel uk-panel-box">	
+				<div class="uk-panel-teaser">	
+					<@ ../snippets/slideshow.php @>
+				</div>
+			</div>
+		</div>
+	<@ end @>
+	<div class="content uk-block uk-column-large-1-2">
+		@{ text | markdown }
+	</div>
+	<div class="uk-block">
+		<# Related pages. #>
+		<ul class="uk-grid uk-grid-width-small-1-2">
 			<@ newPagelist { type: 'related' } @>
 			<@ foreach in pagelist @>
-				<li class="uk-block uk-width-small-1-2">
+				<li class="uk-block">
 					<div class="uk-panel uk-panel-box">
 						<div class="uk-panel-title">
 							@{ title }
@@ -71,6 +73,7 @@
 			<@ end @>
 		</ul>
 	</div>
+	
 	<@ ../snippets/pagination.php @>
 	<@ ../snippets/prev_next.php @>
 	
