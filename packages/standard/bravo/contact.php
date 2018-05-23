@@ -3,12 +3,12 @@
 
 	<div class="uk-block">
 		<h1>@{ title }</h1>
-		<@ if @{ textTeaser } @>
-			<div class="content uk-margin-small-top">
-				@{ textTeaser | markdown }
-			</div>
-		<@ end @>
 	</div>
+	<@ if @{ textTeaser } @>
+		<div class="content uk-block">
+			@{ textTeaser | markdown }
+		</div>
+	<@ end @>
 	<div class="uk-block">
 		<@ standard/mail {
 			to: @{ email },

@@ -11,7 +11,7 @@
  */
 
 
-@panel-box-padding:                 25px;
+@panel-box-padding:                 20px;
 @panel-box-padding-large:           50px;
 
 @panel-box-background:              #FFFFFF;
@@ -19,6 +19,7 @@
 @panel-box-hover-color:             @panel-box-color;
 
 @panel-teaser-margin-bottom:        @panel-box-padding;
+@panel-teaser-margin-bottom-large:  @panel-box-padding-large;
 
 @panel-box-teaser-margin:           -@panel-box-padding;
 @panel-box-teaser-margin-large:     -@panel-box-padding-large;
@@ -34,14 +35,29 @@
 .hook-panel-misc() {
 
     .uk-panel-box > .uk-panel-teaser {
+        
         margin-top: 0;
+        
+        &:not(:first-child) {
+            margin-top: @panel-box-padding !important;
+        }
+        
     }
     
     @media (min-width: @breakpoint-xlarge) {
+        
         .uk-panel-box > .uk-panel-teaser {
+            
             margin-left: @panel-box-teaser-margin-large;
-            margin-right: @panel-box-teaser-margin-large;    
+            margin-right: @panel-box-teaser-margin-large; 
+            margin-bottom: @panel-teaser-margin-bottom-large; 
+            
+            &:not(:first-child) {
+                margin-top: @panel-box-padding-large !important;
+            }
+            
         }
+        
     }
     
 }
@@ -49,7 +65,6 @@
 .hook-panel-box() {
 	
 	margin: 0 -@panel-box-padding;
-	margin-bottom: @gutter !important;
     padding: 0 @panel-box-padding;
     
     @media (min-width: @breakpoint-xlarge) {

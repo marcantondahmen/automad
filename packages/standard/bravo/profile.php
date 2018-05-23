@@ -5,7 +5,7 @@
 		<li class="masonry-item uk-block">
 			<h1>@{ title }</h1>
 		</li>
-		<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 750 } @>
+		<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 780 } @>
 			<li class="masonry-item uk-block">
 				<div class="uk-panel uk-panel-box">
 					<div class="uk-panel-teaser">

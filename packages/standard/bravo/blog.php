@@ -9,9 +9,9 @@
 			<@ ../snippets/clear_search.php @>
 		</div>
 	<@ end @>
-	<ul class="uk-grid">
+	<ul class="uk-grid uk-grid-width-medium-1-2">
 		<@ foreach in pagelist @>
-			<li class="uk-block uk-width-small-1-2">
+			<li class="uk-block">
 				<div class="uk-panel uk-panel-box">
 					<div class="uk-panel-title">
 						@{ title }
@@ -20,8 +20,8 @@
 						<@ ../snippets/date.php @>
 					</div>
 					<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
-						height: 500,
-						width: 750, 
+						height: 520,
+						width: 780, 
 						crop: true
 					} @>
 						<a 

@@ -11,11 +11,31 @@
  */
 
 
-@grid-gutter-horizontal:		(@panel-box-padding * 2) + @gutter;
-@grid-gutter-vertical:			@grid-gutter-horizontal;
+@gutter: 						10px;
+@gutter-large: 					20px;
 
-@grid-gutter-large-horizontal:  (@panel-box-padding-large * 2) + @gutter;
-@grid-gutter-large-vertical:	@grid-gutter-large-horizontal;
+@grid-gutter-horizontal:		(@panel-box-padding * 2) + @gutter;
+@grid-gutter-vertical:			@gutter;
+
+@grid-gutter-large-horizontal:  (@panel-box-padding-large * 2) + @gutter-large;
+@grid-gutter-large-vertical:	@gutter-large;
 
 @grid-gutter-xlarge-horizontal:	@grid-gutter-large-horizontal;
 @grid-gutter-xlarge-vertical:	@grid-gutter-large-vertical;
+
+.hook-grid-misc() {
+	
+	.uk-grid {
+		
+		& > * {
+
+			pointer-events: none;
+			
+			& > * {
+				pointer-events: all;
+			}
+		}
+		
+	}
+	
+}

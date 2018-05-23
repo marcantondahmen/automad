@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 
-	<ul class="uk-grid uk-grid-width-small-1-2">
+	<ul class="uk-grid uk-grid-width-medium-1-2">
 		<@ foreach in pagelist @>
 			<li class="uk-block">
 				<a 
@@ -8,8 +8,8 @@
 				class="uk-panel uk-panel-box uk-panel-box-hover
 				">
 					<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } {
-						height: 500, 
-						width: 750,
+						height: 520, 
+						width: 780,
 						crop: true
 					} @>
 						<div class="uk-panel-teaser">
