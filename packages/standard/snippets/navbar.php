@@ -32,84 +32,82 @@
 					</a>
 			    </div>
 			</nav>
-
 		</div>
-	</div>
-
-	<# Modal with site tree and search. #>
-	<div id="modal-nav" class="uk-modal">		
-		<div class="uk-modal-dialog uk-modal-dialog-blank">
-			<div class="uk-container uk-container-center uk-width-medium-3-4 navbar-push">
-				<div class="uk-block">
-					<ul class="uk-grid">
-						<li class="uk-width-medium-1-2 uk-push-1-2">
-							<# Search. #>
-							<@ if @{ urlSearchResults } @>
-							<form 
-							class="uk-block uk-form" 
-							action="@{ urlSearchResults }" 
-							method="get"
-							>
-								<script>
-									var autocomplete = <@ autocomplete.php @>
-								</script>
-								<div 
-								class="uk-autocomplete uk-width-1-1" 
-								data-uk-autocomplete='{source:autocomplete,minLength:2}'
+		<# Modal with site tree and search. #>
+		<div id="modal-nav" class="uk-modal">		
+			<div class="uk-modal-dialog uk-modal-dialog-blank">
+				<div class="uk-container uk-container-center uk-width-medium-3-4 navbar-push">
+					<div class="uk-block">
+						<ul class="uk-grid">
+							<li class="uk-width-medium-1-2 uk-push-1-2">
+								<# Search. #>
+								<@ if @{ urlSearchResults } @>
+								<form 
+								class="uk-block uk-form" 
+								action="@{ urlSearchResults }" 
+								method="get"
 								>
-									<input 
-									class="uk-form-controls uk-width-1-1" 
-									type="text" 
-									name="search" 
-									placeholder="Search @{ sitename }" 
-									required 
-									/>	
-								</div>
-							</form>	
-							<@ end @>
-						</li>
-						<li class="uk-width-medium-1-2 uk-pull-1-2">
-							<# Create snippet to be used recursively #>
-							<@ snippet tree @>
-								<# Only show children/siblings in current path #>
-								<@ if @{ :currentPath } @>
-									<# Only create new list in case the current context has children #>
-									<@ if @{ :pagelistCount } @>
-										<ul class="uk-nav uk-nav-side">
-											<@ foreach in pagelist @>
-												<@ if not @{ checkboxHideInMenu } @>
-													<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-														<a href="@{ url }">@{ title }</a>
-														<# Call tree snippet recursively #>
-														<@ tree @>
-													</li>
+									<script>
+										var autocomplete = <@ autocomplete.php @>
+									</script>
+									<div 
+									class="uk-autocomplete uk-width-1-1" 
+									data-uk-autocomplete='{source:autocomplete,minLength:2}'
+									>
+										<input 
+										class="uk-form-controls uk-width-1-1" 
+										type="text" 
+										name="search" 
+										placeholder="Search @{ sitename }" 
+										required 
+										/>	
+									</div>
+								</form>	
+								<@ end @>
+							</li>
+							<li class="uk-width-medium-1-2 uk-pull-1-2">
+								<# Create snippet to be used recursively #>
+								<@ snippet tree @>
+									<# Only show children/siblings in current path #>
+									<@ if @{ :currentPath } @>
+										<# Only create new list in case the current context has children #>
+										<@ if @{ :pagelistCount } @>
+											<ul class="uk-nav uk-nav-side">
+												<@ foreach in pagelist @>
+													<@ if not @{ checkboxHideInMenu } @>
+														<li<@ if @{ :current } @> class="uk-active"<@ end @>>
+															<a href="@{ url }">@{ title }</a>
+															<# Call tree snippet recursively #>
+															<@ tree @>
+														</li>
+													<@ end @>
 												<@ end @>
-											<@ end @>
-										</ul>
+											</ul>
+										<@ end @>
 									<@ end @>
 								<@ end @>
-							<@ end @>
-							<# Create new pagelist including all children adapting to the current context. #>
-							<@ newPagelist { 
-								type: 'children',
-								excludeHidden: false 
-							} @>
-							<div class="uk-block">
-								<# Change context to the homepage #>
-								<@ with "/" @>
-									<@ if not @{ checkboxHideInMenu } @>
-										<ul class="uk-nav uk-nav-side">
-											<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-												<a href="@{ url }">@{ title }</a>
-											</li>
-										</ul>
+								<# Create new pagelist including all children adapting to the current context. #>
+								<@ newPagelist { 
+									type: 'children',
+									excludeHidden: false 
+								} @>
+								<div class="uk-block">
+									<# Change context to the homepage #>
+									<@ with "/" @>
+										<@ if not @{ checkboxHideInMenu } @>
+											<ul class="uk-nav uk-nav-side">
+												<li<@ if @{ :current } @> class="uk-active"<@ end @>>
+													<a href="@{ url }">@{ title }</a>
+												</li>
+											</ul>
+										<@ end @>
+										<# Call recursive tree snippet #>
+										<@ tree @>	
 									<@ end @>
-									<# Call recursive tree snippet #>
-									<@ tree @>	
-								<@ end @>
-							</div>
-						</li>
-					</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

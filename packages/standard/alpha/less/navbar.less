@@ -38,16 +38,20 @@
 		
 		position: fixed;
 		box-sizing: border-box;
-		z-index: 9900;
+		z-index: 1000;
 		width: 100%;
 		top: 0;
 		
+		& .uk-modal {
+			z-index: -1;
+		}
+		
 		&-push {
 			
-			margin-top: @navbar-nav-height;
+			padding-top: @navbar-nav-height !important;
 			
 			@media (min-width: @breakpoint-large) {
-				margin-top: @navbar-nav-height-large;
+				padding-top: @navbar-nav-height-large !important;
 			}
 			
 		}
@@ -142,7 +146,7 @@
 
 	.uk-modal-page & {
 		opacity: 0;
-		
+		pointer-events: none;
 	}
 
 	@media (min-width: @breakpoint-xlarge) {

@@ -7,6 +7,16 @@
 	
 	Standard.modal = {
 		
+		init: function(e) {
+			
+			$('.uk-modal').on({
+				'hide.uk.modal': function(){
+					$('[data-modal-toggle]').removeClass('uk-active');
+				}
+			})
+			
+		},
+		
 		toggle: function(e) {
 			
 			var	target = $(this).data('modalToggle'),
@@ -26,6 +36,7 @@
 		
 	};
 	
+	$(document).on('ready', Standard.modal.init);
 	$(document).on('click', 'a[data-modal-toggle]', Standard.modal.toggle);
 
 }(window.Standard = window.Standard || {}, jQuery, UIkit);
