@@ -4,13 +4,21 @@
 	<@ snippets/teaser.php @>
 	<@ ../snippets/pagelist_config.php @>
 	<@ if not @{ checkboxHideFiltersAndSort } @>
-		<div class="buttons-stacked uk-margin-bottom">
-			<@ ../snippets/filters.php @>
-			<@ ../snippets/sort.php @>
-			<@ ../snippets/clear_search.php @>
+		<div class="uk-grid uk-block uk-padding-bottom-remove">
+			<div
+			class="buttons-stacked uk-width-medium-1-2<@ if not @{ checkboxHideTitle } and @{ textTeaser } 
+			@> uk-push-1-2<@ 
+			end @>"
+			>
+				<@ ../snippets/filters.php @>
+				<@ ../snippets/sort.php @>
+				<@ ../snippets/clear_search.php @>
+			</div>
 		</div>
 	<@ end @>
-	<@ snippets/pagelist.php @>
+	<div class="uk-block">
+		<@ snippets/pagelist_portfolio.php @>
+	</div>
 	<@ ../snippets/pagination.php @>
 	
 <@ snippets/footer.php @>

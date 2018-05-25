@@ -22,6 +22,7 @@
 		"itemsFooter": "Additional markup to be added to page's footer",
 		"itemsHeader": "Additional markup to be added to page's <head></head> section",
 		"itemsPerPage": "Limit the items of the pagelist per page",
+		"labelClearSearch": "Button text for clearing search results",
 		"labelSortDateDesc": "Label text in dropdown for sorting pages by date descending",
 		"labelSortDateAsc": "Label text in dropdown for sorting pages by date ascending",
 		"labelSortTitleAsc": "Label text in dropdown for sorting pages by title ascending",

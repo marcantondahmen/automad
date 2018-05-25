@@ -4,46 +4,22 @@
 	<@ snippets/teaser.php @>	
 	<@ ../snippets/pagelist_config.php @>
 	<@ if not @{ checkboxHideFilters } @>	
-		<div class="buttons-stacked uk-margin-bottom">
-			<@ ../snippets/filters.php @>
-			<@ ../snippets/clear_search.php @>
+		<div class="uk-grid uk-block">
+			<div
+			class="buttons-stacked uk-width-medium-1-2<@ 
+			if not @{ checkboxHideTitle } and @{ textTeaser } 
+			@> uk-push-1-2<@ 
+			end @>"
+			>
+				<@ ../snippets/filters.php @>
+				<@ ../snippets/sort.php @>
+				<@ ../snippets/clear_search.php @>
+			</div>
 		</div>
 	<@ end @>
-	<ul class="uk-grid uk-grid-width-medium-1-2">
-		<@ foreach in pagelist @>
-			<li class="uk-block">
-				<div class="uk-panel uk-panel-box">
-					<div class="uk-panel-title">
-						@{ title }
-					</div>
-					<div class="uk-text-small">
-						<@ ../snippets/date.php @>
-					</div>
-					<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
-						height: 520,
-						width: 780, 
-						crop: true
-					} @>
-						<a 
-						href="@{ url }" 
-						class="uk-panel-teaser uk-margin-small-top uk-display-block"
-						>
-							<img src="@{ :fileResized }" alt="@{ :basename }">
-						</a>
-					<@ end @>
-					<@ if @{ textTeaser } @>
-						<div class="content uk-margin-small-top">
-							@{ textTeaser | markdown }
-						</div>
-					<@ end @>
-					<a href="@{ url }" class="uk-button uk-button-small uk-margin-small-top">
-						<i class="uk-icon-plus"></i>&nbsp;
-						More
-					</a>
-				</div>
-			</li>	
-		<@ end @>
-	</ul>
+	<div class="uk-block">
+		<@ snippets/pagelist_blog.php @>
+	</div>
 	<@ ../snippets/pagination.php @>
 	
 <@ snippets/footer.php @>

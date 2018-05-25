@@ -38,7 +38,7 @@
 	<@ newPagelist { type: 'related' } @>
 	<@ if @{ :pagelistCount } @>
 		<div class="uk-block uk-margin-top">
-			<@ snippets/pagelist.php @>
+			<@ snippets/pagelist_portfolio.php @>
 		</div>
 	<@ end @>
 	<@ ../snippets/prev_next.php @>
