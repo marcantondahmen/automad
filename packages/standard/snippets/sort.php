@@ -3,7 +3,18 @@
 	<div class="uk-button-dropdown" data-uk-dropdown>
 		<button class="uk-button">
 			<i class="uk-icon-refresh"></i>&nbsp;
-			Sorting
+			<@ if not @{ ?sort } or @{ ?sort } = 'date desc' @>
+				@{ labelSortDateDesc | def('Recent First') }
+			<@ end @>
+			<@ if @{ ?sort } = 'date asc' @>
+				@{ labelSortDateAsc | def('Chronological') }
+			<@ end @>
+			<@ if @{ ?sort } = 'title asc' @>
+				@{ labelSortTitleAsc | def('Title A-Z') }
+			<@ end @>
+			<@ if @{ ?sort } = 'title desc' @>
+				@{ labelSortTitleDesc | def('Title Z-A') }
+			<@ end @>
 		</button>
 		<div class="uk-dropdown uk-dropdown-small uk-text-left">
 			<ul class="uk-nav uk-nav-dropdown">
@@ -14,7 +25,7 @@
 						<@ else @>
 							<i class="uk-icon-circle-o"></i>
 						<@ end @>
-						&nbsp;Newest On Top
+						&nbsp;@{ labelSortDateDesc | def('Recent First') }
 					</a>	
 				</li>	
 				<li>
@@ -24,7 +35,7 @@
 						<@ else @>
 							<i class="uk-icon-circle-o"></i>
 						<@ end @>
-						&nbsp;Oldest On Top
+						&nbsp;@{ labelSortDateAsc | def('Chronological') }
 					</a>	
 				</li>
 				<li>
@@ -34,7 +45,7 @@
 						<@ else @>
 							<i class="uk-icon-circle-o"></i>
 						<@ end @>
-						&nbsp;Title A-Z
+						&nbsp;@{ labelSortTitleAsc | def('Title A-Z') }
 					</a>	
 				</li>
 				<li>
@@ -44,7 +55,7 @@
 						<@ else @>
 							<i class="uk-icon-circle-o"></i>
 						<@ end @>
-						&nbsp;Title Z-A
+						&nbsp;@{ labelSortTitleDesc | def('Title Z-A') }
 					</a>
 				</li>
 			</ul>

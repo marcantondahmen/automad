@@ -11,22 +11,31 @@
  */
 
 
-@pagination-margin-left:		4px;
+@pagination-margin-left:		0;
+@pagination-font-size: 			14px;
+@pagination-padding-horizontal: 10px;
 
 @pagination-background:			#FFFFFF;
-@pagination-color: 				@base-body-color;
+@pagination-color: 				@text-muted-color;
 @pagination-hover-background:	@pagination-background;
-@pagination-hover-color:		@pagination-color;
+@pagination-hover-color:		@base-body-color;
 @pagination-onclick-background:	@pagination-background;
-@pagination-onclick-color:		@pagination-color;
+@pagination-onclick-color:		@pagination-hover-color;
 @pagination-active-background:	@pagination-background;
-@pagination-active-color:		@pagination-color;
+@pagination-active-color:		@pagination-hover-color;
+
+.hook-pagination-misc() {
+	.uk-pagination {
+		margin-left: -@pagination-padding-horizontal;
+		cursor: default;
+	}
+}
 
 .hook-pagination-item() {
-	border-radius: 20px;
-	border: 2px solid transparent;
+	font-weight: 700;
+	color: @pagination-color;
 }
 
 .hook-pagination-active() {
-	border-color: inherit;
+	cursor: default;
 }

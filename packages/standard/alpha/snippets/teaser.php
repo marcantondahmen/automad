@@ -2,18 +2,18 @@
 
 	<@ if @{ textTeaser } or not @{ checkboxHideTitle } @>
 		<div class="uk-block">
-			<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
+			<ul class="uk-grid" data-uk-margin>
 				<@ if not @{ checkboxHideTitle } @>
-					<li>
+					<li class="uk-width-medium-1-3">
 						<h1>@{ title }</h1>
 					</li>
 				<@ end @>
 				<@ if @{ textTeaser } @>
-					<li class="content">
+					<li class="content uk-text-muted uk-width-medium-2-3">
 						@{ textTeaser | markdown }
 					</li>	
 				<@ end @>
-			</ul>	
+			</ul>
 		</div>
 	<@ end @>
 	

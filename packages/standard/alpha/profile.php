@@ -2,20 +2,18 @@
 <@ snippets/header.php @>
 
 	<div class="uk-block">
-		<ul class="masonry uk-grid uk-grid-width-medium-1-2" data-uk-margin>
+		<ul class="masonry uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
 			<li class="masonry-item">
-				<h1 class="uk-margin-small-bottom">@{ title }</h1>
+				<h1>@{ title }</h1>
 			</li>
-			<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 600 } @>
-				<li class="masonry-item uk-margin-small-bottom">
-					<div class="uk-panel uk-panel-box">
-						<img 
-						src="@{ :fileResized }" 
-						alt="@{ :basename }" 
-						width="@{ :widthResized }" 
-						height="@{ :heightResized }" 
-						/>
-					</div>
+			<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 700 } @>
+				<li class="masonry-item">
+					<img 
+					src="@{ :fileResized }" 
+					alt="@{ :basename }" 
+					width="@{ :widthResized }" 
+					height="@{ :heightResized }" 
+					/>
 				</li>
 			<@ end @>
 			<li class="masonry-item content">

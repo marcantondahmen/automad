@@ -3,16 +3,23 @@
 
 	<@ snippets/teaser.php @>
 	<@ ../snippets/pagelist_config.php @>
-	<div class="uk-block">
-		<@ if not @{ checkboxHideFiltersAndSort } @>
-			<div class="buttons-stacked uk-margin-bottom">
+	<@ if not @{ checkboxHideFiltersAndSort } @>
+		<div class="uk-grid uk-margin-bottom">
+			<div 
+			class="buttons-stacked<@ 
+			if not @{ checkboxHideTitle} and @{ textTeaser }
+			@> uk-width-medium-2-3 uk-push-1-3<@ 
+			end @>"
+			>
 				<@ ../snippets/filters.php @>
 				<@ ../snippets/sort.php @>
 				<@ ../snippets/clear_search.php @>
 			</div>
-		<@ end @>
-		<@ snippets/pagelist.php @>
-		<@ ../snippets/pagination.php @>
+		</div>
+	<@ end @>
+	<div class="uk-block">
+		<@ snippets/pagelist_portfolio.php @>
 	</div>
+	<@ ../snippets/pagination.php @>
 	
 <@ snippets/footer.php @>

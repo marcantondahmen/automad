@@ -3,12 +3,12 @@
 
 	<div class="uk-block">
 		<h1>@{ title }</h1>
-		<@ if @{ textTeaser } @>
-			<div class="content uk-margin-small-top">
-				@{ textTeaser | markdown }
-			</div>
-		<@ end @>
 	</div>
+	<@ if @{ textTeaser } @>
+		<div class="content uk-block">
+			@{ textTeaser | markdown }
+		</div>
+	<@ end @>
 	<div class="uk-block">
 		<div class="uk-panel uk-panel-box">
 			<@ standard/mail {
@@ -44,7 +44,7 @@
 					placeholder="Your Message"
 					></textarea>
 				</div>
-				<button class="uk-button uk-margin-top" type="submit">
+				<button class="uk-button uk-margin-large-top" type="submit">
 					<i class="uk-icon-paper-plane"></i>&nbsp;
 					Send Mail
 				</button>

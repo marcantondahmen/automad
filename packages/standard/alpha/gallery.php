@@ -3,7 +3,10 @@
 
 	<@ snippets/teaser.php @>
 	<div class="uk-block">
-		<ul class="masonry uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-3">
+		<ul 
+		class="masonry uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-3" 
+		data-uk-grid-margin
+		>
 			<@ filelist { glob: @{ imagesGallery }, sort: 'asc' } @>
 			<@ foreach in filelist @>
 				<li class="masonry-item">
@@ -13,16 +16,20 @@
 						title="@{ :caption | stripTags }" 
 						data-uk-lightbox="{group:'gallery'}"
 						>
-							<img 
-							src="<@ with @{ :file } { width: 400 } @>@{ :fileResized }<@ end @>" 
-							alt="@{ :basename }" 
-							/>
+							<figure class="uk-overlay uk-overlay-hover">
+								<img 
+								src="<@ with @{ :file } { width: 450 } @>@{ :fileResized }<@ end @>" 
+								alt="@{ :basename }" 
+								/>
+								<@ if @{ :caption } @>
+									<figcaption 
+									class="uk-overlay-panel uk-overlay-background uk-overlay-fade"
+									>
+										@{ :caption | markdown }
+									</figcaption>
+								<@ end @>
+							</figure>
 						</a>
-						<@ if @{ :caption } @>
-							<div class="uk-margin-small-top uk-text-small">
-								@{ :caption | markdown }
-							</div>
-						<@ end @>
 					</div>
 				</li>
 			<@ end @>

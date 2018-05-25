@@ -13,23 +13,17 @@
 
 @button-background:					transparent;
 @button-color:              		@base-body-color;
-@button-hover-background:   		@base-body-color;
-@button-hover-color:        		#FFFFFF;
+@button-hover-background:   		transparent;
+@button-hover-color:        		@text-muted-color;
 @button-active-background:  		@button-hover-background;
 @button-active-color:       		@button-hover-color;
 
-@button-height:	 					30px;
-@button-line-height: 				26px;
-@button-padding-horizontal: 		10px;
-
-@button-small-height:				25px;
-@button-small-line-height:			21px;
-@button-small-padding-horizontal:	8px;
+@button-height:	 					20px;
+@button-line-height: 				20px;
+@button-padding-horizontal: 		0;
 
 .hook-button {
-	box-sizing: border-box;
-	border-radius: 20px;
-	border: 2px solid @base-body-color;
+	font-weight: 500;	
 }
 
 .hook-button-misc() {
@@ -39,6 +33,7 @@
 		margin-top: -3px;
 		
 		& > * {
+			margin-right: 20px;
 			margin-top: 3px;
 		}
 		
