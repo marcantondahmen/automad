@@ -2,7 +2,7 @@
 
 		<@ foreach in pagelist @>
 			<div class="uk-block">
-				<ul class="uk-grid" data-uk-grid-margin>
+				<ul class="uk-grid" data-uk-margin>
 					<li class="uk-width-medium-1-3">
 						<a href="@{ url }">
 							<h3>@{ title }</h3>
