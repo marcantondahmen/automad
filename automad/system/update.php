@@ -81,16 +81,21 @@ class Update {
 			$itemPath = AM_BASE_DIR . $item;
 			$backupPath = $backup . $item;
 			
-			if (is_writable($itemPath) && is_writable(dirname($itemPath))) {
-				Core\FileSystem::makeDir(dirname($backupPath));
-				$success = rename($itemPath, $backupPath);
-				self::log('Backing up ' . Core\Str::stripStart($itemPath, AM_BASE_DIR) . ' to ' . Core\Str::stripStart($backupPath, AM_BASE_DIR));
-			} else {
-				$success = false;
-			}
-			
-			if (!$success) {
-				return false;
+			// Only try to backup in case item exists.
+			if (file_exists($itemPath)) {
+				
+				if (is_writable($itemPath) && is_writable(dirname($itemPath))) {
+					Core\FileSystem::makeDir(dirname($backupPath));
+					$success = rename($itemPath, $backupPath);
+					self::log('Backing up ' . Core\Str::stripStart($itemPath, AM_BASE_DIR) . ' to ' . Core\Str::stripStart($backupPath, AM_BASE_DIR));
+				} else {
+					$success = false;
+				}
+				
+				if (!$success) {
+					return false;
+				}
+				
 			}
 			
 		}
@@ -248,7 +253,7 @@ class Update {
 			
 			$item = AM_BASE_DIR . $item;
 			
-			if (!is_writable($item) || !is_writable(dirname($item))) {
+			if ((file_exists($item) && !is_writable($item)) || !is_writable(dirname($item))) {
 				return false;
 			} 
 			
