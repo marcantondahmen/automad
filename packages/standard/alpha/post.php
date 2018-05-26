@@ -31,10 +31,12 @@
 	<@ newPagelist { type: 'related' } @>
 	<@ if @{ :pagelistCount } @>
 		<div class="uk-block">
-			<h2 class="uk-margin-large-bottom">Related</h2>
+			<h2>@{ labelRelated | def ('Related') }</h2>
 			<@ snippets/pagelist_blog.php @>
 		</div>
 	<@ end @>
-	<@ ../snippets/prev_next.php @>
+	<div class="uk-block">
+		<@ ../snippets/prev_next.php @>
+	</div>
 	
 <@ snippets/footer.php @>

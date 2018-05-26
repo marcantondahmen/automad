@@ -49,26 +49,16 @@ gulp.task('standard-js', function() {
 				'../../lib/vendor/uikit/uikit/src/js/core/core.js',
 				'../../lib/vendor/uikit/uikit/src/js/core/touch.js',
 				'../../lib/vendor/uikit/uikit/src/js/core/utility.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/smooth-scroll.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/scrollspy.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/toggle.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/alert.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/button.js',
 				'../../lib/vendor/uikit/uikit/src/js/core/dropdown.js',
 				'../../lib/vendor/uikit/uikit/src/js/core/grid.js',
 				'../../lib/vendor/uikit/uikit/src/js/core/modal.js',
 				'../../lib/vendor/uikit/uikit/src/js/core/nav.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/offcanvas.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/switcher.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/tab.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/cover.js',
 				// Selected components.
 				'../../lib/vendor/uikit/uikit/src/js/components/autocomplete.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/lightbox.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/pagination.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/slider.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
+				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js'
 			])
 			.pipe(uglify(uglifyOptions))
 			.pipe(concat('uikit.js', { newLine: '\r\n\r\n' } )) // Doesn't get saved to disk.

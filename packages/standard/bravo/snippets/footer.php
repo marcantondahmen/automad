@@ -2,8 +2,8 @@
 		
 		</div> <# .uk-block #>
 		<div class="footer uk-text-muted uk-margin-large-bottom uk-margin-top">
-			<ul class="uk-grid uk-grid-large uk-grid-width-medium-1-2">
-				<li class="uk-margin-small-top">
+			<ul class="uk-grid uk-grid-large uk-grid-width-medium-1-2" data-uk-grid-margin>
+				<li>
 					<# Show menu with pages with checked "checkboxShowInFooter". #>
 					<@ newPagelist { excludeHidden: false } @>
 					<@ foreach in pagelist @>
@@ -14,7 +14,7 @@
 					<@ end @>
 					<a href="/dashboard">Sign in</a>
 				</li>
-				<li class="uk-margin-small-top uk-text-right uk-text-left-small">
+				<li class="uk-text-right uk-text-left-small">
 					<a href="/">
 						<i class="uk-icon-copyright"></i>
 						@{ :now | dateFormat('Y') } @{ sitename }

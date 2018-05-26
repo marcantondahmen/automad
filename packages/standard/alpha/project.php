@@ -35,10 +35,12 @@
 	<@ newPagelist { type: 'related' } @>
 	<@ if @{ :pagelistCount } @>
 		<div class="uk-block">
-			<h2 class="uk-margin-bottom">Related</h2>
+			<h2 class="uk-margin-bottom">@{ labelRelated | def ('Related') }</h2>
 			<@ snippets/pagelist_portfolio.php @>
 		</div>
 	<@ end @>
-	<@ ../snippets/prev_next.php @>
+	<div class="uk-block uk-margin-top">
+		<@ ../snippets/prev_next.php @>
+	</div>
 	
 <@ snippets/footer.php @>

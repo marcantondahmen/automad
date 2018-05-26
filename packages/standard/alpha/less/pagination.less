@@ -16,19 +16,28 @@
 @pagination-padding-horizontal: 10px;
 
 @pagination-background:			#FFFFFF;
-@pagination-color: 				@text-muted-color;
+@pagination-color: 				@base-body-color;
 @pagination-hover-background:	@pagination-background;
-@pagination-hover-color:		@base-body-color;
+@pagination-hover-color:		@text-muted-color;
 @pagination-onclick-background:	@pagination-background;
 @pagination-onclick-color:		@pagination-hover-color;
 @pagination-active-background:	@pagination-background;
 @pagination-active-color:		@pagination-hover-color;
 
 .hook-pagination-misc() {
+	
 	.uk-pagination {
-		margin-left: -@pagination-padding-horizontal;
+		margin: 0 -@pagination-padding-horizontal;
 		cursor: default;
 	}
+	
+	.uk-pagination-previous a,
+	.uk-pagination-next a {
+		font-size: 16px;
+		line-height: 21px;
+		font-weight: 500 !important;
+	}
+	
 }
 
 .hook-pagination-item() {

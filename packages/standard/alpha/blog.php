@@ -16,9 +16,8 @@
 			</div>
 		</div>
 	<@ end @>
-	<div class="uk-block">
-		<@ snippets/pagelist_blog.php @>
-		<@ ../snippets/pagination.php @>
-	</div>
+	
+	<@ snippets/pagelist_blog.php @>
+	<@ ../snippets/pagination.php @>
 	
 <@ snippets/footer.php @>
