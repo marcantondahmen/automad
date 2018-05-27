@@ -2,7 +2,7 @@
 
 		<@ foreach in pagelist @>
 			<div class="uk-block">
-				<ul class="masonry grid-margin uk-grid uk-grid-width-medium-1-2">
+				<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2">
 					<li class="masonry-item">
 						<a href="@{ url }">
 							<h3>@{ title }</h3>
@@ -16,7 +16,7 @@
 					<li class="masonry-item">
 						<div class="uk-panel uk-panel-box">
 							<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
-								width: 750
+								width: 690
 							} @>
 								<a 
 								href="@{ url }" 

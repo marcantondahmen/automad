@@ -7,7 +7,9 @@
 				href="@{ url }" 
 				class="uk-panel uk-panel-box uk-panel-box-hover
 				">
-					<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { width: 480 } @>
+					<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
+						width: 430 
+					} @>
 						<img 
 						class="uk-margin-small-bottom"
 						src="@{ :fileResized }" 

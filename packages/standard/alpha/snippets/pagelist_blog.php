@@ -3,7 +3,7 @@
 		<@ foreach in pagelist @>
 			<div class="uk-block">
 				<ul class="uk-grid" data-uk-margin>
-					<li class="uk-width-medium-1-3">
+					<li class="uk-width-small-1-3">
 						<a href="@{ url }">
 							<h3>@{ title }</h3>
 						</a>
@@ -15,8 +15,10 @@
 							end @>
 						</div>
 					</li>
-					<li class="uk-width-medium-2-3">
-						<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { width: 850 } @>
+					<li class="uk-width-small-2-3">
+						<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
+							width: 650 
+						} @>
 							<a href="@{ url }" 
 							class="uk-margin-small-bottom uk-display-block">
 								<img 
