@@ -903,19 +903,29 @@ class View {
 		
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/', function($match) use ($method, $parameters) {
-				$parameters = array_merge(array(0 => $match[2]), $parameters);
-				$url = call_user_func_array($method, $parameters);
-				return $match[1] . '="' . $url . '"';
-			}, $str);
+		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/is', function($match) use ($method, $parameters) {
+					$parameters = array_merge(array(0 => $match[2]), $parameters);
+					$url = call_user_func_array($method, $parameters);
+					return $match[1] . '="' . $url . '"';
+				}, $str);
 				
 		// Inline styles (like background-image).
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+)url\(\'?(.+?)\'?\)/', function($match) use ($method, $parameters) {
-				$parameters = array_merge(array(0 => $match[2]), $parameters);
-				$url = call_user_func_array($method, $parameters);
-				return $match[1] . 'url(\'' . $url . '\')';
-			}, $str);
+		$str = 	preg_replace_callback('/(<[^>]+)url\(\'?(.+?)\'?\)/is', function($match) use ($method, $parameters) {
+					$parameters = array_merge(array(0 => $match[2]), $parameters);
+					$url = call_user_func_array($method, $parameters);
+					return $match[1] . 'url(\'' . $url . '\')';
+				}, $str);
+				
+		// Image srcset attributes.
+		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
+		$str = 	preg_replace_callback('/(<[^>]+srcset)="([^"]+)"/is', function($match) use ($method, $parameters) {
+					$urls = preg_replace_callback('/([^,\s]+)\s+(\w+)/is', function($match) use ($method, $parameters) {
+						$parameters = array_merge(array(0 => $match[1]), $parameters);
+						return call_user_func_array($method, $parameters) . ' ' . $match[2];
+					}, $match[2]);
+					return $match[1] . '="' . $urls . '"'; 
+				}, $str);
 	
 		return $str;
 				
