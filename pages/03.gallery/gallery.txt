@@ -2,16 +2,28 @@ title: Gallery
 
 -
 
-imagesGallery: /pages/*/*.png, /pages/*/*/*.png
+tags: Work
 
 -
 
-textTeaser: This is a simple gallery. You can use (multiple) glob patterns to select all images to be included in the gallery.
+checkboxShowInFooter: on
 
 -
 
-date: 2017-03-12 12:00:00
+checkboxShowInNavbar: on
 
 -
 
-imageTeaser: /pages/*portfolio/*/*3.png
+imagesGallery: /pages/*portfolio/*/*.png
+
+-
+
+textTeaser: This is a simple gallery. You can use one or more [glob patterns](https://en.wikipedia.org/wiki/Glob_(programming)) as value for the [Images Gallery](/dashboard?context=edit_page&url=%2Fgallery#data-and-settings) variable to select all images to be included in the gallery.
+
+-
+
+date: 2018-03-21 12:00:00
+
+-
+
+hidden: 1

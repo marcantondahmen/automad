@@ -1,0 +1,21 @@
+title: Alpha / Post
+
+-
+
+tags: Alpha, Blog
+
+-
+
+date: 2018-05-27 12:00:00
+
+-
+
+text: The main content of your post goes here. When beeing logged in, just click the "Edit" button below to edit this text.
+
+-
+
+textTeaser: This is the teaser section of the Post template of the Alpha theme. [Upload](/dashboard?context=edit_page&url=%2Fblog%2Falpha-post#files) images to show up in the slideshow or [define](/dashboard?context=edit_page&url=%2Fblog%2Falpha-post#data-and-settings) the "Images Slideshow" variable to link to images of other pages. Define one of them as your teaser image by setting the "Image Teaser" variable. Note the other blog post below. You can define tags for every page or post in the [Page Settings](/dashboard?context=edit_page&url=%2Fblog%2Falpha-post#data-and-settings). Pages having tags in common with the current page will be shown as related pages.
+
+-
+
+theme: standard/alpha

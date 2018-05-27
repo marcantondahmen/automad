@@ -2,7 +2,7 @@ sitename: My Site
 
 -
 
-theme: am/theme_02
+theme: standard/alpha
 
 -
 

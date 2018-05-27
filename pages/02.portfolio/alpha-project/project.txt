@@ -1,0 +1,30 @@
+title: Alpha / Project
+
+-
+
+tags: Alpha, Work
+
+-
+
+checkboxSingleImageSlideshow: on
+
+-
+
+date: 2018-05-16 12:00:00
+
+-
+
+imageTeaser: square*
+
+-
+
+text: The main description of your project goes here. Like with posts, you can define tags for each project. Related projects will show up at the bottom of this page. Tags can also be used to filter page lists on pages using the Blog or Portfolio templates.   
+Clicking a tag below the project title will bring you to the filtered parent page list. You can also set an URL for the [URL Tag Link Target globally](/dashboard?context=edit_shared#data-and-settings) to link tags to any other page.
+
+-
+
+textTeaser: The Project template provides an easy way to present your design projects or products including a selection of images. You can choose how the images are presented with the "Single Image Slideshow" checkbox in the [Variables](/dashboard?context=edit_page&url=%2Fportfolio%2Falpha-project#data-and-settings) section.
+
+-
+
+theme: standard/alpha

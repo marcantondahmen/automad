@@ -6,6 +6,10 @@ url: http://automad.org
 
 -
 
+checkboxHideInMenu: on
+
+-
+
 checkboxShowInFooter: on
 
 -

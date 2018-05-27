@@ -2,7 +2,15 @@ title: Portfolio
 
 -
 
-date: 2017-05-05 12:00:00
+tags: Work
+
+-
+
+checkboxShowAllPagesInPagelist: on
+
+-
+
+date: 2018-04-29 12:00:00
 
 -
 
@@ -10,9 +18,8 @@ imageTeaser: */*.png
 
 -
 
-textTeaser: Like the landing page, this page uses a *Portfolio* template - here the one of [Theme 01](/dashboard?context=edit_shared#data-and-settings).    
-Check out the [variables section](/dashboard?context=edit_page&url=%2Fportfolio#data-and-settings) to control the displayed elements like the *Teaser* and the *Filters* section.
+textTeaser: Like the landing page, this page uses a Portfolio template - here the one of the [Bravo Theme](/dashboard?context=edit_shared#data-and-settings). Check out the [variables section](/dashboard?context=edit_page&url=%2Fportfolio#data-and-settings) to control the displayed elements like the teaser and the filters section.
 
 -
 
-theme: am/theme_01
+theme: standard/bravo
