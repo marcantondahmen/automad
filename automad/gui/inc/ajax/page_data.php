@@ -208,7 +208,6 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 							<?php echo ucwords(str_replace(array('_', '/'), array(' ', ' / '), ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
 						</button>	
 					</div>
-					<?php if ($Page->path != '/') { ?> 
 					<!-- Visibility -->
 					<div class="uk-form-row">
 						<label class="uk-form-label uk-text-truncate">
@@ -226,6 +225,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 							/>
 						</label>
 					</div>	
+					<?php if ($Page->path != '/') { ?>
 					<!-- Prefix -->
 					<div class="uk-form-row">
 						<label for="am-input-prefix" class="uk-form-label uk-text-truncate">
