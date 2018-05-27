@@ -14,7 +14,7 @@
 @nav-padding-vertical:         	4px;
 @nav-padding-horizontal:       	0;
 
-@nav-nested-padding-left:      	25px;
+@nav-nested-padding-left:      	15px;
 @nav-nested-padding-vertical:  	4px;
 @nav-nested-padding-horizontal:	0;
 
@@ -27,13 +27,13 @@
 @nav-side-nested-hover-color:  	@base-body-color;
 
 @nav-dropdown-color:           	@base-body-color;
-@nav-dropdown-hover-background:	@base-body-color;
-@nav-dropdown-hover-color:     	#FFFFFF;
+@nav-dropdown-hover-background:	#F6F6F6;
+@nav-dropdown-hover-color:     	@base-body-color;
 
 .hook-nav-misc() {
 	
 	.uk-nav.uk-nav-side .uk-nav {
-		margin: 10px 0;	
+		margin: 5px 0;	
 	}
 
 	.uk-nav.uk-nav-autocomplete,
@@ -52,6 +52,7 @@
 	margin: 2px 0;
 	font-size: @navbar-nav-font-size;
 	font-weight: 500;
+	line-height: @base-body-line-height - 6;
 	border-bottom: 2px solid transparent;	
 }
 

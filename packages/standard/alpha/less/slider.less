@@ -11,16 +11,9 @@
  */
 
 
-@slider-gutter: 0;
+@slider-gutter: 5px;
 
 .uk-slider {
-	
-	&-container {
-		@media (max-width: @breakpoint-mini-max) {
-			margin-left: -@utility-container-padding-horizontal;
-			margin-right: -@utility-container-padding-horizontal;
-		}
-	}
 	
 	& img {
 		box-shadow: -@slider-gutter 0 0 @panel-box-background, @slider-gutter 0 0 @panel-box-background;

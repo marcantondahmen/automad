@@ -4,8 +4,12 @@
 		<div class="uk-container uk-container-center">
 			<nav class="uk-navbar">
 				<a href="/" class="uk-navbar-brand"><@ 
-					with @{ logo | def('/shared/*logo*') } { height: 50 } 
-						@><img src="@{ :fileResized }" alt="@{ :basename }"><@ 
+					with @{ logo | def('/shared/*logo*') } 
+						@><img 
+						src="<@ with @{ :file } { height: 40 } @>@{ :fileResized }<@ end @>" 
+						srcset="<@ with @{ :file } { height: 80 } @>@{ :fileResized } 2x<@ end @>"
+						alt="@{ :basename }"
+						><@ 
 					else 
 						@>@{ sitename }<@ 
 					end 
@@ -36,8 +40,8 @@
 		<# Modal with site tree and search. #>
 		<div id="modal-nav" class="uk-modal">		
 			<div class="uk-modal-dialog uk-modal-dialog-blank">
-				<div class="uk-container uk-container-center uk-width-medium-3-4 navbar-push">
-					<div class="uk-block">
+				<div class="uk-container uk-container-center navbar-push">
+					<div class="uk-block uk-width-medium-3-4 uk-container-center">
 						<ul class="uk-grid">
 							<li class="uk-width-medium-1-2 uk-push-1-2">
 								<# Search. #>

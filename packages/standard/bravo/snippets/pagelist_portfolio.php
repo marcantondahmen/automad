@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 
-	<ul class="masonry uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
+	<ul class="masonry grid-margin uk-grid uk-grid-width-medium-1-2">
 		<@ foreach in pagelist @>
 			<li class="masonry-item">
 				<a 
@@ -22,9 +22,7 @@
 					<div class="uk-panel-title">
 						@{ title }
 					</div>
-					<span class="uk-text-small">
-						<@ ../../snippets/date.php @>
-					</span>
+					<@ ../../snippets/date.php @>
 				</a>
 			</li>
 		<@ end @>

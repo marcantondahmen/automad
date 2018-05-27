@@ -17,5 +17,28 @@
 @grid-gutter-large-horizontal:  100px;
 @grid-gutter-large-vertical:	@grid-gutter-large-horizontal;
 
-@grid-gutter-xlarge-horizontal:	100px;
-@grid-gutter-xlarge-vertical:	@grid-gutter-xlarge-horizontal;
+
+.hook-grid-misc() {
+	
+	.uk-grid.grid-margin {
+		
+		margin-bottom: -@grid-gutter-vertical !important;
+		
+		& > * {
+			margin-bottom: @grid-gutter-vertical;
+		}
+		
+		
+		@media (min-width: @breakpoint-xlarge) {
+			
+			margin-bottom: -@grid-gutter-large-vertical !important;
+			
+			& > * {
+				margin-bottom: @grid-gutter-large-vertical;
+			}
+			
+		}
+		
+	}
+	
+}

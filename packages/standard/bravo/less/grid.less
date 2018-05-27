@@ -25,6 +25,27 @@
 
 .hook-grid-misc() {
 	
+	.uk-grid.grid-margin {
+		
+		margin-bottom: -@grid-gutter-vertical !important;
+		
+		& > * {
+			margin-bottom: @grid-gutter-vertical;
+		}
+		
+		
+		@media (min-width: @breakpoint-xlarge) {
+			
+			margin-bottom: -@grid-gutter-large-vertical !important;
+			
+			& > * {
+				margin-bottom: @grid-gutter-large-vertical;
+			}
+			
+		}
+		
+	}
+	
 	.uk-grid {
 		
 		& > * {

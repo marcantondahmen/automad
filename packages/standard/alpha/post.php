@@ -2,9 +2,9 @@
 <@ snippets/header.php @>
 
 	<div class="uk-block">
-		<ul class="uk-grid" data-uk-grid-margin>
+		<ul class="uk-grid grid-margin">
 			<li class="uk-width-medium-1-3">
-				<h1>@{ title }</h1>
+				<h1 class="uk-margin-small-bottom">@{ title }</h1>
 				<div class="uk-text-muted"><@ ../snippets/date.php @></div>
 				<@ ../snippets/tags.php @>
 			</li>
@@ -20,7 +20,7 @@
 		sort: 'asc' 
 	} @>
 	<@ if @{ :filelistCount } @>	
-		<div class="uk-block">
+		<div class="uk-block block-full-width-small">
 			<@ ../snippets/slideshow.php @>
 		</div>	
 	<@ end @>
@@ -28,7 +28,7 @@
 		@{ text | markdown }
 	</div>
 	<# Related pages. #>
-	<@ newPagelist { type: 'related' } @>
+	<@ newPagelist { type: 'related', sort: 'date desc' } @>
 	<@ if @{ :pagelistCount } @>
 		<div class="uk-block">
 			<h2>@{ labelRelated | def ('Related') }</h2>

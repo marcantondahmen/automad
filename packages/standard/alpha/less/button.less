@@ -14,27 +14,28 @@
 @button-background:					transparent;
 @button-color:              		@base-body-color;
 @button-hover-background:   		transparent;
-@button-hover-color:        		@text-muted-color;
+@button-hover-color:        		lighten(@base-body-color, 10%);
 @button-active-background:  		@button-hover-background;
 @button-active-color:       		@button-hover-color;
 
-@button-height:	 					20px;
-@button-line-height: 				20px;
+@button-height:	 					24px;
+@button-line-height: 				24px;
 @button-padding-horizontal: 		0;
 
 .hook-button {
-	font-weight: 500;	
+	font-weight: 700;	
+	text-align: left;
 }
 
 .hook-button-misc() {
 	
 	.buttons-stacked {
 		
-		margin-top: -3px;
+		margin-top: -20px;
 		
 		& > * {
 			margin-right: 20px;
-			margin-top: 3px;
+			margin-top: 20px;
 		}
 		
 	}

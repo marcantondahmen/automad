@@ -30,7 +30,7 @@
 		@{ text | markdown }
 	</div>
 	<# Related pages. #>
-	<@ newPagelist { type: 'related' } @>
+	<@ newPagelist { type: 'related', sort: 'date desc' } @>
 	<@ if @{ :pagelistCount } @>
 		<div class="uk-block">
 			<h2>@{ labelRelated | def ('Related') }</h2>

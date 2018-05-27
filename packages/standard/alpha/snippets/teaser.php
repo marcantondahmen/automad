@@ -9,7 +9,7 @@
 					</li>
 				<@ end @>
 				<@ if @{ textTeaser } @>
-					<li class="content uk-text-muted uk-width-medium-2-3">
+					<li class="content uk-width-medium-2-3">
 						@{ textTeaser | markdown }
 					</li>	
 				<@ end @>

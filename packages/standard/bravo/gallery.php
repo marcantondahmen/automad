@@ -4,9 +4,7 @@
 	<@ snippets/teaser.php @>
 	<div class="uk-block">
 		<ul 
-		class="masonry uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4"
-		data-uk-grid-margin
-		>
+		class="masonry grid-margin uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4">
 			<@ filelist { glob: @{ imagesGallery }, sort: 'asc' } @>
 			<@ foreach in filelist @>
 				<li class="masonry-item">

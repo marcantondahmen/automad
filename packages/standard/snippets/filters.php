@@ -2,7 +2,6 @@
 	
 	<div class="uk-button-dropdown" data-uk-dropdown>
 		<button class="uk-button">
-			<i class="uk-icon-filter"></i>&nbsp;
 			<@ if @{ ?filter } @>
 				@{ ?filter }
 			<@ else @>
@@ -17,7 +16,7 @@
 						<@ if not @{ ?filter } @>
 							<i class="uk-icon-circle"></i>
 						<@ else @>
-							<i class="uk-icon-circle-o"></i>
+							<i class="uk-icon-circle-thin"></i>
 						<@ end @>
 						&nbsp;Show All
 					</a>
@@ -28,7 +27,7 @@
 							<@ if @{ ?filter } = @{ :filter } @>
 								<i class="uk-icon-circle"></i>
 							<@ else @>
-								<i class="uk-icon-circle-o"></i>
+								<i class="uk-icon-circle-thin"></i>
 							<@ end @>
 							&nbsp;@{ :filter }
 						</a>

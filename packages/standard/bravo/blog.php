@@ -4,7 +4,7 @@
 	<@ snippets/teaser.php @>	
 	<@ ../snippets/pagelist_config.php @>
 	<@ if not @{ checkboxHideFilters } @>	
-		<div class="uk-grid uk-block">
+		<div class="uk-grid uk-block uk-padding-bottom-remove">
 			<div
 			class="buttons-stacked uk-width-medium-1-2<@ 
 			if not @{ checkboxHideTitle } and @{ textTeaser } 
@@ -17,7 +17,6 @@
 			</div>
 		</div>
 	<@ end @>
-	
 	<@ snippets/pagelist_blog.php @>
 	<@ ../snippets/pagination.php @>
 	

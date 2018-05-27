@@ -33,8 +33,7 @@
 							</div>
 						<@ end @>
 						<a href="@{ url }" class="uk-button">
-							<i class="uk-icon-plus-circle"></i>&nbsp;
-							More
+							<i class="uk-icon-share uk-icon-small"></i>
 						</a>
 					</li>
 				</ul>

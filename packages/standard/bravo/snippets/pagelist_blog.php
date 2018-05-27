@@ -2,10 +2,10 @@
 
 		<@ foreach in pagelist @>
 			<div class="uk-block">
-				<ul class="masonry uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
+				<ul class="masonry grid-margin uk-grid uk-grid-width-medium-1-2">
 					<li class="masonry-item">
 						<a href="@{ url }">
-							<h2>@{ title }</h2>
+							<h3>@{ title }</h3>
 						</a>
 						<@ ../../snippets/date.php @>
 						<br />
@@ -38,12 +38,10 @@
 								@{ textTeaser | markdown }
 							</div>
 						<@ end @>	
-						<a href="@{ url }" class="uk-button uk-margin-small-top">
-							<i class="uk-icon-plus-circle"></i>&nbsp;
-							More
+						<a href="@{ url }" class="uk-button">
+							<i class="uk-icon-share uk-icon-small"></i>
 						</a>
 					</li>
-					
 				</ul>
 			</div>
 		<@ end @>
