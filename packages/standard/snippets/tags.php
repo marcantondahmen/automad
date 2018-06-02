@@ -2,10 +2,12 @@
 	
 	<@ if @{ tags } @>
 		<ul class="uk-subnav">
-			<li class="uk-disabled">
-				<span><i class="uk-icon-tags"></i></span>
-			</li>	
 			<@ foreach in tags @>
+				<@ if @{ :i } > 1 @>
+					<li class="uk-disabled">
+						<span>,&nbsp;</span>
+					</li>
+				<@ end @>
 				<li>
 					<a href="@{ urlTagLinkTarget | def('/') }?filter=@{ :tag }">
 						@{ :tag }

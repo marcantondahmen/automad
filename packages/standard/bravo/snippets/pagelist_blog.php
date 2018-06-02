@@ -8,10 +8,7 @@
 							<h3>@{ title }</h3>
 						</a>
 						<@ ../../snippets/date.php @>
-						<br />
-						<@ foreach in tags 
-						@><@ if @{ :i } > 1 @>, <@ end @>@{ :tag }<@ 
-						end @>
+						<@ ../../snippets/tags.php @>
 					</li>
 					<li class="masonry-item">
 						<div class="uk-panel uk-panel-box">

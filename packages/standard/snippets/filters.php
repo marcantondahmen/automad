@@ -5,7 +5,7 @@
 			<@ if @{ ?filter } @>
 				@{ ?filter }
 			<@ else @>
-				Show All
+				@{ labelShowAll | def ('Show All') }
 			<@ end @>
 		</button>
 		<div class="uk-dropdown uk-dropdown-small uk-text-left">
@@ -18,7 +18,7 @@
 						<@ else @>
 							<i class="uk-icon-circle-thin"></i>
 						<@ end @>
-						&nbsp;Show All
+						&nbsp;@{ labelShowAll | def ('Show All') }
 					</a>
 				</li>
 				<@ foreach in filters @>

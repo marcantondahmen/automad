@@ -9,15 +9,12 @@
 						</a>
 						<div class="uk-text-muted">
 							<@ ../../snippets/date.php @>
-							<br />
-							<@ foreach in tags 
-							@><@ if @{ :i } > 1 @>, <@ end @>@{ :tag }<@ 
-							end @>
+							<@ ../../snippets/tags.php @>
 						</div>
 					</li>
 					<li class="uk-width-small-2-3">
 						<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
-							width: 650 
+							width: 840 
 						} @>
 							<a href="@{ url }" 
 							class="uk-margin-small-bottom uk-display-block">

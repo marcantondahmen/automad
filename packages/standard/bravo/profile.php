@@ -1,7 +1,7 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ snippets/header.php @>
 
-	<ul class="masonry uk-grid uk-grid-width-medium-1-2">
+	<ul class="masonry uk-grid uk-grid-width-small-1-2">
 		<li class="masonry-item uk-block">
 			<h1>@{ title }</h1>
 		</li>

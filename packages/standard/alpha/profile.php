@@ -2,7 +2,7 @@
 <@ snippets/header.php @>
 
 	<div class="uk-block">
-		<ul class="masonry grid-margin uk-grid uk-grid-width-medium-1-2">
+		<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2">
 			<li class="masonry-item">
 				<h1>@{ title }</h1>
 			</li>

@@ -7,7 +7,7 @@
 			>
 				<div class="uk-slider-container">
 					<ul class="uk-slider">
-						<@ foreach in filelist { height: @{ slideshowHeight | def(480)} } @>
+						<@ foreach in filelist { height: @{ slideshowHeight | def(600)} } @>
 							<# 
 							Assuming a max container size of 1440px, 864px would be 6 of 10.
 							That is the width limit for all images to be able to swap grid sizes from 10 to 6 on small devices.

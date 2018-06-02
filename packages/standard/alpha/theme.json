@@ -25,6 +25,7 @@
 		"itemsPerPage": "Limit the items of the pagelist per page",
 		"labelClearSearch": "Button text for clearing search results",
 		"labelRelated": "Label for related pages section",
+		"labelShowAll": "Label text for filter button when no filter is selected",
 		"labelSortDateDesc": "Label text in dropdown for sorting pages by date descending",
 		"labelSortDateAsc": "Label text in dropdown for sorting pages by date ascending",
 		"labelSortTitleAsc": "Label text in dropdown for sorting pages by title ascending",
