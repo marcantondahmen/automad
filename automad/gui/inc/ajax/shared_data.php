@@ -115,7 +115,7 @@ if (isset($_POST['data'])) {
 					
 						// Set icon.
 						if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
-							$img = new Core\Image(reset($images), 220, 165, true);
+							$img = new Core\Image(reset($images), 440, 330, true);
 							$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 						} else {
 							$icon = '<div class="am-panel-icon"><span><i class="uk-icon-code"></i></span></div>';
