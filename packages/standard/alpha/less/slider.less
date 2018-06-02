@@ -11,7 +11,7 @@
  */
 
 
-@slider-gutter: 2px;
+@slider-gutter: 5px;
 
 [data-uk-slider] {
 	overflow: hidden;
@@ -20,7 +20,8 @@
 .uk-slider {
 
 	&-container {
-		margin: (-@slider-gutter / 2);
+		margin-left: -(floor(@slider-gutter / 2));
+		margin-right: -(ceil(@slider-gutter / 2));
 	}
 
 	& li {
@@ -29,11 +30,14 @@
 			content: '';
 			position: absolute;
 			display: block;
+			box-sizing: border-box;
 			width: 100%;
 			height: 100%;
 			top: 0;
 			left: 0;
-			box-shadow: inset 0 0 0 (@slider-gutter / 2) @panel-box-background;
+			border: 0 solid @panel-box-background;
+			border-left-width: floor(@slider-gutter / 2);
+			border-right-width: ceil(@slider-gutter / 2) 
 		}
 		
 	}
