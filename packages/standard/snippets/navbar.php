@@ -60,9 +60,9 @@
 									>
 										<input 
 										class="uk-form-controls uk-width-1-1" 
-										type="text" 
+										type="search" 
 										name="search" 
-										placeholder="Search @{ sitename }" 
+										placeholder="@{ placeholderSearch | def ('Search') }" 
 										required 
 										/>	
 									</div>
