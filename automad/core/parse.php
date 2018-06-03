@@ -176,6 +176,7 @@ class Parse {
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
 			$str = str_replace("'", '"', $str);
+            $str = str_replace(array("\n", "\r", "\t"), ' ', $str);
 			$str = preg_replace('/(?<=[{,])\s*([\w\-]+)\s*(?=:)/', '"\1"', $str);
 			
 			$debug['Clean'] = $str;
