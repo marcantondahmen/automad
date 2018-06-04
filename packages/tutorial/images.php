@@ -44,7 +44,7 @@ navbar and content snippets are include first.
 								#>
 								title="@{ :file }"
 								<# The size of the resized image. #>
-								width="@{ :widthRseized }"
+								width="@{ :widthResized }"
 								height="@{ :heightResized }"
 								>
 							</figure>
