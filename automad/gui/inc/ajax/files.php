@@ -148,12 +148,12 @@ if ($files) { ?>
 				
 				if (Core\Parse::fileIsImage($file)) { 
 
-					$imgPanel = new Core\Image($file, 220, 165, true);
+					$imgPanel = new Core\Image($file, 320, 240, true);
 					$size = '<div class="uk-panel-badge uk-badge">' . 
 							$imgPanel->originalWidth . ' <i class="uk-icon-times"></i> ' . $imgPanel->originalHeight . 
 							'</div>';
 					$icon = '<img src="' . AM_BASE_URL . $imgPanel->file . '" width="' . $imgPanel->width . '" height="' . $imgPanel->height . '" />';
-					$imgModal = new Core\Image($file, 1000, 800, false);
+					$imgModal = new Core\Image($file, 1600, 1200, false);
 			
 					// Update file info with image.
 					$fileInfo['img'] = 	array(

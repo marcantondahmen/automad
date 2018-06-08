@@ -101,8 +101,10 @@
 			});
 			
 			// Also trigger resizing on toggles to fix issues with hidden textareas.
-			$doc.on('click', '[data-uk-toggle]', function() {
-				$(t.selector).trigger('update.automad.textarea');
+			$doc.on('click', '.uk-accordion-title', function() {
+				setTimeout(function() {
+					$(t.selector).trigger('update.automad.textarea');
+				}, 50);
 			});
 				
 			// Update also on resize.

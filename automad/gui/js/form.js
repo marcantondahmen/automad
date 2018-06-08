@@ -78,7 +78,7 @@
 			 *
 			 *	data-am-enter="#button"				Trigger click event on pressing the enter key. Must be added to an input field.
 			 *
-			 *      data-am-watch-exclude			Exclude field from being watched for changes.
+			 *  data-am-watch-exclude				Exclude field from being watched for changes.
 			 *
 			 *
 			 * 	BUTTON ATTRIBUTES:
