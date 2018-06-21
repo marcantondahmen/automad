@@ -71,19 +71,26 @@ class Pagelist {
 	 */
 	
 	private $defaults = array(
+							'context' => false,
 							'excludeCurrent' => false,
 							'excludeHidden' => true,
 							'filter' => false,
 							'limit' => NULL,
 							'offset' => 0,
 							'page' => false,
-							'parent' => false,
 							'search' => false,
 							'sort' => false,
 							'template' => false,
 							'type' => false
 						);
 	
+	
+	/**
+	 *	In case $type is set to "children", the $context URL can be used as well to change the context from the current page to any page.
+	 */
+	
+	private $context;
+
 	
 	/**
 	 * 	Defines whether the pagelist excludes the current page or not. 
@@ -125,14 +132,7 @@ class Pagelist {
 	 */
 	
 	private $page;
-	
-	
-	/**
-	 *	In case $type is set to "children", the $parent URL can be used as well to change the parent from the current page to any page.
-	 */
-	
-	private $parent;
-	
+		
 	
 	/**
 	 *	The search string to filter pages.
@@ -184,13 +184,13 @@ class Pagelist {
 	 *
 	 *	Options:   
 	 *
+	 *	- context: an optionally fixed URL for the context of a pagelist of type breadcrumbs or children. In case this parameter is false, within a loop the context always changes dynamically to the current page.
 	 *	- excludeCurrent: default false
 	 *	- excludeHidden: default true
 	 *	- filter: filter pages by tags
 	 *	- limit: limit the object's array of relevant pages
 	 *	- offset: offset the within the array of all relevant pages
 	 *	- page: false (the current page in the pagination - to be used with the limit parameter)
-	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
 	 *	- search: filter pages by search string
 	 *	- sort: sorting options string, like "date desc, title asc"
 	 *	- template: include only pages matching that template	
@@ -234,7 +234,7 @@ class Pagelist {
 
 
 	/**
-	 *	Collect all pages matching $type (& optional $parent), $template & $search (optional). 
+	 *	Collect all pages matching $type (& optional $context), $template & $search (optional). 
 	 *
 	 *	The returned pages have to be used to get all relevant tags.
 	 *	It is important, that the pages are not filtered by tag here, because that would also eliminate the non-selected tags itself when filtering.   
@@ -246,15 +246,15 @@ class Pagelist {
 				
 		$Selection = new Selection($this->collection);
 		
-		// In case $this->parent is an empty string or false, use the current context. 
-		// Therefore it is not possible to have a pagelist only including the homepage (parent: "").
+		// In case $this->context is an empty string or false, use the current context. 
+		// Therefore it is not possible to have a pagelist only including the homepage (context: "").
 		// Since that kind of pagelist would always have only one element, that one can be accessed using the "with" statement instead.
-		// Note that $parent has to be defined with each call again, to leave $this->parent untouched - otherwise it would be defined on a second call and therefore would create
+		// Note that $context has to be defined with each call again, to leave $this->context untouched - otherwise it would be defined on a second call and therefore would create
 		// an infinite loop on recursive pagelists.
-		if ($this->parent) {
-			$parent = $this->parent;
+		if ($this->context) {
+			$context = $this->context;
 		} else {
-			$parent = $this->Context->get()->url;
+			$context = $this->Context->get()->url;
 		}
 		
 		// Filter by type.
@@ -262,7 +262,7 @@ class Pagelist {
 		// $this->type has to be casted to a string!
 		switch ((string)$this->type) {
 			case 'children':
-				$Selection->filterByParentUrl($parent);
+				$Selection->filterByParentUrl($context);
 				break;
 			case 'related':
 				$Selection->filterRelated($this->Context->get());
@@ -271,7 +271,7 @@ class Pagelist {
 				$Selection->filterByParentUrl($this->Context->get()->parentUrl);
 				break;
 			case 'breadcrumbs':
-				$Selection->filterBreadcrumbs($this->Context->get()->url);
+				$Selection->filterBreadcrumbs($context);
 				break;
 		}
 		

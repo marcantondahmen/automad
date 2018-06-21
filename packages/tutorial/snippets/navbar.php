@@ -27,7 +27,7 @@
 							<hr class="dropdown-divider" />
 							<@ newPagelist { 
 								type: 'children',
-								parent: @{ urlTutorials },
+								context: @{ urlTutorials },
 								excludeHidden: false
 							} @>
 							<@ foreach in pagelist @>

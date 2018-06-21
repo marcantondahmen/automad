@@ -194,7 +194,7 @@ class Toolbox {
 	 *	Generate a list for the navigation below a given URL.
 	 *
 	 * 	Options:
-	 * 	- parent: '/' (The parent URL)
+	 * 	- context: '/' (The parent URL)
 	 *  - hompage: false (include homepage to first-level nav)
 	 *  - excludeHidden: true (exclude hidden pages)
 	 *  - class: false (class of the <ul> element)
@@ -207,7 +207,7 @@ class Toolbox {
 	public function nav($options = array()) {
 		
 		$defaults = 	array(
-							'parent' => '/', 
+							'context' => '/', 
 							'homepage' => false,
 							'excludeHidden' => true,
 							'class' => false,
@@ -231,12 +231,12 @@ class Toolbox {
 		
 		// Get pages.		
 		$Selection = new Selection($this->collection);
-		$Selection->filterByParentUrl($options['parent']);
+		$Selection->filterByParentUrl($options['context']);
 		$Selection->sortPages();
 		$pages = $Selection->getSelection($options['excludeHidden']);
 		
-		// Add Homepage to first-level navigation if parent is the homepage and the option 'homepage' is true.
-		if ($options['parent'] == '/' && $options['homepage']) {
+		// Add Homepage to first-level navigation if context is the homepage and the option 'homepage' is true.
+		if ($options['context'] == '/' && $options['homepage']) {
 			$pages = array('/' => $this->collection['/']) + $pages;
 		}
 		
@@ -264,7 +264,7 @@ class Toolbox {
 	
 	/**
 	 *	Generate a list for the navigation below the current page.   
-	 *  Options are the same like those for nav() except the 'parent' option.
+	 *  Options are the same like those for nav() except the 'context' option.
 	 *
 	 * 	@param array $options
 	 *	@return string The HTML of the navigation list	
@@ -272,15 +272,15 @@ class Toolbox {
 	
 	public function navChildren($options = array()) {
 	
-		// Always set 'parent' to the current page's parent URL by merging that parameter with the other specified options.
-		return $this->nav(array_merge($options, array('parent' => $this->Automad->Context->get()->url)));
+		// Always set 'context' to the current page's URL by merging that parameter with the other specified options.
+		return $this->nav(array_merge($options, array('context' => $this->Automad->Context->get()->url)));
 		
 	}
 	
 	
 	/**
 	 *	Generate a list for the navigation below the current page's parent.   
-	 *  Options are the same like those for nav() except the 'parent' option.
+	 *  Options are the same like those for nav() except the 'context' option.
 	 *
 	 *	@param array $options
 	 *	@return string The HTML of the navigation list	
@@ -288,15 +288,15 @@ class Toolbox {
 	
 	public function navSiblings($options = array()) {
 		
-		// Set parent to current parentUrl and overwrite passed options
-		return $this->nav(array_merge($options, array('parent' => $this->Automad->Context->get()->parentUrl)));
+		// Set context to current parentUrl and overwrite passed options
+		return $this->nav(array_merge($options, array('context' => $this->Automad->Context->get()->parentUrl)));
 		
 	}
 	
 	
 	/**
 	 *	Generate a list for the navigation at the top level including the home page (level 0 & 1).   
-	 *	Options are the same like those for nav() except the 'parent' option.
+	 *	Options are the same like those for nav() except the 'context' option.
 	 *
 	 *	@param array $options
 	 *	@return string The HTML of the navigation list	
@@ -304,8 +304,8 @@ class Toolbox {
 	
 	public function navTop($options = array()) {
 		
-		// Set parent to '/' and overwrite passed options.
-		return $this->nav(array_merge($options, array('parent' => '/')));
+		// Set context to '/' and overwrite passed options.
+		return $this->nav(array_merge($options, array('context' => '/')));
 		
 	}
 	
@@ -315,13 +315,13 @@ class Toolbox {
 	 *
 	 *  Options:
 	 *  - all: true (expand all pages or only in current path)
-	 *  - parent: '' (parent URL)
-	 *  - rootLevel: false (a kind of flexible parent page at a given level)
+	 *  - context: '' (parent URL)
+	 *  - rootLevel: false (a kind of flexible context page at a given level)
 	 *  - excludeHidden: true (exclude hidden pages)
 	 *  - class: false (class of the <ul> element)
 	 *  - active: false (class of the active <li> element)
 	 *
-	 *	@param array $options - (all: expand all pages (boolean), parent: "/parenturl", rootLevel: integer)
+	 *	@param array $options - (all: expand all pages (boolean), context: "/parenturl", rootLevel: integer)
 	 *	@return string The HTML of the tree
 	 */
 	
@@ -329,7 +329,7 @@ class Toolbox {
 				
 		$defaults = 	array( 
 							'all' => true,
-							'parent' => '',
+							'context' => '',
 							'rootLevel' => false,
 							'excludeHidden' => true,
 							'class' => false,
@@ -340,8 +340,8 @@ class Toolbox {
 		
 		// If 'rootLevel' is not false (!==, can be 0), 
 		// the tree always starts below the given level within the breadcrumb trail to the current page.
-		// So, $parent gets dynamically determined in contrast to defining 'parent' within the options.
-		// When 'rootLevel' is defined, the 'parent' option will be ignored.
+		// So, $context gets dynamically determined in contrast to defining 'context' within the options.
+		// When 'rootLevel' is defined, the 'context' option will be ignored.
 		if ($options['rootLevel'] !== false) {
 			
 			$Selection = new Selection($this->collection);
@@ -349,21 +349,21 @@ class Toolbox {
 			
 			foreach ($Selection->getSelection($options['excludeHidden']) as $breadcrumb) {
 				if ($breadcrumb->level == $options['rootLevel']) {
-					$parent = $breadcrumb->url;
+					$context = $breadcrumb->url;
 				}
 			}
 				
 		} else {
-			// If the 'rootLevel' option is set to false, the 'parent' option will be used.
-			$parent = $options['parent'];
+			// If the 'rootLevel' option is set to false, the 'context' option will be used.
+			$context = $options['context'];
 		}
 		
-		// The tree only gets generated, if $parent is defined, because in case the 'rootLevel' option is 
-		// defined and greater than the actual level of the current page, $parent won't be defined.
-		if (isset($parent)) {	
+		// The tree only gets generated, if $context is defined, because in case the 'rootLevel' option is 
+		// defined and greater than the actual level of the current page, $context won't be defined.
+		if (isset($context)) {	
 
 			$Selection = new Selection($this->collection);
-			$Selection->filterByParentUrl($parent);
+			$Selection->filterByParentUrl($context);
 			$Selection->sortPages();
 			
 			if ($pages = $Selection->getSelection($options['excludeHidden'])) {
@@ -391,7 +391,7 @@ class Toolbox {
 						$html .= 	$this->navTree(array_merge(
 										$options,
 										array(
-											'parent' => $Page->url, 
+											'context' => $Page->url, 
 											'rootLevel' => false
 										)
 									));
@@ -432,13 +432,13 @@ class Toolbox {
 	 *
 	 *	Options:   
 	 *
+	 *	- context: an optionally fixed URL for the context of a pagelist of type breadcrumbs or children. In case this parameter is false, within a loop the context always changes dynamically to the current page.
 	 *	- excludeCurrent: default false
 	 *	- excludeHidden: default true
 	 *	- filter: filter pages by tags
 	 *	- limit: limit the object's array of relevant pages
 	 *	- offset: offset the within the array of all relevant pages
 	 *	- page: false (the current page in the pagination - to be used with the limit parameter)
-	 *	- parent: optional URL of parent page, if type is set to children - default is always the current page
 	 *	- search: filter pages by search string
 	 *	- sort: sorting options string, like "date desc, title asc"
 	 *	- template: include only pages matching that template	

@@ -2,7 +2,7 @@
 	
 	<@ newPagelist { 
 		type: 'children', 
-		parent: @{ showPagesBelow },
+		context: @{ showPagesBelow },
 		filter: @{ ?filter }, 
 		search: @{ ?search },
 		sort: @{ ?sort | def('date desc') },
