@@ -49,12 +49,11 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 }
 
 require 'update.php';
-require 'user.php';
 require 'session.php';
 
 System\Session::start();
 
-if (!GUI\User::get()) {
+if (!System\Session::user()) {
 	exit('Access denied!');
 }
 

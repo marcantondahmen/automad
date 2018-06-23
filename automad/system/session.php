@@ -52,10 +52,30 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class Session {
 	
+	
+	/**
+	 *	Start session.
+	 */
+	
 	public static function start() {
 		
 		session_name('Automad-' . md5(AM_BASE_DIR));
 		session_start();
+		
+	}
+	
+	
+	/**
+	 *	Get logged in user's name.
+	 *	
+	 * 	@return string Username
+	 */
+	
+	public static function user() {
+		
+		if (isset($_SESSION['username'])) {
+			return $_SESSION['username'];
+		}
 		
 	}
 	

@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\System as System;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -124,9 +125,7 @@ class User {
 
 	public static function get() {
 		
-		if (isset($_SESSION['username'])) {
-			return $_SESSION['username'];
-		}
+		return System\Session::user();
 		
 	}
 	
