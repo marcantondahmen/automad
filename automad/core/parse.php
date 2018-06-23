@@ -135,6 +135,9 @@ class Parse {
 					$file = Str::stripStart($file, AM_BASE_DIR);
 				}
 				
+                // Windows compatibility.
+                $file = str_replace('\\', '/', $file);
+                
 			});	
 			
 		}
