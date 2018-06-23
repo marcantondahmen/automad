@@ -47,6 +47,7 @@ if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
 
 use Automad\Core as Core;
 use Automad\GUI as GUI;
+use Automad\System as System;
 
 
 // Set default timezone if not set.
@@ -72,8 +73,7 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 
 
 // Start Session.
-session_name('Automad-' . md5(AM_BASE_DIR));
-session_start();
+System\Session::start();
 
 
 // Split GUI form regular pages.
