@@ -43,16 +43,22 @@ if (http_response_code() || !defined('STDIN')) {
     exit();
 }
 
-define(AUTOMAD, true);
-define(AM_BASE_DIR, dirname(dirname(dirname(__FILE__))));
+define('AUTOMAD', true);
+define('AM_BASE_DIR', dirname(dirname(dirname(__FILE__))));
 
 // Test if updater gets called within development repo.
 if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
     exit('Can\'t run updates within the development repository!' . PHP_EOL);
 }
 
+// Exit on Windows due to file locks.
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    echo 'The CLI updater can\'t be used on Windows! Please update Automad by using the dashboard instead!';
+} 
+
 require AM_BASE_DIR . '/automad/autoload.php'; 
 require AM_BASE_DIR . '/automad/const.php'; 
+require AM_BASE_DIR . '/automad/version.php';
 
 echo 'Automad version ' . AM_VERSION . PHP_EOL;
 echo 'Update branch is ' . AM_UPDATE_BRANCH . PHP_EOL;
@@ -64,10 +70,12 @@ if (version_compare(AM_VERSION, $updateVersion, '<')) {
     echo 'Updating to version ' . $updateVersion . PHP_EOL;
     $output = System\Update::run();
     
-    if (!empty($output['cli'])) {
-        echo $output['cli'] . PHP_EOL;
-    } else {
-        echo 'Error! Update has failed!' . PHP_EOL;
+    if (!empty($output['success'])) {
+        echo $output['success'] . PHP_EOL;
+    } 
+    
+    if (!empty($output['error'])) {
+        echo $output['error'] . PHP_EOL;
     }
     
 } else {
