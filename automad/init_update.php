@@ -60,7 +60,7 @@ spl_autoload_register(function($class) {
 	$class = str_replace('Automad\\', '', $class);
 	$class = str_replace('\\', '/', $class);
 	
-	require_once dirname(__DIR__) . '/' . strtolower($class) . '.php';
+	require_once __DIR__ . '/' . strtolower($class) . '.php';
 	
 });
 

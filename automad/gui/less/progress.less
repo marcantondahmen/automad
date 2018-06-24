@@ -47,5 +47,21 @@
 
 
 .hook-progress() {
+	
 	border-radius: @am-radius;
+	
+	&.am-progress-panel {
+		
+		height: auto;
+		margin: 0;
+		
+		& .uk-progress-bar {
+			padding: @alert-padding 15px;
+			font-size: @base-body-font-size;
+			line-height: @base-body-line-height;
+			text-align: left;
+		}
+		
+	}
+	
 }

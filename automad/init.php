@@ -62,6 +62,10 @@ require AM_BASE_DIR . '/automad/autoload.php';
 require AM_BASE_DIR . '/automad/const.php';
 
 
+// Version number 
+include AM_BASE_DIR . '/automad/version.php';
+
+
 // Enable full error reporting, when debugging is enabled.
 Core\Debug::errorReporting();
 

@@ -207,6 +207,3 @@ Config::set('AM_UPDATE_REPO_RAW_PATH', '/raw');
 Config::set('AM_UPDATE_REPO_GET_PATH', '/get');
 Config::set('AM_UPDATE_REPO_VERSION_FILE', '/automad/version.php');
 Config::set('AM_UPDATE_TEMP', AM_DIR_CACHE . '/update');
-
-// Version number 
-include AM_BASE_DIR . '/automad/version.php';

@@ -45,7 +45,7 @@
 		error: function(text) {
 			
 			UIkit.notify(text, { 
-				timeout: 10000,
+				timeout: 0,
 				pos: 'top-right',
 				status: 'danger'
 			});

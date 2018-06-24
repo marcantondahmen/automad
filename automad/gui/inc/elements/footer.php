@@ -47,8 +47,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<div 
 		class="am-footer uk-position-bottom<?php if (!User::get()) { ?> uk-text-center<?php } ?>"
 		>
-			<a href="http://automad.org" class="uk-text-small" target="_blank">
-				Automad <?php echo AM_VERSION; ?>
+			<a href="https://automad.org" class="uk-text-small" target="_blank">
+				<i class="uk-icon-share"></i>&nbsp;
+				User Guide
 			</a>	
 		</div>
 		

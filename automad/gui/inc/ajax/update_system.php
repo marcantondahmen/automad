@@ -61,7 +61,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 		
 		if (!empty($_POST['update'])) {
 		
-			$output = System\Update::run();
+			System\Update::init();
 		
 		} else {
 		
@@ -73,23 +73,29 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 		
 				// Check if an the current installation is outdated.
 				if (version_compare(AM_VERSION, $version, '<')) {
-			
-					Text::e('sys_update_available');
-		
+					
 					?>
-					<input type="hidden" name="update" value="run" />
-					<button 
-					type="submit" 
-					class="uk-button uk-button-large uk-button-success" 
-					data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
-					>
-						<i class="am-update-progress uk-icon-refresh uk-icon-spin uk-hidden"></i>
-						<i class="am-update-progress uk-icon-refresh"></i>
-						&nbsp;<?php Text::e('sys_update_to'); ?>&nbsp;
-						<span class="uk-badge"><?php echo $version; ?></span>
-					</button>
-					<div class="am-update-progress uk-text-muted uk-margin-top uk-hidden">
-						<?php Text::e('sys_update_progress'); ?>
+					<div class="am-update-progress">
+						<p>
+							<?php echo Text::get('sys_update_current_version') . ' ' . AM_VERSION; ?>.
+							<br />
+							<?php Text::e('sys_update_available'); ?>
+						</p>
+						<input type="hidden" name="update" value="run" />
+						<button 
+						type="submit" 
+						class="uk-button uk-button-large uk-button-success" 
+						data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
+						>
+							<i class="uk-icon-refresh"></i>&nbsp;
+							<?php Text::e('sys_update_to'); ?>&nbsp;
+							<span class="uk-badge"><?php echo $version; ?></span>
+						</button>
+					</div>
+					<div class="am-update-progress am-progress-panel uk-progress uk-progress-striped uk-active uk-hidden">
+						<div class="uk-progress-bar" style="width: 100%;">			
+							<?php Text::e('sys_update_progress'); ?>
+						</div>
 					</div>
 					<?php
 			
@@ -98,6 +104,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 					?>
 					<div class="uk-alert uk-alert-success">
 						<?php Text::e('sys_update_not_required'); ?>
+						<?php echo Text::get('sys_update_current_version') . ' ' . AM_VERSION; ?>.
 					</div>
 					<?php
 			
