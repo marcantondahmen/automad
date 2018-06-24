@@ -58,6 +58,15 @@ class Update {
 	
 	
 	/**
+	 *	The lock file indicates, that there is an update in progress.
+	 *	This is only required on Windows servers to deny access to core files 
+	 *	during updates to avoid file locking issues. 
+	 */
+	
+	private static $updateLock = AM_BASE_DIR . AM_DIR_CACHE . '/lock';
+	
+	
+	/**
 	 *	The update timestamp.
 	 */
 	
@@ -231,6 +240,9 @@ class Update {
 			copy($src, $dest);
 		}
 		
+		// Lock site during update, to avoid file locks on Windows servers.
+		touch(self::$updateLock);
+		
 		// Redirect to the cloned version.
 		header('Location: ' . AM_BASE_URL . $cloneDir . '/init_update.php');
 		
@@ -356,9 +368,6 @@ class Update {
 			
 			if ($success) {
 				
-				// Init a clean form on success to show the updated status.
-				$output['init'] = true;
-				
 				$versionFile = AM_BASE_DIR . '/automad/version.php';
 				
 				if (is_readable($versionFile)) {	
@@ -379,6 +388,14 @@ class Update {
 			$output['error'] = 'Downloading update failed!';
 			
 		}
+		
+		// Remove lock.
+		if (file_exists(self::$updateLock)) {
+			unlink(self::$updateLock);
+		}
+		
+		// Init a clean form on success to show the updated status.
+		$output['init'] = true;
 		
 		return $output;
 		
