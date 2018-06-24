@@ -326,67 +326,73 @@ class Update {
 		
 		$items = self::items();
 		
-		if (!$items) {
-			$output['error'] = 'Invalid list of items to be updated!';
-			return $output;
-		}
+		if ($items) {
 		
-		if (!self::permissionsGranted($items)) {
-			$output['error'] = 'Permission denied!';
-			return $output;
-		}
-		
-		self::$timestamp = date('Ymd-His');
-		self::log('Starting update ' . date('c'));
-		self::log('Version to be updated: ' . AM_VERSION);
-		self::log('Updating items: ' . implode(', ', $items));
-		
-		if ($archive = self::getArchive()) {
-			
-			if (self::backupCurrent($items)) {
+			if (self::permissionsGranted($items)) {
 				
-				if (self::unpack($archive, $items)) {
+				self::$timestamp = date('Ymd-His');
+				self::log('Starting update ' . date('c'));
+				self::log('Version to be updated: ' . AM_VERSION);
+				self::log('Updating items: ' . implode(', ', $items));
+				
+				if ($archive = self::getArchive()) {
 					
-					$success = true;
+					if (self::backupCurrent($items)) {
+						
+						if (self::unpack($archive, $items)) {
+							
+							$success = true;
+							
+							// Clear cache.
+							if (file_exists(AM_FILE_SITE_MTIME)) {
+								unlink(AM_FILE_SITE_MTIME);
+							}
+							
+						} else {
+							
+							$success = false;
+							
+						}
 					
-					// Clear cache.
-					if (file_exists(AM_FILE_SITE_MTIME)) {
-						unlink(AM_FILE_SITE_MTIME);
+					} else {
+						
+						$success = false;
+							
+					}
+					
+					if ($success) {
+						
+						$versionFile = AM_BASE_DIR . '/automad/version.php';
+						
+						if (is_readable($versionFile)) {	
+							$version = self::extractVersion(file_get_contents($versionFile));
+							$log = self::log('Successfully updated Automad to version ' . $version);
+						}
+						
+						$output['success'] = 'Successfully updated to version ' . $version;
+						
+					} else {
+						
+						$output['error'] = 'Update failed!';
+						
 					}
 					
 				} else {
 					
-					$success = false;
+					$output['error'] = 'Downloading update failed!';
 					
 				}
-			
+
 			} else {
 				
-				$success = false;
-					
-			}
-			
-			if ($success) {
-				
-				$versionFile = AM_BASE_DIR . '/automad/version.php';
-				
-				if (is_readable($versionFile)) {	
-					$version = self::extractVersion(file_get_contents($versionFile));
-					$log = self::log('Successfully updated Automad to version ' . $version);
-				}
-				
-				$output['success'] = 'Successfully updated to version ' . $version;
-				
-			} else {
-				
-				$output['error'] = 'Update failed!';
+				$output['error'] = 'Permission denied!';
 				
 			}
 			
 		} else {
 			
-			$output['error'] = 'Downloading update failed!';
-			
+			$output['error'] = 'Invalid list of items to be updated!';
+		
 		}
 		
 		// Remove lock.
