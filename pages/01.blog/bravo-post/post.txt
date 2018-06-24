@@ -14,7 +14,7 @@ imageTeaser: /pages/*/*alpha*/portrait*
 
 -
 
-imagesSlideshow: /pages/*/*alpha*/*.png
+imagesSlideshow: /pages/*portfolio/*alpha*/*.png
 
 -
 
