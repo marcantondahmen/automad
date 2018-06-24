@@ -53,7 +53,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 
 // Exit on Windows due to file locks.
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    exit 'The CLI updater can\'t be used on Windows! Please update Automad by using the dashboard instead!' . PHP_EOL;
+    exit('The CLI updater can\'t be used on Windows! Please update Automad by using the dashboard instead!');
 } 
 
 require AM_BASE_DIR . '/automad/autoload.php'; 
