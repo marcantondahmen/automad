@@ -39,7 +39,7 @@ namespace Automad;
 
 
 define('AUTOMAD', true);
-define('AM_BASE_DIR', dirname(dirname(__DIR__)));
+define('AM_BASE_DIR', dirname(dirname(dirname(__DIR__))));
 
 
 // Test location of updater to avoid unintended updates.
@@ -55,17 +55,25 @@ if (strpos(__DIR__, '/automad/external') !== false) {
 }
 
 
-require 'update.php';
-require 'session.php';
+spl_autoload_register(function($class) {
+	
+	$class = str_replace('Automad\\', '', $class);
+	$class = str_replace('\\', '/', $class);
+	
+	require_once dirname(__DIR__) . '/' . strtolower($class) . '.php';
+	
+});
+
+
+require 'const.php';
+require 'version.php';
 
 
 System\Session::start();
-
 
 if (!System\Session::user()) {
 	exit('Access denied!');
 }
 
-$output = array();
-$output['html'] = AM_BASE_DIR;
-echo json_encode($output);
+
+echo json_encode(System\Update::run());
