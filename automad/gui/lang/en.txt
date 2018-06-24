@@ -660,6 +660,10 @@ sys_update_to: Update to
 
 -
 
+sys_update_windows_warning: Make sure that all Automad files are closed in any program before running the update to avoid file corruptions! 
+
+-
+
 sys_user: Users
 
 -

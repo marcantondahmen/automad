@@ -99,7 +99,7 @@ if (isset($_POST['item'])) {
 				
 		$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . 
 							Text::get('sys_user_registered') . 
-							'&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>';
+							'&nbsp;&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>';
 
 	}
 	

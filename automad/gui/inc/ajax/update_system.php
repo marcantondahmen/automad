@@ -81,6 +81,11 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 							<br />
 							<?php Text::e('sys_update_available'); ?>
 						</p>
+						<?php if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') { ?>
+						<div class="uk-alert uk-alert-danger uk-margin-small-top uk-margin-small-bottom">
+							<?php Text::e('sys_update_windows_warning'); ?>
+						</div>
+						<?php } ?>
 						<input type="hidden" name="update" value="run" />
 						<button 
 						type="submit" 
