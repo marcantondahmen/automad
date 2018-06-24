@@ -254,7 +254,7 @@ error_template_missing: Missing
 
 -
 
-error_update_connection: Can't connect to the update server! This could typically be caused by a SSL certificate error or a missing CURL library.
+error_update_connection: Can't connect to the update server! This could typically be caused by a SSL certificate error or a missing cURL library.
 
 -
 

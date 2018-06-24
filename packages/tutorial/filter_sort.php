@@ -134,9 +134,9 @@ across multiple templates.
 						<div class="field is-size-6">
 							<# 
 							Multiple pipe functions can be chained. 
-							Here, all tags get stripped before shortening the content to 120 characters.
+							Here, all tags get stripped before shortening the content to 100 characters.
 							#>
-							@{ textTeaser | stripTags | 100 }
+							@{ textTeaser | 100 }
 						</div>
 						<a href="@{ url }" class="button is-light is-small">More</a>
 					</div>

@@ -97,7 +97,9 @@ if (isset($_POST['item'])) {
 	
 	if ($item == 'users') {
 				
-		$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . count(Accounts::get()) . ' ' . Text::get('sys_user_registered');
+		$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . 
+							Text::get('sys_user_registered') . 
+							'&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>';
 
 	}
 	

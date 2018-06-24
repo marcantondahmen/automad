@@ -163,7 +163,7 @@ class Str {
 	
 	/**
 	 *	Cleans up a string to be used as URL, directory or file name. 
-	 *	The returned string constists of the following characters: a-z, A-Z, - and optional dots (.)
+	 *	The returned string constists of the following characters: "a-z", "0-9", "-" and optional dots ".".
 	 *	That means, this method is safe to be used with filenames as well, since it keeps by default the dots as suffix separators.
 	 *
 	 *	Note: To produce fully safe prefixes and directory names, 

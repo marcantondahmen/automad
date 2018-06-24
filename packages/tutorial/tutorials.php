@@ -16,7 +16,7 @@
 					<div class="field is-size-4 has-text-weight-bold">
 						@{ title }
 					</div>
-					<div class="field is-size-6">@{ textTeaser | stripTags | 150 }</div>
+					<div class="field is-size-6">@{ textTeaser | 150 }</div>
 					<a href="@{ url }" class="button is-light">More</a>
 				</div>
 			<@ end @>

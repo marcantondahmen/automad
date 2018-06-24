@@ -51,7 +51,7 @@ navbar and content snippets are include first.
 						</div>
 						<div class="card-content">
 							<div class="content">
-								<h3>@{ :basename }</h3>
+								<h3>@{ :basename | stripEnd ('.png') | ucwords }</h3>
 								<#
 								A caption can be saved along with an image. To get the caption for 
 								the current image, the ':caption' variable can used.

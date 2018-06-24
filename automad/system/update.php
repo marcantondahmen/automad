@@ -106,16 +106,6 @@ class Update {
 	}
 	
 	
-	private static function externalFiles() {
-		
-		
-		
-		return $map;
-		
-		
-	}
-	
-	
 	/**
 	 *	Extract version number form content of version.php.
 	 *
