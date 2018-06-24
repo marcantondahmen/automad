@@ -591,11 +591,10 @@ class Content {
 	 *  saved back into the .txt file. 
 	 *  In case the title variable gets modified, the page directory gets renamed accordingly.
 	 *
-	 * 	@param object $Themelist
 	 *  @return array $output (AJAX response)
 	 */
 	
-	public function inPageEdit($Themelist) {
+	public function inPageEdit() {
 		
 		$output = array();
 		
@@ -682,15 +681,7 @@ class Content {
 							$value = $Page->data[$_POST['key']];
 						}
 						
-						if ($tooltip = $Themelist->getThemeByKey($Page->get(AM_KEY_THEME))->getTooltip($_POST['key'])) {
-							$tooltip = '<div class="uk-alert uk-margin-small-bottom" data-uk-alert>' .
-							 		   '<a href="" class="uk-alert-close uk-close"></a>' .
-									   $tooltip . 
-									   '</div>';
-						}
-						
 						$output['html'] = '<div id="am-inpage-edit-fields">' .
-										  $tooltip .
 										  '<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
 										  $this->Html->formField($_POST['key'], $value) . 
 										  '</div>';
