@@ -129,9 +129,6 @@
 			 *
 			 *  5.	data.debug
 			 *      Outputs debug info to the console.
-			 *
-			 * 	6.	data.init
-			 * 		Submit the form again without any data. Just to re-initialize. 
 			 */
 			
 			var	f = Automad.form,
@@ -160,11 +157,6 @@
 				// Debug info.
 				if (data.debug) {
 					Automad.debug.log(handler, data.debug);
-				}
-				
-				// Submit again to refresh the form to a clean state.
-				if (data.init) {
-					$form.html('').submit();
 				}
 				
 				// In case the returned JSON contains a redirect URL, simply redirect the page.

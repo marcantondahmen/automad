@@ -44,10 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Update class handles the process of updating Automad using the dashboard or the CLI. 
- *	Note that initializing the update will first clone a light version of Automad to the cache
- *	directory to run updates from an external location. That extra step is required to make 
- *	updates work on windows.
+ *	The Update class handles the process of updating Automad using the dashboard. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2017-2018 by Marc Anton Dahmen - <http://marcdahmen.de>
@@ -55,15 +52,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 class Update {
-	
-	
-	/**
-	 *	The lock file indicates, that there is an update in progress.
-	 *	This is only required on Windows servers to deny access to core files 
-	 *	during updates to avoid file locking issues. 
-	 */
-	
-	private static $updateLock = AM_BASE_DIR . AM_DIR_CACHE . '/lock';
 	
 	
 	/**
@@ -81,6 +69,8 @@ class Update {
 	 */
 	
 	private static function backupCurrent($items) {
+		
+		self::preloadClasses();
 		
 		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 		
@@ -127,6 +117,31 @@ class Update {
 		if (preg_match('/\(\'AM_VERSION\', \'([^\']+)\'\);/', $str, $matches)) {	
 			return $matches[1];
 		}
+		
+	}
+	
+	
+	/**
+	 *	Get items to be updated from config.
+	 *
+	 *	@return array The array of items to be updated or false on error
+	 */
+	
+	private static function items() {
+		
+		$items = Core\Parse::csv(AM_UPDATE_ITEMS);
+		
+		if (is_array($items)) {
+			
+			$items = array_filter($items);
+			
+			if (!empty($items)) {
+				return $items;
+			}
+			
+		}
+		
+		return false;
 		
 	}
 	
@@ -208,73 +223,6 @@ class Update {
 	
 	
 	/**
-	 * 	Initialize the update process by first cloning a light version of Automad 
-	 * 	to the cache and the redirect to that version to start the actual update.
-	 */
-	
-	public static function init() {
-		
-		$cloneDir = AM_DIR_CACHE . '/update/clone';
-			
-		$globs = array(
-			'/core/*.php',
-			'/system/*.php',
-			'/init_update.php',
-			'/const.php',
-			'/version.php'
-		);
-		
-		// Create file map for all required files for cloning.
-		$map = array();
-		
-		foreach ($globs as $glob) {	
-			foreach (glob(AM_BASE_DIR . '/automad' . $glob) as $file) {
-				$map[$file] = 	AM_BASE_DIR . $cloneDir . '/' . 
-								Core\Str::stripStart($file, AM_BASE_DIR . '/automad');
-			}
-		}
-		
-		// Clone required Automad files.
-		foreach ($map as $src => $dest) {
-			Core\FileSystem::makeDir(dirname($dest));
-			copy($src, $dest);
-		}
-		
-		// Lock site during update, to avoid file locks on Windows servers.
-		touch(self::$updateLock);
-		
-		// Redirect to the cloned version.
-		header('Location: ' . AM_BASE_URL . $cloneDir . '/init_update.php');
-		
-	}
-	
-	
-	/**
-	 *	Get items to be updated from config.
-	 *
-	 *	@return array The array of items to be updated or false on error
-	 */
-	
-	private static function items() {
-		
-		$items = Core\Parse::csv(AM_UPDATE_ITEMS);
-		
-		if (is_array($items)) {
-			
-			$items = array_filter($items);
-			
-			if (!empty($items)) {
-				return $items;
-			}
-			
-		}
-		
-		return false;
-		
-	}
-	
-	
-	/**
 	 *	Log events to the update log file.
 	 *
 	 *	@param string $data
@@ -317,6 +265,17 @@ class Update {
 	
 	
 	/**
+	 *	Preload required classes before removing old installation.
+	 */
+	
+	private static function preloadClasses() {
+		
+		require_once(AM_BASE_DIR . '/automad/gui/prefix.php');
+		
+	}
+	
+	
+	/**
 	 *	Run the actual update.
 	 *
 	 *	@return array The $output array (AJAX response)
@@ -326,82 +285,80 @@ class Update {
 		
 		$items = self::items();
 		
-		if ($items) {
+		if (!$items) {
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_items') . '</div>';
+			$output['cli'] = 'Invalid list of items to be updated!';
+			return $output;
+		}
 		
-			if (self::permissionsGranted($items)) {
+		if (!self::permissionsGranted($items)) {
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_permission') . '</div>';
+			$output['cli'] = 'Permission denied!';
+			return $output;
+		}
+		
+		self::$timestamp = date('Ymd-His');
+		self::log('Starting update ' . date('c'));
+		self::log('Version to be updated: ' . AM_VERSION);
+		self::log('Updating items: ' . implode(', ', $items));
+		
+		if ($archive = self::getArchive()) {
+			
+			if (self::backupCurrent($items)) {
 				
-				self::$timestamp = date('Ymd-His');
-				self::log('Starting update ' . date('c'));
-				self::log('Version to be updated: ' . AM_VERSION);
-				self::log('Updating items: ' . implode(', ', $items));
-				
-				if ($archive = self::getArchive()) {
+				if (self::unpack($archive, $items)) {
 					
-					if (self::backupCurrent($items)) {
-						
-						if (self::unpack($archive, $items)) {
-							
-							$success = true;
-							
-							// Clear cache.
-							if (file_exists(AM_FILE_SITE_MTIME)) {
-								unlink(AM_FILE_SITE_MTIME);
-							}
-							
-						} else {
-							
-							$success = false;
-							
-						}
+					$success = true;
 					
-					} else {
-						
-						$success = false;
-							
-					}
-					
-					if ($success) {
-						
-						$versionFile = AM_BASE_DIR . '/automad/version.php';
-						
-						if (is_readable($versionFile)) {	
-							$version = self::extractVersion(file_get_contents($versionFile));
-							$log = self::log('Successfully updated Automad to version ' . $version);
-						}
-						
-						$output['success'] = 'Successfully updated to version ' . $version;
-						
-					} else {
-						
-						$output['error'] = 'Update failed!';
-						
+					// Clear cache.
+					if (file_exists(AM_FILE_SITE_MTIME)) {
+						unlink(AM_FILE_SITE_MTIME);
 					}
 					
 				} else {
 					
-					$output['error'] = 'Downloading update failed!';
+					$success = false;
 					
 				}
-
+			
 			} else {
 				
-				$output['error'] = 'Permission denied!';
+				$success = false;
+					
+			}
+			
+			if ($success) {
+				
+				$output['html'] = '<div class="uk-alert uk-alert-success">' . GUI\Text::get('sys_update_not_required') . '</div>';
+				
+				$versionFile = AM_BASE_DIR . '/automad/version.php';
+				
+				if (is_readable($versionFile)) {
+					
+					$version = self::extractVersion(file_get_contents($versionFile));
+					$log = self::log('Successfully updated Automad to version ' . $version);
+					$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
+					$output['html'] .= '<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
+							   '<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' . 
+							   GUI\Text::get('btn_open_log') .
+							   '</a>';
+					
+				}
+				
+				$output['success'] = GUI\Text::get('success_update');
+				$output['cli'] = 'Successfully updated to version ' . $version;
+				
+			} else {
+				
+				$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_failed') . '</div>';
 				
 			}
 			
 		} else {
 			
-			$output['error'] = 'Invalid list of items to be updated!';
-		
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_download') . '</div>';
+			
 		}
-		
-		// Remove lock.
-		if (file_exists(self::$updateLock)) {
-			unlink(self::$updateLock);
-		}
-		
-		// Init a clean form on success to show the updated status.
-		$output['init'] = true;
 		
 		return $output;
 		

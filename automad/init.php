@@ -47,7 +47,6 @@ if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
 
 use Automad\Core as Core;
 use Automad\GUI as GUI;
-use Automad\System as System;
 
 
 // Set default timezone if not set.
@@ -62,10 +61,6 @@ require AM_BASE_DIR . '/automad/autoload.php';
 require AM_BASE_DIR . '/automad/const.php';
 
 
-// Version number 
-include AM_BASE_DIR . '/automad/version.php';
-
-
 // Enable full error reporting, when debugging is enabled.
 Core\Debug::errorReporting();
 
@@ -77,7 +72,8 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 
 
 // Start Session.
-System\Session::start();
+session_name('Automad-' . md5(AM_BASE_DIR));
+session_start();
 
 
 // Split GUI form regular pages.

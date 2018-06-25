@@ -106,6 +106,10 @@ btn_ok: Ok
 
 -
 
+btn_open_log: Open Log
+
+-
+
 btn_remove_selected: Remove Selected
 
 -
@@ -258,8 +262,24 @@ error_update_connection: Can't connect to the update server! This could typicall
 
 -
 
+error_update_download: Download of update failed! 
+
+-
+
+error_update_items: Invalid list of items to be updated! 
+
+-
+
+error_update_failed: Update failed! Please restore your installation from a backup. 
+
+-
+
 error_update_not_supported: Updates are not supported by your server! 
 The updater requires **cURL** and **ZIP** libraries to be installed.
+
+-
+
+error_update_permission: Can't run update! Permission denied! 
 
 -
 
@@ -518,6 +538,10 @@ success_log_out: Logged Out Successfully
 -
 
 success_remove: Successfully removed 
+
+-
+
+success_update: Successfully updated Automad!
 
 -
 
