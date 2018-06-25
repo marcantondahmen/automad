@@ -329,21 +329,25 @@ class Update {
 			
 			if ($success) {
 				
-				$output['html'] = '<div class="uk-alert uk-alert-success">' . GUI\Text::get('sys_update_not_required') . '</div>';
-				
+				$version = '';
 				$versionFile = AM_BASE_DIR . '/automad/version.php';
 				
 				if (is_readable($versionFile)) {
-					
 					$version = self::extractVersion(file_get_contents($versionFile));
-					$log = self::log('Successfully updated Automad to version ' . $version);
-					$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
-					$output['html'] .= '<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
-							   '<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' . 
-							   GUI\Text::get('btn_open_log') .
-							   '</a>';
-					
 				}
+				
+				$log = self::log('Successfully updated Automad to version ' . $version);
+				$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
+				
+				$output['html'] = 	'<div class="uk-alert uk-alert-success">' . 
+										GUI\Text::get('sys_update_not_required') . ' ' .
+										GUI\Text::get('sys_update_current_version') . ' ' .
+										$version . '.' .
+									'</div>' .
+				 					'<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
+						   				'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' . 
+						   				GUI\Text::get('btn_open_log') .
+						   			'</a>';
 				
 				$output['success'] = GUI\Text::get('success_update');
 				$output['cli'] = 'Successfully updated to version ' . $version;

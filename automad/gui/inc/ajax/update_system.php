@@ -61,7 +61,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 		
 		if (!empty($_POST['update'])) {
 		
-			System\Update::init();
+			$output = System\Update::run();
 		
 		} else {
 		
