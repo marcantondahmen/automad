@@ -163,7 +163,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								<button class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 								</button>
-								<button class="uk-button uk-button-success" type="button" data-am-submit="page_data">
+								<button class="uk-modal-close uk-button uk-button-success" type="button" data-am-submit="page_data">
 									<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_apply_reload'); ?>
 								</button>
 							</div>

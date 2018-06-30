@@ -44,6 +44,8 @@
 		
 		unsavedClassPrefix: 'am-unsaved-',
 		
+		unsavedClassInput: 'am-form-changed',
+		
 		dataAttr: {
 			
 			/*
@@ -301,12 +303,15 @@
 			
 			$doc.on('ajaxComplete', function(e, xhr, settings) {
 				
-				// On an 'ajaxComplete' event it is important to actually only disabled the related submit button and
+				// On an 'ajaxComplete' event it is important to actually only disable the related submit button and
 				// not just all on the current page. Otherwise a file upload would disable the save button of the page
 				// data section as well. Therefore the actual ajax request has to be analysed.
 				var	handler = settings.url.replace('?ajax=', '');
 				
 				$('button[' + da.submit + '="' + handler + '"]').prop('disabled', true);
+				
+				// Removed class for unsaved form fields from children.
+				$('[' + da.handler + '="' + handler + '"]').find('.' + f.unsavedClassInput).removeClass(f.unsavedClassInput);
 				
 			});
 			
@@ -325,9 +330,9 @@
 					$('button[' + da.submit + '="' + handler + '"]:disabled').prop('disabled', false);
 					
 					// Change label color to flag input as changed.
-					$(this).prevAll('.uk-form-label').addClass('am-form-changed');
-					$(this).closest('.uk-form-icon, .uk-htmleditor, [data-am-toggle], [data-am-datetime]').prev('.uk-form-label').addClass('am-form-changed');
-					$(this).closest('.uk-grid').prev('.uk-form-label').addClass('am-form-changed');
+					$(this).prevAll('.uk-form-label').addClass(f.unsavedClassInput);
+					$(this).closest('.uk-form-icon, .uk-htmleditor, [data-am-toggle], [data-am-datetime]').prev('.uk-form-label').addClass(f.unsavedClassInput);
+					$(this).closest('.uk-grid').prev('.uk-form-label').addClass(f.unsavedClassInput);
 					
 				}
 			);

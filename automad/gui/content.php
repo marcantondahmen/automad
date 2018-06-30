@@ -816,8 +816,8 @@ class Content {
 		
 					// Set hidden parameter within the $data array. 
 					// Since it is a checkbox, it must get parsed separately.
-					if (isset($_POST['hidden'])) {
-						$data['hidden'] = 1;
+					if (isset($_POST[AM_KEY_HIDDEN])) {
+						$data[AM_KEY_HIDDEN] = 1;
 					}
 	
 					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
@@ -825,18 +825,19 @@ class Content {
 
 					// Get correct theme name.
 					// If the theme is not set and there is no slash passed within 'theme_template', the resulting dirname is just a dot.
-					// In that case, $data['theme'] gets removed (no theme - use site theme). 
+					// In that case, $data[AM_KEY_THEME] gets removed (no theme - use site theme). 
 					if (dirname($_POST['theme_template']) != '.') {
-						$data['theme'] = dirname($_POST['theme_template']);
+						$data[AM_KEY_THEME] = dirname($_POST['theme_template']);
 					} else {
-						unset($data['theme']);
+						unset($data[AM_KEY_THEME]);
 					}
 
 					// Delete old (current) file, in case, the template has changed.
 					unlink($this->getPageFilePath($Page));
 
 					// Build the path of the data file by appending the basename of 'theme_template' to $Page->path.
-					$newPageFile = FileSystem::fullPagePath($Page->path) . str_replace('.php', '', basename($_POST['theme_template'])) . '.' . AM_FILE_EXT_DATA;
+					$newTemplate = Core\Str::stripEnd(basename($_POST['theme_template']), '.php');
+					$newPageFile = FileSystem::fullPagePath($Page->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
 					
 					// Save new file within current directory, even when the prefix/title changed. 
 					// Renaming/moving is done in a later step, to keep files and subpages bundled to the current text file.
@@ -862,7 +863,26 @@ class Content {
 			
 					}
 					
-					$output['redirect'] = $this->contextUrlByPath($newPagePath);
+					// Check whether the dashboard has to be redirected.
+					// Only in case the page path (title and prefix) or the theme/template has changed, 
+					// the page has to be redirected to update the site tree and variables.
+					$newTheme = '';
+					
+					if (isset($data[AM_KEY_THEME])) {
+						$newTheme = $data[AM_KEY_THEME];
+					} 
+					
+					$currentTheme = '';
+					
+					if (isset($Page->data[AM_KEY_THEME])) {
+						$currentTheme = $Page->data[AM_KEY_THEME];
+					}
+					
+					if (($Page->path != $newPagePath) || ($currentTheme != $newTheme) || ($Page->template != $newTemplate)) {
+						$output['redirect'] = $this->contextUrlByPath($newPagePath);
+					} else {
+						$output['success'] = Text::get('success_saved');
+					}
 					
 					$this->clearCache();
 					
@@ -904,7 +924,7 @@ class Content {
 		if (is_writable(AM_FILE_SHARED_DATA)) {
 			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 			$this->clearCache();
-			$output['redirect'] = '?context=edit_shared';
+			$output['success'] = Text::get('success_saved');
 		} else {
 			$output['error'] = Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>';
 		}

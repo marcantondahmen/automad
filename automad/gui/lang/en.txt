@@ -541,6 +541,10 @@ success_remove: Successfully removed
 
 -
 
+success_saved: Saved
+
+-
+
 success_update: Successfully updated Automad!
 
 -
