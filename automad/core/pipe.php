@@ -86,7 +86,6 @@ class Pipe {
 			
 			// Create $parameters array.
 			$parameters = str_getcsv($csv, ',', '"');
-			$parameters = array_map('trim', $parameters);
 			
 			// Cast boolean parameters correctly.
 			// To use "false" or "true" as strings, they have to be escaped like "\true" or "\false".
