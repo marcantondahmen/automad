@@ -6,6 +6,14 @@ theme: standard/alpha
 
 -
 
+appleTouchIcon: /shared/apple-touch-icon.png
+
+-
+
+favicon: /shared/favicon.ico
+
+-
+
 urlSearchResults: /
 
 -
