@@ -676,6 +676,10 @@ sys_update_current_version: The currently installed version is
 
 -
 
+sys_update_items: The following items are affected by the update:
+
+-
+
 sys_update_not_required: Automad is up to date.
 
 -

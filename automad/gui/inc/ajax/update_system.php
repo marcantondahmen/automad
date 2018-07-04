@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 use Automad\System as System;
 
 
@@ -76,20 +77,29 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 					
 					?>
 					<div class="am-update-progress">
+						<input type="hidden" name="update" value="run" />
 						<p>
 							<?php echo Text::get('sys_update_current_version') . ' ' . AM_VERSION; ?>.
 							<br />
 							<?php Text::e('sys_update_available'); ?>
+							<br />
+							<?php Text::e('sys_update_items');  ?>
+							
 						</p>
+						<div class="uk-margin-small-bottom">
+							<?php foreach (Core\Parse::csv(AM_UPDATE_ITEMS) as $item) {	
+									echo 	'<i class="uk-icon-check"></i>&nbsp;&nbsp;' . 
+											$item . '<br />';
+							} ?>
+						</div>
 						<?php if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') { ?>
-						<div class="uk-alert uk-alert-danger uk-margin-small-top uk-margin-small-bottom">
+						<div class="uk-alert uk-alert-danger uk-margin-top uk-margin-bottom-remove">
 							<?php Text::e('sys_update_windows_warning'); ?>
 						</div>
 						<?php } ?>
-						<input type="hidden" name="update" value="run" />
 						<button 
 						type="submit" 
-						class="uk-button uk-button-large uk-button-success" 
+						class="uk-button uk-button-large uk-button-success uk-margin-top" 
 						data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
 						>
 							<i class="uk-icon-refresh"></i>&nbsp;
