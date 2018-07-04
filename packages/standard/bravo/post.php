@@ -26,9 +26,7 @@
 			</div>
 		</div>
 	<@ end @>
-	<div class="content uk-block uk-column-large-1-2">
-		@{ text | markdown }
-	</div>
+	<@ ../snippets/text_columns.php @>
 	<# Related pages. #>
 	<@ newPagelist { type: 'related', sort: 'date desc' } @>
 	<@ if @{ :pagelistCount } @>

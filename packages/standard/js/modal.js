@@ -15,6 +15,10 @@
 				}
 			})
 			
+			// Prepend a hidden <a> tag to catch the focus on show.uk.modal event
+			// and avoid focusing the search field.
+			$('.uk-modal-dialog').prepend($('<a href="#"></a>').hide());
+			
 		},
 		
 		toggle: function(e) {

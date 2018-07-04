@@ -2,19 +2,22 @@
 
 		<@ foreach in pagelist @>
 			<div class="uk-block">
-				<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2">
-					<li class="masonry-item">
+				<ul class="grid-margin uk-grid uk-grid-width-small-1-2 <@ 
+				with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } 
+				@>masonry<@ 
+				end @>">
+					<li>
 						<a href="@{ url }">
 							<h3>@{ title }</h3>
 						</a>
 						<@ ../../snippets/date.php @>
 						<@ ../../snippets/tags.php @>
 					</li>
-					<li class="masonry-item">
-						<div class="uk-panel uk-panel-box">
-							<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
-								width: 690
-							} @>
+					<li>
+						<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
+							width: 690
+						} @>
+							<div class="uk-panel uk-panel-box">
 								<a 
 								href="@{ url }" 
 								class="uk-panel-teaser uk-display-block"
@@ -26,10 +29,10 @@
 									height="@{ :heightResized }" 
 									>
 								</a>
-							<@ end @>
-						</div>
+							</div>
+						<@ end @>
 					</li>
-					<li class="masonry-item">
+					<li>
 						<@ if @{ textTeaser } @>
 							<div class="content uk-margin-small-bottom">
 								@{ textTeaser | markdown }

@@ -22,7 +22,7 @@
 						<@ if not @{ ?sort } or @{ ?sort } = 'date desc' @>
 							<i class="uk-icon-circle"></i>
 						<@ else @>
-							<i class="uk-icon-circle-thin"></i>
+							<i class="uk-icon-circle-o"></i>
 						<@ end @>
 						&nbsp;@{ labelSortDateDesc | def('Recent First') }
 					</a>	
@@ -32,7 +32,7 @@
 						<@ if @{ ?sort } = 'date asc' @>
 							<i class="uk-icon-circle"></i>
 						<@ else @>
-							<i class="uk-icon-circle-thin"></i>
+							<i class="uk-icon-circle-o"></i>
 						<@ end @>
 						&nbsp;@{ labelSortDateAsc | def('Chronological') }
 					</a>	
@@ -42,7 +42,7 @@
 						<@ if @{ ?sort } = 'title asc' @>
 							<i class="uk-icon-circle"></i>
 						<@ else @>
-							<i class="uk-icon-circle-thin"></i>
+							<i class="uk-icon-circle-o"></i>
 						<@ end @>
 						&nbsp;@{ labelSortTitleAsc | def('Title A-Z') }
 					</a>	
@@ -52,7 +52,7 @@
 						<@ if @{ ?sort } = 'title desc' @>
 							<i class="uk-icon-circle"></i>
 						<@ else @>
-							<i class="uk-icon-circle-thin"></i>
+							<i class="uk-icon-circle-o"></i>
 						<@ end @>
 						&nbsp;@{ labelSortTitleDesc | def('Title Z-A') }
 					</a>

@@ -2,11 +2,11 @@
 <@ snippets/header.php @>
 
 	<ul class="masonry uk-grid uk-grid-width-small-1-2">
-		<li class="masonry-item uk-block">
+		<li class="uk-block">
 			<h1>@{ title }</h1>
 		</li>
 		<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 780 } @>
-			<li class="masonry-item uk-block">
+			<li class="uk-block">
 				<div class="uk-panel uk-panel-box">
 					<div class="uk-panel-teaser">
 						<img 
@@ -19,7 +19,7 @@
 				</div>
 			</li>
 		<@ end @>
-		<li class="masonry-item content uk-block">
+		<li class="content uk-block">
 			<div class="uk-margin-small-bottom">
 				@{ textTeaser | markdown }
 			</div>

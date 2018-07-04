@@ -21,6 +21,7 @@
 			name="from" 
 			value="" 
 			placeholder="@{ placeholderEmail | def ('Your Email Address')}" 
+			required
 			/>
 		</div>
 		<div class="uk-form-row">
@@ -30,6 +31,7 @@
 			name="subject" 
 			value="" 
 			placeholder="@{ placeholderSubject | def ('Subject') }" 
+			required
 			/>
 		</div>
 		<div class="uk-form-row">
@@ -38,6 +40,7 @@
 			name="message" 
 			rows="5" 
 			placeholder="@{ placeholderMessage | def ('Message') }"
+			required
 			></textarea>
 		</div>
 		<button class="uk-button uk-margin-large-top" type="submit">

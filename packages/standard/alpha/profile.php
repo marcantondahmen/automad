@@ -3,11 +3,11 @@
 
 	<div class="uk-block">
 		<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2">
-			<li class="masonry-item">
+			<li>
 				<h1>@{ title }</h1>
 			</li>
 			<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 700 } @>
-				<li class="masonry-item">
+				<li>
 					<img 
 					src="@{ :fileResized }" 
 					alt="@{ :basename }" 
@@ -16,7 +16,7 @@
 					/>
 				</li>
 			<@ end @>
-			<li class="masonry-item content">
+			<li class="content">
 				<div class="uk-margin-small-bottom">
 					@{ textTeaser | markdown }
 				</div>

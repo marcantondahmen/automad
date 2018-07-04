@@ -2,7 +2,7 @@
 
 	<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2">
 		<@ foreach in pagelist @>
-			<li class="masonry-item">
+			<li>
 				<a 
 				href="@{ url }" 
 				class="uk-panel uk-panel-box uk-panel-box-hover

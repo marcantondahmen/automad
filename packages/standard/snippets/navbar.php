@@ -80,7 +80,7 @@
 												<@ foreach in pagelist @>
 													<@ if not @{ checkboxHideInMenu } @>
 														<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-															<a href="@{ url }">@{ title }</a>
+															<a href="@{ url }">@{ title | stripTags }</a>
 															<# Call tree snippet recursively #>
 															<@ tree @>
 														</li>

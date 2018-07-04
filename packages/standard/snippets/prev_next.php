@@ -7,7 +7,7 @@
 				<@ with prev @>
 					<li class="uk-pagination-previous uk-hidden-small">
 						<a href="@{ url }">
-							<i class="uk-icon-chevron-left"></i>&nbsp;
+							<i class="uk-icon-angle-left uk-icon-small"></i>&nbsp;
 							@{ title }
 						</a>
 					</li>
@@ -16,7 +16,7 @@
 					<li class="uk-pagination-next">
 						<a href="@{ url }">
 							@{ title }&nbsp;
-							<i class="uk-icon-chevron-right"></i>
+							<i class="uk-icon-angle-right uk-icon-small"></i>
 						</a>
 					</li>
 				<@ end @>

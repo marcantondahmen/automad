@@ -3,6 +3,7 @@
 	<div class="uk-button-dropdown" data-uk-dropdown>
 		<button class="uk-button">
 			<@ if @{ ?filter } @>
+				<i class="uk-icon-filter"></i>&nbsp;
 				@{ ?filter }
 			<@ else @>
 				@{ labelShowAll | def ('Show All') }
@@ -16,7 +17,7 @@
 						<@ if not @{ ?filter } @>
 							<i class="uk-icon-circle"></i>
 						<@ else @>
-							<i class="uk-icon-circle-thin"></i>
+							<i class="uk-icon-circle-o"></i>
 						<@ end @>
 						&nbsp;@{ labelShowAll | def ('Show All') }
 					</a>
@@ -27,7 +28,7 @@
 							<@ if @{ ?filter } = @{ :filter } @>
 								<i class="uk-icon-circle"></i>
 							<@ else @>
-								<i class="uk-icon-circle-thin"></i>
+								<i class="uk-icon-circle-o"></i>
 							<@ end @>
 							&nbsp;@{ :filter }
 						</a>

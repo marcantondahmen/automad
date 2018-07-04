@@ -24,9 +24,7 @@
 			<@ ../snippets/slideshow.php @>
 		</div>	
 	<@ end @>
-	<div class="content uk-block">
-		@{ text | markdown }
-	</div>
+	<@ ../snippets/text_columns.php @>
 	<# Related pages. #>
 	<@ newPagelist { type: 'related', sort: 'date desc' } @>
 	<@ if @{ :pagelistCount } @>
