@@ -12,7 +12,7 @@
 
 
 @pagination-margin-left:		0;
-@pagination-font-size: 			14px;
+@pagination-font-size: 			1rem;
 @pagination-padding-horizontal: 10px;
 
 @pagination-background:			#FFFFFF;
@@ -33,14 +33,14 @@
 	
 	.uk-pagination-previous a,
 	.uk-pagination-next a {
-		font-size: 16px;
-		line-height: 21px;
+		font-size: @base-h4-font-size;
+		line-height: @base-h4-line-height;
 	}
 	
 }
 
 .hook-pagination-item() {
-	font-weight: 700;
+	font-weight: @base-heading-font-weight;
 	color: @pagination-color;
 }
 

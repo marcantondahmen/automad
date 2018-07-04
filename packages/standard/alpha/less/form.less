@@ -12,13 +12,13 @@
 
 
 @form-height:				auto;
-@form-padding:				5px 0;
-@form-border:				#EEEEEE;
+@form-padding:				0 0;
+@form-border:				#F0F0F0;
 @form-border-width:			0;
 @form-background:			transparent;
 @form-color:				@base-body-color;
 
-@form-focus-border:			@base-body-color;
+@form-focus-border:			@border-color;
 @form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
@@ -27,7 +27,8 @@
 @form-gutter:				@utility-margin-small;
 
 .hook-form() {
-	font-size: @navbar-nav-font-size;
+	font-size: 1rem;
+	line-height: @base-body-line-height;
 	font-weight: 400;
-	border-bottom-width: 2px;
+	border-bottom-width: @border-width;
 }

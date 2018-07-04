@@ -13,9 +13,9 @@
 @navbar-background:            	fade(@base-body-background, 97%);
 @navbar-color:                 	@base-body-color;
 
-@navbar-nav-height:            	70px;
+@navbar-nav-height:            	80px;
 @navbar-nav-height-large:      	90px;
-@navbar-nav-font-size:         	14px;
+@navbar-nav-font-size:         	1rem;
 @navbar-nav-font-weight:       	500;
 @navbar-nav-font-family:       	@base-body-font-family;
 @navbar-nav-padding-horizontal:	15px;
@@ -162,7 +162,7 @@
 		right: @navbar-nav-padding-horizontal;
 		bottom: ~"calc(50% - 14px)";
 		padding: inherit;
-		border-bottom: 2px solid transparent;
+		border-bottom: @border-width solid transparent;
 		.transition(border-color 0.2s;);
 	}
 	
@@ -170,19 +170,19 @@
 
 .hook-navbar-nav-hover() {
 	&:after {
-		border-bottom-color: inherit;
+		border-bottom-color: @border-color;
 	}
 }
 
 .hook-navbar-nav-onclick() {
 	&:after {
-		border-bottom-color: inherit;
+		border-bottom-color: @border-color;
 	}
 }
 
 .hook-navbar-nav-active() {
 	&:after {
-		border-bottom-color: inherit;
+		border-bottom-color: @border-color;
 	}
 }
 

@@ -11,11 +11,11 @@
  */
 
 
-@nav-padding-vertical:         	4px;
+@nav-padding-vertical:         	0;
 @nav-padding-horizontal:       	0;
 
 @nav-nested-padding-left:      	15px;
-@nav-nested-padding-vertical:  	4px;
+@nav-nested-padding-vertical:  	0;
 @nav-nested-padding-horizontal:	0;
 
 @nav-side-color:               	@base-body-color;
@@ -40,7 +40,14 @@
 	.uk-nav.uk-nav-dropdown {
 		
 		& > li > a {
-			padding: 5px 9px;
+			
+			padding: 6px 15px;
+			.transition(background-color 0.2s;);
+			
+			& > .uk-icon-circle-o {
+				color: #DCDCDC;
+			}
+			
 		}
 		
 	}
@@ -51,15 +58,15 @@
 	display: inline-block;
 	margin: 2px 0;
 	font-size: @navbar-nav-font-size;
-	font-weight: 500;
-	line-height: @base-body-line-height - 6;
-	border-bottom: 2px solid transparent;	
+	font-weight: @navbar-nav-font-weight;
+	line-height: @base-body-line-height;
+	border-bottom: @border-width solid transparent;	
 }
 
 .hook-nav-side-hover() {
-	border-bottom-color: inherit; 
+	border-bottom-color: @border-color; 
 }
 
 .hook-nav-side-active() {
-	border-bottom-color: inherit; 
+	border-bottom-color: @border-color; 
 }

@@ -14,12 +14,16 @@
 .footer {
 	
 	&,
-	& a,
-	& a:hover,
-	& a:active,
-	& a:focus {
-		color: @text-muted-color;
+	& a {
+		
+		color: #D0D0D0;
 		text-decoration: none;
+		
+		&:hover,
+		&:active {
+			color: @base-body-color;
+		}
+		
 	}
 	
 }
