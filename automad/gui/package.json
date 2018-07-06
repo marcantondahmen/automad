@@ -11,7 +11,6 @@
     "draggabilly": "^2.1.1",
     "fs": "0.0.2",
     "gulp": "^3.9.1",
-    "gulp-bump": "^2.1.0",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.0",
     "gulp-google-webfonts": "0.0.14",

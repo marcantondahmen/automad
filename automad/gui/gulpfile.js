@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-	bump = require('gulp-bump'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	googleFonts = require('gulp-google-webfonts'),
@@ -43,28 +42,8 @@ var onError = function(err) {
 	};
 
 
-// Set version in package.json to the current date (YY.MM.DD).
-// Note that this version format should be different from the Automad version (AM_VERSION), since the Automad version gets bumped on commits
-// and therefore it is difficult (and not needed) to keep both versions in sync automatically.
-gulp.task('bump', function() {
-
-	var	date = new Date(),
-		y = date.getFullYear().toString().substr(-2),
-		m = ('0' + (date.getMonth() + 1).toString()).substr(-2),
-		d = ('0' + date.getDate().toString()).substr(-2);
-	
-	// Set pkg.version to be used in the header template without reloading package.json.
-	pkg.version = y + '.' + m + '.' + d;
-	
-	return	gulp.src('./package.json')
-			.pipe(bump( { version: pkg.version } ))
-			.pipe(gulp.dest('./'));
-	
-});
-
-
 // Concat, minify and prefix the GUI js.
-gulp.task('automad-js', ['bump'], function() {
+gulp.task('automad-js', function() {
 	
 	var	uglifyOptions = { 
 			compress: { 
@@ -89,7 +68,7 @@ gulp.task('automad-js', ['bump'], function() {
 
 
 // Concat minify and prefix all required js libraries.
-gulp.task('libs-js', ['bump'], function() {
+gulp.task('libs-js', function() {
 	
 	var	uglifyOptions = { 
 			output: {
@@ -182,7 +161,7 @@ gulp.task('libs-js', ['bump'], function() {
 
 
 // Compile, minify and prefix automad.less.
-gulp.task('automad-less', ['bump'], function() {
+gulp.task('automad-less', function() {
 
 	return 	gulp.src('less/automad.less')
 			.pipe(less())
@@ -199,7 +178,7 @@ gulp.task('automad-less', ['bump'], function() {
 
 
 // Concat all css files used by npm dependencies.
-gulp.task('libs-css', ['bump'], function() {
+gulp.task('libs-css', function() {
 	
 	return 	gulp.src([
 				'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
