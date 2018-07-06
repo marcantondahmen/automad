@@ -114,8 +114,8 @@ class Update {
 	
 	private static function extractVersion($str) {
 		
-		if (preg_match('/\(\'AM_VERSION\', \'([^\']+)\'\);/', $str, $matches)) {	
-			return $matches[1];
+		if (preg_match('/\d[^\'"]+/', $str, $matches)) {
+			return $matches[0];
 		}
 		
 	}
