@@ -25,5 +25,9 @@
 					<@ ../../snippets/date.php @>
 				</a>
 			</li>
+		<@ else @>
+			<li>
+				<h2>@{ notificationNoSearchResults | def('No pages found.')}</h2>
+			</li>
 		<@ end @>
 	</ul>	

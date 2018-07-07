@@ -34,6 +34,7 @@
 		"logo": "The path to your logo - this variable should be defined globally in the shared data section",
 		"notificationMailError": "Notification text for errors when sendig an email form",
 		"notificationMailSuccess": "Notification text after successfully sending email",
+		"notificationNoSearchResults": "Notification text for an empty list of search results",
 		"placeholderEmail": "Placeholder text for email input field",
 		"placeholderMessage": "Placeholder text for the message body field",
 		"placeholderSearch": "Placeholder text for the search field of the main menu",
