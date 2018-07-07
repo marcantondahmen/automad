@@ -22,7 +22,7 @@ latestTag=$(hg tags | sed -n '2 p' | cut -d ' ' -f 1)
 if [[ $(hg status) ]]
 then
 	echo "Working directory is not clean!"
-	exit 1
+	hg status
 fi
 
 echo "---"
