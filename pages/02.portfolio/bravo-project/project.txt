@@ -22,7 +22,7 @@ text: Place your main description text of your project here.
 
 -
 
-textTeaser: This page uses the other Project template of the Bravo theme. Like with [Bravo / Post](/blog/bravo-post), all shown images are linked. Check out the [Images Slideshow](/dashboard?context=edit_page&url=%2Fportfolio%2Fbravo-project#data-and-settings) variable, to understand how links to images work.
+textTeaser: This page uses the other Project template of the Bravo theme. As with [Bravo / Post](/blog/bravo-post), all shown images are linked. Check out the [Images Slideshow](/dashboard?context=edit_page&url=%2Fportfolio%2Fbravo-project#data-and-settings) variable, to understand how links to images work.
 
 -
 
