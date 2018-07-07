@@ -260,14 +260,23 @@ class Cache {
 		// Make sure that $currentPath is never just '/', by wrapping the string in an extra rtrim().
 		$currentPath = rtrim(AM_REQUEST, '/');
 		
-		// Create hashed string of parameters.	
-		if (!empty($_REQUEST)) {
-			$parameters = '_' . md5(json_encode($_REQUEST));
-		} else {
-			$parameters = '';
+		// Create hashed string of get and post parameters.	
+		$parameters = array();
+		$parametersHash = '';
+		
+		if (!empty($_GET)) {
+			$parameters['get'] = $_GET;
 		}
 		
-		Debug::log($_REQUEST, '$_REQUEST');
+		if (!empty($_POST)) {
+			$parameters['post'] = $_POST; 
+		}
+		
+		if ($parameters) {
+			$parametersHash = '_' . sha1(json_encode($parameters));
+		}
+		
+		Debug::log($parameters, 'Parameters (get/post)');
 		
 		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name. 
 		// The actual server name is then already part of the AM_BASE_URL.
@@ -281,7 +290,10 @@ class Cache {
 			$serverName = getenv('SERVER_NAME');
 		}
 		
-		$pageCacheFile = AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . $serverName . AM_BASE_URL . $currentPath . '/' . AM_FILE_PREFIX_CACHE . $parameters . '.' . AM_FILE_EXT_PAGE_CACHE;
+		$pageCacheFile = 	AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . 
+							$serverName . AM_BASE_URL . $currentPath . '/' . 
+							AM_FILE_PREFIX_CACHE . $parametersHash . '.' . AM_FILE_EXT_PAGE_CACHE;
+							
 		Debug::log($pageCacheFile);
 		
 		return $pageCacheFile;
