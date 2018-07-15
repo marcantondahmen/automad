@@ -333,7 +333,8 @@ class View {
 						$parameters = preg_replace_callback('/' . Regex::parameter() . '/s', function($parameterArray) {
 							if (isset($parameterArray[0]) && strlen($parameterArray[0])) {
 								$parameter = $parameterArray[0];
-								$parameter = stripslashes($parameter);
+								// Strip slashes only for ["{}].			
+								$parameter = preg_replace('/\\\\(["\{\}])/s', '$1', $parameter);
 								$parameter = $this->processContent($parameter);
 								return Str::normalizeQuotes($parameter);
 							} else {
