@@ -144,7 +144,7 @@ class Regex {
 	
 	public static function json() {
 		
-		return '[\{,]\s*(?P<key>\w+|\"\w+\")\s*:\s*(?P<value>"([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'|[\d\.]+)';
+		return '[\{,]\s*(?P<key>\w+|\"\w+\")\s*:\s*(?P<value>"([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'|[\d\.]+|true|false)';
 		
 	}
 	
@@ -256,7 +256,7 @@ class Regex {
 	 * 	@return string The regex matching a function parameter.
 	 */
 
-	public function parameter() {
+	public static function parameter() {
 		
 		// Any quoted string. Single and double quotes are allowed.
 		$string = '"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'';

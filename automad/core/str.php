@@ -146,7 +146,7 @@ class Str {
 	
 	
 	/**
-	 * 	Normalize quotes in quoted strings, in case the string is not numeric. 
+	 * 	Normalize quotes in quoted strings, in case the string is not numeric, true or false. 
 	 * 	This method escapes all double quotes, trims all kind of wrapping quotes
 	 * 	and finally wraps the string in double quotes.
 	 * 
@@ -156,7 +156,7 @@ class Str {
 	
 	public static function normalizeQuotes($str) {
 		
-		if (!is_numeric($str)) {       
+		if (!is_numeric($str) && $str !== 'true' && $str !== 'false') {       
 			$str = preg_replace('/^[\'"](.*)[\'"]$/s', '$1', trim($str));
 			$str = str_replace('\"', '"', $str);
 			$str = '"' . addcslashes($str,'"') . '"';
