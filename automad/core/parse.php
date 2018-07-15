@@ -176,12 +176,23 @@ class Parse {
 			
 			$debug['String'] = $str;
 			
+            // Remove all tabs and newlines.
+            $str = str_replace(array("\n", "\r", "\t"), ' ', $str);
+            
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
-			$str = str_replace("'", '"', $str);
-            $str = str_replace(array("\n", "\r", "\t"), ' ', $str);
-			$str = preg_replace('/(?<=[{,])\s*([\w\-]+)\s*(?=:)/', '"\1"', $str);
-			
+            $pairs = array();
+            preg_match_all('/' . Regex::json() . '/s', $str, $matches, PREG_SET_ORDER);
+            
+            foreach ($matches as $match) {
+                $key = '"' . trim($match['key'], '"') . '"';
+                $value = Str::normalizeQuotes($match['value']);
+                $pairs[] = $key . ':' . $value; 
+            }
+            
+            // Build valid JSON string.        
+            $str = '{' . implode(', ', $pairs) . '}';
+            
 			$debug['Clean'] = $str;
 				
 			// Decode JSON.

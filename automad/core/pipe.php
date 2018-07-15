@@ -79,7 +79,7 @@ class Pipe {
 	private static function stringFunction($function, $paramString, $value) {
 		
 		// Prepare function parameters.
-		if ($paramString) {
+		if (strlen($paramString)) {
 			
 			// Relpace single quotes when not escaped with double quotes.
 			$csv = preg_replace('/(?<!\\\\)(\')/', '"', $paramString);

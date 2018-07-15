@@ -79,6 +79,7 @@ class Regex {
 
 	public static $number = '\d+(?:\.\d+)?';
 
+
 	/**
 	 * 	The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
 	 */
@@ -131,6 +132,19 @@ class Regex {
 	public static function inPageEditButton() {
 		
 		return preg_quote(AM_DEL_INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
+		
+	}
+	
+	
+	/**
+	 * 	Return a regex pattern to match key/value pairs in a dirty JSON string without valid quoting/escaping.
+	 * 	 
+	 * 	@return string A pattern matching key/value pairs in an invalid JSON string.
+	 */
+	
+	public static function json() {
+		
+		return '[\{,]\s*(?P<key>\w+|\"\w+\")\s*:\s*(?P<value>"([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'|[\d\.]+|true|false)';
 		
 	}
 	
@@ -235,6 +249,33 @@ class Regex {
 		
 	}
 
+	
+	/**
+	 *	Return the regex to match a single function parameter (pipe).
+	 * 
+	 * 	@return string The regex matching a function parameter.
+	 */
+
+	public static function parameter() {
+		
+		// Any quoted string. Single and double quotes are allowed.
+		$string = '"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'';
+		
+		// Any single word without any spaces.
+		$word = '\w*';
+		
+		// Unquoted variables.
+		// Note when using unquoted variables, curly brackets have to be escaped in nested pipe functions.
+		// @{ var | function ("the \{\} have to be escaped")}
+		$var = preg_quote(AM_DEL_VAR_OPEN) . '(?:[^{}\\\\]|\\\\.)*' . preg_quote(AM_DEL_VAR_CLOSE);
+		
+		// Parameter pattern. Quoted strings (double or single quotes are allowed) or single words / boolean / number values.
+		// Like: 
+		// | function ("Some Text with non-word chars") | function (@{var|function()}) | function (word)
+		return '\s*(?:' . $string . '|' . $var . '|' . $word . ')\s*';
+		
+	}
+
 
 	/**
 	 *	Return the regex for a piped string function or math operation of content variables.     
@@ -262,17 +303,12 @@ class Regex {
 			$num = '?:';
 		}
 		
-		// Parameter pattern. Quoted strings (double or single quotes are allowed) or single words / boolean / number values.
-		// Like: 
-		// | function ("Some Text with non-word chars") | function (word)
-		$regexParameter = '\s*(?:"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\w*)\s*';
-		
 		return	'\|(' . 
 				// Function name.
 				'\s*(' . $function . '[\w][\w\-]*)\s*' .
 				// Parameters. 
 				'(?:\(' . 
-				'(' . $parameters . $regexParameter . '(?:,' . $regexParameter . ')*?)' . 
+				'(' . $parameters . self::parameter() . '(?:,' . self::parameter() . ')*?)' . 
 				'\)\s*)?' . 
 				'|' .
 				// Math.
@@ -309,6 +345,19 @@ class Regex {
 		}
 		
 		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . $charClass . '+)\s*' . '(' . $functions . '(?:' . Regex::pipe() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
+		
+	}
+	
+	
+	/**
+	 * 	A simplified pattern to match all used variable names in a template (GUI).
+	 * 	
+	 * 	@return string The regex pattern.
+	 */
+	
+	public static function variableKeyGUI() {
+		
+		return preg_quote(AM_DEL_VAR_OPEN) . '\s*(?P<varName>' . self::$charClassTextFileVariables . '+)';
 		
 	}
 	
