@@ -326,26 +326,38 @@ class View {
 				// Get the value.
 				$value = $this->getValue($matches['varName']);
 							
-				// Process variables in pipe function parameters.	
+				// Process variables in pipe function parameters and mathematical operations.	
 				$functions = preg_replace_callback('/' . Regex::pipe('pipe') . '/s', function($pipe) {
 					
-					if (isset($pipe['pipeParameters'])) {
-						$parameters = preg_replace_callback('/' . Regex::parameter() . '/s', function($parameterArray) {
-							if (isset($parameterArray[0]) && strlen($parameterArray[0])) {
-								$parameter = $parameterArray[0];
-								// Strip slashes only for ["{}].			
-								$parameter = preg_replace('/\\\\(["\{\}])/s', '$1', $parameter);
-								$parameter = $this->processContent($parameter);
-								return Str::normalizeQuotes($parameter);
-							} else {
-								return '';
-							}
-						}, $pipe['pipeParameters']);
-					} else {
+					// Functions.
+					if (!empty($pipe['pipeFunction'])) {
+						
 						$parameters = '';
+						
+						if (isset($pipe['pipeParameters'])) {
+							$parameters = preg_replace_callback('/' . Regex::parameter() . '/s', function($parameterArray) {
+								if (isset($parameterArray[0]) && strlen($parameterArray[0])) {
+									$parameter = $parameterArray[0];
+									// Strip slashes only for ["{}].			
+									$parameter = preg_replace('/\\\\(["\{\}])/s', '$1', $parameter);
+									$parameter = $this->processContent($parameter);
+									return Str::normalizeQuotes($parameter);
+								} else {
+									return '';
+								}
+							}, $pipe['pipeParameters']);
+						} 
+						
+						return '|' . $pipe['pipeFunction'] . '(' . $parameters . ')';
+				
 					}
 					
-					return '|' . $pipe['pipeFunction'] . '(' . $parameters . ')';
+					// Math.
+					if (!empty($pipe['pipeOperator'])) {
+							
+						return '|' . $pipe['pipeOperator'] . $this->processContent($pipe['pipeNumber']);
+						
+					}
 						
 				}, $matches['varFunctions']); 
 				
