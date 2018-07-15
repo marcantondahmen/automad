@@ -322,12 +322,34 @@ class View {
 				
 				// Merge $matches with empty defaults to skip later checks whether an item exists.
 				$matches = array_merge(array('parameterStart' => '', 'parameterEnd' => '', 'varFunctions' => ''), $matches);
-						
+				
 				// Get the value.
 				$value = $this->getValue($matches['varName']);
+							
+				// Process variables in pipe function parameters.	
+				$functions = preg_replace_callback('/' . Regex::Pipe('pipe') . '/s', function($pipe) {
+					
+					if (!empty($pipe['pipeParameters'])) {
+						$parameters = preg_replace_callback('/' . Regex::parameter() . '/s', function($parameterArray) {
+							if (!empty($parameterArray[0])) {
+								$parameter = $parameterArray[0];
+								$parameter = stripslashes($parameter);
+								$parameter = $this->processContent($parameter);
+								return Str::normalizeQuotes($parameter);
+							} else {
+								return '';
+							}
+						}, $pipe['pipeParameters']);
+					} else {
+						$parameters = '';
+					}
+					
+					return '|' . $pipe['pipeFunction'] . '(' . $parameters . ')';
+						
+				}, $matches['varFunctions']); 
 				
 				// Modify $value by processing all matched string functions.
-				$value = Pipe::process($value, $matches['varFunctions']);
+				$value = Pipe::process($value, $functions);
 				
 				// In case $value will be used as an JSON option, some chars have to be escaped to work within a JSON formatted string.
 				if ($isJsonString) {
@@ -471,6 +493,17 @@ class View {
 		$str = $this->preProcessWrappingStatements($str);
 		
 		$str = preg_replace_callback('/' . Regex::markup() . '/is', function($matches) use ($directory) {
+						
+				/*foreach ($matches as $key => $value) {
+					if (is_int($key)) {
+						unset($matches[$key]);
+					}
+				}		
+				*/		
+				//echo '<pre>';		
+				//print_r($matches);
+				//echo '</pre>';
+						
 												
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				// In-page editing gets enabled here.

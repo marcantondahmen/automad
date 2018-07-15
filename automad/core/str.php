@@ -146,6 +146,28 @@ class Str {
 	
 	
 	/**
+	 * 	Normalize quotes in quoted strings, in case the string is not numeric. 
+	 * 	This method escapes all double quotes, trims all kind of wrapping quotes
+	 * 	and finally wraps the string in double quotes.
+	 * 
+	 * 	@param string $str 
+	 * 	@return string The processed string.
+	 */
+	
+	public static function normalizeQuotes($str) {
+		
+		if (!is_numeric($str)) {       
+			$str = preg_replace('/^[\'"](.*)[\'"]$/s', '$1', trim($str));
+			$str = str_replace('\"', '"', $str);
+			$str = '"' . addcslashes($str,'"') . '"';
+		}
+		
+		return $str;
+		
+	}
+	
+	
+	/**
 	 *	Search and replace by regex.
 	 *      
 	 * 	@param string $str
