@@ -92,23 +92,6 @@ class Str {
 		
 	}
 
-
-	/**
-	 * 	Escape a string to be used within a JSON string.
-	 *	
-	 *	@param string $str
-	 *	@return string Escaped, JSON-safe string
-	 */
-
-	public static function jsonEscape($str) {
-		
-		$search = array('"',   "'",  "\n", "\r");
-		$replace = array('\"', "\'", ' ',  ' ');
-		
-		return str_replace($search, $replace, $str);
-		
-	}
-	
 	
 	/**
 	 *	Parse a markdown string. Optionally skip parsing in case $str is a single line string.
@@ -148,18 +131,25 @@ class Str {
 	/**
 	 * 	Normalize quotes in quoted strings, in case the string is not numeric, true or false. 
 	 * 	This method escapes all double quotes, trims all kind of wrapping quotes
-	 * 	and finally wraps the string in double quotes.
+	 * 	and finally optionally wraps the string in double quotes.
 	 * 
 	 * 	@param string $str 
+	 * 	@param boolean $wrapInQuotes
 	 * 	@return string The processed string.
 	 */
 	
-	public static function normalizeQuotes($str) {
+	public static function normalizeQuotes($str, $wrapInQuotes = true) {
 		
-		if (!is_numeric($str) && $str !== 'true' && $str !== 'false') {       
+		if (!is_numeric($str) && $str !== 'true' && $str !== 'false') {  
+			     
 			$str = preg_replace('/^[\'"](.*)[\'"]$/s', '$1', trim($str));
 			$str = str_replace('\"', '"', $str);
-			$str = '"' . addcslashes($str,'"') . '"';
+			$str = addcslashes($str,'"');
+			
+			if ($wrapInQuotes) {
+				$str = '"' . $str . '"';
+			}
+			
 		}
 		
 		return $str;

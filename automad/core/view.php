@@ -327,11 +327,11 @@ class View {
 				$value = $this->getValue($matches['varName']);
 							
 				// Process variables in pipe function parameters.	
-				$functions = preg_replace_callback('/' . Regex::Pipe('pipe') . '/s', function($pipe) {
+				$functions = preg_replace_callback('/' . Regex::pipe('pipe') . '/s', function($pipe) {
 					
-					if (!empty($pipe['pipeParameters'])) {
+					if (isset($pipe['pipeParameters'])) {
 						$parameters = preg_replace_callback('/' . Regex::parameter() . '/s', function($parameterArray) {
-							if (!empty($parameterArray[0])) {
+							if (isset($parameterArray[0]) && strlen($parameterArray[0])) {
 								$parameter = $parameterArray[0];
 								$parameter = stripslashes($parameter);
 								$parameter = $this->processContent($parameter);
@@ -354,15 +354,16 @@ class View {
 				// In case $value will be used as an JSON option, some chars have to be escaped to work within a JSON formatted string.
 				if ($isJsonString) {
 					
-					$value = Str::jsonEscape($value);
-					
 					// In case the variable is an "stand-alone" value in a JSON formatted string (regex ": {[ var ]} (,|})" ), 
 					// it has to be wrapped in double quotes.
 					// In that case $matches['parameterStart'] and $matches['parameterEnd'] are not empty.
 					if ($matches['parameterStart'] && $matches['parameterEnd']) {
-						$value = '"' . $value . '"';
-						Debug::log($value, 'Wrapping content in double quotes to be valid JSON');
+						$wrapInQuotes = true;
+					} else {
+						$wrapInQuotes = false;
 					}
+					
+					$value = Str::normalizeQuotes($value, $wrapInQuotes);
 					
 				}
 				
@@ -370,7 +371,7 @@ class View {
 				// If $value is a stand-alone parameter, the output will look like:
 				// : "value", or : "value" } 
 				$value = $matches['parameterStart'] . $value . $matches['parameterEnd'];
-				Debug::log($value, $matches['varName'] . ' ' . $matches['varFunctions']);	
+				Debug::log($value, $matches['varName'] . $matches['varFunctions']);	
 					
 				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
 				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
