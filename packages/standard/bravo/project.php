@@ -4,7 +4,7 @@
 	<ul class="uk-grid uk-grid-width-medium-1-2">
 		<li class="uk-block">
 			<h1 class="uk-margin-small-bottom">@{ title }</h1>
-			@{ date | dateFormat('F Y') }
+			<@ ../snippets/date.php @>
 			<@ ../snippets/tags.php @>
 		</li>
 		<@ if @{ textTeaser } @>
