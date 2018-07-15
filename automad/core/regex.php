@@ -136,6 +136,19 @@ class Regex {
 	
 	
 	/**
+	 * 	Return a regex pattern to match key/value pairs in a dirty JSON string without valid quoting/escaping.
+	 * 	 
+	 * 	@return string A pattern matching key/value pairs in an invalid JSON string.
+	 */
+	
+	public static function json() {
+		
+		return '[\{,]\s*(?P<key>\w+|\"\w+\")\s*:\s*(?P<value>"([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'|[\d\.]+)';
+		
+	}
+	
+	
+	/**
 	 *	Return the regex to match any kind of Automad markup such as variables, toolbox methods, includes, extensions, snippets, loops and conditions.
 	 *
 	 *	@return string The markup regex
