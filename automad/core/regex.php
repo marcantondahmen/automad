@@ -349,4 +349,17 @@ class Regex {
 	}
 	
 	
+	/**
+	 * 	A simplified pattern to match all used variable names in a template (GUI).
+	 * 	
+	 * 	@return string The regex pattern.
+	 */
+	
+	public static function variableKeyGUI() {
+		
+		return preg_quote(AM_DEL_VAR_OPEN) . '\s*(?P<varName>' . self::$charClassTextFileVariables . '+)';
+		
+	}
+	
+	
 }

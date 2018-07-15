@@ -102,8 +102,7 @@ class Keys {
 			
 			// Find all variable keys in the template file.
 			$content = file_get_contents($file);
-			// Note the second parameter in Regex::variable() is true to only match variable keys in text files.
-			preg_match_all('/' . Core\Regex::variable('var', true) . '/is', $content, $matches);
+			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
 			$keys = $matches['varName'];
 			
 			// Match markup to get includes recursively.
@@ -165,8 +164,7 @@ class Keys {
 		// Search each template and add matches to the $keys array.
 		foreach ($arrayFiles as $file) {
 			$content = file_get_contents($file);
-			// Note the second parameter in Regex::variable() is true to only match variable keys in text files.
-			preg_match_all('/' . Core\Regex::variable('var', true) . '/is', $content, $matches);
+			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
 			$keys = array_merge($keys, $matches['varName']);
 		}
 		
