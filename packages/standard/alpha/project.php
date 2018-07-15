@@ -5,7 +5,7 @@
 		<ul class="uk-grid grid-margin">
 			<li class="uk-width-medium-1-3">
 				<h1 class="uk-margin-small-bottom">@{ title }</h1>
-				<div class="uk-text-muted">@{ date | dateFormat('F Y') }</div>
+				<div class="uk-text-muted"><@ ../snippets/date.php @></div>
 				<@ ../snippets/tags.php @>
 			</li>
 			<@ if @{ textTeaser } @>
