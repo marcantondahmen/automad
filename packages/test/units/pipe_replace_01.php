@@ -1,0 +1,1 @@
+@{ var | def ('Some (test) string') | replace ('/\\((\\w+)\\)/', '{$1}') }

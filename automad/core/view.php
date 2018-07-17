@@ -127,7 +127,8 @@ class View {
 		$Page = $Automad->Context->get();
 		
 		// Redirect page, if the defined URL variable differs from AM_REQUEST.
-		if ($Page->url) {
+		// Disable redirection for unit tests.
+		if ($Page->url && $Page->get(AM_KEY_THEME) != 'test') {
 			if ($Page->url != AM_REQUEST) {
 				$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($Page->url, $Page));
 				header('Location: ' . $url, true, 301);
@@ -501,7 +502,7 @@ class View {
 	 *	@return string The interpreted string	
 	 */
 
-	private function interpret($str, $directory) {
+	public function interpret($str, $directory) {
 	
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
