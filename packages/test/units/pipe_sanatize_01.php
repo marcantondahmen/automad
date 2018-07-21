@@ -1,0 +1,1 @@
+@{ var | def ('Some very long "quoted" string. All dots will be removed!') | sanitize (true, 35) }

@@ -6,22 +6,34 @@ $View = new Automad\Core\View($Automad);
 $Page = $Automad->Context->get();
 
 $data = array(
+	'date' => '2018-07-21 12:00:00',
 	'test' => 'Test String',
+	'quoted' => '"Quoted" "Test" "String"',
 	'x' => '10'
 );
 
 $Page->data = array_merge($Page->data, $data);
 
 $units = array(
-	'pipe_string_01' => 'Test String',
-	'pipe_string_02' => 'This is a "Test String"',
-	'pipe_string_03' => 'This is a "Test String"',
-	'pipe_replace_01' => 'Some {test} string',
+	'pipe_def_01' => 'Test String',
+	'pipe_def_02' => 'This is a "Test String"',
+	'pipe_def_03' => 'This is a "Test String"',
+	'pipe_def_04' => 'Test String',
+	'pipe_def_05' => 'Some text with a "key": "value", pair.',
+	'pipe_def_06' => '"Quoted" "Test" "String"',
+	'pipe_markdown_01' => '<p>A paragraph with <strong>bold</strong> text.</p>',
+	'pipe_dateformat_01' => '2019',
+	'pipe_replace_01' => 'Some <div class="test">test</div> string',
+	'pipe_sanatize_01' => 'some-very-long-quoted-string-all-do',
+	'pipe_shorten_01' => 'This is ...',
+	'pipe_shorten_02' => 'This is another >>>',
 	'pipe_math_01' => '15',
 	'pipe_math_02' => '50',
+	'pipe_math_03' => '10',
 	'for_01' => '1, 2, 3, 4, 5',
 	'if_01' => 'True',
-	'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15'
+	'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
+	'querystringmerge_02' => 'source=0&key1=some-key-value-pair.'
 );
 
 $tests = array();
@@ -73,7 +85,7 @@ foreach ($units as $file => $expected) {
 						<span class="icon is-small">
 							<i class="fas fa-check-circle"></i>
 						</span>
-						<span>Source</span>
+						<span>Show Source</span>
 					</a>
 				<@ else @>
 					<a 
@@ -83,7 +95,7 @@ foreach ($units as $file => $expected) {
 						<span class="icon is-small">
 							<i class="far fa-circle"></i>
 						</span>
-						<span>Source</span>
+						<span>Show Source</span>
 					</a>
 				<@ end @>
 			</div>
@@ -105,9 +117,9 @@ foreach ($units as $file => $expected) {
 									} @><br /><#
 									#><span class="has-text-grey-light"><#
 										#><br /><#
-										#>Expected:  <?php echo $test['expected']; ?><#
+										#>Expected:  <?php echo htmlentities($test['expected']); ?><#
 										#><br /><span class="<?php echo $test['color']; ?>"><#
-										#>Result:    <?php echo $test['result']; ?></span> <#
+										#>Result:    <?php echo htmlentities($test['result']); ?></span> <#
 									#></span><#
 								#></pre>
 								<br />

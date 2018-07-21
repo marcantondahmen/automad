@@ -1,0 +1,1 @@
+@{ date | dateFormat (@{ format | def ('Y') }) | +@{ var | def (1)} }

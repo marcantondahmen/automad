@@ -1,0 +1,1 @@
+@{ var | def ("A paragraph with **bold** text.") | markdown }
