@@ -88,6 +88,31 @@ class Regex {
 
 
 	/**
+	 *	Return a regex to match a sequence of comma separated values or variables.    
+	 *	
+	 *	In case $isVariableSubpattern is true, the generated value patterns have a 
+	 *	relative reference to the wrapping main variable pattern to match variables 
+	 *	within parameters.
+	 * 
+	 * 	@param boolean $isVariableSubpattern
+	 * 	@return string The regex matching a comma separated parameter string.
+	 */
+	
+	public static function csv($isVariableSubpattern = false) {
+		
+		if ($isVariableSubpattern) {
+			return 	self::value('(?-7)') .
+			 		'(?:,' . self::value('(?-8)') . ')*?';
+		} else {
+			$var = self::variable();
+			return 	self::value($var) .
+			 		'(?:,' . self::value($var) . ')*?';
+		}
+			
+	}
+
+
+	/**
 	 *	Return the regex pattern for a single expression.   
 	 *	    
 	 *	Valid expressions are:    
@@ -132,19 +157,6 @@ class Regex {
 	public static function inPageEditButton() {
 		
 		return preg_quote(AM_DEL_INPAGE_BUTTON_OPEN) . '.+?' . preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
-		
-	}
-	
-	
-	/**
-	 * 	Return a regex pattern to match key/value pairs in a dirty JSON string without valid quoting/escaping.
-	 * 	 
-	 * 	@return string A pattern matching key/value pairs in an invalid JSON string.
-	 */
-	
-	public static function json() {
-		
-		return '[\{,]\s*(?P<key>\w+|\"\w+\")\s*:\s*(?P<value>"([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'|[\d\.]+|true|false)';
 		
 	}
 	
@@ -251,56 +263,57 @@ class Regex {
 
 	
 	/**
-	 *	Return the regex to match a single function parameter (pipe).
-	 * 
-	 * 	@return string The regex matching a function parameter.
+	 * 	Return a regex pattern to match key/value pairs in an invalid JSON string 
+	 * 	without valid quoting/escaping.
+	 * 	 
+	 * 	@return string The generated pattern.
 	 */
+	
+	public static function keyValue() {
+		
+		$key = '(?P<key>[\w\-]+|\"[\w\-]+\")';
+		$value = '(?P<value>' . self::value(self::variable()) . ')';
+		$pair = '\s*' . $key . '\s*:\s*' . $value . '\s*';
+		
+		return '(?<=(\{|,))(' . $pair . ')(?=(\}|,))';
+		
+	} 
 
-	public static function parameter() {
-		
-		// Any quoted string. Single and double quotes are allowed.
-		$string = '"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'';
-		
-		// Any single word without any spaces.
-		$word = '\w*';
-		
-		// Unquoted variables.
-		// Note when using unquoted variables, curly brackets have to be escaped in nested pipe functions.
-		// @{ var | function ("the \{\} have to be escaped")}
-		$var = preg_quote(AM_DEL_VAR_OPEN) . '(?:[^{}\\\\]|\\\\.)*' . preg_quote(AM_DEL_VAR_CLOSE);
-		
-		// Parameter pattern. Quoted strings (double or single quotes are allowed) or single words / boolean / number values.
-		// Like: 
-		// | function ("Some Text with non-word chars") | function (@{var|function()}) | function (word)
-		return '\s*(?:' . $string . '|' . $var . '|' . $word . ')\s*';
-		
-	}
-
-
+	
 	/**
 	 *	Return the regex for a piped string function or math operation of content variables.     
 	 *	Like: 
 	 *	- "| name (parameters)" 
 	 *	- "| +5"
 	 *
-	 * 	Parameters can be strings wrapped in quotes, single words without quotes and numbers.
+	 * 	Parameters can be strings wrapped in quotes, 
+	 * 	single words without quotes, numbers and variables.
+	 * 	In case $isVariableSubpattern is true, relative references to the wrapping 
+	 * 	variable pattern are used to match variables.
 	 *
 	 *	@param string $namedReferencePrefix
+	 *	@param boolean $isVariableSubpattern
 	 *	@return string The regex to match functions and their parameters or math operations
 	 */
 	
-	public static function pipe($namedReferencePrefix = false) {
+	public static function pipe($namedReferencePrefix = false, $isVariableSubpattern = false) {
 		
 		if ($namedReferencePrefix) {
 			$function = 	'?P<' . $namedReferencePrefix . 'Function>';
 			$parameters =	'?P<' . $namedReferencePrefix . 'Parameters>';
 			$operator = 	'?P<' . $namedReferencePrefix . 'Operator>';
-			$num = 		'?P<' . $namedReferencePrefix . 'Number>';
+			$num = 			'?P<' . $namedReferencePrefix . 'Number>';
 		} else {
-			$function = '?:';
-			$parameters = '?:';
-			$operator = '?:';
-			$num = '?:';
+			$function = '';
+			$parameters = '';
+			$operator = '';
+			$num = '';
+		}
+		
+		if ($isVariableSubpattern) {
+			$subpatternMathVar = '(?-10)';
+		} else {
+			$subpatternMathVar = self::variable(false, '(?R)');
 		}
 		
 		return	'\|(' . 
@@ -308,15 +321,32 @@ class Regex {
 				'\s*(' . $function . '[\w][\w\-]*)\s*' .
 				// Parameters. 
 				'(?:\(' . 
-				'(' . $parameters . self::parameter() . '(?:,' . self::parameter() . ')*?)' . 
+				'(' . $parameters . self::csv($isVariableSubpattern) . ')?' . 
 				'\)\s*)?' . 
 				'|' .
 				// Math.
 				'\s*(' . $operator . '[\+\-\*\/])\s*(' . 
-				$num . Regex::$number . '|' . preg_quote(AM_DEL_VAR_OPEN) . '(?:[^{}\\\\]|\\\\.)*' . preg_quote(AM_DEL_VAR_CLOSE) .
+				$num . Regex::$number . '|' . $subpatternMathVar .
 				')\s*' . 
 				')';
 				
+	}
+	
+	
+	/**
+	 *	Return the regex to match a single function parameter (pipe).
+	 *	
+	 *  @param string $subpatternVar
+	 * 	@return string The regex matching a function parameter.
+	 */
+
+	public static function value($subpatternVar) {
+		
+		// Any quoted string. Single and double quotes are allowed.
+		$string = '"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'';
+		
+		return '\s*(' . $string . '|\w+|' . self::$number . '|' . $subpatternVar . ')\s*';
+		
 	}
 	
 	
@@ -325,21 +355,32 @@ class Regex {
 	 *	A prefix can be defined as the first parameter to create named backreferences for each capturing group. 
 	 *	Like: @{var|function1(...)|function2(...)| ... }
 	 *
+	 * 	In case the pattern is used as a subpattern of the pipe() method, $pipeReference can be specified to 
+	 * 	reference the whole pipe pattern by using a relative reference or (?R).
+	 *
 	 *	@param string $namedReferencePrefix
+	 *	@param string $pipeReference
 	 *	@return string The regex to match variables.
 	 */
 	
-	public static function variable($namedReferencePrefix = false) {
+	public static function variable($namedReferencePrefix = false, $pipeReference = false) {
 		
 		if ($namedReferencePrefix) {
 			$name = 		'?P<' . $namedReferencePrefix . 'Name>';
 			$functions =	'?P<' . $namedReferencePrefix . 'Functions>';
 		} else {
-			$name = '?:';
-			$functions = '?:';
+			$name = '';
+			$functions = '';
 		}
 		
-		return 	preg_quote(AM_DEL_VAR_OPEN) . '\s*(' . $name . self::$charClassAllVariables . '+)\s*' . '(' . $functions . '(?:' . Regex::pipe() . ')*)' . preg_quote(AM_DEL_VAR_CLOSE);
+		if (!$pipeReference) {
+			$pipeReference = self::pipe(false, true);
+		}
+		
+		return 	'(' . preg_quote(AM_DEL_VAR_OPEN) . 
+				'\s*(' . $name . self::$charClassAllVariables . '+)\s*' . 
+				'(' . $functions . '(?:' . $pipeReference . ')*)' . 
+				preg_quote(AM_DEL_VAR_CLOSE) . ')';
 		
 	}
 	

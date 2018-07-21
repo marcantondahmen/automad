@@ -182,16 +182,17 @@ class Parse {
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
             $pairs = array();
-            preg_match_all('/' . Regex::json() . '/s', $str, $matches, PREG_SET_ORDER);
+            preg_match_all('/' . Regex::keyValue() . '/s', $str, $matches, PREG_SET_ORDER);
             
             foreach ($matches as $match) {
                 $key = '"' . trim($match['key'], '"') . '"';
-                $value = Str::normalizeQuotes($match['value']);
+                $value = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match['value']));
+                $value = Str::normalizeQuotes($value);
                 $pairs[] = $key . ':' . $value; 
             }
             
             // Build valid JSON string.        
-            $str = '{' . implode(', ', $pairs) . '}';
+            $str = '{' . implode(',', $pairs) . '}';
             
 			$debug['Clean'] = $str;
 				
