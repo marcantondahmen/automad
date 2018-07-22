@@ -1,14 +1,16 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>	
 	<@ standard/mail {
 		to: @{ email },
-		success: '<div class=\"uk-margin-bottom uk-text-bold\">
-					@{ notificationMailSuccess 
-						| def ("Successfully sent email!") 
+		success: '<div class="uk-margin-bottom">
+					@{ notificationMailSuccess |
+						def ("**Successfully sent email!**") |
+						markdown
 					}
 				  </div>',
-		error: '<div class=\"uk-margin-bottom uk-text-bold\">
-					@{ notificationMailError 
-						| def ("Please fill out all fields!") 
+		error: '<div class="uk-margin-bottom">
+					@{ notificationMailError | 
+						def ("**Please fill out all fields!**") |
+						markdown
 					}
 				</div>'
 	} @>
