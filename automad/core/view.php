@@ -127,7 +127,8 @@ class View {
 		$Page = $Automad->Context->get();
 		
 		// Redirect page, if the defined URL variable differs from AM_REQUEST.
-		if ($Page->url) {
+		// Disable redirection for unit tests.
+		if ($Page->url && $Page->get(AM_KEY_THEME) != 'test') {
 			if ($Page->url != AM_REQUEST) {
 				$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($Page->url, $Page));
 				header('Location: ' . $url, true, 301);
@@ -300,7 +301,7 @@ class View {
 	 *	or from the $_GET array (only those starting with a "?").      
 	 *   
 	 *	By first checking the page data (handled by the Page class), basically all shared data variables can be easily overridden by a page. 
-	 *	Optionally all values can be parsed as "JSON safe", by escaping all quotes and wrapping variable is quotes when needed.
+	 *	Optionally all values can be parsed as "JSON safe" ($isOptionString), by escaping all quotes and wrapping variable is quotes when needed.
 	 *	In case a variable is used as an option value for a method and is not part of a string, that variable doesn't need to be 
 	 *	wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
 	 *
@@ -308,83 +309,74 @@ class View {
 	 *  That temporary button still has to be processed later by calling processInPageEditButtons(). 
 	 *
 	 *	@param string $str
-	 *	@param boolean $isJsonString 
+	 *	@param boolean $isOptionString 
 	 *	@param boolean $inPageEdit
 	 *	@return string The processed $str
 	 */
 
-	private function processContent($str, $isJsonString = false, $inPageEdit = false) {
+	private function processContent($str, $isOptionString = false, $inPageEdit = false) {
 		
-		// Build regex. Also match possible JSON elements like ":", "," and "}". They will be added to the output when returning the value if existing.
-		$regexContent = '/(?P<parameterStart>:\s*)?' . Regex::variable('var') . '(?P<parameterEnd>\s*(,|\}))?/s';
+		// Prepare JSON strings by wrapping all stand-alone variables in quotes.		
+		if ($isOptionString) {
+			
+			$str = preg_replace_callback('/' . Regex::keyValue() . '/s', function($pair) {
 				
-		return 	preg_replace_callback($regexContent, function($matches) use ($isJsonString, $inPageEdit) {
+				if (strpos($pair['value'], '@') === 0) {
+					$pair['value'] = '"' . trim($pair['value']) . '"';
+				}
 				
-				// Merge $matches with empty defaults to skip later checks whether an item exists.
-				$matches = array_merge(array('parameterStart' => '', 'parameterEnd' => '', 'varFunctions' => ''), $matches);
+				return $pair['key'] . ':' . $pair['value'];
 				
+			}, $str);
+			
+		}		
+			
+		return 	preg_replace_callback('/' . Regex::variable('var') . '/s', function($matches) use ($isOptionString, $inPageEdit) {
+					
 				// Get the value.
 				$value = $this->getValue($matches['varName']);
-							
-				// Process variables in pipe function parameters and mathematical operations.	
+				
+				// Process pipe.
 				$functions = preg_replace_callback('/' . Regex::pipe('pipe') . '/s', function($pipe) {
 					
 					// Functions.
 					if (!empty($pipe['pipeFunction'])) {
 						
-						$parameters = '';
+						$parametersArray = array();
 						
 						if (isset($pipe['pipeParameters'])) {
-							$parameters = preg_replace_callback('/' . Regex::parameter() . '/s', function($parameterArray) {
-								if (isset($parameterArray[0]) && strlen($parameterArray[0])) {
-									$parameter = $parameterArray[0];
-									// Strip slashes only for ["{}].			
-									$parameter = preg_replace('/\\\\(["\{\}])/s', '$1', $parameter);
-									$parameter = $this->processContent($parameter);
-									return Str::normalizeQuotes($parameter);
-								} else {
-									return '';
-								}
-							}, $pipe['pipeParameters']);
-						} 
+							
+							preg_match_all('/' . Regex::csv() . '/s', $pipe['pipeParameters'], $pipeParameters, PREG_SET_ORDER);
+							
+							foreach ($pipeParameters as $match) {
+								// Strip quotes from parameter to get the actual value. 
+								// Quotes get added back after processing.
+								$parameter = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match[1]));
+								$parametersArray[] = Str::normalizeQuotes($this->processContent($parameter));
+							}
+							
+						}
+												
+						return '|' . $pipe['pipeFunction'] . '(' . implode(',', $parametersArray) . ')';
 						
-						return '|' . $pipe['pipeFunction'] . '(' . $parameters . ')';
-				
 					}
 					
 					// Math.
 					if (!empty($pipe['pipeOperator'])) {
-							
+						
 						return '|' . $pipe['pipeOperator'] . $this->processContent($pipe['pipeNumber']);
 						
 					}
-						
-				}, $matches['varFunctions']); 
+					
+				}, $matches['varFunctions']);
 				
 				// Modify $value by processing all matched string functions.
 				$value = Pipe::process($value, $functions);
 				
-				// In case $value will be used as an JSON option, some chars have to be escaped to work within a JSON formatted string.
-				if ($isJsonString) {
-					
-					// In case the variable is an "stand-alone" value in a JSON formatted string (regex ": {[ var ]} (,|})" ), 
-					// it has to be wrapped in double quotes.
-					// In that case $matches['parameterStart'] and $matches['parameterEnd'] are not empty.
-					if ($matches['parameterStart'] && $matches['parameterEnd']) {
-						$wrapInQuotes = true;
-					} else {
-						$wrapInQuotes = false;
-					}
-					
-					$value = Str::normalizeQuotes($value, $wrapInQuotes);
-					
+				// Escape all double quotes, in case the variable is used in a JSON string.
+				if ($isOptionString) {
+					$value = addcslashes($value, '"');
 				}
-				
-				// Always wrap $value in parameterStart and parameterEnd! In case $value is not a parameter of a JSON string, they will be just empty strings.
-				// If $value is a stand-alone parameter, the output will look like:
-				// : "value", or : "value" } 
-				$value = $matches['parameterStart'] . $value . $matches['parameterEnd'];
-				Debug::log($value, $matches['varName'] . $matches['varFunctions']);	
 					
 				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
 				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
@@ -501,24 +493,13 @@ class View {
 	 *	@return string The interpreted string	
 	 */
 
-	private function interpret($str, $directory) {
+	public function interpret($str, $directory) {
 	
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
 		
 		$str = preg_replace_callback('/' . Regex::markup() . '/is', function($matches) use ($directory) {
 						
-				/*foreach ($matches as $key => $value) {
-					if (is_int($key)) {
-						unset($matches[$key]);
-					}
-				}		
-				*/		
-				//echo '<pre>';		
-				//print_r($matches);
-				//echo '</pre>';
-						
-												
 				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 				// In-page editing gets enabled here.
 				if (!empty($matches['var'])) {

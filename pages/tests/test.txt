@@ -1,0 +1,17 @@
+title: Tests
+
+-
+
+checkboxHideInMenu: on
+
+-
+
+checkboxShowInFooter: on
+
+-
+
+hidden: 1
+
+-
+
+theme: test
