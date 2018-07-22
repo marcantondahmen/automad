@@ -16,6 +16,8 @@
 		"checkboxSingleImageSlideshow": "Show only one image at a time in the slideshow",
 		"date": "Set a date to show up as post or project info",
 		"email": "Your contact email address",
+		"formatDatePost": "The format for displaying the date of a post.",
+		"formatDateProject": "The format for displaying the date of a project",
 		"imagesGallery": "One or more glob patterns to define the images showing up in the gallery",
 		"imageProfile": "The filename of your profile image",
 		"imagesSlideshow": "One or more glob patterns to define the images showing up in the gallery",
