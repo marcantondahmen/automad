@@ -72,13 +72,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						</li>
 						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
 							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
-								<i class="uk-icon-th-large uk-icon-justify"></i>&nbsp;
+								<i class="uk-icon-desktop uk-icon-justify"></i>&nbsp;
 								<?php Text::e('dashboard_title'); ?>
 							</a>
 						</li>
 						<li<?php if (Core\Parse::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
 							<a href="?context=system_settings">
-								<i class="uk-icon-cog uk-icon-justify"></i>&nbsp;
+								<i class="uk-icon-sliders uk-icon-justify"></i>&nbsp;
 								<?php Text::e('sys_title'); ?>
 							</a>
 						</li>

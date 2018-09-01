@@ -646,12 +646,8 @@ class Html {
 			
 			foreach ($pages as $key => $Page) {
 				
-				// Set page icon.
-				if ($Page->url == '/') {
-					$icon = '<i class="uk-icon-home"></i>&nbsp;&nbsp;';
-				} else {   
-					$icon = '<i class="uk-icon-folder uk-icon-justify"></i>&nbsp;&nbsp;';
-				}
+				// Set page icon.  
+				$icon = '<i class="uk-icon-folder uk-icon-justify"></i>&nbsp;&nbsp;';
 				
 				if ($key != $current || !$hideCurrent) {
 				

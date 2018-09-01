@@ -53,7 +53,7 @@ $this->element('header');
 ?>
 	
 		<ul class="uk-subnav uk-subnav-pill uk-margin-top">
-			<li class="uk-disabled"><i class="uk-icon-cog"></i></li>
+			<li class="uk-disabled uk-hidden-small"><i class="uk-icon-sliders"></i></li>
 			<li><a href=""><?php Text::e('sys_title'); ?></a></li>
 		</ul>
 		<?php

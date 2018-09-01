@@ -101,8 +101,7 @@ class InPage {
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlData = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_data'));
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
-		$urlCache = $urlGui . '?context=system_settings#' . Core\Str::sanitize(Text::get('sys_cache'));
-		$urlLogout = $urlGui . '?context=logout';
+		$urlSys = $urlGui . '?context=system_settings';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		
 		$queryString = '';
@@ -118,10 +117,9 @@ class InPage {
 						'<a href="' . $urlGui . '" class="am-inpage-menu-button">' .
 							'<i class="uk-icon-automad"></i>' .
 						'</a>' .
-						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text"></i></a>' .
-						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open"></i></a>' .
-						'<a href="' . $urlCache . '" title="' . Text::get('sys_cache') . '" ' . $attr . '><i class="uk-icon-cog"></i></a>' .
-						'<a href="' . $urlLogout . '" title="' . Text::get('btn_log_out') . '" ' . $attr . '><i class="uk-icon-power-off"></i></a>' .
+						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text-o"></i></a>' .
+						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open-o"></i></a>' .
+						'<a href="' . $urlSys . '" title="' . Text::get('sys_title') . '" ' . $attr . '><i class="uk-icon-sliders"></i></a>' .
 						'<a href="#" class="am-drag-handle am-inpage-menu-button"><i class="uk-icon-arrows"></i></a>' .
 					'</div>' .
 				'</div>' .

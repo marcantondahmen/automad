@@ -91,11 +91,16 @@
 			
 			display: inline-block;
 			margin: 0;
-			padding: 0 @navbar-nav-padding-horizontal 4px @utility-container-padding-horizontal;	
+			padding: 0 @navbar-nav-padding-horizontal 0 @utility-container-padding-horizontal;	
 			position: relative;
 			
 			@media (min-width: @breakpoint-large) {
 				display: none;
+			}
+			
+			& i {
+				position: relative;
+				top: -2px;
 			}
 			
 		}

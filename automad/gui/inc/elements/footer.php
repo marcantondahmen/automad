@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 			class="uk-text-small" 
 			target="_blank"
 			>
-				automad.org
+				Automad <?php echo AM_VERSION; ?>
 			</a>	
 		</div>
 		
