@@ -6,8 +6,8 @@
 				<a href="/" class="uk-navbar-brand"><@ 
 					with @{ logo | def('/shared/*logo*') } 
 						@><img 
-						src="<@ with @{ :file } { height: 40 } @>@{ :fileResized }<@ end @>" 
-						srcset="<@ with @{ :file } { height: 80 } @>@{ :fileResized } 2x<@ end @>"
+						src="<@ with @{ :file } { height: @{ logoHeight | def (40) } } @>@{ :fileResized }<@ end @>" 
+						srcset="<@ with @{ :file } { height: @{ logoHeight | def (40) | *2 } } @>@{ :fileResized } 2x<@ end @>"
 						alt="@{ :basename }"
 						><@ 
 					else 
