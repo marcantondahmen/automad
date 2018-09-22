@@ -2,8 +2,8 @@
 
 		<@ foreach in pagelist @>
 			<div class="uk-block">
-				<ul class="uk-grid" data-uk-margin>
-					<li class="uk-width-small-1-3">
+				<ul class="uk-grid">
+					<li class="uk-width-small-1-3 uk-margin-bottom">
 						<a href="@{ url }">
 							<h3>@{ title }</h3>
 						</a>
@@ -17,7 +17,7 @@
 							width: 840 
 						} @>
 							<a href="@{ url }" 
-							class="uk-margin-small-bottom uk-display-block">
+							class="uk-margin-bottom uk-display-block">
 								<img 
 								src="@{ :fileResized }" 
 								alt="@{ :basename }"

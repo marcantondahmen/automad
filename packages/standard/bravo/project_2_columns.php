@@ -1,8 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ snippets/header.php @>
 
-	<@ snippets/content.php @>
-	<@ snippets/related_posts.php @>
+	<@ snippets/content_2_columns.php @>
+	<@ snippets/related_projects.php @>
 	<div class="uk-block uk-margin-top">
 		<@ ../snippets/prev_next.php @>
 	</div>

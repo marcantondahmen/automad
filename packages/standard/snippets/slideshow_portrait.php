@@ -6,8 +6,8 @@
 		>
 			<ul class="uk-slideshow">
 				<@ foreach in filelist { 
-					width: 1440, 
-					height: @{ slideshowHeight | def(810) }, 
+					width: 840, 
+					height: @{ slideshowHeight | def(1120) }, 
 					crop: true 
 				} @>
 					<li>
