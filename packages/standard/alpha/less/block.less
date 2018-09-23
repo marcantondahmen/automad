@@ -14,6 +14,25 @@
 @block-padding-vertical:		30px;
 @block-padding-vertical-large:	50px;
 
+
+@media (min-width: @breakpoint-medium) {
+
+    .uk-block {
+        padding-top: @block-padding-vertical;
+        padding-bottom: @block-padding-vertical;
+    }
+
+}
+
+@media (min-width: @breakpoint-xlarge) {
+
+    .uk-block {
+        padding-top: @block-padding-vertical-large;
+        padding-bottom: @block-padding-vertical-large;
+    }
+
+}
+
 .block-full-width-small {
 	
 	@media (max-width: @breakpoint-mini-max) {
