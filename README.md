@@ -2,6 +2,9 @@
 
 *A file-based content management system and template engine*
 
+[![Packagist](https://img.shields.io/packagist/v/automad/automad.svg)](https://packagist.org/packages/automad/automad)
+![License](https://img.shields.io/packagist/l/automad/automad.svg)
+
 ---
 
 ## Documentation
