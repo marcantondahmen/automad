@@ -248,9 +248,11 @@ class Cache {
 
 
 	/**
-	 *	Determine the corresponding file in the cache for the visited page in consideration of a possible query string.
-	 *	To get separate unique cache files for all kind of data within the $_REQUEST array, a hash of its JSON representation
-	 *	gets appended to cache file prefix like "cached_{md5-hash}.html" in case the array is not empty.
+	 *	Determine the corresponding file in the cache for the requested page 
+	 *	in consideration of a possible query string or submitted form data.
+	 *	To get unique cache files for all kind of data within $_GET and $_POST, 
+	 *	a hashed JSON representation of a combined array is appended to the cache file prefix 
+	 *	like "cached_{hash}.html" in case the array is not empty.
 	 *
 	 *	@return string The determined file name of the matching cached version of the visited page.
 	 */
