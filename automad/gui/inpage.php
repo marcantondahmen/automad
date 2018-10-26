@@ -115,7 +115,7 @@ class InPage {
 				'<div class="am-inpage-menubar">' .
 					'<div class="uk-button-group">' .
 						'<a href="' . $urlGui . '" class="am-inpage-menu-button">' .
-							'<i class="uk-icon-automad"></i>' .
+							file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg') .
 						'</a>' .
 						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text-o"></i></a>' .
 						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open-o"></i></a>' .

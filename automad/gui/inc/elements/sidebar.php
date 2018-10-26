@@ -52,9 +52,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<div class="am-navbar-push uk-visible-large uk-margin-bottom">
 						<a 
 						href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>"
-						class="am-logo am-sidebar-logo"
+						class="am-sidebar-logo"
 						>
-							<i class="uk-icon-automad"></i>
+							<?php include AM_BASE_DIR . '/automad/gui/svg/logo.svg'; ?>
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">

@@ -34,18 +34,19 @@
 
 .am-logo {
 	
-	font-size: 30px;
-	line-height: 1;
-		
+	width: 30px;
+	
 	@media (min-width: @breakpoint-medium) {
-		font-size: 38px;
+		width: 38px;
 	}
 	
-	&,
-	&:hover,
-	&:active,
-	&:focus {
-		color: @am-text;
+	a & * {
+		&,
+		&:hover,
+		&:active,
+		&:focus {
+			fill: @am-text;
+		}
 	}
 	
 }

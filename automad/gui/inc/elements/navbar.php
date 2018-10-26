@@ -60,11 +60,8 @@ if (User::get()) {
 		<ul class="am-navbar-nav">
 			<!-- Logo -->
 			<li class="am-navbar-logo">
-				<a 
-				href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>"
-				class="am-logo"
-				>
-					<i class="uk-icon-automad"></i>
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
+					<?php include AM_BASE_DIR . '/automad/gui/svg/logo.svg'; ?>
 				</a>
 			</li>
 			<!-- Search -->
