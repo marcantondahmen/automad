@@ -174,7 +174,7 @@ class Regex {
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 		
 		// The subpatterns don't include the wrapping delimiter <@ subpattern @>.
-		$statementSubpatterns['include'] = 	'(?P<file>[\w\/\-\.]+\.php)';
+		$statementSubpatterns['include'] = 	'(?P<file>[\w\/\-\.]+\.[a-z0-9]{2,5})';
 		
 		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?';
 		
