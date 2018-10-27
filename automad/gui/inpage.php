@@ -167,12 +167,13 @@ class InPage {
 	
 	private function injectAssets($str) {
 		
+		$versionSanitized = Core\Str::sanitize(AM_VERSION);
 		$assets = 	"\n" .
 					'<!-- Automad GUI -->' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/gui/dist/libs.min.css" rel="stylesheet">' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/gui/dist/automad.min.css" rel="stylesheet">' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js"></script>' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js"></script>' . "\n" .
+					'<link href="' . AM_BASE_URL . '/automad/gui/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
+					'<link href="' . AM_BASE_URL . '/automad/gui/dist/automad.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
+					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
+					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
 					// Cleanup window object by removing jQuery and UIkit.
 					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
 					'<!-- Automad GUI end -->' . "\n";
