@@ -2,7 +2,7 @@
 	"name": "Alpha",
 	"description": "An elegant Automad standard theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"license": "MIT",
 	"tooltips": {
 		"checkboxHideFilters": "Hide the filter button",
