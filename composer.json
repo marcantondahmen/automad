@@ -2,12 +2,13 @@
     "name": "automad/automad",
     "description": "A file-based content management system and template engine",
     "keywords": ["cms"],
-    "homepage": "http://automad.org",
+    "type": "project",
+    "homepage": "https://automad.org",
     "license": "MIT",
     "authors": [
         {
             "name": "Marc Anton Dahmen",
-            "homepage": "http://marcdahmen.de",
+            "homepage": "https://marcdahmen.de",
             "role": "Developer"
         }
     ],
