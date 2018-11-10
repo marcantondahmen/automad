@@ -71,38 +71,17 @@ class Pipe {
 	 *	Apply string function to $value.
 	 *      
 	 * 	@param string $function
-	 * 	@param string $paramString
+	 * 	@param array $parameters
 	 * 	@param string $value
 	 * 	@return string $value
 	 */
 	
-	private static function stringFunction($function, $paramString, $value) {
+	private static function stringFunction($function, $parameters, $value) {
 		
-		// Prepare function parameters.
-		if (strlen($paramString)) {
-			
-			// Relpace single quotes when not escaped with double quotes.
-			$csv = preg_replace('/(?<!\\\\)(\')/', '"', $paramString);
-			
-			// Create $parameters array.
-			$parameters = str_getcsv($csv, ',', '"');
-			
-			// Cast boolean parameters correctly.
-			// To use "false" or "true" as strings, they have to be escaped like "\true" or "\false".
-			array_walk($parameters, function(&$param) {
-				if (in_array($param, array('true', 'false'))) {
-					$param = filter_var($param, FILTER_VALIDATE_BOOLEAN);
-				}
-			});
-			
-			$parameters = array_map('stripslashes', $parameters);
-			
-		} else {
-			
+		if (!$parameters) {
 			$parameters = array();
-			
 		}
-		
+				
 		// Add the actual $value to the parameters array as its first element.
 		$parameters = array_merge(array(0 => $value), $parameters);
 		
@@ -164,42 +143,27 @@ class Pipe {
 
 
 	/**
-	 *	Process a chain of functions or mathematical operations to manipulate a given value. The output of each function is passed as the input value to the next one.
+	 *	Processes an array of functions applied to a given value.   
 	 *
-	 *	If a matched string matches a String class method, that method is called, else if that string is in the whitelist of PHP standard functions, that function is called.
-	 *	In case a match is just an integer value, the Str::shorten() method is called and the integer value is passed as parameter.    
-	 * 	In case a match is not a function name but an operator (+, -, * or /) followed by a number, the math method is called.
-	 *	
+	 * 	$functions is an associative array where the keys are the function names and 
+	 * 	the values are arrays of parameters. In case the key is a mathematical operator,
+	 * 	the values is just the numeric value instead of an array.
+	 * 
 	 *	@param string $value
-	 *	@param string $pipe - (like: | function (parameters) | function (parameters) | ...)
+	 *	@param array $functions
 	 *	@return string The modified $value 
 	 */
 
-	public static function process($value, $pipe) {
+	public static function process($value, $functions) {
 		
-		// Match functions.
-		preg_match_all('/' . Regex::pipe('pipe') . '/s', $pipe, $matches, PREG_SET_ORDER);
+		Debug::log($functions);
 		
-		// Process functions.
-		foreach ($matches as $match) {
+		foreach ($functions as $function => $param) {
 			
-			// String function.
-			if (!empty($match['pipeFunction'])) {
-				
-				$function = $match['pipeFunction'];
-				$paramString = '';
-				
-				if (isset($match['pipeParameters'])) {
-					$paramString = $match['pipeParameters'];
-				}
-				
-				$value = Pipe::stringFunction($function, $paramString, $value);
-				
-			}
-			
-			// Math.
-			if (!empty($match['pipeOperator'])) {
-				$value = Pipe::math($match['pipeOperator'], $match['pipeNumber'], $value);	
+			if (preg_match('/^[\+\/\*\-]$/', $function)) {
+				$value = Pipe::math($function, $param, $value);
+			} else {
+				$value = Pipe::stringFunction($function, $param, $value);
 			}
 			
 		}
