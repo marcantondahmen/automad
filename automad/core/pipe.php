@@ -145,9 +145,9 @@ class Pipe {
 	/**
 	 *	Processes an array of functions applied to a given value.   
 	 *
-	 * 	$functions is an associative array where the keys are the function names and 
-	 * 	the values are arrays of parameters. In case the key is a mathematical operator,
-	 * 	the values is just the numeric value instead of an array.
+	 * 	$functions is an array of associative arrays with function name and parameters. 
+	 * 	In case the function name is a mathematical operator,
+	 * 	the value is just the numeric value instead of an array.
 	 * 
 	 *	@param string $value
 	 *	@param array $functions
@@ -158,12 +158,12 @@ class Pipe {
 		
 		Debug::log($functions);
 		
-		foreach ($functions as $function => $param) {
+		foreach ($functions as $function) {
 			
-			if (preg_match('/^[\+\/\*\-]$/', $function)) {
-				$value = Pipe::math($function, $param, $value);
+			if (preg_match('/^[\+\/\*\-]$/', $function['name'])) {
+				$value = Pipe::math($function['name'], $function['parameters'], $value);
 			} else {
-				$value = Pipe::stringFunction($function, $param, $value);
+				$value = Pipe::stringFunction($function['name'], $function['parameters'], $value);
 			}
 			
 		}

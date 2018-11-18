@@ -369,13 +369,21 @@ class View {
 							
 						}
 						
-						$functions[$pipe['pipeFunction']] = $parametersArray;
+						$functions[] = array(
+							'name' => $pipe['pipeFunction'],
+							'parameters' => $parametersArray
+						);
 						
 					}
 					
 					// Math.
 					if (!empty($pipe['pipeOperator'])) {
-						$functions[$pipe['pipeOperator']] = $this->processContent($pipe['pipeNumber']);
+						
+						$functions[] = array(
+							'name' => $pipe['pipeOperator'],
+							'parameters' => $this->processContent($pipe['pipeNumber'])
+						);
+						
 					}
 					
 				}
