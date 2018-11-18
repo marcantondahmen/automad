@@ -12,6 +12,9 @@
             "role": "Developer"
         }
     ],
+    "scripts": {
+        "post-create-project-cmd": "@php automad/console createuser"
+    },
     "require": {
         "php": ">=5.4"
     }
