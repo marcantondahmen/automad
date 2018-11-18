@@ -185,10 +185,18 @@ class Parse {
             preg_match_all('/' . Regex::keyValue() . '/s', $str, $matches, PREG_SET_ORDER);
             
             foreach ($matches as $match) {
+                
                 $key = '"' . trim($match['key'], '"') . '"';
                 $value = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match['value']));
-                $value = Str::normalizeQuotes($value);
+                
+                if (!is_numeric($value) && $value !== 'true' && $value !== 'false') {  
+        			$value = str_replace('\"', '"', $value);
+        			$value = addcslashes($value,'"');
+        			$value = '"' . $value . '"';
+        		}
+                
                 $pairs[] = $key . ':' . $value; 
+                
             }
             
             // Build valid JSON string.        

@@ -336,10 +336,13 @@ class View {
 				// Get the value.
 				$value = $this->getValue($matches['varName']);
 				
-				// Process pipe.
-				$functions = preg_replace_callback('/' . Regex::pipe('pipe') . '/s', function($pipe) {
+				// Get pipe functions.
+				$functions = array();
+				
+				preg_match_all('/' . Regex::pipe('pipe') . '/s', $matches['varFunctions'], $pipes, PREG_SET_ORDER);
+				
+				foreach ($pipes as $pipe) {
 					
-					// Functions.
 					if (!empty($pipe['pipeFunction'])) {
 						
 						$parametersArray = array();
@@ -347,28 +350,35 @@ class View {
 						if (isset($pipe['pipeParameters'])) {
 							
 							preg_match_all('/' . Regex::csv() . '/s', $pipe['pipeParameters'], $pipeParameters, PREG_SET_ORDER);
-							
+
 							foreach ($pipeParameters as $match) {
-								// Strip quotes from parameter to get the actual value. 
-								// Quotes get added back after processing.
-								$parameter = preg_replace('/^([\'"])(.*)\1$/s', '$2', trim($match[1]));
-								$parametersArray[] = Str::normalizeQuotes($this->processContent($parameter));
+																
+								$parameter = trim($match[1]);
+								
+								if (in_array($parameter, array('true', 'false'))) {
+									$parameter = filter_var($parameter, FILTER_VALIDATE_BOOLEAN);
+								} else {
+									// Remove outer quotes and strip slashes.
+									$parameter = preg_replace('/^([\'"])(.*)\1$/s', '$2', $parameter);
+									$parameter = stripcslashes($this->processContent($parameter));
+								}
+								
+								$parametersArray[] = $parameter;
+								
 							}
 							
 						}
-												
-						return '|' . $pipe['pipeFunction'] . '(' . implode(',', $parametersArray) . ')';
+						
+						$functions[$pipe['pipeFunction']] = $parametersArray;
 						
 					}
 					
 					// Math.
 					if (!empty($pipe['pipeOperator'])) {
-						
-						return '|' . $pipe['pipeOperator'] . $this->processContent($pipe['pipeNumber']);
-						
+						$functions[$pipe['pipeOperator']] = $this->processContent($pipe['pipeNumber']);
 					}
 					
-				}, $matches['varFunctions']);
+				}
 				
 				// Modify $value by processing all matched string functions.
 				$value = Pipe::process($value, $functions);

@@ -8,6 +8,7 @@ y="0px"
 width="990px" 
 height="1170px" 
 viewBox="0 0 990 1170" 
+preserveAspectRatio="xMinYMin meet"
 enable-background="new 0 0 990 1170" 
 xml:space="preserve">
 	<path d="M647.527,320.549l265.229,285.792l71-172.737L879.579,229.38l0.365-0.145L764.36,5.122H309.412

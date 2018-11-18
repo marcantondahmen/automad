@@ -32,6 +32,7 @@ $units = array(
 	'pipe_math_03' => '10',
 	'for_01' => '1, 2, 3, 4, 5',
 	'if_01' => 'True',
+	'if_02' => 'False',
 	'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 	'querystringmerge_02' => 'source=0&key1=some-key-value-pair.'
 );
