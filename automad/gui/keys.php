@@ -144,17 +144,22 @@ class Keys {
 	public function inAllTemplates() {
 		
 		$keys = array();
-		
-		// Collect all .php files below "/themes"
 		$dir = AM_BASE_DIR . AM_DIR_PACKAGES;	
 		$arrayDirs = array();
 		$arrayFiles = array();
 		
+		// Collect all directories in "/packages" recursively.
 		while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
 			$dir .= '/*';
 			$arrayDirs = array_merge($arrayDirs, $dirs);
 		}
 		
+		// Filter out test and node directories.
+		$arrayDirs = array_filter($arrayDirs, function($array) {
+			return preg_match('/\/(test|node_modules)/', $array) == 0;
+		});
+	
+		// Collect all .php files.
 		foreach ($arrayDirs as $d) {
 			if ($f = glob($d . '/*.php')) {
 				$arrayFiles = array_merge($arrayFiles, $f);
