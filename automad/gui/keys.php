@@ -84,7 +84,7 @@ class Keys {
 	 *	Find all variable keys in the currently used template and all included templates (and ignore those keys in $this->reserved).
 	 *	
 	 *	@param string $file
-	 *	@return Array with keys in the currently used template (without reserved keys)
+	 *	@return array with keys in the currently used template (without reserved keys)
 	 */
 	
 	public function inCurrentTemplate($file = false) {
@@ -122,15 +122,12 @@ class Keys {
 				}
 			
 			}
-		
-			// Remove reserved keys.
-			$keys = array_diff($keys, $this->reserved);
-		
-			sort($keys);
 			
+			$keys = $this->sortAndFilter($keys);
+		
 		}
 			
-		return array_unique($keys);
+		return $keys;
 		
 	}
 
@@ -138,7 +135,7 @@ class Keys {
 	/**
 	 *	Find all variable keys in all templates (and ignore those keys in $this->reserved).
 	 *	
-	 *	@return Array with keys in the currently used template (without reserved keys)
+	 *	@return array with keys in the currently used template (without reserved keys)
 	 */
 
 	public function inAllTemplates() {
@@ -173,12 +170,7 @@ class Keys {
 			$keys = array_merge($keys, $matches['varName']);
 		}
 		
-		// Remove reserved keys.
-		$keys = array_diff($keys, $this->reserved);
-		
-		sort($keys);
-		
-		return array_unique($keys);
+		return $this->sortAndFilter($keys);
 		
 	}
 	
@@ -186,7 +178,7 @@ class Keys {
 	/**
 	 *	Find all variable keys in all other templates but the current (and ignore those keys in $this->reserved).
 	 *	
-	 *	@return Array with keys in the currently used template (without reserved keys)
+	 *	@return array with keys in the currently used template (without reserved keys)
 	 */
 	
 	public function inOtherTemplates() {
@@ -196,4 +188,37 @@ class Keys {
 	}
 	
 	
+	/**
+	 *	Sorts and filters a keys array. All text variable keys get placed in the
+	 *	beginning of the returned array and are not sorted. All non-text variable keys 
+	 *	are sorted alphabetically.
+	 * 
+	 * 	@param array $keys
+	 * 	@return array The sorted and filtered keys array
+	 */
+	
+	private function sortAndFilter($keys) {
+	
+		// Remove reserved keys.
+		$keys = array_diff($keys, $this->reserved);
+	
+		// Place all text keys in the beginning of the array
+		// and only sort all non-text keys alphabetically.
+		$textKeys = array_filter($keys, function($array) {
+			return strpos($array, 'text') === 0;
+		});
+		
+		$nonTextKeys = array_filter($keys, function($array) {
+			return strpos($array, 'text') !== 0;
+		});
+	
+		sort($nonTextKeys);
+		
+		$keys = array_merge($textKeys, $nonTextKeys);
+	
+		return array_unique($keys);
+		
+	}
+	
+		
 }
