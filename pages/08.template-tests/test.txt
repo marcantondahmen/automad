@@ -1,4 +1,4 @@
-title: Tests
+title: Template Tests
 
 -
 
