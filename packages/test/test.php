@@ -27,7 +27,7 @@ $units = array(
 	'pipe_replace_02' => '<div class="test"><p>Test</p></div>',
 	'pipe_sanatize_01' => 'some-very-long-quoted-string-all-do',
 	'pipe_shorten_01' => 'This is ...',
-	'pipe_shorten_02' => 'This is another >>>',
+	'pipe_shorten_02' => 'This is another very >>>',
 	'pipe_math_01' => '15',
 	'pipe_math_02' => '50',
 	'pipe_math_03' => '10',
