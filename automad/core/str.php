@@ -199,11 +199,14 @@ class Str {
 		
 		// Shorten $text to maximal characters (full words).
 		if (strlen($str) > $maxChars) {
-			// Cut $str to max chars
-			$str = substr($str, 0, $maxChars);
-			// Find last space and get position
+			// Cut $str to $maxChars +1. 
+			// Note that it has to be +1 to be able to catch the edge case,
+			// where $maxChars is exactly an end of a word. +1 would than
+			// be a space.
+			$str = substr($str, 0, $maxChars + 1);
+			// Find last space and get position.
 			$pos = strrpos($str, ' ');
-			// Cut $str again at last space's position (< $maxChars)
+			// Cut $str again at last space's position (< $maxChars).
 			$str = substr($str, 0, $pos) . $ellipsis;
 		}
 		
