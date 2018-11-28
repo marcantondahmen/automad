@@ -151,9 +151,9 @@ class Keys {
 			$arrayDirs = array_merge($arrayDirs, $dirs);
 		}
 		
-		// Filter out test and node directories.
+		// Filter out directories.
 		$arrayDirs = array_filter($arrayDirs, function($array) {
-			return preg_match('/\/(test|node_modules)/', $array) == 0;
+			return preg_match('/\/(dist|js|less|node_modules)(\/|$)/', $array) == 0;
 		});
 	
 		// Collect all .php files.
