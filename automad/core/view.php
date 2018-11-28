@@ -127,13 +127,10 @@ class View {
 		$Page = $Automad->Context->get();
 		
 		// Redirect page, if the defined URL variable differs from AM_REQUEST.
-		// Disable redirection for unit tests.
-		if ($Page->url && $Page->get(AM_KEY_THEME) != 'test') {
-			if ($Page->url != AM_REQUEST) {
-				$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($Page->url, $Page));
-				header('Location: ' . $url, true, 301);
-				die;
-			}
+		if ($Page->url != AM_REQUEST) {
+			$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($Page->url, $Page));
+			header('Location: ' . $url, true, 301);
+			die;
 		}
 		
 		$this->template = $Page->getTemplate();
