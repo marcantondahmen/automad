@@ -4,7 +4,12 @@ namespace Automad\Core;
 
 use PHPUnit\Framework\TestCase;
 
-class ParseTest extends TestCase {
+
+/**
+ *	@testdox Automad\Core\Parse
+ */
+
+class Parse_Test extends TestCase {
 
 
 	/**

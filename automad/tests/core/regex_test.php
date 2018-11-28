@@ -4,7 +4,12 @@ namespace Automad\Core;
 
 use PHPUnit\Framework\TestCase;
 
-class RegexTest extends TestCase {
+
+/**
+ *	@testdox Automad\Core\Regex
+ */
+
+class Regex_Test extends TestCase {
 	
 	
 	/**

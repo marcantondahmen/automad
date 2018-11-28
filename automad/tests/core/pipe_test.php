@@ -4,7 +4,12 @@ namespace Automad\Core;
 
 use PHPUnit\Framework\TestCase;
 
-class PipeTest extends TestCase {
+
+/**
+ *	@testdox Automad\Core\Pipe
+ */
+
+class Pipe_Test extends TestCase {
 
 	
 	/**

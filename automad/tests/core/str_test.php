@@ -4,7 +4,12 @@ namespace Automad\Core;
 
 use PHPUnit\Framework\TestCase;
 
-class StrTest extends TestCase {
+
+/**
+ *	@testdox Automad\Core\Str
+ */
+
+class Str_Test extends TestCase {
 	
 	
 	/**
@@ -27,6 +32,7 @@ class StrTest extends TestCase {
 		
 	}
 	
+	
 	/**
 	 *	@dataProvider dataForTestSanitizeIsEqual
 	 *	@testdox sanitize("$str", $removeDots, $maxChars) equals "$expected"
@@ -47,6 +53,7 @@ class StrTest extends TestCase {
 		);
 		
 	}
+	
 	
 	/**
 	 *	@dataProvider dataForTestShortenIsEqual
@@ -72,6 +79,7 @@ class StrTest extends TestCase {
 		
 	}
 	
+	
 	/**
 	 *	@dataProvider dataForTestStripEndIsEqual
 	 *	@testdox stripEnd("$str", "$end") equals "$expected"
@@ -90,6 +98,7 @@ class StrTest extends TestCase {
 		);
 		
 	}
+	
 	
 	/**
 	 *	@dataProvider dataForTestStripStartIsEqual

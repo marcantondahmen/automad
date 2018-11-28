@@ -1,7 +1,7 @@
 <phpunit bootstrap="automad/tests/bootstrap.php" colors="true">
 	<testsuites>
 		<testsuite name="Automad">
-			<directory>automad/tests</directory>
+			<directory suffix="_test.php">automad/tests</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>
