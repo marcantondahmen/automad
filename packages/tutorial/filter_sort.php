@@ -29,7 +29,7 @@ across multiple templates.
 			A simple filter menu lets the user filter the paglist dynamically.
 			#>
 			<div class="field is-grouped is-marginless is-block-mobile">
-				<p class="control is-marginless">
+				<div class="control">
 					<div class="field has-addons">
 						<p class="control">
 							<a 
@@ -62,9 +62,9 @@ across multiple templates.
 							</p>
 						<@ end @>
 					</div>
-				</p>
+				</div>
 				<# The sorting menu. #>
-				<p class="control">
+				<div class="control">
 					<div class="field has-addons">
 						<p class="control">
 							<a 
@@ -89,9 +89,9 @@ across multiple templates.
 							</a>
 						</p>
 					</div>
-				</p>
+				</div>
 				<# A normal form is used to create the keyword search field. #>
-				<p class="control">
+				<div class="control">
 					<form action="" method="get">
 						<input 
 						class="input" 
@@ -106,7 +106,7 @@ across multiple templates.
 						value="@{ ?search }"
 						/>
 					</form>
-				</p>
+				</div>
 			</div>
 			<br />
 			<# The pagelist markup. #>
