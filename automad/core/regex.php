@@ -63,7 +63,7 @@ class Regex {
 	 *	The character class to be used within a regex matching all allowed characters for all kine of variable names (content in .txt files, system variables ( :var ) and query string items ( ?var )).
 	 */
 
-	public static $charClassAllVariables = '[:\?\w\.\-]';
+	public static $charClassAllVariables = '[%:\?\w\.\-]';
 		
 
 	/**
@@ -271,7 +271,7 @@ class Regex {
 	
 	public static function keyValue() {
 		
-		$key = '(?P<key>[\w\-]+|\"[\w\-]+\")';
+		$key = '(?P<key>' . self::$charClassAllVariables . '+|\"' . self::$charClassAllVariables . '+\")';
 		$value = '(?P<value>' . self::value(self::variable()) . ')';
 		$pair = '\s*' . $key . '\s*:\s*' . $value . '\s*';
 		

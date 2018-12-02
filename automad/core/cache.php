@@ -163,19 +163,27 @@ class Cache {
 			
 				// Check if page didn't reach the cache's lifetime yet.
 				if (($cacheMTime + AM_CACHE_LIFETIME) > time()) {
-									
-					// Check if page is newer than the site's mTime.
-					if ($cacheMTime > $this->siteMTime) {
+					
+					// Check if the session data has changed.
+					if ($cacheMTime > SessionData::getMTime()) {
 						
-						// If the cached page is newer and didn't reach the cache's lifetime, it gets approved.
-						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache got approved! Page cache mTime');
-						return true;
+						// Check if page is newer than the site's mTime.
+						if ($cacheMTime > $this->siteMTime) {
+							
+							// If the cached page is newer and didn't reach the cache's lifetime, it gets approved.
+							Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache got approved! Page cache mTime');
+							return true;
+							
+						}
+						
+						// If the cached page is older than the site's mTime,
+						// the cache gets no approval. 
+						Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The site got modified! Page cache mTime');
+						return false;
 						
 					}
 					
-					// If the cached page is older than the site's mTime,
-					// the cache gets no approval. 
-					Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - The site got modified! Page cache mTime');
+					Debug::log(date('d. M Y, H:i:s', $cacheMTime), 'Page cache is deprecated - Session data has changed! Page cache mTime');
 					return false;
 				
 				}
@@ -250,7 +258,7 @@ class Cache {
 	/**
 	 *	Determine the corresponding file in the cache for the requested page 
 	 *	in consideration of a possible query string or submitted form data.
-	 *	To get unique cache files for all kind of data within $_GET and $_POST, 
+	 *	To get unique cache files for all kind of data within $_SESSION['data'], $_GET and $_POST, 
 	 *	a hashed JSON representation of a combined array is appended to the cache file prefix 
 	 *	like "cached_{hash}.html" in case the array is not empty.
 	 *
@@ -266,6 +274,10 @@ class Cache {
 		$parameters = array();
 		$parametersHash = '';
 		
+		if ($sessionData = SessionData::get()) {
+			$parameters['session'] = $sessionData;
+		}
+		
 		if (!empty($_GET)) {
 			$parameters['get'] = $_GET;
 		}
@@ -278,7 +290,7 @@ class Cache {
 			$parametersHash = '_' . sha1(json_encode($parameters));
 		}
 		
-		Debug::log($parameters, 'Parameters (get/post)');
+		Debug::log($parameters, 'Parameters');
 		
 		// For proxies, use HTTP_X_FORWARDED_SERVER or HTTP_X_FORWARDED_HOST as server name. 
 		// The actual server name is then already part of the AM_BASE_URL.

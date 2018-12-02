@@ -98,4 +98,18 @@ class Shared {
 	}
 	
 	
+	/**
+	 *	Set key/value pait in data.
+	 *	
+	 * 	@param string $key
+	 * 	@param string $value
+	 */
+	
+	public function set($key, $value) {
+		
+		$this->data[$key] = $value;
+		
+	}
+	
+
 }

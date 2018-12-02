@@ -20,9 +20,8 @@ class Mock extends TestCase {
 	 */
 		
 	public function createAutomad($template = '') {
-			
-		$SharedMock = $this->createMock('\Automad\Core\Shared');
 		
+		$Shared = new Core\Shared();
 		$collection = array();
 		$collection['/'] = new Core\Page(
 			array(
@@ -35,7 +34,7 @@ class Mock extends TestCase {
 				'quoted' => '"Quoted" "Test" "String"',
 				'x' => '10'
 			), 
-			$SharedMock
+			$Shared
 		);
 		
 	    $methods = array_diff(
@@ -55,6 +54,7 @@ class Mock extends TestCase {
                             ->getMock();
 							
 		$AutomadMock->method('getCollection')->willReturn($collection);
+		$AutomadMock->Shared = $Shared;
 		$AutomadMock->Context = new Core\Context($collection['/']);
 		
 		return $AutomadMock;

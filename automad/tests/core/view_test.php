@@ -54,7 +54,9 @@ class View_Test extends TestCase {
 			'if_01' => 'True',
 			'if_02' => 'False',
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
-			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.'
+			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
+			'set_01' => 'Test 1, Test 2',
+			'session_get_01' => 'Session Test'
 		);
 		
 		foreach ($templates as $template => $expected) {

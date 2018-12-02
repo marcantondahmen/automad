@@ -488,5 +488,30 @@ class Toolbox {
 		
 	}
 	
+	
+	/**
+	 *	Set shared or session data variables by passing an array of key/value pairs.
+	 *	
+	 * 	@param array $options
+	 */
+	
+	public function set($options) {
+		
+		foreach ($options as $key => $value) {
+					
+			if (preg_match('/' . Regex::$charClassAllVariables . '/', $key)) {
+				
+				if (strpos($key, '%') === 0) {
+					SessionData::set($key, $value); 
+				} else {
+					$this->Automad->Shared->set($key, $value);
+				}
+				
+			} 
+			
+		}
+		
+	}
+	
 		
 }

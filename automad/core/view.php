@@ -229,6 +229,11 @@ class View {
 			$key = substr($key, 1);
 			return htmlspecialchars(Parse::query($key));
 			
+		} elseif (strpos($key, '%') === 0) {	
+			
+			// Session variable.
+			return SessionData::get($key);
+			
 		} else {
 			
 			// First try to get the value from the current Runtime object.
