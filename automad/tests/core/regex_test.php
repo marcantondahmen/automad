@@ -87,11 +87,11 @@ class Regex_Test extends TestCase {
 				)
 			),
 			array(
-				'!@{var|+2|*5}',
+				'!@{ var | +2 | *5 }',
 				'test',
 				array(
 					'testNot' => '!',
-					'testVar' => '@{var|+2|*5}'
+					'testVar' => '@{ var | +2 | *5 }'
 				)
 			)
 		);
@@ -143,19 +143,19 @@ class Regex_Test extends TestCase {
 				)
 			),
 			array(
-				'<@# for 1 to @{x} @>@{:i}<@# end @>',
+				'<@# for 1 to @{ x } @>@{ :i }<@# end @>',
 				array(
 					'forStart' => '1',
-					'forEnd' => '@{x}',
-					'forSnippet' => '@{:i}'
+					'forEnd' => '@{ x }',
+					'forSnippet' => '@{ :i }'
 				)
 			),
 			array(
-				'<@# foreach in filelist { width: @{ width } } @>@{:file}<@# end @>',
+				'<@# foreach in filelist { width: @{ width } } @>@{ :file }<@# end @>',
 				array(
 					'foreach' => 'filelist',
 					'foreachOptions' => '{ width: @{ width } }',
-					'foreachSnippet' => '@{:file}'
+					'foreachSnippet' => '@{ :file }'
 				)
 			),
 			array(

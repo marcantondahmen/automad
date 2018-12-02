@@ -90,7 +90,7 @@ class Runtime {
 	
 	public function get($key) {
 		
-		// Check whether $key is generated within a loop and therefore stored in $independentSystemVars or
+		// Check whether $key is generated within a loop and therefore stored in $this->data or
 		// if $key is related to the context, filelist or pagelist object.
 		if (array_key_exists($key, $this->data)) {
 			
