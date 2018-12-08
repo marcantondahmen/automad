@@ -28,7 +28,7 @@ across multiple templates.
 			<# 
 			A simple filter menu lets the user filter the paglist dynamically.
 			#>
-			<div class="field is-grouped is-marginless is-block-mobile">
+			<div class="field is-grouped is-grouped-multiline is-marginless">
 				<div class="control">
 					<div class="field has-addons">
 						<p class="control">

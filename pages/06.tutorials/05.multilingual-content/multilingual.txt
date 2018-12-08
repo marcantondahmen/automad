@@ -14,4 +14,8 @@ textTeaser: This template illustrates the use of session data to build a multili
 
 -
 
+hidden: 1
+
+-
+
 theme: tutorial

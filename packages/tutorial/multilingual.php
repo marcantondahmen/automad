@@ -36,7 +36,7 @@ navbar and content snippets are include first.
 		<#
 		This is the markup for the language selection buttons. 
 		#>
-		<div class="field is-grouped is-marginless is-block-mobile">
+		<div class="field is-grouped is-grouped-multiline is-marginless">
 			<div class="control">
 				<div class="field has-addons">
 					<p class="control">

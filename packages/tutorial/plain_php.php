@@ -47,8 +47,8 @@ footers works perfectly fine since the order of parsing is not relevant here.
 			));
 			?>
 			<# A simple filter menu lets the user filter the paglist dynamically. #>
-			<div class="field is-grouped is-marginless is-block-mobile">
-				<p class="control is-marginless">
+			<div class="field is-grouped is-grouped-multiline is-marginless">
+				<div class="control">
 					<div class="field has-addons">
 						<p class="control">
 							<a 	
@@ -76,9 +76,9 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							</p>
 						<?php } ?>
 					</div>
-				</p>
+				</div>
 				<# The sorting menu. #>
-				<p class="control">
+				<div class="control">
 					<div class="field has-addons">
 						<p class="control">
 							<a 
@@ -103,9 +103,9 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							</a>
 						</p>
 					</div>
-				</p>
+				</div>
 				<# A normal form is used to create the keyword search field. #>
-				<p class="control">
+				<div class="control">
 					<form action="" method="get">
 						<input 
 						class="input" 
@@ -115,7 +115,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 						value="<?php echo Parse::query('search'); ?>"
 						/>
 					</form>
-				</p>
+				</div>
 			</div>
 			<br />
 			<# The pagelist markup. #>
