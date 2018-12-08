@@ -9,6 +9,6 @@
 		limit: @{ itemsPerPage | def(10) },
 		page: @{ ?page | def(1) }
 	} @>
-	<@ if @{ checkboxShowAllPagesInPagelist } @>
+	<@ if @{ checkboxShowAllPagesInPagelist } or @{ ?search } @>
 		<@ pagelist { type: false } @>
 	<@ end @>
