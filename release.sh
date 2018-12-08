@@ -8,12 +8,17 @@
 # This script handles the release process for new Automad versions
 # by doing the following:
 #
-#	1.	Update version numbers in automad/version.php and all related JSON files
-#	2.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
-#	3.	Commit changed files
-#	4.	Merge branch develop into default
-#	5.	Create tag for release
+#	1.	Run tests
+#	2.	Update version numbers in automad/version.php and all related JSON files
+#	3.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
+#	4.	Commit changed files
+#	5.	Merge branch develop into default
+#	6.	Create tag for release
 
+# Run tests.
+phpunit
+echo "---"
+echo
 
 # Get current version.
 latestTag=$(hg tags | sed -n '2 p' | cut -d ' ' -f 1)
