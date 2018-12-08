@@ -26,7 +26,8 @@ class Mock extends TestCase {
 		$collection['/'] = new Core\Page(
 			array(
 				'title' => 'Test',
-				'url' => AM_REQUEST,
+				'url' => '/',
+				':origUrl' => '/',
 				'theme' => '../automad/tests/templates',
 				':template' => $template,
 				'date' => '2018-07-21 12:00:00',

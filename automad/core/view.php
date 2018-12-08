@@ -126,8 +126,8 @@ class View {
 		$this->InPage = new GUI\InPage();
 		$Page = $Automad->Context->get();
 		
-		// Redirect page, if the defined URL variable differs from AM_REQUEST.
-		if ($Page->url != AM_REQUEST) {
+		// Redirect page, if the defined URL variable differs from the original URL.
+		if ($Page->url != $Page->origUrl) {
 			$url = Resolve::absoluteUrlToRoot(Resolve::relativeUrlToBase($Page->url, $Page));
 			header('Location: ' . $url, true, 301);
 			die;
