@@ -51,35 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  
 class SessionData {
 	
-	
-		/**
-		 *	Get modification time of the session data array.
-		 *	
-		 * 	@return integer The UNIX timestamp of the modification time or 0
-		 */
-
-		public static function getMTime() {
-			
-			if (isset($_SESSION['mtime'])) {
-				return $_SESSION['mtime'];
-			}
-			
-			return 0;
-			
-		}
-
-		
-		/**
-		 *	Set the session data array modification time.
-		 */
-
-		private static function setMTime() {
-			
-			$_SESSION['mtime'] = time();
-			
-		}
-
-		
+    	
 		/**
 		 *	Set a key/value pair in the session data array.
 		 *
@@ -94,8 +66,7 @@ class SessionData {
 			}
 			
 			$_SESSION['data'][$key] = $value;
-			self::setMTime();
-			
+            
 		}
 		
 		
@@ -115,12 +86,12 @@ class SessionData {
 			if ($key) {
 				if (array_key_exists($key, $_SESSION['data'])) {
 					return $_SESSION['data'][$key];
-				}
+				} else {
+                    return false;
+                }
 			} else {
 				return $_SESSION['data'];
 			}
-			
-			return false;
 			
 		}
 		
