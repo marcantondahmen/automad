@@ -45,4 +45,6 @@ All console commands and corresponding filenames are lowercase and don't have an
 
     php automad/console createuser > automad/cli/createuser.php
     
-    
+### Composer Packages
+
+Composer packages are excluded from Automad's internal naming convention in terms of directory structure, filenames and classes.  
