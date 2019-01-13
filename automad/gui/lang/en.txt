@@ -471,7 +471,11 @@ shared_theme: Main theme
 
 -
 
-shared_vars_used: Variables in installed themes
+shared_vars_main_theme: Variables in the main theme
+
+-
+
+shared_vars_other_themes: Variables in other themes
 
 -
 

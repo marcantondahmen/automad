@@ -66,6 +66,9 @@ if (isset($_POST['data'])) {
 	// Get shared data from Shared object.
 	$data = $this->Automad->Shared->data;
 	
+	// Get themes.
+	$themes = $this->Themelist->getThemes();
+	
 	// Start buffering the HTML.
 	ob_start();
 	
@@ -103,7 +106,6 @@ if (isset($_POST['data'])) {
 				>
 					<?php 
 					
-					$themes = $this->Themelist->getThemes();
 					Core\Debug::ajax($output, 'themes', $themes);
 					$i = 0;
 					
@@ -175,25 +177,44 @@ if (isset($_POST['data'])) {
 					<?php } ?> 	
 				</ul>
 			</div>
-			<!-- Used shared variables -->
-			<?php $keysInAllTemplates = $this->Keys->inAllTemplates(); ?>
+			<?php 
+			
+				$mainTheme = $themes[$this->Automad->Shared->get(AM_KEY_THEME)];
+				$keysInMainTheme = $this->Keys->inTheme($mainTheme);
+				$keysInOtherThemes = array_diff($this->Keys->inAllTemplates(), $keysInMainTheme); 
+				
+			?>
+			<!-- Used shared variables in main theme. -->
 			<div type="button" class="uk-accordion-title">
-				<?php Text::e('shared_vars_used'); ?>&nbsp;
-				<span class="uk-badge"><?php echo count($keysInAllTemplates); ?></span>
+				<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
+				<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
 					echo $this->Html->formGroup(
-						$keysInAllTemplates, 
+						$keysInMainTheme, 
 						$data,
 						false,
-						$this->Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME))
+						$mainTheme
+					); 
+				?>
+			</div>
+			<!-- Used shared variables in other themes. -->
+			<div type="button" class="uk-accordion-title">
+				<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
+				<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
+			</div>
+			<div class="uk-accordion-content">
+				<?php 
+					echo $this->Html->formGroup(
+						$keysInOtherThemes, 
+						$data
 					); 
 				?>
 			</div>
 			<!-- Unused shared variables -->
 			<div type="button" class="uk-accordion-title">
-				<?php Text::e('shared_vars_unused'); ?>
+				<?php Text::e('shared_vars_unused'); ?>&nbsp;
 				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
 			</div>
 			<div class="uk-accordion-content">
