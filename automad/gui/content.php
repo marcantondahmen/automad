@@ -922,9 +922,16 @@ class Content {
 		$output = array();
 	
 		if (is_writable(AM_FILE_SHARED_DATA)) {
+			
 			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 			$this->clearCache();
-			$output['success'] = Text::get('success_saved');
+			
+			if ($data[AM_KEY_THEME] != $this->Automad->Shared->get(AM_KEY_THEME)) {
+				$output['redirect'] = '?context=edit_shared';
+			} else {
+				$output['success'] = Text::get('success_saved');
+			}
+			
 		} else {
 			$output['error'] = Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>';
 		}
