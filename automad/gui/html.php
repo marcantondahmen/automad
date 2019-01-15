@@ -537,55 +537,64 @@ class Html {
 	public function selectTemplate($Themelist, $name = '', $selectedTheme = false, $selectedTemplate = false) {
 		
 		$themes = $Themelist->getThemes();
-		$sharedTheme = $themes[$this->Automad->Shared->get(AM_KEY_THEME)];
-		$templates = array();
+		$mainTheme = $Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME));
 		
-		// Create HTML
-		$html = '<div class="uk-form-select uk-button uk-button-success uk-width-1-1 uk-text-left" data-uk-form-select="{activeClass:\'\'}">' . 
+		// Create HTML.
+		$html = '<div class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" data-uk-form-select="{activeClass:\'\'}">' . 
 				'<span></span>&nbsp;&nbsp;' .
 				'<span class="uk-float-right"><i class="uk-icon-caret-down"></i></span>' .
 				'<select class="uk-width-1-1" name="' . $name . '">'; 
 		
-		// List templates of current sitewide theme
-		foreach($sharedTheme->templates as $template) {
+		// List templates of current main theme.
+		if ($mainTheme) {
+			
+			$html .= '<optgroup label="' . ucwords(Text::get('shared_theme')) . '">';
+			
+			foreach ($mainTheme->templates as $template) {
 
-			$html .= '<option';
+				$html .= '<option';
 
-			if (!$selectedTheme && basename($template) === $selectedTemplate . '.php') {
-				 $html .= ' selected';
+				if (!$selectedTheme && basename($template) === $selectedTemplate . '.php') {
+					 $html .= ' selected';
+				}
+
+				$html .= ' value="' . basename($template) . '">' . 
+					 '* / ' . ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
+					 '</option>';
+
 			}
-
-			$html .= ' value="' . basename($template) . '">' . 
-				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
-				 ' (Global Theme)</option>';
-
+			
+			$html .= '</optgroup>';
+			
 		}
-
-		// Get all templates of all installed themes.
+		
+		// List all other templated grouped by theme.
 		foreach ($themes as $theme) {
-			$templates = array_merge($templates, $theme->templates);
-		}
-
-		// List all found templates along with their theme folder.
-		foreach($templates as $template) {
-
-			$theme = Core\Str::stripStart(dirname($template), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
-			$html .= '<option';
-
-			if ($selectedTheme === $theme && basename($template) === $selectedTemplate . '.php') {
-				 $html .= ' selected';
+			
+			$html .= '<optgroup label="' . $theme->name . '">';
+			
+			foreach ($theme->templates as $template) {
+				
+				$html .= '<option';
+				
+				if ($selectedTheme === $theme->path && basename($template) === $selectedTemplate . '.php') {
+					 $html .= ' selected';
+				}
+				
+				$html .= ' value="' . $theme->path . '/' . basename($template) . '">' . 
+						 $theme->name . 
+						 ' / ' . 
+						 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
+						 '</option>';
+				
 			}
-
-			$html .= ' value="' . $theme . '/' . basename($template) . '">' . 
-				 ucwords(str_replace(array('_', '/'), array(' ', ' / '), $theme)) . 
-				 ' / ' . 
-				 ucwords(str_replace(array('_', '.php'), array(' ', ''), basename($template))) . 
-				 '</option>';
-				 
+			
+			$html .= '</optgroup>';
+			
 		}
 		
 		$html .= '</select>' .
-			 '</div>';
+			     '</div>';
 		
 		return $html;
 		

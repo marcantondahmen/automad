@@ -172,40 +172,43 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					<!-- Select Template Button -->	
 					<div class="uk-form-row">
 						<label class="uk-form-label uk-text-truncate">
-							<?php 
-							
-							Text::e('page_theme_template'); 
-							
-							if ($data[AM_KEY_THEME]) {
-								$theme = $data[AM_KEY_THEME];
-							} else {
-								$theme = $this->Automad->Shared->get(AM_KEY_THEME);
-							}
-							
-							$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $theme . '/' . $Page->template . '.php';
-							
-							// Give feedback whether the template exists or not.	
-							if (!file_exists($template)) {
-								echo ' - ' . Text::get('error_template_missing');
-							}
-							
-							?>
+							<?php Text::e('page_theme_template'); ?>
 						</label>
 						<?php 
+						
+						if ($data[AM_KEY_THEME]) {
+							$themePath = $data[AM_KEY_THEME];
+							$Theme = $this->Themelist->getThemeByKey($data[AM_KEY_THEME]);
+							$themeName = $Theme->name . ' / ';
+						} else {
+							$themePath = $this->Automad->Shared->get(AM_KEY_THEME);
+							$themeName = '';
+						}
+						
+						$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $themePath . '/' . $Page->template . '.php';
+						$templateName = $themeName . ucwords(str_replace('_', ' ', $Page->template));
 						
 						if (file_exists($template)) {
 							$templateButtonClass = 'uk-button-success';
 						} else {
 							$templateButtonClass = 'uk-button-danger';
+							$templateName .= ' - ' . Text::get('error_template_missing');
 						}
 						
 						?>
 						<button 
 						type="button" 
-						class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1 uk-text-truncate uk-text-left" 
+						class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1" 
 						data-uk-modal="{target:'#am-select-template-modal'}"
 						>
-							<?php echo ucwords(str_replace(array('_', '/'), array(' ', ' / '), ltrim($data[AM_KEY_THEME] . ' / ', '/ ') . $Page->template));?> 
+							<div class="uk-flex uk-flex-space-between">
+								<div class="uk-text-truncate uk-text-left">
+									<?php echo $templateName;?> 
+								</div>
+								<div class="uk-hidden-small">
+									<i class="uk-icon-pencil"></i>
+								</div>
+							</div>
 						</button>	
 					</div>
 					<!-- Visibility -->
