@@ -53,6 +53,8 @@ class View_Test extends TestCase {
 			'for_01' => '1, 2, 3, 4, 5',
 			'if_01' => 'True',
 			'if_02' => 'False',
+			'if_03' => 'True',
+			'if_04' => 'True',
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'set_01' => 'Test 1, Test 2',
