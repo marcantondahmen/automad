@@ -343,7 +343,8 @@ class Regex {
 	public static function value($subpatternVar) {
 		
 		// Any quoted string. Single and double quotes are allowed.
-		$string = '"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'';
+		// Use possessive quantifiers to improve performance of very long values.
+		$string = '"(?:[^"\\\\]|\\\\.)*+"|\'(?:[^\'\\\\]|\\\\.)*+\'';
 		
 		return '\s*(' . $string . '|\w+|' . self::$number . '|' . $subpatternVar . ')\s*';
 		
