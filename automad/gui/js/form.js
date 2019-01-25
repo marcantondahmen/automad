@@ -69,7 +69,7 @@
 			 *						
 			 *	data-am-init						Automatically submit form when a page gets loaded.
 			 *
-			 * 	data-am-auto-submit					Automatically submit form on changes. Must be added to a button.
+			 * 	data-am-auto-submit					Automatically submit form on changes.
 			 *
 			 * 	data-am-close-on-success="#form"	Closes a modal window with the given ID on success.
 			 *
@@ -81,6 +81,8 @@
 			 *	data-am-enter="#button"				Trigger click event on pressing the enter key. Must be added to an input field.
 			 *
 			 *  data-am-watch-exclude				Exclude field from being watched for changes.
+			 *
+			 * 	data-am-modal-on-change="#modal"	Opens a modal on changes.
 			 *
 			 *
 			 * 	BUTTON ATTRIBUTES:
@@ -98,7 +100,8 @@
 			close:			'data-am-close-on-success',
 			confirm:		'data-am-confirm',
 			enter:			'data-am-enter',
-			watchExclude:	'data-am-watch-exclude'
+			watchExclude:	'data-am-watch-exclude',
+			modalOnChange:	'data-am-modal-on-change'
 			
 		},
 		
@@ -355,6 +358,13 @@
 				}
 				
 			}
+			
+			// Open modal window on changes.
+			$doc.on('change', '[' + da.modalOnChange + ']', function() {
+				
+				UIkit.modal($(this).data(Automad.util.dataCamelCase(da.modalOnChange))).show();
+				
+			});
 			
 			
 			// Events.

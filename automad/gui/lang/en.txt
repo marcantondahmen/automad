@@ -258,10 +258,6 @@ error_template_missing: Missing
 
 -
 
-error_theme_missing: Missing
-
--
-
 error_update_connection: Can't connect to the update server! This could typically be caused by a wrong update configuration (config.json), a SSL certificate error or a missing cURL library.
 
 -
@@ -472,6 +468,11 @@ shared_title: Shared Data & Files
 -
 
 shared_theme: Main theme
+
+-
+
+shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? 
+Your unsaved changes will be saved.
 
 -
 
