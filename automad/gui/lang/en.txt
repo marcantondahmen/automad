@@ -110,6 +110,10 @@ btn_open_log: Open Log
 
 -
 
+btn_readme: Open readme file
+
+-
+
 btn_remove_selected: Remove Selected
 
 -

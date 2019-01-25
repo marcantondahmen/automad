@@ -159,6 +159,25 @@ if (isset($_POST['data'])) {
 				
 					?>
 					<li>
+						<?php if ($Theme->readme) { ?>
+						<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
+							<div class="uk-modal-dialog uk-modal-dialog-large">
+								<div class="uk-modal-header">
+									Readme
+									<a href="#" class="uk-modal-close uk-close"></a>
+								</div>
+								<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
+								<div class="uk-modal-footer uk-text-right">
+									<button 
+									class="uk-modal-close uk-button"
+									>
+										<i class="uk-icon-close"></i>&nbsp;
+										<?php Text::e('btn_close'); ?>
+									</button>
+								</div>
+							</div>
+						</div>
+						<?php } ?>				
 						<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
 							<div class="uk-panel-teaser">
 								<?php echo $icon; ?>
@@ -186,7 +205,17 @@ if (isset($_POST['data'])) {
 								<?php echo $Theme->license; ?>
 							</div>
 							<?php } ?>
-							<div class="am-panel-bottom am-panel-bottom-small">
+							<div class="am-panel-bottom">
+								<?php if ($Theme->readme) { ?>
+								<a 
+								href="#<?php echo $id . '-modal' ?>"
+								class="uk-icon-button uk-icon-align-left"
+								title="<?php Text::e('btn_readme'); ?>"
+								data-uk-tooltip
+								data-uk-modal
+								>
+								</a>
+								<?php } ?>
 								<label 
 								class="am-toggle-checkbox am-panel-bottom-right" 
 								data-am-toggle="#<?php echo $id; ?>"

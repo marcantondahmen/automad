@@ -63,10 +63,11 @@ class Theme {
 	/**
 	 * 	The constructor.
 	 *
-	 * 	@param string $path
+	 * 	@param string $themeJSON
+	 * 	@param array $composerInstalled
 	 */
 	
-	public function __construct($themeJSON) {
+	public function __construct($themeJSON, $composerInstalled) {
 		
 		$json = false;
 		$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
@@ -79,6 +80,17 @@ class Theme {
 						'tooltips' => array()
 					);
 		
+		// Get Composer version.			
+		if (array_key_exists($path, $composerInstalled)) {
+			$package = array_intersect_key(
+				$composerInstalled[$path],
+				array_flip(array('version'))
+			);
+		} else {
+			$package = array();
+		}
+		
+		// Decode JSON file.
 		if (is_readable($themeJSON)) {
 			$json = @json_decode(file_get_contents($themeJSON), true);
 		}
@@ -87,6 +99,15 @@ class Theme {
 			$json = array();
 		}
 		
+		// Get readme files.
+		$readme = false;
+		$readmes = glob(dirname($themeJSON) . '/{readme,README}.{md,txt}', GLOB_BRACE);
+		
+		if (is_array($readmes) && !empty($readmes)) {
+			$readme = reset($readmes);
+		}
+		
+		// Get templates.
 		$templates = glob(dirname($themeJSON) . '/*.php');
 		
 		// Remove the 'page not found' template from the array of templates. 
@@ -97,9 +118,11 @@ class Theme {
 		$this->data = array_merge(
 						$defaults, 
 						$json, 
+						$package,
 						array(
 							'path' => $path,
-							'templates' => $templates
+							'templates' => $templates,
+							'readme' => $readme
 						)
 					);
 		
