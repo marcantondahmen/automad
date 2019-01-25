@@ -274,6 +274,8 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 							$allTags = $Pagelist->getTags();
 							sort($allTags);
 							
+							$allTagsAutocomplete = array();
+							
 							foreach ($allTags as $tag) {
 								$allTagsAutocomplete[]['value'] = $tag;
 							}
