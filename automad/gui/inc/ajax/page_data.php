@@ -140,7 +140,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 			>
 				
 				<!-- Settings -->
-				<div type="button" class="uk-accordion-title">
+				<div class="uk-accordion-title">
 					<?php Text::e('page_settings'); ?>
 				</div>
 				<div class="uk-accordion-content">
@@ -302,7 +302,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				
 				<?php if ($keysInCurrentTemplate = $this->Keys->inCurrentTemplate()) { ?>
 				<!-- Vars in selected template -->
-				<div type="button" class="uk-accordion-title">
+				<div class="uk-accordion-title">
 					<?php Text::e('page_vars_in_template'); ?>&nbsp;
 					<span class="uk-badge"><?php echo count($keysInCurrentTemplate); ?></span>
 				</div>
@@ -320,7 +320,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				
 				<!-- Vars in other templates -->
 				<?php $keysInOtherTemplates = $this->Keys->inOtherTemplates(); ?>
-				<div type="button" class="uk-accordion-title">
+				<div class="uk-accordion-title">
 					<?php Text::e('page_vars_in_other_templates'); ?>&nbsp;
 					<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
 				</div>
@@ -329,7 +329,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				</div>
 				
 				<!-- Vars in data but not in any template -->
-				<div type="button" class="uk-accordion-title">
+				<div class="uk-accordion-title">
 					<?php Text::e('page_vars_unused'); ?>&nbsp;
 					<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
 				</div>
