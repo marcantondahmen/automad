@@ -75,11 +75,29 @@ class Text {
 	
 	/**
 	 *	Parse the text modules file and store all modules in Text::$modules.
+	 *	In case AM_FILE_GUI_TRANSLATION is defined, the translated text modules 
+	 *	will be merged into Text:$modules.
 	 */
 	
 	public static function parseModules() {
 		
 		Text::$modules = Core\Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
+		
+		if (AM_FILE_GUI_TRANSLATION) {
+			
+			$translationFile = AM_BASE_DIR . AM_FILE_GUI_TRANSLATION;
+			
+			if (is_readable($translationFile)) {
+				
+				$translation = Core\Parse::textFile($translationFile);
+				
+				if (is_array($translation)) {
+					Text::$modules = array_merge(Text::$modules, $translation);
+				}
+				
+			}
+			
+		}
 		
 		array_walk(Text::$modules, function(&$item) {
 			$item = Core\Str::markdown($item, true);
