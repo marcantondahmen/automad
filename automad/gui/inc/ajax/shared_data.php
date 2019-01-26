@@ -161,7 +161,7 @@ if (isset($_POST['data'])) {
 					<li>
 						<?php if ($Theme->readme) { ?>
 						<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
-							<div class="uk-modal-dialog uk-modal-dialog-large">
+							<div class="am-text-readme uk-modal-dialog uk-modal-dialog-large">
 								<div class="uk-modal-header">
 									Readme
 									<a href="#" class="uk-modal-close uk-close"></a>

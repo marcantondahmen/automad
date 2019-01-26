@@ -35,3 +35,25 @@
 
 @text-muted-color:		    @am-muted;
 @text-small-line-height:    18px;
+
+
+.am-text {
+	
+	&-readme {
+		
+		& pre {
+			margin: @utility-margin-small 0;
+			padding: 10px 15px;
+			background-color: @form-background;
+			border-radius: @am-radius;
+		}
+		
+		& :not(pre) > code {
+			background-color: @form-background;
+			padding: 1px 5px;
+			border-radius: 3px;
+		}
+		
+	}
+	
+}
