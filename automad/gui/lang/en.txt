@@ -631,24 +631,6 @@ Debugging is only needed for development or troubleshooting and should be disabl
 
 -
 
-sys_file_types: Allowed File Types
-
--
-
-sys_file_types_info: In case you want to link to any type of media files - images, archives, videos or audio files - you have to make sure, that the file's extensions is registered here. 
-Most common file types are registered by default.
-
--
-
-sys_file_types_edit: Edit Whitelist For File Types
-
--
-
-sys_file_types_help: Add preferred extensions, separated by commas.  
-Leaving the field empty will reset the list to the default values!
-
--
-
 sys_status_cache_enabled: Caching is enabled
 
 -
