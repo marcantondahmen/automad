@@ -2,7 +2,7 @@
 	"name": "Alpha",
 	"description": "An elegant Automad standard theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"license": "MIT",
 	"tooltips": {
 		"appleTouchIcon": "The image to be used as the Apple touch icon",
