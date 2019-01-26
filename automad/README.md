@@ -46,12 +46,5 @@ All console commands and corresponding filenames are lowercase and don't have an
     php automad/console createuser > automad/cli/createuser.php
     
 ### Composer Packages
-    
-Packages are autoloaded differently than Automad classes. To keep things as simple as possible they follow the naming scheme below. All filenames are lowercase. During installation, dashes get stripped from package names to create valid file and directory names for the extension autoloader.
-    
-    package name:   automad/extension-skeleton
-    filename:       automad/extensionskeleton/extensionskeleton.php
-    class name:     Automad\ExtensionSkeleton
-    function:       ExtensionSkeleton()
-    
-    
+
+Composer packages are excluded from Automad's internal naming convention in terms of directory structure, filenames and classes.  

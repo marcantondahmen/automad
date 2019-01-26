@@ -70,13 +70,22 @@
 @base-body-font-size:		14px;
 @base-body-line-height:		20px;
 
+@base-link-color:           @am-success;
+@base-link-hover-color:     darken(@am-success, 10%);
+
+@base-em-color: 			inherit;
+@base-code-color: 			inherit;
+@base-code-font-size: 		13px;
+
 @base-heading-font-family:  inherit;
 @base-heading-color:		@am-text;
 @base-heading-margin-top: 	@base-margin-vertical;
 @base-h1-font-size:  		26px;
-@base-h1-line-height: 		28px;
+@base-h1-line-height: 		26px;
 @base-h2-font-size: 		18px;
-@base-h2-line-height:  		21px;
+@base-h2-line-height:  		19px;
+@base-h3-font-size: 		16px;
+@base-h3-line-height:  		20px;
 
 @base-list-padding-left:	30px;
 
@@ -102,8 +111,19 @@
 		text-decoration: none !important;
 	}
 	
-	strong {
+	& strong {
 		font-weight: 500;
+	}
+
+	& pre {
+		background-color: @form-background;
+		border-radius: @am-radius;
+	}
+	
+	& :not(pre) > code {
+		background-color: @form-background;
+		padding: 1px 5px;
+		border-radius: 3px;
 	}
 
 	& a,

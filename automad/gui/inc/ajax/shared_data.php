@@ -66,13 +66,17 @@ if (isset($_POST['data'])) {
 	// Get shared data from Shared object.
 	$data = $this->Automad->Shared->data;
 	
+	// Get themes.
+	$themes = $this->Themelist->getThemes();
+	$mainTheme = $this->Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME));
+	
 	// Start buffering the HTML.
 	ob_start();
 	
 	
 	?>
 	
-		<div class="uk-form-row uk-margin-bottom">
+		<div class="uk-form-row">
 			<label for="am-input-data-sitename" class="uk-form-label uk-margin-top-remove">
 				<?php echo ucwords(AM_KEY_SITENAME); ?>
 			</label>
@@ -84,18 +88,37 @@ if (isset($_POST['data'])) {
 			value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" 
 			/>
 		</div>
-
-		<!-- Content -->		
+				
 		<div 
 		class="uk-accordion" 
 		data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
 		>
-			
 			<!-- Theme -->
-			<div type="button" class="uk-accordion-title">
+			<div class="uk-accordion-title">
 				<?php Text::e('shared_theme'); ?>
 			</div>
 			<div class="uk-accordion-content">
+				<div id="am-apply-theme-modal" class="uk-modal">
+					<div class="uk-modal-dialog">
+						<?php Text::e('shared_theme_apply'); ?>
+						<div class="uk-modal-footer uk-text-right">
+							<button 
+							class="uk-modal-close uk-button"
+							>
+								<i class="uk-icon-close"></i>&nbsp;
+								<?php Text::e('btn_close'); ?>
+							</button>
+							<button 
+							class="uk-modal-close uk-button uk-button-success" 
+							type="button" 
+							data-am-submit="shared_data"
+							>
+								<i class="uk-icon-check"></i>&nbsp;
+								<?php Text::e('btn_apply_reload'); ?>
+							</button>
+						</div>
+					</div>
+				</div>			
 				<ul 
 				class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
 				data-uk-grid-match="{target:'.uk-panel'}" 
@@ -103,13 +126,19 @@ if (isset($_POST['data'])) {
 				>
 					<?php 
 					
-					$themes = $this->Themelist->getThemes();
 					Core\Debug::ajax($output, 'themes', $themes);
 					$i = 0;
 					
-					foreach ($themes as $theme) { 
+					// Select the first theme is the main theme is missing to avoid
+					// sending the form without a valid theme.
+					if (!$mainTheme) {
+						$defaultTheme = reset($themes);
+						$data[AM_KEY_THEME] = $defaultTheme->path;
+					}
 					
-						$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $theme->path;
+					foreach ($themes as $Theme) { 
+					
+						$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
 						$files = glob($path . '/*');
 						$id = 'am-theme-' . ++$i;
 					
@@ -122,7 +151,7 @@ if (isset($_POST['data'])) {
 						}
 				
 						// Check currently active theme.
-						if ($theme->path === $data[AM_KEY_THEME]) {
+						if ($Theme->path === $data[AM_KEY_THEME]) {
 							$attrChecked = ' checked';
 						} else {
 							$attrChecked = '';
@@ -130,34 +159,63 @@ if (isset($_POST['data'])) {
 				
 					?>
 					<li>
+						<?php if ($Theme->readme) { ?>
+						<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
+							<div class="uk-modal-dialog uk-modal-dialog-large">
+								<div class="uk-modal-header">
+									Readme
+									<a href="#" class="uk-modal-close uk-close"></a>
+								</div>
+								<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
+								<div class="uk-modal-footer uk-text-right">
+									<button 
+									class="uk-modal-close uk-button"
+									>
+										<i class="uk-icon-close"></i>&nbsp;
+										<?php Text::e('btn_close'); ?>
+									</button>
+								</div>
+							</div>
+						</div>
+						<?php } ?>				
 						<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
 							<div class="uk-panel-teaser">
 								<?php echo $icon; ?>
 							</div>
-							<?php if ($theme->version) { ?> 
+							<?php if ($Theme->version) { ?> 
 							<div class="uk-panel-badge uk-badge">
-								<?php echo $theme->version; ?>
+								<?php echo $Theme->version; ?>
 							</div>	
 							<?php } ?>
 							<div class="uk-panel-title">
-								<?php echo $theme->name; ?>
+								<?php echo $Theme->name; ?>
 							</div>
 							<div class="uk-text-small uk-text-muted uk-hidden-small">
-								<?php echo $theme->description; ?>
+								<?php echo $Theme->description; ?>
 							</div>
-							<?php if ($theme->author) { ?> 
+							<?php if ($Theme->author) { ?> 
 							<div class="uk-text-small uk-text-muted uk-hidden-small">
 								<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
-								<?php echo $theme->author; ?>
+								<?php echo $Theme->author; ?>
 							</div>
 							<?php } ?>
-							<?php if ($theme->license) { ?>
+							<?php if ($Theme->license) { ?>
 							<div class="uk-text-small uk-text-muted uk-hidden-small">
 								<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
-								<?php echo $theme->license; ?>
+								<?php echo $Theme->license; ?>
 							</div>
 							<?php } ?>
-							<div class="am-panel-bottom am-panel-bottom-small">
+							<div class="am-panel-bottom">
+								<?php if ($Theme->readme) { ?>
+								<a 
+								href="#<?php echo $id . '-modal' ?>"
+								class="uk-icon-button uk-icon-align-left"
+								title="<?php Text::e('btn_readme'); ?>"
+								data-uk-tooltip
+								data-uk-modal
+								>
+								</a>
+								<?php } ?>
 								<label 
 								class="am-toggle-checkbox am-panel-bottom-right" 
 								data-am-toggle="#<?php echo $id; ?>"
@@ -165,7 +223,8 @@ if (isset($_POST['data'])) {
 									<input 
 									type="radio" 
 									name="data[<?php echo AM_KEY_THEME; ?>]" 
-									value="<?php echo $theme->path; ?>" 
+									value="<?php echo $Theme->path; ?>" 
+									data-am-modal-on-change="#am-apply-theme-modal"
 									<?php echo $attrChecked; ?> 
 									/>
 								</label>
@@ -173,27 +232,57 @@ if (isset($_POST['data'])) {
 						</div>
 					</li>		
 					<?php } ?> 	
-				</ul>
+				</ul>	
 			</div>
-			<!-- Used shared variables -->
-			<?php $keysInAllTemplates = $this->Keys->inAllTemplates(); ?>
-			<div type="button" class="uk-accordion-title">
-				<?php Text::e('shared_vars_used'); ?>&nbsp;
-				<span class="uk-badge"><?php echo count($keysInAllTemplates); ?></span>
+			
+			<!-- Variables -->
+			<?php 
+			
+				if ($mainTheme) {
+					$keysInMainTheme = $this->Keys->inTheme($mainTheme);
+				} else {
+					$keysInMainTheme = array();
+				}
+				
+				$keysInOtherThemes = array_diff(
+					$this->Keys->inAllTemplates(), 
+					$keysInMainTheme
+				); 
+				
+			?>
+			<!-- Shared variables in main theme -->
+			<?php if ($keysInMainTheme) { ?>
+			<div class="uk-accordion-title">
+				<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
+				<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
 					echo $this->Html->formGroup(
-						$keysInAllTemplates, 
+						$keysInMainTheme, 
 						$data,
 						false,
-						$this->Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME))
+						$mainTheme
+					); 
+				?>
+			</div>
+			<?php } ?>
+			<!-- Shared variables in other themes -->
+			<div class="uk-accordion-title">
+				<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
+				<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
+			</div>
+			<div class="uk-accordion-content">
+				<?php 
+					echo $this->Html->formGroup(
+						$keysInOtherThemes, 
+						$data
 					); 
 				?>
 			</div>
 			<!-- Unused shared variables -->
-			<div type="button" class="uk-accordion-title">
-				<?php Text::e('shared_vars_unused'); ?>
+			<div class="uk-accordion-title">
+				<?php Text::e('shared_vars_unused'); ?>&nbsp;
 				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
 			</div>
 			<div class="uk-accordion-content">

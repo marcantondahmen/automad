@@ -110,6 +110,10 @@ btn_open_log: Open Log
 
 -
 
+btn_readme: Open readme file
+
+-
+
 btn_remove_selected: Remove Selected
 
 -
@@ -471,7 +475,16 @@ shared_theme: Main theme
 
 -
 
-shared_vars_used: Variables in installed themes
+shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? 
+Your unsaved changes will be saved.
+
+-
+
+shared_vars_main_theme: Variables in the main theme
+
+-
+
+shared_vars_other_themes: Variables in other themes
 
 -
 
@@ -615,24 +628,6 @@ sys_debug_enable: Debug Mode
 
 sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
 Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
-
--
-
-sys_file_types: Allowed File Types
-
--
-
-sys_file_types_info: In case you want to link to any type of media files - images, archives, videos or audio files - you have to make sure, that the file's extensions is registered here. 
-Most common file types are registered by default.
-
--
-
-sys_file_types_edit: Edit Whitelist For File Types
-
--
-
-sys_file_types_help: Add preferred extensions, separated by commas.  
-Leaving the field empty will reset the list to the default values!
 
 -
 

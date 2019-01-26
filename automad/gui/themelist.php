@@ -54,6 +54,13 @@ class Themelist {
 	
 	
 	/**
+	 *	An array of installed Composer packages.
+	 */
+	
+	private $composerInstalled;
+	
+	
+	/**
 	 * 	The Theme objects array.
 	 */
 	
@@ -66,6 +73,7 @@ class Themelist {
 	
 	public function __construct() {
 		
+		$this->composerInstalled = $this->getComposerInstalled();
 		$this->themes = $this->collectThemes();
 		Core\Debug::log($this->themes, 'New instance created');
 		
@@ -78,7 +86,7 @@ class Themelist {
 	 *	A theme must be located below the "themes" directory.   
 	 *	It is possible to group themes in subdirectories, like "themes/theme" or "themes/subdir/theme".
 	 * 
-	 *	To be a valid theme, a diretcory must contain a "theme.json" file and at least one ".php" file.
+	 *	To be a valid theme, a directory must contain a "theme.json" file and at least one ".php" file.
 	 *      
 	 *	@param string $path
 	 *  @return array An array containing all themes as objects.
@@ -101,7 +109,7 @@ class Themelist {
 				
 				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
 				$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
-				$themes[$path] = new Theme($themeJSON);
+				$themes[$path] = new Theme($themeJSON, $this->composerInstalled);
 				
 			} else {
 				
@@ -114,6 +122,37 @@ class Themelist {
 		
 		return $themes;
 		
+	}
+	
+	
+	/**
+	 *	Get installed Composer packages.
+	 *	
+	 * 	@return array An associative array of installed Composer packages
+	 */
+	
+	private function getComposerInstalled() {
+		
+		$installedJSON = AM_BASE_DIR . '/vendor/composer/installed.json';
+		$installed = array();
+
+		if (is_readable($installedJSON)) {
+			
+			$decoded = @json_decode(file_get_contents($installedJSON), true);
+			
+			if (is_array($decoded)) {
+				foreach ($decoded as $package) {
+					if (array_key_exists('name', $package)) {
+						$name = $package['name'];
+						$installed[$name] = $package;
+					}
+				}
+			}
+			
+		} 
+
+		return $installed;
+				
 	}
 	
 	

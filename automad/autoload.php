@@ -37,8 +37,15 @@
  
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-// Composer.
+// Composer lib.
 require AM_BASE_DIR . '/lib/vendor/autoload.php';
+
+// Composer packages.
+$packagesAutoload = AM_BASE_DIR . '/vendor/autoload.php';
+
+if (file_exists($packagesAutoload)) {
+    require $packagesAutoload;
+}
 
 // Automad.
 spl_autoload_register(function($class) {

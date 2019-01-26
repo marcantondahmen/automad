@@ -48,6 +48,14 @@ class Regex_Test extends TestCase {
 					'"Some \"quoted\" string"',
 					'false'
 				)
+			),
+			array(
+				"'String', 'String \'quoted\'', '@{ var }'",
+				array(
+					"'String'",
+					"'String \'quoted\''",
+					"'@{ var }'"
+				)
 			)
 		);
 		

@@ -9,7 +9,7 @@
 					</li>
 				<@ end @>
 				<li>
-					<a href="@{ urlTagLinkTarget | def('/') }?filter=@{ :tag }">
+					<a href="@{ urlTagLinkTarget | def(@{ :parent }) }?filter=@{ :tag }">
 						@{ :tag }
 					</a>
 				</li>

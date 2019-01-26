@@ -81,53 +81,18 @@ class Keys {
 	
 	
 	/**
-	 *	Find all variable keys in the currently used template and all included templates (and ignore those keys in $this->reserved).
+	 *	Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
 	 *	
-	 *	@param string $file
-	 *	@return array with keys in the currently used template (without reserved keys)
+	 *	@return array Keys in the currently used template (without reserved keys)
 	 */
 	
-	public function inCurrentTemplate($file = false) {
+	public function inCurrentTemplate() {
 		
-		$keys = array();
+		$Page = $this->Automad->Context->get();
+		// Don't use $Page->getTemplate() to prevent exit on errors.
+		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
 		
-		// Since this is a recursive method, initially there should not be any file defined and the template from the requested page should be used instead.
-		if (!$file) {
-			$Page = $this->Automad->Context->get();
-			// Don't use $Page->getTemplate() to prevent exit on errors.
-			$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
-		}
-		
-		if (file_exists($file)) {
-			
-			// Find all variable keys in the template file.
-			$content = file_get_contents($file);
-			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
-			$keys = $matches['varName'];
-			
-			// Match markup to get includes recursively.
-			preg_match_all('/' . Core\Regex::markup() . '/is', $this->Automad->loadTemplate($file), $matches, PREG_SET_ORDER);
-		
-			foreach ($matches as $match) {
-			
-				// Recursive include.
-				if (!empty($match['file'])) {
-	
-					$include = dirname($file) . '/' . $match['file'];
-
-					if (file_exists($include)) {
-						$keys = array_merge($keys, $this->inCurrentTemplate($include));
-					} 
-		
-				}
-			
-			}
-			
-			$keys = $this->sortAndFilter($keys);
-		
-		}
-			
-		return $keys;
+		return $this->inTemplate($file);
 		
 	}
 
@@ -135,7 +100,7 @@ class Keys {
 	/**
 	 *	Find all variable keys in all templates (and ignore those keys in $this->reserved).
 	 *	
-	 *	@return array with keys in the currently used template (without reserved keys)
+	 *	@return array Keys in all templates (without reserved keys)
 	 */
 
 	public function inAllTemplates() {
@@ -184,6 +149,71 @@ class Keys {
 	public function inOtherTemplates() {
 		
 		return array_diff($this->inAllTemplates(), $this->inCurrentTemplate());
+		
+	}
+	
+	
+	/**
+	 *	Find all variable keys in a template and all included snippets (and ignore those keys in $this->reserved).
+	 *	
+	 *	@param string $file
+	 *	@return array Keys in a given template (without reserved keys)
+	 */
+	
+	private function inTemplate($file) {
+		
+		$keys = array();
+	
+		if (file_exists($file)) {
+			
+			// Find all variable keys in the template file.
+			$content = file_get_contents($file);
+			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
+			$keys = $matches['varName'];
+			
+			// Match markup to get includes recursively.
+			preg_match_all('/' . Core\Regex::markup() . '/is', $content, $matches, PREG_SET_ORDER);
+		
+			foreach ($matches as $match) {
+			
+				// Recursive include.
+				if (!empty($match['file'])) {
+	
+					$include = dirname($file) . '/' . $match['file'];
+
+					if (file_exists($include)) {
+						$keys = array_merge($keys, $this->inTemplate($include));
+					} 
+		
+				}
+			
+			}
+			
+			$keys = $this->sortAndFilter($keys);
+		
+		}
+			
+		return $keys;
+		
+	}
+
+
+	/**
+	 *	Find all variable keys in templates of a given theme.
+	 *	
+	 * 	@param object $Theme
+	 * 	@return array Keys in all templates of the given Theme (without reserved keys)
+	 */
+	
+	public function inTheme($Theme) {
+		
+		$keys = array();
+		
+		foreach ($Theme->templates as $file) {
+			$keys = array_merge($keys, $this->inTemplate($file));
+		}
+		
+		return $this->sortAndFilter($keys);
 		
 	}
 	
