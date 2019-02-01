@@ -407,7 +407,7 @@ class Update {
 				
 				if (preg_match($itemsMatchRegex, $filename)) {
 					
-					$filename = preg_replace('/^([\w\-]+)/', AM_BASE_DIR, $filename); 
+					$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $filename); 
 					
 					if (zip_entry_open($zip, $zipEntry)) {
 						
