@@ -195,8 +195,8 @@ class Extension {
 				// Only add the non-minified version, if no minified version exists.
 				if (!file_exists(str_replace($type, '.min' . $type, $file))) {
 					
-					// Remove base directory from file path.
-					$file = Str::stripStart($file, AM_BASE_DIR);
+					// Remove base directory from file path and normalize slashes.
+					$file = str_replace('\\', '/', Str::stripStart($file, AM_BASE_DIR));
 					
 					// Use $file also as key to keep elemtens unique.
 					$this->assets[$type][$file] = $file;
