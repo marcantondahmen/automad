@@ -161,12 +161,14 @@ if (isset($_POST['data'])) {
 					<li>
 						<?php if ($Theme->readme) { ?>
 						<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
-							<div class="am-text-readme uk-modal-dialog uk-modal-dialog-large">
-								<div class="uk-modal-header">
+							<div class="uk-modal-dialog">
+								<div class="uk-modal-header uk-margin-remove">
 									Readme
 									<a href="#" class="uk-modal-close uk-close"></a>
 								</div>
-								<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
+								<div class="am-text-readme">
+									<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
+								</div>
 								<div class="uk-modal-footer uk-text-right">
 									<button 
 									class="uk-modal-close uk-button"
@@ -180,7 +182,9 @@ if (isset($_POST['data'])) {
 						<?php } ?>				
 						<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
 							<div class="uk-panel-teaser">
-								<?php echo $icon; ?>
+								<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
+									<?php echo $icon; ?>	
+								<?php if ($Theme->readme) { ?></a><?php } ?>
 							</div>
 							<?php if ($Theme->version) { ?> 
 							<div class="uk-panel-badge uk-badge">
@@ -209,7 +213,7 @@ if (isset($_POST['data'])) {
 								<?php if ($Theme->readme) { ?>
 								<a 
 								href="#<?php echo $id . '-modal' ?>"
-								class="uk-icon-button uk-icon-align-left"
+								class="uk-icon-button uk-icon-file-text-o"
 								title="<?php Text::e('btn_readme'); ?>"
 								data-uk-tooltip
 								data-uk-modal

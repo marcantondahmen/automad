@@ -33,6 +33,8 @@
  */
 
 
+@am-code-bg: 				#F6F6F6;
+
 @text-muted-color:		    @am-muted;
 @text-small-line-height:    18px;
 
@@ -41,17 +43,62 @@
 	
 	&-readme {
 		
-		& pre {
-			margin: @utility-margin-small 0;
-			padding: 10px 15px;
-			background-color: @form-background;
-			border-radius: @am-radius;
+		& > * {
+			margin-top: 15px;
+			margin-bottom: 15px;
 		}
 		
-		& :not(pre) > code {
-			background-color: @form-background;
-			padding: 1px 5px;
-			border-radius: 3px;
+		& h1 {
+			font-size: 22px;
+			font-weight: 400;
+			margin: 40px 0 30px 0;
+		}
+		
+		& h2 {
+			font-size: 20px;
+			font-weight: 400;
+			margin: 40px 0 20px 0;
+		}
+		
+		& h3 {
+			font-size: 18px;
+			font-weight: 400;
+			margin: 30px 0 10px 0;
+		}
+		
+		& h4 {
+			font-size: 16px;
+			font-weight: 400;
+			margin: 20px 0 5px 0;
+		}
+		
+		& a {
+			
+			&,
+			&:hover {
+				text-decoration: none;
+			}
+			
+		}
+		
+		& code {
+			padding: 2px 5px;
+			font-weight: 400;
+			border-radius: 4px;
+			color: @am-text;
+			background-color: @am-code-bg;
+		}
+		
+		& pre {
+			
+			padding: 8px 12px;
+			border-radius: @am-radius;
+			background-color: @am-code-bg;
+			
+			& > code {
+				padding: 0;
+			}
+			
 		}
 		
 	}
