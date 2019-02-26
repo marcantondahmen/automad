@@ -44,32 +44,36 @@
 	&-readme {
 		
 		& > * {
-			margin-top: 15px;
-			margin-bottom: 15px;
+			margin-top: 10px;
+			margin-bottom: 10px;
 		}
 		
 		& h1 {
 			font-size: 22px;
+			line-height: 26px;
 			font-weight: 400;
 			margin: 40px 0 30px 0;
 		}
 		
 		& h2 {
 			font-size: 20px;
+			line-height: 25px;
 			font-weight: 400;
 			margin: 40px 0 20px 0;
 		}
 		
 		& h3 {
 			font-size: 18px;
+			line-height: 23px;
 			font-weight: 400;
 			margin: 30px 0 10px 0;
 		}
 		
 		& h4 {
 			font-size: 16px;
+			line-height: 21px;
 			font-weight: 400;
-			margin: 20px 0 5px 0;
+			margin: 20px 0 10px 0;
 		}
 		
 		& a {
@@ -84,6 +88,7 @@
 		& code {
 			padding: 2px 5px;
 			font-family: @base-code-font-family;
+			font-size: 0.925em;
 			font-weight: 400;
 			border-radius: 4px;
 			color: @am-text;
@@ -92,12 +97,15 @@
 		
 		& pre {
 			
+			margin: 20px 0;
 			padding: 8px 12px;
+			font-size: @base-code-font-size;
 			border-radius: @am-radius;
 			background-color: @am-code-bg;
 			
 			& > code {
 				padding: 0;
+				font-size: inherit;
 			}
 			
 		}
