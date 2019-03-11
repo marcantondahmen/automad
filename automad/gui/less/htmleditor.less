@@ -142,11 +142,11 @@
 
 .uk-htmleditor-preview {
 	
-	padding-top: 6px;
-	padding-bottom: 6px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	overflow: hidden;
 	color: @form-focus-color;
-	background-color: @form-focus-background;
+	background-color: @am-bg;
 	border-bottom-left-radius: @am-radius;
 	border-bottom-right-radius: @am-radius;
 	border: @am-border-width solid @form-border;
@@ -179,6 +179,11 @@
         font-weight: 500;
     }
     
+    & code {
+        font-family: @base-code-font-family;
+        font-size: @base-code-font-size;
+    }
+
 }
 
 .uk-htmleditor-fullscreen {
@@ -205,7 +210,7 @@
 		max-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
 		padding: @utility-container-padding-horizontal;
 		color: @form-focus-color;
-		background-color: @form-focus-background;
+		background-color: @am-bg;
         border-radius: 0;
 		.transition(all 0s;);
 	}
