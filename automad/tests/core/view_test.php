@@ -58,7 +58,9 @@ class View_Test extends TestCase {
 			'querystringmerge_01' => 'source=0&key1=test-string&key2=another-test-value&key3=15',
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'set_01' => 'Test 1, Test 2',
-			'session_get_01' => 'Session Test'
+			'session_get_01' => 'Session Test',
+			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
+			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>'
 		);
 		
 		foreach ($templates as $template => $expected) {
