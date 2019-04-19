@@ -149,13 +149,19 @@
 }
 
 .uk-htmleditor-preview {
-	overflow: hidden;
+	
+    overflow: hidden;
 	color: @form-focus-color;
 	background-color: @form-background;
 	border-bottom-left-radius: @am-radius;
 	border-bottom-right-radius: @am-radius;
 	border: @am-border-width solid @form-border;
     .markdown;
+    
+    & :first-child {
+        margin-top: 0;
+    }
+    
 }
 
 .uk-htmleditor-fullscreen {
