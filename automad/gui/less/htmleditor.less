@@ -33,30 +33,32 @@
  */
 
 @am-cm-transition-delay: 			            0.1s;
-@am-cm-selection-background:                    darken(@form-background, 7%);
+@am-cm-selection-color:                         @base-selection-color;
+@am-cm-selection-background:                    @base-selection-background;
 
 @htmleditor-navbar-background:                  @form-border;
 
-@htmleditor-navbar-nav-height:                  @button-height;
+@htmleditor-navbar-nav-height:                  30px;
 @htmleditor-navbar-nav-padding-horizontal:      12px;
 @htmleditor-navbar-nav-line-height:             @htmleditor-navbar-nav-height;
 @htmleditor-navbar-nav-color:                   @am-muted;
 
 @htmleditor-navbar-nav-hover-background:        @htmleditor-navbar-background;
-@htmleditor-navbar-nav-hover-color:             @am-text;
-@htmleditor-navbar-nav-onclick-background:      @htmleditor-navbar-background;
-@htmleditor-navbar-nav-onclick-color:           @am-text;
-@htmleditor-navbar-nav-active-background:       @htmleditor-navbar-background;
-@htmleditor-navbar-nav-active-color:            @am-text;
+@htmleditor-navbar-nav-hover-color:             @button-color;
+@htmleditor-navbar-nav-onclick-background:      @htmleditor-navbar-nav-hover-background;
+@htmleditor-navbar-nav-onclick-color:           @htmleditor-navbar-nav-hover-color;
+@htmleditor-navbar-nav-active-background:       @htmleditor-navbar-nav-hover-background;
+@htmleditor-navbar-nav-active-color:            @htmleditor-navbar-nav-hover-color;
  
 @htmleditor-content-background:                 #FFFFFF;
-@htmleditor-content-padding:                    @form-padding;
+@htmleditor-content-padding:                    20px;
 @htmleditor-content-split-border:               @form-border;
 
 @htmleditor-fullscreen-z-index:                 1040;
 @htmleditor-fullscreen-content-top:             @htmleditor-navbar-nav-height;
 @htmleditor-fullscreen-icon-resize:             "\f066";
 
+@htmleditor-fullscreen-content-top:             0;
 
 .hook-htmleditor() {
 	border: none;
@@ -64,21 +66,28 @@
 
 .hook-htmleditor-navbar() {
 
+    box-sizing: border-box;
 	overflow: hidden;
+    padding: 2px 2px 0 2px;
 	border-top-left-radius: @am-radius;
 	border-top-right-radius: @am-radius;
-
+    
+    // Hide preview button.
 	&-flip li[class*="-button-"] {
 		@media (max-width: @breakpoint-small-max) {
 			display: none;
 		}	
 	}
-		
+	  
+}
+
+.hook-htmleditor-navbar-nav() {
+    font-size: 12px;
 }
 
 .hook-htmleditor-content() {
 	border: none;
-	background-color: transparent;
+	background-color: transparent;    
 }
 
 // Autoresize editor and preview.
@@ -96,10 +105,9 @@
 	
 	& .CodeMirror {
 		
-		font-family: inherit;
+		font-family: @base-code-font-family;
+        font-size: @base-code-font-size;
 		padding: @htmleditor-content-padding;
-		padding-top: 6px;
-		padding-bottom: 6px;
 		color: @form-color;
 		background-color: @form-background;
 		border-bottom-left-radius: @am-radius;
@@ -141,59 +149,53 @@
 }
 
 .uk-htmleditor-preview {
-	
-	padding-top: 15px;
-	padding-bottom: 15px;
 	overflow: hidden;
 	color: @form-focus-color;
-	background-color: @am-bg;
+	background-color: @form-background;
 	border-bottom-left-radius: @am-radius;
 	border-bottom-right-radius: @am-radius;
 	border: @am-border-width solid @form-border;
-
-	& * {
-		color: inherit;
-	}
-	
-    & h1 {
-        font-size: 28px;
-        line-height: 28px;
-        font-weight: 500;
-    }
-    
-    & h2 {
-        font-size: 24px;
-        line-height: 26px;
-        font-weight: 500;
-    }
-    
-    & h3 {
-        font-size: 21px;
-        line-height: 24px;
-        font-weight: 500;
-    }
-    
-    & h4 {
-        font-size: 18px;
-        line-height: 22px;
-        font-weight: 500;
-    }
-    
-    & code {
-        font-family: @base-code-font-family;
-        font-size: @base-code-font-size;
-    }
-
+    .markdown;
 }
 
 .uk-htmleditor-fullscreen {
 	
 	min-height: 100vh;
-	
-	& .uk-htmleditor-navbar {
-		border-radius: 0;
-	}
-	
+	    
+    & .uk-htmleditor-navbar {
+        
+        position: fixed;
+        z-index: 100;
+        width: 288px;
+        top: 15px;
+        left: 50%;
+        margin-left: -144px;
+        padding: 0;
+        border-radius: @am-radius;
+        background-color: @button-background;
+        .shadow;
+        
+        &-nav a {
+            height: 36px;
+            width: 36px;
+            font-size: 14px;
+            text-align: center;
+            padding: 0;
+            line-height: 36px;
+            color: @button-color !important;
+        }
+        
+        // Hide preview button.
+        &-flip li[class*="-button-"] {
+    		display: none;
+    	}
+        
+    }
+    
+    & .uk-htmleditor-content {
+        background-color: @am-bg;
+    }
+
     & .CodeMirror,
     & .uk-htmleditor-preview  {
         border: none !important;
@@ -206,9 +208,8 @@
     
 	& .uk-htmleditor-code .CodeMirror-scroll,
 	& .uk-htmleditor-preview {
-		min-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
-		max-height: ~"calc(100vh - @{htmleditor-navbar-nav-height})" !important;
 		padding: @utility-container-padding-horizontal;
+        padding-top: 70px;
 		color: @form-focus-color;
 		background-color: @am-bg;
         border-radius: 0;
@@ -220,6 +221,7 @@
 		& .cm-s-default {
 			border-right: none;
 		}
+        
 	}
 	
 	& .uk-htmleditor-preview {
@@ -284,8 +286,6 @@
 	}
 	
 	& .cm-comment {
-		font-family: @base-code-font-family;
-		font-size: 13px;
 		color: inherit;
 	}
 	
@@ -340,22 +340,25 @@
 	
     &.CodeMirror .CodeMirror-matchingbracket {
         color: @am-danger;
-        font-weight: 500;
+        font-weight: bold;
     }
     
     & .CodeMirror-selected { 
+        color: @am-cm-selection-color;
         background-color: @am-cm-selection-background; 
     }
     
     & .CodeMirror-line::selection, 
     & .CodeMirror-line > span::selection, 
     & .CodeMirror-line > span > span::selection { 
+        color: @am-cm-selection-color;
         background-color: @am-cm-selection-background;
     }
     
     & .CodeMirror-line::-moz-selection, 
     & .CodeMirror-line > span::-moz-selection, 
     & .CodeMirror-line > span > span::-moz-selection { 
+        color: @am-cm-selection-color;
         background-color: @am-cm-selection-background;
     }
     
@@ -367,7 +370,7 @@
 
 .cm-header, 
 .cm-strong {
-	font-weight: 500;
+	font-weight: bold;
 }
 
 .cm-em {

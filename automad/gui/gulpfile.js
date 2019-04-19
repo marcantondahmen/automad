@@ -91,6 +91,7 @@ gulp.task('libs-js', function() {
 				'node_modules/codemirror/addon/edit/matchbrackets.js',
 				'node_modules/codemirror/addon/edit/continuelist.js',
 				'node_modules/codemirror/addon/mode/overlay.js',
+				'node_modules/codemirror/addon/selection/mark-selection.js',
 				'node_modules/codemirror/mode/xml/xml.js',
 				'node_modules/codemirror/mode/gfm/gfm.js'
 			])

@@ -60,7 +60,8 @@
 				},
 				extraKeys: {
 					"Enter": "newlineAndIndentContinueMarkdownList"
-				}
+				},
+				styleSelectedText: true
 			},
 			toolbar: [ 'bold', 'italic', 'link', 'image', 'blockquote', 'listUl', 'listOl' ]
 		});
