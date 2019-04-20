@@ -1,6 +1,6 @@
 {
     "name": "automad/automad",
-    "description": "A file-based content management system and template engine",
+    "description": "A flat-file content management system and template engine",
     "keywords": ["cms"],
     "type": "project",
     "homepage": "https://automad.org",

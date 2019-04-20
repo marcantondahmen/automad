@@ -27,5 +27,5 @@ However, I do not exclude at this point using parts of Automad's source in futur
 
 ---
       
-© 2013-2018 [Marc Anton Dahmen](https://marcdahmen.de)     
+© 2013-2019 [Marc Anton Dahmen](https://marcdahmen.de)     
 Released under the [MIT license](https://automad.org/license) 

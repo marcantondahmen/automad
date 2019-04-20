@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -58,6 +58,7 @@ $versionSanitized = Core\Str::sanitize(AM_VERSION);
 	
 	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.css?v=<?php echo $versionSanitized; ?>" rel="stylesheet">
 	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/automad.min.css?v=<?php echo $versionSanitized; ?>" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,500" rel="stylesheet">
 	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.js?v=<?php echo $versionSanitized; ?>"></script>	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/automad.min.js?v=<?php echo $versionSanitized; ?>"></script>

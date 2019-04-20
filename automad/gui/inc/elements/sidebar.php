@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -86,6 +86,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							<a href="?context=edit_shared">
 								<i class="uk-icon-globe uk-icon-justify"></i>&nbsp;
 								<?php Text::e('shared_title'); ?>
+							</a>
+						</li>
+						<li>
+							<a href="https://packages.automad.org" target="_blank">
+								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
+								<?php Text::e('btn_get_packages'); ?>
 							</a>
 						</li>
 						<li class="uk-nav-divider"></li>

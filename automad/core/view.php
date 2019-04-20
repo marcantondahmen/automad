@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -58,7 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In a last step, all URLs within the generated HTML get resolved to be relative to the server's root (or absolute), before $output gets returned.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2018 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2013-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -981,7 +981,8 @@ class View {
 	
 	
 	/**
-	 *	Obfuscate all eMail addresses matched in $str.
+	 *	Obfuscate all stand-alone eMail addresses matched in $str. 
+	 *	Addresses in links are ignored.
 	 *	
 	 *	@param string $str
 	 *	@return string The processed string
@@ -989,16 +990,34 @@ class View {
 	
 	private function obfuscateEmails($str) {
 		
-		return 	preg_replace_callback('/(?<!mailto:)\b([\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,})/', function($matches) {
-				
-				Debug::log($matches[1], 'Obfuscating email');
-					
-				$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
-				$html .= strrev($matches[1]);
-				$html .= "</a>&#x200E;";
+		$regexEmail = '[\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,}';
 		
-				return $html;
+		// The following regex matches all email links or just an email address. 
+		// That way it is possible to separate email addresses 
+		// within <a></a> tags from stand-alone ones.
+		$regex = '/(<a\s[^>]*href="mailto.+?<\/a>|(?P<email>' . $regexEmail . '))/is';
+		
+		return 	preg_replace_callback($regex, function($matches) {
+				
+				// Only stand-alone addresses are obfuscated.
+				if (!empty($matches['email'])) {
 					
+					Debug::log($matches['email'], 'Obfuscating');
+						
+					$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
+					$html .= strrev($matches['email']);
+					$html .= "</a>&#x200E;";
+			
+					return $html;
+					
+				} else {
+					
+					Debug::log($matches[0], 'Ignoring');	
+						
+					return $matches[0];
+					
+				}
+				
 			}, $str);
 						
 	}

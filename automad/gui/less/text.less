@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -43,72 +43,12 @@
 	
 	&-readme {
 		
-		& > * {
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
+		padding-top: 40px;
+		.markdown;
 		
-		& h1 {
-			font-size: 24px;
-			line-height: 28px;
-			font-weight: 400;
-			margin: 40px 0 30px 0;
-		}
-		
-		& h2 {
-			font-size: 20px;
-			line-height: 25px;
-			font-weight: 400;
-			margin: 40px 0 20px 0;
-		}
-		
-		& h3 {
-			font-size: 18px;
-			line-height: 23px;
-			font-weight: 400;
-			margin: 30px 0 10px 0;
-		}
-		
-		& h4 {
-			font-size: 16px;
-			line-height: 21px;
-			font-weight: 400;
-			margin: 20px 0 10px 0;
-		}
-		
-		& a {
-			
-			&,
-			&:hover {
-				text-decoration: none;
-			}
-			
-		}
-		
-		& code {
-			padding: 2px 5px;
-			font-family: @base-code-font-family;
-			font-size: 0.925em;
-			font-weight: 400;
-			border-radius: 4px;
-			color: @am-text;
-			background-color: @am-code-bg;
-		}
-		
-		& pre {
-			
-			margin: 20px 0;
-			padding: 8px 12px;
-			font-size: @base-code-font-size;
-			border-radius: @am-radius;
-			background-color: @am-code-bg;
-			
-			& > code {
-				padding: 0;
-				font-size: inherit;
-			}
-			
-		}
+		& > :first-child {
+	        margin-top: 0;
+	    }
 		
 	}
 	

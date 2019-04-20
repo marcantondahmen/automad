@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -60,7 +60,8 @@
 				},
 				extraKeys: {
 					"Enter": "newlineAndIndentContinueMarkdownList"
-				}
+				},
+				styleSelectedText: true
 			},
 			toolbar: [ 'bold', 'italic', 'link', 'image', 'blockquote', 'listUl', 'listOl' ]
 		});

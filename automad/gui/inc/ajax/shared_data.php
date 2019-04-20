@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2014-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -237,6 +237,14 @@ if (isset($_POST['data'])) {
 					</li>		
 					<?php } ?> 	
 				</ul>	
+				<a 
+				href="https://packages.automad.org" 
+				class="uk-button uk-button-success uk-margin-top"
+				target="_blank"
+				>
+					<i class="uk-icon-download"></i>&nbsp;
+					<?php Text::e('btn_get_themes'); ?>
+				</a>
 			</div>
 			
 			<!-- Variables -->
