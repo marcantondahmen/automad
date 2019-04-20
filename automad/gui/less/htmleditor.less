@@ -82,7 +82,9 @@
 }
 
 .hook-htmleditor-navbar-nav() {
-    font-size: 12px;
+    @media (min-width: 375px) {
+        font-size: 12px;
+    }
 }
 
 .hook-htmleditor-content() {
@@ -114,6 +116,10 @@
 		border-bottom-right-radius: @am-radius;
 		border: @am-border-width solid @form-border;
 		
+        @media (max-width: @breakpoint-small-max) {
+			padding: 10px;
+		}
+        
 		&.CodeMirror-focused {
 			color: @form-focus-color;
 			background-color: @form-focus-background;
@@ -349,7 +355,8 @@
         font-weight: bold;
     }
     
-    & .CodeMirror-selected { 
+    & .CodeMirror-selected,
+    & .CodeMirror-selectedtext { 
         color: @am-cm-selection-color;
         background-color: @am-cm-selection-background; 
     }
@@ -384,7 +391,7 @@
 }
 
 .cm-link {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .cm-strikethrough {
