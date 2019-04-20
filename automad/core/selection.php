@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	it can be returned once by $this->getSelection().
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2018 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2013-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

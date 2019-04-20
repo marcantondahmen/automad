@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2018 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Content class provides all methods to add, modify, move or delete content (pages, shared data and files). 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2018 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2016-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
