@@ -88,6 +88,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 								<?php Text::e('shared_title'); ?>
 							</a>
 						</li>
+						<li>
+							<a href="https://packages.automad.org" target="_blank">
+								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
+								<?php Text::e('btn_get_packages'); ?>
+							</a>
+						</li>
 						<li class="uk-nav-divider"></li>
 					</ul>
 					<?php 

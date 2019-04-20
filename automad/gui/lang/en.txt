@@ -66,6 +66,14 @@ btn_files: Files
 
 -
 
+btn_get_packages: Get Packages
+
+-
+
+btn_get_themes: Download More Themes
+
+-
+
 btn_getting_data: Getting Data ...
 
 -
