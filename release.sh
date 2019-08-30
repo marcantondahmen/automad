@@ -8,32 +8,44 @@
 # This script handles the release process for new Automad versions
 # by doing the following:
 #
-#	1.	Run tests
-#	2.	Update version numbers in automad/version.php and all related JSON files
-#	3.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
-#	4.	Commit changed files
-#	5.	Merge branch develop into default
-#	6.	Create tag for release
+#	1.	Check whether the current branch is develop
+#	2.	Run tests
+#	3.	Update version numbers in automad/version.php and all related JSON files
+#	4.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
+#	5.	Commit changed files
+#	6.	Merge branch develop into master
+#	7.	Create tag for release
+
+
+# Test branch.
+if [[ $(git branch | grep \* | cut -d ' ' -f2) != "develop" ]]
+then
+	echo "Please checkout branch develop to create a release!"
+	exit 0
+fi
+
 
 # Run tests.
 phpunit
-echo "---"
 echo
 
-# Get current version.
-latestTag=$(hg tags | sed -n '2 p' | cut -d ' ' -f 1)
+
+# Get latest tag.
+latestTag=$(git describe --tags $(git rev-list --tags --max-count=1))
+
 
 # Check if working directory is clean.
-if [[ $(hg status) ]]
+if [[ $(git status -s) ]]
 then
 	echo "Working directory is not clean!"
-	hg status
+	git status -s
+	echo
 fi
 
-echo "---"
-echo
+
 echo "Current version is: $latestTag"
 read -p "Please enter a new version number: " tag
+
 
 # Wait for confirmation.
 while true
@@ -51,10 +63,8 @@ do
 			;;
         esac
 done
+echo
 
-# Update to branch develop.
-echo "Updating to branch develop ..."
-hg update develop
 
 # Updating version numbers.
 echo "Updating version numbers ..."
@@ -69,6 +79,8 @@ do
 		rm $json.bak
 	fi
 done
+echo
+
 
 # Running Gulp tasks.
 echo "Running Gulp tasks ..."
@@ -80,10 +92,14 @@ echo "Running Gulp tasks ..."
 	cd packages/standard
 	gulp
 )
+echo
+
 
 # Status of repo.
 echo "The following files got updated:"
-hg status
+git status -s
+echo
+
 
 # Wait for confirmation to commit and merge.
 while true
@@ -101,34 +117,44 @@ do
 			;;
         esac
 done
+echo
+
 
 # Commit changes.
 echo "Committing changes ..."
-hg commit -m "Prepared release $tag"
+git add -A && git commit -m "Prepared release $tag"
+echo
+
 
 # Update to branch default.
-echo "Updating to branch default ..."
-hg update default
+echo "Checking out branch master ..."
+git checkout master
+echo
+
 
 # Merging.
 echo "Merging branch develop ..."
-hg merge develop
-echo "Committing merge ..."
-hg commit -m "Merged branch develop (release $tag)"
+git merge develop --no-ff -m "Merged branch develop (release $tag)"
+echo
+
 
 # Creating tag.
 echo "Creating tag $tag ..."
-hg tag $tag
+git tag $tag
+echo
+
 
 # Update back to develop.
-echo "Updating to branch develop ..."
-hg update develop
+echo "Checking out branch develop ..."
+git checkout develop
+echo
+
 
 # Show log.
-echo
-hg log -l 3
-echo "Branch $(hg branch)"
+git log -n 2 --graph --all
 echo
 
-echo "---"
 
+# Show branches.
+git branch
+echo
