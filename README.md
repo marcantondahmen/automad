@@ -8,7 +8,7 @@ A flat-file content management system and template engine
 ![License](https://img.shields.io/github/license/marcantondahmen/automad?color=blue)
 [![Twitter](https://img.shields.io/twitter/follow/automadcms?label=Follow)](https://twitter.com/automadcms)
 
-<div style="text-align: center; background-color: #f8f8f8; border-radius: 3px; padding: 8% 10%;"><img src="https://automad.org/shared/files.png" style="border-radius: 0.9vw; box-shadow: 0 1.2vw 6vw rgba(0,0,0,0.2);" width="640"></img></div>     
+![Mockup](https://automad.org/shared/readme.png)     
 
 ## Installation
 
