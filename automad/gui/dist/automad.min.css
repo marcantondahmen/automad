@@ -26,7 +26,7 @@
  *
  *	AUTOMAD GUI 
  *	
- *	version 1.2.5
+ *	version 1.2.6
  *
  *	Copyright (c) 2014-2019 by Marc Anton Dahmen
  *	http://marcdahmen.de

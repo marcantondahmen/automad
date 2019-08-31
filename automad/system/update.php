@@ -167,14 +167,14 @@ class Update {
 			CURLOPT_FILE => $fp,
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => AM_UPDATE_REPO_URL . AM_UPDATE_REPO_GET_PATH . '/' . AM_UPDATE_BRANCH . '.zip'
+			CURLOPT_URL => AM_UPDATE_REPO_DOWNLOAD_URL . '/' . AM_UPDATE_BRANCH . '.zip'
 		);
 		
 		$curl = curl_init();
 		curl_setopt_array($curl, $options);
 		curl_exec($curl); 
 		
-		self::log('Downloading branch "' . AM_UPDATE_BRANCH . '" form ' . AM_UPDATE_REPO_URL);
+		self::log('Downloading branch "' . AM_UPDATE_BRANCH . '" form ' . AM_UPDATE_REPO_DOWNLOAD_URL);
 		
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
 			$archive = false;
@@ -204,7 +204,7 @@ class Update {
 			CURLOPT_TIMEOUT => 30,
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => AM_UPDATE_REPO_URL . AM_UPDATE_REPO_RAW_PATH . '/' . AM_UPDATE_BRANCH . AM_UPDATE_REPO_VERSION_FILE
+			CURLOPT_URL => AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . AM_UPDATE_REPO_VERSION_FILE
 		);
 		
 		$curl = curl_init();
@@ -411,9 +411,10 @@ class Update {
 					
 					if (zip_entry_open($zip, $zipEntry)) {
 						
-						if (Core\FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry)))) {
+						if (Core\FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry))) !== false) {
 							self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 						} else {
+							self::log('Error extracting ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 							$success = false;
 						}
 						
