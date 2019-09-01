@@ -141,7 +141,7 @@ echo
 
 # Creating tag.
 echo "Creating tag $tag ..."
-git tag $tag
+git tag -a -m "Release $tag" $tag
 echo
 
 
