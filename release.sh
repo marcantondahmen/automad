@@ -15,6 +15,7 @@
 #	5.	Commit changed files
 #	6.	Merge branch develop into master
 #	7.	Create tag for release
+#	8. 	Push changes to origin
 
 
 # Test branch.
@@ -52,16 +53,16 @@ while true
 do
 	read -p "Create release \"$tag\"? (y/n) " continue
 	case $continue in
-                [Yy]* ) 
+        [Yy]* ) 
 			break
 			;;
-                [Nn]* ) 
+        [Nn]* ) 
 			exit 0
 			;;
-                * ) 
+        * ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-        esac
+    esac
 done
 echo
 
@@ -106,16 +107,16 @@ while true
 do
 	read -p "Commit and merge? (y/n) " continue
 	case $continue in
-                [Yy]* ) 
+        [Yy]* ) 
 			break
 			;;
-                [Nn]* ) 
+        [Nn]* ) 
 			exit 0
 			;;
-                * ) 
+        * ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-        esac
+    esac
 done
 echo
 
@@ -154,6 +155,27 @@ echo
 git log -n 2 --graph --all
 echo
 
+# Wait for confirmation to push.
+while true
+do
+	read -p "Push changes to origin? (y/n) " continue
+	case $continue in
+        [Yy]* ) 
+			echo "Pushing branches ..."
+			git push origin --all -u
+			echo "Pushing tags ..."
+			git push origin --tags
+			echo
+			break
+			;;
+        [Nn]* ) 
+			exit 0
+			;;
+        * ) 
+			echo "Please only enter \"y\" or \"n\"."
+			;;
+    esac
+done
 
 # Show branches.
 git branch
