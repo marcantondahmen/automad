@@ -76,10 +76,11 @@
 			});
 
 			$doc.ajaxComplete(function(e, xhr, settings) {
-				// Make sure the status doesn't get triggered by itself in an infinite loop.
-				if (settings.url != '?ajax=status') {
+				
+				if (settings.url == '?ajax=update_config') {
 					s.get();
 				}
+				
 			});
 			
 		}

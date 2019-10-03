@@ -334,7 +334,7 @@ class Html {
 	
 	}
 	
-	
+
 	/**
 	 *	Create loading icon.
 	 *      
@@ -601,28 +601,6 @@ class Html {
 	}
 	
 	
-	/**
-	 *  Create a status button for an AJAX status request with loading animation.
-	 *      
-	 *  @param string $status
-	 *  @param string $tab
-	 *  @return string The HTML for the status button
-	 */
-	
-	public function status($status, $tab) {
-		
-		return	'<a '.
-		 		'href="?context=system_settings#' . $tab . '" ' .
-				'class="uk-button uk-button-large uk-width-1-1 uk-text-left" ' .
-				'data-am-status="' . $status . '"' .
-		 		'>' .
-					'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					Text::get('btn_getting_data') .
-				'</a>';
-				
-	}
-	
-
 	/**
 	 *	Create recursive site tree for editing a page. 
 	 *	Every page link sends a post request to gui/pages.php containing the page's url.
