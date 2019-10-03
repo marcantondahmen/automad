@@ -126,7 +126,7 @@ if (isset($_POST['data'])) {
 				>
 					<?php 
 					
-					Core\Debug::ajax($output, 'themes', $themes);
+					Core\Debug::log($themes, 'themes');
 					$i = 0;
 					
 					// Select the first theme is the main theme is missing to avoid
