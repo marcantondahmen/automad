@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $url = Core\Parse::query('url');
 
 
-if ($Page = $this->Automad->getPage($url)) {
+if ($Page = $this->getAutomad()->getPage($url)) {
 	$this->guiTitle = $this->guiTitle . ' / ' . $Page->get(AM_KEY_TITLE);
 }
 
@@ -62,7 +62,7 @@ $this->element('header');
 		
 		<?php if ($Page) { 
 			
-			echo $this->Html->breadcrumbs();
+			echo $this->getHtml()->breadcrumbs();
 		
 			$items = array(
 				array(
@@ -111,7 +111,7 @@ $this->element('header');
 				);
 			}
 		
-			echo $this->Html->stickySwitcher('#am-page-content', $items, $dropdown);
+			echo $this->getHtml()->stickySwitcher('#am-page-content', $items, $dropdown);
 			
 		?>
 	
@@ -124,7 +124,7 @@ $this->element('header');
 				data-am-handler="page_data" 
 				data-am-url="<?php echo $url; ?>"
 				>
-					<?php echo $this->Html->loading(); ?>
+					<?php echo $this->getHtml()->loading(); ?>
 				</form>
 		    	</li>
 			<!-- Files -->
@@ -136,7 +136,7 @@ $this->element('header');
 				data-am-url="<?php echo $url; ?>" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<?php echo $this->Html->loading(); ?>
+					<?php echo $this->getHtml()->loading(); ?>
 				</form>
 			</li>
 		</ul>
@@ -153,7 +153,7 @@ $this->element('header');
 						<?php Text::e('page_move_destination'); ?>
 					</label>
 					<div data-am-tree="#am-move-page-input">
-						<?php echo $this->Html->siteTree('', $this->collection, array(), true, false); ?>
+						<?php echo $this->getHtml()->siteTree('', $this->getAutomad()->getCollection(), array(), true, false); ?>
 					</div>
 				</div>
 				<form data-am-handler="move_page" data-am-url="<?php echo $url; ?>">

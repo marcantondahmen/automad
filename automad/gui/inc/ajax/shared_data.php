@@ -59,16 +59,16 @@ $output = array();
 if (isset($_POST['data'])) {
 
 	// Save changes.
-	$output = $this->Content->saveSharedData($_POST['data']);
+	$output = $this->getContent()->saveSharedData($_POST['data']);
 			
 } else {
 	
 	// Get shared data from Shared object.
-	$data = $this->Automad->Shared->data;
+	$data = $this->getAutomad()->Shared->data;
 	
 	// Get themes.
-	$themes = $this->Themelist->getThemes();
-	$mainTheme = $this->Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME));
+	$themes = $this->getThemelist()->getThemes();
+	$mainTheme = $this->getThemelist()->getThemeByKey($this->getAutomad()->Shared->get(AM_KEY_THEME));
 	
 	// Start buffering the HTML.
 	ob_start();
@@ -251,13 +251,13 @@ if (isset($_POST['data'])) {
 			<?php 
 			
 				if ($mainTheme) {
-					$keysInMainTheme = $this->Keys->inTheme($mainTheme);
+					$keysInMainTheme = $this->getKeys()->inTheme($mainTheme);
 				} else {
 					$keysInMainTheme = array();
 				}
 				
 				$keysInOtherThemes = array_diff(
-					$this->Keys->inAllTemplates(), 
+					$this->getKeys()->inAllTemplates(), 
 					$keysInMainTheme
 				); 
 				
@@ -270,7 +270,7 @@ if (isset($_POST['data'])) {
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
-					echo $this->Html->formGroup(
+					echo $this->getHtml()->formGroup(
 						$keysInMainTheme, 
 						$data,
 						false,
@@ -286,7 +286,7 @@ if (isset($_POST['data'])) {
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
-					echo $this->Html->formGroup(
+					echo $this->getHtml()->formGroup(
 						$keysInOtherThemes, 
 						$data
 					); 
@@ -300,9 +300,9 @@ if (isset($_POST['data'])) {
 			<div class="uk-accordion-content">
 				<?php 
 				
-				$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
+				$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
 				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo $this->Html->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+				echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
 				
 				?>
 			</div>

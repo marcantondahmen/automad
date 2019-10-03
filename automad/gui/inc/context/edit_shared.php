@@ -58,7 +58,7 @@ $this->element('header');
 		</ul>
 	
 		<?php 
-			echo $this->Html->stickySwitcher('#am-shared-content', array(
+			echo $this->getHtml()->stickySwitcher('#am-shared-content', array(
 				array(
 					'icon' => '<i class="uk-icon-file-text"></i>',
 					'text' => Text::get('btn_data')
@@ -78,7 +78,7 @@ $this->element('header');
 				data-am-init 
 				data-am-handler="shared_data"
 				>
-					<?php echo $this->Html->loading(); ?>
+					<?php echo $this->getHtml()->loading(); ?>
 				</form>
 			</li>
 			<!-- Files -->
@@ -89,7 +89,7 @@ $this->element('header');
 				data-am-handler="files" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<?php echo $this->Html->loading(); ?>
+					<?php echo $this->getHtml()->loading(); ?>
 				</form>
 			</li>
 		</ul>

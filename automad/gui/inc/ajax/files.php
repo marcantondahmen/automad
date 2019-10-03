@@ -56,20 +56,20 @@ $output = array();
 
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, its URL has to be submitted along with the form data.
-if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
+if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->getAutomad()->getCollection())) {
 	$url = $_POST['url'];
 } else {
 	$url = '';
 }
 
 
-$path = $this->Content->getPathByPostUrl();
+$path = $this->getContent()->getPathByPostUrl();
 
 
 // Delete files in $_POST['delete'].
 if (isset($_POST['delete'])) {
 	
-	$output = $this->Content->deleteFiles($_POST['delete'], $path);
+	$output = $this->getContent()->deleteFiles($_POST['delete'], $path);
 
 }
 

@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $Cache = new Core\Cache();
 $mTime = $Cache->getSiteMTime();
-$Selection = new Core\Selection($this->Automad->getCollection());
+$Selection = new Core\Selection($this->getAutomad()->getCollection());
 $Selection->sortPages(AM_KEY_MTIME . ' desc');
 $latestPages = $Selection->getSelection(false, false, 0, 12);
 
@@ -61,7 +61,7 @@ $this->element('header');
 ?>
 		
 		<h1 class="uk-margin-large-top uk-margin-bottom">
-			<?php echo $this->sitename; ?>
+			<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
 		</h1>
 		<p>
 			<a 
@@ -97,7 +97,7 @@ $this->element('header');
 		</ul>
 		<div class="uk-margin-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
-			<?php echo $this->Html->pageGrid($latestPages); ?>
+			<?php echo $this->getHtml()->pageGrid($latestPages); ?>
 		</div>
 
 		<!-- Server Info Modal -->

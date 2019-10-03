@@ -58,7 +58,7 @@ $this->element('header');
 		</ul>
 		<?php
 		 
-			echo $this->Html->stickySwitcher('#am-sys-content', array(
+			echo $this->getHtml()->stickySwitcher('#am-sys-content', array(
 				array(
 					'icon' => '<i class="uk-icon-rocket"></i>',
 					'text' => Text::get('sys_cache')
@@ -108,7 +108,7 @@ $this->element('header');
 						<!-- Cache Monitor Delay -->
 						<p class="uk-margin-large-top"><?php Text::e('sys_cache_monitor_info') ?></p>
 						<?php 
-							echo $this->Html->select(
+							echo $this->getHtml()->select(
 								'cache[monitor-delay]',
 								array(
 									'1 min' => 60,
@@ -122,7 +122,7 @@ $this->element('header');
 						<!-- Cache Lifetime -->
 						<p class="uk-margin-large-top"><?php Text::e('sys_cache_lifetime_info') ?></p>
 						<?php 
-							echo $this->Html->select(
+							echo $this->getHtml()->select(
 								'cache[lifetime]',
 								array(
 									'1 h' => 3600,
@@ -301,7 +301,7 @@ $this->element('header');
 			<!-- Update -->
 			<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
-					<?php echo $this->Html->loading(); ?>
+					<?php echo $this->getHtml()->loading(); ?>
 				</form>
 			</li>
 			<!-- Debug -->

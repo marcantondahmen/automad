@@ -58,7 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
-						<?php echo $this->Html->searchField(Text::get('search_placeholder')); ?>
+						<?php echo $this->getHtml()->searchField(Text::get('search_placeholder')); ?>
 					</div>
 					<ul class="uk-nav uk-nav-side uk-margin-small-top">
 						<li class="uk-nav-header">
@@ -67,7 +67,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li>
 							<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
 								<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
-								<?php echo $this->sitename; ?>
+								<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
 							</a>
 						</li>
 						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
@@ -100,12 +100,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					
 						$header = 	Text::get('sidebar_header_pages') . 
 							  		'&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
-							  		count($this->collection) . 
+							  		count($this->getAutomad()->getCollection()) . 
 							  		'</span>';
 									
-						echo $this->Html->siteTree(
+						echo $this->getHtml()->siteTree(
 							'', 
-							$this->collection, 
+							$this->getAutomad()->getCollection(), 
 							array('context' => 'edit_page'), 
 							false, 
 							$header

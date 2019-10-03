@@ -56,7 +56,7 @@ $this->element('header');
 ?>
 
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<h1><?php echo $this->sitename; ?></h1>
+			<h1><?php echo $this->getShared()->get(AM_KEY_SITENAME); ?></h1>
 			<?php if ($loggedOut) { ?>
 			<div class="uk-alert uk-alert-success uk-margin-top uk-margin-small-bottom">
 				<?php Text::e('success_log_out'); ?>

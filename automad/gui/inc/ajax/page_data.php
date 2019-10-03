@@ -62,7 +62,7 @@ $output = array();
 
 
 // Verify page's URL - The page must exist in the site's collection.
-if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
+if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url']))) {
 
 	// The URL of the currently edited page.
 	$url = $_POST['url'];
@@ -71,7 +71,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 	if (isset($_POST['data'])) {
 	
 		// Save page and replace $output with the returned $output array (error or redirect).
-		$output = $this->Content->savePage($url, $_POST['data']);
+		$output = $this->getContent()->savePage($url, $_POST['data']);
 	
 	} else {
 		
@@ -79,12 +79,12 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 		// get the page's data from its .txt file and return a form's inner HTML containing these information.
 		
 		// Get page's data.
-		$data = Core\Parse::textFile($this->Content->getPageFilePath($Page));
+		$data = Core\Parse::textFile($this->getContent()->getPageFilePath($Page));
 
 		// Set up all standard variables.
 	
 		// Create empty array items for all missing standard variables in $data.
-		foreach ($this->Keys->reserved as $key) {
+		foreach ($this->getKeys()->reserved as $key) {
 			if (!isset($data[$key])) {
 				$data[$key] = false;
 			}
@@ -152,8 +152,8 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 								<a href="#" class="uk-modal-close uk-close"></a>
 							</div>	
 							<?php 
-								echo 	$this->Html->selectTemplate(
-											$this->Themelist,
+								echo 	$this->getHtml()->selectTemplate(
+											$this->getThemelist(),
 											'theme_template', 
 											$data[AM_KEY_THEME], 
 											$Page->template
@@ -178,10 +178,10 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						
 						if ($data[AM_KEY_THEME]) {
 							$themePath = $data[AM_KEY_THEME];
-							$Theme = $this->Themelist->getThemeByKey($data[AM_KEY_THEME]);
+							$Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME]);
 							$themeName = $Theme->name . ' / ';
 						} else {
-							$themePath = $this->Automad->Shared->get(AM_KEY_THEME);
+							$themePath = $this->getAutomad()->Shared->get(AM_KEY_THEME);
 							$themeName = '';
 						}
 						
@@ -239,7 +239,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 						class="uk-form-controls uk-width-1-1" 
 						type="text" 
 						name="prefix" 
-						value="<?php echo $this->Content->extractPrefixFromPath($Page->path); ?>" 
+						value="<?php echo $this->getContent()->extractPrefixFromPath($Page->path); ?>" 
 						/>
 					</div>	
 					<!-- Redirect -->
@@ -263,7 +263,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 							$tags = Core\Parse::csv(htmlspecialchars($data[AM_KEY_TAGS]));
 							sort($tags);
 							
-							$Pagelist = $this->Automad->getPagelist();
+							$Pagelist = $this->getAutomad()->getPagelist();
 							$Pagelist->config(
 								array_merge(
 									$Pagelist->getDefaults(),
@@ -300,7 +300,7 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 					</div>	
 				</div>
 				
-				<?php if ($keysInCurrentTemplate = $this->Keys->inCurrentTemplate()) { ?>
+				<?php if ($keysInCurrentTemplate = $this->getKeys()->inCurrentTemplate()) { ?>
 				<!-- Vars in selected template -->
 				<div class="uk-accordion-title">
 					<?php Text::e('page_vars_in_template'); ?>&nbsp;
@@ -308,24 +308,24 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo 	$this->Html->formGroup(
+						echo 	$this->getHtml()->formGroup(
 									$keysInCurrentTemplate, 
 									$data, 
 									false, 
-									$this->Themelist->getThemeByKey($Page->get(AM_KEY_THEME))
+									$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
 								); 
 					?>
 				</div>
 				<?php } ?>
 				
 				<!-- Vars in other templates -->
-				<?php $keysInOtherTemplates = $this->Keys->inOtherTemplates(); ?>
+				<?php $keysInOtherTemplates = $this->getKeys()->inOtherTemplates(); ?>
 				<div class="uk-accordion-title">
 					<?php Text::e('page_vars_in_other_templates'); ?>&nbsp;
 					<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
 				</div>
 				<div class="uk-accordion-content">
-					<?php echo $this->Html->formGroup($keysInOtherTemplates, $data); ?>
+					<?php echo $this->getHtml()->formGroup($keysInOtherTemplates, $data); ?>
 				</div>
 				
 				<!-- Vars in data but not in any template -->
@@ -336,9 +336,9 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 				<div class="uk-accordion-content">
 					<?php 
 					
-					$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
+					$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
 					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo $this->Html->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
 					
 					?>
 				</div>

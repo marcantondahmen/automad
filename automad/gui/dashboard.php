@@ -89,17 +89,10 @@ class Dashboard {
 	
 	
 	/**
-	 *	Automad's collection.
-	 */	
-		
-	private $collection;
-
-
-	/**
-	 * 	The site name.
+	 * 	The Shared object.
 	 */
 	
-	private $sitename;
+	private $Shared;
 	
 	
 	/**
@@ -141,26 +134,9 @@ class Dashboard {
 		// Load text modules.
 		Text::parseModules();
 		
-		// Create temporary Shared object before a user gets logged in and 
-		// the Automad object didn't get created to always have a value for sitename. 
-		$Shared = new Core\Shared();
-		$this->sitename = $Shared->get(AM_KEY_SITENAME);
-		
 		// Check if an user is logged in.
 		if (User::get()) {
 			
-			// Create Automad object.
-			$this->Automad = new Core\Automad();
-	
-			// If user is logged in, continue with getting the Automad object and the collection.
-			$this->collection = $this->Automad->getCollection();
-			
-			// Create objects.
-			$this->Content = new Content($this->Automad);
-			$this->Html = new Html($this->Automad);
-			$this->Keys = new Keys($this->Automad);
-			$this->Themelist = new Themelist();
-					
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the dashboard page.
 			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Parse::query('context') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
@@ -209,6 +185,109 @@ class Dashboard {
 		
 		require AM_BASE_DIR . AM_DIR_GUI_INC . '/elements/' . $element . '.php';
 		
+	}
+
+
+	/**
+	 *	Return the Automad object and create a new instance if undefined.
+	 *
+	 * 	@return object The Automad object
+	 */
+
+	private function getAutomad() {
+
+		if (!$this->Automad) {
+			$this->Automad = new Core\Automad();
+			Core\Debug::log('Created a new Automad instance for the dashboard');
+		}
+
+		return $this->Automad;
+
+	}
+
+
+	/**
+	 *	Return the Shared object and create a new instance if undefined.
+	 *
+	 * 	@return object The Shared object
+	 */
+
+	private function getShared() {
+
+		if (!$this->Shared) {
+			$this->Shared = new Core\Shared();
+		}
+
+		return $this->Shared;
+
+	}
+
+
+	/**
+	 *	Return the Content object and create a new instance if undefined.
+	 *
+	 * 	@return object The Content object
+	 */
+
+	private function getContent() {
+
+		if (!$this->Content) {
+			$this->Content = new Content($this->getAutomad());
+		}
+
+		return $this->Content;
+
+	}
+
+
+	/**
+	 *	Return the Html object and create a new instance if undefined.
+	 *
+	 * 	@return object The Html object
+	 */
+
+	private function getHtml() {
+
+		if (!$this->Html) {
+			$this->Html = new Html($this->getAutomad());
+		}
+
+		return $this->Html;
+
+	}
+
+
+	/**
+	 *	Return the Keys object and create a new instance if undefined.
+	 *
+	 * 	@return object The Keys object
+	 */
+
+	private function getKeys() {
+
+		if (!$this->Keys) {
+			$this->Keys = new Keys($this->getAutomad());
+		}
+
+		return $this->Keys;
+
+	}
+
+
+	/**
+	 *	Return the Themelist object and create a new instance if undefined.
+	 *
+	 * 	@return object The Themelist object
+	 */
+
+	private function getThemelist() {
+
+		if (!$this->Themelist) {
+			$this->Themelist = new Themelist();
+		}
+
+		return $this->Themelist;
+
 	}
 
 

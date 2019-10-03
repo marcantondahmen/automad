@@ -54,7 +54,7 @@ $this->element('header');
 ?>
 		
 		<div class="uk-width-medium-1-2 uk-container-center">
-			<h1><?php echo $this->sitename; ?></h1>
+			<h1><?php echo $this->getShared()->get(AM_KEY_SITENAME); ?></h1>
 			<form class="uk-form uk-margin-top" method="post">
 				<input 
 				class="uk-form-controls uk-width-1-1" 
