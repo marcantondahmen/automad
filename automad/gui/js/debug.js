@@ -49,10 +49,14 @@
 
 				if (xhr.responseJSON.hasOwnProperty('debug')) {
 
-					var data = {};
+					if (!$.isEmptyObject(xhr.responseJSON.debug)) {
 
-					data["Ajax: " + settings.url] = xhr.responseJSON.debug;
-					console.log(data);
+						var data = {};
+
+						data["Ajax: " + settings.url] = xhr.responseJSON.debug;
+						console.log(data);
+
+					}
 
 				}
 
