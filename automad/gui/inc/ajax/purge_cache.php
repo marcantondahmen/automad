@@ -52,13 +52,13 @@ $tempDir = FileSystem::purgeCache();
 
 if ($tempDir) {
 	$output['success'] = Text::get('success_cache_purged');
-	Core\Debug::ajax($output, 'temp directory', $tempDir);
+	Core\Debug::log($tempDir, 'temp directory');
 } else {
 	$output['error'] = Text::get('error_cache_purged');
 }
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

@@ -131,9 +131,6 @@
 			 *
 			 * 	4.	data.success
 			 * 		will alert the success message in a notification box.
-			 *
-			 *  5.	data.debug
-			 *      Outputs debug info to the console.
 			 */
 			
 			var	f = Automad.form,
@@ -159,11 +156,6 @@
 			// Post form data to the handler.
 			$.post('?ajax=' + handler, param, function(data) {
 			
-				// Debug info.
-				if (data.debug) {
-					Automad.debug.log(handler, data.debug);
-				}
-				
 				// In case the returned JSON contains a redirect URL, simply redirect the page.
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 				if (data.redirect) {

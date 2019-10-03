@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo json_encode($this->Content->addPage());
+$this->jsonOutput($this->getContent()->addPage());
 
 
 ?>

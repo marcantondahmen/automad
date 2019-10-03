@@ -133,7 +133,7 @@ if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 
 
 // If debug is enabled, prepend the logged information to the closing </body> tag and echo the page.
-echo str_replace('</body>', Core\Debug::getLog() . '</body>', $output);
+echo str_replace('</body>', Core\Debug::consoleLog() . '</body>', $output);
 
 
 ?>

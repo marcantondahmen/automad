@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo json_encode(User::changePassword());
+$this->jsonOutput(User::changePassword());
 
 
 ?>

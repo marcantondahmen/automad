@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo json_encode(Accounts::add());
+$this->jsonOutput(Accounts::add());
 
 
 ?>

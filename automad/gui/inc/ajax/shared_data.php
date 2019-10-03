@@ -319,7 +319,7 @@ if (isset($_POST['data'])) {
 }
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

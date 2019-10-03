@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo json_encode($this->Content->duplicatePage());
+$this->jsonOutput($this->getContent()->duplicatePage());
 
 
 ?>

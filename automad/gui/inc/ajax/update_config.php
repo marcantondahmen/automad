@@ -124,7 +124,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 }
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

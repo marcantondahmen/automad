@@ -35,22 +35,33 @@
 
 
 /*
- *	Debug helper. 
+ *	Whenever an AJAX request answer includes a debug field, that content is 
+ *	automatically appended to the console when the request has completed. 
  */
 	
 +function(Automad, $) {
 	
 	Automad.debug = {
 		
-		log: function(handler, data) {
-			
-			var debug = {};
-			
-			debug['Ajax: ' + handler] = data;
-			console.log(debug);
-			
+		init: function() {
+
+			$(document).ajaxComplete(function(e, xhr, settings) {
+
+				if (xhr.responseJSON.hasOwnProperty('debug')) {
+
+					var data = {};
+
+					data["Ajax: " + settings.url] = xhr.responseJSON.debug;
+					console.log(data);
+
+				}
+
+			});
+
 		}
 		
-	}
+	};
+
+	Automad.debug.init();
 	
 }(window.Automad = window.Automad || {}, jQuery);

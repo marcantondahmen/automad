@@ -99,8 +99,8 @@ class Content {
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
 	
-					Core\Debug::ajax($output, 'page', $Page->url);
-					Core\Debug::ajax($output, 'new subpage', $_POST['subpage']);
+					Core\Debug::log($Page->url, 'page');
+					Core\Debug::log($_POST['subpage'], 'new subpage');
 	
 					// The new page's properties.
 					$title = $_POST['subpage']['title'];
@@ -215,8 +215,8 @@ class Content {
 		
 			$file = $directory . $options['filename'];
 		
-			Core\Debug::ajax($output, 'file', $file);
-			Core\Debug::ajax($output, 'options', $options);
+			Core\Debug::log($file, 'file');
+			Core\Debug::log($options, 'options');
 				
 			if (file_exists($file)) {
 				
@@ -316,7 +316,7 @@ class Content {
 
 				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
 				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
-				Core\Debug::ajax($output, 'deleted', $Page->url);
+				Core\Debug::log($Page->url, 'deleted');
 
 				$this->clearCache();
 
@@ -610,8 +610,8 @@ class Content {
 					// Merge and save data.
 					$data = array_merge(Core\Parse::textFile($this->getPageFilePath($Page)), $_POST['data']);
 					FileSystem::writeData($data, $this->getPageFilePath($Page));
-					Core\Debug::ajax($output, 'saved data', $data);
-					Core\Debug::ajax($output, 'data file', $this->getPageFilePath($Page));
+					Core\Debug::log($data, 'saved data');
+					Core\Debug::log($this->getPageFilePath($Page), 'data file');
 					
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
 					if (!empty($_POST['data'][AM_KEY_TITLE]) && $Page->url != '/') {
@@ -624,7 +624,7 @@ class Content {
 							$_POST['data'][AM_KEY_TITLE]
 						);
 						
-						Core\Debug::ajax($output, 'renamed page', $newPagePath);
+						Core\Debug::log($newPagePath, 'renamed page');
 						
 					}
 					
@@ -725,8 +725,8 @@ class Content {
 						// Move page
 						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);	
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
-						Core\Debug::ajax($output, 'page', $Page->path);
-						Core\Debug::ajax($output, 'destination', $dest->path);
+						Core\Debug::log($Page->path, 'page');
+						Core\Debug::log($dest->path, 'destination');
 						
 						$this->clearCache();
 		
@@ -950,7 +950,7 @@ class Content {
 	public function upload() {
 		
 		$output = array();
-		Core\Debug::ajax($output, 'files', $_POST + $_FILES);
+		Core\Debug::log($_POST + $_FILES, 'files');
 
 		// Set path.
 		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.

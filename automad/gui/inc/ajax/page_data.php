@@ -355,6 +355,6 @@ if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 		
 } 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 ?>

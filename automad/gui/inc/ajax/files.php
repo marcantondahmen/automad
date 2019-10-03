@@ -421,7 +421,7 @@ $output['html'] = ob_get_contents();
 ob_end_clean();
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

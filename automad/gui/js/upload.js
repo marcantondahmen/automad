@@ -181,11 +181,6 @@
 					} else {
 						data.context.find('.uk-progress').addClass('uk-progress-success');
 					}
-					
-					// Debug info.
-					if (data.result.debug) {
-						Automad.debug.log('upload', data.result.debug);
-					}
 								
 				},
 				

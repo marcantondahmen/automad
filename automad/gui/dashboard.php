@@ -212,4 +212,20 @@ class Dashboard {
 	}
 
 
+	/**
+	 *	Merge a given output array with the debug log and echo 
+	 *	the JSON encoded data.
+	 *
+	 * 	@param array $output
+	 */
+
+	private function jsonOutput($output = array()) {
+		
+		$output['debug'] = Core\Debug::getLog();
+
+		echo json_encode($output);
+
+	}
+
+
 }
