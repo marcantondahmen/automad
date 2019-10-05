@@ -61,7 +61,7 @@ if (User::get()) {
 			<!-- Logo -->
 			<li class="am-navbar-logo">
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
-					<?php include AM_BASE_DIR . '/automad/gui/svg/logo.svg'; ?>
+					<?php echo Logo::get(); ?>
 				</a>
 			</li>
 			<!-- Search -->

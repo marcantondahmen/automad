@@ -43,12 +43,35 @@
 	}
 	
 	a & * {
+	
 		&,
 		&:hover,
 		&:active,
 		&:focus {
 			fill: @am-text;
 		}
+
+	}
+
+	a &-headless * {
+	
+		&,
+		&:hover,
+		&:active,
+		&:focus {
+			fill: @am-success;
+		}
+		
+	}
+
+	&-container {
+
+		min-width: 31px;
+		
+		&-headless {
+			min-width: 42px;
+		}
+
 	}
 	
 }
