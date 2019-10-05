@@ -77,7 +77,7 @@
 
 			$doc.ajaxComplete(function(e, xhr, settings) {
 				
-				if (settings.url == '?ajax=update_config') {
+				if (settings.url == '?ajax=update_config' || settings.url == '?ajax=users' || settings.url == '?ajax=add_user') {
 					s.get();
 				}
 				
