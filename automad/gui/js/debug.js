@@ -47,6 +47,9 @@
 
 			$(document).ajaxComplete(function(e, xhr, settings) {
 
+				// The debug property in the JSON response will be defined by
+				// the jsonOutput() method of the Dashboard class by using the debug 
+				// buffer array created with Debug::log() as value for the debug property.
 				if (xhr.responseJSON.hasOwnProperty('debug')) {
 
 					if (!$.isEmptyObject(xhr.responseJSON.debug)) {
