@@ -95,6 +95,20 @@ if (!empty($_POST['type'])) {
 		
 	}
 
+	// Headless
+	if ($type == 'headless') {
+		
+		if (isset($_POST['headless'])) {
+			$config['AM_HEADLESS_ENABLED'] = true;
+		} else {
+			$config['AM_HEADLESS_ENABLED'] = false;
+		}
+
+		// Reload page to update the dashboard.
+		$output['reload'] = true;
+		
+	}
+
 	// Debugging
 	if ($type == 'debug') {
 		

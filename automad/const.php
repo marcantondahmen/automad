@@ -200,6 +200,9 @@ Config::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
 Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
+// HEADLESS
+Config::set('AM_HEADLESS_ENABLED', false);
+
 // UPDATE
 Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');
 Config::set('AM_UPDATE_BRANCH', 'master');

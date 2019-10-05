@@ -64,12 +64,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li class="uk-nav-header">
 							<?php Text::e('sidebar_header_global'); ?>
 						</li>
-						<li>
-							<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
-								<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
-								<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
-							</a>
-						</li>
+						<?php if (!AM_HEADLESS_ENABLED) { ?>
+							<li>
+								<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
+									<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
+									<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
+								</a>
+							</li>
+						<?php } ?>
 						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
 							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 								<i class="uk-icon-desktop uk-icon-justify"></i>&nbsp;

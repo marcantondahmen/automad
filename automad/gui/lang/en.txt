@@ -626,7 +626,7 @@ However, on some systems that directory has to be cleaned up manually.
 
 -
 
-sys_debug: Debug Mode
+sys_debug: Debug
 
 -
 
@@ -636,6 +636,18 @@ sys_debug_enable: Debug Mode
 
 sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
 Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
+
+-
+
+sys_headless: Headless
+
+-
+
+sys_headless_enable: Headless Mode
+-
+
+sys_headless_info: The headless mode turns Automad into a back-end only content management system 
+that makes content accessible via a **RESTful API** for display on any device.
 
 -
 

@@ -131,6 +131,9 @@
 			 *
 			 * 	4.	data.success
 			 * 		will alert the success message in a notification box.
+			 * 
+			 * 	5.	data.reload
+			 * 		will reload the current page.
 			 */
 			
 			var	f = Automad.form,
@@ -160,6 +163,13 @@
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 				if (data.redirect) {
 					window.location.href = data.redirect;
+					return false;
+				}
+
+				// Reload the current page.
+				if (data.reload) {
+					window.location.reload();
+					return false;
 				}
 
 				// If HTML gets returned within the JSON data, replace the form's (inner) HTML.

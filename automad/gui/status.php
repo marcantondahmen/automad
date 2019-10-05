@@ -99,16 +99,6 @@ class Status {
 			
 		}
 		
-		if ($item == 'headless') {
-			
-			// The AJAX request for the headless icon is just used to 
-			// return the output of the Logo::headless() method. 
-			// The actual test whether the headless mode is enabled is done
-			// already by that method.
-			$output['status'] = Logo::headless();
-			
-		}
-
 		if ($item == 'debug') {
 			
 			if (AM_DEBUG_ENABLED) {

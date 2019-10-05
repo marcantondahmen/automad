@@ -72,6 +72,10 @@ $this->element('header');
 					'text' => Text::get('sys_update')
 				),
 				array(
+					'icon' => '<strong>{ }</strong>',
+					'text' => Text::get('sys_headless')
+				),
+				array(
 					'icon' => '<i class="uk-icon-bug"></i>',
 					'text' => Text::get('sys_debug')
 				)
@@ -304,6 +308,30 @@ $this->element('header');
 					<?php echo $this->getHtml()->loading(); ?>
 				</form>
 			</li>
+			<!-- Headless --> 
+			<li>
+				<?php Text::e('sys_headless_info'); ?>
+				<!-- Headless Mode Enable -->
+				<form 
+				class="uk-form uk-form-stacked" 
+				data-am-handler="update_config" 
+				data-am-auto-submit
+				>
+					<!-- Headless Mode Enable -->
+					<input type="hidden" name="type" value="headless" />		
+					<label 
+					class="am-toggle-switch-large" 
+					data-am-toggle
+					>
+						<?php Text::e('sys_headless_enable'); ?>
+						<input 
+						type="checkbox" 
+						name="headless" 
+						value="on"<?php if (AM_HEADLESS_ENABLED) { echo ' checked'; } ?> 
+						/>
+					</label>
+				</form>
+			</li>
 			<!-- Debug -->
 			<li>
 				<?php Text::e('sys_debug_info'); ?>
@@ -314,7 +342,7 @@ $this->element('header');
 						<input 
 						type="checkbox" 
 						name="debug" 
-						value="on" <?php if (AM_DEBUG_ENABLED) { echo ' checked'; } ?> 
+						value="on"<?php if (AM_DEBUG_ENABLED) { echo ' checked'; } ?> 
 						/>
 					</label>
 				</form>

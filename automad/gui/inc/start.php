@@ -73,26 +73,41 @@ $this->element('header');
 				<?php echo getenv('SERVER_NAME'); ?>
 			</a>
 		</p>
-		<p>
-			<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large">
-				<i class="uk-icon-share"></i>&nbsp;
-				<?php Text::e('btn_inpage_edit'); ?>
-			</a>
-		</p>
+		<?php if (!AM_HEADLESS_ENABLED) { ?>
+			<p>
+				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large">
+					<i class="uk-icon-share"></i>&nbsp;
+					<?php Text::e('btn_inpage_edit'); ?>
+				</a>
+			</p>
+		<?php } ?>
 		<div class="uk-margin-large-top">
 			<i class="uk-icon-heartbeat uk-icon-justify uk-icon-small"></i>&nbsp;&nbsp;
 			<span class="uk-hidden-small"><?php Text::e('dashboard_modified'); ?></span>
 			<?php echo date('j. M Y, G:i', $mTime); ?>h
 		</div>
 		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-top">
+			<?php if (AM_HEADLESS_ENABLED) { ?>
+				<li class="uk-margin-small-bottom">
+					<a 
+					href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_headless')); ?>"
+					class="uk-button uk-button-success uk-button-large uk-width-1-1 uk-text-left"
+					>
+						<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;
+						<?php Text::e('sys_headless_enable'); ?>
+					</a>
+				</li>
+			<?php } ?>
 			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->status('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
+				<?php echo Status::button('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
 			</li>
+			<?php if (!AM_HEADLESS_ENABLED) { ?>
+				<li class="uk-margin-small-bottom">
+					<?php echo Status::button('debug', Core\Str::sanitize(Text::get('sys_debug'))); ?>
+				</li>
+			<?php } ?>
 			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->status('debug', Core\Str::sanitize(Text::get('sys_debug'))); ?>
-			</li>
-			<li class="uk-margin-small-bottom">
-				<?php echo $this->Html->status('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
+				<?php echo Status::button('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
 			</li>
 		</ul>
 		<div class="uk-margin-top">

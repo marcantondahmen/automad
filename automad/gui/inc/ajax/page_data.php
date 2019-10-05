@@ -115,23 +115,25 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 				placeholder="Required" 
 				required 
 				/>
-				<a 
-				href="<?php echo AM_BASE_INDEX . $url; ?>" 
-				class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
-				title="<?php Text::e('btn_inpage_edit'); ?>" 
-				data-uk-tooltip="pos:'bottom-left'"
-				>
-					<i class="uk-icon-share"></i>&nbsp;
-					<?php 
-					
-					if ($url == '/') {
-						echo getenv('SERVER_NAME');
-					} else {
-						echo $url; 	
-					}
+				<?php if (!AM_HEADLESS_ENABLED) { ?>
+					<a 
+					href="<?php echo AM_BASE_INDEX . $url; ?>" 
+					class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
+					title="<?php Text::e('btn_inpage_edit'); ?>" 
+					data-uk-tooltip="pos:'bottom-left'"
+					>
+						<i class="uk-icon-share"></i>&nbsp;
+						<?php 
+						
+						if ($url == '/') {
+							echo getenv('SERVER_NAME');
+						} else {
+							echo $url; 	
+						}
 
-					?> 
-				</a>
+						?> 
+					</a>
+				<?php } ?>
 			</div>
 			
 			<div 
@@ -144,73 +146,75 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					<?php Text::e('page_settings'); ?>
 				</div>
 				<div class="uk-accordion-content">
-					<!-- Select Template Modal -->	
-					<div id="am-select-template-modal" class="uk-modal">
-						<div class="uk-modal-dialog">
-							<div class="uk-modal-header">
-								<?php Text::e('page_theme_template'); ?>
-								<a href="#" class="uk-modal-close uk-close"></a>
-							</div>	
-							<?php 
-								echo 	$this->getHtml()->selectTemplate(
-											$this->getThemelist(),
-											'theme_template', 
-											$data[AM_KEY_THEME], 
-											$Page->template
-										); 
-							?>	
-							<div class="uk-modal-footer uk-text-right">
-								<button class="uk-modal-close uk-button">
-									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
-								</button>
-								<button class="uk-modal-close uk-button uk-button-success" type="button" data-am-submit="page_data">
-									<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_apply_reload'); ?>
-								</button>
+					<?php if (!AM_HEADLESS_ENABLED) { ?>
+						<!-- Select Template Modal -->	
+						<div id="am-select-template-modal" class="uk-modal">
+							<div class="uk-modal-dialog">
+								<div class="uk-modal-header">
+									<?php Text::e('page_theme_template'); ?>
+									<a href="#" class="uk-modal-close uk-close"></a>
+								</div>	
+								<?php 
+									echo 	$this->getHtml()->selectTemplate(
+												$this->getThemelist(),
+												'theme_template', 
+												$data[AM_KEY_THEME], 
+												$Page->template
+											); 
+								?>	
+								<div class="uk-modal-footer uk-text-right">
+									<button class="uk-modal-close uk-button">
+										<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
+									</button>
+									<button class="uk-modal-close uk-button uk-button-success" type="button" data-am-submit="page_data">
+										<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_apply_reload'); ?>
+									</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Select Template Button -->	
-					<div class="uk-form-row">
-						<label class="uk-form-label uk-text-truncate">
-							<?php Text::e('page_theme_template'); ?>
-						</label>
-						<?php 
-						
-						if ($data[AM_KEY_THEME]) {
-							$themePath = $data[AM_KEY_THEME];
-							$Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME]);
-							$themeName = $Theme->name . ' / ';
-						} else {
-							$themePath = $this->getAutomad()->Shared->get(AM_KEY_THEME);
-							$themeName = '';
-						}
-						
-						$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $themePath . '/' . $Page->template . '.php';
-						$templateName = $themeName . ucwords(str_replace('_', ' ', $Page->template));
-						
-						if (file_exists($template)) {
-							$templateButtonClass = 'uk-button-success';
-						} else {
-							$templateButtonClass = 'uk-button-danger';
-							$templateName .= ' - ' . Text::get('error_template_missing');
-						}
-						
-						?>
-						<button 
-						type="button" 
-						class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1" 
-						data-uk-modal="{target:'#am-select-template-modal'}"
-						>
-							<div class="uk-flex uk-flex-space-between">
-								<div class="uk-text-truncate uk-text-left">
-									<?php echo $templateName;?> 
+						<!-- Select Template Button -->	
+						<div class="uk-form-row">
+							<label class="uk-form-label uk-text-truncate">
+								<?php Text::e('page_theme_template'); ?>
+							</label>
+							<?php 
+							
+							if ($data[AM_KEY_THEME]) {
+								$themePath = $data[AM_KEY_THEME];
+								$Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME]);
+								$themeName = $Theme->name . ' / ';
+							} else {
+								$themePath = $this->getAutomad()->Shared->get(AM_KEY_THEME);
+								$themeName = '';
+							}
+							
+							$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $themePath . '/' . $Page->template . '.php';
+							$templateName = $themeName . ucwords(str_replace('_', ' ', $Page->template));
+							
+							if (file_exists($template)) {
+								$templateButtonClass = 'uk-button-success';
+							} else {
+								$templateButtonClass = 'uk-button-danger';
+								$templateName .= ' - ' . Text::get('error_template_missing');
+							}
+							
+							?>
+							<button 
+							type="button" 
+							class="uk-button <?php echo $templateButtonClass; ?> uk-button-large uk-width-1-1" 
+							data-uk-modal="{target:'#am-select-template-modal'}"
+							>
+								<div class="uk-flex uk-flex-space-between">
+									<div class="uk-text-truncate uk-text-left">
+										<?php echo $templateName;?> 
+									</div>
+									<div class="uk-hidden-small">
+										<i class="uk-icon-pencil"></i>
+									</div>
 								</div>
-								<div class="uk-hidden-small">
-									<i class="uk-icon-pencil"></i>
-								</div>
-							</div>
-						</button>	
-					</div>
+							</button>	
+						</div>
+					<?php } ?>
 					<!-- Visibility -->
 					<div class="uk-form-row">
 						<label class="uk-form-label uk-text-truncate">
