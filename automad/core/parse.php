@@ -271,7 +271,7 @@ class Parse {
 			// domain.com/page?key=value -> domain.com/index.php?/page&key=value
 			$query = explode('&', $_SERVER['QUERY_STRING'], 2);
 			$request = $query[0];
-			Debug::log($query, 'Getting request from QUERY_STRING "' . $_SERVER['QUERY_STRING'] . '"');
+			Debug::log($query, 'Getting request from QUERY_STRING ' . $_SERVER['QUERY_STRING']);
 			
 			// In case there is no real query string except the requested page.
 			if (!isset($query[1])) {
