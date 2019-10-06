@@ -2,6 +2,15 @@ title: Profile
 
 -
 
+textTeaser: Put your CV or other information here.
+
+-
+
+text: Use the Profile template to share information about yourself.   
+Note that you can [activate](/dashboard?context=edit_page&url=%2Fprofile#data-and-settings) the "Show in Navbar" checkbox in the variable section to add this page to the header menu.
+
+-
+
 checkboxShowInFooter: on
 
 -
@@ -11,15 +20,6 @@ checkboxShowInNavbar: on
 -
 
 imageProfile: /pages/*portfolio/*/portrait.png
-
--
-
-text: Use the Profile template to share information about yourself.   
-Note that you can [activate](/dashboard?context=edit_page&url=%2Fprofile#data-and-settings) the "Show in Navbar" checkbox in the variable section to add this page to the header menu.
-
--
-
-textTeaser: Put your CV or other information here.
 
 -
 

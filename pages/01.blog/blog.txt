@@ -6,6 +6,10 @@ tags: Blog
 
 -
 
+textTeaser: This is the Alpha theme's Blog template. All pages created below will show up in the pagelist as previews. To make all pages on your site showing up here, activate the "Show All Pages in Pagelist" checkbox [here](/dashboard?context=edit_page&url=%2Fblog#data-and-settings). There you will find also a bunch of other options to try out. Note the filter button, to filter the shown pages by tags. Every page can have multiple tags.
+
+-
+
 checkboxShowInNavbar: on
 
 -
@@ -15,7 +19,3 @@ date: 2018-05-14 12:00:00
 -
 
 imageTeaser: /pages/*portfolio/*/portrait.png
-
--
-
-textTeaser: This is the Alpha theme's Blog template. All pages created below will show up in the pagelist as previews. To make all pages on your site showing up here, activate the "Show All Pages in Pagelist" checkbox [here](/dashboard?context=edit_page&url=%2Fblog#data-and-settings). There you will find also a bunch of other options to try out. Note the filter button, to filter the shown pages by tags. Every page can have multiple tags.

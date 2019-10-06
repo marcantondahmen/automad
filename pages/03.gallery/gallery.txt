@@ -6,6 +6,10 @@ tags: Work
 
 -
 
+textTeaser: This is a simple gallery. You can use one or more [glob patterns](https://en.wikipedia.org/wiki/Glob_(programming)) as value for the [Images Gallery](/dashboard?context=edit_page&url=%2Fgallery#data-and-settings) variable to select all images to be included in the gallery.
+
+-
+
 checkboxShowInFooter: on
 
 -
@@ -15,10 +19,6 @@ checkboxShowInNavbar: on
 -
 
 imagesGallery: /pages/*portfolio/*/*.png
-
--
-
-textTeaser: This is a simple gallery. You can use one or more [glob patterns](https://en.wikipedia.org/wiki/Glob_(programming)) as value for the [Images Gallery](/dashboard?context=edit_page&url=%2Fgallery#data-and-settings) variable to select all images to be included in the gallery.
 
 -
 
