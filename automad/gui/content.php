@@ -94,7 +94,7 @@ class Content {
 		// Validation of $_POST. URL, title and template must exist and != false.
 		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 	
-			if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title'] && isset($_POST['subpage']['theme_template']) && $_POST['subpage']['theme_template']) {
+			if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title']) {
 		
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
@@ -104,9 +104,9 @@ class Content {
 	
 					// The new page's properties.
 					$title = $_POST['subpage']['title'];
-					$theme_template = $_POST['subpage']['theme_template'];
-					$theme = dirname($theme_template);
-					$template = basename($theme_template);
+					$themeTemplate = $this->getTemplateNameFromArray($_POST['subpage'], 'theme_template');
+					$theme = dirname($themeTemplate);
+					$template = basename($themeTemplate);
 					
 					// Save new subpage below the current page's path.		
 					$subdir = Core\Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
@@ -582,7 +582,31 @@ class Content {
 		
 	}
 	
-	
+
+	/**
+	 * 	Get the theme/template file from posted data or return a default template name
+	 * 
+	 * 	@param array $array
+	 * 	@param string $key
+	 * 	@return string The template filename
+	 */
+
+	private function getTemplateNameFromArray($array = false, $key = false) {
+
+		$template = 'data.php';
+
+		if (is_array($array) && $key) {
+			if (!empty($array[$key])) {
+				$template = $array[$key];
+			}
+		}
+		
+		Core\Debug::log($template, 'Template');
+		return $template;
+
+	}
+
+
 	/**
 	 *	Handle AJAX request for editing a data variable in-page context.   
 	 *          
@@ -822,12 +846,13 @@ class Content {
 	
 					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
 					// That information has to be parsed first and "subdivided".
+					$themeTemplate = $this->getTemplateNameFromArray($_POST, 'theme_template');
 
 					// Get correct theme name.
 					// If the theme is not set and there is no slash passed within 'theme_template', the resulting dirname is just a dot.
 					// In that case, $data[AM_KEY_THEME] gets removed (no theme - use site theme). 
-					if (dirname($_POST['theme_template']) != '.') {
-						$data[AM_KEY_THEME] = dirname($_POST['theme_template']);
+					if (dirname($themeTemplate) != '.') {
+						$data[AM_KEY_THEME] = dirname($themeTemplate);
 					} else {
 						unset($data[AM_KEY_THEME]);
 					}
@@ -836,7 +861,7 @@ class Content {
 					unlink($this->getPageFilePath($Page));
 
 					// Build the path of the data file by appending the basename of 'theme_template' to $Page->path.
-					$newTemplate = Core\Str::stripEnd(basename($_POST['theme_template']), '.php');
+					$newTemplate = Core\Str::stripEnd(basename($themeTemplate), '.php');
 					$newPageFile = FileSystem::fullPagePath($Page->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
 					
 					// Save new file within current directory, even when the prefix/title changed. 
