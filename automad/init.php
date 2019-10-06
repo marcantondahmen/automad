@@ -113,7 +113,7 @@ if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 		}
 	
 		// Render template
-		$View = new Core\View($Automad);
+		$View = new Core\View($Automad, AM_HEADLESS_ENABLED);
 		$output = $View->render();
 	
 		// Save output to cache if page actually exists.

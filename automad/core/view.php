@@ -112,15 +112,30 @@ class View {
 	 */
 	
 	private $template;
+
+
+	/**
+	 * 	Set the headless mode for the current view.
+	 */
+
+	private $headless;
 	
 	
 	/**
 	 *	Define $Automad and $Page, check if the page gets redirected and get the template name. 
+	 *
+	 * 	Note that optionally the $headless and $template variables can be passed to the constructor,
+	 * 	to allow for unit testing views in headless mode independent from the actual configuration.
+	 *	
+	 *	@param object $Automad
+	 *	@param boolean $headless
+	 *	@param string $template
 	 */
 	
-	public function __construct($Automad) {
+	public function __construct($Automad, $headless = false, $template = '') {
 		
 		$this->Automad = $Automad;
+		$this->headless = $headless;
 		$this->Runtime = new Runtime($Automad);
 		$this->Toolbox = new Toolbox($Automad);
 		$this->InPage = new GUI\InPage();
@@ -133,7 +148,16 @@ class View {
 			die;
 		}
 		
-		$this->template = $Page->getTemplate();
+		// Set template.
+		if ($template) {
+			$this->template = $template;
+		} else {
+			if ($this->headless) {
+				$this->template = AM_BASE_DIR . AM_HEADLESS_TEMPLATE;
+			} else {
+				$this->template = $Page->getTemplate();
+			}
+		} 
 		
 		Debug::log($Page, 'New instance created for the current page');
 		
@@ -323,7 +347,7 @@ class View {
 			
 			$str = preg_replace_callback('/' . Regex::keyValue() . '/s', function($pair) {
 				
-				if (strpos($pair['value'], '@') === 0) {
+				if (strpos($pair['value'], AM_DEL_VAR_OPEN) === 0) {
 					$pair['value'] = '"' . trim($pair['value']) . '"';
 				}
 				
@@ -397,10 +421,18 @@ class View {
 				if ($isOptionString) {
 					$value = addcslashes($value, '"');
 				}
-					
+
+				// Escape values to be used in headless mode.
+				if ($this->headless) {
+					$value = preg_replace('/[\r\n]+/', '\n', trim($value));
+					$value = json_encode(array('temp' => $value), JSON_UNESCAPED_SLASHES);
+					$value = Str::stripStart($value, '{"temp":"');
+					$value = Str::stripEnd($value, '"}');
+				}
+				
 				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
 				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
-				if ($inPageEdit) {
+				if ($inPageEdit && !$this->headless) {
 					
 					$value = 	$this->InPage->injectTemporaryEditButton(
 									$value, 
@@ -951,10 +983,11 @@ class View {
 		
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/is', function($match) use ($method, $parameters) {
-					$parameters = array_merge(array(0 => $match[2]), $parameters);
+		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
+					$parameters = array_merge(array(0 => $match[3]), $parameters);
 					$url = call_user_func_array($method, $parameters);
-					return $match[1] . '="' . $url . '"';
+					// Matches 2 and 4 are quotes.
+					return $match[1] . '=' . $match[2] . $url . $match[4];
 				}, $str);
 				
 		// Inline styles (like background-image).
@@ -967,12 +1000,13 @@ class View {
 				
 		// Image srcset attributes.
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+srcset)="([^"]+)"/is', function($match) use ($method, $parameters) {
+		$str = 	preg_replace_callback('/(<[^>]+srcset)=((?:\\\\)?")([^"]+)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
 					$urls = preg_replace_callback('/([^,\s]+)\s+(\w+)/is', function($match) use ($method, $parameters) {
 						$parameters = array_merge(array(0 => $match[1]), $parameters);
 						return call_user_func_array($method, $parameters) . ' ' . $match[2];
-					}, $match[2]);
-					return $match[1] . '="' . $urls . '"'; 
+					}, $match[3]);
+					// Matches 2 and 4 are quotes.
+					return $match[1] . '=' . $match[2] . $urls . $match[4]; 
 				}, $str);
 	
 		return $str;

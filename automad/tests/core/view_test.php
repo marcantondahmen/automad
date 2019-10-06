@@ -60,7 +60,86 @@ class View_Test extends TestCase {
 			'set_01' => 'Test 1, Test 2',
 			'session_get_01' => 'Session Test',
 			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
-			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>'
+			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'resolve_01' => '<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'
+		);
+		
+		foreach ($templates as $template => $expected) {
+			
+			$data[] = array(
+				$template,
+				$expected
+			);
+			
+		}
+		
+		return $data;
+		
+	}
+	
+
+	/**
+	 *	@dataProvider dataForTestHeadlessRenderIsEqual
+	 *	@testdox render $template: $expected
+	 */
+
+	public function testHeadlessRenderIsEqual($template, $expected) {
+		
+		$Mock = new Mock();
+		$View = new View($Mock->createAutomad(), true, AM_BASE_DIR . '/automad/tests/templates/' . $template . '.php');
+		$rendered = $View->render();
+		
+		$this->assertEquals($rendered, $expected);
+		
+	}
+	
+	
+	public function dataForTestHeadlessRenderIsEqual() {
+		
+		$data = array();
+		$templates = array(
+			'headless_01' => '{ "quoted": "\"Quoted\" \"Test\" \"String\"" }',
+			'headless_02' => '{ "text": "<img src=\"/pages/image.jpg\" srcset=\"/pages/image.jpg 500w, /pages/image_large.jpg 1200w\"><a href=\"/index.php/test\">Test</a>" }',
+			'headless_03' => '{ "text": "This is a\\\\nmultiline test." }'
+		);
+		
+		foreach ($templates as $template => $expected) {
+			
+			$data[] = array(
+				$template,
+				$expected
+			);
+			
+		}
+		
+		return $data;
+		
+	}
+
+
+	/**
+	 *	@dataProvider dataForTestHeadlessRenderArrayIsEqual
+	 *	@testdox render $template: $expected
+	 */
+
+	public function testHeadlessRenderArrayIsEqual($template, $expected) {
+		
+		$Mock = new Mock();
+		$View = new View($Mock->createAutomad(), true, AM_BASE_DIR . '/automad/tests/templates/' . $template . '.php');
+		$rendered = $View->render();
+		
+		$this->assertEquals(json_decode($rendered, true), $expected);
+		
+	}
+	
+	
+	public function dataForTestHeadlessRenderArrayIsEqual() {
+		
+		$data = array();
+		$templates = array(
+			'headless_01' => array('quoted' => '"Quoted" "Test" "String"'),
+			'headless_02' => array('text' => '<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'),
+			'headless_03' => array('text' => 'This is a\nmultiline test.')
 		);
 		
 		foreach ($templates as $template => $expected) {
