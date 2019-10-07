@@ -325,9 +325,16 @@ class Cache {
 			$serverName = getenv('SERVER_NAME');
 		}
 		
+		// Set extension.
+		if (AM_HEADLESS_ENABLED) {
+			$extension = AM_FILE_EXT_HEADLESS_CACHE;
+		} else {
+			$extension = AM_FILE_EXT_PAGE_CACHE;
+		}
+
 		$pageCacheFile = 	AM_BASE_DIR . AM_DIR_CACHE_PAGES . '/' . 
 							$serverName . AM_BASE_URL . $currentPath . '/' . 
-							AM_FILE_PREFIX_CACHE . $sessionDataHash . '.' . AM_FILE_EXT_PAGE_CACHE;
+							AM_FILE_PREFIX_CACHE . $sessionDataHash . '.' . $extension;
 							
 		Debug::log($pageCacheFile);
 		

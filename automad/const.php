@@ -112,6 +112,7 @@ Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also requ
 Config::set('AM_FILE_EXT_CAPTION', 'caption');
 Config::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
+Config::set('AM_FILE_EXT_HEADLESS_CACHE', 'json');
 Config::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA); 
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
