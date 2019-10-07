@@ -76,13 +76,18 @@ session_name('Automad-' . md5(AM_BASE_DIR));
 session_start();
 
 
-// Split GUI form regular pages.
+// Split GUI from regular pages.
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 	
 	$Dashboard = new GUI\Dashboard();
 	$output = $Dashboard->output;
 	
 } else {
+
+	// Set content type header.
+	if (AM_HEADLESS_ENABLED) {
+		header('Content-Type: application/json');
+	}
 
 	// Load page from cache or process template
 	$Cache = new Core\Cache();
