@@ -160,7 +160,7 @@ class Keys {
 	 *	@return array Keys in a given template (without reserved keys)
 	 */
 	
-	private function inTemplate($file) {
+	public function inTemplate($file) {
 		
 		$keys = array();
 	

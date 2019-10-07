@@ -93,7 +93,9 @@ if (isset($_POST['data'])) {
 		class="uk-accordion" 
 		data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
 		>
+
 			<?php if (!AM_HEADLESS_ENABLED) { ?>
+
 				<!-- Theme -->
 				<div class="uk-accordion-title">
 					<?php Text::e('shared_theme'); ?>
@@ -247,66 +249,87 @@ if (isset($_POST['data'])) {
 						<?php Text::e('btn_get_themes'); ?>
 					</a>
 				</div>
+				<!-- Variables -->
+				<?php 
+				
+					if ($mainTheme) {
+						$keysInMainTheme = $this->getKeys()->inTheme($mainTheme);
+					} else {
+						$keysInMainTheme = array();
+					}
+					
+					$keysInOtherThemes = array_diff(
+						$this->getKeys()->inAllTemplates(), 
+						$keysInMainTheme
+					); 
+					
+				?>
+				<!-- Shared variables in main theme -->
+				<?php if ($keysInMainTheme) { ?>
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+						echo $this->getHtml()->formGroup(
+							$keysInMainTheme, 
+							$data,
+							false,
+							$mainTheme
+						); 
+					?>
+				</div>
+				<?php } ?>
+				<!-- Shared variables in other themes -->
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+						echo $this->getHtml()->formGroup(
+							$keysInOtherThemes, 
+							$data
+						); 
+					?>
+				</div>
+				<!-- Unused shared variables -->
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_unused'); ?>&nbsp;
+					<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+					
+					$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
+					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
+					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+					
+					?>
+				</div>
+
+			<?php } else { ?>
+
+				<?php $keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); ?>
+				<!-- Headless Variables -->
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_headless'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInHeadless); ?></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+						echo $this->getHtml()->formGroup(
+							$keysInHeadless, 
+							$data,
+							false,
+							false
+						); 
+					?>
+				</div>
+
 			<?php } ?>
-			<!-- Variables -->
-			<?php 
 			
-				if ($mainTheme) {
-					$keysInMainTheme = $this->getKeys()->inTheme($mainTheme);
-				} else {
-					$keysInMainTheme = array();
-				}
-				
-				$keysInOtherThemes = array_diff(
-					$this->getKeys()->inAllTemplates(), 
-					$keysInMainTheme
-				); 
-				
-			?>
-			<!-- Shared variables in main theme -->
-			<?php if ($keysInMainTheme) { ?>
-			<div class="uk-accordion-title">
-				<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
-				<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
-			</div>
-			<div class="uk-accordion-content">
-				<?php 
-					echo $this->getHtml()->formGroup(
-						$keysInMainTheme, 
-						$data,
-						false,
-						$mainTheme
-					); 
-				?>
-			</div>
-			<?php } ?>
-			<!-- Shared variables in other themes -->
-			<div class="uk-accordion-title">
-				<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
-				<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
-			</div>
-			<div class="uk-accordion-content">
-				<?php 
-					echo $this->getHtml()->formGroup(
-						$keysInOtherThemes, 
-						$data
-					); 
-				?>
-			</div>
-			<!-- Unused shared variables -->
-			<div class="uk-accordion-title">
-				<?php Text::e('shared_vars_unused'); ?>&nbsp;
-				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
-			</div>
-			<div class="uk-accordion-content">
-				<?php 
-				
-				$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
-				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
-				
-				?>
-			</div>
 		</div>
 		
 	<?php	

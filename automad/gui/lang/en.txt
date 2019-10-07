@@ -437,11 +437,15 @@ page_var_name: Variable Name
 
 -
 
-page_vars_in_template: Variables in current template
+page_vars_headless: Variables
+
+-
+
+page_vars_template: Variables in current template
 
 - 
 
-page_vars_in_other_templates: Variables in other templates
+page_vars_other_templates: Variables in other templates
 
 - 
 
@@ -485,6 +489,10 @@ shared_theme: Main theme
 
 shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? 
 Your unsaved changes will be saved.
+
+-
+
+shared_vars_headless: Variables
 
 -
 

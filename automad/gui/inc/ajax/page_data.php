@@ -304,48 +304,71 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					</div>	
 				</div>
 				
-				<?php if ($keysInCurrentTemplate = $this->getKeys()->inCurrentTemplate()) { ?>
-				<!-- Vars in selected template -->
-				<div class="uk-accordion-title">
-					<?php Text::e('page_vars_in_template'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($keysInCurrentTemplate); ?></span>
-				</div>
-				<div class="uk-accordion-content">
-					<?php 
-						echo 	$this->getHtml()->formGroup(
-									$keysInCurrentTemplate, 
-									$data, 
-									false, 
-									$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
-								); 
-					?>
-				</div>
+				<?php if (!AM_HEADLESS_ENABLED) { ?>
+
+					<?php if ($keysInCurrentTemplate = $this->getKeys()->inCurrentTemplate()) { ?>
+					<!-- Vars in selected template -->
+					<div class="uk-accordion-title">
+						<?php Text::e('page_vars_template'); ?>&nbsp;
+						<span class="uk-badge"><?php echo count($keysInCurrentTemplate); ?></span>
+					</div>
+					<div class="uk-accordion-content">
+						<?php 
+							echo 	$this->getHtml()->formGroup(
+										$keysInCurrentTemplate, 
+										$data, 
+										false, 
+										$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+									); 
+						?>
+					</div>
+					<?php } ?>
+					
+					<!-- Vars in other templates -->
+					<?php $keysInOtherTemplates = $this->getKeys()->inOtherTemplates(); ?>
+					<div class="uk-accordion-title">
+						<?php Text::e('page_vars_other_templates'); ?>&nbsp;
+						<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
+					</div>
+					<div class="uk-accordion-content">
+						<?php echo $this->getHtml()->formGroup($keysInOtherTemplates, $data); ?>
+					</div>
+					
+					<!-- Vars in data but not in any template -->
+					<div class="uk-accordion-title">
+						<?php Text::e('page_vars_unused'); ?>&nbsp;
+						<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
+					</div>
+					<div class="uk-accordion-content">
+						<?php 
+						
+						$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
+						// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
+						echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+						
+						?>
+					</div>
+
+				<?php } else { ?>
+
+					<?php $keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); ?>
+					<!-- Vars in headless template -->
+					<div class="uk-accordion-title">
+						<?php Text::e('page_vars_headless'); ?>&nbsp;
+						<span class="uk-badge"><?php echo count($keysInHeadless); ?></span>
+					</div>
+					<div class="uk-accordion-content">
+						<?php 
+							echo 	$this->getHtml()->formGroup(
+										$keysInHeadless, 
+										$data, 
+										false, 
+										false
+									); 
+						?>
+					</div>
+
 				<?php } ?>
-				
-				<!-- Vars in other templates -->
-				<?php $keysInOtherTemplates = $this->getKeys()->inOtherTemplates(); ?>
-				<div class="uk-accordion-title">
-					<?php Text::e('page_vars_in_other_templates'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
-				</div>
-				<div class="uk-accordion-content">
-					<?php echo $this->getHtml()->formGroup($keysInOtherTemplates, $data); ?>
-				</div>
-				
-				<!-- Vars in data but not in any template -->
-				<div class="uk-accordion-title">
-					<?php Text::e('page_vars_unused'); ?>&nbsp;
-					<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
-				</div>
-				<div class="uk-accordion-content">
-					<?php 
-					
-					$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
-					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
-					
-					?>
-				</div>
 				
 			</div>	
 				
