@@ -123,16 +123,12 @@ class View {
 	
 	/**
 	 *	Define $Automad and $Page, check if the page gets redirected and get the template name. 
-	 *
-	 * 	Note that optionally the $headless and $template variables can be passed to the constructor,
-	 * 	to allow for unit testing views in headless mode independent from the actual configuration.
 	 *	
 	 *	@param object $Automad
 	 *	@param boolean $headless
-	 *	@param string $template
 	 */
 	
-	public function __construct($Automad, $headless = false, $template = '') {
+	public function __construct($Automad, $headless = false) {
 		
 		$this->Automad = $Automad;
 		$this->headless = $headless;
@@ -149,15 +145,11 @@ class View {
 		}
 		
 		// Set template.
-		if ($template) {
-			$this->template = $template;
+		if ($this->headless) {
+			$this->template = AM_BASE_DIR . AM_HEADLESS_TEMPLATE;
 		} else {
-			if ($this->headless) {
-				$this->template = AM_BASE_DIR . AM_HEADLESS_TEMPLATE;
-			} else {
-				$this->template = $Page->getTemplate();
-			}
-		} 
+			$this->template = $Page->getTemplate();
+		}
 		
 		Debug::log($Page, 'New instance created for the current page');
 		
@@ -423,6 +415,10 @@ class View {
 				}
 
 				// Escape values to be used in headless mode.
+				// The json_encode() function is used to create a valid JSON string
+				// with only one temporary key. 
+				// After getting that JSON string, the key, the brackets and quotes
+				// are stripped to get the escaped version of $value.
 				if ($this->headless) {
 					$value = preg_replace('/[\r\n]+/', '\n', trim($value));
 					$value = json_encode(array('temp' => $value), JSON_UNESCAPED_SLASHES);

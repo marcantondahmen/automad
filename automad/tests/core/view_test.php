@@ -79,81 +79,83 @@ class View_Test extends TestCase {
 	
 
 	/**
-	 *	@dataProvider dataForTestHeadlessRenderIsEqual
+	 *	@dataProvider dataForTestHeadlessValueIsEqual
 	 *	@testdox render $template: $expected
 	 */
 
-	public function testHeadlessRenderIsEqual($template, $expected) {
+	public function testHeadlessValueIsEqual($value, $expected) {
 		
 		$Mock = new Mock();
-		$View = new View($Mock->createAutomad(), true, AM_BASE_DIR . '/automad/tests/templates/' . $template . '.php');
-		$rendered = $View->render();
+		$AutomadMock = $Mock->createAutomad();
+		$Page = $AutomadMock->Context->get();
+		// Set test to $value.
+		$Page->data['test'] = $value;
+		// Render view in headless mode.
+		$View = new View($AutomadMock, true);
+		// Convert JSON output back into array to check if 
+		// $value matches $expected.
+		$array = json_decode($View->render());
 		
-		$this->assertEquals($rendered, $expected);
+		$this->assertEquals($array->test, $expected);
 		
 	}
-	
-	
-	public function dataForTestHeadlessRenderIsEqual() {
+
+	public function dataForTestHeadlessValueIsEqual() {
 		
-		$data = array();
-		$templates = array(
-			'headless_01' => '{ "quoted": "\"Quoted\" \"Test\" \"String\"" }',
-			'headless_02' => '{ "text": "<img src=\"/pages/image.jpg\" srcset=\"/pages/image.jpg 500w, /pages/image_large.jpg 1200w\"><a href=\"/index.php/test\">Test</a>" }',
-			'headless_03' => '{ "text": "This is a\\\\nmultiline test." }'
+		return array(
+			array(
+				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
+				'<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'
+			),
+			array(
+				"This is a\n\rmultiline test.",
+				'This is a\nmultiline test.'
+			),
+			array(
+				'{"test":""}',
+				'{"test":""}'
+			)
 		);
-		
-		foreach ($templates as $template => $expected) {
-			
-			$data[] = array(
-				$template,
-				$expected
-			);
-			
-		}
-		
-		return $data;
-		
+
 	}
 
 
 	/**
-	 *	@dataProvider dataForTestHeadlessRenderArrayIsEqual
+	 *	@dataProvider dataForTestHeadlessJSONIsEqual
 	 *	@testdox render $template: $expected
 	 */
 
-	public function testHeadlessRenderArrayIsEqual($template, $expected) {
+	public function testHeadlessJSONIsEqual($value, $expected) {
 		
 		$Mock = new Mock();
-		$View = new View($Mock->createAutomad(), true, AM_BASE_DIR . '/automad/tests/templates/' . $template . '.php');
-		$rendered = $View->render();
+		$AutomadMock = $Mock->createAutomad();
+		$Page = $AutomadMock->Context->get();
+		// Set test to $value.
+		$Page->data['test'] = $value;
+		// Render view in headless mode.
+		$View = new View($AutomadMock, true);
 		
-		$this->assertEquals(json_decode($rendered, true), $expected);
+		$this->assertEquals($View->render(), $expected);
 		
 	}
-	
-	
-	public function dataForTestHeadlessRenderArrayIsEqual() {
+
+	public function dataForTestHeadlessJSONIsEqual() {
 		
-		$data = array();
-		$templates = array(
-			'headless_01' => array('quoted' => '"Quoted" "Test" "String"'),
-			'headless_02' => array('text' => '<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'),
-			'headless_03' => array('text' => 'This is a\nmultiline test.')
+		return array(
+			array(
+				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
+				'{"test": "<img src=\"/pages/image.jpg\" srcset=\"/pages/image.jpg 500w, /pages/image_large.jpg 1200w\"><a href=\"/index.php/test\">Test</a>"}'
+			),
+			array(
+				"This is a\n\rmultiline test.",
+				'{"test": "This is a\\\\nmultiline test."}'
+			),
+			array(
+				'{"test":""}',
+				'{"test": "{\"test\":\"\"}"}'
+			)
 		);
-		
-		foreach ($templates as $template => $expected) {
-			
-			$data[] = array(
-				$template,
-				$expected
-			);
-			
-		}
-		
-		return $data;
-		
+
 	}
-	
 	
 }
