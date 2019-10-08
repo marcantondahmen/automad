@@ -409,21 +409,9 @@ class View {
 				// Modify $value by processing all matched string functions.
 				$value = Pipe::process($value, $functions);
 				
-				// Escape all double quotes, in case the variable is used in a JSON string.
-				if ($isOptionString) {
-					$value = addcslashes($value, '"');
-				}
-
-				// Escape values to be used in headless mode.
-				// The json_encode() function is used to create a valid JSON string
-				// with only one temporary key. 
-				// After getting that JSON string, the key, the brackets and quotes
-				// are stripped to get the escaped version of $value.
-				if ($this->headless) {
-					$value = preg_replace('/[\r\n]+/', '\n', trim($value));
-					$value = json_encode(array('temp' => $value), JSON_UNESCAPED_SLASHES);
-					$value = Str::stripStart($value, '{"temp":"');
-					$value = Str::stripEnd($value, '"}');
+				// Escape values to be used in headless mode and option strings.
+				if ($this->headless || $isOptionString) {
+					$value = Str::escape($value);
 				}
 				
 				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
@@ -1071,7 +1059,7 @@ class View {
 		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 		
-		return $output;	
+		return trim($output);	
 		
 	}	
 		
