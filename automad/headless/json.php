@@ -6,7 +6,7 @@ end @>
 <# Generate JSON for a pagelist #>
 <@ snippet pages @>[<@ 
 	foreach in pagelist @><@ 
-		comma @>{"url":"@{ :origUrl }","title":"@{ title }","date":"@{ date | dateFormat (@{ formatDate }) }"}<@ 
+		comma @>{"url":"@{ :origUrl }","title":"@{ title }","date":"@{ date }"}<@ 
 	end @>]<@ 
 end @>
 
@@ -70,13 +70,13 @@ end @>
 <@ else @>
 {	
 	"title": "@{ title }",
-	"date": "@{ date | dateFormat (@{ formatDate }) }",
+	"date": "@{ date }",
 	"text": "@{ text | markdown }",
 	"teaser": "@{ textTeaser | markdown }",
 	"hidden": "@{ hidden }",
 	"parent": "@{ :parent }",
 	"path": "@{ :path }",
-	"mtime": "@{ :mtime | dateFormat (@{ formatDate }) }",
+	"mtime": "@{ :mtime }",
 	"tags": <@ tags @>,
 	"children": <@ children @>,
 	"siblings": <@ siblings @>,
