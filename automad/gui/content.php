@@ -951,8 +951,8 @@ class Content {
 			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 			$this->clearCache();
 			
-			if ($data[AM_KEY_THEME] != $this->Automad->Shared->get(AM_KEY_THEME)) {
-				$output['redirect'] = '?context=edit_shared';
+			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $this->Automad->Shared->get(AM_KEY_THEME)) {
+				$output['reload'] = true;
 			} else {
 				$output['success'] = Text::get('success_saved');
 			}

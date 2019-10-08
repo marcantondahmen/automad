@@ -75,8 +75,8 @@ class Shared {
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 		
 		// Check whether there is a theme defined in the Shared object data.
-		if (!$this->get(AM_KEY_THEME)) {
-			exit('Please define a theme in "/shared/data.txt"!');
+		if (!$this->get(AM_KEY_THEME) && AM_REQUEST != AM_PAGE_DASHBOARD) {
+			exit('<h1>No main theme defined!</h1><h2>Please define a theme in "/shared/data.txt"!</h2>');
 		}
 		
 	}
@@ -99,7 +99,7 @@ class Shared {
 	
 	
 	/**
-	 *	Set key/value pait in data.
+	 *	Set key/value pair in data.
 	 *	
 	 * 	@param string $key
 	 * 	@param string $value

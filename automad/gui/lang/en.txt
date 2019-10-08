@@ -242,6 +242,10 @@ error_no_js: Please enabled JavaScript in your browser to use the Dashboard!
 
 -
 
+error_no_theme: No theme selected! Please select a main theme.
+
+-
+
 error_page_not_found: Page Not Found!
 
 -

@@ -245,6 +245,24 @@ class Html {
 	}
 	
 
+	/**	
+	 * 	Create a hidden form field.
+	 * 
+	 *  @param string $key
+	 * 	@param string $value
+	 * 	@return string The HTML for the hidden input field
+	 */
+
+	public function formFieldHidden($key = '', $value = '') {
+
+		// Convert special characters in $value to HTML entities.
+		$value = htmlspecialchars($value);
+
+		return '<input type="hidden" name="data[' . $key . ']" value="' . $value . '" />';
+
+	}
+
+
 	/**
 	 *	Create form fields for page/shared variables.         
 	 *      
@@ -615,9 +633,9 @@ class Html {
 	
 	public function siteTree($parent, $collection, $parameters, $hideCurrent = false, $header = false) {
 		
-		$current = \Automad\Core\Parse::query('url');
+		$current = Core\Parse::query('url');
 		
-		$selection = new \Automad\Core\Selection($collection);
+		$selection = new Core\Selection($collection);
 		$selection->filterByParentUrl($parent);
 		$selection->sortPages();
 		

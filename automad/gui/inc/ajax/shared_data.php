@@ -97,6 +97,12 @@ if (isset($_POST['data'])) {
 			<?php if (!AM_HEADLESS_ENABLED) { ?>
 
 				<!-- Theme -->
+				<?php if (!$mainTheme) { ?> 
+					<!-- No theme warning -->
+					<div class="uk-alert uk-alert-danger uk-margin-large-top">
+						<?php Text::e('error_no_theme'); ?><br />
+					</div>
+				<?php } ?>
 				<div class="uk-accordion-title">
 					<?php Text::e('shared_theme'); ?>
 				</div>
@@ -132,13 +138,6 @@ if (isset($_POST['data'])) {
 						Core\Debug::log($themes, 'themes');
 						$i = 0;
 						
-						// Select the first theme is the main theme is missing to avoid
-						// sending the form without a valid theme.
-						if (!$mainTheme) {
-							$defaultTheme = reset($themes);
-							$data[AM_KEY_THEME] = $defaultTheme->path;
-						}
-						
 						foreach ($themes as $Theme) { 
 						
 							$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
@@ -154,12 +153,14 @@ if (isset($_POST['data'])) {
 							}
 					
 							// Check currently active theme.
-							if ($Theme->path === $data[AM_KEY_THEME]) {
-								$attrChecked = ' checked';
-							} else {
-								$attrChecked = '';
+							$attrChecked = '';
+
+							if ($mainTheme) {
+								if ($Theme->path === $mainTheme->path) {
+									$attrChecked = ' checked';
+								} 
 							}
-					
+							
 						?>
 						<li>
 							<?php if ($Theme->readme) { ?>
@@ -299,8 +300,16 @@ if (isset($_POST['data'])) {
 				
 			<?php } else { ?>
 
-				<?php $keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); ?>
 				<!-- Headless Variables -->
+				<?php 
+				
+					$keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); 
+				
+					// Also submit the saved theme form the non-headless mode.
+					// The value gets stored in a hidden input field.
+					echo $this->getHtml()->formFieldHidden(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
+				
+				?>
 				<div class="uk-accordion-title">
 					<?php Text::e('shared_vars_headless'); ?>&nbsp;
 					<span class="uk-badge"><?php echo count($keysInHeadless); ?></span>
