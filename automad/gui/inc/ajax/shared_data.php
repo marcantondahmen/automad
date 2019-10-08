@@ -294,21 +294,9 @@ if (isset($_POST['data'])) {
 						); 
 					?>
 				</div>
-				<!-- Unused shared variables -->
-				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_unused'); ?>&nbsp;
-					<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
-				</div>
-				<div class="uk-accordion-content">
-					<?php 
-					
-					$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
-					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
-					
-					?>
-				</div>
-
+				
+				<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
+				
 			<?php } else { ?>
 
 				<?php $keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); ?>
@@ -327,9 +315,23 @@ if (isset($_POST['data'])) {
 						); 
 					?>
 				</div>
+				
+				<?php $unusedDataKeys = array_diff(array_keys($data), $keysInHeadless, $this->getKeys()->reserved); ?>
 
 			<?php } ?>
 			
+			<!-- Vars in data but not in any template -->
+			<div class="uk-accordion-title">
+				<?php Text::e('page_vars_unused'); ?>&nbsp;
+				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
+			</div>
+			<div class="uk-accordion-content">
+				<?php 
+				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
+				echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+				?>
+			</div>
+
 		</div>
 		
 	<?php	

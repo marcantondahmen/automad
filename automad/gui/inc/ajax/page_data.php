@@ -334,20 +334,7 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 						<?php echo $this->getHtml()->formGroup($keysInOtherTemplates, $data); ?>
 					</div>
 					
-					<!-- Vars in data but not in any template -->
-					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_unused'); ?>&nbsp;
-						<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
-					</div>
-					<div class="uk-accordion-content">
-						<?php 
-						
-						$unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved);
-						// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-						echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
-						
-						?>
-					</div>
+					<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
 
 				<?php } else { ?>
 
@@ -368,8 +355,22 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 						?>
 					</div>
 
+					<?php $unusedDataKeys = array_diff(array_keys($data), $keysInHeadless, $this->getKeys()->reserved); ?>
+
 				<?php } ?>
 				
+				<!-- Vars in data but not in any template -->
+				<div class="uk-accordion-title">
+					<?php Text::e('page_vars_unused'); ?>&nbsp;
+					<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
+					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+					?>
+				</div>
+
 			</div>	
 				
 		<?php	
