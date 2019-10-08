@@ -50,18 +50,22 @@
 				// The debug property in the JSON response will be defined by
 				// the jsonOutput() method of the Dashboard class by using the debug 
 				// buffer array created with Debug::log() as value for the debug property.
-				if (xhr.responseJSON.hasOwnProperty('debug')) {
+				if (typeof xhr.responseJSON !== 'undefined') {
 
-					if (!$.isEmptyObject(xhr.responseJSON.debug)) {
+					if (xhr.responseJSON.hasOwnProperty('debug')) {
 
-						var data = {};
+						if (!$.isEmptyObject(xhr.responseJSON.debug)) {
 
-						data["Ajax: " + settings.url] = xhr.responseJSON.debug;
-						console.log(data);
+							var data = {};
+
+							data["Ajax: " + settings.url] = xhr.responseJSON.debug;
+							console.log(data);
+
+						}
 
 					}
 
-				}
+				} 
 
 			});
 
