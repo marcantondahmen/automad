@@ -1,7 +1,7 @@
 <# Add a comma if item is not the first one. #>
-<@ snippet comma @>
-	<@ if @{ :i } > 1 @>,<@ end @>
-<@ end @>
+<@ snippet comma @><@ 
+	if @{ :i } > 1 @>,<@ end @><@ 
+end @>
 
 <# Generate JSON for a pagelist #>
 <@ snippet pages @>[<@ 
