@@ -41,7 +41,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $requiredVersion = '5.4.0';
 
 if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
-	die('Please update your PHP version to at least ' . $requiredVersion . '!');
+	exit('<h1>PHP out of date!</h1><h2>Please update your PHP version to ' . $requiredVersion . ' or newer!</h2>');
 }
 
 
@@ -67,7 +67,7 @@ Core\Debug::errorReporting();
 
 // The cache folder must be writable (resized images), also when caching is disabled!
 if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {	
-	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
+	exit('<h1>Permission denied!</h1><h2>The "' . AM_DIR_CACHE . '" directory must be writable by the web server!</h2>');
 }
 
 
