@@ -3,6 +3,7 @@ node_modules
 sitemap.xml
 cache/trash
 config/accounts.php
+config/headless.json
 uikit/docs
 uikit/tests
 uikit/themes
