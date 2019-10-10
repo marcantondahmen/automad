@@ -111,6 +111,20 @@ class Status {
 			
 		}
 		
+		if ($item == 'headless_template') {
+
+			$template = Core\Str::stripStart(Headless::getTemplate(), AM_BASE_DIR);
+			
+			if ($template != AM_HEADLESS_TEMPLATE) {
+				$template .= '&nbsp;<span class="uk-badge uk-badge-success">' .  
+						     Text::get('sys_status_headless_template_custom') . 
+						     '</span>';
+			}
+
+			$output['status'] = $template;
+
+		}
+
 		if ($item == 'update') {
 			
 			$updateVersion = System\Update::getVersion();

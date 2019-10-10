@@ -204,6 +204,8 @@ Config::set('AM_KEY_NOW', ':now');
 // HEADLESS
 Config::set('AM_HEADLESS_ENABLED', false);
 Config::set('AM_HEADLESS_TEMPLATE', '/automad/headless/json.php');
+// For security reasons, the custom template should not have the .php extension.
+Config::set('AM_HEADLESS_TEMPLATE_CUSTOM', '/config/headless.json');
 
 // UPDATE
 Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');

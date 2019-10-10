@@ -338,7 +338,8 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 
 				<?php } else { ?>
 
-					<?php $keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); ?>
+					<?php $keysInHeadless = $this->getKeys()->inTemplate(Headless::getTemplate()); ?>
+					
 					<!-- Vars in headless template -->
 					<div class="uk-accordion-title">
 						<?php Text::e('page_vars_headless'); ?>&nbsp;

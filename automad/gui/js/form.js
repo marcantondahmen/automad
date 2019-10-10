@@ -74,6 +74,8 @@
 			 * 	data-am-close-on-success="#form"	Closes a modal window with the given ID on success.
 			 *
 			 * 	data-am-confirm="Text..."			Confirm submission
+			 * 
+			 * 	data-am-init-on="Event"				Submit a form on any given event
 			 *
 			 * 
 			 * 	INPUT ATTRIBUTES:
@@ -96,6 +98,7 @@
 			url:			'data-am-url',
 			submit:			'data-am-submit',
 			init:			'data-am-init',
+			initOn: 		'data-am-init-on',
 			autoSubmit:		'data-am-auto-submit',
 			close:			'data-am-close-on-success',
 			confirm:		'data-am-confirm',
@@ -134,6 +137,9 @@
 			 * 
 			 * 	5.	data.reload
 			 * 		will reload the current page.
+			 * 
+			 * 	6.	data.trigger
+			 * 		will trigger an event.
 			 */
 			
 			var	f = Automad.form,
@@ -170,6 +176,11 @@
 				if (data.reload) {
 					window.location.reload();
 					return false;
+				}
+
+				// Trigger event.
+				if (data.trigger) {
+					$(document).trigger(data.trigger);
 				}
 
 				// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
@@ -263,6 +274,22 @@
 
 			});
 			
+			// Init a form on a given event. Note that the form will be cleared and submitted.
+			$doc.on('ready ajaxComplete', function() {
+				
+				$('[' + da.initOn + ']').each(function() {
+					var $form = $(this),
+						event = $form.data(Automad.util.dataCamelCase(da.initOn));
+
+					$doc.off(event);
+					$doc.on(event, function () {
+						$form.empty().submit();
+					});
+
+				});
+
+			});
+
 
 			// Handle enter key.
 			

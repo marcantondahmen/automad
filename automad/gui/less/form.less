@@ -107,8 +107,17 @@
 
 .uk-form-controls {
 	
+	-moz-tab-size: 4;
+	tab-size: 4;
+
 	& + & {
 		margin-top: 4px;
+	}
+
+	&.am-form-code {
+		font-family: @base-code-font-family;
+		font-size: @base-code-font-size;
+		padding: @htmleditor-content-padding !important;
 	}
 	
 }
@@ -128,4 +137,3 @@
 .uk-modal textarea {
 	max-height: none !important;
 }
-

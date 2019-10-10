@@ -51,6 +51,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class FileSystem {
 	
+
+	/**
+	 *	Delete a file.
+	 *	
+	 *	@param string $file
+	 *	@return bool Return true if the file was deleted succsessfully
+	 */
+
+	public static function deleteFile($file) {
+
+		if (is_file($file)) {
+			if (is_writable($file) && is_writable(dirname($file))) {
+				return unlink($file);
+			}
+		}
+
+	}
 	
 	/**
 	 *	Return the extension for a given file.

@@ -77,7 +77,14 @@
 
 			$doc.ajaxComplete(function(e, xhr, settings) {
 				
-				if (settings.url == '?ajax=users' || settings.url == '?ajax=add_user') {
+				var triggers = [
+								'?ajax=users', 
+								'?ajax=add_user', 
+								'?ajax=edit_headless_template',
+								'?ajax=reset_headless_template'
+							];
+
+				if (triggers.includes(settings.url)) {
 					s.get();
 				}
 				

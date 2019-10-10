@@ -303,7 +303,7 @@ if (isset($_POST['data'])) {
 				<!-- Headless Variables -->
 				<?php 
 				
-					$keysInHeadless = $this->getKeys()->inTemplate(AM_BASE_DIR . AM_HEADLESS_TEMPLATE); 
+					$keysInHeadless = $this->getKeys()->inTemplate(Headless::getTemplate()); 
 				
 					// Also submit the saved theme form the non-headless mode.
 					// The value gets stored in a hidden input field.

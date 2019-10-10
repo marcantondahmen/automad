@@ -58,6 +58,10 @@ btn_edit_file_info: Edit File Info
 
 -
 
+btn_edit_headless_template: Edit Headless Template
+
+-
+
 btn_edit_page: Edit Page
 
 -
@@ -126,6 +130,10 @@ btn_remove_selected: Remove Selected
 
 -
 
+btn_reset: Reset to Defaults
+
+-
+
 btn_save: Save
 
 -
@@ -150,6 +158,10 @@ confirm_delete_page: Are you sure you want to delete the current page?
 -
 
 confirm_delete_users: Are you sure to delete the selected users?
+
+-
+
+confirm_reset_headless: Are you sure to reset the custom headless template?
 
 -
 
@@ -574,6 +586,10 @@ success_remove: Successfully removed
 
 -
 
+success_reset_headless: Successfully restored the default headless template!
+
+-
+
 success_saved: Saved
 
 -
@@ -655,6 +671,10 @@ sys_headless: Headless
 
 -
 
+sys_headless_edit_info: You can edit the template for the JSON response by using Automad's template language.
+
+-
+
 sys_headless_enable: Headless Mode
 -
 
@@ -676,6 +696,10 @@ sys_status_debug_enabled: Debugging is enabled
 -
 
 sys_status_debug_disabled: Debugging is disabled
+
+-
+
+sys_status_headless_template_custom: Custom
 
 -
 

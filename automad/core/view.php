@@ -146,7 +146,7 @@ class View {
 		
 		// Set template.
 		if ($this->headless) {
-			$this->template = AM_BASE_DIR . AM_HEADLESS_TEMPLATE;
+			$this->template = Headless::getTemplate();
 		} else {
 			$this->template = $Page->getTemplate();
 		}

@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -321,7 +322,7 @@ $this->element('header');
 					<input type="hidden" name="type" value="headless" />		
 					<label 
 					class="am-toggle-switch-large" 
-					data-am-toggle
+					data-am-toggle="#am-headless-template"
 					>
 						<?php Text::e('sys_headless_enable'); ?>
 						<input 
@@ -330,6 +331,65 @@ $this->element('header');
 						value="on"<?php if (AM_HEADLESS_ENABLED) { echo ' checked'; } ?> 
 						/>
 					</label>
+				</form>
+				<!-- Headless Template -->
+				<div id="am-headless-template" class="am-toggle-container uk-margin-large-top">
+					<p class="uk-margin-large-top">
+						<?php Text::e('sys_headless_edit_info'); ?>
+					</p>
+					<a 
+					href="#am-headless-modal" 
+					class="uk-button uk-button-large uk-button-success"
+					data-uk-modal
+					>
+						<i class="uk-icon-pencil"></i>&nbsp;
+						<?php Text::e('btn_edit_headless_template'); ?>
+					</a>
+				</div>
+				<div id="am-headless-modal" class="uk-modal">
+					<div class="uk-modal-dialog uk-modal-dialog-blank">
+						<div class="uk-container uk-container-center">
+							<div class="uk-margin-small-top uk-margin-large-bottom">
+								<div class="uk-margin-top-large uk-margin-small-bottom uk-flex uk-flex-middle uk-flex-right">
+									<div class="uk-flex-item-1 uk-text-truncate">
+										<i class="uk-icon-file"></i>&nbsp;
+										<span data-am-status="headless_template"></span>
+									</div>
+									<a href="#" class="uk-button uk-modal-close">
+										<i class="uk-icon-close"></i>&nbsp;
+										<?php Text::e('btn_close'); ?>
+									</a>
+									<a 
+									href="#"
+									class="uk-button"
+									data-am-submit="reset_headless_template"
+									>
+										<i class="uk-icon-refresh"></i>&nbsp;
+										<?php Text::e('btn_reset'); ?>
+									</a>
+									<button 
+									class="uk-button uk-button-success"
+									data-am-submit="edit_headless_template"
+									>
+										<i class="uk-icon-check"></i>&nbsp;
+										<?php Text::e('btn_save'); ?>
+									</button>
+								</div>
+								<form 
+								class="uk-form uk-form-stacked" 
+								data-am-handler="edit_headless_template" 
+								data-am-init-on="reset.automad.headless"
+								data-am-init
+								></form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<form 
+				data-am-handler="reset_headless_template"
+				data-am-confirm="<?php Text::e('confirm_reset_headless'); ?>"
+				>
+					<input type="hidden" name="reset" value="1" />
 				</form>
 			</li>
 			<!-- Debug -->
