@@ -175,11 +175,7 @@ class Cache {
 
 	public function clear() {
 		
-		if (file_exists(AM_FILE_SITE_MTIME)) {
-			
-			unlink(AM_FILE_SITE_MTIME);
-			
-		}
+		FileSystem::deleteFile(AM_FILE_SITE_MTIME);
 		
 	}
 
