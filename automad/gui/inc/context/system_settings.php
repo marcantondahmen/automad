@@ -334,7 +334,7 @@ $this->element('header');
 				</form>
 				<!-- Headless Template -->
 				<div id="am-headless-template" class="am-toggle-container uk-margin-large-top">
-					<p class="uk-margin-large-top">
+					<p>
 						<?php Text::e('sys_headless_edit_info'); ?>
 					</p>
 					<a 
