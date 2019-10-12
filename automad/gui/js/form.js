@@ -180,7 +180,7 @@
 
 				// Trigger event.
 				if (data.trigger) {
-					$(document).trigger(data.trigger);
+					$('html').trigger(data.trigger);
 				}
 
 				// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
@@ -274,15 +274,30 @@
 
 			});
 			
-			// Init a form on a given event. Note that the form will be cleared and submitted.
+			// Init a form on a given event. 
+			// Note that the form will be cleared before being submitted.
+			// All events triggered by forms are bound to the $('html') element
+			// to allow for an easy way to remove all events before reassigning them on
+			// multiple ajaxComplete events. All events get added a namespace. When unbinding
+			// the events, actually only that namespace gets unbound.
 			$doc.on('ready ajaxComplete', function() {
 				
+				var	formTriggerNamespace = '.automadFormTriggered';
+
+				// Remove all events from this namespace at once before
+				// binding all event again to prevent events from being
+				// fired multiple times.
+				$('html').off(formTriggerNamespace);
+
 				$('[' + da.initOn + ']').each(function() {
+
 					var $form = $(this),
 						event = $form.data(Automad.util.dataCamelCase(da.initOn));
 
-					$doc.off(event);
-					$doc.on(event, function () {
+					// Add namespace to event name when binding to be able
+					// to remove all events triggered by forms at once.
+					$('html').on(event + formTriggerNamespace, function () {
+						// Init empty form.
 						$form.empty().submit();
 					});
 

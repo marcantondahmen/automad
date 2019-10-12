@@ -53,7 +53,7 @@ if (!empty($_POST['reset'])) {
 	if (Headless::resetTemplate()) {
 		$Cache = new Core\Cache();
 		$Cache->clear();
-		$output['trigger'] = 'reset.automad.headless';
+		$output['trigger'] = 'resetHeadlessTemplate';
 		$output['success'] = Text::get('success_reset_headless');
 	}
 

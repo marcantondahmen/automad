@@ -378,7 +378,7 @@ $this->element('header');
 								<form 
 								class="uk-form uk-form-stacked" 
 								data-am-handler="edit_headless_template" 
-								data-am-init-on="reset.automad.headless"
+								data-am-init-on="resetHeadlessTemplate"
 								data-am-init
 								></form>
 							</div>
