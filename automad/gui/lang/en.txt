@@ -130,7 +130,7 @@ btn_remove_selected: Remove Selected
 
 -
 
-btn_reset: Reset to Defaults
+btn_reset: Reset
 
 -
 
@@ -696,10 +696,6 @@ sys_status_debug_enabled: Debugging is enabled
 -
 
 sys_status_debug_disabled: Debugging is disabled
-
--
-
-sys_status_headless_template_custom: Custom
 
 -
 

@@ -62,11 +62,11 @@ if (!empty($_POST['template'])) {
 	ob_start();
 
 	?>
-		
-		<textarea class="am-form-code uk-form-controls uk-width-1-1" name="template" rows="10"><?php 
-			echo htmlspecialchars(Headless::loadTemplate()); 
-		?></textarea>
-
+		<div class="uk-overflow-container">
+			<textarea class="uk-form-controls uk-width-1-1" name="template" rows="10"><?php 
+				echo htmlspecialchars(Headless::loadTemplate()); 
+			?></textarea>			
+		</div>
 	<?php
 
 	// Save buffer to JSON array.

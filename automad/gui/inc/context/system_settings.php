@@ -347,42 +347,39 @@ $this->element('header');
 					</a>
 				</div>
 				<div id="am-headless-modal" class="uk-modal">
-					<div class="uk-modal-dialog uk-modal-dialog-blank">
-						<div class="uk-container uk-container-center">
-							<div class="uk-margin-small-top uk-margin-large-bottom">
-								<div class="uk-margin-top-large uk-margin-small-bottom uk-flex uk-flex-middle uk-flex-right">
-									<div class="uk-flex-item-1 uk-text-truncate">
-										<i class="uk-icon-file"></i>&nbsp;
-										<span data-am-status="headless_template"></span>
-									</div>
-									<a href="#" class="uk-button uk-modal-close">
-										<i class="uk-icon-close"></i>&nbsp;
-										<?php Text::e('btn_close'); ?>
-									</a>
-									<a 
-									href="#"
-									class="uk-button"
-									data-am-submit="reset_headless_template"
-									>
-										<i class="uk-icon-refresh"></i>&nbsp;
-										<?php Text::e('btn_reset'); ?>
-									</a>
-									<button 
-									class="uk-button uk-button-success"
-									data-am-submit="edit_headless_template"
-									>
-										<i class="uk-icon-check"></i>&nbsp;
-										<?php Text::e('btn_save'); ?>
-									</button>
-								</div>
-								<form 
-								class="uk-form uk-form-stacked" 
-								data-am-handler="edit_headless_template" 
-								data-am-init-on="resetHeadlessTemplate"
-								data-am-init
-								></form>
+					<div class="am-modal-dialog-code uk-modal-dialog uk-modal-dialog-large">
+						<div class="uk-margin-small-bottom uk-grid uk-flex uk-flex-middle" data-uk-grid-margin>
+							<div class="uk-width-small-1-1 uk-flex-item-1">
+								<span class="uk-text-truncate" data-am-status="headless_template"></span>
+							</div>
+							<div class="uk-flex">
+								<a href="#" class="uk-button uk-modal-close">
+									<i class="uk-icon-close"></i>&nbsp;
+									<?php Text::e('btn_close'); ?>
+								</a>
+								<a 
+								href="#"
+								class="uk-button"
+								data-am-submit="reset_headless_template"
+								>
+									<i class="uk-icon-refresh"></i>&nbsp;
+									<?php Text::e('btn_reset'); ?>
+								</a>
+								<button 
+								class="uk-button uk-button-success"
+								data-am-submit="edit_headless_template"
+								>
+									<i class="uk-icon-check"></i>&nbsp;
+									<?php Text::e('btn_save'); ?>
+								</button>
 							</div>
 						</div>
+						<form 
+						class="uk-form" 
+						data-am-handler="edit_headless_template" 
+						data-am-init-on="resetHeadlessTemplate"
+						data-am-init
+						></form>
 					</div>
 				</div>
 				<form 

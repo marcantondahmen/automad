@@ -114,14 +114,16 @@ class Status {
 		if ($item == 'headless_template') {
 
 			$template = Core\Str::stripStart(Headless::getTemplate(), AM_BASE_DIR);
-			
-			if ($template != AM_HEADLESS_TEMPLATE) {
-				$template .= '&nbsp;<span class="uk-badge uk-badge-success">' .  
-						     Text::get('sys_status_headless_template_custom') . 
-						     '</span>';
-			}
+			$badge = '';
 
-			$output['status'] = $template;
+			if ($template != AM_HEADLESS_TEMPLATE) {
+				$badge = ' uk-badge-success';
+			} 
+
+			$output['status'] = '<span class="uk-badge uk-badge-notification uk-margin-top-remove' . $badge . '">' . 
+								'<i class="uk-icon-file"></i>&nbsp&nbsp;' . 
+				            	trim($template, '\\/') . 
+				                '</span>';
 
 		}
 
