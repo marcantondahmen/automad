@@ -671,15 +671,18 @@ sys_headless: Headless
 
 -
 
-sys_headless_edit_info: You can edit the template for the JSON response by using Automad's template language.
+sys_headless_edit_info: The structure of the returned JSON data is controlled by a template. 
+You can edit that template using Automad's template language for customizing fields 
+by using variables, objects and control structures.
 
 -
 
 sys_headless_enable: Headless Mode
 -
 
-sys_headless_info: The headless mode turns Automad into a back-end only content management system 
-that makes content accessible via a **RESTful API** for display on any device.
+sys_headless_info: Activating the headless mode turns Automad into a back-end only content management system 
+that makes content accessible via a RESTful API for display on any device. 
+All content is returned in JSON format instead of a regular rendered HTML template.
 
 -
 
