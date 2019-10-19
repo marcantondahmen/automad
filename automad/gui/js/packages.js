@@ -65,28 +65,31 @@
 
 		filter: function() {
 
-			var p = Automad.packages;
+			var p = Automad.packages,
+				$input = $('[' + p.dataAttr.filter + ']'),
+				update = function() {
 
-			$('[' + p.dataAttr.filter + ']').on('keyup', UIkit.Utils.debounce(function () {
+					var filter = $input.val().toLowerCase().split(' ');
 
-				var filter = $(this).val().toLowerCase().split(' ');
+					$('[' + p.dataAttr.packages + ']').find('li').filter(function () {
+						var text = $(this).text().toLowerCase(),
+							display = true;
 
-				$('[' + p.dataAttr.packages + ']').find('li').filter(function() {
-					var text = $(this).text().toLowerCase(),
-						display = true;
-
-					for (var i = 0; i < filter.length; i++) {
-						if (text.indexOf(filter[i]) == -1) {
-							display = false;
-							break;
+						for (var i = 0; i < filter.length; i++) {
+							if (text.indexOf(filter[i]) == -1) {
+								display = false;
+								break;
+							}
 						}
-					}
 
-					$(this).toggle(display);
-					$(window).trigger('resize');
-				});
+						$(this).toggle(display);
+						$(window).trigger('resize');
+					});
 
-			}, 250)); 
+				};
+
+			$(document).on('ajaxComplete', update);
+			$input.on('keyup', UIkit.Utils.debounce(update, 250)); 
 
 		},
 
