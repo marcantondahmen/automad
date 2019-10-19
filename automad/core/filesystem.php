@@ -86,7 +86,32 @@ class FileSystem {
 		
 	}
 	
+
+	/**
+	 * 	Return the path of the temp dir if it is writable by the webserver.
+	 *  In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot, 
+	 *  while other locations like '/var/tmp' do not get purged by the system.
+	 *  But since '/tmp' is only available on macos and linux, 
+	 *  sys_get_temp_dir() is used as fallback.
+	 *
+	 *  @return string The path to the temp dir
+	 */
 	
+	public static function getTmpDir() {
+		
+		$tmp = '/tmp';
+		
+		if (is_writable($tmp)) {
+			return $tmp;
+		}
+		
+		if (is_writable(sys_get_temp_dir())) {
+			return rtrim(sys_get_temp_dir(), '/');
+		}
+		
+	}
+	
+
 	/**
 	 *	Tests if a string is a file name with an allowed file extension.
 	 *

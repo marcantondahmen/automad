@@ -15,3 +15,5 @@ uikit/circle.yml
 uikit/index.html
 uikit/CONTRIBUTING.md
 uikit/CHANGELOG.md
+/vendor
+/composer.lock

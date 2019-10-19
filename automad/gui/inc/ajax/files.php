@@ -194,12 +194,12 @@ if ($files) { ?>
 						<?php echo basename($file); ?>
 					</div>
 					<?php if ($caption) { ?>
-					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
+					<div class="uk-text-small uk-text-truncate uk-hidden-small">
 						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
 						"<?php echo Core\Str::shorten($caption, 100); ?>"
 					</div>
 					<?php } ?>
-					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
+					<div class="uk-text-small uk-text-truncate uk-hidden-small">
 						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;
 						<?php echo date('M j, Y H:i', filemtime($file)); ?>
 					</div>

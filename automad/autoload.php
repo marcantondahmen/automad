@@ -52,7 +52,7 @@ spl_autoload_register(function($class) {
 	
 	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
 		
-	if (strpos($file, 'automad') === 0) {	
+	if (strpos($file, 'automad') === 0 && strpos($file, 'automad/composer') === false) {	
 		require_once AM_BASE_DIR . '/' . $file;
 	}
 		

@@ -45,9 +45,14 @@
 @panel-box-badge-right:			9px;
 @panel-teaser-margin-bottom:	0;
 
+@panel-box-primary-background:	@am-success;               
+@panel-box-primary-color:		#FFFFFF;    
+@panel-box-primary-title-color: #FFFFFF;
+
 .hook-panel-box() {
 	
 	border-radius: @am-radius;
+	cursor: default;
 	
 	.uk-grid & {
 		margin: 0;
@@ -66,28 +71,95 @@
 	& + & {
 		margin-top: 4px;
 	}
+
+	& a:not(.uk-button) {
+
+		&,
+		&:hover,
+		&:active,
+		&:focus {
+			color: inherit;
+		}
+
+	}
 	
+	& .uk-button:not(.uk-button-success):not(.uk-button-danger):not(.uk-button-primary),
 	& .uk-icon-button {
+
 		background-color: darken(@panel-box-background, 4%);
+
+		&:hover {
+			background-color: darken(@panel-box-background, 6%);
+		}
+
+	}
+
+	&-primary {
+
+		& .uk-button {
+
+			color: #FFFFFF;
+			background-color: darken(@panel-box-primary-background, 6%) !important;
+
+			&:hover,
+			&:active,
+			&:focus {
+				color: #FFFFFF;
+				background-color: darken(@panel-box-primary-background, 8%) !important;
+			}
+
+		}
+
+		& .uk-button.uk-button-primary {
+
+			color: darken(@panel-box-primary-background, 9%);
+			background-color: #FFFFFF !important;
+
+			&:hover,
+			&:active,
+			&:focus {
+				color: darken(@panel-box-primary-background, 12%);
+				background-color: mix(#FFFFFF, @panel-box-primary-background, 94%) !important;
+			}
+
+		}
+
+	}
+
+	& p {
+		margin: 5px 0;
 	}
 	
 }
 
 .hook-panel-badge() {
 	
-	&.uk-badge {
+	&.uk-badge:not(.uk-badge-success) {
+		
 		color: @am-text;
 		background-color: darken(@panel-box-background, 4%);
+
+		.uk-panel-box-primary & {
+			color: #FFFFFF;
+			background-color: darken(@panel-box-primary-background, 6%);
+		}
+
 	}
 	
 }
 
 .hook-panel-title() {
+
 	margin: 0 -@panel-box-padding;
 	padding: @panel-box-padding;
 	padding-bottom: 5px;
 	overflow: hidden;
 	overflow-wrap: break-word;
+
+	&:first-child {
+		padding-top: 0;
+	}
+
 }
 
 .am-panel {

@@ -70,11 +70,7 @@ btn_files: Files
 
 -
 
-btn_get_packages: Get Packages
-
--
-
-btn_get_themes: Download More Themes
+btn_get_themes: Get More Themes
 
 -
 
@@ -91,6 +87,10 @@ btn_home: Home
 -
 
 btn_inpage_edit: In-Page Edit Mode
+
+-
+
+btn_install: Install
 
 -
 
@@ -122,7 +122,11 @@ btn_open_log: Open Log
 
 -
 
-btn_readme: Open readme file
+btn_readme: Readme
+
+-
+
+btn_remove: Remove
 
 -
 
@@ -255,6 +259,14 @@ error_no_js: Please enabled JavaScript in your browser to use the Dashboard!
 -
 
 error_no_theme: No theme selected! Please select a main theme.
+
+-
+
+error_packages: Could not load packages from Packagist!
+
+-
+
+error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
 
 -
 
@@ -420,6 +432,45 @@ log_out_title: Logged Out
 
 
 
+packages_title: Packages
+
+-
+
+packages_browse: Open Package Browser
+
+-
+
+packages_filter: Filter Packages
+
+-
+
+packages_installed: Installed
+
+-
+
+packages_installing: Installing package ...
+
+-
+
+packages_update_all: Update All
+
+-
+
+packages_updating: Updating packages ...
+
+-
+
+packages_removing: Removing package ...
+
+-
+
+
+
+
+
+
+
+
 
 page_add_location: Select a location for the new page
 
@@ -574,6 +625,10 @@ success_created: Successfully created<br>
 
 -
 
+success_installed: Successfully installed
+
+-
+
 success_password_changed: Your password got changed successfully!
 
 -
@@ -595,6 +650,10 @@ success_saved: Saved
 -
 
 success_update: Successfully updated Automad!
+
+-
+
+success_packages_updated: Successfully updated all packages
 
 -
 

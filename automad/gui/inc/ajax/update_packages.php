@@ -1,3 +1,4 @@
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -26,43 +27,36 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2019 by Marc Anton Dahmen
+ *	Copyright (c) 2019 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
-@progress-height: 					16px;
-@progress-margin-vertical: 			5px;
-@progress-background:  				#FFFFFF;
-
-@progress-bar-background:   		@am-success;
-@progress-bar-font-size: 			@text-small-font-size;
-@progress-bar-color:  				#FFFFFF;
-
-@progress-bar-success-background:	@am-success;
-@progress-bar-warning-background: 	@am-danger;
-@progress-bar-danger-background: 	@am-danger;
+namespace Automad\GUI;
+use Automad\Core as Core;
+use Automad\System as System;
 
 
-.hook-progress() {
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+
+/*
+ *	Update all packages.
+ */
+
+$output = array();
+
+$Composer = new System\Composer();
+$output['error'] = $Composer->run('update');
+$output['trigger'] = 'composerDone';
 	
-	border-radius: @am-radius;
-	
-	&.am-progress-panel {
-		
-		height: auto;
-		margin: 0;
-		cursor: default;
-		
-		& .uk-progress-bar {
-			padding: @alert-padding 15px;
-			font-size: @base-body-font-size;
-			line-height: @base-body-line-height;
-			text-align: left;
-		}
-		
-	}
-	
+if (!$output['error']) {
+	$output['success'] = Text::get('success_packages_updated');
 }
+
+$this->jsonOutput($output);
+
+?>

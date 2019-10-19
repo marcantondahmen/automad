@@ -211,7 +211,21 @@
 					
 				}
 				
-			}, 'json');
+			}, 'json')
+			// Handle errors.
+			.fail(function(xhr) {
+
+				var data = xhr.responseJSON;
+				
+				if (data.trigger) {
+					$('html').trigger(data.trigger);
+				}
+
+				if (data.error) {
+					Automad.notify.error(data.error);
+				}
+
+			});
 				
 		},
 		
@@ -282,7 +296,7 @@
 			// the events, actually only that namespace gets unbound.
 			$doc.on('ready ajaxComplete', function() {
 				
-				var	formTriggerNamespace = '.automadFormTriggered';
+				var	formTriggerNamespace = '.automadFormInitOn';
 
 				// Remove all events from this namespace at once before
 				// binding all event again to prevent events from being
@@ -295,7 +309,7 @@
 						event = $form.data(Automad.util.dataCamelCase(da.initOn));
 
 					// Add namespace to event name when binding to be able
-					// to remove all events triggered by forms at once.
+					// to remove all events triggering forms at once.
 					$('html').on(event + formTriggerNamespace, function () {
 						// Init empty form.
 						$form.empty().submit();

@@ -90,10 +90,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 								<?php Text::e('shared_title'); ?>
 							</a>
 						</li>
-						<li>
-							<a href="https://packages.automad.org" target="_blank">
+						<li<?php if (Core\Parse::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
+							<a href="?context=packages">
 								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
-								<?php Text::e('btn_get_packages'); ?>
+								<?php Text::e('packages_title'); ?>
 							</a>
 						</li>
 						<li class="uk-nav-divider"></li>

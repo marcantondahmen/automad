@@ -198,17 +198,17 @@ if (isset($_POST['data'])) {
 								<div class="uk-panel-title">
 									<?php echo $Theme->name; ?>
 								</div>
-								<div class="uk-text-small uk-text-muted uk-hidden-small">
+								<div class="uk-text-small uk-hidden-small">
 									<?php echo $Theme->description; ?>
 								</div>
 								<?php if ($Theme->author) { ?> 
-								<div class="uk-text-small uk-text-muted uk-hidden-small">
+								<div class="uk-text-small uk-hidden-small">
 									<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
 									<?php echo $Theme->author; ?>
 								</div>
 								<?php } ?>
 								<?php if ($Theme->license) { ?>
-								<div class="uk-text-small uk-text-muted uk-hidden-small">
+								<div class="uk-text-small uk-hidden-small">
 									<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
 									<?php echo $Theme->license; ?>
 								</div>
@@ -242,9 +242,8 @@ if (isset($_POST['data'])) {
 						<?php } ?> 	
 					</ul>	
 					<a 
-					href="https://packages.automad.org" 
+					href="?context=packages" 
 					class="uk-button uk-button-success uk-margin-top"
-					target="_blank"
 					>
 						<i class="uk-icon-download"></i>&nbsp;
 						<?php Text::e('btn_get_themes'); ?>
