@@ -67,6 +67,7 @@
 
 			var p = Automad.packages,
 				$input = $('[' + p.dataAttr.filter + ']'),
+
 				update = function() {
 
 					var filter = $input.val().toLowerCase().split(' ');
@@ -84,11 +85,20 @@
 
 						$(this).toggle(display);
 						$(window).trigger('resize');
+
 					});
 
 				};
 
-			$(document).on('ajaxComplete', update);
+			// Trigger filter also when packages got reloaded.
+			$(document).ajaxComplete(function (e, xhr, settings) {
+				
+				if (settings.url == '?ajax=get_packages') {
+					update();
+				}
+				
+			});
+
 			$input.on('keyup', UIkit.Utils.debounce(update, 250)); 
 
 		},
