@@ -84,13 +84,13 @@ if ($packages = PackageManager::getPackages()) {
 		<?php foreach ($packages as $package) { ?>
 		
 			<li>
-				<div class="uk-panel uk-panel-box<?php if ($package->installed) { ?> uk-panel-box-primary<?php } ?>">
+				<div class="uk-panel uk-panel-box">
 					<a 
 					href="<?php echo $package->info; ?>" 
 					class="uk-display-block"
 					target="_blank"
 					>
-						<i class="uk-icon-file-archive-o uk-icon-medium"></i>
+						<i class="uk-icon-file-code-o uk-icon-medium"></i>
 						<div class="uk-panel-title uk-margin-small-top uk-padding-top-remove">
 								<?php echo $package->name; ?>
 						</div>
@@ -98,27 +98,26 @@ if ($packages = PackageManager::getPackages()) {
 							<?php echo $package->description; ?>
 						</div>
 						<?php  if ($package->installed) { ?>
-							<span class="uk-panel-badge uk-badge">
+							<span class="uk-panel-badge uk-badge uk-badge-success">
 								<i class="uk-icon-check"></i>&nbsp;
 								<?php Text::e('packages_installed'); ?>
 							</span>
 						<?php } ?>
 					</a>
 					<div class="am-panel-bottom">
+						<a 
+						href="<?php echo $package->info; ?>" 
+						class="uk-icon-button uk-icon-file-text-o"
+						target="_blank"
+						title="<?php Text::e('btn_readme'); ?>"
+						data-uk-tooltip
+						></a>
 						<div class="am-panel-bottom-right">
-							<a 
-							href="<?php echo $package->info; ?>" 
-							class="uk-button uk-button-small"
-							target="_blank"
-							>
-								<i class="uk-icon-file-text-o"></i>&nbsp;	
-								<?php Text::e('btn_readme'); ?>
-							</a>&nbsp;
 							<?php if ($package->installed) { ?>
 								<form class="uk-display-inline-block" data-am-handler="remove_package">
 									<input type="hidden" name="package" value="<?php echo $package->name; ?>">
 									<button 
-									class="uk-button uk-button-small uk-button-primary"
+									class="uk-button uk-button-small"
 									data-uk-modal="{target:'#am-modal-remove-package-progress',keyboard:false,bgclose:false}"
 									>
 										<i class="uk-icon-close"></i>&nbsp;	
@@ -129,7 +128,7 @@ if ($packages = PackageManager::getPackages()) {
 								<form class="uk-display-inline-block" data-am-handler="install_package">
 									<input type="hidden" name="package" value="<?php echo $package->name; ?>">
 									<button 
-									class="uk-button uk-button-small uk-button-success"
+									class="uk-button uk-button-small"
 									data-uk-modal="{target:'#am-modal-install-package-progress',keyboard:false,bgclose:false}"
 									>
 										<i class="uk-icon-download"></i>&nbsp;	
