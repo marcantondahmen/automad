@@ -3,5 +3,6 @@
     "AM_CACHE_ENABLED": true,
     "AM_CACHE_LIFETIME": 43200,
     "AM_CACHE_MONITOR_DELAY": 120,
-    "AM_DEBUG_ENABLED": false
+    "AM_DEBUG_ENABLED": false,
+    "AM_HEADLESS_ENABLED": false
 }
