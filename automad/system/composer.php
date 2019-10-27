@@ -62,6 +62,20 @@ class Composer {
 
 
 	/**	
+	 * 	Composer extraction directory within temporary directory.
+	 */
+
+	private $extractionDir = '/src';
+
+
+	/**	
+	 * 	Composer autoloader within the temporary extraction directory.
+	 */
+
+	private $autoloader = '/vendor/autoload.php';
+
+
+	/**	
 	 *	The Composer memory limit error message text.
 	 */
 
@@ -152,16 +166,38 @@ class Composer {
 	private function getInstallDir() {
 
 		// Get Composer install directory from cache or create new path.
-		if (file_exists($this->installDirCacheFile)) {
+		if (is_readable($this->installDirCacheFile)) {
+		
 			$installDir = file_get_contents($this->installDirCacheFile);
 			Core\Debug::log($installDir, 'Getting Composer installation directory from cache');
-		} else {
-			$tmp = Core\FileSystem::getTmpDir();
-			$installDir = $tmp . '/composer_' . time();
-			Core\FileSystem::write($this->installDirCacheFile, $installDir);
-			Core\Debug::log($installDir, 'Generating new Composer installation path');
-		}
+			
+			// To verify that the directory actually contains Composer, simply test for existance of the autoloader.
+			if (!is_readable($installDir . $this->extractionDir . $this->autoloader)) {
+				Core\Debug::log($installDir . $this->extractionDir . $this->autoloader, 'Autoloader not found');
+				return $this->newInstallDir();
+			}
+		
+			return $installDir;
+		
+		} 
 
+		return $this->newInstallDir();
+
+	}
+
+
+	/**	
+	 * 	Generate a fresh installation directory for Composer.
+	 * 
+	 * 	@return string The path to the directory
+	 */
+
+	private function newInstallDir() {
+
+		$tmp = Core\FileSystem::getTmpDir();
+		$installDir = $tmp . '/composer_' . time();
+		Core\Debug::log($installDir, 'Generating new Composer installation path');
+		Core\FileSystem::write($this->installDirCacheFile, $installDir);
 		Core\FileSystem::makeDir($installDir);
 		
 		return $installDir;
@@ -190,6 +226,8 @@ class Composer {
 		$application->setAutoExit(false);
 		$application->setCatchExceptions(false);
 		
+		Core\Debug::log($command, 'Command');
+
 		try {
 			$application->run($input);
 		} catch (\Exception $e) {
@@ -211,7 +249,7 @@ class Composer {
 
 		$installDir = $this->getInstallDir();
 
-		$srcDir = $installDir . '/src';
+		$srcDir = $installDir . $this->extractionDir;
 
 		if (!file_exists($srcDir)) {
 
@@ -227,7 +265,7 @@ class Composer {
 
 		}
 
-		$autoloader = $srcDir . '/vendor/autoload.php';
+		$autoloader = $installDir . $this->extractionDir . $this->autoloader;
 
 		if (!is_readable($autoloader)) {
 			Core\Debug::log($autoloader, 'Composer autoloader not found');
