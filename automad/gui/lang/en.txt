@@ -739,9 +739,9 @@ by using variables, objects and control structures.
 sys_headless_enable: Headless Mode
 -
 
-sys_headless_info: Activating the headless mode turns Automad into a back-end only content management system 
-that makes content accessible via a RESTful API for display on any device. 
-All content is returned in JSON format instead of a regular rendered HTML template.
+sys_headless_info: Activating the headless mode turns Automad into a content management system without a presentation layer 
+that focuses entirely on content creation. While the Dashboard can still be used to manage content, all data and files are made 
+accessible via a read-only JSON API.
 
 -
 
