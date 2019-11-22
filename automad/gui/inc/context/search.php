@@ -51,7 +51,7 @@ $this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' .
 $this->element('header');
 
 
-$results = $this->Content->getSearchResults();
+$results = $this->getContent()->getSearchResults();
 
 
 ?>
@@ -71,7 +71,7 @@ $results = $this->Content->getSearchResults();
 
 if ($results) {
 	
-	echo $this->Html->pageGrid($results);
+	echo $this->getHtml()->pageGrid($results);
 	
 } else {
 	

@@ -245,6 +245,24 @@ class Html {
 	}
 	
 
+	/**	
+	 * 	Create a hidden form field.
+	 * 
+	 *  @param string $key
+	 * 	@param string $value
+	 * 	@return string The HTML for the hidden input field
+	 */
+
+	public function formFieldHidden($key = '', $value = '') {
+
+		// Convert special characters in $value to HTML entities.
+		$value = htmlspecialchars($value);
+
+		return '<input type="hidden" name="data[' . $key . ']" value="' . $value . '" />';
+
+	}
+
+
 	/**
 	 *	Create form fields for page/shared variables.         
 	 *      
@@ -334,7 +352,7 @@ class Html {
 	
 	}
 	
-	
+
 	/**
 	 *	Create loading icon.
 	 *      
@@ -602,28 +620,6 @@ class Html {
 	
 	
 	/**
-	 *  Create a status button for an AJAX status request with loading animation.
-	 *      
-	 *  @param string $status
-	 *  @param string $tab
-	 *  @return string The HTML for the status button
-	 */
-	
-	public function status($status, $tab) {
-		
-		return	'<a '.
-		 		'href="?context=system_settings#' . $tab . '" ' .
-				'class="uk-button uk-button-large uk-width-1-1 uk-text-left" ' .
-				'data-am-status="' . $status . '"' .
-		 		'>' .
-					'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					Text::get('btn_getting_data') .
-				'</a>';
-				
-	}
-	
-
-	/**
 	 *	Create recursive site tree for editing a page. 
 	 *	Every page link sends a post request to gui/pages.php containing the page's url.
 	 *
@@ -637,9 +633,9 @@ class Html {
 	
 	public function siteTree($parent, $collection, $parameters, $hideCurrent = false, $header = false) {
 		
-		$current = \Automad\Core\Parse::query('url');
+		$current = Core\Parse::query('url');
 		
-		$selection = new \Automad\Core\Selection($collection);
+		$selection = new Core\Selection($collection);
 		$selection->filterByParentUrl($parent);
 		$selection->sortPages();
 		

@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -58,7 +59,7 @@ $this->element('header');
 		</ul>
 		<?php
 		 
-			echo $this->Html->stickySwitcher('#am-sys-content', array(
+			echo $this->getHtml()->stickySwitcher('#am-sys-content', array(
 				array(
 					'icon' => '<i class="uk-icon-rocket"></i>',
 					'text' => Text::get('sys_cache')
@@ -70,6 +71,10 @@ $this->element('header');
 				array(
 					'icon' => '<i class="uk-icon-refresh"></i>',
 					'text' => Text::get('sys_update')
+				),
+				array(
+					'icon' => '<strong>{ }</strong>',
+					'text' => Text::get('sys_headless')
 				),
 				array(
 					'icon' => '<i class="uk-icon-bug"></i>',
@@ -108,7 +113,7 @@ $this->element('header');
 						<!-- Cache Monitor Delay -->
 						<p class="uk-margin-large-top"><?php Text::e('sys_cache_monitor_info') ?></p>
 						<?php 
-							echo $this->Html->select(
+							echo $this->getHtml()->select(
 								'cache[monitor-delay]',
 								array(
 									'1 min' => 60,
@@ -122,7 +127,7 @@ $this->element('header');
 						<!-- Cache Lifetime -->
 						<p class="uk-margin-large-top"><?php Text::e('sys_cache_lifetime_info') ?></p>
 						<?php 
-							echo $this->Html->select(
+							echo $this->getHtml()->select(
 								'cache[lifetime]',
 								array(
 									'1 h' => 3600,
@@ -301,7 +306,87 @@ $this->element('header');
 			<!-- Update -->
 			<li>
 				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
-					<?php echo $this->Html->loading(); ?>
+					<?php echo $this->getHtml()->loading(); ?>
+				</form>
+			</li>
+			<!-- Headless --> 
+			<li>
+				<?php Text::e('sys_headless_info'); ?>
+				<!-- Headless Mode Enable -->
+				<form 
+				class="uk-form uk-form-stacked" 
+				data-am-handler="update_config" 
+				data-am-auto-submit
+				>
+					<!-- Headless Mode Enable -->
+					<input type="hidden" name="type" value="headless" />		
+					<label 
+					class="am-toggle-switch-large" 
+					data-am-toggle="#am-headless-template"
+					>
+						<?php Text::e('sys_headless_enable'); ?>
+						<input 
+						type="checkbox" 
+						name="headless" 
+						value="on"<?php if (AM_HEADLESS_ENABLED) { echo ' checked'; } ?> 
+						/>
+					</label>
+				</form>
+				<!-- Headless Template -->
+				<div id="am-headless-template" class="am-toggle-container uk-margin-large-top">
+					<p>
+						<?php Text::e('sys_headless_edit_info'); ?>
+					</p>
+					<a 
+					href="#am-headless-modal" 
+					class="uk-button uk-button-large uk-button-success"
+					data-uk-modal
+					>
+						<i class="uk-icon-pencil"></i>&nbsp;
+						<?php Text::e('btn_edit_headless_template'); ?>
+					</a>
+				</div>
+				<div id="am-headless-modal" class="uk-modal">
+					<div class="am-modal-dialog-code uk-modal-dialog uk-modal-dialog-large">
+						<div class="uk-margin-small-bottom uk-grid uk-flex uk-flex-middle" data-uk-grid-margin>
+							<div class="uk-width-small-1-1 uk-flex-item-1">
+								<span class="uk-text-truncate" data-am-status="headless_template"></span>
+							</div>
+							<div class="uk-flex">
+								<a href="#" class="uk-button uk-modal-close">
+									<i class="uk-icon-close"></i>&nbsp;
+									<?php Text::e('btn_close'); ?>
+								</a>
+								<a 
+								href="#"
+								class="uk-button"
+								data-am-submit="reset_headless_template"
+								>
+									<i class="uk-icon-refresh"></i>&nbsp;
+									<?php Text::e('btn_reset'); ?>
+								</a>
+								<button 
+								class="uk-button uk-button-success"
+								data-am-submit="edit_headless_template"
+								>
+									<i class="uk-icon-check"></i>&nbsp;
+									<?php Text::e('btn_save'); ?>
+								</button>
+							</div>
+						</div>
+						<form 
+						class="uk-form" 
+						data-am-handler="edit_headless_template" 
+						data-am-init-on="resetHeadlessTemplate"
+						data-am-init
+						></form>
+					</div>
+				</div>
+				<form 
+				data-am-handler="reset_headless_template"
+				data-am-confirm="<?php Text::e('confirm_reset_headless'); ?>"
+				>
+					<input type="hidden" name="reset" value="1" />
 				</form>
 			</li>
 			<!-- Debug -->
@@ -314,7 +399,7 @@ $this->element('header');
 						<input 
 						type="checkbox" 
 						name="debug" 
-						value="on" <?php if (AM_DEBUG_ENABLED) { echo ' checked'; } ?> 
+						value="on"<?php if (AM_DEBUG_ENABLED) { echo ' checked'; } ?> 
 						/>
 					</label>
 				</form>

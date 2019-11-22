@@ -60,7 +60,8 @@ class View_Test extends TestCase {
 			'set_01' => 'Test 1, Test 2',
 			'session_get_01' => 'Session Test',
 			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
-			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>'
+			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'resolve_01' => '<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'
 		);
 		
 		foreach ($templates as $template => $expected) {
@@ -76,5 +77,85 @@ class View_Test extends TestCase {
 		
 	}
 	
+
+	/**
+	 *	@dataProvider dataForTestHeadlessValueIsEqual
+	 *	@testdox render $template: $expected
+	 */
+
+	public function testHeadlessValueIsEqual($value, $expected) {
+		
+		$Mock = new Mock();
+		$AutomadMock = $Mock->createAutomad();
+		$Page = $AutomadMock->Context->get();
+		// Set test to $value.
+		$Page->data['test'] = $value;
+		// Render view in headless mode.
+		$View = new View($AutomadMock, true);
+		// Convert JSON output back into array to check if 
+		// $value matches $expected.
+		$array = json_decode($View->render());
+		
+		$this->assertEquals($array->test, $expected);
+		
+	}
+
+	public function dataForTestHeadlessValueIsEqual() {
+		
+		return array(
+			array(
+				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
+				'<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'
+			),
+			array(
+				"This is a\n\rmultiline test.",
+				'This is a\nmultiline test.'
+			),
+			array(
+				'{"test":""}',
+				'{"test":""}'
+			)
+		);
+
+	}
+
+
+	/**
+	 *	@dataProvider dataForTestHeadlessJSONIsEqual
+	 *	@testdox render $template: $expected
+	 */
+
+	public function testHeadlessJSONIsEqual($value, $expected) {
+		
+		$Mock = new Mock();
+		$AutomadMock = $Mock->createAutomad();
+		$Page = $AutomadMock->Context->get();
+		// Set test to $value.
+		$Page->data['test'] = $value;
+		// Render view in headless mode.
+		$View = new View($AutomadMock, true);
+		
+		$this->assertEquals($View->render(), $expected);
+		
+	}
+
+	public function dataForTestHeadlessJSONIsEqual() {
+		
+		return array(
+			array(
+				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
+				'{"test": "<img src=\"/pages/image.jpg\" srcset=\"/pages/image.jpg 500w, /pages/image_large.jpg 1200w\"><a href=\"/index.php/test\">Test</a>"}'
+			),
+			array(
+				"This is a\n\rmultiline test.",
+				'{"test": "This is a\\\\nmultiline test."}'
+			),
+			array(
+				'{"test":""}',
+				'{"test": "{\"test\":\"\"}"}'
+			)
+		);
+
+	}
 	
 }

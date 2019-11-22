@@ -112,15 +112,26 @@ class View {
 	 */
 	
 	private $template;
+
+
+	/**
+	 * 	Set the headless mode for the current view.
+	 */
+
+	private $headless;
 	
 	
 	/**
 	 *	Define $Automad and $Page, check if the page gets redirected and get the template name. 
+	 *	
+	 *	@param object $Automad
+	 *	@param boolean $headless
 	 */
 	
-	public function __construct($Automad) {
+	public function __construct($Automad, $headless = false) {
 		
 		$this->Automad = $Automad;
+		$this->headless = $headless;
 		$this->Runtime = new Runtime($Automad);
 		$this->Toolbox = new Toolbox($Automad);
 		$this->InPage = new GUI\InPage();
@@ -133,7 +144,12 @@ class View {
 			die;
 		}
 		
-		$this->template = $Page->getTemplate();
+		// Set template.
+		if ($this->headless) {
+			$this->template = Headless::getTemplate();
+		} else {
+			$this->template = $Page->getTemplate();
+		}
 		
 		Debug::log($Page, 'New instance created for the current page');
 		
@@ -323,7 +339,7 @@ class View {
 			
 			$str = preg_replace_callback('/' . Regex::keyValue() . '/s', function($pair) {
 				
-				if (strpos($pair['value'], '@') === 0) {
+				if (strpos($pair['value'], AM_DEL_VAR_OPEN) === 0) {
 					$pair['value'] = '"' . trim($pair['value']) . '"';
 				}
 				
@@ -393,14 +409,14 @@ class View {
 				// Modify $value by processing all matched string functions.
 				$value = Pipe::process($value, $functions);
 				
-				// Escape all double quotes, in case the variable is used in a JSON string.
-				if ($isOptionString) {
-					$value = addcslashes($value, '"');
+				// Escape values to be used in headless mode and option strings.
+				if ($this->headless || $isOptionString) {
+					$value = Str::escape($value);
 				}
-					
+				
 				// Inject "in-page edit" button in case varName starts with a word-char and an user is logged in.
 				// The button needs to be wrapped in delimiters to enable a secondary cleanup step to remove buttons within HTML tags.
-				if ($inPageEdit) {
+				if ($inPageEdit && !$this->headless) {
 					
 					$value = 	$this->InPage->injectTemporaryEditButton(
 									$value, 
@@ -951,10 +967,11 @@ class View {
 		
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))="(.+?)"/is', function($match) use ($method, $parameters) {
-					$parameters = array_merge(array(0 => $match[2]), $parameters);
+		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
+					$parameters = array_merge(array(0 => $match[3]), $parameters);
 					$url = call_user_func_array($method, $parameters);
-					return $match[1] . '="' . $url . '"';
+					// Matches 2 and 4 are quotes.
+					return $match[1] . '=' . $match[2] . $url . $match[4];
 				}, $str);
 				
 		// Inline styles (like background-image).
@@ -967,12 +984,13 @@ class View {
 				
 		// Image srcset attributes.
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+srcset)="([^"]+)"/is', function($match) use ($method, $parameters) {
+		$str = 	preg_replace_callback('/(<[^>]+srcset)=((?:\\\\)?")([^"]+)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
 					$urls = preg_replace_callback('/([^,\s]+)\s+(\w+)/is', function($match) use ($method, $parameters) {
 						$parameters = array_merge(array(0 => $match[1]), $parameters);
 						return call_user_func_array($method, $parameters) . ' ' . $match[2];
-					}, $match[2]);
-					return $match[1] . '="' . $urls . '"'; 
+					}, $match[3]);
+					// Matches 2 and 4 are quotes.
+					return $match[1] . '=' . $match[2] . $urls . $match[4]; 
 				}, $str);
 	
 		return $str;
@@ -1041,7 +1059,7 @@ class View {
 		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 		
-		return $output;	
+		return trim($output);	
 		
 	}	
 		

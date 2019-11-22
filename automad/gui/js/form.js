@@ -74,6 +74,8 @@
 			 * 	data-am-close-on-success="#form"	Closes a modal window with the given ID on success.
 			 *
 			 * 	data-am-confirm="Text..."			Confirm submission
+			 * 
+			 * 	data-am-init-on="Event"				Submit a form on any given event
 			 *
 			 * 
 			 * 	INPUT ATTRIBUTES:
@@ -96,6 +98,7 @@
 			url:			'data-am-url',
 			submit:			'data-am-submit',
 			init:			'data-am-init',
+			initOn: 		'data-am-init-on',
 			autoSubmit:		'data-am-auto-submit',
 			close:			'data-am-close-on-success',
 			confirm:		'data-am-confirm',
@@ -131,9 +134,12 @@
 			 *
 			 * 	4.	data.success
 			 * 		will alert the success message in a notification box.
-			 *
-			 *  5.	data.debug
-			 *      Outputs debug info to the console.
+			 * 
+			 * 	5.	data.reload
+			 * 		will reload the current page.
+			 * 
+			 * 	6.	data.trigger
+			 * 		will trigger an event.
 			 */
 			
 			var	f = Automad.form,
@@ -159,15 +165,22 @@
 			// Post form data to the handler.
 			$.post('?ajax=' + handler, param, function(data) {
 			
-				// Debug info.
-				if (data.debug) {
-					Automad.debug.log(handler, data.debug);
-				}
-				
 				// In case the returned JSON contains a redirect URL, simply redirect the page.
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 				if (data.redirect) {
 					window.location.href = data.redirect;
+					return false;
+				}
+
+				// Reload the current page.
+				if (data.reload) {
+					window.location.reload();
+					return false;
+				}
+
+				// Trigger event.
+				if (data.trigger) {
+					$('html').trigger(data.trigger);
 				}
 
 				// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
@@ -198,7 +211,21 @@
 					
 				}
 				
-			}, 'json');
+			}, 'json')
+			// Handle errors.
+			.fail(function(xhr) {
+
+				var data = xhr.responseJSON;
+				
+				if (data.trigger) {
+					$('html').trigger(data.trigger);
+				}
+
+				if (data.error) {
+					Automad.notify.error(data.error);
+				}
+
+			});
 				
 		},
 		
@@ -261,6 +288,37 @@
 
 			});
 			
+			// Init a form on a given event. 
+			// Note that the form will be cleared before being submitted.
+			// All events triggered by forms are bound to the $('html') element
+			// to allow for an easy way to remove all events before reassigning them on
+			// multiple ajaxComplete events. All events get added a namespace. When unbinding
+			// the events, actually only that namespace gets unbound.
+			$doc.on('ready ajaxComplete', function() {
+				
+				var	formTriggerNamespace = '.automadFormInitOn';
+
+				// Remove all events from this namespace at once before
+				// binding all event again to prevent events from being
+				// fired multiple times.
+				$('html').off(formTriggerNamespace);
+
+				$('[' + da.initOn + ']').each(function() {
+
+					var $form = $(this),
+						event = $form.data(Automad.util.dataCamelCase(da.initOn));
+
+					// Add namespace to event name when binding to be able
+					// to remove all events triggering forms at once.
+					$('html').on(event + formTriggerNamespace, function () {
+						// Init empty form.
+						$form.empty().submit();
+					});
+
+				});
+
+			});
+
 
 			// Handle enter key.
 			

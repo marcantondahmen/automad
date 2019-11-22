@@ -2,15 +2,15 @@ title: Contact
 
 -
 
+textTeaser: Use the Contact template to create an email form. To be able to recieve emails from visitors, you have to provide an email address in the [variables section](/dashboard?context=edit_page&url=%2Fcontact#data-and-settings).
+
+-
+
 checkboxShowInFooter: on
 
 -
 
 imageProfile: /pages/02.portfolio/alpha-project/portrait.png
-
--
-
-textTeaser: Use the Contact template to create an email form. To be able to recieve emails from visitors, you have to provide an email address in the [variables section](/dashboard?context=edit_page&url=%2Fcontact#data-and-settings).
 
 -
 

@@ -41,7 +41,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $requiredVersion = '5.4.0';
 
 if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
-	die('Please update your PHP version to at least ' . $requiredVersion . '!');
+	exit('<h1>PHP out of date!</h1><h2>Please update your PHP version to ' . $requiredVersion . ' or newer!</h2>');
 }
 
 
@@ -67,7 +67,7 @@ Core\Debug::errorReporting();
 
 // The cache folder must be writable (resized images), also when caching is disabled!
 if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {	
-	die('The folder "' . AM_DIR_CACHE . '" must be writable by the web server!');
+	exit('<h1>Permission denied!</h1><h2>The "' . AM_DIR_CACHE . '" directory must be writable by the web server!</h2>');
 }
 
 
@@ -76,13 +76,18 @@ session_name('Automad-' . md5(AM_BASE_DIR));
 session_start();
 
 
-// Split GUI form regular pages.
+// Split GUI from regular pages.
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 	
 	$Dashboard = new GUI\Dashboard();
 	$output = $Dashboard->output;
 	
 } else {
+
+	// Set content type header.
+	if (AM_HEADLESS_ENABLED) {
+		header('Content-Type: application/json');
+	}
 
 	// Load page from cache or process template
 	$Cache = new Core\Cache();
@@ -113,7 +118,7 @@ if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 		}
 	
 		// Render template
-		$View = new Core\View($Automad);
+		$View = new Core\View($Automad, AM_HEADLESS_ENABLED);
 		$output = $View->render();
 	
 		// Save output to cache if page actually exists.
@@ -133,7 +138,7 @@ if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 
 
 // If debug is enabled, prepend the logged information to the closing </body> tag and echo the page.
-echo str_replace('</body>', Core\Debug::getLog() . '</body>', $output);
+echo str_replace('</body>', Core\Debug::consoleLog() . '</body>', $output);
 
 
 ?>

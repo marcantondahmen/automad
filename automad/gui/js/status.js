@@ -76,10 +76,18 @@
 			});
 
 			$doc.ajaxComplete(function(e, xhr, settings) {
-				// Make sure the status doesn't get triggered by itself in an infinite loop.
-				if (settings.url != '?ajax=status') {
+				
+				var triggers = [
+								'?ajax=users', 
+								'?ajax=add_user', 
+								'?ajax=edit_headless_template',
+								'?ajax=reset_headless_template'
+							];
+
+				if (triggers.includes(settings.url)) {
 					s.get();
 				}
+				
 			});
 			
 		}

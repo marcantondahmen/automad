@@ -56,20 +56,20 @@ $output = array();
 
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, its URL has to be submitted along with the form data.
-if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->collection)) {
+if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->getAutomad()->getCollection())) {
 	$url = $_POST['url'];
 } else {
 	$url = '';
 }
 
 
-$path = $this->Content->getPathByPostUrl();
+$path = $this->getContent()->getPathByPostUrl();
 
 
 // Delete files in $_POST['delete'].
 if (isset($_POST['delete'])) {
 	
-	$output = $this->Content->deleteFiles($_POST['delete'], $path);
+	$output = $this->getContent()->deleteFiles($_POST['delete'], $path);
 
 }
 
@@ -194,12 +194,12 @@ if ($files) { ?>
 						<?php echo basename($file); ?>
 					</div>
 					<?php if ($caption) { ?>
-					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
+					<div class="uk-text-small uk-text-truncate uk-hidden-small">
 						<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
 						"<?php echo Core\Str::shorten($caption, 100); ?>"
 					</div>
 					<?php } ?>
-					<div class="uk-text-small uk-text-truncate uk-text-muted uk-hidden-small">
+					<div class="uk-text-small uk-text-truncate uk-hidden-small">
 						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;
 						<?php echo date('M j, Y H:i', filemtime($file)); ?>
 					</div>
@@ -421,7 +421,7 @@ $output['html'] = ob_get_contents();
 ob_end_clean();
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

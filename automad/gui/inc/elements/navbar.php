@@ -61,14 +61,14 @@ if (User::get()) {
 			<!-- Logo -->
 			<li class="am-navbar-logo">
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
-					<?php include AM_BASE_DIR . '/automad/gui/svg/logo.svg'; ?>
+					<?php echo Logo::get(); ?>
 				</a>
 			</li>
 			<!-- Search -->
 			<li class="am-navbar-search">
 				<?php 
-					echo $this->Html->searchField(
-						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->sitename),
+					echo $this->getHtml()->searchField(
+						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
 						'Ctrl + Space'
 					);
 				?>

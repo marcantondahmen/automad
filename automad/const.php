@@ -112,6 +112,7 @@ Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also requ
 Config::set('AM_FILE_EXT_CAPTION', 'caption');
 Config::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
+Config::set('AM_FILE_EXT_HEADLESS_CACHE', 'json');
 Config::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA); 
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
@@ -199,6 +200,15 @@ Config::set('AM_KEY_FILELIST_COUNT', ':filelistCount');
 Config::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
 Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
+
+// HEADLESS
+Config::set('AM_HEADLESS_ENABLED', false);
+Config::set('AM_HEADLESS_TEMPLATE', '/automad/headless/json.php');
+// For security reasons, the custom template should not have the .php extension.
+Config::set('AM_HEADLESS_TEMPLATE_CUSTOM', '/config/headless.json');
+
+// COMPOSER
+Config::set('AM_COMPOSER_PHAR_URL', 'https://getcomposer.org/download/1.9.0/composer.phar');
 
 // UPDATE
 Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');

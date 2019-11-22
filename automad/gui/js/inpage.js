@@ -117,10 +117,6 @@
 				
 				$.post(handler, param, function(data) {
 					
-					if (data.debug) {
-						Automad.debug.log(handler, data.debug);
-					}
-					
 					if (data.redirect) {
 						window.location.href = data.redirect;
 					}

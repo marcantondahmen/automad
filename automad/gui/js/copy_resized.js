@@ -110,10 +110,6 @@
 				// Re-enable button again after AJAX call.
 				$button.prop('disabled', false);
 				
-				if (data.debug) {
-					Automad.debug.log('copy_resized', data.debug);
-				}
-				
 				if (data.error) {
 					Automad.notify.error(data.error);
 				} 

@@ -56,7 +56,7 @@ $Cache->clear();
 $output['success'] = Text::get('success_cache_cleared');
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

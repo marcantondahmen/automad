@@ -58,7 +58,7 @@ class Debug {
 	 *	Log buffer.
 	 */
 	
-	private static $buffer = '';
+	private static $buffer = array();
 	
 	
 	/**
@@ -69,50 +69,13 @@ class Debug {
 	
 	
 	/**
-	 *	Modify a given $output array (passed by reference) to be returned as JSON string (AJAX requests) 
-	 * 	by extending the $output['debug'] array only when debugging is enabled.
-	 * 	Note that this method doesn't return anything (false).
-	 *      
-	 * 	@param array $output
-	 * 	@param string $key
-	 * 	@param mixed $value
-	 */
-	
-	public static function ajax(&$output, $key, $value = '') {
-		
-		if (AM_DEBUG_ENABLED) {
-			
-			if (!isset($output['debug'])) {
-				$output['debug'] = array();
-			}
-			
-			$output['debug'][$key] = $value;
-				
-		}
-		
-	}
-	
-	
-	/**
-	 *	Enable full error reporting, when debugging is enabled.
-	 */
-	
-	public static function errorReporting() {
-		
-		if (AM_DEBUG_ENABLED) {
-			error_reporting(E_ALL);
-		}
-		
-	}
-	
-	
-	/**
-	 *	Stop timer, calculate execution time, get user & server constants and return the log buffer.
+	 *	Stop timer, calculate execution time, get user & server constants 
+	 *	and return a console log item for every item in the buffer array.
 	 *
 	 * 	@return string The Javascript console log
 	 */
 	
-	public static function getLog() {
+	public static function consoleLog() {
 		
 		if (AM_DEBUG_ENABLED) {
 			
@@ -126,15 +89,49 @@ class Debug {
 			self::uc();
 			self::log($_SERVER, 'Server');
 			
-			return '<script type="text/javascript">' . "\n" . self::$buffer . '</script>' . "\n";
+			$html = '<script type="text/javascript">' . "\n";
+
+			foreach (self::$buffer as $key => $item) {
+				$html .= 'console.log(' . json_encode($item) . ');' . "\n";
+			}
+
+			$html .= '</script>' . "\n";
+
+			return $html;
 			
 		}
 		
 	}
-	
+
 	
 	/**
-	 *	Log any kind of variable and append it as JS console.log item to $buffer.
+	 *	Enable full error reporting, when debugging is enabled.
+	 */
+	
+	public static function errorReporting() {
+		
+		if (AM_DEBUG_ENABLED) {
+			error_reporting(E_ALL);
+		}
+		
+	}
+	
+
+	/**
+	 * 	Return the buffer array.
+	 * 
+	 * 	@return array The log buffer array
+	 */
+
+	public static function getLog() {
+
+		return self::$buffer;
+
+	}
+
+
+	/**
+	 *	Log any kind of variable and append it to the $buffer array.
 	 *
 	 *	@param mixed $element (The actual content to log)
 	 *	@param string $description (Basic info, class, method etc.)
@@ -169,7 +166,7 @@ class Debug {
 			// Prepend the method to $description.
 			$description = trim($prefix . $description, ': ');
 			
-			self::$buffer .= "console.log(" . json_encode(array($description => $element)) . ");\n";
+			self::$buffer[] = array($description => $element);
 			
 		}
 		
@@ -188,7 +185,7 @@ class Debug {
 	
 	
 	/**
-	 *	Start the timer on the first call to calculate the execution time when getLog() gets called. 
+	 *	Start the timer on the first call to calculate the execution time when consoleLog() gets called. 
 	 */
 	
 	private static function timerStart() {

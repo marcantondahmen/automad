@@ -33,7 +33,7 @@
  */
 
 
-@modal-background: 				rgba(0,0,0,0.1);
+@modal-background: 				rgba(0,0,0,0.05);
 
 @modal-dialog-background:		@am-bg;
 @modal-dialog-padding:			15px;
@@ -48,7 +48,8 @@
 .hook-modal-dialog() {
 	
 	overflow-x: hidden;
-		
+	outline: none;
+	
 	&:not(&-blank) {
 		border-radius: 12px;
 		.shadow;
@@ -65,7 +66,11 @@
 	& hr {
 		margin: @utility-margin -@modal-dialog-padding;
 		border-top: @am-hairline;
-	}		
+	}
+	
+	&.am-modal-dialog-code {
+		padding-bottom: 0;
+	}
 			
 }
 

@@ -238,7 +238,8 @@ class Page {
 		if (file_exists($templatePath)) {
 			return $templatePath;
 		} else {
-			exit('Template "' . $templatePath . '" not found!');
+			exit('<h1>Template "' . Str::stripStart($templatePath, AM_BASE_DIR . AM_DIR_PACKAGES . '/') . 
+			     '" not found!</h1><h2>Make sure you have selected an existing template for this page!</h2>');
 		}
 	
 	}

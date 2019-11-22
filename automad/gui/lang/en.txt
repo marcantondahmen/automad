@@ -58,6 +58,10 @@ btn_edit_file_info: Edit File Info
 
 -
 
+btn_edit_headless_template: Edit Headless Template
+
+-
+
 btn_edit_page: Edit Page
 
 -
@@ -66,11 +70,7 @@ btn_files: Files
 
 -
 
-btn_get_packages: Get Packages
-
--
-
-btn_get_themes: Download More Themes
+btn_get_themes: Get More Themes
 
 -
 
@@ -87,6 +87,10 @@ btn_home: Home
 -
 
 btn_inpage_edit: In-Page Edit Mode
+
+-
+
+btn_install: Install
 
 -
 
@@ -118,11 +122,19 @@ btn_open_log: Open Log
 
 -
 
-btn_readme: Open readme file
+btn_readme: Readme
+
+-
+
+btn_remove: Remove
 
 -
 
 btn_remove_selected: Remove Selected
+
+-
+
+btn_reset: Reset
 
 -
 
@@ -150,6 +162,10 @@ confirm_delete_page: Are you sure you want to delete the current page?
 -
 
 confirm_delete_users: Are you sure to delete the selected users?
+
+-
+
+confirm_reset_headless: Are you sure to reset the custom headless template?
 
 -
 
@@ -239,6 +255,18 @@ error_no_destination: Please select a page as destination!
 -
 
 error_no_js: Please enabled JavaScript in your browser to use the Dashboard!
+
+-
+
+error_no_theme: No theme selected! Please select a main theme.
+
+-
+
+error_packages: Could not load packages from Packagist!
+
+-
+
+error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
 
 -
 
@@ -404,6 +432,45 @@ log_out_title: Logged Out
 
 
 
+packages_title: Packages
+
+-
+
+packages_browse: Open Package Browser
+
+-
+
+packages_filter: Filter Packages
+
+-
+
+packages_installed: Installed
+
+-
+
+packages_installing: Installing package ...
+
+-
+
+packages_update_all: Update All
+
+-
+
+packages_updating: Updating packages ...
+
+-
+
+packages_removing: Removing package ...
+
+-
+
+
+
+
+
+
+
+
 
 page_add_location: Select a location for the new page
 
@@ -437,11 +504,15 @@ page_var_name: Variable Name
 
 -
 
-page_vars_in_template: Variables in current template
+page_vars_headless: Variables
+
+-
+
+page_vars_template: Variables in current template
 
 - 
 
-page_vars_in_other_templates: Variables in other templates
+page_vars_other_templates: Variables in other templates
 
 - 
 
@@ -485,6 +556,10 @@ shared_theme: Main theme
 
 shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? 
 Your unsaved changes will be saved.
+
+-
+
+shared_vars_headless: Variables
 
 -
 
@@ -550,6 +625,10 @@ success_created: Successfully created<br>
 
 -
 
+success_installed: Successfully installed
+
+-
+
 success_password_changed: Your password got changed successfully!
 
 -
@@ -562,11 +641,19 @@ success_remove: Successfully removed
 
 -
 
+success_reset_headless: Successfully restored the default headless template!
+
+-
+
 success_saved: Saved
 
 -
 
 success_update: Successfully updated Automad!
+
+-
+
+success_packages_updated: Successfully updated all packages
 
 -
 
@@ -626,7 +713,7 @@ However, on some systems that directory has to be cleaned up manually.
 
 -
 
-sys_debug: Debug Mode
+sys_debug: Debug
 
 -
 
@@ -636,6 +723,25 @@ sys_debug_enable: Debug Mode
 
 sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
 Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
+
+-
+
+sys_headless: Headless
+
+-
+
+sys_headless_edit_info: The structure of the returned JSON data is controlled by a template. 
+You can edit that template using Automad's template language for customizing fields 
+by using variables, objects and control structures.
+
+-
+
+sys_headless_enable: Headless Mode
+-
+
+sys_headless_info: Activating the headless mode turns Automad into a content management system without a presentation layer 
+that focuses entirely on content creation. While the Dashboard can still be used to manage content, all data and files are made 
+accessible via a read-only JSON API.
 
 -
 

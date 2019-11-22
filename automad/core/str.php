@@ -94,6 +94,30 @@ class Str {
 
 	
 	/**
+	 * 	Escapes a string to be used safely in a JSON string.
+	 * 
+	 *	@param string $str
+	 *	@return string The escaped string
+	 */
+
+	public static function escape($str) {
+
+		// Escape values to be used in headless mode.
+		// The json_encode() function is used to create a valid JSON string
+		// with only one temporary key. 
+		// After getting that JSON string, the key, the brackets and quotes
+		// are stripped to get the escaped version of $str.
+		$str = preg_replace('/[\r\n]+/', '\n', trim($str));
+		$str = json_encode(array('temp' => $str), JSON_UNESCAPED_SLASHES);
+		$str = Str::stripStart($str, '{"temp":"');
+		$str = Str::stripEnd($str, '"}');
+
+		return $str;
+
+	}
+
+
+	/**
 	 *	Parse a markdown string. Optionally skip parsing in case $str is a single line string.
 	 *
 	 *	@param string $str

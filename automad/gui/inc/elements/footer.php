@@ -79,22 +79,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					required 
 					/>
 				</div>
-				<div class="uk-form-row">
-					<label class="uk-form-label"><?php Text::e('page_theme_template'); ?></label>
-					<?php 
-						echo $this->Html->selectTemplate(
-							$this->Themelist,
-							'subpage[theme_template]'
-						); 
-					?>
-				</div>
+				<?php if (!AM_HEADLESS_ENABLED) { ?>
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php Text::e('page_theme_template'); ?></label>
+						<?php 
+							echo $this->getHtml()->selectTemplate(
+								$this->getThemelist(),
+								'subpage[theme_template]'
+							); 
+						?>
+					</div>
+				<?php } ?>
 			</form>
 			<div class="uk-form-stacked">
 				<label class="uk-form-label">
 					<?php Text::e('page_add_location'); ?>
 				</label>
 				<div data-am-tree="#am-add-page-input">
-					<?php echo $this->Html->siteTree('', $this->collection, array(), false, false); ?>
+					<?php echo $this->getHtml()->siteTree('', $this->getAutomad()->getCollection(), array(), false, false); ?>
 				</div>
 			</div>
 			<div class="uk-modal-footer uk-text-right">

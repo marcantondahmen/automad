@@ -94,19 +94,19 @@ class Content {
 		// Validation of $_POST. URL, title and template must exist and != false.
 		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
 	
-			if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title'] && isset($_POST['subpage']['theme_template']) && $_POST['subpage']['theme_template']) {
+			if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title']) {
 		
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
 	
-					Core\Debug::ajax($output, 'page', $Page->url);
-					Core\Debug::ajax($output, 'new subpage', $_POST['subpage']);
+					Core\Debug::log($Page->url, 'page');
+					Core\Debug::log($_POST['subpage'], 'new subpage');
 	
 					// The new page's properties.
 					$title = $_POST['subpage']['title'];
-					$theme_template = $_POST['subpage']['theme_template'];
-					$theme = dirname($theme_template);
-					$template = basename($theme_template);
+					$themeTemplate = $this->getTemplateNameFromArray($_POST['subpage'], 'theme_template');
+					$theme = dirname($themeTemplate);
+					$template = basename($themeTemplate);
 					
 					// Save new subpage below the current page's path.		
 					$subdir = Core\Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
@@ -215,8 +215,8 @@ class Content {
 		
 			$file = $directory . $options['filename'];
 		
-			Core\Debug::ajax($output, 'file', $file);
-			Core\Debug::ajax($output, 'options', $options);
+			Core\Debug::log($file, 'file');
+			Core\Debug::log($options, 'options');
 				
 			if (file_exists($file)) {
 				
@@ -316,7 +316,7 @@ class Content {
 
 				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
 				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
-				Core\Debug::ajax($output, 'deleted', $Page->url);
+				Core\Debug::log($Page->url, 'deleted');
 
 				$this->clearCache();
 
@@ -582,7 +582,31 @@ class Content {
 		
 	}
 	
-	
+
+	/**
+	 * 	Get the theme/template file from posted data or return a default template name
+	 * 
+	 * 	@param array $array
+	 * 	@param string $key
+	 * 	@return string The template filename
+	 */
+
+	private function getTemplateNameFromArray($array = false, $key = false) {
+
+		$template = 'data.php';
+
+		if (is_array($array) && $key) {
+			if (!empty($array[$key])) {
+				$template = $array[$key];
+			}
+		}
+		
+		Core\Debug::log($template, 'Template');
+		return $template;
+
+	}
+
+
 	/**
 	 *	Handle AJAX request for editing a data variable in-page context.   
 	 *          
@@ -610,8 +634,8 @@ class Content {
 					// Merge and save data.
 					$data = array_merge(Core\Parse::textFile($this->getPageFilePath($Page)), $_POST['data']);
 					FileSystem::writeData($data, $this->getPageFilePath($Page));
-					Core\Debug::ajax($output, 'saved data', $data);
-					Core\Debug::ajax($output, 'data file', $this->getPageFilePath($Page));
+					Core\Debug::log($data, 'saved data');
+					Core\Debug::log($this->getPageFilePath($Page), 'data file');
 					
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
 					if (!empty($_POST['data'][AM_KEY_TITLE]) && $Page->url != '/') {
@@ -624,7 +648,7 @@ class Content {
 							$_POST['data'][AM_KEY_TITLE]
 						);
 						
-						Core\Debug::ajax($output, 'renamed page', $newPagePath);
+						Core\Debug::log($newPagePath, 'renamed page');
 						
 					}
 					
@@ -725,8 +749,8 @@ class Content {
 						// Move page
 						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);	
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
-						Core\Debug::ajax($output, 'page', $Page->path);
-						Core\Debug::ajax($output, 'destination', $dest->path);
+						Core\Debug::log($Page->path, 'page');
+						Core\Debug::log($dest->path, 'destination');
 						
 						$this->clearCache();
 		
@@ -822,12 +846,13 @@ class Content {
 	
 					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
 					// That information has to be parsed first and "subdivided".
+					$themeTemplate = $this->getTemplateNameFromArray($_POST, 'theme_template');
 
 					// Get correct theme name.
 					// If the theme is not set and there is no slash passed within 'theme_template', the resulting dirname is just a dot.
 					// In that case, $data[AM_KEY_THEME] gets removed (no theme - use site theme). 
-					if (dirname($_POST['theme_template']) != '.') {
-						$data[AM_KEY_THEME] = dirname($_POST['theme_template']);
+					if (dirname($themeTemplate) != '.') {
+						$data[AM_KEY_THEME] = dirname($themeTemplate);
 					} else {
 						unset($data[AM_KEY_THEME]);
 					}
@@ -836,7 +861,7 @@ class Content {
 					unlink($this->getPageFilePath($Page));
 
 					// Build the path of the data file by appending the basename of 'theme_template' to $Page->path.
-					$newTemplate = Core\Str::stripEnd(basename($_POST['theme_template']), '.php');
+					$newTemplate = Core\Str::stripEnd(basename($themeTemplate), '.php');
 					$newPageFile = FileSystem::fullPagePath($Page->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
 					
 					// Save new file within current directory, even when the prefix/title changed. 
@@ -926,8 +951,8 @@ class Content {
 			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 			$this->clearCache();
 			
-			if ($data[AM_KEY_THEME] != $this->Automad->Shared->get(AM_KEY_THEME)) {
-				$output['redirect'] = '?context=edit_shared';
+			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $this->Automad->Shared->get(AM_KEY_THEME)) {
+				$output['reload'] = true;
 			} else {
 				$output['success'] = Text::get('success_saved');
 			}
@@ -950,7 +975,7 @@ class Content {
 	public function upload() {
 		
 		$output = array();
-		Core\Debug::ajax($output, 'files', $_POST + $_FILES);
+		Core\Debug::log($_POST + $_FILES, 'files');
 
 		// Set path.
 		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.

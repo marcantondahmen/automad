@@ -59,16 +59,16 @@ $output = array();
 if (isset($_POST['data'])) {
 
 	// Save changes.
-	$output = $this->Content->saveSharedData($_POST['data']);
+	$output = $this->getContent()->saveSharedData($_POST['data']);
 			
 } else {
 	
 	// Get shared data from Shared object.
-	$data = $this->Automad->Shared->data;
+	$data = $this->getAutomad()->Shared->data;
 	
 	// Get themes.
-	$themes = $this->Themelist->getThemes();
-	$mainTheme = $this->Themelist->getThemeByKey($this->Automad->Shared->get(AM_KEY_THEME));
+	$themes = $this->getThemelist()->getThemes();
+	$mainTheme = $this->getThemelist()->getThemeByKey($this->getAutomad()->Shared->get(AM_KEY_THEME));
 	
 	// Start buffering the HTML.
 	ob_start();
@@ -93,219 +93,253 @@ if (isset($_POST['data'])) {
 		class="uk-accordion" 
 		data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
 		>
-			<!-- Theme -->
-			<div class="uk-accordion-title">
-				<?php Text::e('shared_theme'); ?>
-			</div>
-			<div class="uk-accordion-content">
-				<div id="am-apply-theme-modal" class="uk-modal">
-					<div class="uk-modal-dialog">
-						<?php Text::e('shared_theme_apply'); ?>
-						<div class="uk-modal-footer uk-text-right">
-							<button 
-							class="uk-modal-close uk-button"
-							>
-								<i class="uk-icon-close"></i>&nbsp;
-								<?php Text::e('btn_close'); ?>
-							</button>
-							<button 
-							class="uk-modal-close uk-button uk-button-success" 
-							type="button" 
-							data-am-submit="shared_data"
-							>
-								<i class="uk-icon-check"></i>&nbsp;
-								<?php Text::e('btn_apply_reload'); ?>
-							</button>
-						</div>
+
+			<?php if (!AM_HEADLESS_ENABLED) { ?>
+
+				<!-- Theme -->
+				<?php if (!$mainTheme) { ?> 
+					<!-- No theme warning -->
+					<div class="uk-alert uk-alert-danger uk-margin-large-top">
+						<?php Text::e('error_no_theme'); ?><br />
 					</div>
-				</div>			
-				<ul 
-				class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
-				data-uk-grid-match="{target:'.uk-panel'}" 
-				data-uk-grid-margin
-				>
-					<?php 
+				<?php } ?>
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_theme'); ?>
+				</div>
+				<div class="uk-accordion-content">
+					<div id="am-apply-theme-modal" class="uk-modal">
+						<div class="uk-modal-dialog">
+							<?php Text::e('shared_theme_apply'); ?>
+							<div class="uk-modal-footer uk-text-right">
+								<button 
+								class="uk-modal-close uk-button"
+								>
+									<i class="uk-icon-close"></i>&nbsp;
+									<?php Text::e('btn_close'); ?>
+								</button>
+								<button 
+								class="uk-modal-close uk-button uk-button-success" 
+								type="button" 
+								data-am-submit="shared_data"
+								>
+									<i class="uk-icon-check"></i>&nbsp;
+									<?php Text::e('btn_apply_reload'); ?>
+								</button>
+							</div>
+						</div>
+					</div>			
+					<ul 
+					class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
+					data-uk-grid-match="{target:'.uk-panel'}" 
+					data-uk-grid-margin
+					>
+						<?php 
+						
+						Core\Debug::log($themes, 'themes');
+						$i = 0;
+						
+						foreach ($themes as $Theme) { 
+						
+							$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
+							$files = glob($path . '/*');
+							$id = 'am-theme-' . ++$i;
+						
+							// Set icon.
+							if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
+								$img = new Core\Image(reset($images), 320, 240, true);
+								$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
+							} else {
+								$icon = '<div class="am-panel-icon"><span><i class="uk-icon-code"></i></span></div>';
+							}
 					
-					Core\Debug::ajax($output, 'themes', $themes);
-					$i = 0;
-					
-					// Select the first theme is the main theme is missing to avoid
-					// sending the form without a valid theme.
-					if (!$mainTheme) {
-						$defaultTheme = reset($themes);
-						$data[AM_KEY_THEME] = $defaultTheme->path;
+							// Check currently active theme.
+							$attrChecked = '';
+
+							if ($mainTheme) {
+								if ($Theme->path === $mainTheme->path) {
+									$attrChecked = ' checked';
+								} 
+							}
+							
+						?>
+						<li>
+							<?php if ($Theme->readme) { ?>
+							<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
+								<div class="uk-modal-dialog">
+									<div class="uk-modal-header uk-margin-remove">
+										Readme
+										<a href="#" class="uk-modal-close uk-close"></a>
+									</div>
+									<div class="am-text-readme">
+										<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
+									</div>
+									<div class="uk-modal-footer uk-text-right">
+										<button 
+										class="uk-modal-close uk-button"
+										>
+											<i class="uk-icon-close"></i>&nbsp;
+											<?php Text::e('btn_close'); ?>
+										</button>
+									</div>
+								</div>
+							</div>
+							<?php } ?>				
+							<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
+								<div class="uk-panel-teaser">
+									<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
+										<?php echo $icon; ?>	
+									<?php if ($Theme->readme) { ?></a><?php } ?>
+								</div>
+								<?php if ($Theme->version) { ?> 
+								<div class="uk-panel-badge uk-badge">
+									<?php echo $Theme->version; ?>
+								</div>	
+								<?php } ?>
+								<div class="uk-panel-title">
+									<?php echo $Theme->name; ?>
+								</div>
+								<div class="uk-text-small uk-hidden-small">
+									<?php echo $Theme->description; ?>
+								</div>
+								<?php if ($Theme->author) { ?> 
+								<div class="uk-text-small uk-hidden-small">
+									<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
+									<?php echo $Theme->author; ?>
+								</div>
+								<?php } ?>
+								<?php if ($Theme->license) { ?>
+								<div class="uk-text-small uk-hidden-small">
+									<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
+									<?php echo $Theme->license; ?>
+								</div>
+								<?php } ?>
+								<div class="am-panel-bottom">
+									<?php if ($Theme->readme) { ?>
+									<a 
+									href="#<?php echo $id . '-modal' ?>"
+									class="uk-icon-button uk-icon-file-text-o"
+									title="<?php Text::e('btn_readme'); ?>"
+									data-uk-tooltip
+									data-uk-modal
+									>
+									</a>
+									<?php } ?>
+									<label 
+									class="am-toggle-checkbox am-panel-bottom-right" 
+									data-am-toggle="#<?php echo $id; ?>"
+									>
+										<input 
+										type="radio" 
+										name="data[<?php echo AM_KEY_THEME; ?>]" 
+										value="<?php echo $Theme->path; ?>" 
+										data-am-modal-on-change="#am-apply-theme-modal"
+										<?php echo $attrChecked; ?> 
+										/>
+									</label>
+								</div>
+							</div>
+						</li>		
+						<?php } ?> 	
+					</ul>	
+					<a 
+					href="?context=packages" 
+					class="uk-button uk-button-success uk-margin-top"
+					>
+						<i class="uk-icon-download"></i>&nbsp;
+						<?php Text::e('btn_get_themes'); ?>
+					</a>
+				</div>
+				<!-- Variables -->
+				<?php 
+				
+					if ($mainTheme) {
+						$keysInMainTheme = $this->getKeys()->inTheme($mainTheme);
+					} else {
+						$keysInMainTheme = array();
 					}
 					
-					foreach ($themes as $Theme) { 
+					$keysInOtherThemes = array_diff(
+						$this->getKeys()->inAllTemplates(), 
+						$keysInMainTheme
+					); 
 					
-						$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
-						$files = glob($path . '/*');
-						$id = 'am-theme-' . ++$i;
-					
-						// Set icon.
-						if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
-							$img = new Core\Image(reset($images), 320, 240, true);
-							$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
-						} else {
-							$icon = '<div class="am-panel-icon"><span><i class="uk-icon-code"></i></span></div>';
-						}
-				
-						// Check currently active theme.
-						if ($Theme->path === $data[AM_KEY_THEME]) {
-							$attrChecked = ' checked';
-						} else {
-							$attrChecked = '';
-						}
-				
+				?>
+				<!-- Shared variables in main theme -->
+				<?php if ($keysInMainTheme) { ?>
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+						echo $this->getHtml()->formGroup(
+							$keysInMainTheme, 
+							$data,
+							false,
+							$mainTheme
+						); 
 					?>
-					<li>
-						<?php if ($Theme->readme) { ?>
-						<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
-							<div class="uk-modal-dialog">
-								<div class="uk-modal-header uk-margin-remove">
-									Readme
-									<a href="#" class="uk-modal-close uk-close"></a>
-								</div>
-								<div class="am-text-readme">
-									<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
-								</div>
-								<div class="uk-modal-footer uk-text-right">
-									<button 
-									class="uk-modal-close uk-button"
-									>
-										<i class="uk-icon-close"></i>&nbsp;
-										<?php Text::e('btn_close'); ?>
-									</button>
-								</div>
-							</div>
-						</div>
-						<?php } ?>				
-						<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
-							<div class="uk-panel-teaser">
-								<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
-									<?php echo $icon; ?>	
-								<?php if ($Theme->readme) { ?></a><?php } ?>
-							</div>
-							<?php if ($Theme->version) { ?> 
-							<div class="uk-panel-badge uk-badge">
-								<?php echo $Theme->version; ?>
-							</div>	
-							<?php } ?>
-							<div class="uk-panel-title">
-								<?php echo $Theme->name; ?>
-							</div>
-							<div class="uk-text-small uk-text-muted uk-hidden-small">
-								<?php echo $Theme->description; ?>
-							</div>
-							<?php if ($Theme->author) { ?> 
-							<div class="uk-text-small uk-text-muted uk-hidden-small">
-								<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
-								<?php echo $Theme->author; ?>
-							</div>
-							<?php } ?>
-							<?php if ($Theme->license) { ?>
-							<div class="uk-text-small uk-text-muted uk-hidden-small">
-								<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
-								<?php echo $Theme->license; ?>
-							</div>
-							<?php } ?>
-							<div class="am-panel-bottom">
-								<?php if ($Theme->readme) { ?>
-								<a 
-								href="#<?php echo $id . '-modal' ?>"
-								class="uk-icon-button uk-icon-file-text-o"
-								title="<?php Text::e('btn_readme'); ?>"
-								data-uk-tooltip
-								data-uk-modal
-								>
-								</a>
-								<?php } ?>
-								<label 
-								class="am-toggle-checkbox am-panel-bottom-right" 
-								data-am-toggle="#<?php echo $id; ?>"
-								>
-									<input 
-									type="radio" 
-									name="data[<?php echo AM_KEY_THEME; ?>]" 
-									value="<?php echo $Theme->path; ?>" 
-									data-am-modal-on-change="#am-apply-theme-modal"
-									<?php echo $attrChecked; ?> 
-									/>
-								</label>
-							</div>
-						</div>
-					</li>		
-					<?php } ?> 	
-				</ul>	
-				<a 
-				href="https://packages.automad.org" 
-				class="uk-button uk-button-success uk-margin-top"
-				target="_blank"
-				>
-					<i class="uk-icon-download"></i>&nbsp;
-					<?php Text::e('btn_get_themes'); ?>
-				</a>
-			</div>
-			
-			<!-- Variables -->
-			<?php 
-			
-				if ($mainTheme) {
-					$keysInMainTheme = $this->Keys->inTheme($mainTheme);
-				} else {
-					$keysInMainTheme = array();
-				}
+				</div>
+				<?php } ?>
+				<!-- Shared variables in other themes -->
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+						echo $this->getHtml()->formGroup(
+							$keysInOtherThemes, 
+							$data
+						); 
+					?>
+				</div>
 				
-				$keysInOtherThemes = array_diff(
-					$this->Keys->inAllTemplates(), 
-					$keysInMainTheme
-				); 
+				<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
 				
-			?>
-			<!-- Shared variables in main theme -->
-			<?php if ($keysInMainTheme) { ?>
-			<div class="uk-accordion-title">
-				<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
-				<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
-			</div>
-			<div class="uk-accordion-content">
+			<?php } else { ?>
+
+				<!-- Headless Variables -->
 				<?php 
-					echo $this->Html->formGroup(
-						$keysInMainTheme, 
-						$data,
-						false,
-						$mainTheme
-					); 
+				
+					$keysInHeadless = $this->getKeys()->inTemplate(Headless::getTemplate()); 
+				
+					// Also submit the saved theme form the non-headless mode.
+					// The value gets stored in a hidden input field.
+					echo $this->getHtml()->formFieldHidden(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
+				
 				?>
-			</div>
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_headless'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($keysInHeadless); ?></span>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+						echo $this->getHtml()->formGroup(
+							$keysInHeadless, 
+							$data,
+							false,
+							false
+						); 
+					?>
+				</div>
+				
+				<?php $unusedDataKeys = array_diff(array_keys($data), $keysInHeadless, $this->getKeys()->reserved); ?>
+
 			<?php } ?>
-			<!-- Shared variables in other themes -->
+			
+			<!-- Vars in data but not in any template -->
 			<div class="uk-accordion-title">
-				<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
-				<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
+				<?php Text::e('page_vars_unused'); ?>&nbsp;
+				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
-					echo $this->Html->formGroup(
-						$keysInOtherThemes, 
-						$data
-					); 
-				?>
-			</div>
-			<!-- Unused shared variables -->
-			<div class="uk-accordion-title">
-				<?php Text::e('shared_vars_unused'); ?>&nbsp;
-				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>
-			</div>
-			<div class="uk-accordion-content">
-				<?php 
-				
-				$unusedDataKeys = array_diff(array_keys($data), $this->Keys->inAllTemplates(), $this->Keys->reserved);
 				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo $this->Html->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
-				
+				echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
 				?>
 			</div>
+
 		</div>
 		
 	<?php	
@@ -319,7 +353,7 @@ if (isset($_POST['data'])) {
 }
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

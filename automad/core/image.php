@@ -370,7 +370,7 @@ class Image {
 		
 		$file = AM_DIR_CACHE_IMAGES . '/' . AM_FILE_PREFIX_CACHE . '_' . $hash . '.' . $extension;
 		
-		Debug::log($hashData, 'Hash data for "' . $hash . '"');
+		Debug::log($hashData, 'Hash data for ' . $hash);
 		
 		return $file;
 		

@@ -95,6 +95,20 @@ if (!empty($_POST['type'])) {
 		
 	}
 
+	// Headless
+	if ($type == 'headless') {
+		
+		if (isset($_POST['headless'])) {
+			$config['AM_HEADLESS_ENABLED'] = true;
+		} else {
+			$config['AM_HEADLESS_ENABLED'] = false;
+		}
+
+		// Reload page to update the dashboard.
+		$output['reload'] = true;
+		
+	}
+
 	// Debugging
 	if ($type == 'debug') {
 		
@@ -115,7 +129,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 	$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 	FileSystem::write(AM_CONFIG, $json);
 	$output['success'] = Text::get('success_config_update');
-	Core\Debug::ajax($output, 'config', $config);
+	Core\Debug::log($config, 'config');
 
 } else {
 
@@ -124,7 +138,7 @@ if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(
 }
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>

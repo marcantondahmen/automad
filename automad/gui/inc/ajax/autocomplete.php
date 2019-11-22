@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo $this->Content->getAutoCompleteJSON();
+echo $this->getContent()->getAutoCompleteJSON();
 
 
 ?>

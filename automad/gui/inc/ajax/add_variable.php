@@ -44,7 +44,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 if (!empty($_POST['name'])) {
 
-	echo $this->Html->formField($_POST['name'], '', true);
+	echo $this->getHtml()->formField($_POST['name'], '', true);
 	
 }
 

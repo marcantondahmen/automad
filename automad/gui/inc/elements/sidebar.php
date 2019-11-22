@@ -54,22 +54,24 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>"
 						class="am-sidebar-logo"
 						>
-							<?php include AM_BASE_DIR . '/automad/gui/svg/logo.svg'; ?>
+							<?php echo Logo::get(); ?>
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
-						<?php echo $this->Html->searchField(Text::get('search_placeholder')); ?>
+						<?php echo $this->getHtml()->searchField(Text::get('search_placeholder')); ?>
 					</div>
 					<ul class="uk-nav uk-nav-side uk-margin-small-top">
 						<li class="uk-nav-header">
 							<?php Text::e('sidebar_header_global'); ?>
 						</li>
-						<li>
-							<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
-								<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
-								<?php echo $this->sitename; ?>
-							</a>
-						</li>
+						<?php if (!AM_HEADLESS_ENABLED) { ?>
+							<li>
+								<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
+									<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
+									<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
+								</a>
+							</li>
+						<?php } ?>
 						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
 							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 								<i class="uk-icon-desktop uk-icon-justify"></i>&nbsp;
@@ -88,10 +90,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 								<?php Text::e('shared_title'); ?>
 							</a>
 						</li>
-						<li>
-							<a href="https://packages.automad.org" target="_blank">
+						<li<?php if (Core\Parse::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
+							<a href="?context=packages">
 								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
-								<?php Text::e('btn_get_packages'); ?>
+								<?php Text::e('packages_title'); ?>
 							</a>
 						</li>
 						<li class="uk-nav-divider"></li>
@@ -100,12 +102,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					
 						$header = 	Text::get('sidebar_header_pages') . 
 							  		'&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
-							  		count($this->collection) . 
+							  		count($this->getAutomad()->getCollection()) . 
 							  		'</span>';
 									
-						echo $this->Html->siteTree(
+						echo $this->getHtml()->siteTree(
 							'', 
-							$this->collection, 
+							$this->getAutomad()->getCollection(), 
 							array('context' => 'edit_page'), 
 							false, 
 							$header

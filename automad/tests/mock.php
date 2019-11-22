@@ -27,6 +27,7 @@ class Mock extends TestCase {
 			array(
 				'title' => 'Test',
 				'url' => '/',
+				':path' => '/',
 				':origUrl' => '/',
 				'theme' => '../automad/tests/templates',
 				':template' => $template,

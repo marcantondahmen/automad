@@ -150,7 +150,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 }
 
 
-echo json_encode($output);
+$this->jsonOutput($output);
 
 
 ?>
