@@ -190,7 +190,7 @@ class Extension {
 		
 		foreach (array('.css', '.js') as $type) {
 			
-			foreach (glob($path . '/*' . $type) as $file) {
+			foreach (FileSystem::glob($path . '/*' . $type) as $file) {
 				
 				// Only add the non-minified version, if no minified version exists.
 				if (!file_exists(str_replace($type, '.min' . $type, $file))) {

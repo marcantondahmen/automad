@@ -387,7 +387,7 @@ class Html {
 			
 			// Build file grid with up to 6 images.
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
-			$files = glob($path . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+			$files = FileSystem::glob($path . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 			
 			if (!empty($files)) {
 				

@@ -141,7 +141,7 @@ if (isset($_POST['data'])) {
 						foreach ($themes as $Theme) { 
 						
 							$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
-							$files = glob($path . '/*');
+							$files = FileSystem::glob($path . '/*');
 							$id = 'am-theme-' . ++$i;
 						
 							// Set icon.

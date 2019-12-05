@@ -113,6 +113,29 @@ class FileSystem {
 	
 
 	/**
+	 *	A wrapper for PHP's built-in glob function. 
+	 *	This method always returns an array, even though glob() returns false 
+	 *	on some systems instead of empty arrays.
+	 *
+	 * 	@param string $pattern
+	 * 	@param integer $flags
+	 * 	@return array The list of matching files
+	 */
+
+	public static function glob($pattern, $flags = 0) {
+
+		$files = glob($pattern, $flags);
+
+		if (!$files) {
+			return array();
+		}
+
+		return $files;
+
+	}
+
+
+	/**
 	 *	Tests if a string is a file name with an allowed file extension.
 	 *
 	 *	Basically a possibly existing file extension is checked against the array of allowed file extensions.

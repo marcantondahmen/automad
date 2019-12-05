@@ -81,7 +81,7 @@ class FileSystem extends Core\FileSystem {
 		if ($suffix) {
 			
 			$path = self::fullPagePath($path);
-			$files = glob($path . '*.' . AM_FILE_EXT_DATA);
+			$files = FileSystem::glob($path . '*.' . AM_FILE_EXT_DATA);
 			
 			if (!empty($files)) {
 				
@@ -111,7 +111,7 @@ class FileSystem extends Core\FileSystem {
 		$dest = self::fullPagePath($dest);
 		
 		// Get files in directory to be copied.
-		$files = glob($source . '*');
+		$files = FileSystem::glob($source . '*');
 		$files = array_filter($files, 'is_file');
 		
 		// Create directoy and copy files.
@@ -264,8 +264,8 @@ class FileSystem extends Core\FileSystem {
 			
 				// Collect items to be removed.
 				$cacheItems = array_merge(
-					glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
-					glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
+					FileSystem::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
+					FileSystem::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
 				);
 				
 				foreach ($cacheItems as $item) {
