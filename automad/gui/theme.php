@@ -101,14 +101,14 @@ class Theme {
 		
 		// Get readme files.
 		$readme = false;
-		$readmes = glob(dirname($themeJSON) . '/{readme,README}.{md,txt}', GLOB_BRACE);
+		$readmes = FileSystem::glob(dirname($themeJSON) . '/{readme,README}.{md,txt}', GLOB_BRACE);
 		
 		if (is_array($readmes) && !empty($readmes)) {
 			$readme = reset($readmes);
 		}
 		
 		// Get templates.
-		$templates = glob(dirname($themeJSON) . '/*.php');
+		$templates = FileSystem::glob(dirname($themeJSON) . '/*.php');
 		
 		// Remove the 'page not found' template from the array of templates. 
 		$templates = array_filter($templates, function($file) {

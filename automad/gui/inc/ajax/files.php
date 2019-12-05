@@ -79,7 +79,7 @@ $files = array();
 
 foreach (Core\Parse::allowedFileTypes() as $type) {
 	
-	if ($f = glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE)) {
+	if ($f = FileSystem::glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE)) {
 		$files = array_merge($files, $f);
 	}
 	

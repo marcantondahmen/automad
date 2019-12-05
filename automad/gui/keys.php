@@ -111,7 +111,7 @@ class Keys {
 		$arrayFiles = array();
 		
 		// Collect all directories in "/packages" recursively.
-		while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
+		while ($dirs = FileSystem::glob($dir . '/*', GLOB_ONLYDIR)) {
 			$dir .= '/*';
 			$arrayDirs = array_merge($arrayDirs, $dirs);
 		}
@@ -123,7 +123,7 @@ class Keys {
 	
 		// Collect all .php files.
 		foreach ($arrayDirs as $d) {
-			if ($f = glob($d . '/*.php')) {
+			if ($f = FileSystem::glob($d . '/*.php')) {
 				$arrayFiles = array_merge($arrayFiles, $f);
 			}
 		}

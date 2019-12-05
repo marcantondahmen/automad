@@ -376,7 +376,7 @@ class Cache {
 				// Also add the directory itself, to monitor the top level.	
 				$arrayDirs = array($dir);
 	
-				while ($dirs = glob($dir . '/*', GLOB_ONLYDIR)) {
+				while ($dirs = FileSystem::glob($dir . '/*', GLOB_ONLYDIR)) {
 					$dir .= '/*';
 					$arrayDirs = array_merge($arrayDirs, $dirs);
 				}
@@ -385,7 +385,7 @@ class Cache {
 				$arrayFiles = array();
 	
 				foreach ($arrayDirs as $d) {
-					if ($f = glob($d . '/*')) {
+					if ($f = FileSystem::glob($d . '/*')) {
 						$arrayFiles = array_merge($arrayFiles, array_filter($f, 'is_file'));
 					}
 				}

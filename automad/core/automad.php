@@ -179,7 +179,7 @@ class Automad {
 		
 		// First check, if $path contains any data files.
 		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
-		if ($files = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
+		if ($files = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
 			
 			$file = reset($files);
 			
@@ -230,7 +230,7 @@ class Automad {
 						
 			// $path gets only scanned for sub-pages, in case it contains a data file.
 			// That way it is impossible to generate pages without a parent page.
-			if ($dirs = glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR)) {
+			if ($dirs = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR)) {
 				
 				// Sort $dirs array again to be independent from glob's default behavior in case of any inconsistency.
 				sort($dirs);
@@ -350,7 +350,7 @@ class Automad {
 	private function getReservedUrls() {
 		
 		// Get all real directories.
-		foreach (glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
+		foreach (FileSystem::glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
 			$this->reservedUrls[] = '/' . basename($dir);
 		}
 		

@@ -139,9 +139,9 @@ class Dashboard {
 			
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the dashboard page.
-			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Parse::query('context') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
+			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Parse::query('context') . '.php', FileSystem::glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
 				$inc = 'context/' . Core\Parse::query('context');
-			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Parse::query('ajax') . '.php', glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
+			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Parse::query('ajax') . '.php', FileSystem::glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
 				$inc = 'ajax/' . Core\Parse::query('ajax');
 			} else {
 				$inc = 'start';

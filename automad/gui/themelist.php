@@ -100,10 +100,10 @@ class Themelist {
 		
 		$themes = array();
 
-		foreach (glob($path . '/*', GLOB_ONLYDIR) as $dir) {
+		foreach (FileSystem::glob($path . '/*', GLOB_ONLYDIR) as $dir) {
 			
 			$themeJSON = $dir . '/theme.json';
-			$templates = glob($dir . '/*.php');
+			$templates = FileSystem::glob($dir . '/*.php');
 			
 			if (is_readable($themeJSON) && is_array($templates) && $templates) {
 				

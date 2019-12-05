@@ -27,7 +27,7 @@ tag=$(git describe --tags $(git rev-list --tags --max-count=1))
 
 echo "Find latest tag across all branches: $tag"
 	
-distance=$(($(git rev-list --count $(git rev-list --tags --max-count=1)..HEAD) + 2))
+distance=$(($(git rev-list --count $(git rev-list --tags --max-count=1)..HEAD) + 1))
 echo "Distance to $tag: $distance"
 	
 # Append a plus sign followed by the number of commits ahead of the latest tag.
