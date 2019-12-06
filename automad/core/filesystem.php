@@ -136,6 +136,26 @@ class FileSystem {
 
 
 	/**
+	 *	Find files by using the glob() method and filter the resulting array by a regex pattern.
+	 *	Note that this method should basically replace the usage of GLOB_BRACE to be fully 
+	 *	compatible to systems where this constant is not defined. Instead of a glob pattern 
+	 *	like "/path/*.{jpg,png}" it is more safe to use a generic pattern like "/path/*.*" 
+	 *	filtered by a regex like "/\.(jpg|png)$/i" without using the GLOB_BRACE flag.
+	 *
+	 *	@param string $pattern
+	 *	@param string $regex
+	 *	@param integer $flags
+	 *	@return array The filtered list of matching files
+	 */
+
+	public static function globGrep($pattern, $regex, $flags = 0) {
+
+		return array_values(preg_grep($regex, self::glob($pattern, $flags)));
+
+	}
+
+
+	/**
 	 *	Tests if a string is a file name with an allowed file extension.
 	 *
 	 *	Basically a possibly existing file extension is checked against the array of allowed file extensions.

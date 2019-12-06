@@ -75,15 +75,8 @@ if (isset($_POST['delete'])) {
 
 
 // Get files for each allowed file type.
-$files = array();
+$files = FileSystem::globGrep($path . '*.*', '/\.(' . implode('|', Core\Parse::allowedFileTypes()) . ')$/i');
 
-foreach (Core\Parse::allowedFileTypes() as $type) {
-	
-	if ($f = FileSystem::glob($path . '*.{' . strtolower($type) . ',' . strtoupper($type) . '}', GLOB_BRACE)) {
-		$files = array_merge($files, $f);
-	}
-	
-}
 
 ob_start();
 
