@@ -101,7 +101,7 @@ class Theme {
 		
 		// Get readme files.
 		$readme = false;
-		$readmes = FileSystem::glob(dirname($themeJSON) . '/{readme,README}.{md,txt}', GLOB_BRACE);
+		$readmes = FileSystem::globGrep(dirname($themeJSON) . '/*.*', '/readme\.(md|txt)$/i');
 		
 		if (is_array($readmes) && !empty($readmes)) {
 			$readme = reset($readmes);
