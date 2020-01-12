@@ -233,7 +233,7 @@ class InPage {
 		
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
-		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea).+?\<\/\1\>/is', function($matches) {
+		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function($matches) {
 			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 		
