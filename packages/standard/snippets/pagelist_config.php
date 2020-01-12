@@ -5,11 +5,17 @@
 		context: @{ showPagesBelow },
 		filter: @{ ?filter }, 
 		match: '{"url": "#@{ filterPagelistByUrl }#"}',
-		search: @{ ?search },
 		sort: @{ ?sort | def('date desc') },
 		limit: @{ itemsPerPage | def(10) },
 		page: @{ ?page | def(1) }
 	} @>
-	<@ if @{ checkboxShowAllPagesInPagelist } or @{ ?search } @>
+	<@ if @{ checkboxShowAllPagesInPagelist } @>
 		<@ pagelist { type: false } @>
+	<@ end @>
+	<@ if @{ ?search } @>
+		<@ pagelist { 
+			type: false,
+			match: false,
+			search: @{ ?search }
+		} @>
 	<@ end @>
