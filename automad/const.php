@@ -105,7 +105,7 @@ Config::set('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
 Config::set('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
 Config::set('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
 Config::set('AM_DIR_GUI_INC', '/automad/gui/inc');
-Config::set('AM_DIRNAME_MAX_LEN', 30); // Max dirname length when creating/moving pages with the GUI.
+Config::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the GUI.
 
 // FILE
 Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)	
