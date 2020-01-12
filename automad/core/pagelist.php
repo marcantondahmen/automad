@@ -76,6 +76,7 @@ class Pagelist {
 							'excludeHidden' => true,
 							'filter' => false,
 							'limit' => NULL,
+							'match' => false,
 							'offset' => 0,
 							'page' => false,
 							'search' => false,
@@ -118,6 +119,13 @@ class Pagelist {
 	 */
 	
 	private $limit;
+	
+	
+	/**
+	 * 	Defines a JSON string to be used as paramter for the $Selection->match() method.
+	 */
+
+	private $match;
 	
 	
 	/**
@@ -189,6 +197,7 @@ class Pagelist {
 	 *	- excludeHidden: default true
 	 *	- filter: filter pages by tags
 	 *	- limit: limit the object's array of relevant pages
+	 *	- match: filter pages by matching one or more key/regex combinations passed as JSON string
 	 *	- offset: offset the within the array of all relevant pages
 	 *	- page: false (the current page in the pagination - to be used with the limit parameter)
 	 *	- search: filter pages by search string
@@ -280,6 +289,7 @@ class Pagelist {
 		if ($this->type !== 'breadcrumbs') {
 			$Selection->filterByTemplate($this->template);
 			$Selection->filterByKeywords($this->search);
+			$Selection->match(json_decode($this->match, true));
 		}
 	
 		return $Selection->getSelection($this->excludeHidden, $this->excludeCurrent);

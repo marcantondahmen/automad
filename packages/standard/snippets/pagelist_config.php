@@ -4,6 +4,7 @@
 		type: 'children', 
 		context: @{ showPagesBelow },
 		filter: @{ ?filter }, 
+		match: '{"url": "#@{ filterPagelistByUrl }#"}',
 		search: @{ ?search },
 		sort: @{ ?sort | def('date desc') },
 		limit: @{ itemsPerPage | def(10) },

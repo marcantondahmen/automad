@@ -410,6 +410,38 @@ class Selection {
 	
 	 
 	/**
+	 *	While iterating a set of variable/regex combinations in $options, all pages where
+	 *	a given variable is not matching its assigned regex are removed from the selection.
+	 *
+	 * 	@param array $options
+	 */
+
+	public function match($options) {
+
+		if (empty($options)) {
+			return false;
+		}
+
+		if (is_array($options)) {
+
+			foreach ($options as $key => $regex) {
+
+				$this->selection = array_filter(
+					$this->selection, 
+					function($Page) use ($key, $regex) {
+						return preg_match($regex, $Page->get($key));
+					}
+					
+				);
+
+			}
+
+		}
+
+	}
+
+
+	/**
 	 *	Sorts $this->selection based on a sorting options string.    
 	 *	
 	 *	The option string consists of multiple pairs of 
