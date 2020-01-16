@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 
-		<@ foreach in pagelist @>
+		<@~ foreach in pagelist @>
 			<div class="uk-block">
 				<ul class="grid-margin uk-grid uk-grid-width-small-1-2 <@ 
 				with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } 
@@ -16,7 +16,7 @@
 					<li>
 						<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
 							width: 690
-						} @>
+						} ~@>
 							<div class="uk-panel uk-panel-box">
 								<a 
 								href="@{ url }" 
@@ -30,14 +30,14 @@
 									>
 								</a>
 							</div>
-						<@ end @>
+						<@~ end @>
 					</li>
 					<li>
-						<@ if @{ textTeaser } @>
+						<@~ if @{ textTeaser } @>
 							<div class="content uk-margin-small-bottom">
 								@{ textTeaser | markdown }
 							</div>
-						<@ end @>	
+						<@ end ~@>	
 						<a href="@{ url }" class="uk-button">
 							<i class="uk-icon-share uk-icon-small"></i>
 						</a>

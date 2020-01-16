@@ -7,25 +7,25 @@
 				<div class="uk-text-muted"><@ ../../snippets/date.php @></div>
 				<@ ../../snippets/tags.php @>
 			</li>
-			<@ if @{ textTeaser } @>
+			<@~ if @{ textTeaser } @>
 				<li class="content uk-width-medium-2-3">
 					@{ textTeaser | markdown }
 				</li>
-			<@ end @>
+			<@ end ~@>
 		</ul>
 	</div>
-	<@ filelist { 
+	<@~ filelist { 
 		glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
 		sort: 'asc' 
-	} @>
-	<@ if @{ :filelistCount } @>
+	} ~@>
+	<@ if @{ :filelistCount } ~@>
 		<div class="uk-block block-full-width-small">
-			<@ if @{ checkboxSingleImageSlideshow } @>
+			<@ if @{ checkboxSingleImageSlideshow } ~@>
 				<@ ../../snippets/slideshow.php @>
-			<@ else @>
+			<@~ else ~@>
 				<@ ../../snippets/slider.php @>
-			<@ end @>
+			<@~ end @>
 		</div>
-	<@ end @>
-	<@ ../../snippets/text_columns.php @>
+	<@~ end @>
+	<@~ ../../snippets/text_columns.php @>
 	

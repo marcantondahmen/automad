@@ -7,17 +7,17 @@
 				<@ ../../snippets/date.php @>
 				<@ ../../snippets/tags.php @>
 			</div>
-			<@ if @{ textTeaser } @>
+			<@ if @{ textTeaser } ~@>
 				<div class="content uk-block">
 					@{ textTeaser | markdown }
 				</div>
-			<@ end @>
+			<@~ end @>
 		</li>
-		<@ filelist { 
+		<@~ filelist { 
 			glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
 			sort: 'asc' 
-		} @>
-		<@ if @{ :filelistCount } @>
+		} ~@>
+		<@ if @{ :filelistCount } ~@>
 			<li class="uk-block">
 				<div class="uk-panel uk-panel-box">	
 					<div class="uk-panel-teaser">
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 			</li>
-		<@ end @>
+		<@~ end @>
 	</ul>
 	<@ ../../snippets/text_columns.php @>
 	

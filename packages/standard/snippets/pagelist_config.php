@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 	
-	<@ newPagelist { 
+	<@~ newPagelist { 
 		type: 'children', 
 		context: @{ showPagesBelow },
 		filter: @{ ?filter }, 
@@ -8,14 +8,14 @@
 		sort: @{ ?sort | def('date desc') },
 		limit: @{ itemsPerPage | def(10) },
 		page: @{ ?page | def(1) }
-	} @>
+	} ~@>
 	<@ if @{ checkboxShowAllPagesInPagelist } @>
-		<@ pagelist { type: false } @>
+		<@~ pagelist { type: false } ~@>
 	<@ end @>
-	<@ if @{ ?search } @>
+	<@~ if @{ ?search } ~@>
 		<@ pagelist { 
 			type: false,
 			match: false,
 			search: @{ ?search }
 		} @>
-	<@ end @>
+	<@~ end ~@>

@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>	
-	<@ standard/mail {
+	<@~ standard/mail {
 		to: @{ email },
 		success: '<div class="uk-margin-bottom">
 					@{ notificationMailSuccess |
@@ -13,7 +13,7 @@
 						markdown
 					}
 				</div>'
-	} @>
+	} ~@>
 	<form class="uk-form" action="@{ url }" method="post">
 		<input type="text" name="human" value="" />		
 		<div class="uk-form-row">

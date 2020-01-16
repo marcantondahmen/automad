@@ -12,7 +12,7 @@
 				">
 					<@ with @{ imageTeaser | def('*.jpg, *.jpeg, *.png, *.gif') } { 
 						width: 430 
-					} @>
+					} ~@>
 						<img 
 						class="uk-margin-small-bottom"
 						src="@{ :fileResized }" 
@@ -20,7 +20,7 @@
 						width="@{ :widthResized }" 
 						height="@{ :heightResized }" 
 						/>		
-					<@ end @>
+					<@~ end @>
 					<div class="uk-panel-title">
 						@{ title }
 					</div>
@@ -29,9 +29,9 @@
 					</span>
 				</a>
 			</li>
-		<@ else @>
+		<@~ else @>
 			<li class="uk-push-1-3">
 				<h2>@{ notificationNoSearchResults | def('No pages found.')}</h2>
 			</li>
-		<@ end @>
+		<@~ end @>
 	</ul>	
