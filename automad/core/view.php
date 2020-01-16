@@ -531,6 +531,9 @@ class View {
 
 	public function interpret($str, $directory) {
 	
+		// Strip whitespace.
+		$str = $this->stripWhitespace($str);
+
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
 		
@@ -996,7 +999,23 @@ class View {
 		return $str;
 				
 	}
+
 	
+	/**
+	 *	Strip whitespace before or after delimiters when using "<@~" or "~@>".
+	 *
+	 * 	@param string $str
+	 * 	@return string The processed string
+	 */
+
+	private function stripWhitespace($str) {
+
+		$str = preg_replace('/\s*(' . preg_quote(AM_DEL_STATEMENT_OPEN) . ')~/is', '$1', $str);
+		$str = preg_replace('/~(' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
+		return $str;
+
+	}
+
 	
 	/**
 	 *	Obfuscate all stand-alone eMail addresses matched in $str. 
