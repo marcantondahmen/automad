@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2019 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The InPage class provides all methods related to edit content directly in the page. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2017-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2017-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

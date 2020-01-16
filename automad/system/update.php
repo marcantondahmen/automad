@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2019 by Marc Anton Dahmen
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Update class handles the process of updating Automad using the dashboard. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2017-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2017-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

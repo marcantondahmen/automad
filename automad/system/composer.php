@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2019 by Marc Anton Dahmen
+ *	Copyright (c) 2019-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Composer class is a wrapper for setting up Composer and executing commands. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2019 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2019-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 

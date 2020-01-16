@@ -3,7 +3,7 @@
 
 # release.sh
 # 
-# (c) 2017-2019 by Marc Anton Dahmen 
+# (c) 2017-2020 by Marc Anton Dahmen 
 #
 # This script handles the release process for new Automad versions
 # by doing the following:
