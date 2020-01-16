@@ -318,7 +318,7 @@ class Regex {
 		
 		return	'\|(' . 
 				// Function name.
-				'\s*(' . $function . '[\w][\w\-]*)\s*' .
+				'\s*(' . $function . '[\w][\w\/\-]*)\s*' .
 				// Parameters. 
 				'(?:\(' . 
 				'(' . $parameters . self::csv($isVariableSubpattern) . ')?' . 
