@@ -118,7 +118,7 @@ class Selection {
 	
 	public function excludePage($url) {
 		
-		if (array_key_exists($url, $this->selection)) {
+		if ($url && array_key_exists($url, $this->selection)) {
 			unset($this->selection[$url]);
 		} 
 		
