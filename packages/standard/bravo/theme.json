@@ -2,7 +2,7 @@
 	"name": "Bravo",
 	"description": "Another elegant Automad standard theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.3.2",
+	"version": "1.4.0",
 	"license": "MIT",
 	"tooltips": {
 		"appleTouchIcon": "The image to be used as the Apple touch icon",
