@@ -8,23 +8,23 @@
 					<div class="uk-text-muted"><@ ../../snippets/date.php @></div>
 					<@ ../../snippets/tags.php @>
 				</li>
-				<@ if @{ textTeaser } @>
+				<@ if @{ textTeaser } ~@>
 					<li class="content">
 						@{ textTeaser | markdown }
 					</li>
-				<@ end @>
+				<@~ end @>
 			</ul>
 		</li>
 		<li class="uk-width-large-2-3">
-			<@ filelist { 
+			<@~ filelist { 
 				glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
 				sort: 'asc' 
-			} @>
-			<@ if @{ :filelistCount } @>
+			} ~@>
+			<@ if @{ :filelistCount } ~@>
 				<div class="uk-block block-full-width-small">
 					<@ ../../snippets/slideshow_portrait.php @>
 				</div>
-			<@ end @>
+			<@~ end @>
 			<div class="content uk-block">
 				@{ text | markdown }
 			</div>

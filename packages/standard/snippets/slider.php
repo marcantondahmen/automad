@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 	
-		<@ if @{ :filelistCount } > 1 @>
+		<@~ if @{ :filelistCount } > 1 @>
 			<div 
 			class="uk-slidenav-position" 
 			data-uk-slider="autoplay:true,autoplayInterval:5000,center:false,infinite:true"
@@ -14,8 +14,8 @@
 							To create a responsive slider, on large devices, the classes ".uk-width-*-10" are being used,
 							while on small devices, ".uk-width-*-6" are used.
 							#>
-							<@ with @{ :fileResized } { width: 864, crop: true } @>
-								<@ with @{ :fileResized } { width: @{ :widthResized | /144 | floor | *144 }, crop: true } @>
+							<@~ with @{ :fileResized } { width: 864, crop: true } @>
+								<@~ with @{ :fileResized } { width: @{ :widthResized | /144 | floor | *144 }, crop: true } @>
 									<li class="uk-width-@{ :widthResized | /144 | floor }-6 uk-width-medium-@{ :widthResized | /144 | floor }-10">
 										<img 
 										src="@{ :fileResized }" 
@@ -24,8 +24,8 @@
 										height="@{ :heightResized }" 
 										/>
 									</li>	
-								<@ end @>
-							<@ end @>
+								<@~ end @>
+							<@~ end @>
 						<@ end @>
 					</ul>
 				</div>
@@ -40,9 +40,6 @@
 				data-uk-slider-item="next"
 				></a>
 			</div>
-		<@ else @>
-			<@ slideshow.php @>
-		<@ end @>
-	
-	
-		
+		<@~ else @>
+			<@~ slideshow.php @>
+		<@~ end @>

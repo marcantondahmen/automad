@@ -1,13 +1,13 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 	
-	<@ if @{ tags } @>
+	<@~ if @{ tags } ~@>
 		<ul class="uk-subnav">
 			<@ foreach in tags @>
-				<@ if @{ :i } > 1 @>
+				<@~ if @{ :i } > 1 @>
 					<li class="uk-disabled">
 						<span>,&nbsp;</span>
 					</li>
-				<@ end @>
+				<@~ end @>
 				<li>
 					<a href="@{ urlTagLinkTarget | def(@{ :parent }) }?filter=@{ :tag }">
 						@{ :tag }
@@ -15,5 +15,5 @@
 				</li>
 			<@ end @>	
 		</ul>
-	<@ end @>
+	<@~ end ~@>
 	

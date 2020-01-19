@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2019 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	it can be returned once by $this->getSelection().
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2013-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -118,7 +118,7 @@ class Selection {
 	
 	public function excludePage($url) {
 		
-		if (array_key_exists($url, $this->selection)) {
+		if ($url && array_key_exists($url, $this->selection)) {
 			unset($this->selection[$url]);
 		} 
 		
@@ -409,6 +409,38 @@ class Selection {
 	}
 	
 	 
+	/**
+	 *	While iterating a set of variable/regex combinations in $options, all pages where
+	 *	a given variable is not matching its assigned regex are removed from the selection.
+	 *
+	 * 	@param array $options
+	 */
+
+	public function match($options) {
+
+		if (empty($options)) {
+			return false;
+		}
+
+		if (is_array($options)) {
+
+			foreach ($options as $key => $regex) {
+
+				$this->selection = array_filter(
+					$this->selection, 
+					function($Page) use ($key, $regex) {
+						return preg_match($regex, $Page->get($key));
+					}
+					
+				);
+
+			}
+
+		}
+
+	}
+
+
 	/**
 	 *	Sorts $this->selection based on a sorting options string.    
 	 *	

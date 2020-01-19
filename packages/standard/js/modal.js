@@ -1,6 +1,6 @@
 /*!
  *	Standard.modal
- * 	Copyright (c) 2018-2019 by Marc Anton Dahmen - http://marcdahmen.de - MIT license
+ * 	Copyright (c) 2018-2020 by Marc Anton Dahmen - http://marcdahmen.de - MIT license
  */
 
 +function(Standard, $, UIkit) {

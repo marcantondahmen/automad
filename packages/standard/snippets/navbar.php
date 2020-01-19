@@ -17,13 +17,13 @@
 			    <div class="uk-navbar-flip">
 			        <ul class="uk-navbar-nav uk-visible-large">
 						<@ newPagelist { excludeHidden: false } @>
-						<@ foreach in pagelist @>
-							<@ if @{ checkboxShowInNavbar } @>
+						<@ foreach in pagelist ~@>
+							<@ if @{ checkboxShowInNavbar } ~@>
 							<li<@ if @{ :current } @> class="uk-active"<@ end @>>
 								<a href="@{ url }">@{ title }</a>
 							</li>
-							<@ end @>
-						<@ end @>				
+							<@~ end @>
+						<@~ end @>				
 			        </ul>
 					<a 
 					href="#modal-nav"
@@ -73,41 +73,41 @@
 								<# Create snippet to be used recursively #>
 								<@ snippet tree @>
 									<# Only show children/siblings in current path #>
-									<@ if @{ :currentPath } @>
+									<@~ if @{ :currentPath } @>
 										<# Only create new list in case the current context has children #>
-										<@ if @{ :pagelistCount } @>
+										<@~ if @{ :pagelistCount } @>
 											<ul class="uk-nav uk-nav-side">
-												<@ foreach in pagelist @>
-													<@ if not @{ checkboxHideInMenu } @>
+												<@~ foreach in pagelist @>
+													<@~ if not @{ checkboxHideInMenu } ~@>
 														<li<@ if @{ :current } @> class="uk-active"<@ end @>>
 															<a href="@{ url }">@{ title | stripTags }</a>
 															<# Call tree snippet recursively #>
-															<@ tree @>
+															<@~ tree ~@>
 														</li>
-													<@ end @>
-												<@ end @>
+													<@~ end @>
+												<@~ end @>
 											</ul>
-										<@ end @>
-									<@ end @>
-								<@ end @>
+										<@~ end @>
+									<@~ end @>
+								<@~ end ~@>
 								<# Create new pagelist including all children adapting to the current context. #>
-								<@ newPagelist { 
+								<@~ newPagelist { 
 									type: 'children',
 									excludeHidden: false 
-								} @>
+								} ~@>
 								<div class="uk-block">
 									<# Change context to the homepage #>
-									<@ with "/" @>
-										<@ if not @{ checkboxHideInMenu } @>
+									<@~ with "/" @>
+										<@~ if not @{ checkboxHideInMenu } ~@>
 											<ul class="uk-nav uk-nav-side">
 												<li<@ if @{ :current } @> class="uk-active"<@ end @>>
 													<a href="@{ url }">@{ title }</a>
 												</li>
 											</ul>
-										<@ end @>
+										<@~ end @>
 										<# Call recursive tree snippet #>
-										<@ tree @>	
-									<@ end @>
+										<@~ tree @>	
+									<@~ end @>
 								</div>
 							</li>
 						</ul>

@@ -5,13 +5,13 @@
 			<ul class="uk-grid grid-margin uk-grid-width-medium-1-2">
 				<li>
 					<# Show menu with pages with checked "checkboxShowInFooter". #>
-					<@ newPagelist { excludeHidden: false } @>
-					<@ foreach in pagelist @>
-						<@ if @{ checkboxShowInFooter } @>
+					<@~ newPagelist { excludeHidden: false } @>
+					<@~ foreach in pagelist @>
+						<@~ if @{ checkboxShowInFooter } @>
 							<a href="@{ url }">@{ title }</a>
 							<br />
-						<@ end @>
-					<@ end @>
+						<@~ end @>
+					<@~ end @>
 					<a href="/dashboard">Sign in</a>
 				</li>
 				<li class="uk-text-right uk-text-left-small">

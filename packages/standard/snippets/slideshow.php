@@ -11,7 +11,7 @@
 					crop: true 
 				} @>
 					<li>
-						<@ slideshow_image.php @>
+						<@~ slideshow_image.php ~@>
 					</li>
 				<@ end @>
 			</ul>

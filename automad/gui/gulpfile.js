@@ -59,6 +59,9 @@ gulp.task('automad-js', function() {
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
 			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			// Rename custom scrollbars.
+			// This has to be done accordingly within the libs-js task.
+			.pipe(replace('.mCustomScrollbar(', '.am_mCustomScrollbar('))
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
@@ -102,8 +105,15 @@ gulp.task('libs-js', function() {
 			]),
 			// Scrollbars.
 			gulp.src([
-				'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'
-			]),
+				'node_modules/jquery-mousewheel/jquery.mousewheel.js',
+				'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js'
+			])
+			// Rename plugin namespace to avoid conflicts.
+			// This has to be done accordingly for the automad.min.js file within the automad-js task.
+			.pipe(replace('pluginNS="mCustomScrollbar"', 'pluginNS="am_mCustomScrollbar"'))
+			.pipe(replace('pluginPfx="mCS"', 'pluginPfx="am_mCS"'))
+			.pipe(replace('defaultSelector=".mCustomScrollbar"', 'defaultSelector=".am_mCustomScrollbar"'))
+			.pipe(uglify(uglifyOptions)),
 			// UIkit core and components.
 			gulp.src([
 				// Core. 

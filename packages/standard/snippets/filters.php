@@ -2,38 +2,38 @@
 	
 	<div class="uk-button-dropdown" data-uk-dropdown>
 		<button class="uk-button">
-			<@ if @{ ?filter } @>
+			<@~ if @{ ?filter } ~@>
 				<i class="uk-icon-filter"></i>&nbsp;
 				@{ ?filter }
-			<@ else @>
+			<@~ else ~@>
 				@{ labelShowAll | def ('Show All') }
-			<@ end @>
+			<@~ end ~@>
 		</button>
 		<div class="uk-dropdown uk-dropdown-small uk-text-left">
 			<ul class="uk-nav uk-nav-dropdown">
 				<li>
 					<# Also reset pagination! #>
 					<a href="?<@ queryStringMerge { filter: false, page: 1 } @>">
-						<@ if not @{ ?filter } @>
+						<@ if not @{ ?filter } ~@>
 							<i class="uk-icon-circle"></i>
-						<@ else @>
+						<@~ else ~@>
 							<i class="uk-icon-circle-o"></i>
-						<@ end @>
+						<@~ end @>
 						&nbsp;@{ labelShowAll | def ('Show All') }
 					</a>
 				</li>
-				<@ foreach in filters @>
+				<@~ foreach in filters @>
 					<li>
 						<a href="?<@ queryStringMerge { filter: @{ :filter }, page: 1 } @>">
-							<@ if @{ ?filter } = @{ :filter } @>
+							<@ if @{ ?filter } = @{ :filter } ~@>
 								<i class="uk-icon-circle"></i>
-							<@ else @>
+							<@~ else ~@>
 								<i class="uk-icon-circle-o"></i>
-							<@ end @>
+							<@~ end @>
 							&nbsp;@{ :filter }
 						</a>
 					</li>
-				<@ end @>
+				<@~ end @>
 			</ul>
 		</div>
 	</div>

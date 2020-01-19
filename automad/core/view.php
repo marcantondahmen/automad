@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2019 by Marc Anton Dahmen
+ *	Copyright (c) 2013-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -58,7 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In a last step, all URLs within the generated HTML get resolved to be relative to the server's root (or absolute), before $output gets returned.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2013-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -531,6 +531,9 @@ class View {
 
 	public function interpret($str, $directory) {
 	
+		// Strip whitespace.
+		$str = $this->stripWhitespace($str);
+
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
 		
@@ -996,7 +999,23 @@ class View {
 		return $str;
 				
 	}
+
 	
+	/**
+	 *	Strip whitespace before or after delimiters when using "<@~" or "~@>".
+	 *
+	 * 	@param string $str
+	 * 	@return string The processed string
+	 */
+
+	private function stripWhitespace($str) {
+
+		$str = preg_replace('/\s*(' . preg_quote(AM_DEL_STATEMENT_OPEN) . ')~/is', '$1', $str);
+		$str = preg_replace('/~(' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
+		return $str;
+
+	}
+
 	
 	/**
 	 *	Obfuscate all stand-alone eMail addresses matched in $str. 

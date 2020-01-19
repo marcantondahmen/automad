@@ -2,7 +2,7 @@
 	"name": "Bravo",
 	"description": "Another elegant Automad standard theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.3.2",
+	"version": "1.4.0",
 	"license": "MIT",
 	"tooltips": {
 		"appleTouchIcon": "The image to be used as the Apple touch icon",
@@ -18,6 +18,7 @@
 		"date": "Set a date to show up as post or project info",
 		"email": "Your contact email address",
 		"favicon": "The icon to be used as favicon",
+		"filterPagelistByUrl": "Filters the pagelist by URLs matching a given regular expression like for example '(/portfolio|/blog)'",
 		"formatDatePost": "The format for displaying the date of a post.",
 		"formatDateProject": "The format for displaying the date of a project",
 		"imagesGallery": "One or more glob patterns to define the images showing up in the gallery",

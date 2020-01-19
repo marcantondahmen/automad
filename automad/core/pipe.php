@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2019 by Marc Anton Dahmen
+ *	Copyright (c) 2016-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Pipe class handles the chain of processes to manipulate variable values. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2019 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2016-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
@@ -66,6 +66,46 @@ class Pipe {
 										'ucwords'
 									);
 	
+
+	/**
+	 *	Call custom string function.
+	 *      
+	 * 	@param string $function
+	 * 	@param array $parameters
+	 * 	@param string $value
+	 * 	@return string $value
+	 */
+
+	private static function extension($function, $parameters, $value) {
+
+		$class = '\\' . str_replace('/', '\\', $function);
+			
+		if (!class_exists($class, false)) {
+			
+			$file = strtolower(AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $function . '/' . basename($function) . '.php');
+
+			if (is_readable($file)) {
+				require_once($file);
+			}
+			
+		}
+		
+		if (class_exists($class, false)) {
+
+			$object = new $class();
+			$method = basename($function);
+
+			if (method_exists($class, $method)) {
+				$value = call_user_func_array(array($object, $method), $parameters);
+				Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call ' . $function);
+			}
+
+		}
+
+		return $value;
+
+	}
+
 
 	/**
 	 *	Apply string function to $value.
@@ -98,6 +138,9 @@ class Pipe {
 			// In case $function is a number, call Str::shorten() method and pass $function as paramter for the max number of characters.
 			Debug::log($value, 'Shorten content to max ' . $function . ' characters');
 			$value = Str::shorten($value, $function);
+		} else {
+			// Loading custom string functions as extensions.
+			$value = self::extension($function, $parameters, $value);
 		}
 		
 		return $value;

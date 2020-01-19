@@ -6,28 +6,28 @@
 			<@ ../../snippets/date.php @>
 			<@ ../../snippets/tags.php @>
 		</li>
-		<@ if @{ textTeaser } @>
+		<@~ if @{ textTeaser } @>
 			<li class="content uk-block">
 				@{ textTeaser | markdown }
 			</li>
-		<@ end @>
+		<@ end ~@>
 	</ul>
-	<@ filelist { 
+	<@~ filelist { 
 		glob: @{ imagesSlideshow | def('*.jpg, *.jpeg, *.png, *.gif') }, 
 		sort: 'asc' 
-	} @>
-	<@ if @{ :filelistCount } @>
+	} ~@>
+	<@ if @{ :filelistCount } ~@>
 		<div class="uk-block">
 			<div class="uk-panel uk-panel-box">	
 				<div class="uk-panel-teaser">
-					<@ if @{ checkboxSingleImageSlideshow } @>
+					<@ if @{ checkboxSingleImageSlideshow } ~@>
 						<@ ../../snippets/slideshow.php @>
-					<@ else @>
+					<@~ else ~@>
 						<@ ../../snippets/slider.php @>
-					<@ end @>
+					<@~ end @>
 				</div>
 			</div>
 		</div>
-	<@ end @>
-	<@ ../../snippets/text_columns.php @>
+	<@~ end @>
+	<@~ ../../snippets/text_columns.php @>
 	
