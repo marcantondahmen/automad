@@ -90,7 +90,7 @@ class Pipe {
 			
 		}
 		
-		if (class_exists($class, false)) {
+		if (class_exists($class)) {
 
 			$object = new $class();
 			$method = basename($function);
