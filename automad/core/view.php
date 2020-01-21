@@ -354,6 +354,11 @@ class View {
 				// Get the value.
 				$value = $this->getValue($matches['varName']);
 				
+				// Resolve URLs in content before passing it to pipe functions
+				// to make sure images and files can be used correctly in custom
+				// pipe functions.
+				$value = $this->resolveUrls($value, 'relativeUrlToBase', array($this->Automad->Context->get()));
+
 				// Get pipe functions.
 				$functions = array();
 				
@@ -956,6 +961,32 @@ class View {
 	
 	
 	/**
+	 *	Resize any image in the output in case it has a specified size as query string like
+	 *	for example "/shared/image.jpg?200x200".
+	 *
+	 * 	@param string $str
+	 * 	@return string The processed string
+	 */
+
+	private function resizeImages($str) {
+
+		return preg_replace_callback('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png))\?(\d+)x(\d+)/is', function($match) {
+
+			$file = AM_BASE_DIR . $match[1];
+
+			if (is_readable($file)) {
+				$image = new Image($file, $match[2], $match[3], true);
+				return $image->file;
+			}
+
+			return $match[1];
+
+		}, $str);
+
+	}
+
+
+	/**
 	 *	Find and resolve URLs using the specified resolving method and parameters.
 	 *
 	 *	@param string $str
@@ -968,6 +999,13 @@ class View {
 		
 		$method = '\Automad\Core\Resolve::' . $method;
 		
+		// Find URLs in markdown like ![...](image.jpg?100x100).
+		$str =	preg_replace_callback('/(\!\[[^\]]*\]\()([^\)]+\.(?:jpg|jpeg|gif|png))([^\)]*\))/is', function($match) use ($method, $parameters) {
+					$parameters = array_merge(array(0 => $match[2]), $parameters);
+					$url = call_user_func_array($method, $parameters);
+					return $match[1] . $url . $match[3];
+				}, $str);
+
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
 		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
@@ -1075,6 +1113,7 @@ class View {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->obfuscateEmails($output);
+		$output = $this->resizeImages($output);
 		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 		
