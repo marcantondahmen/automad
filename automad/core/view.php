@@ -979,7 +979,7 @@ class View {
 				return $image->file;
 			}
 
-			return $match[1];
+			return $match[0];
 
 		}, $str);
 
