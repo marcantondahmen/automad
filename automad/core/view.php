@@ -961,6 +961,32 @@ class View {
 	
 	
 	/**
+	 *	Resize any image in the output in case it has a specified size as query string like
+	 *	for example "/shared/image.jpg?200x200".
+	 *
+	 * 	@param string $str
+	 * 	@return string The processed string
+	 */
+
+	private function resizeImages($str) {
+
+		return preg_replace_callback('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png))\?(\d+)x(\d+)/is', function($match) {
+
+			$file = AM_BASE_DIR . $match[1];
+
+			if (is_readable($file)) {
+				$image = new Image($file, $match[2], $match[3], true);
+				return $image->file;
+			}
+
+			return $match[1];
+
+		}, $str);
+
+	}
+
+
+	/**
 	 *	Find and resolve URLs using the specified resolving method and parameters.
 	 *
 	 *	@param string $str
@@ -1087,6 +1113,7 @@ class View {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);
 		$output = $this->obfuscateEmails($output);
+		$output = $this->resizeImages($output);
 		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 		
