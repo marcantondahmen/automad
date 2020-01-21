@@ -354,6 +354,11 @@ class View {
 				// Get the value.
 				$value = $this->getValue($matches['varName']);
 				
+				// Resolve URLs in content before passing it to pipe functions
+				// to make sure images and files can be used correctly in custom
+				// pipe functions.
+				$value = $this->resolveUrls($value, 'relativeUrlToBase', array($this->Automad->Context->get()));
+
 				// Get pipe functions.
 				$functions = array();
 				
@@ -968,6 +973,13 @@ class View {
 		
 		$method = '\Automad\Core\Resolve::' . $method;
 		
+		// Find URLs in markdown like ![...](image.jpg?100x100).
+		$str =	preg_replace_callback('/(\!\[[^\]]*\]\()([^\)]+\.(?:jpg|jpeg|gif|png))([^\)]*\))/is', function($match) use ($method, $parameters) {
+					$parameters = array_merge(array(0 => $match[2]), $parameters);
+					$url = call_user_func_array($method, $parameters);
+					return $match[1] . $url . $match[3];
+				}, $str);
+
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
 		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
