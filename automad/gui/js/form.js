@@ -384,7 +384,7 @@
 				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + '])', 
 				function() {
 				
-					var 	$form = $(this).closest('[' + da.handler + ']'),
+					var	$form = $(this).closest('[' + da.handler + ']'),
 						handler = $form.data(Automad.util.dataCamelCase(da.handler));
 					
 					$('html').addClass(f.unsavedClassPrefix + handler);
@@ -392,7 +392,7 @@
 					
 					// Change label color to flag input as changed.
 					$(this).prevAll('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-form-icon, [data-am-toggle], [data-am-datetime]').prev('.uk-form-label').addClass(f.unsavedClassInput);
+					$(this).closest('.uk-form-icon, [data-am-toggle], [data-am-datetime], [data-am-colorpicker]').prev('.uk-form-label').addClass(f.unsavedClassInput);
 					$(this).closest('.uk-htmleditor').closest('[data-uk-tooltip]').prev('.uk-form-label').addClass(f.unsavedClassInput);
 					$(this).closest('.uk-grid').prev('.uk-form-label').addClass(f.unsavedClassInput);
 					
