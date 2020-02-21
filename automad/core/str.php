@@ -53,22 +53,45 @@ class Str {
 	
 	
 	/**
-	 *	Change format of a given date.
+	 *	Change format of a given date, optionally according to locale settings.
 	 *
 	 *	In case a date variable is set in a txt file, its format can be different to a timestamp (mtime) of a file or page.
 	 *	To be independent on the given format without explicitly specifying it, strtotime() is used generate a proper input date.
 	 *	To use DateTime::createFromFormat() instead would require a third parameter (the original format)
 	 *	and would therefore make things more complicated than needed.
+	 *	The format can use either the date() or strftime() syntax. In case a locale is defined, 
+	 *	the strftime() syntax has to be used.
+	 *	
 	 *
 	 *	@param string $date
 	 *	@param string $format
+	 *	@param string $locale
 	 *	@return string The formatted date
 	 */
 
-	public static function dateFormat($date, $format) {
+	public static function dateFormat($date, $format, $locale = false) {
 
 		if ($date) {
-			return date($format, strtotime($date));	
+
+			if (strpos($format, '%') !== false) {
+
+				$original = setlocale(LC_TIME, 0);
+
+				if ($locale) {
+					setlocale(LC_TIME, $locale);	
+				}
+
+				$formatted = strftime($format, strtotime($date));
+				setlocale(LC_TIME, $original);
+
+			} else {
+
+				$formatted = date($format, strtotime($date));	
+
+			}
+			
+			return $formatted;
+
 		}
 		
 	}
