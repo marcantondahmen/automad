@@ -61,8 +61,8 @@ class Str {
 	 *	and would therefore make things more complicated than needed.
 	 *	The format can use either the date() or strftime() syntax. In case a locale is defined, 
 	 *	the strftime() syntax has to be used.
+	 *	Multiple values can be passed as a CSV string for the locale parameter.
 	 *	
-	 *
 	 *	@param string $date
 	 *	@param string $format
 	 *	@param string $locale
@@ -78,7 +78,7 @@ class Str {
 				$original = setlocale(LC_TIME, 0);
 
 				if ($locale) {
-					setlocale(LC_TIME, $locale);	
+					setlocale(LC_TIME, Parse::csv($locale));	
 				}
 
 				$formatted = strftime($format, strtotime($date));
