@@ -2,7 +2,7 @@
 	"name": "Alpha",
 	"description": "An elegant Automad standard theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"license": "MIT",
 	"tooltips": {
 		"appleTouchIcon": "The image to be used as the Apple touch icon",
@@ -36,6 +36,7 @@
 		"labelSortDateAsc": "Label text in dropdown for sorting pages by date ascending",
 		"labelSortTitleAsc": "Label text in dropdown for sorting pages by title ascending",
 		"labelSortTitleDesc": "Label text in dropdown for sorting pages by title descending",
+		"locale": "The locale information to format date and time according to like 'en_EN' or 'de_DE'",
 		"logo": "The path to your logo - this variable should be defined globally in the shared data section",
 		"logoHeight": "The height of your logo - this variable should be defined globally in the shared data section",
 		"notificationMailError": "Notification text for errors when sendig an email form",

@@ -166,9 +166,12 @@ class Html {
 		// Build attribute string.
 		$attr = 'id="' . $id . '" name="data[' . $key . ']"';
 
+		// Global value.
+		$shared = htmlspecialchars($this->Automad->Shared->get($key));
+
 		// Append placeholder to $attr when editing a page. Therefore check if any URL or context (inpage-edit) is set in $_POST.
 		if (!empty($_POST['url']) || !empty($_POST['context'])) {
-			$placeholder = ' placeholder="' . htmlspecialchars($this->Automad->Shared->get($key)) . '"';
+			$placeholder = ' placeholder="' . $shared . '"';
 		} else {
 			$placeholder = '';
 		}
@@ -195,8 +198,8 @@ class Html {
 			$attrTime = 'value="' . Core\Str::dateFormat($value, $formatTime) . '" readonly="true"';
 			
 			if (!empty($_POST['url']) || !empty($_POST['context'])) {
-				$attrDate .= ' placeholder="' . Core\Str::dateFormat($this->Automad->Shared->get($key), $formatDate) . '"';
-				$attrTime .= ' placeholder="' . Core\Str::dateFormat($this->Automad->Shared->get($key), $formatTime) . '"';
+				$attrDate .= ' placeholder="' . Core\Str::dateFormat($shared, $formatDate) . '"';
+				$attrTime .= ' placeholder="' . Core\Str::dateFormat($shared, $formatTime) . '"';
 			}
 			
 			$html .= '<div data-am-datetime' . $tooltip . '>' .
@@ -224,8 +227,23 @@ class Html {
 			
 			$html .= '<label class="am-toggle-switch uk-button" data-am-toggle' . $tooltip . '>&nbsp;' . 
 					 ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
-					 '<input ' . $attr . ' type="checkbox"  />' .
+					 '<input ' . $attr . ' type="checkbox" />' .
 					 '</label>';
+			
+		} else if (strpos($key, 'color') === 0) {
+
+			if (strlen($value)) {
+				$color = $value;
+			} else {
+				$color = $shared;
+			} 
+			
+			$attr .= ' value="' . $value . '"' . $placeholder;
+			
+			$html .=	'<div data-am-colorpicker' . $tooltip . '>' . 
+						'<input type="color" value="' . $color . '" />' .
+						'<input type="text" ' . $attr . ' />'.
+						'</div>'; 
 			
 		} else {
 			

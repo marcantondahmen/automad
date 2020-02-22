@@ -26,17 +26,19 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	Copyright (c) 2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@am-datetime-inner-height: 	@form-height - (2 * @am-border-width);
+@am-colorpicker-inner-height: 	@form-height - (2 * @am-border-width);
+@am-colorpicker-size:			20px;
 
-[data-am-datetime] {
-	
+[data-am-colorpicker] {
+
+	display: flex;
 	background-color: @form-background;
 	border: @am-border-width solid @form-border;
 	border-radius: @am-radius;
@@ -46,65 +48,56 @@
 		background-color: @form-focus-background;
 		border-color: @form-focus-border;
 	}
-	
-	& .uk-form-icon {
-	
-		& input {
-			
-			min-height: @am-datetime-inner-height;
-			max-height: @am-datetime-inner-height;
-			border: none;
-			padding-top: 4px;
-			
-			&,
-			&:focus {
-				background-color: transparent;	
-				box-shadow: none;
-			}
-			
-		}
-			
-		&:first-of-type {
-			width: 125px;
-			margin-left: -@am-border-width;
+
+	& > input[type="color"] {
+		
+		box-sizing: content-box;
+		padding: 6px;
+		height: @am-colorpicker-size;
+		max-height: @am-colorpicker-size;
+		min-height: @am-colorpicker-size;
+		width: @am-colorpicker-size;
+		border: none;
+		outline: none;
+		border-radius: 100%;
+		cursor: pointer;
+		-webkit-appearance: none;
+
+		&::-webkit-color-swatch-wrapper {
+			padding: 0;	
 		}
 		
-		&:last-of-type {
-			width: ~"calc(100% - 125px - @{am-datetime-inner-height} + @{am-border-width})";	
+		&::-moz-color-swatch {
+			border: @am-hairline;
+			border-radius: 100%;
 		}
-		
-		& > i {
-			z-index: 100;
+
+		&::-webkit-color-swatch {
+			border: @am-hairline;
+			border-radius: 100%;
 		}
+
+	}
+
+	& > input[type="text"] {
+		flex-grow: 1;
+		min-height: @am-colorpicker-inner-height;
+		max-height: @am-colorpicker-inner-height;
+		padding-left: 0;
+		padding-top: 4px;
+	}
+
+	& > input[type="color"],
+	& > input[type="text"] {
+			
+		border: none;
 		
-		& .uk-autocomplete input {
-			padding-left: (@form-icon-width + 4px) !important;
+		&,
+		&:focus {
+			background-color: transparent;	
+			box-shadow: none;
 		}
 		
 	}
-	
-	& [data-am-clear-date].uk-button {
-		min-height: @am-datetime-inner-height;
-		max-height: @am-datetime-inner-height;
-		max-width: @am-datetime-inner-height;
-		max-width: @am-datetime-inner-height;
-		line-height: @am-datetime-inner-height;
-		color: @am-muted;
-		background-color: transparent;
-	}
-	
-	& .uk-autocomplete {
-		
-		width: 100%;
-			
-		& .uk-dropdown {
-			min-width: 150px;
-		}
-		
-	}
-	
-	& .uk-dropdown.uk-dropdown-scrollable {
-		max-height: 235px;
-	}
-	
+
 }

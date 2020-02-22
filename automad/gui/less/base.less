@@ -82,39 +82,46 @@
 @base-heading-font-family:  inherit;
 @base-heading-color:		@am-text;
 @base-heading-margin-top: 	@base-margin-vertical;
+@base-heading-font-weight:  400;
 @base-h1-font-size:  		26px;
 @base-h1-line-height: 		26px;
 @base-h2-font-size: 		18px;
 @base-h2-line-height:  		19px;
 @base-h3-font-size: 		16px;
 @base-h3-line-height:  		20px;
-
-@base-list-padding-left:	30px;
+@base-h4-font-size:			16px;
+@base-h4-line-height:		22px;
+@base-h5-font-size:			14px;
+@base-h5-line-height:		20px;
+@base-h6-font-size:			12px;
+@base-h6-line-height:		18px;
 
 @base-selection-background:	@am-success;
 @base-selection-color:  	#FFFFFF;
 
 
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    background: @base-body-background;
+    color: @base-body-color;
+}
+
+body { 
+	margin: 0; 
+}
+
 .am-dashboard,
 .am-inpage {
 
+	font-family: @base-body-font-family;
+	font-weight: @base-body-font-weight;
+	font-size: @base-body-font-size;
+	line-height: @base-body-line-height;
 	font-variant-ligatures: none;
 
 	& div:empty {
 		margin: 0 !important;
-	}
-
-	& h1,
-	& h2 {
-		font-weight: 400;
-	}
-
-	& a {
-		text-decoration: none !important;
-	}
-	
-	& strong {
-		font-weight: 500;
 	}
 
 	& a,
@@ -132,5 +139,215 @@
 	& *:hover {
 		-webkit-tap-highlight-color: rgba(0,0,0,0) !important;
 	}
+
+	& a {
+
+    	cursor: pointer;
+		text-decoration: none !important;
+		
+		&:not[class] {
+
+			color: @base-link-color;
+			background: transparent;
+
+			&:hover {
+    			color: @base-link-hover-color;
+			}
+
+		}
+
+		&:active,
+		&:hover { 
+			text-decoration: none;
+			outline: 0; 
+		}
+
+	}
 	
+	// UIkit base styles taken from core/base.less to be wrapped in am-dashboard class.
+
+	& strong,
+	& b {
+		font-weight: 500;
+	}
+
+	& :not(pre) > code,
+	& :not(pre) > kbd,
+	& :not(pre) > samp {
+		font-size: @base-code-font-size;
+		font-family: @base-code-font-family;
+		color: @base-code-color;
+		white-space: nowrap;
+	}
+
+	& em { 
+		color: @base-em-color; 
+	}
+
+	& small { 
+		font-size: 80%; 
+	}
+
+	& audio,
+	& canvas,
+	& iframe,
+	& img,
+	& svg,
+	& video { 
+		vertical-align: middle; 
+	}
+
+	& img { 
+		border: 0; 
+	}
+
+	& svg:not(:root) { 
+		overflow: hidden; 
+	}
+
+	& blockquote,
+	& figure { 
+		margin: 0; 
+	}
+
+	& p:not([class]),
+	& ul:not([class]),
+	& ol:not([class]),
+	& pre:not([class]) { 
+
+		margin: @base-margin-vertical 0; 
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+	}
+
+	& h1, 
+	& h2, 
+	& h3, 
+	& h4, 
+	& h5, 
+	& h6 {
+		margin: 0 0 @base-margin-vertical 0;
+		font-family:  @base-heading-font-family;
+		font-weight: @base-heading-font-weight;
+		color: @base-heading-color;
+	}
+
+	& * + h1,
+	& * + h2,
+	& * + h3,
+	& * + h4,
+	& * + h5,
+	& * + h6 { 
+		margin-top: @base-heading-margin-top; 
+	}
+
+	& h1, 
+	& .uk-h1 {
+		font-size: @base-h1-font-size;
+		line-height: @base-h1-line-height;
+	}
+
+	& h2, 
+	& .uk-h2 {
+		font-size: @base-h2-font-size;
+		line-height: @base-h2-line-height;	
+	}
+
+	& h3, 
+	& .uk-h3 {
+		font-size: @base-h3-font-size;
+		line-height: @base-h3-line-height;
+	}
+
+	& h4, 
+	& .uk-h4 {
+		font-size: @base-h4-font-size;
+		line-height: @base-h4-line-height;
+	}
+
+	& h5, 
+	& .uk-h5 {
+		font-size: @base-h5-font-size;
+		line-height: @base-h5-line-height;
+	}
+
+	& h6, 
+	& .uk-h6 {
+		font-size: @base-h6-font-size;
+		line-height: @base-h6-line-height;
+	}
+
+	& hr {
+		box-sizing: content-box;
+		height: 0;
+		margin: @base-hr-margin-vertical 0;
+		border: 0;
+		border-top: @base-hr-border-width solid @base-hr-border;
+	}
+
+	& pre {
+		-moz-tab-size: 4;
+		tab-size: 4;
+		overflow: auto;
+	}
+
+	& ::-moz-selection {
+		background: @base-selection-background;
+		color: @base-selection-color;
+		text-shadow: none;
+	}
+
+	& ::selection {
+		background: @base-selection-background;
+		color: @base-selection-color;
+		text-shadow: none;
+	}
+
+	& img {
+		max-width: 100%;
+		height: auto;
+		box-sizing: border-box;
+	}
+
+	& figcaption,
+	& figure,
+	& footer,
+	& header,
+	& main,
+	& nav { 
+		display: block; 
+	}
+
+	& progress { 
+		vertical-align: baseline; 
+	}
+
+	& audio:not([controls]) { 
+		display: none; 
+	}
+
+	& [hidden],
+	& template { 
+		display: none; 
+	}
+
+	& iframe { 
+		border: 0; 
+	}
+
+}
+
+
+// Fix viewport for IE10 snap mode
+@media screen and (max-width: 400px) {
+	@-ms-viewport{
+		width: device-width;
+	}
 }

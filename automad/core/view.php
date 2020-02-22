@@ -979,7 +979,7 @@ class View {
 				return $image->file;
 			}
 
-			return $match[1];
+			return $match[0];
 
 		}, $str);
 
@@ -1001,9 +1001,16 @@ class View {
 		
 		// Find URLs in markdown like ![...](image.jpg?100x100).
 		$str =	preg_replace_callback('/(\!\[[^\]]*\]\()([^\)]+\.(?:jpg|jpeg|gif|png))([^\)]*\))/is', function($match) use ($method, $parameters) {
+					
 					$parameters = array_merge(array(0 => $match[2]), $parameters);
 					$url = call_user_func_array($method, $parameters);
-					return $match[1] . $url . $match[3];
+					
+					if (file_exists(AM_BASE_DIR . $url)) {
+						return $match[1] . $url . $match[3];
+					} else {
+						return $match[0];
+					}
+					
 				}, $str);
 
 		// Find URLs in action, href and src attributes. 
