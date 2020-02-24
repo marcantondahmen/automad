@@ -168,6 +168,12 @@ class Keys {
 			
 			// Find all variable keys in the template file.
 			$content = file_get_contents($file);
+			// Remove ~ characters to match includes correctly.
+			$content = str_replace(
+				array(AM_DEL_STATEMENT_OPEN . '~', '~' . AM_DEL_STATEMENT_CLOSE), 
+				array(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_CLOSE), 
+				$content
+			);
 			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
 			$keys = $matches['varName'];
 			
