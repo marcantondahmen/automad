@@ -117,16 +117,17 @@ $this->element('header');
 	
 		<ul id="am-page-content" class="uk-switcher">
 			<!-- Data -->
-		    	<li>
+		    <li>
 				<form 
 				class="uk-form uk-form-stacked" 
 				data-am-init 
 				data-am-handler="page_data" 
 				data-am-url="<?php echo $url; ?>"
+				data-am-path="<?php echo $Page->get(AM_KEY_PATH); ?>"
 				>
 					<?php echo $this->getHtml()->loading(); ?>
 				</form>
-		    	</li>
+		    </li>
 			<!-- Files -->
 			<li>
 				<form 

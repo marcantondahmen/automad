@@ -182,7 +182,7 @@ class Html {
 			$attr .= $placeholder;
 			
 			$html .= '<div' . $tooltip . '>' .
-					 '<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-htmleditor>' . 
+					 '<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-markdowneditor>' . 
 					 $value . 
 					 '</textarea>' .
 					 '</div>';
