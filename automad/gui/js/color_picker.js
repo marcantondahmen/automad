@@ -57,10 +57,7 @@
 				var $input = $(e.target),
 					$combo = $input.closest(cp.selector);
 
-				$combo.addClass('uk-active');
-
 				$input.on('blur.automad', function () {
-					$combo.removeClass('uk-active');
 					$input.off('blur.automad');
 				});
 

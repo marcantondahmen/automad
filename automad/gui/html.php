@@ -194,7 +194,7 @@ class Html {
 			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
 
 			$html .= '<div class="am-select-image-field uk-flex" data-am-select-image-field>' .
-					 '<button type="button" class="uk-button"><i class="uk-icon-folder-open"></i></button>' .
+					 '<button type="button" class="uk-button uk-button-large"><i class="uk-icon-folder-open"></i></button>' .
 					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />' .
 					 '</div>';
 		
@@ -249,12 +249,12 @@ class Html {
 				$color = $shared;
 			} 
 			
-			$attr .= ' value="' . $value . '"' . $placeholder;
+			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
 			
-			$html .=	'<div data-am-colorpicker' . $tooltip . '>' . 
-						'<input type="color" value="' . $color . '" />' .
-						'<input type="text" ' . $attr . ' />'.
-						'</div>'; 
+			$html .= '<div class="uk-flex" data-am-colorpicker>' . 
+					 '<input type="color" class="uk-button" value="' . $color . '" />' .
+					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />'.
+					 '</div>'; 
 			
 		} else {
 			

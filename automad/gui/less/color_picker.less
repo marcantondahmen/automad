@@ -33,35 +33,28 @@
  */
 
 
-@am-colorpicker-inner-height: 	@form-height - (2 * @am-border-width);
-@am-colorpicker-size:			20px;
-
 [data-am-colorpicker] {
-
-	display: flex;
-	background-color: @form-background;
-	border: @am-border-width solid @form-border;
-	border-radius: @am-radius;
-	.transition(border-color 0.2s;);
-	
-	&.uk-active {
-		background-color: @form-focus-background;
-		border-color: @form-focus-border;
-	}
 
 	& > input[type="color"] {
 		
-		box-sizing: content-box;
-		padding: 6px;
-		height: @am-colorpicker-size;
-		max-height: @am-colorpicker-size;
-		min-height: @am-colorpicker-size;
-		width: @am-colorpicker-size;
+		box-sizing: border-box;
+		width: @form-height;
+		min-width: @form-height;
+		height: @form-height;
+		max-height: @form-height;
+		min-height: @form-height;
+		padding: 8px;
 		border: none;
 		outline: none;
-		border-radius: 100%;
+		border-radius: @am-radius;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 		cursor: pointer;
 		-webkit-appearance: none;
+
+		&:hover {
+			background-color: @button-hover-background;
+		}
 
 		&::-webkit-color-swatch-wrapper {
 			padding: 0;	
@@ -80,24 +73,8 @@
 	}
 
 	& > input[type="text"] {
-		flex-grow: 1;
-		min-height: @am-colorpicker-inner-height;
-		max-height: @am-colorpicker-inner-height;
-		padding-left: 0;
-		padding-top: 4px;
-	}
-
-	& > input[type="color"],
-	& > input[type="text"] {
-			
-		border: none;
-		
-		&,
-		&:focus {
-			background-color: transparent;	
-			box-shadow: none;
-		}
-		
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
 	}
 
 }
