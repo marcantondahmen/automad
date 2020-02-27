@@ -59,7 +59,7 @@
 
 				si.select(UIkit.modal(si.modalSelector), $input, false, function(url, modalElementClicked) {
 
-					$input.val(url);
+					$input.val(url).trigger('change');
 
 				});
 
