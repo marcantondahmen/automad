@@ -26,28 +26,84 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2018-2020 by Marc Anton Dahmen
+ *	Copyright (c) 2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@tooltip-z-index: 				1150;
-@tooltip-max-width:				200px;
-@tooltip-padding-vertical: 		4px;
-@tooltip-padding-horizontal: 	8px;
-@tooltip-background: 			@am-success;
-@tooltip-triangle-size: 		5px;
+//@am-select-file-size: 50px;
 
-@tooltip-color: 				#FFFFFF;
-@tooltip-font-size: 			11px;
-@tooltip-line-height: 			14px;
+.am-select-image {
 
-@tooltip-offset-horizontal: 	10px;
+	&-resize {
 
+		&-hide & {
+			display: none;
+		}
 
-.hook-tooltip() {
-	font-weight: 400;
-	border-radius: @am-radius-small;
+	}
+	
+	&-modal {
+
+		z-index: 1100;
+
+		& .uk-flex {
+
+			& input[type="text"] {
+
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+
+				& + button {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
+
+			}
+
+		}
+
+		& form .uk-panel-box {
+
+			padding: @panel-box-padding - 2px;
+
+			& label {
+				padding: 2px;
+				cursor: pointer;
+			}	
+
+			& img {
+
+				border: @am-border-width solid @am-border-color;
+				border-radius: @am-radius;
+				max-width: 100%;
+				height: auto;
+				.transition(border-color 0.2s;);
+
+				&:hover {
+					border-color: @am-success;
+				}
+
+			}
+
+		}
+
+	}
+
+	&-field {
+
+		& > button {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		& > input[type="text"] {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+	}
+
 }

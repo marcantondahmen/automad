@@ -533,7 +533,10 @@
 			addAction('strike', '~~$1~~');
 			addAction('blockquote', '> $1', 'replaceLine');
 			addAction('link', '[$1](http://)');
-			addAction('image', '![$1](http://)');
+			
+			editor.on('action.image', function() {
+				editor.editor.selectImage();
+			});
 
 			editor.on('action.listUl', function () {
 

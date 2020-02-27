@@ -142,6 +142,9 @@ $this->element('header');
 			</li>
 		</ul>
 		
+		<!-- Select Image Modal -->
+		<?php echo $this->getHtml()->selectImageModal($url); ?>
+
 		<!-- Move Page Modal -->
 		<div id="am-move-page-modal" class="uk-modal">
 			<div class="uk-modal-dialog">

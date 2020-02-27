@@ -187,6 +187,17 @@ class Html {
 					 '</textarea>' .
 					 '</div>';
 			
+		// Only match "image" and not "images". For multiple images a pattern is needed
+		// instead of one selected image.
+		} else if (strpos($key, 'image') === 0 && strpos($key, 'images') === false) {
+		
+			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
+
+			$html .= '<div class="am-select-image-field uk-flex" data-am-select-image-field>' .
+					 '<button type="button" class="uk-button"><i class="uk-icon-folder-open"></i></button>' .
+					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />' .
+					 '</div>';
+		
 		} else if (strpos($key, 'date') === 0) {
 			
 			$attr .= ' value="' . $value . '"';
@@ -559,6 +570,83 @@ class Html {
 		
 	}
 	
+	
+	/**
+	 *	Create an image selection panel.
+	 *
+	 * 	@param array $files
+	 * 	@param string $title
+	 * 	@param boolean $basename
+	 *  @return string The HTML of the panel
+	 */
+
+	public function selectImage($files, $title, $basename = false) {
+
+		if ($files) {
+
+			$html = '<p class="uk-margin-top">' . 
+						$title . '&nbsp;&nbsp;<span class="uk-badge">' . count($files) . '</span>
+					</p>' .
+					'<div class="uk-panel uk-panel-box uk-flex uk-flex-wrap uk-flex-wrap-top">';
+			
+			foreach ($files as $file) {
+
+				if ($basename) {
+					$value = basename($file);
+				} else {
+					$value = Core\Str::stripStart($file, AM_BASE_DIR);
+				}
+
+				$image = new Core\Image($file, 200, 200, true);
+
+				$html .= '<label class="uk-width-1-3 uk-width-medium-1-5">' .
+						 	'<img src="' . AM_BASE_URL . $image->file . '" title="' . $value . '" data-uk-tooltip>' .
+						 	'<input type="hidden" name="imageUrl" value="' . $value . '">' .
+						 '</label>';
+
+			}
+			
+			$html .= '</div>';
+
+			return $html;
+
+		}
+
+	}
+
+
+	/**
+	 *  Create the modal dialog for selecting images.
+	 * 
+	 * 	@param string $url
+	 * 	@return string The HTML for the modal dialog
+	 */
+
+	public function selectImageModal($url = '') {
+
+		if ($url) {
+			$url = 'data-am-url="' . $url . '"';
+		}
+
+		return '<div id="am-select-image-modal" class="am-select-image-modal uk-modal">' .
+					'<div class="uk-modal-dialog">' .
+						'<div class="uk-modal-header">' .
+							Text::get('image_select') .
+							'<a href="#" class="uk-modal-close uk-close"></a>' .
+						'</div>' .
+						'<form class="uk-form" data-am-handler="select_image" ' . $url . ' data-am-init>' .
+						'</form>' .
+						'<div class="uk-modal-footer uk-text-right">' .
+							'<button type="button" class="uk-modal-close uk-button">' .
+								'<i class="uk-icon-close"></i>&nbsp;&nbsp;' .
+								Text::get('btn_close') .
+							'</button>' .
+						'</div>' .
+					'</div>' .
+				'</div>';
+
+	}
+
 	
 	/**
 	 *	Create a select box containing all installed themes/templates to be included in a HTML form.

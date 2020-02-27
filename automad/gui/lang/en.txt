@@ -365,6 +365,27 @@ image_width_px: Width (Pixels)
 
 -
 
+image_options: Options
+
+-
+
+image_select: Select Image
+
+-
+
+images_page: Page Images
+
+-
+
+images_shared: Shared Images
+
+-
+
+image_link: Link 
+
+-
+
+
 
 
 

@@ -483,9 +483,12 @@
 					// forms with a 'data-am-init' attribute must be cleared and re-submitted to
 					// pull updates. 
 					// Clearing the form is important to avoid auto-submitting unwanted changes 
-					// before updateing the form.
+					// before updating the form.
 					$(this).find('[' + Automad.form.dataAttr.init + ']').each(function() {
-						$(this).empty().submit();
+						$(this)
+						.empty()
+						.html('<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>')
+						.submit();
 					});
 					
 					// Focus first input (not disabled and not on any touch device).
