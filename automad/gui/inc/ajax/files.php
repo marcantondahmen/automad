@@ -141,7 +141,18 @@ if ($files) { ?>
 				
 				if (Core\Parse::fileIsImage($file)) { 
 
+					$aspect = 320 / 240;
 					$imgPanel = new Core\Image($file, 320, 240, true);
+	
+					// Re-calculate image dimensions to fit the aspect ratio of 320/240. 
+					if (($imgPanel->width / $imgPanel->height) > $aspect) {
+						$imgPanel = new Core\Image($file, $imgPanel->height * $aspect, $imgPanel->height, true);
+					}
+	
+					if (($imgPanel->width / $imgPanel->height) < $aspect) {
+						$imgPanel = new Core\Image($file, $imgPanel->width, $imgPanel->width / $aspect, true);
+					}
+	
 					$size = '<div class="uk-panel-badge uk-badge">' . 
 							$imgPanel->originalWidth . ' <i class="uk-icon-times"></i> ' . $imgPanel->originalHeight . 
 							'</div>';

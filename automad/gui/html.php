@@ -599,6 +599,12 @@ class Html {
 
 				$image = new Core\Image($file, 200, 200, true);
 
+				// Make sure the resized image fits the aspect ratio of 1/1.
+				if ($image->width != $image->height) {
+					$min = min(array($image->width, $image->height));
+					$image = new Core\Image($file, $min, $min, true);
+				}
+
 				$html .= '<label class="uk-width-1-3 uk-width-medium-1-5">' .
 						 	'<img src="' . AM_BASE_URL . $image->file . '" title="' . $value . '" data-uk-tooltip>' .
 						 	'<input type="hidden" name="imageUrl" value="' . $value . '">' .
