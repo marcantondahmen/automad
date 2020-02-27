@@ -54,8 +54,7 @@
 			// Add .uk-active class to [data-am-colorpicker] when the text input is focused.
 			$doc.on('focus', cp.selector + ' input[type="text"]', function (e) {
 
-				var $input = $(e.target),
-					$combo = $input.closest(cp.selector);
+				var $input = $(e.target);
 
 				$input.on('blur.automad', function () {
 					$input.off('blur.automad');
