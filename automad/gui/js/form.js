@@ -217,12 +217,16 @@
 
 				var data = xhr.responseJSON;
 				
-				if (data.trigger) {
-					$('html').trigger(data.trigger);
-				}
+				if (data) {
 
-				if (data.error) {
-					Automad.notify.error(data.error);
+					if (data.trigger) {
+						$('html').trigger(data.trigger);
+					}
+
+					if (data.error) {
+						Automad.notify.error(data.error);
+					}
+
 				}
 
 			});

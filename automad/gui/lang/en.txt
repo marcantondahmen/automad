@@ -94,6 +94,10 @@ btn_install: Install
 
 -
 
+btn_link: Link 
+
+-
+
 btn_log_out: Log out
 
 -
@@ -378,10 +382,6 @@ images_page: Page Images
 -
 
 images_shared: Shared Images
-
--
-
-image_link: Link 
 
 -
 

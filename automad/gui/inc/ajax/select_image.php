@@ -83,7 +83,7 @@ ob_start();
 		>
 		<button class="uk-button uk-button-large uk-text-nowrap">
 			<i class="uk-icon-link"></i>&nbsp;
-			<?php Text::e('image_link'); ?>
+			<?php Text::e('btn_link'); ?>
 		</button>
 	</div>
 
