@@ -391,10 +391,7 @@
 					$('button[' + da.submit + '="' + handler + '"]:disabled').prop('disabled', false);
 					
 					// Change label color to flag input as changed.
-					$(this).prevAll('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-form-icon, [data-am-toggle], [data-am-datetime], [data-am-colorpicker], [data-am-select-image-field]').prev('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-markdowneditor').closest('[data-uk-tooltip]').prev('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-grid').prev('.uk-form-label').addClass(f.unsavedClassInput);
+					$(this).closest('.uk-form-row').find('.uk-form-label').addClass(f.unsavedClassInput);
 					
 				}
 			);
