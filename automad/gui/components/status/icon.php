@@ -35,54 +35,34 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\GUI\Components\Status;
 use Automad\Core as Core;
 use Automad\System as System;
+use Automad\GUI\Text as Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Status class provides all methods related to the status of the system config. 
+ *	The status icon component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2019-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Status {
+class Icon {
 
+	
 	/**
-	 *  Create a status button for an AJAX status request with loading animation.
-	 *      
-	 *  @param string $status
-	 *  @param string $tab
-	 *  @return string The HTML for the status button
-	 */
-
-	public static function button($status, $tab) {
-		
-		return	'<a '.
-		 		'href="?context=system_settings#' . $tab . '" ' .
-				'class="uk-button uk-button-large uk-width-1-1 uk-text-left" ' .
-				'data-am-status="' . $status . '"' .
-		 		'>' .
-					'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					Text::get('btn_getting_data') .
-				'</a>';
-				
-	}
-
-
-	/**
-	 * 	Get the current status of a given system setting.
+	 * 	Get the current status icon of a given system setting.
 	 * 	
 	 * 	@param string $item
 	 * 	@return array The output array with the generated status return markup
 	 */
 
-	public static function get($item) {
+	public static function render($item) {
 
 		Core\Debug::log($item, 'Getting status');
 		$output = array();

@@ -35,43 +35,42 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\GUI\Components\Status;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Logo class handles the loading of the Automad logo and the headless indicator. 
+ *	The status button component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2019-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Logo {
+class Button {
 
-
+	
 	/**
-	 *	Return the Automad logo and if the headless mode is enabled also the headless indicator.
-	 *
-	 * 	@return string The HTML of the logos
+	 *  Create a status button for an AJAX status request with loading animation.
+	 *      
+	 *  @param string $status
+	 *  @param string $tab
+	 *  @return string The HTML for the status button
 	 */
 
-	public static function get() {
-
-		$logo = file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg');
-
-		if (AM_HEADLESS_ENABLED) {
-			$class = 'am-logo-container-headless';
-			$headless = file_get_contents(AM_BASE_DIR . '/automad/gui/svg/headless.svg');
-		} else {
-			$class = 'am-logo-container';
-			$headless = '';
-		}
+	public static function render($status, $tab) {
 		
-		return '<div class="' . $class . '">' . $logo . $headless . '</div>';
-
+		return	'<a '.
+		 		'href="?context=system_settings#' . $tab . '" ' .
+				'class="uk-button uk-button-large uk-width-1-1 uk-text-left" ' .
+				'data-am-status="' . $status . '"' .
+		 		'>' .
+					'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp;&nbsp;' . 
+					\Automad\GUI\Text::get('btn_getting_data') .
+				'</a>';
+				
 	}
 
 

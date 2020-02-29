@@ -99,15 +99,15 @@ $this->element('header');
 				</li>
 			<?php } ?>
 			<li class="uk-margin-small-bottom">
-				<?php echo Status::button('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
+				<?php echo Components\Status\Button::render('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
 			</li>
 			<?php if (!AM_HEADLESS_ENABLED) { ?>
 				<li class="uk-margin-small-bottom">
-					<?php echo Status::button('debug', Core\Str::sanitize(Text::get('sys_debug'))); ?>
+					<?php echo Components\Status\Button::render('debug', Core\Str::sanitize(Text::get('sys_debug'))); ?>
 				</li>
 			<?php } ?>
 			<li class="uk-margin-small-bottom">
-				<?php echo Status::button('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
+				<?php echo Components\Status\Button::render('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
 			</li>
 		</ul>
 		<div class="uk-margin-top">
