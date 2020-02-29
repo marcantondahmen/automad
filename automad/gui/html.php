@@ -511,9 +511,9 @@ class Html {
 			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 		
-		return  '<form class="uk-form uk-width-1-1" action="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '" method="get" data-am-autocomplete-submit>' .
+		return  '<form class="uk-form uk-width-1-1" action="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '" method="get" data-am-autocomplete>' .
 					'<input type="hidden" name="context" value="search" />' .
-					'<div class="uk-autocomplete uk-width-1-1" data-uk-autocomplete="{source: Automad.autocomplete.data, minLength: 2}">' .
+					'<div class="uk-autocomplete uk-width-1-1">' .
 						'<input ' .
 						'class="uk-form-controls uk-width-1-1" ' .
 						'name="query" ' .
