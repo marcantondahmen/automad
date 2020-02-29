@@ -131,3 +131,20 @@
 .uk-modal textarea {
 	max-height: none !important;
 }
+
+.am-form-input-button {
+
+	& input[type="text"],
+	& > div {
+
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+
+		& + button {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+	}
+
+}

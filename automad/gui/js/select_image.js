@@ -93,11 +93,11 @@
 
 			modal.show();
 
-			modal.on('click.automad.selectImage', 'button', function() {
+			modal.on('click.automad.selectImage', 'form button', function() {
 				onClick($(this).parent().find('input').val(), this);
 			});
 
-			modal.on('click.automad.selectImage', 'label', function() {
+			modal.on('click.automad.selectImage', 'form label', function() {
 				onClick($(this).find('input').val(), this);
 			});
 

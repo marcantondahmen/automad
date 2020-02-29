@@ -68,13 +68,11 @@ if ($url) {
 $sharedFiles = FileSystem::globGrep(AM_BASE_DIR . AM_DIR_SHARED . '/*.*', '/\.(jpg|jpeg|gif|png)$/i');
 sort($sharedFiles);
 
-$Html = $this->getHtml();
-
 ob_start();
 
 ?>
 
-	<div class="uk-flex">
+	<div class="am-form-input-button uk-flex">
 		<input 
 		class="uk-form-controls uk-width-1-1" 
 		type="text" 
