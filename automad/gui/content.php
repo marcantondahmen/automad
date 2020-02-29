@@ -61,13 +61,6 @@ class Content {
 
 
 	/**
-	 *  The Html object.
-	 */
-	
-	private $Html;
-	
-	
-	/**
 	 *	Set $this->Automad when creating an instance.
 	 *
 	 *	@param object $Automad
@@ -76,7 +69,6 @@ class Content {
 	public function __construct($Automad) {
 		
 		$this->Automad = $Automad;
-		$this->Html = new Html($Automad);
 		
 	}
 	

@@ -68,13 +68,6 @@ class Dashboard {
 	
 	
 	/**
-	 *	The Html object.
-	 */
-	
-	private $Html;
-	
-	
-	/**
 	 *	The Keys object.
 	 */
 	
@@ -236,23 +229,6 @@ class Dashboard {
 		}
 
 		return $this->Content;
-
-	}
-
-
-	/**
-	 *	Return the Html object and create a new instance if undefined.
-	 *
-	 * 	@return object The Html object
-	 */
-
-	private function getHtml() {
-
-		if (!$this->Html) {
-			$this->Html = new Html($this->getAutomad());
-		}
-
-		return $this->Html;
 
 	}
 
