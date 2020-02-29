@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 if (User::get()) {
 
 	// Get form handler to be submitted. If no matching handler exists, set an empty string.
-	$context = Core\Parse::query('context');
+	$context = Core\Request::query('context');
 	$handlers = array('edit_page' => 'page_data', 'edit_shared' => 'shared_data');
 
 	if (isset($handlers[$context])) {

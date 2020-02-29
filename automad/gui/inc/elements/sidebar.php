@@ -72,25 +72,25 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 								</a>
 							</li>
 						<?php } ?>
-						<li<?php if (!Core\Parse::query('context')) { echo ' class="uk-active"'; }?>>
+						<li<?php if (!Core\Request::query('context')) { echo ' class="uk-active"'; }?>>
 							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 								<i class="uk-icon-desktop uk-icon-justify"></i>&nbsp;
 								<?php Text::e('dashboard_title'); ?>
 							</a>
 						</li>
-						<li<?php if (Core\Parse::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
+						<li<?php if (Core\Request::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
 							<a href="?context=system_settings">
 								<i class="uk-icon-sliders uk-icon-justify"></i>&nbsp;
 								<?php Text::e('sys_title'); ?>
 							</a>
 						</li>
-						<li<?php if (Core\Parse::query('context') == 'edit_shared') { echo ' class="uk-active"'; }?>>
+						<li<?php if (Core\Request::query('context') == 'edit_shared') { echo ' class="uk-active"'; }?>>
 							<a href="?context=edit_shared">
 								<i class="uk-icon-globe uk-icon-justify"></i>&nbsp;
 								<?php Text::e('shared_title'); ?>
 							</a>
 						</li>
-						<li<?php if (Core\Parse::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
+						<li<?php if (Core\Request::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
 							<a href="?context=packages">
 								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
 								<?php Text::e('packages_title'); ?>

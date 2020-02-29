@@ -90,7 +90,7 @@ Config::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 
 
 // Get the requested URL.
-define('AM_REQUEST', Parse::request());
+define('AM_REQUEST', Request::page());
 
 
 

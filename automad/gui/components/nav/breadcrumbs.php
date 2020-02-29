@@ -63,7 +63,7 @@ class Breadcrumbs {
 	public static function render($Automad) {
 
 		$Selection = new Core\Selection($Automad->getCollection());
-		$Selection->filterBreadcrumbs(Core\Parse::query('url'));
+		$Selection->filterBreadcrumbs(Core\Request::query('url'));
 		$pages = $Selection->getSelection(false);
 		
 		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill uk-margin-top">';

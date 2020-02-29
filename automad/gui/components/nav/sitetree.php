@@ -67,7 +67,7 @@ class SiteTree {
 	
 	public static function render($Automad, $parent, $parameters, $hideCurrent = false, $header = false) {
 		
-		$current = Core\Parse::query('url');
+		$current = Core\Request::query('url');
 		
 		$selection = new Core\Selection($Automad->getCollection());
 		$selection->filterByParentUrl($parent);

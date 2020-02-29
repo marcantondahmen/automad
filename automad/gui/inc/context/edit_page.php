@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$url = Core\Parse::query('url');
+$url = Core\Request::query('url');
 
 
 if ($Page = $this->getAutomad()->getPage($url)) {
@@ -185,7 +185,7 @@ $this->element('header');
 		
 		<div class="uk-alert uk-alert-danger uk-margin-large-top">
 			<?php Text::e('error_page_not_found'); ?><br />
-			"<?php echo Core\Parse::query('url'); ?>"
+			"<?php echo Core\Request::query('url'); ?>"
 		</div>
 			
 		<?php } ?>

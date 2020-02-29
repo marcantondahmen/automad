@@ -542,7 +542,7 @@ class Content {
 		
 		$pages = array();
 	
-		if ($query = Core\Parse::query('query')) {
+		if ($query = Core\Request::query('query')) {
 		
 			$collection = $this->Automad->getCollection();
 		
