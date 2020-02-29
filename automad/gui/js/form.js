@@ -494,7 +494,13 @@
 					
 					// Focus first input (not disabled and not on any touch device).
 					if ($('html.uk-notouch').length) {
-						$(this).find('input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
+
+						var $modal = $(this);
+
+						setTimeout(function() {
+							$modal.find('input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
+						}, 250);
+						
 					}
 					
 				},
