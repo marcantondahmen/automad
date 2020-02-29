@@ -83,7 +83,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<div class="uk-form-row">
 						<label class="uk-form-label"><?php Text::e('page_theme_template'); ?></label>
 						<?php 
-							echo $this->getHtml()->selectTemplate(
+							echo Components\Form\SelectTemplate::render(
+								$this->getAutomad(),
 								$this->getThemelist(),
 								'subpage[theme_template]'
 							); 
@@ -96,7 +97,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<?php Text::e('page_add_location'); ?>
 				</label>
 				<div data-am-tree="#am-add-page-input">
-					<?php echo $this->getHtml()->siteTree('', $this->getAutomad()->getCollection(), array(), false, false); ?>
+					<?php echo Components\Nav\SiteTree::render($this->getAutomad(), '', array(), false, false); ?>
 				</div>
 			</div>
 			<div class="uk-modal-footer uk-text-right">

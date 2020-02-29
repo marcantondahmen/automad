@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
+ *	Copyright (c) 2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,18 +35,39 @@
  */
 
 
+namespace Automad\GUI\Components\Form;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Add a form field for a variable.
+/**
+ *	The hidden form field component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2020 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
 
-if (!empty($_POST['name'])) {
+class FieldHidden {
 
-	echo Automad\GUI\Components\Form\Field::render($this->getAutomad(), $_POST['name'], '', true);
-	
+
+	/**	
+	 * 	Create a hidden form field.
+	 * 
+	 *  @param string $key
+	 * 	@param string $value
+	 * 	@return string The HTML for the hidden input field
+	 */
+
+	public static function render($key = '', $value = '') {
+
+		// Convert special characters in $value to HTML entities.
+		$value = htmlspecialchars($value);
+
+		return '<input type="hidden" name="data[' . $key . ']" value="' . $value . '" />';
+
+	}
+
+
 }
-
-
-?>

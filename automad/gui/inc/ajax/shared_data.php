@@ -272,7 +272,8 @@ if (isset($_POST['data'])) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo $this->getHtml()->formGroup(
+						echo Components\Form\Group::render(
+							$this->getAutomad(), 
 							$keysInMainTheme, 
 							$data,
 							false,
@@ -288,7 +289,8 @@ if (isset($_POST['data'])) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo $this->getHtml()->formGroup(
+						echo Components\Form\Group::render(
+							$this->getAutomad(), 
 							$keysInOtherThemes, 
 							$data
 						); 
@@ -306,7 +308,7 @@ if (isset($_POST['data'])) {
 				
 					// Also submit the saved theme form the non-headless mode.
 					// The value gets stored in a hidden input field.
-					echo $this->getHtml()->formFieldHidden(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
+					echo Components\Form\FieldHidden::render(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
 				
 				?>
 				<div class="uk-accordion-title">
@@ -315,7 +317,8 @@ if (isset($_POST['data'])) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo $this->getHtml()->formGroup(
+						echo Components\Form\Group::render(
+							$this->getAutomad(), 
 							$keysInHeadless, 
 							$data,
 							false,
@@ -336,7 +339,7 @@ if (isset($_POST['data'])) {
 			<div class="uk-accordion-content">
 				<?php 
 				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+				echo Components\Form\Group::render($this->getAutomad(), $unusedDataKeys, $data, 'am-add-variable'); 
 				?>
 			</div>
 

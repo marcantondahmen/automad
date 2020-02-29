@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
+ *	Copyright (c) 2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,18 +35,34 @@
  */
 
 
+namespace Automad\GUI\Components;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Add a form field for a variable.
+/**
+ *	The loading spinner component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2020 Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@license MIT license - http://automad.org/license
  */
 
-if (!empty($_POST['name'])) {
+class Loading {
 
-	echo Automad\GUI\Components\Form\Field::render($this->getAutomad(), $_POST['name'], '', true);
+
+	/**
+	 *	Create loading icon.
+	 *      
+	 * 	@return string The HTML of the loading icon
+	 */
 	
+	public static function render() {
+		
+		return '<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>';
+		
+	}
+
+
 }
-
-
-?>

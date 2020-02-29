@@ -112,7 +112,7 @@ $this->element('header');
 		</ul>
 		<div class="uk-margin-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
-			<?php echo $this->getHtml()->pageGrid($latestPages); ?>
+			<?php echo Components\PageGrid::render($latestPages); ?>
 		</div>
 
 		<!-- Server Info Modal -->

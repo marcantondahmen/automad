@@ -707,7 +707,7 @@ class Content {
 						
 						$output['html'] = '<div id="am-inpage-edit-fields">' .
 										  '<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
-										  $this->Html->formField($_POST['key'], $value) . 
+										  Components\Form\Field::render($this->Automad, $_POST['key'], $value) . 
 										  '</div>';
 						
 					}

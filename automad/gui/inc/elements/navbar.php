@@ -67,7 +67,7 @@ if (User::get()) {
 			<!-- Search -->
 			<li class="am-navbar-search">
 				<?php 
-					echo $this->getHtml()->searchField(
+					echo Components\Form\Search::render(
 						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
 						'Ctrl + Space'
 					);

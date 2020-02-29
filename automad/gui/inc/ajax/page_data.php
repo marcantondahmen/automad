@@ -155,7 +155,8 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 									<a href="#" class="uk-modal-close uk-close"></a>
 								</div>	
 								<?php 
-									echo 	$this->getHtml()->selectTemplate(
+									echo 	Components\Form\SelectTemplate::render(
+												$this->getAutomad(),
 												$this->getThemelist(),
 												'theme_template', 
 												$data[AM_KEY_THEME], 
@@ -314,7 +315,8 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					</div>
 					<div class="uk-accordion-content">
 						<?php 
-							echo 	$this->getHtml()->formGroup(
+							echo 	Components\Form\Group::render(
+										$this->getAutomad(),
 										$keysInCurrentTemplate, 
 										$data, 
 										false, 
@@ -331,7 +333,7 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 						<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
 					</div>
 					<div class="uk-accordion-content">
-						<?php echo $this->getHtml()->formGroup($keysInOtherTemplates, $data); ?>
+						<?php echo Components\Form\Group::render($this->getAutomad(), $keysInOtherTemplates, $data); ?>
 					</div>
 					
 					<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
@@ -347,7 +349,8 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					</div>
 					<div class="uk-accordion-content">
 						<?php 
-							echo 	$this->getHtml()->formGroup(
+							echo 	Components\Form\Group::render(
+										$this->getAutomad(),
 										$keysInHeadless, 
 										$data, 
 										false, 
@@ -368,7 +371,7 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 				<div class="uk-accordion-content">
 					<?php 
 					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+					echo Components\Form\Group::render($this->getAutomad(), $unusedDataKeys, $data, 'am-add-variable'); 
 					?>
 				</div>
 

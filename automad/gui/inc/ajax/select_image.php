@@ -116,8 +116,8 @@ ob_start();
 
 <?php
 
-echo $Html->selectImage($pageFiles, Text::get('images_page'), true);
-echo $Html->selectImage($sharedFiles, Text::get('images_shared'));
+echo Components\Form\SelectImage::render($pageFiles, Text::get('images_page'), true);
+echo Components\Form\SelectImage::render($sharedFiles, Text::get('images_shared'));
 
 $output['html'] = ob_get_contents();
 ob_end_clean();

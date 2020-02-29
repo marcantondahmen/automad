@@ -71,7 +71,7 @@ $results = $this->getContent()->getSearchResults();
 
 if ($results) {
 	
-	echo $this->getHtml()->pageGrid($results);
+	echo Components\PageGrid::render($results);
 	
 } else {
 	

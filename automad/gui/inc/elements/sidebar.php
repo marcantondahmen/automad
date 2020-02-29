@@ -58,7 +58,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
-						<?php echo $this->getHtml()->searchField(Text::get('search_placeholder')); ?>
+						<?php echo Components\Form\Search::render(Text::get('search_placeholder')); ?>
 					</div>
 					<ul class="uk-nav uk-nav-side uk-margin-small-top">
 						<li class="uk-nav-header">
@@ -105,9 +105,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							  		count($this->getAutomad()->getCollection()) . 
 							  		'</span>';
 									
-						echo $this->getHtml()->siteTree(
-							'', 
-							$this->getAutomad()->getCollection(), 
+						echo Components\Nav\SiteTree::render(
+							$this->getAutomad(),
+							'',  
 							array('context' => 'edit_page'), 
 							false, 
 							$header
