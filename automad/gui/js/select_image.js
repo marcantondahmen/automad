@@ -112,7 +112,7 @@
 
 	Automad.selectImage.init();
 
-	CodeMirror.defineExtension('selectImage', function () {
+	CodeMirror.defineExtension('AutomadSelectImage', function () {
 
 		var modalSelector = Automad.selectImage.modalSelector,
 			modal = UIkit.modal(modalSelector),

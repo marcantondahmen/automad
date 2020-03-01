@@ -535,7 +535,7 @@
 			addAction('link', '[$1](http://)');
 			
 			editor.on('action.image', function() {
-				editor.editor.selectImage();
+				editor.editor.AutomadSelectImage();
 			});
 
 			editor.on('action.listUl', function () {
