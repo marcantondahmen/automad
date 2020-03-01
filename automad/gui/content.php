@@ -463,44 +463,6 @@ class Content {
 	
 	
 	/**
-	 *	Return a JSON formatted string to be used as autocomplete infomation in a search field.
-	 *	
-	 *	The collected data consists of all page titles, URLs and all available tags.
-	 *
-	 *	@return string The JSON encoded autocomplete data
-	 */
-	
-	public function getAutoCompleteJSON() {
-		
-		$titles = array();
-		$urls = array();
-		$tags = array();
-		$values = array();
-		
-		foreach ($this->Automad->getCollection() as $Page) {
-			$titles[] = $Page->get(AM_KEY_TITLE);
-			$urls[] = $Page->origUrl;
-			$tags = array_merge($tags, $Page->tags);
-		}
-		
-		$titles = array_unique($titles);
-		$tags = array_unique($tags);
-		
-		// Sort arrays separately to keep titles, urls and tags grouped.
-		sort($titles);
-		sort($tags);
-		sort($urls);
-		
-		foreach (array_merge($titles, $tags, $urls) as $value) {
-			$values[]['value'] = $value;
-		}
-		
-		return json_encode($values, JSON_UNESCAPED_SLASHES);
-		
-	}
-	
-	
-	/**
 	 *	Return the full file system path of a page's data file.
 	 *
 	 *	@param object $Page

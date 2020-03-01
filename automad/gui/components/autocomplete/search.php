@@ -35,14 +35,14 @@
  */
 
 
-namespace Automad\GUI\Components\Form;
+namespace Automad\GUI\Components\Autocomplete;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The search field component. 
+ *	The autocomplete JSON data for search component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 Marc Anton Dahmen - <http://marcdahmen.de>
@@ -53,31 +53,40 @@ class Search {
 
 
 	/**
-	 *	Create a search field.
-	 *      
-	 *  @param string $tooltip
-	 *  @return string The HTML for the search field
+	 *	Return a JSON formatted string to be used as autocomplete infomation in a search field.
+	 *	
+	 *	The collected data consists of all page titles, URLs and all available tags.
+	 *
+	 * 	@param object $Automad
+	 *	@return string The JSON encoded autocomplete data
 	 */
 	
-	public static function render($placeholder = '', $tooltip = '') {
+	public static function render($Automad) {
 		
-		if ($tooltip) {
-			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
+		$titles = array();
+		$urls = array();
+		$tags = array();
+		$values = array();
+		
+		foreach ($Automad->getCollection() as $Page) {
+			$titles[] = $Page->get(AM_KEY_TITLE);
+			$urls[] = $Page->origUrl;
+			$tags = array_merge($tags, $Page->tags);
 		}
 		
-		return  '<form class="uk-form uk-width-1-1" action="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '" method="get" data-am-search>' .
-					'<input type="hidden" name="context" value="search" />' .
-					'<div class="uk-autocomplete uk-width-1-1">' .
-						'<input ' .
-						'class="uk-form-controls uk-width-1-1" ' .
-						'name="query" ' .
-						'type="search" ' .
-						'placeholder="' . $placeholder . '" ' .
-						$tooltip .
-						'required ' .
-						'/>' .
-					'</div>' . 
-				'</form>';
+		$titles = array_unique($titles);
+		$tags = array_unique($tags);
+		
+		// Sort arrays separately to keep titles, urls and tags grouped.
+		sort($titles);
+		sort($tags);
+		sort($urls);
+		
+		foreach (array_merge($titles, $tags, $urls) as $value) {
+			$values[]['value'] = $value;
+		}
+		
+		return json_encode($values, JSON_UNESCAPED_SLASHES);
 		
 	}
 	

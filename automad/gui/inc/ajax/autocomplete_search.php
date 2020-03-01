@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo $this->getContent()->getAutoCompleteJSON();
+echo Automad\GUI\Components\Autocomplete\Search::render($this->getAutomad());
 
 
 ?>

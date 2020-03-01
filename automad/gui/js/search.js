@@ -42,9 +42,9 @@
 
 +function(Automad, $, UIkit) {
 
-	Automad.autocomplete = {
+	Automad.search = {
 		
-		selector: '[data-am-autocomplete]',
+		selector: '[data-am-search]',
 		
 		submitForm: function(e) {
 			
@@ -68,13 +68,14 @@
 		
 		if ($('.am-dashboard').length > 0) {
 			
-			$.post('?ajax=autocomplete', function(data) {
+			$.post('?ajax=autocomplete_search', function(data) {
 
-				var $element = $(Automad.autocomplete.selector + ' .uk-autocomplete'),
-					options = { source: data, minLength: 2 };
+				var options = { source: data, minLength: 2 };
 
-				UIkit.autocomplete($element, options);
-
+				$(Automad.search.selector + ' .uk-autocomplete').each(function() {
+					UIkit.autocomplete($(this), options);
+				});
+				
 			}, 'json');
 			
 		}
@@ -82,15 +83,15 @@
 	});
 	
 	// Submit autocomplete form on hitting the return key.
-	$(document).on('keydown', Automad.autocomplete.selector + ' .uk-autocomplete input[type="search"]', function(e) {
+	$(document).on('keydown', Automad.search.selector + ' .uk-autocomplete input[type="search"]', function(e) {
 		
 		if (e.which == 13) {
-			Automad.autocomplete.submitForm(e);	
+			Automad.search.submitForm(e);	
 		}
 		
 	});
 	
 	// Submit form when selecting an autocomplete value (navbar only).
-	$(document).on('click', Automad.autocomplete.selector + ' .uk-dropdown a', Automad.autocomplete.submitForm);
+	$(document).on('click', Automad.search.selector + ' .uk-dropdown a', Automad.search.submitForm);
 	
 }(window.Automad = window.Automad || {}, jQuery, UIkit);
