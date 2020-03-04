@@ -208,7 +208,7 @@ class Automad {
 			
 			// Convert hidden value to boolean.
 			if (array_key_exists(AM_KEY_HIDDEN, $data)) {	
-				$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] === 'true' || $data[AM_KEY_HIDDEN] === '1');
+				$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] !== 'false');
 			} else {
 				$data[AM_KEY_HIDDEN] = false;
 			}

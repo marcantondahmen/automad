@@ -229,7 +229,7 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 							<input 
 							id="am-checkbox-hidden" 
 							type="checkbox" 
-							name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> 
+							name="data[<?php echo AM_KEY_HIDDEN; ?>]"<?php if ($hidden) { echo ' checked'; } ?> 
 							/>
 						</label>
 					</div>	

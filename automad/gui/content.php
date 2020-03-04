@@ -792,12 +792,6 @@ class Content {
 					// Needs to be done here, to be able to simply test for empty title field.
 					$data = array_filter($data, 'strlen');
 		
-					// Set hidden parameter within the $data array. 
-					// Since it is a checkbox, it must get parsed separately.
-					if (isset($_POST[AM_KEY_HIDDEN])) {
-						$data[AM_KEY_HIDDEN] = 1;
-					}
-	
 					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
 					// That information has to be parsed first and "subdivided".
 					$themeTemplate = $this->getTemplateNameFromArray($_POST, 'theme_template');
