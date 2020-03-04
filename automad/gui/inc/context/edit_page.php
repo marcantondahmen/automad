@@ -145,6 +145,9 @@ $this->element('header');
 		<!-- Select Image Modal -->
 		<?php echo Components\Modal\SelectImage::render($url); ?>
 
+		<!-- Add Link Modal -->
+		<?php echo Components\Modal\Link::render(); ?>
+
 		<!-- Move Page Modal -->
 		<div id="am-move-page-modal" class="uk-modal">
 			<div class="uk-modal-dialog">

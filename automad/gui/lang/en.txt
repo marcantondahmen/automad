@@ -431,6 +431,21 @@ install_title: Create User Account
 
 
 
+link_placeholder: Start typing a page title or paste an external link here
+
+-
+
+link_title: Add Link
+
+-
+
+
+
+
+
+
+
+
 login_title: Login
 
 -

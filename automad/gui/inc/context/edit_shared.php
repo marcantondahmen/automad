@@ -97,6 +97,9 @@ $this->element('header');
 		<!-- Select Image Modal -->
 		<?php echo Components\Modal\SelectImage::render(); ?>
 
+		<!-- Add Link Modal -->
+		<?php echo Components\Modal\Link::render(); ?>
+
 <?php
 
 

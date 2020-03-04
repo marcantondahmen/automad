@@ -122,8 +122,17 @@ class Field {
 		
 			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
 
-			$html .= '<div class="am-select-image-field uk-flex" data-am-select-image-field>' .
+			$html .= '<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>' .
 					 '<button type="button" class="uk-button uk-button-large"><i class="uk-icon-folder-open"></i></button>' .
+					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />' .
+					 '</div>';
+
+		} else if (strpos($key, 'url') === 0) {
+		
+			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
+
+			$html .= '<div class="am-form-icon-button-input uk-flex" data-am-link-field>' .
+					 '<button type="button" class="uk-button uk-button-large"><i class="uk-icon-link"></i></button>' .
 					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />' .
 					 '</div>';
 		

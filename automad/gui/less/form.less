@@ -132,15 +132,35 @@
 	max-height: none !important;
 }
 
-.am-form-input-button {
+.am-form {
 
-	& input[type="text"],
-	& > div {
+	&-input-button {
 
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
+		& input[type="text"],
+		& > div {
 
-		& + button {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+
+			& + button {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+
+		}
+
+	}
+
+	&-icon-button-input {
+
+		& > button {
+			width: @form-height;
+			min-width: @form-height;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		& > input[type="text"] {
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
 		}

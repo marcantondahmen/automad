@@ -532,8 +532,11 @@
 			addAction('italic', '*$1*');
 			addAction('strike', '~~$1~~');
 			addAction('blockquote', '> $1', 'replaceLine');
-			addAction('link', '[$1](http://)');
 			
+			editor.on('action.link', function () {
+				editor.editor.AutomadLink();
+			});
+
 			editor.on('action.image', function() {
 				editor.editor.AutomadSelectImage();
 			});

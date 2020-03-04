@@ -1,3 +1,4 @@
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -30,48 +31,19 @@
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
-.am-select-image {
+defined('AUTOMAD') or die('Direct access not permitted!');
 
-	&-resize {
 
-		&-hide & {
-			display: none;
-		}
+/*
+ *	Autocomplete data for links.
+ */
 
-	}
-	
-	&-modal {
+ 
+echo Automad\GUI\Components\Autocomplete\Link::render($this->getAutomad());
 
-		z-index: 1100;
 
-		& form .uk-panel-box {
-
-			padding: @panel-box-padding - 2px;
-
-			& label {
-				padding: 2px;
-				cursor: pointer;
-			}	
-
-			& img {
-
-				border: @am-border-width solid @am-border-color;
-				border-radius: @am-radius;
-				max-width: 100%;
-				height: auto;
-				.transition(border-color 0.2s;);
-
-				&:hover {
-					border-color: @am-success;
-				}
-
-			}
-
-		}
-
-	}
-
-}
+?>
