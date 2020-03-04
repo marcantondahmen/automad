@@ -248,18 +248,16 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 						/>
 					</div>	
 					<!-- Redirect -->
-					<div class="uk-form-row">
-						<label for="am-input-redirect" class="uk-form-label">
-							<?php Text::e('page_redirect'); ?>
-						</label>
-						<input 
-						id="am-input-redirect" 
-						class="uk-form-controls uk-width-1-1" 
-						type="text" 
-						name="data[<?php echo AM_KEY_URL; ?>]" 
-						value="<?php echo htmlspecialchars($data[AM_KEY_URL]); ?>" 
-						/>
-					</div>
+					<?php 
+						echo Components\Form\Field::render(
+							$this->getAutomad(), 
+							AM_KEY_URL, 
+							$data[AM_KEY_URL],
+							false,
+							false,
+							Text::get('page_redirect')
+						); 
+					?>
 					<?php } ?> 
 					<!-- Tags -->
 					<div class="uk-form-row">	

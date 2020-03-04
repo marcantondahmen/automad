@@ -61,20 +61,25 @@ class Field {
 	 *  @param string $value        
 	 *  @param boolean $removeButton 
 	 *  @param object $Theme
+	 * 	@param string $label
 	 *  @return string The generated HTML            
 	 */
 	
-	public static function render($Automad, $key = '', $value = '', $removeButton = false, $Theme = false) {
+	public static function render($Automad, $key = '', $value = '', $removeButton = false, $Theme = false, $label = false) {
 		
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 		
 		// The field ID.
 		$id = 'am-input-data-' . $key;
+
+		if (!$label) {
+			$label = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key))));
+		}
 	
 		$html = '<div class="uk-form-row uk-position-relative">' .
 				'<label class="uk-form-label" for="' . $id . '">' . 
-				ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key)))) . 
+				$label . 
 				'</label>';
 
 		if ($removeButton) {
