@@ -57,7 +57,7 @@
 
 				var $input = $(this).parent().find('input');
 
-				si.select(UIkit.modal(si.modalSelector), $input, false, function(url, modalElementClicked) {
+				si.dialog(UIkit.modal(si.modalSelector), $input, false, function(url, modalElementClicked) {
 
 					$input.val(url).trigger('change');
 
@@ -67,7 +67,7 @@
 
 		},
 
-		select: function(modal, elementFocusOnHide, resize, callback) {
+		dialog: function(modal, elementFocusOnHide, resize, callback) {
 
 			var modalSelector = Automad.selectImage.modalSelector,
 				onClick = function (url, modalElementClicked) {
@@ -130,7 +130,7 @@
 			modal = UIkit.modal(modalSelector),
 			cm = this;
 
-		Automad.selectImage.select(modal, cm, true, function(url, modalElementClicked) {
+		Automad.selectImage.dialog(modal, cm, true, function(url, modalElementClicked) {
 
 			// Add size options in case a label was clicked.
 			if (modalElementClicked.tagName.toLowerCase() == 'label') {

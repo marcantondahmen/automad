@@ -43,6 +43,7 @@
 	Automad.link = {
 
 		dataAttr: {
+			'form': 'data-am-link',
 			'field': 'data-am-link-field'
 		},
 		
@@ -57,7 +58,7 @@
 
 				var $input = $(this).parent().find('input');
 
-				link.select(UIkit.modal(link.modalSelector), $input, function(url) {
+				link.dialog(UIkit.modal(link.modalSelector), $input, function(url) {
 
 					$input.val(url).trigger('change');
 
@@ -67,7 +68,7 @@
 
 		},
 
-		select: function(modal, elementFocusOnHide, callback) {
+		dialog: function(modal, elementFocusOnHide, callback) {
 
 			var onClick = function(url) {
 
@@ -98,19 +99,21 @@
 
 		autocomplete: function() {
 
-			var $modal = $(Automad.link.modalSelector);
+			var dataAttrForm = Automad.link.dataAttr.form,
+				$form = $('[' + dataAttrForm + ']').first(),
+				handler = $form.data(Automad.util.dataCamelCase(dataAttrForm));
 
-			if ($modal.length > 0) {
+			if ($form.length > 0) {
 
-				$.post('?ajax=autocomplete_link', function(data) {
+				$.post(handler, function(data) {
 
-					var $element = $modal.find('.uk-autocomplete').first(),
+					var $element = $form.find('.uk-autocomplete').first(),
 						options = { source: data, minLength: 1 },
 						$autocomplete = UIkit.autocomplete($element, options);
 
 					$autocomplete.on('selectitem.uk.autocomplete', function(data, element) {
-						$modal.find('input').val(element.value);
-						$modal.find('.uk-form button').click();
+						$form.find('input').val(element.value);
+						$form.find('button').click();
 					});
 
 				}, 'json');
@@ -131,7 +134,7 @@
 			modal = UIkit.modal(modalSelector),
 			cm = this;
 
-		Automad.link.select(modal, cm, function(url) {
+		Automad.link.dialog(modal, cm, function(url) {
 
 			var selection = cm.getSelection();
 
