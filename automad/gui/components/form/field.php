@@ -77,13 +77,22 @@ class Field {
 			$label = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key))));
 		}
 	
-		$html = '<div class="uk-form-row uk-position-relative">' .
-				'<label class="uk-form-label" for="' . $id . '">' . 
-				$label . 
-				'</label>';
+		$html = <<< HTML
+				<div class="uk-form-row uk-position-relative">
+					<label class="uk-form-label" for="$id">
+						$label
+					</label>
+HTML;
 
 		if ($removeButton) {
-			$html .= '<button type="button" class="am-remove-parent uk-position-top-right uk-margin-top uk-close"></button>';
+
+			$html .= <<< HTML
+					 <button 
+					 type="button" 
+					 class="am-remove-parent uk-position-top-right uk-margin-top uk-close"
+					 ></button>
+HTML;
+
 		}
 
 		$tooltip = '';
@@ -99,10 +108,10 @@ class Field {
 		$shared = htmlspecialchars($Automad->Shared->get($key));
 
 		// Append placeholder to $attr when editing a page. Therefore check if any URL or context (inpage-edit) is set in $_POST.
+		$placeholder = '';
+		
 		if (!empty($_POST['url']) || !empty($_POST['context'])) {
 			$placeholder = ' placeholder="' . $shared . '"';
-		} else {
-			$placeholder = '';
 		}
 		
 		// Create field dependig on the start of $key.
@@ -110,11 +119,16 @@ class Field {
 			
 			$attr .= $placeholder;
 			
-			$html .= '<div' . $tooltip . '>' .
-					 '<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10" data-uk-markdowneditor>' . 
-					 $value . 
-					 '</textarea>' .
-					 '</div>';
+			$html .= <<< HTML
+					 <div $tooltip>
+						 <textarea 
+						 $attr 
+						 class="uk-form-controls uk-width-1-1" 
+						 rows="10" 
+						 data-uk-markdowneditor
+						 >$value</textarea>
+					 </div>
+HTML;
 			
 		// Only match "image" and not "images". For multiple images a pattern is needed
 		// instead of one selected image.
@@ -122,19 +136,27 @@ class Field {
 		
 			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
 
-			$html .= '<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>' .
-					 '<button type="button" class="uk-button uk-button-large"><i class="uk-icon-folder-open"></i></button>' .
-					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />' .
-					 '</div>';
+			$html .= <<< HTML
+					 <div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
+					 	<button type="button" class="uk-button uk-button-large">
+							 <i class="uk-icon-folder-open"></i>
+						</button>
+					 	<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+					 </div>
+HTML;
 
 		} else if (strpos($key, 'url') === 0) {
 		
 			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
 
-			$html .= '<div class="am-form-icon-button-input uk-flex" data-am-link-field>' .
-					 '<button type="button" class="uk-button uk-button-large"><i class="uk-icon-link"></i></button>' .
-					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />' .
-					 '</div>';
+			$html .= <<< HTML
+					 <div class="am-form-icon-button-input uk-flex" data-am-link-field>
+					 	<button type="button" class="uk-button uk-button-large">
+							 <i class="uk-icon-link"></i>
+						</button>
+					 	<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+					 </div>
+HTML;
 		
 		} else if (strpos($key, 'date') === 0) {
 			
@@ -151,33 +173,47 @@ class Field {
 				$attrTime .= ' placeholder="' . Core\Str::dateFormat($shared, $formatTime) . '"';
 			}
 			
-			$html .= '<div data-am-datetime' . $tooltip . '>' .
-					 // Actual combined date-time value (hidden).
-					 '<input type="hidden" ' . $attr  . ' />' .
-					 // Date picker.
-					 '<div class="uk-form-icon">' . 
-					 '<i class="uk-icon-calendar"></i>' .
-					 '<input type="text" class="uk-width-1-1" ' . $attrDate . ' data-uk-datepicker="{format:\'YYYY-MM-DD\',pos:\'bottom\'}" />' .
-					 '</div>' .
-					 // Time picker.
-					 '<div class="uk-form-icon">' . 
-					 '<i class="uk-icon-clock-o"></i>' .
-					 '<input type="text" class="uk-width-1-1" ' . $attrTime . ' data-uk-timepicker="{format:\'24h\'}" />' .
-					 '</div>' .
-					 // Reset button.
-					 '<button type="button" class="uk-button" data-am-clear-date><i class="uk-icon-remove"></i></button>' .
-					 '</div>';	
+			$html .= <<< HTML
+					 <div class="uk-flex" data-am-datetime $tooltip>
+					 	<input type="hidden" $attr />
+					 	<div class="uk-form-icon"> 
+					 		<i class="uk-icon-calendar"></i>
+							<input 
+							type="text" 
+							class="uk-width-1-1" 
+							$attrDate 
+							data-uk-datepicker="{format:'YYYY-MM-DD',pos:'bottom'}" 
+							/>
+					 	</div>
+					 	<div class="uk-form-icon">
+					 		<i class="uk-icon-clock-o"></i>
+							<input 
+							type="text" 
+							class="uk-width-1-1" 
+							$attrTime 
+							data-uk-timepicker="{format:'24h'}" 
+							/>
+					 	</div>
+					 	<button type="button" class="uk-button" data-am-clear-date>
+							 <i class="uk-icon-remove"></i>
+						</button>
+					 </div>
+HTML;
 			
 		} else if (strpos($key, 'checkbox') === 0) {
 			
 			if ($value) {
 				$attr .= ' checked';
 			}
+
+			$text = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key)))));
 			
-			$html .= '<label class="am-toggle-switch uk-button" data-am-toggle' . $tooltip . '>&nbsp;' . 
-					 ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key))))) . 
-					 '<input ' . $attr . ' type="checkbox" />' .
-					 '</label>';
+			$html .= <<< HTML
+					 <label class="am-toggle-switch uk-button" data-am-toggle $tooltip> 
+					 	$text
+					 	<input $attr type="checkbox" />
+					 </label>
+HTML;
 			
 		} else if (strpos($key, 'color') === 0) {
 
@@ -189,19 +225,24 @@ class Field {
 			
 			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
 			
-			$html .= '<div class="uk-flex" data-am-colorpicker>' . 
-					 '<input type="color" class="uk-button" value="' . $color . '" />' .
-					 '<input type="text" class="uk-form-controls uk-width-1-1" ' . $attr . ' />'.
-					 '</div>'; 
+			$html .= <<< HTML
+					 <div class="uk-flex" data-am-colorpicker> 
+					 	<input type="color" class="uk-button" value="$color" />
+					 	<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+					 </div>
+HTML;
 			
 		} else {
 			
 			$attr .= $placeholder . $tooltip;
 			
 			// The default is a simple textarea.
-			$html .= 	'<textarea ' . $attr . ' class="uk-form-controls uk-width-1-1" rows="10">' . 
-					$value . 
-					'</textarea>';
+			$html .= <<< HTML
+					 <textarea 
+					 $attr 
+					 class="uk-form-controls uk-width-1-1" rows="10"
+					 >$value</textarea>
+HTML;
 			
 		}
 		

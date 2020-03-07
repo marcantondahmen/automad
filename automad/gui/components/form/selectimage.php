@@ -66,10 +66,15 @@ class SelectImage {
 
 		if ($files) {
 
-			$html = '<p class="uk-margin-top">' . 
-						$title . '&nbsp;&nbsp;<span class="uk-badge">' . count($files) . '</span>
-					</p>' .
-					'<div class="uk-panel uk-panel-box uk-flex uk-flex-wrap uk-flex-wrap-top">';
+			$count = count($files);
+
+			$html = <<< HTML
+					<p class="uk-margin-top"> 
+						$title
+						&nbsp;<span class="uk-badge">$count</span>
+					</p>
+					<div class="uk-panel uk-panel-box uk-flex uk-flex-wrap uk-flex-wrap-top">
+HTML;
 			
 			foreach ($files as $file) {
 
@@ -87,10 +92,14 @@ class SelectImage {
 					$image = new Core\Image($file, $min, $min, true);
 				}
 
-				$html .= '<label class="uk-width-1-3 uk-width-medium-1-5">' .
-						 	'<img src="' . AM_BASE_URL . $image->file . '" title="' . $value . '" data-uk-tooltip>' .
-						 	'<input type="hidden" name="imageUrl" value="' . $value . '">' .
-						 '</label>';
+				$imageUrl = AM_BASE_URL . $image->file;
+
+				$html .= <<< HTML
+				 		 <label class="uk-width-1-3 uk-width-medium-1-5">
+						 	<img src="$imageUrl" title="$value" data-uk-tooltip>
+						 	<input type="hidden" name="imageUrl" value="$value">
+						 </label>
+HTML;
 
 			}
 			

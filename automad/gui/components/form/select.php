@@ -69,11 +69,15 @@ class Select {
 			$selected = reset($values);
 		}
 		
-		$html = '<div class="uk-button uk-form-select" data-uk-form-select="{activeClass:\'\'}">' . 
-				ltrim($prefix . ' ') . 
-				'<span></span>&nbsp;&nbsp;' .
-				'<i class="uk-icon-caret-down"></i>' . 
-				'<select name="' . $name . '">';
+		$prefix = ltrim($prefix . ' ');
+
+		$html = <<< HTML
+				<div class="uk-button uk-form-select" data-uk-form-select="{activeClass:''}"> 
+					$prefix
+					<span></span>&nbsp;
+					<i class="uk-icon-caret-down"></i> 
+					<select name="$name">
+HTML;
 		
 		foreach ($values as $text => $value) {
 			
@@ -87,8 +91,10 @@ class Select {
 			
 		}
 		
-		$html .= '</select>' . 
-			 	 '</div>';
+		$html .= <<< HTML
+					</select> 
+				</div>
+HTML;
 		
 		return $html;
 		

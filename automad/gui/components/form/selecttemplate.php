@@ -70,11 +70,18 @@ class SelectTemplate {
 		$mainTheme = $Themelist->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
 		
 		// Create HTML.
-		$html = '<div class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" data-uk-form-select="{activeClass:\'\'}">' . 
-				'<span></span>&nbsp;&nbsp;' .
-				'<span class="uk-float-right"><i class="uk-icon-caret-down"></i></span>' .
-				'<select class="uk-width-1-1" name="' . $name . '">'; 
-		
+		$html = <<< HTML
+				<div 
+				class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" 
+				data-uk-form-select="{activeClass:''}"
+				> 
+					<span></span>&nbsp;
+					<span class="uk-float-right">
+						<i class="uk-icon-caret-down"></i>
+					</span>
+					<select class="uk-width-1-1" name="$name">
+HTML;
+
 		// List templates of current main theme.
 		if ($mainTheme) {
 			
@@ -123,8 +130,10 @@ class SelectTemplate {
 			
 		}
 		
-		$html .= '</select>' .
-			     '</div>';
+		$html .= <<< HTML
+					</select>
+				 </div>
+HTML;
 		
 		return $html;
 		

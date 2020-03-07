@@ -94,28 +94,52 @@ class Group {
 			$addVarInputlId = $addVariableIdPrefix . '-input';
 			$addVarContainerId = $addVariableIdPrefix . '-container';
 			
-			$html =	'<div id="' . $addVarContainerId . '" class="uk-margin-bottom">' . $html . '</div>' .
-					// The modal button.
-					'<a href="#' . $addVarModalId . '" class="uk-button uk-button-success uk-margin-small-top" data-uk-modal>' .
-					'<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
-					'</a>' . 
-					// The actual modal.
-					'<div id="' . $addVarModalId . '" class="uk-modal">' .
-					'<div class="uk-modal-dialog">' .
-					'<div class="uk-modal-header">' . Text::get('btn_add_var') . '<a href="" class="uk-modal-close uk-close"></a></div>' .	
-					'<input id="' . $addVarInputlId . '" type="text" class="uk-form-controls uk-width-1-1" ' .
-						'placeholder="' . Text::get('page_var_name') . '" required ' .
-						'data-am-enter="#' . $addVarSubmitId . '" data-am-watch-exclude />' .
-					'<div class="uk-modal-footer uk-text-right">' .
-						'<button type="button" class="uk-modal-close uk-button">' .
-							'<i class="uk-icon-close"></i>&nbsp;&nbsp;' . Text::get('btn_close') .
-						'</button>&nbsp;' .
-						'<button id="' . $addVarSubmitId . '" type="button" class="uk-button uk-button-success" data-am-error-exists="' . Text::get('error_var_exists') . '" data-am-error-name="' . Text::get('error_var_name') . '">
-							<i class="uk-icon-plus"></i>&nbsp;&nbsp;' . Text::get('btn_add_var') .
-						'</button>' .
-					'</div>' .
-					'</div>' .
-					'</div>';
+			$btnAddVar = Text::get('btn_add_var');
+			$btnClose = Text::get('btn_close');
+			$pageVarName = Text::get('page_var_name');
+			$errorVarExists = Text::get('error_var_exists');
+			$errorVarName = Text::get('error_var_name');
+
+			$html =	<<< HTML
+					<div id="$addVarContainerId" class="uk-margin-bottom">$html</div>
+					<a href="#$addVarModalId" class="uk-button uk-button-success uk-margin-small-top" data-uk-modal>
+						<i class="uk-icon-plus"></i>&nbsp;
+						$btnAddVar
+					</a>
+					<div id="$addVarModalId" class="uk-modal">
+						<div class="uk-modal-dialog">
+							<div class="uk-modal-header">
+								$btnAddVar
+								<a href="" class="uk-modal-close uk-close"></a>
+							</div>	
+							<input 
+							id="$addVarInputlId" 
+							type="text" 
+							class="uk-form-controls uk-width-1-1"
+							placeholder="$pageVarName" 
+							required
+							data-am-enter="#$addVarSubmitId" 
+							data-am-watch-exclude 
+							/>
+							<div class="uk-modal-footer uk-text-right">
+								<button type="button" class="uk-modal-close uk-button">
+									<i class="uk-icon-close"></i>&nbsp;
+									$btnClose
+								</button>
+								<button 
+								id="$addVarSubmitId" 
+								type="button" 
+								class="uk-button uk-button-success" 
+								data-am-error-exists="$errorVarExists" 
+								data-am-error-name="$errorVarName"
+								>
+									<i class="uk-icon-plus"></i>&nbsp;
+									$btnAddVar
+								</button>
+							</div>
+						</div>
+					</div>
+HTML;
 								
 		} 
 		

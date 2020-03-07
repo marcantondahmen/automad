@@ -65,7 +65,13 @@ class FieldHidden {
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 
-		return '<input type="hidden" name="data[' . $key . ']" value="' . $value . '" />';
+		return 	<<<HTML
+				<input 
+				type="hidden" 
+				name="data[$key]" 
+				value="$value" 
+				/>
+HTML;
 
 	}
 

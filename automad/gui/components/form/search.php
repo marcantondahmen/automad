@@ -64,20 +64,24 @@ class Search {
 		if ($tooltip) {
 			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
+
+		$dashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		
-		return  '<form class="uk-form uk-width-1-1" action="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '" method="get" data-am-search>' .
-					'<input type="hidden" name="context" value="search" />' .
-					'<div class="uk-autocomplete uk-width-1-1">' .
-						'<input ' .
-						'class="uk-form-controls uk-width-1-1" ' .
-						'name="query" ' .
-						'type="search" ' .
-						'placeholder="' . $placeholder . '" ' .
-						$tooltip .
-						'required ' .
-						'/>' .
-					'</div>' . 
-				'</form>';
+		return  <<< HTML
+				<form class="uk-form uk-width-1-1" action="$dashboard" method="get" data-am-search>
+					<input type="hidden" name="context" value="search" />
+					<div class="uk-autocomplete uk-width-1-1">
+						<input
+						class="uk-form-controls uk-width-1-1"
+						name="query"
+						type="search"
+						placeholder="$placeholder"
+						$tooltip
+						required
+						/>
+					</div> 
+				</form>
+HTML;
 		
 	}
 	
