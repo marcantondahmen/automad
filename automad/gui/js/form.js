@@ -63,6 +63,9 @@
 			 *      								Note that a page can only (!) have once a handler with the same name.
 			 *      								Having multiple forms with the same handler confuses button and watch states.
 			 *
+			 * 	data-am-dashboard="url"				The URL of the dashboard.
+			 * 										This is required to add a base URL to AJAX requests in in-page editing.
+			 * 
 			 * 	data-am-url="page"					To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
 			 *										included in the request.
 			 *										Therefore the data attribute "data-am-url" must be added to the form tag. 
@@ -95,6 +98,7 @@
 			 */
 			
 			handler: 		'data-am-handler',
+			dashboard:		'data-am-dashboard',
 			url:			'data-am-url',
 			submit:			'data-am-submit',
 			init:			'data-am-init',
@@ -143,11 +147,13 @@
 			 */
 			
 			var	f = Automad.form,
-				da = f.dataAttr,
 				$form = $(e.target),
 				
 				// Action
 				handler = $form.data(Automad.util.dataCamelCase(f.dataAttr.handler)),
+
+				// Dashboard base URL.
+				dashboard = $form.data(Automad.util.dataCamelCase(f.dataAttr.dashboard)),
 				
 				// Optional URL parameter.
 				// Only needed, to identify a page, in case the form relates to a certain page (edit_page.php).
@@ -162,8 +168,13 @@
 				param.push({name: 'url', value: url});
 			}	
 			
+			// Set dashboard to an empty string if undefined.
+			if (dashboard === undefined) {
+				dashboard = '';
+			}
+
 			// Post form data to the handler.
-			$.post('?ajax=' + handler, param, function(data) {
+			$.post(dashboard + '?ajax=' + handler, param, function(data) {
 			
 				// In case the returned JSON contains a redirect URL, simply redirect the page.
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.

@@ -66,6 +66,9 @@ class Link {
 		$btnClose = Text::get('btn_close');
 		$placeholder = Text::get('link_placeholder');
 
+		// Add dashboard URL to handler to make dialog work in in-Page edit mode.
+		$autocomplete = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?ajax=autocomplete_link';
+
 		return <<< HTML
 
 			<div id="am-link-modal" class="uk-modal">
@@ -74,7 +77,10 @@ class Link {
 						$title
 						<a href="#" class="uk-modal-close uk-close"></a>
 					</div>
-					<div class="am-form-input-button uk-form uk-flex">
+					<div 
+					class="am-form-input-button uk-form uk-flex" 
+					data-am-link="$autocomplete"
+					>
 						<div class="uk-autocomplete uk-width-1-1">
 							<input class="uk-form-controls uk-width-1-1" type="text" placeholder="$placeholder">
 							<script type="text/autocomplete">	

@@ -91,6 +91,18 @@
 				$(modalSelector).addClass('am-select-image-resize-hide');
 			} 
 
+			// Check for context in in-Page edit mode before opening modal
+			// and initializing the included form.
+			var $inPageEdit = $('.am-inpage');
+
+			if ($inPageEdit.length > 0) {
+				
+				var context = $inPageEdit.find('[name="context"]').val();
+
+				modal.find('form').data('amUrl', context);
+
+			}
+
 			modal.show();
 
 			modal.on('click.automad.selectImage', 'form button', function() {

@@ -659,7 +659,7 @@ class Content {
 							$value = $Page->data[$_POST['key']];
 						}
 						
-						$output['html'] = '<div id="am-inpage-edit-fields">' .
+						$output['html'] = '<div id="am-inpage-edit-fields" data-am-path="' . $Page->path . '">' .
 										  '<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
 										  Components\Form\Field::render($this->Automad, $_POST['key'], $value) . 
 										  '</div>';

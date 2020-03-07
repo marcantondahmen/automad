@@ -103,55 +103,74 @@ class InPage {
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
 		$urlSys = $urlGui . '?context=system_settings';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
-		
+		$request = AM_REQUEST;
+		$logoSvg = file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg');
+		$btnData = Text::get('btn_data');
+		$btnFiles = Text::get('btn_files');
+		$sysTitle = Text::get('sys_title');
+		$inpageEditTitle = Text::get('inpage_edit_title');
+		$btnClose = Text::get('btn_close');
+		$btnSave = Text::get('btn_save');
+
+		$modalSelectImage = Components\Modal\SelectImage::render();
+		$modalLink = Components\Modal\Link::render();
+
 		$queryString = '';
 		
 		if (!empty($_SERVER['QUERY_STRING'])) {
 			$queryString = $_SERVER['QUERY_STRING'];
 		}
 		
-		$html = '<div class="am-inpage">' .
-				// Menu.
-				'<div class="am-inpage-menubar">' .
-					'<div class="uk-button-group">' .
-						'<a href="' . $urlGui . '" class="am-inpage-menu-button">' .
-							file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg') .
-						'</a>' .
-						'<a href="' . $urlData . '" title="' . Text::get('btn_data') . '" ' . $attr . '><i class="uk-icon-file-text-o"></i></a>' .
-						'<a href="' . $urlFiles . '" title="' . Text::get('btn_files') . '" ' . $attr . '><i class="uk-icon-folder-open-o"></i></a>' .
-						'<a href="' . $urlSys . '" title="' . Text::get('sys_title') . '" ' . $attr . '><i class="uk-icon-sliders"></i></a>' .
-						'<a href="#" class="am-drag-handle am-inpage-menu-button"><i class="uk-icon-arrows"></i></a>' .
-					'</div>' .
-				'</div>' .
-				// Modal.
-				'<div id="am-inpage-edit-modal" class="uk-modal">' .
-					'<div class="uk-modal-dialog uk-modal-dialog-blank">' .
-						'<div class="uk-container uk-container-center">' .
-							'<form class="uk-form uk-form-stacked uk-margin-top" data-am-inpage-handler="' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?ajax=inpage_edit">' .
-								'<div class="uk-modal-header">' . 
-									Text::get('inpage_edit_title') . '&nbsp;' .
-									'<a href="#" class="uk-modal-close uk-close"></a>' .
-								'</div>' .
-								'<div class="uk-margin-bottom">' . 
-									'<i class="uk-icon-file-text"></i>&nbsp;&nbsp;<span id="am-inpage-edit-modal-title"></span>' .
-								'</div>' .
-								'<input type="hidden" name="url" value="' . AM_REQUEST . '" />' .
-								'<input type="hidden" name="query" value="' . $queryString . '" />' .
-								'<div class="uk-modal-footer">' . 
-									'<div class="uk-text-right uk-margin-large-bottom">' .
-										'<button type="button" class="uk-modal-close uk-button">' .
-											'<i class="uk-icon-close"></i>&nbsp;&nbsp;' . Text::get('btn_close') . 
-										'</button>&nbsp;' .
-										'<button type="submit" class="uk-button uk-button-success">' .
-											'<i class="uk-icon-check"></i>&nbsp;&nbsp;' . Text::get('btn_save') . 
-										'</button>' .
-									'</div>' .
-								'</div>' .
-							'</form>' .
-						'</div>' .
-					'</div>' .
-				'</div>' .
-			'</div>';
+		$html = <<< HTML
+				<div class="am-inpage">
+					<div class="am-inpage-menubar">
+						<div class="uk-button-group">
+							<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
+							<a href="$urlData" title="$btnData" $attr><i class="uk-icon-file-text-o"></i></a>
+							<a href="$urlFiles" title="$btnFiles" $attr><i class="uk-icon-folder-open-o"></i></a>
+							<a href="$urlSys" title="$sysTitle" $attr><i class="uk-icon-sliders"></i></a>
+							<a href="#" class="am-drag-handle am-inpage-menu-button">
+								<i class="uk-icon-arrows"></i>
+							</a>
+						</div>
+					</div>
+					<div id="am-inpage-edit-modal" class="uk-modal">
+						<div class="uk-modal-dialog uk-modal-dialog-blank">
+							<div class="uk-container uk-container-center">
+								<form 
+								class="uk-form uk-form-stacked uk-margin-top" 
+								data-am-inpage-handler="${urlGui}?ajax=inpage_edit"
+								>
+									<div class="uk-modal-header">
+										$inpageEditTitle
+										<a href="#" class="uk-modal-close uk-close"></a>
+									</div>
+									<div class="uk-margin-bottom">
+										<i class="uk-icon-file-text"></i>&nbsp;
+										<span id="am-inpage-edit-modal-title"></span>
+									</div>
+									<input type="hidden" name="url" value="$request" />
+									<input type="hidden" name="query" value="$queryString" />
+									<div class="uk-modal-footer">
+										<div class="uk-text-right uk-margin-large-bottom">
+											<button type="button" class="uk-modal-close uk-button">
+												<i class="uk-icon-close"></i>&nbsp; 
+												$btnClose
+											</button>
+											<button type="submit" class="uk-button uk-button-success">
+												<i class="uk-icon-check"></i>&nbsp;
+												$btnSave
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					$modalSelectImage
+					$modalLink
+				</div>
+HTML;
 		
 		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);
 		
@@ -241,7 +260,7 @@ class InPage {
 		$str = str_replace(
 			array(AM_DEL_INPAGE_BUTTON_OPEN, AM_DEL_INPAGE_BUTTON_CLOSE), 
 			array(
-				Prefix::attributes(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="am-inpage-edit-button" data-uk-modal data-am-inpage-content=\''), 
+				Prefix::attributes(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="am-inpage-edit-button" data-uk-modal="{modal:false}" data-am-inpage-content=\''), 
 				Prefix::attributes('\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;')
 			), 
 			$str

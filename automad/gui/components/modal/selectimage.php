@@ -66,22 +66,35 @@ class SelectImage {
 			$url = 'data-am-url="' . $url . '"';
 		}
 
-		return '<div id="am-select-image-modal" class="am-select-image-modal uk-modal">' .
-					'<div class="uk-modal-dialog">' .
-						'<div class="uk-modal-header">' .
-							Text::get('image_select') .
-							'<a href="#" class="uk-modal-close uk-close"></a>' .
-						'</div>' .
-						'<form class="uk-form" data-am-handler="select_image" ' . $url . ' data-am-init>' .
-						'</form>' .
-						'<div class="uk-modal-footer uk-text-right">' .
-							'<button type="button" class="uk-modal-close uk-button">' .
-								'<i class="uk-icon-close"></i>&nbsp;&nbsp;' .
-								Text::get('btn_close') .
-							'</button>' .
-						'</div>' .
-					'</div>' .
-				'</div>';
+		// Include dashboard URL to make dialog work in in-Page edit mode.
+		$dashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
+		
+		$imageSelect = Text::get('image_select');
+		$btnClose = Text::get('btn_close');
+
+		return 	<<< HTML
+				<div id="am-select-image-modal" class="am-select-image-modal uk-modal">
+					<div class="uk-modal-dialog">
+						<div class="uk-modal-header">
+							$imageSelect
+							<a href="#" class="uk-modal-close uk-close"></a>
+						</div>
+						<form 
+						class="uk-form" 
+						data-am-handler="select_image" 
+						$url
+						data-am-dashboard="$dashboard"
+						data-am-init
+						></form>
+						<div class="uk-modal-footer uk-text-right">
+							<button type="button" class="uk-modal-close uk-button">
+								<i class="uk-icon-close"></i>&nbsp;
+								$btnClose
+							</button>
+						</div>
+					</div>
+				</div>
+HTML;
 
 	}
 
