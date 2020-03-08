@@ -582,10 +582,14 @@
 
 			editor.on('renderLate', function () {
 
+				var pagePath = $('[data-am-path]').data('amPath'),
+					pageUrl = $('[data-am-url]').data('amUrl');
+
+				if (pageUrl === undefined) {
+					pageUrl = '';
+				}
 
 				// Fix preview images.
-				var pagePath = $('[data-am-path]').data('amPath');
-
 				editor.currentvalue = editor.currentvalue.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, function (match, alt, file) {
 
 					if (file.includes('://')) {
@@ -600,8 +604,25 @@
 
 					return '![' + alt + '](' + path + file + ')';
 					
-				})
+				});
 
+				// Fix links.
+				editor.currentvalue = editor.currentvalue.replace(/([^!])\[([^\]]*)\]\(([^\)]+)\)/g, function (match, char, text, url) {
+
+					if (url.includes('://')) {
+						return match;
+					}
+
+					if (url.startsWith('/')) {
+						var url = '.' + url;
+					} else {
+						var url = '.' + pageUrl + '/' + url;
+					}
+
+					return char + '[' + text + '](' + url + ')';
+
+				});
+				
 				editor.currentvalue = parser(editor.currentvalue);
 
 			});
