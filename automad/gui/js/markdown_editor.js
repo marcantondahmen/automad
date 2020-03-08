@@ -607,7 +607,7 @@
 				});
 
 				// Fix links.
-				editor.currentvalue = editor.currentvalue.replace(/([^!])\[([^\]]*)\]\(([^\)]+)\)/g, function (match, char, text, url) {
+				editor.currentvalue = editor.currentvalue.replace(/(^|[^!])\[(.+?)\]\(([^\s\)]+?)\)(\s|$)/g, function (match, before, text, url, after) {
 
 					if (url.includes('://')) {
 						return match;
@@ -619,7 +619,7 @@
 						var url = '.' + pageUrl + '/' + url;
 					}
 
-					return char + '[' + text + '](' + url + ')';
+					return before + '[' + text + '](' + url + ')' + after;
 
 				});
 				
