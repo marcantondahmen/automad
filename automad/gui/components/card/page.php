@@ -66,10 +66,8 @@ class Page {
 	
 	private static function thumbnail($file, $w, $h, $gridW) {
 		
-		$img = new Core\Image($file, ceil($w), floor($h), true);
-		return 	'<li class="uk-width-' . $gridW . '">' .
-				'<img src="' . AM_BASE_URL . $img->file . '" alt="' . basename($img->file) . '" width="' . $img->width . '" height="' . $img->height . '">' .
-				'</li>';
+		$img = new Core\Image($file, $w, $h, true);
+		return 	'<li class="uk-width-' . $gridW . '"><img src="' . AM_BASE_URL . $img->file . '" /></li>';
 	
 	}
 
@@ -152,7 +150,7 @@ class Page {
 		if (!empty($images)) {
 			$preview = self::layout($images);
 		} else {
-			$preview = '<div class="am-panel-icon"><i class="uk-icon-folder-open"></i></div>';
+			$preview = '<i class="uk-icon-folder-open"></i>';
 		}
 
 		$pageTitle = $Page->get(AM_KEY_TITLE);
@@ -162,10 +160,11 @@ class Page {
 		$btnInPageEdit = Text::get('btn_inpage_edit');
 
 		return <<< HTML
+
 				<div class="uk-panel uk-panel-box">
 					<a 
 					href="$link" 
-					class="uk-panel-teaser uk-display-block"
+					class="am-panel-cover-4by3 uk-panel-teaser"
 					>
 						$preview
 					</a>
@@ -188,6 +187,7 @@ class Page {
 						</span>
 					</div>
 				</div>
+
 HTML;
 			
 	}

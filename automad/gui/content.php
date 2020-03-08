@@ -659,6 +659,7 @@ class Content {
 							$value = $Page->data[$_POST['key']];
 						}
 						
+						// Note that $Page->path has to be added to make image previews work in CodeMirror.
 						$output['html'] = '<div id="am-inpage-edit-fields" data-am-path="' . $Page->path . '">' .
 										  '<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
 										  Components\Form\Field::render($this->Automad, $_POST['key'], $value) . 

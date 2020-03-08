@@ -149,7 +149,7 @@ if (isset($_POST['data'])) {
 								$img = new Core\Image(reset($images), 320, 240, true);
 								$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 							} else {
-								$icon = '<div class="am-panel-icon"><span><i class="uk-icon-code"></i></span></div>';
+								$icon = '<i class="uk-icon-code"></i>';
 							}
 					
 							// Check currently active theme.
@@ -185,7 +185,7 @@ if (isset($_POST['data'])) {
 							</div>
 							<?php } ?>				
 							<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
-								<div class="uk-panel-teaser">
+								<div class="am-panel-cover-4by3 uk-panel-teaser">
 									<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
 										<?php echo $icon; ?>	
 									<?php if ($Theme->readme) { ?></a><?php } ?>
