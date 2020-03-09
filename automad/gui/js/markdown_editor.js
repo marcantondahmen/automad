@@ -583,14 +583,16 @@
 			editor.on('renderLate', function () {
 
 				var pagePath = $('[data-am-path]').data('amPath'),
-					pageUrl = $('[data-am-url]').data('amUrl');
+					pageUrl = $('[data-am-url]').data('amUrl'),
+					regexImage = /!\[([^\]]*)\]\(([^\)]+)\)/g,
+					regexLink = /(^|[^!])\[(!\[[^\]]*\]\([^\)]*\)|[^\]]*)\]\(([^\)]+)\)/g;
 
 				if (pageUrl === undefined) {
 					pageUrl = '';
 				}
 
 				// Fix preview images.
-				editor.currentvalue = editor.currentvalue.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, function (match, alt, file) {
+				editor.currentvalue = editor.currentvalue.replace(regexImage, function (match, alt, file) {
 
 					if (file.includes('://')) {
 						return match;
@@ -607,7 +609,7 @@
 				});
 
 				// Fix links.
-				editor.currentvalue = editor.currentvalue.replace(/(^|[^!])\[(.+?)\]\(([^\s\)]+?)\)(\s|$)/g, function (match, before, text, url, after) {
+				editor.currentvalue = editor.currentvalue.replace(regexLink, function (match, before, text, url) {
 
 					if (url.includes('://')) {
 						return match;
@@ -619,7 +621,7 @@
 						var url = '.' + pageUrl + '/' + url;
 					}
 
-					return before + '[' + text + '](' + url + ')' + after;
+					return before + '[' + text + '](' + url + ')';
 
 				});
 				
