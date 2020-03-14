@@ -286,9 +286,22 @@ HTML;
 
 	private static function imageBlock($data) {
 
-		return <<< HTML
-				<img src="$data->url" />
+		if (empty($data->caption)) {
+
+			return <<< HTML
+					<img src="$data->url" />
 HTML;
+
+		} else {
+
+			return <<< HTML
+					<figure>
+						<img src="$data->url" />
+						<figcaption>$data->caption</figcaption>
+					</figure>
+HTML;
+
+		}
 
 	}
 
