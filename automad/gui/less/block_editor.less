@@ -39,21 +39,77 @@
 	border: @am-border-width dashed @am-border-color;
 	border-radius: @am-radius;
 
+	@media (max-width: 650px){	
+		padding: 0 5px;
+	}
+
 	& .ce-block {
 		
 		margin: 5px -60px 5px -10px;
 		padding: 5px 60px 5px 15px;
 		border-radius: 4px;
+		border: @am-hairline;
+		border-color: @am-bg;
+		.transition(background-color 0.2s, border-color 0.2s;);
+
+		@media (max-width: 650px){	
+			margin: 5px 0;
+			padding: 5px 10px;
+		}
+
+		&:hover,
+		&.ce-block--focused {
+			border-color: @am-border-color;
+		}
 
 		&.ce-block--focused {
-			background: none;
-			background-color: @panel-box-background;
+
+			background-image: none;
+			background-color: @form-background;
+
+			@media (max-width: 650px){
+				background-image: none;
+				background-color: @form-background;
+			}
+
 		}
 
 	}
 
 	& .codex-editor__redactor {
 		padding-bottom: 30px;
+	}
+
+	& .cdx-input {
+	
+		background-color: @form-background;
+		border: @am-border-width solid @am-border-color;
+		border-radius: @am-radius;
+		box-shadow: none;
+
+		&,
+		&:empty {
+			margin: 5px 0 !important;
+		}
+		
+		&:focus {
+			border-color: @am-success;
+		}
+
+	}
+
+}
+
+// Tooltips.
+.ct {
+
+	&:before,
+	&:after {
+		background-color: @tooltip-background;
+	}
+
+	&__content {
+		color: @tooltip-color;
 	}
 
 }
