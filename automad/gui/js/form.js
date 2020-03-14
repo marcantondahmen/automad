@@ -189,14 +189,14 @@
 					return false;
 				}
 
-				// Trigger event.
-				if (data.trigger) {
-					$('html').trigger(data.trigger);
-				}
-
 				// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
 				if (data.html) {
 					$form.html(data.html);
+				}
+
+				// Trigger event.
+				if (data.trigger) {
+					$('html').trigger(data.trigger);
 				}
 				
 				// Display error, if existing.
