@@ -219,7 +219,7 @@ HTML;
 	public function injectTemporaryEditButton($value, $key, $Context) {
 		
 		// Only inject button if $key is no runtime var and a user is logged in.
-		if (preg_match('/^\w/', $key) && User::get()) {
+		if (preg_match('/^(\+|\w)/', $key) && User::get()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN . 
 						json_encode(array(
 							'context' => $Context->get()->url, 

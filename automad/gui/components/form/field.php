@@ -74,7 +74,8 @@ class Field {
 		$id = 'am-input-data-' . $key;
 
 		if (!$label) {
-			$label = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $key))));
+			$label = str_replace('+', '<i class="uk-icon-plus"></i> ', $key);
+			$label = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $label))));
 		}
 	
 		$html = <<< HTML
@@ -232,6 +233,17 @@ HTML;
 					 </div>
 HTML;
 			
+		} else if (strpos($key, '+') === 0) {
+
+			$editorId = 'am-block-editor-' . str_replace('+', '', $key);
+
+			$html .= <<< HTML
+					 <div class="am-block-editor" $tooltip data-am-block-editor="$editorId">
+						<input type="hidden" $attr value="$value">
+						<div id="$editorId"></div>
+					 </div>
+HTML;
+
 		} else {
 			
 			$attr .= $placeholder . $tooltip;

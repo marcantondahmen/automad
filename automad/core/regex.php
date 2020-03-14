@@ -56,14 +56,14 @@ class Regex {
 	 *	The character class to be used within a regex matching all allowed characters for variable names within .txt files.
 	 */
 	
-	public static $charClassTextFileVariables = '[\w\.\-]';
+	public static $charClassTextFileVariables = '[\+\w\.\-]';
 
 
 	/**
 	 *	The character class to be used within a regex matching all allowed characters for all kine of variable names (content in .txt files, system variables ( :var ) and query string items ( ?var )).
 	 */
 
-	public static $charClassAllVariables = '[%:\?\w\.\-]';
+	public static $charClassAllVariables = '[%:\?\+\w\.\-]';
 		
 
 	/**

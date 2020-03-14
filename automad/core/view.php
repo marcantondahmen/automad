@@ -245,11 +245,16 @@ class View {
 			$key = substr($key, 1);
 			return htmlspecialchars(Request::query($key));
 			
-		} elseif (strpos($key, '%') === 0) {	
+		} else if (strpos($key, '%') === 0) {	
 			
 			// Session variable.
 			return SessionData::get($key);
-			
+		
+		} else if (strpos($key, '+') === 0) {
+
+			// Blocks variable.
+			return Blocks::render($this->Automad->Context->get()->get($key));
+
 		} else {
 			
 			// First try to get the value from the current Runtime object.

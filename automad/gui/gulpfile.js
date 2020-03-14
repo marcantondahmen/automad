@@ -85,6 +85,20 @@ gulp.task('libs-js', function() {
 			gulp.src([
 				'node_modules/jquery/dist/jquery.min.js'
 			]),
+			// Editor.js.
+			gulp.src([
+				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE',
+				'node_modules/@editorjs/editorjs/dist/editor.js',
+				'node_modules/@editorjs/code/dist/bundle.js',
+				'node_modules/@editorjs/delimiter/dist/bundle.js',
+				'node_modules/@editorjs/embed/dist/bundle.js',
+				'node_modules/@editorjs/header/dist/bundle.js',
+				'node_modules/@editorjs/list/dist/bundle.js',
+				'node_modules/@editorjs/quote/dist/bundle.js',
+				'node_modules/@editorjs/raw/dist/bundle.js',
+				'node_modules/@editorjs/simple-image/dist/bundle.js',
+				'node_modules/@editorjs/table/dist/bundle.js'
+			]),
 			// CodeMirror. To be minified.
 			gulp.src([
 				'node_modules/codemirror/lib/codemirror.js',

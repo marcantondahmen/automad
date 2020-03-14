@@ -238,14 +238,14 @@ class Keys {
 		// Remove reserved keys.
 		$keys = array_diff($keys, $this->reserved);
 	
-		// Place all text keys in the beginning of the array
+		// Place all block and text keys in the beginning of the array
 		// and only sort all non-text keys alphabetically.
-		$textKeys = array_filter($keys, function($array) {
-			return strpos($array, 'text') === 0;
+		$textKeys = array_filter($keys, function($key) {
+			return preg_match('/^(text|\+)/', $key);
 		});
 		
-		$nonTextKeys = array_filter($keys, function($array) {
-			return strpos($array, 'text') !== 0;
+		$nonTextKeys = array_filter($keys, function($key) {
+			return (preg_match('/^(text|\+)/', $key) == false);
 		});
 	
 		sort($nonTextKeys);
