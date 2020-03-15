@@ -14,7 +14,6 @@
     "@editorjs/list": "^1.4.0",
     "@editorjs/quote": "^2.3.0",
     "@editorjs/raw": "^2.1.1",
-    "@editorjs/simple-image": "^1.3.3",
     "@editorjs/table": "^1.2.2",
     "blueimp-file-upload": "^9.21.0",
     "codemirror": "^5.35.0",

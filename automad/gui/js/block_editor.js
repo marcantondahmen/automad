@@ -99,8 +99,7 @@
 									youtube: true
 								}
 							}
-						},
-						image: SimpleImage
+						}
 					},
 
 					onChange: function() { 
