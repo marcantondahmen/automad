@@ -55,7 +55,10 @@ gulp.task('automad-js', function() {
 			}
 		};
 	
-	return 	gulp.src('js/*.js')
+	return 	gulp.src([
+				'js/*.js',
+				'js/*/*.js'
+			])
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
 			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
@@ -219,6 +222,7 @@ gulp.task('libs-css', function() {
 gulp.task('watch', function() {
 
 	gulp.watch('js/*.js', ['automad-js']);
+	gulp.watch('js/*/*.js', ['automad-js']);
 	gulp.watch('less/*.less', ['automad-less']);
 	
 });

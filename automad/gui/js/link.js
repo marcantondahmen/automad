@@ -35,10 +35,10 @@
 
 
 /*
- *	Add link dialog for CodeMirror and input fields. 
+ *	Add link dialog. 
  */
 
-+function (Automad, $, UIkit, CodeMirror) {
++function (Automad, $, UIkit) {
 
 	Automad.link = {
 
@@ -128,24 +128,4 @@
 
 	$(document).on('ready', Automad.link.autocomplete);
 
-	CodeMirror.defineExtension('AutomadLink', function() {
-
-		var modalSelector = Automad.link.modalSelector,
-			modal = UIkit.modal(modalSelector),
-			cm = this;
-
-		Automad.link.dialog(modal, cm, function(url) {
-
-			var selection = cm.getSelection();
-
-			if (!selection) {
-				selection = url;
-			}
-
-			cm.replaceSelection('[' + selection + '](' + url + ')');
-
-		});
-
-	});
-
-}(window.Automad = window.Automad || {}, jQuery, UIkit, CodeMirror);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);

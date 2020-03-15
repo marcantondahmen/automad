@@ -35,10 +35,10 @@
 
 
 /*
- *	Image select dialog for CodeMirror and input fields. 
+ *	Image select dialog. 
  */
 
-+function (Automad, $, UIkit, CodeMirror) {
++function (Automad, $, UIkit) {
 
 	Automad.selectImage = {
 
@@ -70,7 +70,7 @@
 		dialog: function(modal, elementFocusOnHide, resize, callback) {
 
 			var modalSelector = Automad.selectImage.modalSelector,
-				onClick = function (url, modalElementClicked) {
+				onClick = function(url, modalElementClicked) {
 
 					if (modal.isActive()) {
 
@@ -114,8 +114,17 @@
 			});
 
 			modal.on('hide.uk.modal.automad.selectImage', function () {
-				elementFocusOnHide.focus();
-				modal.off('.automad.selectImage')
+
+				if (typeof callback == 'function') {
+					callback('', this);
+				}
+
+				if (elementFocusOnHide) {
+					elementFocusOnHide.focus();
+				}
+				
+				modal.off('.automad.selectImage');
+
 			});
 			
 		}
@@ -124,30 +133,4 @@
 
 	Automad.selectImage.init();
 
-	CodeMirror.defineExtension('AutomadSelectImage', function () {
-
-		var modalSelector = Automad.selectImage.modalSelector,
-			modal = UIkit.modal(modalSelector),
-			cm = this;
-
-		Automad.selectImage.dialog(modal, cm, true, function(url, modalElementClicked) {
-
-			// Add size options in case a label was clicked.
-			if (modalElementClicked.tagName.toLowerCase() == 'label') {
-
-				var width = modal.find('[name="width"]').val(),
-					height = modal.find('[name="height"]').val();
-
-				if (width && height) {
-					url = url + '?' + width + 'x' + height;
-				}
-				
-			}
-
-			cm.replaceRange('![](' + url + ')\n', cm.getCursor());
-
-		});
-
-	});
-
-}(window.Automad = window.Automad || {}, jQuery, UIkit, CodeMirror);
+}(window.Automad = window.Automad || {}, jQuery, UIkit);
