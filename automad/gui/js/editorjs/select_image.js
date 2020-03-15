@@ -78,18 +78,32 @@ class SelectImage {
 
 	}
 
+	static get pasteConfig() {
+
+		return {
+			patterns: {
+				image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
+			}
+		}
+
+	}
+
+	insertImage(url) {
+
+		if (url) {
+			this.img.src = Automad.util.resolvePath(url);
+			this.data.url = url;
+			this.button.parentNode.replaceChild(this.wrapper, this.button);
+		}
+
+	}
+
 	select() {
 
 		var block = this;
 
 		this.si.dialog(this.modal, false, true, function (url, modalElementClicked) {
-
-			if (url) {
-				block.img.src = Automad.util.resolvePath(url);
-				block.data.url = url;
-				block.button.parentNode.replaceChild(block.wrapper, block.button);
-			}
-
+			block.insertImage(url);
 		});
 
 	}
@@ -117,6 +131,14 @@ class SelectImage {
 			url: this.data.url,
 			caption: this.caption.innerHTML
 		};
+
+	}
+
+	onPaste(event) {
+
+		if (event.type == 'pattern') {
+			this.insertImage(event.detail.data);
+		}
 
 	}
 
