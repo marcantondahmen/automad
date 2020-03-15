@@ -84,7 +84,7 @@
 							class: List,
 							inlineToolbar: true,
 						},
-						selectImage: SelectImage,
+						image: Image,
 						quote: Quote,
 						table: {
 							class: Table,

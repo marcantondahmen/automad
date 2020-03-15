@@ -34,7 +34,7 @@
  */
 
 
-class SelectImage {
+class Image {
 
 	constructor({data}) {
 
