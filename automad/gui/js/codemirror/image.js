@@ -36,7 +36,7 @@
 
 +function (Automad, $, UIkit, CodeMirror) {
 
-	CodeMirror.defineExtension('AutomadSelectImage', function () {
+	CodeMirror.defineExtension('AutomadImage', function () {
 
 		var modalSelector = Automad.selectImage.modalSelector,
 			modal = UIkit.modal(modalSelector),

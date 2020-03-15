@@ -538,7 +538,7 @@
 			});
 
 			editor.on('action.image', function() {
-				editor.editor.AutomadSelectImage();
+				editor.editor.AutomadImage();
 			});
 
 			editor.on('action.listUl', function () {
