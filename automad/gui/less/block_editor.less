@@ -107,6 +107,24 @@
 
 	}
 
+	& .ce-delimiter {
+
+		margin: 0 !important;
+		line-height: 0;
+		max-height: 19px;
+
+		&:before {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 0;
+			margin: 9px 0;
+			line-height: 0;
+			border-bottom: 1px solid @am-text;
+		}
+
+	}
+
 }
 
 // Tooltips.
