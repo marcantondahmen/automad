@@ -72,6 +72,46 @@
 
 			return (bytes / 1000).toFixed(2) + ' kb';
 				
+		},
+
+		resolvePath: function(path) {
+
+			var pagePath = $('[data-am-path]').data('amPath');
+
+			if (pagePath === undefined) {
+				pagePath = '';
+			}
+
+			if (path.includes('://')) {
+				return path;
+			}
+
+			if (path.startsWith('/')) {
+				return '.' + path;
+			} else {
+				return 'pages' + pagePath + path;
+			}
+
+		},
+
+		resolveUrl: function(url) {
+
+			var pageUrl = $('[data-am-url]').data('amUrl');
+
+			if (pageUrl === undefined) {
+				pageUrl = '';
+			}
+
+			if (url.includes('://')) {
+				return url;
+			}
+
+			if (url.startsWith('/')) {
+				return '.' + url;
+			} else {
+				return '.' + pageUrl + '/' + url;
+			}
+
 		}
 		
 	}
