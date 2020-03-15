@@ -34,7 +34,7 @@
  */
 
 
-class Image {
+class AutomadImage {
 
 	constructor({data}) {
 

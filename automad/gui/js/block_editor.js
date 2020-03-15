@@ -84,7 +84,7 @@
 							class: List,
 							inlineToolbar: true,
 						},
-						image: Image,
+						image: AutomadImage,
 						quote: Quote,
 						table: {
 							class: Table,
