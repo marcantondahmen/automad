@@ -57,10 +57,8 @@
 
 				var $input = $(this).parent().find('input');
 
-				si.dialog(UIkit.modal(si.modalSelector), $input, false, function(url, modalElementClicked) {
-
+				si.dialog(UIkit.modal(si.modalSelector), $input, false, function(url) {
 					$input.val(url).trigger('change');
-
 				});
 
 			});
@@ -74,8 +72,24 @@
 
 					if (modal.isActive()) {
 
+						if (resize) {
+
+							// Add size options in case a label was clicked.
+							if (modalElementClicked.tagName.toLowerCase() == 'label') {
+
+								var width = modal.find('[name="width"]').val(),
+									height = modal.find('[name="height"]').val();
+
+								if (width && height) {
+									url = url + '?' + width + 'x' + height;
+								}
+
+							}
+
+						}
+						
 						if (typeof callback == 'function') {
-							callback(url, modalElementClicked);
+							callback(url);
 						}
 
 						modal.hide();
@@ -114,11 +128,7 @@
 			});
 
 			modal.on('hide.uk.modal.automad.selectImage', function () {
-
-				if (typeof callback == 'function') {
-					callback('', this);
-				}
-
+				
 				if (elementFocusOnHide) {
 					elementFocusOnHide.focus();
 				}

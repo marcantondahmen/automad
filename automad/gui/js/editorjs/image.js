@@ -102,7 +102,7 @@ class AutomadImage {
 
 		var block = this;
 
-		this.si.dialog(this.modal, false, true, function (url, modalElementClicked) {
+		this.si.dialog(this.modal, false, true, function(url) {
 			block.insertImage(url);
 		});
 
