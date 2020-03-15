@@ -47,6 +47,11 @@
 		font-style: normal !important;
 	}
 
+	[data-placeholder]:empty:not(:focus):before{
+		content: attr(data-placeholder);
+		color: @am-muted;
+	}	
+
 	& .ce-block {
 		
 		margin: 5px -60px 5px -10px;

@@ -41,8 +41,21 @@ class SelectImage {
 		this.si = Automad.selectImage;
 		this.modal = UIkit.modal(this.si.modalSelector);
 
-		this.data = data;
+		this.data = {
+			url: data.url || '',
+			caption: data.caption || ''
+		};
+		
+		this.wrapper = document.createElement('div');
+		this.wrapper.classList.add('cdx-block');
 		this.img = document.createElement('img');
+		this.caption = document.createElement('div');
+		this.caption.classList.add('cdx-input');
+		this.caption.contentEditable = true;
+		this.caption.dataset.placeholder = 'Enter a caption';
+		this.caption.innerHTML = this.data.caption;
+		this.wrapper.appendChild(this.img);
+		this.wrapper.appendChild(this.caption);
 
 		this.button = document.createElement('div');
 		this.button.innerHTML = '<i class="uk-icon-image uk-icon-small"></i>&nbsp;&nbsp;Select Image';
@@ -74,7 +87,7 @@ class SelectImage {
 			if (url) {
 				block.img.src = Automad.util.resolvePath(url);
 				block.data.url = url;
-				block.button.parentNode.replaceChild(block.img, block.button);
+				block.button.parentNode.replaceChild(block.wrapper, block.button);
 			}
 
 		});
@@ -91,7 +104,7 @@ class SelectImage {
 
 		if (this.data && this.data.url) {
 			this.img.src = Automad.util.resolvePath(this.data.url);
-			return this.img;
+			return this.wrapper;
 		} else {
 			return this.button;
 		}
@@ -100,7 +113,10 @@ class SelectImage {
 
 	save() {
 
-		return this.data;
+		return {
+			url: this.data.url,
+			caption: this.caption.innerHTML
+		};
 
 	}
 
