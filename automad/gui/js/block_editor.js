@@ -84,7 +84,14 @@
 							class: List,
 							inlineToolbar: true,
 						},
+						selectImage: SelectImage,
 						quote: Quote,
+						table: {
+							class: Table,
+						},
+						raw: RawTool,
+						code: CodeTool,
+						delimiter: Delimiter,
 						embed: {
 							class: Embed,
 							config: {
@@ -93,12 +100,6 @@
 								}
 							}
 						},
-						raw: RawTool,
-						table: {
-							class: Table,
-						},
-						code: CodeTool,
-						delimiter: Delimiter,
 						image: SimpleImage
 					},
 
