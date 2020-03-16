@@ -44,6 +44,26 @@
 		
 		dataAttr: 'data-am-block-editor',
 
+		embedServices: {
+			youtube: true,
+			codepen: true,
+			vimeo: true,
+			mixcloud: {
+				regex: /https?:\/\/www\.mixcloud\.com\/(.+)\/$/,
+				embedUrl: 'https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=/<%= remote_id %>/',
+				html: '<iframe height="180" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"></iframe>',
+				height: 180,
+				width: 600
+			},
+			soundcloud: {
+				regex: /(https:\/\/soundcloud\.com\/.+)/,
+				embedUrl: 'https://w.soundcloud.com/player/?url=<%= remote_id %>&color=%234a4a4a',
+				html: '<iframe height="166" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"></iframe>',
+				height: 166,
+				width: 600
+			}
+		},
+
 		init: function() {
 			
 			var be = Automad.blockEditor,
@@ -95,11 +115,10 @@
 						embed: {
 							class: Embed,
 							config: {
-								services: {
-									youtube: true
-								}
+								services: Automad.blockEditor.embedServices
 							}
-						}
+						},
+						link2: AutomadLink
 					},
 
 					onChange: function() { 
