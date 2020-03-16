@@ -202,20 +202,26 @@ HTML;
 
 	private static function embedBlock($data) {
 
-		return <<< HTML
-			<iframe 
-			src="$data->embed"
-			height="$data->height"
-			width="$data->width"
-			scrolling='no' 
-			frameborder='no' 
-			allowtransparency='true' 
-			allowfullscreen='true' 
-			style='width: 100%;'
-			>
-			</iframe>
+		$iframe = <<< HTML
+					<iframe 
+					src="$data->embed"
+					height="$data->height"
+					width="$data->width"
+					scrolling='no' 
+					frameborder='no' 
+					allowtransparency='true' 
+					allowfullscreen='true' 
+					style='width: 100%;'
+					>
+					</iframe>
 HTML;
-	
+
+		if (empty($data->caption)) {
+			return $iframe;
+		} else {
+			return "<figure>$iframe<figcaption>$data->caption</figcaption></figure>";
+		}
+
 	}
 
 
