@@ -94,29 +94,25 @@ class Group {
 			$addVarInputlId = $addVariableIdPrefix . '-input';
 			$addVarContainerId = $addVariableIdPrefix . '-container';
 			
-			$btnAddVar = Text::get('btn_add_var');
-			$btnClose = Text::get('btn_close');
-			$pageVarName = Text::get('page_var_name');
-			$errorVarExists = Text::get('error_var_exists');
-			$errorVarName = Text::get('error_var_name');
+			$Text = Text::getObject();
 
 			$html =	<<< HTML
 					<div id="$addVarContainerId" class="uk-margin-bottom">$html</div>
 					<a href="#$addVarModalId" class="uk-button uk-button-success uk-margin-small-top" data-uk-modal>
 						<i class="uk-icon-plus"></i>&nbsp;
-						$btnAddVar
+						$Text->btn_add_var
 					</a>
 					<div id="$addVarModalId" class="uk-modal">
 						<div class="uk-modal-dialog">
 							<div class="uk-modal-header">
-								$btnAddVar
+								$Text->btn_add_var
 								<a href="" class="uk-modal-close uk-close"></a>
 							</div>	
 							<input 
 							id="$addVarInputlId" 
 							type="text" 
 							class="uk-form-controls uk-width-1-1"
-							placeholder="$pageVarName" 
+							placeholder="$Text->page_var_name" 
 							required
 							data-am-enter="#$addVarSubmitId" 
 							data-am-watch-exclude 
@@ -124,17 +120,17 @@ class Group {
 							<div class="uk-modal-footer uk-text-right">
 								<button type="button" class="uk-modal-close uk-button">
 									<i class="uk-icon-close"></i>&nbsp;
-									$btnClose
+									$Text->btn_close
 								</button>
 								<button 
 								id="$addVarSubmitId" 
 								type="button" 
 								class="uk-button uk-button-success" 
-								data-am-error-exists="$errorVarExists" 
-								data-am-error-name="$errorVarName"
+								data-am-error-exists="$Text->error_var_exists" 
+								data-am-error-name="$Text->error_var_name"
 								>
 									<i class="uk-icon-plus"></i>&nbsp;
-									$btnAddVar
+									$Text->btn_add_var
 								</button>
 							</div>
 						</div>

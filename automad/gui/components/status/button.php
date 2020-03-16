@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI\Components\Status;
+use Automad\GUI\Text as Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,15 +63,19 @@ class Button {
 
 	public static function render($status, $tab) {
 		
-		return	'<a '.
-		 		'href="?context=system_settings#' . $tab . '" ' .
-				'class="uk-button uk-button-large uk-width-1-1 uk-text-left" ' .
-				'data-am-status="' . $status . '"' .
-		 		'>' .
-					'<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp;&nbsp;' . 
-					\Automad\GUI\Text::get('btn_getting_data') .
-				'</a>';
-				
+		$Text = Text::getObject();
+
+		return <<< HTML
+				<a
+		 		href="?context=system_settings#$tab"
+				class="uk-button uk-button-large uk-width-1-1 uk-text-left"
+				data-am-status="$status"
+		 		>
+					<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp; 
+					$Text->btn_getting_data
+				</a>
+HTML;
+
 	}
 
 

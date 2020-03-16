@@ -148,11 +148,10 @@ HTML;
 		$title = basename($file);
 		$caption = Core\Str::shorten(htmlspecialchars_decode($data->caption), 100);
 		$mTime = date('M j, Y H:i', filemtime($file));
-		$btnEdit = Text::get('btn_edit_file_info');
-		$btnCopyUrl = Text::get('btn_copy_url_clipboard');
 		$clipboard = Core\Str::stripStart($file, AM_BASE_DIR);
 		$basename = basename($file);
 		$resize = '';
+		$Text = Text::getObject();
 
 		if ($caption) {
 
@@ -167,14 +166,13 @@ HTML;
 
 		if (Core\Parse::fileIsImage($file)) {
 
-			$btnCopyResized = Text::get('btn_copy_resized');
 			$resize = <<< HTML
 						<li>
 							<a href="#am-copy-resized-modal"
 							data-uk-modal
 							>
 								<i class="uk-icon-crop"></i>&nbsp;
-								$btnCopyResized
+								$Text->btn_copy_resized
 							</a>
 						</li>
 
@@ -211,14 +209,14 @@ HTML;
 										data-uk-modal 
 										>
 											<i class="uk-icon-pencil"></i>&nbsp;
-											$btnEdit
+											$Text->btn_edit_file_info
 										</a>
 									</li>
 									$resize
 									<li>
 										<a href="#" data-am-clipboard="$clipboard">
 											<i class="uk-icon-link"></i>&nbsp;
-											$btnCopyUrl
+											$Text->btn_copy_url_clipboard
 										</a>
 									</li>
 								</ul>

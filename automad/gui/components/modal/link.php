@@ -61,10 +61,7 @@ class Link {
 
 	public static function render() {
 
-		$title = Text::get('link_title');
-		$btnLink = Text::get('btn_link');
-		$btnClose = Text::get('btn_close');
-		$placeholder = Text::get('link_placeholder');
+		$Text = Text::getObject();
 
 		// Add dashboard URL to handler to make dialog work in in-Page edit mode.
 		$autocomplete = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?ajax=autocomplete_link';
@@ -74,7 +71,7 @@ class Link {
 			<div id="am-link-modal" class="uk-modal">
 				<div class="uk-modal-dialog">
 					<div class="uk-modal-header">
-						$title
+						$Text->link_title
 						<a href="#" class="uk-modal-close uk-close"></a>
 					</div>
 					<div 
@@ -82,7 +79,7 @@ class Link {
 					data-am-link="$autocomplete"
 					>
 						<div class="uk-autocomplete uk-width-1-1">
-							<input class="uk-form-controls uk-width-1-1" type="text" placeholder="$placeholder">
+							<input class="uk-form-controls uk-width-1-1" type="text" placeholder="$Text->link_placeholder">
 							<script type="text/autocomplete">	
 								<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">
 									{{~items}}
@@ -98,13 +95,13 @@ class Link {
 						</div>	
 						<button type="button" class="uk-button uk-button-large uk-text-nowrap">
 							<i class="uk-icon-link"></i>&nbsp;
-							$btnLink
+							$Text->btn_link
 						</button>
 					</div>
 					<div class="uk-modal-footer uk-text-right">
 						<button type="button" class="uk-modal-close uk-button">
 							<i class="uk-icon-close"></i>&nbsp;
-							$btnClose
+							$Text->btn_close
 						</button>
 					</div>
 				</div>

@@ -155,9 +155,8 @@ class Page {
 
 		$pageTitle = $Page->get(AM_KEY_TITLE);
 		$pageMTime = Core\Str::dateFormat($Page->getMtime(), 'j. M Y');
-		$btnEditPage = Text::get('btn_edit_page');
 		$pageUrl = AM_BASE_INDEX . $Page->url;
-		$btnInPageEdit = Text::get('btn_inpage_edit');
+		$Text = Text::getObject();
 
 		return <<< HTML
 
@@ -174,13 +173,13 @@ class Page {
 						<span> 
 							<a 
 							href="$link" 
-							title="$btnEditPage" 
+							title="$Text->btn_edit_page" 
 							class="uk-icon-button uk-icon-pencil" 
 							data-uk-tooltip
 							></a>
 							<a 
 							href="$pageUrl" 
-							title="$btnInPageEdit" 
+							title="$Text->btn_inpage_edit" 
 							class="uk-icon-button uk-icon-share" 
 							data-uk-tooltip
 							></a>
