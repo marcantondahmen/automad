@@ -8,7 +8,7 @@
   "devDependencies": {
     "@editorjs/code": "^2.4.1",
     "@editorjs/delimiter": "^1.1.0",
-    "@editorjs/editorjs": "^2.16.1",
+    "@editorjs/editorjs": "^2.17.0",
     "@editorjs/embed": "^2.2.1",
     "@editorjs/header": "^2.4.0",
     "@editorjs/list": "^1.4.0",
