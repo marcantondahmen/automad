@@ -39,6 +39,8 @@ namespace Automad\GUI\Components\Status;
 use Automad\Core as Core;
 use Automad\System as System;
 use Automad\GUI\Text as Text;
+use Automad\GUI\Accounts as Accounts;
+use Automad\GUI\Headless as Headless;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -41,6 +41,9 @@
 @modal-header-margin-bottom:	@utility-margin;
 @modal-footer-margin-top:		@utility-margin;
 
+@modal-dialog-large-width: 		800px;
+@modal-dialog-large-width-large:800px;
+
 
 .hook-modal() {
 	overflow-y: auto !important;
@@ -69,7 +72,14 @@
 	}
 	
 	&.am-modal-dialog-code {
+		
 		padding-bottom: 0;
+		overflow: hidden;
+
+		& textarea {
+			box-shadow: none;
+		}
+
 	}
 			
 }
