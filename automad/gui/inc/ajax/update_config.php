@@ -62,14 +62,12 @@ if (file_exists(AM_CONFIG)) {
 
 }
 
-if (!empty($_POST['type'])) {
-	
-	$type = $_POST['type'];
+if ($type = Core\Request::post('type')) {
 	
 	// Cache
-	if ($type == 'cache' && isset($_POST['cache'])) {
+	if ($type == 'cache') {
 		
-		$cache = $_POST['cache'];
+		$cache = Core\Request::post('cache');
 		
 		if (isset($cache['enabled'])) {
 			$config['AM_CACHE_ENABLED'] = true;
@@ -79,19 +77,6 @@ if (!empty($_POST['type'])) {
 		
 		$config['AM_CACHE_MONITOR_DELAY'] = intval($cache['monitor-delay']);
 		$config['AM_CACHE_LIFETIME'] = intval($cache['lifetime']);
-		
-	}
-
-	// Allowed file types
-	if ($type == 'file-types' && isset($_POST['file-types'])) {
-		
-		if ($_POST['file-types']) {
-			// If there string actually contains file types and is not empty.
-			$config['AM_ALLOWED_FILE_TYPES'] = $_POST['file-types'];
-		} else {
-			// If the string is empty, remove the variable from the config, to not overwrite the defaults.
-			unset($config['AM_ALLOWED_FILE_TYPES']);
-		}
 		
 	}
 

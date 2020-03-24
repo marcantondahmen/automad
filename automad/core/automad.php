@@ -328,10 +328,8 @@ class Automad {
 	private function getRequestedPage() {
 		
 		// Check whether the GUI is requesting the currently edited page.
-		if (AM_REQUEST == AM_PAGE_DASHBOARD) {
-			if (isset($_POST['url'])) {
-				return $this->getPage($_POST['url']);
-			}
+		if (AM_REQUEST == AM_PAGE_DASHBOARD) {	
+			return $this->getPage(Request::post('url'));
 		} else {
 			if ($Page = $this->getPage(AM_REQUEST)) {
 				return $Page;

@@ -50,9 +50,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-if (!empty($_POST['package'])) {
+if ($package = Core\Request::post('package')) {
 
-	$package = $_POST['package'];
 	$Composer = new System\Composer();
 	$output['error'] = $Composer->run('require ' . $package);
 	$output['trigger'] = 'composerDone';

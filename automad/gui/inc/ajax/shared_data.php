@@ -56,10 +56,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-if (isset($_POST['data'])) {
+if ($data = Core\Request::post('data')) {
 
 	// Save changes.
-	$output = $this->getContent()->saveSharedData($_POST['data']);
+	$output = $this->getContent()->saveSharedData($data);
 			
 } else {
 	

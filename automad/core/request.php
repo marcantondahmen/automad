@@ -163,5 +163,24 @@ class Request {
 		
 	}
 	
-	
+
+	/**
+	 *	Return value by key in the $_POST array or any empty string, if that key doesn't exist.
+	 *	Note: Since this method always returns a string, it should not be used to test whether a key exists in $_POST. 
+	 * 
+	 *	@param string $key
+	 *	@return string The value for the requested key
+	 */
+
+	public static function post($key) {
+
+		if (isset($_POST[$key])) {
+			return $_POST[$key];
+		} else {
+			return '';
+		}
+
+	}
+
+
 }

@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core\Request as Request;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,20 +62,23 @@ class User {
 	public static function changePassword() {
 		
 		$output = array();
+		$currentPassword = Request::post('current-password');
+		$newPassword1 = Request::post('new-password1');
+		$newPassword2 = Request::post('new-password2');
 
-		if (!empty($_POST['current-password']) && !empty($_POST['new-password1']) && !empty($_POST['new-password2'])) {
+		if ($currentPassword && $newPassword1 && $newPassword2) {
 	
-			if ($_POST['new-password1'] == $_POST['new-password2']) {
+			if ($newPassword1 == $newPassword2) {
 		
-				if ($_POST['current-password'] != $_POST['new-password1']) {
+				if ($currentPassword != $newPassword1) {
 			
 					// Get all accounts from file.
 					$accounts = Accounts::get();
 			
-					if (Accounts::passwordVerified($_POST['current-password'], $accounts[User::get()])) {
+					if (Accounts::passwordVerified($currentPassword, $accounts[User::get()])) {
 				
 						// Change entry for current user with accounts array.
-						$accounts[User::get()] = Accounts::passwordHash($_POST['new-password1']);
+						$accounts[User::get()] = Accounts::passwordHash($newPassword1);
 					
 						// Write array with all accounts back to file.
 						if (Accounts::write($accounts)) {
@@ -141,10 +145,8 @@ class User {
 		
 		if (!empty($_POST)) {
 			
-			if (!empty($_POST['username']) && !empty($_POST['password'])) {
+			if (($username = Request::post('username')) && ($password = Request::post('password'))) {
 	
-				$username = $_POST['username'];
-				$password = $_POST['password'];
 				$accounts = Accounts::get();
 	
 				if (isset($accounts[$username]) && Accounts::passwordVerified($password, $accounts[$username])) {

@@ -59,19 +59,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 // Array for returned JSON data.
 $output = array();
-
+$url = Core\Request::post('url');
 
 // Verify page's URL - The page must exist in the site's collection.
-if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url']))) {
+if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 
-	// The URL of the currently edited page.
-	$url = $_POST['url'];
-	
 	// If the posted form contains any "data", save the form's data to the page file.
-	if (isset($_POST['data'])) {
+	if ($data = Core\Request::post('data')) {
 	
 		// Save page and replace $output with the returned $output array (error or redirect).
-		$output = $this->getContent()->savePage($url, $_POST['data']);
+		$output = $this->getContent()->savePage($url, $data);
 	
 	} else {
 		

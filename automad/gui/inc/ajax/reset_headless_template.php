@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $output = array();
 
-if (!empty($_POST['reset'])) {
+if (Core\Request::post('reset')) {
 
 	if (Headless::resetTemplate()) {
 		$Cache = new Core\Cache();

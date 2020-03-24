@@ -52,9 +52,9 @@ $output = array();
 
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, its URL has to be submitted along with the form data.
-if (isset($_POST['url']) && array_key_exists($_POST['url'], $this->getAutomad()->getCollection())) {
-	$url = $_POST['url'];
-} else {
+$url = Core\Request::post('url');
+
+if (!array_key_exists($url, $this->getAutomad()->getCollection())) {
 	$url = '';
 }
 
