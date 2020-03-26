@@ -1,0 +1,103 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+.am-block-editor {
+	
+	& .ce-block {
+		
+		box-sizing: border-box;
+		width: 100%;
+		margin: 4px 0;
+		padding: 10px 15px;
+		border-radius: @am-block-radius;
+		.transition(background-color 0.2s);
+
+		@media (min-width: @am-blocks-breakpoint-small) {
+			padding: 10px 45px 10px 15px;
+		}
+
+		& + & {
+			margin-top: 4px;
+		}
+
+		&__content {
+			max-width: @am-block-max-width;
+		}
+
+		& [class^="uk-icon-"] {
+			font-style: normal !important;
+		}
+
+		&:hover,
+		&.ce-block--focused {
+
+			background-image: none;
+			background-color: @form-background;
+
+			@media (max-width: 650px){
+				background-image: none;
+				background-color: @form-background;
+			}
+
+		}
+
+		& [data-placeholder]:empty:not(:focus):before{
+			content: attr(data-placeholder);
+			color: @am-muted;
+		}
+
+		&:last-child:not(.ce-block--focused) > div > [contenteditable][data-placeholder=""]:not(:focus):empty {
+			
+			&:after {
+				content: '\f040 ...';
+				font-family: FontAwesome;
+				display: inline-block;
+    			font-weight: normal;
+				font-style: normal;
+				font-size: 1rem;
+				line-height: 1;
+    			-webkit-font-smoothing: antialiased;
+    			-moz-osx-font-smoothing: grayscale;
+				color: @am-muted;
+			}
+
+		}
+
+	}
+
+	& .ce-block--selected > .ce-block__content {
+		background-color: transparent !important;
+	}
+
+}

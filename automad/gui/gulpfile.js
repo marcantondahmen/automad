@@ -223,6 +223,7 @@ gulp.task('watch', function() {
 	gulp.watch('js/*.js', ['automad-js']);
 	gulp.watch('js/*/*.js', ['automad-js']);
 	gulp.watch('less/*.less', ['automad-less']);
+	gulp.watch('less/*/*.less', ['automad-less']);
 	
 });
 

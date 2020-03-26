@@ -33,41 +33,15 @@
  */
 
 
-@import 'editorjs/block.less';
-@import 'editorjs/inline.less';
-@import 'editorjs/plugins.less';
-@import 'editorjs/settings.less';
-@import 'editorjs/toolbar.less';
-@import 'editorjs/tooltips.less';
+.ct {
 
-
-@am-blocks-breakpoint-small: 651px;
-@am-block-max-width: 800px;
-@am-block-radius: 4px;
-@am-block-dropdown-background: @am-bg;
-
-.am-block-editor {
-
-	position: relative;
-
-	&-container {
-
-		max-width: @am-block-max-width;
-		padding: 0 4px;
-		border: 2px dashed @am-border-color;
-		border-radius: @am-radius;
-
-		.am-fullscreen &,
-		.am-inpage & {
-			padding: 0;
-			border: none;
-		}
-
+	&:before,
+	&:after {
+		background-color: @tooltip-background;
 	}
 
-	& .codex-editor__redactor {
-		padding-bottom: 30px;
-		margin-right: 0;
+	&__content {
+		color: @tooltip-color;
 	}
 
 }

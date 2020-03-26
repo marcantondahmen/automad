@@ -33,41 +33,35 @@
  */
 
 
-@import 'editorjs/block.less';
-@import 'editorjs/inline.less';
-@import 'editorjs/plugins.less';
-@import 'editorjs/settings.less';
-@import 'editorjs/toolbar.less';
-@import 'editorjs/tooltips.less';
-
-
-@am-blocks-breakpoint-small: 651px;
-@am-block-max-width: 800px;
-@am-block-radius: 4px;
-@am-block-dropdown-background: @am-bg;
-
 .am-block-editor {
 
-	position: relative;
-
-	&-container {
-
-		max-width: @am-block-max-width;
-		padding: 0 4px;
-		border: 2px dashed @am-border-color;
+	& .ce-settings {
+		background-color: @am-block-dropdown-background;
+		border: none !important;
 		border-radius: @am-radius;
+		.shadow;
+	}
 
-		.am-fullscreen &,
-		.am-inpage & {
-			padding: 0;
-			border: none;
+	& .cdx-settings-button,
+	& .ce-settings__button {
+
+		color: @nav-dropdown-color;
+		background-color: @am-block-dropdown-background;
+		border-radius: 4px;
+		.transition(color 0.2s, background-color 0.2s;);
+
+		&:hover,
+		&:focus,
+		&--active {
+			color: @nav-dropdown-hover-color;
+			background-color: @nav-dropdown-hover-background;
 		}
 
 	}
 
-	& .codex-editor__redactor {
-		padding-bottom: 30px;
-		margin-right: 0;
+	& .ce-settings__button--confirm {
+		color: @button-danger-color !important;
+		background-color: @button-danger-background !important;
 	}
 
 }
