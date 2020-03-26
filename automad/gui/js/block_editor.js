@@ -71,12 +71,13 @@
 
 			$(selector).each(function() {
 
-				var $container = $(this),
-					holder = $container.data(Automad.util.dataCamelCase(be.dataAttr)),
-					$input = $container.find('input'),
+				var $wrapper = $(this),
+					holder = $wrapper.data(Automad.util.dataCamelCase(be.dataAttr)),
+					$input = $wrapper.find('input'),
+					ready = false,
 					data,
 					editor;
-					
+						
 				try {
 					data = JSON.parse($input.val());
 				} catch (e) {
@@ -84,7 +85,7 @@
 				}
 				
 				// Remove data attribute to prevent multiple initializations.
-				$container.removeAttr(be.dataAttr);
+				$wrapper.removeAttr(be.dataAttr);
 
 				editor = new EditorJS({
 
@@ -95,6 +96,7 @@
 						header: {
 							class: Header,
 							shortcut: 'CMD+SHIFT+H',
+							inlineToolbar: true,
 							config: {
 								levels: [1, 2, 3, 4, 5, 6],
 								defaultLevel: 2
@@ -105,7 +107,10 @@
 							inlineToolbar: true,
 						},
 						image: AutomadImage,
-						quote: Quote,
+						quote: {
+							class: Quote,
+							inlineToolbar: true
+						},
 						table: {
 							class: Table,
 						},
@@ -117,18 +122,29 @@
 							config: {
 								services: Automad.blockEditor.embedServices
 							}
-						},
-						link2: AutomadLink
+						}
 					},
 
 					onChange: function() { 
-						editor.save().then(function(data) {
-							$input.val(JSON.stringify(data)).trigger('change');
-						});
+
+						// Catch the initial change event by testing the ready variable.
+						if (ready) {
+							editor.save().then(function(data) {
+								$input.val(JSON.stringify(data)).trigger('change');
+							});
+						}
+					
 					},
 
 					onReady: function() {
-						$container.find('.codex-editor__redactor').removeAttr('style');
+						
+						$wrapper.find('.codex-editor__redactor').removeAttr('style');
+
+						// Delay setting ready to be true to catch the initial change event.
+						setTimeout(function () {
+							ready = true;
+						}, 2000);
+
 					}
 
 				});
