@@ -396,23 +396,24 @@
 			$doc.on('change drop cut paste keydown', 
 				'[' + da.handler + ']:not([' + da.autoSubmit + ']) input:not([' + da.watchExclude + ']), ' +
 				'[' + da.handler + ']:not([' + da.autoSubmit + ']) textarea:not([' + da.watchExclude + ']), ' +
-				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + '])', 
+				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + ']), ' +
+				'.am-inpage form *', 
 				function() {
 				
 					var	$form = $(this).closest('[' + da.handler + ']'),
 						handler = $form.data(Automad.util.dataCamelCase(da.handler));
 					
 					$('html').addClass(f.unsavedClassPrefix + handler);
-					$('button[' + da.submit + '="' + handler + '"]:disabled').prop('disabled', false);
+					$('button[' + da.submit + '="' + handler + '"]:disabled, .am-inpage [type="submit"]').prop('disabled', false);
 					
 					// Change label color to flag input as changed.
-					$(this).closest('.uk-form-row').find('.uk-form-label').addClass(f.unsavedClassInput);
+					$(this).closest('.uk-form-row, .am-inpage form').find('.uk-form-label').addClass(f.unsavedClassInput);
 					
 				}
 			);
 			
 			// Remove 'am-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.
-			$doc.on('submit', '[' + da.handler + ']', function(){
+			$doc.on('submit', '[' + da.handler + '], .am-inpage form', function(){
 				
 				var handler = $(this).data(Automad.util.dataCamelCase(da.handler));
 				

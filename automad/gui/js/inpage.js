@@ -44,7 +44,6 @@
 		
 		selectors: {
 			modal: '#am-inpage-edit-modal',
-			title: '#am-inpage-edit-modal-title',
 			fields: '#am-inpage-edit-fields',
 			menubar: '.am-inpage-menubar',
 			dragHandle: '.am-drag-handle'
@@ -52,8 +51,7 @@
 		
 		dataAttr: {
 			content: 'data-am-inpage-content',
-			handler: 'data-am-inpage-handler',
-			url: 'data-am-inpage-url'
+			handler: 'data-am-inpage-handler'
 		},
 		
 		modal: {
@@ -65,15 +63,12 @@
 					u = Automad.util,
 					param = $button.data(u.dataCamelCase(ip.dataAttr.content)),
 					$modal = $(ip.selectors.modal),
-					$title = $(ip.selectors.title),
 					$form = $modal.find('form'),
 					handler = $form.data(u.dataCamelCase(ip.dataAttr.handler)),
 					$loader = $('<i></i>', { 'class': 'uk-icon-circle-o-notch uk-icon-spin uk-icon-small' })
-						  	  .insertAfter($title.parent()),
-					$footer = $form.find('.uk-modal-footer');
+						  	  .appendTo($form);
 					
-				// Remove possible title and inputs from previous call.
-				$title.empty();
+				// Remove inputs from previous call.
 				$(ip.selectors.fields).remove();
 				
 				// Get form content.
@@ -81,12 +76,8 @@
 							
 					if (data.html) {
 						
-						var $fields = $(data.html).insertBefore($footer).hide(),
-							context = $fields.find('[name="context"]').val();
-						
-						// Set context in modal title.
-						$title.text(context);
-						
+						var $fields = $(data.html).appendTo($form).hide();
+										
 						// Delay resizing to avoid flicker.
 						setTimeout(function() {
 							$(window).resize();
@@ -97,7 +88,7 @@
 							$loader.remove();
 							$fields.fadeIn(300, function() {
 								$(window).resize();
-								$fields.find('.uk-form-controls, textarea').focus();	
+								$fields.find('.uk-form-controls, textarea, [contenteditable]').first().focus();	
 							});
 						}, 600);
 							
@@ -133,7 +124,7 @@
 				
 				var ips = Automad.inPage.selectors,
 					$menubar = $(ips.menubar).draggabilly({
-							handle: ips.dragHandle
+						handle: ips.dragHandle
 					});
 				
 			}

@@ -59,6 +59,9 @@ $url = Core\Request::post('url');
 
 if (!array_key_exists($url, $this->getAutomad()->getCollection())) {
 	$url = '';
+	$modalTitle = Text::get('shared_title');
+} else {
+	$modalTitle = $this->getAutomad()->getPage($url)->get(AM_KEY_TITLE);
 }
 
 $path = $this->getContent()->getPathByPostUrl();
@@ -110,7 +113,7 @@ if ($files) { ?>
 	<?php 
 		echo Components\Grid\Files::render($files); 
 		echo Components\Modal\CopyResized::render($url);
-		echo Components\Modal\EditFile::render($url);
+		echo Components\Modal\EditFileInfo::render($modalTitle, $url);
 	?>
 	
 <?php } else { ?>
