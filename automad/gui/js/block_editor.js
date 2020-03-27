@@ -122,6 +122,12 @@
 							config: {
 								services: Automad.blockEditor.embedServices
 							}
+						},
+						inlineCode: {
+							class: InlineCode
+						},
+						marker: {
+							class: Marker
 						}
 					},
 
