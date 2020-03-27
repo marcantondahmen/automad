@@ -37,29 +37,53 @@
 
 	& .ce-toolbar {
 
+		@media (max-width: 650px) {
+			border-radius: @am-block-radius;
+			border: none;
+			background-color: @am-block-dropdown-background;	
+			.shadow;	
+		}
+
 		&__plus,
 		&__content .ce-toolbox {
+			
 			border-radius: @am-block-radius;
-			background-color: @form-background;
+			background-color: @am-block-dropdown-background;
+
+			@media (min-width: 651px) {
+				.shadow;
+			}
+			
 		}
 
 		&__content {
 
-			max-width: @am-block-max-width;
+			position: relative;
 			
 			& .ce-toolbox {
 				margin-left: 4px;
+			}
+
+			@media (min-width: 651px) {
+
+				max-width: @am-block-max-width;
+
+				& .ce-toolbox {
+					margin-left: 43px;
+				}
+
 			}
 
 		}
 
 		&__actions {
 
-			right: -3px;
+			top: 11px;
+			right: 11px;
 			
-			@media (min-width: @am-blocks-breakpoint-small) {	
-				top: 10px;
-				right: 10px;	
+			@media (max-width: 650px) {	
+				top: 16px;
+				right: -28px;	
 			}
 
 		}

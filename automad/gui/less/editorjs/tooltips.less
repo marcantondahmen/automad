@@ -35,13 +35,20 @@
 
 .ct {
 
+	z-index: @tooltip-z-index;
+	
 	&:before,
 	&:after {
 		background-color: @tooltip-background;
 	}
 
+	&:before {
+		border-radius: 9px;
+	}
+
 	&__content {
 		color: @tooltip-color;
+		border-radius: 9px;
 	}
 
 }
