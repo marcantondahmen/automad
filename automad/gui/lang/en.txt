@@ -14,7 +14,7 @@ btn_add_var: Add Variable
 
 -
 
-btn_apply_reload: Apply &amp; Reload
+btn_apply_reload: Apply & Reload
 
 -
 
@@ -34,7 +34,7 @@ btn_copy_resized: Copy Resized
 
 -
 
-btn_data: Data & Settings
+btn_data: Data + Settings
 
 -
 
@@ -58,7 +58,7 @@ btn_edit_file_info: Edit File Info
 
 -
 
-btn_edit_headless_template: Edit Headless Template
+btn_edit_headless_template: Edit the Headless-Template
 
 -
 
@@ -78,7 +78,7 @@ btn_getting_data: Getting Data ...
 
 -
 
-btn_hide_page: Hide Page From Navigation
+btn_hide_page: Hide Page in Navigation
 
 -
 
@@ -146,7 +146,7 @@ btn_save: Save
 
 -
 
-btn_upload: Upload Files
+btn_upload: Upload
 
 -
 
@@ -157,7 +157,7 @@ btn_upload: Upload Files
 
 
 
-confirm_delete_files: Are you sure to delete the selected files?
+confirm_delete_files: Are you sure you want to delete the selected files?
 
 -
 
@@ -165,11 +165,11 @@ confirm_delete_page: Are you sure you want to delete the current page?
 
 -
 
-confirm_delete_users: Are you sure to delete the selected users?
+confirm_delete_users: Are you sure you want to delete the selected users?
 
 -
 
-confirm_reset_headless: Are you sure to reset the custom headless template?
+confirm_reset_headless: Are you sure you want to reset the custom headless-template?
 
 -
 
@@ -203,7 +203,7 @@ dashboard_title: Dashboard
 
 
 
-dropzone: Drop Files Here
+dropzone: Drag Files Here
 
 -
 
@@ -214,7 +214,7 @@ dropzone: Drop Files Here
 
 
 
-error_cache_purged: Could not purge the cache directory!
+error_cache_purged: The cache directory could not be purged!
 
 -
 
@@ -227,10 +227,6 @@ error_file_save: Could not save
 -
 
 error_file_format: Unsupported file type
-
--
-
-error_file_name: Invalid filename!
 
 -
 
@@ -270,7 +266,7 @@ error_packages: Could not load packages from Packagist!
 
 -
 
-error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
+error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared-hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
 
 -
 
@@ -294,11 +290,11 @@ error_password_reuse: Don't reuse your old password!
 
 -
 
-error_permission: Permission denied:
+error_permission: Permissions denied:
 
 -
 
-error_template_missing: Missing
+error_template_missing: Template missing
 
 -
 
@@ -319,11 +315,11 @@ error_update_failed: Update failed! Please restore your installation from a back
 -
 
 error_update_not_supported: Updates are not supported by your server! 
-The updater requires **cURL** and **ZIP** libraries to be installed.
+The updater requires cURL and ZIP libraries to be installed.
 
 -
 
-error_update_permission: Can't run update! Permission denied! 
+error_update_permission: Can't run update! Permissions denied! 
 
 -
 
@@ -381,18 +377,7 @@ images_page: Page Images
 
 -
 
-images_shared: Shared Images
-
--
-
-
-
-
-
-
-
-
-inpage_edit_title: Edit Content
+images_shared: General Images
 
 -
 
@@ -476,11 +461,11 @@ packages_browse: Open Package Browser
 
 -
 
-packages_filter: Filter Packages
+packages_filter: Filter
 
 -
 
-packages_installed: Installed
+packages_installed: Is installed
 
 -
 
@@ -512,7 +497,7 @@ page_add_location: Select a location for the new page
 
 -
 
-page_move_destination: Select a destination
+page_move_destination: Select a destination for moving
 
 -
 
@@ -582,7 +567,7 @@ sidebar_header_pages: Pages
 
 
 
-shared_title: Shared Data & Files
+shared_title: General Data and Files
 
 -
 
@@ -626,7 +611,7 @@ search_no_results: No pages found!
 
 -
 
-search_placeholder: Search
+search_placeholder: Search in
 
 -
 
@@ -645,7 +630,7 @@ success_added: Successfully added
 
 -
 
-success_cache_cleared: The page cache got cleared successfully!
+success_cache_cleared: The cache got cleared successfully!
 
 -
 
@@ -677,11 +662,11 @@ success_remove: Successfully removed
 
 -
 
-success_reset_headless: Successfully restored the default headless template!
+success_reset_headless: Successfully restored the default headless-template!
 
 -
 
-success_saved: Saved
+success_saved: Saved changes
 
 -
 
@@ -722,7 +707,7 @@ sys_cache_enable: Caching
 
 -
 
-sys_cache_monitor: Check for changes every
+sys_cache_monitor: Interval for checking changes is
 
 -
 
@@ -742,10 +727,10 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: In contrast to clearing the cache, purging will move all files and images from the **cache** directory into the system **temp** directory.   
+sys_cache_purge_info: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temprary directory of the system.   
 This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages.          
-On most systems the **temp** directory will be cleaned up by the system automatically from time to time or on reboot. 
-However, on some systems that directory has to be cleaned up manually.
+On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. 
+However, on some systems that directory has to be cleared manually.
 
 -
 
@@ -762,22 +747,22 @@ Debugging is only needed for development or troubleshooting and should be disabl
 
 -
 
-sys_headless: Headless
+sys_headless: Headless Mode
 
 -
 
 sys_headless_edit_info: The structure of the returned JSON data is controlled by a template. 
-You can edit that template using Automad's template language for customizing fields 
+You can edit that template using Automad's built-in template language for customizing fields 
 by using variables, objects and control structures.
 
 -
 
 sys_headless_enable: Headless Mode
+
 -
 
-sys_headless_info: Activating the headless mode turns Automad into a content management system without a presentation layer 
-that focuses entirely on content creation. While the Dashboard can still be used to manage content, all data and files are made 
-accessible via a read-only JSON API.
+sys_headless_info: Activating the headless mode turns Automad into a content management system focusing entirely on content creation without a presentation layer. 
+While the Dashboard can still be used to manage content, all data and files are accessible via a read-only JSON API.
 
 -
 
@@ -837,7 +822,7 @@ sys_update_to: Update to
 
 -
 
-sys_update_windows_warning: Make sure that all Automad files are closed in any program before running the update to avoid file corruptions! 
+sys_update_windows_warning: Make sure that all files of your installation are closed in external programs before running the update to avoid permissions issues!
 
 -
 
@@ -845,8 +830,7 @@ sys_user: Users
 
 -
 
-sys_user_info: You can add/remove more users or 
-change your password here.
+sys_user_info: You can add or remove more users or change your password here.
 
 -
 
