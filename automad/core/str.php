@@ -154,7 +154,11 @@ class Str {
 		if (strpos($str, "\n") === false && $multilineOnly) { 
 			return $str;
 		} else {
-			return \Michelf\MarkdownExtra::defaultTransform($str);
+			$str = \Michelf\MarkdownExtra::defaultTransform($str);
+			return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function($matches) {
+				$id = self::sanitize($matches[2], true, 200);
+				return "<h{$matches[1]} id=\"$id\">{$matches[2]}</h{$matches[1]}>";
+			}, $str);
 		}
 		
 	}
