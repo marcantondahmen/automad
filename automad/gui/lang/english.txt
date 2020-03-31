@@ -14,7 +14,7 @@ btn_add_var: Add Variable
 
 -
 
-btn_apply_reload: Apply & Reload
+btn_apply_reload: Apply and Reload
 
 -
 
@@ -26,15 +26,15 @@ btn_close: Close
 
 -
 
-btn_copy_url_clipboard: Copy URL To Clipboard
+btn_copy_url_clipboard: Copy URL to Clipboard
 
 -
 
-btn_copy_resized: Copy Resized
+btn_copy_resized: Copy and Resize
 
 -
 
-btn_data: Data + Settings
+btn_data: Data and Settings
 
 -
 
@@ -66,7 +66,7 @@ btn_edit_page: Edit Page
 
 -
 
-btn_files: Files
+btn_files: Uploaded Files
 
 -
 
@@ -102,7 +102,7 @@ btn_log_out: Log out
 
 -
 
-btn_login: Log In
+btn_login: Log in
 
 -
 
@@ -314,8 +314,7 @@ error_update_failed: Update failed! Please restore your installation from a back
 
 -
 
-error_update_not_supported: Updates are not supported by your server! 
-The updater requires cURL and ZIP libraries to be installed.
+error_update_not_supported: Updates are not supported by your server! The updater requires cURL and ZIP libraries to be installed.
 
 -
 
@@ -388,7 +387,7 @@ images_shared: General Images
 
 
 
-install_help: ###Create User Account  
+install_help: ### Create User Account  
 Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
       				
 1. 	Create an user account using the form below and download the created file to your computer. 
@@ -400,7 +399,7 @@ Other users can be added later via the system preferences.
 
 -
 
-install_login: ###Move Account File   
+install_login: ### Move Account File   
 Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can login to the dashboard.
 
 -
@@ -575,8 +574,7 @@ shared_theme: Main theme
 
 -
 
-shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? 
-Your unsaved changes will be saved.
+shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? Your unsaved changes will be saved.
 
 -
 
@@ -689,8 +687,7 @@ sys_cache: Cache
 
 -
 
-sys_cache_info: Caching is essential to speed up your site and should generally be enabled.     
-However under some circumstances you might want to disable or clear your cache.
+sys_cache_info: Caching is essential to speed up your site and should generally be enabled. However under some circumstances you might want to disable or clear your cache.
 
 -
 
@@ -698,8 +695,7 @@ sys_cache_clear: Clear Cache
 
 -
 
-sys_cache_clear_info: Clearing the site cache forces a rescan for updated pages and files. 
-This action will not remove any page files or images from the cache directory.
+sys_cache_clear_info: Clearing the site cache forces a rescan for updated pages and files. This action will not remove any page files or images from the cache directory.
 
 -
 
@@ -707,7 +703,7 @@ sys_cache_enable: Caching
 
 -
 
-sys_cache_monitor: Interval for checking changes is
+sys_cache_monitor: The checking interval is
 
 -
 
@@ -715,7 +711,7 @@ sys_cache_monitor_info: When caching is enabled, Automad will check regularly fo
 
 -
 
-sys_cache_lifetime: Maximum cache lifetime is 
+sys_cache_lifetime: The cache lifetime is 
 
 -
 
@@ -727,10 +723,7 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temprary directory of the system.   
-This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages.          
-On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. 
-However, on some systems that directory has to be cleared manually.
+sys_cache_purge_info: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temprary directory of the system. This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages. On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. However, on some systems that directory has to be cleared manually.
 
 -
 
@@ -742,18 +735,15 @@ sys_debug_enable: Debug Mode
 
 -
 
-sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console.  
-Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
+sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console. Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
 
 -
 
-sys_headless: Headless Mode
+sys_headless: Headless
 
 -
 
-sys_headless_edit_info: The structure of the returned JSON data is controlled by a template. 
-You can edit that template using Automad's built-in template language for customizing fields 
-by using variables, objects and control structures.
+sys_headless_edit_info: The structure of the returned JSON data is controlled by a template. You can edit that template using Automad's built-in template language for customizing fields by using variables, objects and control structures.
 
 -
 
@@ -761,8 +751,15 @@ sys_headless_enable: Headless Mode
 
 -
 
-sys_headless_info: Activating the headless mode turns Automad into a content management system focusing entirely on content creation without a presentation layer. 
-While the Dashboard can still be used to manage content, all data and files are accessible via a read-only JSON API.
+sys_headless_info: Activating the headless mode turns Automad into a content management system focusing entirely on content creation without a presentation layer. While the Dashboard can still be used to manage content, all data and files are accessible via a read-only JSON API.
+
+-
+
+sys_language: Language
+
+-
+
+sys_language_info: There are several languages available for the Dashboard. The translations are created automatically by an artificial intelligence. Therefore this feature is still in an experimental phase and some translations might not be accurate.
 
 -
 
@@ -871,5 +868,3 @@ sys_user_registered: Registered Users
 -
 
 sys_user_you: You
-
-

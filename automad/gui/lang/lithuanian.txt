@@ -1,0 +1,705 @@
+btn_add: Papildyti
+
+-
+
+btn_add_page: Pridėti puslapį
+
+-
+
+btn_add_var: Pridėti kintamąjį
+
+-
+
+btn_apply_reload: Taikyti ir perkrauti iš naujo
+
+-
+
+btn_browse: Naršykite failus
+
+-
+
+btn_close: Uždaryti
+
+-
+
+btn_copy_url_clipboard: Nukopijuokite URL į mainų sritį
+
+-
+
+btn_copy_resized: Nukopijuokite ir pakeiskite dydį
+
+-
+
+btn_data: Duomenys ir parametrai
+
+-
+
+btn_delete_page: Ištrinti puslapį
+
+-
+
+btn_download_file: Parsisiųsti
+
+-
+
+btn_duplicate_page: Puslapio kopija
+
+-
+
+btn_edit: Redaguoti
+
+-
+
+btn_edit_file_info: Redaguoti failo informaciją
+
+-
+
+btn_edit_headless_template: Redaguokite „Headless-Template“
+
+-
+
+btn_edit_page: Redaguoti puslapį
+
+-
+
+btn_files: Įkelti failai
+
+-
+
+btn_get_themes: Gaukite daugiau temų
+
+-
+
+btn_getting_data: Gaunami duomenys ...
+
+-
+
+btn_hide_page: Slėpti puslapį naršant
+
+-
+
+btn_home: Home
+
+-
+
+btn_inpage_edit: Redagavimo puslapyje režimas
+
+-
+
+btn_install: Diegti
+
+-
+
+btn_link: Nuoroda
+
+-
+
+btn_log_out: Atsijungti
+
+-
+
+btn_login: Prisijungti
+
+-
+
+btn_manage_users: Tvarkyti vartotojus
+
+-
+
+btn_more: Daugiau
+
+-
+
+btn_move_page: Perkelti puslapį
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Atidaryti žurnalą
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Pašalinti
+
+-
+
+btn_remove_selected: Pašalinti pasirinktą
+
+-
+
+btn_reset: Atstatyti
+
+-
+
+btn_save: Sutaupyti
+
+-
+
+btn_upload: Įkelti
+
+-
+
+confirm_delete_files: Ar tikrai norite ištrinti pasirinktus failus?
+
+-
+
+confirm_delete_page: Ar tikrai norite ištrinti dabartinį puslapį?
+
+-
+
+confirm_delete_users: Ar tikrai norite ištrinti pasirinktus vartotojus?
+
+-
+
+confirm_reset_headless: Ar tikrai norite atkurti pasirinktinį begalvį šabloną?
+
+-
+
+dashboard_memory: Atminties naudojimas:
+
+-
+
+dashboard_modified: Naujausias užsiėmimas
+
+-
+
+dashboard_recently_edited: Neseniai redaguoti puslapiai
+
+-
+
+dropzone: Vilkite failus čia
+
+-
+
+error_cache_purged: Talpyklos katalogo nepavyko išvalyti!
+
+-
+
+error_existing: Jau egzistuoja!
+
+-
+
+error_file_save: Nepavyko išsaugoti
+
+-
+
+error_file_format: Nepalaikomas failo tipas
+
+-
+
+error_file_not_found: Failas nerastas!
+
+-
+
+error_file_size: Netinkamas failo dydis!
+
+-
+
+error_form: Neišsamūs ar neteisingi duomenys! <br /> Visi laukai yra būtini ir užpildomi taip, kaip aprašyta!
+
+-
+
+error_login: Neteisingas prisijungimo vardas arba slaptažodis
+
+-
+
+error_log_out: Atsijungti nepavyko!
+
+-
+
+error_no_destination: Pasirinkite puslapį kaip paskirties vietą!
+
+-
+
+error_no_js: Jei norite naudoti informacijos suvestinę, savo naršyklėje įgalinkite „JavaScript“!
+
+-
+
+error_no_theme: Nepasirinkta nė viena tema Pasirinkite pagrindinę temą.
+
+-
+
+error_packages: Nepavyko įkelti pakuočių iš „Packagist“!
+
+-
+
+error_composer_memory: Jūsų serveryje nėra pakankamai atminties paketams įdiegti, atnaujinti ar pašalinti! Jei naudojate šią svetainę bendro naudojimo prieglobos tarnyboje su ribotu atminties kiekiu, pabandykite atnaujinti savo planą arba įdiekite svetainę į vietinį kompiuterį be atminties apribojimų.
+
+-
+
+error_page_not_found: Puslapis nerastas!
+
+-
+
+error_page_title: Pavadinimo trūksta!
+
+-
+
+error_password_current: Dabartinis slaptažodis neteisingas!
+
+-
+
+error_password_repeat: Įveskite du kartus tą patį naują slaptažodį!
+
+-
+
+error_password_reuse: Nenaudokite pakartotinai seno slaptažodžio!
+
+-
+
+error_permission: Atmesti leidimai:
+
+-
+
+error_template_missing: Nėra šablono
+
+-
+
+error_update_connection: Neįmanoma prisijungti prie atnaujinimo serverio! Paprastai tai gali sukelti neteisinga atnaujinimo konfigūracija (config.json), SSL sertifikato klaida arba trūkstama CURL biblioteka.
+
+-
+
+error_update_download: Nepavyko atsisiųsti atnaujinimo!
+
+-
+
+error_update_items: Netinkamas atnaujintinų elementų sąrašas!
+
+-
+
+error_update_failed: Atnaujinimas nepavyko! Atkurkite diegimą iš atsarginės kopijos.
+
+-
+
+error_update_not_supported: Jūsų serveris nepalaiko atnaujinimų! Norint atnaujinti, reikia įdiegti CURL ir ZIP bibliotekas.
+
+-
+
+error_update_permission: Nepavyko paleisti naujinimo! Leidimai atmesti!
+
+-
+
+error_var_exists: Kintamasis tokiu pavadinimu jau yra!
+
+-
+
+error_var_name: Negalite pridėti kintamojo be vardo!
+
+-
+
+file_name: Failo pavadinimas
+
+-
+
+file_caption: Antraštė
+
+-
+
+image_crop: Apkarpyti nuotrauką
+
+-
+
+image_height_px: Aukštis (taškai)
+
+-
+
+image_width_px: Plotis (taškai)
+
+-
+
+image_options: Galimybės
+
+-
+
+image_select: Pasirinkite vaizdą
+
+-
+
+images_page: Puslapio vaizdai
+
+-
+
+images_shared: Bendrieji vaizdai
+
+-
+
+link_placeholder: Pradėkite rašyti puslapio pavadinimą arba čia įklijuokite išorinę nuorodą
+
+-
+
+link_title: Pridėti nuorodą
+
+-
+
+login_title: Prisijungti
+
+-
+
+login_username: Vartotojo vardas
+
+-
+
+login_password: Slaptažodis
+
+-
+
+log_out_title: Atsijungęs
+
+-
+
+packages_title: Pakuotės
+
+-
+
+packages_browse: Atidarykite pakuotės naršyklę
+
+-
+
+packages_filter: Filtras
+
+-
+
+packages_installed: Yra įdiegta
+
+-
+
+packages_installing: Diegiamas paketas ...
+
+-
+
+packages_update_all: Atnaujinti viską
+
+-
+
+packages_updating: Atnaujinami paketai ...
+
+-
+
+packages_removing: Šalinamas paketas ...
+
+-
+
+page_add_location: Pasirinkite naujo puslapio vietą
+
+-
+
+page_move_destination: Pasirinkite kelionės tikslą
+
+-
+
+page_settings: Puslapio nustatymai
+
+-
+
+page_prefix: Prefiksas (užsakymas naršant)
+
+-
+
+page_redirect: Peradresuokite puslapį į kitą URL
+
+-
+
+page_tags: Žymos (atskirkite kelias žymas kableliais arba skirtukais)
+
+-
+
+page_theme_template: Šablonas
+
+-
+
+page_var_name: Kintamasis vardas
+
+-
+
+page_vars_headless: Kintamieji
+
+-
+
+page_vars_template: Kintamieji dabartiniame šablone
+
+-
+
+page_vars_other_templates: Kintamieji kituose šablonuose
+
+-
+
+page_vars_unused: Nepanaudoti kintamieji
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Visuotinis
+
+-
+
+sidebar_header_pages: Puslapiai
+
+-
+
+shared_title: Bendrieji duomenys ir failai
+
+-
+
+shared_theme: Pagrindinė tema
+
+-
+
+shared_theme_apply: Ar norite pritaikyti pasirinktą temą ir atnaujinti galimų kintamųjų sąrašą dabar? Neišsaugoti pakeitimai bus išsaugoti.
+
+-
+
+shared_vars_headless: Kintamieji
+
+-
+
+shared_vars_main_theme: Kintamieji pagrindinėje temoje
+
+-
+
+shared_vars_other_themes: Kintamieji kitose temose
+
+-
+
+shared_vars_unused: Nepanaudoti kintamieji
+
+-
+
+shared_var_name: Kintamasis vardas
+
+-
+
+search_no_results: Nerasta jokių puslapių
+
+-
+
+search_placeholder: Ieškokite
+
+-
+
+search_title: Paieškos rezultatai
+
+-
+
+success_added: Sėkmingai pridėta
+
+-
+
+success_cache_cleared: Talpykla sėkmingai išvalyta!
+
+-
+
+success_cache_purged: Talpyklos katalogas buvo sėkmingai išvalytas!
+
+-
+
+success_config_update: Sėkmingai atnaujinta konfigūracija!
+
+-
+
+success_created: Sėkmingai sukurta <br>
+
+-
+
+success_installed: Sėkmingai įdiegta
+
+-
+
+success_password_changed: Jūsų slaptažodis sėkmingai pakeistas!
+
+-
+
+success_log_out: Sėkmingai atsijungėte
+
+-
+
+success_remove: Sėkmingai pašalinta
+
+-
+
+success_reset_headless: Sėkmingai atkurtas numatytasis begalvis šablonas!
+
+-
+
+success_saved: Išsaugoti pakeitimai
+
+-
+
+success_update: Sėkmingai atnaujinta „Automad“!
+
+-
+
+success_packages_updated: Sėkmingai atnaujinti visi paketai
+
+-
+
+sys_cache_info: Talpinimas yra būtinas norint pagreitinti jūsų svetainę ir paprastai turėtų būti įgalintas. Tačiau tam tikromis aplinkybėmis galbūt norėsite išjungti arba išvalyti talpyklą.
+
+-
+
+sys_cache_clear: Išvalyti talpyklą
+
+-
+
+sys_cache_clear_info: Išvalius svetainės talpyklą, reikia nuskaityti atnaujintus puslapius ir failus. Šis veiksmas neištrins jokių failų ar vaizdų iš talpyklos katalogo.
+
+-
+
+sys_cache_monitor: Tikrinimo intervalas yra
+
+-
+
+sys_cache_monitor_info: Įjungus talpyklos kaupimą, „Automad“ reguliariai tikrins, ar nėra pakeitimų failų sistemoje. Čia gali būti apibrėžtas šių patikrinimų dažnumas.
+
+-
+
+sys_cache_lifetime: Talpyklos tarnavimo laikas yra
+
+-
+
+sys_cache_lifetime_info: Visi saugomi „Automad“ duomenys ir puslapiai yra maksimaliai tinkami naudoti. Viršijus objekto gyvavimo laiką, jo talpykla bus atstatyta, kai to bus paprašyta.
+
+-
+
+sys_cache_purge: Išvalymo talpyklos katalogas
+
+-
+
+sys_cache_purge_info: Priešingai nei tiesiog išvalius talpyklą, išvalę talpyklos katalogą visi laikinieji failai, ištrinti puslapiai, atnaujinimų atsarginės kopijos ir talpykloje esantys vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atstatyti atvaizdą ir talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugelyje sistemų laikinas katalogas bus automatiškai išvalomas laikas nuo laiko arba iš naujo paleidžiant. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
+
+-
+
+sys_debug_info: Įjungus derinimo funkciją, visi „Automad“ procesai bus prisijungę prie jūsų naršyklės pulto. Derinimas reikalingas tik kuriant ar šalinant triktis ir visais kitais atvejais turėtų būti neleidžiamas.
+
+-
+
+sys_headless_edit_info: Grąžinamų JSON duomenų struktūra valdoma šablonu. Galite redaguoti tą šabloną naudodami integruotą „Automad“ šablono kalbą, norėdami pritaikyti laukus naudodami kintamuosius, objektus ir valdymo struktūras.
+
+-
+
+sys_headless_info: Suaktyvinus režimą be galvos, „Automad“ paverčiama turinio valdymo sistema, kurioje visas dėmesys skiriamas turinio kūrimui be pateikimo sluoksnio. Nors informacijos suvestinę vis dar galima naudoti turiniui tvarkyti, visi duomenys ir failai pasiekiami naudojant tik skaitomą JSON API.
+
+-
+
+sys_language: Kalba
+
+-
+
+sys_language_info: Prietaisų skydelyje yra keletas kalbų. Vertimai automatiškai sukuriami dirbtinio intelekto pagalba. Todėl ši funkcija vis dar yra eksperimentinėje stadijoje ir kai kurie vertimai gali būti netikslūs.
+
+-
+
+sys_status_cache_enabled: Talpinimas įgalintas
+
+-
+
+sys_status_cache_disabled: Talpinimas neleidžiamas
+
+-
+
+sys_status_debug_enabled: Derinimas įjungtas
+
+-
+
+sys_status_debug_disabled: Derinimas yra išjungtas
+
+-
+
+sys_status_update_available: Atnaujinti į
+
+-
+
+sys_status_update_not_available: �Automad“ yra atnaujinta
+
+-
+
+sys_title: Sistemos nustatymai
+
+-
+
+sys_update: Atnaujinti
+
+-
+
+sys_update_available: Yra naujesnė „Automad“ versija ir ją galima paruošti įdiegti. <br> Prieš atnaujindami, sukurkite atsarginę savo esamo įrenginio kopiją!
+
+-
+
+sys_update_current_version: Šiuo metu įdiegta versija yra
+
+-
+
+sys_update_items: Atnaujinimas turi įtakos šiems elementams:
+
+-
+
+sys_update_not_required: �Automad“ yra atnaujinta.
+
+-
+
+sys_update_progress: Palaukite ir neuždarykite lango atnaujindami ...
+
+-
+
+sys_update_to: Atnaujinti į
+
+-
+
+sys_update_windows_warning: Prieš paleisdami naujinimą įsitikinkite, kad visi jūsų diegimo failai yra uždaryti išorinėse programose, kad išvengtumėte leidimų problemų!
+
+-
+
+sys_user: Vartotojai
+
+-
+
+sys_user_info: Čia galite pridėti arba pašalinti daugiau vartotojų arba pakeisti slaptažodį.
+
+-
+
+sys_user_change_password: Pasikeiskite slaptažodį
+
+-
+
+sys_user_change_password_current: Dabartinis slaptažodis
+
+-
+
+sys_user_change_password_new: Naujas Slaptažodis
+
+-
+
+sys_user_change_password_repeat: Pakartokite slaptažodį
+
+-
+
+sys_user_add: Pridėti vartotoją
+
+-
+
+sys_user_add_name: Vartotojo vardas
+
+-
+
+sys_user_add_password: Slaptažodis
+
+-
+
+sys_user_add_repeat: Pakartokite slaptažodį
+
+-
+
+sys_user_registered: Registruoti vartotojai
+
+-
+
+sys_user_you: Tu

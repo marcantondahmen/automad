@@ -1,0 +1,705 @@
+btn_add: Dodati
+
+-
+
+btn_add_page: Dodaj stranicu
+
+-
+
+btn_add_var: Dodajte promenljivu
+
+-
+
+btn_apply_reload: Primjeni i ponovo učitaj
+
+-
+
+btn_browse: Pregledavanje datoteka
+
+-
+
+btn_close: Zatvori
+
+-
+
+btn_copy_url_clipboard: Kopirajte URL u međuspremnik
+
+-
+
+btn_copy_resized: Kopirajte i promenite veličinu
+
+-
+
+btn_data: Podaci i postavke
+
+-
+
+btn_delete_page: Izbriši stranicu
+
+-
+
+btn_download_file: Skinuti
+
+-
+
+btn_duplicate_page: Duplikatna stranica
+
+-
+
+btn_edit: Uredi
+
+-
+
+btn_edit_file_info: Uređivanje podataka o datoteci
+
+-
+
+btn_edit_headless_template: Uredite predložak bez glave
+
+-
+
+btn_edit_page: Uredi stranicu
+
+-
+
+btn_files: Prenesene datoteke
+
+-
+
+btn_get_themes: Nabavite još tema
+
+-
+
+btn_getting_data: Dobivanje podataka ...
+
+-
+
+btn_hide_page: Sakrij stranicu u navigaciji
+
+-
+
+btn_home: Home
+
+-
+
+btn_inpage_edit: Način uređivanja na stranici
+
+-
+
+btn_install: Instalacija
+
+-
+
+btn_link: Veza
+
+-
+
+btn_log_out: Odjaviti se
+
+-
+
+btn_login: Ulogovati se
+
+-
+
+btn_manage_users: Upravljanje korisnicima
+
+-
+
+btn_more: Još
+
+-
+
+btn_move_page: Move Page
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Otvori dnevnik
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Ukloni
+
+-
+
+btn_remove_selected: Ukloni izabrano
+
+-
+
+btn_reset: Resetovati
+
+-
+
+btn_save: Spremi
+
+-
+
+btn_upload: Pošaljite
+
+-
+
+confirm_delete_files: Jeste li sigurni da želite izbrisati odabrane datoteke?
+
+-
+
+confirm_delete_page: Jeste li sigurni da želite izbrisati trenutnu stranicu?
+
+-
+
+confirm_delete_users: Jeste li sigurni da želite izbrisati odabrane korisnike?
+
+-
+
+confirm_reset_headless: Jeste li sigurni da želite resetirati prilagođeni predložak bez glave?
+
+-
+
+dashboard_memory: Upotreba memorije:
+
+-
+
+dashboard_modified: Najnovija aktivnost na
+
+-
+
+dashboard_recently_edited: Nedavno uređene stranice
+
+-
+
+dropzone: Prevucite datoteke ovdje
+
+-
+
+error_cache_purged: Nije bilo moguće očistiti direktorij predmemorije!
+
+-
+
+error_existing: Već postoji!
+
+-
+
+error_file_save: Nije moguće spremiti
+
+-
+
+error_file_format: Nepodržani tip datoteke
+
+-
+
+error_file_not_found: Datoteka nije pronađena!
+
+-
+
+error_file_size: Nevažeća veličina datoteke!
+
+-
+
+error_form: Nepotpuni ili netačni podaci! <br /> Sva polja su obavezna i moraju se ispuniti kao što je opisano!
+
+-
+
+error_login: Nevažeće korisničko ime ili lozinka
+
+-
+
+error_log_out: Odjava nije uspela!
+
+-
+
+error_no_destination: Molimo odaberite stranicu kao odredište!
+
+-
+
+error_no_js: Molimo omogućite JavaScript u vašem pretraživaču da biste koristili nadzornu ploču!
+
+-
+
+error_no_theme: Nije odabrana tema! Odaberite glavnu temu.
+
+-
+
+error_packages: Nije moguće učitati pakete iz Packagist-a!
+
+-
+
+error_composer_memory: Vaš server nema dovoljno memorije za instaliranje, ažuriranje ili uklanjanje paketa! U slučaju da ovu web lokaciju pokrećete na usluzi zajedničkog hostinga s ograničenom količinom memorije, pokušajte nadograditi svoj plan ili instalirajte web mjesto na lokalnom računalu bez ograničenja memorije.
+
+-
+
+error_page_not_found: Stranica nije pronađena!
+
+-
+
+error_page_title: Naslov nedostaje!
+
+-
+
+error_password_current: Trenutna lozinka je pogrešna!
+
+-
+
+error_password_repeat: Unesite dva puta istu novu lozinku!
+
+-
+
+error_password_reuse: Ne koristite ponovo svoju staru lozinku!
+
+-
+
+error_permission: Dozvole su odbijene:
+
+-
+
+error_template_missing: Nedostaje šablon
+
+-
+
+error_update_connection: Ne mogu se povezati s serverom za ažuriranje! To bi obično moglo biti uzrokovano pogrešnom konfiguracijom ažuriranja (config.json), greškom SSL certifikata ili nedostajućom CURL bibliotekom.
+
+-
+
+error_update_download: Preuzimanje ažuriranja nije uspjelo!
+
+-
+
+error_update_items: Nevažeća lista stavki koje treba ažurirati!
+
+-
+
+error_update_failed: Ažuriranje nije uspjelo! Vratite instalaciju iz rezervne kopije.
+
+-
+
+error_update_not_supported: Vaš poslužitelj ne podržava ažuriranja! Ažuriranje zahtijeva da budu instalirane cURL i ZIP knjižnice.
+
+-
+
+error_update_permission: Ažuriranje nije moguće! Dozvole su odbijene!
+
+-
+
+error_var_exists: Već postoji varijabla s tim imenom!
+
+-
+
+error_var_name: Ne možete dodati varijablu bez imena!
+
+-
+
+file_name: Ime dokumenta
+
+-
+
+file_caption: Natpis
+
+-
+
+image_crop: Obrezivanje slike
+
+-
+
+image_height_px: Visina (piksela)
+
+-
+
+image_width_px: Širina (piksela)
+
+-
+
+image_options: Opcije
+
+-
+
+image_select: Odaberite Slika
+
+-
+
+images_page: Slike stranica
+
+-
+
+images_shared: Opšte slike
+
+-
+
+link_placeholder: Ovdje započnite tipkati naslov stranice ili zalijepite vanjsku vezu
+
+-
+
+link_title: Dodaj vezu
+
+-
+
+login_title: Ulogovati se
+
+-
+
+login_username: Korisničko ime
+
+-
+
+login_password: Lozinka
+
+-
+
+log_out_title: Odjavljen
+
+-
+
+packages_title: Paketi
+
+-
+
+packages_browse: Otvorite pregledač paketa
+
+-
+
+packages_filter: Filter
+
+-
+
+packages_installed: Instalirano
+
+-
+
+packages_installing: Instaliranje paketa ...
+
+-
+
+packages_update_all: Ažuriraj sve
+
+-
+
+packages_updating: Ažuriranje paketa ...
+
+-
+
+packages_removing: Uklanjanje paketa ...
+
+-
+
+page_add_location: Odaberite lokaciju za novu stranicu
+
+-
+
+page_move_destination: Odaberite odredište za selidbu
+
+-
+
+page_settings: Podešavanja stranice
+
+-
+
+page_prefix: Prefiks (Naruči u navigaciji)
+
+-
+
+page_redirect: Preusmjeravanje stranice na drugi URL
+
+-
+
+page_tags: Oznake (Odvojite više oznaka zarezom ili zarezom)
+
+-
+
+page_theme_template: Šablon
+
+-
+
+page_var_name: Naziv varijable
+
+-
+
+page_vars_headless: Varijable
+
+-
+
+page_vars_template: Promenljive u trenutnom predlošku
+
+-
+
+page_vars_other_templates: Varijable u drugim predlošcima
+
+-
+
+page_vars_unused: Nekorišćene varijable
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Globalno
+
+-
+
+sidebar_header_pages: Stranice
+
+-
+
+shared_title: Opći podaci i datoteke
+
+-
+
+shared_theme: Glavna tema
+
+-
+
+shared_theme_apply: Želite li sada primijeniti odabranu temu i ažurirati popis dostupnih varijabli? Vaše nespremljene promjene biće spremljene.
+
+-
+
+shared_vars_headless: Varijable
+
+-
+
+shared_vars_main_theme: Varijable u glavnoj temi
+
+-
+
+shared_vars_other_themes: Varijable u drugim temama
+
+-
+
+shared_vars_unused: Nekorišćene varijable
+
+-
+
+shared_var_name: Naziv varijable
+
+-
+
+search_no_results: Nije pronađena stranica!
+
+-
+
+search_placeholder: Traži u
+
+-
+
+search_title: Rezultati pretrage
+
+-
+
+success_added: Uspješno dodano
+
+-
+
+success_cache_cleared: Keš je uspješno obrisan!
+
+-
+
+success_cache_purged: Katalog predmemorije uspješno je očišćen!
+
+-
+
+success_config_update: Uspješno ažurirana konfiguracija!
+
+-
+
+success_created: Uspješno kreiran <br>
+
+-
+
+success_installed: Uspješno instaliran
+
+-
+
+success_password_changed: Vaša lozinka je uspešno izmenjena!
+
+-
+
+success_log_out: Odjavljen je uspešno
+
+-
+
+success_remove: Uklonjeno
+
+-
+
+success_reset_headless: Uspješno je vraćen zadani predložak bez glave!
+
+-
+
+success_saved: Spremljene promjene
+
+-
+
+success_update: Uspješno ažuriran Automad!
+
+-
+
+success_packages_updated: Svi paketi su uspješno ažurirani
+
+-
+
+sys_cache_info: Keširanje je ključno za ubrzavanje vaše web lokacije i obično bi trebalo biti omogućeno. Međutim, pod nekim okolnostima možda želite onemogućiti ili očistiti predmemoriju.
+
+-
+
+sys_cache_clear: Clear Cache
+
+-
+
+sys_cache_clear_info: Brisanje predmemorije web lokacije natjera ponovo na pregled ažuriranih stranica i datoteka. Ova radnja neće ukloniti nijednu datoteku ili slike stranice iz predmemorije.
+
+-
+
+sys_cache_monitor: Interval provjere je
+
+-
+
+sys_cache_monitor_info: Kada je omogućeno predmemoriranje, Automad će redovno provjeravati promjene u datotečnom sistemu. Učestalost tih provjera može se ovdje definirati.
+
+-
+
+sys_cache_lifetime: Trajanje predmemorije je
+
+-
+
+sys_cache_lifetime_info: Svi predmemorirani podaci i stranice Automada imaju maksimalan vijek trajanja. Nakon što vijek objekta pređe, njegova keš memorija će se obnoviti na zahtjev.
+
+-
+
+sys_cache_purge: Pročistite direktorij predmemorije
+
+-
+
+sys_cache_purge_info: Za razliku od jednostavnog čišćenja predmemorije, čišćenje cache direktorija će također premjestiti sve privremene datoteke, izbrisane stranice, sigurnosne kopije ažuriranja i predmemorirane slike u temprary direktorij sustava. To će naterati potpunu obnovu predmemorije slike i stranice, kao i čišćenje svih izbrisanih stranica. Na većini se sistema privremeni direktorij automatski uklanja sa vremena na vrijeme ili ponovno pokreće. Međutim, na nekim sustavima taj se direktorij mora očistiti ručno.
+
+-
+
+sys_debug_info: Kada je uklanjanje pogrešaka omogućeno, svi procesi Automada bit će zabilježeni na konzoli vašeg preglednika. Otklanjanje pogrešaka potrebno je samo za razvoj ili otklanjanje problema i trebalo bi ga onemogućiti u svim ostalim slučajevima.
+
+-
+
+sys_headless_edit_info: Struktura vraćenih JSON podataka upravlja se pomoću predloška. Taj predložak možete urediti pomoću ugrađenog jezika predloška Automada za prilagođavanje polja pomoću varijabli, objekata i upravljačkih struktura.
+
+-
+
+sys_headless_info: Aktiviranje načina bez glave pretvara Automad u sistem upravljanja sadržajem koji se u potpunosti fokusira na stvaranje sadržaja bez prezentacijskog sloja. Iako se nadzorna ploča i dalje može koristiti za upravljanje sadržajem, svi podaci i datoteke su dostupni putem JSON API-ja samo za čitanje.
+
+-
+
+sys_language: Jezik
+
+-
+
+sys_language_info: Na nadzornoj ploči postoji nekoliko jezika. Prijevodi se automatski stvaraju umjetnom inteligencijom. Zbog toga je ova značajka još u eksperimentalnoj fazi i neki prevodi možda nisu tačni.
+
+-
+
+sys_status_cache_enabled: Keširanje je omogućeno
+
+-
+
+sys_status_cache_disabled: Predavanje je onemogućeno
+
+-
+
+sys_status_debug_enabled: Otklanjanje pogrešaka je omogućeno
+
+-
+
+sys_status_debug_disabled: Otklanjanje pogrešaka je onemogućeno
+
+-
+
+sys_status_update_available: Ažuriraj na
+
+-
+
+sys_status_update_not_available: Automad je ažuriran
+
+-
+
+sys_title: System Settings
+
+-
+
+sys_update: Ažuriraj
+
+-
+
+sys_update_available: Dostupna je i novija verzija Automada koja je spremna za instalaciju. <br> Napravite sigurnosnu kopiju trenutne instalacije prije ažuriranja!
+
+-
+
+sys_update_current_version: Trenutno instalirana verzija je
+
+-
+
+sys_update_items: Sljedeće stavke utječu na ažuriranje:
+
+-
+
+sys_update_not_required: Automad je ažuriran.
+
+-
+
+sys_update_progress: Pričekajte i ne zatvarajte prozor dok ažurirate ...
+
+-
+
+sys_update_to: Ažuriraj na
+
+-
+
+sys_update_windows_warning: Provjerite jesu li sve datoteke vaše instalacije zatvorene u vanjskim programima prije pokretanja ažuriranja kako biste izbjegli probleme s dozvolama!
+
+-
+
+sys_user: Korisnici
+
+-
+
+sys_user_info: Ovde možete dodati ili ukloniti više korisnika ili promeniti lozinku.
+
+-
+
+sys_user_change_password: Promenite lozinku
+
+-
+
+sys_user_change_password_current: Trenutna šifra
+
+-
+
+sys_user_change_password_new: Nova šifra
+
+-
+
+sys_user_change_password_repeat: Ponovi lozinku
+
+-
+
+sys_user_add: Dodaj korisnika
+
+-
+
+sys_user_add_name: Korisničko ime
+
+-
+
+sys_user_add_password: Lozinka
+
+-
+
+sys_user_add_repeat: Ponovi lozinku
+
+-
+
+sys_user_registered: Registrovani korisnici
+
+-
+
+sys_user_you: Ti

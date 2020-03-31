@@ -80,6 +80,15 @@ if ($type = Core\Request::post('type')) {
 		
 	}
 
+	// Language
+	if ($type == 'language') {
+
+		$language = Core\Request::post('language');
+		$config['AM_FILE_GUI_TRANSLATION'] = $language;
+		$output['redirect'] = '#3';
+		
+	}
+
 	// Headless
 	if ($type == 'headless') {
 		

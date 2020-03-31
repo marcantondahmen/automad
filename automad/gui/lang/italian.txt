@@ -1,0 +1,697 @@
+btn_add: Inserisci
+
+-
+
+btn_add_page: Aggiungi pagina
+
+-
+
+btn_add_var: Aggiungi variabile
+
+-
+
+btn_apply_reload: Applica e ricarica
+
+-
+
+btn_browse: Sfoglia file
+
+-
+
+btn_copy_url_clipboard: Copia URL negli Appunti
+
+-
+
+btn_copy_resized: Copia e ridimensiona
+
+-
+
+btn_data: Dati e impostazioni
+
+-
+
+btn_delete_page: Elimina pagina
+
+-
+
+btn_download_file: Scarica
+
+-
+
+btn_duplicate_page: Pagina duplicata
+
+-
+
+btn_edit: Modificare
+
+-
+
+btn_edit_file_info: Modifica informazioni file
+
+-
+
+btn_edit_headless_template: Modifica il modello senza testa
+
+-
+
+btn_edit_page: Modifica Pagina
+
+-
+
+btn_files: File caricati
+
+-
+
+btn_get_themes: Ottieni più temi
+
+-
+
+btn_getting_data: Ottenere i dati ...
+
+-
+
+btn_hide_page: Nascondi pagina nella navigazione
+
+-
+
+btn_home: Home
+
+-
+
+btn_inpage_edit: Modalità di modifica in-page
+
+-
+
+btn_install: Installare
+
+-
+
+btn_link: Collegamento
+
+-
+
+btn_log_out: Disconnettersi
+
+-
+
+btn_login: Accesso
+
+-
+
+btn_manage_users: Gestisci utenti
+
+-
+
+btn_more: Di Più
+
+-
+
+btn_move_page: Sposta pagina
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Apri registro
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Rimuovere
+
+-
+
+btn_remove_selected: Rimuovi i selezionati
+
+-
+
+btn_reset: Ripristina
+
+-
+
+btn_save: Salva
+
+-
+
+btn_upload: Caricare
+
+-
+
+confirm_delete_files: Sei sicuro di voler eliminare i file selezionati?
+
+-
+
+confirm_delete_page: Sei sicuro di voler eliminare la pagina corrente?
+
+-
+
+confirm_delete_users: Sei sicuro di voler eliminare gli utenti selezionati?
+
+-
+
+confirm_reset_headless: Sei sicuro di voler ripristinare il modello headless personalizzato?
+
+-
+
+dashboard_memory: Utilizzo della memoria:
+
+-
+
+dashboard_modified: Ultima attività su
+
+-
+
+dashboard_recently_edited: Pagine modificate di recente
+
+-
+
+dropzone: Trascina i file qui
+
+-
+
+error_cache_purged: Non è stato possibile eliminare la directory della cache!
+
+-
+
+error_existing: Esiste già!
+
+-
+
+error_file_save: Impossibile salvare
+
+-
+
+error_file_format: Tipo di file non supportato
+
+-
+
+error_file_not_found: File non trovato!
+
+-
+
+error_file_size: Dimensione del file non valida!
+
+-
+
+error_form: Dati incompleti o errati! <br /> Tutti i campi sono obbligatori e devono essere compilati come descritto!
+
+-
+
+error_login: Nome utente o password errati
+
+-
+
+error_log_out: Logout fallito!
+
+-
+
+error_no_destination: Seleziona una pagina come destinazione!
+
+-
+
+error_no_js: Si prega di abilitare JavaScript nel tuo browser per utilizzare la Dashboard!
+
+-
+
+error_no_theme: Nessun tema selezionato! Seleziona un tema principale.
+
+-
+
+error_packages: Impossibile caricare i pacchetti da Packagist!
+
+-
+
+error_composer_memory: Il tuo server non ha memoria sufficiente per installare, aggiornare o rimuovere i pacchetti! Nel caso in cui si stia eseguendo questo sito su un servizio di hosting condiviso con una quantità limitata di memoria, provare ad aggiornare il piano o installare il sito su un computer locale senza restrizioni di memoria.
+
+-
+
+error_page_not_found: Pagina non trovata!
+
+-
+
+error_page_title: Titolo mancante!
+
+-
+
+error_password_current: La password attuale è sbagliata!
+
+-
+
+error_password_repeat: Inserisci due volte la stessa nuova password!
+
+-
+
+error_password_reuse: Non riutilizzare la tua vecchia password!
+
+-
+
+error_permission: Autorizzazioni negate:
+
+-
+
+error_template_missing: Modello mancante
+
+-
+
+error_update_connection: Impossibile connettersi al server di aggiornamento! Questo potrebbe in genere essere causato da una configurazione di aggiornamento errata (config.json), un errore del certificato SSL o una libreria cURL mancante.
+
+-
+
+error_update_download: Download dell'aggiornamento fallito!
+
+-
+
+error_update_items: Elenco di articoli non valido da aggiornare!
+
+-
+
+error_update_failed: Aggiornamento non riuscito! Ripristina l'installazione da un backup.
+
+-
+
+error_update_not_supported: Gli aggiornamenti non sono supportati dal tuo server! Il programma di aggiornamento richiede l'installazione delle librerie cURL e ZIP.
+
+-
+
+error_update_permission: Impossibile eseguire l'aggiornamento! Autorizzazioni negate!
+
+-
+
+error_var_exists: Esiste già una variabile con quel nome!
+
+-
+
+error_var_name: Non puoi aggiungere una variabile senza un nome!
+
+-
+
+file_name: Nome del file
+
+-
+
+file_caption: Didascalia
+
+-
+
+image_crop: Ritaglia l'immagine
+
+-
+
+image_height_px: Altezza (pixel)
+
+-
+
+image_width_px: Larghezza (pixel)
+
+-
+
+image_options: Opzioni
+
+-
+
+image_select: Seleziona immagine
+
+-
+
+images_page: Immagini della pagina
+
+-
+
+images_shared: Immagini generali
+
+-
+
+link_placeholder: Inizia a digitare il titolo di una pagina o incolla qui un link esterno
+
+-
+
+link_title: Aggiungi collegamento
+
+-
+
+login_title: Accesso
+
+-
+
+login_username: Nome utente
+
+-
+
+login_password: Parola d'ordine
+
+-
+
+log_out_title: Disconnesso
+
+-
+
+packages_title: Pacchi
+
+-
+
+packages_browse: Apri il browser dei pacchetti
+
+-
+
+packages_filter: Filtro
+
+-
+
+packages_installed: È installato
+
+-
+
+packages_installing: Installazione del pacchetto ...
+
+-
+
+packages_update_all: Aggiorna tutto
+
+-
+
+packages_updating: Aggiornamento dei pacchetti ...
+
+-
+
+packages_removing: Rimozione del pacchetto ...
+
+-
+
+page_add_location: Seleziona una posizione per la nuova pagina
+
+-
+
+page_move_destination: Seleziona una destinazione per lo spostamento
+
+-
+
+page_settings: Impostazioni della pagina
+
+-
+
+page_prefix: Prefisso (Ordine nella navigazione)
+
+-
+
+page_redirect: Reindirizza la pagina a un altro URL
+
+-
+
+page_tags: Tag (separare più tag con virgola o scheda)
+
+-
+
+page_var_name: Nome della variabile
+
+-
+
+page_vars_headless: Variabili
+
+-
+
+page_vars_template: Variabili nel modello corrente
+
+-
+
+page_vars_other_templates: Variabili in altri modelli
+
+-
+
+page_vars_unused: Variabili non utilizzate
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Globale
+
+-
+
+sidebar_header_pages: Pagine
+
+-
+
+shared_title: Dati e file generali
+
+-
+
+shared_theme: Tema principale
+
+-
+
+shared_theme_apply: Vuoi applicare il tema selezionato e aggiornare l'elenco delle variabili disponibili ora? Le modifiche non salvate verranno salvate.
+
+-
+
+shared_vars_headless: Variabili
+
+-
+
+shared_vars_main_theme: Variabili nel tema principale
+
+-
+
+shared_vars_other_themes: Variabili in altri temi
+
+-
+
+shared_vars_unused: Variabili non utilizzate
+
+-
+
+shared_var_name: Nome della variabile
+
+-
+
+search_no_results: Nessuna pagina trovata!
+
+-
+
+search_placeholder: Cerca nel
+
+-
+
+search_title: Risultati di ricerca
+
+-
+
+success_added: Aggiunto con successo
+
+-
+
+success_cache_cleared: La cache è stata cancellata correttamente!
+
+-
+
+success_cache_purged: La directory della cache è stata eliminata correttamente!
+
+-
+
+success_config_update: Configurazione aggiornata correttamente!
+
+-
+
+success_created: Creato con successo <br>
+
+-
+
+success_installed: Installato con successo
+
+-
+
+success_password_changed: La tua password è stata cambiata correttamente!
+
+-
+
+success_log_out: Disconnesso correttamente
+
+-
+
+success_remove: Rimosso con successo
+
+-
+
+success_reset_headless: Ripristinato correttamente il modello headless predefinito!
+
+-
+
+success_saved: Modifiche salvate
+
+-
+
+success_update: Automad aggiornato con successo!
+
+-
+
+success_packages_updated: Tutti i pacchetti aggiornati correttamente
+
+-
+
+sys_cache_info: La memorizzazione nella cache è essenziale per velocizzare il tuo sito e generalmente dovrebbe essere abilitata. Tuttavia, in alcune circostanze potresti voler disabilitare o cancellare la cache.
+
+-
+
+sys_cache_clear: Cancella cache
+
+-
+
+sys_cache_clear_info: Svuotare la cache del sito impone una nuova scansione per pagine e file aggiornati. Questa azione non rimuoverà alcun file di pagina o immagine dalla directory della cache.
+
+-
+
+sys_cache_monitor: L'intervallo di controllo è
+
+-
+
+sys_cache_monitor_info: Quando la memorizzazione nella cache è abilitata, Automad verificherà periodicamente la presenza di modifiche nel file system. La frequenza di tali controlli può essere definita qui.
+
+-
+
+sys_cache_lifetime: La durata della cache è
+
+-
+
+sys_cache_lifetime_info: Tutti i dati e le pagine di Automad memorizzati nella cache hanno una durata massima. Al termine della durata di un oggetto, la sua cache verrà ricostruita quando richiesto.
+
+-
+
+sys_cache_purge: Elimina directory cache
+
+-
+
+sys_cache_purge_info: Contrariamente alla semplice pulizia della cache, l'eliminazione della directory della cache sposta anche tutti i file temporanei, le pagine eliminate, i backup degli aggiornamenti e le immagini memorizzate nella cache nella directory temprary del sistema. Ciò imporrà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi, la directory temporanea verrà ripulita automaticamente di volta in volta o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
+
+-
+
+sys_debug_info: Quando il debug è abilitato, tutti i processi di Automad verranno registrati sulla console del browser. Il debug è necessario solo per lo sviluppo o la risoluzione dei problemi e deve essere disabilitato in tutti gli altri casi.
+
+-
+
+sys_headless_edit_info: La struttura dei dati JSON restituiti è controllata da un modello. È possibile modificare quel modello utilizzando il linguaggio dei modelli integrato di Automad per personalizzare i campi utilizzando variabili, oggetti e strutture di controllo.
+
+-
+
+sys_headless_info: L'attivazione della modalità senza testa trasforma Automad in un sistema di gestione dei contenuti incentrato interamente sulla creazione di contenuti senza un livello di presentazione. Mentre Dashboard può ancora essere utilizzato per gestire il contenuto, tutti i dati e i file sono accessibili tramite un'API JSON di sola lettura.
+
+-
+
+sys_language: Linguaggio
+
+-
+
+sys_language_info: Sono disponibili diverse lingue per il Dashboard. Le traduzioni sono create automaticamente da un'intelligenza artificiale. Pertanto questa funzione è ancora in una fase sperimentale e alcune traduzioni potrebbero non essere accurate.
+
+-
+
+sys_status_cache_enabled: La memorizzazione nella cache è abilitata
+
+-
+
+sys_status_cache_disabled: La memorizzazione nella cache è disabilitata
+
+-
+
+sys_status_debug_enabled: Il debug è abilitato
+
+-
+
+sys_status_debug_disabled: Il debug è disabilitato
+
+-
+
+sys_status_update_available: Aggiorna a
+
+-
+
+sys_status_update_not_available: Automad è aggiornato
+
+-
+
+sys_title: Impostazioni di sistema
+
+-
+
+sys_update: Aggiornare
+
+-
+
+sys_update_available: Una versione più recente di Automad è disponibile e pronta per l'installazione. <br> Effettuare il backup dell'installazione corrente prima dell'aggiornamento!
+
+-
+
+sys_update_current_version: La versione attualmente installata è
+
+-
+
+sys_update_items: I seguenti elementi sono interessati dall'aggiornamento:
+
+-
+
+sys_update_not_required: Automad è aggiornato.
+
+-
+
+sys_update_progress: Attendi e non chiudere la finestra durante l'aggiornamento ...
+
+-
+
+sys_update_to: Aggiorna a
+
+-
+
+sys_update_windows_warning: Assicurati che tutti i file dell'installazione siano chiusi in programmi esterni prima di eseguire l'aggiornamento per evitare problemi con le autorizzazioni!
+
+-
+
+sys_user: Utenti
+
+-
+
+sys_user_info: Puoi aggiungere o rimuovere più utenti o cambiare la tua password qui.
+
+-
+
+sys_user_change_password: Cambia la tua password
+
+-
+
+sys_user_change_password_current: Password attuale
+
+-
+
+sys_user_change_password_new: Nuova password
+
+-
+
+sys_user_change_password_repeat: Ripeti la password
+
+-
+
+sys_user_add: Aggiungi utente
+
+-
+
+sys_user_add_name: Nome utente
+
+-
+
+sys_user_add_password: Parola d'ordine
+
+-
+
+sys_user_add_repeat: Ripeti la password
+
+-
+
+sys_user_registered: Utente registrato
+
+-
+
+sys_user_you: Tu

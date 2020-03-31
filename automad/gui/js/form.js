@@ -180,6 +180,7 @@
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 				if (data.redirect) {
 					window.location.href = data.redirect;
+					window.location.reload();
 					return false;
 				}
 

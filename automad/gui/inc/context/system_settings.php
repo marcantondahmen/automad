@@ -73,6 +73,10 @@ $this->element('header');
 					'text' => Text::get('sys_update')
 				),
 				array(
+					'icon' => '<i class="uk-icon-flag"></i>',
+					'text' => Text::get('sys_language')
+				),
+				array(
 					'icon' => '<strong>{ }</strong>',
 					'text' => Text::get('sys_headless')
 				),
@@ -97,6 +101,10 @@ $this->element('header');
 			<!-- Update -->
 			<li>
 				<?php echo Components\System\Update::render(); ?>
+			</li>
+			<!-- Language -->
+			<li>
+				<?php echo Components\System\Language::render(); ?>
 			</li>
 			<!-- Headless --> 
 			<li>

@@ -1,0 +1,705 @@
+btn_add: Hinzufügen
+
+-
+
+btn_add_page: Seite hinzufügen
+
+-
+
+btn_add_var: Variable hinzufügen
+
+-
+
+btn_apply_reload: Übernehmen und neu laden
+
+-
+
+btn_browse: Dateien durchsuchen
+
+-
+
+btn_close: Schließen
+
+-
+
+btn_copy_url_clipboard: URL in Zwischenablage kopieren
+
+-
+
+btn_copy_resized: Kopieren und Größe ändern
+
+-
+
+btn_data: Daten und Einstellungen
+
+-
+
+btn_delete_page: Seite löschen
+
+-
+
+btn_download_file: Herunterladen
+
+-
+
+btn_duplicate_page: Seite duplizieren
+
+-
+
+btn_edit: Bearbeiten
+
+-
+
+btn_edit_file_info: Dateiinfo bearbeiten
+
+-
+
+btn_edit_headless_template: Bearbeiten Sie die Headless-Vorlage
+
+-
+
+btn_edit_page: Seite bearbeiten
+
+-
+
+btn_files: Hochgeladene Dateien
+
+-
+
+btn_get_themes: Holen Sie sich mehr Themen
+
+-
+
+btn_getting_data: Daten abrufen ...
+
+-
+
+btn_hide_page: Seite in der Navigation ausblenden
+
+-
+
+btn_home: Home
+
+-
+
+btn_inpage_edit: In-Page-Bearbeitungsmodus
+
+-
+
+btn_install: Installieren
+
+-
+
+btn_link: Verknüpfung
+
+-
+
+btn_log_out: Ausloggen
+
+-
+
+btn_login: Einloggen
+
+-
+
+btn_manage_users: Benutzer verwalten
+
+-
+
+btn_more: Mehr
+
+-
+
+btn_move_page: Seite verschieben
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Protokoll öffnen
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Entfernen
+
+-
+
+btn_remove_selected: Ausgewählte entfernen
+
+-
+
+btn_reset: Zurücksetzen
+
+-
+
+btn_save: Speichern
+
+-
+
+btn_upload: Hochladen
+
+-
+
+confirm_delete_files: Möchten Sie die ausgewählten Dateien wirklich löschen?
+
+-
+
+confirm_delete_page: Möchten Sie die aktuelle Seite wirklich löschen?
+
+-
+
+confirm_delete_users: Möchten Sie die ausgewählten Benutzer wirklich löschen?
+
+-
+
+confirm_reset_headless: Möchten Sie die benutzerdefinierte Headless-Vorlage wirklich zurücksetzen?
+
+-
+
+dashboard_memory: Speichernutzung:
+
+-
+
+dashboard_modified: Letzte Aktivität am
+
+-
+
+dashboard_recently_edited: Kürzlich bearbeitete Seiten
+
+-
+
+dropzone: Fügen Sie Dateien per Drag-and-Drop hier ein
+
+-
+
+error_cache_purged: Das Cache-Verzeichnis konnte nicht gelöscht werden!
+
+-
+
+error_existing: Ist bereits vorhanden!
+
+-
+
+error_file_save: Konnte nicht speichern
+
+-
+
+error_file_format: Nicht unterstütztes Dateiformat
+
+-
+
+error_file_not_found: Datei nicht gefunden!
+
+-
+
+error_file_size: Ungültige Dateigröße!
+
+-
+
+error_form: Unvollständige oder falsche Daten! <br /> Alle Felder sind erforderlich und müssen wie beschrieben ausgefüllt werden!
+
+-
+
+error_login: Ungültiger Benutzername oder Passwort
+
+-
+
+error_log_out: Abmelden fehlgeschlagen!
+
+-
+
+error_no_destination: Bitte wählen Sie eine Seite als Ziel!
+
+-
+
+error_no_js: Bitte aktivieren Sie JavaScript in Ihrem Browser, um das Dashboard zu verwenden!
+
+-
+
+error_no_theme: Kein Thema ausgewählt! Bitte wählen Sie ein Hauptthema.
+
+-
+
+error_packages: Pakete von Packagist konnten nicht geladen werden!
+
+-
+
+error_composer_memory: Ihr Server verfügt nicht über genügend Speicher, um Pakete zu installieren, zu aktualisieren oder zu entfernen! Wenn Sie diese Site auf einem Shared-Hosting-Dienst mit einer begrenzten Speichermenge ausführen, versuchen Sie bitte, Ihren Plan zu aktualisieren oder Ihre Site ohne Speicherbeschränkungen auf einem lokalen Computer zu installieren.
+
+-
+
+error_page_not_found: Seite nicht gefunden!
+
+-
+
+error_page_title: Titel fehlt!
+
+-
+
+error_password_current: Das aktuelle Passwort ist falsch!
+
+-
+
+error_password_repeat: Bitte geben Sie zweimal das gleiche neue Passwort ein!
+
+-
+
+error_password_reuse: Verwenden Sie Ihr altes Passwort nicht wieder!
+
+-
+
+error_permission: Berechtigungen verweigert:
+
+-
+
+error_template_missing: Vorlage fehlt
+
+-
+
+error_update_connection: Es kann keine Verbindung zum Update-Server hergestellt werden! Dies kann normalerweise durch eine falsche Update-Konfiguration (config.json), einen SSL-Zertifikatfehler oder eine fehlende cURL-Bibliothek verursacht werden.
+
+-
+
+error_update_download: Download des Updates fehlgeschlagen!
+
+-
+
+error_update_items: Ungültige Liste der zu aktualisierenden Elemente!
+
+-
+
+error_update_failed: Update fehlgeschlagen! Bitte stellen Sie Ihre Installation aus einem Backup wieder her.
+
+-
+
+error_update_not_supported: Updates werden von Ihrem Server nicht unterstützt! Für den Updater müssen cURL- und ZIP-Bibliotheken installiert sein.
+
+-
+
+error_update_permission: Update kann nicht ausgeführt werden! Berechtigungen verweigert!
+
+-
+
+error_var_exists: Es gibt bereits eine Variable mit diesem Namen!
+
+-
+
+error_var_name: Sie können keine Variable ohne Namen hinzufügen!
+
+-
+
+file_name: Dateiname
+
+-
+
+file_caption: Bildbeschriftung
+
+-
+
+image_crop: Bild zuschneiden
+
+-
+
+image_height_px: Höhe (Pixel)
+
+-
+
+image_width_px: Breite (Pixel)
+
+-
+
+image_options: Optionen
+
+-
+
+image_select: Bild auswählen
+
+-
+
+images_page: Seitenbilder
+
+-
+
+images_shared: Allgemeine Bilder
+
+-
+
+link_placeholder: Geben Sie hier einen Seitentitel ein oder fügen Sie einen externen Link ein
+
+-
+
+link_title: Link hinzufügen
+
+-
+
+login_title: Einloggen
+
+-
+
+login_username: Nutzername
+
+-
+
+login_password: Passwort
+
+-
+
+log_out_title: Abgemeldet
+
+-
+
+packages_title: Pakete
+
+-
+
+packages_browse: Öffnen Sie den Paketbrowser
+
+-
+
+packages_filter: Filter
+
+-
+
+packages_installed: Ist installiert
+
+-
+
+packages_installing: Paket installieren ...
+
+-
+
+packages_update_all: Alle aktualisieren
+
+-
+
+packages_updating: Pakete aktualisieren ...
+
+-
+
+packages_removing: Paket entfernen ...
+
+-
+
+page_add_location: Wählen Sie einen Speicherort für die neue Seite
+
+-
+
+page_move_destination: Wählen Sie ein Ziel zum Verschieben
+
+-
+
+page_settings: Seiteneinstellungen
+
+-
+
+page_prefix: Präfix (Reihenfolge in der Navigation)
+
+-
+
+page_redirect: Seite zu einer anderen URL umleiten
+
+-
+
+page_tags: Tags (Trennen Sie mehrere Tags durch Komma oder Tabulator)
+
+-
+
+page_theme_template: Vorlage
+
+-
+
+page_var_name: Variablennamen
+
+-
+
+page_vars_headless: Variablen
+
+-
+
+page_vars_template: Variablen in der aktuellen Vorlage
+
+-
+
+page_vars_other_templates: Variablen in anderen Vorlagen
+
+-
+
+page_vars_unused: Nicht verwendete Variablen
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Global
+
+-
+
+sidebar_header_pages: Seiten
+
+-
+
+shared_title: Allgemeine Daten und Dateien
+
+-
+
+shared_theme: Hauptthema
+
+-
+
+shared_theme_apply: Möchten Sie das ausgewählte Thema anwenden und die Liste der verfügbaren Variablen jetzt aktualisieren? Ihre nicht gespeicherten Änderungen werden gespeichert.
+
+-
+
+shared_vars_headless: Variablen
+
+-
+
+shared_vars_main_theme: Variablen im Hauptthema
+
+-
+
+shared_vars_other_themes: Variablen in anderen Themen
+
+-
+
+shared_vars_unused: Nicht verwendete Variablen
+
+-
+
+shared_var_name: Variablennamen
+
+-
+
+search_no_results: Keine Seiten gefunden!
+
+-
+
+search_placeholder: Suchen in
+
+-
+
+search_title: Suchergebnisse
+
+-
+
+success_added: Erfolgreich hinzugefügt
+
+-
+
+success_cache_cleared: Der Cache wurde erfolgreich geleert!
+
+-
+
+success_cache_purged: Das Cache-Verzeichnis wurde erfolgreich gelöscht!
+
+-
+
+success_config_update: Konfiguration erfolgreich aktualisiert!
+
+-
+
+success_created: Erfolgreich erstellt <br>
+
+-
+
+success_installed: Erfolgreich installiert
+
+-
+
+success_password_changed: Ihr Passwort wurde erfolgreich geändert!
+
+-
+
+success_log_out: Erfolgreich abgemeldet
+
+-
+
+success_remove: Erfolgreich entfernt
+
+-
+
+success_reset_headless: Die Standard-Headless-Vorlage wurde erfolgreich wiederhergestellt!
+
+-
+
+success_saved: Änderungen gespeichert
+
+-
+
+success_update: Automad erfolgreich aktualisiert!
+
+-
+
+success_packages_updated: Alle Pakete erfolgreich aktualisiert
+
+-
+
+sys_cache_info: Das Caching ist wichtig, um Ihre Site zu beschleunigen, und sollte im Allgemeinen aktiviert sein. Unter bestimmten Umständen möchten Sie jedoch möglicherweise Ihren Cache deaktivieren oder leeren.
+
+-
+
+sys_cache_clear: Cache leeren
+
+-
+
+sys_cache_clear_info: Durch das Löschen des Site-Cache wird ein erneuter Scan für aktualisierte Seiten und Dateien erzwungen. Diese Aktion entfernt keine Auslagerungsdateien oder Bilder aus dem Cache-Verzeichnis.
+
+-
+
+sys_cache_monitor: Das Prüfintervall ist
+
+-
+
+sys_cache_monitor_info: Wenn das Caching aktiviert ist, sucht Automad regelmäßig nach Änderungen im Dateisystem. Die Häufigkeit dieser Überprüfungen kann hier definiert werden.
+
+-
+
+sys_cache_lifetime: Die Cache-Lebensdauer beträgt
+
+-
+
+sys_cache_lifetime_info: Alle zwischengespeicherten Automad-Daten und -Seiten haben eine maximale Lebensdauer. Nachdem die Lebensdauer eines Objekts überschritten wurde, wird sein Cache auf Anforderung neu erstellt.
+
+-
+
+sys_cache_purge: Cache-Verzeichnis löschen
+
+-
+
+sys_cache_purge_info: Im Gegensatz zum einfachen Löschen des Caches werden beim Löschen des Cache-Verzeichnisses auch alle temporären Dateien, gelöschten Seiten, Aktualisierungssicherungen und zwischengespeicherten Bilder in das temporäre Verzeichnis des Systems verschoben. Dies erzwingt eine vollständige Neuerstellung des Bild- und Seitencaches sowie eine Bereinigung aller gelöschten Seiten. Auf den meisten Systemen wird das temporäre Verzeichnis von Zeit zu Zeit oder beim Neustart automatisch bereinigt. Auf einigen Systemen muss dieses Verzeichnis jedoch manuell gelöscht werden.
+
+-
+
+sys_debug_info: Wenn das Debuggen aktiviert ist, werden alle Automad-Prozesse in der Konsole Ihres Browsers protokolliert. Das Debuggen ist nur für die Entwicklung oder Fehlerbehebung erforderlich und sollte in allen anderen Fällen deaktiviert werden.
+
+-
+
+sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mithilfe der in Automad integrierten Vorlagensprache zum Anpassen von Feldern mithilfe von Variablen, Objekten und Steuerungsstrukturen bearbeiten.
+
+-
+
+sys_headless_info: Durch Aktivieren des Headless-Modus wird Automad zu einem Content-Management-System, das sich ausschließlich auf die Erstellung von Inhalten ohne Präsentationsebene konzentriert. Während das Dashboard weiterhin zum Verwalten von Inhalten verwendet werden kann, kann auf alle Daten und Dateien über eine schreibgeschützte JSON-API zugegriffen werden.
+
+-
+
+sys_language: Sprache
+
+-
+
+sys_language_info: Für das Dashboard stehen mehrere Sprachen zur Verfügung. Die Übersetzungen werden automatisch von einer künstlichen Intelligenz erstellt. Daher befindet sich diese Funktion noch in einer experimentellen Phase und einige Übersetzungen sind möglicherweise nicht genau.
+
+-
+
+sys_status_cache_enabled: Caching ist aktiviert
+
+-
+
+sys_status_cache_disabled: Das Caching ist deaktiviert
+
+-
+
+sys_status_debug_enabled: Das Debuggen ist aktiviert
+
+-
+
+sys_status_debug_disabled: Das Debuggen ist deaktiviert
+
+-
+
+sys_status_update_available: Aktualisieren zu
+
+-
+
+sys_status_update_not_available: Automad ist auf dem neuesten Stand
+
+-
+
+sys_title: Systemeinstellungen
+
+-
+
+sys_update: Aktualisieren
+
+-
+
+sys_update_available: Eine neuere Version von Automad ist verfügbar und kann installiert werden. <br> Bitte sichern Sie Ihre aktuelle Installation, bevor Sie sie aktualisieren!
+
+-
+
+sys_update_current_version: Die aktuell installierte Version ist
+
+-
+
+sys_update_items: Die folgenden Elemente sind vom Update betroffen:
+
+-
+
+sys_update_not_required: Automad ist auf dem neuesten Stand.
+
+-
+
+sys_update_progress: Bitte warten Sie und schließen Sie das Fenster nicht während der Aktualisierung ...
+
+-
+
+sys_update_to: Aktualisieren zu
+
+-
+
+sys_update_windows_warning: Stellen Sie sicher, dass alle Dateien Ihrer Installation in externen Programmen geschlossen sind, bevor Sie das Update ausführen, um Berechtigungsprobleme zu vermeiden!
+
+-
+
+sys_user: Benutzer
+
+-
+
+sys_user_info: Hier können Sie weitere Benutzer hinzufügen oder entfernen oder Ihr Passwort ändern.
+
+-
+
+sys_user_change_password: Ändern Sie Ihr Passwort
+
+-
+
+sys_user_change_password_current: Aktuelles Passwort
+
+-
+
+sys_user_change_password_new: Neues Kennwort
+
+-
+
+sys_user_change_password_repeat: Wiederhole das Passwort
+
+-
+
+sys_user_add: Benutzer hinzufügen
+
+-
+
+sys_user_add_name: Nutzername
+
+-
+
+sys_user_add_password: Passwort
+
+-
+
+sys_user_add_repeat: Wiederhole das Passwort
+
+-
+
+sys_user_registered: Registrierte Benutzer
+
+-
+
+sys_user_you: Du
