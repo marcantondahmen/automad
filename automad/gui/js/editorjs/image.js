@@ -34,12 +34,22 @@
  */
 
 
++function (Automad, UIkit) {
+
+	Automad.imageBlock = {
+		
+		UIkit: UIkit
+
+	}
+
+}(window.Automad = window.Automad || {}, UIkit);
+
 class AutomadImage {
 
 	constructor({data}) {
 
 		this.si = Automad.selectImage;
-		this.modal = UIkit.modal(this.si.modalSelector);
+		this.modal = Automad.imageBlock.UIkit.modal(this.si.modalSelector);
 
 		this.data = {
 			url: data.url || '',
