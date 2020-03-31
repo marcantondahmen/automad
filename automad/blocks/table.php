@@ -35,64 +35,51 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\Blocks;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Blocks class.
+ *	The table block.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Blocks {
-	
-	
+class Table {
+
+
 	/**	
-	 * 	Render blocks created by the EditorJS block editor.
-	 * 	
-	 * 	@param string $json
-	 * 	@param object $Automad
-	 * 	@return string the rendered HTML
+	 *	Render a table block.
+	 *	
+	 *	@param object $data
+	 *	@return string the rendered HTML
 	 */
 
-	public static function render($json, $Automad) {
+	public static function render($data) {
+
+		$html = '<table>'; 
 		
-		$data = json_decode($json);
-		$html = '';
+		foreach ($data->content as $row) {
 
-		if (!is_object($data)) {
-			return false;
-		}
-
-		if (!isset($data->blocks)) {
-			return false;
-		}
-
-		foreach ($data->blocks as $block) {
-
-			try {
-
-				$html .= call_user_func_array(
-					'\\Automad\\Blocks\\' . $block->type . '::render',
-					array($block->data, $Automad)
-				);
-
-			} catch (\Exception $e) {
-
-				continue;
-				
+			$html .= '<tr>'; 
+			
+			foreach ($row as $item) {
+				$html .= "<th>$item</th>";
 			}
+			
+			$html .= '</tr>';
 
 		}
+		
+		$html .= '</table>';
 
 		return $html;
 
 	}
-	
+
 
 }

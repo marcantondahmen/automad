@@ -253,7 +253,7 @@ class View {
 		} else if (strpos($key, '+') === 0) {
 
 			// Blocks variable.
-			return Blocks::render($this->Automad->Context->get()->get($key));
+			return Blocks::render($this->Automad->Context->get()->get($key), $this->Automad);
 
 		} else {
 			

@@ -35,64 +35,35 @@
  */
 
 
-namespace Automad\Core;
+namespace Automad\Blocks;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Blocks class.
+ *	The paragraph block.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Blocks {
-	
+class Paragraph {
+
 	
 	/**	
-	 * 	Render blocks created by the EditorJS block editor.
-	 * 	
-	 * 	@param string $json
-	 * 	@param object $Automad
-	 * 	@return string the rendered HTML
+	 *	Render a paragraph block.
+	 *	
+	 *	@param object $data
+	 *	@return string the rendered HTML
 	 */
 
-	public static function render($json, $Automad) {
-		
-		$data = json_decode($json);
-		$html = '';
+	public static function render($data) {
 
-		if (!is_object($data)) {
-			return false;
-		}
-
-		if (!isset($data->blocks)) {
-			return false;
-		}
-
-		foreach ($data->blocks as $block) {
-
-			try {
-
-				$html .= call_user_func_array(
-					'\\Automad\\Blocks\\' . $block->type . '::render',
-					array($block->data, $Automad)
-				);
-
-			} catch (\Exception $e) {
-
-				continue;
-				
-			}
-
-		}
-
-		return $html;
+		return "<p>$data->text</p>";
 
 	}
-	
+
 
 }
