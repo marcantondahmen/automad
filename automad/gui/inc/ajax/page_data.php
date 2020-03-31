@@ -117,7 +117,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					href="<?php echo AM_BASE_INDEX . $url; ?>" 
 					class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
 					title="<?php Text::e('btn_inpage_edit'); ?>" 
-					data-uk-tooltip="pos:'bottom-left'"
+					data-uk-tooltip="pos:'bottom'"
 					>
 						<i class="uk-icon-share"></i>&nbsp;
 						<?php 

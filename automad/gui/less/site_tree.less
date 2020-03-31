@@ -76,7 +76,7 @@
 	
 	position: absolute !important;
 	z-index: 2;
-	left: -18px;
+	left: -20px;
 	padding: 5px !important;
 	line-height: @button-mini-line-height;
     	font-size: @button-mini-font-size;
@@ -93,18 +93,22 @@
 
 [class*='am-tree-icon-'] {
 	&:extend([class*='uk-icon-'] all);
-	font-size: 12px;
+	font-size: 1em;
+	width: 10px;
+	text-align: center !important;
 	color: @am-text;
 }
 
 .am-tree-icon {
 	
 	&-open {
-		&:extend(.uk-icon-plus-circle all);
+		&:extend(.uk-icon-chevron-right all);
 	}
 	
 	&-close {
-		&:extend(.uk-icon-minus-circle all);
+		&:extend(.uk-icon-chevron-down all);
+		position: relative;
+		top: -0.2em;
 	}
 	
 }

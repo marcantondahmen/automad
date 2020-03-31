@@ -59,10 +59,11 @@ class Select {
 	 *  @param array $values
 	 *  @param string $selected
 	 *  @param string $prefix
+	 * 	@param string $class
 	 *  @return string The HTML for the button
 	 */
 	
-	public static function render($name, $values, $selected, $prefix = '') {
+	public static function render($name, $values, $selected, $prefix = '', $class = '') {
 		
 		// Set checked value, if $checked is not in $values, to prevent submitting an empty value.
 		if (!in_array($selected, $values)) {
@@ -72,7 +73,7 @@ class Select {
 		$prefix = ltrim($prefix . ' ');
 
 		$html = <<< HTML
-				<div class="uk-button uk-form-select" data-uk-form-select="{activeClass:''}"> 
+				<div class="uk-button $class uk-form-select" data-uk-form-select="{activeClass:''}"> 
 					$prefix
 					<span></span>&nbsp;
 					<i class="uk-icon-caret-down"></i> 

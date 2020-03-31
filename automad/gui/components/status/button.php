@@ -68,7 +68,7 @@ class Button {
 		return <<< HTML
 				<a
 		 		href="?context=system_settings#$tab"
-				class="uk-button uk-button-large uk-width-1-1 uk-text-left"
+				class="uk-button uk-button-large uk-width-1-1 uk-text-left uk-text-truncate"
 				data-am-status="$status"
 		 		>
 					<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp; 

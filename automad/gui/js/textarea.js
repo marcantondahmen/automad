@@ -46,7 +46,7 @@
 		// Since CodeMirror also creates textareas, it is not enough to just filter by ':not([data-uk-markdowneditor])'.
 		// Those textareas created by CodeMirror don't have the '.uk-form-controls' class, so that class must be part of the
 		// selector as well.
-		selector: 'textarea.uk-form-controls:not([data-uk-markdowneditor])',
+		selector: 'textarea.uk-form-controls:not([data-uk-markdowneditor]), textarea.cdx-input',
 		
 		handleTabs: function(e) {
 		

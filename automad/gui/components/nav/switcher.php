@@ -63,8 +63,8 @@ class Switcher {
 	public static function render($target, $items = array(), $dropdown = array()) {
 		
 		$html = '<div class="am-switcher" data-uk-sticky="{top:60}">' .
-				'<div class="am-switcher-buttons">' .
-		 		'<div data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\',swiping:false}">';
+				'<div class="am-switcher-buttons uk-flex">' .
+		 		'<div class="uk-flex uk-flex-nowrap uk-flex-item-1" data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\',swiping:false}">';
 	
 		foreach ($items as $item) {
 			

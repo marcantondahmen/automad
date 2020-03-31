@@ -84,7 +84,7 @@ class EditFileInfo {
 									class="uk-button" 
 									title="$Text->btn_download_file"
 									download
-									data-uk-tooltip
+									data-uk-tooltip="{pos:'bottom'}"
 									>
 										<i class="uk-icon-download"></i>
 									</a>
@@ -93,7 +93,7 @@ class EditFileInfo {
 									type="button" 
 									class="uk-button uk-button-success"
 									title="$Text->btn_save"
-									data-uk-tooltip
+									data-uk-tooltip="{pos:'bottom'}"
 									>
 										<i class="uk-icon-check"></i>	
 									</button>

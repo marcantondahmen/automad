@@ -91,7 +91,7 @@ $this->element('header');
 				<li class="uk-margin-small-bottom">
 					<a 
 					href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_headless')); ?>"
-					class="uk-button uk-button-success uk-button-large uk-width-1-1 uk-text-left"
+					class="uk-button uk-button-success uk-button-large uk-text-truncate uk-width-1-1 uk-text-left"
 					>
 						<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;
 						<?php Text::e('sys_headless_enable'); ?>
