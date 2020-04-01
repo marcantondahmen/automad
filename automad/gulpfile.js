@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
-	destination = 'dist',
+	distDashboard = 'gui/dist',
 	cleanCSSOptions = {
 		format: { wrapAt: 500 },
 		rebase: false
@@ -56,8 +56,8 @@ gulp.task('automad-js', function() {
 		};
 	
 	return 	gulp.src([
-				'js/*.js',
-				'js/*/*.js'
+				'gui/js/*.js',
+				'gui/js/*/*.js'
 			])
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
@@ -68,7 +68,7 @@ gulp.task('automad-js', function() {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(destination));
+			.pipe(gulp.dest(distDashboard));
 	
 });
 
@@ -81,7 +81,7 @@ gulp.task('libs-js', function() {
 				comments: /(license|copyright)/i
 			} 
 		},
-		pkgUIkit = require('../../lib/vendor/uikit/uikit/package.json');
+		pkgUIkit = require('../lib/vendor/uikit/uikit/package.json');
 	
 	return 	merge2(
 			// jQuery first.
@@ -136,31 +136,31 @@ gulp.task('libs-js', function() {
 			gulp.src([
 				// Core. 
 				// Order of files taken from lib/vendor/uikit/uikit/gulpfile.js
-				'../../lib/vendor/uikit/uikit/src/js/core/core.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/touch.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/utility.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/smooth-scroll.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/scrollspy.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/toggle.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/alert.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/button.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/dropdown.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/grid.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/modal.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/nav.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/offcanvas.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/switcher.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/tab.js',
-				'../../lib/vendor/uikit/uikit/src/js/core/cover.js',
+				'../lib/vendor/uikit/uikit/src/js/core/core.js',
+				'../lib/vendor/uikit/uikit/src/js/core/touch.js',
+				'../lib/vendor/uikit/uikit/src/js/core/utility.js',
+				'../lib/vendor/uikit/uikit/src/js/core/smooth-scroll.js',
+				'../lib/vendor/uikit/uikit/src/js/core/scrollspy.js',
+				'../lib/vendor/uikit/uikit/src/js/core/toggle.js',
+				'../lib/vendor/uikit/uikit/src/js/core/alert.js',
+				'../lib/vendor/uikit/uikit/src/js/core/button.js',
+				'../lib/vendor/uikit/uikit/src/js/core/dropdown.js',
+				'../lib/vendor/uikit/uikit/src/js/core/grid.js',
+				'../lib/vendor/uikit/uikit/src/js/core/modal.js',
+				'../lib/vendor/uikit/uikit/src/js/core/nav.js',
+				'../lib/vendor/uikit/uikit/src/js/core/offcanvas.js',
+				'../lib/vendor/uikit/uikit/src/js/core/switcher.js',
+				'../lib/vendor/uikit/uikit/src/js/core/tab.js',
+				'../lib/vendor/uikit/uikit/src/js/core/cover.js',
 				// Selected components.
-				'../../lib/vendor/uikit/uikit/src/js/components/accordion.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/autocomplete.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/datepicker.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/form-select.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/notify.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/sticky.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/timepicker.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
+				'../lib/vendor/uikit/uikit/src/js/components/accordion.js',
+				'../lib/vendor/uikit/uikit/src/js/components/autocomplete.js',
+				'../lib/vendor/uikit/uikit/src/js/components/datepicker.js',
+				'../lib/vendor/uikit/uikit/src/js/components/form-select.js',
+				'../lib/vendor/uikit/uikit/src/js/components/notify.js',
+				'../lib/vendor/uikit/uikit/src/js/components/sticky.js',
+				'../lib/vendor/uikit/uikit/src/js/components/timepicker.js',
+				'../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
 			])
 			.pipe(uglify(uglifyOptions))
 			.pipe(concat('uikit.js', { newLine: '\r\n\r\n' } )) // Doesn't get saved to disk.
@@ -183,7 +183,7 @@ gulp.task('libs-js', function() {
 		// Prefix all UIkit items.
 		.pipe(replace(customize.cls.search, customize.cls.replace))
 		.pipe(replace(customize.da.search, customize.da.replace))
-		.pipe(gulp.dest(destination));
+		.pipe(gulp.dest(distDashboard));
 	
 });
 
@@ -191,7 +191,7 @@ gulp.task('libs-js', function() {
 // Compile, minify and prefix automad.less.
 gulp.task('automad-less', function() {
 
-	return 	gulp.src('less/automad.less')
+	return 	gulp.src('gui/less/automad.less')
 			.pipe(less())
 			.on('error', onError)
 			.pipe(cleanCSS(cleanCSSOptions))
@@ -200,7 +200,7 @@ gulp.task('automad-less', function() {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(destination));
+			.pipe(gulp.dest(distDashboard));
 	
 });
 
@@ -214,7 +214,7 @@ gulp.task('libs-css', function() {
 			])
 			.pipe(cleanCSS(cleanCSSOptions))
 			.pipe(concat('libs.min.css', { newLine: '\r\n\r\n' } ))
-			.pipe(gulp.dest(destination));
+			.pipe(gulp.dest(distDashboard));
 	
 });
 
@@ -222,10 +222,10 @@ gulp.task('libs-css', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('js/*.js', ['automad-js']);
-	gulp.watch('js/*/*.js', ['automad-js']);
-	gulp.watch('less/*.less', ['automad-less']);
-	gulp.watch('less/*/*.less', ['automad-less']);
+	gulp.watch('gui/js/*.js', ['automad-js']);
+	gulp.watch('gui/js/*/*.js', ['automad-js']);
+	gulp.watch('gui/less/*.less', ['automad-less']);
+	gulp.watch('gui/less/*/*.less', ['automad-less']);
 	
 });
 
@@ -252,7 +252,7 @@ gulp.task('google-fonts-download', function() {
 				gulp.src(fontsList)
 				.pipe(googleFonts(ttf))
 			)
-			.pipe(gulp.dest(destination));	
+			.pipe(gulp.dest(distDashboard));	
 		
 });
 
@@ -267,9 +267,9 @@ gulp.task('google-fonts-css', function() {
 				"\n\tsrc: url($2.woff) format('woff');" + 
 				"\n\t$1";
 
-	return	gulp.src('../../lib/fonts/google/fonts.css')
+	return	gulp.src('../lib/fonts/google/fonts.css')
 			.pipe(replace(rgx, rpl))
-			.pipe(gulp.dest('../../lib/fonts/google'))
+			.pipe(gulp.dest('../lib/fonts/google'))
 	
 });
 

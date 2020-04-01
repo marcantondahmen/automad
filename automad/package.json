@@ -1,7 +1,7 @@
 {
-  "name": "automad-gui",
+  "name": "automad",
   "version": "1.4.3",
-  "description": "Automad GUI",
+  "description": "Automad",
   "author": "Marc Anton Dahmen",
   "license": "MIT",
   "private": true,

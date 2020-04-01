@@ -71,7 +71,7 @@ echo
 echo "Updating version numbers ..."
 echo "<?php define('AM_VERSION', '$tag'); ?>" > automad/version.php
 
-for json in {automad/gui,packages/{*/*,*}}/{package,theme}.json
+for json in {automad,packages/{*/*,*}}/{package,theme}.json
 do
 	if [[ -f $json ]]
 	then
@@ -86,7 +86,7 @@ echo
 # Running Gulp tasks.
 echo "Running Gulp tasks ..."
 (
-	cd automad/gui
+	cd automad
 	gulp
 )
 (
