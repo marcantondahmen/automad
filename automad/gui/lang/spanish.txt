@@ -422,10 +422,6 @@ page_vars_template: Variables en la plantilla actual
 
 -
 
-page_vars_other_templates: Variables en otras plantillas
-
--
-
 page_vars_unused: Variables no utilizadas
 
 -
@@ -459,10 +455,6 @@ shared_vars_headless: Variables
 -
 
 shared_vars_main_theme: Variables en el tema principal
-
--
-
-shared_vars_other_themes: Variables en otros temas.
 
 -
 
