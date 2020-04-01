@@ -426,10 +426,6 @@ page_vars_template: Premenné v aktuálnej šablóne
 
 -
 
-page_vars_other_templates: Premenné v iných šablónach
-
--
-
 page_vars_unused: Nepoužité premenné
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Premenné
 -
 
 shared_vars_main_theme: Premenné v hlavnej téme
-
--
-
-shared_vars_other_themes: Premenné v iných témach
 
 -
 

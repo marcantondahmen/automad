@@ -426,10 +426,6 @@ page_vars_template: Breytur í núverandi sniðmáti
 
 -
 
-page_vars_other_templates: Breytur í öðrum sniðmátum
-
--
-
 page_vars_unused: Ónotaðar breytur
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Breytur
 -
 
 shared_vars_main_theme: Breytur í megin þema
-
--
-
-shared_vars_other_themes: Breytur í öðrum þemum
 
 -
 

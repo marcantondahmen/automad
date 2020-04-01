@@ -426,10 +426,6 @@ page_vars_template: Змінні в поточному шаблоні
 
 -
 
-page_vars_other_templates: Змінні в інших шаблонах
-
--
-
 page_vars_unused: Невикористані змінні
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Змінні
 -
 
 shared_vars_main_theme: Змінні в основній темі
-
--
-
-shared_vars_other_themes: Змінні в інших темах
 
 -
 

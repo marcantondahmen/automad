@@ -321,17 +321,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					</div>
 					<?php } ?>
 					
-					<!-- Vars in other templates -->
-					<?php $keysInOtherTemplates = $this->getKeys()->inOtherTemplates(); ?>
-					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_other_templates'); ?>&nbsp;
-						<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
-					</div>
-					<div class="uk-accordion-content">
-						<?php echo Components\Form\Group::render($this->getAutomad(), $keysInOtherTemplates, $data); ?>
-					</div>
-					
-					<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
+					<?php $unusedDataKeys = array_diff(array_keys($data), $keysInCurrentTemplate, $this->getKeys()->reserved); ?>
 
 				<?php } else { ?>
 

@@ -258,11 +258,6 @@ if ($data = Core\Request::post('data')) {
 						$keysInMainTheme = array();
 					}
 					
-					$keysInOtherThemes = array_diff(
-						$this->getKeys()->inAllTemplates(), 
-						$keysInMainTheme
-					); 
-					
 				?>
 				<!-- Shared variables in main theme -->
 				<?php if ($keysInMainTheme) { ?>
@@ -282,22 +277,8 @@ if ($data = Core\Request::post('data')) {
 					?>
 				</div>
 				<?php } ?>
-				<!-- Shared variables in other themes -->
-				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
-				</div>
-				<div class="uk-accordion-content">
-					<?php 
-						echo Components\Form\Group::render(
-							$this->getAutomad(), 
-							$keysInOtherThemes, 
-							$data
-						); 
-					?>
-				</div>
 				
-				<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
+				<?php $unusedDataKeys = array_diff(array_keys($data), $keysInMainTheme, $this->getKeys()->reserved); ?>
 				
 			<?php } else { ?>
 

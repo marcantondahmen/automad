@@ -426,10 +426,6 @@ page_vars_template: Muuttujat nykyisessä mallissa
 
 -
 
-page_vars_other_templates: Muuttujat muissa malleissa
-
--
-
 page_vars_unused: Käyttämättömät muuttujat
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Muuttujat
 -
 
 shared_vars_main_theme: Muutokset pääteemassa
-
--
-
-shared_vars_other_themes: Muuttujat muissa teemoissa
 
 -
 

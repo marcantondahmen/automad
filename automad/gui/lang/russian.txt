@@ -426,10 +426,6 @@ page_vars_template: Переменные в текущем шаблоне
 
 -
 
-page_vars_other_templates: Переменные в других шаблонах
-
--
-
 page_vars_unused: Неиспользуемые переменные
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: переменные
 -
 
 shared_vars_main_theme: Переменные в основной теме
-
--
-
-shared_vars_other_themes: Переменные в других темах
 
 -
 

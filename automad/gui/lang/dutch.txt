@@ -426,10 +426,6 @@ page_vars_template: Variabelen in huidige sjabloon
 
 -
 
-page_vars_other_templates: Variabelen in andere sjablonen
-
--
-
 page_vars_unused: Ongebruikte variabelen
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Variabelen
 -
 
 shared_vars_main_theme: Variabelen in het hoofdthema
-
--
-
-shared_vars_other_themes: Variabelen in andere thema's
 
 -
 

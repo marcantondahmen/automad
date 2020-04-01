@@ -426,10 +426,6 @@ page_vars_template: Variabler i aktuell mall
 
 -
 
-page_vars_other_templates: Variabler i andra mallar
-
--
-
 page_vars_unused: Oanvända variabler
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Variabler
 -
 
 shared_vars_main_theme: Variabler i huvudtemat
-
--
-
-shared_vars_other_themes: Variabler i andra teman
 
 -
 

@@ -530,11 +530,7 @@ page_vars_headless: Variables
 
 page_vars_template: Variables in current template
 
-- 
-
-page_vars_other_templates: Variables in other templates
-
-- 
+-  
 
 page_vars_unused: Unused variables
 
@@ -583,10 +579,6 @@ shared_vars_headless: Variables
 -
 
 shared_vars_main_theme: Variables in the main theme
-
--
-
-shared_vars_other_themes: Variables in other themes
 
 -
 

@@ -426,10 +426,6 @@ page_vars_template: Variabler i gjeldende mal
 
 -
 
-page_vars_other_templates: Variabler i andre maler
-
--
-
 page_vars_unused: Ubrukte variabler
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Variabler
 -
 
 shared_vars_main_theme: Variabler i hovedtema
-
--
-
-shared_vars_other_themes: Variabler i andre temaer
 
 -
 

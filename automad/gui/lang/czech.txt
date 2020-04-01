@@ -426,10 +426,6 @@ page_vars_template: Proměnné v aktuální šabloně
 
 -
 
-page_vars_other_templates: Proměnné v jiných šablonách
-
--
-
 page_vars_unused: Nepoužité proměnné
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Proměnné
 -
 
 shared_vars_main_theme: Proměnné v hlavním tématu
-
--
-
-shared_vars_other_themes: Proměnné v jiných tématech
 
 -
 

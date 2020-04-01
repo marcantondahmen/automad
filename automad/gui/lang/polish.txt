@@ -426,10 +426,6 @@ page_vars_template: Zmienne w bieżącym szablonie
 
 -
 
-page_vars_other_templates: Zmienne w innych szablonach
-
--
-
 page_vars_unused: Niewykorzystane zmienne
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Zmienne
 -
 
 shared_vars_main_theme: Zmienne w temacie głównym
-
--
-
-shared_vars_other_themes: Zmienne w innych tematach
 
 -
 

@@ -426,10 +426,6 @@ page_vars_template: Promenljive u trenutnom predlošku
 
 -
 
-page_vars_other_templates: Varijable u drugim predlošcima
-
--
-
 page_vars_unused: Nekorišćene varijable
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Varijable
 -
 
 shared_vars_main_theme: Varijable u glavnoj temi
-
--
-
-shared_vars_other_themes: Varijable u drugim temama
 
 -
 

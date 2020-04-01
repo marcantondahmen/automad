@@ -426,10 +426,6 @@ page_vars_template: Variabler i den aktuelle skabelon
 
 -
 
-page_vars_other_templates: Variabler i andre skabeloner
-
--
-
 page_vars_unused: Ubrugte variabler
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Variable
 -
 
 shared_vars_main_theme: Variabler i hovedtemaet
-
--
-
-shared_vars_other_themes: Variabler i andre temaer
 
 -
 

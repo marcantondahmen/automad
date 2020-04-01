@@ -426,10 +426,6 @@ page_vars_template: Spremenljivke v trenutni predlogi
 
 -
 
-page_vars_other_templates: Spremenljivke v drugih predlogih
-
--
-
 page_vars_unused: Neuporabljene spremenljivke
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Spremenljivke
 -
 
 shared_vars_main_theme: Spremenljivke v glavni temi
-
--
-
-shared_vars_other_themes: Spremenljivke v drugih temah
 
 -
 

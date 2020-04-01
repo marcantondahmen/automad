@@ -426,10 +426,6 @@ page_vars_template: Kintamieji dabartiniame šablone
 
 -
 
-page_vars_other_templates: Kintamieji kituose šablonuose
-
--
-
 page_vars_unused: Nepanaudoti kintamieji
 
 -
@@ -463,10 +459,6 @@ shared_vars_headless: Kintamieji
 -
 
 shared_vars_main_theme: Kintamieji pagrindinėje temoje
-
--
-
-shared_vars_other_themes: Kintamieji kitose temose
 
 -
 
@@ -618,7 +610,7 @@ sys_status_update_available: Atnaujinti į
 
 -
 
-sys_status_update_not_available: �Automad“ yra atnaujinta
+sys_status_update_not_available: �Automad“ yra atnaujinta
 
 -
 
@@ -642,7 +634,7 @@ sys_update_items: Atnaujinimas turi įtakos šiems elementams:
 
 -
 
-sys_update_not_required: �Automad“ yra atnaujinta.
+sys_update_not_required: �Automad“ yra atnaujinta.
 
 -
 
