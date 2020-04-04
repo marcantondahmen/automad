@@ -50,19 +50,35 @@ class AutomadGallery {
 		this.inputs = {
 			globs: create.editable(['cdx-input'], 'Enter one or more glob patterns', this.data.globs),
 			width: create.editable(['cdx-input'], 'Image width in px', this.data.width),
-			layoutSelect: create.select([], ['Masonry', 'Grid'], this.data.layout),
+			layoutSelect: create.select(['cdx-input', 'uk-button-success'], ['Masonry', 'Grid'], this.data.layout),
 			layoutHidden: create.editable(['uk-hidden'], '', this.data.layout)
 		};
 
 		this.inputs.layoutSelect.addEventListener('change', function() {
 			gallery.inputs.layoutHidden.innerHTML = gallery.inputs.layoutSelect.value;			
 		});
+		
+		var icon = document.createElement('div'),
+			controls = document.createElement('ul'),
+			width = document.createElement('li'),
+			layout = document.createElement('li');
+
+		icon.innerHTML = AutomadGallery.toolbox.icon;
+		icon.classList.add('am-block-icon');
+		controls.classList.add('uk-grid', 'uk-grid-width-medium-1-2');
+		width.appendChild(create.label('Image Width'));
+		width.appendChild(this.inputs.width);
+		layout.appendChild(create.label('Layout'));
+		layout.appendChild(this.inputs.layoutSelect);
+		controls.appendChild(width);
+		controls.appendChild(layout);
 
 		this.wrapper = document.createElement('div');
-		this.wrapper.classList.add('cdx-block');
+		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
+		this.wrapper.appendChild(icon);
+		this.wrapper.appendChild(create.label('Pattern'));
 		this.wrapper.appendChild(this.inputs.globs);
-		this.wrapper.appendChild(this.inputs.width);
-		this.wrapper.appendChild(this.inputs.layoutSelect);
+		this.wrapper.appendChild(controls);
 		this.wrapper.appendChild(this.inputs.layoutHidden);
 
 	}

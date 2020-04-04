@@ -68,6 +68,16 @@
 
 			},
 
+			label: function(text) {
+
+				var label = Automad.util.create.element('label', ['uk-form-label']);
+
+				label.textContent = text;
+
+				return label;
+
+			},
+
 			select: function(cls, options, selected) {
 
 				var select = Automad.util.create.element('select', cls);
