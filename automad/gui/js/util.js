@@ -42,6 +42,51 @@
 	
 	Automad.util = {
 		
+		create: {
+
+			element: function(tag, cls) {
+
+				var element = document.createElement(tag);
+
+				for (var i = 0; i < cls.length; i++) {
+					element.classList.add(cls[i]);
+				}
+
+				return element;
+
+			},
+
+			editable: function(cls, placeholder, value) {
+
+				var div = Automad.util.create.element('div', cls);
+
+				div.contentEditable = true;
+				div.dataset.placeholder = placeholder;
+				div.innerHTML = value;
+
+				return div;
+
+			},
+
+			select: function(cls, options, selected) {
+
+				var select = Automad.util.create.element('select', cls);
+
+				for (var i = 0; i < options.length; i++) {
+					var option = document.createElement('option');
+					option.value = options[i];
+					option.text = options[i];
+					select.appendChild(option);
+				}
+
+				select.value = selected;
+
+				return select;
+
+			}
+
+		},
+
 		// Convert data attribute string in dataAPI string. 
 		// For example "data-am-handler" gets converted into "amHandler".
 		dataCamelCase: function(str) {

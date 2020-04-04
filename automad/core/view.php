@@ -1127,6 +1127,7 @@ class View {
 		$output = $this->obfuscateEmails($output);
 		$output = $this->resizeImages($output);
 		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
+		$output = Blocks::injectAssets($output);
 		$output = $this->InPage->createUI($output);
 		
 		return trim($output);	

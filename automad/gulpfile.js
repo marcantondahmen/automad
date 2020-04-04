@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+	autoprefixer = require('gulp-autoprefixer'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	googleFonts = require('gulp-google-webfonts'),
@@ -13,6 +14,7 @@ var gulp = require('gulp'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
 	distDashboard = 'gui/dist',
+	distBlocks = 'blocks/dist',
 	cleanCSSOptions = {
 		format: { wrapAt: 500 },
 		rebase: false
@@ -40,6 +42,28 @@ var onError = function(err) {
 		new gutil.PluginError(err.plugin, err, {showStack: true})
 		this.emit('end');
 	};
+
+
+// Concat and minify the blocks js.
+gulp.task('blocks-js', function () {
+
+	var uglifyOptions = {
+		compress: {
+			hoist_funs: false,
+			hoist_vars: false
+		},
+		output: {
+			max_line_len: 500
+		}
+	};
+
+	return gulp.src(['blocks/js/*.js'])
+		   .pipe(concat('blocks.min.js'))
+		   .pipe(uglify(uglifyOptions))
+		   .pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+		   .pipe(gulp.dest(distBlocks));
+
+});
 
 
 // Concat, minify and prefix the GUI js.
@@ -188,12 +212,28 @@ gulp.task('libs-js', function() {
 });
 
 
+// Compile and minify blocks.less.
+gulp.task('blocks-less', function() {
+
+	return gulp.src('blocks/less/blocks.less')
+		   .pipe(less())
+		   .on('error', onError)
+		   .pipe(autoprefixer({ grid: false }))
+		   .pipe(cleanCSS(cleanCSSOptions))
+		   .pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+		   .pipe(rename({ suffix: '.min' }))
+		   .pipe(gulp.dest(distBlocks));	
+
+});
+
+
 // Compile, minify and prefix automad.less.
 gulp.task('automad-less', function() {
 
 	return 	gulp.src('gui/less/automad.less')
 			.pipe(less())
 			.on('error', onError)
+			.pipe(autoprefixer({ grid: false }))
 			.pipe(cleanCSS(cleanCSSOptions))
 			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 			.pipe(rename({ suffix: '.min' }))
@@ -222,6 +262,8 @@ gulp.task('libs-css', function() {
 // Watch task.
 gulp.task('watch', function() {
 
+	gulp.watch('blocks/js/*.js', ['blocks-js']);
+	gulp.watch('blocks/less/*.less', ['blocks-less']);
 	gulp.watch('gui/js/*.js', ['automad-js']);
 	gulp.watch('gui/js/*/*.js', ['automad-js']);
 	gulp.watch('gui/less/*.less', ['automad-less']);
@@ -279,4 +321,4 @@ gulp.task('google-fonts', sequence('google-fonts-download', 'google-fonts-css'))
 
 
 // The default task.
-gulp.task('default', ['automad-js', 'libs-js', 'automad-less', 'libs-css']);
+gulp.task('default', ['blocks-js', 'blocks-less', 'automad-js', 'libs-js', 'automad-less', 'libs-css']);

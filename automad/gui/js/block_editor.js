@@ -102,11 +102,12 @@
 								defaultLevel: 2
 							}
 						},
-						list: {
+						lists: {
 							class: List,
 							inlineToolbar: true,
 						},
 						image: AutomadImage,
+						gallery: AutomadGallery,
 						quote: {
 							class: Quote,
 							inlineToolbar: true
