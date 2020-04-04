@@ -56,13 +56,6 @@ class Gallery {
 
 
 	/**	
-	 *	Create unique ids in case multiple galleries are used in one page.
-	 */
-
-	private static $idNumber = 0;
-
-
-	/**	
 	 *	Render a gallery block.
 	 *	
 	 *	@param object $data
@@ -73,8 +66,6 @@ class Gallery {
 	public static function render($data, $Automad) {
 		
 		$masonryRowHeight = 20;
-		self::$idNumber++;
-		$idPrefix = 'am-gallery-' . self::$idNumber . '-image-';
 
 		if (!empty($data->globs) && !empty($data->width) && !empty($data->layout)) {
 
@@ -84,27 +75,26 @@ class Gallery {
 					return Parse::fileIsImage($file);
 				});
 
-				$count = count($files);
-				$i = 1;
+				$html = '<div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px" data-gallery>';
+				$controls = '';
 
-				$html = '<div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px">';
+				if (count($files) > 1) {
+					$controls = '<a class="am-gallery-lightbox-prev"></a><a class="am-gallery-lightbox-next"></a>';
+				}
+
+				$lightbox = <<< HTML
+							<div class="am-gallery-lightbox">
+								<img src="" class="fade">
+								<div class="am-gallery-lightbox-caption"></div>
+								<a class="am-gallery-lightbox-close" href="#"></a>
+								$controls
+							</div>
+HTML;
 
 				foreach ($files as $file) {
 
-					$next = $i + 1;
-					$prev = $i - 1;
-
-					if ($next > $count) {
-						$next = 1;
-					}
-
-					if ($prev < 1) {
-						$prev = $count;
-					}
-
 					$Image = new Image($file, 2 * $data->width);
-					$caption = Parse::caption($file);
-
+					$caption = Str::stripTags(Parse::caption($file));
 					$file = Str::stripStart($file, AM_BASE_DIR);
 
 					if ($data->layout == 'Masonry') {
@@ -129,26 +119,15 @@ class Gallery {
 
 					$html .= <<< HTML
 							<div class="$class">
-								<a id="$idPrefix$i" href="#$idPrefix$i">
-									<img src="$Image->file" class="am-gallery-img-small" />
-									<span class="am-gallery-fullscreen">
-										<img src="$file" />
-									</span>
+								<a href="$file" class="am-gallery-img-small" data-caption="$caption">
+									<img src="$Image->file" />
 								</a>
-								<div class="am-gallery-caption">$caption</div>
-								<a class="am-gallery-close" href="#-"></a>
-								<a class="am-gallery-prev" href="#$idPrefix$prev"></a>
-								<a class="am-gallery-next" href="#$idPrefix$next"></a>
 							</div>
 HTML;
 
-					$i++;					
-
 				}
 
-				$html .= '</div>';
-
-				return $html;
+				return $html . $lightbox . '</div>';
 
 			}
 
