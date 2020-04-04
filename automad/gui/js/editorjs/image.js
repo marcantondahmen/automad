@@ -59,11 +59,8 @@ class AutomadImage {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('cdx-block');
 		this.img = document.createElement('img');
-		this.caption = document.createElement('div');
-		this.caption.classList.add('cdx-input');
-		this.caption.contentEditable = true;
-		this.caption.dataset.placeholder = 'Enter a caption';
-		this.caption.innerHTML = this.data.caption;
+		this.caption = Automad.util.create.editable(['cdx-input'], 'Enter a caption', this.data.caption);
+
 		this.wrapper.appendChild(this.img);
 		this.wrapper.appendChild(this.caption);
 

@@ -36,6 +36,10 @@
 .ct {
 
 	z-index: @tooltip-z-index;
+
+	.am-inpage ~ & {
+		z-index: @tooltip-z-index + 9000;
+	}
 	
 	&:before,
 	&:after {
