@@ -59,6 +59,13 @@ class Blocks {
 	private static $pageHasBlocks = false;
 
 
+	/**
+	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
+	 */
+
+	public static $extensionAssets = array();
+
+
 	/**	
 	 * 	Inject block assets into the header of a page.
 	 * 	

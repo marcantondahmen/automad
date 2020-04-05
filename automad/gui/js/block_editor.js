@@ -118,6 +118,7 @@
 						},
 						raw: RawTool,
 						code: CodeTool,
+						snippet: AutomadSnippet,
 						delimiter: Delimiter,
 						embed: {
 							class: Embed,
