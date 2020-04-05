@@ -13,6 +13,7 @@
 
 
 namespace Standard;
+use Automad\Blocks as Blocks;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -63,36 +64,8 @@ class Mail {
 		// Merge defaults with options.
 		$options = array_merge($defaults, $options);
 		
-		// Define field names.
-		$honeypot = 'human';
-		$from = 'from';
-		$subject = 'subject';
-		$message = 'message';
-		
-		// Basic checks.
-		if (empty($_POST) || empty($options['to'])) {
-			return false;
-		}
+		return Blocks\Mail::send((object) $options, $Automad);
 	
-		// Check optional honeypot to verify human.
-		if (isset($_POST[$honeypot]) && $_POST[$honeypot] != false) {
-			return false;
-		}
-	
-		// Check if form fields are not empty.
-		if (empty($_POST[$from]) || empty($_POST[$subject]) || empty($_POST[$message])) {
-			return $options['error'];
-		}
-	
-		// Prepare mail.
-		$subject = $Automad->Shared->get(AM_KEY_SITENAME) . ': ' . strip_tags($_POST[$subject]);
-		$message = strip_tags($_POST[$message]);
-		$header = 'From: ' . preg_replace('/[^\w\d\.@\-]/', '', $_POST[$from]);
-	
-		if (mail($options['to'], $subject, $message, $header)) {
-			return $options['success'];
-		}
-			
 	}
 	
 		
