@@ -1,0 +1,144 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+:root {
+	--am-slider-controls-color: #FFFFFF;
+	--am-slider-controls-background: rgba(0,0,0,0.1);
+}
+
+.am-slider {
+
+
+	position: relative;
+
+	&-item {
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		opacity: 0;
+		pointer-events: none;
+		cursor: default;
+		transition: opacity 0.2s ease-in;
+
+		&.am-active {
+			position: relative;
+			visibility: visible;
+  			opacity: 1;
+  			pointer-events: initial;
+		}
+
+		& > img {
+			width: 100%;
+			height: auto;
+		}
+
+	}
+
+	&-prev,
+	&-next {
+
+		position: absolute;
+		text-decoration: none;
+		top: 50%;
+		transform: translate(0%, -50%);
+		width: 3.5rem;
+		line-height: 3.5rem;
+		text-align: center;
+		font-family: 'am-controls';
+		color: var(--am-slider-controls-color);
+		background-color: var(--am-slider-controls-background);
+		font-size: 3rem;
+		opacity: 0;
+		transition: opacity 0.2s ease-in;
+
+		.am-slider:hover & {
+			opacity: 1;
+		}
+
+		&:hover {
+			color: var(--am-slider-controls-color);
+			opacity: 0.8 !important;
+		}
+
+		&:before {
+			position: relative;
+			top: -2px;
+		}
+
+	}
+
+	&-prev {
+		
+		left: 0;
+
+		&:before {
+			content: '<';
+			margin-left: -0.12em;
+		}
+
+	}
+
+	&-next {
+
+		right: 0;
+
+		&:before {
+			content: '>';
+			margin-right: -0.12em;
+		}
+
+	}
+
+	&-caption {
+
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		padding: 0.6rem 1rem;
+		font-size: 1rem;
+		color: var(--am-slider-controls-color);
+		background-color: var(--am-slider-controls-background);
+
+		&:empty {
+			display: none;
+		}
+
+	}
+
+
+}

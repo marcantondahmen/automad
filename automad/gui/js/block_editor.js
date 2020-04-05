@@ -108,6 +108,7 @@
 						},
 						image: AutomadImage,
 						gallery: AutomadGallery,
+						slider: AutomadSlider,
 						quote: {
 							class: Quote,
 							inlineToolbar: true
