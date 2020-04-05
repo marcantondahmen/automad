@@ -116,6 +116,7 @@
 						table: {
 							class: Table,
 						},
+						mail: AutomadMail,
 						raw: RawTool,
 						code: CodeTool,
 						snippet: AutomadSnippet,
