@@ -75,22 +75,8 @@ class Gallery {
 					return Parse::fileIsImage($file);
 				});
 
-				$html = '<div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px" data-gallery>';
-				$controls = '';
-
-				if (count($files) > 1) {
-					$controls = '<a class="am-gallery-lightbox-prev"></a><a class="am-gallery-lightbox-next"></a>';
-				}
-
-				$lightbox = <<< HTML
-							<div class="am-gallery-lightbox">
-								<img src="" class="fade">
-								<div class="am-gallery-lightbox-caption"></div>
-								<a class="am-gallery-lightbox-close" href="#"></a>
-								$controls
-							</div>
-HTML;
-
+				$html = '<div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px">';
+	
 				foreach ($files as $file) {
 
 					$Image = new Image($file, 2 * $data->width);
@@ -119,7 +105,7 @@ HTML;
 
 					$html .= <<< HTML
 							<div class="$class">
-								<a href="$file" class="am-gallery-img-small" data-caption="$caption">
+								<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-lightbox>
 									<img src="$Image->file" />
 								</a>
 							</div>
@@ -127,7 +113,7 @@ HTML;
 
 				}
 
-				return $html . $lightbox . '</div>';
+				return $html . '</div>';
 
 			}
 

@@ -37,18 +37,36 @@
 
 	AutomadBlocks.Gallery = {
 
-		lightbox: function(gallery) {
+		lightbox: function(items) {
 
-			var images = gallery.querySelectorAll('.am-gallery-img-small'),
-				container = gallery.querySelector('.am-gallery-lightbox'),
-				img = container.querySelector('img'),
+			var container = document.createElement('div'),
+				controls = '';
+
+			if (items.length > 1) {
+				controls = [
+					'<a class="am-gallery-lightbox-prev"></a>',
+					'<a class="am-gallery-lightbox-next"></a>'
+				].join('');
+			}
+
+			container.classList.add('am-gallery-lightbox');
+			container.innerHTML = [
+				'<img src="" class="am-fade">',
+				'<div class="am-gallery-lightbox-caption"></div>',
+				'<a class="am-gallery-lightbox-close" href="#"></a>',
+				controls
+			].join('');
+
+			document.body.appendChild(container);
+
+			var img = container.querySelector('img'),
 				caption = container.querySelector('.am-gallery-lightbox-caption'),
 				prev = container.querySelector('.am-gallery-lightbox-prev'),
 				next = container.querySelector('.am-gallery-lightbox-next'),
 				close = container.querySelector('.am-gallery-lightbox-close'),
-				activeImage = 0,
+				activeItem = 0,
 				
-				loaded = function (img, callback) {
+				loaded = function(img, callback) {
 
 					if (img.complete) {
 						callback();
@@ -61,36 +79,36 @@
 				fadeIn = function() {
 
 					loaded(img, function () {
-						img.classList.remove('fade');
+						img.classList.remove('am-fade');
 					});
 
 				},
 
 				fade = function() {
 
-					img.classList.add('fade');
+					img.classList.add('am-fade');
 
 					setTimeout(function() {
 						
 						img.src = '';
-						img.src = images[activeImage].href;
-						caption.textContent = images[activeImage].dataset.caption;
+						img.src = items[activeItem].href;
+						caption.textContent = items[activeItem].dataset.caption;
 						fadeIn();
 
 					}, 200);
 
 				};
 
-			images.forEach(function(image, index) {
+			items.forEach(function(item, index) {
 
-				image.addEventListener('click', function(event) {
+				item.addEventListener('click', function(event) {
 
 					event.preventDefault();
 					img.src = '';
 					img.src = this.href;
 					caption.textContent = this.dataset.caption;
-					container.classList.add('active');
-					activeImage = index;
+					container.classList.add('am-active');
+					activeItem = index;
 					fadeIn();
 	
 				});
@@ -100,18 +118,18 @@
 			close.addEventListener('click', function(event) {
 
 				event.preventDefault();
-				container.classList.remove('active');
-				img.classList.add('fade');
+				container.classList.remove('am-active');
+				img.classList.add('am-fade');
 
 			});
 
 			prev.addEventListener('click', function(event) {
 				
 				event.preventDefault();
-				activeImage--;
+				activeItem--;
 
-				if (activeImage < 0) {
-					activeImage = images.length - 1;
+				if (activeItem < 0) {
+					activeItem = items.length - 1;
 				}
 
 				fade();
@@ -121,10 +139,10 @@
 			next.addEventListener('click', function (event) {
 
 				event.preventDefault();
-				activeImage++;
+				activeItem++;
 
-				if (activeImage >= images.length) {
-					activeImage = 0
+				if (activeItem >= items.length) {
+					activeItem = 0
 				}
 
 				fade();
@@ -135,15 +153,18 @@
 
 		init: function() {
 
-			var dataAttr = 'data-gallery',
-				galleries = document.body.querySelectorAll('[' + dataAttr + ']');
+			var dataAttr = 'data-lightbox',
+				items = document.body.querySelectorAll('[' + dataAttr + ']');
 
-			galleries.forEach(function(gallery) {
+			if (items.length) {
 
-				gallery.removeAttribute(dataAttr);
-				AutomadBlocks.Gallery.lightbox(gallery);
+				items.forEach(function(item) {
+					item.removeAttribute(dataAttr);
+				});
 
-			});
+				AutomadBlocks.Gallery.lightbox(items);
+
+			}
 
 		}
 
