@@ -136,11 +136,21 @@
 	}
 
 	& .uk-panel-box {
-		background-color: @form-background;
+		background-color: @am-block-focused-background;
 	}
 
-	& .uk-form-label {
-		margin-top: 15px;
+	& .am-block-label {
+		display: inline-block;
+		margin-top: @utility-margin-small;
+		margin-bottom: @form-stacked-margin-bottom;
+		padding: 4px 6px;
+		vertical-align: top;
+		font-size: @text-small-font-size;
+		font-weight: @form-stacked-font-weight;
+		line-height: @text-small-font-size;
+		color: @am-text;
+		background-color: @button-hover-background;
+		border-radius: @am-radius-small;
 	}
 
 	& .am-block-icon {

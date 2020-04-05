@@ -105,7 +105,7 @@ class Gallery {
 
 					$html .= <<< HTML
 							<div class="$class">
-								<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-lightbox>
+								<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
 									<img src="$Image->file" />
 								</a>
 							</div>

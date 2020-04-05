@@ -153,7 +153,7 @@
 
 		init: function() {
 
-			var dataAttr = 'data-lightbox',
+			var dataAttr = 'data-am-block-lightbox',
 				items = document.body.querySelectorAll('[' + dataAttr + ']');
 
 			if (items.length) {
