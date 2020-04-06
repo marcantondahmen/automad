@@ -66,10 +66,18 @@ class Snippet {
 
 		if (!empty($data->file)) {
 
-			$file = AM_BASE_DIR . $data->file;
+			// Test for files with or without leading slash.
+			$file = AM_BASE_DIR . '/' . trim($data->file, '/');
 
 			if (!is_readable($file)) {
-				return false;
+
+				// Test also path without packages directory.
+				$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . trim($data->file, '/');
+
+				if (!is_readable($file)) {
+					return false;
+				}
+
 			} 
 
 			$View = new View($Automad);
