@@ -108,14 +108,12 @@ class Mail {
 		if (!empty($data->to)) {
 
 			$defaults = array(
-				'error' => 'Please fill out all fields!',
-				'success' => 'Successfully sent email!',
-				'buttonClass' => '',
-				'formClass' => '',
-				'inputClass' => '',
-				'placeholderEmail' => 'Your email adress',
-				'placeholderSubject' => 'Subject',
-				'placeholderMessage' => 'Message'
+				'error' => '',
+				'success' => '',
+				'placeholderEmail' => '',
+				'placeholderSubject' => '',
+				'placeholderMessage' => '',
+				'textButton' => ''
 			);
 
 			$options = array_merge($defaults, (array) $data);
@@ -125,12 +123,12 @@ class Mail {
 
 			return <<< HTML
 					$status
-					<form action="" method="post" class="$data->formClass">	
+					<form action="" method="post" class="am-mail-form">	
 						<input type="text" name="human" value="">	
-						<input class="$data->inputClass" type="text" name="from" value="" placeholder="$data->placeholderEmail">
-						<input class="$data->inputClass" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
-						<textarea class="$data->inputClass" name="message" placeholder="$data->placeholderMessage"></textarea>
-						<button class="$data->buttonClass" type="submit">Send</button>	
+						<input class="am-mail-input" type="text" name="from" value="" placeholder="$data->placeholderEmail">
+						<input class="am-mail-input" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
+						<textarea class="am-mail-input" name="message" placeholder="$data->placeholderMessage"></textarea>
+						<button class="am-mail-button" type="submit">$data->textButton</button>	
 					</form>
 HTML;
 
