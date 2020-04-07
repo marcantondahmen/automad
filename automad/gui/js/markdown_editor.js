@@ -86,7 +86,7 @@
 				},
 				styleSelectedText: true
 			},
-			toolbar: ['bold', 'italic', 'link', 'image', 'blockquote', 'listUl', 'listOl']
+			toolbar: ['bold', 'italic', 'link', 'image', 'blockquote', 'listUl', 'listOl', 'h1', 'h2', 'h3']
 		},
 
 		boot: function () {
@@ -200,54 +200,6 @@
 
 		addButtons: function (buttons) {
 			UI.$.extend(this.buttons, buttons);
-		},
-
-		replaceInPreview: function (regexp, callback) {
-
-			var editor = this.editor, results = [], value = editor.getValue(), offset = -1, index = 0;
-
-			this.currentvalue = this.currentvalue.replace(regexp, function () {
-
-				offset = value.indexOf(arguments[0], ++offset);
-
-				var match = {
-					matches: arguments,
-					from: translateOffset(offset),
-					to: translateOffset(offset + arguments[0].length),
-					replace: function (value) {
-						editor.replaceRange(value, match.from, match.to);
-					},
-					inRange: function (cursor) {
-
-						if (cursor.line === match.from.line && cursor.line === match.to.line) {
-							return cursor.ch >= match.from.ch && cursor.ch < match.to.ch;
-						}
-
-						return (cursor.line === match.from.line && cursor.ch >= match.from.ch) ||
-							(cursor.line > match.from.line && cursor.line < match.to.line) ||
-							(cursor.line === match.to.line && cursor.ch < match.to.ch);
-					}
-				};
-
-				var result = typeof (callback) === 'string' ? callback : callback(match, index);
-
-				if (!result && result !== '') {
-					return arguments[0];
-				}
-
-				index++;
-
-				results.push(match);
-				return result;
-
-			});
-
-			function translateOffset(offset) {
-				var result = editor.getValue().substring(0, offset).split('\n');
-				return { line: result.length - 1, ch: result[result.length - 1].length }
-			}
-
-			return results;
 		},
 
 		_buildtoolbar: function () {
@@ -397,17 +349,14 @@
 		'<div class="uk-markdowneditor uk-clearfix" data-mode="split">',
 			'<div class="uk-markdowneditor-navbar">',
 				'<ul class="uk-markdowneditor-navbar-nav uk-markdowneditor-toolbar"></ul>',
-				'<div class="uk-markdowneditor-navbar-flip">',
-					'<ul class="uk-markdowneditor-navbar-nav">',
-						'<li class="uk-markdowneditor-button-code"><a>Markdown</a></li>',
-						'<li class="uk-markdowneditor-button-preview"><a>Preview</a></li>',
-						'<li><a data-markdowneditor-button="fullscreen"><i class="uk-icon-expand"></i></a></li>',
-					'</ul>',
-				'</div>',
+				'<ul class="uk-markdowneditor-navbar-nav">',
+					'<li class="uk-markdowneditor-button-code"><a title="Markdown" data-uk-tooltip><i class="uk-icon-pencil"></i></a></li>',
+					'<li class="uk-markdowneditor-button-preview"><a title="Preview" data-uk-tooltip><i class="uk-icon-desktop"></i></a></li>',
+				'</ul>',
 			'</div>',
 			'<div class="uk-markdowneditor-content">',
 				'<div class="uk-markdowneditor-code"></div>',
-				'<div class="uk-markdowneditor-preview"><div></div></div>',
+				'<div class="am-text uk-markdowneditor-preview"><div></div></div>',
 			'</div>',
 		'</div>'
 	].join('');
@@ -418,21 +367,13 @@
 
 			editor.addButtons({
 
-				fullscreen: {
-					title: 'Fullscreen',
-					label: '<i class="uk-icon-expand"></i>'
-				},
 				bold: {
 					title: 'Bold',
-					label: '<i class="uk-icon-bold"></i>'
+					label: '<strong>B</strong>'
 				},
 				italic: {
 					title: 'Italic',
-					label: '<i class="uk-icon-italic"></i>'
-				},
-				strike: {
-					title: 'Strikethrough',
-					label: '<i class="uk-icon-strikethrough"></i>'
+					label: '<strong><em>I</em></strong>'
 				},
 				blockquote: {
 					title: 'Blockquote',
@@ -453,73 +394,20 @@
 				listOl: {
 					title: 'Ordered List',
 					label: '<i class="uk-icon-list-ol"></i>'
+				},
+				h1: {
+					title: 'Heading 1',
+					label: 'H1'
+				},
+				h2: {
+					title: 'Heading 2',
+					label: 'H2'
+				},
+				h3: {
+					title: 'Heading 3',
+					label: 'H3'
 				}
 
-			});
-
-			editor.markdowneditor.on('click', 'a[data-markdowneditor-button="fullscreen"]', function () {
-
-				editor.markdowneditor.toggleClass('uk-markdowneditor-fullscreen');
-
-				var wrap = editor.editor.getWrapperElement();
-
-				if (editor.markdowneditor.hasClass('uk-markdowneditor-fullscreen')) {
-
-					var fixedParent = false, parents = editor.markdowneditor.parents().each(function () {
-						if (UI.$(this).css('position') == 'fixed' && !UI.$(this).is('html')) {
-							fixedParent = UI.$(this);
-						}
-					});
-
-					editor.markdowneditor.data('fixedParents', false);
-
-					if (fixedParent) {
-
-						var transformed = [];
-
-						fixedParent = fixedParent.parent().find(parents).each(function () {
-
-							if (UI.$(this).css('transform') != 'none') {
-								transformed.push(UI.$(this).data('transform-reset', {
-									'transform': this.style.transform,
-									'-webkit-transform': this.style.webkitTransform,
-									'-webkit-transition': this.style.webkitTransition,
-									'transition': this.style.transition
-								}).css({
-									'transform': 'none',
-									'-webkit-transform': 'none',
-									'-webkit-transition': 'none',
-									'transition': 'none'
-								}));
-							}
-						});
-
-						editor.markdowneditor.data('fixedParents', transformed);
-					}
-
-					editor.editor.state.fullScreenRestore = { scrollTop: window.pageYOffset, scrollLeft: window.pageXOffset, width: wrap.style.width, height: wrap.style.height };
-					wrap.style.width = '';
-					wrap.style.height = editor.content.height() + 'px';
-					document.documentElement.style.overflow = 'hidden';
-
-				} else {
-
-					document.documentElement.style.overflow = '';
-					var info = editor.editor.state.fullScreenRestore;
-					wrap.style.width = info.width; wrap.style.height = info.height;
-					window.scrollTo(info.scrollLeft, info.scrollTop);
-
-					if (editor.markdowneditor.data('fixedParents')) {
-						editor.markdowneditor.data('fixedParents').forEach(function (parent) {
-							parent.css(parent.data('transform-reset'));
-						});
-					}
-				}
-
-				setTimeout(function () {
-					editor.fit();
-					UI.$win.trigger('resize');
-				}, 50);
 			});
 
 			editor.addShortcutAction('bold', ['Ctrl-B', 'Cmd-B']);
@@ -528,6 +416,9 @@
 
 			if (!parser) return;
 
+			addAction('h1', '# $1');
+			addAction('h2', '## $1');
+			addAction('h3', '### $1');
 			addAction('bold', '**$1**');
 			addAction('italic', '*$1*');
 			addAction('strike', '~~$1~~');
