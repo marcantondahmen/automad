@@ -57,7 +57,7 @@
 
 				var $input = $(this).parent().find('input');
 
-				si.dialog(UIkit.modal(si.modalSelector), $input, false, function(url) {
+				si.dialog($input, false, function(url) {
 					$input.val(url).trigger('change');
 				});
 
@@ -65,9 +65,10 @@
 
 		},
 
-		dialog: function(modal, elementFocusOnHide, resize, callback) {
+		dialog: function(elementFocusOnHide, resize, callback) {
 
 			var modalSelector = Automad.selectImage.modalSelector,
+				modal = UIkit.modal(modalSelector),
 				onClick = function(url, modalElementClicked) {
 
 					if (modal.isActive()) {

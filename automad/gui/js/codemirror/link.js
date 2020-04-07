@@ -34,15 +34,13 @@
  */
 
 
-+function (Automad, $, UIkit, CodeMirror) {
++function (Automad, CodeMirror) {
 
 	CodeMirror.defineExtension('AutomadLink', function () {
 
-		var modalSelector = Automad.link.modalSelector,
-			modal = UIkit.modal(modalSelector),
-			cm = this;
+		var cm = this;
 
-		Automad.link.dialog(modal, cm, function (url) {
+		Automad.link.dialog(cm, function(url) {
 
 			var selection = cm.getSelection();
 
@@ -56,4 +54,4 @@
 
 	});
 
-}(window.Automad = window.Automad || {}, jQuery, UIkit, CodeMirror);
+}(window.Automad = window.Automad || {}, CodeMirror);

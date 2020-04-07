@@ -34,18 +34,16 @@
  */
 
 
-+function (Automad, $, UIkit, CodeMirror) {
++function (Automad, CodeMirror) {
 
 	CodeMirror.defineExtension('AutomadImage', function() {
 
-		var modalSelector = Automad.selectImage.modalSelector,
-			modal = UIkit.modal(modalSelector),
-			cm = this;
+		var cm = this;
 
-		Automad.selectImage.dialog(modal, cm, true, function(url) {
+		Automad.selectImage.dialog(cm, true, function(url) {
 			cm.replaceRange('![](' + url + ')\n', cm.getCursor());
 		});
 
 	});
 
-}(window.Automad = window.Automad || {}, jQuery, UIkit, CodeMirror);
+}(window.Automad = window.Automad || {}, CodeMirror);

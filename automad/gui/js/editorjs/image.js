@@ -48,9 +48,6 @@ class AutomadImage {
 
 	constructor({data}) {
 
-		this.si = Automad.selectImage;
-		this.modal = Automad.imageBlock.UIkit.modal(this.si.modalSelector);
-
 		this.data = {
 			url: data.url || '',
 			caption: data.caption || ''
@@ -109,7 +106,7 @@ class AutomadImage {
 
 		var block = this;
 
-		this.si.dialog(this.modal, false, true, function(url) {
+		Automad.selectImage.dialog(false, true, function(url) {
 			block.insertImage(url);
 		});
 

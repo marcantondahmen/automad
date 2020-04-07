@@ -58,7 +58,7 @@
 
 				var $input = $(this).parent().find('input');
 
-				link.dialog(UIkit.modal(link.modalSelector), $input, function(url) {
+				link.dialog($input, function(url) {
 
 					$input.val(url).trigger('change');
 
@@ -68,9 +68,10 @@
 
 		},
 
-		dialog: function(modal, elementFocusOnHide, callback) {
+		dialog: function(elementFocusOnHide, callback) {
 
-			var onClick = function(url) {
+			var modal = UIkit.modal(Automad.link.modalSelector),
+				onClick = function(url) {
 
 					if (modal.isActive()) {
 
