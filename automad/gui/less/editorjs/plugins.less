@@ -95,9 +95,10 @@
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		appearance: none;
+		.transition(border-color 0.2s;);
 
-		& + .cdx-input,
-		& + .cdx-input:empty {
+		&,
+		&:empty {
 			margin: 5px 0 0 0 !important;
 		}
 
@@ -135,10 +136,12 @@
 	}
 
 	& .uk-panel-box {
-		background-color: @am-block-focused-background;
+		background-color: transparent;
+		border: @am-border-width dashed @am-border-color;
 	}
 
 	& .am-block-label {
+
 		display: inline-block;
 		margin-top: @utility-margin-small;
 		margin-bottom: @form-stacked-margin-bottom;
@@ -148,8 +151,14 @@
 		font-weight: @form-stacked-font-weight;
 		line-height: @text-small-font-size;
 		color: @am-text;
-		background-color: @button-hover-background;
+		background-color: @button-background;
 		border-radius: @am-radius-small;
+
+		& + *,
+		& + *:empty {
+			margin-top: 0 !important;
+		}
+
 	}
 
 	& .am-block-icon {
@@ -159,7 +168,7 @@
 		& svg {
 			height: 30px;
 			width: 100%;
-			fill: @am-text;
+			fill: @am-border-color;
 		}
 
 	}
