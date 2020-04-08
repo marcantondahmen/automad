@@ -46,6 +46,33 @@
 				var prev = document.createElement('a'),
 					next = document.createElement('a'),
 					activeItem = 0,
+					timer,
+					interval = function() {
+						
+						if (timer) {
+							clearInterval(timer);
+						}
+
+						timer = setInterval(function () {
+							change(1);
+						}, 5000);
+
+					},
+					change = function(increment) {
+
+						activeItem = activeItem + increment;
+
+						if (activeItem < 0) {
+							activeItem = items.length - 1;
+						}
+
+						if (activeItem >= items.length) {
+							activeItem = 0
+						}
+
+						fade();
+
+					},
 					fade = function() {
 						
 						var current = container.querySelector('.am-slider-item.am-active');
@@ -61,30 +88,18 @@
 				container.appendChild(next);
 
 				prev.addEventListener('click', function(event) {
-					
 					event.preventDefault();
-					activeItem--;
-
-					if (activeItem < 0) {
-						activeItem = items.length - 1;
-					}
-
-					fade();
-
+					interval();
+					change(-1);
 				});
 
-				next.addEventListener('click', function (event) {
-
+				next.addEventListener('click', function(event) {
 					event.preventDefault();
-					activeItem++;
-
-					if (activeItem >= items.length) {
-						activeItem = 0
-					}
-
-					fade();
-
+					interval();
+					change(1);
 				});
+
+				interval();
 
 			}
 
