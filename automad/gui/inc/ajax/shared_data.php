@@ -165,12 +165,12 @@ if ($data = Core\Request::post('data')) {
 						<li>
 							<?php if ($Theme->readme) { ?>
 							<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
-								<div class="uk-modal-dialog">
+								<div class="uk-modal-dialog uk-modal-dialog-large">
 									<div class="uk-modal-header uk-margin-remove">
 										Readme
 										<a href="#" class="uk-modal-close uk-close"></a>
 									</div>
-									<div class="am-text-readme">
+									<div class="am-text">
 										<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
 									</div>
 									<div class="uk-modal-footer uk-text-right">

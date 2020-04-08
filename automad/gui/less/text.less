@@ -41,15 +41,149 @@
 
 .am-text {
 	
-	&-readme {
+	& img {
 		
-		padding-top: 40px;
-		.markdown;
+		&[src$="jpg"],
+		&[src$="png"],
+		&[src$="gif"] {
+			margin: 0.72rem 0;
+			border-radius: @am-radius;
+			max-width: 100%;
+		}
 		
-		& > :first-child {
-	        margin-top: 0;
-	    }
+	}
+
+	& h1 {
+		font-size: 2rem;
+		font-weight: 400;
+		margin: 2.85rem 0 2.15rem 0;
+		line-height: 1.35;
+	}
+	
+	& h2 {
+		font-size: 1.72rem;
+		font-weight: 400;
+		margin: 2.85rem 0 1.43rem 0;
+		line-height: 1.425;
+	}
+	
+	& h3 {
+		font-size: 1.45rem;
+		font-weight: 400;
+		margin: 2.14rem 0 0.72rem 0;
+		line-height: 1.5;
+	}
+	
+	& h4 {
+		font-size: 1.22rem;
+		font-weight: 400;
+		margin: 1.43rem 0 0.72rem 0;
+		line-height: 1.5;
+	}
+	
+	& a {
+		
+		color: @am-success;
+
+		&,
+		&:hover {
+			text-decoration: none;
+		}
+
+		&:hover {
+			color: darken(@am-success, 10%);
+		}
 		
 	}
 	
+	& p {
+		margin: 0.72rem 0;
+	}
+
+	& ul:not([class]) {
+		list-style-type: disc;
+	}
+
+	& ul:not([class]),
+	& ol:not([class]) {
+
+		padding-left: 2.25rem;
+
+		& li {
+			padding-top: 0.125rem;
+			padding-bottom: 0.125rem;
+		}
+
+	}
+
+	& code {
+		padding: 0.14rem 0.36rem;
+		font-family: @base-code-font-family;
+		font-size: 0.925em;
+		font-weight: 400;
+		border-radius: 4px;
+		color: @am-text;
+		background-color: @am-code-bg;
+	}
+	
+	& pre {
+		
+		margin: 1.43rem 0;
+		padding: 1rem;
+		font-size: 0.925em;
+		border-radius: @am-radius;
+		background-color: @am-code-bg;
+		
+		& > code {
+			padding: 0;
+			font-size: inherit;
+		}
+		
+	}
+	
+	& blockquote {
+		margin: 1.43rem 0;
+		padding: 1rem;
+		font-size: inherit;
+		line-height: inherit;
+		background-color: @form-background;
+		border-left: 2px solid @am-border-color;
+	}
+
+	& table:not([class]) {
+
+		margin: 1.43rem 0;
+		border-collapse: collapse;
+		overflow: hidden;
+		border-radius: @am-radius;
+		box-shadow: 0 0 0 1px @am-border-color;
+
+		& th, 
+		& td {
+
+			padding: 0.5rem 0.75rem;
+			border-bottom: 1px solid @am-border-color;
+			border-left: 1px solid @am-border-color;
+
+			&:first-child {
+				border-left: none;
+			}
+
+		}
+
+		& th {
+			font-weight: 500;
+			border-bottom: 2px solid @am-border-color;
+		}
+
+		& tr:last-child td {
+			border-bottom: none;
+		}
+
+		& tr:nth-child(even) {
+			background-color: #fcfcfc;
+		}
+
+	}
+
 }
