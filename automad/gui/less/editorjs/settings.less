@@ -51,10 +51,22 @@
 		.transition(color 0.2s, background-color 0.2s;);
 
 		&:hover,
-		&:focus,
+		&:focus {
+			color: @button-color;
+			background-color: @button-background;
+		}
+
 		&--active {
-			color: @nav-dropdown-hover-color;
-			background-color: @nav-dropdown-hover-background;
+
+			color: @button-success-color;
+			background-color: @button-success-background;
+
+			&:hover,
+			&:focus {
+				color: @button-success-hover-color;
+				background-color: @button-success-hover-background;
+			}
+
 		}
 
 	}

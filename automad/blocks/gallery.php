@@ -75,7 +75,13 @@ class Gallery {
 					return Parse::fileIsImage($file);
 				});
 
-				$html = '<div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px">';
+				$style = '';
+
+				if (!empty($data->stretched)) {
+					$style = 'style="width: 100%; max-width: 100%;"';
+				}
+
+				$html = '<figure ' . $style . '><div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 	
 				foreach ($files as $file) {
 
@@ -113,7 +119,7 @@ HTML;
 
 				}
 
-				return $html . '</div>';
+				return $html . '</div></figure>';
 
 			}
 

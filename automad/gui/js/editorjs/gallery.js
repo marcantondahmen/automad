@@ -44,7 +44,8 @@ class AutomadGallery {
 		this.data = {
 			globs: data.globs || '*.jpg, *.png, *.gif',
 			width: data.width || 200,
-			layout: data.layout || 'Masonry'
+			layout: data.layout || 'Masonry',
+			stretched: data.stretched !== undefined ? data.stretched : false
 		};
 
 		this.inputs = {
@@ -81,6 +82,11 @@ class AutomadGallery {
 		this.wrapper.appendChild(controls);
 		this.wrapper.appendChild(this.inputs.layoutHidden);
 
+		this.settings = [{
+			name: 'stretched',
+			icon: '<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
+		}];
+
 	}
 
 	static get toolbox() {
@@ -100,11 +106,43 @@ class AutomadGallery {
 
 	save() {
 
-		return {
+		return Object.assign(this.data, {
 			globs: this.inputs.globs.innerHTML,
 			width: parseInt(this.inputs.width.innerHTML),
 			layout: this.inputs.layoutHidden.innerHTML
-		};
+		});
+
+	}
+
+	renderSettings() {
+
+		var wrapper = document.createElement('div'),
+			block = this;
+
+		this.settings.forEach(function (tune) {
+
+			var button = document.createElement('div');
+
+			button.classList.add('cdx-settings-button');
+			button.classList.toggle('cdx-settings-button--active', block.data[tune.name]);
+			button.innerHTML = tune.icon;
+			wrapper.appendChild(button);
+
+			button.addEventListener('click', function () {
+				block.toggleTune(tune.name);
+				button.classList.toggle('cdx-settings-button--active');
+			});
+
+		});
+
+		return wrapper;
+
+	}
+
+	toggleTune(tune) {
+
+		this.data[tune] = !this.data[tune];
+		Automad.util.triggerBlockChange(this.wrapper);
 
 	}
 

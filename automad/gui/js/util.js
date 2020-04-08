@@ -167,6 +167,16 @@
 				return '.' + pageUrl + '/' + url;
 			}
 
+		},
+
+		triggerBlockChange(blockContent) {
+
+			var temp = document.createElement('div');
+
+			// Trigger a fake block changed event by adding and removing a temporary div.
+			blockContent.appendChild(temp);
+			blockContent.removeChild(temp);
+
 		}
 		
 	}

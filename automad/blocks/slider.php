@@ -72,8 +72,14 @@ class Slider {
 					return Parse::fileIsImage($file);
 				});
 
+				$style = '';
+
+				if (!empty($data->stretched)) {
+					$style = 'style="width: 100%; max-width: 100%;"';
+				}
+
 				$first = 'am-active';
-				$html = '<div class="am-slider" data-am-block-slider>';
+				$html = '<figure ' . $style . '><div class="am-slider" data-am-block-slider>';
 				
 				foreach ($files as $file) {
 
@@ -91,7 +97,7 @@ HTML;
 
 				}
 				
-				return $html . '</div>';
+				return $html . '</div></figure>';
 
 			}
 
