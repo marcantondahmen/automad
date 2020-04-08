@@ -37,7 +37,7 @@
 
 	& .ce-toolbar {
 
-		@media (max-width: 650px) {
+		@media (max-width: @am-blocks-breakpoint-small-max) {
 			border-radius: @am-block-radius;
 			border: none;
 			background-color: @am-block-dropdown-background;	
@@ -50,7 +50,7 @@
 			border-radius: @am-block-radius;
 			background-color: @am-block-dropdown-background;
 
-			@media (min-width: 651px) {
+			@media (min-width: @am-blocks-breakpoint-small) {
 				.shadow;
 			}
 			
@@ -64,7 +64,7 @@
 				margin-left: 4px;
 			}
 
-			@media (min-width: 651px) {
+			@media (min-width: @am-blocks-breakpoint-small) {
 
 				max-width: @am-block-max-width;
 
@@ -78,12 +78,12 @@
 
 		&__actions {
 
-			top: 11px;
-			right: 11px;
+			top: 7px;
+			right: 7px;
 			
-			@media (max-width: 650px) {	
-				top: 16px;
-				right: -28px;	
+			@media (max-width: @am-blocks-breakpoint-small-max) {	
+				top: 17px;
+				right: -30px;	
 			}
 
 		}

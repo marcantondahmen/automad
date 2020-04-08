@@ -150,7 +150,7 @@ class Page {
 		if (!empty($images)) {
 			$preview = self::layout($images);
 		} else {
-			$preview = '<i class="uk-icon-folder-open"></i>';
+			$preview = '<i class="uk-icon-file-text-o"></i>';
 		}
 
 		$pageTitle = $Page->get(AM_KEY_TITLE);

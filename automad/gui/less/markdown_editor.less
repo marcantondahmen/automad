@@ -38,9 +38,10 @@
 @am-md-selection-background:               @base-selection-background;
 
 @am-md-navbar-background:                  @am-bg;
+@am-md-navbar-padding:					   6px;
 
 @am-md-navbar-nav-height:                  36px;
-@am-md-navbar-nav-padding-horizontal:      12px;
+@am-md-navbar-nav-padding-horizontal:      10px;
 @am-md-navbar-nav-line-height:             @am-md-navbar-nav-height;
 @am-md-navbar-nav-color:                   @am-text;
 
@@ -53,8 +54,8 @@
  
 @am-md-content-border:                     @am-border-color;
 @am-md-content-background:                 @am-bg;
-@am-md-content-padding:                    20px;
-@am-md-content-padding-fullscreen: 		   40px;
+@am-md-content-padding:                    25px;
+@am-md-content-padding-fullscreen: 		   35px;
 
 .uk-markdowneditor {
 
@@ -81,7 +82,7 @@
 		box-sizing: border-box;
 		width: auto;
 		overflow: auto;
-		padding: 0;
+		padding: 0 @am-md-navbar-padding;
 		background: @am-md-navbar-background;
 		border-top-left-radius: @am-radius - @am-border-width;
 		border-top-right-radius: @am-radius - @am-border-width;
@@ -106,6 +107,7 @@
 			overflow: visible;
 
 			& > li > a {
+
 				display: block;
 				box-sizing: border-box;
 				text-decoration: none;
@@ -115,23 +117,54 @@
 				color: @am-md-navbar-nav-color;
 				font-size: inherit;
 				cursor: pointer;
+
+				& svg {
+					height: 1rem;
+					width: auto;
+					margin-top: -2px;
+					fill: @am-md-navbar-nav-color;
+					stroke: @am-md-navbar-nav-color;
+					.transition(fill 0.2s;);
+				}
+
 			}
 
 			& > li:hover > a,
 			& > li > a:focus { 
+
 				background-color: @am-md-navbar-nav-hover-background;
 				color: @am-md-navbar-nav-hover-color;
-				outline: none;     
+				outline: none;   
+				
+				& svg {
+					fill: @am-md-navbar-nav-hover-color;
+					stroke: @am-md-navbar-nav-hover-color;
+				}
+				
 			}
 
 			& > li > a:active {
+
 				background-color: @am-md-navbar-nav-onclick-background;
 				color: @am-md-navbar-nav-onclick-color;
+
+				& svg {
+					fill: @am-md-navbar-nav-onclick-color;
+					stroke: @am-md-navbar-nav-onclick-color;
+				}
+
 			}
 
 			& > li.uk-active > a {
+
 				background-color: @am-md-navbar-nav-active-background;
 				color: @am-md-navbar-nav-active-color;
+
+				& svg {
+					fill: @am-md-navbar-nav-active-color;
+					stroke: @am-md-navbar-nav-active-color;
+				}
+
 			}
 
 		}

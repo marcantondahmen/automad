@@ -39,12 +39,12 @@
 		box-sizing: border-box;
 		width: 100%;
 		margin: 4px 0;
-		padding: 10px 15px;
+		padding: @am-block-padding;
 		border-radius: @am-block-radius;
 		.transition(background-color 0.2s);
 
 		@media (min-width: @am-blocks-breakpoint-small) {
-			padding: 10px 45px 10px 15px;
+			padding: @am-block-padding 37px @am-block-padding @am-block-padding;
 		}
 
 		& + & {
@@ -65,7 +65,7 @@
 			background-image: none;
 			background-color: @am-block-focused-background;
 
-			@media (max-width: 650px){
+			@media (max-width: @am-blocks-breakpoint-small-max){
 				background-image: none;
 				background-color: @am-block-focused-background;
 			}

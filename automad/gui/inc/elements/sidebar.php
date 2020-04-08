@@ -86,7 +86,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						</li>
 						<li<?php if (Core\Request::query('context') == 'edit_shared') { echo ' class="uk-active"'; }?>>
 							<a href="?context=edit_shared">
-								<i class="uk-icon-globe uk-icon-justify"></i>&nbsp;
+								<i class="uk-icon-files-o uk-icon-justify"></i>&nbsp;
 								<?php Text::e('shared_title'); ?>
 							</a>
 						</li>

@@ -86,7 +86,7 @@ class SiteTree {
 			foreach ($pages as $key => $Page) {
 				
 				// Set page icon.  
-				$icon = '<i class="uk-icon-folder uk-icon-justify"></i>&nbsp;&nbsp;';
+				$icon = '<i class="uk-icon-file-text-o uk-icon-justify"></i>&nbsp;&nbsp;';
 				
 				if ($key != $current || !$hideCurrent) {
 				

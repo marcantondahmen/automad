@@ -103,7 +103,7 @@ class Icon {
 			} 
 
 			$output['status'] = '<span class="uk-badge uk-badge-notification uk-margin-top-remove' . $badge . '">' . 
-								'<i class="uk-icon-file"></i>&nbsp&nbsp;' . 
+								'<i class="uk-icon-file-text"></i>&nbsp&nbsp;' . 
 				            	trim($template, '\\/') . 
 				                '</span>';
 
