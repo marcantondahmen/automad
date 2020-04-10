@@ -76,23 +76,6 @@
 
 				return label;
 
-			},
-
-			select: function(cls, options, selected) {
-
-				var select = Automad.util.create.element('select', cls);
-
-				for (var i = 0; i < options.length; i++) {
-					var option = document.createElement('option');
-					option.value = options[i];
-					option.text = options[i];
-					select.appendChild(option);
-				}
-
-				select.value = selected;
-
-				return select;
-
 			}
 
 		},

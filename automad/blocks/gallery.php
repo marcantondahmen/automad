@@ -65,66 +65,79 @@ class Gallery {
 
 	public static function render($data, $Automad) {
 		
-		$masonryRowHeight = 20;
+		$masonryRowHeight = 5;
+		$defaults = array(
+			'globs' => '*.jpg, *.png, *.gif',
+			'width' => 250,
+			'masonry' => true,
+			'stretched' => true
+		);
 
-		if (!empty($data->globs) && !empty($data->width) && !empty($data->layout)) {
+		$data = array_merge($defaults, (array) $data);
+		$data = (object) $data;
 
-			if ($files = Parse::fileDeclaration($data->globs, $Automad->Context->get())) {
+		if ($files = Parse::fileDeclaration($data->globs, $Automad->Context->get())) {
 
-				$files = array_filter($files, function($file) {
-					return Parse::fileIsImage($file);
-				});
+			$files = array_filter($files, function($file) {
+				return Parse::fileIsImage($file);
+			});
 
-				$style = '';
+			$style = '';
 
-				if (!empty($data->stretched)) {
-					$style = 'style="width: 100%; max-width: 100%;"';
-				}
+			if ($data->stretched) {
+				$style = 'style="width: 100%; max-width: 100%;"';
+			}
 
-				$html = '<figure ' . $style . '><div class="am-gallery-' . strtolower($data->layout) . '" style="--am-gallery-item-width:' . $data->width . 'px">';
-	
-				foreach ($files as $file) {
+			$layout = 'grid';
 
-					$Image = new Image($file, 2 * $data->width);
-					$caption = Str::stripTags(Parse::caption($file));
-					$file = Str::stripStart($file, AM_BASE_DIR);
+			if ($data->masonry) {
+				$layout = 'masonry';
+			}
 
-					if ($data->layout == 'Masonry') {
+			$html = '<figure ' . $style . '><div class="am-gallery-' . $layout . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 
-						$span = round($Image->height / ($masonryRowHeight * 2) );
-						$class = "am-gallery-masonry-rows-$span";
+			foreach ($files as $file) {
 
-					} else {
+				$Image = new Image($file, 2 * $data->width);
+				$caption = Str::stripTags(Parse::caption($file));
+				$file = Str::stripStart($file, AM_BASE_DIR);
 
-						$aspectRatio = $Image->height / $Image->width;
-						$class = 'am-gallery-grid-square';
+				if ($data->masonry) {
 
-						if ($aspectRatio > 1.5) {
-							$class = 'am-gallery-grid-portrait';
-						}
+					$span = round($Image->height / ($masonryRowHeight * 2) );
+					$attr = 'style="--am-gallery-masonry-rows: ' . $span . ';"';
 
-						if ($aspectRatio < 0.75) {
-							$class = 'am-gallery-grid-landscape';
-						}
+				} else {
 
+					$aspectRatio = $Image->height / $Image->width;
+					$class = 'am-gallery-grid-square';
+
+					if ($aspectRatio > 1.5) {
+						$class = 'am-gallery-grid-portrait';
 					}
 
-					$html .= <<< HTML
-							<div class="$class">
-								<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
-									<img src="$Image->file" />
-								</a>
-							</div>
-HTML;
+					if ($aspectRatio < 0.75) {
+						$class = 'am-gallery-grid-landscape';
+					}
+
+					$attr = 'class="' . $class . '"';
 
 				}
 
-				return $html . '</div></figure>';
+				$html .= <<< HTML
+						<div $attr>
+							<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
+								<img src="$Image->file" />
+							</a>
+						</div>
+HTML;
 
 			}
 
+			return $html . '</div></figure>';
+
 		}
-		
+
 	}
 
 

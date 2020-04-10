@@ -38,54 +38,43 @@ class AutomadGallery {
 
 	constructor({data}) {
 
-		var create = Automad.util.create,
-			gallery = this;
+		var create = Automad.util.create;
 
 		this.data = {
 			globs: data.globs || '*.jpg, *.png, *.gif',
-			width: data.width || 200,
-			layout: data.layout || 'Masonry',
-			stretched: data.stretched !== undefined ? data.stretched : false
+			width: data.width || 250,
+			stretched: data.stretched !== undefined ? data.stretched : true,
+			masonry: data.masonry !== undefined ? data.masonry : true
 		};
 
 		this.inputs = {
 			globs: create.editable(['cdx-input'], 'Enter one or more glob patterns', this.data.globs),
-			width: create.editable(['cdx-input'], 'Image width in px', this.data.width),
-			layoutSelect: create.select(['cdx-input', 'uk-button-success'], ['Masonry', 'Grid'], this.data.layout),
-			layoutHidden: create.editable(['uk-hidden'], '', this.data.layout)
+			width: create.editable(['cdx-input'], 'Image width in px', this.data.width)
 		};
-
-		this.inputs.layoutSelect.addEventListener('change', function() {
-			gallery.inputs.layoutHidden.innerHTML = gallery.inputs.layoutSelect.value;			
-		});
 		
-		var icon = document.createElement('div'),
-			controls = document.createElement('ul'),
-			width = document.createElement('li'),
-			layout = document.createElement('li');
-
+		var icon = document.createElement('div');
+		
 		icon.innerHTML = AutomadGallery.toolbox.icon;
 		icon.classList.add('am-block-icon');
-		controls.classList.add('uk-grid', 'uk-grid-width-medium-1-2');
-		width.appendChild(create.label('Image Width'));
-		width.appendChild(this.inputs.width);
-		layout.appendChild(create.label('Layout'));
-		layout.appendChild(this.inputs.layoutSelect);
-		controls.appendChild(width);
-		controls.appendChild(layout);
-
+	
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.appendChild(icon);
 		this.wrapper.appendChild(create.label('Pattern'));
 		this.wrapper.appendChild(this.inputs.globs);
-		this.wrapper.appendChild(controls);
-		this.wrapper.appendChild(this.inputs.layoutHidden);
+		this.wrapper.appendChild(create.label('Image Width'));
+		this.wrapper.appendChild(this.inputs.width);
 
-		this.settings = [{
-			name: 'stretched',
-			icon: '<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
-		}];
+		this.settings = [
+			{
+				name: 'stretched',
+				icon: '<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
+			},
+			{
+				name: 'masonry',
+				icon: '<svg xmlns="http://www.w3.org/2000/svg" width="19px" height="16px" viewBox="0 0 19 16"><path d="M5,4c0,0.552-0.448,1-1,1H1C0.448,5,0,4.552,0,4V1c0-0.552,0.448-1,1-1h3c0.552,0,1,0.448,1,1V4z"/><path d="M12,6c0,0.553-0.447,1-1,1H8C7.448,7,7,6.553,7,6V1c0-0.552,0.448-1,1-1h3c0.553,0,1,0.448,1,1V6z"/><path d="M19,3c0,0.552-0.447,1-1,1h-3c-0.553,0-1-0.448-1-1V1c0-0.552,0.447-1,1-1h3c0.553,0,1,0.448,1,1V3z"/><path d="M12,15c0,0.553-0.447,1-1,1H8c-0.552,0-1-0.447-1-1v-5c0-0.553,0.448-1,1-1h3c0.553,0,1,0.447,1,1V15z"/><path d="M5,12c0,0.553-0.448,1-1,1H1c-0.552,0-1-0.447-1-1V8c0-0.553,0.448-1,1-1h3c0.552,0,1,0.447,1,1V12z"/><path d="M19,13c0,0.553-0.447,1-1,1h-3c-0.553,0-1-0.447-1-1V7c0-0.553,0.447-1,1-1h3c0.553,0,1,0.447,1,1V13z"/></svg>'
+			}
+		];
 
 	}
 
@@ -108,8 +97,7 @@ class AutomadGallery {
 
 		return Object.assign(this.data, {
 			globs: this.inputs.globs.innerHTML,
-			width: parseInt(this.inputs.width.innerHTML),
-			layout: this.inputs.layoutHidden.innerHTML
+			width: parseInt(this.inputs.width.innerHTML)
 		});
 
 	}
@@ -118,6 +106,8 @@ class AutomadGallery {
 
 		var wrapper = document.createElement('div'),
 			block = this;
+
+		wrapper.classList.add('cdx-settings-1-2');
 
 		this.settings.forEach(function (tune) {
 
