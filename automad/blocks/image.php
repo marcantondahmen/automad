@@ -62,18 +62,18 @@ class Image {
 	public static function render($data) {
 
 		$caption = '';
-		$style = '';
+		$figureAttr = '';
 
 		if (!empty($data->caption)) {
 			$caption = "<figcaption>$data->caption</figcaption>";
 		}
 
 		if (!empty($data->stretched)) {
-			$style = 'style="width: 100%; max-width: 100%;"';
+			$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
 		}
 
 		return <<< HTML
-				<figure $style>
+				<figure $figureAttr>
 					<img src="$data->url" />
 					$caption
 				</figure>

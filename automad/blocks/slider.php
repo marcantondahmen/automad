@@ -72,10 +72,10 @@ class Slider {
 					return Parse::fileIsImage($file);
 				});
 
-				$style = '';
+				$figureAttr = '';
 
 				if (!empty($data->stretched)) {
-					$style = 'style="width: 100%; max-width: 100%;"';
+					$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
 				}
 
 				$defaults = array('dots' => true, 'autoplay' => true);
@@ -83,7 +83,7 @@ class Slider {
 				$options = array_intersect_key($options, $defaults);
 
 				$first = 'am-active';
-				$html = '<figure ' . $style . '><div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
+				$html = '<figure ' . $figureAttr . '><div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
 				
 				foreach ($files as $file) {
 

@@ -82,10 +82,10 @@ class Gallery {
 				return Parse::fileIsImage($file);
 			});
 
-			$style = '';
+			$figureAttr = '';
 
 			if ($data->stretched) {
-				$style = 'style="width: 100%; max-width: 100%;"';
+				$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
 			}
 
 			$layout = 'grid';
@@ -94,7 +94,7 @@ class Gallery {
 				$layout = 'masonry';
 			}
 
-			$html = '<figure ' . $style . '><div class="am-gallery-' . $layout . '" style="--am-gallery-item-width:' . $data->width . 'px">';
+			$html = '<figure ' . $figureAttr . '><div class="am-gallery-' . $layout . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 
 			foreach ($files as $file) {
 
