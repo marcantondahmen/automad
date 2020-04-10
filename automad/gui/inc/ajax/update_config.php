@@ -86,6 +86,7 @@ if ($type = Core\Request::post('type')) {
 		$language = Core\Request::post('language');
 		$config['AM_FILE_GUI_TRANSLATION'] = $language;
 		$output['redirect'] = '#3';
+		$output['reload'] = true;
 		
 	}
 
