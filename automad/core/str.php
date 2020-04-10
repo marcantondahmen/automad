@@ -218,6 +218,9 @@ class Str {
 		
 		// Convert slashes separately to avoid issues with regex in URLify.
 		$str = str_replace('/', '-', $str);
+
+		// Convert dashes to simple hyphen.
+		$str = str_replace(array('&mdash;', '&ndash;'), '-', $str);
 		
 		// Configure URLify. 
 		// Add non-word chars and reset the remove list.
