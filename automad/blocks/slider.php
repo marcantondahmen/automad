@@ -78,8 +78,12 @@ class Slider {
 					$style = 'style="width: 100%; max-width: 100%;"';
 				}
 
+				$defaults = array('dots' => true, 'autoplay' => true);
+				$options = array_merge($defaults, (array) $data);
+				$options = array_intersect_key($options, $defaults);
+
 				$first = 'am-active';
-				$html = '<figure ' . $style . '><div class="am-slider" data-am-block-slider>';
+				$html = '<figure ' . $style . '><div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
 				
 				foreach ($files as $file) {
 

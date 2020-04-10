@@ -37,7 +37,7 @@
 
 	AutomadBlocks.Slider = {
 
-		slider: function(container) {
+		slider: function(container, options) {
 
 			var items = container.querySelectorAll('.am-slider-item');
 
@@ -45,22 +45,32 @@
 
 				var prev = document.createElement('a'),
 					next = document.createElement('a'),
+					dotWrapper = document.createElement('div'),
+					dots = [],
 					activeItem = 0,
 					timer,
 					interval = function() {
 						
-						if (timer) {
-							clearInterval(timer);
+						if (options.autoplay) {
+
+							if (timer) {
+								clearInterval(timer);
+							}
+
+							timer = setInterval(function () {
+								change(activeItem + 1, null);
+							}, 4000);
+
 						}
-
-						timer = setInterval(function () {
-							change(1);
-						}, 5000);
-
+						
 					},
-					change = function(increment) {
+					change = function(index, event) {
 
-						activeItem = activeItem + increment;
+						if (event) {
+							event.preventDefault();
+						}
+						
+						activeItem = index;
 
 						if (activeItem < 0) {
 							activeItem = items.length - 1;
@@ -70,15 +80,25 @@
 							activeItem = 0
 						}
 
+						interval();
 						fade();
 
 					},
 					fade = function() {
 						
-						var current = container.querySelector('.am-slider-item.am-active');
-
-						current.classList.remove('am-active');
+						var currentItem = container.querySelector('.am-slider-item.am-active');
+							
+						currentItem.classList.remove('am-active');
 						items[activeItem].classList.add('am-active');
+
+						if (options.dots) {
+
+							var currentDot = container.querySelector('.am-slider-dots .am-active');
+
+							currentDot.classList.remove('am-active');
+							dots[activeItem].classList.add('am-active');
+
+						}
 
 					};
 
@@ -87,16 +107,40 @@
 				container.appendChild(prev);
 				container.appendChild(next);
 
+				if (options.dots) {
+
+					dotWrapper.classList.add('am-slider-dots');
+					container.appendChild(dotWrapper);
+
+					for (var i = 0; i < items.length; i++) {
+
+						(function (index) {
+
+							var dot = document.createElement('a');
+
+							dot.addEventListener('click', function (event) {
+								change(index, event);
+							});
+
+							if (index === 0) {
+								dot.classList.add('am-active');
+							}
+
+							dots.push(dot);
+							dotWrapper.appendChild(dot);
+
+						}(i));
+
+					}
+
+				}
+
 				prev.addEventListener('click', function(event) {
-					event.preventDefault();
-					interval();
-					change(-1);
+					change(activeItem - 1, event);
 				});
 
 				next.addEventListener('click', function(event) {
-					event.preventDefault();
-					interval();
-					change(1);
+					change(activeItem + 1, event);
 				});
 
 				interval();
@@ -113,8 +157,12 @@
 			if (sliders.length) {
 
 				sliders.forEach(function(container) {
+
+					var options = JSON.parse(container.dataset.amBlockSlider);
+
 					container.removeAttribute(dataAttr);
-					AutomadBlocks.Slider.slider(container);
+					AutomadBlocks.Slider.slider(container, options);
+
 				});
 
 			}

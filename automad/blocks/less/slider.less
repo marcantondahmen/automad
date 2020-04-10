@@ -69,23 +69,33 @@
 		text-decoration: none;
 		top: 50%;
 		transform: translate(0%, -50%);
-		width: 3.5rem;
-		line-height: 3.5rem;
+		width: 3.25rem;
+		line-height: 3.25rem;
+		font-size: 2.85rem;
 		text-align: center;
 		font-family: 'am-controls';
 		color: var(--am-slider-controls-color);
 		background-color: var(--am-slider-controls-background);
-		font-size: 3rem;
 		opacity: 0;
 		transition: opacity 0.2s ease-in;
 
 		.am-slider:hover & {
-			opacity: 1;
+			opacity: 0.7;
+		}
+
+		@media (hover: none) {
+			opacity: 0.7;
+		}
+
+		@media (max-width: 780px) {
+			width: 2.65rem;
+			line-height: 2.65rem;
+			font-size: 2.25rem;
 		}
 
 		&:hover {
 			color: var(--am-slider-controls-color);
-			opacity: 0.8 !important;
+			opacity: 0.4 !important;
 		}
 
 		&:before {
@@ -120,7 +130,7 @@
 	&-caption {
 
 		position: absolute;
-		bottom: 0;
+		top: 0;
 		left: 50%;
 		transform: translate(-50%, 0%);
 		padding: 0.6rem 1rem;
@@ -130,6 +140,39 @@
 
 		&:empty {
 			display: none;
+		}
+
+		@media (max-width: 500px) {
+			display: none;
+		}
+
+	}
+
+	&-dots {
+
+		position: absolute;
+		bottom: 6px;
+		left: 50%;
+		transform: translate(-50%, 0%);
+
+		@media (max-width: 500px) {
+			display: none;
+		}
+
+		& a:before {
+			content: '';
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 5px;
+			border-radius: 100%;
+			background-color: var(--am-slider-controls-color);
+			border: 2px solid var(--am-slider-controls-background);
+			opacity: 0.35;
+		}
+
+		& a.am-active:before {
+			opacity: 0.7;
 		}
 
 	}
