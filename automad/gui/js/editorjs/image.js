@@ -157,6 +157,8 @@ class AutomadImage {
 		var wrapper = document.createElement('div'),
 			block = this;
 
+		wrapper.classList.add('cdx-settings-1-1');
+
 		this.settings.forEach(function (tune) {
 
 			var button = document.createElement('div');
