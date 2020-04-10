@@ -76,7 +76,7 @@ class Embed {
 HTML;
 
 		if (empty($data->caption)) {
-			return $iframe;
+			return "<figure>$iframe</figure>";
 		} else {
 			return "<figure>$iframe<figcaption>$data->caption</figcaption></figure>";
 		}

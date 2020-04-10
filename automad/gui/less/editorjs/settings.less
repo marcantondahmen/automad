@@ -51,20 +51,23 @@
 		.transition(color 0.2s, background-color 0.2s;);
 
 		&:hover,
-		&:focus {
-			color: @button-color;
-			background-color: @button-background;
+		&:focus,
+		&--focused {
+			color: @button-color !important;
+			background-color: @button-background !important;
+			border: none !important;
+			box-shadow: none !important;
 		}
 
 		&--active {
 
-			color: @button-success-color;
-			background-color: @button-success-background;
+			color: @button-success-color !important;
+			background-color: @button-success-background !important;
 
 			&:hover,
 			&:focus {
-				color: @button-success-hover-color;
-				background-color: @button-success-hover-background;
+				color: @button-success-hover-color !important;
+				background-color: @button-success-hover-background !important;
 			}
 
 		}

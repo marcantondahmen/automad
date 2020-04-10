@@ -135,6 +135,40 @@
 
 	}
 
+	& .tc-table {
+		
+		&__wrap {
+			border-radius: @am-block-radius;
+			border-color: @am-border-color;
+		}
+
+		&__cell {
+			border-color: @am-border-color;
+		}
+
+		&__area {
+			padding: 8px 10px;
+		}
+
+	}
+
+	& .tc-toolbar {
+
+		&__plus {
+			
+			circle {
+				fill: @am-success !important;
+			}
+			
+		}
+
+		&__shine-line--ver,
+		&__shine-line--hor {
+			background-color: @am-success;
+		}
+
+	}
+
 	& .uk-panel-box {
 		background-color: transparent;
 		border: @am-border-width dashed @am-border-color;
@@ -168,7 +202,7 @@
 		& svg {
 			height: 30px;
 			width: 100%;
-			fill: @am-border-color;
+			fill: @am-text;
 		}
 
 	}

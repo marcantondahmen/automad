@@ -79,7 +79,8 @@
 					editor;
 						
 				try {
-					data = JSON.parse($input.val());
+					// Unescape &amp; to make embed URLs with parameters work. 
+					data = JSON.parse($input.val().replace(/&amp;/g, '&'));
 				} catch (e) {
 					data = {};
 				}
