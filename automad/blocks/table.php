@@ -61,7 +61,7 @@ class Table {
 
 	public static function render($data) {
 
-		$html = '<table>'; 
+		$html = '<figure><table>'; 
 		
 		foreach ($data->content as $row) {
 
@@ -75,7 +75,7 @@ class Table {
 
 		}
 		
-		$html .= '</table>';
+		$html .= '</table></figure>';
 
 		return $html;
 
