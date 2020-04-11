@@ -114,7 +114,13 @@
 
 		resolvePath: function(path) {
 
-			var pagePath = $('[data-am-path]').data('amPath');
+			var pagePath = $('[data-am-path]').data('amPath'),
+				$inPage = $('[data-am-base-url]'),
+				baseUrl = '.';
+
+			if ($inPage.length) {
+				baseUrl = $inPage.data('amBaseUrl');
+			}
 
 			if (pagePath === undefined) {
 				pagePath = '';
@@ -125,7 +131,7 @@
 			}
 
 			if (path.startsWith('/')) {
-				return '.' + path;
+				return baseUrl + path;
 			} else {
 				return 'pages' + pagePath + path;
 			}

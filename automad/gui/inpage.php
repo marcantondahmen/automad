@@ -98,6 +98,7 @@ class InPage {
 	
 	private function injectMarkup($str) {
 		
+		$urlBase = AM_BASE_URL;
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlData = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_data'));
 		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
@@ -107,7 +108,6 @@ class InPage {
 		$logoSvg = file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg');
 		$Text = Text::getObject();
 		
-
 		$modalSelectImage = Components\Modal\SelectImage::render();
 		$modalLink = Components\Modal\Link::render();
 
@@ -118,7 +118,7 @@ class InPage {
 		}
 		
 		$html = <<< HTML
-				<div class="am-inpage">
+				<div class="am-inpage" data-am-base-url="$urlBase">
 					<div class="am-inpage-menubar">
 						<div class="uk-button-group">
 							<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
