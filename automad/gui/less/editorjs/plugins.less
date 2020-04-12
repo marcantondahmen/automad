@@ -63,6 +63,7 @@
 
 		padding-left: 2.5rem;
 		border: none;
+		background-color: transparent;
 
 		&:before {
 			content: '\f10d';
@@ -84,8 +85,8 @@
 	
 		box-sizing: border-box;
 		padding: @form-padding;
-		padding-top: 6px;
-		padding-bottom: 6px;
+		padding-top: 7px;
+		padding-bottom: 7px;
 		min-height: @form-height;
 		line-height: @base-body-line-height;
 		background-color: @form-background;
@@ -108,6 +109,22 @@
 		
 		&:focus {
 			border-color: @am-success;
+		}
+
+	}
+
+	& .ce-code {
+
+		padding: 20px 24px;
+		font-family: @base-code-font-family;
+		font-size: 0.925em;
+		font-weight: 400;
+		border-radius: 0 !important;
+		border: none;
+
+		&,
+		&:empty {
+			margin-top: 0 !important;
 		}
 
 	}

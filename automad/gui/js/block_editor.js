@@ -118,8 +118,8 @@
 							class: Table,
 						},
 						mail: AutomadMail,
+						code: AutomadCode,
 						raw: RawTool,
-						code: CodeTool,
 						snippet: AutomadSnippet,
 						delimiter: Delimiter,
 						embed: {
