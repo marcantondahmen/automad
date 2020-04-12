@@ -61,7 +61,7 @@ class Code {
 
 	public static function render($data) {
 
-		return "<pre><code>$data->code</code></pre>";
+		return "<figure><pre><code>$data->code</code></pre></figure>";
 
 	}
 
