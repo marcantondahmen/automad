@@ -58,14 +58,13 @@ class Field {
 	/**
 	 *	Create markup for a markdown editor.
 	 *
-	 * 	@param string $tooltip
 	 * 	@param string $fullscreenBar
 	 * 	@param string $attr
 	 * 	@param string $value
 	 * 	@return string The rendered markup.
 	 */
 
-	private static function fieldText($tooltip, $fullscreenBar, $attr, $value) {
+	private static function fieldText($fullscreenBar, $attr, $value) {
 
 		$class = '';
 
@@ -74,14 +73,14 @@ class Field {
 		}
 
 		return <<< HTML
-				<div $class $tooltip>
-				$fullscreenBar
-				<textarea 
-				$attr 
-				class="uk-form-controls uk-width-1-1" 
-				rows="10" 
-				data-uk-markdowneditor
-				>$value</textarea>
+				<div $class>
+					$fullscreenBar
+					<textarea 
+					$attr 
+					class="uk-form-controls uk-width-1-1" 
+					rows="10" 
+					data-uk-markdowneditor
+					>$value</textarea>
 				</div>
 HTML;
 
@@ -133,17 +132,16 @@ HTML;
 	/**
 	 *	Create markup for a date field.
 	 *
-	 * 	@param string $tooltip
 	 * 	@param string $attr
 	 * 	@param string $attrDate
 	 * 	@param string $attrTime
 	 * 	@return string The rendered markup
 	 */
 
-	private static function fieldDate($tooltip, $attr, $attrDate, $attrTime) {
+	private static function fieldDate($attr, $attrDate, $attrTime) {
 
 		return <<< HTML
-				<div class="uk-flex" data-am-datetime $tooltip>
+				<div class="uk-flex" data-am-datetime>
 					<input type="hidden" $attr />
 					<div class="uk-form-icon"> 
 						<i class="uk-icon-calendar"></i>
@@ -173,18 +171,17 @@ HTML;
 
 	
 	/**
-	 *	Create markup for a chackbox.
+	 *	Create markup for a checkbox.
 	 *
-	 * 	@param string $tooltip
 	 * 	@param string $text
 	 * 	@param string $attr
 	 * 	@return string The rendered markup
 	 */
 
-	private static function fieldCheckbox($tooltip, $text, $attr) {
+	private static function fieldCheckbox($text, $attr) {
 
 		return <<< HTML
-				<label class="am-toggle-switch uk-button" data-am-toggle $tooltip> 
+				<label class="am-toggle-switch uk-button" data-am-toggle> 
 					$text
 					<input $attr type="checkbox" />
 				</label>
@@ -214,19 +211,18 @@ HTML;
 
 
 	/**
-	 *	Create markup for a block edito.
+	 *	Create markup for a block editor.
 	 *
-	 * 	@param string $tooltip
 	 * 	@param string $editorId
 	 * 	@param string $fullscreenBar
 	 * 	@param string $value
 	 * 	@return string The rendered markup 
 	 */
 
-	private static function fieldBlockEditor($tooltip, $editorId, $fullscreenBar, $attr, $value) {
+	private static function fieldBlockEditor($editorId, $fullscreenBar, $attr, $value) {
 
 		return <<< HTML
-				<div class="am-block-editor" $tooltip data-am-block-editor="$editorId">		
+				<div class="am-block-editor" data-am-block-editor="$editorId">		
 					$fullscreenBar
 					<input type="hidden" $attr value="$value">
 					<div id="$editorId" class="am-text am-block-editor-container am-fullscreen-container"></div>
@@ -357,6 +353,46 @@ HTML;
 
 
 	/**
+	 *	Create tooltip dropdown.
+	 *
+	 * 	@param object $Theme
+	 * 	@param string $key
+	 * 	@return string The markup for the dropdown.
+	 */
+
+	private static function tooltip($Theme, $key) {
+
+		if (self::isInPage()) {
+			return false;	
+		} 
+
+		if ($Theme) {
+
+			if ($tooltip = $Theme->getTooltip($key)) {
+
+				return <<< HTML
+						<div 
+						class="am-dropdown-tooltip" 
+						data-uk-dropdown
+						>
+							<button type="button" class="uk-button uk-button-mini">
+								<i class="uk-icon-lightbulb-o"></i>
+							</button>
+							<div class="uk-dropdown">
+								$tooltip
+							</div>
+						</div>
+
+HTML;
+
+			}
+			
+		} 
+
+	}
+
+
+	/**
 	 *	Create a form field depending on the name.
 	 *      
 	 * 	@param object $Automad
@@ -384,13 +420,6 @@ HTML;
 			$label = self::labelFromKey($key);
 		}
 
-		// Tooltip.
-		if ($Theme) {
-			$tooltip = ' title="' . $Theme->getTooltip($key) . '" data-uk-tooltip';
-		} else {
-			$tooltip = '';
-		}
-
 		// Build attribute string.
 		$attr = 'id="' . $id . '" name="data[' . $key . ']"';
 
@@ -406,22 +435,23 @@ HTML;
 
 		$html = '<div class="uk-form-row uk-position-relative">';
 		$html .= self::labelHtml($label, $id);
+		$html .= self::tooltip($Theme, $key);
 		$html .= self::removeButton($removeButton);
 
 		// Create field dependig on the start of $key.
 		if (strpos($key, 'text') === 0) {
 			
 			$attr .= $placeholder;
-			$html .= self::fieldText($tooltip, self::fullscreenBar($Automad, $label), $attr, $value);
+			$html .= self::fieldText(self::fullscreenBar($Automad, $label), $attr, $value);
 
 		} else if (strpos($key, 'image') === 0 && strpos($key, 'images') === false) {
 		
-			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
+			$attr .= ' value="' . $value . '"' . $placeholder;
 			$html .= self::fieldImage($attr);
 
 		} else if (strpos($key, 'url') === 0) {
 		
-			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;
+			$attr .= ' value="' . $value . '"' . $placeholder;
 			$html .= self::fieldUrl($attr);
 		
 		} else if (strpos($key, 'date') === 0) {
@@ -439,7 +469,7 @@ HTML;
 				$attrTime .= ' placeholder="' . Core\Str::dateFormat($shared, $formatTime) . '"';
 			}
 			
-			$html .= self::fieldDate($tooltip, $attr, $attrDate, $attrTime);
+			$html .= self::fieldDate($attr, $attrDate, $attrTime);
 
 		} else if (strpos($key, 'checkbox') === 0) {
 			
@@ -448,7 +478,7 @@ HTML;
 			}
 
 			$text = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key)))));
-			$html .= self::fieldCheckbox($tooltip, $text, $attr);
+			$html .= self::fieldCheckbox($text, $attr);
 
 		} else if (strpos($key, 'color') === 0) {
 
@@ -458,17 +488,17 @@ HTML;
 				$color = $shared;
 			} 
 			
-			$attr .= ' value="' . $value . '"' . $placeholder . $tooltip;			
+			$attr .= ' value="' . $value . '"' . $placeholder;			
 			$html .= self::fieldColor($color, $attr);
 			
 		} else if (strpos($key, '+') === 0) {
 
 			$editorId = 'am-block-editor-' . str_replace('+', '', $key);
-			$html .= self::fieldBlockEditor($tooltip, $editorId, self::fullscreenBar($Automad, $label), $attr, $value);
+			$html .= self::fieldBlockEditor($editorId, self::fullscreenBar($Automad, $label), $attr, $value);
 
 		} else {
 			
-			$attr .= $placeholder . $tooltip;
+			$attr .= $placeholder;
 			$html .= self::fieldDefault($attr, $value);
 			
 		}

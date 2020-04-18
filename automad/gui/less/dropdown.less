@@ -60,3 +60,44 @@
 	}
 	
 }
+
+.am-dropdown {
+
+	&-tooltip {
+
+		display: inline-block;
+		position: relative;
+		margin-top: @utility-margin;
+		line-height: 11px;
+		font-size: 11px;
+
+		& .uk-dropdown {
+
+			padding: 6px 10px 6px 28px;
+			width: 240px;
+			font-size: @base-body-font-size;
+			line-height: @base-body-line-height;
+			color: @button-success-color;
+			background-color: @button-success-background;
+			.shadow;
+
+			&:after {
+				content: '\f0eb';
+				position: absolute;
+				display: inline-block;
+				top: 6px;
+				left: 9px;
+				font-family: FontAwesome;
+				font-size: 18px;
+				font-weight: normal;
+    			font-style: normal;
+				line-height: 1;
+				-webkit-font-smoothing: antialiased;
+   				-moz-osx-font-smoothing: grayscale;
+			}
+
+		}
+
+	}
+
+}
