@@ -64,7 +64,7 @@ class Keys {
 	 *	Array with reserved variable keys.
 	 */
 	
-	public $reserved = array(AM_KEY_HIDDEN, AM_KEY_TAGS, AM_KEY_THEME, AM_KEY_TITLE, AM_KEY_SITENAME, AM_KEY_URL);
+	public $reserved = array(AM_KEY_DATE, AM_KEY_HIDDEN, AM_KEY_TAGS, AM_KEY_THEME, AM_KEY_TITLE, AM_KEY_SITENAME, AM_KEY_URL);
 	
 	
 	/**

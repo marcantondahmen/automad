@@ -126,6 +126,9 @@ class Content {
 					if ($theme != '.') {
 						$data[AM_KEY_THEME] = $theme;
 					}
+
+					// Set date.
+					$data[AM_KEY_DATE] = date('Y-m-d H:i:s');
 					
 					// Build the file name and save the txt file. 
 					$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;

@@ -256,6 +256,14 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 						); 
 					?>
 					<?php } ?> 
+					<!-- Date -->
+					<?php 
+						echo Components\Form\Field::render(
+							$this->getAutomad(), 
+							AM_KEY_DATE, 
+							$Page->get(AM_KEY_DATE)
+						); 
+					?>
 					<!-- Tags -->
 					<div class="uk-form-row">	
 						<?php 	
