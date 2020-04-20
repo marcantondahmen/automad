@@ -567,6 +567,66 @@ class Content {
 
 
 	/**
+	 * 	Import file from URL based on $_POST.
+	 * 
+	 * 	@return array The $output array with possible error messages.
+	 */
+
+	public function import() {
+
+		$output = array();
+
+		if ($importUrl = Request::post('importUrl')) {
+
+			if (FileSystem::isAllowedFileType($importUrl)) {
+
+				$curl = curl_init(); 
+  
+				curl_setopt($curl, CURLOPT_HEADER, 0); 
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+				curl_setopt($curl, CURLOPT_URL, $importUrl); 
+	
+				$data = curl_exec($curl); 
+				
+				if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
+				
+					$output['error'] = Text::get('error_import');
+				
+				} else {
+
+					$fileName = Core\Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
+
+					if ($url = Request::post('url')) {
+						$Page = $this->Automad->getPage($url);
+						$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
+					} else {
+						$path = AM_BASE_DIR . AM_DIR_SHARED . '/' . $fileName;
+					}
+
+					FileSystem::write($path, $data);
+
+				} 
+
+				curl_close($curl);
+
+			} else {
+
+				$output['error'] = Text::get('error_file_format');
+
+			}
+
+		} else {
+
+			$output['error'] = Text::get('error_no_url'); 
+
+		}
+
+		return $output;
+
+	}
+
+
+	/**
 	 *	Handle AJAX request for editing a data variable in-page context.   
 	 *          
 	 *  If no data gets received, form fields to build up the editing dialog are send back. 

@@ -80,14 +80,24 @@ if ($files) { ?>
 	
 	<ul class="uk-grid">
 		<li class="uk-width-2-3 uk-width-medium-1-1">
-			<a 
-			href="#am-upload-modal" 
-			class="uk-button uk-button-success" 
-			data-uk-modal="{bgclose: false, keyboard: false}"
-			>
-				<i class="uk-icon-upload"></i>&nbsp;
-				<?php Text::e('btn_upload'); ?>
-			</a>	
+			<div class="uk-button-group">
+				<a 
+				href="#am-upload-modal" 
+				class="uk-button uk-button-success" 
+				data-uk-modal="{bgclose: false, keyboard: false}"
+				>
+					<i class="uk-icon-upload"></i>&nbsp;
+					<?php Text::e('btn_upload'); ?>
+				</a>	
+				<a 
+				href="#am-import-modal" 
+				class="uk-button uk-button-success" 
+				data-uk-modal
+				>
+					<span class="uk-hidden-small"><i class="uk-icon-cloud-download"></i>&nbsp;</span>
+					<?php Text::e('btn_import'); ?>
+				</a>
+			</div>
 			<button 
 			class="uk-button uk-button-danger uk-hidden-small" 
 			data-am-submit="files"
@@ -118,17 +128,28 @@ if ($files) { ?>
 	
 <?php } else { ?>
 
-	<a 
-	href="#am-upload-modal" 
-	class="uk-button uk-button-success uk-button-large" 
-	data-uk-modal="{bgclose: false, keyboard: false}"
-	>
-		<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php Text::e('btn_upload'); ?>
-	</a>
+	<div class="uk-button-group">
+		<a 
+		href="#am-upload-modal" 
+		class="uk-button uk-button-success uk-button-large" 
+		data-uk-modal="{bgclose: false, keyboard: false}"
+		>
+			<i class="uk-icon-upload"></i>&nbsp;&nbsp;<?php Text::e('btn_upload'); ?>
+		</a>
+		<a 
+		href="#am-import-modal" 
+		class="uk-button uk-button-success uk-button-large" 
+		data-uk-modal
+		>
+			<i class="uk-icon-cloud-download"></i>&nbsp;
+			<?php Text::e('btn_import'); ?>
+		</a>
+	</div>
 	
 <?php } 
 
 echo Components\Modal\Upload::render($url);
+echo Components\Modal\Import::render($url);
 
 $output['html'] = ob_get_contents();
 ob_end_clean();

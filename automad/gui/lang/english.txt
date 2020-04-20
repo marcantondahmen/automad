@@ -86,6 +86,10 @@ btn_home: Home
 
 -
 
+btn_import: Import From URL
+
+-
+
 btn_inpage_edit: In-Page Edit Mode
 
 -
@@ -259,6 +263,14 @@ error_no_js: Please enabled JavaScript in your browser to use the Dashboard!
 -
 
 error_no_theme: No theme selected! Please select a main theme.
+
+-
+
+error_no_url: Please enter a valid URL!
+
+-
+
+error_import: The file import has failed!
 
 -
 
@@ -751,7 +763,7 @@ sys_language: Language
 
 -
 
-sys_language_info: There are several languages available for the Dashboard. The translations are created automatically by an artificial intelligence. Therefore this feature is still in an experimental phase and some translations might not be accurate.
+sys_language_info: There are several languages available for the Dashboard. The translations are created automatically. This feature is still in an experimental phase and therefore some translations might not be accurate.
 
 -
 
