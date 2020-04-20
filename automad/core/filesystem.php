@@ -69,6 +69,7 @@ class FileSystem {
 
 	}
 	
+
 	/**
 	 *	Return the extension for a given file.
 	 *      
@@ -84,6 +85,48 @@ class FileSystem {
 			return $pathInfo['extension'];
 		}
 		
+	}
+	
+
+	/**
+	 * 	Get file extension for images based on mime types.
+	 * 
+	 * 	@param string $file
+	 * 	@return	string The extension or false
+	 */
+
+	public static function getImageExtensionFromMimeType($file) {
+
+		try {
+			
+			$getimagesize = getimagesize($file);
+			$type = $getimagesize['mime'];
+			
+			switch($type) {
+
+				case 'image/jpeg':
+					$extension = '.jpg';
+					break;
+				case 'image/gif':
+					$extension = '.gif';
+					break;
+				case 'image/png':
+					$extension = '.png';
+					break;
+				default: 
+					$extension = '';
+		    	    break;
+
+			}
+
+			return $extension;
+
+		} catch (\Exception $e) {
+			
+			return false;
+
+		}
+
 	}
 	
 

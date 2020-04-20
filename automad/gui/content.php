@@ -578,40 +578,45 @@ class Content {
 
 		if ($importUrl = Request::post('importUrl')) {
 
-			if (FileSystem::isAllowedFileType($importUrl)) {
-
-				$curl = curl_init(); 
+			$curl = curl_init(); 
   
-				curl_setopt($curl, CURLOPT_HEADER, 0); 
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
-				curl_setopt($curl, CURLOPT_URL, $importUrl); 
-	
-				$data = curl_exec($curl); 
-				
-				if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
-				
-					$output['error'] = Text::get('error_import');
-				
-				} else {
+			curl_setopt($curl, CURLOPT_HEADER, 0); 
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt($curl, CURLOPT_URL, $importUrl); 
 
-					$fileName = Core\Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
-
-					if ($url = Request::post('url')) {
-						$Page = $this->Automad->getPage($url);
-						$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
-					} else {
-						$path = AM_BASE_DIR . AM_DIR_SHARED . '/' . $fileName;
-					}
-
-					FileSystem::write($path, $data);
-
-				} 
-
-				curl_close($curl);
-
+			$data = curl_exec($curl); 
+			
+			if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
+			
+				$output['error'] = Text::get('error_import');
+			
 			} else {
 
-				$output['error'] = Text::get('error_file_format');
+				$fileName = Core\Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
+
+				if ($url = Request::post('url')) {
+					$Page = $this->Automad->getPage($url);
+					$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
+				} else {
+					$path = AM_BASE_DIR . AM_DIR_SHARED . '/' . $fileName;
+				}
+
+				FileSystem::write($path, $data);
+
+			} 
+
+			curl_close($curl);
+
+			if (!FileSystem::isAllowedFileType($path)) {
+
+				$newPath = $path . FileSystem::getImageExtensionFromMimeType($path);
+
+				if (FileSystem::isAllowedFileType($newPath)) {
+					FileSystem::renameMedia($path, $newPath);
+				} else {
+					unlink($path);
+					$output['error'] = Text::get('error_file_format');
+				}
 
 			}
 
