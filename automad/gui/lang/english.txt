@@ -146,7 +146,7 @@ btn_reset: Reset
 
 -
 
-btn_save: Save
+btn_save: Save Changes
 
 -
 

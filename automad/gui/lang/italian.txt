@@ -78,6 +78,10 @@ btn_home: Home
 
 -
 
+btn_import: Importa da URL
+
+-
+
 btn_inpage_edit: Modalità di modifica in-page
 
 -
@@ -134,7 +138,7 @@ btn_reset: Ripristina
 
 -
 
-btn_save: Salva
+btn_save: Salvare le modifiche
 
 -
 
@@ -202,7 +206,7 @@ error_form: Dati incompleti o errati! <br /> Tutti i campi sono obbligatori e de
 
 -
 
-error_login: Nome utente o password errati
+error_login: Username o password non validi
 
 -
 
@@ -219,6 +223,14 @@ error_no_js: Si prega di abilitare JavaScript nel tuo browser per utilizzare la 
 -
 
 error_no_theme: Nessun tema selezionato! Seleziona un tema principale.
+
+-
+
+error_no_url: Per favore, inserisci un URL valido!
+
+-
+
+error_import: L'importazione del file non è riuscita!
 
 -
 
@@ -350,7 +362,7 @@ log_out_title: Disconnesso
 
 -
 
-packages_title: Pacchi
+packages_title: Pacchetti
 
 -
 
@@ -578,7 +590,7 @@ sys_language: Linguaggio
 
 -
 
-sys_language_info: Sono disponibili diverse lingue per il Dashboard. Le traduzioni sono create automaticamente da un'intelligenza artificiale. Pertanto questa funzione è ancora in una fase sperimentale e alcune traduzioni potrebbero non essere accurate.
+sys_language_info: Sono disponibili diverse lingue per il Dashboard. Le traduzioni vengono create automaticamente. Questa funzione è ancora in una fase sperimentale e pertanto alcune traduzioni potrebbero non essere accurate.
 
 -
 
@@ -686,4 +698,4 @@ sys_user_registered: Utente registrato
 
 -
 
-sys_user_you: Tu
+sys_user_you: Voi

@@ -38,7 +38,7 @@ btn_delete_page: Usuń stronę
 
 -
 
-btn_download_file: Ściągnij
+btn_download_file: Pobieranie
 
 -
 
@@ -79,6 +79,10 @@ btn_hide_page: Ukryj stronę w nawigacji
 -
 
 btn_home: Home
+
+-
+
+btn_import: Importuj z adresu URL
 
 -
 
@@ -130,7 +134,7 @@ btn_remove: Usunąć
 
 -
 
-btn_remove_selected: Usuń zaznaczone
+btn_remove_selected: Usuń wybrane
 
 -
 
@@ -138,7 +142,7 @@ btn_reset: Resetowanie
 
 -
 
-btn_save: Zapisać
+btn_save: Zapisz zmiany
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Włącz obsługę JavaScript w przeglądarce, aby korzystać z pulp
 -
 
 error_no_theme: Nie wybrano motywu! Wybierz główny motyw.
+
+-
+
+error_no_url: Proszę wprowadzić poprawny adres URL!
+
+-
+
+error_import: Import pliku nie powiódł się!
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Język
 
 -
 
-sys_language_info: Pulpit nawigacyjny jest dostępny w kilku językach. Tłumaczenia są tworzone automatycznie przez sztuczną inteligencję. Dlatego ta funkcja jest wciąż w fazie eksperymentalnej, a niektóre tłumaczenia mogą być niedokładne.
+sys_language_info: Pulpit nawigacyjny jest dostępny w kilku językach. Tłumaczenia są tworzone automatycznie. Ta funkcja jest wciąż w fazie eksperymentalnej, dlatego niektóre tłumaczenia mogą być niedokładne.
 
 -
 

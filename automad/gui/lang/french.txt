@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importer depuis l'URL
+
+-
+
 btn_inpage_edit: Mode d'édition sur la page
 
 -
@@ -138,7 +142,7 @@ btn_reset: Réinitialiser
 
 -
 
-btn_save: Sauvegarder
+btn_save: Sauvegarder les modifications
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Veuillez activer JavaScript dans votre navigateur pour utiliser le 
 -
 
 error_no_theme: Aucun thème sélectionné! Veuillez sélectionner un thème principal.
+
+-
+
+error_no_url: Veuillez saisir une URL valide!
+
+-
+
+error_import: L'importation du fichier a échoué!
 
 -
 
@@ -582,7 +594,7 @@ sys_language: Langue
 
 -
 
-sys_language_info: Il existe plusieurs langues disponibles pour le tableau de bord. Les traductions sont créées automatiquement par une intelligence artificielle. Par conséquent, cette fonctionnalité est encore en phase expérimentale et certaines traductions peuvent ne pas être précises.
+sys_language_info: Il existe plusieurs langues disponibles pour le tableau de bord. Les traductions sont créées automatiquement. Cette fonctionnalité est encore en phase expérimentale et par conséquent, certaines traductions peuvent ne pas être précises.
 
 -
 
@@ -614,7 +626,7 @@ sys_title: Les paramètres du système
 
 -
 
-sys_update: Mise à jour
+sys_update: Mettre à jour
 
 -
 
@@ -683,3 +695,7 @@ sys_user_add_repeat: Répéter le mot de passe
 -
 
 sys_user_registered: Utilisateurs enregistrés
+
+-
+
+sys_user_you: Vous

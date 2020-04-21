@@ -18,7 +18,7 @@ btn_browse: Búsqueda de archivos
 
 -
 
-btn_close: Cerca
+btn_close: Cerrar
 
 -
 
@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importar desde URL
+
+-
+
 btn_inpage_edit: Modo de edición en página
 
 -
@@ -134,7 +138,7 @@ btn_reset: Reiniciar
 
 -
 
-btn_save: Salvar
+btn_save: Guardar cambios
 
 -
 
@@ -219,6 +223,14 @@ error_no_js: ¡Habilite JavaScript en su navegador para usar el Tablero!
 -
 
 error_no_theme: ¡Ningún tema seleccionado! Por favor seleccione un tema principal.
+
+-
+
+error_no_url: ¡Por favor introduzca un URL válido!
+
+-
+
+error_import: ¡La importación del archivo ha fallado!
 
 -
 
@@ -518,7 +530,7 @@ success_packages_updated: Se actualizaron con éxito todos los paquetes
 
 -
 
-sys_cache_info: El almacenamiento en caché es esencial para acelerar su sitio y, por lo general, debe habilitarse. Sin embargo, en algunas circunstancias, es posible que desee desactivar o borrar su caché.
+sys_cache_info: El almacenamiento en caché es esencial para acelerar su sitio y, por lo general, debe habilitarse. Sin embargo, en algunas circunstancias, es posible que desee deshabilitar o borrar su caché.
 
 -
 
@@ -570,7 +582,7 @@ sys_language: Idioma
 
 -
 
-sys_language_info: Hay varios idiomas disponibles para el Tablero. Las traducciones son creadas automáticamente por una inteligencia artificial. Por lo tanto, esta característica aún se encuentra en una fase experimental y algunas traducciones pueden no ser precisas.
+sys_language_info: Hay varios idiomas disponibles para el Tablero. Las traducciones se crean automáticamente. Esta característica aún se encuentra en una fase experimental y, por lo tanto, algunas traducciones pueden no ser precisas.
 
 -
 
@@ -606,7 +618,7 @@ sys_update: Actualizar
 
 -
 
-sys_update_available: Una nueva versión de Automad está disponible y lista para ser instalada. <br> ¡Haga una copia de seguridad de su instalación actual antes de actualizar!
+sys_update_available: Una versión más nueva de Automad está disponible y lista para ser instalada. <br> ¡Haga una copia de seguridad de su instalación actual antes de actualizar!
 
 -
 

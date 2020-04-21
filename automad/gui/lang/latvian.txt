@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importēt no URL
+
+-
+
 btn_inpage_edit: Lapas rediģēšanas režīms
 
 -
@@ -138,7 +142,7 @@ btn_reset: Atiestatīt
 
 -
 
-btn_save: Saglabāt
+btn_save: Saglabāt izmaiņas
 
 -
 
@@ -226,11 +230,19 @@ error_no_theme: Nav atlasīta neviena tēma. Lūdzu, atlasiet galveno motīvu.
 
 -
 
+error_no_url: Lūdzu, ievadiet derīgu URL!
+
+-
+
+error_import: Faila importēšana neizdevās!
+
+-
+
 error_packages: Nevarēja ielādēt paketes no Packagist!
 
 -
 
-error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu pakotnes! Ja jūs šo vietni izmantojat koplietotās mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalējiet vietni vietējā datorā bez atmiņas ierobežojumiem.
+error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu pakotnes. Ja jūs šo vietni izmantojat koplietotās mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalējiet vietni vietējā datorā bez atmiņas ierobežojumiem.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Valoda
 
 -
 
-sys_language_info: Informācijas panelim ir pieejamas vairākas valodas. Tulkojumus automātiski izveido mākslīgais intelekts. Tāpēc šī funkcija joprojām ir eksperimentālā posmā, un daži tulkojumi var nebūt precīzi.
+sys_language_info: Informācijas panelim ir pieejamas vairākas valodas. Tulkojumi tiek izveidoti automātiski. Šī funkcija joprojām ir eksperimentālā posmā, un tāpēc daži tulkojumi var nebūt precīzi.
 
 -
 

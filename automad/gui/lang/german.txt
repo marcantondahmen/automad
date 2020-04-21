@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Von URL importieren
+
+-
+
 btn_inpage_edit: In-Page-Bearbeitungsmodus
 
 -
@@ -98,7 +102,7 @@ btn_log_out: Ausloggen
 
 -
 
-btn_login: Einloggen
+btn_login: Anmeldung
 
 -
 
@@ -138,7 +142,7 @@ btn_reset: Zurücksetzen
 
 -
 
-btn_save: Speichern
+btn_save: Änderungen speichern
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Bitte aktivieren Sie JavaScript in Ihrem Browser, um das Dashboard 
 -
 
 error_no_theme: Kein Thema ausgewählt! Bitte wählen Sie ein Hauptthema.
+
+-
+
+error_no_url: Bitte geben Sie eine gültige URL ein!
+
+-
+
+error_import: Der Dateiimport ist fehlgeschlagen!
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Sprache
 
 -
 
-sys_language_info: Für das Dashboard stehen mehrere Sprachen zur Verfügung. Die Übersetzungen werden automatisch von einer künstlichen Intelligenz erstellt. Daher befindet sich diese Funktion noch in einer experimentellen Phase und einige Übersetzungen sind möglicherweise nicht genau.
+sys_language_info: Für das Dashboard stehen mehrere Sprachen zur Verfügung. Die Übersetzungen werden automatisch erstellt. Diese Funktion befindet sich noch in einer experimentellen Phase und daher sind einige Übersetzungen möglicherweise nicht genau.
 
 -
 
@@ -662,7 +674,7 @@ sys_user_change_password: Ändern Sie Ihr Passwort
 
 -
 
-sys_user_change_password_current: Aktuelles Passwort
+sys_user_change_password_current: Derzeitiges Passwort
 
 -
 
@@ -670,11 +682,11 @@ sys_user_change_password_new: Neues Kennwort
 
 -
 
-sys_user_change_password_repeat: Wiederhole das Passwort
+sys_user_change_password_repeat: Passwort wiederholen
 
 -
 
-sys_user_add: Benutzer hinzufügen
+sys_user_add: Nutzer hinzufügen
 
 -
 
@@ -686,7 +698,7 @@ sys_user_add_password: Passwort
 
 -
 
-sys_user_add_repeat: Wiederhole das Passwort
+sys_user_add_repeat: Passwort wiederholen
 
 -
 

@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Tuo URL-osoitteesta
+
+-
+
 btn_inpage_edit: Sivunmuokkaustila
 
 -
@@ -138,7 +142,7 @@ btn_reset: Nollaa
 
 -
 
-btn_save: Tallentaa
+btn_save: Tallenna muutokset
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Ota JavaScript käyttöön selaimessa käyttääksesi hallintapanee
 -
 
 error_no_theme: Ei teemaa valittu! Valitse pääteema.
+
+-
+
+error_no_url: Anna kelvollinen URL-osoite!
+
+-
+
+error_import: Tiedoston tuonti epäonnistui!
 
 -
 
@@ -542,7 +554,7 @@ sys_cache_clear: Tyhjennä välimuisti
 
 -
 
-sys_cache_clear_info: Sivustovälimuistin tyhjentäminen pakottaa päivitettyjen sivujen ja tiedostojen uudelleen etsimiseen. Tämä toiminto ei poista sivutiedostoja tai kuvia välimuistihakemistosta.
+sys_cache_clear_info: Sivustovälimuistin tyhjentäminen pakottaa päivitettyjen sivujen ja tiedostojen uudelleen hakuun. Tämä toiminto ei poista sivutiedostoja tai kuvia välimuistihakemistosta.
 
 -
 
@@ -566,7 +578,7 @@ sys_cache_purge: Puhdista välimuistihakemisto
 
 -
 
-sys_cache_purge_info: Toisin kuin vain välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää myös kaikki väliaikaiset tiedostot, poistetut sivut, päivitykset ja varmuuskopiot kuvat järjestelmän väliaikaiseen hakemistoon. Tämä pakottaa kuvan ja sivuvälimuistin kokonaan uusimaan sekä poistamaan kaikki poistetut sivut. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan automaattisesti ajoittain tai käynnistettäessä uudelleen. Joissakin järjestelmissä hakemisto on kuitenkin tyhjennettävä manuaalisesti.
+sys_cache_purge_info: Toisin kuin välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää myös kaikki väliaikaiset tiedostot, poistetut sivut, päivitykset ja välimuistissa olevat kuvat järjestelmän väliaikaiseen hakemistoon. Tämä pakottaa kuvan ja sivuvälimuistin kokonaan uusimaan sekä poistamaan kaikki poistetut sivut. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan automaattisesti ajoittain tai käynnistettäessä uudelleen. Joissakin järjestelmissä hakemisto on kuitenkin tyhjennettävä manuaalisesti.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Kieli
 
 -
 
-sys_language_info: Hallintapaneelille on saatavana useita kieliä. Käännökset luodaan automaattisesti tekoälyn avulla. Siksi tämä ominaisuus on edelleen kokeiluvaiheessa ja jotkut käännökset eivät ehkä ole tarkkoja.
+sys_language_info: Hallintapaneelille on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on vielä kokeiluvaiheessa, ja siksi jotkut käännökset eivät välttämättä ole tarkkoja.
 
 -
 

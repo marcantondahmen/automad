@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importimine URL-ist
+
+-
+
 btn_inpage_edit: Lehesisene redigeerimisrežiim
 
 -
@@ -138,7 +142,7 @@ btn_reset: Lähtesta
 
 -
 
-btn_save: Salvesta
+btn_save: Salvesta muudatused
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Juhtpaneeli kasutamiseks lubage oma brauseris JavaScript!
 -
 
 error_no_theme: Ühtegi teemat pole valitud! Valige peateema.
+
+-
+
+error_no_url: Sisestage kehtiv URL!
+
+-
+
+error_import: Faili import ebaõnnestus!
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Keel
 
 -
 
-sys_language_info: Juhtpaneeli jaoks on saadaval mitu keelt. Tõlked luuakse tehisintellekti abil automaatselt. Seetõttu on see funktsioon alles katsejärgus ja mõned tõlked ei pruugi olla täpsed.
+sys_language_info: Juhtpaneeli jaoks on saadaval mitu keelt. Tõlked luuakse automaatselt. See funktsioon on endiselt katsejärgus ja seetõttu ei pruugi mõned tõlked olla täpsed.
 
 -
 

@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importovat z adresy URL
+
+-
+
 btn_inpage_edit: Režim úpravy na stránce
 
 -
@@ -138,7 +142,7 @@ btn_reset: Resetovat
 
 -
 
-btn_save: Uložit
+btn_save: Uložit změny
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Chcete-li používat řídicí panel, povolte ve svém prohlížeč
 -
 
 error_no_theme: Nebylo vybráno žádné téma! Vyberte hlavní téma.
+
+-
+
+error_no_url: Zadejte prosím platnou adresu URL!
+
+-
+
+error_import: Import souboru selhal!
 
 -
 
@@ -566,7 +578,7 @@ sys_cache_purge: Vyčistit adresář mezipaměti
 
 -
 
-sys_cache_purge_info: Na rozdíl od pouhého vymazání mezipaměti, vymazání adresáře mezipaměti také přesune všechny dočasné soubory, smazané stránky, zálohy aktualizace a obrázky v mezipaměti do temprary adresáře systému. Tím se vynutí úplná přestavba mezipaměti obrázků a stránek a také vyčištění všech smazaných stránek. Ve většině systémů bude dočasný adresář čas od času nebo při restartu automaticky vyčištěn. U některých systémů však musí být adresář vymazán ručně.
+sys_cache_purge_info: Na rozdíl od pouhého vymazání mezipaměti, vymazání adresáře mezipaměti také přesune všechny dočasné soubory, smazané stránky, zálohy aktualizací a obrázky v mezipaměti do temprary adresáře systému. Tím se vynutí úplná přestavba mezipaměti obrázků a stránek a také vyčištění všech smazaných stránek. Ve většině systémů bude dočasný adresář čas od času nebo při restartu automaticky vyčištěn. U některých systémů však musí být adresář vymazán ručně.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Jazyk
 
 -
 
-sys_language_info: Pro panel je k dispozici několik jazyků. Překlady jsou vytvářeny automaticky pomocí umělé inteligence. Tato funkce je proto stále v experimentální fázi a některé překlady nemusí být přesné.
+sys_language_info: Pro panel je k dispozici několik jazyků. Překlady jsou vytvářeny automaticky. Tato funkce je stále v experimentální fázi, a proto některé překlady nemusí být přesné.
 
 -
 

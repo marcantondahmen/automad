@@ -22,7 +22,7 @@ btn_close: Închide
 
 -
 
-btn_copy_url_clipboard: Copiați URL-ul în Clipboard
+btn_copy_url_clipboard: Copiați adresa URL în Clipboard
 
 -
 
@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importați din URL
+
+-
+
 btn_inpage_edit: Mod de editare în pagină
 
 -
@@ -138,7 +142,7 @@ btn_reset: Resetați
 
 -
 
-btn_save: Salva
+btn_save: Salvează modificările
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Vă rugăm să activați JavaScript în browserul dvs. pentru a uti
 -
 
 error_no_theme: Nicio temă selectată! Vă rugăm să selectați o temă principală.
+
+-
+
+error_no_url: Vă rugăm să introduceți o adresă URL validă!
+
+-
+
+error_import: Importul de fișiere a eșuat!
 
 -
 
@@ -542,7 +554,7 @@ sys_cache_clear: Ștergeți memoria cache
 
 -
 
-sys_cache_clear_info: Ștergerea memoriei cache a site-ului forțează o resanare pentru pagini și fișiere actualizate. Această acțiune nu va elimina niciun fișier de pagină sau imagini din directorul cache.
+sys_cache_clear_info: Ștergerea memoriei cache a site-ului forțează o resanare pentru paginile și fișierele actualizate. Această acțiune nu va elimina niciun fișier de pagină sau imagini din directorul cache.
 
 -
 
@@ -566,7 +578,7 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: Spre deosebire de ștergerea cache-ului, purjarea directorului de memorie cache va muta și toate fișierele temporare, paginile șterse, actualizarea copiilor de rezervă și imaginile din cache în directorul temporal al sistemului. Acest lucru va impune o reconstrucție completă a imaginii și a cache-ului de pagină, precum și o curățare a tuturor paginilor șterse. În majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme, acel director trebuie să fie șters manual.
+sys_cache_purge_info: Spre deosebire de ștergerea cache-ului, purjarea directorului din cache va muta și toate fișierele temporare, paginile șterse, actualizarea copiilor de rezervă și imaginile din cache în directorul temporal al sistemului. Acest lucru va impune o reconstrucție completă a imaginii și a cache-ului de pagină, precum și o curățare a tuturor paginilor șterse. În majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme, acel director trebuie să fie șters manual.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Limba
 
 -
 
-sys_language_info: Există mai multe limbi disponibile pentru tabloul de bord. Traducerile sunt create automat de o inteligență artificială. Prin urmare, această caracteristică este încă într-o fază experimentală și este posibil ca unele traduceri să nu fie exacte.
+sys_language_info: Există mai multe limbi disponibile pentru tabloul de bord. Traducerile sunt create automat. Această caracteristică este încă într-o fază experimentală și, prin urmare, este posibil ca unele traduceri să nu fie exacte.
 
 -
 

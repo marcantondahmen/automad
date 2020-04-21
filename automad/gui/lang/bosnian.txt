@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Uvezi iz URL-a
+
+-
+
 btn_inpage_edit: Način uređivanja na stranici
 
 -
@@ -138,7 +142,7 @@ btn_reset: Resetovati
 
 -
 
-btn_save: Spremi
+btn_save: Sačuvaj promjene
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Molimo omogućite JavaScript u vašem pretraživaču da biste koris
 -
 
 error_no_theme: Nije odabrana tema! Odaberite glavnu temu.
+
+-
+
+error_no_url: Unesite valjanu URL adresu!
+
+-
+
+error_import: Uvoz datoteke nije uspio!
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Jezik
 
 -
 
-sys_language_info: Na nadzornoj ploči postoji nekoliko jezika. Prijevodi se automatski stvaraju umjetnom inteligencijom. Zbog toga je ova značajka još u eksperimentalnoj fazi i neki prevodi možda nisu tačni.
+sys_language_info: Na nadzornoj ploči postoji nekoliko jezika. Prijevodi se kreiraju automatski. Ova značajka je još u eksperimentalnoj fazi i zato neki prevodi možda nisu tačni.
 
 -
 
@@ -622,7 +634,7 @@ sys_update: Ažuriraj
 
 -
 
-sys_update_available: Dostupna je i novija verzija Automada koja je spremna za instalaciju. <br> Napravite sigurnosnu kopiju trenutne instalacije prije ažuriranja!
+sys_update_available: Dostupna je i novija verzija Automada koja je spremna za instalaciju. <br> Rezervno kopirajte trenutnu instalaciju prije ažuriranja!
 
 -
 

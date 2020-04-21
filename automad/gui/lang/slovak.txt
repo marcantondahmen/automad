@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importovať z adresy URL
+
+-
+
 btn_inpage_edit: Režim úpravy na stránke
 
 -
@@ -138,7 +142,7 @@ btn_reset: Reset
 
 -
 
-btn_save: Uložiť
+btn_save: Uložiť zmeny
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Ak chcete používať informačný panel, povolte vo svojom prehlia
 -
 
 error_no_theme: Nie je vybratá žiadna téma! Vyberte hlavnú tému.
+
+-
+
+error_no_url: Prosím vložte platnú URL!
+
+-
+
+error_import: Import súboru zlyhal!
 
 -
 
@@ -566,7 +578,7 @@ sys_cache_purge: Vyčistiť adresár cache
 
 -
 
-sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamäte, vyčistenie adresára vyrovnávacej pamäte presunie aj všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do adresára Temprary systému. Vynúti to úplné obnovenie vyrovnávacej pamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Na väčšine systémov sa dočasný adresár z času na čas alebo po reštarte automaticky vyčistí. Na niektorých systémoch sa však tento adresár musí vymazať manuálne.
+sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamäte, vyčistenie adresára vyrovnávacej pamäte presunie aj všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do dočasného adresára systému. Vynúti to úplné obnovenie vyrovnávacej pamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Na väčšine systémov sa dočasný adresár z času na čas alebo po reštarte automaticky vyčistí. Na niektorých systémoch sa však tento adresár musí vymazať manuálne.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Jazyk
 
 -
 
-sys_language_info: Pre informačný panel je k dispozícii niekoľko jazykov. Preklady sa vytvárajú automaticky pomocou umelej inteligencie. Preto je táto funkcia stále v experimentálnej fáze a niektoré preklady nemusia byť presné.
+sys_language_info: Pre informačný panel je k dispozícii niekoľko jazykov. Preklady sa vytvárajú automaticky. Táto funkcia je stále v experimentálnej fáze, a preto niektoré preklady nemusia byť presné.
 
 -
 

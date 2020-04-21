@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Flytja inn frá slóð
+
+-
+
 btn_inpage_edit: Breytingarstilling á síðu
 
 -
@@ -138,7 +142,7 @@ btn_reset: Endurstilla
 
 -
 
-btn_save: Vista
+btn_save: Vista breytingar
 
 -
 
@@ -206,7 +210,7 @@ error_form: Ófullkomin eða röng gögn! <br /> Allir reitir eru nauðsynlegir 
 
 -
 
-error_login: ógilt notendanafn eða lykilorð
+error_login: Rangt notandanafn eða lykilorð
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Vinsamlegast virkjaðu JavaScript í vafranum þínum til að nota 
 -
 
 error_no_theme: Ekkert þema valið! Vinsamlegast veldu aðalþema.
+
+-
+
+error_no_url: Vinsamlegast sláðu inn gilda slóð!
+
+-
+
+error_import: Mistókst að flytja inn skrána!
 
 -
 
@@ -274,7 +286,7 @@ error_update_items: Ógildur listi yfir hluti sem á að uppfæra!
 
 -
 
-error_update_failed: Uppfærsla mistókst! Vinsamlegast endurheimtu uppsetninguna úr afriti.
+error_update_failed: Uppfærsla mistókst! Vinsamlegast endurheimtu uppsetninguna úr afriti
 
 -
 
@@ -530,7 +542,7 @@ success_update: Uppfærður Automad!
 
 -
 
-success_packages_updated: Allir pakkar voru uppfærðir
+success_packages_updated: Uppfærðir allir pakkar tókst
 
 -
 
@@ -566,7 +578,7 @@ sys_cache_purge: Hreinsa skyndiminni skrá
 
 -
 
-sys_cache_purge_info: Öfugt við að hreinsa skyndiminnið einfaldlega mun hreinsun skyndiminnisins einnig færa allar tímabundnar skrár, eyddar síður, uppfæra afrit og skyndiminni í skyndiminni yfir kerfið. Þetta mun þvinga til enduruppbyggingar myndar og skyndiminni og hreinsun allra eyðilagðra síðna. Í flestum kerfum verður tímabundna skráin hreinsuð sjálfkrafa af og til eða við endurræsingu. En í sumum kerfum þarf að hreinsa þessa skrá handvirkt.
+sys_cache_purge_info: Öfugt við að hreinsa skyndiminnið einfaldlega, hreinsar skyndiminnaskrána einnig allar tímabundnar skrár, eyddar síður, uppfærðar afrit og afrit myndir í skyndiminni kerfisins. Þetta mun þvinga til enduruppbyggingar myndar og skyndiminni og hreinsun allra eyðilagðra síðna. Í flestum kerfum verður tímabundna skráin hreinsuð sjálfkrafa af og til eða við endurræsingu. En í sumum kerfum þarf að hreinsa þessa skrá handvirkt.
 
 -
 
@@ -578,7 +590,7 @@ sys_headless_edit_info: Uppbyggingu skilaðra JSON gagna er stjórnað af sniðm
 
 -
 
-sys_headless_info: Að virkja hauslausa stillingu breytir Automad í innihaldastjórnunarkerfi sem einbeitir sér alfarið að efnissköpun án kynningarlaga. Þó að enn sé hægt að nota Mælaborðið til að stjórna efni eru öll gögn og skrár aðgengilegar með skrifvarna JSON API.
+sys_headless_info: Með því að virkja höfuðlausan hátt breytir Automad í innihaldastjórnunarkerfi sem einbeitir sér alfarið að efnissköpun án kynningarlags. Þó að enn sé hægt að nota Mælaborðið til að stjórna efni eru öll gögn og skrár aðgengilegar með skrifvarna JSON API.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Tungumál
 
 -
 
-sys_language_info: Það eru nokkur tungumál í boði fyrir stjórnborðið. Þýðingarnar eru búnar til sjálfkrafa af gervigreind. Þess vegna er þessi aðgerð ennþá í tilraunaáfanga og sumar þýðingar kunna ekki að vera nákvæmar.
+sys_language_info: Það eru nokkur tungumál í boði fyrir stjórnborðið. Þýðingarnar eru búnar til sjálfkrafa. Þessi aðgerð er enn í tilraunastigi og því gætu sumar þýðingar ekki verið nákvæmar.
 
 -
 

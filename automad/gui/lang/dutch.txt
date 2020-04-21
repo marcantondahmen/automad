@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importeren vanuit URL
+
+-
+
 btn_inpage_edit: In-Page Edit Mode
 
 -
@@ -138,7 +142,7 @@ btn_reset: Reset
 
 -
 
-btn_save: Sparen
+btn_save: Wijzigingen opslaan
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Schakel JavaScript in uw browser in om het Dashboard te gebruiken!
 -
 
 error_no_theme: Geen thema geselecteerd! Selecteer een hoofdthema.
+
+-
+
+error_no_url: Voer een geldige URL in!
+
+-
+
+error_import: Het importeren van bestanden is mislukt!
 
 -
 
@@ -578,7 +590,7 @@ sys_headless_edit_info: De structuur van de geretourneerde JSON-gegevens wordt b
 
 -
 
-sys_headless_info: Door de headless-modus te activeren, verandert Automad in een contentmanagementsysteem dat zich volledig richt op het creëren van content zonder presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
+sys_headless_info: Door de headless-modus te activeren, wordt Automad een contentmanagementsysteem dat zich volledig richt op het maken van content zonder presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Taal
 
 -
 
-sys_language_info: Er zijn verschillende talen beschikbaar voor het dashboard. De vertalingen worden automatisch gemaakt door een kunstmatige intelligentie. Daarom bevindt deze functie zich nog in een experimentele fase en zijn sommige vertalingen mogelijk niet nauwkeurig.
+sys_language_info: Er zijn verschillende talen beschikbaar voor het dashboard. De vertalingen worden automatisch gemaakt. Deze functie bevindt zich nog in een experimentele fase en daarom zijn sommige vertalingen mogelijk niet nauwkeurig.
 
 -
 

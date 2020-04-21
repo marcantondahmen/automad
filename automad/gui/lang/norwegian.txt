@@ -1,4 +1,4 @@
-btn_add: Legg til
+btn_add: Legge til
 
 -
 
@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importer fra URL
+
+-
+
 btn_inpage_edit: In-Page redigeringsmodus
 
 -
@@ -126,7 +130,7 @@ btn_readme: Readme
 
 -
 
-btn_remove: Fjerne
+btn_remove: Ta bort
 
 -
 
@@ -138,7 +142,7 @@ btn_reset: Nullstille
 
 -
 
-btn_save: Lagre
+btn_save: Lagre endringer
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Vennligst aktiver JavaScript i nettleseren din for å bruke dashbor
 -
 
 error_no_theme: Ingen tema valgt! Velg et hovedtema.
+
+-
+
+error_no_url: Vennligst skriv inn en gyldig url!
+
+-
+
+error_import: Filimporten mislyktes!
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Språk
 
 -
 
-sys_language_info: Det er flere språk tilgjengelig for dashbordet. Oversettelsene opprettes automatisk av en kunstig intelligens. Derfor er denne funksjonen fortsatt i en eksperimentell fase, og noen oversettelser er kanskje ikke nøyaktige.
+sys_language_info: Det er flere språk tilgjengelig for dashbordet. Oversettelsene opprettes automatisk. Denne funksjonen er fremdeles i en eksperimentell fase, og derfor kan det hende at noen oversettelser ikke er nøyaktige.
 
 -
 

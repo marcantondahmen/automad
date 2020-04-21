@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Uvozi z URL-ja
+
+-
+
 btn_inpage_edit: Način urejanja na strani
 
 -
@@ -138,7 +142,7 @@ btn_reset: Ponastaviti
 
 -
 
-btn_save: Shrani
+btn_save: Shrani spremembe
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Če želite uporabljati nadzorno ploščo, omogočite JavaScript v 
 -
 
 error_no_theme: Nobena tema ni izbrana! Izberite glavno temo.
+
+-
+
+error_no_url: Vnesite veljaven URL!
+
+-
+
+error_import: Uvoz datoteke ni uspel!
 
 -
 
@@ -538,11 +550,11 @@ sys_cache_info: Predvajanje podatkov je ključnega pomena za pospešitev spletne
 
 -
 
-sys_cache_clear: Počisti predpomnilnik
+sys_cache_clear: Počistiti začasni pomnilnik
 
 -
 
-sys_cache_clear_info: Če izbrišete predpomnilnik spletnega mesta, morate ponovno pregledati posodobljene strani in datoteke. To dejanje ne bo odstranilo nobenih datotek strani ali slik iz predpomnilnika.
+sys_cache_clear_info: Če izbrišete predpomnilnik spletnega mesta, je potrebno ponovno pregledati posodobljene strani in datoteke. To dejanje ne bo odstranilo nobenih datotek strani ali slik iz predpomnilnika.
 
 -
 
@@ -578,7 +590,7 @@ sys_headless_edit_info: Strukturo vrnjenih podatkov JSON nadzira predloga. To pr
 
 -
 
-sys_headless_info: Aktiviranje brezglavega načina samodejno prikaže Automad v sistem za upravljanje vsebine, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvenega sloja. Čeprav se nadzorna plošča še vedno lahko uporablja za upravljanje z vsebino, so vsi podatki in datoteke dostopni prek JSON API-ja, ki je samo za branje.
+sys_headless_info: Aktiviranje brezglavega načina samodejno prikaže Automad v sistem za upravljanje vsebine, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvene plasti. Čeprav se nadzorna plošča še vedno lahko uporablja za upravljanje z vsebino, so vsi podatki in datoteke dostopni prek JSON API-ja, ki je samo za branje.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Jezik
 
 -
 
-sys_language_info: Na nadzorni plošči je na voljo več jezikov. Prevode ustvari samodejno umetna inteligenca. Zato je ta funkcija še vedno v poskusni fazi in nekateri prevodi morda niso natančni.
+sys_language_info: Na nadzorni plošči je na voljo več jezikov. Prevodi so ustvarjeni samodejno. Ta funkcija je še vedno v poskusni fazi, zato nekateri prevodi morda niso natančni.
 
 -
 

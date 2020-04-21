@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importuoti iš URL
+
+-
+
 btn_inpage_edit: Redagavimo puslapyje režimas
 
 -
@@ -138,7 +142,7 @@ btn_reset: Atstatyti
 
 -
 
-btn_save: Sutaupyti
+btn_save: Išsaugoti pakeitimus
 
 -
 
@@ -218,11 +222,19 @@ error_no_destination: Pasirinkite puslapį kaip paskirties vietą!
 
 -
 
-error_no_js: Jei norite naudoti informacijos suvestinę, savo naršyklėje įgalinkite „JavaScript“!
+error_no_js: Norėdami naudoti informacijos suvestinę, savo naršyklėje įgalinkite „JavaScript“!
 
 -
 
 error_no_theme: Nepasirinkta nė viena tema Pasirinkite pagrindinę temą.
+
+-
+
+error_no_url: Prašome įvesti teisingą URL adresą!
+
+-
+
+error_import: Nepavyko importuoti failo!
 
 -
 
@@ -566,7 +578,7 @@ sys_cache_purge: Išvalymo talpyklos katalogas
 
 -
 
-sys_cache_purge_info: Priešingai nei tiesiog išvalius talpyklą, išvalę talpyklos katalogą visi laikinieji failai, ištrinti puslapiai, atnaujinimų atsarginės kopijos ir talpykloje esantys vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atstatyti atvaizdą ir talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugelyje sistemų laikinas katalogas bus automatiškai išvalomas laikas nuo laiko arba iš naujo paleidžiant. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
+sys_cache_purge_info: Priešingai nei tiesiog išvalius talpyklą, išvalę talpyklos katalogą visi laikinieji failai, ištrinti puslapiai, atnaujinimo atsarginės kopijos ir talpykloje esantys vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atstatyti atvaizdą ir talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugelyje sistemų laikinas katalogas bus automatiškai išvalomas laikas nuo laiko arba iš naujo paleidžiant. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Kalba
 
 -
 
-sys_language_info: Prietaisų skydelyje yra keletas kalbų. Vertimai automatiškai sukuriami dirbtinio intelekto pagalba. Todėl ši funkcija vis dar yra eksperimentinėje stadijoje ir kai kurie vertimai gali būti netikslūs.
+sys_language_info: Prietaisų skydelyje yra keletas kalbų. Vertimai sukuriami automatiškai. Ši funkcija vis dar yra eksperimentinėje stadijoje, todėl kai kurie vertimai gali būti netikslūs.
 
 -
 
@@ -610,7 +622,7 @@ sys_status_update_available: Atnaujinti į
 
 -
 
-sys_status_update_not_available: �Automad“ yra atnaujinta
+sys_status_update_not_available: �Automad“ yra atnaujinta
 
 -
 
@@ -634,7 +646,7 @@ sys_update_items: Atnaujinimas turi įtakos šiems elementams:
 
 -
 
-sys_update_not_required: �Automad“ yra atnaujinta.
+sys_update_not_required: �Automad“ yra atnaujinta.
 
 -
 

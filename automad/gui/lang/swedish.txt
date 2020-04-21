@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importera från URL
+
+-
+
 btn_inpage_edit: Inredningsläge på sidan
 
 -
@@ -138,7 +142,7 @@ btn_reset: Återställa
 
 -
 
-btn_save: Spara
+btn_save: Spara ändringar
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Vänligen aktivera JavaScript i din webbläsare för att använda i
 -
 
 error_no_theme: Inget tema valt! Välj ett huvudtema.
+
+-
+
+error_no_url: Var god och skriv in en giltig url!
+
+-
+
+error_import: Filimporten har misslyckats!
 
 -
 
@@ -450,7 +462,7 @@ shared_theme: Huvudtema
 
 -
 
-shared_theme_apply: Vill du använda det valda temat och uppdatera listan med tillgängliga variabler nu? Dina ej sparade ändringar sparas.
+shared_theme_apply: Vill du använda det valda temat och uppdatera listan med tillgängliga variabler nu? Dina osparade ändringar sparas.
 
 -
 
@@ -534,7 +546,7 @@ success_packages_updated: Alla paket har uppdaterats
 
 -
 
-sys_cache_info: Cache är avgörande för att påskynda din webbplats och bör i allmänhet vara aktiverad. Men under vissa omständigheter kanske du vill inaktivera eller rensa din cache.
+sys_cache_info: Cachning är avgörande för att påskynda din webbplats och bör i allmänhet vara aktiverad. Men under vissa omständigheter kanske du vill inaktivera eller rensa din cache.
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Språk
 
 -
 
-sys_language_info: Det finns flera språk tillgängliga för instrumentpanelen. Översättningarna skapas automatiskt av en artificiell intelligens. Därför är denna funktion fortfarande i en experimentell fas och vissa översättningar kanske inte är korrekta.
+sys_language_info: Det finns flera språk tillgängliga för instrumentpanelen. Översättningarna skapas automatiskt. Den här funktionen befinner sig fortfarande i en experimentell fas och därför kanske vissa översättningar inte är korrekta.
 
 -
 

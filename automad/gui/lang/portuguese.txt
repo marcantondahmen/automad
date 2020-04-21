@@ -82,6 +82,10 @@ btn_home: Home
 
 -
 
+btn_import: Importar do URL
+
+-
+
 btn_inpage_edit: Modo de edição na página
 
 -
@@ -126,7 +130,7 @@ btn_readme: Readme
 
 -
 
-btn_remove: Retirar
+btn_remove: Remover
 
 -
 
@@ -138,7 +142,7 @@ btn_reset: Redefinir
 
 -
 
-btn_save: Salve 
+btn_save: Salvar alterações
 
 -
 
@@ -223,6 +227,14 @@ error_no_js: Ative o JavaScript no seu navegador para usar o Painel!
 -
 
 error_no_theme: Nenhum tema selecionado! Por favor, selecione um tema principal.
+
+-
+
+error_no_url: Por favor, insira um URL válido!
+
+-
+
+error_import: A importação do arquivo falhou!
 
 -
 
@@ -586,7 +598,7 @@ sys_language: Língua
 
 -
 
-sys_language_info: Existem vários idiomas disponíveis para o painel. As traduções são criadas automaticamente por uma inteligência artificial. Portanto, esse recurso ainda está em fase experimental e algumas traduções podem não ser precisas.
+sys_language_info: Existem vários idiomas disponíveis para o painel. As traduções são criadas automaticamente. Esse recurso ainda está em fase experimental e, portanto, algumas traduções podem não ser precisas.
 
 -
 
@@ -614,7 +626,7 @@ sys_status_update_not_available: Automad está atualizado
 
 -
 
-sys_title: Configurações do sistema
+sys_title: Configurações de sistema
 
 -
 
@@ -694,4 +706,4 @@ sys_user_registered: Usuários registrados
 
 -
 
-sys_user_you: Vocês
+sys_user_you: Você
