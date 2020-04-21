@@ -67,10 +67,18 @@
 				$.post('?ajax=import', { url: url, importUrl: importUrl}, function(data) {
 					
 					if (data.error) {
+
 						Automad.notify.error(data.error);
+						
 					} else {
+
+						$modal.on('hide.uk.modal.automad.import', function() {
+							$modal.off('automad.import');
+							$form.empty().submit();
+						});
+
 						UIkit.modal(ai.selectors.modal).hide();
-						$form.empty().submit();
+						
 					}
 					
 				}, 'json');
