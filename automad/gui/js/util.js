@@ -133,7 +133,7 @@
 			if (path.startsWith('/')) {
 				return baseUrl + path;
 			} else {
-				return 'pages' + pagePath + path;
+				return baseUrl + '/pages' + pagePath + path;
 			}
 
 		},
