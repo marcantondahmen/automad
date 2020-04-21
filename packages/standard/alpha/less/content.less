@@ -13,17 +13,17 @@
 
 .content {
 	
-	color: @text-muted-color;
-	
-	& a {
+	& ol:not([class]) li a,
+	& ul:not([class]) li a,
+	& p a:not([class]) {
 		
 		color: inherit;
-		border-bottom: @border-width solid @border-color;
+		border-bottom: 1px solid;
 		text-decoration: none !important;
-		padding-bottom: 3px;
+		padding-bottom: 0.03rem;
 		
 		&:hover {
-			border-color: transparent;
+			border-color: @border-color;
 		}
 		
 	}
@@ -32,14 +32,44 @@
 		margin: @utility-margin 0;
 		border-left: 2px solid @text-muted-color; 
 	}
+
+	& em {
+		color: inherit;
+	}
 	
 	& strong,
 	& b {
-		font-weight: 500;
+		font-weight: 700;
+	}
+
+	& table {
+
+		box-sizing: content-box;
+		width: 100%;
+		border-collapse: collapse;
+		text-align: left;
+
+		& th {
+			padding: 0.5rem 0;
+			font-weight: inherit;
+			border-bottom: @border-width solid @border-color;
+		}
+
+		& tr:first-child th {
+			font-weight: 700;
+			border-bottom: 2px solid @border-color;
+		}
+
+		& tr:last-child th {
+			border: none;
+		}
+
+	}
+
+	img,
+	.uk-slideshow {
+		overflow: hidden;
+		border-radius: 4px;
 	}
 	
-}
-
-em {
-	color: inherit;
 }

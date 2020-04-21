@@ -27,24 +27,24 @@
 .hook-pagination-misc() {
 	
 	.uk-pagination {
-		margin: 0 -@pagination-padding-horizontal;
-		cursor: default;
-	}
-	
-	.uk-pagination-previous a,
-	.uk-pagination-next a {
-		font-size: @base-h4-font-size;
-		line-height: @base-h4-line-height;
-		color: @base-body-color !important;
+		text-align: center;
 	}
 	
 }
 
 .hook-pagination-item() {
-	font-weight: @base-heading-font-weight;
+	font-weight: 500;
 	color: @pagination-color;
+	width: 2rem;
+	line-height: 2rem;
+	padding: 0;
+	margin: 0 0.2rem;
+	text-align: center;
+	.panel;
+	border-radius: 100%;
 }
 
 .hook-pagination-active() {
+	color: @pagination-active-color !important;
 	cursor: default;
 }

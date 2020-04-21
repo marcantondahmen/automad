@@ -1,11 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ snippets/header.php @>
-
-	<div class="uk-block">
-		<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2">
-			<li>
-				<h1>@{ title }</h1>
-			</li>
+	<div class="content uk-block">
+		<@ snippets/title.php @>
+		<ul class="masonry uk-grid uk-grid-width-small-1-2">
 			<@ with @{ imageProfile | def('*.jpg, *.jpeg, *.png, *.gif')} { width: 700 } @>
 				<li>
 					<img 
@@ -24,5 +21,4 @@
 			</li>
 		</ul>
 	</div>
-
 <@ snippets/footer.php @>

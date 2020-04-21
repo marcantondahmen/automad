@@ -11,26 +11,26 @@
  */
 
 
-@form-height:				auto;
-@form-padding:				0 0;
-@form-border:				#EEEEEE;
-@form-border-width:			0;
+@form-height:				2.75rem;
+@form-padding:				0.5rem 0.7rem;
+@form-border:				@text-muted-color;
+@form-border-width:			@border-width;
 @form-background:			transparent;
 @form-color:				@base-body-color;
 
-@form-focus-border:			@border-color;
+@form-focus-border:			@base-body-color;
 @form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
-@form-placeholder-color:	#CCCCCC;
+@form-placeholder-color:	@text-muted-color;
 
 @form-gutter:				@utility-margin-small;
 
 .hook-form() {
-	font-size: 1rem;
-	line-height: @base-body-line-height;
-	font-weight: 400;
-	border-bottom-width: @border-width;
 	overflow: hidden;
 	resize: none;
+}
+
+textarea {
+	min-height: 8rem;
 }

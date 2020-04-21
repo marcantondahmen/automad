@@ -1,10 +1,9 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ snippets/header.php @>
-
-	<@ snippets/teaser.php @>
-	<div class="uk-block">
-		<ul class="masonry grid-margin uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-3">
-			<@ filelist { glob: @{ imagesGallery }, sort: 'asc' } @>
+	<div class="content uk-block">
+		<@ snippets/content.php @>
+		<@ filelist { glob: @{ imagesGallery }, sort: 'asc' } @>	
+		<ul class="masonry am-stretched uk-grid uk-grid-width-small-1-2 uk-grid-width-medium-1-3">
 			<@ foreach in filelist @>
 				<li>
 					<div class="uk-panel uk-panel-box">
@@ -32,5 +31,4 @@
 			<@ end @>
 		</ul>
 	</div>
-	
 <@ snippets/footer.php @>

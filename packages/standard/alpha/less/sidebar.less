@@ -1,0 +1,31 @@
+/*
+ *	Standard / Alpha
+ *  Automad Theme
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+ 
+.sidebar{
+
+	will-change: min-height;
+	
+	&-inner{
+		transform: translate(0, 0); /* For browsers don't support translate3d. */
+		transform: translate3d(0, 0, 0);
+		will-change: position, transform;
+	}
+
+	&-wrapper {
+
+		padding-top: 4rem;
+
+	}
+
+}
+

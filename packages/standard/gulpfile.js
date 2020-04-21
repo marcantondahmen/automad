@@ -1,4 +1,6 @@
+/* Standard Themes */
 var gulp = require('gulp'),
+	autoprefixer = require('gulp-autoprefixer'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	header = require('gulp-header'),
@@ -58,17 +60,24 @@ gulp.task('standard-js', function() {
 				'../../lib/vendor/uikit/uikit/src/js/components/lightbox.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/pagination.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/slider.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js'
+				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js',
+				'../../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
 			])
 			.pipe(uglify(uglifyOptions))
 			.pipe(concat('uikit.js', { newLine: '\r\n\r\n' } )) // Doesn't get saved to disk.
 			.pipe(header('/*! <%= pkg.title %> <%= pkg.version %> | <%= pkg.homepage %> | (c) 2014 YOOtheme | MIT License */\n', { 'pkg' : pkgUIkit } )),
-			// Automad.
+			// Sticky sidebar.
 			gulp.src([
-				'../../automad/gui/js/textarea.js'
+				'node_modules/css-element-queries/src/ResizeSensor.js'
 			])
 			.pipe(uglify(uglifyOptions)),
-			gulp.src('js/*.js')
+			gulp.src([
+				'node_modules/sticky-sidebar/dist/sticky-sidebar.min.js'
+			]),
+			gulp.src([
+				'../../automad/gui/js/scroll_position.js',
+				'js/*.js'
+			])
 			.pipe(uglify(uglifyOptions))
 		)
 		.pipe(concat('standard.min.js', { newLine: '\r\n\r\n' } ))
@@ -82,6 +91,7 @@ gulp.task('alpha-less', function() {
 	return 	gulp.src('alpha/less/alpha.less')
 			.pipe(less())
 			.on('error', onError)
+			.pipe(autoprefixer({ grid: false }))
 			.pipe(cleanCSS(cleanCSSOptions))
 			.pipe(rename({ suffix: '.min' }))
 			.pipe(gulp.dest('alpha/dist'));
@@ -94,6 +104,7 @@ gulp.task('bravo-less', function() {
 	return 	gulp.src('bravo/less/bravo.less')
 			.pipe(less())
 			.on('error', onError)
+			.pipe(autoprefixer({ grid: false }))
 			.pipe(cleanCSS(cleanCSSOptions))
 			.pipe(rename({ suffix: '.min' }))
 			.pipe(gulp.dest('bravo/dist'));

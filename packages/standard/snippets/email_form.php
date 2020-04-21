@@ -45,8 +45,7 @@
 			required
 			></textarea>
 		</div>
-		<button class="uk-button uk-margin-large-top" type="submit">
-			<i class="uk-icon-paper-plane"></i>&nbsp;
+		<button class="uk-button uk-margin-small-top" type="submit">
 			@{ labelSendMail | def ('Send Mail') }
 		</button>
 	</form>
