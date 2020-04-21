@@ -94,10 +94,14 @@
 					logLevel: 'ERROR',
 					data: data,
 					tools: {
+						paragraph: {
+							class: AutomadParagraph,
+							inlineToolbar: true
+						},
 						header: {
 							class: Header,
 							shortcut: 'CMD+SHIFT+H',
-							inlineToolbar: true,
+							inlineToolbar: [],
 							config: {
 								levels: [1, 2, 3, 4, 5, 6],
 								defaultLevel: 2
@@ -116,6 +120,7 @@
 						},
 						table: {
 							class: Table,
+							inlineToolbar: true
 						},
 						mail: AutomadMail,
 						code: AutomadCode,
