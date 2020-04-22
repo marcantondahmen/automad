@@ -36,9 +36,11 @@
 
 class AutomadGallery {
 
-	constructor({data}) {
+	constructor({data, api}) {
 
 		var create = Automad.util.create;
+
+		this.api = api;
 
 		this.data = {
 			globs: data.globs || '*.jpg, *.png, *.gif',
@@ -75,6 +77,10 @@ class AutomadGallery {
 				icon: '<svg xmlns="http://www.w3.org/2000/svg" width="19px" height="16px" viewBox="0 0 19 16"><path d="M5,4c0,0.552-0.448,1-1,1H1C0.448,5,0,4.552,0,4V1c0-0.552,0.448-1,1-1h3c0.552,0,1,0.448,1,1V4z"/><path d="M12,6c0,0.553-0.447,1-1,1H8C7.448,7,7,6.553,7,6V1c0-0.552,0.448-1,1-1h3c0.553,0,1,0.448,1,1V6z"/><path d="M19,3c0,0.552-0.447,1-1,1h-3c-0.553,0-1-0.448-1-1V1c0-0.552,0.447-1,1-1h3c0.553,0,1,0.448,1,1V3z"/><path d="M12,15c0,0.553-0.447,1-1,1H8c-0.552,0-1-0.447-1-1v-5c0-0.553,0.448-1,1-1h3c0.553,0,1,0.447,1,1V15z"/><path d="M5,12c0,0.553-0.448,1-1,1H1c-0.552,0-1-0.447-1-1V8c0-0.553,0.448-1,1-1h3c0.552,0,1,0.447,1,1V12z"/><path d="M19,13c0,0.553-0.447,1-1,1h-3c-0.553,0-1-0.447-1-1V7c0-0.553,0.447-1,1-1h3c0.553,0,1,0.447,1,1V13z"/></svg>'
 			}
 		];
+
+		Promise.resolve().then(() => {
+			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
+		});
 
 	}
 
@@ -132,6 +138,11 @@ class AutomadGallery {
 	toggleTune(tune) {
 
 		this.data[tune] = !this.data[tune];
+
+		if (tune == 'stretched') {
+			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
+		}
+
 		Automad.util.triggerBlockChange(this.wrapper);
 
 	}

@@ -52,7 +52,21 @@
 		}
 
 		&__content {
+
 			max-width: @am-block-max-width;
+
+			@media (min-width: @am-blocks-breakpoint-small) {
+				padding: 0 @am-block-content-padding;
+			}
+			
+		}
+
+		&--stretched .ce-block__content {
+			
+			@media (min-width: @am-blocks-breakpoint-small) {
+				padding: 0;
+			}
+
 		}
 
 		& [class^="uk-icon-"] {
@@ -97,7 +111,13 @@
 	}
 
 	& .ce-block--selected > .ce-block__content {
+
 		background-color: transparent !important;
+
+		& img {
+			opacity: 1;
+		}
+
 	}
 
 }

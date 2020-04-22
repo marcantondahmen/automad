@@ -46,7 +46,9 @@
 
 class AutomadImage {
 
-	constructor({data}) {
+	constructor({data, api}) {
+
+		this.api = api;
 
 		this.data = {
 			url: data.url || '',
@@ -72,10 +74,7 @@ class AutomadImage {
 			block.select();
 		});
 
-		this.settings = [{
-			name: 'stretched',
-			icon: '<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
-		}];
+		this.settings = this.renderStretchSetting(this, this.wrapper);
 
 	}
 
@@ -154,35 +153,37 @@ class AutomadImage {
 
 	renderSettings() {
 
-		var wrapper = document.createElement('div'),
-			block = this;
-
-		wrapper.classList.add('cdx-settings-1-1');
-
-		this.settings.forEach(function (tune) {
-
-			var button = document.createElement('div');
-
-			button.classList.add('cdx-settings-button');
-			button.classList.toggle('cdx-settings-button--active', block.data[tune.name]);
-			button.innerHTML = tune.icon;
-			wrapper.appendChild(button);
-
-			button.addEventListener('click', function () {
-				block.toggleTune(tune.name);
-				button.classList.toggle('cdx-settings-button--active');
-			});
-
-		});
-
-		return wrapper;
+		return this.settings;
 
 	}
 
-	toggleTune(tune) {
+	renderStretchSetting(block, blockWrapper) {
 
-		this.data[tune] = !this.data[tune];
-		Automad.util.triggerBlockChange(this.wrapper);
+		var wrapper = document.createElement('div'),
+			button = document.createElement('div'),
+			icon = '<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>',
+			toggleStretch = function () {
+				block.data.stretched = !block.data.stretched;
+				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data.stretched);
+				Automad.util.triggerBlockChange(blockWrapper);
+			};
+
+		wrapper.classList.add('cdx-settings-1-1');
+		button.classList.add(block.api.styles.settingsButton);
+		button.classList.toggle(block.api.styles.settingsButtonActive, block.data.stretched);
+		button.innerHTML = icon;
+		wrapper.appendChild(button);
+
+		button.addEventListener('click', function () {
+			toggleStretch();
+			button.classList.toggle(block.api.styles.settingsButtonActive);
+		});
+
+		Promise.resolve().then(() => {
+			block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data.stretched);
+		});
+
+		return wrapper;
 
 	}
 

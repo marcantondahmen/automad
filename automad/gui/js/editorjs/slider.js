@@ -36,10 +36,12 @@
 
 class AutomadSlider {
 
-	constructor({data}) {
+	constructor({data, api}) {
 
 		var create = Automad.util.create;
 
+		this.api = api;
+		
 		this.data = {
 			globs: data.globs || '*.jpg, *.png, *.gif',
 			width: data.width || 1200,
@@ -91,6 +93,10 @@ class AutomadSlider {
 				icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 14 14"><path d="M3,13.424c-0.259,0-0.518-0.067-0.75-0.201C1.786,12.955,1.5,12.46,1.5,11.924V2.076c0-0.536,0.286-1.031,0.75-1.299 c0.464-0.269,1.036-0.269,1.5,0l8.527,4.924c0.464,0.268,0.75,0.763,0.75,1.299s-0.286,1.031-0.75,1.299L3.75,13.223 C3.518,13.356,3.259,13.424,3,13.424z"/></svg>'
 			}
 		];
+
+		Promise.resolve().then(() => {
+			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
+		});
 
 	}
 
@@ -147,6 +153,11 @@ class AutomadSlider {
 	toggleTune(tune) {
 
 		this.data[tune] = !this.data[tune];
+
+		if (tune == 'stretched') {
+			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
+		}
+		
 		Automad.util.triggerBlockChange(this.wrapper);
 
 	}
