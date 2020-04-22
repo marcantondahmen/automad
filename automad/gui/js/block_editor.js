@@ -122,11 +122,11 @@
 							class: Table,
 							inlineToolbar: true
 						},
-						mail: AutomadMail,
 						code: AutomadCode,
 						raw: RawTool,
-						snippet: AutomadSnippet,
+						mail: AutomadMail,
 						delimiter: Delimiter,
+						snippet: AutomadSnippet,
 						embed: {
 							class: Embed,
 							config: {
