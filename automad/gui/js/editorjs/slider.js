@@ -157,8 +157,6 @@ class AutomadSlider {
 		if (tune == 'stretched') {
 			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
 		}
-		
-		Automad.util.triggerBlockChange(this.wrapper);
 
 	}
 

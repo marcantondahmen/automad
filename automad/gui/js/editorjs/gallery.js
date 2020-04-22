@@ -143,8 +143,6 @@ class AutomadGallery {
 			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
 		}
 
-		Automad.util.triggerBlockChange(this.wrapper);
-
 	}
 
 }

@@ -167,10 +167,28 @@
 
 			});
 
+			// Trigger changes when clicking a settings button.
+			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', function(e) {
+				
+				var block = $(this).closest('.codex-editor').find('.cdx-block').first().get(0),
+					temp = document.createElement('div');
+
+				// Trigger a fake block changed event by adding and removing a temporary div.
+				block.appendChild(temp);
+				block.removeChild(temp);
+
+			});
+
 		}
 		
 	};
 
-	$(document).on('ajaxComplete', Automad.blockEditor.init);
+	$(document).on('ajaxComplete', function (e, xhr, settings) {
+
+		if (settings.url.includes('page_data') || settings.url.includes('inpage_edit')) {
+			Automad.blockEditor.init();
+		}
+
+	});
 	
 }(window.Automad = window.Automad || {}, jQuery);

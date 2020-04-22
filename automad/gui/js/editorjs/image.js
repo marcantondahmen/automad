@@ -165,7 +165,6 @@ class AutomadImage {
 			toggleStretch = function () {
 				block.data.stretched = !block.data.stretched;
 				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data.stretched);
-				Automad.util.triggerBlockChange(blockWrapper);
 			};
 
 		wrapper.classList.add('cdx-settings-1-1');

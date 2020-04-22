@@ -61,22 +61,25 @@
 
 	& .cdx-quote {
 
-		padding-left: 2.5rem;
 		border: none;
 		background-color: transparent;
 
-		&:before {
-			content: '\f10d';
-			display: inline-block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			font-family: FontAwesome;
-			font-size: 1.8rem;
-			line-height: 1;
-			color: @am-border-color;
-			-webkit-font-smoothing: antialiased;
-    		-moz-osx-font-smoothing: grayscale;
+		@media (min-width: @breakpoint-large) {
+
+			&:before {
+				content: '\f10d';
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				font-family: FontAwesome;
+				font-size: 1.8rem;
+				line-height: 1;
+				color: @am-border-color;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
 		}
 		
 	}

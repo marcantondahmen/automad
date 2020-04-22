@@ -181,7 +181,6 @@ class AutomadParagraph {
 	toggleTune(tune) {
 
 		this.data[tune] = !this.data[tune];
-		Automad.util.triggerBlockChange(this._element);
 
 	}
 
