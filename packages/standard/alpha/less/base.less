@@ -37,8 +37,14 @@
 @base-h3-line-height: 				1.25;
 @base-h4-font-size:   				1.35rem;
 @base-h4-line-height: 				1.275;
-@base-h5-font-size:   				1.15rem;
+@base-h5-font-size:   				1.225rem;
 @base-h5-line-height: 				1.35;
+@base-h6-font-size:   				1.15rem;
+@base-h6-line-height: 				1.425;
+
+@base-code-font-family:				'Fira Mono', monospace;
+@base-code-color:					inherit;
+@base-code-font-size:				0.95em;
 
 @base-em-color:						@base-body-color;
 @base-quote-font-style:         	italic;
@@ -58,17 +64,30 @@
 	-webkit-tap-highlight-color: rgba(0,0,0,0) !important;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 @media (min-width: 1600px) {
 
 	html,
 	body {
-		font-size: 19px;
+		font-size: 18px;
+	}
+
+}
+
+@media (min-width: 2100px) {
+
+	html,
+	body {
+		font-size: 20px;
 	}
 
 }
 
 h1 {
-	margin-top: @utility-margin !important;
+	margin-top: @utility-margin;
 	margin-bottom: @utility-margin;
 	letter-spacing: -0.05rem;
 }
@@ -103,16 +122,34 @@ button {
 		
 }
 
-p:last-child {
-	margin-bottom: 0;
-}
-
 figure {
+
 	margin-top: @utility-margin;
 	margin-bottom: @utility-margin;
+
+	& > :first-child {
+		margin-top: 0 !important;
+	}
+
 }
 
 hr {
 	margin: @utility-margin-large auto;
 	border-top: 2px solid @border-color;
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+address,
+fieldset,
+figure { 
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
 }

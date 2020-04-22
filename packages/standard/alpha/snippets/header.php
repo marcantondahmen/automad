@@ -17,6 +17,7 @@
 	@{ imageTeaser } 
 	
 	#>
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">	
 	<link href="/packages/standard/alpha/dist/alpha.min.css?v=@{ :version | sanitize }" rel="stylesheet">
 	<script src="/packages/standard/dist/standard.min.js?v=@{ :version | sanitize }"></script>

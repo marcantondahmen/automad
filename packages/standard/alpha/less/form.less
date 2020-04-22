@@ -13,8 +13,8 @@
 
 @form-height:				2.75rem;
 @form-padding:				0.5rem 0.7rem;
-@form-border:				@text-muted-color;
-@form-border-width:			@border-width;
+@form-border:				#F2F2F2;
+@form-border-width:			2px;
 @form-background:			transparent;
 @form-color:				@base-body-color;
 
@@ -22,15 +22,21 @@
 @form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
-@form-placeholder-color:	@text-muted-color;
+@form-placeholder-color:	@base-body-color;
 
-@form-gutter:				@utility-margin-small;
+@form-gutter:				0.5rem;
+
+@form-large-height:			3.5rem;
+@form-large-padding:		0.7rem 1rem;
+@form-large-font-size:		1.15rem;
 
 .hook-form() {
 	overflow: hidden;
 	resize: none;
+	border-radius: 4px;
 }
 
-textarea {
+textarea,
+textarea.uk-form-controls:invalid {
 	min-height: 8rem;
 }

@@ -10,7 +10,7 @@
  *  based on UIkit 2
  */
 
-@navbar-background:            	fade(@base-body-background, 97%);
+@navbar-background:            	fade(@base-body-background, 95%);
 @navbar-color:                 	@base-body-color;
 
 @navbar-nav-height:            	50px;
@@ -18,7 +18,7 @@
 @navbar-nav-font-size:         	1rem;
 @navbar-nav-font-weight:       	400;
 @navbar-nav-font-family:       	@base-body-font-family;
-@navbar-nav-padding-horizontal:	12px;
+@navbar-nav-padding-horizontal:	15px;
 
 @navbar-nav-color:             	@navbar-color;
 @navbar-nav-hover-background:  	transparent;
@@ -56,12 +56,31 @@
 		
 		&-push {
 			
-			padding-top: @navbar-nav-height !important;
+			padding-top: (@navbar-nav-height * 1.85) !important;
 			
 			@media (min-width: @breakpoint-large) {
-				padding-top: @navbar-nav-height-large !important;
+				padding-top: (@navbar-nav-height-large * 1.85) !important;
 			}
 			
+		}
+
+		&-search-button {
+
+			padding: 0 @navbar-nav-padding-horizontal 5px @navbar-nav-padding-horizontal;
+			height: @navbar-nav-height - 5;
+			line-height: @navbar-nav-height - 5;
+			
+			@media (min-width: @breakpoint-xlarge) {
+				min-height: @navbar-nav-height-large - 5;
+				line-height: @navbar-nav-height-large - 5;
+			}
+
+			&,
+			&:hover,
+			&:focus {
+				fill: @navbar-color;
+			}
+
 		}
 		
 		&-toggle {

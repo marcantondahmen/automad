@@ -2,7 +2,7 @@
 <@~ newPagelist ~@>
 [
 <@~ foreach in pagelist ~@>
-<# Add comma before all elements except the first one. #>
+	<# Add comma before all elements except the first one. #>
 	<@ if @{ :i | -1 } @>,<@ end @>
 	<# Exclude redirected pages. #>
 	<@~ if @{ :origUrl } = @{ url } ~@>

@@ -21,7 +21,7 @@
 					</div>
 				<@~ end @>
 				<@~ ../../snippets/set_teaser_variable.php @>
-				<p class="content">@{ :teaser }</p>
+				<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
 				<a href="@{ url }" class="nav-link panel-more">
 					<svg class="bi bi-plus-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						<path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
@@ -30,6 +30,10 @@
 					</svg>
 				</a>
 			</div>
+		</li>
+	<@ else @>
+		<li>
+			<h4>@{ notificationNoSearchResults | def ('No Pages Found') }</h4>
 		</li>
 	<@~ end @>
 </ul>

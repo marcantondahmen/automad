@@ -15,7 +15,7 @@
 					containerSelector: false,
 					innerWrapperSelector: '.sidebar-wrapper',
 					resizeSensor: true,
-					topSpacing: 0,
+					topSpacing: 20,
 					bottomSpacing: 70
 				});
 				

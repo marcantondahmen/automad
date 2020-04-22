@@ -2,8 +2,7 @@
 <@ if @{ date } or @{ tags } ~@>
 	<div class="text-subtitle">
 		<@ ../../snippets/date.php @>
-		<@ if @{ date } and @{ tags } @>&nbsp;&mdash;&nbsp;<@ end @>
-		<br class="uk-visible-small">
+		<@ if @{ date } and @{ tags } @>&nbsp;&mdash;&nbsp;<br class="uk-visible-small"><@ end @>
 		<@ ../../snippets/tags.php @>
 	</div>
 <@~ end @>
