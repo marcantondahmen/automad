@@ -7,10 +7,8 @@
 			</div>
 		</div>
 		<div id="sidebar" class="uk-width-1-4 uk-visible-large">
-			<div class="sidebar-wrapper">			
-				<div class="uk-margin-top">
-					<@ ../snippets/tree.php @>
-				</div>
+			<div class="uk-block sidebar-wrapper">				
+				<@ ../snippets/tree.php @>
 			</div>
 		</div>
 	</div>
