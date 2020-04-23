@@ -14,29 +14,37 @@
 @button-background:					transparent;
 @button-color:              		@base-body-color;
 @button-hover-background:   		transparent;
-@button-hover-color:        		lighten(@base-body-color, 30%);
+@button-hover-color:        		@base-body-color;
 @button-active-background:  		@button-hover-background;
 @button-active-color:       		@button-hover-color;
 
-@button-height:	 					1.25rem;
-@button-line-height: 				inherit;
-@button-padding-horizontal: 		0;
+@button-height:	 					2.35rem;
+@button-line-height: 				@button-height;
+@button-padding-horizontal: 		0.7rem;
 
-.hook-button {
-	font-weight: 400;	
+.hook-button() {
+	.button;
 }
 
 .hook-button-misc() {
 	
 	.buttons-stacked {
 		
-		margin-top: -1rem;
+		padding-top: 4rem;
+		margin-top: -3rem;
 		
 		& > * {
-			margin-right: 1.75rem;
+			margin-right: 1rem;
 			margin-top: 1rem;
 		}
 		
 	}
 	
+}
+
+.am-mail-button {
+	
+	box-sizing: content-box;
+	&:extend(.uk-button all);
+
 }

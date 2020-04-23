@@ -28,11 +28,6 @@
 		
 	}
 	
-	& blockquote {
-		margin: @utility-margin 0;
-		border-left: 2px solid @text-muted-color; 
-	}
-
 	& em {
 		color: inherit;
 	}
@@ -50,14 +45,15 @@
 		text-align: left;
 
 		& th {
-			padding: 0.4rem 0;
+			padding: 0.5rem 0;
 			font-weight: inherit;
-			border-bottom: @border-width solid @border-color;
+			border-bottom: 1px solid @border-color;
 		}
 
 		& tr:first-child th {
-			font-weight: 500;
-			border-bottom: 2px solid @border-color;
+			font-weight: 400;
+			color: @text-muted-color;
+			border-bottom: @border-width solid @border-color;
 		}
 
 		& tr:last-child th {
@@ -85,8 +81,9 @@
 	& pre {
 		
 		margin: 1.43rem 0;
-		padding: 1.2rem;
+		padding: 1.4rem 1.5rem;
 		font-size: 0.925em;
+		line-height: 1.5;
 		border-radius: 4px;
 		background-color: #F8F8F8;
 		
@@ -99,6 +96,7 @@
 
 	& figcaption {
 		margin-top: 0.75rem;
+		color: @text-muted-color;
 	}
 
 	& blockquote {

@@ -4,7 +4,7 @@
 		<@ snippets/content.php @>
 		<@ ../snippets/pagelist_config.php @>
 		<@ if not @{ checkboxHideFiltersAndSort } @>
-			<div class="buttons-stacked uk-margin-top uk-margin-bottom">
+			<div id="list" class="buttons-stacked uk-margin-bottom">
 				<@ ../snippets/filters.php @>
 				<@ ../snippets/sort.php @>
 				<@ ../snippets/clear_search.php @>

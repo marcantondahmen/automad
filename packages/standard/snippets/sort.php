@@ -1,5 +1,4 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-
 	<div class="uk-button-dropdown" data-uk-dropdown>
 		<button class="uk-button">
 			<svg class="bi bi-arrow-up-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -23,22 +22,22 @@
 		<div class="uk-dropdown uk-dropdown-small uk-text-left">
 			<ul class="uk-nav uk-nav-dropdown">
 				<li>
-					<a href="?<@ queryStringMerge { sort: 'date desc', page: 1 } @>">
+					<a href="?<@ queryStringMerge { sort: 'date desc', page: 1 } @>#list">
 						@{ labelSortDateDesc | def('Recent First') }
 					</a>	
 				</li>	
 				<li>
-					<a href="?<@ queryStringMerge { sort: 'date asc', page: 1 } @>">
+					<a href="?<@ queryStringMerge { sort: 'date asc', page: 1 } @>#list">
 						@{ labelSortDateAsc | def('Chronological') }
 					</a>	
 				</li>
 				<li>
-					<a href="?<@ queryStringMerge { sort: 'title asc', page: 1 } @>">
+					<a href="?<@ queryStringMerge { sort: 'title asc', page: 1 } @>#list">
 						@{ labelSortTitleAsc | def('Title A-Z') }
 					</a>	
 				</li>
 				<li>
-					<a href="?<@ queryStringMerge { sort: 'title desc', page: 1 } @>">
+					<a href="?<@ queryStringMerge { sort: 'title desc', page: 1 } @>#list">
 						@{ labelSortTitleDesc | def('Title Z-A') }
 					</a>
 				</li>

@@ -33,30 +33,30 @@
 	--am-slider-controls-background: var(--am-gallery-controls-background);
 
 	// Mail
-	--am-mail-input-margin: 5px 0;
-	--am-mail-input-padding: 4px 8px;
+	--am-mail-input-margin: @form-gutter 0;
+	--am-mail-input-padding: @form-padding;
 	--am-mail-input-color: inherit;
-	--am-mail-input-placeholder-color: #CCCCCC;
-	--am-mail-input-background: inherit;
-	--am-mail-input-radius: 5px;
-	--am-mail-input-border: 1px solid #DDDDDD;
+	--am-mail-input-placeholder-color: @form-placeholder-color;
+	--am-mail-input-background: @form-background;
+	--am-mail-input-radius: @form-radius;
+	--am-mail-input-border: @form-border-width solid @form-border;
 	--am-mail-input-hover-color: var(--am-mail-input-color);
 	--am-mail-input-hover-background: var(--am-mail-input-background);
 	--am-mail-input-hover-border: var(--am-mail-input-border);
 	--am-mail-input-focus-color: var(--am-mail-input-color);
 	--am-mail-input-focus-background: var(--am-mail-input-background);
-	--am-mail-input-focus-border: 1px solid #AAAAAA;
+	--am-mail-input-focus-border: @form-border-width solid @form-focus-border;
 	
 	--am-mail-button-margin: var(--am-mail-input-margin);
-	--am-mail-button-padding: 0 1rem;
-	--am-mail-button-height: 2rem;
-	--am-mail-button-lineheight: 2rem;
+	--am-mail-button-padding: 0 @button-padding-horizontal;
+	--am-mail-button-height: @button-height;
+	--am-mail-button-lineheight: @button-line-height;
 	--am-mail-button-radius: var(--am-mail-input-radius);
 	--am-mail-button-color: inherit;
 	--am-mail-button-background: inherit;
 	--am-mail-button-border: var(--am-mail-input-border);
 	--am-mail-button-hover-color: #FFFFFF;
 	--am-mail-button-hover-background: #222222;
-	--am-mail-button-hover-border: 1px solid #222222;
+	--am-mail-button-hover-border: var(--am-mail-input-border);
 
 }

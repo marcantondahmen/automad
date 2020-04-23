@@ -13,7 +13,7 @@
 
 @form-height:				2.75rem;
 @form-padding:				0.5rem 0.7rem;
-@form-border:				#F2F2F2;
+@form-border:				@border-color;
 @form-border-width:			2px;
 @form-background:			transparent;
 @form-color:				@base-body-color;
@@ -30,13 +30,20 @@
 @form-large-padding:		0.7rem 1rem;
 @form-large-font-size:		1.15rem;
 
+@form-radius:				5px;
+
 .hook-form() {
 	overflow: hidden;
 	resize: none;
-	border-radius: 4px;
+	border-radius: @form-radius;
 }
 
 textarea,
 textarea.uk-form-controls:invalid {
 	min-height: 8rem;
+}
+
+.am-mail-input {
+	box-sizing: border-box;
+	.transition(border-color 0.2s;);
 }
