@@ -11,7 +11,7 @@
  */
 
  
-.sidebar{
+.sidebar {
 
 	will-change: min-height;
 	
@@ -27,16 +27,21 @@
 
 	body.sidebar-left {
 
+		& .sidebar-wrapper {
+			padding-right: @grid-gutter-large-horizontal;
+		}
+
 		& .sidebar-block {
-			
+		
 			& > * {
-				max-width: 85%;
+				max-width: 80%;
 				margin-left: 0;
 			}
 				
 		}
 
 		& .uk-block > .footer {
+			max-width: 60%;
 			margin-left: 25% !important;
 		}
 
@@ -49,26 +54,24 @@
 
 	body.sidebar-right {
 
+		& .sidebar-wrapper {
+			padding-left: @grid-gutter-large-horizontal;
+		}
+
 		& .sidebar-block {
 			
-			padding-right: @grid-gutter-large-horizontal / 2;
-
 			& > * {
-				max-width: 85%;
+				max-width: 80%;
 				margin-right: 0;
 			}
 				
 		}
 
 		& .uk-block > .footer {
-			max-width: 63.5%;
-			margin-right: ~"calc(25% + (@{grid-gutter-large-horizontal} / 8))" !important;
+			max-width: 60%;
+			margin-right: 25% !important;
 		}
-
-		& .sidebar-wrapper {
-			padding-left: @grid-gutter-large-horizontal / 2;
-		}
-
+		
 		& a.next {
 			right: initial;
 			left: 50px;
