@@ -56,13 +56,19 @@
 
 			$(document).on('click', '[' + da.field + '] button', function() {
 
-				var $input = $(this).parent().find('input');
+				link.click(this);
 
-				link.dialog($input, function(url) {
+			});
 
-					$input.val(url).trigger('change');
+		},
 
-				});
+		click: function(button) {
+
+			var $input = $(button).parent().find('input');
+
+			Automad.link.dialog($input, function (url) {
+
+				$input.val(url).trigger('change');
 
 			});
 

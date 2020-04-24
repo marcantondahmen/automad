@@ -114,6 +114,10 @@
 						image: AutomadImage,
 						gallery: AutomadGallery,
 						slider: AutomadSlider,
+						buttons: {
+							class: AutomadButtons,
+							inlineToolbar: ['italic', 'bold'] 
+						},
 						quote: {
 							class: Quote,
 							inlineToolbar: true
