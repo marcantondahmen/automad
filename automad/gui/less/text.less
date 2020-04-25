@@ -84,7 +84,7 @@
 	
 	& a {
 		
-		color: @am-success;
+		color: darken(@am-success, 7%);
 
 		&,
 		&:hover {
@@ -92,7 +92,7 @@
 		}
 
 		&:hover {
-			color: darken(@am-success, 10%);
+			color: darken(@am-success, 20%);
 		}
 		
 	}
@@ -108,11 +108,19 @@
 	& ul:not([class]),
 	& ol:not([class]) {
 
-		padding-left: 2.25rem;
+		padding-left: 2rem;
 
 		& li {
-			padding-top: 0.125rem;
-			padding-bottom: 0.125rem;
+
+			padding-top: 0.15rem;
+			padding-bottom: 0.15rem;
+
+			& ul,
+			& ol {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+
 		}
 
 	}
@@ -144,7 +152,7 @@
 	
 	& blockquote {
 		margin: 1.43rem 0;
-		padding: 1rem;
+		padding: 1.43rem;
 		font-size: inherit;
 		line-height: inherit;
 		background-color: @form-background;

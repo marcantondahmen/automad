@@ -49,8 +49,8 @@
 		"placeholderSubject": "Placeholder text for the subject input field",
 		"showPagesBelow": "Define an alternative URL to be used as the pagelist's parent page, instead of the current one",
 		"slideshowHeight": "The hight of the slideshow in pixels",
-		"text": "The main content of the page",
-		"textTeaser": "The content of the teaser section",
+		"text": "An alternative content variable. It is only displays as long as the +Main variable is empty.",
+		"textTeaser": "An alternative teaser variable. It is only displayed as long as the +Main variable is empty.",
 		"urlTagLinkTarget": "The target URL of the pagelist page for the tag buttons",
 		"urlSearchResults": "The URL of the pagelist page to show the search results"
 	}
