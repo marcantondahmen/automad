@@ -323,7 +323,8 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 										$keysInCurrentTemplate, 
 										$data, 
 										false, 
-										$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+										$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME)),
+										'am-readme-modal'
 									); 
 						?>
 					</div>

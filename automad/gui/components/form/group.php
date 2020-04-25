@@ -62,15 +62,33 @@ class Group {
 	 * 	@param object $Automad
 	 *	@param array $keys
 	 *	@param array $data
-	 *	@param string $addVariableIdPrefix (automatically prefies all IDs for the HTML elements needed for the modal to add variables)
+	 *	@param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
 	 *	@param object $Theme
+	 * 	@param string $readmeModalId
 	 *	@return string The HTML for the textarea
 	 */
 	
-	public static function render($Automad, $keys, $data = array(), $addVariableIdPrefix = false, $Theme = false) {
+	public static function render($Automad, $keys, $data = array(), $addVariableIdPrefix = false, $Theme = false, $readmeModalId = false) {
 			
+		$Text = Text::getObject();
 		$html = '';
 		
+		if ($Theme && $readmeModalId) {
+
+			if ($readme = $Theme->readme) {
+				$html .= \Automad\GUI\Components\Modal\Readme::render($readmeModalId, $Theme->readme);
+				$html .= <<< HTML
+						<div class="uk-margin-small-top">
+							<a href="#$readmeModalId" class="uk-button uk-button-large uk-button-success uk-width-1-1" data-uk-modal>
+								<i class="uk-icon-file-text-o"></i>&nbsp;
+								$Theme->name &mdash; $Text->btn_readme 
+							</a>
+						</div>
+HTML;
+			}
+			
+		}
+
 		// The HTML for the variable fields.
 		foreach ($keys as $key) {
 		
@@ -93,8 +111,6 @@ class Group {
 			$addVarSubmitId = $addVariableIdPrefix . '-submit';
 			$addVarInputlId = $addVariableIdPrefix . '-input';
 			$addVarContainerId = $addVariableIdPrefix . '-container';
-			
-			$Text = Text::getObject();
 
 			$html =	<<< HTML
 					<div id="$addVarContainerId" class="uk-margin-bottom">$html</div>
