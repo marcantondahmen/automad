@@ -1,0 +1,85 @@
+/*
+ *	Standard / Bravo
+ *  Automad Theme
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@breakpoint-small:	480px;
+@breakpoint-medium:	768px;
+@breakpoint-large:	1020px;
+@breakpoint-xlarge:	1250px;
+
+@primary: var(--color-primary, #135df8);
+
+:root {
+	
+	// Gallery
+	--am-gallery-gap: 4px;
+	--am-gallery-item-width: 200px;
+	--am-gallery-z-index: 9999;
+	--am-gallery-max-height: 100%;
+	--am-gallery-max-width: 100%;
+	--am-gallery-background: #FFFFFF;
+	--am-gallery-controls-color: @base-body-color;
+	--am-gallery-controls-background: rgba(255,255,255,0.6);
+
+	// Slider
+	--am-slider-controls-color: var(--am-gallery-controls-color);
+	--am-slider-controls-background: var(--am-gallery-controls-background);
+
+	// Mail
+	--am-mail-input-margin: @form-gutter 0;
+	--am-mail-input-padding: @form-padding;
+	--am-mail-input-color: inherit;
+	--am-mail-input-placeholder-color: @form-placeholder-color;
+	--am-mail-input-background: @form-background;
+	--am-mail-input-radius: 0;
+	--am-mail-input-border: @form-border-width solid @form-border;
+	--am-mail-input-hover-color: var(--am-mail-input-color);
+	--am-mail-input-hover-background: var(--am-mail-input-background);
+	--am-mail-input-hover-border: var(--am-mail-input-border);
+	--am-mail-input-focus-color: var(--am-mail-input-color);
+	--am-mail-input-focus-background: var(--am-mail-input-background);
+	--am-mail-input-focus-border: @form-border-width solid @form-focus-border;
+	
+	--am-mail-button-margin: var(--am-mail-input-margin);
+	--am-mail-button-padding: 0 0.7rem;
+	--am-mail-button-height: @button-height;
+	--am-mail-button-lineheight: @button-line-height;
+	--am-mail-button-radius: var(--am-mail-input-radius);
+	--am-mail-button-color: @primary;
+	--am-mail-button-background: inherit;
+	--am-mail-button-border: @form-border-width solid @primary;
+	--am-mail-button-hover-color: inherit;
+	--am-mail-button-hover-background: inherit;
+	--am-mail-button-hover-border: @form-border-width solid @form-border;
+
+	// Buttons 
+	--am-button-margin: 1.25rem 0.25rem;
+	--am-button-padding: 0 1.2rem;
+	--am-button-font-size: 1.15rem;
+	--am-button-height: 2.85rem;
+	--am-button-lineheight: 2.85rem;
+	--am-button-radius: 0;
+	--am-button-color: inherit;
+	--am-button-background: inherit;
+	--am-button-border: @border-width solid @border-color;
+	--am-button-hover-color: @primary;
+	--am-button-hover-background: inherit;
+	--am-button-hover-border: @border-width solid @primary;
+
+	--am-button-primary-color: @primary;
+	--am-button-primary-background: inherit;
+	--am-button-primary-border: @border-width solid @primary;
+	--am-button-primary-hover-color: inherit;
+	--am-button-primary-hover-background: inherit;
+	--am-button-primary-hover-border: @border-width solid #444444;
+
+}

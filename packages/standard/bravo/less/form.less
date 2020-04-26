@@ -11,26 +11,36 @@
  */
 
 
-@form-height:				auto;
-@form-padding:				0 0;
-@form-border:				#EEEEEE;
-@form-border-width:			0;
+@form-height:				2.75rem;
+@form-padding:				0.5rem 0.7rem;
+@form-border:				@border-color;
+@form-border-width:			@border-width;
 @form-background:			transparent;
 @form-color:				@base-body-color;
 
-@form-focus-border:			@base-body-color;
+@form-focus-border:			@primary;
 @form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
-@form-placeholder-color:	#CCCCCC;
+@form-placeholder-color:	@base-body-color;
 
-@form-gutter:				@utility-margin-small;
+@form-gutter:				0.5rem;
+
+@form-large-height:			3.5rem;
+@form-large-padding:		0.7rem 1rem;
+@form-large-font-size:		1.15rem;
 
 .hook-form() {
-	font-size: 1rem;
-	line-height: @base-body-line-height;
-	font-weight: 400;
-	border-bottom-width: @border-width;
 	overflow: hidden;
 	resize: none;
+}
+
+textarea,
+textarea.uk-form-controls:invalid {
+	min-height: 8rem;
+}
+
+.am-mail-input {
+	box-sizing: border-box;
+	.transition(border-color 0.2s;);
 }

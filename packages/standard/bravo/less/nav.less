@@ -14,26 +14,55 @@
 @nav-padding-vertical:         	0;
 @nav-padding-horizontal:       	0;
 
-@nav-nested-padding-left:      	15px;
+@nav-nested-padding-left:      	1rem;
 @nav-nested-padding-vertical:  	0;
 @nav-nested-padding-horizontal:	0;
 
 @nav-side-color:               	@base-body-color;
 @nav-side-hover-background:    	transparent;
-@nav-side-hover-color:         	@base-body-color;
+@nav-side-hover-color:         	@primary;
 @nav-side-active-background:   	transparent;
-@nav-side-active-color:        	@base-body-color;
-@nav-side-nested-color:        	@base-body-color;
-@nav-side-nested-hover-color:  	@base-body-color;
+@nav-side-active-color:        	@primary;
+@nav-side-nested-color:        	@nav-side-color;
+@nav-side-nested-hover-color:  	@primary;
 
 @nav-dropdown-color:           	@base-body-color;
 @nav-dropdown-hover-background:	#F6F6F6;
-@nav-dropdown-hover-color:     	@base-body-color;
+@nav-dropdown-hover-color:     	@primary;
+
+.hook-nav-side() {
+	display: inline;
+	padding: 0.1rem 0;
+	font-size: 1.15rem;
+	font-weight: 700;
+	line-height: 1.65;
+}
 
 .hook-nav-misc() {
 	
+	.uk-nav-side:first-child {
+		margin-top: -0.4rem;
+	}
+
+	.uk-nav.uk-nav-side li {
+		margin: 0.4rem 0;
+	}
+
 	.uk-nav.uk-nav-side .uk-nav {
-		margin: 5px 0;	
+
+		margin: 0.8rem 0;
+		
+		& > li {
+			margin: 0.2rem 0;
+			padding: 2px 0;
+		}
+
+		& > li > a {
+			font-size: @navbar-nav-font-size;
+			font-weight: @base-body-font-weight;
+			line-height: @base-body-line-height;
+		}
+
 	}
 
 	.uk-nav.uk-nav-autocomplete,
@@ -41,26 +70,22 @@
 		
 		& > li > a {
 			padding: 6px 15px;
-			.transition(background-color 0.2s;);
+			border: none;
+			.transition(background-color 0.2s;);	
 		}
 		
 	}
 
 }
 
-.hook-nav-side() {
-	display: inline-block;
-	margin: 2px 0;
-	font-size: @navbar-nav-font-size;
-	font-weight: @navbar-nav-font-weight;
-	line-height: @base-body-line-height;
-	border-bottom: @border-width solid transparent;	
-}
+.nav-link {
 
-.hook-nav-side-hover() {
-	border-bottom-color: @border-color; 
-}
+	color: @base-body-color;
 
-.hook-nav-side-active() {
-	border-bottom-color: @border-color; 
+	&:hover,
+	&:active,
+	&:focus {
+		color: @primary;
+	}
+
 }

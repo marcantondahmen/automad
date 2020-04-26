@@ -10,11 +10,11 @@
  *  based on UIkit 2
  */
 
-@navbar-background:            	fade(@base-body-background, 97%);
+@navbar-background:            	@base-body-background;
 @navbar-color:                 	@base-body-color;
 
-@navbar-nav-height:            	80px;
-@navbar-nav-height-large:      	90px;
+@navbar-nav-height:            	54px;
+@navbar-nav-height-large:      	64px;
 @navbar-nav-font-size:         	1rem;
 @navbar-nav-font-weight:       	400;
 @navbar-nav-font-family:       	@base-body-font-family;
@@ -22,15 +22,15 @@
 
 @navbar-nav-color:             	@navbar-color;
 @navbar-nav-hover-background:  	transparent;
-@navbar-nav-hover-color:       	@navbar-color;
+@navbar-nav-hover-color:       	@primary;
 @navbar-nav-onclick-background:	transparent;
-@navbar-nav-onclick-color:     	@navbar-color;
+@navbar-nav-onclick-color:     	@primary;
 @navbar-nav-active-background: 	transparent;
-@navbar-nav-active-color:      	@navbar-color;
+@navbar-nav-active-color:      	@primary;
 
-@navbar-brand-font-size: 		16px;
+@navbar-brand-font-size: 		1.25rem;
 
-@navbar-toggle-width: 			18px;
+@navbar-toggle-width: 			20px;
 
 .hook-navbar-misc() {
 	
@@ -40,20 +40,47 @@
 		box-sizing: border-box;
 		z-index: 1000;
 		width: 100%;
+		padding-top: 1rem;
 		top: 0;
+		box-shadow: none;
+		.transition(box-shadow 0.2s, padding 0.2s;);
 		
 		& .uk-modal {
 			z-index: -1;
 		}
+
+		.am-scrolled & {
+			padding-top: 0;
+			.shadow;
+		}
 		
 		&-push {
 			
-			padding-top: @navbar-nav-height !important;
+			padding-top: (@navbar-nav-height * 1.85) !important;
 			
 			@media (min-width: @breakpoint-large) {
-				padding-top: @navbar-nav-height-large !important;
+				padding-top: (@navbar-nav-height-large * 1.85) !important;
 			}
 			
+		}
+
+		&-search-button {
+
+			padding: 0 @navbar-nav-padding-horizontal 5px @navbar-nav-padding-horizontal;
+			height: @navbar-nav-height - 5;
+			line-height: @navbar-nav-height - 5;
+			
+			@media (min-width: @breakpoint-xlarge) {
+				min-height: @navbar-nav-height-large - 5;
+				line-height: @navbar-nav-height-large - 5;
+			}
+
+			&,
+			&:hover,
+			&:focus {
+				fill: @navbar-color;
+			}
+
 		}
 		
 		&-toggle {
@@ -73,7 +100,7 @@
 			}
 			
 			& span {
-				background-color: @navbar-color;
+				background-color: @base-body-color;
 				display: block;
 				height: 2px;
 				left: ~"calc(50% - (@{navbar-toggle-width} / 2))";
@@ -86,20 +113,22 @@
 				transition-property: background-color, opacity, transform, -webkit-transform;
 				transition-timing-function: ease-out;
 				width: @navbar-toggle-width;
+				border-radius: 2px;
 			}
 			
 			& span:nth-child(1) {
-				top: ~"calc(50% - 8px)";
-				width: @navbar-toggle-width * 0.9;
+				top: ~"calc(50% - 7px)";
+				width: @navbar-toggle-width;
 			}
 			
 			& span:nth-child(2) {
-				top: ~"calc(50% - 2px)";
-				width: @navbar-toggle-width * 0.7;
+				top: ~"calc(50% - 1px)";
+				width: @navbar-toggle-width;
 			}
 			
 			& span:nth-child(3) {
-				top: ~"calc(50% + 4px)";
+				top: ~"calc(50% + 5px)";
+				width: @navbar-toggle-width * 0.7;
 			}
 			
 			&.uk-active span:nth-child(1) {
@@ -115,6 +144,7 @@
 			&.uk-active span:nth-child(3) {
 				-webkit-transform: translateY(-6px) rotate(-45deg);
 				transform: translateY(-6px) rotate(-45deg);
+				width: @navbar-toggle-width;
 			}
 				
 		}
@@ -122,8 +152,7 @@
 	}
 	
 	.uk-navbar-brand {
-		font-weight: 500;
-		line-break: 1;
+		font-weight: 700;
 	}
 	
 }
@@ -142,8 +171,6 @@
 
 .hook-navbar-nav() {
 
-	.transition(opacity 0.2s;);
-
 	.uk-modal-page & {
 		opacity: 0;
 		pointer-events: none;
@@ -154,36 +181,6 @@
 		line-height: @navbar-nav-height-large;
 	}
 	
-	&:after {
-		content: '';
-		position: absolute;
-		display: block;
-		left: @navbar-nav-padding-horizontal;
-		right: @navbar-nav-padding-horizontal;
-		bottom: ~"calc(50% - 14px)";
-		padding: inherit;
-		border-bottom: @border-width solid transparent;
-		.transition(border-color 0.2s;);
-	}
-	
-}
-
-.hook-navbar-nav-hover() {
-	&:after {
-		border-bottom-color: inherit;
-	}
-}
-
-.hook-navbar-nav-onclick() {
-	&:after {
-		border-bottom-color: inherit;
-	}
-}
-
-.hook-navbar-nav-active() {
-	&:after {
-		border-bottom-color: inherit;
-	}
 }
 
 .hook-navbar-content() {

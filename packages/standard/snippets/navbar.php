@@ -64,7 +64,7 @@
 				<div class="uk-container uk-container-center navbar-push">
 					<# Search. #>
 					<@~ if @{ urlSearchResults } @>
-						<div class="uk-block uk-margin-bottom-remove">
+						<div class="uk-block uk-margin-bottom-remove uk-margin-top-remove">
 							<form 
 							class="uk-form" 
 							action="@{ urlSearchResults }" 

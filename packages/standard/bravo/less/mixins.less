@@ -12,7 +12,26 @@
 
 
 .shadow() {
-	box-shadow: 0 5px 30px rgba(0,0,0,0.08), 0 5px 50px rgba(0,0,0,0.1);
+	box-shadow: 0 2px 25px 0 rgba(0,0,0,0.08), 0 50px 70px -30px rgba(0, 0, 0, 0.05);
+}
+
+.panel() {
+	.shadow;
+}
+
+.button(@radius: 0) {
+
+	font-weight: 500;
+	border: @border-width solid;
+	border-radius: @radius;
+	.transition(box-shadow 0.2s, border-color 0.2s, color 0.2s;);
+
+	&:hover,
+	&.uk-active {
+		border-color: inherit;
+		.shadow;
+	}
+
 }
 
 .transition(@parameters) {
