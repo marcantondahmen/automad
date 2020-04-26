@@ -40,8 +40,17 @@
 	}
 
 	& > .am-stretched {
-		width: 100%;
-		max-width: 100%;
+		
+		width: ~"calc(100% + (2 * @{utility-container-padding-horizontal}))" !important;
+		max-width: ~"calc(100% + (2 * @{utility-container-padding-horizontal}))" !important;
+		margin: @utility-margin -@utility-container-padding-horizontal !important;
+		
+		@media (min-width: @breakpoint-xlarge) {	
+			width: ~"calc(100% + (2 * @{utility-container-large-padding-horizontal}))" !important;
+			max-width: ~"calc(100% + (2 * @{utility-container-large-padding-horizontal}))" !important;
+			margin: @utility-margin-large -@utility-container-large-padding-horizontal !important;
+		}
+
 	}
 	
 }
