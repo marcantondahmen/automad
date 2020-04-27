@@ -50,8 +50,8 @@
 		border-radius: 4px;
 		.transition(color 0.2s, background-color 0.2s;);
 
-		&:hover,
-		&:focus,
+		&:not(.ce-settings__button--confirm):hover,
+		&:not(.ce-settings__button--confirm):focus,
 		&--focused {
 			color: @button-color !important;
 			background-color: @button-background !important;
