@@ -3,13 +3,13 @@
 		to: @{ email },
 		success: '<div class="uk-margin-bottom">
 					@{ notificationMailSuccess |
-						def ("**Successfully sent email!**") |
+						def ("### Successfully sent email!") |
 						markdown
 					}
 				  </div>',
 		error: '<div class="uk-margin-bottom">
 					@{ notificationMailError | 
-						def ("**Please fill out all fields!**") |
+						def ("### Please fill out all fields!") |
 						markdown
 					}
 				</div>'

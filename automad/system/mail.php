@@ -35,15 +35,14 @@
  */
 
 
-namespace Automad\Blocks;
-use Automad\System as System;
+namespace Automad\System;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The mail block.
+ *	The mail class.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
@@ -54,46 +53,56 @@ class Mail {
 
 
 	/**	
-	 *	Render a mail form block.
+	 * 	Save status to avoid a second trigger for example in pagelists or teaser snippets.
+	 */
+
+	private static $sent = false;
+
+
+	/**	
+	 *	Send mail.
 	 *	
 	 *	@param object $data
 	 *	@param object $Automad
-	 *	@return string the rendered HTML
+	 *	@return string the sendig status
 	 */
 
-	public static function render($data, $Automad) {
+	public static function send($data, $Automad) {
 
-		if (!empty($data->to)) {
+		// Prevent a second call.
+		if (self::$sent) {
+			return $data->success;
+		}
 
-			$defaults = array(
-				'error' => '',
-				'success' => '',
-				'placeholderEmail' => '',
-				'placeholderSubject' => '',
-				'placeholderMessage' => '',
-				'textButton' => ''
-			);
-
-			$options = array_merge($defaults, (array) $data);
-			$data = (object) $options;
-
-			$status = System\Mail::send($data, $Automad);
-
-			if ($status) {
-				$status = "<h3>$status</h3>";
-			}
-
-			return <<< HTML
-					$status
-					<form action="" method="post" class="am-mail-form">	
-						<input type="text" name="human" value="">	
-						<input class="am-mail-input" type="text" name="from" value="" placeholder="$data->placeholderEmail">
-						<input class="am-mail-input" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
-						<textarea class="am-mail-input" name="message" placeholder="$data->placeholderMessage"></textarea>
-						<button class="am-mail-button" type="submit">$data->textButton</button>	
-					</form>
-HTML;
-
+		// Define field names.
+		$honeypot = 'human';
+		$from = 'from';
+		$subject = 'subject';
+		$message = 'message';
+		
+		// Basic checks.
+		if (empty($_POST) || empty($data->to)) {
+			return false;
+		}
+	
+		// Check optional honeypot to verify human.
+		if (isset($_POST[$honeypot]) && $_POST[$honeypot] != false) {
+			return false;
+		}
+	
+		// Check if form fields are not empty.
+		if (empty($_POST[$from]) || empty($_POST[$subject]) || empty($_POST[$message])) {
+			return $data->error;
+		}
+	
+		// Prepare mail.
+		$subject = $Automad->Shared->get(AM_KEY_SITENAME) . ': ' . strip_tags($_POST[$subject]);
+		$message = strip_tags($_POST[$message]);
+		$header = 'From: ' . preg_replace('/[^\w\d\.@\-]/', '', $_POST[$from]);
+		
+		if (mail($data->to, $subject, $message, $header)) {
+			self::$sent = true;
+			return $data->success;
 		}
 
 	}

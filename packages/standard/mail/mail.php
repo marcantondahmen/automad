@@ -13,7 +13,7 @@
 
 
 namespace Standard;
-use Automad\Blocks as Blocks;
+use Automad\System as System;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -57,14 +57,14 @@ class Mail {
 		
 		$defaults = array(
 			'to' => false,
-			'error' => '<b>Please fill out all fields!</b>',
-			'success' => '<b>Successfully sent email!</b>'
+			'error' => 'Please fill out all fields!',
+			'success' => 'Successfully sent email!'
 		);
 		
 		// Merge defaults with options.
 		$options = array_merge($defaults, $options);
 		
-		return Blocks\Mail::send((object) $options, $Automad);
+		return System\Mail::send((object) $options, $Automad);
 	
 	}
 	
