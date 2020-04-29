@@ -16,13 +16,14 @@
 }
 
 .panel() {
+	border-radius: @button-radius;
 	.shadow;
 }
 
-.button(@radius: 0) {
+.button(@radius: @button-radius) {
 
 	font-weight: 500;
-	border: @border-width solid;
+	border: 2px solid @border-color;
 	border-radius: @radius;
 	.transition(box-shadow 0.2s, border-color 0.2s, color 0.2s;);
 

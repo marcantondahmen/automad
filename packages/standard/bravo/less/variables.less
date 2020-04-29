@@ -16,12 +16,12 @@
 @breakpoint-large:	1020px;
 @breakpoint-xlarge:	1250px;
 
-@primary: var(--color-primary, #135df8);
+@primary: var(--color-primary, #006de9);
 
 :root {
 	
 	// Gallery
-	--am-gallery-gap: 2px;
+	--am-gallery-gap: 10px;
 	--am-gallery-item-width: 200px;
 	--am-gallery-z-index: 9999;
 	--am-gallery-max-height: 100%;
@@ -40,7 +40,7 @@
 	--am-mail-input-color: inherit;
 	--am-mail-input-placeholder-color: @form-placeholder-color;
 	--am-mail-input-background: @form-background;
-	--am-mail-input-radius: 0;
+	--am-mail-input-radius: @button-radius;
 	--am-mail-input-border: @form-border-width solid @form-border;
 	--am-mail-input-hover-color: var(--am-mail-input-color);
 	--am-mail-input-hover-background: var(--am-mail-input-background);
@@ -56,10 +56,10 @@
 	--am-mail-button-radius: var(--am-mail-input-radius);
 	--am-mail-button-color: @primary;
 	--am-mail-button-background: inherit;
-	--am-mail-button-border: @form-border-width solid @primary;
+	--am-mail-button-border: 2px solid @primary;
 	--am-mail-button-hover-color: inherit;
 	--am-mail-button-hover-background: inherit;
-	--am-mail-button-hover-border: @form-border-width solid @form-border;
+	--am-mail-button-hover-border: 2px solid @form-border;
 
 	// Buttons 
 	--am-button-margin: 1.25rem 0.25rem;
@@ -67,19 +67,19 @@
 	--am-button-font-size: 1.15rem;
 	--am-button-height: 2.85rem;
 	--am-button-lineheight: 2.85rem;
-	--am-button-radius: 0;
+	--am-button-radius: @button-radius;
 	--am-button-color: inherit;
 	--am-button-background: inherit;
-	--am-button-border: @border-width solid @border-color;
+	--am-button-border: 2px solid @border-color;
 	--am-button-hover-color: @primary;
 	--am-button-hover-background: inherit;
-	--am-button-hover-border: @border-width solid @primary;
+	--am-button-hover-border: 2px solid @primary;
 
 	--am-button-primary-color: @primary;
 	--am-button-primary-background: inherit;
-	--am-button-primary-border: @border-width solid @primary;
+	--am-button-primary-border: 2px solid @primary;
 	--am-button-primary-hover-color: inherit;
 	--am-button-primary-hover-background: inherit;
-	--am-button-primary-hover-border: @border-width solid #444444;
+	--am-button-primary-hover-border: 2px solid #444444;
 
 }

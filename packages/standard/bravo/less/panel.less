@@ -29,19 +29,12 @@
 
 .hook-panel-box() {
 	
-	& > * + .uk-panel-teaser {
-		margin-top: @panel-teaser-margin-bottom !important;
-	}
-
-	& .uk-panel-title a:not([class]) {
-		color: inherit;
-		&:hover {
-			color: @primary;
-		}
-	}
-
 	& .uk-panel-teaser {
 		overflow: hidden;
+	}
+
+	& > * + .uk-panel-teaser {
+		margin-top: @panel-teaser-margin-bottom !important;
 	}
 
 	& .uk-panel-teaser img {
@@ -55,6 +48,16 @@
 			transform: scale(1.1);
 		}
 
+	}
+
+	& .uk-panel-title a:not([class]) {
+
+		color: inherit;
+
+		&:hover {
+			color: @primary;
+		}
+		
 	}
 
 }

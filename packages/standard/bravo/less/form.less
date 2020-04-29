@@ -13,7 +13,7 @@
 
 @form-height:				2.75rem;
 @form-padding:				0.5rem 0.7rem;
-@form-border:				@border-color;
+@form-border:				#EEEEEE;
 @form-border-width:			@border-width;
 @form-background:			transparent;
 @form-color:				@base-body-color;
@@ -30,9 +30,13 @@
 @form-large-padding:		0.7rem 1rem;
 @form-large-font-size:		1.15rem;
 
+@form-radius: 				@button-radius;
+
 .hook-form() {
 	overflow: hidden;
 	resize: none;
+	box-shadow: none !important;
+	border-radius: @form-radius;
 }
 
 textarea,

@@ -7,12 +7,13 @@
   				<path d="M7.002 12a1 1 0 112 0 1 1 0 01-2 0zM7.1 5.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 5.995z"/>
 			</svg>
 		</p>
-		<h1 class="uk-margin-large-bottom">
+		<h1 class=" uk-margin-large-bottom">
 			404 
-			<br>
-			<span class="text-subtitle">
-				Page not found
-			</span>
+			&mdash;
+			Page not found
 		</h1>
+		<div class="uk-margin-large-bottom">
+			<a href="/" class="uk-button">Back Home</a>
+		</div>
 	</div>
 <@ snippets/footer.php @>

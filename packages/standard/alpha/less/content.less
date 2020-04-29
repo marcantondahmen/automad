@@ -45,15 +45,17 @@
 		text-align: left;
 
 		& th {
-			padding: 0.5rem 0;
+			padding: 0.5rem;
+			padding-left: 0;
 			font-weight: inherit;
 			border-bottom: 1px solid @border-color;
+			vertical-align: top;
 		}
 
 		& tr:first-child th {
-			font-weight: 400;
-			color: @text-muted-color;
-			border-bottom: @border-width solid @border-color;
+			font-weight: 500;
+			border-bottom: 2px solid @border-color;
+			white-space: nowrap !important;
 		}
 
 		& tr:last-child th {
@@ -90,7 +92,6 @@
 
 	& figcaption {
 		margin-top: 0.75rem;
-		color: @text-muted-color;
 	}
 
 	& blockquote {

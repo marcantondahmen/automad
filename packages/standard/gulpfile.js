@@ -115,8 +115,7 @@ gulp.task('bravo-less', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('alpha/less/*.less', ['alpha-less']);
-	gulp.watch('bravo/less/*.less', ['bravo-less']);
+	gulp.watch('*/less/*.less', ['alpha-less', 'bravo-less']);
 	gulp.watch('js/*.js', ['standard-js']);
 	
 });
