@@ -61,24 +61,40 @@ class Embed {
 
 	public static function render($data) {
 
-		$iframe = <<< HTML
+		$attr = 'scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true"';
+
+		if (!empty($data->width)) {
+
+			$paddingTop = $data->height / $data->width * 100;
+			$html = <<< HTML
+					<div style="position: relative; padding-top: $paddingTop%;">
+						<iframe 
+						src="$data->embed"
+						$attr
+						style="position: absolute; top: 0; width: 100%; height: 100%;"
+						>
+						</iframe>
+					</div>
+HTML;
+
+		} else {
+
+			$html = <<< HTML
 					<iframe 
 					src="$data->embed"
 					height="$data->height"
-					width="$data->width"
-					scrolling='no' 
-					frameborder='no' 
-					allowtransparency='true' 
-					allowfullscreen='true' 
-					style='width: 100%;'
+					$attr
+					style="width: 100%;"
 					>
 					</iframe>
 HTML;
 
+		}
+
 		if (empty($data->caption)) {
-			return "<figure>$iframe</figure>";
+			return "<figure>$html</figure>";
 		} else {
-			return "<figure>$iframe<figcaption>$data->caption</figcaption></figure>";
+			return "<figure>$html<figcaption>$data->caption</figcaption></figure>";
 		}
 
 	}
