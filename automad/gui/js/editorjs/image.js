@@ -34,16 +34,6 @@
  */
 
 
-+function (Automad, UIkit) {
-
-	Automad.imageBlock = {
-		
-		UIkit: UIkit
-
-	}
-
-}(window.Automad = window.Automad || {}, UIkit);
-
 class AutomadImage {
 
 	constructor({data, api}) {
@@ -74,7 +64,7 @@ class AutomadImage {
 			block.select();
 		});
 
-		this.settings = this.renderStretchSetting(this, this.wrapper);
+		this.settings = this.renderStretchSetting();
 
 	}
 
@@ -157,9 +147,10 @@ class AutomadImage {
 
 	}
 
-	renderStretchSetting(block, blockWrapper) {
+	renderStretchSetting() {
 
-		var wrapper = document.createElement('div'),
+		var block = this,
+			wrapper = document.createElement('div'),
 			button = document.createElement('div'),
 			icon = '<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>',
 			toggleStretch = function () {
