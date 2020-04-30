@@ -14,7 +14,7 @@
     "gulp-uglify": "^2.1.2",
     "gulp-util": "^3.0.8",
     "imagesloaded": "^4.1.4",
-    "jquery": "^2.2.4",
+    "jquery": "^3.5.0",
     "masonry-layout": "^4.2.1",
     "merge2": "^1.0.3"
   },
