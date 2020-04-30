@@ -1,19 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-
-<@~ if @{ :pagelistCount } > 2 ~@>
-	<@ set { 
-		:container: 'am-stretched masonry uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3'
-	} @>
-<@~ else ~@>
-	<@ set { 
-		:container: 'uk-grid uk-grid-width-small-1-2'
-	} @>
-<@~ end ~@>
-
-<ul class="@{ :container }">
+<div class="masonry<@ if @{ :pagelistCount } > 1 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
-		<li>
-			<div class="uk-panel uk-panel-box uk-height-1-1">
+		<div class="masonry-item uk-panel uk-panel-box">
+			<div class="masonry-content">
 				<@~ ../../snippets/set_imageteaser_variable.php @>
 				<@~ if @{ :imageTeaser } @>
 					<div class="uk-panel-teaser">
@@ -30,10 +19,12 @@
 				</div>
 				<@ more.php @>
 			</div>
-		</li>
+		</div>
 	<@ else @>
-		<li>
-			<h4>@{ notificationNoSearchResults | def ('No Pages Found') }</h4>
-		</li>
+		<div class="masonry-item">
+			<h4 class="masonry-content">
+				@{ notificationNoSearchResults | def ('No Pages Found') }
+			</h4>
+		</div>
 	<@~ end @>
-</ul>
+</div>

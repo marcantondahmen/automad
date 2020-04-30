@@ -42,8 +42,7 @@ gulp.task('standard-js', function() {
 	return 	merge2(
 			gulp.src([
 				'node_modules/jquery/dist/jquery.min.js',
-				'node_modules/imagesloaded/imagesloaded.pkgd.min.js',
-				'node_modules/masonry-layout/dist/masonry.pkgd.min.js'
+				'node_modules/imagesloaded/imagesloaded.pkgd.min.js'
 			]),
 			gulp.src([
 				// Core. 
@@ -116,6 +115,7 @@ gulp.task('bravo-less', function() {
 gulp.task('watch', function() {
 
 	gulp.watch('*/less/*.less', ['alpha-less', 'bravo-less']);
+	gulp.watch('less/*.less', ['alpha-less', 'bravo-less']);
 	gulp.watch('js/*.js', ['standard-js']);
 	
 });

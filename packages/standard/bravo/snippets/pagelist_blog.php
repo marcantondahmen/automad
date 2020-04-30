@@ -1,15 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-
-<@~ if @{ :pagelistCount } > 1 ~@>
-	<@ set { :classes: 'masonry am-stretched uk-grid uk-grid-width-large-1-2' } @>
-<@~ else ~@>
-	<@ set { :classes: 'uk-grid uk-grid-width-1-1' } @>
-<@~ end ~@>
-
-<ul class="@{ :classes }">
+<div class="masonry masonry-large<@ if @{ :pagelistCount } > 0 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
-		<li>
-			<div class="uk-panel uk-panel-box">
+		<div class="masonry-item uk-panel uk-panel-box">
+			<div class="masonry-content">
 				<div class="uk-panel-title">
 					<a href="@{ url }" class="nav-link">@{ title }</a>
 					<@ subtitle.php @>
@@ -24,10 +17,12 @@
 				<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
 				<@ more.php @>
 			</div>
-		</li>
+		</div>
 	<@ else @>
-		<li>
-			<h4>@{ notificationNoSearchResults | def ('No Pages Found') }</h4>
-		</li>
+		<div class="masonry-item">
+			<h4 class="masonry-content">
+				@{ notificationNoSearchResults | def ('No Pages Found') }
+			</h4>
+		</div>
 	<@~ end @>
-</ul>
+</div>

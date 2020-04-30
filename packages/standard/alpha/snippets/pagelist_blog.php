@@ -1,33 +1,30 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-
-<@~ if @{ :pagelistCount } > 1 ~@>
-	<@ set { :classes: 'masonry am-stretched uk-grid uk-grid-width-large-1-2' } @>
-<@~ else ~@>
-	<@ set { :classes: 'uk-grid uk-grid-width-1-1' } @>
-<@~ end ~@>
-
-<ul class="@{ :classes }">
-	<@ foreach in pagelist ~@>
-		<li>
-			<div class="uk-panel uk-panel-box">
-				<div class="uk-panel-title">
-					<a href="@{ url }" class="nav-link">@{ title }</a>
-					<@ subtitle.php @>
-				</div>
-				<@~ ../../snippets/set_imageteaser_variable.php @>
-				<@ if @{ :imageTeaser } ~@>
-					<div class="uk-panel-teaser">
-						<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
+<section <@~ if @{ :pagelistCount } > 1 @> class="am-stretched"<@ end @>>
+	<div class="masonry masonry-large">
+		<@ foreach in pagelist ~@>
+			<div class="masonry-item">
+				<div class="masonry-content uk-panel uk-panel-box">
+					<div class="uk-panel-title">
+						<a href="@{ url }" class="nav-link">@{ title }</a>
+						<@ subtitle.php @>
 					</div>
-				<@~ end @>
-				<@~ ../../snippets/set_teaser_variable.php @>
-				<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
-				<@ more.php @>
+					<@~ ../../snippets/set_imageteaser_variable.php @>
+					<@ if @{ :imageTeaser } ~@>
+						<div class="uk-panel-teaser">
+							<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
+						</div>
+					<@~ end @>
+					<@~ ../../snippets/set_teaser_variable.php @>
+					<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
+					<@ more.php @>
+				</div>
 			</div>
-		</li>
-	<@ else @>
-		<li>
-			<h4>@{ notificationNoSearchResults | def ('No Pages Found') }</h4>
-		</li>
-	<@~ end @>
-</ul>
+		<@ else @>
+			<div class="masonry-item">
+				<h4 class="masonry-content">
+					@{ notificationNoSearchResults | def ('No Pages Found') }
+				</h4>
+			</div>
+		<@~ end @>
+	</div>
+</section>

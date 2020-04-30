@@ -1,0 +1,60 @@
+/*
+ *	Standard / Alpha
+ *  Automad Theme
+ *
+ *	Copyright (c) 2017-2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@masonry-gap: 0px;
+@masonry-item-width: 23rem;
+@masonry-large-item-width: 32rem;
+
+@masonry-item-padding: 25px;
+@masonry-item-padding-large: 35px;
+
+.masonry {
+
+	margin: 0 -@masonry-item-padding;
+
+	&-item {
+		padding: @masonry-item-padding;
+	}
+
+	@media (min-width: @breakpoint-xlarge) {
+	
+		margin: 0 -@masonry-item-padding-large;
+		
+		&-item {
+			padding: @masonry-item-padding-large;
+		}
+	
+	}
+
+	.am-stretched & {
+
+		margin: 0 (@utility-container-padding-horizontal - @masonry-item-padding);
+
+		&-item {
+			padding: @masonry-item-padding;
+		}
+
+		@media (min-width: @breakpoint-xlarge) {
+		
+			margin: 0 (@utility-container-large-padding-horizontal - @masonry-item-padding-large);
+			
+			&-item {
+				padding: @masonry-item-padding-large;
+			}
+		
+		}
+		
+	}
+
+}
+
