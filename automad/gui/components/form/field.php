@@ -171,21 +171,81 @@ HTML;
 
 	
 	/**
-	 *	Create markup for a checkbox.
+	 *	Create markup for a checkbox with optional 'default' option for page data.
 	 *
 	 * 	@param string $text
 	 * 	@param string $attr
+	 * 	@param string $value
+	 * 	@param string $shared
+	 * 	@param boolean $isPage
 	 * 	@return string The rendered markup
 	 */
 
-	private static function fieldCheckbox($text, $attr) {
+	private static function fieldCheckbox($text, $attr, $value, $shared, $isPage) {
+		
+		if ($isPage) {
 
-		return <<< HTML
-				<label class="am-toggle-switch uk-button" data-am-toggle> 
-					$text
-					<input $attr type="checkbox" />
-				</label>
+			$options = array(
+				(object) array(
+					'value' => '',
+					'text' => 'Undefined - Use Shared Default',
+					'selected' => ($value === '')
+				),
+				(object) array(
+					'value' => '1',
+					'text' => 'On',
+					'selected' => ($value == true)
+				),
+				(object) array(
+					'value' => '0',
+					'text' => 'Off',
+					'selected' => ($value == false && strlen($value))
+				)
+			);
+
+			$optionsHtml = '';
+
+			foreach ($options as $option) {
+
+				$selected = '';
+				
+				if ($option->selected) {
+					$selected = 'selected';
+				}
+
+				$optionsHtml .= '<option value="' . $option->value . '" ' . $selected . '>' . $option->text . '</option>';
+
+			}
+			
+			return <<< HTML
+					<div 
+					class="uk-button uk-text-left uk-form-select uk-width-1-1" 
+					data-uk-form-select="{activeClass:''}" 
+					data-am-toggle-default="$shared"
+					> 
+						&nbsp; $text
+						<select $attr>
+							$optionsHtml
+						</select> 
+					</div>
 HTML;
+
+		} else {
+
+			$checked = '';
+
+			if ($value) {
+				$checked = 'checked';
+			}
+
+			return <<< HTML
+					<label class="am-toggle-switch uk-button" data-am-toggle> 
+						$text
+						<input $attr type="checkbox" $checked>
+					</label>
+HTML;
+
+		}
 
 	}
 
@@ -473,12 +533,8 @@ HTML;
 
 		} else if (strpos($key, 'checkbox') === 0) {
 			
-			if ($value) {
-				$attr .= ' checked';
-			}
-
 			$text = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', str_replace('checkbox', '', $key)))));
-			$html .= self::fieldCheckbox($text, $attr);
+			$html .= self::fieldCheckbox($text, $attr, $value, $shared, ($url || $context));
 
 		} else if (strpos($key, 'color') === 0) {
 
