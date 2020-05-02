@@ -25,11 +25,11 @@
 
 @navbar-nav-color:             	@navbar-color;
 @navbar-nav-hover-background:  	transparent;
-@navbar-nav-hover-color:       	@primary;
+@navbar-nav-hover-color:       	@text-color;
 @navbar-nav-onclick-background:	transparent;
-@navbar-nav-onclick-color:     	@primary;
+@navbar-nav-onclick-color:     	@text-color;
 @navbar-nav-active-background: 	transparent;
-@navbar-nav-active-color:      	@primary;
+@navbar-nav-active-color:      	@text-color;
 
 @navbar-brand-font-size: 		1.25rem;
 
@@ -54,7 +54,7 @@
 
 		.am-scrolled & {
 			padding-top: 0;
-			.shadow;
+			border-bottom: @border-width solid @panel-bg-color;
 		}
 		
 		&-push {
@@ -101,7 +101,7 @@
 				width: @navbar-nav-height-large;
 				margin-right: -((@navbar-nav-height-large - @navbar-toggle-width) / 2) + @navbar-nav-padding-horizontal;
 			}
-			
+
 			& span {
 				background-color: @base-body-color;
 				display: block;
@@ -117,6 +117,12 @@
 				transition-timing-function: ease-out;
 				width: @navbar-toggle-width;
 				border-radius: 2px;
+			}
+
+			&:hover {
+				& span {
+					background-color: @muted-color;
+				}	
 			}
 			
 			& span:nth-child(1) {
@@ -169,7 +175,7 @@
 		margin: 0 -@utility-container-large-padding-horizontal;
 		padding: 0 (@utility-container-large-padding-horizontal - @navbar-nav-padding-horizontal);
 	} 
-	
+
 }
 
 .hook-navbar-nav() {
@@ -183,7 +189,37 @@
 		height: @navbar-nav-height-large;
 		line-height: @navbar-nav-height-large;
 	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		left: @navbar-nav-padding-horizontal;
+		right: @navbar-nav-padding-horizontal;
+		bottom: ~"calc(50% - 14px)";
+		padding: inherit;
+		border-bottom: 1px solid transparent;
+		.transition(border-color 0.2s;);
+	}
 	
+}
+
+.hook-navbar-nav-hover() {
+	&:after {
+		border-bottom-color: @navbar-color;
+	}
+}
+
+.hook-navbar-nav-onclick() {
+	&:after {
+		border-bottom-color: @navbar-color;
+	}
+}
+
+.hook-navbar-nav-active() {
+	&:after {
+		border-bottom-color: @navbar-color;
+	}
 }
 
 .hook-navbar-content() {

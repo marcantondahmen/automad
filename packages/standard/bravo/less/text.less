@@ -11,27 +11,21 @@
  */
 
 
-@text-muted-color: 		#D7D7D7;
+@text-muted-color: 		@muted-color;
 
 .text-subtitle {
 	
-	padding-top: 0.2rem;
+	padding-top: 0.5rem;
 	font-size: 1rem;
 	line-height: 1.5;
-	font-weight: 500;
+	font-weight: @base-body-font-weight;
 	
 	h1 + div & {
-		padding-top: 0.7rem;
+		padding-top: 1rem;
 	}
 
 	& a:not([class]) {
-
-		color: inherit;
-
-		&:hover {
-			color: @primary;
-		}
-	
+		.hover-underline;
 	}
 
 }

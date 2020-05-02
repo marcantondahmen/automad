@@ -11,17 +11,17 @@
  */
 
 
-@border-color: 						#444444;
+@border-color: 						@border;
 @border-width: 						2px;
 @border:							@border-width solid @border-color;
 
-@base-body-background:				#FFFFFF;
+@base-body-background:				@bg-color;
 @base-body-font-family:				'Inter', sans-serif;
 @base-heading-font-family:			@base-body-font-family;
-@base-body-color:					#333333;
+@base-body-color:					@text-color;
 @base-body-font-size: 				16px;
-@base-body-line-height: 			1.5;
-@base-body-font-weight:				500;
+@base-body-line-height: 			1.75;
+@base-body-font-weight:				400;
 @base-link-hover-text-decoration: 	none;
 
 @base-margin-vertical:				@utility-margin-small;
@@ -30,7 +30,7 @@
 @base-heading-color:				@base-body-color;
 @base-heading-text-transform:		none;
 @base-heading-margin-top:			@utility-margin;
-@base-h1-font-size:   				2.6rem;
+@base-h1-font-size:   				3.25rem;
 @base-h1-line-height: 				1.1;
 @base-h2-font-size:   				1.95rem;
 @base-h2-line-height: 				1.225;
@@ -89,6 +89,7 @@ h1 {
 	margin-top: @utility-margin;
 	margin-bottom: @utility-margin;
 	letter-spacing: -0.08rem;
+	font-weight: 800;
 }
 
 h2 {

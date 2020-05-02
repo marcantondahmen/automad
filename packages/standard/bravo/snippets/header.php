@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" <@ if @{ checkboxLightColorScheme } @>class="light"<@ end @>>
 <head>
 	<@ set { :version: '<?php echo AM_VERSION; ?>' } @>
 	<meta charset="utf-8">

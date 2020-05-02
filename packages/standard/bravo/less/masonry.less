@@ -1,0 +1,34 @@
+/*
+ *	Standard / Bravo
+ *  Automad Theme
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ *
+ *  based on UIkit 2
+ */
+
+
+@masonry-auto-rows: 30px;
+@masonry-item-width: 360px;
+@masonry-large-item-width: 480px;
+@masonry-gap: 4px;
+
+.masonry {
+
+	position: relative;
+	margin-top: @utility-margin;
+	margin-bottom: @utility-margin;
+	
+	@media (min-width: @breakpoint-xlarge) {	
+		margin-top: @utility-margin-large;
+		margin-bottom: @utility-margin-large;
+	}
+
+	&-item {
+		background-color: @panel-box-background;
+	}
+
+}

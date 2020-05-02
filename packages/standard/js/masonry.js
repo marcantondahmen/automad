@@ -115,7 +115,7 @@
 				var masonry = this,
 					$items = $(masonry).find(Standard.masonry.selectors.item),
 					rowHeight = parseInt(window.getComputedStyle(masonry).getPropertyValue('grid-auto-rows')),
-					rowGap = parseInt(window.getComputedStyle(masonry).getPropertyValue('grid-row-gap'));	
+					rowGap = parseInt(window.getComputedStyle(masonry).getPropertyValue('row-gap'));	
 
 				$items.each(function() {
 					this.style.gridRowStart = '';

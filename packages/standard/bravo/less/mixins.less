@@ -11,13 +11,21 @@
  */
 
 
-.shadow() {
-	box-shadow: 0 2px 25px 0 rgba(0,0,0,0.08), 0 50px 70px -30px rgba(0, 0, 0, 0.05);
+.outline() {
+	border: @border-width solid @panel-bg-color;
 }
 
-.panel() {
-	border-radius: @button-radius;
-	.shadow;
+.hover-underline() {
+
+	color: inherit;
+	padding: 1px 0;
+	border-bottom: 1px solid transparent;
+
+	&:hover {
+		color: @text-color !important;
+		border-bottom: 1px solid;
+	}
+
 }
 
 .button(@radius: @button-radius) {
@@ -30,7 +38,6 @@
 	&:hover,
 	&.uk-active {
 		border-color: inherit;
-		.shadow;
 	}
 
 }

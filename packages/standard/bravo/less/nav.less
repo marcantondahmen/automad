@@ -20,22 +20,23 @@
 
 @nav-side-color:               	@base-body-color;
 @nav-side-hover-background:    	transparent;
-@nav-side-hover-color:         	@primary;
+@nav-side-hover-color:         	@text-color;
 @nav-side-active-background:   	transparent;
-@nav-side-active-color:        	@primary;
+@nav-side-active-color:        	@text-color;
 @nav-side-nested-color:        	@nav-side-color;
-@nav-side-nested-hover-color:  	@primary;
+@nav-side-nested-hover-color:  	@text-color;
 
 @nav-dropdown-color:           	@base-body-color;
-@nav-dropdown-hover-background:	#F8F8F8;
+@nav-dropdown-hover-background:	@panel-bg-color;
 @nav-dropdown-hover-color:     	@base-body-color;
 
 .hook-nav-side() {
 	display: inline;
 	padding: 0.1rem 0;
 	font-size: 1.15rem;
-	font-weight: 700;
+	font-weight: 500;
 	line-height: 1.65;
+	border-bottom: 1px solid transparent;
 }
 
 .hook-nav-misc() {
@@ -78,6 +79,14 @@
 
 }
 
+.hook-nav-side-hover() {
+	border-bottom-color: @nav-side-color; 
+}
+
+.hook-nav-side-active() {
+	border-bottom-color: @nav-side-color; 
+}
+
 .nav-link {
 
 	color: @base-body-color;
@@ -85,7 +94,7 @@
 	&:hover,
 	&:active,
 	&:focus {
-		color: @primary;
+		color: @text-muted-color;
 	}
 
 }

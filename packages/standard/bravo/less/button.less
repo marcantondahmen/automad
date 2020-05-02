@@ -14,15 +14,15 @@
 @button-background:					transparent;
 @button-color:              		@base-body-color;
 @button-hover-background:   		transparent;
-@button-hover-color:        		@primary;
+@button-hover-color:        		@text-color;
 @button-active-background:  		@button-hover-background;
 @button-active-color:       		@button-hover-color;
 
 @button-height:	 					2.35rem;
 @button-line-height: 				@button-height;
-@button-padding-horizontal: 		0.7rem;
+@button-padding-horizontal: 		1rem;
 
-@button-radius: 5px;
+@button-radius: 0;
 
 .hook-button() {
 	.button;
@@ -48,10 +48,5 @@
 .am-mail-button {
 
 	.transition(box-shadow 0.2s, border-color 0.2s;);
-
-	&:hover,
-	&.uk-active {
-		.shadow;
-	}
 
 }
