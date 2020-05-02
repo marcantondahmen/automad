@@ -9,15 +9,19 @@
 
 
 @masonry-gap: 2px;
+@masonry-column-gap: @masonry-gap;
+@masonry-row-gap: @masonry-gap;
+@masonry-auto-rows: 1px;
 @masonry-item-width: 350px;
 @masonry-large-item-width: 500px;
 
 .masonry {
 
 	display: grid;
-	gap: @masonry-gap;
+	column-gap: @masonry-column-gap;
+	row-gap: @masonry-row-gap;
 	grid-template-columns: repeat(auto-fill, minmax(@masonry-item-width, 1fr));
-	grid-auto-rows: 2px;
+	grid-auto-rows: @masonry-auto-rows;
 
 	&-large {
 		grid-template-columns: repeat(auto-fill, minmax(@masonry-large-item-width, 1fr));

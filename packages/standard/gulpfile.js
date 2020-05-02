@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 	merge2 = require('merge2'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
-	uglify = require('gulp-uglify'),
+	uglify = require('gulp-uglify-es').default,
 	gutil = require('gulp-util'),
 	cleanCSSOptions = {
 		format: { wrapAt: 500 },

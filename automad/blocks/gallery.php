@@ -105,7 +105,7 @@ class Gallery {
 				if ($data->masonry) {
 
 					$span = round($Image->height / ($masonryRowHeight * 2) );
-					$attr = 'style="--am-gallery-masonry-rows: ' . $span . ';"';
+					$attr = 'class="am-gallery-masonry-item" style="--am-gallery-masonry-rows: ' . $span . ';"';
 
 				} else {
 
