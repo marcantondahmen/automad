@@ -23,8 +23,18 @@
 	grid-template-columns: repeat(auto-fill, minmax(@masonry-item-width, 1fr));
 	grid-auto-rows: @masonry-auto-rows;
 
+	@media (max-width: (@masonry-item-width * 1.75)) {
+		grid-template-columns: 1fr;
+	}
+
 	&-large {
+
 		grid-template-columns: repeat(auto-fill, minmax(@masonry-large-item-width, 1fr));
+
+		@media (max-width: (@masonry-large-item-width * 1.75)) {
+			grid-template-columns: 1fr;
+		}
+
 	}
 
 }

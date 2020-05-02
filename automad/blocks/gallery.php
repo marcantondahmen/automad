@@ -82,6 +82,10 @@ class Gallery {
 				return Parse::fileIsImage($file);
 			});
 
+			// Adding styles for devices smaller than width.
+			$maxWidth = $data->width * 1.75;
+			$style = "<style scoped>@media (max-width: ${maxWidth}px) { .am-gallery-masonry, .am-gallery-grid { grid-template-columns: 1fr; } }</style>";
+
 			$figureAttr = '';
 
 			if ($data->stretched) {
@@ -94,7 +98,9 @@ class Gallery {
 				$layout = 'masonry';
 			}
 
-			$html = '<figure ' . $figureAttr . '><div class="am-gallery-' . $layout . '" style="--am-gallery-item-width:' . $data->width . 'px">';
+			$html = '<figure ' . $figureAttr . '>' . 
+					$style . 
+					'<div class="am-gallery-' . $layout . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 
 			foreach ($files as $file) {
 
