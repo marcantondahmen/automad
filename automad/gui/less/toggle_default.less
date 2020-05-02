@@ -43,7 +43,11 @@
 		content: '\f204'; // off	
 	}
 
-	&[data-selected="1"]:before  {
+	&[data-selected="1"].uk-button {
+		background-color: @button-active-background;
+	}
+
+	&[data-selected="1"]:before {
 		content: '\f205'; // on
 	}
 
