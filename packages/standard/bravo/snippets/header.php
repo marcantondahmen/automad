@@ -32,6 +32,6 @@
 	@{ itemsHeader }
 </head>
 
-<body class="@{ theme | sanitize } @{ :template | sanitize }">
+<body class="@{ theme | sanitize } @{ :template | sanitize } masonry-clean-bottom-edge">
 	<@ ../../snippets/navbar.php @>
 	<div class="uk-container uk-container-center navbar-push">
