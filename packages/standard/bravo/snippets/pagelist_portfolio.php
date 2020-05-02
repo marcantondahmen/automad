@@ -24,10 +24,8 @@
 			</div>
 		</div>
 	<@ else @>
-		<div class="masonry-item">
-			<h4 class="masonry-content">
-				@{ notificationNoSearchResults | def ('No Pages Found') }
-			</h4>
-		</div>
+		<h4>
+			@{ notificationNoSearchResults | def ('No Pages Found') }
+		</h4>
 	<@~ end @>
 </div>
