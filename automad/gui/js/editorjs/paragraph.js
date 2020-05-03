@@ -41,11 +41,9 @@
 
 class AutomadParagraph {
 	
-	static get DEFAULT_PLACEHOLDER() {
-		return '';
-	}
+	constructor({ data, api }) {
 
-	constructor({ data, config, api }) {
+		var large = data.large !== undefined ? data.large : false;
 
 		this.api = api;
 
@@ -55,15 +53,13 @@ class AutomadParagraph {
 			large: 'am-paragraph-large'
 		};
 
-		this.onKeyUp = this.onKeyUp.bind(this);
-
-		this._placeholder = config.placeholder ? config.placeholder : AutomadParagraph.DEFAULT_PLACEHOLDER;
 		this._data = {};
-		this._element = this.drawView(data.large !== undefined ? data.large : false);
+		this.onKeyUp = this.onKeyUp.bind(this);
+		this.input = this.drawView(large);
 		
 		this.data = {
 			text: data.text || '',
-			large: data.large !== undefined ? data.large : false
+			large: large
 		};
 
 		this.settings = [{
@@ -79,26 +75,21 @@ class AutomadParagraph {
 			return;
 		}
 
-		const { textContent } = this._element;
+		const { textContent } = this.input;
 
 		if (textContent === '') {
-			this._element.innerHTML = '';
+			this.input.innerHTML = '';
 		}
 
 	}
 
 	drawView(large) {
 
-		let div = document.createElement('DIV');
-
-		div.classList.add(this._CSS.wrapper, this._CSS.block);
+		var div = Automad.util.create.editable([this._CSS.wrapper, this._CSS.block], '', '');
 
 		if (large) {
 			div.classList.add(this._CSS.large);
 		}
-
-		div.contentEditable = true;
-		div.dataset.placeholder = this._placeholder;
 
 		div.addEventListener('keyup', this.onKeyUp);
 
@@ -108,7 +99,7 @@ class AutomadParagraph {
 
 	render() {
 
-		return this._element;
+		return this.input;
 
 	}
 
@@ -132,10 +123,10 @@ class AutomadParagraph {
 
 	}
 
-	save(toolsContent) {
+	save() {
 
 		return Object.assign(this.data, {
-			text: toolsContent.innerHTML
+			text: this.input.innerHTML
 		});
 
 	}
@@ -147,6 +138,23 @@ class AutomadParagraph {
 		};
 
 		this.data = data;
+
+	}
+
+	get data() {
+
+		let text = this.input.innerHTML;
+
+		this._data.text = text;
+
+		return this._data;
+
+	}
+
+	set data(data) {
+
+		this._data = data || {};
+		this.input.innerHTML = this._data.text || '';
 
 	}
 
@@ -169,7 +177,7 @@ class AutomadParagraph {
 			button.addEventListener('click', function () {
 				block.toggleTune(tune.name);
 				button.classList.toggle('cdx-settings-button--active');
-				block._element.classList.toggle(block._CSS.large);
+				block.input.classList.toggle(block._CSS.large);
 			});
 
 		});
@@ -198,23 +206,6 @@ class AutomadParagraph {
 				br: true,
 			}
 		};
-
-	}
-
-	get data() {
-
-		let text = this._element.innerHTML;
-
-		this._data.text = text;
-
-		return this._data;
-
-	}
-
-	set data(data) {
-
-		this._data = data || {};
-		this._element.innerHTML = this._data.text || '';
 
 	}
 

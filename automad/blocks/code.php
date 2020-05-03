@@ -61,9 +61,7 @@ class Code {
 
 	public static function render($data) {
 
-		$code = htmlspecialchars($data->code);
-
-		return "<figure><pre><code>$code</code></pre></figure>";
+		return "<figure><pre><code>$data->code</code></pre></figure>";
 
 	}
 

@@ -61,7 +61,7 @@ class Raw {
 
 	public static function render($data) {
 
-		return $data->html;
+		return htmlspecialchars_decode($data->code);
 
 	}
 
