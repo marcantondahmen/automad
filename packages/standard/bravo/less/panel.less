@@ -11,8 +11,8 @@
  */
 
 
-@panel-box-padding:             30px;
-@panel-box-padding-large:		45px;
+@panel-box-padding:             @utility-container-padding-horizontal;
+@panel-box-padding-large:		@utility-container-large-padding-horizontal;
 
 @panel-box-background:          @panel-bg-color;
 @panel-box-color:               @text-color;
@@ -21,8 +21,8 @@
 @panel-teaser-margin-bottom: 	30px;
 
 @panel-title-margin-bottom:     0.6rem;
-@panel-title-font-size:         1.5rem;
-@panel-title-line-height:       1.3;
+@panel-title-font-size:         1.4rem;
+@panel-title-line-height:       1.35;
 @panel-title-font-weight:       @base-heading-font-weight;
 @panel-title-color:             @panel-box-color;
 @panel-box-title-color:         @panel-box-color;
@@ -31,7 +31,7 @@
 .hook-panel-box() {
 	
 	.masonry & {
-
+		
 		& > .uk-panel-teaser {
 			overflow: hidden;
 			margin-top: -@panel-box-padding;

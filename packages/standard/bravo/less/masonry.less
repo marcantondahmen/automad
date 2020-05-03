@@ -12,8 +12,8 @@
 
 
 @masonry-auto-rows: 30px;
-@masonry-item-width: 360px;
-@masonry-large-item-width: 480px;
+@masonry-item-width: 300px;
+@masonry-large-item-width: 420px;
 @masonry-gap: 4px;
 
 .masonry {
@@ -21,6 +21,10 @@
 	position: relative;
 	margin-top: @utility-margin;
 	margin-bottom: @utility-margin;
+
+	@media (max-width: @block-max-width) {
+		margin: @utility-margin -@utility-container-padding-horizontal !important;
+	}
 	
 	@media (min-width: @breakpoint-xlarge) {	
 		margin-top: @utility-margin-large;
