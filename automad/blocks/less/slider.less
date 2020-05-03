@@ -46,13 +46,14 @@
 		opacity: 0;
 		pointer-events: none;
 		cursor: default;
-		transition: opacity 0.2s ease-in;
+		transition: opacity 0.2s 0.2s ease-in;
 
 		&.am-active {
 			position: relative;
 			visibility: visible;
   			opacity: 1;
-  			pointer-events: initial;
+			  pointer-events: initial;
+			  transition: opacity 0.2s 0s ease-in;
 		}
 
 		& > img {
@@ -69,9 +70,9 @@
 		text-decoration: none;
 		top: 50%;
 		transform: translate(0%, -50%);
-		width: 3.25rem;
-		line-height: 3.25rem;
-		font-size: 2.85rem;
+		width: 3.5rem;
+		line-height: 3.5rem;
+		font-size: 3rem;
 		text-align: center;
 		font-family: 'am-controls';
 		color: var(--am-slider-controls-color);
@@ -80,11 +81,11 @@
 		transition: opacity 0.2s ease-in;
 
 		.am-slider:hover & {
-			opacity: 0.7;
+			opacity: 0.1;
 		}
 
 		@media (hover: none) {
-			opacity: 0.7;
+			opacity: 0.1;
 		}
 
 		@media (max-width: 780px) {
@@ -95,7 +96,7 @@
 
 		&:hover {
 			color: var(--am-slider-controls-color);
-			opacity: 0.4 !important;
+			opacity: 0.2 !important;
 		}
 
 		&:before {
