@@ -121,7 +121,10 @@ class Content {
 					$newPagePath = FileSystem::appendSuffixToPath($newPagePath, $suffix); 
 					
 					// Data. Also directly append possibly existing suffix to title here.
-					$data = array(AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)));
+					$data = array(
+						AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
+						AM_KEY_HIDDEN => (!empty($subpage['hidden']))
+					);
 					
 					if ($theme != '.') {
 						$data[AM_KEY_THEME] = $theme;

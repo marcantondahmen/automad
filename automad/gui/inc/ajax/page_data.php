@@ -214,22 +214,10 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 						</div>
 					<?php } ?>
 					<!-- Visibility -->
-					<div class="uk-form-row">
-						<label class="uk-form-label uk-text-truncate">
-							<?php Text::e('page_visibility'); ?>
-						</label>
-						<label 
-						class="am-toggle-switch uk-button" 
-						data-am-toggle
-						>
-							<?php Text::e('btn_hide_page'); ?>
-							<input 
-							id="am-checkbox-hidden" 
-							type="checkbox" 
-							name="data[<?php echo AM_KEY_HIDDEN; ?>]"<?php if ($hidden) { echo ' checked'; } ?> 
-							/>
-						</label>
-					</div>	
+					<?php echo Components\Form\CheckboxHidden::render(
+						'data[' . AM_KEY_HIDDEN . ']',
+						$hidden
+					); ?>
 					<?php if ($Page->path != '/') { ?>
 					<!-- Prefix -->
 					<div class="uk-form-row">

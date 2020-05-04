@@ -91,6 +91,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						?>
 					</div>
 				<?php } ?>
+				<?php echo Components\Form\CheckboxHidden::render('subpage[hidden]'); ?>
 			</form>
 			<div class="uk-form-stacked">
 				<label class="uk-form-label">
