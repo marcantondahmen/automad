@@ -46,15 +46,15 @@
 		padding-top: 1rem;
 		top: 0;
 		box-shadow: none;
-		.transition(box-shadow 0.2s, padding 0.2s;);
+		.transition(box-shadow 0.2s, padding 0.4s;);
 		
-		& .uk-modal {
-			z-index: -1;
-		}
-
 		.am-scrolled & {
 			padding-top: 0;
 			.shadow;
+		}
+
+		& .uk-modal-dialog {	
+			padding-top: @utility-margin-large * 1.2;
 		}
 		
 		&-push {
@@ -88,10 +88,11 @@
 		
 		&-toggle {
 			
+			position: relative;
+			z-index: 2000;
 			cursor: pointer;
 			display: block;
 			height: @navbar-nav-height;
-			position: relative;
 			width: @navbar-nav-height;	
 			margin-left: auto;
 			margin-right: -((@navbar-nav-height - @navbar-toggle-width) / 2) + @navbar-nav-padding-horizontal;
@@ -173,12 +174,7 @@
 }
 
 .hook-navbar-nav() {
-
-	.uk-modal-page & {
-		opacity: 0;
-		pointer-events: none;
-	}
-
+	
 	@media (min-width: @breakpoint-xlarge) {
 		height: @navbar-nav-height-large;
 		line-height: @navbar-nav-height-large;

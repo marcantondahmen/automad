@@ -45,18 +45,19 @@
 		width: 100%;
 		padding-top: 1rem;
 		top: 0;
-		box-shadow: none;
-		.transition(box-shadow 0.2s, padding 0.2s;);
-		
-		& .uk-modal {
-			z-index: -1;
-		}
+		background-color: @navbar-background;
+		border-bottom: @border-width solid @navbar-background;
+		.transition(border-color 0.2s, padding-top 0.4s;);
 
 		.am-scrolled & {
 			padding-top: 0;
 			border-bottom: @border-width solid @panel-bg-color;
 		}
 		
+		& .uk-modal-dialog {	
+			padding-top: @utility-margin-large * 1.2;
+		}
+
 		&-push {
 			
 			padding-top: (@navbar-nav-height * 1.85) !important;
@@ -88,10 +89,11 @@
 		
 		&-toggle {
 			
+			position: relative;
+			z-index: 2000;
 			cursor: pointer;
 			display: block;
 			height: @navbar-nav-height;
-			position: relative;
 			width: @navbar-nav-height;	
 			margin-left: auto;
 			margin-right: -((@navbar-nav-height - @navbar-toggle-width) / 2) + @navbar-nav-padding-horizontal;
@@ -179,11 +181,6 @@
 }
 
 .hook-navbar-nav() {
-
-	.uk-modal-page & {
-		opacity: 0;
-		pointer-events: none;
-	}
 
 	@media (min-width: @breakpoint-xlarge) {
 		height: @navbar-nav-height-large;

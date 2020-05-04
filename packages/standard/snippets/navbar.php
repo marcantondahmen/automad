@@ -8,7 +8,6 @@
 	} @>
 <@ end @>
 
-
 	<div class="navbar">
 		<div class="uk-container uk-container-center">
 			<nav class="uk-navbar">
@@ -55,43 +54,43 @@
 						<span aria-hidden="true"></span>
 						<span aria-hidden="true"></span>
 					</a>
+					<# Modal with site tree and search. #>
+					<div id="modal-nav" class="uk-modal">		
+						<div class="uk-modal-dialog uk-modal-dialog-blank">
+							<div class="uk-container uk-container-center">
+								<# Search. #>
+								<@~ if @{ urlSearchResults } @>
+									<div class="uk-block uk-margin-bottom-remove uk-margin-top-remove">
+										<form 
+										class="uk-form" 
+										action="@{ urlSearchResults }" 
+										method="get"
+										>
+											<script>
+												var autocomplete = <@ autocomplete.php @>
+											</script>
+											<div 
+											class="uk-autocomplete uk-width-1-1" 
+											data-uk-autocomplete='{source:autocomplete,minLength:2}'
+											>
+												<input 
+												class="uk-form-controls uk-form-large uk-width-1-1" 
+												type="search" 
+												name="search" 
+												placeholder="@{ placeholderSearch | def ('Search') }" 
+												required 
+												/>	
+											</div>
+										</form>	
+									</div>
+								<@ end ~@>
+								<div class="uk-block @{ :classNav }">
+									<@ tree.php @>
+								</div>
+							</div>
+						</div>
+					</div>
 			    </div>
 			</nav>
-		</div>
-		<# Modal with site tree and search. #>
-		<div id="modal-nav" class="uk-modal">		
-			<div class="uk-modal-dialog uk-modal-dialog-blank">
-				<div class="uk-container uk-container-center navbar-push">
-					<# Search. #>
-					<@~ if @{ urlSearchResults } @>
-						<div class="uk-block uk-margin-bottom-remove uk-margin-top-remove">
-							<form 
-							class="uk-form" 
-							action="@{ urlSearchResults }" 
-							method="get"
-							>
-								<script>
-									var autocomplete = <@ autocomplete.php @>
-								</script>
-								<div 
-								class="uk-autocomplete uk-width-1-1" 
-								data-uk-autocomplete='{source:autocomplete,minLength:2}'
-								>
-									<input 
-									class="uk-form-controls uk-form-large uk-width-1-1" 
-									type="search" 
-									name="search" 
-									placeholder="@{ placeholderSearch | def ('Search') }" 
-									required 
-									/>	
-								</div>
-							</form>	
-						</div>
-					<@ end ~@>
-					<div class="uk-block @{ :classNav }">
-						<@ tree.php @>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
