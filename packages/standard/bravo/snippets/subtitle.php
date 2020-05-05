@@ -3,6 +3,6 @@
 	<div class="text-subtitle">
 		<@ ../../snippets/date.php @>
 		<@ if @{ date } and @{ tags } @>&nbsp;&mdash;&nbsp;<br class="uk-visible-small"><@ end @>
-		<@ ../../snippets/tags.php @>
+		<@ tags.php @>
 	</div>
 <@~ end @>

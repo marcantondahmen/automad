@@ -6,7 +6,11 @@
 				<div class="masonry-content uk-panel uk-panel-box">
 					<div class="uk-panel-title">
 						<a href="@{ url }" class="nav-link">@{ title }</a>
-						<@ subtitle.php @>
+						<div class="text-subtitle">
+							<@ ../../snippets/date.php @>
+							<@ if @{ date } and @{ tags } @><br><@ end @>
+							<@ tags.php @>
+						</div>
 					</div>
 					<@~ ../../snippets/set_imageteaser_variable.php @>
 					<@ if @{ :imageTeaser } ~@>

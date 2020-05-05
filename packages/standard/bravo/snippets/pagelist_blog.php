@@ -14,7 +14,11 @@
 				<@ end @>
 				<div class="uk-panel-title">
 					<a href="@{ url }" class="nav-link">@{ title }</a>
-					<@ subtitle.php @>
+					<div class="text-subtitle">
+						<@ ../../snippets/date.php @>
+						<@ if @{ date } and @{ tags } @><br><@ end @>
+						<@ tags.php @>
+					</div>
 				</div>
 				<@~ ../../snippets/set_teaser_variable.php @>
 				<p class="content uk-margin-bottom-remove">@{ :teaser }</p>

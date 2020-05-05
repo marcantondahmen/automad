@@ -15,7 +15,7 @@
 						<div class="text-subtitle">
 							<@ ../../snippets/date.php @>
 							<@ if @{ date } and @{ tags } @><br><@ end @>
-							<@ ../../snippets/tags.php @>
+							<@ tags.php @>
 						</div>
 					</div>
 					<@ more.php @>
