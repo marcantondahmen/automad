@@ -11,7 +11,6 @@
 								<br />
 							<@~ end @>
 						<@~ end @>
-						<a href="/dashboard">Sign in</a>
 					</li>
 					<li class="uk-text-right uk-text-left-small">
 						<a href="/">

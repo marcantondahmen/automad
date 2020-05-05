@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="masonry masonry-large<@ if @{ :pagelistCount } > 1 @> am-stretched<@ end @>">
+<div class="masonry masonry-large<@ if @{ :pagelistCount } > 2 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
 		<div class="masonry-item">
 			<div class="masonry-content uk-panel uk-panel-box">
