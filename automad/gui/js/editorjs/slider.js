@@ -160,4 +160,14 @@ class AutomadSlider {
 
 	}
 
+	static get sanitize() {
+
+		return {
+			globs: false,
+			width: false,
+			height: false
+		};
+
+	}
+
 }

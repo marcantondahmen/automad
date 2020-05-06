@@ -145,4 +145,13 @@ class AutomadGallery {
 
 	}
 
+	static get sanitize() {
+
+		return {
+			globs: false,
+			width: false
+		};
+
+	}
+
 }

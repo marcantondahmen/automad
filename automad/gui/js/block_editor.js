@@ -154,7 +154,7 @@
 			// Trigger changes when clicking a settings button.
 			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', function(e) {
 				
-				var block = $(this).closest('.codex-editor').find('.cdx-block').first().get(0),
+				var block = $(this).closest('.codex-editor').find('.cdx-block, .ce-block__content').first().get(0),
 					temp = document.createElement('div');
 
 				// Trigger a fake block changed event by adding and removing a temporary div.
