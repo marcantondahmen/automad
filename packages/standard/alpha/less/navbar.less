@@ -16,8 +16,8 @@
 @navbar-brand-color:			@navbar-color;
 @navbar-brand-hover-color:		@navbar-nav-hover-color;
 
-@navbar-nav-height:            	54px;
-@navbar-nav-height-large:      	64px;
+@navbar-nav-height:            	56px;
+@navbar-nav-height-large:      	68px;
 @navbar-nav-font-size:         	1rem;
 @navbar-nav-font-weight:       	400;
 @navbar-nav-font-family:       	@base-body-font-family;
@@ -39,7 +39,7 @@
 	
 	.navbar {
 		
-		position: fixed;
+		position: absolute;
 		box-sizing: border-box;
 		z-index: 1000;
 		width: 100%;
@@ -49,9 +49,15 @@
 		box-shadow: none;
 		.transition(box-shadow 0.2s, padding 0.4s;);
 		
-		.am-scrolled & {
-			padding-top: 0;
-			.shadow;
+		@media (min-height: 680px) {
+		
+			position: fixed;
+
+			.am-scrolled & {
+				padding-top: 0;
+				.shadow;
+			}
+
 		}
 
 		& .uk-modal-dialog {	
@@ -156,8 +162,20 @@
 		
 	}
 	
-	.uk-navbar-brand {
+	& .uk-navbar-brand {
+
 		font-weight: 700;
+
+		& img,
+		& svg {
+			max-height: 75%;
+			width: auto;
+		}
+
+		& svg {
+			fill: currentColor;
+		}
+
 	}
 	
 }

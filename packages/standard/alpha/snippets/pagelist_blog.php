@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <section <@~ if @{ :pagelistCount } > 1 @> class="am-stretched"<@ end @>>
-	<div class="masonry masonry-large">
+	<div class="masonry masonry-large uk-margin-large-bottom">
 		<@ foreach in pagelist ~@>
 			<div class="masonry-item">
 				<div class="masonry-content uk-panel uk-panel-box">
