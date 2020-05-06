@@ -78,22 +78,24 @@ class Buttons {
 			$class = ' class="am-buttons am-buttons-center"';
 		}
 
-		if (trim(strip_tags($data->primaryText))) {
+		if (trim($data->primaryText) && trim($data->primaryLink)) {
+			$primaryText = htmlspecialchars_decode($data->primaryText);
 			$html .= <<< HTML
 					<a 
 					href="$data->primaryLink"
 					class="am-button am-button-primary">
-						$data->primaryText
+						$primaryText
 					</a>
 HTML;
 		}
 
-		if (trim(strip_tags($data->secondaryText))) {
+		if (trim($data->secondaryText) && trim($data->secondaryLink)) {
+			$secondaryText = htmlspecialchars_decode($data->secondaryText);
 			$html .= <<< HTML
 					<a 
 					href="$data->secondaryLink"
 					class="am-button">
-						$data->secondaryText
+						$secondaryText
 					</a>
 HTML;
 		}

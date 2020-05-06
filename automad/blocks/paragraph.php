@@ -62,12 +62,13 @@ class Paragraph {
 	public static function render($data) {
 
 		$attr = '';
+		$text = htmlspecialchars_decode($data->text);
 
 		if (!empty($data->large)) {
 			$attr = ' class="am-paragraph-large"';
 		}
 
-		return "<p$attr>$data->text</p>";
+		return "<p$attr>$text</p>";
 
 	}
 

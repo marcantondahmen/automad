@@ -182,7 +182,7 @@ class AutomadButtons {
 
 		return wrapper;
 
-	};
+	}
 
 	toggleTune(tune) {
 		this.data.alignment = tune;

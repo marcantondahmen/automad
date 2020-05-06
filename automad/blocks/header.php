@@ -61,7 +61,9 @@ class Header {
 
 	public static function render($data) {
 
-		return "<h$data->level>$data->text</h$data->level>";
+		$text = htmlspecialchars_decode($data->text);
+
+		return "<h$data->level>$text</h$data->level>";
 
 	}
 

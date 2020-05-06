@@ -72,6 +72,7 @@ class Lists {
 		$html = $open;
 
 		foreach ($data->items as $item) {
+			$item = htmlspecialchars_decode($item);
 			$html .= "<li>$item</li>";
 		}
 
