@@ -34,7 +34,7 @@
  */
 
 
-class AutomadMonospace {
+class AutomadTextarea {
 
 	constructor({ data, api }) {
 
@@ -50,14 +50,11 @@ class AutomadMonospace {
 
 	drawView() {
 
-		var code = Automad.util.create.editable(
-				['ce-code', 'cdx-input'], 
-				this.placeholder(), 
-				this.data.code
-			),
+		var code = Automad.util.create.element('textarea', ['ce-code', 'cdx-input']),
 			label = Automad.util.create.label(this.label()),
 			wrapper = Automad.util.create.element('div', [this.api.styles.block]);
 
+		code.value = this.data.code;
 		label.classList.add('uk-margin-top-remove');
 		wrapper.appendChild(label);
 		wrapper.appendChild(code);
@@ -86,18 +83,8 @@ class AutomadMonospace {
 	save() {
 
 		return {
-			code: this.input.innerHTML
+			code: this.input.value
 		};
-
-	}
-
-	onPaste(event) {
-
-		const data = {
-			code: event.detail.data.innerHTML
-		};
-
-		this.data = data;
 
 	}
 
@@ -128,7 +115,7 @@ class AutomadMonospace {
 
 }
 
-class AutomadMonospaceCode extends AutomadMonospace {
+class AutomadTextareaCode extends AutomadTextarea {
 
 	static get toolbox() {
 		return {
@@ -147,7 +134,7 @@ class AutomadMonospaceCode extends AutomadMonospace {
 
 }
 
-class AutomadMonospaceRaw extends AutomadMonospace {
+class AutomadTextareaRaw extends AutomadTextarea {
 
 	static get toolbox() {
 		return {

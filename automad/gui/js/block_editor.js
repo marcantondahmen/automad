@@ -106,8 +106,8 @@
 							class: Table,
 							inlineToolbar: true
 						},
-						code: AutomadMonospaceCode,
-						raw: AutomadMonospaceRaw,
+						code: AutomadTextareaCode,
+						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
 						delimiter: Delimiter,
 						snippet: AutomadSnippet,
