@@ -16,7 +16,7 @@ navbar and content snippets are include first.
 			as value for the 'glob' parameter. 
 			#>
 			<@ filelist { 
-				glob: @{ files | def('/shared/sample-*.png') },
+				glob: @{ files | def('/shared/image-*.png') },
 				sort: 'asc'
 			} @>
 			<# 
