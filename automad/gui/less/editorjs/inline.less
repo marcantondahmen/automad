@@ -68,6 +68,18 @@
 			background-color: @nav-dropdown-hover-background;
 		}
 
+		&--active {
+
+			color: @nav-dropdown-hover-color;
+			background-color: @nav-dropdown-hover-background;
+
+			&:hover,
+			&:focus {
+				color: @button-success-hover-color;
+				background-color: @button-success-hover-background;
+			}
+		}
+
 		& .icon + .icon {
 			margin-top: 11px;
 		}
