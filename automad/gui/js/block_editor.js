@@ -47,7 +47,17 @@
 		init: function() {
 			
 			var be = Automad.blockEditor,
-				selector = '[' + be.dataAttr + ']';
+				selector = '[' + be.dataAttr + ']',
+				triggerChange = function() {
+
+					var block = $(this).closest('.codex-editor').find('.cdx-block, .ce-block__content').first().get(0),
+						temp = document.createElement('div');
+
+					// Trigger a fake block changed event by adding and removing a temporary div.
+					block.appendChild(temp);
+					block.removeChild(temp);
+
+				};
 
 			$(selector).each(function() {
 
@@ -151,17 +161,9 @@
 
 			});
 
-			// Trigger changes when clicking a settings button.
-			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', function(e) {
-				
-				var block = $(this).closest('.codex-editor').find('.cdx-block, .ce-block__content').first().get(0),
-					temp = document.createElement('div');
-
-				// Trigger a fake block changed event by adding and removing a temporary div.
-				block.appendChild(temp);
-				block.removeChild(temp);
-
-			});
+			// Trigger changes when clicking a settings button or changing an input field.
+			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', triggerChange);
+			$(document).on('change keyup', '.ce-block input', triggerChange);
 
 		}
 		
