@@ -128,7 +128,8 @@
 							}
 						},
 						inlineCode: {
-							class: InlineCode
+							class: InlineCode,
+							shortcut: 'CMD+SHIFT+M'
 						},
 						marker: {
 							class: Marker

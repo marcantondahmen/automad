@@ -56,7 +56,6 @@
 
 		margin: 0;
 		padding: 0 10px !important;
-		min-width: 26px;
 		text-align: center;
 		color: @nav-dropdown-color;
 		background-color: @am-block-dropdown-background;
@@ -80,8 +79,19 @@
 			}
 		}
 
-		& .icon + .icon {
-			margin-top: 11px;
+	}
+
+	& .ce-inline-toolbar {
+
+		& svg {
+			box-sizing: border-box;
+			height: 34px;
+			min-height: 34px;
+			max-height: 34px;
+			width: 14px;
+			min-width: 14px;
+			max-width: 14px;
+			padding: 11px 0;
 		}
 
 	}
