@@ -6,10 +6,6 @@
 				<@ snippets/content.php @>
 			</div>
 		</div>
-		<div id="sidebar" class="uk-width-1-4 uk-visible-large">
-			<div class="uk-block sidebar-wrapper">				
-				<@ ../snippets/tree.php @>
-			</div>
-		</div>
+		<@ ../snippets/sidebar.php @>
 	</div>
 <@ snippets/footer.php @>

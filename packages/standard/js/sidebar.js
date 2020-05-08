@@ -13,7 +13,7 @@
 
 				new StickySidebar('#sidebar', {
 					containerSelector: false,
-					innerWrapperSelector: '.sidebar-wrapper',
+					innerWrapperSelector: '.sidebar-inner',
 					resizeSensor: true,
 					topSpacing: 20,
 					bottomSpacing: 70
