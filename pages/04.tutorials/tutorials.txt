@@ -10,16 +10,12 @@ textTeaser: This is a basic [Automad](https://automad.org) tutorial theme using 
 
 -
 
-checkboxShowInNavbar: on
-
--
-
-date: 2018-04-29 12:00:00
-
--
-
-imageTeaser: /pages/*/*/landscape*
+checkboxShowInFooter: 1
 
 -
 
 theme: tutorial
+
+-
+
+date: 2019-11-19 12:00:00

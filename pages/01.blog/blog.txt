@@ -2,20 +2,24 @@ title: Blog
 
 -
 
-tags: Blog
+date: 2020-03-26 12:00:00
 
 -
 
-textTeaser: This is the Alpha theme's Blog template. All pages created below will show up in the pagelist as previews. To make all pages on your site showing up here, activate the "Show All Pages in Pagelist" checkbox [here](/dashboard?context=edit_page&url=%2Fblog#data-and-settings). There you will find also a bunch of other options to try out. Note the filter button, to filter the shown pages by tags. Every page can have multiple tags.
+tags: Blog, Pagelist, Post
 
 -
 
-checkboxShowInNavbar: on
++main: {"time":1588833622933,"blocks":[{"type":"paragraph","data":{"text":"Automad ships with two elegant multi-purpose themes — <b>Alpha</b> and <b>Bravo</b>. This here is the <b>Blog</b> template of the Alpha theme. This page is configured to hide the page title and to display a filtered set of pages in the grid below. <a href=\"/dashboard?context=edit_page&amp;url=%2Fblog#data-and-settings\">Check out</a> all settings and start playing around. Don't worry, nothing can break!<br>","large":true}},{"type":"buttons","data":{"primaryText":"The First Post &nbsp;&lt;svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 8 90 60\"&gt;&lt;polygon points=\"0,25 69.101,25 52.082,7.917 60,0 90,30 60,60 52.082,52.082 69.101,35 0,35 \"&gt;&lt;/polygon&gt;&lt;/svg&gt;","primaryLink":"/blog/the-first-post","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.17.0"}
 
 -
 
-date: 2018-05-14 12:00:00
+checkboxHideTitle: 1
 
 -
 
-imageTeaser: /pages/*portfolio/*/portrait.png
+checkboxShowAllPagesInPagelist: 1
+
+-
+
+checkboxShowInNavbar: 1
