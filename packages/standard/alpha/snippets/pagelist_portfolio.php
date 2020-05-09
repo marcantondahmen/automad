@@ -3,22 +3,24 @@
 	<div class="masonry">
 		<@ foreach in pagelist ~@>
 			<div class="masonry-item">
-				<div class="masonry-content uk-panel uk-panel-box">
-					<@~ ../../snippets/set_imageteaser_variable.php @>
-					<@~ if @{ :imageTeaser } @>
-						<div class="uk-panel-teaser">
-							<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
+				<div class="uk-height-1-1 uk-panel uk-panel-box">
+					<div class="masonry-content">
+						<@~ ../../snippets/set_imageteaser_variable.php @>
+						<@~ if @{ :imageTeaser } @>
+							<div class="uk-panel-teaser">
+								<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
+							</div>
+						<@~ end @>
+						<div class="uk-panel-title uk-margin-bottom-remove">
+							<a href="@{ url }">@{ title }</a>
+							<div class="text-subtitle">
+								<@ ../../snippets/date.php @>
+								<@ if @{ date } and @{ tags } @><br><@ end @>
+								<@ tags.php @>
+							</div>
 						</div>
-					<@~ end @>
-					<div class="uk-panel-title uk-margin-bottom-remove">
-						<a href="@{ url }">@{ title }</a>
-						<div class="text-subtitle">
-							<@ ../../snippets/date.php @>
-							<@ if @{ date } and @{ tags } @><br><@ end @>
-							<@ tags.php @>
-						</div>
+						<@ more.php @>
 					</div>
-					<@ more.php @>
 				</div>
 			</div>
 		<@ else @>
