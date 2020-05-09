@@ -581,6 +581,20 @@ class Content {
 
 		if ($importUrl = Request::post('importUrl')) {
 
+			// Resolve local URLs.
+			if (strpos($importUrl, '/') === 0) {
+
+				if (getenv('HTTPS') && getenv('HTTPS') !== 'off' && getenv('HTTP_HOST')) {
+					$protocol = 'https://';
+				} else {
+					$protocol = 'http://';
+				}
+
+				$importUrl = $protocol . getenv('HTTP_HOST') . AM_BASE_URL . $importUrl;
+				Core\Debug::log($importUrl, 'Local URL');
+
+			}
+
 			$curl = curl_init(); 
   
 			curl_setopt($curl, CURLOPT_HEADER, 0); 
