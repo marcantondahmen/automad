@@ -177,13 +177,18 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 							</label>
 							<?php 
 							
+							$themeName = '';
+
 							if ($data[AM_KEY_THEME]) {
+
 								$themePath = $data[AM_KEY_THEME];
-								$Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME]);
-								$themeName = $Theme->name . ' / ';
+
+								if ($Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME])) {
+									$themeName = $Theme->name . ' / ';
+								}
+								
 							} else {
 								$themePath = $this->getAutomad()->Shared->get(AM_KEY_THEME);
-								$themeName = '';
 							}
 							
 							$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $themePath . '/' . $Page->template . '.php';

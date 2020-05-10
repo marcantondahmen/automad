@@ -146,7 +146,7 @@ if ($data = Core\Request::post('data')) {
 						
 							// Set icon.
 							if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
-								$img = new Core\Image(reset($images), 320, 240, true);
+								$img = new Core\Image(reset($images), 400, 300, true);
 								$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 							} else {
 								$icon = '<i class="uk-icon-code"></i>';

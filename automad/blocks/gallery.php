@@ -65,7 +65,7 @@ class Gallery {
 
 	public static function render($data, $Automad) {
 		
-		$masonryRowHeight = 5;
+		$masonryRowHeight = 50;
 		$defaults = array(
 			'globs' => '*.jpg, *.png, *.gif',
 			'width' => 250,
