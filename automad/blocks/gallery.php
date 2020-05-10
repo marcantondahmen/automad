@@ -69,7 +69,7 @@ class Gallery {
 		$defaults = array(
 			'globs' => '*.jpg, *.png, *.gif',
 			'width' => 250,
-			'masonry' => true,
+			'cleanBottom' => true,
 			'stretched' => true
 		);
 
@@ -84,7 +84,7 @@ class Gallery {
 
 			// Adding styles for devices smaller than width.
 			$maxWidth = $data->width * 1.75;
-			$style = "<style scoped>@media (max-width: ${maxWidth}px) { .am-gallery-masonry, .am-gallery-grid { grid-template-columns: 1fr; } }</style>";
+			$style = "<style scoped>@media (max-width: ${maxWidth}px) { .am-gallery-masonry { grid-template-columns: 1fr; } }</style>";
 
 			$figureAttr = '';
 
@@ -92,46 +92,28 @@ class Gallery {
 				$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
 			}
 
-			$layout = 'grid';
+			$cleanBottom = '';
 
-			if ($data->masonry) {
-				$layout = 'masonry';
+			if ($data->cleanBottom) {
+				$cleanBottom = ' am-gallery-masonry-clean-bottom';
 			}
 
 			$html = '<figure ' . $figureAttr . '>' . 
 					$style . 
-					'<div class="am-gallery-' . $layout . '" style="--am-gallery-item-width:' . $data->width . 'px">';
+					'<div class="am-gallery-masonry' . $cleanBottom . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 
 			foreach ($files as $file) {
 
 				$Image = new Image($file, 2 * $data->width);
 				$caption = Str::stripTags(Parse::caption($file));
 				$file = Str::stripStart($file, AM_BASE_DIR);
-
-				if ($data->masonry) {
-
-					$span = round($Image->height / ($masonryRowHeight * 2) );
-					$attr = 'class="am-gallery-masonry-item" style="--am-gallery-masonry-rows: ' . $span . ';"';
-
-				} else {
-
-					$aspectRatio = $Image->height / $Image->width;
-					$class = 'am-gallery-grid-square';
-
-					if ($aspectRatio > 1.5) {
-						$class = 'am-gallery-grid-portrait';
-					}
-
-					if ($aspectRatio < 0.75) {
-						$class = 'am-gallery-grid-landscape';
-					}
-
-					$attr = 'class="' . $class . '"';
-
-				}
+				$span = round($Image->height / ($masonryRowHeight * 2) );
 
 				$html .= <<< HTML
-						<div $attr>
+						<div 
+						class="am-gallery-masonry-item"
+						style="--am-gallery-masonry-rows: $span;"
+						>
 							<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
 								<img src="$Image->file" />
 							</a>

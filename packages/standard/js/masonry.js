@@ -9,21 +9,12 @@
 
 		selectors: {
 			grid: '.masonry',
-			gallery: '.am-gallery-masonry',
-			item: '.masonry-item, .am-gallery-masonry-item',
-			content: '.masonry-content, .am-gallery-img-small'
+			item: '.masonry-item',
+			content: '.masonry-content'
 		},
 		
 		// Get number of rows a given item spans.
 		calcItemRowSpan: function(item, rowHeight, rowGap) {
-
-			// In case the item belongs to a gallery, it has a custom property with the span.
-			// If existing, just return that property. 
-			var customProperty = parseInt(window.getComputedStyle(item).getPropertyValue('--am-gallery-masonry-rows'));
-
-			if (customProperty) {
-				return customProperty;
-			}
 
 			// For all other items, the span has to be calculated.
 			var content = item.querySelector(Standard.masonry.selectors.content),
@@ -128,7 +119,7 @@
 
 		},
 
-		initPagelists: function() {
+		init: function() {
 
 			$(window).on('load resize orientationchange', function() {
 				Standard.masonry.layout();
@@ -140,46 +131,9 @@
 				$(Standard.masonry.selectors.grid).imagesLoaded().progress(Standard.masonry.layout);
 			});
 
-		},
-
-		initGalleries: function() {
-
-			var galleryCleanBottom = function() {
-
-				var $galleries = $(Standard.masonry.selectors.gallery);
-
-				$galleries.each(function () {
-
-					var gallery = this,
-						$items = $(gallery).find(Standard.masonry.selectors.item);
-
-					// Reset inline styles.
-					$items.each(function () {
-						this.style.gridRowStart = '';
-						this.style.gridRowEnd = '';
-						this.style.gridColumnStart = '';
-					});
-
-					Standard.masonry.cleanBottomEdge($(gallery), $items, 50, 0);
-
-				});
-
-			}
-
-			$(window).on('load resize orientationchange', function() {
-				galleryCleanBottom();
-				setTimeout(galleryCleanBottom, 300);
-			});
-
-			$(document).on('ready', function () {
-				$(Standard.masonry.selectors.gallery).imagesLoaded().progress(galleryCleanBottom);
-			});
-
 		}
-		
 	};
 	
-	Standard.masonry.initPagelists();
-	Standard.masonry.initGalleries();
+	Standard.masonry.init();
 	
 }(window.Standard = window.Standard || {}, jQuery);

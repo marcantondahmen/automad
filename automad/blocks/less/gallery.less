@@ -40,7 +40,7 @@
 		display: grid;
 		gap: 0;
 		grid-template-columns: repeat(auto-fill, minmax(var(--am-gallery-item-width), 1fr));
-		grid-auto-rows: auto;
+		grid-auto-rows: 50px;
 		margin-left: ~"calc(var(--am-gallery-gap) * -1)";
 		margin-bottom: ~"calc(var(--am-gallery-gap) * -1)";
 		
@@ -48,67 +48,6 @@
 			padding-left: var(--am-gallery-gap);
 			padding-bottom: var(--am-gallery-gap);
 			grid-row-end: span var(--am-gallery-masonry-rows);
-		}
-
-	}
-
-	&-grid {
-
-		display: grid;
-		gap: var(--am-gallery-gap);
-		grid-template-columns: repeat(auto-fill, minmax(var(--am-gallery-item-width), 1fr));
-		grid-auto-rows: auto;
-		grid-auto-flow: dense;
-
-		& > div {
-
-			position: relative;
-
-			&:before {
-				content: '';
-				position: relative;
-				display: block;
-				top: 0;
-				width: 100%;
-				height: 0;
-			}
-
-			& img {
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-
-		}
-
-		&-square {
-
-			&:before {
-				padding-bottom: 100%;
-			}
-		
-		}
-
-		&-portrait {
-
-			grid-row-end: span 2;
-			grid-column-end: span 1;
-
-			&:before {
-				padding-bottom: ~"calc(200% + var(--am-gallery-gap))";
-			}
-
-		}
-
-		&-landscape {
-
-			grid-row-end: span 1;
-			grid-column-end: span 2;
-
-			&:before {
-				padding-bottom: ~"calc(50% - var(--am-gallery-gap))";
-			}
-
 		}
 
 	}
