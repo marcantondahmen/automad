@@ -6,7 +6,7 @@ date: 2020-04-08 21:29:00
 
 -
 
-tags: Dark, Post
+tags: Blog, Dark
 
 -
 
@@ -18,4 +18,4 @@ checkboxHideThumbnails: 1
 
 -
 
-theme: standard/bravo
+theme: standard/dark

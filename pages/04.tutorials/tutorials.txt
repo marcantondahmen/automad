@@ -2,6 +2,10 @@ title: Tutorials
 
 -
 
+date: 2019-11-19 12:00:00
+
+-
+
 tags: Tutorial
 
 -
@@ -15,7 +19,3 @@ checkboxShowInFooter: 1
 -
 
 theme: tutorial
-
--
-
-date: 2019-11-19 12:00:00

@@ -22,16 +22,12 @@ checkboxHideTitle: 1
 
 -
 
-checkboxLightColorScheme: 1
-
--
-
 checkboxShowAllPagesInPagelist: 1
 
 -
 
-checkboxHideFiltersAndSort: 1
+checkboxLightColorScheme: 1
 
 -
 
-theme: standard/bravo
+checkboxHideFiltersAndSort: 1

@@ -6,11 +6,11 @@ date: 2020-03-26 12:00:00
 
 -
 
-tags: Blog, Pagelist, Post
+tags: Blog, Light
 
 -
 
-+main: {"time":1588833622933,"blocks":[{"type":"paragraph","data":{"text":"Automad ships with two elegant multi-purpose themes — <b>Alpha</b> and <b>Bravo</b>. This here is the <b>Blog</b> template of the Alpha theme. This page is configured to hide the page title and to display a filtered set of pages in the grid below. <a href=\"/dashboard?context=edit_page&amp;url=%2Fblog#data-and-settings\">Check out</a> all settings and start playing around. Don't worry, nothing can break!<br>","large":true}},{"type":"buttons","data":{"primaryText":"The First Post &nbsp;&lt;svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 8 90 60\"&gt;&lt;polygon points=\"0,25 69.101,25 52.082,7.917 60,0 90,30 60,60 52.082,52.082 69.101,35 0,35 \"&gt;&lt;/polygon&gt;&lt;/svg&gt;","primaryLink":"/blog/the-first-post","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.17.0"}
++main: {"time":1589123018694,"blocks":[{"type":"paragraph","data":{"text":"Automad ships with two elegant themes — <b>light</b> and <b>dark</b>. This page uses the blog template of the light theme. It is configured to hide the page title and to display a filtered set of pages in the grid below. <a href=\"/dashboard?context=edit_page&amp;url=%2Fblog#data-and-settings\">Check out</a> all settings and start playing around. Don't worry, nothing can break!<br>","large":true}},{"type":"buttons","data":{"primaryText":"The First Post &nbsp;&lt;svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 8 90 60\"&gt;&lt;polygon points=\"0,25 69.101,25 52.082,7.917 60,0 90,30 60,60 52.082,52.082 69.101,35 0,35 \"&gt;&lt;/polygon&gt;&lt;/svg&gt;","primaryLink":"/blog/the-first-post","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.17.0"}
 
 -
 
@@ -27,3 +27,7 @@ checkboxShowInNavbar: 1
 -
 
 filterPagelistByUrl: (/work|/blog/|/tutorials|/contact)
+
+-
+
+imageTeaser: /shared/image-square.png
