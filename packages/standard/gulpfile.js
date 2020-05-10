@@ -1,4 +1,13 @@
-/* Standard Themes */
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
 var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	cleanCSS = require('gulp-clean-css'),
@@ -84,29 +93,17 @@ gulp.task('standard-js', function() {
 	
 });	
 	
-// Compile, minify and prefix alpha.less.
-gulp.task('alpha-less', function() {
 
-	return 	gulp.src('alpha/less/alpha.less')
+// Compile, minify and prefix standard.less.
+gulp.task('standard-less', function() {
+
+	return 	gulp.src('less/standard.less')
 			.pipe(less())
 			.on('error', onError)
 			.pipe(autoprefixer({ grid: false }))
 			.pipe(cleanCSS(cleanCSSOptions))
 			.pipe(rename({ suffix: '.min' }))
-			.pipe(gulp.dest('alpha/dist'));
-	
-});
-
-// Compile, minify and prefix bravo.less.
-gulp.task('bravo-less', function() {
-
-	return 	gulp.src('bravo/less/bravo.less')
-			.pipe(less())
-			.on('error', onError)
-			.pipe(autoprefixer({ grid: false }))
-			.pipe(cleanCSS(cleanCSSOptions))
-			.pipe(rename({ suffix: '.min' }))
-			.pipe(gulp.dest('bravo/dist'));
+			.pipe(gulp.dest('dist'));
 	
 });
 
@@ -114,12 +111,11 @@ gulp.task('bravo-less', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('*/less/*.less', ['alpha-less', 'bravo-less']);
-	gulp.watch('less/*.less', ['alpha-less', 'bravo-less']);
+	gulp.watch('less/*.less', ['standard-less']);
 	gulp.watch('js/*.js', ['standard-js']);
 	
 });
 
 
 // The default task.
-gulp.task('default', ['standard-js', 'alpha-less', 'bravo-less']);
+gulp.task('default', ['standard-js', 'standard-less']);

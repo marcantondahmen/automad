@@ -1,0 +1,91 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@panel-box-padding:             @utility-container-padding-horizontal;
+@panel-box-padding-large:		@utility-container-large-padding-horizontal;
+
+@panel-box-background:          @panel-bg-color;
+@panel-box-color:               @text-color;
+@panel-box-hover-color:         @panel-box-color;
+
+@panel-teaser-margin-bottom: 	30px;
+
+@panel-title-margin-bottom:     0.6rem;
+@panel-title-font-size:         1.4rem;
+@panel-title-line-height:       1.28;
+@panel-title-font-weight:       @base-heading-font-weight;
+@panel-title-color:             @panel-box-color;
+@panel-box-title-color:         @panel-box-color;
+
+
+.hook-panel-box() {
+	
+	.masonry & {
+		
+		& > .uk-panel-teaser {
+			overflow: hidden;
+			margin-top: -@panel-box-padding;
+			margin-left: -@panel-box-padding;
+			margin-right: -@panel-box-padding;
+			border-bottom: @masonry-gap solid @base-body-background;
+		}
+		
+		@media (min-width: @breakpoint-xlarge) {
+
+			padding: @panel-box-padding-large;
+
+			& > .uk-panel-teaser {
+				margin-top: -@panel-box-padding-large;
+				margin-left: -@panel-box-padding-large;
+				margin-right: -@panel-box-padding-large;
+			}
+
+		}
+
+		& .uk-panel-teaser img {
+
+			box-shadow: none;
+			width: 100%;
+			border-radius: 0;
+			object-fit: cover;
+			.transition(transform 0.3s;);
+
+			&:hover {
+				transform: scale(1.1);
+			}
+
+		}
+
+		& .uk-panel-title a:not([class]) {
+
+			color: @panel-box-color;
+
+			&:hover {
+				color: @muted-color;
+			}
+			
+		}
+
+	}
+
+}
+
+.panel-more {
+
+	display: inline-block;
+	padding: 0 1rem;
+	margin: 1rem 0 0 -1rem;
+	color: inherit;
+	
+	&:hover {
+		color: @muted-color;
+	}
+
+}

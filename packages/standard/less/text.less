@@ -1,0 +1,33 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@text-muted-color: 		@muted-color;
+
+.text-subtitle {
+	
+	padding-top: 0.5rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	font-weight: @base-body-font-weight;
+	
+	h1 + div & {
+		padding-top: 1rem;
+	}
+
+	& a:not([class]) {
+		.hover-underline;
+	}
+
+}
+
+.am-paragraph-large {
+	font-size: 1.4rem;
+	line-height: 1.5;
+}

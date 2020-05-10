@@ -8,7 +8,6 @@
 	Standard.masonry = {
 
 		selectors: {
-			clean: '.masonry-clean-bottom-edge', // Apply this to any element in the document to trigger cleaning up the bottom of grids.
 			grid: '.masonry',
 			gallery: '.am-gallery-masonry',
 			item: '.masonry-item, .am-gallery-masonry-item',
@@ -123,10 +122,8 @@
 					this.style.gridRowEnd = 'span ' + Standard.masonry.calcItemRowSpan(this, rowHeight, rowGap);
 				});
 
-				if ($(Standard.masonry.selectors.clean).length) {
-					Standard.masonry.cleanBottomEdge($(masonry), $items, rowHeight, rowGap);
-				}
-
+				Standard.masonry.cleanBottomEdge($(masonry), $items, rowHeight, rowGap);
+				
 			});	
 
 		},
@@ -149,27 +146,23 @@
 
 			var galleryCleanBottom = function() {
 
-				if ($(Standard.masonry.selectors.clean).length) {
+				var $galleries = $(Standard.masonry.selectors.gallery);
 
-					var $galleries = $(Standard.masonry.selectors.gallery);
+				$galleries.each(function () {
 
-					$galleries.each(function () {
+					var gallery = this,
+						$items = $(gallery).find(Standard.masonry.selectors.item);
 
-						var gallery = this,
-							$items = $(gallery).find(Standard.masonry.selectors.item);
-
-						// Reset inline styles.
-						$items.each(function () {
-							this.style.gridRowStart = '';
-							this.style.gridRowEnd = '';
-							this.style.gridColumnStart = '';
-						});
-
-						Standard.masonry.cleanBottomEdge($(gallery), $items, 5, 0);
-
+					// Reset inline styles.
+					$items.each(function () {
+						this.style.gridRowStart = '';
+						this.style.gridRowEnd = '';
+						this.style.gridColumnStart = '';
 					});
 
-				}
+					Standard.masonry.cleanBottomEdge($(gallery), $items, 50, 0);
+
+				});
 
 			}
 

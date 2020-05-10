@@ -1,0 +1,47 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@pagination-margin-left:		0;
+@pagination-font-size: 			1rem;
+@pagination-padding-horizontal: 10px;
+
+@pagination-background:			@base-body-background;
+@pagination-color: 				@base-body-color;
+@pagination-hover-background:	@pagination-background;
+@pagination-hover-color:		@text-color;
+@pagination-onclick-background:	@pagination-background;
+@pagination-onclick-color:		@pagination-hover-color;
+@pagination-active-background:	@pagination-background;
+@pagination-active-color:		@pagination-hover-color;
+
+.hook-pagination-misc() {
+	
+	.uk-pagination {
+		text-align: center;
+	}
+	
+}
+
+.hook-pagination-item() {
+	font-weight: 700;
+	color: @pagination-color;
+	width: 2rem;
+	line-height: 2rem;
+	padding: 0;
+	margin: 0 0.2rem;
+	text-align: center;
+	.button(100%);
+}
+
+.hook-pagination-active() {
+	color: @pagination-active-color !important;
+	border-color: @pagination-active-color;
+	cursor: default;
+}
