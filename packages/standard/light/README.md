@@ -12,7 +12,6 @@ The Light theme is a clean and elegant multi-purpose theme. It provides several 
 - [Social Media Cards](#social-media-cards)
 - [Header and Footer Items](#header-and-footer-items)
 - [Slideshows](#slideshows)
-- [Email](#email)
 
 ## Templates
 
@@ -21,7 +20,6 @@ The following templates are included in this theme.
 | Name | Description |
 | ---- | ----------- |
 | Blog | A blog page grid template. Articles are displayed along with their teaser image, date, tags and the first paragraph. |
-| Contact | A simple contact page template including a mail form. |
 | Portfolio | A portfolio page grid template. Projects are displayed along with their teaser image, date and tags. |
 | Post | A blog post template. Related pages are displayed below the main content. |
 | Project | A project page template. Related pages are displayed below the main content. |
@@ -141,7 +139,3 @@ As described before, it is either possible to used the block editor or the tradi
 | ---- | ----------- |
 | Images Slideshow | One or more glob patterns to define the images showing up in the slideshow. |
 | Slideshow Height | The relative height of the slideshow depending on the width. |
-
-## Email
-
-To enable receiving emails via the contact form, an valid email address has to be entered into the `email` field of a contact page.

@@ -16,7 +16,6 @@
 		"checkboxShowAllPagesInPagelist": "Show not only children but all pages in the pagelist",
 		"checkboxShowInFooter": "Show a link to this page in the footer menu",
 		"checkboxShowInNavbar": "Show a link to this page in the main navbar",
-		"email": "Your contact email address",
 		"filterPagelistByUrl": "Filters the pagelist by URLs matching a given regular expression like for example '(/portfolio|/blog)'",
 		"formatDatePost": "The format for displaying the date of a post",
 		"formatDateProject": "The format for displaying the date of a project",
