@@ -30,4 +30,4 @@ filterPagelistByUrl: (/work|/blog/|/tutorials|/contact)
 
 -
 
-imageTeaser: /shared/image-square.png
+imageTeaser: /shared/image-landscape.png
