@@ -21,13 +21,13 @@
 					</div>
 					<div class="dropdown-menu" id="dropdown-menu" role="menu">
 						<div class="dropdown-content">
-							<a href="@{ urlTutorials }" class="dropdown-item">
+							<a href="/tutorials" class="dropdown-item">
 								Introduction
 							</a>
 							<hr class="dropdown-divider" />
 							<@ newPagelist { 
 								type: 'children',
-								context: @{ urlTutorials },
+								context: '/tutorials',
 								excludeHidden: false
 							} @>
 							<@ foreach in pagelist @>
