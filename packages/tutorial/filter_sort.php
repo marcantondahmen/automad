@@ -134,9 +134,11 @@ across multiple templates.
 						<div class="field is-size-6">
 							<# 
 							Multiple pipe functions can be chained. 
-							Here, all tags get stripped before shortening the content to 100 characters.
+							Here, the first paragraph block of the "+main" avriable is used
+							as teaser text. If there is no paragraph, the "textTeaser" variable is used as falback.
+							Then all tags get stripped before shortening the content to 100 characters.
 							#>
-							@{ textTeaser | 100 }
+							@{ +main | findFirstParagraph | def(@{ textTeaser }) | 100 }
 						</div>
 						<a href="@{ url }" class="button is-light is-small">More</a>
 					</div>

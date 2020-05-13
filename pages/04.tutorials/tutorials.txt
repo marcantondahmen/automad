@@ -6,10 +6,6 @@ date: 2019-11-19 12:00:00
 
 -
 
-tags: Tutorial
-
--
-
 textTeaser: This is a basic [Automad](https://automad.org) tutorial theme using the [Bulma](http://bulma.io) CSS Framework. You can use the templates listed below to learn, how templates work in Automad and to get started with developing your own themes.
 
 -
