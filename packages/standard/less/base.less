@@ -13,6 +13,11 @@
 @border:							@border-width solid @border-color;
 @radius: 							0;
 
+@font-large-breakpoint:				1600px;
+@font-large-factor:					1.125;
+@font-xlarge-breakpoint:			2100px;
+@font-xlarge-factor:				1.25;
+
 @base-body-background:				@bg-color;
 @base-body-font-family:				'Inter', sans-serif;
 @base-heading-font-family:			@base-body-font-family;
@@ -62,20 +67,20 @@ body {
 	overflow-x: hidden;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: @font-large-breakpoint) {
 
 	html,
 	body {
-		font-size: 18px;
+		font-size: @base-body-font-size * @font-large-factor;
 	}
 
 }
 
-@media (min-width: 2100px) {
+@media (min-width: @font-xlarge-breakpoint) {
 
 	html,
 	body {
-		font-size: 20px;
+		font-size: @base-body-font-size * @font-xlarge-factor;
 	}
 
 }

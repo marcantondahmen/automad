@@ -1,0 +1,21 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+.am-gallery-masonry {
+
+	@media (min-width: @font-large-breakpoint) {
+		grid-template-columns: repeat(auto-fill, minmax(~"calc(var(--am-gallery-item-width) * @{font-large-factor})", 1fr));
+	}
+
+	@media (min-width: @font-xlarge-breakpoint) {
+		grid-template-columns: repeat(auto-fill, minmax(~"calc(var(--am-gallery-item-width) * @{font-xlarge-factor})", 1fr));
+	}
+
+}
