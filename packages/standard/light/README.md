@@ -2,7 +2,10 @@
 
 The Light theme is a clean and elegant multi-purpose theme. It provides several options to display your content. Please read below more about the main concepts of this theme.
 
+![](https://standard.dev.automad.org/shared/standard-light.png)
+
 - [Templates](#templates)
+- [Colors](#colors)
 - [Writing Content](#writing-content)
 - [Pagelist Configuration](#pagelist-configuration)
 - [Title, Navigation, Filtering and Sorting](#title-navigation-filtering-and-sorting)
@@ -25,6 +28,19 @@ The following templates are included in this theme.
 | Project | A project page template. Related pages are displayed below the main content. |
 | Sidebar Left | A multi-purpose template with a navigation sidebar on the left. |
 | Sidebar Right | A multi-purpose template with a navigation sidebar on the right. |
+
+## Colors
+
+While there is a light and a dark theme serving as presets, all the colors used in the templates are fully customizable.
+
+| Name | Description |
+| ---- | ----------- |
+| Color Text | A custom override text color |
+| Color Bg | A custom override background color |
+| Color Border | A custom override border color |
+| Color Muted | A custom override color for muted and hovered text |
+| Color Panel Bg | A custom override color for panel backgrounds |
+| Color Code | A custom override code color |
 
 ## Writing Content
 
