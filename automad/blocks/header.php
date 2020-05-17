@@ -36,6 +36,7 @@
 
 
 namespace Automad\Blocks;
+use Automad\Core\Str as Str;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,9 +62,9 @@ class Header {
 
 	public static function render($data) {
 
-		$text = htmlspecialchars_decode($data->text);
-
-		return "<h$data->level>$text</h$data->level>";
+		return 	'<h' . $data->level . ' id="' . Str::sanitize($data->text, true) . '">' . 
+					htmlspecialchars_decode($data->text) . 
+				'</h' . $data->level . '>';
 
 	}
 
