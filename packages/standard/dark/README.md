@@ -68,6 +68,8 @@ This theme offers multiple options and two templates &mdash; **Blog** and **Port
 | Url Tag Link Target | The target page to navigate to when clicking a tag. By default the parent page is used. |
 | Image Teaser | The filename or glob pattern for the image to be used as the teaser image in a pagelist. |
 | Hide Thumbnails | Hide teaser images in page grid. |
+| Sort Related Pages | Sorting of the pagelist with related pages. The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc). |
+		
 
 ## Title, Navigation, Filtering and Sorting
 
