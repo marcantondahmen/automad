@@ -5,7 +5,7 @@
 		context: @{ showPagesBelow },
 		filter: @{ ?filter }, 
 		match: '{"url": "#@{ filterPagelistByUrl }#"}',
-		sort: @{ ?sort | def('date desc') },
+		sort: @{ ?sort | def (@{ sortPagelist }) | def('date desc') },
 		limit: @{ itemsPerPage | def(10) },
 		page: @{ ?page | def(1) }
 	} ~@>

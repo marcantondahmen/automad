@@ -55,6 +55,7 @@
 		"placeholderSubject": "Placeholder text for the subject input field",
 		"showPagesBelow": "Define an alternative URL to be used as the pagelist's parent page, instead of the current one",
 		"slideshowHeight": "The height of the slideshow in pixels",
+		"sortPagelist": "Sorting of the pages in a portfolio or blog pagelist. Note that the sorting and filtering buttons should be hidden in case this variable is defined! The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc) like ':path asc'.",
 		"sortRelatedPages": "Sorting of the pagelist with related pages. The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc).",
 		"text": "An alternative content variable. It is only displays as long as the +Main variable is empty.",
 		"textTeaser": "An alternative teaser variable. It is only displayed as long as the +Main variable is empty.",
