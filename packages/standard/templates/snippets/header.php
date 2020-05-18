@@ -21,7 +21,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">	
 	<link href="/packages/standard/dist/standard.min.css?v=@{ :version | sanitize }" rel="stylesheet">
 	<script src="/packages/standard/dist/standard.min.js?v=@{ :version | sanitize }"></script>
-	<@ colors.php @>
+	<@ colors_header.php @>
 	<# Add optional header items. #>
 	@{ itemsHeader }
 </head>

@@ -2,7 +2,7 @@
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
 <div class="masonry<@ if @{ :pagelistCount } > 3 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
-		<div class="masonry-item">
+		<div class="masonry-item" <@ colors_inline.php @>>
 			<div class="masonry-content uk-panel uk-panel-box">
 				<@ if not @{ :hideThumbnails } @>
 					<@~ set_imageteaser_variable.php @>
