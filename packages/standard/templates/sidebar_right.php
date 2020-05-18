@@ -4,6 +4,7 @@
 		<div class="uk-width-large-3-4">
 			<div class="content uk-block sidebar-block">
 				<@ snippets/content.php @>
+				<@ snippets/related_simple.php @>
 			</div>
 		</div>
 		<@ snippets/sidebar.php @>
