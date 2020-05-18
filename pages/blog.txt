@@ -26,6 +26,10 @@ checkboxShowAllPagesInPagelist: 1
 
 -
 
+filterPagelistByUrl: ^/
+
+-
+
 checkboxLightColorScheme: 1
 
 -

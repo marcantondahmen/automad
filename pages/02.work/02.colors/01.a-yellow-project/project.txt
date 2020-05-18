@@ -1,0 +1,33 @@
+title: A Yellow Project
+
+-
+
+url: ../
+
+-
+
+date: 2020-04-15 12:00:00
+
+-
+
+tags: Yellow
+
+-
+
++main: {"time":1589829284560,"blocks":[{"type":"paragraph","data":{"text":"Use custom background colors to fit the page to your artwork's color scheme or images.<br>","large":false}}],"version":"2.17.0"}
+
+-
+
+colorBg: #ffe86e
+
+-
+
+colorMuted: #968841
+
+-
+
+colorPanelBg: #ffe86e
+
+-
+
+colorText: #292929

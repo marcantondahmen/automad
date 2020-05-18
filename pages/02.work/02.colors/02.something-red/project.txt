@@ -1,0 +1,33 @@
+title: Something Red
+
+-
+
+url: ../
+
+-
+
+date: 2020-05-18 12:00:00
+
+-
+
+tags: Red
+
+-
+
++main: {"time":1589829333704,"blocks":[{"type":"paragraph","data":{"text":"Make certain pages stand out with just changing their text color. Or change the color scheme of the entire site in the global settings.<br>","large":false}}],"version":"2.17.0"}
+
+-
+
+colorBg: #ff6c53
+
+-
+
+colorMuted: #aa4938
+
+-
+
+colorPanelBg: #ff6c53
+
+-
+
+colorText: #292929

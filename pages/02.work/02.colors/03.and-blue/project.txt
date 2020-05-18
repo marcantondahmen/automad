@@ -1,0 +1,33 @@
+title: And Blue
+
+-
+
+url: ../
+
+-
+
+date: 2020-02-12 12:00:00
+
+-
+
+tags: Blue
+
+-
+
++main: {"time":1589828112206,"blocks":[{"type":"paragraph","data":{"text":"Custom page colors are also reflected in pagelists.<br>","large":false}}],"version":"2.17.0"}
+
+-
+
+colorBg: #80e8ff
+
+-
+
+colorMuted: #498492
+
+-
+
+colorPanelBg: #80e8ff
+
+-
+
+colorText: #292929

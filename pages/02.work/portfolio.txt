@@ -23,3 +23,7 @@ checkboxShowAllPagesInPagelist: 1
 -
 
 checkboxShowInNavbar: 1
+
+-
+
+filterPagelistByUrl: ^/
