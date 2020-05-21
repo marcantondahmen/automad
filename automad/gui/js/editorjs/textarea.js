@@ -132,6 +132,16 @@ class AutomadTextareaCode extends AutomadTextarea {
 		return 'Enter Code';
 	}
 
+	onPaste(event) {
+		this.input.value = event.detail.data.textContent;
+	}
+
+	static get pasteConfig() {
+		return {
+			tags: ['pre'],
+		};
+	}
+
 }
 
 class AutomadTextareaRaw extends AutomadTextarea {
