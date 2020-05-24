@@ -194,7 +194,7 @@ class Str {
 		} else {
 			$str = \Michelf\MarkdownExtra::defaultTransform($str);
 			return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function($matches) {
-				$id = self::sanitize($matches[2], true, 200);
+				$id = self::sanitize(self::stripTags($matches[2]), true, 100);
 				return "<h{$matches[1]} id=\"$id\">{$matches[2]}</h{$matches[1]}>";
 			}, $str);
 		}
