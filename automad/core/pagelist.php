@@ -263,7 +263,7 @@ class Pagelist {
 		if ($this->context) {
 			$context = $this->context;
 		} else {
-			$context = $this->Context->get()->url;
+			$context = $this->Context->get()->origUrl;
 		}
 		
 		// Filter by type.
