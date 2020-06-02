@@ -22,6 +22,7 @@ across multiple templates.
 			#>
 			<@ newPagelist {  
 				filter: @{ ?filter }, 
+				match: '{":level": "/(1|2)/"}',
 				search: @{ ?search },
 				sort: @{ ?sort | def ('date desc') }
 			} @>

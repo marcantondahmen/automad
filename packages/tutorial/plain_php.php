@@ -42,6 +42,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 			// controllable by a menu.
 			$Pagelist->config(array(
 				'filter' => Request::query('filter'),
+				'match' => '{":level": "/(1|2)/"}',
 				'search' => Request::query('search'),
 				'sort' => Str::def(Request::query('sort'), 'date desc')
 			));

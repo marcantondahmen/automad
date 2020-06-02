@@ -2,7 +2,7 @@
 
 The Dark theme is a clean and elegant multi-purpose theme. It provides several options to display your content. Please read below more about the main concepts of this theme.
 
-![](https://github.com/marcantondahmen/media-files/raw/master/automad/themes/dark.png)
+![](https://raw.githubusercontent.com/marcantondahmen/media-files/master/automad/themes/dark.png)
 
 - [Templates](#templates)
 - [Colors](#colors)
