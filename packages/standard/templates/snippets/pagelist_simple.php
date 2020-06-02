@@ -2,7 +2,10 @@
 <@ foreach in pagelist ~@>
 	<div class="uk-panel uk-panel-box" <@ colors_inline.php @>>
 		<div class="uk-panel-title uk-margin-bottom-remove">
-			<a href="@{ url }" class="nav-link">@{ title }</a>
+			<a href="@{ url }" class="nav-link">
+				<@ icon.php @>
+				@{ title }
+			</a>
 		</div>
 		<@ subtitle.php @>
 		<@~ set_teaser_variable.php @>

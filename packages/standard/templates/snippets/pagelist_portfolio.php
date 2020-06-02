@@ -4,7 +4,7 @@
 	<@ foreach in pagelist ~@>
 		<div class="masonry-item" <@ colors_inline.php @>>
 			<div class="masonry-content uk-panel uk-panel-box">
-				<@ if not @{ :hideThumbnails } @>
+				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
 					<@~ set_imageteaser_variable.php @>
 					<@~ if @{ :imageTeaser } @>
 						<div class="uk-panel-teaser">
@@ -13,7 +13,10 @@
 					<@~ end ~@>
 				<@ end @>
 				<div class="uk-panel-title uk-margin-bottom-remove">
-					<a href="@{ url }">@{ title }</a>
+					<a href="@{ url }">
+						<@ icon.php @>
+						@{ title }
+					</a>
 					<div class="text-subtitle">
 						<@ date.php @>
 						<@ if @{ date } and @{ tags } @><br><@ end @>

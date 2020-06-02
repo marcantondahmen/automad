@@ -97,6 +97,7 @@ To set the brand name, a navbar logo and favicons, use the following options.
 | Logo Height | The height of your logo - this variable should be defined globally in the shared data section. |
 | Favicon | The local path to the icon to be used as favicon. |
 | Image Apple Touch Icon | The image to be used as the Apple touch icon. |
+| Page Icon Svg | A little SVG icon representing a page in a pagelist card. |
 
 ## Labels
 

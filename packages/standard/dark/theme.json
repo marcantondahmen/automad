@@ -25,6 +25,7 @@
 		"filterPagelistByUrl": "Filters the pagelist by URLs matching a given regular expression like for example '(/portfolio|/blog)'",
 		"formatDatePost": "The format for displaying the date of a post",
 		"formatDateProject": "The format for displaying the date of a project",
+		"pageIconSvg": "A little SVG icon representing the page in a pagelist card",
 		"imageAppleTouchIcon": "The image to be used as the Apple touch icon",
 		"imageFavicon": "The icon to be used as favicon",
 		"imagesSlideshow": "One or more glob patterns to define the images showing up in the slideshow",
