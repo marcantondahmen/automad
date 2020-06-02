@@ -1,0 +1,92 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-buttons {
+
+	&-center {
+		text-align: center;
+	}
+
+	& .am-button {
+
+		display: inline-block;
+		box-sizing: content-box;
+		margin: var(--am-button-margin);
+		padding: var(--am-button-padding);
+		height: var(--am-button-height);
+		line-height: var(--am-button-lineheight);
+		font-family: inherit;
+		font-weight: inherit;
+		font-size: var(--am-button-font-size);
+		text-transform: none;
+		text-decoration: none;
+		text-align: center;
+		cursor: pointer;
+		border-radius: var(--am-button-radius);
+		color: var(--am-button-color);
+		background-color: var(--am-button-background);
+		border: var(--am-button-border);
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&:hover,
+		&:active,
+		&:focus {
+			color: var(--am-button-hover-color);
+			background-color: var(--am-button-hover-background);
+			border: var(--am-button-hover-border);
+		}
+
+		&-primary {
+
+			color: var(--am-button-primary-color);
+			background-color: var(--am-button-primary-background);
+			border: var(--am-button-primary-border);
+
+			&:hover,
+			&:active,
+			&:focus {
+				color: var(--am-button-primary-hover-color);
+				background-color: var(--am-button-primary-hover-background);
+				border: var(--am-button-primary-hover-border);
+			}
+
+		}
+
+	}
+
+} 

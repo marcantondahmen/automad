@@ -122,6 +122,19 @@ class Text {
 		}
 		
 	}
+
+
+	/**
+	 * 	Return the modules as object to be used in heredoc strings.
+	 * 
+	 * 	@return object The modules array as object
+	 */
+
+	public static function getObject() {
+
+		return (object) self::$modules;
+
+	}
 	
 	
 }

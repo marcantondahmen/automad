@@ -141,6 +141,44 @@ class Str {
 
 
 	/**
+	 *	Find the URL of the first image within rendered HTML markup.
+	 *
+	 * 	@param string $str
+	 * 	@return string The URL of the first image or false 
+	 */
+
+	public static function findFirstImage($str) {
+
+		preg_match('/<img[^>]+src="([^"]+)"/is', $str, $matches);
+		
+		if (!empty($matches[1])) {
+			return $matches[1];
+		}
+
+	}
+
+
+	/**
+	 *	Find the first paragraph in rendered HTML and return its inner HTML.
+	 *
+	 * 	@param string $str
+	 * 	@return string The inner HTML of the first paragraph or false
+	 */
+
+	public static function findFirstParagraph($str) {
+
+		// First remove any paragraph only containing an image.
+		$str = preg_replace('/<p>\s*<img.+?><\/p>/is', '', $str);
+		preg_match('/<p[^>]*>(.*?)<\/p>/is', $str, $matches);
+		
+		if (!empty($matches[1])) {
+			return $matches[1];
+		}
+
+	}
+
+
+	/**
 	 *	Parse a markdown string. Optionally skip parsing in case $str is a single line string.
 	 *
 	 *	@param string $str
@@ -154,7 +192,11 @@ class Str {
 		if (strpos($str, "\n") === false && $multilineOnly) { 
 			return $str;
 		} else {
-			return \Michelf\MarkdownExtra::defaultTransform($str);
+			$str = \Michelf\MarkdownExtra::defaultTransform($str);
+			return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function($matches) {
+				$id = self::sanitize(self::stripTags($matches[2]), true, 100);
+				return "<h{$matches[1]} id=\"$id\">{$matches[2]}</h{$matches[1]}>";
+			}, $str);
 		}
 		
 	}
@@ -214,6 +256,9 @@ class Str {
 		
 		// Convert slashes separately to avoid issues with regex in URLify.
 		$str = str_replace('/', '-', $str);
+
+		// Convert dashes to simple hyphen.
+		$str = str_replace(array('&mdash;', '&ndash;'), '-', $str);
 		
 		// Configure URLify. 
 		// Add non-word chars and reset the remove list.

@@ -1,0 +1,161 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-block-editor {
+
+	& .ce-inline-toolbar {
+		background-color: transparent;
+		border: none !important;
+		box-shadow: none;
+	}
+
+	& .ce-inline-toolbar__buttons,
+	& .ce-conversion-toolbar {
+		overflow: hidden;
+		padding: 0;
+		background-color: @am-block-dropdown-background;
+		border-radius: @am-radius;
+		border: none !important;
+		.shadow;
+	}
+
+	& .ce-inline-toolbar__dropdown,
+	& .ce-inline-tool {
+
+		margin: 0;
+		padding: 0 10px !important;
+		text-align: center;
+		color: @nav-dropdown-color;
+		background-color: @am-block-dropdown-background;
+		.transition(color 0.2s, background-color 0.2s;);
+
+		&:hover,
+		&:focus {
+			color: @nav-dropdown-hover-color;
+			background-color: @nav-dropdown-hover-background;
+		}
+
+		&--active {
+
+			color: @nav-dropdown-hover-color;
+			background-color: @nav-dropdown-hover-background;
+
+			&:hover,
+			&:focus {
+				color: @button-success-hover-color;
+				background-color: @button-success-hover-background;
+			}
+		}
+
+	}
+
+	& .ce-inline-toolbar {
+
+		& svg {
+			box-sizing: border-box;
+			height: 34px;
+			min-height: 34px;
+			max-height: 34px;
+			width: 14px;
+			min-width: 14px;
+			max-width: 14px;
+			padding: 11px 0;
+		}
+
+	}
+
+	& .ce-inline-toolbar__dropdown {
+		border-right: @am-hairline;
+	}
+
+	& .ce-inline-toolbar__actions {
+
+		margin-top: 5px;
+		
+		& input {
+			.shadow;
+		}
+	
+	}
+
+	& .ce-conversion-toolbar {
+		overflow: hidden;
+	}
+
+	& .ce-conversion-toolbar__label {
+		padding: 7px 10px;
+		color: @am-text;
+		text-transform: inherit;
+		font-weight: normal;
+		font-size: 11px;
+		border-bottom: @am-hairline;
+	}
+
+	& .ce-conversion-tool {
+
+		padding: 5px 10px;
+		font-weight: normal;
+		color: @nav-dropdown-color;
+		background-color: @am-block-dropdown-background;
+		border: none;
+		.transition(color 0.2s, background-color 0.2s;);
+
+		&:hover,
+		&:focus,
+		&--focused {
+			color: @nav-dropdown-hover-color;
+			background-color: @nav-dropdown-hover-background !important;
+			border: none;
+		}
+
+		&__icon {
+
+			width: 14px;
+			height: 14px;
+			color: inherit;
+			background-color: inherit;
+			border: none;
+
+			& svg {
+				margin-top: -2px;
+				width: auto;
+				height: 100%;
+			}
+
+		}
+
+	}
+
+}

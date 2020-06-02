@@ -63,6 +63,9 @@
 			 *      								Note that a page can only (!) have once a handler with the same name.
 			 *      								Having multiple forms with the same handler confuses button and watch states.
 			 *
+			 * 	data-am-dashboard="url"				The URL of the dashboard.
+			 * 										This is required to add a base URL to AJAX requests in in-page editing.
+			 * 
 			 * 	data-am-url="page"					To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
 			 *										included in the request.
 			 *										Therefore the data attribute "data-am-url" must be added to the form tag. 
@@ -95,6 +98,7 @@
 			 */
 			
 			handler: 		'data-am-handler',
+			dashboard:		'data-am-dashboard',
 			url:			'data-am-url',
 			submit:			'data-am-submit',
 			init:			'data-am-init',
@@ -143,11 +147,13 @@
 			 */
 			
 			var	f = Automad.form,
-				da = f.dataAttr,
 				$form = $(e.target),
 				
 				// Action
 				handler = $form.data(Automad.util.dataCamelCase(f.dataAttr.handler)),
+
+				// Dashboard base URL.
+				dashboard = $form.data(Automad.util.dataCamelCase(f.dataAttr.dashboard)),
 				
 				// Optional URL parameter.
 				// Only needed, to identify a page, in case the form relates to a certain page (edit_page.php).
@@ -162,30 +168,37 @@
 				param.push({name: 'url', value: url});
 			}	
 			
+			// Set dashboard to an empty string if undefined.
+			if (dashboard === undefined) {
+				dashboard = '';
+			}
+
 			// Post form data to the handler.
-			$.post('?ajax=' + handler, param, function(data) {
+			$.post(dashboard + '?ajax=' + handler, param, function(data) {
 			
 				// In case the returned JSON contains a redirect URL, simply redirect the page.
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
 				if (data.redirect) {
 					window.location.href = data.redirect;
-					return false;
 				}
 
 				// Reload the current page.
 				if (data.reload) {
 					window.location.reload();
-					return false;
 				}
 
-				// Trigger event.
-				if (data.trigger) {
-					$('html').trigger(data.trigger);
+				if (data.redirect || data.reload) {
+					return false;
 				}
 
 				// If HTML gets returned within the JSON data, replace the form's (inner) HTML.
 				if (data.html) {
 					$form.html(data.html);
+				}
+
+				// Trigger event.
+				if (data.trigger) {
+					$('html').trigger(data.trigger);
 				}
 				
 				// Display error, if existing.
@@ -217,12 +230,16 @@
 
 				var data = xhr.responseJSON;
 				
-				if (data.trigger) {
-					$('html').trigger(data.trigger);
-				}
+				if (data) {
 
-				if (data.error) {
-					Automad.notify.error(data.error);
+					if (data.trigger) {
+						$('html').trigger(data.trigger);
+					}
+
+					if (data.error) {
+						Automad.notify.error(data.error);
+					}
+
 				}
 
 			});
@@ -381,26 +398,24 @@
 			$doc.on('change drop cut paste keydown', 
 				'[' + da.handler + ']:not([' + da.autoSubmit + ']) input:not([' + da.watchExclude + ']), ' +
 				'[' + da.handler + ']:not([' + da.autoSubmit + ']) textarea:not([' + da.watchExclude + ']), ' +
-				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + '])', 
+				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + ']), ' +
+				'.am-inpage form *', 
 				function() {
 				
 					var	$form = $(this).closest('[' + da.handler + ']'),
 						handler = $form.data(Automad.util.dataCamelCase(da.handler));
 					
 					$('html').addClass(f.unsavedClassPrefix + handler);
-					$('button[' + da.submit + '="' + handler + '"]:disabled').prop('disabled', false);
+					$('button[' + da.submit + '="' + handler + '"]:disabled, .am-inpage [type="submit"]').prop('disabled', false);
 					
 					// Change label color to flag input as changed.
-					$(this).prevAll('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-form-icon, [data-am-toggle], [data-am-datetime], [data-am-colorpicker]').prev('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-htmleditor').closest('[data-uk-tooltip]').prev('.uk-form-label').addClass(f.unsavedClassInput);
-					$(this).closest('.uk-grid').prev('.uk-form-label').addClass(f.unsavedClassInput);
+					$(this).closest('.uk-form-row, .am-inpage form').find('.uk-form-label').addClass(f.unsavedClassInput);
 					
 				}
 			);
 			
 			// Remove 'am-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.
-			$doc.on('submit', '[' + da.handler + ']', function(){
+			$doc.on('submit', '[' + da.handler + '], .am-inpage form', function(){
 				
 				var handler = $(this).data(Automad.util.dataCamelCase(da.handler));
 				
@@ -483,14 +498,23 @@
 					// forms with a 'data-am-init' attribute must be cleared and re-submitted to
 					// pull updates. 
 					// Clearing the form is important to avoid auto-submitting unwanted changes 
-					// before updateing the form.
+					// before updating the form.
 					$(this).find('[' + Automad.form.dataAttr.init + ']').each(function() {
-						$(this).empty().submit();
+						$(this)
+						.empty()
+						.html('<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>')
+						.submit();
 					});
 					
 					// Focus first input (not disabled and not on any touch device).
 					if ($('html.uk-notouch').length) {
-						$(this).find('input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
+
+						var $modal = $(this);
+
+						setTimeout(function() {
+							$modal.find('input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
+						}, 250);
+						
 					}
 					
 				},

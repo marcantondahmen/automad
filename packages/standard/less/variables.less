@@ -1,0 +1,104 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@breakpoint-small:	480px;
+@breakpoint-medium:	768px;
+@breakpoint-large:	1020px;
+@breakpoint-xlarge:	1250px;
+
+// Colors
+@text-color: var(--color-text);
+@bg-color: var(--color-bg);
+@border-color: var(--color-border);
+@muted-color: var(--color-muted);
+@panel-bg-color: var(--color-panel-bg);
+@code-color: var(--color-code);
+
+:root {
+
+	--color-text: #181818;
+	--color-bg: #FFFFFF;
+	--color-border: #EDEDED;
+	--color-muted: #444444;
+	--color-panel-bg: #F6F6F6;
+	--color-code: #222222;
+
+	&.standard-dark {
+		--color-text: #FFFFFF;
+		--color-bg: #121212;
+		--color-border: #323232;
+		--color-muted: #777777;
+		--color-panel-bg: #1B1B1B;
+		--color-code: #E0E0E0;
+	}
+
+	// Gallery
+	--am-gallery-gap: @masonry-column-gap;
+	--am-gallery-item-width: 200px;
+	--am-gallery-z-index: 9999;
+	--am-gallery-max-height: 100%;
+	--am-gallery-max-width: 100%;
+	--am-gallery-background: @bg-color;
+	--am-gallery-controls-color: @text-color;
+	--am-gallery-controls-background: @bg-color;
+
+	// Slider
+	--am-slider-controls-color: var(--am-gallery-controls-color);
+	--am-slider-controls-background: var(--am-gallery-controls-background);
+
+	// Mail
+	--am-mail-input-margin: @form-gutter 0;
+	--am-mail-input-padding: @form-padding;
+	--am-mail-input-color: inherit;
+	--am-mail-input-placeholder-color: @form-placeholder-color;
+	--am-mail-input-background: @form-background;
+	--am-mail-input-radius: @button-radius;
+	--am-mail-input-border: @form-border-width solid @form-border;
+	--am-mail-input-hover-color: var(--am-mail-input-color);
+	--am-mail-input-hover-background: var(--am-mail-input-background);
+	--am-mail-input-hover-border: var(--am-mail-input-border);
+	--am-mail-input-focus-color: var(--am-mail-input-color);
+	--am-mail-input-focus-background: var(--am-mail-input-background);
+	--am-mail-input-focus-border: @form-border-width solid @form-focus-border;
+	
+	--am-mail-button-margin: var(--am-mail-input-margin);
+	--am-mail-button-padding: 0 @button-padding-horizontal;
+	--am-mail-button-height: @button-height;
+	--am-mail-button-lineheight: @button-line-height;
+	--am-mail-button-radius: var(--am-mail-input-radius);
+	--am-mail-button-color: @text-color;
+	--am-mail-button-background: inherit;
+	--am-mail-button-border: 2px solid @text-color;
+	--am-mail-button-hover-color: inherit;
+	--am-mail-button-hover-background: inherit;
+	--am-mail-button-hover-border: 2px solid @form-border;
+
+	// Buttons 
+	--am-button-margin: 1.25rem 0.25rem;
+	--am-button-padding: 0 1.15rem;
+	--am-button-font-size: 1.15rem;
+	--am-button-height: 2.75rem;
+	--am-button-lineheight: 2.75rem;
+	--am-button-radius: @button-radius;
+	--am-button-color: inherit;
+	--am-button-background: inherit;
+	--am-button-border: @border-width solid @border-color;
+	--am-button-hover-color: @text-color;
+	--am-button-hover-background: inherit;
+	--am-button-hover-border: @border-width solid @text-color;
+
+	--am-button-primary-color: @text-color;
+	--am-button-primary-background: inherit;
+	--am-button-primary-border: @border-width solid @text-color;
+	--am-button-primary-hover-color: @text-color;
+	--am-button-primary-hover-background: inherit;
+	--am-button-primary-hover-border: @border-width solid @border-color;
+
+}

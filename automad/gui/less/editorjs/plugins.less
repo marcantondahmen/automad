@@ -1,0 +1,231 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-block-editor {
+
+	& .cdx-block {
+
+		padding: 0;
+		left: 0;
+
+		& > img {
+			margin: 0 !important;
+			border-radius: 5px !important;
+		}
+
+	}
+
+	& .cdx-list {
+
+		padding-left: 10px;
+		list-style-position: inside;
+
+		&__item {
+			padding: 0.2rem 0 0.2rem 0.2rem;
+			line-height: inherit;
+		}
+
+	}
+
+	& .cdx-quote {
+
+		border: none;
+		background-color: transparent;
+
+		@media (min-width: @breakpoint-large) {
+
+			&:before {
+				content: '\f10d';
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				font-family: FontAwesome;
+				font-size: 1.8rem;
+				line-height: 1;
+				color: @am-border-color;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
+		}
+		
+	}
+	
+	& .cdx-input {
+	
+		box-sizing: border-box;
+		padding: @form-padding;
+		padding-top: 7px;
+		padding-bottom: 7px;
+		min-height: @form-height;
+		line-height: @base-body-line-height;
+		background-color: @form-background;
+		border: @am-border-width solid @am-border-color;
+		border-radius: @am-radius !important;
+		box-shadow: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		appearance: none;
+		.transition(border-color 0.2s;);
+
+		&,
+		&:empty {
+			margin: 5px 0 0 0 !important;
+		}
+
+		&:hover {
+			color: @form-color;
+		}
+		
+		&:focus {
+			border-color: @am-success;
+		}
+
+	}
+
+	& .ce-code {
+
+		font-family: @base-code-font-family;
+		font-size: 0.925em;
+		
+		&,
+		&:empty {
+			margin-top: 0 !important;
+		}
+
+	}
+
+	& .ce-header {
+		padding: 0;
+		margin: 20px 0 10px 0;
+	}
+
+	& .ce-delimiter {
+
+		margin: 0 !important;
+		line-height: 0;
+		max-height: 19px;
+
+		&:before {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 0;
+			margin: 9px 0;
+			line-height: 0;
+			border-bottom: @am-hairline
+		}
+
+	}
+
+	& .am-paragraph-large {
+		font-size: 1.3em;
+		line-height: 1.5;
+	}
+
+	& .tc-table {
+		
+		&__wrap {
+			border-radius: @am-block-radius;
+			border-color: @am-border-color;
+		}
+
+		&__cell {
+			border-color: @am-border-color;
+		}
+
+		&__area {
+			padding: 8px 10px;
+		}
+
+	}
+
+	& .tc-toolbar {
+
+		&__plus {
+			
+			circle {
+				fill: @am-success !important;
+			}
+			
+		}
+
+		&__shine-line--ver,
+		&__shine-line--hor {
+			background-color: @am-success;
+		}
+
+	}
+
+	& .uk-panel-box {
+		background-color: transparent;
+		border: @am-border-width dashed @am-border-color;
+	}
+
+	& .am-block-label {
+
+		display: inline-block;
+		margin-top: @utility-margin-small;
+		margin-bottom: @form-stacked-margin-bottom;
+		padding: 4px 6px;
+		vertical-align: top;
+		font-size: @text-small-font-size;
+		font-weight: @form-stacked-font-weight;
+		line-height: @text-small-font-size;
+		color: @am-text;
+		background-color: @button-background;
+		border-radius: @am-radius-small;
+
+		& + *,
+		& + *:empty {
+			margin-top: 0 !important;
+		}
+
+	}
+
+	& .am-block-icon {
+
+		padding-top: 10px;
+
+		& svg {
+			height: 30px;
+			width: 100%;
+			fill: @am-text;
+		}
+
+	}
+
+}

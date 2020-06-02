@@ -37,6 +37,7 @@
 
 namespace Automad\GUI;
 use Automad\Core as Core;
+use Automad\Core\Request as Request;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,13 +62,6 @@ class Content {
 
 
 	/**
-	 *  The Html object.
-	 */
-	
-	private $Html;
-	
-	
-	/**
 	 *	Set $this->Automad when creating an instance.
 	 *
 	 *	@param object $Automad
@@ -76,7 +70,6 @@ class Content {
 	public function __construct($Automad) {
 		
 		$this->Automad = $Automad;
-		$this->Html = new Html($Automad);
 		
 	}
 	
@@ -90,21 +83,24 @@ class Content {
 	public function addPage() {
 		
 		$output = array();
-		
+		$url = Request::post('url');
+
 		// Validation of $_POST. URL, title and template must exist and != false.
-		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
+		if ($url && ($Page = $this->Automad->getPage($url))) {
 	
-			if (isset($_POST['subpage']) && isset($_POST['subpage']['title']) && $_POST['subpage']['title']) {
+			$subpage = Request::post('subpage');
+
+			if (is_array($subpage) && !empty($subpage['title'])) {
 		
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
 	
 					Core\Debug::log($Page->url, 'page');
-					Core\Debug::log($_POST['subpage'], 'new subpage');
+					Core\Debug::log($subpage, 'new subpage');
 	
 					// The new page's properties.
-					$title = $_POST['subpage']['title'];
-					$themeTemplate = $this->getTemplateNameFromArray($_POST['subpage'], 'theme_template');
+					$title = $subpage['title'];
+					$themeTemplate = $this->getTemplateNameFromArray($subpage, 'theme_template');
 					$theme = dirname($themeTemplate);
 					$template = basename($themeTemplate);
 					
@@ -125,11 +121,17 @@ class Content {
 					$newPagePath = FileSystem::appendSuffixToPath($newPagePath, $suffix); 
 					
 					// Data. Also directly append possibly existing suffix to title here.
-					$data = array(AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)));
+					$data = array(
+						AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
+						AM_KEY_HIDDEN => (!empty($subpage['hidden']))
+					);
 					
 					if ($theme != '.') {
 						$data[AM_KEY_THEME] = $theme;
 					}
+
+					// Set date.
+					$data[AM_KEY_DATE] = date('Y-m-d H:i:s');
 					
 					// Build the file name and save the txt file. 
 					$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
@@ -307,14 +309,16 @@ class Content {
 	public function deletePage() {
 		
 		$output = array();
+		$url = Request::post('url');
+		$title = Request::post('title');
 
 		// Validate $_POST.
-		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url'])) && $_POST['url'] != '/' && !empty($_POST['title'])) {
+		if ($url && ($Page = $this->Automad->getPage($url)) && $url != '/' && $title) {
 
 			// Check if the page's directory and parent directory are wirtable.
 			if (is_writable(dirname($this->getPageFilePath($Page))) && is_writable(dirname(dirname($this->getPageFilePath($Page))))) {
 
-				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $_POST['title']);
+				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $title);
 				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
 				Core\Debug::log($Page->url, 'deleted');
 
@@ -346,10 +350,9 @@ class Content {
 	public function duplicatePage() {
 		
 		$output = array();
+		$url = Request::post('url');
 		
-		if (!empty($_POST['url'])) {
-			
-			$url = $_POST['url'];
+		if ($url) {
 			
 			if ($url != '/' && ($Page = $this->Automad->getPage($url))) {
 				
@@ -400,50 +403,45 @@ class Content {
 	public function editFileInfo() {
 		
 		$output = array();
+		$newName = Request::post('new-name');
+		$oldName = Request::post('old-name');
+		$caption = Request::post('caption');
 
-		if (!empty($_POST['old-name']) && !empty($_POST['new-name']) && isset($_POST['caption'])) {
+		if ($oldName && $newName) {
 	
-			if ($_POST['new-name']) {
-				
-				$path = $this->getPathByPostUrl();
-				$oldFile = $path . basename($_POST['old-name']);
-				$newFile = $path . Core\Str::sanitize(basename($_POST['new-name']));
-				$caption = $_POST['caption'];
-				
-				if (FileSystem::isAllowedFileType($newFile)) {
-					
-					// Rename file and caption if needed.
-					if ($newFile != $oldFile) {
-						$output['error'] = FileSystem::renameMedia($oldFile, $newFile);
-					}
-					
-					// Write caption.
-					if (empty($output['error'])) {
-						
-						$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
-						
-						// Only if file exists already or $caption is empty.
-						if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {
-							FileSystem::write($newCaptionFile, $caption);
-						} else {
-							$output['error'] = Text::get('error_file_save') . ' "' . basename($newCaptionFile) . '"';
-						}
-						
-					}
-				
-					$this->clearCache();
-					 
-				} else {
+			$path = $this->getPathByPostUrl();
+			$oldFile = $path . basename($oldName);
+			$newFile = $path . Core\Str::sanitize(basename($newName));
 			
-					$output['error'] = Text::get('error_file_format') . ' "' . FileSystem::getExtension($newFile) . '"';
+			if (FileSystem::isAllowedFileType($newFile)) {
 				
+				// Rename file and caption if needed.
+				if ($newFile != $oldFile) {
+					$output['error'] = FileSystem::renameMedia($oldFile, $newFile);
 				}
 				
+				// Write caption.
+				if (empty($output['error'])) {
+					
+					$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
+					
+					// Only if file exists already or $caption is empty.
+					if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {
+						FileSystem::write($newCaptionFile, $caption);
+					} else {
+						$output['error'] = Text::get('error_file_save') . ' "' . basename($newCaptionFile) . '"';
+					}
+					
+				}
+			
+				$this->clearCache();
+					
 			} else {
-				
-				$output['error'] = Text::get('error_file_name');
-				
+		
+				$output['error'] = Text::get('error_file_format') . ' "' . FileSystem::getExtension($newFile) . '"';
+			
 			}
+			
 	
 		} else {
 			
@@ -471,44 +469,6 @@ class Content {
 	
 	
 	/**
-	 *	Return a JSON formatted string to be used as autocomplete infomation in a search field.
-	 *	
-	 *	The collected data consists of all page titles, URLs and all available tags.
-	 *
-	 *	@return string The JSON encoded autocomplete data
-	 */
-	
-	public function getAutoCompleteJSON() {
-		
-		$titles = array();
-		$urls = array();
-		$tags = array();
-		$values = array();
-		
-		foreach ($this->Automad->getCollection() as $Page) {
-			$titles[] = $Page->get(AM_KEY_TITLE);
-			$urls[] = $Page->origUrl;
-			$tags = array_merge($tags, $Page->tags);
-		}
-		
-		$titles = array_unique($titles);
-		$tags = array_unique($tags);
-		
-		// Sort arrays separately to keep titles, urls and tags grouped.
-		sort($titles);
-		sort($tags);
-		sort($urls);
-		
-		foreach (array_merge($titles, $tags, $urls) as $value) {
-			$values[]['value'] = $value;
-		}
-		
-		return json_encode($values, JSON_UNESCAPED_SLASHES);
-		
-	}
-	
-	
-	/**
 	 *	Return the full file system path of a page's data file.
 	 *
 	 *	@param object $Page
@@ -531,7 +491,9 @@ class Content {
 	
 	public function getPathByPostUrl() {
 		
-		if (isset($_POST['url']) && ($Page = $this->Automad->getPage($_POST['url']))) {
+		$url = Request::post('url');
+
+		if ($url && ($Page = $this->Automad->getPage($url))) {
 			return FileSystem::fullPagePath($Page->path);
 		} else {
 			return AM_BASE_DIR . AM_DIR_SHARED . '/';
@@ -550,7 +512,7 @@ class Content {
 		
 		$pages = array();
 	
-		if ($query = Core\Parse::query('query')) {
+		if ($query = Core\Request::query('query')) {
 		
 			$collection = $this->Automad->getCollection();
 		
@@ -608,6 +570,85 @@ class Content {
 
 
 	/**
+	 * 	Import file from URL based on $_POST.
+	 * 
+	 * 	@return array The $output array with possible error messages.
+	 */
+
+	public function import() {
+
+		$output = array();
+
+		if ($importUrl = Request::post('importUrl')) {
+
+			// Resolve local URLs.
+			if (strpos($importUrl, '/') === 0) {
+
+				if (getenv('HTTPS') && getenv('HTTPS') !== 'off' && getenv('HTTP_HOST')) {
+					$protocol = 'https://';
+				} else {
+					$protocol = 'http://';
+				}
+
+				$importUrl = $protocol . getenv('HTTP_HOST') . AM_BASE_URL . $importUrl;
+				Core\Debug::log($importUrl, 'Local URL');
+
+			}
+
+			$curl = curl_init(); 
+  
+			curl_setopt($curl, CURLOPT_HEADER, 0); 
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt($curl, CURLOPT_URL, $importUrl); 
+
+			$data = curl_exec($curl); 
+			
+			if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
+			
+				$output['error'] = Text::get('error_import');
+			
+			} else {
+
+				$fileName = Core\Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
+
+				if ($url = Request::post('url')) {
+					$Page = $this->Automad->getPage($url);
+					$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
+				} else {
+					$path = AM_BASE_DIR . AM_DIR_SHARED . '/' . $fileName;
+				}
+
+				FileSystem::write($path, $data);
+
+			} 
+
+			curl_close($curl);
+
+			if (!FileSystem::isAllowedFileType($path)) {
+
+				$newPath = $path . FileSystem::getImageExtensionFromMimeType($path);
+
+				if (FileSystem::isAllowedFileType($newPath)) {
+					FileSystem::renameMedia($path, $newPath);
+				} else {
+					unlink($path);
+					$output['error'] = Text::get('error_file_format');
+				}
+
+			}
+
+		} else {
+
+			$output['error'] = Text::get('error_no_url'); 
+
+		}
+
+		return $output;
+
+	}
+
+
+	/**
 	 *	Handle AJAX request for editing a data variable in-page context.   
 	 *          
 	 *  If no data gets received, form fields to build up the editing dialog are send back. 
@@ -621,31 +662,34 @@ class Content {
 	public function inPageEdit() {
 		
 		$output = array();
+		$context = Request::post('context');
+		$postData = Request::post('data');
+		$url = Request::post('url');
 		
-		if (!empty($_POST['context'])) {
+		if ($context) {
 		
 			// Check if page actually exists.
-			if ($Page = $this->Automad->getPage($_POST['context'])) {
+			if ($Page = $this->Automad->getPage($context)) {
 				
 				// If data gets received, merge and save.
 				// Else send back form fields.
-				if (isset($_POST['data'], $_POST['url']) && is_array($_POST['data'])) {
+				if ($postData && is_array($postData)) {
 					
 					// Merge and save data.
-					$data = array_merge(Core\Parse::textFile($this->getPageFilePath($Page)), $_POST['data']);
+					$data = array_merge(Core\Parse::textFile($this->getPageFilePath($Page)), $postData);
 					FileSystem::writeData($data, $this->getPageFilePath($Page));
 					Core\Debug::log($data, 'saved data');
 					Core\Debug::log($this->getPageFilePath($Page), 'data file');
 					
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
-					if (!empty($_POST['data'][AM_KEY_TITLE]) && $Page->url != '/') {
+					if (!empty($postData[AM_KEY_TITLE]) && $Page->url != '/') {
 						
 						// Move directory.
 						$newPagePath = FileSystem::movePageDir(
 							$Page->path, 
 							dirname($Page->path), 
 							$this->extractPrefixFromPath($Page->path), 
-							$_POST['data'][AM_KEY_TITLE]
+							$postData[AM_KEY_TITLE]
 						);
 						
 						Core\Debug::log($newPagePath, 'renamed page');
@@ -656,7 +700,7 @@ class Content {
 					$this->clearCache();
 					
 					// If the page directory got renamed, find the new URL.
-					if ($Page->url == $_POST['url'] && isset($newPagePath)) {
+					if ($Page->url == $url && isset($newPagePath)) {
 						
 						// The page has to be redirected to a new url in case the edited context is actually 
 						// the requested page and the title of the page and therefore the URL has changed.
@@ -685,30 +729,30 @@ class Content {
 						// 	
 						// 2.	The context is the current page, but the title didn't change and
 						// 		therefore the URL stays the same.
-						$output['redirect'] = AM_BASE_INDEX . $_POST['url'];
+						$output['redirect'] = AM_BASE_INDEX . $url;
 						
 					}
 					
 					// Append query string if not empty.
-					if (!empty($_POST['query'])) {
-						$output['redirect'] .= '?' . $_POST['query'];
+					$queryString = Request::post('query');
+
+					if ($queryString) {
+						$output['redirect'] .= '?' . $queryString;
 					}
 								
 				} else {
-					
+						
 					// Return form fields if key is defined.
-					if (!empty($_POST['key'])) {
+					if ($key = Request::post('key')) {
 						
 						$value = '';
 						
-						if (!empty($Page->data[$_POST['key']])) {
-							$value = $Page->data[$_POST['key']];
+						if (!empty($Page->data[$key])) {
+							$value = $Page->data[$key];
 						}
 						
-						$output['html'] = '<div id="am-inpage-edit-fields">' .
-										  '<input type="hidden" name="context" value="' . $_POST['context'] . '" />' .
-										  $this->Html->formField($_POST['key'], $value) . 
-										  '</div>';
+						// Note that $Page->path has to be added to make image previews work in CodeMirror.
+						$output['html'] = Components\InPage\Edit::render($this->Automad, $key, $value, $context, $Page->path);
 						
 					}
 			
@@ -732,13 +776,16 @@ class Content {
 	public function movePage() {
 		
 		$output = array();
+		$url = Request::post('url');
+		$dest = Request::post('destination');
+		$title = Request::post('title');
 
 		// Validation of $_POST.
 		// To avoid all kinds of unexpected trouble, the URL and the destination must exist in the Automad's collection and a title must be present.
-		if (isset($_POST['url']) && isset($_POST['destination']) && !empty($_POST['title']) && ($Page = $this->Automad->getPage($_POST['url'])) && ($dest = $this->Automad->getPage($_POST['destination']))) {
+		if ($url && $dest && $title && ($Page = $this->Automad->getPage($url)) && ($dest = $this->Automad->getPage($dest))) {
 	
 			// The home page can't be moved!	
-			if ($_POST['url'] != '/') {
+			if ($url != '/') {
 		
 				// Check if new parent directory is writable.
 				if (is_writable(FileSystem::fullPagePath($dest->path))) {
@@ -747,7 +794,7 @@ class Content {
 					if (is_writable(dirname($this->getPageFilePath($Page))) && is_writable(dirname(dirname($this->getPageFilePath($Page))))) {
 	
 						// Move page
-						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $_POST['title']);	
+						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $title);	
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
 						Core\Debug::log($Page->path, 'page');
 						Core\Debug::log($dest->path, 'destination');
@@ -838,12 +885,6 @@ class Content {
 					// Needs to be done here, to be able to simply test for empty title field.
 					$data = array_filter($data, 'strlen');
 		
-					// Set hidden parameter within the $data array. 
-					// Since it is a checkbox, it must get parsed separately.
-					if (isset($_POST[AM_KEY_HIDDEN])) {
-						$data[AM_KEY_HIDDEN] = 1;
-					}
-	
 					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
 					// That information has to be parsed first and "subdivided".
 					$themeTemplate = $this->getTemplateNameFromArray($_POST, 'theme_template');
@@ -873,12 +914,7 @@ class Content {
 					// FileSystem::movePageDir() will check if renaming is needed, and will skip moving, when old and new path are equal.
 					if ($url != '/') {
 	
-						if (!isset($_POST['prefix'])) {
-							$prefix = '';
-						} else {
-							$prefix = $_POST['prefix'];
-						}
-
+						$prefix = Request::post('prefix');
 						$newPagePath = FileSystem::movePageDir($Page->path, dirname($Page->path), $prefix, $data['title']);
 	
 					} else {

@@ -155,6 +155,8 @@ class Image {
 		
 		if ($originalFile) {
 			
+			ini_set('memory_limit', -1);
+
 			$getimagesize = @getimagesize($originalFile);
 			
 			if ($getimagesize) {

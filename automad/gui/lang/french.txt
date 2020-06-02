@@ -1,0 +1,701 @@
+btn_add: Ajouter
+
+-
+
+btn_add_page: Ajouter une page
+
+-
+
+btn_add_var: Ajouter une variable
+
+-
+
+btn_apply_reload: Appliquer et recharger
+
+-
+
+btn_browse: Parcourir les fichiers
+
+-
+
+btn_close: Proche
+
+-
+
+btn_copy_url_clipboard: Copier l'URL dans le presse-papiers
+
+-
+
+btn_copy_resized: Copier et redimensionner
+
+-
+
+btn_data: Données et paramètres
+
+-
+
+btn_delete_page: Supprimer la page
+
+-
+
+btn_download_file: Télécharger
+
+-
+
+btn_duplicate_page: Page en double
+
+-
+
+btn_edit: Éditer
+
+-
+
+btn_edit_file_info: Modifier les informations sur le fichier
+
+-
+
+btn_edit_headless_template: Modifier le modèle sans tête
+
+-
+
+btn_edit_page: Modifier la page
+
+-
+
+btn_files: Fichiers téléchargés
+
+-
+
+btn_get_themes: Obtenez plus de thèmes
+
+-
+
+btn_getting_data: Obtention de données ...
+
+-
+
+btn_hide_page: Masquer la page dans la navigation
+
+-
+
+btn_home: Home
+
+-
+
+btn_import: Importer depuis l'URL
+
+-
+
+btn_inpage_edit: Mode d'édition sur la page
+
+-
+
+btn_install: Installer
+
+-
+
+btn_link: Lien
+
+-
+
+btn_log_out: Se déconnecter
+
+-
+
+btn_login: S'identifier
+
+-
+
+btn_manage_users: Gérer les utilisateurs
+
+-
+
+btn_more: Plus
+
+-
+
+btn_move_page: Déplacer la page
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Ouvrir le journal
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Retirer
+
+-
+
+btn_remove_selected: Enlever la sélection
+
+-
+
+btn_reset: Réinitialiser
+
+-
+
+btn_save: Sauvegarder les modifications
+
+-
+
+btn_upload: Télécharger
+
+-
+
+confirm_delete_files: Voulez-vous vraiment supprimer les fichiers sélectionnés?
+
+-
+
+confirm_delete_page: Voulez-vous vraiment supprimer la page actuelle?
+
+-
+
+confirm_delete_users: Voulez-vous vraiment supprimer les utilisateurs sélectionnés?
+
+-
+
+confirm_reset_headless: Voulez-vous vraiment réinitialiser le modèle sans tête personnalisé?
+
+-
+
+dashboard_memory: Utilisation de la mémoire:
+
+-
+
+dashboard_modified: Dernière activité sur
+
+-
+
+dashboard_recently_edited: Pages récemment modifiées
+
+-
+
+dropzone: Déplacez des fichiers ici
+
+-
+
+error_cache_purged: Le répertoire de cache n'a pas pu être purgé!
+
+-
+
+error_existing: Existe déjà!
+
+-
+
+error_file_save: Impossible d'enregistrer
+
+-
+
+error_file_format: Type de fichier non pris en charge
+
+-
+
+error_file_not_found: Fichier non trouvé!
+
+-
+
+error_file_size: Taille de fichier non valide!
+
+-
+
+error_form: Données incomplètes ou incorrectes! <br /> Tous les champs sont obligatoires et doivent être remplis comme décrit!
+
+-
+
+error_login: Nom d'utilisateur ou mot de passe invalide
+
+-
+
+error_log_out: La déconnexion a échoué!
+
+-
+
+error_no_destination: Veuillez sélectionner une page comme destination!
+
+-
+
+error_no_js: Veuillez activer JavaScript dans votre navigateur pour utiliser le tableau de bord!
+
+-
+
+error_no_theme: Aucun thème sélectionné! Veuillez sélectionner un thème principal.
+
+-
+
+error_no_url: Veuillez saisir une URL valide!
+
+-
+
+error_import: L'importation du fichier a échoué!
+
+-
+
+error_packages: Impossible de charger les packages depuis Packagist!
+
+-
+
+error_composer_memory: Votre serveur n'a pas assez de mémoire pour installer, mettre à jour ou supprimer des packages! Dans le cas où vous exécutez ce site sur un service d'hébergement partagé avec une quantité limitée de mémoire, veuillez essayer de mettre à niveau votre plan ou d'installer votre site sur un ordinateur local sans restrictions de mémoire.
+
+-
+
+error_page_not_found: Page non trouvée!
+
+-
+
+error_page_title: Titre manquant!
+
+-
+
+error_password_current: Le mot de passe actuel est incorrect!
+
+-
+
+error_password_repeat: Veuillez saisir deux fois le même nouveau mot de passe!
+
+-
+
+error_password_reuse: Ne réutilisez pas votre ancien mot de passe!
+
+-
+
+error_permission: Autorisations refusées:
+
+-
+
+error_template_missing: Modèle manquant
+
+-
+
+error_update_connection: Impossible de se connecter au serveur de mise à jour! Cela peut généralement être dû à une configuration de mise à jour incorrecte (config.json), une erreur de certificat SSL ou une bibliothèque cURL manquante.
+
+-
+
+error_update_download: Le téléchargement de la mise à jour a échoué!
+
+-
+
+error_update_items: Liste d'éléments à mettre à jour non valide!
+
+-
+
+error_update_failed: Mise à jour a échoué! Veuillez restaurer votre installation à partir d'une sauvegarde.
+
+-
+
+error_update_not_supported: Les mises à jour ne sont pas prises en charge par votre serveur! Le programme de mise à jour nécessite l'installation des bibliothèques cURL et ZIP.
+
+-
+
+error_update_permission: Impossible d'exécuter la mise à jour! Autorisations refusées!
+
+-
+
+error_var_exists: Il y a déjà une variable avec ce nom!
+
+-
+
+error_var_name: Vous ne pouvez pas ajouter une variable sans nom!
+
+-
+
+file_name: Nom de fichier
+
+-
+
+file_caption: Légende
+
+-
+
+image_crop: Recadrer l'image
+
+-
+
+image_height_px: Hauteur (Pixels)
+
+-
+
+image_width_px: Largeur (pixels)
+
+-
+
+image_options: Les options
+
+-
+
+image_select: Sélectionnez l'image
+
+-
+
+images_page: Images de la page
+
+-
+
+images_shared: Images générales
+
+-
+
+link_placeholder: Commencez à taper un titre de page ou collez un lien externe ici
+
+-
+
+link_title: Ajouter un lien
+
+-
+
+login_title: S'identifier
+
+-
+
+login_username: Nom d'utilisateur
+
+-
+
+login_password: Mot de passe
+
+-
+
+log_out_title: Déconnecté
+
+-
+
+packages_title: Paquets
+
+-
+
+packages_browse: Ouvrir le navigateur de packages
+
+-
+
+packages_filter: Filtre
+
+-
+
+packages_installed: Est installé
+
+-
+
+packages_installing: Installation du package ...
+
+-
+
+packages_update_all: Tout mettre à jour
+
+-
+
+packages_updating: Mise à jour des packages ...
+
+-
+
+packages_removing: Suppression du package ...
+
+-
+
+page_add_location: Sélectionnez un emplacement pour la nouvelle page
+
+-
+
+page_move_destination: Sélectionnez une destination pour vous déplacer
+
+-
+
+page_settings: Paramètres de page
+
+-
+
+page_prefix: Préfixe (ordre de navigation)
+
+-
+
+page_redirect: Rediriger la page vers une autre URL
+
+-
+
+page_tags: Tags (séparez plusieurs tags par une virgule ou un onglet)
+
+-
+
+page_theme_template: Modèle
+
+-
+
+page_var_name: Nom de variable
+
+-
+
+page_vars_headless: Variables
+
+-
+
+page_vars_template: Variables dans le modèle actuel
+
+-
+
+page_vars_unused: Variables inutilisées
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_pages: Pages
+
+-
+
+shared_title: Données et fichiers généraux
+
+-
+
+shared_theme: Thème principal
+
+-
+
+shared_theme_apply: Voulez-vous appliquer le thème sélectionné et mettre à jour la liste des variables disponibles maintenant? Vos modifications non enregistrées seront enregistrées.
+
+-
+
+shared_vars_headless: Variables
+
+-
+
+shared_vars_main_theme: Variables dans le thème principal
+
+-
+
+shared_vars_unused: Variables inutilisées
+
+-
+
+shared_var_name: Nom de variable
+
+-
+
+search_no_results: Aucune page trouvée!
+
+-
+
+search_placeholder: Rechercher dans
+
+-
+
+search_title: Résultats de recherche
+
+-
+
+success_added: Ajouté avec succès
+
+-
+
+success_cache_cleared: Le cache a été vidé avec succès!
+
+-
+
+success_cache_purged: Le répertoire de cache a été purgé avec succès!
+
+-
+
+success_config_update: Configuration mise à jour avec succès!
+
+-
+
+success_created: Création réussie <br>
+
+-
+
+success_installed: Installation réussie
+
+-
+
+success_password_changed: Votre mot de passe a été changé avec succès!
+
+-
+
+success_log_out: Déconnecté avec succès
+
+-
+
+success_remove: Supprimé avec succès
+
+-
+
+success_reset_headless: Le modèle sans tête par défaut a été restauré avec succès!
+
+-
+
+success_saved: Modifications enregistrées
+
+-
+
+success_update: Automad mis à jour avec succès!
+
+-
+
+success_packages_updated: Tous les packages ont été mis à jour avec succès
+
+-
+
+sys_cache_info: La mise en cache est essentielle pour accélérer votre site et doit généralement être activée. Cependant, dans certaines circonstances, vous souhaiterez peut-être désactiver ou effacer votre cache.
+
+-
+
+sys_cache_clear: Vider le cache
+
+-
+
+sys_cache_clear_info: L'effacement du cache du site force une nouvelle analyse des pages et des fichiers mis à jour. Cette action ne supprimera aucun fichier ou image de page du répertoire cache.
+
+-
+
+sys_cache_monitor: L'intervalle de vérification est
+
+-
+
+sys_cache_monitor_info: Lorsque la mise en cache est activée, Automad vérifie régulièrement les modifications du système de fichiers. La fréquence de ces contrôles peut être définie ici.
+
+-
+
+sys_cache_lifetime: La durée de vie du cache est
+
+-
+
+sys_cache_lifetime_info: Toutes les données et pages Automad mises en cache ont une durée de vie maximale. Une fois la durée de vie d'un objet dépassée, son cache sera reconstruit à la demande.
+
+-
+
+sys_cache_purge: Purger le répertoire du cache
+
+-
+
+sys_cache_purge_info: Contrairement à l'effacement simple du cache, la purge du répertoire du cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images mises en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de pages ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
+
+-
+
+sys_debug_info: Lorsque le débogage est activé, tous les processus d'Automad seront enregistrés dans la console de votre navigateur. Le débogage n'est nécessaire que pour le développement ou le dépannage et doit être désactivé dans tous les autres cas.
+
+-
+
+sys_headless_edit_info: La structure des données JSON renvoyées est contrôlée par un modèle. Vous pouvez modifier ce modèle à l'aide du langage de modèle intégré d'Automad pour personnaliser les champs en utilisant des variables, des objets et des structures de contrôle.
+
+-
+
+sys_headless_info: L'activation du mode sans tête transforme Automad en un système de gestion de contenu entièrement axé sur la création de contenu sans couche de présentation. Bien que le tableau de bord puisse toujours être utilisé pour gérer le contenu, toutes les données et tous les fichiers sont accessibles via une API JSON en lecture seule.
+
+-
+
+sys_language: Langue
+
+-
+
+sys_language_info: Il existe plusieurs langues disponibles pour le tableau de bord. Les traductions sont créées automatiquement. Cette fonctionnalité est encore en phase expérimentale et par conséquent, certaines traductions peuvent ne pas être précises.
+
+-
+
+sys_status_cache_enabled: La mise en cache est activée
+
+-
+
+sys_status_cache_disabled: La mise en cache est désactivée
+
+-
+
+sys_status_debug_enabled: Le débogage est activé
+
+-
+
+sys_status_debug_disabled: Le débogage est désactivé
+
+-
+
+sys_status_update_available: Mise à jour de
+
+-
+
+sys_status_update_not_available: Automad est à jour
+
+-
+
+sys_title: Les paramètres du système
+
+-
+
+sys_update: Mettre à jour
+
+-
+
+sys_update_available: Une nouvelle version d'Automad est disponible et prête à être installée. <br> Veuillez sauvegarder votre installation actuelle avant la mise à jour!
+
+-
+
+sys_update_current_version: La version actuellement installée est
+
+-
+
+sys_update_items: Les éléments suivants sont affectés par la mise à jour:
+
+-
+
+sys_update_not_required: Automad est à jour.
+
+-
+
+sys_update_progress: Veuillez patienter et ne fermez pas la fenêtre pendant la mise à jour ...
+
+-
+
+sys_update_to: Mise à jour de
+
+-
+
+sys_update_windows_warning: Assurez-vous que tous les fichiers de votre installation sont fermés dans des programmes externes avant d'exécuter la mise à jour pour éviter les problèmes d'autorisations!
+
+-
+
+sys_user_info: Vous pouvez ajouter ou supprimer plus d'utilisateurs ou modifier votre mot de passe ici.
+
+-
+
+sys_user_change_password: Changez votre mot de passe
+
+-
+
+sys_user_change_password_current: Mot de passe actuel
+
+-
+
+sys_user_change_password_new: Nouveau mot de passe
+
+-
+
+sys_user_change_password_repeat: Répéter le mot de passe
+
+-
+
+sys_user_add: Ajouter un utilisateur
+
+-
+
+sys_user_add_name: Nom d'utilisateur
+
+-
+
+sys_user_add_password: Mot de passe
+
+-
+
+sys_user_add_repeat: Répéter le mot de passe
+
+-
+
+sys_user_registered: Utilisateurs enregistrés
+
+-
+
+sys_user_you: Vous

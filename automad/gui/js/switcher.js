@@ -52,9 +52,19 @@
 		getActiveTab: function() {
 			
 			if (window.location.hash) {
-				return $('[' + Automad.switcher.dataAttr.tab + '="' + window.location.hash.substr(1) + '"]').index();
+				
+				var hash = window.location.hash.substr(1);
+				
+				if ($.isNumeric(hash)) {
+					return parseInt(hash);
+				} else {
+					return $('[' + Automad.switcher.dataAttr.tab + '="' + hash + '"]').index();
+				}
+
 			} else {
+
 				return 0;
+				
 			}
 
 		}
@@ -64,7 +74,7 @@
 	// Override UIkit defaults to show the tab defined in the hash.
 	UIkit.on('beforeready.uk.dom', function(){
 		$.extend(UIkit.components.switcher.prototype.defaults, {
-	        	active: Automad.switcher.getActiveTab()
+	        active: Automad.switcher.getActiveTab()
 		});
 	});
 	
@@ -77,7 +87,7 @@
 			tab = Automad.switcher.getActiveTab();
 		
 		// Only update if the hash doesn't match the active tab.	
-		if ($active.index() != tab) {
+		if ($active.index() != tab && tab > 0) {
 			$switcher.children('button').eq(tab).click();
 		}
 			

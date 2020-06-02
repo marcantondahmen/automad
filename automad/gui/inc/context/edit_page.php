@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$url = Core\Parse::query('url');
+$url = Core\Request::query('url');
 
 
 if ($Page = $this->getAutomad()->getPage($url)) {
@@ -62,7 +62,7 @@ $this->element('header');
 		
 		<?php if ($Page) { 
 			
-			echo $this->getHtml()->breadcrumbs();
+			echo Components\Nav\Breadcrumbs::render($this->getAutomad());
 		
 			$items = array(
 				array(
@@ -111,22 +111,23 @@ $this->element('header');
 				);
 			}
 		
-			echo $this->getHtml()->stickySwitcher('#am-page-content', $items, $dropdown);
+			echo Components\Nav\Switcher::render('#am-page-content', $items, $dropdown);
 			
 		?>
 	
 		<ul id="am-page-content" class="uk-switcher">
 			<!-- Data -->
-		    	<li>
+		    <li>
 				<form 
 				class="uk-form uk-form-stacked" 
 				data-am-init 
 				data-am-handler="page_data" 
 				data-am-url="<?php echo $url; ?>"
+				data-am-path="<?php echo $Page->get(AM_KEY_PATH); ?>"
 				>
-					<?php echo $this->getHtml()->loading(); ?>
+					<?php echo Components\Loading::render(); ?>
 				</form>
-		    	</li>
+		    </li>
 			<!-- Files -->
 			<li>
 				<form 
@@ -136,11 +137,17 @@ $this->element('header');
 				data-am-url="<?php echo $url; ?>" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<?php echo $this->getHtml()->loading(); ?>
+					<?php echo Components\Loading::render(); ?>
 				</form>
 			</li>
 		</ul>
 		
+		<!-- Select Image Modal -->
+		<?php echo Components\Modal\SelectImage::render($url); ?>
+
+		<!-- Add Link Modal -->
+		<?php echo Components\Modal\Link::render(); ?>
+
 		<!-- Move Page Modal -->
 		<div id="am-move-page-modal" class="uk-modal">
 			<div class="uk-modal-dialog">
@@ -153,7 +160,7 @@ $this->element('header');
 						<?php Text::e('page_move_destination'); ?>
 					</label>
 					<div data-am-tree="#am-move-page-input">
-						<?php echo $this->getHtml()->siteTree('', $this->getAutomad()->getCollection(), array(), true, false); ?>
+						<?php echo Components\Nav\SiteTree::render($this->getAutomad(), '', array(), true, false); ?>
 					</div>
 				</div>
 				<form data-am-handler="move_page" data-am-url="<?php echo $url; ?>">
@@ -181,7 +188,7 @@ $this->element('header');
 		
 		<div class="uk-alert uk-alert-danger uk-margin-large-top">
 			<?php Text::e('error_page_not_found'); ?><br />
-			"<?php echo Core\Parse::query('url'); ?>"
+			"<?php echo Core\Request::query('url'); ?>"
 		</div>
 			
 		<?php } ?>

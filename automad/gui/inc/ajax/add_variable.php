@@ -42,9 +42,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	Add a form field for a variable.
  */
 
-if (!empty($_POST['name'])) {
+if ($name = Automad\Core\Request::post('name')) {
 
-	echo $this->getHtml()->formField($_POST['name'], '', true);
+	echo Automad\GUI\Components\Form\Field::render($this->getAutomad(), $name, '', true);
 	
 }
 

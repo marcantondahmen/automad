@@ -62,11 +62,9 @@
 		// Dropzone.
 		$dropzone: $('<div></div>', { 'class': 'am-files-dropzone uk-hidden-touch' }),
 		$input:	$('<input type="file" multiple />'),
-		$browse: $('<button></button>', { 'class': 'uk-button uk-button-success uk-button-large uk-width-1-1 uk-margin-small-top' })
-				 .click(function() {
-					// Make a button click trigger the file input for browsing.
-					Automad.upload.$input.click();
-					return false;
+		$browse: $('<button></button>', { 
+					'type': 'button',
+					'class': 'uk-button uk-button-success uk-button-large uk-width-1-1 uk-margin-small-top' 
 				 }),
 				
 		// Init the upload modal.
@@ -91,7 +89,12 @@
 				   	   .appendTo(u.$container);
 			u.$input.appendTo(u.$dropzone).hide();
 			u.$browse.html(iconBrowse + u.$modal.data(util.dataCamelCase(da.browseText)))
-				 	 .insertAfter(u.$dropzone);
+					 .insertAfter(u.$dropzone)
+					 .click(function () {
+						// Make a button click trigger the file input for browsing.
+						Automad.upload.$input.click();
+						return false;
+					 });
 			
 			// The modal's close buttons
 			u.$close = u.$modal.find('.uk-modal-close'); 	
@@ -150,7 +153,7 @@
 					data.submit();
 						
 				    	// Disable the close button for every added file.
-					// When all uploads are done, the button gets enabled again (always callback).
+						// When all uploads are done, the button gets enabled again (always callback).
 				    	u.$close.prop('disabled', true);
 					
 				},

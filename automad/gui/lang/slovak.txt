@@ -1,0 +1,709 @@
+btn_add: Pridať
+
+-
+
+btn_add_page: Pridať stránku
+
+-
+
+btn_add_var: Pridať premennú
+
+-
+
+btn_apply_reload: Použiť a znovu načítať
+
+-
+
+btn_browse: Prehliadať súbory
+
+-
+
+btn_close: Zavrieť
+
+-
+
+btn_copy_url_clipboard: Skopírujte URL do schránky
+
+-
+
+btn_copy_resized: Kopírovanie a zmena veľkosti
+
+-
+
+btn_data: Údaje a nastavenia
+
+-
+
+btn_delete_page: Odstrániť stránku
+
+-
+
+btn_download_file: Stiahnuť ▼
+
+-
+
+btn_duplicate_page: Duplikát
+
+-
+
+btn_edit: Editovať
+
+-
+
+btn_edit_file_info: Upraviť informácie o súbore
+
+-
+
+btn_edit_headless_template: Upravte šablónu bez hlavy
+
+-
+
+btn_edit_page: Upraviť stránku
+
+-
+
+btn_files: Odovzdané súbory
+
+-
+
+btn_get_themes: Získajte viac tém
+
+-
+
+btn_getting_data: Načítavajú sa údaje ...
+
+-
+
+btn_hide_page: Skryť stránku v navigácii
+
+-
+
+btn_home: Home
+
+-
+
+btn_import: Importovať z adresy URL
+
+-
+
+btn_inpage_edit: Režim úpravy na stránke
+
+-
+
+btn_install: Inštalácia
+
+-
+
+btn_link: Odkaz
+
+-
+
+btn_log_out: Odhlásiť sa
+
+-
+
+btn_login: Prihlásiť sa
+
+-
+
+btn_manage_users: Správa používateľov
+
+-
+
+btn_more: Viac
+
+-
+
+btn_move_page: Presunúť stránku
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Otvorte denník
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Remove
+
+-
+
+btn_remove_selected: Vymazať označené
+
+-
+
+btn_reset: Reset
+
+-
+
+btn_save: Uložiť zmeny
+
+-
+
+btn_upload: Nahrať
+
+-
+
+confirm_delete_files: Naozaj chcete odstrániť vybraté súbory?
+
+-
+
+confirm_delete_page: Naozaj chcete odstrániť aktuálnu stránku?
+
+-
+
+confirm_delete_users: Naozaj chcete odstrániť vybratých používateľov?
+
+-
+
+confirm_reset_headless: Naozaj chcete resetovať vlastnú bezhlavú šablónu?
+
+-
+
+dashboard_memory: Využitie pamäte:
+
+-
+
+dashboard_modified: Posledná aktivita dňa
+
+-
+
+dashboard_recently_edited: Nedávno upravené stránky
+
+-
+
+dropzone: Sem presuňte súbory
+
+-
+
+error_cache_purged: Adresár vyrovnávacej pamäte sa nepodarilo vyčistiť!
+
+-
+
+error_existing: Už existuje!
+
+-
+
+error_file_save: Nepodarilo sa uložiť
+
+-
+
+error_file_format: Nepodporovaný typ súboru
+
+-
+
+error_file_not_found: Súbor nenájdený!
+
+-
+
+error_file_size: Neplatná veľkosť súboru!
+
+-
+
+error_form: Neúplné alebo nesprávne údaje! <br /> Všetky polia sú povinné a musia byť vyplnené podľa popisu!
+
+-
+
+error_login: Nesprávne užívateľské meno alebo heslo
+
+-
+
+error_log_out: Odhlásenie zlyhal!
+
+-
+
+error_no_destination: Vyberte stránku ako cieľ!
+
+-
+
+error_no_js: Ak chcete používať informačný panel, povolte vo svojom prehliadači JavaScript.
+
+-
+
+error_no_theme: Nie je vybratá žiadna téma! Vyberte hlavnú tému.
+
+-
+
+error_no_url: Prosím vložte platnú URL!
+
+-
+
+error_import: Import súboru zlyhal!
+
+-
+
+error_packages: Nepodarilo sa načítať balíčky od spoločnosti Packagist!
+
+-
+
+error_composer_memory: Váš server nemá dostatok pamäte na inštaláciu, aktualizáciu alebo odstránenie balíkov! V prípade, že prevádzkujete túto stránku na zdieľanom serveri s obmedzeným množstvom pamäte, skúste aktualizovať svoj plán alebo nainštalovať svoje stránky na lokálny počítač bez obmedzenia pamäte.
+
+-
+
+error_page_not_found: Stránka nenájdená!
+
+-
+
+error_page_title: Názov chýba!
+
+-
+
+error_password_current: Aktuálne heslo je nesprávne!
+
+-
+
+error_password_repeat: Zadajte dvakrát rovnaké nové heslo!
+
+-
+
+error_password_reuse: Nepoužívajte staré heslo!
+
+-
+
+error_permission: Povolenia boli zamietnuté:
+
+-
+
+error_template_missing: Chýba šablóna
+
+-
+
+error_update_connection: Nedá sa pripojiť k aktualizačnému serveru! To môže byť zvyčajne spôsobené nesprávnou konfiguráciou aktualizácie (config.json), chybou certifikátu SSL alebo chýbajúcou knižnicou CURL.
+
+-
+
+error_update_download: Sťahovanie aktualizácie zlyhalo!
+
+-
+
+error_update_items: Zoznam položiek, ktoré sa majú aktualizovať, je neplatný!
+
+-
+
+error_update_failed: Aktualizacia neuspešná! Obnovte inštaláciu zo zálohy.
+
+-
+
+error_update_not_supported: Váš server nepodporuje aktualizácie! Aktualizátor vyžaduje nainštalovanie knižníc CURL a ZIP.
+
+-
+
+error_update_permission: Aktualizáciu nie je možné spustiť! Povolenia boli zamietnuté!
+
+-
+
+error_var_exists: S týmto menom už existuje premenná!
+
+-
+
+error_var_name: Premennú nemôžete pridať bez názvu!
+
+-
+
+file_name: Názov súboru
+
+-
+
+file_caption: Titulok
+
+-
+
+image_crop: Orezať obrázok
+
+-
+
+image_height_px: Výška (pixely)
+
+-
+
+image_width_px: Šírka (pixely)
+
+-
+
+image_options: Možnosti
+
+-
+
+image_select: Vyberte Obrázok
+
+-
+
+images_page: Obrázky stránok
+
+-
+
+images_shared: Všeobecné obrázky
+
+-
+
+link_placeholder: Začnite sem zadávať názov stránky alebo sem vložte externý odkaz
+
+-
+
+link_title: Pridať odkaz
+
+-
+
+login_title: Prihlásiť sa
+
+-
+
+login_username: Užívateľské meno
+
+-
+
+login_password: Heslo
+
+-
+
+log_out_title: Odhlasený
+
+-
+
+packages_title: Balíčky
+
+-
+
+packages_browse: Otvorte prehliadač balíkov
+
+-
+
+packages_filter: Filter
+
+-
+
+packages_installed: Je nainštalovaný
+
+-
+
+packages_installing: Inštaluje sa balík ...
+
+-
+
+packages_update_all: Aktualizovať všetko
+
+-
+
+packages_updating: Aktualizácia balíkov ...
+
+-
+
+packages_removing: Odstraňuje sa balík ...
+
+-
+
+page_add_location: Vyberte umiestnenie novej stránky
+
+-
+
+page_move_destination: Vyberte cieľ na presun
+
+-
+
+page_settings: Nastavenia stránky
+
+-
+
+page_prefix: Predpona (Objednať v navigácii)
+
+-
+
+page_redirect: Presmerujte stránku na inú adresu URL
+
+-
+
+page_tags: Značky (Oddeľte viacero značiek čiarkou alebo kartou)
+
+-
+
+page_theme_template: šablóna
+
+-
+
+page_var_name: Názov premennej
+
+-
+
+page_vars_headless: Premenné
+
+-
+
+page_vars_template: Premenné v aktuálnej šablóne
+
+-
+
+page_vars_unused: Nepoužité premenné
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Globálnej
+
+-
+
+sidebar_header_pages: Stránky
+
+-
+
+shared_title: Všeobecné údaje a súbory
+
+-
+
+shared_theme: Hlavná téma
+
+-
+
+shared_theme_apply: Chcete teraz použiť vybratú tému a aktualizovať zoznam dostupných premenných? Neuložené zmeny sa uložia.
+
+-
+
+shared_vars_headless: Premenné
+
+-
+
+shared_vars_main_theme: Premenné v hlavnej téme
+
+-
+
+shared_vars_unused: Nepoužité premenné
+
+-
+
+shared_var_name: Názov premennej
+
+-
+
+search_no_results: Nenašli sa žiadne stránky!
+
+-
+
+search_placeholder: Hľadať v
+
+-
+
+search_title: Výsledky vyhľadávania
+
+-
+
+success_added: Úspešne pridané
+
+-
+
+success_cache_cleared: Vyrovnávacia pamäť bola úspešne vymazaná!
+
+-
+
+success_cache_purged: Adresár vyrovnávacej pamäte sa úspešne vymazal!
+
+-
+
+success_config_update: Konfigurácia bola úspešne aktualizovaná!
+
+-
+
+success_created: Úspešne vytvorený <br>
+
+-
+
+success_installed: Úspešne nainštalovaná
+
+-
+
+success_password_changed: Vaše heslo sa úspešne zmenilo!
+
+-
+
+success_log_out: Úspešne sa odhlásilo
+
+-
+
+success_remove: Úspešne odstránené
+
+-
+
+success_reset_headless: Úspešne ste obnovili predvolenú bezhlavú šablónu!
+
+-
+
+success_saved: Uložené zmeny
+
+-
+
+success_update: Automad bola úspešne aktualizovaná!
+
+-
+
+success_packages_updated: Všetky balíčky boli úspešne aktualizované
+
+-
+
+sys_cache_info: Vyrovnávacia pamäť je nevyhnutná na urýchlenie vášho webu a mala by byť vo všeobecnosti povolená. Za určitých okolností však možno budete chcieť vypnúť alebo vyčistiť vyrovnávaciu pamäť.
+
+-
+
+sys_cache_clear: Vymazať vyrovnávaciu pamäť
+
+-
+
+sys_cache_clear_info: Vymazanie vyrovnávacej pamäte lokality vynúti opätovné vyhľadávanie aktualizovaných stránok a súborov. Táto akcia neodstráni žiadne súbory stránky ani obrázky z adresára vyrovnávacej pamäte.
+
+-
+
+sys_cache_monitor: Interval kontroly je
+
+-
+
+sys_cache_monitor_info: Ak je zapnutá vyrovnávacia pamäť, program Automad bude pravidelne kontrolovať zmeny v systéme súborov. Frekvenciu týchto kontrol je možné definovať tu.
+
+-
+
+sys_cache_lifetime: Životnosť vyrovnávacej pamäte je
+
+-
+
+sys_cache_lifetime_info: Maximálna životnosť všetkých údajov a stránok Automad uložených v pamäti. Po uplynutí životnosti objektu sa jeho vyrovnávacia pamäť na požiadanie obnoví.
+
+-
+
+sys_cache_purge: Vyčistiť adresár cache
+
+-
+
+sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamäte, vyčistenie adresára vyrovnávacej pamäte presunie aj všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do dočasného adresára systému. Vynúti to úplné obnovenie vyrovnávacej pamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Na väčšine systémov sa dočasný adresár z času na čas alebo po reštarte automaticky vyčistí. Na niektorých systémoch sa však tento adresár musí vymazať manuálne.
+
+-
+
+sys_debug_info: Ak je aktivované ladenie, všetky procesy Automad budú zaznamenané do konzoly prehliadača. Ladenie je potrebné iba pre vývoj alebo riešenie problémov a malo by byť zakázané vo všetkých ostatných prípadoch.
+
+-
+
+sys_headless_edit_info: Štruktúra vrátených údajov JSON je riadená šablónou. Túto šablónu môžete upraviť pomocou vstavaného jazyka šablóny Automad na prispôsobenie polí pomocou premenných, objektov a kontrolných štruktúr.
+
+-
+
+sys_headless_info: Aktivácia režimu bez hlavy zmení Automad na systém správy obsahu so zameraním výlučne na tvorbu obsahu bez prezentačnej vrstvy. Aj keď sa informačný panel dá naďalej používať na správu obsahu, všetky údaje a súbory sú dostupné prostredníctvom rozhrania JSON API na čítanie.
+
+-
+
+sys_language: Jazyk
+
+-
+
+sys_language_info: Pre informačný panel je k dispozícii niekoľko jazykov. Preklady sa vytvárajú automaticky. Táto funkcia je stále v experimentálnej fáze, a preto niektoré preklady nemusia byť presné.
+
+-
+
+sys_status_cache_enabled: Vyrovnávacia pamäť je povolená
+
+-
+
+sys_status_cache_disabled: Vyrovnávacia pamäť je zakázaná
+
+-
+
+sys_status_debug_enabled: Ladenie je povolené
+
+-
+
+sys_status_debug_disabled: Ladenie je zakázané
+
+-
+
+sys_status_update_available: Aktualizujte na
+
+-
+
+sys_status_update_not_available: Automad je aktuálny
+
+-
+
+sys_title: Systémové nastavenia
+
+-
+
+sys_update: Aktualizovať
+
+-
+
+sys_update_available: K dispozícii je novšia verzia aplikácie Automad a je pripravená na inštaláciu. <br> Pred aktualizáciou si prosím zazálohujte svoju súčasnú inštaláciu!
+
+-
+
+sys_update_current_version: Aktuálne nainštalovaná verzia je
+
+-
+
+sys_update_items: Aktualizácia sa týka nasledujúcich položiek:
+
+-
+
+sys_update_not_required: Automad je aktuálny.
+
+-
+
+sys_update_progress: Počkajte a nezatvárajte okno počas aktualizácie ...
+
+-
+
+sys_update_to: Aktualizujte na
+
+-
+
+sys_update_windows_warning: Pred spustením aktualizácie sa uistite, že všetky súbory vašej inštalácie sú v externých programoch zatvorené, aby nedošlo k problémom s povoleniami!
+
+-
+
+sys_user: Užívatelia
+
+-
+
+sys_user_info: Tu môžete pridať alebo odstrániť viac používateľov alebo zmeniť svoje heslo.
+
+-
+
+sys_user_change_password: Zmeň si heslo
+
+-
+
+sys_user_change_password_current: Aktuálne heslo
+
+-
+
+sys_user_change_password_new: Nové heslo
+
+-
+
+sys_user_change_password_repeat: Zopakujte heslo
+
+-
+
+sys_user_add: Pridať používateľa
+
+-
+
+sys_user_add_name: Užívateľské meno
+
+-
+
+sys_user_add_password: Heslo
+
+-
+
+sys_user_add_repeat: Zopakujte heslo
+
+-
+
+sys_user_registered: Registrovaní užívatelia
+
+-
+
+sys_user_you: Vy

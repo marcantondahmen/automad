@@ -59,19 +59,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 // Array for returned JSON data.
 $output = array();
-
+$url = Core\Request::post('url');
 
 // Verify page's URL - The page must exist in the site's collection.
-if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url']))) {
+if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 
-	// The URL of the currently edited page.
-	$url = $_POST['url'];
-	
 	// If the posted form contains any "data", save the form's data to the page file.
-	if (isset($_POST['data'])) {
+	if ($data = Core\Request::post('data')) {
 	
 		// Save page and replace $output with the returned $output array (error or redirect).
-		$output = $this->getContent()->savePage($url, $_POST['data']);
+		$output = $this->getContent()->savePage($url, $data);
 	
 	} else {
 		
@@ -120,7 +117,7 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					href="<?php echo AM_BASE_INDEX . $url; ?>" 
 					class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
 					title="<?php Text::e('btn_inpage_edit'); ?>" 
-					data-uk-tooltip="pos:'bottom-left'"
+					data-uk-tooltip="pos:'bottom'"
 					>
 						<i class="uk-icon-share"></i>&nbsp;
 						<?php 
@@ -155,7 +152,8 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 									<a href="#" class="uk-modal-close uk-close"></a>
 								</div>	
 								<?php 
-									echo 	$this->getHtml()->selectTemplate(
+									echo 	Components\Form\SelectTemplate::render(
+												$this->getAutomad(),
 												$this->getThemelist(),
 												'theme_template', 
 												$data[AM_KEY_THEME], 
@@ -179,13 +177,18 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 							</label>
 							<?php 
 							
+							$themeName = '';
+
 							if ($data[AM_KEY_THEME]) {
+
 								$themePath = $data[AM_KEY_THEME];
-								$Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME]);
-								$themeName = $Theme->name . ' / ';
+
+								if ($Theme = $this->getThemelist()->getThemeByKey($data[AM_KEY_THEME])) {
+									$themeName = $Theme->name . ' / ';
+								}
+								
 							} else {
 								$themePath = $this->getAutomad()->Shared->get(AM_KEY_THEME);
-								$themeName = '';
 							}
 							
 							$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $themePath . '/' . $Page->template . '.php';
@@ -216,22 +219,10 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 						</div>
 					<?php } ?>
 					<!-- Visibility -->
-					<div class="uk-form-row">
-						<label class="uk-form-label uk-text-truncate">
-							<?php Text::e('page_visibility'); ?>
-						</label>
-						<label 
-						class="am-toggle-switch uk-button" 
-						data-am-toggle
-						>
-							<?php Text::e('btn_hide_page'); ?>
-							<input 
-							id="am-checkbox-hidden" 
-							type="checkbox" 
-							name="<?php echo AM_KEY_HIDDEN; ?>"<?php if ($hidden) { echo ' checked'; } ?> 
-							/>
-						</label>
-					</div>	
+					<?php echo Components\Form\CheckboxHidden::render(
+						'data[' . AM_KEY_HIDDEN . ']',
+						$hidden
+					); ?>
 					<?php if ($Page->path != '/') { ?>
 					<!-- Prefix -->
 					<div class="uk-form-row">
@@ -247,19 +238,25 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 						/>
 					</div>	
 					<!-- Redirect -->
-					<div class="uk-form-row">
-						<label for="am-input-redirect" class="uk-form-label">
-							<?php Text::e('page_redirect'); ?>
-						</label>
-						<input 
-						id="am-input-redirect" 
-						class="uk-form-controls uk-width-1-1" 
-						type="text" 
-						name="data[<?php echo AM_KEY_URL; ?>]" 
-						value="<?php echo htmlspecialchars($data[AM_KEY_URL]); ?>" 
-						/>
-					</div>
+					<?php 
+						echo Components\Form\Field::render(
+							$this->getAutomad(), 
+							AM_KEY_URL, 
+							$data[AM_KEY_URL],
+							false,
+							false,
+							Text::get('page_redirect')
+						); 
+					?>
 					<?php } ?> 
+					<!-- Date -->
+					<?php 
+						echo Components\Form\Field::render(
+							$this->getAutomad(), 
+							AM_KEY_DATE, 
+							$Page->get(AM_KEY_DATE)
+						); 
+					?>
 					<!-- Tags -->
 					<div class="uk-form-row">	
 						<?php 	
@@ -314,27 +311,19 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					</div>
 					<div class="uk-accordion-content">
 						<?php 
-							echo 	$this->getHtml()->formGroup(
+							echo 	Components\Form\Group::render(
+										$this->getAutomad(),
 										$keysInCurrentTemplate, 
 										$data, 
 										false, 
-										$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+										$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME)),
+										'am-readme-modal'
 									); 
 						?>
 					</div>
 					<?php } ?>
 					
-					<!-- Vars in other templates -->
-					<?php $keysInOtherTemplates = $this->getKeys()->inOtherTemplates(); ?>
-					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_other_templates'); ?>&nbsp;
-						<span class="uk-badge"><?php echo count($keysInOtherTemplates); ?></span>
-					</div>
-					<div class="uk-accordion-content">
-						<?php echo $this->getHtml()->formGroup($keysInOtherTemplates, $data); ?>
-					</div>
-					
-					<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
+					<?php $unusedDataKeys = array_diff(array_keys($data), $keysInCurrentTemplate, $this->getKeys()->reserved); ?>
 
 				<?php } else { ?>
 
@@ -347,7 +336,8 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 					</div>
 					<div class="uk-accordion-content">
 						<?php 
-							echo 	$this->getHtml()->formGroup(
+							echo 	Components\Form\Group::render(
+										$this->getAutomad(),
 										$keysInHeadless, 
 										$data, 
 										false, 
@@ -368,7 +358,7 @@ if (isset($_POST['url']) && ($Page = $this->getAutomad()->getPage($_POST['url'])
 				<div class="uk-accordion-content">
 					<?php 
 					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+					echo Components\Form\Group::render($this->getAutomad(), $unusedDataKeys, $data, 'am-add-variable'); 
 					?>
 				</div>
 

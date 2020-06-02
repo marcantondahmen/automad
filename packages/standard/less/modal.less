@@ -1,0 +1,31 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@modal-background:			@base-body-background;
+@modal-dialog-background:	transparent;
+@modal-caption-color: 		@base-body-color;
+
+
+.hook-modal-dialog() {
+	
+	&&-blank {
+		min-height: 100%;
+		-webkit-transform: translateX(-5%);
+	    	    transform: translateX(-5%);
+		.transition(opacity 0.2s linear, transform 0.4s ease-out;);
+		
+		@media (min-width: @breakpoint-medium) {
+			-webkit-transform: translateY(-5%);
+		    	    transform: translateY(-5%);
+		}
+		
+	}
+		
+}

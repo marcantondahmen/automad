@@ -1,0 +1,21 @@
+title: Sign In
+
+-
+
+hidden: on
+
+-
+
+url: /dashboard
+
+-
+
+date: 2020-05-04 21:03:41
+
+-
+
+checkboxHideInMenu: 1
+
+-
+
+checkboxShowInFooter: 1

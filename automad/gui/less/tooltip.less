@@ -33,21 +33,22 @@
  */
 
 
-@tooltip-z-index: 				1030;
+@tooltip-z-index: 				1150;
 @tooltip-max-width:				200px;
-@tooltip-padding-vertical: 		4px;
-@tooltip-padding-horizontal: 	8px;
+@tooltip-padding-vertical: 		5px;
+@tooltip-padding-horizontal: 	10px;
 @tooltip-background: 			@am-success;
 @tooltip-triangle-size: 		5px;
 
 @tooltip-color: 				#FFFFFF;
-@tooltip-font-size: 			11px;
+@tooltip-font-size: 			12px;
 @tooltip-line-height: 			14px;
 
 @tooltip-offset-horizontal: 	10px;
 
 
 .hook-tooltip() {
-	font-weight: 400;
-	border-radius: @am-radius-small;
+	font-weight: normal;
+	border-radius: 9px;
+	box-shadow: 0 8px 12px 0 rgba(29,32,43,0.17), 0 4px 5px -3px rgba(5,6,12,0.49);
 }

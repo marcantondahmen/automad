@@ -41,9 +41,10 @@ footers works perfectly fine since the order of parsing is not relevant here.
 			// Note that query string parameters get used as parameter values to make the pagelist
 			// controllable by a menu.
 			$Pagelist->config(array(
-				'filter' => Parse::query('filter'),
-				'search' => Parse::query('search'),
-				'sort' => Str::def(Parse::query('sort'), 'date desc')
+				'filter' => Request::query('filter'),
+				'match' => '{":level": "/(1|2)/"}',
+				'search' => Request::query('search'),
+				'sort' => Str::def(Request::query('sort'), 'date desc')
 			));
 			?>
 			<# A simple filter menu lets the user filter the paglist dynamically. #>
@@ -58,7 +59,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							modify the filter parameter within an existing query string without resetting other options. 
 							#>
 							href="?<?php echo $Toolbox->queryStringMerge(array('filter' => false)); ?>"
-							class="button is-info<?php if (!Parse::query('filter')) { ?> is-active<?php } ?>">
+							class="button is-info<?php if (!Request::query('filter')) { ?> is-active<?php } ?>">
 								All
 							</a>
 						</p>
@@ -70,7 +71,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							<p class="control">
 								<a 
 								href="?<?php echo $Toolbox->queryStringMerge(array('filter' => $filter)); ?>" 
-								class="button is-info<?php if (Parse::query('filter') == $filter) { ?> is-active<?php } ?>">
+								class="button is-info<?php if (Request::query('filter') == $filter) { ?> is-active<?php } ?>">
 									<?php echo $filter; ?>
 								</a>
 							</p>
@@ -83,7 +84,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 						<p class="control">
 							<a 
 							href="?<?php echo $Toolbox->queryStringMerge(array('sort' => 'date desc')); ?>"
-							class="button is-info<?php if (!Parse::query('sort') || Parse::query('sort') == 'date desc') { ?> is-active<?php } ?>"
+							class="button is-info<?php if (!Request::query('sort') || Request::query('sort') == 'date desc') { ?> is-active<?php } ?>"
 							>
 								<span class="icon is-small">
 									<i class="fas fa-sort-numeric-down" aria-hidden="true"></i>
@@ -94,7 +95,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 						<p class="control">
 							<a 
 							href="?<?php echo $Toolbox->queryStringMerge(array('sort' => 'title asc')); ?>"
-							class="button is-info<?php if (Parse::query('sort') == 'title asc') { ?> is-active<?php } ?>"
+							class="button is-info<?php if (Request::query('sort') == 'title asc') { ?> is-active<?php } ?>"
 							>
 								<span class="icon is-small">
 									<i class="fas fa-sort-alpha-up" aria-hidden="true"></i>
@@ -112,7 +113,7 @@ footers works perfectly fine since the order of parsing is not relevant here.
 						type="text" 
 						name="search" 
 						placeholder="Keyword" 
-						value="<?php echo Parse::query('search'); ?>"
+						value="<?php echo Request::query('search'); ?>"
 						/>
 					</form>
 				</div>
@@ -136,7 +137,18 @@ footers works perfectly fine since the order of parsing is not relevant here.
 							</span>
 						</div>
 						<div class="field is-size-6">
-							<?php echo Str::shorten(Str::stripTags($Page->get('textTeaser')), 100); ?>
+							<?php 
+								// Use the first paragraph block of the page or the textTeaser as fallback.
+								echo Str::shorten(
+										Str::stripTags(
+											Str::def(
+												trim(Str::findFirstParagraph(Blocks::render($Page->get('+main'), $Automad))), 
+												$Page->get('textTeaser')
+											)
+										), 
+										100
+									 ); 
+							?>
 						</div>
 						<a 
 						href="<?php echo $Page->get('url'); ?>" 

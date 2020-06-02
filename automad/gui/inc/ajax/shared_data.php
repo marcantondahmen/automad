@@ -56,10 +56,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-if (isset($_POST['data'])) {
+if ($data = Core\Request::post('data')) {
 
 	// Save changes.
-	$output = $this->getContent()->saveSharedData($_POST['data']);
+	$output = $this->getContent()->saveSharedData($data);
 			
 } else {
 	
@@ -146,10 +146,10 @@ if (isset($_POST['data'])) {
 						
 							// Set icon.
 							if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
-								$img = new Core\Image(reset($images), 320, 240, true);
+								$img = new Core\Image(reset($images), 400, 300, true);
 								$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 							} else {
-								$icon = '<div class="am-panel-icon"><span><i class="uk-icon-code"></i></span></div>';
+								$icon = '<i class="uk-icon-code"></i>';
 							}
 					
 							// Check currently active theme.
@@ -163,29 +163,9 @@ if (isset($_POST['data'])) {
 							
 						?>
 						<li>
-							<?php if ($Theme->readme) { ?>
-							<div id="<?php echo $id . '-modal' ?>" class="uk-modal">
-								<div class="uk-modal-dialog">
-									<div class="uk-modal-header uk-margin-remove">
-										Readme
-										<a href="#" class="uk-modal-close uk-close"></a>
-									</div>
-									<div class="am-text-readme">
-										<?php echo Core\Str::markdown(file_get_contents($Theme->readme)); ?>
-									</div>
-									<div class="uk-modal-footer uk-text-right">
-										<button 
-										class="uk-modal-close uk-button"
-										>
-											<i class="uk-icon-close"></i>&nbsp;
-											<?php Text::e('btn_close'); ?>
-										</button>
-									</div>
-								</div>
-							</div>
-							<?php } ?>				
+							<?php echo Components\Modal\Readme::render($id . '-modal', $Theme->readme) ?>			
 							<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
-								<div class="uk-panel-teaser">
+								<div class="am-panel-cover-4by3 uk-panel-teaser">
 									<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
 										<?php echo $icon; ?>	
 									<?php if ($Theme->readme) { ?></a><?php } ?>
@@ -258,11 +238,6 @@ if (isset($_POST['data'])) {
 						$keysInMainTheme = array();
 					}
 					
-					$keysInOtherThemes = array_diff(
-						$this->getKeys()->inAllTemplates(), 
-						$keysInMainTheme
-					); 
-					
 				?>
 				<!-- Shared variables in main theme -->
 				<?php if ($keysInMainTheme) { ?>
@@ -272,7 +247,8 @@ if (isset($_POST['data'])) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo $this->getHtml()->formGroup(
+						echo Components\Form\Group::render(
+							$this->getAutomad(), 
 							$keysInMainTheme, 
 							$data,
 							false,
@@ -281,21 +257,8 @@ if (isset($_POST['data'])) {
 					?>
 				</div>
 				<?php } ?>
-				<!-- Shared variables in other themes -->
-				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_other_themes'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($keysInOtherThemes); ?></span>
-				</div>
-				<div class="uk-accordion-content">
-					<?php 
-						echo $this->getHtml()->formGroup(
-							$keysInOtherThemes, 
-							$data
-						); 
-					?>
-				</div>
 				
-				<?php $unusedDataKeys = array_diff(array_keys($data), $this->getKeys()->inAllTemplates(), $this->getKeys()->reserved); ?>
+				<?php $unusedDataKeys = array_diff(array_keys($data), $keysInMainTheme, $this->getKeys()->reserved); ?>
 				
 			<?php } else { ?>
 
@@ -306,7 +269,7 @@ if (isset($_POST['data'])) {
 				
 					// Also submit the saved theme form the non-headless mode.
 					// The value gets stored in a hidden input field.
-					echo $this->getHtml()->formFieldHidden(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
+					echo Components\Form\FieldHidden::render(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
 				
 				?>
 				<div class="uk-accordion-title">
@@ -315,7 +278,8 @@ if (isset($_POST['data'])) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo $this->getHtml()->formGroup(
+						echo Components\Form\Group::render(
+							$this->getAutomad(), 
 							$keysInHeadless, 
 							$data,
 							false,
@@ -336,7 +300,7 @@ if (isset($_POST['data'])) {
 			<div class="uk-accordion-content">
 				<?php 
 				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo $this->getHtml()->formGroup($unusedDataKeys, $data, 'am-add-variable'); 
+				echo Components\Form\Group::render($this->getAutomad(), $unusedDataKeys, $data, 'am-add-variable'); 
 				?>
 			</div>
 

@@ -39,15 +39,23 @@
 		
 		border-radius: @am-radius;
 		background-color: @button-background;
-		
+				
 		& > div {
-			display: inline-block;
+			max-width: 100%;
 		}
-		
+
+		& [data-uk-switcher]:last-child {
+			overflow: hidden;
+			border-radius: @am-radius;
+		}
+
 		& .uk-button {
 			
 			margin: 0;
 			border-radius: 0;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: clip;
 			
 			&[data-am-tab] {
 				
@@ -91,5 +99,11 @@
 }
 
 .uk-switcher {	
+
 	margin-top: @utility-margin-large - @am-sticky-padding;
+
+	& > li {
+		backface-visibility: hidden;
+	}
+
 }

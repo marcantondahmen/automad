@@ -1,0 +1,178 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-gallery {
+
+	&-masonry {
+
+		display: grid;
+		gap: 0;
+		grid-template-columns: repeat(auto-fill, minmax(var(--am-gallery-item-width), 1fr));
+		grid-auto-rows: 50px;
+		margin-left: ~"calc(var(--am-gallery-gap) * -1)";
+		margin-bottom: ~"calc(var(--am-gallery-gap) * -1)";
+		
+		&-item {
+			padding-left: var(--am-gallery-gap);
+			padding-bottom: var(--am-gallery-gap);
+			grid-row-end: span var(--am-gallery-masonry-rows);
+		}
+
+	}
+
+	&-img-small img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+
+	&-lightbox {
+
+		position: fixed;
+		z-index: var(--am-gallery-z-index);
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		pointer-events: none;
+		cursor: default;
+		transition: opacity 0.2s ease-in;
+		background-color: var(--am-gallery-background);
+
+		&.am-active {
+			visibility: visible;
+  			opacity: 1;
+  			pointer-events: initial;
+		}
+
+		& > img {
+
+			position: fixed;
+			margin: 0;
+			padding: 0;
+			max-height: var(--am-gallery-max-height);
+			max-width: var(--am-gallery-max-width);
+			top: 50%;
+			left: 50%;
+			margin-right: -50%;
+			transform: translate(-50%, -50%);
+			transition: opacity 0.2s ease-in;
+
+			&.am-fade {
+				opacity: 0;
+			}
+
+		}
+
+		&-close {
+  			position: fixed;
+  			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+
+		&-caption {
+
+			position: fixed;
+			bottom: 0;
+			left: 50%;
+			transform: translate(-50%, 0%);
+			padding: 0.6rem 1rem;
+			font-size: 1rem;
+			color: var(--am-gallery-controls-color);
+			background-color: var(--am-gallery-controls-background);
+
+			&:empty {
+				display: none;
+			}
+
+		}
+
+		&-prev,
+		&-next {
+
+			position: fixed;
+  			text-decoration: none;
+			top: 50%;
+			transform: translate(0%, -50%);
+			width: 3.5rem;
+			line-height: 3.5rem;
+			text-align: center;
+			font-family: 'am-controls';
+			color: var(--am-gallery-controls-color);
+			background-color: var(--am-gallery-controls-background);
+			font-size: 3rem;
+			opacity: 0.1;
+			transition: opacity 0.2s ease-in;
+
+			&:hover {
+				color: var(--am-gallery-controls-color);
+				opacity: 0.2;
+			}
+
+			&:before {
+				position: relative;
+				top: -2px;
+			}
+
+		}
+
+		&-prev {
+			
+			left: 0;
+
+			&:before {
+				content: '<';
+				margin-left: -0.12em;
+			}
+
+		}
+
+		&-next {
+
+			right: 0;
+
+			&:before {
+				content: '>';
+				margin-right: -0.12em;
+			}
+
+		}
+
+	}
+
+}

@@ -60,14 +60,19 @@
 	line-height: 1.6;
     
 	&:before {
-		content: '\f055';
+		content: '\f054';
 		position: relative;
+		width: 10px;
+		top: -0.1em;
 		&:extend([class*='uk-icon-'] all);
-		padding-right: 5px;
+		text-align: center;
+		font-size: 0.8em;
+		padding-right: 4px;
 	}
 	
 	&.uk-active:before {
-		content: '\f056';
+		content: '\f078';
+		top: -0.2em;
 	}
 
 }

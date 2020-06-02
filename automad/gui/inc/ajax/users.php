@@ -47,8 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Delete selected users.
-if (isset($_POST['delete'])) {	
-	$output = Accounts::delete($_POST['delete']);
+if ($delete = \Automad\Core\Request::post('delete')) {	
+	$output = Accounts::delete($delete);
 } else {
 	$output = array();
 }

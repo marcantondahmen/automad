@@ -53,12 +53,12 @@ $this->element('header');
 ?>
 	
 		<ul class="uk-subnav uk-subnav-pill uk-margin-top">
-			<li class="uk-disabled uk-hidden-small"><i class="uk-icon-globe"></i></li>
+			<li class="uk-disabled uk-hidden-small"><i class="uk-icon-files-o"></i></li>
 			<li><a href=""><?php Text::e('shared_title'); ?></a></li>
 		</ul>
 	
 		<?php 
-			echo $this->getHtml()->stickySwitcher('#am-shared-content', array(
+			echo Components\Nav\Switcher::render('#am-shared-content', array(
 				array(
 					'icon' => '<i class="uk-icon-file-text"></i>',
 					'text' => Text::get('btn_data')
@@ -78,7 +78,7 @@ $this->element('header');
 				data-am-init 
 				data-am-handler="shared_data"
 				>
-					<?php echo $this->getHtml()->loading(); ?>
+					<?php echo Components\Loading::render(); ?>
 				</form>
 			</li>
 			<!-- Files -->
@@ -89,11 +89,17 @@ $this->element('header');
 				data-am-handler="files" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<?php echo $this->getHtml()->loading(); ?>
+					<?php echo Components\Loading::render(); ?>
 				</form>
 			</li>
 		</ul>
 		
+		<!-- Select Image Modal -->
+		<?php echo Components\Modal\SelectImage::render(); ?>
+
+		<!-- Add Link Modal -->
+		<?php echo Components\Modal\Link::render(); ?>
+
 <?php
 
 

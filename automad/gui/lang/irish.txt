@@ -1,0 +1,709 @@
+btn_add: Cuir leis
+
+-
+
+btn_add_page: Cuir Leathanach leis
+
+-
+
+btn_add_var: Cuir Athróg leis
+
+-
+
+btn_apply_reload: Cuir Iarratas agus Athlódáil
+
+-
+
+btn_browse: Brabhsáil Comhaid
+
+-
+
+btn_close: Dún
+
+-
+
+btn_copy_url_clipboard: Cóipeáil URL chuig an Ghearrthaisce
+
+-
+
+btn_copy_resized: Cóipeáil agus Athraigh méid
+
+-
+
+btn_data: Sonraí agus Socruithe
+
+-
+
+btn_delete_page: Scrios Leathanach
+
+-
+
+btn_download_file: Íoslódáil
+
+-
+
+btn_duplicate_page: Leathanach Dúblach
+
+-
+
+btn_edit: Cuir in Eagar
+
+-
+
+btn_edit_file_info: Cuir Faisnéis Comhad in Eagar
+
+-
+
+btn_edit_headless_template: Cuir an Teimpléad Gan Cheann in eagar
+
+-
+
+btn_edit_page: Cuir Leathanach in Eagar
+
+-
+
+btn_files: Comhaid Uaslódáilte
+
+-
+
+btn_get_themes: Faigh Tuilleadh Téamaí
+
+-
+
+btn_getting_data: Sonraí a Fháil ...
+
+-
+
+btn_hide_page: Folaigh Leathanach sa Loingseoireacht
+
+-
+
+btn_home: Home
+
+-
+
+btn_import: Iompórtáil Ó URL
+
+-
+
+btn_inpage_edit: Mód Eagarthóireachta In-Leathanach
+
+-
+
+btn_install: Suiteáil
+
+-
+
+btn_link: Nasc
+
+-
+
+btn_log_out: Logáil Amach
+
+-
+
+btn_login: Logáil isteach
+
+-
+
+btn_manage_users: Bainistigh Úsáideoirí
+
+-
+
+btn_more: Níos mó
+
+-
+
+btn_move_page: Bog Leathanach
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Log Oscailte
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Bain
+
+-
+
+btn_remove_selected: Bain Roghnaithe
+
+-
+
+btn_reset: Athshocraigh
+
+-
+
+btn_save: Sabháil na hathruithe
+
+-
+
+btn_upload: Uaslódáil
+
+-
+
+confirm_delete_files: An bhfuil tú cinnte gur mhaith leat na comhaid roghnaithe a scriosadh?
+
+-
+
+confirm_delete_page: An bhfuil tú cinnte gur mhaith leat an leathanach reatha a scriosadh?
+
+-
+
+confirm_delete_users: An bhfuil tú cinnte gur mhaith leat na húsáideoirí roghnaithe a scriosadh?
+
+-
+
+confirm_reset_headless: An bhfuil tú cinnte gur mhaith leat an teimpléad saincheaptha gan cheann a athshocrú?
+
+-
+
+dashboard_memory: Úsáid cuimhne:
+
+-
+
+dashboard_modified: Gníomhaíocht is Déanaí ar
+
+-
+
+dashboard_recently_edited: Leathanaigh a cuireadh in eagar le déanaí
+
+-
+
+dropzone: Tarraing Comhaid Anseo
+
+-
+
+error_cache_purged: Ní fhéadfaí an t-eolaire taisce a ghlanadh!
+
+-
+
+error_existing: Ann cheana!
+
+-
+
+error_file_save: Níorbh fhéidir sábháil
+
+-
+
+error_file_format: Cineál comhaid gan tacaíocht
+
+-
+
+error_file_not_found: Níor aimsíodh comhad!
+
+-
+
+error_file_size: Méid neamhbhailí comhaid!
+
+-
+
+error_form: Sonraí neamhiomlána nó míchearta! <br /> Teastaíonn gach réimse agus caithfear iad a chomhlánú mar a thuairiscítear!
+
+-
+
+error_login: Ainm úsáideora nó pasfhocal neamhbhailí
+
+-
+
+error_log_out: Theip ar logáil amach!
+
+-
+
+error_no_destination: Roghnaigh leathanach mar cheann scríbe le do thoil!
+
+-
+
+error_no_js: Cumasaigh JavaScript i do bhrabhsálaí le do thoil chun an Painéal na nIonstraimí a úsáid!
+
+-
+
+error_no_theme: Níor roghnaíodh téama! Roghnaigh príomhthéama le do thoil.
+
+-
+
+error_no_url: Iontráil URL bailí le do thoil!
+
+-
+
+error_import: Theip ar allmhairiú an chomhaid!
+
+-
+
+error_packages: Níorbh fhéidir pacáistí a luchtú ó Packagist!
+
+-
+
+error_composer_memory: Níl cuimhne leordhóthanach ag do fhreastalaí chun pacáistí a shuiteáil, a nuashonrú nó a bhaint! Sa chás go bhfuil tú ag rith an láithreáin seo ar sheirbhís óstála roinnte le méid teoranta cuimhne, déan iarracht do phlean a uasghrádú nó do shuíomh a shuiteáil ar ríomhaire áitiúil gan srianta cuimhne.
+
+-
+
+error_page_not_found: Ní bhfuarthas an leathanach!
+
+-
+
+error_page_title: Teideal ar iarraidh!
+
+-
+
+error_password_current: Tá an focal faire reatha mícheart!
+
+-
+
+error_password_repeat: Iontráil dhá uair an focal faire nua céanna le do thoil!
+
+-
+
+error_password_reuse: Ná athúsáid do sheanfhocal faire!
+
+-
+
+error_permission: Diúltaíodh ceadanna:
+
+-
+
+error_template_missing: Teimpléad ar iarraidh
+
+-
+
+error_update_connection: Ní féidir ceangal leis an bhfreastalaí nuashonraithe! De ghnáth d’fhéadfadh cumraíocht nuashonraithe mícheart (config.json), earráid teastais SSL nó leabharlann cURL a bheith mar chúis leis seo.
+
+-
+
+error_update_download: Theip ar íoslódáil an nuashonraithe!
+
+-
+
+error_update_items: Liosta neamhbhailí earraí le nuashonrú!
+
+-
+
+error_update_failed: Theip ar an nuashonrú! Cuir do shuiteáil ar ais ó chúltaca.
+
+-
+
+error_update_not_supported: Ní thacaíonn do fhreastalaí le nuashonruithe! Éilíonn an updater leabharlanna cURL agus ZIP a shuiteáil.
+
+-
+
+error_update_permission: Ní féidir nuashonrú a reáchtáil! Diúltaíodh ceadanna!
+
+-
+
+error_var_exists: Tá athróg ann cheana leis an ainm sin!
+
+-
+
+error_var_name: Ní féidir leat athróg a chur leis gan ainm!
+
+-
+
+file_name: Ainm comhaid
+
+-
+
+file_caption: Fotheideal
+
+-
+
+image_crop: Íomhá na mBarr
+
+-
+
+image_height_px: Airde (Pixel)
+
+-
+
+image_width_px: Leithead (Pixel)
+
+-
+
+image_options: Roghanna
+
+-
+
+image_select: Roghnaigh Íomhá
+
+-
+
+images_page: Íomhánna Leathanach
+
+-
+
+images_shared: Íomhánna Ginearálta
+
+-
+
+link_placeholder: Tosaigh teideal leathanaigh a chlóscríobh nó greamaigh nasc seachtrach anseo
+
+-
+
+link_title: Cuir Nasc leis
+
+-
+
+login_title: Logáil isteach
+
+-
+
+login_username: Ainm úsáideora
+
+-
+
+login_password: Pasfhocal
+
+-
+
+log_out_title: Logáilte Amach
+
+-
+
+packages_title: Pacáistí
+
+-
+
+packages_browse: Brabhsálaí Pacáiste Oscailte
+
+-
+
+packages_filter: Scagaire
+
+-
+
+packages_installed: Suiteáilte
+
+-
+
+packages_installing: Pacáiste a shuiteáil ...
+
+-
+
+packages_update_all: Nuashonraigh Uile
+
+-
+
+packages_updating: Pacáistí a nuashonrú ...
+
+-
+
+packages_removing: Pacáiste a bhaint ...
+
+-
+
+page_add_location: Roghnaigh suíomh don leathanach nua
+
+-
+
+page_move_destination: Roghnaigh ceann scríbe le haghaidh gluaiseachta
+
+-
+
+page_settings: Socruithe leathanaigh
+
+-
+
+page_prefix: Réimír (Ordú Nascleanúna)
+
+-
+
+page_redirect: Leathanach a atreorú chuig URL eile
+
+-
+
+page_tags: Clibeanna (Ilchlibeanna ar leithligh le camóg nó cluaisín)
+
+-
+
+page_theme_template: Teimpléad
+
+-
+
+page_var_name: Ainm Athraitheach
+
+-
+
+page_vars_headless: Athróga
+
+-
+
+page_vars_template: Athróga sa teimpléad reatha
+
+-
+
+page_vars_unused: Athróga neamhúsáidte
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Domhanda
+
+-
+
+sidebar_header_pages: Leathanaigh
+
+-
+
+shared_title: Sonraí Ginearálta agus Comhaid
+
+-
+
+shared_theme: Príomhthéama
+
+-
+
+shared_theme_apply: Ar mhaith leat an téama roghnaithe a chur i bhfeidhm agus liosta na n-athróg atá ar fáil a nuashonrú anois? Sábhálfar d’athruithe nár sábháladh.
+
+-
+
+shared_vars_headless: Athróga
+
+-
+
+shared_vars_main_theme: Athróga sa phríomhthéama
+
+-
+
+shared_vars_unused: Athróga neamhúsáidte
+
+-
+
+shared_var_name: Ainm Athraitheach
+
+-
+
+search_no_results: Níor aimsíodh aon leathanaigh!
+
+-
+
+search_placeholder: Cuardaigh isteach
+
+-
+
+search_title: Torthaí Cuardaigh
+
+-
+
+success_added: Cuireadh leis go rathúil
+
+-
+
+success_cache_cleared: Glanadh an taisce go rathúil!
+
+-
+
+success_cache_purged: Glanadh an t-eolaire taisce go rathúil!
+
+-
+
+success_config_update: Cumraíocht nuashonraithe go rathúil!
+
+-
+
+success_created: Cruthaíodh go rathúil <br>
+
+-
+
+success_installed: Suiteáilte go rathúil
+
+-
+
+success_password_changed: Athraíodh do phasfhocal go rathúil!
+
+-
+
+success_log_out: Logáilte Amach go rathúil
+
+-
+
+success_remove: Baineadh go rathúil é
+
+-
+
+success_reset_headless: D'éirigh leis an teimpléad réamhshocraithe gan cheann a athbhunú!
+
+-
+
+success_saved: Athruithe sábháilte
+
+-
+
+success_update: Automad nuashonraithe go rathúil!
+
+-
+
+success_packages_updated: Rinneadh gach pacáiste a nuashonrú go rathúil
+
+-
+
+sys_cache_info: Tá caching riachtanach chun do shuíomh a bhrostú agus ba cheart go mbeadh sé cumasaithe go ginearálta. Ach in imthosca áirithe b’fhéidir gur mhaith leat do thaisce a dhíchumasú nó a ghlanadh.
+
+-
+
+sys_cache_clear: Taisce Glan
+
+-
+
+sys_cache_clear_info: Nuair a dhéantar taisce an láithreáin a ghlanadh, cuirtear rescan le haghaidh leathanaigh agus comhaid nuashonraithe. Ní bhainfidh an gníomh seo aon chomhaid leathanaigh nó íomhánna ón eolaire taisce.
+
+-
+
+sys_cache_monitor: Is é an t-eatramh seiceála
+
+-
+
+sys_cache_monitor_info: Nuair a chumasaítear caching, seiceálfaidh Automad go rialta le haghaidh athruithe sa chóras comhad. Is féidir minicíocht na seiceálacha sin a shainiú anseo.
+
+-
+
+sys_cache_lifetime: Is é saolré an taisce
+
+-
+
+sys_cache_lifetime_info: Tá saolré uasta ag na sonraí agus na leathanaigh Automad i dtaisce. Tar éis saolré réada a bheith níos faide, atógfar a thaisce nuair a iarrfar é.
+
+-
+
+sys_cache_purge: Eolaire Purge Cache
+
+-
+
+sys_cache_purge_info: I gcodarsnacht leis an taisce a ghlanadh, bogfaidh an eolaire taisce gach comhad sealadach, leathanaigh scriosta, cúltacaí nuashonraithe agus íomhánna taiscthe chuig eolaire sealadach an chórais. Cuirfidh sé seo atógáil iomlán ar an taisce íomhá agus leathanaigh chomh maith le glanta ar gach leathanach scriosta. I bhformhór na gcóras, glanfar an t-eolaire sealadach go huathoibríoch ó am go ham nó ar atosaigh. Mar sin féin, ar roinnt córais caithfear an eolaire sin a ghlanadh de láimh.
+
+-
+
+sys_debug_info: Nuair a chumasófar dífhabhtú, logálfar gach ceann de phróisis Automad chuig consól do bhrabhsálaí. Ní theastaíonn dífhabhtú ach le haghaidh forbartha nó fabhtcheartaithe agus ba cheart go mbeadh sé faoi mhíchumas i ngach cás eile.
+
+-
+
+sys_headless_edit_info: Tá struchtúr na sonraí JSON a chuirtear ar ais á rialú ag teimpléad. Is féidir leat an teimpléad sin a chur in eagar trí úsáid a bhaint as teanga teimpléid ionsuite Automad chun réimsí a shaincheapadh trí athróga, rudaí agus struchtúir rialaithe a úsáid.
+
+-
+
+sys_headless_info: Nuair a dhéantar an modh gan cheann a ghníomhachtú casann Automad ina chóras bainistíochta inneachair a dhíríonn go hiomlán ar chruthú ábhair gan ciseal cur i láthair. Cé gur féidir an Painéal na nIonstraimí a úsáid fós chun ábhar a bhainistiú, tá na sonraí agus na comhaid go léir inrochtana trí API JSON inléite amháin.
+
+-
+
+sys_language: Teanga
+
+-
+
+sys_language_info: Tá roinnt teangacha ar fáil don Phainéal. Cruthaítear na haistriúcháin go huathoibríoch. Tá an ghné seo fós i gcéim thurgnamhach agus dá bhrí sin b’fhéidir nach mbeadh roinnt aistriúcháin cruinn.
+
+-
+
+sys_status_cache_enabled: Cumasaítear caching
+
+-
+
+sys_status_cache_disabled: Tá caching faoi mhíchumas
+
+-
+
+sys_status_debug_enabled: Cumasaítear dífhabhtú
+
+-
+
+sys_status_debug_disabled: Tá dífhabhtú faoi mhíchumas
+
+-
+
+sys_status_update_available: Nuashonrú chuig
+
+-
+
+sys_status_update_not_available: Tá Automad cothrom le dáta
+
+-
+
+sys_title: Socruithe Córais
+
+-
+
+sys_update: Nuashonrú
+
+-
+
+sys_update_available: Tá leagan níos nuaí de Automad ar fáil agus réidh le suiteáil. <br> Déan cúltaca de do shuiteáil reatha sula ndéantar nuashonrú air!
+
+-
+
+sys_update_current_version: Is é an leagan atá suiteáilte faoi láthair
+
+-
+
+sys_update_items: Bíonn tionchar ag an nuashonrú ar na míreanna seo a leanas:
+
+-
+
+sys_update_not_required: Tá Automad cothrom le dáta.
+
+-
+
+sys_update_progress: Fan le do thoil agus ná dún an fhuinneog agus tú ag nuashonrú ...
+
+-
+
+sys_update_to: Nuashonrú chuig
+
+-
+
+sys_update_windows_warning: Déan cinnte go bhfuil gach comhad de do shuiteáil suiteáilte i gcláir sheachtracha sula ndéantar an nuashonrú a rith chun saincheisteanna ceadanna a sheachaint!
+
+-
+
+sys_user: Úsáideoirí
+
+-
+
+sys_user_info: Féadfaidh tú níos mó úsáideoirí a chur leis nó a bhaint nó do phasfhocal a athrú anseo.
+
+-
+
+sys_user_change_password: Athraigh Do Pasfhocal
+
+-
+
+sys_user_change_password_current: Pasfhocal reatha
+
+-
+
+sys_user_change_password_new: Focal Faire Nua
+
+-
+
+sys_user_change_password_repeat: Athscríobh an Pasfhocal
+
+-
+
+sys_user_add: Cuir Úsáideoir leis
+
+-
+
+sys_user_add_name: Ainm úsáideora
+
+-
+
+sys_user_add_password: Pasfhocal
+
+-
+
+sys_user_add_repeat: Athscríobh an Pasfhocal
+
+-
+
+sys_user_registered: Úsáideoirí Cláraithe
+
+-
+
+sys_user_you: Tú

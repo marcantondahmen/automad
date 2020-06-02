@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\Core\Request as Request;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,26 +62,29 @@ class Accounts {
 	public static function add() {
 		
 		$output = array();
+		$username = Request::post('username');
+		$password1 = Request::post('password1');
+		$password2 = Request::post('password2');
 
-		if (isset($_POST['username']) && $_POST['username'] && isset($_POST['password1']) && $_POST['password1'] && isset($_POST['password2']) && $_POST['password2']) {
+		if ($username && $password1 && $password2) {
 	
 			// Check if password1 equals password2.
-			if ($_POST['password1'] == $_POST['password2']) {
+			if ($password1 == $password2) {
 		
 				// Get all accounts from file.
 				$accounts = Accounts::get();
 		
 				// Check, if user exists already.
-				if (!isset($accounts[$_POST['username']])) {
+				if (!isset($accounts[$username])) {
 		
 					// Add user to accounts array.
-					$accounts[$_POST['username']] = Accounts::passwordHash($_POST['password1']);
+					$accounts[$username] = Accounts::passwordHash($password1);
 					ksort($accounts);
 				
 					// Write array with all accounts back to file.
 					if (Accounts::write($accounts)) {
 				
-						$output['success'] = Text::get('success_added') . ' "' . $_POST['username'] . '"';
+						$output['success'] = Text::get('success_added') . ' "' . $username . '"';
 				
 					} else {
 	
@@ -90,7 +94,7 @@ class Accounts {
 			
 				} else {
 		
-					$output['error'] = '"' . $_POST['username'] . '" ' . Text::get('error_existing');	
+					$output['error'] = '"' . $username . '" ' . Text::get('error_existing');	
 			
 				}
 		
@@ -172,10 +176,14 @@ class Accounts {
 		
 		if (!empty($_POST)) {
 	
-			if ($_POST['username'] && $_POST['password1'] && ($_POST['password1'] === $_POST['password2'])) {
+			$username = Request::post('username');
+			$password1 = Request::post('password1');
+			$password2 = Request::post('password2');
+
+			if ($username && $password1 && ($password1 === $password2)) {
 		
 				$accounts = array();
-				$accounts[$_POST['username']] = Accounts::passwordHash($_POST['password1']);
+				$accounts[$username] = Accounts::passwordHash($password1);
 		
 				// Download accounts.php
 				header('Expires: -1');

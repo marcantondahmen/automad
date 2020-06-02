@@ -1,0 +1,48 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+.prev-next {
+
+	position: relative;
+	top: 0;
+	padding: 2rem 0 1.75rem 0;
+	font-size: 1rem;
+	line-height: 1;
+
+	@media (min-width: @breakpoint-large) {
+		position: absolute;
+		top: 1.5rem;
+		padding: 0.5rem 0;
+		width: 100%;
+		max-width: 100% !important;
+	}
+
+	// Keep the first element aligned with the arrows.
+	& + * {
+		margin-top: 0 !important;
+	}
+
+	& a {
+
+		position: absolute;
+		top: -0.5rem;
+		padding: 0.5rem 0;
+
+		&.prev {
+			left: 0;
+		}
+
+		&.next {
+			right: 0;
+		}
+
+	}
+
+}

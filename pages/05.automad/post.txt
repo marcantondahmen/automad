@@ -1,0 +1,21 @@
+title: Automad
+
+-
+
+hidden: on
+
+-
+
+url: https://automad.org
+
+-
+
+tags: Docs
+
+-
+
+checkboxHideInMenu: 0
+
+-
+
+checkboxShowInFooter: 1

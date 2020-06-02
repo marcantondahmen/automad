@@ -1,0 +1,101 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@nav-padding-vertical:         	0;
+@nav-padding-horizontal:       	0;
+
+@nav-nested-padding-left:      	1rem;
+@nav-nested-padding-vertical:  	0;
+@nav-nested-padding-horizontal:	0;
+
+@nav-side-color:               	@base-body-color;
+@nav-side-hover-background:    	transparent;
+@nav-side-hover-color:         	@text-color;
+@nav-side-active-background:   	transparent;
+@nav-side-active-color:        	@text-color;
+@nav-side-nested-color:        	@nav-side-color;
+@nav-side-nested-hover-color:  	@text-color;
+
+@nav-dropdown-color:           	@base-body-color;
+@nav-dropdown-hover-background:	@panel-bg-color;
+@nav-dropdown-hover-color:     	@base-body-color;
+
+.hook-nav-side() {
+	display: inline;
+	padding: 0.1rem 0;
+	font-size: 1.15rem;
+	font-weight: 500;
+	line-height: 1.65;
+	border-bottom: 1px solid transparent;
+}
+
+.hook-nav-misc() {
+	
+	.uk-nav-side:first-child {
+		margin-top: -0.4rem;
+	}
+
+	.uk-nav.uk-nav-side li {
+		margin: 0.4rem 0;
+	}
+
+	.uk-nav.uk-nav-side .uk-nav {
+
+		margin: 0.8rem 0;
+		
+		& > li {
+			margin: 0;
+			padding: 2px 0;
+		}
+
+		& > li > a {
+			font-size: @navbar-nav-font-size;
+			font-weight: @base-body-font-weight;
+			line-height: @base-body-line-height;
+		}
+
+	}
+
+	.uk-nav:last-child .uk-nav:last-child {
+		margin-bottom: 0;
+	}
+
+	.uk-nav.uk-nav-autocomplete,
+	.uk-nav.uk-nav-dropdown {
+		
+		& > li > a {
+			padding: 6px 15px;
+			border: none;
+			.transition(background-color 0.2s;);	
+		}
+		
+	}
+
+}
+
+.hook-nav-side-hover() {
+	border-bottom-color: @nav-side-color; 
+}
+
+.hook-nav-side-active() {
+	border-bottom-color: @nav-side-color; 
+}
+
+.nav-link {
+
+	color: @base-body-color;
+
+	&:hover,
+	&:active,
+	&:focus {
+		color: @text-muted-color;
+	}
+
+}

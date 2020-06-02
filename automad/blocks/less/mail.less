@@ -1,0 +1,114 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+input[name="human"] {
+	display: none !important;
+}
+
+.am-mail {
+
+	&-input {
+
+		width: 100%;
+		margin: var(--am-mail-input-margin);
+		padding: var(--am-mail-input-padding);
+		font-family: inherit;
+		font-weight: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		color: var(--am-mail-input-color);
+		background-color: var(--am-mail-input-background);
+		border-radius: var(--am-mail-input-radius);
+		border: var(--am-mail-input-border);
+
+		&:hover {
+			color: var(--am-mail-input-hover-color);
+			background-color: var(--am-mail-input-hover-background);
+			border: var(--am-mail-input-hover-border);
+		}
+
+		&:focus {
+			color: var(--am-mail-input-focus-color);
+			background-color: var(--am-mail-input-focus-background);
+			border: var(--am-mail-input-focus-border);
+			outline: none;
+		}
+
+		&::-webkit-input-placeholder { 
+			color: var(--am-mail-input-placeholder-color);
+		}
+
+		&::-moz-placeholder { 
+			color: var(--am-mail-input-placeholder-color);
+		}
+
+	}
+
+	&-button {
+
+		box-sizing: content-box;
+		margin: var(--am-mail-button-margin);
+		padding: var(--am-mail-button-padding);
+		height: var(--am-mail-button-height);
+		line-height: var(--am-mail-button-lineheight);
+		-webkit-appearance: none;
+		font-family: inherit;
+		font-weight: inherit;
+		font-size: inherit;
+		text-transform: none;
+		text-decoration: none;
+		text-align: center;
+		cursor: pointer;
+		border-radius: var(--am-mail-button-radius);
+		color: var(--am-mail-button-color);
+		background-color: var(--am-mail-button-background);
+		border: var(--am-mail-button-border);
+
+		&:hover,
+		&:active,
+		&:focus {
+			color: var(--am-mail-button-hover-color);
+			background-color: var(--am-mail-button-hover-background);
+			border: var(--am-mail-button-hover-border);
+		}
+
+		&::-moz-focus-inner {
+    		border: 0;
+    		padding: 0;
+		}
+
+	}
+
+}

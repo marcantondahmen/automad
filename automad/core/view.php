@@ -76,7 +76,7 @@ class View {
 	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
 	 */
 	
-	private $extensionAssets = array();
+	public $extensionAssets = array();
 	
 	
 	/**
@@ -243,13 +243,20 @@ class View {
 			
 			// Query string parameter.
 			$key = substr($key, 1);
-			return htmlspecialchars(Parse::query($key));
+			return htmlspecialchars(Request::query($key));
 			
-		} elseif (strpos($key, '%') === 0) {	
+		} else if (strpos($key, '%') === 0) {	
 			
 			// Session variable.
 			return SessionData::get($key);
-			
+		
+		} else if (strpos($key, '+') === 0) {
+
+			// Blocks variable.
+			$value = Blocks::render($this->Automad->Context->get()->get($key), $this->Automad);
+			$this->mergeExtensionAssets(Blocks::$extensionAssets);
+			return $value;
+
 		} else {
 			
 			// First try to get the value from the current Runtime object.
@@ -968,7 +975,7 @@ class View {
 	 * 	@return string The processed string
 	 */
 
-	private function resizeImages($str) {
+	public function resizeImages($str) {
 
 		return preg_replace_callback('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png))\?(\d+)x(\d+)/is', function($match) {
 
@@ -995,7 +1002,7 @@ class View {
 	 *	@return string The processed string
 	 */
 	
-	private function resolveUrls($str, $method, $parameters = array()) {
+	public function resolveUrls($str, $method, $parameters = array()) {
 		
 		$method = '\Automad\Core\Resolve::' . $method;
 		
@@ -1070,7 +1077,7 @@ class View {
 	 *	@return string The processed string
 	 */
 	
-	private function obfuscateEmails($str) {
+	public function obfuscateEmails($str) {
 		
 		$regexEmail = '[\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,}';
 		
@@ -1122,6 +1129,7 @@ class View {
 		$output = $this->obfuscateEmails($output);
 		$output = $this->resizeImages($output);
 		$output = $this->resolveUrls($output, 'absoluteUrlToRoot');
+		$output = Blocks::injectAssets($output);
 		$output = $this->InPage->createUI($output);
 		
 		return trim($output);	

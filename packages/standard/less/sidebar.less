@@ -1,0 +1,79 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+ 
+.sidebar {
+
+	will-change: min-height;
+	
+	&-inner {
+		transform: translate(0, 0); /* For browsers don't support translate3d. */
+		transform: translate3d(0, 0, 0);
+		will-change: position, transform;
+	}
+
+}
+
+@media (min-width: @breakpoint-large) {
+
+	body.sidebar-left {
+
+		& .sidebar-inner {
+			padding-right: @grid-gutter-large-horizontal;
+		}
+
+		& .sidebar-block {
+		
+			& > * {
+				max-width: 80%;
+				margin-left: 0;
+			}
+				
+		}
+
+		& .uk-block > .footer {
+			max-width: 60%;
+			margin-left: 25% !important;
+		}
+
+		& a.prev {
+			left: initial;
+			right: 3.125rem;
+		}
+
+	}
+
+	body.sidebar-right {
+
+		& .sidebar-inner {
+			padding-left: @grid-gutter-large-horizontal;
+		}
+
+		& .sidebar-block {
+			
+			& > * {
+				max-width: 80%;
+				margin-right: 0;
+			}
+				
+		}
+
+		& .uk-block > .footer {
+			max-width: 60%;
+			margin-right: 25% !important;
+		}
+		
+		& a.next {
+			right: initial;
+			left: 3.125rem;
+		}
+
+	}
+
+}

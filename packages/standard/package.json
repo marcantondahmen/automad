@@ -1,22 +1,24 @@
 {
   "name": "standard",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "A standard collection of elegant Automad themes",
   "main": "gulpfile.js",
   "private": true,
   "devDependencies": {
+    "css-element-queries": "^1.2.3",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.1",
     "gulp-header": "^2.0.5",
     "gulp-less": "^3.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.2",
+    "gulp-uglify-es": "^2.0.0",
     "gulp-util": "^3.0.8",
     "imagesloaded": "^4.1.4",
     "jquery": "^2.2.4",
-    "masonry-layout": "^4.2.1",
-    "merge2": "^1.0.3"
+    "merge2": "^1.0.3",
+    "sticky-sidebar": "^3.3.1"
   },
   "author": "Marc Anton Dahmen",
   "license": "MIT"

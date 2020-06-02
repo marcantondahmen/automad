@@ -1,0 +1,709 @@
+btn_add: Toevoegen
+
+-
+
+btn_add_page: Pagina toevoegen
+
+-
+
+btn_add_var: Variabele toevoegen
+
+-
+
+btn_apply_reload: Toepassen en opnieuw laden
+
+-
+
+btn_browse: Bestanden doorbladeren
+
+-
+
+btn_close: Dichtbij
+
+-
+
+btn_copy_url_clipboard: Kopieer URL naar klembord
+
+-
+
+btn_copy_resized: Kopieer en verklein
+
+-
+
+btn_data: Gegevens en instellingen
+
+-
+
+btn_delete_page: Pagina verwijderen
+
+-
+
+btn_download_file: Downloaden
+
+-
+
+btn_duplicate_page: Dubbele pagina
+
+-
+
+btn_edit: Bewerk
+
+-
+
+btn_edit_file_info: Bestandsinfo bewerken
+
+-
+
+btn_edit_headless_template: Bewerk de Headless-Template
+
+-
+
+btn_edit_page: Pagina aanpassen
+
+-
+
+btn_files: Geuploade bestanden
+
+-
+
+btn_get_themes: Krijg meer thema's
+
+-
+
+btn_getting_data: Gegevens ophalen ...
+
+-
+
+btn_hide_page: Pagina verbergen in navigatie
+
+-
+
+btn_home: Home
+
+-
+
+btn_import: Importeren vanuit URL
+
+-
+
+btn_inpage_edit: In-Page Edit Mode
+
+-
+
+btn_install: Installeren
+
+-
+
+btn_link: Koppeling
+
+-
+
+btn_log_out: Uitloggen
+
+-
+
+btn_login: Log in
+
+-
+
+btn_manage_users: Gebruikers beheren
+
+-
+
+btn_more: Meer
+
+-
+
+btn_move_page: Pagina verplaatsen
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Logboek openen
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Verwijderen
+
+-
+
+btn_remove_selected: Verwijder geselecteerde
+
+-
+
+btn_reset: Reset
+
+-
+
+btn_save: Wijzigingen opslaan
+
+-
+
+btn_upload: Uploaden
+
+-
+
+confirm_delete_files: Weet u zeker dat u de geselecteerde bestanden wilt verwijderen?
+
+-
+
+confirm_delete_page: Weet je zeker dat je de huidige pagina wilt verwijderen?
+
+-
+
+confirm_delete_users: Weet u zeker dat u de geselecteerde gebruikers wilt verwijderen?
+
+-
+
+confirm_reset_headless: Weet u zeker dat u de aangepaste headless-sjabloon wilt resetten?
+
+-
+
+dashboard_memory: Geheugengebruik:
+
+-
+
+dashboard_modified: Laatste activiteit op
+
+-
+
+dashboard_recently_edited: Onlangs bewerkte pagina's
+
+-
+
+dropzone: Sleep bestanden hierheen
+
+-
+
+error_cache_purged: De cachemap kan niet worden opgeschoond!
+
+-
+
+error_existing: Bestaat al!
+
+-
+
+error_file_save: Kon niet opslaan
+
+-
+
+error_file_format: Niet ondersteund bestandstype
+
+-
+
+error_file_not_found: Bestand niet gevonden!
+
+-
+
+error_file_size: Ongeldige bestandsgrootte!
+
+-
+
+error_form: Onvolledige of onjuiste gegevens! <br /> Alle velden zijn verplicht en moeten worden ingevuld zoals beschreven!
+
+-
+
+error_login: Ongeldige gebruikersnaam of wachtwoord
+
+-
+
+error_log_out: Uitloggen mislukt!
+
+-
+
+error_no_destination: Selecteer een pagina als bestemming!
+
+-
+
+error_no_js: Schakel JavaScript in uw browser in om het Dashboard te gebruiken!
+
+-
+
+error_no_theme: Geen thema geselecteerd! Selecteer een hoofdthema.
+
+-
+
+error_no_url: Voer een geldige URL in!
+
+-
+
+error_import: Het importeren van bestanden is mislukt!
+
+-
+
+error_packages: Kan pakketten van Packagist niet laden!
+
+-
+
+error_composer_memory: Uw server heeft niet genoeg geheugen om pakketten te installeren, bij te werken of te verwijderen! Als u deze site gebruikt op een shared-hostingservice met een beperkte hoeveelheid geheugen, probeer dan uw plan te upgraden of installeer uw site op een lokale computer zonder geheugenbeperkingen.
+
+-
+
+error_page_not_found: Pagina niet gevonden!
+
+-
+
+error_page_title: Titel ontbreekt!
+
+-
+
+error_password_current: Het huidige wachtwoord is verkeerd!
+
+-
+
+error_password_repeat: Voer tweemaal hetzelfde nieuwe wachtwoord in!
+
+-
+
+error_password_reuse: Gebruik uw oude wachtwoord niet opnieuw!
+
+-
+
+error_permission: Rechten geweigerd:
+
+-
+
+error_template_missing: Sjabloon ontbreekt
+
+-
+
+error_update_connection: Kan geen verbinding maken met de updateserver! Dit kan meestal worden veroorzaakt door een verkeerde updateconfiguratie (config.json), een SSL-certificaatfout of een ontbrekende cURL-bibliotheek.
+
+-
+
+error_update_download: Downloaden van update is mislukt!
+
+-
+
+error_update_items: Ongeldige lijst met items die moeten worden bijgewerkt!
+
+-
+
+error_update_failed: Update mislukt! Herstel uw installatie vanaf een back-up.
+
+-
+
+error_update_not_supported: Updates worden niet ondersteund door uw server! De updater vereist dat cURL- en ZIP-bibliotheken zijn geïnstalleerd.
+
+-
+
+error_update_permission: Kan update niet uitvoeren! Toestemmingen geweigerd!
+
+-
+
+error_var_exists: Er is al een variabele met die naam!
+
+-
+
+error_var_name: Je kunt geen variabele toevoegen zonder een naam!
+
+-
+
+file_name: Bestandsnaam
+
+-
+
+file_caption: Onderschrift
+
+-
+
+image_crop: Afbeelding bijsnijden
+
+-
+
+image_height_px: Hoogte (pixels)
+
+-
+
+image_width_px: Breedte (pixels)
+
+-
+
+image_options: Opties
+
+-
+
+image_select: Selecteer afbeelding
+
+-
+
+images_page: Pagina afbeeldingen
+
+-
+
+images_shared: Algemene afbeeldingen
+
+-
+
+link_placeholder: Begin met het typen van een paginatitel of plak hier een externe link
+
+-
+
+link_title: Voeg een link toe
+
+-
+
+login_title: Log in
+
+-
+
+login_username: Gebruikersnaam
+
+-
+
+login_password: Wachtwoord
+
+-
+
+log_out_title: Uitgelogd
+
+-
+
+packages_title: Pakketjes
+
+-
+
+packages_browse: Pakketbrowser openen
+
+-
+
+packages_filter: Filter
+
+-
+
+packages_installed: Is geinstalleerd
+
+-
+
+packages_installing: Pakket installeren ...
+
+-
+
+packages_update_all: Update alles
+
+-
+
+packages_updating: Pakketten bijwerken ...
+
+-
+
+packages_removing: Pakket verwijderen ...
+
+-
+
+page_add_location: Selecteer een locatie voor de nieuwe pagina
+
+-
+
+page_move_destination: Selecteer een bestemming om te verplaatsen
+
+-
+
+page_settings: Pagina-instellingen
+
+-
+
+page_prefix: Prefix (volgorde in navigatie)
+
+-
+
+page_redirect: Verwijs de pagina door naar een andere URL
+
+-
+
+page_tags: Tags (Scheid meerdere tags door komma of tabblad)
+
+-
+
+page_theme_template: Sjabloon
+
+-
+
+page_var_name: Variabelenaam
+
+-
+
+page_vars_headless: Variabelen
+
+-
+
+page_vars_template: Variabelen in huidige sjabloon
+
+-
+
+page_vars_unused: Ongebruikte variabelen
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Globaal
+
+-
+
+sidebar_header_pages: Pagina's
+
+-
+
+shared_title: Algemene gegevens en bestanden
+
+-
+
+shared_theme: Hoofd thema
+
+-
+
+shared_theme_apply: Wilt u het geselecteerde thema toepassen en de lijst met beschikbare variabelen nu bijwerken? Uw niet-opgeslagen wijzigingen worden opgeslagen.
+
+-
+
+shared_vars_headless: Variabelen
+
+-
+
+shared_vars_main_theme: Variabelen in het hoofdthema
+
+-
+
+shared_vars_unused: Ongebruikte variabelen
+
+-
+
+shared_var_name: Variabelenaam
+
+-
+
+search_no_results: Geen pagina's gevonden!
+
+-
+
+search_placeholder: Zoek in
+
+-
+
+search_title: Zoekresultaten
+
+-
+
+success_added: Succesvol toegevoegd
+
+-
+
+success_cache_cleared: De cache is met succes gewist!
+
+-
+
+success_cache_purged: De cachemap is met succes verwijderd!
+
+-
+
+success_config_update: Configuratie succesvol bijgewerkt!
+
+-
+
+success_created: <br> gemaakt
+
+-
+
+success_installed: Succesvol geïnstalleerd
+
+-
+
+success_password_changed: Uw wachtwoord is succesvol gewijzigd!
+
+-
+
+success_log_out: Succesvol uitgelogd
+
+-
+
+success_remove: Succesvol verwijderd
+
+-
+
+success_reset_headless: De standaard headless-template is hersteld!
+
+-
+
+success_saved: Opgeslagen wijzigingen
+
+-
+
+success_update: Automad is bijgewerkt!
+
+-
+
+success_packages_updated: Alle pakketten zijn bijgewerkt
+
+-
+
+sys_cache_info: Caching is essentieel om uw site te versnellen en moet over het algemeen worden ingeschakeld. Onder bepaalde omstandigheden wilt u misschien uw cache uitschakelen of wissen.
+
+-
+
+sys_cache_clear: Cache wissen
+
+-
+
+sys_cache_clear_info: Het wissen van de sitecache dwingt een nieuwe scan voor bijgewerkte pagina's en bestanden. Met deze actie worden geen paginabestanden of afbeeldingen uit de cachemap verwijderd.
+
+-
+
+sys_cache_monitor: Het controle-interval is
+
+-
+
+sys_cache_monitor_info: Als caching is ingeschakeld, controleert Automad regelmatig op wijzigingen in het bestandssysteem. De frequentie van deze controles kan hier worden gedefinieerd.
+
+-
+
+sys_cache_lifetime: De cache-levensduur is
+
+-
+
+sys_cache_lifetime_info: Alle in de cache opgeslagen Automad-gegevens en -pagina's hebben een maximale levensduur. Nadat de levensduur van een object is overschreden, wordt de cache op verzoek opnieuw opgebouwd.
+
+-
+
+sys_cache_purge: Cache-map opschonen
+
+-
+
+sys_cache_purge_info: In tegenstelling tot het eenvoudigweg wissen van de cache, worden bij het opschonen van de cachemap ook alle tijdelijke bestanden, verwijderde pagina's, update-back-ups en gecachte afbeeldingen naar de tijdelijke directory van het systeem verplaatst. Dit dwingt een volledige herbouw van de afbeelding en paginacache en een opschoning van alle verwijderde pagina's. Op de meeste systemen wordt de tijdelijke map van tijd tot tijd automatisch opgeschoond of bij het opnieuw opstarten. Op sommige systemen moet die map echter handmatig worden gewist.
+
+-
+
+sys_debug_info: Als debuggen is ingeschakeld, worden alle processen van Automad vastgelegd in de console van uw browser. Debuggen is alleen nodig voor ontwikkeling of probleemoplossing en moet in alle andere gevallen worden uitgeschakeld.
+
+-
+
+sys_headless_edit_info: De structuur van de geretourneerde JSON-gegevens wordt bepaald door een sjabloon. U kunt die sjabloon bewerken met de ingebouwde sjabloontaal van Automad voor het aanpassen van velden met behulp van variabelen, objecten en besturingsstructuren.
+
+-
+
+sys_headless_info: Door de headless-modus te activeren, wordt Automad een contentmanagementsysteem dat zich volledig richt op het maken van content zonder presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
+
+-
+
+sys_language: Taal
+
+-
+
+sys_language_info: Er zijn verschillende talen beschikbaar voor het dashboard. De vertalingen worden automatisch gemaakt. Deze functie bevindt zich nog in een experimentele fase en daarom zijn sommige vertalingen mogelijk niet nauwkeurig.
+
+-
+
+sys_status_cache_enabled: Caching is ingeschakeld
+
+-
+
+sys_status_cache_disabled: Caching is uitgeschakeld
+
+-
+
+sys_status_debug_enabled: Foutopsporing is ingeschakeld
+
+-
+
+sys_status_debug_disabled: Foutopsporing is uitgeschakeld
+
+-
+
+sys_status_update_available: Update naar
+
+-
+
+sys_status_update_not_available: Automad is up-to-date
+
+-
+
+sys_title: Systeem instellingen
+
+-
+
+sys_update: Bijwerken
+
+-
+
+sys_update_available: Er is een nieuwere versie van Automad beschikbaar en klaar om te worden geïnstalleerd. <br> Maak een back-up van uw huidige installatie voordat u gaat updaten!
+
+-
+
+sys_update_current_version: De momenteel geïnstalleerde versie is
+
+-
+
+sys_update_items: De volgende items worden beïnvloed door de update:
+
+-
+
+sys_update_not_required: Automad is up-to-date.
+
+-
+
+sys_update_progress: Even geduld en sluit het venster niet tijdens het updaten ...
+
+-
+
+sys_update_to: Update naar
+
+-
+
+sys_update_windows_warning: Zorg ervoor dat alle bestanden van uw installatie in externe programma's zijn gesloten voordat u de update uitvoert om machtigingsproblemen te voorkomen!
+
+-
+
+sys_user: Gebruikers
+
+-
+
+sys_user_info: U kunt hier meer gebruikers toevoegen of verwijderen of uw wachtwoord wijzigen.
+
+-
+
+sys_user_change_password: Verander uw wachtwoord
+
+-
+
+sys_user_change_password_current: Huidig wachtwoord
+
+-
+
+sys_user_change_password_new: Nieuw paswoord
+
+-
+
+sys_user_change_password_repeat: Herhaal wachtwoord
+
+-
+
+sys_user_add: Voeg gebruiker toe
+
+-
+
+sys_user_add_name: Gebruikersnaam
+
+-
+
+sys_user_add_password: Wachtwoord
+
+-
+
+sys_user_add_repeat: Herhaal wachtwoord
+
+-
+
+sys_user_registered: Geregistreerde gebruikers
+
+-
+
+sys_user_you: U

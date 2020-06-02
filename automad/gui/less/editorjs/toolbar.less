@@ -1,0 +1,137 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-block-editor {
+
+	& .ce-toolbar {
+
+		@media (max-width: @am-blocks-breakpoint-small-max) {
+			border-radius: @am-block-radius;
+			border: none;
+			background-color: @am-block-dropdown-background;	
+			.shadow;	
+		}
+
+		&__plus,
+		&__content .ce-toolbox {
+			
+			border-radius: @am-block-radius;
+			background-color: @am-block-dropdown-background;
+
+			@media (min-width: @am-blocks-breakpoint-small) {
+				.shadow;
+			}
+			
+		}
+
+		&__plus {
+
+			@media (min-width: @am-blocks-breakpoint-small) {
+				left: @am-block-content-padding - 30px;
+			}
+			
+		}
+
+		&__content {
+
+			position: relative;
+			
+			& .ce-toolbox {
+				margin-left: 4px;
+			}
+
+			@media (min-width: @am-blocks-breakpoint-small) {
+
+				max-width: @am-block-max-width;
+
+				& .ce-toolbox {
+					margin-left: @am-block-content-padding + @am-block-padding - 1;
+				}
+
+			}
+
+		}
+
+		&__actions {
+
+			top: 7px;
+			right: 7px;
+			
+			@media (max-width: @am-blocks-breakpoint-small-max) {	
+				top: 17px;
+				right: -30px;	
+			}
+
+		}
+
+		&__settings-btn {
+
+			color: @button-success-color;
+			background-color: @button-success-background;
+			border-radius: 3px;
+			.transition(color 0.2s, background-color 0.2s;);
+
+			&:hover {
+				color: @button-success-hover-color;
+				background-color: @button-success-hover-background;
+			}
+
+		}
+
+	}
+
+	& .ce-toolbar__plus,
+	& .ce-toolbox__button {
+
+		color: @am-text;
+		.transition(color 0.2s;);
+
+		&:hover {
+			color: @am-success;
+		}
+
+	}
+
+	& .ce-toolbox__button--active {
+
+		color: @am-success;		
+
+		&:hover {
+			color: @am-success;
+		}
+
+	}
+
+}

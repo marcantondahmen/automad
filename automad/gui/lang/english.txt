@@ -1,0 +1,874 @@
+btn_accounts_file: Download Accounts File
+
+-
+
+btn_add: Add
+
+-
+
+btn_add_page: Add Page
+
+-
+
+btn_add_var: Add Variable
+
+-
+
+btn_apply_reload: Apply and Reload
+
+-
+
+btn_browse: Browse Files
+
+-
+
+btn_close: Close
+
+-
+
+btn_copy_url_clipboard: Copy URL to Clipboard
+
+-
+
+btn_copy_resized: Copy and Resize
+
+-
+
+btn_data: Data and Settings
+
+-
+
+btn_delete_page: Delete Page
+
+-
+
+btn_download_file: Download
+
+-
+
+btn_duplicate_page: Duplicate Page
+
+-
+
+btn_edit: Edit
+
+-
+
+btn_edit_file_info: Edit File Info
+
+-
+
+btn_edit_headless_template: Edit the Headless-Template
+
+-
+
+btn_edit_page: Edit Page
+
+-
+
+btn_files: Uploaded Files
+
+-
+
+btn_get_themes: Get More Themes
+
+-
+
+btn_getting_data: Getting Data ...
+
+-
+
+btn_hide_page: Hide Page in Navigation
+
+-
+
+btn_home: Home
+
+-
+
+btn_import: Import From URL
+
+-
+
+btn_inpage_edit: In-Page Edit Mode
+
+-
+
+btn_install: Install
+
+-
+
+btn_link: Link 
+
+-
+
+btn_log_out: Log out
+
+-
+
+btn_login: Log in
+
+-
+
+btn_manage_users: Manage Users
+
+-
+
+btn_more: More
+
+-
+
+btn_move_page: Move Page
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Open Log
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Remove
+
+-
+
+btn_remove_selected: Remove Selected
+
+-
+
+btn_reset: Reset
+
+-
+
+btn_save: Save Changes
+
+-
+
+btn_upload: Upload
+
+-
+
+
+
+
+
+
+
+
+confirm_delete_files: Are you sure you want to delete the selected files?
+
+-
+
+confirm_delete_page: Are you sure you want to delete the current page?
+
+-
+
+confirm_delete_users: Are you sure you want to delete the selected users?
+
+-
+
+confirm_reset_headless: Are you sure you want to reset the custom headless-template?
+
+-
+
+
+
+
+
+
+
+
+dashboard_memory: Memory usage: 
+
+-
+
+dashboard_modified: Lastest Activity on
+
+-
+
+dashboard_recently_edited: Recently Edited Pages
+
+-
+
+dashboard_title: Dashboard
+
+-
+
+
+
+
+
+
+
+
+dropzone: Drag Files Here
+
+-
+
+
+
+
+
+
+
+
+error_cache_purged: The cache directory could not be purged!
+
+-
+
+error_existing: already exists!
+
+-
+
+error_file_save: Could not save 
+
+-
+
+error_file_format: Unsupported file type
+
+-
+
+error_file_not_found: File not found!
+
+-
+
+error_file_size: Invalid file size!
+
+-
+
+error_form: Incomplete or incorrect data!<br />All fields are required and have to be completed as described!
+
+-
+
+error_login: Invalid username or password
+
+-
+
+error_log_out: Log out failed!
+
+-
+
+error_no_destination: Please select a page as destination!
+
+-
+
+error_no_js: Please enabled JavaScript in your browser to use the Dashboard!
+
+-
+
+error_no_theme: No theme selected! Please select a main theme.
+
+-
+
+error_no_url: Please enter a valid URL!
+
+-
+
+error_import: The file import has failed!
+
+-
+
+error_packages: Could not load packages from Packagist!
+
+-
+
+error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared-hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
+
+-
+
+error_page_not_found: Page Not Found!
+
+-
+
+error_page_title: Title missing!
+
+-
+
+error_password_current: The current password is wrong!
+
+-
+
+error_password_repeat: Please enter twice the same new password!
+
+-
+
+error_password_reuse: Don't reuse your old password!
+
+-
+
+error_permission: Permissions denied:
+
+-
+
+error_template_missing: Template missing
+
+-
+
+error_update_connection: Can't connect to the update server! This could typically be caused by a wrong update configuration (config.json), a SSL certificate error or a missing cURL library.
+
+-
+
+error_update_download: Download of update failed! 
+
+-
+
+error_update_items: Invalid list of items to be updated! 
+
+-
+
+error_update_failed: Update failed! Please restore your installation from a backup. 
+
+-
+
+error_update_not_supported: Updates are not supported by your server! The updater requires cURL and ZIP libraries to be installed.
+
+-
+
+error_update_permission: Can't run update! Permissions denied! 
+
+-
+
+error_var_exists: There is already a variable with that name!
+
+-
+
+error_var_name: You can not add a variable without a name!
+
+-
+
+
+
+
+
+
+
+
+file_name: Filename
+
+-
+
+file_caption: Caption
+
+-
+
+
+
+
+
+
+
+
+image_crop: Crop Image
+
+-
+
+image_height_px: Height (Pixels)
+
+-
+
+image_width_px: Width (Pixels)
+
+-
+
+image_options: Options
+
+-
+
+image_select: Select Image
+
+-
+
+images_page: Page Images
+
+-
+
+images_shared: General Images
+
+-
+
+
+
+
+
+
+
+
+install_help: ### Create User Account  
+Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
+      				
+1. 	Create an user account using the form below and download the created file to your computer. 
+2. 	Move the downloaded file to the "/config" directory within your Automad installation.   
+	(via a file browser, FTP or SSH) 
+				
+After completing these steps, the dashboard should be ready to use. 
+Other users can be added later via the system preferences.
+
+-
+
+install_login: ### Move Account File   
+Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can login to the dashboard.
+
+-
+
+install_title: Create User Account
+
+-
+
+
+
+
+
+
+
+
+link_placeholder: Start typing a page title or paste an external link here
+
+-
+
+link_title: Add Link
+
+-
+
+
+
+
+
+
+
+
+login_title: Login
+
+-
+
+login_username: Username
+
+-
+
+login_password: Password
+
+-
+
+log_out_title: Logged Out
+
+-
+
+
+
+
+
+
+
+packages_title: Packages
+
+-
+
+packages_browse: Open Package Browser
+
+-
+
+packages_filter: Filter
+
+-
+
+packages_installed: Is installed
+
+-
+
+packages_installing: Installing package ...
+
+-
+
+packages_update_all: Update All
+
+-
+
+packages_updating: Updating packages ...
+
+-
+
+packages_removing: Removing package ...
+
+-
+
+
+
+
+
+
+
+
+
+page_add_location: Select a location for the new page
+
+-
+
+page_move_destination: Select a destination for moving
+
+-
+
+page_settings: Page settings
+
+-
+
+page_prefix: Prefix (Order in Navigation)
+
+-
+
+page_redirect: Redirect page to another URL
+
+-
+
+page_tags: Tags (Separate multiple tags by comma or tab)
+
+-
+
+page_theme_template: Template
+
+-
+
+page_var_name: Variable Name
+
+-
+
+page_vars_headless: Variables
+
+-
+
+page_vars_template: Variables in current template
+
+-  
+
+page_vars_unused: Unused variables
+
+-
+
+page_visibility: Visibility
+
+-
+
+
+
+
+
+
+
+
+sidebar_header_global: Global
+
+-
+
+sidebar_header_pages: Pages
+
+- 
+
+
+
+
+
+
+
+
+shared_title: General Data and Files
+
+-
+
+shared_theme: Main theme
+
+-
+
+shared_theme_apply: Do you want to apply the selected theme and update the list of available variables now? Your unsaved changes will be saved.
+
+-
+
+shared_vars_headless: Variables
+
+-
+
+shared_vars_main_theme: Variables in the main theme
+
+-
+
+shared_vars_unused: Unused variables
+
+-
+
+shared_var_name: Variable Name
+
+-
+
+
+
+
+
+
+
+
+search_no_results: No pages found!
+
+-
+
+search_placeholder: Search in
+
+-
+
+search_title: Search Results
+
+-
+
+
+
+
+
+
+
+
+success_added: Successfully added
+
+-
+
+success_cache_cleared: The cache got cleared successfully!
+
+-
+
+success_cache_purged: The cache directory got purged successfully!
+
+-
+
+success_config_update: Successfully updated configuration!
+
+-
+
+success_created: Successfully created<br> 
+
+-
+
+success_installed: Successfully installed
+
+-
+
+success_password_changed: Your password got changed successfully!
+
+-
+
+success_log_out: Logged Out Successfully
+
+-
+
+success_remove: Successfully removed 
+
+-
+
+success_reset_headless: Successfully restored the default headless-template!
+
+-
+
+success_saved: Saved changes
+
+-
+
+success_update: Successfully updated Automad!
+
+-
+
+success_packages_updated: Successfully updated all packages
+
+-
+
+
+
+
+
+
+
+
+sys_cache: Cache
+
+-
+
+sys_cache_info: Caching is essential to speed up your site and should generally be enabled. However under some circumstances you might want to disable or clear your cache.
+
+-
+
+sys_cache_clear: Clear Cache
+
+-
+
+sys_cache_clear_info: Clearing the site cache forces a rescan for updated pages and files. This action will not remove any page files or images from the cache directory.
+
+-
+
+sys_cache_enable: Caching
+
+-
+
+sys_cache_monitor: The checking interval is
+
+-
+
+sys_cache_monitor_info: When caching is enabled, Automad will check regularly for changes in the file system. The frequency of those checks can be defined here.
+
+-
+
+sys_cache_lifetime: The cache lifetime is 
+
+-
+
+sys_cache_lifetime_info: All cached Automad data and pages have a maximum lifetime. After the lifetime of an object exceeds, its cache will be rebuilt when requested.   
+
+-
+
+sys_cache_purge: Purge Cache Directory
+
+-
+
+sys_cache_purge_info: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temprary directory of the system. This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages. On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. However, on some systems that directory has to be cleared manually.
+
+-
+
+sys_debug: Debug
+
+-
+
+sys_debug_enable: Debug Mode
+
+-
+
+sys_debug_info: When debugging is enabled, all of Automad's processes will be logged to your browser's console. Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
+
+-
+
+sys_headless: Headless
+
+-
+
+sys_headless_edit_info: The structure of the returned JSON data is controlled by a template. You can edit that template using Automad's built-in template language for customizing fields by using variables, objects and control structures.
+
+-
+
+sys_headless_enable: Headless Mode
+
+-
+
+sys_headless_info: Activating the headless mode turns Automad into a content management system focusing entirely on content creation without a presentation layer. While the Dashboard can still be used to manage content, all data and files are accessible via a read-only JSON API.
+
+-
+
+sys_language: Language
+
+-
+
+sys_language_info: There are several languages available for the Dashboard. The translations are created automatically. This feature is still in an experimental phase and therefore some translations might not be accurate.
+
+-
+
+sys_status_cache_enabled: Caching is enabled
+
+-
+
+sys_status_cache_disabled: Caching is disabled
+
+-
+
+sys_status_debug_enabled: Debugging is enabled
+
+-
+
+sys_status_debug_disabled: Debugging is disabled
+
+-
+
+sys_status_update_available: Update to
+
+-
+
+sys_status_update_not_available: Automad is up to date
+
+-
+
+sys_title: System Settings
+
+-
+
+sys_update: Update
+
+-
+
+sys_update_available: A newer version of Automad is available and ready to be installed.<br>Please backup your current installation before updating!
+
+-
+
+sys_update_current_version: The currently installed version is 
+
+-
+
+sys_update_items: The following items are affected by the update:
+
+-
+
+sys_update_not_required: Automad is up to date.
+
+-
+
+sys_update_progress: Please wait and don't close the window while updating ...
+
+-
+
+sys_update_to: Update to
+
+-
+
+sys_update_windows_warning: Make sure that all files of your installation are closed in external programs before running the update to avoid permissions issues!
+
+-
+
+sys_user: Users
+
+-
+
+sys_user_info: You can add or remove more users or change your password here.
+
+-
+
+sys_user_change_password: Change Your Password
+
+-
+
+sys_user_change_password_current: Current Password
+
+-
+
+sys_user_change_password_new: New Password
+
+-
+
+sys_user_change_password_repeat: Repeat Password
+
+-
+
+sys_user_add: Add User
+
+-
+
+sys_user_add_name: Username
+
+-
+
+sys_user_add_password: Password
+
+-
+
+sys_user_add_repeat: Repeat Password
+
+-
+
+sys_user_registered: Registered Users
+
+-
+
+sys_user_you: You

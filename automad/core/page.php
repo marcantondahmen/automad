@@ -236,8 +236,20 @@ class Page {
 		$templatePath = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
 		
 		if (file_exists($templatePath)) {
+
 			return $templatePath;
+
 		} else {
+
+			// Add backwards compatibility for old theme names and removed templates.
+			$templatePath = str_replace(array('/contact', '/gallery', '/profile'), '/project', $templatePath);
+			$templatePath = str_replace('_2_columns', '', $templatePath);
+			$templatePath = str_replace(array('/alpha', '/bravo'), '/light', $templatePath);
+
+			if (file_exists($templatePath)) {
+				return $templatePath;
+			}
+
 			exit('<h1>Template "' . Str::stripStart($templatePath, AM_BASE_DIR . AM_DIR_PACKAGES . '/') . 
 			     '" not found!</h1><h2>Make sure you have selected an existing template for this page!</h2>');
 		}

@@ -2,20 +2,27 @@ sitename: My Site
 
 -
 
-theme: standard/alpha
+theme: standard/light
 
 -
 
-appleTouchIcon: /shared/apple-touch-icon.png
+brand: <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 120 120">
+<path d="M23,115L0.18,43.888L60.009-0.022l59.811,44.117L96.995,115H23z M11.17,47.62L29.852,106H90.15
+	l18.679-58.113L59.99,11.752L11.17,47.62z"/>
+</svg>
 
 -
 
-favicon: /shared/favicon.ico
+imageAppleTouchIcon: /shared/apple-touch-icon.png
+
+-
+
+imageFavicon: /shared/favicon.png
+
+-
+
+ogImage: *.png, *.jpg, /shared/image-landscape.png
 
 -
 
 urlSearchResults: /
-
--
-
-urlTutorials: /tutorials

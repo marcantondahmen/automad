@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Core\Parse::query('query') . '"';
+$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Core\Request::query('query') . '"';
 $this->element('header');
 
 
@@ -62,7 +62,7 @@ $results = $this->getContent()->getSearchResults();
 		</ul>
 		<h2 class="uk-margin-top-remove">
 			<i class="uk-icon-angle-double-left"></i>
-			<?php echo Core\Parse::query('query'); ?>
+			<?php echo Core\Request::query('query'); ?>
 			<i class="uk-icon-angle-double-right"></i>&nbsp;
 			<span class="uk-badge"><?php echo count($results); ?></span>
 		</h2>
@@ -71,7 +71,7 @@ $results = $this->getContent()->getSearchResults();
 
 if ($results) {
 	
-	echo $this->getHtml()->pageGrid($results);
+	echo Components\Grid\Pages::render($results);
 	
 } else {
 	

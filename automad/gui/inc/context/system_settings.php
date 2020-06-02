@@ -59,7 +59,7 @@ $this->element('header');
 		</ul>
 		<?php
 		 
-			echo $this->getHtml()->stickySwitcher('#am-sys-content', array(
+			echo Components\Nav\Switcher::render('#am-sys-content', array(
 				array(
 					'icon' => '<i class="uk-icon-rocket"></i>',
 					'text' => Text::get('sys_cache')
@@ -71,6 +71,10 @@ $this->element('header');
 				array(
 					'icon' => '<i class="uk-icon-refresh"></i>',
 					'text' => Text::get('sys_update')
+				),
+				array(
+					'icon' => '<i class="uk-icon-flag"></i>',
+					'text' => Text::get('sys_language')
 				),
 				array(
 					'icon' => '<strong>{ }</strong>',
@@ -88,321 +92,27 @@ $this->element('header');
 		<ul id="am-sys-content" class="uk-switcher">
 			<!-- Cache -->
 			<li>
-				<?php Text::e('sys_cache_info'); ?>
-				<!-- Cache Enable / Settings -->
-				<form 
-				class="uk-form uk-form-stacked" 
-				data-am-handler="update_config" 
-				data-am-auto-submit
-				>
-					<!-- Cache Enable -->
-					<input type="hidden" name="type" value="cache" />		
-					<label 
-					class="am-toggle-switch-large" 
-					data-am-toggle="#am-cache-settings, #am-cache-actions"
-					>
-						<?php Text::e('sys_cache_enable'); ?>
-						<input 
-						type="checkbox" 
-						name="cache[enabled]" 
-						value="on"<?php if (AM_CACHE_ENABLED) { echo ' checked'; } ?> 
-						/>
-					</label>
-					<!-- Cache Settings -->
-					<div id="am-cache-settings" class="am-toggle-container">
-						<!-- Cache Monitor Delay -->
-						<p class="uk-margin-large-top"><?php Text::e('sys_cache_monitor_info') ?></p>
-						<?php 
-							echo $this->getHtml()->select(
-								'cache[monitor-delay]',
-								array(
-									'1 min' => 60,
-									'2 min' => 120,
-									'5 min' => 300
-								),
-								AM_CACHE_MONITOR_DELAY,
-								Text::get('sys_cache_monitor')
-							); 
-						?>
-						<!-- Cache Lifetime -->
-						<p class="uk-margin-large-top"><?php Text::e('sys_cache_lifetime_info') ?></p>
-						<?php 
-							echo $this->getHtml()->select(
-								'cache[lifetime]',
-								array(
-									'1 h' => 3600,
-									'6 h' => 21600,
-									'12 h' => 43200
-								),
-								AM_CACHE_LIFETIME,
-								Text::get('sys_cache_lifetime')
-							);
-						?> 
-					</div>	
-				</form>
-				<div id="am-cache-actions" class="am-toggle-container uk-margin-large-top">
-					<!-- Clear Cache -->	
-					<?php Text::e('sys_cache_clear_info'); ?>
-					<form data-am-handler="clear_cache">
-						<button type="submit" class="uk-button uk-button-success uk-button-large uk-margin-bottom">
-							<i class="uk-icon-refresh"></i>&nbsp;
-							<?php Text::e('sys_cache_clear'); ?>
-						</button>
-					</form>	
-					<?php if ($tmp = FileSystem::getTmpDir()) { ?>
-					<!-- Purge Cache -->
-					<?php Text::e('sys_cache_purge_info'); ?>
-					<form data-am-handler="purge_cache">
-						<button type="submit" class="uk-button uk-button-success uk-button-large">
-							<?php Text::e('sys_cache_purge'); ?>&nbsp;
-							<i class="uk-icon-angle-right"></i>
-							&nbsp;<span class="uk-badge"><?php echo $tmp; ?></span>
-						</button>
-					</form>
-					<?php } ?>
-				</div>
+				<?php echo Components\System\Cache::render(); ?>
 			</li>
 			<!-- User -->
 			<li>
-				<?php Text::e('sys_user_info'); ?>
-				<!-- Registered Users -->
-				<a 
-				href="#am-users-modal" 
-				class="uk-button uk-button-large uk-button-success" 
-				data-uk-modal 
-				data-am-status="users"
-				></a>
-				<div id="am-users-modal" class="uk-modal">
-					<div class="uk-modal-dialog">
-						<div class="uk-modal-header">
-							<?php Text::e('sys_user_registered'); ?>
-							<a href="#" class="uk-modal-close uk-close"></a>
-						</div>
-						<form 
-						class="uk-form" 
-						data-am-handler="users" 
-						data-am-init 
-						data-am-confirm="<?php Text::e('confirm_delete_users') ;?>"
-						></form>
-						<div class="uk-modal-footer uk-text-right">
-							<button type="button" class="uk-modal-close uk-button">
-								<span class="uk-hidden-small"><i class="uk-icon-close"></i>&nbsp;</span>
-								<?php Text::e('btn_close'); ?>
-							</button>
-							<button type="button" class="uk-button uk-button-danger" data-am-submit="users">
-								<span class="uk-hidden-small"><i class="uk-icon-user-times"></i>&nbsp;</span>
-								<?php Text::e('btn_remove_selected'); ?>
-							</button>
-						</div>
-					</div>
-				</div>
-				<!-- Add User -->
-				<br />
-				<a href="#am-add-user-modal" class="uk-button uk-margin-top" data-uk-modal>
-					<i class="uk-icon-user-plus"></i>&nbsp;&nbsp;<?php Text::e('sys_user_add'); ?>
-				</a>
-				<div id="am-add-user-modal" class="uk-modal">
-					<div class="uk-modal-dialog">
-						<div class="uk-modal-header">
-							<?php Text::e('sys_user_add'); ?>
-							<a href="#" class="uk-modal-close uk-close"></a>
-						</div>
-						<form 
-						class="uk-form" 
-						data-am-handler="add_user" 
-						data-am-close-on-success="#am-add-user-modal"
-						>		
-							<input 
-							class="uk-form-controls uk-form-large uk-width-1-1" 
-							type="text" 
-							name="username" 
-							placeholder="<?php Text::e('sys_user_add_name'); ?>"
-							data-am-enter="#am-add-user-submit" 
-							required
-							/>	
-							<input 
-							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
-							type="password" 
-							name="password1" 
-							placeholder="<?php Text::e('sys_user_add_password'); ?>"  
-							data-am-enter="#am-add-user-submit" 
-							required
-							/>		
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="password2" 
-							placeholder="<?php Text::e('sys_user_add_repeat'); ?>"  
-							data-am-enter="#am-add-user-submit" 
-							required
-							/>
-							<div class="uk-modal-footer uk-text-right">
-								<button type="button" class="uk-modal-close uk-button">
-									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
-								</button>
-								<button id="am-add-user-submit" type="submit" class="uk-button uk-button-success">
-									<i class="uk-icon-user-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add'); ?>
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- Change Password -->
-				<br />
-				<a 
-				href="#am-change-password-modal" 
-				class="uk-button uk-margin-small-top" 
-				data-uk-modal
-				>
-					<i class="uk-icon-key"></i>&nbsp;&nbsp;<?php Text::e('sys_user_change_password'); ?>
-				</a>
-				<div id="am-change-password-modal" class="uk-modal">
-					<div class="uk-modal-dialog">
-						<div class="uk-modal-header">
-							<?php Text::e('sys_user_change_password'); ?>
-							<a href="#" class="uk-modal-close uk-close"></a>
-						</div>
-						<form 
-						class="uk-form" 
-						data-am-handler="change_password" 
-						data-am-close-on-success="#am-change-password-modal"
-						>
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="current-password" 
-							placeholder="<?php Text::e('sys_user_change_password_current'); ?>"  
-							data-am-enter="#am-change-password-submit" 
-							required
-							/>
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="new-password1" 
-							placeholder="<?php Text::e('sys_user_change_password_new'); ?>"  
-							data-am-enter="#am-change-password-submit" 
-							required
-							/>
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="new-password2" 
-							placeholder="<?php Text::e('sys_user_change_password_repeat'); ?>"  
-							data-am-enter="#am-change-password-submit" 
-							required
-							/>
-							<div class="uk-modal-footer uk-text-right">
-								<button type="button" class="uk-modal-close uk-button">
-									<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
-								</button>
-								<button id="am-change-password-submit" type="submit" class="uk-button uk-button-success">
-									<i class="uk-icon-check"></i>&nbsp;&nbsp;<?php Text::e('btn_save'); ?>
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
+				<?php echo Components\System\Users::render(); ?>
 			</li>
 			<!-- Update -->
 			<li>
-				<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">
-					<?php echo $this->getHtml()->loading(); ?>
-				</form>
+				<?php echo Components\System\Update::render(); ?>
+			</li>
+			<!-- Language -->
+			<li>
+				<?php echo Components\System\Language::render(); ?>
 			</li>
 			<!-- Headless --> 
 			<li>
-				<?php Text::e('sys_headless_info'); ?>
-				<!-- Headless Mode Enable -->
-				<form 
-				class="uk-form uk-form-stacked" 
-				data-am-handler="update_config" 
-				data-am-auto-submit
-				>
-					<!-- Headless Mode Enable -->
-					<input type="hidden" name="type" value="headless" />		
-					<label 
-					class="am-toggle-switch-large" 
-					data-am-toggle="#am-headless-template"
-					>
-						<?php Text::e('sys_headless_enable'); ?>
-						<input 
-						type="checkbox" 
-						name="headless" 
-						value="on"<?php if (AM_HEADLESS_ENABLED) { echo ' checked'; } ?> 
-						/>
-					</label>
-				</form>
-				<!-- Headless Template -->
-				<div id="am-headless-template" class="am-toggle-container uk-margin-large-top">
-					<p>
-						<?php Text::e('sys_headless_edit_info'); ?>
-					</p>
-					<a 
-					href="#am-headless-modal" 
-					class="uk-button uk-button-large uk-button-success"
-					data-uk-modal
-					>
-						<i class="uk-icon-pencil"></i>&nbsp;
-						<?php Text::e('btn_edit_headless_template'); ?>
-					</a>
-				</div>
-				<div id="am-headless-modal" class="uk-modal">
-					<div class="am-modal-dialog-code uk-modal-dialog uk-modal-dialog-large">
-						<div class="uk-margin-small-bottom uk-grid uk-flex uk-flex-middle" data-uk-grid-margin>
-							<div class="uk-width-small-1-1 uk-flex-item-1">
-								<span class="uk-text-truncate" data-am-status="headless_template"></span>
-							</div>
-							<div class="uk-flex">
-								<a href="#" class="uk-button uk-modal-close">
-									<i class="uk-icon-close"></i>&nbsp;
-									<?php Text::e('btn_close'); ?>
-								</a>
-								<a 
-								href="#"
-								class="uk-button"
-								data-am-submit="reset_headless_template"
-								>
-									<i class="uk-icon-refresh"></i>&nbsp;
-									<?php Text::e('btn_reset'); ?>
-								</a>
-								<button 
-								class="uk-button uk-button-success"
-								data-am-submit="edit_headless_template"
-								>
-									<i class="uk-icon-check"></i>&nbsp;
-									<?php Text::e('btn_save'); ?>
-								</button>
-							</div>
-						</div>
-						<form 
-						class="uk-form" 
-						data-am-handler="edit_headless_template" 
-						data-am-init-on="resetHeadlessTemplate"
-						data-am-init
-						></form>
-					</div>
-				</div>
-				<form 
-				data-am-handler="reset_headless_template"
-				data-am-confirm="<?php Text::e('confirm_reset_headless'); ?>"
-				>
-					<input type="hidden" name="reset" value="1" />
-				</form>
+				<?php echo Components\System\Headless::render(); ?>
 			</li>
 			<!-- Debug -->
 			<li>
-				<?php Text::e('sys_debug_info'); ?>
-				<form class="uk-form" data-am-handler="update_config" data-am-auto-submit>
-					<input type="hidden" name="type" value="debug" />
-					<label class="am-toggle-switch-large" data-am-toggle>
-						<?php Text::e('sys_debug_enable'); ?>
-						<input 
-						type="checkbox" 
-						name="debug" 
-						value="on"<?php if (AM_DEBUG_ENABLED) { echo ' checked'; } ?> 
-						/>
-					</label>
-				</form>
+				<?php echo Components\System\Debug::render(); ?>
 			</li>
 		</ul>
 

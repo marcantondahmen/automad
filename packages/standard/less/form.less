@@ -1,0 +1,54 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@form-height:				2.75rem;
+@form-padding:				0.7rem 1rem;
+@form-border:				@border-color;
+@form-border-width:			@border-width;
+@form-background:			transparent;
+@form-color:				@base-body-color;
+
+@form-focus-border:			@text-color;
+@form-focus-background:		@form-background;
+@form-focus-color:			@form-color;
+
+@form-placeholder-color:	@base-body-color;
+
+@form-gutter:				0.5rem;
+
+@form-large-height:			3.5rem;
+@form-large-padding:		0.7rem 1.2rem;
+@form-large-font-size:		1.15rem;
+
+@form-radius: 				@button-radius;
+
+.hook-form() {
+	overflow: hidden;
+	resize: none;
+	box-shadow: none !important;
+	border-radius: @form-radius;
+}
+
+textarea,
+textarea.uk-form-controls:invalid {
+	min-height: 8rem;
+}
+
+input[type=text],
+textarea {   
+    -webkit-appearance: none;
+    -moz-appearance: none;
+	appearance: none;
+}
+
+.am-mail-input {
+	box-sizing: border-box;
+	.transition(border-color 0.2s;);
+}

@@ -32,27 +32,27 @@
  *	Licensed under the MIT license.
  */
 
-@badge-color:						#FFFFFF;
-@badge-background:					@am-text;
+@badge-color:						@button-primary-color;
+@badge-background:					@button-primary-background;
 @badge-padding-horizontal:			7px;
 @badge-font-size:					11px;
-@badge-font-weight:					400;
-@badge-line-height:					19px;
+@badge-font-weight:					normal;
+@badge-line-height:					11px;
 @badge-text-transform:				none;
 @badge-hover-color:					@badge-color;
 
 @badge-success-background:			@am-success;
-@badge-danger-background: 			@am-danger;
 
 @badge-notification-font-size:		12px;
 @badge-notification-line-height:	26px;
 
 .hook-badge() {
 
-	margin-top: -3px;
+	margin-top: -2px;
 	border-radius: 50px;
-	vertical-align: middle;
-	min-width: @badge-line-height;
+	min-width: @badge-line-height + 10;
+	padding-top: 4px;
+	padding-bottom: 3px;
 	box-sizing: border-box;
 	text-align: center;
 	
@@ -84,6 +84,10 @@
 		
 	}
 	
+}
+
+.hook-badge-success() {
+	color: #FFFFFF;
 }
 
 .uk-badge-notification {

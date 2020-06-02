@@ -90,7 +90,7 @@ Config::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 
 
 // Get the requested URL.
-define('AM_REQUEST', Parse::request());
+define('AM_REQUEST', Request::page());
 
 
 
@@ -117,7 +117,7 @@ Config::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_F
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
-Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/en.txt');
+Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/english.txt');
 Config::set('AM_FILE_GUI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
 Config::set('AM_ALLOWED_FILE_TYPES', 
 	// Archives
@@ -169,6 +169,7 @@ Config::set('AM_PARSE_STR_SEPARATOR', ',');
 
 // KEYS
 // Variables used in txt files in /pages or /shared
+Config::set('AM_KEY_DATE', 'date');
 Config::set('AM_KEY_HIDDEN', 'hidden');
 Config::set('AM_KEY_TAGS', 'tags');
 Config::set('AM_KEY_THEME', 'theme');

@@ -1,0 +1,709 @@
+btn_add: Legge til
+
+-
+
+btn_add_page: Legg til side
+
+-
+
+btn_add_var: Legg til variabel
+
+-
+
+btn_apply_reload: Påfør og last inn på nytt
+
+-
+
+btn_browse: Bla gjennom filer
+
+-
+
+btn_close: Lukk
+
+-
+
+btn_copy_url_clipboard: Kopier URL til utklippstavlen
+
+-
+
+btn_copy_resized: Kopier og endre størrelse
+
+-
+
+btn_data: Data og innstillinger
+
+-
+
+btn_delete_page: Slett side
+
+-
+
+btn_download_file: Nedlasting
+
+-
+
+btn_duplicate_page: Dupliser side
+
+-
+
+btn_edit: Redigere
+
+-
+
+btn_edit_file_info: Rediger filinfo
+
+-
+
+btn_edit_headless_template: Rediger hodeløs mal
+
+-
+
+btn_edit_page: Rediger side
+
+-
+
+btn_files: Lastet opp filer
+
+-
+
+btn_get_themes: Få flere temaer
+
+-
+
+btn_getting_data: Henter data ...
+
+-
+
+btn_hide_page: Skjul side i navigasjonen
+
+-
+
+btn_home: Home
+
+-
+
+btn_import: Importer fra URL
+
+-
+
+btn_inpage_edit: In-Page redigeringsmodus
+
+-
+
+btn_install: Installere
+
+-
+
+btn_link: Link
+
+-
+
+btn_log_out: Logg ut
+
+-
+
+btn_login: Logg Inn
+
+-
+
+btn_manage_users: Administrer brukere
+
+-
+
+btn_more: Mer
+
+-
+
+btn_move_page: Flytt side
+
+-
+
+btn_ok: Ok
+
+-
+
+btn_open_log: Åpen logg
+
+-
+
+btn_readme: Readme
+
+-
+
+btn_remove: Ta bort
+
+-
+
+btn_remove_selected: Fjern valgte
+
+-
+
+btn_reset: Nullstille
+
+-
+
+btn_save: Lagre endringer
+
+-
+
+btn_upload: Laste opp
+
+-
+
+confirm_delete_files: Er du sikker på at du vil slette de valgte filene?
+
+-
+
+confirm_delete_page: Er du sikker på at du vil slette den gjeldende siden?
+
+-
+
+confirm_delete_users: Er du sikker på at du vil slette de valgte brukerne?
+
+-
+
+confirm_reset_headless: Er du sikker på at du vil tilbakestille den tilpassede hodeløse malen?
+
+-
+
+dashboard_memory: Minnebruk:
+
+-
+
+dashboard_modified: Siste aktivitet på
+
+-
+
+dashboard_recently_edited: Nylig redigerte sider
+
+-
+
+dropzone: Dra filer hit
+
+-
+
+error_cache_purged: Cache-katalogen kunne ikke renses!
+
+-
+
+error_existing: Eksisterer allerede!
+
+-
+
+error_file_save: Kunne ikke lagre
+
+-
+
+error_file_format: Ikke-støttet filtype
+
+-
+
+error_file_not_found: Fil ikke funnet!
+
+-
+
+error_file_size: Ugyldig filstørrelse!
+
+-
+
+error_form: Ufullstendige eller uriktige data! <br /> Alle felt er obligatoriske og må fylles ut som beskrevet!
+
+-
+
+error_login: Ugyldig brukernavn eller passord
+
+-
+
+error_log_out: Loggingen mislyktes!
+
+-
+
+error_no_destination: Velg en side som destinasjon!
+
+-
+
+error_no_js: Vennligst aktiver JavaScript i nettleseren din for å bruke dashbordet!
+
+-
+
+error_no_theme: Ingen tema valgt! Velg et hovedtema.
+
+-
+
+error_no_url: Vennligst skriv inn en gyldig url!
+
+-
+
+error_import: Filimporten mislyktes!
+
+-
+
+error_packages: Kunne ikke laste inn pakker fra Packagist!
+
+-
+
+error_composer_memory: Serveren din har ikke nok minne til å installere, oppdatere eller fjerne pakker! Hvis du kjører dette nettstedet på en delt-hosting-tjeneste med en begrenset mengde minne, kan du prøve å oppgradere planen din eller installere siden din på en lokal datamaskin uten minnebegrensninger.
+
+-
+
+error_page_not_found: Side ikke funnet!
+
+-
+
+error_page_title: Tittel mangler!
+
+-
+
+error_password_current: Det gjeldende passordet er feil!
+
+-
+
+error_password_repeat: Vennligst tast inn to ganger det samme nye passordet!
+
+-
+
+error_password_reuse: Ikke bruk det gamle passordet ditt!
+
+-
+
+error_permission: Tillatelser avslått:
+
+-
+
+error_template_missing: Mal mangler
+
+-
+
+error_update_connection: Kan ikke koble til oppdateringsserveren! Dette kan vanligvis være forårsaket av en feil oppdateringskonfigurasjon (config.json), en SSL-sertifikatfeil eller et manglende cURL-bibliotek.
+
+-
+
+error_update_download: Nedlasting av oppdatering mislyktes!
+
+-
+
+error_update_items: Ugyldig liste over varer som skal oppdateres!
+
+-
+
+error_update_failed: Oppdatering mislyktes! Gjenopprett installasjonen fra en sikkerhetskopi.
+
+-
+
+error_update_not_supported: Oppdateringer støttes ikke av serveren din! Oppdatereren krever at CURL- og ZIP-biblioteker er installert.
+
+-
+
+error_update_permission: Kan ikke kjøre oppdatering! Tillatelser nektet!
+
+-
+
+error_var_exists: Det er allerede en variabel med det navnet!
+
+-
+
+error_var_name: Du kan ikke legge til en variabel uten navn!
+
+-
+
+file_name: Filnavn
+
+-
+
+file_caption: Bildetekst
+
+-
+
+image_crop: Beskjær bilde
+
+-
+
+image_height_px: Høyde (piksler)
+
+-
+
+image_width_px: Bredde (piksler)
+
+-
+
+image_options: Alternativer
+
+-
+
+image_select: Velg Bilde
+
+-
+
+images_page: Sidebilder
+
+-
+
+images_shared: Generelle bilder
+
+-
+
+link_placeholder: Begynn å skrive inn en sidetittel eller lim inn en ekstern lenke her
+
+-
+
+link_title: Legg til lenke
+
+-
+
+login_title: Logg Inn
+
+-
+
+login_username: Brukernavn
+
+-
+
+login_password: Passord
+
+-
+
+log_out_title: Logget ut
+
+-
+
+packages_title: Pakker
+
+-
+
+packages_browse: Åpne nettleseren
+
+-
+
+packages_filter: Filter
+
+-
+
+packages_installed: Er installert
+
+-
+
+packages_installing: Installerer pakke ...
+
+-
+
+packages_update_all: Oppdater alt
+
+-
+
+packages_updating: Oppdaterer pakker ...
+
+-
+
+packages_removing: Fjerner pakken ...
+
+-
+
+page_add_location: Velg et sted for den nye siden
+
+-
+
+page_move_destination: Velg destinasjon for flytting
+
+-
+
+page_settings: Sideinnstillinger
+
+-
+
+page_prefix: Prefiks (Order in Navigation)
+
+-
+
+page_redirect: Viderekobl side til en annen URL
+
+-
+
+page_tags: Merkelapper (Skill flere koder etter komma eller fane)
+
+-
+
+page_theme_template: Mal
+
+-
+
+page_var_name: Variabel Navn
+
+-
+
+page_vars_headless: Variabler
+
+-
+
+page_vars_template: Variabler i gjeldende mal
+
+-
+
+page_vars_unused: Ubrukte variabler
+
+-
+
+page_visibility: Visibility
+
+-
+
+sidebar_header_global: Global
+
+-
+
+sidebar_header_pages: Sider
+
+-
+
+shared_title: Generelle data og filer
+
+-
+
+shared_theme: Hovedtema
+
+-
+
+shared_theme_apply: Vil du bruke det valgte temaet og oppdatere listen over tilgjengelige variabler nå? Endringene som ikke er lagret, blir lagret.
+
+-
+
+shared_vars_headless: Variabler
+
+-
+
+shared_vars_main_theme: Variabler i hovedtema
+
+-
+
+shared_vars_unused: Ubrukte variabler
+
+-
+
+shared_var_name: Variabel Navn
+
+-
+
+search_no_results: Ingen sider funnet!
+
+-
+
+search_placeholder: Søk inn
+
+-
+
+search_title: Søkeresultater
+
+-
+
+success_added: Lagt til
+
+-
+
+success_cache_cleared: Cachen ble fjernet!
+
+-
+
+success_cache_purged: Cache-katalogen ble utvasket vellykket!
+
+-
+
+success_config_update: Vellykket oppdatert konfigurasjon!
+
+-
+
+success_created: Opprettet vellykket <br>
+
+-
+
+success_installed: Vellykket installert
+
+-
+
+success_password_changed: Passordet ditt ble endret!
+
+-
+
+success_log_out: Logget ut Vellykket
+
+-
+
+success_remove: Fjernet
+
+-
+
+success_reset_headless: Gjenopprettet standard hodeløs mal!
+
+-
+
+success_saved: Lagrede endringer
+
+-
+
+success_update: Vellykket oppdatert Automad!
+
+-
+
+success_packages_updated: Alle pakker ble oppdatert
+
+-
+
+sys_cache_info: Bufring er viktig for å få fart på nettstedet ditt, og bør generelt være aktivert. Imidlertid kan det være lurt å deaktivere eller tømme hurtigbufferen under noen omstendigheter.
+
+-
+
+sys_cache_clear: Tøm cache
+
+-
+
+sys_cache_clear_info: Hvis du tømmer nettstedets hurtigbuffer, tvinger du en ny skanning for oppdaterte sider og filer. Denne handlingen vil ikke fjerne sidefiler eller bilder fra hurtigbufferen.
+
+-
+
+sys_cache_monitor: Sjekkintervallet er
+
+-
+
+sys_cache_monitor_info: Når hurtigbufring er aktivert, vil Automad sjekke regelmessig for endringer i filsystemet. Frekvensen for disse kontrollene kan defineres her.
+
+-
+
+sys_cache_lifetime: Cache-levetiden er
+
+-
+
+sys_cache_lifetime_info: Alle hurtigbufrede Automad-data og sider har maksimal levetid. Etter at levetiden til et objekt overskrider, vil hurtigbufferen bli bygget opp igjen når du blir bedt om det.
+
+-
+
+sys_cache_purge: Purge Cache Directory
+
+-
+
+sys_cache_purge_info: I motsetning til bare å tømme hurtigbufferen, vil rensing av hurtigbufferen også flytte alle midlertidige filer, slettede sider, oppdaterings-sikkerhetskopier og hurtigbufrede bilder til temprary-katalogen til systemet. Dette vil tvinge til en fullstendig gjenoppbygging av bilde- og sidebuffer samt opprydding av alle slettede sider. På de fleste systemer blir den midlertidige katalogen renset opp automatisk fra tid til annen eller ved omstart. På noen systemer må katalogen imidlertid fjernes manuelt.
+
+-
+
+sys_debug_info: Når feilsøking er aktivert, blir alle Automads prosesser logget på nettleserkonsollen. Feilsøking er bare nødvendig for utvikling eller feilsøking og bør deaktiveres i alle andre tilfeller.
+
+-
+
+sys_headless_edit_info: Strukturen til de returnerte JSON-dataene styres av en mal. Du kan redigere den malen ved å bruke Automads innebygde malspråk for å tilpasse felt ved å bruke variabler, objekter og kontrollstrukturer.
+
+-
+
+sys_headless_info: Aktivering av hodeløs modus gjør Automad til et innholdsstyringssystem som fokuserer helt på innholdsoppretting uten presentasjonslag. Mens dashbordet fremdeles kan brukes til å administrere innhold, er alle data og filer tilgjengelige via et skrivebeskyttet JSON API.
+
+-
+
+sys_language: Språk
+
+-
+
+sys_language_info: Det er flere språk tilgjengelig for dashbordet. Oversettelsene opprettes automatisk. Denne funksjonen er fremdeles i en eksperimentell fase, og derfor kan det hende at noen oversettelser ikke er nøyaktige.
+
+-
+
+sys_status_cache_enabled: Bufring er aktivert
+
+-
+
+sys_status_cache_disabled: Bufring er deaktivert
+
+-
+
+sys_status_debug_enabled: Feilsøking er aktivert
+
+-
+
+sys_status_debug_disabled: Feilsøking er deaktivert
+
+-
+
+sys_status_update_available: Oppdater til
+
+-
+
+sys_status_update_not_available: Automad er oppdatert
+
+-
+
+sys_title: Systeminnstillinger
+
+-
+
+sys_update: Oppdater
+
+-
+
+sys_update_available: En nyere versjon av Automad er tilgjengelig og klar til å bli installert. <br> Ta sikkerhetskopi av den nåværende installasjonen før du oppdaterer!
+
+-
+
+sys_update_current_version: Den for øyeblikket installerte versjonen er
+
+-
+
+sys_update_items: Følgende elementer påvirkes av oppdateringen:
+
+-
+
+sys_update_not_required: Automad er oppdatert.
+
+-
+
+sys_update_progress: Vent og lukk ikke vinduet mens du oppdaterer ...
+
+-
+
+sys_update_to: Oppdater til
+
+-
+
+sys_update_windows_warning: Forsikre deg om at alle filene i installasjonen er lukket i eksterne programmer før du kjører oppdateringen for å unngå tillatelsesproblemer!
+
+-
+
+sys_user: Brukere
+
+-
+
+sys_user_info: Du kan legge til eller fjerne flere brukere eller endre passordet ditt her.
+
+-
+
+sys_user_change_password: Bytt passord
+
+-
+
+sys_user_change_password_current: Nåværende passord
+
+-
+
+sys_user_change_password_new: Nytt passord
+
+-
+
+sys_user_change_password_repeat: Gjenta passord
+
+-
+
+sys_user_add: Legg til bruker
+
+-
+
+sys_user_add_name: Brukernavn
+
+-
+
+sys_user_add_password: Passord
+
+-
+
+sys_user_add_repeat: Gjenta passord
+
+-
+
+sys_user_registered: Registrerte brukere
+
+-
+
+sys_user_you: Du

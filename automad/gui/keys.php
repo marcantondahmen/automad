@@ -64,7 +64,7 @@ class Keys {
 	 *	Array with reserved variable keys.
 	 */
 	
-	public $reserved = array(AM_KEY_HIDDEN, AM_KEY_TAGS, AM_KEY_THEME, AM_KEY_TITLE, AM_KEY_SITENAME, AM_KEY_URL);
+	public $reserved = array(AM_KEY_DATE, AM_KEY_HIDDEN, AM_KEY_TAGS, AM_KEY_THEME, AM_KEY_TITLE, AM_KEY_SITENAME, AM_KEY_URL);
 	
 	
 	/**
@@ -97,62 +97,6 @@ class Keys {
 	}
 
 
-	/**
-	 *	Find all variable keys in all templates (and ignore those keys in $this->reserved).
-	 *	
-	 *	@return array Keys in all templates (without reserved keys)
-	 */
-
-	public function inAllTemplates() {
-		
-		$keys = array();
-		$dir = AM_BASE_DIR . AM_DIR_PACKAGES;	
-		$arrayDirs = array();
-		$arrayFiles = array();
-		
-		// Collect all directories in "/packages" recursively.
-		while ($dirs = FileSystem::glob($dir . '/*', GLOB_ONLYDIR)) {
-			$dir .= '/*';
-			$arrayDirs = array_merge($arrayDirs, $dirs);
-		}
-		
-		// Filter out directories.
-		$arrayDirs = array_filter($arrayDirs, function($array) {
-			return preg_match('/\/(dist|js|less|node_modules)(\/|$)/', $array) == 0;
-		});
-	
-		// Collect all .php files.
-		foreach ($arrayDirs as $d) {
-			if ($f = FileSystem::glob($d . '/*.php')) {
-				$arrayFiles = array_merge($arrayFiles, $f);
-			}
-		}
-		
-		// Search each template and add matches to the $keys array.
-		foreach ($arrayFiles as $file) {
-			$content = file_get_contents($file);
-			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
-			$keys = array_merge($keys, $matches['varName']);
-		}
-		
-		return $this->sortAndFilter($keys);
-		
-	}
-	
-	
-	/**
-	 *	Find all variable keys in all other templates but the current (and ignore those keys in $this->reserved).
-	 *	
-	 *	@return array with keys in the currently used template (without reserved keys)
-	 */
-	
-	public function inOtherTemplates() {
-		
-		return array_diff($this->inAllTemplates(), $this->inCurrentTemplate());
-		
-	}
-	
-	
 	/**
 	 *	Find all variable keys in a template and all included snippets (and ignore those keys in $this->reserved).
 	 *	
@@ -238,14 +182,14 @@ class Keys {
 		// Remove reserved keys.
 		$keys = array_diff($keys, $this->reserved);
 	
-		// Place all text keys in the beginning of the array
+		// Place all block and text keys in the beginning of the array
 		// and only sort all non-text keys alphabetically.
-		$textKeys = array_filter($keys, function($array) {
-			return strpos($array, 'text') === 0;
+		$textKeys = array_filter($keys, function($key) {
+			return preg_match('/^(text|\+)/', $key);
 		});
 		
-		$nonTextKeys = array_filter($keys, function($array) {
-			return strpos($array, 'text') !== 0;
+		$nonTextKeys = array_filter($keys, function($key) {
+			return (preg_match('/^(text|\+)/', $key) == false);
 		});
 	
 		sort($nonTextKeys);

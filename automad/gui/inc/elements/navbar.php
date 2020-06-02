@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 if (User::get()) {
 
 	// Get form handler to be submitted. If no matching handler exists, set an empty string.
-	$context = Core\Parse::query('context');
+	$context = Core\Request::query('context');
 	$handlers = array('edit_page' => 'page_data', 'edit_shared' => 'shared_data');
 
 	if (isset($handlers[$context])) {
@@ -61,13 +61,13 @@ if (User::get()) {
 			<!-- Logo -->
 			<li class="am-navbar-logo">
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
-					<?php echo Logo::get(); ?>
+					<?php echo Components\Logo::render(); ?>
 				</a>
 			</li>
 			<!-- Search -->
 			<li class="am-navbar-search">
 				<?php 
-					echo $this->getHtml()->searchField(
+					echo Components\Form\Search::render(
 						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
 						'Ctrl + Space'
 					);

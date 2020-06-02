@@ -72,7 +72,7 @@
 @button-large-font-size: 			16px;
 
 @button-height:						30px;
-@button-mini-height:				20px;
+@button-mini-height:				19px;
 @button-small-height:				24px;
 @button-large-height:				36px;
 
@@ -100,6 +100,36 @@
 	&.uk-button-mini,
 	&.uk-button-small {
 		border-radius: @am-radius-small;
+	}
+
+	&-group {
+		
+		& > *.uk-button {
+			margin-left: 0;
+			border-radius: 0;
+		}
+
+		& .uk-button {
+
+			border-left: 1px solid @button-hover-background;
+
+			&-success {
+				border-left: 1px solid @button-success-hover-background;
+			}
+
+		}
+
+		& > :first-child {
+			border-top-left-radius: @am-radius;
+			border-bottom-left-radius: @am-radius;
+			border-left: none;
+		}
+
+		& > :last-child {
+			border-top-right-radius: @am-radius;
+			border-bottom-right-radius: @am-radius;
+		}
+
 	}
 	
 }

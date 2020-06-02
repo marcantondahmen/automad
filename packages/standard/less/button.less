@@ -1,0 +1,49 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@button-background:					transparent;
+@button-color:              		@base-body-color;
+@button-hover-background:   		transparent;
+@button-hover-color:        		@text-color;
+@button-active-background:  		@button-hover-background;
+@button-active-color:       		@button-hover-color;
+
+@button-height:	 					2.35rem;
+@button-line-height: 				@button-height;
+@button-padding-horizontal: 		1rem;
+
+@button-radius: 0;
+
+.hook-button() {
+	.button;
+}
+
+.hook-button-misc() {
+	
+	.buttons-stacked {
+		
+		padding-top: 4rem;
+		margin-top: -3rem;
+		
+		& > * {
+			margin-right: 1rem;
+			margin-top: 1rem;
+		}
+		
+	}
+	
+}
+
+.am-button,
+.am-mail-button {
+
+	.transition(box-shadow 0.2s, border-color 0.2s;);
+
+}

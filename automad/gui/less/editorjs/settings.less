@@ -1,0 +1,107 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-block-editor {
+
+	& .ce-settings {
+		background-color: @am-block-dropdown-background;
+		border: none !important;
+		border-radius: @am-radius;
+		.shadow;
+	}
+
+	& .cdx-settings-button,
+	& .ce-settings__button {
+
+		color: @nav-dropdown-color;
+		background-color: @am-block-dropdown-background;
+		border-radius: 4px;
+		.transition(color 0.2s, background-color 0.2s;);
+
+		&:not(.ce-settings__button--confirm):hover,
+		&:not(.ce-settings__button--confirm):focus,
+		&--focused {
+			color: @button-color !important;
+			background-color: @button-background !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		&--active {
+
+			color: @button-success-color !important;
+			background-color: @button-success-background !important;
+
+			&:not(.ce-settings__button--confirm):hover,
+			&:not(.ce-settings__button--confirm):focus,
+			&--focused {
+				color: @button-success-hover-color !important;
+				background-color: @button-success-hover-background !important;
+			}
+
+		}
+
+	}
+
+	& .cdx-settings-1-1 {
+
+		& .cdx-settings-button {
+			width: 100%;
+		}
+
+	}
+
+	& .cdx-settings-1-2 {
+
+		display: flex;
+
+		& .cdx-settings-button {
+			
+			width: 50%;
+
+			&:last-child {
+				margin-right: 0;
+			}
+
+		}
+
+	}
+
+	& .ce-settings__button--confirm {
+		color: @button-danger-color !important;
+		background-color: @button-danger-background !important;
+	}
+
+}

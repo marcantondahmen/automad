@@ -1,0 +1,123 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+.am-block-editor {
+	
+	& .ce-block {
+		
+		box-sizing: border-box;
+		width: 100%;
+		margin: 4px 0;
+		padding: @am-block-padding;
+		border-radius: @am-block-radius;
+		.transition(background-color 0.2s);
+
+		@media (min-width: @am-blocks-breakpoint-small) {
+			padding: @am-block-padding 37px @am-block-padding @am-block-padding;
+		}
+
+		& + & {
+			margin-top: 4px;
+		}
+
+		&__content {
+
+			max-width: @am-block-max-width;
+
+			@media (min-width: @am-blocks-breakpoint-small) {
+				padding: 0 @am-block-content-padding;
+			}
+			
+		}
+
+		&--stretched .ce-block__content {
+			
+			@media (min-width: @am-blocks-breakpoint-small) {
+				padding: 0;
+			}
+
+		}
+
+		& [class^="uk-icon-"] {
+			font-style: normal !important;
+		}
+
+		&:hover,
+		&.ce-block--focused {
+
+			background-image: none;
+			background-color: @am-block-focused-background;
+
+			@media (max-width: @am-blocks-breakpoint-small-max){
+				background-image: none;
+				background-color: @am-block-focused-background;
+			}
+
+		}
+
+		& [data-placeholder]:empty:not(:focus):before {
+			content: attr(data-placeholder);
+			color: @am-muted;
+		}
+
+		&:last-child:not(.ce-block--focused) > div > [contenteditable][data-placeholder=""]:not(:focus):empty {
+			
+			&:after {
+				content: '\f040 ...';
+				font-family: FontAwesome;
+				display: inline-block;
+    			font-weight: normal;
+				font-style: normal;
+				font-size: 1rem;
+				line-height: 1;
+    			-webkit-font-smoothing: antialiased;
+    			-moz-osx-font-smoothing: grayscale;
+				color: @am-muted;
+			}
+
+		}
+
+	}
+
+	& .ce-block--selected > .ce-block__content {
+
+		background-color: transparent !important;
+
+		& img {
+			opacity: 1;
+		}
+
+	}
+
+}
