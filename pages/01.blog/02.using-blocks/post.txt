@@ -15,7 +15,3 @@ tags: Blog, Light
 -
 
 imageTeaser: /shared/image-square.png
-
--
-
-checkboxLightColorScheme: 1
