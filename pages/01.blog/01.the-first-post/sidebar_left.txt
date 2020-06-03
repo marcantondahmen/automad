@@ -14,8 +14,4 @@ tags: Blog, Dark
 
 -
 
-checkboxHideThumbnails: 1
-
--
-
 theme: standard/dark

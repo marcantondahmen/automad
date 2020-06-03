@@ -2,7 +2,7 @@
 	"name": "Light",
 	"description": "A light and elegant multi-purpose theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"license": "MIT",
 	"tooltips": {
 		"+main": "The main content block area",
