@@ -6,7 +6,7 @@
 	<@ if @{ :i | -1 } @>,<@ end @>
 	<# Exclude redirected pages. #>
 	<@~ if @{ :origUrl } = @{ url } ~@>
-		{"value":"@{ title | stripTags }"}
+		{"value":"@{ title }"}
 	<@~ else ~@>
 		<# Add empty array for redirected elements to make sure there is always an element following a comma. #>
 		[]
