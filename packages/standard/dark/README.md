@@ -112,15 +112,8 @@ All labels, button text, placeholders and notification texts can be overriden or
 | Label Sort Date Desc | Label text in dropdown for sorting pages by date descending. |
 | Label Sort Title Asc | Label text in dropdown for sorting pages by title ascending. |
 | Label Sort Title Desc | Label text in dropdown for sorting pages by title descending. |
-| Label Send Mail | Label for the send button of an email form. |
-| Notification Mail Error | Notification text for errors when sendig an email form. |
-| Notification Mail Success | Notification text after successfully sending email. |
 | Notification No Search Results | Notification text for an empty list of search results. |
-| placeholder Email | Placeholder text for email input field. |
-| placeholder Message | Placeholder text for the message body field. |
-| placeholder Search | Placeholder text for the search field of the main menu. |
-| placeholder Subject | Placeholder text for the subject input field. |
-| Placeholder Search | Placeholder text for the search field of the main menu. |		
+| Placeholder Search | Placeholder text for the search field of the main menu. |  
 
 ## Date Formats
 
