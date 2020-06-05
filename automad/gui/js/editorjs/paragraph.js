@@ -126,7 +126,7 @@ class AutomadParagraph {
 	save() {
 
 		return Object.assign(this.data, {
-			text: this.input.innerHTML
+			text: this.input.innerHTML.replace(/\<br\>$/, '')
 		});
 
 	}
