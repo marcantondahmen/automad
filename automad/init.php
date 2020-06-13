@@ -79,6 +79,11 @@ session_start();
 // Split GUI from regular pages.
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 	
+	// Set content type header.
+	if (Core\Request::query('ajax')) {
+		header('Content-Type: application/json');
+	}
+
 	$Dashboard = new GUI\Dashboard();
 	$output = $Dashboard->output;
 	
