@@ -300,7 +300,7 @@ class Composer {
 			$this->reservedShutdownMemory = null;
 			$error = error_get_last();
 
-			if (null !== $error) {
+			if (is_array($error) && !empty($error['type']) && $error['type'] === 1) {
 				exit('{"error": "' . $this->memoryErrorMessage . '", "trigger": "composerDone"}');
 			}
 
