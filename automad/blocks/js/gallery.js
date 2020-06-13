@@ -125,32 +125,40 @@
 
 				});
 
-				prev.addEventListener('click', function (event) {
+				if (prev) {
 
-					event.preventDefault();
-					activeItem--;
+					prev.addEventListener('click', function (event) {
 
-					if (activeItem < 0) {
-						activeItem = items.length - 1;
-					}
+						event.preventDefault();
+						activeItem--;
 
-					fade();
+						if (activeItem < 0) {
+							activeItem = items.length - 1;
+						}
 
-				});
+						fade();
 
-				next.addEventListener('click', function (event) {
+					});
 
-					event.preventDefault();
-					activeItem++;
+				}
+				
+				if (next) {
 
-					if (activeItem >= items.length) {
-						activeItem = 0
-					}
+					next.addEventListener('click', function (event) {
 
-					fade();
+						event.preventDefault();
+						activeItem++;
 
-				});
+						if (activeItem >= items.length) {
+							activeItem = 0
+						}
 
+						fade();
+
+					});
+
+				}
+				
 			},
 
 			init: function () {

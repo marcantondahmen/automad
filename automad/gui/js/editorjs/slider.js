@@ -118,7 +118,7 @@ class AutomadSlider {
 	save() {
 
 		return Object.assign(this.data, {
-			globs: this.inputs.globs.innerHTML,
+			globs: this.inputs.globs.innerHTML.replace(/&nbsp;/g, ''),
 			width: parseInt(this.inputs.width.innerHTML),
 			height: parseInt(this.inputs.height.innerHTML)
 		});

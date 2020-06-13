@@ -41,7 +41,8 @@
 		border-collapse: collapse;
 		text-align: left;
 
-		& th {
+		& th,
+		& td {
 			padding: 0.5rem;
 			padding-left: 0;
 			font-weight: inherit;
@@ -49,13 +50,13 @@
 			vertical-align: top;
 		}
 
-		& tr:first-child th {
+		& th {
 			font-weight: 500;
-			border-bottom: 2px solid @border-color;
+			border-width: 2px;
 			white-space: nowrap !important;
 		}
 
-		& tr:last-child th {
+		& tr:last-child td {
 			border: none;
 		}
 

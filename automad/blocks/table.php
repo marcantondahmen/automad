@@ -63,15 +63,21 @@ class Table {
 
 		$html = '<figure><table>'; 
 		
+		// Initially set cell tag to "th".
+		$tag = 'th';
+		
 		foreach ($data->content as $row) {
 
 			$html .= '<tr>'; 
 			
 			foreach ($row as $item) {
-				$html .= "<th>$item</th>";
+				$html .= "<$tag>$item</$tag>";
 			}
 			
 			$html .= '</tr>';
+
+			// For every row after the first one, set the cell tag to "td".
+			$tag = 'td';
 
 		}
 		
