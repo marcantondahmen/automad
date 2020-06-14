@@ -9,7 +9,7 @@ spl_autoload_register(function($class){
 	require str_replace('\\', DIRECTORY_SEPARATOR, ltrim($class, '\\')).'.php';
 });
 // If using Composer, use this instead:
-//require 'vendor/autoloader.php';
+//require 'vendor/autoload.php';
 
 // Get Markdown class
 use Michelf\Markdown;
@@ -21,13 +21,13 @@ $html = Markdown::defaultTransform($text);
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PHP Markdown Lib - Readme</title>
-    </head>
-    <body>
+	<head>
+		<title>PHP Markdown Lib - Readme</title>
+	</head>
+	<body>
 		<?php
 			// Put HTML content in the document
 			echo $html;
 		?>
-    </body>
+	</body>
 </html>
