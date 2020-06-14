@@ -44,8 +44,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 if ($name = Automad\Core\Request::post('name')) {
 
-	echo Automad\GUI\Components\Form\Field::render($this->getAutomad(), $name, '', true);
-	
+	$html = Automad\GUI\Components\Form\Field::render($this->getAutomad(), $name, '', true);
+	$this->jsonOutput(array('html' => $html));
+
 }
 
 
