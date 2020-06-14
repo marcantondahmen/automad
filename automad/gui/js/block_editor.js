@@ -127,6 +127,7 @@
 								services: Automad.editorJS.embedServices
 							}
 						},
+						underline: Underline,
 						inlineCode: {
 							class: InlineCode,
 							shortcut: 'CMD+SHIFT+M'

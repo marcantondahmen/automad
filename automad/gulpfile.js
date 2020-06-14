@@ -124,7 +124,8 @@ gulp.task('libs-js', function() {
 				'node_modules/@editorjs/marker/dist/bundle.js',
 				'node_modules/@editorjs/quote/dist/bundle.js',
 				'node_modules/@editorjs/raw/dist/bundle.js',
-				'node_modules/@editorjs/table/dist/bundle.js'
+				'node_modules/@editorjs/table/dist/bundle.js',
+				'node_modules/@editorjs/underline/dist/bundle.js'
 			]),
 			// CodeMirror. To be minified.
 			gulp.src([
