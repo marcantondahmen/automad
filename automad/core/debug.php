@@ -88,6 +88,9 @@ class Debug {
 			// Get user & server constants.
 			self::uc();
 			self::log($_SERVER, 'Server');
+
+			// Get last error.
+			self::log(error_get_last(), 'Last error');
 			
 			$html = '<script type="text/javascript">' . "\n";
 
