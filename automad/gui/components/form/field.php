@@ -328,7 +328,7 @@ HTML;
 
 		if ($url = Core\Request::post('url')) {
 			$Page = $Automad->getPage($url);
-			$title = $Page->get(AM_KEY_TITLE);
+			$title = htmlspecialchars($Page->get(AM_KEY_TITLE));
 		} else {
 			$title = Text::get('shared_title');
 		}

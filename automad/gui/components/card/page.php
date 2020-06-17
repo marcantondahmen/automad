@@ -153,7 +153,7 @@ class Page {
 			$preview = '<i class="uk-icon-file-text-o"></i>';
 		}
 
-		$pageTitle = $Page->get(AM_KEY_TITLE);
+		$pageTitle = htmlspecialchars($Page->get(AM_KEY_TITLE));
 		$pageMTime = Core\Str::dateFormat($Page->getMtime(), 'j. M Y');
 		$pageUrl = AM_BASE_INDEX . $Page->url;
 		$Text = Text::getObject();

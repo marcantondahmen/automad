@@ -64,7 +64,7 @@ class Link {
 		$autocomplete = array();
 
 		foreach ($Automad->getCollection() as $Page) {
-			$autocomplete[] = array('value' => $Page->url, 'title' => $Page->get(AM_KEY_TITLE));
+			$autocomplete[] = array('value' => $Page->url, 'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)));
 		}
 
 		return json_encode($autocomplete, JSON_UNESCAPED_SLASHES);

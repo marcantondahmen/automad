@@ -51,7 +51,7 @@ $url = Core\Request::query('url');
 
 
 if ($Page = $this->getAutomad()->getPage($url)) {
-	$this->guiTitle = $this->guiTitle . ' / ' . $Page->get(AM_KEY_TITLE);
+	$this->guiTitle = $this->guiTitle . ' / ' . htmlspecialchars($Page->get(AM_KEY_TITLE));
 }
 
 
@@ -188,7 +188,7 @@ $this->element('header');
 		
 		<div class="uk-alert uk-alert-danger uk-margin-large-top">
 			<?php Text::e('error_page_not_found'); ?><br />
-			"<?php echo Core\Request::query('url'); ?>"
+			"<?php echo $url; ?>"
 		</div>
 			
 		<?php } ?>
