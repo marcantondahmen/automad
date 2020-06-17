@@ -243,7 +243,7 @@ class View {
 			
 			// Query string parameter.
 			$key = substr($key, 1);
-			return htmlspecialchars(Request::query($key));
+			return Request::query($key);
 			
 		} else if (strpos($key, '%') === 0) {	
 			

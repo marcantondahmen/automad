@@ -98,7 +98,7 @@ class SiteTree {
 					}
 					
 					// Set title in tree.
-					$title = $Page->get(AM_KEY_TITLE);
+					$title = htmlspecialchars($Page->get(AM_KEY_TITLE));
 					$prefix = $Content->extractPrefixFromPath($Page->path);
 					
 					if (strlen($prefix) > 0) {

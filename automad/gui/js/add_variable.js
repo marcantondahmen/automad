@@ -65,14 +65,14 @@
 				$container = $(a.selectors.container),
 				$modalInput = $(a.selectors.modalInput),
 				idPrefix = 'am-input-data-',
-				name = $modalInput.val().replace(/[^\+\w\.\-]/g, '_').toLowerCase();
+				name = $modalInput.val().replace(/[^\w\.\-]/g, '_').toLowerCase();
 			
 			// Check if there is already a variable with the same name.
 			if ($('#' + idPrefix + name).length == 0){
 			
 				if (name) {
 					
-					$.post('?ajax=add_variable', {name: name}, function(html) {
+					$.post('?ajax=add_variable', {name: name}, function(data) {
 						
 						// Hide modal on success.
 						UIkit.modal(a.selectors.modal).hide();
@@ -81,7 +81,7 @@
 						$modalInput.val('');
 						
 						// Append field to data form.
-						$container.append(html);
+						$container.append(data.html);
 						
 						// Focus new input.
 						$('#' + idPrefix + name).focus();

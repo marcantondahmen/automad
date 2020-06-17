@@ -19,3 +19,9 @@ uikit/CHANGELOG.md
 /composer.lock
 packages/automad
 pages/test
+lib/vendor/michelf/php-markdown/test
+lib/vendor/michelf/php-markdown/.editorconfig
+lib/vendor/michelf/php-markdown/.gitignore
+lib/vendor/michelf/php-markdown/.scrutinizer.yml
+lib/vendor/michelf/php-markdown/.travis.yml
+lib/vendor/michelf/php-markdown/phpunit.xml.dist

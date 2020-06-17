@@ -73,17 +73,13 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 
 // Start Session.
 session_name('Automad-' . md5(AM_BASE_DIR));
+session_set_cookie_params(0, '/', '', false, true);
 session_start();
 
 
 // Split GUI from regular pages.
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 	
-	// Set content type header.
-	if (Core\Request::query('ajax')) {
-		header('Content-Type: application/json');
-	}
-
 	$Dashboard = new GUI\Dashboard();
 	$output = $Dashboard->output;
 	

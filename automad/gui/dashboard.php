@@ -276,6 +276,7 @@ class Dashboard {
 
 	private function jsonOutput($output = array()) {
 		
+		header('Content-Type: application/json');
 		$output['debug'] = Core\Debug::getLog();
 
 		echo json_encode($output);
