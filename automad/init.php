@@ -73,6 +73,7 @@ if (!is_writable(AM_BASE_DIR . AM_DIR_CACHE)) {
 
 // Start Session.
 session_name('Automad-' . md5(AM_BASE_DIR));
+session_set_cookie_params(0, '/', '', false, true);
 session_start();
 
 
