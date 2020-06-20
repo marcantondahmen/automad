@@ -52,6 +52,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class FileSystem extends Core\FileSystem {
 	
+
+	/**
+	 * 	The cached array of items in the packages directory.
+	 */
+
+	private static $packageDirectoryItems = array();
+
 	
 	/**
 	 *	Append a suffix to a path just before the trailing slash.
@@ -181,6 +188,60 @@ class FileSystem extends Core\FileSystem {
 		
 		return rtrim($path, '/') . '/';
 		
+	}
+
+
+	/**
+	 *	Get all items in the packages directory, optionally filtered by a regex string.
+	 *
+	 * 	@param string $filter
+	 *  @return array A filtered list with all items in the packages directory
+	 */
+
+	public static function getPackagesDirectoryItems($filter = '') {
+
+		if (empty(self::$packageDirectoryItems)) {
+			self::$packageDirectoryItems = self::listDirectoryRecursively(AM_BASE_DIR . AM_DIR_PACKAGES, AM_BASE_DIR . AM_DIR_PACKAGES);
+		}
+
+		if ($filter) {
+			return array_values(preg_grep($filter, self::$packageDirectoryItems));
+		}
+
+		return self::$packageDirectoryItems;
+
+	}
+
+
+	/**	
+	 * 	Recursively list all items in a directory.
+	 * 	
+	 * 	@param string $directory
+	 *  @param string $base
+	 *  @return array The list of items
+	 */
+
+	public static function listDirectoryRecursively($directory, $base = AM_BASE_DIR) {
+
+		$items = array();
+		$exclude = array('node_modules', 'vendor');
+
+		foreach (self::glob($directory . '/*') as $item) {
+
+			if (!in_array(basename($item), $exclude)) {
+
+				$items[] = Core\Str::stripStart($item, $base);
+				
+				if (is_dir($item)) {
+					$items = array_merge($items, self::listDirectoryRecursively($item, $base));
+				}
+				
+			}
+
+		}
+
+		return $items;
+
 	}
 
 

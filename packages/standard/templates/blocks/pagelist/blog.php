@@ -1,29 +1,31 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="masonry<@ if @{ :pagelistCount } > 3 @> am-stretched<@ end @>">
+<div class="masonry masonry-large<@ if @{ :pagelistDisplayCount } > 2 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
-		<div class="masonry-item" <@ colors_inline.php @>>
+		<div class="masonry-item" <@ ../../snippets/colors_inline.php @>>
 			<div class="masonry-content uk-panel uk-panel-box">
 				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
-					<@~ set_imageteaser_variable.php @>
-					<@~ if @{ :imageTeaser } @>
+					<@~ ../../snippets/set_imageteaser_variable.php @>
+					<@ if @{ :imageTeaser } ~@>
 						<div class="uk-panel-teaser">
 							<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
 						</div>
 					<@~ end ~@>
 				<@ end @>
-				<div class="uk-panel-title uk-margin-bottom-remove">
-					<a href="@{ url }">
-						<@ icon.php @>
+				<div class="uk-panel-title">
+					<a href="@{ url }" class="nav-link">
+						<@ ../../snippets/icon.php @>
 						@{ title }
 					</a>
 					<div class="text-subtitle">
-						<@ date.php @>
+						<@ ../../snippets/date.php @>
 						<@ if @{ date } and @{ tags } @><br><@ end @>
-						<@ tags.php @>
+						<@ ../../snippets/tags.php @>
 					</div>
 				</div>
-				<@ more.php @>
+				<@~ ../../snippets/set_teaser_variable.php @>
+				<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
+				<@ ../../snippets/more.php @>
 			</div>
 		</div>
 	<@ else @>

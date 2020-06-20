@@ -10,7 +10,7 @@
 				<@ snippets/clear_search.php @>
 			</div>
 		<@ end @>
-		<@ snippets/pagelist_portfolio.php @>
+		<@ blocks/pagelist/portfolio.php @>
 		<@ snippets/pagination.php @>
 	</div>
 <@ snippets/footer.php @>

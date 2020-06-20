@@ -109,9 +109,13 @@ class Runtime {
 					return count($this->Automad->getFilelist()->getFiles());
 					
 				case AM_KEY_PAGELIST_COUNT:
-					// The pagelist count represents the number of pages within the last defined pagelist. 
+					// The pagelist count represents the number of pages within the last defined pagelist, ignoring limit and pagination. 
 					return count($this->Automad->getPagelist()->getPages(true));
-					
+				
+				case AM_KEY_PAGELIST_DISPLAY_COUNT:
+					// The pagelist display count represents the number of pages that will be displayed. 
+					return count($this->Automad->getPagelist()->getPages(false));	
+
 				case AM_KEY_PAGINATION_COUNT:
 					// The last page number of the pagination of the current pagelist.
 					return $this->Automad->getPagelist()->getPaginationCount();

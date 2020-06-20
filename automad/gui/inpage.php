@@ -171,6 +171,7 @@ HTML;
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
 					// Cleanup window object by removing jQuery and UIkit.
 					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
+					Components\Header\BlockSnippetArrays::render() . "\n" .
 					'<!-- Automad GUI end -->' . "\n";
 			
 		// Check if there is already any other script tag and try to prepend all assets as first items.

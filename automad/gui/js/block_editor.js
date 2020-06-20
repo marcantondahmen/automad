@@ -116,6 +116,7 @@
 							class: Table,
 							inlineToolbar: true
 						},
+						pagelist: AutomadPagelist,
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
@@ -165,7 +166,7 @@
 
 			// Trigger changes when clicking a settings button or changing an input field.
 			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', triggerChange);
-			$(document).on('change keyup', '.ce-block input', triggerChange);
+			$(document).on('change keyup', '.ce-block input, .ce-block select', triggerChange);
 
 		}
 		

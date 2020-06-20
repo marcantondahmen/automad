@@ -61,7 +61,9 @@ $versionSanitized = Core\Str::sanitize(AM_VERSION);
 	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.js?v=<?php echo $versionSanitized; ?>"></script>	
 	<script type="text/javascript" src="<?php echo AM_BASE_URL; ?>/automad/gui/dist/automad.min.js?v=<?php echo $versionSanitized; ?>"></script>
-		
+	
+	<?php echo Components\Header\BlockSnippetArrays::render(); ?>
+
 </head>
 
 

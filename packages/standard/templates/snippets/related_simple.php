@@ -3,7 +3,7 @@
 <@~ if @{ :pagelistCount } @>
 	<@ related.php @>
 	<div class="uk-margin-large-top">
-		<@ pagelist_simple.php @>
+		<@ ../blocks/pagelist/simple.php @>
 	</div>
 <@ end ~@>
 	

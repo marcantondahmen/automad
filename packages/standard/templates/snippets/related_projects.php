@@ -2,5 +2,5 @@
 <@~ newPagelist { type: 'related', sort: @{ sortRelatedPages | def ('date desc') } } @>	
 <@~ if @{ :pagelistCount } @>
 	<@ related.php @>
-	<@ pagelist_portfolio.php @>
+	<@ ../blocks/pagelist/portfolio.php @>
 <@ end ~@>

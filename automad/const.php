@@ -199,6 +199,7 @@ Config::set('AM_KEY_CAPTION', ':caption');
 Config::set('AM_KEY_INDEX', ':i');
 Config::set('AM_KEY_FILELIST_COUNT', ':filelistCount');
 Config::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
+Config::set('AM_KEY_PAGELIST_DISPLAY_COUNT', ':pagelistDisplayCount');
 Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
