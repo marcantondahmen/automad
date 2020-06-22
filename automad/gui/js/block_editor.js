@@ -117,6 +117,7 @@
 							inlineToolbar: true
 						},
 						pagelist: AutomadPagelist,
+						filelist: AutomadFilelist,
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,

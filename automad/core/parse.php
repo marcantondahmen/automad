@@ -122,6 +122,7 @@ class Parse {
 			foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
 						
 				if ($f = FileSystem::glob(Resolve::filePath($Page->path, trim($glob)))) {
+					$f = array_filter($f, '\Automad\Core\FileSystem::isAllowedFileType');
 					$files = array_merge($files, $f);
 				}
 				
