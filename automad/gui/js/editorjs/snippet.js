@@ -44,20 +44,21 @@ class AutomadSnippet {
 			file: data.file || '',
 		};
 
-		this.inputs = {
-			file: create.editable(['cdx-input'], 'Enter the file path of a snippet', this.data.file),
-		};
-
-		var icon = document.createElement('div');
-
-		icon.innerHTML = AutomadSnippet.toolbox.icon;
-		icon.classList.add('am-block-icon');
-		
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
-		this.wrapper.appendChild(icon);
-		this.wrapper.appendChild(create.label('Path to Snippet'));
-		this.wrapper.appendChild(this.inputs.file);
+		this.wrapper.innerHTML = `
+			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
+			${create.label('Snippet File').outerHTML}
+			<div class="uk-form-select uk-button uk-button-success uk-button-large uk-width-1-1" data-uk-form-select>
+				<i class="uk-icon-file-text-o"></i>&nbsp;
+				<span></span>
+				${create.select(['am-block-file'], window.AutomadBlockTemplates.snippets, this.data.file).outerHTML}
+			</div>
+		`;
+
+		this.inputs = {
+			file: this.wrapper.querySelector('.am-block-file')
+		}
 
 	}
 
@@ -79,7 +80,7 @@ class AutomadSnippet {
 	save() {
 
 		return {
-			file: this.inputs.file.innerHTML
+			file: this.inputs.file.value
 		};
 
 	}

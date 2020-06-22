@@ -65,6 +65,7 @@ class BlockSnippetArrays {
 				json_encode(
 					array(
 						'pagelist' => GUI\FileSystem::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/')
+						'snippets' => GUI\FileSystem::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/')
 					), 
 					JSON_UNESCAPED_SLASHES
 				) .
