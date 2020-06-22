@@ -60,14 +60,18 @@ class AutomadMail {
 			textButton: create.editable(['cdx-input'], '', this.data.textButton)
 		};
 
-		var icon = document.createElement('div');
+		var icon = document.createElement('div'),
+			title = document.createElement('div');
 
 		icon.innerHTML = AutomadMail.toolbox.icon;
 		icon.classList.add('am-block-icon');
+		title.innerHTML = AutomadMail.toolbox.title;
+		title.classList.add('uk-text-center');
 		
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.appendChild(icon);
+		this.wrapper.appendChild(title);
 		this.wrapper.appendChild(create.label('Your Email Address'));
 		this.wrapper.appendChild(this.inputs.to);
 		this.wrapper.appendChild(create.label('Success Message'));

@@ -101,6 +101,15 @@
 							class: List,
 							inlineToolbar: true,
 						},
+						table: {
+							class: Table,
+							inlineToolbar: true
+						},
+						quote: {
+							class: Quote,
+							inlineToolbar: true
+						},
+						delimiter: Delimiter,
 						image: AutomadImage,
 						gallery: AutomadGallery,
 						slider: AutomadSlider,
@@ -108,20 +117,11 @@
 							class: AutomadButtons,
 							inlineToolbar: ['italic', 'bold'] 
 						},
-						quote: {
-							class: Quote,
-							inlineToolbar: true
-						},
-						table: {
-							class: Table,
-							inlineToolbar: true
-						},
 						pagelist: AutomadPagelist,
 						filelist: AutomadFilelist,
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
-						delimiter: Delimiter,
 						snippet: AutomadSnippet,
 						embed: {
 							class: Embed,

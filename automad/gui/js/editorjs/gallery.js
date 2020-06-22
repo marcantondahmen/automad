@@ -54,14 +54,18 @@ class AutomadGallery {
 			width: create.editable(['cdx-input'], 'Image width in px', this.data.width)
 		};
 		
-		var icon = document.createElement('div');
+		var icon = document.createElement('div'),
+			title = document.createElement('div');
 		
 		icon.innerHTML = AutomadGallery.toolbox.icon;
 		icon.classList.add('am-block-icon');
+		title.innerHTML = AutomadGallery.toolbox.title;
+		title.classList.add('uk-text-center');
 	
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.appendChild(icon);
+		this.wrapper.appendChild(title);
 		this.wrapper.appendChild(create.label('Pattern'));
 		this.wrapper.appendChild(this.inputs.globs);
 		this.wrapper.appendChild(create.label('Image Width'));

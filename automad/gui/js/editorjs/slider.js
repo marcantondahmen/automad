@@ -58,12 +58,15 @@ class AutomadSlider {
 		};
 
 		var icon = document.createElement('div'),
+			title = document.createElement('div'),
 			controls = document.createElement('ul'),
 			width = document.createElement('li'),
 			height = document.createElement('li');
 
 		icon.innerHTML = AutomadSlider.toolbox.icon;
 		icon.classList.add('am-block-icon');
+		title.innerHTML = AutomadSlider.toolbox.title;
+		title.classList.add('uk-text-center');
 		controls.classList.add('uk-grid', 'uk-grid-width-medium-1-2');
 		width.appendChild(create.label('Image Width'));
 		width.appendChild(this.inputs.width);
@@ -75,6 +78,7 @@ class AutomadSlider {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.appendChild(icon);
+		this.wrapper.appendChild(title);
 		this.wrapper.appendChild(create.label('Pattern'));
 		this.wrapper.appendChild(this.inputs.globs);
 		this.wrapper.appendChild(controls);

@@ -57,11 +57,12 @@ class AutomadPagelist {
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadPagelist.toolbox.icon}</div>
+			<div class="uk-text-center">${AutomadPagelist.toolbox.title}</div>
 			<ul class="uk-grid">
 				<li class="uk-width-medium-1-1">
 					${create.label('Snippet File').outerHTML}
-					<div class="uk-form-select uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-left" data-uk-form-select>
-						<i class="uk-icon-file-text"></i>&nbsp;
+					<div class="uk-form-select uk-button uk-button-success uk-button-large uk-width-1-1" data-uk-form-select>
+						<i class="uk-icon-file-text-o"></i>&nbsp;
 						<span></span>
 						${create.select(
 							['am-block-file'], 
@@ -82,10 +83,9 @@ class AutomadPagelist {
 					${create.label('Filter by Tag').outerHTML}
 					${create.editable(['cdx-input', 'am-block-filter'], '', this.data.filter).outerHTML}
 				</li>
-
 				<li class="uk-width-medium-1-3">
-					${create.label('Filter by Template Regex').outerHTML}
-					${create.editable(['cdx-input', 'am-block-template'], '', this.data.template).outerHTML}
+					${create.label('Filter by Template').outerHTML}
+					${create.editable(['cdx-input', 'am-block-template'], 'post|project', this.data.template).outerHTML}
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Number of Pages').outerHTML}
@@ -93,7 +93,7 @@ class AutomadPagelist {
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Sort by Variable').outerHTML}
-					${create.editable(['cdx-input', 'am-block-sort-key'], '', this.data.sortKey).outerHTML}
+					${create.editable(['cdx-input', 'am-block-sort-key'], ':path', this.data.sortKey).outerHTML}
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Sort Order').outerHTML}
@@ -118,7 +118,7 @@ class AutomadPagelist {
 
 		return {
 			title: 'Pagelist',
-			icon: 'P'
+			icon: '<svg width="16px" height="18px" viewBox="0 0 16 18"><path d="M7,3C4.79,3,3,4.79,3,7v7c0,2.21,1.79,4,4,4h5c2.21,0,4-1.79,4-4V7c0-2.21-1.79-4-4-4 M12,5c1.1,0,2,0.9,2,2v7 c0,1.1-0.9,2-2,2H7c-1.1,0-2-0.9-2-2V7c0-1.1,0.9-2,2-2"/><path d="M2,11V6V4c0-1.1,0.9-2,2-2h1h4h3.45C11.75,0.81,10.48,0,9,0H4C1.79,0,0,1.79,0,4v7c0,1.48,0.81,2.75,2,3.45V11z"/><path d="M12,9H7C6.72,9,6.5,8.78,6.5,8.5S6.72,8,7,8h5c0.28,0,0.5,0.22,0.5,0.5S12.28,9,12,9z"/><path d="M12,11H7c-0.28,0-0.5-0.22-0.5-0.5S6.72,10,7,10h5c0.28,0,0.5,0.22,0.5,0.5S12.28,11,12,11z"/><path d="M12,13H7c-0.28,0-0.5-0.22-0.5-0.5S6.72,12,7,12h5c0.28,0,0.5,0.22,0.5,0.5S12.28,13,12,13z"/></svg>'
 		};
 
 	}
