@@ -119,7 +119,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					title="<?php Text::e('btn_inpage_edit'); ?>" 
 					data-uk-tooltip="pos:'bottom'"
 					>
-						<i class="uk-icon-share"></i>&nbsp;
+						<i class="uk-icon-link"></i>&nbsp;
 						<?php 
 						
 						if ($url == '/') {

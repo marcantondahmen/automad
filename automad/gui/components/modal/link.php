@@ -93,7 +93,7 @@ class Link {
 								</ul>
 							</script>
 						</div>	
-						<button type="button" class="uk-button uk-button-large uk-text-nowrap">
+						<button type="button" class="uk-button uk-text-nowrap">
 							<i class="uk-icon-link"></i>&nbsp;
 							$Text->btn_link
 						</button>

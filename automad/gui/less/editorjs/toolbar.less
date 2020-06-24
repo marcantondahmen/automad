@@ -59,7 +59,7 @@
 		&__plus {
 
 			@media (min-width: @am-blocks-breakpoint-small) {
-				left: @am-block-content-padding - 30px;
+				left: 6px;
 			}
 			
 		}
@@ -77,7 +77,7 @@
 				max-width: @am-block-max-width;
 
 				& .ce-toolbox {
-					margin-left: @am-block-content-padding + @am-block-padding - 1;
+					margin-left: 46px;
 				}
 
 			}
@@ -86,8 +86,8 @@
 
 		&__actions {
 
-			top: 7px;
-			right: 7px;
+			top: @am-block-padding + 1;
+			right: @am-block-padding;
 			
 			@media (max-width: @am-blocks-breakpoint-small-max) {	
 				top: 17px;
@@ -98,9 +98,11 @@
 
 		&__settings-btn {
 
+			height: 20px;
+			width: 20px;
 			color: @button-success-color;
 			background-color: @button-success-background;
-			border-radius: 3px;
+			border-radius: 5px;
 			.transition(color 0.2s, background-color 0.2s;);
 
 			&:hover {

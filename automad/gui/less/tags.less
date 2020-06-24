@@ -37,7 +37,7 @@
 @am-tag-height: 	@button-small-height;
 @am-tag-padding: 	0 10px;
 @am-tag-radius:  	@am-tag-height;
-@am-tag-margin: 	4px;
+@am-tag-margin: 	5px;
 
 [data-am-tags] {
 	box-sizing: border-box;
@@ -117,6 +117,8 @@
 		font-size: @am-tag-font-size;
 		line-height: @am-tag-height - (2 * @am-border-width);
 		border-radius: @am-tag-radius;
+		border-width: 1px;
+		border-color: #D9D9D9;
 		
 		&:not(:focus) {
 			border-style: dashed;

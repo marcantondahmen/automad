@@ -93,8 +93,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 				<?php } ?>
 				<?php echo Components\Form\CheckboxHidden::render('subpage[hidden]'); ?>
 			</form>
+			<hr>
 			<div class="uk-form-stacked">
-				<label class="uk-form-label">
+				<label class="uk-form-label uk-margin-top-remove">
 					<?php Text::e('page_add_location'); ?>
 				</label>
 				<div data-am-tree="#am-add-page-input">

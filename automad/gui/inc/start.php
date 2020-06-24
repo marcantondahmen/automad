@@ -76,7 +76,7 @@ $this->element('header');
 		<?php if (!AM_HEADLESS_ENABLED) { ?>
 			<p>
 				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large">
-					<i class="uk-icon-share"></i>&nbsp;
+					<i class="uk-icon-pencil"></i>&nbsp;
 					<?php Text::e('btn_inpage_edit'); ?>
 				</a>
 			</p>
@@ -122,27 +122,26 @@ $this->element('header');
 					<?php echo getenv('SERVER_NAME'); ?>
 					<a class="uk-modal-close uk-close"></a>
 				</div>
-				<div class="uk-panel uk-panel-box uk-margin-small-bottom">
-					<p>
-						Automad Version:<br />
-						<?php echo AM_VERSION; ?>
-					</p>
-					<p>
-						Operating System:<br />
-						<?php echo php_uname('s') . ' / ' . php_uname('r'); ?>
-					</p>
-					<p>
-						Server Software:<br />
-						<?php echo getenv('SERVER_SOFTWARE'); ?>
-					</p>
-					<p>
-						PHP:<br /> 
-						<?php echo phpversion(); ?> / <?php echo php_sapi_name(); ?>
-					</p>
-				</div>
-				<span class="uk-badge uk-badge-success uk-badge-notification">
+				<p>
+					Automad Version:<br /> 
+					<?php echo AM_VERSION; ?>
+				</p>
+				<p>
+					Operating System:<br />
+					<?php echo php_uname('s') . ' / ' . php_uname('r'); ?>
+				</p>
+				<p>
+					Server Software:<br />
+					<?php echo getenv('SERVER_SOFTWARE'); ?>
+				</p>
+				<p>
+					PHP:<br /> 
+					<?php echo phpversion(); ?> / <?php echo php_sapi_name(); ?>
+				</p>
+				<hr>
+				<div class="uk-alert uk-margin-top-remove">
 					<?php echo Text::get('dashboard_memory') . ' ' . (memory_get_peak_usage(true) / 1048576) . 'M  (' . ini_get('memory_limit') . ')'; ?>
-				</span>
+				</div>
 				<div class="uk-modal-footer uk-text-right">
 					<button type="button" class="uk-modal-close uk-button">
 						<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>

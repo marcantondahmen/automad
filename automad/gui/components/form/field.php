@@ -98,7 +98,7 @@ HTML;
 
 		return <<< HTML
 				<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
-					<button type="button" class="uk-button uk-button-large">
+					<button type="button" class="uk-button">
 						<i class="uk-icon-folder-open"></i>
 					</button>
 					<input type="text" class="uk-form-controls uk-width-1-1" $attr />
@@ -119,7 +119,7 @@ HTML;
 
 		return <<< HTML
 				<div class="am-form-icon-button-input uk-flex" data-am-link-field>
-					<button type="button" class="uk-button uk-button-large">
+					<button type="button" class="uk-button">
 						<i class="uk-icon-link"></i>
 					</button>
 					<input type="text" class="uk-form-controls uk-width-1-1" $attr />

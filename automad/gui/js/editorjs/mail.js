@@ -72,6 +72,7 @@ class AutomadMail {
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.appendChild(icon);
 		this.wrapper.appendChild(title);
+		this.wrapper.appendChild(document.createElement('hr'));
 		this.wrapper.appendChild(create.label('Your Email Address'));
 		this.wrapper.appendChild(this.inputs.to);
 		this.wrapper.appendChild(create.label('Success Message'));

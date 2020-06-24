@@ -71,8 +71,8 @@ if ($packages = PackageManager::getPackages()) {
 		class="uk-button uk-hidden-small" 
 		target="_blank"
 		>
-			<i class="uk-icon-share"></i>&nbsp;
-			<?php Text::e('packages_browse'); ?>
+			<?php Text::e('packages_browse'); ?>&nbsp;
+			<i class="uk-icon-arrow-right"></i>
 		</a>
 
 		<ul 
@@ -90,7 +90,7 @@ if ($packages = PackageManager::getPackages()) {
 					class="uk-display-block"
 					target="_blank"
 					>
-						<i class="uk-icon-file-code-o uk-icon-medium"></i>
+						<i class="uk-icon-file-zip-o uk-icon-medium"></i>
 						<div class="uk-panel-title uk-margin-small-top uk-padding-top-remove">
 								<?php echo $package->name; ?>
 						</div>

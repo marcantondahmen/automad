@@ -79,7 +79,7 @@ ob_start();
 		name="imageUrl"
 		placeholder="URL"
 		>
-		<button type="button" class="uk-button uk-button-large uk-text-nowrap">
+		<button type="button" class="uk-button uk-text-nowrap">
 			<i class="uk-icon-link"></i>&nbsp;
 			<?php Text::e('btn_link'); ?>
 		</button>

@@ -72,7 +72,7 @@ class Readme {
 			return <<< HTML
 					<div id="$id" class="uk-modal">
 						<div class="uk-modal-dialog uk-modal-dialog-large">
-							<div class="uk-modal-header uk-margin-remove">
+							<div class="uk-modal-header">
 								Readme
 								<a href="#" class="uk-modal-close uk-close"></a>
 							</div>

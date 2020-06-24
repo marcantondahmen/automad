@@ -88,8 +88,8 @@
 	
 		box-sizing: border-box;
 		padding: @form-padding;
-		padding-top: 6px;
-		padding-bottom: 6px;
+		padding-top: 7px;
+		padding-bottom: 7px;
 		min-height: @form-height;
 		line-height: @base-body-line-height;
 		background-color: @form-background;
@@ -200,9 +200,8 @@
 
 	}
 
-	& .uk-panel-box {
-		background-color: @am-bg;
-		border: @am-border-width solid @am-border-color;
+	& .uk-panel-box {		
+		border-radius: 12px;
 	}
 
 	& .am-block-label {
@@ -210,13 +209,13 @@
 		display: inline-block;
 		margin-top: @utility-margin-small;
 		margin-bottom: @form-stacked-margin-bottom;
-		padding: 4px 6px;
+		padding: 2px 0;
 		vertical-align: top;
 		font-size: @text-small-font-size;
 		font-weight: @form-stacked-font-weight;
 		line-height: @text-small-font-size;
-		color: @am-text;
-		background-color: @button-background;
+		color: @am-muted;
+		background-color: transparent;
 		border-radius: @am-radius-small;
 
 		& + *,
@@ -232,8 +231,10 @@
 		margin-bottom: 8px;
 
 		& svg {
-			height: 32px;
-			width: 100%;
+			display: block;
+			height: 30px;
+			width: 30px;
+			margin: 0 auto;
 			fill: @am-text;
 		}
 

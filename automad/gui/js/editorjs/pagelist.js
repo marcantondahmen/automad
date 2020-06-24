@@ -58,11 +58,11 @@ class AutomadPagelist {
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadPagelist.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadPagelist.toolbox.title}</div>
+			<hr>
 			<ul class="uk-grid">
 				<li class="uk-width-medium-1-1">
-					${create.label('Snippet File').outerHTML}
-					<div class="uk-form-select uk-button uk-button-success uk-button-large uk-width-1-1" data-uk-form-select>
-						<i class="uk-icon-file-text-o"></i>&nbsp;
+					<div class="uk-form-select uk-button uk-button-large uk-button-primary uk-text-left uk-width-1-1" data-uk-form-select>
+						<i class="uk-icon-file"></i>&nbsp;
 						<span></span>
 						${create.select(
 							['am-block-file'], 

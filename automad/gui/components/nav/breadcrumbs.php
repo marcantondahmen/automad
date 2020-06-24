@@ -67,7 +67,7 @@ class Breadcrumbs {
 		$pages = $Selection->getSelection(false);
 		
 		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill uk-margin-top">';
-		$html .= '<li class="uk-hidden-small"><i class="uk-icon-folder-open"></i></li>';
+		$html .= '<li class="uk-hidden-small"><i class="uk-icon-folder-open-o"></i></li>';
 		
 		$i = count($pages);
 		

@@ -55,6 +55,7 @@ class AutomadButtons {
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadButtons.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadButtons.toolbox.title}</div>
+			<hr>
 			<ul class="uk-grid uk-grid-width-medium-1-2">
 				<li>
 					${create.label('Primary Button Text').outerHTML}

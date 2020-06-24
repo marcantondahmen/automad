@@ -81,7 +81,7 @@ $this->element('header');
 				$dropdown = array(
 					// Edit data inpage.
 					'<a href="' . AM_BASE_INDEX . $url . '">' . 
-						'<i class="uk-icon-share uk-icon-justify"></i>&nbsp;&nbsp;' . 
+						'<i class="uk-icon-bookmark-o uk-icon-justify"></i>&nbsp;&nbsp;' . 
 						Text::get('btn_inpage_edit') . 
 					'</a>', 
 					// Duplicate Page.

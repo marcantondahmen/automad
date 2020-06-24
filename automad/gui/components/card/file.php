@@ -87,7 +87,7 @@ HTML;
 		return <<< HTML
 				<a 
 				href="#am-edit-file-info-modal" 
-				class="am-panel-cover-4by3 uk-panel-teaser uk-display-block" 
+				class="am-cover-4by3 uk-panel-teaser uk-display-block" 
 				data-uk-modal
 				>
 					$preview

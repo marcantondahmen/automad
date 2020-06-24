@@ -163,7 +163,7 @@ class Page {
 				<div class="uk-panel uk-panel-box">
 					<a 
 					href="$link" 
-					class="am-panel-cover-4by3 uk-panel-teaser"
+					class="am-cover-4by3 uk-panel-teaser"
 					>
 						$preview
 					</a>
@@ -174,13 +174,13 @@ class Page {
 							<a 
 							href="$link" 
 							title="$Text->btn_edit_page" 
-							class="uk-icon-button uk-icon-pencil" 
+							class="uk-icon-button uk-icon-file-o" 
 							data-uk-tooltip
 							></a>
 							<a 
 							href="$pageUrl" 
 							title="$Text->btn_inpage_edit" 
-							class="uk-icon-button uk-icon-share" 
+							class="uk-icon-button uk-icon-bookmark-o" 
 							data-uk-tooltip
 							></a>
 						</span>

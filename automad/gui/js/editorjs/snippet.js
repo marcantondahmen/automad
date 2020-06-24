@@ -49,9 +49,9 @@ class AutomadSnippet {
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadSnippet.toolbox.title}</div>
-			${create.label('Snippet File').outerHTML}
-			<div class="uk-form-select uk-button uk-button-success uk-button-large uk-width-1-1" data-uk-form-select>
-				<i class="uk-icon-file-text-o"></i>&nbsp;
+			<hr>
+			<div class="uk-form-select uk-button uk-button-large uk-button-primary uk-text-left uk-width-1-1" data-uk-form-select>
+				<i class="uk-icon-file"></i>&nbsp;
 				<span></span>
 				${create.select(['am-block-file'], window.AutomadBlockTemplates.snippets, this.data.file).outerHTML}
 			</div>

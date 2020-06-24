@@ -165,7 +165,7 @@ if ($data = Core\Request::post('data')) {
 						<li>
 							<?php echo Components\Modal\Readme::render($id . '-modal', $Theme->readme) ?>			
 							<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
-								<div class="am-panel-cover-4by3 uk-panel-teaser">
+								<div class="am-cover-4by3 uk-panel-teaser">
 									<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
 										<?php echo $icon; ?>	
 									<?php if ($Theme->readme) { ?></a><?php } ?>
@@ -223,7 +223,7 @@ if ($data = Core\Request::post('data')) {
 					</ul>	
 					<a 
 					href="?context=packages" 
-					class="uk-button uk-button-success uk-margin-top"
+					class="uk-button uk-button-large uk-button-success uk-margin-top"
 					>
 						<i class="uk-icon-download"></i>&nbsp;
 						<?php Text::e('btn_get_themes'); ?>

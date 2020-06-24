@@ -36,8 +36,14 @@
 .uk-close {
 	
 	&,
+	&:focus {
+		color: inherit;
+		opacity: 0.2;
+	}
+	
 	&:hover {
 		color: inherit;
+		opacity: 0.4;
 	}
 	
 	&:after {
@@ -47,11 +53,11 @@
 	.uk-modal-dialog > &,
 	.uk-modal-header > & {
 		
-		line-height: 16px;
-		font-size: 16px;
+		line-height: 14px;
+		font-size: 14px;
 		
 		&:after {
-			content: '\f057';
+			content: '\f00d';
 		}
 		
 	}

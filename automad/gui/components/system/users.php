@@ -67,7 +67,7 @@ class Users {
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
-				class="uk-button uk-button-large uk-button-success" 
+				class="uk-button uk-button-large uk-button-primary" 
 				data-uk-modal 
 				data-am-status="users"
 				></a>
@@ -88,7 +88,7 @@ class Users {
 								<span class="uk-hidden-small"><i class="uk-icon-close"></i>&nbsp;</span>
 								$Text->btn_close
 							</button>
-							<button type="button" class="uk-button uk-button-danger" data-am-submit="users">
+							<button type="button" class="uk-button uk-button-primary" data-am-submit="users">
 								<span class="uk-hidden-small"><i class="uk-icon-user-times"></i>&nbsp;</span>
 								$Text->btn_remove_selected
 							</button>

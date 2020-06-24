@@ -50,9 +50,9 @@ class AutomadFilelist {
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadFilelist.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadFilelist.toolbox.title}</div>
-			${create.label('Snippet File').outerHTML}
-			<div class="uk-form-select uk-button uk-button-success uk-button-large uk-width-1-1" data-uk-form-select>
-				<i class="uk-icon-file-text-o"></i>&nbsp;
+			<hr>
+			<div class="uk-form-select uk-button uk-button-large uk-button-primary uk-text-left uk-width-1-1" data-uk-form-select>
+				<i class="uk-icon-file"></i>&nbsp;
 				<span></span>
 				${create.select(
 					['am-block-file'], 
@@ -60,7 +60,7 @@ class AutomadFilelist {
 					this.data.file
 				).outerHTML}
 			</div>
-			${create.label('Glob Patterns &mdash; Separated by Comma').outerHTML}
+			${create.label('Glob Patterns - Separated by Comma').outerHTML}
 			${create.editable(['cdx-input', 'am-block-glob'], '*.pdf, *.zip', this.data.glob).outerHTML}
 		`;
 

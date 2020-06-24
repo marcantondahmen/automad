@@ -73,7 +73,7 @@ class SelectImage {
 						$title
 						&nbsp;<span class="uk-badge">$count</span>
 					</p>
-					<div class="uk-panel uk-panel-box uk-flex uk-flex-wrap uk-flex-wrap-top">
+					<div class="am-select-image-group uk-flex uk-flex-wrap uk-flex-wrap-top">
 HTML;
 			
 			foreach ($files as $file) {
@@ -89,7 +89,7 @@ HTML;
 
 				$html .= <<< HTML
 				 		 <label class="uk-width-1-3 uk-width-medium-1-5">
-							<div class="am-panel-cover-1by1">
+							<div class="am-cover-1by1">
 								<img src="$imageUrl" title="$value" data-uk-tooltip>
 							</div>
 						 	<input type="hidden" name="imageUrl" value="$value">

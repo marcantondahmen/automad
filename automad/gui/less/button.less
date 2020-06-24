@@ -33,10 +33,11 @@
  */
 
 
+@am-icon-button-size:				32px;
 @am-icon-button-margin-left: 		10px;
 
 @button-color:						@am-text;
-@button-background:					#F2F2F2;
+@button-background:					#F7F7F7;
 @button-hover-color:				@button-color;
 @button-hover-background:			darken(@button-background, 3%);
 @button-active-color:				@button-hover-color;
@@ -71,20 +72,20 @@
 @button-small-font-size: 			12px;
 @button-large-font-size: 			16px;
 
-@button-height:						30px;
+@button-height:						32px;
 @button-mini-height:				19px;
 @button-small-height:				24px;
-@button-large-height:				36px;
+@button-large-height:				38px;
 
 @button-line-height: 				@button-height;
 @button-mini-line-height: 			@button-mini-height;
 @button-small-line-height: 			@button-small-height;
 @button-large-line-height: 			@button-large-height;
 
-@button-padding-horizontal:			10px;
+@button-padding-horizontal:			11px;
 @button-mini-padding-horizontal:	6px;
 @button-small-padding-horizontal:	8px;
-@button-large-padding-horizontal:	12px;
+@button-large-padding-horizontal:	13px;
 
 
 .hook-button() {
@@ -143,6 +144,15 @@
 	
 }
 
+.hook-button-primary() {
+	
+	& .uk-badge {
+		color: @button-primary-background;
+		background-color: @button-primary-color;
+	}
+	
+}
+
 .am-icon-buttons {
 	
 	margin-left: -@am-icon-button-margin-left;
@@ -152,13 +162,25 @@
 	}
 	
 	& .uk-button {
-		min-width: @button-height;
-		max-width: @button-height;
+
+		box-sizing: border-box;
+		width: @am-icon-button-size;
+		min-width: @am-icon-button-size;
+		max-width: @am-icon-button-size;
+		height: @am-icon-button-size;
+		min-height: @am-icon-button-size;
+		max-height: @am-icon-button-size;
 		text-align: center;
 		margin-left: @am-icon-button-margin-left;
-		padding-left: 0;
-		padding-right: 0;
-		border-radius: @button-height / 2;
+		line-height: 14px !important;
+		padding: ((@am-icon-button-size - 14) / 2) 0 !important;
+		border-radius: @am-icon-button-size / 2;
+
+		& i {
+			max-height: 14px !important;
+			line-height: 14px !important;
+		}
+
 	}
 	
 }

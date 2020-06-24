@@ -66,6 +66,7 @@ class AutomadGallery {
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.appendChild(icon);
 		this.wrapper.appendChild(title);
+		this.wrapper.appendChild(document.createElement('hr'));
 		this.wrapper.appendChild(create.label('Pattern'));
 		this.wrapper.appendChild(this.inputs.globs);
 		this.wrapper.appendChild(create.label('Image Width'));
