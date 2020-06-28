@@ -211,25 +211,21 @@
 		border: @am-hairline;
 	}
 
-	& .am-block-label {
+	& .uk-form-label {
 
 		display: inline-block;
-		margin-top: @utility-margin-small;
+		margin-top: @utility-margin-small !important;
 		margin-bottom: @form-stacked-margin-bottom;
-		padding: 2px 0;
-		vertical-align: top;
-		font-size: @text-small-font-size;
-		font-weight: @form-stacked-font-weight;
-		line-height: @text-small-font-size;
-		color: @am-muted;
-		background-color: transparent;
-		border-radius: @am-radius-small;
-
+		
 		& + *,
 		& + *:empty {
 			margin-top: 0 !important;
 		}
 
+	}
+
+	& hr + .uk-form-label {
+		margin-top: 0 !important;
 	}
 
 	& .am-block-icon {
