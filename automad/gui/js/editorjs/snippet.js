@@ -50,8 +50,8 @@ class AutomadSnippet {
 			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadSnippet.toolbox.title}</div>
 			<hr>
-			<div class="uk-form-select uk-button uk-button-large uk-button-primary uk-text-left uk-width-1-1" data-uk-form-select>
-				<i class="uk-icon-file"></i>&nbsp;
+			<div class="uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
+				<i class="uk-icon-file-o"></i>&nbsp;
 				<span></span>
 				${create.select(['am-block-file'], window.AutomadBlockTemplates.snippets, this.data.file).outerHTML}
 			</div>

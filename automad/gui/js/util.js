@@ -86,13 +86,20 @@
 				options.forEach(function(value) {
 
 					let html,
+						text,
 						selectedAttr = '';
 
 					if (value == selected) {
 						selectedAttr = ' selected';
 					}
+					
+					text = 	value
+							.replace(/^[\/\\\\]/g, '')
+							.replace(/[\/\\\\]/g, ' > ')
+							.replace(/_/g, ' ')
+							.replace('.php', '');
 
-					html = `<option value="${value}"${selectedAttr}>${value}</option>`;
+					html = `<option value="${value}"${selectedAttr}>${text}</option>`;
 					optionMarkup.push(html);
 
 				});
