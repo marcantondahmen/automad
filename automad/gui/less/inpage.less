@@ -48,7 +48,7 @@
 		
 		display: inline-block;
 		position: fixed;
-		top: ~"calc(100% - 55px)";
+		top: ~"calc(100% - 65px)";
 		left: ~"calc(50% - 150px)";
 		width: 300px;
 		text-align: center;
@@ -70,9 +70,9 @@
 	&-menu-button {
 		
 		&:extend(.uk-button all, .uk-button-large all);
-		line-height: 40px;
 		border-radius: 0;
 		background-color: @am-bg;
+		border-color: transparent !important;
 		
 		&:hover,
 		&:focus {
@@ -101,12 +101,11 @@
 	
 	& > &-edit-button {
 
-		&:extend(.uk-button all, .uk-button-small all, .uk-button-success all);
+		&:extend(.uk-button all, .uk-button-primary all, .uk-button-small all);
 		border: none !important;
 		margin-bottom: 2px;
 		vertical-align: text-bottom;
-		letter-spacing: 0;
-		.shadow;
+		letter-spacing: 0 !important;
 
 		& > i {
 			color: inherit;

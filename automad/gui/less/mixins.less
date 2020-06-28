@@ -37,6 +37,15 @@
 	box-shadow: 0 1px 4px rgba(0,0,0,0.03), 0 2px 20px rgba(0,0,0,0.06), 0 4px 50px rgba(0,0,0,0.06);	
 }
 
+.shadow-panel(@active: rgba(0,0,0,0)) {
+	box-shadow: 0 2px 9px rgba(0,0,0,0.03) , 0 3px 25px rgba(0,0,0,0.07), 0 0 0 3px @active;
+}
+
+.form-focus() {
+	border-color: @am-success;
+	box-shadow: 0 2px 15px fade(@am-success, 20%);
+}
+
 .fade-out(@duration: 0.3s) {
 	visibility: hidden;
   	opacity: 0;

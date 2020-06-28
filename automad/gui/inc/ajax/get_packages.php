@@ -71,8 +71,8 @@ if ($packages = PackageManager::getPackages()) {
 		class="uk-button uk-hidden-small" 
 		target="_blank"
 		>
-			<?php Text::e('packages_browse'); ?>&nbsp;
-			<i class="uk-icon-arrow-right"></i>
+			<i class="uk-icon-folder-open-o"></i>&nbsp;
+			<?php Text::e('packages_browse'); ?>
 		</a>
 
 		<ul 
@@ -128,7 +128,7 @@ if ($packages = PackageManager::getPackages()) {
 								<form class="uk-display-inline-block" data-am-handler="install_package">
 									<input type="hidden" name="package" value="<?php echo $package->name; ?>">
 									<button 
-									class="uk-button uk-button-small"
+									class="uk-button uk-button-primary uk-button-small"
 									data-uk-modal="{target:'#am-modal-install-package-progress',keyboard:false,bgclose:false}"
 									>
 										<i class="uk-icon-download"></i>&nbsp;	

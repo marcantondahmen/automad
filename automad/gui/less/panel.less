@@ -40,9 +40,9 @@
 @panel-box-padding:				10px;
 @panel-box-color:				@am-text;
 @panel-box-title-color:			@am-text;
-@panel-box-background:			@button-background;
-@panel-box-badge-top:          	8px;
-@panel-box-badge-right:			5px;
+@panel-box-background:			@am-bg;
+@panel-box-badge-top:          	10px;
+@panel-box-badge-right:			8px;
 @panel-teaser-margin-bottom:	0;
 
 
@@ -50,13 +50,14 @@
 	
 	border-radius: @am-radius;
 	cursor: default;
-	
+	.shadow-panel;
+
 	.uk-grid & {
 		margin: 0;
 	}
 
 	&.uk-active {
-		box-shadow: 0 0 0 3px @am-success;
+		.shadow-panel(@am-success);
 	}
 
 	& .uk-panel-teaser {
@@ -80,17 +81,6 @@
 
 	}
 	
-	& .uk-button:not(.uk-button-success):not(.uk-button-danger):not(.uk-button-primary),
-	& .uk-icon-button {
-
-		background-color: darken(@panel-box-background, 4%);
-
-		&:hover {
-			background-color: darken(@panel-box-background, 6%);
-		}
-
-	}
-
 	& p {
 		margin: 5px 0;
 	}

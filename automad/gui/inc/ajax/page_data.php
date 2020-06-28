@@ -115,11 +115,11 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				<?php if (!AM_HEADLESS_ENABLED) { ?>
 					<a 
 					href="<?php echo AM_BASE_INDEX . $url; ?>" 
-					class="uk-button uk-button-small uk-margin-small-top uk-text-truncate uk-display-inline-block" 
+					class="uk-button uk-button-link uk-button-small uk-text-truncate uk-display-inline-block" 
 					title="<?php Text::e('btn_inpage_edit'); ?>" 
 					data-uk-tooltip="pos:'bottom'"
 					>
-						<i class="uk-icon-link"></i>&nbsp;
+						<i class="uk-icon-bookmark uk-icon-justify"></i>&nbsp;
 						<?php 
 						
 						if ($url == '/') {

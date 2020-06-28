@@ -88,8 +88,8 @@
 	
 		box-sizing: border-box;
 		padding: @form-padding;
-		padding-top: 7px;
-		padding-bottom: 7px;
+		padding-top: 9px;
+		padding-bottom: 8px;
 		min-height: @form-height;
 		line-height: @base-body-line-height;
 		background-color: @form-background;
@@ -111,9 +111,14 @@
 		}
 		
 		&:focus {
-			border-color: @am-success;
+			.form-focus;
 		}
 
+	}
+
+	& select.cdx-input {
+		padding-top: 8px;
+		padding-bottom: 9px;
 	}
 
 	& .ce-code {
@@ -202,6 +207,8 @@
 
 	& .uk-panel-box {		
 		border-radius: 12px;
+		box-shadow: none;
+		border: @am-hairline;
 	}
 
 	& .am-block-label {

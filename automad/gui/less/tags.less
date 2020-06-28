@@ -34,10 +34,10 @@
 
 
 @am-tag-font-size: 	@button-small-font-size;
-@am-tag-height: 	@button-small-height;
+@am-tag-height: 	24px;
 @am-tag-padding: 	0 10px;
 @am-tag-radius:  	@am-tag-height;
-@am-tag-margin: 	5px;
+@am-tag-margin: 	8px;
 
 [data-am-tags] {
 	box-sizing: border-box;
@@ -80,7 +80,7 @@
 					padding: 0 3px;
 					cursor: pointer;
 					font-size: 14px;
-					line-height: inherit;
+					line-height: @am-tag-height;
 					vertical-align: top;
 					
 					&:hover {
@@ -118,10 +118,11 @@
 		line-height: @am-tag-height - (2 * @am-border-width);
 		border-radius: @am-tag-radius;
 		border-width: 1px;
-		border-color: #D9D9D9;
+		border-color: @am-success;
 		
 		&:not(:focus) {
 			border-style: dashed;
+			border-color: #D9D9D9;
 		}
 		
 	}

@@ -99,7 +99,7 @@ HTML;
 		return <<< HTML
 				<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
 					<button type="button" class="uk-button">
-						<i class="uk-icon-folder-open"></i>
+						<i class="uk-icon-folder-open-o"></i>
 					</button>
 					<input type="text" class="uk-form-controls uk-width-1-1" $attr />
 				</div>

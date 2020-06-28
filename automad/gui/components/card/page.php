@@ -174,7 +174,7 @@ class Page {
 							<a 
 							href="$link" 
 							title="$Text->btn_edit_page" 
-							class="uk-icon-button uk-icon-file-o" 
+							class="uk-icon-button uk-icon-sliders" 
 							data-uk-tooltip
 							></a>
 							<a 

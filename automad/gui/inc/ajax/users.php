@@ -68,7 +68,7 @@ foreach (Accounts::get() as $user => $hash) {
 		<li>
 			<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
 				<div class="uk-margin-small-bottom">
-					<i class="uk-icon-smile-o uk-icon-large"></i>
+					<i class="uk-icon-user uk-icon-medium"></i>
 				</div>
 				<div class="uk-margin-small-bottom">
 					<?php echo ucwords($user); ?>

@@ -73,7 +73,7 @@
 			var	u = Automad.upload,
 				util = Automad.util,
 				da = u.dataAttr,
-				iconDropzone = '<i class="uk-icon-mouse-pointer"></i>&nbsp;&nbsp;',
+				iconDropzone = '<i class="uk-icon-arrows"></i>&nbsp;&nbsp;',
 				iconBrowse = '<i class="uk-icon-folder-open"></i>&nbsp;&nbsp;';
 			
 			u.$modal = $(u.selectors.modal);

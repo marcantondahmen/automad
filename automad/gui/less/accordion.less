@@ -55,15 +55,24 @@
 	
 	position: relative;
 	margin-top: @utility-margin;
+	margin-left: 14px;
+	padding: 0 8px;
 	color: @am-text;
 	font-weight: @am-nav-font-weight;
-	line-height: 1.6;
+	line-height: @button-height;
+	border-radius: @am-radius;
+	.transition(background-color 0.2s;);
+
+	&:hover {
+		background-color: @button-hover-background;
+	}
     
 	&:before {
 		content: '\f054';
-		position: relative;
-		width: 10px;
-		top: -0.1em;
+		position: absolute;
+		width: 12px;
+		top: 12px;
+		left: -14px;
 		&:extend([class*='uk-icon-'] all);
 		text-align: center;
 		font-size: 0.8em;
@@ -72,7 +81,7 @@
 	
 	&.uk-active:before {
 		content: '\f078';
-		top: -0.2em;
+		top: 10px;
 	}
 
 }

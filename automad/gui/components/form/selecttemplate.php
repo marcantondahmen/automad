@@ -73,7 +73,7 @@ class SelectTemplate {
 		$html = <<< HTML
 				<div 
 				class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" 
-				data-uk-form-select="{activeClass:''}"
+				data-uk-form-select
 				> 
 					<span></span>&nbsp;
 					<span class="uk-float-right">

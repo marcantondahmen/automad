@@ -35,8 +35,8 @@
 
 @form-height:				@button-large-height;
 @form-large-height: 		44px;
-@form-padding:				5px 11px;
-@form-large-padding: 		6px 11px;
+@form-padding:				5px 14px;
+@form-large-padding: 		6px 14px;
 @form-border:				@am-border-color;
 @form-border-width:			@am-border-width;
 @form-color:				@am-text;
@@ -72,6 +72,10 @@
 	-webkit-text-fill-color: @form-disabled-color;
 }
 
+.hook-form-focus() {
+	.form-focus;
+}
+
 .hook-form-stacked-label() {
 	
 	display: inline-block;
@@ -83,8 +87,9 @@
 	font-weight: @form-stacked-font-weight;
 	line-height: @text-small-font-size;
 	color: @am-text;
-	background-color: @button-background;
-	border-radius: @am-radius-small;
+	background-color: @am-bg;
+	border-radius: @am-radius;
+	border: @am-hairline;
 	
 	&.am-form-changed:after {
 		content: '\f111';
@@ -99,8 +104,9 @@
 .uk-form textarea:not([data-uk-markdowneditor]) {
 	overflow: hidden;
 	resize: none;
-	padding-top: 6px;
-	padding-bottom: 6px;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	min-height: 70px;
 	// Disable height transitions. 
 	.transition(height 0s, color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;);
 }
@@ -144,10 +150,11 @@
 
 			& + button {
 
-				height: @form-height;
-				line-height: @form-height;
+				height: @button-large-height;
+				line-height: @button-large-line-height;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
+				border-left: none;
 
 				& > i {
 					line-height: inherit !important;
@@ -163,12 +170,13 @@
 
 		& > button {
 
-			height: @form-height;
-			line-height: @form-height;
+			height: @button-large-height;
+			line-height: @button-large-line-height;
 			width: @form-height;
 			min-width: @form-height;
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
+			border-right: none;
 
 			& > i {
 				line-height: inherit !important;

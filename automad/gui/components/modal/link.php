@@ -93,15 +93,9 @@ class Link {
 								</ul>
 							</script>
 						</div>	
-						<button type="button" class="uk-button uk-text-nowrap">
+						<button type="button" class="uk-button uk-button-success uk-text-nowrap">
 							<i class="uk-icon-link"></i>&nbsp;
 							$Text->btn_link
-						</button>
-					</div>
-					<div class="uk-modal-footer uk-text-right">
-						<button type="button" class="uk-modal-close uk-button">
-							<i class="uk-icon-close"></i>&nbsp;
-							$Text->btn_close
 						</button>
 					</div>
 				</div>

@@ -39,9 +39,11 @@
 		
 		border-radius: @am-radius;
 		background-color: @button-background;
-				
+		border: @am-hairline;
+		
 		& > div {
 			max-width: 100%;
+			margin: -1px 0;
 		}
 
 		& [data-uk-switcher]:last-child {
@@ -56,15 +58,17 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: clip;
-			
+			border-left-color: transparent;
+			border-right-color: transparent;
+
 			&[data-am-tab] {
 				
-				&:hover,
 				&:active,
 				&.uk-active {
 					
 					color: @button-primary-color;
 					background-color: @button-primary-background;
+					border-color: @button-primary-background;
 					
 					& .uk-badge {
 						color: @button-primary-background;

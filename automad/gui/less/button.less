@@ -37,9 +37,9 @@
 @am-icon-button-margin-left: 		10px;
 
 @button-color:						@am-text;
-@button-background:					#F7F7F7;
-@button-hover-color:				@button-color;
-@button-hover-background:			darken(@button-background, 3%);
+@button-background:					@am-bg;
+@button-hover-color:				@am-text;
+@button-hover-background:			#F8F8F8;
 @button-active-color:				@button-hover-color;
 @button-active-background:			@button-hover-background;
 
@@ -65,35 +65,52 @@
 @button-danger-active-background:	@button-danger-hover-background;
 
 @button-disabled-color:				#CFCFCF;
-@button-disabled-background:		@button-background;
+@button-disabled-background:		@am-bg;
 
 @button-font-size:					14px;
 @button-mini-font-size: 			11px;
 @button-small-font-size: 			12px;
 @button-large-font-size: 			16px;
 
-@button-height:						32px;
-@button-mini-height:				19px;
-@button-small-height:				24px;
-@button-large-height:				38px;
+@button-height:						34px;
+@button-mini-height:				21px;
+@button-small-height:				26px;
+@button-large-height:				40px;
 
-@button-line-height: 				@button-height;
-@button-mini-line-height: 			@button-mini-height;
-@button-small-line-height: 			@button-small-height;
-@button-large-line-height: 			@button-large-height;
+@button-line-height: 				@button-height - 2;
+@button-mini-line-height: 			@button-mini-height - 2;
+@button-small-line-height: 			@button-small-height - 2;
+@button-large-line-height: 			@button-large-height - 2;
 
-@button-padding-horizontal:			11px;
+@button-padding-horizontal:			12px;
 @button-mini-padding-horizontal:	6px;
-@button-small-padding-horizontal:	8px;
-@button-large-padding-horizontal:	13px;
+@button-small-padding-horizontal:	9px;
+@button-large-padding-horizontal:	15px;
 
+@button-link-color:					@button-color;
+@button-link-hover-color:			#555555;
+@button-link-hover-text-decoration: none;
+@button-link-disabled-color:        @am-muted;
 
 .hook-button() {
 	
 	box-sizing: border-box;
 	position: relative;
 	border-radius: @am-radius;
+	border: @am-hairline;
 	
+	&-link,
+	&-primary,
+	&-success,
+	&-danger,
+	&.uk-modal-close:not(:last-child) {
+		border-color: transparent;
+	}
+
+	&:active {
+		box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+	}
+
 	& + & {
 		margin-left: 5px;
 	}
@@ -104,7 +121,7 @@
 	}
 
 	&-group {
-		
+
 		& > *.uk-button {
 			margin-left: 0;
 			border-radius: 0;
@@ -135,6 +152,14 @@
 	
 }
 
+.hook-button-link() {
+	padding: 0 !important;
+}
+
+.hook-button-disable() {
+	border: @am-hairline;
+}
+
 .hook-button-success() {
 	
 	& .uk-badge {
@@ -157,6 +182,7 @@
 	
 	margin-left: -@am-icon-button-margin-left;
 	
+	
 	& > * {
 		display: inline-block;
 	}
@@ -173,7 +199,7 @@
 		text-align: center;
 		margin-left: @am-icon-button-margin-left;
 		line-height: 14px !important;
-		padding: ((@am-icon-button-size - 14) / 2) 0 !important;
+		padding: ((@am-icon-button-size - 16) / 2) 0 !important;
 		border-radius: @am-icon-button-size / 2;
 
 		& i {

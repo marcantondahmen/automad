@@ -30,46 +30,20 @@
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
+ *	http://automad.org/license
  */
 
 
-.am-select-image {
+/*
+ * 	Override the UIkit form-select plugin.
+ */
 
-	&-resize {
++function (Automad, $, UIkit) {
 
-		&-hide & {
-			display: none;
-		}
+	UIkit.on('beforeready.uk.dom', function () {
+		$.extend(UIkit.components.formSelect.prototype.defaults, {
+			activeClass: ''
+		});
+	});
 
-	}
-	
-	&-grid {
-
-		display: grid;
-		column-gap: @am-border-width;
-		row-gap: @am-border-width;
-		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-		grid-auto-rows: auto;
-		overflow: hidden;
-		border: @am-hairline;
-		border-radius: @am-radius;
-
-		& label {
-
-			cursor: pointer;
-			box-shadow: 0 0 0 @am-border-width @am-border-color;
-
-			& img {
-				opacity: 1;
-				.transition(opacity 0.2s;);
-			}
-
-			&:hover img {
-				opacity: 0.7;
-			}
-
-		}
-
-	}
-
-}
+}(window.Automad = window.Automad || {}, jQuery, UIkit);
