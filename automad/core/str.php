@@ -169,7 +169,7 @@ class Str {
 
 		// First remove any paragraph only containing an image.
 		$str = preg_replace('/<p>\s*<img.+?><\/p>/is', '', $str);
-		preg_match('/<p\s[^>]*>(.*?)<\/p>/is', $str, $matches);
+		preg_match('/<p\b[^>]*>(.*?)<\/p>/is', $str, $matches);
 		
 		if (!empty($matches[1])) {
 			return $matches[1];
