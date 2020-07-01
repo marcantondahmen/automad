@@ -180,7 +180,7 @@ class Page {
 							<a 
 							href="$pageUrl" 
 							title="$Text->btn_inpage_edit" 
-							class="uk-icon-button uk-icon-bookmark-o" 
+							class="uk-icon-button uk-icon-link" 
 							data-uk-tooltip
 							></a>
 						</span>

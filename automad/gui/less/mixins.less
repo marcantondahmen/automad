@@ -46,6 +46,58 @@
 	box-shadow: 0 2px 15px fade(@am-success, 20%);
 }
 
+.alert() {
+
+	border-radius: @am-radius;
+	overflow: hidden;
+	position: relative;
+	padding-left: 3rem;
+	border: 2px solid;
+	.shadow;
+	
+	&:before {	
+		content: '\f0eb';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 1.1rem;
+		text-align: center;
+		padding: 1rem;
+		font-family: FontAwesome;
+		display: block;
+		font-weight: normal;
+		font-style: normal;
+		font-size: 1.25rem;
+		line-height: 1;
+		color: inherit;
+		background-color: transparent;
+		.smooth-fonts;
+	}
+
+	&-success:before {
+		content: '\f00c' !important;
+	}
+
+	&-danger:before {
+		content: '\f06a' !important;
+	}
+
+	&.am-alert-progress {
+
+		
+
+	}
+	&.am-alert-progress:before {
+		content: '\f06a' !important;
+		display: inline-block;
+    	-webkit-animation: uk-rotate 2s infinite linear;
+    	animation: uk-rotate 2s infinite linear;
+		
+	}
+
+}
+
 .fade-out(@duration: 0.3s) {
 	visibility: hidden;
   	opacity: 0;

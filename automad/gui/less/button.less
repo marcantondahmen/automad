@@ -39,7 +39,7 @@
 @button-color:						@am-text;
 @button-background:					@am-bg;
 @button-hover-color:				@am-text;
-@button-hover-background:			#F8F8F8;
+@button-hover-background:			#F7F7F7;
 @button-active-color:				@button-hover-color;
 @button-active-background:			@button-hover-background;
 
@@ -84,7 +84,7 @@
 
 @button-padding-horizontal:			12px;
 @button-mini-padding-horizontal:	6px;
-@button-small-padding-horizontal:	9px;
+@button-small-padding-horizontal:	8px;
 @button-large-padding-horizontal:	15px;
 
 @button-link-color:					@button-color;
@@ -118,6 +118,10 @@
 	&.uk-button-mini,
 	&.uk-button-small {
 		border-radius: @am-radius-small;
+	}
+
+	&.uk-button-mini {
+		min-width: @button-mini-height;
 	}
 
 	&-group {
