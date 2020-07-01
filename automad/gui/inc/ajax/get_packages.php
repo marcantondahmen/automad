@@ -80,69 +80,9 @@ if ($packages = PackageManager::getPackages()) {
 		data-uk-grid-margin 
 		data-uk-grid-match="{target:'.uk-panel'}"
 		>
-
-		<?php foreach ($packages as $package) { ?>
-		
-			<li>
-				<div class="uk-panel uk-panel-box">
-					<a 
-					href="<?php echo $package->info; ?>" 
-					class="uk-display-block"
-					target="_blank"
-					>
-						<i class="uk-icon-file-zip-o uk-icon-medium"></i>
-						<div class="uk-panel-title uk-margin-small-top uk-padding-top-remove">
-								<?php echo $package->name; ?>
-						</div>
-						<div class="uk-text-small">
-							<?php echo $package->description; ?>
-						</div>
-						<?php  if ($package->installed) { ?>
-							<span class="uk-panel-badge uk-badge uk-badge-success">
-								<i class="uk-icon-check"></i>&nbsp;
-								<?php Text::e('packages_installed'); ?>
-							</span>
-						<?php } ?>
-					</a>
-					<div class="am-panel-bottom">
-						<a 
-						href="<?php echo $package->info; ?>" 
-						class="uk-icon-button uk-icon-file-text-o"
-						target="_blank"
-						title="<?php Text::e('btn_readme'); ?>"
-						data-uk-tooltip
-						></a>
-						<div class="am-panel-bottom-right">
-							<?php if ($package->installed) { ?>
-								<form class="uk-display-inline-block" data-am-handler="remove_package">
-									<input type="hidden" name="package" value="<?php echo $package->name; ?>">
-									<button 
-									class="uk-button uk-button-small"
-									data-uk-modal="{target:'#am-modal-remove-package-progress',keyboard:false,bgclose:false}"
-									>
-										<i class="uk-icon-close"></i>&nbsp;	
-										<?php Text::e('btn_remove'); ?>
-									</button>
-								</form>
-							<?php } else { ?>
-								<form class="uk-display-inline-block" data-am-handler="install_package">
-									<input type="hidden" name="package" value="<?php echo $package->name; ?>">
-									<button 
-									class="uk-button uk-button-primary uk-button-small"
-									data-uk-modal="{target:'#am-modal-install-package-progress',keyboard:false,bgclose:false}"
-									>
-										<i class="uk-icon-download"></i>&nbsp;	
-										<?php Text::e('btn_install'); ?>
-									</button>
-								</form>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-			</li>
-
-		<?php } ?>
-
+			<?php foreach ($packages as $package) { 
+				echo '<li>' . Components\Card\Package::render($package) . '</li>';
+			} ?> 
 		</ul>
 
 	<?php	
