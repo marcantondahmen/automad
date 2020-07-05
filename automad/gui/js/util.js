@@ -70,7 +70,7 @@
 
 			label: function(text) {
 
-				var label = Automad.util.create.element('label', ['uk-form-label']);
+				var label = Automad.util.create.element('label', ['am-block-label']);
 
 				label.textContent = text;
 
