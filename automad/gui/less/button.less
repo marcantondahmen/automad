@@ -69,12 +69,12 @@
 
 @button-font-size:					14px;
 @button-mini-font-size: 			11px;
-@button-small-font-size: 			12px;
+@button-small-font-size: 			11px;
 @button-large-font-size: 			16px;
 
 @button-height:						34px;
-@button-mini-height:				21px;
-@button-small-height:				26px;
+@button-mini-height:				22px;
+@button-small-height:				25px;
 @button-large-height:				40px;
 
 @button-line-height: 				@button-height - 2;
@@ -82,13 +82,13 @@
 @button-small-line-height: 			@button-small-height - 2;
 @button-large-line-height: 			@button-large-height - 2;
 
-@button-padding-horizontal:			12px;
+@button-padding-horizontal:			11px;
 @button-mini-padding-horizontal:	6px;
 @button-small-padding-horizontal:	8px;
-@button-large-padding-horizontal:	15px;
+@button-large-padding-horizontal:	12px;
 
 @button-link-color:					@button-color;
-@button-link-hover-color:			#555555;
+@button-link-hover-color:			@am-success;
 @button-link-hover-text-decoration: none;
 @button-link-disabled-color:        @am-muted;
 
@@ -97,7 +97,7 @@
 	box-sizing: border-box;
 	position: relative;
 	border-radius: @am-radius;
-	border: @am-hairline;
+	border: @am-border-width solid;
 	
 	&-link,
 	&-primary,
@@ -157,7 +157,13 @@
 }
 
 .hook-button-link() {
+	
 	padding: 0 !important;
+
+	input + & {
+		margin-top: 6px;
+	}
+
 }
 
 .hook-button-disable() {
@@ -185,7 +191,6 @@
 .am-icon-buttons {
 	
 	margin-left: -@am-icon-button-margin-left;
-	
 	
 	& > * {
 		display: inline-block;

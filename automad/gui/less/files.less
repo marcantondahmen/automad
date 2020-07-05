@@ -75,12 +75,13 @@
 				margin-bottom: 0;
 			}
 			
-			& > * {
+			& > img,
+			& > div {
 				overflow: hidden;
 				box-sizing: border-box;
 				background-color: @panel-box-background;
 				border-radius: @am-radius;
-				.shadow-panel;
+				border: @am-hairline;
 			}
 			
 			// Image.
@@ -88,7 +89,6 @@
 				
 				max-height: 82vh;
 				width: auto;
-				border: 3px solid @panel-box-background;
 				
 				// Hide img tag with empty src attribute.
 				&[src=""] {
@@ -166,7 +166,7 @@
 	// Upload dropzone.
 	&-dropzone {
 		border: 1px dashed @am-success;
-		border-radius: 20px;
+		border-radius: @am-radius;
 		text-align: center;
 		padding: 120px 0;
 		color: @am-success;

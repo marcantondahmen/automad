@@ -272,53 +272,5 @@ gulp.task('watch', function() {
 });
 
 
-// Download fonts from Google.
-gulp.task('google-fonts-download', function() {
-
-	var	libDir = '../../../lib/fonts/google', // Note: the path is relative to gulp.dest
-		fontsList = './fonts.list',
-		options = {
-			fontsDir: libDir,
-			cssDir: libDir,
-			cssFilename: 'fonts.css'
-		},
-		woff = Object.assign({}, options, { format: 'woff' }),
-		woff2 = Object.assign({}, options, { format: 'woff2' }),
-		ttf = Object.assign({}, options, { format: 'ttf' });
-
-	return	merge2(
-				gulp.src(fontsList)
-				.pipe(googleFonts(woff)),
-				gulp.src(fontsList)
-				.pipe(googleFonts(woff2)),
-				gulp.src(fontsList)
-				.pipe(googleFonts(ttf))
-			)
-			.pipe(gulp.dest(distDashboard));	
-		
-});
-
-
-// Add all formats to the fonts.css file. 
-// The gulp-google-webfonts plugin can only create a .css file for one format.
-// Therefore that file will be processed in a second step.
-gulp.task('google-fonts-css', function() {
-
-	var	rgx = /(src\: url\(([^\)]+?)\.ttf\) format\(\'truetype\'\);)/g,
-		rpl = 	"src: url($2.woff2) format('woff2');" +
-				"\n\tsrc: url($2.woff) format('woff');" + 
-				"\n\t$1";
-
-	return	gulp.src('../lib/fonts/google/fonts.css')
-			.pipe(replace(rgx, rpl))
-			.pipe(gulp.dest('../lib/fonts/google'))
-	
-});
-
-
-// Run both google font tasks as a sequence.
-gulp.task('google-fonts', sequence('google-fonts-download', 'google-fonts-css'));
-
-
 // The default task.
 gulp.task('default', ['blocks-js', 'blocks-less', 'automad-js', 'libs-js', 'automad-less', 'libs-css']);

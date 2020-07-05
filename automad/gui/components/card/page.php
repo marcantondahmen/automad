@@ -170,20 +170,24 @@ class Page {
 					<div class="uk-panel-title">$pageTitle</div>
 					<div class="uk-text-small">$pageMTime</div>
 					<div class="am-panel-bottom">
-						<span> 
+						<div class="am-panel-bottom-left">
 							<a 
 							href="$link" 
-							title="$Text->btn_edit_page" 
-							class="uk-icon-button uk-icon-sliders" 
+							title="$Text->btn_edit_page"  
+							class="am-panel-bottom-link"
 							data-uk-tooltip
-							></a>
+							>
+								<i class="uk-icon-file-text-o"></i>
+							</a>
 							<a 
 							href="$pageUrl" 
 							title="$Text->btn_inpage_edit" 
-							class="uk-icon-button uk-icon-bookmark-o" 
+							class="am-panel-bottom-link"
 							data-uk-tooltip
-							></a>
-						</span>
+							>
+								<i class="uk-icon-bookmark-o"></i>
+							</a>
+						</div>
 					</div>
 				</div>
 

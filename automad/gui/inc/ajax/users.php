@@ -74,13 +74,15 @@ foreach (Accounts::get() as $user => $hash) {
 					<?php echo ucwords($user); ?>
 				</div>
 				<div class="am-panel-bottom">
-					<?php if ($user != User::get()) { ?>
-						<label class="am-toggle-checkbox am-panel-bottom-right" data-am-toggle="#<?php echo $id; ?>">
-							<input type="checkbox" name="delete[]" value="<?php echo $user; ?>" />
-						</label>
-					<?php } else { ?>
-						<div class="uk-text-muted am-panel-bottom-right"><?php Text::e('sys_user_you'); ?></div>
-					<?php } ?>
+					<div class="am-panel-bottom-right">
+						<?php if ($user != User::get()) { ?>
+							<label class="am-toggle-checkbox am-panel-bottom-link" data-am-toggle="#<?php echo $id; ?>">
+								<input type="checkbox" name="delete[]" value="<?php echo $user; ?>" />
+							</label>
+						<?php } else { ?>
+							<div class="am-panel-bottom-link uk-text-muted"><?php Text::e('sys_user_you'); ?></div>
+						<?php } ?>
+					</div>
 				</div>
 			</div>	
 		</li>

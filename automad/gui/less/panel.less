@@ -32,17 +32,23 @@
  *	Licensed under the MIT license.
  */
 
+
+@am-panel-bottom-height: 		40px;
+@am-panel-bottom-height-large: 	49px;
+@am-panel-bottom-link-height:	30px;
+@am-panel-bottom-link-padding: 	@panel-box-padding / 2;
+
 @panel-title-margin-bottom:     0;
 @panel-title-font-size:         inherit;
 @panel-title-line-height:       inherit;
-@panel-title-font-weight:		inherit;
+@panel-title-font-weight:		500;
 
-@panel-box-padding:				10px;
+@panel-box-padding:				12px;
 @panel-box-color:				@am-text;
 @panel-box-title-color:			@am-text;
-@panel-box-background:			@am-bg;
-@panel-box-badge-top:          	10px;
-@panel-box-badge-right:			8px;
+@panel-box-background:			#FFFFFF;
+@panel-box-badge-top:          	@panel-box-padding;
+@panel-box-badge-right:			@panel-box-padding - 2;
 @panel-teaser-margin-bottom:	0;
 
 
@@ -50,20 +56,22 @@
 	
 	border-radius: @am-radius;
 	cursor: default;
-	.shadow-panel;
+	border: @am-hairline;
+	.transition(border-color 0.2s, box-shadow 0.2s;);
 
 	.uk-grid & {
 		margin: 0;
 	}
 
 	&.uk-active {
-		.shadow-panel(@am-success);
+		.panel-active;
 	}
 
 	& .uk-panel-teaser {
 		overflow: hidden;
-		border: 3px solid @panel-box-background;
-		border-radius: @am-radius;
+		border-top-left-radius: @am-radius - @am-border-width;
+		border-top-right-radius: @am-radius - @am-border-width;
+		border-bottom: @am-hairline;
 	}
 	
 	& + & {
@@ -95,9 +103,16 @@
 
 .hook-panel-badge() {
 	
-	&.uk-badge:not(.uk-badge-success) {
+	&.uk-badge {
+		font-size: 9px;
+		line-height: 17px;
+		padding: 0 8px !important;
+	}
+
+	&.uk-badge:not(.uk-badge-success):not(.uk-badge-primary) {
 		color: @am-text;
-		background-color: darken(@panel-box-background, 4%);
+		background-color: @panel-box-background;
+		border: @am-hairline;
 	}
 	
 }
@@ -106,7 +121,7 @@
 
 	margin: 0 -@panel-box-padding;
 	padding: @panel-box-padding;
-	padding-bottom: 5px;
+	padding-bottom: 3px;
 	overflow: hidden;
 	overflow-wrap: break-word;
 
@@ -121,18 +136,62 @@
 	&-bottom {
 		
 		display: block;
-		height: 30px;
-		margin-top: @panel-box-padding;
-		
-		& > * {
-			
+		height: @am-panel-bottom-height;
+		margin: -@panel-box-padding;
+		margin-top: -@am-panel-bottom-link-padding;
+		font-size: 0.01rem;
+
+		&-large {
+			height: @am-panel-bottom-height-large;
+		}
+
+		&-left,
+		&-right {
+
+			display: flex;
+			box-sizing: border-box;
 			position: absolute;
-			bottom: @panel-box-padding;
-			
-			&.am-panel-bottom-right {
-				right: @panel-box-padding;
+			align-items: center;
+			bottom: 0;
+			height: inherit;
+			padding: @panel-box-padding - @am-panel-bottom-link-padding;
+
+			& .uk-button {
+				margin: 0 @am-panel-bottom-link-padding;
 			}
-			
+
+		}
+
+		&-left {
+			left: 0;
+		}
+
+		&-right {
+			right: 0;
+		}
+
+		&-link {
+
+			display: inline-block;
+			font-size: 14px;
+			height: @am-panel-bottom-link-height !important;
+			line-height: @am-panel-bottom-link-height;
+			padding: 0 @am-panel-bottom-link-padding;
+			color: @am-text;
+			text-decoration: none;
+			cursor: pointer;
+			.transition(color 0.2s;);
+
+			&:hover {
+				color: @am-success;
+				text-decoration: none;
+			}
+
+			button& {
+				border: none;
+				background-color: transparent;
+			}
+
 		}
 		
 	}

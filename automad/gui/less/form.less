@@ -35,8 +35,8 @@
 
 @form-height:				@button-large-height;
 @form-large-height: 		44px;
-@form-padding:				5px 14px;
-@form-large-padding: 		6px 14px;
+@form-padding:				5px 12px;
+@form-large-padding: 		6px 12px;
 @form-border:				@am-border-color;
 @form-border-width:			@am-border-width;
 @form-color:				@am-text;
@@ -81,20 +81,18 @@
 	display: inline-block;
 	margin-top: @utility-margin;
 	margin-bottom: @form-stacked-margin-bottom;
-	padding: 4px 6px;
+	padding: 0 0 2px 0;
 	vertical-align: top;
-	font-size: @text-small-font-size;
+	font-size: @button-mini-font-size;
 	font-weight: @form-stacked-font-weight;
-	line-height: @text-small-font-size;
+	line-height: @button-mini-height;
 	color: @am-text;
 	background-color: @am-bg;
-	border-radius: @am-radius;
-	border: @am-hairline;
 	
-	&.am-form-changed:after {
+	&.am-form-changed:before {
 		content: '\f111';
 		&:extend([class*='uk-icon-']);
-		padding-left: 4px;
+		padding-right: 5px;
 		color: @am-success;
 	} 
 	
@@ -160,6 +158,10 @@
 					line-height: inherit !important;
 				}
 
+				&:not(.uk-button-success) {
+					border-color: @form-border;
+				}
+
 			}
 
 		}
@@ -172,11 +174,12 @@
 
 			height: @button-large-height;
 			line-height: @button-large-line-height;
-			width: @form-height;
-			min-width: @form-height;
+			width: @form-height - 1;
+			min-width: @form-height - 1;
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
 			border-right: none;
+			border-color: @form-border;
 
 			& > i {
 				line-height: inherit !important;

@@ -129,7 +129,7 @@ if ($data = Core\Request::post('data')) {
 						</div>
 					</div>			
 					<ul 
-					class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
+					class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-3 uk-margin-top" 
 					data-uk-grid-match="{target:'.uk-panel'}" 
 					data-uk-grid-margin
 					>
@@ -139,87 +139,11 @@ if ($data = Core\Request::post('data')) {
 						$i = 0;
 						
 						foreach ($themes as $Theme) { 
-						
-							$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
-							$files = FileSystem::glob($path . '/*');
 							$id = 'am-theme-' . ++$i;
+							echo '<li>' . Components\Card\Theme::render($Theme, $mainTheme, $id) . '</li>';
+						} 
 						
-							// Set icon.
-							if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
-								$img = new Core\Image(reset($images), 400, 300, true);
-								$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
-							} else {
-								$icon = '<i class="uk-icon-code"></i>';
-							}
-					
-							// Check currently active theme.
-							$attrChecked = '';
-
-							if ($mainTheme) {
-								if ($Theme->path === $mainTheme->path) {
-									$attrChecked = ' checked';
-								} 
-							}
-							
-						?>
-						<li>
-							<?php echo Components\Modal\Readme::render($id . '-modal', $Theme->readme) ?>			
-							<div id="<?php echo $id; ?>" class="uk-panel uk-panel-box">
-								<div class="am-cover-4by3 uk-panel-teaser">
-									<?php if ($Theme->readme) { ?><a href="#<?php echo $id . '-modal' ?>"data-uk-modal><?php } ?>
-										<?php echo $icon; ?>	
-									<?php if ($Theme->readme) { ?></a><?php } ?>
-								</div>
-								<?php if ($Theme->version) { ?> 
-								<div class="uk-panel-badge uk-badge">
-									<?php echo $Theme->version; ?>
-								</div>	
-								<?php } ?>
-								<div class="uk-panel-title">
-									<?php echo $Theme->name; ?>
-								</div>
-								<div class="uk-text-small uk-hidden-small">
-									<?php echo $Theme->description; ?>
-								</div>
-								<?php if ($Theme->author) { ?> 
-								<div class="uk-text-small uk-hidden-small">
-									<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
-									<?php echo $Theme->author; ?>
-								</div>
-								<?php } ?>
-								<?php if ($Theme->license) { ?>
-								<div class="uk-text-small uk-hidden-small">
-									<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
-									<?php echo $Theme->license; ?>
-								</div>
-								<?php } ?>
-								<div class="am-panel-bottom">
-									<?php if ($Theme->readme) { ?>
-									<a 
-									href="#<?php echo $id . '-modal' ?>"
-									class="uk-icon-button uk-icon-file-text-o"
-									title="<?php Text::e('btn_readme'); ?>"
-									data-uk-tooltip
-									data-uk-modal
-									>
-									</a>
-									<?php } ?>
-									<label 
-									class="am-toggle-checkbox am-panel-bottom-right" 
-									data-am-toggle="#<?php echo $id; ?>"
-									>
-										<input 
-										type="radio" 
-										name="data[<?php echo AM_KEY_THEME; ?>]" 
-										value="<?php echo $Theme->path; ?>" 
-										data-am-modal-on-change="#am-apply-theme-modal"
-										<?php echo $attrChecked; ?> 
-										/>
-									</label>
-								</div>
-							</div>
-						</li>		
-						<?php } ?> 	
+						?> 	
 					</ul>	
 					<a 
 					href="?context=packages" 

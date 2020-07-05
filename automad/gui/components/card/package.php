@@ -73,21 +73,20 @@ class Package {
 			$active = 'uk-active';
 
 			$badge = <<< HTML
-					<span class="uk-panel-badge uk-badge uk-badge-success">
-						<i class="uk-icon-check"></i>&nbsp;
+					<span class="uk-panel-badge uk-badge uk-badge-primary">
 						$Text->packages_installed
 					</span>
 HTML;
 
 			$button = <<< HTML
-					<form class="uk-display-inline-block" data-am-handler="remove_package">
+					<form class="am-panel-bottom-right" data-am-handler="remove_package">
 						<input type="hidden" name="package" value="$package->name">
 						<button 
 						class="uk-button uk-button-small"
 						data-uk-modal="{target:'#am-modal-remove-package-progress',keyboard:false,bgclose:false}"
 						>
-							<i class="uk-icon-close"></i>&nbsp;	
 							$Text->btn_remove
+							&nbsp;<i class="uk-icon-times"></i>	
 						</button>
 					</form>
 HTML;
@@ -95,14 +94,14 @@ HTML;
 		} else {
 
 			$button = <<< HTML
-					<form class="uk-display-inline-block" data-am-handler="install_package">
+					<form class="am-panel-bottom-right" data-am-handler="install_package">
 						<input type="hidden" name="package" value="$package->name">
 						<button 
-						class="uk-button uk-button-primary_ uk-button-small"
+						class="uk-button uk-button-small uk-button-primary"
 						data-uk-modal="{target:'#am-modal-install-package-progress',keyboard:false,bgclose:false}"
 						>
-							<i class="uk-icon-download"></i>&nbsp;	
-							$Text->btn_install
+							$Text->btn_install	
+							&nbsp;<i class="uk-icon-plus"></i>
 						</button>
 					</form>
 HTML;
@@ -116,7 +115,7 @@ HTML;
 					class="uk-display-block"
 					target="_blank"
 					>
-						<i class="uk-icon-file-zip-o uk-icon-medium"></i>
+						<i class="uk-icon-folder-o uk-icon-medium"></i>
 						<div class="uk-panel-title uk-margin-small-top uk-padding-top-remove">
 								$package->name
 						</div>
@@ -125,17 +124,19 @@ HTML;
 						</div>
 						$badge
 					</a>
-					<div class="am-panel-bottom">
-						<a 
-						href="$package->info" 
-						class="uk-icon-button uk-icon-file-text-o"
-						target="_blank"
-						title="$Text->btn_readme"
-						data-uk-tooltip
-						></a>
-						<div class="am-panel-bottom-right">
-							$button
+					<div class="am-panel-bottom am-panel-bottom-large">
+						<div class="am-panel-bottom-left">
+							<a 
+							href="$package->info" 
+							class="am-panel-bottom-link"
+							target="_blank"
+							title="$Text->btn_readme"
+							data-uk-tooltip
+							>
+								<i class="uk-icon-file-text-o"></i>
+							</a>
 						</div>
+						$button
 					</div>
 				</div>
 HTML;

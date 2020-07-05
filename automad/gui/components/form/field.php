@@ -404,7 +404,7 @@ HTML;
 	
 	public static function labelFromKey($key) {
 
-		$label = str_replace('+', '<i class="uk-icon-plus-circle"></i> ', $key);
+		$label = str_replace('+', '', $key);
 		$label = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $label))));
 
 		return $label;
@@ -435,9 +435,9 @@ HTML;
 						class="am-dropdown-tooltip" 
 						data-uk-dropdown
 						>
-							<button type="button" class="uk-button uk-button-mini">
+							<div class="am-dropdown-tooltip-icon">
 								<i class="uk-icon-lightbulb-o"></i>
-							</button>
+							</div>
 							<div class="uk-dropdown">
 								$tooltip
 							</div>
