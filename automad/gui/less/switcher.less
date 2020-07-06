@@ -33,13 +33,15 @@
  */
 
 
+@am-switcher-border-color:	@am-border-color;
+
 .am-switcher {
 	
 	&-buttons {
 		
 		border-radius: @am-radius;
 		background-color: @button-background;
-		border: @am-border-width solid @am-button-border-color;
+		border: @am-border-width solid @am-switcher-border-color;
 		border-left: none;
 		
 		& > div {
@@ -59,7 +61,7 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: clip;
-			border-color: @am-button-border-color;
+			border-color: @am-switcher-border-color;
 			border-left: none;
 			border-right: none;
 
@@ -84,7 +86,7 @@
 		}
 		
 		& > div:first-child > button:first-child {
-			border-left: @am-border-width solid @am-button-border-color;
+			border-left: @am-border-width solid @am-switcher-border-color;
 			border-top-left-radius: @am-radius;
 			border-bottom-left-radius: @am-radius;
 		}

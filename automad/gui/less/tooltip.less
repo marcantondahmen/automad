@@ -36,8 +36,8 @@
 @tooltip-z-index: 				1150;
 @tooltip-max-width:				200px;
 @tooltip-padding-vertical: 		5px;
-@tooltip-padding-horizontal: 	10px;
-@tooltip-background: 			@am-success;
+@tooltip-padding-horizontal: 	7px;
+@tooltip-background: 			@am-primary;
 @tooltip-triangle-size: 		5px;
 
 @tooltip-color: 				#FFFFFF;
@@ -49,6 +49,7 @@
 
 .hook-tooltip() {
 	font-weight: normal;
-	border-radius: 9px;
+	border-radius: @am-radius-small;
 	box-shadow: 0 8px 12px 0 rgba(29,32,43,0.17), 0 4px 5px -3px rgba(5,6,12,0.49);
+	opacity: 0.9;
 }
