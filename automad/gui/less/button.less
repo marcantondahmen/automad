@@ -35,6 +35,7 @@
 
 @am-icon-button-size:				32px;
 @am-icon-button-margin-left: 		10px;
+@am-button-border-color:			#969696;
 
 @button-color:						@am-text;
 @button-background:					@am-bg;
@@ -97,7 +98,7 @@
 	box-sizing: border-box;
 	position: relative;
 	border-radius: @am-radius;
-	border: @am-border-width solid;
+	border: @am-border-width solid @am-button-border-color;
 	
 	&-link,
 	&-primary,
@@ -159,6 +160,9 @@
 .hook-button-link() {
 	
 	padding: 0 !important;
+	border-left: none;
+	border-right: none;
+	outline: none !important;
 
 	input + & {
 		margin-top: 6px;

@@ -56,7 +56,7 @@ $versionSanitized = Core\Str::sanitize(AM_VERSION);
 	
 	<title><?php echo $this->guiTitle; ?></title>
 	
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/libs.min.css?v=<?php echo $versionSanitized; ?>" rel="stylesheet">
 	<link href="<?php echo AM_BASE_URL; ?>/automad/gui/dist/automad.min.css?v=<?php echo $versionSanitized; ?>" rel="stylesheet">
 	

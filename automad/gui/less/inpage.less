@@ -57,6 +57,7 @@
 			
 			border-radius: @am-radius;
 			overflow: hidden;
+			border: @am-border-width solid @am-button-border-color;
 			.shadow;	
 			
 			& > a {
@@ -72,7 +73,7 @@
 		&:extend(.uk-button all, .uk-button-large all);
 		padding: 0 12px;
 		border-radius: 0;
-		border-color: transparent !important;
+		border: none !important;
 		
 		& > .am-logo {
 			position: relative;
@@ -96,10 +97,11 @@
 	
 	& > &-edit-button {
 
-		&:extend(.uk-button all, .uk-button-primary all, .uk-button-small all);
+		&:extend(.uk-button all, .uk-button-success all, .uk-button-small all);
 		margin-bottom: 2px;
 		vertical-align: text-bottom;
 		letter-spacing: 0 !important;
+		border-color: transparent;
 
 		& > i {
 			color: inherit;

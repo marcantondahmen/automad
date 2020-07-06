@@ -43,7 +43,7 @@
 }
 
 .panel-active() {
-	border-color: @am-primary;
+	border-color: @am-button-border-color;
 	box-shadow: 0 2px 15px fade(@am-primary, 20%);
 }
 
@@ -53,7 +53,7 @@
 	overflow: hidden;
 	position: relative;
 	padding-left: 3rem;
-	border: @am-border-width solid;
+	border: @am-border-width solid @am-button-border-color;
 	.shadow;
 	
 	&:before {	
@@ -76,12 +76,24 @@
 		.smooth-fonts;
 	}
 
-	&-success:before {
-		content: '\f00c' !important;
+	&-success {
+
+		border-color: @am-success;
+
+		&:before {
+			content: '\f00c' !important;
+		}
+
 	}
 
-	&-danger:before {
-		content: '\f06a' !important;
+	&-danger {
+
+		border-color: @am-danger;
+
+		&:before {
+			content: '\f06d' !important;
+		}
+
 	}
 
 }

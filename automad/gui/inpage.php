@@ -165,7 +165,7 @@ HTML;
 		$versionSanitized = Core\Str::sanitize(AM_VERSION);
 		$assets = 	"\n" .
 					'<!-- Automad GUI -->' . "\n" .
-					'<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">' . "\n" .
+					'<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">' . "\n" .
 					'<link href="' . AM_BASE_URL . '/automad/gui/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
 					'<link href="' . AM_BASE_URL . '/automad/gui/dist/automad.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/libs.min.js?v=' . $versionSanitized . '"></script>' . "\n" .

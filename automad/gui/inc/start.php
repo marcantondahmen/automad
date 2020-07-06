@@ -60,33 +60,34 @@ $this->element('header');
 
 ?>
 		
-		<h1 class="uk-margin-large-top uk-margin-bottom">
-			<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
-		</h1>
-		<p>
+		<div class="uk-margin-large-top">
+			<h1><?php echo $this->getShared()->get(AM_KEY_SITENAME); ?></h1>
+		</div>
+		<div class="uk-margin-top uk-margin-large-bottom">
 			<a 
 			href="#am-server-info-modal" 
-			class="uk-button uk-button-small uk-text-truncate" 
+			class="uk-button uk-button-small uk-button-link uk-text-truncate" 
 			data-uk-modal
 			>
-				<i class="uk-icon-hdd-o"></i>&nbsp;
+				<i class="uk-icon-hdd-o uk-icon-justify"></i>&nbsp;
 				<?php echo getenv('SERVER_NAME'); ?>
 			</a>
-		</p>
+			<br>
+			<span class="uk-text-small">
+				<i class="uk-icon-heartbeat uk-icon-justify"></i>&nbsp;
+				<span class="uk-hidden-small"><?php Text::e('dashboard_modified'); ?></span>
+				<?php echo date('j. M Y, G:i', $mTime); ?>h
+			</span>
+		</div>
 		<?php if (!AM_HEADLESS_ENABLED) { ?>
 			<p>
-				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large">
+				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-left-small">
 					<i class="uk-icon-pencil"></i>&nbsp;
 					<?php Text::e('btn_inpage_edit'); ?>
 				</a>
 			</p>
 		<?php } ?>
-		<div class="uk-margin-large-top">
-			<i class="uk-icon-heartbeat uk-icon-justify uk-icon-small"></i>&nbsp;&nbsp;
-			<span class="uk-hidden-small"><?php Text::e('dashboard_modified'); ?></span>
-			<?php echo date('j. M Y, G:i', $mTime); ?>h
-		</div>
-		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-top">
+		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-small-top">
 			<?php if (AM_HEADLESS_ENABLED) { ?>
 				<li class="uk-margin-small-bottom">
 					<a 
@@ -110,7 +111,7 @@ $this->element('header');
 				<?php echo Components\Status\Button::render('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
 			</li>
 		</ul>
-		<div class="uk-margin-top">
+		<div class="uk-margin-large-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
 			<?php echo Components\Grid\Pages::render($latestPages); ?>
 		</div>
