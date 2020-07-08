@@ -80,6 +80,8 @@ class Pagelist {
 
 		$options = array_merge($defaults, (array) $data);
 		$options['sort'] = $options['sortKey'] . ' ' . $options['sortOrder'];
+		$options['match'] = json_encode(array('url' => $options['matchUrl']));
+		
 		$Pagelist->config($options);
 
 		$options['file'] = AM_DIR_PACKAGES . $options['file'];
