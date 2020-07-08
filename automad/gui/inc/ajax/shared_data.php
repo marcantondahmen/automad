@@ -89,6 +89,8 @@ if ($data = Core\Request::post('data')) {
 			/>
 		</div>
 				
+		<?php echo Components\Alert\ThemeReadme::render($mainTheme); ?>
+
 		<div 
 		class="uk-accordion" 
 		data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
@@ -103,6 +105,7 @@ if ($data = Core\Request::post('data')) {
 						<?php Text::e('error_no_theme'); ?><br />
 					</div>
 				<?php } ?>
+
 				<div class="uk-accordion-title">
 					<?php Text::e('shared_theme'); ?>
 				</div>
@@ -153,67 +156,76 @@ if ($data = Core\Request::post('data')) {
 						<?php Text::e('btn_get_themes'); ?>
 					</a>
 				</div>
-				<!-- Variables -->
-				<?php 
-				
-					if ($mainTheme) {
-						$keysInMainTheme = $this->getKeys()->inTheme($mainTheme);
-					} else {
-						$keysInMainTheme = array();
-					}
-					
-				?>
-				<!-- Shared variables in main theme -->
-				<?php if ($keysInMainTheme) { ?>
+
+			<?php } ?>
+			
+			<!-- Variables -->
+			<?php 
+			
+			if (!AM_HEADLESS_ENABLED) {
+
+				if ($mainTheme) {
+					$keys = Keys::inTheme($mainTheme);
+				} else {
+					$keys = array();
+				}
+
+			} else {
+
+				$keys = Keys::inTemplate(Headless::getTemplate()); 
+		
+				// Also submit the saved theme form the non-headless mode.
+				// The value gets stored in a hidden input field.
+				echo Components\Form\FieldHidden::render(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
+			
+			}
+			
+			$textKeys = Keys::filterTextKeys($keys);
+			$settingKeys = Keys::filterSettingKeys($keys);
+			$unusedDataKeys = array_diff(array_keys($data), $keys, Keys::$reserved);
+
+			?>
+
+			<!-- Text variables -->
+			<?php if ($textKeys) { ?>
 				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_main_theme'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($keysInMainTheme); ?></span>
+					<?php Text::e('shared_vars_content'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($textKeys); ?></span>
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo Components\Form\Group::render(
-							$this->getAutomad(), 
-							$keysInMainTheme, 
-							$data,
-							false,
-							$mainTheme
-						); 
+
+					echo Components\Form\Group::render(
+						$this->getAutomad(), 
+						$textKeys, 
+						$data,
+						false,
+						$mainTheme
+					); 
+
 					?>
 				</div>
-				<?php } ?>
-				
-				<?php $unusedDataKeys = array_diff(array_keys($data), $keysInMainTheme, $this->getKeys()->reserved); ?>
-				
-			<?php } else { ?>
+			<?php } ?>
 
-				<!-- Headless Variables -->
-				<?php 
-				
-					$keysInHeadless = $this->getKeys()->inTemplate(Headless::getTemplate()); 
-				
-					// Also submit the saved theme form the non-headless mode.
-					// The value gets stored in a hidden input field.
-					echo Components\Form\FieldHidden::render(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
-				
-				?>
+			<!-- Settings variables -->
+			<?php if ($settingKeys) { ?>
 				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_headless'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($keysInHeadless); ?></span>
+					<?php Text::e('shared_vars_settings'); ?>&nbsp;
+					<span class="uk-badge"><?php echo count($settingKeys); ?></span>
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
-						echo Components\Form\Group::render(
-							$this->getAutomad(), 
-							$keysInHeadless, 
-							$data,
-							false,
-							false
-						); 
+
+					echo Components\Form\Group::render(
+						$this->getAutomad(), 
+						$settingKeys, 
+						$data,
+						false,
+						$mainTheme
+					); 
+
 					?>
 				</div>
-				
-				<?php $unusedDataKeys = array_diff(array_keys($data), $keysInHeadless, $this->getKeys()->reserved); ?>
-
 			<?php } ?>
 			
 			<!-- Vars in data but not in any template -->
@@ -223,8 +235,15 @@ if ($data = Core\Request::post('data')) {
 			</div>
 			<div class="uk-accordion-content">
 				<?php 
+
 				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo Components\Form\Group::render($this->getAutomad(), $unusedDataKeys, $data, 'am-add-variable'); 
+				echo Components\Form\Group::render(
+					$this->getAutomad(), 
+					$unusedDataKeys, 
+					$data, 
+					'am-add-variable'
+				); 
+				
 				?>
 			</div>
 

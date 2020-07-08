@@ -81,7 +81,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 		// Set up all standard variables.
 	
 		// Create empty array items for all missing standard variables in $data.
-		foreach ($this->getKeys()->reserved as $key) {
+		foreach (Keys::$reserved as $key) {
 			if (!isset($data[$key])) {
 				$data[$key] = false;
 			}
@@ -133,6 +133,14 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				<?php } ?>
 			</div>
 			
+			<?php 
+
+			echo Components\Alert\ThemeReadme::render(
+				$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+			); 
+
+			?>
+
 			<div 
 			class="uk-accordion" 
 			data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
@@ -152,13 +160,15 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 									<a href="#" class="uk-modal-close uk-close"></a>
 								</div>	
 								<?php 
-									echo 	Components\Form\SelectTemplate::render(
-												$this->getAutomad(),
-												$this->getThemelist(),
-												'theme_template', 
-												$data[AM_KEY_THEME], 
-												$Page->template
-											); 
+
+								echo Components\Form\SelectTemplate::render(
+									$this->getAutomad(),
+									$this->getThemelist(),
+									'theme_template', 
+									$data[AM_KEY_THEME], 
+									$Page->template
+								); 
+
 								?>	
 								<div class="uk-modal-footer uk-text-right">
 									<button class="uk-modal-close uk-button">
@@ -239,47 +249,51 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					</div>	
 					<!-- Redirect -->
 					<?php 
-						echo Components\Form\Field::render(
-							$this->getAutomad(), 
-							AM_KEY_URL, 
-							$data[AM_KEY_URL],
-							false,
-							false,
-							Text::get('page_redirect')
-						); 
+
+					echo Components\Form\Field::render(
+						$this->getAutomad(), 
+						AM_KEY_URL, 
+						$data[AM_KEY_URL],
+						false,
+						false,
+						Text::get('page_redirect')
+					); 
+
 					?>
 					<?php } ?> 
 					<!-- Date -->
 					<?php 
-						echo Components\Form\Field::render(
-							$this->getAutomad(), 
-							AM_KEY_DATE, 
-							$Page->get(AM_KEY_DATE)
-						); 
+
+					echo Components\Form\Field::render(
+						$this->getAutomad(), 
+						AM_KEY_DATE, 
+						$Page->get(AM_KEY_DATE)
+					); 
+
 					?>
 					<!-- Tags -->
 					<div class="uk-form-row">	
 						<?php 	
 						
-							$tags = Core\Parse::csv(htmlspecialchars($data[AM_KEY_TAGS]));
-							sort($tags);
-							
-							$Pagelist = $this->getAutomad()->getPagelist();
-							$Pagelist->config(
-								array_merge(
-									$Pagelist->getDefaults(),
-									array('excludeHidden' => false)
-								)
-							);
-							
-							$allTags = $Pagelist->getTags();
-							sort($allTags);
-							
-							$allTagsAutocomplete = array();
-							
-							foreach ($allTags as $tag) {
-								$allTagsAutocomplete[]['value'] = $tag;
-							}
+						$tags = Core\Parse::csv(htmlspecialchars($data[AM_KEY_TAGS]));
+						sort($tags);
+						
+						$Pagelist = $this->getAutomad()->getPagelist();
+						$Pagelist->config(
+							array_merge(
+								$Pagelist->getDefaults(),
+								array('excludeHidden' => false)
+							)
+						);
+						
+						$allTags = $Pagelist->getTags();
+						sort($allTags);
+						
+						$allTagsAutocomplete = array();
+						
+						foreach ($allTags as $tag) {
+							$allTagsAutocomplete[]['value'] = $tag;
+						}
 							
 						?>
 						<label class="uk-form-label">
@@ -301,53 +315,60 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					</div>	
 				</div>
 				
-				<?php if (!AM_HEADLESS_ENABLED) { ?>
+				<?php 
+			
+				if (!AM_HEADLESS_ENABLED) {
+					$keys = Keys::inCurrentTemplate($Page);
+				} else {
+					$keys = Keys::inTemplate(Headless::getTemplate());
+				}
+				
+				$textKeys = Keys::filterTextKeys($keys);
+				$settingKeys = Keys::filterSettingKeys($keys);
+				$unusedDataKeys = array_diff(array_keys($data), $keys, Keys::$reserved);
+			
+				?>
 
-					<?php if ($keysInCurrentTemplate = $this->getKeys()->inCurrentTemplate()) { ?>
-					<!-- Vars in selected template -->
+				<?php if (!empty($textKeys)) { ?>
+					<!-- Text vars -->
 					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_template'); ?>&nbsp;
-						<span class="uk-badge"><?php echo count($keysInCurrentTemplate); ?></span>
+						<?php Text::e('page_vars_content'); ?>&nbsp;
+						<span class="uk-badge"><?php echo count($textKeys); ?></span>
 					</div>
 					<div class="uk-accordion-content">
 						<?php 
-							echo 	Components\Form\Group::render(
-										$this->getAutomad(),
-										$keysInCurrentTemplate, 
-										$data, 
-										false, 
-										$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME)),
-										'am-readme-modal'
-									); 
+
+						echo Components\Form\Group::render(
+							$this->getAutomad(),
+							$textKeys, 
+							$data, 
+							false, 
+							$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+						); 
+
 						?>
 					</div>
-					<?php } ?>
-					
-					<?php $unusedDataKeys = array_diff(array_keys($data), $keysInCurrentTemplate, $this->getKeys()->reserved); ?>
+				<?php } ?>
 
-				<?php } else { ?>
-
-					<?php $keysInHeadless = $this->getKeys()->inTemplate(Headless::getTemplate()); ?>
-					
-					<!-- Vars in headless template -->
+				<?php if (!empty($settingKeys)) { ?>
+					<!-- Setting vars -->
 					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_headless'); ?>&nbsp;
-						<span class="uk-badge"><?php echo count($keysInHeadless); ?></span>
+						<?php Text::e('page_vars_settings'); ?>&nbsp;
+						<span class="uk-badge"><?php echo count($settingKeys); ?></span>
 					</div>
 					<div class="uk-accordion-content">
-						<?php 
-							echo 	Components\Form\Group::render(
-										$this->getAutomad(),
-										$keysInHeadless, 
-										$data, 
-										false, 
-										false
-									); 
+						<?php
+
+						echo Components\Form\Group::render(
+							$this->getAutomad(),
+							$settingKeys, 
+							$data, 
+							false, 
+							$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+						); 
+
 						?>
 					</div>
-
-					<?php $unusedDataKeys = array_diff(array_keys($data), $keysInHeadless, $this->getKeys()->reserved); ?>
-
 				<?php } ?>
 				
 				<!-- Vars in data but not in any template -->
@@ -357,8 +378,15 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
+
 					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo Components\Form\Group::render($this->getAutomad(), $unusedDataKeys, $data, 'am-add-variable'); 
+					echo Components\Form\Group::render(
+						$this->getAutomad(), 
+						$unusedDataKeys, 
+						$data, 
+						'am-add-variable'
+					); 
+					
 					?>
 				</div>
 

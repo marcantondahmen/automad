@@ -68,13 +68,6 @@ class Dashboard {
 	
 	
 	/**
-	 *	The Keys object.
-	 */
-	
-	private $Keys;
-	
-	
-	/**
 	 * 	The Themelist object.
 	 */
 	
@@ -229,23 +222,6 @@ class Dashboard {
 		}
 
 		return $this->Content;
-
-	}
-
-
-	/**
-	 *	Return the Keys object and create a new instance if undefined.
-	 *
-	 * 	@return object The Keys object
-	 */
-
-	private function getKeys() {
-
-		if (!$this->Keys) {
-			$this->Keys = new Keys($this->getAutomad());
-		}
-
-		return $this->Keys;
 
 	}
 

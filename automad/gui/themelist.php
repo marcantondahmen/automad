@@ -166,7 +166,7 @@ class Themelist {
 	
 	public function getThemeByKey($key) {
 		
-		if (array_key_exists($key, $this->themes)) {
+		if ($key && array_key_exists($key, $this->themes)) {
 			return $this->themes[$key];
 		} 
 		
