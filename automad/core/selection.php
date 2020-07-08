@@ -426,13 +426,16 @@ class Selection {
 
 			foreach ($options as $key => $regex) {
 
-				$this->selection = array_filter(
-					$this->selection, 
-					function($Page) use ($key, $regex) {
-						return preg_match($regex, $Page->get($key));
-					}
+				if (@preg_match($regex, null) !== false) {
+
+					$this->selection = array_filter(
+						$this->selection, 
+						function($Page) use ($key, $regex) {
+							return preg_match($regex, $Page->get($key));
+						}
+					);
 					
-				);
+				}
 
 			}
 
