@@ -81,7 +81,8 @@
 								'?ajax=users', 
 								'?ajax=add_user', 
 								'?ajax=edit_headless_template',
-								'?ajax=reset_headless_template'
+								'?ajax=reset_headless_template',
+								'?ajax=update_config'
 							];
 
 				if (triggers.includes(settings.url)) {

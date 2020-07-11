@@ -93,22 +93,15 @@
 			line-height: @base-body-line-height;
 			color: @tooltip-color;
 			background-color: @tooltip-background;
-			opacity: 0.9;
 			.shadow;
 
 			&:after {
 				content: '\f0eb';
 				position: absolute;
-				display: inline-block;
 				top: 6px;
 				left: 9px;
-				font-family: FontAwesome;
 				font-size: 18px;
-				font-weight: normal;
-    			font-style: normal;
-				line-height: 1;
-				-webkit-font-smoothing: antialiased;
-   				-moz-osx-font-smoothing: grayscale;
+				.icon-font;
 			}
 
 		}

@@ -98,7 +98,7 @@ class Headless {
 					</p>
 					<a 
 					href="#am-headless-modal" 
-					class="uk-button uk-button-large uk-button-primary"
+					class="uk-button uk-button-large uk-button-success"
 					data-uk-modal
 					>
 						<i class="uk-icon-pencil"></i>&nbsp;

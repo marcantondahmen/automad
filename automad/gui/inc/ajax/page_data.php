@@ -105,7 +105,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				</label>
 				<input 
 				id="am-input-data-title" 
-				class="uk-form-controls uk-form-large uk-width-1-1" 
+				class="am-form-title uk-form-controls uk-form-large uk-width-1-1" 
 				type="text" 
 				name="data[<?php echo AM_KEY_TITLE; ?>]" 
 				value="<?php echo htmlspecialchars($Page->get(AM_KEY_TITLE)); ?>" 
@@ -115,11 +115,10 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				<?php if (!AM_HEADLESS_ENABLED) { ?>
 					<a 
 					href="<?php echo AM_BASE_INDEX . $url; ?>" 
-					class="uk-button uk-button-link uk-button-mini uk-text-truncate uk-display-inline-block" 
+					class="uk-button uk-button-mini uk-margin-small-top uk-text-truncate uk-display-inline-block" 
 					title="<?php Text::e('btn_inpage_edit'); ?>" 
 					data-uk-tooltip="pos:'bottom'"
 					>
-						<i class="uk-icon-bookmark-o uk-icon-justify"></i>&nbsp;
 						<?php 
 						
 						if ($url == '/') {
@@ -332,8 +331,8 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				<?php if (!empty($textKeys)) { ?>
 					<!-- Text vars -->
 					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_content'); ?>&nbsp;
-						<span class="uk-badge"><?php echo count($textKeys); ?></span>
+						<?php Text::e('page_vars_content'); ?> &ndash;
+						<?php echo count($textKeys); ?>
 					</div>
 					<div class="uk-accordion-content">
 						<?php 
@@ -353,8 +352,8 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				<?php if (!empty($settingKeys)) { ?>
 					<!-- Setting vars -->
 					<div class="uk-accordion-title">
-						<?php Text::e('page_vars_settings'); ?>&nbsp;
-						<span class="uk-badge"><?php echo count($settingKeys); ?></span>
+						<?php Text::e('page_vars_settings'); ?> &ndash;
+						<?php echo count($settingKeys); ?>
 					</div>
 					<div class="uk-accordion-content">
 						<?php
@@ -373,8 +372,8 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				
 				<!-- Vars in data but not in any template -->
 				<div class="uk-accordion-title">
-					<?php Text::e('page_vars_unused'); ?>&nbsp;
-					<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
+					<?php Text::e('page_vars_unused'); ?> &ndash;
+					<span data-am-count="#am-add-variable-container .uk-form-row"></span>	
 				</div>
 				<div class="uk-accordion-content">
 					<?php 

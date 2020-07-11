@@ -34,25 +34,25 @@
 
 @badge-color:						@button-primary-color;
 @badge-background:					@button-primary-background;
-@badge-padding-horizontal:			7px;
-@badge-font-size:					11px;
-@badge-font-weight:					normal;
-@badge-line-height:					11px;
+@badge-padding-horizontal:			6px;
+@badge-font-size:					10px;
+@badge-font-weight:					600;
+@badge-line-height:					17px;
 @badge-text-transform:				none;
 @badge-hover-color:					@badge-color;
 
-@badge-success-background:			@am-success;
+@badge-success-background:			@button-success-background;
 
 @badge-notification-font-size:		12px;
 @badge-notification-line-height:	26px;
 
 .hook-badge() {
 
-	margin-top: -2px;
+	margin-top: -4px;
 	border-radius: 50px;
-	min-width: @badge-line-height + 10;
-	padding-top: 4px;
-	padding-bottom: 3px;
+	min-width: 20px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 	box-sizing: border-box;
 	text-align: center;
 	
@@ -66,8 +66,9 @@
 		padding: 0;
 		margin-top: 0;
 		border-radius: 4px;
-		line-height: 14px;
-		padding-top: 1px;
+		line-height: 15px;
+		color: @am-bg;
+		background-color: @am-text;
 		
 		&:before {	
 			content: '';
@@ -92,4 +93,5 @@
 
 .uk-badge-notification {
 	padding: 0 12px;
+	font-weight: 400;
 }

@@ -61,19 +61,19 @@ class AutomadPagelist {
 			<hr>
 			<ul class="uk-grid">
 				<li class="uk-width-medium-1-1">
-					<div class="uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
-						<i class="uk-icon-file-o"></i>&nbsp;
+					<div class="am-block-file-select uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
+						<i class="uk-icon-file"></i>&nbsp;
 						<span></span>
 						${create.select(
 							['am-block-file'], 
-							['default'].concat(window.AutomadBlockTemplates.pagelist), 
+							['default template'].concat(window.AutomadBlockTemplates.pagelist), 
 							this.data.file
 						).outerHTML}
 					</div>
 				</li>
 				<li class="uk-width-medium-1-1">
 					${create.label('Match URL Regex').outerHTML}
-					${create.editable(['cdx-input', 'am-block-match-url'], '/(work|blog)/', this.data.matchUrl).outerHTML}
+					${create.editable(['cdx-input', 'am-block-match-url'], 'work|blog', this.data.matchUrl).outerHTML}
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Type').outerHTML}

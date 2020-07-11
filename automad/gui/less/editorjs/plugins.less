@@ -68,16 +68,12 @@
 
 			&:before {
 				content: '\f10d';
-				display: inline-block;
 				position: absolute;
 				left: 0;
 				top: 0;
-				font-family: FontAwesome;
 				font-size: 1.8rem;
-				line-height: 1;
 				color: @am-border-color;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
+				.icon-font;
 			}
 
 		}
@@ -243,5 +239,12 @@
 		}
 
 	}
+
+	& .am-block-file-select {
+		text-transform: capitalize;
+		overflow-x: auto;
+		overflow-y: hidden;
+  		white-space: nowrap;
+	} 
 
 }

@@ -143,7 +143,7 @@ HTML;
 					<!-- Clear Cache -->
 					<p>$Text->sys_cache_clear_info</p>	
 					<form data-am-handler="clear_cache">
-						<button type="submit" class="uk-button uk-button-primary uk-button-large uk-margin-bottom">
+						<button type="submit" class="uk-button uk-button-success uk-button-large uk-margin-bottom">
 							<i class="uk-icon-refresh"></i>&nbsp;
 							$Text->sys_cache_clear
 						</button>

@@ -62,13 +62,11 @@ $this->element('header');
 				<?php Text::e('success_log_out'); ?>
 			</div>
 			<div class="uk-text-right">
-				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button">
-					<i class="uk-icon-home"></i>&nbsp;
+				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-link">
 					<?php Text::e('btn_home'); ?>
 				</a>
-				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>" class="uk-button">
-					<?php Text::e('btn_login'); ?>&nbsp;
-					<i class="uk-icon-sign-in"></i>
+				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>" class="uk-button uk-button-success">
+					<?php Text::e('btn_login'); ?>
 				</a>
 			</div>
 			<?php } else { ?>

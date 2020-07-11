@@ -102,7 +102,7 @@ class SiteTree {
 					$prefix = $Content->extractPrefixFromPath($Page->path);
 					
 					if (strlen($prefix) > 0) {
-						$title = $prefix . ' - ' . $title;
+						$title = $prefix . ' &ndash; ' . $title;
 					}
 					
 					$html .= '<a title="' . $Page->path . '" href="?' . http_build_query(array_merge($parameters, array('url' => $key)), '', '&amp;') . '">' . 

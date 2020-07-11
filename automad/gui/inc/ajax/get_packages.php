@@ -68,7 +68,7 @@ if ($packages = PackageManager::getPackages()) {
 		
 		<a 
 		href="https://packages.automad.org" 
-		class="uk-button uk-hidden-small" 
+		class="uk-button uk-button-link uk-hidden-small" 
 		target="_blank"
 		>
 			<i class="uk-icon-folder-open-o"></i>&nbsp;

@@ -51,12 +51,12 @@ class AutomadFilelist {
 			<div class="am-block-icon">${AutomadFilelist.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadFilelist.toolbox.title}</div>
 			<hr>
-			<div class="uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
-				<i class="uk-icon-file-o"></i>&nbsp;
+			<div class="am-block-file-select uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
+				<i class="uk-icon-file"></i>&nbsp;
 				<span></span>
 				${create.select(
 					['am-block-file'], 
-					['default'].concat(window.AutomadBlockTemplates.filelist), 
+					['default template'].concat(window.AutomadBlockTemplates.filelist), 
 					this.data.file
 				).outerHTML}
 			</div>

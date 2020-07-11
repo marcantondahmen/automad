@@ -73,7 +73,7 @@ class Package {
 			$active = 'uk-active';
 
 			$badge = <<< HTML
-					<span class="uk-panel-badge uk-badge uk-badge-primary">
+					<span class="uk-panel-badge uk-badge uk-badge-success">
 						$Text->packages_installed
 					</span>
 HTML;
@@ -97,7 +97,7 @@ HTML;
 					<form class="am-panel-bottom-right" data-am-handler="install_package">
 						<input type="hidden" name="package" value="$package->name">
 						<button 
-						class="uk-button uk-button-small uk-button-primary"
+						class="uk-button uk-button-small"
 						data-uk-modal="{target:'#am-modal-install-package-progress',keyboard:false,bgclose:false}"
 						>
 							$Text->btn_install	
@@ -115,7 +115,7 @@ HTML;
 					class="uk-display-block"
 					target="_blank"
 					>
-						<i class="uk-icon-folder-o uk-icon-medium"></i>
+						<i class="uk-icon-file-zip-o uk-icon-small"></i>
 						<div class="uk-panel-title uk-margin-small-top uk-padding-top-remove">
 								$package->name
 						</div>

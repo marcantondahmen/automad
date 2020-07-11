@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 if ($item = \Automad\Core\Request::post('item')) {
 
-	$this->jsonOutput(Icon::render($item));
+	$this->jsonOutput(Response::render($item));
 
 }
 

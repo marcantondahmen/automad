@@ -34,7 +34,7 @@
 
 
 @alert-margin-vertical:  	@utility-margin-large;
-@alert-padding: 			1rem;
+@alert-padding: 			@utility-margin-small;
 @alert-background: 			@am-bg;
 @alert-color:				@am-text;
 
@@ -48,5 +48,32 @@
 
 
 .hook-alert() {	
+	
 	.alert;
+
+	a& {
+
+		display: block;
+
+		&:hover {
+			color: @am-success;
+			border-color: @am-success;
+		}
+
+	}
+
+}
+
+.am-alert-readme {
+
+	@media (min-width: 1400px) {
+		position: fixed;
+		right: @utility-container-padding-horizontal;
+		top: 120px;
+		width: ~"calc(100vw - 1150px)";
+		max-width: 220px;
+		padding-left: @alert-padding;
+		padding-top: 47px;
+	}
+
 }

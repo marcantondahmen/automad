@@ -67,7 +67,7 @@ class Users {
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
-				class="uk-button uk-button-large uk-button-primary" 
+				class="uk-button uk-button-large uk-button-success" 
 				data-uk-modal 
 				data-am-status="users"
 				></a>
@@ -85,11 +85,11 @@ class Users {
 						></form>
 						<div class="uk-modal-footer uk-text-right">
 							<button type="button" class="uk-modal-close uk-button">
-								<span class="uk-hidden-small"><i class="uk-icon-close"></i>&nbsp;</span>
+								<i class="uk-icon-close"></i>&nbsp;
 								$Text->btn_close
 							</button>
 							<button type="button" class="uk-button uk-button-primary" data-am-submit="users">
-								<span class="uk-hidden-small"><i class="uk-icon-user-times"></i>&nbsp;</span>
+								<i class="uk-icon-user-times"></i>&nbsp;
 								$Text->btn_remove_selected
 							</button>
 						</div>

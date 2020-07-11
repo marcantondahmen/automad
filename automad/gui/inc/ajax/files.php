@@ -99,7 +99,7 @@ if ($files) { ?>
 				</a>
 			</div>&nbsp;
 			<button 
-			class="uk-button uk-hidden-small" 
+			class="uk-button uk-button-link uk-hidden-small" 
 			data-am-submit="files"
 			>
 				<i class="uk-icon-remove"></i>&nbsp;

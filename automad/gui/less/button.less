@@ -34,8 +34,9 @@
 
 
 @am-icon-button-size:				32px;
-@am-icon-button-margin-left: 		10px;
-@am-button-border-color:			#969696;
+@am-icon-button-font-size:			14px;
+@am-icon-button-margin-left: 		7px;
+@am-button-border-color:			@am-border-color;
 
 @button-color:						@am-text;
 @button-background:					@am-bg;
@@ -47,21 +48,21 @@
 @button-primary-color:				#FFFFFF;
 @button-primary-background:			@am-primary;
 @button-primary-hover-color:		#FFFFFF;
-@button-primary-hover-background:	lighten(@button-primary-background, 5%);
+@button-primary-hover-background:	lighten(@button-primary-background, 6%);
 @button-primary-active-color:		#FFFFFF;
 @button-primary-active-background:	@button-primary-hover-background;
 
 @button-success-color:				#FFFFFF;
 @button-success-background:			@am-success;
 @button-success-hover-color: 		#FFFFFF;
-@button-success-hover-background: 	darken(@button-success-background, 5%);
+@button-success-hover-background: 	darken(@button-success-background, 6%);
 @button-success-active-color: 		#FFFFFF;
 @button-success-active-background:	@button-success-hover-background;
 
 @button-danger-color:				#FFFFFF;
 @button-danger-background:			@am-danger;
 @button-danger-hover-color: 		#FFFFFF;
-@button-danger-hover-background:	darken(@button-danger-background, 5%);
+@button-danger-hover-background:	darken(@button-danger-background, 6%);
 @button-danger-active-color:		#FFFFFF;
 @button-danger-active-background:	@button-danger-hover-background;
 
@@ -88,7 +89,7 @@
 @button-small-padding-horizontal:	8px;
 @button-large-padding-horizontal:	12px;
 
-@button-link-color:					@button-color;
+@button-link-color:					@am-success;
 @button-link-hover-color:			@am-success;
 @button-link-hover-text-decoration: none;
 @button-link-disabled-color:        @am-muted;
@@ -103,9 +104,27 @@
 	&-link,
 	&-primary,
 	&-success,
-	&-danger,
-	.uk-modal-footer &.uk-modal-close:not(:last-child) {
+	&-danger {
 		border-color: transparent;
+	}
+
+	&.js-modal-confirm-cancel,
+	&.uk-modal-close:not(:last-child) {
+		&:extend(.uk-button-link all);
+	}
+
+	&.js-modal-confirm-cancel:before {
+		content: '\f00d\00a0\00a0';
+		.icon-font;
+	}
+
+	&.js-modal-confirm {
+		&:extend(.uk-button-success all);
+	}
+
+	&.js-modal-confirm:before {
+		content: '\f00c\00a0\00a0';
+		.icon-font;
 	}
 
 	&:active {
@@ -114,6 +133,10 @@
 
 	& + & {
 		margin-left: 5px;
+	}
+
+	&-mini {
+		vertical-align: baseline;
 	}
 	
 	&.uk-button-mini,
@@ -134,10 +157,8 @@
 
 		& .uk-button {
 
-			border-left: 1px solid @button-hover-background;
-
-			&-success {
-				border-left: 1px solid @button-success-hover-background;
+			&-success:not(:first-child) {
+				border-left-color: @button-success-hover-background;
 			}
 
 		}
@@ -145,7 +166,6 @@
 		& > :first-child {
 			border-top-left-radius: @am-radius;
 			border-bottom-left-radius: @am-radius;
-			border-left: none;
 		}
 
 		& > :last-child {
@@ -158,14 +178,12 @@
 }
 
 .hook-button-link() {
-	
-	padding: 0 !important;
-	border-left: none;
-	border-right: none;
-	outline: none !important;
 
-	input + & {
-		margin-top: 6px;
+	&:hover,
+	&:active,
+	&:focus {
+		outline: 0 !important;
+		background-color: @button-hover-background;
 	}
 
 }
@@ -192,6 +210,15 @@
 	
 }
 
+.hook-button-danger() {
+	
+	& .uk-badge {
+		color: @button-danger-background;
+		background-color: @button-danger-color;
+	}
+	
+}
+
 .am-icon-buttons {
 	
 	margin-left: -@am-icon-button-margin-left;
@@ -211,15 +238,28 @@
 		max-height: @am-icon-button-size;
 		text-align: center;
 		margin-left: @am-icon-button-margin-left;
-		line-height: 14px !important;
+		font-size: @am-icon-button-font-size;
+		line-height: @am-icon-button-font-size !important;
 		padding: ((@am-icon-button-size - 16) / 2) 0 !important;
 		border-radius: @am-icon-button-size / 2;
-
+		
 		& i {
-			max-height: 14px !important;
-			line-height: 14px !important;
+			max-height: @am-icon-button-font-size !important;
+			line-height: @am-icon-button-font-size !important;
 		}
 
 	}
 	
+}
+
+.am-button-title {
+	font-size: @base-body-font-size;
+	line-height: @base-body-line-height;
+	vertical-align: baseline;
+	color: @am-muted;
+
+	&:hover {
+		color: @am-text;
+	}
+
 }

@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The form theme readme component. 
+ *	The theme readme alert component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 Marc Anton Dahmen - <http://marcdahmen.de>
@@ -71,8 +71,8 @@ class ThemeReadme {
 
 				$html = \Automad\GUI\Components\Modal\Readme::render($id, $Theme->readme);
 				$html .= <<< HTML
-						<a href="#$id" class="uk-alert" data-uk-modal>
-							<b>$Theme->name</b> &mdash; $Text->theme_readme_help
+						<a href="#$id" class="am-alert-readme uk-alert" data-uk-modal>
+							$Text->theme_readme_alert
 						</a>
 HTML;
 

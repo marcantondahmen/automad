@@ -37,7 +37,7 @@
 
 @text-muted-color:		    @am-muted;
 @text-danger-color:			@am-danger;
-@text-small-line-height:    18px;
+@text-small-line-height:    20px;
 
 
 .am-text {
@@ -84,7 +84,7 @@
 	
 	& a {
 		
-		color: darken(@am-success, 7%);
+		color: @base-link-color;
 
 		&,
 		&:hover {
@@ -92,7 +92,7 @@
 		}
 
 		&:hover {
-			color: darken(@am-success, 20%);
+			color: @base-link-hover-color;
 		}
 		
 	}

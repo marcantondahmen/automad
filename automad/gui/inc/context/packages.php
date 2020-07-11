@@ -60,10 +60,10 @@ $this->element('header');
 		</ul>
 		
 		<!-- Filters -->
-		<div data-uk-sticky="{top:60}">
+		<div data-uk-sticky="{top:64}">
 			<div class="uk-form">
 				<input 
-				class="uk-width-1-1 uk-form-large" 
+				class="uk-width-1-1" 
 				type="search" 
 				name="filter" 
 				placeholder="<?php Text::e('packages_filter'); ?>"

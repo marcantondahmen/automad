@@ -76,23 +76,25 @@ if (User::get()) {
 			<!-- Buttons -->
 			<li class="am-navbar-buttons">
 				<div class="am-icon-buttons">
+					<!-- Debug Status -->
+					<span data-am-status="debug"></span>
 					<!-- Add Page -->
 					<a 
 					href="#am-add-page-modal" 
 					class="uk-button uk-button-primary" 
 					title="<?php Text::e('btn_add_page'); ?>"
 					data-uk-modal
-					data-uk-tooltip="{pos:'bottom'}"
+					data-uk-tooltip="{pos:'bottom-right'}"
 					>
 						<i class="uk-icon-plus"></i>
 					</a>
 					<!-- Save -->
 					<?php if ($submit) { ?>
 					<button 
-					title="<?php Text::e('btn_save'); ?> (Cmd/Ctrl + S)" 
+					title="<?php Text::e('btn_save'); ?> (Cmd/Ctrl+S)" 
 					class="uk-button uk-button-success" 
 					data-am-submit="<?php echo $submit; ?>" 
-					data-uk-tooltip="{pos:'bottom'}" 
+					data-uk-tooltip="{pos:'bottom-right'}" 
 					disabled
 					>
 						<i class="uk-icon-check"></i>
@@ -104,7 +106,7 @@ if (User::get()) {
 					data-uk-dropdown="{mode:'click'}"
 					>
 						<div class="uk-button">
-							<i class="uk-icon-user"></i>
+							<i class="uk-icon-ellipsis-v"></i>
 						</div>
 						<div class="uk-dropdown uk-dropdown-small">
 							<ul class="uk-nav uk-nav-dropdown">

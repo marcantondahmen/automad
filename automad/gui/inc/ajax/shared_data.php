@@ -82,7 +82,7 @@ if ($data = Core\Request::post('data')) {
 			</label>
 			<input 
 			id="am-input-data-sitename" 
-			class="uk-form-controls uk-form-large uk-width-1-1" 
+			class="am-form-title uk-form-controls uk-form-large uk-width-1-1" 
 			type="text" 
 			name="data[<?php echo AM_KEY_SITENAME; ?>]" 
 			value="<?php echo htmlspecialchars($data[AM_KEY_SITENAME]); ?>" 
@@ -132,7 +132,7 @@ if ($data = Core\Request::post('data')) {
 						</div>
 					</div>			
 					<ul 
-					class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-3 uk-margin-top" 
+					class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
 					data-uk-grid-match="{target:'.uk-panel'}" 
 					data-uk-grid-margin
 					>
@@ -189,8 +189,8 @@ if ($data = Core\Request::post('data')) {
 			<!-- Text variables -->
 			<?php if ($textKeys) { ?>
 				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_content'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($textKeys); ?></span>
+					<?php Text::e('shared_vars_content'); ?> &ndash;
+					<?php echo count($textKeys); ?>
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
@@ -210,8 +210,8 @@ if ($data = Core\Request::post('data')) {
 			<!-- Settings variables -->
 			<?php if ($settingKeys) { ?>
 				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_settings'); ?>&nbsp;
-					<span class="uk-badge"><?php echo count($settingKeys); ?></span>
+					<?php Text::e('shared_vars_settings'); ?> &ndash;
+					<?php echo count($settingKeys); ?>
 				</div>
 				<div class="uk-accordion-content">
 					<?php 
@@ -230,8 +230,8 @@ if ($data = Core\Request::post('data')) {
 			
 			<!-- Vars in data but not in any template -->
 			<div class="uk-accordion-title">
-				<?php Text::e('page_vars_unused'); ?>&nbsp;
-				<span class="uk-badge" data-am-count="#am-add-variable-container .uk-form-row"></span>	
+				<?php Text::e('page_vars_unused'); ?> &ndash;
+				<span data-am-count="#am-add-variable-container .uk-form-row"></span>	
 			</div>
 			<div class="uk-accordion-content">
 				<?php 

@@ -61,32 +61,32 @@ $this->element('header');
 ?>
 		
 		<div class="uk-margin-large-top">
-			<h1><?php echo $this->getShared()->get(AM_KEY_SITENAME); ?></h1>
+			<h1>
+				<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
+				<a href="?context=edit_shared" class="am-button-title">
+					<i class="uk-icon-pencil"></i>
+				</a>
+			</h1>
 		</div>
-		<div class="uk-margin-top uk-margin-large-bottom">
+
+		<p class="uk-text-small uk-margin-large-bottom">	
+			<i class="uk-icon-hdd-o uk-icon-justify"></i>&nbsp;
+			<?php echo getenv('SERVER_NAME'); ?>
+			<br>
+			<i class="uk-icon-heart-o uk-icon-justify"></i>&nbsp;
+			<?php Text::e('dashboard_modified'); ?>
+			<?php echo date('j. M Y, G:i', $mTime); ?>h
+			<br>
 			<a 
 			href="#am-server-info-modal" 
-			class="uk-button uk-button-small uk-button-link uk-text-truncate" 
+			class="uk-button uk-button-mini uk-text-muted uk-margin-small-top" 
 			data-uk-modal
 			>
-				<i class="uk-icon-hdd-o uk-icon-justify"></i>&nbsp;
-				<?php echo getenv('SERVER_NAME'); ?>
+				<?php Text::e('btn_more'); ?>
+				&nbsp;<i class="uk-icon-ellipsis-h"></i>
 			</a>
-			<br>
-			<span class="uk-text-small">
-				<i class="uk-icon-heartbeat uk-icon-justify"></i>&nbsp;
-				<span class="uk-hidden-small"><?php Text::e('dashboard_modified'); ?></span>
-				<?php echo date('j. M Y, G:i', $mTime); ?>h
-			</span>
-		</div>
-		<?php if (!AM_HEADLESS_ENABLED) { ?>
-			<p>
-				<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-left-small">
-					<i class="uk-icon-pencil"></i>&nbsp;
-					<?php Text::e('btn_inpage_edit'); ?>
-				</a>
-			</p>
-		<?php } ?>
+		</p>
+
 		<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-small-top">
 			<?php if (AM_HEADLESS_ENABLED) { ?>
 				<li class="uk-margin-small-bottom">
@@ -98,19 +98,22 @@ $this->element('header');
 						<?php Text::e('sys_headless_enable'); ?>
 					</a>
 				</li>
+			<?php } else { ?>
+				<li class="uk-margin-small-bottom">
+					<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-left">
+						<i class="uk-icon-mouse-pointer"></i>&nbsp;
+						<?php Text::e('btn_inpage_edit'); ?>
+					</a>
+				</li>
 			<?php } ?>
 			<li class="uk-margin-small-bottom">
 				<?php echo Components\Status\Button::render('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
 			</li>
-			<?php if (!AM_HEADLESS_ENABLED) { ?>
-				<li class="uk-margin-small-bottom">
-					<?php echo Components\Status\Button::render('debug', Core\Str::sanitize(Text::get('sys_debug'))); ?>
-				</li>
-			<?php } ?>
 			<li class="uk-margin-small-bottom">
 				<?php echo Components\Status\Button::render('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
 			</li>
 		</ul>
+
 		<div class="uk-margin-large-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
 			<?php echo Components\Grid\Pages::render($latestPages); ?>
@@ -140,7 +143,7 @@ $this->element('header');
 					<?php echo phpversion(); ?> / <?php echo php_sapi_name(); ?>
 				</p>
 				<hr>
-				<div class="uk-alert uk-margin-top-remove">
+				<div class="uk-alert uk-margin-top-remove" data-icon="&#xf1fe">
 					<?php echo Text::get('dashboard_memory') . ' ' . (memory_get_peak_usage(true) / 1048576) . 'M  (' . ini_get('memory_limit') . ')'; ?>
 				</div>
 				<div class="uk-modal-footer uk-text-right">

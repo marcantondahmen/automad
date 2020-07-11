@@ -83,7 +83,7 @@ class Language {
 			$languages, 
 			AM_FILE_GUI_TRANSLATION,
 			'',
-			'uk-button-large'
+			'uk-button-large uk-button-success'
 		);
 
 		return <<< HTML

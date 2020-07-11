@@ -47,18 +47,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The status icon component. 
+ *	The status response component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2019-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Icon {
+class Response {
 
 	
 	/**
-	 * 	Get the current status icon of a given system setting.
+	 * 	Get the current status response of a given system setting.
 	 * 	
 	 * 	@param string $item
 	 * 	@return array The output array with the generated status return markup
@@ -83,13 +83,22 @@ class Icon {
 		
 		if ($item == 'debug') {
 			
+			$output['status'] = '';
+			$tooltip = Text::get('sys_status_debug_enabled');
+			$tab = Core\Str::sanitize(Text::get('sys_debug'));
+			
 			if (AM_DEBUG_ENABLED) {
-				$output['status'] = '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
-									Text::get('sys_status_debug_enabled');
-			} else {
-				$output['status'] = '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
-									Text::get('sys_status_debug_disabled');
-			}
+				$output['status'] = <<< HTML
+					<a 
+					href="?context=system_settings#$tab" 
+					class="am-u-button am-u-button-danger" 
+					title="$tooltip" 
+					data-uk-tooltip="{pos:'bottom-right'}"
+					>
+						<i class="am-u-icon-bug"></i>
+					</a>	
+HTML;
+			} 
 			
 		}
 		
@@ -114,7 +123,7 @@ class Icon {
 			$updateVersion = System\Update::getVersion();
 			
 			if (version_compare(AM_VERSION, $updateVersion, '<')) {
-				$output['status'] = '<i class="uk-icon-refresh uk-icon-justify"></i>&nbsp;&nbsp;' .
+				$output['status'] = '<i class="uk-icon-download uk-icon-justify"></i>&nbsp;&nbsp;' .
 									Text::get('sys_status_update_available') . 
 									'&nbsp;&nbsp;<span class="uk-badge uk-badge-success">' . $updateVersion . '</span>';
 			} else {

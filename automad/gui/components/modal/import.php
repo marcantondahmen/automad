@@ -78,14 +78,8 @@ class Import {
 						</div>
 						<div class="am-form-input-button uk-form uk-flex">
 							<input class="uk-form-controls uk-width-1-1" type="text" name="importUrl" placeholder="URL">
-							<button type="button" class="uk-button uk-button-large">
+							<button type="button" class="uk-button uk-button-success uk-button-large">
 								<i class="uk-icon-cloud-download"></i>
-							</button>
-						</div>
-						<div class="uk-modal-footer uk-text-right">
-							<button type="button" class="uk-modal-close uk-button">
-								<i class="uk-icon-close"></i>&nbsp;
-								$Text->btn_close
 							</button>
 						</div>
 					</div>

@@ -57,7 +57,7 @@ if ($delete = \Automad\Core\Request::post('delete')) {
 ob_start();
 
 ?>
-<ul class="uk-grid uk-grid-width-medium-1-4">
+<ul class="uk-grid uk-grid-width-medium-1-4" data-uk-grid-margin>
 <?php
 
 foreach (Accounts::get() as $user => $hash) { 
