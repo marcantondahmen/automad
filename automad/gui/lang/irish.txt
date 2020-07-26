@@ -50,7 +50,7 @@ btn_edit: Cuir in Eagar
 
 -
 
-btn_edit_file_info: Cuir Faisnéis Comhad in Eagar
+btn_edit_file_info: Cuir Eolas Comhad in Eagar
 
 -
 
@@ -74,7 +74,7 @@ btn_getting_data: Sonraí a Fháil ...
 
 -
 
-btn_hide_page: Folaigh Leathanach sa Loingseoireacht
+btn_hide_page: Folaigh Leathanach sa Nascleanúint
 
 -
 
@@ -342,7 +342,7 @@ images_shared: Íomhánna Ginearálta
 
 -
 
-link_placeholder: Tosaigh teideal leathanaigh a chlóscríobh nó greamaigh nasc seachtrach anseo
+link_placeholder: Tosaigh clóscríobh teideal leathanaigh nó greamaigh nasc seachtrach anseo
 
 -
 
@@ -406,7 +406,7 @@ page_move_destination: Roghnaigh ceann scríbe le haghaidh gluaiseachta
 
 -
 
-page_settings: Socruithe leathanaigh
+page_settings: Socruithe Leathanach
 
 -
 
@@ -430,15 +430,15 @@ page_var_name: Ainm Athraitheach
 
 -
 
-page_vars_headless: Athróga
+page_vars_content: Ábhar
 
 -
 
-page_vars_template: Athróga sa teimpléad reatha
+page_vars_settings: Socruithe Teimpléad
 
 -
 
-page_vars_unused: Athróga neamhúsáidte
+page_vars_unused: Athróga Neamhúsáidte
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Ar mhaith leat an téama roghnaithe a chur i bhfeidhm agus l
 
 -
 
-shared_vars_headless: Athróga
+shared_vars_content: Ábhar Réamhshocraithe
 
 -
 
-shared_vars_main_theme: Athróga sa phríomhthéama
+shared_vars_settings: Socruithe Teimpléad Réamhshocraithe
 
 -
 
@@ -570,7 +570,7 @@ sys_cache_lifetime: Is é saolré an taisce
 
 -
 
-sys_cache_lifetime_info: Tá saolré uasta ag na sonraí agus na leathanaigh Automad i dtaisce. Tar éis saolré réada a bheith níos faide, atógfar a thaisce nuair a iarrfar é.
+sys_cache_lifetime_info: Tá saolré uasta ag na sonraí agus na leathanaigh Automad i dtaisce. Tar éis saolré an ruda a shárú, atógfar a thaisce nuair a iarrfar é.
 
 -
 
@@ -578,11 +578,11 @@ sys_cache_purge: Eolaire Purge Cache
 
 -
 
-sys_cache_purge_info: I gcodarsnacht leis an taisce a ghlanadh, bogfaidh an eolaire taisce gach comhad sealadach, leathanaigh scriosta, cúltacaí nuashonraithe agus íomhánna taiscthe chuig eolaire sealadach an chórais. Cuirfidh sé seo atógáil iomlán ar an taisce íomhá agus leathanaigh chomh maith le glanta ar gach leathanach scriosta. I bhformhór na gcóras, glanfar an t-eolaire sealadach go huathoibríoch ó am go ham nó ar atosaigh. Mar sin féin, ar roinnt córais caithfear an eolaire sin a ghlanadh de láimh.
+sys_cache_purge_info: I gcodarsnacht leis an taisce a ghlanadh, bogfaidh eolaire an taisce gach comhad sealadach, leathanaigh scriosta, cúltacaí nuashonraithe agus íomhánna taiscthe chuig eolaire sealadach an chórais. Cuirfidh sé seo atógáil iomlán ar an taisce íomhá agus leathanaigh chomh maith le glanta ar gach leathanach scriosta. I bhformhór na gcóras, glanfar an t-eolaire sealadach go huathoibríoch ó am go ham nó ar atosaigh. Mar sin féin, ar roinnt córais caithfear an eolaire sin a ghlanadh de láimh.
 
 -
 
-sys_debug_info: Nuair a chumasófar dífhabhtú, logálfar gach ceann de phróisis Automad chuig consól do bhrabhsálaí. Ní theastaíonn dífhabhtú ach le haghaidh forbartha nó fabhtcheartaithe agus ba cheart go mbeadh sé faoi mhíchumas i ngach cás eile.
+sys_debug_info: Nuair a chumasófar dífhabhtú, logálfar próisis uile Automad chuig consól do bhrabhsálaí. Ní theastaíonn dífhabhtú ach le haghaidh forbartha nó fabhtcheartaithe agus ba cheart go mbeadh sé faoi mhíchumas i ngach cás eile.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Cumasaítear dífhabhtú
 
 -
 
-sys_status_debug_disabled: Tá dífhabhtú faoi mhíchumas
-
--
-
 sys_status_update_available: Nuashonrú chuig
 
 -
@@ -638,11 +634,11 @@ sys_update_available: Tá leagan níos nuaí de Automad ar fáil agus réidh le 
 
 -
 
-sys_update_current_version: Is é an leagan atá suiteáilte faoi láthair
+sys_update_current_version: Tá do leagan suiteáilte faoi láthair
 
 -
 
-sys_update_items: Bíonn tionchar ag an nuashonrú ar na míreanna seo a leanas:
+sys_update_items: Tabhair faoi deara go dtéann an nuashonrú i bhfeidhm ar na comhaid agus na heolairí seo a leanas:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Fan le do thoil agus ná dún an fhuinneog agus tú ag nuas
 
 -
 
-sys_update_to: Nuashonrú chuig
+sys_update_to: Nuashonrú go leagan
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Úsáideoirí Cláraithe
 -
 
 sys_user_you: Tú
+
+-
+
+theme_readme_alert: Cliceáil anseo chun na cáipéisí don téama gníomhach a léamh!

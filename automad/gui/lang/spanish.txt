@@ -18,7 +18,7 @@ btn_browse: Búsqueda de archivos
 
 -
 
-btn_close: Cerrar
+btn_close: Cerca
 
 -
 
@@ -270,7 +270,7 @@ error_template_missing: Falta plantilla
 
 -
 
-error_update_connection: ¡No puedo conectarme al servidor de actualizaciones! Esto normalmente puede deberse a una configuración de actualización incorrecta (config.json), un error de certificado SSL o una biblioteca cURL faltante.
+error_update_connection: ¡No se puede conectar al servidor de actualización! Esto normalmente puede deberse a una configuración de actualización incorrecta (config.json), un error de certificado SSL o una biblioteca de cURL que falta.
 
 -
 
@@ -426,11 +426,11 @@ page_var_name: Nombre de la variable
 
 -
 
-page_vars_headless: Variables
+page_vars_content: Contenido
 
 -
 
-page_vars_template: Variables en la plantilla actual
+page_vars_settings: Configuraciones de plantilla
 
 -
 
@@ -462,11 +462,11 @@ shared_theme_apply: ¿Desea aplicar el tema seleccionado y actualizar la lista d
 
 -
 
-shared_vars_headless: Variables
+shared_vars_content: Contenido predeterminado
 
 -
 
-shared_vars_main_theme: Variables en el tema principal
+shared_vars_settings: Configuración de plantilla predeterminada
 
 -
 
@@ -478,7 +478,7 @@ shared_var_name: Nombre de la variable
 
 -
 
-search_no_results: No se encontraron páginas!
+search_no_results: ¡No se encontraron páginas!
 
 -
 
@@ -506,15 +506,11 @@ success_installed: Instalado exitosamente
 
 -
 
-success_password_changed: ¡Tu contraseña se cambió con éxito!
+success_password_changed: ¡Su contraseña se cambió con éxito!
 
 -
 
-success_log_out: Salió exitosamente
-
--
-
-success_remove: Eliminado exitosamente
+success_log_out: Cerrar sesión correctamente
 
 -
 
@@ -526,7 +522,7 @@ success_saved: Cambios guardados
 
 -
 
-success_packages_updated: Se actualizaron con éxito todos los paquetes
+success_packages_updated: Se actualizaron correctamente todos los paquetes
 
 -
 
@@ -574,7 +570,7 @@ sys_headless_edit_info: La estructura de los datos JSON devueltos está controla
 
 -
 
-sys_headless_info: La activación del modo sin cabeza convierte a Automad en un sistema de administración de contenido que se enfoca completamente en la creación de contenido sin una capa de presentación. Si bien el Tablero aún se puede usar para administrar contenido, se puede acceder a todos los datos y archivos a través de una API JSON de solo lectura.
+sys_headless_info: La activación del modo sin cabeza convierte a Automad en un sistema de administración de contenido que se enfoca completamente en la creación de contenido sin una capa de presentación. Si bien el Tablero aún se puede usar para administrar el contenido, se puede acceder a todos los datos y archivos a través de una API JSON de solo lectura.
 
 -
 
@@ -598,10 +594,6 @@ sys_status_debug_enabled: La depuración está habilitada
 
 -
 
-sys_status_debug_disabled: La depuración está deshabilitada
-
--
-
 sys_status_update_available: Actualización para
 
 -
@@ -622,11 +614,11 @@ sys_update_available: Una versión más nueva de Automad está disponible y list
 
 -
 
-sys_update_current_version: La versión instalada actualmente es
+sys_update_current_version: Su versión instalada actualmente es
 
 -
 
-sys_update_items: Los siguientes elementos se ven afectados por la actualización:
+sys_update_items: Tenga en cuenta que los siguientes archivos y directorios se ven afectados por la actualización:
 
 -
 
@@ -638,7 +630,7 @@ sys_update_progress: Espere y no cierre la ventana mientras actualiza ...
 
 -
 
-sys_update_to: Actualización para
+sys_update_to: Actualizar a la versión
 
 -
 
@@ -686,4 +678,8 @@ sys_user_add_repeat: Repite la contraseña
 
 -
 
-sys_user_you: Usted
+sys_user_you: Tú
+
+-
+
+theme_readme_alert: ¡Haga clic aquí para leer la documentación del tema activo!

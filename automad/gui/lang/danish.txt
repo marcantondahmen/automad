@@ -290,7 +290,7 @@ error_update_failed: Opdatering fejlede! Gendan din installation fra en sikkerhe
 
 -
 
-error_update_not_supported: Opdateringer understøttes ikke af din server! Opdatereren kræver, at der er installeret cURL- og ZIP-biblioteker.
+error_update_not_supported: Opdateringer understøttes ikke af din server! Opdatereren kræver, at cURL- og ZIP-biblioteker skal installeres.
 
 -
 
@@ -394,7 +394,7 @@ packages_updating: Opdaterer pakker ...
 
 -
 
-packages_removing: Fjerner pakke ...
+packages_removing: Fjerner pakken ...
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Variabel Navn
 
 -
 
-page_vars_headless: Variable
+page_vars_content: Indhold
 
 -
 
-page_vars_template: Variabler i den aktuelle skabelon
+page_vars_settings: Skabelonindstillinger
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Vil du anvende det valgte tema og opdatere listen over tilg�
 
 -
 
-shared_vars_headless: Variable
+shared_vars_content: Standardindhold
 
 -
 
-shared_vars_main_theme: Variabler i hovedtemaet
+shared_vars_settings: Standard skabelonindstillinger
 
 -
 
@@ -510,7 +510,7 @@ success_config_update: Opdateret konfiguration!
 
 -
 
-success_created: Oprettet vellykket <br>
+success_created: Oprettet med succes
 
 -
 
@@ -530,7 +530,7 @@ success_remove: Fjernet
 
 -
 
-success_reset_headless: Gendannet standardhovedløs-skabelon blev succesfuld!
+success_reset_headless: Gendannet standardhovedløs skabelon!
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: I modsætning til blot at rydde cachen flytter cache-biblioteket også alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cache-billeder til temprary-biblioteket i systemet. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecachen samt en oprydning af alle slettede sider. På de fleste systemer renses det midlertidige bibliotek automatisk fra tid til anden eller ved genstart. På nogle systemer skal denne mappe imidlertid ryddes manuelt.
+sys_cache_purge_info: I modsætning til blot at rydde cachen, vil rensning af cache-biblioteket også flytte alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cache-gemmer til temprary-biblioteket i systemet. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecache samt en oprydning af alle slettede sider. På de fleste systemer renses det midlertidige bibliotek automatisk fra tid til anden eller ved genstart. På nogle systemer skal denne mappe imidlertid ryddes manuelt.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Fejlsøgning er aktiveret
 
 -
 
-sys_status_debug_disabled: Fejlsøgning er deaktiveret
-
--
-
 sys_status_update_available: Opdater til
 
 -
@@ -638,11 +634,11 @@ sys_update_available: En nyere version af Automad er tilgængelig og klar til in
 
 -
 
-sys_update_current_version: Den aktuelt installerede version er
+sys_update_current_version: Din aktuelt installerede version er
 
 -
 
-sys_update_items: Følgende poster påvirkes af opdateringen:
+sys_update_items: Bemærk, at følgende filer og mapper er påvirket af opdateringen:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Vent venligst og luk ikke vinduet, mens du opdaterer ...
 
 -
 
-sys_update_to: Opdater til
+sys_update_to: Opdater til version
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrerede brugere
 -
 
 sys_user_you: Du
+
+-
+
+theme_readme_alert: Klik her for at læse dokumentationen til det aktive tema!

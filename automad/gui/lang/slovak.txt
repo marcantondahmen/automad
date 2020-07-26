@@ -242,7 +242,7 @@ error_packages: Nepodarilo sa načítať balíčky od spoločnosti Packagist!
 
 -
 
-error_composer_memory: Váš server nemá dostatok pamäte na inštaláciu, aktualizáciu alebo odstránenie balíkov! V prípade, že prevádzkujete túto stránku na zdieľanom serveri s obmedzeným množstvom pamäte, skúste aktualizovať svoj plán alebo nainštalovať svoje stránky na lokálny počítač bez obmedzenia pamäte.
+error_composer_memory: Váš server nemá dostatok pamäte na inštaláciu, aktualizáciu alebo odstránenie balíkov! V prípade, že prevádzkujete túto stránku na zdieľanom serveri s obmedzeným množstvom pamäte, skúste upgradovať svoj plán alebo ho nainštalovať na lokálny počítač bez obmedzenia pamäte.
 
 -
 
@@ -274,7 +274,7 @@ error_template_missing: Chýba šablóna
 
 -
 
-error_update_connection: Nedá sa pripojiť k aktualizačnému serveru! To môže byť zvyčajne spôsobené nesprávnou konfiguráciou aktualizácie (config.json), chybou certifikátu SSL alebo chýbajúcou knižnicou CURL.
+error_update_connection: Nedá sa pripojiť k aktualizačnému serveru! To by mohlo byť zvyčajne spôsobené nesprávnou konfiguráciou aktualizácie (config.json), chybou certifikátu SSL alebo chýbajúcou knižnicou cURL.
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Názov premennej
 
 -
 
-page_vars_headless: Premenné
+page_vars_content: Obsah
 
 -
 
-page_vars_template: Premenné v aktuálnej šablóne
+page_vars_settings: Nastavenia šablóny
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Chcete teraz použiť vybratú tému a aktualizovať zoznam 
 
 -
 
-shared_vars_headless: Premenné
+shared_vars_content: Predvolený obsah
 
 -
 
-shared_vars_main_theme: Premenné v hlavnej téme
+shared_vars_settings: Predvolené nastavenie šablóny
 
 -
 
@@ -502,7 +502,7 @@ success_cache_cleared: Vyrovnávacia pamäť bola úspešne vymazaná!
 
 -
 
-success_cache_purged: Adresár vyrovnávacej pamäte sa úspešne vymazal!
+success_cache_purged: Adresár vyrovnávacej pamäte bol úspešne vymazaný!
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Vyčistiť adresár cache
 
 -
 
-sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamäte, vyčistenie adresára vyrovnávacej pamäte presunie aj všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do dočasného adresára systému. Vynúti to úplné obnovenie vyrovnávacej pamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Na väčšine systémov sa dočasný adresár z času na čas alebo po reštarte automaticky vyčistí. Na niektorých systémoch sa však tento adresár musí vymazať manuálne.
+sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamäte, vyčistenie adresára vyrovnávacej pamäte presunie aj všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do adresára Temprary systému. Vynúti to úplné obnovenie vyrovnávacej pamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Na väčšine systémov sa dočasný adresár z času na čas alebo po reštarte automaticky vyčistí. V niektorých systémoch sa však tento adresár musí vymazať manuálne.
 
 -
 
@@ -586,11 +586,11 @@ sys_debug_info: Ak je aktivované ladenie, všetky procesy Automad budú zazname
 
 -
 
-sys_headless_edit_info: Štruktúra vrátených údajov JSON je riadená šablónou. Túto šablónu môžete upraviť pomocou vstavaného jazyka šablóny Automad na prispôsobenie polí pomocou premenných, objektov a kontrolných štruktúr.
+sys_headless_edit_info: Štruktúra vrátených údajov JSON je riadená šablónou. Túto šablónu môžete upravovať pomocou zabudovaného jazyka šablóny Automad na prispôsobenie polí pomocou premenných, objektov a riadiacich štruktúr.
 
 -
 
-sys_headless_info: Aktivácia režimu bez hlavy zmení Automad na systém správy obsahu so zameraním výlučne na tvorbu obsahu bez prezentačnej vrstvy. Aj keď sa informačný panel dá naďalej používať na správu obsahu, všetky údaje a súbory sú dostupné prostredníctvom rozhrania JSON API na čítanie.
+sys_headless_info: Aktivácia režimu bez hlavy zmení Automad na systém na správu obsahu so zameraním výlučne na tvorbu obsahu bez prezentačnej vrstvy. Aj keď sa informačný panel dá naďalej používať na správu obsahu, všetky údaje a súbory sú dostupné prostredníctvom rozhrania JSON API na čítanie.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Ladenie je povolené
 
 -
 
-sys_status_debug_disabled: Ladenie je zakázané
-
--
-
 sys_status_update_available: Aktualizujte na
 
 -
@@ -634,15 +630,15 @@ sys_update: Aktualizovať
 
 -
 
-sys_update_available: K dispozícii je novšia verzia aplikácie Automad a je pripravená na inštaláciu. <br> Pred aktualizáciou si prosím zazálohujte svoju súčasnú inštaláciu!
+sys_update_available: K dispozícii je novšia verzia automatu a je pripravená na inštaláciu. <br> Pred aktualizáciou si prosím zazálohujte svoju aktuálnu inštaláciu!
 
 -
 
-sys_update_current_version: Aktuálne nainštalovaná verzia je
+sys_update_current_version: Vaša aktuálne nainštalovaná verzia je
 
 -
 
-sys_update_items: Aktualizácia sa týka nasledujúcich položiek:
+sys_update_items: Upozorňujeme, že aktualizácia ovplyvní nasledujúce súbory a adresáre:
 
 -
 
@@ -650,11 +646,11 @@ sys_update_not_required: Automad je aktuálny.
 
 -
 
-sys_update_progress: Počkajte a nezatvárajte okno počas aktualizácie ...
+sys_update_progress: Čakajte a nezatvárajte okno počas aktualizácie ...
 
 -
 
-sys_update_to: Aktualizujte na
+sys_update_to: Aktualizácia na verziu
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrovaní užívatelia
 -
 
 sys_user_you: Vy
+
+-
+
+theme_readme_alert: Kliknite sem a prečítajte si dokumentáciu k aktívnej téme!

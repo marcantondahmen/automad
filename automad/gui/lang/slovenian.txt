@@ -82,7 +82,7 @@ btn_home: Home
 
 -
 
-btn_import: Uvozi z URL-ja
+btn_import: Uvoz iz URL-ja
 
 -
 
@@ -262,7 +262,7 @@ error_password_repeat: Vnesite dvakrat isto novo geslo!
 
 -
 
-error_password_reuse: Ne uporabljajte svojega starega gesla!
+error_password_reuse: Ne uporabite ponovno svojega starega gesla!
 
 -
 
@@ -274,7 +274,7 @@ error_template_missing: Predloga manjka
 
 -
 
-error_update_connection: Ne morem se povezati s strežnikom za posodobitve! To lahko ponavadi povzroči napačna konfiguracija posodobitve (config.json), napaka potrdila SSL ali manjkajoča knjižnica CURL.
+error_update_connection: Ne morem se povezati s strežnikom za posodobitve! Običajno lahko to povzroči napačna konfiguracija posodobitve (config.json), napaka v potrdilu SSL ali manjkajoča knjižnica CURL.
 
 -
 
@@ -398,7 +398,7 @@ packages_removing: Odstranjevanje paketa ...
 
 -
 
-page_add_location: Izberite lokacijo za novo stran
+page_add_location: Izberite mesto za novo stran
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Ime spremenljivke
 
 -
 
-page_vars_headless: Spremenljivke
+page_vars_content: Vsebina
 
 -
 
-page_vars_template: Spremenljivke v trenutni predlogi
+page_vars_settings: Nastavitve predloge
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Ali želite zdaj uporabiti izbrano temo in posodobiti seznam
 
 -
 
-shared_vars_headless: Spremenljivke
+shared_vars_content: Privzeta vsebina
 
 -
 
-shared_vars_main_theme: Spremenljivke v glavni temi
+shared_vars_settings: Privzete nastavitve predloge
 
 -
 
@@ -482,7 +482,7 @@ shared_var_name: Ime spremenljivke
 
 -
 
-search_no_results: Strani niso najdene!
+search_no_results: Ni najdenih strani!
 
 -
 
@@ -554,7 +554,7 @@ sys_cache_clear: Počistiti začasni pomnilnik
 
 -
 
-sys_cache_clear_info: Če izbrišete predpomnilnik spletnega mesta, je potrebno ponovno pregledati posodobljene strani in datoteke. To dejanje ne bo odstranilo nobenih datotek strani ali slik iz predpomnilnika.
+sys_cache_clear_info: Če izbrišete predpomnilnik mesta, morate znova pregledati posodobljene strani in datoteke. To dejanje ne bo odstranilo nobenih datotek strani ali slik iz predpomnilnika.
 
 -
 
@@ -590,7 +590,7 @@ sys_headless_edit_info: Strukturo vrnjenih podatkov JSON nadzira predloga. To pr
 
 -
 
-sys_headless_info: Aktiviranje brezglavega načina samodejno prikaže Automad v sistem za upravljanje vsebine, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvene plasti. Čeprav se nadzorna plošča še vedno lahko uporablja za upravljanje z vsebino, so vsi podatki in datoteke dostopni prek JSON API-ja, ki je samo za branje.
+sys_headless_info: Aktiviranje brezglavega načina delovanja Automad pretvori v sistem za upravljanje vsebine, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvenega sloja. Čeprav se nadzorna plošča še vedno lahko uporablja za upravljanje z vsebino, so vsi podatki in datoteke dostopni prek JSON API-ja, ki je samo za branje.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Odpravljanje napak je omogočeno
 
 -
 
-sys_status_debug_disabled: Odpravljanje napak je onemogočeno
-
--
-
 sys_status_update_available: Posodobi v
 
 -
@@ -634,7 +630,7 @@ sys_update: Nadgradnja
 
 -
 
-sys_update_available: Na voljo je novejša različica Automada in pripravljena za namestitev. <br> Pred posodabljanjem varnostno kopirajte trenutno namestitev!
+sys_update_available: Na voljo je novejša različica Automada in pripravljena za namestitev. <br> Pred posodobitvijo varnostno kopirajte trenutno namestitev!
 
 -
 
@@ -642,7 +638,7 @@ sys_update_current_version: Trenutno nameščena različica je
 
 -
 
-sys_update_items: Na posodobitev vplivajo naslednji elementi:
+sys_update_items: Upoštevajte, da na posodobitev vplivajo naslednje datoteke in imeniki:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Počakajte in med posodabljanjem ne zapirajte okna ...
 
 -
 
-sys_update_to: Posodobi v
+sys_update_to: Posodobi na različico
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrirani uporabniki
 -
 
 sys_user_you: Ti
+
+-
+
+theme_readme_alert: Kliknite tukaj, da preberete dokumentacijo za aktivno temo!

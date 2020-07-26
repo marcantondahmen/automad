@@ -18,7 +18,7 @@ btn_browse: Parcourir les fichiers
 
 -
 
-btn_close: Proche
+btn_close: Fermer
 
 -
 
@@ -406,7 +406,7 @@ page_move_destination: Sélectionnez une destination pour vous déplacer
 
 -
 
-page_settings: Paramètres de page
+page_settings: Paramètres de la page
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Nom de variable
 
 -
 
-page_vars_headless: Variables
+page_vars_content: Contenu
 
 -
 
-page_vars_template: Variables dans le modèle actuel
+page_vars_settings: Paramètres du modèle
 
 -
 
@@ -462,11 +462,11 @@ shared_theme_apply: Voulez-vous appliquer le thème sélectionné et mettre à j
 
 -
 
-shared_vars_headless: Variables
+shared_vars_content: Contenu par défaut
 
 -
 
-shared_vars_main_theme: Variables dans le thème principal
+shared_vars_settings: Paramètres de modèle par défaut
 
 -
 
@@ -550,7 +550,7 @@ sys_cache_clear: Vider le cache
 
 -
 
-sys_cache_clear_info: L'effacement du cache du site force une nouvelle analyse des pages et des fichiers mis à jour. Cette action ne supprimera aucun fichier ou image de page du répertoire cache.
+sys_cache_clear_info: L'effacement du cache du site force une nouvelle analyse des pages et des fichiers mis à jour. Cette action ne supprimera aucun fichier d'échange ni aucune image du répertoire cache.
 
 -
 
@@ -574,7 +574,7 @@ sys_cache_purge: Purger le répertoire du cache
 
 -
 
-sys_cache_purge_info: Contrairement à l'effacement simple du cache, la purge du répertoire du cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images mises en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de pages ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
+sys_cache_purge_info: Contrairement à la simple suppression du cache, la purge du répertoire du cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images mises en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de pages ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
 
 -
 
@@ -610,10 +610,6 @@ sys_status_debug_enabled: Le débogage est activé
 
 -
 
-sys_status_debug_disabled: Le débogage est désactivé
-
--
-
 sys_status_update_available: Mise à jour de
 
 -
@@ -634,11 +630,11 @@ sys_update_available: Une nouvelle version d'Automad est disponible et prête à
 
 -
 
-sys_update_current_version: La version actuellement installée est
+sys_update_current_version: Votre version actuellement installée est
 
 -
 
-sys_update_items: Les éléments suivants sont affectés par la mise à jour:
+sys_update_items: Notez que les fichiers et répertoires suivants sont affectés par la mise à jour:
 
 -
 
@@ -650,7 +646,7 @@ sys_update_progress: Veuillez patienter et ne fermez pas la fenêtre pendant la 
 
 -
 
-sys_update_to: Mise à jour de
+sys_update_to: Mettre à jour vers la version
 
 -
 
@@ -698,4 +694,4 @@ sys_user_registered: Utilisateurs enregistrés
 
 -
 
-sys_user_you: Vous
+theme_readme_alert: Cliquez ici pour lire la documentation du thème actif!

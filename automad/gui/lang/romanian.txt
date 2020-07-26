@@ -22,7 +22,7 @@ btn_close: Închide
 
 -
 
-btn_copy_url_clipboard: Copiați adresa URL în Clipboard
+btn_copy_url_clipboard: Copiați URL-ul în Clipboard
 
 -
 
@@ -406,7 +406,7 @@ page_move_destination: Selectați o destinație pentru mutare
 
 -
 
-page_settings: Setări de pagină
+page_settings: Setări pagină
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Nume variabilă
 
 -
 
-page_vars_headless: Variabile
+page_vars_content: Conţinut
 
 -
 
-page_vars_template: Variabile în șablonul curent
+page_vars_settings: Setări de șabloane
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Doriți să aplicați tema selectată și să actualizați l
 
 -
 
-shared_vars_headless: Variabile
+shared_vars_content: Conținut implicit
 
 -
 
-shared_vars_main_theme: Variabile în tema principală
+shared_vars_settings: Setări implicite pentru șabloane
 
 -
 
@@ -578,11 +578,11 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: Spre deosebire de ștergerea cache-ului, purjarea directorului din cache va muta și toate fișierele temporare, paginile șterse, actualizarea copiilor de rezervă și imaginile din cache în directorul temporal al sistemului. Acest lucru va impune o reconstrucție completă a imaginii și a cache-ului de pagină, precum și o curățare a tuturor paginilor șterse. În majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme, acel director trebuie să fie șters manual.
+sys_cache_purge_info: Spre deosebire de ștergerea cache-ului, purjarea directorului de memorie cache va muta și toate fișierele temporare, paginile șterse, actualizarea copiilor de rezervă și imaginile din cache în directorul temporal al sistemului. Acest lucru va impune o reconstrucție completă a imaginii și a cache-ului de pagină, precum și o curățare a tuturor paginilor șterse. În majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme, acel director trebuie să fie șters manual.
 
 -
 
-sys_debug_info: Când debugging-ul este activat, toate procesele Automad vor fi înregistrate în consola browserului. Debugging-ul este necesar doar pentru dezvoltare sau depanare și ar trebui dezactivat în toate celelalte cazuri.
+sys_debug_info: Când debugging-ul este activat, toate procesele Automad vor fi înregistrate în consola browserului. Debugarea este necesară numai pentru dezvoltare sau depanare și ar trebui dezactivată în toate celelalte cazuri.
 
 -
 
@@ -590,7 +590,7 @@ sys_headless_edit_info: Structura datelor JSON returnate este controlată de un 
 
 -
 
-sys_headless_info: Activarea modului fără cap transformă Automad într-un sistem de gestionare a conținutului concentrându-se în întregime pe crearea de conținut fără un strat de prezentare. În timp ce tabloul de bord poate fi utilizat în continuare pentru gestionarea conținutului, toate datele și fișierele sunt accesibile printr-o API JSON de citire.
+sys_headless_info: Activarea modului fără cap transformă Automad într-un sistem de gestionare a conținutului concentrându-se în întregime pe crearea de conținut fără un strat de prezentare. În timp ce tabloul de bord poate fi utilizat în continuare pentru gestionarea conținutului, toate datele și fișierele sunt accesibile printr-o API JSON doar de citire.
 
 -
 
@@ -602,7 +602,7 @@ sys_language_info: Există mai multe limbi disponibile pentru tabloul de bord. T
 
 -
 
-sys_status_cache_enabled: Cache-ul este activat
+sys_status_cache_enabled: Caching-ul este activat
 
 -
 
@@ -611,10 +611,6 @@ sys_status_cache_disabled: Cache-ul este dezactivat
 -
 
 sys_status_debug_enabled: Debugging-ul este activat
-
--
-
-sys_status_debug_disabled: Debugging-ul este dezactivat
 
 -
 
@@ -634,15 +630,15 @@ sys_update: Actualizați
 
 -
 
-sys_update_available: O versiune mai nouă a Automad este disponibilă și este gata de instalare. <br> Vă rugăm să faceți o copie de rezervă a instalației curente înainte de actualizare!
+sys_update_available: O versiune mai nouă de Automad este disponibilă și este gata de instalare. <br> Vă rugăm să faceți o copie de rezervă a instalației curente înainte de actualizare!
 
 -
 
-sys_update_current_version: Versiunea actuală instalată este
+sys_update_current_version: Versiunea dvs. actuală instalată este
 
 -
 
-sys_update_items: Următoarele elemente sunt afectate de actualizare:
+sys_update_items: Rețineți că următoarele actualizări sunt afectate de următoarele fișiere și directoare:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Vă rugăm să așteptați și să nu închideți fereastra
 
 -
 
-sys_update_to: Actualizați la
+sys_update_to: Actualizare la versiune
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Utilizatori Înregistrați
 -
 
 sys_user_you: Tu
+
+-
+
+theme_readme_alert: Faceți clic aici pentru a citi documentația pentru tema activă!

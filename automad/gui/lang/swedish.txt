@@ -294,7 +294,7 @@ error_update_not_supported: Uppdateringar stöds inte av din server! Uppdaterare
 
 -
 
-error_update_permission: Kan inte köra uppdateringen! Behörigheter nekas!
+error_update_permission: Kan inte köra uppdateringen! Tillstånd nekas!
 
 -
 
@@ -426,15 +426,15 @@ page_theme_template: Mall
 
 -
 
-page_var_name: Variabel Namn
+page_var_name: Variabelnamn
 
 -
 
-page_vars_headless: Variabler
+page_vars_content: Innehåll
 
 -
 
-page_vars_template: Variabler i aktuell mall
+page_vars_settings: Mallinställningar
 
 -
 
@@ -462,15 +462,15 @@ shared_theme: Huvudtema
 
 -
 
-shared_theme_apply: Vill du använda det valda temat och uppdatera listan med tillgängliga variabler nu? Dina osparade ändringar sparas.
+shared_theme_apply: Vill du tillämpa det valda temat och uppdatera listan med tillgängliga variabler nu? Dina sparade ändringar sparas.
 
 -
 
-shared_vars_headless: Variabler
+shared_vars_content: Standardinnehåll
 
 -
 
-shared_vars_main_theme: Variabler i huvudtemat
+shared_vars_settings: Standardmallinställningar
 
 -
 
@@ -478,7 +478,7 @@ shared_vars_unused: Oanvända variabler
 
 -
 
-shared_var_name: Variabel Namn
+shared_var_name: Variabelnamn
 
 -
 
@@ -518,7 +518,7 @@ success_installed: Framgångsrikt installerad
 
 -
 
-success_password_changed: Ditt lösenord har ändrats framgångsrikt!
+success_password_changed: Ditt lösenord har ändrats!
 
 -
 
@@ -526,7 +526,7 @@ success_log_out: Loggad ut framgångsrikt
 
 -
 
-success_remove: Har lyckats ta bort
+success_remove: Har tagits bort
 
 -
 
@@ -546,7 +546,7 @@ success_packages_updated: Alla paket har uppdaterats
 
 -
 
-sys_cache_info: Cachning är avgörande för att påskynda din webbplats och bör i allmänhet vara aktiverad. Men under vissa omständigheter kanske du vill inaktivera eller rensa din cache.
+sys_cache_info: Cache är avgörande för att påskynda din webbplats och bör i allmänhet vara aktiverad. Men under vissa omständigheter kanske du vill inaktivera eller rensa din cache.
 
 -
 
@@ -562,7 +562,7 @@ sys_cache_monitor: Kontrollintervallet är
 
 -
 
-sys_cache_monitor_info: När caching är aktiverat kommer Automad att regelbundet leta efter förändringar i filsystemet. Frekvensen för dessa kontroller kan definieras här.
+sys_cache_monitor_info: När caching är aktiverat kommer Automad att regelbundet leta efter ändringar i filsystemet. Frekvensen för dessa kontroller kan definieras här.
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensar cache-katalogen också alla temporära filer, raderade sidor, uppdaterings-säkerhetskopior och cachade bilder till temprary-katalogen för systemet. Detta kommer att tvinga fram en fullständig ombyggnad av bild- och sidcachen och en rensning av alla raderade sidor. På de flesta system kommer den tillfälliga katalogen att rensas upp automatiskt då och då eller vid omstart. Men på vissa system måste katalogen rensas manuellt.
+sys_cache_purge_info: Till skillnad från att helt enkelt rensa cachen, rensar cache-katalogen också alla temporära filer, raderade sidor, uppdaterings-säkerhetskopior och cachade bilder till temprary-katalogen för systemet. Detta kommer att tvinga fram en fullständig ombyggnad av bild- och sidcachen samt en rensning av alla raderade sidor. På de flesta system kommer den tillfälliga katalogen att rensas upp automatiskt då och då eller vid omstart. På vissa system måste emellertid den katalogen rensas manuellt.
 
 -
 
@@ -590,7 +590,7 @@ sys_headless_edit_info: Strukturen för de returnerade JSON-uppgifterna styrs av
 
 -
 
-sys_headless_info: Att aktivera det huvudlösa läget förvandlar Automad till ett innehållshanteringssystem som helt fokuserar på innehållsskapande utan presentationslager. Även om instrumentpanelen fortfarande kan användas för att hantera innehåll, är alla data och filer tillgängliga via ett skrivskyddat JSON API.
+sys_headless_info: Att aktivera det huvudlösa läget förvandlar Automad till ett innehållshanteringssystem som helt fokuserar på innehållsskapande utan ett presentationslager. Även om instrumentpanelen fortfarande kan användas för att hantera innehåll, är alla data och filer tillgängliga via ett skrivskyddat JSON API.
 
 -
 
@@ -606,15 +606,11 @@ sys_status_cache_enabled: Cachning är aktiverad
 
 -
 
-sys_status_cache_disabled: Cachning är inaktiverad
+sys_status_cache_disabled: Cachningen är inaktiverad
 
 -
 
 sys_status_debug_enabled: Felsökning är aktiverad
-
--
-
-sys_status_debug_disabled: Felsökning är inaktiverad
 
 -
 
@@ -638,11 +634,11 @@ sys_update_available: En nyare version av Automad är tillgänglig och redo att 
 
 -
 
-sys_update_current_version: Den för närvarande installerade versionen är
+sys_update_current_version: Din för närvarande installerade version är
 
 -
 
-sys_update_items: Följande objekt påverkas av uppdateringen:
+sys_update_items: Observera att följande filer och kataloger påverkas av uppdateringen:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Vänta och stäng inte fönstret när du uppdaterar ...
 
 -
 
-sys_update_to: Uppdatera till
+sys_update_to: Uppdatera till version
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrerade användare
 -
 
 sys_user_you: Du
+
+-
+
+theme_readme_alert: Klicka här för att läsa dokumentationen för det aktiva temat!

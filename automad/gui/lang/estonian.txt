@@ -50,7 +50,7 @@ btn_edit: Redigeeri
 
 -
 
-btn_edit_file_info: Failiteabe muutmine
+btn_edit_file_info: Failiteabe redigeerimine
 
 -
 
@@ -162,7 +162,7 @@ confirm_delete_users: Kas soovite kindlasti valitud kasutajad kustutada?
 
 -
 
-confirm_reset_headless: Kas soovite kindlasti lähtestatud kohandatud peata malli lähtestada?
+confirm_reset_headless: Kas soovite kindlasti lähtestatud kohandatud päisteta malli lähtestada?
 
 -
 
@@ -242,7 +242,7 @@ error_packages: Pakke ei saanud paketti laadida!
 
 -
 
-error_composer_memory: Teie serveril pole pakettide installimiseks, värskendamiseks või eemaldamiseks piisavalt mälu! Kui kasutate seda saiti piiratud mäluga jagatud hostimise teenuses, proovige oma plaani täiendada või installige oma sait ilma mälupiiranguteta kohalikku arvutisse.
+error_composer_memory: Teie serveril pole pakettide installimiseks, värskendamiseks või eemaldamiseks piisavalt mälu! Kui kasutate seda saiti piiratud mälumahuga jagatud hostimise teenuses, proovige oma plaani täiendada või installige oma sait ilma mälupiiranguteta kohalikku arvutisse.
 
 -
 
@@ -406,7 +406,7 @@ page_move_destination: Valige kolimise sihtkoht
 
 -
 
-page_settings: Lehe sätted
+page_settings: Lehe seaded
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Muutuja nimi
 
 -
 
-page_vars_headless: Muutujad
+page_vars_content: Sisu
 
 -
 
-page_vars_template: Muutujad aktiivses mallis
+page_vars_settings: Malliseaded
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Kas soovite valitud teema rakendada ja värskendada saadaole
 
 -
 
-shared_vars_headless: Muutujad
+shared_vars_content: Vaikimisi sisu
 
 -
 
-shared_vars_main_theme: Põhiteema muutujad
+shared_vars_settings: Mallide vaikeseaded
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Puhastage vahemälu kataloog
 
 -
 
-sys_cache_purge_info: Vahemälu tühjendamise asemel teisaldab vahemälu kataloogi puhastamine ka kõik ajutised failid, kustutatud lehed, värskenduste varundamine ja vahemälupildid süsteemi ajutisse kataloogi. See sunnib pildi ja lehe vahemälu täielikult taastama, samuti kustutatakse kõik kustutatud lehed. Enamikus süsteemides puhastatakse ajutine kataloog aeg-ajalt automaatselt või taaskäivituse korral. Mõnes süsteemis tuleb see kataloog käsitsi kustutada.
+sys_cache_purge_info: Vahemälu tühjendamise asemel teisaldab vahemälu kataloogi puhastamine ka kõik ajutised failid, kustutatud lehed, värskenduste varundamine ja vahemälupildid süsteemi ajutisse kataloogi. See sunnib pildi ja lehe vahemälu täielikult taastama, samuti kustutatakse kõik kustutatud lehed. Enamikus süsteemides puhastatakse ajutine kataloog automaatselt aeg-ajalt või taaskäivituse korral. Mõnes süsteemis tuleb see kataloog käsitsi kustutada.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Silumine on lubatud
 
 -
 
-sys_status_debug_disabled: Silumine on keelatud
-
--
-
 sys_status_update_available: Värskenda saidile
 
 -
@@ -638,11 +634,11 @@ sys_update_available: Automadi uuem versioon on saadaval ja installimiseks valmi
 
 -
 
-sys_update_current_version: Praegu installitud versioon on
+sys_update_current_version: Teie praegu installitud versioon on
 
 -
 
-sys_update_items: Värskendus mõjutab järgmisi üksusi:
+sys_update_items: Pange tähele, et värskendus mõjutab järgmisi faile ja katalooge:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Palun oodake ja ärge sulgege värskendamise ajal akent ...
 
 -
 
-sys_update_to: Värskenda saidile
+sys_update_to: Uuendage versioonile
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registreeritud kasutajad
 -
 
 sys_user_you: Sina
+
+-
+
+theme_readme_alert: Aktiivse teema dokumentatsiooni lugemiseks klõpsake siin!

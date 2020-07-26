@@ -74,7 +74,7 @@ btn_getting_data: Daten abrufen ...
 
 -
 
-btn_hide_page: Seite in der Navigation ausblenden
+btn_hide_page: Seite in Navigation ausblenden
 
 -
 
@@ -350,7 +350,7 @@ link_title: Link hinzufügen
 
 -
 
-login_title: Einloggen
+login_title: Anmeldung
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Variablennamen
 
 -
 
-page_vars_headless: Variablen
+page_vars_content: Inhalt
 
 -
 
-page_vars_template: Variablen in der aktuellen Vorlage
+page_vars_settings: Vorlageneinstellungen
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Möchten Sie das ausgewählte Thema anwenden und die Liste d
 
 -
 
-shared_vars_headless: Variablen
+shared_vars_content: Standardinhalt
 
 -
 
-shared_vars_main_theme: Variablen im Hauptthema
+shared_vars_settings: Standardvorlageneinstellungen
 
 -
 
@@ -582,11 +582,11 @@ sys_cache_purge_info: Im Gegensatz zum einfachen Löschen des Caches werden beim
 
 -
 
-sys_debug_info: Wenn das Debuggen aktiviert ist, werden alle Automad-Prozesse in der Konsole Ihres Browsers protokolliert. Das Debuggen ist nur für die Entwicklung oder Fehlerbehebung erforderlich und sollte in allen anderen Fällen deaktiviert werden.
+sys_debug_info: Wenn das Debuggen aktiviert ist, werden alle Prozesse von Automad in der Konsole Ihres Browsers protokolliert. Das Debuggen ist nur für die Entwicklung oder Fehlerbehebung erforderlich und sollte in allen anderen Fällen deaktiviert werden.
 
 -
 
-sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mithilfe der in Automad integrierten Vorlagensprache zum Anpassen von Feldern mithilfe von Variablen, Objekten und Steuerungsstrukturen bearbeiten.
+sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mit der in Automad integrierten Vorlagensprache bearbeiten, um Felder mithilfe von Variablen, Objekten und Steuerungsstrukturen anzupassen.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Das Debuggen ist aktiviert
 
 -
 
-sys_status_debug_disabled: Das Debuggen ist deaktiviert
-
--
-
 sys_status_update_available: Aktualisieren zu
 
 -
@@ -634,15 +630,15 @@ sys_update: Aktualisieren
 
 -
 
-sys_update_available: Eine neuere Version von Automad ist verfügbar und kann installiert werden. <br> Bitte sichern Sie Ihre aktuelle Installation, bevor Sie sie aktualisieren!
+sys_update_available: Eine neuere Version von Automad ist verfügbar und kann installiert werden. <br> Bitte sichern Sie Ihre aktuelle Installation, bevor Sie ein Update durchführen!
 
 -
 
-sys_update_current_version: Die aktuell installierte Version ist
+sys_update_current_version: Ihre aktuell installierte Version ist
 
 -
 
-sys_update_items: Die folgenden Elemente sind vom Update betroffen:
+sys_update_items: Beachten Sie, dass die folgenden Dateien und Verzeichnisse vom Update betroffen sind:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Bitte warten Sie und schließen Sie das Fenster nicht währ
 
 -
 
-sys_update_to: Aktualisieren zu
+sys_update_to: Update auf Version
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrierte Benutzer
 -
 
 sys_user_you: Du
+
+-
+
+theme_readme_alert: Klicken Sie hier, um die Dokumentation zum aktiven Thema zu lesen!

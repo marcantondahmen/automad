@@ -134,7 +134,7 @@ btn_remove: Usunąć
 
 -
 
-btn_remove_selected: Usuń wybrane
+btn_remove_selected: Usuń zaznaczone
 
 -
 
@@ -230,7 +230,7 @@ error_no_theme: Nie wybrano motywu! Wybierz główny motyw.
 
 -
 
-error_no_url: Proszę wprowadzić poprawny adres URL!
+error_no_url: Proszę podać poprawny adres URL!
 
 -
 
@@ -286,7 +286,7 @@ error_update_items: Nieprawidłowa lista elementów do aktualizacji!
 
 -
 
-error_update_failed: Aktualizacja nie powiodła się! Przywróć instalację z kopii zapasowej.
+error_update_failed: Aktualizacja nieudana! Przywróć instalację z kopii zapasowej.
 
 -
 
@@ -430,15 +430,15 @@ page_var_name: Nazwa zmiennej
 
 -
 
-page_vars_headless: Zmienne
+page_vars_content: Zadowolony
 
 -
 
-page_vars_template: Zmienne w bieżącym szablonie
+page_vars_settings: Ustawienia szablonu
 
 -
 
-page_vars_unused: Niewykorzystane zmienne
+page_vars_unused: Nieużywane zmienne
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Czy chcesz teraz zastosować wybrany motyw i zaktualizować 
 
 -
 
-shared_vars_headless: Zmienne
+shared_vars_content: Treść domyślna
 
 -
 
-shared_vars_main_theme: Zmienne w temacie głównym
+shared_vars_settings: Domyślne ustawienia szablonów
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Debugowanie jest włączone
 
 -
 
-sys_status_debug_disabled: Debugowanie jest wyłączone
-
--
-
 sys_status_update_available: Uaktualnij do
 
 -
@@ -638,11 +634,11 @@ sys_update_available: Nowsza wersja Automada jest dostępna i gotowa do zainstal
 
 -
 
-sys_update_current_version: Aktualnie zainstalowana wersja to
+sys_update_current_version: Twoja aktualnie zainstalowana wersja to
 
 -
 
-sys_update_items: Aktualizacja wpływa na następujące elementy:
+sys_update_items: Uwaga: aktualizacja wpływa na następujące pliki i katalogi:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Poczekaj i nie zamykaj okna podczas aktualizacji ...
 
 -
 
-sys_update_to: Uaktualnij do
+sys_update_to: Zaktualizuj do wersji
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Zarejestrowani Użytkownicy
 -
 
 sys_user_you: Ty
+
+-
+
+theme_readme_alert: Kliknij tutaj, aby przeczytać dokumentację dla aktywnego motywu!

@@ -18,7 +18,7 @@ btn_browse: Procurar arquivos
 
 -
 
-btn_close: Fechar
+btn_close: Perto
 
 -
 
@@ -258,7 +258,7 @@ error_password_current: A senha atual está errada!
 
 -
 
-error_password_repeat: Por favor, digite duas vezes a mesma nova senha!
+error_password_repeat: Digite duas vezes a mesma nova senha!
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Nome variável
 
 -
 
-page_vars_headless: Variáveis
+page_vars_content: Conteúdo
 
 -
 
-page_vars_template: Variáveis no modelo atual
+page_vars_settings: Configurações do modelo
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Deseja aplicar o tema selecionado e atualizar a lista de var
 
 -
 
-shared_vars_headless: Variáveis
+shared_vars_content: Conteúdo padrão
 
 -
 
-shared_vars_main_theme: Variáveis no tema principal
+shared_vars_settings: Configurações de modelo padrão
 
 -
 
@@ -562,7 +562,7 @@ sys_cache_monitor: O intervalo de verificação é
 
 -
 
-sys_cache_monitor_info: Quando o armazenamento em cache está ativado, o Automad verifica regularmente se há alterações no sistema de arquivos. A frequência dessas verificações pode ser definida aqui.
+sys_cache_monitor_info: Quando o cache está ativado, o Automad verifica regularmente se há alterações no sistema de arquivos. A frequência dessas verificações pode ser definida aqui.
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Diretório de Cache de Limpeza
 
 -
 
-sys_cache_purge_info: Ao contrário de simplesmente limpar o cache, a limpeza do diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagens e páginas, além de uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de tempos em tempos ou na reinicialização. No entanto, em alguns sistemas, esse diretório deve ser limpo manualmente.
+sys_cache_purge_info: Ao contrário de simplesmente limpar o cache, a limpeza do diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagens e páginas, além de uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de tempos em tempos ou na reinicialização. No entanto, em alguns sistemas esse diretório deve ser limpo manualmente.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: A depuração está ativada
 
 -
 
-sys_status_debug_disabled: A depuração está desativada
-
--
-
 sys_status_update_available: Atualizar para
 
 -
@@ -626,7 +622,7 @@ sys_status_update_not_available: Automad está atualizado
 
 -
 
-sys_title: Configurações de sistema
+sys_title: Configurações do sistema
 
 -
 
@@ -638,11 +634,11 @@ sys_update_available: Uma versão mais recente do Automad está disponível e pr
 
 -
 
-sys_update_current_version: A versão atualmente instalada é
+sys_update_current_version: Sua versão atualmente instalada é
 
 -
 
-sys_update_items: Os seguintes itens são afetados pela atualização:
+sys_update_items: Observe que os seguintes arquivos e diretórios são afetados pela atualização:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Aguarde e não feche a janela durante a atualização ...
 
 -
 
-sys_update_to: Atualizar para
+sys_update_to: Atualizar para a versão
 
 -
 
@@ -706,4 +702,8 @@ sys_user_registered: Usuários registrados
 
 -
 
-sys_user_you: Você
+sys_user_you: Vocês
+
+-
+
+theme_readme_alert: Clique aqui para ler a documentação do tema ativo!

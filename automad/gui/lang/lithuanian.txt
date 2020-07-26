@@ -222,7 +222,7 @@ error_no_destination: Pasirinkite puslapį kaip paskirties vietą!
 
 -
 
-error_no_js: Norėdami naudoti informacijos suvestinę, savo naršyklėje įgalinkite „JavaScript“!
+error_no_js: Jei norite naudoti informacijos suvestinę, savo naršyklėje įgalinkite „JavaScript“!
 
 -
 
@@ -430,15 +430,15 @@ page_var_name: Kintamasis vardas
 
 -
 
-page_vars_headless: Kintamieji
+page_vars_content: Turinys
 
 -
 
-page_vars_template: Kintamieji dabartiniame šablone
+page_vars_settings: Šablono nustatymai
 
 -
 
-page_vars_unused: Nepanaudoti kintamieji
+page_vars_unused: Nenaudojami kintamieji
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Ar norite pritaikyti pasirinktą temą ir atnaujinti galimų
 
 -
 
-shared_vars_headless: Kintamieji
+shared_vars_content: Numatytasis turinys
 
 -
 
-shared_vars_main_theme: Kintamieji pagrindinėje temoje
+shared_vars_settings: Numatytieji šablono nustatymai
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Išvalymo talpyklos katalogas
 
 -
 
-sys_cache_purge_info: Priešingai nei tiesiog išvalius talpyklą, išvalę talpyklos katalogą visi laikinieji failai, ištrinti puslapiai, atnaujinimo atsarginės kopijos ir talpykloje esantys vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atstatyti atvaizdą ir talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugelyje sistemų laikinas katalogas bus automatiškai išvalomas laikas nuo laiko arba iš naujo paleidžiant. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
+sys_cache_purge_info: Priešingai nei tiesiog išvalius talpyklą, išvalę talpyklos katalogą visi laikinieji failai, ištrinti puslapiai, atnaujinimų atsarginės kopijos ir talpykloje esantys vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atstatyti atvaizdą ir talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugelyje sistemų laikinas katalogas bus automatiškai išvalomas laikas nuo laiko arba iš naujo paleidžiant. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Derinimas įjungtas
 
 -
 
-sys_status_debug_disabled: Derinimas yra išjungtas
-
--
-
 sys_status_update_available: Atnaujinti į
 
 -
@@ -638,11 +634,11 @@ sys_update_available: Yra naujesnė „Automad“ versija ir ją galima paruošt
 
 -
 
-sys_update_current_version: Šiuo metu įdiegta versija yra
+sys_update_current_version: Šiuo metu įdiegta jūsų versija
 
 -
 
-sys_update_items: Atnaujinimas turi įtakos šiems elementams:
+sys_update_items: Atminkite, kad naujinimas paveikia šiuos failus ir katalogus:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Palaukite ir neuždarykite lango atnaujindami ...
 
 -
 
-sys_update_to: Atnaujinti į
+sys_update_to: Atnaujinkite į versiją
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registruoti vartotojai
 -
 
 sys_user_you: Tu
+
+-
+
+theme_readme_alert: Spustelėkite čia, kad perskaitytumėte aktyvios temos dokumentus!

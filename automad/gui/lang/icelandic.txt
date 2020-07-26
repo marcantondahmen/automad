@@ -82,7 +82,7 @@ btn_home: Home
 
 -
 
-btn_import: Flytja inn frá slóð
+btn_import: Flytja inn úr slóðinni
 
 -
 
@@ -210,7 +210,7 @@ error_form: Ófullkomin eða röng gögn! <br /> Allir reitir eru nauðsynlegir 
 
 -
 
-error_login: Rangt notandanafn eða lykilorð
+error_login: ógilt notendanafn eða lykilorð
 
 -
 
@@ -226,7 +226,7 @@ error_no_js: Vinsamlegast virkjaðu JavaScript í vafranum þínum til að nota 
 
 -
 
-error_no_theme: Ekkert þema valið! Vinsamlegast veldu aðalþema.
+error_no_theme: Ekkert þema valið! Veldu aðalþema.
 
 -
 
@@ -242,7 +242,7 @@ error_packages: Gat ekki hlaðið pakka frá Packagist!
 
 -
 
-error_composer_memory: Miðlarinn þinn hefur ekki nóg minni til að setja upp, uppfæra eða fjarlægja pakka! Ef þú ert að keyra þessa síðu á sameiginlegri hýsingarþjónustu með takmarkaðan minni, vinsamlegast reyndu að uppfæra áætlunina þína eða setja upp síðuna þína á tölvu innan staðar án takmarkana á minni.
+error_composer_memory: Miðlarinn þinn hefur ekki nóg minni til að setja upp, uppfæra eða fjarlægja pakka! Ef þú ert að keyra þessa síðu á sameiginlegri hýsingarþjónustu með takmarkaðan minni, vinsamlegast reyndu að uppfæra áætlunina þína eða setja síðuna þína upp á staðbundinni tölvu án minni takmarkana.
 
 -
 
@@ -286,7 +286,7 @@ error_update_items: Ógildur listi yfir hluti sem á að uppfæra!
 
 -
 
-error_update_failed: Uppfærsla mistókst! Vinsamlegast endurheimtu uppsetninguna úr afriti
+error_update_failed: Uppfærsla mistókst! Vinsamlegast endurheimtu uppsetninguna úr afriti.
 
 -
 
@@ -418,7 +418,7 @@ page_redirect: Beina síðu yfir í aðra slóð
 
 -
 
-page_tags: Merkimiðar (Aðgreindu mörg merki eftir kommu eða flipa)
+page_tags: Merkimiðar (Aðskildu mörg merki eftir kommu eða flipa)
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Breytilegt nafn
 
 -
 
-page_vars_headless: Breytur
+page_vars_content: Innihald
 
 -
 
-page_vars_template: Breytur í núverandi sniðmáti
+page_vars_settings: Sniðmátsstillingar
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Viltu nota valið þema og uppfæra lista yfir tiltækar bre
 
 -
 
-shared_vars_headless: Breytur
+shared_vars_content: Sjálfgefið efni
 
 -
 
-shared_vars_main_theme: Breytur í megin þema
+shared_vars_settings: Sjálfgefnar sniðmátastillingar
 
 -
 
@@ -510,7 +510,7 @@ success_config_update: Uppfærsla tókst!
 
 -
 
-success_created: Tókst að búa til
+success_created: Tókst til við að búa til
 
 -
 
@@ -542,7 +542,7 @@ success_update: Uppfærður Automad!
 
 -
 
-success_packages_updated: Uppfærðir allir pakkar tókst
+success_packages_updated: Allir pakkar voru uppfærðir
 
 -
 
@@ -554,7 +554,7 @@ sys_cache_clear: Hreinsa skyndiminni
 
 -
 
-sys_cache_clear_info: Að hreinsa skyndiminni vefsvæðisins neyðir til að skanna aftur fyrir uppfærðar síður og skrár. Þessi aðgerð mun ekki fjarlægja neinar blaðsíður skrár eða myndir úr skyndiminni skrá.
+sys_cache_clear_info: Að hreinsa skyndiminni vefsvæðisins neyðir til að skanna aftur fyrir uppfærðar síður og skrár. Þessi aðgerð mun ekki fjarlægja neinar blaðsíður skrár eða myndir úr skyndiminni skránni.
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Hreinsa skyndiminni skrá
 
 -
 
-sys_cache_purge_info: Öfugt við að hreinsa skyndiminnið einfaldlega, hreinsar skyndiminnaskrána einnig allar tímabundnar skrár, eyddar síður, uppfærðar afrit og afrit myndir í skyndiminni kerfisins. Þetta mun þvinga til enduruppbyggingar myndar og skyndiminni og hreinsun allra eyðilagðra síðna. Í flestum kerfum verður tímabundna skráin hreinsuð sjálfkrafa af og til eða við endurræsingu. En í sumum kerfum þarf að hreinsa þessa skrá handvirkt.
+sys_cache_purge_info: Öfugt við að hreinsa skyndiminnið einfaldlega mun hreinsun skyndiminnisins færa allar tímabundnar skrár, eyddar síður, uppfæra afrit og skyndiminni í skyndimöppu kerfisins. Þetta mun þvinga til enduruppbyggingar myndar og skyndiminni auk hreinsunar á öllum síðum. Í flestum kerfum verður tímabundna skráin hreinsuð sjálfkrafa af og til eða við endurræsingu. En í sumum kerfum þarf að hreinsa þessa skrá handvirkt.
 
 -
 
@@ -590,7 +590,7 @@ sys_headless_edit_info: Uppbyggingu skilaðra JSON gagna er stjórnað af sniðm
 
 -
 
-sys_headless_info: Með því að virkja höfuðlausan hátt breytir Automad í innihaldastjórnunarkerfi sem einbeitir sér alfarið að efnissköpun án kynningarlags. Þó að enn sé hægt að nota Mælaborðið til að stjórna efni eru öll gögn og skrár aðgengilegar með skrifvarna JSON API.
+sys_headless_info: Með því að virkja höfuðlausan hátt breytir Automad í innihaldastjórnunarkerfi sem einbeitir sér alfarið að efnissköpun án kynningarlags. Þó að enn sé hægt að nota Mælaborðið til að stjórna efni, eru öll gögn og skrár aðgengilegar með skrifvarna JSON API.
 
 -
 
@@ -598,7 +598,7 @@ sys_language: Tungumál
 
 -
 
-sys_language_info: Það eru nokkur tungumál í boði fyrir stjórnborðið. Þýðingarnar eru búnar til sjálfkrafa. Þessi aðgerð er enn í tilraunastigi og því gætu sumar þýðingar ekki verið nákvæmar.
+sys_language_info: Það eru nokkur tungumál í boði fyrir stjórnborðið. Þýðingarnar eru búnar til sjálfkrafa. Þessi eiginleiki er enn í tilraunastigi og því gætu sumar þýðingar ekki verið nákvæmar.
 
 -
 
@@ -611,10 +611,6 @@ sys_status_cache_disabled: Skyndiminni er óvirkt
 -
 
 sys_status_debug_enabled: Kembiforrit er virkt
-
--
-
-sys_status_debug_disabled: Kembiforrit er óvirk
 
 -
 
@@ -638,11 +634,11 @@ sys_update_available: Nýrri útgáfa af Automad er fáanleg og tilbúin til upp
 
 -
 
-sys_update_current_version: Núverandi uppsett útgáfa er
+sys_update_current_version: Núverandi uppsett útgáfa þín er
 
 -
 
-sys_update_items: Eftirfarandi atriði hafa áhrif á uppfærsluna:
+sys_update_items: Athugaðu að eftirfarandi skrár og möppur hafa áhrif á uppfærsluna:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Vinsamlegast bíddu og ekki loka glugganum meðan þú ert 
 
 -
 
-sys_update_to: Uppfæra í
+sys_update_to: Uppfærðu í útgáfu
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Skráðir notendur
 -
 
 sys_user_you: Þú
+
+-
+
+theme_readme_alert: Smelltu hér til að lesa skjölin fyrir virka þemað!

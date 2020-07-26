@@ -178,7 +178,7 @@ dashboard_recently_edited: Nedavno uređene stranice
 
 -
 
-dropzone: Prevucite datoteke ovdje
+dropzone: Ovde povucite datoteke
 
 -
 
@@ -206,7 +206,7 @@ error_file_size: Nevažeća veličina datoteke!
 
 -
 
-error_form: Nepotpuni ili netačni podaci! <br /> Sva polja su obavezna i moraju se ispuniti kao što je opisano!
+error_form: Nepotpuni ili netačni podaci! <br /> Sva polja su obavezna i moraju se ispuniti kako je opisano!
 
 -
 
@@ -286,7 +286,7 @@ error_update_items: Nevažeća lista stavki koje treba ažurirati!
 
 -
 
-error_update_failed: Ažuriranje nije uspjelo! Vratite instalaciju iz rezervne kopije.
+error_update_failed: Ažuriranje nije uspjelo! Obnovite instalaciju iz rezervne kopije.
 
 -
 
@@ -338,7 +338,7 @@ images_page: Slike stranica
 
 -
 
-images_shared: Opšte slike
+images_shared: Opće slike
 
 -
 
@@ -418,7 +418,7 @@ page_redirect: Preusmjeravanje stranice na drugi URL
 
 -
 
-page_tags: Oznake (Odvojite više oznaka zarezom ili zarezom)
+page_tags: Oznake (Odvojite više oznaka zarezom ili tabulatorom)
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Naziv varijable
 
 -
 
-page_vars_headless: Varijable
+page_vars_content: Sadržaj
 
 -
 
-page_vars_template: Promenljive u trenutnom predlošku
+page_vars_settings: Postavke predloška
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Želite li sada primijeniti odabranu temu i ažurirati popis
 
 -
 
-shared_vars_headless: Varijable
+shared_vars_content: Zadani sadržaj
 
 -
 
-shared_vars_main_theme: Varijable u glavnoj temi
+shared_vars_settings: Podrazumevane postavke predloška
 
 -
 
@@ -546,7 +546,7 @@ success_packages_updated: Svi paketi su uspješno ažurirani
 
 -
 
-sys_cache_info: Keširanje je ključno za ubrzavanje vaše web lokacije i obično bi trebalo biti omogućeno. Međutim, pod nekim okolnostima možda želite onemogućiti ili očistiti predmemoriju.
+sys_cache_info: Keširanje je ključno za ubrzavanje vaše web lokacije i obično bi trebalo biti omogućeno. Međutim, u nekim ćete okolnostima možda želite onemogućiti ili očistiti predmemoriju.
 
 -
 
@@ -554,7 +554,7 @@ sys_cache_clear: Clear Cache
 
 -
 
-sys_cache_clear_info: Brisanje predmemorije web lokacije natjera ponovo na pregled ažuriranih stranica i datoteka. Ova radnja neće ukloniti nijednu datoteku ili slike stranice iz predmemorije.
+sys_cache_clear_info: Brisanje predmemorije web lokacije natjera ponovo na ažurirane stranice i datoteke. Ova radnja neće ukloniti nijednu datoteku ili slike stranice iz predmemorije.
 
 -
 
@@ -570,7 +570,7 @@ sys_cache_lifetime: Trajanje predmemorije je
 
 -
 
-sys_cache_lifetime_info: Svi predmemorirani podaci i stranice Automada imaju maksimalan vijek trajanja. Nakon što vijek objekta pređe, njegova keš memorija će se obnoviti na zahtjev.
+sys_cache_lifetime_info: Svi predmemorirani podaci i stranice Automada imaju maksimalan vijek trajanja. Nakon što životni vijek objekta pređe, njegova predmemorija će se obnoviti na zahtjev.
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Pročistite direktorij predmemorije
 
 -
 
-sys_cache_purge_info: Za razliku od jednostavnog čišćenja predmemorije, čišćenje cache direktorija će također premjestiti sve privremene datoteke, izbrisane stranice, sigurnosne kopije ažuriranja i predmemorirane slike u temprary direktorij sustava. To će naterati potpunu obnovu predmemorije slike i stranice, kao i čišćenje svih izbrisanih stranica. Na većini se sistema privremeni direktorij automatski uklanja sa vremena na vrijeme ili ponovno pokreće. Međutim, na nekim sustavima taj se direktorij mora očistiti ručno.
+sys_cache_purge_info: Za razliku od jednostavnog čišćenja predmemorije, čišćenjem predmemorije predmemorije također će se premjestiti sve privremene datoteke, izbrisane stranice, sigurnosne kopije ažuriranja i predmemorirane slike u temprary direktorij sustava. Ovo će naterati potpunu obnovu predmemorije slike i stranice, kao i čišćenje svih izbrisanih stranica. Na većini se sistema privremeni direktorij automatski uklanja sa vremena na vrijeme ili ponovno pokreće. Međutim, na nekim sustavima taj se direktorij mora očistiti ručno.
 
 -
 
@@ -586,7 +586,7 @@ sys_debug_info: Kada je uklanjanje pogrešaka omogućeno, svi procesi Automada b
 
 -
 
-sys_headless_edit_info: Struktura vraćenih JSON podataka upravlja se pomoću predloška. Taj predložak možete urediti pomoću ugrađenog jezika predloška Automada za prilagođavanje polja pomoću varijabli, objekata i upravljačkih struktura.
+sys_headless_edit_info: Struktura vraćenih JSON podataka upravlja se pomoću predloška. Taj predložak možete urediti pomoću ugrađenog jezika predloška Automada za prilagođavanje polja korištenjem varijabli, objekata i upravljačkih struktura.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Otklanjanje pogrešaka je omogućeno
 
 -
 
-sys_status_debug_disabled: Otklanjanje pogrešaka je onemogućeno
-
--
-
 sys_status_update_available: Ažuriraj na
 
 -
@@ -634,7 +630,7 @@ sys_update: Ažuriraj
 
 -
 
-sys_update_available: Dostupna je i novija verzija Automada koja je spremna za instalaciju. <br> Rezervno kopirajte trenutnu instalaciju prije ažuriranja!
+sys_update_available: Dostupna je i novija verzija Automada koja je spremna za instalaciju. <br> Napravite sigurnosnu kopiju trenutne instalacije prije ažuriranja!
 
 -
 
@@ -642,7 +638,7 @@ sys_update_current_version: Trenutno instalirana verzija je
 
 -
 
-sys_update_items: Sljedeće stavke utječu na ažuriranje:
+sys_update_items: Imajte na umu da na ažuriranje utječu sljedeće datoteke i direktorije:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Pričekajte i ne zatvarajte prozor dok ažurirate ...
 
 -
 
-sys_update_to: Ažuriraj na
+sys_update_to: Ažuriraj na verziju
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrovani korisnici
 -
 
 sys_user_you: Ti
+
+-
+
+theme_readme_alert: Kliknite ovdje za čitanje dokumentacije za aktivnu temu!

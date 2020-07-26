@@ -86,7 +86,7 @@ btn_import: Importēt no URL
 
 -
 
-btn_inpage_edit: Lapas rediģēšanas režīms
+btn_inpage_edit: Režīms lappusē
 
 -
 
@@ -242,7 +242,7 @@ error_packages: Nevarēja ielādēt paketes no Packagist!
 
 -
 
-error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu pakotnes. Ja jūs šo vietni izmantojat koplietotās mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalējiet vietni vietējā datorā bez atmiņas ierobežojumiem.
+error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu pakotnes! Gadījumā, ja jūs šo vietni izmantojat dalītas mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalējiet vietni vietējā datorā bez atmiņas ierobežojumiem.
 
 -
 
@@ -262,7 +262,7 @@ error_password_repeat: Lūdzu, divreiz ievadiet to pašu jauno paroli!
 
 -
 
-error_password_reuse: Nelietojiet atkārtotu veco paroli!
+error_password_reuse: Nelietojiet atkārtoti savu veco paroli!
 
 -
 
@@ -286,7 +286,7 @@ error_update_items: Nederīgs atjaunināmo vienumu saraksts!
 
 -
 
-error_update_failed: Atjaunināšana neizdevās! Lūdzu, atjaunojiet instalāciju no dublējuma.
+error_update_failed: Atjaunināt neizdevās! Lūdzu, atjaunojiet instalāciju no dublējuma.
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Mainīgais nosaukums
 
 -
 
-page_vars_headless: Mainīgie
+page_vars_content: Saturs
 
 -
 
-page_vars_template: Mainīgie pašreizējā veidnē
+page_vars_settings: Veidnes iestatījumi
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Vai vēlaties izmantot izvēlēto motīvu un atjaunināt pie
 
 -
 
-shared_vars_headless: Mainīgie
+shared_vars_content: Noklusējuma saturs
 
 -
 
-shared_vars_main_theme: Mainīgās tēmas galvenajā tēmā
+shared_vars_settings: Noklusētie veidnes iestatījumi
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Notīrīt kešatmiņas direktoriju
 
 -
 
-sys_cache_purge_info: Atšķirībā no kešatmiņas iztīrīšanas, iztīrot kešatmiņas direktoriju, visi pagaidu faili, izdzēstās lapas, atjaunināšanas dublējumi un kešatmiņā saglabātie attēli tiek pārvietoti uz sistēmas pagaidu direktoriju. Tas prasīs pilnīgu attēla un lapu kešatmiņas atjaunošanu, kā arī visu izdzēsto lapu tīrīšanu. Lielākajā daļā sistēmu pagaidu direktorijs tiek laiku pa laikam automātiski iztīrīts vai atsāknējot. Tomēr dažās sistēmās direktorijs ir jādzēš manuāli.
+sys_cache_purge_info: Atšķirībā no kešatmiņas iztīrīšanas, iztīrot kešatmiņas direktoriju, visi pagaidu faili, izdzēstās lapas, atjaunināšanas dublējumi un kešatmiņā saglabātie attēli tiks pārvietoti uz sistēmas pagaidu direktoriju. Tas prasīs pilnīgu attēla un lapu kešatmiņas atjaunošanu, kā arī visu izdzēsto lapu tīrīšanu. Lielākajā daļā sistēmu pagaidu direktorijs laiku pa laikam tiks automātiski iztīrīts vai atsāknējot. Tomēr dažās sistēmās direktorijs ir jādzēš manuāli.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Atkļūdošana ir iespējota
 
 -
 
-sys_status_debug_disabled: Atkļūdošana ir atspējota
-
--
-
 sys_status_update_available: Atjaunināt uz
 
 -
@@ -638,11 +634,11 @@ sys_update_available: Ir pieejama jaunāka Automad versija un ir gatava uzstād�
 
 -
 
-sys_update_current_version: Pašlaik instalētā versija ir
+sys_update_current_version: Jūsu pašreiz instalētā versija ir
 
 -
 
-sys_update_items: Atjauninājums ietekmē šādus vienumus:
+sys_update_items: Ņemiet vērā, ka atjauninājums ietekmē šādus failus un direktorijus:
 
 -
 
@@ -654,7 +650,7 @@ sys_update_progress: Lūdzu, uzgaidiet un neaizveriet logu, kamēr atjaunināt .
 
 -
 
-sys_update_to: Atjaunināt uz
+sys_update_to: Atjaunināt uz versiju
 
 -
 
@@ -702,8 +698,12 @@ sys_user_add_repeat: Atkārtojiet paroli
 
 -
 
-sys_user_registered: Reģistrēti lietotāji
+sys_user_registered: Reģistrētie lietotāji
 
 -
 
 sys_user_you: Jūs
+
+-
+
+theme_readme_alert: Noklikšķiniet šeit, lai izlasītu aktīvās tēmas dokumentāciju!

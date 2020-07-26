@@ -1,4 +1,4 @@
-btn_add: Legge til
+btn_add: Legg til
 
 -
 
@@ -130,7 +130,7 @@ btn_readme: Readme
 
 -
 
-btn_remove: Ta bort
+btn_remove: Ta vekk
 
 -
 
@@ -250,7 +250,7 @@ error_page_not_found: Side ikke funnet!
 
 -
 
-error_page_title: Tittel mangler!
+error_page_title: Tittelen mangler!
 
 -
 
@@ -258,7 +258,7 @@ error_password_current: Det gjeldende passordet er feil!
 
 -
 
-error_password_repeat: Vennligst tast inn to ganger det samme nye passordet!
+error_password_repeat: Angi to ganger det samme nye passordet!
 
 -
 
@@ -282,7 +282,7 @@ error_update_download: Nedlasting av oppdatering mislyktes!
 
 -
 
-error_update_items: Ugyldig liste over varer som skal oppdateres!
+error_update_items: Ugyldig liste over elementer som skal oppdateres!
 
 -
 
@@ -370,7 +370,7 @@ packages_title: Pakker
 
 -
 
-packages_browse: Åpne nettleseren
+packages_browse: Åpne pakke nettleser
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Variabel Navn
 
 -
 
-page_vars_headless: Variabler
+page_vars_content: Innhold
 
 -
 
-page_vars_template: Variabler i gjeldende mal
+page_vars_settings: Malinnstillinger
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Vil du bruke det valgte temaet og oppdatere listen over tilg
 
 -
 
-shared_vars_headless: Variabler
+shared_vars_content: Standardinnhold
 
 -
 
-shared_vars_main_theme: Variabler i hovedtema
+shared_vars_settings: Standard malinnstillinger
 
 -
 
@@ -498,11 +498,11 @@ success_added: Lagt til
 
 -
 
-success_cache_cleared: Cachen ble fjernet!
+success_cache_cleared: Cachen ble tømt vellykket!
 
 -
 
-success_cache_purged: Cache-katalogen ble utvasket vellykket!
+success_cache_purged: Cache-katalogen ble renset vellykket!
 
 -
 
@@ -570,7 +570,7 @@ sys_cache_lifetime: Cache-levetiden er
 
 -
 
-sys_cache_lifetime_info: Alle hurtigbufrede Automad-data og sider har maksimal levetid. Etter at levetiden til et objekt overskrider, vil hurtigbufferen bli bygget opp igjen når du blir bedt om det.
+sys_cache_lifetime_info: Alle hurtigbufrede Automad-data og sider har maksimal levetid. Etter at levetiden til et objekt overskrider, vil hurtigbufferen bli gjenoppbygget når du blir bedt om det.
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: I motsetning til bare å tømme hurtigbufferen, vil rensing av hurtigbufferen også flytte alle midlertidige filer, slettede sider, oppdaterings-sikkerhetskopier og hurtigbufrede bilder til temprary-katalogen til systemet. Dette vil tvinge til en fullstendig gjenoppbygging av bilde- og sidebuffer samt opprydding av alle slettede sider. På de fleste systemer blir den midlertidige katalogen renset opp automatisk fra tid til annen eller ved omstart. På noen systemer må katalogen imidlertid fjernes manuelt.
+sys_cache_purge_info: I motsetning til bare å tømme hurtigbufferen, vil rensing av hurtigbufferen også flytte alle midlertidige filer, slettede sider, oppdaterings-sikkerhetskopier og hurtigbufrede bilder til temprary-katalogen til systemet. Dette vil tvinge til en fullstendig gjenoppbygging av bilde- og sidebuffer samt opprydding av alle slettede sider. På de fleste systemer blir den midlertidige katalogen renset opp automatisk fra tid til annen eller ved omstart. På noen systemer må katalogen imidlertid tømmes manuelt.
 
 -
 
@@ -586,7 +586,7 @@ sys_debug_info: Når feilsøking er aktivert, blir alle Automads prosesser logge
 
 -
 
-sys_headless_edit_info: Strukturen til de returnerte JSON-dataene styres av en mal. Du kan redigere den malen ved å bruke Automads innebygde malspråk for å tilpasse felt ved å bruke variabler, objekter og kontrollstrukturer.
+sys_headless_edit_info: Strukturen for de returnerte JSON-dataene styres av en mal. Du kan redigere den malen ved å bruke Automads innebygde malspråk for å tilpasse felt ved å bruke variabler, objekter og kontrollstrukturer.
 
 -
 
@@ -614,10 +614,6 @@ sys_status_debug_enabled: Feilsøking er aktivert
 
 -
 
-sys_status_debug_disabled: Feilsøking er deaktivert
-
--
-
 sys_status_update_available: Oppdater til
 
 -
@@ -638,11 +634,11 @@ sys_update_available: En nyere versjon av Automad er tilgjengelig og klar til å
 
 -
 
-sys_update_current_version: Den for øyeblikket installerte versjonen er
+sys_update_current_version: Din nåværende installerte versjon er
 
 -
 
-sys_update_items: Følgende elementer påvirkes av oppdateringen:
+sys_update_items: Merk at følgende filer og kataloger blir påvirket av oppdateringen:
 
 -
 
@@ -650,11 +646,11 @@ sys_update_not_required: Automad er oppdatert.
 
 -
 
-sys_update_progress: Vent og lukk ikke vinduet mens du oppdaterer ...
+sys_update_progress: Vent og ikke lukk vinduet mens du oppdaterer ...
 
 -
 
-sys_update_to: Oppdater til
+sys_update_to: Oppdater til versjon
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Registrerte brukere
 -
 
 sys_user_you: Du
+
+-
+
+theme_readme_alert: Klikk her for å lese dokumentasjonen for det aktive temaet!

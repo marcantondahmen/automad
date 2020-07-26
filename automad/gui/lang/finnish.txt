@@ -430,11 +430,11 @@ page_var_name: Muuttujan nimi
 
 -
 
-page_vars_headless: Muuttujat
+page_vars_content: Sisältö
 
 -
 
-page_vars_template: Muuttujat nykyisessä mallissa
+page_vars_settings: Mallin asetukset
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Haluatko käyttää valittua teemaa ja päivittää käytett
 
 -
 
-shared_vars_headless: Muuttujat
+shared_vars_content: Oletussisältö
 
 -
 
-shared_vars_main_theme: Muutokset pääteemassa
+shared_vars_settings: Mallin oletusasetukset
 
 -
 
@@ -538,7 +538,7 @@ success_saved: Tallennetut muutokset
 
 -
 
-success_update: Päivitetty Automad!
+success_update: Automad päivitettiin onnistuneesti!
 
 -
 
@@ -562,7 +562,7 @@ sys_cache_monitor: Tarkastusväli on
 
 -
 
-sys_cache_monitor_info: Kun välimuisti on käytössä, Automad tarkistaa säännöllisesti tiedostojärjestelmän muutokset. Näiden tarkastusten tiheys voidaan määritellä täällä.
+sys_cache_monitor_info: Kun välimuisti on käytössä, Automad tarkistaa säännöllisesti tiedostojärjestelmän muutokset. Tarkastusten tiheys voidaan määritellä täällä.
 
 -
 
@@ -590,7 +590,7 @@ sys_headless_edit_info: Palautettujen JSON-tietojen rakennetta ohjataan mallilla
 
 -
 
-sys_headless_info: Päättömän tilan aktivointi muuttaa Automadin sisällönhallintajärjestelmäksi, joka keskittyy kokonaan sisällön luomiseen ilman esityskerrosta. Vaikka hallintapaneelia voidaan edelleen käyttää sisällön hallintaan, kaikkiin tietoihin ja tiedostoihin pääsee vain luku-vain JSON-sovellusliittymän kautta.
+sys_headless_info: Päättömän tilan aktivointi muuttaa Automadin sisällönhallintajärjestelmäksi, joka keskittyy kokonaan sisällön luomiseen ilman esityskerrosta. Vaikka hallintapaneelia voidaan silti käyttää sisällön hallintaan, kaikki tiedot ja tiedostot ovat käytettävissä vain luku -tyyppisen JSON-sovellusliittymän kautta.
 
 -
 
@@ -598,7 +598,7 @@ sys_language: Kieli
 
 -
 
-sys_language_info: Hallintapaneelille on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on vielä kokeiluvaiheessa, ja siksi jotkut käännökset eivät välttämättä ole tarkkoja.
+sys_language_info: Hallintapaneelille on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on vielä kokeiluvaiheessa, joten jotkut käännökset eivät välttämättä ole tarkkoja.
 
 -
 
@@ -611,10 +611,6 @@ sys_status_cache_disabled: Välimuisti on poistettu käytöstä
 -
 
 sys_status_debug_enabled: Debugging on käytössä
-
--
-
-sys_status_debug_disabled: Virheenkorjaus on poistettu käytöstä
 
 -
 
@@ -642,7 +638,7 @@ sys_update_current_version: Nykyinen asennettu versio on
 
 -
 
-sys_update_items: Päivitys vaikuttaa seuraaviin kohteisiin:
+sys_update_items: Huomaa, että päivitys vaikuttaa seuraaviin tiedostoihin ja hakemistoihin:
 
 -
 
@@ -654,11 +650,11 @@ sys_update_progress: Odota, älä sulje ikkunaa päivitettäessä ...
 
 -
 
-sys_update_to: Päivitä
+sys_update_to: Päivitä versioon
 
 -
 
-sys_update_windows_warning: Varmista, että käyttöoikeuskysymykset vältetään ennen päivityksen suorittamista, että kaikki asennustiedostosi on suljettu ulkoisissa ohjelmissa!
+sys_update_windows_warning: Varmista, että käyttöoikeusongelmien välttämiseksi varmista, että kaikki asennustiedostosi on suljettu ulkoisissa ohjelmissa ennen päivityksen suorittamista!
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Rekisteröityneet käyttäjät
 -
 
 sys_user_you: Sinä
+
+-
+
+theme_readme_alert: Napsauta tätä lukeaksesi aktiivisen teeman dokumentaatio!

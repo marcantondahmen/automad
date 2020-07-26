@@ -206,7 +206,7 @@ error_form: Dati incompleti o errati! <br /> Tutti i campi sono obbligatori e de
 
 -
 
-error_login: Username o password non validi
+error_login: Nome utente o password errati
 
 -
 
@@ -274,7 +274,7 @@ error_update_connection: Impossibile connettersi al server di aggiornamento! Que
 
 -
 
-error_update_download: Download dell'aggiornamento fallito!
+error_update_download: Download dell'aggiornamento non riuscito!
 
 -
 
@@ -362,7 +362,7 @@ log_out_title: Disconnesso
 
 -
 
-packages_title: Pacchetti
+packages_title: Pacchi
 
 -
 
@@ -422,15 +422,15 @@ page_var_name: Nome della variabile
 
 -
 
-page_vars_headless: Variabili
+page_vars_content: Soddisfare
 
 -
 
-page_vars_template: Variabili nel modello corrente
+page_vars_settings: Impostazioni modello
 
 -
 
-page_vars_unused: Variabili non utilizzate
+page_vars_unused: Variabili inutilizzate
 
 -
 
@@ -458,11 +458,11 @@ shared_theme_apply: Vuoi applicare il tema selezionato e aggiornare l'elenco del
 
 -
 
-shared_vars_headless: Variabili
+shared_vars_content: Contenuto predefinito
 
 -
 
-shared_vars_main_theme: Variabili nel tema principale
+shared_vars_settings: Impostazioni modello predefinite
 
 -
 
@@ -570,7 +570,7 @@ sys_cache_purge: Elimina directory cache
 
 -
 
-sys_cache_purge_info: Contrariamente alla semplice pulizia della cache, l'eliminazione della directory della cache sposta anche tutti i file temporanei, le pagine eliminate, i backup degli aggiornamenti e le immagini memorizzate nella cache nella directory temprary del sistema. Ciò imporrà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi, la directory temporanea verrà ripulita automaticamente di volta in volta o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
+sys_cache_purge_info: Contrariamente alla semplice pulizia della cache, l'eliminazione della directory della cache sposta anche tutti i file temporanei, le pagine eliminate, i backup degli aggiornamenti e le immagini memorizzate nella cache nella directory temprary del sistema. Ciò forzerà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi, la directory temporanea verrà ripulita automaticamente di volta in volta o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
 
 -
 
@@ -606,10 +606,6 @@ sys_status_debug_enabled: Il debug è abilitato
 
 -
 
-sys_status_debug_disabled: Il debug è disabilitato
-
--
-
 sys_status_update_available: Aggiorna a
 
 -
@@ -634,7 +630,7 @@ sys_update_current_version: La versione attualmente installata è
 
 -
 
-sys_update_items: I seguenti elementi sono interessati dall'aggiornamento:
+sys_update_items: Si noti che i seguenti file e directory sono interessati dall'aggiornamento:
 
 -
 
@@ -646,7 +642,7 @@ sys_update_progress: Attendi e non chiudere la finestra durante l'aggiornamento 
 
 -
 
-sys_update_to: Aggiorna a
+sys_update_to: Aggiorna alla versione
 
 -
 
@@ -698,4 +694,8 @@ sys_user_registered: Utente registrato
 
 -
 
-sys_user_you: Voi
+sys_user_you: Tu
+
+-
+
+theme_readme_alert: Clicca qui per leggere la documentazione per il tema attivo!

@@ -242,7 +242,7 @@ error_packages: Kan pakketten van Packagist niet laden!
 
 -
 
-error_composer_memory: Uw server heeft niet genoeg geheugen om pakketten te installeren, bij te werken of te verwijderen! Als u deze site gebruikt op een shared-hostingservice met een beperkte hoeveelheid geheugen, probeer dan uw plan te upgraden of installeer uw site op een lokale computer zonder geheugenbeperkingen.
+error_composer_memory: Uw server heeft niet genoeg geheugen om pakketten te installeren, updaten of verwijderen! Als u deze site gebruikt op een shared-hostingservice met een beperkte hoeveelheid geheugen, probeer dan uw plan te upgraden of installeer uw site op een lokale computer zonder geheugenbeperkingen.
 
 -
 
@@ -430,11 +430,11 @@ page_var_name: Variabelenaam
 
 -
 
-page_vars_headless: Variabelen
+page_vars_content: Inhoud
 
 -
 
-page_vars_template: Variabelen in huidige sjabloon
+page_vars_settings: Sjablooninstellingen
 
 -
 
@@ -466,11 +466,11 @@ shared_theme_apply: Wilt u het geselecteerde thema toepassen en de lijst met bes
 
 -
 
-shared_vars_headless: Variabelen
+shared_vars_content: Standaard inhoud
 
 -
 
-shared_vars_main_theme: Variabelen in het hoofdthema
+shared_vars_settings: Standaard sjablooninstellingen
 
 -
 
@@ -578,7 +578,7 @@ sys_cache_purge: Cache-map opschonen
 
 -
 
-sys_cache_purge_info: In tegenstelling tot het eenvoudigweg wissen van de cache, worden bij het opschonen van de cachemap ook alle tijdelijke bestanden, verwijderde pagina's, update-back-ups en gecachte afbeeldingen naar de tijdelijke directory van het systeem verplaatst. Dit dwingt een volledige herbouw van de afbeelding en paginacache en een opschoning van alle verwijderde pagina's. Op de meeste systemen wordt de tijdelijke map van tijd tot tijd automatisch opgeschoond of bij het opnieuw opstarten. Op sommige systemen moet die map echter handmatig worden gewist.
+sys_cache_purge_info: In tegenstelling tot het eenvoudigweg wissen van de cache, worden bij het opschonen van de cachemap ook alle tijdelijke bestanden, verwijderde pagina's, updateback-ups en gecachte afbeeldingen naar de tijdelijke directory van het systeem verplaatst. Dit zorgt ervoor dat de afbeelding en paginacache volledig opnieuw worden opgebouwd en dat alle verwijderde pagina's worden opgeschoond. Op de meeste systemen wordt de tijdelijke map van tijd tot tijd automatisch opgeschoond of bij het opnieuw opstarten. Op sommige systemen moet die map echter handmatig worden gewist.
 
 -
 
@@ -590,7 +590,7 @@ sys_headless_edit_info: De structuur van de geretourneerde JSON-gegevens wordt b
 
 -
 
-sys_headless_info: Door de headless-modus te activeren, wordt Automad een contentmanagementsysteem dat zich volledig richt op het maken van content zonder presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
+sys_headless_info: Door de headless-modus te activeren, verandert Automad in een contentmanagementsysteem dat zich volledig richt op het maken van content zonder presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
 
 -
 
@@ -598,7 +598,7 @@ sys_language: Taal
 
 -
 
-sys_language_info: Er zijn verschillende talen beschikbaar voor het dashboard. De vertalingen worden automatisch gemaakt. Deze functie bevindt zich nog in een experimentele fase en daarom zijn sommige vertalingen mogelijk niet nauwkeurig.
+sys_language_info: Er zijn verschillende talen beschikbaar voor het Dashboard. De vertalingen worden automatisch gemaakt. Deze functie bevindt zich nog in een experimentele fase en daarom zijn sommige vertalingen mogelijk niet nauwkeurig.
 
 -
 
@@ -611,10 +611,6 @@ sys_status_cache_disabled: Caching is uitgeschakeld
 -
 
 sys_status_debug_enabled: Foutopsporing is ingeschakeld
-
--
-
-sys_status_debug_disabled: Foutopsporing is uitgeschakeld
 
 -
 
@@ -638,11 +634,11 @@ sys_update_available: Er is een nieuwere versie van Automad beschikbaar en klaar
 
 -
 
-sys_update_current_version: De momenteel geïnstalleerde versie is
+sys_update_current_version: Uw momenteel geïnstalleerde versie is
 
 -
 
-sys_update_items: De volgende items worden beïnvloed door de update:
+sys_update_items: Merk op dat de volgende bestanden en mappen worden beïnvloed door de update:
 
 -
 
@@ -654,11 +650,11 @@ sys_update_progress: Even geduld en sluit het venster niet tijdens het updaten .
 
 -
 
-sys_update_to: Update naar
+sys_update_to: Update naar versie
 
 -
 
-sys_update_windows_warning: Zorg ervoor dat alle bestanden van uw installatie in externe programma's zijn gesloten voordat u de update uitvoert om machtigingsproblemen te voorkomen!
+sys_update_windows_warning: Zorg ervoor dat alle bestanden van uw installatie in externe programma's zijn gesloten voordat u de update uitvoert om problemen met toestemmingen te voorkomen!
 
 -
 
@@ -670,7 +666,7 @@ sys_user_info: U kunt hier meer gebruikers toevoegen of verwijderen of uw wachtw
 
 -
 
-sys_user_change_password: Verander uw wachtwoord
+sys_user_change_password: Wijzig uw wachtwoord
 
 -
 
@@ -707,3 +703,7 @@ sys_user_registered: Geregistreerde gebruikers
 -
 
 sys_user_you: U
+
+-
+
+theme_readme_alert: Klik hier om de documentatie voor het actieve thema te lezen!
