@@ -163,9 +163,11 @@ class Page {
 				<div class="uk-panel uk-panel-box">
 					<a 
 					href="$link" 
-					class="am-cover-4by3 uk-panel-teaser"
+					class="uk-panel-teaser uk-display-block"
 					>
-						$preview
+						<div class="am-cover-4by3">
+							$preview
+						</div>
 					</a>
 					<div class="uk-panel-title">$pageTitle</div>
 					<div class="uk-text-small">$pageMTime</div>

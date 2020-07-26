@@ -145,8 +145,10 @@ HTML;
 		return <<< HTML
 					$readme
 					<div id="$id" class="uk-panel uk-panel-box">
-						<div class="am-cover-4by3 uk-panel-teaser">
-							$icon
+						<div class="uk-panel-teaser">
+							<div class="am-cover-4by3">
+								$icon
+							</div>
 						</div>
 						$badge
 						<div class="uk-panel-title">

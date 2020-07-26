@@ -87,10 +87,12 @@ HTML;
 		return <<< HTML
 				<a 
 				href="#am-edit-file-info-modal" 
-				class="am-cover-4by3 uk-panel-teaser uk-display-block" 
+				class="uk-panel-teaser uk-display-block" 
 				data-uk-modal
 				>
-					$preview
+					<div class="am-cover-4by3">
+						$preview
+					</div>
 				</a>
 HTML;
 
