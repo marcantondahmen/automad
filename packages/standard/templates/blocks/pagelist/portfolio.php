@@ -12,7 +12,7 @@
 						</div>
 					<@~ end ~@>
 				<@ end @>
-				<div class="uk-panel-title uk-margin-bottom-remove">
+				<div class="uk-panel-title panel-body">
 					<a href="@{ url }">
 						<@ ../../snippets/icon.php @>
 						@{ title }

@@ -12,19 +12,21 @@
 						</div>
 					<@~ end ~@>
 				<@ end @>
-				<div class="uk-panel-title">
-					<a href="@{ url }" class="nav-link">
-						<@ ../../snippets/icon.php @>
-						@{ title }
-					</a>
-					<div class="text-subtitle">
-						<@ ../../snippets/date.php @>
-						<@ if @{ date } and @{ tags } @><br><@ end @>
-						<@ ../../snippets/tags.php @>
+				<div class="panel-body">
+					<div class="uk-panel-title">
+						<a href="@{ url }" class="nav-link">
+							<@ ../../snippets/icon.php @>
+							@{ title }
+						</a>
+						<div class="text-subtitle">
+							<@ ../../snippets/date.php @>
+							<@ if @{ date } and @{ tags } @><br><@ end @>
+							<@ ../../snippets/tags.php @>
+						</div>
 					</div>
+					<@~ ../../snippets/set_teaser_variable.php @>
+					<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
 				</div>
-				<@~ ../../snippets/set_teaser_variable.php @>
-				<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
 				<@ ../../snippets/more.php @>
 			</div>
 		</div>
