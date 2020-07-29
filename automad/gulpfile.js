@@ -8,7 +8,6 @@ var gulp = require('gulp'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
 	replace = require('gulp-replace'),
-	sequence = require('gulp-sequence'),
 	uglify = require('gulp-uglify-es').default,
 	gutil = require('gulp-util'),
 	fs = require('fs'),
@@ -114,7 +113,7 @@ gulp.task('libs-js', function() {
 			]),
 			// Editor.js.
 			gulp.src([
-				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE',
+				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
 				'node_modules/@editorjs/delimiter/dist/bundle.js',
 				'node_modules/@editorjs/embed/dist/bundle.js',
@@ -262,15 +261,15 @@ gulp.task('libs-css', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('blocks/js/*.js', ['blocks-js']);
-	gulp.watch('blocks/less/*.less', ['blocks-less']);
-	gulp.watch('gui/js/*.js', ['automad-js']);
-	gulp.watch('gui/js/*/*.js', ['automad-js']);
-	gulp.watch('gui/less/*.less', ['automad-less']);
-	gulp.watch('gui/less/*/*.less', ['automad-less']);
+	gulp.watch('blocks/js/*.js', gulp.series('blocks-js'));
+	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
+	gulp.watch('gui/js/*.js', gulp.series('automad-js'));
+	gulp.watch('gui/js/*/*.js', gulp.series('automad-js'));
+	gulp.watch('gui/less/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/*/*.less', gulp.series('automad-less'));
 	
 });
 
 
 // The default task.
-gulp.task('default', ['blocks-js', 'blocks-less', 'automad-js', 'libs-js', 'automad-less', 'libs-css']);
+gulp.task('default', gulp.series('blocks-js', 'blocks-less', 'automad-js', 'libs-js', 'automad-less', 'libs-css'));
