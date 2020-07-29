@@ -6,7 +6,7 @@
   "private": true,
   "devDependencies": {
     "css-element-queries": "^1.2.3",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.1",

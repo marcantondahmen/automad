@@ -111,11 +111,11 @@ gulp.task('standard-less', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('less/*.less', ['standard-less']);
-	gulp.watch('js/*.js', ['standard-js']);
+	gulp.watch('less/*.less', gulp.series('standard-less'));
+	gulp.watch('js/*.js', gulp.series('standard-js'));
 	
 });
 
 
 // The default task.
-gulp.task('default', ['standard-js', 'standard-less']);
+gulp.task('default', gulp.series('standard-js', 'standard-less'));
