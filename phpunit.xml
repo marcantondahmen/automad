@@ -4,4 +4,7 @@
 			<directory suffix="_test.php">automad/tests</directory>
 		</testsuite>
 	</testsuites>
+	<php>
+		<server name="SERVER_NAME" value=""/>
+	</php>
 </phpunit>
