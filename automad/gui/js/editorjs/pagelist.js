@@ -77,7 +77,7 @@ class AutomadPagelist {
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Type').outerHTML}
-					${create.select(['cdx-input', 'am-block-type'], ['all', 'children'], this.data.type).outerHTML}
+					${create.select(['cdx-input', 'am-block-type'], ['all', 'children', 'related'], this.data.type).outerHTML}
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Filter by Tag').outerHTML}
