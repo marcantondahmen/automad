@@ -261,7 +261,7 @@ class FileSystem extends Core\FileSystem {
 		
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
-		$newParentPath = str_replace('\\', '/', $newParentPath);
+		$newParentPath = FileSystem::normalizeSlashes($newParentPath);
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.

@@ -53,6 +53,11 @@ use Automad\GUI as GUI;
 date_default_timezone_set(@date_default_timezone_get());
 
 
+// Set base dir.
+require_once __DIR__ . '/core/filesystem.php';
+define('AM_BASE_DIR', Core\FileSystem::normalizeSlashes(dirname(__DIR__)));
+
+
 // Autoloading.
 require AM_BASE_DIR . '/automad/autoload.php';
 

@@ -119,9 +119,9 @@ class Parse {
 		
 		if ($str) {
 			
-			foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
+			foreach (self::csv($str) as $glob) {
 						
-				if ($f = FileSystem::glob(Resolve::filePath($Page->path, trim($glob)))) {
+				if ($f = FileSystem::glob(Resolve::filePath($Page->path, $glob))) {
 					$f = array_filter($f, '\Automad\Core\FileSystem::isAllowedFileType');
 					$files = array_merge($files, $f);
 				}
@@ -135,9 +135,6 @@ class Parse {
 				if ($stripBaseDir) {
 					$file = Str::stripStart($file, AM_BASE_DIR);
 				}
-				
-                // Windows compatibility.
-                $file = str_replace('\\', '/', $file);
                 
 			});	
 			

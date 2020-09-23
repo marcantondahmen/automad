@@ -173,7 +173,9 @@ class FileSystem {
 			return array();
 		}
 
-		return $files;
+		return	array_map(function($path) {
+					return self::normalizeSlashes($path);
+				}, $files);
 
 	}
 
@@ -248,6 +250,20 @@ class FileSystem {
 		
 	}
 	
+
+	/**
+	 *	Replace all backslashes in a given path with forward slashes.
+	 *	
+	 *	@param string $path
+	 *	@return string The processed path with only forward slashes
+	 */
+
+	public static function normalizeSlashes($path) {
+
+		return str_replace('\\', '/', $path);
+
+	}
+
 	
 	/**
 	 *	Write content to a file and create the parent directory if needed.
