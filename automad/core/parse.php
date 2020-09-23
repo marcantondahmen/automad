@@ -128,16 +128,14 @@ class Parse {
 				
 			}
 			
-			array_walk($files, function(&$file) use ($stripBaseDir) { 
-				
-				$file = realpath($file); 
-				
-				if ($stripBaseDir) {
+			if ($stripBaseDir) {
+
+				array_walk($files, function(&$file) { 
 					$file = Str::stripStart($file, AM_BASE_DIR);
-				}
-                
-			});	
-			
+				});	
+
+			}
+
 		}
 		
 		return $files;
