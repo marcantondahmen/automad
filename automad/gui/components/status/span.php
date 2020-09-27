@@ -42,21 +42,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The status badge component. 
+ *	The status span component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Badge {
+class Span {
 
 	
 	/**
-	 *  Create a status badge for an AJAX status request.
+	 *  Create a span for an AJAX status request.
 	 *      
 	 *  @param string $status
-	 *  @return string The HTML for the status badge
+	 *  @return string The HTML for the status span
 	 */
 
 	public static function render($status) {
