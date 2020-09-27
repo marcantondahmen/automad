@@ -93,7 +93,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li<?php if (Core\Request::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
 							<a href="?context=packages">
 								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
-								<?php Text::e('packages_title'); ?>
+								<?php Text::e('packages_title'); ?>&nbsp;
+								<?php echo Components\Status\Badge::render('outdated_packages'); ?>
 							</a>
 						</li>
 						<li class="uk-nav-divider"></li>

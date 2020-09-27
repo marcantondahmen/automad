@@ -58,7 +58,7 @@ class Response {
 
 	
 	/**
-	 * 	Get the current status response of a given system setting.
+	 * 	Get the current status response of a given system item or packages.
 	 * 	
 	 * 	@param string $item
 	 * 	@return array The output array with the generated status return markup
@@ -138,6 +138,24 @@ HTML;
 			$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . 
 								Text::get('sys_user_registered') . 
 								'&nbsp;&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>';
+
+		}
+
+		if ($item == 'outdated_packages') {
+
+			$Composer = new System\Composer();
+			$buffer = $Composer->run('show -oD -f json', true);
+
+			if ($buffer) {
+				
+				$data = json_decode($buffer);
+
+				if (!empty($data->installed)) {
+					$count = count($data->installed);
+					$output['status'] = '<span class="uk-badge uk-badge-success">' . $count . '</span>';
+				}
+
+			}
 
 		}
 
