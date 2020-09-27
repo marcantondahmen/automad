@@ -150,6 +150,10 @@ btn_save: Save Changes
 
 -
 
+btn_update: Update
+
+-
+
 btn_upload: Upload
 
 -
@@ -488,7 +492,11 @@ packages_update_all: Update All
 
 -
 
-packages_updating: Updating packages ...
+packages_updating_all: Updating packages ...
+
+-
+
+packages_updating: Updating package ...
 
 -
 
@@ -677,7 +685,11 @@ success_update: Successfully updated Automad!
 
 -
 
-success_packages_updated: Successfully updated all packages
+success_packages_updated_all: Successfully updated all packages
+
+-
+
+success_package_updated: Successfully updated
 
 -
 

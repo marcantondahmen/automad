@@ -81,7 +81,11 @@ $this->element('header');
 		<?php 
 		
 		$progressModals = array(
-			'am-modal-update-packages-progress' => array(
+			'am-modal-update-all-packages-progress' => array(
+				'icon' => 'uk-icon-refresh uk-icon-spin',
+				'text' => Text::get('packages_updating_all')
+			),
+			'am-modal-update-package-progress' => array(
 				'icon' => 'uk-icon-refresh uk-icon-spin',
 				'text' => Text::get('packages_updating')
 			),	

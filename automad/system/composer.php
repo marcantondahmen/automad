@@ -209,9 +209,11 @@ class Composer {
 	 * 	Run a given Composer command.
 	 * 	
 	 * 	@param string $command
+	 *  @param bool $getBuffer
+	 * 	@return string The command output on false or in case $getBuffer is true
 	 */
 
-	public function run($command) {
+	public function run($command, $getBuffer = false) {
 
 		$this->shutdownOnError();
 		
@@ -221,6 +223,7 @@ class Composer {
 		ini_set('memory_limit', -1);
 				
 		$input = new \Symfony\Component\Console\Input\StringInput($command);
+		$output = new \Symfony\Component\Console\Output\BufferedOutput();
 		$application = new \Composer\Console\Application();
 		
 		$application->setAutoExit(false);
@@ -229,12 +232,16 @@ class Composer {
 		Core\Debug::log($command, 'Command');
 
 		try {
-			$application->run($input);
+			$application->run($input, $output);
 		} catch (\Exception $e) {
 			return $e->getMessage();
 		}
 
 		Core\Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
+
+		if ($getBuffer) {
+			return $output->fetch();
+		}
 
 	}
 

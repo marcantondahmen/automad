@@ -54,7 +54,7 @@ $output['error'] = $Composer->run('update');
 $output['trigger'] = 'composerDone';
 	
 if (!$output['error']) {
-	$output['success'] = Text::get('success_packages_updated');
+	$output['success'] = Text::get('success_packages_updated_all');
 }
 
 $this->jsonOutput($output);

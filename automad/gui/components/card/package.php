@@ -79,16 +79,28 @@ class Package {
 HTML;
 
 			$button = <<< HTML
-					<form class="am-panel-bottom-right" data-am-handler="remove_package">
-						<input type="hidden" name="package" value="$package->name">
-						<button 
-						class="uk-button uk-button-small"
-						data-uk-modal="{target:'#am-modal-remove-package-progress',keyboard:false,bgclose:false}"
-						>
-							$Text->btn_remove
-							&nbsp;<i class="uk-icon-times"></i>	
-						</button>
-					</form>
+					<div class="am-panel-bottom-right">
+						<form data-am-handler="remove_package">
+							<input type="hidden" name="package" value="$package->name">
+							<button 
+							class="uk-button uk-button-small"
+							data-uk-modal="{target:'#am-modal-remove-package-progress',keyboard:false,bgclose:false}"
+							>
+								$Text->btn_remove
+								&nbsp;<i class="uk-icon-times"></i>	
+							</button>
+						</form>
+						<form class="uk-hidden" data-am-handler="update_package">
+							<input type="hidden" name="package" value="$package->name">
+							<button 
+							class="uk-button uk-button-success uk-button-small"
+							data-uk-modal="{target:'#am-modal-update-package-progress',keyboard:false,bgclose:false}"
+							>
+								$Text->btn_update
+								&nbsp;<i class="uk-icon-refresh"></i>	
+							</button>
+						</form>
+					</div>		
 HTML;
 
 		} else {
@@ -109,7 +121,7 @@ HTML;
 		}
 
 		return <<< HTML
-				<div class="uk-panel uk-panel-box $active">
+				<div class="uk-panel uk-panel-box $active" data-package="$package->name">
 					<a 
 					href="$package->info" 
 					class="uk-display-block"
