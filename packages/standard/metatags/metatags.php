@@ -38,7 +38,7 @@ class MetaTags {
 			'ogDescription' => false,
 			'ogType' => 'website',
 			'ogImage' => false,
-			'twitterCard' => true
+			'twitterCard' => 'summary_large_image'
 		);
 		
 		$options = array_merge($defaults, $options);
