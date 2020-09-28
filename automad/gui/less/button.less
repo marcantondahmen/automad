@@ -39,9 +39,9 @@
 @am-button-border-color:			@am-border-color;
 
 @button-color:						@am-text;
-@button-background:					@am-bg;
+@button-background:					#FFFFFF;
 @button-hover-color:				@am-text;
-@button-hover-background:			#F7F7F7;
+@button-hover-background:			#F6F6F6;
 @button-active-color:				@button-hover-color;
 @button-active-background:			@button-hover-background;
 
@@ -67,7 +67,7 @@
 @button-danger-active-background:	@button-danger-hover-background;
 
 @button-disabled-color:				#CFCFCF;
-@button-disabled-background:		@am-bg;
+@button-disabled-background:		@button-background;
 
 @button-font-size:					14px;
 @button-mini-font-size: 			11px;
@@ -99,7 +99,7 @@
 	box-sizing: border-box;
 	position: relative;
 	border-radius: @am-radius;
-	border: @am-border-width solid @am-button-border-color;
+	border: @am-border-width solid @am-border-color;
 	
 	&-link,
 	&-primary,
@@ -183,7 +183,7 @@
 	&:active,
 	&:focus {
 		outline: 0 !important;
-		background-color: @button-hover-background;
+		background-color: @button-background;
 	}
 
 }

@@ -34,10 +34,10 @@
 
 
 @am-tag-font-size: 	@button-small-font-size;
-@am-tag-height: 	24px;
-@am-tag-padding: 	0 10px;
+@am-tag-height: 	20px;
+@am-tag-padding: 	0 8px;
 @am-tag-radius:  	@am-tag-height;
-@am-tag-margin: 	7px;
+@am-tag-margin: 	8px;
 
 [data-am-tags] {
 	box-sizing: border-box;
@@ -64,6 +64,7 @@
 			font-size: @am-tag-font-size;
 			line-height: @am-tag-height;
 			border-radius: @am-tag-radius;
+			font-weight: 500;
 			
 			&.taggle {
 							
@@ -75,7 +76,8 @@
 				& .close {
 					
 					&:extend(.uk-close);
-					margin-left: -1px;
+					margin-top: -1px;
+					margin-left: -4px;
 					margin-right: -9px;
 					padding: 0 3px;
 					cursor: pointer;

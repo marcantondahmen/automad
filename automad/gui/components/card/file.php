@@ -203,7 +203,7 @@ HTML;
 						<div class="am-panel-bottom-left">
 							<div data-uk-dropdown="{mode:'click'}">
 								<div class="am-panel-bottom-link">
-									<i class="uk-icon-plus"></i>
+									<i class="uk-icon-ellipsis-v"></i>
 								</div>
 								<div class="uk-dropdown uk-dropdown-small">
 									<ul class="uk-nav uk-nav-dropdown">

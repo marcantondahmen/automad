@@ -37,7 +37,7 @@
 
 @text-muted-color:		    @am-muted;
 @text-danger-color:			@am-danger;
-@text-small-line-height:    20px;
+@text-small-line-height:    17px;
 
 
 .am-text {
@@ -63,21 +63,21 @@
 	
 	& h2 {
 		font-size: 1.72rem;
-		font-weight: 700;
+		font-weight: 670;
 		margin: 2.85rem 0 1.43rem 0;
 		line-height: 1.425;
 	}
 	
 	& h3 {
 		font-size: 1.45rem;
-		font-weight: 700;
+		font-weight: 620;
 		margin: 2.14rem 0 0.72rem 0;
 		line-height: 1.5;
 	}
 	
 	& h4 {
 		font-size: 1.22rem;
-		font-weight: 700;
+		font-weight: 580;
 		margin: 1.43rem 0 0.72rem 0;
 		line-height: 1.5;
 	}
@@ -166,6 +166,8 @@
 
 	& table:not([class]) {
 
+		width: 100%;
+		max-width: 100%;
 		margin: 1.43rem 0;
 		border-collapse: collapse;
 		overflow: hidden;
@@ -178,6 +180,7 @@
 			padding: 0.5rem 0.75rem;
 			border-bottom: 1px solid @am-border-color;
 			border-left: 1px solid @am-border-color;
+			vertical-align: top;
 
 			&:first-child {
 				border-left: none;

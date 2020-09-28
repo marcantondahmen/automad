@@ -54,7 +54,7 @@
 
 .hook-panel-box() {
 	
-	border-radius: @am-radius;
+	border-radius: @am-radius-large;
 	cursor: default;
 	border: @am-hairline;
 	.transition(border-color 0.2s, box-shadow 0.2s;);
@@ -69,8 +69,8 @@
 
 	& .uk-panel-teaser {
 		overflow: hidden;
-		border-top-left-radius: @am-radius - @am-border-width;
-		border-top-right-radius: @am-radius - @am-border-width;
+		border-top-left-radius: @am-radius-large - @am-border-width;
+		border-top-right-radius: @am-radius-large - @am-border-width;
 		border-bottom: @am-hairline;
 	}
 	
@@ -157,18 +157,28 @@
 			height: inherit;
 			padding: @panel-box-padding - @am-panel-bottom-link-padding;
 
-			& .uk-button {
-				margin: 0 @am-panel-bottom-link-padding;
-			}
+			
 
 		}
 
 		&-left {
+
 			left: 0;
+
+			& .uk-button {
+				margin-left: @am-panel-bottom-link-padding;
+			}
+			
 		}
 
 		&-right {
+
 			right: 0;
+
+			& .uk-button {
+				margin-right: @am-panel-bottom-link-padding;
+			}
+
 		}
 
 		&-link {

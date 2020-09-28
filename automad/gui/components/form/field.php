@@ -262,7 +262,7 @@ HTML;
 
 		return <<< HTML
 				<div class="uk-flex" data-am-colorpicker> 
-				 	<input type="color" class="uk-button" value="$color" />
+				 	<input type="color" value="$color" />
 				 	<input type="text" class="uk-form-controls uk-width-1-1" $attr />
 				</div>
 HTML;

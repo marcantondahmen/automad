@@ -79,7 +79,7 @@ $this->element('header');
 			<br>
 			<a 
 			href="#am-server-info-modal" 
-			class="uk-button uk-button-mini uk-text-muted uk-margin-small-top" 
+			class="uk-button uk-button-mini uk-margin-small-top" 
 			data-uk-modal
 			>
 				<?php Text::e('btn_more'); ?>

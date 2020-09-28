@@ -73,7 +73,7 @@ class Package {
 			$active = 'uk-active';
 
 			$badge = <<< HTML
-					<span class="uk-panel-badge uk-badge uk-badge-success">
+					<span class="uk-panel-badge uk-badge">
 						$Text->packages_installed
 					</span>
 HTML;
@@ -113,7 +113,7 @@ HTML;
 						data-uk-modal="{target:'#am-modal-install-package-progress',keyboard:false,bgclose:false}"
 						>
 							$Text->btn_install	
-							&nbsp;<i class="uk-icon-plus"></i>
+							&nbsp;<i class="uk-icon-download"></i>
 						</button>
 					</form>
 HTML;

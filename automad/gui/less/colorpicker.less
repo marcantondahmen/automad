@@ -37,26 +37,20 @@
 
 	& > input[type="color"] {
 		
+		position: absolute;
 		box-sizing: border-box;
-		width: @form-height - 1;
-		min-width: @form-height - 1;
+		width: @form-height;
+		min-width: @form-height;
 		height: @form-height;
 		max-height: @form-height;
 		min-height: @form-height;
-		padding: 8px;
-		border: @am-hairline !important;
-		border-right: none !important;
+		padding: 10px;
+		border: none !important;
 		outline: none;
-		border-radius: @am-radius;
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		background-color: @button-background;
+		background-color: transparent !important;
+		box-shadow: none !important;
 		cursor: pointer;
 		-webkit-appearance: none;
-
-		&:hover {
-			background-color: @button-hover-background;
-		}
 
 		&::-webkit-color-swatch-wrapper {
 			padding: 0;	
@@ -75,8 +69,7 @@
 	}
 
 	& > input[type="text"] {
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
+		padding-left: 40px;
 	}
 
 }

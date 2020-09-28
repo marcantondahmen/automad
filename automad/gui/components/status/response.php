@@ -152,7 +152,7 @@ HTML;
 
 				if (!empty($data->installed)) {
 					$count = count($data->installed);
-					$output['status'] = '<span class="uk-badge uk-badge-success">' . $count . '</span>';
+					$output['status'] = '<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i>&nbsp; ' . $count . '</span>';
 				} else {
 					$output['status'] = '';
 				}
