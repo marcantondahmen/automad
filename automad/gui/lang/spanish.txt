@@ -26,11 +26,11 @@ btn_copy_url_clipboard: Copiar URL al portapapeles
 
 -
 
-btn_copy_resized: Copiar y redimensionar
+btn_copy_resized: Copiar y cambiar el tamaño
 
 -
 
-btn_data: Datos y configuraciones
+btn_data: Datos y configuración
 
 -
 
@@ -50,7 +50,7 @@ btn_edit: Editar
 
 -
 
-btn_edit_file_info: Editar información del archivo
+btn_edit_file_info: Editar información de archivo
 
 -
 
@@ -66,7 +66,7 @@ btn_files: Archivos subidos
 
 -
 
-btn_get_themes: Obtén más temas
+btn_get_themes: Obtener más temas
 
 -
 
@@ -86,7 +86,7 @@ btn_import: Importar desde URL
 
 -
 
-btn_inpage_edit: Modo de edición en página
+btn_inpage_edit: Modo de edición en la página
 
 -
 
@@ -142,15 +142,19 @@ btn_save: Guardar cambios
 
 -
 
+btn_update: Actualizar
+
+-
+
 btn_upload: Subir
 
 -
 
-confirm_delete_files: ¿Estás seguro de que deseas eliminar los archivos seleccionados?
+confirm_delete_files: ¿Está seguro de que desea eliminar los archivos seleccionados?
 
 -
 
-confirm_delete_page: ¿Estás seguro de que deseas eliminar la página actual?
+confirm_delete_page: ¿Está seguro de que desea eliminar la página actual?
 
 -
 
@@ -166,7 +170,7 @@ dashboard_memory: Uso de memoria:
 
 -
 
-dashboard_modified: Actividad más reciente en
+dashboard_modified: Última actividad en
 
 -
 
@@ -178,7 +182,7 @@ dropzone: Arrastre los archivos aquí
 
 -
 
-error_cache_purged: ¡El directorio de caché no pudo ser purgado!
+error_cache_purged: ¡No se pudo purgar el directorio de caché!
 
 -
 
@@ -198,7 +202,7 @@ error_file_not_found: ¡Archivo no encontrado!
 
 -
 
-error_file_size: Tamaño de archivo no válido
+error_file_size: Tamaño de archivo no válido.
 
 -
 
@@ -210,19 +214,19 @@ error_login: Usuario o contraseña invalido
 
 -
 
-error_log_out: ¡Cerrar sesión fallido!
+error_log_out: ¡No se pudo cerrar la sesión!
 
 -
 
-error_no_destination: Por favor, seleccione una página como destino!
+error_no_destination: Seleccione una página como destino.
 
 -
 
-error_no_js: ¡Habilite JavaScript en su navegador para usar el Tablero!
+error_no_js: ¡Habilite JavaScript en su navegador para usar el Panel de control!
 
 -
 
-error_no_theme: ¡Ningún tema seleccionado! Por favor seleccione un tema principal.
+error_no_theme: ¡Ningún tema seleccionado! Seleccione un tema principal.
 
 -
 
@@ -234,7 +238,7 @@ error_import: ¡La importación del archivo ha fallado!
 
 -
 
-error_packages: ¡No se pudieron cargar paquetes de Packagist!
+error_packages: ¡No se pudieron cargar los paquetes de Packagist!
 
 -
 
@@ -246,7 +250,7 @@ error_page_not_found: ¡Página no encontrada!
 
 -
 
-error_page_title: Título faltante!
+error_page_title: ¡Falta el título!
 
 -
 
@@ -254,11 +258,11 @@ error_password_current: ¡La contraseña actual es incorrecta!
 
 -
 
-error_password_repeat: ¡Ingrese dos veces la misma contraseña nueva!
+error_password_repeat: ¡Ingrese dos veces la misma nueva contraseña!
 
 -
 
-error_password_reuse: ¡No reutilices tu contraseña anterior!
+error_password_reuse: ¡No reutilice su contraseña anterior!
 
 -
 
@@ -270,15 +274,15 @@ error_template_missing: Falta plantilla
 
 -
 
-error_update_connection: ¡No se puede conectar al servidor de actualización! Esto normalmente puede deberse a una configuración de actualización incorrecta (config.json), un error de certificado SSL o una biblioteca de cURL que falta.
+error_update_connection: ¡No puedo conectarme al servidor de actualizaciones! Por lo general, esto podría deberse a una configuración de actualización incorrecta (config.json), un error de certificado SSL o una biblioteca cURL faltante.
 
 -
 
-error_update_download: ¡Descarga de actualización fallida!
+error_update_download: ¡Falló la descarga de la actualización!
 
 -
 
-error_update_items: ¡Lista inválida de artículos para actualizar!
+error_update_items: Lista no válida de elementos para actualizar.
 
 -
 
@@ -286,15 +290,15 @@ error_update_failed: ¡Actualización fallida! Restaure su instalación desde un
 
 -
 
-error_update_not_supported: ¡Las actualizaciones no son compatibles con su servidor! El actualizador requiere que se instalen las bibliotecas cURL y ZIP.
+error_update_not_supported: ¡Las actualizaciones no son compatibles con su servidor! El actualizador requiere la instalación de bibliotecas cURL y ZIP.
 
 -
 
-error_update_permission: No se puede ejecutar la actualización! Permisos denegados!
+error_update_permission: ¡No se puede ejecutar la actualización! ¡Permisos denegados!
 
 -
 
-error_var_exists: ¡Ya hay una variable con ese nombre!
+error_var_exists: ¡Ya existe una variable con ese nombre!
 
 -
 
@@ -366,7 +370,7 @@ packages_title: Paquetes
 
 -
 
-packages_browse: Abrir el navegador de paquetes
+packages_browse: Abrir navegador de paquetes
 
 -
 
@@ -386,7 +390,11 @@ packages_update_all: Actualizar todo
 
 -
 
-packages_updating: Actualizando paquetes ...
+packages_updating_all: Actualizando paquetes ...
+
+-
+
+packages_updating: Actualizando paquete ...
 
 -
 
@@ -406,7 +414,7 @@ page_settings: Configuración de página
 
 -
 
-page_prefix: Prefijo (Orden en navegación)
+page_prefix: Prefijo (orden en navegación)
 
 -
 
@@ -414,7 +422,7 @@ page_redirect: Redirigir la página a otra URL
 
 -
 
-page_tags: Etiquetas (separe varias etiquetas por coma o tabulación)
+page_tags: Etiquetas (separe varias etiquetas por comas o tabulaciones)
 
 -
 
@@ -430,7 +438,7 @@ page_vars_content: Contenido
 
 -
 
-page_vars_settings: Configuraciones de plantilla
+page_vars_settings: Configuración de plantilla
 
 -
 
@@ -450,7 +458,7 @@ sidebar_header_pages: Páginas
 
 -
 
-shared_title: Datos generales y archivos
+shared_title: Datos y archivos generales
 
 -
 
@@ -458,7 +466,7 @@ shared_theme: Tema principal
 
 -
 
-shared_theme_apply: ¿Desea aplicar el tema seleccionado y actualizar la lista de variables disponibles ahora? Sus cambios no guardados se guardarán.
+shared_theme_apply: ¿Desea aplicar el tema seleccionado y actualizar la lista de variables disponibles ahora? Se guardarán los cambios que no hayas guardado.
 
 -
 
@@ -490,11 +498,11 @@ search_title: Resultados de la búsqueda
 
 -
 
-success_cache_cleared: ¡El caché se borró con éxito!
+success_cache_cleared: ¡La caché se borró con éxito!
 
 -
 
-success_cache_purged: ¡El directorio de caché se purgó con éxito!
+success_cache_purged: ¡El directorio de caché se purgó correctamente!
 
 -
 
@@ -506,7 +514,7 @@ success_installed: Instalado exitosamente
 
 -
 
-success_password_changed: ¡Su contraseña se cambió con éxito!
+success_password_changed: ¡Tu contraseña se cambió correctamente!
 
 -
 
@@ -522,11 +530,15 @@ success_saved: Cambios guardados
 
 -
 
-success_packages_updated: Se actualizaron correctamente todos los paquetes
+success_packages_updated_all: Todos los paquetes actualizados con éxito
 
 -
 
-sys_cache_info: El almacenamiento en caché es esencial para acelerar su sitio y, por lo general, debe habilitarse. Sin embargo, en algunas circunstancias, es posible que desee deshabilitar o borrar su caché.
+success_package_updated: Actualizado exitosamente
+
+-
+
+sys_cache_info: El almacenamiento en caché es esencial para acelerar su sitio y generalmente debe estar habilitado. Sin embargo, en algunas circunstancias, es posible que desee deshabilitar o borrar su caché.
 
 -
 
@@ -534,7 +546,7 @@ sys_cache_clear: Limpiar cache
 
 -
 
-sys_cache_clear_info: Borrar el caché del sitio obliga a volver a escanear páginas y archivos actualizados. Esta acción no eliminará ningún archivo de página o imagen del directorio de caché.
+sys_cache_clear_info: Borrar la memoria caché del sitio obliga a volver a escanear en busca de páginas y archivos actualizados. Esta acción no eliminará ningún archivo de página o imágenes del directorio de caché.
 
 -
 
@@ -542,7 +554,7 @@ sys_cache_monitor: El intervalo de verificación es
 
 -
 
-sys_cache_monitor_info: Cuando el almacenamiento en caché está habilitado, Automad verificará periódicamente los cambios en el sistema de archivos. La frecuencia de esas verificaciones se puede definir aquí.
+sys_cache_monitor_info: Cuando el almacenamiento en caché está habilitado, Automad comprobará periódicamente los cambios en el sistema de archivos. La frecuencia de esos controles se puede definir aquí.
 
 -
 
@@ -550,7 +562,7 @@ sys_cache_lifetime: La vida útil de la caché es
 
 -
 
-sys_cache_lifetime_info: Todos los datos y páginas de Automad almacenados en caché tienen una vida útil máxima. Después de que la vida útil de un objeto excede, su caché se reconstruirá cuando se solicite.
+sys_cache_lifetime_info: Todos los datos y páginas de Automad almacenados en caché tienen una vida útil máxima. Una vez que se excede la vida útil de un objeto, su caché se reconstruirá cuando se solicite.
 
 -
 
@@ -558,19 +570,19 @@ sys_cache_purge: Purgar directorio de caché
 
 -
 
-sys_cache_purge_info: En contraste con simplemente borrar el caché, la purga del directorio del caché también moverá todos los archivos temporales, páginas eliminadas, copias de seguridad de actualización e imágenes en caché al directorio temporal del sistema. Esto forzará una reconstrucción completa de la imagen y el caché de la página, así como una limpieza de todas las páginas eliminadas. En la mayoría de los sistemas, el directorio temporal se limpiará automáticamente de vez en cuando o al reiniciar. Sin embargo, en algunos sistemas ese directorio debe borrarse manualmente.
+sys_cache_purge_info: En contraste con simplemente borrar la caché, la depuración del directorio de la caché también moverá todos los archivos temporales, las páginas eliminadas, las copias de seguridad de actualización y las imágenes almacenadas en caché al directorio temporal del sistema. Esto forzará una reconstrucción completa de la caché de imágenes y páginas, así como una limpieza de todas las páginas eliminadas. En la mayoría de los sistemas, el directorio temporal se limpiará automáticamente de vez en cuando o al reiniciar. Sin embargo, en algunos sistemas, ese directorio debe borrarse manualmente.
 
 -
 
-sys_debug_info: Cuando se habilita la depuración, todos los procesos de Automad se registrarán en la consola de su navegador. La depuración solo es necesaria para el desarrollo o la resolución de problemas y debe deshabilitarse en todos los demás casos.
+sys_debug_info: Cuando la depuración está habilitada, todos los procesos de Automad se registrarán en la consola de su navegador. La depuración solo es necesaria para el desarrollo o la resolución de problemas y debe desactivarse en todos los demás casos.
 
 -
 
-sys_headless_edit_info: La estructura de los datos JSON devueltos está controlada por una plantilla. Puede editar esa plantilla utilizando el lenguaje de plantilla incorporado de Automad para personalizar campos utilizando variables, objetos y estructuras de control.
+sys_headless_edit_info: La estructura de los datos JSON devueltos está controlada por una plantilla. Puede editar esa plantilla usando el lenguaje de plantillas incorporado de Automad para personalizar campos usando variables, objetos y estructuras de control.
 
 -
 
-sys_headless_info: La activación del modo sin cabeza convierte a Automad en un sistema de administración de contenido que se enfoca completamente en la creación de contenido sin una capa de presentación. Si bien el Tablero aún se puede usar para administrar el contenido, se puede acceder a todos los datos y archivos a través de una API JSON de solo lectura.
+sys_headless_info: La activación del modo sin cabeza convierte a Automad en un sistema de gestión de contenido que se centra completamente en la creación de contenido sin una capa de presentación. Si bien el panel aún se puede usar para administrar contenido, todos los datos y archivos son accesibles a través de una API JSON de solo lectura.
 
 -
 
@@ -578,7 +590,7 @@ sys_language: Idioma
 
 -
 
-sys_language_info: Hay varios idiomas disponibles para el Tablero. Las traducciones se crean automáticamente. Esta característica aún se encuentra en una fase experimental y, por lo tanto, algunas traducciones pueden no ser precisas.
+sys_language_info: Hay varios idiomas disponibles para el panel. Las traducciones se crean automáticamente. Esta función aún se encuentra en una fase experimental y, por lo tanto, es posible que algunas traducciones no sean precisas.
 
 -
 
@@ -598,10 +610,6 @@ sys_status_update_available: Actualización para
 
 -
 
-sys_status_update_not_available: Automad está actualizado
-
--
-
 sys_title: Ajustes del sistema
 
 -
@@ -610,7 +618,7 @@ sys_update: Actualizar
 
 -
 
-sys_update_available: Una versión más nueva de Automad está disponible y lista para ser instalada. <br> ¡Haga una copia de seguridad de su instalación actual antes de actualizar!
+sys_update_available: Hay una versión más reciente de Automad disponible y lista para ser instalada. <br> ¡Haga una copia de seguridad de su instalación actual antes de actualizar!
 
 -
 
@@ -626,7 +634,7 @@ sys_update_not_required: Automad está actualizado.
 
 -
 
-sys_update_progress: Espere y no cierre la ventana mientras actualiza ...
+sys_update_progress: Espere y no cierre la ventana durante la actualización ...
 
 -
 
@@ -635,10 +643,6 @@ sys_update_to: Actualizar a la versión
 -
 
 sys_update_windows_warning: ¡Asegúrese de que todos los archivos de su instalación estén cerrados en programas externos antes de ejecutar la actualización para evitar problemas de permisos!
-
--
-
-sys_user: Los usuarios
 
 -
 

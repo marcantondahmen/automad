@@ -18,7 +18,7 @@ btn_browse: Parcourir les fichiers
 
 -
 
-btn_close: Fermer
+btn_close: Proche
 
 -
 
@@ -42,7 +42,7 @@ btn_download_file: Télécharger
 
 -
 
-btn_duplicate_page: Page en double
+btn_duplicate_page: Dupliquer la page
 
 -
 
@@ -50,7 +50,7 @@ btn_edit: Éditer
 
 -
 
-btn_edit_file_info: Modifier les informations sur le fichier
+btn_edit_file_info: Modifier les informations du fichier
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Sauvegarder les modifications
 
 -
 
+btn_update: Mise à jour
+
+-
+
 btn_upload: Télécharger
 
 -
@@ -154,7 +158,7 @@ confirm_delete_files: Voulez-vous vraiment supprimer les fichiers sélectionnés
 
 -
 
-confirm_delete_page: Voulez-vous vraiment supprimer la page actuelle?
+confirm_delete_page: Êtes-vous sûr de vouloir supprimer la page actuelle?
 
 -
 
@@ -162,7 +166,7 @@ confirm_delete_users: Voulez-vous vraiment supprimer les utilisateurs sélection
 
 -
 
-confirm_reset_headless: Voulez-vous vraiment réinitialiser le modèle sans tête personnalisé?
+confirm_reset_headless: Êtes-vous sûr de vouloir réinitialiser le modèle sans tête personnalisé?
 
 -
 
@@ -242,7 +246,7 @@ error_packages: Impossible de charger les packages depuis Packagist!
 
 -
 
-error_composer_memory: Votre serveur n'a pas assez de mémoire pour installer, mettre à jour ou supprimer des packages! Dans le cas où vous exécutez ce site sur un service d'hébergement partagé avec une quantité limitée de mémoire, veuillez essayer de mettre à niveau votre plan ou d'installer votre site sur un ordinateur local sans restrictions de mémoire.
+error_composer_memory: Votre serveur n'a pas assez de mémoire pour installer, mettre à jour ou supprimer des packages! Si vous exécutez ce site sur un service d'hébergement partagé avec une quantité limitée de mémoire, essayez de mettre à niveau votre plan ou d'installer votre site sur un ordinateur local sans restrictions de mémoire.
 
 -
 
@@ -254,7 +258,7 @@ error_page_title: Titre manquant!
 
 -
 
-error_password_current: Le mot de passe actuel est incorrect!
+error_password_current: Le mot de passe actuel est faux!
 
 -
 
@@ -274,7 +278,7 @@ error_template_missing: Modèle manquant
 
 -
 
-error_update_connection: Impossible de se connecter au serveur de mise à jour! Cela peut généralement être dû à une configuration de mise à jour incorrecte (config.json), une erreur de certificat SSL ou une bibliothèque cURL manquante.
+error_update_connection: Impossible de se connecter au serveur de mise à jour! Cela peut généralement être dû à une mauvaise configuration de mise à jour (config.json), à une erreur de certificat SSL ou à une bibliothèque cURL manquante.
 
 -
 
@@ -282,7 +286,7 @@ error_update_download: Le téléchargement de la mise à jour a échoué!
 
 -
 
-error_update_items: Liste d'éléments à mettre à jour non valide!
+error_update_items: Liste non valide des éléments à mettre à jour!
 
 -
 
@@ -298,7 +302,7 @@ error_update_permission: Impossible d'exécuter la mise à jour! Autorisations r
 
 -
 
-error_var_exists: Il y a déjà une variable avec ce nom!
+error_var_exists: Il existe déjà une variable avec ce nom!
 
 -
 
@@ -318,7 +322,7 @@ image_crop: Recadrer l'image
 
 -
 
-image_height_px: Hauteur (Pixels)
+image_height_px: Hauteur (pixels)
 
 -
 
@@ -326,15 +330,15 @@ image_width_px: Largeur (pixels)
 
 -
 
-image_options: Les options
+image_options: Options
 
 -
 
-image_select: Sélectionnez l'image
+image_select: Sélectionnez une image
 
 -
 
-images_page: Images de la page
+images_page: Images de page
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Tout mettre à jour
 
 -
 
-packages_updating: Mise à jour des packages ...
+packages_updating_all: Mise à jour des packages ...
+
+-
+
+packages_updating: Mise à jour du package ...
 
 -
 
@@ -410,7 +418,7 @@ page_settings: Paramètres de la page
 
 -
 
-page_prefix: Préfixe (ordre de navigation)
+page_prefix: Préfixe (ordre dans la navigation)
 
 -
 
@@ -418,7 +426,7 @@ page_redirect: Rediriger la page vers une autre URL
 
 -
 
-page_tags: Tags (séparez plusieurs tags par une virgule ou un onglet)
+page_tags: Balises (séparez les balises par une virgule ou une tabulation)
 
 -
 
@@ -446,11 +454,11 @@ page_visibility: Visibility
 
 -
 
-sidebar_header_pages: Pages
+sidebar_header_pages: Des pages
 
 -
 
-shared_title: Données et fichiers généraux
+shared_title: Données générales et fichiers
 
 -
 
@@ -494,7 +502,7 @@ success_added: Ajouté avec succès
 
 -
 
-success_cache_cleared: Le cache a été vidé avec succès!
+success_cache_cleared: Le cache a été effacé avec succès!
 
 -
 
@@ -506,11 +514,11 @@ success_config_update: Configuration mise à jour avec succès!
 
 -
 
-success_created: Création réussie <br>
+success_created: Créé avec succès <br>
 
 -
 
-success_installed: Installation réussie
+success_installed: Installé avec succès
 
 -
 
@@ -518,7 +526,7 @@ success_password_changed: Votre mot de passe a été changé avec succès!
 
 -
 
-success_log_out: Déconnecté avec succès
+success_log_out: Déconnexion réussie
 
 -
 
@@ -526,7 +534,7 @@ success_remove: Supprimé avec succès
 
 -
 
-success_reset_headless: Le modèle sans tête par défaut a été restauré avec succès!
+success_reset_headless: Restauration du modèle sans tête par défaut avec succès!
 
 -
 
@@ -538,11 +546,15 @@ success_update: Automad mis à jour avec succès!
 
 -
 
-success_packages_updated: Tous les packages ont été mis à jour avec succès
+success_packages_updated_all: Mise à jour réussie de tous les packages
 
 -
 
-sys_cache_info: La mise en cache est essentielle pour accélérer votre site et doit généralement être activée. Cependant, dans certaines circonstances, vous souhaiterez peut-être désactiver ou effacer votre cache.
+success_package_updated: Mise à jour réussie
+
+-
+
+sys_cache_info: La mise en cache est essentielle pour accélérer votre site et doit généralement être activée. Cependant, dans certaines circonstances, vous souhaiterez peut-être désactiver ou vider votre cache.
 
 -
 
@@ -550,7 +562,7 @@ sys_cache_clear: Vider le cache
 
 -
 
-sys_cache_clear_info: L'effacement du cache du site force une nouvelle analyse des pages et des fichiers mis à jour. Cette action ne supprimera aucun fichier d'échange ni aucune image du répertoire cache.
+sys_cache_clear_info: La suppression du cache du site force une nouvelle analyse des pages et des fichiers mis à jour. Cette action ne supprimera aucun fichier de page ni aucune image du répertoire de cache.
 
 -
 
@@ -558,7 +570,7 @@ sys_cache_monitor: L'intervalle de vérification est
 
 -
 
-sys_cache_monitor_info: Lorsque la mise en cache est activée, Automad vérifie régulièrement les modifications du système de fichiers. La fréquence de ces contrôles peut être définie ici.
+sys_cache_monitor_info: Lorsque la mise en cache est activée, Automad vérifie régulièrement les changements dans le système de fichiers. La fréquence de ces contrôles peut être définie ici.
 
 -
 
@@ -574,7 +586,7 @@ sys_cache_purge: Purger le répertoire du cache
 
 -
 
-sys_cache_purge_info: Contrairement à la simple suppression du cache, la purge du répertoire du cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images mises en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de pages ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
+sys_cache_purge_info: Contrairement à la simple suppression du cache, la purge du répertoire de cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de page ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
 
 -
 
@@ -582,7 +594,7 @@ sys_debug_info: Lorsque le débogage est activé, tous les processus d'Automad s
 
 -
 
-sys_headless_edit_info: La structure des données JSON renvoyées est contrôlée par un modèle. Vous pouvez modifier ce modèle à l'aide du langage de modèle intégré d'Automad pour personnaliser les champs en utilisant des variables, des objets et des structures de contrôle.
+sys_headless_edit_info: La structure des données JSON renvoyées est contrôlée par un modèle. Vous pouvez modifier ce modèle à l'aide du langage de modèle intégré d'Automad pour personnaliser les champs à l'aide de variables, d'objets et de structures de contrôle.
 
 -
 
@@ -594,7 +606,7 @@ sys_language: Langue
 
 -
 
-sys_language_info: Il existe plusieurs langues disponibles pour le tableau de bord. Les traductions sont créées automatiquement. Cette fonctionnalité est encore en phase expérimentale et par conséquent, certaines traductions peuvent ne pas être précises.
+sys_language_info: Il existe plusieurs langues disponibles pour le tableau de bord. Les traductions sont créées automatiquement. Cette fonctionnalité est encore dans une phase expérimentale et par conséquent, certaines traductions peuvent ne pas être exactes.
 
 -
 
@@ -622,11 +634,11 @@ sys_title: Les paramètres du système
 
 -
 
-sys_update: Mettre à jour
+sys_update: Mise à jour
 
 -
 
-sys_update_available: Une nouvelle version d'Automad est disponible et prête à être installée. <br> Veuillez sauvegarder votre installation actuelle avant la mise à jour!
+sys_update_available: Une version plus récente d'Automad est disponible et prête à être installée. <br> Veuillez sauvegarder votre installation actuelle avant la mise à jour!
 
 -
 
@@ -654,7 +666,7 @@ sys_update_windows_warning: Assurez-vous que tous les fichiers de votre installa
 
 -
 
-sys_user_info: Vous pouvez ajouter ou supprimer plus d'utilisateurs ou modifier votre mot de passe ici.
+sys_user_info: Vous pouvez ajouter ou supprimer d'autres utilisateurs ou modifier votre mot de passe ici.
 
 -
 

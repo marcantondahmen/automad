@@ -110,7 +110,7 @@ btn_manage_users: Bainistigh Úsáideoirí
 
 -
 
-btn_more: Níos mó
+btn_more: Tuilleadh
 
 -
 
@@ -143,6 +143,10 @@ btn_reset: Athshocraigh
 -
 
 btn_save: Sabháil na hathruithe
+
+-
+
+btn_update: Nuashonrú
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Íomhánna Ginearálta
 
 -
 
-link_placeholder: Tosaigh clóscríobh teideal leathanaigh nó greamaigh nasc seachtrach anseo
+link_placeholder: Tosaigh teideal leathanaigh a chlóscríobh nó greamaigh nasc seachtrach anseo
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Nuashonraigh Uile
 
 -
 
-packages_updating: Pacáistí a nuashonrú ...
+packages_updating_all: Pacáistí a nuashonrú ...
+
+-
+
+packages_updating: Pacáiste nuashonraithe ...
 
 -
 
@@ -542,7 +550,11 @@ success_update: Automad nuashonraithe go rathúil!
 
 -
 
-success_packages_updated: Rinneadh gach pacáiste a nuashonrú go rathúil
+success_packages_updated_all: Rinneadh gach pacáiste a nuashonrú go rathúil
+
+-
+
+success_package_updated: Nuashonraithe go rathúil
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Taisce Glan
 
 -
 
-sys_cache_clear_info: Nuair a dhéantar taisce an láithreáin a ghlanadh, cuirtear rescan le haghaidh leathanaigh agus comhaid nuashonraithe. Ní bhainfidh an gníomh seo aon chomhaid leathanaigh nó íomhánna ón eolaire taisce.
+sys_cache_clear_info: Nuair a dhéantar taisce an láithreáin a ghlanadh, cuirtear rescan i bhfeidhm maidir le leathanaigh agus comhaid nuashonraithe. Ní bhainfidh an gníomh seo aon chomhaid leathanaigh nó íomhánna ón eolaire taisce.
 
 -
 
@@ -602,7 +614,7 @@ sys_language_info: Tá roinnt teangacha ar fáil don Phainéal. Cruthaítear na 
 
 -
 
-sys_status_cache_enabled: Cumasaítear caching
+sys_status_cache_enabled: Cumasaítear cacháil
 
 -
 
@@ -706,4 +718,4 @@ sys_user_you: Tú
 
 -
 
-theme_readme_alert: Cliceáil anseo chun na cáipéisí don téama gníomhach a léamh!
+theme_readme_alert: Cliceáil anseo chun an cháipéisíocht don téama gníomhach a léamh!

@@ -26,7 +26,7 @@ btn_copy_url_clipboard: Skopiuj adres URL do schowka
 
 -
 
-btn_copy_resized: Skopiuj i zmień rozmiar
+btn_copy_resized: Kopiuj i zmień rozmiar
 
 -
 
@@ -38,7 +38,7 @@ btn_delete_page: Usuń stronę
 
 -
 
-btn_download_file: Pobieranie
+btn_download_file: Ściągnij
 
 -
 
@@ -66,7 +66,7 @@ btn_files: Przesłane pliki
 
 -
 
-btn_get_themes: Uzyskaj więcej motywów
+btn_get_themes: Pobierz więcej motywów
 
 -
 
@@ -86,7 +86,7 @@ btn_import: Importuj z adresu URL
 
 -
 
-btn_inpage_edit: Tryb edycji na stronie
+btn_inpage_edit: Tryb edycji w treści strony
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Zapisz zmiany
 
 -
 
+btn_update: Aktualizacja
+
+-
+
 btn_upload: Przekazać plik
 
 -
@@ -190,7 +194,7 @@ error_existing: Już istnieje!
 
 -
 
-error_file_save: Nie można zapisać
+error_file_save: Nie udało się zapisać
 
 -
 
@@ -206,7 +210,7 @@ error_file_size: Nieprawidłowy rozmiar pliku!
 
 -
 
-error_form: Niepełne lub nieprawidłowe dane! <br /> Wszystkie pola są wymagane i muszą zostać wypełnione zgodnie z opisem!
+error_form: Niekompletne lub nieprawidłowe dane! <br /> Wszystkie pola są wymagane i należy je wypełnić zgodnie z opisem!
 
 -
 
@@ -214,23 +218,23 @@ error_login: Nieprawidłowa nazwa użytkownika lub hasło
 
 -
 
-error_log_out: Wylogowanie nie powiodło się!
+error_log_out: Wylogowanie się nie powiodło!
 
 -
 
-error_no_destination: Wybierz stronę jako cel podróży!
+error_no_destination: Wybierz stronę jako miejsce docelowe!
 
 -
 
-error_no_js: Włącz obsługę JavaScript w przeglądarce, aby korzystać z pulpitu nawigacyjnego!
+error_no_js: Aby korzystać z Panelu, włącz obsługę JavaScript w przeglądarce!
 
 -
 
-error_no_theme: Nie wybrano motywu! Wybierz główny motyw.
+error_no_theme: Nie wybrano motywu! Wybierz motyw główny.
 
 -
 
-error_no_url: Proszę podać poprawny adres URL!
+error_no_url: Proszę wprowadzić poprawny adres URL!
 
 -
 
@@ -242,7 +246,7 @@ error_packages: Nie można załadować pakietów z Packagist!
 
 -
 
-error_composer_memory: Twój serwer nie ma wystarczającej ilości pamięci, aby zainstalować, zaktualizować lub usunąć pakiety! Jeśli używasz tej witryny w usłudze hostingu współdzielonego z ograniczoną ilością pamięci, spróbuj uaktualnić swój plan lub zainstalować witrynę na komputerze lokalnym bez ograniczeń pamięci.
+error_composer_memory: Twój serwer nie ma wystarczającej ilości pamięci, aby zainstalować, zaktualizować lub usunąć pakiety! W przypadku korzystania z tej witryny w usłudze hostingu współdzielonego z ograniczoną ilością pamięci, spróbuj zaktualizować swój plan lub zainstalować witrynę na komputerze lokalnym bez ograniczeń pamięci.
 
 -
 
@@ -254,11 +258,11 @@ error_page_title: Brak tytułu!
 
 -
 
-error_password_current: Obecne hasło jest nieprawidłowe!
+error_password_current: Aktualne hasło jest nieprawidłowe!
 
 -
 
-error_password_repeat: Wpisz dwa razy to samo nowe hasło!
+error_password_repeat: Wprowadź dwukrotnie to samo nowe hasło!
 
 -
 
@@ -274,7 +278,7 @@ error_template_missing: Brak szablonu
 
 -
 
-error_update_connection: Nie można połączyć się z serwerem aktualizacji! Zwykle może to być spowodowane niewłaściwą konfiguracją aktualizacji (config.json), błędem certyfikatu SSL lub brakującą biblioteką cURL.
+error_update_connection: Nie można połączyć się z serwerem aktualizacji! Zwykle może to być spowodowane nieprawidłową konfiguracją aktualizacji (config.json), błędem certyfikatu SSL lub brakiem biblioteki cURL.
 
 -
 
@@ -322,7 +326,7 @@ image_height_px: Wysokość (piksele)
 
 -
 
-image_width_px: Szerokość (w pikselach)
+image_width_px: Szerokość (piksele)
 
 -
 
@@ -334,7 +338,7 @@ image_select: Wybierz obraz
 
 -
 
-images_page: Obrazy strony
+images_page: Obrazy stron
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Obrazy ogólne
 
 -
 
-link_placeholder: Zacznij wpisywać tytuł strony lub wklej tutaj link zewnętrzny
+link_placeholder: Zacznij wpisywać tytuł strony lub wklej tutaj zewnętrzny link
 
 -
 
@@ -386,11 +390,15 @@ packages_installing: Instalowanie pakietu ...
 
 -
 
-packages_update_all: Zaktualizuj wszystko
+packages_update_all: Aktualizuj wszystko
 
 -
 
-packages_updating: Aktualizowanie pakietów ...
+packages_updating_all: Aktualizowanie pakietów ...
+
+-
+
+packages_updating: Aktualizuję pakiet ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Wybierz lokalizację nowej strony
 
 -
 
-page_move_destination: Wybierz miejsce docelowe przeprowadzki
+page_move_destination: Wybierz miejsce docelowe do przeniesienia
 
 -
 
@@ -410,15 +418,15 @@ page_settings: Ustawienia strony
 
 -
 
-page_prefix: Prefiks (porządek w nawigacji)
+page_prefix: Prefiks (kolejność w nawigacji)
 
 -
 
-page_redirect: Przekieruj stronę na inny adres URL
+page_redirect: Przekieruj stronę do innego adresu URL
 
 -
 
-page_tags: Tagi (Oddziel wiele tagów przecinkami lub tabulatorami)
+page_tags: Tagi (oddziel wiele tagów przecinkiem lub tabulatorem)
 
 -
 
@@ -470,11 +478,11 @@ shared_vars_content: Treść domyślna
 
 -
 
-shared_vars_settings: Domyślne ustawienia szablonów
+shared_vars_settings: Domyślne ustawienia szablonu
 
 -
 
-shared_vars_unused: Niewykorzystane zmienne
+shared_vars_unused: Nieużywane zmienne
 
 -
 
@@ -506,7 +514,7 @@ success_cache_purged: Katalog pamięci podręcznej został pomyślnie wyczyszczo
 
 -
 
-success_config_update: Pomyślnie zaktualizowano konfigurację!
+success_config_update: Konfiguracja została zaktualizowana!
 
 -
 
@@ -514,7 +522,7 @@ success_created: Pomyślnie utworzono <br>
 
 -
 
-success_installed: Pomyślnie zainstalowany
+success_installed: Pomyślnie zainstalowano
 
 -
 
@@ -526,7 +534,7 @@ success_log_out: Wylogowano pomyślnie
 
 -
 
-success_remove: Pomyślnie usunięto
+success_remove: Usunięto pomyślnie
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Zapisane zmiany
 
 -
 
-success_update: Pomyślnie zaktualizowano Automad!
+success_update: Pomyślnie zaktualizowano Automada!
 
 -
 
-success_packages_updated: Pomyślnie zaktualizowano wszystkie pakiety
+success_packages_updated_all: Pomyślnie zaktualizowano wszystkie pakiety
 
 -
 
-sys_cache_info: Buforowanie jest niezbędne do przyspieszenia witryny i powinno być ogólnie włączone. Jednak w niektórych okolicznościach możesz chcieć wyłączyć lub wyczyścić pamięć podręczną.
+success_package_updated: Zaktualizowano pomyślnie
+
+-
+
+sys_cache_info: Buforowanie jest niezbędne, aby przyspieszyć działanie witryny i powinno być ogólnie włączone. Jednak w pewnych okolicznościach możesz chcieć wyłączyć lub wyczyścić pamięć podręczną.
 
 -
 
@@ -554,23 +566,23 @@ sys_cache_clear: Wyczyść pamięć podręczną
 
 -
 
-sys_cache_clear_info: Wyczyszczenie pamięci podręcznej witryny wymusza ponowne skanowanie zaktualizowanych stron i plików. Ta czynność nie usunie żadnych plików stron ani obrazów z katalogu pamięci podręcznej.
+sys_cache_clear_info: Wyczyszczenie pamięci podręcznej witryny wymusza ponowne skanowanie w poszukiwaniu zaktualizowanych stron i plików. Ta czynność nie spowoduje usunięcia żadnych plików stron ani obrazów z katalogu pamięci podręcznej.
 
 -
 
-sys_cache_monitor: Interwał sprawdzania wynosi
+sys_cache_monitor: Okres sprawdzania to
 
 -
 
-sys_cache_monitor_info: Gdy buforowanie jest włączone, Automad będzie regularnie sprawdzać zmiany w systemie plików. Częstotliwość tych kontroli można zdefiniować tutaj.
+sys_cache_monitor_info: Gdy buforowanie jest włączone, Automad będzie regularnie sprawdzać zmiany w systemie plików. Tutaj można określić częstotliwość tych kontroli.
 
 -
 
-sys_cache_lifetime: Żywotność pamięci podręcznej wynosi
+sys_cache_lifetime: Okres istnienia pamięci podręcznej to
 
 -
 
-sys_cache_lifetime_info: Wszystkie buforowane dane i strony Automada mają maksymalny okres użytkowania. Po przekroczeniu czasu życia obiektu pamięć podręczna zostanie odbudowana na żądanie.
+sys_cache_lifetime_info: Wszystkie dane i strony w pamięci podręcznej Automad mają maksymalny czas życia. Po przekroczeniu czasu życia obiektu jego pamięć podręczna zostanie odbudowana na żądanie.
 
 -
 
@@ -578,19 +590,19 @@ sys_cache_purge: Wyczyść katalog pamięci podręcznej
 
 -
 
-sys_cache_purge_info: W przeciwieństwie do zwykłego czyszczenia pamięci podręcznej, wyczyszczenie katalogu pamięci podręcznej spowoduje również przeniesienie wszystkich plików tymczasowych, usuniętych stron, kopii zapasowych i obrazów w pamięci podręcznej do katalogu tymczasowego systemu. Wymusi to pełną przebudowę pamięci podręcznej obrazu i strony, a także czyszczenie wszystkich usuniętych stron. W większości systemów katalog tymczasowy będzie od czasu do czasu czyszczony automatycznie lub po ponownym uruchomieniu. Jednak w niektórych systemach katalog ten musi zostać wyczyszczony ręcznie.
+sys_cache_purge_info: W przeciwieństwie do zwykłego czyszczenia pamięci podręcznej, wyczyszczenie katalogu pamięci podręcznej spowoduje również przeniesienie wszystkich plików tymczasowych, usuniętych stron, kopii zapasowych aktualizacji i obrazów w pamięci podręcznej do tymczasowego katalogu systemu. Wymusi to pełną przebudowę obrazu i pamięci podręcznej strony, a także wyczyszczenie wszystkich usuniętych stron. W większości systemów katalog tymczasowy będzie czyszczony automatycznie od czasu do czasu lub po ponownym uruchomieniu. Jednak w niektórych systemach ten katalog należy wyczyścić ręcznie.
 
 -
 
-sys_debug_info: Po włączeniu debugowania wszystkie procesy Automada będą rejestrowane w konsoli przeglądarki. Debugowanie jest potrzebne tylko do programowania lub rozwiązywania problemów i powinno być wyłączone we wszystkich innych przypadkach.
+sys_debug_info: Gdy debugowanie jest włączone, wszystkie procesy Automada będą rejestrowane w konsoli przeglądarki. Debugowanie jest potrzebne tylko do programowania lub rozwiązywania problemów i powinno być wyłączone we wszystkich innych przypadkach.
 
 -
 
-sys_headless_edit_info: Struktura zwracanych danych JSON jest kontrolowana przez szablon. Możesz edytować ten szablon za pomocą wbudowanego języka szablonów Automada do dostosowywania pól za pomocą zmiennych, obiektów i struktur kontrolnych.
+sys_headless_edit_info: Struktura zwracanych danych JSON jest kontrolowana przez szablon. Możesz edytować ten szablon za pomocą wbudowanego języka szablonów Automad do dostosowywania pól przy użyciu zmiennych, obiektów i struktur kontrolnych.
 
 -
 
-sys_headless_info: Aktywacja trybu bezgłowego zmienia Automada w system zarządzania treścią, który koncentruje się całkowicie na tworzeniu treści bez warstwy prezentacji. Chociaż pulpit nawigacyjny może być nadal używany do zarządzania zawartością, wszystkie dane i pliki są dostępne za pośrednictwem interfejsu API JSON tylko do odczytu.
+sys_headless_info: Aktywacja trybu bezgłowego zmienia Automad w system zarządzania treścią, skupiający się całkowicie na tworzeniu treści bez warstwy prezentacji. Chociaż Pulpit nawigacyjny nadal może być używany do zarządzania treścią, wszystkie dane i pliki są dostępne za pośrednictwem interfejsu API JSON tylko do odczytu.
 
 -
 
@@ -598,7 +610,7 @@ sys_language: Język
 
 -
 
-sys_language_info: Pulpit nawigacyjny jest dostępny w kilku językach. Tłumaczenia są tworzone automatycznie. Ta funkcja jest wciąż w fazie eksperymentalnej, dlatego niektóre tłumaczenia mogą być niedokładne.
+sys_language_info: Pulpit nawigacyjny jest dostępny w kilku językach. Tłumaczenia są tworzone automatycznie. Ta funkcja jest nadal w fazie eksperymentalnej, dlatego niektóre tłumaczenia mogą nie być dokładne.
 
 -
 
@@ -630,7 +642,7 @@ sys_update: Aktualizacja
 
 -
 
-sys_update_available: Nowsza wersja Automada jest dostępna i gotowa do zainstalowania. <br> Przed aktualizacją wykonaj kopię zapasową bieżącej instalacji!
+sys_update_available: Dostępna jest nowsza wersja Automada, gotowa do zainstalowania. <br> Przed aktualizacją wykonaj kopię zapasową bieżącej instalacji!
 
 -
 
@@ -638,7 +650,7 @@ sys_update_current_version: Twoja aktualnie zainstalowana wersja to
 
 -
 
-sys_update_items: Uwaga: aktualizacja wpływa na następujące pliki i katalogi:
+sys_update_items: Zauważ, że aktualizacja ma wpływ na następujące pliki i katalogi:
 
 -
 
@@ -646,7 +658,7 @@ sys_update_not_required: Automad jest aktualny.
 
 -
 
-sys_update_progress: Poczekaj i nie zamykaj okna podczas aktualizacji ...
+sys_update_progress: Proszę czekać i nie zamykaj okna podczas aktualizacji ...
 
 -
 
@@ -662,7 +674,7 @@ sys_user: Użytkownicy
 
 -
 
-sys_user_info: Możesz dodać lub usunąć więcej użytkowników lub zmienić hasło tutaj.
+sys_user_info: Tutaj możesz dodać lub usunąć więcej użytkowników lub zmienić swoje hasło.
 
 -
 
@@ -706,4 +718,4 @@ sys_user_you: Ty
 
 -
 
-theme_readme_alert: Kliknij tutaj, aby przeczytać dokumentację dla aktywnego motywu!
+theme_readme_alert: Kliknij tutaj, aby przeczytać dokumentację aktywnego motywu!

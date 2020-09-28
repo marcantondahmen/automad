@@ -6,15 +6,15 @@ btn_add_page: Dodaj stran
 
 -
 
-btn_add_var: Dodajte spremenljivko
+btn_add_var: Dodaj spremenljivko
 
 -
 
-btn_apply_reload: Uporabi in ponovno naloži
+btn_apply_reload: Uporabi in znova naloži
 
 -
 
-btn_browse: Brskanje po datotekah
+btn_browse: Brskaj po datotekah
 
 -
 
@@ -50,7 +50,7 @@ btn_edit: Uredi
 
 -
 
-btn_edit_file_info: Urejanje podatkov o datoteki
+btn_edit_file_info: Uredi podatke o datoteki
 
 -
 
@@ -82,7 +82,7 @@ btn_home: Home
 
 -
 
-btn_import: Uvoz iz URL-ja
+btn_import: Uvozi iz URL-ja
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Shrani spremembe
 
 -
 
+btn_update: Nadgradnja
+
+-
+
 btn_upload: Naloži
 
 -
@@ -162,11 +166,11 @@ confirm_delete_users: Ali ste prepričani, da želite izbrisati izbrane uporabni
 
 -
 
-confirm_reset_headless: Ali ste prepričani, da želite ponastaviti predlogo po meri brez glave?
+confirm_reset_headless: Ali ste prepričani, da želite ponastaviti predlogo brez glave?
 
 -
 
-dashboard_memory: Poraba pomnilnika:
+dashboard_memory: Uporaba pomnilnika:
 
 -
 
@@ -178,7 +182,7 @@ dashboard_recently_edited: Nedavno urejene strani
 
 -
 
-dropzone: Tu povlecite datoteke
+dropzone: Povlecite datoteke sem
 
 -
 
@@ -218,11 +222,11 @@ error_log_out: Odjava ni uspela!
 
 -
 
-error_no_destination: Izberite stran kot cilj!
+error_no_destination: Prosimo, izberite stran kot cilj!
 
 -
 
-error_no_js: Če želite uporabljati nadzorno ploščo, omogočite JavaScript v svojem brskalniku!
+error_no_js: Za uporabo nadzorne plošče v brskalniku omogočite JavaScript!
 
 -
 
@@ -238,11 +242,11 @@ error_import: Uvoz datoteke ni uspel!
 
 -
 
-error_packages: Paket ni bilo mogoče naložiti iz Packagist-a!
+error_packages: Paketov iz Packagist ni bilo mogoče naložiti!
 
 -
 
-error_composer_memory: Vaš strežnik nima dovolj pomnilnika za namestitev, posodobitev ali odstranjevanje paketov! Če to spletno mesto izvajate v storitvi skupnega gostovanja z omejeno količino pomnilnika, poskusite nadgraditi načrt ali ga namestite na lokalni računalnik brez omejitev pomnilnika.
+error_composer_memory: Vaš strežnik nima dovolj pomnilnika za namestitev, posodobitev ali odstranjevanje paketov! Če uporabljate to spletno mesto v storitvi deljenega gostovanja z omejeno količino pomnilnika, poskusite nadgraditi svoj načrt ali namestiti spletno mesto v lokalni računalnik brez omejitev pomnilnika.
 
 -
 
@@ -250,31 +254,31 @@ error_page_not_found: Stran ni najdena!
 
 -
 
-error_page_title: Naslov manjka!
+error_page_title: Manjka naslov!
 
 -
 
-error_password_current: Trenutno geslo je narobe!
+error_password_current: Trenutno geslo je napačno!
 
 -
 
-error_password_repeat: Vnesite dvakrat isto novo geslo!
+error_password_repeat: Prosimo, vnesite dvakrat isto geslo!
 
 -
 
-error_password_reuse: Ne uporabite ponovno svojega starega gesla!
+error_password_reuse: Ne uporabljajte starega gesla!
 
 -
 
-error_permission: Dovoljenja so zavrnjena:
+error_permission: Zavrnjena dovoljenja:
 
 -
 
-error_template_missing: Predloga manjka
+error_template_missing: Manjka predloga
 
 -
 
-error_update_connection: Ne morem se povezati s strežnikom za posodobitve! Običajno lahko to povzroči napačna konfiguracija posodobitve (config.json), napaka v potrdilu SSL ali manjkajoča knjižnica CURL.
+error_update_connection: Ne morem se povezati s strežnikom za posodobitve! To lahko običajno povzroči napačna konfiguracija posodobitve (config.json), napaka potrdila SSL ali manjkajoča knjižnica cURL.
 
 -
 
@@ -290,7 +294,7 @@ error_update_failed: Posodobitev ni uspela! Obnovite namestitev iz varnostne kop
 
 -
 
-error_update_not_supported: Posodobitve vaš strežnik ne podpira! Posodobitelj zahteva namestitev knjižnic cURL in ZIP.
+error_update_not_supported: Vaš strežnik ne podpira posodobitev! Posodabljalnik zahteva namestitev knjižnic cURL in ZIP.
 
 -
 
@@ -298,11 +302,11 @@ error_update_permission: Posodobitve ni mogoče zagnati! Dovoljenja zavrnjena!
 
 -
 
-error_var_exists: Že obstaja spremenljivka s tem imenom!
+error_var_exists: S tem imenom že obstaja spremenljivka!
 
 -
 
-error_var_name: Spremenljivke ne morete dodati brez imena!
+error_var_name: Brez imena ne morete dodati spremenljivke!
 
 -
 
@@ -314,11 +318,11 @@ file_caption: Napis
 
 -
 
-image_crop: Obrežite sliko
+image_crop: Obreži sliko
 
 -
 
-image_height_px: Višina (slikovnih pik)
+image_height_px: Višina (slikovne pike)
 
 -
 
@@ -338,11 +342,11 @@ images_page: Slike strani
 
 -
 
-images_shared: Splošne slike
+images_shared: Splošne podobe
 
 -
 
-link_placeholder: Začnite vnašati naslov strani ali tukaj prilepite zunanjo povezavo
+link_placeholder: Začnite tipkati naslov strani ali tukaj prilepite zunanjo povezavo
 
 -
 
@@ -382,7 +386,7 @@ packages_installed: Je nameščen
 
 -
 
-packages_installing: Namestitev paketa ...
+packages_installing: Nameščanje paketa ...
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Posodobi vse
 
 -
 
-packages_updating: Posodabljanje paketov ...
+packages_updating_all: Posodabljanje paketov ...
+
+-
+
+packages_updating: Posodabljanje paketa ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Izberite mesto za novo stran
 
 -
 
-page_move_destination: Izberite destinacijo za premikanje
+page_move_destination: Izberite cilj za premikanje
 
 -
 
@@ -410,15 +418,15 @@ page_settings: Nastavitve strani
 
 -
 
-page_prefix: Predpona (Naročanje v navigaciji)
+page_prefix: Predpona (vrstni red v navigaciji)
 
 -
 
-page_redirect: Stran preusmeri na drug URL
+page_redirect: Preusmeri stran na drug URL
 
 -
 
-page_tags: Oznake (Ločite več oznak z vejico ali zavihkom)
+page_tags: Oznake (ločite več oznak z vejico ali zavihkom)
 
 -
 
@@ -498,15 +506,15 @@ success_added: Uspešno dodano
 
 -
 
-success_cache_cleared: Predpomnilnik se je uspešno izbrisal!
+success_cache_cleared: Predpomnilnik je bil uspešno očiščen!
 
 -
 
-success_cache_purged: Imenik predpomnilnika se je uspešno očistil!
+success_cache_purged: Imenik predpomnilnika je bil uspešno očiščen!
 
 -
 
-success_config_update: Konfiguracija uspešno posodobljena!
+success_config_update: Uspešno posodobljena konfiguracija!
 
 -
 
@@ -514,7 +522,7 @@ success_created: Uspešno ustvarjeno <br>
 
 -
 
-success_installed: Nameščeno uspešno
+success_installed: Uspešno nameščen
 
 -
 
@@ -522,11 +530,11 @@ success_password_changed: Vaše geslo je bilo uspešno spremenjeno!
 
 -
 
-success_log_out: Odjavljena je bila uspešno
+success_log_out: Odjava uspešna
 
 -
 
-success_remove: Odstranjeno je bilo uspešno
+success_remove: Uspešno odstranjeno
 
 -
 
@@ -534,7 +542,7 @@ success_reset_headless: Uspešno obnovljena privzeta predloga brez glave!
 
 -
 
-success_saved: Spremembe so shranjene
+success_saved: Shranjene spremembe
 
 -
 
@@ -542,19 +550,23 @@ success_update: Uspešno posodobljen Automad!
 
 -
 
-success_packages_updated: Vsi paketi so uspešno posodobljeni
+success_packages_updated_all: Uspešno posodobljeni vsi paketi
 
 -
 
-sys_cache_info: Predvajanje podatkov je ključnega pomena za pospešitev spletnega mesta in na splošno mora biti omogočeno. V nekaterih okoliščinah boste morda želeli onemogočiti ali počistiti predpomnilnik.
+success_package_updated: Uspešno posodobljeno
 
 -
 
-sys_cache_clear: Počistiti začasni pomnilnik
+sys_cache_info: Predpomnjenje je bistvenega pomena za pospešitev vaše strani in bi moralo biti na splošno omogočeno. Vendar boste v nekaterih okoliščinah morda želeli onemogočiti ali počistiti predpomnilnik.
 
 -
 
-sys_cache_clear_info: Če izbrišete predpomnilnik mesta, morate znova pregledati posodobljene strani in datoteke. To dejanje ne bo odstranilo nobenih datotek strani ali slik iz predpomnilnika.
+sys_cache_clear: Počisti predpomnilnik
+
+-
+
+sys_cache_clear_info: Če počistite predpomnilnik mesta, morate znova pregledati posodobljene strani in datoteke. S tem dejanjem ne boste odstranili datotek strani ali slik iz imenika predpomnilnika.
 
 -
 
@@ -562,7 +574,7 @@ sys_cache_monitor: Interval preverjanja je
 
 -
 
-sys_cache_monitor_info: Ko je omogočeno predpomnjenje, bo Automad redno preverjal spremembe v datotečnem sistemu. Pogostost teh pregledov je mogoče določiti tukaj.
+sys_cache_monitor_info: Ko je omogočeno predpomnjenje, bo Automad redno preverjal spremembe v datotečnem sistemu. Pogostost teh pregledov lahko določite tukaj.
 
 -
 
@@ -570,27 +582,27 @@ sys_cache_lifetime: Življenjska doba predpomnilnika je
 
 -
 
-sys_cache_lifetime_info: Vsi predpomnjeni podatki in strani programa Automad imajo največjo življenjsko dobo. Po preteku življenjske dobe predmeta bo predpomnilnik obnovljen na zahtevo.
+sys_cache_lifetime_info: Vsi predpomnjeni podatki in strani Automada imajo najdaljšo življenjsko dobo. Ko življenjska doba predmeta preseže, se njegov predpomnilnik obnovi na zahtevo.
 
 -
 
-sys_cache_purge: Izbriši predpomnilnik
+sys_cache_purge: Izbriši imenik predpomnilnika
 
 -
 
-sys_cache_purge_info: V nasprotju s preprostim čiščenjem predpomnilnika bo čiščenje imenika predpomnilnika vse začasne datoteke, izbrisane strani, varnostne kopije posodobitev in predpomnilne slike premaknilo v temprary imenik sistema. To bo povzročilo popolno obnovo predpomnilnika slike in strani ter čiščenje vseh izbrisanih strani. V večini sistemov se bo začasni imenik občasno samodejno očistil ali ob ponovnem zagonu. Vendar pa je treba v nekaterih sistemih imenik očistiti ročno.
+sys_cache_purge_info: V nasprotju s preprostim čiščenjem predpomnilnika bo čiščenje imenika predpomnilnika premaknilo tudi vse začasne datoteke, izbrisane strani, varnostne kopije posodobitev in predpomnjene slike v časovni imenik sistema. To bo zahtevalo popolno obnovo predpomnilnika slik in strani ter čiščenje vseh izbrisanih strani. V večini sistemov se začasni imenik občasno ali ob ponovnem zagonu samodejno očisti. Vendar je treba v nekaterih sistemih ta imenik ročno počistiti.
 
 -
 
-sys_debug_info: Ko je odpravljanje napak omogočeno, bodo vsi procesi sistema Automad zabeleženi na konzoli brskalnika. Odpravljanje napak je potrebno le za razvoj ali odpravljanje težav, zato ga je treba onemogočiti v vseh drugih primerih.
+sys_debug_info: Ko je odpravljanje napak omogočeno, bodo vsi procesi Automada zabeleženi v konzolo brskalnika. Odpravljanje napak je potrebno samo za razvoj ali odpravljanje težav in bi ga bilo treba onemogočiti v vseh drugih primerih.
 
 -
 
-sys_headless_edit_info: Strukturo vrnjenih podatkov JSON nadzira predloga. To predlogo lahko uredite s pomočjo vgrajenega jezika predloge Automada za prilagajanje polj z uporabo spremenljivk, predmetov in nadzornih struktur.
+sys_headless_edit_info: Strukturo vrnjenih podatkov JSON nadzoruje predloga. To predlogo lahko uredite z uporabo vgrajenega jezika predlog Autoad za prilagajanje polj z uporabo spremenljivk, predmetov in nadzornih struktur.
 
 -
 
-sys_headless_info: Aktiviranje brezglavega načina delovanja Automad pretvori v sistem za upravljanje vsebine, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvenega sloja. Čeprav se nadzorna plošča še vedno lahko uporablja za upravljanje z vsebino, so vsi podatki in datoteke dostopni prek JSON API-ja, ki je samo za branje.
+sys_headless_info: Aktiviranje načina brez glave spremeni Automad v sistem za upravljanje vsebin, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvene plasti. Medtem ko je nadzorno ploščo še vedno mogoče uporabiti za upravljanje vsebine, so vsi podatki in datoteke dostopni prek JSON API-ja samo za branje.
 
 -
 
@@ -598,15 +610,15 @@ sys_language: Jezik
 
 -
 
-sys_language_info: Na nadzorni plošči je na voljo več jezikov. Prevodi so ustvarjeni samodejno. Ta funkcija je še vedno v poskusni fazi, zato nekateri prevodi morda niso natančni.
+sys_language_info: Za nadzorno ploščo je na voljo več jezikov. Prevodi se ustvarijo samodejno. Ta funkcija je še vedno v poskusni fazi, zato nekateri prevodi morda niso točni.
 
 -
 
-sys_status_cache_enabled: Predvajanje je omogočeno
+sys_status_cache_enabled: Predpomnjenje je omogočeno
 
 -
 
-sys_status_cache_disabled: Predvajanje je onemogočeno
+sys_status_cache_disabled: Predpomnjenje je onemogočeno
 
 -
 
@@ -614,7 +626,7 @@ sys_status_debug_enabled: Odpravljanje napak je omogočeno
 
 -
 
-sys_status_update_available: Posodobi v
+sys_status_update_available: Posodobite na
 
 -
 
@@ -622,7 +634,7 @@ sys_status_update_not_available: Automad je posodobljen
 
 -
 
-sys_title: Nastavitve sistema
+sys_title: Sistemske nastavitve
 
 -
 
@@ -630,15 +642,15 @@ sys_update: Nadgradnja
 
 -
 
-sys_update_available: Na voljo je novejša različica Automada in pripravljena za namestitev. <br> Pred posodobitvijo varnostno kopirajte trenutno namestitev!
+sys_update_available: Na voljo je novejša različica programa Automad, ki je pripravljena za namestitev. <br> Pred posodobitvijo varnostno kopirajte trenutno namestitev!
 
 -
 
-sys_update_current_version: Trenutno nameščena različica je
+sys_update_current_version: Vaša trenutno nameščena različica je
 
 -
 
-sys_update_items: Upoštevajte, da na posodobitev vplivajo naslednje datoteke in imeniki:
+sys_update_items: Upoštevajte, da posodobitev vpliva na naslednje datoteke in imenike:
 
 -
 
@@ -646,15 +658,15 @@ sys_update_not_required: Automad je posodobljen.
 
 -
 
-sys_update_progress: Počakajte in med posodabljanjem ne zapirajte okna ...
+sys_update_progress: Počakajte in ne zapirajte okna med posodabljanjem ...
 
 -
 
-sys_update_to: Posodobi na različico
+sys_update_to: Posodobite na različico
 
 -
 
-sys_update_windows_warning: Prepričajte se, da so vse datoteke vaše namestitve zaprte v zunanjih programih, preden zaženete posodobitev, da se izognete težavam s dovoljenji!
+sys_update_windows_warning: Pred zagonom posodobitve se prepričajte, da so vse datoteke vaše namestitve zaprte v zunanjih programih, da se izognete težavam z dovoljenji!
 
 -
 
@@ -706,4 +718,4 @@ sys_user_you: Ti
 
 -
 
-theme_readme_alert: Kliknite tukaj, da preberete dokumentacijo za aktivno temo!
+theme_readme_alert: Kliknite tukaj, če želite prebrati dokumentacijo za aktivno temo!

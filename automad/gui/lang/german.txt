@@ -102,7 +102,7 @@ btn_log_out: Ausloggen
 
 -
 
-btn_login: Anmeldung
+btn_login: Einloggen
 
 -
 
@@ -143,6 +143,10 @@ btn_reset: Zurücksetzen
 -
 
 btn_save: Änderungen speichern
+
+-
+
+btn_update: Aktualisieren
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Allgemeine Bilder
 
 -
 
-link_placeholder: Geben Sie hier einen Seitentitel ein oder fügen Sie einen externen Link ein
+link_placeholder: Geben Sie hier einen Seitentitel ein oder fügen Sie hier einen externen Link ein
 
 -
 
@@ -350,7 +354,7 @@ link_title: Link hinzufügen
 
 -
 
-login_title: Anmeldung
+login_title: Einloggen
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Alle aktualisieren
 
 -
 
-packages_updating: Pakete aktualisieren ...
+packages_updating_all: Pakete aktualisieren ...
+
+-
+
+packages_updating: Paket aktualisieren ...
 
 -
 
@@ -542,7 +550,11 @@ success_update: Automad erfolgreich aktualisiert!
 
 -
 
-success_packages_updated: Alle Pakete erfolgreich aktualisiert
+success_packages_updated_all: Alle Pakete erfolgreich aktualisiert
+
+-
+
+success_package_updated: Erfolgreich aktualisiert
 
 -
 
@@ -586,7 +598,7 @@ sys_debug_info: Wenn das Debuggen aktiviert ist, werden alle Prozesse von Automa
 
 -
 
-sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mit der in Automad integrierten Vorlagensprache bearbeiten, um Felder mithilfe von Variablen, Objekten und Steuerungsstrukturen anzupassen.
+sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mithilfe der in Automad integrierten Vorlagensprache zum Anpassen von Feldern mithilfe von Variablen, Objekten und Steuerungsstrukturen bearbeiten.
 
 -
 
@@ -682,7 +694,7 @@ sys_user_change_password_repeat: Passwort wiederholen
 
 -
 
-sys_user_add: Nutzer hinzufügen
+sys_user_add: Benutzer hinzufügen
 
 -
 

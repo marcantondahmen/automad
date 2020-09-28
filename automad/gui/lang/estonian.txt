@@ -6,11 +6,11 @@ btn_add_page: Lisa leht
 
 -
 
-btn_add_var: Lisage muutuja
+btn_add_var: Lisa muutuja
 
 -
 
-btn_apply_reload: Rakendage ja laadige uuesti
+btn_apply_reload: Rakenda ja laadige uuesti
 
 -
 
@@ -26,7 +26,7 @@ btn_copy_url_clipboard: Kopeeri URL lõikelauale
 
 -
 
-btn_copy_resized: Kopeerige ja muutke suurust
+btn_copy_resized: Kopeerimine ja suuruse muutmine
 
 -
 
@@ -42,23 +42,23 @@ btn_download_file: Lae alla
 
 -
 
-btn_duplicate_page: Kopeeri leht
+btn_duplicate_page: Duplikaatleht
 
 -
 
-btn_edit: Redigeeri
+btn_edit: Muuda
 
 -
 
-btn_edit_file_info: Failiteabe redigeerimine
+btn_edit_file_info: Redigeeri failiteavet
 
 -
 
-btn_edit_headless_template: Redigeerige peata malli
+btn_edit_headless_template: Redigeeri Headless-malli
 
 -
 
-btn_edit_page: Redigeeri lehte
+btn_edit_page: Muuda lehte
 
 -
 
@@ -82,7 +82,7 @@ btn_home: Home
 
 -
 
-btn_import: Importimine URL-ist
+btn_import: Import URL-ist
 
 -
 
@@ -90,7 +90,7 @@ btn_inpage_edit: Lehesisene redigeerimisrežiim
 
 -
 
-btn_install: Installi
+btn_install: Installige
 
 -
 
@@ -106,7 +106,7 @@ btn_login: Logi sisse
 
 -
 
-btn_manage_users: Halda kasutajaid
+btn_manage_users: Kasutajate haldamine
 
 -
 
@@ -114,7 +114,7 @@ btn_more: Veel
 
 -
 
-btn_move_page: Teisalda leht
+btn_move_page: Lehe teisaldamine
 
 -
 
@@ -122,7 +122,7 @@ btn_ok: Ok
 
 -
 
-btn_open_log: Ava logi
+btn_open_log: Avage Logi
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Salvesta muudatused
 
 -
 
+btn_update: Uuenda
+
+-
+
 btn_upload: Laadi üles
 
 -
@@ -162,7 +166,7 @@ confirm_delete_users: Kas soovite kindlasti valitud kasutajad kustutada?
 
 -
 
-confirm_reset_headless: Kas soovite kindlasti lähtestatud kohandatud päisteta malli lähtestada?
+confirm_reset_headless: Kas soovite kindlasti lähtestada kohandatud peata malli?
 
 -
 
@@ -170,19 +174,19 @@ dashboard_memory: Mälukasutus:
 
 -
 
-dashboard_modified: Viimane tegevus on
+dashboard_modified: Uusim tegevus saidil
 
 -
 
-dashboard_recently_edited: Hiljuti redigeeritud lehed
+dashboard_recently_edited: Hiljuti muudetud lehed
 
 -
 
-dropzone: Lohistage faile siia
+dropzone: Lohistage failid siia
 
 -
 
-error_cache_purged: Vahemälu kataloogi ei saanud tühjendada!
+error_cache_purged: Vahemälu kataloogi ei õnnestunud tühjendada!
 
 -
 
@@ -190,7 +194,7 @@ error_existing: Juba eksisteerib!
 
 -
 
-error_file_save: Ei saanud salvestada
+error_file_save: Salvestamine nurjus
 
 -
 
@@ -202,11 +206,11 @@ error_file_not_found: Faili ei leitud!
 
 -
 
-error_file_size: Vale faili suurus!
+error_file_size: Vale failisuurus!
 
 -
 
-error_form: Mittetäielikud või valed andmed! <br /> Kõik väljad on kohustuslikud ja need tuleb täita vastavalt kirjeldusele!
+error_form: Mittetäielikud või valed andmed! <br /> Kõik väljad on kohustuslikud ja need tuleb täita kirjeldatud viisil!
 
 -
 
@@ -214,7 +218,7 @@ error_login: Vale kasutajanimi või parool
 
 -
 
-error_log_out: Väljalogimine ebaõnnestus!
+error_log_out: Sisselogimine ebaõnnestus!
 
 -
 
@@ -222,11 +226,11 @@ error_no_destination: Valige sihtkohaks leht!
 
 -
 
-error_no_js: Juhtpaneeli kasutamiseks lubage oma brauseris JavaScript!
+error_no_js: Juhtpaneeli kasutamiseks lubage oma brauseris JavaScripti!
 
 -
 
-error_no_theme: Ühtegi teemat pole valitud! Valige peateema.
+error_no_theme: Teemat pole valitud! Valige peateema.
 
 -
 
@@ -234,15 +238,15 @@ error_no_url: Sisestage kehtiv URL!
 
 -
 
-error_import: Faili import ebaõnnestus!
+error_import: Failide importimine nurjus!
 
 -
 
-error_packages: Pakke ei saanud paketti laadida!
+error_packages: Packagistist ei saanud pakette laadida!
 
 -
 
-error_composer_memory: Teie serveril pole pakettide installimiseks, värskendamiseks või eemaldamiseks piisavalt mälu! Kui kasutate seda saiti piiratud mälumahuga jagatud hostimise teenuses, proovige oma plaani täiendada või installige oma sait ilma mälupiiranguteta kohalikku arvutisse.
+error_composer_memory: Teie serveris pole piisavalt mälu pakettide installimiseks, värskendamiseks või eemaldamiseks! Kui kasutate seda saiti piiratud mälumahuga jagatud hostimise teenuses, proovige oma plaani uuendada või installida oma sait kohalikku arvutisse ilma mälupiiranguteta.
 
 -
 
@@ -258,7 +262,7 @@ error_password_current: Praegune parool on vale!
 
 -
 
-error_password_repeat: Sisestage kaks korda sama uus parool!
+error_password_repeat: Palun sisestage kaks korda sama uus parool!
 
 -
 
@@ -266,7 +270,7 @@ error_password_reuse: Ärge kasutage oma vana parooli uuesti!
 
 -
 
-error_permission: Load on keelatud:
+error_permission: Keelatud load:
 
 -
 
@@ -274,7 +278,7 @@ error_template_missing: Mall puudub
 
 -
 
-error_update_connection: Ei saa värskendusserveriga ühendust! Tavaliselt võib selle põhjuseks olla vale värskenduskonfiguratsioon (config.json), SSL-sertifikaadi tõrge või puuduv cURL-i teeki.
+error_update_connection: Värskendusserveriga ei saa ühendust luua! Selle põhjuseks võib tavaliselt olla vale värskenduskonfiguratsioon (config.json), SSL-sertifikaadi tõrge või puuduv CURL-i teek.
 
 -
 
@@ -282,19 +286,19 @@ error_update_download: Värskenduse allalaadimine ebaõnnestus!
 
 -
 
-error_update_items: Kehtetu värskendatavate üksuste loend!
+error_update_items: Vale värskendatavate üksuste loend!
 
 -
 
-error_update_failed: Uuendus ebaõnnestus! Taastage install oma varukoopiast.
+error_update_failed: Uuendus ebaõnnestus! Taastage install varukoopiast.
 
 -
 
-error_update_not_supported: Teie server ei toeta värskendusi! Uuendaja nõuab cURL- ja ZIP-teekide installimist.
+error_update_not_supported: Teie server ei toeta värskendusi! Uuendaja nõuab CURL- ja ZIP-teekide installimist.
 
 -
 
-error_update_permission: Värskendust ei saa käivitada! Load on keelatud!
+error_update_permission: Värskendust ei saa käivitada! Lubadest keelduti!
 
 -
 
@@ -302,7 +306,7 @@ error_var_exists: Selle nimega muutuja on juba olemas!
 
 -
 
-error_var_name: Muutujat ilma nimeta lisada ei saa!
+error_var_name: Ilma nimeta muutujat lisada ei saa!
 
 -
 
@@ -310,7 +314,7 @@ file_name: Faili nimi
 
 -
 
-file_caption: Pealdis
+file_caption: Pealkiri
 
 -
 
@@ -318,11 +322,11 @@ image_crop: Kärbi pilti
 
 -
 
-image_height_px: Kõrgus (pikslid)
+image_height_px: Kõrgus (pikslit)
 
 -
 
-image_width_px: Laius (pikslid)
+image_width_px: Laius (pikslit)
 
 -
 
@@ -334,7 +338,7 @@ image_select: Valige Pilt
 
 -
 
-images_page: Lehekujutised
+images_page: Lehe pildid
 
 -
 
@@ -370,7 +374,7 @@ packages_title: Paketid
 
 -
 
-packages_browse: Avage paketibrauser
+packages_browse: Avage pakettbrauser
 
 -
 
@@ -390,11 +394,15 @@ packages_update_all: Värskenda kõik
 
 -
 
-packages_updating: Pakendite värskendamine ...
+packages_updating_all: Pakettide värskendamine ...
 
 -
 
-packages_removing: Paketi eemaldamine ...
+packages_updating: Paketi värskendamine ...
+
+-
+
+packages_removing: Pakendi eemaldamine ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Valige uue lehe asukoht
 
 -
 
-page_move_destination: Valige kolimise sihtkoht
+page_move_destination: Valige kolimiseks sihtkoht
 
 -
 
@@ -410,7 +418,7 @@ page_settings: Lehe seaded
 
 -
 
-page_prefix: Prefiks (järjekord navigeerimisel)
+page_prefix: Eesliide (navigeerimisjärjestus)
 
 -
 
@@ -418,7 +426,7 @@ page_redirect: Suuna leht teisele URL-ile
 
 -
 
-page_tags: Sildid (eraldage mitu silti koma või vahekaardi järgi)
+page_tags: Sildid (eraldage mitu silti koma või vahelehe järgi)
 
 -
 
@@ -434,7 +442,7 @@ page_vars_content: Sisu
 
 -
 
-page_vars_settings: Malliseaded
+page_vars_settings: Mallisätted
 
 -
 
@@ -446,7 +454,7 @@ page_visibility: Visibility
 
 -
 
-sidebar_header_global: Globaalne
+sidebar_header_global: Ülemaailmne
 
 -
 
@@ -454,15 +462,15 @@ sidebar_header_pages: Lehed
 
 -
 
-shared_title: Üldised andmed ja failid
+shared_title: Üldandmed ja failid
 
 -
 
-shared_theme: Põhiteema
+shared_theme: Peamine teema
 
 -
 
-shared_theme_apply: Kas soovite valitud teema rakendada ja värskendada saadaolevate muutujate loendit nüüd? Teie salvestamata muudatused salvestatakse.
+shared_theme_apply: Kas soovite valitud teema rakendada ja saadaolevate muutujate loendit värskendada? Teie salvestamata muudatused salvestatakse.
 
 -
 
@@ -482,11 +490,11 @@ shared_var_name: Muutuja nimi
 
 -
 
-search_no_results: Lehti ei leitud!
+search_no_results: Ühtegi lehte ei leitud!
 
 -
 
-search_placeholder: Otsige sisse
+search_placeholder: Otsige
 
 -
 
@@ -506,11 +514,11 @@ success_cache_purged: Vahemälu kataloog puhastati edukalt!
 
 -
 
-success_config_update: Konfiguratsiooni värskendamine õnnestus!
+success_config_update: Konfiguratsioon õnnestus uuendada!
 
 -
 
-success_created: Edukalt loodud <br>
+success_created: <br> edukalt loodud <br>
 
 -
 
@@ -518,11 +526,11 @@ success_installed: Installimine õnnestus
 
 -
 
-success_password_changed: Teie parool on edukalt muudetud!
+success_password_changed: Teie parooli muutmine õnnestus!
 
 -
 
-success_log_out: Edukalt välja logitud
+success_log_out: Sisselogimine õnnestus
 
 -
 
@@ -530,7 +538,7 @@ success_remove: Eemaldamine õnnestus
 
 -
 
-success_reset_headless: Peata vaikimisi malli edukas taastamine!
+success_reset_headless: Vaikimisi peata malli taastamine õnnestus!
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Salvestatud muudatused
 
 -
 
-success_update: Automadi värskendamine õnnestus!
+success_update: Automadi uuendamine õnnestus!
 
 -
 
-success_packages_updated: Kõigi pakettide värskendamine õnnestus
+success_packages_updated_all: Kõigi pakettide värskendamine õnnestus
 
 -
 
-sys_cache_info: Vahemälu on saidi kiirendamiseks hädavajalik ja üldiselt peaks see olema lubatud. Mõnel juhul võiksite vahemälu keelata või tühjendada.
+success_package_updated: Edukalt uuendatud
+
+-
+
+sys_cache_info: Vahemällu salvestamine on teie saidi kiirendamiseks hädavajalik ja see peaks üldiselt olema lubatud. Mõnes olukorras võiksite siiski vahemälu keelata või tühjendada.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Tühjenda vahemälu
 
 -
 
-sys_cache_clear_info: Saidi vahemälu tühjendamine sunnib värskendatud lehti ja faile uuesti otsima. Selle toiminguga ei eemaldata vahemälu kataloogist ühtegi leheküljefaili ega pilti.
+sys_cache_clear_info: Saidi vahemälu tühjendamine sunnib uuendatud lehti ja faile uuesti otsima. See toiming ei eemalda vahemälu kataloogist ühtegi lehefaili ega pilti.
 
 -
 
@@ -562,7 +574,7 @@ sys_cache_monitor: Kontrollimise intervall on
 
 -
 
-sys_cache_monitor_info: Kui vahemälu on lubatud, kontrollib Automad regulaarselt muudatusi failisüsteemis. Nende kontrollide sagedust saab siin määratleda.
+sys_cache_monitor_info: Kui vahemällu salvestamine on lubatud, kontrollib Automad failisüsteemis regulaarselt muudatusi. Nende kontrollide sageduse saab määrata siin.
 
 -
 
@@ -570,15 +582,15 @@ sys_cache_lifetime: Vahemälu eluiga on
 
 -
 
-sys_cache_lifetime_info: Kõigi vahemällu salvestatud Automadi andmete ja lehtede maksimaalne kasutusiga on. Kui objekti eluiga ületab, ehitatakse selle vahemälu taotluse korral uuesti.
+sys_cache_lifetime_info: Kõigil vahemällu salvestatud Automadi andmetel ja lehtedel on maksimaalne eluiga. Kui objekti eluiga on pikem, ehitatakse selle vahemälu selle nõudmisel uuesti üles.
 
 -
 
-sys_cache_purge: Puhastage vahemälu kataloog
+sys_cache_purge: Puhasta vahemälu kataloog
 
 -
 
-sys_cache_purge_info: Vahemälu tühjendamise asemel teisaldab vahemälu kataloogi puhastamine ka kõik ajutised failid, kustutatud lehed, värskenduste varundamine ja vahemälupildid süsteemi ajutisse kataloogi. See sunnib pildi ja lehe vahemälu täielikult taastama, samuti kustutatakse kõik kustutatud lehed. Enamikus süsteemides puhastatakse ajutine kataloog automaatselt aeg-ajalt või taaskäivituse korral. Mõnes süsteemis tuleb see kataloog käsitsi kustutada.
+sys_cache_purge_info: Erinevalt vahemälu tühjendamisest teisaldab vahemälukataloogi puhastamine kõik ajutised failid, kustutatud lehed, värskenduse varukoopiad ja vahemällu salvestatud pildid süsteemi ajutisse kataloogi. See sunnib pildi ja lehe vahemälu täielikult taastama ning puhastama kõik kustutatud lehed. Enamikus süsteemidest puhastatakse ajutine kataloog aeg-ajalt või taaskäivitamisel automaatselt. Mõnes süsteemis tuleb see kataloog käsitsi kustutada.
 
 -
 
@@ -586,11 +598,11 @@ sys_debug_info: Kui silumine on lubatud, logitakse kõik Automadi protsessid tei
 
 -
 
-sys_headless_edit_info: Tagastatud JSON-i andmete struktuuri kontrollib mall. Saate seda malli redigeerida, kasutades Automadi sisseehitatud mallikeelt, et kohandada välju muutujate, objektide ja juhtimisstruktuuride abil.
+sys_headless_edit_info: Tagastatud JSON-i andmete struktuuri juhib mall. Selle malli saate muutmiseks kasutada muutjate, objektide ja juhtimisstruktuuride abil väljade kohandamiseks Automadi sisseehitatud mallikeelt.
 
 -
 
-sys_headless_info: Peata režiimi aktiveerimine muudab Automadi sisuhaldussüsteemiks, mis keskendub täielikult sisu loomisele ilma esitluskihita. Ehkki juhtpaneeli saab endiselt sisu haldamiseks kasutada, on kõik andmed ja failid juurdepääsetavad ainult kirjutuskaitstud JSON-i API kaudu.
+sys_headless_info: Peata režiimi aktiveerimine muudab Automadi sisuhaldussüsteemiks, mis keskendub täielikult sisu loomisele ilma esitluskihita. Kuigi juhtpaneeli saab endiselt sisu haldamiseks kasutada, on kõikidele andmetele ja failidele juurdepääs kirjutuskaitstud JSON API kaudu.
 
 -
 
@@ -598,11 +610,11 @@ sys_language: Keel
 
 -
 
-sys_language_info: Juhtpaneeli jaoks on saadaval mitu keelt. Tõlked luuakse automaatselt. See funktsioon on endiselt katsejärgus ja seetõttu ei pruugi mõned tõlked olla täpsed.
+sys_language_info: Juhtpaneelil on saadaval mitu keelt. Tõlked luuakse automaatselt. See funktsioon on endiselt katsefaasis ja seetõttu ei pruugi mõned tõlked olla täpsed.
 
 -
 
-sys_status_cache_enabled: Vahemälu on lubatud
+sys_status_cache_enabled: Vahemällu salvestamine on lubatud
 
 -
 
@@ -614,7 +626,7 @@ sys_status_debug_enabled: Silumine on lubatud
 
 -
 
-sys_status_update_available: Värskenda saidile
+sys_status_update_available: Värskendage versioonile
 
 -
 
@@ -630,7 +642,7 @@ sys_update: Uuenda
 
 -
 
-sys_update_available: Automadi uuem versioon on saadaval ja installimiseks valmis. <br> Enne värskendamist palun varundage praegune install!
+sys_update_available: Automadi uuem versioon on saadaval ja valmis installimiseks. <br> Enne värskendamist varundage oma praegune install!
 
 -
 
@@ -646,15 +658,15 @@ sys_update_not_required: Automad on ajakohane.
 
 -
 
-sys_update_progress: Palun oodake ja ärge sulgege värskendamise ajal akent ...
+sys_update_progress: Oodake ja ärge värskendamise ajal akent sulgege ...
 
 -
 
-sys_update_to: Uuendage versioonile
+sys_update_to: Värskenda versioonile
 
 -
 
-sys_update_windows_warning: Enne värskenduse käivitamist veenduge, et kõik teie installifailid oleks välistes programmides suletud, et lubade probleeme vältida!
+sys_update_windows_warning: Enne värskenduse käivitamist veenduge, et lubade probleemide vältimiseks oleksid kõik installitud failid välistes programmides suletud!
 
 -
 
@@ -666,7 +678,7 @@ sys_user_info: Siin saate lisada või eemaldada rohkem kasutajaid või muuta oma
 
 -
 
-sys_user_change_password: Muutke oma parooli
+sys_user_change_password: Parooli muutmine
 
 -
 

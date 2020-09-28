@@ -22,7 +22,7 @@ btn_close: Închide
 
 -
 
-btn_copy_url_clipboard: Copiați URL-ul în Clipboard
+btn_copy_url_clipboard: Copiați adresa URL în clipboard
 
 -
 
@@ -30,7 +30,7 @@ btn_copy_resized: Copiați și redimensionați
 
 -
 
-btn_data: Date și Setări
+btn_data: Date și setări
 
 -
 
@@ -42,7 +42,7 @@ btn_download_file: Descarca
 
 -
 
-btn_duplicate_page: Pagină duplicată
+btn_duplicate_page: Pagină duplicat
 
 -
 
@@ -50,7 +50,7 @@ btn_edit: Editați | ×
 
 -
 
-btn_edit_file_info: Editați informațiile despre fișiere
+btn_edit_file_info: Editați informații despre fișier
 
 -
 
@@ -70,11 +70,11 @@ btn_get_themes: Obțineți mai multe teme
 
 -
 
-btn_getting_data: Obținerea de date ...
+btn_getting_data: Se obțin date ...
 
 -
 
-btn_hide_page: Ascundeți pagina în navigare
+btn_hide_page: Ascundeți pagina în Navigare
 
 -
 
@@ -98,7 +98,7 @@ btn_link: Legătură
 
 -
 
-btn_log_out: Deconectați-vă
+btn_log_out: Deconectează-te
 
 -
 
@@ -146,7 +146,11 @@ btn_save: Salvează modificările
 
 -
 
-btn_upload: Încărcați
+btn_update: Actualizați
+
+-
+
+btn_upload: Încărcare
 
 -
 
@@ -170,7 +174,7 @@ dashboard_memory: Folosirea memoriei:
 
 -
 
-dashboard_modified: Ultima activitate la
+dashboard_modified: Ultima activitate pe
 
 -
 
@@ -178,11 +182,11 @@ dashboard_recently_edited: Pagini editate recent
 
 -
 
-dropzone: Trageți fișierele aici
+dropzone: Trageți fișiere aici
 
 -
 
-error_cache_purged: Directorul cache nu a putut fi șters!
+error_cache_purged: Directorul cache nu a putut fi eliminat!
 
 -
 
@@ -194,7 +198,7 @@ error_file_save: Nu s-a putut salva
 
 -
 
-error_file_format: Tipul fișierului neacceptat
+error_file_format: Tipul de fișier neacceptat
 
 -
 
@@ -202,11 +206,11 @@ error_file_not_found: Fișierul nu a fost găsit!
 
 -
 
-error_file_size: Dimensiune de fișier nevalidă!
+error_file_size: Dimensiune nevalidă a fișierului!
 
 -
 
-error_form: Date incomplete sau incorecte! <br /> Toate câmpurile sunt obligatorii și trebuie completate așa cum este descris!
+error_form: Date incomplete sau incorecte! <br /> Toate câmpurile sunt obligatorii și trebuie completate conform descrierii!
 
 -
 
@@ -214,7 +218,7 @@ error_login: Nume de utilizator sau parola incorecte
 
 -
 
-error_log_out: Deconectați-vă eșuat!
+error_log_out: Deconectarea a eșuat!
 
 -
 
@@ -222,7 +226,7 @@ error_no_destination: Vă rugăm să selectați o pagină ca destinație!
 
 -
 
-error_no_js: Vă rugăm să activați JavaScript în browserul dvs. pentru a utiliza Tabloul de bord!
+error_no_js: Vă rugăm să activați JavaScript în browserul dvs. pentru a utiliza tabloul de bord!
 
 -
 
@@ -234,15 +238,15 @@ error_no_url: Vă rugăm să introduceți o adresă URL validă!
 
 -
 
-error_import: Importul de fișiere a eșuat!
+error_import: Importul fișierului a eșuat!
 
 -
 
-error_packages: Nu s-a putut încărca pachetele de la Packagist!
+error_packages: Nu s-au putut încărca pachetele de la Packagist!
 
 -
 
-error_composer_memory: Serverul dvs. nu are suficientă memorie pentru a instala, actualiza sau elimina pachetele! În cazul în care executați acest site pe un serviciu de găzduire partajată cu o cantitate limitată de memorie, încercați să vă actualizați planul sau să instalați site-ul dvs. pe un computer local fără restricții de memorie.
+error_composer_memory: Serverul dvs. nu are suficientă memorie pentru a instala, actualiza sau elimina pachete! În cazul în care rulați acest site pe un serviciu de găzduire partajată cu o cantitate limitată de memorie, vă rugăm să încercați să actualizați planul sau să instalați site-ul pe un computer local fără restricții de memorie.
 
 -
 
@@ -254,7 +258,7 @@ error_page_title: Titlul lipsește!
 
 -
 
-error_password_current: Parola curentă este greșită!
+error_password_current: Parola actuală este greșită!
 
 -
 
@@ -262,11 +266,11 @@ error_password_repeat: Vă rugăm să introduceți de două ori aceeași parolă
 
 -
 
-error_password_reuse: Nu reutilizați parola veche!
+error_password_reuse: Nu refolosiți vechea parolă!
 
 -
 
-error_permission: Permisiunile refuzate:
+error_permission: Permisiuni refuzate:
 
 -
 
@@ -274,7 +278,7 @@ error_template_missing: Șablonul lipsește
 
 -
 
-error_update_connection: Nu mă pot conecta la serverul de actualizare! Acest lucru ar putea fi de obicei cauzat de o configurație de actualizare greșită (config.json), o eroare de certificare SSL sau o bibliotecă cURL care lipsește.
+error_update_connection: Nu se poate conecta la serverul de actualizare! Acest lucru ar putea fi de obicei cauzat de o configurație de actualizare greșită (config.json), o eroare de certificat SSL sau o bibliotecă cURL lipsă.
 
 -
 
@@ -282,7 +286,7 @@ error_update_download: Descărcarea actualizării a eșuat!
 
 -
 
-error_update_items: Lista de articole nevalide care urmează să fie actualizate!
+error_update_items: Lista nevalidă de articole care trebuie actualizate!
 
 -
 
@@ -290,11 +294,11 @@ error_update_failed: Actualizare esuata! Vă rugăm să restaurați instalarea d
 
 -
 
-error_update_not_supported: Actualizările nu sunt acceptate de serverul dvs.! Actualizatorul necesită instalarea bibliotecilor CURL și ZIP.
+error_update_not_supported: Actualizările nu sunt acceptate de serverul dvs.! Actualizatorul necesită instalarea de biblioteci CURL și ZIP.
 
 -
 
-error_update_permission: Nu se poate executa actualizarea! Permisiunile refuzate!
+error_update_permission: Actualizarea nu poate rula! Permisiuni refuzate!
 
 -
 
@@ -302,7 +306,7 @@ error_var_exists: Există deja o variabilă cu acest nume!
 
 -
 
-error_var_name: Nu puteți adăuga o variabilă fără nume!
+error_var_name: Nu puteți adăuga o variabilă fără un nume!
 
 -
 
@@ -314,7 +318,7 @@ file_caption: Legendă
 
 -
 
-image_crop: Crop Image
+image_crop: Decupați imaginea
 
 -
 
@@ -342,11 +346,11 @@ images_shared: Imagini generale
 
 -
 
-link_placeholder: Începeți să tastați un titlu de pagină sau să lipiți un link extern aici
+link_placeholder: Începeți să tastați un titlu de pagină sau lipiți un link extern aici
 
 -
 
-link_title: Adaugă link
+link_title: Adăugați un link
 
 -
 
@@ -382,19 +386,23 @@ packages_installed: Este instalat
 
 -
 
-packages_installing: Instalarea pachetului ...
+packages_installing: Se instalează pachetul ...
 
 -
 
-packages_update_all: Actualizați toate
+packages_update_all: Actualizați-le pe toate
 
 -
 
-packages_updating: Actualizarea pachetelor ...
+packages_updating_all: Se actualizează pachetele ...
 
 -
 
-packages_removing: Scoaterea pachetului ...
+packages_updating: Se actualizează pachetul ...
+
+-
+
+packages_removing: Se elimină pachetul ...
 
 -
 
@@ -410,7 +418,7 @@ page_settings: Setări pagină
 
 -
 
-page_prefix: Prefix (comandă în navigare)
+page_prefix: Prefix (Comandă în navigare)
 
 -
 
@@ -418,15 +426,15 @@ page_redirect: Redirecționați pagina către o altă adresă URL
 
 -
 
-page_tags: Etichete (separați mai multe etichete după virgulă sau filă)
+page_tags: Etichete (separați mai multe etichete prin virgulă sau filă)
 
 -
 
-page_theme_template: Format
+page_theme_template: Șablon
 
 -
 
-page_var_name: Nume variabilă
+page_var_name: Numele variabilei
 
 -
 
@@ -434,7 +442,7 @@ page_vars_content: Conţinut
 
 -
 
-page_vars_settings: Setări de șabloane
+page_vars_settings: Setări șablon
 
 -
 
@@ -454,7 +462,7 @@ sidebar_header_pages: Pagini
 
 -
 
-shared_title: Date generale și fișiere
+shared_title: Date și fișiere generale
 
 -
 
@@ -462,7 +470,7 @@ shared_theme: Tema principală
 
 -
 
-shared_theme_apply: Doriți să aplicați tema selectată și să actualizați lista de variabile disponibile acum? Modificările dvs. salvate vor fi salvate.
+shared_theme_apply: Doriți să aplicați tema selectată și să actualizați lista variabilelor disponibile acum? Modificările dvs. nesalvate vor fi salvate.
 
 -
 
@@ -470,7 +478,7 @@ shared_vars_content: Conținut implicit
 
 -
 
-shared_vars_settings: Setări implicite pentru șabloane
+shared_vars_settings: Setări implicite ale șablonului
 
 -
 
@@ -478,11 +486,11 @@ shared_vars_unused: Variabile neutilizate
 
 -
 
-shared_var_name: Nume variabilă
+shared_var_name: Numele variabilei
 
 -
 
-search_no_results: Nu s-au găsit pagini!
+search_no_results: Nu au fost găsite pagini!
 
 -
 
@@ -498,19 +506,19 @@ success_added: Adăugat cu succes
 
 -
 
-success_cache_cleared: Cache-ul s-a șters cu succes!
+success_cache_cleared: Memoria cache a fost ștearsă cu succes!
 
 -
 
-success_cache_purged: Directorul cache a fost șters cu succes!
+success_cache_purged: Directorul cache a fost eliminat cu succes!
 
 -
 
-success_config_update: Configurație actualizată cu succes!
+success_config_update: Configurare actualizată cu succes!
 
 -
 
-success_created: <br> creat cu succes
+success_created: <br> creată cu succes
 
 -
 
@@ -518,7 +526,7 @@ success_installed: Instalat cu succes
 
 -
 
-success_password_changed: Parola dvs. a fost schimbată cu succes!
+success_password_changed: Parola dvs. a fost modificată cu succes!
 
 -
 
@@ -530,7 +538,7 @@ success_remove: Eliminat cu succes
 
 -
 
-success_reset_headless: Restaurați cu succes modelul implicit headless!
+success_reset_headless: A restaurat cu succes șablonul implicit fără cap!
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Modificări salvate
 
 -
 
-success_update: Actualizat cu succes Automad!
+success_update: Automad a fost actualizat cu succes!
 
 -
 
-success_packages_updated: Actualizați cu succes toate pachetele
+success_packages_updated_all: S-au actualizat cu succes toate pachetele
 
 -
 
-sys_cache_info: Cache-ul este esențial pentru a accelera site-ul și ar trebui, în general, să fie activat. Cu toate acestea, în anumite circumstanțe, poate doriți să dezactivați sau să ștergeți memoria cache.
+success_package_updated: Actualizat cu succes
+
+-
+
+sys_cache_info: Memorarea în cache este esențială pentru a accelera site-ul și ar trebui să fie, în general, activată. Cu toate acestea, în anumite circumstanțe, ați putea dori să dezactivați sau să goliți memoria cache.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Ștergeți memoria cache
 
 -
 
-sys_cache_clear_info: Ștergerea memoriei cache a site-ului forțează o resanare pentru paginile și fișierele actualizate. Această acțiune nu va elimina niciun fișier de pagină sau imagini din directorul cache.
+sys_cache_clear_info: Ștergerea memoriei cache a site-ului forțează o rescanare a paginilor și fișierelor actualizate. Această acțiune nu va elimina niciun fișier de pagină sau imagine din directorul cache.
 
 -
 
@@ -562,35 +574,35 @@ sys_cache_monitor: Intervalul de verificare este
 
 -
 
-sys_cache_monitor_info: Când este activată memorarea în cache, Automad va verifica periodic modificările sistemului de fișiere. Frecvența acestor verificări poate fi definită aici.
+sys_cache_monitor_info: Când cache-ul este activat, Automad va verifica în mod regulat modificările sistemului de fișiere. Frecvența acestor verificări poate fi definită aici.
 
 -
 
-sys_cache_lifetime: Durata de viață a memoriei cache este
+sys_cache_lifetime: Durata de viață a cache-ului este
 
 -
 
-sys_cache_lifetime_info: Toate datele și paginile automatizate din cache au o durată de viață maximă. După depășirea duratei de viață a unui obiect, cache-ul său va fi reconstruit la cerere.
+sys_cache_lifetime_info: Toate datele și paginile Automad din cache au o durată de viață maximă. După ce durata de viață a unui obiect depășește, cache-ul acestuia va fi reconstruit la cerere.
 
 -
 
-sys_cache_purge: Purge Cache Directory
+sys_cache_purge: Ștergeți directorul cache
 
 -
 
-sys_cache_purge_info: Spre deosebire de ștergerea cache-ului, purjarea directorului de memorie cache va muta și toate fișierele temporare, paginile șterse, actualizarea copiilor de rezervă și imaginile din cache în directorul temporal al sistemului. Acest lucru va impune o reconstrucție completă a imaginii și a cache-ului de pagină, precum și o curățare a tuturor paginilor șterse. În majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme, acel director trebuie să fie șters manual.
+sys_cache_purge_info: Spre deosebire de simpla ștergere a cache-ului, curățarea directorului cache va muta, de asemenea, toate fișierele temporare, paginile șterse, backup-urile de actualizare și imaginile cache în directorul temporar al sistemului. Acest lucru va forța o reconstrucție completă a imaginii și a paginii cache, precum și o curățare a tuturor paginilor șterse. Pe majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme acel director trebuie șters manual.
 
 -
 
-sys_debug_info: Când debugging-ul este activat, toate procesele Automad vor fi înregistrate în consola browserului. Debugarea este necesară numai pentru dezvoltare sau depanare și ar trebui dezactivată în toate celelalte cazuri.
+sys_debug_info: Când depanarea este activată, toate procesele Automad vor fi înregistrate în consola browserului. Depanarea este necesară numai pentru dezvoltare sau depanare și ar trebui să fie dezactivată în toate celelalte cazuri.
 
 -
 
-sys_headless_edit_info: Structura datelor JSON returnate este controlată de un șablon. Puteți edita acel șablon folosind limbajul de șablon încorporat al Automad pentru personalizarea câmpurilor folosind variabile, obiecte și structuri de control.
+sys_headless_edit_info: Structura datelor JSON returnate este controlată de un șablon. Puteți edita acel șablon folosind limbajul de șabloane încorporat al Automad pentru personalizarea câmpurilor utilizând variabile, obiecte și structuri de control.
 
 -
 
-sys_headless_info: Activarea modului fără cap transformă Automad într-un sistem de gestionare a conținutului concentrându-se în întregime pe crearea de conținut fără un strat de prezentare. În timp ce tabloul de bord poate fi utilizat în continuare pentru gestionarea conținutului, toate datele și fișierele sunt accesibile printr-o API JSON doar de citire.
+sys_headless_info: Activarea modului fără cap transformă Automad într-un sistem de gestionare a conținutului axat în întregime pe crearea de conținut fără un strat de prezentare. În timp ce Tabloul de bord poate fi încă utilizat pentru a gestiona conținutul, toate datele și fișierele sunt accesibile printr-un API JSON numai în citire.
 
 -
 
@@ -602,15 +614,15 @@ sys_language_info: Există mai multe limbi disponibile pentru tabloul de bord. T
 
 -
 
-sys_status_cache_enabled: Caching-ul este activat
+sys_status_cache_enabled: Memorarea în cache este activată
 
 -
 
-sys_status_cache_disabled: Cache-ul este dezactivat
+sys_status_cache_disabled: Memorarea în cache este dezactivată
 
 -
 
-sys_status_debug_enabled: Debugging-ul este activat
+sys_status_debug_enabled: Depanarea este activată
 
 -
 
@@ -618,7 +630,7 @@ sys_status_update_available: Actualizați la
 
 -
 
-sys_status_update_not_available: Automad este la zi
+sys_status_update_not_available: Automad este actualizat
 
 -
 
@@ -630,19 +642,19 @@ sys_update: Actualizați
 
 -
 
-sys_update_available: O versiune mai nouă de Automad este disponibilă și este gata de instalare. <br> Vă rugăm să faceți o copie de rezervă a instalației curente înainte de actualizare!
+sys_update_available: O versiune mai nouă a Automad este disponibilă și gata de instalare. <br> Vă rugăm să faceți backup instalării curente înainte de actualizare!
 
 -
 
-sys_update_current_version: Versiunea dvs. actuală instalată este
+sys_update_current_version: Versiunea dvs. instalată în prezent este
 
 -
 
-sys_update_items: Rețineți că următoarele actualizări sunt afectate de următoarele fișiere și directoare:
+sys_update_items: Rețineți că următoarele fișiere și directoare sunt afectate de actualizare:
 
 -
 
-sys_update_not_required: Automad este la zi.
+sys_update_not_required: Automad este actualizat.
 
 -
 
@@ -650,7 +662,7 @@ sys_update_progress: Vă rugăm să așteptați și să nu închideți fereastra
 
 -
 
-sys_update_to: Actualizare la versiune
+sys_update_to: Actualizați versiunea
 
 -
 

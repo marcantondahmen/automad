@@ -22,11 +22,11 @@ btn_close: Dichtbij
 
 -
 
-btn_copy_url_clipboard: Kopieer URL naar klembord
+btn_copy_url_clipboard: Kopieer de URL naar het klembord
 
 -
 
-btn_copy_resized: Kopieer en verklein
+btn_copy_resized: Kopiëren en formaat wijzigen
 
 -
 
@@ -50,7 +50,7 @@ btn_edit: Bewerk
 
 -
 
-btn_edit_file_info: Bestandsinfo bewerken
+btn_edit_file_info: Bewerk bestandsinfo
 
 -
 
@@ -62,7 +62,7 @@ btn_edit_page: Pagina aanpassen
 
 -
 
-btn_files: Geuploade bestanden
+btn_files: Geüploade bestanden
 
 -
 
@@ -82,7 +82,7 @@ btn_home: Home
 
 -
 
-btn_import: Importeren vanuit URL
+btn_import: Importeren van URL
 
 -
 
@@ -122,7 +122,7 @@ btn_ok: Ok
 
 -
 
-btn_open_log: Logboek openen
+btn_open_log: Open Logboek
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Wijzigingen opslaan
 
 -
 
+btn_update: Bijwerken
+
+-
+
 btn_upload: Uploaden
 
 -
@@ -154,7 +158,7 @@ confirm_delete_files: Weet u zeker dat u de geselecteerde bestanden wilt verwijd
 
 -
 
-confirm_delete_page: Weet je zeker dat je de huidige pagina wilt verwijderen?
+confirm_delete_page: Weet u zeker dat u de huidige pagina wilt verwijderen?
 
 -
 
@@ -162,7 +166,7 @@ confirm_delete_users: Weet u zeker dat u de geselecteerde gebruikers wilt verwij
 
 -
 
-confirm_reset_headless: Weet u zeker dat u de aangepaste headless-sjabloon wilt resetten?
+confirm_reset_headless: Weet u zeker dat u de aangepaste headless-sjabloon opnieuw wilt instellen?
 
 -
 
@@ -182,7 +186,7 @@ dropzone: Sleep bestanden hierheen
 
 -
 
-error_cache_purged: De cachemap kan niet worden opgeschoond!
+error_cache_purged: De cachemap kan niet worden verwijderd!
 
 -
 
@@ -190,7 +194,7 @@ error_existing: Bestaat al!
 
 -
 
-error_file_save: Kon niet opslaan
+error_file_save: Kan niet opslaan
 
 -
 
@@ -234,15 +238,15 @@ error_no_url: Voer een geldige URL in!
 
 -
 
-error_import: Het importeren van bestanden is mislukt!
+error_import: Het importeren van het bestand is mislukt!
 
 -
 
-error_packages: Kan pakketten van Packagist niet laden!
+error_packages: Kan pakketten niet laden vanuit Packagist!
 
 -
 
-error_composer_memory: Uw server heeft niet genoeg geheugen om pakketten te installeren, updaten of verwijderen! Als u deze site gebruikt op een shared-hostingservice met een beperkte hoeveelheid geheugen, probeer dan uw plan te upgraden of installeer uw site op een lokale computer zonder geheugenbeperkingen.
+error_composer_memory: Uw server heeft niet genoeg geheugen om pakketten te installeren, bij te werken of te verwijderen! Als u deze site op een shared-hostingservice met een beperkte hoeveelheid geheugen gebruikt, probeer dan uw plan te upgraden of installeer uw site op een lokale computer zonder geheugenbeperkingen.
 
 -
 
@@ -254,11 +258,11 @@ error_page_title: Titel ontbreekt!
 
 -
 
-error_password_current: Het huidige wachtwoord is verkeerd!
+error_password_current: Het huidige wachtwoord is onjuist!
 
 -
 
-error_password_repeat: Voer tweemaal hetzelfde nieuwe wachtwoord in!
+error_password_repeat: Voer twee keer hetzelfde nieuwe wachtwoord in!
 
 -
 
@@ -266,7 +270,7 @@ error_password_reuse: Gebruik uw oude wachtwoord niet opnieuw!
 
 -
 
-error_permission: Rechten geweigerd:
+error_permission: Toestemmingen geweigerd:
 
 -
 
@@ -278,11 +282,11 @@ error_update_connection: Kan geen verbinding maken met de updateserver! Dit kan 
 
 -
 
-error_update_download: Downloaden van update is mislukt!
+error_update_download: Downloaden van update mislukt!
 
 -
 
-error_update_items: Ongeldige lijst met items die moeten worden bijgewerkt!
+error_update_items: Ongeldige lijst met te updaten items!
 
 -
 
@@ -302,7 +306,7 @@ error_var_exists: Er is al een variabele met die naam!
 
 -
 
-error_var_name: Je kunt geen variabele toevoegen zonder een naam!
+error_var_name: U kunt geen variabele zonder naam toevoegen!
 
 -
 
@@ -318,11 +322,11 @@ image_crop: Afbeelding bijsnijden
 
 -
 
-image_height_px: Hoogte (pixels)
+image_height_px: Hoogte (Pixels)
 
 -
 
-image_width_px: Breedte (pixels)
+image_width_px: Breedte (Pixels)
 
 -
 
@@ -334,7 +338,7 @@ image_select: Selecteer afbeelding
 
 -
 
-images_page: Pagina afbeeldingen
+images_page: Pagina-afbeeldingen
 
 -
 
@@ -370,7 +374,7 @@ packages_title: Pakketjes
 
 -
 
-packages_browse: Pakketbrowser openen
+packages_browse: Open de pakketbrowser
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Update alles
 
 -
 
-packages_updating: Pakketten bijwerken ...
+packages_updating_all: Pakketten bijwerken ...
+
+-
+
+packages_updating: Pakket updaten ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Selecteer een locatie voor de nieuwe pagina
 
 -
 
-page_move_destination: Selecteer een bestemming om te verplaatsen
+page_move_destination: Selecteer een bestemming om te verhuizen
 
 -
 
@@ -410,15 +418,15 @@ page_settings: Pagina-instellingen
 
 -
 
-page_prefix: Prefix (volgorde in navigatie)
+page_prefix: Voorvoegsel (volgorde in navigatie)
 
 -
 
-page_redirect: Verwijs de pagina door naar een andere URL
+page_redirect: Leid de pagina om naar een andere URL
 
 -
 
-page_tags: Tags (Scheid meerdere tags door komma of tabblad)
+page_tags: Tags (Scheid meerdere tags door komma of tab)
 
 -
 
@@ -426,7 +434,7 @@ page_theme_template: Sjabloon
 
 -
 
-page_var_name: Variabelenaam
+page_var_name: Variabele naam
 
 -
 
@@ -466,7 +474,7 @@ shared_theme_apply: Wilt u het geselecteerde thema toepassen en de lijst met bes
 
 -
 
-shared_vars_content: Standaard inhoud
+shared_vars_content: Standaardinhoud
 
 -
 
@@ -478,7 +486,7 @@ shared_vars_unused: Ongebruikte variabelen
 
 -
 
-shared_var_name: Variabelenaam
+shared_var_name: Variabele naam
 
 -
 
@@ -498,19 +506,19 @@ success_added: Succesvol toegevoegd
 
 -
 
-success_cache_cleared: De cache is met succes gewist!
+success_cache_cleared: De cache is succesvol gewist!
 
 -
 
-success_cache_purged: De cachemap is met succes verwijderd!
+success_cache_purged: De cachemap is succesvol gewist!
 
 -
 
-success_config_update: Configuratie succesvol bijgewerkt!
+success_config_update: Succesvol bijgewerkte configuratie!
 
 -
 
-success_created: <br> gemaakt
+success_created: Succesvol gemaakt <br>
 
 -
 
@@ -530,7 +538,7 @@ success_remove: Succesvol verwijderd
 
 -
 
-success_reset_headless: De standaard headless-template is hersteld!
+success_reset_headless: Met succes de standaard headless-sjabloon hersteld!
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Opgeslagen wijzigingen
 
 -
 
-success_update: Automad is bijgewerkt!
+success_update: Automad bijgewerkt!
 
 -
 
-success_packages_updated: Alle pakketten zijn bijgewerkt
+success_packages_updated_all: Alle pakketten zijn bijgewerkt
 
 -
 
-sys_cache_info: Caching is essentieel om uw site te versnellen en moet over het algemeen worden ingeschakeld. Onder bepaalde omstandigheden wilt u misschien uw cache uitschakelen of wissen.
+success_package_updated: Succesvol geüpdatet
+
+-
+
+sys_cache_info: Caching is essentieel om uw site te versnellen en moet over het algemeen worden ingeschakeld. Onder bepaalde omstandigheden wilt u echter uw cache uitschakelen of wissen.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Cache wissen
 
 -
 
-sys_cache_clear_info: Het wissen van de sitecache dwingt een nieuwe scan voor bijgewerkte pagina's en bestanden. Met deze actie worden geen paginabestanden of afbeeldingen uit de cachemap verwijderd.
+sys_cache_clear_info: Als u het cachegeheugen van de site wist, moet er opnieuw worden gescand op bijgewerkte pagina's en bestanden. Deze actie verwijdert geen paginabestanden of afbeeldingen uit de cachemap.
 
 -
 
@@ -562,35 +574,35 @@ sys_cache_monitor: Het controle-interval is
 
 -
 
-sys_cache_monitor_info: Als caching is ingeschakeld, controleert Automad regelmatig op wijzigingen in het bestandssysteem. De frequentie van deze controles kan hier worden gedefinieerd.
+sys_cache_monitor_info: Als caching is ingeschakeld, controleert Automad regelmatig op wijzigingen in het bestandssysteem. De frequentie van die controles kan hier worden gedefinieerd.
 
 -
 
-sys_cache_lifetime: De cache-levensduur is
+sys_cache_lifetime: De levensduur van de cache is
 
 -
 
-sys_cache_lifetime_info: Alle in de cache opgeslagen Automad-gegevens en -pagina's hebben een maximale levensduur. Nadat de levensduur van een object is overschreden, wordt de cache op verzoek opnieuw opgebouwd.
+sys_cache_lifetime_info: Alle Automad-gegevens en -pagina's in de cache hebben een maximale levensduur. Nadat de levensduur van een object is overschreden, wordt de cache op verzoek opnieuw opgebouwd.
 
 -
 
-sys_cache_purge: Cache-map opschonen
+sys_cache_purge: Cachemap leegmaken
 
 -
 
-sys_cache_purge_info: In tegenstelling tot het eenvoudigweg wissen van de cache, worden bij het opschonen van de cachemap ook alle tijdelijke bestanden, verwijderde pagina's, updateback-ups en gecachte afbeeldingen naar de tijdelijke directory van het systeem verplaatst. Dit zorgt ervoor dat de afbeelding en paginacache volledig opnieuw worden opgebouwd en dat alle verwijderde pagina's worden opgeschoond. Op de meeste systemen wordt de tijdelijke map van tijd tot tijd automatisch opgeschoond of bij het opnieuw opstarten. Op sommige systemen moet die map echter handmatig worden gewist.
+sys_cache_purge_info: In tegenstelling tot het simpelweg wissen van de cache, zal het opschonen van de cachemap ook alle tijdelijke bestanden, verwijderde pagina's, updateback-ups en cachebeelden naar de tijdelijke map van het systeem verplaatsen. Dit zal een volledige herbouw van de afbeelding en de paginacache afdwingen, evenals een opschoning van alle verwijderde pagina's. Op de meeste systemen wordt de tijdelijke map van tijd tot tijd automatisch opgeschoond of bij het opnieuw opstarten. Op sommige systemen moet die directory echter handmatig worden gewist.
 
 -
 
-sys_debug_info: Als debuggen is ingeschakeld, worden alle processen van Automad vastgelegd in de console van uw browser. Debuggen is alleen nodig voor ontwikkeling of probleemoplossing en moet in alle andere gevallen worden uitgeschakeld.
+sys_debug_info: Als foutopsporing is ingeschakeld, worden alle Automad-processen gelogd naar de console van uw browser. Foutopsporing is alleen nodig voor ontwikkeling of probleemoplossing en moet in alle andere gevallen worden uitgeschakeld.
 
 -
 
-sys_headless_edit_info: De structuur van de geretourneerde JSON-gegevens wordt bepaald door een sjabloon. U kunt die sjabloon bewerken met de ingebouwde sjabloontaal van Automad voor het aanpassen van velden met behulp van variabelen, objecten en besturingsstructuren.
+sys_headless_edit_info: De structuur van de geretourneerde JSON-gegevens wordt bepaald door een sjabloon. U kunt die sjabloon bewerken met behulp van Automad's ingebouwde sjabloontaal voor het aanpassen van velden door variabelen, objecten en controlestructuren te gebruiken.
 
 -
 
-sys_headless_info: Door de headless-modus te activeren, verandert Automad in een contentmanagementsysteem dat zich volledig richt op het maken van content zonder presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
+sys_headless_info: Door de headless-modus te activeren, wordt Automad een inhoudbeheersysteem dat zich volledig richt op het maken van inhoud zonder een presentatielaag. Hoewel het Dashboard nog steeds kan worden gebruikt om inhoud te beheren, zijn alle gegevens en bestanden toegankelijk via een alleen-lezen JSON API.
 
 -
 
@@ -630,7 +642,7 @@ sys_update: Bijwerken
 
 -
 
-sys_update_available: Er is een nieuwere versie van Automad beschikbaar en klaar om te worden geïnstalleerd. <br> Maak een back-up van uw huidige installatie voordat u gaat updaten!
+sys_update_available: Er is een nieuwere versie van Automad beschikbaar en klaar om geïnstalleerd te worden. <br> Maak een back-up van uw huidige installatie voordat u gaat updaten!
 
 -
 
@@ -646,7 +658,7 @@ sys_update_not_required: Automad is up-to-date.
 
 -
 
-sys_update_progress: Even geduld en sluit het venster niet tijdens het updaten ...
+sys_update_progress: Een ogenblik geduld en sluit het venster niet tijdens het updaten ...
 
 -
 
@@ -654,7 +666,7 @@ sys_update_to: Update naar versie
 
 -
 
-sys_update_windows_warning: Zorg ervoor dat alle bestanden van uw installatie in externe programma's zijn gesloten voordat u de update uitvoert om problemen met toestemmingen te voorkomen!
+sys_update_windows_warning: Zorg ervoor dat alle bestanden van uw installatie in externe programma's zijn gesloten voordat u de update uitvoert om problemen met machtigingen te voorkomen!
 
 -
 
