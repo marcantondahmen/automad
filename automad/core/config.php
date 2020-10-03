@@ -55,7 +55,7 @@ class Config {
 	/**
 	 * 	Read configuration overrides form JSON file and set constants accordingly.
 	 *
-	 * 	@param string $file
+	 *	@param string $file
 	 */
 	 
 	public static function json($file) {
@@ -72,8 +72,8 @@ class Config {
 	/**
 	 * 	Define constant, if not defined already.
 	 * 
-	 * 	@param string $name
-	 * 	@param string $value
+	 *	@param string $name
+	 *	@param string $value
 	 */
 	 
 	public static function set($name, $value) {

@@ -56,7 +56,7 @@ class Headless {
 	 * 	Checks whether a custom headless template exists and returns its path.
 	 *  In case there is no custom template, the path to the default template is returned.
 	 * 
-	 * 	@return string The path to the template file
+	 *	@return string The path to the template file
 	 */
 
 	public static function getTemplate() {

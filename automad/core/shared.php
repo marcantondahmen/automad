@@ -101,8 +101,8 @@ class Shared {
 	/**
 	 *	Set key/value pair in data.
 	 *	
-	 * 	@param string $key
-	 * 	@param string $value
+	 *	@param string $key
+	 *	@param string $value
 	 */
 	
 	public function set($key, $value) {

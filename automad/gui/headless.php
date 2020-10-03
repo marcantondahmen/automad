@@ -57,7 +57,7 @@ class Headless extends Core\Headless {
 	/**	
 	 * 	Get the content of the template in use.
 	 * 
-	 * 	@return string The content of the template in use
+	 *	@return string The content of the template in use
 	 */
 
 	public static function loadTemplate() {
@@ -74,7 +74,7 @@ class Headless extends Core\Headless {
 	/**
 	 * 	Reset the headless template by deleting the custom template file.
 	 * 
-	 * 	@return boolean Returns true it the file existed and was deleted
+	 *	@return boolean Returns true it the file existed and was deleted
 	 */
 
 	public static function resetTemplate() {

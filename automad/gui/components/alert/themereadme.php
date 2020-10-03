@@ -56,9 +56,9 @@ class ThemeReadme {
 	/**
 	 *	Render a theme readme alert box.
 	 *
-	 * 	@param object $Theme
-	 * 	@param string $id
-	 * 	@return string The rendered alert box markup
+	 *	@param object $Theme
+	 *	@param string $id
+	 *	@return string The rendered alert box markup
 	 */
 
 	public static function render($Theme, $id = 'am-readme-modal') {

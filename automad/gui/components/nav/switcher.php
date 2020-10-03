@@ -54,10 +54,10 @@ class Switcher {
 /**
 	 *  Create a sticky switcher menu with an optional dropdown menu.
 	 *
-	 *  @param string $target
-	 *  @param array $items Main menu items
-	 *  @param array $dropdown Dropdown menu items
-	 *  @return string The rendered menu HTML
+	 *	@param string $target
+	 *	@param array $items Main menu items
+	 *	@param array $dropdown Dropdown menu items
+	 *	@return string The rendered menu HTML
 	 */
 	
 	public static function render($target, $items = array(), $dropdown = array()) {

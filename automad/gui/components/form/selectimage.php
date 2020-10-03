@@ -56,10 +56,10 @@ class SelectImage {
 	/**
 	 *	Create an image selection panel.
 	 *
-	 * 	@param array $files
-	 * 	@param string $title
-	 * 	@param boolean $basename
-	 *  @return string The HTML of the panel
+	 *	@param array $files
+	 *	@param string $title
+	 *	@param boolean $basename
+	 *	@return string The HTML of the panel
 	 */
 
 	public static function render($files, $title, $basename = false) {

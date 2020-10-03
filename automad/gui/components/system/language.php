@@ -57,7 +57,7 @@ class Language {
 	/**
 	 * 	Renders the language component.
 	 * 
-	 * 	@return string The rendered HTML
+	 *	@return string The rendered HTML
 	 */
 
 	public static function render() {

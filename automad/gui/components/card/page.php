@@ -57,11 +57,11 @@ class Page {
 	/**
 	 *	Generate thumbnail for page grid.
 	 *      
-	 *  @param string $file  
-	 *  @param float $w     
-	 *  @param float $h     
-	 *  @param string $gridW (uk-width-* suffix) 
-	 *  @return string The generated markup
+	 *	@param string $file  
+	 *	@param float $w     
+	 *	@param float $h     
+	 *	@param string $gridW (uk-width-* suffix) 
+	 *	@return string The generated markup
 	 */
 	
 	private static function thumbnail($file, $w, $h, $gridW) {
@@ -75,8 +75,8 @@ class Page {
 	/**
 	 *	Layout preview images.
 	 *
-	 * 	@param array $images
-	 * 	@return string The generated HTML 
+	 *	@param array $images
+	 *	@return string The generated HTML 
 	 */
 
 	private static function layout($images) {

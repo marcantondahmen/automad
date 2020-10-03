@@ -139,6 +139,7 @@ HTML;
 	 *	Render a file card.
 	 *	
 	 *	@param string $file
+	 *	@param string $id
 	 *	@return string The HTML of the card
 	 */
 

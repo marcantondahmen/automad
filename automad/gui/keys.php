@@ -71,8 +71,8 @@ class Keys {
 	/**
 	 * 	Get text variable keys from an array of keys.
 	 * 
-	 * 	@param array $keys
-	 * 	@return array The array with only text variables.
+	 *	@param array $keys
+	 *	@return array The array with only text variables.
 	 */
 
 	public static function filterTextKeys($keys) {
@@ -87,8 +87,8 @@ class Keys {
 	/**
 	 * 	Get settings variable keys from an array of keys.
 	 * 
-	 * 	@param array $keys
-	 * 	@return array The array with only settings variables.
+	 *	@param array $keys
+	 *	@return array The array with only settings variables.
 	 */
 
 	public static function filterSettingKeys($keys) {
@@ -173,8 +173,8 @@ class Keys {
 	/**
 	 *	Find all variable keys in templates of a given theme.
 	 *	
-	 * 	@param object $Theme
-	 * 	@return array Keys in all templates of the given Theme (without reserved keys)
+	 *	@param object $Theme
+	 *	@return array Keys in all templates of the given Theme (without reserved keys)
 	 */
 	
 	public static function inTheme($Theme) {
@@ -193,8 +193,8 @@ class Keys {
 	/**
 	 *	Cleans up an array of keys. All reserved and duplicate keys get removed.
 	 * 
-	 * 	@param array $keys
-	 * 	@return array The sorted and filtered keys array
+	 *	@param array $keys
+	 *	@return array The sorted and filtered keys array
 	 */
 
 	private static function cleanUp($keys) {

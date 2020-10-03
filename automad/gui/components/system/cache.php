@@ -58,7 +58,7 @@ class Cache {
 	/**
 	 * 	Renders the cache component.
 	 * 
-	 * 	@return string The rendered HTML
+	 *	@return string The rendered HTML
 	 */
 
 	public static function render() {

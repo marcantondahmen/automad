@@ -64,7 +64,7 @@ class PackageManager {
 	/**
 	 *	Get the array of installed packages.
 	 *
-	 * 	@return array The array with all installed packages.
+	 *	@return array The array with all installed packages.
 	 */
 
 	private static function getInstalled() {
@@ -88,7 +88,7 @@ class PackageManager {
 	 *	Get a list of theme packages available on Packagist
 	 *	where the installed ones are at the beginning.
 	 *
-	 * 	@return array The array with installed and available themes
+	 *	@return array The array with installed and available themes
 	 */
 
 	public static function getPackages() {

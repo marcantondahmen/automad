@@ -56,7 +56,7 @@ class Link {
 	/**
 	 *  Create the modal dialog for adding links.
 	 * 
-	 * 	@return string The HTML for the modal dialog
+	 *	@return string The HTML for the modal dialog
 	 */
 
 	public static function render() {

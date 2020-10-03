@@ -56,7 +56,7 @@ class Breadcrumbs {
 	/**
 	 *	Create a breadcrumb navigation based on $_GET.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 *	@return string The breadcrumb naviagtion markup
 	 */
 

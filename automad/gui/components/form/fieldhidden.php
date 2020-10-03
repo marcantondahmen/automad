@@ -55,9 +55,9 @@ class FieldHidden {
 	/**	
 	 * 	Create a hidden form field.
 	 * 
-	 *  @param string $key
-	 * 	@param string $value
-	 * 	@return string The HTML for the hidden input field
+	 *	@param string $key
+	 *	@param string $value
+	 *	@return string The HTML for the hidden input field
 	 */
 
 	public static function render($key = '', $value = '') {

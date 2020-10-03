@@ -57,9 +57,9 @@ class Readme {
 	/**
 	 *  Create the readme modal dialog.
 	 * 
-	 * 	@param string $id
-	 * 	@param string $readme
-	 * 	@return string The HTML for the modal dialog
+	 *	@param string $id
+	 *	@param string $readme
+	 *	@return string The HTML for the modal dialog
 	 */
 
 	public static function render($id, $readme) {

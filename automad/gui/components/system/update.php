@@ -56,7 +56,7 @@ class Update {
 	/**
 	 * 	Renders the update component.
 	 * 
-	 * 	@return string The rendered HTML
+	 *	@return string The rendered HTML
 	 */
 
 	public static function render() {

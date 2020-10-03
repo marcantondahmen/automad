@@ -72,7 +72,7 @@ class Debug {
 	 *	Stop timer, calculate execution time, get user & server constants 
 	 *	and return a console log item for every item in the buffer array.
 	 *
-	 * 	@return string The Javascript console log
+	 *	@return string The Javascript console log
 	 */
 	
 	public static function consoleLog() {
@@ -123,7 +123,7 @@ class Debug {
 	/**
 	 * 	Return the buffer array.
 	 * 
-	 * 	@return array The log buffer array
+	 *	@return array The log buffer array
 	 */
 
 	public static function getLog() {

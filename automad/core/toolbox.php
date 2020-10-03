@@ -85,7 +85,7 @@ class Toolbox {
 	 * 	- class: false (class of <ul> element)
 	 * 	- excludeHidden: false (exclude hidden pages)
 	 *      
-	 * 	@param array $options
+	 *	@param array $options
 	 *	@return string The HTML of a breadcrumb navigation
 	 */
 	
@@ -266,7 +266,7 @@ class Toolbox {
 	 *	Generate a list for the navigation below the current page.   
 	 *  Options are the same like those for nav() except the 'context' option.
 	 *
-	 * 	@param array $options
+	 *	@param array $options
 	 *	@return string The HTML of the navigation list	
 	 */
 	
@@ -457,8 +457,8 @@ class Toolbox {
 	/**
 	 *	Merge passed key-value pairs ($options) with current query string.
 	 *
-	 *  @param array $options
-	 *  @return string The merged query string
+	 *	@param array $options
+	 *	@return string The merged query string
 	 */
 	
 	public function queryStringMerge($options) {
@@ -471,7 +471,7 @@ class Toolbox {
 	/**
 	 *	Redirect page.
 	 *      
-	 *  @param array $options
+	 *	@param array $options
 	 */
 	
 	public function redirect($options) {
@@ -492,7 +492,7 @@ class Toolbox {
 	/**
 	 *	Set shared or session data variables by passing an array of key/value pairs.
 	 *	
-	 * 	@param array $options
+	 *	@param array $options
 	 */
 	
 	public function set($options) {

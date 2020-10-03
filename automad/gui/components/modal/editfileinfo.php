@@ -56,9 +56,9 @@ class EditFileInfo {
 	/**
 	 *  Create the file edit modal dialog.
 	 * 
-	 * 	@param string $title
-	 * 	@param string $url
-	 * 	@return string The HTML for the modal dialog
+	 *	@param string $title
+	 *	@param string $url
+	 *	@return string The HTML for the modal dialog
 	 */
 
 	public static function render($title, $url = false) {

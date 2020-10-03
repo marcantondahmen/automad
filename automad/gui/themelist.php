@@ -89,7 +89,7 @@ class Themelist {
 	 *	To be a valid theme, a directory must contain a "theme.json" file and at least one ".php" file.
 	 *      
 	 *	@param string $path
-	 *  @return array An array containing all themes as objects.
+	 *	@return array An array containing all themes as objects.
 	 */
 	
 	private function collectThemes($path = false) {
@@ -128,7 +128,7 @@ class Themelist {
 	/**
 	 *	Get installed Composer packages.
 	 *	
-	 * 	@return array An associative array of installed Composer packages
+	 *	@return array An associative array of installed Composer packages
 	 */
 	
 	private function getComposerInstalled() {
@@ -160,8 +160,8 @@ class Themelist {
 	 * 	Get the theme object by the key in the themelist array 
 	 * 	corresponding to the AM_KEY_THEME variable.
 	 *
-	 *  @param string $key
-	 *  @return object The requested theme object
+	 *	@param string $key
+	 *	@return object The requested theme object
 	 */
 	
 	public function getThemeByKey($key) {
@@ -176,7 +176,7 @@ class Themelist {
 	/**
 	 * 	Return the Theme objects array. 
 	 *
-	 * 	@return array The array of Theme objects
+	 *	@return array The array of Theme objects
 	 */
 	
 	public function getThemes() {

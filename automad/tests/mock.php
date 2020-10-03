@@ -15,8 +15,8 @@ class Mock extends TestCase {
 	 *	Create a mock of the Automad object with a single page.
 	 * 	A template can be passed optionally to the page.
 	 * 	
-	 * 	@param string $template
-	 * 	@return object The Automad Mock
+	 *	@param string $template
+	 *	@return object The Automad Mock
 	 */
 		
 	public function createAutomad($template = '') {

@@ -63,8 +63,8 @@ class Theme {
 	/**
 	 * 	The constructor.
 	 *
-	 * 	@param string $themeJSON
-	 * 	@param array $composerInstalled
+	 *	@param string $themeJSON
+	 *	@param array $composerInstalled
 	 */
 	
 	public function __construct($themeJSON, $composerInstalled) {
@@ -132,8 +132,8 @@ class Theme {
 	/**
 	 *	Make theme data accessible as page properties.
 	 *      
-	 * 	@param string $key The property name
-	 * 	@return string The returned value from the data array
+	 *	@param string $key The property name
+	 *	@return string The returned value from the data array
 	 */
 	
 	public function __get($key) {
@@ -148,8 +148,8 @@ class Theme {
 	/**
 	 * 	Return the tooltip for the requested variable name (key in the data array).
 	 *
-	 * 	@param string $key
-	 * 	@return string The tooltip text
+	 *	@param string $key
+	 *	@return string The tooltip text
 	 */
 	
 	public function getTooltip($key) {

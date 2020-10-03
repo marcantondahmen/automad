@@ -91,8 +91,8 @@ class FileSystem {
 	/**
 	 * 	Get file extension for images based on mime types.
 	 * 
-	 * 	@param string $file
-	 * 	@return	string The extension or false
+	 *	@param string $file
+	 *	@return	string The extension or false
 	 */
 
 	public static function getImageExtensionFromMimeType($file) {
@@ -137,7 +137,7 @@ class FileSystem {
 	 *  But since '/tmp' is only available on macos and linux, 
 	 *  sys_get_temp_dir() is used as fallback.
 	 *
-	 *  @return string The path to the temp dir
+	 *	@return string The path to the temp dir
 	 */
 	
 	public static function getTmpDir() {
@@ -160,9 +160,9 @@ class FileSystem {
 	 *	This method always returns an array, even though glob() returns false 
 	 *	on some systems instead of empty arrays.
 	 *
-	 * 	@param string $pattern
-	 * 	@param integer $flags
-	 * 	@return array The list of matching files
+	 *	@param string $pattern
+	 *	@param integer $flags
+	 *	@return array The list of matching files
 	 */
 
 	public static function glob($pattern, $flags = 0) {
@@ -234,8 +234,8 @@ class FileSystem {
 	/**
 	 *	Create directory if not existing.
 	 *
-	 * 	@param string $path
-	 * 	@return boolean True on success, else false
+	 *	@param string $path
+	 *	@return boolean True on success, else false
 	 */
 	
 	public static function makeDir($path) {
@@ -268,9 +268,9 @@ class FileSystem {
 	/**
 	 *	Write content to a file and create the parent directory if needed.
 	 *
-	 * 	@param string $file
-	 * 	@param string $content
-	 * 	@return boolean True on success, else false
+	 *	@param string $file
+	 *	@param string $content
+	 *	@return boolean True on success, else false
 	 */
 	
 	public static function write($file, $content) {

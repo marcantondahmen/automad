@@ -56,8 +56,8 @@ class SelectTemplate {
 	/**
 	 *	Create a select box containing all installed themes/templates to be included in a HTML form.
 	 *
-	 * 	@param object $Automad
-	 * 	@param object $Themelist
+	 *	@param object $Automad
+	 *	@param object $Themelist
 	 *	@param string $name
 	 *	@param string $selectedTheme
 	 *	@param string $selectedTemplate

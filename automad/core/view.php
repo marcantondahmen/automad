@@ -448,11 +448,11 @@ class View {
 	/**
 	 *	Process a file related snippet like <@ foreach "*.jpg" { options } @> ... <@ end @>.
 	 *      
-	 *  @param string $file
-	 *  @param array $options  
-	 *  @param string $snippet  
-	 *  @param string $directory
-	 *  @return string $html           
+	 *	@param string $file
+	 *	@param array $options  
+	 *	@param string $snippet  
+	 *	@param string $directory
+	 *	@return string $html           
 	 */
 	
 	private function processFileSnippet($file, $options, $snippet, $directory) {
@@ -971,8 +971,8 @@ class View {
 	 *	Resize any image in the output in case it has a specified size as query string like
 	 *	for example "/shared/image.jpg?200x200".
 	 *
-	 * 	@param string $str
-	 * 	@return string The processed string
+	 *	@param string $str
+	 *	@return string The processed string
 	 */
 
 	public function resizeImages($str) {
@@ -1056,8 +1056,8 @@ class View {
 	/**
 	 *	Strip whitespace before or after delimiters when using "<@~" or "~@>".
 	 *
-	 * 	@param string $str
-	 * 	@return string The processed string
+	 *	@param string $str
+	 *	@return string The processed string
 	 */
 
 	private function stripWhitespace($str) {

@@ -58,10 +58,10 @@ class Field {
 	/**
 	 *	Create markup for a markdown editor.
 	 *
-	 * 	@param string $fullscreenBar
-	 * 	@param string $attr
-	 * 	@param string $value
-	 * 	@return string The rendered markup.
+	 *	@param string $fullscreenBar
+	 *	@param string $attr
+	 *	@param string $value
+	 *	@return string The rendered markup.
 	 */
 
 	private static function fieldText($fullscreenBar, $attr, $value) {
@@ -90,8 +90,8 @@ HTML;
 	/**
 	 *	Create markup for an image field.
 	 *
-	 * 	@param string $attr
-	 * 	@return string The rendered markup
+	 *	@param string $attr
+	 *	@return string The rendered markup
 	 */
 
 	private static function fieldImage($attr) {
@@ -111,8 +111,8 @@ HTML;
 	/**
 	 *	Create markup for an URL field.
 	 *
-	 * 	@param string $attr
-	 * 	@return string The rendered markup
+	 *	@param string $attr
+	 *	@return string The rendered markup
 	 */
 
 	private static function fieldUrl($attr) {
@@ -132,10 +132,10 @@ HTML;
 	/**
 	 *	Create markup for a date field.
 	 *
-	 * 	@param string $attr
-	 * 	@param string $attrDate
-	 * 	@param string $attrTime
-	 * 	@return string The rendered markup
+	 *	@param string $attr
+	 *	@param string $attrDate
+	 *	@param string $attrTime
+	 *	@return string The rendered markup
 	 */
 
 	private static function fieldDate($attr, $attrDate, $attrTime) {
@@ -173,12 +173,12 @@ HTML;
 	/**
 	 *	Create markup for a checkbox with optional 'default' option for page data.
 	 *
-	 * 	@param string $text
-	 * 	@param string $attr
-	 * 	@param string $value
-	 * 	@param string $shared
-	 * 	@param boolean $isPage
-	 * 	@return string The rendered markup
+	 *	@param string $text
+	 *	@param string $attr
+	 *	@param string $value
+	 *	@param string $shared
+	 *	@param boolean $isPage
+	 *	@return string The rendered markup
 	 */
 
 	private static function fieldCheckbox($text, $attr, $value, $shared, $isPage) {
@@ -253,9 +253,9 @@ HTML;
 	/**
 	 *	Create markup for a color field.
 	 *
-	 * 	@param string $color
-	 * 	@param string $attr
-	 * 	@return string The rendered markup
+	 *	@param string $color
+	 *	@param string $attr
+	 *	@return string The rendered markup
 	 */
 
 	 private static function fieldColor($color, $attr) {
@@ -273,10 +273,10 @@ HTML;
 	/**
 	 *	Create markup for a block editor.
 	 *
-	 * 	@param string $editorId
-	 * 	@param string $fullscreenBar
-	 * 	@param string $value
-	 * 	@return string The rendered markup 
+	 *	@param string $editorId
+	 *	@param string $fullscreenBar
+	 *	@param string $value
+	 *	@return string The rendered markup 
 	 */
 
 	private static function fieldBlockEditor($editorId, $fullscreenBar, $attr, $value) {
@@ -295,9 +295,9 @@ HTML;
 	/**
 	 *	Create markup for a default text area.
 	 *
-	 * 	@param string $attr
-	 * 	@param string $value
-	 * 	@return string The rendered markup
+	 *	@param string $attr
+	 *	@param string $value
+	 *	@return string The rendered markup
 	 */
 	
 	 private static function fieldDefault($attr, $value) {
@@ -315,9 +315,9 @@ HTML;
 	/**
 	 *	Return the fullscreen bar markup when not in in-page edit mode.
 	 *
-	 * 	@param object $Automad
-	 * 	@param string $label
-	 * 	@return string The rendered markup
+	 *	@param object $Automad
+	 *	@param string $label
+	 *	@return string The rendered markup
 	 */
 
 	 private static function fullscreenBar($Automad, $label) {
@@ -341,7 +341,7 @@ HTML;
 	/**
 	 *	Check if request is made in in-page edit mode.
 	 *
-	 * 	@return string The converted label.
+	 *	@return string The converted label.
 	 */
 
 	private static function isInPage() {
@@ -354,9 +354,9 @@ HTML;
 	/**
 	 *	Return the label markup when not in in-page edit mode.
 	 *
-	 * 	@param string $label
-	 * 	@param string $id
-	 * 	@return string The rendered markup
+	 *	@param string $label
+	 *	@param string $id
+	 *	@return string The rendered markup
 	 */
 
 	private static function labelHtml($label, $id) {
@@ -375,8 +375,8 @@ HTML;
 	/**
 	 *	Return the remove button markup if needed.
 	 *
-	 * 	@param boolean $hasRemoveButton
-	 * 	@return string The rendered markup
+	 *	@param boolean $hasRemoveButton
+	 *	@return string The rendered markup
 	 */
 
 	private static function removeButton($hasRemoveButton) {
@@ -398,8 +398,8 @@ HTML;
 	/**
 	 *	Convert camel case key into a human readable label.
 	 *
-	 * 	@param string $key
-	 * 	@return string The converted label.
+	 *	@param string $key
+	 *	@return string The converted label.
 	 */
 	
 	public static function labelFromKey($key) {
@@ -415,9 +415,9 @@ HTML;
 	/**
 	 *	Create tooltip dropdown.
 	 *
-	 * 	@param object $Theme
-	 * 	@param string $key
-	 * 	@return string The markup for the dropdown.
+	 *	@param object $Theme
+	 *	@param string $key
+	 *	@return string The markup for the dropdown.
 	 */
 
 	private static function tooltip($Theme, $key) {
@@ -455,13 +455,13 @@ HTML;
 	/**
 	 *	Create a form field depending on the name.
 	 *      
-	 * 	@param object $Automad
-	 *  @param string $key          
-	 *  @param string $value        
-	 *  @param boolean $removeButton 
-	 *  @param object $Theme
-	 * 	@param string $label
-	 *  @return string The generated HTML            
+	 *	@param object $Automad
+	 *	@param string $key          
+	 *	@param string $value        
+	 *	@param boolean $removeButton 
+	 *	@param object $Theme
+	 *	@param string $label
+	 *	@return string The generated HTML            
 	 */
 	
 	public static function render($Automad, $key = '', $value = '', $removeButton = false, $Theme = false, $label = false) {

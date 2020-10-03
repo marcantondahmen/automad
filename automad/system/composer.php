@@ -160,7 +160,7 @@ class Composer {
 	 *	in case Composer was already used before. In case Composer hasn't been used before,
 	 *	a new path will be generated and save to the cache.
 	 *
-	 * 	@return string The path to the installation directory
+	 *	@return string The path to the installation directory
 	 */
 
 	private function getInstallDir() {
@@ -189,7 +189,7 @@ class Composer {
 	/**	
 	 * 	Generate a fresh installation directory for Composer.
 	 * 
-	 * 	@return string The path to the directory
+	 *	@return string The path to the directory
 	 */
 
 	private function newInstallDir() {
@@ -208,9 +208,9 @@ class Composer {
 	/**	
 	 * 	Run a given Composer command.
 	 * 	
-	 * 	@param string $command
-	 *  @param bool $getBuffer
-	 * 	@return string The command output on false or in case $getBuffer is true
+	 *	@param string $command
+	 *	@param bool $getBuffer
+	 *	@return string The command output on false or in case $getBuffer is true
 	 */
 
 	public function run($command, $getBuffer = false) {

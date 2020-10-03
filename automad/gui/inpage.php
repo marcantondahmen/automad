@@ -72,8 +72,8 @@ class InPage {
 	/**
 	 *  Process the page markup and inject all needed GUI markup if an user is logged in.
 	 *      
-	 *  @param string $str
-	 *  @return string The processed $str
+	 *	@param string $str
+	 *	@return string The processed $str
 	 */
 	
 	public function createUI($str) {
@@ -92,8 +92,8 @@ class InPage {
 	/**
 	 *	Inject GUI markup like bottom menu and modal dialogs.
 	 *      
-	 *  @param string $str
-	 *  @return string The processed $str
+	 *	@param string $str
+	 *	@return string The processed $str
 	 */
 	
 	private function injectMarkup($str) {
@@ -156,8 +156,8 @@ HTML;
 	/**
 	 *	Add all needed assets for inpage-editing to the <head> element. 
 	 *      
-	 *  @param string $str
-	 *  @return string The processed markup
+	 *	@param string $str
+	 *	@return string The processed markup
 	 */
 	
 	private function injectAssets($str) {
@@ -187,10 +187,10 @@ HTML;
 	/**
 	 *  Inject a temporary markup for an edit button.
 	 *      
-	 *  @param string $value
-	 *  @param string $key
-	 *  @param object $Context
-	 *  @return string The processed $value 
+	 *	@param string $value
+	 *	@param string $key
+	 *	@param object $Context
+	 *	@return string The processed $value 
 	 */
 	
 	public function injectTemporaryEditButton($value, $key, $Context) {
@@ -214,8 +214,8 @@ HTML;
 	 * 	Process the temporary buttons to edit variable in the page. 
 	 *  All invalid buttons (within tags and in links) will be removed.
 	 *      
-	 *  @param string $str
-	 *  @return string The processed markup
+	 *	@param string $str
+	 *	@return string The processed markup
 	 */
 	
 	private function processTemporaryEditButtons($str) {

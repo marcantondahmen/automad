@@ -232,7 +232,7 @@ class Pagelist {
 	/**
 	 *	Return the default options array.
 	 *      
-	 * 	@return array Default options
+	 *	@return array Default options
 	 */
 	
 	public function getDefaults() {
@@ -372,7 +372,7 @@ class Pagelist {
 	/**
 	 *	Calculate the number of pages of the pagination.
 	 *      
-	 * 	@return number The number of pages of the current pagelist.
+	 *	@return number The number of pages of the current pagelist.
 	 */
 	
 	public function getPaginationCount() {

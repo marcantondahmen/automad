@@ -59,7 +59,7 @@ class Group {
 	 *  Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
 	 *  Note used prefix must match the ID selectors defined in 'add_variable.js'.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 *	@param array $keys
 	 *	@param array $data
 	 *	@param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)

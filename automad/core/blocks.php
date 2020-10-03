@@ -69,7 +69,7 @@ class Blocks {
 	/**	
 	 * 	Inject block assets into the header of a page.
 	 * 	
-	 * 	@return string the processed HTML
+	 *	@return string the processed HTML
 	 */
 
 	public static function injectAssets($str) {
@@ -101,9 +101,9 @@ HTML;
 	/**	
 	 * 	Render blocks created by the EditorJS block editor.
 	 * 	
-	 * 	@param string $json
-	 * 	@param object $Automad
-	 * 	@return string the rendered HTML
+	 *	@param string $json
+	 *	@param object $Automad
+	 *	@return string the rendered HTML
 	 */
 
 	public static function render($json, $Automad) {

@@ -55,8 +55,8 @@ class Bar {
 	/**
 	 *	Create the fullscreen bar markup.
 	 *
-	 * 	@param string $title
-	 * 	@param string $label
+	 *	@param string $title
+	 *	@param string $label
 	 *	@return string The breadcrumb naviagtion markup
 	 */
 

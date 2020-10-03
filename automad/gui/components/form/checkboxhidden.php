@@ -55,9 +55,9 @@ class CheckboxHidden {
 	/**	
 	 * 	Create a checkbox to hide a page.
 	 * 
-	 *  @param string $key
-	 * 	@param string $hidden
-	 * 	@return string The HTML for the hidden input field
+	 *	@param string $key
+	 *	@param string $hidden
+	 *	@return string The HTML for the hidden input field
 	 */
 
 	public static function render($key, $hidden = false) {

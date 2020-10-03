@@ -55,12 +55,12 @@ class Select {
 	/**
 	 *	Create a select button.
 	 *
-	 *  @param string $name
-	 *  @param array $values
-	 *  @param string $selected
-	 *  @param string $prefix
-	 * 	@param string $class
-	 *  @return string The HTML for the button
+	 *	@param string $name
+	 *	@param array $values
+	 *	@param string $selected
+	 *	@param string $prefix
+	 *	@param string $class
+	 *	@return string The HTML for the button
 	 */
 	
 	public static function render($name, $values, $selected, $prefix = '', $class = '') {

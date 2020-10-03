@@ -13,8 +13,8 @@ class Str_Test extends TestCase {
 	
 	
 	/**
-	 * 	@dataProvider dataForTestDefIsEqual
-	 * 	@testdox def("$str", "$defaultValue") equals "$expected" 
+	 *	@dataProvider dataForTestDefIsEqual
+	 *	@testdox def("$str", "$defaultValue") equals "$expected" 
 	 */
 	
 	public function testDefIsEqual($str, $defaultValue, $expected) {

@@ -101,7 +101,7 @@ class Str {
 	 *	Set a default value for $str in case $str is empty.
 	 *	
 	 *	@param string $str
-	 *	@param string $default
+	 *	@param string $defaultValue
 	 *	@return string The default value
 	 */
 
@@ -143,8 +143,8 @@ class Str {
 	/**
 	 *	Find the URL of the first image within rendered HTML markup.
 	 *
-	 * 	@param string $str
-	 * 	@return string The URL of the first image or false 
+	 *	@param string $str
+	 *	@return string The URL of the first image or false 
 	 */
 
 	public static function findFirstImage($str) {
@@ -161,8 +161,8 @@ class Str {
 	/**
 	 *	Find the first paragraph in rendered HTML and return its inner HTML.
 	 *
-	 * 	@param string $str
-	 * 	@return string The inner HTML of the first paragraph or false
+	 *	@param string $str
+	 *	@return string The inner HTML of the first paragraph or false
 	 */
 
 	public static function findFirstParagraph($str) {
@@ -205,9 +205,9 @@ class Str {
 	/**
 	 *	Perform a regex match.
 	 *      
-	 * 	@param string $str
-	 * 	@param string $regex
-	 * 	@return number 1 or 0
+	 *	@param string $str
+	 *	@param string $regex
+	 *	@return number 1 or 0
 	 */
 	
 	public static function match($str, $regex) {
@@ -220,10 +220,10 @@ class Str {
 	/**
 	 *	Search and replace by regex.
 	 *      
-	 * 	@param string $str
-	 * 	@param string $regex  
-	 * 	@param string $replace 
-	 * 	@return string The processed string          
+	 *	@param string $str
+	 *	@param string $regex  
+	 *	@param string $replace 
+	 *	@return string The processed string          
 	 */
 	
 	public static function replace($str, $regex, $replace) {
@@ -310,9 +310,9 @@ class Str {
 	/**
 	 *	Strip substring from end of string.
 	 *      
-	 * 	@param string $str
-	 * 	@param string $end
-	 * 	@return string The processed string
+	 *	@param string $str
+	 *	@param string $end
+	 *	@return string The processed string
 	 */
 	
 	public static function stripEnd($str, $end) {
@@ -325,9 +325,9 @@ class Str {
 	/**
 	 *	Strip substring from start of string.
 	 *      
-	 * 	@param string $str
-	 * 	@param string $start
-	 * 	@return string The processed string
+	 *	@param string $str
+	 *	@param string $start
+	 *	@return string The processed string
 	 */
 	
 	public static function stripStart($str, $start) {

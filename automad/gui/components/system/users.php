@@ -55,7 +55,7 @@ class Users {
 	/**
 	 * 	Renders the users component.
 	 * 
-	 * 	@return string The rendered HTML
+	 *	@return string The rendered HTML
 	 */
 
 	public static function render() {

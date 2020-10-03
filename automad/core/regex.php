@@ -94,8 +94,8 @@ class Regex {
 	 *	relative reference to the wrapping main variable pattern to match variables 
 	 *	within parameters.
 	 * 
-	 * 	@param boolean $isVariableSubpattern
-	 * 	@return string The regex matching a comma separated parameter string.
+	 *	@param boolean $isVariableSubpattern
+	 *	@return string The regex matching a comma separated parameter string.
 	 */
 	
 	public static function csv($isVariableSubpattern = false) {
@@ -151,7 +151,7 @@ class Regex {
 	/**
 	 *	Return regex to match any temporary in-page edit button.
 	 *      
-	 * 	@return string The regex
+	 *	@return string The regex
 	 */
 	
 	public static function inPageEditButton() {
@@ -266,7 +266,7 @@ class Regex {
 	 * 	Return a regex pattern to match key/value pairs in an invalid JSON string 
 	 * 	without valid quoting/escaping.
 	 * 	 
-	 * 	@return string The generated pattern.
+	 *	@return string The generated pattern.
 	 */
 	
 	public static function keyValue() {
@@ -336,8 +336,8 @@ class Regex {
 	/**
 	 *	Return the regex to match a single function parameter (pipe).
 	 *	
-	 *  @param string $subpatternVar
-	 * 	@return string The regex matching a function parameter.
+	 *	@param string $subpatternVar
+	 *	@return string The regex matching a function parameter.
 	 */
 
 	public static function value($subpatternVar) {
@@ -389,7 +389,7 @@ class Regex {
 	/**
 	 * 	A simplified pattern to match all used variable names in a template (GUI).
 	 * 	
-	 * 	@return string The regex pattern.
+	 *	@return string The regex pattern.
 	 */
 	
 	public static function variableKeyGUI() {

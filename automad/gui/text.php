@@ -63,7 +63,7 @@ class Text {
 	/**
 	 *  Short version of echo Text::get().
 	 *
-	 *  @param string $key
+	 *	@param string $key
 	 */
 	
 	public static function e($key) {
@@ -127,7 +127,7 @@ class Text {
 	/**
 	 * 	Return the modules as object to be used in heredoc strings.
 	 * 
-	 * 	@return object The modules array as object
+	 *	@return object The modules array as object
 	 */
 
 	public static function getObject() {

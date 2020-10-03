@@ -4,9 +4,9 @@
  *
  * 	An Automad meta tags extension.
  *
- * 	@author Marc Anton Dahmen
- * 	@copyright Copyright (C) 2018 Marc Anton Dahmen - <https://marcdahmen.de> 
- * 	@license MIT license
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (C) 2018 Marc Anton Dahmen - <https://marcdahmen.de> 
+ *	@license MIT license
  */
 
 namespace Standard;
@@ -21,9 +21,9 @@ class MetaTags {
 	/**
 	 *  The main function.
 	 *
-	 * 	@param array $options
-	 * 	@param object $Automad
-	 * 	@return string the output of the extension
+	 *	@param array $options
+	 *	@param object $Automad
+	 *	@return string the output of the extension
 	 */
 	
 	public function MetaTags($options, $Automad) {

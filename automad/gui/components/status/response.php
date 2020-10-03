@@ -60,8 +60,8 @@ class Response {
 	/**
 	 * 	Get the current status response of a given system item or packages.
 	 * 	
-	 * 	@param string $item
-	 * 	@return array The output array with the generated status return markup
+	 *	@param string $item
+	 *	@return array The output array with the generated status return markup
 	 */
 
 	public static function render($item) {
