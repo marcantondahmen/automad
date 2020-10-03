@@ -51,7 +51,8 @@ class AutomadFilelist {
 			<div class="am-block-icon">${AutomadFilelist.toolbox.icon}</div>
 			<div class="uk-text-center">${AutomadFilelist.toolbox.title}</div>
 			<hr>
-			<div class="am-block-file-select uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
+			${create.label('Select Template', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
+			<div class="am-block-file-select uk-form-select uk-button uk-button-primary uk-text-left uk-width-1-1" data-uk-form-select>
 				<i class="uk-icon-file"></i>&nbsp;
 				<span></span>
 				${create.select(

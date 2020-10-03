@@ -61,7 +61,8 @@ class AutomadPagelist {
 			<hr>
 			<ul class="uk-grid">
 				<li class="uk-width-medium-1-1">
-					<div class="am-block-file-select uk-form-select uk-button uk-button-large uk-text-left uk-width-1-1" data-uk-form-select>
+					${create.label('Select Template', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
+					<div class="am-block-file-select uk-form-select uk-button uk-button-primary uk-text-left uk-width-1-1" data-uk-form-select>
 						<i class="uk-icon-file"></i>&nbsp;
 						<span></span>
 						${create.select(

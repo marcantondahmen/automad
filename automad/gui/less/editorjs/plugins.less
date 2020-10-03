@@ -211,9 +211,12 @@
 
 		&:extend(.uk-form-label all);
 		display: inline-block;
-		margin-top: @utility-margin-small !important;
 		margin-bottom: @form-stacked-margin-bottom;
 		
+		&:not(.uk-margin-top-remove) {
+			margin-top: @utility-margin-small !important;
+		}
+
 		& + *,
 		& + *:empty {
 			margin-top: 0 !important;
@@ -221,7 +224,7 @@
 
 	}
 
-	& hr + .uk-form-label {
+	& .ce-block hr + .am-block-label {
 		margin-top: 0 !important;
 	}
 

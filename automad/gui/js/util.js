@@ -68,9 +68,9 @@
 
 			},
 
-			label: function(text) {
+			label: function(text, cls = ['am-block-label']) {
 
-				var label = Automad.util.create.element('label', ['am-block-label']);
+				var label = Automad.util.create.element('label', cls);
 
 				label.textContent = text;
 
