@@ -144,6 +144,25 @@ class AutomadTextareaCode extends AutomadTextarea {
 
 }
 
+class AutomadTextareaMarkdown extends AutomadTextarea {
+
+	static get toolbox() {
+		return {
+			icon: '<svg width="22" height="22" viewBox="0 0 22 22" style="enable-background:new 0 0 22 22;" xml:space="preserve"><path d="M19.56,3.85H2.44C1.1,3.85,0,4.94,0,6.29v9.42c0,1.35,1.1,2.44,2.44,2.44h17.12c1.35,0,2.44-1.1,2.44-2.44V6.29 C22,4.94,20.9,3.85,19.56,3.85z M20.04,15.71c0,0.26-0.22,0.48-0.48,0.48H2.44c-0.27,0-0.48-0.22-0.48-0.48V6.29 c0-0.27,0.22-0.48,0.48-0.48h17.12c0.26,0,0.48,0.21,0.48,0.48V15.71z"/><path d="M3.88,14.27V7.73h1.92l1.92,2.4l1.92-2.4h1.92v6.54H9.65v-3.75l-1.92,2.4l-1.92-2.4v3.75H3.88z M15.9,14.27l-2.88-3.17h1.92 V7.73h1.92v3.37h1.92L15.9,14.27z"/></svg>',
+			title: 'Markdown'
+		};
+	}
+
+	label() {
+		return 'Markdown';
+	}
+
+	placeholder() {
+		return '';
+	}
+
+}
+
 class AutomadTextareaRaw extends AutomadTextarea {
 
 	static get toolbox() {

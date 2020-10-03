@@ -119,6 +119,7 @@
 						},
 						pagelist: AutomadPagelist,
 						filelist: AutomadFilelist,
+						markdown: AutomadTextareaMarkdown,
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
