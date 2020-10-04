@@ -121,14 +121,20 @@
 
 							if (data.buffer) {
 
-								var json = JSON.parse(data.buffer),
-									outdated = json.installed;
+								try {
 
-								for (let i = 0; i < outdated.length; i++) {
+									var json = JSON.parse(data.buffer),
+										outdated = json.installed;
 
-									$('[data-package="' + outdated[i].name + '"] form.uk-hidden')
-									.removeClass('uk-hidden');
-									
+									for (let i = 0; i < outdated.length; i++) {
+										$('[data-package="' + outdated[i].name + '"] form.uk-hidden')
+										.removeClass('uk-hidden');
+									}
+
+								} catch (e) {
+
+									return false;
+
 								}
 
 							}

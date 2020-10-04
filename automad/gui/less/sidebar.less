@@ -44,6 +44,10 @@
 		width: @am-sidebar-width;
 		opacity: 1 !important;	
 	}	
+
+	& [data-am-status]:empty {
+		display: none;
+	}
 	
 	&.uk-modal {
 		background-color: fade(@am-bg, 70%);
