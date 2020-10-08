@@ -97,7 +97,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 									<?php Text::e('sys_update_to'); ?>
 									<b><?php echo $version; ?></b>
 								</button>
-								<a href="https://automad.org/release-notes" class="uk-button uk-button-link" target="_blank">
+								<a href="https://automad.org/release-notes" class="uk-button uk-button-link uk-hidden-small" target="_blank">
 									<i class="uk-icon-file-text-o"></i>&nbsp;
 									Release Notes
 								</a>

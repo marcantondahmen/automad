@@ -52,17 +52,17 @@
 	border-radius: @am-radius;
 	overflow: hidden;
 	position: relative;
-	padding-left: 46px;
+	padding-left: 40px;
 	border: @am-border-width solid @am-border-dark-color;
 	.shadow;
 	
 	&:before {	
 		content: '\f0eb';
 		position: absolute;
-		left: 0;
+		left: 5px;
 		top: 0;
 		bottom: 0;
-		width: 46px;
+		width: 35px;
 		text-align: center;
 		padding: @alert-padding 0;
 		font-family: FontAwesome;
@@ -74,6 +74,18 @@
 		color: inherit;
 		background-color: transparent;
 		.smooth-fonts;
+	}
+
+	@media (max-width: 500px) {
+
+		padding-left: @alert-padding;
+		padding-top: 45px;
+
+		&:before {
+			left: @alert-padding;
+			text-align: left;
+		}
+
 	}
 
 	&-success {
