@@ -34,7 +34,7 @@
 
 
 @accordion-title-margin-bottom:         0;
-@accordion-title-padding-vertical:      5px;
+@accordion-title-padding-vertical:      0.36rem;
 @accordion-title-padding-horizontal:    0;
 @accordion-title-font-size:             1rem;
 @accordion-title-line-height:           @base-body-line-height;
@@ -46,8 +46,8 @@
 
 .hook-accordion() {
     & [data-wrapper] {
-        margin: 0 -10px;
-        padding: 0 10px;
+        margin: 0 -0.71rem;
+        padding: 0 0.71rem;
     }
 }
  
@@ -55,8 +55,8 @@
 	
 	position: relative;
 	margin-top: @utility-margin;
-	margin-left: 15px;
-	padding: 0 8px;
+	margin-left: 1.1rem;
+	padding: 0 0.57rem;
 	color: @am-text;
 	font-weight: inherit;
 	line-height: @button-height;
@@ -70,18 +70,18 @@
 	&:before {
 		content: '\f054';
 		position: absolute;
-		width: 12px;
-		top: 12px;
-		left: -15px;
+		width: 0.86rem;
+		top: 0.86rem;
+		left: -1.1rem;
 		&:extend([class*='uk-icon-'] all);
 		text-align: center;
 		font-size: 0.8em;
-		padding-right: 4px;
+		padding-right: 0.29rem;
 	}
 	
 	&.uk-active:before {
 		content: '\f078';
-		top: 10px;
+		top: 0.71rem;
 	}
 
 }

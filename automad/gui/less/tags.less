@@ -34,10 +34,10 @@
 
 
 @am-tag-font-size: 	@button-small-font-size;
-@am-tag-height: 	20px;
-@am-tag-padding: 	0 8px;
+@am-tag-height: 	1.43rem;
+@am-tag-padding: 	0 0.57rem;
 @am-tag-radius:  	@am-tag-height;
-@am-tag-margin: 	8px;
+@am-tag-margin: 	0.57rem;
 
 [data-am-tags] {
 	box-sizing: border-box;
@@ -76,12 +76,12 @@
 				& .close {
 					
 					&:extend(.uk-close);
-					margin-top: -1px;
-					margin-left: -4px;
-					margin-right: -9px;
-					padding: 0 3px;
+					margin-top: -0.072rem;
+					margin-left: -0.29rem;
+					margin-right: -0.64rem;
+					padding: 0 0.21rem;
 					cursor: pointer;
-					font-size: 14px;
+					font-size: 1rem;
 					line-height: @am-tag-height;
 					vertical-align: top;
 					
@@ -110,8 +110,8 @@
 		display: inline-block;
 		box-sizing: border-box;
 		position: relative;
-		top: -1px;
-		width: 120px !important;
+		top: -0.072rem;
+		width: 8.57rem !important;
 		height: @am-tag-height;
 		min-height: 0;
 		margin: 0;
@@ -119,7 +119,7 @@
 		font-size: @am-tag-font-size;
 		line-height: @am-tag-height - (2 * @am-border-width);
 		border-radius: @am-tag-radius;
-		border-width: 1px;
+		border-width: @am-border-width;
 		border-color: @am-success;
 		
 		&:not(:focus) {
@@ -133,7 +133,7 @@
 		padding: 0;
 		margin: 0;
 		position: absolute;
-		top: -500px;
+		top: -35.71rem;
 		z-index: -1;
 		visibility: hidden;
 	}

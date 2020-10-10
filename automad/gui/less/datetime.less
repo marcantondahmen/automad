@@ -54,7 +54,7 @@
 			min-height: @am-datetime-inner-height;
 			max-height: @am-datetime-inner-height;
 			border: none;
-			padding-top: 4px;
+			padding-top: 0.29rem;
 			
 			&,
 			&:focus {
@@ -65,12 +65,12 @@
 		}
 			
 		&:first-of-type {
-			width: 140px;
+			width: 10rem;
 			margin-left: -@am-border-width;
 		}
 		
 		&:last-of-type {
-			width: ~"calc(100% - 140px - @{am-datetime-inner-height} + @{am-border-width})";	
+			width: ~"calc(100% - 10rem - @{am-datetime-inner-height} + @{am-border-width})";	
 		}
 		
 		& > i {
@@ -78,7 +78,7 @@
 		}
 		
 		& .uk-autocomplete input {
-			padding-left: (@form-icon-width + 4px) !important;
+			padding-left: (@form-icon-width + 0.29rem) !important;
 		}
 		
 	}
@@ -99,13 +99,13 @@
 		width: 100%;
 			
 		& .uk-dropdown {
-			min-width: 150px;
+			min-width: 10.71rem;
 		}
 		
 	}
 	
 	& .uk-dropdown.uk-dropdown-scrollable {
-		max-height: 235px;
+		max-height: 16.79rem;
 	}
 	
 }

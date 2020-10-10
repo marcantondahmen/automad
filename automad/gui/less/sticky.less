@@ -33,20 +33,20 @@
  */
 
 
-@am-sticky-padding: 7px;
+@am-sticky-padding: 0.5rem;
 
 [data-uk-sticky] {
 
 	background-color: @am-bg;
 	padding: @am-sticky-padding 0;
 	// Cover overlapping content (like selected panels) below with shadow when switcher is sticky.
-	box-shadow: 20px 0 0 @am-bg, -20px 0 0 @am-bg;
+	box-shadow: 1.43rem 0 0 @am-bg, -1.43rem 0 0 @am-bg;
 
 	&.uk-active:after {
 		
 		content: '';
 		position: absolute;
-		bottom: -1px;
+		bottom: -0.072rem;
 		width: 100vw;
 		margin-left: -@utility-container-padding-horizontal;
 		border-bottom: @am-hairline;

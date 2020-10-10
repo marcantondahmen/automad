@@ -33,15 +33,15 @@
  */
 
 
-@am-navbar-padding-top: 		10px;
+@am-navbar-padding-top: 		0.71rem;
 
 @navbar-color:					@am-text;
 @navbar-background: 			@am-bg;
 @navbar-nav-color:				@navbar-color;
 @navbar-nav-hover-color:		@am-muted;
 
-@navbar-nav-height:				64px;
-@navbar-nav-padding-horizontal: 25px;
+@navbar-nav-height:				4.57rem;
+@navbar-nav-padding-horizontal: 1.79rem;
 
 
 .am-navbar {
@@ -58,7 +58,7 @@
 	background-color: @navbar-background;
 	
 	html.am-scrolled & {
-		height: @navbar-nav-height + 1px;
+		height: @navbar-nav-height + @am-border-width;
 		border-bottom: @am-hairline;
 	}
 	
@@ -150,10 +150,10 @@
 	&-push {
 		
 		box-sizing: border-box;
-		padding-top: 80px;
+		padding-top: 5.71rem;
 		
 		@media (min-width: @breakpoint-medium) {
-			padding-top: 90px;
+			padding-top: 6.43rem;
 		}
 		
 	}

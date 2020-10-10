@@ -33,8 +33,8 @@
  */
 
 
-@am-footer-height:		25px;
-@am-footer-padding-top: 100px;
+@am-footer-height:		1.79rem;
+@am-footer-padding-top: 7.14rem;
 
 
 body > .uk-container-center {
@@ -45,9 +45,9 @@ body > .uk-container-center {
 	
 	// Fixing vh unit bug on iOS (and other) touch devices.
 	// Since iOS UI elements overlap the window initially before scrolling down, 
-	// the min-height gets reduced by 70px.
+	// the min-height gets reduced by 5rem.
 	.uk-touch & {
-		min-height: ~"calc(100vh - 70px)";
+		min-height: ~"calc(100vh - 5rem)";
 	}
 	
 	& .am-footer {

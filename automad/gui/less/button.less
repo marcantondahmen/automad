@@ -33,9 +33,9 @@
  */
 
 
-@am-icon-button-size:				32px;
-@am-icon-button-font-size:			14px;
-@am-icon-button-margin-left: 		7px;
+@am-icon-button-size:				2.29rem;
+@am-icon-button-font-size:			1rem;
+@am-icon-button-margin-left: 		0.5rem;
 @am-button-border-color:			@am-border-color;
 
 @button-color:						@am-text;
@@ -69,25 +69,25 @@
 @button-disabled-color:				#CFCFCF;
 @button-disabled-background:		@button-background;
 
-@button-font-size:					14px;
-@button-mini-font-size: 			11px;
-@button-small-font-size: 			11px;
-@button-large-font-size: 			16px;
+@button-font-size:					1rem;
+@button-mini-font-size: 			0.79rem;
+@button-small-font-size: 			0.79rem;
+@button-large-font-size: 			1.14rem;
 
-@button-height:						34px;
-@button-mini-height:				22px;
-@button-small-height:				25px;
-@button-large-height:				40px;
+@button-height:						2.43rem;
+@button-mini-height:				1.57rem;
+@button-small-height:				1.79rem;
+@button-large-height:				2.86rem;
 
-@button-line-height: 				@button-height - 2;
-@button-mini-line-height: 			@button-mini-height - 2;
-@button-small-line-height: 			@button-small-height - 2;
-@button-large-line-height: 			@button-large-height - 2;
+@button-line-height: 				@button-height - (2 * @am-border-width);
+@button-mini-line-height: 			@button-mini-height - (2 * @am-border-width);
+@button-small-line-height: 			@button-small-height - (2 * @am-border-width);
+@button-large-line-height: 			@button-large-height - (2 * @am-border-width);
 
-@button-padding-horizontal:			11px;
-@button-mini-padding-horizontal:	6px;
-@button-small-padding-horizontal:	8px;
-@button-large-padding-horizontal:	12px;
+@button-padding-horizontal:			0.79rem;
+@button-mini-padding-horizontal:	0.43rem;
+@button-small-padding-horizontal:	0.57rem;
+@button-large-padding-horizontal:	0.86rem;
 
 @button-link-color:					@am-success;
 @button-link-hover-color:			@am-success;
@@ -128,11 +128,11 @@
 	}
 
 	&:active {
-		box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+		box-shadow: inset 0 0.14rem 0.57rem rgba(0,0,0,0.1);
 	}
 
 	& + & {
-		margin-left: 5px;
+		margin-left: 0.36rem;
 	}
 
 	&-mini {
@@ -240,7 +240,7 @@
 		margin-left: @am-icon-button-margin-left;
 		font-size: @am-icon-button-font-size;
 		line-height: @am-icon-button-font-size !important;
-		padding: ((@am-icon-button-size - 16) / 2) 0 !important;
+		padding: ((@am-icon-button-size - 1.14rem) / 2) 0 !important;
 		border-radius: @am-icon-button-size / 2;
 		
 		& i {
@@ -253,6 +253,7 @@
 }
 
 .am-button-title {
+
 	font-size: @base-body-font-size;
 	line-height: @base-body-line-height;
 	vertical-align: baseline;

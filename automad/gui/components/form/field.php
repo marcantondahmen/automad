@@ -285,7 +285,7 @@ HTML;
 				<div class="am-block-editor" data-am-block-editor="$editorId">		
 					$fullscreenBar
 					<input type="hidden" $attr value="$value">
-					<div id="$editorId" class="am-text am-block-editor-container am-fullscreen-container"></div>
+					<div id="$editorId" class="am-text am-block-editor-container am-fullscreen-container am-fullscreen-container-large"></div>
 				</div>
 HTML;
 

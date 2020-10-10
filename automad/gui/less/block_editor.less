@@ -43,10 +43,12 @@
 
 @am-blocks-breakpoint-small: 651px;
 @am-blocks-breakpoint-small-max: (@am-blocks-breakpoint-small - 1px);
-@am-block-padding: 12px;
-@am-block-content-padding: 70px;
-@am-block-max-width: 1150px;
-@am-block-radius: 2px;
+@am-blocks-breakpoint-fullscreen-large: 1250px;
+@am-block-padding: 0.86rem;
+@am-block-content-padding: 5rem;
+@am-block-content-padding-fullscreen: 12rem;
+@am-block-max-width: 82rem;
+@am-block-radius: @am-radius;
 @am-block-dropdown-background: @am-bg;
 @am-block-focused-background: @am-bg;
 
@@ -57,8 +59,8 @@
 	&-container {
 
 		max-width: @am-block-max-width;
-		padding: 0 4px;
-		border: 1px dashed @am-border-color;
+		padding: 0 0.29rem;
+		border: 0.072rem dashed @am-border-color;
 		border-radius: @am-radius-large;
 
 		.am-fullscreen &,
@@ -83,7 +85,7 @@
 	}
 
 	& .codex-editor__redactor {
-		padding-bottom: 30px;
+		padding-bottom: 2.14rem;
 		margin-right: 0;
 	}
 

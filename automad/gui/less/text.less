@@ -37,7 +37,7 @@
 
 @text-muted-color:		    @am-muted;
 @text-danger-color:			@am-danger;
-@text-small-line-height:    17px;
+@text-small-line-height:    1.21rem;
 
 
 .am-text {
@@ -135,7 +135,7 @@
 		font-family: @base-code-font-family;
 		font-size: 0.925em;
 		font-weight: normal;
-		border-radius: 4px;
+		border-radius: 0.29rem;
 		color: @am-text;
 		background-color: @am-code-bg;
 	}
@@ -161,7 +161,7 @@
 		font-size: inherit;
 		line-height: inherit;
 		background-color: @form-background;
-		border-left: 2px solid @am-border-color;
+		border-left: 0.14rem solid @am-border-color;
 	}
 
 	& table:not([class]) {
@@ -172,14 +172,14 @@
 		border-collapse: collapse;
 		overflow: hidden;
 		border-radius: @am-radius;
-		box-shadow: 0 0 0 1px @am-border-color;
+		box-shadow: 0 0 0 @am-border-width @am-border-color;
 
 		& th, 
 		& td {
 
 			padding: 0.5rem 0.75rem;
-			border-bottom: 1px solid @am-border-color;
-			border-left: 1px solid @am-border-color;
+			border-bottom: @am-border-width solid @am-border-color;
+			border-left: @am-border-width solid @am-border-color;
 			vertical-align: top;
 
 			&:first-child {
@@ -190,7 +190,7 @@
 
 		& th {
 			font-weight: bold;
-			border-bottom: 2px solid @am-border-color;
+			border-bottom: 0.14rem solid @am-border-color;
 		}
 
 		& tr:last-child td {
