@@ -60,7 +60,7 @@ $this->element('header');
 		</ul>
 		
 		<!-- Filters -->
-		<div data-uk-sticky="{top:65}">
+		<div class="am-sticky">
 			<div class="uk-form">
 				<input 
 				class="uk-width-1-1" 

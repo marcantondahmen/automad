@@ -181,7 +181,6 @@ gulp.task('libs-js', function() {
 				'../lib/vendor/uikit/uikit/src/js/components/datepicker.js',
 				'../lib/vendor/uikit/uikit/src/js/components/form-select.js',
 				'../lib/vendor/uikit/uikit/src/js/components/notify.js',
-				'../lib/vendor/uikit/uikit/src/js/components/sticky.js',
 				'../lib/vendor/uikit/uikit/src/js/components/timepicker.js',
 				'../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
 			])

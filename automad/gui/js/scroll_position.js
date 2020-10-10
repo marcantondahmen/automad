@@ -64,12 +64,19 @@
 			$(window).on('load scrolled.automad', function() {
 				
 				var scrolled = $doc.scrollTop(),
-					cls = 'am-scrolled';
+					cls = 'am-scrolled',
+					clsSecondary = 'am-scrolled-secondary';
 				
 				if (scrolled > 30) {
 					$html.addClass(cls);
 				} else {
 					$html.removeClass(cls);
+				}
+
+				if (scrolled > 60) {
+					$html.addClass(clsSecondary);
+				} else {
+					$html.removeClass(clsSecondary);
 				}
 				
 			});
