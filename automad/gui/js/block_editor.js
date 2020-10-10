@@ -109,7 +109,7 @@
 							class: Quote,
 							inlineToolbar: true
 						},
-						delimiter: Delimiter,
+						delimiter: AutomadDelimiter,
 						image: AutomadImage,
 						gallery: AutomadGallery,
 						slider: AutomadSlider,

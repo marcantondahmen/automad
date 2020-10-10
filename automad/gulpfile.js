@@ -115,7 +115,6 @@ gulp.task('libs-js', function() {
 			gulp.src([
 				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
-				'node_modules/@editorjs/delimiter/dist/bundle.js',
 				'node_modules/@editorjs/embed/dist/bundle.js',
 				'node_modules/@editorjs/header/dist/bundle.js',
 				'node_modules/@editorjs/inline-code/dist/bundle.js',

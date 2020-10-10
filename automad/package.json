@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@editorjs/delimiter": "^1.1.0",
     "@editorjs/editorjs": "^2.18.0",
     "@editorjs/embed": "^2.3.1",
     "@editorjs/header": "^2.4.1",
