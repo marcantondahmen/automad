@@ -69,8 +69,8 @@
 
 @base-body-font-family:		"Inter", sans-serif;
 @base-body-font-weight:		430;
-@base-body-font-size:		14px;
-@base-body-line-height:		1.43rem;
+@base-body-font-size:		16px;
+@base-body-line-height:		1.45;
 
 @base-code-font-family:		"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 @base-code-color: 			inherit;
@@ -113,12 +113,38 @@ body {
 	margin: 0; 
 }
 
+.am-dashboard {
+
+	html&,
+	& body {
+
+		font-size: 14px;
+		
+		@media (min-width: 370px) { 
+			font-size: 15px;
+		}
+
+		@media (min-width: 1400px) { 
+			font-size: @base-body-font-size;
+		}
+
+		@media (min-width: 1800px) { 
+			font-size: 17px;
+		}
+
+	}
+
+}
+
+.am-inpage {
+	font-size: @base-body-font-size;
+}
+
 .am-dashboard,
 .am-inpage {
 
 	font-family: @base-body-font-family;
 	font-weight: @base-body-font-weight;
-	font-size: @base-body-font-size;
 	line-height: @base-body-line-height;
 	font-variant-ligatures: none;
 
