@@ -72,20 +72,20 @@
 		& [class^="uk-icon-"] {
 			font-style: normal !important;
 		}
+		
+		&.ce-block--focused,
+		&.ce-block--selected {
 
-		&:hover {
-			box-shadow: 0 0.14rem 0.71rem rgba(0,0,0,0.1);
-		}
-
-		&.ce-block--focused {
-
-			background-image: none;
-			background-color: @am-block-focused-background;
 			.shadow;
 
-			@media (max-width: @am-blocks-breakpoint-small-max){
-				background-image: none;
-				background-color: @am-block-focused-background;
+			& > .ce-block__content {
+
+				background-color: transparent !important;
+				
+				& img {
+					opacity: 1;
+				}
+
 			}
 
 		}
@@ -118,16 +118,6 @@
 			padding: 0 @am-block-content-padding-stretched;
 		}
 
-	}
-
-	& .ce-block--selected > .ce-block__content {
-
-		background-color: transparent !important;
-
-		& img {
-			opacity: 1;
-		}
-
-	}
+	}	
 
 }

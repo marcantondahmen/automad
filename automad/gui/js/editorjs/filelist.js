@@ -49,7 +49,7 @@ class AutomadFilelist {
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadFilelist.toolbox.icon}</div>
-			<div class="uk-text-center">${AutomadFilelist.toolbox.title}</div>
+			<div class="am-block-title">${AutomadFilelist.toolbox.title}</div>
 			<hr>
 			${create.label('Select Template', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
 			<div class="am-block-file-select uk-form-select uk-button uk-text-left uk-width-1-1" data-uk-form-select>

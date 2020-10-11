@@ -48,7 +48,7 @@ class AutomadSnippet {
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
-			<div class="uk-text-center">${AutomadSnippet.toolbox.title}</div>
+			<div class="am-block-title">${AutomadSnippet.toolbox.title}</div>
 			<hr>
 			${create.label('Select Snippet', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
 			<div class="am-block-file-select uk-form-select uk-button uk-text-left uk-width-1-1" data-uk-form-select>

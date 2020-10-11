@@ -169,7 +169,16 @@
 			// Trigger changes when clicking a settings button or changing an input field.
 			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', triggerChange);
 			$(document).on('change keyup', '.ce-block input, .ce-block select', triggerChange);
-
+			
+			// Blur focus on block when clicking outside.
+			$(window).click(function () {
+				$('.ce-block--focused').removeClass('ce-block--focused');
+			});
+			
+			$(document).on('blur', '.ce-block--focused [contenteditable]', function(event) {
+				event.stopPropagation();
+			});
+			
 		}
 		
 	};
