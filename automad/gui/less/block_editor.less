@@ -45,10 +45,10 @@
 @am-blocks-breakpoint-small-max: (@am-blocks-breakpoint-small - 1px);
 @am-blocks-breakpoint-fullscreen-large: 1250px;
 @am-block-padding: 0.86rem;
-@am-block-content-padding: 5rem;
-@am-block-content-padding-stretched: 0.5rem;
-@am-block-content-padding-fullscreen: 12rem;
-@am-block-max-width: 82rem;
+@am-block-content-padding: 4rem;
+@am-block-content-padding-stretched: 0rem;
+@am-block-content-padding-fullscreen: 10rem;
+@am-block-max-width: 80rem;
 @am-block-radius: @am-radius;
 @am-block-dropdown-background: @am-bg;
 @am-block-focused-background: @am-bg;
@@ -89,5 +89,24 @@
 		padding-bottom: 2.14rem;
 		margin-right: 0;
 	}
+
+	// Resize SVG icons.
+	.svgWidth(@n) when (@n >= 4) {
+		.svgWidth(@n - 1);
+		& svg[width*=~'"@{n}"'] {
+			width: round(@n / 14, 2) * 1em !important;
+		}
+	}
+
+	.svgWidth(24);
+
+	.svgHeight(@n) when (@n >= 8) {
+		.svgHeight(@n - 1);
+		& svg[height*=~'"@{n}"'] {
+			height: round(@n / 14, 2) * 1em !important;
+		}
+	}
+
+	.svgHeight(22);
 
 }
