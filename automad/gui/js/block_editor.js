@@ -142,23 +142,23 @@
 
 					onChange: function() { 
 
-						// Catch the initial change event by testing the ready variable.
-						if (ready) {
-							editor.save().then(function(data) {
+						editor.save().then(function(data) {
+
+							// Only trigger change in case blocks actually have changed.
+							var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks),
+								blocksNew = JSON.stringify(data.blocks);
+
+							if (blocksCurrent != blocksNew) {
 								$input.val(JSON.stringify(data)).trigger('change');
-							});
-						}
+							}
+
+						});
 					
 					},
 
 					onReady: function() {
 						
 						$wrapper.find('.codex-editor__redactor').removeAttr('style');
-
-						// Delay setting ready to be true to catch the initial change event.
-						setTimeout(function () {
-							ready = true;
-						}, 2000);
 
 					}
 
