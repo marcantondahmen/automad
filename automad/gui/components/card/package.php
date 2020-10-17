@@ -73,7 +73,7 @@ class Package {
 			$active = 'uk-active';
 
 			$badge = <<< HTML
-					<span class="uk-panel-badge uk-badge">
+					<span class="uk-panel-badge uk-badge uk-badge-success">
 						$Text->packages_installed
 					</span>
 HTML;

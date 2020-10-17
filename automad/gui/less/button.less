@@ -75,7 +75,7 @@
 @button-large-font-size: 			1.14rem;
 
 @button-height:						2.43rem;
-@button-mini-height:				1.57rem;
+@button-mini-height:				1.52rem;
 @button-small-height:				1.79rem;
 @button-large-height:				2.86rem;
 
@@ -228,7 +228,6 @@
 	}
 	
 	& .uk-button {
-
 		box-sizing: border-box;
 		width: @am-icon-button-size;
 		min-width: @am-icon-button-size;
@@ -239,15 +238,9 @@
 		text-align: center;
 		margin-left: @am-icon-button-margin-left;
 		font-size: @am-icon-button-font-size;
-		line-height: @am-icon-button-font-size !important;
-		padding: ((@am-icon-button-size - 1.14rem) / 2) 0 !important;
+		line-height: @am-icon-button-size - (2 * @am-border-width) !important;
+		padding: 0 !important;
 		border-radius: @am-icon-button-size / 2;
-		
-		& i {
-			max-height: @am-icon-button-font-size !important;
-			line-height: @am-icon-button-font-size !important;
-		}
-
 	}
 	
 }
