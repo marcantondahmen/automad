@@ -57,24 +57,24 @@ if (User::get()) {
 ?>
 	
 	<nav class="am-navbar">
-		<ul class="am-navbar-nav">
+		<div class="am-navbar-nav">
 			<!-- Logo -->
-			<li class="am-navbar-logo">
+			<div class="am-navbar-logo">
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 					<?php echo Components\Logo::render(); ?>
 				</a>
-			</li>
+			</div>
 			<!-- Search -->
-			<li class="am-navbar-search">
+			<div class="am-navbar-search">
 				<?php 
 					echo Components\Form\Search::render(
 						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
 						'Ctrl + Space'
 					);
 				?>
-			</li>
+			</div>
 			<!-- Buttons -->
-			<li class="am-navbar-buttons">
+			<div class="am-navbar-buttons">
 				<div class="am-icon-buttons">
 					<!-- Debug Status -->
 					<span data-am-status="debug"></span>
@@ -136,8 +136,8 @@ if (User::get()) {
 						<i class="uk-icon-navicon uk-icon-justify"></i>
 					</a>
 				</div>
-			</li>
-		</ul>	
+			</div>
+		</div>	
 	</nav>
 	
 <?php 
