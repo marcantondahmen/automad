@@ -145,8 +145,13 @@
 						editor.save().then(function(data) {
 
 							// Only trigger change in case blocks actually have changed.
-							var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks),
-								blocksNew = JSON.stringify(data.blocks);
+							var blocksNew = JSON.stringify(data.blocks);
+
+							try {
+								var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks);
+							} catch(e) {
+								var blocksCurrent = '';
+							}
 
 							if (blocksCurrent != blocksNew) {
 								$input.val(JSON.stringify(data)).trigger('change');
