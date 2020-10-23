@@ -73,7 +73,7 @@
 			@media (max-width: @am-blocks-breakpoint-small-max) {
 				box-sizing: border-box;
 				margin: 0 -@am-fullscreen-padding !important;
-				padding: 0 (@am-fullscreen-padding - @am-block-padding);
+				padding: 0 (@am-fullscreen-padding - @am-block-padding) !important;
 				max-width: 100vw !important;
 			}
 
@@ -83,6 +83,25 @@
 
 	& .codex-editor {
 		z-index: 200;
+	}
+
+	.am-inpage & {
+
+		@media (min-width: @utility-container-max-width) {
+			
+			width: 100vw;
+			left: -50vw;
+			margin-left: 50%;
+			
+			&-container {
+				max-width: @am-block-max-width;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 0 @am-block-padding;
+			}
+
+		}
+
 	}
 
 	& .codex-editor__redactor {
