@@ -102,9 +102,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<?php 
 					
 						$header = 	Text::get('sidebar_header_pages') . 
-							  		'&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
-							  		count($this->getAutomad()->getCollection()) . 
-							  		'</span>';
+							  		'&nbsp;&mdash;&nbsp;' . 
+							  		count($this->getAutomad()->getCollection());
 									
 						echo Components\Nav\SiteTree::render(
 							$this->getAutomad(),

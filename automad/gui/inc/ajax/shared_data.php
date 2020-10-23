@@ -189,7 +189,7 @@ if ($data = Core\Request::post('data')) {
 			<!-- Text variables -->
 			<?php if ($textKeys) { ?>
 				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_content'); ?> &ndash;
+					<?php Text::e('shared_vars_content'); ?> &mdash;
 					<?php echo count($textKeys); ?>
 				</div>
 				<div class="uk-accordion-content">
@@ -210,7 +210,7 @@ if ($data = Core\Request::post('data')) {
 			<!-- Settings variables -->
 			<?php if ($settingKeys) { ?>
 				<div class="uk-accordion-title">
-					<?php Text::e('shared_vars_settings'); ?> &ndash;
+					<?php Text::e('shared_vars_settings'); ?> &mdash;
 					<?php echo count($settingKeys); ?>
 				</div>
 				<div class="uk-accordion-content">
@@ -230,7 +230,7 @@ if ($data = Core\Request::post('data')) {
 			
 			<!-- Vars in data but not in any template -->
 			<div class="uk-accordion-title">
-				<?php Text::e('page_vars_unused'); ?> &ndash;
+				<?php Text::e('page_vars_unused'); ?> &mdash;
 				<span data-am-count="#am-add-variable-container .uk-form-row"></span>	
 			</div>
 			<div class="uk-accordion-content">
