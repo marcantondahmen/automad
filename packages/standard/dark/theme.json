@@ -4,6 +4,31 @@
 	"author": "Marc Anton Dahmen",
 	"version": "1.5.4",
 	"license": "MIT",
+	"masks": {
+		"page": [
+			"formatDatePost",
+			"formatDateProject",
+			"imageAppleTouchIcon",
+			"imageFavicon",
+			"labelClearSearch",
+			"labelRelated",
+			"labelShowAll",
+			"labelSortDateDesc",
+			"labelSortDateAsc",
+			"labelSortTitleAsc",
+			"labelSortTitleDesc",
+			"locale",
+			"notificationNoSearchResults",
+			"placeholderSearch",
+			"urlSearchResults"
+			
+		],
+		"shared": [
+			"+main",
+			"text",
+			"textTeaser"
+		]
+	},
 	"tooltips": {
 		"+main": "The main content block area",
 		"brand": "The brand HTML, SVG or text to be used as logo",

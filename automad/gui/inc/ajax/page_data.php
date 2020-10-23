@@ -317,7 +317,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				<?php 
 			
 				if (!AM_HEADLESS_ENABLED) {
-					$keys = Keys::inCurrentTemplate($Page);
+					$keys = Keys::inCurrentTemplate($Page, $this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME)));
 				} else {
 					$keys = Keys::inTemplate(Headless::getTemplate());
 				}

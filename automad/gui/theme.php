@@ -77,6 +77,7 @@ class Theme {
 						'author' => false, 
 						'version' => false, 
 						'license' => false,
+						'masks' => array(),
 						'tooltips' => array()
 					);
 		
@@ -144,7 +145,25 @@ class Theme {
 		
 	}
 	
-	
+
+	/**
+	 *	Get the UI mask (page or shared) for hiding variables in the dashboard.
+	 *	
+	 *	@param string $mask "page" or "shared"
+	 *	@return array The mask array
+	 */
+
+	public function getMask($mask) {
+
+		if (array_key_exists($mask, $this->data['masks'])) {
+			return $this->data['masks'][$mask];
+		}
+
+		return array();
+
+	}
+
+
 	/**
 	 * 	Return the tooltip for the requested variable name (key in the data array).
 	 *

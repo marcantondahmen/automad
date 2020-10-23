@@ -106,15 +106,17 @@ class Keys {
 	 *	Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
 	 *	
 	 *	@param object $Page
+	 *	@param object $Theme
 	 *	@return array Keys in the currently used template (without reserved keys)
 	 */
 	
-	public static function inCurrentTemplate($Page) {
+	public static function inCurrentTemplate($Page, $Theme) {
 		
 		// Don't use $Page->getTemplate() to prevent exit on errors.
 		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
+		$keys = self::inTemplate($file);
 		
-		return self::inTemplate($file);
+		return self::cleanUp($keys, $Theme->getMask('page'));
 		
 	}
 
@@ -184,21 +186,29 @@ class Keys {
 		foreach ($Theme->templates as $file) {
 			$keys = array_merge($keys, self::inTemplate($file));
 		}
-		
-		return self::cleanUp($keys);
-		
+
+		return self::cleanUp($keys, $Theme->getMask('shared'));
+
 	}
 	
 	
 	/**
-	 *	Cleans up an array of keys. All reserved and duplicate keys get removed.
+	 *	Cleans up an array of keys. All reserved and duplicate keys get removed 
+	 *	and the optional UI mask is applied.
 	 * 
 	 *	@param array $keys
+	 *	@param array $mask
 	 *	@return array The sorted and filtered keys array
 	 */
 
-	private static function cleanUp($keys) {
+	private static function cleanUp($keys, $mask = array()) {
 	
+		if (!empty($mask)) {
+			$keys = array_filter($keys, function($key) use ($mask) {
+				return !in_array($key, $mask);
+			});
+		}
+		
 		return array_unique(array_diff($keys, self::$reserved));
 		
 	}
