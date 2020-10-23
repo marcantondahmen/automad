@@ -119,7 +119,6 @@
 						},
 						pagelist: AutomadPagelist,
 						filelist: AutomadFilelist,
-						markdown: AutomadTextareaMarkdown,
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
@@ -173,7 +172,7 @@
 
 			// Trigger changes when clicking a settings button or changing an input field.
 			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', triggerChange);
-			$(document).on('change keyup', '.ce-block input, .ce-block select', triggerChange);
+			$(document).on('change keyup', '.cdx-input, .ce-block input, .ce-block select', triggerChange);
 			
 			// Blur focus on block when clicking outside.
 			$(window).click(function () {
