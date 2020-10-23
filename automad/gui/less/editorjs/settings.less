@@ -40,10 +40,11 @@
 
 	& .ce-settings {
 		
-		min-width: (3 * @am-settings-button-width) + (4 * @am-settings-button-margin);
+		min-width: (3.05 * @am-settings-button-width) + (4 * @am-settings-button-margin);
 		background-color: @am-block-dropdown-background;
 		border: none !important;
 		border-radius: @am-radius;
+		text-align: center;
 		.shadow;
 
 		&__plugin-zone,
@@ -60,8 +61,8 @@
 	& .cdx-settings-button,
 	& .ce-settings__button {
 
-		width: 2.43rem;
-		height: 2.43rem;
+		width: @am-settings-button-width;
+		height: @am-settings-button-width;
 		color: @nav-dropdown-color;
 		background-color: @am-block-dropdown-background;
 		border-radius: @am-radius-small;
