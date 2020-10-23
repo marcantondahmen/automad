@@ -57,6 +57,8 @@
 
 @form-placeholder-color:	@am-muted;
 
+@form-icon-width: 			2.2rem;
+@form-icon-font-size:		1rem;
 @form-icon-color:			mix(@am-muted, @am-border-color);
 
 .hook-form() {
@@ -129,8 +131,11 @@
 }
  
 .uk-form-icon {
-	
+
 	& > [class*="uk-icon-"] {
+		line-height: @form-height - (2 * @am-border-width);
+		margin-top: 0;
+		top: 0;
 		left: 0.29rem;
 	}
 	
