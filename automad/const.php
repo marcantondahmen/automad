@@ -210,7 +210,7 @@ Config::set('AM_HEADLESS_TEMPLATE', '/automad/headless/json.php');
 Config::set('AM_HEADLESS_TEMPLATE_CUSTOM', '/config/headless.json');
 
 // COMPOSER
-Config::set('AM_COMPOSER_PHAR_URL', 'https://getcomposer.org/download/1.9.0/composer.phar');
+Config::set('AM_COMPOSER_PHAR_URL', 'https://getcomposer.org/download/2.0.1/composer.phar');
 
 // UPDATE
 Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');

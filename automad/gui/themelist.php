@@ -140,8 +140,9 @@ class Themelist {
 			
 			$decoded = @json_decode(file_get_contents($installedJSON), true);
 			
-			if (is_array($decoded)) {
-				foreach ($decoded as $package) {
+			if (is_array($decoded) && !empty($decoded['packages'])) {
+				$packages = $decoded['packages'];
+				foreach ($packages as $package) {
 					if (array_key_exists('name', $package)) {
 						$name = $package['name'];
 						$installed[$name] = $package;
