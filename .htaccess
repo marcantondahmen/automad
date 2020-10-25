@@ -1,7 +1,20 @@
+# --- AUTOMAD --- #
+
+
 <IfModule mod_rewrite.c>
 
 
-# --- AUTOMAD --- #
+
+
+# Allow large file uploads.
+
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
+php_value max_input_time 3000
+php_value max_execution_time 3000
+
+
+
 
 # DO NOT MODIFY!
 
@@ -85,7 +98,9 @@ RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*)\1$
 RewriteRule ^(.*)$ %2index.php/_ [L]
 
 
-# --------------- #
 
 
 </IfModule>
+
+
+# --------------- #
