@@ -68,9 +68,16 @@
 			&[data-am-tab] {
 				
 				&.uk-active {
+					
 					color: @button-primary-color;
 					background-color: @button-primary-background;
 					border-color: @button-primary-background;
+
+					& .uk-badge {
+						color: @button-primary-background;
+						background-color: @button-primary-color;
+					}
+
 				}
 				
 			}

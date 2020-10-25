@@ -237,10 +237,15 @@ class Composer {
 			return $e->getMessage();
 		}
 
+		$buffer = $output->fetch();
+		$bufferNoWarning = preg_replace('/\<warning\>.*?\<\/warning\>\s*/is', '', $buffer);
+
 		Core\Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
+		Core\Debug::log($buffer, 'Buffer');
+		Core\Debug::log($bufferNoWarning, 'Buffer without warning');
 
 		if ($getBuffer) {
-			return $output->fetch();
+			return $bufferNoWarning;
 		}
 
 	}
