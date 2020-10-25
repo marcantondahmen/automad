@@ -91,7 +91,7 @@
 						header: {
 							class: Header,
 							shortcut: 'CMD+SHIFT+H',
-							inlineToolbar: [],
+							inlineToolbar: true,
 							config: {
 								levels: [1, 2, 3, 4, 5, 6],
 								defaultLevel: 2
@@ -115,7 +115,7 @@
 						slider: AutomadSlider,
 						buttons: {
 							class: AutomadButtons,
-							inlineToolbar: ['italic', 'bold'] 
+							inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle'] 
 						},
 						pagelist: AutomadPagelist,
 						filelist: AutomadFilelist,
