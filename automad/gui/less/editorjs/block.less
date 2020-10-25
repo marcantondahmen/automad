@@ -41,7 +41,8 @@
 		margin: 0.29rem 0;
 		padding: @am-block-padding;
 		border-radius: @am-block-radius;
-		.transition(box-shadow 0.2s);
+		border: @am-border-width solid transparent;
+		.transition(border-color 0.2s, box-shadow 0.2s;);
 
 		@media (min-width: @am-blocks-breakpoint-small) {
 			padding: @am-block-padding 2.85rem;
@@ -90,6 +91,10 @@
 
 		}
 
+		&.ce-block--drop-target {
+			border: @am-border-width dashed @am-success;
+		}
+
 		& [data-placeholder]:empty:not(:focus):before {
 			content: attr(data-placeholder);
 			color: @am-muted;
@@ -121,5 +126,19 @@
 		}
 
 	}	
+
+	& .ce-block--drop-target .ce-block__content {
+
+		outline: none;
+		
+		&:before {
+			display: none;
+		}
+
+		&:after {
+			background: none;
+		}
+
+	}
 
 }

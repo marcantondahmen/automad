@@ -109,6 +109,51 @@
 		& input {
 			.shadow;
 		}
+
+		& > div:not([class]) {
+
+			padding: 0.75rem;
+			padding-top: 0.2rem;
+			border-radius: @am-radius;
+			background-color: @am-bg;
+			.shadow;
+
+			&:empty {
+				display: none;
+			}
+
+			& > div {
+				margin-left: 0 !important;
+			}
+
+			& input:not(:focus) {
+				box-shadow: none;
+			}
+
+			& label {
+
+				flex-direction: column;
+				align-items: flex-start !important;
+				padding-bottom: 0.75rem;
+
+				&:last-child {
+					padding-bottom: 0;
+				}
+
+				& span {
+					font-size: @button-mini-font-size;
+					font-weight: @form-stacked-font-weight;
+					line-height: @button-mini-height;
+				}
+
+				& input,
+				& textarea {
+					width: 100% !important;
+				}
+
+			}
+
+		}
 	
 	}
 
@@ -158,6 +203,12 @@
 
 		}
 
+	}
+
+	& .editorjs-inspector-dialog {
+		padding: 0.5rem;
+		border: none !important;
+		.shadow;
 	}
 
 }

@@ -136,7 +136,12 @@
 						},
 						marker: {
 							class: Marker
-						}
+						},
+						editorJSStyle: {
+							class: EditorJSStyle,
+							shortcut: 'CMD+SHIFT+S'
+						},
+						editorJSInspector: EditorJSInspector
 					},
 
 					onChange: function() { 
@@ -163,6 +168,8 @@
 					onReady: function() {
 						
 						$wrapper.find('.codex-editor__redactor').removeAttr('style');
+						new DragDrop(editor);
+						new Undo({ editor });
 
 					}
 
