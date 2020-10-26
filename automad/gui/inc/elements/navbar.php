@@ -68,8 +68,11 @@ if (User::get()) {
 			<div class="am-navbar-search">
 				<?php 
 					echo Components\Form\Search::render(
-						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
-						'Ctrl + Space'
+						Text::get('search_placeholder') . ' ' . 
+						htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
+						Text::get('search_placeholder') . ' ' . 
+						htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)) . 
+						'<br><small>CMD/CTRL+SHIFT+Space</small>'
 					);
 				?>
 			</div>
@@ -91,7 +94,7 @@ if (User::get()) {
 					<!-- Save -->
 					<?php if ($submit) { ?>
 					<button 
-					title="<?php Text::e('btn_save'); ?> (Cmd/Ctrl+S)" 
+					title="<?php echo Text::get('btn_save') . htmlspecialchars('<br><small>CMD/CTRL+S</small>'); ?>" 
 					class="uk-button uk-button-success" 
 					data-am-submit="<?php echo $submit; ?>" 
 					data-uk-tooltip="{pos:'bottom-right'}" 

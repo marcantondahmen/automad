@@ -63,7 +63,7 @@ class Search {
 	public static function render($placeholder = '', $tooltip = '') {
 		
 		if ($tooltip) {
-			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
+			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 
 		$dashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
