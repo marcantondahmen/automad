@@ -55,10 +55,17 @@ class Composer {
 
 
 	/**	
+	 *	The Composer version to be used.
+	 */
+
+	private $composerVersion = '2.0.2';
+
+	
+	/**	
 	 *	A chached file including the temporary Composer install directory.
 	 */
 
-	private $installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_composer_dir';
+	private $installDirCacheFile = false;
 
 
 	/**	
@@ -86,7 +93,7 @@ class Composer {
 	 * 	The download URL for the composer.phar file.
 	 */
 
-	private $pharUrl = AM_COMPOSER_PHAR_URL;
+	private $pharUrl = false;
 
 
 	/**
@@ -103,6 +110,11 @@ class Composer {
 
 	public function __construct() {
 
+		$this->pharUrl = 'https://getcomposer.org/download/' . $this->composerVersion . '/composer.phar';
+		$this->installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . 
+									 AM_FILE_PREFIX_CACHE . '_composer_' . 
+									 Core\Str::sanitize($this->composerVersion, true) . 
+									 '_dir';
 		$this->setUp();
 
 	}
