@@ -38,7 +38,7 @@
 @tooltip-padding-vertical: 		0.36rem;
 @tooltip-padding-horizontal: 	0.5rem;
 @tooltip-background: 			@am-primary;
-@tooltip-triangle-size: 		0.4rem;
+@tooltip-triangle-size: 		0.5rem;
 
 @tooltip-color: 				#FFFFFF;
 @tooltip-font-size: 			0.86rem;
@@ -58,4 +58,16 @@
 		color: #888888;
 	}
 	
+}
+
+.uk-tooltip-top:after,
+.uk-tooltip-top-left:after,
+.uk-tooltip-top-right:after {
+    bottom: -@tooltip-triangle-size + 0.1;
+}
+
+.uk-tooltip-bottom:after,
+.uk-tooltip-bottom-left:after,
+.uk-tooltip-bottom-right:after {
+    top: -@tooltip-triangle-size + 0.1;
 }
