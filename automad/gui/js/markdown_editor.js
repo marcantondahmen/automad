@@ -370,11 +370,11 @@
 			editor.addButtons({
 
 				bold: {
-					title: 'Bold<br><small>CMD/CTRL+B</small>',
+					title: 'Bold[Ctrl + B]</small>',
 					label: '<strong>B</strong>'
 				},
 				italic: {
-					title: 'Italic<br><small>CMD/CTRL+I</small>',
+					title: 'Italic[Ctrl + I]</small>',
 					label: '<strong><em>I</em></strong>'
 				},
 				blockquote: {
@@ -382,7 +382,7 @@
 					label: '<i class="uk-icon-quote-right"></i>'
 				},
 				link: {
-					title: 'Link<br><small>CMD/CTRL+L</small>',
+					title: 'Link[Ctrl + L]</small>',
 					label: '<i class="uk-icon-link"></i>'
 				},
 				image: {

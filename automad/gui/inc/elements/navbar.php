@@ -70,9 +70,7 @@ if (User::get()) {
 					echo Components\Form\Search::render(
 						Text::get('search_placeholder') . ' ' . 
 						htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
-						Text::get('search_placeholder') . ' ' . 
-						htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)) . 
-						'<br><small>CMD/CTRL+SHIFT+Space</small>'
+						'[Ctrl + ⇧ + Space]'
 					);
 				?>
 			</div>
@@ -94,7 +92,7 @@ if (User::get()) {
 					<!-- Save -->
 					<?php if ($submit) { ?>
 					<button 
-					title="<?php echo Text::get('btn_save') . htmlspecialchars('<br><small>CMD/CTRL+S</small>'); ?>" 
+					title="<?php Text::e('btn_save'); ?>[Ctrl + S]" 
 					class="uk-button uk-button-success" 
 					data-am-submit="<?php echo $submit; ?>" 
 					data-uk-tooltip="{pos:'bottom-right'}" 
