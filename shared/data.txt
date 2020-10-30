@@ -16,7 +16,7 @@ imageAppleTouchIcon: /shared/apple-touch-icon.png
 
 -
 
-imageFavicon: /shared/favicon.png
+imageFavicon: /shared/favicon.ico
 
 -
 
