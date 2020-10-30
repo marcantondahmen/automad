@@ -58,7 +58,7 @@ class Composer {
 	 *	The Composer version to be used.
 	 */
 
-	private $composerVersion = '2.0.2';
+	private $composerVersion = '2.0.3';
 
 	
 	/**	
