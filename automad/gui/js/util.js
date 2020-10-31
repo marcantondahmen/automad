@@ -68,13 +68,45 @@
 
 			},
 
-			label: function(text) {
+			label: function(text, cls = ['am-block-label']) {
 
-				var label = Automad.util.create.element('label', ['am-block-label']);
+				var label = Automad.util.create.element('label', cls);
 
 				label.textContent = text;
 
 				return label;
+
+			},
+
+			select: function(cls, options, selected) {
+
+				var select = Automad.util.create.element('select', cls),
+					optionMarkup = [];
+
+				options.forEach(function(value) {
+
+					let html,
+						text,
+						selectedAttr = '';
+
+					if (value == selected) {
+						selectedAttr = ' selected';
+					}
+					
+					text = 	value
+							.replace(/^[\/\\\\]/g, '')
+							.replace(/[\/\\\\]/g, ' > ')
+							.replace(/_/g, ' ')
+							.replace('.php', '');
+
+					html = `<option value="${value}"${selectedAttr}>${text}</option>`;
+					optionMarkup.push(html);
+
+				});
+				
+				select.innerHTML = optionMarkup.join('');
+				
+				return select;
 
 			}
 

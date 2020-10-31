@@ -6,7 +6,7 @@ btn_add_page: Adicionar Página
 
 -
 
-btn_add_var: Adicionar variável
+btn_add_var: Adicionar Variável
 
 -
 
@@ -18,7 +18,7 @@ btn_browse: Procurar arquivos
 
 -
 
-btn_close: Fechar
+btn_close: Perto
 
 -
 
@@ -50,7 +50,7 @@ btn_edit: Editar
 
 -
 
-btn_edit_file_info: Editar informações do arquivo
+btn_edit_file_info: Editar Informações do Arquivo
 
 -
 
@@ -62,11 +62,11 @@ btn_edit_page: Editar Página
 
 -
 
-btn_files: Arquivos enviados
+btn_files: Arquivos carregados
 
 -
 
-btn_get_themes: Obter mais temas
+btn_get_themes: Obtenha mais temas
 
 -
 
@@ -82,7 +82,7 @@ btn_home: Home
 
 -
 
-btn_import: Importar do URL
+btn_import: Importar de URL
 
 -
 
@@ -122,7 +122,7 @@ btn_ok: Ok
 
 -
 
-btn_open_log: Abrir registro
+btn_open_log: Registro aberto
 
 -
 
@@ -130,7 +130,7 @@ btn_readme: Readme
 
 -
 
-btn_remove: Remover
+btn_remove: Retirar
 
 -
 
@@ -143,6 +143,10 @@ btn_reset: Redefinir
 -
 
 btn_save: Salvar alterações
+
+-
+
+btn_update: Atualizar
 
 -
 
@@ -170,11 +174,11 @@ dashboard_memory: Uso de memória:
 
 -
 
-dashboard_modified: Atividade mais recente em
+dashboard_modified: Última atividade em
 
 -
 
-dashboard_recently_edited: Páginas Editadas Recentemente
+dashboard_recently_edited: Páginas editadas recentemente
 
 -
 
@@ -182,7 +186,7 @@ dropzone: Arraste os arquivos aqui
 
 -
 
-error_cache_purged: Não foi possível limpar o diretório de cache!
+error_cache_purged: O diretório do cache não pôde ser removido!
 
 -
 
@@ -214,19 +218,19 @@ error_login: Nome de usuário ou senha inválidos
 
 -
 
-error_log_out: Falha no logout!
+error_log_out: O logout falhou!
 
 -
 
-error_no_destination: Por favor, selecione uma página como destino!
+error_no_destination: Selecione uma página como destino!
 
 -
 
-error_no_js: Ative o JavaScript no seu navegador para usar o Painel!
+error_no_js: Habilite o JavaScript em seu navegador para usar o Dashboard!
 
 -
 
-error_no_theme: Nenhum tema selecionado! Por favor, selecione um tema principal.
+error_no_theme: Nenhum tema selecionado! Selecione um tema principal.
 
 -
 
@@ -238,11 +242,11 @@ error_import: A importação do arquivo falhou!
 
 -
 
-error_packages: Não foi possível carregar os pacotes do Packagist!
+error_packages: Não foi possível carregar pacotes do Packagist!
 
 -
 
-error_composer_memory: Seu servidor não possui memória suficiente para instalar, atualizar ou remover pacotes! Caso você esteja executando este site em um serviço de hospedagem compartilhada com uma quantidade limitada de memória, tente atualizar seu plano ou instalar o site em um computador local sem restrições de memória.
+error_composer_memory: Seu servidor não tem memória suficiente para instalar, atualizar ou remover pacotes! Caso você esteja executando este site em um serviço de hospedagem compartilhada com uma quantidade limitada de memória, tente atualizar o seu plano ou instalar o seu site em um computador local sem restrições de memória.
 
 -
 
@@ -250,7 +254,7 @@ error_page_not_found: Página não encontrada!
 
 -
 
-error_page_title: Falta o título!
+error_page_title: Título faltando!
 
 -
 
@@ -270,15 +274,15 @@ error_permission: Permissões negadas:
 
 -
 
-error_template_missing: Modelo ausente
+error_template_missing: Falta modelo
 
 -
 
-error_update_connection: Não foi possível conectar ao servidor de atualização! Isso geralmente pode ser causado por uma configuração de atualização incorreta (config.json), um erro de certificado SSL ou uma biblioteca cURL ausente.
+error_update_connection: Não é possível conectar ao servidor de atualização! Normalmente, isso pode ser causado por uma configuração de atualização incorreta (config.json), um erro de certificado SSL ou uma biblioteca cURL ausente.
 
 -
 
-error_update_download: Falha no download da atualização!
+error_update_download: O download da atualização falhou!
 
 -
 
@@ -286,11 +290,11 @@ error_update_items: Lista inválida de itens a serem atualizados!
 
 -
 
-error_update_failed: Atualização falhou! Por favor, restaure sua instalação a partir de um backup.
+error_update_failed: Atualização falhou! Restaure sua instalação a partir de um backup.
 
 -
 
-error_update_not_supported: As atualizações não são suportadas pelo seu servidor! O atualizador requer a instalação de bibliotecas cURL e ZIP.
+error_update_not_supported: Atualizações não são suportadas por seu servidor! O atualizador requer que as bibliotecas cURL e ZIP sejam instaladas.
 
 -
 
@@ -318,11 +322,11 @@ image_crop: Cortar imagem
 
 -
 
-image_height_px: Altura (pixels)
+image_height_px: Altura (Pixels)
 
 -
 
-image_width_px: Largura (pixels)
+image_width_px: Largura (Pixels)
 
 -
 
@@ -334,7 +338,7 @@ image_select: Selecione a imagem
 
 -
 
-images_page: Page Imagens
+images_page: Imagens da página
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Imagens Gerais
 
 -
 
-link_placeholder: Comece a digitar o título da página ou cole um link externo aqui
+link_placeholder: Comece a digitar o título de uma página ou cole um link externo aqui
 
 -
 
@@ -370,7 +374,7 @@ packages_title: Pacotes
 
 -
 
-packages_browse: Abra o Navegador de Pacotes
+packages_browse: Abra o navegador de pacotes
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Atualize tudo
 
 -
 
-packages_updating: Atualizando pacotes ...
+packages_updating_all: Atualizando pacotes ...
+
+-
+
+packages_updating: Atualizando pacote ...
 
 -
 
@@ -414,11 +422,11 @@ page_prefix: Prefixo (ordem na navegação)
 
 -
 
-page_redirect: Redirecionar página para outro URL
+page_redirect: Redirecionar a página para outro URL
 
 -
 
-page_tags: Tags (separe várias tags por vírgula ou guia)
+page_tags: Tags (separe várias tags por vírgula ou tabulação)
 
 -
 
@@ -430,11 +438,11 @@ page_var_name: Nome variável
 
 -
 
-page_vars_headless: Variáveis
+page_vars_content: Conteúdo
 
 -
 
-page_vars_template: Variáveis no modelo atual
+page_vars_settings: Configurações de modelo
 
 -
 
@@ -462,15 +470,15 @@ shared_theme: Tema principal
 
 -
 
-shared_theme_apply: Deseja aplicar o tema selecionado e atualizar a lista de variáveis disponíveis agora? Suas alterações não salvas serão salvas.
+shared_theme_apply: Quer aplicar o tema selecionado e atualizar a lista de variáveis disponíveis agora? Suas alterações não salvas serão salvas.
 
 -
 
-shared_vars_headless: Variáveis
+shared_vars_content: Conteúdo Padrão
 
 -
 
-shared_vars_main_theme: Variáveis no tema principal
+shared_vars_settings: Configurações de modelo padrão
 
 -
 
@@ -510,7 +518,7 @@ success_config_update: Configuração atualizada com sucesso!
 
 -
 
-success_created: <br> criado com sucesso
+success_created: Criado com sucesso <br>
 
 -
 
@@ -530,7 +538,7 @@ success_remove: Removido com sucesso
 
 -
 
-success_reset_headless: Restaurado com sucesso o modelo sem cabeça padrão!
+success_reset_headless: Restaurado com sucesso o template padrão sem cabeça!
 
 -
 
@@ -542,11 +550,15 @@ success_update: Automad atualizado com sucesso!
 
 -
 
-success_packages_updated: Todos os pacotes atualizados com sucesso
+success_packages_updated_all: Todos os pacotes foram atualizados com sucesso
 
 -
 
-sys_cache_info: O armazenamento em cache é essencial para acelerar o site e geralmente deve estar ativado. No entanto, em algumas circunstâncias, convém desativar ou limpar seu cache.
+success_package_updated: Atualizado com sucesso
+
+-
+
+sys_cache_info: O cache é essencial para acelerar seu site e geralmente deve ser ativado. No entanto, em algumas circunstâncias, você pode desativar ou limpar o cache.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Limpar cache
 
 -
 
-sys_cache_clear_info: A limpeza do cache do site força uma nova verificação de páginas e arquivos atualizados. Esta ação não removerá nenhum arquivo de página ou imagem do diretório de cache.
+sys_cache_clear_info: Limpar o cache do site força uma nova varredura de páginas e arquivos atualizados. Esta ação não removerá nenhum arquivo de página ou imagem do diretório de cache.
 
 -
 
@@ -562,7 +574,7 @@ sys_cache_monitor: O intervalo de verificação é
 
 -
 
-sys_cache_monitor_info: Quando o armazenamento em cache está ativado, o Automad verifica regularmente se há alterações no sistema de arquivos. A frequência dessas verificações pode ser definida aqui.
+sys_cache_monitor_info: Quando o armazenamento em cache está ativado, o Automad verifica regularmente se há mudanças no sistema de arquivos. A frequência dessas verificações pode ser definida aqui.
 
 -
 
@@ -570,27 +582,27 @@ sys_cache_lifetime: O tempo de vida do cache é
 
 -
 
-sys_cache_lifetime_info: Todos os dados e páginas do Automad em cache têm uma vida útil máxima. Após a vida útil de um objeto exceder, seu cache será reconstruído quando solicitado.
+sys_cache_lifetime_info: Todos os dados e páginas do Automad em cache têm uma vida útil máxima. Após o tempo de vida de um objeto exceder, seu cache será reconstruído quando solicitado.
 
 -
 
-sys_cache_purge: Diretório de Cache de Limpeza
+sys_cache_purge: Limpar diretório de cache
 
 -
 
-sys_cache_purge_info: Ao contrário de simplesmente limpar o cache, a limpeza do diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagens e páginas, além de uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de tempos em tempos ou na reinicialização. No entanto, em alguns sistemas, esse diretório deve ser limpo manualmente.
+sys_cache_purge_info: Em contraste com simplesmente limpar o cache, limpar o diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagem e página, bem como uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de tempos em tempos ou na reinicialização. No entanto, em alguns sistemas, esse diretório deve ser limpo manualmente.
 
 -
 
-sys_debug_info: Quando a depuração estiver ativada, todos os processos do Automad serão registrados no console do seu navegador. A depuração é necessária apenas para desenvolvimento ou solução de problemas e deve ser desativada em todos os outros casos.
+sys_debug_info: Quando a depuração está habilitada, todos os processos do Automad serão registrados no console do seu navegador. A depuração é necessária apenas para desenvolvimento ou solução de problemas e deve ser desativada em todos os outros casos.
 
 -
 
-sys_headless_edit_info: A estrutura dos dados JSON retornados é controlada por um modelo. Você pode editar esse modelo usando a linguagem de modelo interna do Automad para personalizar campos usando variáveis, objetos e estruturas de controle.
+sys_headless_edit_info: A estrutura dos dados JSON retornados é controlada por um modelo. Você pode editar esse modelo usando a linguagem de modelo embutida do Automad para personalizar campos usando variáveis, objetos e estruturas de controle.
 
 -
 
-sys_headless_info: A ativação do modo decapitado transforma o Automad em um sistema de gerenciamento de conteúdo focado inteiramente na criação de conteúdo sem uma camada de apresentação. Embora o Painel ainda possa ser usado para gerenciar conteúdo, todos os dados e arquivos são acessíveis por meio de uma API JSON somente leitura.
+sys_headless_info: Ativar o modo headless transforma o Automad em um sistema de gerenciamento de conteúdo com foco inteiramente na criação de conteúdo sem uma camada de apresentação. Embora o painel ainda possa ser usado para gerenciar conteúdo, todos os dados e arquivos podem ser acessados por meio de uma API JSON somente leitura.
 
 -
 
@@ -598,23 +610,19 @@ sys_language: Língua
 
 -
 
-sys_language_info: Existem vários idiomas disponíveis para o painel. As traduções são criadas automaticamente. Esse recurso ainda está em fase experimental e, portanto, algumas traduções podem não ser precisas.
+sys_language_info: Existem vários idiomas disponíveis para o Dashboard. As traduções são criadas automaticamente. Este recurso ainda está em fase experimental e, portanto, algumas traduções podem não ser precisas.
 
 -
 
-sys_status_cache_enabled: O cache está ativado
+sys_status_cache_enabled: Cache está habilitado
 
 -
 
-sys_status_cache_disabled: O cache está desativado
+sys_status_cache_disabled: Cache está desativado
 
 -
 
-sys_status_debug_enabled: A depuração está ativada
-
--
-
-sys_status_debug_disabled: A depuração está desativada
+sys_status_debug_enabled: A depuração está habilitada
 
 -
 
@@ -634,15 +642,15 @@ sys_update: Atualizar
 
 -
 
-sys_update_available: Uma versão mais recente do Automad está disponível e pronta para ser instalada. <br> Faça backup da sua instalação atual antes de atualizar!
+sys_update_available: Uma versão mais recente do Automad está disponível e pronta para ser instalada. <br> Faça backup de sua instalação atual antes de atualizar!
 
 -
 
-sys_update_current_version: A versão atualmente instalada é
+sys_update_current_version: Sua versão atualmente instalada é
 
 -
 
-sys_update_items: Os seguintes itens são afetados pela atualização:
+sys_update_items: Observe que os seguintes arquivos e diretórios são afetados pela atualização:
 
 -
 
@@ -654,11 +662,11 @@ sys_update_progress: Aguarde e não feche a janela durante a atualização ...
 
 -
 
-sys_update_to: Atualizar para
+sys_update_to: Atualizar para a versão
 
 -
 
-sys_update_windows_warning: Verifique se todos os arquivos da sua instalação estão fechados em programas externos antes de executar a atualização para evitar problemas de permissão!
+sys_update_windows_warning: Certifique-se de que todos os arquivos de sua instalação estejam fechados em programas externos antes de executar a atualização para evitar problemas de permissões!
 
 -
 
@@ -706,4 +714,8 @@ sys_user_registered: Usuários registrados
 
 -
 
-sys_user_you: Você
+sys_user_you: Vocês
+
+-
+
+theme_readme_alert: Clique aqui para ler a documentação do tema ativo!

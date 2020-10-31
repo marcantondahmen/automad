@@ -9,7 +9,7 @@
 				<@ snippets/clear_search.php @>
 			</div>
 		<@ end ~@>
-		<@ snippets/pagelist_blog.php @>
+		<@ blocks/pagelist/blog.php @>
 		<@ snippets/pagination.php @>
 	</div>
 <@ snippets/footer.php @>

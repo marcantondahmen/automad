@@ -50,7 +50,27 @@
 	}
 
 	&-item {
+		overflow: hidden;
 		background-color: @panel-box-background;
 	}
+
+	&-clean-bottom &-content {
+
+		display: flex;
+		box-sizing: border-box;
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 100%;
+
+		& > .uk-panek-teaser {
+			flex-grow: 1;
+		}
+
+		& > .panel-body {
+			flex-grow: 1;
+		}
+
+	}
+
 
 }

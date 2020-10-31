@@ -129,7 +129,7 @@ class Selection {
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
 	 *	@param boolean $excludeHidden
-	 * 	@param boolean $excludeCurrent
+	 *	@param boolean $excludeCurrent
 	 *	@param integer $offset
 	 *	@param integer $limit
 	 *	@return array $this->selection
@@ -246,7 +246,7 @@ class Selection {
 	 *	For example passing 'page|home' as parameter will include all pages with a template that 
 	 *	contains 'page' or 'home' as substrings.
 	 *
-	 *	@param string $template
+	 *	@param string $regex
 	 */
 	
 	public function filterByTemplate($regex) {
@@ -413,7 +413,7 @@ class Selection {
 	 *	While iterating a set of variable/regex combinations in $options, all pages where
 	 *	a given variable is not matching its assigned regex are removed from the selection.
 	 *
-	 * 	@param array $options
+	 *	@param array $options
 	 */
 
 	public function match($options) {
@@ -426,13 +426,16 @@ class Selection {
 
 			foreach ($options as $key => $regex) {
 
-				$this->selection = array_filter(
-					$this->selection, 
-					function($Page) use ($key, $regex) {
-						return preg_match($regex, $Page->get($key));
-					}
+				if (@preg_match($regex, null) !== false) {
+
+					$this->selection = array_filter(
+						$this->selection, 
+						function($Page) use ($key, $regex) {
+							return preg_match($regex, $Page->get($key));
+						}
+					);
 					
-				);
+				}
 
 			}
 

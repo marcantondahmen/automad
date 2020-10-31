@@ -55,14 +55,15 @@ class Search {
 	/**
 	 *	Create a search field.
 	 *      
-	 *  @param string $tooltip
-	 *  @return string The HTML for the search field
+	 *	@param string $placeholder
+	 *	@param string $tooltip
+	 *	@return string The HTML for the search field
 	 */
 	
 	public static function render($placeholder = '', $tooltip = '') {
 		
 		if ($tooltip) {
-			$tooltip = 'title="' . $tooltip . '" data-uk-tooltip="{pos:\'bottom\'}" ';
+			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 
 		$dashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;

@@ -45,19 +45,25 @@
 		init: function() {
 			
 			$(window).bind('keydown', function(e) {
+
 				if (e.ctrlKey || e.metaKey) {
 					switch (String.fromCharCode(e.which).toLowerCase()) {
 						case 's':
 							e.preventDefault();
 							$('.am-navbar [data-am-submit], .am-inpage .uk-open [type="submit"]').click();
-							break;
+							break;				
+					}
+				}
+
+				if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
+					switch (String.fromCharCode(e.which).toLowerCase()) {
 						case ' ':
 							e.preventDefault();
 							$('.am-navbar-search [name="query"]').focus();
 							break;
-						
 					}
 				}
+
 			});
 			
 		}

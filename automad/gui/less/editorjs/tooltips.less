@@ -36,6 +36,7 @@
 .ct {
 
 	z-index: @tooltip-z-index;
+	-webkit-mask-box-image: none;
 
 	.am-inpage ~ & {
 		z-index: @tooltip-z-index + 9000;
@@ -47,12 +48,19 @@
 	}
 
 	&:before {
-		border-radius: 9px;
+		border-radius: @am-radius-small;
+		-webkit-mask-box-image: none;
 	}
 
 	&__content {
+		padding: 0.43rem 0.5rem;
 		color: @tooltip-color;
-		border-radius: 9px;
+		border-radius: @am-radius-small;
+	}
+
+	& .ce-toolbox-button-tooltip__shortcut,
+	& .ce-inline-toolbar__shortcut {
+		color: @am-tooltip-shortcut-color;
 	}
 
 }

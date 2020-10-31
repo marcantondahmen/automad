@@ -10,7 +10,7 @@ btn_add_var: Lisää muuttuja
 
 -
 
-btn_apply_reload: Levitä ja lataa uudelleen
+btn_apply_reload: Käytä ja lataa uudelleen
 
 -
 
@@ -50,11 +50,11 @@ btn_edit: Muokata
 
 -
 
-btn_edit_file_info: Muokkaa tiedoston tietoja
+btn_edit_file_info: Muokkaa tiedostotietoja
 
 -
 
-btn_edit_headless_template: Muokkaa päättömää mallia
+btn_edit_headless_template: Muokkaa Headless-mallia
 
 -
 
@@ -62,7 +62,7 @@ btn_edit_page: Muokkaa sivua
 
 -
 
-btn_files: Lähetetyt tiedostot
+btn_files: Ladatut tiedostot
 
 -
 
@@ -86,7 +86,7 @@ btn_import: Tuo URL-osoitteesta
 
 -
 
-btn_inpage_edit: Sivunmuokkaustila
+btn_inpage_edit: Sivun muokkaustila
 
 -
 
@@ -106,7 +106,7 @@ btn_login: Kirjaudu sisään
 
 -
 
-btn_manage_users: Hallinnoi käyttäjiä
+btn_manage_users: Hallitse käyttäjiä
 
 -
 
@@ -146,7 +146,11 @@ btn_save: Tallenna muutokset
 
 -
 
-btn_upload: Upload
+btn_update: Päivittää
+
+-
+
+btn_upload: Lähetä
 
 -
 
@@ -162,7 +166,7 @@ confirm_delete_users: Haluatko varmasti poistaa valitut käyttäjät?
 
 -
 
-confirm_reset_headless: Haluatko varmasti nollata mukautetun päättömän mallin?
+confirm_reset_headless: Haluatko varmasti nollata mukautetun headless-mallin?
 
 -
 
@@ -170,7 +174,7 @@ dashboard_memory: Muistin käyttö:
 
 -
 
-dashboard_modified: Viimeisin toiminta
+dashboard_modified: Viimeisin toiminta sivustolla
 
 -
 
@@ -214,7 +218,7 @@ error_login: Väärä käyttäjänimi tai salasana
 
 -
 
-error_log_out: Kirjaudu ulos epäonnistui!
+error_log_out: Kirjautuminen ulos epäonnistui!
 
 -
 
@@ -222,11 +226,11 @@ error_no_destination: Valitse sivu määränpääksi!
 
 -
 
-error_no_js: Ota JavaScript käyttöön selaimessa käyttääksesi hallintapaneelia!
+error_no_js: Ota JavaScript käyttöön selaimessasi käyttääksesi hallintapaneelia!
 
 -
 
-error_no_theme: Ei teemaa valittu! Valitse pääteema.
+error_no_theme: Teemaa ei ole valittu! Valitse pääteema.
 
 -
 
@@ -238,11 +242,11 @@ error_import: Tiedoston tuonti epäonnistui!
 
 -
 
-error_packages: Paketteja ei voitu ladata Packagistista!
+error_packages: Pakettien lataaminen Packagistista epäonnistui!
 
 -
 
-error_composer_memory: Palvelimellasi ei ole tarpeeksi muistia pakettien asentamiseen, päivittämiseen tai poistamiseen! Jos käytät tätä sivustoa jaetussa isännöintipalvelussa, jossa on rajoitettu määrä muistia, yritä päivittää suunnitelma tai asentaa sivustosi paikalliselle tietokoneelle ilman muistirajoituksia.
+error_composer_memory: Palvelimellasi ei ole tarpeeksi muistia pakettien asentamiseen, päivittämiseen tai poistamiseen! Jos käytät tätä sivustoa jaetussa hosting-palvelussa, jossa on rajoitettu määrä muistia, yritä päivittää suunnitelma tai asentaa sivustosi paikalliseen tietokoneeseen ilman muistirajoituksia.
 
 -
 
@@ -258,7 +262,7 @@ error_password_current: Nykyinen salasana on väärä!
 
 -
 
-error_password_repeat: Anna kahdesti sama uusi salasana!
+error_password_repeat: Anna kaksi kertaa sama uusi salasana!
 
 -
 
@@ -266,7 +270,7 @@ error_password_reuse: Älä käytä vanhaa salasanaasi uudelleen!
 
 -
 
-error_permission: Luvat evätty:
+error_permission: Estetyt käyttöoikeudet:
 
 -
 
@@ -274,15 +278,15 @@ error_template_missing: Malli puuttuu
 
 -
 
-error_update_connection: Ei voida muodostaa yhteyttä päivityspalvelimeen! Tämän voi yleensä aiheuttaa väärä päivityskokoonpano (config.json), SSL-varmennevirhe tai puuttuva cURL-kirjasto.
+error_update_connection: Yhteyttä päivityspalvelimeen ei voi muodostaa! Tämä voi yleensä johtua väärästä päivitysmäärityksestä (config.json), SSL-varmentevirheestä tai puuttuvasta CURL-kirjastosta.
 
 -
 
-error_update_download: Päivityksen lataus epäonnistui!
+error_update_download: Päivityksen lataaminen epäonnistui!
 
 -
 
-error_update_items: Virheellinen päivitettävien kohteiden luettelo!
+error_update_items: Virheellinen luettelo päivitettävistä tuotteista!
 
 -
 
@@ -290,7 +294,7 @@ error_update_failed: Päivitys epäonnistui! Palauta asennus varmuuskopiosta.
 
 -
 
-error_update_not_supported: Palvelin ei tue päivityksiä! Päivittäjä vaatii cURL- ja ZIP-kirjastojen asentamisen.
+error_update_not_supported: Palvelimesi ei tue päivityksiä! Päivitysohjelma vaatii cURL- ja ZIP-kirjastojen asentamisen.
 
 -
 
@@ -314,7 +318,7 @@ file_caption: Kuvateksti
 
 -
 
-image_crop: Rajaa kuvaa
+image_crop: Rajaa kuva
 
 -
 
@@ -330,7 +334,7 @@ image_options: Vaihtoehdot
 
 -
 
-image_select: Valitse kuva
+image_select: Valitse Kuva
 
 -
 
@@ -390,11 +394,15 @@ packages_update_all: Päivitä kaikki
 
 -
 
-packages_updating: Päivitetään paketteja ...
+packages_updating_all: Päivitetään paketteja ...
 
 -
 
-packages_removing: Poistetaan paketti ...
+packages_updating: Päivitetään pakettia ...
+
+-
+
+packages_removing: Poistetaan pakettia ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Valitse uuden sivun sijainti
 
 -
 
-page_move_destination: Valitse matkakohde
+page_move_destination: Valitse siirrettävä kohde
 
 -
 
@@ -418,7 +426,7 @@ page_redirect: Ohjaa sivu toiseen URL-osoitteeseen
 
 -
 
-page_tags: Tunnisteet (erota useita tunnisteita pilkulla tai välilehdellä)
+page_tags: Tunnisteet (erota useita tunnisteita pilkulla tai sarkaimella)
 
 -
 
@@ -430,11 +438,11 @@ page_var_name: Muuttujan nimi
 
 -
 
-page_vars_headless: Muuttujat
+page_vars_content: Sisältö
 
 -
 
-page_vars_template: Muuttujat nykyisessä mallissa
+page_vars_settings: Malliasetukset
 
 -
 
@@ -462,15 +470,15 @@ shared_theme: Pääteema
 
 -
 
-shared_theme_apply: Haluatko käyttää valittua teemaa ja päivittää käytettävissä olevien muuttujien luetteloa nyt? Tallentamattomat muutokset tallennetaan.
+shared_theme_apply: Haluatko käyttää valittua teemaa ja päivittää käytettävissä olevien muuttujien luettelon nyt? Tallentamattomat muutokset tallennetaan.
 
 -
 
-shared_vars_headless: Muuttujat
+shared_vars_content: Oletussisältö
 
 -
 
-shared_vars_main_theme: Muutokset pääteemassa
+shared_vars_settings: Mallin oletusasetukset
 
 -
 
@@ -502,15 +510,15 @@ success_cache_cleared: Välimuisti tyhjennettiin onnistuneesti!
 
 -
 
-success_cache_purged: Välimuistihakemiston puhdistus onnistui!
+success_cache_purged: Välimuistihakemisto puhdistettiin onnistuneesti!
 
 -
 
-success_config_update: Kokoonpanon päivitys onnistui!
+success_config_update: Kokoonpano on päivitetty onnistuneesti!
 
 -
 
-success_created: Luotu onnistuneesti
+success_created: Luo onnistuneesti kuva
 
 -
 
@@ -518,19 +526,19 @@ success_installed: Asennus onnistui
 
 -
 
-success_password_changed: Salasanasi vaihdetaan onnistuneesti!
+success_password_changed: Salasanasi vaihdettiin onnistuneesti!
 
 -
 
-success_log_out: Kirjaudu ulos onnistuneesti
+success_log_out: Kirjauduttiin ulos onnistuneesti
 
 -
 
-success_remove: Poistettu onnistuneesti
+success_remove: Poistaminen onnistui
 
 -
 
-success_reset_headless: Oletuspäättömän päättömän mallin palautus onnistui!
+success_reset_headless: Oletuspäimaton malli palautettiin onnistuneesti!
 
 -
 
@@ -542,11 +550,15 @@ success_update: Päivitetty Automad!
 
 -
 
-success_packages_updated: Päivitetty kaikki paketit onnistuneesti
+success_packages_updated_all: Kaikkien pakettien päivittäminen onnistui
 
 -
 
-sys_cache_info: Välimuisti on välttämätöntä sivustosi nopeuttamiseksi, ja se pitäisi yleensä ottaa käyttöön. Joissain tapauksissa saatat kuitenkin haluta poistaa käytöstä tai tyhjentää välimuistin.
+success_package_updated: Päivitetty onnistuneesti
+
+-
+
+sys_cache_info: Välimuistin tallentaminen on välttämätöntä sivustosi nopeuttamiseksi, ja se tulisi yleensä ottaa käyttöön. Joissakin olosuhteissa haluat ehkä poistaa välimuistin käytöstä tai tyhjentää sen.
 
 -
 
@@ -554,15 +566,15 @@ sys_cache_clear: Tyhjennä välimuisti
 
 -
 
-sys_cache_clear_info: Sivustovälimuistin tyhjentäminen pakottaa päivitettyjen sivujen ja tiedostojen uudelleen hakuun. Tämä toiminto ei poista sivutiedostoja tai kuvia välimuistihakemistosta.
+sys_cache_clear_info: Sivuston välimuistin tyhjentäminen pakottaa tarkistamaan päivitetyt sivut ja tiedostot. Tämä toiminto ei poista sivutiedostoja tai kuvia välimuistihakemistosta.
 
 -
 
-sys_cache_monitor: Tarkastusväli on
+sys_cache_monitor: Tarkistusväli on
 
 -
 
-sys_cache_monitor_info: Kun välimuisti on käytössä, Automad tarkistaa säännöllisesti tiedostojärjestelmän muutokset. Näiden tarkastusten tiheys voidaan määritellä täällä.
+sys_cache_monitor_info: Kun välimuisti on käytössä, Automad tarkistaa säännöllisesti tiedostojärjestelmän muutokset. Tarkastusten tiheys voidaan määrittää tässä.
 
 -
 
@@ -570,27 +582,27 @@ sys_cache_lifetime: Välimuistin käyttöikä on
 
 -
 
-sys_cache_lifetime_info: Kaikilla välimuistissa olevilla Automad-tiedoilla ja sivuilla on suurin käyttöikä. Kun kohteen elinaika ylittää, sen välimuisti rakennetaan uudelleen pyydettäessä.
+sys_cache_lifetime_info: Kaikilla välimuistissa olevilla Automad-tiedoilla ja sivuilla on suurin käyttöikä. Kun objektin käyttöikä ylittyy, sen välimuisti rakennetaan uudelleen pyydettäessä.
 
 -
 
-sys_cache_purge: Puhdista välimuistihakemisto
+sys_cache_purge: Tyhjennä välimuistihakemisto
 
 -
 
-sys_cache_purge_info: Toisin kuin välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää myös kaikki väliaikaiset tiedostot, poistetut sivut, päivitykset ja välimuistissa olevat kuvat järjestelmän väliaikaiseen hakemistoon. Tämä pakottaa kuvan ja sivuvälimuistin kokonaan uusimaan sekä poistamaan kaikki poistetut sivut. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan automaattisesti ajoittain tai käynnistettäessä uudelleen. Joissakin järjestelmissä hakemisto on kuitenkin tyhjennettävä manuaalisesti.
+sys_cache_purge_info: Toisin kuin välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää kaikki väliaikaiset tiedostot, poistetut sivut, päivitysvarmuuskopiot ja välimuistissa olevat kuvat järjestelmän tilapäiseen hakemistoon. Tämä pakottaa kuvan ja sivun välimuistin täydellisen uudelleenrakentamisen sekä kaikkien poistettujen sivujen siivoamisen. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan ajoittain tai uudelleenkäynnistyksen yhteydessä. Joissakin järjestelmissä kyseinen hakemisto on kuitenkin tyhjennettävä manuaalisesti.
 
 -
 
-sys_debug_info: Kun virheenkorjaus on käytössä, kaikki Automadin prosessit kirjataan selaimen konsoliin. Virheenkorjausta tarvitaan vain kehittämiseen tai vianetsintään, ja se tulisi poistaa käytöstä kaikissa muissa tapauksissa.
+sys_debug_info: Kun virheenkorjaus on käytössä, kaikki Automadin prosessit kirjataan selaimesi konsoliin. Virheenkorjausta tarvitaan vain kehitykseen tai vianmääritykseen, ja se tulisi poistaa käytöstä kaikissa muissa tapauksissa.
 
 -
 
-sys_headless_edit_info: Palautettujen JSON-tietojen rakennetta ohjataan mallilla. Voit muokata mallia Automadin sisäänrakennetulla mallikielellä kenttien mukauttamiseksi muuttujia, objekteja ja ohjausrakenteita käyttämällä.
+sys_headless_edit_info: Palautettujen JSON-tietojen rakennetta ohjataan mallilla. Voit muokata kyseistä mallia Automadin sisäänrakennetulla mallikielellä kenttien mukauttamiseksi muuttujien, objektien ja ohjausrakenteiden avulla.
 
 -
 
-sys_headless_info: Päättömän tilan aktivointi muuttaa Automadin sisällönhallintajärjestelmäksi, joka keskittyy kokonaan sisällön luomiseen ilman esityskerrosta. Vaikka hallintapaneelia voidaan edelleen käyttää sisällön hallintaan, kaikkiin tietoihin ja tiedostoihin pääsee vain luku-vain JSON-sovellusliittymän kautta.
+sys_headless_info: Päätön-tilan aktivoiminen tekee Automadista sisällönhallintajärjestelmän, joka keskittyy kokonaan sisällön luomiseen ilman esityskerrosta. Vaikka hallintapaneelia voidaan edelleen käyttää sisällön hallintaan, kaikki tiedot ja tiedostot ovat käytettävissä vain luku -oikeutetun JSON-sovellusliittymän kautta.
 
 -
 
@@ -598,7 +610,7 @@ sys_language: Kieli
 
 -
 
-sys_language_info: Hallintapaneelille on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on vielä kokeiluvaiheessa, ja siksi jotkut käännökset eivät välttämättä ole tarkkoja.
+sys_language_info: Kojelaudalle on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on edelleen kokeiluvaiheessa, joten jotkin käännökset eivät välttämättä ole tarkkoja.
 
 -
 
@@ -610,11 +622,7 @@ sys_status_cache_disabled: Välimuisti on poistettu käytöstä
 
 -
 
-sys_status_debug_enabled: Debugging on käytössä
-
--
-
-sys_status_debug_disabled: Virheenkorjaus on poistettu käytöstä
+sys_status_debug_enabled: Virheenkorjaus on käytössä
 
 -
 
@@ -634,7 +642,7 @@ sys_update: Päivittää
 
 -
 
-sys_update_available: Uudempi Automad-versio on saatavana ja valmis asennettavaksi. <br> Varmuuskopioi nykyinen asennus ennen päivittämistä!
+sys_update_available: Automadin uudempi versio on saatavana ja valmis asennettavaksi. <br> Varmuuskopioi nykyinen asennuksesi ennen päivittämistä!
 
 -
 
@@ -642,7 +650,7 @@ sys_update_current_version: Nykyinen asennettu versio on
 
 -
 
-sys_update_items: Päivitys vaikuttaa seuraaviin kohteisiin:
+sys_update_items: Huomaa, että päivitys vaikuttaa seuraaviin tiedostoihin ja hakemistoihin:
 
 -
 
@@ -650,15 +658,15 @@ sys_update_not_required: Automad on ajan tasalla.
 
 -
 
-sys_update_progress: Odota, älä sulje ikkunaa päivitettäessä ...
+sys_update_progress: Odota ja älä sulje ikkunaa päivittäessäsi ...
 
 -
 
-sys_update_to: Päivitä
+sys_update_to: Päivitä versioon
 
 -
 
-sys_update_windows_warning: Varmista, että käyttöoikeuskysymykset vältetään ennen päivityksen suorittamista, että kaikki asennustiedostosi on suljettu ulkoisissa ohjelmissa!
+sys_update_windows_warning: Varmista ennen päivityksen suorittamista, että kaikki asennuksen tiedostot ovat suljettuina ulkoisissa ohjelmissa, jotta vältät käyttöoikeusongelmat!
 
 -
 
@@ -707,3 +715,7 @@ sys_user_registered: Rekisteröityneet käyttäjät
 -
 
 sys_user_you: Sinä
+
+-
+
+theme_readme_alert: Napsauttamalla tätä voit lukea aktiivisen teeman ohjeet!

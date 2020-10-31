@@ -54,6 +54,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class Snippet {
 
 
+	/**
+	 *	This variable tracks whether a snippet is called by another snippet to prevent inifinte recursive loops.
+	 */
+
+	private static $snippetIsRendering = false;
+
+
 	/**	
 	 *	Render a snippet block.
 	 *	
@@ -63,6 +70,11 @@ class Snippet {
 	 */
 
 	public static function render($data, $Automad) {
+
+		// Prevent infinite recursion.
+		if (self::$snippetIsRendering) {
+			return false;
+		}
 
 		if (!empty($data->file)) {
 
@@ -80,14 +92,15 @@ class Snippet {
 
 			} 
 
+			self::$snippetIsRendering = true;
+
 			$View = new View($Automad);
 			$output = $Automad->loadTemplate($file);
 			$output = $View->interpret($output, dirname($file));
-			$output = $View->obfuscateEmails($output);
-			$output = $View->resizeImages($output);
-			$output = $View->resolveUrls($output, 'absoluteUrlToRoot');
 			Core\Blocks::$extensionAssets = array_merge_recursive(Core\Blocks::$extensionAssets, $View->extensionAssets);
 			
+			self::$snippetIsRendering = false;
+
 			return $output;
 
 		}

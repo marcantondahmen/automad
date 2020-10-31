@@ -55,7 +55,7 @@ class Users {
 	/**
 	 * 	Renders the users component.
 	 * 
-	 * 	@return string The rendered HTML
+	 *	@return string The rendered HTML
 	 */
 
 	public static function render() {
@@ -85,11 +85,11 @@ class Users {
 						></form>
 						<div class="uk-modal-footer uk-text-right">
 							<button type="button" class="uk-modal-close uk-button">
-								<span class="uk-hidden-small"><i class="uk-icon-close"></i>&nbsp;</span>
+								<i class="uk-icon-close"></i>&nbsp;
 								$Text->btn_close
 							</button>
-							<button type="button" class="uk-button uk-button-danger" data-am-submit="users">
-								<span class="uk-hidden-small"><i class="uk-icon-user-times"></i>&nbsp;</span>
+							<button type="button" class="uk-button uk-button-primary" data-am-submit="users">
+								<i class="uk-icon-user-times"></i>&nbsp;
 								$Text->btn_remove_selected
 							</button>
 						</div>

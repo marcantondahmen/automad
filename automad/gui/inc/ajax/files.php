@@ -97,9 +97,9 @@ if ($files) { ?>
 					<span class="uk-hidden-small"><i class="uk-icon-cloud-download"></i>&nbsp;</span>
 					<?php Text::e('btn_import'); ?>
 				</a>
-			</div>
+			</div>&nbsp;
 			<button 
-			class="uk-button uk-button-danger uk-hidden-small" 
+			class="uk-button uk-button-link uk-hidden-small" 
 			data-am-submit="files"
 			>
 				<i class="uk-icon-remove"></i>&nbsp;
@@ -109,7 +109,7 @@ if ($files) { ?>
 		<li class="uk-width-1-3 uk-visible-small">
 			<div class="am-icon-buttons uk-text-right">
 				<button 
-				class="uk-button uk-button-danger" 
+				class="uk-button" 
 				title="<?php Text::e('btn_remove_selected'); ?>"
 				data-am-submit="files"
 				data-uk-tooltip

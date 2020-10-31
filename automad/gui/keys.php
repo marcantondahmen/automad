@@ -54,45 +54,69 @@ class Keys {
 	
 	
 	/**
-	 *	The Automad object.
-	 */
-	
-	private $Automad;
-	
-	
-	/**
 	 *	Array with reserved variable keys.
 	 */
 	
-	public $reserved = array(AM_KEY_DATE, AM_KEY_HIDDEN, AM_KEY_TAGS, AM_KEY_THEME, AM_KEY_TITLE, AM_KEY_SITENAME, AM_KEY_URL);
+	public static $reserved = array(
+		AM_KEY_DATE, 
+		AM_KEY_HIDDEN, 
+		AM_KEY_TAGS, 
+		AM_KEY_THEME, 
+		AM_KEY_TITLE, 
+		AM_KEY_SITENAME, 
+		AM_KEY_URL
+	);
 	
-	
+
 	/**
-	 *	Set $this->Automad when creating an instance.
-	 *
-	 *	@param object $Automad
+	 * 	Get text variable keys from an array of keys.
+	 * 
+	 *	@param array $keys
+	 *	@return array The array with only text variables.
 	 */
-	
-	public function __construct($Automad) {
-		
-		$this->Automad = $Automad;
-		
+
+	public static function filterTextKeys($keys) {
+
+		return array_filter($keys, function($key) {
+			return preg_match('/^(text|\+)/', $key);
+		});
+
 	}
-	
+
+
+	/**
+	 * 	Get settings variable keys from an array of keys.
+	 * 
+	 *	@param array $keys
+	 *	@return array The array with only settings variables.
+	 */
+
+	public static function filterSettingKeys($keys) {
+
+		sort($keys);
+
+		return array_filter($keys, function($key) {
+			return (preg_match('/^(text|\+)/', $key) == false);
+		});
+
+	}
+
 	
 	/**
 	 *	Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
 	 *	
+	 *	@param object $Page
+	 *	@param object $Theme
 	 *	@return array Keys in the currently used template (without reserved keys)
 	 */
 	
-	public function inCurrentTemplate() {
+	public static function inCurrentTemplate($Page, $Theme) {
 		
-		$Page = $this->Automad->Context->get();
 		// Don't use $Page->getTemplate() to prevent exit on errors.
 		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
+		$keys = self::inTemplate($file);
 		
-		return $this->inTemplate($file);
+		return self::cleanUp($keys, $Theme->getMask('page'));
 		
 	}
 
@@ -104,7 +128,7 @@ class Keys {
 	 *	@return array Keys in a given template (without reserved keys)
 	 */
 	
-	public function inTemplate($file) {
+	public static function inTemplate($file) {
 		
 		$keys = array();
 	
@@ -132,14 +156,14 @@ class Keys {
 					$include = dirname($file) . '/' . $match['file'];
 
 					if (file_exists($include)) {
-						$keys = array_merge($keys, $this->inTemplate($include));
+						$keys = array_merge($keys, self::inTemplate($include));
 					} 
 		
 				}
 			
 			}
 			
-			$keys = $this->sortAndFilter($keys);
+			$keys = self::cleanUp($keys);
 		
 		}
 			
@@ -151,52 +175,41 @@ class Keys {
 	/**
 	 *	Find all variable keys in templates of a given theme.
 	 *	
-	 * 	@param object $Theme
-	 * 	@return array Keys in all templates of the given Theme (without reserved keys)
+	 *	@param object $Theme
+	 *	@return array Keys in all templates of the given Theme (without reserved keys)
 	 */
 	
-	public function inTheme($Theme) {
+	public static function inTheme($Theme) {
 		
 		$keys = array();
 		
 		foreach ($Theme->templates as $file) {
-			$keys = array_merge($keys, $this->inTemplate($file));
+			$keys = array_merge($keys, self::inTemplate($file));
 		}
-		
-		return $this->sortAndFilter($keys);
-		
+
+		return self::cleanUp($keys, $Theme->getMask('shared'));
+
 	}
 	
 	
 	/**
-	 *	Sorts and filters a keys array. All text variable keys get placed in the
-	 *	beginning of the returned array and are not sorted. All non-text variable keys 
-	 *	are sorted alphabetically.
+	 *	Cleans up an array of keys. All reserved and duplicate keys get removed 
+	 *	and the optional UI mask is applied.
 	 * 
-	 * 	@param array $keys
-	 * 	@return array The sorted and filtered keys array
+	 *	@param array $keys
+	 *	@param array $mask
+	 *	@return array The sorted and filtered keys array
 	 */
+
+	private static function cleanUp($keys, $mask = array()) {
 	
-	private function sortAndFilter($keys) {
-	
-		// Remove reserved keys.
-		$keys = array_diff($keys, $this->reserved);
-	
-		// Place all block and text keys in the beginning of the array
-		// and only sort all non-text keys alphabetically.
-		$textKeys = array_filter($keys, function($key) {
-			return preg_match('/^(text|\+)/', $key);
-		});
+		if (!empty($mask)) {
+			$keys = array_filter($keys, function($key) use ($mask) {
+				return !in_array($key, $mask);
+			});
+		}
 		
-		$nonTextKeys = array_filter($keys, function($key) {
-			return (preg_match('/^(text|\+)/', $key) == false);
-		});
-	
-		sort($nonTextKeys);
-		
-		$keys = array_merge($textKeys, $nonTextKeys);
-	
-		return array_unique($keys);
+		return array_unique(array_diff($keys, self::$reserved));
 		
 	}
 	

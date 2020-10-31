@@ -2,7 +2,7 @@ title: Contact
 
 -
 
-date: 2020-04-16 12:00:00
+date: 2020-10-30 00:00:00
 
 -
 
@@ -22,7 +22,7 @@ colorBg: #f5f5f5
 
 -
 
-colorBorder: #121212
+colorBorder: #e0e0e0
 
 -
 

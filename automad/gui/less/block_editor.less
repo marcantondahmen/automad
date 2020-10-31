@@ -43,12 +43,15 @@
 
 @am-blocks-breakpoint-small: 651px;
 @am-blocks-breakpoint-small-max: (@am-blocks-breakpoint-small - 1px);
-@am-block-padding: 12px;
-@am-block-content-padding: 70px;
-@am-block-max-width: 1000px;
-@am-block-radius: 4px;
+@am-blocks-breakpoint-fullscreen-large: 1250px;
+@am-block-padding: 0.86rem;
+@am-block-content-padding: 4rem;
+@am-block-content-padding-stretched: 0rem;
+@am-block-content-padding-fullscreen: 10rem;
+@am-block-max-width: 80rem;
+@am-block-radius: @am-radius;
 @am-block-dropdown-background: @am-bg;
-@am-block-focused-background: @form-background;
+@am-block-focused-background: @am-bg;
 
 .am-block-editor {
 
@@ -57,9 +60,9 @@
 	&-container {
 
 		max-width: @am-block-max-width;
-		padding: 0 4px;
-		border: 2px dashed @am-border-color;
-		border-radius: @am-radius;
+		padding: 0 0.29rem;
+		border: 0.072rem dashed @am-border-color;
+		border-radius: @am-radius-large;
 
 		.am-fullscreen &,
 		.am-inpage & {
@@ -70,7 +73,7 @@
 			@media (max-width: @am-blocks-breakpoint-small-max) {
 				box-sizing: border-box;
 				margin: 0 -@am-fullscreen-padding !important;
-				padding: 0 (@am-fullscreen-padding - @am-block-padding);
+				padding: 0 (@am-fullscreen-padding - @am-block-padding) !important;
 				max-width: 100vw !important;
 			}
 
@@ -82,9 +85,47 @@
 		z-index: 200;
 	}
 
+	.am-inpage & {
+
+		@media (min-width: @utility-container-max-width) {
+			
+			width: 100vw;
+			left: -50vw;
+			margin-left: 50%;
+			
+			&-container {
+				max-width: @am-block-max-width;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 0 @am-block-padding;
+			}
+
+		}
+
+	}
+
 	& .codex-editor__redactor {
-		padding-bottom: 30px;
+		padding-bottom: 2.14rem;
 		margin-right: 0;
 	}
+
+	// Resize SVG icons.
+	.svgWidth(@n) when (@n >= 4) {
+		.svgWidth(@n - 1);
+		& svg[width*=~'"@{n}"'] {
+			width: round(@n / 14, 2) * 1em !important;
+		}
+	}
+
+	.svgWidth(24);
+
+	.svgHeight(@n) when (@n >= 8) {
+		.svgHeight(@n - 1);
+		& svg[height*=~'"@{n}"'] {
+			height: round(@n / 14, 2) * 1em !important;
+		}
+	}
+
+	.svgHeight(22);
 
 }

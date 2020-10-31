@@ -36,13 +36,14 @@
 
 
 namespace Automad\Blocks;
+use Automad\Core\Str as Str;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The raw HTML block.
+ *	The raw HTML and markdown block.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
@@ -61,7 +62,7 @@ class Raw {
 
 	public static function render($data) {
 
-		return $data->code;
+		return Str::markdown($data->code);
 
 	}
 

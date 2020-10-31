@@ -38,10 +38,10 @@
 @am-md-selection-background:               @base-selection-background;
 
 @am-md-navbar-background:                  @am-bg;
-@am-md-navbar-padding:					   6px;
+@am-md-navbar-padding:					   0.43rem;
 
-@am-md-navbar-nav-height:                  36px;
-@am-md-navbar-nav-padding-horizontal:      10px;
+@am-md-navbar-nav-height:                  2.57rem;
+@am-md-navbar-nav-padding-horizontal:      0.71rem;
 @am-md-navbar-nav-line-height:             @am-md-navbar-nav-height;
 @am-md-navbar-nav-color:                   @am-text;
 
@@ -54,8 +54,8 @@
  
 @am-md-content-border:                     @am-border-color;
 @am-md-content-background:                 @am-bg;
-@am-md-content-padding:                    25px;
-@am-md-content-padding-fullscreen: 		   35px;
+@am-md-content-padding:                    1.79rem;
+@am-md-content-padding-fullscreen: 		   2.5rem;
 
 .uk-markdowneditor {
 
@@ -121,7 +121,7 @@
 				& svg {
 					height: 1rem;
 					width: auto;
-					margin-top: -2px;
+					margin-top: -0.14rem;
 					fill: @am-md-navbar-nav-color;
 					stroke: @am-md-navbar-nav-color;
 					.transition(fill 0.2s;);
@@ -172,9 +172,9 @@
 	}
 
 	&-content {
-		border-left: 1px solid @am-md-content-border;
-		border-right: 1px solid @am-md-content-border;
-		border-bottom: 1px solid @am-md-content-border;
+		border-left: 0.072rem solid @am-md-content-border;
+		border-right: @am-border-width solid @am-md-content-border;
+		border-bottom: @am-border-width solid @am-md-content-border;
 		border: none;
 		background-color: transparent;
 	}
@@ -232,7 +232,7 @@
 		&.CodeMirror-focused {
 			color: @form-focus-color;
 			background-color: @form-focus-background;
-			border-color: @form-focus-border;
+			.form-focus;
 		}
 
 		& .CodeMirror-line,
@@ -320,7 +320,7 @@
 
 .cm-s-default {
 	
-	font-weight: normal;
+	font-weight: @base-body-font-weight;
 	
 	& .cm-header {
 		color: inherit;

@@ -10,7 +10,7 @@ btn_add_var: Pievienot mainīgo
 
 -
 
-btn_apply_reload: Piesakieties un atkārtoti ielādējiet
+btn_apply_reload: Piesakieties un pārlādējiet
 
 -
 
@@ -18,7 +18,7 @@ btn_browse: Pārlūkot failus
 
 -
 
-btn_close: Aizveriet
+btn_close: Aizvērt
 
 -
 
@@ -42,7 +42,7 @@ btn_download_file: Lejupielādēt
 
 -
 
-btn_duplicate_page: Dublikāta lapa
+btn_duplicate_page: Lapas dublikāts
 
 -
 
@@ -54,7 +54,7 @@ btn_edit_file_info: Rediģēt faila informāciju
 
 -
 
-btn_edit_headless_template: Rediģējiet veidni bez galvas
+btn_edit_headless_template: Rediģējiet veidni Bez galvas
 
 -
 
@@ -122,7 +122,7 @@ btn_ok: Ok
 
 -
 
-btn_open_log: Atvērt žurnālu
+btn_open_log: Atveriet žurnālu
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Saglabāt izmaiņas
 
 -
 
+btn_update: Atjaunināt
+
+-
+
 btn_upload: Augšupielādēt
 
 -
@@ -162,7 +166,7 @@ confirm_delete_users: Vai tiešām vēlaties dzēst atlasītos lietotājus?
 
 -
 
-confirm_reset_headless: Vai tiešām vēlaties atiestatīt pielāgoto bezgalvju veidni?
+confirm_reset_headless: Vai tiešām vēlaties atiestatīt pielāgoto veidni bez galvas?
 
 -
 
@@ -170,7 +174,7 @@ dashboard_memory: Atmiņas izmantošana:
 
 -
 
-dashboard_modified: Jaunākās aktivitātes
+dashboard_modified: Jaunākā darbība vietnē
 
 -
 
@@ -182,7 +186,7 @@ dropzone: Velciet failus šeit
 
 -
 
-error_cache_purged: Kešatmiņas direktoriju nevar iztīrīt!
+error_cache_purged: Kešatmiņas direktoriju nevarēja iztīrīt!
 
 -
 
@@ -206,7 +210,7 @@ error_file_size: Nederīgs faila lielums!
 
 -
 
-error_form: Nepilnīgi vai nepareizi dati! <br /> Visi lauki ir obligāti un jāaizpilda, kā aprakstīts!
+error_form: Nepilnīgi vai nepareizi dati! <br /> Visi lauki ir obligāti un tie ir jāaizpilda, kā aprakstīts!
 
 -
 
@@ -214,19 +218,19 @@ error_login: Nederīgs lietotājvārds vai parole
 
 -
 
-error_log_out: Iziet neizdevās!
+error_log_out: Neizdevās atteikties!
 
 -
 
-error_no_destination: Lūdzu, atlasiet lapu kā galamērķi!
+error_no_destination: Lūdzu, izvēlieties lapu kā galamērķi!
 
 -
 
-error_no_js: Lūdzu, savā pārlūkprogrammā iespējojiet JavaScript, lai izmantotu informācijas paneli!
+error_no_js: Lūdzu, iespējojiet JavaScript savā pārlūkprogrammā, lai izmantotu informācijas paneli!
 
 -
 
-error_no_theme: Nav atlasīta neviena tēma. Lūdzu, atlasiet galveno motīvu.
+error_no_theme: Nav izvēlēta neviena tēma! Lūdzu, atlasiet galveno tēmu.
 
 -
 
@@ -234,15 +238,15 @@ error_no_url: Lūdzu, ievadiet derīgu URL!
 
 -
 
-error_import: Faila importēšana neizdevās!
+error_import: Failu importēšana neizdevās!
 
 -
 
-error_packages: Nevarēja ielādēt paketes no Packagist!
+error_packages: Nevarēja ielādēt pakas no Packagist!
 
 -
 
-error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu pakotnes. Ja jūs šo vietni izmantojat koplietotās mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalējiet vietni vietējā datorā bez atmiņas ierobežojumiem.
+error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu paketes! Ja šo vietni izmantojat koplietošanas mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalēt vietni vietējā datorā bez atmiņas ierobežojumiem.
 
 -
 
@@ -254,31 +258,31 @@ error_page_title: Trūkst nosaukuma!
 
 -
 
-error_password_current: Pašreizējā parole nav pareiza.
+error_password_current: Pašreizējā parole ir nepareiza!
 
 -
 
-error_password_repeat: Lūdzu, divreiz ievadiet to pašu jauno paroli!
+error_password_repeat: Lūdzu, ievadiet divreiz to pašu jauno paroli!
 
 -
 
-error_password_reuse: Nelietojiet atkārtotu veco paroli!
+error_password_reuse: Nelietojiet atkārtoti izmantot savu veco paroli!
 
 -
 
-error_permission: Noraidītas atļaujas:
+error_permission: Noraidītās atļaujas:
 
 -
 
-error_template_missing: Trūkst veidnes
+error_template_missing: Veidne trūkst
 
 -
 
-error_update_connection: Nevar izveidot savienojumu ar atjauninājumu serveri! Parasti to var izraisīt nepareiza atjaunināšanas konfigurācija (config.json), SSL sertifikāta kļūda vai trūkstoša cURL bibliotēka.
+error_update_connection: Nevar izveidot savienojumu ar atjaunināšanas serveri! Parasti to var izraisīt nepareiza atjaunināšanas konfigurācija (config.json), SSL sertifikāta kļūda vai trūkstoša CURL bibliotēkas.
 
 -
 
-error_update_download: Neizdevās lejupielādēt atjauninājumu.
+error_update_download: Neizdevās lejupielādēt atjauninājumu!
 
 -
 
@@ -290,15 +294,15 @@ error_update_failed: Atjaunināšana neizdevās! Lūdzu, atjaunojiet instalācij
 
 -
 
-error_update_not_supported: Jūsu serveris neatbalsta atjauninājumus. Atjauninātājam ir jāinstalē cURL un ZIP bibliotēkas.
+error_update_not_supported: Jūsu serveris neatbalsta atjauninājumus! Atjauninātājam ir nepieciešams instalēt cURL un ZIP bibliotēkas.
 
 -
 
-error_update_permission: Nevar palaist atjaunināšanu! Atļaujas ir liegtas!
+error_update_permission: Nevar palaist atjauninājumu! Atļaujas liegtas!
 
 -
 
-error_var_exists: Ar mainīgo jau ir mainīgais!
+error_var_exists: Ir jau mainīgais ar šādu nosaukumu!
 
 -
 
@@ -330,11 +334,11 @@ image_options: Iespējas
 
 -
 
-image_select: Atlasiet Attēlu
+image_select: Atlasiet Attēls
 
 -
 
-images_page: Lapu attēli
+images_page: Lappuses attēli
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Vispārīgi attēli
 
 -
 
-link_placeholder: Sāciet rakstīt lapas virsrakstu vai ielīmējiet šeit ārēju saiti
+link_placeholder: Sāciet rakstīt lapas nosaukumu vai šeit ielīmējiet ārēju saiti
 
 -
 
@@ -366,7 +370,7 @@ log_out_title: Izlogojies
 
 -
 
-packages_title: Pakas
+packages_title: Iepakojumi
 
 -
 
@@ -378,11 +382,11 @@ packages_filter: Filtrēt
 
 -
 
-packages_installed: Ir instalēta
+packages_installed: Ir uzstādīts
 
 -
 
-packages_installing: Notiek paketes instalēšana ...
+packages_installing: Notiek pakotnes instalēšana ...
 
 -
 
@@ -390,11 +394,15 @@ packages_update_all: Atjaunot visu
 
 -
 
-packages_updating: Notiek pakešu atjaunināšana ...
+packages_updating_all: Notiek pakotņu atjaunināšana ...
 
 -
 
-packages_removing: Notiek paketes noņemšana ...
+packages_updating: Notiek pakotnes atjaunināšana ...
+
+-
+
+packages_removing: Notiek pakotnes noņemšana ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Atlasiet jaunās lapas atrašanās vietu
 
 -
 
-page_move_destination: Izvēlieties pārvietošanās mērķi
+page_move_destination: Izvēlieties pārvietošanās galamērķi
 
 -
 
@@ -410,15 +418,15 @@ page_settings: Lapas iestatījumi
 
 -
 
-page_prefix: Prefikss (Pasūtīt navigācijā)
+page_prefix: Prefikss (secība navigācijā)
 
 -
 
-page_redirect: Novirzīt lapu uz citu URL
+page_redirect: Novirziet lapu uz citu URL
 
 -
 
-page_tags: Tagi (atdaliet vairākus tagus ar komatu vai cilni)
+page_tags: Tagi (Atdaliet vairākus tagus pēc komata vai cilnes)
 
 -
 
@@ -426,15 +434,15 @@ page_theme_template: Veidne
 
 -
 
-page_var_name: Mainīgais nosaukums
+page_var_name: Mainīgā nosaukums
 
 -
 
-page_vars_headless: Mainīgie
+page_vars_content: Saturs
 
 -
 
-page_vars_template: Mainīgie pašreizējā veidnē
+page_vars_settings: Veidnes iestatījumi
 
 -
 
@@ -446,7 +454,7 @@ page_visibility: Visibility
 
 -
 
-sidebar_header_global: Globālā
+sidebar_header_global: Globāls
 
 -
 
@@ -462,15 +470,15 @@ shared_theme: Galvenā tēma
 
 -
 
-shared_theme_apply: Vai vēlaties izmantot izvēlēto motīvu un atjaunināt pieejamo mainīgo sarakstu tagad? Jūsu nesaglabātās izmaiņas tiks saglabātas.
+shared_theme_apply: Vai vēlaties lietot atlasīto motīvu un atjaunināt pieejamo mainīgo sarakstu tūlīt? Jūsu nesaglabātās izmaiņas tiks saglabātas.
 
 -
 
-shared_vars_headless: Mainīgie
+shared_vars_content: Noklusējuma saturs
 
 -
 
-shared_vars_main_theme: Mainīgās tēmas galvenajā tēmā
+shared_vars_settings: Noklusējuma veidņu iestatījumi
 
 -
 
@@ -478,11 +486,11 @@ shared_vars_unused: Neizmantotie mainīgie
 
 -
 
-shared_var_name: Mainīgais nosaukums
+shared_var_name: Mainīgā nosaukums
 
 -
 
-search_no_results: Neviena lapa nav atrasta.
+search_no_results: Nav atrasta neviena lapa!
 
 -
 
@@ -498,15 +506,15 @@ success_added: Veiksmīgi pievienots
 
 -
 
-success_cache_cleared: Kešatmiņa tika veiksmīgi iztīrīta.
+success_cache_cleared: Kešatmiņa tika veiksmīgi notīrīta!
 
 -
 
-success_cache_purged: Kešatmiņas direktorija tika veiksmīgi iztīrīta.
+success_cache_purged: Kešatmiņas katalogs tika veiksmīgi iztīrīts!
 
 -
 
-success_config_update: Konfigurācija ir veiksmīgi atjaunināta!
+success_config_update: Veiksmīgi atjaunināta konfigurācija!
 
 -
 
@@ -522,7 +530,7 @@ success_password_changed: Jūsu parole tika veiksmīgi nomainīta!
 
 -
 
-success_log_out: Veiksmīgi izrakstījies
+success_log_out: Izrakstījies veiksmīgi
 
 -
 
@@ -530,7 +538,7 @@ success_remove: Veiksmīgi noņemts
 
 -
 
-success_reset_headless: Veiksmīgi atjaunota noklusējuma bezgalvju veidne.
+success_reset_headless: Veiksmīgi atjaunota noklusējuma veidne bez galvas.
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Saglabātās izmaiņas
 
 -
 
-success_update: Veiksmīgi atjaunināta Automad!
+success_update: Veiksmīgi atjaunināts Automad!
 
 -
 
-success_packages_updated: Visas paketes ir veiksmīgi atjauninātas
+success_packages_updated_all: Veiksmīgi atjauninātas visas pakotnes
 
 -
 
-sys_cache_info: Kešatmiņas saglabāšana ir būtiska vietnes paātrināšanai, un parasti tā ir jāiespējo. Tomēr dažos gadījumos jūs varētu vēlēties atspējot vai notīrīt kešatmiņu.
+success_package_updated: Veiksmīgi atjaunināta
+
+-
+
+sys_cache_info: Kešatmiņa ir būtiska, lai paātrinātu jūsu vietni, un tā parasti ir jāiespējo. Tomēr dažos gadījumos jūs varētu vēlēties atspējot vai notīrīt kešatmiņu.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Iztīrīt kešatmiņu
 
 -
 
-sys_cache_clear_info: Vietnes kešatmiņas notīrīšana liek skenēt atjauninātās lapas un failus. Šī darbība no kešatmiņas direktorijas nenoņems nevienu lapu failu vai attēlu.
+sys_cache_clear_info: Vietnes kešatmiņas notīrīšana liek atkārtoti skenēt atjauninātās lapas un failus. Veicot šo darbību, no kešatmiņas direktorijas netiks noņemti neviens lapas fails vai attēls.
 
 -
 
@@ -562,15 +574,15 @@ sys_cache_monitor: Pārbaudes intervāls ir
 
 -
 
-sys_cache_monitor_info: Kad kešatmiņa ir iespējota, Automad regulāri pārbaudīs, vai nav izmaiņas failu sistēmā. Šeit var noteikt šo pārbaužu biežumu.
+sys_cache_monitor_info: Kad kešatmiņa ir iespējota, Automad regulāri pārbaudīs izmaiņas faila sistēmā. Šo pārbaužu biežumu var noteikt šeit.
 
 -
 
-sys_cache_lifetime: Kešatmiņas darbības laiks ir
+sys_cache_lifetime: Kešatmiņas kalpošanas laiks ir
 
 -
 
-sys_cache_lifetime_info: Visiem kešatmiņā saglabātajiem Automad datiem un lapām ir maksimālais darbības laiks. Pēc objekta kalpošanas laika pārsniegšanas tā kešatmiņa tiks atjaunota pēc pieprasījuma.
+sys_cache_lifetime_info: Visiem kešatmiņā saglabātajiem Automad datiem un lapām ir maksimālais kalpošanas laiks. Pēc objekta kalpošanas laika pārsniegšanas tā kešatmiņa tiks atjaunota pēc pieprasījuma.
 
 -
 
@@ -578,19 +590,19 @@ sys_cache_purge: Notīrīt kešatmiņas direktoriju
 
 -
 
-sys_cache_purge_info: Atšķirībā no kešatmiņas iztīrīšanas, iztīrot kešatmiņas direktoriju, visi pagaidu faili, izdzēstās lapas, atjaunināšanas dublējumi un kešatmiņā saglabātie attēli tiek pārvietoti uz sistēmas pagaidu direktoriju. Tas prasīs pilnīgu attēla un lapu kešatmiņas atjaunošanu, kā arī visu izdzēsto lapu tīrīšanu. Lielākajā daļā sistēmu pagaidu direktorijs tiek laiku pa laikam automātiski iztīrīts vai atsāknējot. Tomēr dažās sistēmās direktorijs ir jādzēš manuāli.
+sys_cache_purge_info: Pretstatā vienkārši kešatmiņas tīrīšanai, kešatmiņas direktorija tīrīšana arī visus pagaidu failus, izdzēstās lapas, atjaunināšanas dublējumkopijas un kešatmiņā saglabātos attēlus pārvietos uz sistēmas pagaidu direktoriju. Tas piespiedīs pilnībā atjaunot attēlu un lapu kešatmiņu, kā arī notīrīt visas izdzēstās lapas. Lielākajā daļā sistēmu pagaidu direktorijs laiku pa laikam tiek automātiski iztīrīts vai tiek restartēts. Tomēr dažās sistēmās šis direktorijs ir jānotīra manuāli.
 
 -
 
-sys_debug_info: Kad atkļūdošana ir iespējota, visi Automad procesi tiks reģistrēti jūsu pārlūkprogrammas konsolē. Atkļūdošana ir nepieciešama tikai izstrādei vai problēmu novēršanai, un visos citos gadījumos tā būtu jāatspējo.
+sys_debug_info: Kad atkļūdošana ir iespējota, visi Automad procesi tiks reģistrēti jūsu pārlūkprogrammas konsolē. Atkļūdošana ir nepieciešama tikai izstrādei vai problēmu novēršanai, un visos pārējos gadījumos tā ir jāatspējo.
 
 -
 
-sys_headless_edit_info: Atgriezto JSON datu struktūru kontrolē veidne. Jūs varat rediģēt šo veidni, izmantojot Automad iebūvēto veidņu valodu lauku pielāgošanai, izmantojot mainīgos, objektus un vadības struktūras.
+sys_headless_edit_info: Atgriezto JSON datu struktūru kontrolē veidne. Jūs varat rediģēt šo veidni, izmantojot Automad iebūvēto veidnes valodu, lai pielāgotu laukus, izmantojot mainīgos, objektus un vadības struktūras.
 
 -
 
-sys_headless_info: Aktivizējot bez galvas režīmu, Automad kļūst par satura pārvaldības sistēmu, kas pilnībā koncentrējas uz satura izveidi bez prezentācijas slāņa. Kaut arī informācijas paneli joprojām var izmantot satura pārvaldīšanai, visi dati un faili ir pieejami, izmantojot tikai lasāmo JSON API.
+sys_headless_info: Aktivizējot bezgalvu režīmu, Automad kļūst par satura pārvaldības sistēmu, kas pilnībā koncentrējas uz satura veidošanu bez prezentācijas slāņa. Lai gan informācijas paneli joprojām var izmantot satura pārvaldībai, visiem datiem un failiem var piekļūt, izmantojot tikai lasāmu JSON API.
 
 -
 
@@ -598,7 +610,7 @@ sys_language: Valoda
 
 -
 
-sys_language_info: Informācijas panelim ir pieejamas vairākas valodas. Tulkojumi tiek izveidoti automātiski. Šī funkcija joprojām ir eksperimentālā posmā, un tāpēc daži tulkojumi var nebūt precīzi.
+sys_language_info: Informācijas panelim ir pieejamas vairākas valodas. Tulkojumi tiek izveidoti automātiski. Šī funkcija joprojām ir eksperimentālā fāzē, un tāpēc daži tulkojumi var nebūt precīzi.
 
 -
 
@@ -611,10 +623,6 @@ sys_status_cache_disabled: Kešatmiņa ir atspējota
 -
 
 sys_status_debug_enabled: Atkļūdošana ir iespējota
-
--
-
-sys_status_debug_disabled: Atkļūdošana ir atspējota
 
 -
 
@@ -634,15 +642,15 @@ sys_update: Atjaunināt
 
 -
 
-sys_update_available: Ir pieejama jaunāka Automad versija un ir gatava uzstādīšanai. <br> Lūdzu, pirms atjaunināšanas izveidojiet dublējumu par pašreizējo instalāciju!
+sys_update_available: Ir pieejama jaunāka Automad versija, un tā ir gatava instalēšanai. <br> Pirms atjaunināšanas, lūdzu, dublējiet pašreizējo instalāciju!
 
 -
 
-sys_update_current_version: Pašlaik instalētā versija ir
+sys_update_current_version: Jūsu pašlaik instalētā versija ir
 
 -
 
-sys_update_items: Atjauninājums ietekmē šādus vienumus:
+sys_update_items: Ņemiet vērā, ka atjauninājums ietekmē šādus failus un direktorijus:
 
 -
 
@@ -650,11 +658,11 @@ sys_update_not_required: Automad ir atjaunināts.
 
 -
 
-sys_update_progress: Lūdzu, uzgaidiet un neaizveriet logu, kamēr atjaunināt ...
+sys_update_progress: Lūdzu, uzgaidiet un neaizveriet logu, kamēr tiek atjaunināts ...
 
 -
 
-sys_update_to: Atjaunināt uz
+sys_update_to: Atjaunināt uz versiju
 
 -
 
@@ -666,7 +674,7 @@ sys_user: Lietotāji
 
 -
 
-sys_user_info: Šeit varat pievienot vai noņemt vairāk lietotāju vai mainīt paroli.
+sys_user_info: Šeit varat pievienot vai noņemt vairāk lietotāju vai mainīt savu paroli.
 
 -
 
@@ -702,8 +710,12 @@ sys_user_add_repeat: Atkārtojiet paroli
 
 -
 
-sys_user_registered: Reģistrēti lietotāji
+sys_user_registered: Reģistrētie lietotāji
 
 -
 
 sys_user_you: Jūs
+
+-
+
+theme_readme_alert: Noklikšķiniet šeit, lai izlasītu aktīvās tēmas dokumentāciju!

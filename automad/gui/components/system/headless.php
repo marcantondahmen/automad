@@ -55,7 +55,7 @@ class Headless {
 	/**
 	 * 	Renders the headless component.
 	 * 
-	 * 	@return string The rendered HTML
+	 *	@return string The rendered HTML
 	 */
 
 	public static function render() {

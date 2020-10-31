@@ -10,7 +10,7 @@ btn_add_var: Tilføj variabel
 
 -
 
-btn_apply_reload: Påfør og genindlæs igen
+btn_apply_reload: Anvend og genindlæs
 
 -
 
@@ -26,7 +26,7 @@ btn_copy_url_clipboard: Kopier URL til udklipsholder
 
 -
 
-btn_copy_resized: Kopier og ændr størrelse
+btn_copy_resized: Kopier og tilpas størrelse
 
 -
 
@@ -42,7 +42,7 @@ btn_download_file: Hent
 
 -
 
-btn_duplicate_page: Duplikatside
+btn_duplicate_page: Kopier side
 
 -
 
@@ -54,7 +54,7 @@ btn_edit_file_info: Rediger filinfo
 
 -
 
-btn_edit_headless_template: Rediger hovedløs-skabelonen
+btn_edit_headless_template: Rediger skabelonen uden hoved
 
 -
 
@@ -74,7 +74,7 @@ btn_getting_data: Henter data ...
 
 -
 
-btn_hide_page: Skjul side i navigationen
+btn_hide_page: Skjul side i navigation
 
 -
 
@@ -82,11 +82,11 @@ btn_home: Home
 
 -
 
-btn_import: Importer fra URL
+btn_import: Import fra URL
 
 -
 
-btn_inpage_edit: In-Page redigeringstilstand
+btn_inpage_edit: Redigeringstilstand på siden
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Gem ændringer
 
 -
 
+btn_update: Opdatering
+
+-
+
 btn_upload: Upload
 
 -
@@ -162,7 +166,7 @@ confirm_delete_users: Er du sikker på, at du vil slette de valgte brugere?
 
 -
 
-confirm_reset_headless: Er du sikker på, at du vil nulstille den tilpassede headless-skabelon?
+confirm_reset_headless: Er du sikker på, at du vil nulstille den tilpassede hovedløse skabelon?
 
 -
 
@@ -178,7 +182,7 @@ dashboard_recently_edited: Senest redigerede sider
 
 -
 
-dropzone: Træk filer hit
+dropzone: Træk filer her
 
 -
 
@@ -206,7 +210,7 @@ error_file_size: Ugyldig filstørrelse!
 
 -
 
-error_form: Ufuldstændige eller forkerte data! <br /> Alle felter er påkrævet og skal udfyldes som beskrevet!
+error_form: Ufuldstændige eller forkerte data! <br /> Alle felter er obligatoriske og skal udfyldes som beskrevet!
 
 -
 
@@ -214,7 +218,7 @@ error_login: Ugyldigt brugernavn eller kodeord
 
 -
 
-error_log_out: Log af mislykkedes!
+error_log_out: Log ud mislykkedes!
 
 -
 
@@ -222,7 +226,7 @@ error_no_destination: Vælg en side som destination!
 
 -
 
-error_no_js: Aktivér JavaScript i din browser for at bruge Dashboard!
+error_no_js: Venligst aktiver JavaScript i din browser for at bruge Dashboard!
 
 -
 
@@ -230,7 +234,7 @@ error_no_theme: Intet tema valgt! Vælg et hovedtema.
 
 -
 
-error_no_url: Indtast en gyldig URL!
+error_no_url: Indtast venligst en gyldig URL!
 
 -
 
@@ -242,7 +246,7 @@ error_packages: Kunne ikke indlæse pakker fra Packagist!
 
 -
 
-error_composer_memory: Din server har ikke nok hukommelse til at installere, opdatere eller fjerne pakker! Hvis du kører dette websted på en delt-hosting-service med en begrænset mængde hukommelse, kan du prøve at opgradere din plan eller installere dit websted på en lokal computer uden hukommelsesbegrænsninger.
+error_composer_memory: Din server har ikke nok hukommelse til at installere, opdatere eller fjerne pakker! Hvis du kører dette websted på en delt hostingtjeneste med en begrænset mængde hukommelse, skal du prøve at opgradere din plan eller installere dit websted på en lokal computer uden hukommelsesbegrænsninger.
 
 -
 
@@ -250,7 +254,7 @@ error_page_not_found: Siden blev ikke fundet!
 
 -
 
-error_page_title: Titlen mangler!
+error_page_title: Titel mangler!
 
 -
 
@@ -258,19 +262,19 @@ error_password_current: Den aktuelle adgangskode er forkert!
 
 -
 
-error_password_repeat: Indtast to gange den samme nye adgangskode!
+error_password_repeat: Indtast venligst to gange den samme nye adgangskode!
 
 -
 
-error_password_reuse: Brug ikke dit gamle kodeord igen!
+error_password_reuse: Genbrug ikke din gamle adgangskode!
 
 -
 
-error_permission: Tilladelser afvist:
+error_permission: Tilladelser nægtet:
 
 -
 
-error_template_missing: Skabelonen mangler
+error_template_missing: Skabelon mangler
 
 -
 
@@ -282,7 +286,7 @@ error_update_download: Download af opdatering mislykkedes!
 
 -
 
-error_update_items: Ugyldig liste over varer, der skal opdateres!
+error_update_items: Ugyldig liste over emner, der skal opdateres!
 
 -
 
@@ -290,11 +294,11 @@ error_update_failed: Opdatering fejlede! Gendan din installation fra en sikkerhe
 
 -
 
-error_update_not_supported: Opdateringer understøttes ikke af din server! Opdatereren kræver, at der er installeret cURL- og ZIP-biblioteker.
+error_update_not_supported: Opdateringer understøttes ikke af din server! Opdateringsprogrammet kræver, at der installeres cURL- og ZIP-biblioteker.
 
 -
 
-error_update_permission: Kan ikke køre opdatering! Tilladelser afvist!
+error_update_permission: Kan ikke køre opdatering! Tilladelser nægtet!
 
 -
 
@@ -318,11 +322,11 @@ image_crop: Beskær billede
 
 -
 
-image_height_px: Højde (Pixels)
+image_height_px: Højde (pixel)
 
 -
 
-image_width_px: Bredde (Pixels)
+image_width_px: Bredde (pixel)
 
 -
 
@@ -334,7 +338,7 @@ image_select: Vælg billede
 
 -
 
-images_page: Sidebilleder
+images_page: Side billeder
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Generelle billeder
 
 -
 
-link_placeholder: Begynd at indtaste en sidetitel, eller indsæt et eksternt link her
+link_placeholder: Begynd at skrive en sidetitel, eller indsæt et eksternt link her
 
 -
 
@@ -370,7 +374,7 @@ packages_title: Pakker
 
 -
 
-packages_browse: Åbn pakke browser
+packages_browse: Åbn pakkebrowser
 
 -
 
@@ -390,15 +394,19 @@ packages_update_all: Opdater alle
 
 -
 
-packages_updating: Opdaterer pakker ...
+packages_updating_all: Opdaterer pakker ...
 
 -
 
-packages_removing: Fjerner pakke ...
+packages_updating: Opdaterer pakke ...
 
 -
 
-page_add_location: Vælg en placering for den nye side
+packages_removing: Fjerner pakken ...
+
+-
+
+page_add_location: Vælg en placering til den nye side
 
 -
 
@@ -410,15 +418,15 @@ page_settings: Sideindstillinger
 
 -
 
-page_prefix: Præfiks (ordre i navigation)
+page_prefix: Præfiks (rækkefølge i navigation)
 
 -
 
-page_redirect: Omdiriger side til en anden URL
+page_redirect: Omdiriger siden til en anden URL
 
 -
 
-page_tags: Mærker (Adskill flere tags efter komma eller fane)
+page_tags: Tags (Adskil flere tags efter komma eller fane)
 
 -
 
@@ -426,15 +434,15 @@ page_theme_template: Skabelon
 
 -
 
-page_var_name: Variabel Navn
+page_var_name: Variabelt navn
 
 -
 
-page_vars_headless: Variable
+page_vars_content: Indhold
 
 -
 
-page_vars_template: Variabler i den aktuelle skabelon
+page_vars_settings: Skabelonindstillinger
 
 -
 
@@ -466,11 +474,11 @@ shared_theme_apply: Vil du anvende det valgte tema og opdatere listen over tilg�
 
 -
 
-shared_vars_headless: Variable
+shared_vars_content: Standardindhold
 
 -
 
-shared_vars_main_theme: Variabler i hovedtemaet
+shared_vars_settings: Standardindstillinger for skabeloner
 
 -
 
@@ -478,7 +486,7 @@ shared_vars_unused: Ubrugte variabler
 
 -
 
-shared_var_name: Variabel Navn
+shared_var_name: Variabelt navn
 
 -
 
@@ -494,7 +502,7 @@ search_title: Søgeresultater
 
 -
 
-success_added: Tilføjet med succes
+success_added: Føjet til
 
 -
 
@@ -506,15 +514,15 @@ success_cache_purged: Cache-biblioteket blev renset med succes!
 
 -
 
-success_config_update: Opdateret konfiguration!
+success_config_update: Konfigurationen er opdateret!
 
 -
 
-success_created: Oprettet vellykket <br>
+success_created: Oprettet <br> <br>
 
 -
 
-success_installed: Installeret
+success_installed: Installeret korrekt
 
 -
 
@@ -522,7 +530,7 @@ success_password_changed: Din adgangskode blev ændret med succes!
 
 -
 
-success_log_out: Logget af succes
+success_log_out: Logget ud med succes
 
 -
 
@@ -530,7 +538,7 @@ success_remove: Fjernet
 
 -
 
-success_reset_headless: Gendannet standardhovedløs-skabelon blev succesfuld!
+success_reset_headless: Standardhovedløs skabelon blev gendannet!
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Gemte ændringer
 
 -
 
-success_update: Opdateret Automad!
+success_update: Automad er opdateret!
 
 -
 
-success_packages_updated: Alle pakker blev opdateret
+success_packages_updated_all: Alle pakker er opdateret
 
 -
 
-sys_cache_info: Cache er vigtigt for at fremskynde dit websted og bør generelt være aktiveret. Under nogle omstændigheder kan du dog muligvis deaktivere eller rydde din cache.
+success_package_updated: Opdateret
+
+-
+
+sys_cache_info: Cache er vigtigt for at fremskynde dit websted og bør generelt være aktiveret. Under nogle omstændigheder vil du muligvis deaktivere eller rydde din cache.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Ryd cache
 
 -
 
-sys_cache_clear_info: Rydning af webstedscachen tvinger en rescan til opdaterede sider og filer. Denne handling fjerner ikke nogen sidefiler eller billeder fra cache-biblioteket.
+sys_cache_clear_info: Rydning af webstedscache tvinger en genscanning til opdaterede sider og filer. Denne handling fjerner ikke sidefiler eller billeder fra cache-biblioteket.
 
 -
 
@@ -562,35 +574,35 @@ sys_cache_monitor: Kontrolintervallet er
 
 -
 
-sys_cache_monitor_info: Når cache er aktiveret, tjekker Automad regelmæssigt for ændringer i filsystemet. Hyppigheden af disse kontroller kan defineres her.
+sys_cache_monitor_info: Når caching er aktiveret, vil Automad regelmæssigt kontrollere ændringer i filsystemet. Hyppigheden af disse kontroller kan defineres her.
 
 -
 
-sys_cache_lifetime: Cache-levetiden er
+sys_cache_lifetime: Cache levetid er
 
 -
 
-sys_cache_lifetime_info: Alle cachede Automad-data og -sider har en maksimal levetid. Når et objekts levetid er overskredet, genopbygges cache, når det anmodes om det.
+sys_cache_lifetime_info: Alle cachede Automad-data og -sider har en maksimal levetid. Når et objekts levetid er overskredet, genopbygges dets cache efter anmodning.
 
 -
 
-sys_cache_purge: Purge Cache Directory
+sys_cache_purge: Rens cache-bibliotek
 
 -
 
-sys_cache_purge_info: I modsætning til blot at rydde cachen flytter cache-biblioteket også alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cache-billeder til temprary-biblioteket i systemet. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecachen samt en oprydning af alle slettede sider. På de fleste systemer renses det midlertidige bibliotek automatisk fra tid til anden eller ved genstart. På nogle systemer skal denne mappe imidlertid ryddes manuelt.
+sys_cache_purge_info: I modsætning til simpelthen at rydde cachen vil rensning af cache-biblioteket også flytte alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cachelagrede billeder til systemets temprary-bibliotek. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecache samt en oprydning af alle slettede sider. På de fleste systemer renses den midlertidige mappe automatisk fra tid til anden eller ved genstart. På nogle systemer skal kataloget imidlertid ryddes manuelt.
 
 -
 
-sys_debug_info: Når fejlsøgning er aktiveret, logges alle Automads processer på din browsers konsol. Fejlsøgning er kun nødvendig til udvikling eller fejlfinding og bør deaktiveres i alle andre tilfælde.
+sys_debug_info: Når fejlretning er aktiveret, vil alle Automads processer blive logget på din browsers konsol. Fejlfinding er kun nødvendigt til udvikling eller fejlfinding og bør deaktiveres i alle andre tilfælde.
 
 -
 
-sys_headless_edit_info: Strukturen af de returnerede JSON-data styres af en skabelon. Du kan redigere den skabelon ved hjælp af Automads indbyggede skabelonsprog til tilpasning af felter ved hjælp af variabler, objekter og kontrolstrukturer.
+sys_headless_edit_info: Strukturen af de returnerede JSON-data styres af en skabelon. Du kan redigere denne skabelon ved hjælp af Automads indbyggede skabelonsprog til at tilpasse felter ved hjælp af variabler, objekter og kontrolstrukturer.
 
 -
 
-sys_headless_info: Aktivering af hovedløs tilstand gør Automad til et indholdsstyringssystem, der helt fokuserer på indholdsoprettelse uden et præsentationslag. Mens Dashboard stadig kan bruges til at administrere indhold, er alle data og filer tilgængelige via et skrivebeskyttet JSON API.
+sys_headless_info: Aktivering af hovedløs tilstand gør Automad til et indholdsstyringssystem, der helt fokuserer på oprettelse af indhold uden et præsentationslag. Mens Dashboard stadig kan bruges til at administrere indhold, er alle data og filer tilgængelige via en skrivebeskyttet JSON API.
 
 -
 
@@ -598,23 +610,19 @@ sys_language: Sprog
 
 -
 
-sys_language_info: Der er flere sprog til rådighed for Dashboard. Oversættelserne oprettes automatisk. Denne funktion er stadig i en eksperimentel fase, og derfor er nogle oversættelser muligvis ikke nøjagtige.
+sys_language_info: Der er flere sprog tilgængelige til Dashboard. Oversættelserne oprettes automatisk. Denne funktion er stadig i en eksperimentel fase, og derfor er nogle oversættelser muligvis ikke korrekte.
 
 -
 
-sys_status_cache_enabled: Cache er aktiveret
+sys_status_cache_enabled: Caching er aktiveret
 
 -
 
-sys_status_cache_disabled: Cache er deaktiveret
+sys_status_cache_disabled: Caching er deaktiveret
 
 -
 
-sys_status_debug_enabled: Fejlsøgning er aktiveret
-
--
-
-sys_status_debug_disabled: Fejlsøgning er deaktiveret
+sys_status_debug_enabled: Fejlfinding er aktiveret
 
 -
 
@@ -634,15 +642,15 @@ sys_update: Opdatering
 
 -
 
-sys_update_available: En nyere version af Automad er tilgængelig og klar til installation. <br> Sikkerhedskopiér din nuværende installation, før du opdaterer!
+sys_update_available: En nyere version af Automad er tilgængelig og klar til installation. <br> Sikkerhedskopier din nuværende installation inden opdatering!
 
 -
 
-sys_update_current_version: Den aktuelt installerede version er
+sys_update_current_version: Din aktuelt installerede version er
 
 -
 
-sys_update_items: Følgende poster påvirkes af opdateringen:
+sys_update_items: Bemærk, at følgende filer og kataloger påvirkes af opdateringen:
 
 -
 
@@ -650,11 +658,11 @@ sys_update_not_required: Automad er opdateret.
 
 -
 
-sys_update_progress: Vent venligst og luk ikke vinduet, mens du opdaterer ...
+sys_update_progress: Vent og luk ikke vinduet, mens du opdaterer ...
 
 -
 
-sys_update_to: Opdater til
+sys_update_to: Opdater til version
 
 -
 
@@ -707,3 +715,7 @@ sys_user_registered: Registrerede brugere
 -
 
 sys_user_you: Du
+
+-
+
+theme_readme_alert: Klik her for at læse dokumentationen til det aktive tema!

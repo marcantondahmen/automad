@@ -71,13 +71,11 @@ $this->element('header');
 				required 
 				/>
 				<div class="uk-text-right">
-					<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button">
-						<i class="uk-icon-home"></i>&nbsp;
+					<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-link">
 						<?php Text::e('btn_home'); ?>
 					</a>
 					<button type="submit" class="uk-button uk-button-success">
-						<?php Text::e('btn_login'); ?>&nbsp;
-						<i class="uk-icon-sign-in"></i>
+						<?php Text::e('btn_login'); ?>
 					</button>
 				</div>
 			</form>

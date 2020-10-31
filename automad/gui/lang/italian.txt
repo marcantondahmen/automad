@@ -18,7 +18,7 @@ btn_browse: Sfoglia file
 
 -
 
-btn_copy_url_clipboard: Copia URL negli Appunti
+btn_copy_url_clipboard: Copia l'URL negli Appunti
 
 -
 
@@ -46,7 +46,7 @@ btn_edit: Modificare
 
 -
 
-btn_edit_file_info: Modifica informazioni file
+btn_edit_file_info: Modifica informazioni sul file
 
 -
 
@@ -66,11 +66,11 @@ btn_get_themes: Ottieni più temi
 
 -
 
-btn_getting_data: Ottenere i dati ...
+btn_getting_data: Recupero dati ...
 
 -
 
-btn_hide_page: Nascondi pagina nella navigazione
+btn_hide_page: Nascondi pagina in navigazione
 
 -
 
@@ -90,7 +90,7 @@ btn_install: Installare
 
 -
 
-btn_link: Collegamento
+btn_link: Link
 
 -
 
@@ -142,6 +142,10 @@ btn_save: Salvare le modifiche
 
 -
 
+btn_update: Aggiornare
+
+-
+
 btn_upload: Caricare
 
 -
@@ -178,7 +182,7 @@ dropzone: Trascina i file qui
 
 -
 
-error_cache_purged: Non è stato possibile eliminare la directory della cache!
+error_cache_purged: La directory della cache non può essere eliminata!
 
 -
 
@@ -202,11 +206,11 @@ error_file_size: Dimensione del file non valida!
 
 -
 
-error_form: Dati incompleti o errati! <br /> Tutti i campi sono obbligatori e devono essere compilati come descritto!
+error_form: Dati incompleti o errati! <br /> Tutti i campi sono obbligatori e devono essere completati come descritto!
 
 -
 
-error_login: Username o password non validi
+error_login: Nome utente o password errati
 
 -
 
@@ -218,7 +222,7 @@ error_no_destination: Seleziona una pagina come destinazione!
 
 -
 
-error_no_js: Si prega di abilitare JavaScript nel tuo browser per utilizzare la Dashboard!
+error_no_js: Abilita JavaScript nel tuo browser per utilizzare la dashboard!
 
 -
 
@@ -230,7 +234,7 @@ error_no_url: Per favore, inserisci un URL valido!
 
 -
 
-error_import: L'importazione del file non è riuscita!
+error_import: L'importazione del file è fallita!
 
 -
 
@@ -238,7 +242,7 @@ error_packages: Impossibile caricare i pacchetti da Packagist!
 
 -
 
-error_composer_memory: Il tuo server non ha memoria sufficiente per installare, aggiornare o rimuovere i pacchetti! Nel caso in cui si stia eseguendo questo sito su un servizio di hosting condiviso con una quantità limitata di memoria, provare ad aggiornare il piano o installare il sito su un computer locale senza restrizioni di memoria.
+error_composer_memory: Il tuo server non ha abbastanza memoria per installare, aggiornare o rimuovere i pacchetti! Se stai eseguendo questo sito su un servizio di hosting condiviso con una quantità di memoria limitata, prova ad aggiornare il tuo piano o installa il tuo sito su un computer locale senza limitazioni di memoria.
 
 -
 
@@ -258,7 +262,7 @@ error_password_repeat: Inserisci due volte la stessa nuova password!
 
 -
 
-error_password_reuse: Non riutilizzare la tua vecchia password!
+error_password_reuse: Non riutilizzare la vecchia password!
 
 -
 
@@ -270,11 +274,11 @@ error_template_missing: Modello mancante
 
 -
 
-error_update_connection: Impossibile connettersi al server di aggiornamento! Questo potrebbe in genere essere causato da una configurazione di aggiornamento errata (config.json), un errore del certificato SSL o una libreria cURL mancante.
+error_update_connection: Impossibile connettersi al server di aggiornamento! Ciò potrebbe in genere essere causato da una configurazione di aggiornamento errata (config.json), un errore del certificato SSL o una libreria cURL mancante.
 
 -
 
-error_update_download: Download dell'aggiornamento fallito!
+error_update_download: Download dell'aggiornamento non riuscito!
 
 -
 
@@ -362,7 +366,7 @@ log_out_title: Disconnesso
 
 -
 
-packages_title: Pacchetti
+packages_title: Pacchi
 
 -
 
@@ -386,11 +390,15 @@ packages_update_all: Aggiorna tutto
 
 -
 
-packages_updating: Aggiornamento dei pacchetti ...
+packages_updating_all: Aggiornamento dei pacchetti ...
 
 -
 
-packages_removing: Rimozione del pacchetto ...
+packages_updating: Aggiornamento del pacchetto in corso ...
+
+-
+
+packages_removing: Rimozione pacchetto ...
 
 -
 
@@ -402,11 +410,11 @@ page_move_destination: Seleziona una destinazione per lo spostamento
 
 -
 
-page_settings: Impostazioni della pagina
+page_settings: Impostazioni pagina
 
 -
 
-page_prefix: Prefisso (Ordine nella navigazione)
+page_prefix: Prefisso (ordine nella navigazione)
 
 -
 
@@ -414,23 +422,23 @@ page_redirect: Reindirizza la pagina a un altro URL
 
 -
 
-page_tags: Tag (separare più tag con virgola o scheda)
+page_tags: Tag (separa più tag con virgola o tabulazione)
 
 -
 
-page_var_name: Nome della variabile
+page_var_name: Nome variabile
 
 -
 
-page_vars_headless: Variabili
+page_vars_content: Soddisfare
 
 -
 
-page_vars_template: Variabili nel modello corrente
+page_vars_settings: Impostazioni modello
 
 -
 
-page_vars_unused: Variabili non utilizzate
+page_vars_unused: Variabili inutilizzate
 
 -
 
@@ -442,7 +450,7 @@ sidebar_header_global: Globale
 
 -
 
-sidebar_header_pages: Pagine
+sidebar_header_pages: Pages
 
 -
 
@@ -454,15 +462,15 @@ shared_theme: Tema principale
 
 -
 
-shared_theme_apply: Vuoi applicare il tema selezionato e aggiornare l'elenco delle variabili disponibili ora? Le modifiche non salvate verranno salvate.
+shared_theme_apply: Vuoi applicare il tema selezionato e aggiornare l'elenco delle variabili disponibili adesso? Le modifiche non salvate verranno salvate.
 
 -
 
-shared_vars_headless: Variabili
+shared_vars_content: Contenuto predefinito
 
 -
 
-shared_vars_main_theme: Variabili nel tema principale
+shared_vars_settings: Impostazioni modello predefinite
 
 -
 
@@ -470,7 +478,7 @@ shared_vars_unused: Variabili non utilizzate
 
 -
 
-shared_var_name: Nome della variabile
+shared_var_name: Nome variabile
 
 -
 
@@ -490,7 +498,7 @@ success_added: Aggiunto con successo
 
 -
 
-success_cache_cleared: La cache è stata cancellata correttamente!
+success_cache_cleared: La cache è stata cancellata con successo!
 
 -
 
@@ -498,7 +506,7 @@ success_cache_purged: La directory della cache è stata eliminata correttamente!
 
 -
 
-success_config_update: Configurazione aggiornata correttamente!
+success_config_update: Configurazione aggiornata con successo!
 
 -
 
@@ -510,11 +518,11 @@ success_installed: Installato con successo
 
 -
 
-success_password_changed: La tua password è stata cambiata correttamente!
+success_password_changed: La tua password è stata modificata con successo!
 
 -
 
-success_log_out: Disconnesso correttamente
+success_log_out: Disconnesso con successo
 
 -
 
@@ -522,7 +530,7 @@ success_remove: Rimosso con successo
 
 -
 
-success_reset_headless: Ripristinato correttamente il modello headless predefinito!
+success_reset_headless: Ripristinato con successo il modello headless predefinito!
 
 -
 
@@ -534,11 +542,15 @@ success_update: Automad aggiornato con successo!
 
 -
 
-success_packages_updated: Tutti i pacchetti aggiornati correttamente
+success_packages_updated_all: Aggiornato con successo tutti i pacchetti
 
 -
 
-sys_cache_info: La memorizzazione nella cache è essenziale per velocizzare il tuo sito e generalmente dovrebbe essere abilitata. Tuttavia, in alcune circostanze potresti voler disabilitare o cancellare la cache.
+success_package_updated: Aggiornato con successo
+
+-
+
+sys_cache_info: La memorizzazione nella cache è essenziale per velocizzare il tuo sito e dovrebbe essere generalmente abilitata. Tuttavia, in alcune circostanze potresti voler disabilitare o svuotare la cache.
 
 -
 
@@ -546,7 +558,7 @@ sys_cache_clear: Cancella cache
 
 -
 
-sys_cache_clear_info: Svuotare la cache del sito impone una nuova scansione per pagine e file aggiornati. Questa azione non rimuoverà alcun file di pagina o immagine dalla directory della cache.
+sys_cache_clear_info: La cancellazione della cache del sito impone una nuova scansione delle pagine e dei file aggiornati. Questa azione non rimuoverà alcun file di pagina o immagine dalla directory della cache.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_monitor: L'intervallo di controllo è
 
 -
 
-sys_cache_monitor_info: Quando la memorizzazione nella cache è abilitata, Automad verificherà periodicamente la presenza di modifiche nel file system. La frequenza di tali controlli può essere definita qui.
+sys_cache_monitor_info: Quando la memorizzazione nella cache è abilitata, Automad controllerà regolarmente le modifiche nel file system. La frequenza di questi controlli può essere definita qui.
 
 -
 
@@ -562,7 +574,7 @@ sys_cache_lifetime: La durata della cache è
 
 -
 
-sys_cache_lifetime_info: Tutti i dati e le pagine di Automad memorizzati nella cache hanno una durata massima. Al termine della durata di un oggetto, la sua cache verrà ricostruita quando richiesto.
+sys_cache_lifetime_info: Tutti i dati e le pagine di Automad memorizzati nella cache hanno una durata massima. Dopo che la durata di un oggetto è stata superata, la sua cache verrà ricostruita quando richiesto.
 
 -
 
@@ -570,19 +582,19 @@ sys_cache_purge: Elimina directory cache
 
 -
 
-sys_cache_purge_info: Contrariamente alla semplice pulizia della cache, l'eliminazione della directory della cache sposta anche tutti i file temporanei, le pagine eliminate, i backup degli aggiornamenti e le immagini memorizzate nella cache nella directory temprary del sistema. Ciò imporrà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi, la directory temporanea verrà ripulita automaticamente di volta in volta o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
+sys_cache_purge_info: In contrasto con la semplice cancellazione della cache, l'eliminazione della directory della cache sposterà anche tutti i file temporanei, le pagine eliminate, i backup di aggiornamento e le immagini nella cache nella directory temporanea del sistema. Ciò forzerà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi la directory temporanea verrà eliminata automaticamente di tanto in tanto o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
 
 -
 
-sys_debug_info: Quando il debug è abilitato, tutti i processi di Automad verranno registrati sulla console del browser. Il debug è necessario solo per lo sviluppo o la risoluzione dei problemi e deve essere disabilitato in tutti gli altri casi.
+sys_debug_info: Quando il debug è abilitato, tutti i processi di Automad verranno registrati nella console del browser. Il debug è necessario solo per lo sviluppo o la risoluzione dei problemi e dovrebbe essere disabilitato in tutti gli altri casi.
 
 -
 
-sys_headless_edit_info: La struttura dei dati JSON restituiti è controllata da un modello. È possibile modificare quel modello utilizzando il linguaggio dei modelli integrato di Automad per personalizzare i campi utilizzando variabili, oggetti e strutture di controllo.
+sys_headless_edit_info: La struttura dei dati JSON restituiti è controllata da un modello. È possibile modificare quel modello utilizzando il linguaggio del modello integrato di Automad per personalizzare i campi utilizzando variabili, oggetti e strutture di controllo.
 
 -
 
-sys_headless_info: L'attivazione della modalità senza testa trasforma Automad in un sistema di gestione dei contenuti incentrato interamente sulla creazione di contenuti senza un livello di presentazione. Mentre Dashboard può ancora essere utilizzato per gestire il contenuto, tutti i dati e i file sono accessibili tramite un'API JSON di sola lettura.
+sys_headless_info: L'attivazione della modalità senza testa trasforma Automad in un sistema di gestione dei contenuti incentrato interamente sulla creazione di contenuti senza un livello di presentazione. Sebbene il dashboard possa ancora essere utilizzato per gestire i contenuti, tutti i dati e i file sono accessibili tramite un'API JSON di sola lettura.
 
 -
 
@@ -590,7 +602,7 @@ sys_language: Linguaggio
 
 -
 
-sys_language_info: Sono disponibili diverse lingue per il Dashboard. Le traduzioni vengono create automaticamente. Questa funzione è ancora in una fase sperimentale e pertanto alcune traduzioni potrebbero non essere accurate.
+sys_language_info: Sono disponibili diverse lingue per il dashboard. Le traduzioni vengono create automaticamente. Questa funzione è ancora in una fase sperimentale e quindi alcune traduzioni potrebbero non essere accurate.
 
 -
 
@@ -603,10 +615,6 @@ sys_status_cache_disabled: La memorizzazione nella cache è disabilitata
 -
 
 sys_status_debug_enabled: Il debug è abilitato
-
--
-
-sys_status_debug_disabled: Il debug è disabilitato
 
 -
 
@@ -626,15 +634,15 @@ sys_update: Aggiornare
 
 -
 
-sys_update_available: Una versione più recente di Automad è disponibile e pronta per l'installazione. <br> Effettuare il backup dell'installazione corrente prima dell'aggiornamento!
+sys_update_available: Una versione più recente di Automad è disponibile e pronta per essere installata. <br> Effettua il backup dell'installazione corrente prima dell'aggiornamento!
 
 -
 
-sys_update_current_version: La versione attualmente installata è
+sys_update_current_version: La tua versione attualmente installata è
 
 -
 
-sys_update_items: I seguenti elementi sono interessati dall'aggiornamento:
+sys_update_items: Tieni presente che i seguenti file e directory sono interessati dall'aggiornamento:
 
 -
 
@@ -646,11 +654,11 @@ sys_update_progress: Attendi e non chiudere la finestra durante l'aggiornamento 
 
 -
 
-sys_update_to: Aggiorna a
+sys_update_to: Aggiorna alla versione
 
 -
 
-sys_update_windows_warning: Assicurati che tutti i file dell'installazione siano chiusi in programmi esterni prima di eseguire l'aggiornamento per evitare problemi con le autorizzazioni!
+sys_update_windows_warning: Assicurati che tutti i file della tua installazione siano chiusi in programmi esterni prima di eseguire l'aggiornamento per evitare problemi di autorizzazione!
 
 -
 
@@ -658,7 +666,7 @@ sys_user: Utenti
 
 -
 
-sys_user_info: Puoi aggiungere o rimuovere più utenti o cambiare la tua password qui.
+sys_user_info: Puoi aggiungere o rimuovere più utenti o modificare la password qui.
 
 -
 
@@ -699,3 +707,7 @@ sys_user_registered: Utente registrato
 -
 
 sys_user_you: Voi
+
+-
+
+theme_readme_alert: Clicca qui per leggere la documentazione per il tema attivo!

@@ -38,17 +38,18 @@
 		
 		box-sizing: border-box;
 		width: 100%;
-		margin: 4px 0;
+		margin: 0.29rem 0;
 		padding: @am-block-padding;
 		border-radius: @am-block-radius;
-		.transition(background-color 0.2s);
+		border: @am-border-width solid transparent;
+		.transition(border-color 0.2s, box-shadow 0.2s;);
 
 		@media (min-width: @am-blocks-breakpoint-small) {
-			padding: @am-block-padding 37px @am-block-padding @am-block-padding;
+			padding: @am-block-padding 2.85rem;
 		}
 
 		& + & {
-			margin-top: 4px;
+			margin-top: 0.29rem;
 		}
 
 		&__content {
@@ -64,7 +65,7 @@
 		&--stretched .ce-block__content {
 			
 			@media (min-width: @am-blocks-breakpoint-small) {
-				padding: 0;
+				padding: 0 @am-block-content-padding-stretched;
 			}
 
 		}
@@ -72,18 +73,26 @@
 		& [class^="uk-icon-"] {
 			font-style: normal !important;
 		}
+		
+		&.ce-block--focused,
+		&.ce-block--selected {
 
-		&:hover,
-		&.ce-block--focused {
+			.shadow;
 
-			background-image: none;
-			background-color: @am-block-focused-background;
+			& > .ce-block__content {
 
-			@media (max-width: @am-blocks-breakpoint-small-max){
-				background-image: none;
-				background-color: @am-block-focused-background;
+				background-color: transparent !important;
+				
+				& img {
+					opacity: 1;
+				}
+
 			}
 
+		}
+
+		&.ce-block--drop-target {
+			border: @am-border-width dashed @am-success;
 		}
 
 		& [data-placeholder]:empty:not(:focus):before {
@@ -94,28 +103,40 @@
 		&:last-child:not(.ce-block--focused) > div > [contenteditable][data-placeholder=""]:not(:focus):empty {
 			
 			&:after {
-				content: '\f040 ...';
-				font-family: FontAwesome;
-				display: inline-block;
-    			font-weight: normal;
-				font-style: normal;
+				content: '\f245';
 				font-size: 1rem;
-				line-height: 1;
-    			-webkit-font-smoothing: antialiased;
-    			-moz-osx-font-smoothing: grayscale;
-				color: @am-muted;
+				color: @am-border-color;
+				.icon-font;
 			}
 
 		}
 
 	}
 
-	& .ce-block--selected > .ce-block__content {
+	@media (min-width: @am-blocks-breakpoint-fullscreen-large) {
 
-		background-color: transparent !important;
+		.am-inpage & .ce-block__content,
+		&.am-fullscreen .ce-block__content {
+			padding: 0 @am-block-content-padding-fullscreen;
+		}
 
-		& img {
-			opacity: 1;
+		.am-inpage & .ce-block--stretched .ce-block__content,
+		&.am-fullscreen .ce-block--stretched .ce-block__content {
+			padding: 0 @am-block-content-padding-stretched;
+		}
+
+	}	
+
+	& .ce-block--drop-target .ce-block__content {
+
+		outline: none;
+		
+		&:before {
+			display: none;
+		}
+
+		&:after {
+			background: none;
 		}
 
 	}

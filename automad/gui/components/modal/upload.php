@@ -56,8 +56,8 @@ class Upload {
 	/**
 	 *  Create the upload modal dialog.
 	 * 
-	 * 	@param string $url
-	 * 	@return string The HTML for the modal dialog
+	 *	@param string $url
+	 *	@return string The HTML for the modal dialog
 	 */
 
 	public static function render($url = false) {

@@ -2,6 +2,6 @@
 <@~ newPagelist { type: 'related', sort: @{ sortRelatedPages | def ('date desc') } } @>	
 <@~ if @{ :pagelistCount } @>
 	<@ related.php @>
-	<@ pagelist_blog.php @>
+	<@ ../blocks/pagelist/blog.php @>
 <@ end ~@>
 	

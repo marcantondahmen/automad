@@ -57,7 +57,7 @@ class Search {
 	 *	
 	 *	The collected data consists of all page titles, URLs and all available tags.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 *	@return string The JSON encoded autocomplete data
 	 */
 	

@@ -33,15 +33,20 @@
  */
 
 
+@am-switcher-border-color:	@am-border-color;
+
 .am-switcher {
 	
 	&-buttons {
 		
 		border-radius: @am-radius;
 		background-color: @button-background;
-				
+		border: @am-border-width solid @am-switcher-border-color;
+		border-left: none;
+		
 		& > div {
 			max-width: 100%;
+			margin: -0.072rem 0;
 		}
 
 		& [data-uk-switcher]:last-child {
@@ -56,21 +61,23 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: clip;
-			
+			border-color: @am-switcher-border-color;
+			border-left: none;
+			border-right: none;
+
 			&[data-am-tab] {
 				
-				&:hover,
-				&:active,
 				&.uk-active {
 					
 					color: @button-primary-color;
 					background-color: @button-primary-background;
-					
+					border-color: @button-primary-background;
+
 					& .uk-badge {
 						color: @button-primary-background;
 						background-color: @button-primary-color;
 					}
-					
+
 				}
 				
 			}
@@ -78,6 +85,7 @@
 		}
 		
 		& > div:first-child > button:first-child {
+			border-left: @am-border-width solid @am-switcher-border-color;
 			border-top-left-radius: @am-radius;
 			border-bottom-left-radius: @am-radius;
 		}

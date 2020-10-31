@@ -35,25 +35,27 @@
 
 // Automad colors.
 @am-bg: 			#FFFFFF;
-@am-text: 			#484848;
-@am-muted: 			#9A9A9A;
+@am-text: 			#121212;
+@am-muted: 			#CFCFCF;
 
 @am-primary:		@am-text;
-@am-danger:			#EC7262;
-@am-success:		#369BE3;
+@am-danger:			#ff2f2f;
+@am-success:		#1070ff;
 
 
 // Specific Automad theme variables.
 @am-body-padding-bottom:	@utility-margin; 
 
-@am-border-width:			2px;
-@am-border-color:			#ECECEC;
-@am-hairline: 				1px solid @am-border-color;
+@am-border-width:			0.072rem;
+@am-border-color:			#E0E0E0;
+@am-border-dark-color:		#333333;
+@am-hairline: 				0.072rem solid @am-border-color;
 
 @am-nav-font-weight:		@base-body-font-weight;
 
-@am-radius: 				7px;
-@am-radius-small: 			5px;
+@am-radius: 				0.21rem;
+@am-radius-small: 			0.14rem;
+@am-radius-large:			0.42rem;
 
 // UIkit base variables.
 @base-body-color: 			@am-text;
@@ -63,16 +65,16 @@
 
 @base-hr-margin-vertical:	@utility-margin-small;
 @base-hr-border:			@am-border-color;
-@base-hr-border-width:		1px;
+@base-hr-border-width:		@am-border-width;
 
-@base-body-font-family:		"Rubik", sans-serif;
-@base-body-font-weight:		normal;
-@base-body-font-size:		14px;
-@base-body-line-height:		20px;
+@base-body-font-family:		"Inter", sans-serif;
+@base-body-font-weight:		430;
+@base-body-font-size:		16px;
+@base-body-line-height:		1.45;
 
 @base-code-font-family:		"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 @base-code-color: 			inherit;
-@base-code-font-size: 		13px;
+@base-code-font-size: 		0.93rem;
 
 @base-link-color:           @am-success;
 @base-link-hover-color:     darken(@am-success, 10%);
@@ -82,19 +84,19 @@
 @base-heading-font-family:  inherit;
 @base-heading-color:		@am-text;
 @base-heading-margin-top: 	@base-margin-vertical;
-@base-heading-font-weight:  normal;
-@base-h1-font-size:  		26px;
-@base-h1-line-height: 		26px;
-@base-h2-font-size: 		18px;
-@base-h2-line-height:  		19px;
-@base-h3-font-size: 		16px;
-@base-h3-line-height:  		20px;
-@base-h4-font-size:			16px;
-@base-h4-line-height:		22px;
-@base-h5-font-size:			14px;
-@base-h5-line-height:		20px;
-@base-h6-font-size:			12px;
-@base-h6-line-height:		18px;
+@base-heading-font-weight:  580;
+@base-h1-font-size:  		2.43rem;
+@base-h1-line-height: 		2.71rem;
+@base-h2-font-size: 		1.36rem;
+@base-h2-line-height:  		1.5rem;
+@base-h3-font-size: 		1.14rem;
+@base-h3-line-height:  		1.43rem;
+@base-h4-font-size:			1.14rem;
+@base-h4-line-height:		1.57rem;
+@base-h5-font-size:			1rem;
+@base-h5-line-height:		1.43rem;
+@base-h6-font-size:			0.86rem;
+@base-h6-line-height:		1.29rem;
 
 @base-selection-background:	@am-success;
 @base-selection-color:  	#FFFFFF;
@@ -111,12 +113,42 @@ body {
 	margin: 0; 
 }
 
+.am-dashboard {
+
+	& body {
+		overflow-x: hidden;
+	}
+
+	html&,
+	& body {
+
+		font-size: 15px;
+		
+		@media (min-width: 400px) { 
+			font-size: @base-body-font-size;
+		}
+
+		@media (min-width: 1700px) { 
+			font-size: 17px;
+		}
+
+		@media (min-width: 1900px) { 
+			font-size: 18px;
+		}
+
+	}
+
+}
+
+.am-inpage {
+	font-size: @base-body-font-size;
+}
+
 .am-dashboard,
 .am-inpage {
 
 	font-family: @base-body-font-family;
 	font-weight: @base-body-font-weight;
-	font-size: @base-body-font-size;
 	line-height: @base-body-line-height;
 	font-variant-ligatures: none;
 
@@ -145,22 +177,21 @@ body {
     	cursor: pointer;
 		text-decoration: none !important;
 		
-		&:not[class] {
-
-			color: @base-link-color;
-			background: transparent;
-
-			&:hover {
-    			color: @base-link-hover-color;
-			}
-
-		}
-
 		&:active,
 		&:hover { 
 			text-decoration: none;
 			outline: 0; 
 		}
+
+	}
+
+	& ul:not([class]) {
+
+		padding-left: 2.5rem;
+
+		& > li:not([class]) {
+			list-style-type: disc;
+		}	
 
 	}
 	
@@ -250,8 +281,10 @@ body {
 
 	& h1, 
 	& .uk-h1 {
+		margin-top: -0.5rem;
 		font-size: @base-h1-font-size;
 		line-height: @base-h1-line-height;
+		font-weight: 700;
 	}
 
 	& h2, 

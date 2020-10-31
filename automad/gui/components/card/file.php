@@ -87,10 +87,12 @@ HTML;
 		return <<< HTML
 				<a 
 				href="#am-edit-file-info-modal" 
-				class="am-panel-cover-4by3 uk-panel-teaser uk-display-block" 
+				class="uk-panel-teaser uk-display-block" 
 				data-uk-modal
 				>
-					$preview
+					<div class="am-cover-4by3">
+						$preview
+					</div>
 				</a>
 HTML;
 
@@ -137,6 +139,7 @@ HTML;
 	 *	Render a file card.
 	 *	
 	 *	@param string $file
+	 *	@param string $id
 	 *	@return string The HTML of the card
 	 */
 
@@ -175,7 +178,6 @@ HTML;
 								$Text->btn_copy_resized
 							</a>
 						</li>
-
 HTML;
 
 		}
@@ -199,38 +201,43 @@ HTML;
 						$mTime
 					</div>
 					<div class="am-panel-bottom">
-						<div data-uk-dropdown="{mode:'click'}">
-							<div class="uk-icon-button uk-icon-ellipsis-v"></div>
-							<div class="uk-dropdown uk-dropdown-small">
-								<ul class="uk-nav uk-nav-dropdown">
-									<li>
-										<a 
-										href="#am-edit-file-info-modal" 
-										data-uk-modal 
-										>
-											<i class="uk-icon-pencil"></i>&nbsp;
-											$Text->btn_edit_file_info
-										</a>
-									</li>
-									$resize
-									<li>
-										<a href="#" data-am-clipboard="$clipboard">
-											<i class="uk-icon-link"></i>&nbsp;
-											$Text->btn_copy_url_clipboard
-										</a>
-									</li>
-								</ul>
+						<div class="am-panel-bottom-left">
+							<div data-uk-dropdown="{mode:'click'}">
+								<div class="am-panel-bottom-link">
+									<i class="uk-icon-ellipsis-v"></i>
+								</div>
+								<div class="uk-dropdown uk-dropdown-small">
+									<ul class="uk-nav uk-nav-dropdown">
+										<li>
+											<a 
+											href="#am-edit-file-info-modal" 
+											data-uk-modal 
+											>
+												<i class="uk-icon-pencil"></i>&nbsp;
+												$Text->btn_edit_file_info
+											</a>
+										</li>
+										$resize
+										<li>
+											<a href="#" data-am-clipboard="$clipboard">
+												<i class="uk-icon-link"></i>&nbsp;
+												$Text->btn_copy_url_clipboard
+											</a>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
-						<label 
-						class="am-toggle-checkbox am-panel-bottom-right" 
-						data-am-toggle="#$id"
-						>
-							<input type="checkbox" name="delete[]" value="$basename" />
-						</label>
+						<div class="am-panel-bottom-right">
+							<label 
+							class="am-toggle-checkbox am-panel-bottom-link" 
+							data-am-toggle="#$id"
+							>
+								<input type="checkbox" name="delete[]" value="$basename" />
+							</label>
+						</div>
 					</div>
 				</div>
-
 HTML;
 
 	}

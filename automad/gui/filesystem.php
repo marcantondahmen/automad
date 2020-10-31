@@ -52,13 +52,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class FileSystem extends Core\FileSystem {
 	
+
+	/**
+	 * 	The cached array of items in the packages directory.
+	 */
+
+	private static $packageDirectoryItems = array();
+
 	
 	/**
 	 *	Append a suffix to a path just before the trailing slash.
 	 *      
-	 *  @param string $path
-	 *  @param string $suffix
-	 *  @return string The path with appended suffix
+	 *	@param string $path
+	 *	@param string $suffix
+	 *	@return string The path with appended suffix
 	 */
 	
 	public static function appendSuffixToPath($path, $suffix) {
@@ -72,8 +79,8 @@ class FileSystem extends Core\FileSystem {
 	 * 	Open a data text file under the given path, read the data, 
 	 *  append a suffix to the title variable and write back the data.
 	 *      
-	 *  @param string $path   
-	 *  @param string $suffix 
+	 *	@param string $path   
+	 *	@param string $suffix 
 	 */
 	
 	public static function appendSuffixToTitle($path, $suffix) {
@@ -100,8 +107,8 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 *  Unlike FileSystem::movePageDir(), this method only copies all files within a page directory without (!) any subdirectories.
 	 *      
-	 *  @param string $source
-	 *  @param string $dest
+	 *	@param string $source
+	 *	@param string $dest
 	 */
 	
 	public static function copyPageFiles($source, $dest) {
@@ -129,8 +136,8 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 *  Deletes a file and its caption (if existing).
 	 *      
-	 *  @param string $file
-	 *  @return string Only error messages - false in case no errors occured!
+	 *	@param string $file
+	 *	@return string Only error messages - false in case no errors occured!
 	 */
 	
 	public static function deleteMedia($file) {
@@ -169,8 +176,8 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 *  Get the full file system path for the given path.
 	 *      
-	 *  @param string $path
-	 *  @return string The full path
+	 *	@param string $path
+	 *	@return string The full path
 	 */
 
 	public static function fullPagePath($path) {
@@ -181,6 +188,60 @@ class FileSystem extends Core\FileSystem {
 		
 		return rtrim($path, '/') . '/';
 		
+	}
+
+
+	/**
+	 *	Get all items in the packages directory, optionally filtered by a regex string.
+	 *
+	 *	@param string $filter
+	 *	@return array A filtered list with all items in the packages directory
+	 */
+
+	public static function getPackagesDirectoryItems($filter = '') {
+
+		if (empty(self::$packageDirectoryItems)) {
+			self::$packageDirectoryItems = self::listDirectoryRecursively(AM_BASE_DIR . AM_DIR_PACKAGES, AM_BASE_DIR . AM_DIR_PACKAGES);
+		}
+
+		if ($filter) {
+			return array_values(preg_grep($filter, self::$packageDirectoryItems));
+		}
+
+		return self::$packageDirectoryItems;
+
+	}
+
+
+	/**	
+	 * 	Recursively list all items in a directory.
+	 * 	
+	 *	@param string $directory
+	 *	@param string $base
+	 *	@return array The list of items
+	 */
+
+	public static function listDirectoryRecursively($directory, $base = AM_BASE_DIR) {
+
+		$items = array();
+		$exclude = array('node_modules', 'vendor');
+
+		foreach (self::glob($directory . '/*') as $item) {
+
+			if (!in_array(basename($item), $exclude)) {
+
+				$items[] = Core\Str::stripStart($item, $base);
+				
+				if (is_dir($item)) {
+					$items = array_merge($items, self::listDirectoryRecursively($item, $base));
+				}
+				
+			}
+
+		}
+
+		return $items;
+
 	}
 
 
@@ -200,7 +261,7 @@ class FileSystem extends Core\FileSystem {
 		
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
-		$newParentPath = str_replace('\\', '/', $newParentPath);
+		$newParentPath = FileSystem::normalizeSlashes($newParentPath);
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
@@ -242,7 +303,7 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 * 	Move all items in /cache to the PHP temp directory.
 	 *
-	 *  @return string $tmp
+	 *	@return string $tmp
 	 */
 
 	public static function purgeCache() {
@@ -287,9 +348,9 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 *  Renames a file and its caption (if existing).
 	 *      
-	 *  @param string $oldFile
-	 *  @param string $newFile
-	 *  @return string Only error messages - false in case no errors occured!          
+	 *	@param string $oldFile
+	 *	@param string $newFile
+	 *	@return string Only error messages - false in case no errors occured!          
 	 */
 	
 	public static function renameMedia($oldFile, $newFile) {
@@ -346,9 +407,9 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 *  Creates an unique suffix for a path to avoid conflicts with existing directories.
 	 *      
-	 *  @param string $path
-	 *  @param string $prefix (prepended to the numerical suffix)
-	 *  @return string The suffix
+	 *	@param string $path
+	 *	@param string $prefix (prepended to the numerical suffix)
+	 *	@return string The suffix
 	 */
 	
 	public static function uniquePathSuffix($path, $prefix = '') {
@@ -368,8 +429,8 @@ class FileSystem extends Core\FileSystem {
 	/**
 	 *  Format, filter and write the data array a text file.
 	 *      
-	 *  @param array $data
-	 *  @param string $file
+	 *	@param array $data
+	 *	@param string $file
 	 */
 	
 	public static function writeData($data, $file) {

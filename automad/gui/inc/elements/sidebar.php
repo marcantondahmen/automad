@@ -67,14 +67,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<?php if (!AM_HEADLESS_ENABLED) { ?>
 							<li>
 								<a href="<?php echo AM_BASE_INDEX . '/'; ?>">
-									<i class="uk-icon-share uk-icon-justify"></i>&nbsp;
+									<i class="uk-icon-bookmark-o uk-icon-justify"></i>&nbsp;
 									<?php echo $this->getShared()->get(AM_KEY_SITENAME); ?>
 								</a>
 							</li>
 						<?php } ?>
 						<li<?php if (!Core\Request::query('context')) { echo ' class="uk-active"'; }?>>
 							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
-								<i class="uk-icon-desktop uk-icon-justify"></i>&nbsp;
+								<i class="uk-icon-tv uk-icon-justify"></i>&nbsp;
 								<?php Text::e('dashboard_title'); ?>
 							</a>
 						</li>
@@ -93,7 +93,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li<?php if (Core\Request::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
 							<a href="?context=packages">
 								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
-								<?php Text::e('packages_title'); ?>
+								<?php Text::e('packages_title'); ?>&nbsp;
+								<?php echo Components\Status\Span::render('outdated_packages'); ?>
 							</a>
 						</li>
 						<li class="uk-nav-divider"></li>
@@ -101,9 +102,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					<?php 
 					
 						$header = 	Text::get('sidebar_header_pages') . 
-							  		'&nbsp;&nbsp;&nbsp;<span class="uk-badge">' . 
-							  		count($this->getAutomad()->getCollection()) . 
-							  		'</span>';
+							  		'&nbsp;&mdash;&nbsp;' . 
+							  		count($this->getAutomad()->getCollection());
 									
 						echo Components\Nav\SiteTree::render(
 							$this->getAutomad(),

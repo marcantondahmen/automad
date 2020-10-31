@@ -32,41 +32,50 @@
  *	Licensed under the MIT license.
  */
 
+
+@am-panel-bottom-height: 		3rem;
+@am-panel-bottom-height-large: 	3.5rem;
+@am-panel-bottom-link-height:	2.14rem;
+@am-panel-bottom-link-padding: 	@panel-box-padding / 2;
+
 @panel-title-margin-bottom:     0;
 @panel-title-font-size:         inherit;
 @panel-title-line-height:       inherit;
-@panel-title-font-weight:		inherit;
+@panel-title-font-weight:		590;
 
-@panel-box-padding:				8px;
+@panel-box-padding:				0.86rem;
 @panel-box-color:				@am-text;
 @panel-box-title-color:			@am-text;
-@panel-box-background:			#F6F6F6;
-@panel-box-badge-top:          	12px;
-@panel-box-badge-right:			9px;
+@panel-box-background:			#FFFFFF;
+@panel-box-badge-top:          	@panel-box-padding;
+@panel-box-badge-right:			@panel-box-padding - 0.18rem;
 @panel-teaser-margin-bottom:	0;
 
 
 .hook-panel-box() {
 	
-	border-radius: @am-radius;
+	border-radius: @am-radius-large;
 	cursor: default;
-	
+	border: @am-hairline;
+	.transition(border-color 0.2s, box-shadow 0.2s;);
+
 	.uk-grid & {
 		margin: 0;
 	}
 
 	&.uk-active {
-		box-shadow: 0 0 0 3px @am-success;
+		.panel-active;
 	}
 
 	& .uk-panel-teaser {
 		overflow: hidden;
-		border: 3px solid @panel-box-background;
-		border-radius: @am-radius;
+		border-top-left-radius: @am-radius-large - @am-border-width;
+		border-top-right-radius: @am-radius-large - @am-border-width;
+		border-bottom: @am-hairline;
 	}
 	
 	& + & {
-		margin-top: 4px;
+		margin-top: 0.29rem;
 	}
 
 	& > a {
@@ -80,28 +89,30 @@
 
 	}
 	
-	& .uk-button:not(.uk-button-success):not(.uk-button-danger):not(.uk-button-primary),
-	& .uk-icon-button {
-
-		background-color: darken(@panel-box-background, 4%);
-
-		&:hover {
-			background-color: darken(@panel-box-background, 6%);
-		}
-
+	& p {
+		margin: 0.36rem 0;
 	}
 
-	& p {
-		margin: 5px 0;
+	& > hr,
+	.uk-modal-dialog & > hr {
+		margin-left: -@panel-box-padding !important;
+		margin-right: -@panel-box-padding !important;
 	}
 	
 }
 
 .hook-panel-badge() {
 	
-	&.uk-badge:not(.uk-badge-success) {
+	&.uk-badge {
+		font-size: 0.64rem;
+		line-height: 1.21rem;
+		padding: 0 0.57rem !important;
+	}
+
+	&.uk-badge:not(.uk-badge-success):not(.uk-badge-primary) {
 		color: @am-text;
-		background-color: darken(@panel-box-background, 4%);
+		background-color: @panel-box-background;
+		border: @am-hairline;
 	}
 	
 }
@@ -110,7 +121,8 @@
 
 	margin: 0 -@panel-box-padding;
 	padding: @panel-box-padding;
-	padding-bottom: 5px;
+	padding-top: @panel-box-padding - 3;
+	padding-bottom: 0.21rem;
 	overflow: hidden;
 	overflow-wrap: break-word;
 
@@ -121,74 +133,72 @@
 }
 
 .am-panel {
-	
-	&-cover {
-
-		&-1by1 {
-			padding-top: 100%;
-		}
-
-		&-4by3 {
-			// Use 79% instead of 75% because of image border.
-			padding-top: 79%;
-		}
-
-		&-1by1,
-		&-4by3 {
-			
-			display: block;
-			position: relative;
-			height: 0;
-		
-			& img,
-			& > ul,
-			& > i,
-			& > a > i {
-				position: absolute;
-				top: 0;
-				height: 100%;
-				width: 100%;
-			}
-
-			& li {
-				position: relative;
-			}
-
-			& img {
-				object-fit: cover;
-			}
-
-			& > i,
-			& > a > i {
-				display: block;
-				top: 50%;
-				margin-top: -12px;
-				font-size: 24px;
-				font-weight: normal;
-				line-height: 24px;
-				color: @am-text;
-				text-align: center;
-			}
-			
-		}
-
-	}
 
 	&-bottom {
 		
 		display: block;
-		height: 30px;
-		margin-top: @panel-box-padding;
-		
-		& > * {
-			
+		height: @am-panel-bottom-height;
+		margin: -@panel-box-padding;
+		margin-top: -@am-panel-bottom-link-padding;
+		font-size: 0.01rem;
+
+		&-large {
+			height: @am-panel-bottom-height-large;
+		}
+
+		&-left,
+		&-right {
+			display: flex;
+			box-sizing: border-box;
 			position: absolute;
-			bottom: @panel-box-padding;
-			
-			&.am-panel-bottom-right {
-				right: @panel-box-padding;
+			align-items: center;
+			bottom: 0;
+			height: inherit;
+			padding: @panel-box-padding - @am-panel-bottom-link-padding;
+		}
+
+		&-left {
+
+			left: 0;
+
+			& .uk-button {
+				margin-left: @am-panel-bottom-link-padding;
 			}
 			
+		}
+
+		&-right {
+
+			right: 0;
+
+			& .uk-button {
+				margin-right: @am-panel-bottom-link-padding;
+			}
+
+		}
+
+		&-link {
+
+			display: inline-block;
+			font-size: 1rem;
+			height: @am-panel-bottom-link-height !important;
+			line-height: @am-panel-bottom-link-height;
+			padding: 0 @am-panel-bottom-link-padding;
+			color: @am-text;
+			text-decoration: none;
+			cursor: pointer;
+			.transition(color 0.2s;);
+
+			&:hover {
+				color: @am-success;
+				text-decoration: none;
+			}
+
+			button& {
+				border: none;
+				background-color: transparent;
+			}
+
 		}
 		
 	}

@@ -2,15 +2,15 @@ title: Using Blocks
 
 -
 
-date: 2020-05-05 17:11:58
+date: 2020-12-04 00:00:00
 
 -
 
-tags: Blog, Light
+tags: Blocks, Blog, Light
 
 -
 
-+main: {"time":1589123178763,"blocks":[{"type":"paragraph","data":{"text":"Each post consists of one or more blocks. This post includes an enlarged paragraph followed by a <b>gallery</b> block, more text and a button. A gallery optionally can be stretched over the full with. Its image selection can be controlled by using one or more <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob</a> patterns.<br>","large":true}},{"type":"gallery","data":{"globs":"/shared/*landscape.png, /shared/*square.png, /shared/*port*.png, /shared/*square.png, /shared/*landscape.png","width":400,"stretched":true,"cleanBottom":true}},{"type":"paragraph","data":{"text":"In the next step you will learn how to use templates to control the look and feel of your pages and create an online portfolio. <br>","large":true}},{"type":"buttons","data":{"primaryText":"Using Templates &nbsp;&lt;svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 8 90 60\"&gt;&lt;polygon points=\"0,25 69.101,25 52.082,7.917 60,0 90,30 60,60 52.082,52.082 69.101,35 0,35 \"&gt;&lt;/polygon&gt;&lt;/svg&gt;","primaryLink":"/work","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.17.0"}
++main: {"time":1604076026954,"blocks":[{"type":"paragraph","data":{"text":"Each post consists of one or more blocks. This post includes an enlarged paragraph followed by a <b>gallery</b> block, more text and a button. A gallery optionally can be stretched over the full with. Its image selection can be controlled by using one or more <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob</a> patterns.","large":true}},{"type":"gallery","data":{"globs":"/shared/*landscape.png, /shared/*square.png, /shared/*port*.png, /shared/*square.png, /shared/*landscape.png","width":400,"stretched":true,"cleanBottom":true}},{"type":"paragraph","data":{"text":"In the next step you will learn how to use templates to control the look and feel of your pages and create an online portfolio. ","large":true}},{"type":"buttons","data":{"primaryText":"Using Templates ⟶","primaryLink":"/work","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.18.0"}
 
 -
 

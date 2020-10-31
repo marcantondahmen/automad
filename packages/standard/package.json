@@ -1,12 +1,12 @@
 {
   "name": "standard",
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "A standard collection of elegant Automad themes",
   "main": "gulpfile.js",
   "private": true,
   "devDependencies": {
     "css-element-queries": "^1.2.3",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.1",

@@ -101,8 +101,8 @@ class Page {
 	/**
 	 *  Make basic data items accessible as page properties.
 	 *      
-	 *  @param string $key The property name
-	 *  @return string The returned value from the data array
+	 *	@param string $key The property name
+	 *	@return string The returned value from the data array
 	 */
 	
 	public function __get($key) {

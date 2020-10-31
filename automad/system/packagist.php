@@ -55,9 +55,9 @@ class Packagist {
 	/**	
 	 * 	Get a list op packages from Packagist filtered by type and tag.
 	 * 
-	 * 	@param string $type
-	 * 	@param string $tag
-	 * 	@return array The list of packages
+	 *	@param string $type
+	 *	@param string $tag
+	 *	@return array The list of packages
 	 */
 
 	public static function getPackages($type = '', $tag = '') {
@@ -83,8 +83,8 @@ class Packagist {
 	/**	
 	 * 	Make a request to the Packagist API.
 	 * 
-	 * 	@param string $url
-	 * 	@return array The response data
+	 *	@param string $url
+	 *	@return array The response data
 	 */
 
 	private static function request($url) {

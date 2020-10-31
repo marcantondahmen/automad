@@ -10,11 +10,11 @@ btn_add_var: Lägg till variabel
 
 -
 
-btn_apply_reload: Applicera och ladda om igen
+btn_apply_reload: Applicera och ladda om
 
 -
 
-btn_browse: Bläddra i filer
+btn_browse: Bläddra bland filer
 
 -
 
@@ -34,7 +34,7 @@ btn_data: Data och inställningar
 
 -
 
-btn_delete_page: Radera sida
+btn_delete_page: Ta bort sida
 
 -
 
@@ -42,7 +42,7 @@ btn_download_file: Ladda ner
 
 -
 
-btn_duplicate_page: Duplicera sidan
+btn_duplicate_page: Kopiera sida
 
 -
 
@@ -54,7 +54,7 @@ btn_edit_file_info: Redigera filinformation
 
 -
 
-btn_edit_headless_template: Redigera Headless-Mall
+btn_edit_headless_template: Redigera den huvudlösa mallen
 
 -
 
@@ -70,7 +70,7 @@ btn_get_themes: Få fler teman
 
 -
 
-btn_getting_data: Hämtar data ...
+btn_getting_data: Få data ...
 
 -
 
@@ -86,7 +86,7 @@ btn_import: Importera från URL
 
 -
 
-btn_inpage_edit: Inredningsläge på sidan
+btn_inpage_edit: Redigeringsläge på sidan
 
 -
 
@@ -122,7 +122,7 @@ btn_ok: Ok
 
 -
 
-btn_open_log: Öppna loggen
+btn_open_log: Öppna logg
 
 -
 
@@ -130,7 +130,7 @@ btn_readme: Readme
 
 -
 
-btn_remove: Avlägsna
+btn_remove: Ta bort
 
 -
 
@@ -146,6 +146,10 @@ btn_save: Spara ändringar
 
 -
 
+btn_update: Uppdatering
+
+-
+
 btn_upload: Ladda upp
 
 -
@@ -158,7 +162,7 @@ confirm_delete_page: Är du säker på att du vill ta bort den aktuella sidan?
 
 -
 
-confirm_delete_users: Är du säker på att du vill ta bort de valda användarna?
+confirm_delete_users: Är du säker på att du vill ta bort de markerade användarna?
 
 -
 
@@ -178,11 +182,11 @@ dashboard_recently_edited: Nyligen redigerade sidor
 
 -
 
-dropzone: Dra filer här
+dropzone: Dra filer hit
 
 -
 
-error_cache_purged: Cache-katalogen kunde inte rensas!
+error_cache_purged: Cachekatalogen kunde inte rensas!
 
 -
 
@@ -194,7 +198,7 @@ error_file_save: Det gick inte att spara
 
 -
 
-error_file_format: Filstyp som inte stöds
+error_file_format: Filtyp som inte stöds
 
 -
 
@@ -206,7 +210,7 @@ error_file_size: Ogiltig filstorlek!
 
 -
 
-error_form: Ofullständig eller felaktig information! <br /> Alla fält krävs och måste fyllas i enligt beskrivningen!
+error_form: Ofullständiga eller felaktiga uppgifter! <br /> Alla fält är obligatoriska och måste fyllas i enligt beskrivningen!
 
 -
 
@@ -222,7 +226,7 @@ error_no_destination: Välj en sida som destination!
 
 -
 
-error_no_js: Vänligen aktivera JavaScript i din webbläsare för att använda instrumentpanelen!
+error_no_js: Aktivera JavaScript i din webbläsare för att använda instrumentpanelen!
 
 -
 
@@ -234,7 +238,7 @@ error_no_url: Var god och skriv in en giltig url!
 
 -
 
-error_import: Filimporten har misslyckats!
+error_import: Filimporten misslyckades!
 
 -
 
@@ -242,7 +246,7 @@ error_packages: Det gick inte att ladda paket från Packagist!
 
 -
 
-error_composer_memory: Din server har inte tillräckligt med minne för att installera, uppdatera eller ta bort paket! Om du kör denna webbplats på en delad värdtjänst med en begränsad mängd minne, försök att uppgradera din plan eller installera din webbplats på en lokal dator utan minnesbegränsningar.
+error_composer_memory: Din server har inte tillräckligt med minne för att installera, uppdatera eller ta bort paket! Om du kör den här webbplatsen på en delad värdtjänst med en begränsad mängd minne, försök att uppgradera din plan eller installera din webbplats på en lokal dator utan minnesbegränsningar.
 
 -
 
@@ -254,7 +258,7 @@ error_page_title: Titel saknas!
 
 -
 
-error_password_current: Det nuvarande lösenordet är fel!
+error_password_current: Det aktuella lösenordet är fel!
 
 -
 
@@ -266,7 +270,7 @@ error_password_reuse: Återanvänd inte ditt gamla lösenord!
 
 -
 
-error_permission: Tillstånd nekas:
+error_permission: Tillstånd nekade:
 
 -
 
@@ -274,7 +278,7 @@ error_template_missing: Mall saknas
 
 -
 
-error_update_connection: Det går inte att ansluta till uppdateringsservern! Detta kan vanligtvis orsakas av fel uppdateringskonfiguration (config.json), ett SSL-certifikatfel eller ett saknat cURL-bibliotek.
+error_update_connection: Kan inte ansluta till uppdateringsservern! Detta kan vanligtvis orsakas av en felaktig uppdateringskonfiguration (config.json), ett SSL-certifikatfel eller ett saknat cURL-bibliotek.
 
 -
 
@@ -282,19 +286,19 @@ error_update_download: Nedladdning av uppdateringen misslyckades!
 
 -
 
-error_update_items: Ogiltig lista över artiklar som ska uppdateras!
+error_update_items: Ogiltig lista över objekt som ska uppdateras!
 
 -
 
-error_update_failed: Uppdateringen misslyckades! Återställ installationen från en säkerhetskopia.
+error_update_failed: Uppdateringen misslyckades! Återställ din installation från en säkerhetskopia.
 
 -
 
-error_update_not_supported: Uppdateringar stöds inte av din server! Uppdateraren kräver att CURL- och ZIP-bibliotek installeras.
+error_update_not_supported: Uppdateringar stöds inte av din server! Uppdateraren kräver att cURL- och ZIP-bibliotek installeras.
 
 -
 
-error_update_permission: Kan inte köra uppdateringen! Behörigheter nekas!
+error_update_permission: Kan inte köra uppdatering! Tillstånd nekas!
 
 -
 
@@ -334,7 +338,7 @@ image_select: Välj bild
 
 -
 
-images_page: Sidbilder
+images_page: Sidans bilder
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Allmänna bilder
 
 -
 
-link_placeholder: Börja skriva en sidtitel eller klistra in en extern länk här
+link_placeholder: Börja skriva en sidrubrik eller klistra in en extern länk här
 
 -
 
@@ -370,7 +374,7 @@ packages_title: Paket
 
 -
 
-packages_browse: Öppna paketläsaren
+packages_browse: Öppna paketbläddraren
 
 -
 
@@ -382,7 +386,7 @@ packages_installed: Är installerad
 
 -
 
-packages_installing: Installerar paket ...
+packages_installing: Installerar paketet ...
 
 -
 
@@ -390,7 +394,11 @@ packages_update_all: Uppdatera alla
 
 -
 
-packages_updating: Uppdaterar paket ...
+packages_updating_all: Uppdaterar paket ...
+
+-
+
+packages_updating: Uppdaterar paketet ...
 
 -
 
@@ -402,7 +410,7 @@ page_add_location: Välj en plats för den nya sidan
 
 -
 
-page_move_destination: Välj en destination för att flytta
+page_move_destination: Välj en destination för flyttning
 
 -
 
@@ -410,7 +418,7 @@ page_settings: Sidinställningar
 
 -
 
-page_prefix: Prefix (order i navigering)
+page_prefix: Prefix (beställning i navigering)
 
 -
 
@@ -418,7 +426,7 @@ page_redirect: Omdirigera sidan till en annan URL
 
 -
 
-page_tags: Taggar (separera flera taggar med komma eller flik)
+page_tags: Taggar (Separera flera taggar med komma eller flik)
 
 -
 
@@ -426,15 +434,15 @@ page_theme_template: Mall
 
 -
 
-page_var_name: Variabel Namn
+page_var_name: Variabelt namn
 
 -
 
-page_vars_headless: Variabler
+page_vars_content: Innehåll
 
 -
 
-page_vars_template: Variabler i aktuell mall
+page_vars_settings: Mallinställningar
 
 -
 
@@ -462,15 +470,15 @@ shared_theme: Huvudtema
 
 -
 
-shared_theme_apply: Vill du använda det valda temat och uppdatera listan med tillgängliga variabler nu? Dina osparade ändringar sparas.
+shared_theme_apply: Vill du använda det valda temat och uppdatera listan över tillgängliga variabler nu? Dina ej sparade ändringar sparas.
 
 -
 
-shared_vars_headless: Variabler
+shared_vars_content: Standardinnehåll
 
 -
 
-shared_vars_main_theme: Variabler i huvudtemat
+shared_vars_settings: Standardinställningar för mall
 
 -
 
@@ -478,7 +486,7 @@ shared_vars_unused: Oanvända variabler
 
 -
 
-shared_var_name: Variabel Namn
+shared_var_name: Variabelt namn
 
 -
 
@@ -502,15 +510,15 @@ success_cache_cleared: Cachen rensades framgångsrikt!
 
 -
 
-success_cache_purged: Cache-katalogen rensades framgångsrikt!
+success_cache_purged: Cachekatalogen rensades framgångsrikt!
 
 -
 
-success_config_update: Framgångsrik uppdaterad konfiguration!
+success_config_update: Konfigurationen har uppdaterats!
 
 -
 
-success_created: Framgångsrikt skapat <br>
+success_created: Skapades <br> <br>
 
 -
 
@@ -522,15 +530,15 @@ success_password_changed: Ditt lösenord har ändrats framgångsrikt!
 
 -
 
-success_log_out: Loggad ut framgångsrikt
+success_log_out: Loggade ut framgångsrikt
 
 -
 
-success_remove: Har lyckats ta bort
+success_remove: Har tagits bort
 
 -
 
-success_reset_headless: Återställd standardhuvudmall!
+success_reset_headless: Standardhuvudlös mall har återställts!
 
 -
 
@@ -538,15 +546,19 @@ success_saved: Sparade ändringar
 
 -
 
-success_update: Framgångsrik uppdaterad Automad!
+success_update: Uppdaterad Automad!
 
 -
 
-success_packages_updated: Alla paket har uppdaterats
+success_packages_updated_all: Alla paket har uppdaterats
 
 -
 
-sys_cache_info: Cachning är avgörande för att påskynda din webbplats och bör i allmänhet vara aktiverad. Men under vissa omständigheter kanske du vill inaktivera eller rensa din cache.
+success_package_updated: Uppdaterad
+
+-
+
+sys_cache_info: Cachning är viktigt för att påskynda din webbplats och bör i allmänhet vara aktiverad. Men under vissa omständigheter kanske du vill inaktivera eller rensa cacheminnet.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Rensa cache
 
 -
 
-sys_cache_clear_info: Att rensa cacheminnet tvingar en ny skanning för uppdaterade sidor och filer. Den här åtgärden tar inte bort några sidfiler eller bilder från cachekatalogen.
+sys_cache_clear_info: Om du rensar webbplatsens cache tvingas en ny sökning efter uppdaterade sidor och filer. Denna åtgärd tar inte bort några sidfiler eller bilder från cachekatalogen.
 
 -
 
@@ -562,7 +574,7 @@ sys_cache_monitor: Kontrollintervallet är
 
 -
 
-sys_cache_monitor_info: När caching är aktiverat kommer Automad att regelbundet leta efter förändringar i filsystemet. Frekvensen för dessa kontroller kan definieras här.
+sys_cache_monitor_info: När cachning är aktiverat kommer Automad regelbundet att söka efter ändringar i filsystemet. Frekvensen för dessa kontroller kan definieras här.
 
 -
 
@@ -570,27 +582,27 @@ sys_cache_lifetime: Cache-livslängden är
 
 -
 
-sys_cache_lifetime_info: Alla cachade Automad-data och sidor har en maximal livslängd. Efter att ett objekts livstid har överskridits, kommer cachen att byggas om på begäran.
+sys_cache_lifetime_info: Alla cachade Automad-data och sidor har en maximal livslängd. Efter att ett objekts livstid har överskridits kommer dess cache att byggas om på begäran.
 
 -
 
-sys_cache_purge: Purge Cache Directory
+sys_cache_purge: Rensa cachekatalog
 
 -
 
-sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensar cache-katalogen också alla temporära filer, raderade sidor, uppdaterings-säkerhetskopior och cachade bilder till temprary-katalogen för systemet. Detta kommer att tvinga fram en fullständig ombyggnad av bild- och sidcachen och en rensning av alla raderade sidor. På de flesta system kommer den tillfälliga katalogen att rensas upp automatiskt då och då eller vid omstart. Men på vissa system måste katalogen rensas manuellt.
+sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensar cachekatalogen också alla tillfälliga filer, raderade sidor, säkerhetskopior och cachade bilder till systemets temporära katalog. Detta kommer att tvinga en fullständig ombyggnad av bild- och sidcache samt en sanering av alla borttagna sidor. På de flesta system kommer den tillfälliga katalogen att rensas upp automatiskt då och då eller vid omstart. Men på vissa system måste katalogen rensas manuellt.
 
 -
 
-sys_debug_info: När felsökning är aktiverad kommer alla Automads processer att loggas till din webbläsares konsol. Felsökning behövs endast för utveckling eller felsökning och bör avaktiveras i alla andra fall.
+sys_debug_info: När felsökning är aktiverat loggas alla Automads processer till din webbläsares konsol. Felsökning behövs bara för utveckling eller felsökning och bör inaktiveras i alla andra fall.
 
 -
 
-sys_headless_edit_info: Strukturen för de returnerade JSON-uppgifterna styrs av en mall. Du kan redigera den mallen med Automads inbyggda mallspråk för att anpassa fält med variabler, objekt och kontrollstrukturer.
+sys_headless_edit_info: Strukturen för de returnerade JSON-data styrs av en mall. Du kan redigera den mallen med hjälp av Automads inbyggda mallspråk för att anpassa fält med hjälp av variabler, objekt och kontrollstrukturer.
 
 -
 
-sys_headless_info: Att aktivera det huvudlösa läget förvandlar Automad till ett innehållshanteringssystem som helt fokuserar på innehållsskapande utan presentationslager. Även om instrumentpanelen fortfarande kan användas för att hantera innehåll, är alla data och filer tillgängliga via ett skrivskyddat JSON API.
+sys_headless_info: Genom att aktivera headless-läget förvandlas Automad till ett innehållshanteringssystem som helt fokuserar på innehållsskapande utan ett presentationslager. Medan Dashboard fortfarande kan användas för att hantera innehåll, är all data och filer tillgängliga via ett skrivskyddat JSON API.
 
 -
 
@@ -598,11 +610,11 @@ sys_language: Språk
 
 -
 
-sys_language_info: Det finns flera språk tillgängliga för instrumentpanelen. Översättningarna skapas automatiskt. Den här funktionen befinner sig fortfarande i en experimentell fas och därför kanske vissa översättningar inte är korrekta.
+sys_language_info: Det finns flera språk tillgängliga för instrumentpanelen. Översättningarna skapas automatiskt. Den här funktionen är fortfarande i en experimentfas och därför kanske vissa översättningar inte är korrekta.
 
 -
 
-sys_status_cache_enabled: Cachning är aktiverad
+sys_status_cache_enabled: Cachning är aktiverat
 
 -
 
@@ -610,11 +622,7 @@ sys_status_cache_disabled: Cachning är inaktiverad
 
 -
 
-sys_status_debug_enabled: Felsökning är aktiverad
-
--
-
-sys_status_debug_disabled: Felsökning är inaktiverad
+sys_status_debug_enabled: Felsökning är aktiverat
 
 -
 
@@ -622,7 +630,7 @@ sys_status_update_available: Uppdatera till
 
 -
 
-sys_status_update_not_available: Automad är aktuell
+sys_status_update_not_available: Automad är uppdaterad
 
 -
 
@@ -638,23 +646,23 @@ sys_update_available: En nyare version av Automad är tillgänglig och redo att 
 
 -
 
-sys_update_current_version: Den för närvarande installerade versionen är
+sys_update_current_version: Din nu installerade version är
 
 -
 
-sys_update_items: Följande objekt påverkas av uppdateringen:
+sys_update_items: Observera att följande filer och kataloger påverkas av uppdateringen:
 
 -
 
-sys_update_not_required: Automad är aktuell.
+sys_update_not_required: Automad är uppdaterad.
 
 -
 
-sys_update_progress: Vänta och stäng inte fönstret när du uppdaterar ...
+sys_update_progress: Vänta och stäng inte fönstret medan du uppdaterar ...
 
 -
 
-sys_update_to: Uppdatera till
+sys_update_to: Uppdatera till version
 
 -
 
@@ -707,3 +715,7 @@ sys_user_registered: Registrerade användare
 -
 
 sys_user_you: Du
+
+-
+
+theme_readme_alert: Klicka här för att läsa dokumentationen för det aktiva temat!

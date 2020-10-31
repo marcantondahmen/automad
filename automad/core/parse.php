@@ -90,8 +90,8 @@ class Parse {
     /**
      *  Split and trim comma separated string.
      *  
-     *  @param string $str
-     *  @return array The array of separate and trimmed strings
+     *	@param string $str
+     *	@return array The array of separate and trimmed strings
      */
     
     public static function csv($str) {
@@ -119,27 +119,23 @@ class Parse {
 		
 		if ($str) {
 			
-			foreach (explode(AM_PARSE_STR_SEPARATOR, $str) as $glob) {
+			foreach (self::csv($str) as $glob) {
 						
-				if ($f = FileSystem::glob(Resolve::filePath($Page->path, trim($glob)))) {
+				if ($f = FileSystem::glob(Resolve::filePath($Page->path, $glob))) {
+					$f = array_filter($f, '\Automad\Core\FileSystem::isAllowedFileType');
 					$files = array_merge($files, $f);
 				}
 				
 			}
 			
-			array_walk($files, function(&$file) use ($stripBaseDir) { 
-				
-				$file = realpath($file); 
-				
-				if ($stripBaseDir) {
+			if ($stripBaseDir) {
+
+				array_walk($files, function(&$file) { 
 					$file = Str::stripStart($file, AM_BASE_DIR);
-				}
-				
-                // Windows compatibility.
-                $file = str_replace('\\', '/', $file);
-                
-			});	
-			
+				});	
+
+			}
+
 		}
 		
 		return $files;
@@ -150,8 +146,8 @@ class Parse {
     /**
      *  Parse a filename to check whether a file is an image or not.
      *
-     *  @param string $file
-     *  @return boolean True if $file is an image file
+     *	@param string $file
+     *	@return boolean True if $file is an image file
      */
 
     public static function fileIsImage($file) {

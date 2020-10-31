@@ -45,19 +45,16 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Extension class provides an interface for calling an extension from a template file.
  *	There are two options for autoloading extension classes:
  *
- * 	1. Composer autoloading:
- *
- * 	Composer packages are autoloaded according to the given settings in the package's composer.json file.
+ *	1. Composer autoloading:
+ *	Composer packages are autoloaded according to the given settings in the package's composer.json file.
  * 
- * 	2. Local extensions with simple autoloading:    
- * 	
+ *	2. Local extensions with simple autoloading:    
  *	A local extension is basically called by the subdirectory name within the "/packages" directory. 
  *	The file name within that subdirectory must have the basename of that directory followed by ".php".
  *	Both, class and method name, must be the basename of the directory as well.    
- *     
  *	In case of extensions grouped in a subdirectory of "/packages", the name of that directory has to be the namespace, 
  *	in that way that the namespace reflects the actual directory structure without the last directory containing the actual .php file.    
- *          
+ *        		
  *	Example 1 - Single extension:     
  *	An extension call like <@ example1 @> would load the file "/packages/example1/example1.php", 
  *	create an instance of the class "\example1" ($object) and call the method "$object->example1()" of that class.
@@ -125,7 +122,7 @@ class Extension {
 			
 			// Load class file in case extension is not a Composer packages.
 			// Building the extension's file path.
-			$file = AM_BASE_DIR . AM_DIR_PACKAGES . strtolower(str_replace('\\', '/', $class) . '/' . $method) . '.php';
+			$file = AM_BASE_DIR . AM_DIR_PACKAGES . strtolower(FileSystem::normalizeSlashes($class) . '/' . $method) . '.php';
 			
 			if (file_exists($file)) {
 				
@@ -195,8 +192,8 @@ class Extension {
 				// Only add the non-minified version, if no minified version exists.
 				if (!file_exists(str_replace($type, '.min' . $type, $file))) {
 					
-					// Remove base directory from file path and normalize slashes.
-					$file = str_replace('\\', '/', Str::stripStart($file, AM_BASE_DIR));
+					// Remove base directory from file path.
+					$file = Str::stripStart($file, AM_BASE_DIR);
 					
 					// Use $file also as key to keep elemtens unique.
 					$this->assets[$type][$file] = $file;

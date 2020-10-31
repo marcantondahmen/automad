@@ -44,20 +44,23 @@ class AutomadSnippet {
 			file: data.file || '',
 		};
 
-		this.inputs = {
-			file: create.editable(['cdx-input'], 'Enter the file path of a snippet', this.data.file),
-		};
-
-		var icon = document.createElement('div');
-
-		icon.innerHTML = AutomadSnippet.toolbox.icon;
-		icon.classList.add('am-block-icon');
-		
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
-		this.wrapper.appendChild(icon);
-		this.wrapper.appendChild(create.label('Path to Snippet'));
-		this.wrapper.appendChild(this.inputs.file);
+		this.wrapper.innerHTML = `
+			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadSnippet.toolbox.title}</div>
+			<hr>
+			${create.label('Select Snippet', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
+			<div class="am-block-file-select uk-form-select uk-button uk-text-left uk-width-1-1" data-uk-form-select>
+				<i class="uk-icon-file"></i>&nbsp;
+				<span></span>
+				${create.select(['am-block-file'], window.AutomadBlockTemplates.snippets, this.data.file).outerHTML}
+			</div>
+		`;
+
+		this.inputs = {
+			file: this.wrapper.querySelector('.am-block-file')
+		}
 
 	}
 
@@ -65,7 +68,7 @@ class AutomadSnippet {
 
 		return {
 			title: 'Template Snippet',
-			icon: '<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="18px" viewBox="0 0 15 18"><path d="M11.016,1.516C9.891,0.391,9.25,0,7,0C5,0,4,0,4,0C1.791,0,0,1.791,0,4v10c0,2.209,1.791,4,4,4h7c2.209,0,4-1.791,4-4 c0,0,0-4.016,0-6c0-2.25-0.328-2.828-1.484-3.984C11.947,2.448,12.526,3.028,11.016,1.516z M9,2.203L12.896,6H11 C9.896,6,9,5.104,9,4V2.203z M13,14c0,1.104-0.896,2-2,2H4c-1.104,0-2-0.896-2-2V4c0-1.104,0.896-2,2-2h3v2c0,2.209,1.791,4,4,4h2 V14z"/><path d="M8.635,9.435c-0.312,0.312-0.312,0.818,0,1.131L10.068,12l-1.434,1.435c-0.312,0.312-0.312,0.818,0,1.131 C8.791,14.722,8.996,14.8,9.2,14.8c0.205,0,0.409-0.078,0.565-0.234l2-2c0.312-0.312,0.312-0.818,0-1.131l-2-2 C9.454,9.124,8.947,9.122,8.635,9.435z"/><path d="M6.366,9.435c-0.313-0.312-0.82-0.311-1.132,0l-2,2c-0.312,0.312-0.312,0.818,0,1.131l2,2 C5.391,14.722,5.595,14.8,5.8,14.8s0.41-0.078,0.566-0.234c0.312-0.312,0.312-0.818,0-1.131L4.932,12l1.435-1.435 C6.678,10.253,6.678,9.747,6.366,9.435z"/></svg>'
+			icon: '<svg width="15px" height="18px" viewBox="0 0 15 18"><path d="M11.02,1.52C9.89,0.39,9.25,0,7,0C5,0,4,0,4,0C1.79,0,0,1.79,0,4v10c0,2.21,1.79,4,4,4h7c2.21,0,4-1.79,4-4c0,0,0-4.02,0-6 c0-2.25-0.33-2.83-1.48-3.98C11.95,2.45,12.53,3.03,11.02,1.52z M13,14c0,1.1-0.9,2-2,2H4c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h3v2 c0,2.21,1.79,4,4,4h2V14z"/><path d="M8.63,9.43c-0.31,0.31-0.31,0.82,0,1.13L10.07,12l-1.43,1.43c-0.31,0.31-0.31,0.82,0,1.13C8.79,14.72,9,14.8,9.2,14.8 c0.21,0,0.41-0.08,0.57-0.23l2-2c0.31-0.31,0.31-0.82,0-1.13l-2-2C9.45,9.12,8.95,9.12,8.63,9.43z"/><path d="M6.37,9.43c-0.31-0.31-0.82-0.31-1.13,0l-2,2c-0.31,0.31-0.31,0.82,0,1.13l2,2c0.16,0.16,0.36,0.23,0.57,0.23 s0.41-0.08,0.57-0.23c0.31-0.31,0.31-0.82,0-1.13L4.93,12l1.43-1.43C6.68,10.25,6.68,9.75,6.37,9.43z"/></svg>'
 		};
 
 	}
@@ -79,7 +82,7 @@ class AutomadSnippet {
 	save() {
 
 		return {
-			file: this.inputs.file.innerHTML
+			file: this.inputs.file.value
 		};
 
 	}

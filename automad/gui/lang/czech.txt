@@ -66,7 +66,7 @@ btn_files: Nahrané soubory
 
 -
 
-btn_get_themes: Získejte více témat
+btn_get_themes: Získejte více motivů
 
 -
 
@@ -82,11 +82,11 @@ btn_home: Home
 
 -
 
-btn_import: Importovat z adresy URL
+btn_import: Importovat z URL
 
 -
 
-btn_inpage_edit: Režim úpravy na stránce
+btn_inpage_edit: Režim úprav na stránce
 
 -
 
@@ -122,7 +122,7 @@ btn_ok: Ok
 
 -
 
-btn_open_log: Otevřete protokol
+btn_open_log: Otevřít protokol
 
 -
 
@@ -146,11 +146,15 @@ btn_save: Uložit změny
 
 -
 
+btn_update: Aktualizace
+
+-
+
 btn_upload: Nahrát
 
 -
 
-confirm_delete_files: Opravdu chcete vybrané soubory smazat?
+confirm_delete_files: Opravdu chcete odstranit vybrané soubory?
 
 -
 
@@ -158,7 +162,7 @@ confirm_delete_page: Opravdu chcete smazat aktuální stránku?
 
 -
 
-confirm_delete_users: Opravdu chcete vybrané uživatele smazat?
+confirm_delete_users: Opravdu chcete odstranit vybrané uživatele?
 
 -
 
@@ -170,7 +174,7 @@ dashboard_memory: Využití paměti:
 
 -
 
-dashboard_modified: Poslední aktivita dne
+dashboard_modified: Poslední aktivita zapnuta
 
 -
 
@@ -206,7 +210,7 @@ error_file_size: Neplatná velikost souboru!
 
 -
 
-error_form: Neúplná nebo nesprávná data! <br /> Všechna pole jsou povinná a musí být vyplněna, jak je popsáno!
+error_form: Neúplná nebo nesprávná data! <br /> Všechna pole jsou povinná a musí být vyplněna podle popisu!
 
 -
 
@@ -226,23 +230,23 @@ error_no_js: Chcete-li používat řídicí panel, povolte ve svém prohlížeč
 
 -
 
-error_no_theme: Nebylo vybráno žádné téma! Vyberte hlavní téma.
+error_no_theme: Není vybráno žádné téma! Vyberte prosím hlavní téma.
 
 -
 
-error_no_url: Zadejte prosím platnou adresu URL!
+error_no_url: Zadejte platnou adresu URL!
 
 -
 
-error_import: Import souboru selhal!
+error_import: Import souboru se nezdařil!
 
 -
 
-error_packages: Nelze načíst balíčky od Packagist!
+error_packages: Nelze načíst balíčky z Packagist!
 
 -
 
-error_composer_memory: Váš server nemá dostatek paměti pro instalaci, aktualizaci nebo odebrání balíčků! V případě, že provozujete tento web na sdílené hostitelské službě s omezeným množstvím paměti, zkuste upgradovat svůj plán nebo jej nainstalovat na místním počítači bez omezení paměti.
+error_composer_memory: Váš server nemá dostatek paměti pro instalaci, aktualizaci nebo odebrání balíčků! V případě, že provozujete tento web ve službě sdíleného hostování s omezeným množstvím paměti, zkuste upgradovat svůj plán nebo nainstalovat web do místního počítače bez omezení paměti.
 
 -
 
@@ -258,7 +262,7 @@ error_password_current: Aktuální heslo je špatné!
 
 -
 
-error_password_repeat: Zadejte dvakrát stejné nové heslo!
+error_password_repeat: Zadejte prosím dvakrát stejné nové heslo!
 
 -
 
@@ -266,7 +270,7 @@ error_password_reuse: Nepoužívejte znovu své staré heslo!
 
 -
 
-error_permission: Oprávnění byla odepřena:
+error_permission: Oprávnění odepřena:
 
 -
 
@@ -274,15 +278,15 @@ error_template_missing: Šablona chybí
 
 -
 
-error_update_connection: Nelze se připojit k aktualizačnímu serveru! Příčinou může být nesprávná konfigurace aktualizací (config.json), chyba certifikátu SSL nebo chybějící knihovna CURL.
+error_update_connection: Nelze se připojit k aktualizačnímu serveru! To může být obvykle způsobeno nesprávnou konfigurací aktualizace (config.json), chybou certifikátu SSL nebo chybějící knihovnou cURL.
 
 -
 
-error_update_download: Stahování aktualizace se nezdařilo!
+error_update_download: Stažení aktualizace se nezdařilo!
 
 -
 
-error_update_items: Neplatný seznam položek, které mají být aktualizovány!
+error_update_items: Neplatný seznam položek k aktualizaci!
 
 -
 
@@ -290,19 +294,19 @@ error_update_failed: Aktualizace selhala! Obnovte prosím instalaci ze zálohy.
 
 -
 
-error_update_not_supported: Váš server nepodporuje aktualizace! Aktualizátor vyžaduje, aby byly nainstalovány knihovny CURL a ZIP.
+error_update_not_supported: Váš server nepodporuje aktualizace! Aktualizátor vyžaduje instalaci knihoven cURL a ZIP.
 
 -
 
-error_update_permission: Nelze spustit aktualizaci! Oprávnění byla odepřena!
+error_update_permission: Aktualizaci nelze spustit! Oprávnění zamítnuta!
 
 -
 
-error_var_exists: S tímto názvem již existuje proměnná!
+error_var_exists: Proměnná s tímto názvem již existuje!
 
 -
 
-error_var_name: Proměnnou bez názvu nelze přidat!
+error_var_name: Proměnnou nemůžete přidat bez názvu!
 
 -
 
@@ -318,7 +322,7 @@ image_crop: Oříznout obrázek
 
 -
 
-image_height_px: Výška (pixelů)
+image_height_px: Výška (pixely)
 
 -
 
@@ -330,11 +334,11 @@ image_options: Možnosti
 
 -
 
-image_select: Vyberte Obrázek
+image_select: Vyberte obrázek
 
 -
 
-images_page: Obrázky stránek
+images_page: Obrázky stránky
 
 -
 
@@ -342,7 +346,7 @@ images_shared: Obecné obrázky
 
 -
 
-link_placeholder: Začněte zde psát název stránky nebo vložte externí odkaz
+link_placeholder: Začněte psát název stránky nebo sem vložte externí odkaz
 
 -
 
@@ -390,15 +394,19 @@ packages_update_all: Aktualizovat vše
 
 -
 
-packages_updating: Aktualizace balíčků ...
+packages_updating_all: Aktualizace balíčků ...
 
 -
 
-packages_removing: Odstraňování balíčku ...
+packages_updating: Aktualizace balíčku ...
 
 -
 
-page_add_location: Vyberte umístění nové stránky
+packages_removing: Odebírání balíčku ...
+
+-
+
+page_add_location: Vyberte umístění pro novou stránku
 
 -
 
@@ -410,15 +418,15 @@ page_settings: Nastavení stránky
 
 -
 
-page_prefix: Předpona (objednávka v navigaci)
+page_prefix: Předpona (pořadí v navigaci)
 
 -
 
-page_redirect: Přesměrujte stránku na jinou adresu URL
+page_redirect: Přesměrovat stránku na jinou adresu URL
 
 -
 
-page_tags: Značky (oddělte více značek čárkami nebo tabulátory)
+page_tags: Značky (oddělte více značek čárkou nebo tabulátorem)
 
 -
 
@@ -430,11 +438,11 @@ page_var_name: Název proměnné
 
 -
 
-page_vars_headless: Proměnné
+page_vars_content: Obsah
 
 -
 
-page_vars_template: Proměnné v aktuální šabloně
+page_vars_settings: Nastavení šablony
 
 -
 
@@ -454,7 +462,7 @@ sidebar_header_pages: Stránky
 
 -
 
-shared_title: Obecná data a soubory
+shared_title: Obecné údaje a soubory
 
 -
 
@@ -462,15 +470,15 @@ shared_theme: Hlavní téma
 
 -
 
-shared_theme_apply: Chcete použít vybrané téma a aktualizovat seznam dostupných proměnných nyní? Neuložené změny budou uloženy.
+shared_theme_apply: Chcete nyní použít vybrané téma a aktualizovat seznam dostupných proměnných? Vaše neuložené změny budou uloženy.
 
 -
 
-shared_vars_headless: Proměnné
+shared_vars_content: Výchozí obsah
 
 -
 
-shared_vars_main_theme: Proměnné v hlavním tématu
+shared_vars_settings: Výchozí nastavení šablony
 
 -
 
@@ -498,7 +506,7 @@ success_added: Úspěšně přidáno
 
 -
 
-success_cache_cleared: Vyrovnávací paměť byla úspěšně vymazána!
+success_cache_cleared: Mezipaměť byla úspěšně vymazána!
 
 -
 
@@ -506,15 +514,15 @@ success_cache_purged: Adresář mezipaměti byl úspěšně vymazán!
 
 -
 
-success_config_update: Úspěšně aktualizovaná konfigurace!
+success_config_update: Konfigurace byla úspěšně aktualizována!
 
 -
 
-success_created: Úspěšně vytvořen <br>
+success_created: Úspěšně vytvořeno <br>
 
 -
 
-success_installed: Úspěšně nainstalována
+success_installed: Úspěšně nainstalováno
 
 -
 
@@ -526,7 +534,7 @@ success_log_out: Úspěšně odhlášeno
 
 -
 
-success_remove: Úspěšně odebráno
+success_remove: Úspěšně odstraněno
 
 -
 
@@ -542,11 +550,15 @@ success_update: Automad byl úspěšně aktualizován!
 
 -
 
-success_packages_updated: Všechny balíčky byly úspěšně aktualizovány
+success_packages_updated_all: Všechny balíčky byly úspěšně aktualizovány
 
 -
 
-sys_cache_info: Ukládání do mezipaměti je nezbytné pro urychlení vašeho webu a mělo by být obecně povoleno. Za určitých okolností však můžete chtít zakázat nebo vymazat mezipaměť.
+success_package_updated: Úspěšně aktualizováno
+
+-
+
+sys_cache_info: Ukládání do mezipaměti je nezbytné pro zrychlení vašeho webu a mělo by být obecně povoleno. Za určitých okolností však můžete chtít mezipaměť deaktivovat nebo vymazat.
 
 -
 
@@ -554,7 +566,7 @@ sys_cache_clear: Vyčistit mezipaměť
 
 -
 
-sys_cache_clear_info: Vymazání mezipaměti webu vynutí nové vyhledávání aktualizovaných stránek a souborů. Tato akce neodstraní žádné soubory stránek ani obrázky z adresáře mezipaměti.
+sys_cache_clear_info: Vymazání mezipaměti webu vynutí opakované skenování aktualizovaných stránek a souborů. Tato akce neodstraní žádné soubory stránek ani obrázky z adresáře mezipaměti.
 
 -
 
@@ -562,7 +574,7 @@ sys_cache_monitor: Interval kontroly je
 
 -
 
-sys_cache_monitor_info: Pokud je povoleno ukládání do mezipaměti, Automad bude pravidelně kontrolovat změny v systému souborů. Frekvence těchto kontrol lze definovat zde.
+sys_cache_monitor_info: Když je povoleno ukládání do mezipaměti, Automad bude pravidelně kontrolovat změny v systému souborů. Zde lze definovat frekvenci těchto kontrol.
 
 -
 
@@ -570,7 +582,7 @@ sys_cache_lifetime: Životnost mezipaměti je
 
 -
 
-sys_cache_lifetime_info: Všechna data a stránky Automad v mezipaměti mají maximální životnost. Po uplynutí životnosti objektu bude jeho mezipaměť na požádání znovu vytvořena.
+sys_cache_lifetime_info: Všechna data a stránky Automadu v mezipaměti mají maximální životnost. Po překročení doby životnosti objektu bude jeho mezipaměť na požádání znovu sestavena.
 
 -
 
@@ -578,19 +590,19 @@ sys_cache_purge: Vyčistit adresář mezipaměti
 
 -
 
-sys_cache_purge_info: Na rozdíl od pouhého vymazání mezipaměti, vymazání adresáře mezipaměti také přesune všechny dočasné soubory, smazané stránky, zálohy aktualizací a obrázky v mezipaměti do temprary adresáře systému. Tím se vynutí úplná přestavba mezipaměti obrázků a stránek a také vyčištění všech smazaných stránek. Ve většině systémů bude dočasný adresář čas od času nebo při restartu automaticky vyčištěn. U některých systémů však musí být adresář vymazán ručně.
+sys_cache_purge_info: Na rozdíl od jednoduchého vymazání mezipaměti, vyčištění adresáře mezipaměti také přesune všechny dočasné soubory, odstraněné stránky, zálohy aktualizací a obrázky v mezipaměti do dočasného adresáře systému. To vynutí úplné opětovné vytvoření mezipaměti obrázků a stránek a vyčištění všech odstraněných stránek. Ve většině systémů bude dočasný adresář čas od času automaticky vyčištěn nebo restartován. V některých systémech však musí být adresář vymazán ručně.
 
 -
 
-sys_debug_info: Pokud je povoleno ladění, všechny procesy Automad budou zaznamenány do konzoly prohlížeče. Ladění je nutné pouze pro vývoj nebo odstraňování problémů a mělo by být deaktivováno ve všech ostatních případech.
+sys_debug_info: Když je povoleno ladění, budou všechny procesy Automadu protokolovány do konzoly vašeho prohlížeče. Ladění je potřeba pouze pro vývoj nebo řešení problémů a ve všech ostatních případech by mělo být deaktivováno.
 
 -
 
-sys_headless_edit_info: Struktura vrácených dat JSON je řízena šablonou. Tuto šablonu můžete upravit pomocí vestavěného jazyka šablony Automad pro přizpůsobení polí pomocí proměnných, objektů a řídicích struktur.
+sys_headless_edit_info: Struktura vrácených dat JSON je řízena šablonou. Tuto šablonu můžete upravit pomocí vestavěného šablonového jazyka Automadu pro přizpůsobení polí pomocí proměnných, objektů a řídicích struktur.
 
 -
 
-sys_headless_info: Aktivace režimu bez hlavy změní Automad na systém pro správu obsahu se zaměřením výhradně na tvorbu obsahu bez prezentační vrstvy. I když lze řídicí panel stále používat ke správě obsahu, všechna data a soubory jsou přístupné prostřednictvím JSON API jen pro čtení.
+sys_headless_info: Aktivace bezhlavého režimu promění Automad v systém pro správu obsahu zaměřený výhradně na tvorbu obsahu bez prezentační vrstvy. Zatímco Dashboard lze stále používat ke správě obsahu, všechna data a soubory jsou přístupné prostřednictvím API JSON jen pro čtení.
 
 -
 
@@ -598,7 +610,7 @@ sys_language: Jazyk
 
 -
 
-sys_language_info: Pro panel je k dispozici několik jazyků. Překlady jsou vytvářeny automaticky. Tato funkce je stále v experimentální fázi, a proto některé překlady nemusí být přesné.
+sys_language_info: Panel obsahuje několik jazyků. Překlady se vytvářejí automaticky. Tato funkce je stále v experimentální fázi, a proto některé překlady nemusí být přesné.
 
 -
 
@@ -606,7 +618,7 @@ sys_status_cache_enabled: Ukládání do mezipaměti je povoleno
 
 -
 
-sys_status_cache_disabled: Ukládání do mezipaměti je zakázáno
+sys_status_cache_disabled: Ukládání do mezipaměti je deaktivováno
 
 -
 
@@ -614,11 +626,7 @@ sys_status_debug_enabled: Ladění je povoleno
 
 -
 
-sys_status_debug_disabled: Ladění je zakázáno
-
--
-
-sys_status_update_available: Aktualizujte na
+sys_status_update_available: Aktualizovat na
 
 -
 
@@ -634,7 +642,7 @@ sys_update: Aktualizace
 
 -
 
-sys_update_available: Je k dispozici novější verze automatu a je připraven k instalaci. <br> Před aktualizací si prosím zálohujte aktuální instalaci!
+sys_update_available: Je k dispozici a připravena k instalaci novější verze Automadu. <br> Před aktualizací si prosím zálohujte aktuální instalaci!
 
 -
 
@@ -642,7 +650,7 @@ sys_update_current_version: Aktuálně nainstalovaná verze je
 
 -
 
-sys_update_items: Aktualizace se týká následujících položek:
+sys_update_items: Upozorňujeme, že aktualizace má vliv na následující soubory a adresáře:
 
 -
 
@@ -650,15 +658,15 @@ sys_update_not_required: Automad je aktuální.
 
 -
 
-sys_update_progress: Počkejte prosím a nezavírejte okno při aktualizaci ...
+sys_update_progress: Během aktualizace prosím počkejte a nezavírejte okno ...
 
 -
 
-sys_update_to: Aktualizujte na
+sys_update_to: Aktualizovat na verzi
 
 -
 
-sys_update_windows_warning: Před spuštěním aktualizace se ujistěte, že všechny soubory instalace jsou uzavřeny v externích programech, abyste předešli problémům s oprávněními!
+sys_update_windows_warning: Před spuštěním aktualizace se ujistěte, že jsou všechny soubory vaší instalace uzavřeny v externích programech, aby nedocházelo k problémům s oprávněními!
 
 -
 
@@ -666,7 +674,7 @@ sys_user: Uživatelé
 
 -
 
-sys_user_info: Zde můžete přidat nebo odebrat více uživatelů nebo změnit své heslo.
+sys_user_info: Zde můžete přidat nebo odebrat více uživatelů nebo změnit heslo.
 
 -
 
@@ -707,3 +715,7 @@ sys_user_registered: Registrovaní uživatelé
 -
 
 sys_user_you: Vy
+
+-
+
+theme_readme_alert: Kliknutím sem si přečtete dokumentaci k aktivnímu tématu!

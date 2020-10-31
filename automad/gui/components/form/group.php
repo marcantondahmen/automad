@@ -59,36 +59,19 @@ class Group {
 	 *  Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
 	 *  Note used prefix must match the ID selectors defined in 'add_variable.js'.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 *	@param array $keys
 	 *	@param array $data
 	 *	@param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
 	 *	@param object $Theme
-	 * 	@param string $readmeModalId
 	 *	@return string The HTML for the textarea
 	 */
 	
-	public static function render($Automad, $keys, $data = array(), $addVariableIdPrefix = false, $Theme = false, $readmeModalId = false) {
+	public static function render($Automad, $keys, $data = array(), $addVariableIdPrefix = false, $Theme = false) {
 			
 		$Text = Text::getObject();
 		$html = '';
 		
-		if ($Theme && $readmeModalId) {
-
-			if ($readme = $Theme->readme) {
-				$html .= \Automad\GUI\Components\Modal\Readme::render($readmeModalId, $Theme->readme);
-				$html .= <<< HTML
-						<div class="uk-margin-small-top">
-							<a href="#$readmeModalId" class="uk-button uk-button-large uk-button-success uk-width-1-1" data-uk-modal>
-								<i class="uk-icon-file-text-o"></i>&nbsp;
-								$Theme->name &mdash; $Text->btn_readme 
-							</a>
-						</div>
-HTML;
-			}
-			
-		}
-
 		// The HTML for the variable fields.
 		foreach ($keys as $key) {
 		

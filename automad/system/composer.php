@@ -55,10 +55,17 @@ class Composer {
 
 
 	/**	
+	 *	The Composer version to be used.
+	 */
+
+	private $composerVersion = '2.0.3';
+
+	
+	/**	
 	 *	A chached file including the temporary Composer install directory.
 	 */
 
-	private $installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_composer_dir';
+	private $installDirCacheFile = false;
 
 
 	/**	
@@ -86,7 +93,7 @@ class Composer {
 	 * 	The download URL for the composer.phar file.
 	 */
 
-	private $pharUrl = AM_COMPOSER_PHAR_URL;
+	private $pharUrl = false;
 
 
 	/**
@@ -103,6 +110,11 @@ class Composer {
 
 	public function __construct() {
 
+		$this->pharUrl = 'https://getcomposer.org/download/' . $this->composerVersion . '/composer.phar';
+		$this->installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . 
+									 AM_FILE_PREFIX_CACHE . '_composer_' . 
+									 Core\Str::sanitize($this->composerVersion, true) . 
+									 '_dir';
 		$this->setUp();
 
 	}
@@ -160,7 +172,7 @@ class Composer {
 	 *	in case Composer was already used before. In case Composer hasn't been used before,
 	 *	a new path will be generated and save to the cache.
 	 *
-	 * 	@return string The path to the installation directory
+	 *	@return string The path to the installation directory
 	 */
 
 	private function getInstallDir() {
@@ -189,7 +201,7 @@ class Composer {
 	/**	
 	 * 	Generate a fresh installation directory for Composer.
 	 * 
-	 * 	@return string The path to the directory
+	 *	@return string The path to the directory
 	 */
 
 	private function newInstallDir() {
@@ -208,10 +220,12 @@ class Composer {
 	/**	
 	 * 	Run a given Composer command.
 	 * 	
-	 * 	@param string $command
+	 *	@param string $command
+	 *	@param bool $getBuffer
+	 *	@return string The command output on false or in case $getBuffer is true
 	 */
 
-	public function run($command) {
+	public function run($command, $getBuffer = false) {
 
 		$this->shutdownOnError();
 		
@@ -221,6 +235,7 @@ class Composer {
 		ini_set('memory_limit', -1);
 				
 		$input = new \Symfony\Component\Console\Input\StringInput($command);
+		$output = new \Symfony\Component\Console\Output\BufferedOutput();
 		$application = new \Composer\Console\Application();
 		
 		$application->setAutoExit(false);
@@ -229,12 +244,21 @@ class Composer {
 		Core\Debug::log($command, 'Command');
 
 		try {
-			$application->run($input);
+			$application->run($input, $output);
 		} catch (\Exception $e) {
 			return $e->getMessage();
 		}
 
+		$buffer = $output->fetch();
+		$bufferNoWarning = preg_replace('/\<warning\>.*?\<\/warning\>\s*/is', '', $buffer);
+
 		Core\Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
+		Core\Debug::log($buffer, 'Buffer');
+		Core\Debug::log($bufferNoWarning, 'Buffer without warning');
+
+		if ($getBuffer) {
+			return $bufferNoWarning;
+		}
 
 	}
 

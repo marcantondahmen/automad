@@ -57,11 +57,11 @@ class Page {
 	/**
 	 *	Generate thumbnail for page grid.
 	 *      
-	 *  @param string $file  
-	 *  @param float $w     
-	 *  @param float $h     
-	 *  @param string $gridW (uk-width-* suffix) 
-	 *  @return string The generated markup
+	 *	@param string $file  
+	 *	@param float $w     
+	 *	@param float $h     
+	 *	@param string $gridW (uk-width-* suffix) 
+	 *	@return string The generated markup
 	 */
 	
 	private static function thumbnail($file, $w, $h, $gridW) {
@@ -75,8 +75,8 @@ class Page {
 	/**
 	 *	Layout preview images.
 	 *
-	 * 	@param array $images
-	 * 	@return string The generated HTML 
+	 *	@param array $images
+	 *	@return string The generated HTML 
 	 */
 
 	private static function layout($images) {
@@ -163,27 +163,33 @@ class Page {
 				<div class="uk-panel uk-panel-box">
 					<a 
 					href="$link" 
-					class="am-panel-cover-4by3 uk-panel-teaser"
+					class="uk-panel-teaser uk-display-block"
 					>
-						$preview
+						<div class="am-cover-4by3">
+							$preview
+						</div>
 					</a>
 					<div class="uk-panel-title">$pageTitle</div>
 					<div class="uk-text-small">$pageMTime</div>
 					<div class="am-panel-bottom">
-						<span> 
+						<div class="am-panel-bottom-left">
 							<a 
 							href="$link" 
-							title="$Text->btn_edit_page" 
-							class="uk-icon-button uk-icon-pencil" 
+							title="$Text->btn_edit_page"  
+							class="am-panel-bottom-link"
 							data-uk-tooltip
-							></a>
+							>
+								<i class="uk-icon-file-text-o"></i>
+							</a>
 							<a 
 							href="$pageUrl" 
 							title="$Text->btn_inpage_edit" 
-							class="uk-icon-button uk-icon-share" 
+							class="am-panel-bottom-link"
 							data-uk-tooltip
-							></a>
-						</span>
+							>
+								<i class="uk-icon-bookmark-o"></i>
+							</a>
+						</div>
 					</div>
 				</div>
 

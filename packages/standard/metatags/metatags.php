@@ -4,9 +4,9 @@
  *
  * 	An Automad meta tags extension.
  *
- * 	@author Marc Anton Dahmen
- * 	@copyright Copyright (C) 2018 Marc Anton Dahmen - <https://marcdahmen.de> 
- * 	@license MIT license
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (C) 2018 Marc Anton Dahmen - <https://marcdahmen.de> 
+ *	@license MIT license
  */
 
 namespace Standard;
@@ -21,9 +21,9 @@ class MetaTags {
 	/**
 	 *  The main function.
 	 *
-	 * 	@param array $options
-	 * 	@param object $Automad
-	 * 	@return string the output of the extension
+	 *	@param array $options
+	 *	@param object $Automad
+	 *	@return string the output of the extension
 	 */
 	
 	public function MetaTags($options, $Automad) {
@@ -38,7 +38,7 @@ class MetaTags {
 			'ogDescription' => false,
 			'ogType' => 'website',
 			'ogImage' => false,
-			'twitterCard' => false
+			'twitterCard' => 'summary_large_image'
 		);
 		
 		$options = array_merge($defaults, $options);
@@ -59,7 +59,7 @@ class MetaTags {
 		$html .= '<meta name="viewport" content="' . $options['viewport'] . '" />';
 		
 		if ($options['description']) {
-			$html .= '<meta name="description" content="' . Core\Str::shorten($options['description'], 160) . '" />';
+			$html .= '<meta name="description" content="' . htmlspecialchars(Core\Str::shorten($options['description'], 160)) . '" />';
 		}
 		
 		if ($options['ogTitle']) {
@@ -67,7 +67,7 @@ class MetaTags {
 		}
 		
 		if ($options['ogDescription']) {
-			$html .= '<meta property="og:description" content="' . Core\Str::shorten($options['ogDescription'], 320) . '" />';
+			$html .= '<meta property="og:description" content="' . htmlspecialchars(Core\Str::shorten($options['ogDescription'], 320)) . '" />';
 		}
 		
 		$html .= '<meta property="og:type" content="' . $options['ogType'] . '" />' . 

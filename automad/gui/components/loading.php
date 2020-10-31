@@ -55,7 +55,7 @@ class Loading {
 	/**
 	 *	Create loading icon.
 	 *      
-	 * 	@return string The HTML of the loading icon
+	 *	@return string The HTML of the loading icon
 	 */
 	
 	public static function render() {

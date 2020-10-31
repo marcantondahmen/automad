@@ -55,8 +55,8 @@ class SessionData {
 		/**
 		 *	Set a key/value pair in the session data array.
 		 *
-		 * 	@param string $key
-		 * 	@param string $value
+		 *	@param string $key
+		 *	@param string $value
 		 */
 
 		public static function set($key, $value) {
@@ -73,8 +73,8 @@ class SessionData {
 		/**
 		 *	Get the session data array or just one value in case $key is defined.
 		 *	
-		 * 	@param string $key
-		 * 	@return mixed The data array or a single value
+		 *	@param string $key
+		 *	@return mixed The data array or a single value
 		 */
 		
 		public static function get($key = false) {

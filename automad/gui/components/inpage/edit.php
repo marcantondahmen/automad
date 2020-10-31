@@ -56,12 +56,12 @@ class Edit {
 	/**	
 	 * 	Create in-page edit field.
 	 * 
-	 *  @param object $Automad
-	 * 	@param string $key
-	 * 	@param string $value
-	 * 	@param string $context
-	 * 	@param string $path
-	 * 	@return string The HTML for the in-page edit field
+	 *	@param object $Automad
+	 *	@param string $key
+	 *	@param string $value
+	 *	@param string $context
+	 *	@param string $path
+	 *	@return string The HTML for the in-page edit field
 	 */
 
 	public static function render($Automad, $key, $value, $context, $path) {

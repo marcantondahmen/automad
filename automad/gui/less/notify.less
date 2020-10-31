@@ -34,57 +34,16 @@
 
 @notify-message-padding:			@alert-padding;
 
-@notify-message-font-size: 			14px;
+@notify-message-font-size: 			1rem;
 @notify-message-line-height:  		@base-body-line-height;
 
-@notify-message-success-background:	@am-success;
-@notify-message-success-color:		#FFFFFF;
+@notify-message-success-background:	@am-bg;
+@notify-message-success-color:		@am-success;
 
-@notify-message-danger-background:	@am-danger;
-@notify-message-danger-color:		#FFFFFF;
+@notify-message-danger-background:	@am-bg;
+@notify-message-danger-color:		@am-danger;
 
 
 .hook-notify-message() {
-	
-	border-radius: @am-radius;
-	overflow: hidden;
-	.shadow;
-	
-	&.uk-notify-message-success,
-	&.uk-notify-message-danger {
-		
-		position: relative;
-		padding-left: 37px;
-		
-		&:before {	
-			position: absolute;
-			left: 0;
-			top: 0;
-			bottom: 0;
-			padding: @notify-message-padding;
-			font-family: FontAwesome;
-			display: block;
-			font-weight: normal;
-			font-style: normal;
-			font-size: 18px;
-			line-height: inherit;
-			color: inherit;
-			background-color: transparent;
-			.smooth-fonts;
-		}
-		
-	}
-	
-}
-
-.hook-notify-message-success() {
-	&:before {
-		content: '\f00c';
-	}
-}
-
-.hook-notify-message-danger() {
-	&:before {
-		content: '\f071';
-	}
+	.alert;	
 }

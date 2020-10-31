@@ -33,7 +33,7 @@
  */
 
 
-@am-sidebar-width: 	300px;
+@am-sidebar-width: 	21.43rem;
 
 .am-sidebar {
 		
@@ -44,6 +44,10 @@
 		width: @am-sidebar-width;
 		opacity: 1 !important;	
 	}	
+
+	& [data-am-status]:empty {
+		display: none;
+	}
 	
 	&.uk-modal {
 		background-color: fade(@am-bg, 70%);
@@ -52,8 +56,8 @@
 	&-modal-dialog.uk-modal-dialog-blank {
 		
 		width: @am-sidebar-width;
-		// Always keep 50px free space at right to close sidebar.
-		max-width: ~"calc(100vw - 60px)";
+		// Always keep 4.25rem free space at right to close sidebar.
+		max-width: ~"calc(100vw - 4.25rem)";
 		border-right: @am-hairline;
 		
 		@media (max-width: @breakpoint-medium-max) {
@@ -84,15 +88,15 @@
 		position: absolute;
 		box-sizing: border-box;
 		top: 0;
-		padding: 17px 0 0 0;
+		padding: 1.21rem 0 0 0;
 	}
 	
 	&-search {
 		// Keep search aligned with navbar buttons and use negative margin to generate the 
 		// same horizontal and vertical space to the sidebar borders.
 		// Note that therefore the searchbar will not be aligned with any other sidebar elements on purpose. 
-		padding-top: 17px;
-		margin: 0 -3px;
+		padding-top: 1.21rem;
+		margin: 0 -0.21rem;
 		width: auto;
 	}
 	

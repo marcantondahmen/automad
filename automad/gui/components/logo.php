@@ -55,7 +55,7 @@ class Logo {
 	/**
 	 *	Return the Automad logo and if the headless mode is enabled also the headless indicator.
 	 *
-	 * 	@return string The HTML of the logos
+	 *	@return string The HTML of the logos
 	 */
 
 	public static function render() {

@@ -33,22 +33,43 @@
  */
 
 
+@am-tooltip-shortcut-color:		#929292;
+
 @tooltip-z-index: 				1150;
-@tooltip-max-width:				200px;
-@tooltip-padding-vertical: 		5px;
-@tooltip-padding-horizontal: 	10px;
-@tooltip-background: 			@am-success;
-@tooltip-triangle-size: 		5px;
+@tooltip-max-width:				14.5rem;
+@tooltip-padding-vertical: 		0.36rem;
+@tooltip-padding-horizontal: 	0.5rem;
+@tooltip-background: 			@am-primary;
+@tooltip-triangle-size: 		0.5rem;
 
 @tooltip-color: 				#FFFFFF;
-@tooltip-font-size: 			12px;
-@tooltip-line-height: 			14px;
+@tooltip-font-size: 			0.86rem;
+@tooltip-line-height: 			1rem;
 
-@tooltip-offset-horizontal: 	10px;
+@tooltip-offset-horizontal: 	0.71rem;
 
 
 .hook-tooltip() {
-	font-weight: normal;
-	border-radius: 9px;
-	box-shadow: 0 8px 12px 0 rgba(29,32,43,0.17), 0 4px 5px -3px rgba(5,6,12,0.49);
+
+	font-weight: @base-body-font-weight;
+	text-align: center;
+	border-radius: @am-radius-small;
+	box-shadow: 0 0.57rem 0.86rem 0 rgba(0,0,0,0.17), 0 0.29rem 0.36rem -0.21rem rgba(0,0,0,0.49);
+
+	& small {
+		color:	@am-tooltip-shortcut-color;
+	}
+	
+}
+
+.uk-tooltip-top:after,
+.uk-tooltip-top-left:after,
+.uk-tooltip-top-right:after {
+    bottom: -@tooltip-triangle-size + 0.1;
+}
+
+.uk-tooltip-bottom:after,
+.uk-tooltip-bottom-left:after,
+.uk-tooltip-bottom-right:after {
+    top: -@tooltip-triangle-size + 0.1;
 }

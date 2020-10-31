@@ -70,7 +70,7 @@ class Runtime {
 	/**
 	 *	The constructor.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 */
 	
 	public function __construct($Automad) {
@@ -109,9 +109,13 @@ class Runtime {
 					return count($this->Automad->getFilelist()->getFiles());
 					
 				case AM_KEY_PAGELIST_COUNT:
-					// The pagelist count represents the number of pages within the last defined pagelist. 
+					// The pagelist count represents the number of pages within the last defined pagelist, ignoring limit and pagination. 
 					return count($this->Automad->getPagelist()->getPages(true));
-					
+				
+				case AM_KEY_PAGELIST_DISPLAY_COUNT:
+					// The pagelist display count represents the number of pages that will be displayed. 
+					return count($this->Automad->getPagelist()->getPages(false));	
+
 				case AM_KEY_PAGINATION_COUNT:
 					// The last page number of the pagination of the current pagelist.
 					return $this->Automad->getPagelist()->getPaginationCount();
@@ -154,7 +158,7 @@ class Runtime {
 	/**
 	 *	Get the $data array to be shelved and restored at a later point.
 	 *
-	 * 	@return array The runtime data array
+	 *	@return array The runtime data array
 	 */
 	
 	public function shelve() {
@@ -168,7 +172,7 @@ class Runtime {
 	/**
 	 *	Restore shelved $data array by replacing it with the passed $shelf array.
 	 *
-	 *  @param array $shelf
+	 *	@param array $shelf
 	 */
 	
 	public function unshelve($shelf) {

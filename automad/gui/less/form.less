@@ -34,13 +34,13 @@
 
 
 @form-height:				@button-large-height;
-@form-large-height: 		44px;
-@form-padding:				4px 10px;
-@form-large-padding: 		6px 14px;
+@form-large-height: 		3.14rem;
+@form-padding:				0.29rem 0.86rem 0.43rem 0.86rem;
+@form-large-padding: 		0.43rem 0.86rem;
 @form-border:				@am-border-color;
 @form-border-width:			@am-border-width;
 @form-color:				@am-text;
-@form-background:       	#F7F7F7;
+@form-background:       	#FAFAFA;
 
 @form-gutter: 				0;
 
@@ -48,15 +48,17 @@
 @form-focus-background:		@form-background;
 @form-focus-color:			@form-color;
 
-@form-disabled-border:      transparent;
-@form-disabled-background:  @panel-box-background;
-@form-disabled-color:		@panel-box-color;
+@form-disabled-border:      @form-border;
+@form-disabled-background:  @form-background;
+@form-disabled-color:		@am-muted;
 
-@form-stacked-font-weight:	normal;
-@form-stacked-margin-bottom:4px;
+@form-stacked-font-weight:	@base-body-font-weight;
+@form-stacked-margin-bottom:0.29rem;
 
 @form-placeholder-color:	@am-muted;
 
+@form-icon-width: 			2.2rem;
+@form-icon-font-size:		1rem;
 @form-icon-color:			mix(@am-muted, @am-border-color);
 
 .hook-form() {
@@ -72,24 +74,27 @@
 	-webkit-text-fill-color: @form-disabled-color;
 }
 
+.hook-form-focus() {
+	.form-focus;
+}
+
 .hook-form-stacked-label() {
 	
 	display: inline-block;
 	margin-top: @utility-margin;
 	margin-bottom: @form-stacked-margin-bottom;
-	padding: 4px 6px;
+	padding: 0 0 0.14rem 0;
 	vertical-align: top;
-	font-size: @text-small-font-size;
+	font-size: @button-mini-font-size;
 	font-weight: @form-stacked-font-weight;
-	line-height: @text-small-font-size;
+	line-height: @button-mini-height;
 	color: @am-text;
-	background-color: @button-background;
-	border-radius: @am-radius-small;
+	background-color: @am-bg;
 	
-	&.am-form-changed:after {
+	&.am-form-changed:before {
 		content: '\f111';
 		&:extend([class*='uk-icon-']);
-		padding-left: 4px;
+		padding-right: 0.36rem;
 		color: @am-success;
 	} 
 	
@@ -99,8 +104,9 @@
 .uk-form textarea:not([data-uk-markdowneditor]) {
 	overflow: hidden;
 	resize: none;
-	padding-top: 6px;
-	padding-bottom: 6px;
+	padding-top: 0.71rem;
+	padding-bottom: 0.57rem;
+	min-height: 5rem;
 	// Disable height transitions. 
 	.transition(height 0s, color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;);
 }
@@ -111,19 +117,30 @@
 	tab-size: 4;
 
 	& + & {
-		margin-top: 4px;
+		margin-top: 0.29rem;
 	}
 
 }
+
+.uk-form-select.uk-button:not(.uk-button-large) {
+	height: @form-height;
+	line-height: @form-height - (2 * @am-border-width);
+	padding: @form-padding;
+	padding-top: 0;
+	padding-bottom: 0;
+}
  
 .uk-form-icon {
-	
+
 	& > [class*="uk-icon-"] {
-		left: 4px;
+		line-height: @form-height - (2 * @am-border-width);
+		margin-top: 0;
+		top: 0;
+		left: 0.29rem;
 	}
 	
 	&:not(.uk-form-icon-flip) > input {
-		padding-left: (@form-icon-width + 4px) !important;	
+		padding-left: (@form-icon-width + 0.29rem) !important;	
 	}
 	
 }
@@ -134,6 +151,14 @@
 
 .am-form {
 
+	&-title {
+		padding: 1.71rem 0.86rem !important;
+		font-size: 1.71rem !important;
+		font-weight: 670 !important;
+		min-height: 3.57rem !important;
+		line-height: 2.29rem !important;
+	}
+
 	&-input-button {
 
 		& input[type="text"],
@@ -143,8 +168,21 @@
 			border-bottom-right-radius: 0;
 
 			& + button {
+
+				height: @button-large-height;
+				line-height: @button-large-line-height;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
+				border-left: none;
+
+				& > i {
+					line-height: inherit !important;
+				}
+
+				&:not(.uk-button-success) {
+					border-color: @form-border;
+				}
+
 			}
 
 		}
@@ -154,15 +192,23 @@
 	&-icon-button-input {
 
 		& > button {
+
+			position: absolute;
+			height: @form-height;
+			line-height: @form-height;
 			width: @form-height;
 			min-width: @form-height;
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 0;
+			background-color: transparent !important;
+			border: none;
+		
+			& > i {
+				line-height: inherit !important;
+			}
+
 		}
 
 		& > input[type="text"] {
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
+			padding-left: 2.86rem;
 		}
 
 	}

@@ -56,7 +56,7 @@ class Breadcrumbs {
 	/**
 	 *	Create a breadcrumb navigation based on $_GET.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 *	@return string The breadcrumb naviagtion markup
 	 */
 
@@ -67,7 +67,7 @@ class Breadcrumbs {
 		$pages = $Selection->getSelection(false);
 		
 		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill uk-margin-top">';
-		$html .= '<li class="uk-hidden-small"><i class="uk-icon-folder-open"></i></li>';
+		$html .= '<li class="uk-hidden-small"><i class="uk-icon-folder-open-o"></i></li>';
 		
 		$i = count($pages);
 		

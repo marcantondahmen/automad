@@ -150,6 +150,10 @@ btn_save: Save Changes
 
 -
 
+btn_update: Update
+
+-
+
 btn_upload: Upload
 
 -
@@ -488,7 +492,11 @@ packages_update_all: Update All
 
 -
 
-packages_updating: Updating packages ...
+packages_updating_all: Updating packages ...
+
+-
+
+packages_updating: Updating package ...
 
 -
 
@@ -512,7 +520,7 @@ page_move_destination: Select a destination for moving
 
 -
 
-page_settings: Page settings
+page_settings: Page Settings
 
 -
 
@@ -534,17 +542,18 @@ page_theme_template: Template
 
 page_var_name: Variable Name
 
--
-
-page_vars_headless: Variables
 
 -
 
-page_vars_template: Variables in current template
+page_vars_content: Content
+
+-
+
+page_vars_settings: Template Settings
 
 -  
 
-page_vars_unused: Unused variables
+page_vars_unused: Unused Variables
 
 -
 
@@ -586,11 +595,11 @@ shared_theme_apply: Do you want to apply the selected theme and update the list 
 
 -
 
-shared_vars_headless: Variables
+shared_vars_content: Default Content
 
 -
 
-shared_vars_main_theme: Variables in the main theme
+shared_vars_settings: Default Template Settings
 
 -
 
@@ -676,7 +685,11 @@ success_update: Successfully updated Automad!
 
 -
 
-success_packages_updated: Successfully updated all packages
+success_packages_updated_all: Successfully updated all packages
+
+-
+
+success_package_updated: Successfully updated
 
 -
 
@@ -779,10 +792,6 @@ sys_status_debug_enabled: Debugging is enabled
 
 -
 
-sys_status_debug_disabled: Debugging is disabled
-
--
-
 sys_status_update_available: Update to
 
 -
@@ -803,11 +812,11 @@ sys_update_available: A newer version of Automad is available and ready to be in
 
 -
 
-sys_update_current_version: The currently installed version is 
+sys_update_current_version: Your currently installed version is 
 
 -
 
-sys_update_items: The following items are affected by the update:
+sys_update_items: Note that the following files and directories are affected by the update:
 
 -
 
@@ -819,7 +828,7 @@ sys_update_progress: Please wait and don't close the window while updating ...
 
 -
 
-sys_update_to: Update to
+sys_update_to: Update to version
 
 -
 
@@ -872,3 +881,13 @@ sys_user_registered: Registered Users
 -
 
 sys_user_you: You
+
+-
+
+
+
+
+
+
+
+theme_readme_alert: Click here to read the documentation for the active theme!

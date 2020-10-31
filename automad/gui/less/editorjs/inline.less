@@ -54,8 +54,10 @@
 	& .ce-inline-toolbar__dropdown,
 	& .ce-inline-tool {
 
+		height: 2.45rem;
+		width: 2.45rem;
 		margin: 0;
-		padding: 0 10px !important;
+		padding: 0 0.71rem !important;
 		text-align: center;
 		color: @nav-dropdown-color;
 		background-color: @am-block-dropdown-background;
@@ -85,13 +87,13 @@
 
 		& svg {
 			box-sizing: border-box;
-			height: 34px;
-			min-height: 34px;
-			max-height: 34px;
-			width: 14px;
-			min-width: 14px;
-			max-width: 14px;
-			padding: 11px 0;
+			height: 2.43rem;
+			min-height: 2.43rem;
+			max-height: 2.43rem;
+			width: 1rem;
+			min-width: 1rem;
+			max-width: 1rem;
+			padding: 0.79rem 0;
 		}
 
 	}
@@ -102,10 +104,55 @@
 
 	& .ce-inline-toolbar__actions {
 
-		margin-top: 5px;
+		margin-top: 0.36rem;
 		
 		& input {
 			.shadow;
+		}
+
+		& > div:not([class]) {
+
+			padding: 0.75rem;
+			padding-top: 0.2rem;
+			border-radius: @am-radius;
+			background-color: @am-bg;
+			.shadow;
+
+			&:empty {
+				display: none;
+			}
+
+			& > div {
+				margin-left: 0 !important;
+			}
+
+			& input:not(:focus) {
+				box-shadow: none;
+			}
+
+			& label {
+
+				flex-direction: column;
+				align-items: flex-start !important;
+				padding-bottom: 0.75rem;
+
+				&:last-child {
+					padding-bottom: 0;
+				}
+
+				& span {
+					font-size: @button-mini-font-size;
+					font-weight: @form-stacked-font-weight;
+					line-height: @button-mini-height;
+				}
+
+				& input,
+				& textarea {
+					width: 100% !important;
+				}
+
+			}
+
 		}
 	
 	}
@@ -115,18 +162,18 @@
 	}
 
 	& .ce-conversion-toolbar__label {
-		padding: 7px 10px;
+		padding: 0.5rem 0.71rem;
 		color: @am-text;
 		text-transform: inherit;
-		font-weight: normal;
-		font-size: 11px;
+		font-weight: @base-body-font-weight;
+		font-size: 0.79rem;
 		border-bottom: @am-hairline;
 	}
 
 	& .ce-conversion-tool {
 
-		padding: 5px 10px;
-		font-weight: normal;
+		padding: 0.36rem 0.71rem;
+		font-weight: @base-body-font-weight;
 		color: @nav-dropdown-color;
 		background-color: @am-block-dropdown-background;
 		border: none;
@@ -142,20 +189,26 @@
 
 		&__icon {
 
-			width: 14px;
-			height: 14px;
+			width: 1rem;
+			height: 1rem;
 			color: inherit;
 			background-color: inherit;
 			border: none;
 
 			& svg {
-				margin-top: -2px;
+				margin-top: -0.14rem;
 				width: auto;
 				height: 100%;
 			}
 
 		}
 
+	}
+
+	& .editorjs-inspector-dialog {
+		padding: 0.5rem;
+		border: none !important;
+		.shadow;
 	}
 
 }

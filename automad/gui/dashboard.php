@@ -68,13 +68,6 @@ class Dashboard {
 	
 	
 	/**
-	 *	The Keys object.
-	 */
-	
-	private $Keys;
-	
-	
-	/**
 	 * 	The Themelist object.
 	 */
 	
@@ -184,7 +177,7 @@ class Dashboard {
 	/**
 	 *	Return the Automad object and create a new instance if undefined.
 	 *
-	 * 	@return object The Automad object
+	 *	@return object The Automad object
 	 */
 
 	private function getAutomad() {
@@ -202,7 +195,7 @@ class Dashboard {
 	/**
 	 *	Return the Shared object and create a new instance if undefined.
 	 *
-	 * 	@return object The Shared object
+	 *	@return object The Shared object
 	 */
 
 	private function getShared() {
@@ -219,7 +212,7 @@ class Dashboard {
 	/**
 	 *	Return the Content object and create a new instance if undefined.
 	 *
-	 * 	@return object The Content object
+	 *	@return object The Content object
 	 */
 
 	private function getContent() {
@@ -234,26 +227,9 @@ class Dashboard {
 
 
 	/**
-	 *	Return the Keys object and create a new instance if undefined.
-	 *
-	 * 	@return object The Keys object
-	 */
-
-	private function getKeys() {
-
-		if (!$this->Keys) {
-			$this->Keys = new Keys($this->getAutomad());
-		}
-
-		return $this->Keys;
-
-	}
-
-
-	/**
 	 *	Return the Themelist object and create a new instance if undefined.
 	 *
-	 * 	@return object The Themelist object
+	 *	@return object The Themelist object
 	 */
 
 	private function getThemelist() {
@@ -271,7 +247,7 @@ class Dashboard {
 	 *	Merge a given output array with the debug log and echo 
 	 *	the JSON encoded data.
 	 *
-	 * 	@param array $output
+	 *	@param array $output
 	 */
 
 	private function jsonOutput($output = array()) {

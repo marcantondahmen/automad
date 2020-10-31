@@ -57,42 +57,45 @@ if (User::get()) {
 ?>
 	
 	<nav class="am-navbar">
-		<ul class="am-navbar-nav">
+		<div class="am-navbar-nav">
 			<!-- Logo -->
-			<li class="am-navbar-logo">
+			<div class="am-navbar-logo">
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 					<?php echo Components\Logo::render(); ?>
 				</a>
-			</li>
+			</div>
 			<!-- Search -->
-			<li class="am-navbar-search">
+			<div class="am-navbar-search">
 				<?php 
 					echo Components\Form\Search::render(
-						Text::get('search_placeholder') . ' ' . htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
-						'Ctrl + Space'
+						Text::get('search_placeholder') . ' ' . 
+						htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
+						'[Ctrl + ⇧ + Space]'
 					);
 				?>
-			</li>
+			</div>
 			<!-- Buttons -->
-			<li class="am-navbar-buttons">
+			<div class="am-navbar-buttons">
 				<div class="am-icon-buttons">
+					<!-- Debug Status -->
+					<span data-am-status="debug"></span>
 					<!-- Add Page -->
 					<a 
 					href="#am-add-page-modal" 
 					class="uk-button uk-button-primary" 
 					title="<?php Text::e('btn_add_page'); ?>"
 					data-uk-modal
-					data-uk-tooltip="{pos:'bottom'}"
+					data-uk-tooltip="{pos:'bottom-right'}"
 					>
 						<i class="uk-icon-plus"></i>
 					</a>
 					<!-- Save -->
 					<?php if ($submit) { ?>
 					<button 
-					title="<?php Text::e('btn_save'); ?> (Cmd/Ctrl + S)" 
+					title="<?php Text::e('btn_save'); ?>[Ctrl + S]" 
 					class="uk-button uk-button-success" 
 					data-am-submit="<?php echo $submit; ?>" 
-					data-uk-tooltip="{pos:'bottom'}" 
+					data-uk-tooltip="{pos:'bottom-right'}" 
 					disabled
 					>
 						<i class="uk-icon-check"></i>
@@ -104,7 +107,7 @@ if (User::get()) {
 					data-uk-dropdown="{mode:'click'}"
 					>
 						<div class="uk-button">
-							<i class="uk-icon-user"></i>
+							<i class="uk-icon-ellipsis-v"></i>
 						</div>
 						<div class="uk-dropdown uk-dropdown-small">
 							<ul class="uk-nav uk-nav-dropdown">
@@ -134,8 +137,8 @@ if (User::get()) {
 						<i class="uk-icon-navicon uk-icon-justify"></i>
 					</a>
 				</div>
-			</li>
-		</ul>	
+			</div>
+		</div>	
 	</nav>
 	
 <?php 

@@ -1,0 +1,6 @@
+{
+  "name": "automad-lib",
+  "dependencies": {
+    "typeface-inter": "^3.15.0"
+  }
+}

@@ -199,6 +199,7 @@ Config::set('AM_KEY_CAPTION', ':caption');
 Config::set('AM_KEY_INDEX', ':i');
 Config::set('AM_KEY_FILELIST_COUNT', ':filelistCount');
 Config::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
+Config::set('AM_KEY_PAGELIST_DISPLAY_COUNT', ':pagelistDisplayCount');
 Config::set('AM_KEY_PAGINATION_COUNT', ':paginationCount');
 Config::set('AM_KEY_NOW', ':now');
 
@@ -207,9 +208,6 @@ Config::set('AM_HEADLESS_ENABLED', false);
 Config::set('AM_HEADLESS_TEMPLATE', '/automad/headless/json.php');
 // For security reasons, the custom template should not have the .php extension.
 Config::set('AM_HEADLESS_TEMPLATE_CUSTOM', '/config/headless.json');
-
-// COMPOSER
-Config::set('AM_COMPOSER_PHAR_URL', 'https://getcomposer.org/download/1.9.0/composer.phar');
 
 // UPDATE
 Config::set('AM_UPDATE_ITEMS', '/automad, /lib, /index.php, /packages/standard, /packages/tutorial');

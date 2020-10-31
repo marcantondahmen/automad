@@ -114,7 +114,33 @@
 				$.get('?ajax=get_packages', function (data) {
 
 					if (data.html) {
+
 						$this.html(data.html);
+
+						$.get('?ajax=outdated_packages', function (data) {
+
+							if (data.buffer) {
+
+								try {
+
+									var json = JSON.parse(data.buffer),
+										outdated = json.installed;
+
+									for (let i = 0; i < outdated.length; i++) {
+										$('[data-package="' + outdated[i].name + '"] form.uk-hidden')
+										.removeClass('uk-hidden');
+									}
+
+								} catch (e) {
+
+									return false;
+
+								}
+
+							}
+							
+						}, 'json');
+
 					}
 
 					if (data.error) {

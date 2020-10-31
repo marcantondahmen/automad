@@ -62,7 +62,9 @@ $this->element('header');
 					<div class="uk-panel-title">
 						<i class="uk-icon-user-plus uk-icon-medium"></i>
 					</div>
-					<?php Text::e('install_help'); ?>
+					<div class="am-text">
+						<?php Text::e('install_help'); ?>
+					</div>
 				</div>
 				<form class="uk-form uk-margin-small-top" method="post">
 					<input 
@@ -104,7 +106,7 @@ $this->element('header');
 				</div>
 				<div class="uk-text-right">
 					<a href="" class="uk-button uk-button-success">
-						<?php Text::e('btn_login'); ?>&nbsp;&nbsp;<i class="uk-icon-sign-in"></i>
+						<?php Text::e('btn_login'); ?>
 					</a>
 				</div>
 			</div>

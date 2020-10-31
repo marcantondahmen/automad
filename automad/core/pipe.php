@@ -70,10 +70,10 @@ class Pipe {
 	/**
 	 *	Call custom string function.
 	 *      
-	 * 	@param string $function
-	 * 	@param array $parameters
-	 * 	@param string $value
-	 * 	@return string $value
+	 *	@param string $function
+	 *	@param array $parameters
+	 *	@param string $value
+	 *	@return string $value
 	 */
 
 	private static function extension($function, $parameters, $value) {
@@ -110,10 +110,10 @@ class Pipe {
 	/**
 	 *	Apply string function to $value.
 	 *      
-	 * 	@param string $function
-	 * 	@param array $parameters
-	 * 	@param string $value
-	 * 	@return string $value
+	 *	@param string $function
+	 *	@param array $parameters
+	 *	@param string $value
+	 *	@return string $value
 	 */
 	
 	private static function stringFunction($function, $parameters, $value) {
@@ -151,10 +151,10 @@ class Pipe {
 	/**
 	 *	Simple math operations.
 	 *      
-	 * 	@param string $operator
-	 * 	@param string $number
-	 * 	@param string $value
-	 * 	@return number $value
+	 *	@param string $operator
+	 *	@param string $number
+	 *	@param string $value
+	 *	@return number $value
 	 */
 	
 	private static function math($operator, $number, $value) {

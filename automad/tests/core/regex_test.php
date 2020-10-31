@@ -13,8 +13,8 @@ class Regex_Test extends TestCase {
 	
 	
 	/**
-	 * 	@dataProvider dataForTestCsvIsSame
-	 * 	@testdox csv() matches: $str
+	 *	@dataProvider dataForTestCsvIsSame
+	 *	@testdox csv() matches: $str
 	 */
 	
 	public function testCsvIsSame($str, $expected) {

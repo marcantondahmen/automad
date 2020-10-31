@@ -33,7 +33,7 @@
 							<@~ end @>
 						<@~ end ~@>				
 					</ul>
-					<@ if @{ :sidebarNav } @>
+					<@ if @{ :sidebarNav } and @{ urlSearchResults } @>
 						<a 
 						href="#modal-nav" 
 						class="navbar-search-button @{ :classSearch }"

@@ -33,15 +33,15 @@
  */
 
 
-@am-navbar-padding-top: 		10px;
+@am-navbar-padding-top: 		0.71rem;
 
 @navbar-color:					@am-text;
 @navbar-background: 			@am-bg;
 @navbar-nav-color:				@navbar-color;
 @navbar-nav-hover-color:		@am-muted;
 
-@navbar-nav-height:				60px;
-@navbar-nav-padding-horizontal: 25px;
+@navbar-nav-height:				4.57rem;
+@navbar-nav-padding-horizontal: 1.79rem;
 
 
 .am-navbar {
@@ -58,29 +58,23 @@
 	background-color: @navbar-background;
 	
 	html.am-scrolled & {
-		height: @navbar-nav-height + 1px;
+		height: @navbar-nav-height + @am-border-width;
 		border-bottom: @am-hairline;
 	}
 	
 	&-nav {
-		
-		display: table;
+		display: flex;
+		align-items: center;
+		width: 100%;
 		height: 100%;
 		padding: 0;
-		margin: 0;
-		
-		& > li {
-			display: table-cell;
-			vertical-align: middle;
-			width: auto;	
-		}
-			
+		margin: 0;	
 	}
 	
 	&-logo {
-		
+
 		@media (min-width: @breakpoint-medium) {
-			min-width: ~"calc(((100vw - @{utility-container-max-width}) / 2) + @{utility-container-padding-horizontal})";
+			min-width: ~"calc(((100% - @{utility-container-max-width}) / 2) + @{utility-container-padding-horizontal})";
 		}
 		
 		@media (min-width: @breakpoint-large) and (max-width: ((2 * @am-sidebar-width) + @utility-container-max-width)) {
@@ -89,7 +83,7 @@
 		
 		& a {
 			
-			display: block;
+			display: inline-block;
 			margin: 0;
 			padding: 0 @navbar-nav-padding-horizontal 0 @utility-container-padding-horizontal;	
 			white-space: nowrap;
@@ -124,7 +118,7 @@
 	
 	& &-search {
 		
-		width: 100%;
+		flex-grow: 1;
 		position: relative;
 		
 		& form {
@@ -150,10 +144,10 @@
 	&-push {
 		
 		box-sizing: border-box;
-		padding-top: 52px;
+		padding-top: 5.71rem;
 		
 		@media (min-width: @breakpoint-medium) {
-			padding-top: 85px;
+			padding-top: 6.43rem;
 		}
 		
 	}

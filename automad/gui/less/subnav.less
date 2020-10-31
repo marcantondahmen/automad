@@ -33,8 +33,8 @@
  */
 
 
-@subnav-margin-horizontal:			2px;
-@subnav-margin-vertical:			8px;
+@subnav-margin-horizontal:			0.14rem;
+@subnav-margin-vertical:			0.57rem;
 
 @subnav-color:						@am-text;
 @subnav-hover-color:				@subnav-color;
@@ -42,19 +42,19 @@
 @subnav-disabled-color:				@subnav-color;
 
 @subnav-pill-padding-vertical:		0;
-@subnav-pill-padding-horizontal:	6px;
-@subnav-pill-hover-background:		@button-background;
-@subnav-pill-hover-color:			@am-text;
-@subnav-pill-active-background:		@button-background;
+@subnav-pill-padding-horizontal:	0.43rem;
+@subnav-pill-hover-background:		@button-hover-background;
+@subnav-pill-hover-color:			@subnav-hover-color;
+@subnav-pill-active-background:		@button-active-background;
 @subnav-pill-active-color:			@subnav-active-color;
 
 .hook-subnav-pill() {
 	
 	font-size: @text-small-font-size;
 	font-weight: @am-nav-font-weight;
-	line-height: @text-small-line-height + 2 !important;
-	border-radius: 50px;
-	margin-top: -1px;
+	line-height: @text-small-line-height + 0.21rem !important;
+	border-radius: @am-radius-small;
+	margin-top: -0.072rem;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -69,7 +69,7 @@
 	}
 	
 	&.uk-icon-search {
-		width: 12px
+		width: 0.86rem
 	}
 	
 }
@@ -90,12 +90,12 @@
 	
 	& > li {
 		display: inline-block;
-		margin-bottom: @subnav-margin-vertical - 5;
+		margin-bottom: @subnav-margin-vertical - 0.36rem;
 	}
 	
 	&.am-breadcrumbs {
 		
-		min-width: 285px;
+		min-width: 20.36rem;
 		
 		& > li i:hover {
 			cursor: default;
@@ -103,21 +103,19 @@
 		}
 		
 		& > li a {
-	
-			// To make text-overflow work in every browser, 
-			// the max-width needs to be in pixels.
-			max-width: 105px;
+			
+			max-width: 7.5rem;
 		
 			@media (min-width: @breakpoint-small) {
-				max-width: 185px;
+				max-width: 13rem;
 			}
 		
 			@media (min-width: @breakpoint-medium) {
-				max-width: 135px;
+				max-width: 9.5rem;
 			}
 		
 			@media (min-width: @breakpoint-large) {
-				max-width: 170px;
+				max-width: 12rem;
 			}
 		
 		}

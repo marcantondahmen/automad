@@ -56,10 +56,10 @@ class SelectImage {
 	/**
 	 *	Create an image selection panel.
 	 *
-	 * 	@param array $files
-	 * 	@param string $title
-	 * 	@param boolean $basename
-	 *  @return string The HTML of the panel
+	 *	@param array $files
+	 *	@param string $title
+	 *	@param boolean $basename
+	 *	@return string The HTML of the panel
 	 */
 
 	public static function render($files, $title, $basename = false) {
@@ -73,7 +73,7 @@ class SelectImage {
 						$title
 						&nbsp;<span class="uk-badge">$count</span>
 					</p>
-					<div class="uk-panel uk-panel-box uk-flex uk-flex-wrap uk-flex-wrap-top">
+					<div class="am-select-image-grid">
 HTML;
 			
 			foreach ($files as $file) {
@@ -88,10 +88,8 @@ HTML;
 				$imageUrl = AM_BASE_URL . $image->file;
 
 				$html .= <<< HTML
-				 		 <label class="uk-width-1-3 uk-width-medium-1-5">
-							<div class="am-panel-cover-1by1">
-								<img src="$imageUrl" title="$value" data-uk-tooltip>
-							</div>
+				 		 <label class="am-cover-1by1">
+							<img src="$imageUrl" title="$value" data-uk-tooltip>
 						 	<input type="hidden" name="imageUrl" value="$value">
 						 </label>
 HTML;

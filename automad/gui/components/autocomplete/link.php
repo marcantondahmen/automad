@@ -55,7 +55,7 @@ class Link {
 	/**
 	 *	Return a JSON formatted string to be used as autocomplete infomation in a link field.
 	 *
-	 * 	@param object $Automad
+	 *	@param object $Automad
 	 *	@return string The JSON encoded autocomplete data
 	 */
 	

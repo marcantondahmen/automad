@@ -77,7 +77,7 @@ $this->element('header');
 					'text' => Text::get('sys_language')
 				),
 				array(
-					'icon' => '<strong>{ }</strong>',
+					'icon' => '<span class="am-icon-headless"></span>',
 					'text' => Text::get('sys_headless')
 				),
 				array(

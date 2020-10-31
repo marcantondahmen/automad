@@ -8,7 +8,6 @@ var gulp = require('gulp'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
 	replace = require('gulp-replace'),
-	sequence = require('gulp-sequence'),
 	uglify = require('gulp-uglify-es').default,
 	gutil = require('gulp-util'),
 	fs = require('fs'),
@@ -114,9 +113,8 @@ gulp.task('libs-js', function() {
 			]),
 			// Editor.js.
 			gulp.src([
-				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE',
+				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
-				'node_modules/@editorjs/delimiter/dist/bundle.js',
 				'node_modules/@editorjs/embed/dist/bundle.js',
 				'node_modules/@editorjs/header/dist/bundle.js',
 				'node_modules/@editorjs/inline-code/dist/bundle.js',
@@ -125,7 +123,11 @@ gulp.task('libs-js', function() {
 				'node_modules/@editorjs/quote/dist/bundle.js',
 				'node_modules/@editorjs/raw/dist/bundle.js',
 				'node_modules/@editorjs/table/dist/bundle.js',
-				'node_modules/@editorjs/underline/dist/bundle.js'
+				'node_modules/@editorjs/underline/dist/bundle.js',
+				'node_modules/editorjs-drag-drop/dist/bundle.js',
+				'node_modules/editorjs-inspector/dist/index.js',
+				'node_modules/editorjs-style/dist/index.js',
+				'node_modules/editorjs-undo/dist/bundle.js'
 			]),
 			// CodeMirror. To be minified.
 			gulp.src([
@@ -182,7 +184,6 @@ gulp.task('libs-js', function() {
 				'../lib/vendor/uikit/uikit/src/js/components/datepicker.js',
 				'../lib/vendor/uikit/uikit/src/js/components/form-select.js',
 				'../lib/vendor/uikit/uikit/src/js/components/notify.js',
-				'../lib/vendor/uikit/uikit/src/js/components/sticky.js',
 				'../lib/vendor/uikit/uikit/src/js/components/timepicker.js',
 				'../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
 			])
@@ -262,63 +263,15 @@ gulp.task('libs-css', function() {
 // Watch task.
 gulp.task('watch', function() {
 
-	gulp.watch('blocks/js/*.js', ['blocks-js']);
-	gulp.watch('blocks/less/*.less', ['blocks-less']);
-	gulp.watch('gui/js/*.js', ['automad-js']);
-	gulp.watch('gui/js/*/*.js', ['automad-js']);
-	gulp.watch('gui/less/*.less', ['automad-less']);
-	gulp.watch('gui/less/*/*.less', ['automad-less']);
+	gulp.watch('blocks/js/*.js', gulp.series('blocks-js'));
+	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
+	gulp.watch('gui/js/*.js', gulp.series('automad-js'));
+	gulp.watch('gui/js/*/*.js', gulp.series('automad-js'));
+	gulp.watch('gui/less/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/*/*.less', gulp.series('automad-less'));
 	
 });
-
-
-// Download fonts from Google.
-gulp.task('google-fonts-download', function() {
-
-	var	libDir = '../../../lib/fonts/google', // Note: the path is relative to gulp.dest
-		fontsList = './fonts.list',
-		options = {
-			fontsDir: libDir,
-			cssDir: libDir,
-			cssFilename: 'fonts.css'
-		},
-		woff = Object.assign({}, options, { format: 'woff' }),
-		woff2 = Object.assign({}, options, { format: 'woff2' }),
-		ttf = Object.assign({}, options, { format: 'ttf' });
-
-	return	merge2(
-				gulp.src(fontsList)
-				.pipe(googleFonts(woff)),
-				gulp.src(fontsList)
-				.pipe(googleFonts(woff2)),
-				gulp.src(fontsList)
-				.pipe(googleFonts(ttf))
-			)
-			.pipe(gulp.dest(distDashboard));	
-		
-});
-
-
-// Add all formats to the fonts.css file. 
-// The gulp-google-webfonts plugin can only create a .css file for one format.
-// Therefore that file will be processed in a second step.
-gulp.task('google-fonts-css', function() {
-
-	var	rgx = /(src\: url\(([^\)]+?)\.ttf\) format\(\'truetype\'\);)/g,
-		rpl = 	"src: url($2.woff2) format('woff2');" +
-				"\n\tsrc: url($2.woff) format('woff');" + 
-				"\n\t$1";
-
-	return	gulp.src('../lib/fonts/google/fonts.css')
-			.pipe(replace(rgx, rpl))
-			.pipe(gulp.dest('../lib/fonts/google'))
-	
-});
-
-
-// Run both google font tasks as a sequence.
-gulp.task('google-fonts', sequence('google-fonts-download', 'google-fonts-css'));
 
 
 // The default task.
-gulp.task('default', ['blocks-js', 'blocks-less', 'automad-js', 'libs-js', 'automad-less', 'libs-css']);
+gulp.task('default', gulp.series('blocks-js', 'blocks-less', 'automad-js', 'libs-js', 'automad-less', 'libs-css'));

@@ -55,12 +55,12 @@ class Select {
 	/**
 	 *	Create a select button.
 	 *
-	 *  @param string $name
-	 *  @param array $values
-	 *  @param string $selected
-	 *  @param string $prefix
-	 * 	@param string $class
-	 *  @return string The HTML for the button
+	 *	@param string $name
+	 *	@param array $values
+	 *	@param string $selected
+	 *	@param string $prefix
+	 *	@param string $class
+	 *	@return string The HTML for the button
 	 */
 	
 	public static function render($name, $values, $selected, $prefix = '', $class = '') {
@@ -73,7 +73,7 @@ class Select {
 		$prefix = ltrim($prefix . ' ');
 
 		$html = <<< HTML
-				<div class="uk-button $class uk-form-select" data-uk-form-select="{activeClass:''}"> 
+				<div class="uk-button $class uk-form-select" data-uk-form-select> 
 					$prefix
 					<span></span>&nbsp;
 					<i class="uk-icon-caret-down"></i> 

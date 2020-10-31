@@ -91,7 +91,7 @@
 						header: {
 							class: Header,
 							shortcut: 'CMD+SHIFT+H',
-							inlineToolbar: [],
+							inlineToolbar: true,
 							config: {
 								levels: [1, 2, 3, 4, 5, 6],
 								defaultLevel: 2
@@ -101,25 +101,27 @@
 							class: List,
 							inlineToolbar: true,
 						},
-						image: AutomadImage,
-						gallery: AutomadGallery,
-						slider: AutomadSlider,
-						buttons: {
-							class: AutomadButtons,
-							inlineToolbar: ['italic', 'bold'] 
+						table: {
+							class: Table,
+							inlineToolbar: true
 						},
 						quote: {
 							class: Quote,
 							inlineToolbar: true
 						},
-						table: {
-							class: Table,
-							inlineToolbar: true
+						delimiter: AutomadDelimiter,
+						image: AutomadImage,
+						gallery: AutomadGallery,
+						slider: AutomadSlider,
+						buttons: {
+							class: AutomadButtons,
+							inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle'] 
 						},
+						pagelist: AutomadPagelist,
+						filelist: AutomadFilelist,
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
-						delimiter: Delimiter,
 						snippet: AutomadSnippet,
 						embed: {
 							class: Embed,
@@ -134,28 +136,40 @@
 						},
 						marker: {
 							class: Marker
-						}
+						},
+						editorJSStyle: {
+							class: EditorJSStyle,
+							shortcut: 'CMD+SHIFT+S'
+						},
+						editorJSInspector: EditorJSInspector
 					},
 
 					onChange: function() { 
 
-						// Catch the initial change event by testing the ready variable.
-						if (ready) {
-							editor.save().then(function(data) {
+						editor.save().then(function(data) {
+
+							// Only trigger change in case blocks actually have changed.
+							var blocksNew = JSON.stringify(data.blocks);
+
+							try {
+								var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks);
+							} catch(e) {
+								var blocksCurrent = '';
+							}
+
+							if (blocksCurrent != blocksNew) {
 								$input.val(JSON.stringify(data)).trigger('change');
-							});
-						}
+							}
+
+						});
 					
 					},
 
 					onReady: function() {
 						
 						$wrapper.find('.codex-editor__redactor').removeAttr('style');
-
-						// Delay setting ready to be true to catch the initial change event.
-						setTimeout(function () {
-							ready = true;
-						}, 2000);
+						new DragDrop(editor);
+						new Undo({ editor });
 
 					}
 
@@ -165,8 +179,17 @@
 
 			// Trigger changes when clicking a settings button or changing an input field.
 			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', triggerChange);
-			$(document).on('change keyup', '.ce-block input', triggerChange);
-
+			$(document).on('change keyup', '.cdx-input, .ce-block input, .ce-block select', triggerChange);
+			
+			// Blur focus on block when clicking outside.
+			$(window).click(function () {
+				$('.ce-block--focused').removeClass('ce-block--focused');
+			});
+			
+			$(document).on('blur', '.ce-block--focused [contenteditable]', function(event) {
+				event.stopPropagation();
+			});
+			
 		}
 		
 	};

@@ -60,10 +60,10 @@ $this->element('header');
 		</ul>
 		
 		<!-- Filters -->
-		<div data-uk-sticky="{top:60}">
+		<div class="am-sticky">
 			<div class="uk-form">
 				<input 
-				class="uk-width-1-1 uk-form-large" 
+				class="uk-width-1-1" 
 				type="search" 
 				name="filter" 
 				placeholder="<?php Text::e('packages_filter'); ?>"
@@ -81,7 +81,11 @@ $this->element('header');
 		<?php 
 		
 		$progressModals = array(
-			'am-modal-update-packages-progress' => array(
+			'am-modal-update-all-packages-progress' => array(
+				'icon' => 'uk-icon-refresh uk-icon-spin',
+				'text' => Text::get('packages_updating_all')
+			),
+			'am-modal-update-package-progress' => array(
 				'icon' => 'uk-icon-refresh uk-icon-spin',
 				'text' => Text::get('packages_updating')
 			),	

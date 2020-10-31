@@ -2,7 +2,7 @@ title: Work
 
 -
 
-date: 2020-03-24 12:00:00
+date: 2020-07-04 00:00:00
 
 -
 
@@ -10,7 +10,7 @@ tags: Light, Portfolio
 
 -
 
-+main: {"time":1589109374130,"blocks":[{"type":"paragraph","data":{"text":"Templates are used to present your content. There are different templates for each purpose. They control the layout as well as the design of you page. This page for example uses the <b>portfolio</b> template of the <b>light</b> theme. Below the content blocks, a page grid with a selection of other pages quickly gives your visitors a visual impression of your work.","large":true}},{"type":"buttons","data":{"primaryText":"Showcasing a Project  &nbsp;&lt;svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 8 90 60\"&gt;&lt;polygon points=\"0,25 69.101,25 52.082,7.917 60,0 90,30 60,60 52.082,52.082 69.101,35 0,35 \"&gt;&lt;/polygon&gt;&lt;/svg&gt;","primaryLink":"/work/a-project-page","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.17.0"}
++main: {"time":1604076060915,"blocks":[{"type":"paragraph","data":{"text":"Templates are used to present your content. There are different templates for each purpose. They control the layout as well as the design of you page. This page for example uses the <b>portfolio</b> template of the <b>light</b> theme. Below the content blocks, a page grid with a selection of other pages quickly gives your visitors a visual impression of your work.","large":true}},{"type":"buttons","data":{"primaryText":"Showcasing a Project ⟶","primaryLink":"/work/a-project-page","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.18.0"}
 
 -
 

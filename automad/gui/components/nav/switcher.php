@@ -54,15 +54,15 @@ class Switcher {
 /**
 	 *  Create a sticky switcher menu with an optional dropdown menu.
 	 *
-	 *  @param string $target
-	 *  @param array $items Main menu items
-	 *  @param array $dropdown Dropdown menu items
-	 *  @return string The rendered menu HTML
+	 *	@param string $target
+	 *	@param array $items Main menu items
+	 *	@param array $dropdown Dropdown menu items
+	 *	@return string The rendered menu HTML
 	 */
 	
 	public static function render($target, $items = array(), $dropdown = array()) {
 		
-		$html = '<div class="am-switcher" data-uk-sticky="{top:60}">' .
+		$html = '<div class="am-switcher am-sticky">' .
 				'<div class="am-switcher-buttons uk-flex">' .
 		 		'<div class="uk-flex uk-flex-nowrap uk-flex-item-1" data-uk-switcher="{connect:\'' . $target . '\',animation:\'uk-animation-fade\',swiping:false}">';
 	

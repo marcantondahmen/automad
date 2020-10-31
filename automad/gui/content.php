@@ -344,7 +344,7 @@ class Content {
 	/**
 	 *	Duplicate a page based on $_POST.
 	 *      
-	 * 	@return array $output (AJAX response) 
+	 *	@return array $output (AJAX response) 
 	 */
 	
 	public function duplicatePage() {
@@ -457,7 +457,7 @@ class Content {
 	/**
 	 *	Extract the deepest directory's prefix from a given path.
 	 *
-	 * 	@param string $path
+	 *	@param string $path
 	 *	@return string Prefix
 	 */
 
@@ -486,7 +486,7 @@ class Content {
 	 *  Return the file system path for the directory of a page based on $_POST['url'].   
 	 *  In case URL is empty, return the '/shared' directory.
 	 *      
-	 *  @return string The full path to the related directory
+	 *	@return string The full path to the related directory
 	 */
 	
 	public function getPathByPostUrl() {
@@ -548,9 +548,9 @@ class Content {
 	/**
 	 * 	Get the theme/template file from posted data or return a default template name
 	 * 
-	 * 	@param array $array
-	 * 	@param string $key
-	 * 	@return string The template filename
+	 *	@param array $array
+	 *	@param string $key
+	 *	@return string The template filename
 	 */
 
 	private function getTemplateNameFromArray($array = false, $key = false) {
@@ -572,7 +572,7 @@ class Content {
 	/**
 	 * 	Import file from URL based on $_POST.
 	 * 
-	 * 	@return array The $output array with possible error messages.
+	 *	@return array The $output array with possible error messages.
 	 */
 
 	public function import() {
@@ -656,7 +656,7 @@ class Content {
 	 *  saved back into the .txt file. 
 	 *  In case the title variable gets modified, the page directory gets renamed accordingly.
 	 *
-	 *  @return array $output (AJAX response)
+	 *	@return array $output (AJAX response)
 	 */
 	
 	public function inPageEdit() {
@@ -829,8 +829,8 @@ class Content {
 	/**
 	 *	Return updated context URL based on $path.
 	 *      
-	 *  @param string $path
-	 *  @return string The context URL to the new page
+	 *	@param string $path
+	 *	@return string The context URL to the new page
 	 */
 	
 	private function contextUrlByPath($path) {

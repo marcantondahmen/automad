@@ -370,11 +370,11 @@
 			editor.addButtons({
 
 				bold: {
-					title: 'Bold',
+					title: 'Bold[Ctrl + B]</small>',
 					label: '<strong>B</strong>'
 				},
 				italic: {
-					title: 'Italic',
+					title: 'Italic[Ctrl + I]</small>',
 					label: '<strong><em>I</em></strong>'
 				},
 				blockquote: {
@@ -382,7 +382,7 @@
 					label: '<i class="uk-icon-quote-right"></i>'
 				},
 				link: {
-					title: 'Link',
+					title: 'Link[Ctrl + L]</small>',
 					label: '<i class="uk-icon-link"></i>'
 				},
 				image: {
@@ -413,6 +413,8 @@
 			});
 
 			editor.addShortcutAction('bold', ['Ctrl-B', 'Cmd-B']);
+			editor.addShortcutAction('italic', ['Ctrl-I', 'Cmd-I']);
+			editor.addShortcutAction('link', ['Ctrl-L', 'Cmd-L']);
 
 			var parser = editor.options.mdparser || window.marked || null;
 

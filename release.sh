@@ -27,7 +27,7 @@ fi
 
 
 # Run tests.
-phpunit
+bash phpunit.sh
 echo
 
 
