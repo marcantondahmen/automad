@@ -66,7 +66,7 @@ class Toc {
 		$Page = $Automad->Context->get();
 		$content = json_decode($Page->get($data->key));
 		$headers = array();
-		$lastLevel = 0;
+		$lastLevel = 1;
 		$open = 0;
 		$html = '';
 		
@@ -100,16 +100,28 @@ class Toc {
 		foreach ($headers as $header) {
 
 			if ($header->level > $lastLevel) {
-				$open++;
-				$html .= "<$tag><li>";
+
+				$diff = $header->level - $lastLevel;
+
+				for ($i = 1; $i <= $diff; $i++) {
+					$open++;
+					$html .= "<$tag><li>";
+				}
+
 			}
 
 			if ($header->level < $lastLevel) {
-				$open--;
-				$html .= "</li></$tag></li><li>";
+
+				$diff = $lastLevel - $header->level;
+
+				for ($i = 1; $i <= $diff; $i++) {
+					$open--;
+					$html .= "</li></$tag>";
+				}
+
 			}
 
-			if ($header->level == $lastLevel) {
+			if ($header->level <= $lastLevel) {
 				$html .= '</li><li>';
 			}
 
@@ -120,7 +132,6 @@ class Toc {
 
 		for ($i = 1; $i <= $open; $i++) {
 			$html .= "</li></$tag>";
-			
 		}
 
 		return '<figure class="am-toc">' . $html . '</figure>';
