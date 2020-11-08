@@ -383,11 +383,15 @@ HTML;
 
 		if ($hasRemoveButton) {
 
+			$Text = Text::getObject();
+
 			return <<< HTML
 				   <button 
 				   type="button" 
-				   class="am-remove-parent uk-margin-top uk-button uk-button-mini uk-button-danger"
-				   ><i class="uk-icon-trash-o"></i></button>
+				   class="am-remove-parent am-button-remove-parent uk-margin-top"
+				   title="$Text->btn_remove"
+				   data-uk-tooltip
+				   ><i class="uk-icon-remove"></i></button>
 HTML;
 
 		}
