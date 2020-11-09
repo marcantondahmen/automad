@@ -14,11 +14,11 @@ tags: Colors, Icons
 
 -
 
-colorMuted: #484848
+colorMuted: #222222
 
 -
 
-colorPanelBg: #f3e466
+colorPanelBg: #ff563d
 
 -
 
@@ -26,6 +26,7 @@ colorText: #121212
 
 -
 
-pageIconSvg: <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="8" cy="8" r="8"/>
+pageIconSvg: <svg width="1.2em" height="1.6em" x="0px" y="0px" viewBox="0 0 15 20" fill="currentColor">
+    <polygon points="8,0 8,7 15,7"/>
+    <polygon points="8,8 7,8 7,0 0,0 0,20 15,20 15,8"/>
 </svg>

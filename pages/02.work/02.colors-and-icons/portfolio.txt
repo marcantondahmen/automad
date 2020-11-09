@@ -22,8 +22,12 @@ checkboxHideTitle: 1
 
 -
 
-sortPagelist: :path asc
+colorBg: #ebebeb
 
 -
 
-theme: standard/dark
+colorBorder: #dddddd
+
+-
+
+sortPagelist: :path asc
