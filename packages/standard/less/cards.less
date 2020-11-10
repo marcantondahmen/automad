@@ -1,0 +1,83 @@
+/*
+ *	Standard
+ *
+ *	Copyright (c) 2020 by Marc Anton Dahmen
+ *	http://marcdahmen.de
+ *
+ *  MIT license
+ */
+
+
+@card-width: 18.75rem;
+@card-large-width: 25rem;
+@cards-gap: 4px;
+@cards-column-gap: @cards-gap;
+@cards-row-gap: @cards-gap;
+@cards-masonry-auto-rows: 50px;
+
+.cards {
+
+	display: grid;
+	column-gap: @cards-column-gap;
+	row-gap: @cards-row-gap;
+	grid-template-columns: repeat(auto-fill, minmax(@card-width, 1fr));
+	position: relative;
+	margin-top: @utility-margin;
+	margin-bottom: @utility-margin;
+
+	@media (max-width: (@card-width * 1.75)) {
+		grid-template-columns: 1fr;
+	}
+
+	@media (max-width: @block-max-width) {
+		margin: @utility-margin -@utility-container-padding-horizontal !important;
+	}
+	
+	@media (min-width: @breakpoint-xlarge) {	
+		margin-top: @utility-margin-large;
+		margin-bottom: @utility-margin-large;
+	}
+
+	&.masonry {
+		grid-auto-rows: @cards-masonry-auto-rows;
+	}
+
+	&-large {
+
+		grid-template-columns: repeat(auto-fill, minmax(@card-large-width, 1fr));
+
+		@media (max-width: (@card-large-width * 1.75)) {
+			grid-template-columns: 1fr;
+		}
+
+	}
+
+	& .card {
+		overflow: hidden;
+		background-color: @panel-box-background;
+	}
+
+	&.grid,
+	&.masonry-clean-bottom {
+
+		& .card-content {
+		
+			display: flex;
+			box-sizing: border-box;
+			flex-direction: column;
+			justify-content: flex-start;
+			height: 100%;
+
+			& > .uk-panek-teaser {
+				flex-grow: 1;
+			}
+
+			& > .panel-body {
+				flex-grow: 1;
+			}
+		
+		}
+
+	}
+
+}

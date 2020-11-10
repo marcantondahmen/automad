@@ -1,9 +1,9 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="masonry masonry-large<@ if @{ :pagelistDisplayCount } > 2 @> am-stretched<@ end @> @{ :classes }">
+<div class="@{ :classes | def('cards cards-large masonry') }<@ if @{ :pagelistDisplayCount } > 2 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
-		<div class="masonry-item" <@ ../../snippets/colors_inline.php @>>
-			<div class="masonry-content uk-panel uk-panel-box">
+		<div class="card" <@ ../../snippets/colors_inline.php @>>
+			<div class="card-content uk-panel uk-panel-box">
 				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
 					<@~ ../../snippets/set_imageteaser_variable.php @>
 					<@ if @{ :imageTeaser } ~@>
@@ -31,8 +31,8 @@
 			</div>
 		</div>
 	<@ else @>
-		<div class="masonry-item">
-			<div class="masonry-content uk-panel uk-panel-box">
+		<div class="card">
+			<div class="card-content uk-panel uk-panel-box">
 				<div class="uk-panel-title uk-margin-remove">
 					@{ notificationNoSearchResults | def ('No Pages Found') }
 				</div>
