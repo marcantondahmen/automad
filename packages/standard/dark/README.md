@@ -71,6 +71,7 @@ This theme offers multiple options and two templates &mdash; **Blog** and **Port
 | Hide Thumbnails | Hide teaser images in page grid. |
 | Sort Pagelist | Sorting of the pages in a portfolio or blog pagelist. Note that the sorting and filtering buttons should be hidden in case this variable is defined! The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc) like ':path asc'. |
 | Sort Related Pages | Sorting of the pagelist with related pages. The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc). |
+| Use Alternative Pagelist Layout | Use an alternative layout for blog, portfolio or related pages pagelists. |
 
 ### Related Pages 
 

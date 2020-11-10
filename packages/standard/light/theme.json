@@ -41,6 +41,7 @@
 		"checkboxShowAllPagesInPagelist": "Show not only children but all pages in the pagelist",
 		"checkboxShowInFooter": "Show a link to this page in the footer menu",
 		"checkboxShowInNavbar": "Show a link to this page in the main navbar",
+		"checkboxUseAlternativePagelistLayout": "Use an alternative layout for blog, portfolio or related pages pagelists",
 		"colorText": "A custom override text color",
 		"colorBg": "A custom override background color",
 		"colorBorder": "A custom override border color",

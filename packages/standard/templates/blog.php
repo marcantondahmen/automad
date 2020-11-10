@@ -9,7 +9,11 @@
 				<@ snippets/clear_search.php @>
 			</div>
 		<@ end ~@>
-		<@ blocks/pagelist/blog.php @>
+		<@ if @{ checkboxUseAlternativePagelistLayout } @>
+			<@ blocks/pagelist/blog_alt.php @>
+		<@ else @>
+			<@ blocks/pagelist/blog.php @>
+		<@ end @>
 		<@ snippets/pagination.php @>
 	</div>
 <@ snippets/footer.php @>
