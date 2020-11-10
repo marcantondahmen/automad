@@ -36,6 +36,7 @@
 		"checkboxHideFiltersAndSort": "Hide filter and sorting buttons",
 		"checkboxHideInMenu": "Hide this page in the main menu",
 		"checkboxHidePrevNextNav": "Hide the prev/next navigation at the bottom",
+		"checkboxHideRelatedPages": "Hide related pages at the bottom",
 		"checkboxHideThumbnails": "Hide teaser images in page grid",
 		"checkboxHideTitle": "Hide the page title",
 		"checkboxShowAllPagesInPagelist": "Show not only children but all pages in the pagelist",
