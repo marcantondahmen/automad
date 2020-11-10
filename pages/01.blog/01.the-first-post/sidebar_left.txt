@@ -14,4 +14,8 @@ tags: Blog, Dark
 
 -
 
+checkboxHideRelatedPages: 1
+
+-
+
 theme: standard/dark

@@ -14,7 +14,7 @@ tags: Colors, Icons
 
 -
 
-colorMuted: #222222
+colorMuted: #ffefe8
 
 -
 
@@ -22,7 +22,7 @@ colorPanelBg: #ff563d
 
 -
 
-colorText: #121212
+colorText: #ffffff
 
 -
 
