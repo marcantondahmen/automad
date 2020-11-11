@@ -34,7 +34,7 @@
  */
 
 
-+function (Automad, CodeMirror) {
++function (Automad, $, CodeMirror) {
 
 	CodeMirror.defineExtension('AutomadLink', function () {
 
@@ -50,8 +50,10 @@
 
 			cm.replaceSelection('[' + selection + '](' + url + ')');
 
+			$(cm.getTextArea()).trigger('keydown');
+			
 		});
 
 	});
 
-}(window.Automad = window.Automad || {}, CodeMirror);
+}(window.Automad = window.Automad || {}, jQuery, CodeMirror);

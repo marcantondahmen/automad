@@ -34,7 +34,7 @@
  */
 
 
-+function (Automad, CodeMirror) {
++function (Automad, $, CodeMirror) {
 
 	CodeMirror.defineExtension('AutomadImage', function() {
 
@@ -42,8 +42,9 @@
 
 		Automad.selectImage.dialog(cm, true, function(url) {
 			cm.replaceRange('![](' + url + ')\n', cm.getCursor());
+			$(cm.getTextArea()).trigger('keydown');
 		});
 
 	});
 
-}(window.Automad = window.Automad || {}, CodeMirror);
+}(window.Automad = window.Automad || {}, jQuery, CodeMirror);

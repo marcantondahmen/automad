@@ -73,7 +73,7 @@
 				$picker = $combo.find('[type="color"]'),
 				$text = $combo.find('[type="text"]');
 
-			$text.val(color);
+			$text.val(color).trigger('keydown');
 			$picker.val(color);
 
 			if (!color) {
