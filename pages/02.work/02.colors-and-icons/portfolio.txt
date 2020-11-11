@@ -10,7 +10,7 @@ tags: Dark, Portfolio
 
 -
 
-+main: {"time":1604076198886,"blocks":[{"type":"paragraph","data":{"text":"Use custom <b>colors</b> to align your pages with your artwork or change the color scheme globally. Instead of a preview image, use an <b>icon</b> to represent a page in a pagelist. ","large":true}},{"type":"buttons","data":{"primaryText":"Now More About Pagelists ⟶","primaryLink":"/work/pagelist-blocks","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.18.0"}
++main: {"time":1605090616014,"blocks":[{"type":"paragraph","data":{"text":"Use custom <b>colors</b> to align your pages with your artwork or change the color scheme globally. Instead of a preview image, use an <b>icon</b> to represent a page in a pagelist. ","large":true}},{"type":"buttons","data":{"primaryText":"More About Pagelists ⟶","primaryLink":"/work/pagelist-blocks","secondaryText":"","secondaryLink":"","alignment":"left"}}],"version":"2.18.0"}
 
 -
 

@@ -1,0 +1,17 @@
+title: Pagelist Blocks
+
+-
+
+date: 2020-04-15 00:00:00
+
+-
+
+tags: Blocks, Portfolio
+
+-
+
++main: {"time":1605119618395,"blocks":[{"type":"paragraph","data":{"text":"To provide even more flexibility to structure you content, it is also possible to embed pagelist <b>blocks</b> directly into a page's content like below instead of using a portfolio or blog template. ","large":true}},{"type":"buttons","data":{"primaryText":"Let's Build a Contact Page Now ⟶","primaryLink":"/contact","secondaryText":"","secondaryLink":"","alignment":"left"}},{"type":"pagelist","data":{"type":"all","matchUrl":"work\\/","filter":"","template":"","limit":"3","sortKey":"date","sortOrder":"desc","file":"/standard/templates/blocks/pagelist/portfolio.php"}}],"version":"2.18.0"}
+
+-
+
+checkboxHideRelatedPages: 1
