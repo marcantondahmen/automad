@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *	
- *	version 1.6.0
+ *	version 1.6.1
  *
  *	Copyright (c) 2014-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de
@@ -55,4 +55,4 @@ var(--am-mail-button-margin);padding:var(--am-mail-button-padding);height:var(--
 visibility:visible;opacity:1;pointer-events:initial;transition:opacity .2s 0s ease-in}.am-slider-item>img{width:100%;height:auto}.am-slider-next,.am-slider-prev{position:absolute;text-decoration:none;top:50%;transform:translate(0,-50%);width:3.5rem;line-height:3.5rem;font-size:3rem;text-align:center;font-family:am-controls;color:var(--am-slider-controls-color);background-color:var(--am-slider-controls-background);opacity:0;transition:opacity .2s ease-in}.am-slider:hover .am-slider-next,
 .am-slider:hover .am-slider-prev{opacity:.1}@media (hover:none){.am-slider-next,.am-slider-prev{opacity:.1}}@media (max-width:780px){.am-slider-next,.am-slider-prev{width:2.65rem;line-height:2.65rem;font-size:2.25rem}}.am-slider-next:hover,.am-slider-prev:hover{color:var(--am-slider-controls-color);opacity:.2!important}.am-slider-next:before,.am-slider-prev:before{position:relative;top:-2px}.am-slider-prev{left:0}.am-slider-prev:before{content:'<';margin-left:-.12em}.am-slider-next{right:0}
 .am-slider-next:before{content:'>';margin-right:-.12em}.am-slider-caption{position:absolute;top:0;left:50%;transform:translate(-50%,0);padding:.6rem 1rem;font-size:1rem;color:var(--am-slider-controls-color);background-color:var(--am-slider-controls-background)}.am-slider-caption:empty{display:none}@media (max-width:500px){.am-slider-caption{display:none}}.am-slider-dots{position:absolute;bottom:6px;left:50%;transform:translate(-50%,0)}@media (max-width:500px){.am-slider-dots{display:none}}
-.am-slider-dots a:before{content:'';display:inline-block;width:10px;height:10px;margin:0 5px;border-radius:100%;background-color:#fff;border:2px solid rgba(0,0,0,.3);opacity:.35}.am-slider-dots a.am-active:before{opacity:.7}
+.am-slider-dots a:before{content:'';display:inline-block;width:10px;height:10px;margin:0 5px;border-radius:100%;background-color:#fff;border:2px solid rgba(0,0,0,.3);opacity:.35}.am-slider-dots a.am-active:before{opacity:.7}.am-toc ol{counter-reset:item;padding-left:1.5em}.am-toc ol li{display:block}.am-toc ol li:before{content:counters(item, '.');counter-increment:item;padding-right:.6em}.am-toc>ol{padding-left:.75em}
