@@ -1071,7 +1071,7 @@ class View {
 	
 	/**
 	 *	Obfuscate all stand-alone eMail addresses matched in $str. 
-	 *	Addresses in links are ignored.
+	 *	Addresses in links are ignored. In headless mode, obfuscation is disabled.
 	 *	
 	 *	@param string $str
 	 *	@return string The processed string
@@ -1079,6 +1079,10 @@ class View {
 	
 	public function obfuscateEmails($str) {
 		
+		if ($this->headless) {
+			return $str;
+		}
+
 		$regexEmail = '[\w\.\+\-]+@[\w\-\.]+\.[a-zA-Z]{2,}';
 		
 		// The following regex matches all email links or just an email address. 

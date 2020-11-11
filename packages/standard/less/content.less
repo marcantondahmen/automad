@@ -10,6 +10,14 @@
 
 .content {
 	
+	& [id]:target:before {
+		content: '';
+		display: block;
+		height: 6rem;
+		margin-top: -6rem;
+		visibility: hidden;
+	}
+
 	& ol:not([class]) li a,
 	& ul:not([class]) li a,
 	& p a:not([class]) {

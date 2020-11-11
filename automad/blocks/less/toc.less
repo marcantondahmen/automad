@@ -22,7 +22,7 @@
  *	             ::::   ::::    ..''
  *	             :::: ..:::: .:''
  *	               ''''  '''''
- *
+ *	
  *
  *	AUTOMAD
  *
@@ -30,30 +30,32 @@
  *	http://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
  */
 
 
-+function (Automad, $, CodeMirror) {
+.am-toc {
+	
+	& ol { 
 
-	CodeMirror.defineExtension('AutomadLink', function () {
+		counter-reset: item; 
+		padding-left: 1.5em;
 
-		var cm = this;
+		& li { 
 
-		Automad.link.dialog(cm, function(url) {
+			display: block; 
 
-			var selection = cm.getSelection();
-
-			if (!selection) {
-				selection = url;
+			&:before { 
+				content: counters(item, '.'); 
+				counter-increment: item;
+				padding-right: 0.6em;
 			}
 
-			cm.replaceSelection('[' + selection + '](' + url + ')');
+		}
 
-			$(cm.getTextArea()).trigger('keydown');
-			
-		});
+	}
 
-	});
+	& > ol {
+		padding-left: 0.75em;
+	}
 
-}(window.Automad = window.Automad || {}, jQuery, CodeMirror);
+}

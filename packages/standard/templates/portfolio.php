@@ -10,7 +10,11 @@
 				<@ snippets/clear_search.php @>
 			</div>
 		<@ end @>
-		<@ blocks/pagelist/portfolio.php @>
+		<@ if @{ checkboxUseAlternativePagelistLayout } @>
+			<@ blocks/pagelist/portfolio_alt.php @>
+		<@ else @>
+			<@ blocks/pagelist/portfolio.php @>
+		<@ end @>
 		<@ snippets/pagination.php @>
 	</div>
 <@ snippets/footer.php @>

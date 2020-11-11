@@ -9,8 +9,8 @@
 
 		selectors: {
 			grid: '.masonry',
-			item: '.masonry-item',
-			content: '.masonry-content'
+			item: '.card',
+			content: '.card-content'
 		},
 		
 		// Get number of rows a given item spans.

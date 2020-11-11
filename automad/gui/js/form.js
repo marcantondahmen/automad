@@ -395,23 +395,35 @@
 			
 			// Add 'am-unsaved-{handler}' class to the <html> element on form changes
 			// and re-enable related (only!) submit buttons after touching any form element.
-			$doc.on('change drop cut paste keydown', 
-				'[' + da.handler + ']:not([' + da.autoSubmit + ']) input:not([' + da.watchExclude + ']), ' +
-				'[' + da.handler + ']:not([' + da.autoSubmit + ']) textarea:not([' + da.watchExclude + ']), ' +
-				'[' + da.handler + ']:not([' + da.autoSubmit + ']) select:not([' + da.watchExclude + ']), ' +
-				'.am-inpage form *', 
-				function() {
-				
-					var	$form = $(this).closest('[' + da.handler + ']'),
+			var onFormChange = function() {
+
+					var $form = $(this).closest('[' + da.handler + ']'),
 						handler = $form.data(Automad.util.dataCamelCase(da.handler));
-					
+
 					$('html').addClass(f.unsavedClassPrefix + handler);
 					$('button[' + da.submit + '="' + handler + '"]:disabled, .am-inpage [type="submit"]').prop('disabled', false);
-					
+
 					// Change label color to flag input as changed.
 					$(this).closest('.uk-form-row, .am-inpage form').find('.uk-form-label').addClass(f.unsavedClassInput);
-					
-				}
+
+				},
+				noAuto = `[${da.handler}]:not([${da.autoSubmit}])`,
+				noExclude = `:not([${da.watchExclude}])`;
+
+			$doc.on('drop cut paste keydown', 
+				`${noAuto} input${noExclude}, 
+				 ${noAuto} textarea${noExclude}, 
+				 .am-inpage form *`,
+				onFormChange
+			);
+
+			$doc.on('change',
+				`${noAuto} [type="hidden"]${noExclude}, 
+				 ${noAuto} [type="checkbox"]${noExclude},
+				 ${noAuto} [type="color"]${noExclude},
+				 ${noAuto} select${noExclude},  
+				 .am-inpage form *`,
+				onFormChange
 			);
 			
 			// Remove 'am-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.

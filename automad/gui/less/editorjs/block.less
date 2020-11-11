@@ -141,4 +141,33 @@
 
 	}
 
+	& .ce-stub {
+
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+		color: @am-danger;
+		background-color: @am-bg;
+		border: @am-border-width dashed @am-danger;
+
+		& svg.icon {
+			display: none;
+		}
+
+		&__info {
+
+			width: 100%;
+			margin-left: 0 !important;
+			padding: 0 @am-block-content-padding;
+
+			.am-fullscreen&,
+			.am-fullscreen-modal & {
+				padding: 0 @am-block-content-padding-fullscreen !important;
+			}
+
+		}
+
+	}
+
 }

@@ -2,7 +2,7 @@
 	"name": "Dark",
 	"description": "A dark and elegant multi-purpose theme",
 	"author": "Marc Anton Dahmen",
-	"version": "1.6.0",
+	"version": "1.6.1",
 	"license": "MIT",
 	"masks": {
 		"page": [
@@ -36,11 +36,13 @@
 		"checkboxHideFiltersAndSort": "Hide filter and sorting buttons",
 		"checkboxHideInMenu": "Hide this page in the main menu",
 		"checkboxHidePrevNextNav": "Hide the prev/next navigation at the bottom",
+		"checkboxHideRelatedPages": "Hide related pages at the bottom",
 		"checkboxHideThumbnails": "Hide teaser images in page grid",
 		"checkboxHideTitle": "Hide the page title",
 		"checkboxShowAllPagesInPagelist": "Show not only children but all pages in the pagelist",
 		"checkboxShowInFooter": "Show a link to this page in the footer menu",
 		"checkboxShowInNavbar": "Show a link to this page in the main navbar",
+		"checkboxUseAlternativePagelistLayout": "Use an alternative layout for blog, portfolio or related pages pagelists",
 		"colorText": "A custom override text color",
 		"colorBg": "A custom override background color",
 		"colorBorder": "A custom override border color",

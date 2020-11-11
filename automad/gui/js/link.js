@@ -68,7 +68,7 @@
 
 			Automad.link.dialog($input, function (url) {
 
-				$input.val(url).trigger('change');
+				$input.val(url).trigger('keydown');
 
 			});
 

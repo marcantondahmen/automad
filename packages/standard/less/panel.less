@@ -28,10 +28,10 @@
 .hook-panel-box() {
 	
 	& + & {
-		margin-top: @masonry-gap;
+		margin-top: @cards-gap;
 	}
 
-	.masonry & {
+	.cards & {
 		
 		& > .uk-panel-teaser {
 			overflow: hidden;
@@ -52,21 +52,6 @@
 
 		}
 
-		& .uk-panel-teaser img {
-
-			box-shadow: none;
-			width: 100%;
-			height: 100%;
-			border-radius: 0;
-			object-fit: cover;
-			.transition(transform 0.3s;);
-
-			&:hover {
-				transform: scale(1.1);
-			}
-
-		}
-
 		& .uk-panel-title a:not([class]) {
 
 			letter-spacing: -0.016em;
@@ -76,6 +61,26 @@
 				color: @muted-color;
 			}
 			
+		}
+
+	}
+
+}
+
+.uk-panel-teaser,
+.panel-image {
+
+	.cards & img {
+
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+		object-fit: cover;
+		box-shadow: none;
+		.transition(transform 0.3s;);
+
+		&:hover {
+			transform: scale(1.1);
 		}
 
 	}

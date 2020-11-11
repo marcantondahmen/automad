@@ -64,7 +64,7 @@
 				var $wrapper = $(this),
 					holder = $wrapper.data(Automad.util.dataCamelCase(be.dataAttr)),
 					$input = $wrapper.find('input'),
-					ready = false,
+					key = $input.attr('name').replace(/(data\[|\])/g, ''),
 					data,
 					editor;
 						
@@ -119,6 +119,10 @@
 						},
 						pagelist: AutomadPagelist,
 						filelist: AutomadFilelist,
+						toc: {
+							class: AutomadToc,
+							config: { key: key }
+						},
 						code: AutomadTextareaCode,
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,

@@ -55,11 +55,10 @@ class Delimiter {
 	/**	
 	 *	Render a delimiter block.
 	 *	
-	 *	@param object $data
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render() {
 
 		return '<hr>';
 

@@ -58,7 +58,7 @@
 				var $input = $(this).parent().find('input');
 
 				si.dialog($input, false, function(url) {
-					$input.val(url).trigger('change');
+					$input.val(url).trigger('keydown');
 				});
 
 			});

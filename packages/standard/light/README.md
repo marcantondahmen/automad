@@ -8,6 +8,7 @@ The Light theme is a clean and elegant multi-purpose theme. It provides several 
 - [Colors](#colors)
 - [Writing Content](#writing-content)
 - [Pagelist Configuration](#pagelist-configuration)
+	- [Related Pages](#related-pages)
 - [Title, Navigation, Filtering and Sorting](#title-navigation-filtering-and-sorting)
 - [Logo and Brand](#logo-and-brand)
 - [Labels](#labels)
@@ -70,6 +71,11 @@ This theme offers multiple options and two templates &mdash; **Blog** and **Port
 | Hide Thumbnails | Hide teaser images in page grid. |
 | Sort Pagelist | Sorting of the pages in a portfolio or blog pagelist. Note that the sorting and filtering buttons should be hidden in case this variable is defined! The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc) like ':path asc'. |
 | Sort Related Pages | Sorting of the pagelist with related pages. The default is 'date desc'. You can choose any other page variable in combination with an order (asc or desc). |
+| Use Alternative Pagelist Layout | Use an alternative layout for blog, portfolio or related pages pagelists. |
+
+### Related Pages 
+
+Related pages are pages having one or more tags in common with the current page. By default they show up at the bottom below the page content. They can be disabled by checking the `Hide Related Pages` checkbox.
 
 ## Title, Navigation, Filtering and Sorting
 

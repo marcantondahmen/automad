@@ -87,14 +87,17 @@ class AutomadSlider {
 		this.settings = [
 			{
 				name: 'stretched',
+				title: 'Full Width',
 				icon: '<svg width="17" height="10" viewBox="0 0 17 10"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
 			},
 			{
 				name: 'dots',
+				title: 'Show Dot Navigation',
 				icon: '<svg width="17px" height="10px" viewBox="0 0 17 10"><circle cx="2.0" cy="5" r="2.0"/><circle cx="8.5" cy="5" r="2.0"/><circle cx="15.0" cy="5" r="2.0"/></svg>'
 			},
 			{
 				name: 'autoplay',
+				title: 'Autoplay',
 				icon: '<svg width="14px" height="14px" viewBox="0 0 14 14"><path d="M3,13.424c-0.259,0-0.518-0.067-0.75-0.201C1.786,12.955,1.5,12.46,1.5,11.924V2.076c0-0.536,0.286-1.031,0.75-1.299 c0.464-0.269,1.036-0.269,1.5,0l8.527,4.924c0.464,0.268,0.75,0.763,0.75,1.299s-0.286,1.031-0.75,1.299L3.75,13.223 C3.518,13.356,3.259,13.424,3,13.424z"/></svg>'
 			}
 		];
@@ -148,6 +151,8 @@ class AutomadSlider {
 				block.toggleTune(tune.name);
 				button.classList.toggle('cdx-settings-button--active');
 			});
+
+			block.api.tooltip.onHover(button, tune.title, { placement: 'top' });
 
 		});
 
