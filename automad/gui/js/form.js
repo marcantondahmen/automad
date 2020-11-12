@@ -420,6 +420,7 @@
 			$doc.on('change',
 				`${noAuto} [type="hidden"]${noExclude}, 
 				 ${noAuto} [type="checkbox"]${noExclude},
+				 ${noAuto} [type="radio"]${noExclude},
 				 ${noAuto} [type="color"]${noExclude},
 				 ${noAuto} select${noExclude},  
 				 .am-inpage form *`,
