@@ -48,6 +48,7 @@ class AutomadPagelist {
 			filter: data.filter || '',
 			template: data.template || '',
 			limit: data.limit || 3,
+			offset: data.offset || 0,
 			sortKey: data.sortKey || ':path',
 			sortOrder: data.sortOrder || 'asc',
 			file: data.file || ''
@@ -89,8 +90,11 @@ class AutomadPagelist {
 					${create.editable(['cdx-input', 'am-block-template'], 'post|project', this.data.template).outerHTML}
 				</li>
 				<li class="uk-width-medium-1-3">
-					${create.label('Number of Pages').outerHTML}
-					${create.editable(['cdx-input', 'am-block-limit'], '', this.data.limit).outerHTML}
+					${create.label('Limit and Offset').outerHTML}
+					<div class="am-form-input-group">
+						${create.editable(['cdx-input', 'am-block-limit'], '', this.data.limit).outerHTML}
+						${create.editable(['cdx-input', 'am-block-offset'], '', this.data.offset).outerHTML}
+					</div>
 				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label('Sort by Variable').outerHTML}
@@ -108,6 +112,7 @@ class AutomadPagelist {
 			filter: this.wrapper.querySelector('.am-block-filter'),
 			template: this.wrapper.querySelector('.am-block-template'),
 			limit: this.wrapper.querySelector('.am-block-limit'),
+			offset: this.wrapper.querySelector('.am-block-offset'),
 			sortKey: this.wrapper.querySelector('.am-block-sort-key'),
 			sortOrder: this.wrapper.querySelector('.am-block-sort-order'),
 			file: this.wrapper.querySelector('.am-block-file')
@@ -132,6 +137,7 @@ class AutomadPagelist {
 			filter: false,
 			template: false,
 			limit: false,
+			offset: false,
 			sortKey: false,
 			sortOrder: false,
 			file: false
@@ -153,6 +159,7 @@ class AutomadPagelist {
 			filter: this.inputs.filter.innerHTML,
 			template: this.inputs.template.innerHTML,
 			limit: this.inputs.limit.innerHTML,
+			offset: this.inputs.offset.innerHTML,
 			sortKey: this.inputs.sortKey.innerHTML,
 			sortOrder: this.inputs.sortOrder.value,
 			file: this.inputs.file.value

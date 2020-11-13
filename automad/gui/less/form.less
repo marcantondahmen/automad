@@ -213,4 +213,35 @@
 
 	}
 
+	&-input-group {
+		
+		display: flex;
+
+		& > *,
+		.am-block-editor & > .cdx-input {
+
+			margin-top: 0 !important;
+			border-radius: 0;
+			margin-left: -@am-border-width !important;
+
+			&:first-child {
+				border-top-left-radius: @am-radius;
+				border-bottom-left-radius: @am-radius;
+				margin-left: 0 !important;
+			}
+
+			&:last-child {
+				border-top-right-radius: @am-radius;
+				border-bottom-right-radius: @am-radius;
+			}
+
+			&:focus {
+				position: relative;
+				z-index: 2;
+			}
+
+		}
+
+	}
+
 }

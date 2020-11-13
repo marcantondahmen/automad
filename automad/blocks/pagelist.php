@@ -72,7 +72,8 @@ class Pagelist {
 			'matchUrl' => '',
 			'filter' => '',
 			'template' => '',
-			'limit' => 0,
+			'limit' => NULL,
+			'offset' => 0,
 			'sortKey' => ':path',
 			'sortOrder' => 'asc',
 			'file' => ''

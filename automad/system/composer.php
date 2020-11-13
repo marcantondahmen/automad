@@ -58,7 +58,7 @@ class Composer {
 	 *	The Composer version to be used.
 	 */
 
-	private $composerVersion = '2.0.3';
+	private $composerVersion = '2.0.6';
 
 	
 	/**	
@@ -272,6 +272,7 @@ class Composer {
 	private function setUp() {
 
 		$installDir = $this->getInstallDir();
+		$updatePackageInstaller = false;
 
 		$srcDir = $installDir . $this->extractionDir;
 
@@ -287,6 +288,8 @@ class Composer {
 			$phar = new \Phar($file);
 			$phar->extractTo($srcDir);
 
+			$updatePackageInstaller = true;
+
 		}
 
 		$autoloader = $installDir . $this->extractionDir . $this->autoloader;
@@ -300,6 +303,11 @@ class Composer {
 
 		Core\Debug::log($autoloader, 'Require Composer autoloader');
 		require_once($autoloader);
+
+		if ($updatePackageInstaller) {
+			$this->run('require automad/package-installer');
+			$this->run('update automad/package-installer');
+		}
 
 	}
 
