@@ -6,7 +6,7 @@ tags: Blocks, Mail
 
 -
 
-+main: {"time":1605119723480,"blocks":[{"type":"paragraph","data":{"text":"This is a <b>contact</b> page. Just add your mail address to the <b>mail</b> block below and you're done — or maybe change the color as well. Note that this page also uses some other settings, for example to make it show up in the <b>footer</b> navigation. ","large":true}},{"type":"buttons","data":{"primaryText":"Got it, Open the Dashboard Now!<br>","primaryLink":"/dashboard","secondaryText":"","secondaryLink":"","alignment":"left"}},{"type":"mail","data":{"to":"email@your-domain.com<br>","error":"Please fill out all fields!","success":"Successfully sent email!","placeholderEmail":"Your email address","placeholderSubject":"Subject","placeholderMessage":"Message","textButton":"Send"}}],"version":"2.18.0"}
++main: {"time":1605258297116,"blocks":[{"type":"paragraph","data":{"text":"This is a contact page — just add your <b>mail</b> address to the mail block below and you're done. Note that this page also uses some other settings, for example to make it show up in the footer navigation and a custom background color. ","large":true}},{"type":"buttons","data":{"primaryText":"Got it, Open the Dashboard!<br>","primaryLink":"/dashboard","secondaryText":"","secondaryLink":"","alignment":"left"}},{"type":"mail","data":{"to":"email@your-domain.com<br>","error":"Please fill out all fields!","success":"Successfully sent email!","placeholderEmail":"Your email address","placeholderSubject":"Subject","placeholderMessage":"Message","textButton":"Send&nbsp;⟶"}}],"version":"2.18.0"}
 
 -
 
@@ -18,8 +18,8 @@ checkboxShowInFooter: 1
 
 -
 
-colorBg: #fff46a
+colorBg: #eaeaea
 
 -
 
-colorBorder: #ddd35b
+colorBorder: #dcdcdc

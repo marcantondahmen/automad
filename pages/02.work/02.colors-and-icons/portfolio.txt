@@ -22,11 +22,11 @@ checkboxHideTitle: 1
 
 -
 
-colorBg: #ebebeb
+colorBg: #eaeaea
 
 -
 
-colorBorder: #dddddd
+colorBorder: #dcdcdc
 
 -
 
