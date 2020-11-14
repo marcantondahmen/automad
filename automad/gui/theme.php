@@ -174,7 +174,7 @@ class Theme {
 	public function getTooltip($key) {
 		
 		if (array_key_exists($key, $this->data['tooltips'])) {
-			return htmlentities(htmlentities($this->data['tooltips'][$key]));
+			return $this->data['tooltips'][$key];
 		}
 		
 	}

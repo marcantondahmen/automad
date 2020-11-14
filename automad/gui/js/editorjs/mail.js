@@ -99,6 +99,17 @@ class AutomadMail {
 
 	}
 
+	static get sanitize() {
+
+		return {
+			to: false,
+			placeholderEmail: false,
+			placeholderSubject: false,
+			placeholderMessage: false
+		}
+
+	}
+
 	render() {
 
 		return this.wrapper;
@@ -107,14 +118,16 @@ class AutomadMail {
 
 	save() {
 
+		var stripNbsp = Automad.util.stripNbsp;
+
 		return {
-			to: this.inputs.to.innerHTML,
-			error: this.inputs.error.innerHTML,
-			success: this.inputs.success.innerHTML,
-			placeholderEmail: this.inputs.placeholderEmail.innerHTML,
-			placeholderSubject: this.inputs.placeholderSubject.innerHTML,
-			placeholderMessage: this.inputs.placeholderMessage.innerHTML,
-			textButton: this.inputs.textButton.innerHTML
+			to: stripNbsp(this.inputs.to.innerHTML),
+			error: stripNbsp(this.inputs.error.innerHTML),
+			success: stripNbsp(this.inputs.success.innerHTML),
+			placeholderEmail: stripNbsp(this.inputs.placeholderEmail.innerHTML),
+			placeholderSubject: stripNbsp(this.inputs.placeholderSubject.innerHTML),
+			placeholderMessage: stripNbsp(this.inputs.placeholderMessage.innerHTML),
+			textButton: stripNbsp(this.inputs.textButton.innerHTML)
 		};
 
 	}

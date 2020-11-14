@@ -108,9 +108,11 @@ class AutomadGallery {
 
 	save() {
 
+		var stripNbsp = Automad.util.stripNbsp;
+
 		return Object.assign(this.data, {
-			globs: this.inputs.globs.innerHTML.replace(/&nbsp;/g, ''),
-			width: parseInt(this.inputs.width.innerHTML)
+			globs: stripNbsp(this.inputs.globs.innerHTML),
+			width: parseInt(stripNbsp(this.inputs.width.innerHTML))
 		});
 
 	}

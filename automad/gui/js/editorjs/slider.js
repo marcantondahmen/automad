@@ -125,10 +125,12 @@ class AutomadSlider {
 
 	save() {
 
+		var stripNbsp = Automad.util.stripNbsp;
+
 		return Object.assign(this.data, {
-			globs: this.inputs.globs.innerHTML.replace(/&nbsp;/g, ''),
-			width: parseInt(this.inputs.width.innerHTML),
-			height: parseInt(this.inputs.height.innerHTML)
+			globs: stripNbsp(this.inputs.globs.innerHTML),
+			width: parseInt(stripNbsp(this.inputs.width.innerHTML)),
+			height: parseInt(stripNbsp(this.inputs.height.innerHTML))
 		});
 
 	}

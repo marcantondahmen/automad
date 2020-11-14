@@ -81,6 +81,15 @@ class AutomadFilelist {
 
 	}
 
+	static get sanitize() {
+
+		return {
+			file: false,
+			glob: false
+		}
+
+	}
+
 	render() {
 
 		return this.wrapper;
@@ -89,9 +98,11 @@ class AutomadFilelist {
 
 	save() {
 
+		var stripNbsp = Automad.util.stripNbsp;
+
 		return {
 			file: this.inputs.file.value,
-			glob: this.inputs.glob.innerHTML
+			glob: stripNbsp(this.inputs.glob.innerHTML)
 		};
 
 	}
