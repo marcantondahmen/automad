@@ -153,14 +153,16 @@ class AutomadPagelist {
 
 	save() {
 
+		var stripNbsp = Automad.util.stripNbsp;
+
 		return {
 			type: this.inputs.type.value,
-			matchUrl: this.inputs.matchUrl.innerHTML,
-			filter: this.inputs.filter.innerHTML,
-			template: this.inputs.template.innerHTML,
-			limit: this.inputs.limit.innerHTML,
-			offset: this.inputs.offset.innerHTML,
-			sortKey: this.inputs.sortKey.innerHTML,
+			matchUrl: stripNbsp(this.inputs.matchUrl.innerHTML),
+			filter: stripNbsp(this.inputs.filter.innerHTML),
+			template: stripNbsp(this.inputs.template.innerHTML),
+			limit: stripNbsp(this.inputs.limit.innerHTML),
+			offset: stripNbsp(this.inputs.offset.innerHTML),
+			sortKey: stripNbsp(this.inputs.sortKey.innerHTML),
 			sortOrder: this.inputs.sortOrder.value,
 			file: this.inputs.file.value
 		};

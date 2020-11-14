@@ -188,6 +188,12 @@
 				return '.' + pageUrl + '/' + url;
 			}
 
+		},
+
+		stripNbsp: function(str) {
+
+			return str.replace(/\&nbsp;/g, ' ').trim();
+
 		}
 		
 	}

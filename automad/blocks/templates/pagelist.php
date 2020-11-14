@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<section>
+<figure>
 	<@ foreach in pagelist @>
 		<p>
 			<a href="@{ url }"><b>@{ title }</b></a>
@@ -7,4 +7,4 @@
 			@{ tags }
 		</p>
 	<@ end @>
-</section>
+</figure>

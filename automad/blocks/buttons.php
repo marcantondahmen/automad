@@ -102,7 +102,7 @@ HTML;
 
 		if ($html) {
 
-			return "<section$class>$html</section>";
+			return "<figure$class>$html</figure>";
 
 		}
 
