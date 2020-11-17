@@ -46,7 +46,7 @@
 		// Since CodeMirror also creates textareas, it is not enough to just filter by ':not([data-uk-markdowneditor])'.
 		// Those textareas created by CodeMirror don't have the '.uk-form-controls' class, so that class must be part of the
 		// selector as well.
-		selector: 'textarea.uk-form-controls:not([data-uk-markdowneditor]), textarea.cdx-input',
+		selector: 'textarea.uk-form-controls:not([data-uk-markdowneditor])',
 		
 		handleTabs: function(e) {
 		
@@ -54,7 +54,8 @@
 			if (e.keyCode === 9) { 
 				
 				e.preventDefault();
-				
+				e.stopPropagation();
+
 				var start = this.selectionStart,
 				 	end = this.selectionEnd,
 					$ta = $(e.target),
