@@ -60,6 +60,7 @@ class Keys {
 	public static $reserved = array(
 		AM_KEY_DATE, 
 		AM_KEY_HIDDEN, 
+		AM_KEY_PRIVATE,
 		AM_KEY_TAGS, 
 		AM_KEY_THEME, 
 		AM_KEY_TITLE, 

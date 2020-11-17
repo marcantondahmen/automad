@@ -171,6 +171,7 @@ Config::set('AM_PARSE_STR_SEPARATOR', ',');
 // Variables used in txt files in /pages or /shared
 Config::set('AM_KEY_DATE', 'date');
 Config::set('AM_KEY_HIDDEN', 'hidden');
+Config::set('AM_KEY_PRIVATE', 'private');
 Config::set('AM_KEY_TAGS', 'tags');
 Config::set('AM_KEY_THEME', 'theme');
 Config::set('AM_KEY_TITLE', 'title');

@@ -93,13 +93,20 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 		} else {
 			$hidden = false;
 		} 
+
+		// Check if page is private.
+		if (isset($data[AM_KEY_PRIVATE]) && $data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] != 'false') {
+			$private = true;
+		} else {
+			$private = false;
+		} 
 		
 		// Start buffering the HTML.
 		ob_start();
 		
 		?>
 			
-			<div class="uk-form-row uk-margin-large-bottom">
+			<div class="uk-form-row">
 				<label for="am-input-data-title" class="uk-form-label uk-margin-top-remove">
 					<?php echo ucwords(AM_KEY_TITLE); ?>
 				</label>
@@ -131,7 +138,13 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					</a>
 				<?php } ?>
 			</div>
+			<?php 
 			
+			echo Components\Form\CheckboxPrivate::render(
+				'data[' . AM_KEY_PRIVATE . ']', 
+				$private); 
+			
+			?>
 			<?php 
 
 			echo Components\Alert\ThemeReadme::render(

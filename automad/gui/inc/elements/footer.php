@@ -79,9 +79,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 					required 
 					/>
 				</div>
+				<?php echo Components\Form\CheckboxPrivate::render('subpage[private]'); ?>
+				<hr>
 				<?php if (!AM_HEADLESS_ENABLED) { ?>
 					<div class="uk-form-row">
-						<label class="uk-form-label"><?php Text::e('page_theme_template'); ?></label>
+						<label class="uk-form-label uk-margin-top-remove"><?php Text::e('page_theme_template'); ?></label>
 						<?php 
 							echo Components\Form\SelectTemplate::render(
 								$this->getAutomad(),
@@ -91,10 +93,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						?>
 					</div>
 				<?php } ?>
-				<?php echo Components\Form\CheckboxHidden::render('subpage[hidden]'); ?>
 			</form>
-			<hr>
-			<div class="uk-form-stacked">
+			<div class="uk-form-stacked uk-margin-top">
 				<label class="uk-form-label uk-margin-top-remove">
 					<?php Text::e('page_add_location'); ?>
 				</label>

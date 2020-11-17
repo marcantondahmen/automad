@@ -123,7 +123,7 @@ class Content {
 					// Data. Also directly append possibly existing suffix to title here.
 					$data = array(
 						AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
-						AM_KEY_HIDDEN => (!empty($subpage['hidden']))
+						AM_KEY_PRIVATE => (!empty($subpage['private']))
 					);
 					
 					if ($theme != '.') {
@@ -885,6 +885,15 @@ class Content {
 					// Needs to be done here, to be able to simply test for empty title field.
 					$data = array_filter($data, 'strlen');
 		
+					// Check if privacy has changed to trigger a reload.
+					if (isset($data[AM_KEY_PRIVATE]) && $data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] != 'false') {
+						$private = true;
+					} else {
+						$private = false;
+					}
+
+					$changedPrivacy = ($private != $Page->private);
+
 					// The theme and the template get passed as theme/template.php combination separate form $_POST['data']. 
 					// That information has to be parsed first and "subdivided".
 					$themeTemplate = $this->getTemplateNameFromArray($_POST, 'theme_template');
@@ -939,7 +948,7 @@ class Content {
 						$currentTheme = $Page->data[AM_KEY_THEME];
 					}
 					
-					if (($Page->path != $newPagePath) || ($currentTheme != $newTheme) || ($Page->template != $newTemplate)) {
+					if (($Page->path != $newPagePath) || ($currentTheme != $newTheme) || ($Page->template != $newTemplate) || $changedPrivacy) {
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
 					} else {
 						$output['success'] = Text::get('success_saved');

@@ -87,6 +87,10 @@ class SiteTree {
 				
 				// Set page icon.  
 				$icon = '<i class="uk-icon-file-text-o uk-icon-justify"></i>&nbsp;&nbsp;';
+
+				if ($Page->private) {
+					$icon = '<i class="uk-icon-lock uk-icon-justify"></i>&nbsp;&nbsp;';
+				}
 				
 				if ($key != $current || !$hideCurrent) {
 				

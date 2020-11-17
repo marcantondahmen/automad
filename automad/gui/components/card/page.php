@@ -158,6 +158,15 @@ class Page {
 		$pageUrl = AM_BASE_INDEX . $Page->url;
 		$Text = Text::getObject();
 
+		if ($Page->private) {
+			$badge = '<span class="uk-panel-badge uk-badge">' . 
+					 '<i class="uk-icon-lock"></i>&nbsp;&nbsp;' . 
+					 $Text->page_private .
+					 '</span>';
+		} else {
+			$badge = '';
+		}
+
 		return <<< HTML
 
 				<div class="uk-panel uk-panel-box">
@@ -191,6 +200,7 @@ class Page {
 							</a>
 						</div>
 					</div>
+					$badge
 				</div>
 
 HTML;

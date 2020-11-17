@@ -130,6 +130,10 @@ btn_open_log: Open Log
 
 -
 
+btn_page_private: Keep page private
+
+-
+
 btn_readme: Readme
 
 -
@@ -542,7 +546,6 @@ page_theme_template: Template
 
 page_var_name: Variable Name
 
-
 -
 
 page_vars_content: Content
@@ -558,6 +561,10 @@ page_vars_unused: Unused Variables
 -
 
 page_visibility: Visibility
+
+-
+
+page_private: private
 
 -
 
