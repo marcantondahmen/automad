@@ -76,34 +76,35 @@ class Snippet {
 			return false;
 		}
 
+		self::$snippetIsRendering = true;
+		$View = new View($Automad);
+		$output = '';
+
+		if (!empty($data->snippet)) {
+			$output .= $View->interpret($data->snippet, AM_BASE_DIR . AM_DIR_PACKAGES);
+		} 
+
 		if (!empty($data->file)) {
 
 			// Test for files with or without leading slash.
 			$file = AM_BASE_DIR . '/' . trim($data->file, '/');
 
 			if (!is_readable($file)) {
-
 				// Test also path without packages directory.
 				$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . trim($data->file, '/');
-
-				if (!is_readable($file)) {
-					return false;
-				}
-
 			} 
 
-			self::$snippetIsRendering = true;
-
-			$View = new View($Automad);
-			$output = $Automad->loadTemplate($file);
-			$output = $View->interpret($output, dirname($file));
-			Core\Blocks::$extensionAssets = array_merge_recursive(Core\Blocks::$extensionAssets, $View->extensionAssets);
-			
-			self::$snippetIsRendering = false;
-
-			return $output;
+			if (is_readable($file)) {
+				$template = $Automad->loadTemplate($file);
+				$output .= $View->interpret($template, dirname($file));
+			}
 
 		}
+
+		Core\Blocks::$extensionAssets = array_merge_recursive(Core\Blocks::$extensionAssets, $View->extensionAssets);
+		self::$snippetIsRendering = false;
+
+		return $output;
 
 	}
 
