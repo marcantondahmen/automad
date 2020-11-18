@@ -54,7 +54,8 @@ class Config {
 	
 	/**
 	 *	Read configuration overrides as JSON string form PHP or JSON file 
-	 *	and decode the returned string.
+	 *	and decode the returned string. Note that now the configuration is stored in 
+	 *	PHP files instead of JSON files to make it less easy to access from outside.
 	 *	
 	 *	@return array The configuration array
 	 */
@@ -91,7 +92,7 @@ class Config {
 	public static function write($config) {
 
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-		$content = "<?php return <<< JSON\n\r$json\n\rJSON;";
+		$content = "<?php return <<< JSON\r\n$json\r\nJSON;";
 
 		return FileSystem::write(AM_CONFIG, $content);
 
