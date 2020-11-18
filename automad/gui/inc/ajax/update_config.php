@@ -43,7 +43,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /*
- *	Update/merge AM_CONFIG with requested items.
+ *	Update or merge config/config.php with requested items.
  */
 
 
@@ -51,16 +51,9 @@ $output = array();
 
 
 // Get config from json file, if exsiting.
-if (file_exists(AM_CONFIG)) {
-	
-	$config = json_decode(file_get_contents(AM_CONFIG), true);
-	ksort($config);
+$config = Core\Config::read();
+ksort($config);
 
-} else {
-
-	$config = array();
-
-}
 
 if ($type = Core\Request::post('type')) {
 	
@@ -118,17 +111,14 @@ if ($type = Core\Request::post('type')) {
 }
 
 
-// Write config file.
-if ((is_writable(dirname(AM_CONFIG)) && !file_exists(AM_CONFIG)) || is_writable(AM_CONFIG)) {
-	
-	$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-	FileSystem::write(AM_CONFIG, $json);
+if (Core\Config::write($config)) {
+
+	Core\Debug::log($config, 'Updated config file');
 	$output['success'] = Text::get('success_config_update');
-	Core\Debug::log($config, 'config');
 
 } else {
 
-	$output['error'] = Text::get('error_permission') . '<p>' . AM_CONFIG . '</p>';
+	$output['error'] = Text::get('error_permission') . '<br>' . AM_CONFIG;
 
 }
 

@@ -53,19 +53,61 @@ class Config {
 	
 	
 	/**
-	 * 	Read configuration overrides form JSON file and set constants accordingly.
-	 *
-	 *	@param string $file
+	 *	Read configuration overrides as JSON string form PHP or JSON file 
+	 *	and decode the returned string.
+	 *	
+	 *	@return array The configuration array
 	 */
 	 
-	public static function json($file) {
+	public static function read() {
 		
-		if (file_exists($file)) {
-			foreach (json_decode(file_get_contents($file), true) as $name => $value) {
-				define($name, $value);	
-			}
+		$json = false;
+		$config = array();
+		$legacy = AM_BASE_DIR . '/config/config.json';
+
+		if (is_readable(AM_CONFIG)) {
+			$json = require AM_CONFIG;
+		} else if (is_readable($legacy)) {
+			// Support legacy configuration files.
+			$json = file_get_contents($legacy);
+		}
+
+		if ($json) {
+			$config = json_decode($json, true); 
 		}
 		
+		return $config;
+
+	}
+
+
+	/**
+	 *	Write the configuration file.
+	 *	
+	 *	@param array $config 
+	 *	@return boolean True on success
+	 */
+
+	public static function write($config) {
+
+		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+		$content = "<?php return <<< JSON\n\r$json\n\rJSON;";
+
+		return FileSystem::write(AM_CONFIG, $content);
+
+	}
+
+
+	/**
+	 *	Define constants based on the configuration array.
+	 */
+
+	public static function overrides() {
+
+		foreach (self::read() as $name => $value) {
+			define($name, $value);	
+		}
+
 	}
 	
 	

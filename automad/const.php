@@ -44,10 +44,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Set config file.
-define('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
+define('AM_CONFIG', AM_BASE_DIR . '/config/config.php');
 
 // Parse AM_CONFIG to set user overrides for the below defined constants.
-Config::json(AM_CONFIG);
+Config::overrides();
 
 // Define debugging already here to be available when parsing the request.
 Config::set('AM_DEBUG_ENABLED', false);
