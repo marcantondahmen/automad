@@ -282,6 +282,10 @@ error_import: The file import has failed!
 
 -
 
+error_json: Invalid JSON! The contents of the configuration file is not formatted correctly.
+
+-
+
 error_packages: Could not load packages from Packagist!
 
 -
@@ -748,6 +752,14 @@ sys_cache_purge: Purge Cache Directory
 -
 
 sys_cache_purge_info: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temprary directory of the system. This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages. On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. However, on some systems that directory has to be cleared manually.
+
+-
+
+sys_config: Edit Configuration File 
+
+-
+
+sys_config_warning: Note that only experienced users should edit the configuration file to avoid damage to your installation. In case something goes wrong, please delete the configuration file manually from your server in order to restore the default settings.
 
 -
 
