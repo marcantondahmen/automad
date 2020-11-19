@@ -60,7 +60,7 @@ class Loading {
 	
 	public static function render() {
 		
-		return '<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>';
+		return '<i class="uk-text-muted uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>';
 		
 	}
 

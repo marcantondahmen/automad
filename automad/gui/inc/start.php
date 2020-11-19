@@ -100,7 +100,7 @@ $this->element('header');
 				</li>
 			<?php } else { ?>
 				<li class="uk-margin-small-bottom">
-					<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-left">
+					<a href="<?php echo AM_BASE_INDEX . '/'; ?>" class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-left uk-text-truncate">
 						<i class="uk-icon-mouse-pointer"></i>&nbsp;
 						<?php Text::e('btn_inpage_edit'); ?>
 					</a>
