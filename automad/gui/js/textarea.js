@@ -74,7 +74,10 @@
 		init: function() {
 		
 			var	t = Automad.textarea,
-				$doc = $(document);
+				$doc = $(document),
+				triggerResize = function() {
+					$(t.selector).trigger('update.automad.textarea');
+				};
 				
 			// On keyup.
 			$doc.on('keyup focus focusout update.automad.textarea', t.selector, t.resize);
@@ -92,26 +95,18 @@
 			})
 			
 			// Update also when AJAX completes.
-			$doc.ajaxComplete(function() {
-				$(t.selector).trigger('update.automad.textarea');
-			});
+			$doc.ajaxComplete(triggerResize);
 			
 			// Update also when doc is ready.
-			$doc.on('ready', function() {
-				$(t.selector).trigger('update.automad.textarea');
-			});
+			$doc.on('ready', triggerResize);
 			
 			// Also trigger resizing on toggles to fix issues with hidden textareas.
 			$doc.on('click', '.uk-accordion-title', function() {
-				setTimeout(function() {
-					$(t.selector).trigger('update.automad.textarea');
-				}, 50);
+				setTimeout(triggerResize, 50);
 			});
 				
 			// Update also on resize.
-			$(window).resize(function() {
-				$(t.selector).trigger('update.automad.textarea');
-			});	
+			$(window).resize(triggerResize);	
 				
 			// Tabs
 			$doc.on('keydown', t.selector, t.handleTabs);	

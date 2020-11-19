@@ -109,7 +109,10 @@ class Headless {
 					<div class="am-modal-dialog-code uk-modal-dialog uk-modal-dialog-large">
 						<div class="uk-margin-small-bottom uk-grid uk-flex uk-flex-middle" data-uk-grid-margin>
 							<div class="uk-width-small-1-1 uk-flex-item-1">
-								<span class="uk-text-truncate" data-am-status="headless_template"></span>
+								<span 
+								class="uk-text-truncate uk-hidden-small" 
+								data-am-status="headless_template">
+								</span>
 							</div>
 							<div class="uk-flex">
 								<a href="#" class="uk-button uk-modal-close">

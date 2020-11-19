@@ -91,7 +91,8 @@ class Switcher {
 		if ($dropdown) {
 			$html .= '<div data-uk-dropdown="{mode:\'click\',pos:\'bottom-right\'}">' . 
 	        		 '<a href="#" class="uk-button uk-button-large">' .
-				 	 Text::get('btn_more') . '&nbsp;&nbsp;<i class="uk-icon-caret-down"></i>' .
+					 '<span class="uk-visible-large">' . Text::get('btn_more') . '&nbsp;&nbsp;<i class="uk-icon-caret-down"></i></span>' .
+					 '<i class="uk-hidden-large uk-icon-ellipsis-v uk-icon-justify"></i>' .
 				 	 '</a>' .
 	        		 '<div class="uk-dropdown uk-dropdown-small">' .
 	            	 '<ul class="uk-nav uk-nav-dropdown">';
