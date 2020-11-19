@@ -1,3 +1,7 @@
+btn_about: About Automad
+
+-
+
 btn_accounts_file: Download Accounts File
 
 -
@@ -127,6 +131,10 @@ btn_ok: Ok
 -
 
 btn_open_log: Open Log
+
+-
+
+btn_open_website: Open Website
 
 -
 

@@ -48,16 +48,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		class="am-footer uk-position-bottom<?php if (!User::get()) { ?> uk-text-center<?php } ?>"
 		>
 			<a 
-			href="https://automad.org" 
-			class="uk-text-small" 
-			target="_blank"
+			href="#am-about-modal" 
+			class="uk-button uk-button-mini uk-text-muted" 
+			data-uk-modal
 			>
-				Automad <?php echo AM_VERSION; ?>
+				Automad &mdash; Version <?php echo AM_VERSION; ?>
 			</a>	
 		</div>
 		
 	</div> <!-- .uk-container -->	
 	
+	<?php echo Components\Modal\About::render('am-about-modal'); ?>
+
 	<?php if (User::get()) { ?>
 	<!-- Add Page Modal -->
 	<div id="am-add-page-modal" class="uk-modal">
