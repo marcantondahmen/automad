@@ -515,7 +515,7 @@
 					$(this).find('[' + Automad.form.dataAttr.init + ']').each(function() {
 						$(this)
 						.empty()
-						.html('<i class="uk-text-muted uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>')
+						.html('<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>')
 						.submit();
 					});
 					
