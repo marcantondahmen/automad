@@ -1,3 +1,7 @@
+btn_about: Informazioni su Automad
+
+-
+
 btn_add: Inserisci
 
 -
@@ -15,6 +19,10 @@ btn_apply_reload: Applica e ricarica
 -
 
 btn_browse: Sfoglia file
+
+-
+
+btn_close: Vicina
 
 -
 
@@ -119,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Apri registro
+
+-
+
+btn_open_website: Apri sito web
+
+-
+
+btn_page_private: Mantieni la pagina privata
 
 -
 
@@ -238,6 +254,10 @@ error_import: L'importazione del file è fallita!
 
 -
 
+error_json: JSON non valido! Il contenuto del file di configurazione non è formattato correttamente.
+
+-
+
 error_packages: Impossibile caricare i pacchetti da Packagist!
 
 -
@@ -274,7 +294,7 @@ error_template_missing: Modello mancante
 
 -
 
-error_update_connection: Impossibile connettersi al server di aggiornamento! Ciò potrebbe in genere essere causato da una configurazione di aggiornamento errata (config.json), un errore del certificato SSL o una libreria cURL mancante.
+error_update_connection: Impossibile connettersi al server di aggiornamento! Ciò potrebbe essere in genere causato da una configurazione di aggiornamento errata (config / config.php), un errore del certificato SSL o una libreria cURL mancante.
 
 -
 
@@ -426,6 +446,10 @@ page_tags: Tag (separa più tag con virgola o tabulazione)
 
 -
 
+page_theme_template: Modella
+
+-
+
 page_var_name: Nome variabile
 
 -
@@ -443,6 +467,10 @@ page_vars_unused: Variabili inutilizzate
 -
 
 page_visibility: Visibility
+
+-
+
+page_private: Privata
 
 -
 
@@ -550,7 +578,7 @@ success_package_updated: Aggiornato con successo
 
 -
 
-sys_cache_info: La memorizzazione nella cache è essenziale per velocizzare il tuo sito e dovrebbe essere generalmente abilitata. Tuttavia, in alcune circostanze potresti voler disabilitare o svuotare la cache.
+sys_cache_info: La memorizzazione nella cache è essenziale per velocizzare il tuo sito e generalmente dovrebbe essere abilitata. Tuttavia in alcune circostanze potresti voler disabilitare o svuotare la cache.
 
 -
 
@@ -582,7 +610,15 @@ sys_cache_purge: Elimina directory cache
 
 -
 
-sys_cache_purge_info: In contrasto con la semplice cancellazione della cache, l'eliminazione della directory della cache sposterà anche tutti i file temporanei, le pagine eliminate, i backup di aggiornamento e le immagini nella cache nella directory temporanea del sistema. Ciò forzerà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi la directory temporanea verrà eliminata automaticamente di tanto in tanto o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
+sys_cache_purge_info: In contrasto con la semplice cancellazione della cache, l'eliminazione della directory della cache sposterà anche tutti i file temporanei, le pagine eliminate, i backup di aggiornamento e le immagini memorizzate nella cache nella directory temporanea del sistema. Ciò forzerà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi, la directory temporanea verrà eliminata automaticamente di tanto in tanto o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
+
+-
+
+sys_config: File Modifica configurazione
+
+-
+
+sys_config_warning: Tieni presente che solo gli utenti esperti dovrebbero modificare il file di configurazione per evitare danni all'installazione. Nel caso in cui qualcosa vada storto, eliminare manualmente il file di configurazione dal server per ripristinare le impostazioni predefinite.
 
 -
 
@@ -658,7 +694,7 @@ sys_update_to: Aggiorna alla versione
 
 -
 
-sys_update_windows_warning: Assicurati che tutti i file della tua installazione siano chiusi in programmi esterni prima di eseguire l'aggiornamento per evitare problemi di autorizzazione!
+sys_update_windows_warning: Assicurati che tutti i file della tua installazione siano chiusi in programmi esterni prima di eseguire l'aggiornamento per evitare problemi di autorizzazioni!
 
 -
 
@@ -706,7 +742,7 @@ sys_user_registered: Utente registrato
 
 -
 
-sys_user_you: Voi
+sys_user_you: Tu
 
 -
 

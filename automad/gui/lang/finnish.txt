@@ -1,3 +1,7 @@
+btn_about: Tietoja Automadista
+
+-
+
 btn_add: Lisätä
 
 -
@@ -22,7 +26,7 @@ btn_close: Kiinni
 
 -
 
-btn_copy_url_clipboard: Kopioi URL leikepöydälle
+btn_copy_url_clipboard: Kopioi URL-osoite leikepöydälle
 
 -
 
@@ -106,7 +110,7 @@ btn_login: Kirjaudu sisään
 
 -
 
-btn_manage_users: Hallitse käyttäjiä
+btn_manage_users: Hallinnoi käyttäjiä
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Avaa loki
+
+-
+
+btn_open_website: Avaa verkkosivusto
+
+-
+
+btn_page_private: Pidä sivu yksityisenä
 
 -
 
@@ -242,6 +254,10 @@ error_import: Tiedoston tuonti epäonnistui!
 
 -
 
+error_json: Virheellinen JSON! Kokoonpanotiedoston sisältö ei ole alustettu oikein.
+
+-
+
 error_packages: Pakettien lataaminen Packagistista epäonnistui!
 
 -
@@ -278,7 +294,7 @@ error_template_missing: Malli puuttuu
 
 -
 
-error_update_connection: Yhteyttä päivityspalvelimeen ei voi muodostaa! Tämä voi yleensä johtua väärästä päivitysmäärityksestä (config.json), SSL-varmentevirheestä tai puuttuvasta CURL-kirjastosta.
+error_update_connection: Yhteyttä päivityspalvelimeen ei voi muodostaa! Tämä voi yleensä johtua väärästä päivityskokoonpanosta (config / config.php), SSL-varmentevirheestä tai puuttuvasta CURL-kirjastosta.
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Yksityinen
+
+-
+
 sidebar_header_global: Maailmanlaajuinen
 
 -
@@ -530,7 +550,7 @@ success_password_changed: Salasanasi vaihdettiin onnistuneesti!
 
 -
 
-success_log_out: Kirjauduttiin ulos onnistuneesti
+success_log_out: Kirjautuminen ulos onnistuneesti
 
 -
 
@@ -574,7 +594,7 @@ sys_cache_monitor: Tarkistusväli on
 
 -
 
-sys_cache_monitor_info: Kun välimuisti on käytössä, Automad tarkistaa säännöllisesti tiedostojärjestelmän muutokset. Tarkastusten tiheys voidaan määrittää tässä.
+sys_cache_monitor_info: Kun välimuisti on käytössä, Automad tarkistaa säännöllisesti tiedostojärjestelmän muutokset. Näiden tarkastusten tiheys voidaan määrittää tässä.
 
 -
 
@@ -582,7 +602,7 @@ sys_cache_lifetime: Välimuistin käyttöikä on
 
 -
 
-sys_cache_lifetime_info: Kaikilla välimuistissa olevilla Automad-tiedoilla ja sivuilla on suurin käyttöikä. Kun objektin käyttöikä ylittyy, sen välimuisti rakennetaan uudelleen pyydettäessä.
+sys_cache_lifetime_info: Kaikilla välimuistissa olevilla Automad-tiedoilla ja sivuilla on suurin käyttöikä. Kun objektin käyttöikä on ylitetty, sen välimuisti rakennetaan uudelleen pyydettäessä.
 
 -
 
@@ -590,7 +610,15 @@ sys_cache_purge: Tyhjennä välimuistihakemisto
 
 -
 
-sys_cache_purge_info: Toisin kuin välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää kaikki väliaikaiset tiedostot, poistetut sivut, päivitysvarmuuskopiot ja välimuistissa olevat kuvat järjestelmän tilapäiseen hakemistoon. Tämä pakottaa kuvan ja sivun välimuistin täydellisen uudelleenrakentamisen sekä kaikkien poistettujen sivujen siivoamisen. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan ajoittain tai uudelleenkäynnistyksen yhteydessä. Joissakin järjestelmissä kyseinen hakemisto on kuitenkin tyhjennettävä manuaalisesti.
+sys_cache_purge_info: Toisin kuin välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää kaikki väliaikaiset tiedostot, poistetut sivut, päivitysvarmuuskopiot ja välimuistissa olevat kuvat järjestelmän temprary-hakemistoon. Tämä pakottaa kuvan ja sivun välimuistin täydellisen uudelleenrakentamisen sekä kaikkien poistettujen sivujen siivoamisen. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan ajoittain tai uudelleenkäynnistyksen yhteydessä. Joissakin järjestelmissä kyseinen hakemisto on kuitenkin tyhjennettävä manuaalisesti.
+
+-
+
+sys_config: Muokkaa määritystiedostoa
+
+-
+
+sys_config_warning: Huomaa, että vain kokeneiden käyttäjien tulisi muokata määritystiedostoa asennuksen vahingoittumisen välttämiseksi. Jos jokin menee pieleen, poista määritystiedosto palvelimeltasi manuaalisesti palauttaaksesi oletusasetukset.
 
 -
 
@@ -598,11 +626,11 @@ sys_debug_info: Kun virheenkorjaus on käytössä, kaikki Automadin prosessit ki
 
 -
 
-sys_headless_edit_info: Palautettujen JSON-tietojen rakennetta ohjataan mallilla. Voit muokata kyseistä mallia Automadin sisäänrakennetulla mallikielellä kenttien mukauttamiseksi muuttujien, objektien ja ohjausrakenteiden avulla.
+sys_headless_edit_info: Palautettujen JSON-tietojen rakennetta ohjataan mallilla. Voit muokata kyseistä mallia käyttämällä Automadin sisäänrakennettua mallikieliä kenttien mukauttamiseksi muuttujien, objektien ja ohjausrakenteiden avulla.
 
 -
 
-sys_headless_info: Päätön-tilan aktivoiminen tekee Automadista sisällönhallintajärjestelmän, joka keskittyy kokonaan sisällön luomiseen ilman esityskerrosta. Vaikka hallintapaneelia voidaan edelleen käyttää sisällön hallintaan, kaikki tiedot ja tiedostot ovat käytettävissä vain luku -oikeutetun JSON-sovellusliittymän kautta.
+sys_headless_info: Päättömän tilan aktivoiminen tekee Automadista sisällönhallintajärjestelmän, joka keskittyy kokonaan sisällön luomiseen ilman esityskerrosta. Vaikka hallintapaneelia voidaan edelleen käyttää sisällön hallintaan, kaikki tiedot ja tiedostot ovat käytettävissä vain luku -oikeutetun JSON-sovellusliittymän kautta.
 
 -
 
@@ -610,7 +638,7 @@ sys_language: Kieli
 
 -
 
-sys_language_info: Kojelaudalle on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on edelleen kokeiluvaiheessa, joten jotkin käännökset eivät välttämättä ole tarkkoja.
+sys_language_info: Kojelaudalle on saatavana useita kieliä. Käännökset luodaan automaattisesti. Tämä ominaisuus on vielä kokeiluvaiheessa, joten jotkin käännökset eivät välttämättä ole tarkkoja.
 
 -
 

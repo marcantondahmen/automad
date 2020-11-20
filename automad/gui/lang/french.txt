@@ -1,3 +1,7 @@
+btn_about: À propos d'Automad
+
+-
+
 btn_add: Ajouter
 
 -
@@ -126,6 +130,14 @@ btn_open_log: Ouvrir le journal
 
 -
 
+btn_open_website: Site Web ouvert
+
+-
+
+btn_page_private: Garder la page privée
+
+-
+
 btn_readme: Readme
 
 -
@@ -154,11 +166,11 @@ btn_upload: Télécharger
 
 -
 
-confirm_delete_files: Voulez-vous vraiment supprimer les fichiers sélectionnés?
+confirm_delete_files: Êtes-vous sûr de vouloir supprimer les fichiers sélectionnés?
 
 -
 
-confirm_delete_page: Êtes-vous sûr de vouloir supprimer la page actuelle?
+confirm_delete_page: Voulez-vous vraiment supprimer la page actuelle?
 
 -
 
@@ -242,6 +254,10 @@ error_import: L'importation du fichier a échoué!
 
 -
 
+error_json: JSON invalide! Le contenu du fichier de configuration n'est pas formaté correctement.
+
+-
+
 error_packages: Impossible de charger les packages depuis Packagist!
 
 -
@@ -278,7 +294,7 @@ error_template_missing: Modèle manquant
 
 -
 
-error_update_connection: Impossible de se connecter au serveur de mise à jour! Cela peut généralement être dû à une mauvaise configuration de mise à jour (config.json), à une erreur de certificat SSL ou à une bibliothèque cURL manquante.
+error_update_connection: Impossible de se connecter au serveur de mise à jour! Cela peut généralement être causé par une mauvaise configuration de mise à jour (config / config.php), une erreur de certificat SSL ou une bibliothèque cURL manquante.
 
 -
 
@@ -454,6 +470,14 @@ page_visibility: Visibility
 
 -
 
+page_private: Privée
+
+-
+
+sidebar_header_global: Globale
+
+-
+
 sidebar_header_pages: Des pages
 
 -
@@ -578,7 +602,7 @@ sys_cache_lifetime: La durée de vie du cache est
 
 -
 
-sys_cache_lifetime_info: Toutes les données et pages Automad mises en cache ont une durée de vie maximale. Une fois la durée de vie d'un objet dépassée, son cache sera reconstruit à la demande.
+sys_cache_lifetime_info: Toutes les données et pages Automad mises en cache ont une durée de vie maximale. Une fois la durée de vie d'un objet dépassée, son cache sera reconstruit sur demande.
 
 -
 
@@ -586,7 +610,15 @@ sys_cache_purge: Purger le répertoire du cache
 
 -
 
-sys_cache_purge_info: Contrairement à la simple suppression du cache, la purge du répertoire de cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de page ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
+sys_cache_purge_info: Contrairement à la simple suppression du cache, la purge du répertoire du cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images mises en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de page ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
+
+-
+
+sys_config: Modifier le fichier de configuration
+
+-
+
+sys_config_warning: Notez que seuls les utilisateurs expérimentés doivent modifier le fichier de configuration pour éviter d'endommager votre installation. En cas de problème, supprimez manuellement le fichier de configuration de votre serveur afin de restaurer les paramètres par défaut.
 
 -
 
@@ -662,7 +694,11 @@ sys_update_to: Mettre à jour vers la version
 
 -
 
-sys_update_windows_warning: Assurez-vous que tous les fichiers de votre installation sont fermés dans des programmes externes avant d'exécuter la mise à jour pour éviter les problèmes d'autorisations!
+sys_update_windows_warning: Assurez-vous que tous les fichiers de votre installation sont fermés dans les programmes externes avant d'exécuter la mise à jour pour éviter les problèmes d'autorisations!
+
+-
+
+sys_user: Utilisatrices
 
 -
 
@@ -703,6 +739,10 @@ sys_user_add_repeat: Répéter le mot de passe
 -
 
 sys_user_registered: Utilisateurs enregistrés
+
+-
+
+sys_user_you: Tue
 
 -
 

@@ -1,3 +1,7 @@
+btn_about: Despre Automad
+
+-
+
 btn_add: Adăuga
 
 -
@@ -50,7 +54,7 @@ btn_edit: Editați | ×
 
 -
 
-btn_edit_file_info: Editați informații despre fișier
+btn_edit_file_info: Editați informațiile despre fișier
 
 -
 
@@ -82,7 +86,7 @@ btn_home: Home
 
 -
 
-btn_import: Importați din URL
+btn_import: Importă din URL
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Deschideți jurnalul
+
+-
+
+btn_open_website: Deschideți site-ul web
+
+-
+
+btn_page_private: Păstrați pagina privată
 
 -
 
@@ -210,7 +222,7 @@ error_file_size: Dimensiune nevalidă a fișierului!
 
 -
 
-error_form: Date incomplete sau incorecte! <br /> Toate câmpurile sunt obligatorii și trebuie completate conform descrierii!
+error_form: Incomplete sau date incorecte! Toate campurile sunt obligatorii și trebuie completate așa cum este descris!
 
 -
 
@@ -239,6 +251,10 @@ error_no_url: Vă rugăm să introduceți o adresă URL validă!
 -
 
 error_import: Importul fișierului a eșuat!
+
+-
+
+error_json: JSON nevalid! Conținutul fișierului de configurare nu este formatat corect.
 
 -
 
@@ -278,7 +294,7 @@ error_template_missing: Șablonul lipsește
 
 -
 
-error_update_connection: Nu se poate conecta la serverul de actualizare! Acest lucru ar putea fi de obicei cauzat de o configurație de actualizare greșită (config.json), o eroare de certificat SSL sau o bibliotecă cURL lipsă.
+error_update_connection: Nu se poate conecta la serverul de actualizare! Acest lucru ar putea fi de obicei cauzat de o configurație de actualizare greșită (config / config.php), o eroare de certificat SSL sau o bibliotecă cURL lipsă.
 
 -
 
@@ -298,7 +314,7 @@ error_update_not_supported: Actualizările nu sunt acceptate de serverul dvs.! A
 
 -
 
-error_update_permission: Actualizarea nu poate rula! Permisiuni refuzate!
+error_update_permission: Nu se poate rula actualizarea! Permisiuni refuzate!
 
 -
 
@@ -306,7 +322,7 @@ error_var_exists: Există deja o variabilă cu acest nume!
 
 -
 
-error_var_name: Nu puteți adăuga o variabilă fără un nume!
+error_var_name: Nu puteți adăuga o variabilă fără nume!
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privat
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -526,7 +546,7 @@ success_installed: Instalat cu succes
 
 -
 
-success_password_changed: Parola dvs. a fost modificată cu succes!
+success_password_changed: Parola dvs. a fost schimbată cu succes!
 
 -
 
@@ -574,7 +594,7 @@ sys_cache_monitor: Intervalul de verificare este
 
 -
 
-sys_cache_monitor_info: Când cache-ul este activat, Automad va verifica în mod regulat modificările sistemului de fișiere. Frecvența acestor verificări poate fi definită aici.
+sys_cache_monitor_info: Când cache-ul este activat, Automad va verifica periodic modificările sistemului de fișiere. Frecvența acestor verificări poate fi definită aici.
 
 -
 
@@ -590,11 +610,19 @@ sys_cache_purge: Ștergeți directorul cache
 
 -
 
-sys_cache_purge_info: Spre deosebire de simpla ștergere a cache-ului, curățarea directorului cache va muta, de asemenea, toate fișierele temporare, paginile șterse, backup-urile de actualizare și imaginile cache în directorul temporar al sistemului. Acest lucru va forța o reconstrucție completă a imaginii și a paginii cache, precum și o curățare a tuturor paginilor șterse. Pe majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme acel director trebuie șters manual.
+sys_cache_purge_info: Spre deosebire de ștergerea memoriei cache, purjarea directorului cache va muta, de asemenea, toate fișierele temporare, paginile șterse, backup-urile de actualizare și imaginile memorate în cache în directorul temporar al sistemului. Acest lucru va forța o reconstrucție completă a imaginii și a paginii cache, precum și o curățare a tuturor paginilor șterse. Pe majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme acel director trebuie șters manual.
 
 -
 
-sys_debug_info: Când depanarea este activată, toate procesele Automad vor fi înregistrate în consola browserului. Depanarea este necesară numai pentru dezvoltare sau depanare și ar trebui să fie dezactivată în toate celelalte cazuri.
+sys_config: Editați fișierul de configurare
+
+-
+
+sys_config_warning: Rețineți că numai utilizatorii experimentați ar trebui să editeze fișierul de configurare pentru a evita deteriorarea instalării dvs. În cazul în care ceva nu merge bine, vă rugăm să ștergeți manual fișierul de configurare de pe serverul dvs. pentru a restabili setările implicite.
+
+-
+
+sys_debug_info: Când depanarea este activată, toate procesele Automad vor fi înregistrate în consola browserului. Depanarea este necesară doar pentru dezvoltare sau depanare și ar trebui să fie dezactivată în toate celelalte cazuri.
 
 -
 

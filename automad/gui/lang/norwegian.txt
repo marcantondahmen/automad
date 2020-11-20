@@ -1,3 +1,7 @@
+btn_about: Om Automad
+
+-
+
 btn_add: Legge til
 
 -
@@ -10,7 +14,7 @@ btn_add_var: Legg til variabel
 
 -
 
-btn_apply_reload: Påfør og last på nytt
+btn_apply_reload: Påfør og last inn på nytt
 
 -
 
@@ -126,6 +130,14 @@ btn_open_log: Åpne logg
 
 -
 
+btn_open_website: Åpne nettsted
+
+-
+
+btn_page_private: Hold siden privat
+
+-
+
 btn_readme: Readme
 
 -
@@ -158,7 +170,7 @@ confirm_delete_files: Er du sikker på at du vil slette de valgte filene?
 
 -
 
-confirm_delete_page: Er du sikker på at du vil slette den gjeldende siden?
+confirm_delete_page: Er du sikker på at du vil slette den aktuelle siden?
 
 -
 
@@ -210,7 +222,7 @@ error_file_size: Ugyldig filstørrelse!
 
 -
 
-error_form: Ufullstendige eller uriktige data! <br /> Alle felt er obligatoriske og må fylles ut som beskrevet!
+error_form: Ufullstendige eller feil data! <br /> Alle felt er obligatoriske og må fylles ut som beskrevet!
 
 -
 
@@ -242,11 +254,15 @@ error_import: Filimporten mislyktes!
 
 -
 
+error_json: Ugyldig JSON! Innholdet i konfigurasjonsfilen er ikke formatert riktig.
+
+-
+
 error_packages: Kunne ikke laste pakker fra Packagist!
 
 -
 
-error_composer_memory: Serveren din har ikke nok minne til å installere, oppdatere eller fjerne pakker! Hvis du kjører dette nettstedet på en delt hostingtjeneste med begrenset mengde minne, kan du prøve å oppgradere planen din eller installere nettstedet på en lokal datamaskin uten minnebegrensninger.
+error_composer_memory: Serveren din har ikke nok minne til å installere, oppdatere eller fjerne pakker! Hvis du kjører dette nettstedet på en delt hostingtjeneste med en begrenset mengde minne, kan du prøve å oppgradere planen din eller installere nettstedet på en lokal datamaskin uten minnebegrensninger.
 
 -
 
@@ -278,7 +294,7 @@ error_template_missing: Malen mangler
 
 -
 
-error_update_connection: Kan ikke koble til oppdateringsserveren! Dette kan vanligvis være forårsaket av en feil oppdateringskonfigurasjon (config.json), en SSL-sertifikatfeil eller et manglende cURL-bibliotek.
+error_update_connection: Kan ikke koble til oppdateringsserveren! Dette kan vanligvis skyldes feil oppdateringskonfigurasjon (config / config.php), en SSL-sertifikatfeil eller et manglende cURL-bibliotek.
 
 -
 
@@ -294,7 +310,7 @@ error_update_failed: Oppdatering mislyktes! Gjenopprett installasjonen fra en si
 
 -
 
-error_update_not_supported: Oppdateringer støttes ikke av serveren din! Oppdatereren krever at cURL- og ZIP-biblioteker er installert.
+error_update_not_supported: Oppdateringer støttes ikke av serveren din! Oppdatereren krever at det er installert cURL- og ZIP-biblioteker.
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privat
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -506,11 +526,11 @@ success_added: Vellykket lagt til
 
 -
 
-success_cache_cleared: Cachen ble tømt med hell!
+success_cache_cleared: Cachen ble fjernet med hell!
 
 -
 
-success_cache_purged: Cache-katalogen ble ryddet!
+success_cache_purged: Cache-katalogen ble fjernet!
 
 -
 
@@ -590,11 +610,19 @@ sys_cache_purge: Rens hurtigbufferkatalog
 
 -
 
-sys_cache_purge_info: I motsetning til å bare rydde hurtigbufferen, vil rensing av hurtigbufferkatalogen også flytte alle midlertidige filer, slettede sider, sikkerhetskopier av oppdateringer og hurtigbufrede bilder til den midlertidige katalogen til systemet. Dette vil tvinge en full gjenoppbygging av bilde- og sidebufferen, samt opprydding av alle slettede sider. På de fleste systemer vil den midlertidige katalogen bli renset automatisk fra tid til annen eller ved omstart. Imidlertid må katalogen tømmes manuelt på noen systemer.
+sys_cache_purge_info: I motsetning til å bare tømme hurtigbufferen, vil rensing av hurtigbufferkatalogen også flytte alle midlertidige filer, slettede sider, sikkerhetskopier av oppdateringer og hurtigbufrede bilder til den midlertidige katalogen til systemet. Dette vil tvinge en fullstendig gjenoppbygging av bilde- og sidebufferen, samt opprydding av alle slettede sider. På de fleste systemer blir den midlertidige katalogen renset automatisk fra tid til annen eller ved omstart. Imidlertid må katalogen tømmes manuelt på noen systemer.
 
 -
 
-sys_debug_info: Når feilsøking er aktivert, vil alle Automads prosesser logges til nettleserens konsoll. Feilsøking er bare nødvendig for utvikling eller feilsøking, og bør deaktiveres i alle andre tilfeller.
+sys_config: Rediger konfigurasjonsfil
+
+-
+
+sys_config_warning: Merk at bare erfarne brukere skal redigere konfigurasjonsfilen for å unngå skade på installasjonen. Hvis noe går galt, må du slette konfigurasjonsfilen manuelt fra serveren din for å gjenopprette standardinnstillingene.
+
+-
+
+sys_debug_info: Når feilsøking er aktivert, vil alle Automads prosesser logges til nettleserens konsoll. Feilsøking er bare nødvendig for utvikling eller feilsøking og bør deaktiveres i alle andre tilfeller.
 
 -
 
@@ -602,7 +630,7 @@ sys_headless_edit_info: Strukturen til de returnerte JSON-dataene styres av en m
 
 -
 
-sys_headless_info: Aktivering av hodeløs modus gjør Automad til et innholdsstyringssystem som fokuserer helt på innholdsoppretting uten et presentasjonslag. Mens Dashboard fremdeles kan brukes til å administrere innhold, er alle data og filer tilgjengelige via et skrivebeskyttet JSON API.
+sys_headless_info: Aktivering av hodeløs modus gjør Automad til et innholdsstyringssystem som fokuserer helt på innholdsoppretting uten et presentasjonslag. Mens Dashboard fremdeles kan brukes til å administrere innhold, er alle data og filer tilgjengelige via en skrivebeskyttet JSON API.
 
 -
 
@@ -610,7 +638,7 @@ sys_language: Språk
 
 -
 
-sys_language_info: Det er flere språk tilgjengelig for Dashboard. Oversettelsene opprettes automatisk. Denne funksjonen er fremdeles i en eksperimentell fase, og det kan hende at noen oversettelser kanskje ikke er korrekte.
+sys_language_info: Det er flere språk tilgjengelig for Dashboard. Oversettelsene opprettes automatisk. Denne funksjonen er fremdeles i en eksperimentell fase, og det kan hende at noen oversettelser kanskje ikke er nøyaktige.
 
 -
 
@@ -674,7 +702,7 @@ sys_user: Brukere
 
 -
 
-sys_user_info: Du kan legge til eller fjerne flere brukere eller endre passordet ditt her.
+sys_user_info: Du kan legge til eller fjerne flere brukere eller endre passordet her.
 
 -
 

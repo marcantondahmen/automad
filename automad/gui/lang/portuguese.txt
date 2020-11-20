@@ -1,3 +1,7 @@
+btn_about: Sobre Automad
+
+-
+
 btn_add: Adicionar
 
 -
@@ -18,7 +22,7 @@ btn_browse: Procurar arquivos
 
 -
 
-btn_close: Perto
+btn_close: Fechar
 
 -
 
@@ -126,11 +130,19 @@ btn_open_log: Registro aberto
 
 -
 
+btn_open_website: Abrir site
+
+-
+
+btn_page_private: Manter a página privada
+
+-
+
 btn_readme: Readme
 
 -
 
-btn_remove: Retirar
+btn_remove: Remover
 
 -
 
@@ -242,6 +254,10 @@ error_import: A importação do arquivo falhou!
 
 -
 
+error_json: JSON inválido! O conteúdo do arquivo de configuração não está formatado corretamente.
+
+-
+
 error_packages: Não foi possível carregar pacotes do Packagist!
 
 -
@@ -278,7 +294,7 @@ error_template_missing: Falta modelo
 
 -
 
-error_update_connection: Não é possível conectar ao servidor de atualização! Normalmente, isso pode ser causado por uma configuração de atualização incorreta (config.json), um erro de certificado SSL ou uma biblioteca cURL ausente.
+error_update_connection: Não é possível conectar ao servidor de atualização! Normalmente, isso pode ser causado por uma configuração de atualização errada (config / config.php), um erro de certificado SSL ou uma biblioteca cURL ausente.
 
 -
 
@@ -346,7 +362,7 @@ images_shared: Imagens Gerais
 
 -
 
-link_placeholder: Comece a digitar o título de uma página ou cole um link externo aqui
+link_placeholder: Comece a digitar o título da página ou cole um link externo aqui
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privada
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -530,7 +550,7 @@ success_password_changed: Sua senha foi alterada com sucesso!
 
 -
 
-success_log_out: Desconectado com sucesso
+success_log_out: Saiu com sucesso
 
 -
 
@@ -538,7 +558,7 @@ success_remove: Removido com sucesso
 
 -
 
-success_reset_headless: Restaurado com sucesso o template padrão sem cabeça!
+success_reset_headless: O template padrão sem cabeça foi restaurado com sucesso!
 
 -
 
@@ -574,7 +594,7 @@ sys_cache_monitor: O intervalo de verificação é
 
 -
 
-sys_cache_monitor_info: Quando o armazenamento em cache está ativado, o Automad verifica regularmente se há mudanças no sistema de arquivos. A frequência dessas verificações pode ser definida aqui.
+sys_cache_monitor_info: Quando o cache está habilitado, o Automad verificará regularmente se há mudanças no sistema de arquivos. A frequência dessas verificações pode ser definida aqui.
 
 -
 
@@ -591,6 +611,14 @@ sys_cache_purge: Limpar diretório de cache
 -
 
 sys_cache_purge_info: Em contraste com simplesmente limpar o cache, limpar o diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagem e página, bem como uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de tempos em tempos ou na reinicialização. No entanto, em alguns sistemas, esse diretório deve ser limpo manualmente.
+
+-
+
+sys_config: Editar Arquivo de Configuração
+
+-
+
+sys_config_warning: Observe que apenas usuários experientes devem editar o arquivo de configuração para evitar danos à instalação. Caso algo dê errado, exclua o arquivo de configuração manualmente de seu servidor para restaurar as configurações padrão.
 
 -
 
@@ -634,7 +662,7 @@ sys_status_update_not_available: Automad está atualizado
 
 -
 
-sys_title: Configurações de sistema
+sys_title: Configurações do sistema
 
 -
 
@@ -714,7 +742,7 @@ sys_user_registered: Usuários registrados
 
 -
 
-sys_user_you: Vocês
+sys_user_you: Você
 
 -
 

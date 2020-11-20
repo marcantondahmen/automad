@@ -1,3 +1,7 @@
+btn_about: Apie „Automad“
+
+-
+
 btn_add: Papildyti
 
 -
@@ -126,6 +130,14 @@ btn_open_log: Atidarykite žurnalą
 
 -
 
+btn_open_website: Atidarykite svetainę
+
+-
+
+btn_page_private: Laikykite puslapį privatų
+
+-
+
 btn_readme: Readme
 
 -
@@ -242,6 +254,10 @@ error_import: Nepavyko importuoti failo!
 
 -
 
+error_json: Netinkamas JSON! Konfigūracijos failo turinys netinkamai suformatuotas.
+
+-
+
 error_packages: Nepavyko įkelti pakuočių iš „Packagist“!
 
 -
@@ -278,7 +294,7 @@ error_template_missing: Šablono nėra
 
 -
 
-error_update_connection: Nepavyksta prisijungti prie naujinimo serverio! Paprastai tai gali sukelti neteisinga atnaujinimo konfigūracija (config.json), SSL sertifikato klaida arba trūkstama CURL biblioteka.
+error_update_connection: Nepavyksta prisijungti prie naujinimo serverio! Tai paprastai gali sukelti neteisinga atnaujinimo konfigūracija (config / config.php), SSL sertifikato klaida arba trūkstama CURL biblioteka.
 
 -
 
@@ -322,7 +338,7 @@ image_crop: Apkarpyti nuotrauką
 
 -
 
-image_height_px: Aukštis (pikseliai)
+image_height_px: Aukštis (pikseliais)
 
 -
 
@@ -346,7 +362,7 @@ images_shared: Bendrieji vaizdai
 
 -
 
-link_placeholder: Pradėkite rašyti puslapio pavadinimą arba įklijuokite išorinę nuorodą čia
+link_placeholder: Pradėkite rašyti puslapio pavadinimą arba čia įklijuokite išorinę nuorodą
 
 -
 
@@ -402,7 +418,7 @@ packages_updating: Atnaujinamas paketas ...
 
 -
 
-packages_removing: Pašalinama pakuotė ...
+packages_removing: Pašalinamas paketas ...
 
 -
 
@@ -451,6 +467,10 @@ page_vars_unused: Nenaudojami kintamieji
 -
 
 page_visibility: Visibility
+
+-
+
+page_private: Privatus
 
 -
 
@@ -590,7 +610,15 @@ sys_cache_purge: Išvalyti talpyklos katalogą
 
 -
 
-sys_cache_purge_info: Priešingai nei paprasčiausiai išvalant talpyklą, išvalius talpyklos katalogą, visi laikini failai, ištrinti puslapiai, atnaujinimo atsarginės kopijos ir talpyklos vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atkurti vaizdą ir puslapių talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugumoje sistemų laikinas katalogas retkarčiais bus automatiškai išvalomas arba perkraunamas. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
+sys_cache_purge_info: Priešingai nei paprasčiausiai išvalant talpyklą, išvalius talpyklos katalogą, visi laikini failai, ištrinti puslapiai, atnaujinimo atsarginės kopijos ir talpyklos vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atkurti vaizdą ir puslapių talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugumoje sistemų laikinas katalogas retkarčiais arba iš naujo paleidžiamas automatiškai. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
+
+-
+
+sys_config: Redaguoti konfigūracijos failą
+
+-
+
+sys_config_warning: Atminkite, kad tik patyrę vartotojai turėtų redaguoti konfigūracijos failą, kad būtų išvengta jūsų įrenginio pažeidimo. Jei kažkas negerai, ištrinkite konfigūracijos failą rankiniu būdu iš savo serverio, kad atkurtumėte numatytuosius nustatymus.
 
 -
 
@@ -642,7 +670,7 @@ sys_update: Atnaujinti
 
 -
 
-sys_update_available: Yra naujesnė „Automad“ versija, kuri yra paruošta įdiegti. <br> Prieš atnaujindami, atsisiųskite dabartinę diegimo kopiją!
+sys_update_available: Galima įsigyti naujesnę „Automad“ versiją, kuri bus paruošta įdiegti. <br> Prieš atnaujindami, atsarginę savo kopiją sukurkite!
 
 -
 
@@ -650,7 +678,7 @@ sys_update_current_version: Šiuo metu įdiegta jūsų versija yra
 
 -
 
-sys_update_items: Atminkite, kad naujinimas turi įtakos šiems failams ir katalogams:
+sys_update_items: Atminkite, kad naujinimas paveikė šiuos failus ir katalogus:
 
 -
 

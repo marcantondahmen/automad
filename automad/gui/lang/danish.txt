@@ -1,3 +1,7 @@
+btn_about: Om Automad
+
+-
+
 btn_add: Tilføje
 
 -
@@ -114,7 +118,7 @@ btn_more: Mere
 
 -
 
-btn_move_page: Flyt side
+btn_move_page: Flyt Side
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Åbn log
+
+-
+
+btn_open_website: Åbn websted
+
+-
+
+btn_page_private: Hold siden privat
 
 -
 
@@ -242,6 +254,10 @@ error_import: Filimporten mislykkedes!
 
 -
 
+error_json: Ugyldig JSON! Indholdet af konfigurationsfilen er ikke formateret korrekt.
+
+-
+
 error_packages: Kunne ikke indlæse pakker fra Packagist!
 
 -
@@ -278,7 +294,7 @@ error_template_missing: Skabelon mangler
 
 -
 
-error_update_connection: Kan ikke oprette forbindelse til opdateringsserveren! Dette kan typisk være forårsaget af en forkert opdateringskonfiguration (config.json), en SSL-certifikatfejl eller et manglende cURL-bibliotek.
+error_update_connection: Kan ikke oprette forbindelse til opdateringsserveren! Dette kan typisk være forårsaget af en forkert opdateringskonfiguration (config / config.php), en SSL-certifikatfejl eller et manglende cURL-bibliotek.
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privat
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -522,7 +542,7 @@ success_created: Oprettet <br> <br>
 
 -
 
-success_installed: Installeret korrekt
+success_installed: Installeret
 
 -
 
@@ -566,7 +586,7 @@ sys_cache_clear: Ryd cache
 
 -
 
-sys_cache_clear_info: Rydning af webstedscache tvinger en genscanning til opdaterede sider og filer. Denne handling fjerner ikke sidefiler eller billeder fra cache-biblioteket.
+sys_cache_clear_info: Rydning af webstedscachen tvinger en genscanning efter opdaterede sider og filer. Denne handling fjerner ikke sidefiler eller billeder fra cache-biblioteket.
 
 -
 
@@ -590,15 +610,23 @@ sys_cache_purge: Rens cache-bibliotek
 
 -
 
-sys_cache_purge_info: I modsætning til simpelthen at rydde cachen vil rensning af cache-biblioteket også flytte alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cachelagrede billeder til systemets temprary-bibliotek. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecache samt en oprydning af alle slettede sider. På de fleste systemer renses den midlertidige mappe automatisk fra tid til anden eller ved genstart. På nogle systemer skal kataloget imidlertid ryddes manuelt.
+sys_cache_purge_info: I modsætning til simpelthen at rydde cachen vil rensning af cache-biblioteket også flytte alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cachelagrede billeder til systemets temprary-bibliotek. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecache samt oprydning af alle slettede sider. På de fleste systemer renses den midlertidige mappe automatisk fra tid til anden eller ved genstart. På nogle systemer skal kataloget imidlertid ryddes manuelt.
 
 -
 
-sys_debug_info: Når fejlretning er aktiveret, vil alle Automads processer blive logget på din browsers konsol. Fejlfinding er kun nødvendigt til udvikling eller fejlfinding og bør deaktiveres i alle andre tilfælde.
+sys_config: Rediger konfigurationsfil
 
 -
 
-sys_headless_edit_info: Strukturen af de returnerede JSON-data styres af en skabelon. Du kan redigere denne skabelon ved hjælp af Automads indbyggede skabelonsprog til at tilpasse felter ved hjælp af variabler, objekter og kontrolstrukturer.
+sys_config_warning: Bemærk, at kun erfarne brugere skal redigere konfigurationsfilen for at undgå beskadigelse af din installation. Hvis noget går galt, skal du slette konfigurationsfilen manuelt fra din server for at gendanne standardindstillingerne.
+
+-
+
+sys_debug_info: Når fejlretning er aktiveret, vil alle Automads processer blive logget på din browsers konsol. Fejlfinding er kun nødvendig til udvikling eller fejlfinding og bør deaktiveres i alle andre tilfælde.
+
+-
+
+sys_headless_edit_info: Strukturen for de returnerede JSON-data styres af en skabelon. Du kan redigere denne skabelon ved hjælp af Automads indbyggede skabelonsprog til at tilpasse felter ved hjælp af variabler, objekter og kontrolstrukturer.
 
 -
 

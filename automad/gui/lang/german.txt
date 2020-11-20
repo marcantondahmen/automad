@@ -1,3 +1,7 @@
+btn_about: Über Automad
+
+-
+
 btn_add: Hinzufügen
 
 -
@@ -102,7 +106,7 @@ btn_log_out: Ausloggen
 
 -
 
-btn_login: Einloggen
+btn_login: Anmeldung
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Protokoll öffnen
+
+-
+
+btn_open_website: Website öffnen
+
+-
+
+btn_page_private: Seite privat halten
 
 -
 
@@ -242,6 +254,10 @@ error_import: Der Dateiimport ist fehlgeschlagen!
 
 -
 
+error_json: Ungültiger JSON! Der Inhalt der Konfigurationsdatei ist nicht korrekt formatiert.
+
+-
+
 error_packages: Pakete von Packagist konnten nicht geladen werden!
 
 -
@@ -278,7 +294,7 @@ error_template_missing: Vorlage fehlt
 
 -
 
-error_update_connection: Es kann keine Verbindung zum Update-Server hergestellt werden! Dies kann normalerweise durch eine falsche Update-Konfiguration (config.json), einen SSL-Zertifikatfehler oder eine fehlende cURL-Bibliothek verursacht werden.
+error_update_connection: Es kann keine Verbindung zum Update-Server hergestellt werden! Dies kann normalerweise durch eine falsche Update-Konfiguration (config / config.php), einen SSL-Zertifikatfehler oder eine fehlende cURL-Bibliothek verursacht werden.
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privat
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -594,11 +614,19 @@ sys_cache_purge_info: Im Gegensatz zum einfachen Löschen des Caches werden beim
 
 -
 
+sys_config: Konfigurationsdatei bearbeiten
+
+-
+
+sys_config_warning: Beachten Sie, dass nur erfahrene Benutzer die Konfigurationsdatei bearbeiten sollten, um Schäden an Ihrer Installation zu vermeiden. Falls etwas schief geht, löschen Sie die Konfigurationsdatei bitte manuell von Ihrem Server, um die Standardeinstellungen wiederherzustellen.
+
+-
+
 sys_debug_info: Wenn das Debuggen aktiviert ist, werden alle Prozesse von Automad in der Konsole Ihres Browsers protokolliert. Das Debuggen ist nur für die Entwicklung oder Fehlerbehebung erforderlich und sollte in allen anderen Fällen deaktiviert werden.
 
 -
 
-sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mithilfe der in Automad integrierten Vorlagensprache zum Anpassen von Feldern mithilfe von Variablen, Objekten und Steuerungsstrukturen bearbeiten.
+sys_headless_edit_info: Die Struktur der zurückgegebenen JSON-Daten wird von einer Vorlage gesteuert. Sie können diese Vorlage mit der in Automad integrierten Vorlagensprache zum Anpassen von Feldern mithilfe von Variablen, Objekten und Kontrollstrukturen bearbeiten.
 
 -
 
@@ -690,7 +718,7 @@ sys_user_change_password_new: Neues Kennwort
 
 -
 
-sys_user_change_password_repeat: Passwort wiederholen
+sys_user_change_password_repeat: Wiederhole das Passwort
 
 -
 
@@ -706,7 +734,7 @@ sys_user_add_password: Passwort
 
 -
 
-sys_user_add_repeat: Passwort wiederholen
+sys_user_add_repeat: Wiederhole das Passwort
 
 -
 

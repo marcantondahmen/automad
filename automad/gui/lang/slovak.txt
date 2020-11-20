@@ -1,3 +1,7 @@
+btn_about: O spoločnosti Automad
+
+-
+
 btn_add: Pridať
 
 -
@@ -126,6 +130,14 @@ btn_open_log: Otvorte denník
 
 -
 
+btn_open_website: Otvorený web
+
+-
+
+btn_page_private: Ponechať stránku súkromnú
+
+-
+
 btn_readme: Readme
 
 -
@@ -242,11 +254,15 @@ error_import: Import súboru zlyhal!
 
 -
 
+error_json: Neplatný JSON! Obsah konfiguračného súboru nie je správne naformátovaný.
+
+-
+
 error_packages: Nepodarilo sa načítať balíčky z Packagistu!
 
 -
 
-error_composer_memory: Váš server nemá dostatok pamäte na inštaláciu, aktualizáciu alebo odstránenie balíkov! Ak prevádzkujete tento web na zdieľanom hostiteľskom serveri s obmedzeným počtom pamäte, pokúste sa inovovať svoj plán alebo nainštalovať web na lokálnom počítači bez obmedzenia pamäte.
+error_composer_memory: Váš server nemá dostatok pamäte na inštaláciu, aktualizáciu alebo odstránenie balíkov! Ak prevádzkujete tento web na zdieľanom hostiteľskom serveri s obmedzeným počtom pamäte, skúste aktualizovať svoj plán alebo nainštalovať web na lokálnom počítači bez obmedzenia pamäte.
 
 -
 
@@ -278,7 +294,7 @@ error_template_missing: Chýba šablóna
 
 -
 
-error_update_connection: Nemôžem sa pripojiť k aktualizačnému serveru! Môže to byť zvyčajne spôsobené nesprávnou konfiguráciou aktualizácie (config.json), chybou certifikátu SSL alebo chýbajúcou knižnicou cURL.
+error_update_connection: Nemôžem sa pripojiť k aktualizačnému serveru! Môže to byť zvyčajne spôsobené nesprávnou konfiguráciou aktualizácie (config / config.php), chybou certifikátu SSL alebo chýbajúcou knižnicou cURL.
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Súkromné
+
+-
+
 sidebar_header_global: Globálne
 
 -
@@ -558,7 +578,7 @@ success_package_updated: Úspešne aktualizované
 
 -
 
-sys_cache_info: Ukladanie do medzipamäte je nevyhnutné na urýchlenie vášho webu a malo by byť všeobecne povolené. Za určitých okolností však možno budete chcieť vypnúť alebo vyčistiť cache.
+sys_cache_info: Ukladanie do medzipamäte je nevyhnutné na urýchlenie vášho webu a malo by sa všeobecne povoliť. Za určitých okolností však možno budete chcieť vypnúť alebo vyčistiť cache.
 
 -
 
@@ -566,7 +586,7 @@ sys_cache_clear: Vymazať vyrovnávaciu pamäť
 
 -
 
-sys_cache_clear_info: Vymazanie medzipamäte stránok vynúti opätovné skenovanie aktualizovaných stránok a súborov. Táto akcia neodstráni žiadne súbory stránok ani obrázky z adresára cache.
+sys_cache_clear_info: Vymazanie medzipamäte stránok vynúti opätovné skenovanie aktualizovaných stránok a súborov. Táto akcia neodstráni žiadne súbory stránok ani obrázky z adresára medzipamäte.
 
 -
 
@@ -590,7 +610,15 @@ sys_cache_purge: Vymazať adresár medzipamäte
 
 -
 
-sys_cache_purge_info: Na rozdiel od jednoduchého vyčistenia pamäte cache, vyčistenie adresára pamäte cache tiež presunie všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do dočasného adresára systému. Toto vynúti úplné opätovné vytvorenie medzipamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Vo väčšine systémov bude dočasný adresár občas vyčistený automaticky alebo po reštarte. V niektorých systémoch však musí byť tento adresár vymazaný manuálne.
+sys_cache_purge_info: Na rozdiel od jednoduchého vyčistenia medzipamäte, vyčistenie adresára medzipamäte tiež presunie všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do dočasného adresára systému. Toto vynúti úplné opätovné vytvorenie medzipamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Vo väčšine systémov bude dočasný adresár občas vyčistený automaticky alebo po reštarte. V niektorých systémoch však musí byť tento adresár vymazaný manuálne.
+
+-
+
+sys_config: Upravte konfiguračný súbor
+
+-
+
+sys_config_warning: Upozorňujeme, že konfiguračný súbor by mali upravovať iba skúsení používatelia, aby nedošlo k poškodeniu vašej inštalácie. V prípade, že sa niečo pokazí, vymažte konfiguračný súbor ručne zo servera, aby ste obnovili pôvodné nastavenia.
 
 -
 
@@ -602,7 +630,7 @@ sys_headless_edit_info: Štruktúra vrátených údajov JSON je riadená šabló
 
 -
 
-sys_headless_info: Aktivácia bezhlavého režimu urobí z Automadu systém na správu obsahu zameraný výlučne na tvorbu obsahu bez prezentačnej vrstvy. Aj keď sa Dashboard dá stále používať na správu obsahu, všetky dáta a súbory sú prístupné cez JSON API iba na čítanie.
+sys_headless_info: Aktivácia bezhlavého režimu urobí z Automadu systém na správu obsahu zameraný výlučne na tvorbu obsahu bez prezentačnej vrstvy. Aj keď sa Dashboard dá stále používať na správu obsahu, všetky údaje a súbory sú prístupné prostredníctvom rozhrania JSON API iba na čítanie.
 
 -
 
@@ -658,7 +686,7 @@ sys_update_not_required: Automad je aktuálny.
 
 -
 
-sys_update_progress: Pri aktualizácii čakajte a nezatvárajte okno ...
+sys_update_progress: Pri aktualizácii prosím čakajte a nezatvárajte okno ...
 
 -
 

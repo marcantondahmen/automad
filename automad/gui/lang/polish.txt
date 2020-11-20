@@ -1,3 +1,7 @@
+btn_about: O firmie Automad
+
+-
+
 btn_add: Dodaj
 
 -
@@ -38,7 +42,7 @@ btn_delete_page: Usuń stronę
 
 -
 
-btn_download_file: Ściągnij
+btn_download_file: Pobieranie
 
 -
 
@@ -110,7 +114,7 @@ btn_manage_users: Zarządzaj użytkownikami
 
 -
 
-btn_more: Więcej
+btn_more: Jeszcze
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Otwórz dziennik
+
+-
+
+btn_open_website: Otwórz witrynę
+
+-
+
+btn_page_private: Zachowaj prywatność strony
 
 -
 
@@ -242,11 +254,15 @@ error_import: Import pliku nie powiódł się!
 
 -
 
+error_json: Nieprawidłowy JSON! Zawartość pliku konfiguracyjnego nie jest poprawnie sformatowana.
+
+-
+
 error_packages: Nie można załadować pakietów z Packagist!
 
 -
 
-error_composer_memory: Twój serwer nie ma wystarczającej ilości pamięci, aby zainstalować, zaktualizować lub usunąć pakiety! W przypadku korzystania z tej witryny w usłudze hostingu współdzielonego z ograniczoną ilością pamięci, spróbuj zaktualizować swój plan lub zainstalować witrynę na komputerze lokalnym bez ograniczeń pamięci.
+error_composer_memory: Twój serwer nie ma wystarczającej ilości pamięci, aby zainstalować, zaktualizować lub usunąć pakiety! Jeśli korzystasz z tej witryny w usłudze hostingu współdzielonego z ograniczoną ilością pamięci, spróbuj zaktualizować swój plan lub zainstalować witrynę na komputerze lokalnym bez ograniczeń pamięci.
 
 -
 
@@ -278,7 +294,7 @@ error_template_missing: Brak szablonu
 
 -
 
-error_update_connection: Nie można połączyć się z serwerem aktualizacji! Zwykle może to być spowodowane nieprawidłową konfiguracją aktualizacji (config.json), błędem certyfikatu SSL lub brakiem biblioteki cURL.
+error_update_connection: Nie można połączyć się z serwerem aktualizacji! Zwykle może to być spowodowane nieprawidłową konfiguracją aktualizacji (config / config.php), błędem certyfikatu SSL lub brakiem biblioteki cURL.
 
 -
 
@@ -290,7 +306,7 @@ error_update_items: Nieprawidłowa lista elementów do aktualizacji!
 
 -
 
-error_update_failed: Aktualizacja nieudana! Przywróć instalację z kopii zapasowej.
+error_update_failed: Aktualizacja nie powiodła się! Przywróć instalację z kopii zapasowej.
 
 -
 
@@ -454,6 +470,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Prywatny
+
+-
+
 sidebar_header_global: Światowy
 
 -
@@ -558,7 +578,7 @@ success_package_updated: Zaktualizowano pomyślnie
 
 -
 
-sys_cache_info: Buforowanie jest niezbędne, aby przyspieszyć działanie witryny i powinno być ogólnie włączone. Jednak w pewnych okolicznościach możesz chcieć wyłączyć lub wyczyścić pamięć podręczną.
+sys_cache_info: Buforowanie jest niezbędne do przyspieszenia witryny i powinno być ogólnie włączone. Jednak w pewnych okolicznościach możesz chcieć wyłączyć lub wyczyścić pamięć podręczną.
 
 -
 
@@ -590,7 +610,15 @@ sys_cache_purge: Wyczyść katalog pamięci podręcznej
 
 -
 
-sys_cache_purge_info: W przeciwieństwie do zwykłego czyszczenia pamięci podręcznej, wyczyszczenie katalogu pamięci podręcznej spowoduje również przeniesienie wszystkich plików tymczasowych, usuniętych stron, kopii zapasowych aktualizacji i obrazów w pamięci podręcznej do tymczasowego katalogu systemu. Wymusi to pełną przebudowę obrazu i pamięci podręcznej strony, a także wyczyszczenie wszystkich usuniętych stron. W większości systemów katalog tymczasowy będzie czyszczony automatycznie od czasu do czasu lub po ponownym uruchomieniu. Jednak w niektórych systemach ten katalog należy wyczyścić ręcznie.
+sys_cache_purge_info: W przeciwieństwie do zwykłego czyszczenia pamięci podręcznej, wyczyszczenie katalogu pamięci podręcznej spowoduje również przeniesienie wszystkich plików tymczasowych, usuniętych stron, kopii zapasowych aktualizacji i obrazów w pamięci podręcznej do tymczasowego katalogu systemu. Wymusi to pełną przebudowę obrazu i pamięci podręcznej stron, a także wyczyszczenie wszystkich usuniętych stron. W większości systemów katalog tymczasowy będzie czyszczony automatycznie od czasu do czasu lub po ponownym uruchomieniu. Jednak w niektórych systemach ten katalog należy wyczyścić ręcznie.
+
+-
+
+sys_config: Edytuj plik konfiguracyjny
+
+-
+
+sys_config_warning: Należy pamiętać, że tylko doświadczeni użytkownicy powinni edytować plik konfiguracyjny, aby uniknąć uszkodzenia instalacji. Jeśli coś pójdzie nie tak, usuń ręcznie plik konfiguracyjny z serwera, aby przywrócić ustawienia domyślne.
 
 -
 
@@ -602,7 +630,7 @@ sys_headless_edit_info: Struktura zwracanych danych JSON jest kontrolowana przez
 
 -
 
-sys_headless_info: Aktywacja trybu bezgłowego zmienia Automad w system zarządzania treścią, skupiający się całkowicie na tworzeniu treści bez warstwy prezentacji. Chociaż Pulpit nawigacyjny nadal może być używany do zarządzania treścią, wszystkie dane i pliki są dostępne za pośrednictwem interfejsu API JSON tylko do odczytu.
+sys_headless_info: Aktywacja trybu bezgłowego zamienia Automad w system zarządzania treścią skupiający się całkowicie na tworzeniu treści bez warstwy prezentacji. Chociaż Pulpit nawigacyjny nadal może być używany do zarządzania treścią, wszystkie dane i pliki są dostępne za pośrednictwem interfejsu API JSON tylko do odczytu.
 
 -
 
@@ -610,7 +638,7 @@ sys_language: Język
 
 -
 
-sys_language_info: Pulpit nawigacyjny jest dostępny w kilku językach. Tłumaczenia są tworzone automatycznie. Ta funkcja jest nadal w fazie eksperymentalnej, dlatego niektóre tłumaczenia mogą nie być dokładne.
+sys_language_info: Pulpit nawigacyjny jest dostępny w kilku językach. Tłumaczenia są tworzone automatycznie. Ta funkcja jest wciąż w fazie eksperymentalnej, dlatego niektóre tłumaczenia mogą być niedokładne.
 
 -
 
@@ -650,7 +678,7 @@ sys_update_current_version: Twoja aktualnie zainstalowana wersja to
 
 -
 
-sys_update_items: Zauważ, że aktualizacja ma wpływ na następujące pliki i katalogi:
+sys_update_items: Pamiętaj, że aktualizacja ma wpływ na następujące pliki i katalogi:
 
 -
 
@@ -666,7 +694,7 @@ sys_update_to: Zaktualizuj do wersji
 
 -
 
-sys_update_windows_warning: Przed uruchomieniem aktualizacji upewnij się, że wszystkie pliki instalacji są zamknięte w programach zewnętrznych, aby uniknąć problemów z uprawnieniami!
+sys_update_windows_warning: Upewnij się, że wszystkie pliki instalacji są zamknięte w programach zewnętrznych przed uruchomieniem aktualizacji, aby uniknąć problemów z uprawnieniami!
 
 -
 
