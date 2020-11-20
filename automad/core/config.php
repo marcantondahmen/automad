@@ -51,7 +51,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class Config {
 	
+
+	/**
+	 *	The legacy .json file.
+	 */
+
+	private static $legacy = AM_BASE_DIR . '/config/config.json';
 	
+
 	/**
 	 *	Read configuration overrides as JSON string form PHP or JSON file 
 	 *	and decode the returned string. Note that now the configuration is stored in 
@@ -64,13 +71,12 @@ class Config {
 		
 		$json = false;
 		$config = array();
-		$legacy = AM_BASE_DIR . '/config/config.json';
 
 		if (is_readable(AM_CONFIG)) {
 			$json = require AM_CONFIG;
-		} else if (is_readable($legacy)) {
+		} else if (is_readable(self::$legacy)) {
 			// Support legacy configuration files.
-			$json = file_get_contents($legacy);
+			$json = file_get_contents(self::$legacy);
 		}
 
 		if ($json) {
@@ -93,8 +99,13 @@ class Config {
 
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 		$content = "<?php return <<< JSON\r\n$json\r\nJSON;";
+		$success = FileSystem::write(AM_CONFIG, $content);
 
-		return FileSystem::write(AM_CONFIG, $content);
+		if ($success && is_writable(self::$legacy)) {
+			@unlink(self::$legacy);
+		}
+
+		return $success;
 
 	}
 

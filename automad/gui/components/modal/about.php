@@ -86,8 +86,7 @@ class About {
 							target="_blank"
 							>
 								$Text->btn_open_website
-							</a>
-							<a 
+							</a><a 
 							href="https://automad.org/release-notes" 
 							class="uk-button uk-button-mini"
 							target="_blank"

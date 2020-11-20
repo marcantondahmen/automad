@@ -330,7 +330,7 @@ error_template_missing: Template missing
 
 -
 
-error_update_connection: Can't connect to the update server! This could typically be caused by a wrong update configuration (config.json), a SSL certificate error or a missing cURL library.
+error_update_connection: Can't connect to the update server! This could typically be caused by a wrong update configuration (config/config.php), a SSL certificate error or a missing cURL library.
 
 -
 
