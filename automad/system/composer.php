@@ -82,13 +82,6 @@ class Composer {
 	private $autoloader = '/vendor/autoload.php';
 
 
-	/**	
-	 *	The Composer memory limit error message text.
-	 */
-
-	private $memoryErrorMessage = false;
-
-
 	/**
 	 * 	The download URL for the composer.phar file.
 	 */
@@ -324,7 +317,6 @@ class Composer {
 		// This memory is cleared on error (case of allowed memory exhausted)
 		// to use that memory to run the shutdown function.
     	$this->reservedShutdownMemory = str_repeat('*', 1024 * 1024);
-		$this->memoryErrorMessage = GUI\Text::get('error_composer_memory');
 				
 		register_shutdown_function(function(){
 
@@ -333,7 +325,7 @@ class Composer {
 			$error = error_get_last();
 
 			if (is_array($error) && !empty($error['type']) && $error['type'] === 1) {
-				exit('{"error": "' . $this->memoryErrorMessage . '", "trigger": "composerDone"}');
+				exit('{"error": "' . $error['message'] . '", "trigger": "composerDone"}');
 			}
 
 		});
