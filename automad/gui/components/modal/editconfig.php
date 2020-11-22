@@ -87,9 +87,9 @@ class EditConfig {
 								</button>
 							</div>
 						</div>
-						<div class="uk-alert" data-icon="&#xf071">
+						<p class="uk-margin-top uk-margin-bottom">
 							$Text->sys_config_warning
-						</div>
+						</p>
 						<form 
 						class="uk-form" 
 						data-am-handler="save_config_file"
