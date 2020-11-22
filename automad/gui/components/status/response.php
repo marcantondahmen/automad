@@ -132,7 +132,21 @@ HTML;
 			}
 			
 		}
-		
+
+
+		if ($item == 'update_badge') {
+			
+			$updateVersion = System\Update::getVersion();
+			
+			if (version_compare(AM_VERSION, $updateVersion, '<')) {
+				$output['status'] = '<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i></span>';
+			} else {
+				$output['status'] = '';
+			}
+			
+		}
+
+
 		if ($item == 'users') {
 					
 			$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' . 
