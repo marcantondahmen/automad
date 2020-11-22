@@ -262,10 +262,6 @@ error_packages: Packagistist ei saanud pakette laadida!
 
 -
 
-error_composer_memory: Teie serveris pole piisavalt mälu pakettide installimiseks, värskendamiseks või eemaldamiseks! Kui kasutate seda saiti piiratud mälumahuga jagatud hostimise teenuses, proovige oma plaani uuendada või installida oma sait kohalikku arvutisse ilma mälupiiranguteta.
-
--
-
 error_page_not_found: Lehte ei leitud!
 
 -

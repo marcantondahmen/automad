@@ -262,10 +262,6 @@ error_packages: Nije moguće učitati pakete iz Packagista!
 
 -
 
-error_composer_memory: Vaš poslužitelj nema dovoljno memorije za instaliranje, ažuriranje ili uklanjanje paketa! U slučaju da ovu web lokaciju koristite na usluzi zajedničkog hostinga s ograničenom količinom memorije, pokušajte nadograditi svoj plan ili instalirati web lokaciju na lokalnom računaru bez ograničenja memorije.
-
--
-
 error_page_not_found: Stranica nije pronađena!
 
 -

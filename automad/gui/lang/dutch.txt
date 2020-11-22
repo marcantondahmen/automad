@@ -262,10 +262,6 @@ error_packages: Kan pakketten niet laden vanuit Packagist!
 
 -
 
-error_composer_memory: Uw server heeft niet genoeg geheugen om pakketten te installeren, bij te werken of te verwijderen! Als u deze site op een shared-hostingservice met een beperkte hoeveelheid geheugen gebruikt, probeer dan uw plan te upgraden of installeer uw site op een lokale computer zonder geheugenbeperkingen.
-
--
-
 error_page_not_found: Pagina niet gevonden!
 
 -

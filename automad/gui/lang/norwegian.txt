@@ -262,10 +262,6 @@ error_packages: Kunne ikke laste pakker fra Packagist!
 
 -
 
-error_composer_memory: Serveren din har ikke nok minne til å installere, oppdatere eller fjerne pakker! Hvis du kjører dette nettstedet på en delt hostingtjeneste med en begrenset mengde minne, kan du prøve å oppgradere planen din eller installere nettstedet på en lokal datamaskin uten minnebegrensninger.
-
--
-
 error_page_not_found: Side ikke funnet!
 
 -

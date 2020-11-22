@@ -262,10 +262,6 @@ error_packages: Pakettien lataaminen Packagistista epäonnistui!
 
 -
 
-error_composer_memory: Palvelimellasi ei ole tarpeeksi muistia pakettien asentamiseen, päivittämiseen tai poistamiseen! Jos käytät tätä sivustoa jaetussa hosting-palvelussa, jossa on rajoitettu määrä muistia, yritä päivittää suunnitelma tai asentaa sivustosi paikalliseen tietokoneeseen ilman muistirajoituksia.
-
--
-
 error_page_not_found: Sivua ei löydetty!
 
 -

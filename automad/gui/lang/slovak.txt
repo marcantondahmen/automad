@@ -262,10 +262,6 @@ error_packages: Nepodarilo sa načítať balíčky z Packagistu!
 
 -
 
-error_composer_memory: Váš server nemá dostatok pamäte na inštaláciu, aktualizáciu alebo odstránenie balíkov! Ak prevádzkujete tento web na zdieľanom hostiteľskom serveri s obmedzeným počtom pamäte, skúste aktualizovať svoj plán alebo nainštalovať web na lokálnom počítači bez obmedzenia pamäte.
-
--
-
 error_page_not_found: Stránka nenájdená!
 
 -

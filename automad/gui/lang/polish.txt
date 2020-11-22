@@ -262,10 +262,6 @@ error_packages: Nie można załadować pakietów z Packagist!
 
 -
 
-error_composer_memory: Twój serwer nie ma wystarczającej ilości pamięci, aby zainstalować, zaktualizować lub usunąć pakiety! Jeśli korzystasz z tej witryny w usłudze hostingu współdzielonego z ograniczoną ilością pamięci, spróbuj zaktualizować swój plan lub zainstalować witrynę na komputerze lokalnym bez ograniczeń pamięci.
-
--
-
 error_page_not_found: Strona nie znaleziona!
 
 -

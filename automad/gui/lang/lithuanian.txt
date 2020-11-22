@@ -262,10 +262,6 @@ error_packages: Nepavyko įkelti pakuočių iš „Packagist“!
 
 -
 
-error_composer_memory: Jūsų serveryje nėra pakankamai atminties paketams įdiegti, atnaujinti ar pašalinti! Jei naudojate šią svetainę bendro prieglobos paslauga, turinti ribotą atminties kiekį, pabandykite atnaujinti planą arba įdiekite savo svetainę vietiniame kompiuteryje be apribojimų atmintyje.
-
--
-
 error_page_not_found: Puslapis nerastas!
 
 -
@@ -658,7 +654,7 @@ sys_status_update_available: Atnaujinti į
 
 -
 
-sys_status_update_not_available: �Automad“ yra naujausia
+sys_status_update_not_available: �Automad“ yra naujausia
 
 -
 
@@ -682,7 +678,7 @@ sys_update_items: Atminkite, kad naujinimas paveikė šiuos failus ir katalogus:
 
 -
 
-sys_update_not_required: �Automad“ yra naujausia.
+sys_update_not_required: �Automad“ yra naujausia.
 
 -
 

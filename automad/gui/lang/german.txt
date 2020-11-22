@@ -262,10 +262,6 @@ error_packages: Pakete von Packagist konnten nicht geladen werden!
 
 -
 
-error_composer_memory: Ihr Server verfügt nicht über genügend Speicher, um Pakete zu installieren, zu aktualisieren oder zu entfernen! Wenn Sie diese Site auf einem Shared-Hosting-Dienst mit einer begrenzten Speichermenge ausführen, versuchen Sie bitte, Ihren Plan zu aktualisieren oder Ihre Site ohne Speicherbeschränkungen auf einem lokalen Computer zu installieren.
-
--
-
 error_page_not_found: Seite nicht gefunden!
 
 -

@@ -262,10 +262,6 @@ error_packages: Impossible de charger les packages depuis Packagist!
 
 -
 
-error_composer_memory: Votre serveur n'a pas assez de mémoire pour installer, mettre à jour ou supprimer des packages! Si vous exécutez ce site sur un service d'hébergement partagé avec une quantité limitée de mémoire, essayez de mettre à niveau votre plan ou d'installer votre site sur un ordinateur local sans restrictions de mémoire.
-
--
-
 error_page_not_found: Page non trouvée!
 
 -

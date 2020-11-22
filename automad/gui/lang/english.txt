@@ -298,10 +298,6 @@ error_packages: Could not load packages from Packagist!
 
 -
 
-error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared-hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
-
--
-
 error_page_not_found: Page Not Found!
 
 -

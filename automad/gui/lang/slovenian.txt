@@ -262,10 +262,6 @@ error_packages: Paketov iz Packagist ni bilo mogoče naložiti!
 
 -
 
-error_composer_memory: Vaš strežnik nima dovolj pomnilnika za namestitev, posodobitev ali odstranjevanje paketov! Če uporabljate to spletno mesto v storitvi deljenega gostovanja z omejeno količino pomnilnika, poskusite nadgraditi svoj načrt ali namestiti spletno mesto v lokalni računalnik brez omejitev pomnilnika.
-
--
-
 error_page_not_found: Stran ni najdena!
 
 -

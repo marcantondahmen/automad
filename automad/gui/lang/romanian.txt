@@ -262,10 +262,6 @@ error_packages: Nu s-au putut încărca pachetele de la Packagist!
 
 -
 
-error_composer_memory: Serverul dvs. nu are suficientă memorie pentru a instala, actualiza sau elimina pachete! În cazul în care rulați acest site pe un serviciu de găzduire partajată cu o cantitate limitată de memorie, vă rugăm să încercați să actualizați planul sau să instalați site-ul pe un computer local fără restricții de memorie.
-
--
-
 error_page_not_found: Pagina nu a fost gasita!
 
 -

@@ -262,10 +262,6 @@ error_packages: Kunne ikke indlæse pakker fra Packagist!
 
 -
 
-error_composer_memory: Din server har ikke nok hukommelse til at installere, opdatere eller fjerne pakker! Hvis du kører dette websted på en delt hostingtjeneste med en begrænset mængde hukommelse, skal du prøve at opgradere din plan eller installere dit websted på en lokal computer uden hukommelsesbegrænsninger.
-
--
-
 error_page_not_found: Siden blev ikke fundet!
 
 -

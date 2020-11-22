@@ -262,10 +262,6 @@ error_packages: Nelze načíst balíčky z Packagist!
 
 -
 
-error_composer_memory: Váš server nemá dostatek paměti pro instalaci, aktualizaci nebo odebrání balíčků! V případě, že provozujete tento web ve službě sdíleného hostování s omezeným množstvím paměti, zkuste upgradovat svůj plán nebo nainstalovat web do místního počítače bez omezení paměti.
-
--
-
 error_page_not_found: Stránka nenalezena!
 
 -

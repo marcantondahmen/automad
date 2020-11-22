@@ -262,10 +262,6 @@ error_packages: Gat ekki hlaðið pakka frá Packagist!
 
 -
 
-error_composer_memory: Netþjóninn þinn hefur ekki nóg minni til að setja upp, uppfæra eða fjarlægja pakka! Ef þú ert að keyra þessa síðu í samnýttri hýsingarþjónustu með takmarkað magn af minni skaltu reyna að uppfæra áætlunina þína eða setja síðuna þína upp á staðbundinni tölvu án takmarkana á minni.
-
--
-
 error_page_not_found: Síða ekki fundin!
 
 -

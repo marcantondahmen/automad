@@ -262,10 +262,6 @@ error_packages: Níorbh fhéidir pacáistí a luchtú ó Packagist!
 
 -
 
-error_composer_memory: Níl cuimhne leordhóthanach ag do fhreastalaí chun pacáistí a shuiteáil, a nuashonrú nó a bhaint! Sa chás go bhfuil tú ag rith an láithreáin seo ar sheirbhís óstála roinnte le méid teoranta cuimhne, déan iarracht do phlean a uasghrádú nó do shuíomh a shuiteáil ar ríomhaire áitiúil gan srianta cuimhne.
-
--
-
 error_page_not_found: Ní bhfuarthas an leathanach!
 
 -

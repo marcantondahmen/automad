@@ -262,10 +262,6 @@ error_packages: Nevarēja ielādēt pakas no Packagist!
 
 -
 
-error_composer_memory: Jūsu serverim nav pietiekami daudz atmiņas, lai instalētu, atjauninātu vai noņemtu paketes! Ja šo vietni izmantojat koplietošanas mitināšanas pakalpojumā ar ierobežotu atmiņas daudzumu, lūdzu, mēģiniet jaunināt plānu vai instalēt vietni vietējā datorā bez atmiņas ierobežojumiem.
-
--
-
 error_page_not_found: Lapa nav atrasta!
 
 -
