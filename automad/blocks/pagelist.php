@@ -72,6 +72,7 @@ class Pagelist {
 			'matchUrl' => '',
 			'filter' => '',
 			'template' => '',
+			'excludeCurrent' => true,
 			'limit' => NULL,
 			'offset' => 0,
 			'sortKey' => ':path',
