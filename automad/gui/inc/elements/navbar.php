@@ -122,13 +122,13 @@ if (User::get()) {
 								</li>
 								<li>
 									<a href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_user'), true); ?>">
-										<i class="uk-icon-users uk-icon-justify"></i>&nbsp;
+										<i class="uk-icon-user uk-icon-justify"></i>&nbsp;
 										<?php Text::e('btn_manage_users'); ?>
 									</a>
 								</li>
 								<li>
 									<a href="#am-about-modal" data-uk-modal>
-										<i class="uk-icon-info-circle uk-icon-justify"></i>&nbsp;
+										<i class="uk-icon-lightbulb-o uk-icon-justify"></i>&nbsp;
 										<?php Text::e('btn_about'); ?>
 									</a>
 								</li>

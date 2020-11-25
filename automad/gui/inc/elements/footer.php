@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		<?php if (User::get()) { ?>
 
 			<!-- Footer -->
-			<div class="am-footer uk-position-bottom uk-text-center">
+			<div class="am-footer uk-position-bottom">
 				<a 
 				href="#am-about-modal" 
 				class="uk-button uk-button-mini uk-text-muted" 
