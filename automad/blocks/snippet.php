@@ -101,7 +101,9 @@ class Snippet {
 
 		}
 
-		Core\Blocks::$extensionAssets = array_merge_recursive(Core\Blocks::$extensionAssets, $View->extensionAssets);
+		$View->mergeExtensionAssets(Core\Blocks::$extensionAssets);
+		Core\Blocks::$extensionAssets = $View->extensionAssets;
+		
 		self::$snippetIsRendering = false;
 
 		return $output;

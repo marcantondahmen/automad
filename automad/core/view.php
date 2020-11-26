@@ -214,7 +214,7 @@ class View {
 	 *	@param array $assets (Array containing two sub-arrays: $assets['.css'] and $assets['.js'])
 	 */
 
-	private function mergeExtensionAssets($assets) {
+	public function mergeExtensionAssets($assets) {
 		
 		// Make sure, $this->extensionAssets has a basic structure to enable merging new assets.
 		$this->extensionAssets = array_merge(array('.css' => array(), '.js' => array()), $this->extensionAssets);
