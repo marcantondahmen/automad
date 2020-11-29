@@ -95,7 +95,7 @@ class PackageManager {
 
 		// For now only get theme packages and therefore set the tags 
 		// parameter to 'theme'.
-		$packages = System\Packagist::getPackages('automad-package', 'theme');
+		$packages = System\Packagist::getPackages('automad-package');
 		$installed = array();
 		$available = array();
 		$installedPackages = self::getInstalled();
