@@ -51,21 +51,75 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class Config {
 	
-	
+
 	/**
-	 * 	Read configuration overrides form JSON file and set constants accordingly.
-	 *
-	 *	@param string $file
+	 *	The legacy .json file.
+	 */
+
+	private static $legacy = AM_BASE_DIR . '/config/config.json';
+	
+
+	/**
+	 *	Read configuration overrides as JSON string form PHP or JSON file 
+	 *	and decode the returned string. Note that now the configuration is stored in 
+	 *	PHP files instead of JSON files to make it less easy to access from outside.
+	 *	
+	 *	@return array The configuration array
 	 */
 	 
-	public static function json($file) {
+	public static function read() {
 		
-		if (file_exists($file)) {
-			foreach (json_decode(file_get_contents($file), true) as $name => $value) {
-				define($name, $value);	
-			}
+		$json = false;
+		$config = array();
+
+		if (is_readable(AM_CONFIG)) {
+			$json = require AM_CONFIG;
+		} else if (is_readable(self::$legacy)) {
+			// Support legacy configuration files.
+			$json = file_get_contents(self::$legacy);
+		}
+
+		if ($json) {
+			$config = json_decode($json, true); 
 		}
 		
+		return $config;
+
+	}
+
+
+	/**
+	 *	Write the configuration file.
+	 *	
+	 *	@param array $config 
+	 *	@return boolean True on success
+	 */
+
+	public static function write($config) {
+
+		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+		$content = "<?php return <<< JSON\r\n$json\r\nJSON;";
+		$success = FileSystem::write(AM_CONFIG, $content);
+
+		if ($success && is_writable(self::$legacy)) {
+			@unlink(self::$legacy);
+		}
+
+		return $success;
+
+	}
+
+
+	/**
+	 *	Define constants based on the configuration array.
+	 */
+
+	public static function overrides() {
+
+		foreach (self::read() as $name => $value) {
+			define($name, $value);	
+		}
+
 	}
 	
 	

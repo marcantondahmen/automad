@@ -1,3 +1,7 @@
+btn_about: O Automadu
+
+-
+
 btn_add: Dodati
 
 -
@@ -126,6 +130,14 @@ btn_open_log: Otvorite dnevnik
 
 -
 
+btn_open_website: Otvorite web stranicu
+
+-
+
+btn_page_private: Neka stranica bude privatna
+
+-
+
 btn_readme: Readme
 
 -
@@ -230,7 +242,7 @@ error_no_js: Molimo omogućite JavaScript u svom pregledniku da biste koristili 
 
 -
 
-error_no_theme: Nije odabrana nijedna tema! Odaberite glavnu temu.
+error_no_theme: Nije odabrana nijedna tema! Molimo odaberite glavnu temu.
 
 -
 
@@ -242,11 +254,11 @@ error_import: Uvoz datoteke nije uspio!
 
 -
 
-error_packages: Nije moguće učitati pakete iz Packagista!
+error_json: Nevažeći JSON! Sadržaj konfiguracijske datoteke nije pravilno formatiran.
 
 -
 
-error_composer_memory: Vaš poslužitelj nema dovoljno memorije za instaliranje, ažuriranje ili uklanjanje paketa! U slučaju da ovu web lokaciju koristite na usluzi zajedničkog hostinga s ograničenom količinom memorije, pokušajte nadograditi svoj plan ili instalirati web lokaciju na lokalnom računaru bez ograničenja memorije.
+error_packages: Nije moguće učitati pakete iz Packagista!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Predložak nedostaje
 
 -
 
-error_update_connection: Ne mogu se povezati sa serverom za ažuriranje! To bi obično moglo biti uzrokovano pogrešnom konfiguracijom ažuriranja (config.json), greškom SSL certifikata ili nedostajućom bibliotekom cURL.
+error_update_connection: Ne mogu se povezati sa serverom za ažuriranje! To bi obično moglo biti uzrokovano pogrešnom konfiguracijom ažuriranja (config / config.php), greškom SSL certifikata ili nedostajućom bibliotekom CURL.
 
 -
 
@@ -454,6 +466,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privatno
+
+-
+
 sidebar_header_global: Globalno
 
 -
@@ -470,7 +486,7 @@ shared_theme: Glavna tema
 
 -
 
-shared_theme_apply: Želite li odmah primijeniti odabranu temu i ažurirati listu dostupnih varijabli? Vaše nespremljene promjene bit će spremljene.
+shared_theme_apply: Želite li sada primijeniti odabranu temu i ažurirati listu dostupnih varijabli? Vaše nespremljene promjene bit će spremljene.
 
 -
 
@@ -594,11 +610,19 @@ sys_cache_purge_info: Za razliku od jednostavnog brisanja predmemorije, čišće
 
 -
 
+sys_config: Uredi konfiguracijsku datoteku
+
+-
+
+sys_config_warning: Imajte na umu da bi samo iskusni korisnici trebali uređivati konfiguracijsku datoteku kako bi izbjegli oštećenje vaše instalacije. U slučaju da nešto pođe po zlu, molimo vas da ručno izbrišete konfiguracijsku datoteku sa vašeg servera kako biste vratili zadane postavke.
+
+-
+
 sys_debug_info: Kada je omogućeno otklanjanje pogrešaka, svi Automadovi procesi bit će evidentirani na konzoli vašeg preglednika. Otklanjanje pogrešaka potrebno je samo za razvoj ili rješavanje problema i trebalo bi ga onemogućiti u svim ostalim slučajevima.
 
 -
 
-sys_headless_edit_info: Strukturom vraćenih JSON podataka upravlja šablon. Možete urediti taj predložak pomoću ugrađenog Automadova jezika predloška za prilagođavanje polja korištenjem varijabli, objekata i kontrolnih struktura.
+sys_headless_edit_info: Strukturom vraćenih JSON podataka upravlja šablon. Možete uređivati taj predložak pomoću ugrađenog Automadova jezika predloška za prilagođavanje polja korištenjem varijabli, objekata i kontrolnih struktura.
 
 -
 

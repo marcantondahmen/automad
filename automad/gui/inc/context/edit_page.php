@@ -111,7 +111,7 @@ $this->element('header');
 				);
 			}
 		
-			echo Components\Nav\Switcher::render('#am-page-content', $items, $dropdown);
+			echo Components\Nav\Switcher::render('#am-page-content', $items, $dropdown, $Page->private);
 			
 		?>
 	

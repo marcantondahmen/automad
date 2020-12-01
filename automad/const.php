@@ -44,10 +44,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Set config file.
-define('AM_CONFIG', AM_BASE_DIR . '/config/config.json');
+define('AM_CONFIG', AM_BASE_DIR . '/config/config.php');
 
 // Parse AM_CONFIG to set user overrides for the below defined constants.
-Config::json(AM_CONFIG);
+Config::overrides();
 
 // Define debugging already here to be available when parsing the request.
 Config::set('AM_DEBUG_ENABLED', false);
@@ -171,6 +171,7 @@ Config::set('AM_PARSE_STR_SEPARATOR', ',');
 // Variables used in txt files in /pages or /shared
 Config::set('AM_KEY_DATE', 'date');
 Config::set('AM_KEY_HIDDEN', 'hidden');
+Config::set('AM_KEY_PRIVATE', 'private');
 Config::set('AM_KEY_TAGS', 'tags');
 Config::set('AM_KEY_THEME', 'theme');
 Config::set('AM_KEY_TITLE', 'title');

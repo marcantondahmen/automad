@@ -1,3 +1,7 @@
+btn_about: O podjetju Automad
+
+-
+
 btn_add: Dodaj
 
 -
@@ -126,6 +130,14 @@ btn_open_log: Odprite dnevnik
 
 -
 
+btn_open_website: Odprite spletno mesto
+
+-
+
+btn_page_private: Stran naj bo zasebna
+
+-
+
 btn_readme: Readme
 
 -
@@ -242,11 +254,11 @@ error_import: Uvoz datoteke ni uspel!
 
 -
 
-error_packages: Paketov iz Packagist ni bilo mogoče naložiti!
+error_json: Neveljaven JSON! Vsebina konfiguracijske datoteke ni pravilno oblikovana.
 
 -
 
-error_composer_memory: Vaš strežnik nima dovolj pomnilnika za namestitev, posodobitev ali odstranjevanje paketov! Če uporabljate to spletno mesto v storitvi deljenega gostovanja z omejeno količino pomnilnika, poskusite nadgraditi svoj načrt ali namestiti spletno mesto v lokalni računalnik brez omejitev pomnilnika.
+error_packages: Paketov iz Packagist ni bilo mogoče naložiti!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Manjka predloga
 
 -
 
-error_update_connection: Ne morem se povezati s strežnikom za posodobitve! To lahko običajno povzroči napačna konfiguracija posodobitve (config.json), napaka potrdila SSL ali manjkajoča knjižnica cURL.
+error_update_connection: Ne morem se povezati s strežnikom za posodobitve! To lahko običajno povzroči napačna konfiguracija posodobitve (config / config.php), napaka potrdila SSL ali manjkajoča knjižnica CURL.
 
 -
 
@@ -342,11 +354,11 @@ images_page: Slike strani
 
 -
 
-images_shared: Splošne podobe
+images_shared: Splošne slike
 
 -
 
-link_placeholder: Začnite tipkati naslov strani ali tukaj prilepite zunanjo povezavo
+link_placeholder: Začnite vnašati naslov strani ali sem prilepite zunanjo povezavo
 
 -
 
@@ -451,6 +463,10 @@ page_vars_unused: Neuporabljene spremenljivke
 -
 
 page_visibility: Visibility
+
+-
+
+page_private: Zasebno
 
 -
 
@@ -562,11 +578,11 @@ sys_cache_info: Predpomnjenje je bistvenega pomena za pospešitev vaše strani i
 
 -
 
-sys_cache_clear: Počisti predpomnilnik
+sys_cache_clear: Počistiti začasni pomnilnik
 
 -
 
-sys_cache_clear_info: Če počistite predpomnilnik mesta, morate znova pregledati posodobljene strani in datoteke. S tem dejanjem ne boste odstranili datotek strani ali slik iz imenika predpomnilnika.
+sys_cache_clear_info: Če počistite predpomnilnik spletnega mesta, je treba znova pregledati posodobljene strani in datoteke. S tem dejanjem ne boste odstranili datotek strani ali slik iz imenika predpomnilnika.
 
 -
 
@@ -594,6 +610,14 @@ sys_cache_purge_info: V nasprotju s preprostim čiščenjem predpomnilnika bo č
 
 -
 
+sys_config: Uredi konfiguracijsko datoteko
+
+-
+
+sys_config_warning: Upoštevajte, da bi morali samo izkušeni uporabniki urediti konfiguracijsko datoteko, da ne bi poškodovali vaše namestitve. Če gre kaj narobe, iz strežnika ročno izbrišite konfiguracijsko datoteko, da obnovite privzete nastavitve.
+
+-
+
 sys_debug_info: Ko je odpravljanje napak omogočeno, bodo vsi procesi Automada zabeleženi v konzolo brskalnika. Odpravljanje napak je potrebno samo za razvoj ali odpravljanje težav in bi ga bilo treba onemogočiti v vseh drugih primerih.
 
 -
@@ -602,7 +626,7 @@ sys_headless_edit_info: Strukturo vrnjenih podatkov JSON nadzoruje predloga. To 
 
 -
 
-sys_headless_info: Aktiviranje načina brez glave spremeni Automad v sistem za upravljanje vsebin, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvene plasti. Medtem ko je nadzorno ploščo še vedno mogoče uporabiti za upravljanje vsebine, so vsi podatki in datoteke dostopni prek JSON API-ja samo za branje.
+sys_headless_info: Aktiviranje načina brez glave spremeni Automad v sistem za upravljanje vsebin, ki se v celoti osredotoča na ustvarjanje vsebine brez predstavitvene plasti. Medtem ko je nadzorno ploščo še vedno mogoče uporabljati za upravljanje vsebine, so vsi podatki in datoteke dostopni prek JSON API-ja samo za branje.
 
 -
 
@@ -662,7 +686,7 @@ sys_update_progress: Počakajte in ne zapirajte okna med posodabljanjem ...
 
 -
 
-sys_update_to: Posodobite na različico
+sys_update_to: Posodobi na različico
 
 -
 

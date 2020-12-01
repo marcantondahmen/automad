@@ -81,7 +81,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<li<?php if (Core\Request::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
 							<a href="?context=system_settings">
 								<i class="uk-icon-sliders uk-icon-justify"></i>&nbsp;
-								<?php Text::e('sys_title'); ?>
+								<?php Text::e('sys_title'); ?>&nbsp;
+								<?php echo Components\Status\Span::render('update_badge'); ?>
 							</a>
 						</li>
 						<li<?php if (Core\Request::query('context') == 'edit_shared') { echo ' class="uk-active"'; }?>>

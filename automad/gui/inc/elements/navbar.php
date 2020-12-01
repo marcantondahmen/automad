@@ -101,7 +101,7 @@ if (User::get()) {
 						<i class="uk-icon-check"></i>
 					</button>
 					<?php } ?>	
-					<!-- User -->
+					<!-- More -->
 					<div 
 					class="uk-position-relative uk-visible-large" 
 					data-uk-dropdown="{mode:'click'}"
@@ -113,7 +113,7 @@ if (User::get()) {
 							<ul class="uk-nav uk-nav-dropdown">
 								<li>
 									<a href="?context=logout">
-										<i class="uk-icon-power-off"></i>&nbsp;
+										<i class="uk-icon-power-off uk-icon-justify"></i>&nbsp;
 										<?php echo Text::get('btn_log_out'); ?>
 										<i class="uk-icon-angle-double-left"></i>
 										<?php echo ucwords(User::get()) ?>
@@ -122,8 +122,14 @@ if (User::get()) {
 								</li>
 								<li>
 									<a href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_user'), true); ?>">
-										<i class="uk-icon-users"></i>&nbsp;
+										<i class="uk-icon-user uk-icon-justify"></i>&nbsp;
 										<?php Text::e('btn_manage_users'); ?>
+									</a>
+								</li>
+								<li>
+									<a href="#am-about-modal" data-uk-modal>
+										<i class="uk-icon-lightbulb-o uk-icon-justify"></i>&nbsp;
+										<?php Text::e('btn_about'); ?>
 									</a>
 								</li>
 							</ul>

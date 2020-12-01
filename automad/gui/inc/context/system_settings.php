@@ -85,8 +85,15 @@ $this->element('header');
 					'text' => Text::get('sys_debug')
 				)
 				
+			), array(
+				'<a href="#am-edit-config-modal" data-uk-modal>' .
+					'<i class="uk-icon-file-text-o uk-icon-justify"></i>&nbsp;&nbsp;' . 
+					Text::get('sys_config') . 
+				'</a>'
 			)); 
 			
+			echo Components\Modal\EditConfig::render('am-edit-config-modal');
+
 		?> 
 
 		<ul id="am-sys-content" class="uk-switcher">

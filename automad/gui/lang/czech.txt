@@ -1,3 +1,7 @@
+btn_about: O společnosti Automad
+
+-
+
 btn_add: Přidat
 
 -
@@ -126,6 +130,14 @@ btn_open_log: Otevřít protokol
 
 -
 
+btn_open_website: Otevřít web
+
+-
+
+btn_page_private: Ponechat stránku soukromou
+
+-
+
 btn_readme: Readme
 
 -
@@ -214,7 +226,7 @@ error_form: Neúplná nebo nesprávná data! <br /> Všechna pole jsou povinná 
 
 -
 
-error_login: Neplatné uživatelské jméno nebo heslo
+error_login: Neplatné uživatelské jméno či heslo
 
 -
 
@@ -226,7 +238,7 @@ error_no_destination: Vyberte prosím stránku jako cíl!
 
 -
 
-error_no_js: Chcete-li používat řídicí panel, povolte ve svém prohlížeči JavaScript.
+error_no_js: Chcete-li používat Dashboard, povolte ve svém prohlížeči JavaScript.
 
 -
 
@@ -242,11 +254,11 @@ error_import: Import souboru se nezdařil!
 
 -
 
-error_packages: Nelze načíst balíčky z Packagist!
+error_json: Neplatný JSON! Obsah konfiguračního souboru není správně naformátován.
 
 -
 
-error_composer_memory: Váš server nemá dostatek paměti pro instalaci, aktualizaci nebo odebrání balíčků! V případě, že provozujete tento web ve službě sdíleného hostování s omezeným množstvím paměti, zkuste upgradovat svůj plán nebo nainstalovat web do místního počítače bez omezení paměti.
+error_packages: Nelze načíst balíčky z Packagist!
 
 -
 
@@ -262,7 +274,7 @@ error_password_current: Aktuální heslo je špatné!
 
 -
 
-error_password_repeat: Zadejte prosím dvakrát stejné nové heslo!
+error_password_repeat: Zadejte dvakrát stejné nové heslo!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Šablona chybí
 
 -
 
-error_update_connection: Nelze se připojit k aktualizačnímu serveru! To může být obvykle způsobeno nesprávnou konfigurací aktualizace (config.json), chybou certifikátu SSL nebo chybějící knihovnou cURL.
+error_update_connection: Nelze se připojit k aktualizačnímu serveru! To může být obvykle způsobeno nesprávnou konfigurací aktualizace (config / config.php), chybou certifikátu SSL nebo chybějící knihovnou cURL.
 
 -
 
@@ -454,6 +466,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Soukromé
+
+-
+
 sidebar_header_global: Globální
 
 -
@@ -590,7 +606,15 @@ sys_cache_purge: Vyčistit adresář mezipaměti
 
 -
 
-sys_cache_purge_info: Na rozdíl od jednoduchého vymazání mezipaměti, vyčištění adresáře mezipaměti také přesune všechny dočasné soubory, odstraněné stránky, zálohy aktualizací a obrázky v mezipaměti do dočasného adresáře systému. To vynutí úplné opětovné vytvoření mezipaměti obrázků a stránek a vyčištění všech odstraněných stránek. Ve většině systémů bude dočasný adresář čas od času automaticky vyčištěn nebo restartován. V některých systémech však musí být adresář vymazán ručně.
+sys_cache_purge_info: Na rozdíl od jednoduchého vymazání mezipaměti, vyčištění adresáře mezipaměti také přesune všechny dočasné soubory, odstraněné stránky, zálohy aktualizací a obrázky v mezipaměti do dočasného adresáře systému. To vynutí úplné opětovné vytvoření mezipaměti obrázků a stránek a vyčištění všech odstraněných stránek. Ve většině systémů bude dočasný adresář čas od času automaticky vyčištěn nebo restartován. V některých systémech však musí být tento adresář vymazán ručně.
+
+-
+
+sys_config: Upravit konfigurační soubor
+
+-
+
+sys_config_warning: Upozorňujeme, že konfigurační soubor by měli upravovat pouze zkušení uživatelé, aby nedošlo k poškození instalace. V případě, že se něco pokazí, odstraňte prosím konfigurační soubor ručně ze serveru, abyste obnovili výchozí nastavení.
 
 -
 

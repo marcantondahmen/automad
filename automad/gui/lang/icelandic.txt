@@ -1,3 +1,7 @@
+btn_about: Um Automad
+
+-
+
 btn_add: Bæta við
 
 -
@@ -14,7 +18,7 @@ btn_apply_reload: Sækja um og endurhlaða
 
 -
 
-btn_browse: Vafraðu um skrár
+btn_browse: Vafra um skrár
 
 -
 
@@ -38,7 +42,7 @@ btn_delete_page: Eyða síðu
 
 -
 
-btn_download_file: Sækja
+btn_download_file: Niðurhal
 
 -
 
@@ -70,7 +74,7 @@ btn_get_themes: Fáðu fleiri þemu
 
 -
 
-btn_getting_data: Fá gögn ...
+btn_getting_data: Fær gögn ...
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Opnaðu Log
+
+-
+
+btn_open_website: Opna vefsíðu
+
+-
+
+btn_page_private: Haltu síðunni lokuðum
 
 -
 
@@ -242,11 +254,11 @@ error_import: Innflutningur skráa mistókst!
 
 -
 
-error_packages: Gat ekki hlaðið pakka frá Packagist!
+error_json: Ógilt JSON! Innihald stillingarskrárinnar er ekki sniðið rétt.
 
 -
 
-error_composer_memory: Netþjóninn þinn hefur ekki nóg minni til að setja upp, uppfæra eða fjarlægja pakka! Ef þú ert að keyra þessa síðu á þjónustu með sameiginlegri hýsingu með takmarkað magn af minni skaltu reyna að uppfæra áætlunina þína eða setja upp síðuna þína á staðbundinni tölvu án minnistakmarkana.
+error_packages: Gat ekki hlaðið pakka frá Packagist!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Sniðmát vantar
 
 -
 
-error_update_connection: Get ekki tengst uppfærslumiðlara! Þetta gæti venjulega stafað af röngum uppfærsluuppsetningum (config.json), SSL vottorðsvillu eða vantar cURL bókasafn.
+error_update_connection: Get ekki tengst uppfærslumiðlara! Þetta gæti venjulega stafað af röngum uppfærslustillingum (config / config.php), SSL vottorðsvillu eða vantar cURL bókasafn.
 
 -
 
@@ -422,7 +434,7 @@ page_prefix: Forskeyti (röð í leiðsögn)
 
 -
 
-page_redirect: Beina síðu til annarrar vefslóðar
+page_redirect: Beina síðu á aðra slóð
 
 -
 
@@ -454,7 +466,11 @@ page_visibility: Visibility
 
 -
 
-sidebar_header_global: Alheims
+page_private: Einkaaðila
+
+-
+
+sidebar_header_global: Alheimslegt
 
 -
 
@@ -506,7 +522,7 @@ success_added: Vel bætt við
 
 -
 
-success_cache_cleared: Skyndiminnið tókst að hreinsa með góðum árangri!
+success_cache_cleared: Skyndiminnið var hreinsað með góðum árangri!
 
 -
 
@@ -526,7 +542,7 @@ success_installed: Vel uppsett
 
 -
 
-success_password_changed: Lykilorðinu þínu var breytt með góðum árangri!
+success_password_changed: Lykilorðinu þínu var breytt!
 
 -
 
@@ -538,7 +554,7 @@ success_remove: Tókst að fjarlægja
 
 -
 
-success_reset_headless: Sjálfgefið höfuðlaust sniðmát endurheimti!
+success_reset_headless: Sjálfgefið hauslaust sniðmát endurheimti!
 
 -
 
@@ -554,11 +570,11 @@ success_packages_updated_all: Allir pakkar uppfærðir
 
 -
 
-success_package_updated: Uppfært
+success_package_updated: Tókst að uppfæra
 
 -
 
-sys_cache_info: Skyndiminni er nauðsynlegt til að flýta fyrir síðuna þína og ætti almennt að vera virk. Hins vegar gætirðu undir sumum kringumstæðum viljað slökkva á eða eyða skyndiminni.
+sys_cache_info: Skyndiminni er nauðsynlegt til að flýta fyrir síðuna þína og ætti almennt að vera virk. Hins vegar gætirðu undir sumum kringumstæðum viljað slökkva á eða hreinsa skyndiminnið.
 
 -
 
@@ -594,7 +610,15 @@ sys_cache_purge_info: Öfugt við það að hreinsa skyndiminnið, hreinsar skyn
 
 -
 
-sys_debug_info: Þegar kembiforrit er virkt verða allir ferlar Automad skráðir í stjórnborð vafrans. Kembiforrit er aðeins þörf fyrir þróun eða bilanaleit og ætti að vera óvirk í öllum öðrum tilvikum.
+sys_config: Breyta stillingarskrá
+
+-
+
+sys_config_warning: Athugaðu að aðeins reyndir notendur ættu að breyta stillingarskránni til að koma í veg fyrir skemmdir á uppsetningunni þinni. Ef eitthvað fer úrskeiðis skaltu eyða stillingarskránni handvirkt af netþjóninum þínum til að endurheimta sjálfgefnar stillingar.
+
+-
+
+sys_debug_info: Þegar kembiforrit er virkt verða allir ferlar Automad skráðir í stjórnborð vafrans. Villuleit er aðeins þörf fyrir þróun eða bilanaleit og ætti að vera óvirk í öllum öðrum tilvikum.
 
 -
 
@@ -602,7 +626,7 @@ sys_headless_edit_info: Uppbyggingu skilaðra JSON gagna er stjórnað með sni�
 
 -
 
-sys_headless_info: Að virkja höfuðlausan hátt gerir Automad að efnisstjórnunarkerfi sem einbeitir sér alfarið að efnissköpun án kynningarlags. Þó að hægt sé að nota stjórnborðið til að stjórna efni eru öll gögn og skrár aðgengilegar í gegnum skrifvarið JSON API.
+sys_headless_info: Með því að virkja höfuðlausan hátt breytist Automad í efnisstjórnunarkerfi sem einblínir alfarið á efnissköpun án kynningarlags. Þó að hægt sé að nota stjórnborðið til að stjórna efni eru öll gögn og skrár aðgengilegar í gegnum skrifvarið JSON API.
 
 -
 
@@ -626,7 +650,7 @@ sys_status_debug_enabled: Kembiforrit er virkt
 
 -
 
-sys_status_update_available: Uppfærsla til
+sys_status_update_available: Uppfæra til
 
 -
 
@@ -666,7 +690,7 @@ sys_update_to: Uppfæra í útgáfu
 
 -
 
-sys_update_windows_warning: Gakktu úr skugga um að allar skrár uppsetningar þinnar séu lokaðar í utanaðkomandi forritum áður en þú keyrir uppfærsluna til að forðast heimildir vandamál!
+sys_update_windows_warning: Gakktu úr skugga um að allar skrár uppsetningar þinnar séu lokaðar í utanaðkomandi forritum áður en þú keyrir uppfærsluna til að koma í veg fyrir heimildarmál!
 
 -
 

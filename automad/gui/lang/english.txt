@@ -1,3 +1,7 @@
+btn_about: About Automad
+
+-
+
 btn_accounts_file: Download Accounts File
 
 -
@@ -127,6 +131,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Open Log
+
+-
+
+btn_open_website: Open Website
+
+-
+
+btn_page_private: Keep page private
 
 -
 
@@ -278,11 +290,11 @@ error_import: The file import has failed!
 
 -
 
-error_packages: Could not load packages from Packagist!
+error_json: Invalid JSON! The contents of the configuration file is not formatted correctly.
 
 -
 
-error_composer_memory: Your server doesn't have enough memory to install, update or remove packages! In case you are running this site on a shared-hosting service with a limited amount of memory, please try to upgrade your plan or install your site on a local computer without memory restrictions.
+error_packages: Could not load packages from Packagist!
 
 -
 
@@ -314,7 +326,7 @@ error_template_missing: Template missing
 
 -
 
-error_update_connection: Can't connect to the update server! This could typically be caused by a wrong update configuration (config.json), a SSL certificate error or a missing cURL library.
+error_update_connection: Can't connect to the update server! This could typically be caused by a wrong update configuration (config/config.php), a SSL certificate error or a missing cURL library.
 
 -
 
@@ -542,7 +554,6 @@ page_theme_template: Template
 
 page_var_name: Variable Name
 
-
 -
 
 page_vars_content: Content
@@ -558,6 +569,10 @@ page_vars_unused: Unused Variables
 -
 
 page_visibility: Visibility
+
+-
+
+page_private: private
 
 -
 
@@ -741,6 +756,14 @@ sys_cache_purge: Purge Cache Directory
 -
 
 sys_cache_purge_info: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temprary directory of the system. This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages. On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. However, on some systems that directory has to be cleared manually.
+
+-
+
+sys_config: Edit Configuration File 
+
+-
+
+sys_config_warning: Note that only experienced users should edit the configuration file to avoid damage to your installation. In case something goes wrong, please delete the configuration file manually from your server in order to restore the default settings.
 
 -
 

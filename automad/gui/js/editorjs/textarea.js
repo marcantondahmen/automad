@@ -59,6 +59,7 @@ class AutomadTextarea {
 		wrapper.appendChild(label);
 		wrapper.appendChild(code);
 		this.input = code;
+		this.api.listeners.on(this.input, 'keydown', Automad.textarea.handleTabs, true);
 
 		return wrapper;
 

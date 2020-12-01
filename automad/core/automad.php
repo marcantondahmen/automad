@@ -36,6 +36,7 @@
 
 
 namespace Automad\Core;
+use Automad\GUI\User as User; 
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -103,6 +104,13 @@ class Automad {
 	 */
 	
 	private $reservedUrls;
+
+
+	/**
+	 *	The username of the currently logged in user or false.
+	 */
+
+	private $user;
 	
 	
 	/**
@@ -188,6 +196,20 @@ class Automad {
 			
 			// Get content from text file.
 			$data = Parse::textFile($file);
+
+			// Check if page is private.			
+			if (array_key_exists(AM_KEY_PRIVATE, $data)) {	
+				$private = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
+			} else {
+				$private = false;
+			}
+			
+			$data[AM_KEY_PRIVATE] = $private;
+
+			// Stop processing of page data and subdirectories if page is private and nobody is logged in.
+			if (!$this->user && $private) {
+				return false;
+			}
 			
 			// In case the title is not set in the data file or is empty, use the slug of the URL instead.
 			// In case the title is missig for the home page, use the site name instead.
@@ -255,6 +277,7 @@ class Automad {
 		
 		$this->getReservedUrls();
 		$this->Shared = new Shared();
+		$this->user = User::get();
 		$this->collectPages();
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 		

@@ -1,3 +1,7 @@
+btn_about: Sobre Automad
+
+-
+
 btn_add: Añadir
 
 -
@@ -18,7 +22,7 @@ btn_browse: Búsqueda de archivos
 
 -
 
-btn_close: Cerca
+btn_close: Cerrar
 
 -
 
@@ -106,6 +110,10 @@ btn_login: Iniciar sesión
 
 -
 
+btn_manage_users: Administrar usuarias
+
+-
+
 btn_more: Más
 
 -
@@ -119,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Abrir registro
+
+-
+
+btn_open_website: Sitio web abierto
+
+-
+
+btn_page_private: Mantener la página privada
 
 -
 
@@ -222,7 +238,7 @@ error_no_destination: Seleccione una página como destino.
 
 -
 
-error_no_js: ¡Habilite JavaScript en su navegador para usar el Panel de control!
+error_no_js: Habilite JavaScript en su navegador para usar el Panel de control.
 
 -
 
@@ -238,11 +254,11 @@ error_import: ¡La importación del archivo ha fallado!
 
 -
 
-error_packages: ¡No se pudieron cargar los paquetes de Packagist!
+error_json: JSON no válido El contenido del archivo de configuración no tiene el formato correcto.
 
 -
 
-error_composer_memory: ¡Su servidor no tiene suficiente memoria para instalar, actualizar o eliminar paquetes! En caso de que esté ejecutando este sitio en un servicio de alojamiento compartido con una cantidad limitada de memoria, intente actualizar su plan o instalar su sitio en una computadora local sin restricciones de memoria.
+error_packages: ¡No se pudieron cargar los paquetes de Packagist!
 
 -
 
@@ -274,15 +290,15 @@ error_template_missing: Falta plantilla
 
 -
 
-error_update_connection: ¡No puedo conectarme al servidor de actualizaciones! Por lo general, esto podría deberse a una configuración de actualización incorrecta (config.json), un error de certificado SSL o una biblioteca cURL faltante.
+error_update_connection: ¡No puedo conectarme al servidor de actualizaciones! Por lo general, esto podría deberse a una configuración de actualización incorrecta (config / config.php), un error de certificado SSL o una biblioteca cURL faltante.
 
 -
 
-error_update_download: ¡Falló la descarga de la actualización!
+error_update_download: ¡La descarga de la actualización falló!
 
 -
 
-error_update_items: Lista no válida de elementos para actualizar.
+error_update_items: Lista de elementos para actualizar no válida.
 
 -
 
@@ -450,6 +466,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privada
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -458,7 +478,7 @@ sidebar_header_pages: Páginas
 
 -
 
-shared_title: Datos y archivos generales
+shared_title: Archivos y datos generales
 
 -
 
@@ -466,7 +486,7 @@ shared_theme: Tema principal
 
 -
 
-shared_theme_apply: ¿Desea aplicar el tema seleccionado y actualizar la lista de variables disponibles ahora? Se guardarán los cambios que no hayas guardado.
+shared_theme_apply: ¿Quieres aplicar el tema seleccionado y actualizar la lista de variables disponibles ahora? Se guardarán los cambios que no hayas guardado.
 
 -
 
@@ -498,6 +518,10 @@ search_title: Resultados de la búsqueda
 
 -
 
+success_added: Añadida exitosamente
+
+-
+
 success_cache_cleared: ¡La caché se borró con éxito!
 
 -
@@ -507,6 +531,10 @@ success_cache_purged: ¡El directorio de caché se purgó correctamente!
 -
 
 success_config_update: ¡Configuración actualizada con éxito!
+
+-
+
+success_created: Creada con éxito <br>
 
 -
 
@@ -522,11 +550,19 @@ success_log_out: Cerrar sesión correctamente
 
 -
 
+success_remove: Eliminada exitosamente
+
+-
+
 success_reset_headless: ¡Se restauró con éxito la plantilla sin cabeza predeterminada!
 
 -
 
 success_saved: Cambios guardados
+
+-
+
+success_update: Actualizada con éxito Automad!
 
 -
 
@@ -546,7 +582,7 @@ sys_cache_clear: Limpiar cache
 
 -
 
-sys_cache_clear_info: Borrar la memoria caché del sitio obliga a volver a escanear en busca de páginas y archivos actualizados. Esta acción no eliminará ningún archivo de página o imágenes del directorio de caché.
+sys_cache_clear_info: Limpiar la memoria caché del sitio obliga a volver a examinar las páginas y archivos actualizados. Esta acción no eliminará ningún archivo de página o imágenes del directorio de caché.
 
 -
 
@@ -562,7 +598,7 @@ sys_cache_lifetime: La vida útil de la caché es
 
 -
 
-sys_cache_lifetime_info: Todos los datos y páginas de Automad almacenados en caché tienen una vida útil máxima. Una vez que se excede la vida útil de un objeto, su caché se reconstruirá cuando se solicite.
+sys_cache_lifetime_info: Todos los datos y páginas de Automad en caché tienen una vida útil máxima. Una vez que se excede la vida útil de un objeto, su caché se reconstruirá cuando se solicite.
 
 -
 
@@ -570,7 +606,15 @@ sys_cache_purge: Purgar directorio de caché
 
 -
 
-sys_cache_purge_info: En contraste con simplemente borrar la caché, la depuración del directorio de la caché también moverá todos los archivos temporales, las páginas eliminadas, las copias de seguridad de actualización y las imágenes almacenadas en caché al directorio temporal del sistema. Esto forzará una reconstrucción completa de la caché de imágenes y páginas, así como una limpieza de todas las páginas eliminadas. En la mayoría de los sistemas, el directorio temporal se limpiará automáticamente de vez en cuando o al reiniciar. Sin embargo, en algunos sistemas, ese directorio debe borrarse manualmente.
+sys_cache_purge_info: En contraste con simplemente borrar la caché, la depuración del directorio de la caché también moverá todos los archivos temporales, las páginas eliminadas, las copias de seguridad de actualización y las imágenes almacenadas en caché al directorio temporal del sistema. Esto forzará una reconstrucción completa de la memoria caché de la imagen y la página, así como una limpieza de todas las páginas eliminadas. En la mayoría de los sistemas, el directorio temporal se limpiará automáticamente de vez en cuando o al reiniciar. Sin embargo, en algunos sistemas, ese directorio debe borrarse manualmente.
+
+-
+
+sys_config: Editar archivo de configuración
+
+-
+
+sys_config_warning: Tenga en cuenta que solo los usuarios experimentados deben editar el archivo de configuración para evitar daños en su instalación. En caso de que algo salga mal, elimine el archivo de configuración manualmente de su servidor para restaurar la configuración predeterminada.
 
 -
 
@@ -610,6 +654,10 @@ sys_status_update_available: Actualización para
 
 -
 
+sys_status_update_not_available: Automad está actualizada
+
+-
+
 sys_title: Ajustes del sistema
 
 -
@@ -643,6 +691,10 @@ sys_update_to: Actualizar a la versión
 -
 
 sys_update_windows_warning: ¡Asegúrese de que todos los archivos de su instalación estén cerrados en programas externos antes de ejecutar la actualización para evitar problemas de permisos!
+
+-
+
+sys_user: Usuarias
 
 -
 
@@ -682,7 +734,11 @@ sys_user_add_repeat: Repite la contraseña
 
 -
 
-sys_user_you: Tú
+sys_user_registered: Usuarios registradas
+
+-
+
+sys_user_you: Usted
 
 -
 

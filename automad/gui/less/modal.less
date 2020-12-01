@@ -58,6 +58,29 @@
 		.shadow;
 	}
 
+	&-about {
+
+		width: @modal-dialog-width * 0.55;
+
+		& .am-logo {
+			display: inline-block;
+			height: 7rem;
+			min-height: 7rem;
+			width: auto;
+			margin: 1.5rem 0;
+		}
+
+		.am-dashboard & strong {
+			font-weight: @panel-title-font-weight;
+		}
+
+		& a,
+		& a * {
+			outline: none;
+		}
+
+	}
+
 	&-blank {
 		box-sizing: border-box;
 		-webkit-transform: translateY(0);
@@ -114,6 +137,10 @@
 		font-size: @base-code-font-size;
 		border-radius: 0;
 		border: none;
+	}
+
+	& .uk-icon-spin {
+		padding: @modal-dialog-padding !important;
 	}
 
 }

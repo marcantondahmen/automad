@@ -110,6 +110,7 @@ class Page {
 		// Map property names to the defined keys of the data array.
 		$keyMap = array(
 			'hidden' => AM_KEY_HIDDEN,
+			'private' => AM_KEY_PRIVATE,
 			'level' => AM_KEY_LEVEL,
 			'origUrl' => AM_KEY_ORIG_URL,
 			'parentUrl' => AM_KEY_PARENT,

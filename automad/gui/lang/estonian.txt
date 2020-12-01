@@ -1,3 +1,7 @@
+btn_about: Automadi kohta
+
+-
+
 btn_add: Lisama
 
 -
@@ -54,7 +58,7 @@ btn_edit_file_info: Redigeeri failiteavet
 
 -
 
-btn_edit_headless_template: Redigeeri Headless-malli
+btn_edit_headless_template: Redigeerige Headless-malli
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Avage Logi
+
+-
+
+btn_open_website: Avage veebisait
+
+-
+
+btn_page_private: Hoidke leht privaatsena
 
 -
 
@@ -242,11 +254,11 @@ error_import: Failide importimine nurjus!
 
 -
 
-error_packages: Packagistist ei saanud pakette laadida!
+error_json: Kehtetu JSON! Konfiguratsioonifaili sisu pole õigesti vormindatud.
 
 -
 
-error_composer_memory: Teie serveris pole piisavalt mälu pakettide installimiseks, värskendamiseks või eemaldamiseks! Kui kasutate seda saiti piiratud mälumahuga jagatud hostimise teenuses, proovige oma plaani uuendada või installida oma sait kohalikku arvutisse ilma mälupiiranguteta.
+error_packages: Packagistist ei saanud pakette laadida!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Mall puudub
 
 -
 
-error_update_connection: Värskendusserveriga ei saa ühendust luua! Selle põhjuseks võib tavaliselt olla vale värskenduskonfiguratsioon (config.json), SSL-sertifikaadi tõrge või puuduv CURL-i teek.
+error_update_connection: Värskendusserveriga ei saa ühendust luua! Selle põhjuseks võib tavaliselt olla vale värskenduskonfiguratsioon (config / config.php), SSL-sertifikaadi tõrge või puuduv CURL-i teek.
 
 -
 
@@ -454,6 +466,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privaatne
+
+-
+
 sidebar_header_global: Ülemaailmne
 
 -
@@ -566,7 +582,7 @@ sys_cache_clear: Tühjenda vahemälu
 
 -
 
-sys_cache_clear_info: Saidi vahemälu tühjendamine sunnib uuendatud lehti ja faile uuesti otsima. See toiming ei eemalda vahemälu kataloogist ühtegi lehefaili ega pilti.
+sys_cache_clear_info: Saidi vahemälu kustutamine sunnib uuendatud lehti ja faile uuesti otsima. See toiming ei eemalda vahemälu kataloogist ühtegi lehefaili ega pilti.
 
 -
 
@@ -594,7 +610,15 @@ sys_cache_purge_info: Erinevalt vahemälu tühjendamisest teisaldab vahemälukat
 
 -
 
-sys_debug_info: Kui silumine on lubatud, logitakse kõik Automadi protsessid teie brauseri konsooli. Silumist on vaja ainult arenduse või tõrkeotsingu jaoks ja see tuleks kõigil muudel juhtudel keelata.
+sys_config: Redigeeri konfiguratsioonifaili
+
+-
+
+sys_config_warning: Pange tähele, et teie installi kahjustamise vältimiseks peaksid konfiguratsioonifaili muutma ainult kogenud kasutajad. Kui midagi läheb valesti, kustutage vaikeseadete taastamiseks konfiguratsioonifail oma serverist käsitsi.
+
+-
+
+sys_debug_info: Kui silumine on lubatud, logitakse kõik Automadi protsessid teie brauseri konsooli. Silumist on vaja ainult arendamiseks või tõrkeotsinguks ning see tuleks kõigil muudel juhtudel keelata.
 
 -
 
@@ -618,7 +642,7 @@ sys_status_cache_enabled: Vahemällu salvestamine on lubatud
 
 -
 
-sys_status_cache_disabled: Vahemälu on keelatud
+sys_status_cache_disabled: Vahemälu salvestamine on keelatud
 
 -
 

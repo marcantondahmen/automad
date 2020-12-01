@@ -36,32 +36,47 @@
 
 class AutomadSnippet {
 
-	constructor({data}) {
+	constructor({data, api}) {
 
 		var create = Automad.util.create;
 
+		this.api = api;
+
 		this.data = {
 			file: data.file || '',
+			snippet: data.snippet || ''
 		};
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
+		var textarea = create.element('textarea', ['ce-code', 'cdx-input', 'am-block-run-before']);
+		textarea.setAttribute('placeholder', '<@ set { :variable: "value" } @>');
 		this.wrapper.innerHTML = `
 			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
 			<div class="am-block-title">${AutomadSnippet.toolbox.title}</div>
 			<hr>
-			${create.label('Select Snippet', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
+			${create.label('Snippet', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
+			${textarea.outerHTML}
+			${create.label('Include Snippet File', ['am-block-label']).outerHTML}
 			<div class="am-block-file-select uk-form-select uk-button uk-text-left uk-width-1-1" data-uk-form-select>
 				<i class="uk-icon-file"></i>&nbsp;
 				<span></span>
-				${create.select(['am-block-file'], window.AutomadBlockTemplates.snippets, this.data.file).outerHTML}
+				${create.select(['am-block-file'], ['—'].concat(window.AutomadBlockTemplates.snippets), this.data.file).outerHTML}
 			</div>
 		`;
 
 		this.inputs = {
-			file: this.wrapper.querySelector('.am-block-file')
+			file: this.wrapper.querySelector('.am-block-file'),
+			snippet: this.wrapper.querySelector('.am-block-run-before')
 		}
 
+		this.api.listeners.on(this.inputs.snippet, 'keydown', Automad.textarea.handleTabs, true);
+		this.inputs.snippet.value = this.data.snippet;
+
+	}
+
+	static get enableLineBreaks() {
+		return true;
 	}
 
 	static get toolbox() {
@@ -73,6 +88,12 @@ class AutomadSnippet {
 
 	}
 
+	static get sanitize() {
+		return {
+			snippet: true // Allow HTML tags
+		};
+	}
+
 	render() {
 
 		return this.wrapper;
@@ -82,7 +103,8 @@ class AutomadSnippet {
 	save() {
 
 		return {
-			file: this.inputs.file.value
+			file: this.inputs.file.value,
+			snippet: this.inputs.snippet.value
 		};
 
 	}

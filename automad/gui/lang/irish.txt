@@ -1,3 +1,7 @@
+btn_about: Maidir le Automad
+
+-
+
 btn_add: Cuir leis
 
 -
@@ -110,7 +114,7 @@ btn_manage_users: Bainistigh Úsáideoirí
 
 -
 
-btn_more: Tuilleadh
+btn_more: Níos mó
 
 -
 
@@ -123,6 +127,14 @@ btn_ok: Ok
 -
 
 btn_open_log: Log Oscailte
+
+-
+
+btn_open_website: Suíomh Gréasáin Oscailte
+
+-
+
+btn_page_private: Coinnigh an leathanach príobháideach
 
 -
 
@@ -242,11 +254,11 @@ error_import: Theip ar allmhairiú an chomhaid!
 
 -
 
-error_packages: Níorbh fhéidir pacáistí a luchtú ó Packagist!
+error_json: JSON neamhbhailí! Níl ábhar an chomhaid chumraíochta formáidithe i gceart.
 
 -
 
-error_composer_memory: Níl cuimhne leordhóthanach ag do fhreastalaí chun pacáistí a shuiteáil, a nuashonrú nó a bhaint! Sa chás go bhfuil tú ag rith an láithreáin seo ar sheirbhís óstála roinnte le méid teoranta cuimhne, déan iarracht do phlean a uasghrádú nó do shuíomh a shuiteáil ar ríomhaire áitiúil gan srianta cuimhne.
+error_packages: Níorbh fhéidir pacáistí a luchtú ó Packagist!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Teimpléad ar iarraidh
 
 -
 
-error_update_connection: Ní féidir ceangal leis an bhfreastalaí nuashonraithe! De ghnáth d’fhéadfadh cumraíocht nuashonraithe mícheart (config.json), earráid teastais SSL nó leabharlann cURL a bheith mar chúis leis seo.
+error_update_connection: Ní féidir ceangal leis an bhfreastalaí nuashonraithe! De ghnáth d’fhéadfadh cumraíocht nuashonraithe mícheart (config / config.php), earráid teastais SSL nó leabharlann cURL a bheith mar chúis leis seo.
 
 -
 
@@ -454,6 +466,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Príobháideach
+
+-
+
 sidebar_header_global: Domhanda
 
 -
@@ -590,7 +606,15 @@ sys_cache_purge: Eolaire Purge Cache
 
 -
 
-sys_cache_purge_info: I gcodarsnacht leis an taisce a ghlanadh, bogfaidh eolaire an taisce gach comhad sealadach, leathanaigh scriosta, cúltacaí nuashonraithe agus íomhánna taiscthe chuig eolaire sealadach an chórais. Cuirfidh sé seo atógáil iomlán ar an taisce íomhá agus leathanaigh chomh maith le glanta ar gach leathanach scriosta. I bhformhór na gcóras, glanfar an t-eolaire sealadach go huathoibríoch ó am go ham nó ar atosaigh. Mar sin féin, ar roinnt córais caithfear an eolaire sin a ghlanadh de láimh.
+sys_cache_purge_info: I gcodarsnacht leis an taisce a ghlanadh, bogfaidh eolaire an taisce gach comhad sealadach, leathanaigh scriosta, cúltacaí nuashonraithe agus íomhánna taiscthe chuig eolaire sealadach an chórais. Cuirfidh sé seo atógáil iomlán ar an taisce íomhá agus leathanaigh chomh maith le glanadh na leathanach scriosta go léir. I bhformhór na gcóras, glanfar an t-eolaire sealadach go huathoibríoch ó am go ham nó ar atosaigh. Mar sin féin, ar roinnt córais caithfear an eolaire sin a ghlanadh de láimh.
+
+-
+
+sys_config: Cuir Comhad Cumraíochta in Eagar
+
+-
+
+sys_config_warning: Tabhair faoi deara nár cheart ach d’úsáideoirí a bhfuil taithí acu an comhad cumraíochta a chur in eagar chun damáiste do shuiteáil a sheachaint. Sa chás go dtéann rud éigin mícheart, scrios an comhad cumraíochta de láimh ó do fhreastalaí d’fhonn na socruithe réamhshocraithe a chur ar ais.
 
 -
 
@@ -718,4 +742,4 @@ sys_user_you: Tú
 
 -
 
-theme_readme_alert: Cliceáil anseo chun an cháipéisíocht don téama gníomhach a léamh!
+theme_readme_alert: Cliceáil anseo chun na cáipéisí don téama gníomhach a léamh!

@@ -525,8 +525,8 @@
 						var $modal = $(this);
 
 						setTimeout(function() {
-							$modal.find('input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
-						}, 250);
+							$modal.find('textarea, input:not(:disabled, [type="hidden"], [type="search"])').first().focus();
+						}, 500);
 						
 					}
 					

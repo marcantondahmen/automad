@@ -1,3 +1,7 @@
+btn_about: Om Automad
+
+-
+
 btn_add: Lägg till
 
 -
@@ -54,7 +58,7 @@ btn_edit_file_info: Redigera filinformation
 
 -
 
-btn_edit_headless_template: Redigera den huvudlösa mallen
+btn_edit_headless_template: Redigera den Headless-mallen
 
 -
 
@@ -126,6 +130,14 @@ btn_open_log: Öppna logg
 
 -
 
+btn_open_website: Öppna webbplats
+
+-
+
+btn_page_private: Håll sidan privat
+
+-
+
 btn_readme: Readme
 
 -
@@ -162,7 +174,7 @@ confirm_delete_page: Är du säker på att du vill ta bort den aktuella sidan?
 
 -
 
-confirm_delete_users: Är du säker på att du vill ta bort de markerade användarna?
+confirm_delete_users: Är du säker på att du vill ta bort de valda användarna?
 
 -
 
@@ -210,7 +222,7 @@ error_file_size: Ogiltig filstorlek!
 
 -
 
-error_form: Ofullständiga eller felaktiga uppgifter! <br /> Alla fält är obligatoriska och måste fyllas i enligt beskrivningen!
+error_form: Ofullständiga eller felaktiga data! <br /> Alla fält är obligatoriska och måste fyllas i enligt beskrivningen!
 
 -
 
@@ -242,11 +254,11 @@ error_import: Filimporten misslyckades!
 
 -
 
-error_packages: Det gick inte att ladda paket från Packagist!
+error_json: Ogiltig JSON! Innehållet i konfigurationsfilen är inte formaterat korrekt.
 
 -
 
-error_composer_memory: Din server har inte tillräckligt med minne för att installera, uppdatera eller ta bort paket! Om du kör den här webbplatsen på en delad värdtjänst med en begränsad mängd minne, försök att uppgradera din plan eller installera din webbplats på en lokal dator utan minnesbegränsningar.
+error_packages: Det gick inte att ladda paket från Packagist!
 
 -
 
@@ -278,7 +290,7 @@ error_template_missing: Mall saknas
 
 -
 
-error_update_connection: Kan inte ansluta till uppdateringsservern! Detta kan vanligtvis orsakas av en felaktig uppdateringskonfiguration (config.json), ett SSL-certifikatfel eller ett saknat cURL-bibliotek.
+error_update_connection: Kan inte ansluta till uppdateringsservern! Detta kan vanligtvis orsakas av felaktig uppdateringskonfiguration (config / config.php), ett SSL-certifikatfel eller ett saknat cURL-bibliotek.
 
 -
 
@@ -454,6 +466,10 @@ page_visibility: Visibility
 
 -
 
+page_private: Privat
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -478,7 +494,7 @@ shared_vars_content: Standardinnehåll
 
 -
 
-shared_vars_settings: Standardinställningar för mall
+shared_vars_settings: Standardmallinställningar
 
 -
 
@@ -562,7 +578,7 @@ sys_cache_info: Cachning är viktigt för att påskynda din webbplats och bör i
 
 -
 
-sys_cache_clear: Rensa cache
+sys_cache_clear: Clear Cache
 
 -
 
@@ -582,7 +598,7 @@ sys_cache_lifetime: Cache-livslängden är
 
 -
 
-sys_cache_lifetime_info: Alla cachade Automad-data och sidor har en maximal livslängd. Efter att ett objekts livstid har överskridits kommer dess cache att byggas om på begäran.
+sys_cache_lifetime_info: Alla cachade Automad-data och sidor har maximal livslängd. Efter att ett objekts livstid har överskridits kommer dess cache att byggas om på begäran.
 
 -
 
@@ -590,7 +606,15 @@ sys_cache_purge: Rensa cachekatalog
 
 -
 
-sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensar cachekatalogen också alla tillfälliga filer, raderade sidor, säkerhetskopior och cachade bilder till systemets temporära katalog. Detta kommer att tvinga en fullständig ombyggnad av bild- och sidcache samt en sanering av alla borttagna sidor. På de flesta system kommer den tillfälliga katalogen att rensas upp automatiskt då och då eller vid omstart. Men på vissa system måste katalogen rensas manuellt.
+sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensar cachekatalogen också alla tillfälliga filer, raderade sidor, säkerhetskopior och cachade bilder till systemets temporära katalog. Detta kommer att tvinga en fullständig ombyggnad av bild- och sidcache samt en sanering av alla borttagna sidor. I de flesta system rensas den tillfälliga katalogen automatiskt då och då eller vid omstart. Men på vissa system måste katalogen rensas manuellt.
+
+-
+
+sys_config: Redigera konfigurationsfil
+
+-
+
+sys_config_warning: Observera att endast erfarna användare bör redigera konfigurationsfilen för att undvika skador på din installation. Om något går fel, ta bort konfigurationsfilen manuellt från din server för att återställa standardinställningarna.
 
 -
 
@@ -602,7 +626,7 @@ sys_headless_edit_info: Strukturen för de returnerade JSON-data styrs av en mal
 
 -
 
-sys_headless_info: Genom att aktivera headless-läget förvandlas Automad till ett innehållshanteringssystem som helt fokuserar på innehållsskapande utan ett presentationslager. Medan Dashboard fortfarande kan användas för att hantera innehåll, är all data och filer tillgängliga via ett skrivskyddat JSON API.
+sys_headless_info: Att aktivera huvudlöst läge gör Automad till ett innehållshanteringssystem som helt fokuserar på innehållsskapande utan ett presentationslager. Medan Dashboard fortfarande kan användas för att hantera innehåll, är all data och filer tillgängliga via ett skrivskyddat JSON API.
 
 -
 

@@ -35,67 +35,56 @@
  */
 
 
-namespace Automad\Blocks;
+namespace Automad\GUI\Components\Form;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The pagelist block.
+ *	The checkbox component to make a page private. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
+ *	@copyright Copyright (c) 2020 Marc Anton Dahmen - <http://marcdahmen.de>
  *	@license MIT license - http://automad.org/license
  */
 
-class Pagelist {
+class CheckboxPrivate {
 
-	
+
 	/**	
-	 *	Render a pagelist block.
-	 *	
-	 *	@param object $data
-	 *	@param object $Automad
-	 *	@return string the rendered HTML
+	 * 	Create a checkbox to make a page private.
+	 * 
+	 *	@param string $key
+	 *	@param string $private
+	 *	@return string The HTML for the private input field
 	 */
 
-	public static function render($data, $Automad) {
+	public static function render($key, $private = false) {
 
-		$Pagelist = $Automad->getPagelist();
+		$Text = \Automad\GUI\Text::getObject();
+		$checked = '';
 
-		// Reset pagelist.
-		$Pagelist->config($Pagelist->getDefaults());
-
-		$defaults = array(
-			'type' => '',
-			'matchUrl' => '',
-			'filter' => '',
-			'template' => '',
-			'excludeCurrent' => true,
-			'limit' => NULL,
-			'offset' => 0,
-			'sortKey' => ':path',
-			'sortOrder' => 'asc',
-			'file' => ''
-		);
-
-		$options = array_merge($defaults, (array) $data);
-		$options['sort'] = $options['sortKey'] . ' ' . $options['sortOrder'];
-
-		if (!empty($options['matchUrl'])) {
-			$options['match'] = json_encode(array('url' => '/(' . $options['matchUrl'] . ')/'));
+		if ($private) {
+			$checked = 'checked';
 		}
 
-		$Pagelist->config($options);
-
-		$options['file'] = AM_DIR_PACKAGES . $options['file'];
-
-		if (!is_readable(AM_BASE_DIR . $options['file'])) {
-			$options['file'] = '/automad/blocks/templates/pagelist.php';
-		}
-
-		return Snippet::render((object) $options, $Automad);	
+		return 	<<<HTML
+				<div class="uk-margin-top">
+					<label 
+					class="am-toggle-switch-large" 
+					data-am-toggle
+					>
+						$Text->btn_page_private
+						<input 
+						id="am-checkbox-private" 
+						type="checkbox" 
+						name="$key"
+						$checked 
+						/>
+					</label>
+				</div>
+HTML;
 
 	}
 

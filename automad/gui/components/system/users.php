@@ -125,6 +125,7 @@ class Users {
 							type="password" 
 							name="password1" 
 							placeholder="$Text->sys_user_add_password"  
+							autocomplete="new-password"
 							data-am-enter="#am-add-user-submit" 
 							required
 							/>		
@@ -133,6 +134,7 @@ class Users {
 							type="password" 
 							name="password2" 
 							placeholder="$Text->sys_user_add_repeat"  
+							autocomplete="new-password"
 							data-am-enter="#am-add-user-submit" 
 							required
 							/>
