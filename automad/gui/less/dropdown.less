@@ -95,6 +95,17 @@
 			background-color: @tooltip-background;
 			.shadow;
 
+			& > a {
+
+				font-weight: 640;
+				color: inherit;
+
+				&:not(:hover) {
+					text-decoration: underline !important;
+				}
+
+			}
+
 			&:after {
 				content: '\f0eb';
 				position: absolute;
