@@ -98,7 +98,7 @@ class Config {
 	public static function write($config) {
 
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-		$content = "<?php return <<< JSON\r\n$json\r\nJSON;";
+		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
 		$success = FileSystem::write(AM_CONFIG, $content);
 
 		if ($success && is_writable(self::$legacy)) {
