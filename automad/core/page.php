@@ -247,12 +247,8 @@ class Page {
 			$templatePath = str_replace('_2_columns', '', $templatePath);
 			$templatePath = str_replace(array('/alpha', '/bravo'), '/light', $templatePath);
 
-			if (file_exists($templatePath)) {
-				return $templatePath;
-			}
+			return $templatePath;
 
-			exit('<h1>Template "' . Str::stripStart($templatePath, AM_BASE_DIR . AM_DIR_PACKAGES . '/') . 
-			     '" not found!</h1><h2>Make sure you have selected an existing template for this page!</h2>');
 		}
 	
 	}

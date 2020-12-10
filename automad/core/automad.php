@@ -451,10 +451,17 @@ class Automad {
 		
 		$Automad = $this;
 		
-		ob_start();
-		include $file;
-		$output = ob_get_contents();
-		ob_end_clean();
+		if (is_readable($file)) {
+			ob_start();
+			include $file;
+			$output = ob_get_contents();
+			ob_end_clean();
+		} else {
+			$template = Str::stripStart($file, AM_BASE_DIR . AM_DIR_PACKAGES);
+			$title = $this->Context->get()->get(AM_KEY_TITLE);
+			$url = $this->Context->get()->get(AM_KEY_URL);
+			$output = "<h1>Template $template for page $title ($url) is missing!</h1><h2>Make sure you have selected an existing template for this page!</h2>";
+		}
 		
 		// Strip comments before return.
 		return preg_replace('/(' . preg_quote(AM_DEL_COMMENT_OPEN) . '.*?' . preg_quote(AM_DEL_COMMENT_CLOSE) . ')/s', '', $output);
