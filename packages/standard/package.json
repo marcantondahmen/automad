@@ -1,6 +1,6 @@
 {
   "name": "standard",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "A standard collection of elegant Automad themes",
   "main": "gulpfile.js",
   "private": true,
