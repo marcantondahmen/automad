@@ -74,6 +74,15 @@
 			html: '<iframe height="180" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"></iframe>',
 			height: 180,
 			width: 0
+		},
+
+		twitter: {
+			regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$/,
+			embedUrl: 'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
+			html: '<iframe width="500" height="300" style="display: block; width: 500px; border-bottom: 1px solid #E0E0E0; margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
+			height: 400,
+			width: 500,
+			id: ids => ids.join('/status/')
 		}
 
 	}

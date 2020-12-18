@@ -52,6 +52,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class Embed {
 
 
+	/**
+	 *	The index of the embedded element.
+	 */
+
+	private static $index = 0;
+
+
 	/**	
 	 *	Render a embed block.
 	 *	
@@ -61,9 +68,32 @@ class Embed {
 
 	public static function render($data) {
 
-		$attr = 'scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true"';
+		self::$index++;
+		$id = 'am-embed-' . $data->service . '-' . self::$index;
 
-		if (!empty($data->width)) {
+		$attr = <<< HTML
+				id="$id"
+				scrolling="no"
+				frameborder="no"
+				allowtransparency="true"
+				allowfullscreen="true"
+
+HTML;
+
+		if ($data->service == 'twitter') {
+
+			$html = <<< HTML
+					<iframe 
+					src="$data->embed"
+					width="$data->width"
+					height="$data->height"
+					$attr
+					style="display: block; margin: 0 auto;"
+					>
+					</iframe>
+HTML;
+
+		} else if (!empty($data->width)) {
 
 			$paddingTop = $data->height / $data->width * 100;
 			$html = <<< HTML
