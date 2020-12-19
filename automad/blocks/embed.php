@@ -73,7 +73,7 @@ HTML;
 
 			$url = Core\Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
 			$html = <<< HTML
-					<blockquote class="twitter-tweet tw-align-center">
+					<blockquote class="twitter-tweet tw-align-center" style="visibility: hidden;">
 						<a href="$url"></a>
 					</blockquote>
 					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
