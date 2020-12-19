@@ -53,7 +53,7 @@
 		},
 		
 		giphy: {
-			regex: /https?:\/\/giphy\.com\/\gifs\/(?:[^\/]*\-)?([a-zA-Z0-9]+)$/,
+			regex: /https?:\/\/giphy\.com\/(?:gifs|videos)\/(?:[^\/]*\-)?([a-zA-Z0-9]+)$/,
 			embedUrl: 'https://giphy.com/embed/<%= remote_id %>/',
 			html: '<iframe width="600" height="480" frameborder="0" allowFullScreen></iframe>',
 			height: 480,
@@ -80,8 +80,8 @@
 			regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$/,
 			embedUrl: 'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
 			html: '<iframe width="500" height="300" style="display: block; width: 500px; border-bottom: 1px solid #E0E0E0; margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
-			height: 400,
-			width: 500,
+			height: 0,
+			width: 0,
 			id: ids => ids.join('/status/')
 		}
 

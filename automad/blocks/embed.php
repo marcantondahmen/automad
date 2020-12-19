@@ -36,6 +36,7 @@
 
 
 namespace Automad\Blocks;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,13 +53,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class Embed {
 
 
-	/**
-	 *	The index of the embedded element.
-	 */
-
-	private static $index = 0;
-
-
 	/**	
 	 *	Render a embed block.
 	 *	
@@ -68,29 +62,21 @@ class Embed {
 
 	public static function render($data) {
 
-		self::$index++;
-		$id = 'am-embed-' . $data->service . '-' . self::$index;
-
 		$attr = <<< HTML
-				id="$id"
 				scrolling="no"
 				frameborder="no"
 				allowtransparency="true"
 				allowfullscreen="true"
-
 HTML;
 
 		if ($data->service == 'twitter') {
 
+			$url = Core\Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
 			$html = <<< HTML
-					<iframe 
-					src="$data->embed"
-					width="$data->width"
-					height="$data->height"
-					$attr
-					style="display: block; margin: 0 auto;"
-					>
-					</iframe>
+					<blockquote class="twitter-tweet tw-align-center">
+						<a href="$url"></a>
+					</blockquote>
+					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 HTML;
 
 		} else if (!empty($data->width)) {
