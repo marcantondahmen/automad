@@ -199,7 +199,7 @@ HTML;
 		if (preg_match('/^(\+|\w)/', $key) && User::get()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN . 
 						json_encode(array(
-							'context' => $Context->get()->url, 
+							'context' => $Context->get()->origUrl, 
 							'key' => $key
 						), JSON_UNESCAPED_SLASHES) . 
 						AM_DEL_INPAGE_BUTTON_CLOSE;
