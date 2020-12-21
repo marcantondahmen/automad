@@ -106,7 +106,7 @@ btn_log_out: Ausloggen
 
 -
 
-btn_login: Anmeldung
+btn_login: Anmelden
 
 -
 
@@ -462,7 +462,7 @@ page_vars_unused: Nicht verwendete Variablen
 
 -
 
-page_visibility: Visibility
+page_visibility: Sichtbarkeit
 
 -
 
