@@ -3,8 +3,6 @@ name: 'Lock down repository'
 on:
   pull_request:
     types: opened
-  schedule:
-    - cron: '0 * * * *'
 
 jobs:
   lockdown:
