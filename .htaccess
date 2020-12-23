@@ -7,11 +7,12 @@
 
 
 # Allow large file uploads.
+# Uncomment the following lines in case your server allows for setting those parameters.
 
-php_value upload_max_filesize 100M
-php_value post_max_size 100M
-php_value max_input_time 3000
-php_value max_execution_time 3000
+#php_value upload_max_filesize 100M
+#php_value post_max_size 100M
+#php_value max_input_time 3000
+#php_value max_execution_time 3000
 
 
 
