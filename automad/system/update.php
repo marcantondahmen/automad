@@ -393,7 +393,7 @@ class Update {
 	private static function unpack($archive, $items) {
 
 		$success = true;
-		$zip = new \ZipArchive;
+		$zip = new \ZipArchive();
 		$itemsMatchRegex = 	'/^[\w\-]+(' . 
 							addcslashes(implode('|', $items), '/') . 
 							')/';
@@ -433,16 +433,17 @@ class Update {
 					}
 					
 				}
-				
+
 			}
 			
+			$zip->close();
+
 		} else {
 			
 			$success = false;
 			
 		}
 		
-		$zip->close;
 		unlink($archive);
 
 		return $success;
