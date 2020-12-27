@@ -393,33 +393,39 @@ class Update {
 	private static function unpack($archive, $items) {
 
 		$success = true;
-		$zip = zip_open($archive);
+		$zip = new \ZipArchive();
 		$itemsMatchRegex = 	'/^[\w\-]+(' . 
 							addcslashes(implode('|', $items), '/') . 
 							')/';
 		
-		if (is_resource($zip)) {
+		if ($zip->open($archive)) {
 			
-			// Iterate over zip entries and unpack item in case the filename matches on of the update items.
-			while($zipEntry = zip_read($zip)) { 
-				
-				$filename = zip_entry_name($zipEntry);
-				
+			// Iterate over zip entries and unpack item in case 
+			// the filename matches on of the update items.
+			for ($i = 0; $i < $zip->numFiles; $i++) {
+
+				$filename = $zip->getNameIndex($i);
+
 				if (preg_match($itemsMatchRegex, $filename)) {
 					
-					$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $filename); 
-					
-					if (zip_entry_open($zip, $zipEntry)) {
-						
-						if (Core\FileSystem::write($filename, zip_entry_read($zipEntry, zip_entry_filesize($zipEntry))) !== false) {
+					if ($fp = $zip->getStream($filename)) {
+
+						$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $filename); 						
+						$contents = '';
+
+						while (!feof($fp)) {
+							$contents .= fread($fp, 2);
+						}
+
+						fclose($fp);
+
+						if (Core\FileSystem::write($filename, $contents) !== false) {
 							self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 						} else {
 							self::log('Error extracting ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 							$success = false;
 						}
-						
-						zip_entry_close($zipEntry);
-						
+
 					} else {
 						
 						$success = false;
@@ -427,16 +433,17 @@ class Update {
 					}
 					
 				}
-				
-			} 
+
+			}
 			
+			$zip->close();
+
 		} else {
 			
 			$success = false;
 			
 		}
 		
-		zip_close($zip);
 		unlink($archive);
 
 		return $success;
