@@ -58,7 +58,7 @@ class Composer {
 	 *	The Composer version to be used.
 	 */
 
-	private $composerVersion = '2.0.6';
+	private $composerVersion = '2.0.8';
 
 	
 	/**	
@@ -126,7 +126,11 @@ class Composer {
 
 		if (is_writable($dir)) {
 
-			$phar = $dir . '/composer_' . time() . '.phar';
+			$phar = $dir . '/composer.phar';
+
+			if (is_writable($phar)) {
+				unlink($phar);
+			}
 
 			set_time_limit(0);
 			
@@ -236,17 +240,41 @@ class Composer {
 		
 		Core\Debug::log($command, 'Command');
 
+		$buffer = null;
+
 		try {
+
 			$application->run($input, $output);
+			$buffer = $output->fetch();
+			Core\Debug::log($buffer, 'Buffer');
+
 		} catch (\Exception $e) {
-			return $e->getMessage();
+
+			if (!function_exists('exec')) {
+				return 'The exec() function is disabled in your php.ini file!';
+			}
+
+			$binFinder = new \Symfony\Component\Process\PhpExecutableFinder();
+			$php = $binFinder->find();
+			$phar = $this->getInstallDir() . '/composer.phar';
+			$exitCode = null;
+
+			@exec("$php $phar $command 2>&1", $output, $exitCode);
+			$buffer = implode("\n", $output);
+
+			Core\Debug::log("$php $phar $command", 'Use exec() function as fallback');
+			Core\Debug::log($exitCode, 'exec() exit code');
+			Core\Debug::log($buffer, 'exec() buffer');
+
+			if ($exitCode !== 0) {
+				return $e->getMessage();
+			}
+
 		}
 
-		$buffer = $output->fetch();
 		$bufferNoWarning = preg_replace('/\<warning\>.*?\<\/warning\>\s*/is', '', $buffer);
 
 		Core\Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
-		Core\Debug::log($buffer, 'Buffer');
 		Core\Debug::log($bufferNoWarning, 'Buffer without warning');
 
 		if ($getBuffer) {
@@ -316,7 +344,7 @@ class Composer {
 
 		// This memory is cleared on error (case of allowed memory exhausted)
 		// to use that memory to run the shutdown function.
-    	$this->reservedShutdownMemory = str_repeat('*', 1024 * 1024);
+		$this->reservedShutdownMemory = str_repeat('*', 1024 * 1024);
 				
 		register_shutdown_function(function(){
 
