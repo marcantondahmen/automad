@@ -103,7 +103,7 @@ class Resolve {
 	public static function relativeUrlToBase($url, $Page) {
 		
 		// Skip any protocol, mailto, tel and skype links.
-		if (preg_match('/(\:\/\/|^(mailto|tel|skype)\:)/is', $url)) {
+		if (preg_match('/(\:\/\/|^[a-z]+\:)/is', $url)) {
 			
 			return $url;
 			
