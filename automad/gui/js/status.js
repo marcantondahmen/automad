@@ -83,7 +83,8 @@
 								'?ajax=edit_headless_template',
 								'?ajax=reset_headless_template',
 								'?ajax=update_config',
-								'?ajax=get_packages'
+								'?ajax=get_packages',
+								'?ajax=update_system'
 							];
 
 				if (triggers.includes(settings.url)) {

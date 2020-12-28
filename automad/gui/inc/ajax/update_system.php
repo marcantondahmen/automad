@@ -90,7 +90,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 							<div class="uk-margin-top">
 								<button 
 								type="submit" 
-								class="uk-button uk-button-success" 
+								class="uk-button uk-button-success uk-text-nowrap" 
 								data-uk-toggle="{target:'.am-update-progress',cls:'uk-hidden'}"
 								>
 									<i class="uk-icon-download"></i>&nbsp;
