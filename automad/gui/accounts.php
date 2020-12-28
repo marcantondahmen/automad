@@ -278,8 +278,14 @@ class Accounts {
 
 	public static function write($accounts) {
 		
-		return FileSystem::write(AM_FILE_ACCOUNTS, Accounts::generatePHP($accounts));
+		$success = FileSystem::write(AM_FILE_ACCOUNTS, Accounts::generatePHP($accounts));
 		
+		if ($success && function_exists('opcache_invalidate')) {
+			opcache_invalidate(AM_FILE_ACCOUNTS, true);
+		}
+
+		return $success;
+
 	}
 
 
