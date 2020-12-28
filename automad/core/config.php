@@ -105,6 +105,10 @@ class Config {
 			@unlink(self::$legacy);
 		}
 
+		if ($success && function_exists('opcache_invalidate')) {
+			opcache_invalidate(AM_CONFIG, true);
+		}
+
 		return $success;
 
 	}
