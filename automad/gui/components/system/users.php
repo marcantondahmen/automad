@@ -88,7 +88,7 @@ class Users {
 								<i class="uk-icon-close"></i>&nbsp;
 								$Text->btn_close
 							</button>
-							<button type="button" class="uk-button uk-button-primary" data-am-submit="users">
+							<button type="button" class="uk-button uk-button-success" data-am-submit="users">
 								<i class="uk-icon-user-times"></i>&nbsp;
 								$Text->btn_remove_selected
 							</button>
