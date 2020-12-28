@@ -377,7 +377,7 @@ class Update {
 	
 	public static function supported() {
 		
-		return (function_exists('curl_version') && function_exists('zip_open'));
+		return (function_exists('curl_version') && class_exists('ZipArchive'));
 		
 	}
 	
