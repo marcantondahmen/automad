@@ -250,6 +250,9 @@ class Composer {
 
 		} catch (\Exception $e) {
 
+			// Try to fall back to running composer.phar using exec() in case
+			// there was any execption raised using the Composer API.
+			// That could be for example the case on Windows machines.
 			if (!function_exists('exec')) {
 				return 'The exec() function is disabled in your php.ini file!';
 			}

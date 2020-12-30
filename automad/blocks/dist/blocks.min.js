@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *	
- *	version 1.6.11
+ *	version 1.6.12
  *
  *	Copyright (c) 2014-2020 by Marc Anton Dahmen
  *	http://marcdahmen.de

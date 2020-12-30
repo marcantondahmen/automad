@@ -38,7 +38,7 @@
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-$requiredVersion = '5.4.0';
+$requiredVersion = '5.6.0';
 
 if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
 	exit('<h1>PHP out of date!</h1><h2>Please update your PHP version to ' . $requiredVersion . ' or newer!</h2>');

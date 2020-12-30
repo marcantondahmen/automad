@@ -2,7 +2,7 @@
 	"name": "Tutorial",
 	"description": "A collection of tutorial templates",
 	"author": "Marc Anton Dahmen",
-	"version": "1.6.11",
+	"version": "1.6.12",
 	"license": "MIT",
 	"tooltips": {
 		"date": "Set a date to show up as post or project info",
