@@ -394,42 +394,25 @@ class Update {
 
 		$success = true;
 		$zip = new \ZipArchive();
-		$itemsMatchRegex = 	'/^[\w\-]+(' . 
-							addcslashes(implode('|', $items), '/') . 
-							')/';
+		$itemsMatchRegex = 	'/^[\w\-]+(' . addcslashes(implode('|', $items), '/') . ')/';
 		
 		if ($zip->open($archive)) {
 			
 			// Iterate over zip entries and unpack item in case 
-			// the filename matches on of the update items.
+			// the name matches on of the update items.
 			for ($i = 0; $i < $zip->numFiles; $i++) {
 
-				$filename = $zip->getNameIndex($i);
+				$name = $zip->getNameIndex($i);
 
-				if (preg_match($itemsMatchRegex, $filename)) {
+				if (preg_match($itemsMatchRegex, $name)) {
 					
-					if ($fp = $zip->getStream($filename)) {
+					$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $name);
 
-						$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $filename); 						
-						$contents = '';
-
-						while (!feof($fp)) {
-							$contents .= fread($fp, 2);
-						}
-
-						fclose($fp);
-
-						if (Core\FileSystem::write($filename, $contents) !== false) {
-							self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
-						} else {
-							self::log('Error extracting ' . Core\Str::stripStart($filename, AM_BASE_DIR));
-							$success = false;
-						}
-
+					if (Core\FileSystem::write($filename, $zip->getFromName($name)) !== false) {
+						self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 					} else {
-						
+						self::log('Error extracting ' . Core\Str::stripStart($filename, AM_BASE_DIR));
 						$success = false;
-						
 					}
 					
 				}
