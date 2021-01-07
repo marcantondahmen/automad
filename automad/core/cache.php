@@ -139,8 +139,9 @@ class Cache {
 			
 			// Disable page caching for in-page edit mode.
 			if (GUI\User::get()) {
-				Debug::log('In-page edit mode! Disable page caching.');
+				Debug::log('In-page edit mode! Disable caching.');
 				$this->pageCachingIsEnabled = false;
+				$this->automadObjectCachingIsEnabled = false;
 			}
 			
 			// Disable page caching $_GET is not empty.
