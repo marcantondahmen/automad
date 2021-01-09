@@ -61,7 +61,7 @@ class Table {
 
 	public static function render($data) {
 
-		$html = '<figure><table>'; 
+		$html = '<figure class="am-table"><table>'; 
 		
 		// Initially set cell tag to "th".
 		$tag = 'th';
