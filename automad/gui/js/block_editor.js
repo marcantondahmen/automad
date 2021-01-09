@@ -212,22 +212,32 @@
 				},
 				stretchWrapper = element('div', ['cdx-settings-1-1']),
 				stretchButton = element('div', [cls]),
-				spanWrapper = element('div', []),
+				spanWrapper = element('div', ['cdx-settings-5']),
 				spanOptions = [
 					{
-						title: 'Span 1⁄3',
-						icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M16,0H2C0.9,0,0,0.9,0,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V2C18,0.9,17.1,0,16,0z M16.6,16c0,0.3-0.3,0.6-0.6,0.6H6 V1.4h10c0.3,0,0.6,0.3,0.6,0.6V16z"/></svg>',
-						value: '2'
-					},
-					{
-						title: 'Span 1⁄2',
-						icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M16,0H2C0.9,0,0,0.9,0,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V2C18,0.9,17.1,0,16,0z M16.6,16c0,0.3-0.3,0.6-0.6,0.6H9 V1.4h7c0.3,0,0.6,0.3,0.6,0.6V16z"/></svg>',
+						title: 'Span 1⁄4',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
 						value: '3'
 					},
 					{
-						title: 'Span 2⁄3',
-						icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M16,0H2C0.9,0,0,0.9,0,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V2C18,0.9,17.1,0,16,0z M16.6,16c0,0.3-0.3,0.6-0.6,0.6h-4 V1.4h4c0.3,0,0.6,0.3,0.6,0.6V16z"/></svg>',
+						title: 'Span 1⁄3',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
 						value: '4'
+					},
+					{
+						title: 'Span 1⁄2',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '6'
+					},
+					{
+						title: 'Span 2⁄3',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '8'
+					},
+					{
+						title: 'Span 3⁄4',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '9'
 					}
 				],
 				clearSpanSettings = function() {
@@ -264,7 +274,7 @@
 
 				var button = element('div', [cls]);
 
-				button.innerHTML = option.icon;
+				button.innerHTML = `<svg width="20px" height="20px" viewBox="0 0 20 20">${option.icon}</svg>`;
 				button.classList.toggle(clsActive, (block.data[keys.span] == option.value));
 
 				button.addEventListener('click', function () {
