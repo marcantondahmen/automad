@@ -196,7 +196,7 @@
 			
 		},
 
-		renderLayoutSettings: function (data, savedData, api) {
+		renderLayoutSettings: function (data, savedData, api, withStretch) {
 
 			var element = Automad.util.create.element,
 				cls = api.styles.settingsButton,
@@ -252,27 +252,34 @@
 
 				};
 
-			data[keys.stretch] = savedData[keys.stretch] !== undefined ? savedData[keys.stretch] : false;
+			// Stretch button.
+			if (withStretch) {
+
+				data[keys.stretch] = savedData[keys.stretch] !== undefined ? savedData[keys.stretch] : false;
+
+				stretchButton.innerHTML = stretchOption.icon;
+				stretchButton.classList.toggle(clsActive, data[keys.stretch]);
+				stretchWrapper.appendChild(stretchButton);
+				api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
+
+				Promise.resolve().then(() => {
+					api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
+				});
+
+				stretchButton.addEventListener('click', function () {
+					clearSpanSettings();
+					stretchButton.classList.toggle(clsActive);
+					data[keys.stretch] = !data[keys.stretch];
+					api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
+				});
+
+				wrapper.appendChild(stretchWrapper);
+
+			}
+			
+			// Span buttons.
 			data[keys.span] = savedData[keys.span] || '';
 
-			// Stretch button.
-			stretchButton.innerHTML = stretchOption.icon;
-			stretchButton.classList.toggle(clsActive, data[keys.stretch]);
-			stretchWrapper.appendChild(stretchButton);
-			api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
-
-			Promise.resolve().then(() => {
-				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-			});
-
-			stretchButton.addEventListener('click', function () {
-				clearSpanSettings();
-				stretchButton.classList.toggle(clsActive);
-				data[keys.stretch] = !data[keys.stretch];
-				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-			});
-
-			// Span buttons.
 			spanOptions.forEach(function (option) {
 
 				var button = element('div', [cls]);
@@ -303,7 +310,6 @@
 
 			});
 
-			wrapper.appendChild(stretchWrapper);
 			wrapper.appendChild(spanWrapper);
 
 			return wrapper;
