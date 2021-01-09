@@ -279,12 +279,14 @@
 
 				button.addEventListener('click', function () {
 
+					var span = block.data[keys.span];
+
 					stretchButton.classList.toggle(clsActive, false);
 					block.data[keys.stretch] = false;
 					block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
 					clearSpanSettings();
 
-					if (block.data[keys.span] == option.value) {
+					if (span == option.value) {
 						block.data[keys.span] = '';
 					} else {
 						button.classList.toggle(clsActive, true);
