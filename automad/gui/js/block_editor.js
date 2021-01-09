@@ -212,7 +212,7 @@
 				},
 				stretchWrapper = element('div', ['cdx-settings-1-1']),
 				stretchButton = element('div', [cls]),
-				spanWrapper = element('div', ['cdx-settings-5']),
+				spanWrapper = element('div', ['cdx-settings-6']),
 				spanOptions = [
 					{
 						title: 'Span 1⁄4',
@@ -238,6 +238,11 @@
 						title: 'Span 3⁄4',
 						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
 						value: '9'
+					},
+					{
+						title: 'Span 1⁄1',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
+						value: '12'
 					}
 				],
 				clearSpanSettings = function() {

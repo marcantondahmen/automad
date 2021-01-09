@@ -32,17 +32,18 @@
  *	Licensed under the MIT license.
  */
 
-.am-block-row {
+.am-block-grid {
 
-	width: var(--am-block-row-width) !important;
-	max-width: var(--am-block-row-width) !important;
+	width: var(--am-block-grid-width) !important;
+	max-width: var(--am-block-grid-width) !important;
 
 	@media (min-width: 860px) {
 
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		column-gap: var(--am-block-row-gap);
-		margin: var(--am-block-row-margin) 0;
+		column-gap: var(--am-block-grid-column-gap);
+		row-gap: var(--am-block-grid-row-gap);
+		margin: var(--am-block-grid-margin) 0;
 
 		& > [class*="am-block-span-"] > * {
 
@@ -72,6 +73,10 @@
 		
 		& .am-block-span-9 {
 			grid-column-start: span 9;
+		}
+
+		& .am-block-span-12 {
+			grid-column-start: span 12;
 		}
 
 	}

@@ -128,7 +128,7 @@ HTML;
 				$blockIsRowItem = (!empty($block->data->span));
 
 				if (!$rowOpen && $blockIsRowItem) {
-					$html .= '<section class="am-block-row">';
+					$html .= '<section class="am-block-grid">';
 					$rowOpen = true;
 				}
 
