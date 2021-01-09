@@ -86,19 +86,13 @@ class Gallery {
 			$maxWidth = $data->width * 1.75;
 			$style = "<style scoped>@media (max-width: ${maxWidth}px) { .am-gallery-masonry { grid-template-columns: 1fr; } }</style>";
 
-			$figureAttr = '';
-
-			if ($data->stretched) {
-				$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
-			}
-
 			$cleanBottom = '';
 
 			if ($data->cleanBottom) {
 				$cleanBottom = ' am-gallery-masonry-clean-bottom';
 			}
 
-			$html = '<figure ' . $figureAttr . '>' . 
+			$html = '<figure>' . 
 					$style . 
 					'<div class="am-gallery-masonry' . $cleanBottom . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 

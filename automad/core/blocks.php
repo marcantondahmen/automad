@@ -137,10 +137,33 @@ HTML;
 					$rowOpen = false;
 				}
 
-				$html .= call_user_func_array(
+				$blockHtml = call_user_func_array(
 					'\\Automad\\Blocks\\' . $block->type . '::render',
 					array($block->data, $Automad)
 				);
+
+				// Stretch block.
+				if (!empty($block->data->stretched)) {
+					$blockHtml = <<< HTML
+								<div 
+								class="am-stretched" 
+								style="width: 100%; max-width: 100%;"
+								>
+									$blockHtml
+								</div>
+HTML;
+				}
+
+				// Apply span.
+				if (!empty($block->data->span)) {
+					$blockHtml = <<< HTML
+								<div class="am-block-span-{$block->data->span}">
+									$blockHtml
+								</div>
+HTML;
+				}
+
+				$html .= $blockHtml;
 
 			} catch (\Exception $e) {
 
