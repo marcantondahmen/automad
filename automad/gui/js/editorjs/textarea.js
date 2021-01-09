@@ -44,6 +44,8 @@ class AutomadTextarea {
 			code: data.code || ''
 		};
 
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+
 		this.wrapper = this.drawView();
 
 	}
@@ -83,9 +85,9 @@ class AutomadTextarea {
 
 	save() {
 
-		return {
+		return Object.assign(this.data, {
 			code: this.input.value
-		};
+		});
 
 	}
 
@@ -112,6 +114,12 @@ class AutomadTextarea {
 
 	placeholder() {
 		return '';
+	}
+
+	renderSettings() {
+
+		return this.layoutSettings;
+
 	}
 
 }

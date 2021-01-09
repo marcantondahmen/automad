@@ -50,6 +50,8 @@ class AutomadButtons {
 			alignment: data.alignment || 'left'
 		};
 
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
@@ -149,9 +151,10 @@ class AutomadButtons {
 	renderSettings() {
 
 		var wrapper = document.createElement('div'),
+			inner = document.createElement('div'),
 			block = this;
 
-		wrapper.classList.add('cdx-settings-1-2');
+		inner.classList.add('cdx-settings-1-2');
 
 		this.settings.map(function(tune) {
 
@@ -161,7 +164,7 @@ class AutomadButtons {
 			el.classList.add(block.api.styles.settingsButton);
 			el.classList.toggle(block.api.styles.settingsButtonActive, tune.name === block.data.alignment);
 
-			wrapper.appendChild(el);
+			inner.appendChild(el);
 
 			return el;
 
@@ -181,6 +184,9 @@ class AutomadButtons {
 			});
 
 		});
+
+		wrapper.appendChild(inner);
+		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 

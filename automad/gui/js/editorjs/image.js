@@ -42,9 +42,10 @@ class AutomadImage {
 
 		this.data = {
 			url: data.url || '',
-			caption: data.caption || '',
-			stretched: data.stretched !== undefined ? data.stretched : false
+			caption: data.caption || ''
 		};
+
+		this.settings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
 		
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('cdx-block');
@@ -63,8 +64,6 @@ class AutomadImage {
 		this.button.addEventListener('click', function () {
 			block.select();
 		});
-
-		this.settings = this.renderStretchSetting();
 
 	}
 
@@ -144,39 +143,6 @@ class AutomadImage {
 	renderSettings() {
 
 		return this.settings;
-
-	}
-
-	renderStretchSetting() {
-
-		var block = this,
-			wrapper = document.createElement('div'),
-			button = document.createElement('div'),
-			icon = '<svg width="17" height="10" viewBox="0 0 17 10"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>',
-			title = 'Full Width',
-			toggleStretch = function () {
-				block.data.stretched = !block.data.stretched;
-				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data.stretched);
-			};
-
-		wrapper.classList.add('cdx-settings-1-1');
-		button.classList.add(block.api.styles.settingsButton);
-		button.classList.toggle(block.api.styles.settingsButtonActive, block.data.stretched);
-		button.innerHTML = icon;
-		wrapper.appendChild(button);
-
-		button.addEventListener('click', function () {
-			toggleStretch();
-			button.classList.toggle(block.api.styles.settingsButtonActive);
-		});
-
-		Promise.resolve().then(() => {
-			block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data.stretched);
-		});
-
-		block.api.tooltip.onHover(button, title, { placement: 'top' });
-
-		return wrapper;
 
 	}
 

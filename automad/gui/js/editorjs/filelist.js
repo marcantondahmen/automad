@@ -36,7 +36,7 @@
 
 class AutomadFilelist {
 
-	constructor({data}) {
+	constructor({data, api}) {
 
 		var create = Automad.util.create;
 
@@ -44,6 +44,8 @@ class AutomadFilelist {
 			file: data.file || '',
 			glob: data.glob || '*.*'
 		};
+
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -100,10 +102,16 @@ class AutomadFilelist {
 
 		var stripNbsp = Automad.util.stripNbsp;
 
-		return {
+		return Object.assign(this.data, {
 			file: this.inputs.file.value,
 			glob: stripNbsp(this.inputs.glob.innerHTML)
-		};
+		});
+
+	}
+
+	renderSettings() {
+
+		return this.layoutSettings;
 
 	}
 

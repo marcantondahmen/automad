@@ -51,6 +51,8 @@ class AutomadToc {
 			style: data.style || 'ordered'
 		}
 
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+
 		this.api = api;
 
 		this.wrapper = document.createElement('div');
@@ -82,9 +84,10 @@ class AutomadToc {
 	renderSettings() {
 
 		var wrapper = document.createElement('div'),
+			inner = document.createElement('div'),
 			block = this;
 
-		wrapper.classList.add(this.CSS.settingsWrapper);
+		inner.classList.add(this.CSS.settingsWrapper);
 
 		this.settings.forEach(function (tune) {
 
@@ -93,14 +96,14 @@ class AutomadToc {
 			button.classList.add(block.CSS.settingsButton);
 			button.classList.toggle(block.CSS.settingsButtonActive, (block.data.style == tune.name));
 			button.innerHTML = tune.icon;
-			wrapper.appendChild(button);
+			inner.appendChild(button);
 
 			button.addEventListener('click', function () {
 				
 				block.toggleTune(tune);
 				
 				// Clear all buttons.
-				const buttons = wrapper.parentNode.querySelectorAll('.' + block.CSS.settingsButton);
+				const buttons = inner.parentNode.querySelectorAll('.' + block.CSS.settingsButton);
 
 				Array.from(buttons).forEach((_button) =>
 					_button.classList.remove(block.CSS.settingsButtonActive)
@@ -114,6 +117,9 @@ class AutomadToc {
 			block.api.tooltip.onHover(button, tune.title, { placement: 'top' });
 
 		});
+
+		wrapper.appendChild(inner);
+		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 

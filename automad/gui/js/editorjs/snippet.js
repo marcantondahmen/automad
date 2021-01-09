@@ -46,6 +46,8 @@ class AutomadSnippet {
 			file: data.file || '',
 			snippet: data.snippet || ''
 		};
+		
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -102,10 +104,16 @@ class AutomadSnippet {
 
 	save() {
 
-		return {
+		return Object.assign(this.data, {
 			file: this.inputs.file.value,
 			snippet: this.inputs.snippet.value
-		};
+		});
+
+	}
+
+	renderSettings() {
+
+		return this.layoutSettings;
 
 	}
 

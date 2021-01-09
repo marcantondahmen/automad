@@ -62,11 +62,7 @@ class AutomadParagraph {
 			large: large
 		};
 
-		this.settings = [{
-			name: 'large',
-			title: 'Large',
-			icon: '<svg width="24px" height="14px" viewBox="0 0 24 14"><path d="M12.815,11.695L7.609,1.283c-0.387-0.771-1.651-0.771-2.038,0L0.365,11.695c-0.281,0.562-0.054,1.246,0.509,1.527 c0.562,0.287,1.247,0.057,1.528-0.508l0.987-1.975h6.402l0.986,1.975c0.2,0.398,0.602,0.629,1.02,0.629 c0.173,0,0.346-0.038,0.508-0.121C12.869,12.941,13.095,12.258,12.815,11.695z M4.528,8.463l2.061-4.124l2.063,4.124H4.528z"/><path d="M23.416,4.887L19.6,1.11c-0.208-0.271-0.52-0.456-0.889-0.456c-0.368,0-0.68,0.186-0.889,0.456l-3.816,3.777 c-0.447,0.442-0.451,1.165-0.01,1.611c0.445,0.445,1.164,0.453,1.611,0.01l1.965-1.946v7.643c0,0.629,0.51,1.139,1.139,1.139 s1.139-0.51,1.139-1.139V4.562l1.966,1.946c0.221,0.219,0.511,0.328,0.8,0.328c0.295,0,0.588-0.113,0.811-0.338 C23.868,6.052,23.864,5.33,23.416,4.887z"/></svg>'
-		}];
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
 
 	}
 
@@ -161,37 +157,28 @@ class AutomadParagraph {
 
 	renderSettings() {
 
-		var wrapper = document.createElement('div'),
+		var create = Automad.util.create,
+			wrapper = document.createElement('div'),
+			inner = create.element('div', ['cdx-settings-1-1']),
+			button = create.element('div', ['cdx-settings-button']),
 			block = this;
 
-		wrapper.classList.add('cdx-settings-1-1');
+		button.classList.toggle('cdx-settings-button--active', this.data['large']);
+		button.innerHTML = '<svg width="24px" height="14px" viewBox="0 0 24 14"><path d="M12.815,11.695L7.609,1.283c-0.387-0.771-1.651-0.771-2.038,0L0.365,11.695c-0.281,0.562-0.054,1.246,0.509,1.527 c0.562,0.287,1.247,0.057,1.528-0.508l0.987-1.975h6.402l0.986,1.975c0.2,0.398,0.602,0.629,1.02,0.629 c0.173,0,0.346-0.038,0.508-0.121C12.869,12.941,13.095,12.258,12.815,11.695z M4.528,8.463l2.061-4.124l2.063,4.124H4.528z"/><path d="M23.416,4.887L19.6,1.11c-0.208-0.271-0.52-0.456-0.889-0.456c-0.368,0-0.68,0.186-0.889,0.456l-3.816,3.777 c-0.447,0.442-0.451,1.165-0.01,1.611c0.445,0.445,1.164,0.453,1.611,0.01l1.965-1.946v7.643c0,0.629,0.51,1.139,1.139,1.139 s1.139-0.51,1.139-1.139V4.562l1.966,1.946c0.221,0.219,0.511,0.328,0.8,0.328c0.295,0,0.588-0.113,0.811-0.338 C23.868,6.052,23.864,5.33,23.416,4.887z"/></svg>';
+		this.api.tooltip.onHover(button, 'Large', { placement: 'top' });
 
-		this.settings.forEach(function (tune) {
-
-			var button = document.createElement('div');
-
-			button.classList.add('cdx-settings-button');
-			button.classList.toggle('cdx-settings-button--active', block.data[tune.name]);
-			button.innerHTML = tune.icon;
-			wrapper.appendChild(button);
-
-			button.addEventListener('click', function () {
-				block.toggleTune(tune.name);
-				button.classList.toggle('cdx-settings-button--active');
-				block.input.classList.toggle(block._CSS.large);
-			});
-
-			block.api.tooltip.onHover(button, tune.title, { placement: 'top' });
-
+		button.addEventListener('click', function () {
+			block.data['large'] = !block.data['large'];
+			button.classList.toggle('cdx-settings-button--active');
+			block.input.classList.toggle(block._CSS.large);
 		});
 
+		inner.appendChild(button);
+	
+		wrapper.appendChild(inner);
+		wrapper.appendChild(this.layoutSettings);
+
 		return wrapper;
-
-	}
-
-	toggleTune(tune) {
-
-		this.data[tune] = !this.data[tune];
 
 	}
 

@@ -54,6 +54,8 @@ class AutomadPagelist {
 			file: data.file || ''
 		}
 
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
@@ -155,7 +157,7 @@ class AutomadPagelist {
 
 		var stripNbsp = Automad.util.stripNbsp;
 
-		return {
+		return Object.assign(this.data, {
 			type: this.inputs.type.value,
 			matchUrl: stripNbsp(this.inputs.matchUrl.innerHTML),
 			filter: stripNbsp(this.inputs.filter.innerHTML),
@@ -165,7 +167,13 @@ class AutomadPagelist {
 			sortKey: stripNbsp(this.inputs.sortKey.innerHTML),
 			sortOrder: this.inputs.sortOrder.value,
 			file: this.inputs.file.value
-		};
+		});
+
+	}
+
+	renderSettings() {
+
+		return this.layoutSettings;
 
 	}
 

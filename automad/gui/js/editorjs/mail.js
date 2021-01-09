@@ -36,7 +36,7 @@
 
 class AutomadMail {
 
-	constructor({data}) {
+	constructor({data, api}) {
 
 		var create = Automad.util.create;
 
@@ -49,6 +49,8 @@ class AutomadMail {
 			placeholderMessage: data.placeholderMessage || 'Message',
 			textButton: data.textButton || 'Send'
 		};
+
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
 
 		this.inputs = {
 			to: create.editable(['cdx-input'], 'Enter your email address here', this.data.to),
@@ -120,7 +122,7 @@ class AutomadMail {
 
 		var stripNbsp = Automad.util.stripNbsp;
 
-		return {
+		return Object.assign(this.data, {
 			to: stripNbsp(this.inputs.to.innerHTML),
 			error: stripNbsp(this.inputs.error.innerHTML),
 			success: stripNbsp(this.inputs.success.innerHTML),
@@ -128,7 +130,13 @@ class AutomadMail {
 			placeholderSubject: stripNbsp(this.inputs.placeholderSubject.innerHTML),
 			placeholderMessage: stripNbsp(this.inputs.placeholderMessage.innerHTML),
 			textButton: stripNbsp(this.inputs.textButton.innerHTML)
-		};
+		});
+
+	}
+
+	renderSettings() {
+
+		return this.layoutSettings;
 
 	}
 

@@ -42,6 +42,17 @@
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
 		column-gap: var(--am-block-row-gap);
+		margin: var(--am-block-row-margin) 0;
+
+		& > [class*="am-block-span-"] > * {
+
+			&,
+			& .am-button {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+			
+		}
 
 		& .am-block-span-3 {
 			grid-column-start: span 3;
