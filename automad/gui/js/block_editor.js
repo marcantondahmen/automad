@@ -196,11 +196,11 @@
 			
 		},
 
-		renderLayoutSettings: function (block) {
+		renderLayoutSettings: function (data, savedData, api) {
 
 			var element = Automad.util.create.element,
-				cls = block.api.styles.settingsButton,
-				clsActive = block.api.styles.settingsButtonActive,
+				cls = api.styles.settingsButton,
+				clsActive = api.styles.settingsButtonActive,
 				wrapper = element('div', ['am-block-settings-layout']),
 				keys = {
 					stretch: 'stretched',
@@ -248,25 +248,28 @@
 						button.classList.remove(clsActive);
 					});
 
-					block.data[keys.span] = '';
+					data[keys.span] = '';
 
 				};
 
+			data[keys.stretch] = savedData[keys.stretch] !== undefined ? savedData[keys.stretch] : false;
+			data[keys.span] = savedData[keys.span] || '';
+
 			// Stretch button.
 			stretchButton.innerHTML = stretchOption.icon;
-			stretchButton.classList.toggle(clsActive, block.data[keys.stretch]);
+			stretchButton.classList.toggle(clsActive, data[keys.stretch]);
 			stretchWrapper.appendChild(stretchButton);
-			block.api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
+			api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
 
 			Promise.resolve().then(() => {
-				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
+				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
 			});
 
 			stretchButton.addEventListener('click', function () {
 				clearSpanSettings();
 				stretchButton.classList.toggle(clsActive);
-				block.data[keys.stretch] = !block.data[keys.stretch];
-				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
+				data[keys.stretch] = !data[keys.stretch];
+				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
 			});
 
 			// Span buttons.
@@ -275,27 +278,27 @@
 				var button = element('div', [cls]);
 
 				button.innerHTML = `<svg width="20px" height="20px" viewBox="0 0 20 20">${option.icon}</svg>`;
-				button.classList.toggle(clsActive, (block.data[keys.span] == option.value));
+				button.classList.toggle(clsActive, (data[keys.span] == option.value));
 
 				button.addEventListener('click', function () {
 
-					var span = block.data[keys.span];
+					var span = data[keys.span];
 
 					stretchButton.classList.toggle(clsActive, false);
-					block.data[keys.stretch] = false;
-					block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
+					data[keys.stretch] = false;
+					api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
 					clearSpanSettings();
 
 					if (span == option.value) {
-						block.data[keys.span] = '';
+						data[keys.span] = '';
 					} else {
 						button.classList.toggle(clsActive, true);
-						block.data[keys.span] = option.value;
+						data[keys.span] = option.value;
 					}
 
 				});
 				
-				block.api.tooltip.onHover(button, option.title, { placement: 'top' });
+				api.tooltip.onHover(button, option.title, { placement: 'top' });
 				spanWrapper.appendChild(button);
 
 			});
