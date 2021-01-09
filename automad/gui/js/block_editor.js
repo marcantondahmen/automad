@@ -194,6 +194,105 @@
 				event.stopPropagation();
 			});
 			
+		},
+
+		renderLayoutSettings: function (block) {
+
+			var element = Automad.util.create.element,
+				cls = block.api.styles.settingsButton,
+				clsActive = block.api.styles.settingsButtonActive,
+				wrapper = element('div', ['am-block-settings-layout']),
+				keys = {
+					stretch: 'stretched',
+					span: 'span'
+				},
+				stretchOption = {
+					title: 'Stretch',
+					icon: '<svg width="17" height="10" viewBox="0 0 17 10"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
+				},
+				stretchWrapper = element('div', ['cdx-settings-1-1']),
+				stretchButton = element('div', [cls]),
+				spanWrapper = element('div', []),
+				spanOptions = [
+					{
+						title: 'Span 1⁄3',
+						icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M16,0H2C0.9,0,0,0.9,0,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V2C18,0.9,17.1,0,16,0z M16.6,16c0,0.3-0.3,0.6-0.6,0.6H6 V1.4h10c0.3,0,0.6,0.3,0.6,0.6V16z"/></svg>',
+						value: '2'
+					},
+					{
+						title: 'Span 1⁄2',
+						icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M16,0H2C0.9,0,0,0.9,0,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V2C18,0.9,17.1,0,16,0z M16.6,16c0,0.3-0.3,0.6-0.6,0.6H9 V1.4h7c0.3,0,0.6,0.3,0.6,0.6V16z"/></svg>',
+						value: '3'
+					},
+					{
+						title: 'Span 2⁄3',
+						icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M16,0H2C0.9,0,0,0.9,0,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V2C18,0.9,17.1,0,16,0z M16.6,16c0,0.3-0.3,0.6-0.6,0.6h-4 V1.4h4c0.3,0,0.6,0.3,0.6,0.6V16z"/></svg>',
+						value: '4'
+					}
+				],
+				clearSpanSettings = function() {
+
+					const spanButtons = spanWrapper.querySelectorAll('.' + cls);
+
+					Array.from(spanButtons).forEach((button) => {
+						button.classList.remove(clsActive);
+					});
+
+					block.data[keys.span] = '';
+
+				};
+
+			// Stretch button.
+			stretchButton.innerHTML = stretchOption.icon;
+			stretchButton.classList.toggle(clsActive, block.data[keys.stretch]);
+			stretchWrapper.appendChild(stretchButton);
+			block.api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
+
+			Promise.resolve().then(() => {
+				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
+			});
+
+			stretchButton.addEventListener('click', function () {
+				clearSpanSettings();
+				stretchButton.classList.toggle(clsActive);
+				block.data[keys.stretch] = !block.data[keys.stretch];
+				block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
+			});
+
+			// Span buttons.
+			spanOptions.forEach(function (option) {
+
+				var button = element('div', [cls]);
+
+				button.innerHTML = option.icon;
+				button.classList.toggle(clsActive, (block.data[keys.span] == option.value));
+
+				button.addEventListener('click', function () {
+
+					stretchButton.classList.toggle(clsActive, false);
+					block.data[keys.stretch] = false;
+					block.api.blocks.stretchBlock(block.api.blocks.getCurrentBlockIndex(), block.data[keys.stretch]);
+					clearSpanSettings();
+
+					if (block.data[keys.span] == option.value) {
+						block.data[keys.span] = '';
+					} else {
+						button.classList.toggle(clsActive, true);
+						block.data[keys.span] = option.value;
+					}
+
+				});
+				
+				block.api.tooltip.onHover(button, option.title, { placement: 'top' });
+				spanWrapper.appendChild(button);
+
+			});
+
+			wrapper.appendChild(stretchWrapper);
+			wrapper.appendChild(spanWrapper);
+
+			return wrapper;
+
 		}
 		
 	};

@@ -109,6 +109,7 @@ HTML;
 	public static function render($json, $Automad) {
 		
 		self::$pageHasBlocks = true;
+		$rowOpen = false;
 		$data = json_decode($json);
 		$html = '';
 
@@ -124,6 +125,18 @@ HTML;
 
 			try {
 
+				$blockIsRowItem = (!empty($block->data->span));
+
+				if (!$rowOpen && $blockIsRowItem) {
+					$html .= '<section class="am-block-row">';
+					$rowOpen = true;
+				}
+
+				if ($rowOpen && !$blockIsRowItem) {
+					$html .= '</section>';
+					$rowOpen = false;
+				}
+
 				$html .= call_user_func_array(
 					'\\Automad\\Blocks\\' . $block->type . '::render',
 					array($block->data, $Automad)
@@ -135,6 +148,10 @@ HTML;
 				
 			}
 
+		}
+
+		if ($rowOpen) {
+			$html .= '</section>';
 		}
 
 		return $html;
