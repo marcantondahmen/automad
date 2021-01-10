@@ -71,9 +71,12 @@ class AutomadBlockUtils {
 
 	}
 
-	static alignButton(editor, button) {
+	static alignButton(editor) {
 
-		var blockId = editor.blocks.getCurrentBlockIndex(),
+		var editorId = editor.configuration.holder,
+			container = document.getElementById(editorId),
+			button = container.querySelector(`.${AutomadBlockUtils.cls.actionsButton}`),
+			blockId = editor.blocks.getCurrentBlockIndex(),
 			block = editor.blocks.getBlockByIndex(blockId).holder,
 			blockContent = block.querySelector(`.${AutomadBlockUtils.cls.blockContent}`);
 
@@ -93,9 +96,7 @@ class AutomadBlockUtils {
 	static settingsButtonObserver(editor) {
 
 		var editorId = editor.configuration.holder,
-			container = document.getElementById(editorId),
-			button = container.querySelector(`.${AutomadBlockUtils.cls.actionsButton}`),
-			alignButton = function () { AutomadBlockUtils.alignButton(editor, button) };
+			alignButton = function () { AutomadBlockUtils.alignButton(editor) };
 
 		$(document).on(
 			'mousedown click',
@@ -382,6 +383,7 @@ class AutomadBlockUtils {
 							}
 
 							AutomadBlockUtils.applyLayout(editor, data);
+							AutomadBlockUtils.alignButton(editor);
 
 						});
 					
