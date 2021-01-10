@@ -76,12 +76,16 @@ class AutomadBlockUtils {
 			block = editor.blocks.getBlockByIndex(blockId).holder,
 			blockContent = block.querySelector(`.${AutomadBlockUtils.cls.blockContent}`);
 
-		button.style.transform = 'translateX(0px)';
+		button.style.transform = 'translate3d(0,0,0)';
 
 		var blockRight = blockContent.getBoundingClientRect().right,
-			buttonRight = button.getBoundingClientRect().right;
+			buttonRight = button.getBoundingClientRect().right,
+			blockTop = blockContent.getBoundingClientRect().top,
+			buttonTop = button.getBoundingClientRect().top,
+			right = buttonRight - blockRight,
+			top = blockTop - buttonTop;
 
-		button.style.transform = 'translateX(-' + (buttonRight - blockRight) + 'px)';
+		button.style.transform = `translate3d(-${right}px,${top}px,0)`;
 		
 	}
 
@@ -405,9 +409,13 @@ class AutomadBlockUtils {
 				$(`.${AutomadBlockUtils.cls.actionsOpened}`).removeClass(AutomadBlockUtils.cls.actionsOpened);
 			});
 			
-			$(document).on('blur', `.${AutomadBlockUtils.cls.blockFocused} [contenteditable]`, function(event) {
-				event.stopPropagation();
-			});
+			$(document).on(
+				'blur click', 
+				`.${AutomadBlockUtils.cls.blockFocused} [contenteditable], .${AutomadBlockUtils.cls.actionsButton}`, 
+				function(event) {
+					event.stopPropagation();
+				}
+			);
 			
 		}
 
