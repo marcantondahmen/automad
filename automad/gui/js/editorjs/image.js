@@ -45,7 +45,7 @@ class AutomadImage {
 			caption: data.caption || ''
 		};
 
-		this.settings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+		this.settings = AutomadBlockUtils.renderLayoutSettings(this.data, data, api, true);
 		
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('cdx-block');

@@ -105,8 +105,51 @@
 	}
 
 	& .codex-editor__redactor {
+
 		padding-bottom: 2.14rem;
 		margin-right: 0;
+
+		@media (min-width: 860px) {
+
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			column-gap: 0.5rem;
+			row-gap: 0.25rem;
+
+			& > .ce-block {
+				grid-column-start: span 12;
+			}
+
+			& > [class*="span-"] > .ce-block__content {
+				padding: 0 !important;
+			}
+
+			& > .span-3 {
+				grid-column-start: span 3;
+			}
+
+			& > .span-4 {
+				grid-column-start: span 4;
+			}
+
+			& > .span-6 {
+				grid-column-start: span 6;
+			}
+
+			& > .span-8 {
+				grid-column-start: span 8;
+			}
+
+			& > .span-9 {
+				grid-column-start: span 9;
+			}
+
+			& > .span-12 {
+				grid-column-start: span 12;
+			}
+
+		}
+
 	}
 
 	// Resize SVG icons.

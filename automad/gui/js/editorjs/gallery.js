@@ -48,7 +48,7 @@ class AutomadGallery {
 			cleanBottom: data.cleanBottom !== undefined ? data.cleanBottom : true
 		};
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadBlockUtils.renderLayoutSettings(this.data, data, api, true);
 
 		this.inputs = {
 			globs: create.editable(['cdx-input'], 'Enter one or more glob patterns', this.data.globs),

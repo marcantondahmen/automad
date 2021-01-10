@@ -37,6 +37,206 @@
 /*
  *	A wrapper for editor.js. 
  */
+ 
+
+class AutomadBlockUtils {
+
+	static get cls() {
+
+		return {
+			editor: 'codex-editor',
+			actionsButton: 'ce-toolbar__actions',
+			block: 'ce-block',
+			blockFocused: 'ce-block--focused',
+			blockContent: 'ce-block__content',
+			input: 'cdx-input',
+			settingsButton: 'cdx-settings-button',
+			settingsLayout: 'am-block-settings-layout'
+		}
+
+	}
+
+	static applyLayoutOnReady(editor, data) {
+
+		for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
+
+			var block = editor.blocks.getBlockByIndex(i).holder,
+				span = data.blocks[i].data.span;
+
+			block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
+
+		}
+
+	}
+
+	static alignButton(editor, button) {
+
+		var blockId = editor.blocks.getCurrentBlockIndex(),
+			block = editor.blocks.getBlockByIndex(blockId).holder,
+			blockContent = block.querySelector(`.${AutomadBlockUtils.cls.blockContent}`);
+
+		button.style.transform = 'translateX(0px)';
+
+		var blockRight = blockContent.getBoundingClientRect().right,
+			buttonRight = button.getBoundingClientRect().right;
+
+		button.style.transform = 'translateX(-' + (buttonRight - blockRight) + 'px)';
+		
+	}
+
+	static settingsButtonObserver(editor) {
+
+		var editorId = editor.configuration.holder,
+			container = document.getElementById(editorId),
+			button = container.querySelector(`.${AutomadBlockUtils.cls.actionsButton}`),
+			alignButton = function () { AutomadBlockUtils.alignButton(editor, button) };
+
+		$(document).on(
+			'mousedown click',
+			`#${editorId} .${AutomadBlockUtils.cls.block}`,
+			function () {
+				setTimeout(alignButton, 50);
+			}
+		);
+
+		$(document).on(
+			'mousedown click',
+			`#${editorId} .${AutomadBlockUtils.cls.settingsLayout} div`,
+			alignButton
+		);
+
+	}
+
+	static renderLayoutSettings (data, savedData, api, withStretch) {
+
+		var element = Automad.util.create.element,
+			cls = api.styles.settingsButton,
+			clsActive = api.styles.settingsButtonActive,
+			wrapper = element('div', [AutomadBlockUtils.cls.settingsLayout]),
+			keys = {
+				stretch: 'stretched',
+				span: 'span'
+			},
+			stretchOption = {
+				title: 'Stretch',
+				icon: '<svg width="17" height="10" viewBox="0 0 17 10"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
+			},
+			stretchWrapper = element('div', ['cdx-settings-1-1']),
+			stretchButton = element('div', [cls]),
+			spanWrapper = element('div', ['cdx-settings-6']),
+			spanOptions = [
+				{
+					title: 'Span 1⁄4',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
+					value: '3'
+				},
+				{
+					title: 'Span 1⁄3',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
+					value: '4'
+				},
+				{
+					title: 'Span 1⁄2',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
+					value: '6'
+				},
+				{
+					title: 'Span 2⁄3',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
+					value: '8'
+				},
+				{
+					title: 'Span 3⁄4',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
+					value: '9'
+				},
+				{
+					title: 'Span 1⁄1',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
+					value: '12'
+				}
+			],
+			clearSpanSettings = function () {
+
+				const spanButtons = spanWrapper.querySelectorAll('.' + cls),
+					block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex()).holder;
+
+				Array.from(spanButtons).forEach((button) => {
+					button.classList.remove(clsActive);
+				});
+
+				block.className = block.className.replace(/span\-\d+/g, '');
+				data[keys.span] = '';
+
+			};
+
+		// Stretch button.
+		if (withStretch) {
+
+			data[keys.stretch] = savedData[keys.stretch] !== undefined ? savedData[keys.stretch] : false;
+
+			stretchButton.innerHTML = stretchOption.icon;
+			stretchButton.classList.toggle(clsActive, data[keys.stretch]);
+			stretchWrapper.appendChild(stretchButton);
+			api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
+
+			Promise.resolve().then(() => {
+				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
+			});
+
+			stretchButton.addEventListener('click', function () {
+				clearSpanSettings();
+				stretchButton.classList.toggle(clsActive);
+				data[keys.stretch] = !data[keys.stretch];
+				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
+			});
+
+			wrapper.appendChild(stretchWrapper);
+
+		}
+
+		// Span buttons.
+		data[keys.span] = savedData[keys.span] || '';
+
+		spanOptions.forEach(function (option) {
+
+			var button = element('div', [cls]);
+
+			button.innerHTML = `<svg width="20px" height="20px" viewBox="0 0 20 20">${option.icon}</svg>`;
+			button.classList.toggle(clsActive, (data[keys.span] == option.value));
+
+			button.addEventListener('click', function () {
+
+				var span = data[keys.span],
+					block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex()).holder;
+
+				stretchButton.classList.toggle(clsActive, false);
+				data[keys.stretch] = false;
+				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
+				clearSpanSettings();
+
+				if (span == option.value) {
+					data[keys.span] = '';
+				} else {
+					button.classList.toggle(clsActive, true);
+					block.classList.toggle(`span-${option.value}`, true);
+					data[keys.span] = option.value;
+				}
+
+			});
+
+			api.tooltip.onHover(button, option.title, { placement: 'top' });
+			spanWrapper.appendChild(button);
+
+		});
+
+		wrapper.appendChild(spanWrapper);
+
+		return wrapper;
+
+	}
+
+}
 	
 +function(Automad, $) {
 	
@@ -50,7 +250,11 @@
 				selector = '[' + be.dataAttr + ']',
 				triggerChange = function() {
 
-					var block = $(this).closest('.codex-editor').find('.cdx-block, .ce-block__content').first().get(0),
+					var block = $(this)
+								.closest(`.${AutomadBlockUtils.cls.editor}`)
+								.find(`.cdx-block, .${AutomadBlockUtils.cls.blockContent}`)
+								.first()
+								.get(0),
 						temp = document.createElement('div');
 
 					// Trigger a fake block changed event by adding and removing a temporary div.
@@ -175,6 +379,9 @@
 						new DragDrop(editor);
 						new Undo({ editor });
 
+						AutomadBlockUtils.applyLayoutOnReady(editor, data);
+						AutomadBlockUtils.settingsButtonObserver(editor);
+
 					}
 
 				});
@@ -182,145 +389,20 @@
 			});
 
 			// Trigger changes when clicking a settings button or changing an input field.
-			$(document).on('click', '.ce-settings__plugin-zone .cdx-settings-button', triggerChange);
-			$(document).on('change keyup', '.cdx-input, .ce-block input, .ce-block select', triggerChange);
+			$(document).on('click', `.${AutomadBlockUtils.cls.settingsButton}`, triggerChange);
+			$(document).on('change keyup', `.${AutomadBlockUtils.cls.input}, .${AutomadBlockUtils.cls.block} input, .${AutomadBlockUtils.cls.block} select`, triggerChange);
 			
 			// Blur focus on block when clicking outside.
 			$(window).click(function () {
-				$('.ce-block--focused').removeClass('ce-block--focused');
+				$(`.${AutomadBlockUtils.cls.blockFocused}`).removeClass(AutomadBlockUtils.cls.blockFocused);
 			});
 			
-			$(document).on('blur', '.ce-block--focused [contenteditable]', function(event) {
+			$(document).on('blur', `.${AutomadBlockUtils.cls.blockFocused} [contenteditable]`, function(event) {
 				event.stopPropagation();
 			});
 			
-		},
-
-		renderLayoutSettings: function (data, savedData, api, withStretch) {
-
-			var element = Automad.util.create.element,
-				cls = api.styles.settingsButton,
-				clsActive = api.styles.settingsButtonActive,
-				wrapper = element('div', ['am-block-settings-layout']),
-				keys = {
-					stretch: 'stretched',
-					span: 'span'
-				},
-				stretchOption = {
-					title: 'Stretch',
-					icon: '<svg width="17" height="10" viewBox="0 0 17 10"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
-				},
-				stretchWrapper = element('div', ['cdx-settings-1-1']),
-				stretchButton = element('div', [cls]),
-				spanWrapper = element('div', ['cdx-settings-6']),
-				spanOptions = [
-					{
-						title: 'Span 1⁄4',
-						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
-						value: '3'
-					},
-					{
-						title: 'Span 1⁄3',
-						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
-						value: '4'
-					},
-					{
-						title: 'Span 1⁄2',
-						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
-						value: '6'
-					},
-					{
-						title: 'Span 2⁄3',
-						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
-						value: '8'
-					},
-					{
-						title: 'Span 3⁄4',
-						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
-						value: '9'
-					},
-					{
-						title: 'Span 1⁄1',
-						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
-						value: '12'
-					}
-				],
-				clearSpanSettings = function() {
-
-					const spanButtons = spanWrapper.querySelectorAll('.' + cls);
-
-					Array.from(spanButtons).forEach((button) => {
-						button.classList.remove(clsActive);
-					});
-
-					data[keys.span] = '';
-
-				};
-
-			// Stretch button.
-			if (withStretch) {
-
-				data[keys.stretch] = savedData[keys.stretch] !== undefined ? savedData[keys.stretch] : false;
-
-				stretchButton.innerHTML = stretchOption.icon;
-				stretchButton.classList.toggle(clsActive, data[keys.stretch]);
-				stretchWrapper.appendChild(stretchButton);
-				api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
-
-				Promise.resolve().then(() => {
-					api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-				});
-
-				stretchButton.addEventListener('click', function () {
-					clearSpanSettings();
-					stretchButton.classList.toggle(clsActive);
-					data[keys.stretch] = !data[keys.stretch];
-					api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-				});
-
-				wrapper.appendChild(stretchWrapper);
-
-			}
-			
-			// Span buttons.
-			data[keys.span] = savedData[keys.span] || '';
-
-			spanOptions.forEach(function (option) {
-
-				var button = element('div', [cls]);
-
-				button.innerHTML = `<svg width="20px" height="20px" viewBox="0 0 20 20">${option.icon}</svg>`;
-				button.classList.toggle(clsActive, (data[keys.span] == option.value));
-
-				button.addEventListener('click', function () {
-
-					var span = data[keys.span];
-
-					stretchButton.classList.toggle(clsActive, false);
-					data[keys.stretch] = false;
-					api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-					clearSpanSettings();
-
-					if (span == option.value) {
-						data[keys.span] = '';
-					} else {
-						button.classList.toggle(clsActive, true);
-						data[keys.span] = option.value;
-					}
-
-				});
-				
-				api.tooltip.onHover(button, option.title, { placement: 'top' });
-				spanWrapper.appendChild(button);
-
-			});
-
-			wrapper.appendChild(spanWrapper);
-
-			return wrapper;
-
 		}
-		
+
 	};
 
 	$(document).on('ajaxComplete', function (e, xhr, settings) {
