@@ -46,6 +46,7 @@ class AutomadBlockUtils {
 		return {
 			editor: 'codex-editor',
 			actionsButton: 'ce-toolbar__actions',
+			actionsOpened: 'ce-toolbar__actions--opened',
 			block: 'ce-block',
 			blockFocused: 'ce-block--focused',
 			blockContent: 'ce-block__content',
@@ -102,6 +103,12 @@ class AutomadBlockUtils {
 		$(document).on(
 			'mousedown click',
 			`#${editorId} .${AutomadBlockUtils.cls.settingsLayout} div`,
+			alignButton
+		);
+
+		$(document).on(
+			'dragend mouseup',
+			`#${editorId} .${AutomadBlockUtils.cls.actionsButton} div`,
 			alignButton
 		);
 
@@ -393,8 +400,9 @@ class AutomadBlockUtils {
 			$(document).on('change keyup', `.${AutomadBlockUtils.cls.input}, .${AutomadBlockUtils.cls.block} input, .${AutomadBlockUtils.cls.block} select`, triggerChange);
 			
 			// Blur focus on block when clicking outside.
-			$(window).click(function () {
+			$(window).on('click', function() {
 				$(`.${AutomadBlockUtils.cls.blockFocused}`).removeClass(AutomadBlockUtils.cls.blockFocused);
+				$(`.${AutomadBlockUtils.cls.actionsOpened}`).removeClass(AutomadBlockUtils.cls.actionsOpened);
 			});
 			
 			$(document).on('blur', `.${AutomadBlockUtils.cls.blockFocused} [contenteditable]`, function(event) {

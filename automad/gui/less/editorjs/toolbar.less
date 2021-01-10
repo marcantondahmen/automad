@@ -86,9 +86,7 @@
 
 		&__actions {
 
-			top: @am-block-padding + 0.072rem;
-			right: @am-block-padding;
-			padding: 0.25rem;
+			top: 0.7rem;
 			
 			@media (max-width: @am-blocks-breakpoint-small-max) {	
 				top: 0.195rem;
@@ -99,11 +97,14 @@
 
 		&__settings-btn {
 
-			height: 1.6rem;
-			width: 1.6rem;
+			position: relative;
+			height: 2rem;
+			width: 2rem;
+			right: -0.2rem;
 			color: @button-success-color;
 			background-color: @button-success-background;
 			border-radius: 2rem;
+			box-shadow: 0 0 0 0.2rem @am-bg;
 			.transition(color 0.2s, background-color 0.2s;);
 
 			&:hover {
