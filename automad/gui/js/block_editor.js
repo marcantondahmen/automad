@@ -57,13 +57,14 @@ class AutomadBlockUtils {
 
 	}
 
-	static applyLayoutOnReady(editor, data) {
+	static applyLayout(editor, data) {
 
 		for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
 
 			var block = editor.blocks.getBlockByIndex(i).holder,
 				span = data.blocks[i].data.span;
 
+			block.className = block.className.replace(/span\-\d+/g, '');
 			block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
 
 		}
@@ -380,19 +381,25 @@ class AutomadBlockUtils {
 								$input.val(JSON.stringify(data)).trigger('change');
 							}
 
+							AutomadBlockUtils.applyLayout(editor, data);
+
 						});
 					
 					},
 
 					onReady: function() {
 						
-						$wrapper.find('.codex-editor__redactor').removeAttr('style');
-						new DragDrop(editor);
-						new Undo({ editor });
+						var undo = new Undo({ editor });
 
-						AutomadBlockUtils.applyLayoutOnReady(editor, data);
+						undo.initialize(data);
+
+						new DragDrop(editor);
+						
+						AutomadBlockUtils.applyLayout(editor, data);
 						AutomadBlockUtils.settingsButtonObserver(editor);
 
+						$wrapper.find('.codex-editor__redactor').removeAttr('style');
+						
 					}
 
 				});
