@@ -56,17 +56,21 @@
 			settingsLayout: 'am-block-settings-layout'
 		},
 
-		applyLayout: function(editor, data) {
+		applyLayout: function(editor) {
 
-			for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
+			editor.save().then((data) => {
 
-				var block = editor.blocks.getBlockByIndex(i).holder,
-					span = data.blocks[i].data.span;
+				for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
 
-				block.className = block.className.replace(/span\-\d+/g, '');
-				block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
+					var block = editor.blocks.getBlockByIndex(i).holder,
+						span = data.blocks[i].data.span;
 
-			}
+					block.className = block.className.replace(/span\-\d+/g, '');
+					block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
+
+				}
+
+			});
 
 		},
 
@@ -385,7 +389,7 @@
 
 						new DragDrop(editor);
 						
-						Automad.blockEditor.applyLayout(editor, data);
+						Automad.blockEditor.applyLayout(editor);
 						Automad.blockEditor.settingsButtonObserver(editor);
 
 						$(window).bind('keydown', function (e) {
@@ -396,9 +400,9 @@
 
 								if (key == 'z' || key == 'y') {
 									setTimeout(function () {
-										Automad.blockEditor.applyLayout(editor, data);
+										Automad.blockEditor.applyLayout(editor);
 										Automad.blockEditor.alignButton(editor);
-									}, 200);
+									}, 50);
 								}
 								
 							}
