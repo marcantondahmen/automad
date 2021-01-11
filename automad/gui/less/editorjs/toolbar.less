@@ -47,7 +47,7 @@
 		&__plus,
 		&__content .ce-toolbox {
 			
-			border-radius: @am-block-radius;
+			border-radius: @am-block-radius - 0.15rem;
 			background-color: @am-block-dropdown-background;
 
 			@media (min-width: @am-blocks-breakpoint-small) {
@@ -59,7 +59,7 @@
 		&__plus {
 
 			@media (min-width: @am-blocks-breakpoint-small) {
-				left: 0.43rem;
+				left: 0.35rem;
 			}
 			
 		}
@@ -87,8 +87,8 @@
 		&__actions {
 
 			@media (max-width: @am-blocks-breakpoint-small-max) {	
-				top: 0.445rem;
-				right: -1.85rem;	
+				top: 0.22rem;
+				right: -1.95rem;	
 				transform: none !important;
 			}
 
@@ -99,12 +99,12 @@
 			position: relative;
 			height: 2rem;
 			width: 2rem;
-			top: -0.25rem;
-			right: -0.2rem;
+			top: 0;
+			right: 0;
 			color: @button-success-color;
 			background-color: @button-success-background;
-			border-radius: 2rem;
-			box-shadow: 0 0 0 0.2rem @am-bg;
+			border-radius: 0.25rem;
+			box-shadow: 0 0 0 0.25rem @am-bg;
 			.transition(color 0.2s, background-color 0.2s;);
 
 			&:hover {

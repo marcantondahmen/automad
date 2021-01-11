@@ -135,7 +135,7 @@
 				},
 				stretchOption = {
 					title: 'Stretch',
-					icon: '<svg width="17" height="10" viewBox="0 0 17 10"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'
+					icon: '<svg height="1.25em" width="3.75em" viewBox="0 0 60 20"><path d="M41,0H19c-1.7,0-3,1.3-3,3v14c0,1.7,1.3,3,3,3h22c1.7,0,3-1.3,3-3V3C44,1.3,42.7,0,41,0z M42.9,10.4 c-0.1,0.1-0.1,0.2-0.2,0.3l-5,5C37.5,15.9,37.3,16,37,16s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l3.3-3.3H20.4l3.3,3.3 c0.4,0.4,0.4,1,0,1.4C23.5,15.9,23.3,16,23,16s-0.5-0.1-0.7-0.3l-5-5c-0.1-0.1-0.2-0.2-0.2-0.3c-0.1-0.2-0.1-0.5,0-0.8 c0.1-0.1,0.1-0.2,0.2-0.3l5-5c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L20.4,9h19.2l-3.3-3.3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5,5 c0.1,0.1,0.2,0.2,0.2,0.3C43,9.9,43,10.1,42.9,10.4z"/><path d="M11.5,20L11.5,20c-0.8,0-1.5-0.7-1.5-1.5v-17C10,0.7,10.7,0,11.5,0h0C12.3,0,13,0.7,13,1.5v17C13,19.3,12.3,20,11.5,20z"/><path d="M48.5,20L48.5,20c-0.8,0-1.5-0.7-1.5-1.5v-17C47,0.7,47.7,0,48.5,0l0,0C49.3,0,50,0.7,50,1.5v17C50,19.3,49.3,20,48.5,20z"/></svg>'
 				},
 				stretchWrapper = element('div', ['cdx-settings-1-1']),
 				stretchButton = element('div', [cls]),
@@ -218,7 +218,7 @@
 
 				var button = element('div', [cls]);
 
-				button.innerHTML = `<svg width="20px" height="20px" viewBox="0 0 20 20">${option.icon}</svg>`;
+				button.innerHTML = `<svg width="16px" height="16px" viewBox="0 0 20 20">${option.icon}</svg>`;
 				button.classList.toggle(clsActive, (data[keys.span] == option.value));
 
 				button.addEventListener('click', function () {
@@ -424,7 +424,6 @@
 			// Blur focus on block when clicking outside.
 			$(window).on('click', function() {
 				$(`.${Automad.blockEditor.cls.blockFocused}`).removeClass(Automad.blockEditor.cls.blockFocused);
-				$(`.${Automad.blockEditor.cls.actionsOpened}`).removeClass(Automad.blockEditor.cls.actionsOpened);
 			});
 			
 			$(document).on(

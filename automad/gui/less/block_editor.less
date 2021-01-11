@@ -44,12 +44,12 @@
 @am-blocks-breakpoint-small: 651px;
 @am-blocks-breakpoint-small-max: (@am-blocks-breakpoint-small - 1px);
 @am-blocks-breakpoint-fullscreen-large: 1250px;
-@am-block-padding: 0.86rem;
+@am-block-padding: 0.42rem;
 @am-block-content-padding: 4rem;
 @am-block-content-padding-stretched: 0rem;
 @am-block-content-padding-fullscreen: 10rem;
 @am-block-max-width: 80rem;
-@am-block-radius: @am-radius;
+@am-block-radius: 0.4rem;
 @am-block-dropdown-background: @am-bg;
 @am-block-focused-background: @am-bg;
 
@@ -62,7 +62,7 @@
 		max-width: @am-block-max-width;
 		padding: 0 0.29rem;
 		border: 0.072rem dashed @am-border-color;
-		border-radius: @am-radius-large;
+		border-radius: @am-block-radius + 0.29rem;
 
 		.am-fullscreen &,
 		.am-inpage & {
@@ -113,8 +113,8 @@
 
 			display: grid;
 			grid-template-columns: repeat(12, 1fr);
-			column-gap: 0.4rem;
-			row-gap: 0;
+			column-gap: 0.85rem;
+			row-gap: 0.2rem;
 
 			& > .ce-block {
 				grid-column-start: span 12;
@@ -155,7 +155,7 @@
 	// Resize SVG icons.
 	.svgWidth(@n) when (@n >= 4) {
 		.svgWidth(@n - 1);
-		& svg[width*=~'"@{n}"'] {
+		& svg[width^=~'"@{n}"'] {
 			width: round(@n / 14, 2) * 1em !important;
 		}
 	}
@@ -164,7 +164,7 @@
 
 	.svgHeight(@n) when (@n >= 8) {
 		.svgHeight(@n - 1);
-		& svg[height*=~'"@{n}"'] {
+		& svg[height^=~'"@{n}"'] {
 			height: round(@n / 14, 2) * 1em !important;
 		}
 	}
