@@ -382,9 +382,6 @@ class AutomadBlockUtils {
 								$input.val(JSON.stringify(data)).trigger('change');
 							}
 
-							AutomadBlockUtils.applyLayout(editor, data);
-							AutomadBlockUtils.alignButton(editor);
-
 						});
 					
 					},
@@ -399,6 +396,23 @@ class AutomadBlockUtils {
 						
 						AutomadBlockUtils.applyLayout(editor, data);
 						AutomadBlockUtils.settingsButtonObserver(editor);
+
+						$(window).bind('keydown', function (e) {
+
+							if (e.ctrlKey || e.metaKey) {
+
+								let key = String.fromCharCode(e.which).toLowerCase();
+								
+								if (key == 'z' || key == 'y') {
+									setTimeout(function () {
+										AutomadBlockUtils.applyLayout(editor, data);
+										AutomadBlockUtils.alignButton(editor);
+									}, 200);
+								}
+								
+							}
+
+						});
 
 						$wrapper.find('.codex-editor__redactor').removeAttr('style');
 						
