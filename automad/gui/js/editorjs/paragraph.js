@@ -62,7 +62,7 @@ class AutomadParagraph {
 			large: large
 		};
 
-		this.layoutSettings = AutomadBlockUtils.renderLayoutSettings(this.data, data, api, false);
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
 
 	}
 
