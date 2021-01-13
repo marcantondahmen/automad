@@ -63,10 +63,13 @@
 				for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
 
 					var block = editor.blocks.getBlockByIndex(i).holder,
-						span = data.blocks[i].data.span;
+						span;
 
-					block.className = block.className.replace(/span\-\d+/g, '');
-					block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
+					if (data.blocks[i] !== undefined) {
+						span = data.blocks[i].data.span;
+						block.className = block.className.replace(/span\-\d+/g, '');
+						block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
+					}
 
 				}
 
