@@ -342,12 +342,7 @@
 						raw: AutomadTextareaRaw,
 						mail: AutomadMail,
 						snippet: AutomadSnippet,
-						embed: {
-							class: Embed,
-							config: {
-								services: Automad.editorJS.embedServices
-							}
-						},
+						embed: AutomadEmbed,
 						underline: Underline,
 						inlineCode: {
 							class: InlineCode,
