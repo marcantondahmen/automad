@@ -13,7 +13,6 @@
     "@editorjs/marker": "^1.2.2",
     "@editorjs/quote": "^2.3.0",
     "@editorjs/raw": "^2.1.2",
-    "@editorjs/table": "^1.2.2",
     "@editorjs/underline": "^1.0.0",
     "blueimp-file-upload": "^9.21.0",
     "codemirror": "^5.35.0",

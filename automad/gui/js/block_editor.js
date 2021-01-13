@@ -314,7 +314,7 @@
 							inlineToolbar: true,
 						},
 						table: {
-							class: Table,
+							class: AutomadTable,
 							inlineToolbar: true
 						},
 						quote: {
