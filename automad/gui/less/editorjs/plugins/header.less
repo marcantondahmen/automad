@@ -34,6 +34,33 @@
 
 
 .ce-header {
+
 	padding: 0;
 	margin: 1.43rem 0 0.71rem 0;
+	line-height: 1.5em;
+	outline: none;
+
+	& p,
+	& div{
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+}
+
+.ce-header[contentEditable=true][data-placeholder]::before{
+  position: absolute;
+  content: attr(data-placeholder);
+  color: #707684;
+  font-weight: normal;
+  display: none;
+  cursor: text;
+}
+
+.ce-header[contentEditable=true][data-placeholder]:empty::before {
+  display: block;
+}
+
+.ce-header[contentEditable=true][data-placeholder]:empty:focus::before {
+  display: none;
 }

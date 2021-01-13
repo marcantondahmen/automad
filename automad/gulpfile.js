@@ -116,7 +116,6 @@ gulp.task('libs-js', function() {
 				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
 				'node_modules/@editorjs/embed/dist/bundle.js',
-				'node_modules/@editorjs/header/dist/bundle.js',
 				'node_modules/@editorjs/inline-code/dist/bundle.js',
 				'node_modules/@editorjs/list/dist/bundle.js',
 				'node_modules/@editorjs/marker/dist/bundle.js',
@@ -269,6 +268,7 @@ gulp.task('watch', function() {
 	gulp.watch('gui/js/*/*.js', gulp.series('automad-js'));
 	gulp.watch('gui/less/*.less', gulp.series('automad-less'));
 	gulp.watch('gui/less/*/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/*/*/*.less', gulp.series('automad-less'));
 	
 });
 
