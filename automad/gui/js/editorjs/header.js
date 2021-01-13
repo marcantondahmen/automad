@@ -26,14 +26,6 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	http://marcdahmen.de
- *
- *	Licensed under the MIT license.
- *	http://automad.org/license
- */
-
-/**
  *	This block is based on the original header block of editor.js and 
  *	is extended to support the Automad block grid layout.
  *	https://github.com/editor-js/header
@@ -48,7 +40,7 @@
  * @version 2.0.0
  */
 
-class Header {
+class AutomadHeader {
 	
 	constructor({ data, config, api, readOnly }) {
 		

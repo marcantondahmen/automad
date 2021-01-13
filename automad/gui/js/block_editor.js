@@ -301,7 +301,7 @@
 							inlineToolbar: true
 						},
 						header: {
-							class: Header,
+							class: AutomadHeader,
 							shortcut: 'CMD+SHIFT+H',
 							inlineToolbar: true,
 							config: {
