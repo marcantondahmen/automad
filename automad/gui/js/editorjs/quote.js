@@ -94,7 +94,7 @@ class AutomadQuote {
 			text: 'cdx-quote__text',
 			input: this.api.styles.input,
 			caption: 'cdx-quote__caption',
-			settingsWrapper: 'cdx-quote-settings',
+			settingsWrapper: 'cdx-settings-1-2',
 			settingsButton: this.api.styles.settingsButton,
 			settingsButtonActive: this.api.styles.settingsButtonActive,
 		};
@@ -129,6 +129,9 @@ class AutomadQuote {
 				config.defaultAlignment ||
 				DEFAULT_ALIGNMENT,
 		};
+
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+
 	}
 
 	render() {
@@ -174,7 +177,9 @@ class AutomadQuote {
 	}
 
 	renderSettings() {
-		const wrapper = this._make('div', [this.CSS.settingsWrapper], {});
+
+		const wrapper = document.createElement('div');
+		const inner = this._make('div', [this.CSS.settingsWrapper], {});
 		const capitalize = str => str[0].toUpperCase() + str.substr(1);
 
 		this.settings
@@ -186,7 +191,7 @@ class AutomadQuote {
 
 				el.classList.toggle(this.CSS.settingsButtonActive, tune.name === this.data.alignment);
 
-				wrapper.appendChild(el);
+				inner.appendChild(el);
 
 				return el;
 			})
@@ -202,6 +207,9 @@ class AutomadQuote {
 				});
 			});
 
+		wrapper.appendChild(inner);
+		wrapper.appendChild(this.layoutSettings);
+		
 		return wrapper;
 	};
 

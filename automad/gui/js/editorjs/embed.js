@@ -32,7 +32,6 @@
  */
 
 
-
 +function (Automad) {
 
 	Automad.embedUtils = {
@@ -113,12 +112,16 @@
 class AutomadEmbed {
 	
 	constructor({ data, api, readOnly }) {
+
 		this.api = api;
 		this._data = {};
 		this.element = null;
 		this.readOnly = readOnly;
 
 		this.data = data;
+
+		this.settings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+
 	}
 
 	set data(data) {
@@ -168,6 +171,7 @@ class AutomadEmbed {
 	}
 
 	render() {
+
 		if (!this.data.service) {
 			const container = document.createElement('div');
 
@@ -208,9 +212,11 @@ class AutomadEmbed {
 		this.element = container;
 
 		return container;
+
 	}
 
 	createPreloader() {
+
 		const preloader = document.createElement('preloader');
 		const url = document.createElement('div');
 
@@ -222,6 +228,7 @@ class AutomadEmbed {
 		preloader.appendChild(url);
 
 		return preloader;
+
 	}
 
 	save() {
@@ -229,6 +236,7 @@ class AutomadEmbed {
 	}
 
 	onPaste(event) {
+
 		const { key: service, data: url } = event.detail;
 
 		const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = AutomadEmbed.services[service];
@@ -242,9 +250,11 @@ class AutomadEmbed {
 			width,
 			height,
 		};
+
 	}
 
 	static prepare({ config = {} }) {
+
 		const { services = {} } = config;
 
 		let entries = Object.entries(Automad.editorJS.embedServices);
@@ -303,6 +313,7 @@ class AutomadEmbed {
 	}
 
 	static checkServiceConfig(config) {
+
 		const { regex, embedUrl, html, height, width, id } = config;
 
 		let isValid = regex && regex instanceof RegExp &&
@@ -314,6 +325,7 @@ class AutomadEmbed {
 		isValid = isValid && (width !== undefined ? Number.isFinite(width) : true);
 
 		return isValid;
+
 	}
 
 	static get pasteConfig() {
@@ -327,6 +339,7 @@ class AutomadEmbed {
 	}
 
 	embedIsReady(targetNode) {
+
 		const PRELOADER_DELAY = 450;
 
 		let observer = null;
@@ -340,6 +353,13 @@ class AutomadEmbed {
 		}).then(() => {
 			observer.disconnect();
 		});
+
+	}
+
+	renderSettings() {
+
+		return this.settings;
+
 	}
 
 }

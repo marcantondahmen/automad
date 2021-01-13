@@ -266,8 +266,9 @@ class AutomadTable {
 	constructor({ data, config, api, readOnly }) {
 		this.api = api;
 		this.readOnly = readOnly;
-
-		this._tableConstructor = new TableConstructor(data, config, api, readOnly);
+		this.data = data;
+		this._tableConstructor = new TableConstructor(this.data, config, api, readOnly);
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
 	}
 
 	render() {
@@ -275,6 +276,7 @@ class AutomadTable {
 	}
 
 	save(toolsContent) {
+
 		const table = toolsContent.querySelector('table');
 		const data = [];
 		const rows = table.rows;
@@ -291,9 +293,15 @@ class AutomadTable {
 			data.push(inputs.map(input => input.innerHTML));
 		}
 
-		return {
+		return Object.assign(this.data, {
 			content: data,
-		};
+		});
+	}
+
+	renderSettings() {
+
+		return this.layoutSettings;
+
 	}
 
 	_isEmpty(input) {

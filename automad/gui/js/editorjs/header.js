@@ -59,6 +59,8 @@ class AutomadHeader {
 		this.settingsButtons = [];
 		this._element = this.getTag();
 
+		this.settings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+
 	}
 
 	normalizeData(data) {
@@ -84,7 +86,8 @@ class AutomadHeader {
 
 	renderSettings() {
 
-		const holder = document.createElement('DIV');
+		const wrapper = document.createElement('DIV'),
+			  holder = document.createElement('DIV');
 
 		// do not add settings button, when only one level is configured
 		if (this.levels.length <= 1) {
@@ -115,7 +118,10 @@ class AutomadHeader {
 
 		});
 
-		return holder;
+		wrapper.appendChild(holder);
+		wrapper.appendChild(this.settings);
+
+		return wrapper;
 
 	}
 
@@ -149,10 +155,10 @@ class AutomadHeader {
 
 	save(toolsContent) {
 
-		return {
+		return Object.assign(this.data, {
 			text: toolsContent.innerHTML,
 			level: this.currentLevel.number,
-		};
+		});
 
 	}
 

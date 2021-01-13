@@ -80,9 +80,13 @@ class AutomadList {
 		};
 
 		this.data = data;
+
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this._data, data, api, false);
+
 	}
 
 	render() {
+
 		this._elements.wrapper = this.makeMainTag(this._data.style);
 
 		// fill with data
@@ -113,6 +117,7 @@ class AutomadList {
 		}
 
 		return this._elements.wrapper;
+
 	}
 
 	save() {
@@ -120,6 +125,7 @@ class AutomadList {
 	}
 
 	static get conversionConfig() {
+
 		return {
 
 			/**
@@ -140,6 +146,7 @@ class AutomadList {
 			}
 
 		};
+
 	}
 
 	static get sanitize() {
@@ -152,9 +159,12 @@ class AutomadList {
 	}
 
 	renderSettings() {
-		const wrapper = this._make('div', [this.CSS.settingsWrapper], {});
+
+		const wrapper = document.createElement('div'),
+			  inner = this._make('div', [this.CSS.settingsWrapper], {});
 
 		this.settings.forEach((item) => {
+
 			const itemEl = this._make('div', this.CSS.settingsButton, {
 				innerHTML: item.icon,
 			});
@@ -182,10 +192,15 @@ class AutomadList {
 				itemEl.classList.add(this.CSS.settingsButtonActive);
 			}
 
-			wrapper.appendChild(itemEl);
+			inner.appendChild(itemEl);
+
 		});
 
+		wrapper.appendChild(inner);
+		wrapper.appendChild(this.layoutSettings);
+
 		return wrapper;
+
 	}
 
 	onPaste(event) {
@@ -228,13 +243,14 @@ class AutomadList {
 			wrapperOrdered: 'cdx-list--ordered',
 			wrapperUnordered: 'cdx-list--unordered',
 			item: 'cdx-list__item',
-			settingsWrapper: 'cdx-list-settings',
+			settingsWrapper: 'cdx-settings-1-2',
 			settingsButton: this.api.styles.settingsButton,
 			settingsButtonActive: this.api.styles.settingsButtonActive,
 		};
 	}
 
 	set data(listData) {
+
 		if (!listData) {
 			listData = {};
 		}
@@ -247,9 +263,11 @@ class AutomadList {
 		if (oldView) {
 			oldView.parentNode.replaceChild(this.render(), oldView);
 		}
+		
 	}
 
 	get data() {
+
 		this._data.items = [];
 
 		const items = this._elements.wrapper.querySelectorAll(`.${this.CSS.item}`);
