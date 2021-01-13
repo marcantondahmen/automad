@@ -33,6 +33,15 @@
  */
 
 
+@import 'plugins/code.less';
+@import 'plugins/delimiter.less';
+@import 'plugins/header.less';
+@import 'plugins/list.less';
+@import 'plugins/paragraph.less';
+@import 'plugins/quote.less';
+@import 'plugins/table.less';
+
+
 .am-block-editor {
 
 	& .cdx-block {
@@ -49,39 +58,6 @@
 
 	}
 
-	& .cdx-list {
-
-		padding-left: 0.71rem;
-		list-style-position: inside;
-
-		&__item {
-			padding: 0.2rem 0 0.2rem 0.2rem;
-			line-height: inherit;
-		}
-
-	}
-
-	& .cdx-quote {
-
-		border: none;
-		background-color: transparent;
-
-		@media (min-width: @breakpoint-large) {
-
-			&:before {
-				content: '\f10d';
-				position: absolute;
-				left: 0;
-				top: 0;
-				font-size: 1.8rem;
-				color: @am-border-color;
-				.icon-font;
-			}
-
-		}
-		
-	}
-	
 	& .cdx-input {
 	
 		box-sizing: border-box;
@@ -119,73 +95,6 @@
 	& select.cdx-input {
 		padding-top: 0.57rem;
 		padding-bottom: 0.64rem;
-	}
-
-	& .ce-code {
-
-		font-family: @base-code-font-family;
-		font-size: 0.925em;
-		
-		&,
-		&:empty {
-			margin-top: 0 !important;
-		}
-
-	}
-
-	& .ce-header {
-		padding: 0;
-		margin: 1.43rem 0 0.71rem 0;
-	}
-
-	& .ce-delimiter {
-
-		margin: 0 !important;
-		line-height: 0;
-		max-height: 1.36rem;
-
-		&:before {
-			content: '';
-			display: block;
-			width: 100%;
-			height: 0;
-			margin: 0.64rem 0;
-			line-height: 0;
-			border-bottom: @am-hairline
-		}
-
-	}
-
-	& .am-paragraph-large {
-		font-size: 1.3em;
-		line-height: 1.5;
-	}
-
-	& .tc-table {
-		
-		&__wrap {
-			border-radius: @am-block-radius;
-			border-color: @am-border-color;
-		}
-
-		&__cell {
-			border-color: @am-border-color;
-		}
-
-		&__area {
-			padding: 0.57rem 0.71rem;
-		}
-
-		& tr:first-child > td {
-
-			border-bottom-width: 0.14rem;
-
-			& .tc-table__inp {
-				font-weight: bold !important;
-			}
-			
-		}
-
 	}
 
 	& .tc-toolbar {
