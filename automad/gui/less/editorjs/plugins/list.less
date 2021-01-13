@@ -35,6 +35,8 @@
 
 .cdx-list {
 
+	margin: 0;
+	outline: none;
 	padding-left: 0.71rem;
 	list-style-position: inside;
 
@@ -43,4 +45,19 @@
 		line-height: inherit;
 	}
 
+	&--unordered {
+		list-style: disc;
+	}
+
+	&--ordered {
+		list-style: decimal;
+	}
+
+	&-settings {
+		display: flex;
+
+		.cdx-settings-button {
+			width: 50%;
+		}
+	}
 }

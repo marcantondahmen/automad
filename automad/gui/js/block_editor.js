@@ -313,7 +313,7 @@
 							}
 						},
 						lists: {
-							class: List,
+							class: AutomadList,
 							inlineToolbar: true,
 						},
 						table: {
