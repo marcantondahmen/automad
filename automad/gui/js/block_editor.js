@@ -321,7 +321,7 @@
 							inlineToolbar: true
 						},
 						quote: {
-							class: Quote,
+							class: AutomadQuote,
 							inlineToolbar: true
 						},
 						delimiter: AutomadDelimiter,

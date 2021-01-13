@@ -118,7 +118,6 @@ gulp.task('libs-js', function() {
 				'node_modules/@editorjs/inline-code/dist/bundle.js',
 				'node_modules/@editorjs/list/dist/bundle.js',
 				'node_modules/@editorjs/marker/dist/bundle.js',
-				'node_modules/@editorjs/quote/dist/bundle.js',
 				'node_modules/@editorjs/raw/dist/bundle.js',
 				'node_modules/@editorjs/underline/dist/bundle.js',
 				'node_modules/editorjs-drag-drop/dist/bundle.js',
