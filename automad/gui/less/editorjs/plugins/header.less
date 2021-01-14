@@ -35,8 +35,8 @@
 
 .ce-header {
 
-	padding: 0;
-	margin: 1.43rem 0 0.71rem 0;
+	padding: 0.5rem 0;
+	margin: 0 !important;
 	line-height: 1.5em;
 	outline: none;
 
@@ -49,18 +49,18 @@
 }
 
 .ce-header[contentEditable=true][data-placeholder]::before{
-  position: absolute;
-  content: attr(data-placeholder);
-  color: #707684;
-  font-weight: normal;
-  display: none;
-  cursor: text;
+	position: absolute;
+	content: attr(data-placeholder);
+	color: @am-muted;
+	font-weight: normal;
+	display: none;
+	cursor: text;
 }
 
 .ce-header[contentEditable=true][data-placeholder]:empty::before {
-  display: block;
+	display: block;
 }
 
 .ce-header[contentEditable=true][data-placeholder]:empty:focus::before {
-  display: none;
+	display: none;
 }

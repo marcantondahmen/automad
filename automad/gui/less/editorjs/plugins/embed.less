@@ -35,6 +35,11 @@
 
 .embed-tool {
 
+	& iframe {
+		pointer-events: none;
+		max-width: 100%;
+	}
+
 	&--loading {
 
 		& .embed-tool__caption {
@@ -82,7 +87,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		max-width: 250px;
-		color: #7b7e89;
+		color: @am-muted;
 		font-size: 11px;
 		white-space: nowrap;
 		overflow: hidden;
@@ -100,7 +105,7 @@
 		&[contentEditable=true][data-placeholder]::before{
 			position: absolute;
 			content: attr(data-placeholder);
-			color: #707684;
+			color: @am-muted;
 			font-weight: normal;
 			opacity: 0;
 		}
