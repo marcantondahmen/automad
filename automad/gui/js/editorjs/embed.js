@@ -120,7 +120,12 @@ class AutomadEmbed {
 
 		this.data = data;
 
-		this.settings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+		this.layout = {
+			span: data.span || '',
+			stretched: data.stretched || ''
+		};
+
+		this.settings = Automad.blockEditor.renderLayoutSettings(this.layout, data, api, true);
 
 	}
 
@@ -232,7 +237,7 @@ class AutomadEmbed {
 	}
 
 	save() {
-		return this.data;
+		return Object.assign(this.data, this.layout);
 	}
 
 	onPaste(event) {
