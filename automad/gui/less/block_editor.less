@@ -71,21 +71,41 @@
 			position: absolute;
 			display: block;
 			bottom: 0.35rem;
-			width: ~"calc(100% - (2 * @{am-block-content-padding}))";
-			margin: 0 @am-block-content-padding;
+			width: ~"calc(100% - 9.7rem)";
+			margin: 0.2rem 4.45rem;
+			padding-bottom: 0.3rem;
 			border: @am-hairline;
-			border-radius: 0.4rem;
+			border-radius: @am-radius;
 			text-align: center;
-			line-height: 2.4rem;
-			font-size: 1.5rem;
-			font-weight: 520;
+			line-height: 2.2rem;
+			font-size: 1.85rem;
+			font-weight: 300;
 			color: @am-border-color;
+
+			@media (max-width: @am-blocks-breakpoint-small-max) {
+				width: ~"calc(100% - 1.66rem)" !important;
+				margin: 0.5rem;
+			}
+
+			.am-inpage & {
+				width: ~"calc(100% - 21.95rem)";
+				margin: 0.2rem 10.47rem;
+			}
+
+			.am-fullscreen & {
+				width: ~"calc(100% - 21.7rem)";
+				margin: 0.2rem 10.47rem;
+			}
 
 			.am-fullscreen &,
 			.am-inpage & {
-				width: ~"calc(100% - (2 * @{am-block-content-padding-fullscreen}))";
-				margin: 0 @am-block-content-padding-fullscreen;
-			}
+
+				@media (max-width: @am-blocks-breakpoint-small-max) {
+					width: ~"calc(100vw - 3.2rem)" !important;
+					margin: 0.55rem;
+				}
+
+			}			
 
 		}
 
@@ -93,6 +113,7 @@
 		.am-inpage & {
 			
 			padding-bottom: 0 !important;
+			margin-bottom: 5rem !important;
 			border: none;
 
 			@media (max-width: @am-blocks-breakpoint-small-max) {
@@ -131,7 +152,7 @@
 
 	& .codex-editor__redactor {
 
-		padding-bottom: 3.25rem;
+		padding-bottom: 3.45rem;
 		margin-right: 0;
 
 		@media (min-width: 860px) {
