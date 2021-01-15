@@ -85,7 +85,7 @@
 									</div>
 								<@ end ~@>
 								<div class="uk-block @{ :classNav }">
-									<@ tree.php @>
+									<@ ../snippets/tree.php @>
 								</div>
 							</div>
 						</div>

@@ -5,6 +5,6 @@
 		@{ title }
 	</h1>	
 	<div class="uk-margin-bottom">
-		<@ subtitle.php @>
+		<@ ../snippets/subtitle.php @>
 	</div>
 <@~ end @>

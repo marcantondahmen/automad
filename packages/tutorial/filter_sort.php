@@ -4,15 +4,15 @@ Since the header markup is the same in all templates,
 it is stored in a separate snippet file and therefore can be reused
 across multiple templates.
 #>
-<@ snippets/header.php @>
+<@ elements/header.php @>
 		<# The top navigation is included here. #>
-		<@ snippets/navbar.php @>
+		<@ elements/navbar.php @>
 		<section class="section">
 			<# 
 			Since also the content markup is the same in every template,
 			it is included here as a reusable snippet. 
 			#>
-			<@ snippets/content.php @>
+			<@ elements/content.php @>
 		</section>
 		<section class="section">
 			<# 
@@ -147,4 +147,4 @@ across multiple templates.
 			</div>
 		</section>
 <# As the last step, the footer markup is included. #>
-<@ snippets/footer.php @>
+<@ elements/footer.php @>

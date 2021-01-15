@@ -3,8 +3,8 @@
 Like in all other tutorial templates, the header, 
 navbar and content snippets are include first. 
 #>
-<@ snippets/header.php @>	
-	<@ snippets/navbar.php @>
+<@ elements/header.php @>	
+	<@ elements/navbar.php @>
 	<section class="section">		
 		<div class="content">
 			<h1>@{ title }</h1>
@@ -72,4 +72,4 @@ navbar and content snippets are include first.
 		</div>
 	</section>
 <# As the last step, the footer markup is included. #>
-<@ snippets/footer.php @>
+<@ elements/footer.php @>

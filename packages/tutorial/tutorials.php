@@ -1,8 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ snippets/header.php @>	
-	<@ snippets/navbar.php @>
+<@ elements/header.php @>	
+	<@ elements/navbar.php @>
 	<section class="section">		
-		<@ snippets/content.php @>
+		<@ elements/content.php @>
 	</section>
 	<section class="section">
 		<div class="columns is-multiline is-8 is-variable">
@@ -22,4 +22,4 @@
 			<@ end @>
 		</div>
 	</section>
-<@ snippets/footer.php @>
+<@ elements/footer.php @>

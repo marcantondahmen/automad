@@ -2,7 +2,7 @@
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
 <div class="@{ :classes | def('cards masonry') }<@ if @{ :pagelistDisplayCount } > 3 @> am-stretched<@ end @>">
 	<@ foreach in pagelist ~@>
-		<@~ ../../snippets/set_imageteaser_variable.php @>
+		<@~ ../../elements/set_imageteaser_variable.php @>
 		<@~ if @{ :imageTeaser } @>
 			<a href="@{ url }" class="card">
 				<div class="card-content panel-image">

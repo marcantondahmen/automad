@@ -14,8 +14,8 @@ not related functionally.
 While PHP code will always be parsed first, using the Automad syntax for includes of headers or 
 footers works perfectly fine since the order of parsing is not relevant here.
 #>
-<@ snippets/header.php @>
-		<@ snippets/navbar.php @>
+<@ elements/header.php @>
+		<@ elements/navbar.php @>
 		<section class="section">
 			<div class="content">
 				<h1>
@@ -161,4 +161,4 @@ footers works perfectly fine since the order of parsing is not relevant here.
 			</div>
 		</section>
 <# As the last step, the footer markup is included. #>
-<@ snippets/footer.php @>
+<@ elements/footer.php @>
