@@ -59,15 +59,40 @@
 
 	&-container {
 
+		position: relative;
 		max-width: @am-block-max-width;
 		padding: 0 0.29rem;
 		border: 0.072rem dashed @am-border-color;
 		border-radius: @am-block-radius + 0.29rem;
 
+		&:after {
+
+			content: '+';
+			position: absolute;
+			display: block;
+			bottom: 0.35rem;
+			width: ~"calc(100% - (2 * @{am-block-content-padding}))";
+			margin: 0 @am-block-content-padding;
+			border: @am-hairline;
+			border-radius: 0.4rem;
+			text-align: center;
+			line-height: 2.4rem;
+			font-size: 1.5rem;
+			font-weight: 520;
+			color: @am-border-color;
+
+			.am-fullscreen &,
+			.am-inpage & {
+				width: ~"calc(100% - (2 * @{am-block-content-padding-fullscreen}))";
+				margin: 0 @am-block-content-padding-fullscreen;
+			}
+
+		}
+
 		.am-fullscreen &,
 		.am-inpage & {
 			
-			padding: 0;
+			padding-bottom: 0 !important;
 			border: none;
 
 			@media (max-width: @am-blocks-breakpoint-small-max) {
@@ -106,7 +131,7 @@
 
 	& .codex-editor__redactor {
 
-		padding-bottom: 2.14rem;
+		padding-bottom: 3.25rem;
 		margin-right: 0;
 
 		@media (min-width: 860px) {
