@@ -27,7 +27,3 @@ checkboxShowInNavbar: 1
 -
 
 filterPagelistByUrl: (/work|/blog/|/tutorials|/contact)
-
--
-
-imageTeaser: /shared/image-landscape.png

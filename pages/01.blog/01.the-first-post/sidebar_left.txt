@@ -18,8 +18,4 @@ checkboxHideRelatedPages: 1
 
 -
 
-imageTeaser: /shared/image-portrait.png
-
--
-
 theme: standard/dark
