@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="@{ :classes | def('cards masonry') }<@ if @{ :pagelistDisplayCount } > 3 @> am-stretched<@ end @>">
+<div class="@{ :classes | def('cards masonry') }">
 	<@ foreach in pagelist ~@>
 		<@~ ../../elements/set_imageteaser_variable.php @>
 		<@~ if @{ :imageTeaser } @>

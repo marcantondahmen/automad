@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="@{ :classes | def('cards cards-large masonry') }<@ if @{ :pagelistDisplayCount } > 2 @> am-stretched<@ end @>">
+<div class="@{ :classes | def('cards cards-large masonry') }">
 	<@ foreach in pagelist ~@>
 		<div class="card" <@ ../../elements/colors_inline.php @>>
 			<div class="card-content uk-panel uk-panel-box">

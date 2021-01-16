@@ -9,11 +9,13 @@
 				<@ elements/clear_search.php @>
 			</div>
 		<@ end ~@>
-		<@ if @{ checkboxUseAlternativePagelistLayout } @>
-			<@ blocks/pagelist/blog_alt.php @>
-		<@ else @>
-			<@ blocks/pagelist/blog.php @>
-		<@ end @>
+		<section <@ if @{ :pagelistDisplayCount } > 2 @>class="am-stretched"<@ end @>>
+			<@ if @{ checkboxUseAlternativePagelistLayout } @>
+				<@ blocks/pagelist/blog_alt.php @>
+			<@ else @>
+				<@ blocks/pagelist/blog.php @>
+			<@ end @>
+		</section>
 		<@ elements/pagination.php @>
 	</div>
 <@ elements/footer.php @>
