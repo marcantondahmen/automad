@@ -62,7 +62,9 @@ class AutomadParagraph {
 			large: large
 		};
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+		this.layout = {}
+
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.layout, data, api, false);
 
 	}
 
@@ -122,7 +124,7 @@ class AutomadParagraph {
 
 	save() {
 
-		return Object.assign(this.data, {
+		return Object.assign(this.data, this.layout, {
 			text: this.input.innerHTML.replace(/\<br\>$/, '')
 		});
 
