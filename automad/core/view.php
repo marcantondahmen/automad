@@ -961,6 +961,8 @@ class View {
 				}
 				
 			}, $str);
+
+		$str = $this->InPage->processTemporaryEditButtons($str);
 			
 		return $this->resolveUrls($str, 'relativeUrlToBase', array($this->Automad->Context->get()));
 		

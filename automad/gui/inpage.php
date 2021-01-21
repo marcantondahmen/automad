@@ -81,7 +81,6 @@ class InPage {
 		if (User::get()) {
 			$str = $this->injectAssets($str);
 			$str = $this->injectMarkup($str);
-			$str = $this->processTemporaryEditButtons($str);
 		}
 		
 		return $str;
@@ -218,7 +217,7 @@ HTML;
 	 *	@return string The processed markup
 	 */
 	
-	private function processTemporaryEditButtons($str) {
+	public function processTemporaryEditButtons($str) {
 		
 		// Remove invalid buttons.
 		// Within HTML tags.	
