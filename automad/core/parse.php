@@ -104,8 +104,10 @@ class Parse {
 
 
 	/**
-	 *	Parse a file declaration string where multiple glob patterns can be separated by a comma and return an array with the resolved file paths.
-	 *	If $stripBaseDir is true, the base directory will be stripped from the path and each path gets resolved to be relative to the Automad installation directory.
+	 *	Parse a file declaration string where multiple glob patterns or URLs can be separated by a comma 
+	 *	and return an array with the resolved/downloaded file paths.
+	 *	If $stripBaseDir is true, the base directory will be stripped from the path 
+	 *	and each path gets resolved to be relative to the Automad installation directory.
 	 * 
 	 *	@param string $str
 	 *	@param object $Page (current page)
@@ -119,9 +121,17 @@ class Parse {
 		
 		if ($str) {
 			
-			foreach (self::csv($str) as $glob) {
-						
-				if ($f = FileSystem::glob(Resolve::filePath($Page->path, $glob))) {
+			foreach (self::csv($str) as $item) {
+				
+				if (preg_match('/\:\/\//is', $item)) {
+
+					$RemoteFile = new RemoteFile($item);
+
+					if ($file = $RemoteFile->getLocalCopy()) {
+						$files[] = $file;
+					}
+					
+				} else if ($f = FileSystem::glob(Resolve::filePath($Page->path, $item))) {
 					$f = array_filter($f, '\Automad\Core\FileSystem::isAllowedFileType');
 					$files = array_merge($files, $f);
 				}
