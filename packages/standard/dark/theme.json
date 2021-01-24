@@ -21,7 +21,6 @@
 			"notificationNoSearchResults",
 			"placeholderSearch",
 			"urlSearchResults"
-			
 		],
 		"shared": [
 			"+main",
@@ -43,12 +42,13 @@
 		"checkboxShowInFooter": "Show a link to this page in the footer menu",
 		"checkboxShowInNavbar": "Show a link to this page in the main navbar",
 		"checkboxUseAlternativePagelistLayout": "Use an alternative layout for blog, portfolio or related pages pagelists",
-		"colorText": "A custom override text color",
-		"colorBg": "A custom override background color",
-		"colorBorder": "A custom override border color",
-		"colorMuted": "A custom override color for muted text",
-		"colorPanelBg": "A custom override color for panel backgrounds",
-		"colorCode": "A custom override code color",
+		"colorPageText": "A custom override text color for the page",
+		"colorPageBackground": "A custom override background color for the page",
+		"colorPageBorder": "A custom override border color for the page",
+		"colorCardText": "A custom override text color for cards",
+		"colorCardBackground": "A custom override background color for cards",
+		"colorCardBorder": "A custom override border color for cards",
+		"colorCodeBackground": "A custom override background color for code blocks",
 		"filterPagelistByUrl": "Filters the pagelist by URLs matching a given regular expression like for example '(/portfolio|/blog)'",
 		"formatDatePost": "The format for displaying the date of a post &mdash; you can find more information about date formats <a href=\"https://www.php.net/manual/en/datetime.format.php\">here</a>",
 		"formatDateProject": "The format for displaying the date of a project &mdash; you can find more information about date formats <a href=\"https://www.php.net/manual/en/datetime.format.php\">here</a>",

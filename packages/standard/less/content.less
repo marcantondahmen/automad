@@ -9,6 +9,10 @@
 
 
 .content {
+
+	& > :first-child {
+		margin-top: 0;
+	}
 	
 	& [id]:target:before {
 		content: '';
@@ -77,7 +81,7 @@
 		font-weight: 400;
 		border-radius: @radius;
 		color: @code-color;
-		background-color: @panel-bg-color;
+		background-color: @code-bg-color;
 	}
 	
 	& pre {
@@ -87,7 +91,7 @@
 		font-size: 1em;
 		line-height: 1.5;
 		border-radius: @radius;
-		background-color: @panel-bg-color;
+		background-color: @code-bg-color;
 		
 		& > code {
 			display: inline-block;

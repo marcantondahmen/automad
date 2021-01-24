@@ -14,9 +14,9 @@
 	they can be included in a comment block.
 	
 	@{ imageTeaser } 
+	@{ checkboxHideThumbnails }
 	
 	#>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
 	<link href="/packages/standard/dist/standard.min.css?v=@{ :version | sanitize }" rel="stylesheet">
 	<script src="/packages/standard/dist/standard.min.js?v=@{ :version | sanitize }"></script>
 	<@ colors_header.php @>

@@ -9,6 +9,7 @@
 
 		selectors: {
 			grid: '.masonry',
+			clean: '.clean',
 			item: '.card',
 			content: '.card-content'
 		},
@@ -107,7 +108,7 @@
 					rowHeight = parseInt(window.getComputedStyle(masonry).getPropertyValue('grid-auto-rows')),
 					rowGap = parseInt(window.getComputedStyle(masonry).getPropertyValue('row-gap'));	
 
-				masonry.classList.remove('masonry-clean-bottom');
+				masonry.classList.remove('masonry-applied');
 
 				$items.each(function() {
 					this.style.gridRowStart = '';
@@ -115,9 +116,11 @@
 					this.style.gridRowEnd = 'span ' + Standard.masonry.calcItemRowSpan(this, rowHeight, rowGap);
 				});
 
-				Standard.masonry.cleanBottomEdge($(masonry), $items, rowHeight, rowGap);
-				
-				masonry.classList.add('masonry-clean-bottom');
+				if ($(masonry).is(Standard.masonry.selectors.clean)) {
+					Standard.masonry.cleanBottomEdge($(masonry), $items, rowHeight, rowGap);
+				}
+
+				masonry.classList.add('masonry-applied');
 
 			});	
 

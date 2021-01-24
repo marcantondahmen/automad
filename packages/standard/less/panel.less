@@ -8,25 +8,24 @@
  */
 
 
-@panel-box-padding:             @utility-container-padding-horizontal;
-@panel-box-padding-large:		@utility-container-large-padding-horizontal;
+@panel-box-padding:				@cards-padding;
 
-@panel-box-background:          @panel-bg-color;
-@panel-box-color:               @text-color;
-@panel-box-hover-color:         @panel-box-color;
+@panel-box-background:			@card-bg-color;
+@panel-box-color:				@card-text-color;
+@panel-box-hover-color:			@panel-box-color;
 
-@panel-teaser-margin-bottom: 	30px;
+@panel-teaser-margin-bottom: 	@panel-box-padding;
 
-@panel-title-margin-bottom:     0.6rem;
-@panel-title-font-size:         1.65rem;
-@panel-title-line-height:       1.25;
-@panel-title-font-weight:       @base-heading-font-weight;
-@panel-title-color:             @panel-box-color;
-@panel-box-title-color:         @panel-box-color;
+@panel-title-margin-bottom:		0.5rem;
+@panel-title-font-size:			1.65rem;
+@panel-title-line-height:		1.25;
+@panel-title-font-weight:		@base-heading-font-weight;
+@panel-title-color:				@panel-box-color;
+@panel-box-title-color:			@panel-box-color;
 
 
 .hook-panel-box() {
-	
+
 	& + & {
 		margin-top: @cards-gap;
 	}
@@ -39,28 +38,34 @@
 			margin-left: -@panel-box-padding;
 			margin-right: -@panel-box-padding;
 		}
-		
-		@media (min-width: @breakpoint-xlarge) {
 
-			padding: @panel-box-padding-large;
-
-			& > .uk-panel-teaser {
-				margin-top: -@panel-box-padding-large;
-				margin-left: -@panel-box-padding-large;
-				margin-right: -@panel-box-padding-large;
-			}
-
-		}
-
-		& .uk-panel-title a:not([class]) {
+		& .uk-panel-title a {
 
 			letter-spacing: -0.016em;
 			color: @panel-box-color;
+			opacity: 1;
+			.transition(opacity 0.2s;);
 
 			&:hover {
-				color: @muted-color;
+				color: @panel-box-color;
+				opacity: 0.8;
 			}
 			
+		}
+
+		&.small {
+
+			& .uk-panel-title {
+				font-size: 1.25rem;
+				font-weight: 640;
+				margin-top: -0.2rem;
+			}
+
+			& .text-subtitle {
+				padding-top: 0.3rem;
+				font-size: 0.8rem;
+			}
+
 		}
 
 	}
@@ -89,13 +94,24 @@
 
 .panel-more {
 
-	display: inline-block;
+	display: block;
 	padding: 0 1rem;
-	margin: 1rem 0 0 -1rem;
-	color: inherit;
+	margin: 1.5rem 0 0 -1rem;
+	color: @panel-box-color;
+	font-size: 1.2rem;
+	font-weight: 300;
+	opacity: 1;
+	.transition(opacity 0.2s;);
 	
 	&:hover {
-		color: @muted-color;
+		color: @panel-box-color;
+		opacity: 0.7;
+	}
+
+	.small & {
+		margin: 0.5rem 0 0 -1rem;
+		font-size: 0.9rem;
+		font-weight: 380;
 	}
 
 }

@@ -9,7 +9,7 @@
 				<@ elements/clear_search.php @>
 			</div>
 		<@ end ~@>
-		<section <@ if @{ :pagelistDisplayCount } > 2 @>class="am-stretched"<@ end @>>
+		<section <@ if @{ :pagelistDisplayCount } > 2 @>class="cards-full-width"<@ end @>>
 			<@ if @{ checkboxUseAlternativePagelistLayout } @>
 				<@ blocks/pagelist/blog_alt.php @>
 			<@ else @>

@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="@{ :classes | def('cards cards-large masonry') }">
+<div class="@{ :classes | def('cards cards-large clean masonry') }">
 	<@ foreach in pagelist ~@>
 		<div class="card" <@ ../../elements/colors_inline.php @>>
 			<div class="card-content uk-panel uk-panel-box">
@@ -14,7 +14,7 @@
 				<@ end @>
 				<div class="panel-body">
 					<div class="uk-panel-title">
-						<a href="@{ url }" class="nav-link">
+						<a href="@{ url }">
 							<@ ../../elements/icon.php @>
 							@{ title }
 						</a>

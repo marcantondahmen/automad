@@ -10,7 +10,7 @@
 				<@ elements/clear_search.php @>
 			</div>
 		<@ end @>
-		<section <@ if @{ :pagelistDisplayCount } > 3 @>class="am-stretched"<@ end @>>
+		<section <@ if @{ :pagelistDisplayCount } > 3 @>class="cards-full-width"<@ end @>>
 			<@ if @{ checkboxUseAlternativePagelistLayout } @>
 				<@ blocks/pagelist/portfolio_alt.php @>
 			<@ else @>

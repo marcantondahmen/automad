@@ -1,4 +1,4 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>	
-<@~ if @{ colorText } or @{ colorBg } or @{ colorBorder } or @{ colorMuted } or @{ colorPanelBg } or @{ colorCode } ~@>
+<@~ if @{ :c | def('@{colorPageText}@{colorPageBackground}@{colorPageBorder}@{colorCardText}@{colorCardBackground}@{colorCardBorder}@{colorCodeBackground}') } ~@>
 	style="<@ colors.php @>"
 <@~ end ~@>

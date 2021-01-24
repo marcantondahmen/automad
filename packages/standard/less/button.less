@@ -8,6 +8,8 @@
  */
 
 
+@button-border-width: 				@border-width;
+
 @button-background:					transparent;
 @button-color:              		@base-body-color;
 @button-hover-background:   		transparent;
@@ -19,7 +21,7 @@
 @button-line-height: 				@button-height;
 @button-padding-horizontal: 		1rem;
 
-@button-radius: 0;
+@button-radius: 0.4rem;
 
 .hook-button() {
 	.button;
@@ -33,7 +35,7 @@
 		margin-top: -3rem;
 		
 		& > * {
-			margin-right: 1rem;
+			margin-right: 0.55rem;
 			margin-top: 1rem;
 		}
 		
@@ -44,6 +46,7 @@
 .am-button,
 .am-mail-button {
 
+	font-weight: 560 !important;
 	.transition(box-shadow 0.2s, border-color 0.2s;);
 
 }

@@ -1,9 +1,9 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="@{ :classes | def('cards masonry') }">
+<div class="@{ :classes | def('cards masonry clean') }">
 	<@ foreach in pagelist ~@>
 		<div class="card" <@ ../../elements/colors_inline.php @>>
-			<div class="card-content uk-panel uk-panel-box">
+			<div class="card-content uk-panel small uk-panel-box">
 				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
 					<@~ ../../elements/set_imageteaser_variable.php @>
 					<@~ if @{ :imageTeaser } @>
