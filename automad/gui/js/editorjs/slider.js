@@ -54,7 +54,7 @@ class AutomadSlider {
 		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
 
 		this.inputs = {
-			globs: create.editable(['cdx-input'], 'Enter one or more glob patterns', this.data.globs),
+			globs: create.editable(['cdx-input'], '*.jpg, /shared/*.jpg, https://domain.com/image.jpg', this.data.globs),
 			width: create.editable(['cdx-input'], 'Image width in px', this.data.width),
 			height: create.editable(['cdx-input'], 'Image height in px', this.data.height)
 		};

@@ -58,13 +58,13 @@
 
 			editable: function(cls, placeholder, value) {
 
-				var div = Automad.util.create.element('div', cls);
+				var span = Automad.util.create.element('span', cls);
 
-				div.contentEditable = true;
-				div.dataset.placeholder = placeholder;
-				div.innerHTML = value;
+				span.contentEditable = true;
+				span.dataset.placeholder = placeholder;
+				span.innerHTML = value;
 
-				return div;
+				return span;
 
 			},
 
