@@ -116,6 +116,11 @@ class RemoteFile {
 		curl_close($curl);
 		fclose($fp);
 
+		if (!$file) {
+			Debug::log($url, 'File not found');
+			return false;
+		}
+
 		if ($extension = FileSystem::getImageExtensionFromMimeType($file)) {
 			rename($file, "$file$extension");
 			$file = "$file$extension";
