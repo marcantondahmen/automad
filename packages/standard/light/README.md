@@ -36,12 +36,13 @@ While there is a light and a dark theme serving as presets, all the colors used 
 
 | Name | Description |
 | ---- | ----------- |
-| Color Text | A custom override text color |
-| Color Bg | A custom override background color |
-| Color Border | A custom override border color |
-| Color Muted | A custom override color for muted and hovered text |
-| Color Panel Bg | A custom override color for panel backgrounds |
-| Color Code | A custom override code color |
+| Color Page Text | A custom override text color for a page |
+| Color Page Background | A custom override background color for a page |
+| Color Page Border | A custom override border color for a page |
+| Color Card Text | A custom override text color for cards |
+| Color Card Background | A custom override background color for cards |
+| Color Card Border | A custom override border color for cards |
+| Color Code Background | A custom override background color for code blocks |
 
 ## Writing Content
 

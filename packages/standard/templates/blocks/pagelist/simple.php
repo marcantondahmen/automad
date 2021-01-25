@@ -1,9 +1,9 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<section class="uk-margin-top uk-margin-bottom">
+<section class="cards-simple">
 	<@ foreach in pagelist ~@>
-		<div class="uk-panel uk-panel-box" <@ ../../elements/colors_inline.php @>>
+		<div class="card uk-panel uk-panel-box" <@ ../../elements/colors_inline.php @>>
 			<div class="uk-panel-title uk-margin-bottom-remove">
-				<a href="@{ url }" class="nav-link">
+				<a href="@{ url }">
 					<@ ../../elements/icon.php @>
 					@{ title }
 				</a>

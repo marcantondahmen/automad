@@ -61,13 +61,6 @@
 
 	}
 
-	& .card {
-		overflow: hidden;
-		background-color: @card-bg-color;
-		border: @cards-border-width solid @card-border-color;
-		border-radius: @cards-radius;
-	}
-
 	&.masonry-applied {
 
 		& .card-content {
@@ -90,4 +83,16 @@
 
 	}
 
+}
+
+.cards-simple {
+	margin-top: @utility-margin;
+	margin-bottom: @utility-margin;
+}
+
+.card {
+	overflow: hidden;
+	background-color: @card-bg-color;
+	border: @cards-border-width solid @card-border-color;
+	border-radius: @cards-radius;
 }

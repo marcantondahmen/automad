@@ -30,42 +30,38 @@
 		margin-top: @cards-gap;
 	}
 
-	.cards & {
-		
-		& > .uk-panel-teaser {
-			overflow: hidden;
-			margin-top: -@panel-box-padding;
-			margin-left: -@panel-box-padding;
-			margin-right: -@panel-box-padding;
-		}
+	& > .uk-panel-teaser {
+		overflow: hidden;
+		margin-top: -@panel-box-padding;
+		margin-left: -@panel-box-padding;
+		margin-right: -@panel-box-padding;
+	}
 
-		& .uk-panel-title a {
+	& .uk-panel-title a {
 
-			letter-spacing: -0.016em;
+		letter-spacing: -0.016em;
+		color: @panel-box-color;
+		opacity: 1;
+		.transition(opacity 0.2s;);
+
+		&:hover {
 			color: @panel-box-color;
-			opacity: 1;
-			.transition(opacity 0.2s;);
+			opacity: 0.8;
+		}
+		
+	}
 
-			&:hover {
-				color: @panel-box-color;
-				opacity: 0.8;
-			}
-			
+	&.small {
+
+		& .uk-panel-title {
+			font-size: 1.25rem;
+			font-weight: 640;
+			margin-top: -0.2rem;
 		}
 
-		&.small {
-
-			& .uk-panel-title {
-				font-size: 1.25rem;
-				font-weight: 640;
-				margin-top: -0.2rem;
-			}
-
-			& .text-subtitle {
-				padding-top: 0.3rem;
-				font-size: 0.8rem;
-			}
-
+		& .text-subtitle {
+			padding-top: 0.3rem;
+			font-size: 0.8rem;
 		}
 
 	}
