@@ -86,6 +86,22 @@ class Keys {
 
 
 	/**
+	 * 	Get color variable keys from an array of keys.
+	 * 
+	 *	@param array $keys
+	 *	@return array The array with only text variables.
+	 */
+
+	public static function filterColorKeys($keys) {
+
+		return array_filter($keys, function($key) {
+			return preg_match('/^color/', $key);
+		});
+
+	}
+
+
+	/**
 	 * 	Get settings variable keys from an array of keys.
 	 * 
 	 *	@param array $keys
@@ -97,7 +113,7 @@ class Keys {
 		sort($keys);
 
 		return array_filter($keys, function($key) {
-			return (preg_match('/^(text|\+)/', $key) == false);
+			return (preg_match('/^(text|\+|color)/', $key) == false);
 		});
 
 	}

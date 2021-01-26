@@ -560,6 +560,10 @@ page_vars_content: Content
 
 -
 
+page_vars_color: Colors
+
+-
+
 page_vars_settings: Template Settings
 
 -  
@@ -611,6 +615,10 @@ shared_theme_apply: Do you want to apply the selected theme and update the list 
 -
 
 shared_vars_content: Default Content
+
+-
+
+shared_vars_color: Default Colors
 
 -
 
