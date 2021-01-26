@@ -168,8 +168,7 @@ class Toolbox {
 			
 		if ($options['file']) {
 			
-			$glob = Resolve::filePath($this->Automad->Context->get()->path, $options['file']);
-			$files = FileSystem::glob($glob);
+			$files = Parse::fileDeclaration($options['file'], $this->Automad->Context->get());
 			$file = reset($files);
 			$img = new Image($file, $options['width'], $options['height'], $options['crop']);
 			
