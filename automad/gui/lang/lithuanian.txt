@@ -454,6 +454,10 @@ page_vars_content: Turinys
 
 -
 
+page_vars_color: Spalvos
+
+-
+
 page_vars_settings: Šablono nustatymai
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Ar norite pritaikyti pasirinktą temą ir atnaujinti galimų
 -
 
 shared_vars_content: Numatytasis turinys
+
+-
+
+shared_vars_color: Numatytosios spalvos
 
 -
 

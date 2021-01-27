@@ -454,6 +454,10 @@ page_vars_content: Obsah
 
 -
 
+page_vars_color: Farby
+
+-
+
 page_vars_settings: Nastavenia šablóny
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Chcete teraz použiť vybratú tému a aktualizovať zoznam 
 -
 
 shared_vars_content: Predvolený obsah
+
+-
+
+shared_vars_color: Predvolené farby
 
 -
 

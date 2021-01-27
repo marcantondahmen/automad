@@ -454,6 +454,10 @@ page_vars_content: Innehåll
 
 -
 
+page_vars_color: Färger
+
+-
+
 page_vars_settings: Mallinställningar
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Vill du använda det valda temat och uppdatera listan över 
 -
 
 shared_vars_content: Standardinnehåll
+
+-
+
+shared_vars_color: Standardfärger
 
 -
 

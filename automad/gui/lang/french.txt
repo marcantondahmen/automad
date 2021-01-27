@@ -454,6 +454,10 @@ page_vars_content: Contenu
 
 -
 
+page_vars_color: Couleurs
+
+-
+
 page_vars_settings: Paramètres du modèle
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Voulez-vous appliquer le thème sélectionné et mettre à j
 -
 
 shared_vars_content: Contenu par défaut
+
+-
+
+shared_vars_color: Couleurs par défaut
 
 -
 

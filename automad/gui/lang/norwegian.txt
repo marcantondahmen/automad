@@ -454,6 +454,10 @@ page_vars_content: Innhold
 
 -
 
+page_vars_color: Farger
+
+-
+
 page_vars_settings: Malinnstillinger
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Vil du bruke det valgte temaet og oppdatere listen over tilg
 -
 
 shared_vars_content: Standardinnhold
+
+-
+
+shared_vars_color: Standard farger
 
 -
 

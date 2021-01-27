@@ -454,6 +454,10 @@ page_vars_content: Ábhar
 
 -
 
+page_vars_color: Dathanna
+
+-
+
 page_vars_settings: Socruithe Teimpléad
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Ar mhaith leat an téama roghnaithe a chur i bhfeidhm agus l
 -
 
 shared_vars_content: Ábhar Réamhshocraithe
+
+-
+
+shared_vars_color: Dathanna Réamhshocraithe
 
 -
 

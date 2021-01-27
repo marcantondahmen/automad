@@ -454,6 +454,10 @@ page_vars_content: Contenido
 
 -
 
+page_vars_color: Colores
+
+-
+
 page_vars_settings: Configuración de plantilla
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: ¿Quieres aplicar el tema seleccionado y actualizar la lista
 -
 
 shared_vars_content: Contenido predeterminado
+
+-
+
+shared_vars_color: Colores predeterminados
 
 -
 

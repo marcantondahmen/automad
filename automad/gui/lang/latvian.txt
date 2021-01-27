@@ -454,6 +454,10 @@ page_vars_content: Saturs
 
 -
 
+page_vars_color: Krāsas
+
+-
+
 page_vars_settings: Veidnes iestatījumi
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Vai vēlaties lietot atlasīto motīvu un atjaunināt pieeja
 -
 
 shared_vars_content: Noklusējuma saturs
+
+-
+
+shared_vars_color: Noklusējuma krāsas
 
 -
 

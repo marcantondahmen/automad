@@ -454,6 +454,10 @@ page_vars_content: Zadowolony
 
 -
 
+page_vars_color: Zabarwienie
+
+-
+
 page_vars_settings: Ustawienia szablonu
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Czy chcesz teraz zastosować wybrany motyw i zaktualizować 
 -
 
 shared_vars_content: Treść domyślna
+
+-
+
+shared_vars_color: Kolory domyślne
 
 -
 

@@ -454,6 +454,10 @@ page_vars_content: Vsebina
 
 -
 
+page_vars_color: Barve
+
+-
+
 page_vars_settings: Nastavitve predloge
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Ali želite zdaj uporabiti izbrano temo in posodobiti seznam
 -
 
 shared_vars_content: Privzeta vsebina
+
+-
+
+shared_vars_color: Privzete barve
 
 -
 

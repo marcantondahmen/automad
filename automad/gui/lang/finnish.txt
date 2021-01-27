@@ -454,6 +454,10 @@ page_vars_content: Sisältö
 
 -
 
+page_vars_color: Värit
+
+-
+
 page_vars_settings: Malliasetukset
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Haluatko käyttää valittua teemaa ja päivittää käytett
 -
 
 shared_vars_content: Oletussisältö
+
+-
+
+shared_vars_color: Oletusvärit
 
 -
 

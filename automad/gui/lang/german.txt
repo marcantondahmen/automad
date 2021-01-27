@@ -454,6 +454,10 @@ page_vars_content: Inhalt
 
 -
 
+page_vars_color: Farben
+
+-
+
 page_vars_settings: Vorlageneinstellungen
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Möchten Sie das ausgewählte Thema anwenden und die Liste d
 -
 
 shared_vars_content: Standardinhalt
+
+-
+
+shared_vars_color: Standardfarben
 
 -
 

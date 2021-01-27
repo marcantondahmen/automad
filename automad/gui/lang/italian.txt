@@ -454,6 +454,10 @@ page_vars_content: Soddisfare
 
 -
 
+page_vars_color: Colori
+
+-
+
 page_vars_settings: Impostazioni modello
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Vuoi applicare il tema selezionato e aggiornare l'elenco del
 -
 
 shared_vars_content: Contenuto predefinito
+
+-
+
+shared_vars_color: Colori predefiniti
 
 -
 

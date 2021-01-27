@@ -454,6 +454,10 @@ page_vars_content: Sisu
 
 -
 
+page_vars_color: Värvid
+
+-
+
 page_vars_settings: Mallisätted
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Kas soovite valitud teema rakendada ja saadaolevate muutujat
 -
 
 shared_vars_content: Vaikimisi sisu
+
+-
+
+shared_vars_color: Vaikevärvid
 
 -
 

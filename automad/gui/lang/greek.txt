@@ -454,6 +454,10 @@ page_vars_content: Περιεχόμενο
 
 -
 
+page_vars_color: Χρωματιστά
+
+-
+
 page_vars_settings: Ρυθμίσεις προτύπου
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Θέλετε να εφαρμόσετε το επιλεγμέ
 -
 
 shared_vars_content: Προεπιλεγμένο περιεχόμενο
+
+-
+
+shared_vars_color: Προεπιλεγμένα χρώματα
 
 -
 

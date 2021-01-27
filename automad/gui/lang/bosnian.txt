@@ -454,6 +454,10 @@ page_vars_content: Sadržaj
 
 -
 
+page_vars_color: Boje
+
+-
+
 page_vars_settings: Postavke predloška
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Želite li sada primijeniti odabranu temu i ažurirati listu
 -
 
 shared_vars_content: Zadani sadržaj
+
+-
+
+shared_vars_color: Zadane boje
 
 -
 

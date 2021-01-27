@@ -454,6 +454,10 @@ page_vars_content: Obsah
 
 -
 
+page_vars_color: Barvy
+
+-
+
 page_vars_settings: Nastavení šablony
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Chcete nyní použít vybrané téma a aktualizovat seznam d
 -
 
 shared_vars_content: Výchozí obsah
+
+-
+
+shared_vars_color: Výchozí barvy
 
 -
 

@@ -454,6 +454,10 @@ page_vars_content: Содержание
 
 -
 
+page_vars_color: Цвета
+
+-
+
 page_vars_settings: Настройки шаблона
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Вы хотите применить выбранную те
 -
 
 shared_vars_content: Контент по умолчанию
+
+-
+
+shared_vars_color: Цвета по умолчанию
 
 -
 

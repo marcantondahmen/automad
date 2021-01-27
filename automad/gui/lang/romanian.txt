@@ -454,6 +454,10 @@ page_vars_content: Conţinut
 
 -
 
+page_vars_color: Culori
+
+-
+
 page_vars_settings: Setări șablon
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Doriți să aplicați tema selectată și să actualizați l
 -
 
 shared_vars_content: Conținut implicit
+
+-
+
+shared_vars_color: Culori implicite
 
 -
 

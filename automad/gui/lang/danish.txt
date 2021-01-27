@@ -454,6 +454,10 @@ page_vars_content: Indhold
 
 -
 
+page_vars_color: Farver
+
+-
+
 page_vars_settings: Skabelonindstillinger
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Vil du anvende det valgte tema og opdatere listen over tilgÃ
 -
 
 shared_vars_content: Standardindhold
+
+-
+
+shared_vars_color: Standardfarver
 
 -
 

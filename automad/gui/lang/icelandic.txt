@@ -454,6 +454,10 @@ page_vars_content: Innihald
 
 -
 
+page_vars_color: Litir
+
+-
+
 page_vars_settings: Sniðmátstillingar
 
 -
@@ -491,6 +495,10 @@ shared_theme_apply: Viltu beita völdu þema og uppfæra listann yfir tiltækar 
 -
 
 shared_vars_content: Sjálfgefið efni
+
+-
+
+shared_vars_color: Sjálfgefnir litir
 
 -
 
