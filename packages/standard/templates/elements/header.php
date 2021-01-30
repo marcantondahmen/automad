@@ -13,7 +13,7 @@
 	To make sure the following variables are always available in the dashboard, 
 	they can be included in a comment block.
 	
-	@{ imageTeaser } 
+	@{ imageCard } 
 	@{ checkboxHideThumbnails }
 	
 	#>

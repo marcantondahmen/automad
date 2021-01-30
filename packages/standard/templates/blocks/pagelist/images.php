@@ -3,10 +3,10 @@
 <div class="@{ :classes | def('cards masonry clean') }">
 	<@ foreach in pagelist ~@>
 		<@~ ../../elements/set_imageteaser_variable.php @>
-		<@~ if @{ :imageTeaser } @>
+		<@~ if @{ :imageCard } @>
 			<a href="@{ url }" class="card">
 				<div class="card-content panel-image">
-					<img src="@{ :imageTeaser }">
+					<img src="@{ :imageCard }">
 				</div>
 			</a>
 		<@ end @>

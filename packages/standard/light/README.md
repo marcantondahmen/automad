@@ -65,7 +65,7 @@ This theme offers multiple options and two templates &mdash; **Blog** and **Port
 | Filter Pagelist By Url | Filters the pagelist by URLs matching a given regular expression like for example `(/portfolio|/blog)`. |
 | Notification No Search Results | The notification text for empty search results. |
 | Items Per Page | The maximum number of pages to be displayed in a pagelist at once. In case there are more pages to be shown, a pagination navigation will show up below automatically. |
-| Show Pages Below | Show only direct children of a custom local URL like `/custom/page` |
+| Url Show Pages Below | Show only direct children of a custom local URL like `/custom/page` |
 | Url Search Results | The local URL of the pagelist page to be used as the search results page. Note that the search field in the menu is only enabled in case an URL is defined. |
 | Url Tag Link Target | The target page to navigate to when clicking a tag. By default the parent page is used. |
 | Image Teaser | The filename or glob pattern for the image to be used as the teaser image in a pagelist. |

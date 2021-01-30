@@ -6,9 +6,9 @@
 			<div class="card-content uk-panel uk-panel-box">
 				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
 					<@~ ../../elements/set_imageteaser_variable.php @>
-					<@ if @{ :imageTeaser } ~@>
+					<@ if @{ :imageCard } ~@>
 						<div class="uk-panel-teaser">
-							<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
+							<a href="@{ url }"><img src="@{ :imageCard }"></a>
 						</div>
 					<@~ end ~@>
 				<@ end @>
