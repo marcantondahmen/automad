@@ -280,7 +280,7 @@
 							items[j].style.gridColumnStart = '';
 						}
 
-						AutomadBlocks.Gallery.Masonry.cleanBottomEdge(gallery, items, 50, 0);
+						AutomadBlocks.Gallery.Masonry.cleanBottomEdge(gallery, items, 20, 0);
 
 					}
 

@@ -65,7 +65,10 @@ class Gallery {
 
 	public static function render($data, $Automad) {
 		
-		$masonryRowHeight = 50;
+		// Use a factor of 0.85 to multiply with the row height of the grid to get a good
+		// result since the aspect ratio is dependent on the actual row width and not the 
+		// minimum row width.
+		$masonryRowHeight = 20 * 0.85;
 		$defaults = array(
 			'globs' => '*.jpg, *.png, *.gif',
 			'width' => 250,
