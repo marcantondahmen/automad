@@ -1,0 +1,33 @@
+title: Automad
+
+-
+
+url: https://automad.org
+
+-
+
+tags: Docs
+
+-
+
+colorCardBackground: #E9EAEC
+
+-
+
+colorCardBorder: #E9EAEC
+
+-
+
+checkboxHideInMenu: 0
+
+-
+
+checkboxShowInFooter: 1
+
+-
+
+checkboxShowInNavbar: 1
+
+-
+
+imageCard: https://source.unsplash.com/GSIzNfR9GLE/1000x1000

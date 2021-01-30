@@ -1,0 +1,73 @@
+title: Pagelist Blocks
+
+-
+
+tags: Intro, Pagelist
+
+-
+
++main: {
+  "time": 1611962762871,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "To provide even more flexibility to structure you content, it is also possible to embed <b>pagelist blocks</b> directly into a page's content like below instead of using a portfolio or blog template. ",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "Let's Build a Contact Page&nbsp; ⟶",
+        "primaryLink": "/intro/contact",
+        "secondaryText": "",
+        "secondaryLink": "",
+        "alignment": "left",
+        "span": ""
+      }
+    },
+    {
+      "type": "pagelist",
+      "data": {
+        "type": "all",
+        "matchUrl": "(intro\\/|auto)",
+        "filter": "",
+        "template": "",
+        "limit": "5",
+        "offset": "0",
+        "sortKey": ":path",
+        "sortOrder": "asc",
+        "file": "/standard/templates/blocks/pagelist/portfolio_alt.php",
+        "stretched": false,
+        "span": "12"
+      }
+    }
+  ],
+  "version": "2.18.0"
+}
+
+-
+
+colorCardText: #181818
+
+-
+
+colorCardBackground: #E6E6E6
+
+-
+
+colorCardBorder: #E6E6E6
+
+-
+
+checkboxHideRelatedPages: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+imageCard: https://source.unsplash.com/ut67iFuoD2o/1000x1100

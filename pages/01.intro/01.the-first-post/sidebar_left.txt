@@ -1,0 +1,61 @@
+title: The First Post
+
+-
+
+tags: Intro, Post
+
+-
+
++main: {
+  "time": 1611962045682,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "A post in Automad is just a page including some meta data, like a date and tags, the post content and a list of related pages at the bottom. Related pages are controlled by common <i>tags</i>. The page content can have a wide selection of <a href=\"https://automad.org/user-guide/using-blocks\">blocks</a> — it includes paragraphs, headings, lists, images, tables, galleries, slider and so on.",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "Using Blocks ⟶",
+        "primaryLink": "/intro/using-blocks",
+        "secondaryText": "",
+        "secondaryLink": "",
+        "alignment": "left",
+        "span": ""
+      }
+    }
+  ],
+  "version": "2.18.0"
+}
+
+-
+
+colorPageBackground: #232323
+
+-
+
+colorPageBorder: #333333
+
+-
+
+colorCardText: #181818
+
+-
+
+colorCardBackground: #F3F4F6
+
+-
+
+colorCardBorder: #F3F4F6
+
+-
+
+imageCard: https://source.unsplash.com/6rXpQzfCYlw/1000x1100
+
+-
+
+theme: standard/dark

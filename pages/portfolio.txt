@@ -1,0 +1,57 @@
+title: Welcome
+
+-
+
+hidden: on
+
+-
+
+date: 2017-06-28 12:00:00
+
+-
+
++main: {
+  "time": 1611962032413,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Hello, I'm <b>Automad</b>. <br>You've have just finished my installation successfully! Now it's time to publish your stories and projects. <a href=\"/dashboard\">Sign in</a> to the dashboard to get started quickly or <a href=\"/intro\">take</a> a tour to explore all my features to create an awesome website.",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "Take a Tour&nbsp; ⟶",
+        "primaryLink": "/intro",
+        "secondaryText": "<br>",
+        "secondaryLink": "",
+        "alignment": "left",
+        "span": ""
+      }
+    }
+  ],
+  "version": "2.18.0"
+}
+
+-
+
+checkboxHideFiltersAndSort: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+checkboxShowAllPagesInPagelist: 1
+
+-
+
+filterPagelistByUrl: (^/|auto)
+
+-
+
+sortPagelist: :path asc

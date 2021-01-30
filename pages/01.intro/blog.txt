@@ -1,0 +1,88 @@
+title: Intro
+
+-
+
+tags: Get Started
+
+-
+
++main: {
+  "time": 1611963497752,
+  "blocks": [
+    {
+      "type": "header",
+      "data": {
+        "text": "Intro",
+        "level": 1
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Automad ships with two elegant themes — <b>light</b> and <b>dark</b>. This page uses the blog template of the dark theme. It is configured to display a filtered set of pages in the grid below. <a href=\"/dashboard?context=edit_page&amp;url=%2Fblog#data-and-settings\">Check out</a> all settings and start playing around. Don't worry, nothing can break!",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "The First Post ⟶",
+        "primaryLink": "/intro/the-first-post",
+        "secondaryText": "",
+        "secondaryLink": "",
+        "alignment": "left",
+        "span": ""
+      }
+    }
+  ],
+  "version": "2.18.0"
+}
+
+-
+
+colorPageBackground: #232323
+
+-
+
+colorPageBorder: #333333
+
+-
+
+colorCardText: #181818
+
+-
+
+colorCardBackground: #F1D5C5
+
+-
+
+colorCardBorder: #F1D5C5
+
+-
+
+checkboxHideFilters: 1
+
+-
+
+checkboxHidePrevNextNav: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+checkboxShowInNavbar: 1
+
+-
+
+imageCard: https://source.unsplash.com/URCwkL1dTjM/1000x1300
+
+-
+
+sortPagelist: :path asc
+
+-
+
+theme: standard/dark

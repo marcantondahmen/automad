@@ -1,0 +1,92 @@
+title: Block Layouts
+
+-
+
+tags: Blocks, Intro, Layout
+
+-
+
++main: {
+  "time": 1611962589843,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "In some cases you maybe want to arrange some blocks <b>horizontally</b> in one row instead of stacking them vertically. Fortunately you can easily change the <b>block layout</b> by defining how much space a block should take within a row. The three images below are arranged in three columns of 1/3 of the full witdh of a row.",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "image",
+      "data": {
+        "url": "https://source.unsplash.com/giP0e750Dr8/1000x1000",
+        "caption": "Enter your ...",
+        "stretched": false,
+        "span": "4"
+      }
+    },
+    {
+      "type": "image",
+      "data": {
+        "url": "https://source.unsplash.com/Ds4TsdS095U/1000x1000",
+        "caption": "Captions right ...",
+        "stretched": false,
+        "span": "4"
+      }
+    },
+    {
+      "type": "image",
+      "data": {
+        "url": "https://source.unsplash.com/7FE2UTxR1Yw/1000x1000",
+        "caption": "Below the images",
+        "stretched": false,
+        "span": "4"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Now let's add some <b>color</b> to our pagelists and show an unique <b>icon</b> along with the page title.",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "Colors and Icons ⟶",
+        "primaryLink": "/intro/colors-and-icons",
+        "secondaryText": "",
+        "secondaryLink": "",
+        "alignment": "left",
+        "span": ""
+      }
+    }
+  ],
+  "version": "2.18.0"
+}
+
+-
+
+colorCardText: #181818
+
+-
+
+colorCardBackground: #F6F7F9
+
+-
+
+colorCardBorder: #F6F7F9
+
+-
+
+checkboxHideRelatedPages: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+imageCard: https://source.unsplash.com/VYCDTBAP8P4/1000x1300

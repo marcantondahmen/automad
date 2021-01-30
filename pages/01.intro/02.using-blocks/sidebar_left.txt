@@ -1,0 +1,75 @@
+title: Using Blocks
+
+-
+
+tags: Blocks, Intro
+
+-
+
++main: {
+  "time": 1611962538421,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Each post consists of one or more <b>blocks</b>. This post includes an enlarged paragraph followed by a <i>gallery block</i>, more text and a button. A gallery optionally can be stretched over the full with. Its image <a href=\"https://automad.org/user-guide/using-blocks#image-selections\">selection</a> can be controlled by using glob patterns or URLs.",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "gallery",
+      "data": {
+        "globs": "https://source.unsplash.com/96oddxihsfA/1100x1100,https://source.unsplash.com/6exatQX3vUE/1200x1000,https://source.unsplash.com/Ds4TsdS095U/900x1200,https://source.unsplash.com/7FE2UTxR1Yw/900x1000,https://source.unsplash.com/giP0e750Dr8/1000x900,https://source.unsplash.com/f4qLDY-OjSU/1200x800",
+        "width": 280,
+        "cleanBottom": true,
+        "stretched": false,
+        "span": "12"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "In the next step you will learn how to control the layout of a page even more precisely by arranging blocks horizontally. ",
+        "large": true,
+        "span": ""
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "Arranging Blocks ⟶",
+        "primaryLink": "/intro/block-layouts",
+        "secondaryText": "",
+        "secondaryLink": "",
+        "alignment": "left",
+        "span": ""
+      }
+    }
+  ],
+  "version": "2.18.0"
+}
+
+-
+
+colorCardText: #181818
+
+-
+
+colorCardBackground: #DBDBDB
+
+-
+
+colorCardBorder: #DBDBDB
+
+-
+
+checkboxHideRelatedPages: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+imageCard: https://source.unsplash.com/2cFZ_FB08UM/1000x800
