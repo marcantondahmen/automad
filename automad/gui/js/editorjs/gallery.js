@@ -136,4 +136,10 @@ class AutomadGallery {
 
 	}
 
+	static get enableLineBreaks() {
+
+		return true;
+
+	}
+
 }

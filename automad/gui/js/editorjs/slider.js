@@ -180,4 +180,10 @@ class AutomadSlider {
 
 	}
 
+	static get enableLineBreaks() {
+
+		return true;
+
+	}
+
 }

@@ -326,7 +326,10 @@
 							inlineToolbar: true
 						},
 						delimiter: AutomadDelimiter,
-						image: AutomadImage,
+						image: {
+							class: AutomadImage,
+							inlineToolbar: true
+						},
 						gallery: AutomadGallery,
 						slider: AutomadSlider,
 						buttons: {
