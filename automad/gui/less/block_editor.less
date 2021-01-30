@@ -44,12 +44,12 @@
 @am-blocks-breakpoint-small: 651px;
 @am-blocks-breakpoint-small-max: (@am-blocks-breakpoint-small - 1px);
 @am-blocks-breakpoint-fullscreen-large: 1250px;
-@am-block-padding: 0.42rem;
+@am-block-padding: 0.65rem;
 @am-block-content-padding: 4rem;
 @am-block-content-padding-stretched: 0rem;
 @am-block-content-padding-fullscreen: 10rem;
 @am-block-max-width: 80rem;
-@am-block-radius: 0.4rem;
+@am-block-radius: 0.6rem;
 @am-block-dropdown-background: @am-bg;
 @am-block-focused-background: @am-bg;
 
@@ -65,56 +65,11 @@
 		border: 0.072rem dashed @am-border-color;
 		border-radius: @am-block-radius + 0.29rem;
 
-		&:after {
-
-			content: '+';
-			position: absolute;
-			display: block;
-			bottom: 0.35rem;
-			width: ~"calc(100% - 9.7rem)";
-			margin: 0.2rem 4.45rem;
-			padding-bottom: 0.3rem;
-			border: @am-hairline;
-			border-radius: @am-radius;
-			text-align: center;
-			line-height: 2.2rem;
-			font-size: 1.85rem;
-			font-weight: 300;
-			color: @am-border-color;
-
-			@media (max-width: @am-blocks-breakpoint-small-max) {
-				width: ~"calc(100% - 1.66rem)" !important;
-				margin: 0.5rem;
-			}
-
-			.am-inpage & {
-				width: ~"calc(100% - 21.95rem)";
-				margin: 0.2rem 10.47rem;
-			}
-
-			.am-fullscreen & {
-				width: ~"calc(100% - 21.7rem)";
-				margin: 0.2rem 10.47rem;
-			}
-
-			.am-fullscreen &,
-			.am-inpage & {
-
-				@media (max-width: @am-blocks-breakpoint-small-max) {
-					width: ~"calc(100vw - 3.2rem)" !important;
-					margin: 0.55rem;
-				}
-
-			}			
-
-		}
-
 		.am-fullscreen &,
 		.am-inpage & {
 			
 			padding-bottom: 0 !important;
 			margin-bottom: 5rem !important;
-			border: none;
 
 			@media (max-width: @am-blocks-breakpoint-small-max) {
 				box-sizing: border-box;
@@ -143,7 +98,6 @@
 				max-width: @am-block-max-width;
 				margin-left: auto;
 				margin-right: auto;
-				padding: 0 @am-block-padding;
 			}
 
 		}

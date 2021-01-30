@@ -46,6 +46,7 @@
 
 		cls: {
 			editor: 'codex-editor',
+			redactor: 'codex-editor__redactor',
 			actionsButton: 'ce-toolbar__actions',
 			actionsOpened: 'ce-toolbar__actions--opened',
 			block: 'ce-block',
@@ -106,7 +107,7 @@
 
 			$(document).on(
 				'mousedown click',
-				`#${editorId} .${Automad.blockEditor.cls.block}`,
+				`#${editorId} .${Automad.blockEditor.cls.block}, #${editorId} .${Automad.blockEditor.cls.redactor}`,
 				function () {
 					setTimeout(alignButton, 50);
 				}
@@ -306,7 +307,7 @@
 						header: {
 							class: AutomadHeader,
 							shortcut: 'CMD+SHIFT+H',
-							inlineToolbar: true,
+							inlineToolbar: ['italic', 'underline', 'link', 'editorJSStyle'],
 							config: {
 								levels: [1, 2, 3, 4, 5, 6],
 								defaultLevel: 2
@@ -407,7 +408,7 @@
 
 						});
 
-						$wrapper.find('.codex-editor__redactor').removeAttr('style');
+						$wrapper.find(`.${Automad.blockEditor.cls.redactor}`).removeAttr('style');
 						
 					}
 
