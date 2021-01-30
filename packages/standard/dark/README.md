@@ -7,6 +7,7 @@ The Dark theme is a clean and elegant multi-purpose theme. It provides several o
 - [Templates](#templates)
 - [Colors](#colors)
 - [Writing Content](#writing-content)
+- [Overriding Theme Styles](#overriding-theme-styles)
 - [Pagelist Configuration](#pagelist-configuration)
 	- [Related Pages](#related-pages)
 - [Title, Navigation, Filtering and Sorting](#title-navigation-filtering-and-sorting)
@@ -55,6 +56,29 @@ Please note that in case the **+Main** blocks variable has any content, the Mark
 | Text | An alternative content variable. It is only displays as long as the +Main variable is empty. |
 | Text Teaser | An alternative teaser variable. It is only displayed as long as the +Main variable is empty. |
 		
+## Overriding Theme Styles
+
+Apart from colors, also other styles can be overriden using CSS custom properties. Those overrides can be easily defined by adding a `<style>` tag to the `Items Header` variable of either a page or in the **Shared Data and Settings** section of the dashboard. The following example demonstrates how to change the font weight of the `h1` and `h2` headlines:
+
+	<style>
+	    :root {
+	        --h1-font-weight: 500;
+			--h2-font-weight: 480;
+	    }
+	</style>
+
+It is also possible to change the font family for headings by embedding some Google fonts as well:
+
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<style>
+	    :root {
+	        --heading-font-family: 'Lobster', cursive;
+	    }
+	</style>
+
+There are many other custom properties available. A full list can be found [here](https://github.com/marcantondahmen/automad/blob/master/packages/standard/less/variables.less).
+
 ## Pagelist Configuration
 
 This theme offers multiple options and two templates &mdash; **Blog** and **Portfolio** &mdash; to create pagelists. The following options can be used to control the content of such a pagelist. Pagelist templates can also be used to create a search results page.

@@ -8,7 +8,16 @@
  */
 
 
-@border-width: 						2px;
+@text-color: 						var(--color-page-text);
+@bg-color: 							var(--color-page-bg);
+@border-color: 						var(--color-page-border);
+@card-text-color: 					var(--color-card-text);
+@card-bg-color: 					var(--color-card-bg);
+@card-border-color: 				var(--color-card-border);
+@code-color: 						@text-color;
+@code-bg-color: 					var(--color-code-bg);
+
+@border-width: 						var(--border-width);
 @border:							@border-width solid @border-color;
 @radius: 							0;
 
@@ -18,8 +27,8 @@
 @font-xlarge-factor:				1.25;
 
 @base-body-background:				@bg-color;
-@base-body-font-family:				'Inter', sans-serif;
-@base-heading-font-family:			@base-body-font-family;
+@base-body-font-family:				var(--font-family);
+@base-heading-font-family:			var(--heading-font-family);
 @base-body-color:					@text-color;
 @base-body-font-size: 				16px;
 @base-body-line-height: 			1.6;
@@ -28,33 +37,32 @@
 
 @base-margin-vertical:				@utility-margin-small;
 
-@base-heading-font-weight:			640;
 @base-heading-color:				@base-body-color;
 @base-heading-text-transform:		none;
 @base-heading-margin-top:			@utility-margin;
-@base-h1-font-size:   				2.85rem;
-@base-h1-line-height: 				1.1;
-@base-h2-font-size:   				1.95rem;
-@base-h2-line-height: 				1.225;
-@base-h3-font-size:   				1.65rem;
-@base-h3-line-height: 				1.25;
-@base-h4-font-size:   				1.35rem;
-@base-h4-line-height: 				1.275;
-@base-h5-font-size:   				1.225rem;
-@base-h5-line-height: 				1.35;
-@base-h6-font-size:   				1.15rem;
-@base-h6-line-height: 				1.425;
+@base-h1-font-size:   				var(--h1-font-size);
+@base-h1-line-height: 				var(--h1-line-height);
+@base-h2-font-size: 				var(--h2-font-size);
+@base-h2-line-height: 				var(--h2-line-height);
+@base-h3-font-size: 				var(--h3-font-size);
+@base-h3-line-height: 				var(--h3-line-height);
+@base-h4-font-size: 				var(--h4-font-size);
+@base-h4-line-height: 				var(--h4-line-height);
+@base-h5-font-size: 				var(--h5-font-size);
+@base-h5-line-height: 				var(--h5-line-height);
+@base-h6-font-size: 				var(--h6-font-size);
+@base-h6-line-height: 				var(--h6-line-height);
 
 @base-code-font-family:				"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 @base-code-color:					inherit;
 @base-code-font-size:				0.95em;
 
 @base-em-color:						@base-body-color;
-@base-quote-font-style:         	italic;
+@base-quote-font-style:				italic;
 
-@base-hr-margin-vertical:       	@base-margin-vertical;
-@base-hr-border:                	@base-body-color;
-@base-hr-border-width:          	2px;
+@base-hr-margin-vertical:			@base-margin-vertical;
+@base-hr-border:					@base-body-color;
+@base-hr-border-width:				@border-width;
 
 
 *,
@@ -87,15 +95,33 @@ body {
 h1 {
 	margin-top: @utility-margin;
 	margin-bottom: @utility-margin;
-	letter-spacing: -0.014em;
-	font-weight: 720;
+	font-weight: var(--h1-font-weight);
 }
 
 h2 {
-	letter-spacing: -0.016em;
+	font-weight: var(--h2-font-weight);
 }
 
 h3 {
+	font-weight: var(--h3-font-weight);
+}
+
+h4 {
+	font-weight: var(--h4-font-weight);
+}
+
+h5 {
+	font-weight: var(--h5-font-weight);
+}
+
+h6 {
+	font-weight: var(--h6-font-weight);
+}
+
+h1,
+h2,
+h3,
+h4 {
 	letter-spacing: -0.016em;
 }
 
