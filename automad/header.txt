@@ -29,8 +29,8 @@
  *	version <%= pkg.version %>
  *
  *	Copyright (c) 2014-<%= new Date().getFullYear() %> by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */

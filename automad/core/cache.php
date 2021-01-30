@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2013-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -76,8 +76,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In case the page and the Automad object are deprecated, after creating both, they can be saved to cache using writePageToCache() and writeAutomadObjectToCache().
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Cache {

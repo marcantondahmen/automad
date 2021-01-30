@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Keys class provides all methods to search all kind of content variables (keys of the data array) used in templates. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Keys {

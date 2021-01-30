@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2013-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -58,8 +58,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In a last step, all URLs within the generated HTML get resolved to be relative to the server's root (or absolute), before $output gets returned.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class View {

@@ -28,10 +28,10 @@
  *	AUTOMAD
  *
  *	Copyright (c) 2021 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The remote file class.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class RemoteFile {
