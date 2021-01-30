@@ -1,44 +1,13 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *
- *
- *	AUTOMAD
- *
- *	This block is based on the original header block of editor.js and 
+ *	This EditorJS block is based on the original header block by CodeX and
  *	is extended to support the Automad block grid layout.
  *	https://github.com/editor-js/header
+ *
+ *	Copyright (c) 2018 CodeX (team@ifmo.su)
+ *	Copyright (c) 2021 Marc Anton Dahmen
+ *	MIT License
  */
 
-/**
- * Header block for the Editor.js.
- *
- * @author CodeX (team@ifmo.su)
- * @copyright CodeX 2018
- * @license MIT
- * @version 2.0.0
- */
 
 class AutomadHeader {
 	

@@ -1,43 +1,13 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *
- *
- *	AUTOMAD
- *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
- *
- *	Licensed under the MIT license.
- *	http://automad.org/license
- */
-
-
-/**
- *	This block is based on the original paragraph block of editor.js
+ *	This EditorJS block is based on the original paragraph block by CodeX and
+ *	is extended to support the Automad block grid layout and other features.
  *	https://github.com/editor-js/paragraph
+ *
+ *	Copyright (c) 2018 CodeX (team@ifmo.su)
+ *	Copyright (c) 2021 Marc Anton Dahmen
+ *	MIT License
  */
+
 
 class AutomadParagraph {
 	

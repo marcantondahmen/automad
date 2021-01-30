@@ -1,34 +1,19 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *
- *
- *	AUTOMAD
- *
- *	This block is based on the original embed block of editor.js and
+ *	This EditorJS block is based on the original embed block by CodeX and
  *	is extended to support the Automad block grid layout.
  *	https://github.com/editor-js/embed
+ *
+ *	Copyright (c) 2018 CodeX (team@ifmo.su)
+ *	Copyright (c) 2021 Marc Anton Dahmen
+ *	MIT License
+ *	
+ *	------------------------------------------------------------------------
+ *	
+ *	The debounce function is part of Underscore.js
+ *	https://underscorejs.org
+ *
+ *	Copyright (c) 2009-2020 Jeremy Ashkenas, DocumentCloud and Investigative
+ *	MIT License
  */
 
 
