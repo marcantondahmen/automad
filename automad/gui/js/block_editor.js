@@ -423,19 +423,6 @@
 			$(document).on('click', `.${Automad.blockEditor.cls.settingsButton}`, triggerChange);
 			$(document).on('change keyup', `.${Automad.blockEditor.cls.input}, .${Automad.blockEditor.cls.block} input, .${Automad.blockEditor.cls.block} select`, triggerChange);
 			
-			// Blur focus on block when clicking outside.
-			$(window).on('click', function() {
-				$(`.${Automad.blockEditor.cls.blockFocused}`).removeClass(Automad.blockEditor.cls.blockFocused);
-			});
-			
-			$(document).on(
-				'blur click', 
-				`.${Automad.blockEditor.cls.blockFocused} [contenteditable], .${Automad.blockEditor.cls.actionsButton}`, 
-				function(event) {
-					event.stopPropagation();
-				}
-			);
-			
 		}
 
 	};
