@@ -25,7 +25,7 @@ class View_Test extends TestCase {
 		$rendered = $View->render();
 		$rendered = trim(str_replace('\n', '', $rendered));
 		
-		$this->assertEquals($rendered, $expected);
+		$this->assertEquals($expected, $rendered);
 		
 	}
 	
@@ -61,7 +61,8 @@ class View_Test extends TestCase {
 			'session_get_01' => 'Session Test',
 			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
 			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'
+			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
+			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
 		);
 		
 		foreach ($templates as $template => $expected) {
@@ -80,7 +81,7 @@ class View_Test extends TestCase {
 
 	/**
 	 *	@dataProvider dataForTestHeadlessValueIsEqual
-	 *	@testdox render $template: $expected
+	 *	@testdox render $value: $expected
 	 */
 
 	public function testHeadlessValueIsEqual($value, $expected) {
@@ -96,7 +97,7 @@ class View_Test extends TestCase {
 		// $value matches $expected.
 		$array = json_decode($View->render());
 		
-		$this->assertEquals($array->test, $expected);
+		$this->assertEquals($expected, $array->test);
 		
 	}
 
@@ -105,7 +106,7 @@ class View_Test extends TestCase {
 		return array(
 			array(
 				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
-				'<img src="/pages/image.jpg" srcset="/pages/image.jpg 500w, /pages/image_large.jpg 1200w"><a href="/index.php/test">Test</a>'
+				'<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
 			),
 			array(
 				"This is a\n\rmultiline test.",
@@ -122,7 +123,7 @@ class View_Test extends TestCase {
 
 	/**
 	 *	@dataProvider dataForTestHeadlessJSONIsEqual
-	 *	@testdox render $template: $expected
+	 *	@testdox render $value: $expected
 	 */
 
 	public function testHeadlessJSONIsEqual($value, $expected) {
@@ -135,7 +136,7 @@ class View_Test extends TestCase {
 		// Render view in headless mode.
 		$View = new View($AutomadMock, true);
 		
-		$this->assertEquals($View->render(), $expected);
+		$this->assertEquals($expected, $View->render());
 		
 	}
 
@@ -144,7 +145,7 @@ class View_Test extends TestCase {
 		return array(
 			array(
 				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
-				'{"test": "<img src=\"/pages/image.jpg\" srcset=\"/pages/image.jpg 500w, /pages/image_large.jpg 1200w\"><a href=\"/index.php/test\">Test</a>"}'
+				'{"test": "<img src=\"/pages/01.page/image.jpg\" srcset=\"/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w\"><a href=\"/index.php/page/test\">Test</a>"}'
 			),
 			array(
 				"This is a\n\rmultiline test.",
@@ -158,4 +159,49 @@ class View_Test extends TestCase {
 
 	}
 	
+
+	/**
+	 *	@dataProvider dataForTestInPageRenderIsEqual
+	 *	@testdox render $template: $expected
+	 */
+
+	public function testInPageRenderIsEqual($template, $expected) {
+
+		$_SESSION['username'] = 'test';
+
+		$Mock = new Mock();
+		$View = new View($Mock->createAutomad($template));
+		$rendered = $View->render();
+		$rendered = trim(str_replace('\n', '', $rendered));
+		
+		$this->assertEquals($expected, $rendered);
+
+		$_SESSION['username'] = false;
+
+	}
+
+	public function dataForTestInPageRenderIsEqual() {
+
+		$data = array();
+		$templates = array(
+			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
+			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
+			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
+		);
+		
+		foreach ($templates as $template => $expected) {
+			
+			$data[] = array(
+				$template,
+				$expected
+			);
+			
+		}
+		
+		return $data;
+
+	}
+
+
 }
