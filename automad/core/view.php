@@ -1020,12 +1020,19 @@ class View {
 					
 				}, $str);
 
+		// Remove all temporary edit buttons inside HTML tags to avoid confusing the URL resolver. 
+		$str = 	preg_replace_callback(
+					'/<([^>]+)>/s',
+					function($match) {
+						return '<' . preg_replace('/' . Regex::inPageEditButton() . '/s', '', $match[1]) . '>';
+					},
+					$str
+				);
+
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
 		$str = 	preg_replace_callback(
-					// Note that it is important to separate the in-page edit button markup from the URL to
-					// resolve file URLs correctly.
-					'/(<[^>]+(?:action|href|src))=((?:\\\\)?")([^"\{]+)(?:' . Regex::inPageEditButton() . ')?((?:\\\\)?")/is', 
+					'/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', 
 					function($match) use ($method, $parameters) {
 						$parameters = array_merge(array(0 => $match[3]), $parameters);
 						$url = call_user_func_array($method, $parameters);
