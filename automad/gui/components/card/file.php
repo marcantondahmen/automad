@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The file card component. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
