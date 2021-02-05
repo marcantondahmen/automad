@@ -96,6 +96,91 @@
 
 class AutomadEmbed {
 	
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get pasteConfig() {
+		return {
+			patterns: AutomadEmbed.patterns,
+		};
+	}
+
+	static prepare({ config = {} }) {
+
+		const { services = {} } = config;
+
+		let entries = Object.entries(Automad.editorJS.embedServices);
+
+		const enabledServices = Object
+			.entries(services)
+			.filter(([key, value]) => {
+				return typeof value === 'boolean' && value === true;
+			})
+			.map(([key]) => key);
+
+		const userServices = Object
+			.entries(services)
+			.filter(([key, value]) => {
+				return typeof value === 'object';
+			})
+			.filter(([key, service]) => AutomadEmbed.checkServiceConfig(service))
+			.map(([key, service]) => {
+				const { regex, embedUrl, html, height, width, id } = service;
+
+				return [key, {
+					regex,
+					embedUrl,
+					html,
+					height,
+					width,
+					id,
+				}];
+			});
+
+		if (enabledServices.length) {
+			entries = entries.filter(([key]) => enabledServices.includes(key));
+		}
+
+		entries = entries.concat(userServices);
+
+		AutomadEmbed.services = entries.reduce((result, [key, service]) => {
+			if (!(key in result)) {
+				result[key] = service;
+
+				return result;
+			}
+
+			result[key] = Object.assign({}, result[key], service);
+
+			return result;
+		}, {});
+
+		AutomadEmbed.patterns = entries
+			.reduce((result, [key, item]) => {
+				result[key] = item.regex;
+
+				return result;
+			}, {});
+
+	}
+
+	static checkServiceConfig(config) {
+
+		const { regex, embedUrl, html, height, width, id } = config;
+
+		let isValid = regex && regex instanceof RegExp &&
+			embedUrl && typeof embedUrl === 'string' &&
+			html && typeof html === 'string';
+
+		isValid = isValid && (id !== undefined ? id instanceof Function : true);
+		isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
+		isValid = isValid && (width !== undefined ? Number.isFinite(width) : true);
+
+		return isValid;
+
+	}
+
 	constructor({ data, api, readOnly }) {
 
 		this.api = api;
@@ -243,91 +328,6 @@ class AutomadEmbed {
 
 	}
 
-	static prepare({ config = {} }) {
-
-		const { services = {} } = config;
-
-		let entries = Object.entries(Automad.editorJS.embedServices);
-
-		const enabledServices = Object
-			.entries(services)
-			.filter(([key, value]) => {
-				return typeof value === 'boolean' && value === true;
-			})
-			.map(([key]) => key);
-
-		const userServices = Object
-			.entries(services)
-			.filter(([key, value]) => {
-				return typeof value === 'object';
-			})
-			.filter(([key, service]) => AutomadEmbed.checkServiceConfig(service))
-			.map(([key, service]) => {
-				const { regex, embedUrl, html, height, width, id } = service;
-
-				return [key, {
-					regex,
-					embedUrl,
-					html,
-					height,
-					width,
-					id,
-				}];
-			});
-
-		if (enabledServices.length) {
-			entries = entries.filter(([key]) => enabledServices.includes(key));
-		}
-
-		entries = entries.concat(userServices);
-
-		AutomadEmbed.services = entries.reduce((result, [key, service]) => {
-			if (!(key in result)) {
-				result[key] = service;
-
-				return result;
-			}
-
-			result[key] = Object.assign({}, result[key], service);
-
-			return result;
-		}, {});
-
-		AutomadEmbed.patterns = entries
-			.reduce((result, [key, item]) => {
-				result[key] = item.regex;
-
-				return result;
-			}, {});
-
-	}
-
-	static checkServiceConfig(config) {
-
-		const { regex, embedUrl, html, height, width, id } = config;
-
-		let isValid = regex && regex instanceof RegExp &&
-			embedUrl && typeof embedUrl === 'string' &&
-			html && typeof html === 'string';
-
-		isValid = isValid && (id !== undefined ? id instanceof Function : true);
-		isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
-		isValid = isValid && (width !== undefined ? Number.isFinite(width) : true);
-
-		return isValid;
-
-	}
-
-	static get pasteConfig() {
-		return {
-			patterns: AutomadEmbed.patterns,
-		};
-	}
-
-	static get isReadOnlySupported() {
-		return true;
-	}
-
 	embedIsReady(targetNode) {
 
 		const PRELOADER_DELAY = 450;
@@ -347,9 +347,7 @@ class AutomadEmbed {
 	}
 
 	renderSettings() {
-
 		return this.settings;
-
 	}
 
 }

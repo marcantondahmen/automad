@@ -36,6 +36,31 @@
 
 class AutomadPagelist {
 
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get sanitize() {
+		return {
+			type: false,
+			matchUrl: false,
+			filter: false,
+			template: false,
+			limit: false,
+			offset: false,
+			sortKey: false,
+			sortOrder: false,
+			file: false
+		}
+	}
+
+	static get toolbox() {
+		return {
+			title: 'Pagelist',
+			icon: '<svg width="16px" height="18px" viewBox="0 0 16 18"><path d="M7,3C4.79,3,3,4.79,3,7v7c0,2.21,1.79,4,4,4h5c2.21,0,4-1.79,4-4V7c0-2.21-1.79-4-4-4 M12,5c1.1,0,2,0.9,2,2v7 c0,1.1-0.9,2-2,2H7c-1.1,0-2-0.9-2-2V7c0-1.1,0.9-2,2-2"/><path d="M2,11V6V4c0-1.1,0.9-2,2-2h1h4h3.45C11.75,0.81,10.48,0,9,0H4C1.79,0,0,1.79,0,4v7c0,1.48,0.81,2.75,2,3.45V11z"/><path d="M12,9H7C6.72,9,6.5,8.78,6.5,8.5S6.72,8,7,8h5c0.28,0,0.5,0.22,0.5,0.5S12.28,9,12,9z"/><path d="M12,11H7c-0.28,0-0.5-0.22-0.5-0.5S6.72,10,7,10h5c0.28,0,0.5,0.22,0.5,0.5S12.28,11,12,11z"/><path d="M12,13H7c-0.28,0-0.5-0.22-0.5-0.5S6.72,12,7,12h5c0.28,0,0.5,0.22,0.5,0.5S12.28,13,12,13z"/></svg>'
+		};
+	}
+
 	constructor({ data, api }) {
 
 		var create = Automad.util.create;
@@ -118,31 +143,6 @@ class AutomadPagelist {
 			sortKey: this.wrapper.querySelector('.am-block-sort-key'),
 			sortOrder: this.wrapper.querySelector('.am-block-sort-order'),
 			file: this.wrapper.querySelector('.am-block-file')
-		}
-
-	}
-
-	static get toolbox() {
-
-		return {
-			title: 'Pagelist',
-			icon: '<svg width="16px" height="18px" viewBox="0 0 16 18"><path d="M7,3C4.79,3,3,4.79,3,7v7c0,2.21,1.79,4,4,4h5c2.21,0,4-1.79,4-4V7c0-2.21-1.79-4-4-4 M12,5c1.1,0,2,0.9,2,2v7 c0,1.1-0.9,2-2,2H7c-1.1,0-2-0.9-2-2V7c0-1.1,0.9-2,2-2"/><path d="M2,11V6V4c0-1.1,0.9-2,2-2h1h4h3.45C11.75,0.81,10.48,0,9,0H4C1.79,0,0,1.79,0,4v7c0,1.48,0.81,2.75,2,3.45V11z"/><path d="M12,9H7C6.72,9,6.5,8.78,6.5,8.5S6.72,8,7,8h5c0.28,0,0.5,0.22,0.5,0.5S12.28,9,12,9z"/><path d="M12,11H7c-0.28,0-0.5-0.22-0.5-0.5S6.72,10,7,10h5c0.28,0,0.5,0.22,0.5,0.5S12.28,11,12,11z"/><path d="M12,13H7c-0.28,0-0.5-0.22-0.5-0.5S6.72,12,7,12h5c0.28,0,0.5,0.22,0.5,0.5S12.28,13,12,13z"/></svg>'
-		};
-
-	}
-
-	static get sanitize() {
-
-		return {
-			type: false,
-			matchUrl: false,
-			filter: false,
-			template: false,
-			limit: false,
-			offset: false,
-			sortKey: false,
-			sortOrder: false,
-			file: false
 		}
 
 	}

@@ -36,6 +36,24 @@
 
 class AutomadFilelist {
 
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get sanitize() {
+		return {
+			file: false,
+			glob: false
+		}
+	}
+
+	static get toolbox() {
+		return {
+			title: 'Filelist',
+			icon: '<svg width="16px" height="18px" viewBox="0 0 16 18"><path d="M14.52,7.02c-1.57-1.57-0.99-0.99-2.5-2.5C10.89,3.39,10.25,3,8,3C7.5,3,7.19,3,7,3C4.79,3,3,4.79,3,7v7c0,2.21,1.79,4,4,4 h5c2.21,0,4-1.79,4-4c0,0,0-1.02,0-3C16,8.75,15.67,8.17,14.52,7.02z M14,14c0,1.1-0.9,2-2,2H7c-1.1,0-2-0.9-2-2V7c0-1.1,0.9-2,2-2 h2v1c0,2.21,1.79,4,4,4h1V14z"/><path d="M6,2h3.5C9.37,1.87,9.21,1.71,9.02,1.52C7.89,0.39,7.25,0,5,0C4.5,0,4.19,0,4,0C1.79,0,0,1.79,0,4v7 c0,1.48,0.81,2.75,2,3.45V11V4v0c0-1.1,0.9-2,2-2H6z"/></svg>'
+		};
+	}
+
 	constructor({data, api}) {
 
 		var create = Automad.util.create;
@@ -74,28 +92,8 @@ class AutomadFilelist {
 
 	}
 
-	static get toolbox() {
-
-		return {
-			title: 'Filelist',
-			icon: '<svg width="16px" height="18px" viewBox="0 0 16 18"><path d="M14.52,7.02c-1.57-1.57-0.99-0.99-2.5-2.5C10.89,3.39,10.25,3,8,3C7.5,3,7.19,3,7,3C4.79,3,3,4.79,3,7v7c0,2.21,1.79,4,4,4 h5c2.21,0,4-1.79,4-4c0,0,0-1.02,0-3C16,8.75,15.67,8.17,14.52,7.02z M14,14c0,1.1-0.9,2-2,2H7c-1.1,0-2-0.9-2-2V7c0-1.1,0.9-2,2-2 h2v1c0,2.21,1.79,4,4,4h1V14z"/><path d="M6,2h3.5C9.37,1.87,9.21,1.71,9.02,1.52C7.89,0.39,7.25,0,5,0C4.5,0,4.19,0,4,0C1.79,0,0,1.79,0,4v7 c0,1.48,0.81,2.75,2,3.45V11V4v0c0-1.1,0.9-2,2-2H6z"/></svg>'
-		};
-
-	}
-
-	static get sanitize() {
-
-		return {
-			file: false,
-			glob: false
-		}
-
-	}
-
 	render() {
-
 		return this.wrapper;
-
 	}
 
 	save() {
@@ -110,9 +108,7 @@ class AutomadFilelist {
 	}
 
 	renderSettings() {
-
 		return this.layoutSettings;
-
 	}
 
 }

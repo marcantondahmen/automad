@@ -36,6 +36,28 @@
 
 class AutomadGallery {
 
+	static get enableLineBreaks() {
+		return true;
+	}
+
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get sanitize() {
+		return {
+			globs: false,
+			width: false
+		};
+	}
+
+	static get toolbox() {
+		return {
+			title: 'Gallery',
+			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M4,2h4v6H2V4 C2,2.897,2.897,2,4,2z M4,13c-1.103,0-2-0.897-2-2v-1h6v3H4z M16,11c0,1.103-0.897,2-2,2h-4V7h6V11z M16,5h-6V2h4 c1.103,0,2,0.897,2,2V5z"/></svg>'
+		};
+	}
+
 	constructor({data, api}) {
 
 		var create = Automad.util.create;
@@ -72,15 +94,6 @@ class AutomadGallery {
 		this.wrapper.appendChild(this.inputs.globs);
 		this.wrapper.appendChild(create.label('Image Width'));
 		this.wrapper.appendChild(this.inputs.width);
-
-	}
-
-	static get toolbox() {
-
-		return {
-			title: 'Gallery',
-			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M4,2h4v6H2V4 C2,2.897,2.897,2,4,2z M4,13c-1.103,0-2-0.897-2-2v-1h6v3H4z M16,11c0,1.103-0.897,2-2,2h-4V7h6V11z M16,5h-6V2h4 c1.103,0,2,0.897,2,2V5z"/></svg>'
-		};
 
 	}
 
@@ -124,21 +137,6 @@ class AutomadGallery {
 		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
-
-	}
-
-	static get sanitize() {
-
-		return {
-			globs: false,
-			width: false
-		};
-
-	}
-
-	static get enableLineBreaks() {
-
-		return true;
 
 	}
 

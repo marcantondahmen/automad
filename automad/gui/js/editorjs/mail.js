@@ -36,6 +36,26 @@
 
 class AutomadMail {
 
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get sanitize() {
+		return {
+			to: false,
+			placeholderEmail: false,
+			placeholderSubject: false,
+			placeholderMessage: false
+		}
+	}
+
+	static get toolbox() {
+		return {
+			title: 'Mail Form',
+			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M14,2 c0.153,0,0.302,0.021,0.445,0.054L9,7.5L3.554,2.054C3.698,2.021,3.846,2,4,2H14z M16,11c0,1.103-0.897,2-2,2H4 c-1.103,0-2-0.897-2-2V4c0-0.154,0.021-0.302,0.054-0.446L8.25,9.75C8.457,9.957,8.729,10.061,9,10.061S9.543,9.957,9.75,9.75 l6.195-6.196C15.979,3.698,16,3.846,16,4V11z"/></svg>'
+		};
+	}
+
 	constructor({data, api}) {
 
 		var create = Automad.util.create;
@@ -89,26 +109,6 @@ class AutomadMail {
 		this.wrapper.appendChild(this.inputs.placeholderMessage);
 		this.wrapper.appendChild(create.label('Text Button'));
 		this.wrapper.appendChild(this.inputs.textButton);
-
-	}
-
-	static get toolbox() {
-
-		return {
-			title: 'Mail Form',
-			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M14,2 c0.153,0,0.302,0.021,0.445,0.054L9,7.5L3.554,2.054C3.698,2.021,3.846,2,4,2H14z M16,11c0,1.103-0.897,2-2,2H4 c-1.103,0-2-0.897-2-2V4c0-0.154,0.021-0.302,0.054-0.446L8.25,9.75C8.457,9.957,8.729,10.061,9,10.061S9.543,9.957,9.75,9.75 l6.195-6.196C15.979,3.698,16,3.846,16,4V11z"/></svg>'
-		};
-
-	}
-
-	static get sanitize() {
-
-		return {
-			to: false,
-			placeholderEmail: false,
-			placeholderSubject: false,
-			placeholderMessage: false
-		}
 
 	}
 

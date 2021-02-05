@@ -11,13 +11,52 @@
 
 class AutomadList {
 
-	
-	static get isReadOnlySupported() {
-		return true;
+	static get conversionConfig() {
+
+		return {
+
+			/**
+			 * To create exported string from list, concatenate items by dot-symbol.
+			 */
+			export: (data) => {
+				return data.items.join('. ');
+			},
+
+			/**
+			 * To create a list from other block's string, just put it at the first item.
+			 */
+			import: (string) => {
+				return {
+					items: [string],
+					style: 'unordered',
+				};
+			}
+
+		};
+
 	}
 
 	static get enableLineBreaks() {
 		return true;
+	}
+
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get pasteConfig() {
+		return {
+			tags: ['OL', 'UL', 'LI'],
+		};
+	}
+
+	static get sanitize() {
+		return {
+			style: {},
+			items: {
+				br: true,
+			},
+		};
 	}
 
 	static get toolbox() {
@@ -101,40 +140,6 @@ class AutomadList {
 		return this.data;
 	}
 
-	static get conversionConfig() {
-
-		return {
-
-			/**
-			 * To create exported string from list, concatenate items by dot-symbol.
-			 */
-			export: (data) => {
-				return data.items.join('. ');
-			},
-
-			/**
-			 * To create a list from other block's string, just put it at the first item.
-			 */
-			import: (string) => {
-				return {
-					items: [string],
-					style: 'unordered',
-				};
-			}
-
-		};
-
-	}
-
-	static get sanitize() {
-		return {
-			style: {},
-			items: {
-				br: true,
-			},
-		};
-	}
-
 	renderSettings() {
 
 		const wrapper = document.createElement('div'),
@@ -184,12 +189,6 @@ class AutomadList {
 		const list = event.detail.data;
 
 		this.data = this.pasteHandler(list);
-	}
-
-	static get pasteConfig() {
-		return {
-			tags: ['OL', 'UL', 'LI'],
-		};
 	}
 
 	makeMainTag(style) {

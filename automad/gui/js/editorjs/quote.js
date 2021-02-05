@@ -64,6 +64,39 @@ class AutomadQuote {
 		};
 	}
 
+	static get sanitize() {
+		return {
+			text: {
+				br: true,
+			},
+			caption: {
+				br: true,
+			},
+			alignment: {},
+		};
+	}
+
+	constructor({ data, config, api, readOnly }) {
+		const { ALIGNMENTS, DEFAULT_ALIGNMENT } = AutomadQuote;
+
+		this.api = api;
+		this.readOnly = readOnly;
+
+		this.quotePlaceholder = config.quotePlaceholder || AutomadQuote.DEFAULT_QUOTE_PLACEHOLDER;
+		this.captionPlaceholder = config.captionPlaceholder || AutomadQuote.DEFAULT_CAPTION_PLACEHOLDER;
+
+		this.data = {
+			text: data.text || '',
+			caption: data.caption || '',
+			alignment: Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment ||
+				config.defaultAlignment ||
+				DEFAULT_ALIGNMENT,
+		};
+
+		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+
+	}
+
 	get CSS() {
 		return {
 			baseClass: this.api.styles.block,
@@ -88,27 +121,6 @@ class AutomadQuote {
 				icon: `<svg width="16" height="11" viewBox="0 0 16 11" xmlns="http://www.w3.org/2000/svg" ><path d="M1.069 0H13.33a1.069 1.069 0 0 1 0 2.138H1.07a1.069 1.069 0 1 1 0-2.138zm3.15 4.275h5.962a1.069 1.069 0 0 1 0 2.137H4.22a1.069 1.069 0 1 1 0-2.137zM1.069 8.55H13.33a1.069 1.069 0 0 1 0 2.137H1.07a1.069 1.069 0 0 1 0-2.137z"/></svg>`,
 			},
 		];
-	}
-
-	constructor({ data, config, api, readOnly }) {
-		const { ALIGNMENTS, DEFAULT_ALIGNMENT } = AutomadQuote;
-
-		this.api = api;
-		this.readOnly = readOnly;
-
-		this.quotePlaceholder = config.quotePlaceholder || AutomadQuote.DEFAULT_QUOTE_PLACEHOLDER;
-		this.captionPlaceholder = config.captionPlaceholder || AutomadQuote.DEFAULT_CAPTION_PLACEHOLDER;
-
-		this.data = {
-			text: data.text || '',
-			caption: data.caption || '',
-			alignment: Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment ||
-				config.defaultAlignment ||
-				DEFAULT_ALIGNMENT,
-		};
-
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
-
 	}
 
 	render() {
@@ -139,18 +151,6 @@ class AutomadQuote {
 			text: text.innerHTML,
 			caption: caption.innerHTML,
 		});
-	}
-
-	static get sanitize() {
-		return {
-			text: {
-				br: true,
-			},
-			caption: {
-				br: true,
-			},
-			alignment: {},
-		};
 	}
 
 	renderSettings() {

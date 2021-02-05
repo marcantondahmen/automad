@@ -36,6 +36,29 @@
 
 class AutomadSlider {
 
+	static get enableLineBreaks() {
+		return true;
+	}
+
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get sanitize() {
+		return {
+			globs: false,
+			width: false,
+			height: false
+		};
+	}
+
+	static get toolbox() {
+		return {
+			title: 'Slider',
+			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M16,11 c0,1.103-0.897,2-2,2H4c-1.103,0-2-0.897-2-2V4c0-1.103,0.897-2,2-2h10c1.103,0,2,0.897,2,2V11z"/><path d="M6.5,8.5c-0.097,0-0.194-0.028-0.277-0.084l-3-2C3.083,6.323,3,6.167,3,6s0.083-0.323,0.223-0.416l3-2 c0.153-0.102,0.352-0.111,0.513-0.025C6.898,3.646,7,3.815,7,4v4c0,0.185-0.102,0.354-0.264,0.44C6.662,8.48,6.581,8.5,6.5,8.5z"/><path d="M11.264,8.44C11.102,8.354,11,8.185,11,8V4c0-0.185,0.102-0.354,0.264-0.441c0.162-0.086,0.361-0.077,0.514,0.025l3,2 C14.916,5.677,15,5.833,15,6s-0.084,0.323-0.223,0.416l-3,2C11.693,8.472,11.598,8.5,11.5,8.5C11.419,8.5,11.338,8.48,11.264,8.44z"/><circle cx="9" cy="11" r="1"/><circle cx="6" cy="11" r="1"/><circle cx="12" cy="11" r="1"/></svg>'
+		};
+	}
+
 	constructor({data, api}) {
 
 		var create = Automad.util.create;
@@ -101,15 +124,6 @@ class AutomadSlider {
 
 	}
 
-	static get toolbox() {
-
-		return {
-			title: 'Slider',
-			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M16,11 c0,1.103-0.897,2-2,2H4c-1.103,0-2-0.897-2-2V4c0-1.103,0.897-2,2-2h10c1.103,0,2,0.897,2,2V11z"/><path d="M6.5,8.5c-0.097,0-0.194-0.028-0.277-0.084l-3-2C3.083,6.323,3,6.167,3,6s0.083-0.323,0.223-0.416l3-2 c0.153-0.102,0.352-0.111,0.513-0.025C6.898,3.646,7,3.815,7,4v4c0,0.185-0.102,0.354-0.264,0.44C6.662,8.48,6.581,8.5,6.5,8.5z"/><path d="M11.264,8.44C11.102,8.354,11,8.185,11,8V4c0-0.185,0.102-0.354,0.264-0.441c0.162-0.086,0.361-0.077,0.514,0.025l3,2 C14.916,5.677,15,5.833,15,6s-0.084,0.323-0.223,0.416l-3,2C11.693,8.472,11.598,8.5,11.5,8.5C11.419,8.5,11.338,8.48,11.264,8.44z"/><circle cx="9" cy="11" r="1"/><circle cx="6" cy="11" r="1"/><circle cx="12" cy="11" r="1"/></svg>'
-		};
-
-	}
-
 	render() {
 
 		return this.wrapper;
@@ -167,22 +181,6 @@ class AutomadSlider {
 		if (tune == 'stretched') {
 			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
 		}
-
-	}
-
-	static get sanitize() {
-
-		return {
-			globs: false,
-			width: false,
-			height: false
-		};
-
-	}
-
-	static get enableLineBreaks() {
-
-		return true;
 
 	}
 

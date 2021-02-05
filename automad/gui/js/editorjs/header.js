@@ -11,6 +11,37 @@
 
 class AutomadHeader {
 	
+	static get conversionConfig() {
+		return {
+			export: 'text', // use 'text' property for other blocks
+			import: 'text', // fill 'text' property from other block's export string
+		};
+	}
+
+	static get isReadOnlySupported() {
+		return true;
+	}
+
+	static get pasteConfig() {
+		return {
+			tags: ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+		};
+	}
+
+	static get sanitize() {
+		return {
+			level: false,
+			text: {},
+		};
+	}
+
+	static get toolbox() {
+		return {
+			icon: '<svg width="10" height="14" viewBox="0 0 10 14"><path d="M7.6 8.15H2.25v4.525a1.125 1.125 0 0 1-2.25 0V1.125a1.125 1.125 0 1 1 2.25 0V5.9H7.6V1.125a1.125 1.125 0 0 1 2.25 0v11.55a1.125 1.125 0 0 1-2.25 0V8.15z"/></svg>',
+			title: 'Heading',
+		};
+	}
+
 	constructor({ data, config, api, readOnly }) {
 		
 		this.api = api;
@@ -130,29 +161,6 @@ class AutomadHeader {
 		});
 
 	}
-
-	static get conversionConfig() {
-
-		return {
-			export: 'text', // use 'text' property for other blocks
-			import: 'text', // fill 'text' property from other block's export string
-		};
-
-	}
-
-	static get sanitize() {
-		return {
-			level: false,
-			text: {},
-		};
-	}
-
-	static get isReadOnlySupported() {
-
-		return true;
-
-	}
-
 
 	get data() {
 
@@ -336,20 +344,4 @@ class AutomadHeader {
 
 	}
 
-	static get pasteConfig() {
-
-		return {
-			tags: ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
-		};
-
-	}
-
-	static get toolbox() {
-
-		return {
-			icon: '<svg width="10" height="14" viewBox="0 0 10 14"><path d="M7.6 8.15H2.25v4.525a1.125 1.125 0 0 1-2.25 0V1.125a1.125 1.125 0 1 1 2.25 0V5.9H7.6V1.125a1.125 1.125 0 0 1 2.25 0v11.55a1.125 1.125 0 0 1-2.25 0V8.15z"/></svg>',
-			title: 'Heading',
-		};
-
-	}
 }

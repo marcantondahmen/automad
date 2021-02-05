@@ -36,12 +36,19 @@
 
 class AutomadToc {
 
+	static get contentless() {
+		return true;
+	}
+
 	static get isReadOnlySupported() {
 		return true;
 	}
 
-	static get contentless() {
-		return true;
+	static get toolbox() {
+		return {
+			icon: '<svg width="17px" height="13px" x="0px" y="0px" viewBox="0 0 17 13"><path d="M3.38,5.3h10.25c0.62,0,1.12,0.5,1.12,1.12s-0.5,1.12-1.12,1.12H3.38c-0.62,0-1.12-0.5-1.12-1.12S2.75,5.3,3.38,5.3z"/><path d="M1.38,0.45h10.25c0.62,0,1.12,0.5,1.12,1.12s-0.5,1.12-1.12,1.12H1.38c-0.62,0-1.12-0.5-1.12-1.12S0.75,0.45,1.38,0.45z"/><path d="M5.38,10.3h10.25c0.62,0,1.12,0.5,1.12,1.12s-0.5,1.12-1.12,1.12H5.38c-0.62,0-1.12-0.5-1.12-1.12S4.75,10.3,5.38,10.3z"/></svg>',
+			title: 'Table of Contents'
+		};
 	}
 
 	constructor({ data, config, api }) {
@@ -131,13 +138,6 @@ class AutomadToc {
 
 	toggleTune(tune) {
 		this.data.style = tune.name;
-	}
-
-	static get toolbox() {
-		return {
-			icon: '<svg width="17px" height="13px" x="0px" y="0px" viewBox="0 0 17 13"><path d="M3.38,5.3h10.25c0.62,0,1.12,0.5,1.12,1.12s-0.5,1.12-1.12,1.12H3.38c-0.62,0-1.12-0.5-1.12-1.12S2.75,5.3,3.38,5.3z"/><path d="M1.38,0.45h10.25c0.62,0,1.12,0.5,1.12,1.12s-0.5,1.12-1.12,1.12H1.38c-0.62,0-1.12-0.5-1.12-1.12S0.75,0.45,1.38,0.45z"/><path d="M5.38,10.3h10.25c0.62,0,1.12,0.5,1.12,1.12s-0.5,1.12-1.12,1.12H5.38c-0.62,0-1.12-0.5-1.12-1.12S4.75,10.3,5.38,10.3z"/></svg>',
-			title: 'Table of Contents'
-		};
 	}
 
 	get CSS() {
