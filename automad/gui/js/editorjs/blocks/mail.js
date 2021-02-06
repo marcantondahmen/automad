@@ -70,7 +70,7 @@ class AutomadBlockMail {
 			textButton: data.textButton || 'Send'
 		};
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, false);
 
 		this.inputs = {
 			to: create.editable(['cdx-input'], 'Enter your email address here', this.data.to),

@@ -80,7 +80,8 @@ gulp.task('automad-js', function() {
 	
 	return 	gulp.src([
 				'gui/js/*.js',
-				'gui/js/*/*.js'
+				'gui/js/*/*.js',
+				'gui/js/editorjs/blocks/*.js'
 			])
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
@@ -262,9 +263,10 @@ gulp.task('watch', function() {
 	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
 	gulp.watch('gui/js/*.js', gulp.series('automad-js'));
 	gulp.watch('gui/js/*/*.js', gulp.series('automad-js'));
+	gulp.watch('gui/js/editorjs/blocks/*.js', gulp.series('automad-js'));
 	gulp.watch('gui/less/*.less', gulp.series('automad-less'));
-	gulp.watch('gui/less/*/*.less', gulp.series('automad-less'));
-	gulp.watch('gui/less/*/*/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/editorjs/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/editorjs/*/*.less', gulp.series('automad-less'));
 	
 });
 

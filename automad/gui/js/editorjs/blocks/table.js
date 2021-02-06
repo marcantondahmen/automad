@@ -245,7 +245,7 @@ class AutomadBlockTable {
 		this.readOnly = readOnly;
 		this.data = data;
 		this._tableConstructor = new TableConstructor(this.data, config, api, readOnly);
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, false);
 	}
 
 	render() {

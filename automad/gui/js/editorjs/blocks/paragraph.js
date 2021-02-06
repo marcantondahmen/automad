@@ -66,7 +66,7 @@ class AutomadBlockParagraph {
 
 		this.layout = {}
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.layout, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.layout, data, api, false);
 
 	}
 

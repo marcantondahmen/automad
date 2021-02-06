@@ -58,7 +58,7 @@ class AutomadBlockToc {
 			style: data.style || 'ordered'
 		}
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, false);
 
 		this.api = api;
 

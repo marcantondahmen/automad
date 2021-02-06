@@ -59,7 +59,7 @@ class AutomadBlockHeader {
 		this.settingsButtons = [];
 		this._element = this.getTag();
 
-		this.settings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+		this.settings = AutomadLayout.renderSettings(this.data, data, api, false);
 
 	}
 

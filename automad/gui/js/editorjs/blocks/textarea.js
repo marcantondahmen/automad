@@ -65,7 +65,7 @@ class AutomadBlockTextarea {
 			code: data.code || ''
 		};
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
 
 		this.wrapper = this.drawView();
 

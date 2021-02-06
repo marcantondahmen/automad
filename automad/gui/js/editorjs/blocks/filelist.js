@@ -63,7 +63,7 @@ class AutomadBlockFilelist {
 			glob: data.glob || '*.*'
 		};
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, false);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');

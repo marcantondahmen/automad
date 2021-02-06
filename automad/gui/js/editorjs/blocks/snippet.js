@@ -68,7 +68,7 @@ class AutomadBlockSnippet {
 			snippet: data.snippet || ''
 		};
 		
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');

@@ -195,7 +195,7 @@ class AutomadBlockEmbed {
 			stretched: data.stretched || ''
 		};
 
-		this.settings = Automad.blockEditor.renderLayoutSettings(this.layout, data, api, true);
+		this.settings = AutomadLayout.renderSettings(this.layout, data, api, true);
 
 	}
 

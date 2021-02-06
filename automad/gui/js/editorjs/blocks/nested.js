@@ -79,7 +79,7 @@ class AutomadBlockNested {
 			nestedData: data.nestedData || {}
 		};
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
 		this.parentEditor = document.getElementById(config.parentEditorId);
 
 		this.wrapper = create.element('div', ['am-block-editor-container', 'am-block-nested']);

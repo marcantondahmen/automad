@@ -97,7 +97,7 @@ class AutomadBlockList {
 
 		this.data = data;
 
-		this.layoutSettings = Automad.blockEditor.renderLayoutSettings(this._data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this._data, data, api, false);
 
 	}
 
