@@ -59,7 +59,7 @@
 
 		applyLayout: function(editor) {
 
-			editor.save().then((data) => {
+			var layout = function(data) {
 
 				for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
 
@@ -74,29 +74,65 @@
 
 				}
 
-			});
+			}
+
+
+			if (!editor.configuration.readOnly) {
+
+				editor.save().then((data) => {
+
+					layout(data);
+
+				});
+
+			} else {
+
+				editor.readOnly.toggle(false).then(() => {
+
+					editor.save().then((data) => {
+
+						editor.readOnly.toggle(true).then(() => {
+
+							layout(data);
+
+						});
+
+
+
+					});
+
+				});
+			}
+
+			
+
+			
 
 		},
 
 		alignButton: function(editor) {
 
-			var editorId = editor.configuration.holder,
-				container = document.getElementById(editorId),
-				button = container.querySelector(`.${Automad.blockEditor.cls.actionsButton}`),
-				blockId = editor.blocks.getCurrentBlockIndex(),
-				block = editor.blocks.getBlockByIndex(blockId).holder,
-				blockContent = block.querySelector(`.${Automad.blockEditor.cls.blockContent}`);
+			try {
 
-			button.style.transform = 'translate3d(0,0,0)';
+				var editorId = editor.configuration.holder,
+					container = document.getElementById(editorId),
+					button = container.querySelector(`.${Automad.blockEditor.cls.actionsButton}`),
+					blockId = editor.blocks.getCurrentBlockIndex(),
+					block = editor.blocks.getBlockByIndex(blockId).holder,
+					blockContent = block.querySelector(`.${Automad.blockEditor.cls.blockContent}`);
 
-			var blockRight = blockContent.getBoundingClientRect().right,
-				buttonRight = button.getBoundingClientRect().right,
-				blockTop = blockContent.getBoundingClientRect().top,
-				buttonTop = button.getBoundingClientRect().top,
-				right = buttonRight - blockRight,
-				top = blockTop - buttonTop;
+				button.style.transform = 'translate3d(0,0,0)';
 
-			button.style.transform = `translate3d(-${right}px,${top}px,0)`;
+				var blockRight = blockContent.getBoundingClientRect().right,
+					buttonRight = button.getBoundingClientRect().right,
+					blockTop = blockContent.getBoundingClientRect().top,
+					buttonTop = button.getBoundingClientRect().top,
+					right = buttonRight - blockRight,
+					top = blockTop - buttonTop;
+
+				button.style.transform = `translate3d(-${right}px,${top}px,0)`;
+
+			} catch (e) {}
 
 		},
 
@@ -256,6 +292,198 @@
 
 		},
 
+		tools: function(holder, key, hasNestedEditor) {
+
+			var tools = {};
+
+			if (hasNestedEditor) {
+				tools = {
+					nested: { 
+						class: AutomadNested,
+						config: { 
+							parentEditorId: holder,
+							parentKey: key
+						}
+					}
+				};
+			}
+
+			return Object.assign(tools, {
+
+				paragraph: {
+					class: AutomadParagraph,
+					inlineToolbar: true
+				},
+				header: {
+					class: AutomadHeader,
+					shortcut: 'CMD+SHIFT+H',
+					inlineToolbar: ['italic', 'underline', 'link', 'editorJSStyle'],
+					config: {
+						levels: [1, 2, 3, 4, 5, 6],
+						defaultLevel: 2
+					}
+				},
+				lists: {
+					class: AutomadList,
+					inlineToolbar: true,
+				},
+				table: {
+					class: AutomadTable,
+					inlineToolbar: true
+				},
+				quote: {
+					class: AutomadQuote,
+					inlineToolbar: true
+				},
+				delimiter: AutomadDelimiter,
+				image: {
+					class: AutomadImage,
+					inlineToolbar: true
+				},
+				gallery: AutomadGallery,
+				slider: AutomadSlider,
+				buttons: {
+					class: AutomadButtons,
+					inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle']
+				},
+				pagelist: AutomadPagelist,
+				filelist: AutomadFilelist,
+				toc: {
+					class: AutomadToc,
+					config: { key: key }
+				},
+				code: AutomadTextareaCode,
+				raw: AutomadTextareaRaw,
+				mail: AutomadMail,
+				snippet: AutomadSnippet,
+				embed: AutomadEmbed,
+				underline: Underline,
+				inlineCode: {
+					class: InlineCode,
+					shortcut: 'CMD+SHIFT+M'
+				},
+				marker: {
+					class: Marker
+				},
+				editorJSStyle: {
+					class: EditorJSStyle,
+					shortcut: 'CMD+SHIFT+S'
+				},
+				editorJSInspector: EditorJSInspector
+
+			});
+
+		},
+
+		createEditor: function(options) {
+
+			options = Object.assign({
+				holder: false,
+				input: false,
+				key: '',
+				hasNestedEditor: true,
+				readOnly: false,
+				autofocus: false,
+				onReady: function() {}
+			}, options);
+
+			var $input = $(options.input);
+
+			try {
+				// Unescape &amp; to make embed URLs with parameters work. 
+				var data = JSON.parse($input.val().replace(/&amp;/g, '&'));
+			} catch (e) {
+				var data = {};
+			}
+
+			var editor = new EditorJS({
+
+				holder: options.holder,
+				logLevel: 'ERROR',
+				data: data,
+				tools: Automad.blockEditor.tools(options.holder, options.key, options.hasNestedEditor),
+				readOnly: options.readOnly,
+				minHeight: false,
+				autofocus: options.autofocus,
+
+				onChange: function () {
+
+					if (!editor.configuration.readOnly) {
+
+						editor.save().then(function (data) {
+			
+							// Only trigger change in case blocks actually have changed.
+							var blocksNew = JSON.stringify(data.blocks);
+
+							try {
+								var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks);
+							} catch (e) {
+								var blocksCurrent = '';
+							}
+
+							if (blocksCurrent != blocksNew) {
+								$input.val(JSON.stringify(data, null, 2)).trigger('change');
+							}
+
+						});
+
+					}
+
+				},
+
+				onReady: function () {
+
+					Automad.blockEditor.applyLayout(editor);
+
+					if (!editor.configuration.readOnly) {
+
+						var undo = new Undo({ editor });
+
+						undo.initialize(data);
+						new DragDrop(editor);
+						Automad.blockEditor.settingsButtonObserver(editor);
+
+						$(window).bind('keydown', function (e) {
+
+							if (e.ctrlKey || e.metaKey) {
+
+								let key = String.fromCharCode(e.which).toLowerCase();
+
+								if (key == 'z' || key == 'y') {
+									setTimeout(function () {
+										Automad.blockEditor.applyLayout(editor);
+										Automad.blockEditor.alignButton(editor);
+									}, 50);
+								}
+
+							}
+
+						});
+
+					}
+
+					options.onReady();
+
+				}
+
+			});
+
+			return editor;
+
+		},
+
+		initErrorHandler: function() {
+
+			$(window).on('error', function (event) {
+
+				if (event.originalEvent.message.includes('updateCurrentInput')) {
+					event.preventDefault();
+				}
+
+			});
+
+		},
+
 		init: function() {
 			
 			var be = Automad.blockEditor,
@@ -275,146 +503,22 @@
 
 				};
 
+			be.initErrorHandler();
+
 			$(selector).each(function() {
 
 				var $wrapper = $(this),
-					holder = $wrapper.data(Automad.util.dataCamelCase(be.dataAttr)),
-					$input = $wrapper.find('input'),
-					key = $input.attr('name').replace(/(data\[|\])/g, ''),
-					data,
-					editor;
-						
-				try {
-					// Unescape &amp; to make embed URLs with parameters work. 
-					data = JSON.parse($input.val().replace(/&amp;/g, '&'));
-				} catch (e) {
-					data = {};
-				}
-				
+					id = $wrapper.data(Automad.util.dataCamelCase(be.dataAttr)),
+					input = this.querySelector('input'),
+					key = $(input).attr('name').replace(/(data\[|\])/g, '');
+
 				// Remove data attribute to prevent multiple initializations.
 				$wrapper.removeAttr(be.dataAttr);
 
-				editor = new EditorJS({
-
-					holder: holder,
-					logLevel: 'ERROR',
-					data: data,
-					tools: {
-						paragraph: {
-							class: AutomadParagraph,
-							inlineToolbar: true
-						},
-						header: {
-							class: AutomadHeader,
-							shortcut: 'CMD+SHIFT+H',
-							inlineToolbar: ['italic', 'underline', 'link', 'editorJSStyle'],
-							config: {
-								levels: [1, 2, 3, 4, 5, 6],
-								defaultLevel: 2
-							}
-						},
-						lists: {
-							class: AutomadList,
-							inlineToolbar: true,
-						},
-						table: {
-							class: AutomadTable,
-							inlineToolbar: true
-						},
-						quote: {
-							class: AutomadQuote,
-							inlineToolbar: true
-						},
-						delimiter: AutomadDelimiter,
-						image: {
-							class: AutomadImage,
-							inlineToolbar: true
-						},
-						gallery: AutomadGallery,
-						slider: AutomadSlider,
-						buttons: {
-							class: AutomadButtons,
-							inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle'] 
-						},
-						pagelist: AutomadPagelist,
-						filelist: AutomadFilelist,
-						toc: {
-							class: AutomadToc,
-							config: { key: key }
-						},
-						code: AutomadTextareaCode,
-						raw: AutomadTextareaRaw,
-						mail: AutomadMail,
-						snippet: AutomadSnippet,
-						embed: AutomadEmbed,
-						underline: Underline,
-						inlineCode: {
-							class: InlineCode,
-							shortcut: 'CMD+SHIFT+M'
-						},
-						marker: {
-							class: Marker
-						},
-						editorJSStyle: {
-							class: EditorJSStyle,
-							shortcut: 'CMD+SHIFT+S'
-						},
-						editorJSInspector: EditorJSInspector
-					},
-
-					onChange: function() { 
-
-						editor.save().then(function(data) {
-
-							// Only trigger change in case blocks actually have changed.
-							var blocksNew = JSON.stringify(data.blocks);
-
-							try {
-								var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks);
-							} catch(e) {
-								var blocksCurrent = '';
-							}
-
-							if (blocksCurrent != blocksNew) {
-								$input.val(JSON.stringify(data, null, 2)).trigger('change');
-							}
-
-						});
-					
-					},
-
-					onReady: function() {
-						
-						var undo = new Undo({ editor });
-
-						undo.initialize(data);
-
-						new DragDrop(editor);
-						
-						Automad.blockEditor.applyLayout(editor);
-						Automad.blockEditor.settingsButtonObserver(editor);
-
-						$(window).bind('keydown', function (e) {
-
-							if (e.ctrlKey || e.metaKey) {
-
-								let key = String.fromCharCode(e.which).toLowerCase();
-
-								if (key == 'z' || key == 'y') {
-									setTimeout(function () {
-										Automad.blockEditor.applyLayout(editor);
-										Automad.blockEditor.alignButton(editor);
-									}, 50);
-								}
-								
-							}
-
-						});
-
-						$wrapper.find(`.${Automad.blockEditor.cls.redactor}`).removeAttr('style');
-						
-					}
-
+				be.createEditor({
+					holder: id,
+					input: input,
+					key: key
 				});
 
 			});
