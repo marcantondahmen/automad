@@ -34,7 +34,7 @@
  */
 
 
-class AutomadMail {
+class AutomadBlockMail {
 
 	static get isReadOnlySupported() {
 		return true;
@@ -85,9 +85,9 @@ class AutomadMail {
 		var icon = document.createElement('div'),
 			title = document.createElement('div');
 
-		icon.innerHTML = AutomadMail.toolbox.icon;
+		icon.innerHTML = AutomadBlockMail.toolbox.icon;
 		icon.classList.add('am-block-icon');
-		title.innerHTML = AutomadMail.toolbox.title;
+		title.innerHTML = AutomadBlockMail.toolbox.title;
 		title.classList.add('am-block-title');
 		
 		this.wrapper = document.createElement('div');

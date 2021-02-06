@@ -34,7 +34,7 @@
  */
 
 
-class AutomadToc {
+class AutomadBlockToc {
 
 	static get contentless() {
 		return true;
@@ -65,8 +65,8 @@ class AutomadToc {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
-			<div class="am-block-icon">${AutomadToc.toolbox.icon}</div>
-			<div class="am-block-title">${AutomadToc.toolbox.title}</div>
+			<div class="am-block-icon">${AutomadBlockToc.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadBlockToc.toolbox.title}</div>
 		`;
 
 		this.settings = [

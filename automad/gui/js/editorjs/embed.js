@@ -94,7 +94,7 @@
 }(window.Automad = window.Automad || {});
 
 
-class AutomadEmbed {
+class AutomadBlockEmbed {
 	
 	static get isReadOnlySupported() {
 		return true;
@@ -102,7 +102,7 @@ class AutomadEmbed {
 
 	static get pasteConfig() {
 		return {
-			patterns: AutomadEmbed.patterns,
+			patterns: AutomadBlockEmbed.patterns,
 		};
 	}
 
@@ -124,7 +124,7 @@ class AutomadEmbed {
 			.filter(([key, value]) => {
 				return typeof value === 'object';
 			})
-			.filter(([key, service]) => AutomadEmbed.checkServiceConfig(service))
+			.filter(([key, service]) => AutomadBlockEmbed.checkServiceConfig(service))
 			.map(([key, service]) => {
 				const { regex, embedUrl, html, height, width, id } = service;
 
@@ -144,7 +144,7 @@ class AutomadEmbed {
 
 		entries = entries.concat(userServices);
 
-		AutomadEmbed.services = entries.reduce((result, [key, service]) => {
+		AutomadBlockEmbed.services = entries.reduce((result, [key, service]) => {
 			if (!(key in result)) {
 				result[key] = service;
 
@@ -156,7 +156,7 @@ class AutomadEmbed {
 			return result;
 		}, {});
 
-		AutomadEmbed.patterns = entries
+		AutomadBlockEmbed.patterns = entries
 			.reduce((result, [key, item]) => {
 				result[key] = item.regex;
 
@@ -255,7 +255,7 @@ class AutomadEmbed {
 			return container;
 		}
 
-		const { html } = AutomadEmbed.services[this.data.service];
+		const { html } = AutomadBlockEmbed.services[this.data.service];
 		const container = document.createElement('div');
 		const caption = document.createElement('div');
 		const template = document.createElement('template');
@@ -314,7 +314,7 @@ class AutomadEmbed {
 
 		const { key: service, data: url } = event.detail;
 
-		const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = AutomadEmbed.services[service];
+		const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = AutomadBlockEmbed.services[service];
 		const result = regex.exec(url).slice(1);
 		const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
 

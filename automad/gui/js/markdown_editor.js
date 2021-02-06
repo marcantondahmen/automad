@@ -433,7 +433,7 @@
 			});
 
 			editor.on('action.image', function() {
-				editor.editor.AutomadImage();
+				editor.editor.AutomadBlockImage();
 			});
 
 			editor.on('action.listUl', function () {

@@ -34,7 +34,7 @@
  */
 
 
-class AutomadSnippet {
+class AutomadBlockSnippet {
 
 	static get enableLineBreaks() {
 		return true;
@@ -75,8 +75,8 @@ class AutomadSnippet {
 		var textarea = create.element('textarea', ['ce-code', 'cdx-input', 'am-block-run-before']);
 		textarea.setAttribute('placeholder', '<@ set { :variable: "value" } @>');
 		this.wrapper.innerHTML = `
-			<div class="am-block-icon">${AutomadSnippet.toolbox.icon}</div>
-			<div class="am-block-title">${AutomadSnippet.toolbox.title}</div>
+			<div class="am-block-icon">${AutomadBlockSnippet.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadBlockSnippet.toolbox.title}</div>
 			<hr>
 			${create.label('Snippet', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
 			${textarea.outerHTML}

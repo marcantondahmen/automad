@@ -34,7 +34,7 @@
  */
 
 
-class AutomadImage {
+class AutomadBlockImage {
 
 	static get isReadOnlySupported() {
 		return true;

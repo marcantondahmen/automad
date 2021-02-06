@@ -34,7 +34,7 @@
  */
 
 
-class AutomadGallery {
+class AutomadBlockGallery {
 
 	static get enableLineBreaks() {
 		return true;
@@ -80,9 +80,9 @@ class AutomadGallery {
 		var icon = document.createElement('div'),
 			title = document.createElement('div');
 		
-		icon.innerHTML = AutomadGallery.toolbox.icon;
+		icon.innerHTML = AutomadBlockGallery.toolbox.icon;
 		icon.classList.add('am-block-icon');
-		title.innerHTML = AutomadGallery.toolbox.title;
+		title.innerHTML = AutomadBlockGallery.toolbox.title;
 		title.classList.add('am-block-title');
 	
 		this.wrapper = document.createElement('div');

@@ -36,7 +36,7 @@
 
 +function (Automad, $, CodeMirror) {
 
-	CodeMirror.defineExtension('AutomadImage', function() {
+	CodeMirror.defineExtension('AutomadBlockImage', function() {
 
 		var cm = this;
 

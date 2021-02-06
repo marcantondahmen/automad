@@ -223,7 +223,7 @@ class VerticalBorderToolBar extends BorderToolBar {
  * Tool for table's creating
  */
 
-class AutomadTable {
+class AutomadBlockTable {
 	
 	static get isReadOnlySupported() {
 		return true;

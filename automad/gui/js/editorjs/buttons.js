@@ -34,7 +34,7 @@
  */
 
 
-class AutomadButtons {
+class AutomadBlockButtons {
 
 	static get isReadOnlySupported() {
 		return true;
@@ -75,8 +75,8 @@ class AutomadButtons {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
-			<div class="am-block-icon">${AutomadButtons.toolbox.icon}</div>
-			<div class="am-block-title">${AutomadButtons.toolbox.title}</div>
+			<div class="am-block-icon">${AutomadBlockButtons.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadBlockButtons.toolbox.title}</div>
 			<hr>
 			<ul class="uk-grid uk-grid-width-medium-1-2">
 				<li>

@@ -299,7 +299,7 @@
 			if (hasNestedEditor) {
 				tools = {
 					nested: { 
-						class: AutomadNested,
+						class: AutomadBlockNested,
 						config: { 
 							parentEditorId: holder,
 							parentKey: key
@@ -311,11 +311,11 @@
 			return Object.assign(tools, {
 
 				paragraph: {
-					class: AutomadParagraph,
+					class: AutomadBlockParagraph,
 					inlineToolbar: true
 				},
 				header: {
-					class: AutomadHeader,
+					class: AutomadBlockHeader,
 					shortcut: 'CMD+SHIFT+H',
 					inlineToolbar: ['italic', 'underline', 'link', 'editorJSStyle'],
 					config: {
@@ -324,39 +324,39 @@
 					}
 				},
 				lists: {
-					class: AutomadList,
+					class: AutomadBlockList,
 					inlineToolbar: true,
 				},
 				table: {
-					class: AutomadTable,
+					class: AutomadBlockTable,
 					inlineToolbar: true
 				},
 				quote: {
-					class: AutomadQuote,
+					class: AutomadBlockQuote,
 					inlineToolbar: true
 				},
-				delimiter: AutomadDelimiter,
+				delimiter: AutomadBlockDelimiter,
 				image: {
-					class: AutomadImage,
+					class: AutomadBlockImage,
 					inlineToolbar: true
 				},
-				gallery: AutomadGallery,
-				slider: AutomadSlider,
+				gallery: AutomadBlockGallery,
+				slider: AutomadBlockSlider,
 				buttons: {
-					class: AutomadButtons,
+					class: AutomadBlockButtons,
 					inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle']
 				},
-				pagelist: AutomadPagelist,
-				filelist: AutomadFilelist,
+				pagelist: AutomadBlockPagelist,
+				filelist: AutomadBlockFilelist,
 				toc: {
-					class: AutomadToc,
+					class: AutomadBlockToc,
 					config: { key: key }
 				},
-				code: AutomadTextareaCode,
-				raw: AutomadTextareaRaw,
-				mail: AutomadMail,
-				snippet: AutomadSnippet,
-				embed: AutomadEmbed,
+				code: AutomadBlockTextareaCode,
+				raw: AutomadBlockTextareaRaw,
+				mail: AutomadBlockMail,
+				snippet: AutomadBlockSnippet,
+				embed: AutomadBlockEmbed,
 				underline: Underline,
 				inlineCode: {
 					class: InlineCode,

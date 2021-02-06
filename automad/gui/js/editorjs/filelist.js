@@ -34,7 +34,7 @@
  */
 
 
-class AutomadFilelist {
+class AutomadBlockFilelist {
 
 	static get isReadOnlySupported() {
 		return true;
@@ -68,8 +68,8 @@ class AutomadFilelist {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
-			<div class="am-block-icon">${AutomadFilelist.toolbox.icon}</div>
-			<div class="am-block-title">${AutomadFilelist.toolbox.title}</div>
+			<div class="am-block-icon">${AutomadBlockFilelist.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadBlockFilelist.toolbox.title}</div>
 			<hr>
 			${create.label('Select Template', ['am-block-label', 'uk-margin-top-remove']).outerHTML}
 			<div class="am-block-file-select uk-form-select uk-button uk-text-left uk-width-1-1" data-uk-form-select>

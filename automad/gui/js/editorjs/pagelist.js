@@ -34,7 +34,7 @@
  */
 
 
-class AutomadPagelist {
+class AutomadBlockPagelist {
 
 	static get isReadOnlySupported() {
 		return true;
@@ -84,8 +84,8 @@ class AutomadPagelist {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
-			<div class="am-block-icon">${AutomadPagelist.toolbox.icon}</div>
-			<div class="am-block-title">${AutomadPagelist.toolbox.title}</div>
+			<div class="am-block-icon">${AutomadBlockPagelist.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadBlockPagelist.toolbox.title}</div>
 			<hr>
 			<ul class="uk-grid">
 				<li class="uk-width-medium-1-1">

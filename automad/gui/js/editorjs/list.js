@@ -9,7 +9,7 @@
  */
 
 
-class AutomadList {
+class AutomadBlockList {
 
 	static get conversionConfig() {
 

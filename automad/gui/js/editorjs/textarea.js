@@ -34,7 +34,7 @@
  */
 
 
-class AutomadTextarea {
+class AutomadBlockTextarea {
 
 	static get enableLineBreaks() {
 		return true;
@@ -128,7 +128,7 @@ class AutomadTextarea {
 
 }
 
-class AutomadTextareaCode extends AutomadTextarea {
+class AutomadBlockTextareaCode extends AutomadBlockTextarea {
 
 	static get pasteConfig() {
 		return {
@@ -157,7 +157,7 @@ class AutomadTextareaCode extends AutomadTextarea {
 
 }
 
-class AutomadTextareaRaw extends AutomadTextarea {
+class AutomadBlockTextareaRaw extends AutomadBlockTextarea {
 
 	static get toolbox() {
 		return {

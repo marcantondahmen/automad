@@ -9,7 +9,7 @@
  */
 
 
-class AutomadParagraph {
+class AutomadBlockParagraph {
 	
 	static get conversionConfig() {
 		return {

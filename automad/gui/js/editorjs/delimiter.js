@@ -39,7 +39,7 @@
  *	https://github.com/editor-js/delimiter
  */
 
-class AutomadDelimiter {
+class AutomadBlockDelimiter {
 
 	static get contentless() {
 		return true;

@@ -9,7 +9,7 @@
  */
 
 
-class AutomadQuote {
+class AutomadBlockQuote {
 	
 	static get isReadOnlySupported() {
 		return true;
@@ -46,7 +46,7 @@ class AutomadQuote {
 	}
 
 	static get DEFAULT_ALIGNMENT() {
-		return AutomadQuote.ALIGNMENTS.left;
+		return AutomadBlockQuote.ALIGNMENTS.left;
 	}
 
 	static get conversionConfig() {
@@ -77,13 +77,13 @@ class AutomadQuote {
 	}
 
 	constructor({ data, config, api, readOnly }) {
-		const { ALIGNMENTS, DEFAULT_ALIGNMENT } = AutomadQuote;
+		const { ALIGNMENTS, DEFAULT_ALIGNMENT } = AutomadBlockQuote;
 
 		this.api = api;
 		this.readOnly = readOnly;
 
-		this.quotePlaceholder = config.quotePlaceholder || AutomadQuote.DEFAULT_QUOTE_PLACEHOLDER;
-		this.captionPlaceholder = config.captionPlaceholder || AutomadQuote.DEFAULT_CAPTION_PLACEHOLDER;
+		this.quotePlaceholder = config.quotePlaceholder || AutomadBlockQuote.DEFAULT_QUOTE_PLACEHOLDER;
+		this.captionPlaceholder = config.captionPlaceholder || AutomadBlockQuote.DEFAULT_CAPTION_PLACEHOLDER;
 
 		this.data = {
 			text: data.text || '',

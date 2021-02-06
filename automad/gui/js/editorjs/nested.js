@@ -46,7 +46,7 @@
 }(window.Automad = window.Automad || {}, jQuery, UIkit);
 
 
-class AutomadNested {
+class AutomadBlockNested {
 
 	static get enableLineBreaks() {
 		return true;

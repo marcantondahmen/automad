@@ -34,7 +34,7 @@
  */
 
 
-class AutomadSlider {
+class AutomadBlockSlider {
 
 	static get enableLineBreaks() {
 		return true;
@@ -88,9 +88,9 @@ class AutomadSlider {
 			width = document.createElement('li'),
 			height = document.createElement('li');
 
-		icon.innerHTML = AutomadSlider.toolbox.icon;
+		icon.innerHTML = AutomadBlockSlider.toolbox.icon;
 		icon.classList.add('am-block-icon');
-		title.innerHTML = AutomadSlider.toolbox.title;
+		title.innerHTML = AutomadBlockSlider.toolbox.title;
 		title.classList.add('am-block-title');
 		controls.classList.add('uk-grid', 'uk-grid-width-medium-1-2');
 		width.appendChild(create.label('Image Width'));

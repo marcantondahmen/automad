@@ -9,7 +9,7 @@
  */
 
 
-class AutomadHeader {
+class AutomadBlockHeader {
 	
 	static get conversionConfig() {
 		return {
