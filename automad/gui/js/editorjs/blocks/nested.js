@@ -94,6 +94,7 @@ class AutomadBlockNested {
 		this.holder = this.wrapper.querySelector('section');
 		this.button = this.wrapper.querySelector('a');
 
+		this.modalWrapper = null;
 		this.modalEditor = null;
 
 		this.renderNested();
@@ -138,12 +139,16 @@ class AutomadBlockNested {
 			  block = this;
 
 		try {
-			ne.$(modalWrapper).remove();
-		} catch (e) {}
+			block.modalEditor.destroy();
+		} catch (e) { }
 
-		const modalWrapper = create.element('div', ['am-nested-editor-modal-container']);
+		try {
+			this.modalWrapper.innerHTML = '';
+			ne.$(this.modalWrapper).remove();
+		} catch (e) { }
 
-		modalWrapper.innerHTML = `
+		this.modalWrapper = create.element('div', ['am-nested-editor-modal-container']);
+		this.modalWrapper.innerHTML = `
 			<div id="am-nested-editor-modal" class="uk-modal">
 				<div class="uk-modal-dialog uk-modal-dialog-large am-block-editor">
 					<section id="am-nested-editor"></section>
@@ -151,16 +156,12 @@ class AutomadBlockNested {
 			</div>
 		`;
 
-		container.appendChild(modalWrapper);
+		container.appendChild(this.modalWrapper);
 
-		const modal = ne.UIkit.modal('#am-nested-editor-modal', {modal: false});
+		const modal = ne.UIkit.modal('#am-nested-editor-modal', { modal: false });
 
 		modal.on('show.uk.modal', function () {
 
-			try {
-				block.modalEditor.destroy();
-			} catch (e) { }
-			
 			block.modalEditor = Automad.blockEditor.createEditor({
 
 				holder: 'am-nested-editor',
