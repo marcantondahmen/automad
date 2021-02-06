@@ -48,6 +48,20 @@
 
 class AutomadBlockNested {
 
+	static get cls() {
+		return {
+			block: 'am-block-nested',
+			modalContainer: 'am-block-nested-modal-container'
+		}
+	}
+
+	static get ids() {
+		return {
+			modal: 'am-block-nested-modal',
+			modalEditor: 'am-block-nested-modal-editor'
+		}
+	}
+
 	static get enableLineBreaks() {
 		return true;
 	}
@@ -81,8 +95,9 @@ class AutomadBlockNested {
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
 		this.parentEditor = document.getElementById(config.parentEditorId);
+		this.container = this.parentEditor.parentNode;
 
-		this.wrapper = create.element('div', ['am-block-editor-container', 'am-block-nested']);
+		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockNested.cls.block]);
 		this.wrapper.innerHTML = `
 			<input type="hidden">
 			<section></section>
@@ -93,9 +108,6 @@ class AutomadBlockNested {
 		this.input.value = JSON.stringify(this.data.nestedData, null, 2);
 		this.holder = this.wrapper.querySelector('section');
 		this.button = this.wrapper.querySelector('a');
-
-		this.modalWrapper = null;
-		this.modalEditor = null;
 
 		this.renderNested();
 
@@ -115,9 +127,9 @@ class AutomadBlockNested {
 
 	renderNested() {
 
-		if (this.editor !== undefined) {
+		try {
 			this.editor.destroy();
-		}
+		} catch (e) { }
 
 		this.holder.innerHTML = '';
 
@@ -131,59 +143,49 @@ class AutomadBlockNested {
 
 	}
 
+	destroyModal() {
+
+		try {
+			this.modalEditor.destroy();
+		} catch (e) {}
+
+		Automad.nestedEditor.$(this.container).find(`.${AutomadBlockNested.cls.modalContainer}`).remove();
+
+	}
+
 	showModal() {
 
 		const create = Automad.util.create,
 			  ne = Automad.nestedEditor,
-			  container = this.parentEditor.parentNode,
 			  block = this;
 
-		try {
-			block.modalEditor.destroy();
-		} catch (e) { }
+		this.destroyModal();
 
-		try {
-			this.modalWrapper.innerHTML = '';
-			ne.$(this.modalWrapper).remove();
-		} catch (e) { }
-
-		this.modalWrapper = create.element('div', ['am-nested-editor-modal-container']);
+		this.modalWrapper = create.element('div', [AutomadBlockNested.cls.modalContainer]);
 		this.modalWrapper.innerHTML = `
-			<div id="am-nested-editor-modal" class="uk-modal">
+			<div id="${AutomadBlockNested.ids.modal}" class="uk-modal">
 				<div class="uk-modal-dialog uk-modal-dialog-large am-block-editor">
-					<section id="am-nested-editor"></section>
+					<section id="${AutomadBlockNested.ids.modalEditor}"></section>
 				</div>
 			</div>
 		`;
 
-		container.appendChild(this.modalWrapper);
+		this.container.appendChild(this.modalWrapper);
 
-		const modal = ne.UIkit.modal('#am-nested-editor-modal', { modal: false });
+		const modal = ne.UIkit.modal(`#${AutomadBlockNested.ids.modal}`, { modal: false });
 
-		modal.on('show.uk.modal', function () {
-
-			block.modalEditor = Automad.blockEditor.createEditor({
-
-				holder: 'am-nested-editor',
-				input: block.input,
-				parentKey: block.data.parentKey,
-				hasNestedEditor: false,
-				autofocus: true,
-				onReady: function () {
-
-					modal.on('hide.uk.modal', function () {
-
-						try {
-							block.modalEditor.destroy();
-						} catch (e) {}
-						
-						block.renderNested();
-
-					});
-
-				}
-			});
-
+		this.modalEditor = Automad.blockEditor.createEditor({
+			holder: AutomadBlockNested.ids.modalEditor,
+			input: this.input,
+			parentKey: this.data.parentKey,
+			hasNestedEditor: false,
+			autofocus: true,
+			onReady: function () {
+				modal.on('hide.uk.modal', function () {
+					block.destroyModal();
+					block.renderNested();
+				});
+			}
 		});
 
 		modal.show();
