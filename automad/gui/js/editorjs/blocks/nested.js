@@ -51,6 +51,7 @@ class AutomadBlockNested {
 	static get cls() {
 		return {
 			block: 'am-block-nested',
+			modal: 'am-block-nested-modal',
 			modalContainer: 'am-block-nested-modal-container'
 		}
 	}
@@ -75,7 +76,7 @@ class AutomadBlockNested {
 	static get toolbox() {
 		return {
 			title: 'Nested Block Editor',
-			icon: ''
+			icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M13,0H5C2.2,0,0,2.2,0,5v8c0,2.8,2.2,5,5,5h8c2.8,0,5-2.2,5-5V5C18,2.2,15.8,0,13,0z M16,13c0,1.7-1.3,3-3,3H5 c-1.7,0-3-1.3-3-3V5c0-1.7,1.3-3,3-3h8c1.7,0,3,1.3,3,3V13z"/><path d="M10,11H5c-0.6,0-1-0.4-1-1V5c0-0.6,0.4-1,1-1h5c0.6,0,1,0.4,1,1v5C11,10.6,10.6,11,10,11z"/></svg>'
 		};
 	}
 
@@ -95,13 +96,13 @@ class AutomadBlockNested {
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
 		this.parentEditor = document.getElementById(config.parentEditorId);
-		this.container = this.parentEditor.parentNode;
+		this.container = document.querySelector('body');
 
 		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockNested.cls.block]);
 		this.wrapper.innerHTML = `
 			<input type="hidden">
 			<section></section>
-			<a href="#">edit</a>
+			<a href="#"><i class="uk-icon-expand"></i></a>
 		`;
 
 		this.input = this.wrapper.querySelector('input');
@@ -149,7 +150,16 @@ class AutomadBlockNested {
 			this.modalEditor.destroy();
 		} catch (e) {}
 
-		Automad.nestedEditor.$(this.container).find(`.${AutomadBlockNested.cls.modalContainer}`).remove();
+		var container = Automad.nestedEditor.$(this.container).find(`.${AutomadBlockNested.cls.modalContainer}`);
+
+		try {
+			container.prev('.ct').remove();
+			container.next('.ct').remove();
+		} catch (e) { }
+
+		try {
+			container.remove();
+		} catch (e) { }
 
 	}
 
@@ -163,9 +173,15 @@ class AutomadBlockNested {
 
 		this.modalWrapper = create.element('div', [AutomadBlockNested.cls.modalContainer]);
 		this.modalWrapper.innerHTML = `
-			<div id="${AutomadBlockNested.ids.modal}" class="uk-modal">
-				<div class="uk-modal-dialog uk-modal-dialog-large am-block-editor">
-					<section id="${AutomadBlockNested.ids.modalEditor}"></section>
+			<div id="${AutomadBlockNested.ids.modal}" class="uk-modal ${AutomadBlockNested.cls.modal}">
+				<div class="uk-modal-dialog am-block-editor">
+					<div class="uk-modal-header">
+						<a class="uk-modal-close"><i class="uk-icon-compress"></i></a>
+					</div>
+					<section 
+					id="${AutomadBlockNested.ids.modalEditor}" 
+					class="am-block-editor-container"
+					></section>
 				</div>
 			</div>
 		`;

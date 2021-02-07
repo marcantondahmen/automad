@@ -39,15 +39,11 @@
 		box-sizing: border-box;
 		width: 100%;
 		min-height: 3.25rem;
-		margin: 0.29rem 0;
+		margin: 0.3rem 0 0 0;
 		padding: @am-block-padding;
 		border-radius: @am-block-radius;
 		border: @am-border-width solid transparent;
 		.transition(border-color 0.2s, box-shadow 0.2s;);
-
-		& + & {
-			margin-top: 0.29rem;
-		}
 
 		&__content {
 
@@ -74,7 +70,7 @@
 		&.ce-block--focused,
 		&.ce-block--selected {
 
-			& > .ce-block__content {
+			& .ce-block__content {
 
 				background-color: transparent !important;
 				

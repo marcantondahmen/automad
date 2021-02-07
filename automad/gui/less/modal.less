@@ -33,7 +33,7 @@
  */
 
 
-@modal-z-index: 				1010;
+@modal-z-index: 				9010;
 @modal-background: 				rgba(0,0,0,0.05);
 
 @modal-dialog-background:		@am-bg;
@@ -47,6 +47,7 @@
 
 .hook-modal() {
 	overflow-y: auto !important;
+	z-index: @modal-z-index !important;
 }
 
 .hook-modal-dialog() {

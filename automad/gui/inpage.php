@@ -143,9 +143,9 @@ class InPage {
 							</div>
 						</div>
 					</div>
-					$modalSelectImage
-					$modalLink
 				</div>
+				$modalSelectImage
+				$modalLink
 HTML;
 		
 		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);

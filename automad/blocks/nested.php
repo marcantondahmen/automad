@@ -64,8 +64,13 @@ class Nested {
 	public static function render($data, $Automad) {
 
 		$json = json_encode($data->nestedData);
+		$html = Core\Blocks::render($json, $Automad);
 
-		return Core\Blocks::render($json, $Automad);
+		return <<< HTML
+				<section class="am-nested">
+					$html
+				</section>
+HTML;
 
 	}
 

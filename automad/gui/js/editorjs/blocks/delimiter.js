@@ -69,6 +69,8 @@ class AutomadBlockDelimiter {
 		this._element = this.drawView();
 
 		this.data = data;
+
+		this.settings = AutomadLayout.renderSettings(this.data, data, api, true);
 		
 	}
 
@@ -85,7 +87,13 @@ class AutomadBlockDelimiter {
 	}
 
 	save(toolsContent) {
-		return {};
+		return this.data;
+	}
+
+	renderSettings() {
+
+		return this.settings;
+
 	}
 
 }

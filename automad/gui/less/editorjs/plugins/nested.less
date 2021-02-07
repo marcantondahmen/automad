@@ -35,23 +35,106 @@
 
 .am-block-nested {
 
+	&.am-block-editor-container {
+		border: none;
+		border-radius: @am-block-radius;
+		padding: 0 !important;
+	}
+
+	.am-fullscreen-container .codex-editor & {
+		margin-bottom: 0 !important;
+	}
+
 	& section {
 
 		position: relative;
-
+		
 		&:after {
 			content: '';
 			position: absolute;
+			box-sizing: border-box;
 			display: block;
 			z-index: 0;
-			height: 100%;
-			width: 100%;
-			top: 0;
+			height: ~"calc(100% + 1rem)";
+			width: ~"calc(100% + 1rem)";
+			top: -0.5rem;
+			left: -0.5rem;
+			border: @am-border-width dashed @am-border-color;
+			border-radius: 0.5rem;
 			cursor: not-allowed;
 		}
 
 		& .codex-editor {
+
 			z-index: 0;
+
+			&__redactor {
+				min-height: 3rem;
+				padding-bottom: @button-height !important;
+			}
+
+		}
+
+	}
+
+	& > a {
+		position: absolute;
+		display: block;
+		width: 100%;
+		bottom: 0;
+		right: 0;
+		padding: 0;
+		line-height: @button-height;
+		font-size: 1rem;
+		text-align: center;
+		border-radius: 0.25rem;
+		color: @am-text !important;
+		background-color: @am-bg;
+		.shadow;
+	}
+
+	& .ce-block {
+		padding: 0 !important;
+		margin: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	& .ce-block__content {
+		padding: 0 !important;
+	}
+
+	&-modal {
+
+		&-container {
+			position: relative;
+			z-index: @modal-z-index - 1;
+		}
+
+		& .uk-modal-dialog {
+			width: 45rem;
+			padding: 0.3rem;
+			padding-top: 0.6rem;
+			border-radius: @am-block-radius + 0.6rem;
+		}
+
+		& .uk-modal-header {
+			padding: 0 0.5rem;
+			margin-bottom: 0.4rem;
+			text-align: right;
+		}
+
+		& .uk-modal-close {
+
+			color: @am-text;
+
+			&:hover {
+				color: @am-muted;
+			}
+			
+		}
+
+		& .uk-modal-dialog > .am-block-editor-container {
+			margin-bottom: 0 !important;
 		}
 
 	}
