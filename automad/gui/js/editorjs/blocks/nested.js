@@ -89,13 +89,10 @@ class AutomadBlockNested {
 		this.api = api;
 
 		this.data = {
-			parentKey: config.parentKey,
-			parentEditorId: config.parentEditorId,
 			nestedData: data.nestedData || {}
 		};
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
-		this.parentEditor = document.getElementById(config.parentEditorId);
 		this.container = document.querySelector('body');
 
 		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockNested.cls.block]);
@@ -137,7 +134,6 @@ class AutomadBlockNested {
 		this.editor = Automad.blockEditor.createEditor({
 			holder: this.holder,
 			input: this.input,
-			parentKey: this.data.parentKey,
 			hasNestedEditor: false,
 			readOnly: true
 		});
@@ -193,7 +189,6 @@ class AutomadBlockNested {
 		this.modalEditor = Automad.blockEditor.createEditor({
 			holder: AutomadBlockNested.ids.modalEditor,
 			input: this.input,
-			parentKey: this.data.parentKey,
 			hasNestedEditor: false,
 			autofocus: true,
 			onReady: function () {

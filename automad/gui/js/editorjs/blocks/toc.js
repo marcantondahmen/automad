@@ -54,7 +54,6 @@ class AutomadBlockToc {
 	constructor({ data, config, api }) {
 
 		this.data = {
-			key: config.key,
 			style: data.style || 'ordered'
 		}
 

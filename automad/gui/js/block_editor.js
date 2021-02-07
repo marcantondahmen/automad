@@ -49,7 +49,6 @@
 			options = Object.assign({
 				holder: false,
 				input: false,
-				key: '',
 				hasNestedEditor: true,
 				readOnly: false,
 				autofocus: false,
@@ -70,7 +69,7 @@
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
-				tools: AutomadEditorConfig.tools(options.holder, options.key, options.hasNestedEditor),
+				tools: AutomadEditorConfig.tools(options.hasNestedEditor),
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
@@ -164,16 +163,14 @@
 
 				var $wrapper = $(this),
 					id = $wrapper.data(Automad.util.dataCamelCase(be.dataAttr)),
-					input = this.querySelector('input'),
-					key = $(input).attr('name').replace(/(data\[|\])/g, '');
+					input = this.querySelector('input');
 
 				// Remove data attribute to prevent multiple initializations.
 				$wrapper.removeAttr(be.dataAttr);
 
 				be.createEditor({
 					holder: id,
-					input: input,
-					key: key
+					input: input
 				});
 
 			});

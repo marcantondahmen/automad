@@ -53,19 +53,13 @@ class AutomadEditorConfig {
 
 	}
 
-	static tools(holder, key, hasNestedEditor) {
+	static tools(hasNestedEditor) {
 
 		var tools = {};
 
 		if (hasNestedEditor) {
 			tools = {
-				nested: {
-					class: AutomadBlockNested,
-					config: {
-						parentEditorId: holder,
-						parentKey: key
-					}
-				}
+				nested: AutomadBlockNested
 			};
 		}
 
@@ -109,10 +103,7 @@ class AutomadEditorConfig {
 			},
 			pagelist: AutomadBlockPagelist,
 			filelist: AutomadBlockFilelist,
-			toc: {
-				class: AutomadBlockToc,
-				config: { key: key }
-			},
+			toc: AutomadBlockToc,
 			code: AutomadBlockTextareaCode,
 			raw: AutomadBlockTextareaRaw,
 			mail: AutomadBlockMail,
