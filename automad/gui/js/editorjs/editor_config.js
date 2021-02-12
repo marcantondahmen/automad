@@ -53,13 +53,18 @@ class AutomadEditorConfig {
 
 	}
 
-	static tools(hasNestedEditor) {
+	static tools(isNested) {
 
 		var tools = {};
 
-		if (hasNestedEditor) {
+		if (!isNested) {
 			tools = {
-				nested: AutomadBlockNested
+				nested: {
+					class: AutomadBlockNested,
+					config: {
+						allowStretching: true
+					}
+				}
 			};
 		}
 
@@ -67,7 +72,10 @@ class AutomadEditorConfig {
 
 			paragraph: {
 				class: AutomadBlockParagraph,
-				inlineToolbar: true
+				inlineToolbar: true,
+				config: {
+					isNested: isNested
+				}
 			},
 			header: {
 				class: AutomadBlockHeader,
@@ -75,48 +83,123 @@ class AutomadEditorConfig {
 				inlineToolbar: ['italic', 'underline', 'link', 'editorJSStyle'],
 				config: {
 					levels: [1, 2, 3, 4, 5, 6],
-					defaultLevel: 2
+					defaultLevel: 2,
+					isNested: isNested
 				}
 			},
 			lists: {
 				class: AutomadBlockList,
 				inlineToolbar: true,
+				config: {
+					isNested: isNested
+				}
 			},
 			table: {
 				class: AutomadBlockTable,
-				inlineToolbar: true
+				inlineToolbar: true,
+				config: {
+					isNested: isNested
+				}
 			},
 			quote: {
 				class: AutomadBlockQuote,
-				inlineToolbar: true
+				inlineToolbar: true,
+				config: {
+					isNested: isNested
+				}
 			},
-			delimiter: AutomadBlockDelimiter,
+			delimiter: { 
+				class: AutomadBlockDelimiter,
+				config: {
+					allowStretching: true,
+					isNested: isNested
+				}
+			},
 			image: {
 				class: AutomadBlockImage,
-				inlineToolbar: true
+				inlineToolbar: true,
+				config: {
+					allowStretching: true,
+					isNested: isNested
+				}
 			},
-			gallery: AutomadBlockGallery,
-			slider: AutomadBlockSlider,
+			gallery: {
+				class: AutomadBlockGallery,
+				config: {
+					allowStretching: true,
+					isNested: isNested
+				}
+			},
+			slider: {
+				class: AutomadBlockSlider,
+				config: {
+					allowStretching: true,
+					isNested: isNested
+				}
+			},
 			buttons: {
 				class: AutomadBlockButtons,
-				inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle']
+				inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle'],
+				config: {
+					isNested: isNested
+				}
 			},
-			pagelist: AutomadBlockPagelist,
-			filelist: AutomadBlockFilelist,
-			toc: AutomadBlockToc,
-			code: AutomadBlockTextareaCode,
-			raw: AutomadBlockTextareaRaw,
-			mail: AutomadBlockMail,
-			snippet: AutomadBlockSnippet,
-			embed: AutomadBlockEmbed,
+			pagelist: {
+				class: AutomadBlockPagelist,
+				config: {
+					allowStretching: true,
+					isNested: isNested
+				}
+			},
+			filelist: { 
+				class: AutomadBlockFilelist,
+				config: {
+					isNested: isNested
+				}
+			},
+			toc: {
+				class: AutomadBlockToc,
+				config: {
+					isNested: isNested
+				}
+			},
+			code: {
+				class: AutomadBlockTextareaCode,
+				config: {
+					isNested: isNested
+				}
+			},
+			raw: {
+				class: AutomadBlockTextareaRaw,
+				config: {
+					isNested: isNested
+				}
+			},
+			mail: {
+				class: AutomadBlockMail,
+				config: {
+					isNested: isNested
+				}
+			},
+			snippet: {
+				class: AutomadBlockSnippet,
+				config: {
+					isNested: isNested
+				}
+			},
+			embed: { 
+				class: AutomadBlockEmbed,
+				config: {
+					allowStretching: true,
+					isNested: isNested
+				}
+			},
 			underline: Underline,
 			inlineCode: {
 				class: InlineCode,
 				shortcut: 'CMD+SHIFT+M'
 			},
-			marker: {
-				class: Marker
-			},
+			marker: Marker,
 			editorJSStyle: {
 				class: EditorJSStyle,
 				shortcut: 'CMD+SHIFT+S'

@@ -43,7 +43,7 @@ class AutomadBlockParagraph {
 		};
 	}
 
-	constructor({ data, api }) {
+	constructor({ data, api, config }) {
 
 		var large = data.large !== undefined ? data.large : false;
 
@@ -66,7 +66,7 @@ class AutomadBlockParagraph {
 
 		this.layout = {}
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.layout, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.layout, data, api, config);
 
 	}
 

@@ -45,6 +45,115 @@
 
 }(window.Automad = window.Automad || {}, jQuery, UIkit);
 
+
+class AutomadLayoutButton {
+
+	constructor(api, data, wrapper, options) {
+
+		var _this = this;
+
+		this.options = Object.assign({
+			title: '',
+			icon: '',
+			name: '',
+			value: '',
+			buttonsClearRegex: '',
+			blockClearRegex: '',
+			clearDataKeys: [],
+			onClick: function () { }
+		}, options);
+
+		this.data = data;
+		this.api = api;
+		this.wrapper = wrapper;
+		this.cls = api.styles.settingsButton;
+		this.clsActive = api.styles.settingsButtonActive;
+		this.button = Automad.util.create.element('div', [this.cls, this.options.name]);
+		this.button.innerHTML = this.options.icon;
+		
+		api.tooltip.onHover(this.button, this.options.title, { placement: 'top' });
+
+		this.button.addEventListener('click', function () {
+			_this.onClickHandler();
+		});
+
+		this.onInit();
+
+	}
+
+	onInit() {
+
+		this.button.classList.toggle(this.clsActive, (this.data[this.options.name] == this.options.value));
+
+	}
+
+	onClickHandler() {
+
+		var _this = this;
+
+		const buttons = this.wrapper.querySelectorAll(`.${this.cls}`),
+			  block = this.api.blocks.getBlockByIndex(this.api.blocks.getCurrentBlockIndex()).holder;
+
+		Array.from(buttons).forEach((_button) => {
+			if (_button.className.match(_this.options.buttonsClearRegex)) {
+				_button.classList.remove(_this.clsActive);
+			}
+		});
+
+		this.options.clearDataKeys.forEach((key) => {
+			_this.data[key] = '';
+		});
+
+		this.button.classList.add(this.clsActive);
+		this.data[this.options.name] = this.options.value;
+		block.className = block.className.replace(this.options.blockClearRegex, '');
+		block.classList.add(AutomadLayout.getClassName(this.options.name, this.options.value));
+		this.options.onClick();
+
+	}
+
+	get() {
+
+		return this.button;
+
+	}
+
+}
+
+
+class AutomadLayoutResetButton extends AutomadLayoutButton {
+
+	onInit() {
+
+		this.button.classList.toggle(this.clsActive, (!this.data.span && !this.data.stretched));
+
+	}
+
+	onClickHandler() {
+
+		var _this = this;
+
+		const buttons = this.wrapper.querySelectorAll(`.${this.cls}`),
+			  block = this.api.blocks.getBlockByIndex(this.api.blocks.getCurrentBlockIndex()).holder;
+
+		Array.from(buttons).forEach((_button) => {
+			if (_button.className.match(_this.options.buttonsClearRegex)) {
+				_button.classList.remove(_this.clsActive);
+			}
+		});
+
+		this.options.clearDataKeys.forEach((key) => {
+			_this.data[key] = '';
+		});
+
+		this.button.classList.add(this.clsActive);
+		block.className = block.className.replace(this.options.blockClearRegex, '');
+		this.options.onClick();
+
+	}
+
+}
+
 class AutomadLayout {
 
 	constructor(editor) {
@@ -84,17 +193,26 @@ class AutomadLayout {
 	applyLayout() {
 
 		var editor = this.editor,
-			layout = function (data) {
+			apply = function (data) {
 
 			for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
 
-				var block = editor.blocks.getBlockByIndex(i).holder,
-					span;
+				var block = editor.blocks.getBlockByIndex(i).holder;
 
 				if (data.blocks[i] !== undefined) {
-					span = data.blocks[i].data.span;
-					block.className = block.className.replace(/span\-\d+/g, '');
-					block.classList.toggle(`span-${span}`, (span !== undefined && span != ''));
+
+					['span', 'start'].forEach((key) => {
+
+						let value = data.blocks[i].data[key],
+							regex = new RegExp(`${key}\-\d+`, 'g');
+
+						block.className = block.className.replace(regex, '');
+						block.classList.toggle(`${key}-${value}`, (value !== undefined && value !== ''));
+
+					});
+
+					block.classList.toggle('stretched', data.blocks[i].data.stretched);
+					
 				}
 
 			}
@@ -104,7 +222,7 @@ class AutomadLayout {
 		if (!editor.configuration.readOnly) {
 
 			editor.save().then((data) => {
-				layout(data);
+				apply(data);
 			});
 
 		} else {
@@ -112,7 +230,7 @@ class AutomadLayout {
 			editor.readOnly.toggle(false).then(() => {
 				editor.save().then((data) => {
 					editor.readOnly.toggle(true).then(() => {
-						layout(data);
+						apply(data);
 					});
 				});
 			});
@@ -164,7 +282,7 @@ class AutomadLayout {
 					setTimeout(function () {
 						layout.applyLayout();
 						layout.alignButton();
-					}, 50);
+					}, 200);
 				}
 
 			}
@@ -173,134 +291,223 @@ class AutomadLayout {
 
 	}
 
-	static renderSettings(data, saved, api, hasStretch) {
+	static getClassName(key, value) {
+
+		if (typeof value == 'string') {
+			return `${key}-${value}`;
+		} else {
+			if (value) {
+				return `${key}`;
+			}
+		}
+
+		return '';
+
+	}
+
+	static renderSettings(data, saved, api, config) {
 
 		var element = Automad.util.create.element,
-			cls = api.styles.settingsButton,
-			clsActive = api.styles.settingsButtonActive,
 			wrapper = element('div', [AutomadEditorConfig.cls.settingsLayout]),
-			keys = {
-				stretch: 'stretched',
-				span: 'span'
+			mainWrapper = element('div', ['cdx-settings-1-2']),
+			resetOption = {
+				title: 'Default',
+				name: 'reset',
+				icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M2,17V3c0-0.6,0.4-1,1-1h5v16H3 C2.4,18,2,17.6,2,17z M28,17c0,0.6-0.4,1-1,1h-5V2h5c0.6,0,1,0.4,1,1V17z"/></svg>'
 			},
 			stretchOption = {
 				title: 'Stretch',
-				icon: '<svg height="1.25em" width="3.75em" viewBox="0 0 60 20"><path d="M41,0H19c-1.7,0-3,1.3-3,3v14c0,1.7,1.3,3,3,3h22c1.7,0,3-1.3,3-3V3C44,1.3,42.7,0,41,0z M42.9,10.4 c-0.1,0.1-0.1,0.2-0.2,0.3l-5,5C37.5,15.9,37.3,16,37,16s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l3.3-3.3H20.4l3.3,3.3 c0.4,0.4,0.4,1,0,1.4C23.5,15.9,23.3,16,23,16s-0.5-0.1-0.7-0.3l-5-5c-0.1-0.1-0.2-0.2-0.2-0.3c-0.1-0.2-0.1-0.5,0-0.8 c0.1-0.1,0.1-0.2,0.2-0.3l5-5c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L20.4,9h19.2l-3.3-3.3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5,5 c0.1,0.1,0.2,0.2,0.2,0.3C43,9.9,43,10.1,42.9,10.4z"/><path d="M11.5,20L11.5,20c-0.8,0-1.5-0.7-1.5-1.5v-17C10,0.7,10.7,0,11.5,0h0C12.3,0,13,0.7,13,1.5v17C13,19.3,12.3,20,11.5,20z"/><path d="M48.5,20L48.5,20c-0.8,0-1.5-0.7-1.5-1.5v-17C47,0.7,47.7,0,48.5,0l0,0C49.3,0,50,0.7,50,1.5v17C50,19.3,49.3,20,48.5,20z"/></svg>'
+				name: 'stretched',
+				icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M25.9,10.9l-5,5 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4c-0.5-0.5-0.5-1.3,0-1.8l2.9-2.9H8l2.9,2.9c0.5,0.5,0.5,1.3,0,1.8 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4l-5-5c-0.5-0.5-0.5-1.3,0-1.8l5-5c0.5-0.5,1.3-0.5,1.8,0s0.5,1.3,0,1.8L8,8.8h14 l-2.9-2.9c-0.5-0.5-0.5-1.3,0-1.8s1.3-0.5,1.8,0l5,5C26.4,9.6,26.4,10.4,25.9,10.9z"/></svg>',
+				value: true
 			},
-			stretchWrapper = element('div', ['cdx-settings-1-1']),
-			stretchButton = element('div', [cls]),
-			spanWrapper = element('div', ['cdx-settings-6']),
+			spanWrapper = element('div', ['cdx-settings']),
 			spanOptions = [
 				{
 					title: 'Span 1⁄4',
+					name: 'span',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
 					value: '3'
 				},
 				{
 					title: 'Span 1⁄3',
+					name: 'span',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
 					value: '4'
 				},
 				{
 					title: 'Span 1⁄2',
+					name: 'span',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
 					value: '6'
 				},
 				{
 					title: 'Span 2⁄3',
+					name: 'span',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
 					value: '8'
 				},
 				{
 					title: 'Span 3⁄4',
+					name: 'span',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
 					value: '9'
 				},
 				{
 					title: 'Span 1⁄1',
+					name: 'span',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
 					value: '12'
 				}
 			],
-			clearSpanSettings = function () {
+			startWrapper = element('div', ['cdx-settings']),
+			startOptions = [
+				{
+					title: 'Auto',
+					name: 'start',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><path d="M15,11.4L12.5,10L15,8.6c0.6-0.3,0.8-1.1,0.5-1.7c-0.3-0.6-1.1-0.8-1.7-0.5l-2.5,1.4V5c0-0.7-0.6-1.2-1.2-1.2S8.8,4.3,8.8,5 v2.8L6.3,6.4C5.7,6.1,4.9,6.3,4.6,6.9C4.2,7.5,4.4,8.2,5,8.6L7.5,10L5,11.4c-0.6,0.3-0.8,1.1-0.5,1.7c0.3,0.6,1.1,0.8,1.7,0.5 l2.5-1.4V15c0,0.7,0.6,1.2,1.2,1.2s1.2-0.6,1.2-1.2v-2.8l2.5,1.4c0.6,0.3,1.4,0.1,1.7-0.5C15.8,12.5,15.6,11.8,15,11.4z"/>',
+					value: ''
+				},
+				{
+					title: 'Push 0',
+					name: 'start',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="2" y="2" width="2" height="16"/>',
+					value: '1'
+				},
+				{
+					title: 'Push 1⁄6',
+					name: 'start',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="4" y="2" width="2" height="16"/>',
+					value: '3'
+				},
+				{
+					title: 'Push 1⁄4',
+					name: 'start',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="5" y="2" width="2" height="16"/>',
+					value: '4'
+				},
+				{
+					title: 'Push 1⁄3',
+					name: 'start',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="7" y="2" width="2" height="16"/>',
+					value: '5'
+				},
+				{
+					title: 'Push 1⁄2',
+					name: 'start',
+					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="9" y="2" width="2" height="16"/>',
+					value: '7'
+				}
+			];
 
-				const spanButtons = spanWrapper.querySelectorAll('.' + cls),
-					block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex()).holder;
+		data.stretched = saved.stretched || '';
+		data.span = saved.span || '';
+		data.start = saved.start || '';
 
-				Array.from(spanButtons).forEach((button) => {
-					button.classList.remove(clsActive);
-				});
+		const isNested = config.isNested || false,
+			  allowStretching = config.allowStretching || false;
 
-				block.className = block.className.replace(/span\-\d+/g, '');
-				data[keys.span] = '';
+		const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
+			icon: resetOption.icon,
+			buttonsClearRegex: /(span|stretched|start)/g,
+			blockClearRegex: /(stretched|(span|start)\-\d+)/g,
+			clearDataKeys: ['stretched', 'span', 'start'],
+			onClick: function () {
+				startWrapper.classList.add('uk-hidden');
+			}
+		}));
 
-			};
+		mainWrapper.appendChild(resetButton.get());
 
-		// Stretch button.
-		if (hasStretch) {
+		if (!isNested && allowStretching) {
 
-			data[keys.stretch] = saved[keys.stretch] !== undefined ? saved[keys.stretch] : false;
+			const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
+				icon: stretchOption.icon,
+				buttonsClearRegex: /(span|start|reset)/g,
+				blockClearRegex: /(stretched|(span|start)\-\d+)/g,
+				clearDataKeys: ['span', 'start'],
+				onClick: function () {
+					startWrapper.classList.add('uk-hidden');
+				}
+			}));
+
+			mainWrapper.appendChild(stretchButton.get());
+
+		} else {
+
+			let stretchButton = element('div', [api.styles.settingsButton, 'disabled']);
 
 			stretchButton.innerHTML = stretchOption.icon;
-			stretchButton.classList.toggle(clsActive, data[keys.stretch]);
-			stretchWrapper.appendChild(stretchButton);
-			api.tooltip.onHover(stretchButton, stretchOption.title, { placement: 'top' });
 
-			Promise.resolve().then(() => {
-				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
+			stretchButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
 			});
 
-			stretchButton.addEventListener('click', function () {
-				clearSpanSettings();
-				stretchButton.classList.toggle(clsActive);
-				data[keys.stretch] = !data[keys.stretch];
-				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-			});
-
-			wrapper.appendChild(stretchWrapper);
+			mainWrapper.appendChild(stretchButton);
 
 		}
 
-		// Span buttons.
-		data[keys.span] = saved[keys.span] || '';
-
+		wrapper.appendChild(mainWrapper);
+	
 		spanOptions.forEach(function (option) {
 
-			var button = element('div', [cls]);
-
-			button.innerHTML = `<svg width="16px" height="16px" viewBox="0 0 20 20">${option.icon}</svg>`;
-			button.classList.toggle(clsActive, (data[keys.span] == option.value));
-
-			button.addEventListener('click', function () {
-
-				var span = data[keys.span],
-					block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex()).holder;
-
-				stretchButton.classList.toggle(clsActive, false);
-				data[keys.stretch] = false;
-				api.blocks.stretchBlock(api.blocks.getCurrentBlockIndex(), data[keys.stretch]);
-				clearSpanSettings();
-
-				if (span == option.value) {
-					data[keys.span] = '';
-				} else {
-					button.classList.toggle(clsActive, true);
-					block.classList.toggle(`span-${option.value}`, true);
-					data[keys.span] = option.value;
+			const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
+				icon: AutomadLayout.icon(option.icon),
+				buttonsClearRegex: /(span|stretched|reset)/g,
+				blockClearRegex: /(stretched|span\-\d+)/g,
+				clearDataKeys: ['stretched'],
+				onClick: function () {
+					startWrapper.classList.remove('uk-hidden');
+					if (!data.start && !isNested) {
+						startWrapper.querySelector('.start').click();
+					}
 				}
+			}));
 
-			});
-
-			api.tooltip.onHover(button, option.title, { placement: 'top' });
-			spanWrapper.appendChild(button);
+			spanWrapper.appendChild(button.get());
 
 		});
 
 		wrapper.appendChild(spanWrapper);
 
+		if (!isNested) {
+
+			startOptions.forEach(function (option) {
+
+				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
+					icon: AutomadLayout.icon(option.icon),
+					buttonsClearRegex: /(start|stretched|reset)/g,
+					blockClearRegex: /(stretched|start\-\d+)/g,
+					clearDataKeys: ['stretched'],
+					onClick: function() {
+						if (!data.span) {
+							spanWrapper.querySelector('.span').click();
+						}
+					}
+				}));
+
+				startWrapper.appendChild(button.get());
+
+				if (!data.span) {
+					startWrapper.classList.add('uk-hidden');
+				}
+
+			});
+
+			wrapper.appendChild(startWrapper);
+
+		}
+	
 		return wrapper;
 
 	}
 
+	static icon(innerSvg) {
+
+		return `<svg width="16px" height="16px" viewBox="0 0 20 20">${innerSvg}</svg>`;
+
+	}
 
 }

@@ -33,14 +33,14 @@
  */
 
 
-@am-settings-button-width: 2.43rem;
-@am-settings-button-margin: 0.15rem;
+@am-settings-height: 2.5rem;
+@am-settings-gap: 2px;
 
 .am-block-editor {
 
 	& .ce-settings {
 		
-		min-width: (3.05 * @am-settings-button-width) + (4 * @am-settings-button-margin);
+		width: ~"calc((3 * @{am-settings-height}) + (4 * @{am-settings-gap}))";
 		background-color: @am-block-dropdown-background;
 		border: none !important;
 		border-radius: @am-radius;
@@ -49,38 +49,53 @@
 
 		&__plugin-zone,
 		&__default-zone {
-			padding: @am-settings-button-margin;
+			padding: 0;
 		}
 
-		&__plugin-zone {
+	}
 
-			padding-bottom: 0;
+	& .cdx-settings,
+	& .cdx-settings-1-1,
+	& .cdx-settings-1-2,
+	& .ce-settings__default-zone {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: @am-settings-gap;
+		padding: @am-settings-gap;
+	}
 
-			&:empty {
-				padding-top: 0;
-			}
+	& .cdx-settings-1-1 {
+		grid-template-columns: 1fr;
+	}
 
+	& .cdx-settings-1-2 {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	& .am-block-settings-layout {
+
+		& > * {
+			border-bottom: @am-hairline;
+			border-width: 1px;
 		}
 
+	}
+
+	& * + .am-block-settings-layout {
+		border-top: @am-hairline;
+		border-width: 1px;
 	}
 
 	& .cdx-settings-button,
 	& .ce-settings__button {
 
-		width: @am-settings-button-width;
-		height: @am-settings-button-width;
+		width: auto;
+		height: @am-settings-height;
+		margin: 0 !important;
 		color: @nav-dropdown-color;
 		background-color: @am-block-dropdown-background;
 		border-radius: @am-radius-small;
 		.transition(color 0.2s, background-color 0.2s;);
-
-		&:not(:nth-child(3n+3)) {
-			margin-right: @am-settings-button-margin;
-		}
-
-		&:nth-child(n+4) {
-			margin-top: @am-settings-button-margin;
-		}
 
 		&:not(.ce-settings__button--confirm):hover,
 		&:not(.ce-settings__button--confirm):focus,
@@ -105,31 +120,14 @@
 
 		}
 
-	}
+		&.disabled {
 
-	& .cdx-settings-1-1 {
+			color: @am-muted;
+			cursor: default !important;
 
-		padding: 0 (@am-settings-button-margin / 2);
-		padding-bottom: @am-settings-button-margin;
-
-		& .cdx-settings-button {
-			width: 100%;
-		}
-
-	}
-
-	& .cdx-settings-1-2 {
-
-		display: flex;
-		padding: 0 (@am-settings-button-margin / 2);
-		padding-bottom: @am-settings-button-margin;
-
-		& .cdx-settings-button {
-			
-			width: 50%;
-
-			&:last-child {
-				margin-right: 0;
+			&:hover {
+				color: @am-muted !important;
+				background-color: transparent !important;
 			}
 
 		}

@@ -93,7 +93,7 @@ class AutomadBlockQuote {
 				DEFAULT_ALIGNMENT,
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 	}
 

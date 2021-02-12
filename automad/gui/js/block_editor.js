@@ -49,7 +49,7 @@
 			options = Object.assign({
 				holder: false,
 				input: false,
-				hasNestedEditor: true,
+				isNested: false,
 				readOnly: false,
 				autofocus: false,
 				onReady: function() {}
@@ -69,7 +69,7 @@
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
-				tools: AutomadEditorConfig.tools(options.hasNestedEditor),
+				tools: AutomadEditorConfig.tools(options.isNested),
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,

@@ -55,7 +55,7 @@ class AutomadBlockImage {
 		};
 	}
 
-	constructor({data, api}) {
+	constructor({data, api, config}) {
 
 		this.api = api;
 
@@ -64,7 +64,7 @@ class AutomadBlockImage {
 			caption: data.caption || ''
 		};
 
-		this.settings = AutomadLayout.renderSettings(this.data, data, api, true);
+		this.settings = AutomadLayout.renderSettings(this.data, data, api, config);
 		
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('cdx-block');

@@ -70,7 +70,7 @@ class AutomadBlockDelimiter {
 
 		this.data = data;
 
-		this.settings = AutomadLayout.renderSettings(this.data, data, api, true);
+		this.settings = AutomadLayout.renderSettings(this.data, data, api, config);
 		
 	}
 

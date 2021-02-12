@@ -58,7 +58,7 @@ class AutomadBlockGallery {
 		};
 	}
 
-	constructor({data, api}) {
+	constructor({data, api, config}) {
 
 		var create = Automad.util.create;
 
@@ -70,7 +70,7 @@ class AutomadBlockGallery {
 			cleanBottom: data.cleanBottom !== undefined ? data.cleanBottom : true
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 		this.inputs = {
 			globs: create.editable(['cdx-input'], '*.jpg, /shared/*.jpg, https://domain.com/image.jpg', this.data.globs),

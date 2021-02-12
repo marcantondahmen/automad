@@ -89,10 +89,11 @@ class AutomadBlockNested {
 		this.api = api;
 
 		this.data = {
-			nestedData: data.nestedData || {}
+			nestedData: data.nestedData || {},
+			card: data.card || ''
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 		this.container = document.querySelector('body');
 
 		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockNested.cls.block]);
@@ -101,6 +102,8 @@ class AutomadBlockNested {
 			<section></section>
 			<a href="#"><i class="uk-icon-expand"></i></a>
 		`;
+
+		this.toggleCardClass(this.data.card, true);
 
 		this.input = this.wrapper.querySelector('input');
 		this.input.value = JSON.stringify(this.data.nestedData, null, 2);
@@ -134,7 +137,7 @@ class AutomadBlockNested {
 		this.editor = Automad.blockEditor.createEditor({
 			holder: this.holder,
 			input: this.input,
-			hasNestedEditor: false,
+			isNested: true,
 			readOnly: true
 		});
 
@@ -189,7 +192,7 @@ class AutomadBlockNested {
 		this.modalEditor = Automad.blockEditor.createEditor({
 			holder: AutomadBlockNested.ids.modalEditor,
 			input: this.input,
-			hasNestedEditor: false,
+			isNested: true,
 			autofocus: true,
 			onReady: function () {
 				modal.on('hide.uk.modal', function () {
@@ -233,7 +236,71 @@ class AutomadBlockNested {
 
 	renderSettings() {
 
-		return this.layoutSettings;
+		var create = Automad.util.create,
+			wrapper = create.element('div', []),
+			inner = create.element('div', ['cdx-settings-1-2']),
+			btnCls = this.api.styles.settingsButton,
+			btnActiveCls = this.api.styles.settingsButtonActive,
+			block = this,
+			settings = [
+				{
+					title: 'Style as Primary Card',
+					value: 'primary',
+					icon: '<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M3,11c0-0.6,0.4-1,1-1h6 c0.6,0,1,0.4,1,1v1c0,0.6-0.4,1-1,1H4c-0.6,0-1-0.4-1-1V11z M13,17H4c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h9c0.6,0,1,0.4,1,1 C14,16.6,13.6,17,13,17z M17,7c0,0.6-0.4,1-1,1H4C3.4,8,3,7.6,3,7V4c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1V7z"/></svg>'
+				},
+				{
+					title: 'Style as Secondary Card',
+					value: 'secondary',
+					icon: '<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18.5,16c0,1.4-1.1,2.5-2.5,2.5H4 c-1.4,0-2.5-1.1-2.5-2.5V4c0-1.4,1.1-2.5,2.5-2.5h12c1.4,0,2.5,1.1,2.5,2.5V16z"/><path d="M16,8H4C3.4,8,3,7.6,3,7V4c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1v3C17,7.6,16.6,8,16,8z"/><path d="M10,13H4c-0.6,0-1-0.4-1-1v-1c0-0.6,0.4-1,1-1h6c0.6,0,1,0.4,1,1v1C11,12.6,10.6,13,10,13z"/><path d="M13,17H4c-0.6,0-1-0.4-1-1v0c0-0.6,0.4-1,1-1h9c0.6,0,1,0.4,1,1v0C14,16.6,13.6,17,13,17z"/></svg>'
+				}
+			];
+
+		settings.forEach((item) => {
+
+			let button = create.element('div', [btnCls]);
+
+			button.classList.toggle(btnActiveCls, (this.data['card'] == item.value));
+			button.innerHTML = item.icon;
+			this.api.tooltip.onHover(button, item.title, { placement: 'top' });
+
+			button.addEventListener('click', function () {
+
+				const _buttons = inner.querySelectorAll(`.${btnCls}`);
+
+				Array.from(_buttons).forEach((_button) => {
+					_button.classList.toggle(btnActiveCls, false);	
+				});
+
+				settings.forEach((_item) => {
+					block.toggleCardClass(_item.value, false);
+				});
+				
+				if (block.data['card'] != item.value) {
+					block.data['card'] = item.value;
+					button.classList.toggle(btnActiveCls);
+					block.toggleCardClass(item.value, true);
+				} else {
+					block.data['card'] = '';
+				}
+
+			});
+
+			inner.appendChild(button);
+
+		});
+
+		wrapper.appendChild(inner);
+		wrapper.appendChild(this.layoutSettings);
+
+		return wrapper;
+
+	}
+
+	toggleCardClass(value, state) {
+
+		if (value) {
+			this.wrapper.classList.toggle(`${AutomadBlockNested.cls.block}-card-${value}`, state);
+		}
 
 	}
 

@@ -109,7 +109,7 @@ HTML;
 	public static function render($json, $Automad) {
 		
 		self::$pageHasBlocks = true;
-		$rowOpen = false;
+		$gridOpen = false;
 		$data = json_decode($json);
 		$html = '';
 
@@ -125,16 +125,16 @@ HTML;
 
 			try {
 
-				$blockIsRowItem = (!empty($block->data->span));
+				$blockIsGridItem = (!empty($block->data->span) && empty($block->data->stretched));
 
-				if (!$rowOpen && $blockIsRowItem) {
+				if (!$gridOpen && $blockIsGridItem) {
 					$html .= '<section class="am-block-grid">';
-					$rowOpen = true;
+					$gridOpen = true;
 				}
 
-				if ($rowOpen && !$blockIsRowItem) {
+				if ($gridOpen && !$blockIsGridItem) {
 					$html .= '</section>';
-					$rowOpen = false;
+					$gridOpen = false;
 				}
 
 				$blockHtml = call_user_func_array(
@@ -154,10 +154,24 @@ HTML;
 HTML;
 				}
 
-				// Apply span.
-				if (!empty($block->data->span)) {
+				// Apply grid.
+				if ($blockIsGridItem) {
+
+					$class = '';
+
+					foreach (array('span', 'start') as $key) {
+
+						if (isset($block->data->{$key})) {
+							$value = $block->data->{$key};
+							$class .= " am-block-{$key}-{$value}";
+						}
+
+					}
+
+					$class = trim($class);
+
 					$blockHtml = <<< HTML
-								<div class="am-block-span-{$block->data->span}">
+								<div class="{$class}">
 									$blockHtml
 								</div>
 HTML;
@@ -173,7 +187,7 @@ HTML;
 
 		}
 
-		if ($rowOpen) {
+		if ($gridOpen) {
 			$html .= '</section>';
 		}
 

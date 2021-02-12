@@ -135,7 +135,8 @@
 			row-gap: 0;
 
 			& > .ce-block {
-				grid-column-start: span 12;
+				grid-column-start: auto;
+				grid-column-end: span 12;
 			}
 
 			& > [class*="span-"] > .ce-block__content {
@@ -143,27 +144,47 @@
 			}
 
 			& > .span-3 {
-				grid-column-start: span 3;
+				grid-column-end: span 3;
 			}
 
 			& > .span-4 {
-				grid-column-start: span 4;
+				grid-column-end: span 4;
 			}
 
 			& > .span-6 {
-				grid-column-start: span 6;
+				grid-column-end: span 6;
 			}
 
 			& > .span-8 {
-				grid-column-start: span 8;
+				grid-column-end: span 8;
 			}
 
 			& > .span-9 {
-				grid-column-start: span 9;
+				grid-column-end: span 9;
 			}
 
 			& > .span-12 {
-				grid-column-start: span 12;
+				grid-column-end: span 12;
+			}
+
+			& > .start-1 {
+				grid-column-start: 1;
+			}
+
+			& > .start-3 {
+				grid-column-start: 3;
+			}
+
+			& > .start-4 {
+				grid-column-start: 4;
+			}
+
+			& > .start-5 {
+				grid-column-start: 5;
+			}
+
+			& > .start-7 {
+				grid-column-start: 7;
 			}
 
 		}
@@ -173,7 +194,7 @@
 	// Resize SVG icons.
 	.svgWidth(@n) when (@n >= 4) {
 		.svgWidth(@n - 1);
-		& svg[width^=~'"@{n}"'] {
+		& svg[width^=~'"@{n}"'][width$="px"] {
 			width: round(@n / 14, 2) * 1em !important;
 		}
 	}
@@ -182,7 +203,7 @@
 
 	.svgHeight(@n) when (@n >= 8) {
 		.svgHeight(@n - 1);
-		& svg[height^=~'"@{n}"'] {
+		& svg[height^=~'"@{n}"'][width$="px"] {
 			height: round(@n / 14, 2) * 1em !important;
 		}
 	}

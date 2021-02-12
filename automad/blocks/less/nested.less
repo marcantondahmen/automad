@@ -34,13 +34,54 @@
 
 
 .am-nested {
-	
+
 	& > :first-child {
 		margin-top: 0;
 	}
 
 	& > :last-child {
 		margin-bottom: 0;
+	}
+
+	&-card-primary,
+	&-card-secondary {
+
+		box-sizing: border-box;
+		overflow: hidden;
+		
+		border-radius: var(--am-card-radius);
+
+		& > *,
+		& .am-block-grid > * > * {
+			margin: 0 !important;
+			padding: var(--am-card-padding);
+		}
+
+		& > figure,
+		& .am-block-grid > * > figure {
+			padding: var(--am-card-figure-padding);
+		}
+
+		& > .am-block-grid {
+			padding: 0;
+			column-gap: 0;
+			row-gap: var(--am-card-padding);
+		}
+
+		& :not(figure) + :not(figure) {
+			padding-top: 0;
+		}
+
+	}
+
+	&-card-primary {
+		border: var(--am-card-primary-border);
+		box-shadow: var(--am-card-primary-shadow);
+	}
+
+	&-card-secondary {
+		border: var(--am-card-secondary-border);
+		box-shadow: var(--am-card-secondary-shadow);
 	}
 
 }

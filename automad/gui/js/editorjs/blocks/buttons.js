@@ -56,7 +56,7 @@ class AutomadBlockButtons {
 		};
 	}
 
-	constructor({data, api}) {
+	constructor({data, api, config}) {
 
 		var create = Automad.util.create;
 
@@ -70,7 +70,7 @@ class AutomadBlockButtons {
 			alignment: data.alignment || 'left'
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, false);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -78,7 +78,7 @@ class AutomadBlockButtons {
 			<div class="am-block-icon">${AutomadBlockButtons.toolbox.icon}</div>
 			<div class="am-block-title">${AutomadBlockButtons.toolbox.title}</div>
 			<hr>
-			<ul class="uk-grid uk-grid-width-medium-1-2">
+			<ul class="uk-grid uk-grid-width-medium-1-2 uk-form">
 				<li>
 					${create.label('Primary Button Text').outerHTML}
 					${create.editable(['cdx-input', 'am-block-primary-text'], '', this.data.primaryText).outerHTML}

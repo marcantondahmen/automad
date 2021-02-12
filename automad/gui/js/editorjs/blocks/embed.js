@@ -181,7 +181,7 @@ class AutomadBlockEmbed {
 
 	}
 
-	constructor({ data, api, readOnly }) {
+	constructor({ data, api, config, readOnly }) {
 
 		this.api = api;
 		this._data = {};
@@ -195,7 +195,7 @@ class AutomadBlockEmbed {
 			stretched: data.stretched || ''
 		};
 
-		this.settings = AutomadLayout.renderSettings(this.layout, data, api, true);
+		this.settings = AutomadLayout.renderSettings(this.layout, data, api, config);
 
 	}
 

@@ -65,9 +65,14 @@ class Nested {
 
 		$json = json_encode($data->nestedData);
 		$html = Core\Blocks::render($json, $Automad);
+		$card = '';
+
+		if (!empty($data->card)) {
+			$card = " am-nested-card-{$data->card}";
+		}
 
 		return <<< HTML
-				<section class="am-nested">
+				<section class="am-nested$card">
 					$html
 				</section>
 HTML;

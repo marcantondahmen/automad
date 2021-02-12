@@ -57,7 +57,7 @@ class AutomadBlockTextarea {
 		};
 	}
 
-	constructor({ data, api }) {
+	constructor({ data, api, config }) {
 
 		this.api = api;
 
@@ -65,7 +65,7 @@ class AutomadBlockTextarea {
 			code: data.code || ''
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 		this.wrapper = this.drawView();
 

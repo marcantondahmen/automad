@@ -59,7 +59,7 @@ class AutomadBlockSlider {
 		};
 	}
 
-	constructor({data, api}) {
+	constructor({data, api, config}) {
 
 		var create = Automad.util.create;
 
@@ -74,7 +74,7 @@ class AutomadBlockSlider {
 			autoplay: data.autoplay !== undefined ? data.autoplay : true
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, true);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 		this.inputs = {
 			globs: create.editable(['cdx-input'], '*.jpg, /shared/*.jpg, https://domain.com/image.jpg', this.data.globs),
