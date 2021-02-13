@@ -68,6 +68,12 @@ class Paragraph {
 			$attr = ' class="am-paragraph-large"';
 		}
 
+		if (!empty($data->alignment)) {
+			if ($data->alignment == 'center') {
+				$attr .= ' style="text-align: center;"';
+			}
+		}
+
 		return "<p$attr>$text</p>";
 
 	}

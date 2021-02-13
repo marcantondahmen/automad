@@ -1,4 +1,3 @@
-<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -23,11 +22,11 @@
  *	             ::::   ::::    ..''
  *	             :::: ..:::: .:''
  *	               ''''  '''''
- *	
+ *
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,46 +34,17 @@
  */
 
 
-namespace Automad\Blocks;
-use Automad\Core\Str as Str;
+class AutomadEditorIcons {
 
+	static get get() {
 
-defined('AUTOMAD') or die('Direct access not permitted!');
+		return {
 
+			alignCenter: '<svg width="16" height="11" viewBox="0 0 16 11"><path d="M1.069 0H13.33a1.069 1.069 0 0 1 0 2.138H1.07a1.069 1.069 0 1 1 0-2.138zm3.15 4.275h5.962a1.069 1.069 0 0 1 0 2.137H4.22a1.069 1.069 0 1 1 0-2.137zM1.069 8.55H13.33a1.069 1.069 0 0 1 0 2.137H1.07a1.069 1.069 0 0 1 0-2.137z"/></svg>',
+			alignLeft: '<svg width="16" height="11" viewBox="0 0 16 11"><path d="M1.069 0H13.33a1.069 1.069 0 0 1 0 2.138H1.07a1.069 1.069 0 1 1 0-2.138zm0 4.275H9.03a1.069 1.069 0 1 1 0 2.137H1.07a1.069 1.069 0 1 1 0-2.137zm0 4.275h9.812a1.069 1.069 0 0 1 0 2.137H1.07a1.069 1.069 0 0 1 0-2.137z" /></svg>'
 
-/**
- *	The header block.
- *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
- */
-
-class Header {
-
-
-	/**	
-	 *	Render a header block.
-	 *	
-	 *	@param object $data
-	 *	@return string the rendered HTML
-	 */
-
-	public static function render($data) {
-
-		$style = '';
-
-		if (!empty($data->alignment)) {
-			if ($data->alignment == 'center') {
-				$style = ' style="text-align: center;"';
-			}
 		}
 
-		return 	'<h' . $data->level . ' id="' . Str::sanitize($data->text, true) . '"' . $style . '>' . 
-					htmlspecialchars_decode($data->text) . 
-				'</h' . $data->level . '>';
-
 	}
-
 
 }

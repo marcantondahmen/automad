@@ -59,7 +59,7 @@ class AutomadBlockHeader {
 		this.settingsButtons = [];
 		this._element = this.getTag();
 
-		this.settings = AutomadLayout.renderSettings(this.data, data, api, config);
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 	}
 
@@ -73,6 +73,7 @@ class AutomadBlockHeader {
 
 		newData.text = data.text || '';
 		newData.level = parseInt(data.level) || this.defaultLevel.number;
+		newData.alignment = data.alignment || 'left';
 
 		return newData;
 
@@ -87,14 +88,50 @@ class AutomadBlockHeader {
 	renderSettings() {
 
 		const wrapper = document.createElement('DIV'),
-			  holder = document.createElement('DIV');
+			  wrapperLevels = document.createElement('DIV'),
+			  wrapperAlign = document.createElement('DIV'),
+			  alignments = [
+				  {
+					  title: 'Left',
+					  icon: AutomadEditorIcons.get.alignLeft,
+					  value: 'left'
+				  },
+				  {
+					  title: 'Center',
+					  icon: AutomadEditorIcons.get.alignCenter,
+					  value: 'center'
+				  }
+			  ];
 
-		holder.classList.add('cdx-settings');
+		wrapperAlign.classList.add('cdx-settings-1-2');
+		wrapperLevels.classList.add('cdx-settings');
 
-		// do not add settings button, when only one level is configured
-		if (this.levels.length <= 1) {
-			return holder;
-		}
+		alignments.forEach((alignment) => {
+
+			const button = document.createElement('SPAN');
+
+			button.classList.add(this._CSS.settingsButton);
+			button.classList.toggle(this._CSS.settingsButtonActive, (this.data.alignment == alignment.value));
+			button.innerHTML = alignment.icon;
+
+			button.addEventListener('click', () => {
+
+				const _buttons = wrapperAlign.querySelectorAll(`.${this._CSS.settingsButton}`);
+
+				Array.from(_buttons).forEach((_button) => {
+					_button.classList.toggle(this._CSS.settingsButtonActive, false);
+				});
+
+				this._data.alignment = alignment.value;
+				button.classList.toggle(this._CSS.settingsButtonActive, true);
+				this.setAlignment(this._element);
+
+			});
+
+			this.api.tooltip.onHover(button, alignment.title, { placement: 'top' });
+			wrapperAlign.appendChild(button);
+
+		});
 
 		this.levels.forEach(level => {
 
@@ -114,16 +151,23 @@ class AutomadBlockHeader {
 				this.setLevel(level.number);
 			});
 
-			holder.appendChild(selectTypeButton);
+			wrapperLevels.appendChild(selectTypeButton);
 
 			this.settingsButtons.push(selectTypeButton);
 
 		});
 
-		wrapper.appendChild(holder);
-		wrapper.appendChild(this.settings);
+		wrapper.appendChild(wrapperAlign);
+		wrapper.appendChild(wrapperLevels);
+		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
+
+	}
+
+	setAlignment(element) {
+
+		element.classList.toggle('uk-text-center', (this._data.alignment == 'center'));
 
 	}
 
@@ -132,6 +176,7 @@ class AutomadBlockHeader {
 		this.data = {
 			level: level,
 			text: this.data.text,
+			alignment: this.data.alignment
 		};
 
 		this.settingsButtons.forEach(button => {
@@ -144,6 +189,7 @@ class AutomadBlockHeader {
 		const newData = {
 			text: this.data.text + data.text,
 			level: this.data.level,
+			alignment: this.data.alignment
 		};
 
 		this.data = newData;
@@ -218,6 +264,7 @@ class AutomadBlockHeader {
 		 * Add styles class
 		 */
 		tag.classList.add(this._CSS.wrapper);
+		this.setAlignment(tag);
 
 		/**
 		 * Make tag editable
