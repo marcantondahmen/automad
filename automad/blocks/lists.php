@@ -78,7 +78,7 @@ class Lists {
 
 		$html .= $close;
 
-		return $html;
+		return "<section>$html</section>";
 
 	}
 
