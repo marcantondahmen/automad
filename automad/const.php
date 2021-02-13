@@ -89,6 +89,12 @@ Config::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 
 
 
+// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
+Config::set('AM_BASE_SITEMAP', '');
+
+
+
+
 // Get the requested URL.
 define('AM_REQUEST', Request::page());
 

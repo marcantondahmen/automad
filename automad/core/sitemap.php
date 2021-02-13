@@ -60,22 +60,15 @@ class Sitemap {
 	
 	public function __construct($collection) {
 		
-		// Skip sitemap for Proxies.
-		if (!isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
-				
-			$sitemap = AM_BASE_DIR . '/sitemap.xml';
-		
-			// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
-			if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
-				$this->generate($collection, $sitemap);
-			} else {
-				Debug::log('Permissions denied!');
-			}
-			
+		$sitemap = AM_BASE_DIR . '/sitemap.xml';
+	
+		// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
+		if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
+			$this->generate($collection, $sitemap);
 		} else {
-			Debug::log('Skipped generating sitemap.xml! (Proxy)');
+			Debug::log('Permissions denied!');
 		}
-		
+	
 	}
 	
 	
@@ -87,20 +80,26 @@ class Sitemap {
 	 */
 	
 	private function generate($collection, $sitemap) {
-			
-		$protocol = 'http';
 		
-		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
-			$protocol = 'https';
+		if (!$base = AM_BASE_SITEMAP) {
+
+			$protocol = 'http';
+		
+			if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+				$protocol = 'https';
+			}
+
+			$base = $protocol . '://' . $_SERVER['SERVER_NAME'] . AM_BASE_INDEX;
+
 		}
-		
+
 		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . 
 				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 		
 		foreach ($collection as $Page) {
 			// Only include "real" URLs and not aliases.
 			if (strpos($Page->url, '/') === 0) {
-				$xml .= '<url><loc>' . $protocol . '://' . $_SERVER['SERVER_NAME'] . AM_BASE_INDEX . $Page->url . '</loc></url>' . "\n";
+				$xml .= "<url><loc>{$base}{$Page->url}</loc></url>\n";
 			}
 		}
 		
