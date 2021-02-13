@@ -89,6 +89,8 @@ class AutomadBlockHeader {
 		const wrapper = document.createElement('DIV'),
 			  holder = document.createElement('DIV');
 
+		holder.classList.add('cdx-settings');
+
 		// do not add settings button, when only one level is configured
 		if (this.levels.length <= 1) {
 			return holder;

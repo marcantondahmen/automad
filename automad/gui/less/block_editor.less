@@ -194,7 +194,7 @@
 	// Resize SVG icons.
 	.svgWidth(@n) when (@n >= 4) {
 		.svgWidth(@n - 1);
-		& svg[width^=~'"@{n}"'][width$="px"] {
+		& svg[width^=~'"@{n}"']:not([width$="em"]) {
 			width: round(@n / 14, 2) * 1em !important;
 		}
 	}
@@ -203,7 +203,7 @@
 
 	.svgHeight(@n) when (@n >= 8) {
 		.svgHeight(@n - 1);
-		& svg[height^=~'"@{n}"'][width$="px"] {
+		& svg[height^=~'"@{n}"']:not([height$="em"]) {
 			height: round(@n / 14, 2) * 1em !important;
 		}
 	}

@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<figure>
+<nav>
 	<ul>
 		<@ foreach in filelist @>
 			<li>
@@ -7,4 +7,4 @@
 			</li>
 		<@ end @>
 	</ul>
-</figure>
+</nav>

@@ -48,7 +48,6 @@
 
 		box-sizing: border-box;
 		overflow: hidden;
-		
 		border-radius: var(--am-card-radius);
 
 		& > *,
@@ -59,7 +58,15 @@
 
 		& > figure,
 		& .am-block-grid > * > figure {
+
 			padding: var(--am-card-figure-padding);
+
+			& > blockquote,
+			& > figcaption {
+				margin: ~"calc(-1 * var(--am-card-figure-padding))";
+				padding: var(--am-card-padding);
+			}
+
 		}
 
 		& > .am-block-grid {
