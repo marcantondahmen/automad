@@ -46,6 +46,8 @@
 
 		createEditor: function(options) {
 
+			const t = AutomadEditorTranslation.get;
+
 			options = Object.assign({
 				holder: false,
 				input: false,
@@ -73,6 +75,30 @@
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
+				i18n: {
+					messages: {
+						ui: {
+							"blockTunes": {
+								"toggler": {
+									"Click to tune": t('ui_settings'),
+									"Delete": t('ui_delete'),
+									"Move up": t('ui_move_up'),
+									"Move down": t('ui_move_down')
+								}
+							},
+							"inlineToolbar": {
+								"converter": {
+									"Convert to": t('ui_convert')
+								}
+							},
+							"toolbar": {
+								"toolbox": {
+									"Add": t('ui_add')
+								}
+							}
+						}
+					}
+				},
 
 				onChange: function () {
 
@@ -130,7 +156,9 @@
 
 			$(window).on('error', function (event) {
 
-				if (event.originalEvent.message.includes('updateCurrentInput')) {
+				let msg = event.originalEvent.message;
+
+				if (msg.includes('updateCurrentInput') || msg.includes('TypeError')) {
 					event.preventDefault();
 				}
 
