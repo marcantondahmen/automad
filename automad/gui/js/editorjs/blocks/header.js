@@ -38,7 +38,7 @@ class AutomadBlockHeader {
 	static get toolbox() {
 		return {
 			icon: '<svg width="10" height="14" viewBox="0 0 10 14"><path d="M7.6 8.15H2.25v4.525a1.125 1.125 0 0 1-2.25 0V1.125a1.125 1.125 0 1 1 2.25 0V5.9H7.6V1.125a1.125 1.125 0 0 1 2.25 0v11.55a1.125 1.125 0 0 1-2.25 0V8.15z"/></svg>',
-			title: 'Heading',
+			title: AutomadEditorTranslation.get('heading_toolbox'),
 		};
 	}
 
@@ -92,12 +92,12 @@ class AutomadBlockHeader {
 			  wrapperAlign = document.createElement('DIV'),
 			  alignments = [
 				  {
-					  title: 'Left',
+					  title: AutomadEditorTranslation.get('left'),
 					  icon: AutomadEditorIcons.get.alignLeft,
 					  value: 'left'
 				  },
 				  {
-					  title: 'Center',
+					  title: AutomadEditorTranslation.get('center'),
 					  icon: AutomadEditorIcons.get.alignCenter,
 					  value: 'center'
 				  }

@@ -75,7 +75,7 @@ class AutomadBlockNested {
 
 	static get toolbox() {
 		return {
-			title: 'Nested Block Editor',
+			title: AutomadEditorTranslation.get('nested_toolbox'),
 			icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M13,0H5C2.2,0,0,2.2,0,5v8c0,2.8,2.2,5,5,5h8c2.8,0,5-2.2,5-5V5C18,2.2,15.8,0,13,0z M16,13c0,1.7-1.3,3-3,3H5 c-1.7,0-3-1.3-3-3V5c0-1.7,1.3-3,3-3h8c1.7,0,3,1.3,3,3V13z"/><path d="M10,11H5c-0.6,0-1-0.4-1-1V5c0-0.6,0.4-1,1-1h5c0.6,0,1,0.4,1,1v5C11,10.6,10.6,11,10,11z"/></svg>'
 		};
 	}
@@ -84,7 +84,8 @@ class AutomadBlockNested {
 
 		var create = Automad.util.create,
 			ne = Automad.nestedEditor,
-			block = this;
+			block = this,
+			editText = AutomadEditorTranslation.get('nested_edit');
 		
 		this.api = api;
 
@@ -100,7 +101,10 @@ class AutomadBlockNested {
 		this.wrapper.innerHTML = `
 			<input type="hidden">
 			<section></section>
-			<a href="#"><i class="uk-icon-expand"></i></a>
+			<a href="#">
+				${editText}&nbsp;
+				<i class="uk-icon-expand"></i>
+			</a>
 		`;
 
 		this.toggleCardClass(this.data.card, true);
@@ -244,12 +248,12 @@ class AutomadBlockNested {
 			block = this,
 			settings = [
 				{
-					title: 'Style as Primary Card',
+					title: AutomadEditorTranslation.get('nested_card_primary'),
 					value: 'primary',
 					icon: '<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M3,11c0-0.6,0.4-1,1-1h6 c0.6,0,1,0.4,1,1v1c0,0.6-0.4,1-1,1H4c-0.6,0-1-0.4-1-1V11z M13,17H4c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h9c0.6,0,1,0.4,1,1 C14,16.6,13.6,17,13,17z M17,7c0,0.6-0.4,1-1,1H4C3.4,8,3,7.6,3,7V4c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1V7z"/></svg>'
 				},
 				{
-					title: 'Style as Secondary Card',
+					title: AutomadEditorTranslation.get('nested_card_secondary'),
 					value: 'secondary',
 					icon: '<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18.5,16c0,1.4-1.1,2.5-2.5,2.5H4 c-1.4,0-2.5-1.1-2.5-2.5V4c0-1.4,1.1-2.5,2.5-2.5h12c1.4,0,2.5,1.1,2.5,2.5V16z"/><path d="M16,8H4C3.4,8,3,7.6,3,7V4c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1v3C17,7.6,16.6,8,16,8z"/><path d="M10,13H4c-0.6,0-1-0.4-1-1v-1c0-0.6,0.4-1,1-1h6c0.6,0,1,0.4,1,1v1C11,12.6,10.6,13,10,13z"/><path d="M13,17H4c-0.6,0-1-0.4-1-1v0c0-0.6,0.4-1,1-1h9c0.6,0,1,0.4,1,1v0C14,16.6,13.6,17,13,17z"/></svg>'
 				}

@@ -234,6 +234,309 @@ dropzone: Drag Files Here
 
 
 
+editor_buttons_toolbox: Buttons
+
+-
+
+editor_button_primary_label: Primary Text
+
+-
+
+editor_button_primary_link: Primary Link
+
+-
+
+editor_button_secondary_label: Secondary Text
+
+-
+
+editor_button_secondary_link: Secondary Link
+
+-
+
+editor_delimiter_toolbox: Delimiter
+
+-
+
+editor_filelist_toolbox: File List
+
+-
+
+editor_filelist_template: Select Template 
+
+-
+
+editor_filelist_default: Default Template
+
+-
+
+editor_filelist_files: Glob Patterns (Separated by Comma)
+
+-
+
+editor_gallery_toolbox: Image Gallery 
+
+-
+
+editor_gallery_files: Glob Patterns or URLs (separated by comma)
+
+-
+
+editor_gallery_width: Image Width in Pixels
+
+-
+
+editor_gallery_clean_bottom: Clean Bottom Edge
+
+-
+
+editor_heading_toolbox: Heading
+
+-
+
+editor_image_toolbox: Image
+
+-
+
+editor_list_toolbox: List 
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Numbered List
+
+-
+
+editor_mail_toolbox: Email Form
+
+-
+
+editor_mail_data_error: Please fill out all fields!
+
+-
+
+editor_mail_data_success: Successfully sent email!
+
+-
+
+editor_mail_data_placeholder_address: Your email address
+
+-
+
+editor_mail_data_placeholder_subject: Email subject
+
+-
+
+editor_mail_data_placeholder_message: Message body
+
+-
+
+editor_mail_data_send: Send Mail
+
+-
+
+editor_mail_placeholder_address: Enter your email address here
+
+-
+
+editor_mail_placeholder_error: Enter an optional error message here
+
+-
+
+editor_mail_placeholder_success: Enter an optional success message here
+
+-
+
+editor_mail_label_address: Your Email Address
+
+-
+
+editor_mail_label_success: Success Message
+
+-
+
+editor_mail_label_error: Error message
+
+-
+
+editor_mail_label_placeholder_address: Placeholder for Email
+
+-
+
+editor_mail_label_placeholder_subject: Placeholder for Email Subject
+
+-
+
+editor_mail_label_placeholder_message: Placeholder for Message Body
+
+-
+
+editor_mail_label_button: Button Text
+
+-
+
+editor_nested_toolbox: Embedded Editor / Card
+
+-
+
+editor_nested_edit: Edit
+
+-
+
+editor_nested_card_primary: Primary Card Design
+
+-
+
+editor_nested_card_secondary: Secondary Card Design
+
+-
+
+editor_pagelist_toolbox: Page List
+
+-
+
+editor_pagelist_template: Select Template 
+
+-
+
+editor_pagelist_default: Default Template
+
+-
+
+editor_pagelist_url_regex: URL Regex Filter
+
+-
+
+editor_pagelist_type: Type
+
+-
+
+editor_pagelist_filter_tag: Filter by Tag
+
+-
+
+editor_pagelist_filter_template: Filter by Template
+
+-
+
+editor_pagelist_limit_offset: Limit and Offset
+
+-
+
+editor_pagelist_sort_var: Sort by Variable
+
+-
+
+editor_pagelist_sort_order: Sort Order
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Larger Font Size
+
+-
+
+editor_quote_toolbox: Quote
+
+-
+
+editor_quote_placeholder: Enter a text
+
+-
+
+editor_quote_placeholder_caption: Enter a caption
+
+-
+
+editor_slider_toolbox: Slideshow
+
+-
+
+editor_slider_width: Width 
+
+-
+
+editor_slider_height: Height 
+
+-
+
+editor_slider_pattern: Glob Pattern or URLs (separated by comma)
+
+-
+
+editor_slider_dots: Show Dot Navigation 
+
+-
+
+editor_slider_autoplay: Autoplay
+
+-
+
+editor_snippet_toolbox: Custom Template Snippet
+
+-
+
+editor_snippet_input: Snippet Code 
+
+-
+
+editor_snippet_file: Select a Snippet File
+
+-
+
+editor_table_toolbox: Tabular List
+
+-
+
+editor_code: Source Code
+
+-
+
+editor_toc: Table of Contents 
+
+-
+
+editor_left: Left 
+
+-
+
+editor_center: Center
+
+-
+
+editor_layout_default: Default layout
+
+-
+
+editor_layout_stretch: Expand the block to full width
+
+-
+
+editor_layout_span: Width
+
+-
+
+editor_layout_start: Shift
+
+-
+
+editor_layout_start_auto: Automatically shift blocks
+
+-
+
+
+
+
+
+
+
+
 error_cache_purged: The cache directory could not be purged!
 
 -

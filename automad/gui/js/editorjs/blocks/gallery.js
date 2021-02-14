@@ -53,14 +53,15 @@ class AutomadBlockGallery {
 
 	static get toolbox() {
 		return {
-			title: 'Gallery',
+			title: AutomadEditorTranslation.get('gallery_toolbox'),
 			icon: '<svg width="18px" height="15px" viewBox="0 0 18 15"><path d="M14,0H4C1.791,0,0,1.791,0,4v7c0,2.209,1.791,4,4,4h10c2.209,0,4-1.791,4-4V4C18,1.791,16.209,0,14,0z M4,2h4v6H2V4 C2,2.897,2.897,2,4,2z M4,13c-1.103,0-2-0.897-2-2v-1h6v3H4z M16,11c0,1.103-0.897,2-2,2h-4V7h6V11z M16,5h-6V2h4 c1.103,0,2,0.897,2,2V5z"/></svg>'
 		};
 	}
 
 	constructor({data, api, config}) {
 
-		var create = Automad.util.create;
+		var create = Automad.util.create,
+			t = AutomadEditorTranslation.get;
 
 		this.api = api;
 
@@ -74,7 +75,7 @@ class AutomadBlockGallery {
 
 		this.inputs = {
 			globs: create.editable(['cdx-input'], '*.jpg, /shared/*.jpg, https://domain.com/image.jpg', this.data.globs),
-			width: create.editable(['cdx-input'], 'Image width in px', this.data.width)
+			width: create.editable(['cdx-input'], 'px', this.data.width)
 		};
 		
 		var icon = document.createElement('div'),
@@ -90,9 +91,9 @@ class AutomadBlockGallery {
 		this.wrapper.appendChild(icon);
 		this.wrapper.appendChild(title);
 		this.wrapper.appendChild(document.createElement('hr'));
-		this.wrapper.appendChild(create.label('Pattern'));
+		this.wrapper.appendChild(create.label(t('gallery_files')));
 		this.wrapper.appendChild(this.inputs.globs);
-		this.wrapper.appendChild(create.label('Image Width'));
+		this.wrapper.appendChild(create.label(t('gallery_width')));
 		this.wrapper.appendChild(this.inputs.width);
 
 	}
@@ -130,7 +131,7 @@ class AutomadBlockGallery {
 			button.classList.toggle('cdx-settings-button--active');
 		});
 
-		this.api.tooltip.onHover(button, 'Clean Bottom Edge', { placement: 'top' });
+		this.api.tooltip.onHover(button, AutomadEditorTranslation.get('gallery_clean_bottom'), { placement: 'top' });
 
 		inner.appendChild(button);
 		wrapper.appendChild(inner);
