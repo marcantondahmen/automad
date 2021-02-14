@@ -64,6 +64,7 @@
 	}
 
 	&__plus {
+
 		height: 1.5rem;
 		width: 1.5rem;
 		margin: 0;
@@ -76,6 +77,11 @@
 		&--ver {
 			margin-top: -0.75rem;
 		}
+
+		circle {
+			fill: @am-success !important;
+		}
+
 	}
 
 	&__shine-line {
@@ -89,6 +95,12 @@
 			min-width: 1px;
 			height: 100%;
 		}
+
+	}
+
+	&__shine-line--ver,
+	&__shine-line--hor {
+		background-color: @am-success;
 	}
 
 }

@@ -101,28 +101,18 @@
 		padding-bottom: 0.64rem;
 	}
 
-	& .tc-toolbar {
-
-		&__plus {
-			
-			circle {
-				fill: @am-success !important;
-			}
-			
-		}
-
-		&__shine-line--ver,
-		&__shine-line--hor {
-			background-color: @am-success;
-		}
-
-	}
-
 	& .am-block-label {
 
-		&:extend(.uk-form-label all);
 		display: inline-block;
+		margin-top: @utility-margin;
 		margin-bottom: @form-stacked-margin-bottom;
+		padding: 0 0 0.14rem 0;
+		vertical-align: top;
+		font-size: @button-mini-font-size;
+		font-weight: @form-stacked-font-weight;
+		line-height: @button-mini-height;
+		color: @am-text;
+		background-color: @am-bg;
 		
 		&:not(.uk-margin-top-remove) {
 			margin-top: @utility-margin-small !important;

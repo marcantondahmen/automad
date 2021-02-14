@@ -279,7 +279,10 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					echo Components\Form\Field::render(
 						$this->getAutomad(), 
 						AM_KEY_DATE, 
-						$Page->get(AM_KEY_DATE)
+						$Page->get(AM_KEY_DATE),
+						false,
+						false,
+						Text::get('page_date')
 					); 
 
 					?>

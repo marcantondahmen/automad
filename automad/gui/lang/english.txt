@@ -855,6 +855,10 @@ page_add_location: Select a location for the new page
 
 -
 
+page_date: Date
+
+-
+
 page_move_destination: Select a destination for moving
 
 -
