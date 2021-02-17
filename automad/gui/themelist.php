@@ -101,21 +101,25 @@ class Themelist {
 		$themes = array();
 
 		foreach (FileSystem::glob($path . '/*', GLOB_ONLYDIR) as $dir) {
-			
-			$themeJSON = $dir . '/theme.json';
-			$templates = FileSystem::glob($dir . '/*.php');
-			
-			if (is_readable($themeJSON) && is_array($templates) && $templates) {
+
+			if (strpos($dir, 'node_modules') === false) {
+
+				$themeJSON = $dir . '/theme.json';
+				$templates = FileSystem::glob($dir . '/*.php');
 				
-				// If a theme.json file and at least one .php file exist, use that directoy as a theme.
-				$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
-				$themes[$path] = new Theme($themeJSON, $this->composerInstalled);
-				
-			} else {
-				
-				// Else check subdirectories for theme.json files.
-				$themes = array_merge($themes, $this->collectThemes($dir));
-				
+				if (is_readable($themeJSON) && is_array($templates) && $templates) {
+					
+					// If a theme.json file and at least one .php file exist, use that directoy as a theme.
+					$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
+					$themes[$path] = new Theme($themeJSON, $this->composerInstalled);
+					
+				} else {
+					
+					// Else check subdirectories for theme.json files.
+					$themes = array_merge($themes, $this->collectThemes($dir));
+					
+				}
+
 			}
 			
 		}

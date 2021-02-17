@@ -354,6 +354,30 @@ class Cache {
 	
 	
 	/**
+	 *	Get all subdirectories of a given directory.
+	 *
+	 *	@param string $dir 
+	 *	@return array The array of directories including the given directory itself
+	 */
+
+	private function getDirectoriesRecursively($dir) {
+
+		$dirs = array($dir);
+
+		foreach (FileSystem::glob($dir . '/*', GLOB_ONLYDIR) as $d) {
+
+			if (strpos($dir, 'node_modules') === false) {
+				$dirs = array_merge($dirs, $this->getDirectoriesRecursively($d));
+			}
+
+		}
+
+		return $dirs;
+
+	}
+
+
+	/**
 	 *	Get an array of all subdirectories and all files under /pages, /shared, /themes and /config (and the version.php) 
 	 *	and determine the latest mtime among all these items.
 	 *	That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.
@@ -387,13 +411,8 @@ class Cache {
 				// Add base dir to string.
 				$dir = AM_BASE_DIR . $monitoredDir;
 			
-				// Also add the directory itself, to monitor the top level.	
-				$arrayDirs = array($dir);
-	
-				while ($dirs = FileSystem::glob($dir . '/*', GLOB_ONLYDIR)) {
-					$dir .= '/*';
-					$arrayDirs = array_merge($arrayDirs, $dirs);
-				}
+				// Get subdirectories including the top directory itself.
+				$arrayDirs = $this->getDirectoriesRecursively($dir);
 
 				// Get all files
 				$arrayFiles = array();
