@@ -53,12 +53,12 @@
 
 	&.standard-dark {
 		--color-page-text: #FFFFFF;
-		--color-page-bg: #121212;
-		--color-page-border: #202020;
+		--color-page-bg: #202020;
+		--color-page-border: #2E2E2E;
 		--color-code-bg: #171717;
 		--color-card-text: #FFFFFF;
-		--color-card-bg: #171717;
-		--color-card-border: #202020;
+		--color-card-bg: #242424;
+		--color-card-border: #2E2E2E;
 	}
 
 	// Block Row Columns
@@ -66,7 +66,20 @@
 	--am-block-grid-column-gap: @utility-margin;
 	--am-block-grid-row-gap: @utility-margin;
 	--am-block-grid-margin: @utility-margin;
-
+	
+	// Cards
+	--am-card-padding: @cards-padding;
+	--am-card-figure-padding: 0;
+	--am-card-radius: var(--cards-radius);
+	--am-card-primary-border: var(--border-width) solid var(--color-card-text);
+	--am-card-primary-shadow: 0 0.3rem 2.5rem rgba(0,0,0,0.07);
+	--am-card-primary-color: var(--color-card-text);
+	--am-card-primary-background: var(--color-card-bg);
+	--am-card-secondary-border: var(--border-width) solid var(--color-card-border);
+	--am-card-secondary-shadow: none;
+	--am-card-secondary-color: var(--color-card-text);
+	--am-card-secondary-background: var(--color-card-bg);
+	
 	// Gallery
 	--am-gallery-gap: 2px;
 	--am-gallery-item-width: 200px;
