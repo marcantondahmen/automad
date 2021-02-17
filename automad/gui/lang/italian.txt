@@ -198,6 +198,326 @@ dropzone: Trascina i file qui
 
 -
 
+editor_buttons_toolbox: Bottoni
+
+-
+
+editor_button_primary_label: Testo primario
+
+-
+
+editor_button_primary_link: Collegamento primario
+
+-
+
+editor_button_secondary_label: Testo secondario
+
+-
+
+editor_button_secondary_link: Collegamento secondario
+
+-
+
+editor_delimiter_toolbox: Delimitatore
+
+-
+
+editor_filelist_toolbox: Elenco file
+
+-
+
+editor_filelist_template: Seleziona modello
+
+-
+
+editor_filelist_default: Modello predefinito
+
+-
+
+editor_filelist_files: Motivi glob (separati da virgola)
+
+-
+
+editor_gallery_toolbox: Galleria di immagini
+
+-
+
+editor_gallery_files: Pattern globali o URL (separati da virgola)
+
+-
+
+editor_gallery_width: Larghezza immagine in pixel
+
+-
+
+editor_gallery_clean_bottom: Bordo inferiore pulito
+
+-
+
+editor_heading_toolbox: Intestazione
+
+-
+
+editor_image_toolbox: Immagine
+
+-
+
+editor_list_toolbox: Elenco
+
+-
+
+editor_list_unordered: Elenco puntato
+
+-
+
+editor_list_ordered: Elenco numerato
+
+-
+
+editor_mail_toolbox: Modulo e-mail
+
+-
+
+editor_mail_data_error: Compila tutti i campi!
+
+-
+
+editor_mail_data_success: Email inviata con successo!
+
+-
+
+editor_mail_data_placeholder_address: Il tuo indirizzo di posta elettronica
+
+-
+
+editor_mail_data_placeholder_subject: Oggetto dell'email
+
+-
+
+editor_mail_data_placeholder_message: Corpo del messaggio
+
+-
+
+editor_mail_data_send: Inviare una mail
+
+-
+
+editor_mail_placeholder_address: Inserisci il tuo indirizzo email qui
+
+-
+
+editor_mail_placeholder_error: Inserisci qui un messaggio di errore facoltativo
+
+-
+
+editor_mail_placeholder_success: Inserisci qui un messaggio di successo facoltativo
+
+-
+
+editor_mail_label_address: Il tuo indirizzo di posta elettronica
+
+-
+
+editor_mail_label_success: Messaggio di successo
+
+-
+
+editor_mail_label_error: Messaggio di errore
+
+-
+
+editor_mail_label_placeholder_address: Segnaposto per e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Segnaposto per oggetto e-mail
+
+-
+
+editor_mail_label_placeholder_message: Segnaposto per il corpo del messaggio
+
+-
+
+editor_mail_label_button: Testo pulsante
+
+-
+
+editor_nested_toolbox: Editor / scheda incorporati
+
+-
+
+editor_nested_edit: Modificare
+
+-
+
+editor_nested_card_primary: Design della carta primaria
+
+-
+
+editor_nested_card_secondary: Progettazione di carte secondarie
+
+-
+
+editor_pagelist_toolbox: Elenco pagine
+
+-
+
+editor_pagelist_template: Seleziona modello
+
+-
+
+editor_pagelist_default: Modello predefinito
+
+-
+
+editor_pagelist_url_regex: Filtro URL Regex
+
+-
+
+editor_pagelist_type: Genere
+
+-
+
+editor_pagelist_filter_tag: Filtra per tag
+
+-
+
+editor_pagelist_filter_template: Filtra per modello
+
+-
+
+editor_pagelist_limit_offset: Limite e offset
+
+-
+
+editor_pagelist_sort_var: Ordina per variabile
+
+-
+
+editor_pagelist_sort_order: Ordinamento
+
+-
+
+editor_paragraph_toolbox: Testo
+
+-
+
+editor_paragraph_large: Dimensione carattere maggiore
+
+-
+
+editor_quote_toolbox: Citazione
+
+-
+
+editor_quote_placeholder: Immettere un testo
+
+-
+
+editor_quote_placeholder_caption: Inserisci una didascalia
+
+-
+
+editor_slider_toolbox: Presentazione
+
+-
+
+editor_slider_width: Larghezza
+
+-
+
+editor_slider_height: Altezza
+
+-
+
+editor_slider_pattern: Pattern Glob o URL (separati da virgola)
+
+-
+
+editor_slider_dots: Mostra navigazione a punti
+
+-
+
+editor_slider_autoplay: Riproduzione automatica
+
+-
+
+editor_snippet_toolbox: Snippet di modello personalizzato
+
+-
+
+editor_snippet_input: Codice frammento
+
+-
+
+editor_snippet_file: Seleziona un file frammento
+
+-
+
+editor_table_toolbox: Elenco tabulare
+
+-
+
+editor_code: Codice sorgente
+
+-
+
+editor_toc: Sommario
+
+-
+
+editor_left: Sinistra
+
+-
+
+editor_center: Centro
+
+-
+
+editor_layout_default: Layout predefinito
+
+-
+
+editor_layout_stretch: Espandi il blocco a tutta larghezza
+
+-
+
+editor_layout_span: Larghezza
+
+-
+
+editor_layout_start: Cambio
+
+-
+
+editor_layout_start_auto: Sposta automaticamente i blocchi
+
+-
+
+editor_ui_add: Inserisci
+
+-
+
+editor_ui_settings: Fare clic per aprire le impostazioni o trascinare per spostare il blocco
+
+-
+
+editor_ui_delete: Elimina blocco
+
+-
+
+editor_ui_move_up: Sposta il blocco in alto
+
+-
+
+editor_ui_move_down: Sposta il blocco verso il basso
+
+-
+
+editor_ui_convert: Converti blocco in
+
+-
+
 error_cache_purged: La directory della cache non può essere eliminata!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Rimozione pacchetto ...
 -
 
 page_add_location: Seleziona una posizione per la nuova pagina
+
+-
+
+page_date: Data
 
 -
 

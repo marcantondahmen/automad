@@ -530,7 +530,7 @@ editor_layout_start_auto: Automatically shift blocks
 
 -
 
-editor_ui_add: Add block
+editor_ui_add: Add
 
 -
 
@@ -538,15 +538,15 @@ editor_ui_settings: Click to open settings or drag to move block
 
 -
 
-editor_ui_delete: Delete 
+editor_ui_delete: Delete block
 
 -
 
-editor_ui_move_up: Move up 
+editor_ui_move_up: Move block up 
 
 -
 
-editor_ui_move_down: Move down
+editor_ui_move_down: Move block down
 
 -
 

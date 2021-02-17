@@ -198,6 +198,326 @@ dropzone: Перетягніть файли сюди
 
 -
 
+editor_buttons_toolbox: Кнопки
+
+-
+
+editor_button_primary_label: Первинний текст
+
+-
+
+editor_button_primary_link: Первинна ланка
+
+-
+
+editor_button_secondary_label: Вторинний текст
+
+-
+
+editor_button_secondary_link: Вторинна ланка
+
+-
+
+editor_delimiter_toolbox: Розділювач
+
+-
+
+editor_filelist_toolbox: Список файлів
+
+-
+
+editor_filelist_template: Виберіть Шаблон
+
+-
+
+editor_filelist_default: Шаблон за замовчуванням
+
+-
+
+editor_filelist_files: Шаблони глобусів (розділені комами)
+
+-
+
+editor_gallery_toolbox: Галерея зображень
+
+-
+
+editor_gallery_files: Шаблони глобусів або URL-адреси (розділені комами)
+
+-
+
+editor_gallery_width: Ширина зображення в пікселях
+
+-
+
+editor_gallery_clean_bottom: Чистий нижній край
+
+-
+
+editor_heading_toolbox: Заголовок
+
+-
+
+editor_image_toolbox: Зображення
+
+-
+
+editor_list_toolbox: Список
+
+-
+
+editor_list_unordered: Кульові окуляри
+
+-
+
+editor_list_ordered: Нумерований список
+
+-
+
+editor_mail_toolbox: Форма електронної пошти
+
+-
+
+editor_mail_data_error: Будь ласка, заповніть усі поля!
+
+-
+
+editor_mail_data_success: Успішно надіслано електронне повідомлення!
+
+-
+
+editor_mail_data_placeholder_address: Ваша електронна адреса
+
+-
+
+editor_mail_data_placeholder_subject: Тема електронної пошти
+
+-
+
+editor_mail_data_placeholder_message: Тіло повідомлення
+
+-
+
+editor_mail_data_send: Надіслати пошту
+
+-
+
+editor_mail_placeholder_address: Введіть тут свою електронну адресу
+
+-
+
+editor_mail_placeholder_error: Введіть сюди необов’язкове повідомлення про помилку
+
+-
+
+editor_mail_placeholder_success: Введіть сюди необов’язкове повідомлення про успіх
+
+-
+
+editor_mail_label_address: Ваша електронна адреса
+
+-
+
+editor_mail_label_success: Повідомлення про успіх
+
+-
+
+editor_mail_label_error: Повідомлення про помилку
+
+-
+
+editor_mail_label_placeholder_address: Заповнювач для електронної пошти
+
+-
+
+editor_mail_label_placeholder_subject: Заповнювач для теми електронної пошти
+
+-
+
+editor_mail_label_placeholder_message: Заповнювач для тіла повідомлення
+
+-
+
+editor_mail_label_button: Текст кнопки
+
+-
+
+editor_nested_toolbox: Вбудований редактор / картка
+
+-
+
+editor_nested_edit: Редагувати
+
+-
+
+editor_nested_card_primary: Дизайн первинної картки
+
+-
+
+editor_nested_card_secondary: Дизайн вторинних карток
+
+-
+
+editor_pagelist_toolbox: Список сторінок
+
+-
+
+editor_pagelist_template: Виберіть Шаблон
+
+-
+
+editor_pagelist_default: Шаблон за замовчуванням
+
+-
+
+editor_pagelist_url_regex: Фільтр регулярних виразів URL
+
+-
+
+editor_pagelist_type: Тип
+
+-
+
+editor_pagelist_filter_tag: Фільтрувати за тегом
+
+-
+
+editor_pagelist_filter_template: Фільтрувати за шаблоном
+
+-
+
+editor_pagelist_limit_offset: Обмеження та зміщення
+
+-
+
+editor_pagelist_sort_var: Сортувати за змінною
+
+-
+
+editor_pagelist_sort_order: Порядок сортування
+
+-
+
+editor_paragraph_toolbox: Текст
+
+-
+
+editor_paragraph_large: Більший розмір шрифту
+
+-
+
+editor_quote_toolbox: Цитата
+
+-
+
+editor_quote_placeholder: Введіть текст
+
+-
+
+editor_quote_placeholder_caption: Введіть підпис
+
+-
+
+editor_slider_toolbox: Слайд-шоу
+
+-
+
+editor_slider_width: Ширина
+
+-
+
+editor_slider_height: Висота
+
+-
+
+editor_slider_pattern: Шаблон глобуса або URL-адреси (розділені комами)
+
+-
+
+editor_slider_dots: Показати крапкову навігацію
+
+-
+
+editor_slider_autoplay: Автоматичне відтворення
+
+-
+
+editor_snippet_toolbox: Фрагмент спеціального шаблону
+
+-
+
+editor_snippet_input: Код фрагмента
+
+-
+
+editor_snippet_file: Виберіть файл фрагмента
+
+-
+
+editor_table_toolbox: Табличний список
+
+-
+
+editor_code: Вихідний код
+
+-
+
+editor_toc: Зміст
+
+-
+
+editor_left: Ліворуч
+
+-
+
+editor_center: Центр
+
+-
+
+editor_layout_default: Макет за замовчуванням
+
+-
+
+editor_layout_stretch: Розгорніть блок на всю ширину
+
+-
+
+editor_layout_span: Ширина
+
+-
+
+editor_layout_start: Shift
+
+-
+
+editor_layout_start_auto: Автоматично переміщувати блоки
+
+-
+
+editor_ui_add: Додати
+
+-
+
+editor_ui_settings: Клацніть, щоб відкрити налаштування, або перетягніть, щоб перемістити блок
+
+-
+
+editor_ui_delete: Видалити блок
+
+-
+
+editor_ui_move_up: Перемістити блок вгору
+
+-
+
+editor_ui_move_down: Перемістити блок вниз
+
+-
+
+editor_ui_convert: Перетворити блок на
+
+-
+
 error_cache_purged: Не вдалося очистити каталог кешу!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Видалення пакета ...
 -
 
 page_add_location: Виберіть місце для нової сторінки
+
+-
+
+page_date: Дата
 
 -
 

@@ -198,6 +198,326 @@ dropzone: Vedä tiedostot tähän
 
 -
 
+editor_buttons_toolbox: Painikkeet
+
+-
+
+editor_button_primary_label: Ensisijainen teksti
+
+-
+
+editor_button_primary_link: Ensisijainen linkki
+
+-
+
+editor_button_secondary_label: Toissijainen teksti
+
+-
+
+editor_button_secondary_link: Toissijainen linkki
+
+-
+
+editor_delimiter_toolbox: Erotin
+
+-
+
+editor_filelist_toolbox: Tiedostoluettelo
+
+-
+
+editor_filelist_template: Valitse malli
+
+-
+
+editor_filelist_default: Oletusmalli
+
+-
+
+editor_filelist_files: Glob-kuviot (erotettu pilkulla)
+
+-
+
+editor_gallery_toolbox: Kuvagalleria
+
+-
+
+editor_gallery_files: Glob-mallit tai URL-osoitteet (erotettu pilkulla)
+
+-
+
+editor_gallery_width: Kuvan leveys pikseleinä
+
+-
+
+editor_gallery_clean_bottom: Puhdista alareuna
+
+-
+
+editor_heading_toolbox: Otsikko
+
+-
+
+editor_image_toolbox: Kuva
+
+-
+
+editor_list_toolbox: Lista
+
+-
+
+editor_list_unordered: Luettelopisteet
+
+-
+
+editor_list_ordered: Numeroitu luettelo
+
+-
+
+editor_mail_toolbox: Sähköpostilomake
+
+-
+
+editor_mail_data_error: Täytä kaikki kentät!
+
+-
+
+editor_mail_data_success: Sähköpostin lähetys onnistui!
+
+-
+
+editor_mail_data_placeholder_address: Sähköpostiosoitteesi
+
+-
+
+editor_mail_data_placeholder_subject: Sähköpostin aihe
+
+-
+
+editor_mail_data_placeholder_message: Viestin runko
+
+-
+
+editor_mail_data_send: Lähetä postia
+
+-
+
+editor_mail_placeholder_address: Kirjoita sähköpostiosoitteesi tähän
+
+-
+
+editor_mail_placeholder_error: Kirjoita valinnainen virhesanoma tähän
+
+-
+
+editor_mail_placeholder_success: Kirjoita valinnainen menestysviesti tähän
+
+-
+
+editor_mail_label_address: Sähköpostiosoitteesi
+
+-
+
+editor_mail_label_success: Menestysviesti
+
+-
+
+editor_mail_label_error: Virheviesti
+
+-
+
+editor_mail_label_placeholder_address: Paikkamerkki sähköpostille
+
+-
+
+editor_mail_label_placeholder_subject: Paikkamerkki sähköpostin aiheelle
+
+-
+
+editor_mail_label_placeholder_message: Paikkamerkki viestirungolle
+
+-
+
+editor_mail_label_button: Painikkeen teksti
+
+-
+
+editor_nested_toolbox: Sulautettu editori / kortti
+
+-
+
+editor_nested_edit: Muokata
+
+-
+
+editor_nested_card_primary: Ensisijaisen kortin suunnittelu
+
+-
+
+editor_nested_card_secondary: Toissijaisen kortin suunnittelu
+
+-
+
+editor_pagelist_toolbox: Sivuluettelo
+
+-
+
+editor_pagelist_template: Valitse malli
+
+-
+
+editor_pagelist_default: Oletusmalli
+
+-
+
+editor_pagelist_url_regex: URL Regex -suodatin
+
+-
+
+editor_pagelist_type: Tyyppi
+
+-
+
+editor_pagelist_filter_tag: Suodata tunnisteen mukaan
+
+-
+
+editor_pagelist_filter_template: Suodata mallin mukaan
+
+-
+
+editor_pagelist_limit_offset: Raja ja siirtymä
+
+-
+
+editor_pagelist_sort_var: Lajittele muuttujan mukaan
+
+-
+
+editor_pagelist_sort_order: Lajittelujärjestys
+
+-
+
+editor_paragraph_toolbox: Teksti
+
+-
+
+editor_paragraph_large: Suurempi kirjasinkoko
+
+-
+
+editor_quote_toolbox: Lainata
+
+-
+
+editor_quote_placeholder: Kirjoita teksti
+
+-
+
+editor_quote_placeholder_caption: Kirjoita kuvateksti
+
+-
+
+editor_slider_toolbox: Kuvaesitys
+
+-
+
+editor_slider_width: Leveys
+
+-
+
+editor_slider_height: Korkeus
+
+-
+
+editor_slider_pattern: Glob-kuvio tai URL-osoitteet (erotettu pilkulla)
+
+-
+
+editor_slider_dots: Näytä piste navigointi
+
+-
+
+editor_slider_autoplay: Automaattinen toisto
+
+-
+
+editor_snippet_toolbox: Mukautettu mallinpätkä
+
+-
+
+editor_snippet_input: Katkelma
+
+-
+
+editor_snippet_file: Valitse katkelma
+
+-
+
+editor_table_toolbox: Taulukko
+
+-
+
+editor_code: Lähdekoodi
+
+-
+
+editor_toc: Sisällysluettelo
+
+-
+
+editor_left: Vasen
+
+-
+
+editor_center: Keskusta
+
+-
+
+editor_layout_default: Oletusasettelu
+
+-
+
+editor_layout_stretch: Laajenna lohko täysleveydelle
+
+-
+
+editor_layout_span: Leveys
+
+-
+
+editor_layout_start: Siirtää
+
+-
+
+editor_layout_start_auto: Lohkojen automaattinen siirtäminen
+
+-
+
+editor_ui_add: Lisätä
+
+-
+
+editor_ui_settings: Napsauta avataksesi asetukset tai siirrä lohko vetämällä
+
+-
+
+editor_ui_delete: Poista lohko
+
+-
+
+editor_ui_move_up: Siirrä lohko ylös
+
+-
+
+editor_ui_move_down: Siirrä lohko alas
+
+-
+
+editor_ui_convert: Muunna lohko muotoon
+
+-
+
 error_cache_purged: Välimuistihakemistoa ei voitu tyhjentää!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Poistetaan pakettia ...
 -
 
 page_add_location: Valitse uuden sivun sijainti
+
+-
+
+page_date: Päivämäärä
 
 -
 

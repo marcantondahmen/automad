@@ -198,6 +198,326 @@ dropzone: Przeciągnij pliki tutaj
 
 -
 
+editor_buttons_toolbox: Guziki
+
+-
+
+editor_button_primary_label: Główny tekst
+
+-
+
+editor_button_primary_link: Główny link
+
+-
+
+editor_button_secondary_label: Dodatkowy tekst
+
+-
+
+editor_button_secondary_link: Link drugorzędny
+
+-
+
+editor_delimiter_toolbox: Separator
+
+-
+
+editor_filelist_toolbox: Lista plików
+
+-
+
+editor_filelist_template: Wybierz szablon
+
+-
+
+editor_filelist_default: Domyślny szablon
+
+-
+
+editor_filelist_files: Wzorce globalne (oddzielone przecinkami)
+
+-
+
+editor_gallery_toolbox: Galeria obrazów
+
+-
+
+editor_gallery_files: Wzorce lub adresy URL Glob (oddzielone przecinkami)
+
+-
+
+editor_gallery_width: Szerokość obrazu w pikselach
+
+-
+
+editor_gallery_clean_bottom: Wyczyść dolną krawędź
+
+-
+
+editor_heading_toolbox: Nagłówek
+
+-
+
+editor_image_toolbox: Wizerunek
+
+-
+
+editor_list_toolbox: Lista
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Lista numerowana
+
+-
+
+editor_mail_toolbox: Formularz e-mailowy
+
+-
+
+editor_mail_data_error: Proszę wypełnić wszystkie pola!
+
+-
+
+editor_mail_data_success: Wysłano wiadomość e-mail!
+
+-
+
+editor_mail_data_placeholder_address: Twój adres email
+
+-
+
+editor_mail_data_placeholder_subject: Temat emaila
+
+-
+
+editor_mail_data_placeholder_message: Treść wiadomości
+
+-
+
+editor_mail_data_send: Wyślij maila
+
+-
+
+editor_mail_placeholder_address: Wpisz tutaj swój adres e-mail
+
+-
+
+editor_mail_placeholder_error: Wpisz tutaj opcjonalny komunikat o błędzie
+
+-
+
+editor_mail_placeholder_success: Wpisz tutaj opcjonalną wiadomość o powodzeniu
+
+-
+
+editor_mail_label_address: Twój adres email
+
+-
+
+editor_mail_label_success: Wiadomość o sukcesie
+
+-
+
+editor_mail_label_error: Komunikat o błędzie
+
+-
+
+editor_mail_label_placeholder_address: Symbol zastępczy wiadomości e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Symbol zastępczy tematu wiadomości e-mail
+
+-
+
+editor_mail_label_placeholder_message: Symbol zastępczy treści wiadomości
+
+-
+
+editor_mail_label_button: Przycisk tekstowy
+
+-
+
+editor_nested_toolbox: Wbudowany edytor / karta
+
+-
+
+editor_nested_edit: Edytować
+
+-
+
+editor_nested_card_primary: Podstawowy projekt karty
+
+-
+
+editor_nested_card_secondary: Drugi projekt karty
+
+-
+
+editor_pagelist_toolbox: Lista stron
+
+-
+
+editor_pagelist_template: Wybierz szablon
+
+-
+
+editor_pagelist_default: Domyślny szablon
+
+-
+
+editor_pagelist_url_regex: URL Regex Filter
+
+-
+
+editor_pagelist_type: Rodzaj
+
+-
+
+editor_pagelist_filter_tag: Filtruj według tagu
+
+-
+
+editor_pagelist_filter_template: Filtruj według szablonu
+
+-
+
+editor_pagelist_limit_offset: Limit i przesunięcie
+
+-
+
+editor_pagelist_sort_var: Sortuj według zmiennej
+
+-
+
+editor_pagelist_sort_order: Porządek sortowania
+
+-
+
+editor_paragraph_toolbox: Tekst
+
+-
+
+editor_paragraph_large: Większy rozmiar czcionki
+
+-
+
+editor_quote_toolbox: Zacytować
+
+-
+
+editor_quote_placeholder: Wpisz tekst
+
+-
+
+editor_quote_placeholder_caption: Wpisz podpis
+
+-
+
+editor_slider_toolbox: Pokaz slajdów
+
+-
+
+editor_slider_width: Szerokość
+
+-
+
+editor_slider_height: Wysokość
+
+-
+
+editor_slider_pattern: Wzorzec Glob lub adresy URL (oddzielone przecinkami)
+
+-
+
+editor_slider_dots: Pokaż nawigację kropkową
+
+-
+
+editor_slider_autoplay: Automatyczne odtwarzanie
+
+-
+
+editor_snippet_toolbox: Niestandardowy fragment szablonu
+
+-
+
+editor_snippet_input: Kod fragmentu
+
+-
+
+editor_snippet_file: Wybierz plik fragmentu
+
+-
+
+editor_table_toolbox: Lista tabelaryczna
+
+-
+
+editor_code: Kod źródłowy
+
+-
+
+editor_toc: Spis treści
+
+-
+
+editor_left: Lewo
+
+-
+
+editor_center: Centrum
+
+-
+
+editor_layout_default: Domyślny układ
+
+-
+
+editor_layout_stretch: Rozwiń blok do pełnej szerokości
+
+-
+
+editor_layout_span: Szerokość
+
+-
+
+editor_layout_start: Zmiana
+
+-
+
+editor_layout_start_auto: Automatyczne przesuwanie bloków
+
+-
+
+editor_ui_add: Dodaj
+
+-
+
+editor_ui_settings: Kliknij, aby otworzyć ustawienia lub przeciągnij, aby przesunąć blok
+
+-
+
+editor_ui_delete: Usuń blok
+
+-
+
+editor_ui_move_up: Przesuń blok w górę
+
+-
+
+editor_ui_move_down: Przesuń blok w dół
+
+-
+
+editor_ui_convert: Konwertuj blok na
+
+-
+
 error_cache_purged: Nie można wyczyścić katalogu pamięci podręcznej!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Usuwanie pakietu ...
 -
 
 page_add_location: Wybierz lokalizację nowej strony
+
+-
+
+page_date: Data
 
 -
 

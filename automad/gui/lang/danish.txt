@@ -198,6 +198,326 @@ dropzone: Træk filer her
 
 -
 
+editor_buttons_toolbox: Knapper
+
+-
+
+editor_button_primary_label: Primær tekst
+
+-
+
+editor_button_primary_link: Primært link
+
+-
+
+editor_button_secondary_label: Sekundær tekst
+
+-
+
+editor_button_secondary_link: Sekundært link
+
+-
+
+editor_delimiter_toolbox: Afgrænser
+
+-
+
+editor_filelist_toolbox: Filliste
+
+-
+
+editor_filelist_template: Vælg skabelon
+
+-
+
+editor_filelist_default: Standardskabelon
+
+-
+
+editor_filelist_files: Globmønstre (adskilt af komma)
+
+-
+
+editor_gallery_toolbox: Billedgalleri
+
+-
+
+editor_gallery_files: Globale mønstre eller webadresser (adskilt med komma)
+
+-
+
+editor_gallery_width: Billedbredde i pixel
+
+-
+
+editor_gallery_clean_bottom: Rengør bundkanten
+
+-
+
+editor_heading_toolbox: Overskrift
+
+-
+
+editor_image_toolbox: Billede
+
+-
+
+editor_list_toolbox: Liste
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Nummereret liste
+
+-
+
+editor_mail_toolbox: E-mail-formular
+
+-
+
+editor_mail_data_error: Udfyld venligst alle felter!
+
+-
+
+editor_mail_data_success: Sendt e-mail!
+
+-
+
+editor_mail_data_placeholder_address: Din email adresse
+
+-
+
+editor_mail_data_placeholder_subject: Email emne
+
+-
+
+editor_mail_data_placeholder_message: Beskedtekst
+
+-
+
+editor_mail_data_send: Send mail
+
+-
+
+editor_mail_placeholder_address: Indtast din e-mail-adresse her
+
+-
+
+editor_mail_placeholder_error: Indtast en valgfri fejlmeddelelse her
+
+-
+
+editor_mail_placeholder_success: Indtast en valgfri succesmeddelelse her
+
+-
+
+editor_mail_label_address: Din email adresse
+
+-
+
+editor_mail_label_success: Succesmeddelelse
+
+-
+
+editor_mail_label_error: Fejl besked
+
+-
+
+editor_mail_label_placeholder_address: Pladsholder til e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Pladsholder til e-mail-emne
+
+-
+
+editor_mail_label_placeholder_message: Pladsholder for meddelelsesorgan
+
+-
+
+editor_mail_label_button: Knaptekst
+
+-
+
+editor_nested_toolbox: Integreret editor / kort
+
+-
+
+editor_nested_edit: Redigere
+
+-
+
+editor_nested_card_primary: Primært kortdesign
+
+-
+
+editor_nested_card_secondary: Sekundært kortdesign
+
+-
+
+editor_pagelist_toolbox: Sideliste
+
+-
+
+editor_pagelist_template: Vælg skabelon
+
+-
+
+editor_pagelist_default: Standardskabelon
+
+-
+
+editor_pagelist_url_regex: URL Regex-filter
+
+-
+
+editor_pagelist_type: Type
+
+-
+
+editor_pagelist_filter_tag: Filtrer efter tag
+
+-
+
+editor_pagelist_filter_template: Filtrer efter skabelon
+
+-
+
+editor_pagelist_limit_offset: Limit og Offset
+
+-
+
+editor_pagelist_sort_var: Sorter efter variabel
+
+-
+
+editor_pagelist_sort_order: Sorteringsrækkefølge
+
+-
+
+editor_paragraph_toolbox: Tekst
+
+-
+
+editor_paragraph_large: Større skriftstørrelse
+
+-
+
+editor_quote_toolbox: Citere
+
+-
+
+editor_quote_placeholder: Indtast en tekst
+
+-
+
+editor_quote_placeholder_caption: Indtast en billedtekst
+
+-
+
+editor_slider_toolbox: Diasshow
+
+-
+
+editor_slider_width: Bredde
+
+-
+
+editor_slider_height: Højde
+
+-
+
+editor_slider_pattern: Globmønster eller webadresser (adskilt med komma)
+
+-
+
+editor_slider_dots: Vis punktnavigation
+
+-
+
+editor_slider_autoplay: Automatisk afspilning
+
+-
+
+editor_snippet_toolbox: Tilpasset skabelonuddrag
+
+-
+
+editor_snippet_input: Kodestykke
+
+-
+
+editor_snippet_file: Vælg en uddragsfil
+
+-
+
+editor_table_toolbox: Liste over tabeller
+
+-
+
+editor_code: Kildekode
+
+-
+
+editor_toc: Indholdsfortegnelse
+
+-
+
+editor_left: Venstre
+
+-
+
+editor_center: Centrum
+
+-
+
+editor_layout_default: Standardlayout
+
+-
+
+editor_layout_stretch: Udvid blokken til fuld bredde
+
+-
+
+editor_layout_span: Bredde
+
+-
+
+editor_layout_start: Flytte
+
+-
+
+editor_layout_start_auto: Skift blokke automatisk
+
+-
+
+editor_ui_add: Tilføje
+
+-
+
+editor_ui_settings: Klik for at åbne indstillinger, eller træk for at flytte blokken
+
+-
+
+editor_ui_delete: Slet blok
+
+-
+
+editor_ui_move_up: Flyt blokken op
+
+-
+
+editor_ui_move_down: Flyt blokken ned
+
+-
+
+editor_ui_convert: Konverter blok til
+
+-
+
 error_cache_purged: Cache-biblioteket kunne ikke renses!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Fjerner pakken ...
 -
 
 page_add_location: Vælg en placering til den nye side
+
+-
+
+page_date: Dato
 
 -
 

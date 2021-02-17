@@ -198,6 +198,326 @@ dropzone: Lohistage failid siia
 
 -
 
+editor_buttons_toolbox: Nööbid
+
+-
+
+editor_button_primary_label: Esmane tekst
+
+-
+
+editor_button_primary_link: Esmane link
+
+-
+
+editor_button_secondary_label: Teisene tekst
+
+-
+
+editor_button_secondary_link: Sekundaarne link
+
+-
+
+editor_delimiter_toolbox: Piiraja
+
+-
+
+editor_filelist_toolbox: Faililoend
+
+-
+
+editor_filelist_template: Valige mall
+
+-
+
+editor_filelist_default: Vaikemall
+
+-
+
+editor_filelist_files: Gloobuse mustrid (eraldatud komaga)
+
+-
+
+editor_gallery_toolbox: Pildigalerii
+
+-
+
+editor_gallery_files: Globaalsed mustrid või URL-id (eraldatud komaga)
+
+-
+
+editor_gallery_width: Pildi laius pikslites
+
+-
+
+editor_gallery_clean_bottom: Puhastage alumine serv
+
+-
+
+editor_heading_toolbox: Pealkiri
+
+-
+
+editor_image_toolbox: Pilt
+
+-
+
+editor_list_toolbox: Nimekiri
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Numbriloend
+
+-
+
+editor_mail_toolbox: E-posti vorm
+
+-
+
+editor_mail_data_error: Palun täitke kõik väljad!
+
+-
+
+editor_mail_data_success: E-posti saatmine õnnestus!
+
+-
+
+editor_mail_data_placeholder_address: Sinu emaili aadress
+
+-
+
+editor_mail_data_placeholder_subject: E-posti teema
+
+-
+
+editor_mail_data_placeholder_message: Sõnumi sisu
+
+-
+
+editor_mail_data_send: Kirja saatma
+
+-
+
+editor_mail_placeholder_address: Sisestage siia oma e-posti aadress
+
+-
+
+editor_mail_placeholder_error: Sisestage siia valikuline tõrketeade
+
+-
+
+editor_mail_placeholder_success: Sisestage siia valikuline eduteade
+
+-
+
+editor_mail_label_address: Sinu emaili aadress
+
+-
+
+editor_mail_label_success: Edusõnum
+
+-
+
+editor_mail_label_error: Veateade
+
+-
+
+editor_mail_label_placeholder_address: E-posti kohahoidja
+
+-
+
+editor_mail_label_placeholder_subject: E-posti teema kohahoidja
+
+-
+
+editor_mail_label_placeholder_message: Sõnumiteksti kohatäide
+
+-
+
+editor_mail_label_button: Nuputekst
+
+-
+
+editor_nested_toolbox: Sisseehitatud toimetaja / kaart
+
+-
+
+editor_nested_edit: Muuda
+
+-
+
+editor_nested_card_primary: Esmane kaardi kujundus
+
+-
+
+editor_nested_card_secondary: Teisene kaardi kujundus
+
+-
+
+editor_pagelist_toolbox: Lehekülgede loend
+
+-
+
+editor_pagelist_template: Valige mall
+
+-
+
+editor_pagelist_default: Vaikemall
+
+-
+
+editor_pagelist_url_regex: URL-i regex-filter
+
+-
+
+editor_pagelist_type: Tüüp
+
+-
+
+editor_pagelist_filter_tag: Filtreeri sildi järgi
+
+-
+
+editor_pagelist_filter_template: Filtreeri malli järgi
+
+-
+
+editor_pagelist_limit_offset: Piir ja nihe
+
+-
+
+editor_pagelist_sort_var: Sordi muutuja järgi
+
+-
+
+editor_pagelist_sort_order: Sordi järjekord
+
+-
+
+editor_paragraph_toolbox: Tekst
+
+-
+
+editor_paragraph_large: Suurem fondi suurus
+
+-
+
+editor_quote_toolbox: Tsiteeri
+
+-
+
+editor_quote_placeholder: Sisestage tekst
+
+-
+
+editor_quote_placeholder_caption: Sisestage pealkiri
+
+-
+
+editor_slider_toolbox: Slaidiseanss
+
+-
+
+editor_slider_width: Laius
+
+-
+
+editor_slider_height: Kõrgus
+
+-
+
+editor_slider_pattern: Globaalne muster või URL-id (eraldatud komaga)
+
+-
+
+editor_slider_dots: Kuva punktnavigatsioon
+
+-
+
+editor_slider_autoplay: Automaatne esitamine
+
+-
+
+editor_snippet_toolbox: Kohandatud mallilõik
+
+-
+
+editor_snippet_input: Katkendi kood
+
+-
+
+editor_snippet_file: Valige katkefail
+
+-
+
+editor_table_toolbox: Tabelite loend
+
+-
+
+editor_code: Lähtekood
+
+-
+
+editor_toc: Sisukord
+
+-
+
+editor_left: Vasakule
+
+-
+
+editor_center: Keskus
+
+-
+
+editor_layout_default: Vaikimisi paigutus
+
+-
+
+editor_layout_stretch: Laiendage plokki täislaiusele
+
+-
+
+editor_layout_span: Laius
+
+-
+
+editor_layout_start: Shift
+
+-
+
+editor_layout_start_auto: Plokkide nihutamine automaatselt
+
+-
+
+editor_ui_add: Lisama
+
+-
+
+editor_ui_settings: Klõpsake seadete avamiseks või lohistage ploki teisaldamiseks
+
+-
+
+editor_ui_delete: Kustuta plokk
+
+-
+
+editor_ui_move_up: Liigutage plokk üles
+
+-
+
+editor_ui_move_down: Liigutage plokk alla
+
+-
+
+editor_ui_convert: Teisenda plokk
+
+-
+
 error_cache_purged: Vahemälu kataloogi ei õnnestunud tühjendada!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Pakendi eemaldamine ...
 -
 
 page_add_location: Valige uue lehe asukoht
+
+-
+
+page_date: Kuupäev
 
 -
 

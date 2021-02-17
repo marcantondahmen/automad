@@ -198,6 +198,326 @@ dropzone: Σύρετε τα αρχεία εδώ
 
 -
 
+editor_buttons_toolbox: Κουμπιά
+
+-
+
+editor_button_primary_label: Κύριο κείμενο
+
+-
+
+editor_button_primary_link: Κύριος σύνδεσμος
+
+-
+
+editor_button_secondary_label: Δευτερεύον κείμενο
+
+-
+
+editor_button_secondary_link: Δευτερεύων σύνδεσμος
+
+-
+
+editor_delimiter_toolbox: Οριοθέτης
+
+-
+
+editor_filelist_toolbox: Λίστα αρχείων
+
+-
+
+editor_filelist_template: Επιλέξτε Πρότυπο
+
+-
+
+editor_filelist_default: Προεπιλεγμένο πρότυπο
+
+-
+
+editor_filelist_files: Μοτίβα Glob (Διαχωρισμένα με κόμμα)
+
+-
+
+editor_gallery_toolbox: Συλλογή εικόνων
+
+-
+
+editor_gallery_files: Μοτίβα Glob ή URL (διαχωρισμένα με κόμμα)
+
+-
+
+editor_gallery_width: Πλάτος εικόνας σε εικονοστοιχεία
+
+-
+
+editor_gallery_clean_bottom: Καθαρό κάτω άκρο
+
+-
+
+editor_heading_toolbox: Επικεφαλίδα
+
+-
+
+editor_image_toolbox: Εικόνα
+
+-
+
+editor_list_toolbox: Λίστα
+
+-
+
+editor_list_unordered: Κουκκίδες
+
+-
+
+editor_list_ordered: Αριθμημένη λίστα
+
+-
+
+editor_mail_toolbox: Φόρμα ηλεκτρονικού ταχυδρομείου
+
+-
+
+editor_mail_data_error: Συμπληρώστε όλα τα πεδία!
+
+-
+
+editor_mail_data_success: Αποστολή email με επιτυχία!
+
+-
+
+editor_mail_data_placeholder_address: η ηλεκτρονική σου διεύθυνση
+
+-
+
+editor_mail_data_placeholder_subject: Θέμα του μέιλ
+
+-
+
+editor_mail_data_placeholder_message: Σώμα μηνύματος
+
+-
+
+editor_mail_data_send: Αποστολή αλληλογραφίας
+
+-
+
+editor_mail_placeholder_address: Εισάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας εδώ
+
+-
+
+editor_mail_placeholder_error: Εισαγάγετε ένα προαιρετικό μήνυμα σφάλματος εδώ
+
+-
+
+editor_mail_placeholder_success: Εισαγάγετε ένα προαιρετικό μήνυμα επιτυχίας εδώ
+
+-
+
+editor_mail_label_address: Η ηλεκτρονική σου διεύθυνση
+
+-
+
+editor_mail_label_success: Μήνυμα επιτυχίας
+
+-
+
+editor_mail_label_error: Μήνυμα λάθους
+
+-
+
+editor_mail_label_placeholder_address: Placeholder για email
+
+-
+
+editor_mail_label_placeholder_subject: Placeholder για Θέμα ηλεκτρονικού ταχυδρομείου
+
+-
+
+editor_mail_label_placeholder_message: Placeholder για το σώμα του μηνύματος
+
+-
+
+editor_mail_label_button: Κείμενο κουμπιού
+
+-
+
+editor_nested_toolbox: Ενσωματωμένος επεξεργαστής / κάρτα
+
+-
+
+editor_nested_edit: Επεξεργασία
+
+-
+
+editor_nested_card_primary: Κύριος σχεδιασμός καρτών
+
+-
+
+editor_nested_card_secondary: Σχεδιασμός δευτερεύουσας κάρτας
+
+-
+
+editor_pagelist_toolbox: Λίστα σελίδων
+
+-
+
+editor_pagelist_template: Επιλέξτε Πρότυπο
+
+-
+
+editor_pagelist_default: Προεπιλεγμένο πρότυπο
+
+-
+
+editor_pagelist_url_regex: Φίλτρο Regex URL
+
+-
+
+editor_pagelist_type: Τύπος
+
+-
+
+editor_pagelist_filter_tag: Φιλτράρισμα κατά ετικέτα
+
+-
+
+editor_pagelist_filter_template: Φιλτράρισμα ανά πρότυπο
+
+-
+
+editor_pagelist_limit_offset: Όριο και όφσετ
+
+-
+
+editor_pagelist_sort_var: Ταξινόμηση κατά μεταβλητή
+
+-
+
+editor_pagelist_sort_order: Σειρά ταξινόμησης
+
+-
+
+editor_paragraph_toolbox: Κείμενο
+
+-
+
+editor_paragraph_large: Μεγαλύτερο μέγεθος γραμματοσειράς
+
+-
+
+editor_quote_toolbox: Παραθέτω, αναφορά
+
+-
+
+editor_quote_placeholder: Εισαγάγετε ένα κείμενο
+
+-
+
+editor_quote_placeholder_caption: Εισαγάγετε μια λεζάντα
+
+-
+
+editor_slider_toolbox: Παρουσίαση
+
+-
+
+editor_slider_width: Πλάτος
+
+-
+
+editor_slider_height: Υψος
+
+-
+
+editor_slider_pattern: Μοτίβο Glob ή URL (διαχωρισμένα με κόμμα)
+
+-
+
+editor_slider_dots: Εμφάνιση πλοήγησης κουκκίδων
+
+-
+
+editor_slider_autoplay: Αυτόματη αναπαραγωγή
+
+-
+
+editor_snippet_toolbox: Προσαρμοσμένο απόσπασμα προτύπου
+
+-
+
+editor_snippet_input: Κωδικός αποσπάσματος
+
+-
+
+editor_snippet_file: Επιλέξτε ένα απόσπασμα αρχείου
+
+-
+
+editor_table_toolbox: Λίστα πινάκων
+
+-
+
+editor_code: Πηγαίος κώδικας
+
+-
+
+editor_toc: Πίνακας περιεχομένων
+
+-
+
+editor_left: Αριστερά
+
+-
+
+editor_center: Κέντρο
+
+-
+
+editor_layout_default: Προεπιλεγμένη διάταξη
+
+-
+
+editor_layout_stretch: Αναπτύξτε το μπλοκ σε πλήρες πλάτος
+
+-
+
+editor_layout_span: Πλάτος
+
+-
+
+editor_layout_start: Βάρδια
+
+-
+
+editor_layout_start_auto: Αυτόματη μετατόπιση μπλοκ
+
+-
+
+editor_ui_add: Προσθήκη
+
+-
+
+editor_ui_settings: Κάντε κλικ για να ανοίξετε τις ρυθμίσεις ή σύρετε για να μετακινήσετε το μπλοκ
+
+-
+
+editor_ui_delete: Διαγραφή μπλοκ
+
+-
+
+editor_ui_move_up: Μετακίνηση μπλοκαρίσματος
+
+-
+
+editor_ui_move_down: Μετακίνηση μπλοκ προς τα κάτω
+
+-
+
+editor_ui_convert: Μετατροπή μπλοκ σε
+
+-
+
 error_cache_purged: Δεν ήταν δυνατή η εκκαθάριση του καταλόγου προσωρινής μνήμης!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Κατάργηση πακέτου ...
 -
 
 page_add_location: Επιλέξτε μια θέση για τη νέα σελίδα
+
+-
+
+page_date: Ημερομηνία
 
 -
 

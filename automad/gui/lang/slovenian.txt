@@ -198,6 +198,326 @@ dropzone: Povlecite datoteke sem
 
 -
 
+editor_buttons_toolbox: Gumbi
+
+-
+
+editor_button_primary_label: Primarno besedilo
+
+-
+
+editor_button_primary_link: Primarna povezava
+
+-
+
+editor_button_secondary_label: Sekundarno besedilo
+
+-
+
+editor_button_secondary_link: Sekundarna povezava
+
+-
+
+editor_delimiter_toolbox: Ločilo
+
+-
+
+editor_filelist_toolbox: Seznam datotek
+
+-
+
+editor_filelist_template: Izberite Predloga
+
+-
+
+editor_filelist_default: Privzeta predloga
+
+-
+
+editor_filelist_files: Vzorci globusa (ločeni z vejico)
+
+-
+
+editor_gallery_toolbox: Galerija slik
+
+-
+
+editor_gallery_files: Glob vzorci ali URL-ji (ločeni z vejico)
+
+-
+
+editor_gallery_width: Širina slike v slikovnih pikah
+
+-
+
+editor_gallery_clean_bottom: Clean Bottom Edge
+
+-
+
+editor_heading_toolbox: Naslov
+
+-
+
+editor_image_toolbox: Slika
+
+-
+
+editor_list_toolbox: Seznam
+
+-
+
+editor_list_unordered: Bullet Točke
+
+-
+
+editor_list_ordered: Oštevilčen seznam
+
+-
+
+editor_mail_toolbox: E-poštni obrazec
+
+-
+
+editor_mail_data_error: Izpolnite vsa polja!
+
+-
+
+editor_mail_data_success: Uspešno poslano e-poštno sporočilo!
+
+-
+
+editor_mail_data_placeholder_address: Vaš email naslov
+
+-
+
+editor_mail_data_placeholder_subject: Zadeva e-pošte
+
+-
+
+editor_mail_data_placeholder_message: Telo sporočila
+
+-
+
+editor_mail_data_send: Pošlji pošto
+
+-
+
+editor_mail_placeholder_address: Tu vnesite svoj e-poštni naslov
+
+-
+
+editor_mail_placeholder_error: Sem vnesite neobvezno sporočilo o napaki
+
+-
+
+editor_mail_placeholder_success: Sem vnesite neobvezno sporočilo o uspehu
+
+-
+
+editor_mail_label_address: Vaš email naslov
+
+-
+
+editor_mail_label_success: Sporočilo o uspehu
+
+-
+
+editor_mail_label_error: Obvestilo o napaki
+
+-
+
+editor_mail_label_placeholder_address: Nadomestni znak za e-pošto
+
+-
+
+editor_mail_label_placeholder_subject: Nadomestni znak za zadevo e-pošte
+
+-
+
+editor_mail_label_placeholder_message: Nadomestni znak za telo sporočila
+
+-
+
+editor_mail_label_button: Besedilo gumba
+
+-
+
+editor_nested_toolbox: Vdelani urejevalnik / kartica
+
+-
+
+editor_nested_edit: Uredi
+
+-
+
+editor_nested_card_primary: Primarno oblikovanje kartic
+
+-
+
+editor_nested_card_secondary: Sekundarno oblikovanje kartic
+
+-
+
+editor_pagelist_toolbox: Seznam strani
+
+-
+
+editor_pagelist_template: Izberite Predloga
+
+-
+
+editor_pagelist_default: Privzeta predloga
+
+-
+
+editor_pagelist_url_regex: Filter regularnih izrazov URL
+
+-
+
+editor_pagelist_type: Tip
+
+-
+
+editor_pagelist_filter_tag: Filtriraj po oznaki
+
+-
+
+editor_pagelist_filter_template: Filtriraj po predlogi
+
+-
+
+editor_pagelist_limit_offset: Omejitev in odmik
+
+-
+
+editor_pagelist_sort_var: Razvrsti po spremenljivki
+
+-
+
+editor_pagelist_sort_order: Razvrsti vrstni red
+
+-
+
+editor_paragraph_toolbox: Besedilo
+
+-
+
+editor_paragraph_large: Večja velikost pisave
+
+-
+
+editor_quote_toolbox: Kvota
+
+-
+
+editor_quote_placeholder: Vnesite besedilo
+
+-
+
+editor_quote_placeholder_caption: Vnesite napis
+
+-
+
+editor_slider_toolbox: Diaprojekcija
+
+-
+
+editor_slider_width: Premer
+
+-
+
+editor_slider_height: Višina
+
+-
+
+editor_slider_pattern: Vzorec globusa ali URL-ji (ločeni z vejico)
+
+-
+
+editor_slider_dots: Pokaži navigacijo s pikami
+
+-
+
+editor_slider_autoplay: Samodejno predvajanje
+
+-
+
+editor_snippet_toolbox: Delček predloge po meri
+
+-
+
+editor_snippet_input: Koda odrezka
+
+-
+
+editor_snippet_file: Izberite datoteko delčka
+
+-
+
+editor_table_toolbox: Tabelarični seznam
+
+-
+
+editor_code: Izvorna koda
+
+-
+
+editor_toc: Kazalo
+
+-
+
+editor_left: Levo
+
+-
+
+editor_center: Center
+
+-
+
+editor_layout_default: Privzeta postavitev
+
+-
+
+editor_layout_stretch: Razširite blok na celotno širino
+
+-
+
+editor_layout_span: Premer
+
+-
+
+editor_layout_start: Shift
+
+-
+
+editor_layout_start_auto: Samodejno premakni bloke
+
+-
+
+editor_ui_add: Dodaj
+
+-
+
+editor_ui_settings: Kliknite, da odprete nastavitve, ali povlecite, če želite premakniti blok
+
+-
+
+editor_ui_delete: Izbriši blok
+
+-
+
+editor_ui_move_up: Premakni blok navzgor
+
+-
+
+editor_ui_move_down: Premakni blok navzdol
+
+-
+
+editor_ui_convert: Pretvori blok v
+
+-
+
 error_cache_purged: Imenika predpomnilnika ni bilo mogoče očistiti!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Odstranjevanje paketa ...
 -
 
 page_add_location: Izberite mesto za novo stran
+
+-
+
+page_date: Datum
 
 -
 

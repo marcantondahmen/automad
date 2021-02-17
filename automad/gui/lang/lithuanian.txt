@@ -198,6 +198,326 @@ dropzone: Vilkite failus čia
 
 -
 
+editor_buttons_toolbox: Mygtukai
+
+-
+
+editor_button_primary_label: Pirminis tekstas
+
+-
+
+editor_button_primary_link: Pagrindinė nuoroda
+
+-
+
+editor_button_secondary_label: Antrinis tekstas
+
+-
+
+editor_button_secondary_link: Antrinė nuoroda
+
+-
+
+editor_delimiter_toolbox: Apribotojas
+
+-
+
+editor_filelist_toolbox: Failų sąrašas
+
+-
+
+editor_filelist_template: Pasirinkite Šablonas
+
+-
+
+editor_filelist_default: Numatytasis šablonas
+
+-
+
+editor_filelist_files: �Glob Patterns“ (atskirta kableliais)
+
+-
+
+editor_gallery_toolbox: Vaizdų galerija
+
+-
+
+editor_gallery_files: �Glob Patterns“ arba URL (atskirti kableliais)
+
+-
+
+editor_gallery_width: Vaizdo plotis pikseliais
+
+-
+
+editor_gallery_clean_bottom: Švarus apatinis kraštas
+
+-
+
+editor_heading_toolbox: Antraštė
+
+-
+
+editor_image_toolbox: Vaizdas
+
+-
+
+editor_list_toolbox: Sąrašas
+
+-
+
+editor_list_unordered: �Bullet Points“
+
+-
+
+editor_list_ordered: Sunumeruotas sąrašas
+
+-
+
+editor_mail_toolbox: Pašto forma
+
+-
+
+editor_mail_data_error: Užpildykite visus laukus!
+
+-
+
+editor_mail_data_success: El. Laiškas sėkmingai išsiųstas!
+
+-
+
+editor_mail_data_placeholder_address: Jūsų elektroninio pašto adresas
+
+-
+
+editor_mail_data_placeholder_subject: El.laiško tema
+
+-
+
+editor_mail_data_placeholder_message: Pranešimo turinys
+
+-
+
+editor_mail_data_send: Išsiųsti laišką
+
+-
+
+editor_mail_placeholder_address: Čia įveskite savo el. Pašto adresą
+
+-
+
+editor_mail_placeholder_error: Čia įveskite neprivalomą klaidos pranešimą
+
+-
+
+editor_mail_placeholder_success: Čia įveskite pasirinktinį sėkmės pranešimą
+
+-
+
+editor_mail_label_address: Jūsų elektroninio pašto adresas
+
+-
+
+editor_mail_label_success: Sėkmės pranešimas
+
+-
+
+editor_mail_label_error: Klaidos pranešimas
+
+-
+
+editor_mail_label_placeholder_address: El. Pašto rezervavimo vieta
+
+-
+
+editor_mail_label_placeholder_subject: El. Pašto temos rezervuota vieta
+
+-
+
+editor_mail_label_placeholder_message: Pranešimo turinio rezervuota vieta
+
+-
+
+editor_mail_label_button: Mygtuko tekstas
+
+-
+
+editor_nested_toolbox: Įterptasis redaktorius / kortelė
+
+-
+
+editor_nested_edit: Redaguoti
+
+-
+
+editor_nested_card_primary: Pirminis kortelių dizainas
+
+-
+
+editor_nested_card_secondary: Antrinės kortelės dizainas
+
+-
+
+editor_pagelist_toolbox: Puslapių sąrašas
+
+-
+
+editor_pagelist_template: Pasirinkite Šablonas
+
+-
+
+editor_pagelist_default: Numatytasis šablonas
+
+-
+
+editor_pagelist_url_regex: URL reguliavimo filtras
+
+-
+
+editor_pagelist_type: Tipas
+
+-
+
+editor_pagelist_filter_tag: Filtruoti pagal žymą
+
+-
+
+editor_pagelist_filter_template: Filtruoti pagal šabloną
+
+-
+
+editor_pagelist_limit_offset: Riba ir poslinkis
+
+-
+
+editor_pagelist_sort_var: Rūšiuoti pagal kintamąjį
+
+-
+
+editor_pagelist_sort_order: Rikiuoti
+
+-
+
+editor_paragraph_toolbox: Tekstas
+
+-
+
+editor_paragraph_large: Didesnis šrifto dydis
+
+-
+
+editor_quote_toolbox: Citata
+
+-
+
+editor_quote_placeholder: Įveskite tekstą
+
+-
+
+editor_quote_placeholder_caption: Įveskite antraštę
+
+-
+
+editor_slider_toolbox: Skaidrių demonstravimas
+
+-
+
+editor_slider_width: Plotis
+
+-
+
+editor_slider_height: Aukštis
+
+-
+
+editor_slider_pattern: �Glob Pattern“ arba URL (atskirtas kableliais)
+
+-
+
+editor_slider_dots: Rodyti taškų navigaciją
+
+-
+
+editor_slider_autoplay: Automatinis paleidimas
+
+-
+
+editor_snippet_toolbox: Tinkinto šablono fragmentas
+
+-
+
+editor_snippet_input: Fragmento kodas
+
+-
+
+editor_snippet_file: Pasirinkite fragmento failą
+
+-
+
+editor_table_toolbox: Lentelių sąrašas
+
+-
+
+editor_code: Pirminis kodas
+
+-
+
+editor_toc: Turinys
+
+-
+
+editor_left: Kairėje
+
+-
+
+editor_center: Centras
+
+-
+
+editor_layout_default: Numatytasis išdėstymas
+
+-
+
+editor_layout_stretch: Išplėskite bloką iki viso pločio
+
+-
+
+editor_layout_span: Plotis
+
+-
+
+editor_layout_start: �Shift“
+
+-
+
+editor_layout_start_auto: Automatiškai perkelti blokus
+
+-
+
+editor_ui_add: Papildyti
+
+-
+
+editor_ui_settings: Spustelėkite, jei norite atidaryti nustatymus, arba vilkite, kad perkeltumėte bloką
+
+-
+
+editor_ui_delete: Ištrinti bloką
+
+-
+
+editor_ui_move_up: Perkelti bloką aukštyn
+
+-
+
+editor_ui_move_down: Perkelti bloką žemyn
+
+-
+
+editor_ui_convert: Konvertuoti bloką į
+
+-
+
 error_cache_purged: Talpyklos katalogo nepavyko išvalyti!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Pašalinamas paketas ...
 -
 
 page_add_location: Pasirinkite naujo puslapio vietą
+
+-
+
+page_date: Data
 
 -
 

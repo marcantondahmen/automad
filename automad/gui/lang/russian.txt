@@ -198,6 +198,326 @@ dropzone: Перетащите файлы сюда
 
 -
 
+editor_buttons_toolbox: Кнопки
+
+-
+
+editor_button_primary_label: Основной текст
+
+-
+
+editor_button_primary_link: Первичная ссылка
+
+-
+
+editor_button_secondary_label: Дополнительный текст
+
+-
+
+editor_button_secondary_link: Дополнительная ссылка
+
+-
+
+editor_delimiter_toolbox: Разделитель
+
+-
+
+editor_filelist_toolbox: Список файлов
+
+-
+
+editor_filelist_template: Выбрать шаблон
+
+-
+
+editor_filelist_default: Шаблон по умолчанию
+
+-
+
+editor_filelist_files: Шаблоны глобусов (через запятую)
+
+-
+
+editor_gallery_toolbox: Галерея
+
+-
+
+editor_gallery_files: Шаблоны глобуса или URL-адреса (через запятую)
+
+-
+
+editor_gallery_width: Ширина изображения в пикселях
+
+-
+
+editor_gallery_clean_bottom: Чистый нижний край
+
+-
+
+editor_heading_toolbox: Заголовок
+
+-
+
+editor_image_toolbox: Изображение
+
+-
+
+editor_list_toolbox: Список
+
+-
+
+editor_list_unordered: Отверстия от пуль
+
+-
+
+editor_list_ordered: Нумерованный список
+
+-
+
+editor_mail_toolbox: Электронная форма
+
+-
+
+editor_mail_data_error: Пожалуйста, заполните все поля!
+
+-
+
+editor_mail_data_success: Письмо отправлено успешно!
+
+-
+
+editor_mail_data_placeholder_address: Ваш адрес электронной почты
+
+-
+
+editor_mail_data_placeholder_subject: Тема письма
+
+-
+
+editor_mail_data_placeholder_message: Тело сообщения
+
+-
+
+editor_mail_data_send: Отправить письмо
+
+-
+
+editor_mail_placeholder_address: Введите свой электронный адрес сюда
+
+-
+
+editor_mail_placeholder_error: Введите здесь необязательное сообщение об ошибке
+
+-
+
+editor_mail_placeholder_success: Введите здесь необязательное сообщение об успехе
+
+-
+
+editor_mail_label_address: Ваш адрес электронной почты
+
+-
+
+editor_mail_label_success: Сообщение об успехе
+
+-
+
+editor_mail_label_error: Сообщение об ошибке
+
+-
+
+editor_mail_label_placeholder_address: Заполнитель для электронной почты
+
+-
+
+editor_mail_label_placeholder_subject: Заполнитель для темы электронного письма
+
+-
+
+editor_mail_label_placeholder_message: Заполнитель для тела сообщения
+
+-
+
+editor_mail_label_button: Текст кнопки
+
+-
+
+editor_nested_toolbox: Встроенный редактор / карта
+
+-
+
+editor_nested_edit: Редактировать
+
+-
+
+editor_nested_card_primary: Основной дизайн карты
+
+-
+
+editor_nested_card_secondary: Вторичный дизайн карты
+
+-
+
+editor_pagelist_toolbox: Список страниц
+
+-
+
+editor_pagelist_template: Выбрать шаблон
+
+-
+
+editor_pagelist_default: Шаблон по умолчанию
+
+-
+
+editor_pagelist_url_regex: Фильтр регулярных выражений URL
+
+-
+
+editor_pagelist_type: Тип
+
+-
+
+editor_pagelist_filter_tag: Фильтр по тегу
+
+-
+
+editor_pagelist_filter_template: Фильтр по шаблону
+
+-
+
+editor_pagelist_limit_offset: Предел и смещение
+
+-
+
+editor_pagelist_sort_var: Сортировать по переменной
+
+-
+
+editor_pagelist_sort_order: Порядок сортировки
+
+-
+
+editor_paragraph_toolbox: Текст
+
+-
+
+editor_paragraph_large: Увеличенный размер шрифта
+
+-
+
+editor_quote_toolbox: Цитировать
+
+-
+
+editor_quote_placeholder: Введите текст
+
+-
+
+editor_quote_placeholder_caption: Введите подпись
+
+-
+
+editor_slider_toolbox: Слайд-шоу
+
+-
+
+editor_slider_width: Ширина
+
+-
+
+editor_slider_height: Высота
+
+-
+
+editor_slider_pattern: Шаблон глобуса или URL-адреса (через запятую)
+
+-
+
+editor_slider_dots: Показать точечную навигацию
+
+-
+
+editor_slider_autoplay: Автовоспроизведение
+
+-
+
+editor_snippet_toolbox: Пользовательский фрагмент шаблона
+
+-
+
+editor_snippet_input: Фрагмент кода
+
+-
+
+editor_snippet_file: Выберите файл фрагмента
+
+-
+
+editor_table_toolbox: Табличный список
+
+-
+
+editor_code: Исходный код
+
+-
+
+editor_toc: Оглавление
+
+-
+
+editor_left: Оставили
+
+-
+
+editor_center: Центр
+
+-
+
+editor_layout_default: Макет по умолчанию
+
+-
+
+editor_layout_stretch: Развернуть блок на всю ширину
+
+-
+
+editor_layout_span: Ширина
+
+-
+
+editor_layout_start: Сдвиг
+
+-
+
+editor_layout_start_auto: Автоматически сдвигать блоки
+
+-
+
+editor_ui_add: Добавлять
+
+-
+
+editor_ui_settings: Нажмите, чтобы открыть настройки, или перетащите, чтобы переместить блок
+
+-
+
+editor_ui_delete: Удалить блок
+
+-
+
+editor_ui_move_up: Переместить блок вверх
+
+-
+
+editor_ui_move_down: Переместить блок вниз
+
+-
+
+editor_ui_convert: Преобразовать блок в
+
+-
+
 error_cache_purged: Не удалось очистить каталог кеша!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Удаление пакета ...
 -
 
 page_add_location: Выберите место для новой страницы
+
+-
+
+page_date: Дата
 
 -
 

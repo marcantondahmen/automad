@@ -198,6 +198,326 @@ dropzone: Dragðu skrár hingað
 
 -
 
+editor_buttons_toolbox: Hnappar
+
+-
+
+editor_button_primary_label: Aðaltexti
+
+-
+
+editor_button_primary_link: Aðaltengill
+
+-
+
+editor_button_secondary_label: Secondary Text
+
+-
+
+editor_button_secondary_link: Secondary Link
+
+-
+
+editor_delimiter_toolbox: Afmörkun
+
+-
+
+editor_filelist_toolbox: Skráalisti
+
+-
+
+editor_filelist_template: Veldu Sniðmát
+
+-
+
+editor_filelist_default: Sjálfgefið sniðmát
+
+-
+
+editor_filelist_files: Glob Patterns (aðskilin með kommu)
+
+-
+
+editor_gallery_toolbox: Myndasafn
+
+-
+
+editor_gallery_files: Glob Patterns eða URL (aðskilin með komma)
+
+-
+
+editor_gallery_width: Breidd myndar í pixlum
+
+-
+
+editor_gallery_clean_bottom: Hreinn botnbrún
+
+-
+
+editor_heading_toolbox: Fyrirsögn
+
+-
+
+editor_image_toolbox: Mynd
+
+-
+
+editor_list_toolbox: Listi
+
+-
+
+editor_list_unordered: Kúlupunktar
+
+-
+
+editor_list_ordered: Númeraður listi
+
+-
+
+editor_mail_toolbox: Netfangsform
+
+-
+
+editor_mail_data_error: Vinsamlegast fyllið út alla reiti!
+
+-
+
+editor_mail_data_success: Tölvupóstur sendur!
+
+-
+
+editor_mail_data_placeholder_address: Netfangið þitt
+
+-
+
+editor_mail_data_placeholder_subject: Efni tölvupósts
+
+-
+
+editor_mail_data_placeholder_message: Aðili skilaboða
+
+-
+
+editor_mail_data_send: Senda póst
+
+-
+
+editor_mail_placeholder_address: Sláðu inn netfangið þitt hér
+
+-
+
+editor_mail_placeholder_error: Sláðu inn valfrjáls villuboð hér
+
+-
+
+editor_mail_placeholder_success: Sláðu inn valfrjáls árangursskilaboð hér
+
+-
+
+editor_mail_label_address: Netfangið þitt
+
+-
+
+editor_mail_label_success: Árangursskilaboð
+
+-
+
+editor_mail_label_error: Villu skilaboð
+
+-
+
+editor_mail_label_placeholder_address: Staðhafi fyrir tölvupóst
+
+-
+
+editor_mail_label_placeholder_subject: Staðhafi fyrir netfang tölvupósts
+
+-
+
+editor_mail_label_placeholder_message: Staður fyrir skilaboðaaðila
+
+-
+
+editor_mail_label_button: Hnappatexti
+
+-
+
+editor_nested_toolbox: Innbyggður ritstjóri / kort
+
+-
+
+editor_nested_edit: Breyta
+
+-
+
+editor_nested_card_primary: Aðal kortahönnun
+
+-
+
+editor_nested_card_secondary: Secondary Card Design
+
+-
+
+editor_pagelist_toolbox: Síðu Listi
+
+-
+
+editor_pagelist_template: Veldu Sniðmát
+
+-
+
+editor_pagelist_default: Sjálfgefið sniðmát
+
+-
+
+editor_pagelist_url_regex: Vefslóð Regex sía
+
+-
+
+editor_pagelist_type: Tegund
+
+-
+
+editor_pagelist_filter_tag: Sía eftir merki
+
+-
+
+editor_pagelist_filter_template: Sía eftir sniðmát
+
+-
+
+editor_pagelist_limit_offset: Limit og Offset
+
+-
+
+editor_pagelist_sort_var: Raða eftir breytu
+
+-
+
+editor_pagelist_sort_order: Flokkun
+
+-
+
+editor_paragraph_toolbox: Texti
+
+-
+
+editor_paragraph_large: Stærri leturstærð
+
+-
+
+editor_quote_toolbox: Tilvitnun
+
+-
+
+editor_quote_placeholder: Sláðu inn texta
+
+-
+
+editor_quote_placeholder_caption: Sláðu inn myndatexta
+
+-
+
+editor_slider_toolbox: Myndasýning
+
+-
+
+editor_slider_width: Breidd
+
+-
+
+editor_slider_height: Hæð
+
+-
+
+editor_slider_pattern: Glob mynstur eða vefslóðir (aðskilin með kommu)
+
+-
+
+editor_slider_dots: Sýna punktaleiðsögn
+
+-
+
+editor_slider_autoplay: Spilaðu sjálfkrafa
+
+-
+
+editor_snippet_toolbox: Sérsniðið sniðmát
+
+-
+
+editor_snippet_input: Úrtakskóði
+
+-
+
+editor_snippet_file: Veldu brotaskrá
+
+-
+
+editor_table_toolbox: Tafla Listi
+
+-
+
+editor_code: Upprunakóði
+
+-
+
+editor_toc: Efnisyfirlit
+
+-
+
+editor_left: Vinstri
+
+-
+
+editor_center: Miðja
+
+-
+
+editor_layout_default: Sjálfgefið skipulag
+
+-
+
+editor_layout_stretch: Stækkaðu kubbinn í fulla breidd
+
+-
+
+editor_layout_span: Breidd
+
+-
+
+editor_layout_start: Vakt
+
+-
+
+editor_layout_start_auto: Skiptu sjálfkrafa um blokkir
+
+-
+
+editor_ui_add: Bæta við
+
+-
+
+editor_ui_settings: Smelltu til að opna stillingar eða dragðu til að færa lokun
+
+-
+
+editor_ui_delete: Eyða lokun
+
+-
+
+editor_ui_move_up: Færðu blokk upp
+
+-
+
+editor_ui_move_down: Færðu blokk niður
+
+-
+
+editor_ui_convert: Umbreyta blokk í
+
+-
+
 error_cache_purged: Ekki var hægt að hreinsa skyndiminnismöppuna!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Fjarlægir pakkann ...
 -
 
 page_add_location: Veldu staðsetningu fyrir nýju síðuna
+
+-
+
+page_date: Dagsetning
 
 -
 

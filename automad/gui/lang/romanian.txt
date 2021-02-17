@@ -198,6 +198,326 @@ dropzone: Trageți fișiere aici
 
 -
 
+editor_buttons_toolbox: Butoane
+
+-
+
+editor_button_primary_label: Text primar
+
+-
+
+editor_button_primary_link: Legătură principală
+
+-
+
+editor_button_secondary_label: Text secundar
+
+-
+
+editor_button_secondary_link: Link secundar
+
+-
+
+editor_delimiter_toolbox: Delimitator
+
+-
+
+editor_filelist_toolbox: Lista de fișiere
+
+-
+
+editor_filelist_template: Selectați șablonul
+
+-
+
+editor_filelist_default: Șablon implicit
+
+-
+
+editor_filelist_files: Modele Glob (separate prin virgulă)
+
+-
+
+editor_gallery_toolbox: Galerie de imagini
+
+-
+
+editor_gallery_files: Modele globale sau adrese URL (separate prin virgulă)
+
+-
+
+editor_gallery_width: Lățimea imaginii în pixeli
+
+-
+
+editor_gallery_clean_bottom: Curățați marginea inferioară
+
+-
+
+editor_heading_toolbox: Titlu
+
+-
+
+editor_image_toolbox: Imagine
+
+-
+
+editor_list_toolbox: Listă
+
+-
+
+editor_list_unordered: Puncte cheie
+
+-
+
+editor_list_ordered: Lista numerotată
+
+-
+
+editor_mail_toolbox: Formular de e-mail
+
+-
+
+editor_mail_data_error: Vă rugăm să completați toate câmpurile!
+
+-
+
+editor_mail_data_success: E-mail trimis cu succes!
+
+-
+
+editor_mail_data_placeholder_address: Adresa ta de email
+
+-
+
+editor_mail_data_placeholder_subject: Subiectul emailului
+
+-
+
+editor_mail_data_placeholder_message: Conținutul mesajului
+
+-
+
+editor_mail_data_send: Trimiteți e-mail
+
+-
+
+editor_mail_placeholder_address: Introduceți adresa de e-mail aici
+
+-
+
+editor_mail_placeholder_error: Introduceți aici un mesaj de eroare opțional
+
+-
+
+editor_mail_placeholder_success: Introduceți aici un mesaj opțional de succes
+
+-
+
+editor_mail_label_address: Adresa ta de email
+
+-
+
+editor_mail_label_success: Mesaj de succes
+
+-
+
+editor_mail_label_error: Mesaj de eroare
+
+-
+
+editor_mail_label_placeholder_address: Substituent pentru e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Substituent pentru subiectul e-mailului
+
+-
+
+editor_mail_label_placeholder_message: Substituent pentru corpul mesajului
+
+-
+
+editor_mail_label_button: Text buton
+
+-
+
+editor_nested_toolbox: Editor / Card încorporat
+
+-
+
+editor_nested_edit: Editați | ×
+
+-
+
+editor_nested_card_primary: Proiectare card primar
+
+-
+
+editor_nested_card_secondary: Proiectare card secundar
+
+-
+
+editor_pagelist_toolbox: Lista paginilor
+
+-
+
+editor_pagelist_template: Selectați șablonul
+
+-
+
+editor_pagelist_default: Șablon implicit
+
+-
+
+editor_pagelist_url_regex: Filtru Regex URL
+
+-
+
+editor_pagelist_type: Tip
+
+-
+
+editor_pagelist_filter_tag: Filtrați după etichetă
+
+-
+
+editor_pagelist_filter_template: Filtrează după șablon
+
+-
+
+editor_pagelist_limit_offset: Limită și Offset
+
+-
+
+editor_pagelist_sort_var: Sortați după variabilă
+
+-
+
+editor_pagelist_sort_order: Ordinea de sortare
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Dimensiune mai mare a fontului
+
+-
+
+editor_quote_toolbox: Citat
+
+-
+
+editor_quote_placeholder: Introduceți un text
+
+-
+
+editor_quote_placeholder_caption: Introduceți o legendă
+
+-
+
+editor_slider_toolbox: Slideshow
+
+-
+
+editor_slider_width: Lăţime
+
+-
+
+editor_slider_height: Înălţime
+
+-
+
+editor_slider_pattern: Model glob sau adrese URL (separate prin virgulă)
+
+-
+
+editor_slider_dots: Afișați navigarea prin puncte
+
+-
+
+editor_slider_autoplay: Redare automata
+
+-
+
+editor_snippet_toolbox: Fragment de șablon personalizat
+
+-
+
+editor_snippet_input: Cod fragment
+
+-
+
+editor_snippet_file: Selectați un fișier Snippet
+
+-
+
+editor_table_toolbox: Listă tabelară
+
+-
+
+editor_code: Cod sursa
+
+-
+
+editor_toc: Cuprins
+
+-
+
+editor_left: Stânga
+
+-
+
+editor_center: Centru
+
+-
+
+editor_layout_default: Aspect implicit
+
+-
+
+editor_layout_stretch: Extindeți blocul la toată lățimea
+
+-
+
+editor_layout_span: Lăţime
+
+-
+
+editor_layout_start: Schimb
+
+-
+
+editor_layout_start_auto: Schimbați automat blocurile
+
+-
+
+editor_ui_add: Adăuga
+
+-
+
+editor_ui_settings: Faceți clic pentru a deschide setările sau trageți pentru a muta blocul
+
+-
+
+editor_ui_delete: Ștergeți blocul
+
+-
+
+editor_ui_move_up: Mutați blocul în sus
+
+-
+
+editor_ui_move_down: Mutați blocul în jos
+
+-
+
+editor_ui_convert: Convertiți blocul în
+
+-
+
 error_cache_purged: Directorul cache nu a putut fi eliminat!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Se elimină pachetul ...
 -
 
 page_add_location: Selectați o locație pentru noua pagină
+
+-
+
+page_date: Data
 
 -
 

@@ -198,6 +198,326 @@ dropzone: Sem přetáhněte soubory
 
 -
 
+editor_buttons_toolbox: Tlačítka
+
+-
+
+editor_button_primary_label: Primární text
+
+-
+
+editor_button_primary_link: Primární odkaz
+
+-
+
+editor_button_secondary_label: Sekundární text
+
+-
+
+editor_button_secondary_link: Sekundární odkaz
+
+-
+
+editor_delimiter_toolbox: Oddělovač
+
+-
+
+editor_filelist_toolbox: Seznam souborů
+
+-
+
+editor_filelist_template: Vyberte šablonu
+
+-
+
+editor_filelist_default: Výchozí šablona
+
+-
+
+editor_filelist_files: Vzory globusu (oddělené čárkou)
+
+-
+
+editor_gallery_toolbox: Galerie Obrázků
+
+-
+
+editor_gallery_files: Vzory globusu nebo adresy URL (oddělené čárkou)
+
+-
+
+editor_gallery_width: Šířka obrázku v pixelech
+
+-
+
+editor_gallery_clean_bottom: Vyčistěte spodní okraj
+
+-
+
+editor_heading_toolbox: Nadpis
+
+-
+
+editor_image_toolbox: Obraz
+
+-
+
+editor_list_toolbox: Seznam
+
+-
+
+editor_list_unordered: Odrážky
+
+-
+
+editor_list_ordered: Číslovaný seznam
+
+-
+
+editor_mail_toolbox: E-mailový formulář
+
+-
+
+editor_mail_data_error: Vyplňte prosím všechna pole!
+
+-
+
+editor_mail_data_success: E-mail byl úspěšně odeslán!
+
+-
+
+editor_mail_data_placeholder_address: Vaše emailová adresa
+
+-
+
+editor_mail_data_placeholder_subject: Předmět emailu
+
+-
+
+editor_mail_data_placeholder_message: Tělo zprávy
+
+-
+
+editor_mail_data_send: Poslat mail
+
+-
+
+editor_mail_placeholder_address: Sem zadejte svou e-mailovou adresu
+
+-
+
+editor_mail_placeholder_error: Sem zadejte volitelnou chybovou zprávu
+
+-
+
+editor_mail_placeholder_success: Sem zadejte volitelnou zprávu o úspěchu
+
+-
+
+editor_mail_label_address: Vaše emailová adresa
+
+-
+
+editor_mail_label_success: Zpráva o úspěchu
+
+-
+
+editor_mail_label_error: Chybové hlášení
+
+-
+
+editor_mail_label_placeholder_address: Zástupný symbol pro e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Zástupný symbol pro předmět e-mailu
+
+-
+
+editor_mail_label_placeholder_message: Zástupný symbol pro tělo zprávy
+
+-
+
+editor_mail_label_button: Text tlačítka
+
+-
+
+editor_nested_toolbox: Integrovaný editor / karta
+
+-
+
+editor_nested_edit: Upravit
+
+-
+
+editor_nested_card_primary: Návrh primární karty
+
+-
+
+editor_nested_card_secondary: Návrh sekundární karty
+
+-
+
+editor_pagelist_toolbox: Seznam stránek
+
+-
+
+editor_pagelist_template: Vyberte šablonu
+
+-
+
+editor_pagelist_default: Výchozí šablona
+
+-
+
+editor_pagelist_url_regex: Filtr regulárních výrazů URL
+
+-
+
+editor_pagelist_type: Typ
+
+-
+
+editor_pagelist_filter_tag: Filtrovat podle značky
+
+-
+
+editor_pagelist_filter_template: Filtrovat podle šablony
+
+-
+
+editor_pagelist_limit_offset: Limit a offset
+
+-
+
+editor_pagelist_sort_var: Řadit podle proměnné
+
+-
+
+editor_pagelist_sort_order: Pořadí řazení
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Větší velikost písma
+
+-
+
+editor_quote_toolbox: Citát
+
+-
+
+editor_quote_placeholder: Zadejte text
+
+-
+
+editor_quote_placeholder_caption: Zadejte titulek
+
+-
+
+editor_slider_toolbox: Prezentace
+
+-
+
+editor_slider_width: Šířka
+
+-
+
+editor_slider_height: Výška
+
+-
+
+editor_slider_pattern: Vzor globusu nebo adresy URL (oddělené čárkou)
+
+-
+
+editor_slider_dots: Zobrazit Dot Navigation
+
+-
+
+editor_slider_autoplay: Automatické přehrávání
+
+-
+
+editor_snippet_toolbox: Úryvek vlastní šablony
+
+-
+
+editor_snippet_input: Úryvek kódu
+
+-
+
+editor_snippet_file: Vyberte soubor úryvků
+
+-
+
+editor_table_toolbox: Tabulkový seznam
+
+-
+
+editor_code: Zdrojový kód
+
+-
+
+editor_toc: Obsah
+
+-
+
+editor_left: Vlevo, odjet
+
+-
+
+editor_center: Centrum
+
+-
+
+editor_layout_default: Výchozí rozložení
+
+-
+
+editor_layout_stretch: Rozbalte blok na celou šířku
+
+-
+
+editor_layout_span: Šířka
+
+-
+
+editor_layout_start: Posun
+
+-
+
+editor_layout_start_auto: Automaticky přesouvat bloky
+
+-
+
+editor_ui_add: Přidat
+
+-
+
+editor_ui_settings: Kliknutím otevřete nastavení nebo přetažením přesunete blok
+
+-
+
+editor_ui_delete: Smazat blok
+
+-
+
+editor_ui_move_up: Přesunout blok nahoru
+
+-
+
+editor_ui_move_down: Přesuňte blok dolů
+
+-
+
+editor_ui_convert: Převést blok na
+
+-
+
 error_cache_purged: Adresář mezipaměti nelze vymazat!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Odebírání balíčku ...
 -
 
 page_add_location: Vyberte umístění pro novou stránku
+
+-
+
+page_date: Datum
 
 -
 

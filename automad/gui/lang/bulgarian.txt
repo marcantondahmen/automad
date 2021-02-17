@@ -198,6 +198,326 @@ dropzone: Плъзнете файлове тук
 
 -
 
+editor_buttons_toolbox: Бутони
+
+-
+
+editor_button_primary_label: Основен текст
+
+-
+
+editor_button_primary_link: Основна връзка
+
+-
+
+editor_button_secondary_label: Вторичен текст
+
+-
+
+editor_button_secondary_link: Вторична връзка
+
+-
+
+editor_delimiter_toolbox: Разделител
+
+-
+
+editor_filelist_toolbox: Списък с файлове
+
+-
+
+editor_filelist_template: Изберете Шаблон
+
+-
+
+editor_filelist_default: Шаблон по подразбиране
+
+-
+
+editor_filelist_files: Модели на глобус (разделени със запетая)
+
+-
+
+editor_gallery_toolbox: Галерия с изображения
+
+-
+
+editor_gallery_files: Глобулни модели или URL адреси (разделени със запетая)
+
+-
+
+editor_gallery_width: Ширина на изображението в пиксели
+
+-
+
+editor_gallery_clean_bottom: Clean Bottom Edge
+
+-
+
+editor_heading_toolbox: Заглавие
+
+-
+
+editor_image_toolbox: Изображение
+
+-
+
+editor_list_toolbox: Списък
+
+-
+
+editor_list_unordered: Точки за куршуми
+
+-
+
+editor_list_ordered: Номериран списък
+
+-
+
+editor_mail_toolbox: Имейл формуляр
+
+-
+
+editor_mail_data_error: Моля, попълнете всички полета!
+
+-
+
+editor_mail_data_success: Успешно изпратен имейл!
+
+-
+
+editor_mail_data_placeholder_address: Вашата електронна поща
+
+-
+
+editor_mail_data_placeholder_subject: Тема на имейл
+
+-
+
+editor_mail_data_placeholder_message: Тяло на съобщението
+
+-
+
+editor_mail_data_send: Изпрати писмо
+
+-
+
+editor_mail_placeholder_address: Въведете тук своя имейл адрес
+
+-
+
+editor_mail_placeholder_error: Въведете тук незадължително съобщение за грешка
+
+-
+
+editor_mail_placeholder_success: Въведете тук незадължително съобщение за успех
+
+-
+
+editor_mail_label_address: Вашата електронна поща
+
+-
+
+editor_mail_label_success: Съобщение за успех
+
+-
+
+editor_mail_label_error: Съобщение за грешка
+
+-
+
+editor_mail_label_placeholder_address: Placeholder за имейл
+
+-
+
+editor_mail_label_placeholder_subject: Placeholder за тема на имейл
+
+-
+
+editor_mail_label_placeholder_message: Placeholder за Body Message
+
+-
+
+editor_mail_label_button: Текст на бутон
+
+-
+
+editor_nested_toolbox: Вграден редактор / карта
+
+-
+
+editor_nested_edit: редактиране
+
+-
+
+editor_nested_card_primary: Основен дизайн на карти
+
+-
+
+editor_nested_card_secondary: Вторичен дизайн на карти
+
+-
+
+editor_pagelist_toolbox: Списък със страници
+
+-
+
+editor_pagelist_template: Изберете Шаблон
+
+-
+
+editor_pagelist_default: Шаблон по подразбиране
+
+-
+
+editor_pagelist_url_regex: Филтър за регулярни изрази на URL
+
+-
+
+editor_pagelist_type: Тип
+
+-
+
+editor_pagelist_filter_tag: Филтрирайте по етикет
+
+-
+
+editor_pagelist_filter_template: Филтриране по шаблон
+
+-
+
+editor_pagelist_limit_offset: Limit и Offset
+
+-
+
+editor_pagelist_sort_var: Сортирай по променлива
+
+-
+
+editor_pagelist_sort_order: Сортирай ред
+
+-
+
+editor_paragraph_toolbox: Текст
+
+-
+
+editor_paragraph_large: По-голям размер на шрифта
+
+-
+
+editor_quote_toolbox: Цитат
+
+-
+
+editor_quote_placeholder: Въведете текст
+
+-
+
+editor_quote_placeholder_caption: Въведете надпис
+
+-
+
+editor_slider_toolbox: Слайдшоу
+
+-
+
+editor_slider_width: Ширина
+
+-
+
+editor_slider_height: Височина
+
+-
+
+editor_slider_pattern: Glob Pattern или URL адреси (разделени със запетая)
+
+-
+
+editor_slider_dots: Показване на навигация с точки
+
+-
+
+editor_slider_autoplay: Автоматично изпълнение
+
+-
+
+editor_snippet_toolbox: Фрагмент на персонализиран шаблон
+
+-
+
+editor_snippet_input: Код на фрагмент
+
+-
+
+editor_snippet_file: Изберете файл с фрагмент
+
+-
+
+editor_table_toolbox: Табличен списък
+
+-
+
+editor_code: Програмен код
+
+-
+
+editor_toc: Съдържание
+
+-
+
+editor_left: Наляво
+
+-
+
+editor_center: Център
+
+-
+
+editor_layout_default: Оформление по подразбиране
+
+-
+
+editor_layout_stretch: Разгънете блока до пълната ширина
+
+-
+
+editor_layout_span: Ширина
+
+-
+
+editor_layout_start: Shift
+
+-
+
+editor_layout_start_auto: Автоматично преместване на блокове
+
+-
+
+editor_ui_add: Добавяне
+
+-
+
+editor_ui_settings: Щракнете, за да отворите настройките, или плъзнете, за да преместите блок
+
+-
+
+editor_ui_delete: Изтриване на блок
+
+-
+
+editor_ui_move_up: Преместване на блока нагоре
+
+-
+
+editor_ui_move_down: Преместване на блока надолу
+
+-
+
+editor_ui_convert: Преобразуване на блок в
+
+-
+
 error_cache_purged: Директорията на кеша не може да бъде изчистена!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Премахване на пакета ...
 -
 
 page_add_location: Изберете място за новата страница
+
+-
+
+page_date: Дата
 
 -
 

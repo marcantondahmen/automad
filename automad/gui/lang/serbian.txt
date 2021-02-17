@@ -198,6 +198,326 @@ dropzone: Превуците датотеке овде
 
 -
 
+editor_buttons_toolbox: Дугмад
+
+-
+
+editor_button_primary_label: Примарни текст
+
+-
+
+editor_button_primary_link: Примарна веза
+
+-
+
+editor_button_secondary_label: Секундарни текст
+
+-
+
+editor_button_secondary_link: Секундарна веза
+
+-
+
+editor_delimiter_toolbox: Делимитер
+
+-
+
+editor_filelist_toolbox: Листа датотека
+
+-
+
+editor_filelist_template: Изаберите Темплате
+
+-
+
+editor_filelist_default: Подразумевани образац
+
+-
+
+editor_filelist_files: Глоб обрасци (одвојени зарезом)
+
+-
+
+editor_gallery_toolbox: Галерија слика
+
+-
+
+editor_gallery_files: Глоб обрасци или УРЛ-ови (одвојени зарезом)
+
+-
+
+editor_gallery_width: Ширина слике у пикселима
+
+-
+
+editor_gallery_clean_bottom: Цлеан Боттом Едге
+
+-
+
+editor_heading_toolbox: Наслов
+
+-
+
+editor_image_toolbox: Слика
+
+-
+
+editor_list_toolbox: Листа
+
+-
+
+editor_list_unordered: Буллет Поинтс
+
+-
+
+editor_list_ordered: Нумерисана листа
+
+-
+
+editor_mail_toolbox: Образац е-поште
+
+-
+
+editor_mail_data_error: Молимо попуните сва поља!
+
+-
+
+editor_mail_data_success: Успешно послата е-пошта!
+
+-
+
+editor_mail_data_placeholder_address: Ваша емаил адреса
+
+-
+
+editor_mail_data_placeholder_subject: Предмет е-поште
+
+-
+
+editor_mail_data_placeholder_message: Тело поруке
+
+-
+
+editor_mail_data_send: Пошаљи пошту
+
+-
+
+editor_mail_placeholder_address: Овде унесите своју адресу е-поште
+
+-
+
+editor_mail_placeholder_error: Овде унесите опционалну поруку о грешци
+
+-
+
+editor_mail_placeholder_success: Овде унесите опционалну поруку о успеху
+
+-
+
+editor_mail_label_address: Ваша емаил адреса
+
+-
+
+editor_mail_label_success: Порука о успеху
+
+-
+
+editor_mail_label_error: Порука о грешци
+
+-
+
+editor_mail_label_placeholder_address: Резервисано место за е-пошту
+
+-
+
+editor_mail_label_placeholder_subject: Резервисано место за тему е-поште
+
+-
+
+editor_mail_label_placeholder_message: Резервисано место за тело поруке
+
+-
+
+editor_mail_label_button: Текст дугмета
+
+-
+
+editor_nested_toolbox: Уграђени уређивач / картица
+
+-
+
+editor_nested_edit: Уредити
+
+-
+
+editor_nested_card_primary: Дизајн примарне картице
+
+-
+
+editor_nested_card_secondary: Дизајн секундарне картице
+
+-
+
+editor_pagelist_toolbox: Листа страница
+
+-
+
+editor_pagelist_template: Изаберите Темплате
+
+-
+
+editor_pagelist_default: Подразумевани образац
+
+-
+
+editor_pagelist_url_regex: УРЛ регуларни израз
+
+-
+
+editor_pagelist_type: Тип
+
+-
+
+editor_pagelist_filter_tag: Филтрирај по ознаци
+
+-
+
+editor_pagelist_filter_template: Филтрирај по предлошку
+
+-
+
+editor_pagelist_limit_offset: Лимит и Оффсет
+
+-
+
+editor_pagelist_sort_var: Поредај по променљивој
+
+-
+
+editor_pagelist_sort_order: Редослед
+
+-
+
+editor_paragraph_toolbox: Текст
+
+-
+
+editor_paragraph_large: Већа величина фонта
+
+-
+
+editor_quote_toolbox: Цитат
+
+-
+
+editor_quote_placeholder: Унесите текст
+
+-
+
+editor_quote_placeholder_caption: Унесите наслов
+
+-
+
+editor_slider_toolbox: Пројекција слајдова
+
+-
+
+editor_slider_width: Ширина
+
+-
+
+editor_slider_height: Висина
+
+-
+
+editor_slider_pattern: Глоб образац или УРЛ адресе (одвојене зарезом)
+
+-
+
+editor_slider_dots: Прикажи навигацију тачкама
+
+-
+
+editor_slider_autoplay: Аутоматско покретање
+
+-
+
+editor_snippet_toolbox: Фрагмент прилагођеног предлошка
+
+-
+
+editor_snippet_input: Сниппет Цоде
+
+-
+
+editor_snippet_file: Изаберите датотеку исечка
+
+-
+
+editor_table_toolbox: Табеларни списак
+
+-
+
+editor_code: Изворни код
+
+-
+
+editor_toc: Преглед садржаја
+
+-
+
+editor_left: Лево
+
+-
+
+editor_center: Центар
+
+-
+
+editor_layout_default: Подразумевани распоред
+
+-
+
+editor_layout_stretch: Проширите блок у пуну ширину
+
+-
+
+editor_layout_span: Ширина
+
+-
+
+editor_layout_start: Смена
+
+-
+
+editor_layout_start_auto: Аутоматски померај блокове
+
+-
+
+editor_ui_add: Додати
+
+-
+
+editor_ui_settings: Кликните да бисте отворили поставке или повуците за премештање блока
+
+-
+
+editor_ui_delete: Избриши блок
+
+-
+
+editor_ui_move_up: Помери блок нагоре
+
+-
+
+editor_ui_move_down: Помери блок надоле
+
+-
+
+editor_ui_convert: Претвори блок у
+
+-
+
 error_cache_purged: Није могуће очистити директоријум кеш меморије!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Уклањање пакета ...
 -
 
 page_add_location: Изаберите место за нову страницу
+
+-
+
+page_date: Датум
 
 -
 

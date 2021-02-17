@@ -198,6 +198,326 @@ dropzone: Sem presuňte súbory
 
 -
 
+editor_buttons_toolbox: Gombíky
+
+-
+
+editor_button_primary_label: Primárny text
+
+-
+
+editor_button_primary_link: Primárny odkaz
+
+-
+
+editor_button_secondary_label: Sekundárny text
+
+-
+
+editor_button_secondary_link: Sekundárny odkaz
+
+-
+
+editor_delimiter_toolbox: Oddeľovač
+
+-
+
+editor_filelist_toolbox: Zoznam súborov
+
+-
+
+editor_filelist_template: Vyberte šablónu
+
+-
+
+editor_filelist_default: Predvolená šablóna
+
+-
+
+editor_filelist_files: Vzory globusu (oddelené čiarkou)
+
+-
+
+editor_gallery_toolbox: Galéria obrázkov
+
+-
+
+editor_gallery_files: Vzory globusu alebo adresy URL (oddelené čiarkou)
+
+-
+
+editor_gallery_width: Šírka obrázka v pixeloch
+
+-
+
+editor_gallery_clean_bottom: Vyčistite spodný okraj
+
+-
+
+editor_heading_toolbox: Nadpis
+
+-
+
+editor_image_toolbox: Obrázok
+
+-
+
+editor_list_toolbox: Zoznam
+
+-
+
+editor_list_unordered: Odrážky
+
+-
+
+editor_list_ordered: Číslovaný zoznam
+
+-
+
+editor_mail_toolbox: E-mailový formulár
+
+-
+
+editor_mail_data_error: Vyplňte všetky polia!
+
+-
+
+editor_mail_data_success: E-mail bol úspešne odoslaný!
+
+-
+
+editor_mail_data_placeholder_address: Vaša emailová adresa
+
+-
+
+editor_mail_data_placeholder_subject: Predmet emailu
+
+-
+
+editor_mail_data_placeholder_message: Telo správy
+
+-
+
+editor_mail_data_send: Poslať mail
+
+-
+
+editor_mail_placeholder_address: Sem zadajte svoju e-mailovú adresu
+
+-
+
+editor_mail_placeholder_error: Sem zadajte voliteľnú chybovú správu
+
+-
+
+editor_mail_placeholder_success: Sem zadajte voliteľnú správu o úspechu
+
+-
+
+editor_mail_label_address: Vaša emailová adresa
+
+-
+
+editor_mail_label_success: Správa o úspechu
+
+-
+
+editor_mail_label_error: Chybná správa
+
+-
+
+editor_mail_label_placeholder_address: Zástupný symbol pre e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Zástupný symbol pre predmet e-mailu
+
+-
+
+editor_mail_label_placeholder_message: Zástupný symbol pre telo správy
+
+-
+
+editor_mail_label_button: Text tlačidla
+
+-
+
+editor_nested_toolbox: Vložený editor / karta
+
+-
+
+editor_nested_edit: Upraviť
+
+-
+
+editor_nested_card_primary: Návrh primárnej karty
+
+-
+
+editor_nested_card_secondary: Dizajn sekundárnej karty
+
+-
+
+editor_pagelist_toolbox: Zoznam stránok
+
+-
+
+editor_pagelist_template: Vyberte šablónu
+
+-
+
+editor_pagelist_default: Predvolená šablóna
+
+-
+
+editor_pagelist_url_regex: Filter URL regulárneho výrazu
+
+-
+
+editor_pagelist_type: Typ
+
+-
+
+editor_pagelist_filter_tag: Filtrovať podľa značky
+
+-
+
+editor_pagelist_filter_template: Filtrovať podľa šablóny
+
+-
+
+editor_pagelist_limit_offset: Limit a offset
+
+-
+
+editor_pagelist_sort_var: Zoradiť podľa premennej
+
+-
+
+editor_pagelist_sort_order: Poradie zoradenia
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Väčšia veľkosť písma
+
+-
+
+editor_quote_toolbox: Citát
+
+-
+
+editor_quote_placeholder: Zadajte text
+
+-
+
+editor_quote_placeholder_caption: Zadajte titulok
+
+-
+
+editor_slider_toolbox: Prezentácia
+
+-
+
+editor_slider_width: Šírka
+
+-
+
+editor_slider_height: Výška
+
+-
+
+editor_slider_pattern: Vzor globusu alebo adresy URL (oddelené čiarkou)
+
+-
+
+editor_slider_dots: Zobraziť bodovú navigáciu
+
+-
+
+editor_slider_autoplay: Automatické prehrávanie
+
+-
+
+editor_snippet_toolbox: Úryvok vlastnej šablóny
+
+-
+
+editor_snippet_input: Útržkový kód
+
+-
+
+editor_snippet_file: Vyberte súbor úryvkov
+
+-
+
+editor_table_toolbox: Tabuľkový zoznam
+
+-
+
+editor_code: Zdrojový kód
+
+-
+
+editor_toc: Obsah
+
+-
+
+editor_left: Vľavo
+
+-
+
+editor_center: Stred
+
+-
+
+editor_layout_default: Predvolené rozloženie
+
+-
+
+editor_layout_stretch: Rozbaľte blok na celú šírku
+
+-
+
+editor_layout_span: Šírka
+
+-
+
+editor_layout_start: Posun
+
+-
+
+editor_layout_start_auto: Automaticky posúvať bloky
+
+-
+
+editor_ui_add: Pridať
+
+-
+
+editor_ui_settings: Kliknutím otvoríte nastavenia alebo presunutím presuniete blok
+
+-
+
+editor_ui_delete: Odstrániť blok
+
+-
+
+editor_ui_move_up: Posunúť blok nahor
+
+-
+
+editor_ui_move_down: Posunúť blok nadol
+
+-
+
+editor_ui_convert: Konvertovať blok na
+
+-
+
 error_cache_purged: Adresár cache sa nepodarilo vyčistiť!
 
 -
@@ -419,6 +739,10 @@ packages_removing: Odstraňuje sa balík ...
 -
 
 page_add_location: Vyberte umiestnenie pre novú stránku
+
+-
+
+page_date: Dátum
 
 -
 
