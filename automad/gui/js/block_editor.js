@@ -80,10 +80,7 @@
 						ui: {
 							"blockTunes": {
 								"toggler": {
-									"Click to tune": t('ui_settings'),
-									"Delete": t('ui_delete'),
-									"Move up": t('ui_move_up'),
-									"Move down": t('ui_move_down')
+									"Click to tune": t('ui_settings')
 								}
 							},
 							"inlineToolbar": {
@@ -95,6 +92,17 @@
 								"toolbox": {
 									"Add": t('ui_add')
 								}
+							}
+						},
+						blockTunes: {
+							"delete": {
+								"Delete": t('ui_delete')
+							},
+							"moveUp": {
+								"Move up": t('ui_move_up')
+							},
+							"moveDown": {
+								"Move down": t('ui_move_down')
 							}
 						}
 					}
