@@ -122,6 +122,7 @@ Config::set('AM_FILE_EXT_HEADLESS_CACHE', 'json');
 Config::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA); 
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
+Config::set('AM_FILE_OBJECT_USER_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_user');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
 Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/english.txt');
 Config::set('AM_FILE_GUI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.

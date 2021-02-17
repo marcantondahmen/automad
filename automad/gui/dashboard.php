@@ -183,8 +183,17 @@ class Dashboard {
 	private function getAutomad() {
 
 		if (!$this->Automad) {
-			$this->Automad = new Core\Automad();
-			Core\Debug::log('Created a new Automad instance for the dashboard');
+
+			$Cache = new Core\Cache();
+
+			if ($Cache->automadObjectCacheIsApproved()) {
+				$this->Automad = $Cache->readAutomadObjectFromCache();
+			} else {
+				$this->Automad = new Core\Automad();
+				$Cache->writeAutomadObjectToCache($this->Automad);
+				Core\Debug::log('Created a new Automad instance for the dashboard');
+			}
+
 		}
 
 		return $this->Automad;

@@ -103,7 +103,16 @@ class Cache {
 	 */
 	
 	private $pageCacheFile;
-	
+
+
+	/**
+	 *	The filename for the object cache. 
+	 *	Note that in order to correctly handle caching of private pages, 
+	 *	a separate cache file is used when a user is in.
+	 */
+
+	private $objectCacheFile;
+
 
 	/**
 	 *	The latest modification time of the whole website (any file or directory).
@@ -136,12 +145,16 @@ class Cache {
 			// Define boolean variable for page cache status only, 
 			// independent from the Automad object cache.
 			$this->pageCachingIsEnabled = true;
+
+			// Define object cache file for visitors.
+			$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
 			
-			// Disable page caching for in-page edit mode.
+			// Disable page caching for in-page edit mode and define ui cache file.
 			if (GUI\User::get()) {
-				Debug::log('In-page edit mode! Disable caching.');
 				$this->pageCachingIsEnabled = false;
-				$this->automadObjectCachingIsEnabled = false;
+				Debug::log('Page cache is disabled during editing.');
+				$this->objectCacheFile = AM_FILE_OBJECT_USER_CACHE;
+				Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 			}
 			
 			// Disable page caching $_GET is not empty.
@@ -250,9 +263,9 @@ class Cache {
 		
 		if ($this->automadObjectCachingIsEnabled) {
 		
-			if (file_exists(AM_FILE_OBJECT_CACHE)) {
+			if (file_exists($this->objectCacheFile)) {
 		
-				$automadObjectMTime = filemtime(AM_FILE_OBJECT_CACHE);
+				$automadObjectMTime = filemtime($this->objectCacheFile);
 				
 				// Check if object didn't reach the cache's lifetime yet.
 				if (($automadObjectMTime + AM_CACHE_LIFETIME) > time()) {
@@ -446,15 +459,15 @@ class Cache {
 	
 	
 	/**
-	 *	Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE and update the context to the requested page.
+	 *	Read (unserialize) the Automad object from $this->objectCacheFile and update the context to the requested page.
 	 *
 	 *	@return object Automad object
 	 */
 	
 	public function readAutomadObjectFromCache() {
 		
-		Debug::log(AM_FILE_OBJECT_CACHE, 'Reading cached Automad object from');
-		return unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
+		Debug::log($this->objectCacheFile, 'Reading cached Automad object from');
+		return unserialize(file_get_contents($this->objectCacheFile));
 		
 	}
 	
@@ -482,7 +495,7 @@ class Cache {
 	
 	
 	/**
-	 *	Write (serialize) the Automad object to AM_FILE_OBJECT_CACHE.
+	 *	Write (serialize) the Automad object to $this->objectCacheFile.
 	 *	
 	 *	@param object $Automad
 	 */
@@ -491,8 +504,8 @@ class Cache {
 		
 		if ($this->automadObjectCachingIsEnabled) {
 			
-			FileSystem::write(AM_FILE_OBJECT_CACHE, serialize($Automad));
-			Debug::log(AM_FILE_OBJECT_CACHE, 'Automad object written to');
+			FileSystem::write($this->objectCacheFile, serialize($Automad));
+			Debug::log($this->objectCacheFile, 'Automad object written to');
 			
 			// Only non-forwarded (no proxy) sites.
 			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
