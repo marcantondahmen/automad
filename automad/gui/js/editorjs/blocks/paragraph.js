@@ -171,12 +171,12 @@ class AutomadBlockParagraph {
 			buttonLarge = create.element('div', [cls]),
 			alignments = [
 				{
-					title: 'Left',
+					title: AutomadEditorTranslation.get('left'),
 					icon: AutomadEditorIcons.get.alignLeft,
 					value: 'left'
 				},
 				{
-					title: 'Center',
+					title: AutomadEditorTranslation.get('center'),
 					icon: AutomadEditorIcons.get.alignCenter,
 					value: 'center'
 				}
