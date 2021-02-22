@@ -77,18 +77,10 @@
 
 	}
 
-	&-card-primary {
+	&-card {
 
 		& section:after {
 			border: 2px solid @am-text;
-		}
-
-	}
-
-	&-card-secondary {
-
-		& section:after {
-			border: 2px solid @am-border-color;
 		}
 
 	}
@@ -110,9 +102,16 @@
 	}
 
 	& .ce-block {
-		padding: 0 !important;
+		
+		padding-left: 0 !important;
+		padding-right: 0 !important;
 		margin: 0;
 		margin-bottom: 0.5rem;
+
+		&:first-child {
+			padding-top: 0 !important;
+		}
+
 	}
 
 	& .ce-block__content {
@@ -136,9 +135,11 @@
 		}
 
 		& .uk-modal-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			padding: 0 0.5rem;
 			margin-bottom: 0.4rem;
-			text-align: right;
 		}
 
 		& .uk-modal-close {
@@ -149,6 +150,12 @@
 				color: @am-muted;
 			}
 			
+		}
+
+		& .uk-dropdown {
+			padding: 0.5rem;
+			max-width: 85vw;
+			width: 20rem;
 		}
 
 		& .uk-modal-dialog > .am-block-editor-container {

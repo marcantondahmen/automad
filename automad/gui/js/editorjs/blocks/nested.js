@@ -59,7 +59,8 @@ class AutomadBlockNested {
 	static get ids() {
 		return {
 			modal: 'am-block-nested-modal',
-			modalEditor: 'am-block-nested-modal-editor'
+			modalEditor: 'am-block-nested-modal-editor',
+			modalDropdown: 'am-block-nested-modal-dropdown'
 		}
 	}
 
@@ -69,7 +70,10 @@ class AutomadBlockNested {
 
 	static get sanitize() {
 		return {
-			nestedData: true // Allow HTML tags
+			nestedData: true, // Allow HTML tags
+			cardStyle: {
+				css: false
+			}
 		};
 	}
 
@@ -91,7 +95,8 @@ class AutomadBlockNested {
 
 		this.data = {
 			nestedData: data.nestedData || {},
-			card: data.card || ''
+			isCard: data.isCard || false,
+			cardStyle: data.cardStyle || {}
 		};
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
@@ -107,14 +112,13 @@ class AutomadBlockNested {
 			</a>
 		`;
 
-		this.toggleCardClass(this.data.card, true);
-
 		this.input = this.wrapper.querySelector('input');
 		this.input.value = JSON.stringify(this.data.nestedData, null, 2);
 		this.holder = this.wrapper.querySelector('section');
 		this.button = this.wrapper.querySelector('a');
 
 		this.renderNested();
+		this.toggleCardClass();
 
 		ne.$(this.button).on('click', function(event) {
 			event.preventDefault();
@@ -166,6 +170,108 @@ class AutomadBlockNested {
 
 	}
 
+	colorPicker(id, value) {
+
+		return `<div class="am-u-flex" data-am-colorpicker=""> 
+					<input type="color" value="${value}">
+					<input type="text" class="am-u-form-controls am-u-width-1-1" id="${id}" value="${value}">
+				</div>`
+
+	}
+
+	renderCardSettings() {
+
+		const create = Automad.util.create,
+			  t = AutomadEditorTranslation.get,
+			  style = Object.assign({
+				  shadow: '',
+				  color: '',
+				  backgroundColor: '',
+				  borderColor: '',
+				  css: ''
+			  }, this.data.cardStyle);
+
+		return `
+			<label 
+			class="am-toggle-switch-medium" 
+			title="${t('nested_card_tooltip')}"
+			data-am-toggle="#${AutomadBlockNested.ids.modalDropdown}"
+			data-uk-tooltip="{pos:'bottom'}"
+			>
+				${t('nested_card_toggle')}
+				<input id="am-nested-card-toggle" type="checkbox" ${this.data.isCard == true ? 'checked' : ''}>
+			</label>
+			<div
+			id="${AutomadBlockNested.ids.modalDropdown}" 
+			class="am-toggle-container uk-margin-small-left uk-form" 
+			data-uk-dropdown="{mode:'click', pos:'bottom-left'}"
+			>
+				<div class="uk-button uk-button-small uk-button-success">
+					${t('nested_card_style')}&nbsp;
+					<i class="uk-icon-caret-down"></i>
+				</div>
+				<div class="uk-dropdown uk-dropdown-blank">
+					<div class="uk-form-row">
+						<label 
+						class="am-toggle-switch uk-button uk-text-left uk-width-1-1" 
+						data-am-toggle
+						> 
+							${t('nested_card_shadow')}
+							<input id="am-nested-card-shadow" type="checkbox" ${style.shadow == true ? 'checked' : ''}>
+						</label>
+					</div>
+					${create.label(t('nested_card_color')).outerHTML}
+					${this.colorPicker('am-nested-card-color', style.color)}
+					${create.label(t('nested_card_background')).outerHTML}
+					${this.colorPicker('am-nested-card-background', style.backgroundColor)}
+					${create.label(t('nested_card_border')).outerHTML}
+					${this.colorPicker('am-nested-card-border', style.borderColor)}
+					${create.label(t('nested_card_css')).outerHTML}
+					${create.editable(['cdx-input', 'am-nested-card-css'], 'xx', style.css).outerHTML}
+				</div>
+			</div>
+		`;
+
+	}
+
+	saveCardSettings() {
+
+		let inputs = {};
+
+		inputs.toggle = this.modalWrapper.querySelector('#am-nested-card-toggle');
+		inputs.shadow = this.modalWrapper.querySelector('#am-nested-card-shadow');
+		inputs.color = this.modalWrapper.querySelector('#am-nested-card-color');
+		inputs.backgroundColor = this.modalWrapper.querySelector('#am-nested-card-background');
+		inputs.borderColor = this.modalWrapper.querySelector('#am-nested-card-border');
+		inputs.css = this.modalWrapper.querySelector('.am-nested-card-css');
+
+		this.data.isCard = inputs.toggle.checked;
+		this.data.cardStyle = {};
+
+		if (inputs.toggle.checked) {
+
+			this.data.cardStyle = {
+				shadow: inputs.shadow.checked,
+				color: inputs.color.value,
+				backgroundColor: inputs.backgroundColor.value,
+				borderColor: inputs.borderColor.value,
+				css: Automad.util.stripNbsp(inputs.css.textContent)
+			};
+			
+		}
+
+	}
+
+	initToggles() {
+
+		const toggles = this.modalWrapper.querySelectorAll('label > input');
+
+		Array.from(toggles).forEach((item) => {
+			Automad.toggle.update(Automad.nestedEditor.$(item));
+		});
+
+	}
+
 	showModal() {
 
 		const create = Automad.util.create,
@@ -179,6 +285,9 @@ class AutomadBlockNested {
 			<div id="${AutomadBlockNested.ids.modal}" class="uk-modal ${AutomadBlockNested.cls.modal}">
 				<div class="uk-modal-dialog am-block-editor">
 					<div class="uk-modal-header">
+						<div class="uk-flex uk-flex-middle uk-position-relative">
+							${this.renderCardSettings()}
+						</div>
 						<a class="uk-modal-close"><i class="uk-icon-compress"></i></a>
 					</div>
 					<section 
@@ -190,8 +299,13 @@ class AutomadBlockNested {
 		`;
 
 		this.container.appendChild(this.modalWrapper);
+		this.initToggles();
 
-		const modal = ne.UIkit.modal(`#${AutomadBlockNested.ids.modal}`, { modal: false });
+		const modal = ne.UIkit.modal(`#${AutomadBlockNested.ids.modal}`, { 
+						modal: false, 
+						bgclose: true, 
+						keyboard: false 
+					  });
 
 		this.modalEditor = Automad.blockEditor.createEditor({
 			holder: AutomadBlockNested.ids.modalEditor,
@@ -200,8 +314,11 @@ class AutomadBlockNested {
 			autofocus: true,
 			onReady: function () {
 				modal.on('hide.uk.modal', function () {
+					block.saveCardSettings();
+					ne.$(block.input).trigger('change');
 					block.destroyModal();
 					block.renderNested();
+					block.toggleCardClass();
 				});
 			}
 		});
@@ -240,72 +357,15 @@ class AutomadBlockNested {
 
 	renderSettings() {
 
-		var create = Automad.util.create,
-			wrapper = create.element('div', []),
-			inner = create.element('div', ['cdx-settings-1-2']),
-			btnCls = this.api.styles.settingsButton,
-			btnActiveCls = this.api.styles.settingsButtonActive,
-			block = this,
-			settings = [
-				{
-					title: AutomadEditorTranslation.get('nested_card_primary'),
-					value: 'primary',
-					icon: '<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M3,11c0-0.6,0.4-1,1-1h6 c0.6,0,1,0.4,1,1v1c0,0.6-0.4,1-1,1H4c-0.6,0-1-0.4-1-1V11z M13,17H4c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h9c0.6,0,1,0.4,1,1 C14,16.6,13.6,17,13,17z M17,7c0,0.6-0.4,1-1,1H4C3.4,8,3,7.6,3,7V4c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1V7z"/></svg>'
-				},
-				{
-					title: AutomadEditorTranslation.get('nested_card_secondary'),
-					value: 'secondary',
-					icon: '<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18.5,16c0,1.4-1.1,2.5-2.5,2.5H4 c-1.4,0-2.5-1.1-2.5-2.5V4c0-1.4,1.1-2.5,2.5-2.5h12c1.4,0,2.5,1.1,2.5,2.5V16z"/><path d="M16,8H4C3.4,8,3,7.6,3,7V4c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1v3C17,7.6,16.6,8,16,8z"/><path d="M10,13H4c-0.6,0-1-0.4-1-1v-1c0-0.6,0.4-1,1-1h6c0.6,0,1,0.4,1,1v1C11,12.6,10.6,13,10,13z"/><path d="M13,17H4c-0.6,0-1-0.4-1-1v0c0-0.6,0.4-1,1-1h9c0.6,0,1,0.4,1,1v0C14,16.6,13.6,17,13,17z"/></svg>'
-				}
-			];
+		return this.layoutSettings;
 
-		settings.forEach((item) => {
-
-			let button = create.element('div', [btnCls]);
-
-			button.classList.toggle(btnActiveCls, (this.data['card'] == item.value));
-			button.innerHTML = item.icon;
-			this.api.tooltip.onHover(button, item.title, { placement: 'top' });
-
-			button.addEventListener('click', function () {
-
-				const _buttons = inner.querySelectorAll(`.${btnCls}`);
-
-				Array.from(_buttons).forEach((_button) => {
-					_button.classList.toggle(btnActiveCls, false);	
-				});
-
-				settings.forEach((_item) => {
-					block.toggleCardClass(_item.value, false);
-				});
-				
-				if (block.data['card'] != item.value) {
-					block.data['card'] = item.value;
-					button.classList.toggle(btnActiveCls);
-					block.toggleCardClass(item.value, true);
-				} else {
-					block.data['card'] = '';
-				}
-
-			});
-
-			inner.appendChild(button);
-
-		});
-
-		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
-
-		return wrapper;
-
+		
 	}
 
-	toggleCardClass(value, state) {
+	toggleCardClass() {
 
-		if (value) {
-			this.wrapper.classList.toggle(`${AutomadBlockNested.cls.block}-card-${value}`, state);
-		}
-
+		this.wrapper.classList.toggle(`${AutomadBlockNested.cls.block}-card`, this.data.isCard);
+		
 	}
 
 }

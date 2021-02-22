@@ -386,11 +386,35 @@ editor_nested_edit: Edit
 
 -
 
-editor_nested_card_primary: Primary Card Design
+editor_nested_card_toggle: Card 
 
 -
 
-editor_nested_card_secondary: Secondary Card Design
+editor_nested_card_tooltip: Enable this setting to render the content as a card with custom colors, borders and shadow.
+
+-
+
+editor_nested_card_style: Style
+
+-
+
+editor_nested_card_color: Text Color
+
+-
+
+editor_nested_card_background: Background Color 
+
+-
+
+editor_nested_card_border: Border Color 
+
+-
+
+editor_nested_card_shadow: Drop Shadow
+
+-
+
+editor_nested_card_css: CSS
 
 -
 
