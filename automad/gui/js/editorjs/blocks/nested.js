@@ -233,7 +233,7 @@ class AutomadBlockNested {
 					${create.label(t('nested_card_border')).outerHTML}
 					${this.colorPicker('am-nested-card-border', style.borderColor)}
 					${create.label(t('nested_card_css')).outerHTML}
-					${create.editable(['cdx-input', 'am-nested-card-css'], 'xx', style.css).outerHTML}
+					<textarea class="ce-code cdx-input am-nested-card-css">${style.css}</textarea>
 				</div>
 			</div>
 		`;
@@ -261,7 +261,7 @@ class AutomadBlockNested {
 				color: inputs.color.value,
 				backgroundColor: inputs.backgroundColor.value,
 				borderColor: inputs.borderColor.value,
-				css: Automad.util.stripNbsp(inputs.css.textContent)
+				css: inputs.css.value
 			};
 			
 		}
