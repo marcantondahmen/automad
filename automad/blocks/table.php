@@ -61,7 +61,7 @@ class Table {
 
 	public static function render($data) {
 
-		$html = '<div class="am-table"><table>'; 
+		$html = '<section class="am-table"><table>'; 
 		
 		// Initially set cell tag to "th".
 		$tag = 'th';
@@ -81,7 +81,7 @@ class Table {
 
 		}
 		
-		$html .= '</table></div>';
+		$html .= '</table></section>';
 
 		return $html;
 

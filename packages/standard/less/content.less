@@ -8,7 +8,13 @@
  */
 
 
-.content {
+.content,
+.am-nested {
+
+	& > * {
+		margin-top: @base-margin-vertical;
+		margin-bottom: @base-margin-vertical;
+	}
 
 	& > :first-child {
 		margin-top: 0;
@@ -120,8 +126,9 @@
 
 	}
 
-	& form,
-	& figure {
+	& > form,
+	& > figure,
+	& > .am-block-grid {
 
 		margin-top: @utility-margin;
 		margin-bottom: @utility-margin;
@@ -130,6 +137,11 @@
 			margin-top: 0 !important;
 		}
 
+	}
+
+	& > .am-buttons {
+		margin-top: @utility-margin - 0.5rem;
+		margin-bottom: @utility-margin - 0.5rem;
 	}
 	
 }
