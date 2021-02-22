@@ -35,6 +35,8 @@
 
 .am-block-nested {
 
+	position: relative;
+
 	&.am-block-editor-container {
 		border: none;
 		border-radius: @am-block-radius;
@@ -47,18 +49,8 @@
 
 	& section {
 
-		position: relative;
-		
 		&:after {
 			content: '';
-			position: absolute;
-			box-sizing: border-box;
-			display: block;
-			z-index: 0;
-			height: ~"calc(100% + 1rem)";
-			width: ~"calc(100% + 1rem)";
-			top: -0.5rem;
-			left: -0.5rem;
 			border: @am-border-width dashed @am-border-color;
 			border-radius: 0.5rem;
 			cursor: not-allowed;
@@ -77,15 +69,36 @@
 
 	}
 
-	&-card {
+	& .am-nested-overlay-focus {
 
-		& section:after {
-			border: 2px solid @am-text;
+		// Only show overlay when block is focused (see below).
+		// When focused it has the same dimensions as the section:after element.
+		background-color: @am-bg;
+		opacity: 0;
+		cursor: zoom-in;
+		pointer-events: none;
+		.transition(opacity 0.2s;);
+
+		.ce-block--focused & {
+			opacity: 0.5;
+			pointer-events: auto;
 		}
 
 	}
 
-	& > a {
+	& section:after,
+	.ce-block--focused & .am-nested-overlay-focus {
+		position: absolute;
+		box-sizing: border-box;
+		display: block;
+		z-index: 0;
+		height: ~"calc(100% + 1rem)";
+		width: ~"calc(100% + 1rem)";
+		top: -0.5rem;
+		left: -0.5rem;
+	}
+
+	& .am-nested-edit-button {
 		position: absolute;
 		display: block;
 		width: 100%;
@@ -99,6 +112,14 @@
 		color: @am-text !important;
 		background-color: @am-bg;
 		.shadow;
+	}
+
+	&-card {
+
+		& section:after {
+			border: @am-border-width solid @am-text;
+		}
+
 	}
 
 	& .ce-block {

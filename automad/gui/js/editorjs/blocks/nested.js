@@ -106,7 +106,8 @@ class AutomadBlockNested {
 		this.wrapper.innerHTML = `
 			<input type="hidden">
 			<section></section>
-			<a href="#">
+			<div class="am-nested-overlay-focus"></div>
+			<a href="#" class="am-nested-edit-button">
 				${editText}&nbsp;
 				<i class="uk-icon-expand"></i>
 			</a>
@@ -115,17 +116,22 @@ class AutomadBlockNested {
 		this.input = this.wrapper.querySelector('input');
 		this.input.value = JSON.stringify(this.data.nestedData, null, 2);
 		this.holder = this.wrapper.querySelector('section');
-		this.button = this.wrapper.querySelector('a');
+		this.overlay = this.wrapper.querySelector('.am-nested-overlay-focus');
+		this.button = this.wrapper.querySelector('.am-nested-edit-button');
 
 		this.renderNested();
 		this.toggleCardClass();
 
-		ne.$(this.button).on('click', function(event) {
-			event.preventDefault();
-			event.stopPropagation();
-			block.showModal();
+		[this.button, this.overlay].forEach((item) => {
+
+			item.addEventListener('click', (event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				this.showModal();
+			});
+
 		});
-		
+
 	}
 
 	appendCallback() {
