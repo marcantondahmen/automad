@@ -350,11 +350,35 @@ editor_nested_edit: Breyta
 
 -
 
-editor_nested_card_primary: Aðal kortahönnun
+editor_nested_card_toggle: Spil
 
 -
 
-editor_nested_card_secondary: Secondary Card Design
+editor_nested_card_tooltip: Virkjaðu þessa stillingu til að endurgera efnið sem kort með sérsniðnum litum, ramma og skugga.
+
+-
+
+editor_nested_card_style: Stíll
+
+-
+
+editor_nested_card_color: Textalitur
+
+-
+
+editor_nested_card_background: Bakgrunns litur
+
+-
+
+editor_nested_card_border: Jaðarlitur
+
+-
+
+editor_nested_card_shadow: Drop Shadow
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

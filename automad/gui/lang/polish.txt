@@ -350,11 +350,35 @@ editor_nested_edit: Edytować
 
 -
 
-editor_nested_card_primary: Podstawowy projekt karty
+editor_nested_card_toggle: Karta
 
 -
 
-editor_nested_card_secondary: Drugi projekt karty
+editor_nested_card_tooltip: Włącz to ustawienie, aby renderować zawartość jako kartę z niestandardowymi kolorami, obramowaniem i cieniem.
+
+-
+
+editor_nested_card_style: Styl
+
+-
+
+editor_nested_card_color: Kolor tekstu
+
+-
+
+editor_nested_card_background: Kolor tła
+
+-
+
+editor_nested_card_border: Kolor ramki
+
+-
+
+editor_nested_card_shadow: Drop Shadow
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

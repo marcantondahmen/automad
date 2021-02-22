@@ -350,11 +350,35 @@ editor_nested_edit: Upraviť
 
 -
 
-editor_nested_card_primary: Návrh primárnej karty
+editor_nested_card_toggle: Card
 
 -
 
-editor_nested_card_secondary: Dizajn sekundárnej karty
+editor_nested_card_tooltip: Povolením tohto nastavenia zobrazíte obsah ako kartu s vlastnými farbami, okrajmi a tieňom.
+
+-
+
+editor_nested_card_style: Štýl
+
+-
+
+editor_nested_card_color: Farba textu
+
+-
+
+editor_nested_card_background: Farba pozadia
+
+-
+
+editor_nested_card_border: Farba okraja
+
+-
+
+editor_nested_card_shadow: Vrhať tieň
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

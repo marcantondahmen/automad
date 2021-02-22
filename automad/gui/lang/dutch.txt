@@ -350,11 +350,35 @@ editor_nested_edit: Bewerk
 
 -
 
-editor_nested_card_primary: Primair kaartontwerp
+editor_nested_card_toggle: Kaart
 
 -
 
-editor_nested_card_secondary: Secundair kaartontwerp
+editor_nested_card_tooltip: Schakel deze instelling in om de inhoud weer te geven als een kaart met aangepaste kleuren, randen en schaduw.
+
+-
+
+editor_nested_card_style: Stijl
+
+-
+
+editor_nested_card_color: Tekst kleur
+
+-
+
+editor_nested_card_background: Achtergrond kleur
+
+-
+
+editor_nested_card_border: Rand kleur
+
+-
+
+editor_nested_card_shadow: Slagschaduw
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

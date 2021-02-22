@@ -350,11 +350,35 @@ editor_nested_edit: Редактировать
 
 -
 
-editor_nested_card_primary: Основной дизайн карты
+editor_nested_card_toggle: Карта
 
 -
 
-editor_nested_card_secondary: Вторичный дизайн карты
+editor_nested_card_tooltip: Включите этот параметр, чтобы отображать содержимое в виде карточки с настраиваемыми цветами, границами и тенью.
+
+-
+
+editor_nested_card_style: Стиль
+
+-
+
+editor_nested_card_color: Цвет текста
+
+-
+
+editor_nested_card_background: Фоновый цвет
+
+-
+
+editor_nested_card_border: Цвет границы
+
+-
+
+editor_nested_card_shadow: Падающая тень
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

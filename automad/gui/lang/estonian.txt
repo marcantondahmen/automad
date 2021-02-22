@@ -350,11 +350,35 @@ editor_nested_edit: Muuda
 
 -
 
-editor_nested_card_primary: Esmane kaardi kujundus
+editor_nested_card_toggle: Kaart
 
 -
 
-editor_nested_card_secondary: Teisene kaardi kujundus
+editor_nested_card_tooltip: Selle seade lubamisel saate sisu muuta kohandatud värvide, ääriste ja varjudega kaardina.
+
+-
+
+editor_nested_card_style: Stiil
+
+-
+
+editor_nested_card_color: Teksti värv
+
+-
+
+editor_nested_card_background: Taustavärv
+
+-
+
+editor_nested_card_border: Äärise värv
+
+-
+
+editor_nested_card_shadow: Tilk varju
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

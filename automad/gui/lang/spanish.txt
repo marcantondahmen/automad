@@ -350,11 +350,35 @@ editor_nested_edit: Editar
 
 -
 
-editor_nested_card_primary: Diseño de tarjeta principal
+editor_nested_card_toggle: Tarjeta
 
 -
 
-editor_nested_card_secondary: Diseño de tarjeta secundaria
+editor_nested_card_tooltip: Habilite esta configuración para representar el contenido como una tarjeta con colores, bordes y sombras personalizados.
+
+-
+
+editor_nested_card_style: Estilo
+
+-
+
+editor_nested_card_color: Color de texto
+
+-
+
+editor_nested_card_background: Color de fondo
+
+-
+
+editor_nested_card_border: Color del borde
+
+-
+
+editor_nested_card_shadow: Sombra paralela
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

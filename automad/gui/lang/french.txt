@@ -350,11 +350,35 @@ editor_nested_edit: Éditer
 
 -
 
-editor_nested_card_primary: Conception de la carte principale
+editor_nested_card_toggle: Carte
 
 -
 
-editor_nested_card_secondary: Conception de carte secondaire
+editor_nested_card_tooltip: Activez ce paramètre pour rendre le contenu sous forme de carte avec des couleurs, des bordures et des ombres personnalisées.
+
+-
+
+editor_nested_card_style: Style
+
+-
+
+editor_nested_card_color: Couleur du texte
+
+-
+
+editor_nested_card_background: Couleur de l'arrière plan
+
+-
+
+editor_nested_card_border: Couleur de la bordure
+
+-
+
+editor_nested_card_shadow: Ombre portée
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

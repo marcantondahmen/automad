@@ -350,11 +350,35 @@ editor_nested_edit: Редагувати
 
 -
 
-editor_nested_card_primary: Дизайн первинної картки
+editor_nested_card_toggle: Картка
 
 -
 
-editor_nested_card_secondary: Дизайн вторинних карток
+editor_nested_card_tooltip: Увімкніть цей параметр, щоб відображати вміст у вигляді картки із власними кольорами, рамками та тінню.
+
+-
+
+editor_nested_card_style: Стиль
+
+-
+
+editor_nested_card_color: Колір тексту
+
+-
+
+editor_nested_card_background: Колір фону
+
+-
+
+editor_nested_card_border: Колір кордону
+
+-
+
+editor_nested_card_shadow: Тінь
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

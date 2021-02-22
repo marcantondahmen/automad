@@ -350,11 +350,35 @@ editor_nested_edit: Uredi
 
 -
 
-editor_nested_card_primary: Dizajn primarne kartice
+editor_nested_card_toggle: Card
 
 -
 
-editor_nested_card_secondary: Dizajn sekundarne kartice
+editor_nested_card_tooltip: Omogućite ovu postavku da sadržaj prikazuje karticu s prilagođenim bojama, granicama i sjeni.
+
+-
+
+editor_nested_card_style: Stil
+
+-
+
+editor_nested_card_color: Tekst u boji
+
+-
+
+editor_nested_card_background: Boja pozadine
+
+-
+
+editor_nested_card_border: Boja obruba
+
+-
+
+editor_nested_card_shadow: Drop Shadow
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

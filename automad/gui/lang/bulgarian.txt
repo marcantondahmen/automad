@@ -350,11 +350,35 @@ editor_nested_edit: редактиране
 
 -
 
-editor_nested_card_primary: Основен дизайн на карти
+editor_nested_card_toggle: Карта
 
 -
 
-editor_nested_card_secondary: Вторичен дизайн на карти
+editor_nested_card_tooltip: Активирайте тази настройка, за да изобразявате съдържанието като карта с персонализирани цветове, граници и сенки.
+
+-
+
+editor_nested_card_style: Стил
+
+-
+
+editor_nested_card_color: Цвят на текста
+
+-
+
+editor_nested_card_background: Цвят на фона
+
+-
+
+editor_nested_card_border: Цвят на границата
+
+-
+
+editor_nested_card_shadow: Капка сянка
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

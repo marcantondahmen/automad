@@ -350,11 +350,35 @@ editor_nested_edit: Uredi
 
 -
 
-editor_nested_card_primary: Primarno oblikovanje kartic
+editor_nested_card_toggle: Kartica
 
 -
 
-editor_nested_card_secondary: Sekundarno oblikovanje kartic
+editor_nested_card_tooltip: Omogočite to nastavitev, če želite vsebino upodabljati kot kartico z barvami, obrobami in senco po meri.
+
+-
+
+editor_nested_card_style: Slog
+
+-
+
+editor_nested_card_color: Barva besedila
+
+-
+
+editor_nested_card_background: Barva ozadja
+
+-
+
+editor_nested_card_border: Barva obrobe
+
+-
+
+editor_nested_card_shadow: Spusti senco
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

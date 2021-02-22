@@ -350,11 +350,35 @@ editor_nested_edit: Rediģēt
 
 -
 
-editor_nested_card_primary: Primārā kartes dizains
+editor_nested_card_toggle: Karte
 
 -
 
-editor_nested_card_secondary: Sekundārā karšu dizains
+editor_nested_card_tooltip: Iespējojiet šo iestatījumu, lai saturu renderētu kā karti ar pielāgotām krāsām, apmalēm un ēnu.
+
+-
+
+editor_nested_card_style: Stils
+
+-
+
+editor_nested_card_color: Teksta krāsa
+
+-
+
+editor_nested_card_background: Fona krāsa
+
+-
+
+editor_nested_card_border: Apmales krāsa
+
+-
+
+editor_nested_card_shadow: Nomest ēnu
+
+-
+
+editor_nested_card_css: Css
 
 -
 

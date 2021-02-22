@@ -350,11 +350,35 @@ editor_nested_edit: Upravit
 
 -
 
-editor_nested_card_primary: Návrh primární karty
+editor_nested_card_toggle: Kartu
 
 -
 
-editor_nested_card_secondary: Návrh sekundární karty
+editor_nested_card_tooltip: Povolte toto nastavení k vykreslení obsahu jako karty s vlastními barvami, okraji a stínem.
+
+-
+
+editor_nested_card_style: Styl
+
+-
+
+editor_nested_card_color: Barva textu
+
+-
+
+editor_nested_card_background: Barva pozadí
+
+-
+
+editor_nested_card_border: Barva ohraničení
+
+-
+
+editor_nested_card_shadow: Vrhat stín
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

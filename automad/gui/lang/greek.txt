@@ -350,11 +350,35 @@ editor_nested_edit: Επεξεργασία
 
 -
 
-editor_nested_card_primary: Κύριος σχεδιασμός καρτών
+editor_nested_card_toggle: Κάρτα
 
 -
 
-editor_nested_card_secondary: Σχεδιασμός δευτερεύουσας κάρτας
+editor_nested_card_tooltip: Ενεργοποιήστε αυτή τη ρύθμιση για να κάνετε το περιεχόμενο ως κάρτα με προσαρμοσμένα χρώματα, σύνορα και σκιά.
+
+-
+
+editor_nested_card_style: Στυλ
+
+-
+
+editor_nested_card_color: Χρώμα κειμένου
+
+-
+
+editor_nested_card_background: Χρώμα του φόντου
+
+-
+
+editor_nested_card_border: Χρώμα πλαισίου
+
+-
+
+editor_nested_card_shadow: Σκίαση
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

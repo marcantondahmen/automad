@@ -350,11 +350,35 @@ editor_nested_edit: Redaguoti
 
 -
 
-editor_nested_card_primary: Pirminis kortelių dizainas
+editor_nested_card_toggle: Kortelė
 
 -
 
-editor_nested_card_secondary: Antrinės kortelės dizainas
+editor_nested_card_tooltip: Įgalinkite šį nustatymą, kad turinys būtų pateiktas kaip kortelė su pasirinktinėmis spalvomis, kraštinėmis ir šešėliais.
+
+-
+
+editor_nested_card_style: Stilius
+
+-
+
+editor_nested_card_color: Teksto spalva
+
+-
+
+editor_nested_card_background: Fono spalva
+
+-
+
+editor_nested_card_border: Pasienio spalva
+
+-
+
+editor_nested_card_shadow: Mesti šešėlį
+
+-
+
+editor_nested_card_css: CSS.
 
 -
 

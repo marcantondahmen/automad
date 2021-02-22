@@ -350,11 +350,35 @@ editor_nested_edit: Editar
 
 -
 
-editor_nested_card_primary: Design de cartão primário
+editor_nested_card_toggle: Cartão
 
 -
 
-editor_nested_card_secondary: Design de cartão secundário
+editor_nested_card_tooltip: Ative esta configuração para renderizar o conteúdo como um cartão com cores, bordas e sombras personalizadas.
+
+-
+
+editor_nested_card_style: Estilo
+
+-
+
+editor_nested_card_color: Cor do texto
+
+-
+
+editor_nested_card_background: Cor de fundo
+
+-
+
+editor_nested_card_border: Cor da borda
+
+-
+
+editor_nested_card_shadow: Drop Shadow
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

@@ -350,11 +350,35 @@ editor_nested_edit: Modificare
 
 -
 
-editor_nested_card_primary: Design della carta primaria
+editor_nested_card_toggle: Carta
 
 -
 
-editor_nested_card_secondary: Progettazione di carte secondarie
+editor_nested_card_tooltip: Abilita questa impostazione per eseguire il rendering del contenuto come una scheda con colori, bordi e ombre personalizzati.
+
+-
+
+editor_nested_card_style: Stile
+
+-
+
+editor_nested_card_color: Colore del testo
+
+-
+
+editor_nested_card_background: Colore di sfondo
+
+-
+
+editor_nested_card_border: Colore del bordo
+
+-
+
+editor_nested_card_shadow: Ombra esterna
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

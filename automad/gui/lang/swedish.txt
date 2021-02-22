@@ -350,11 +350,35 @@ editor_nested_edit: Redigera
 
 -
 
-editor_nested_card_primary: Primär kortdesign
+editor_nested_card_toggle: Kort
 
 -
 
-editor_nested_card_secondary: Sekundär kortdesign
+editor_nested_card_tooltip: Aktivera den här inställningen för att återge innehållet som ett kort med anpassade färger, ramar och skugga.
+
+-
+
+editor_nested_card_style: Stil
+
+-
+
+editor_nested_card_color: Text färg
+
+-
+
+editor_nested_card_background: Bakgrundsfärg
+
+-
+
+editor_nested_card_border: Gräns färg
+
+-
+
+editor_nested_card_shadow: Drop Shadow
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

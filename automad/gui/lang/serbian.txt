@@ -350,11 +350,35 @@ editor_nested_edit: Уредити
 
 -
 
-editor_nested_card_primary: Дизајн примарне картице
+editor_nested_card_toggle: Карта
 
 -
 
-editor_nested_card_secondary: Дизајн секундарне картице
+editor_nested_card_tooltip: Омогућите ово подешавање да бисте садржај приказивали као картицу са прилагођеним бојама, обрубима и сенкама.
+
+-
+
+editor_nested_card_style: Стил
+
+-
+
+editor_nested_card_color: Тект Цолор
+
+-
+
+editor_nested_card_background: Боја позадине
+
+-
+
+editor_nested_card_border: Боја ивице
+
+-
+
+editor_nested_card_shadow: Сенка
+
+-
+
+editor_nested_card_css: ЦСС
 
 -
 

@@ -350,11 +350,35 @@ editor_nested_edit: Cuir in Eagar
 
 -
 
-editor_nested_card_primary: Dearadh Cárta Bunscoile
+editor_nested_card_toggle: Cárta
 
 -
 
-editor_nested_card_secondary: Dearadh Cárta Tánaisteach
+editor_nested_card_tooltip: Cumasaigh an socrú seo chun an t-ábhar a thabhairt mar chárta le dathanna saincheaptha, teorainneacha agus scáth.
+
+-
+
+editor_nested_card_style: Stíl
+
+-
+
+editor_nested_card_color: Dath an Téacs
+
+-
+
+editor_nested_card_background: Dath cúlra
+
+-
+
+editor_nested_card_border: Dath Teorann
+
+-
+
+editor_nested_card_shadow: Scáth titim
+
+-
+
+editor_nested_card_css: CSS
 
 -
 

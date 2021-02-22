@@ -350,11 +350,35 @@ editor_nested_edit: Bearbeiten
 
 -
 
-editor_nested_card_primary: Primäres Kartendesign
+editor_nested_card_toggle: Karte
 
 -
 
-editor_nested_card_secondary: Sekundäres Kartendesign
+editor_nested_card_tooltip: Aktivieren Sie diese Einstellung, um den Inhalt als Karte mit benutzerdefinierten Farben, Rahmen und Schatten zu rendern.
+
+-
+
+editor_nested_card_style: Stil
+
+-
+
+editor_nested_card_color: Textfarbe
+
+-
+
+editor_nested_card_background: Hintergrundfarbe
+
+-
+
+editor_nested_card_border: Randfarbe
+
+-
+
+editor_nested_card_shadow: Schlagschatten
+
+-
+
+editor_nested_card_css: CSS
 
 -
 
