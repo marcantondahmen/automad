@@ -4,7 +4,7 @@
 	<h1 class="uk-margin-bottom-remove uk-margin-top-remove">
 		@{ title }
 	</h1>	
-	<div class="uk-margin-bottom">
+	<div class="uk-margin-top-remove uk-margin-bottom">
 		<@ subtitle.php @>
 	</div>
 <@~ end @>
