@@ -542,15 +542,15 @@ editor_layout_stretch: Expand the block to full width
 
 -
 
-editor_layout_span: Width
+editor_layout_column_span: Width
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Shift
 
 -
 
-editor_layout_start_auto: Automatically shift blocks
+editor_layout_column_start_auto: Automatically shift blocks
 
 -
 
