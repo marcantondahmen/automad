@@ -125,7 +125,7 @@ HTML;
 
 			try {
 
-				$blockIsGridItem = (!empty($block->data->span) && empty($block->data->stretched));
+				$blockIsGridItem = (!empty($block->data->columnSpan) && empty($block->data->stretched));
 
 				if (!$gridOpen && $blockIsGridItem) {
 					$html .= '<section class="am-block-grid">';
@@ -159,11 +159,12 @@ HTML;
 
 					$class = '';
 
-					foreach (array('span', 'start') as $key) {
+					foreach (array('columnSpan', 'columnStart') as $key) {
 
 						if (isset($block->data->{$key})) {
+							$prefix = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
 							$value = $block->data->{$key};
-							$class .= " am-block-{$key}-{$value}";
+							$class .= " am-block-{$prefix}-{$value}";
 						}
 
 					}

@@ -43,12 +43,12 @@
 	width: var(--am-block-grid-width) !important;
 	max-width: var(--am-block-grid-width) !important;
 
-	& > [class*="am-block-span-"] {
+	& > [class*="am-block-column-span-"] {
 		grid-column-start: auto;
 		grid-column-end: span 12;
 	}
 
-	& > [class*="am-block-span-"] > * {
+	& > [class*="am-block-column-span-"] > * {
 
 		&,
 		& .am-button {
@@ -60,7 +60,7 @@
 	
 	@media (min-width: 580px) {
 		
-		& > .am-block-span-3 {
+		& > .am-block-column-span-3 {
 			grid-column-start: auto;
 			grid-column-end: span 6;
 		}
@@ -69,7 +69,7 @@
 
 	@media (min-width: 720px) {
 
-		& > .am-block-span {
+		& > .am-block-column-span {
 
 			&-3 {
 				grid-column-end: span 6;
@@ -85,7 +85,7 @@
 
 	@media (min-width: 880px) {
 
-		& > .am-block-span {
+		& > .am-block-column-span {
 
 			&-3 {
 				grid-column-end: span 4;
@@ -101,7 +101,7 @@
 
 	@media (min-width: 1080px) {
 
-		& > .am-block-span {
+		& > .am-block-column-span {
 
 			&-3 {
 				grid-column-end: span 3;
@@ -129,7 +129,7 @@
 
 		}
 
-		& > .am-block-start {
+		& > .am-block-column-start {
 
 			&-1 {
 				grid-column-start: 1;
