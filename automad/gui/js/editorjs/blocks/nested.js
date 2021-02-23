@@ -191,6 +191,7 @@ class AutomadBlockNested {
 			  t = AutomadEditorTranslation.get,
 			  style = Object.assign({
 				  shadow: '',
+				  matchRowHeight: '',
 				  color: '',
 				  backgroundColor: '',
 				  borderColor: '',
@@ -226,6 +227,15 @@ class AutomadBlockNested {
 							<input id="am-nested-card-shadow" type="checkbox" ${style.shadow == true ? 'checked' : ''}>
 						</label>
 					</div>
+					<div class="uk-form-row uk-margin-small-top">
+						<label
+						class="am-toggle-switch uk-button uk-text-left uk-width-1-1"
+						data-am-toggle
+						>
+							${t('nested_card_match_row_height')}
+							<input id="am-nested-card-match-row-height" type="checkbox" ${style.matchRowHeight == true ? 'checked' : ''}>
+						</label>
+					</div>
 					${create.label(t('nested_card_color')).outerHTML}
 					${this.colorPicker('am-nested-card-color', style.color)}
 					${create.label(t('nested_card_background')).outerHTML}
@@ -246,6 +256,7 @@ class AutomadBlockNested {
 
 		inputs.toggle = this.modalWrapper.querySelector('#am-nested-card-toggle');
 		inputs.shadow = this.modalWrapper.querySelector('#am-nested-card-shadow');
+		inputs.matchRowHeight = this.modalWrapper.querySelector('#am-nested-card-match-row-height');
 		inputs.color = this.modalWrapper.querySelector('#am-nested-card-color');
 		inputs.backgroundColor = this.modalWrapper.querySelector('#am-nested-card-background');
 		inputs.borderColor = this.modalWrapper.querySelector('#am-nested-card-border');
@@ -258,6 +269,7 @@ class AutomadBlockNested {
 
 			this.data.cardStyle = {
 				shadow: inputs.shadow.checked,
+				matchRowHeight: inputs.matchRowHeight.checked,
 				color: inputs.color.value,
 				backgroundColor: inputs.backgroundColor.value,
 				borderColor: inputs.borderColor.value,

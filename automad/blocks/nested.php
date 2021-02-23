@@ -92,6 +92,10 @@ class Nested {
 					$style .= 'box-shadow: var(--am-card-shadow); ';
 				}
 
+				if (!empty($cardStyle->matchRowHeight)) {
+					$style .= 'height: 100%; ';
+				}
+
 				if (!empty($cardStyle->css)) {
 					$style .= preg_replace('/\s+/s', ' ', $cardStyle->css);
 				}
