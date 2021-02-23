@@ -159,12 +159,17 @@ HTML;
 
 					$class = '';
 
-					foreach (array('columnSpan', 'columnStart') as $key) {
+					foreach (array('columnSpan', 'columnStart', 'rowSpan') as $key) {
 
 						if (isset($block->data->{$key})) {
-							$prefix = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
+
 							$value = $block->data->{$key};
-							$class .= " am-block-{$prefix}-{$value}";
+							
+							if ($value) {
+								$prefix = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
+								$class .= " am-block-{$prefix}-{$value}";
+							}
+							
 						}
 
 					}

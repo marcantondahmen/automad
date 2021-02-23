@@ -107,7 +107,13 @@ class AutomadLayoutButton {
 		this.button.classList.add(this.clsActive);
 		this.data[this.options.name] = this.options.value;
 		block.className = block.className.replace(this.options.blockClearRegex, '');
-		block.classList.add(AutomadLayout.getClassName(this.options.name, this.options.value));
+
+		const className = AutomadLayout.getClassName(this.options.name, this.options.value);
+
+		if (className.length) {
+			block.classList.add(className);
+		}
+
 		this.options.onClick();
 
 	}
@@ -201,13 +207,13 @@ class AutomadLayout {
 
 				if (data.blocks[i] !== undefined) {
 
-					['columnSpan', 'columnStart'].forEach((key) => {
+					['columnSpan', 'columnStart', 'rowSpan'].forEach((key) => {
 
 						let value = data.blocks[i].data[key],
 							regex = new RegExp(`${key}\-\d+`, 'g');
 
 						block.className = block.className.replace(regex, '');
-						block.classList.toggle(`${key}-${value}`, (value !== undefined && value !== ''));
+						block.classList.toggle(`${key}-${value.toString()}`, (value !== undefined && value != 0));
 
 					});
 
@@ -293,8 +299,8 @@ class AutomadLayout {
 
 	static getClassName(key, value) {
 
-		if (typeof value == 'string') {
-			return `${key}-${value}`;
+		if (typeof value === 'number' && value) {
+			return `${key}-${value.toString()}`;
 		} else {
 			if (value) {
 				return `${key}`;
@@ -328,37 +334,37 @@ class AutomadLayout {
 					title: t('layout_column_span') + ': 1⁄4',
 					name: 'columnSpan',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '3'
+					value: 3
 				},
 				{
 					title: t('layout_column_span') + ': 1⁄3',
 					name: 'columnSpan',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '4'
+					value: 4
 				},
 				{
 					title: t('layout_column_span') + ': 1⁄2',
 					name: 'columnSpan',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '6'
+					value: 6
 				},
 				{
 					title: t('layout_column_span') + ': 2⁄3',
 					name: 'columnSpan',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '8'
+					value: 8
 				},
 				{
 					title: t('layout_column_span') + ': 3⁄4',
 					name: 'columnSpan',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '9'
+					value: 9
 				},
 				{
 					title: t('layout_column_span') + ': 1⁄1',
 					name: 'columnSpan',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
-					value: '12'
+					value: 12
 				}
 			],
 			columnStartWrapper = element('div', ['cdx-settings']),
@@ -367,54 +373,77 @@ class AutomadLayout {
 					title: t('layout_column_start_auto'),
 					name: 'columnStart',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><path d="M15,11.4L12.5,10L15,8.6c0.6-0.3,0.8-1.1,0.5-1.7c-0.3-0.6-1.1-0.8-1.7-0.5l-2.5,1.4V5c0-0.7-0.6-1.2-1.2-1.2S8.8,4.3,8.8,5 v2.8L6.3,6.4C5.7,6.1,4.9,6.3,4.6,6.9C4.2,7.5,4.4,8.2,5,8.6L7.5,10L5,11.4c-0.6,0.3-0.8,1.1-0.5,1.7c0.3,0.6,1.1,0.8,1.7,0.5 l2.5-1.4V15c0,0.7,0.6,1.2,1.2,1.2s1.2-0.6,1.2-1.2v-2.8l2.5,1.4c0.6,0.3,1.4,0.1,1.7-0.5C15.8,12.5,15.6,11.8,15,11.4z"/>',
-					value: ''
+					value: false
 				},
 				{
 					title: t('layout_column_start') + ': 0',
 					name: 'columnStart',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="2" y="2" width="2" height="16"/>',
-					value: '1'
+					value: 1
 				},
 				{
 					title: t('layout_column_start') + ': 1⁄6',
 					name: 'columnStart',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="4" y="2" width="2" height="16"/>',
-					value: '3'
+					value: 3
 				},
 				{
 					title: t('layout_column_start') + ': 1⁄4',
 					name: 'columnStart',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="5" y="2" width="2" height="16"/>',
-					value: '4'
+					value: 4
 				},
 				{
 					title: t('layout_column_start') + ': 1⁄3',
 					name: 'columnStart',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="7" y="2" width="2" height="16"/>',
-					value: '5'
+					value: 5
 				},
 				{
 					title: t('layout_column_start') + ': 1⁄2',
 					name: 'columnStart',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H4 c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2V16z"/><rect x="9" y="2" width="2" height="16"/>',
-					value: '7'
+					value: 7
+				}
+			],
+			rowSpanWrapper = element('div', ['cdx-settings']),
+			rowSpanOptions = [
+				{
+					title: t('layout_row_span') + ': 1',
+					name: 'rowSpan',
+					icon: '<path d="M17,6H3C1.3,6,0,7.3,0,9v2c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3V9C20,7.3,18.7,6,17,6z M18,11c0,0.6-0.4,1-1,1H3 c-0.6,0-1-0.4-1-1V9c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V11z"/>',
+					value: false
+				},
+				{
+					title: t('layout_row_span') + ': 2',
+					name: 'rowSpan',
+					icon: '<path d="M17,3H3C1.3,3,0,4.3,0,6v8c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3V6C20,4.3,18.7,3,17,3z M18,14c0,0.6-0.4,1-1,1H3 c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V14z"/><rect x="2" y="9" width="16" height="2"/>',
+					value: 2
+				},
+				{
+					title: t('layout_row_span') + ': 3',
+					name: 'rowSpan',
+					icon: '<path d="M17,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3V3C20,1.3,18.7,0,17,0z M18,17c0,0.6-0.4,1-1,1H3 c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V17z"/><rect x="2" y="12" width="16" height="2"/><rect x="2" y="6" width="16" height="2"/>',
+					value: 3
 				}
 			];
 
-		data.stretched = saved.stretched || '';
-		data.columnSpan = saved.columnSpan || '';
-		data.columnStart = saved.columnStart || '';
+		data.stretched = saved.stretched || false;
+		data.columnSpan = saved.columnSpan || false;
+		data.columnStart = saved.columnStart || false;
+		data.rowSpan = saved.rowSpan || false;
 
 		const isNested = config.isNested || false,
 			  allowStretching = config.allowStretching || false;
 
 		const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
 			icon: resetOption.icon,
-			buttonsClearRegex: /(columnSpan|stretched|columnStart)/g,
-			blockClearRegex: /(stretched|(columnSpan|columnStart)\-\d+)/g,
-			clearDataKeys: ['stretched', 'columnSpan', 'columnStart'],
+			buttonsClearRegex: /(columnSpan|stretched|columnStart|rowSpan)/g,
+			blockClearRegex: /(stretched|(columnSpan|columnStart|rowSpan)\-\d+)/g,
+			clearDataKeys: ['stretched', 'columnSpan', 'columnStart', 'rowSpan'],
 			onClick: function () {
 				columnStartWrapper.classList.add('uk-hidden');
+				rowSpanWrapper.classList.add('uk-hidden');
 			}
 		}));
 
@@ -424,11 +453,12 @@ class AutomadLayout {
 
 			const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
 				icon: stretchOption.icon,
-				buttonsClearRegex: /(columnSpan|columnStart|reset)/g,
-				blockClearRegex: /(stretched|(columnSpan|columnStart)\-\d+)/g,
-				clearDataKeys: ['columnSpan', 'columnStart'],
+				buttonsClearRegex: /(columnSpan|columnStart|rowSpan|reset)/g,
+				blockClearRegex: /(stretched|(columnSpan|columnStart|rowSpan)\-\d+)/g,
+				clearDataKeys: ['columnSpan', 'columnStart', 'rowSpan'],
 				onClick: function () {
 					columnStartWrapper.classList.add('uk-hidden');
+					rowSpanWrapper.classList.add('uk-hidden');
 				}
 			}));
 
@@ -464,6 +494,10 @@ class AutomadLayout {
 					if (!data.columnStart && !isNested) {
 						columnStartWrapper.querySelector('.columnStart').click();
 					}
+					rowSpanWrapper.classList.remove('uk-hidden');
+					if (!data.rowSpan && !isNested) {
+						rowSpanWrapper.querySelector('.rowSpan').click();
+					}
 				}
 			}));
 
@@ -498,6 +532,30 @@ class AutomadLayout {
 			});
 
 			wrapper.appendChild(columnStartWrapper);
+
+			rowSpanOptions.forEach(function (option) {
+
+				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
+					icon: AutomadLayout.icon(option.icon),
+					buttonsClearRegex: /(rowSpan|stretched|reset)/g,
+					blockClearRegex: /(stretched|rowSpan\-\d+)/g,
+					clearDataKeys: ['stretched'],
+					onClick: function () {
+						if (!data.columnSpan) {
+							columnSpanWrapper.querySelector('.columnSpan').click();
+						}
+					}
+				}));
+
+				rowSpanWrapper.appendChild(button.get());
+
+				if (!data.columnSpan) {
+					rowSpanWrapper.classList.add('uk-hidden');
+				}
+
+			});
+
+			wrapper.appendChild(rowSpanWrapper);
 
 		}
 	

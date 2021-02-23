@@ -550,6 +550,10 @@ editor_layout_column_start: Shift
 
 -
 
+editor_layout_row_span: Rows
+
+-
+
 editor_layout_column_start_auto: Automatically shift blocks
 
 -
