@@ -378,6 +378,10 @@ editor_nested_card_shadow: Spusti senco
 
 -
 
+editor_nested_card_match_row_height: Celotna višina vrstice
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Razširite blok na celotno širino
 
 -
 
-editor_layout_span: Premer
+editor_layout_column_span: Premer
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Shift
 
 -
 
-editor_layout_start_auto: Samodejno premakni bloke
+editor_layout_row_span: Vrsto števca
+
+-
+
+editor_layout_column_start_auto: Samodejno premakni bloke
 
 -
 

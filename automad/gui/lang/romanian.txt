@@ -378,6 +378,10 @@ editor_nested_card_shadow: Umbra
 
 -
 
+editor_nested_card_match_row_height: Înălțimea întregului rând
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Extindeți blocul la toată lățimea
 
 -
 
-editor_layout_span: Lăţime
+editor_layout_column_span: Lăţime
 
 -
 
-editor_layout_start: Schimb
+editor_layout_column_start: Schimb
 
 -
 
-editor_layout_start_auto: Schimbați automat blocurile
+editor_layout_row_span: Rang Span
+
+-
+
+editor_layout_column_start_auto: Schimbați automat blocurile
 
 -
 

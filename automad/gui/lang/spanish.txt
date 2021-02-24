@@ -378,6 +378,10 @@ editor_nested_card_shadow: Sombra paralela
 
 -
 
+editor_nested_card_match_row_height: Altura de fila completa
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Expanda el bloque a ancho completo
 
 -
 
-editor_layout_span: Ancho
+editor_layout_column_span: Ancho
 
 -
 
-editor_layout_start: Cambio
+editor_layout_column_start: Cambio
 
 -
 
-editor_layout_start_auto: Cambiar bloques automáticamente
+editor_layout_row_span: Lapso de fila
+
+-
+
+editor_layout_column_start_auto: Cambiar bloques automáticamente
 
 -
 

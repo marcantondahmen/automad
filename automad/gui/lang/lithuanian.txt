@@ -378,6 +378,10 @@ editor_nested_card_shadow: Mesti šešėlį
 
 -
 
+editor_nested_card_match_row_height: Visas eilės aukštis
+
+-
+
 editor_nested_card_css: CSS.
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Išplėskite bloką iki viso pločio
 
 -
 
-editor_layout_span: Plotis
+editor_layout_column_span: Plotis
 
 -
 
-editor_layout_start: �Shift“
+editor_layout_column_start: SHIFT.
 
 -
 
-editor_layout_start_auto: Automatiškai perkelti blokus
+editor_layout_row_span: Eilutė
+
+-
+
+editor_layout_column_start_auto: Automatiškai perkelia blokus
 
 -
 

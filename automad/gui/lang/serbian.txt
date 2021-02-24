@@ -378,6 +378,10 @@ editor_nested_card_shadow: Сенка
 
 -
 
+editor_nested_card_match_row_height: Потпуна висина реда
+
+-
+
 editor_nested_card_css: ЦСС
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Проширите блок у пуну ширину
 
 -
 
-editor_layout_span: Ширина
+editor_layout_column_span: Ширина
 
 -
 
-editor_layout_start: Смена
+editor_layout_column_start: Смена
 
 -
 
-editor_layout_start_auto: Аутоматски померај блокове
+editor_layout_row_span: Ред распона
+
+-
+
+editor_layout_column_start_auto: Аутоматски померај блокове
 
 -
 

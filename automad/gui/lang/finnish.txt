@@ -378,6 +378,10 @@ editor_nested_card_shadow: Pudota varjo
 
 -
 
+editor_nested_card_match_row_height: Koko rivikorkeus
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Laajenna lohko täysleveydelle
 
 -
 
-editor_layout_span: Leveys
+editor_layout_column_span: Leveys
 
 -
 
-editor_layout_start: Siirtää
+editor_layout_column_start: Siirtää
 
 -
 
-editor_layout_start_auto: Lohkojen automaattinen siirtäminen
+editor_layout_row_span: Riviväli
+
+-
+
+editor_layout_column_start_auto: Lohkojen automaattinen siirtäminen
 
 -
 

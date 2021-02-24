@@ -378,6 +378,10 @@ editor_nested_card_shadow: Тінь
 
 -
 
+editor_nested_card_match_row_height: Повна висота рядка
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Розгорніть блок на всю ширину
 
 -
 
-editor_layout_span: Ширина
+editor_layout_column_span: Ширина
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Зміна
 
 -
 
-editor_layout_start_auto: Автоматично переміщувати блоки
+editor_layout_row_span: Розмах рядка
+
+-
+
+editor_layout_column_start_auto: Автоматично змінювати блоки
 
 -
 

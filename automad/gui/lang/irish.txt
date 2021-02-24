@@ -378,6 +378,10 @@ editor_nested_card_shadow: Scáth titim
 
 -
 
+editor_nested_card_match_row_height: Airde lánrow
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Leathnaigh an bloc go leithead iomlán
 
 -
 
-editor_layout_span: Leithead
+editor_layout_column_span: Le chéile
 
 -
 
-editor_layout_start: Aistriú
+editor_layout_column_start: Bog go gasta
 
 -
 
-editor_layout_start_auto: Bloic a aistriú go huathoibríoch
+editor_layout_row_span: Row Span
+
+-
+
+editor_layout_column_start_auto: Bloic a athrú go huathoibríoch
 
 -
 

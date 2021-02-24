@@ -378,6 +378,10 @@ editor_nested_card_shadow: Drop Shadow
 
 -
 
+editor_nested_card_match_row_height: Full röð hæð
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Stækkaðu kubbinn í fulla breidd
 
 -
 
-editor_layout_span: Breidd
+editor_layout_column_span: Breidd
 
 -
 
-editor_layout_start: Vakt
+editor_layout_column_start: Breyting
 
 -
 
-editor_layout_start_auto: Skiptu sjálfkrafa um blokkir
+editor_layout_row_span: Róðuspennu
+
+-
+
+editor_layout_column_start_auto: Skiptu sjálfkrafa um blokkir
 
 -
 

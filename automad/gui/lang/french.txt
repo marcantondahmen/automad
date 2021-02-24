@@ -378,6 +378,10 @@ editor_nested_card_shadow: Ombre portée
 
 -
 
+editor_nested_card_match_row_height: Hauteur de la rangée complète
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Développez le bloc en pleine largeur
 
 -
 
-editor_layout_span: Largeur
+editor_layout_column_span: Largeur
 
 -
 
-editor_layout_start: Décalage
+editor_layout_column_start: Décalage
 
 -
 
-editor_layout_start_auto: Décaler automatiquement les blocs
+editor_layout_row_span: Envergure de ligne
+
+-
+
+editor_layout_column_start_auto: Déplacer automatiquement des blocs
 
 -
 

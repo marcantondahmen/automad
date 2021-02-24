@@ -378,6 +378,10 @@ editor_nested_card_shadow: Падающая тень
 
 -
 
+editor_nested_card_match_row_height: Полная высота строки
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Развернуть блок на всю ширину
 
 -
 
-editor_layout_span: Ширина
+editor_layout_column_span: Ширина
 
 -
 
-editor_layout_start: Сдвиг
+editor_layout_column_start: Сдвиг
 
 -
 
-editor_layout_start_auto: Автоматически сдвигать блоки
+editor_layout_row_span: Промежуток строки
+
+-
+
+editor_layout_column_start_auto: Автоматически сдвигать блоки
 
 -
 

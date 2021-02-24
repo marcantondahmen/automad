@@ -378,6 +378,10 @@ editor_nested_card_shadow: Vrhať tieň
 
 -
 
+editor_nested_card_match_row_height: Výška riadka
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Rozbaľte blok na celú šírku
 
 -
 
-editor_layout_span: Šírka
+editor_layout_column_span: Šírka
 
 -
 
-editor_layout_start: Posun
+editor_layout_column_start: Posun
 
 -
 
-editor_layout_start_auto: Automaticky posúvať bloky
+editor_layout_row_span: Row Span
+
+-
+
+editor_layout_column_start_auto: Automaticky Shift bloky
 
 -
 

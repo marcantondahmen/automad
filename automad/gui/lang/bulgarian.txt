@@ -378,6 +378,10 @@ editor_nested_card_shadow: Капка сянка
 
 -
 
+editor_nested_card_match_row_height: Височина на пълен ред
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Разгънете блока до пълната шир�
 
 -
 
-editor_layout_span: Ширина
+editor_layout_column_span: Ширина
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Shift
 
 -
 
-editor_layout_start_auto: Автоматично преместване на блокове
+editor_layout_row_span: Обхват на редовете
+
+-
+
+editor_layout_column_start_auto: Автоматично преместване на блокове
 
 -
 

@@ -378,6 +378,10 @@ editor_nested_card_shadow: Nomest ēnu
 
 -
 
+editor_nested_card_match_row_height: Pilna rindu augstums
+
+-
+
 editor_nested_card_css: Css
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Paplašiniet bloku līdz pilnam platumam
 
 -
 
-editor_layout_span: Platums
+editor_layout_column_span: Platums
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Pāriet
 
 -
 
-editor_layout_start_auto: Automātiski pārslēgt blokus
+editor_layout_row_span: Rindas laidums
+
+-
+
+editor_layout_column_start_auto: Automātiski pārslēgt blokus
 
 -
 

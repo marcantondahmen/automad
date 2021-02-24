@@ -414,7 +414,7 @@ editor_nested_card_shadow: Drop Shadow
 
 -
 
-editor_nested_card_match_row_height: Match Row Height
+editor_nested_card_match_row_height: Full Row Height
 
 -
 
@@ -554,7 +554,7 @@ editor_layout_column_start: Shift
 
 -
 
-editor_layout_row_span: Rows
+editor_layout_row_span: Row Span
 
 -
 

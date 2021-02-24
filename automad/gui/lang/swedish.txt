@@ -378,6 +378,10 @@ editor_nested_card_shadow: Drop Shadow
 
 -
 
+editor_nested_card_match_row_height: Full radhöjd
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Expandera blocket till full bredd
 
 -
 
-editor_layout_span: Bredd
+editor_layout_column_span: Bredd
 
 -
 
-editor_layout_start: Flytta
+editor_layout_column_start: Flytta
 
 -
 
-editor_layout_start_auto: Växla block automatiskt
+editor_layout_row_span: Radspan
+
+-
+
+editor_layout_column_start_auto: Växla block automatiskt
 
 -
 

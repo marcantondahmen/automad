@@ -378,6 +378,10 @@ editor_nested_card_shadow: Drop Shadow
 
 -
 
+editor_nested_card_match_row_height: Fuld rækkehøjde
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Udvid blokken til fuld bredde
 
 -
 
-editor_layout_span: Bredde
+editor_layout_column_span: Bredde
 
 -
 
-editor_layout_start: Flytte
+editor_layout_column_start: Flytte
 
 -
 
-editor_layout_start_auto: Skift blokke automatisk
+editor_layout_row_span: ROW SPAN.
+
+-
+
+editor_layout_column_start_auto: Automatisk skift blokke
 
 -
 

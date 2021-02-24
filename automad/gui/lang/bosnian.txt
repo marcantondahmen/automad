@@ -378,6 +378,10 @@ editor_nested_card_shadow: Drop Shadow
 
 -
 
+editor_nested_card_match_row_height: Visina punog reda
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Proširite blok u punu širinu
 
 -
 
-editor_layout_span: Širina
+editor_layout_column_span: Širina
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Pomak
 
 -
 
-editor_layout_start_auto: Automatski prebaci blokove
+editor_layout_row_span: Redoslijed
+
+-
+
+editor_layout_column_start_auto: Automatski prebaci blokove
 
 -
 

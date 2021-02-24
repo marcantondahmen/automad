@@ -378,6 +378,10 @@ editor_nested_card_shadow: Tilk varju
 
 -
 
+editor_nested_card_match_row_height: Täisrea kõrgus
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Laiendage plokki täislaiusele
 
 -
 
-editor_layout_span: Laius
+editor_layout_column_span: Laius
 
 -
 
-editor_layout_start: Shift
+editor_layout_column_start: Shift
 
 -
 
-editor_layout_start_auto: Plokkide nihutamine automaatselt
+editor_layout_row_span: Rea pikkus
+
+-
+
+editor_layout_column_start_auto: Plokkide nihutamine automaatselt
 
 -
 

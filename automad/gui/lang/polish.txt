@@ -378,6 +378,10 @@ editor_nested_card_shadow: Drop Shadow
 
 -
 
+editor_nested_card_match_row_height: Pełna wysokość wiersza
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Rozwiń blok do pełnej szerokości
 
 -
 
-editor_layout_span: Szerokość
+editor_layout_column_span: Szerokość
 
 -
 
-editor_layout_start: Zmiana
+editor_layout_column_start: Zmiana
 
 -
 
-editor_layout_start_auto: Automatyczne przesuwanie bloków
+editor_layout_row_span: Span
+
+-
+
+editor_layout_column_start_auto: Automatyczne przesuwanie bloków
 
 -
 

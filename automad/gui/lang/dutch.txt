@@ -378,6 +378,10 @@ editor_nested_card_shadow: Slagschaduw
 
 -
 
+editor_nested_card_match_row_height: Volledige rijhoogte
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Vouw het blok uit tot volledige breedte
 
 -
 
-editor_layout_span: Breedte
+editor_layout_column_span: Breedte
 
 -
 
-editor_layout_start: Verschuiving
+editor_layout_column_start: Verschuiving
 
 -
 
-editor_layout_start_auto: Automatisch blokken verschuiven
+editor_layout_row_span: Rij Span
+
+-
+
+editor_layout_column_start_auto: Automatisch blokken verschuiven
 
 -
 

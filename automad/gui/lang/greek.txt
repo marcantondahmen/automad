@@ -378,6 +378,10 @@ editor_nested_card_shadow: Σκίαση
 
 -
 
+editor_nested_card_match_row_height: Πλήρες ύψος σειράς
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Αναπτύξτε το μπλοκ σε πλήρες πλ
 
 -
 
-editor_layout_span: Πλάτος
+editor_layout_column_span: Πλάτος
 
 -
 
-editor_layout_start: Βάρδια
+editor_layout_column_start: Βάρδια
 
 -
 
-editor_layout_start_auto: Αυτόματη μετατόπιση μπλοκ
+editor_layout_row_span: Σειρά
+
+-
+
+editor_layout_column_start_auto: Αυτόματη μετατόπιση μπλοκ
 
 -
 

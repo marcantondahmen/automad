@@ -378,6 +378,10 @@ editor_nested_card_shadow: Schlagschatten
 
 -
 
+editor_nested_card_match_row_height: Volle Reihenhöhe
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Erweitern Sie den Block auf volle Breite
 
 -
 
-editor_layout_span: Breite
+editor_layout_column_span: Breite
 
 -
 
-editor_layout_start: Verschiebung
+editor_layout_column_start: Verschiebung
 
 -
 
-editor_layout_start_auto: Blöcke automatisch verschieben
+editor_layout_row_span: Reihenspanne
+
+-
+
+editor_layout_column_start_auto: Blöcke automatisch verschieben.
 
 -
 

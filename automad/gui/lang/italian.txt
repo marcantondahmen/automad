@@ -378,6 +378,10 @@ editor_nested_card_shadow: Ombra esterna
 
 -
 
+editor_nested_card_match_row_height: Altezza completa della fila
+
+-
+
 editor_nested_card_css: CSS
 
 -
@@ -506,15 +510,19 @@ editor_layout_stretch: Espandi il blocco a tutta larghezza
 
 -
 
-editor_layout_span: Larghezza
+editor_layout_column_span: Larghezza
 
 -
 
-editor_layout_start: Cambio
+editor_layout_column_start: Cambio
 
 -
 
-editor_layout_start_auto: Sposta automaticamente i blocchi
+editor_layout_row_span: Campata di fila
+
+-
+
+editor_layout_column_start_auto: Sposta automaticamente i blocchi
 
 -
 
