@@ -49,9 +49,9 @@
 		column-gap: ~"min(8%, var(--am-block-grid-column-gap))";
 		row-gap: var(--am-block-grid-row-gap);
 
-		@media (min-width: 580px) {
+		@media (min-width: 480px) {
 
-			& > .am-block-span {
+			& > .am-block-column-span {
 
 				&-3 {
 					grid-column-end: span 3;
@@ -127,6 +127,49 @@
 			padding: 0;
 			border: none;
 			border-top: var(--am-card-border-width) solid var(--am-card-border-color);
+		}
+
+		& table,
+		& tr,
+		& th,
+		& td {
+			border-color: var(--am-card-color) !important;
+		}
+
+		& .am-button {
+
+			padding: 0 1em;
+			height: 2.4em;
+			line-height: 2.4em;
+			font-size: 1em;
+			color: var(--am-card-color);
+			background-color: transparent;
+			border-color: var(--am-card-border-color);
+
+			&:hover,
+			&:active,
+			&:focus {
+				color: var(--am-card-color);
+				background-color: transparent;
+				border-color: var(--am-card-color);
+			}
+
+			&-primary {
+
+				color: var(--am-card-color);
+				background-color: transparent;
+				border-color: var(--am-card-color);
+
+				&:hover,
+				&:active,
+				&:focus {
+					color: var(--am-card-color);
+					background-color: transparent;
+					border-color: var(--am-card-border-color);
+				}
+
+			}
+
 		}
 
 	}

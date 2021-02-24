@@ -8,15 +8,16 @@
  */
 
 
-.content,
-.am-nested {
+.content {
 
-	& > * {
+	& > *,
+	& .am-nested > * {
 		margin-top: @base-margin-vertical;
 		margin-bottom: @base-margin-vertical;
 	}
 
-	& > :first-child {
+	& > :first-child,
+	& .am-nested > :first-child {
 		margin-top: 0;
 	}
 	
@@ -40,7 +41,17 @@
 		&:hover {
 			border-color: @border-color;
 		}
+
+	}
+
+	& .am-nested-card ol:not([class]) li a,
+	& .am-nested-card ul:not([class]) li a,
+	& .am-nested-card p a:not([class]) {
 		
+		&:hover {
+			border-color: var(--am-card-border-color);
+		}
+
 	}
 	
 	& em {
@@ -61,8 +72,8 @@
 
 		& th,
 		& td {
-			padding: 0.5rem;
-			padding-left: 0;
+			padding: 0.5rem !important;
+			padding-left: 0 !important;
 			font-weight: inherit;
 			border-bottom: 1px solid @border-color;
 			vertical-align: top;
@@ -140,7 +151,8 @@
 
 	}
 
-	& > .am-buttons {
+	& > .am-buttons,
+	& .am-nested > .am-buttons {
 		margin-top: @utility-margin - 0.5rem;
 		margin-bottom: @utility-margin - 0.5rem;
 	}

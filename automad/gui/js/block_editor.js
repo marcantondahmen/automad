@@ -166,7 +166,7 @@
 
 				let msg = event.originalEvent.message;
 
-				if (msg.includes('updateCurrentInput') || msg.includes('TypeError')) {
+				if (msg.includes('closest is not a function')) {
 					event.preventDefault();
 				}
 
