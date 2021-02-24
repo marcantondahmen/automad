@@ -7,14 +7,18 @@ tags: Intro, Post
 -
 
 +main: {
-  "time": 1611962045682,
+  "time": 1614201900725,
   "blocks": [
     {
       "type": "paragraph",
       "data": {
         "text": "A post in Automad is just a page including some meta data, like a date and tags, the post content and a list of related pages at the bottom. Related pages are controlled by common <i>tags</i>. The page content can have a wide selection of <a href=\"https://automad.org/user-guide/using-blocks\">blocks</a> — it includes paragraphs, headings, lists, images, tables, galleries, slider and so on.",
         "large": true,
-        "span": ""
+        "alignment": "left",
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     },
     {
@@ -25,11 +29,14 @@ tags: Intro, Post
         "secondaryText": "",
         "secondaryLink": "",
         "alignment": "left",
-        "span": ""
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     }
   ],
-  "version": "2.18.0"
+  "version": "2.19.2-rc.0"
 }
 
 -

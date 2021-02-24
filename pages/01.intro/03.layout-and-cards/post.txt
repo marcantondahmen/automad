@@ -1,0 +1,346 @@
+title: Layout and Cards
+
+-
+
+tags: Blocks, Intro, Layout
+
+-
+
++main: {
+  "time": 1614201580907,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "While blocks by default are just stacked on top of each other — the block editor also offers some neat <b>options</b> to realize more complex layouts and cards based on a grid.",
+        "large": true,
+        "alignment": "left",
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    },
+    {
+      "type": "nested",
+      "data": {
+        "nestedData": {
+          "time": 1614201249746,
+          "blocks": [
+            {
+              "type": "image",
+              "data": {
+                "url": "https://source.unsplash.com/VYCDTBAP8P4/1000x750",
+                "caption": "",
+                "stretched": false,
+                "columnSpan": false,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            }
+          ],
+          "version": "2.19.2-rc.0"
+        },
+        "isCard": true,
+        "cardStyle": {
+          "shadow": false,
+          "matchRowHeight": false,
+          "color": "",
+          "backgroundColor": "",
+          "borderColor": "",
+          "css": ""
+        },
+        "stretched": "",
+        "columnSpan": 6,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    },
+    {
+      "type": "nested",
+      "data": {
+        "nestedData": {
+          "time": 1614201123785,
+          "blocks": [
+            {
+              "type": "header",
+              "data": {
+                "text": "Grouping Blocks in <br>Nested Editors<br>",
+                "level": 2,
+                "alignment": "left",
+                "stretched": false,
+                "columnSpan": false,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            },
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "You can define how much of the page's width a block should span. Blocks spanning a fraction of the full width automatically line up horizontally. In order to arrange a <b>group of blocks</b> vertically within a grid row, it is possible to embed a nested block editor and arrange its content independently.",
+                "large": true,
+                "alignment": "left",
+                "stretched": false,
+                "columnSpan": false,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            }
+          ],
+          "version": "2.19.2-rc.0"
+        },
+        "isCard": false,
+        "cardStyle": {},
+        "stretched": false,
+        "columnSpan": 6,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    },
+    {
+      "type": "nested",
+      "data": {
+        "nestedData": {
+          "time": 1614033840383,
+          "blocks": [
+            {
+              "type": "header",
+              "data": {
+                "text": "Styling Content<br>as Cards",
+                "level": 2,
+                "alignment": "left",
+                "stretched": "",
+                "span": "",
+                "start": ""
+              }
+            },
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "You also can style blocks of an embedded block editor individually to make them stand out on a page. Just apply some <b>custom</b> colors for the text, the background and borders or make a card drop shadows.&nbsp;",
+                "large": true,
+                "alignment": "left",
+                "stretched": "",
+                "span": "",
+                "start": ""
+              }
+            }
+          ],
+          "version": "2.19.1"
+        },
+        "isCard": false,
+        "cardStyle": {},
+        "stretched": false,
+        "columnSpan": 4,
+        "columnStart": false,
+        "rowSpan": 3
+      }
+    },
+    {
+      "type": "nested",
+      "data": {
+        "nestedData": {
+          "time": 1614201580440,
+          "blocks": [
+            {
+              "type": "image",
+              "data": {
+                "url": "https://source.unsplash.com/VYCDTBAP8P4/1000x1000",
+                "caption": "",
+                "stretched": false,
+                "columnSpan": false,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            },
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "This a <b>nested block editor</b> styled as a card with some sample content such as an image, this text and a button. Cards can contain any kind of blocks.",
+                "large": false,
+                "alignment": "left",
+                "stretched": false,
+                "columnSpan": false,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            },
+            {
+              "type": "buttons",
+              "data": {
+                "primaryText": "Button",
+                "primaryLink": "/intro/layout",
+                "secondaryText": "More",
+                "secondaryLink": "/intro/layout-and-cards",
+                "alignment": "left",
+                "stretched": false,
+                "columnSpan": false,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            }
+          ],
+          "version": "2.19.2-rc.0"
+        },
+        "isCard": true,
+        "cardStyle": {
+          "shadow": true,
+          "matchRowHeight": false,
+          "color": "",
+          "backgroundColor": "#f6f6f9",
+          "borderColor": "#e5e6e8",
+          "css": ""
+        },
+        "stretched": false,
+        "columnSpan": 4,
+        "columnStart": false,
+        "rowSpan": 3
+      }
+    },
+    {
+      "type": "nested",
+      "data": {
+        "nestedData": {
+          "time": 1614201441316,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "It is also possible to <b>arrange</b> blocks of an embedded editor in a grid ...",
+                "large": false,
+                "alignment": "left",
+                "stretched": false,
+                "columnSpan": 8,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            },
+            {
+              "type": "image",
+              "data": {
+                "url": "https://source.unsplash.com/VYCDTBAP8P4/400x400",
+                "caption": "",
+                "stretched": false,
+                "columnSpan": 4,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            }
+          ],
+          "version": "2.19.2-rc.0"
+        },
+        "isCard": true,
+        "cardStyle": {
+          "shadow": false,
+          "matchRowHeight": false,
+          "color": "",
+          "backgroundColor": "#f6f6f9",
+          "borderColor": "#f6f6f9",
+          "css": ""
+        },
+        "stretched": false,
+        "columnSpan": 4,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    },
+    {
+      "type": "nested",
+      "data": {
+        "nestedData": {
+          "time": 1614201457263,
+          "blocks": [
+            {
+              "type": "image",
+              "data": {
+                "url": "https://source.unsplash.com/VYCDTBAP8P4/400x400",
+                "caption": "",
+                "stretched": false,
+                "columnSpan": 4,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            },
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "... and to vertically stack them in one column by letting other blocks in the same row <b>span multiple</b> rows.&nbsp;",
+                "large": false,
+                "alignment": "left",
+                "stretched": false,
+                "columnSpan": 8,
+                "columnStart": false,
+                "rowSpan": false
+              }
+            }
+          ],
+          "version": "2.19.2-rc.0"
+        },
+        "isCard": true,
+        "cardStyle": {
+          "shadow": false,
+          "matchRowHeight": false,
+          "color": "",
+          "backgroundColor": "",
+          "borderColor": "",
+          "css": ""
+        },
+        "stretched": false,
+        "columnSpan": 4,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Now let's add some <b>color</b> to our pagelists and show an unique <b>icon</b> along with the page title.",
+        "large": true,
+        "alignment": "left",
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "Colors and Icons ⟶",
+        "primaryLink": "/intro/colors-and-icons",
+        "secondaryText": "",
+        "secondaryLink": "",
+        "alignment": "left",
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
+      }
+    }
+  ],
+  "version": "2.19.2-rc.0"
+}
+
+-
+
+colorCardText: #181818
+
+-
+
+colorCardBackground: #F6F7F9
+
+-
+
+colorCardBorder: #F6F7F9
+
+-
+
+checkboxHideRelatedPages: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+imageCard: https://source.unsplash.com/VYCDTBAP8P4/1000x1300

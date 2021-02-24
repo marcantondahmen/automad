@@ -7,14 +7,18 @@ tags: Colors, Icons, Intro
 -
 
 +main: {
-  "time": 1611965136353,
+  "time": 1614201913548,
   "blocks": [
     {
       "type": "paragraph",
       "data": {
-        "text": "Use custom <b>colors</b> to align your pages with your artwork or change the color scheme globally. Instead of a preview image, use an <b>icon</b> to represent a page in a pagelist. Read on to learn more about placing pagelist blocks on a page side by side with other content. ",
+        "text": "Use custom <b>colors</b> to align your pages with your artwork or change the color scheme globally. Instead of a preview image, use an <b>icon</b> to represent a page in a pagelist. Read on to learn more about placing pagelist blocks on a page side by side with other content.&nbsp;",
         "large": true,
-        "span": ""
+        "alignment": "left",
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     },
     {
@@ -25,7 +29,10 @@ tags: Colors, Icons, Intro
         "secondaryText": "",
         "secondaryLink": "",
         "alignment": "left",
-        "span": ""
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     },
     {
@@ -41,11 +48,13 @@ tags: Colors, Icons, Intro
         "sortOrder": "asc",
         "file": "/standard/templates/blocks/pagelist/portfolio.php",
         "stretched": false,
-        "span": ""
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     }
   ],
-  "version": "2.18.0"
+  "version": "2.19.2-rc.0"
 }
 
 -

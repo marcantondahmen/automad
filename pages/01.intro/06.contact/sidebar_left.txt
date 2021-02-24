@@ -7,14 +7,18 @@ tags: Intro, Mail
 -
 
 +main: {
-  "time": 1611962791124,
+  "time": 1614201933496,
   "blocks": [
     {
       "type": "paragraph",
       "data": {
-        "text": "This is a typical <b>contact</b> page — just add your mail address to the mail block below and you're done. Note that this page also uses some other settings, for example to make it show up in the footer navigation and a custom background color. ",
+        "text": "This is a typical <b>contact</b> page — just add your mail address to the mail block below and you're done. Note that this page also uses some other settings, for example to make it show up in the footer navigation and a custom background color.&nbsp;",
         "large": true,
-        "span": ""
+        "alignment": "left",
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     },
     {
@@ -25,7 +29,10 @@ tags: Intro, Mail
         "secondaryText": "",
         "secondaryLink": "",
         "alignment": "left",
-        "span": ""
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     },
     {
@@ -38,11 +45,14 @@ tags: Intro, Mail
         "placeholderSubject": "Subject",
         "placeholderMessage": "Message",
         "textButton": "Send ⟶",
-        "span": ""
+        "stretched": false,
+        "columnSpan": false,
+        "columnStart": false,
+        "rowSpan": false
       }
     }
   ],
-  "version": "2.18.0"
+  "version": "2.19.2-rc.0"
 }
 
 -
