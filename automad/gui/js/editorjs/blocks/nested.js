@@ -310,7 +310,7 @@ class AutomadBlockNested {
 					</div>
 					<section 
 					id="${AutomadBlockNested.ids.modalEditor}" 
-					class="am-block-editor-container"
+					class="am-block-editor-container uk-form"
 					></section>
 				</div>
 			</div>

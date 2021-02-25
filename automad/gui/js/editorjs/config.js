@@ -53,9 +53,12 @@ class AutomadEditorConfig {
 
 	}
 
-	static tools(isNested) {
+	static tools(isNested, readOnly) {
 
-		var tools = {};
+		var tools = {},
+			inlineTools = {},
+			inlineAll = false,
+			inlineReduced = false;
 
 		if (!isNested) {
 			tools = {
@@ -68,11 +71,26 @@ class AutomadEditorConfig {
 			};
 		}
 
+		if (!readOnly) {
+			inlineAll = true;
+			inlineReduced = ['italic', 'underline', 'link', 'editorJSStyle'];
+			inlineTools = {
+				underline: Underline,
+				inlineCode: {
+					class: InlineCode,
+					shortcut: 'CMD+SHIFT+M'
+				},
+				marker: Marker,
+				editorJSStyle: EditorJSStyle.StyleInlineTool,
+				editorJSInspector: EditorJSInspector
+			};
+		}
+
 		return Object.assign(tools, {
 
 			paragraph: {
 				class: AutomadBlockParagraph,
-				inlineToolbar: true,
+				inlineToolbar: inlineAll,
 				config: {
 					isNested: isNested
 				}
@@ -80,7 +98,7 @@ class AutomadEditorConfig {
 			header: {
 				class: AutomadBlockHeader,
 				shortcut: 'CMD+SHIFT+H',
-				inlineToolbar: ['italic', 'underline', 'link', 'editorJSStyle'],
+				inlineToolbar: inlineReduced,
 				config: {
 					levels: [1, 2, 3, 4, 5, 6],
 					defaultLevel: 2,
@@ -89,21 +107,21 @@ class AutomadEditorConfig {
 			},
 			lists: {
 				class: AutomadBlockList,
-				inlineToolbar: true,
+				inlineToolbar: inlineAll,
 				config: {
 					isNested: isNested
 				}
 			},
 			table: {
 				class: AutomadBlockTable,
-				inlineToolbar: true,
+				inlineToolbar: inlineAll,
 				config: {
 					isNested: isNested
 				}
 			},
 			quote: {
 				class: AutomadBlockQuote,
-				inlineToolbar: true,
+				inlineToolbar: inlineAll,
 				config: {
 					isNested: isNested
 				}
@@ -117,7 +135,7 @@ class AutomadEditorConfig {
 			},
 			image: {
 				class: AutomadBlockImage,
-				inlineToolbar: true,
+				inlineToolbar: inlineAll,
 				config: {
 					allowStretching: true,
 					isNested: isNested
@@ -139,7 +157,7 @@ class AutomadEditorConfig {
 			},
 			buttons: {
 				class: AutomadBlockButtons,
-				inlineToolbar: ['italic', 'bold', 'underline', 'editorJSStyle'],
+				inlineToolbar: inlineReduced,
 				config: {
 					isNested: isNested
 				}
@@ -193,20 +211,9 @@ class AutomadEditorConfig {
 					allowStretching: true,
 					isNested: isNested
 				}
-			},
-			underline: Underline,
-			inlineCode: {
-				class: InlineCode,
-				shortcut: 'CMD+SHIFT+M'
-			},
-			marker: Marker,
-			editorJSStyle: {
-				class: EditorJSStyle,
-				shortcut: 'CMD+SHIFT+S'
-			},
-			editorJSInspector: EditorJSInspector
+			}
 
-		});
+		}, inlineTools);
 
 	}
 

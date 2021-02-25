@@ -71,7 +71,7 @@
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
-				tools: AutomadEditorConfig.tools(options.isNested),
+				tools: AutomadEditorConfig.tools(options.isNested, options.readOnly),
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
@@ -182,14 +182,16 @@
 
 					var block = $(this)
 								.closest(`.${AutomadEditorConfig.cls.editor}`)
-								.find(`.cdx-block, .${AutomadEditorConfig.cls.blockContent}`)
+								.find(`.cdx-block, .${AutomadEditorConfig.cls.blockContent}, .ce-block`)
 								.first()
 								.get(0),
 						temp = document.createElement('div');
 
 					// Trigger a fake block changed event by adding and removing a temporary div.
-					block.appendChild(temp);
-					block.removeChild(temp);
+					try {
+						block.appendChild(temp);
+						block.removeChild(temp);
+					} catch(e) {}
 
 				};
 
