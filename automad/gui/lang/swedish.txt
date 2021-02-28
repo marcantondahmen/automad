@@ -78,6 +78,10 @@ btn_getting_data: Få data ...
 
 -
 
+btn_help: Hjälp
+
+-
+
 btn_hide_page: Dölj sida i navigering
 
 -

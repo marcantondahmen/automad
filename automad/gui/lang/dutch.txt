@@ -78,6 +78,10 @@ btn_getting_data: Gegevens ophalen ...
 
 -
 
+btn_help: Helpen
+
+-
+
 btn_hide_page: Pagina verbergen in navigatie
 
 -

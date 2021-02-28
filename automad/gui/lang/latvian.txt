@@ -78,6 +78,10 @@ btn_getting_data: Notiek datu iegūšana ...
 
 -
 
+btn_help: Palīdzība
+
+-
+
 btn_hide_page: Slēpt lapu navigācijā
 
 -

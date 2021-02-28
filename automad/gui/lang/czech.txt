@@ -78,6 +78,10 @@ btn_getting_data: Získávání dat ...
 
 -
 
+btn_help: Pomoc
+
+-
+
 btn_hide_page: Skrýt stránku v navigaci
 
 -

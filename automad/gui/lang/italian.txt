@@ -78,6 +78,10 @@ btn_getting_data: Recupero dati ...
 
 -
 
+btn_help: Aiuto
+
+-
+
 btn_hide_page: Nascondi pagina in navigazione
 
 -

@@ -78,6 +78,10 @@ btn_getting_data: Sonraí a Fháil ...
 
 -
 
+btn_help: Cabhrú
+
+-
+
 btn_hide_page: Folaigh Leathanach sa Nascleanúint
 
 -

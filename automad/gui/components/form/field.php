@@ -553,6 +553,7 @@ HTML;
 			
 		} else if (strpos($key, '+') === 0) {
 
+			$html .= '<a href="https://automad.org/user-guide/using-blocks" class="am-form-block-help uk-button uk-button-mini" target="_blank">' . Text::get('btn_help') . '</a>';
 			$editorId = 'am-block-editor-' . str_replace('+', '', $key);
 			$html .= self::fieldBlockEditor($editorId, self::fullscreenBar($Automad, $label), $attr, $value);
 

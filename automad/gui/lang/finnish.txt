@@ -78,6 +78,10 @@ btn_getting_data: Haetaan tietoja ...
 
 -
 
+btn_help: Auta
+
+-
+
 btn_hide_page: Piilota sivu navigoinnissa
 
 -

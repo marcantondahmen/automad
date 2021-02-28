@@ -78,6 +78,10 @@ btn_getting_data: Pridobivanje podatkov ...
 
 -
 
+btn_help: Pomoč
+
+-
+
 btn_hide_page: Skrij stran v navigaciji
 
 -

@@ -78,6 +78,10 @@ btn_getting_data: Daten abrufen ...
 
 -
 
+btn_help: Hilfe
+
+-
+
 btn_hide_page: Seite in Navigation ausblenden
 
 -
