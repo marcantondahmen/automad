@@ -51,8 +51,7 @@ $output = array();
 if ($template = Core\Request::post('template')) {
 
 	if (FileSystem::write(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM, $template)) {
-		$Cache = new Core\Cache();
-		$Cache->clear();
+		Core\Cache::clear();
 		$output['success'] = Text::get('success_saved');
 	}
 

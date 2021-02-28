@@ -51,8 +51,7 @@ $output = array();
 if (Core\Request::post('reset')) {
 
 	if (Headless::resetTemplate()) {
-		$Cache = new Core\Cache();
-		$Cache->clear();
+		Core\Cache::clear();
 		$output['trigger'] = 'resetHeadlessTemplate';
 		$output['success'] = Text::get('success_reset_headless');
 	}

@@ -120,6 +120,47 @@ class Cache {
 	
 	private $siteMTime;
 	
+
+	/**
+	 *	Clearing the cache is done by simply setting the stored Site's mTime to the current timestamp. 
+	 *	That will trigger a full cache rebuild.
+	 */
+
+	public static function clear() {
+		
+		Debug::log('Resetting the site modification time');
+		Cache::writeSiteMTime(time());
+		
+	}
+
+
+	/**
+	 *	Read the site's modification time from file.
+	 *
+	 *	@return int The site's modification time.
+	 */
+
+	private static function readSiteMTime() {
+
+		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
+
+	}
+
+
+	/**
+	 *	Write the site's modification time to the cache.
+	 *
+	 *	@param int $siteMTime
+	 */
+
+	private static function writeSiteMTime($siteMTime) {
+
+		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
+		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+
+	}
+
 	
 	/**
 	 *	The constructor checks whether caching is enabled for the current request and
@@ -182,19 +223,6 @@ class Cache {
 		
 	}
 	
-
-	/**
-	 *	Clearing the cache is done by simply setting the stored Site's mTime to the current timestamp. 
-	 *	That will trigger a full cache rebuild.
-	 */
-
-	public function clear() {
-		
-		Debug::log('Resetting the site modification time');
-		$this->writeSiteMTime(time());
-		
-	}
-
 
 	/**
 	 *	Verify if the cached version of the visited page is existing and still up to date.
@@ -448,46 +476,18 @@ class Cache {
 			Debug::log('Scanned directories to get the site modification time');
 			Debug::log($lastModifiedItem, 'Last modified item'); 
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime');
-			$this->writeSiteMTime($siteMTime);
+			Cache::writeSiteMTime($siteMTime);
 		
 		} else {
 			
 			// In between this delay, it just gets loaded from a file.
-			$siteMTime = $this->readSiteMTime();
+			$siteMTime = Cache::readSiteMTime();
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime is');
 			
 		}
 		
 		return $siteMTime;
 		
-	}
-
-
-	/**
-	 *	Read the site's modification time from file.
-	 *
-	 *	@return int The site's modification time.
-	 */
-
-	private function readSiteMTime() {
-
-		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
-		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-
-	}
-
-
-	/**
-	 *	Write the site's modification time to the cache.
-	 *
-	 *	@param int $siteMTime
-	 */
-
-	private function writeSiteMTime($siteMTime) {
-
-		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
-		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
-
 	}
 
 

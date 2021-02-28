@@ -55,8 +55,7 @@ $output['trigger'] = 'composerDone';
 	
 if (!$output['error']) {
 	$output['success'] = Text::get('success_packages_updated_all');
-	$Cache = new Core\Cache();
-	$Cache->clear();
+	Core\Cache::clear();
 }
 
 $this->jsonOutput($output);

@@ -57,8 +57,7 @@ if ($package = Core\Request::post('package')) {
 		
 	if (!$output['error']) {
 		$output['success'] = Text::get('success_package_updated') . '<br>' . $package;
-		$Cache = new Core\Cache();
-		$Cache->clear();
+		Core\Cache::clear();
 	}
 
 }

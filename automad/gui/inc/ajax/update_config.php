@@ -115,8 +115,7 @@ if (Core\Config::write($config)) {
 
 	Core\Debug::log($config, 'Updated config file');
 	$output['success'] = Text::get('success_config_update');
-	$Cache = new Core\Cache();
-	$Cache->clear();
+	Core\Cache::clear();
 
 } else {
 

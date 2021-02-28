@@ -170,8 +170,7 @@ class Content {
 	
 	private function clearCache() {
 		
-		$Cache = new Core\Cache();
-		$Cache->clear();
+		Core\Cache::clear();
 		
 	}
 	
@@ -236,6 +235,7 @@ class Content {
 					
 					if (!$output['error'] = FileSystem::renameMedia($cachedFile, $resizedFile)) {
 						$output['success'] = Text::get('success_created') . ' "' . basename($resizedFile) . '"';
+						$this->clearCache();
 					}
 					
 				} else {

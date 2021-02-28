@@ -62,8 +62,7 @@ if ($json = Core\Request::post('json')) {
 		}
 
 		if (Core\Config::write($config)) {
-			$Cache = new Core\Cache();
-			$Cache->clear();
+			Core\Cache::clear();
 			$output['reload'] = true;
 		} else {
 			$output['error'] = Text::get('error_permission') . '<br>' . AM_CONFIG;
