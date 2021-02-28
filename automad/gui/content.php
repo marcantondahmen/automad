@@ -619,6 +619,7 @@ class Content {
 				}
 
 				FileSystem::write($path, $data);
+				$this->clearCache();
 
 			} 
 
