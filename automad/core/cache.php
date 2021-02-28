@@ -184,12 +184,14 @@ class Cache {
 	
 
 	/**
-	 *	Clearing the cache is done by simply deleting the stored Site's mTime file. That will trigger a full cache rebuild.
+	 *	Clearing the cache is done by simply setting the stored Site's mTime to the current timestamp. 
+	 *	That will trigger a full cache rebuild.
 	 */
 
 	public function clear() {
 		
-		FileSystem::deleteFile(AM_FILE_SITE_MTIME);
+		Debug::log('Resetting the site modification time');
+		$this->writeSiteMTime(time());
 		
 	}
 
@@ -443,17 +445,15 @@ class Cache {
 			$siteMTime = $mTimes[$lastModifiedItem];
 			
 			// Save mTime
-			FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
-			Debug::log('Scanned directories and saved Site-mTime.');
+			Debug::log('Scanned directories to get the site modification time');
 			Debug::log($lastModifiedItem, 'Last modified item'); 
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime');
-			Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+			$this->writeSiteMTime($siteMTime);
 		
 		} else {
 			
 			// In between this delay, it just gets loaded from a file.
-			$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-			Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+			$siteMTime = $this->readSiteMTime();
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime is');
 			
 		}
@@ -461,8 +461,36 @@ class Cache {
 		return $siteMTime;
 		
 	}
-	
-	
+
+
+	/**
+	 *	Read the site's modification time from file.
+	 *
+	 *	@return int The site's modification time.
+	 */
+
+	private function readSiteMTime() {
+
+		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
+
+	}
+
+
+	/**
+	 *	Write the site's modification time to the cache.
+	 *
+	 *	@param int $siteMTime
+	 */
+
+	private function writeSiteMTime($siteMTime) {
+
+		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
+		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+
+	}
+
+
 	/**
 	 *	Read the rendered page from the cached version.
 	 *
