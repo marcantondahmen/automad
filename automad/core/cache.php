@@ -123,7 +123,9 @@ class Cache {
 
 	/**
 	 *	Clearing the cache is done by simply setting the stored Site's mTime to the current timestamp. 
-	 *	That will trigger a full cache rebuild.
+	 *	That will trigger a full cache rebuild. Note that this method is only being called from outside
+	 *	and doesn't require any cache instance. It therefore should be static in order to avoid unneeded 
+	 *	scanning of files when creating a new cache object.
 	 */
 
 	public static function clear() {
@@ -135,7 +137,8 @@ class Cache {
 
 
 	/**
-	 *	Read the site's modification time from file.
+	 *	Read the site's modification time from file. 
+	 *	This methods doesn't require any cache instance and should be static for performance reasons.
 	 *
 	 *	@return int The site's modification time.
 	 */
@@ -149,7 +152,9 @@ class Cache {
 
 
 	/**
-	 *	Write the site's modification time to the cache.
+	 *	Write the site's modification time to the cache. 
+	 *	This method is also used in other static methods and doesn't require any cache instance. 
+	 *	It therefore should be static for performance reasons.
 	 *
 	 *	@param int $siteMTime
 	 */

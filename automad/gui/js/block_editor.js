@@ -166,7 +166,7 @@
 
 				let msg = event.originalEvent.message;
 
-				if (msg.includes('closest is not a function')) {
+				if (msg.includes('closest is not a function') || msg.includes('Uncaught TypeError')) {
 					event.preventDefault();
 				}
 
