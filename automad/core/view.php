@@ -1110,9 +1110,9 @@ class View {
 					
 					Debug::log($matches['email'], 'Obfuscating');
 						
-					$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
+					$html = "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>";
 					$html .= strrev($matches['email']);
-					$html .= "</a>&#x200E;";
+					$html .= '</a>&#x200E;';
 			
 					return $html;
 					

@@ -59,7 +59,7 @@ class View_Test extends TestCase {
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'set_01' => 'Test 1, Test 2',
 			'session_get_01' => 'Session Test',
-			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
+			'email_01' => '<a href="#">test</a>' . "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" . '<a href="#">test</a>',
 			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
 			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
 			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
@@ -184,7 +184,7 @@ class View_Test extends TestCase {
 
 		$data = array();
 		$templates = array(
-			'email_01' => '<a href="#">test</a><a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">moc.tset-tset.tset@tset-tset.tset</a>&#x200E;<a href="#">test</a>',
+			'email_01' => '<a href="#">test</a>' . "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" . '<a href="#">test</a>',
 			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
 			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
 			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
