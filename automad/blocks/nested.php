@@ -66,50 +66,71 @@ class Nested {
 		$json = json_encode($data->nestedData);
 		$html = Core\Blocks::render($json, $Automad);
 		$style = '';
-		$cardClass = '';
+		$class = '';
 
-		if (!empty($data->isCard)) {
+		if (!empty($data->style)) {
 
-			$cardClass = ' am-nested-card';
-			$cardStyle = array();
-			
-			if (!empty($data->cardStyle) && is_object($data->cardStyle)) {
+			if (!empty($data->style->backgroundImage) || 
+				!empty($data->style->backgroundColor) ||
+				!empty($data->style->shadow) || 
+				(!empty($data->style->borderWidth) && strpos($data->style->borderWidth, '0') !== 0) 
+			) {
+				$class = ' am-nested-padding';
+			}
 
-				$cardStyle = $data->cardStyle;
-				$items = array(
-					'color' => '--am-card-color',
-					'backgroundColor' => '--am-card-background',
-					'borderColor' => '--am-card-border-color',
-				);
+			if (!empty($data->style->card)) {
+				$class = ' am-nested-card';
+			}
 
-				foreach ($items as $key => $property) {
-					if (!empty($cardStyle->$key)) {
-						$style .= "$property: {$cardStyle->$key}; ";
-					}
-				} 
+			if (!empty($data->style->backgroundImage)) {
+				$style .= " background-image: url('{$data->style->backgroundImage}');"; 
+			}
 
-				if (!empty($cardStyle->shadow)) {
-					$style .= 'box-shadow: var(--am-card-shadow); ';
+			if (!empty($data->style->matchRowHeight)) {
+				$style .= ' height: 100%;';
+			}
+
+			if (!empty($data->style->shadow)) {
+				$style .= ' box-shadow: var(--am-nested-shadow);';
+			}
+
+			foreach(array(
+				'backgroundColor',
+				'borderWidth',
+				'borderRadius',
+				'paddingTop',
+				'paddingBottom'
+			) as $item) {
+
+				$property = strtolower(preg_replace('/([A-Z])/', '-$1', $item));
+
+				if (!empty($data->style->$item)) {
+					$style .= " $property: {$data->style->$item};";
 				}
 
-				if (!empty($cardStyle->matchRowHeight)) {
-					$style .= 'height: 100%; ';
-				}
+			}
 
-				if (!empty($cardStyle->css)) {
-					$style .= preg_replace('/\s+/s', ' ', $cardStyle->css);
-				}
+			foreach(array(
+				'color',
+				'borderColor'
+			) as $item) {
 
-				if ($style) {
-					$style = 'style="' . trim($style) . '"';
+				$property = strtolower(preg_replace('/([A-Z])/', '-$1', $item));
+
+				if (!empty($data->style->$item)) {
+					$style .= " --am-nested-$property: {$data->style->$item};";
 				}
 
 			}
 
 		}
 
+		if ($style) {
+			$style = 'style="' . trim($style) . '"';
+		}
+
 		return <<< HTML
-				<section class="am-nested{$cardClass}" $style>
+				<section class="am-container am-nested{$class}" $style>
 					$html
 				</section>
 HTML;

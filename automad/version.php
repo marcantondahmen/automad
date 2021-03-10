@@ -1,1 +1,1 @@
-<?php define('AM_VERSION', '1.6.12+124'); ?>
+<?php define('AM_VERSION', '1.6.12+125'); ?>
