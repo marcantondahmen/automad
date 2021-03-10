@@ -415,7 +415,6 @@ class AutomadBlockNested {
 	showModal() {
 
 		const create = Automad.util.create,
-			  t = AutomadEditorTranslation.get,
 			  ne = Automad.nestedEditor;
 
 		this.destroyModal();
@@ -440,6 +439,7 @@ class AutomadBlockNested {
 
 		this.container.appendChild(this.modalWrapper);
 		this.initToggles();
+		this.applyDialogSize();
 
 		ne.$(`#${AutomadBlockNested.ids.modalDropdown}`).on('hide.uk.dropdown', () => {
 			this.saveStyleSettings();
@@ -472,6 +472,24 @@ class AutomadBlockNested {
 		});
 
 		modal.show();
+
+	}
+
+	applyDialogSize() {
+
+		const dialog = this.modalWrapper.querySelector('.uk-modal-dialog');
+		var span = 0.7;
+
+		if (this.data.columnSpan) {
+			span = this.data.columnSpan / 12;
+		} 
+
+		if (this.data.stretched) {
+			span = 1;
+		}
+
+		dialog.style.width = `${span * 74}rem`;
+		dialog.style.maxWidth = '90vw';
 
 	}
 
