@@ -110,7 +110,6 @@
 		
 		height: 10rem;
 
-
 		&:before {
 			width: 1.4rem;
 			height: 1.4rem;
@@ -135,8 +134,15 @@
 			row-gap: 0;
 
 			& > .ce-block {
+
 				grid-column-start: auto;
 				grid-column-end: span 12;
+
+				& .ce-block__content {
+					box-sizing: border-box;
+					height: 100%;
+				}
+
 			}
 
 			& > [class*="columnSpan-"] > .ce-block__content {

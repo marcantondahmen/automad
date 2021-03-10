@@ -36,6 +36,8 @@
 .am-block-nested {
 
 	position: relative;
+	box-sizing: border-box;
+	height: 100%;
 
 	&.am-block-editor-container {
 		border: none;
@@ -48,6 +50,10 @@
 	}
 
 	& section {
+
+		display: block;
+		box-sizing: border-box;
+		border-radius: 0.25rem;
 
 		&:after {
 			content: '';
@@ -80,7 +86,7 @@
 		.transition(opacity 0.2s;);
 
 		.ce-block--focused & {
-			opacity: 0.5;
+			opacity: 0.2;
 			pointer-events: auto;
 		}
 
@@ -101,30 +107,22 @@
 	& .am-nested-edit-button {
 		position: absolute;
 		display: block;
-		width: 100%;
-		bottom: 0;
-		right: 0;
+		width: auto;
+		bottom: 2px;
+		left: 2px;
+		right: 2px;
 		padding: 0;
 		line-height: @button-height;
 		font-size: 1rem;
 		text-align: center;
-		border-radius: 0.25rem;
-		color: @am-text !important;
-		background-color: @am-bg;
+		border-radius: @am-radius;
+		color: @button-color !important;
+		background-color: @button-background;
 		.shadow;
-	}
-
-	&-card {
-
-		& section:after {
-			border: @am-border-width solid @am-text;
-		}
-
 	}
 
 	& .ce-block {
 		padding: 0 0 0.5rem 0 !important;
-		margin: 0;
 	}
 
 	& .ce-block__content {
@@ -139,10 +137,7 @@
 		}
 
 		& .uk-modal-dialog {
-			width: 45rem;
-			padding: 0.3rem;
-			padding-top: 0.6rem;
-			border-radius: @am-block-radius + 0.6rem;
+			width: 80rem;
 			color: @am-text;
 			background-color: @am-bg;
 		}
@@ -151,12 +146,19 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 0 0.5rem;
-			margin-bottom: 0.4rem;
+			margin: -@modal-dialog-padding;
+			margin-bottom: 1rem;
+			padding: @modal-dialog-padding - 0.5rem;
+			border-bottom: @am-hairline;
+		}
+
+		& .am-nested-style-button {
+			border-color: transparent !important;
 		}
 
 		& .uk-modal-close {
 
+			padding: 0 0.25rem;
 			color: @am-text;
 
 			&:hover {
@@ -166,13 +168,14 @@
 		}
 
 		& .uk-dropdown {
-			padding: 0.5rem;
+			padding: 0.6rem;
 			max-width: 85vw;
-			width: 20rem;
+			width: 35rem;
+			border-radius: 0.45rem;
 		}
 
 		& .uk-modal-dialog > .am-block-editor-container {
-			margin-bottom: 0 !important;
+			border-radius: @am-radius;
 		}
 
 	}

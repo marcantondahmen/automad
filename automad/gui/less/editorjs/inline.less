@@ -105,6 +105,7 @@
 	& .ce-inline-toolbar__actions {
 
 		margin-top: 0.36rem;
+		color: @am-text;
 		
 		& input {
 			.shadow;
@@ -123,7 +124,13 @@
 			}
 
 			& > div {
-				margin-left: 0 !important;
+				margin: 0 !important;
+			}
+
+			& .delete-button {
+				width: 2.5rem;
+				text-align: center;
+				margin-right: -0.5rem !important;
 			}
 
 			& input:not(:focus) {

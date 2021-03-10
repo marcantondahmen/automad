@@ -104,6 +104,7 @@
 	& .am-block-label {
 
 		display: inline-block;
+		max-width: 100%;
 		margin-top: @utility-margin;
 		margin-bottom: @form-stacked-margin-bottom;
 		padding: 0 0 0.14rem 0;
@@ -113,6 +114,9 @@
 		line-height: @button-mini-height;
 		color: @am-text;
 		background-color: @am-bg;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		
 		&:not(.uk-margin-top-remove) {
 			margin-top: @utility-margin-small !important;
