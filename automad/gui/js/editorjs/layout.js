@@ -245,7 +245,7 @@ class AutomadLayout {
 			alignButton = function () { layout.alignButton() };
 
 		Automad.layout.$(document).on(
-			'mousedown click',
+			'mousedown',
 			`#${editorId} .${AutomadEditorConfig.cls.block}, #${editorId} .${AutomadEditorConfig.cls.redactor}`,
 			function () {
 				setTimeout(alignButton, 50);
@@ -253,7 +253,7 @@ class AutomadLayout {
 		);
 
 		Automad.layout.$(document).on(
-			'mousedown click',
+			'mousedown',
 			`#${editorId} .${AutomadEditorConfig.cls.settingsLayout} div`,
 			alignButton
 		);

@@ -41,6 +41,7 @@ class AutomadEditorConfig {
 		return {
 			editor: 'codex-editor',
 			redactor: 'codex-editor__redactor',
+			toolbar: 'ce-toolbar',
 			actionsButton: 'ce-toolbar__actions',
 			actionsOpened: 'ce-toolbar__actions--opened',
 			block: 'ce-block',

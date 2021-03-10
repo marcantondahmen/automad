@@ -48,8 +48,11 @@
 
 			const holder = editor.configuration.holder,
 				  inputs = holder.querySelectorAll('input, select'),
-				  editables = holder.querySelectorAll('[contenteditable]');
+				  editables = holder.querySelectorAll('[contenteditable]'),
+				  toolbar = holder.querySelector(`.${AutomadEditorConfig.cls.toolbar}`);
 
+			toolbar.remove();
+			
 			Array.from(inputs).forEach((element) => {
 				element.setAttribute('readonly', true);
 				element.setAttribute('disabled', true);
