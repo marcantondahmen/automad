@@ -53,13 +53,6 @@ class Blocks {
 	
 
 	/**
-	 * 	True if the page contains a block variable.
-	 */
-
-	private static $pageHasBlocks = false;
-
-
-	/**
 	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
 	 */
 
@@ -73,11 +66,6 @@ class Blocks {
 	 */
 
 	public static function injectAssets($str) {
-
-		// If no block was rendered before, just return $str.
-		if (!self::$pageHasBlocks) {
-			return $str;
-		}
 
 		$versionSanitized = Str::sanitize(AM_VERSION);
 		$css = AM_BASE_URL . '/automad/blocks/dist/blocks.min.css?v=' . $versionSanitized;
@@ -108,7 +96,6 @@ HTML;
 
 	public static function render($json, $Automad) {
 		
-		self::$pageHasBlocks = true;
 		$gridOpen = false;
 		$data = json_decode($json);
 		$html = '';
@@ -145,10 +132,7 @@ HTML;
 				// Stretch block.
 				if (!empty($block->data->stretched)) {
 					$blockHtml = <<< HTML
-								<div 
-								class="am-stretched" 
-								style="width: 100%; max-width: 100%;"
-								>
+								<div class="am-stretched">
 									$blockHtml
 								</div>
 HTML;

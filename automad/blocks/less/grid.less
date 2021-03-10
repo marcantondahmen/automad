@@ -39,9 +39,9 @@
 	grid-template-columns: repeat(12, 1fr);
 	column-gap: ~"min(8%, var(--am-block-grid-column-gap))";;
 	row-gap: var(--am-block-grid-row-gap);
-	margin: var(--am-block-grid-margin) 0;
+	margin: var(--am-block-grid-margin) auto;
 	width: var(--am-block-grid-width) !important;
-	max-width: var(--am-block-grid-width) !important;
+	max-width: var(--am-block-grid-max-width) !important;
 
 	& > [class*="am-block-column-span-"] {
 		grid-column-start: auto;

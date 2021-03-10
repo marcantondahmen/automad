@@ -1,0 +1,89 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.am-container {
+
+	overflow: hidden;
+	
+	&:not(.am-nested),
+	.am-stretched & {
+		padding: 0 var(--am-container-padding);
+	}
+
+	& > * {
+		max-width: var(--am-block-max-width);
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	& > * {
+		margin-top: var(--am-block-margin-vertical);
+		margin-bottom: var(--am-block-margin-vertical);
+	}
+
+	& > :first-child {
+		margin-top: 0;
+	}
+
+	& > form,
+	& > figure,
+	& > .am-nested,
+	& > .am-block-grid {
+
+		margin-top: var(--am-block-figure-margin-vertical);
+		margin-bottom: var(--am-block-figure-margin-vertical);
+
+		& > :first-child {
+			margin-top: 0 !important;
+		}
+
+	}
+
+	& > .am-buttons {
+		--am-block-margin-vertical: ~"calc(var(--am-block-figure-margin-vertical) - var(--am-button-margin))";
+	}
+
+}
+
+.am-stretched {
+	max-width: none !important;
+	padding: 0;
+}
+
+.am-stretched,
+.am-container:not(.am-nested) {
+	margin-left: ~"calc(var(--am-container-margin-negative) * -1)" !important;
+	margin-right: ~"calc(var(--am-container-margin-negative) * -1)" !important;
+}

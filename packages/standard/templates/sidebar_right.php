@@ -2,7 +2,7 @@
 <@ elements/header.php @>
 	<div class="uk-flex">
 		<div class="uk-width-large-3-4">
-			<div class="content uk-block sidebar-block">
+			<div class="am-container content uk-block sidebar-block">
 				<@ elements/content.php @>
 				<@ elements/related_simple.php @>
 			</div>

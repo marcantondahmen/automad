@@ -35,6 +35,13 @@
 
 .am-nested {
 
+	overflow: hidden;
+	color: var(--am-nested-color);
+	background-color: transparent;
+	background-size: cover;
+	background-position: 50% 50%;
+	border: 0 solid var(--am-nested-border-color);
+
 	& > :first-child {
 		margin-top: 0;
 	}
@@ -86,28 +93,25 @@
 	&-card {
 
 		box-sizing: border-box;
-		overflow: hidden;
-		border-radius: var(--am-card-radius);
-		border: var(--am-card-border-width) solid var(--am-card-border-color);
 		box-shadow: none;
-		color: var(--am-card-color);
-		background-color: var(--am-card-background);
-
+		padding: 0;
+		
 		& > *,
 		& .am-block-grid > * > * {
-			margin: 0 !important;
-			padding: var(--am-card-padding);
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+			padding: var(--am-nested-padding);
 		}
 
 		& > figure,
 		& .am-block-grid > * > figure {
 
-			padding: var(--am-card-figure-padding);
+			padding: var(--am-nested-figure-padding);
 
 			& > blockquote,
 			& > figcaption {
-				margin: ~"calc(-1 * var(--am-card-figure-padding))";
-				padding: var(--am-card-padding);
+				margin: ~"calc(-1 * var(--am-nested-figure-padding))";
+				padding: var(--am-nested-padding);
 			}
 
 		}
@@ -123,51 +127,65 @@
 		}
 
 		& hr {
-			margin: var(--am-card-padding) 0 !important;
+			margin: var(--am-nested-padding) 0 !important;
 			padding: 0;
-			border: none;
-			border-top: var(--am-card-border-width) solid var(--am-card-border-color);
 		}
 
 		& table,
 		& tr,
 		& th,
 		& td {
-			border-color: var(--am-card-color) !important;
+			border-color: var(--am-nested-color) !important;
 		}
 
 		& .am-button {
-
 			padding: 0 1em;
 			height: 2.4em;
 			line-height: 2.4em;
 			font-size: 1em;
-			color: var(--am-card-color);
+		}
+
+	}
+
+	& h1,
+	& h2,
+	& h3,
+	& h4,
+	& h5,
+	& h6 {
+		color: inherit;
+	}
+
+	& hr {
+		border-color: var(--am-nested-border-color);
+	}
+
+	& .am-button {
+
+		color: var(--am-nested-color);
+		background-color: transparent;
+		border-color: var(--am-nested-border-color);
+
+		&:hover,
+		&:active,
+		&:focus {
+			color: var(--am-nested-color);
 			background-color: transparent;
-			border-color: var(--am-card-border-color);
+			border-color: var(--am-nested-color);
+		}
+
+		&-primary {
+
+			color: var(--am-nested-color);
+			background-color: transparent;
+			border-color: var(--am-nested-color);
 
 			&:hover,
 			&:active,
 			&:focus {
-				color: var(--am-card-color);
+				color: var(--am-nested-color);
 				background-color: transparent;
-				border-color: var(--am-card-color);
-			}
-
-			&-primary {
-
-				color: var(--am-card-color);
-				background-color: transparent;
-				border-color: var(--am-card-color);
-
-				&:hover,
-				&:active,
-				&:focus {
-					color: var(--am-card-color);
-					background-color: transparent;
-					border-color: var(--am-card-border-color);
-				}
-
+				border-color: var(--am-nested-border-color);
 			}
 
 		}

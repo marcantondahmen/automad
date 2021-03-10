@@ -61,8 +61,23 @@
 		--color-card-border: #2E2E2E;
 	}
 
-	// Block Row Columns
+	// Blocks
+
+	// Container
+	--am-block-max-width: @block-max-width;
+	--am-block-margin-vertical: @base-margin-vertical;
+	--am-block-figure-margin-vertical: @utility-margin;
+	--am-container-padding: @utility-container-padding-horizontal;
+	--am-container-margin-negative: @utility-container-padding-horizontal;
+
+	@media (min-width: @breakpoint-large) {
+		--am-container-padding: @utility-container-large-padding-horizontal;
+		--am-container-margin-negative: @utility-container-large-padding-horizontal;
+	}
+
+	// Grid
 	--am-block-grid-width: 100%;
+	--am-block-grid-max-width: 100%;
 	--am-block-grid-column-gap: @utility-margin;
 	--am-block-grid-row-gap: @utility-margin;
 	--am-block-grid-margin: @utility-margin;

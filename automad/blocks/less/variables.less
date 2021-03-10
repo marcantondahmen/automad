@@ -35,21 +35,26 @@
 
 :root {
 
-	// Block Row Columns
+	// Container
+	--am-block-max-width: 50rem;
+	--am-block-margin-vertical: 2rem;
+	--am-block-figure-margin-vertical: 4rem;
+	--am-container-padding: 2rem;
+	--am-container-margin-negative: var(--am-container-padding);
+
+	// Grid
 	--am-block-grid-width: 100%;
+	--am-block-grid-max-width: 100rem;
 	--am-block-grid-column-gap: 2rem;
 	--am-block-grid-row-gap: 2rem;
 	--am-block-grid-margin: 2rem;
 
-	// Cards
-	--am-card-padding: 1.2rem;
-	--am-card-figure-padding: 0;
-	--am-card-radius: 0.6rem;
-	--am-card-border-color: #E2E2E2;
-	--am-card-border-width: 2px;
-	--am-card-shadow: 0 0.3rem 2rem rgba(0,0,0,0.1);
-	--am-card-color: inherit;
-	--am-card-background: transparent;
+	// Nested & Cards
+	--am-nested-padding: 1.2rem;
+	--am-nested-figure-padding: 0;
+	--am-nested-shadow: 0 0.3rem 2rem rgba(0,0,0,0.1);
+	--am-nested-color: inherit;
+	--am-nested-border-color: inherit;
 
 	// Gallery
 	--am-gallery-gap: 10px;
@@ -93,7 +98,7 @@
 	--am-mail-button-hover-border: 1px solid #222222;
 
 	// Buttons 
-	--am-button-margin: 5px;
+	--am-button-margin: 0.2rem;
 	--am-button-padding: 0 1.5rem;
 	--am-button-font-size: 1.15rem;
 	--am-button-height: 2.75rem;
