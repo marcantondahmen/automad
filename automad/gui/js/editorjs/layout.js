@@ -196,52 +196,44 @@ class AutomadLayout {
 
 	}
 
-	applyLayout() {
+	applyLayout(callback = false) {
 
 		var editor = this.editor,
 			apply = function (data) {
 
-			for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
+				for (var i = 0; i < editor.blocks.getBlocksCount(); i++) {
 
-				var block = editor.blocks.getBlockByIndex(i).holder;
+					var block = editor.blocks.getBlockByIndex(i).holder;
 
-				if (data.blocks[i] !== undefined) {
+					if (data.blocks[i] !== undefined) {
 
-					['columnSpan', 'columnStart', 'rowSpan'].forEach((key) => {
+						['columnSpan', 'columnStart', 'rowSpan'].forEach((key) => {
 
-						let value = data.blocks[i].data[key],
-							regex = new RegExp(`${key}\-\d+`, 'g');
+							let value = data.blocks[i].data[key],
+								regex = new RegExp(`${key}\-\d+`, 'g');
 
-						block.className = block.className.replace(regex, '');
-						block.classList.toggle(`${key}-${value.toString()}`, (value !== undefined && value != 0));
+							block.className = block.className.replace(regex, '');
+							block.classList.toggle(`${key}-${value.toString()}`, (value !== undefined && value != 0));
 
 					});
 
-					block.classList.toggle('stretched', data.blocks[i].data.stretched);
-					
+						block.classList.toggle('stretched', data.blocks[i].data.stretched);
+						
+					}
+
 				}
 
+			};
+
+		editor.save().then((data) => {
+
+			apply(data);
+
+			if (typeof callback == 'function') {
+				callback();
 			}
-
-		}
-
-		if (!editor.configuration.readOnly) {
-
-			editor.save().then((data) => {
-				apply(data);
-			});
-
-		} else {
-
-			editor.readOnly.toggle(false).then(() => {
-				editor.save().then((data) => {
-					editor.readOnly.toggle(true).then(() => {
-						apply(data);
-					});
-				});
-			});
-
-		}
+			
+		});
 
 	}
 

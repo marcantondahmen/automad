@@ -44,6 +44,28 @@
 		
 		dataAttr: 'data-am-block-editor',
 
+		makeReadOnly: function(editor) {
+
+			const holder = editor.configuration.holder,
+				  inputs = holder.querySelectorAll('input, select'),
+				  editables = holder.querySelectorAll('[contenteditable]');
+
+			Array.from(inputs).forEach((element) => {
+				element.setAttribute('readonly', true);
+				element.setAttribute('disabled', true);
+			});
+
+			Array.from(editables).forEach((element) => {
+				element.removeAttribute('contenteditable');
+			});
+
+			const html = holder.innerHTML;
+
+			editor.destroy();
+			holder.innerHTML = html;
+
+		},
+
 		createEditor: function(options) {
 
 			const t = AutomadEditorTranslation.get;
@@ -72,7 +94,7 @@
 				logLevel: 'ERROR',
 				data: data,
 				tools: AutomadEditorConfig.tools(options.isNested, options.readOnly),
-				readOnly: options.readOnly,
+				readOnly: false,
 				minHeight: false,
 				autofocus: options.autofocus,
 				i18n: {
@@ -110,24 +132,28 @@
 
 				onChange: function () {
 
-					if (!editor.configuration.readOnly) {
+					if (!options.readOnly) {
+					
+						try {
 
-						editor.save().then(function (data) {
-			
-							// Only trigger change in case blocks actually have changed.
-							var blocksNew = JSON.stringify(data.blocks);
+							editor.save().then(function (data) {
 
-							try {
-								var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks);
-							} catch (e) {
-								var blocksCurrent = '';
-							}
+								// Only trigger change in case blocks actually have changed.
+								var blocksNew = JSON.stringify(data.blocks);
 
-							if (blocksCurrent != blocksNew) {
-								$input.val(JSON.stringify(data, null, 2)).trigger('change');
-							}
+								try {
+									var blocksCurrent = JSON.stringify(JSON.parse($input.val()).blocks);
+								} catch (e) {
+									var blocksCurrent = '';
+								}
 
-						});
+								if (blocksCurrent != blocksNew) {
+									$input.val(JSON.stringify(data, null, 2)).trigger('change');
+								}
+
+							});
+
+						} catch (e) {}
 
 					}
 
@@ -137,20 +163,26 @@
 
 					const layout = new AutomadLayout(editor);
 
-					layout.applyLayout();
+					layout.applyLayout(function() {
 
-					if (!editor.configuration.readOnly) {
+						if (!options.readOnly) {
 
-						var undo = new Undo({ editor });
+							var undo = new Undo({ editor });
 
-						undo.initialize(data);
-						new DragDrop(editor);
-						layout.settingsButtonObserver();
-						layout.initUndoHandler();
-						
-					}
+							undo.initialize(data);
+							new DragDrop(editor);
+							layout.settingsButtonObserver();
+							layout.initUndoHandler();
 
-					options.onReady();
+						} else {
+
+							Automad.blockEditor.makeReadOnly(editor);
+
+						}
+
+						options.onReady();
+
+					});
 
 				}
 
@@ -166,7 +198,7 @@
 
 				let msg = event.originalEvent.message;
 
-				if (msg.includes('closest is not a function') || msg.includes('Uncaught TypeError')) {
+				if (msg.includes('closest is not a function') || msg.includes('updateCurrentInput')) {
 					event.preventDefault();
 				}
 
