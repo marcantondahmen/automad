@@ -215,7 +215,7 @@ class AutomadLayout {
 							block.className = block.className.replace(regex, '');
 							block.classList.toggle(`${key}-${value.toString()}`, (value !== undefined && value != 0));
 
-					});
+						});
 
 						block.classList.toggle('stretched', data.blocks[i].data.stretched);
 						
@@ -499,57 +499,53 @@ class AutomadLayout {
 
 		wrapper.appendChild(columnSpanWrapper);
 
-		if (!isNested) {
+		columnStartOptions.forEach(function (option) {
 
-			columnStartOptions.forEach(function (option) {
-
-				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
-					icon: AutomadLayout.icon(option.icon),
-					buttonsClearRegex: /(columnStart|stretched|reset)/g,
-					blockClearRegex: /(stretched|columnStart\-\d+)/g,
-					clearDataKeys: ['stretched'],
-					onClick: function() {
-						if (!data.columnSpan) {
-							columnSpanWrapper.querySelector('.columnSpan').click();
-						}
+			const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
+				icon: AutomadLayout.icon(option.icon),
+				buttonsClearRegex: /(columnStart|stretched|reset)/g,
+				blockClearRegex: /(stretched|columnStart\-\d+)/g,
+				clearDataKeys: ['stretched'],
+				onClick: function() {
+					if (!data.columnSpan) {
+						columnSpanWrapper.querySelector('.columnSpan').click();
 					}
-				}));
-
-				columnStartWrapper.appendChild(button.get());
-
-				if (!data.columnSpan) {
-					columnStartWrapper.classList.add('uk-hidden');
 				}
+			}));
 
-			});
+			columnStartWrapper.appendChild(button.get());
 
-			wrapper.appendChild(columnStartWrapper);
+			if (!data.columnSpan) {
+				columnStartWrapper.classList.add('uk-hidden');
+			}
 
-			rowSpanOptions.forEach(function (option) {
+		});
 
-				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
-					icon: AutomadLayout.icon(option.icon),
-					buttonsClearRegex: /(rowSpan|stretched|reset)/g,
-					blockClearRegex: /(stretched|rowSpan\-\d+)/g,
-					clearDataKeys: ['stretched'],
-					onClick: function () {
-						if (!data.columnSpan) {
-							columnSpanWrapper.querySelector('.columnSpan').click();
-						}
+		wrapper.appendChild(columnStartWrapper);
+
+		rowSpanOptions.forEach(function (option) {
+
+			const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
+				icon: AutomadLayout.icon(option.icon),
+				buttonsClearRegex: /(rowSpan|stretched|reset)/g,
+				blockClearRegex: /(stretched|rowSpan\-\d+)/g,
+				clearDataKeys: ['stretched'],
+				onClick: function () {
+					if (!data.columnSpan) {
+						columnSpanWrapper.querySelector('.columnSpan').click();
 					}
-				}));
-
-				rowSpanWrapper.appendChild(button.get());
-
-				if (!data.columnSpan) {
-					rowSpanWrapper.classList.add('uk-hidden');
 				}
+			}));
 
-			});
+			rowSpanWrapper.appendChild(button.get());
 
-			wrapper.appendChild(rowSpanWrapper);
+			if (!data.columnSpan) {
+				rowSpanWrapper.classList.add('uk-hidden');
+			}
 
-		}
+		});
+
+		wrapper.appendChild(rowSpanWrapper);
 	
 		return wrapper;
 
