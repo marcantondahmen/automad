@@ -354,39 +354,51 @@ editor_nested_edit: Redigera
 
 -
 
-editor_nested_card_toggle: Kort
+editor_nested_style: Redigeringsstil
 
 -
 
-editor_nested_card_tooltip: Aktivera den här inställningen för att återge innehållet som ett kort med anpassade färger, ramar och skugga.
+editor_nested_card: Optimera innehållet för kort
 
 -
 
-editor_nested_card_style: Stil
+editor_nested_padding_top: Spacing uppåt
 
 -
 
-editor_nested_card_color: Text färg
+editor_nested_padding_bottom: Spacing down
 
 -
 
-editor_nested_card_background: Bakgrundsfärg
+editor_nested_color: Text färg
 
 -
 
-editor_nested_card_border: Gräns färg
+editor_nested_background_color: Bakgrundsfärg
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Bakgrundsbild
 
 -
 
-editor_nested_card_match_row_height: Full radhöjd
+editor_nested_border_color: Gräns färg
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Gränsbredd
+
+-
+
+editor_nested_border_radius: Hörnradie
+
+-
+
+editor_nested_shadow: Droppskugga
+
+-
+
+editor_nested_match_row_height: Fullrad höjd
 
 -
 

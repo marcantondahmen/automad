@@ -354,39 +354,51 @@ editor_nested_edit: Upraviť
 
 -
 
-editor_nested_card_toggle: Card
+editor_nested_style: Upraviť štýl
 
 -
 
-editor_nested_card_tooltip: Povolením tohto nastavenia zobrazíte obsah ako kartu s vlastnými farbami, okrajmi a tieňom.
+editor_nested_card: Optimalizujte obsah pre karty
 
 -
 
-editor_nested_card_style: Štýl
+editor_nested_padding_top: Rozmiestnenie smerom nahor
 
 -
 
-editor_nested_card_color: Farba textu
+editor_nested_padding_bottom: Rozteč
 
 -
 
-editor_nested_card_background: Farba pozadia
+editor_nested_color: Farba textu
 
 -
 
-editor_nested_card_border: Farba okraja
+editor_nested_background_color: Farba pozadia
 
 -
 
-editor_nested_card_shadow: Vrhať tieň
+editor_nested_background_image: Obrázok na pozadí
 
 -
 
-editor_nested_card_match_row_height: Výška riadka
+editor_nested_border_color: Hraničná farba
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Hraničná šírka
+
+-
+
+editor_nested_border_radius: Rohový polomer
+
+-
+
+editor_nested_shadow: Vrhať tieň
+
+-
+
+editor_nested_match_row_height: Výška riadka
 
 -
 

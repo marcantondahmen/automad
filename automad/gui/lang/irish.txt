@@ -350,43 +350,55 @@ editor_nested_toolbox: Eagarthóir / Cárta Leabaithe
 
 -
 
-editor_nested_edit: Cuir in Eagar
+editor_nested_edit: Eagarthóireacht a dhéanamh ar
 
 -
 
-editor_nested_card_toggle: Cárta
+editor_nested_style: Cuir stíl in eagar
 
 -
 
-editor_nested_card_tooltip: Cumasaigh an socrú seo chun an t-ábhar a thabhairt mar chárta le dathanna saincheaptha, teorainneacha agus scáth.
+editor_nested_card: Ábhar a bharrfheabhsú do chártaí
 
 -
 
-editor_nested_card_style: Stíl
+editor_nested_padding_top: Spásáil suas
 
 -
 
-editor_nested_card_color: Dath an Téacs
+editor_nested_padding_bottom: Spásáil síos
 
 -
 
-editor_nested_card_background: Dath cúlra
+editor_nested_color: Dath téacs
 
 -
 
-editor_nested_card_border: Dath Teorann
+editor_nested_background_color: Dath cúlra
 
 -
 
-editor_nested_card_shadow: Scáth titim
+editor_nested_background_image: Íomhá chúlra
 
 -
 
-editor_nested_card_match_row_height: Airde lánrow
+editor_nested_border_color: Dath teorann
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Leithead na teorann
+
+-
+
+editor_nested_border_radius: Ga Cúinne
+
+-
+
+editor_nested_shadow: Scáth titim
+
+-
+
+editor_nested_match_row_height: Airde lánrow
 
 -
 

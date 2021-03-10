@@ -354,39 +354,51 @@ editor_nested_edit: редактиране
 
 -
 
-editor_nested_card_toggle: Карта
+editor_nested_style: Редактиране на стил
 
 -
 
-editor_nested_card_tooltip: Активирайте тази настройка, за да изобразявате съдържанието като карта с персонализирани цветове, граници и сенки.
+editor_nested_card: Оптимизиране на съдържанието за карти
 
 -
 
-editor_nested_card_style: Стил
+editor_nested_padding_top: Разстояние нагоре
 
 -
 
-editor_nested_card_color: Цвят на текста
+editor_nested_padding_bottom: Разстояние
 
 -
 
-editor_nested_card_background: Цвят на фона
+editor_nested_color: Цвят на текста
 
 -
 
-editor_nested_card_border: Цвят на границата
+editor_nested_background_color: Цвят на фона
 
 -
 
-editor_nested_card_shadow: Капка сянка
+editor_nested_background_image: Фоново изображение
 
 -
 
-editor_nested_card_match_row_height: Височина на пълен ред
+editor_nested_border_color: Граничен цвят
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Гранична ширина
+
+-
+
+editor_nested_border_radius: Радиус на ъгъла
+
+-
+
+editor_nested_shadow: Капка сянка
+
+-
+
+editor_nested_match_row_height: Височина на пълен ред
 
 -
 

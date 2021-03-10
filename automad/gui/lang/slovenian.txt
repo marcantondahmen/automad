@@ -354,39 +354,51 @@ editor_nested_edit: Uredi
 
 -
 
-editor_nested_card_toggle: Kartica
+editor_nested_style: Uredi stil.
 
 -
 
-editor_nested_card_tooltip: Omogočite to nastavitev, če želite vsebino upodabljati kot kartico z barvami, obrobami in senco po meri.
+editor_nested_card: Optimizirajte vsebino za kartice
 
 -
 
-editor_nested_card_style: Slog
+editor_nested_padding_top: Razmik navzgor
 
 -
 
-editor_nested_card_color: Barva besedila
+editor_nested_padding_bottom: Razmik
 
 -
 
-editor_nested_card_background: Barva ozadja
+editor_nested_color: Barva besedila
 
 -
 
-editor_nested_card_border: Barva obrobe
+editor_nested_background_color: Barva ozadja
 
 -
 
-editor_nested_card_shadow: Spusti senco
+editor_nested_background_image: Slika ozadja
 
 -
 
-editor_nested_card_match_row_height: Celotna višina vrstice
+editor_nested_border_color: Barva meje
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Širina meje
+
+-
+
+editor_nested_border_radius: Polmer kota
+
+-
+
+editor_nested_shadow: Drop Shadow.
+
+-
+
+editor_nested_match_row_height: Celotna višina vrstice
 
 -
 

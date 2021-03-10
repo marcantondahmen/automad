@@ -354,39 +354,51 @@ editor_nested_edit: Redigere
 
 -
 
-editor_nested_card_toggle: Kort
+editor_nested_style: Rediger stil
 
 -
 
-editor_nested_card_tooltip: Aktivér denne indstilling for at gengive indholdet som et kort med brugerdefinerede farver, kanter og skygge.
+editor_nested_card: Optimer indholdet til kort
 
 -
 
-editor_nested_card_style: Stil
+editor_nested_padding_top: Afstand opad
 
 -
 
-editor_nested_card_color: Tekstfarve
+editor_nested_padding_bottom: Afstand ned
 
 -
 
-editor_nested_card_background: Baggrundsfarve
+editor_nested_color: Tekstfarve.
 
 -
 
-editor_nested_card_border: Kantfarve
+editor_nested_background_color: Baggrundsfarve
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Baggrundsbillede
 
 -
 
-editor_nested_card_match_row_height: Fuld rækkehøjde
+editor_nested_border_color: Border Color.
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Border bredde.
+
+-
+
+editor_nested_border_radius: Hjørne Radius.
+
+-
+
+editor_nested_shadow: Drop Shadow.
+
+-
+
+editor_nested_match_row_height: Fuld række højde
 
 -
 

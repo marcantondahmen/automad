@@ -350,43 +350,55 @@ editor_nested_toolbox: Ugrađeni uređivač / kartica
 
 -
 
-editor_nested_edit: Uredi
+editor_nested_edit: Urediti
 
 -
 
-editor_nested_card_toggle: Card
+editor_nested_style: Uredi stil
 
 -
 
-editor_nested_card_tooltip: Omogućite ovu postavku da sadržaj prikazuje karticu s prilagođenim bojama, granicama i sjeni.
+editor_nested_card: Optimizirajte sadržaj za kartice
 
 -
 
-editor_nested_card_style: Stil
+editor_nested_padding_top: Razmak prema gore
 
 -
 
-editor_nested_card_color: Tekst u boji
+editor_nested_padding_bottom: Razmak
 
 -
 
-editor_nested_card_background: Boja pozadine
+editor_nested_color: Boja teksta
 
 -
 
-editor_nested_card_border: Boja obruba
+editor_nested_background_color: Boja pozadine
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Pozadinska slika
 
 -
 
-editor_nested_card_match_row_height: Visina punog reda
+editor_nested_border_color: Granična boja
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Širina granice
+
+-
+
+editor_nested_border_radius: Kutni radijus
+
+-
+
+editor_nested_shadow: Sjeni
+
+-
+
+editor_nested_match_row_height: Visina punog reda
 
 -
 

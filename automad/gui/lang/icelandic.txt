@@ -354,39 +354,51 @@ editor_nested_edit: Breyta
 
 -
 
-editor_nested_card_toggle: Spil
+editor_nested_style: Breyta stíl
 
 -
 
-editor_nested_card_tooltip: Virkjaðu þessa stillingu til að endurgera efnið sem kort með sérsniðnum litum, ramma og skugga.
+editor_nested_card: Bjartsýni efni fyrir spil
 
 -
 
-editor_nested_card_style: Stíll
+editor_nested_padding_top: Bili upp á við
 
 -
 
-editor_nested_card_color: Textalitur
+editor_nested_padding_bottom: Bili niður
 
 -
 
-editor_nested_card_background: Bakgrunns litur
+editor_nested_color: Texti lit.
 
 -
 
-editor_nested_card_border: Jaðarlitur
+editor_nested_background_color: Bakgrunns litur
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Bakgrunnsmynd
 
 -
 
-editor_nested_card_match_row_height: Full röð hæð
+editor_nested_border_color: Landamæri lit.
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Border breidd
+
+-
+
+editor_nested_border_radius: Corner Radius.
+
+-
+
+editor_nested_shadow: Drop Shadow.
+
+-
+
+editor_nested_match_row_height: Fullur röð hæð
 
 -
 

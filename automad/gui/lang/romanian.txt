@@ -354,39 +354,51 @@ editor_nested_edit: Editați | ×
 
 -
 
-editor_nested_card_toggle: Card
+editor_nested_style: Editați stilul
 
 -
 
-editor_nested_card_tooltip: Activați această setare pentru a reda conținutul ca un card cu culori personalizate, chenare și umbră.
+editor_nested_card: Optimizați conținutul pentru carduri
 
 -
 
-editor_nested_card_style: Stil
+editor_nested_padding_top: Spațierea în sus
 
 -
 
-editor_nested_card_color: Culoarea textului
+editor_nested_padding_bottom: Spațierea în jos
 
 -
 
-editor_nested_card_background: Culoare de fundal
+editor_nested_color: Culoarea textului
 
 -
 
-editor_nested_card_border: Culoare margine
+editor_nested_background_color: Culoare de fundal
 
 -
 
-editor_nested_card_shadow: Umbra
+editor_nested_background_image: Imagine de fundal
 
 -
 
-editor_nested_card_match_row_height: Înălțimea întregului rând
+editor_nested_border_color: Culoarea frontierei
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Lățimea graniței
+
+-
+
+editor_nested_border_radius: Raza de colț
+
+-
+
+editor_nested_shadow: Umbra
+
+-
+
+editor_nested_match_row_height: Înălțimea rândului complet
 
 -
 

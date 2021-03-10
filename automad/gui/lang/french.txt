@@ -354,39 +354,51 @@ editor_nested_edit: Éditer
 
 -
 
-editor_nested_card_toggle: Carte
+editor_nested_style: Style d'édition
 
 -
 
-editor_nested_card_tooltip: Activez ce paramètre pour rendre le contenu sous forme de carte avec des couleurs, des bordures et des ombres personnalisées.
+editor_nested_card: Optimiser le contenu des cartes
 
 -
 
-editor_nested_card_style: Style
+editor_nested_padding_top: Espacement vers le haut
 
 -
 
-editor_nested_card_color: Couleur du texte
+editor_nested_padding_bottom: Espacement
 
 -
 
-editor_nested_card_background: Couleur de l'arrière plan
+editor_nested_color: Couleur de texte
 
 -
 
-editor_nested_card_border: Couleur de la bordure
+editor_nested_background_color: Couleur de l'arrière plan
 
 -
 
-editor_nested_card_shadow: Ombre portée
+editor_nested_background_image: Image de fond
 
 -
 
-editor_nested_card_match_row_height: Hauteur de la rangée complète
+editor_nested_border_color: Couleur de la bordure
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Largeur de la bordure
+
+-
+
+editor_nested_border_radius: Rayon de coin
+
+-
+
+editor_nested_shadow: Ombre portée
+
+-
+
+editor_nested_match_row_height: Hauteur de la rangée complète
 
 -
 

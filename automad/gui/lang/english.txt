@@ -390,39 +390,51 @@ editor_nested_edit: Edit
 
 -
 
-editor_nested_card_toggle: Card 
+editor_nested_style: Edit Style
 
 -
 
-editor_nested_card_tooltip: Enable this setting to render the content as a card with custom colors, borders and shadow.
+editor_nested_card: Optimize Content for Cards
 
 -
 
-editor_nested_card_style: Style
+editor_nested_padding_top: Spacing upwards
 
 -
 
-editor_nested_card_color: Text Color
+editor_nested_padding_bottom: Spacing down
 
 -
 
-editor_nested_card_background: Background Color 
+editor_nested_color: Text Color
 
 -
 
-editor_nested_card_border: Border Color 
+editor_nested_background_color: Background Color 
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Background Image
 
 -
 
-editor_nested_card_match_row_height: Full Row Height
+editor_nested_border_color: Border Color 
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Border Width
+
+-
+
+editor_nested_border_radius: Corner Radius
+
+-
+
+editor_nested_shadow: Drop Shadow
+
+-
+
+editor_nested_match_row_height: Full Row Height
 
 -
 

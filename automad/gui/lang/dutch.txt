@@ -354,39 +354,51 @@ editor_nested_edit: Bewerk
 
 -
 
-editor_nested_card_toggle: Kaart
+editor_nested_style: Edit Style
 
 -
 
-editor_nested_card_tooltip: Schakel deze instelling in om de inhoud weer te geven als een kaart met aangepaste kleuren, randen en schaduw.
+editor_nested_card: Intimaliseer inhoud voor kaarten
 
 -
 
-editor_nested_card_style: Stijl
+editor_nested_padding_top: Naar boven
 
 -
 
-editor_nested_card_color: Tekst kleur
+editor_nested_padding_bottom: Afsnijden
 
 -
 
-editor_nested_card_background: Achtergrond kleur
+editor_nested_color: Tekst kleur
 
 -
 
-editor_nested_card_border: Rand kleur
+editor_nested_background_color: Achtergrond kleur
 
 -
 
-editor_nested_card_shadow: Slagschaduw
+editor_nested_background_image: Achtergrond afbeelding
 
 -
 
-editor_nested_card_match_row_height: Volledige rijhoogte
+editor_nested_border_color: Rand kleur
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Grensbreedte
+
+-
+
+editor_nested_border_radius: Hoekradius
+
+-
+
+editor_nested_shadow: Druppelschaduw
+
+-
+
+editor_nested_match_row_height: Volledige rijhoogte
 
 -
 

@@ -354,39 +354,51 @@ editor_nested_edit: Modificare
 
 -
 
-editor_nested_card_toggle: Carta
+editor_nested_style: Modifica stile.
 
 -
 
-editor_nested_card_tooltip: Abilita questa impostazione per eseguire il rendering del contenuto come una scheda con colori, bordi e ombre personalizzati.
+editor_nested_card: Ottimizza il contenuto per le carte
 
 -
 
-editor_nested_card_style: Stile
+editor_nested_padding_top: Spaziatura verso l'alto
 
 -
 
-editor_nested_card_color: Colore del testo
+editor_nested_padding_bottom: Spaziatura
 
 -
 
-editor_nested_card_background: Colore di sfondo
+editor_nested_color: Colore del testo
 
 -
 
-editor_nested_card_border: Colore del bordo
+editor_nested_background_color: Colore di sfondo
 
 -
 
-editor_nested_card_shadow: Ombra esterna
+editor_nested_background_image: Immagine di sfondo
 
 -
 
-editor_nested_card_match_row_height: Altezza completa della fila
+editor_nested_border_color: Colore del bordo
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Larghezza del bordo
+
+-
+
+editor_nested_border_radius: Raggio dell'angolo
+
+-
+
+editor_nested_shadow: Drop Shadow.
+
+-
+
+editor_nested_match_row_height: Altezza completa della fila
 
 -
 

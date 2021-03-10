@@ -354,39 +354,51 @@ editor_nested_edit: Rediģēt
 
 -
 
-editor_nested_card_toggle: Karte
+editor_nested_style: Rediģēt stilu
 
 -
 
-editor_nested_card_tooltip: Iespējojiet šo iestatījumu, lai saturu renderētu kā karti ar pielāgotām krāsām, apmalēm un ēnu.
+editor_nested_card: Optimizējiet kartes saturu
 
 -
 
-editor_nested_card_style: Stils
+editor_nested_padding_top: Atstarpes uz augšu
 
 -
 
-editor_nested_card_color: Teksta krāsa
+editor_nested_padding_bottom: Atstājot
 
 -
 
-editor_nested_card_background: Fona krāsa
+editor_nested_color: Teksta krāsa
 
 -
 
-editor_nested_card_border: Apmales krāsa
+editor_nested_background_color: Fona krāsa
 
 -
 
-editor_nested_card_shadow: Nomest ēnu
+editor_nested_background_image: Fona attēls
 
 -
 
-editor_nested_card_match_row_height: Pilna rindu augstums
+editor_nested_border_color: Robeža
 
 -
 
-editor_nested_card_css: Css
+editor_nested_border_width: Robežu platums
+
+-
+
+editor_nested_border_radius: Stūra rādiuss
+
+-
+
+editor_nested_shadow: Nomest ēnu
+
+-
+
+editor_nested_match_row_height: Pilna rindu augstums
 
 -
 

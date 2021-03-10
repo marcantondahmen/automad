@@ -354,39 +354,51 @@ editor_nested_edit: Upravit
 
 -
 
-editor_nested_card_toggle: Kartu
+editor_nested_style: Upravit styl
 
 -
 
-editor_nested_card_tooltip: Povolte toto nastavení k vykreslení obsahu jako karty s vlastními barvami, okraji a stínem.
+editor_nested_card: Optimalizace obsahu pro karty
 
 -
 
-editor_nested_card_style: Styl
+editor_nested_padding_top: Vzdálenost nahoru
 
 -
 
-editor_nested_card_color: Barva textu
+editor_nested_padding_bottom: Vzdálenost dolů
 
 -
 
-editor_nested_card_background: Barva pozadí
+editor_nested_color: Barva textu
 
 -
 
-editor_nested_card_border: Barva ohraničení
+editor_nested_background_color: Barva pozadí
 
 -
 
-editor_nested_card_shadow: Vrhat stín
+editor_nested_background_image: Obrázek na pozadí
 
 -
 
-editor_nested_card_match_row_height: Výška celé řady
+editor_nested_border_color: Hraniční barva
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Šířka hranic
+
+-
+
+editor_nested_border_radius: Rohový poloměr
+
+-
+
+editor_nested_shadow: Vrhat stín
+
+-
+
+editor_nested_match_row_height: Výška celé řady
 
 -
 

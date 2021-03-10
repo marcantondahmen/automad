@@ -354,39 +354,51 @@ editor_nested_edit: Επεξεργασία
 
 -
 
-editor_nested_card_toggle: Κάρτα
+editor_nested_style: Επεξεργασία στυλ
 
 -
 
-editor_nested_card_tooltip: Ενεργοποιήστε αυτή τη ρύθμιση για να κάνετε το περιεχόμενο ως κάρτα με προσαρμοσμένα χρώματα, σύνορα και σκιά.
+editor_nested_card: Βελτιστοποιήστε το περιεχόμενο για κάρτες
 
 -
 
-editor_nested_card_style: Στυλ
+editor_nested_padding_top: Απόσταση προς τα πάνω
 
 -
 
-editor_nested_card_color: Χρώμα κειμένου
+editor_nested_padding_bottom: Διαχωρισμός
 
 -
 
-editor_nested_card_background: Χρώμα του φόντου
+editor_nested_color: Χρώμα κειμένου
 
 -
 
-editor_nested_card_border: Χρώμα πλαισίου
+editor_nested_background_color: Χρώμα του φόντου
 
 -
 
-editor_nested_card_shadow: Σκίαση
+editor_nested_background_image: Εικόνα φόντου
 
 -
 
-editor_nested_card_match_row_height: Πλήρες ύψος σειράς
+editor_nested_border_color: Χρώμα πλαισίου
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Πλάτος των συνόρων
+
+-
+
+editor_nested_border_radius: Ακτίνα γωνίας
+
+-
+
+editor_nested_shadow: Σκίαση
+
+-
+
+editor_nested_match_row_height: Πλήρης ύψος σειράς
 
 -
 

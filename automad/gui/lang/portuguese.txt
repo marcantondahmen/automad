@@ -354,39 +354,51 @@ editor_nested_edit: Editar
 
 -
 
-editor_nested_card_toggle: Cartão
+editor_nested_style: Editar estilo
 
 -
 
-editor_nested_card_tooltip: Ative esta configuração para renderizar o conteúdo como um cartão com cores, bordas e sombras personalizadas.
+editor_nested_card: Otimize o conteúdo para cartões
 
 -
 
-editor_nested_card_style: Estilo
+editor_nested_padding_top: Espaçando para cima
 
 -
 
-editor_nested_card_color: Cor do texto
+editor_nested_padding_bottom: Espaçamento para baixo
 
 -
 
-editor_nested_card_background: Cor de fundo
+editor_nested_color: Cor do texto
 
 -
 
-editor_nested_card_border: Cor da borda
+editor_nested_background_color: Cor de fundo
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Imagem de fundo
 
 -
 
-editor_nested_card_match_row_height: Altura da linha completa
+editor_nested_border_color: Cor da borda
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Largura da fronteira
+
+-
+
+editor_nested_border_radius: Raio de canto
+
+-
+
+editor_nested_shadow: Drop Shadow.
+
+-
+
+editor_nested_match_row_height: Altura da fileira completa
 
 -
 

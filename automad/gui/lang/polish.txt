@@ -354,39 +354,51 @@ editor_nested_edit: Edytować
 
 -
 
-editor_nested_card_toggle: Karta
+editor_nested_style: Edytuj styl
 
 -
 
-editor_nested_card_tooltip: Włącz to ustawienie, aby renderować zawartość jako kartę z niestandardowymi kolorami, obramowaniem i cieniem.
+editor_nested_card: Zoptymalizuj treści dla kart
 
 -
 
-editor_nested_card_style: Styl
+editor_nested_padding_top: Odstępy do góry.
 
 -
 
-editor_nested_card_color: Kolor tekstu
+editor_nested_padding_bottom: Odstępy
 
 -
 
-editor_nested_card_background: Kolor tła
+editor_nested_color: Kolor tekstu
 
 -
 
-editor_nested_card_border: Kolor ramki
+editor_nested_background_color: Kolor tła
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Zdjęcie w tle
 
 -
 
-editor_nested_card_match_row_height: Pełna wysokość wiersza
+editor_nested_border_color: Kolor ramki
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Szerokość granicy
+
+-
+
+editor_nested_border_radius: Promień narożny
+
+-
+
+editor_nested_shadow: Upuść cień
+
+-
+
+editor_nested_match_row_height: Pełna wysokość wiersza
 
 -
 

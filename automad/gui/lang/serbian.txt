@@ -354,39 +354,51 @@ editor_nested_edit: Уредити
 
 -
 
-editor_nested_card_toggle: Карта
+editor_nested_style: Уреди стил
 
 -
 
-editor_nested_card_tooltip: Омогућите ово подешавање да бисте садржај приказивали као картицу са прилагођеним бојама, обрубима и сенкама.
+editor_nested_card: Оптимизирајте садржај за картице
 
 -
 
-editor_nested_card_style: Стил
+editor_nested_padding_top: Размазање према горе
 
 -
 
-editor_nested_card_color: Тект Цолор
+editor_nested_padding_bottom: Размакнути доле
 
 -
 
-editor_nested_card_background: Боја позадине
+editor_nested_color: Боја текста
 
 -
 
-editor_nested_card_border: Боја ивице
+editor_nested_background_color: Боја позадине
 
 -
 
-editor_nested_card_shadow: Сенка
+editor_nested_background_image: Позадинска слика
 
 -
 
-editor_nested_card_match_row_height: Потпуна висина реда
+editor_nested_border_color: Боја ивице
 
 -
 
-editor_nested_card_css: ЦСС
+editor_nested_border_width: Ширина границе
+
+-
+
+editor_nested_border_radius: Угаони радијус
+
+-
+
+editor_nested_shadow: Сенка
+
+-
+
+editor_nested_match_row_height: Потпуна висина реда
 
 -
 

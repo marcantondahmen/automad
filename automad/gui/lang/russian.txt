@@ -354,39 +354,51 @@ editor_nested_edit: Редактировать
 
 -
 
-editor_nested_card_toggle: Карта
+editor_nested_style: Стиль редактирования
 
 -
 
-editor_nested_card_tooltip: Включите этот параметр, чтобы отображать содержимое в виде карточки с настраиваемыми цветами, границами и тенью.
+editor_nested_card: Оптимизировать контент для карт
 
 -
 
-editor_nested_card_style: Стиль
+editor_nested_padding_top: Расстояние вверх
 
 -
 
-editor_nested_card_color: Цвет текста
+editor_nested_padding_bottom: Осадка вниз
 
 -
 
-editor_nested_card_background: Фоновый цвет
+editor_nested_color: Цвет текста
 
 -
 
-editor_nested_card_border: Цвет границы
+editor_nested_background_color: Фоновый цвет
 
 -
 
-editor_nested_card_shadow: Падающая тень
+editor_nested_background_image: Фоновая картинка
 
 -
 
-editor_nested_card_match_row_height: Полная высота строки
+editor_nested_border_color: Цвет границы
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Ширина рамки
+
+-
+
+editor_nested_border_radius: Угловой радиус
+
+-
+
+editor_nested_shadow: Падение тень
+
+-
+
+editor_nested_match_row_height: Полная высота строки
 
 -
 

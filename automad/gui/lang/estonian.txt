@@ -350,43 +350,55 @@ editor_nested_toolbox: Sisseehitatud toimetaja / kaart
 
 -
 
-editor_nested_edit: Muuda
+editor_nested_edit: Redigeerima
 
 -
 
-editor_nested_card_toggle: Kaart
+editor_nested_style: Muuda stiili
 
 -
 
-editor_nested_card_tooltip: Selle seade lubamisel saate sisu muuta kohandatud värvide, ääriste ja varjudega kaardina.
+editor_nested_card: Kaartide sisu optimeerimine
 
 -
 
-editor_nested_card_style: Stiil
+editor_nested_padding_top: Vahekaugus ülespoole
 
 -
 
-editor_nested_card_color: Teksti värv
+editor_nested_padding_bottom: Vahemaad
 
 -
 
-editor_nested_card_background: Taustavärv
+editor_nested_color: Teksti värv
 
 -
 
-editor_nested_card_border: Äärise värv
+editor_nested_background_color: Taustavärv
 
 -
 
-editor_nested_card_shadow: Tilk varju
+editor_nested_background_image: Taustapilt
 
 -
 
-editor_nested_card_match_row_height: Täisrea kõrgus
+editor_nested_border_color: Piir
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Piirilaius
+
+-
+
+editor_nested_border_radius: Nurgaraadius
+
+-
+
+editor_nested_shadow: Tilk vari
+
+-
+
+editor_nested_match_row_height: Täisrea kõrgus
 
 -
 

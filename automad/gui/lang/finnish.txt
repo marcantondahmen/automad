@@ -354,39 +354,51 @@ editor_nested_edit: Muokata
 
 -
 
-editor_nested_card_toggle: Kortti
+editor_nested_style: Muokkaa tyyliä
 
 -
 
-editor_nested_card_tooltip: Ota tämä asetus käyttöön, jos haluat tehdä sisällöstä kortin, jossa on mukautetut värit, reunukset ja varjo.
+editor_nested_card: Optimoi sisältö kortille
 
 -
 
-editor_nested_card_style: Tyyli
+editor_nested_padding_top: Välimatka ylöspäin
 
 -
 
-editor_nested_card_color: Tekstin väri
+editor_nested_padding_bottom: Välimatka alas
 
 -
 
-editor_nested_card_background: Taustaväri
+editor_nested_color: Tekstin väri
 
 -
 
-editor_nested_card_border: Reunuksen väri
+editor_nested_background_color: Taustaväri
 
 -
 
-editor_nested_card_shadow: Pudota varjo
+editor_nested_background_image: Taustakuva
 
 -
 
-editor_nested_card_match_row_height: Koko rivikorkeus
+editor_nested_border_color: Reunuksen väri
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Raja-leveys
+
+-
+
+editor_nested_border_radius: Kulmasäde
+
+-
+
+editor_nested_shadow: Pudota varjo
+
+-
+
+editor_nested_match_row_height: Koko rivin korkeus
 
 -
 

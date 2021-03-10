@@ -354,39 +354,51 @@ editor_nested_edit: Redaguoti
 
 -
 
-editor_nested_card_toggle: Kortelė
+editor_nested_style: Redaguoti stilius
 
 -
 
-editor_nested_card_tooltip: Įgalinkite šį nustatymą, kad turinys būtų pateiktas kaip kortelė su pasirinktinėmis spalvomis, kraštinėmis ir šešėliais.
+editor_nested_card: Optimizuokite kortelių turinį
 
 -
 
-editor_nested_card_style: Stilius
+editor_nested_padding_top: Tarpai aukštyn
 
 -
 
-editor_nested_card_color: Teksto spalva
+editor_nested_padding_bottom: Atstumas
 
 -
 
-editor_nested_card_background: Fono spalva
+editor_nested_color: Teksto spalva
 
 -
 
-editor_nested_card_border: Pasienio spalva
+editor_nested_background_color: Fono spalva
 
 -
 
-editor_nested_card_shadow: Mesti šešėlį
+editor_nested_background_image: Fono vaizdas
 
 -
 
-editor_nested_card_match_row_height: Visas eilės aukštis
+editor_nested_border_color: Sienos spalva
 
 -
 
-editor_nested_card_css: CSS.
+editor_nested_border_width: Pasienio plotis
+
+-
+
+editor_nested_border_radius: Kampo spindulys
+
+-
+
+editor_nested_shadow: Mesti šešėlį
+
+-
+
+editor_nested_match_row_height: Visas eilės aukštis
 
 -
 

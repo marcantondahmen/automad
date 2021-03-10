@@ -354,39 +354,51 @@ editor_nested_edit: Redigere
 
 -
 
-editor_nested_card_toggle: Kort
+editor_nested_style: Rediger stil
 
 -
 
-editor_nested_card_tooltip: Aktiver denne innstillingen for å gjengi innholdet som et kort med tilpassede farger, rammer og skygge.
+editor_nested_card: Optimaliser innhold for kort
 
 -
 
-editor_nested_card_style: Stil
+editor_nested_padding_top: Avstand oppover
 
 -
 
-editor_nested_card_color: Tekstfarge
+editor_nested_padding_bottom: Mellomrom ned
 
 -
 
-editor_nested_card_background: Bakgrunnsfarge
+editor_nested_color: Tekstfarge
 
 -
 
-editor_nested_card_border: Grensefarge
+editor_nested_background_color: Bakgrunnsfarge
 
 -
 
-editor_nested_card_shadow: Drop Shadow
+editor_nested_background_image: Bakgrunnsbilde
 
 -
 
-editor_nested_card_match_row_height: Full rad høyde
+editor_nested_border_color: Grensefarge
 
 -
 
-editor_nested_card_css: CSS
+editor_nested_border_width: Borderbredde
+
+-
+
+editor_nested_border_radius: Hjørne radius
+
+-
+
+editor_nested_shadow: Slipp skygge
+
+-
+
+editor_nested_match_row_height: Full rad høyde
 
 -
 
