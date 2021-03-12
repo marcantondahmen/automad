@@ -54,6 +54,7 @@
 	& .ce-inline-toolbar__dropdown,
 	& .ce-inline-tool {
 
+		box-sizing: border-box;
 		height: 2.45rem;
 		width: 2.45rem;
 		margin: 0;
@@ -85,20 +86,32 @@
 
 	& .ce-inline-toolbar {
 
-		& svg {
-			box-sizing: border-box;
-			height: 2.43rem;
-			min-height: 2.43rem;
-			max-height: 2.43rem;
-			width: 1rem;
-			min-width: 1rem;
-			max-width: 1rem;
-			padding: 0.79rem 0;
+		& .ce-inline-tool {
+
+			font-size: 0.65rem;
+
+			&[data-tool="bold"] {
+				font-size: 0.85rem;
+			}
+
+			&[data-tool="italic"] {
+				font-size: 1.15rem;
+			}
+
+			&[data-tool="underline"] {
+				font-size: 1.06rem;
+			}
+
+			&[data-tool="link"] {
+				font-size: 1.03rem;
+			}
+
 		}
 
 	}
 
 	& .ce-inline-toolbar__dropdown {
+		width: 3.35rem;
 		border-right: @am-hairline;
 	}
 

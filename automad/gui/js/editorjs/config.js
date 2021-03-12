@@ -73,16 +73,24 @@ class AutomadEditorConfig {
 		}
 
 		if (!readOnly) {
-			inlineAll = true;
-			inlineReduced = ['italic', 'underline', 'link', 'editorJSStyle'];
+			inlineAll = ['bold', 'italic', 'underline', 'link', 'fontSize', 'color', 'background', 'editorJSStyle', 'editorJSInspector'];
+			inlineReduced = ['bold', 'italic', 'underline', 'fontSize', 'color', 'background'];
 			inlineTools = {
-				underline: Underline,
+				underline: {
+					class: Underline,
+					shortcut: 'CMD+U'
+				},
 				inlineCode: {
 					class: InlineCode,
 					shortcut: 'CMD+SHIFT+M'
 				},
-				marker: Marker,
-				editorJSStyle: EditorJSStyle.StyleInlineTool,
+				color: AutomadColor,
+				background: AutomadBackground,
+				fontSize: AutomadFontSize,
+				editorJSStyle: {
+					class: EditorJSStyle.StyleInlineTool,
+					shortcut: ' '
+				},
 				editorJSInspector: EditorJSInspector
 			};
 		}
