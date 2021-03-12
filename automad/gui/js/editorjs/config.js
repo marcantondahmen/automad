@@ -76,14 +76,10 @@ class AutomadEditorConfig {
 			inlineAll = ['bold', 'italic', 'underline', 'inlineCode', 'link', 'fontSize', 'lineHeight', 'color', 'background', 'editorJSStyle', 'editorJSInspector'];
 			inlineReduced = ['bold', 'italic', 'underline', 'inlineCode', 'fontSize', 'lineHeight', 'color', 'background'];
 			inlineTools = {
-				underline: {
-					class: Underline,
-					shortcut: 'CMD+U'
-				},
-				inlineCode: {
-					class: InlineCode,
-					shortcut: 'CMD+SHIFT+M'
-				},
+				bold: AutomadBold,
+				italic: AutomadItalic,
+				underline: AutomadUnderline,
+				inlineCode: AutomadInlineCode,
 				color: AutomadColor,
 				background: AutomadBackground,
 				fontSize: AutomadFontSize,
