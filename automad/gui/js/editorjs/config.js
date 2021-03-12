@@ -87,6 +87,7 @@ class AutomadEditorConfig {
 				color: AutomadColor,
 				background: AutomadBackground,
 				fontSize: AutomadFontSize,
+				lineHeight: AutomadLineHeight,
 				editorJSStyle: {
 					class: EditorJSStyle.StyleInlineTool,
 					shortcut: ' '
