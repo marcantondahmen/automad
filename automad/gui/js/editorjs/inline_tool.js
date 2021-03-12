@@ -41,13 +41,9 @@ class AutomadInlineTool {
 		return true;
 	}
 
-	static get title() {
-		return '';
-	}
+	static get title() {}
 
-	static get sanitize() {
-		return {};
-	}
+	static get sanitize() {}
 
 	get tag() {}
 
@@ -67,7 +63,6 @@ class AutomadInlineTool {
 		this.api = api;
 		this.button = null;
 		this._state = false;
-		this.class = 'am-inline-input';
 		
 	}
 
@@ -118,7 +113,6 @@ class AutomadInlineTool {
 		node.remove();
 		range.insertNode(unwrappedContent);
 		sel.removeAllRanges();
-		sel.addRange(range);
 
 	}
 
@@ -128,18 +122,17 @@ class AutomadInlineTool {
 
 		this.state = !!node;
 
-		if (this.state) {
-			this.showActions(node);
-		} else {
-			this.hideActions();
+		if (typeof this.showActions !== 'undefined' && typeof this.hideActions !== 'undefined') {
+
+			if (this.state) {
+				this.showActions(node);
+			} else {
+				this.hideActions();
+			}
+
 		}
 
 	}
 
-	renderActions() {}
-
-	showActions(node) {}
-
-	hideActions() {}
 
 }

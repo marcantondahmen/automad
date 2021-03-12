@@ -65,7 +65,7 @@ class AutomadColor extends AutomadInlineTool {
 		this.colorPicker.type = 'color';
 		this.colorPicker.value = this.defaultColor;
 		this.colorPicker.hidden = true;
-		this.colorPicker.classList.add(this.class);
+		this.colorPicker.classList.add('am-inline-input');
 
 		return this.colorPicker;
 

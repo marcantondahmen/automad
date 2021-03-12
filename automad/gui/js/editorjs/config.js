@@ -73,8 +73,8 @@ class AutomadEditorConfig {
 		}
 
 		if (!readOnly) {
-			inlineAll = ['bold', 'italic', 'underline', 'link', 'fontSize', 'color', 'background', 'editorJSStyle', 'editorJSInspector'];
-			inlineReduced = ['bold', 'italic', 'underline', 'fontSize', 'color', 'background'];
+			inlineAll = ['bold', 'italic', 'underline', 'inlineCode', 'link', 'fontSize', 'lineHeight', 'color', 'background', 'editorJSStyle', 'editorJSInspector'];
+			inlineReduced = ['bold', 'italic', 'underline', 'inlineCode', 'fontSize', 'lineHeight', 'color', 'background'];
 			inlineTools = {
 				underline: {
 					class: Underline,
@@ -107,7 +107,7 @@ class AutomadEditorConfig {
 			header: {
 				class: AutomadBlockHeader,
 				shortcut: 'CMD+SHIFT+H',
-				inlineToolbar: inlineReduced,
+				inlineToolbar: inlineAll,
 				config: {
 					levels: [1, 2, 3, 4, 5, 6],
 					defaultLevel: 2,

@@ -37,10 +37,6 @@
 class AutomadFontSize extends AutomadInlineTool {
 
 
-	static get isInline() {
-		return true;
-	}
-
 	static get title() {
 		return 'Font Size';
 	}
@@ -65,7 +61,7 @@ class AutomadFontSize extends AutomadInlineTool {
 
 	renderActions() {
 
-		this.select = Automad.util.create.select([this.class], this.options, this.selected);
+		this.select = Automad.util.create.select(['am-inline-input'], this.options, this.selected);
 		this.select.hidden = true;
 		
 		return this.select;
