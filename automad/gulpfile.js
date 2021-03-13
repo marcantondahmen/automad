@@ -116,7 +116,6 @@ gulp.task('libs-js', function() {
 				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
 				'node_modules/editorjs-drag-drop/dist/bundle.js',
-				'node_modules/editorjs-inspector/dist/index.js',
 				'node_modules/editorjs-style/dist/index.js',
 				'node_modules/editorjs-undo/dist/bundle.js'
 			]),
