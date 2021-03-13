@@ -80,6 +80,7 @@ class AutomadEditorConfig {
 				italic: AutomadItalic,
 				underline: AutomadUnderline,
 				inlineCode: AutomadInlineCode,
+				link: AutomadLink,
 				color: AutomadColor,
 				background: AutomadBackground,
 				fontSize: AutomadFontSize,
