@@ -253,7 +253,7 @@ class AutomadLayout {
 		);
 
 		Automad.layout.$(document).on(
-			'mousedown',
+			'mousedown click',
 			`#${editorId} .${AutomadEditorConfig.cls.settingsLayout} div`,
 			alignButton
 		);

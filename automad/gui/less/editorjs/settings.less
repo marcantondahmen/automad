@@ -42,9 +42,10 @@
 		
 		width: ~"calc((3 * @{am-settings-height}) + (4 * @{am-settings-gap}))";
 		background-color: @am-block-dropdown-background;
-		border: none !important;
+		border: @am-hairline !important;
 		border-radius: @am-radius;
 		text-align: center;
+		font-size: 0.87rem;
 		.shadow;
 
 		&__plugin-zone,
@@ -100,22 +101,22 @@
 		&:not(.ce-settings__button--confirm):hover,
 		&:not(.ce-settings__button--confirm):focus,
 		&--focused {
-			color: @button-hover-color !important;
-			background-color: @button-hover-background !important;
+			color: @am-text !important;
+			background-color: @am-block-button-hover-background !important;
 			border: none !important;
 			box-shadow: none !important;
 		}
 
 		&--active {
 
-			color: @button-success-color !important;
-			background-color: @button-success-background !important;
+			color: @am-block-button-active-color !important;
+			background-color: @am-block-button-active-background !important;
 
 			&:not(.ce-settings__button--confirm):hover,
 			&:not(.ce-settings__button--confirm):focus,
 			&--focused {
-				color: @button-success-hover-color !important;
-				background-color: @button-success-hover-background !important;
+				color: @am-block-button-active-color !important;
+				background-color: @am-block-button-active-hover-background !important;
 			}
 
 		}

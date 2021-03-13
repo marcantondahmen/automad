@@ -33,22 +33,157 @@
  */
 
 
+@am-inline-actions-padding: 0.8rem;
+
 .am-block-editor {
 
 	& .ce-inline-toolbar {
-		background-color: transparent;
-		border: none !important;
-		box-shadow: none;
+
+		display: flex !important;
+		flex-direction: column;
+		max-width: 27.9rem;
+		background-color: @am-bg;
+		border: @am-hairline !important;
+		border-radius: @am-radius;
+		overflow: hidden;
+		.shadow;
+
+		@media (max-width: @am-blocks-breakpoint-small-max) {
+			left: 5px !important;
+			right: 5px !important;
+			width: 24rem;
+			max-width: 24rem !important;
+		}
+
 	}
 
 	& .ce-inline-toolbar__toggler-and-button-wrapper,
+	& .ce-inline-toolbar__actions,
 	& .ce-conversion-toolbar {
 		overflow: hidden;
 		padding: 0;
-		background-color: @am-block-dropdown-background;
-		border-radius: @am-radius;
+		background-color: transparent;
 		border: none;
-		.shadow;
+		border-radius: 0;
+		border-bottom: @am-hairline;
+		margin-top: 0 !important;
+		margin-bottom: -@am-border-width !important;
+	}
+
+	& .ce-inline-toolbar__toggler-and-button-wrapper {
+		order: 1;
+	}
+
+	& .ce-inline-toolbar__actions {
+		
+		order: 3;
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 100% !important;
+
+		& > * {
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			width: 25%;
+			padding: @am-inline-actions-padding !important;
+			padding-top: 0.4rem !important;
+		}
+
+		& > .link {
+			width: 100%;
+			border-bottom: @am-hairline;
+			margin-bottom: -@am-border-width;
+		}
+
+		& > div:not([class]) {
+
+			width: 100%;
+			border-top: @am-hairline;
+			margin-top: -@am-border-width;
+
+			& > div {
+				margin: 0 !important;
+				font-size: 0.8rem;
+			}
+
+			& .delete-button {
+				height: 1.6rem;
+				width: 1.6rem;
+				font-size: 0.65rem;
+			}
+
+			& label {
+
+				flex-direction: column !important;
+				align-items: stretch !important;
+				padding-top: @am-inline-actions-padding;
+
+				& input,
+				& textarea {
+					width: 100% !important;
+				}
+			}
+
+		}
+
+		& > [hidden],
+		& > :empty {
+			display: none !important;
+		}
+
+		& .am-inline-tool-action {
+
+			& .am-block-label {
+				margin-top: 0 !important;
+			}
+
+			& .am-inline-tool-input {
+				box-sizing: border-box;
+				width: 100%;
+			}
+
+		}
+
+		& input,
+		& select {
+			height: 2.4rem;
+			max-height: 2.4rem;
+			min-height: 2.4rem;
+			padding: 0.2rem 0.65rem;
+			-webkit-appearance: none;
+			font-size: 0.8rem;
+		}
+
+		& input[type="color"] {
+		
+			box-sizing: border-box;
+			width: @form-height;
+			min-width: @form-height;
+			padding: 0;
+			border: none !important;
+			outline: none;
+			background-color: transparent !important;
+			box-shadow: none !important;
+			cursor: pointer;
+			-webkit-appearance: none;
+
+			&::-webkit-color-swatch-wrapper {
+				padding: 0;	
+			}
+			
+			&::-moz-color-swatch {
+				border: @am-hairline;
+				border-radius: @am-radius;
+			}
+
+			&::-webkit-color-swatch {
+				border: @am-hairline;
+				border-radius: @am-radius;
+			}
+
+		}
+
 	}
 
 	& .ce-inline-toolbar__dropdown,
@@ -64,34 +199,26 @@
 		background-color: @am-block-dropdown-background;
 		.transition(color 0.2s, background-color 0.2s;);
 
+		@media (max-width: @am-blocks-breakpoint-small-max) {
+			width: 2.1rem;
+			padding: 0 0.4rem !important;
+		}
+
 		&:hover,
 		&:focus {
-			color: @nav-dropdown-hover-color;
-			background-color: @nav-dropdown-hover-background;
+			color: @am-text;
+			background-color: @am-block-button-hover-background;
 		}
 
 		&--active {
 
-			color: @nav-dropdown-hover-color;
-			background-color: @nav-dropdown-hover-background;
+			color: @am-block-button-active-color;
+			background-color: @am-block-button-active-background;
 
 			&:hover,
 			&:focus {
-				color: @button-success-hover-color;
-				background-color: @button-success-hover-background;
-			}
-		}
-
-	}
-
-	& .ce-inline-toolbar {
-
-		& .ce-inline-tool {
-
-			font-size: 0.65rem;
-
-			&[data-tool="link"] {
-				font-size: 1.03rem;
+				color: @am-block-button-active-color;
+				background-color: @am-block-button-active-hover-background;
 			}
 
 		}
@@ -99,74 +226,49 @@
 	}
 
 	& .ce-inline-toolbar__dropdown {
-		width: 3.35rem;
+
+		width: 3.5rem;
 		border-right: @am-hairline;
+
+		&-content {
+			font-size: 0.9rem !important;
+			margin-top: -0.05rem;
+			margin-left: 0.2rem;
+		}
+
+		& .icon--toggler-down {
+			margin-top: 0.1rem;
+		}
+
 	}
 
-	& .ce-inline-toolbar__actions {
+	& .ce-inline-tool {
 
-		margin-top: 0.36rem;
-		color: @am-text;
-		
-		& input {
-			.shadow;
+		font-size: 0.64rem;
+
+		@media (max-width: @am-blocks-breakpoint-small-max) {
+			font-size: 0.6rem;
 		}
 
-		& > div:not([class]) {
-
-			padding: 0.75rem;
-			padding-top: 0.2rem;
-			border-radius: @am-radius;
-			background-color: @am-bg;
-			.shadow;
-
-			&:empty {
-				display: none;
-			}
-
-			& > div {
-				margin: 0 !important;
-			}
-
-			& .delete-button {
-				width: 2.5rem;
-				text-align: center;
-				margin-right: -0.5rem !important;
-			}
-
-			& input:not(:focus) {
-				box-shadow: none;
-			}
-
-			& label {
-
-				flex-direction: column;
-				align-items: flex-start !important;
-				padding-bottom: 0.75rem;
-
-				&:last-child {
-					padding-bottom: 0;
-				}
-
-				& span {
-					font-size: @button-mini-font-size;
-					font-weight: @form-stacked-font-weight;
-					line-height: @button-mini-height;
-				}
-
-				& input,
-				& textarea {
-					width: 100% !important;
-				}
-
-			}
-
+		&[data-tool="link"] {
+			font-size: 0.78rem;
 		}
-	
+
 	}
 
 	& .ce-conversion-toolbar {
-		overflow: hidden;
+
+		order: 2;
+		position: relative;
+		left: 0;
+		display: none;
+		width: 100%;
+		box-shadow: none;
+
+		&--showed {
+			display: block;
+			padding-bottom: 0.2rem;
+		}
 	}
 
 	& .ce-conversion-toolbar__label {
@@ -174,8 +276,7 @@
 		color: @am-text;
 		text-transform: inherit;
 		font-weight: @base-body-font-weight;
-		font-size: 0.79rem;
-		border-bottom: @am-hairline;
+		font-size: @button-mini-font-size;
 	}
 
 	& .ce-conversion-tool {
@@ -190,33 +291,28 @@
 		&:hover,
 		&:focus,
 		&--focused {
-			color: @nav-dropdown-hover-color;
-			background-color: @nav-dropdown-hover-background !important;
+			color: @am-text;
+			background-color: @am-block-button-hover-background !important;
 			border: none;
+			box-shadow: none;
 		}
 
 		&__icon {
 
 			width: 1rem;
 			height: 1rem;
+			font-size: 0.8rem !important;
 			color: inherit;
 			background-color: inherit;
 			border: none;
 
 			& svg {
-				margin-top: -0.14rem;
 				width: auto;
 				height: 100%;
 			}
 
 		}
 
-	}
-
-	& .editorjs-inspector-dialog {
-		padding: 0.5rem;
-		border: none !important;
-		.shadow;
 	}
 
 }

@@ -38,19 +38,19 @@
 @am-md-selection-background:               @base-selection-background;
 
 @am-md-navbar-background:                  @am-bg;
-@am-md-navbar-padding:					   0.43rem;
+@am-md-navbar-padding:					   0;
 
-@am-md-navbar-nav-height:                  2.57rem;
-@am-md-navbar-nav-padding-horizontal:      0.71rem;
+@am-md-navbar-nav-height:                  @button-height;
+@am-md-navbar-nav-padding-horizontal:      0.85rem;
 @am-md-navbar-nav-line-height:             @am-md-navbar-nav-height;
 @am-md-navbar-nav-color:                   @am-text;
 
-@am-md-navbar-nav-hover-background:        @am-md-navbar-background;
-@am-md-navbar-nav-hover-color:             @am-success;
+@am-md-navbar-nav-hover-background:        @button-hover-background;
+@am-md-navbar-nav-hover-color:             @am-text;
 @am-md-navbar-nav-onclick-background:      @am-md-navbar-nav-hover-background;
 @am-md-navbar-nav-onclick-color:           @am-md-navbar-nav-hover-color;
-@am-md-navbar-nav-active-background:       @am-md-navbar-nav-hover-background;
-@am-md-navbar-nav-active-color:            @am-md-navbar-nav-hover-color;
+@am-md-navbar-nav-active-background:       @am-bg;
+@am-md-navbar-nav-active-color:            @am-success;
  
 @am-md-content-border:                     @am-border-color;
 @am-md-content-background:                 @am-bg;
@@ -163,6 +163,10 @@
 				& svg {
 					fill: @am-md-navbar-nav-active-color;
 					stroke: @am-md-navbar-nav-active-color;
+				}
+
+				&:hover {
+					background-color: @am-md-navbar-nav-hover-background;
 				}
 
 			}
