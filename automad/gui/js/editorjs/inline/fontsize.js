@@ -61,10 +61,16 @@ class AutomadFontSize extends AutomadInlineTool {
 
 	renderActions() {
 
-		this.select = Automad.util.create.select(['am-inline-input'], this.options, this.selected);
-		this.select.hidden = true;
-		
-		return this.select;
+		const create = Automad.util.create,
+			  label = create.label(AutomadFontSize.title);
+
+		this.select = create.select([this.cls.input], this.options, this.selected);
+		this.wrapper = create.element('span', [this.cls.wrapper]);
+		this.wrapper.appendChild(label);
+		this.wrapper.appendChild(this.select);
+		this.wrapper.hidden = true;
+
+		return this.wrapper;
 
 	}
 
@@ -79,13 +85,13 @@ class AutomadFontSize extends AutomadInlineTool {
 			node.style.fontSize = this.select.value;
 		};
 
-		this.select.hidden = false;
+		this.wrapper.hidden = false;
 
 	}
 
 	hideActions() {
 		this.select.onchange = null;
-		this.select.hidden = true;
+		this.wrapper.hidden = true;
 	}
 
 

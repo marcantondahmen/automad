@@ -61,13 +61,19 @@ class AutomadColor extends AutomadInlineTool {
 
 	renderActions() {
 
-		this.colorPicker = document.createElement('input');
+		const create = Automad.util.create,
+			  label = create.label(this.constructor.title);
+
+		this.colorPicker = create.element('input', [this.cls.input]);
 		this.colorPicker.type = 'color';
 		this.colorPicker.value = this.defaultColor;
-		this.colorPicker.hidden = true;
-		this.colorPicker.classList.add('am-inline-input');
-
-		return this.colorPicker;
+	
+		this.wrapper = create.element('span', [this.cls.wrapper]);
+		this.wrapper.appendChild(label);
+		this.wrapper.appendChild(this.colorPicker);
+		this.wrapper.hidden = true;
+		
+		return this.wrapper;
 
 	}
 
@@ -81,13 +87,13 @@ class AutomadColor extends AutomadInlineTool {
 			node.style.color = this.colorPicker.value;
 		};
 
-		this.colorPicker.hidden = false;
+		this.wrapper.hidden = false;
 
 	}
 
 	hideActions() {
 		this.colorPicker.onchange = null;
-		this.colorPicker.hidden = true;
+		this.wrapper.hidden = true;
 	}
 
 	convertToHex(color) {
@@ -114,7 +120,7 @@ class AutomadBackground extends AutomadColor {
 
 
 	static get title() {
-		return 'Background Color';
+		return 'Background';
 	}
 
 	static get sanitize() {
@@ -144,7 +150,7 @@ class AutomadBackground extends AutomadColor {
 		this.colorPicker.onchange = () => {
 			node.style.backgroundColor = this.colorPicker.value;
 		};
-		this.colorPicker.hidden = false;
+		this.wrapper.hidden = false;
 
 	}
 

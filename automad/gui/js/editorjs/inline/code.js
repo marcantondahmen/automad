@@ -37,10 +37,6 @@
 class AutomadInlineCode extends AutomadInlineTool {
 
 
-	get shortcut() {
-		return 'CMD+M';
-	}
-
 	static get title() {
 		return 'Code';
 	}

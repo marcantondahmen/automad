@@ -56,15 +56,21 @@ class AutomadLineHeight extends AutomadInlineTool {
 	}
 
 	get options() {
-		return ['inherit', '1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8', '1.9', '2.0'];
+		return ['inherit', '0.8', '0.9', '1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8', '1.9', '2.0'];
 	}
 
 	renderActions() {
 
-		this.select = Automad.util.create.select(['am-inline-input'], this.options, this.selected);
-		this.select.hidden = true;
-		
-		return this.select;
+		const create = Automad.util.create,
+			  label = create.label(AutomadLineHeight.title);
+
+		this.select = create.select([this.cls.input], this.options, this.selected);
+		this.wrapper = create.element('span', [this.cls.wrapper]);
+		this.wrapper.appendChild(label);
+		this.wrapper.appendChild(this.select);
+		this.wrapper.hidden = true;
+
+		return this.wrapper;
 
 	}
 
@@ -74,18 +80,19 @@ class AutomadLineHeight extends AutomadInlineTool {
 
 		this.select.value = lineHeight ? lineHeight : 'inherit';
 		node.style.lineHeight = this.select.value;
+		node.style.display = 'inline-block';
 
 		this.select.onchange = () => {
 			node.style.lineHeight = this.select.value;
 		};
 
-		this.select.hidden = false;
+		this.wrapper.hidden = false;
 
 	}
 
 	hideActions() {
 		this.select.onchange = null;
-		this.select.hidden = true;
+		this.wrapper.hidden = true;
 	}
 
 

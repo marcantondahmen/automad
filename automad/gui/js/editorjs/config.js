@@ -73,7 +73,7 @@ class AutomadEditorConfig {
 		}
 
 		if (!readOnly) {
-			inlineAll = ['bold', 'italic', 'underline', 'inlineCode', 'link', 'fontSize', 'lineHeight', 'color', 'background', 'editorJSStyle', 'editorJSInspector'];
+			inlineAll = ['bold', 'italic', 'underline', 'inlineCode', 'link', 'fontSize', 'lineHeight', 'color', 'background', 'editorJSStyle'];
 			inlineReduced = ['bold', 'italic', 'underline', 'inlineCode', 'fontSize', 'lineHeight', 'color', 'background'];
 			inlineTools = {
 				bold: AutomadBold,
@@ -87,8 +87,7 @@ class AutomadEditorConfig {
 				editorJSStyle: {
 					class: EditorJSStyle.StyleInlineTool,
 					shortcut: ' '
-				},
-				editorJSInspector: EditorJSInspector
+				}
 			};
 		}
 

@@ -45,6 +45,13 @@ class AutomadInlineTool {
 
 	static get sanitize() {}
 
+	get cls() {
+		return {
+			input: 'am-inline-tool-input',
+			wrapper: 'am-inline-tool-action'
+		}
+	}
+
 	get tag() {}
 
 	get icon() {}
@@ -102,17 +109,20 @@ class AutomadInlineTool {
 
 	unwrap() {
 
-		const node = this.api.selection.findParentTag(this.tag);
+		try {
 
-		this.api.selection.expandToTag(node);
+			const node = this.api.selection.findParentTag(this.tag);
 
-		const sel = window.getSelection(),
-			  range = sel.getRangeAt(0),
-			  unwrappedContent = range.extractContents();
+			this.api.selection.expandToTag(node);
 
-		node.remove();
-		range.insertNode(unwrappedContent);
-		sel.removeAllRanges();
+			const sel = window.getSelection(),
+				range = sel.getRangeAt(0),
+				unwrappedContent = range.extractContents();
+
+			node.remove();
+			range.insertNode(unwrappedContent);
+
+		} catch (e) {}
 
 	}
 
