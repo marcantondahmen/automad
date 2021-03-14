@@ -47,24 +47,25 @@
 			.shadow;
 		}
 
-		&__content .ce-toolbox {
-			
-			border-radius: @am-radius;
-			background-color: @am-block-dropdown-background;
-
-			@media (min-width: @am-blocks-breakpoint-small) {
-				border: @am-hairline;
-				.shadow;
-			}
-			
-		}
-
 		&__plus {
+
+			height: 2.5rem;
+			width: 2.5rem;
+			color: @am-text;
+			background-color: @am-bg;
+			border-radius: @am-radius + 0.2rem;
+			.transition(color 0.2s;);
+
+			&:hover {
+				color: @am-success;
+			}
 
 			@media (min-width: @am-blocks-breakpoint-small) {
 				left: 0.35rem;
+				border: @am-hairline;
+				.shadow;
 			}
-			
+
 		}
 
 		&__content {
@@ -122,10 +123,22 @@
 	}
 
 	& .ce-toolbox {
-
+		
 		font-size: 0.86rem;
+		border-radius: @am-radius + 0.2rem;
+		background-color: @am-block-dropdown-background;
+
+		@media (min-width: @am-blocks-breakpoint-small) {
+			border: @am-hairline;
+			.shadow;
+		}
 
 		&__button {
+
+			height: 2.5rem;
+			width: 2.5rem;
+			color: @am-text;
+			.transition(color 0.2s, background-color 0.2s;);
 
 			&:first-child {
 				border-top-left-radius: @am-radius - @am-border-width;
@@ -137,6 +150,24 @@
 				border-bottom-right-radius: @am-radius - @am-border-width;
 			}
 
+			&:hover,
+			&:focus {
+				color: @am-text;
+				background-color: @am-block-button-hover-background !important;
+				
+			}
+
+			&.ce-toolbox__button--active {
+				
+				color: @am-success;
+				animation: none !important;
+
+				&:hover {
+					color: @am-success;
+				}
+
+			}
+
 		}
 
 		& [data-tool="header"],
@@ -144,50 +175,6 @@
 		& [data-tool="buttons"],
 		& [data-tool="code"] {
 			border-left: @am-hairline;
-		}
-
-	}
-
-	& .ce-toolbar__plus {
-
-		height: 2.5rem;
-		width: 2.5rem;
-		color: @am-text;
-		.transition(color 0.2s;);
-
-		&:hover {
-			color: @am-success;
-		}
-
-	}
-
-	& .ce-toolbox__button {
-
-		height: 2.5rem;
-		width: 2.5rem;
-		color: @am-text;
-		.transition(color 0.2s, background-color 0.2s;);
-
-		&:hover,
-		&:focus {
-			color: @am-text;
-			background-color: @am-block-button-hover-background !important;
-			
-		}
-
-		&.ce-toolbox__button--active {
-			color: @am-success;
-			animation: none !important;
-		}
-
-	}
-
-	& .ce-toolbox__button--active {
-
-		color: @am-success;		
-
-		&:hover {
-			color: @am-success;
 		}
 
 	}
