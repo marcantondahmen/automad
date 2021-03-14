@@ -42,16 +42,16 @@
 			regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
 			embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
 			html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
-			height: 320,
-			width: 580,
+			height: 9,
+			width: 16,
 		},
 
 		youtube: {
 			regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)/,
 			embedUrl: 'https://www.youtube.com/embed/<%= remote_id %>',
 			html: '<iframe style="width:100%;" height="320" frameborder="0" allowfullscreen></iframe>',
-			height: 320,
-			width: 580,
+			height: 9,
+			width: 16,
 			id: ([id, params]) => {
 				if (!params && id) {
 					return id;

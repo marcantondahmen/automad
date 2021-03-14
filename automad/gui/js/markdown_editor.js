@@ -66,7 +66,7 @@
 			autocomplete: true,
 			enablescripts: false,
 			height: 500,
-			maxsplitsize: 1000,
+			maxsplitsize: 1100,
 			codemirror: {
 				mode: 'gfm',
 				lineWrapping: true,
