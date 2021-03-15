@@ -48,10 +48,7 @@
 
 			const holder = editor.configuration.holder,
 				  inputs = holder.querySelectorAll('input, select'),
-				  editables = holder.querySelectorAll('[contenteditable]'),
-				  toolbar = holder.querySelector(`.${AutomadEditorConfig.cls.toolbar}`);
-
-			toolbar.remove();
+				  editables = holder.querySelectorAll('[contenteditable]');
 			
 			Array.from(inputs).forEach((element) => {
 				element.setAttribute('readonly', true);
@@ -86,9 +83,9 @@
 			}
 
 			// In order to avoid infinite loops due to initializing nested editors,
-			// the initialization of those editors has to be prevented as soon as 
+			// the initialization of those readOnly preview editors has to be prevented as soon as 
 			// there is no nested data anymore.
-			if (typeof data.blocks === 'undefined') {
+			if (typeof data.blocks === 'undefined' && options.readOnly) {
 				return;
 			}
 
@@ -98,7 +95,7 @@
 				logLevel: 'ERROR',
 				data: data,
 				tools: AutomadEditorConfig.tools(options.readOnly),
-				readOnly: false,
+				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
 				i18n: {
@@ -167,7 +164,7 @@
 
 					const layout = new AutomadLayout(editor);
 
-					layout.applyLayout(function() {
+					layout.applyLayout(data, function() {
 
 						if (!options.readOnly) {
 
@@ -180,7 +177,7 @@
 
 						} else {
 
-							Automad.blockEditor.makeReadOnly(editor);
+							Automad.blockEditor.makeReadOnly(editor, data);
 
 						}
 

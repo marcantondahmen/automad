@@ -48,6 +48,10 @@
 
 class AutomadBlockNested {
 
+	static get isReadOnlySupported() {
+		return true;
+	}
+
 	static get cls() {
 		return {
 			block: 'am-block-nested',
