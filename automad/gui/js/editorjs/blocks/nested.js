@@ -187,7 +187,7 @@ class AutomadBlockNested {
 		const create = Automad.util.create,
 			  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
 		
-		var	number = parseInt(value) || '',
+		var	number = parseFloat(value) || '',
 			unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
 
 		return `<div class="am-form-input-group">
