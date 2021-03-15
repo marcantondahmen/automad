@@ -70,14 +70,6 @@ class Nested {
 
 		if (!empty($data->style)) {
 
-			if (!empty($data->style->backgroundImage) || 
-				!empty($data->style->backgroundColor) ||
-				!empty($data->style->shadow) || 
-				(!empty($data->style->borderWidth) && strpos($data->style->borderWidth, '0') !== 0) 
-			) {
-				$class = ' am-nested-padding';
-			}
-
 			if (!empty($data->style->card)) {
 				$class = ' am-nested-card';
 			}
