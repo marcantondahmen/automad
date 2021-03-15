@@ -241,7 +241,12 @@
 
 				be.createEditor({
 					holder: id,
-					input: input
+					input: input,
+					onReady: () => {
+						// Add init class to all editor tooltips in order to keep them 
+						// during clean-up after destroying nested modal editor tooltips.
+						$('.ct').toggleClass('init', true);
+					}
 				});
 
 			});

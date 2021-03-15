@@ -172,8 +172,8 @@ class AutomadBlockNested {
 		var container = Automad.nestedEditor.$(this.container).find(`.${this.modalContainerCls}`);
 
 		try {
-			container.prev('.ct').remove();
-			container.next('.ct').remove();
+			// Remove all tooltips that haven't been created by the initial editors. 
+			Automad.nestedEditor.$('.ct:not(.init)').remove();
 		} catch (e) { }
 
 		try {
@@ -428,7 +428,7 @@ class AutomadBlockNested {
 
 		this.destroyModal();
 
-		this.modalWrapper = create.element('div', [this.modalContainerCls]);
+		this.modalWrapper = create.element('div', [this.modalContainerCls, AutomadBlockNested.cls.modalContainer]);
 		this.modalWrapper.innerHTML = `
 			<div id="${this.modalId}" class="uk-modal ${AutomadBlockNested.cls.modal}">
 				<div class="uk-modal-dialog am-block-editor uk-form">
