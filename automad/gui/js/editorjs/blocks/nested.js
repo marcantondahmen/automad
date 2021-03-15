@@ -86,8 +86,14 @@ class AutomadBlockNested {
 
 	constructor({data, config, api}) {
 
-		var create = Automad.util.create;
+		var create = Automad.util.create,
+			idSuffix = Date.now();
 		
+		this.modalContainerCls = `${AutomadBlockNested.cls.modalContainer}-${idSuffix}`;
+		this.modalId = `${AutomadBlockNested.ids.modal}-${idSuffix}`;
+		this.modalEditorId = `${AutomadBlockNested.ids.modalEditor}-${idSuffix}`;
+		this.modalDropdownId = `${AutomadBlockNested.ids.modalDropdown}-${idSuffix}`;
+
 		this.api = api;
 
 		this.data = {
@@ -146,7 +152,6 @@ class AutomadBlockNested {
 		this.editor = Automad.blockEditor.createEditor({
 			holder: this.holder,
 			input: this.input,
-			isNested: true,
 			readOnly: true
 		});
 
@@ -160,7 +165,7 @@ class AutomadBlockNested {
 			this.modalEditor.destroy();
 		} catch (e) {}
 
-		var container = Automad.nestedEditor.$(this.container).find(`.${AutomadBlockNested.cls.modalContainer}`);
+		var container = Automad.nestedEditor.$(this.container).find(`.${this.modalContainerCls}`);
 
 		try {
 			container.prev('.ct').remove();
@@ -225,7 +230,7 @@ class AutomadBlockNested {
 
 		return `
 			<div
-			id="${AutomadBlockNested.ids.modalDropdown}" 
+			id="${this.modalDropdownId}" 
 			class="uk-form" 
 			data-uk-dropdown="{mode:'click', pos:'bottom-left'}"
 			>
@@ -419,9 +424,9 @@ class AutomadBlockNested {
 
 		this.destroyModal();
 
-		this.modalWrapper = create.element('div', [AutomadBlockNested.cls.modalContainer]);
+		this.modalWrapper = create.element('div', [this.modalContainerCls]);
 		this.modalWrapper.innerHTML = `
-			<div id="${AutomadBlockNested.ids.modal}" class="uk-modal ${AutomadBlockNested.cls.modal}">
+			<div id="${this.modalId}" class="uk-modal ${AutomadBlockNested.cls.modal}">
 				<div class="uk-modal-dialog am-block-editor uk-form">
 					<div class="uk-modal-header">
 						<div class="uk-position-relative">
@@ -430,7 +435,7 @@ class AutomadBlockNested {
 						<a class="uk-modal-close"><i class="uk-icon-compress"></i></a>
 					</div>
 					<section 
-					id="${AutomadBlockNested.ids.modalEditor}" 
+					id="${this.modalEditorId}" 
 					class="am-block-editor-container"
 					></section>
 				</div>
@@ -441,25 +446,24 @@ class AutomadBlockNested {
 		this.initToggles();
 		this.applyDialogSize();
 
-		ne.$(`#${AutomadBlockNested.ids.modalDropdown}`).on('hide.uk.dropdown', () => {
+		ne.$(`#${this.modalDropdownId}`).on('hide.uk.dropdown', () => {
 			this.saveStyleSettings();
-			this.applyStyleSettings(document.getElementById(AutomadBlockNested.ids.modalEditor));
+			this.applyStyleSettings(document.getElementById(this.modalEditorId));
 		});
 
-		const modal = ne.UIkit.modal(`#${AutomadBlockNested.ids.modal}`, { 
+		const modal = ne.UIkit.modal(`#${this.modalId}`, { 
 						modal: false, 
 						bgclose: true, 
 						keyboard: false 
 					  });
 
 		this.modalEditor = Automad.blockEditor.createEditor({
-			holder: AutomadBlockNested.ids.modalEditor,
+			holder: this.modalEditorId,
 			input: this.input,
-			isNested: true,
 			autofocus: true,
 			onReady: () => {
 
-				this.applyStyleSettings(document.getElementById(AutomadBlockNested.ids.modalEditor));
+				this.applyStyleSettings(document.getElementById(this.modalEditorId));
 
 				modal.on('hide.uk.modal', () => {
 					this.saveStyleSettings();

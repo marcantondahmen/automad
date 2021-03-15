@@ -62,11 +62,6 @@
 				element.removeAttribute('contenteditable');
 			});
 
-			const html = holder.innerHTML;
-
-			editor.destroy();
-			holder.innerHTML = html;
-
 		},
 
 		createEditor: function(options) {
@@ -76,7 +71,6 @@
 			options = Object.assign({
 				holder: false,
 				input: false,
-				isNested: false,
 				readOnly: false,
 				autofocus: false,
 				onReady: function() {}
@@ -91,12 +85,19 @@
 				var data = {};
 			}
 
+			// In order to avoid infinite loops due to initializing nested editors,
+			// the initialization of those editors has to be prevented as soon as 
+			// there is no nested data anymore.
+			if (typeof data.blocks === 'undefined') {
+				return;
+			}
+
 			var editor = new EditorJS({
 
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
-				tools: AutomadEditorConfig.tools(options.isNested, options.readOnly),
+				tools: AutomadEditorConfig.tools(options.readOnly),
 				readOnly: false,
 				minHeight: false,
 				autofocus: options.autofocus,

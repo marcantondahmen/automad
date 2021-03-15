@@ -54,23 +54,11 @@ class AutomadEditorConfig {
 
 	}
 
-	static tools(isNested, readOnly) {
+	static tools(readOnly) {
 
-		var tools = {},
-			inlineTools = {},
+		var inlineTools = {},
 			inlineAll = false,
 			inlineReduced = false;
-
-		if (!isNested) {
-			tools = {
-				nested: {
-					class: AutomadBlockNested,
-					config: {
-						allowStretching: true
-					}
-				}
-			};
-		}
 
 		if (!readOnly) {
 			inlineAll = ['bold', 'italic', 'underline', 'inlineCode', 'link', 'fontSize', 'lineHeight', 'color', 'background', 'editorJSStyle'];
@@ -92,13 +80,16 @@ class AutomadEditorConfig {
 			};
 		}
 
-		return Object.assign(tools, {
+		return Object.assign({
 
 			paragraph: {
 				class: AutomadBlockParagraph,
-				inlineToolbar: inlineAll,
+				inlineToolbar: inlineAll
+			},
+			nested: {
+				class: AutomadBlockNested,
 				config: {
-					isNested: isNested
+					allowStretching: true
 				}
 			},
 			header: {
@@ -107,115 +98,78 @@ class AutomadEditorConfig {
 				inlineToolbar: inlineAll,
 				config: {
 					levels: [1, 2, 3, 4, 5, 6],
-					defaultLevel: 2,
-					isNested: isNested
+					defaultLevel: 2
 				}
 			},
 			lists: {
 				class: AutomadBlockList,
-				inlineToolbar: inlineAll,
-				config: {
-					isNested: isNested
-				}
+				inlineToolbar: inlineAll
 			},
 			table: {
 				class: AutomadBlockTable,
-				inlineToolbar: inlineAll,
-				config: {
-					isNested: isNested
-				}
+				inlineToolbar: inlineAll
 			},
 			quote: {
 				class: AutomadBlockQuote,
-				inlineToolbar: inlineAll,
-				config: {
-					isNested: isNested
-				}
+				inlineToolbar: inlineAll
 			},
 			delimiter: { 
 				class: AutomadBlockDelimiter,
 				config: {
-					allowStretching: true,
-					isNested: isNested
+					allowStretching: true
 				}
 			},
 			image: {
 				class: AutomadBlockImage,
 				inlineToolbar: inlineAll,
 				config: {
-					allowStretching: true,
-					isNested: isNested
+					allowStretching: true
 				}
 			},
 			gallery: {
 				class: AutomadBlockGallery,
 				config: {
-					allowStretching: true,
-					isNested: isNested
+					allowStretching: true
 				}
 			},
 			slider: {
 				class: AutomadBlockSlider,
 				config: {
-					allowStretching: true,
-					isNested: isNested
+					allowStretching: true
 				}
 			},
 			buttons: {
 				class: AutomadBlockButtons,
-				inlineToolbar: inlineReduced,
-				config: {
-					isNested: isNested
-				}
+				inlineToolbar: inlineReduced
 			},
 			pagelist: {
 				class: AutomadBlockPagelist,
 				config: {
-					allowStretching: true,
-					isNested: isNested
+					allowStretching: true
 				}
 			},
 			filelist: { 
-				class: AutomadBlockFilelist,
-				config: {
-					isNested: isNested
-				}
+				class: AutomadBlockFilelist
 			},
 			toc: {
-				class: AutomadBlockToc,
-				config: {
-					isNested: isNested
-				}
+				class: AutomadBlockToc
 			},
 			code: {
-				class: AutomadBlockTextareaCode,
-				config: {
-					isNested: isNested
-				}
+				class: AutomadBlockTextareaCode
 			},
 			raw: {
-				class: AutomadBlockTextareaRaw,
-				config: {
-					isNested: isNested
-				}
+				class: AutomadBlockTextareaRaw
 			},
 			mail: {
-				class: AutomadBlockMail,
-				config: {
-					isNested: isNested
-				}
+				class: AutomadBlockMail
 			},
 			snippet: {
-				class: AutomadBlockSnippet,
-				config: {
-					isNested: isNested
-				}
+				class: AutomadBlockSnippet
 			},
 			embed: { 
 				class: AutomadBlockEmbed,
 				config: {
-					allowStretching: true,
-					isNested: isNested
+					allowStretching: true
 				}
 			}
 

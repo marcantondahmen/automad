@@ -425,8 +425,7 @@ class AutomadLayout {
 		data.columnStart = saved.columnStart || false;
 		data.rowSpan = saved.rowSpan || false;
 
-		const isNested = config.isNested || false,
-			  allowStretching = config.allowStretching || false;
+		const allowStretching = config.allowStretching || false;
 
 		const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
 			icon: resetOption.icon,
@@ -441,7 +440,7 @@ class AutomadLayout {
 
 		mainWrapper.appendChild(resetButton.get());
 
-		if (!isNested && allowStretching) {
+		if (allowStretching) {
 
 			const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
 				icon: stretchOption.icon,
@@ -483,11 +482,11 @@ class AutomadLayout {
 				clearDataKeys: ['stretched'],
 				onClick: function () {
 					columnStartWrapper.classList.remove('uk-hidden');
-					if (!data.columnStart && !isNested) {
+					if (!data.columnStart) {
 						columnStartWrapper.querySelector('.columnStart').click();
 					}
 					rowSpanWrapper.classList.remove('uk-hidden');
-					if (!data.rowSpan && !isNested) {
+					if (!data.rowSpan) {
 						rowSpanWrapper.querySelector('.rowSpan').click();
 					}
 				}
