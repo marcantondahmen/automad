@@ -89,8 +89,8 @@ class AutomadEditorConfig {
 					flex: flex
 				}
 			},
-			nested: {
-				class: AutomadBlockNested,
+			section: {
+				class: AutomadBlockSection,
 				config: {
 					allowStretching: true,
 					flex: flex

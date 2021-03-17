@@ -83,9 +83,9 @@
 				var data = {};
 			}
 
-			// In order to avoid infinite loops due to initializing nested editors,
+			// In order to avoid infinite loops due to initializing section editors,
 			// the initialization of those readOnly preview editors has to be prevented as soon as 
-			// there is no nested data anymore.
+			// there is no section data anymore.
 			if (typeof data.blocks === 'undefined' && options.readOnly) {
 				return;
 			}
@@ -246,7 +246,7 @@
 					flex: false,
 					onReady: () => {
 						// Add init class to all editor tooltips in order to keep them 
-						// during clean-up after destroying nested modal editor tooltips.
+						// during clean-up after destroying section modal editor tooltips.
 						$('.ct').toggleClass('init', true);
 					}
 				});

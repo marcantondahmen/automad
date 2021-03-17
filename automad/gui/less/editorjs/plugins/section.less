@@ -33,7 +33,7 @@
  */
 
 
-.am-block-nested {
+.am-block-section {
 
 	position: relative;
 	box-sizing: border-box;
@@ -75,7 +75,7 @@
 
 	}
 
-	& .am-nested-overlay-focus {
+	& .am-section-overlay-focus {
 
 		// Only show overlay when block is focused (see below).
 		// When focused it has the same dimensions as the section:after element.
@@ -93,7 +93,7 @@
 	}
 
 	& section:after,
-	.ce-block--focused & .am-nested-overlay-focus {
+	.ce-block--focused & .am-section-overlay-focus {
 		position: absolute;
 		box-sizing: border-box;
 		display: block;
@@ -104,7 +104,7 @@
 		left: -0.5rem;
 	}
 
-	& .am-nested-edit-button {
+	& .am-section-edit-button {
 		position: absolute;
 		display: block;
 		width: auto;
@@ -122,7 +122,7 @@
 		.shadow;
 	}
 
-	& & .am-nested-edit-button {
+	& & .am-section-edit-button {
 		display: none;
 	}
 
@@ -149,7 +149,7 @@
 			border-bottom: @am-hairline;
 		}
 
-		& .am-nested-style-button {
+		& .am-section-style-button {
 			border-color: transparent !important;
 		}
 

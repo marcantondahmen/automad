@@ -36,7 +36,7 @@
 
 +function(Automad, $, UIkit) {
 
-	Automad.nestedEditor = {
+	Automad.sectionEditor = {
 
 		$: $,
 		UIkit: UIkit
@@ -46,7 +46,7 @@
 }(window.Automad = window.Automad || {}, jQuery, UIkit);
 
 
-class AutomadBlockNested {
+class AutomadBlockSection {
 
 	static get isReadOnlySupported() {
 		return true;
@@ -54,18 +54,18 @@ class AutomadBlockNested {
 
 	static get cls() {
 		return {
-			block: 'am-block-nested',
-			modal: 'am-block-nested-modal',
-			modalContainer: 'am-block-nested-modal-container',
-			flex: 'am-block-nested-flex'
+			block: 'am-block-section',
+			modal: 'am-block-section-modal',
+			modalContainer: 'am-block-section-modal-container',
+			flex: 'am-block-section-flex'
 		}
 	}
 
 	static get ids() {
 		return {
-			modal: 'am-block-nested-modal',
-			modalEditor: 'am-block-nested-modal-editor',
-			modalDropdown: 'am-block-nested-modal-dropdown'
+			modal: 'am-block-section-modal',
+			modalEditor: 'am-block-section-modal-editor',
+			modalDropdown: 'am-block-section-modal-dropdown'
 		}
 	}
 
@@ -75,7 +75,7 @@ class AutomadBlockNested {
 
 	static get sanitize() {
 		return {
-			nestedData: true, // Allow HTML tags
+			sectionData: true, // Allow HTML tags
 			style: {
 				css: false
 			}
@@ -84,7 +84,7 @@ class AutomadBlockNested {
 
 	static get toolbox() {
 		return {
-			title: AutomadEditorTranslation.get('nested_toolbox'),
+			title: AutomadEditorTranslation.get('section_toolbox'),
 			icon: '<svg width="18px" height="18px" viewBox="0 0 18 18"><path d="M14,0H4C1.8,0,0,1.8,0,4v10c0,2.2,1.8,4,4,4h10c2.2,0,4-1.8,4-4V4C18,1.8,16.2,0,14,0z M3,4c0-0.6,0.4-1,1-1h7 c0.6,0,1,0.4,1,1v2c0,0.6-0.4,1-1,1H4C3.4,7,3,6.6,3,6V4z M9,15H4c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h5c0.6,0,1,0.4,1,1 C10,14.6,9.6,15,9,15z M14,11H4c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h10c0.6,0,1,0.4,1,1C15,10.6,14.6,11,14,11z"/></svg>'
 		};
 	}
@@ -95,39 +95,39 @@ class AutomadBlockNested {
 			t = AutomadEditorTranslation.get,
 			idSuffix = Date.now();
 		
-		this.modalContainerCls = `${AutomadBlockNested.cls.modalContainer}-${idSuffix}`;
-		this.modalId = `${AutomadBlockNested.ids.modal}-${idSuffix}`;
-		this.modalEditorId = `${AutomadBlockNested.ids.modalEditor}-${idSuffix}`;
-		this.modalDropdownId = `${AutomadBlockNested.ids.modalDropdown}-${idSuffix}`;
+		this.modalContainerCls = `${AutomadBlockSection.cls.modalContainer}-${idSuffix}`;
+		this.modalId = `${AutomadBlockSection.ids.modal}-${idSuffix}`;
+		this.modalEditorId = `${AutomadBlockSection.ids.modalEditor}-${idSuffix}`;
+		this.modalDropdownId = `${AutomadBlockSection.ids.modalDropdown}-${idSuffix}`;
 
 		this.api = api;
 
 		this.data = {
-			nestedData: data.nestedData || {},
+			sectionData: data.sectionData || {},
 			style: data.style || {},
 			justifyContent: data.justifyContent || ''
 		};
 
 		this.container = document.querySelector('body');
 
-		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockNested.cls.block]);
+		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockSection.cls.block]);
 		this.wrapper.innerHTML = `
 			<input type="hidden">
-			<section class="${AutomadBlockNested.cls.flex}"></section>
-			<div class="am-nested-overlay-focus"></div>
-			<a href="#" class="am-nested-edit-button">
-				${AutomadEditorTranslation.get('nested_edit')}&nbsp;
+			<section class="${AutomadBlockSection.cls.flex}"></section>
+			<div class="am-section-overlay-focus"></div>
+			<a href="#" class="am-section-edit-button">
+				${AutomadEditorTranslation.get('section_edit')}&nbsp;
 				<i class="uk-icon-expand"></i>
 			</a>
 			`;
 
 		this.input = this.wrapper.querySelector('input');
-		this.input.value = JSON.stringify(this.data.nestedData, null, 2);
+		this.input.value = JSON.stringify(this.data.sectionData, null, 2);
 		this.holder = this.wrapper.querySelector('section');
-		this.overlay = this.wrapper.querySelector('.am-nested-overlay-focus');
-		this.button = this.wrapper.querySelector('.am-nested-edit-button');
+		this.overlay = this.wrapper.querySelector('.am-section-overlay-focus');
+		this.button = this.wrapper.querySelector('.am-section-edit-button');
 
-		this.renderNested();
+		this.renderSection();
 
 		[this.button, this.overlay].forEach((item) => {
 
@@ -143,17 +143,17 @@ class AutomadBlockNested {
 			{
 				value: 'flex-start',
 				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z"/><path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/></svg>',
-				title: t('nested_justify_start')
+				title: t('section_justify_start')
 			},
 			{
 				value: 'center',
 				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5V6h-1V1.5A.5.5 0 0 1 8 1zm0 14a.5.5 0 0 1-.5-.5V10h1v4.5a.5.5 0 0 1-.5.5zM2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7z"/></svg>',
-				title: t('nested_justify_center')
+				title: t('section_justify_center')
 			},
 			{
 				value: 'flex-end',
 				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z"/><path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/></svg>',
-				title: t('nested_justify_end')
+				title: t('section_justify_end')
 			}
 		];
 
@@ -168,7 +168,7 @@ class AutomadBlockNested {
 
 	}
 
-	renderNested() {
+	renderSection() {
 
 		try {
 			this.editor.destroy();
@@ -192,11 +192,11 @@ class AutomadBlockNested {
 			this.modalEditor.destroy();
 		} catch (e) {}
 
-		var container = Automad.nestedEditor.$(this.container).find(`.${this.modalContainerCls}`);
+		var container = Automad.sectionEditor.$(this.container).find(`.${this.modalContainerCls}`);
 
 		try {
 			// Remove all tooltips that haven't been created by the initial editors. 
-			Automad.nestedEditor.$('.ct:not(.init)').remove();
+			Automad.sectionEditor.$('.ct:not(.init)').remove();
 		} catch (e) { }
 
 		try {
@@ -224,12 +224,12 @@ class AutomadBlockNested {
 
 		return `<div class="am-form-input-group">
 					${create.editable(
-						[AutomadEditorConfig.cls.input, `am-nested-${clsPrefix}-number`], 
+						[AutomadEditorConfig.cls.input, `am-section-${clsPrefix}-number`], 
 						placeholder, 
 						number
 					).outerHTML}
 					${create.select(
-						[AutomadEditorConfig.cls.input, `am-nested-${clsPrefix}-unit`],
+						[AutomadEditorConfig.cls.input, `am-section-${clsPrefix}-unit`],
 						units,
 						unit
 					).outerHTML}
@@ -261,9 +261,9 @@ class AutomadBlockNested {
 			class="uk-form" 
 			data-uk-dropdown="{mode:'click', pos:'bottom-left'}"
 			>
-				<div class="uk-button am-nested-style-button">
+				<div class="uk-button am-section-style-button">
 					<i class="uk-icon-sliders"></i>&nbsp;
-					${t('nested_style')}&nbsp;
+					${t('section_style')}&nbsp;
 					<i class="uk-icon-caret-down"></i>
 				</div>
 				<div class="uk-dropdown uk-dropdown-blank">
@@ -272,8 +272,8 @@ class AutomadBlockNested {
 						class="am-toggle-switch uk-text-truncate uk-button uk-text-left uk-width-1-1"
 						data-am-toggle
 						>
-							${t('nested_card')}
-							<input id="am-nested-card" type="checkbox" ${style.card == true ? 'checked' : ''}>
+							${t('section_card')}
+							<input id="am-section-card" type="checkbox" ${style.card == true ? 'checked' : ''}>
 						</label>
 					</div>
 					<div class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
@@ -283,8 +283,8 @@ class AutomadBlockNested {
 								class="am-toggle-switch uk-text-truncate uk-button uk-text-left uk-width-1-1"
 								data-am-toggle
 								>
-									${t('nested_shadow')}
-									<input id="am-nested-shadow" type="checkbox" ${style.shadow == true ? 'checked' : ''}>
+									${t('section_shadow')}
+									<input id="am-section-shadow" type="checkbox" ${style.shadow == true ? 'checked' : ''}>
 								</label>
 							</div>
 						</div>
@@ -294,54 +294,54 @@ class AutomadBlockNested {
 								class="am-toggle-switch uk-text-truncate uk-button uk-text-left uk-width-1-1"
 								data-am-toggle
 								>
-									${t('nested_match_row_height')}
-									<input id="am-nested-match-row-height" type="checkbox" ${style.matchRowHeight == true ? 'checked' : ''}>
+									${t('section_match_row_height')}
+									<input id="am-section-match-row-height" type="checkbox" ${style.matchRowHeight == true ? 'checked' : ''}>
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
 			  			<div>
-							${create.label(t('nested_color')).outerHTML}
-							${this.colorPicker('am-nested-color', style.color)}
+							${create.label(t('section_color')).outerHTML}
+							${this.colorPicker('am-section-color', style.color)}
 						</div>
 						<div>
-			  				${create.label(t('nested_background_color')).outerHTML}
-							${this.colorPicker('am-nested-background-color', style.backgroundColor)}
+			  				${create.label(t('section_background_color')).outerHTML}
+							${this.colorPicker('am-section-background-color', style.backgroundColor)}
 						</div>
 					</div>
 					<div class="uk-grid uk-grid-width-medium-1-3 uk-margin-top-remove">
 			  			<div>
-							${create.label(t('nested_border_color')).outerHTML}
-							${this.colorPicker('am-nested-border-color', style.borderColor)}
+							${create.label(t('section_border_color')).outerHTML}
+							${this.colorPicker('am-section-border-color', style.borderColor)}
 						</div>
 						<div>
-			  				${create.label(t('nested_border_width')).outerHTML}
+			  				${create.label(t('section_border_width')).outerHTML}
 							${this.numberUnit('border-width', style.borderWidth, '')}
 						</div>
 						<div>
-			  				${create.label(t('nested_border_radius')).outerHTML}
+			  				${create.label(t('section_border_radius')).outerHTML}
 							${this.numberUnit('border-radius', style.borderRadius, '')}
 						</div>
 					</div>
-					${create.label(t('nested_background_image')).outerHTML}
+					${create.label(t('section_background_image')).outerHTML}
 					<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
 						<button type="button" class="uk-button">
 							<i class="uk-icon-folder-open-o"></i>
 						</button>
 						<input 
 						type="text" 
-						class="am-nested-background-image uk-form-controls uk-width-1-1" 
+						class="am-section-background-image uk-form-controls uk-width-1-1" 
 						value="${style.backgroundImage}"
 						/>
 					</div>
 					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
 			  			<div>
-			  				${create.label(`${t('nested_padding_top')} (padding top)`).outerHTML}
+			  				${create.label(`${t('section_padding_top')} (padding top)`).outerHTML}
 							${this.numberUnit('padding-top', style.paddingTop, '')}
 			  			</div>
 						<div>
-			  				${create.label(`${t('nested_padding_bottom')} (padding bottom)`).outerHTML}
+			  				${create.label(`${t('section_padding_bottom')} (padding bottom)`).outerHTML}
 							${this.numberUnit('padding-bottom', style.paddingBottom, '')}
 			  			</div>
 					</div>
@@ -356,21 +356,21 @@ class AutomadBlockNested {
 		let inputs = {},
 			wrapper = this.modalWrapper;
 
-		inputs.card = wrapper.querySelector('#am-nested-card');
-		inputs.shadow = wrapper.querySelector('#am-nested-shadow');
-		inputs.matchRowHeight = wrapper.querySelector('#am-nested-match-row-height');
-		inputs.color = wrapper.querySelector('#am-nested-color');
-		inputs.backgroundColor = wrapper.querySelector('#am-nested-background-color');
-		inputs.borderColor = wrapper.querySelector('#am-nested-border-color');
-		inputs.borderWidthNumber = wrapper.querySelector('.am-nested-border-width-number');
-		inputs.borderWidthUnit = wrapper.querySelector('.am-nested-border-width-unit');
-		inputs.borderRadiusNumber = wrapper.querySelector('.am-nested-border-radius-number');
-		inputs.borderRadiusUnit = wrapper.querySelector('.am-nested-border-radius-unit');
-		inputs.backgroundImage = wrapper.querySelector('.am-nested-background-image');
-		inputs.paddingTopNumber = wrapper.querySelector('.am-nested-padding-top-number');
-		inputs.paddingTopUnit = wrapper.querySelector('.am-nested-padding-top-unit');
-		inputs.paddingBottomNumber = wrapper.querySelector('.am-nested-padding-bottom-number');
-		inputs.paddingBottomUnit = wrapper.querySelector('.am-nested-padding-bottom-unit');
+		inputs.card = wrapper.querySelector('#am-section-card');
+		inputs.shadow = wrapper.querySelector('#am-section-shadow');
+		inputs.matchRowHeight = wrapper.querySelector('#am-section-match-row-height');
+		inputs.color = wrapper.querySelector('#am-section-color');
+		inputs.backgroundColor = wrapper.querySelector('#am-section-background-color');
+		inputs.borderColor = wrapper.querySelector('#am-section-border-color');
+		inputs.borderWidthNumber = wrapper.querySelector('.am-section-border-width-number');
+		inputs.borderWidthUnit = wrapper.querySelector('.am-section-border-width-unit');
+		inputs.borderRadiusNumber = wrapper.querySelector('.am-section-border-radius-number');
+		inputs.borderRadiusUnit = wrapper.querySelector('.am-section-border-radius-unit');
+		inputs.backgroundImage = wrapper.querySelector('.am-section-background-image');
+		inputs.paddingTopNumber = wrapper.querySelector('.am-section-padding-top-number');
+		inputs.paddingTopUnit = wrapper.querySelector('.am-section-padding-top-unit');
+		inputs.paddingBottomNumber = wrapper.querySelector('.am-section-padding-bottom-number');
+		inputs.paddingBottomUnit = wrapper.querySelector('.am-section-padding-bottom-unit');
 		
 		this.data.style = {
 			card: inputs.card.checked,
@@ -441,7 +441,7 @@ class AutomadBlockNested {
 		const toggles = this.modalWrapper.querySelectorAll('label > input');
 
 		Array.from(toggles).forEach((item) => {
-			Automad.toggle.update(Automad.nestedEditor.$(item));
+			Automad.toggle.update(Automad.sectionEditor.$(item));
 		});
 
 	}
@@ -449,13 +449,13 @@ class AutomadBlockNested {
 	showModal() {
 
 		const create = Automad.util.create,
-			  ne = Automad.nestedEditor;
+			  ne = Automad.sectionEditor;
 
 		this.destroyModal();
 
-		this.modalWrapper = create.element('div', [this.modalContainerCls, AutomadBlockNested.cls.modalContainer]);
+		this.modalWrapper = create.element('div', [this.modalContainerCls, AutomadBlockSection.cls.modalContainer]);
 		this.modalWrapper.innerHTML = `
-			<div id="${this.modalId}" class="uk-modal ${AutomadBlockNested.cls.modal}">
+			<div id="${this.modalId}" class="uk-modal ${AutomadBlockSection.cls.modal}">
 				<div class="uk-modal-dialog am-block-editor uk-form">
 					<div class="uk-modal-header">
 						<div class="uk-position-relative">
@@ -465,7 +465,7 @@ class AutomadBlockNested {
 					</div>
 					<section 
 					id="${this.modalEditorId}" 
-					class="am-block-editor-container ${AutomadBlockNested.cls.flex}"
+					class="am-block-editor-container ${AutomadBlockSection.cls.flex}"
 					></section>
 				</div>
 			</div>
@@ -499,7 +499,7 @@ class AutomadBlockNested {
 					this.saveStyleSettings();
 					ne.$(this.input).trigger('change');
 					this.destroyModal();
-					this.renderNested();
+					this.renderSection();
 				});
 
 			}
@@ -559,7 +559,7 @@ class AutomadBlockNested {
 	save() {
 
 		return Object.assign(this.data, {
-			nestedData: this.getInputData()
+			sectionData: this.getInputData()
 		});
 
 	}
