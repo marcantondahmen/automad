@@ -386,6 +386,18 @@ editor_nested_toolbox: Embedded Editor / Card
 
 -
 
+editor_nested_justify_start: Align Items Left 
+
+-
+
+editor_nested_justify_center: Center Items
+
+-
+
+editor_nested_justify_end: Align Items Right
+
+-
+
 editor_nested_edit: Edit
 
 -
@@ -562,19 +574,7 @@ editor_layout_stretch: Expand the block to full width
 
 -
 
-editor_layout_column_span: Width
-
--
-
-editor_layout_column_start: Shift
-
--
-
-editor_layout_row_span: Row Span
-
--
-
-editor_layout_column_start_auto: Automatically shift blocks
+editor_layout_width: Width
 
 -
 

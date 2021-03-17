@@ -111,101 +111,22 @@
 
 	& .codex-editor__loader {
 		
-		height: 10rem;
+		height: 5rem;
 
 		&:before {
-			width: 1.4rem;
-			height: 1.4rem;
-			margin-top: -0.7rem;
-			margin-left: -0.7rem;
-			border: 3px solid @am-text;
-			border-top-color: @am-bg;
+			width: 1.2rem;
+			height: 1.2rem;
+			margin-top: -0.6rem;
+			margin-left: -0.6rem;
+			border: 2px solid @am-text;
+			border-top-color: transparent;
 		}
 
 	}
 
 	& .codex-editor__redactor {
-
 		padding-bottom: 3.45rem !important;
 		margin-right: 0;
-
-		@media (min-width: 860px) {
-
-			display: grid;
-			grid-template-columns: repeat(12, 1fr);
-			column-gap: 0.3rem;
-			row-gap: 0;
-
-			& > .ce-block {
-
-				grid-column-start: auto;
-				grid-column-end: span 12;
-
-				& .ce-block__content {
-					box-sizing: border-box;
-					height: 100%;
-				}
-
-			}
-
-			& > [class*="columnSpan-"] > .ce-block__content {
-				padding: 0 !important;
-			}
-
-			& > .columnSpan-3 {
-				grid-column-end: span 3;
-			}
-
-			& > .columnSpan-4 {
-				grid-column-end: span 4;
-			}
-
-			& > .columnSpan-6 {
-				grid-column-end: span 6;
-			}
-
-			& > .columnSpan-8 {
-				grid-column-end: span 8;
-			}
-
-			& > .columnSpan-9 {
-				grid-column-end: span 9;
-			}
-
-			& > .columnSpan-12 {
-				grid-column-end: span 12;
-			}
-
-			& > .columnStart-1 {
-				grid-column-start: 1;
-			}
-
-			& > .columnStart-3 {
-				grid-column-start: 3;
-			}
-
-			& > .columnStart-4 {
-				grid-column-start: 4;
-			}
-
-			& > .columnStart-5 {
-				grid-column-start: 5;
-			}
-
-			& > .columnStart-7 {
-				grid-column-start: 7;
-			}
-
-			& > .rowSpan-2 {
-				grid-row: span 2;
-			}
-
-			& > .rowSpan-3 {
-				grid-row: span 3;
-			}
-
-		}
-
 	}
 
 	// Resize SVG icons.

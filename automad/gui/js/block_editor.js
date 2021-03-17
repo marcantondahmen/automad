@@ -70,6 +70,7 @@
 				input: false,
 				readOnly: false,
 				autofocus: false,
+				flex: false,
 				onReady: function() {}
 			}, options);
 
@@ -94,7 +95,7 @@
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
-				tools: AutomadEditorConfig.tools(options.readOnly),
+				tools: AutomadEditorConfig.tools(options.readOnly, options.flex),
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
@@ -242,6 +243,7 @@
 				be.createEditor({
 					holder: id,
 					input: input,
+					flex: false,
 					onReady: () => {
 						// Add init class to all editor tooltips in order to keep them 
 						// during clean-up after destroying nested modal editor tooltips.

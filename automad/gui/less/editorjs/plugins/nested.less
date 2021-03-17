@@ -37,7 +37,6 @@
 
 	position: relative;
 	box-sizing: border-box;
-	height: 100%;
 	min-height: 5rem;
 
 	&.am-block-editor-container {
@@ -174,6 +173,78 @@
 
 		& .uk-modal-dialog > .am-block-editor-container {
 			border-radius: @am-radius;
+		}
+
+	}
+
+	&-flex {
+
+		& .codex-editor__redactor {
+
+			display: flex;
+			flex-wrap: wrap;
+
+			& > * {
+				flex-basis: 100%;
+				flex-grow: 1;
+			}
+
+			& > .columns {
+
+				&-3 {
+					flex-basis: 3% * 100 / 12;
+				}
+
+				&-4 {
+					flex-basis: 4% * 100 / 12;
+				}
+
+				&-6 {
+					flex-basis: 6% * 100 / 12;
+				}
+
+				&-8 {
+					flex-basis: 8% * 100 / 12;
+				}
+
+				&-9 {
+					flex-basis: 9% * 100 / 12;
+				}
+
+				&-12 {
+					flex-basis: 100%;
+				}
+
+			}
+
+		}
+
+		&[class*="justify"] .codex-editor__redactor > * {
+			flex-grow: 0;
+		}
+
+		&.justify-flex-start {
+
+			& .codex-editor__redactor {
+				justify-content: flex-start;
+			}
+
+		}
+
+		&.justify-center {
+
+			& .codex-editor__redactor {
+				justify-content: center;
+			}
+
+		}
+
+		&.justify-flex-end {
+
+			& .codex-editor__redactor {
+				justify-content: flex-end;
+			}
+
 		}
 
 	}

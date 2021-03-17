@@ -54,7 +54,7 @@ class AutomadEditorConfig {
 
 	}
 
-	static tools(readOnly) {
+	static tools(readOnly, flex) {
 
 		var inlineTools = {},
 			inlineAll = false,
@@ -84,12 +84,16 @@ class AutomadEditorConfig {
 
 			paragraph: {
 				class: AutomadBlockParagraph,
-				inlineToolbar: inlineAll
+				inlineToolbar: inlineAll,
+				config: {
+					flex: flex
+				}
 			},
 			nested: {
 				class: AutomadBlockNested,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			},
 			header: {
@@ -98,78 +102,115 @@ class AutomadEditorConfig {
 				inlineToolbar: inlineAll,
 				config: {
 					levels: [1, 2, 3, 4, 5, 6],
-					defaultLevel: 2
+					defaultLevel: 2,
+					flex: flex
 				}
 			},
 			lists: {
 				class: AutomadBlockList,
-				inlineToolbar: inlineAll
+				inlineToolbar: inlineAll,
+				config: {
+					flex: flex
+				}
 			},
 			table: {
 				class: AutomadBlockTable,
-				inlineToolbar: inlineAll
+				inlineToolbar: inlineAll,
+				config: {
+					flex: flex
+				}
 			},
 			quote: {
 				class: AutomadBlockQuote,
-				inlineToolbar: inlineAll
+				inlineToolbar: inlineAll,
+				config: {
+					flex: flex
+				}
 			},
 			delimiter: { 
 				class: AutomadBlockDelimiter,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			},
 			image: {
 				class: AutomadBlockImage,
 				inlineToolbar: inlineAll,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			},
 			gallery: {
 				class: AutomadBlockGallery,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			},
 			slider: {
 				class: AutomadBlockSlider,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			},
 			buttons: {
 				class: AutomadBlockButtons,
-				inlineToolbar: inlineReduced
+				inlineToolbar: inlineReduced,
+				config: {
+					flex: flex
+				}
 			},
 			pagelist: {
 				class: AutomadBlockPagelist,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			},
 			filelist: { 
-				class: AutomadBlockFilelist
+				class: AutomadBlockFilelist,
+				config: {
+					flex: flex
+				}
 			},
 			toc: {
-				class: AutomadBlockToc
+				class: AutomadBlockToc,
+				config: {
+					flex: flex
+				}
 			},
 			code: {
-				class: AutomadBlockTextareaCode
+				class: AutomadBlockTextareaCode,
+				config: {
+					flex: flex
+				}
 			},
 			raw: {
-				class: AutomadBlockTextareaRaw
+				class: AutomadBlockTextareaRaw,
+				config: {
+					flex: flex
+				}
 			},
 			mail: {
-				class: AutomadBlockMail
+				class: AutomadBlockMail,
+				config: {
+					flex: flex
+				}
 			},
 			snippet: {
-				class: AutomadBlockSnippet
+				class: AutomadBlockSnippet,
+				config: {
+					flex: flex
+				}
 			},
 			embed: { 
 				class: AutomadBlockEmbed,
 				config: {
-					allowStretching: true
+					allowStretching: true,
+					flex: flex
 				}
 			}
 

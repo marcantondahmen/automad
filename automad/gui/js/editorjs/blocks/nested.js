@@ -56,7 +56,8 @@ class AutomadBlockNested {
 		return {
 			block: 'am-block-nested',
 			modal: 'am-block-nested-modal',
-			modalContainer: 'am-block-nested-modal-container'
+			modalContainer: 'am-block-nested-modal-container',
+			flex: 'am-block-nested-flex'
 		}
 	}
 
@@ -91,6 +92,7 @@ class AutomadBlockNested {
 	constructor({data, config, api}) {
 
 		var create = Automad.util.create,
+			t = AutomadEditorTranslation.get,
 			idSuffix = Date.now();
 		
 		this.modalContainerCls = `${AutomadBlockNested.cls.modalContainer}-${idSuffix}`;
@@ -102,16 +104,16 @@ class AutomadBlockNested {
 
 		this.data = {
 			nestedData: data.nestedData || {},
-			style: data.style || {}
+			style: data.style || {},
+			justifyContent: data.justifyContent || ''
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 		this.container = document.querySelector('body');
 
 		this.wrapper = create.element('div', ['am-block-editor-container', AutomadBlockNested.cls.block]);
 		this.wrapper.innerHTML = `
 			<input type="hidden">
-			<section></section>
+			<section class="${AutomadBlockNested.cls.flex}"></section>
 			<div class="am-nested-overlay-focus"></div>
 			<a href="#" class="am-nested-edit-button">
 				${AutomadEditorTranslation.get('nested_edit')}&nbsp;
@@ -136,6 +138,27 @@ class AutomadBlockNested {
 			});
 
 		});
+
+		this.justifySettings = [
+			{
+				value: 'flex-start',
+				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z"/><path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/></svg>',
+				title: t('nested_justify_start')
+			},
+			{
+				value: 'center',
+				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5V6h-1V1.5A.5.5 0 0 1 8 1zm0 14a.5.5 0 0 1-.5-.5V10h1v4.5a.5.5 0 0 1-.5.5zM2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7z"/></svg>',
+				title: t('nested_justify_center')
+			},
+			{
+				value: 'flex-end',
+				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z"/><path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/></svg>',
+				title: t('nested_justify_end')
+			}
+		];
+
+		this.justifyWrapper = this.renderJustifySettings();
+		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 	}
 
@@ -409,6 +432,8 @@ class AutomadBlockNested {
 
 		});
 
+		element.classList.toggle(`justify-${this.data.justifyContent}`, this.data.justifyContent !== '');
+
 	}
 
 	initToggles() {
@@ -440,7 +465,7 @@ class AutomadBlockNested {
 					</div>
 					<section 
 					id="${this.modalEditorId}" 
-					class="am-block-editor-container"
+					class="am-block-editor-container ${AutomadBlockNested.cls.flex}"
 					></section>
 				</div>
 			</div>
@@ -464,6 +489,7 @@ class AutomadBlockNested {
 		this.modalEditor = Automad.blockEditor.createEditor({
 			holder: this.modalEditorId,
 			input: this.input,
+			flex: true,
 			autofocus: true,
 			onReady: () => {
 
@@ -540,8 +566,61 @@ class AutomadBlockNested {
 
 	renderSettings() {
 
-		return this.layoutSettings;
+		const create = Automad.util.create,
+			  wrapper = create.element('div', []);
+
+		wrapper.appendChild(this.justifyWrapper);
+		wrapper.appendChild(this.layoutSettings);
+
+		return wrapper;
 	
+	}
+
+	renderJustifySettings() {
+
+		const create = Automad.util.create,
+			  wrapper = create.element('div', ['cdx-settings']);
+	
+		this.justifySettings.forEach((item, index) => {
+
+			const button = create.element('div', [this.api.styles.settingsButton]);
+
+			this.justifySettings[index].button = button;
+
+			button.innerHTML = item.icon;
+			this.api.tooltip.onHover(button, item.title, { placement: 'top' });
+
+			button.addEventListener('click', () => {
+				this.data.justifyContent = item.value !== this.data.justifyContent ? item.value : '';
+				this.toggleJustify();
+			});
+
+			wrapper.appendChild(button);
+
+		});
+
+		this.toggleJustify();
+
+		return wrapper;
+
+	}
+
+	toggleJustify() {
+
+		this.justifySettings.forEach((item) => {
+
+			item.button.classList.toggle(
+				this.api.styles.settingsButtonActive, 
+				(item.value === this.data.justifyContent)
+			);
+
+			this.holder.classList.toggle(
+				`justify-${item.value}`, 
+				(item.value === this.data.justifyContent)
+			);
+
+		});
+
 	}
 
 }
