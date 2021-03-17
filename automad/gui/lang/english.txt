@@ -382,7 +382,7 @@ editor_mail_label_button: Button Text
 
 -
 
-editor_section_toolbox: Embedded Editor / Card
+editor_section_toolbox: Section / Card
 
 -
 

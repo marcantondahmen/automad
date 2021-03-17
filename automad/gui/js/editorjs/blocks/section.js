@@ -449,7 +449,7 @@ class AutomadBlockSection {
 	showModal() {
 
 		const create = Automad.util.create,
-			  ne = Automad.sectionEditor;
+			  se = Automad.sectionEditor;
 
 		this.destroyModal();
 
@@ -475,12 +475,12 @@ class AutomadBlockSection {
 		this.initToggles();
 		this.applyDialogSize();
 
-		ne.$(`#${this.modalDropdownId}`).on('hide.uk.dropdown', () => {
+		se.$(`#${this.modalDropdownId}`).on('hide.uk.dropdown', () => {
 			this.saveStyleSettings();
 			this.applyStyleSettings(document.getElementById(this.modalEditorId));
 		});
 
-		const modal = ne.UIkit.modal(`#${this.modalId}`, { 
+		const modal = se.UIkit.modal(`#${this.modalId}`, { 
 						modal: false, 
 						bgclose: true, 
 						keyboard: false 
@@ -497,7 +497,7 @@ class AutomadBlockSection {
 
 				modal.on('hide.uk.modal', () => {
 					this.saveStyleSettings();
-					ne.$(this.input).trigger('change');
+					se.$(this.input).trigger('change');
 					this.destroyModal();
 					this.renderSection();
 				});
