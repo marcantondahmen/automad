@@ -382,19 +382,19 @@ editor_mail_label_button: Button Text
 
 -
 
-editor_section_toolbox: Section / Card
+editor_section_toolbox: Layout Section / Card
 
 -
 
-editor_section_justify_start: Align Items Left 
+editor_section_justify_start: Align elements torward the left side
 
 -
 
-editor_section_justify_center: Center Items
+editor_section_justify_center: Align elements torward the middle
 
 -
 
-editor_section_justify_end: Align Items Right
+editor_section_justify_end: Align elements torward the right side
 
 -
 
