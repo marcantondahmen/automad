@@ -175,6 +175,7 @@
 							new DragDrop(editor);
 							layout.settingsButtonObserver();
 							layout.initUndoHandler();
+							layout.initPasteHandler();
 
 						} else {
 
@@ -200,7 +201,9 @@
 
 				let msg = event.originalEvent.message;
 
-				if (msg.includes('closest is not a function') || msg.includes('updateCurrentInput')) {
+				if (msg.includes('closest is not a function') || 
+					msg.includes('updateCurrentInput') ||
+					msg.includes('DOMException')) {
 					event.preventDefault();
 				}
 

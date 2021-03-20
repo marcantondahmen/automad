@@ -39,32 +39,25 @@
 		
 		box-sizing: border-box;
 		width: 100%;
-		min-height: 3.25rem;
-		margin: 0.3rem 0 0 0;
-		padding: @am-block-padding;
-		background-color: rgba(255, 255, 255, 0.15);
-		border-radius: @am-block-radius;
+		min-height: 2.9rem;
+		margin: 0;
+		padding: 0;
+		background-color: rgba(255, 255, 255, 0.12);
 		border: @am-border-width solid transparent;
 		.transition(border-color 0.2s, box-shadow 0.2s;);
 
 		&__content {
-
+			box-sizing: border-box;
 			max-width: @am-block-max-width;
+			width: 100%;
 			height: 100%;
-			border-radius: @am-radius-large;
-
-			@media (min-width: @am-blocks-breakpoint-small) {
-				padding: 0 @am-block-content-padding;
-			}
-
+			margin: 0 auto;
+			padding: @am-block-padding;
 		}
 
 		&.stretched > .ce-block__content {
-			
-			@media (min-width: @am-blocks-breakpoint-small) {
-				padding: 0 @am-block-content-padding-stretched;
-			}
-
+			max-width: 100%;
+			margin: 0;
 		}
 
 		& [class^="uk-icon-"] {
@@ -74,9 +67,10 @@
 		&.ce-block--focused,
 		&.ce-block--selected {
 
-			& .ce-block__content {
+			& > .ce-block__content {
 
 				background-color: transparent !important;
+				.transition(border-color 0.2s, background-color 0.2s;);
 				
 				& img {
 					opacity: 1;
@@ -86,8 +80,8 @@
 
 		}
 
-		&.ce-block--selected {
-			.shadow;
+		&.ce-block--selected > .ce-block__content {
+			background-color: mix(@am-bg, @am-success, 90%) !important;
 		}
 
 		&.ce-block--drop-target {
@@ -100,20 +94,6 @@
 		content: attr(data-placeholder);
 		color: @am-muted;
 	}
-
-	@media (min-width: @am-blocks-breakpoint-fullscreen-large) {
-
-		.am-inpage & .ce-block__content,
-		&.am-fullscreen .ce-block__content {
-			padding: 0 @am-block-content-padding-fullscreen;
-		}
-
-		.am-inpage & .stretched > .ce-block__content,
-		&.am-fullscreen .stretched > .ce-block__content {
-			padding: 0 @am-block-content-padding-stretched;
-		}
-
-	}	
 
 	& .ce-block--drop-target .ce-block__content {
 
@@ -144,16 +124,8 @@
 		}
 
 		&__info {
-
 			width: 100%;
 			margin-left: 0 !important;
-			padding: 0 @am-block-content-padding;
-
-			.am-fullscreen&,
-			.am-fullscreen-modal & {
-				padding: 0 @am-block-content-padding-fullscreen !important;
-			}
-
 		}
 
 	}

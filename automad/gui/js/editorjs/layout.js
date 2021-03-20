@@ -186,7 +186,7 @@ class AutomadLayout {
 				right = buttonRight - blockRight,
 				top = blockTop - buttonTop;
 
-			button.style.transform = `translate3d(-${right}px,${top}px,0)`;
+			button.style.transform = `translate3d(${right * -1}px,${top}px,0)`;
 
 		} catch (e) { }
 
@@ -262,6 +262,19 @@ class AutomadLayout {
 			`#${editorId} .${AutomadEditorConfig.cls.actionsButton} div`,
 			alignButton
 		);
+
+	}
+
+	initPasteHandler() {
+
+		const redactor = document.querySelector(`#${this.editor.configuration.holder} > div > div`);
+
+		redactor.addEventListener('paste', () => {
+			setTimeout(() => {
+				this.applyLayout();
+			}, 50);
+			
+		});
 
 	}
 

@@ -52,8 +52,8 @@
 			height: 2.5rem;
 			width: 2.5rem;
 			color: @am-text;
-			background-color: @am-bg;
-			border-radius: @am-radius + 0.2rem;
+			background-color: fade(@am-bg, 50%);
+			border-radius: 2.5rem;
 			.transition(color 0.2s;);
 
 			&:hover {
@@ -61,9 +61,7 @@
 			}
 
 			@media (min-width: @am-blocks-breakpoint-small) {
-				left: 0.35rem;
-				border: @am-hairline;
-				.shadow;
+				left: -2.5rem;
 			}
 
 		}
@@ -73,15 +71,13 @@
 			position: relative;
 			
 			& .ce-toolbox {
-				margin-left: 0.29rem;
+				margin-left: -0.25rem;
 			}
 
 			@media (min-width: @am-blocks-breakpoint-small) {
 
-				max-width: @am-block-max-width;
-
 				& .ce-toolbox {
-					margin-left: 3.29rem;
+					margin-left: 0.55rem;
 				}
 
 			}
@@ -93,8 +89,8 @@
 			transform: translate3d(-0.8rem, 0.165rem, 0);
 
 			@media (max-width: @am-blocks-breakpoint-small-max) {	
-				top: 0.39rem;
-				right: -1.78rem;	
+				top: 0.175rem;
+				right: -1.9rem;	
 				transform: none !important;
 			}
 
@@ -105,17 +101,17 @@
 			position: relative;
 			height: 1.65rem;
 			width: 1.65rem;
-			top: 0;
-			right: 0;
-			color: @button-success-color;
-			background-color: @button-success-background;
-			border-radius: 0.25rem;
-			box-shadow: 0 0 0 0.15rem @am-bg;
+			top: 0.25rem;
+			right: 0.25rem;
+			color: @button-color;
+			background-color: @button-active-background;
+			border-radius: @am-radius;
+			box-shadow: 0 0 0 0.1rem @am-bg;
 			.transition(color 0.2s, background-color 0.2s;);
 
 			&:hover {
-				color: @button-success-hover-color;
-				background-color: @button-success-hover-background;
+				color: @button-hover-color;
+				background-color: @button-hover-background;
 			}
 
 		}

@@ -386,6 +386,12 @@ class AutomadBlockSection {
 			paddingBottom: this.getNumberUnit(inputs.paddingBottomNumber, inputs.paddingBottomUnit)
 		};
 
+		Object.keys(this.data.style).forEach((key) => {
+			if (!this.data.style[key]) {
+				delete this.data.style[key];
+			}
+		});
+
 	}
 
 	applyStyleSettings(element) {
@@ -537,8 +543,12 @@ class AutomadBlockSection {
 
 		const number = Automad.util.stripNbsp(numberInput.textContent).trim() || '0',
 			  unit = unitSelect.value;
-			  
-		return `${number}${unit}`;
+		
+		if (parseFloat(number)) {
+			return `${number}${unit}`;
+		}
+		
+		return '';
 		
 	}
 
