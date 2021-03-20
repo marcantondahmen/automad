@@ -43,18 +43,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The nested editor block.
+ *	The section editor block.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Nested {
+class Section {
 
 
 	/**	
-	 *	Render a nested editor block.
+	 *	Render a section editor block.
 	 *	
 	 *	@param object $data
 	 *	@param object $Automad
@@ -63,15 +63,19 @@ class Nested {
 
 	public static function render($data, $Automad) {
 
-		$json = json_encode($data->nestedData);
+		$json = json_encode($data->sectionData);
 		$html = Core\Blocks::render($json, $Automad);
 		$style = '';
 		$class = '';
 
+		if (!empty($data->justifyContent)) {
+			$class = " am-section-justify-{$data->justifyContent}";
+		}
+
 		if (!empty($data->style)) {
 
 			if (!empty($data->style->card)) {
-				$class = ' am-nested-card';
+				$class = ' am-section-card';
 			}
 
 			if (!empty($data->style->backgroundImage)) {
@@ -83,7 +87,7 @@ class Nested {
 			}
 
 			if (!empty($data->style->shadow)) {
-				$style .= ' box-shadow: var(--am-nested-shadow);';
+				$style .= ' box-shadow: var(--am-section-shadow);';
 			}
 
 			foreach(array(
@@ -110,7 +114,7 @@ class Nested {
 				$property = strtolower(preg_replace('/([A-Z])/', '-$1', $item));
 
 				if (!empty($data->style->$item)) {
-					$style .= " --am-nested-$property: {$data->style->$item};";
+					$style .= " --am-section-$property: {$data->style->$item};";
 				}
 
 			}
@@ -122,7 +126,7 @@ class Nested {
 		}
 
 		return <<< HTML
-				<section class="am-container am-nested{$class}" $style>
+				<section class="am-container am-section{$class}" $style>
 					$html
 				</section>
 HTML;

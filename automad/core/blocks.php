@@ -96,7 +96,7 @@ HTML;
 
 	public static function render($json, $Automad) {
 		
-		$gridOpen = false;
+		$flexOpen = false;
 		$data = json_decode($json);
 		$html = '';
 
@@ -112,16 +112,16 @@ HTML;
 
 			try {
 
-				$blockIsGridItem = (!empty($block->data->columnSpan) && empty($block->data->stretched));
+				$blockIsFlexItem = (!empty($block->data->columns) && empty($block->data->stretched));
 
-				if (!$gridOpen && $blockIsGridItem) {
-					$html .= '<section class="am-block-grid">';
-					$gridOpen = true;
+				if (!$flexOpen && $blockIsFlexItem) {
+					$html .= '<section class="am-flex">';
+					$flexOpen = true;
 				}
 
-				if ($gridOpen && !$blockIsGridItem) {
+				if ($flexOpen && !$blockIsFlexItem) {
 					$html .= '</section>';
-					$gridOpen = false;
+					$flexOpen = false;
 				}
 
 				$blockHtml = call_user_func_array(
@@ -136,32 +136,9 @@ HTML;
 									$blockHtml
 								</div>
 HTML;
-				}
-
-				// Apply grid.
-				if ($blockIsGridItem) {
-
-					$class = '';
-
-					foreach (array('columnSpan', 'columnStart', 'rowSpan') as $key) {
-
-						if (isset($block->data->{$key})) {
-
-							$value = $block->data->{$key};
-							
-							if ($value) {
-								$prefix = strtolower(preg_replace('/([A-Z])/', '-$1', $key));
-								$class .= " am-block-{$prefix}-{$value}";
-							}
-							
-						}
-
-					}
-
-					$class = trim($class);
-
+				} else if (!empty($block->data->columns)) {
 					$blockHtml = <<< HTML
-								<div class="{$class}">
+								<div class="am-columns-{$block->data->columns}">
 									$blockHtml
 								</div>
 HTML;
@@ -177,7 +154,7 @@ HTML;
 
 		}
 
-		if ($gridOpen) {
+		if ($flexOpen) {
 			$html .= '</section>';
 		}
 
