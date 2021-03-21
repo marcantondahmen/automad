@@ -402,10 +402,6 @@ editor_section_edit: Edit
 
 -
 
-editor_section_style: Edit Style
-
--
-
 editor_section_card: Optimize Content for Cards
 
 -
@@ -563,6 +559,10 @@ editor_left: Left
 -
 
 editor_center: Center
+
+-
+
+editor_edit_style: Edit Style
 
 -
 

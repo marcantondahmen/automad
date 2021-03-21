@@ -56,6 +56,20 @@
 
 			},
 
+			colorPicker: function(cls, value) {
+
+				const wrapper = Automad.util.create.element('div', ['uk-flex']);
+
+				wrapper.dataset.amColorpicker = true;
+				wrapper.innerHTML = `
+					<input type="color" value="${value}">
+					<input type="text" class="${cls} am-u-form-controls am-u-width-1-1" value="${value}">
+				`;
+
+				return wrapper;
+
+			},
+
 			editable: function(cls, placeholder, value) {
 
 				var span = Automad.util.create.element('span', cls);
@@ -75,6 +89,32 @@
 				label.textContent = text;
 
 				return label;
+
+			},
+
+			numberUnit: function(clsPrefix, value, placeholder) {
+
+				const create = Automad.util.create,
+					  wrapper = create.element('div', ['am-form-input-group']),
+					  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
+
+				var number = parseFloat(value) || '',
+					unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
+
+				wrapper.innerHTML = `
+					${create.editable(
+						['cdx-input', `am-${clsPrefix}-number`],
+						placeholder,
+						number
+					).outerHTML}
+					${create.select(
+						['cdx-input', `am-${clsPrefix}-unit`],
+						units,
+						unit
+					).outerHTML}
+				`;
+
+				return wrapper;
 
 			},
 
@@ -142,6 +182,19 @@
 
 			return (bytes / 1000).toFixed(2) + ' kb';
 				
+		},
+
+		getNumberUnitAsString: function(numberInput, unitSelect) {
+
+			const number = Automad.util.stripNbsp(numberInput.textContent).trim() || '0',
+				  unit = unitSelect.value;
+
+			if (parseFloat(number)) {
+				return `${number}${unit}`;
+			}
+
+			return '';
+
 		},
 
 		resolvePath: function(path) {

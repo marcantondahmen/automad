@@ -205,38 +205,6 @@ class AutomadBlockSection {
 
 	}
 
-	colorPicker(id, value) {
-
-		return `<div class="am-u-flex" data-am-colorpicker=""> 
-					<input type="color" value="${value}">
-					<input type="text" class="am-u-form-controls am-u-width-1-1" id="${id}" value="${value}">
-				</div>`
-
-	}
-
-	numberUnit(clsPrefix, value, placeholder) {
-
-		const create = Automad.util.create,
-			  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
-		
-		var	number = parseFloat(value) || '',
-			unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
-
-		return `<div class="am-form-input-group">
-					${create.editable(
-						[AutomadEditorConfig.cls.input, `am-section-${clsPrefix}-number`], 
-						placeholder, 
-						number
-					).outerHTML}
-					${create.select(
-						[AutomadEditorConfig.cls.input, `am-section-${clsPrefix}-unit`],
-						units,
-						unit
-					).outerHTML}
-				</div>`;
-
-	}
-
 	renderStyleSettings() {
 
 		const create = Automad.util.create,
@@ -263,7 +231,7 @@ class AutomadBlockSection {
 			>
 				<div class="uk-button am-section-style-button">
 					<i class="uk-icon-sliders"></i>&nbsp;
-					${t('section_style')}&nbsp;
+					${t('edit_style')}&nbsp;
 					<i class="uk-icon-caret-down"></i>
 				</div>
 				<div class="uk-dropdown uk-dropdown-blank">
@@ -303,25 +271,25 @@ class AutomadBlockSection {
 					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
 			  			<div>
 							${create.label(t('section_color')).outerHTML}
-							${this.colorPicker('am-section-color', style.color)}
+							${create.colorPicker('am-section-color', style.color).outerHTML}
 						</div>
 						<div>
 			  				${create.label(t('section_background_color')).outerHTML}
-							${this.colorPicker('am-section-background-color', style.backgroundColor)}
+							${create.colorPicker('am-section-background-color', style.backgroundColor).outerHTML}
 						</div>
 					</div>
 					<div class="uk-grid uk-grid-width-medium-1-3 uk-margin-top-remove">
 			  			<div>
 							${create.label(t('section_border_color')).outerHTML}
-							${this.colorPicker('am-section-border-color', style.borderColor)}
+							${create.colorPicker('am-section-border-color', style.borderColor).outerHTML}
 						</div>
 						<div>
 			  				${create.label(t('section_border_width')).outerHTML}
-							${this.numberUnit('border-width', style.borderWidth, '')}
+							${create.numberUnit('section-border-width', style.borderWidth, '').outerHTML}
 						</div>
 						<div>
 			  				${create.label(t('section_border_radius')).outerHTML}
-							${this.numberUnit('border-radius', style.borderRadius, '')}
+							${create.numberUnit('section-border-radius', style.borderRadius, '').outerHTML}
 						</div>
 					</div>
 					${create.label(t('section_background_image')).outerHTML}
@@ -338,11 +306,11 @@ class AutomadBlockSection {
 					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
 			  			<div>
 			  				${create.label(`${t('section_padding_top')} (padding top)`).outerHTML}
-							${this.numberUnit('padding-top', style.paddingTop, '')}
+							${create.numberUnit('section-padding-top', style.paddingTop, '').outerHTML}
 			  			</div>
 						<div>
 			  				${create.label(`${t('section_padding_bottom')} (padding bottom)`).outerHTML}
-							${this.numberUnit('padding-bottom', style.paddingBottom, '')}
+							${create.numberUnit('section-padding-bottom', style.paddingBottom, '').outerHTML}
 			  			</div>
 					</div>
 				</div>
@@ -359,9 +327,9 @@ class AutomadBlockSection {
 		inputs.card = wrapper.querySelector('#am-section-card');
 		inputs.shadow = wrapper.querySelector('#am-section-shadow');
 		inputs.matchRowHeight = wrapper.querySelector('#am-section-match-row-height');
-		inputs.color = wrapper.querySelector('#am-section-color');
-		inputs.backgroundColor = wrapper.querySelector('#am-section-background-color');
-		inputs.borderColor = wrapper.querySelector('#am-section-border-color');
+		inputs.color = wrapper.querySelector('.am-section-color');
+		inputs.backgroundColor = wrapper.querySelector('.am-section-background-color');
+		inputs.borderColor = wrapper.querySelector('.am-section-border-color');
 		inputs.borderWidthNumber = wrapper.querySelector('.am-section-border-width-number');
 		inputs.borderWidthUnit = wrapper.querySelector('.am-section-border-width-unit');
 		inputs.borderRadiusNumber = wrapper.querySelector('.am-section-border-radius-number');
@@ -379,11 +347,11 @@ class AutomadBlockSection {
 			color: inputs.color.value,
 			backgroundColor: inputs.backgroundColor.value,
 			borderColor: inputs.borderColor.value,
-			borderWidth: this.getNumberUnit(inputs.borderWidthNumber, inputs.borderWidthUnit),
-			borderRadius: this.getNumberUnit(inputs.borderRadiusNumber, inputs.borderRadiusUnit),
+			borderWidth: Automad.util.getNumberUnitAsString(inputs.borderWidthNumber, inputs.borderWidthUnit),
+			borderRadius: Automad.util.getNumberUnitAsString(inputs.borderRadiusNumber, inputs.borderRadiusUnit),
 			backgroundImage: inputs.backgroundImage.value,
-			paddingTop: this.getNumberUnit(inputs.paddingTopNumber, inputs.paddingTopUnit),
-			paddingBottom: this.getNumberUnit(inputs.paddingBottomNumber, inputs.paddingBottomUnit)
+			paddingTop: Automad.util.getNumberUnitAsString(inputs.paddingTopNumber, inputs.paddingTopUnit),
+			paddingBottom: Automad.util.getNumberUnitAsString(inputs.paddingBottomNumber, inputs.paddingBottomUnit)
 		};
 
 		Object.keys(this.data.style).forEach((key) => {
@@ -537,19 +505,6 @@ class AutomadBlockSection {
 
 		return this.wrapper;
 
-	}
-
-	getNumberUnit(numberInput, unitSelect) {
-
-		const number = Automad.util.stripNbsp(numberInput.textContent).trim() || '0',
-			  unit = unitSelect.value;
-		
-		if (parseFloat(number)) {
-			return `${number}${unit}`;
-		}
-		
-		return '';
-		
 	}
 
 	getInputData() {
