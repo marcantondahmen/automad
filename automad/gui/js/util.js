@@ -103,12 +103,12 @@
 
 				wrapper.innerHTML = `
 					${create.editable(
-						['cdx-input', `am-${clsPrefix}-number`],
+						['cdx-input', `${clsPrefix}number`],
 						placeholder,
 						number
 					).outerHTML}
 					${create.select(
-						['cdx-input', `am-${clsPrefix}-unit`],
+						['cdx-input', `${clsPrefix}unit`],
 						units,
 						unit
 					).outerHTML}
