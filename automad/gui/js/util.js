@@ -92,7 +92,7 @@
 
 			},
 
-			numberUnit: function(clsPrefix, value, placeholder) {
+			numberUnit: function(clsPrefix, placeholder, value) {
 
 				const create = Automad.util.create,
 					  wrapper = create.element('div', ['am-form-input-group']),
