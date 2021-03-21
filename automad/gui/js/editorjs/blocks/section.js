@@ -285,11 +285,11 @@ class AutomadBlockSection {
 						</div>
 						<div>
 			  				${create.label(t('section_border_width')).outerHTML}
-							${create.numberUnit('am-section-border-width-', '', style.borderWidth).outerHTML}
+							${create.numberUnit('am-section-border-width-', style.borderWidth).outerHTML}
 						</div>
 						<div>
 			  				${create.label(t('section_border_radius')).outerHTML}
-							${create.numberUnit('am-section-border-radius-', '', style.borderRadius).outerHTML}
+							${create.numberUnit('am-section-border-radius-', style.borderRadius).outerHTML}
 						</div>
 					</div>
 					${create.label(t('section_background_image')).outerHTML}
@@ -306,11 +306,11 @@ class AutomadBlockSection {
 					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
 			  			<div>
 			  				${create.label(`${t('section_padding_top')} (padding top)`).outerHTML}
-							${create.numberUnit('am-section-padding-top-', '', style.paddingTop).outerHTML}
+							${create.numberUnit('am-section-padding-top-', style.paddingTop).outerHTML}
 			  			</div>
 						<div>
 			  				${create.label(`${t('section_padding_bottom')} (padding bottom)`).outerHTML}
-							${create.numberUnit('am-section-padding-bottom-', '', style.paddingBottom).outerHTML}
+							${create.numberUnit('am-section-padding-bottom-', style.paddingBottom).outerHTML}
 			  			</div>
 					</div>
 				</div>

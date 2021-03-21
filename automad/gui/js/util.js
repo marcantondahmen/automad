@@ -92,7 +92,7 @@
 
 			},
 
-			numberUnit: function(clsPrefix, placeholder, value) {
+			numberUnit: function(clsPrefix, value) {
 
 				const create = Automad.util.create,
 					  wrapper = create.element('div', ['am-form-input-group']),
@@ -104,7 +104,7 @@
 				wrapper.innerHTML = `
 					${create.editable(
 						['cdx-input', `${clsPrefix}number`],
-						placeholder,
+						'',
 						number
 					).outerHTML}
 					${create.select(
