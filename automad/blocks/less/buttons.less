@@ -44,8 +44,8 @@
 		display: inline-block;
 		box-sizing: content-box;
 		margin: var(--am-button-margin);
-		padding: var(--am-button-padding);
-		height: var(--am-button-height);
+		padding: var(--am-button-padding-vertical) var(--am-button-padding-horizontal);
+		height: auto;
 		line-height: var(--am-button-lineheight);
 		font-family: inherit;
 		font-weight: inherit;
@@ -57,7 +57,8 @@
 		border-radius: var(--am-button-radius);
 		color: var(--am-button-color);
 		background-color: var(--am-button-background);
-		border: var(--am-button-border);
+		border: var(--am-button-border-width) solid var(--am-button-border-color);
+		transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 
 		&:first-child {
 			margin-left: 0;
@@ -68,23 +69,7 @@
 		&:focus {
 			color: var(--am-button-hover-color);
 			background-color: var(--am-button-hover-background);
-			border: var(--am-button-hover-border);
-		}
-
-		&-primary {
-
-			color: var(--am-button-primary-color);
-			background-color: var(--am-button-primary-background);
-			border: var(--am-button-primary-border);
-
-			&:hover,
-			&:active,
-			&:focus {
-				color: var(--am-button-primary-hover-color);
-				background-color: var(--am-button-primary-hover-background);
-				border: var(--am-button-primary-hover-border);
-			}
-
+			border: var(--am-button-border-width) solid var(--am-button-hover-border-color);
 		}
 
 	}

@@ -64,8 +64,10 @@ class Buttons {
 		$defaults = array(
 			'primaryText' => '',
 			'primaryLink' => '',
+			'primaryStyle' => (object) array(),
 			'secondaryText' => '',
 			'secondaryLink' => '',
+			'secondaryStyle' => (object) array(),
 			'alignment' => 'left'
 		);
 
@@ -78,26 +80,38 @@ class Buttons {
 			$class = ' class="am-buttons am-buttons-center"';
 		}
 
-		if (trim($data->primaryText) && trim($data->primaryLink)) {
-			$primaryText = htmlspecialchars_decode($data->primaryText);
-			$html .= <<< HTML
-					<a 
-					href="$data->primaryLink"
-					class="am-button am-button-primary">
-						$primaryText
-					</a>
-HTML;
-		}
+		foreach (array('primary', 'secondary') as $item) {
 
-		if (trim($data->secondaryText) && trim($data->secondaryLink)) {
-			$secondaryText = htmlspecialchars_decode($data->secondaryText);
-			$html .= <<< HTML
-					<a 
-					href="$data->secondaryLink"
-					class="am-button">
-						$secondaryText
-					</a>
+			if (trim($data->{$item . 'Text'}) && trim($data->{$item . 'Link'})) {
+
+				$text = htmlspecialchars_decode($data->{$item . 'Text'});
+				$styleObj = $data->{$item . 'Style'};
+				$style = '';
+				$link = $data->{$item . 'Link'};
+
+				foreach ($styleObj as $key => $value) {
+					$style .= '--am-button-' . 
+							  strtolower(preg_replace('/([A-Z])/', '-$1', $key)) . 
+							  ": $value; ";
+				}
+
+				if ($style) {
+					$style = trim($style);
+					$style = 'style="' . $style . '"';
+				}
+
+				$html .= <<< HTML
+						<a 
+						href="$link"
+						class="am-button"
+						$style
+						>
+							$text
+						</a>
 HTML;
+
+			}
+
 		}
 
 		if ($html) {

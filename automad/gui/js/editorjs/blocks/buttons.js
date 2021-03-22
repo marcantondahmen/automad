@@ -66,8 +66,10 @@ class AutomadBlockButtons {
 		this.data = {
 			primaryText: data.primaryText || '',
 			primaryLink: data.primaryLink || '',
+			primaryStyle: data.primaryStyle || {},
 			secondaryText: data.secondaryText || '',
 			secondaryLink: data.secondaryLink || '',
+			secondaryStyle: data.secondaryStyle || {},
 			alignment: data.alignment || 'left'
 		};
 
@@ -76,14 +78,26 @@ class AutomadBlockButtons {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
-			<div class="am-block-icon">${AutomadBlockButtons.toolbox.icon}</div>
-			<div class="am-block-title">${AutomadBlockButtons.toolbox.title}</div>
+			<ul class="uk-grid uk-grid-width-medium-1-2 uk-form" data-uk-grid-margin>
+				<div>
+					<span class="am-preview-primary uk-display-inline-block">
+						${this.data.primaryText != '' ? this.data.primaryText : 'Button'}
+					</span>
+				</div>
+				<div>
+					<span class="am-preview-secondary uk-display-inline-block">
+						${this.data.secondaryText != '' ? this.data.secondaryText : 'Button'}
+					</span>
+				</div>
+			</ul>
 			<hr>
 			<ul class="uk-grid uk-grid-width-medium-1-2 uk-form">
-				<li>
-					${create.label(t('button_primary_label')).outerHTML}
+				<li class="primary">
+					<div class="am-block-title">${t('button_primary')}</div>
+					<div class="style"></div>
+					${create.label(t('button_label')).outerHTML}
 					${create.editable(['cdx-input', 'am-block-primary-text'], '', this.data.primaryText).outerHTML}
-					${create.label(t('button_primary_link')).outerHTML}
+					${create.label(t('button_link')).outerHTML}
 					<div class="am-form-icon-button-input uk-flex">
 						<button type="button" class="uk-button uk-button-large">
 							<i class="uk-icon-link"></i>
@@ -91,10 +105,12 @@ class AutomadBlockButtons {
 						<input type="text" class="am-block-primary-link uk-form-controls uk-width-1-1" value="${this.data.primaryLink}" />
 					</div>
 				</li>
-				<li>
-					${create.label(t('button_secondary_label')).outerHTML}
+				<li class="secondary">
+					<div class="am-block-title">${t('button_secondary')}</div>
+					<div class="style"></div>
+					${create.label(t('button_label')).outerHTML}
 					${create.editable(['cdx-input', 'am-block-secondary-text'], '', this.data.secondaryText).outerHTML}
-					${create.label(t('button_secondary_link')).outerHTML}
+					${create.label(t('button_link')).outerHTML}
 					<div class="am-form-icon-button-input uk-flex">
 						<button type="button" class="uk-button uk-button-large">
 							<i class="uk-icon-link"></i>
@@ -104,7 +120,9 @@ class AutomadBlockButtons {
 				</li>
 			</ul>`;
 
-		var linkButtons = this.wrapper.querySelectorAll('button');
+		var linkButtons = this.wrapper.querySelectorAll('button'),
+			columnPrimary = this.wrapper.querySelector('li.primary .style'),
+			columnSecondary = this.wrapper.querySelector('li.secondary .style');
 
 		for (let i = 0; i < linkButtons.length; ++i) {
 			api.listeners.on(linkButtons[i], 'click', function() {
@@ -118,6 +136,10 @@ class AutomadBlockButtons {
 			secondaryText: this.wrapper.querySelector('.am-block-secondary-text'),
 			secondaryLink: this.wrapper.querySelector('.am-block-secondary-link')
 		}
+
+		this.renderStyleSettings(columnPrimary, this.data.primaryStyle);
+		this.renderStyleSettings(columnSecondary, this.data.secondaryStyle);
+		this.renderPreview();
 
 		this.settings = [
 			{
@@ -141,6 +163,8 @@ class AutomadBlockButtons {
 	}
 
 	save() {
+
+		this.renderPreview();
 
 		return Object.assign(this.data, {
 			primaryText: this.inputs.primaryText.innerHTML,
@@ -198,6 +222,180 @@ class AutomadBlockButtons {
 
 	toggleTune(tune) {
 		this.data.alignment = tune;
+	}
+
+	renderStyleSettings(parent, obj) {
+
+		const create = Automad.util.create,
+			  t = AutomadEditorTranslation.get,
+			  wrapper = create.element('div', ['uk-position-relative', 'uk-margin-small-top']),
+			  settings = [
+				  [
+					  {
+						  label: t('button_border_width'),
+						  name: 'borderWidth',
+						  type: 'numberUnit'
+					  }
+				  ],
+				  [
+					  {
+						  label: t('button_border_radius'),
+						  name: 'borderRadius',
+						  type: 'numberUnit'
+					  }
+				  ],
+				  [
+					  {
+						  label: t('button_padding_horizontal'),
+						  name: 'paddingHorizontal',
+						  type: 'numberUnit'
+					  }
+				  ],
+				  [
+					  {
+						  label: t('button_padding_vertical'),
+						  name: 'paddingVertical',
+						  type: 'numberUnit'
+					  }
+				  ],
+				  [
+					  {
+						  label: t('button_color'),
+						  name: 'color',
+						  type: 'colorPicker'
+					  },
+					  {
+						  label: t('button_background_color'),
+						  name: 'background',
+						  type: 'colorPicker'
+					  },
+					  {
+						  label: t('button_border_color'),
+						  name: 'borderColor',
+						  type: 'colorPicker'
+					  }
+				  ],
+				  [
+					  {
+						  label: `${t('button_color')} (hover)`,
+						  name: 'hoverColor',
+						  type: 'colorPicker'
+					  },
+					  {
+						  label: `${t('button_background_color')} (hover)`,
+						  name: 'hoverBackground',
+						  type: 'colorPicker'
+					  },
+					  {
+						  label: `${t('button_border_color')} (hover)`,
+						  name: 'hoverBorderColor',
+						  type: 'colorPicker'
+					  }
+				  ]
+			  ];
+
+		wrapper.innerHTML = `
+			<div class="uk-form" data-uk-dropdown="{mode:'click',pos:'bottom-center'}">
+				<div class="uk-button uk-width-1-1 uk-text-left">
+					<i class="uk-icon-sliders"></i>&nbsp;
+					${t('edit_style')}
+				</div>
+				<div class="am-style-dropdown uk-dropdown">
+					<div class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin></div>
+				</div>
+			</div>
+		`;
+
+		const grid = wrapper.querySelector('.uk-grid');
+
+		settings.forEach((group) => {
+
+			const div = create.element('div', []);
+
+			group.forEach((item) => {
+
+				const label = create.label(item.label),
+					  combo = create[item.type]('', obj[item.name] || '');
+
+				div.appendChild(label);
+				div.appendChild(combo);
+
+				Array.from(combo.querySelectorAll('input, select, [contenteditable]')).forEach((field) => {
+
+					field.addEventListener('input', (event) => {
+
+						var value;
+
+						if (item.type == 'numberUnit') {
+
+							const number = combo.querySelector('[contenteditable]'),
+								  unit = combo.querySelector('select');
+							
+							value = Automad.util.getNumberUnitAsString(number, unit);
+
+						} else {
+
+							value = event.currentTarget.value;
+
+						}
+
+						if (value) {
+							obj[item.name] = value;
+						} else {
+							delete obj[item.name];
+						}
+
+					});
+
+				});
+
+
+			});
+
+			grid.appendChild(div);
+
+		});
+
+		parent.appendChild(wrapper);
+
+	}
+
+	renderPreview() {
+
+		['primary', 'secondary'].forEach((item) => {
+
+			const button = this.wrapper.querySelector(`.am-preview-${item}`),
+				  obj = this.data[`${item}Style`],
+				  style = {
+					borderWidth: obj.borderWidth || '1px',
+					borderRadius: obj.borderRadius || '4px',
+					paddingHorizontal: obj.paddingHorizontal || '2em',
+					paddingVertical: obj.paddingVertical || '0.5em',
+					color: obj.color || '#121212',
+					backgroundColor: obj.backgroundColor || '#FFFFFF',
+					borderColor: obj.borderColor || '#CCCCCC'
+				  };
+
+			button.removeAttribute('style');
+
+			['borderWidth',
+			'borderRadius',
+			'color',
+			'backgroundColor',
+			'borderColor'].forEach((_item) => {
+				button.style[_item] = style[_item];
+			});
+
+			button.style.borderStyle = 'solid';
+			button.style.padding = `${style.paddingVertical} ${style.paddingHorizontal}`;
+			button.innerHTML = this.data[`${item}Text`] || 'Button';
+
+			if (!this.data[`${item}Text`]) {
+				button.style.opacity = '0.3';
+			}
+
+		});
+
 	}
 
 }

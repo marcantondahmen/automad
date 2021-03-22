@@ -242,19 +242,47 @@ editor_buttons_toolbox: Buttons
 
 -
 
-editor_button_primary_label: Primary Text
+editor_button_primary: Primary Button
 
 -
 
-editor_button_primary_link: Primary Link
+editor_button_secondary: Secondary Button 
 
 -
 
-editor_button_secondary_label: Secondary Text
+editor_button_label: Text
 
 -
 
-editor_button_secondary_link: Secondary Link
+editor_button_link: Link
+
+-
+
+editor_button_color: Text Color 
+
+-
+
+editor_button_background_color: Background 
+
+-
+
+editor_button_border_color: Border Color
+
+-
+
+editor_button_border_width: Border Width
+
+-
+
+editor_button_border_radius: Corner Radius
+
+-
+
+editor_button_padding_horizontal: Horizontal Spacing
+
+-
+
+editor_button_padding_vertical: Vertical Spacing
 
 -
 
@@ -563,6 +591,10 @@ editor_center: Center
 -
 
 editor_edit_style: Edit Style
+
+-
+
+editor_close_style: Ok
 
 -
 
