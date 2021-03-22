@@ -206,19 +206,47 @@ editor_buttons_toolbox: Κουμπιά
 
 -
 
-editor_button_primary_label: Κύριο κείμενο
+editor_button_primary: Κύριο κουμπί
 
 -
 
-editor_button_primary_link: Κύριος σύνδεσμος
+editor_button_secondary: Δευτερεύον κουμπί
 
 -
 
-editor_button_secondary_label: Δευτερεύον κείμενο
+editor_button_label: Κείμενο
 
 -
 
-editor_button_secondary_link: Δευτερεύων σύνδεσμος
+editor_button_link: Σύνδεσμος
+
+-
+
+editor_button_color: Χρώμα κειμένου
+
+-
+
+editor_button_background_color: Ιστορικό
+
+-
+
+editor_button_border_color: Χρώμα πλαισίου
+
+-
+
+editor_button_border_width: Πλάτος των συνόρων
+
+-
+
+editor_button_border_radius: Ακτίνα γωνίας
+
+-
+
+editor_button_padding_horizontal: Οριζόντια απόσταση
+
+-
+
+editor_button_padding_vertical: Κάθετη απόσταση
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Κείμενο κουμπιού
 
 -
 
-editor_nested_toolbox: Ενσωματωμένος επεξεργαστής / κάρτα
+editor_section_toolbox: Τμήμα / Κάρτα διάταξης
 
 -
 
-editor_nested_edit: Επεξεργασία
+editor_section_justify_start: Ευθυγραμμίστε τα στοιχεία προς την αριστερή πλευρά
 
 -
 
-editor_nested_style: Επεξεργασία στυλ
+editor_section_justify_center: Ευθυγραμμίστε τα στοιχεία προς τη μέση
 
 -
 
-editor_nested_card: Βελτιστοποιήστε το περιεχόμενο για κάρτες
+editor_section_justify_end: Ευθυγραμμίστε τα στοιχεία προς τη δεξιά πλευρά
 
 -
 
-editor_nested_padding_top: Απόσταση προς τα πάνω
+editor_section_edit: Επεξεργασία
 
 -
 
-editor_nested_padding_bottom: Διαχωρισμός
+editor_section_card: Βελτιστοποιήστε το περιεχόμενο για κάρτες
 
 -
 
-editor_nested_color: Χρώμα κειμένου
+editor_section_padding_top: Απόσταση προς τα πάνω
 
 -
 
-editor_nested_background_color: Χρώμα του φόντου
+editor_section_padding_bottom: Διαχωρισμός
 
 -
 
-editor_nested_background_image: Εικόνα φόντου
+editor_section_color: Χρώμα κειμένου
 
 -
 
-editor_nested_border_color: Χρώμα πλαισίου
+editor_section_background_color: Χρώμα του φόντου
 
 -
 
-editor_nested_border_width: Πλάτος των συνόρων
+editor_section_background_image: Εικόνα φόντου
 
 -
 
-editor_nested_border_radius: Ακτίνα γωνίας
+editor_section_border_color: Χρώμα πλαισίου
 
 -
 
-editor_nested_shadow: Σκίαση
+editor_section_border_width: Πλάτος των συνόρων
 
 -
 
-editor_nested_match_row_height: Πλήρης ύψος σειράς
+editor_section_border_radius: Ακτίνα γωνίας
+
+-
+
+editor_section_shadow: Σκίαση
+
+-
+
+editor_section_match_row_height: Πλήρης ύψος σειράς
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Κέντρο
 
 -
 
+editor_edit_style: Επεξεργασία στυλ
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Προεπιλεγμένη διάταξη
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Αναπτύξτε το μπλοκ σε πλήρες πλ
 
 -
 
-editor_layout_column_span: Πλάτος
-
--
-
-editor_layout_column_start: Βάρδια
-
--
-
-editor_layout_row_span: Σειρά
-
--
-
-editor_layout_column_start_auto: Αυτόματη μετατόπιση μπλοκ
+editor_layout_width: Πλάτος
 
 -
 

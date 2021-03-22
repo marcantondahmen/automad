@@ -206,19 +206,47 @@ editor_buttons_toolbox: Guziki
 
 -
 
-editor_button_primary_label: Główny tekst
+editor_button_primary: Główny przycisk
 
 -
 
-editor_button_primary_link: Główny link
+editor_button_secondary: Przycisk wtórny
 
 -
 
-editor_button_secondary_label: Dodatkowy tekst
+editor_button_label: Tekst
 
 -
 
-editor_button_secondary_link: Link drugorzędny
+editor_button_link: Połączyć
+
+-
+
+editor_button_color: Kolor tekstu
+
+-
+
+editor_button_background_color: Tło
+
+-
+
+editor_button_border_color: Kolor ramki
+
+-
+
+editor_button_border_width: Szerokość granicy
+
+-
+
+editor_button_border_radius: Promień narożny
+
+-
+
+editor_button_padding_horizontal: Odstępy poziome.
+
+-
+
+editor_button_padding_vertical: Odstęp pionowy.
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Przycisk tekstowy
 
 -
 
-editor_nested_toolbox: Wbudowany edytor / karta
+editor_section_toolbox: Sekcja / karta układu
 
 -
 
-editor_nested_edit: Edytować
+editor_section_justify_start: Wyrównaj elementy w kierunku lewej strony
 
 -
 
-editor_nested_style: Edytuj styl
+editor_section_justify_center: Wyrównaj elementy w kierunku środka
 
 -
 
-editor_nested_card: Zoptymalizuj treści dla kart
+editor_section_justify_end: Wyrównaj elementy w prawo
 
 -
 
-editor_nested_padding_top: Odstępy do góry.
+editor_section_edit: Edytować
 
 -
 
-editor_nested_padding_bottom: Odstępy
+editor_section_card: Zoptymalizuj treści dla kart
 
 -
 
-editor_nested_color: Kolor tekstu
+editor_section_padding_top: Odstępy do góry.
 
 -
 
-editor_nested_background_color: Kolor tła
+editor_section_padding_bottom: Odstępy
 
 -
 
-editor_nested_background_image: Zdjęcie w tle
+editor_section_color: Kolor tekstu
 
 -
 
-editor_nested_border_color: Kolor ramki
+editor_section_background_color: Kolor tła
 
 -
 
-editor_nested_border_width: Szerokość granicy
+editor_section_background_image: Zdjęcie w tle
 
 -
 
-editor_nested_border_radius: Promień narożny
+editor_section_border_color: Kolor ramki
 
 -
 
-editor_nested_shadow: Upuść cień
+editor_section_border_width: Szerokość granicy
 
 -
 
-editor_nested_match_row_height: Pełna wysokość wiersza
+editor_section_border_radius: Promień narożny
+
+-
+
+editor_section_shadow: Upuść cień
+
+-
+
+editor_section_match_row_height: Pełna wysokość wiersza
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centrum
 
 -
 
+editor_edit_style: Edytuj styl
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Domyślny układ
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Rozwiń blok do pełnej szerokości
 
 -
 
-editor_layout_column_span: Szerokość
-
--
-
-editor_layout_column_start: Zmiana
-
--
-
-editor_layout_row_span: Span
-
--
-
-editor_layout_column_start_auto: Automatyczne przesuwanie bloków
+editor_layout_width: Szerokość
 
 -
 

@@ -206,19 +206,47 @@ editor_buttons_toolbox: Knapper
 
 -
 
-editor_button_primary_label: Primær tekst
+editor_button_primary: Hovedknap.
 
 -
 
-editor_button_primary_link: Primært link
+editor_button_secondary: Sekundær knap
 
 -
 
-editor_button_secondary_label: Sekundær tekst
+editor_button_label: Tekst
 
 -
 
-editor_button_secondary_link: Sekundært link
+editor_button_link: Link
+
+-
+
+editor_button_color: Tekstfarve.
+
+-
+
+editor_button_background_color: Baggrund
+
+-
+
+editor_button_border_color: Border Color.
+
+-
+
+editor_button_border_width: Border bredde.
+
+-
+
+editor_button_border_radius: Hjørne Radius.
+
+-
+
+editor_button_padding_horizontal: Vandret afstand
+
+-
+
+editor_button_padding_vertical: Lodret afstand
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Knaptekst
 
 -
 
-editor_nested_toolbox: Integreret editor / kort
+editor_section_toolbox: Layout sektion / kort
 
 -
 
-editor_nested_edit: Redigere
+editor_section_justify_start: Juster elementer mod venstre side
 
 -
 
-editor_nested_style: Rediger stil
+editor_section_justify_center: Juster elementer mod midten
 
 -
 
-editor_nested_card: Optimer indholdet til kort
+editor_section_justify_end: Juster elementer mod højre side
 
 -
 
-editor_nested_padding_top: Afstand opad
+editor_section_edit: Redigere
 
 -
 
-editor_nested_padding_bottom: Afstand ned
+editor_section_card: Optimer indholdet til kort
 
 -
 
-editor_nested_color: Tekstfarve.
+editor_section_padding_top: Afstand opad
 
 -
 
-editor_nested_background_color: Baggrundsfarve
+editor_section_padding_bottom: Afstand ned
 
 -
 
-editor_nested_background_image: Baggrundsbillede
+editor_section_color: Tekstfarve.
 
 -
 
-editor_nested_border_color: Border Color.
+editor_section_background_color: Baggrundsfarve
 
 -
 
-editor_nested_border_width: Border bredde.
+editor_section_background_image: Baggrundsbillede
 
 -
 
-editor_nested_border_radius: Hjørne Radius.
+editor_section_border_color: Border Color.
 
 -
 
-editor_nested_shadow: Drop Shadow.
+editor_section_border_width: Border bredde.
 
 -
 
-editor_nested_match_row_height: Fuld række højde
+editor_section_border_radius: Hjørne Radius.
+
+-
+
+editor_section_shadow: Drop Shadow.
+
+-
+
+editor_section_match_row_height: Fuld række højde
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centrum
 
 -
 
+editor_edit_style: Rediger stil
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Standardlayout
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Udvid blokken til fuld bredde
 
 -
 
-editor_layout_column_span: Bredde
-
--
-
-editor_layout_column_start: Flytte
-
--
-
-editor_layout_row_span: ROW SPAN.
-
--
-
-editor_layout_column_start_auto: Automatisk skift blokke
+editor_layout_width: Bredde
 
 -
 

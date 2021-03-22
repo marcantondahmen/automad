@@ -206,19 +206,47 @@ editor_buttons_toolbox: Tlačítka
 
 -
 
-editor_button_primary_label: Primární text
+editor_button_primary: Hlavní tlačítko
 
 -
 
-editor_button_primary_link: Primární odkaz
+editor_button_secondary: Sekundární tlačítko
 
 -
 
-editor_button_secondary_label: Sekundární text
+editor_button_label: Text
 
 -
 
-editor_button_secondary_link: Sekundární odkaz
+editor_button_link: Odkaz
+
+-
+
+editor_button_color: Barva textu
+
+-
+
+editor_button_background_color: Pozadí
+
+-
+
+editor_button_border_color: Hraniční barva
+
+-
+
+editor_button_border_width: Šířka hranic
+
+-
+
+editor_button_border_radius: Rohový poloměr
+
+-
+
+editor_button_padding_horizontal: Horizontální rozteč
+
+-
+
+editor_button_padding_vertical: Vertikální rozteč
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Text tlačítka
 
 -
 
-editor_nested_toolbox: Integrovaný editor / karta
+editor_section_toolbox: Rozvržení sekce / karta
 
 -
 
-editor_nested_edit: Upravit
+editor_section_justify_start: Zarovnejte prvky směrem na levé straně
 
 -
 
-editor_nested_style: Upravit styl
+editor_section_justify_center: Vyrovnejte prvky směrem ke středu
 
 -
 
-editor_nested_card: Optimalizace obsahu pro karty
+editor_section_justify_end: Zarovnejte prvky směrem k pravé straně
 
 -
 
-editor_nested_padding_top: Vzdálenost nahoru
+editor_section_edit: Upravit
 
 -
 
-editor_nested_padding_bottom: Vzdálenost dolů
+editor_section_card: Optimalizace obsahu pro karty
 
 -
 
-editor_nested_color: Barva textu
+editor_section_padding_top: Vzdálenost nahoru
 
 -
 
-editor_nested_background_color: Barva pozadí
+editor_section_padding_bottom: Vzdálenost dolů
 
 -
 
-editor_nested_background_image: Obrázek na pozadí
+editor_section_color: Barva textu
 
 -
 
-editor_nested_border_color: Hraniční barva
+editor_section_background_color: Barva pozadí
 
 -
 
-editor_nested_border_width: Šířka hranic
+editor_section_background_image: Obrázek na pozadí
 
 -
 
-editor_nested_border_radius: Rohový poloměr
+editor_section_border_color: Hraniční barva
 
 -
 
-editor_nested_shadow: Vrhat stín
+editor_section_border_width: Šířka hranic
 
 -
 
-editor_nested_match_row_height: Výška celé řady
+editor_section_border_radius: Rohový poloměr
+
+-
+
+editor_section_shadow: Vrhat stín
+
+-
+
+editor_section_match_row_height: Výška celé řady
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centrum
 
 -
 
+editor_edit_style: Upravit styl
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Výchozí rozložení
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Rozbalte blok na celou šířku
 
 -
 
-editor_layout_column_span: Šířka
-
--
-
-editor_layout_column_start: Posun
-
--
-
-editor_layout_row_span: Row Span
-
--
-
-editor_layout_column_start_auto: Automaticky přesouvat bloky
+editor_layout_width: Šířka
 
 -
 

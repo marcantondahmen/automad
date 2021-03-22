@@ -206,19 +206,47 @@ editor_buttons_toolbox: Cnaipí
 
 -
 
-editor_button_primary_label: Téacs Bunscoile
+editor_button_primary: Príomhchnaipe
 
 -
 
-editor_button_primary_link: Nasc Bunscoile
+editor_button_secondary: Cnaipe Tánaisteach
 
 -
 
-editor_button_secondary_label: Téacs Tánaisteach
+editor_button_label: Dúiche
 
 -
 
-editor_button_secondary_link: Nasc Tánaisteach
+editor_button_link: Sáigh
+
+-
+
+editor_button_color: Dath téacs
+
+-
+
+editor_button_background_color: Cúlra
+
+-
+
+editor_button_border_color: Dath teorann
+
+-
+
+editor_button_border_width: Leithead na teorann
+
+-
+
+editor_button_border_radius: Ga Cúinne
+
+-
+
+editor_button_padding_horizontal: Spásáil chothrománach
+
+-
+
+editor_button_padding_vertical: Spásáil ingearach
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Téacs Cnaipe
 
 -
 
-editor_nested_toolbox: Eagarthóir / Cárta Leabaithe
+editor_section_toolbox: Rannóg Leagan Amach / Cárta
 
 -
 
-editor_nested_edit: Eagarthóireacht a dhéanamh ar
+editor_section_justify_start: Eilimintí a ailíniú i dtreo an taobh clé
 
 -
 
-editor_nested_style: Cuir stíl in eagar
+editor_section_justify_center: Eilimintí a ailíniú i dtreo an lár
 
 -
 
-editor_nested_card: Ábhar a bharrfheabhsú do chártaí
+editor_section_justify_end: Eilimintí a ailíniú i dtreo na láimhe deise
 
 -
 
-editor_nested_padding_top: Spásáil suas
+editor_section_edit: Eagarthóireacht a dhéanamh ar
 
 -
 
-editor_nested_padding_bottom: Spásáil síos
+editor_section_card: Ábhar a bharrfheabhsú do chártaí
 
 -
 
-editor_nested_color: Dath téacs
+editor_section_padding_top: Spásáil suas
 
 -
 
-editor_nested_background_color: Dath cúlra
+editor_section_padding_bottom: Spásáil síos
 
 -
 
-editor_nested_background_image: Íomhá chúlra
+editor_section_color: Dath téacs
 
 -
 
-editor_nested_border_color: Dath teorann
+editor_section_background_color: Dath cúlra
 
 -
 
-editor_nested_border_width: Leithead na teorann
+editor_section_background_image: Íomhá chúlra
 
 -
 
-editor_nested_border_radius: Ga Cúinne
+editor_section_border_color: Dath teorann
 
 -
 
-editor_nested_shadow: Scáth titim
+editor_section_border_width: Leithead na teorann
 
 -
 
-editor_nested_match_row_height: Airde lánrow
+editor_section_border_radius: Ga Cúinne
+
+-
+
+editor_section_shadow: Scáth titim
+
+-
+
+editor_section_match_row_height: Airde lánrow
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Ionad
 
 -
 
+editor_edit_style: Cuir stíl in eagar
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Leagan amach réamhshocraithe
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Leathnaigh an bloc go leithead iomlán
 
 -
 
-editor_layout_column_span: Le chéile
-
--
-
-editor_layout_column_start: Bog go gasta
-
--
-
-editor_layout_row_span: Row Span
-
--
-
-editor_layout_column_start_auto: Bloic a athrú go huathoibríoch
+editor_layout_width: Le chéile
 
 -
 

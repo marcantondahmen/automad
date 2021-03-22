@@ -206,19 +206,47 @@ editor_buttons_toolbox: Toetsen
 
 -
 
-editor_button_primary_label: Primaire tekst
+editor_button_primary: Hoofdknop
 
 -
 
-editor_button_primary_link: Primaire link
+editor_button_secondary: Secundaire knop
 
 -
 
-editor_button_secondary_label: Secundaire tekst
+editor_button_label: Tekst
 
 -
 
-editor_button_secondary_link: Secundaire link
+editor_button_link: Koppeling
+
+-
+
+editor_button_color: Tekst kleur
+
+-
+
+editor_button_background_color: Achtergrond
+
+-
+
+editor_button_border_color: Rand kleur
+
+-
+
+editor_button_border_width: Grensbreedte
+
+-
+
+editor_button_border_radius: Hoekradius
+
+-
+
+editor_button_padding_horizontal: Horizontale afstand
+
+-
+
+editor_button_padding_vertical: Verticale afstand
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Knop tekst
 
 -
 
-editor_nested_toolbox: Ingebouwde editor / kaart
+editor_section_toolbox: Lay-out sectie / kaart
 
 -
 
-editor_nested_edit: Bewerk
+editor_section_justify_start: Lijn elementen aan de linkerkant uit
 
 -
 
-editor_nested_style: Edit Style
+editor_section_justify_center: Lijn elementen naar het midden uit
 
 -
 
-editor_nested_card: Intimaliseer inhoud voor kaarten
+editor_section_justify_end: Lijn elementen aan de rechterkant uit
 
 -
 
-editor_nested_padding_top: Naar boven
+editor_section_edit: Bewerk
 
 -
 
-editor_nested_padding_bottom: Afsnijden
+editor_section_card: Intimaliseer inhoud voor kaarten
 
 -
 
-editor_nested_color: Tekst kleur
+editor_section_padding_top: Naar boven
 
 -
 
-editor_nested_background_color: Achtergrond kleur
+editor_section_padding_bottom: Afsnijden
 
 -
 
-editor_nested_background_image: Achtergrond afbeelding
+editor_section_color: Tekst kleur
 
 -
 
-editor_nested_border_color: Rand kleur
+editor_section_background_color: Achtergrond kleur
 
 -
 
-editor_nested_border_width: Grensbreedte
+editor_section_background_image: Achtergrond afbeelding
 
 -
 
-editor_nested_border_radius: Hoekradius
+editor_section_border_color: Rand kleur
 
 -
 
-editor_nested_shadow: Druppelschaduw
+editor_section_border_width: Grensbreedte
 
 -
 
-editor_nested_match_row_height: Volledige rijhoogte
+editor_section_border_radius: Hoekradius
+
+-
+
+editor_section_shadow: Druppelschaduw
+
+-
+
+editor_section_match_row_height: Volledige rijhoogte
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centrum
 
 -
 
+editor_edit_style: Edit Style
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Standaard layout
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Vouw het blok uit tot volledige breedte
 
 -
 
-editor_layout_column_span: Breedte
-
--
-
-editor_layout_column_start: Verschuiving
-
--
-
-editor_layout_row_span: Rij Span
-
--
-
-editor_layout_column_start_auto: Automatisch blokken verschuiven
+editor_layout_width: Breedte
 
 -
 

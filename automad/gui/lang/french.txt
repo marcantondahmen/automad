@@ -206,19 +206,47 @@ editor_buttons_toolbox: Boutons
 
 -
 
-editor_button_primary_label: Texte principal
+editor_button_primary: Bouton principal
 
 -
 
-editor_button_primary_link: Lien principal
+editor_button_secondary: Bouton secondaire
 
 -
 
-editor_button_secondary_label: Texte secondaire
+editor_button_label: Texte
 
 -
 
-editor_button_secondary_link: Lien secondaire
+editor_button_link: Lien
+
+-
+
+editor_button_color: Couleur de texte
+
+-
+
+editor_button_background_color: Fond
+
+-
+
+editor_button_border_color: Couleur de la bordure
+
+-
+
+editor_button_border_width: Largeur de la bordure
+
+-
+
+editor_button_border_radius: Rayon de coin
+
+-
+
+editor_button_padding_horizontal: Espacement horizontal
+
+-
+
+editor_button_padding_vertical: Espacement vertical
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Texte du bouton
 
 -
 
-editor_nested_toolbox: Éditeur / carte intégré
+editor_section_toolbox: Section de la disposition / carte
 
 -
 
-editor_nested_edit: Éditer
+editor_section_justify_start: Aligner des éléments vers le côté gauche
 
 -
 
-editor_nested_style: Style d'édition
+editor_section_justify_center: Aligner des éléments vers le milieu
 
 -
 
-editor_nested_card: Optimiser le contenu des cartes
+editor_section_justify_end: Aligner des éléments vers le côté droit
 
 -
 
-editor_nested_padding_top: Espacement vers le haut
+editor_section_edit: Éditer
 
 -
 
-editor_nested_padding_bottom: Espacement
+editor_section_card: Optimiser le contenu des cartes
 
 -
 
-editor_nested_color: Couleur de texte
+editor_section_padding_top: Espacement vers le haut
 
 -
 
-editor_nested_background_color: Couleur de l'arrière plan
+editor_section_padding_bottom: Espacement
 
 -
 
-editor_nested_background_image: Image de fond
+editor_section_color: Couleur de texte
 
 -
 
-editor_nested_border_color: Couleur de la bordure
+editor_section_background_color: Couleur de l'arrière plan
 
 -
 
-editor_nested_border_width: Largeur de la bordure
+editor_section_background_image: Image de fond
 
 -
 
-editor_nested_border_radius: Rayon de coin
+editor_section_border_color: Couleur de la bordure
 
 -
 
-editor_nested_shadow: Ombre portée
+editor_section_border_width: Largeur de la bordure
 
 -
 
-editor_nested_match_row_height: Hauteur de la rangée complète
+editor_section_border_radius: Rayon de coin
+
+-
+
+editor_section_shadow: Ombre portée
+
+-
+
+editor_section_match_row_height: Hauteur de la rangée complète
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centre
 
 -
 
+editor_edit_style: Style d'édition
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Disposition par défaut
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Développez le bloc en pleine largeur
 
 -
 
-editor_layout_column_span: Largeur
-
--
-
-editor_layout_column_start: Décalage
-
--
-
-editor_layout_row_span: Envergure de ligne
-
--
-
-editor_layout_column_start_auto: Déplacer automatiquement des blocs
+editor_layout_width: Largeur
 
 -
 

@@ -206,19 +206,47 @@ editor_buttons_toolbox: Gombíky
 
 -
 
-editor_button_primary_label: Primárny text
+editor_button_primary: Hlavné tlačidlo
 
 -
 
-editor_button_primary_link: Primárny odkaz
+editor_button_secondary: Druhotné tlačidlo
 
 -
 
-editor_button_secondary_label: Sekundárny text
+editor_button_label: Text
 
 -
 
-editor_button_secondary_link: Sekundárny odkaz
+editor_button_link: Spojenie
+
+-
+
+editor_button_color: Farba textu
+
+-
+
+editor_button_background_color: Pozadie
+
+-
+
+editor_button_border_color: Hraničná farba
+
+-
+
+editor_button_border_width: Hraničná šírka
+
+-
+
+editor_button_border_radius: Rohový polomer
+
+-
+
+editor_button_padding_horizontal: Horizontálny rozstup
+
+-
+
+editor_button_padding_vertical: Vertikálny rozstup
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Text tlačidla
 
 -
 
-editor_nested_toolbox: Vložený editor / karta
+editor_section_toolbox: Sekcia rozloženia / karty
 
 -
 
-editor_nested_edit: Upraviť
+editor_section_justify_start: Zarovnajte prvky smerom k ľavej strane
 
 -
 
-editor_nested_style: Upraviť štýl
+editor_section_justify_center: Zarovnajte prvky smerom k stredu
 
 -
 
-editor_nested_card: Optimalizujte obsah pre karty
+editor_section_justify_end: Zarovnajte prvky smerom k pravej strane
 
 -
 
-editor_nested_padding_top: Rozmiestnenie smerom nahor
+editor_section_edit: Upraviť
 
 -
 
-editor_nested_padding_bottom: Rozteč
+editor_section_card: Optimalizujte obsah pre karty
 
 -
 
-editor_nested_color: Farba textu
+editor_section_padding_top: Rozmiestnenie smerom nahor
 
 -
 
-editor_nested_background_color: Farba pozadia
+editor_section_padding_bottom: Rozteč
 
 -
 
-editor_nested_background_image: Obrázok na pozadí
+editor_section_color: Farba textu
 
 -
 
-editor_nested_border_color: Hraničná farba
+editor_section_background_color: Farba pozadia
 
 -
 
-editor_nested_border_width: Hraničná šírka
+editor_section_background_image: Obrázok na pozadí
 
 -
 
-editor_nested_border_radius: Rohový polomer
+editor_section_border_color: Hraničná farba
 
 -
 
-editor_nested_shadow: Vrhať tieň
+editor_section_border_width: Hraničná šírka
 
 -
 
-editor_nested_match_row_height: Výška riadka
+editor_section_border_radius: Rohový polomer
+
+-
+
+editor_section_shadow: Vrhať tieň
+
+-
+
+editor_section_match_row_height: Výška riadka
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Stred
 
 -
 
+editor_edit_style: Upraviť štýl
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Predvolené rozloženie
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Rozbaľte blok na celú šírku
 
 -
 
-editor_layout_column_span: Šírka
-
--
-
-editor_layout_column_start: Posun
-
--
-
-editor_layout_row_span: Row Span
-
--
-
-editor_layout_column_start_auto: Automaticky Shift bloky
+editor_layout_width: Šírka
 
 -
 

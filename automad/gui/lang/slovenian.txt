@@ -206,19 +206,47 @@ editor_buttons_toolbox: Gumbi
 
 -
 
-editor_button_primary_label: Primarno besedilo
+editor_button_primary: Glavni gumb
 
 -
 
-editor_button_primary_link: Primarna povezava
+editor_button_secondary: Sekundarna tipka
 
 -
 
-editor_button_secondary_label: Sekundarno besedilo
+editor_button_label: Besedilo
 
 -
 
-editor_button_secondary_link: Sekundarna povezava
+editor_button_link: Povezava
+
+-
+
+editor_button_color: Barva besedila
+
+-
+
+editor_button_background_color: Ozadje
+
+-
+
+editor_button_border_color: Barva meje
+
+-
+
+editor_button_border_width: Širina meje
+
+-
+
+editor_button_border_radius: Polmer kota
+
+-
+
+editor_button_padding_horizontal: Vodoravno razmik
+
+-
+
+editor_button_padding_vertical: Navpični razmik
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Besedilo gumba
 
 -
 
-editor_nested_toolbox: Vdelani urejevalnik / kartica
+editor_section_toolbox: Razdelek / kartica postavitve
 
 -
 
-editor_nested_edit: Uredi
+editor_section_justify_start: Poravnajte elemente proti levi strani
 
 -
 
-editor_nested_style: Uredi stil.
+editor_section_justify_center: Poravnajte elemente proti sredini
 
 -
 
-editor_nested_card: Optimizirajte vsebino za kartice
+editor_section_justify_end: Poravnajte elemente proti desni strani
 
 -
 
-editor_nested_padding_top: Razmik navzgor
+editor_section_edit: Uredi
 
 -
 
-editor_nested_padding_bottom: Razmik
+editor_section_card: Optimizirajte vsebino za kartice
 
 -
 
-editor_nested_color: Barva besedila
+editor_section_padding_top: Razmik navzgor
 
 -
 
-editor_nested_background_color: Barva ozadja
+editor_section_padding_bottom: Razmik
 
 -
 
-editor_nested_background_image: Slika ozadja
+editor_section_color: Barva besedila
 
 -
 
-editor_nested_border_color: Barva meje
+editor_section_background_color: Barva ozadja
 
 -
 
-editor_nested_border_width: Širina meje
+editor_section_background_image: Slika ozadja
 
 -
 
-editor_nested_border_radius: Polmer kota
+editor_section_border_color: Barva meje
 
 -
 
-editor_nested_shadow: Drop Shadow.
+editor_section_border_width: Širina meje
 
 -
 
-editor_nested_match_row_height: Celotna višina vrstice
+editor_section_border_radius: Polmer kota
+
+-
+
+editor_section_shadow: Drop Shadow.
+
+-
+
+editor_section_match_row_height: Celotna višina vrstice
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Center
 
 -
 
+editor_edit_style: Uredi stil
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Privzeta postavitev
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Razširite blok na celotno širino
 
 -
 
-editor_layout_column_span: Premer
-
--
-
-editor_layout_column_start: Shift
-
--
-
-editor_layout_row_span: Vrsto števca
-
--
-
-editor_layout_column_start_auto: Samodejno premakni bloke
+editor_layout_width: Premer
 
 -
 

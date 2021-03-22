@@ -206,19 +206,47 @@ editor_buttons_toolbox: Кнопки
 
 -
 
-editor_button_primary_label: Основной текст
+editor_button_primary: Основная кнопка
 
 -
 
-editor_button_primary_link: Первичная ссылка
+editor_button_secondary: Вторичная кнопка
 
 -
 
-editor_button_secondary_label: Дополнительный текст
+editor_button_label: Текст
 
 -
 
-editor_button_secondary_link: Дополнительная ссылка
+editor_button_link: Связь
+
+-
+
+editor_button_color: Цвет текста
+
+-
+
+editor_button_background_color: Фон
+
+-
+
+editor_button_border_color: Цвет границы
+
+-
+
+editor_button_border_width: Ширина рамки
+
+-
+
+editor_button_border_radius: Угловой радиус
+
+-
+
+editor_button_padding_horizontal: Горизонтальное расстояние
+
+-
+
+editor_button_padding_vertical: Вертикальное расстояние
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Текст кнопки
 
 -
 
-editor_nested_toolbox: Встроенный редактор / карта
+editor_section_toolbox: Раздел макета / карта
 
 -
 
-editor_nested_edit: Редактировать
+editor_section_justify_start: Выровнять элементы к левой стороне
 
 -
 
-editor_nested_style: Стиль редактирования
+editor_section_justify_center: Выровнять элементы к середине
 
 -
 
-editor_nested_card: Оптимизировать контент для карт
+editor_section_justify_end: Выровнять элементы к правой стороне
 
 -
 
-editor_nested_padding_top: Расстояние вверх
+editor_section_edit: Редактировать
 
 -
 
-editor_nested_padding_bottom: Осадка вниз
+editor_section_card: Оптимизировать контент для карт
 
 -
 
-editor_nested_color: Цвет текста
+editor_section_padding_top: Расстояние вверх
 
 -
 
-editor_nested_background_color: Фоновый цвет
+editor_section_padding_bottom: Осадка вниз
 
 -
 
-editor_nested_background_image: Фоновая картинка
+editor_section_color: Цвет текста
 
 -
 
-editor_nested_border_color: Цвет границы
+editor_section_background_color: Фоновый цвет
 
 -
 
-editor_nested_border_width: Ширина рамки
+editor_section_background_image: Фоновая картинка
 
 -
 
-editor_nested_border_radius: Угловой радиус
+editor_section_border_color: Цвет границы
 
 -
 
-editor_nested_shadow: Падение тень
+editor_section_border_width: Ширина рамки
 
 -
 
-editor_nested_match_row_height: Полная высота строки
+editor_section_border_radius: Угловой радиус
+
+-
+
+editor_section_shadow: Падение тень
+
+-
+
+editor_section_match_row_height: Полная высота строки
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Центр
 
 -
 
+editor_edit_style: Стиль редактирования
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Макет по умолчанию
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Развернуть блок на всю ширину
 
 -
 
-editor_layout_column_span: Ширина
-
--
-
-editor_layout_column_start: Сдвиг
-
--
-
-editor_layout_row_span: Промежуток строки
-
--
-
-editor_layout_column_start_auto: Автоматически сдвигать блоки
+editor_layout_width: Ширина
 
 -
 

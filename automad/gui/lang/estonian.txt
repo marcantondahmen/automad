@@ -206,19 +206,47 @@ editor_buttons_toolbox: Nööbid
 
 -
 
-editor_button_primary_label: Esmane tekst
+editor_button_primary: Põhinupp
 
 -
 
-editor_button_primary_link: Esmane link
+editor_button_secondary: Sekundaarne nupp
 
 -
 
-editor_button_secondary_label: Teisene tekst
+editor_button_label: Tekst
 
 -
 
-editor_button_secondary_link: Sekundaarne link
+editor_button_link: Link
+
+-
+
+editor_button_color: Teksti värv
+
+-
+
+editor_button_background_color: Taust
+
+-
+
+editor_button_border_color: Piir
+
+-
+
+editor_button_border_width: Piirilaius
+
+-
+
+editor_button_border_radius: Nurgaraadius
+
+-
+
+editor_button_padding_horizontal: Horisontaalne vahe
+
+-
+
+editor_button_padding_vertical: Vertikaalne vahe
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Nuputekst
 
 -
 
-editor_nested_toolbox: Sisseehitatud toimetaja / kaart
+editor_section_toolbox: Paigutusosa / kaart
 
 -
 
-editor_nested_edit: Redigeerima
+editor_section_justify_start: Joondage elemendid vasakpoolse poole
 
 -
 
-editor_nested_style: Muuda stiili
+editor_section_justify_center: Joondage elemendid keskele
 
 -
 
-editor_nested_card: Kaartide sisu optimeerimine
+editor_section_justify_end: Joondage elemendid paremale poole
 
 -
 
-editor_nested_padding_top: Vahekaugus ülespoole
+editor_section_edit: Redigeerima
 
 -
 
-editor_nested_padding_bottom: Vahemaad
+editor_section_card: Kaartide sisu optimeerimine
 
 -
 
-editor_nested_color: Teksti värv
+editor_section_padding_top: Vahekaugus ülespoole
 
 -
 
-editor_nested_background_color: Taustavärv
+editor_section_padding_bottom: Vahemaad
 
 -
 
-editor_nested_background_image: Taustapilt
+editor_section_color: Teksti värv
 
 -
 
-editor_nested_border_color: Piir
+editor_section_background_color: Taustavärv
 
 -
 
-editor_nested_border_width: Piirilaius
+editor_section_background_image: Taustapilt
 
 -
 
-editor_nested_border_radius: Nurgaraadius
+editor_section_border_color: Piir
 
 -
 
-editor_nested_shadow: Tilk vari
+editor_section_border_width: Piirilaius
 
 -
 
-editor_nested_match_row_height: Täisrea kõrgus
+editor_section_border_radius: Nurgaraadius
+
+-
+
+editor_section_shadow: Tilk vari
+
+-
+
+editor_section_match_row_height: Täisrea kõrgus
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Keskus
 
 -
 
+editor_edit_style: Muuda stiili
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Vaikimisi paigutus
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Laiendage plokki täislaiusele
 
 -
 
-editor_layout_column_span: Laius
-
--
-
-editor_layout_column_start: Shift
-
--
-
-editor_layout_row_span: Rea pikkus
-
--
-
-editor_layout_column_start_auto: Plokkide nihutamine automaatselt
+editor_layout_width: Laius
 
 -
 

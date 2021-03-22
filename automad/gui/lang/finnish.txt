@@ -206,19 +206,47 @@ editor_buttons_toolbox: Painikkeet
 
 -
 
-editor_button_primary_label: Ensisijainen teksti
+editor_button_primary: Pääpainike
 
 -
 
-editor_button_primary_link: Ensisijainen linkki
+editor_button_secondary: Toissijainen painike
 
 -
 
-editor_button_secondary_label: Toissijainen teksti
+editor_button_label: Teksti
 
 -
 
-editor_button_secondary_link: Toissijainen linkki
+editor_button_link: Linkki
+
+-
+
+editor_button_color: Tekstin väri
+
+-
+
+editor_button_background_color: Tausta
+
+-
+
+editor_button_border_color: Reunuksen väri
+
+-
+
+editor_button_border_width: Raja-leveys
+
+-
+
+editor_button_border_radius: Kulmasäde
+
+-
+
+editor_button_padding_horizontal: Horisontaalinen välimatka
+
+-
+
+editor_button_padding_vertical: Vertikaalinen välimatka
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Painikkeen teksti
 
 -
 
-editor_nested_toolbox: Sulautettu editori / kortti
+editor_section_toolbox: Layout-osio / kortti
 
 -
 
-editor_nested_edit: Muokata
+editor_section_justify_start: Kohdista elementit vasemmalle puolelle
 
 -
 
-editor_nested_style: Muokkaa tyyliä
+editor_section_justify_center: Kohdista elementit kohti keskelle
 
 -
 
-editor_nested_card: Optimoi sisältö kortille
+editor_section_justify_end: Kohdista elementit oikealle puolelle
 
 -
 
-editor_nested_padding_top: Välimatka ylöspäin
+editor_section_edit: Muokata
 
 -
 
-editor_nested_padding_bottom: Välimatka alas
+editor_section_card: Optimoi sisältö kortille
 
 -
 
-editor_nested_color: Tekstin väri
+editor_section_padding_top: Välimatka ylöspäin
 
 -
 
-editor_nested_background_color: Taustaväri
+editor_section_padding_bottom: Välimatka alas
 
 -
 
-editor_nested_background_image: Taustakuva
+editor_section_color: Tekstin väri
 
 -
 
-editor_nested_border_color: Reunuksen väri
+editor_section_background_color: Taustaväri
 
 -
 
-editor_nested_border_width: Raja-leveys
+editor_section_background_image: Taustakuva
 
 -
 
-editor_nested_border_radius: Kulmasäde
+editor_section_border_color: Reunuksen väri
 
 -
 
-editor_nested_shadow: Pudota varjo
+editor_section_border_width: Raja-leveys
 
 -
 
-editor_nested_match_row_height: Koko rivin korkeus
+editor_section_border_radius: Kulmasäde
+
+-
+
+editor_section_shadow: Pudota varjo
+
+-
+
+editor_section_match_row_height: Koko rivin korkeus
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Keskusta
 
 -
 
+editor_edit_style: Muokkaa tyyliä
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Oletusasettelu
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Laajenna lohko täysleveydelle
 
 -
 
-editor_layout_column_span: Leveys
-
--
-
-editor_layout_column_start: Siirtää
-
--
-
-editor_layout_row_span: Riviväli
-
--
-
-editor_layout_column_start_auto: Lohkojen automaattinen siirtäminen
+editor_layout_width: Leveys
 
 -
 

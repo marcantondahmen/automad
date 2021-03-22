@@ -206,19 +206,47 @@ editor_buttons_toolbox: Tasten
 
 -
 
-editor_button_primary_label: Primärer Text
+editor_button_primary: Hauptknopf
 
 -
 
-editor_button_primary_link: Primärer Link
+editor_button_secondary: Sekundärer Knopf
 
 -
 
-editor_button_secondary_label: Sekundärtext
+editor_button_label: Text
 
 -
 
-editor_button_secondary_link: Sekundärer Link
+editor_button_link: Verknüpfung
+
+-
+
+editor_button_color: Textfarbe
+
+-
+
+editor_button_background_color: Hintergrund
+
+-
+
+editor_button_border_color: Randfarbe
+
+-
+
+editor_button_border_width: Rahmenbreite
+
+-
+
+editor_button_border_radius: Eckenradius
+
+-
+
+editor_button_padding_horizontal: Horizontaler Abstand
+
+-
+
+editor_button_padding_vertical: Vertikaler Abstand
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Schaltflächentext
 
 -
 
-editor_nested_toolbox: Eingebetteter Editor / Karte
+editor_section_toolbox: Layoutabschnitt / Karte
 
 -
 
-editor_nested_edit: Bearbeiten
+editor_section_justify_start: Elemente auf der linken Seite ausrichten
 
 -
 
-editor_nested_style: Stil bearbeiten
+editor_section_justify_center: Elemente in Richtung der Mitte ausrichten
 
 -
 
-editor_nested_card: Inhalte für Karten optimieren
+editor_section_justify_end: Elemente auf der rechten Seite ausrichten
 
 -
 
-editor_nested_padding_top: Abstand nach oben
+editor_section_edit: Bearbeiten
 
 -
 
-editor_nested_padding_bottom: Abstand nach unten
+editor_section_card: Inhalte für Karten optimieren
 
 -
 
-editor_nested_color: Textfarbe
+editor_section_padding_top: Abstand nach oben
 
 -
 
-editor_nested_background_color: Hintergrundfarbe
+editor_section_padding_bottom: Abstand nach unten
 
 -
 
-editor_nested_background_image: Hintergrundbild
+editor_section_color: Textfarbe
 
 -
 
-editor_nested_border_color: Randfarbe
+editor_section_background_color: Hintergrundfarbe
 
 -
 
-editor_nested_border_width: Rahmenbreite
+editor_section_background_image: Hintergrundbild
 
 -
 
-editor_nested_border_radius: Eckenradius
+editor_section_border_color: Randfarbe
 
 -
 
-editor_nested_shadow: Schlagschatten
+editor_section_border_width: Rahmenbreite
 
 -
 
-editor_nested_match_row_height: Volle Reihenhöhe
+editor_section_border_radius: Eckenradius
+
+-
+
+editor_section_shadow: Schlagschatten
+
+-
+
+editor_section_match_row_height: Volle Reihenhöhe
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Center
 
 -
 
+editor_edit_style: Stil bearbeiten
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Standardlayout
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Erweitern Sie den Block auf volle Breite
 
 -
 
-editor_layout_column_span: Breite
-
--
-
-editor_layout_column_start: Verschiebung
-
--
-
-editor_layout_row_span: Reihenspanne
-
--
-
-editor_layout_column_start_auto: Blöcke automatisch verschieben.
+editor_layout_width: Breite
 
 -
 

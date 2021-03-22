@@ -206,19 +206,47 @@ editor_buttons_toolbox: Hnappar
 
 -
 
-editor_button_primary_label: Aðaltexti
+editor_button_primary: Helstu hnappur
 
 -
 
-editor_button_primary_link: Aðaltengill
+editor_button_secondary: Efri hnappur
 
 -
 
-editor_button_secondary_label: Secondary Text
+editor_button_label: Texti
 
 -
 
-editor_button_secondary_link: Secondary Link
+editor_button_link: Link.
+
+-
+
+editor_button_color: Texti lit.
+
+-
+
+editor_button_background_color: Bakgrunnur
+
+-
+
+editor_button_border_color: Landamæri lit.
+
+-
+
+editor_button_border_width: Border breidd
+
+-
+
+editor_button_border_radius: Corner Radius.
+
+-
+
+editor_button_padding_horizontal: Lárétt bilun
+
+-
+
+editor_button_padding_vertical: Lóðrétt bilun
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Hnappatexti
 
 -
 
-editor_nested_toolbox: Innbyggður ritstjóri / kort
+editor_section_toolbox: Layout kafla / kort
 
 -
 
-editor_nested_edit: Breyta
+editor_section_justify_start: Stilltu þætti í átt að vinstri hliðinni
 
 -
 
-editor_nested_style: Breyta stíl
+editor_section_justify_center: Samræma þætti í átt að miðjunni
 
 -
 
-editor_nested_card: Bjartsýni efni fyrir spil
+editor_section_justify_end: Stilltu þætti í átt að hægri hliðinni
 
 -
 
-editor_nested_padding_top: Bili upp á við
+editor_section_edit: Breyta
 
 -
 
-editor_nested_padding_bottom: Bili niður
+editor_section_card: Bjartsýni efni fyrir spil
 
 -
 
-editor_nested_color: Texti lit.
+editor_section_padding_top: Bili upp á við
 
 -
 
-editor_nested_background_color: Bakgrunns litur
+editor_section_padding_bottom: Bili niður
 
 -
 
-editor_nested_background_image: Bakgrunnsmynd
+editor_section_color: Texti lit.
 
 -
 
-editor_nested_border_color: Landamæri lit.
+editor_section_background_color: Bakgrunns litur
 
 -
 
-editor_nested_border_width: Border breidd
+editor_section_background_image: Bakgrunnsmynd
 
 -
 
-editor_nested_border_radius: Corner Radius.
+editor_section_border_color: Landamæri lit.
 
 -
 
-editor_nested_shadow: Drop Shadow.
+editor_section_border_width: Border breidd
 
 -
 
-editor_nested_match_row_height: Fullur röð hæð
+editor_section_border_radius: Corner Radius.
+
+-
+
+editor_section_shadow: Drop Shadow.
+
+-
+
+editor_section_match_row_height: Fullur röð hæð
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Miðja
 
 -
 
+editor_edit_style: Breyta stíl
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Sjálfgefið skipulag
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Stækkaðu kubbinn í fulla breidd
 
 -
 
-editor_layout_column_span: Breidd
-
--
-
-editor_layout_column_start: Breyting
-
--
-
-editor_layout_row_span: Róðuspennu
-
--
-
-editor_layout_column_start_auto: Skiptu sjálfkrafa um blokkir
+editor_layout_width: Breidd
 
 -
 

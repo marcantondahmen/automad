@@ -206,19 +206,47 @@ editor_buttons_toolbox: Butoane
 
 -
 
-editor_button_primary_label: Text primar
+editor_button_primary: Butonul principal
 
 -
 
-editor_button_primary_link: Legătură principală
+editor_button_secondary: Buton secundar.
 
 -
 
-editor_button_secondary_label: Text secundar
+editor_button_label: Text
 
 -
 
-editor_button_secondary_link: Link secundar
+editor_button_link: Legătură
+
+-
+
+editor_button_color: Culoarea textului
+
+-
+
+editor_button_background_color: Fundal
+
+-
+
+editor_button_border_color: Culoarea frontierei
+
+-
+
+editor_button_border_width: Lățimea graniței
+
+-
+
+editor_button_border_radius: Raza de colț
+
+-
+
+editor_button_padding_horizontal: Spațierea orizontală
+
+-
+
+editor_button_padding_vertical: Spațierea verticală
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Text buton
 
 -
 
-editor_nested_toolbox: Editor / Card încorporat
+editor_section_toolbox: Secțiunea / cardul Layout
 
 -
 
-editor_nested_edit: Editați | ×
+editor_section_justify_start: Aliniați elementele spre partea stângă
 
 -
 
-editor_nested_style: Editați stilul
+editor_section_justify_center: Aliniați elementele spre mijloc
 
 -
 
-editor_nested_card: Optimizați conținutul pentru carduri
+editor_section_justify_end: Aliniați elementele spre partea dreaptă
 
 -
 
-editor_nested_padding_top: Spațierea în sus
+editor_section_edit: Editați | ×
 
 -
 
-editor_nested_padding_bottom: Spațierea în jos
+editor_section_card: Optimizați conținutul pentru carduri
 
 -
 
-editor_nested_color: Culoarea textului
+editor_section_padding_top: Spațierea în sus
 
 -
 
-editor_nested_background_color: Culoare de fundal
+editor_section_padding_bottom: Spațierea în jos
 
 -
 
-editor_nested_background_image: Imagine de fundal
+editor_section_color: Culoarea textului
 
 -
 
-editor_nested_border_color: Culoarea frontierei
+editor_section_background_color: Culoare de fundal
 
 -
 
-editor_nested_border_width: Lățimea graniței
+editor_section_background_image: Imagine de fundal
 
 -
 
-editor_nested_border_radius: Raza de colț
+editor_section_border_color: Culoarea frontierei
 
 -
 
-editor_nested_shadow: Umbra
+editor_section_border_width: Lățimea graniței
 
 -
 
-editor_nested_match_row_height: Înălțimea rândului complet
+editor_section_border_radius: Raza de colț
+
+-
+
+editor_section_shadow: Umbra
+
+-
+
+editor_section_match_row_height: Înălțimea rândului complet
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centru
 
 -
 
+editor_edit_style: Editați stilul
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Aspect implicit
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Extindeți blocul la toată lățimea
 
 -
 
-editor_layout_column_span: Lăţime
-
--
-
-editor_layout_column_start: Schimb
-
--
-
-editor_layout_row_span: Rang Span
-
--
-
-editor_layout_column_start_auto: Schimbați automat blocurile
+editor_layout_width: Lăţime
 
 -
 

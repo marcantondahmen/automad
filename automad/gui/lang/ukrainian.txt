@@ -206,19 +206,47 @@ editor_buttons_toolbox: Кнопки
 
 -
 
-editor_button_primary_label: Первинний текст
+editor_button_primary: Основна кнопка
 
 -
 
-editor_button_primary_link: Первинна ланка
+editor_button_secondary: Вторинна кнопка
 
 -
 
-editor_button_secondary_label: Вторинний текст
+editor_button_label: Текст
 
 -
 
-editor_button_secondary_link: Вторинна ланка
+editor_button_link: Посилання
+
+-
+
+editor_button_color: Текстовий колір
+
+-
+
+editor_button_background_color: Фон
+
+-
+
+editor_button_border_color: Колір кордону
+
+-
+
+editor_button_border_width: Ширина кордону
+
+-
+
+editor_button_border_radius: Кутовий радіус
+
+-
+
+editor_button_padding_horizontal: Горизонтальний інтервал
+
+-
+
+editor_button_padding_vertical: Вертикальний інтервал
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Текст кнопки
 
 -
 
-editor_nested_toolbox: Вбудований редактор / картка
+editor_section_toolbox: Розділ / картка макета
 
 -
 
-editor_nested_edit: Редагувати
+editor_section_justify_start: Вирівняти елементи до лівої сторони
 
 -
 
-editor_nested_style: Редагувати стиль
+editor_section_justify_center: Вирівнювати елементи до середини
 
 -
 
-editor_nested_card: Оптимізувати вміст для карт
+editor_section_justify_end: Вирівняти елементи до правої сторони
 
 -
 
-editor_nested_padding_top: Відстань вгору
+editor_section_edit: Редагувати
 
 -
 
-editor_nested_padding_bottom: Пробіл
+editor_section_card: Оптимізувати вміст для карт
 
 -
 
-editor_nested_color: Текстовий колір
+editor_section_padding_top: Відстань вгору
 
 -
 
-editor_nested_background_color: Колір фону
+editor_section_padding_bottom: Пробіл
 
 -
 
-editor_nested_background_image: Фонове зображення
+editor_section_color: Текстовий колір
 
 -
 
-editor_nested_border_color: Колір кордону
+editor_section_background_color: Колір фону
 
 -
 
-editor_nested_border_width: Ширина кордону
+editor_section_background_image: Фонове зображення
 
 -
 
-editor_nested_border_radius: Кутовий радіус
+editor_section_border_color: Колір кордону
 
 -
 
-editor_nested_shadow: Тінь
+editor_section_border_width: Ширина кордону
 
 -
 
-editor_nested_match_row_height: Повна висота рядка
+editor_section_border_radius: Кутовий радіус
+
+-
+
+editor_section_shadow: Тінь
+
+-
+
+editor_section_match_row_height: Повна висота рядка
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Центр
 
 -
 
+editor_edit_style: Редагувати стиль
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Макет за замовчуванням
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Розгорніть блок на всю ширину
 
 -
 
-editor_layout_column_span: Ширина
-
--
-
-editor_layout_column_start: Зміна
-
--
-
-editor_layout_row_span: Розмах рядка
-
--
-
-editor_layout_column_start_auto: Автоматично змінювати блоки
+editor_layout_width: Ширина
 
 -
 

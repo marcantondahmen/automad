@@ -206,19 +206,47 @@ editor_buttons_toolbox: Botões
 
 -
 
-editor_button_primary_label: Texto Primário
+editor_button_primary: Botão principal
 
 -
 
-editor_button_primary_link: Link Primário
+editor_button_secondary: Botão secundário
 
 -
 
-editor_button_secondary_label: Texto Secundário
+editor_button_label: Texto
 
 -
 
-editor_button_secondary_link: Link Secundário
+editor_button_link: Ligação
+
+-
+
+editor_button_color: Cor do texto
+
+-
+
+editor_button_background_color: Fundo
+
+-
+
+editor_button_border_color: Cor da borda
+
+-
+
+editor_button_border_width: Largura da fronteira
+
+-
+
+editor_button_border_radius: Raio de canto
+
+-
+
+editor_button_padding_horizontal: Espaçamento horizontal
+
+-
+
+editor_button_padding_vertical: Espaçamento vertical
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Botão de texto
 
 -
 
-editor_nested_toolbox: Editor / cartão incorporado
+editor_section_toolbox: Seção de layout / cartão
 
 -
 
-editor_nested_edit: Editar
+editor_section_justify_start: Alinhar elementos para o lado esquerdo
 
 -
 
-editor_nested_style: Editar estilo
+editor_section_justify_center: Alinhar elementos para o meio
 
 -
 
-editor_nested_card: Otimize o conteúdo para cartões
+editor_section_justify_end: Alinhar elementos para o lado direito
 
 -
 
-editor_nested_padding_top: Espaçando para cima
+editor_section_edit: Editar
 
 -
 
-editor_nested_padding_bottom: Espaçamento para baixo
+editor_section_card: Otimize o conteúdo para cartões
 
 -
 
-editor_nested_color: Cor do texto
+editor_section_padding_top: Espaçando para cima
 
 -
 
-editor_nested_background_color: Cor de fundo
+editor_section_padding_bottom: Espaçamento para baixo
 
 -
 
-editor_nested_background_image: Imagem de fundo
+editor_section_color: Cor do texto
 
 -
 
-editor_nested_border_color: Cor da borda
+editor_section_background_color: Cor de fundo
 
 -
 
-editor_nested_border_width: Largura da fronteira
+editor_section_background_image: Imagem de fundo
 
 -
 
-editor_nested_border_radius: Raio de canto
+editor_section_border_color: Cor da borda
 
 -
 
-editor_nested_shadow: Drop Shadow.
+editor_section_border_width: Largura da fronteira
 
 -
 
-editor_nested_match_row_height: Altura da fileira completa
+editor_section_border_radius: Raio de canto
+
+-
+
+editor_section_shadow: Drop Shadow.
+
+-
+
+editor_section_match_row_height: Altura da fileira completa.
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centro
 
 -
 
+editor_edit_style: Editar estilo
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Layout padrão
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Expanda o bloco para a largura total
 
 -
 
-editor_layout_column_span: Largura
-
--
-
-editor_layout_column_start: Mudança
-
--
-
-editor_layout_row_span: Expansão de linha
-
--
-
-editor_layout_column_start_auto: Mudar automaticamente blocos
+editor_layout_width: Largura
 
 -
 

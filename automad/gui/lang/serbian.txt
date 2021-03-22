@@ -206,19 +206,47 @@ editor_buttons_toolbox: Дугмад
 
 -
 
-editor_button_primary_label: Примарни текст
+editor_button_primary: Главно дугме
 
 -
 
-editor_button_primary_link: Примарна веза
+editor_button_secondary: Секундарно дугме
 
 -
 
-editor_button_secondary_label: Секундарни текст
+editor_button_label: Текст
 
 -
 
-editor_button_secondary_link: Секундарна веза
+editor_button_link: Линк
+
+-
+
+editor_button_color: Боја текста
+
+-
+
+editor_button_background_color: Позадина
+
+-
+
+editor_button_border_color: Боја ивице
+
+-
+
+editor_button_border_width: Ширина границе
+
+-
+
+editor_button_border_radius: Угаони радијус
+
+-
+
+editor_button_padding_horizontal: Хоризонтални размак
+
+-
+
+editor_button_padding_vertical: Вертикални размак
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Текст дугмета
 
 -
 
-editor_nested_toolbox: Уграђени уређивач / картица
+editor_section_toolbox: Одељење / картица изласка
 
 -
 
-editor_nested_edit: Уредити
+editor_section_justify_start: Поравнајте елементе према левој страни
 
 -
 
-editor_nested_style: Уреди стил
+editor_section_justify_center: Поравнајте елементе према средини
 
 -
 
-editor_nested_card: Оптимизирајте садржај за картице
+editor_section_justify_end: Поравнајте елементе према десној страни
 
 -
 
-editor_nested_padding_top: Размазање према горе
+editor_section_edit: Уредити
 
 -
 
-editor_nested_padding_bottom: Размакнути доле
+editor_section_card: Оптимизирајте садржај за картице
 
 -
 
-editor_nested_color: Боја текста
+editor_section_padding_top: Размазање према горе
 
 -
 
-editor_nested_background_color: Боја позадине
+editor_section_padding_bottom: Размакнути доле
 
 -
 
-editor_nested_background_image: Позадинска слика
+editor_section_color: Боја текста
 
 -
 
-editor_nested_border_color: Боја ивице
+editor_section_background_color: Боја позадине
 
 -
 
-editor_nested_border_width: Ширина границе
+editor_section_background_image: Позадинска слика
 
 -
 
-editor_nested_border_radius: Угаони радијус
+editor_section_border_color: Боја ивице
 
 -
 
-editor_nested_shadow: Сенка
+editor_section_border_width: Ширина границе
 
 -
 
-editor_nested_match_row_height: Потпуна висина реда
+editor_section_border_radius: Угаони радијус
+
+-
+
+editor_section_shadow: Сенка
+
+-
+
+editor_section_match_row_height: Потпуна висина реда
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Центар
 
 -
 
+editor_edit_style: Уреди стил
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Подразумевани распоред
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Проширите блок у пуну ширину
 
 -
 
-editor_layout_column_span: Ширина
-
--
-
-editor_layout_column_start: Смена
-
--
-
-editor_layout_row_span: Ред распона
-
--
-
-editor_layout_column_start_auto: Аутоматски померај блокове
+editor_layout_width: Ширина
 
 -
 

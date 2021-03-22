@@ -206,19 +206,47 @@ editor_buttons_toolbox: Pogas
 
 -
 
-editor_button_primary_label: Primārais teksts
+editor_button_primary: Galvenā poga
 
 -
 
-editor_button_primary_link: Primārā saite
+editor_button_secondary: Sekundārā poga
 
 -
 
-editor_button_secondary_label: Sekundārais teksts
+editor_button_label: Teksts
 
 -
 
-editor_button_secondary_link: Sekundārā saite
+editor_button_link: Saite
+
+-
+
+editor_button_color: Teksta krāsa
+
+-
+
+editor_button_background_color: Fons
+
+-
+
+editor_button_border_color: Robeža
+
+-
+
+editor_button_border_width: Robežu platums
+
+-
+
+editor_button_border_radius: Stūra rādiuss
+
+-
+
+editor_button_padding_horizontal: Horizontālā atstatums
+
+-
+
+editor_button_padding_vertical: Vertikālā atstāšana
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Pogas teksts
 
 -
 
-editor_nested_toolbox: Iegultais redaktors / karte
+editor_section_toolbox: Izkārtojuma sadaļa / karte
 
 -
 
-editor_nested_edit: Rediģēt
+editor_section_justify_start: Izlīdzināt elementus kreisajā pusē
 
 -
 
-editor_nested_style: Rediģēt stilu
+editor_section_justify_center: Saskaņot elementus vidū
 
 -
 
-editor_nested_card: Optimizējiet kartes saturu
+editor_section_justify_end: Izlīdzināt elementus uz labo pusi
 
 -
 
-editor_nested_padding_top: Atstarpes uz augšu
+editor_section_edit: Rediģēt
 
 -
 
-editor_nested_padding_bottom: Atstājot
+editor_section_card: Optimizējiet kartes saturu
 
 -
 
-editor_nested_color: Teksta krāsa
+editor_section_padding_top: Atstarpes uz augšu
 
 -
 
-editor_nested_background_color: Fona krāsa
+editor_section_padding_bottom: Atstājot
 
 -
 
-editor_nested_background_image: Fona attēls
+editor_section_color: Teksta krāsa
 
 -
 
-editor_nested_border_color: Robeža
+editor_section_background_color: Fona krāsa
 
 -
 
-editor_nested_border_width: Robežu platums
+editor_section_background_image: Fona attēls
 
 -
 
-editor_nested_border_radius: Stūra rādiuss
+editor_section_border_color: Robeža
 
 -
 
-editor_nested_shadow: Nomest ēnu
+editor_section_border_width: Robežu platums
 
 -
 
-editor_nested_match_row_height: Pilna rindu augstums
+editor_section_border_radius: Stūra rādiuss
+
+-
+
+editor_section_shadow: Nomest ēnu
+
+-
+
+editor_section_match_row_height: Pilna rindu augstums
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centrs
 
 -
 
+editor_edit_style: Rediģēt stilu
+
+-
+
+editor_close_style: Ok
+
+-
+
 editor_layout_default: Noklusējuma izkārtojums
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Paplašiniet bloku līdz pilnam platumam
 
 -
 
-editor_layout_column_span: Platums
-
--
-
-editor_layout_column_start: Pāriet
-
--
-
-editor_layout_row_span: Rindas laidums
-
--
-
-editor_layout_column_start_auto: Automātiski pārslēgt blokus
+editor_layout_width: Platums
 
 -
 

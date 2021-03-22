@@ -206,19 +206,47 @@ editor_buttons_toolbox: Mygtukai
 
 -
 
-editor_button_primary_label: Pirminis tekstas
+editor_button_primary: Pagrindinis mygtukas
 
 -
 
-editor_button_primary_link: Pagrindinė nuoroda
+editor_button_secondary: Antrinis mygtukas
 
 -
 
-editor_button_secondary_label: Antrinis tekstas
+editor_button_label: Tekstas
 
 -
 
-editor_button_secondary_link: Antrinė nuoroda
+editor_button_link: Nuoroda
+
+-
+
+editor_button_color: Teksto spalva
+
+-
+
+editor_button_background_color: Fonas
+
+-
+
+editor_button_border_color: Sienos spalva
+
+-
+
+editor_button_border_width: Pasienio plotis
+
+-
+
+editor_button_border_radius: Kampo spindulys
+
+-
+
+editor_button_padding_horizontal: Horizontalus tarpai
+
+-
+
+editor_button_padding_vertical: Vertikalus tarpai
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Mygtuko tekstas
 
 -
 
-editor_nested_toolbox: Įterptasis redaktorius / kortelė
+editor_section_toolbox: Išdėstymas skyrius / kortelė
 
 -
 
-editor_nested_edit: Redaguoti
+editor_section_justify_start: Suderinti elementus į kairę pusę
 
 -
 
-editor_nested_style: Redaguoti stilius
+editor_section_justify_center: Suderinti elementus į vidurį
 
 -
 
-editor_nested_card: Optimizuokite kortelių turinį
+editor_section_justify_end: Suderinti elementus į dešinę pusę
 
 -
 
-editor_nested_padding_top: Tarpai aukštyn
+editor_section_edit: Redaguoti
 
 -
 
-editor_nested_padding_bottom: Atstumas
+editor_section_card: Optimizuokite kortelių turinį
 
 -
 
-editor_nested_color: Teksto spalva
+editor_section_padding_top: Tarpai aukštyn
 
 -
 
-editor_nested_background_color: Fono spalva
+editor_section_padding_bottom: Atstumas
 
 -
 
-editor_nested_background_image: Fono vaizdas
+editor_section_color: Teksto spalva
 
 -
 
-editor_nested_border_color: Sienos spalva
+editor_section_background_color: Fono spalva
 
 -
 
-editor_nested_border_width: Pasienio plotis
+editor_section_background_image: Fono vaizdas
 
 -
 
-editor_nested_border_radius: Kampo spindulys
+editor_section_border_color: Sienos spalva
 
 -
 
-editor_nested_shadow: Mesti šešėlį
+editor_section_border_width: Pasienio plotis
 
 -
 
-editor_nested_match_row_height: Visas eilės aukštis
+editor_section_border_radius: Kampo spindulys
+
+-
+
+editor_section_shadow: Mesti šešėlį
+
+-
+
+editor_section_match_row_height: Visas eilės aukštis
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Centras
 
 -
 
+editor_edit_style: Redaguoti stilius
+
+-
+
+editor_close_style: Ok.
+
+-
+
 editor_layout_default: Numatytasis išdėstymas
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Išplėskite bloką iki viso pločio
 
 -
 
-editor_layout_column_span: Plotis
-
--
-
-editor_layout_column_start: SHIFT.
-
--
-
-editor_layout_row_span: Eilutė
-
--
-
-editor_layout_column_start_auto: Automatiškai perkelia blokus
+editor_layout_width: Plotis
 
 -
 

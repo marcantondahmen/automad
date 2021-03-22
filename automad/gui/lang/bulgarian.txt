@@ -206,19 +206,47 @@ editor_buttons_toolbox: Бутони
 
 -
 
-editor_button_primary_label: Основен текст
+editor_button_primary: Главен бутон
 
 -
 
-editor_button_primary_link: Основна връзка
+editor_button_secondary: Вторичен бутон
 
 -
 
-editor_button_secondary_label: Вторичен текст
+editor_button_label: Текст
 
 -
 
-editor_button_secondary_link: Вторична връзка
+editor_button_link: Връзка
+
+-
+
+editor_button_color: Цвят на текста
+
+-
+
+editor_button_background_color: Заден план
+
+-
+
+editor_button_border_color: Граничен цвят
+
+-
+
+editor_button_border_width: Гранична ширина
+
+-
+
+editor_button_border_radius: Радиус на ъгъла
+
+-
+
+editor_button_padding_horizontal: Хоризонтално разстояние
+
+-
+
+editor_button_padding_vertical: Вертикално разстояние
 
 -
 
@@ -346,59 +374,67 @@ editor_mail_label_button: Текст на бутон
 
 -
 
-editor_nested_toolbox: Вграден редактор / карта
+editor_section_toolbox: Разпределение / карта
 
 -
 
-editor_nested_edit: редактиране
+editor_section_justify_start: Подравнете елементите към лявата страна
 
 -
 
-editor_nested_style: Редактиране на стил
+editor_section_justify_center: Подравнете елементите към средата
 
 -
 
-editor_nested_card: Оптимизиране на съдържанието за карти
+editor_section_justify_end: Подравнете елементите към дясната страна
 
 -
 
-editor_nested_padding_top: Разстояние нагоре
+editor_section_edit: редактиране
 
 -
 
-editor_nested_padding_bottom: Разстояние
+editor_section_card: Оптимизиране на съдържанието за карти
 
 -
 
-editor_nested_color: Цвят на текста
+editor_section_padding_top: Разстояние нагоре
 
 -
 
-editor_nested_background_color: Цвят на фона
+editor_section_padding_bottom: Разстояние
 
 -
 
-editor_nested_background_image: Фоново изображение
+editor_section_color: Цвят на текста
 
 -
 
-editor_nested_border_color: Граничен цвят
+editor_section_background_color: Цвят на фона
 
 -
 
-editor_nested_border_width: Гранична ширина
+editor_section_background_image: Фоново изображение
 
 -
 
-editor_nested_border_radius: Радиус на ъгъла
+editor_section_border_color: Граничен цвят
 
 -
 
-editor_nested_shadow: Капка сянка
+editor_section_border_width: Гранична ширина
 
 -
 
-editor_nested_match_row_height: Височина на пълен ред
+editor_section_border_radius: Радиус на ъгъла
+
+-
+
+editor_section_shadow: Капка сянка
+
+-
+
+editor_section_match_row_height: Височина на пълен ред
 
 -
 
@@ -518,6 +554,14 @@ editor_center: Център
 
 -
 
+editor_edit_style: Редактиране на стил
+
+-
+
+editor_close_style: Ok. \ t
+
+-
+
 editor_layout_default: Оформление по подразбиране
 
 -
@@ -526,19 +570,7 @@ editor_layout_stretch: Разгънете блока до пълната шир�
 
 -
 
-editor_layout_column_span: Ширина
-
--
-
-editor_layout_column_start: Shift
-
--
-
-editor_layout_row_span: Обхват на редовете
-
--
-
-editor_layout_column_start_auto: Автоматично преместване на блокове
+editor_layout_width: Ширина
 
 -
 

@@ -242,7 +242,7 @@ editor_buttons_toolbox: Buttons
 
 -
 
-editor_button_primary: Primary Button
+editor_button_primary: Main Button
 
 -
 
