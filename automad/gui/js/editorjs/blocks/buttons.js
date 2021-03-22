@@ -372,7 +372,7 @@ class AutomadBlockButtons {
 					paddingHorizontal: obj.paddingHorizontal || '2em',
 					paddingVertical: obj.paddingVertical || '0.5em',
 					color: obj.color || '#121212',
-					backgroundColor: obj.backgroundColor || '#FFFFFF',
+					background: obj.background || '#FFFFFF',
 					borderColor: obj.borderColor || '#CCCCCC'
 				  };
 
@@ -381,7 +381,7 @@ class AutomadBlockButtons {
 			['borderWidth',
 			'borderRadius',
 			'color',
-			'backgroundColor',
+			'background',
 			'borderColor'].forEach((_item) => {
 				button.style[_item] = style[_item];
 			});

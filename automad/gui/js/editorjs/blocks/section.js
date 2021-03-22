@@ -375,7 +375,7 @@ class AutomadBlockSection {
 		element.removeAttribute('style');
 		
 		if (style.backgroundImage) {
-			element.style.backgroundImage = `url('${Automad.util.resolveUrl(style.backgroundImage)}')`;
+			element.style.backgroundImage = `url('${Automad.util.resolvePath(style.backgroundImage)}')`;
 			element.style.backgroundPosition = '50% 50%';
 			element.style.backgroundSize = 'cover';
 		}
