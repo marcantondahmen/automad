@@ -313,6 +313,12 @@ class AutomadBlockSection {
 							${create.numberUnit('am-section-padding-bottom-', style.paddingBottom).outerHTML}
 			  			</div>
 					</div>
+					<div class="uk-text-right uk-margin-small-top">
+						<a href="#" class="uk-button uk-button-success uk-dropdown-close">
+							<i class="uk-icon-check"></i>&nbsp;
+							${t('close_style')}
+						</a>
+					</div>
 				</div>
 			</div>
 		`;

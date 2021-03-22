@@ -86,20 +86,21 @@
 			box-sizing: border-box;
 			display: flex;
 			flex-direction: column;
-			width: 25%;
+			flex-basis: 25%;
+			min-width: 6.5rem;
 			padding: @am-inline-actions-padding !important;
 			padding-top: 0.4rem !important;
 		}
 
 		& > .link {
-			width: 100%;
+			flex-basis: 100%;
 			border-bottom: @am-hairline;
 			margin-bottom: -@am-border-width;
 		}
 
 		& > div:not([class]) {
 
-			width: 100%;
+			flex-basis: 100%;
 			border-top: @am-hairline;
 			margin-top: -@am-border-width;
 
