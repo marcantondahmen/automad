@@ -482,9 +482,11 @@ class AutomadBlockSection {
 		this.initToggles();
 		this.applyDialogSize();
 
-		se.$(`#${this.modalDropdownId}`).on('hide.uk.dropdown', () => {
-			this.saveStyleSettings();
-			this.applyStyleSettings(document.getElementById(this.modalEditorId));
+		se.$('input, select, [contenteditable]').on('change input', () => {
+			setTimeout(() => {
+				this.saveStyleSettings();
+				this.applyStyleSettings(document.getElementById(this.modalEditorId));
+			}, 50);
 		});
 
 		const modal = se.UIkit.modal(`#${this.modalId}`, { 
