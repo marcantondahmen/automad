@@ -70,7 +70,7 @@ class Header {
 			}
 		}
 
-		return 	'<h' . $data->level . ' id="' . Str::sanitize($data->text, true) . '"' . $style . '>' . 
+		return 	'<h' . $data->level . ' id="' . Str::sanitize(strip_tags($data->text), true) . '"' . $style . '>' . 
 					htmlspecialchars_decode($data->text) . 
 				'</h' . $data->level . '>';
 

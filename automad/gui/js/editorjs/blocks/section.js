@@ -333,12 +333,6 @@ class AutomadBlockSection {
 							${create.numberUnit('am-section-padding-bottom-', style.paddingBottom).outerHTML}
 						</div>
 					</div>
-					<div class="uk-text-right uk-margin-small-top">
-						<a href="#" class="uk-button uk-button-success uk-dropdown-close">
-							<i class="uk-icon-check"></i>&nbsp;
-							${t('close_style')}
-						</a>
-					</div>
 				</div>
 			</div>
 		`;
@@ -398,7 +392,9 @@ class AutomadBlockSection {
 
 		const style = this.data.style;
 
-		element.removeAttribute('style');
+		try {
+			element.removeAttribute('style');
+		} catch (e) {}
 		
 		if (style.backgroundImage) {
 			element.style.backgroundImage = `url('${Automad.util.resolvePath(style.backgroundImage)}')`;
