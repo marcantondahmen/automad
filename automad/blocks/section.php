@@ -92,6 +92,7 @@ class Section {
 
 			foreach(array(
 				'backgroundColor',
+				'backgroundBlendMode',
 				'borderWidth',
 				'borderRadius',
 				'paddingTop',

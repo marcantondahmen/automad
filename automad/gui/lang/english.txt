@@ -454,6 +454,10 @@ editor_section_background_image: Background Image
 
 -
 
+editor_section_background_blend_mode: Background Blend Mode
+
+-
+
 editor_section_border_color: Border Color 
 
 -

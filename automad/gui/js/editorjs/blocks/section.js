@@ -215,6 +215,7 @@ class AutomadBlockSection {
 				  matchRowHeight: false,
 				  color: '',
 				  backgroundColor: '',
+				  backgroundBlendMode: '',
 				  borderColor: '',
 				  borderWidth: '',
 				  borderRadius: '',
@@ -278,20 +279,6 @@ class AutomadBlockSection {
 							${create.colorPicker('am-section-background-color', style.backgroundColor).outerHTML}
 						</div>
 					</div>
-					<div class="uk-grid uk-grid-width-medium-1-3 uk-margin-top-remove">
-			  			<div>
-							${create.label(t('section_border_color')).outerHTML}
-							${create.colorPicker('am-section-border-color', style.borderColor).outerHTML}
-						</div>
-						<div>
-			  				${create.label(t('section_border_width')).outerHTML}
-							${create.numberUnit('am-section-border-width-', style.borderWidth).outerHTML}
-						</div>
-						<div>
-			  				${create.label(t('section_border_radius')).outerHTML}
-							${create.numberUnit('am-section-border-radius-', style.borderRadius).outerHTML}
-						</div>
-					</div>
 					${create.label(t('section_background_image')).outerHTML}
 					<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
 						<button type="button" class="uk-button">
@@ -303,15 +290,48 @@ class AutomadBlockSection {
 						value="${style.backgroundImage}"
 						/>
 					</div>
-					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
-			  			<div>
-			  				${create.label(`${t('section_padding_top')} (padding top)`).outerHTML}
-							${create.numberUnit('am-section-padding-top-', style.paddingTop).outerHTML}
-			  			</div>
+					${create.label(t('section_background_blend_mode')).outerHTML}
+					${create.select(['am-section-background-blend-mode', 'uk-button', 'uk-width-1-1', 'uk-text-left'], [
+						'normal',
+						'multiply',
+						'screen',
+						'overlay',
+						'darken',
+						'lighten',
+						'color-dodge',
+						'color-burn',
+						'hard-light',
+						'soft-light',
+						'difference',
+						'exclusion',
+						'hue',
+						'saturation',
+						'color',
+						'luminosity'
+					], style.backgroundBlendMode).outerHTML}
+					<div class="uk-grid uk-grid-width-medium-1-3 uk-margin-top-remove">
 						<div>
-			  				${create.label(`${t('section_padding_bottom')} (padding bottom)`).outerHTML}
+							${create.label(t('section_border_color')).outerHTML}
+							${create.colorPicker('am-section-border-color', style.borderColor).outerHTML}
+						</div>
+						<div>
+							${create.label(t('section_border_width')).outerHTML}
+							${create.numberUnit('am-section-border-width-', style.borderWidth).outerHTML}
+						</div>
+						<div>
+							${create.label(t('section_border_radius')).outerHTML}
+							${create.numberUnit('am-section-border-radius-', style.borderRadius).outerHTML}
+						</div>
+					</div>
+					<div class="uk-grid uk-grid-width-medium-1-2 uk-margin-top-remove">
+						<div>
+							${create.label(`${t('section_padding_top')} (padding top)`).outerHTML}
+							${create.numberUnit('am-section-padding-top-', style.paddingTop).outerHTML}
+						</div>
+						<div>
+							${create.label(`${t('section_padding_bottom')} (padding bottom)`).outerHTML}
 							${create.numberUnit('am-section-padding-bottom-', style.paddingBottom).outerHTML}
-			  			</div>
+						</div>
 					</div>
 					<div class="uk-text-right uk-margin-small-top">
 						<a href="#" class="uk-button uk-button-success uk-dropdown-close">
@@ -341,6 +361,7 @@ class AutomadBlockSection {
 		inputs.borderRadiusNumber = wrapper.querySelector('.am-section-border-radius-number');
 		inputs.borderRadiusUnit = wrapper.querySelector('.am-section-border-radius-unit');
 		inputs.backgroundImage = wrapper.querySelector('.am-section-background-image');
+		inputs.backgroundBlendMode = wrapper.querySelector('.am-section-background-blend-mode');
 		inputs.paddingTopNumber = wrapper.querySelector('.am-section-padding-top-number');
 		inputs.paddingTopUnit = wrapper.querySelector('.am-section-padding-top-unit');
 		inputs.paddingBottomNumber = wrapper.querySelector('.am-section-padding-bottom-number');
@@ -356,9 +377,14 @@ class AutomadBlockSection {
 			borderWidth: Automad.util.getNumberUnitAsString(inputs.borderWidthNumber, inputs.borderWidthUnit),
 			borderRadius: Automad.util.getNumberUnitAsString(inputs.borderRadiusNumber, inputs.borderRadiusUnit),
 			backgroundImage: inputs.backgroundImage.value,
+			backgroundBlendMode: inputs.backgroundBlendMode.value,
 			paddingTop: Automad.util.getNumberUnitAsString(inputs.paddingTopNumber, inputs.paddingTopUnit),
 			paddingBottom: Automad.util.getNumberUnitAsString(inputs.paddingBottomNumber, inputs.paddingBottomUnit)
 		};
+
+		if (this.data.style.backgroundBlendMode == 'normal') {
+			delete this.data.style.backgroundBlendMode;
+		}
 
 		Object.keys(this.data.style).forEach((key) => {
 			if (!this.data.style[key]) {
@@ -400,6 +426,7 @@ class AutomadBlockSection {
 
 		['color', 
 		'backgroundColor', 
+		'backgroundBlendMode',
 		'paddingTop', 
 		'paddingBottom', 
 		'borderColor', 
