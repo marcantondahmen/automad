@@ -418,6 +418,10 @@ editor_section_background_image: Bakgrundsbild
 
 -
 
+editor_section_background_blend_mode: Bakgrundsblandningsläge
+
+-
+
 editor_section_border_color: Gräns färg
 
 -
@@ -555,10 +559,6 @@ editor_center: Centrum
 -
 
 editor_edit_style: Redigeringsstil
-
--
-
-editor_close_style: Ok
 
 -
 

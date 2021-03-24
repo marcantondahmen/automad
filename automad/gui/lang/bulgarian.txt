@@ -418,6 +418,10 @@ editor_section_background_image: Фоново изображение
 
 -
 
+editor_section_background_blend_mode: Режим на фоново смес
+
+-
+
 editor_section_border_color: Граничен цвят
 
 -
@@ -555,10 +559,6 @@ editor_center: Център
 -
 
 editor_edit_style: Редактиране на стил
-
--
-
-editor_close_style: Ok. \ t
 
 -
 

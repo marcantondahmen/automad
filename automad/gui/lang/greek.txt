@@ -418,6 +418,10 @@ editor_section_background_image: Εικόνα φόντου
 
 -
 
+editor_section_background_blend_mode: Λειτουργία μείγμα φόντου
+
+-
+
 editor_section_border_color: Χρώμα πλαισίου
 
 -
@@ -555,10 +559,6 @@ editor_center: Κέντρο
 -
 
 editor_edit_style: Επεξεργασία στυλ
-
--
-
-editor_close_style: Ok
 
 -
 

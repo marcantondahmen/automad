@@ -418,6 +418,10 @@ editor_section_background_image: Fono vaizdas
 
 -
 
+editor_section_background_blend_mode: Fono mišinio režimas
+
+-
+
 editor_section_border_color: Sienos spalva
 
 -
@@ -555,10 +559,6 @@ editor_center: Centras
 -
 
 editor_edit_style: Redaguoti stilius
-
--
-
-editor_close_style: Ok.
 
 -
 

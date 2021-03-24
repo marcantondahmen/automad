@@ -406,7 +406,7 @@ editor_section_padding_bottom: Bili niður
 
 -
 
-editor_section_color: Texti lit.
+editor_section_color: Texti lit
 
 -
 
@@ -418,7 +418,11 @@ editor_section_background_image: Bakgrunnsmynd
 
 -
 
-editor_section_border_color: Landamæri lit.
+editor_section_background_blend_mode: Bakgrunnur blanda ham
+
+-
+
+editor_section_border_color: Landamæri lit
 
 -
 
@@ -426,11 +430,11 @@ editor_section_border_width: Border breidd
 
 -
 
-editor_section_border_radius: Corner Radius.
+editor_section_border_radius: Corner Radius
 
 -
 
-editor_section_shadow: Drop Shadow.
+editor_section_shadow: Drop Shadow
 
 -
 
@@ -555,10 +559,6 @@ editor_center: Miðja
 -
 
 editor_edit_style: Breyta stíl
-
--
-
-editor_close_style: Ok.
 
 -
 

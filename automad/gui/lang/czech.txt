@@ -418,6 +418,10 @@ editor_section_background_image: Obrázek na pozadí
 
 -
 
+editor_section_background_blend_mode: Režim blodu na pozadí
+
+-
+
 editor_section_border_color: Hraniční barva
 
 -
@@ -555,10 +559,6 @@ editor_center: Centrum
 -
 
 editor_edit_style: Upravit styl
-
--
-
-editor_close_style: Ok.
 
 -
 

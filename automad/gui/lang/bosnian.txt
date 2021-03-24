@@ -418,6 +418,10 @@ editor_section_background_image: Pozadinska slika
 
 -
 
+editor_section_background_blend_mode: Režim mješavine pozadine
+
+-
+
 editor_section_border_color: Granična boja
 
 -
@@ -555,10 +559,6 @@ editor_center: Centar
 -
 
 editor_edit_style: Uredi stil
-
--
-
-editor_close_style: Ok
 
 -
 

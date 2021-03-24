@@ -418,6 +418,10 @@ editor_section_background_image: Obrázok na pozadí
 
 -
 
+editor_section_background_blend_mode: Režim Blend
+
+-
+
 editor_section_border_color: Hraničná farba
 
 -
@@ -555,10 +559,6 @@ editor_center: Stred
 -
 
 editor_edit_style: Upraviť štýl
-
--
-
-editor_close_style: Ok
 
 -
 

@@ -418,6 +418,10 @@ editor_section_background_image: Taustapilt
 
 -
 
+editor_section_background_blend_mode: Taustapõletiku režiim
+
+-
+
 editor_section_border_color: Piir
 
 -
@@ -555,10 +559,6 @@ editor_center: Keskus
 -
 
 editor_edit_style: Muuda stiili
-
--
-
-editor_close_style: Ok
 
 -
 

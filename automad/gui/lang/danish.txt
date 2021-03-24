@@ -406,7 +406,7 @@ editor_section_padding_bottom: Afstand ned
 
 -
 
-editor_section_color: Tekstfarve.
+editor_section_color: Tekstfarve
 
 -
 
@@ -418,19 +418,23 @@ editor_section_background_image: Baggrundsbillede
 
 -
 
-editor_section_border_color: Border Color.
+editor_section_background_blend_mode: Baggrund Blend Mode
 
 -
 
-editor_section_border_width: Border bredde.
+editor_section_border_color: Border Color
 
 -
 
-editor_section_border_radius: Hjørne Radius.
+editor_section_border_width: Border bredde
 
 -
 
-editor_section_shadow: Drop Shadow.
+editor_section_border_radius: Hjørne Radius
+
+-
+
+editor_section_shadow: Drop Shadow
 
 -
 
@@ -555,10 +559,6 @@ editor_center: Centrum
 -
 
 editor_edit_style: Rediger stil
-
--
-
-editor_close_style: Ok.
 
 -
 

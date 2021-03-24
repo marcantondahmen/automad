@@ -418,6 +418,10 @@ editor_section_background_image: Imagine de fundal
 
 -
 
+editor_section_background_blend_mode: Modul de amestec de fundal
+
+-
+
 editor_section_border_color: Culoarea frontierei
 
 -
@@ -555,10 +559,6 @@ editor_center: Centru
 -
 
 editor_edit_style: Editați stilul
-
--
-
-editor_close_style: Ok.
 
 -
 

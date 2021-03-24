@@ -418,6 +418,10 @@ editor_section_background_image: Фонове зображення
 
 -
 
+editor_section_background_blend_mode: Фоновий режим суміші
+
+-
+
 editor_section_border_color: Колір кордону
 
 -
@@ -555,10 +559,6 @@ editor_center: Центр
 -
 
 editor_edit_style: Редагувати стиль
-
--
-
-editor_close_style: Ok
 
 -
 

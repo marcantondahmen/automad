@@ -418,6 +418,10 @@ editor_section_background_image: Achtergrond afbeelding
 
 -
 
+editor_section_background_blend_mode: Achtergrond Blend-modus
+
+-
+
 editor_section_border_color: Rand kleur
 
 -
@@ -555,10 +559,6 @@ editor_center: Centrum
 -
 
 editor_edit_style: Edit Style
-
--
-
-editor_close_style: Ok
 
 -
 

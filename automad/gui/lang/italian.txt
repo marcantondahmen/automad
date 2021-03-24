@@ -418,6 +418,10 @@ editor_section_background_image: Immagine di sfondo
 
 -
 
+editor_section_background_blend_mode: Modalità Blend Background
+
+-
+
 editor_section_border_color: Colore del bordo
 
 -
@@ -430,7 +434,7 @@ editor_section_border_radius: Raggio dell'angolo
 
 -
 
-editor_section_shadow: Drop Shadow.
+editor_section_shadow: Drop Shadow
 
 -
 
@@ -555,10 +559,6 @@ editor_center: Centro
 -
 
 editor_edit_style: Modifica stile.
-
--
-
-editor_close_style: Ok.
 
 -
 

@@ -418,6 +418,10 @@ editor_section_background_image: Fona attēls
 
 -
 
+editor_section_background_blend_mode: Fona maisījuma režīms
+
+-
+
 editor_section_border_color: Robeža
 
 -
@@ -555,10 +559,6 @@ editor_center: Centrs
 -
 
 editor_edit_style: Rediģēt stilu
-
--
-
-editor_close_style: Ok
 
 -
 

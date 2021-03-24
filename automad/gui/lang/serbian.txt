@@ -418,6 +418,10 @@ editor_section_background_image: Позадинска слика
 
 -
 
+editor_section_background_blend_mode: Режим мешања позадинских спорова
+
+-
+
 editor_section_border_color: Боја ивице
 
 -
@@ -555,10 +559,6 @@ editor_center: Центар
 -
 
 editor_edit_style: Уреди стил
-
--
-
-editor_close_style: Ok
 
 -
 

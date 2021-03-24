@@ -418,6 +418,10 @@ editor_section_background_image: Image de fond
 
 -
 
+editor_section_background_blend_mode: Mode de fond de fond
+
+-
+
 editor_section_border_color: Couleur de la bordure
 
 -
@@ -555,10 +559,6 @@ editor_center: Centre
 -
 
 editor_edit_style: Style d'édition
-
--
-
-editor_close_style: Ok
 
 -
 

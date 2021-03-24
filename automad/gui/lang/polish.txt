@@ -418,6 +418,10 @@ editor_section_background_image: Zdjęcie w tle
 
 -
 
+editor_section_background_blend_mode: TRYB TŁO TRYBNY
+
+-
+
 editor_section_border_color: Kolor ramki
 
 -
@@ -555,10 +559,6 @@ editor_center: Centrum
 -
 
 editor_edit_style: Edytuj styl
-
--
-
-editor_close_style: Ok.
 
 -
 

@@ -418,6 +418,10 @@ editor_section_background_image: Imagem de fundo
 
 -
 
+editor_section_background_blend_mode: Modo de mistura de fundo
+
+-
+
 editor_section_border_color: Cor da borda
 
 -
@@ -430,11 +434,11 @@ editor_section_border_radius: Raio de canto
 
 -
 
-editor_section_shadow: Drop Shadow.
+editor_section_shadow: Drop Shadow
 
 -
 
-editor_section_match_row_height: Altura da fileira completa.
+editor_section_match_row_height: Altura da fileira completa
 
 -
 
@@ -555,10 +559,6 @@ editor_center: Centro
 -
 
 editor_edit_style: Editar estilo
-
--
-
-editor_close_style: Ok.
 
 -
 

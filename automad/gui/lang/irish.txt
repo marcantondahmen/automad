@@ -418,6 +418,10 @@ editor_section_background_image: Íomhá chúlra
 
 -
 
+editor_section_background_blend_mode: Mód Cumaisc Cúlra
+
+-
+
 editor_section_border_color: Dath teorann
 
 -
@@ -555,10 +559,6 @@ editor_center: Ionad
 -
 
 editor_edit_style: Cuir stíl in eagar
-
--
-
-editor_close_style: Ok
 
 -
 

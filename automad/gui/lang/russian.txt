@@ -418,6 +418,10 @@ editor_section_background_image: Фоновая картинка
 
 -
 
+editor_section_background_blend_mode: Режим фона Смеси
+
+-
+
 editor_section_border_color: Цвет границы
 
 -
@@ -555,10 +559,6 @@ editor_center: Центр
 -
 
 editor_edit_style: Стиль редактирования
-
--
-
-editor_close_style: Ok.
 
 -
 

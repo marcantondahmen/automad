@@ -598,10 +598,6 @@ editor_edit_style: Edit Style
 
 -
 
-editor_close_style: Ok
-
--
-
 editor_layout_default: Default layout
 
 -
