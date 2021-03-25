@@ -105,7 +105,8 @@ class AutomadBlockSection {
 		this.data = {
 			sectionData: data.sectionData || {},
 			style: data.style || {},
-			justifyContent: data.justifyContent || ''
+			justifyContent: data.justifyContent || '',
+			gap: data.gap !== undefined ? data.gap : false
 		};
 
 		this.container = document.querySelector('body');
@@ -157,7 +158,21 @@ class AutomadBlockSection {
 			}
 		];
 
+		this.gapSettings = [
+			{
+				value: true,
+				icon: '<svg width="24px" height="16px" viewBox="0 0 29 20"><path d="M10,0v20h9V0H10z M17,18h-5V2h5V18z"/><path d="M0,3v14c0,1.7,1.3,3,3,3h5v-2V2V0H3C1.3,0,0,1.3,0,3z M6,18H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h3V18z"/><path d="M26,0h-5v2v16v2h5c1.7,0,3-1.3,3-3V3C29,1.3,27.7,0,26,0z M27,17c0,0.6-0.4,1-1,1h-3V2h3c0.6,0,1,0.4,1,1V17z"/></svg>',
+				title: t('section_gap')
+			},
+			{
+				value: false,
+				icon: '<svg width="24px" height="16px" viewBox="0 0 29 20"><path d="M26,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h23c1.7,0,3-1.3,3-3V3C29,1.3,27.7,0,26,0z M27,17c0,0.6-0.4,1-1,1H3 c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h23c0.6,0,1,0.4,1,1V17z"/><rect x="18" y="2" width="2" height="16"/><rect x="9" y="2" width="2" height="16"/></svg>',
+				title: t('section_no_gap')
+			}
+		];
+
 		this.justifyWrapper = this.renderJustifySettings();
+		this.gapWrapper = this.renderGapSettings();
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 	}
@@ -566,39 +581,88 @@ class AutomadBlockSection {
 			  wrapper = create.element('div', []);
 
 		wrapper.appendChild(this.justifyWrapper);
+		wrapper.appendChild(this.gapWrapper);
 		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	
 	}
 
-	renderJustifySettings() {
+	renderSettingsGroup(obj, cls, callback, onClick) {
 
 		const create = Automad.util.create,
-			  wrapper = create.element('div', ['cdx-settings']);
-	
-		this.justifySettings.forEach((item, index) => {
+			  wrapper = create.element('div', [cls]);
+
+		obj.forEach((item, index) => {
 
 			const button = create.element('div', [this.api.styles.settingsButton]);
 
-			this.justifySettings[index].button = button;
+			obj[index].button = button;
 
 			button.innerHTML = item.icon;
 			this.api.tooltip.onHover(button, item.title, { placement: 'top' });
 
 			button.addEventListener('click', () => {
-				this.data.justifyContent = item.value !== this.data.justifyContent ? item.value : '';
-				this.toggleJustify();
+				onClick(item);
 			});
 
 			wrapper.appendChild(button);
 
 		});
 
-		this.toggleJustify();
+		callback();
 
 		return wrapper;
 
+	}
+
+	renderJustifySettings() {
+
+		return this.renderSettingsGroup(
+			this.justifySettings,
+			'cdx-settings',
+			() => {
+				this.toggleJustify();
+			},
+			(item) => {
+				this.data.justifyContent = item.value !== this.data.justifyContent ? item.value : '';
+				this.toggleJustify();
+			}
+		);
+
+	}
+
+	renderGapSettings() {
+
+		return this.renderSettingsGroup(
+			this.gapSettings,
+			'cdx-settings-1-2',
+			() => {
+				this.toggleGap();
+			},
+			(item) => {
+				this.data.gap = item.value;
+				this.toggleGap();
+			}
+		);
+
+	}
+
+	toggleGap() {
+
+		this.gapSettings.forEach((item) => {
+
+			item.button.classList.toggle(
+				this.api.styles.settingsButtonActive,
+				(item.value === this.data.gap)
+			);
+
+			this.holder.classList.toggle(
+				'gap',
+				this.data.gap
+			);
+
+		});
 	}
 
 	toggleJustify() {

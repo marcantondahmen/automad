@@ -40,7 +40,7 @@
 	flex-wrap: wrap;
 	justify-content: stretch;
 	max-width: none !important;
-	margin: ~"calc(var(--am-flex-gap) * -0.5)" !important;
+	margin: 0;
 
 	& > * {
 
@@ -49,10 +49,20 @@
 		max-width: none;
 		min-width: var(--am-flex-min-width);
 		margin: 0;
-		padding: ~"calc(var(--am-flex-gap) * 0.5)" !important;
+		padding: 0;
 		
 		& .am-container {
 			padding: 0;
+		}
+
+	}
+
+	.am-section-gap > & {
+
+		margin: ~"calc(var(--am-flex-gap) * -0.5)" !important;
+
+		& > * {
+			padding: ~"calc(var(--am-flex-gap) * 0.5)" !important;
 		}
 
 	}

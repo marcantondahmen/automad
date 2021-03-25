@@ -72,6 +72,10 @@ class Section {
 			$class = " am-section-justify-{$data->justifyContent}";
 		}
 
+		if (!empty($data->gap)) {
+			$class = " am-section-gap";
+		}
+
 		if (!empty($data->style)) {
 
 			if (!empty($data->style->card)) {
