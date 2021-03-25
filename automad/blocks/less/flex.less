@@ -39,6 +39,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: stretch;
+	height: 100%;
 	max-width: none !important;
 	margin: 0;
 
@@ -59,6 +60,7 @@
 
 	.am-section-gap > & {
 
+		height: ~"calc(100% + var(--am-flex-gap))";
 		margin: ~"calc(var(--am-flex-gap) * -0.5)" !important;
 
 		& > * {
