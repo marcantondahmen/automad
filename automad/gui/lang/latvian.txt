@@ -50,10 +50,6 @@ btn_duplicate_page: Lapas dublikāts
 
 -
 
-btn_edit: Rediģēt
-
--
-
 btn_edit_file_info: Rediģēt faila informāciju
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Saskaņot elementus vidū
 -
 
 editor_section_justify_end: Izlīdzināt elementus uz labo pusi
+
+-
+
+editor_section_gap: Plaisa starp blokiem
+
+-
+
+editor_section_no_gap: Nav starp blokiem
 
 -
 

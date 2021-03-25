@@ -50,10 +50,6 @@ btn_duplicate_page: Podvojena stran
 
 -
 
-btn_edit: Uredi
-
--
-
 btn_edit_file_info: Uredi podatke o datoteki
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Poravnajte elemente proti sredini
 -
 
 editor_section_justify_end: Poravnajte elemente proti desni strani
+
+-
+
+editor_section_gap: Razmika med bloki
+
+-
+
+editor_section_no_gap: Brez razkorak med bloki
 
 -
 

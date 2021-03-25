@@ -50,10 +50,6 @@ btn_duplicate_page: Duplikaatleht
 
 -
 
-btn_edit: Muuda
-
--
-
 btn_edit_file_info: Redigeeri failiteavet
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Joondage elemendid keskele
 -
 
 editor_section_justify_end: Joondage elemendid paremale poole
+
+-
+
+editor_section_gap: Vahe plokkide vahel
+
+-
+
+editor_section_no_gap: Plokkide vahel ei ole vahe
 
 -
 

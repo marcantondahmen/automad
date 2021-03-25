@@ -50,10 +50,6 @@ btn_duplicate_page: Seite duplizieren
 
 -
 
-btn_edit: Bearbeiten
-
--
-
 btn_edit_file_info: Dateiinfo bearbeiten
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Elemente in Richtung der Mitte ausrichten
 -
 
 editor_section_justify_end: Elemente auf der rechten Seite ausrichten
+
+-
+
+editor_section_gap: Lücke zwischen Blöcken
+
+-
+
+editor_section_no_gap: Keine Lücke zwischen Blöcken
 
 -
 

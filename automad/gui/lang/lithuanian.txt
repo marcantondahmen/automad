@@ -50,10 +50,6 @@ btn_duplicate_page: Pasikartojantis puslapis
 
 -
 
-btn_edit: Redaguoti
-
--
-
 btn_edit_file_info: Redaguoti failo informaciją
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Suderinti elementus į vidurį
 -
 
 editor_section_justify_end: Suderinti elementus į dešinę pusę
+
+-
+
+editor_section_gap: Tarp blokų
+
+-
+
+editor_section_no_gap: Nėra tarpo tarp blokų
 
 -
 

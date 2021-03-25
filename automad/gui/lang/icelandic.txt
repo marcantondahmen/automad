@@ -50,10 +50,6 @@ btn_duplicate_page: Afrit Síða
 
 -
 
-btn_edit: Breyta
-
--
-
 btn_edit_file_info: Breyttu skráarupplýsingum
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Samræma þætti í átt að miðjunni
 -
 
 editor_section_justify_end: Stilltu þætti í átt að hægri hliðinni
+
+-
+
+editor_section_gap: Bilið milli blokkir
+
+-
+
+editor_section_no_gap: Engin bil milli blokkir
 
 -
 

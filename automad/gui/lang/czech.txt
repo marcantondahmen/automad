@@ -50,10 +50,6 @@ btn_duplicate_page: Duplicitní stránka
 
 -
 
-btn_edit: Upravit
-
--
-
 btn_edit_file_info: Upravit informace o souboru
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Vyrovnejte prvky směrem ke středu
 -
 
 editor_section_justify_end: Zarovnejte prvky směrem k pravé straně
+
+-
+
+editor_section_gap: Mezi bloky
+
+-
+
+editor_section_no_gap: Žádná mezera mezi bloky
 
 -
 

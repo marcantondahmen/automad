@@ -50,10 +50,6 @@ btn_duplicate_page: Kopiera sida
 
 -
 
-btn_edit: Redigera
-
--
-
 btn_edit_file_info: Redigera filinformation
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Justera element mot mitten
 -
 
 editor_section_justify_end: Justera elementen mot höger sida
+
+-
+
+editor_section_gap: Gap mellan block
+
+-
+
+editor_section_no_gap: Inget gap mellan block
 
 -
 

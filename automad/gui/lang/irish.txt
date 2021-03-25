@@ -50,10 +50,6 @@ btn_duplicate_page: Leathanach Dúblach
 
 -
 
-btn_edit: Cuir in Eagar
-
--
-
 btn_edit_file_info: Cuir Eolas Comhad in Eagar
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Eilimintí a ailíniú i dtreo an lár
 -
 
 editor_section_justify_end: Eilimintí a ailíniú i dtreo na láimhe deise
+
+-
+
+editor_section_gap: Bearna idir bloic
+
+-
+
+editor_section_no_gap: Gan bearna idir bloic
 
 -
 

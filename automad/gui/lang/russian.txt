@@ -50,10 +50,6 @@ btn_duplicate_page: Дубликат страницы
 
 -
 
-btn_edit: редактировать
-
--
-
 btn_edit_file_info: Редактировать информацию о файле
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Выровнять элементы к серед
 -
 
 editor_section_justify_end: Выровнять элементы к правой стороне
+
+-
+
+editor_section_gap: Разрыв между блоками
+
+-
+
+editor_section_no_gap: Нет разрыва между блоками
 
 -
 

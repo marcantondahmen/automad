@@ -50,10 +50,6 @@ btn_duplicate_page: Pagină duplicat
 
 -
 
-btn_edit: Editați | ×
-
--
-
 btn_edit_file_info: Editați informațiile despre fișier
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Aliniați elementele spre mijloc
 -
 
 editor_section_justify_end: Aliniați elementele spre partea dreaptă
+
+-
+
+editor_section_gap: Decalaj între blocuri
+
+-
+
+editor_section_no_gap: Nici un decalaj între blocuri
 
 -
 

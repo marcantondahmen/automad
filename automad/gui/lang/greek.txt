@@ -50,10 +50,6 @@ btn_duplicate_page: Διπλότυπη σελίδα
 
 -
 
-btn_edit: Επεξεργασία
-
--
-
 btn_edit_file_info: Επεξεργασία πληροφοριών αρχείου
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Ευθυγραμμίστε τα στοιχεία 
 -
 
 editor_section_justify_end: Ευθυγραμμίστε τα στοιχεία προς τη δεξιά πλευρά
+
+-
+
+editor_section_gap: ΧΑΡ μεταξύ μπλοκ
+
+-
+
+editor_section_no_gap: Δεν υπάρχει κενό μεταξύ μπλοκ
 
 -
 

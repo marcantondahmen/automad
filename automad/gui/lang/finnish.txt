@@ -50,10 +50,6 @@ btn_duplicate_page: Kopioi sivu
 
 -
 
-btn_edit: Muokata
-
--
-
 btn_edit_file_info: Muokkaa tiedostotietoja
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Kohdista elementit kohti keskelle
 -
 
 editor_section_justify_end: Kohdista elementit oikealle puolelle
+
+-
+
+editor_section_gap: Lohkojen välinen ero
+
+-
+
+editor_section_no_gap: Ei lohkojen välistä aukkoa
 
 -
 

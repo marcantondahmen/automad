@@ -50,10 +50,6 @@ btn_duplicate_page: Página duplicada
 
 -
 
-btn_edit: Editar
-
--
-
 btn_edit_file_info: Editar información de archivo
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Alinear elementos hacia el medio
 -
 
 editor_section_justify_end: Alinee elementos hacia el lado derecho.
+
+-
+
+editor_section_gap: Brecha entre bloques
+
+-
+
+editor_section_no_gap: Sin brecha entre bloques
 
 -
 

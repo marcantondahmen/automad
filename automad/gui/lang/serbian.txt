@@ -50,10 +50,6 @@ btn_duplicate_page: Дупликат странице
 
 -
 
-btn_edit: Уредити
-
--
-
 btn_edit_file_info: Уреди податке о датотеци
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Поравнајте елементе према 
 -
 
 editor_section_justify_end: Поравнајте елементе према десној страни
+
+-
+
+editor_section_gap: Јаз између блокова
+
+-
+
+editor_section_no_gap: Нема јаз између блокова
 
 -
 

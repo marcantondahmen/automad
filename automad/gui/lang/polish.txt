@@ -50,10 +50,6 @@ btn_duplicate_page: Duplikat strony
 
 -
 
-btn_edit: Edytować
-
--
-
 btn_edit_file_info: Edytuj informacje o pliku
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Wyrównaj elementy w kierunku środka
 -
 
 editor_section_justify_end: Wyrównaj elementy w prawo
+
+-
+
+editor_section_gap: Gap między blokami
+
+-
+
+editor_section_no_gap: Brak luki między blokami
 
 -
 

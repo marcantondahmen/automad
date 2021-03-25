@@ -50,10 +50,6 @@ btn_duplicate_page: Dupliser side
 
 -
 
-btn_edit: Redigere
-
--
-
 btn_edit_file_info: Rediger filinfo
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Juster elementene mot midten
 -
 
 editor_section_justify_end: Juster elementer mot høyre side
+
+-
+
+editor_section_gap: Gap mellom blokker
+
+-
+
+editor_section_no_gap: Ingen gap mellom blokker
 
 -
 

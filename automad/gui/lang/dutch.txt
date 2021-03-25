@@ -50,10 +50,6 @@ btn_duplicate_page: Dubbele pagina
 
 -
 
-btn_edit: Bewerk
-
--
-
 btn_edit_file_info: Bewerk bestandsinfo
 
 -
@@ -387,6 +383,14 @@ editor_section_justify_center: Lijn elementen naar het midden uit
 -
 
 editor_section_justify_end: Lijn elementen aan de rechterkant uit
+
+-
+
+editor_section_gap: Kloof tussen blokken
+
+-
+
+editor_section_no_gap: Geen opening tussen blokken
 
 -
 
