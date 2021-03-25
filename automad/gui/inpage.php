@@ -234,16 +234,32 @@ HTML;
 			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 		
-		// Enable valid buttons.
-		$str = str_replace(
-			array(AM_DEL_INPAGE_BUTTON_OPEN, AM_DEL_INPAGE_BUTTON_CLOSE), 
-			array(
-				Prefix::attributes(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="am-inpage-edit-button" data-uk-modal="{modal:false}" data-am-inpage-content=\''), 
-				Prefix::attributes('\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;')
-			), 
-			$str
-		);
-		
+		$open = preg_quote(AM_DEL_INPAGE_BUTTON_OPEN);
+		$close = preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
+
+		$str = preg_replace_callback("/$open(.+?\"key\":\"([^\"]+)\".+?)$close/is", function($matches) {
+
+			$json = $matches[1];
+			$name = ucwords(str_replace('+', '' ,preg_replace('/([A-Z])/', ' $1', $matches[2])));
+
+			$html = <<< HTML
+					<span class="am-inpage">
+						<a 
+						href="#am-inpage-edit-modal" 
+						class="am-inpage-edit-button" 
+						data-uk-modal="{modal:false}" 
+						data-am-inpage-content='$json'
+						>
+							<i class="uk-icon-pencil"></i>&nbsp;
+							$name 
+						</a>
+					</span>
+HTML;
+
+			return Prefix::attributes($html);
+
+		}, $str);
+
 		return $str;
 		
 	}

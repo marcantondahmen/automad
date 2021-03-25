@@ -41,7 +41,9 @@
 	
 	body > & {
 		position: relative;	
+		display: block;
 		z-index: 9000;
+		padding: 0.75rem 1.5rem;
 	}
 	
 	&-menubar {
@@ -101,11 +103,17 @@
 		margin-bottom: 0.14rem;
 		vertical-align: text-bottom;
 		letter-spacing: 0 !important;
-		border-color: transparent;
+		border-color: transparent !important;
+		text-decoration: none !important;
 		color: @button-success-color !important;
+		.shadow;
 
 		& > i {
 			color: inherit;
+		}
+
+		&:hover {
+			color: @button-success-hover-color !important;
 		}
 
 	}

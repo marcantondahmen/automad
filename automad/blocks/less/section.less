@@ -44,6 +44,7 @@
 	&-card {
 
 		box-sizing: border-box;
+		overflow: hidden;
 		box-shadow: none;
 		padding: 0;
 		
@@ -68,9 +69,14 @@
 		}
 
 		& > .am-flex {
-			padding: 0;
-			column-gap: 0;
-			row-gap: 0;
+
+			margin: 0 !important;
+			padding: 0 !important;
+
+			& > * {
+				padding: 0 !important;
+			}
+			
 		}
 
 		& > :not(figure):not(.am-flex) + :not(figure) {

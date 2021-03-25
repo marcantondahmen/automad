@@ -143,17 +143,17 @@ class AutomadBlockSection {
 		this.justifySettings = [
 			{
 				value: 'flex-start',
-				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z"/><path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/></svg>',
+				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M1,20L1,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C2,19.6,1.6,20,1,20z"/><path d="M18,16H6c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2v8C20,15.1,19.1,16,18,16z"/></svg>',
 				title: t('section_justify_start')
 			},
 			{
 				value: 'center',
-				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5V6h-1V1.5A.5.5 0 0 1 8 1zm0 14a.5.5 0 0 1-.5-.5V10h1v4.5a.5.5 0 0 1-.5.5zM2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7z"/></svg>',
+				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M10,20L10,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C11,19.6,10.6,20,10,20z"/><path d="M18,16H2c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h16c1.1,0,2,0.9,2,2v8C20,15.1,19.1,16,18,16z"/></svg>',
 				title: t('section_justify_center')
 			},
 			{
 				value: 'flex-end',
-				icon: '<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z"/><path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/></svg>',
+				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M19,20L19,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C20,19.6,19.6,20,19,20z"/><path d="M14,16H2c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2v8C16,15.1,15.1,16,14,16z"/></svg>',
 				title: t('section_justify_end')
 			}
 		];
@@ -408,50 +408,52 @@ class AutomadBlockSection {
 		const style = this.data.style;
 
 		try {
+
 			element.removeAttribute('style');
-		} catch (e) {}
 		
-		if (style.backgroundImage) {
-			element.style.backgroundImage = `url('${Automad.util.resolvePath(style.backgroundImage)}')`;
-			element.style.backgroundPosition = '50% 50%';
-			element.style.backgroundSize = 'cover';
-		}
-
-		if (style.backgroundImage || 
-			style.borderColor || 
-			style.backgroundColor || 
-			style.shadow ||
-			style.borderWidth) { element.style.padding = '1rem'; }
-			
-		if (style.borderWidth && !style.borderWidth.startsWith('0')) {
-			element.style.borderStyle = 'solid';
-		}
-
-		if (style.shadow) {
-			element.style.boxShadow = '0 0.2rem 2rem rgba(0,0,0,0.1)';
-		}
-
-		if (style.matchRowHeight) {
-			element.style.height = '100%';
-		}
-
-		['color', 
-		'backgroundColor', 
-		'backgroundBlendMode',
-		'paddingTop', 
-		'paddingBottom', 
-		'borderColor', 
-		'borderWidth', 
-		'borderRadius'].forEach((item) => {
-
-			if (style[item] && !style[item].startsWith('0')) {
-				element.style[item] = style[item];
+			if (style.backgroundImage) {
+				element.style.backgroundImage = `url('${Automad.util.resolvePath(style.backgroundImage)}')`;
+				element.style.backgroundPosition = '50% 50%';
+				element.style.backgroundSize = 'cover';
 			}
 
-		});
+			if (style.backgroundImage || 
+				style.borderColor || 
+				style.backgroundColor || 
+				style.shadow ||
+				style.borderWidth) { element.style.padding = '1rem'; }
+				
+			if (style.borderWidth && !style.borderWidth.startsWith('0')) {
+				element.style.borderStyle = 'solid';
+			}
 
-		element.classList.toggle(`justify-${this.data.justifyContent}`, this.data.justifyContent !== '');
+			if (style.shadow) {
+				element.style.boxShadow = '0 0.2rem 2rem rgba(0,0,0,0.1)';
+			}
 
+			if (style.matchRowHeight) {
+				element.style.height = '100%';
+			}
+
+			['color', 
+			'backgroundColor', 
+			'backgroundBlendMode',
+			'paddingTop', 
+			'paddingBottom', 
+			'borderColor', 
+			'borderWidth', 
+			'borderRadius'].forEach((item) => {
+
+				if (style[item] && !style[item].startsWith('0')) {
+					element.style[item] = style[item];
+				}
+
+			});
+
+			element.classList.toggle(`justify-${this.data.justifyContent}`, this.data.justifyContent !== '');
+
+		} catch (e) {}
+		
 	}
 
 	initToggles() {

@@ -43,33 +43,27 @@
 
 	& > * {
 		max-width: var(--am-block-max-width);
-		margin-left: auto;
-		margin-right: auto;
+		margin: 0 auto var(--am-block-margin-bottom) auto;
 	}
 
-	& > * {
-		margin-top: var(--am-block-margin-vertical);
-		margin-bottom: var(--am-block-margin-vertical);
-	}
-
-	& > :first-child {
-		margin-top: 0;
+	& > * + * {
+		margin-top: var(--am-block-margin-top);
 	}
 
 	& > form,
 	& > figure {
 
-		margin-top: var(--am-block-figure-margin-vertical);
-		margin-bottom: var(--am-block-figure-margin-vertical);
+		margin-bottom: var(--am-block-figure-margin-bottom);
 
 		& > :first-child {
 			margin-top: 0 !important;
 		}
 
-	}
+	} 
 
-	& > .am-buttons {
-		--am-block-margin-vertical: ~"calc(var(--am-block-figure-margin-vertical) - var(--am-button-margin))";
+	& > * + form,
+	& > * + figure {
+		margin-top: var(--am-block-figure-margin-top);
 	}
 
 }

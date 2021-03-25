@@ -54,10 +54,6 @@ btn_duplicate_page: Duplicate Page
 
 -
 
-btn_edit: Edit
-
--
-
 btn_edit_file_info: Edit File Info
 
 -
