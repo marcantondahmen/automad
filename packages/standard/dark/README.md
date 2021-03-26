@@ -11,6 +11,7 @@ The Dark theme is a clean and elegant multi-purpose theme. It provides several o
 - [Pagelist Configuration](#pagelist-configuration)
 	- [Related Pages](#related-pages)
 - [Title, Navigation, Filtering and Sorting](#title-navigation-filtering-and-sorting)
+- [Transparent Navbars](#transparent-navbars)
 - [Logo and Brand](#logo-and-brand)
 - [Labels](#labels)
 - [Date Formats](#date-formats)
@@ -116,6 +117,12 @@ The following checkboxes can be used to control the visibility of pages and elem
 | Show In Footer | Add the page to the footer menu. |
 | Show In Navbar | Add the page to the navbar menu. |
 
+## Transparent Navbars
+
+By default the navbar inherits its background color from the page. In order to have a nice stretched 
+teaser image that also serves as background for your navbar, you can toggle the `Make Transparent Navbar` 
+checkbox to make the navbar fully transparent on load.
+
 ## Logo and Brand
 
 To set the brand name, a navbar logo and favicons, use the following options.
@@ -127,7 +134,8 @@ To set the brand name, a navbar logo and favicons, use the following options.
 | Logo Height | The height of your logo - this variable should be defined globally in the shared data section. |
 | Favicon | The local path to the icon to be used as favicon. |
 | Image Apple Touch Icon | The image to be used as the Apple touch icon. |
-| Page Icon Svg | A little SVG icon representing a page in a pagelist card. |
+| Icon Panel | A little SVG icon representing a page in a pagelist card. |
+| Icon Nav | A little SVG icon representing a page in a menu. |
 
 ## Labels
 

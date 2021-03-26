@@ -65,33 +65,24 @@
 
 	// Container
 	--am-block-max-width: @block-max-width;
-	--am-block-margin-vertical: @base-margin-vertical;
-	--am-block-figure-margin-vertical: @utility-margin;
+	--am-block-margin-top: 1.25em;
+	--am-block-margin-bottom: 0.65em;
+	--am-block-figure-margin-top: 2em;
+	--am-block-figure-margin-bottom: 2em;
 	--am-container-padding: @utility-container-padding-horizontal;
 	--am-container-margin-negative: @utility-container-padding-horizontal;
-
-	@media (min-width: @breakpoint-large) {
-		--am-container-padding: @utility-container-large-padding-horizontal;
-		--am-container-margin-negative: @utility-container-large-padding-horizontal;
-	}
-
-	// Grid
-	--am-block-grid-width: 100%;
-	--am-block-grid-max-width: 100%;
-	--am-block-grid-column-gap: @utility-margin;
-	--am-block-grid-row-gap: @utility-margin;
-	--am-block-grid-margin: @utility-margin;
 	
-	// Cards
-	--am-card-padding: @cards-padding;
-	--am-card-figure-padding: 0;
-	--am-card-radius: var(--cards-radius);
-	--am-card-border-color: var(--color-card-border);
-	--am-card-border-width: var(--border-width);
-	--am-card-shadow: 0 0.3rem 2.5rem rgba(0,0,0,0.17);
-	--am-card-color: var(--color-card-text);
-	--am-card-background: var(--color-card-bg);
-	
+	// Section & Cards
+	--am-section-padding: @cards-padding;
+	--am-section-figure-padding: 0;
+	--am-section-shadow: 0 0.3rem 3rem rgba(0,0,0,0.175);
+	--am-section-color: var(--color-card-text);
+	--am-section-border-color: var(--color-card-bg);
+
+	// Flex
+	--am-flex-gap: 2rem;
+	--am-flex-min-width: 20rem;
+
 	// Gallery
 	--am-gallery-gap: 2px;
 	--am-gallery-item-width: 200px;
@@ -135,23 +126,16 @@
 
 	// Buttons 
 	--am-button-margin: 0.5rem 0.32rem;
-	--am-button-padding: 0 1.4rem;
+	--am-button-padding-vertical: 0;
+	--am-button-padding-horizontal: 1.4rem;
 	--am-button-font-size: 1.15rem;
-	--am-button-height: 3.1rem;
 	--am-button-lineheight: 3.1rem;
 	--am-button-radius: @button-radius;
 	--am-button-color: inherit;
 	--am-button-background: inherit;
-	--am-button-border: @button-border-width solid @border-color;
+	--am-button-border-width: @button-border-width;
+	--am-button-border-color: @text-color;
 	--am-button-hover-color: @text-color;
 	--am-button-hover-background: inherit;
-	--am-button-hover-border: @button-border-width solid @text-color;
-
-	--am-button-primary-color: @text-color;
-	--am-button-primary-background: inherit;
-	--am-button-primary-border: @button-border-width solid @text-color;
-	--am-button-primary-hover-color: @text-color;
-	--am-button-primary-hover-background: inherit;
-	--am-button-primary-hover-border: @button-border-width solid @border-color;
-
+	--am-button-hover-border-color: @border-color;
 }

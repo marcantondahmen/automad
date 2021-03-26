@@ -3,7 +3,7 @@
 	<div class="am-container content uk-block">
 		<@ elements/content.php @>
 	</div>
-	<div class="content uk-block">
+	<div class="am-container content uk-block">
 		<@ elements/related_projects.php @>
 	</div>
 <@ elements/footer.php @>

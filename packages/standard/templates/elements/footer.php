@@ -1,15 +1,15 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-		<div class="uk-block">
+		<div class="am-container uk-block">
 			<div class="footer uk-margin-bottom">
 				<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
 					<li>
-						<# Show menu with pages with checked "checkboxShowInFooter". #>
-						<@~ newPagelist { excludeHidden: false } @>
+						<# @{ checkboxShowInFooter } #>
+						<@~ newPagelist { 
+							excludeHidden: false,
+							match: '{ "checkboxShowInFooter": "/.+/" }' 
+						} @>
 						<@~ foreach in pagelist @>
-							<@~ if @{ checkboxShowInFooter } @>
-								<a href="@{ url }">@{ title }</a>
-								<br />
-							<@~ end @>
+							<a href="@{ url }"><@ icon_title.php @></a><br />
 						<@~ end @>
 					</li>
 					<li class="uk-text-right uk-text-left-small">

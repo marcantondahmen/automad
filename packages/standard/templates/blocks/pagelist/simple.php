@@ -16,7 +16,7 @@
 					<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
 					<@ ../../elements/more.php @>
 				</div>
-				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
+				<@ if not @{ :hideThumbnails } and not @{ iconPanel } @>
 					<@~ ../../elements/set_imageteaser_variable.php @>
 					<@~ if @{ :imageCard } @>
 						<div class="uk-panel-teaser">

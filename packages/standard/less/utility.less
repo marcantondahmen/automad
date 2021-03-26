@@ -13,11 +13,24 @@
 @utility-margin-large:							4.5rem;
 
 @utility-container-max-width:					90rem;
-@utility-container-padding-horizontal:			25px;
+@utility-container-padding-horizontal:			1.75rem;
 @utility-container-large-max-width:  			90rem;
-@utility-container-large-padding-horizontal:	35px;
+@utility-container-large-padding-horizontal:	1.75rem;
 
 @breakpoint-small:								480px;
 @breakpoint-medium:								768px;
 @breakpoint-large:								1020px;
 @breakpoint-xlarge:								1250px;
+
+
+.uk-container {
+
+	body > & {
+		margin-top: 5rem;
+	}
+
+	:not(.navbar) + & {
+		margin-top: @utility-margin-small;
+	}
+
+}

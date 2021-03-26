@@ -8,7 +8,7 @@
 	} @>
 <@ end @>
 
-	<div class="navbar">
+	<div class="navbar<@ if @{ checkboxMakeNavbarTransparent } @> navbar-transparent<@ end @>">
 		<div class="uk-container uk-container-center">
 			<nav class="uk-navbar">
 				<a href="/" class="uk-navbar-brand">
@@ -24,14 +24,16 @@
 				</a>
 			    <div class="uk-navbar-flip">
 			        <ul class="uk-navbar-nav uk-visible-large">
-						<@ newPagelist { excludeHidden: false } @>
+						<# @{ checkboxShowInNavbar } #>
+						<@ newPagelist { 
+							excludeHidden: false, 
+							match: '{ "checkboxShowInNavbar": "/.+/" }' 
+						} @>
 						<@~ foreach in pagelist ~@>
-							<@ if @{ checkboxShowInNavbar } ~@>
-								<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-									<a href="@{ url }">@{ title }</a>
-								</li>
-							<@~ end @>
-						<@~ end ~@>				
+							<li<@ if @{ :current } @> class="uk-active"<@ end @>>
+								<a href="@{ url }"><@ icon_title.php @></a>
+							</li>
+						<@~ end ~@>
 					</ul>
 					<@ if @{ :sidebarNav } and @{ urlSearchResults } @>
 						<a 

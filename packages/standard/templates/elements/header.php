@@ -26,4 +26,5 @@
 
 <body class="@{ :template | sanitize }">
 	<@ navbar.php @>
-	<div class="uk-container uk-container-center navbar-push">
+	@{ +teaser | replace ('/^(.+)$/is', '<div class="am-container teaser">$1</div>') }
+	<div class="uk-container uk-container-center">

@@ -9,7 +9,7 @@
 				<@~ foreach in pagelist @>
 					<@~ if not @{ checkboxHideInMenu } ~@>
 						<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-							<a href="@{ url }">@{ title | stripTags }</a>
+							<a href="@{ url }"><@ ../elements/icon_title.php @></a>
 							<# Call tree snippet recursively #>
 							<@~ tree ~@>
 						</li>

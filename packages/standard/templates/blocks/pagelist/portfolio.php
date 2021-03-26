@@ -4,7 +4,7 @@
 	<@ foreach in pagelist ~@>
 		<div class="card" <@ ../../elements/colors_inline.php @>>
 			<div class="card-content uk-panel small uk-panel-box">
-				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
+				<@ if not @{ :hideThumbnails } and not @{ iconPanel } @>
 					<@~ ../../elements/set_imageteaser_variable.php @>
 					<@~ if @{ :imageCard } @>
 						<div class="uk-panel-teaser">
