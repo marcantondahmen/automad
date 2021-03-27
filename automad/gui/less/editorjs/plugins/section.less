@@ -229,32 +229,20 @@
 
 		}
 
-		&[class*="justify"] .codex-editor__redactor > * {
+		&[class*="justify"] > div > .codex-editor__redactor > * {
 			flex-grow: 0;
 		}
 
-		&.justify-flex-start {
-
-			& .codex-editor__redactor {
-				justify-content: flex-start;
-			}
-
+		&.justify-flex-start > div > .codex-editor__redactor {
+			justify-content: flex-start;
 		}
 
-		&.justify-center {
-
-			& .codex-editor__redactor {
-				justify-content: center;
-			}
-
+		&.justify-center > div > .codex-editor__redactor {
+			justify-content: center;
 		}
 
-		&.justify-flex-end {
-
-			& .codex-editor__redactor {
-				justify-content: flex-end;
-			}
-
+		&.justify-flex-end > div > .codex-editor__redactor {
+			justify-content: flex-end;
 		}
 
 	}

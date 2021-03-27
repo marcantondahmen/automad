@@ -428,7 +428,7 @@ class AutomadBlockSection {
 			}
 
 			if (style.shadow) {
-				element.style.boxShadow = '0 0.2rem 2rem rgba(0,0,0,0.1)';
+				element.style.boxShadow = '0 0.2rem 2rem rgba(0,0,0,0.15)';
 			}
 
 			if (style.matchRowHeight) {
@@ -444,7 +444,7 @@ class AutomadBlockSection {
 			'borderWidth', 
 			'borderRadius'].forEach((item) => {
 
-				if (style[item] && !style[item].startsWith('0')) {
+				if (style[item]) {
 					element.style[item] = style[item];
 				}
 
