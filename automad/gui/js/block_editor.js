@@ -140,6 +140,15 @@
 
 							editor.save().then(function (data) {
 
+								// Purge layout data.
+								data.blocks.forEach(block => {
+									['stretched', 'width'].forEach(key => {
+										if (!block.data[key]) {
+											delete block.data[key];
+										}
+									});
+								});
+
 								// Only trigger change in case blocks actually have changed.
 								var blocksNew = JSON.stringify(data.blocks);
 

@@ -69,17 +69,17 @@ class Section {
 		$class = '';
 
 		if (!empty($data->justifyContent)) {
-			$class = " am-section-justify-{$data->justifyContent}";
+			$class .= " am-section-justify-{$data->justifyContent}";
 		}
 
 		if (!empty($data->gap)) {
-			$class = " am-section-gap";
+			$class .= " am-section-gap";
 		}
 
 		if (!empty($data->style)) {
 
 			if (!empty($data->style->card)) {
-				$class = ' am-section-card';
+				$class .= ' am-section-card';
 			}
 
 			if (!empty($data->style->backgroundImage)) {

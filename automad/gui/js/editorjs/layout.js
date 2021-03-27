@@ -50,8 +50,6 @@ class AutomadLayoutButton {
 
 	constructor(api, data, wrapper, options) {
 
-		var _this = this;
-
 		this.options = Object.assign({
 			title: '',
 			icon: '',
@@ -72,8 +70,8 @@ class AutomadLayoutButton {
 		
 		api.tooltip.onHover(this.button, this.options.title, { placement: 'top' });
 
-		this.button.addEventListener('click', function () {
-			_this.onClickHandler();
+		this.button.addEventListener('click', () => {
+			this.onClickHandler();
 		});
 
 		this.onInit();
@@ -88,19 +86,17 @@ class AutomadLayoutButton {
 
 	onClickHandler() {
 
-		var _this = this;
-
 		const buttons = this.wrapper.querySelectorAll(`.${this.cls}`),
 			  block = this.api.blocks.getBlockByIndex(this.api.blocks.getCurrentBlockIndex()).holder;
 
 		Array.from(buttons).forEach((_button) => {
-			if (_button.className.match(_this.options.buttonsClearRegex)) {
-				_button.classList.remove(_this.clsActive);
+			if (_button.className.match(this.options.buttonsClearRegex)) {
+				_button.classList.remove(this.clsActive);
 			}
 		});
 
 		this.options.clearDataKeys.forEach((key) => {
-			_this.data[key] = '';
+			delete this.data[key];
 		});
 
 		this.button.classList.add(this.clsActive);
@@ -128,25 +124,23 @@ class AutomadLayoutResetButton extends AutomadLayoutButton {
 
 	onInit() {
 
-		this.button.classList.toggle(this.clsActive, (!this.data.columns && !this.data.stretched));
+		this.button.classList.toggle(this.clsActive, (!this.data.width && !this.data.stretched));
 
 	}
 
 	onClickHandler() {
 
-		var _this = this;
-
 		const buttons = this.wrapper.querySelectorAll(`.${this.cls}`),
 			  block = this.api.blocks.getBlockByIndex(this.api.blocks.getCurrentBlockIndex()).holder;
 
 		Array.from(buttons).forEach((_button) => {
-			if (_button.className.match(_this.options.buttonsClearRegex)) {
-				_button.classList.remove(_this.clsActive);
+			if (_button.className.match(this.options.buttonsClearRegex)) {
+				_button.classList.remove(this.clsActive);
 			}
 		});
 
 		this.options.clearDataKeys.forEach((key) => {
-			_this.data[key] = '';
+			delete this.data[key];
 		});
 
 		this.button.classList.add(this.clsActive);
@@ -205,14 +199,18 @@ class AutomadLayout {
 
 						if (data.blocks[i] !== undefined) {
 
-							let key = 'columns',
-								value = data.blocks[i].data[key],
-								regex = new RegExp(`${key}\-\d+`, 'g');
+							let value = data.blocks[i].data.width,
+								stretched = data.blocks[i].data.stretched,
+								regex = new RegExp(`width\-\d+\-\d+`, 'g');
+
+							if (typeof value == 'string') {
+								value = value.replace('/', '-');
+							}
 
 							block.className = block.className.replace(regex, '');
-							block.classList.toggle(`${key}-${value}`, (value !== undefined && value != 0));
+							block.classList.toggle(`width-${value}`, (value !== undefined && value));
 
-							block.classList.toggle('stretched', data.blocks[i].data.stretched);
+							block.classList.toggle('stretched', (stretched !== undefined && stretched));
 
 						}
 
@@ -303,8 +301,8 @@ class AutomadLayout {
 
 	static getClassName(key, value) {
 
-		if (typeof value === 'number' && value) {
-			return `${key}-${value.toString()}`;
+		if (typeof value === 'string' && value) {
+			return `${key}-${value.replace('/', '-')}`;
 		} else {
 			if (value) {
 				return `${key}`;
@@ -332,57 +330,57 @@ class AutomadLayout {
 				icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M25.9,10.9l-5,5 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4c-0.5-0.5-0.5-1.3,0-1.8l2.9-2.9H8l2.9,2.9c0.5,0.5,0.5,1.3,0,1.8 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4l-5-5c-0.5-0.5-0.5-1.3,0-1.8l5-5c0.5-0.5,1.3-0.5,1.8,0s0.5,1.3,0,1.8L8,8.8h14 l-2.9-2.9c-0.5-0.5-0.5-1.3,0-1.8s1.3-0.5,1.8,0l5,5C26.4,9.6,26.4,10.4,25.9,10.9z"/></svg>',
 				value: true
 			},
-			columnsWrapper = element('div', ['cdx-settings']),
-			columnsOptions = [
+			widthWrapper = element('div', ['cdx-settings']),
+			widthOptions = [
 				{
 					title: t('layout_width') + ': 1⁄4',
-					name: 'columns',
+					name: 'width',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
-					value: 3
+					value: '1/4'
 				},
 				{
 					title: t('layout_width') + ': 1⁄3',
-					name: 'columns',
+					name: 'width',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
-					value: 4
+					value: '1/3'
 				},
 				{
 					title: t('layout_width') + ': 1⁄2',
-					name: 'columns',
+					name: 'width',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
-					value: 6
+					value: '1/2'
 				},
 				{
 					title: t('layout_width') + ': 2⁄3',
-					name: 'columns',
+					name: 'width',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
-					value: 8
+					value: '2/3'
 				},
 				{
 					title: t('layout_width') + ': 3⁄4',
-					name: 'columns',
+					name: 'width',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
-					value: 9
+					value: '3/4'
 				},
 				{
 					title: t('layout_width') + ': 1⁄1',
-					name: 'columns',
+					name: 'width',
 					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
-					value: 12
+					value: '1/1'
 				}
 			];
 
 		data.stretched = saved.stretched || false;
-		data.columns = saved.columns || false;
+		data.width = saved.width || false;
 
 		const allowStretching = config.allowStretching || false,
 			  flex = config.flex || false;
 
 		const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
 			icon: resetOption.icon,
-			buttonsClearRegex: /(columns|stretched)/g,
-			blockClearRegex: /(stretched|columns\-\d+)/g,
-			clearDataKeys: ['stretched', 'columns']
+			buttonsClearRegex: /(width|stretched)/g,
+			blockClearRegex: /(stretched|width\-\d+\-\d+)/g,
+			clearDataKeys: ['stretched', 'width']
 		}));
 
 		mainWrapper.appendChild(resetButton.get());
@@ -391,9 +389,9 @@ class AutomadLayout {
 
 			const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
 				icon: stretchOption.icon,
-				buttonsClearRegex: /(columns|reset)/g,
-				blockClearRegex: /(stretched|columns\-\d+)/g,
-				clearDataKeys: ['columns']
+				buttonsClearRegex: /(width|reset)/g,
+				blockClearRegex: /(stretched|width\-\d+\-\d+)/g,
+				clearDataKeys: ['width']
 			}));
 
 			mainWrapper.appendChild(stretchButton.get());
@@ -418,20 +416,20 @@ class AutomadLayout {
 	
 		if (flex) {
 
-			columnsOptions.forEach(function (option) {
+			widthOptions.forEach(function (option) {
 
 				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
 					icon: AutomadLayout.icon(option.icon),
-					buttonsClearRegex: /(columns|stretched|reset)/g,
-					blockClearRegex: /(stretched|columns\-\d+)/g,
+					buttonsClearRegex: /(width|stretched|reset)/g,
+					blockClearRegex: /(stretched|width\-\d+\-\d+)/g,
 					clearDataKeys: ['stretched']
 				}));
 
-				columnsWrapper.appendChild(button.get());
+				widthWrapper.appendChild(button.get());
 
 			});
 
-			wrapper.appendChild(columnsWrapper);
+			wrapper.appendChild(widthWrapper);
 
 		}
 

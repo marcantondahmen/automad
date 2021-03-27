@@ -112,7 +112,7 @@ HTML;
 
 			try {
 
-				$blockIsFlexItem = (!empty($block->data->columns) && empty($block->data->stretched));
+				$blockIsFlexItem = (!empty($block->data->width) && empty($block->data->stretched));
 
 				if (!$flexOpen && $blockIsFlexItem) {
 					$html .= '<section class="am-flex">';
@@ -136,12 +136,16 @@ HTML;
 									$blockHtml
 								</div>
 HTML;
-				} else if (!empty($block->data->columns)) {
+				} else if (!empty($block->data->width)) {
+
+					$width = str_replace('/', '-', $block->data->width);
+
 					$blockHtml = <<< HTML
-								<div class="am-columns-{$block->data->columns}">
+								<div class="am-w-{$width}">
 									$blockHtml
 								</div>
 HTML;
+
 				}
 
 				$html .= $blockHtml;

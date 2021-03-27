@@ -450,7 +450,7 @@ class AutomadBlockSection {
 
 			});
 
-			element.classList.toggle(`justify-${this.data.justifyContent}`, this.data.justifyContent !== '');
+			element.classList.toggle(`justify-${this.data.justifyContent}`, (this.data.justifyContent != '' && this.data.justifyContent !== undefined));
 
 		} catch (e) {}
 		
@@ -571,6 +571,12 @@ class AutomadBlockSection {
 
 	save() {
 
+		['justifyContent', 'gap'].forEach(key => {
+			if (!this.data[key]) {
+				delete this.data[key];
+			}
+		});
+
 		return Object.assign(this.data, {
 			sectionData: this.getInputData()
 		});
@@ -678,7 +684,7 @@ class AutomadBlockSection {
 
 			this.holder.classList.toggle(
 				`justify-${item.value}`, 
-				(item.value === this.data.justifyContent)
+				(item.value === this.data.justifyContent && item.value != '')
 			);
 
 		});
