@@ -201,7 +201,7 @@ class AutomadLayout {
 
 							let value = data.blocks[i].data.width,
 								stretched = data.blocks[i].data.stretched,
-								regex = new RegExp(`width\-\d+\-\d+`, 'g');
+								regex = new RegExp(`width\\-\\d+\\-\\d+`, 'g');
 
 							if (typeof value == 'string') {
 								value = value.replace('/', '-');

@@ -140,7 +140,7 @@
 			justify-content: space-between;
 			align-items: center;
 			margin: -@modal-dialog-padding;
-			margin-bottom: 1rem;
+			margin-bottom: 0;
 			padding: @modal-dialog-padding - 0.5rem;
 			border-bottom: @am-hairline;
 		}
@@ -163,7 +163,7 @@
 		& .uk-dropdown {
 			padding: 0.6rem;
 			max-width: 85vw;
-			width: 35rem;
+			width: 30rem;
 			border-radius: 0.45rem;
 		}
 
@@ -251,6 +251,41 @@
 
 		&.justify-fill-row > div > .codex-editor__redactor > * {
 			flex-grow: 1;
+		}
+
+		&-settings {
+
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0 -@modal-dialog-padding;
+			margin-bottom: 1rem;
+			border-bottom: @am-hairline;
+
+			& > div {
+				
+				display: flex;
+				padding: 0.5rem 0.8rem;
+				margin: -@am-border-width 0 0 -@am-border-width;
+				overflow: hidden;
+
+				& + * {
+					flex-grow: 1;
+					border-top: @am-hairline;
+					border-left: @am-hairline;
+				}
+
+			}
+
+			& .cdx-settings-button {
+
+				width: @am-settings-height !important;
+				
+				& + * {
+					margin-left: 2px;
+				}
+
+			}
+
 		}
 
 	}

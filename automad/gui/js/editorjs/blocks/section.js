@@ -57,7 +57,8 @@ class AutomadBlockSection {
 			block: 'am-block-section',
 			modal: 'am-block-section-modal',
 			modalContainer: 'am-block-section-modal-container',
-			flex: 'am-block-section-flex'
+			flex: 'am-block-section-flex',
+			flexSettings: 'am-block-section-flex-settings'
 		}
 	}
 
@@ -496,6 +497,7 @@ class AutomadBlockSection {
 						</div>
 						<a class="uk-modal-close"><i class="uk-icon-compress"></i></a>
 					</div>
+					<div class="${AutomadBlockSection.cls.flexSettings}"></div>
 					<section 
 					id="${this.modalEditorId}" 
 					class="am-block-editor-container ${AutomadBlockSection.cls.flex}"
@@ -505,6 +507,12 @@ class AutomadBlockSection {
 		`;
 
 		this.container.appendChild(this.modalWrapper);
+
+		const flexSettings = this.modalWrapper.querySelector(`.${AutomadBlockSection.cls.flexSettings}`);
+
+		flexSettings.appendChild(this.renderFlexSettings(this.justifySettings, 'justify'));
+		flexSettings.appendChild(this.renderFlexSettings(this.gapSettings, 'gap'));
+
 		this.initToggles();
 		this.applyDialogSize();
 
@@ -547,17 +555,18 @@ class AutomadBlockSection {
 	applyDialogSize() {
 
 		const dialog = this.modalWrapper.querySelector('.uk-modal-dialog');
-		var span = 0.7;
+		var width = 1;
 
-		if (this.data.columnSpan) {
-			span = this.data.columnSpan / 12;
+		if (this.data.width) {
+			// Sanitize width string before passing it to eval().
+			width = eval(this.data.width.replace(/[^\d\/]/g, ''));
 		} 
 
 		if (this.data.stretched) {
-			span = 1;
+			width = 1;
 		}
 
-		dialog.style.width = `${span * 74}rem`;
+		dialog.style.width = `${width * 74}rem`;
 		dialog.style.maxWidth = '90vw';
 
 	}
@@ -592,22 +601,14 @@ class AutomadBlockSection {
 
 	renderSettings() {
 
-		const create = Automad.util.create,
-			  wrapper = create.element('div', []);
+		return this.layoutSettings;
 
-		wrapper.appendChild(this.renderFlexSettings(this.justifySettings, 'justify'));
-		wrapper.appendChild(this.renderFlexSettings(this.gapSettings, 'gap'));
-		wrapper.appendChild(this.layoutSettings);
-
-		return wrapper;
-	
 	}
 
 	renderFlexSettings(settings, key) {
 
 		const create = Automad.util.create,
-			  cls = settings.length == 2 ? 'cdx-settings-1-2' : 'cdx-settings',
-			  wrapper = create.element('div', [cls]);
+			  wrapper = create.element('div', []);
 
 		settings.forEach(obj => {
 
@@ -633,6 +634,8 @@ class AutomadBlockSection {
 
 	toggleFlexClasses(settings, key) {
 
+		const holder = document.getElementById(this.modalEditorId);
+
 		settings.forEach(obj => {
 
 			obj.button.classList.toggle(
@@ -640,9 +643,9 @@ class AutomadBlockSection {
 				(obj.value == this.data[key])
 			);
 
-			this.toggleSectionFlexClasses(this.holder, key, obj.value);
-
 		});
+
+		this.toggleSectionFlexClasses(holder, key, this.data[key]);
 
 	}
 
@@ -650,6 +653,9 @@ class AutomadBlockSection {
 
 		if (typeof value === 'string') {
 
+			var regex = new RegExp(`${key}[\\-\\w]+`, 'g');
+
+			element.className = element.className.replace(regex, '');
 			element.classList.toggle(
 				`${key}-${value}`,
 				(value == this.data[key])
