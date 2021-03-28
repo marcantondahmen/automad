@@ -386,6 +386,18 @@ editor_section_justify_end: Suderinti elementus į dešinę pusę
 
 -
 
+editor_section_justify_space_between: Tarpas tarp. \ T
+
+-
+
+editor_section_justify_space_evenly: Tolygiai
+
+-
+
+editor_section_justify_fill_row: Užpildykite eilutę
+
+-
+
 editor_section_gap: Tarp blokų
 
 -

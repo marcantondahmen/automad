@@ -386,6 +386,18 @@ editor_section_justify_end: Aliniați elementele spre partea dreaptă
 
 -
 
+editor_section_justify_space_between: Spațiu între
+
+-
+
+editor_section_justify_space_evenly: Spațiu în mod egal
+
+-
+
+editor_section_justify_fill_row: Completați rândul
+
+-
+
 editor_section_gap: Decalaj între blocuri
 
 -

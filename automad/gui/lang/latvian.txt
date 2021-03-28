@@ -386,6 +386,18 @@ editor_section_justify_end: Izlīdzināt elementus uz labo pusi
 
 -
 
+editor_section_justify_space_between: Telpu starp
+
+-
+
+editor_section_justify_space_evenly: Vienmērīgi
+
+-
+
+editor_section_justify_fill_row: Aizpildīt rindu
+
+-
+
 editor_section_gap: Plaisa starp blokiem
 
 -

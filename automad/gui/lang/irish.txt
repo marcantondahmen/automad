@@ -386,6 +386,18 @@ editor_section_justify_end: Eilimintí a ailíniú i dtreo na láimhe deise
 
 -
 
+editor_section_justify_space_between: Spás idir
+
+-
+
+editor_section_justify_space_evenly: Spás go cothrom
+
+-
+
+editor_section_justify_fill_row: Sraith
+
+-
+
 editor_section_gap: Bearna idir bloic
 
 -

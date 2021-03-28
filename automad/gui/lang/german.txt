@@ -386,6 +386,18 @@ editor_section_justify_end: Elemente auf der rechten Seite ausrichten
 
 -
 
+editor_section_justify_space_between: Raum dazwischen
+
+-
+
+editor_section_justify_space_evenly: Platz gleichmäßig
+
+-
+
+editor_section_justify_fill_row: Zeile füllen
+
+-
+
 editor_section_gap: Lücke zwischen Blöcken
 
 -

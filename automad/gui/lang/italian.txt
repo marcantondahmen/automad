@@ -386,6 +386,18 @@ editor_section_justify_end: Allinea gli elementi verso il lato destro
 
 -
 
+editor_section_justify_space_between: Spazio tra
+
+-
+
+editor_section_justify_space_evenly: Spazio uniformemente
+
+-
+
+editor_section_justify_fill_row: Riempire la riga
+
+-
+
 editor_section_gap: Gap tra blocchi
 
 -

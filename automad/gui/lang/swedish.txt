@@ -386,6 +386,18 @@ editor_section_justify_end: Justera elementen mot höger sida
 
 -
 
+editor_section_justify_space_between: Rymd mellan
+
+-
+
+editor_section_justify_space_evenly: Utrymme jämnt
+
+-
+
+editor_section_justify_fill_row: Fylla raden
+
+-
+
 editor_section_gap: Gap mellan block
 
 -

@@ -386,6 +386,18 @@ editor_section_justify_end: Поравнајте елементе према д�
 
 -
 
+editor_section_justify_space_between: Размак између
+
+-
+
+editor_section_justify_space_evenly: Свемир равномерно
+
+-
+
+editor_section_justify_fill_row: Пунити ред
+
+-
+
 editor_section_gap: Јаз између блокова
 
 -

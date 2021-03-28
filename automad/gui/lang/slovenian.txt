@@ -386,6 +386,18 @@ editor_section_justify_end: Poravnajte elemente proti desni strani
 
 -
 
+editor_section_justify_space_between: Prostor med
+
+-
+
+editor_section_justify_space_evenly: Enakomerno
+
+-
+
+editor_section_justify_fill_row: Izpolnite vrstico
+
+-
+
 editor_section_gap: Razmika med bloki
 
 -

@@ -386,6 +386,18 @@ editor_section_justify_end: Joondage elemendid paremale poole
 
 -
 
+editor_section_justify_space_between: Ruumi vahel
+
+-
+
+editor_section_justify_space_evenly: Ruumi ühtlaselt
+
+-
+
+editor_section_justify_fill_row: Täitke
+
+-
+
 editor_section_gap: Vahe plokkide vahel
 
 -

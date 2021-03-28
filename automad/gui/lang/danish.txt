@@ -386,6 +386,18 @@ editor_section_justify_end: Juster elementer mod højre side
 
 -
 
+editor_section_justify_space_between: Mellemrum mellem
+
+-
+
+editor_section_justify_space_evenly: Plads jævnt
+
+-
+
+editor_section_justify_fill_row: Fyld række
+
+-
+
 editor_section_gap: Gap mellem blokke
 
 -

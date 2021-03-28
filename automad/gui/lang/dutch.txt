@@ -386,6 +386,18 @@ editor_section_justify_end: Lijn elementen aan de rechterkant uit
 
 -
 
+editor_section_justify_space_between: Ruimte tussen
+
+-
+
+editor_section_justify_space_evenly: Ruimte gelijkmatig
+
+-
+
+editor_section_justify_fill_row: Vullen rij
+
+-
+
 editor_section_gap: Kloof tussen blokken
 
 -

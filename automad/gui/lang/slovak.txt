@@ -386,6 +386,18 @@ editor_section_justify_end: Zarovnajte prvky smerom k pravej strane
 
 -
 
+editor_section_justify_space_between: Priestor medzi
+
+-
+
+editor_section_justify_space_evenly: Rovnomerne
+
+-
+
+editor_section_justify_fill_row: Vyplniť riadok
+
+-
+
 editor_section_gap: Medzera medzi blokmi
 
 -

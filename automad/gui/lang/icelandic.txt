@@ -386,6 +386,18 @@ editor_section_justify_end: Stilltu þætti í átt að hægri hliðinni
 
 -
 
+editor_section_justify_space_between: Rúm milli
+
+-
+
+editor_section_justify_space_evenly: Rúm jafnt
+
+-
+
+editor_section_justify_fill_row: Fylltu röð
+
+-
+
 editor_section_gap: Bilið milli blokkir
 
 -

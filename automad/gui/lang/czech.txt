@@ -386,6 +386,18 @@ editor_section_justify_end: Zarovnejte prvky směrem k pravé straně
 
 -
 
+editor_section_justify_space_between: Prostor mezi nimi
+
+-
+
+editor_section_justify_space_evenly: Rovnoměrně
+
+-
+
+editor_section_justify_fill_row: Vyplnit řádek
+
+-
+
 editor_section_gap: Mezi bloky
 
 -

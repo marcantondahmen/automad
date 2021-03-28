@@ -386,6 +386,18 @@ editor_section_justify_end: Ευθυγραμμίστε τα στοιχεία π�
 
 -
 
+editor_section_justify_space_between: Διάστημα μεταξύ
+
+-
+
+editor_section_justify_space_evenly: Χώρος ομοιόμορφα
+
+-
+
+editor_section_justify_fill_row: Γεμίζω σειρά
+
+-
+
 editor_section_gap: ΧΑΡ μεταξύ μπλοκ
 
 -

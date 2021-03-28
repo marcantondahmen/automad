@@ -386,6 +386,18 @@ editor_section_justify_end: Выровнять элементы к правой 
 
 -
 
+editor_section_justify_space_between: Пространство между
+
+-
+
+editor_section_justify_space_evenly: Доснованно пространство
+
+-
+
+editor_section_justify_fill_row: Заполнить строку
+
+-
+
 editor_section_gap: Разрыв между блоками
 
 -

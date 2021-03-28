@@ -386,6 +386,18 @@ editor_section_justify_end: Kohdista elementit oikealle puolelle
 
 -
 
+editor_section_justify_space_between: Välilyönti
+
+-
+
+editor_section_justify_space_evenly: Tilaa tasaisesti
+
+-
+
+editor_section_justify_fill_row: Täytä rivi
+
+-
+
 editor_section_gap: Lohkojen välinen ero
 
 -

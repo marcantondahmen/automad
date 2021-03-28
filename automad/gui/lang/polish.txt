@@ -386,6 +386,18 @@ editor_section_justify_end: Wyrównaj elementy w prawo
 
 -
 
+editor_section_justify_space_between: Przestrzeń pomiędzy
+
+-
+
+editor_section_justify_space_evenly: Przestrzeń równomiernie
+
+-
+
+editor_section_justify_fill_row: Wypełnić rząd
+
+-
+
 editor_section_gap: Gap między blokami
 
 -
