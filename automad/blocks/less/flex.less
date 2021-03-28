@@ -38,7 +38,6 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: stretch;
 	height: 100%;
 	max-width: none !important;
 	margin: 0;
@@ -46,7 +45,7 @@
 	& > * {
 
 		box-sizing: border-box;
-		flex-grow: 1;
+		flex-grow: 0;
 		max-width: none;
 		min-width: var(--am-flex-min-width);
 		margin: 0;
@@ -97,10 +96,6 @@
 
 	}
 
-	[class*="justify"] > & > * {
-		flex-grow: 0;
-	}
-
 	.am-section-justify-flex-start > & {
 		justify-content: flex-start;
 	}
@@ -111,6 +106,18 @@
 
 	.am-section-justify-flex-end > & {
 		justify-content: flex-end;
+	}
+
+	.am-section-justify-space-between > & {
+		justify-content: space-between;
+	}
+
+	.am-section-justify-space-evenly > & {
+		justify-content: space-evenly;
+	}
+
+	.am-section-justify-fill-row > & > * {
+		flex-grow: 1;
 	}
 
 }

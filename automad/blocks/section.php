@@ -63,13 +63,13 @@ class Section {
 
 	public static function render($data, $Automad) {
 
-		$json = json_encode($data->sectionData);
+		$json = json_encode($data->content);
 		$html = Core\Blocks::render($json, $Automad);
 		$style = '';
 		$class = '';
 
-		if (!empty($data->justifyContent)) {
-			$class .= " am-section-justify-{$data->justifyContent}";
+		if (!empty($data->justify)) {
+			$class .= " am-section-justify-{$data->justify}";
 		}
 
 		if (!empty($data->gap)) {

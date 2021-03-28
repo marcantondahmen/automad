@@ -187,7 +187,7 @@
 
 			& > * {
 				flex-basis: 100%;
-				flex-grow: 1;
+				flex-grow: 0;
 				min-width: 15rem;
 			}
 
@@ -229,10 +229,6 @@
 
 		}
 
-		&[class*="justify"] > div > .codex-editor__redactor > * {
-			flex-grow: 0;
-		}
-
 		&.justify-flex-start > div > .codex-editor__redactor {
 			justify-content: flex-start;
 		}
@@ -243,6 +239,18 @@
 
 		&.justify-flex-end > div > .codex-editor__redactor {
 			justify-content: flex-end;
+		}
+
+		&.justify-space-between > div > .codex-editor__redactor {
+			justify-content: space-between;
+		}
+
+		&.justify-space-evenly > div > .codex-editor__redactor {
+			justify-content: space-evenly;
+		}
+
+		&.justify-fill-row > div > .codex-editor__redactor > * {
+			flex-grow: 1;
 		}
 
 	}

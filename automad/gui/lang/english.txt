@@ -422,6 +422,18 @@ editor_section_justify_end: Align elements torward the right side
 
 -
 
+editor_section_justify_space_between: Space between
+
+-
+
+editor_section_justify_space_evenly: Space evenly 
+
+-
+
+editor_section_justify_fill_row: Fill row
+
+-
+
 editor_section_gap: Gap between blocks
 
 -

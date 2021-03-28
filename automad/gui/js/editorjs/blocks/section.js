@@ -75,7 +75,7 @@ class AutomadBlockSection {
 
 	static get sanitize() {
 		return {
-			sectionData: true, // Allow HTML tags
+			content: true, // Allow HTML tags
 			style: {
 				css: false
 			}
@@ -103,10 +103,10 @@ class AutomadBlockSection {
 		this.api = api;
 
 		this.data = {
-			sectionData: data.sectionData || {},
+			content: data.content || {},
 			style: data.style || {},
-			justifyContent: data.justifyContent || '',
-			gap: data.gap !== undefined ? data.gap : false
+			justify: data.justify || 'flex-start',
+			gap: data.gap !== undefined ? data.gap : true
 		};
 
 		this.container = document.querySelector('body');
@@ -123,7 +123,7 @@ class AutomadBlockSection {
 			`;
 
 		this.input = this.wrapper.querySelector('input');
-		this.input.value = JSON.stringify(this.data.sectionData, null, 2);
+		this.input.value = JSON.stringify(this.data.content, null, 2);
 		this.holder = this.wrapper.querySelector('section');
 		this.overlay = this.wrapper.querySelector('.am-section-overlay-focus');
 		this.button = this.wrapper.querySelector('.am-section-edit-button');
@@ -143,36 +143,49 @@ class AutomadBlockSection {
 		this.justifySettings = [
 			{
 				value: 'flex-start',
-				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M1,20L1,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C2,19.6,1.6,20,1,20z"/><path d="M18,16H6c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2v8C20,15.1,19.1,16,18,16z"/></svg>',
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M1,20L1,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C2,19.6,1.6,20,1,20z"/><path d="M5.5,16L5.5,16C4.7,16,4,15.3,4,14.5v-9C4,4.7,4.7,4,5.5,4h0C6.3,4,7,4.7,7,5.5v9C7,15.3,6.3,16,5.5,16z"/><path d="M10.5,16L10.5,16C9.7,16,9,15.3,9,14.5v-9C9,4.7,9.7,4,10.5,4h0C11.3,4,12,4.7,12,5.5v9C12,15.3,11.3,16,10.5,16z"/></svg>',
 				title: t('section_justify_start')
 			},
 			{
 				value: 'center',
-				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M10,20L10,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C11,19.6,10.6,20,10,20z"/><path d="M18,16H2c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h16c1.1,0,2,0.9,2,2v8C20,15.1,19.1,16,18,16z"/></svg>',
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M10,20L10,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C11,19.6,10.6,20,10,20z"/><path d="M5.5,16L5.5,16C4.7,16,4,15.3,4,14.5v-9C4,4.7,4.7,4,5.5,4h0C6.3,4,7,4.7,7,5.5v9C7,15.3,6.3,16,5.5,16z"/><path d="M14.5,16L14.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C13,4.7,13.7,4,14.5,4h0C15.3,4,16,4.7,16,5.5v9C16,15.3,15.3,16,14.5,16z"/></svg>',
 				title: t('section_justify_center')
 			},
 			{
 				value: 'flex-end',
-				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M19,20L19,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C20,19.6,19.6,20,19,20z"/><path d="M14,16H2c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h12c1.1,0,2,0.9,2,2v8C16,15.1,15.1,16,14,16z"/></svg>',
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M19,20L19,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C20,19.6,19.6,20,19,20z"/><path d="M9.5,16L9.5,16C8.7,16,8,15.3,8,14.5v-9C8,4.7,8.7,4,9.5,4h0C10.3,4,11,4.7,11,5.5v9C11,15.3,10.3,16,9.5,16z"/><path d="M14.5,16L14.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C13,4.7,13.7,4,14.5,4h0C15.3,4,16,4.7,16,5.5v9C16,15.3,15.3,16,14.5,16z"/></svg>',
 				title: t('section_justify_end')
+			},
+			{
+				value: 'space-between',
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M1,20L1,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C2,19.6,1.6,20,1,20z"/><path d="M19,20L19,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C20,19.6,19.6,20,19,20z"/><path d="M5.5,16L5.5,16C4.7,16,4,15.3,4,14.5v-9C4,4.7,4.7,4,5.5,4h0C6.3,4,7,4.7,7,5.5v9C7,15.3,6.3,16,5.5,16z"/><path d="M14.5,16L14.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C13,4.7,13.7,4,14.5,4h0C15.3,4,16,4.7,16,5.5v9C16,15.3,15.3,16,14.5,16z"/></svg>',
+				title: t('section_justify_space_between')
+			},
+			{
+				value: 'space-evenly',
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M1,20L1,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C2,19.6,1.6,20,1,20z"/><path d="M19,20L19,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C20,19.6,19.6,20,19,20z"/><path d="M7,4C6.2,4,5.5,4.7,5.5,5.5v9C5.5,15.3,6.2,16,7,16s1.5-0.7,1.5-1.5v-9C8.5,4.7,7.8,4,7,4z"/><path d="M13,4c-0.8,0-1.5,0.7-1.5,1.5v9c0,0.8,0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5v-9C14.5,4.7,13.8,4,13,4z"/></svg>',
+				title: t('section_justify_space_evenly')
+			},
+			{
+				value: 'fill-row',
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M1,20L1,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C2,19.6,1.6,20,1,20z"/><path d="M19,20L19,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C20,19.6,19.6,20,19,20z"/><path d="M7,16H6c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h1c1.1,0,2,0.9,2,2v8C9,15.1,8.1,16,7,16z"/><path d="M14,16h-1c-1.1,0-2-0.9-2-2V6c0-1.1,0.9-2,2-2h1c1.1,0,2,0.9,2,2v8C16,15.1,15.1,16,14,16z"/></svg>',
+				title: t('section_justify_fill_row')
 			}
 		];
 
 		this.gapSettings = [
 			{
 				value: true,
-				icon: '<svg width="24px" height="16px" viewBox="0 0 29 20"><path d="M10,0v20h9V0H10z M17,18h-5V2h5V18z"/><path d="M0,3v14c0,1.7,1.3,3,3,3h5v-2V2V0H3C1.3,0,0,1.3,0,3z M6,18H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h3V18z"/><path d="M26,0h-5v2v16v2h5c1.7,0,3-1.3,3-3V3C29,1.3,27.7,0,26,0z M27,17c0,0.6-0.4,1-1,1h-3V2h3c0.6,0,1,0.4,1,1V17z"/></svg>',
+				icon: '<svg width="29px" height="20px" viewBox="0 0 29 20"><path d="M7.5,16L7.5,16C6.7,16,6,15.3,6,14.5v-9C6,4.7,6.7,4,7.5,4h0C8.3,4,9,4.7,9,5.5v9C9,15.3,8.3,16,7.5,16z"/><path d="M21.5,16L21.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C20,4.7,20.7,4,21.5,4h0C22.3,4,23,4.7,23,5.5v9C23,15.3,22.3,16,21.5,16z"/><path d="M14.5,16L14.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C13,4.7,13.7,4,14.5,4h0C15.3,4,16,4.7,16,5.5v9C16,15.3,15.3,16,14.5,16z"/></svg>',
 				title: t('section_gap')
 			},
 			{
 				value: false,
-				icon: '<svg width="24px" height="16px" viewBox="0 0 29 20"><path d="M26,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h23c1.7,0,3-1.3,3-3V3C29,1.3,27.7,0,26,0z M27,17c0,0.6-0.4,1-1,1H3 c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h23c0.6,0,1,0.4,1,1V17z"/><rect x="18" y="2" width="2" height="16"/><rect x="9" y="2" width="2" height="16"/></svg>',
+				icon: '<svg width="29px" height="20px" viewBox="0 0 29 20"><path d="M9.5,16L9.5,16C8.7,16,8,15.3,8,14.5v-9C8,4.7,8.7,4,9.5,4h0C10.3,4,11,4.7,11,5.5v9C11,15.3,10.3,16,9.5,16z"/><path d="M19.5,16L19.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C18,4.7,18.7,4,19.5,4h0C20.3,4,21,4.7,21,5.5v9C21,15.3,20.3,16,19.5,16z"/><path d="M14.5,16L14.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C13,4.7,13.7,4,14.5,4h0C15.3,4,16,4.7,16,5.5v9C16,15.3,15.3,16,14.5,16z"/></svg>',
 				title: t('section_no_gap')
 			}
 		];
 
-		this.justifyWrapper = this.renderJustifySettings();
-		this.gapWrapper = this.renderGapSettings();
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 	}
@@ -450,7 +463,7 @@ class AutomadBlockSection {
 
 			});
 
-			element.classList.toggle(`justify-${this.data.justifyContent}`, (this.data.justifyContent != '' && this.data.justifyContent !== undefined));
+			this.toggleSectionFlexClasses(element, 'justify', this.data.justify);
 
 		} catch (e) {}
 		
@@ -571,14 +584,8 @@ class AutomadBlockSection {
 
 	save() {
 
-		['justifyContent', 'gap'].forEach(key => {
-			if (!this.data[key]) {
-				delete this.data[key];
-			}
-		});
-
 		return Object.assign(this.data, {
-			sectionData: this.getInputData()
+			content: this.getInputData()
 		});
 
 	}
@@ -588,106 +595,74 @@ class AutomadBlockSection {
 		const create = Automad.util.create,
 			  wrapper = create.element('div', []);
 
-		wrapper.appendChild(this.justifyWrapper);
-		wrapper.appendChild(this.gapWrapper);
+		wrapper.appendChild(this.renderFlexSettings(this.justifySettings, 'justify'));
+		wrapper.appendChild(this.renderFlexSettings(this.gapSettings, 'gap'));
 		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	
 	}
 
-	renderSettingsGroup(obj, cls, callback, onClick) {
+	renderFlexSettings(settings, key) {
 
 		const create = Automad.util.create,
+			  cls = settings.length == 2 ? 'cdx-settings-1-2' : 'cdx-settings',
 			  wrapper = create.element('div', [cls]);
 
-		obj.forEach((item, index) => {
+		settings.forEach(obj => {
 
 			const button = create.element('div', [this.api.styles.settingsButton]);
 
-			obj[index].button = button;
-
-			button.innerHTML = item.icon;
-			this.api.tooltip.onHover(button, item.title, { placement: 'top' });
+			obj.button = button;
+			button.innerHTML = obj.icon;
+			this.api.tooltip.onHover(button, obj.title, { placement: 'top' });
+			wrapper.appendChild(button);
 
 			button.addEventListener('click', () => {
-				onClick(item);
+				this.data[key] = obj.value;
+				this.toggleFlexClasses(settings, key);
 			});
-
-			wrapper.appendChild(button);
 
 		});
 
-		callback();
+		this.toggleFlexClasses(settings, key);
 
 		return wrapper;
 
 	}
 
-	renderJustifySettings() {
+	toggleFlexClasses(settings, key) {
 
-		return this.renderSettingsGroup(
-			this.justifySettings,
-			'cdx-settings',
-			() => {
-				this.toggleJustify();
-			},
-			(item) => {
-				this.data.justifyContent = item.value !== this.data.justifyContent ? item.value : '';
-				this.toggleJustify();
-			}
-		);
+		settings.forEach(obj => {
 
-	}
-
-	renderGapSettings() {
-
-		return this.renderSettingsGroup(
-			this.gapSettings,
-			'cdx-settings-1-2',
-			() => {
-				this.toggleGap();
-			},
-			(item) => {
-				this.data.gap = item.value;
-				this.toggleGap();
-			}
-		);
-
-	}
-
-	toggleGap() {
-
-		this.gapSettings.forEach((item) => {
-
-			item.button.classList.toggle(
+			obj.button.classList.toggle(
 				this.api.styles.settingsButtonActive,
-				(item.value === this.data.gap)
+				(obj.value == this.data[key])
 			);
 
-			this.holder.classList.toggle(
-				'gap',
-				this.data.gap
-			);
+			this.toggleSectionFlexClasses(this.holder, key, obj.value);
 
 		});
+
 	}
 
-	toggleJustify() {
+	toggleSectionFlexClasses(element, key, value) {
 
-		this.justifySettings.forEach((item) => {
+		if (typeof value === 'string') {
 
-			item.button.classList.toggle(
-				this.api.styles.settingsButtonActive, 
-				(item.value === this.data.justifyContent)
+			element.classList.toggle(
+				`${key}-${value}`,
+				(value == this.data[key])
 			);
 
-			this.holder.classList.toggle(
-				`justify-${item.value}`, 
-				(item.value === this.data.justifyContent && item.value != '')
+		} else {
+
+			element.classList.toggle(
+				key,
+				this.data[key]
 			);
 
-		});
+		}
 
 	}
 
