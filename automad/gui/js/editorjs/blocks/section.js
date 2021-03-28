@@ -464,7 +464,7 @@ class AutomadBlockSection {
 
 			});
 
-			this.toggleSectionFlexClasses(element, 'justify', this.data.justify);
+			this.toggleSectionFlexClass(element, 'justify', this.data.justify);
 
 		} catch (e) {}
 		
@@ -566,7 +566,7 @@ class AutomadBlockSection {
 			width = 1;
 		}
 
-		dialog.style.width = `${width * 74}rem`;
+		dialog.style.width = `${(width * 74) + 4}rem`;
 		dialog.style.maxWidth = '90vw';
 
 	}
@@ -645,11 +645,11 @@ class AutomadBlockSection {
 
 		});
 
-		this.toggleSectionFlexClasses(holder, key, this.data[key]);
+		this.toggleSectionFlexClass(holder, key, this.data[key]);
 
 	}
 
-	toggleSectionFlexClasses(element, key, value) {
+	toggleSectionFlexClass(element, key, value) {
 
 		if (typeof value === 'string') {
 

@@ -96,7 +96,7 @@ class AutomadLayoutButton {
 		});
 
 		this.options.clearDataKeys.forEach((key) => {
-			delete this.data[key];
+			this.data[key] = false;
 		});
 
 		this.button.classList.add(this.clsActive);
@@ -140,7 +140,7 @@ class AutomadLayoutResetButton extends AutomadLayoutButton {
 		});
 
 		this.options.clearDataKeys.forEach((key) => {
-			delete this.data[key];
+			this.data[key] = false;
 		});
 
 		this.button.classList.add(this.clsActive);
