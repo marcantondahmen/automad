@@ -622,7 +622,7 @@ editor_layout_stretch: Expand the block to full width
 
 -
 
-editor_layout_width: Width
+editor_layout_fraction: Width
 
 -
 
