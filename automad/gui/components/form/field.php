@@ -96,12 +96,18 @@ HTML;
 
 	private static function fieldImage($attr) {
 
+		$Text = Text::getObject();
+
 		return <<< HTML
-				<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
-					<button type="button" class="uk-button">
-						<i class="uk-icon-folder-open-o"></i>
-					</button>
-					<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+				<div data-am-select-image-field>
+					<figure></figure>
+					<div>
+						<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+						<button type="button" class="uk-button uk-text-muted">
+							<i class="uk-icon-folder-open-o"></i>&nbsp;
+							{$Text->btn_browse}
+						</button>
+					</div>
 				</div>
 HTML;
 

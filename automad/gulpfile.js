@@ -111,6 +111,10 @@ gulp.task('libs-js', function() {
 			gulp.src([
 				'node_modules/jquery/dist/jquery.min.js'
 			]),
+			// Draggable.
+			gulp.src([
+				'node_modules/@shopify/draggable/lib/draggable.bundle.js'
+			]),
 			// Editor.js.
 			gulp.src([
 				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',

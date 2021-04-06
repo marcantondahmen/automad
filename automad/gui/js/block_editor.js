@@ -267,7 +267,7 @@
 
 			// Trigger changes when clicking a settings button or changing an input field.
 			$(document).on('click', `.${AutomadEditorConfig.cls.settingsButton}`, triggerChange);
-			$(document).on('change keyup', `.${AutomadEditorConfig.cls.input}, .${AutomadEditorConfig.cls.block} input, .${AutomadEditorConfig.cls.block} select`, triggerChange);
+			$(document).on('change keyup keydown', `.${AutomadEditorConfig.cls.input}, .${AutomadEditorConfig.cls.block} input, .${AutomadEditorConfig.cls.block} select`, triggerChange);
 			
 		}
 

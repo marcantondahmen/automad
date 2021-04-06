@@ -67,28 +67,29 @@ class AutomadBlockSlider {
 		this.api = api;
 		
 		this.data = {
-			globs: data.globs || '*.jpg, *.png, *.gif',
+			globs: data.globs || '*.jpg, *.png',
 			width: data.width || 1200,
 			height: data.height || 600,
-			stretched: data.stretched !== undefined ? data.stretched : true,
 			dots: data.dots !== undefined ? data.dots : true,
 			autoplay: data.autoplay !== undefined ? data.autoplay : true
 		};
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
-
+		
 		this.inputs = {
-			globs: create.editable(['cdx-input'], '*.jpg, /shared/*.jpg, https://domain.com/image.jpg', this.data.globs),
 			width: create.editable(['cdx-input'], 'px', this.data.width),
 			height: create.editable(['cdx-input'], 'px', this.data.height)
 		};
 
 		var icon = document.createElement('div'),
 			title = document.createElement('div'),
+			selection = document.createElement('div'),
 			controls = document.createElement('ul'),
 			width = document.createElement('li'),
 			height = document.createElement('li');
 
+		this.imageSelection = new AutomadEditorImageSelection(this.data.globs, selection);
+		
 		icon.innerHTML = AutomadBlockSlider.toolbox.icon;
 		icon.classList.add('am-block-icon');
 		title.innerHTML = AutomadBlockSlider.toolbox.title;
@@ -106,8 +107,8 @@ class AutomadBlockSlider {
 		this.wrapper.appendChild(icon);
 		this.wrapper.appendChild(title);
 		this.wrapper.appendChild(document.createElement('hr'));
-		this.wrapper.appendChild(create.label(t('slider_pattern')));
-		this.wrapper.appendChild(this.inputs.globs);
+		this.wrapper.appendChild(create.label(t('slider_files')));
+		this.wrapper.appendChild(selection);
 		this.wrapper.appendChild(controls);
 
 		this.settings = [
@@ -136,7 +137,7 @@ class AutomadBlockSlider {
 		var stripNbsp = Automad.util.stripNbsp;
 
 		return Object.assign(this.data, {
-			globs: stripNbsp(this.inputs.globs.innerHTML),
+			globs: this.imageSelection.save(),
 			width: parseInt(stripNbsp(this.inputs.width.innerHTML)),
 			height: parseInt(stripNbsp(this.inputs.height.innerHTML))
 		});
@@ -178,10 +179,6 @@ class AutomadBlockSlider {
 	toggleTune(tune) {
 
 		this.data[tune] = !this.data[tune];
-
-		if (tune == 'stretched') {
-			this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), this.data.stretched);
-		}
 
 	}
 

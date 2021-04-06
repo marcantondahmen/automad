@@ -306,7 +306,7 @@ editor_gallery_toolbox: Image Gallery
 
 -
 
-editor_gallery_files: Glob Patterns or URLs (separated by comma)
+editor_gallery_files: Glob Patterns or URLs
 
 -
 
@@ -566,7 +566,7 @@ editor_slider_height: Height
 
 -
 
-editor_slider_pattern: Glob Pattern or URLs (separated by comma)
+editor_slider_files: Glob Patterns or URLs
 
 -
 
@@ -647,6 +647,10 @@ editor_ui_move_down: Move block down
 -
 
 editor_ui_convert: Convert block to
+
+-
+
+editor_ui_browse: Browse Files
 
 -
 

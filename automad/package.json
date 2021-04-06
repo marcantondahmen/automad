@@ -7,6 +7,7 @@
   "private": true,
   "devDependencies": {
     "@editorjs/editorjs": "^2.19.1",
+    "@shopify/draggable": "^1.0.0-beta.8",
     "blueimp-file-upload": "^9.21.0",
     "codemirror": "^5.35.0",
     "draggabilly": "^2.1.1",

@@ -73,3 +73,127 @@
 	}
 
 }
+
+[data-am-select-image-field] {
+
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	height: 2 * @form-height;
+	align-content: stretch;
+	opacity: 1;
+	outline: none !important;
+	border-radius: @am-radius + @am-border-width;
+	.transition(box-shadow 0.2s, opacity 0.2s;);
+
+	&.draggable-source--is-dragging {
+		
+		border: @am-border-width dashed @am-success;
+
+		& > * {
+			visibility: hidden;
+		}
+
+	}
+	
+	&.draggable-mirror {
+		z-index: 1000;
+		.shadow;
+	}
+
+	& + & {
+		margin-top: 0.75rem;
+	}
+
+	& figure {
+
+		box-sizing: border-box;
+		width: 2 * @form-height;
+		height: 2 * @form-height;
+		padding: 0;
+		overflow: hidden;
+		border: @am-hairline;
+		border-right: none;
+		border-top-left-radius: @am-radius;
+		border-bottom-left-radius: @am-radius;
+		background-color: @form-background;
+
+		.am-sortable & {
+			cursor: grab;
+		}	
+		
+		& > img {
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	
+	}
+
+	& > div {
+
+		display: flex;
+		flex-direction: column;
+		align-content: stretch;
+		flex-grow: 1;
+
+		& > input[type="text"],
+		& > .uk-button {
+			height: @form-height;
+			line-height: @form-height - @am-border-width;
+			flex-grow: 1;
+			border-radius: 0;
+			text-align: left;
+		}
+
+		& > * + * {
+			border-top: none;
+		}
+
+		&:last-child > :first-child {
+			border-top-right-radius: @am-radius;
+		}
+
+		&:last-child > :last-child {
+			border-bottom-right-radius: @am-radius;
+		}
+
+	}
+
+	& .am-delete {
+		line-height: 2 * @form-height;
+		width: 2.5rem;
+		border-left: none;
+		border-radius: 0;
+	}
+
+	& .am-drag {
+		box-sizing: border-box;
+		line-height: 2 * @form-height;
+		width: 2.5rem;
+		text-align: center;
+		color: @am-muted;
+		background-color: @am-bg;
+		cursor: grab;
+		border: @am-hairline;
+		border-left: none;
+		border-top-right-radius: @am-radius;
+		border-bottom-right-radius: @am-radius;
+	}
+
+}
+
+.am-sortable {
+
+	outline: none !important;
+
+	& + .uk-button {
+		margin-top: 0.75rem;
+		text-align: left;
+		width: 100%;
+		line-height: @form-height;
+	}
+
+}

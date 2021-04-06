@@ -66,7 +66,7 @@ class AutomadBlockGallery {
 		this.api = api;
 
 		this.data = {
-			globs: data.globs || '*.jpg, *.png, *.gif',
+			globs: data.globs || '*.jpg, *.png',
 			width: data.width || 250,
 			cleanBottom: data.cleanBottom !== undefined ? data.cleanBottom : true
 		};
@@ -74,12 +74,14 @@ class AutomadBlockGallery {
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
 		this.inputs = {
-			globs: create.editable(['cdx-input'], '*.jpg, /shared/*.jpg, https://domain.com/image.jpg', this.data.globs),
 			width: create.editable(['cdx-input'], 'px', this.data.width)
 		};
 		
 		var icon = document.createElement('div'),
-			title = document.createElement('div');
+			title = document.createElement('div'),
+			selection = document.createElement('div');
+		
+		this.imageSelection = new AutomadEditorImageSelection(this.data.globs, selection);
 		
 		icon.innerHTML = AutomadBlockGallery.toolbox.icon;
 		icon.classList.add('am-block-icon');
@@ -92,7 +94,7 @@ class AutomadBlockGallery {
 		this.wrapper.appendChild(title);
 		this.wrapper.appendChild(document.createElement('hr'));
 		this.wrapper.appendChild(create.label(t('gallery_files')));
-		this.wrapper.appendChild(this.inputs.globs);
+		this.wrapper.appendChild(selection);
 		this.wrapper.appendChild(create.label(t('gallery_width')));
 		this.wrapper.appendChild(this.inputs.width);
 
@@ -109,7 +111,7 @@ class AutomadBlockGallery {
 		var stripNbsp = Automad.util.stripNbsp;
 
 		return Object.assign(this.data, {
-			globs: stripNbsp(this.inputs.globs.innerHTML),
+			globs: this.imageSelection.save(),
 			width: parseInt(stripNbsp(this.inputs.width.innerHTML))
 		});
 
