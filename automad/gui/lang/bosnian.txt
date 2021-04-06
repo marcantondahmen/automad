@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galerija slika
 
 -
 
-editor_gallery_files: Glob obrasci ili URL-ovi (odvojeni zarezom)
+editor_gallery_files: Globe uzorci ili urls
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Visina
 
 -
 
-editor_slider_pattern: Glob obrazac ili URL-ovi (odvojeni zarezom)
+editor_slider_files: Globe uzorci ili urls
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Proširite blok u punu širinu
 
 -
 
-editor_layout_width: Širina
+editor_layout_fraction: Širina
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Pomaknite blok prema dolje
 -
 
 editor_ui_convert: Pretvori blok u
+
+-
+
+editor_ui_browse: Pregledajte datoteke
 
 -
 

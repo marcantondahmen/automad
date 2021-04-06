@@ -270,7 +270,7 @@ editor_gallery_toolbox: Bildegalleri
 
 -
 
-editor_gallery_files: Globale mønstre eller nettadresser (atskilt med komma)
+editor_gallery_files: Glob mønstre eller nettadresser
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Høyde
 
 -
 
-editor_slider_pattern: Globmønster eller nettadresser (atskilt med komma)
+editor_slider_files: Glob mønstre eller nettadresser
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Utvid blokken til full bredde
 
 -
 
-editor_layout_width: Bredde
+editor_layout_fraction: Bredde
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Flytt blokken ned
 -
 
 editor_ui_convert: Konverter blokk til
+
+-
+
+editor_ui_browse: Bla gjennom filer
 
 -
 

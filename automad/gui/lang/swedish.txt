@@ -270,7 +270,7 @@ editor_gallery_toolbox: Bildgalleri
 
 -
 
-editor_gallery_files: Globmönster eller webbadresser (åtskilda med komma)
+editor_gallery_files: Glob mönster eller webbadresser
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Höjd
 
 -
 
-editor_slider_pattern: Globmönster eller webbadresser (åtskilda med komma)
+editor_slider_files: Glob mönster eller webbadresser
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Expandera blocket till full bredd
 
 -
 
-editor_layout_width: Bredd
+editor_layout_fraction: Bredd
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Flytta blocket nedåt
 -
 
 editor_ui_convert: Konvertera block till
+
+-
+
+editor_ui_browse: Bläddra i filer
 
 -
 

@@ -270,7 +270,7 @@ editor_gallery_toolbox: Галерея
 
 -
 
-editor_gallery_files: Шаблоны глобуса или URL-адреса (через запятую)
+editor_gallery_files: Шаблоны шаблонов или URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Высота
 
 -
 
-editor_slider_pattern: Шаблон глобуса или URL-адреса (через запятую)
+editor_slider_files: Шаблоны шаблонов или URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Развернуть блок на всю ширину
 
 -
 
-editor_layout_width: Ширина
+editor_layout_fraction: Ширина
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Переместить блок вниз
 -
 
 editor_ui_convert: Преобразовать блок в
+
+-
+
+editor_ui_browse: Просмотр файлов
 
 -
 

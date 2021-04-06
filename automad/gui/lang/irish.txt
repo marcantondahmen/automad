@@ -270,7 +270,7 @@ editor_gallery_toolbox: Gailearaí Íomhánna
 
 -
 
-editor_gallery_files: Patrúin Glob nó URLanna (scartha le camóg)
+editor_gallery_files: Patrúin nó URLanna Glob
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Airde
 
 -
 
-editor_slider_pattern: Patrún Glob nó URLanna (scartha le camóg)
+editor_slider_files: Patrúin nó URLanna Glob
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Leathnaigh an bloc go leithead iomlán
 
 -
 
-editor_layout_width: Le chéile
+editor_layout_fraction: Le chéile
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Bog bloc síos
 -
 
 editor_ui_convert: Tiontaigh bloc go
+
+-
+
+editor_ui_browse: Brabhsáil na comhaid
 
 -
 

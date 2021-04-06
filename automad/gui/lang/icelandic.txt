@@ -270,7 +270,7 @@ editor_gallery_toolbox: Myndasafn
 
 -
 
-editor_gallery_files: Glob Patterns eða URL (aðskilin með komma)
+editor_gallery_files: Glob mynstur eða vefslóðir
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Hæð
 
 -
 
-editor_slider_pattern: Glob mynstur eða vefslóðir (aðskilin með kommu)
+editor_slider_files: Glob mynstur eða vefslóðir
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Stækkaðu kubbinn í fulla breidd
 
 -
 
-editor_layout_width: Breidd
+editor_layout_fraction: Breidd
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Færðu blokk niður
 -
 
 editor_ui_convert: Umbreyta blokk í
+
+-
+
+editor_ui_browse: Skoðaðu skrár
 
 -
 

@@ -270,7 +270,7 @@ editor_gallery_toolbox: Галерея зображень
 
 -
 
-editor_gallery_files: Шаблони глобусів або URL-адреси (розділені комами)
+editor_gallery_files: Шаблони або URL-адреси
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Висота
 
 -
 
-editor_slider_pattern: Шаблон глобуса або URL-адреси (розділені комами)
+editor_slider_files: Шаблони або URL-адреси
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Розгорніть блок на всю ширину
 
 -
 
-editor_layout_width: Ширина
+editor_layout_fraction: Ширина
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Перемістити блок вниз
 -
 
 editor_ui_convert: Перетворити блок на
+
+-
+
+editor_ui_browse: Переглядати файли
 
 -
 

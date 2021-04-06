@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galleria di immagini
 
 -
 
-editor_gallery_files: Pattern globali o URL (separati da virgola)
+editor_gallery_files: Modelli di glob o URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Altezza
 
 -
 
-editor_slider_pattern: Pattern Glob o URL (separati da virgola)
+editor_slider_files: Modelli di glob o URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Espandi il blocco a tutta larghezza
 
 -
 
-editor_layout_width: Larghezza
+editor_layout_fraction: Larghezza
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Sposta il blocco verso il basso
 -
 
 editor_ui_convert: Converti blocco in
+
+-
+
+editor_ui_browse: Sfoglia i file
 
 -
 

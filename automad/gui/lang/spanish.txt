@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galería de imágenes
 
 -
 
-editor_gallery_files: Patrones Glob o URL (separados por comas)
+editor_gallery_files: Patrones de globo o URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Altura
 
 -
 
-editor_slider_pattern: Patrón global o URL (separados por comas)
+editor_slider_files: Patrones de globo o URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Expanda el bloque a ancho completo
 
 -
 
-editor_layout_width: Ancho
+editor_layout_fraction: Ancho
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Mover bloque hacia abajo
 -
 
 editor_ui_convert: Convertir bloque a
+
+-
+
+editor_ui_browse: Búsqueda de archivos
 
 -
 

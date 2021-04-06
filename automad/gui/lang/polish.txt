@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galeria obrazów
 
 -
 
-editor_gallery_files: Wzorce lub adresy URL Glob (oddzielone przecinkami)
+editor_gallery_files: Wzory globu lub adresy URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Wysokość
 
 -
 
-editor_slider_pattern: Wzorzec Glob lub adresy URL (oddzielone przecinkami)
+editor_slider_files: Wzory globu lub adresy URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Rozwiń blok do pełnej szerokości
 
 -
 
-editor_layout_width: Szerokość
+editor_layout_fraction: Szerokość
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Przesuń blok w dół
 -
 
 editor_ui_convert: Konwertuj blok na
+
+-
+
+editor_ui_browse: Przeglądaj pliki.
 
 -
 

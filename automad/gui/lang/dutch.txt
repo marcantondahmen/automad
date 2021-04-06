@@ -270,7 +270,7 @@ editor_gallery_toolbox: Afbeeldingengalerij
 
 -
 
-editor_gallery_files: Glob Patterns of URL's (gescheiden door komma)
+editor_gallery_files: Glob Patronen of URL's
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Hoogte
 
 -
 
-editor_slider_pattern: Glob-patroon of URL's (gescheiden door komma)
+editor_slider_files: Glob Patronen of URL's
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Vouw het blok uit tot volledige breedte
 
 -
 
-editor_layout_width: Breedte
+editor_layout_fraction: Breedte
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Verplaats het blok naar beneden
 -
 
 editor_ui_convert: Converteer blok naar
+
+-
+
+editor_ui_browse: Bestanden doorbladeren
 
 -
 

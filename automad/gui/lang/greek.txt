@@ -270,7 +270,7 @@ editor_gallery_toolbox: Συλλογή εικόνων
 
 -
 
-editor_gallery_files: Μοτίβα Glob ή URL (διαχωρισμένα με κόμμα)
+editor_gallery_files: Glob Patterns ή URLS
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Υψος
 
 -
 
-editor_slider_pattern: Μοτίβο Glob ή URL (διαχωρισμένα με κόμμα)
+editor_slider_files: Glob Patterns ή URLS
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Αναπτύξτε το μπλοκ σε πλήρες πλ
 
 -
 
-editor_layout_width: Πλάτος
+editor_layout_fraction: Πλάτος
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Μετακίνηση μπλοκ προς τα κάτω
 -
 
 editor_ui_convert: Μετατροπή μπλοκ σε
+
+-
+
+editor_ui_browse: ΕΞΕΡΕΥΝΗΣΗ ΑΡΧΕΙΩΝ
 
 -
 

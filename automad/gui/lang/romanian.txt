@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galerie de imagini
 
 -
 
-editor_gallery_files: Modele globale sau adrese URL (separate prin virgulă)
+editor_gallery_files: Modele globale sau adrese URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Înălţime
 
 -
 
-editor_slider_pattern: Model glob sau adrese URL (separate prin virgulă)
+editor_slider_files: Modele globale sau adrese URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Extindeți blocul la toată lățimea
 
 -
 
-editor_layout_width: Lăţime
+editor_layout_fraction: Lăţime
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Mutați blocul în jos
 -
 
 editor_ui_convert: Convertiți blocul în
+
+-
+
+editor_ui_browse: Cauta fisiere
 
 -
 

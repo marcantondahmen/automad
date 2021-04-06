@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galéria obrázkov
 
 -
 
-editor_gallery_files: Vzory globusu alebo adresy URL (oddelené čiarkou)
+editor_gallery_files: Vzory alebo adresy URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Výška
 
 -
 
-editor_slider_pattern: Vzor globusu alebo adresy URL (oddelené čiarkou)
+editor_slider_files: Vzory alebo adresy URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Rozbaľte blok na celú šírku
 
 -
 
-editor_layout_width: Šírka
+editor_layout_fraction: Šírka
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Posunúť blok nadol
 -
 
 editor_ui_convert: Konvertovať blok na
+
+-
+
+editor_ui_browse: Prehľadávať súbory
 
 -
 

@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galerie Obrázků
 
 -
 
-editor_gallery_files: Vzory globusu nebo adresy URL (oddělené čárkou)
+editor_gallery_files: GLOCH vzory nebo URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Výška
 
 -
 
-editor_slider_pattern: Vzor globusu nebo adresy URL (oddělené čárkou)
+editor_slider_files: GLOCH vzory nebo URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Rozbalte blok na celou šířku
 
 -
 
-editor_layout_width: Šířka
+editor_layout_fraction: Šířka
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Přesuňte blok dolů
 -
 
 editor_ui_convert: Převést blok na
+
+-
+
+editor_ui_browse: Procházet soubory
 
 -
 

@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galeria de imagens
 
 -
 
-editor_gallery_files: Padrões Glob ou URLs (separados por vírgula)
+editor_gallery_files: Padrões ou urls glob
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Altura
 
 -
 
-editor_slider_pattern: Padrão Glob ou URLs (separados por vírgula)
+editor_slider_files: Padrões ou urls glob
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Expanda o bloco para a largura total
 
 -
 
-editor_layout_width: Largura
+editor_layout_fraction: Largura
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Mova o bloco para baixo
 -
 
 editor_ui_convert: Converter bloco em
+
+-
+
+editor_ui_browse: Navegue arquivos
 
 -
 

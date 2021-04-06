@@ -270,7 +270,7 @@ editor_gallery_toolbox: Галерија слика
 
 -
 
-editor_gallery_files: Глоб обрасци или УРЛ-ови (одвојени зарезом)
+editor_gallery_files: Глоб обрасци или УРЛ-ови
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Висина
 
 -
 
-editor_slider_pattern: Глоб образац или УРЛ адресе (одвојене зарезом)
+editor_slider_files: Глоб обрасци или УРЛ-ови
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Проширите блок у пуну ширину
 
 -
 
-editor_layout_width: Ширина
+editor_layout_fraction: Ширина
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Помери блок надоле
 -
 
 editor_ui_convert: Претвори блок у
+
+-
+
+editor_ui_browse: Прегледајте датотеке
 
 -
 

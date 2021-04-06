@@ -270,7 +270,7 @@ editor_gallery_toolbox: Kuvagalleria
 
 -
 
-editor_gallery_files: Glob-mallit tai URL-osoitteet (erotettu pilkulla)
+editor_gallery_files: Glob Mallit tai URL-osoitteet
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Korkeus
 
 -
 
-editor_slider_pattern: Glob-kuvio tai URL-osoitteet (erotettu pilkulla)
+editor_slider_files: Glob Mallit tai URL-osoitteet
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Laajenna lohko täysleveydelle
 
 -
 
-editor_layout_width: Leveys
+editor_layout_fraction: Leveys
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Siirrä lohko alas
 -
 
 editor_ui_convert: Muunna lohko muotoon
+
+-
+
+editor_ui_browse: Selaa tiedostoja
 
 -
 

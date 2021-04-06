@@ -270,7 +270,7 @@ editor_gallery_toolbox: Vaizdų galerija
 
 -
 
-editor_gallery_files: �Glob Patterns“ arba URL (atskirti kableliais)
+editor_gallery_files: Glob modeliai arba URL
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Aukštis
 
 -
 
-editor_slider_pattern: �Glob Pattern“ arba URL (atskirtas kableliais)
+editor_slider_files: Glob modeliai arba URL
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Išplėskite bloką iki viso pločio
 
 -
 
-editor_layout_width: Plotis
+editor_layout_fraction: Plotis
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Perkelti bloką žemyn
 -
 
 editor_ui_convert: Konvertuoti bloką į
+
+-
+
+editor_ui_browse: Naršyti failus
 
 -
 

@@ -270,7 +270,7 @@ editor_gallery_toolbox: Bildergalerie
 
 -
 
-editor_gallery_files: Glob-Muster oder URLs (durch Komma getrennt)
+editor_gallery_files: Glob-Muster oder URLs
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Höhe
 
 -
 
-editor_slider_pattern: Glob-Muster oder URLs (durch Komma getrennt)
+editor_slider_files: Glob-Muster oder URLs
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Erweitern Sie den Block auf volle Breite
 
 -
 
-editor_layout_width: Breite
+editor_layout_fraction: Breite
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Block nach unten bewegen
 -
 
 editor_ui_convert: Block konvertieren in
+
+-
+
+editor_ui_browse: Dateien durchsuchen
 
 -
 

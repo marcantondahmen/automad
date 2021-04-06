@@ -270,7 +270,7 @@ editor_gallery_toolbox: Pildigalerii
 
 -
 
-editor_gallery_files: Globaalsed mustrid või URL-id (eraldatud komaga)
+editor_gallery_files: Glob mustrid või URL-id
 
 -
 
@@ -530,7 +530,7 @@ editor_slider_height: Kõrgus
 
 -
 
-editor_slider_pattern: Globaalne muster või URL-id (eraldatud komaga)
+editor_slider_files: Glob mustrid või URL-id
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Laiendage plokki täislaiusele
 
 -
 
-editor_layout_width: Laius
+editor_layout_fraction: Laius
 
 -
 
@@ -611,6 +611,10 @@ editor_ui_move_down: Liigutage plokk alla
 -
 
 editor_ui_convert: Teisenda plokk
+
+-
+
+editor_ui_browse: Sirvi faile
 
 -
 
