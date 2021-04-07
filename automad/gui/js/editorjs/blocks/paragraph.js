@@ -48,6 +48,7 @@ class AutomadBlockParagraph {
 		var large = data.large !== undefined ? data.large : false;
 
 		this.api = api;
+		this.placeholder = config.placeholder || '';
 
 		this._CSS = {
 			block: this.api.styles.block,
@@ -94,6 +95,10 @@ class AutomadBlockParagraph {
 			div.classList.add(this._CSS.large);
 		}
 
+		if (this.placeholder) {
+			div.dataset.placeholder = this.placeholder;
+		}
+		
 		div.addEventListener('keyup', this.onKeyUp);
 
 		return div;

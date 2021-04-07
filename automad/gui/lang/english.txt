@@ -626,6 +626,10 @@ editor_layout_fraction: Width
 
 -
 
+editor_ui_placeholder: Click here to add your first block ...
+
+-
+
 editor_ui_add: Add
 
 -

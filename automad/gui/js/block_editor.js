@@ -70,6 +70,7 @@
 				input: false,
 				readOnly: false,
 				autofocus: false,
+				placeholder: '',
 				flex: false,
 				onReady: function() {}
 			}, options);
@@ -99,6 +100,7 @@
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
+				placeholder: options.placeholder,
 				i18n: {
 					messages: {
 						ui: {
@@ -255,6 +257,7 @@
 				be.createEditor({
 					holder: id,
 					input: input,
+					placeholder: AutomadEditorTranslation.get('ui_placeholder'),
 					flex: false,
 					onReady: () => {
 						// Add init class to all editor tooltips in order to keep them 
