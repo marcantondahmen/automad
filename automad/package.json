@@ -7,7 +7,6 @@
   "private": true,
   "devDependencies": {
     "@editorjs/editorjs": "^2.19.1",
-    "@shopify/draggable": "^1.0.0-beta.8",
     "blueimp-file-upload": "^9.21.0",
     "codemirror": "^5.35.0",
     "draggabilly": "^2.1.1",
@@ -30,6 +29,7 @@
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "marked": "^0.3.17",
     "merge2": "^1.0.2",
+    "sortablejs": "^1.13.0",
     "taggle": "^1.13.0"
   }
 }

@@ -86,17 +86,19 @@
 	border-radius: @am-radius + @am-border-width;
 	.transition(box-shadow 0.2s, opacity 0.2s;);
 
-	&.draggable-source--is-dragging {
+	&.sortable-ghost {
 		
 		border: @am-border-width dashed @am-success;
+		box-shadow: none !important;
 
 		& > * {
 			visibility: hidden;
 		}
 
 	}
-	
-	&.draggable-mirror {
+
+	&.sortable-chosen,
+	&.sortable-drag {
 		z-index: 1000;
 		.shadow;
 	}
@@ -147,6 +149,10 @@
 			text-align: left;
 		}
 
+		& > .uk-button {
+			color: @am-muted;
+		}
+
 		& > * + * {
 			border-top: none;
 		}
@@ -166,6 +172,7 @@
 		width: 2.5rem;
 		border-left: none;
 		border-radius: 0;
+		color: @am-muted;
 	}
 
 	& .am-drag {
@@ -189,9 +196,10 @@
 	outline: none !important;
 
 	& + .uk-button {
-		text-align: left;
 		width: 100%;
 		line-height: @form-height;
+		border-style: dashed;
+		color: @am-muted;
 	}
 
 }

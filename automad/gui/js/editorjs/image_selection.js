@@ -76,12 +76,14 @@ class AutomadEditorImageSelection {
 		this.container.appendChild(fields);
 		this.container.appendChild(button);
 
-		new Draggable.Sortable(this.container.querySelectorAll('.am-sortable'), {
+		Sortable.create(fields, {
+			animation: 200,
 			draggable: '.am-item',
 			handle: '.am-drag, figure',
-			mirror: {
-				constrainDimensions: true
-			}
+			forceFallback: true,
+			ghostClass: 'sortable-ghost',
+			chosenClass: 'sortable-chosen',
+			dragClass: 'sortable-drag',
 		});
 
 	}
@@ -95,7 +97,7 @@ class AutomadEditorImageSelection {
 			<figure></figure>
 			<div>
 				<input type="text" class="uk-form-controls uk-width-1-1" value="${this.sanitize(value)}" />
-				<button type="button" class="uk-button uk-text-muted">
+				<button type="button" class="uk-button">
 					<i class="uk-icon-folder-open-o"></i>&nbsp;
 					${AutomadEditorTranslation.get('ui_browse')}
 				</button>

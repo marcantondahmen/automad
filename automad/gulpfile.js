@@ -111,9 +111,9 @@ gulp.task('libs-js', function() {
 			gulp.src([
 				'node_modules/jquery/dist/jquery.min.js'
 			]),
-			// Draggable.
+			// Sortable.
 			gulp.src([
-				'node_modules/@shopify/draggable/lib/draggable.bundle.js'
+				'node_modules/sortablejs/Sortable.min.js'
 			]),
 			// Editor.js.
 			gulp.src([
