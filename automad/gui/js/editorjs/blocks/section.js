@@ -309,15 +309,19 @@ class AutomadBlockSection {
 						</div>
 					</div>
 					${create.label(t('section_background_image')).outerHTML}
-					<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
-						<button type="button" class="uk-button">
-							<i class="uk-icon-folder-open-o"></i>
-						</button>
-						<input 
-						type="text" 
-						class="am-section-background-image uk-form-controls uk-width-1-1" 
-						value="${style.backgroundImage}"
-						/>
+					<div data-am-select-image-field>
+						<figure></figure>
+						<div>
+							<input
+							type="text"
+							class="am-section-background-image uk-form-controls uk-width-1-1"
+							value="${style.backgroundImage}"
+							/>
+							<button type="button" class="uk-button">
+								<i class="uk-icon-folder-open-o"></i>&nbsp;
+								${t('ui_browse')}
+							</button>
+						</div>
 					</div>
 					${create.label(t('section_background_blend_mode')).outerHTML}
 					${create.select(['am-section-background-blend-mode', 'uk-button', 'uk-width-1-1', 'uk-text-left'], [
