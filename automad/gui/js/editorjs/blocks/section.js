@@ -511,6 +511,7 @@ class AutomadBlockSection {
 		`;
 
 		this.container.appendChild(this.modalWrapper);
+		Automad.selectImage.preview(this.modalWrapper.querySelector('.am-section-background-image'));
 
 		const flexSettings = this.modalWrapper.querySelector(`.${AutomadBlockSection.cls.flexSettings}`);
 
