@@ -590,6 +590,10 @@ editor_layout_fraction: Le chéile
 
 -
 
+editor_ui_placeholder: Cliceáil anseo chun do chéad bhloc a chur leis ...
+
+-
+
 editor_ui_add: Cuir leis
 
 -

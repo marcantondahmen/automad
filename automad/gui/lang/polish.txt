@@ -590,6 +590,10 @@ editor_layout_fraction: Szerokość
 
 -
 
+editor_ui_placeholder: Kliknij tutaj, aby dodać swój pierwszy blok ...
+
+-
+
 editor_ui_add: Dodaj
 
 -

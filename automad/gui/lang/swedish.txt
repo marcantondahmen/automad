@@ -590,6 +590,10 @@ editor_layout_fraction: Bredd
 
 -
 
+editor_ui_placeholder: Klicka här för att lägga till ditt första kvarter ...
+
+-
+
 editor_ui_add: Lägg till
 
 -

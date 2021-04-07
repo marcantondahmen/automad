@@ -590,6 +590,10 @@ editor_layout_fraction: Plotis
 
 -
 
+editor_ui_placeholder: Spauskite čia norėdami pridėti savo pirmąjį bloką ...
+
+-
+
 editor_ui_add: Papildyti
 
 -

@@ -590,6 +590,10 @@ editor_layout_fraction: Platums
 
 -
 
+editor_ui_placeholder: Noklikšķiniet šeit, lai pievienotu savu pirmo bloku ...
+
+-
+
 editor_ui_add: Pievienot
 
 -

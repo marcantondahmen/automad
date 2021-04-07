@@ -590,6 +590,10 @@ editor_layout_fraction: Laius
 
 -
 
+editor_ui_placeholder: Esimese ploki lisamiseks klõpsake siia ...
+
+-
+
 editor_ui_add: Lisama
 
 -

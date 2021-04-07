@@ -590,6 +590,10 @@ editor_layout_fraction: Breidd
 
 -
 
+editor_ui_placeholder: Smelltu hér til að bæta við fyrstu blokkinni þinni ...
+
+-
+
 editor_ui_add: Bæta við
 
 -

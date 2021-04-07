@@ -590,6 +590,10 @@ editor_layout_fraction: Ширина
 
 -
 
+editor_ui_placeholder: Кликнете тук, за да добавите първия си блок ...
+
+-
+
 editor_ui_add: Добавяне
 
 -

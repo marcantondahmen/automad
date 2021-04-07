@@ -590,6 +590,10 @@ editor_layout_fraction: Širina
 
 -
 
+editor_ui_placeholder: Kliknite ovdje da biste dodali svoj prvi blok ...
+
+-
+
 editor_ui_add: Dodati
 
 -

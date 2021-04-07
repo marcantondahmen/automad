@@ -590,6 +590,10 @@ editor_layout_fraction: Leveys
 
 -
 
+editor_ui_placeholder: Klikkaa tästä lisätäksesi ensimmäisen lohkon ...
+
+-
+
 editor_ui_add: Lisätä
 
 -

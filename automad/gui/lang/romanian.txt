@@ -590,6 +590,10 @@ editor_layout_fraction: Lăţime
 
 -
 
+editor_ui_placeholder: Faceți clic aici pentru a adăuga primul bloc ...
+
+-
+
 editor_ui_add: Adăuga
 
 -

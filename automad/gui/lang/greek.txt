@@ -590,6 +590,10 @@ editor_layout_fraction: Πλάτος
 
 -
 
+editor_ui_placeholder: Κάντε κλικ εδώ για να προσθέσετε το πρώτο σας μπλοκ ...
+
+-
+
 editor_ui_add: Προσθήκη
 
 -
