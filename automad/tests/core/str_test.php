@@ -119,5 +119,25 @@ class Str_Test extends TestCase {
 		
 	}
 
+
+	/**
+	 *	@dataProvider dataForTestStripTagsIsEqual
+	 *	@testdox stripTags("$str") equals "$expected"
+	 */
 	
+	public function testStripTagsIsEqual($str, $expected) {
+		
+		$this->assertEquals(Str::stripTags($str), $expected);
+		
+	}
+	
+	public function dataForTestStripTagsIsEqual() {
+		
+		return array(
+			array('	<div>Test</div>', 'Test')
+		);
+		
+	}
+
+
 }

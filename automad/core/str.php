@@ -346,7 +346,7 @@ class Str {
 	
 	public static function stripTags($str) {
 		
-		return trim(strip_tags(Str::markdown($str)));
+		return trim(strip_tags(Str::markdown(strip_tags($str))));
 		
 	}
 		
