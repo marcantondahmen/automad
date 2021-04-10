@@ -538,7 +538,6 @@ class AutomadBlockSection {
 			holder: this.modalEditorId,
 			input: this.input,
 			flex: true,
-			autofocus: true,
 			onReady: () => {
 
 				this.applyStyleSettings(document.getElementById(this.modalEditorId));

@@ -69,7 +69,6 @@
 				holder: false,
 				input: false,
 				readOnly: false,
-				autofocus: false,
 				placeholder: '',
 				flex: false,
 				onReady: function() {}
@@ -99,7 +98,7 @@
 				tools: AutomadEditorConfig.tools(options.readOnly, options.flex),
 				readOnly: options.readOnly,
 				minHeight: false,
-				autofocus: options.autofocus,
+				autofocus: false,
 				placeholder: options.placeholder,
 				i18n: {
 					messages: {

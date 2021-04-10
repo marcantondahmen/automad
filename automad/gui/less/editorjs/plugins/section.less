@@ -71,7 +71,7 @@
 
 	}
 
-	& .am-section-overlay-focus {
+	& > .am-section-overlay-focus {
 
 		// Only show overlay when block is focused (see below).
 		// When focused it has the same dimensions as the section:after element.
@@ -81,7 +81,7 @@
 		pointer-events: none;
 		.transition(opacity 0.2s;);
 
-		.ce-block--focused & {
+		.ce-block--focused > div > & {
 			opacity: 0.2;
 			pointer-events: auto;
 		}
@@ -89,7 +89,7 @@
 	}
 
 	& section:after,
-	.ce-block--focused & .am-section-overlay-focus {
+	& .am-section-overlay-focus {
 		position: absolute;
 		box-sizing: border-box;
 		display: block;

@@ -232,7 +232,7 @@ class AutomadLayout {
 
 		Automad.layout.$(document).on(
 			'mousedown click',
-			`#${editorId} .${AutomadEditorConfig.cls.settingsLayout} div, .cdx-settings-button`,
+			`#${editorId} .${AutomadEditorConfig.cls.settingsLayout} div, .${AutomadEditorConfig.cls.settingsButton}`,
 			alignButton
 		);
 
