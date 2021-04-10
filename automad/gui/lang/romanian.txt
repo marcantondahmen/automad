@@ -586,7 +586,7 @@ editor_layout_stretch: Extindeți blocul la toată lățimea
 
 -
 
-editor_layout_fraction: Lăţime
+editor_layout_width: Lăţime
 
 -
 

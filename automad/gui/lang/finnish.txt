@@ -586,7 +586,7 @@ editor_layout_stretch: Laajenna lohko täysleveydelle
 
 -
 
-editor_layout_fraction: Leveys
+editor_layout_width: Leveys
 
 -
 

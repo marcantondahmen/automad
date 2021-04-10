@@ -560,18 +560,18 @@ class AutomadBlockSection {
 	applyDialogSize() {
 
 		const dialog = this.modalWrapper.querySelector('.uk-modal-dialog');
-		var fraction = 1;
+		var widthFraction = 1;
 
-		if (this.data.fraction) {
-			// Sanitize fraction string before passing it to eval().
-			fraction = eval(this.data.fraction.replace(/[^\d\/]/g, ''));
+		if (this.data.widthFraction) {
+			// Sanitize widthFraction string before passing it to eval().
+			widthFraction = eval(this.data.widthFraction.replace(/[^\d\/]/g, ''));
 		} 
 
 		if (this.data.stretched) {
-			fraction = 1;
+			widthFraction = 1;
 		}
 
-		dialog.style.width = `${(fraction * 74) + 4}rem`;
+		dialog.style.width = `${(widthFraction * 74) + 4}rem`;
 		dialog.style.maxWidth = '90vw';
 
 	}

@@ -262,7 +262,7 @@ editor_filelist_default: Numatytasis šablonas
 
 -
 
-editor_filelist_files: �Glob Patterns“ (atskirta kableliais)
+editor_filelist_files: �Glob Patterns“ (atskirta kableliais)
 
 -
 
@@ -294,7 +294,7 @@ editor_list_toolbox: Sąrašas
 
 -
 
-editor_list_unordered: �Bullet Points“
+editor_list_unordered: �Bullet Points“
 
 -
 
@@ -586,7 +586,7 @@ editor_layout_stretch: Išplėskite bloką iki viso pločio
 
 -
 
-editor_layout_fraction: Plotis
+editor_layout_width: Plotis
 
 -
 

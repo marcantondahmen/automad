@@ -586,7 +586,7 @@ editor_layout_stretch: Razširite blok na celotno širino
 
 -
 
-editor_layout_fraction: Premer
+editor_layout_width: Premer
 
 -
 

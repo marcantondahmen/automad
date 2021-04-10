@@ -586,7 +586,7 @@ editor_layout_stretch: Rozbalte blok na celou šířku
 
 -
 
-editor_layout_fraction: Šířka
+editor_layout_width: Šířka
 
 -
 

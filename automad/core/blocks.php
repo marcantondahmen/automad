@@ -112,7 +112,7 @@ HTML;
 
 			try {
 
-				$blockIsFlexItem = (!empty($block->data->fraction) && empty($block->data->stretched));
+				$blockIsFlexItem = (!empty($block->data->widthFraction) && empty($block->data->stretched));
 
 				if (!$flexOpen && $blockIsFlexItem) {
 					$html .= '<section class="am-flex">';
@@ -136,12 +136,12 @@ HTML;
 									$blockHtml
 								</div>
 HTML;
-				} else if (!empty($block->data->fraction)) {
+				} else if (!empty($block->data->widthFraction)) {
 
-					$fraction = str_replace('/', '-', $block->data->fraction);
+					$widthFraction = str_replace('/', '-', $block->data->widthFraction);
 
 					$blockHtml = <<< HTML
-								<div class="am-{$fraction}">
+								<div class="am-{$widthFraction}">
 									$blockHtml
 								</div>
 HTML;

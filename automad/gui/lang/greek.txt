@@ -586,7 +586,7 @@ editor_layout_stretch: Αναπτύξτε το μπλοκ σε πλήρες πλ
 
 -
 
-editor_layout_fraction: Πλάτος
+editor_layout_width: Πλάτος
 
 -
 

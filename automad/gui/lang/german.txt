@@ -586,7 +586,7 @@ editor_layout_stretch: Erweitern Sie den Block auf volle Breite
 
 -
 
-editor_layout_fraction: Breite
+editor_layout_width: Breite
 
 -
 

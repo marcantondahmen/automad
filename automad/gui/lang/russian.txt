@@ -586,7 +586,7 @@ editor_layout_stretch: Развернуть блок на всю ширину
 
 -
 
-editor_layout_fraction: Ширина
+editor_layout_width: Ширина
 
 -
 

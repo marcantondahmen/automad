@@ -586,7 +586,7 @@ editor_layout_stretch: Vouw het blok uit tot volledige breedte
 
 -
 
-editor_layout_fraction: Breedte
+editor_layout_width: Breedte
 
 -
 

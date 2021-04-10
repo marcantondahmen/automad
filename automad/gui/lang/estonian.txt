@@ -586,7 +586,7 @@ editor_layout_stretch: Laiendage plokki täislaiusele
 
 -
 
-editor_layout_fraction: Laius
+editor_layout_width: Laius
 
 -
 

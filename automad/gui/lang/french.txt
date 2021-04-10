@@ -586,7 +586,7 @@ editor_layout_stretch: Développez le bloc en pleine largeur
 
 -
 
-editor_layout_fraction: Largeur
+editor_layout_width: Largeur
 
 -
 

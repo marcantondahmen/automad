@@ -586,7 +586,7 @@ editor_layout_stretch: Stækkaðu kubbinn í fulla breidd
 
 -
 
-editor_layout_fraction: Breidd
+editor_layout_width: Breidd
 
 -
 

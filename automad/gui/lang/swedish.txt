@@ -586,7 +586,7 @@ editor_layout_stretch: Expandera blocket till full bredd
 
 -
 
-editor_layout_fraction: Bredd
+editor_layout_width: Bredd
 
 -
 

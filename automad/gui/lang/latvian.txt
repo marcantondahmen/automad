@@ -586,7 +586,7 @@ editor_layout_stretch: Paplašiniet bloku līdz pilnam platumam
 
 -
 
-editor_layout_fraction: Platums
+editor_layout_width: Platums
 
 -
 

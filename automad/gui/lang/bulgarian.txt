@@ -586,7 +586,7 @@ editor_layout_stretch: Разгънете блока до пълната шир�
 
 -
 
-editor_layout_fraction: Ширина
+editor_layout_width: Ширина
 
 -
 

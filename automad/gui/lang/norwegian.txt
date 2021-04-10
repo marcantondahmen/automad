@@ -586,7 +586,7 @@ editor_layout_stretch: Utvid blokken til full bredde
 
 -
 
-editor_layout_fraction: Bredde
+editor_layout_width: Bredde
 
 -
 

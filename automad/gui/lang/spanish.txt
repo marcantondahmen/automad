@@ -586,7 +586,7 @@ editor_layout_stretch: Expanda el bloque a ancho completo
 
 -
 
-editor_layout_fraction: Ancho
+editor_layout_width: Ancho
 
 -
 
