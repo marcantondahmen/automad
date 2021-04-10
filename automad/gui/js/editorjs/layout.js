@@ -56,7 +56,6 @@ class AutomadLayoutButton {
 			name: '',
 			value: '',
 			buttonsClearRegex: '',
-			blockClearRegex: '',
 			clearDataKeys: []
 		}, options);
 
@@ -101,13 +100,8 @@ class AutomadLayoutButton {
 
 		this.button.classList.add(this.clsActive);
 		this.data[this.options.name] = this.options.value;
-		block.className = block.className.replace(this.options.blockClearRegex, '');
-
-		const className = AutomadLayout.getClassName(this.options.name, this.options.value);
-
-		if (className.length) {
-			block.classList.add(className);
-		}
+		
+		AutomadLayout.toggleBlockClasses(block, this.data);
 
 	}
 
@@ -144,7 +138,7 @@ class AutomadLayoutResetButton extends AutomadLayoutButton {
 		});
 
 		this.button.classList.add(this.clsActive);
-		block.className = block.className.replace(this.options.blockClearRegex, '');
+		AutomadLayout.toggleBlockClasses(block, this.data);
 
 	}
 
@@ -198,20 +192,7 @@ class AutomadLayout {
 					if (data.blocks !== undefined) {
 
 						if (data.blocks[i] !== undefined) {
-
-							let value = data.blocks[i].data.widthFraction,
-								stretched = data.blocks[i].data.stretched,
-								regex = new RegExp(`width\\-\\d+\\-\\d+`, 'g');
-
-							if (typeof value == 'string') {
-								value = value.replace('/', '-');
-							}
-
-							block.className = block.className.replace(regex, '');
-							block.classList.toggle(`width-${value}`, (value !== undefined && value));
-
-							block.classList.toggle('stretched', (stretched !== undefined && stretched));
-
+							AutomadLayout.toggleBlockClasses(block, data.blocks[i].data);
 						}
 
 					}
@@ -251,7 +232,7 @@ class AutomadLayout {
 
 		Automad.layout.$(document).on(
 			'mousedown click',
-			`#${editorId} .${AutomadEditorConfig.cls.settingsLayout} div`,
+			`#${editorId} .${AutomadEditorConfig.cls.settingsLayout} div, .cdx-settings-button`,
 			alignButton
 		);
 
@@ -299,17 +280,14 @@ class AutomadLayout {
 
 	}
 
-	static getClassName(key, value) {
+	static toggleBlockClasses(element, data) {
 
-		if (typeof value === 'string' && value) {
-			return `${key}-${value.replace('/', '-')}`;
-		} else {
-			if (value) {
-				return `${key}`;
-			}
+		element.className = element.className.replace(/width\-fraction[\d\-]+/g, '');
+		element.classList.toggle('stretched', (data.stretched !== undefined && data.stretched));
+
+		if (data.widthFraction !== undefined && data.widthFraction) {
+			element.classList.add(`width-fraction-${data.widthFraction.replace('/', '-')}`);
 		}
-
-		return '';
 
 	}
 
@@ -378,8 +356,7 @@ class AutomadLayout {
 
 		const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
 			icon: resetOption.icon,
-			buttonsClearRegex: /(width|stretched)/g,
-			blockClearRegex: /(stretched|width\-\d+\-\d+)/g,
+			buttonsClearRegex: /(widthFraction|stretched)/g,
 			clearDataKeys: ['stretched', 'widthFraction']
 		}));
 
@@ -389,8 +366,7 @@ class AutomadLayout {
 
 			const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
 				icon: stretchOption.icon,
-				buttonsClearRegex: /(width|reset)/g,
-				blockClearRegex: /(stretched|width\-\d+\-\d+)/g,
+				buttonsClearRegex: /(widthFraction|reset)/g,
 				clearDataKeys: ['widthFraction']
 			}));
 
@@ -420,8 +396,7 @@ class AutomadLayout {
 
 				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
 					icon: AutomadLayout.icon(option.icon),
-					buttonsClearRegex: /(width|stretched|reset)/g,
-					blockClearRegex: /(stretched|width\-\d+\-\d+)/g,
+					buttonsClearRegex: /(widthFraction|stretched|reset)/g,
 					clearDataKeys: ['stretched']
 				}));
 
