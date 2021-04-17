@@ -143,7 +143,7 @@ class AutomadBlockSection {
 
 		this.justifySettings = [
 			{
-				value: 'flex-start',
+				value: 'start',
 				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M5,20L5,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C6,19.6,5.6,20,5,20z"/><path d="M9.5,16L9.5,16C8.7,16,8,15.3,8,14.5v-9C8,4.7,8.7,4,9.5,4h0C10.3,4,11,4.7,11,5.5v9C11,15.3,10.3,16,9.5,16z"/><path d="M14.5,16L14.5,16c-0.8,0-1.5-0.7-1.5-1.5v-9C13,4.7,13.7,4,14.5,4h0C15.3,4,16,4.7,16,5.5v9C16,15.3,15.3,16,14.5,16z"/></svg>',
 				title: t('section_justify_start')
 			},
@@ -153,7 +153,7 @@ class AutomadBlockSection {
 				title: t('section_justify_center')
 			},
 			{
-				value: 'flex-end',
+				value: 'end',
 				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M15,20L15,20c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h0c0.6,0,1,0.4,1,1v18C16,19.6,15.6,20,15,20z"/><path d="M5.5,16L5.5,16C4.7,16,4,15.3,4,14.5v-9C4,4.7,4.7,4,5.5,4h0C6.3,4,7,4.7,7,5.5v9C7,15.3,6.3,16,5.5,16z"/><path d="M10.5,16L10.5,16C9.7,16,9,15.3,9,14.5v-9C9,4.7,9.7,4,10.5,4h0C11.3,4,12,4.7,12,5.5v9C12,15.3,11.3,16,10.5,16z"/></svg>',
 				title: t('section_justify_end')
 			},

@@ -354,60 +354,69 @@ class AutomadLayout {
 		const allowStretching = config.allowStretching || false,
 			  flex = config.flex || false;
 
-		const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
-			icon: resetOption.icon,
-			buttonsClearRegex: /(widthFraction|stretched)/g,
-			clearDataKeys: ['stretched', 'widthFraction']
-		}));
 
-		mainWrapper.appendChild(resetButton.get());
+		if (flex || allowStretching) {
 
-		if (allowStretching) {
-
-			const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
-				icon: stretchOption.icon,
-				buttonsClearRegex: /(widthFraction|reset)/g,
-				clearDataKeys: ['widthFraction']
+			const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
+				icon: resetOption.icon,
+				buttonsClearRegex: /(widthFraction|stretched)/g,
+				clearDataKeys: ['stretched', 'widthFraction']
 			}));
 
-			mainWrapper.appendChild(stretchButton.get());
+			mainWrapper.appendChild(resetButton.get());
 
-		} else {
+			if (allowStretching) {
 
-			let stretchButton = element('div', [api.styles.settingsButton, 'disabled']);
-
-			stretchButton.innerHTML = stretchOption.icon;
-
-			stretchButton.addEventListener('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				return false;
-			});
-
-			mainWrapper.appendChild(stretchButton);
-
-		}
-
-		wrapper.appendChild(mainWrapper);
-	
-		if (flex) {
-
-			widthFractionOptions.forEach(function (option) {
-
-				const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
-					icon: AutomadLayout.icon(option.icon),
-					buttonsClearRegex: /(widthFraction|stretched|reset)/g,
-					clearDataKeys: ['stretched']
+				const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
+					icon: stretchOption.icon,
+					buttonsClearRegex: /(widthFraction|reset)/g,
+					clearDataKeys: ['widthFraction']
 				}));
 
-				widthFractionWrapper.appendChild(button.get());
+				mainWrapper.appendChild(stretchButton.get());
 
-			});
+			} else {
 
-			wrapper.appendChild(widthFractionWrapper);
+				let stretchButton = element('div', [api.styles.settingsButton, 'disabled']);
+
+				stretchButton.innerHTML = stretchOption.icon;
+
+				stretchButton.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				});
+
+				mainWrapper.appendChild(stretchButton);
+
+			}
+
+			wrapper.appendChild(mainWrapper);
+
+			if (flex) {
+
+				widthFractionOptions.forEach(function (option) {
+
+					const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
+						icon: AutomadLayout.icon(option.icon),
+						buttonsClearRegex: /(widthFraction|stretched|reset)/g,
+						clearDataKeys: ['stretched']
+					}));
+
+					widthFractionWrapper.appendChild(button.get());
+
+				});
+
+				wrapper.appendChild(widthFractionWrapper);
+
+			}
+
 
 		}
 
+
+
+		
 		return wrapper;
 
 	}
