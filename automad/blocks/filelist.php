@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Filelist {
+class Filelist extends Paragraph {
 
 	
 	/**	
@@ -79,7 +79,10 @@ class Filelist {
 			$options['file'] = '/automad/blocks/templates/filelist.php';
 		}
 		
-		return Snippet::render((object) $options, $Automad);	
+		$html = Snippet::render((object) $options, $Automad);
+		$class = self::classAttr();
+
+		return "<am-filelist $class>$html</am-filelist>";
 
 	}
 

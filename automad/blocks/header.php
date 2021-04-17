@@ -50,27 +50,30 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Header {
+class Header extends Paragraph {
 
 
 	/**	
 	 *	Render a header block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
-		$style = '';
+		$classes = array();
 
 		if (!empty($data->alignment)) {
 			if ($data->alignment == 'center') {
-				$style = ' style="text-align: center;"';
+				$classes[] = 'am-center';
 			}
 		}
 
-		return 	'<h' . $data->level . ' id="' . Str::sanitize(strip_tags($data->text), true) . '"' . $style . '>' . 
+		return 	'<h' . $data->level . 
+				' id="' . Str::sanitize(strip_tags($data->text), true) . '" ' . 
+				self::classAttr($classes) . '>' . 
 					htmlspecialchars_decode($data->text) . 
 				'</h' . $data->level . '>';
 

@@ -49,19 +49,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Table {
+class Table extends Paragraph {
 
 
 	/**	
 	 *	Render a table block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
-		$html = '<section class="am-table"><table>'; 
+		$class = self::classAttr();
+		$html = "<am-table $class><table><thead>"; 
+		$first = true;
 		
 		// Initially set cell tag to "th".
 		$tag = 'th';
@@ -76,12 +79,16 @@ class Table {
 			
 			$html .= '</tr>';
 
-			// For every row after the first one, set the cell tag to "td".
-			$tag = 'td';
+			if ($first) {
+				$html .= '</thead><tbody>';
+				$first = false;
+				// For every row after the first one, set the cell tag to "td".
+				$tag = 'td';
+			}
 
 		}
 		
-		$html .= '</table></section>';
+		$html .= '</tbody></table></am-table>';
 
 		return $html;
 

@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Slider {
+class Slider extends Paragraph {
 
 
 	/**	
@@ -77,7 +77,7 @@ class Slider {
 				$options = array_intersect_key($options, $defaults);
 
 				$first = 'am-active';
-				$html = '<figure><div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
+				$html = '<div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
 				
 				foreach ($files as $file) {
 
@@ -95,7 +95,11 @@ HTML;
 
 				}
 				
-				return $html . '</div></figure>';
+				$html .= '</div>';
+				$class = self::classAttr();
+
+				return "<am-slider $class>$html</am-slider>";
+
 
 			}
 

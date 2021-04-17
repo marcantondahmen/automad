@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Mail {
+class Mail extends Paragraph {
 
 
 	/**	
@@ -83,15 +83,19 @@ class Mail {
 				$status = "<h3>$status</h3>";
 			}
 
+			$class = self::classAttr();
+
 			return <<< HTML
-					$status
-					<form action="" method="post" class="am-mail-form">	
-						<input type="text" name="human" value="">	
-						<input class="am-mail-input" type="text" name="from" value="" placeholder="$data->placeholderEmail">
-						<input class="am-mail-input" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
-						<textarea class="am-mail-input" name="message" placeholder="$data->placeholderMessage"></textarea>
-						<button class="am-mail-button" type="submit">$data->textButton</button>	
-					</form>
+					<am-mail $class>
+						$status
+						<form action="" method="post">	
+							<input type="text" name="human" value="">	
+							<input class="am-input" type="text" name="from" value="" placeholder="$data->placeholderEmail">
+							<input class="am-input" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
+							<textarea class="am-input" name="message" placeholder="$data->placeholderMessage"></textarea>
+							<button class="am-button" type="submit">$data->textButton</button>	
+						</form>
+					</am-mail>
 HTML;
 
 		}

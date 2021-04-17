@@ -50,21 +50,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Toc {
+class Toc extends Paragraph {
 
 
 	/**	
 	 *	Render a toc block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
-		return <<<HTML
-				<nav class="am-toc am-toc-{$data->style}"></nav>
-HTML;
+		$class = self::classAttr(array("am-toc-{$data->style}"));
+
+		return "<am-toc $class></am-toc>";
 
 	}
 

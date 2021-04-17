@@ -49,17 +49,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Lists {
+class Lists extends Paragraph {
 
 
 	/**	
 	 *	Render a list block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
 		if ($data->style == 'ordered') {
 			$open = '<ol>';
@@ -77,8 +78,9 @@ class Lists {
 		}
 
 		$html .= $close;
+		$class = self::classAttr();
 
-		return "<section>$html</section>";
+		return "<am-list $class>$html</am-list>";
 
 	}
 

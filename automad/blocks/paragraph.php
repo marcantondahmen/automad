@@ -51,30 +51,49 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 class Paragraph {
 
-	
-	/**	
+
+	/**
+	 *	Return a class attribute for the wrapping block element.
+	 *
+	 *	@param array $custom
+	 *	@return string the attribute string
+	 */
+
+	protected static function classAttr($custom = array()) {
+
+		$classes = array_merge(array('am-block'), $custom);
+
+		return 'class="' . join(' ', $classes) . '"';
+
+	}
+
+
+	/**
 	 *	Render a paragraph block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
-		$attr = '';
+		$classes = array();
 		$text = htmlspecialchars_decode($data->text);
 
 		if (!empty($data->large)) {
-			$attr = ' class="am-paragraph-large"';
+			$classes[] = 'am-paragraph-large';
 		}
 
 		if (!empty($data->alignment)) {
 			if ($data->alignment == 'center') {
-				$attr .= ' style="text-align: center;"';
+				$classes[] = 'am-center';
 			}
 		}
 
-		return "<p$attr>$text</p>";
+		$class = self::classAttr($classes);
+
+		return "<p $class>$text</p>";
 
 	}
 

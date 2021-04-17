@@ -33,59 +33,51 @@
  */
 
 
-.am-section {
+am-section {
 
+	display: block;
+	box-sizing: border-box;
+	overflow: hidden;
 	color: var(--am-section-color);
 	background-color: transparent;
 	background-size: cover;
 	background-position: 50% 50%;
 	border: 0 solid var(--am-section-border-color);
 
-	&-card {
+	am-stretched & {
+		padding: 0 var(--am-container-padding);
+	}
+
+	&.am-card {
 
 		box-sizing: border-box;
 		overflow: hidden;
 		box-shadow: none;
 		padding: 0;
-		
-		& > *,
-		& > .am-flex > * > * {
-			margin-top: 0 !important;
-			margin-bottom: 0 !important;
-			padding: var(--am-section-padding);
+
+		& > * {
+			margin-top: 0;
+			margin-bottom: 0;
+			padding: var(--am-card-padding);
 		}
 
-		& > figure,
-		& > .am-flex > * > figure {
-
-			padding: var(--am-section-figure-padding);
-
-			& > blockquote,
-			& > figcaption {
-				margin: ~"calc(-1 * var(--am-section-figure-padding))";
-				padding: var(--am-section-padding);
-			}
-
-		}
-
-		& > .am-flex {
-
+		& > am-stretched {
+			padding: 0;
 			margin: 0 !important;
-			padding: 0 !important;
-
-			& > * {
-				padding: 0 !important;
-			}
-			
 		}
 
-		& > :not(figure):not(.am-flex) + :not(figure) {
+		& > :not(am-stretched) + * {
 			padding-top: 0;
 		}
 
-		& hr {
-			margin: var(--am-section-padding) 0 !important;
-			padding: 0;
+		&.am-gap > am-flex {
+
+			margin: ~"calc(var(--am-card-padding) * -0.5)" !important;
+
+			& > * {
+				padding: ~"calc(var(--am-card-padding) * 0.5)" !important;
+			}
+
 		}
 
 		& table,

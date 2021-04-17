@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Snippet {
+class Snippet extends Paragraph {
 
 
 	/**
@@ -106,7 +106,9 @@ class Snippet {
 		
 		self::$snippetIsRendering = false;
 
-		return $output;
+		$class = self::classAttr();
+
+		return "<am-snippet $class>$output</am-snippet>";
 
 	}
 

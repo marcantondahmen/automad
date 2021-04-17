@@ -43,11 +43,31 @@
 
 @import 'variables.less';
 @import 'buttons.less';
-@import 'container.less';
 @import 'flex.less';
 @import 'gallery.less';
 @import 'mail.less';
 @import 'paragraph.less';
 @import 'section.less';
 @import 'slider.less';
+@import 'stretched.less';
 @import 'toc.less';
+@import 'util.less';
+
+
+.am-block {
+
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: var(--am-block-max-width);
+	margin: 0 auto;
+
+	* + & {
+		margin-top: var(--am-block-margin-top);
+	}
+
+	& figcaption {
+		padding: 0.75em 0 0 0;
+	}
+
+}

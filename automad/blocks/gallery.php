@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Gallery {
+class Gallery extends Paragraph {
 
 
 	/**	
@@ -95,8 +95,7 @@ class Gallery {
 				$cleanBottom = ' am-gallery-masonry-clean-bottom';
 			}
 
-			$html = '<figure>' . 
-					$style . 
+			$html = $style . 
 					'<div class="am-gallery-masonry' . $cleanBottom . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 
 			foreach ($files as $file) {
@@ -119,7 +118,9 @@ HTML;
 
 			}
 
-			return $html . '</div></figure>';
+			$html .= '</div>';
+
+			return '<am-gallery ' . self::classAttr() . '>' . $html . '</am-gallery>';
 
 		}
 

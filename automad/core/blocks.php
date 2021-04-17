@@ -115,12 +115,12 @@ HTML;
 				$blockIsFlexItem = (!empty($block->data->widthFraction) && empty($block->data->stretched));
 
 				if (!$flexOpen && $blockIsFlexItem) {
-					$html .= '<section class="am-flex">';
+					$html .= '<am-flex>';
 					$flexOpen = true;
 				}
 
 				if ($flexOpen && !$blockIsFlexItem) {
-					$html .= '</section>';
+					$html .= '</am-flex>';
 					$flexOpen = false;
 				}
 
@@ -131,21 +131,10 @@ HTML;
 
 				// Stretch block.
 				if (!empty($block->data->stretched)) {
-					$blockHtml = <<< HTML
-								<div class="am-stretched">
-									$blockHtml
-								</div>
-HTML;
+					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
 				} else if (!empty($block->data->widthFraction)) {
-
 					$widthFraction = str_replace('/', '-', $block->data->widthFraction);
-
-					$blockHtml = <<< HTML
-								<div class="am-{$widthFraction}">
-									$blockHtml
-								</div>
-HTML;
-
+					$blockHtml = "<am-{$widthFraction}>$blockHtml</am-{$widthFraction}>";
 				}
 
 				$html .= $blockHtml;
@@ -159,7 +148,7 @@ HTML;
 		}
 
 		if ($flexOpen) {
-			$html .= '</section>';
+			$html .= '</am-flex>';
 		}
 
 		return $html;

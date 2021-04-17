@@ -49,18 +49,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Delimiter {
+class Delimiter extends Paragraph {
 
 
 	/**	
 	 *	Render a delimiter block.
 	 *	
+	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render() {
+	public static function render($data, $Automad) {
 
-		return '<hr>';
+		return '<hr '. self::classAttr() .'>';
 
 	}
 

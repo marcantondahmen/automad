@@ -49,17 +49,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Buttons {
+class Buttons extends Paragraph {
 
 	
 	/**	
 	 *	Render a buttons block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
 		$defaults = array(
 			'primaryText' => '',
@@ -74,11 +75,6 @@ class Buttons {
 		$options = array_merge($defaults, (array) $data);
 		$data = (object) $options;
 		$html = '';
-		$class = ' class="am-buttons"';
-
-		if ($data->alignment == 'center') {
-			$class = ' class="am-buttons am-buttons-center"';
-		}
 
 		foreach (array('primary', 'secondary') as $item) {
 
@@ -116,7 +112,15 @@ HTML;
 
 		if ($html) {
 
-			return "<section$class>$html</section>";
+			$classes = array();
+
+			if ($data->alignment == 'center') {
+				$classes[] = 'am-center';
+			}
+
+			$class = self::classAttr($classes);
+
+			return "<am-buttons $class>$html</am-buttons>";
 
 		}
 

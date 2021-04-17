@@ -102,7 +102,7 @@
 		init: function() {
 
 			var items = document.querySelectorAll('h2, h3, h4'),
-				containers = document.querySelectorAll('nav.am-toc');
+				containers = document.querySelectorAll('am-toc');
 
 			for (var i = 0; i < containers.length; ++i) {
 				AutomadBlocks.Toc.generateToc(containers[i], items);

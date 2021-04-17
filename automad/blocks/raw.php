@@ -50,19 +50,23 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Raw {
+class Raw extends Paragraph {
 
 
 	/**	
 	 *	Render a raw block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
-		return Str::markdown($data->code);
+		$html = Str::markdown($data->code);
+		$class = self::classAttr();
+
+		return "<am-raw $class>$html</am-raw>";
 
 	}
 

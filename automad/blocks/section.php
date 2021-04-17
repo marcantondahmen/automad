@@ -50,10 +50,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Section {
+class Section extends Paragraph {
 
 
-	/**	
+	/**
 	 *	Render a section editor block.
 	 *	
 	 *	@param object $data
@@ -66,20 +66,20 @@ class Section {
 		$json = json_encode($data->content);
 		$html = Core\Blocks::render($json, $Automad);
 		$style = '';
-		$class = '';
+		$classes = array();
 
 		if (!empty($data->justify)) {
-			$class .= " am-section-justify-{$data->justify}";
+			$classes[] = "am-justify-{$data->justify}";
 		}
 
 		if (!empty($data->gap)) {
-			$class .= " am-section-gap";
+			$classes[] = 'am-gap';
 		}
 
 		if (!empty($data->style)) {
 
 			if (!empty($data->style->card)) {
-				$class .= ' am-section-card';
+				$classes[] = 'am-card';
 			}
 
 			if (!empty($data->style->backgroundImage)) {
@@ -130,10 +130,12 @@ class Section {
 			$style = 'style="' . trim($style) . '"';
 		}
 
+		$class = self::classAttr($classes);
+
 		return <<< HTML
-				<section class="am-container am-section{$class}" $style>
+				<am-section $class $style>
 					$html
-				</section>
+				</am-section>
 HTML;
 
 	}

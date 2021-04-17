@@ -33,7 +33,7 @@
  */
 
 
-.am-flex {
+am-flex {
 
 	box-sizing: border-box;
 	display: flex;
@@ -43,23 +43,16 @@
 	margin: 0;
 
 	& > * {
-
 		box-sizing: border-box;
 		flex-grow: 0;
 		max-width: none;
 		min-width: var(--am-flex-min-width);
 		margin: 0;
 		padding: 0;
-		
-		& .am-container {
-			padding: 0;
-		}
-
 	}
 
-	.am-section-gap > & {
+	.am-gap > & {
 
-		height: ~"calc(100% + var(--am-flex-gap))";
 		margin: ~"calc(var(--am-flex-gap) * -0.5)" !important;
 
 		& > * {
@@ -68,7 +61,11 @@
 
 	}
 
-	& > .am {
+	& .am-block {
+		max-width: none;
+	}
+
+	& > am {
 
 		&-1-4 {
 			flex-basis: 1 / 4 * 100%;
@@ -96,27 +93,27 @@
 
 	}
 
-	.am-section-justify-flex-start > & {
+	.am-justify-start > & {
 		justify-content: flex-start;
 	}
 
-	.am-section-justify-center > & {
+	.am-justify-center > & {
 		justify-content: center;
 	}
 
-	.am-section-justify-flex-end > & {
+	.am-justify-end > & {
 		justify-content: flex-end;
 	}
 
-	.am-section-justify-space-between > & {
+	.am-justify-space-between > & {
 		justify-content: space-between;
 	}
 
-	.am-section-justify-space-evenly > & {
+	.am-justify-space-evenly > & {
 		justify-content: space-evenly;
 	}
 
-	.am-section-justify-fill-row > & > * {
+	.am-justify-fill-row > & > * {
 		flex-grow: 1;
 	}
 

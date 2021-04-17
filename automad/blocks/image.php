@@ -49,18 +49,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Image {
+class Image extends Paragraph {
 
 
 	/**	
 	 *	Render an image block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
+		$class = self::classAttr();
 		$caption = '';
 		
 		if (!empty($data->caption)) {
@@ -68,10 +70,12 @@ class Image {
 		}
 
 		return <<< HTML
-				<figure>
-					<img src="$data->url" />
-					$caption
-				</figure>
+				<am-img $class>
+					<figure>
+						<img src="$data->url" />
+						$caption
+					</figure>
+				</am-img>
 HTML;
 
 	}

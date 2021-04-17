@@ -49,23 +49,36 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Quote {
+class Quote extends Paragraph {
 
 
 	/**	
 	 *	Render a quote block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
+
+		$classes = array();
+
+		if (!empty($data->alignment)) {
+			if ($data->alignment == 'center') {
+				$classes[] = 'am-center';
+			}
+		}
+
+		$class = self::classAttr($classes);
 
 		return <<< HTML
-				<figure>
-					<blockquote>$data->text</blockquote>
-   					<figcaption style="text-align: $data->alignment;">$data->caption</figcaption>
-				</figure>	
+				<am-quote $class>
+					<figure>
+						<blockquote>$data->text</blockquote>
+						<figcaption>$data->caption</figcaption>
+					</figure>
+				</am-quote>
 HTML;
 
 	}
