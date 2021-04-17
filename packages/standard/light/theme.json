@@ -20,15 +20,19 @@
 			"locale",
 			"notificationNoSearchResults",
 			"placeholderSearch",
-			"urlSearchResults"
+			"urlSearchResults",
+			"text",
+			"textTeaser"
 		],
 		"shared": [
+			"+teaser",
 			"+main",
 			"text",
 			"textTeaser"
 		]
 	},
 	"tooltips": {
+		"+teaser": "The teaser block area",
 		"+main": "The main content block area",
 		"brand": "The brand HTML, SVG or text to be used as logo",
 		"checkboxHideFilters": "Hide the filter button",

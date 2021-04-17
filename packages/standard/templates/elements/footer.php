@@ -1,5 +1,5 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-		<div class="am-container uk-block">
+		<div class="uk-block">
 			<div class="footer uk-margin-bottom">
 				<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
 					<li>

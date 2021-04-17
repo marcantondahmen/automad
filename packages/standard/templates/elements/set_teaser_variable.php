@@ -3,9 +3,14 @@
 <@~ set { :teaser: false } @>
 <# Try to get first paragraph from content. #>
 <@~ set { :teaser: 
-	@{ +main | 
-		def (@{ textTeaser | markdown }) | 
-		def (@{ text | markdown }) |
-		findFirstParagraph 
+	@{ +teaser |
+		findFirstParagraph |
+		def (@{
+			+main |
+			def (@{ textTeaser | markdown }) | 
+			def (@{ text | markdown }) |
+			findFirstParagraph
+		}) |
+		stripTags
 	}
 } @>

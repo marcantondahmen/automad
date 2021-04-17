@@ -48,14 +48,12 @@ While there is a light and a dark theme serving as presets, all the colors used 
 
 ## Writing Content
 
-There are two ways of writing content using this theme &mdash; **Blocks** and **Markdown** formatted text. 
-Please note that in case the **+Main** blocks variable has any content, the Markdown variables **Text** and **Text Teaser** are ignored! They only serve as an alternative and fallback content. 
+There are two block areas &mdash; the teaser and the main area.
 
 | Name | Description |
 | ---- | ----------- |
+| +Teaser | The teaser block area. Note that you can stretch that area to the full width of a page. |
 | +Main | The main content block area. |
-| Text | An alternative content variable. It is only displays as long as the +Main variable is empty. |
-| Text Teaser | An alternative teaser variable. It is only displayed as long as the +Main variable is empty. |
 		
 ## Overriding Theme Styles
 

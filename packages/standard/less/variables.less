@@ -15,7 +15,7 @@
 	
 	--h1-font-size: 2.85rem;
 	--h1-line-height: 1.25;
-	--h1-font-weight: 720;
+	--h1-font-weight: 680;
 
 	--h2-font-size: 1.95rem;
 	--h2-line-height: 1.35;
@@ -38,9 +38,9 @@
 	--h6-font-weight: 640;
 
 	--border-width: 2px;
-	--cards-gap: 1.5rem;
-	--cards-radius: 0.6rem;
-	--button-radius: 0.35rem;
+	--cards-gap: 2rem;
+	--cards-radius: 0;
+	--button-radius: 0.3rem;
 
 	// Colors
 	--color-page-text: #181818;
@@ -61,34 +61,11 @@
 		--color-card-border: #2E2E2E;
 	}
 
-	// Blocks
-
 	// Container
 	--am-block-max-width: @block-max-width;
-	--am-block-margin-top: 1.25em;
-	--am-block-margin-bottom: 0.65em;
-	--am-block-figure-margin-top: 2em;
-	--am-block-figure-margin-bottom: 2em;
 	--am-container-padding: @utility-container-padding-horizontal;
-	--am-container-margin-negative: @utility-container-padding-horizontal;
 	
-	// Section & Cards
-	--am-section-padding: @cards-padding;
-	--am-section-figure-padding: 0;
-	--am-section-shadow: 0 0.3rem 3rem rgba(0,0,0,0.175);
-	--am-section-color: var(--color-card-text);
-	--am-section-border-color: var(--color-card-bg);
-
-	// Flex
-	--am-flex-gap: 2rem;
-	--am-flex-min-width: 20rem;
-
 	// Gallery
-	--am-gallery-gap: 2px;
-	--am-gallery-item-width: 200px;
-	--am-gallery-z-index: 9999;
-	--am-gallery-max-height: 100%;
-	--am-gallery-max-width: 100%;
 	--am-gallery-background: @bg-color;
 	--am-gallery-controls-color: @text-color;
 	--am-gallery-controls-background: @bg-color;
@@ -96,46 +73,5 @@
 	// Slider
 	--am-slider-controls-color: var(--am-gallery-controls-color);
 	--am-slider-controls-background: var(--am-gallery-controls-background);
-
-	// Mail
-	--am-mail-input-margin: @form-gutter 0;
-	--am-mail-input-padding: @form-padding;
-	--am-mail-input-color: inherit;
-	--am-mail-input-placeholder-color: @form-placeholder-color;
-	--am-mail-input-background: @form-background;
-	--am-mail-input-radius: @button-radius;
-	--am-mail-input-border: @form-border-width solid @form-border;
-	--am-mail-input-hover-color: var(--am-mail-input-color);
-	--am-mail-input-hover-background: var(--am-mail-input-background);
-	--am-mail-input-hover-border: var(--am-mail-input-border);
-	--am-mail-input-focus-color: var(--am-mail-input-color);
-	--am-mail-input-focus-background: var(--am-mail-input-background);
-	--am-mail-input-focus-border: @form-border-width solid @form-focus-border;
 	
-	--am-mail-button-margin: var(--am-mail-input-margin);
-	--am-mail-button-padding: 0 @button-padding-horizontal;
-	--am-mail-button-height: @button-height;
-	--am-mail-button-lineheight: @button-line-height;
-	--am-mail-button-radius: var(--am-mail-input-radius);
-	--am-mail-button-color: @text-color;
-	--am-mail-button-background: inherit;
-	--am-mail-button-border: @button-border-width solid @text-color;
-	--am-mail-button-hover-color: inherit;
-	--am-mail-button-hover-background: inherit;
-	--am-mail-button-hover-border: @button-border-width solid @form-border;
-
-	// Buttons 
-	--am-button-margin: 0.5rem 0.32rem;
-	--am-button-padding-vertical: 0;
-	--am-button-padding-horizontal: 1.4rem;
-	--am-button-font-size: 1.15rem;
-	--am-button-lineheight: 3.1rem;
-	--am-button-radius: @button-radius;
-	--am-button-color: inherit;
-	--am-button-background: inherit;
-	--am-button-border-width: @button-border-width;
-	--am-button-border-color: @text-color;
-	--am-button-hover-color: @text-color;
-	--am-button-hover-background: inherit;
-	--am-button-hover-border-color: @border-color;
 }

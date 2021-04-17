@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
-	<div class="am-container content uk-block">
+	<div class="content uk-block">
 		<@ elements/content.php @>
 		<@ elements/pagelist_config.php @>
 		<@ if not @{ checkboxHideFiltersAndSort } @>
