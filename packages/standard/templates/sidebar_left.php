@@ -2,11 +2,11 @@
 <@ elements/header.php @>
 	<div class="uk-flex">
 		<@ elements/sidebar.php @>
-		<div class="uk-width-large-3-4">
+		<main class="uk-width-large-3-4">
 			<div class="content uk-block sidebar-block">
 				<@ elements/content.php @>
 				<@ elements/related_simple.php @>
 			</div>
-		</div>
+		</main>
 	</div>
 <@ elements/footer.php @>

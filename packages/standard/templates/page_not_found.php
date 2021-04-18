@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
-	<div class="content uk-block">
+	<main class="content uk-block">
 		<p class="uk-margin-top uk-margin-bottom">
 			<svg class="bi bi-emoji-dizzy" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   				<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -16,5 +16,5 @@
 		<div class="uk-margin-large-bottom">
 			<a href="/" class="uk-button">Back Home</a>
 		</div>
-	</div>
+	</main>
 <@ elements/footer.php @>

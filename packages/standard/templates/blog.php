@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ elements/header.php @>
-	<div class="content uk-block">
+	<main class="content uk-block">
 		<@ elements/content.php @>
 		<@ elements/pagelist_config.php @>
 		<@~ if not @{ checkboxHideFilters } @>
@@ -17,5 +17,5 @@
 			<@ end @>
 		</section>
 		<@ elements/pagination.php @>
-	</div>
+	</main>
 <@ elements/footer.php @>
