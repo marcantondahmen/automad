@@ -8,9 +8,9 @@
  */
 
 
-@teaser-width: @utility-container-max-width - (2 * @utility-container-padding-horizontal);
+@hero-width: @utility-container-max-width - (2 * @utility-container-padding-horizontal);
 
-.teaser {
+.hero {
 
 	box-sizing: border-box;
 	width: 100%;
@@ -18,8 +18,8 @@
 	min-height: 5rem;
 	padding: 0 @utility-container-padding-horizontal;
 
-	& .am-flex {	
-		padding: 0 ~"max(0.0001rem, (100% - @{teaser-width}) / 2)";
+	& am-flex {	
+		padding: 0 ~"max(0.0001rem, (100% - @{hero-width}) / 2)";
 	}
 
 }

@@ -25,14 +25,14 @@
 			"textTeaser"
 		],
 		"shared": [
-			"+teaser",
+			"+hero",
 			"+main",
 			"text",
 			"textTeaser"
 		]
 	},
 	"tooltips": {
-		"+teaser": "The teaser block area",
+		"+hero": "The hero section",
 		"+main": "The main content block area",
 		"brand": "The brand HTML, SVG or text to be used as logo",
 		"checkboxHideFilters": "Hide the filter button",

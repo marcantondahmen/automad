@@ -52,7 +52,7 @@ There are two block areas &mdash; the teaser and the main area.
 
 | Name | Description |
 | ---- | ----------- |
-| +Teaser | The teaser block area. Note that you can stretch that area to the full width of a page. |
+| +Hero | The hero section. Note that you can stretch that area to the full width of a page. |
 | +Main | The main content block area. |
 		
 ## Overriding Theme Styles

@@ -3,7 +3,7 @@
 <@~ set { :teaser: false } @>
 <# Try to get first paragraph from content. #>
 <@~ set { :teaser: 
-	@{ +teaser |
+	@{ +hero |
 		findFirstParagraph |
 		def (@{
 			+main |
