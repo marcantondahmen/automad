@@ -293,69 +293,65 @@ class AutomadLayout {
 
 	static renderSettings(data, saved, api, config) {
 
-		var element = Automad.util.create.element,
-			t = AutomadEditorTranslation.get,
-			wrapper = element('div', [AutomadEditorConfig.cls.settingsLayout]),
-			mainWrapper = element('div', ['cdx-settings-1-2']),
-			resetOption = {
-				title: t('layout_default'),
-				name: 'reset',
-				icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M2,17V3c0-0.6,0.4-1,1-1h5v16H3 C2.4,18,2,17.6,2,17z M28,17c0,0.6-0.4,1-1,1h-5V2h5c0.6,0,1,0.4,1,1V17z"/></svg>'
-			},
-			stretchOption = {
-				title: t('layout_stretch'),
-				name: 'stretched',
-				icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M25.9,10.9l-5,5 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4c-0.5-0.5-0.5-1.3,0-1.8l2.9-2.9H8l2.9,2.9c0.5,0.5,0.5,1.3,0,1.8 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4l-5-5c-0.5-0.5-0.5-1.3,0-1.8l5-5c0.5-0.5,1.3-0.5,1.8,0s0.5,1.3,0,1.8L8,8.8h14 l-2.9-2.9c-0.5-0.5-0.5-1.3,0-1.8s1.3-0.5,1.8,0l5,5C26.4,9.6,26.4,10.4,25.9,10.9z"/></svg>',
-				value: true
-			},
-			widthFractionWrapper = element('div', ['cdx-settings']),
-			widthFractionOptions = [
-				{
-					title: t('layout_width') + ': 1⁄4',
-					name: 'widthFraction',
-					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '1/4'
-				},
-				{
-					title: t('layout_width') + ': 1⁄3',
-					name: 'widthFraction',
-					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '1/3'
-				},
-				{
-					title: t('layout_width') + ': 1⁄2',
-					name: 'widthFraction',
-					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '1/2'
-				},
-				{
-					title: t('layout_width') + ': 2⁄3',
-					name: 'widthFraction',
-					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '2/3'
-				},
-				{
-					title: t('layout_width') + ': 3⁄4',
-					name: 'widthFraction',
-					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
-					value: '3/4'
-				},
-				{
-					title: t('layout_width') + ': 1⁄1',
-					name: 'widthFraction',
-					icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
-					value: '1/1'
-				}
-			];
-
-		data.stretched = saved.stretched || false;
-		data.widthFraction = saved.widthFraction || false;
-
 		const allowStretching = config.allowStretching || false,
-			  flex = config.flex || false;
-
+			flex = config.flex || false;
 
 		if (flex || allowStretching) {
+
+			var element = Automad.util.create.element,
+				t = AutomadEditorTranslation.get,
+				wrapper = element('div', [AutomadEditorConfig.cls.settingsLayout]),
+				mainWrapper = element('div', ['cdx-settings-1-2']),
+				resetOption = {
+					title: t('layout_default'),
+					name: 'reset',
+					icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M2,17V3c0-0.6,0.4-1,1-1h5v16H3 C2.4,18,2,17.6,2,17z M28,17c0,0.6-0.4,1-1,1h-5V2h5c0.6,0,1,0.4,1,1V17z"/></svg>'
+				},
+				stretchOption = {
+					title: t('layout_stretch'),
+					name: 'stretched',
+					icon: '<svg width="24px" height="16px" viewBox="0 0 30 20"><path d="M27,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h24c1.7,0,3-1.3,3-3V3C30,1.3,28.7,0,27,0z M25.9,10.9l-5,5 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4c-0.5-0.5-0.5-1.3,0-1.8l2.9-2.9H8l2.9,2.9c0.5,0.5,0.5,1.3,0,1.8 c-0.2,0.2-0.6,0.4-0.9,0.4s-0.6-0.1-0.9-0.4l-5-5c-0.5-0.5-0.5-1.3,0-1.8l5-5c0.5-0.5,1.3-0.5,1.8,0s0.5,1.3,0,1.8L8,8.8h14 l-2.9-2.9c-0.5-0.5-0.5-1.3,0-1.8s1.3-0.5,1.8,0l5,5C26.4,9.6,26.4,10.4,25.9,10.9z"/></svg>',
+					value: true
+				},
+				widthFractionWrapper = element('div', ['cdx-settings']),
+				widthFractionOptions = [
+					{
+						title: t('layout_width') + ': 1⁄4',
+						name: 'widthFraction',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H5V2h11 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '1/4'
+					},
+					{
+						title: t('layout_width') + ': 1⁄3',
+						name: 'widthFraction',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2H7V2h9 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '1/3'
+					},
+					{
+						title: t('layout_width') + ': 1⁄2',
+						name: 'widthFraction',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-6V2h6 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '1/2'
+					},
+					{
+						title: t('layout_width') + ': 2⁄3',
+						name: 'widthFraction',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-3V2h3 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '2/3'
+					},
+					{
+						title: t('layout_width') + ': 3⁄4',
+						name: 'widthFraction',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18,16c0,1.1-0.9,2-2,2h-1V2h1 c1.1,0,2,0.9,2,2V16z"/>',
+						value: '3/4'
+					},
+					{
+						title: t('layout_width') + ': 1⁄1',
+						name: 'widthFraction',
+						icon: '<path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z"/>',
+						value: '1/1'
+					}
+				];
 
 			const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
 				icon: resetOption.icon,
@@ -366,6 +362,8 @@ class AutomadLayout {
 			mainWrapper.appendChild(resetButton.get());
 
 			if (allowStretching) {
+
+				data.stretched = saved.stretched || false;
 
 				const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
 					icon: stretchOption.icon,
@@ -395,6 +393,8 @@ class AutomadLayout {
 
 			if (flex) {
 
+				data.widthFraction = saved.widthFraction || false;
+
 				widthFractionOptions.forEach(function (option) {
 
 					const button = new AutomadLayoutButton(api, data, wrapper, Object.assign(option, {
@@ -414,9 +414,6 @@ class AutomadLayout {
 
 		}
 
-
-
-		
 		return wrapper;
 
 	}
