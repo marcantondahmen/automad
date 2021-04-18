@@ -4,12 +4,12 @@
 		<@ elements/content.php @>
 		<@ elements/pagelist_config.php @>
 		<@~ if not @{ checkboxHideFilters } @>
-			<div id="list" class="buttons-stacked uk-margin-bottom">
+			<div id="list" class="am-block buttons-stacked uk-margin-bottom">
 				<@ elements/filters.php @>
 				<@ elements/clear_search.php @>
 			</div>
 		<@ end ~@>
-		<section <@ if @{ :pagelistDisplayCount } > 2 @>class="cards-full-width"<@ end @>>
+		<section <@ if @{ :pagelistDisplayCount } < 3 @>class="am-block"<@ end @>>
 			<@ if @{ checkboxUseAlternativePagelistLayout } @>
 				<@ blocks/pagelist/blog_alt.php @>
 			<@ else @>

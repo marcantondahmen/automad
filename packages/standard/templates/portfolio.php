@@ -4,13 +4,13 @@
 		<@ elements/content.php @>
 		<@ elements/pagelist_config.php @>
 		<@ if not @{ checkboxHideFiltersAndSort } @>
-			<div id="list" class="buttons-stacked uk-margin-bottom">
+			<div id="list" class="am-block buttons-stacked uk-margin-bottom">
 				<@ elements/filters.php @>
 				<@ elements/sort.php @>
 				<@ elements/clear_search.php @>
 			</div>
 		<@ end @>
-		<section <@ if @{ :pagelistDisplayCount } > 3 @>class="cards-full-width"<@ end @>>
+		<section <@ if @{ :pagelistDisplayCount } < 4 @>class="am-block"<@ end @>>
 			<@ if @{ checkboxUseAlternativePagelistLayout } @>
 				<@ blocks/pagelist/portfolio_alt.php @>
 			<@ else @>
