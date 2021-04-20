@@ -208,9 +208,11 @@ class AutomadLayout {
 		if (data) {
 			apply(data);
 		} else {
-			editor.save().then((data) => {
-				apply(data);
-			});
+			try {
+				editor.save().then((data) => {
+					apply(data);
+				});
+			} catch(e) {}
 		}
 
 	}
@@ -294,14 +296,14 @@ class AutomadLayout {
 	static renderSettings(data, saved, api, config) {
 
 		const allowStretching = config.allowStretching || false,
-			flex = config.flex || false;
+			  flex = config.flex || false,
+			  element = Automad.util.create.element,
+			  t = AutomadEditorTranslation.get,
+			  wrapper = element('div', [AutomadEditorConfig.cls.settingsLayout]);
 
 		if (flex || allowStretching) {
 
-			var element = Automad.util.create.element,
-				t = AutomadEditorTranslation.get,
-				wrapper = element('div', [AutomadEditorConfig.cls.settingsLayout]),
-				mainWrapper = element('div', ['cdx-settings-1-2']),
+			var mainWrapper = element('div', ['cdx-settings-1-2']),
 				resetOption = {
 					title: t('layout_default'),
 					name: 'reset',

@@ -77,6 +77,7 @@ class AutomadEditorImageSelection {
 		this.container.appendChild(button);
 
 		Sortable.create(fields, {
+			group: 'automad',
 			animation: 200,
 			draggable: '.am-item',
 			handle: '.am-drag, figure',

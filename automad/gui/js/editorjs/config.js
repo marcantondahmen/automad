@@ -166,7 +166,6 @@ class AutomadEditorConfig {
 			pagelist: {
 				class: AutomadBlockPagelist,
 				config: {
-					allowStretching: true,
 					flex: flex
 				}
 			},

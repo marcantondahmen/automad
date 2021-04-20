@@ -98,7 +98,7 @@
 					  wrapper = create.element('div', ['am-form-input-group']),
 					  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
 
-				var number = parseFloat(value) || '',
+				var number = value.replace(/([\d\.]+)[^\d\.]*/g, '$1'),
 					unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
 
 				wrapper.innerHTML = `
@@ -186,10 +186,10 @@
 
 		getNumberUnitAsString: function(numberInput, unitSelect) {
 
-			const number = Automad.util.stripNbsp(numberInput.textContent).trim() || '0',
+			const number = Automad.util.stripNbsp(numberInput.textContent).trim(),
 				  unit = unitSelect.value;
 
-			if (parseFloat(number)) {
+			if (number.length) {
 				return `${number}${unit}`;
 			}
 
