@@ -179,10 +179,9 @@
 
 						if (!options.readOnly) {
 
-							var undo = new Undo({ editor });
-
-							undo.initialize(data);
+							new AutomadEditorUndo({ editor, data });
 							new DragDrop(editor);
+
 							layout.settingsButtonObserver();
 							layout.initUndoHandler();
 							layout.initPasteHandler();
