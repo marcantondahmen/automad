@@ -183,7 +183,6 @@
 							new DragDrop(editor);
 
 							layout.settingsButtonObserver();
-							layout.initUndoHandler();
 							layout.initPasteHandler();
 
 						} else {

@@ -66,7 +66,10 @@ class AutomadEditorUndo {
 
 		this.editor.blocks
 			.render({ blocks: this.defaultState(state) })
-			.then(() => this.editor.caret.setToBlock(index, 'end'));
+			.then(() => {
+				this.editor.caret.setToBlock(index, 'end');
+				this.holder.dispatchEvent(new CustomEvent('undo'));
+			});
 
 	}
 

@@ -148,7 +148,12 @@ class AutomadLayout {
 
 	constructor(editor) {
 
+		const holder = editor.configuration.holder;
+
 		this.editor = editor;
+		this.holder = typeof holder === 'string' ? document.getElementById(holder) : holder;
+
+		this.initUndoHandler();
 
 	}
 
@@ -261,23 +266,9 @@ class AutomadLayout {
 
 	initUndoHandler() {
 
-		let layout = this;
-
-		Automad.layout.$(window).bind('keydown', function (e) {
-
-			if (e.ctrlKey || e.metaKey) {
-
-				let key = String.fromCharCode(e.which).toLowerCase();
-
-				if (key == 'z' || key == 'y') {
-					setTimeout(function () {
-						layout.applyLayout();
-						layout.alignButton();
-					}, 200);
-				}
-
-			}
-
+		this.holder.addEventListener('undo', () => {
+			this.applyLayout();
+			this.alignButton();
 		});
 
 	}
