@@ -73,7 +73,11 @@ class Section extends Paragraph {
 		}
 
 		if (!empty($data->gap)) {
-			$classes[] = 'am-gap';
+			$style .= " --am-flex-gap: {$data->gap};";
+		}
+
+		if (!empty($data->minBlockWidth)) {
+			$style .= " --am-flex-min-block-width: {$data->minBlockWidth};";
 		}
 
 		if (!empty($data->style)) {
@@ -84,6 +88,10 @@ class Section extends Paragraph {
 
 			if (!empty($data->style->backgroundImage)) {
 				$style .= " background-image: url('{$data->style->backgroundImage}');"; 
+			}
+
+			if (!empty($data->style->overflowHidden)) {
+				$style .= ' overflow: hidden;';
 			}
 
 			if (!empty($data->style->matchRowHeight)) {

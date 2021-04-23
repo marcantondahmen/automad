@@ -38,27 +38,17 @@ am-flex {
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	height: 100%;
 	max-width: none !important;
-	margin: 0;
+	height: ~"calc(var(--am-flex-gap) + 100%)";
+	margin: ~"calc(var(--am-flex-gap) * -0.5)";
 
 	& > * {
 		box-sizing: border-box;
 		flex-grow: 0;
 		max-width: none;
-		min-width: var(--am-flex-min-width);
+		min-width: var(--am-flex-min-block-width);
 		margin: 0;
-		padding: 0;
-	}
-
-	.am-gap > & {
-
-		margin: ~"calc(var(--am-flex-gap) * -0.5)" !important;
-
-		& > * {
-			padding: ~"calc(var(--am-flex-gap) * 0.5)" !important;
-		}
-
+		padding: ~"calc(var(--am-flex-gap) * 0.5)";
 	}
 
 	& .am-block {
