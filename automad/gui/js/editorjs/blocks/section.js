@@ -251,7 +251,8 @@ class AutomadBlockSection {
 				  borderRadius: '',
 				  backgroundImage: '',
 				  paddingTop: '',
-				  paddingBottom: ''
+				  paddingBottom: '',
+				  overflowHidden: false
 			  }, this.data.style);
 
 		return `
@@ -273,6 +274,15 @@ class AutomadBlockSection {
 						>
 							${t('section_card')}
 							<input id="am-section-card" type="checkbox" ${style.card == true ? 'checked' : ''}>
+						</label>
+					</div>
+					<div class="uk-form-row uk-margin-small-bottom">
+						<label
+						class="am-toggle-switch uk-text-truncate uk-button uk-text-left uk-width-1-1"
+						data-am-toggle
+						>
+							${t('section_overflow_hidden')}
+							<input id="am-section-overflow" type="checkbox" ${style.overflowHidden == true ? 'checked' : ''}>
 						</label>
 					</div>
 					<div class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
@@ -379,6 +389,7 @@ class AutomadBlockSection {
 			wrapper = this.modalWrapper;
 
 		inputs.card = wrapper.querySelector('#am-section-card');
+		inputs.overflowHidden = wrapper.querySelector('#am-section-overflow');
 		inputs.shadow = wrapper.querySelector('#am-section-shadow');
 		inputs.matchRowHeight = wrapper.querySelector('#am-section-match-row-height');
 		inputs.color = wrapper.querySelector('.am-section-color');
@@ -397,6 +408,7 @@ class AutomadBlockSection {
 		
 		this.data.style = {
 			card: inputs.card.checked,
+			overflowHidden: inputs.overflowHidden.checked,
 			shadow: inputs.shadow.checked,
 			matchRowHeight: inputs.matchRowHeight.checked,
 			color: inputs.color.value,

@@ -450,6 +450,10 @@ editor_section_card: Optimize Content for Cards
 
 -
 
+editor_section_overflow_hidden: Overflow hidden 
+
+-
+
 editor_section_padding_top: Spacing upwards
 
 -
