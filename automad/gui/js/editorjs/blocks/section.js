@@ -106,8 +106,9 @@ class AutomadBlockSection {
 		this.data = {
 			content: data.content || {},
 			style: data.style || {},
-			justify: data.justify || 'flex-start',
-			gap: data.gap !== undefined ? data.gap : true
+			justify: data.justify || 'start',
+			gap: data.gap !== undefined ? data.gap : '',
+			minBlockWidth: data.minBlockWidth !== undefined ? data.minBlockWidth : ''
 		};
 
 		this.container = document.querySelector('body');
@@ -174,18 +175,18 @@ class AutomadBlockSection {
 			}
 		];
 
-		this.gapSettings = [
-			{
-				value: true,
-				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M17,0h-5c-0.6,0-1,0.4-1,1v0c0,0.6,0.4,1,1,1h5c0.6,0,1,0.4,1,1v14c0,0.6-0.4,1-1,1h-5c-0.6,0-1,0.4-1,1v0c0,0.6,0.4,1,1,1 h5c1.7,0,3-1.3,3-3V3C20,1.3,18.7,0,17,0z"/><path d="M8,18H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h5 c0.6,0,1-0.4,1-1v0C9,18.4,8.6,18,8,18z"/><rect x="7" y="1" width="2" height="18"/><rect x="11" y="1" width="2" height="18"/></svg>',
-				title: t('section_gap')
+		this.sizeSettings = {
+			'gap': {
+				name: 'gap',
+				title: t('section_gap'),
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><rect x="8.5" y="1" width="3" height="18"/><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18.5,16c0,1.4-1.1,2.5-2.5,2.5H4 c-1.4,0-2.5-1.1-2.5-2.5V4c0-1.4,1.1-2.5,2.5-2.5h12c1.4,0,2.5,1.1,2.5,2.5V16z"/></svg>',
 			},
-			{
-				value: false,
-				icon: '<svg width="16px" height="16px" viewBox="0 0 20 20"><path d="M17,0H3C1.3,0,0,1.3,0,3v14c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3V3C20,1.3,18.7,0,17,0z M18,17c0,0.6-0.4,1-1,1H3 c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V17z"/><rect x="9" y="2" width="2" height="16"/></svg>',
-				title: t('section_no_gap')
+			'minBlockWidth': {
+				name: 'minBlockWidth',
+				title: t('section_min_block_width'),
+				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18.5,16c0,1.4-1.1,2.5-2.5,2.5H4 c-1.4,0-2.5-1.1-2.5-2.5V4c0-1.4,1.1-2.5,2.5-2.5h12c1.4,0,2.5,1.1,2.5,2.5V16z"/><rect x="4" y="9" width="12" height="2"/><path d="M4.9,6.9L2.1,9.6C2,9.8,2,10.2,2.1,10.4l2.8,2.8c0.3,0.3,0.9,0.1,0.9-0.4V7.2C5.8,6.8,5.3,6.5,4.9,6.9z"/><path d="M15.1,6.9l2.8,2.8c0.2,0.2,0.2,0.5,0,0.7l-2.8,2.8c-0.3,0.3-0.9,0.1-0.9-0.4V7.2C14.2,6.8,14.7,6.5,15.1,6.9z"/></svg>'
 			}
-		];
+		};
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
 
@@ -516,8 +517,9 @@ class AutomadBlockSection {
 		const flexSettings = this.modalWrapper.querySelector(`.${AutomadBlockSection.cls.flexSettings}`);
 
 		flexSettings.appendChild(this.renderFlexSettings(this.justifySettings, 'justify'));
-		flexSettings.appendChild(this.renderFlexSettings(this.gapSettings, 'gap'));
-
+		flexSettings.appendChild(this.renderSizeSettings(this.sizeSettings.gap));
+		flexSettings.appendChild(this.renderSizeSettings(this.sizeSettings.minBlockWidth));
+		
 		this.initToggles();
 		this.applyDialogSize();
 
@@ -673,6 +675,31 @@ class AutomadBlockSection {
 			);
 
 		}
+
+	}
+
+	renderSizeSettings(option) {
+
+		const create = Automad.util.create,
+			  wrapper = create.element('div', []),
+			  inner = create.element('span', ['am-section-flex-size-settings']);
+
+		inner.innerHTML = option.icon;
+		inner.appendChild(create.numberUnit('', this.data[option.name]));
+		wrapper.appendChild(inner);
+
+		const input = inner.querySelector('.number'),
+			  unit = inner.querySelector('.unit');
+
+		[input, unit].forEach((field) => {
+			field.addEventListener('input', () => {
+				this.data[option.name] = Automad.util.getNumberUnitAsString(input, unit);
+			});
+		});
+
+		this.api.tooltip.onHover(inner, option.title, { placement: 'top' });
+
+		return wrapper;
 
 	}
 

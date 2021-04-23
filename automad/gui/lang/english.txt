@@ -438,7 +438,7 @@ editor_section_gap: Gap between blocks
 
 -
 
-editor_section_no_gap: No gap between blocks
+editor_section_min_block_width: Minimum block width 
 
 -
 

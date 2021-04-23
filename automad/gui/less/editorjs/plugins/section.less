@@ -177,11 +177,14 @@
 
 		min-height: 5rem;
 
+		& .codex-editor {
+			height: 100%;
+		}
+
 		& .codex-editor__redactor {
 
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: stretch;
 			height: 100%;
 			min-height: 5rem;
 
@@ -229,7 +232,7 @@
 
 		}
 
-		&.justify-flex-start > div > .codex-editor__redactor {
+		&.justify-start > div > .codex-editor__redactor {
 			justify-content: flex-start;
 		}
 
@@ -237,7 +240,7 @@
 			justify-content: center;
 		}
 
-		&.justify-flex-end > div > .codex-editor__redactor {
+		&.justify-end > div > .codex-editor__redactor {
 			justify-content: flex-end;
 		}
 
@@ -264,14 +267,18 @@
 			& > div {
 				
 				display: flex;
-				padding: 0.5rem 0.6rem;
+				align-items: center;
+				padding: 0.4rem 0.6rem;
 				margin: -@am-border-width 0 0 -@am-border-width;
 				overflow: hidden;
 
 				& + * {
-					flex-grow: 1;
 					border-top: @am-hairline;
 					border-left: @am-hairline;
+				}
+
+				&:last-child {
+					flex-grow: 1;
 				}
 
 			}
@@ -282,6 +289,21 @@
 				
 				& + * {
 					margin-left: 2px;
+				}
+
+			}
+
+			& .am-section-flex-size-settings {
+
+				display: flex;
+				align-items: center;
+
+				& svg {
+					margin: 0 1rem 0 0.5rem;
+				}
+
+				& .am-form-input-group {
+					width: 8rem;
 				}
 
 			}

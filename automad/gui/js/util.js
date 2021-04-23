@@ -98,12 +98,14 @@
 					  wrapper = create.element('div', ['am-form-input-group']),
 					  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
 
-				var number = value.replace(/([\d\.]+)[^\d\.]*/g, '$1'),
+				value = String(value);
+
+				var number = value.replace(/([^\d\.]+)/g, ''),
 					unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
 
 				wrapper.innerHTML = `
 					${create.editable(
-						['cdx-input', `${clsPrefix}number`],
+						['cdx-input', 'uk-text-right', `${clsPrefix}number`],
 						'',
 						number
 					).outerHTML}
