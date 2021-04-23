@@ -29,7 +29,7 @@
 	<@~ if not @{ checkboxHideInMenu } ~@>
 		<ul class="uk-nav uk-nav-side">
 			<li<@ if @{ :current } @> class="uk-active"<@ end @>>
-				<a href="@{ url }">@{ title }</a>
+				<a href="@{ url }"><@ ../elements/icon_title.php @></a>
 			</li>
 		</ul>
 	<@~ end @>

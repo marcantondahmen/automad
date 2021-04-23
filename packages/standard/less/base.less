@@ -19,7 +19,7 @@
 
 @border-width: 						var(--border-width);
 @border:							@border-width solid @border-color;
-@radius: 							0;
+@radius: 							var(--button-radius);
 
 @font-large-breakpoint:				1600px;
 @font-large-factor:					1.125;
@@ -61,7 +61,7 @@
 @base-quote-font-style:				italic;
 
 @base-hr-margin-vertical:			@base-margin-vertical;
-@base-hr-border:					@base-body-color;
+@base-hr-border:					var(--color-page-border);
 @base-hr-border-width:				@border-width;
 
 
@@ -100,8 +100,14 @@ body {
 }
 
 h1 {
+	
 	margin-bottom: @utility-margin;
 	font-weight: var(--h1-font-weight);
+
+	&:first-child {
+		margin-top: -0.3rem !important;
+	}
+
 }
 
 h2 {
@@ -126,8 +132,7 @@ h6 {
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
 	letter-spacing: -0.016em;
 }
 

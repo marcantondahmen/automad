@@ -2,15 +2,17 @@
 <@~ if not @{ checkboxHidePrevNextNav } @>
 	<@~ newPagelist { type: 'siblings' } @>
 	<@~ if @{ :pagelistCount } @>
-		<nav class="prev-next">
+		<nav class="am-block prev-next">
 			<@ with prev ~@>
-				<a href="@{ url }" class="nav-link prev" title="@{ title }" data-uk-tooltip="{pos:'right',animation:true}">
-					⟵
+				<a href="@{ url }" class="nav-link prev">
+					<span class="arrow">⟵</span>
+					<span class="uk-hidden-small uk-text-truncate">@{ title }</span>
 				</a>
 			<@~ end @>
 			<@~ with next ~@>
-				<a href="@{ url }" class="nav-link next" title="@{ title }" data-uk-tooltip="{pos:'left',animation:true}">
-					⟶
+				<a href="@{ url }" class="nav-link next">
+					<span class="uk-hidden-small uk-text-truncate">@{ title }</span>
+					<span class="arrow">⟶</span>
 				</a>
 			<@~ end @>
 		</nav>

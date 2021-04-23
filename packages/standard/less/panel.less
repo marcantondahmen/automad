@@ -53,19 +53,24 @@
 
 	}
 
-	& .uk-panel-title a {
+	& .uk-panel-title {
 
-		letter-spacing: -0.016em;
-		color: @panel-box-color;
-		opacity: 1;
-		.transition(opacity 0.2s;);
+		margin-top: -0.2em;
 
-		&:hover {
+		& a {
+
 			color: @panel-box-color;
-			opacity: 0.7;
+			opacity: 1;
 			.transition(opacity 0.2s;);
+
+			&:hover {
+				color: @panel-box-color;
+				opacity: 0.7;
+				.transition(opacity 0.2s;);
+			}
+			
 		}
-		
+
 	}
 
 	&.small {

@@ -8,11 +8,12 @@
  */
 
 
-@navbar-push: 					@navbar-nav-height + 2rem;
-@navbar-push-large:				@navbar-nav-height-large + 2rem;
+@navbar-push: 					@navbar-nav-height;
+@navbar-push-large:				@navbar-nav-height-large;
 
-@navbar-background:            	@base-body-background;
-@navbar-color:                 	@base-body-color;
+@navbar-background:            	var(--color-navbar-bg);
+@navbar-color:                 	var(--color-navbar-text);
+@navbar-border:					var(--color-navbar-border);
 
 @navbar-brand-color:			@navbar-color;
 @navbar-brand-hover-color:		@navbar-nav-hover-color;
@@ -26,11 +27,11 @@
 
 @navbar-nav-color:             	@navbar-color;
 @navbar-nav-hover-background:  	transparent;
-@navbar-nav-hover-color:       	@text-color;
+@navbar-nav-hover-color:       	@navbar-color;
 @navbar-nav-onclick-background:	transparent;
-@navbar-nav-onclick-color:     	@text-color;
+@navbar-nav-onclick-color:     	@navbar-color;
 @navbar-nav-active-background: 	transparent;
-@navbar-nav-active-color:      	@text-color;
+@navbar-nav-active-color:      	@navbar-color;
 
 @navbar-brand-font-size: 		1.25rem;
 
@@ -93,19 +94,7 @@
 			}
 
 		}
-		/*
-		body:not(&-transparent) &-push {
-			
-			padding-top: @navbar-nav-height !important;
-			
-			@media (min-width: @breakpoint-large) {
-				padding-top: @navbar-nav-height-large !important;
-			}
-			
-		}*/
-
-
-
+		
 		&-search-button {
 
 			position: relative;
@@ -145,7 +134,7 @@
 			}
 			
 			& span {
-				background-color: @base-body-color;
+				background-color: @navbar-color;
 				display: block;
 				height: 2px;
 				left: ~"calc(50% - (@{navbar-toggle-width} / 2))";

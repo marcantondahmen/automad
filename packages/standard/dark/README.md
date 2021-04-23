@@ -41,6 +41,9 @@ While there is a light and a dark theme serving as presets, all the colors used 
 | Color Page Text | A custom override text color for a page |
 | Color Page Background | A custom override background color for a page |
 | Color Page Border | A custom override border color for a page |
+| Color Navbar Text | A custom override text color for a navbar |
+| Color Navbar Background | A custom override background color for a navbar |
+| Color Navbar Border | A custom override border color for a navbar |
 | Color Card Text | A custom override text color for cards |
 | Color Card Background | A custom override background color for cards |
 | Color Card Border | A custom override border color for cards |

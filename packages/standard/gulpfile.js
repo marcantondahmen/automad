@@ -68,8 +68,7 @@ gulp.task('standard-js', function() {
 				'../../lib/vendor/uikit/uikit/src/js/components/lightbox.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/pagination.js',
 				'../../lib/vendor/uikit/uikit/src/js/components/slider.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js',
-				'../../lib/vendor/uikit/uikit/src/js/components/tooltip.js'
+				'../../lib/vendor/uikit/uikit/src/js/components/slideshow.js'
 			])
 			.pipe(uglify(uglifyOptions))
 			.pipe(concat('uikit.js', { newLine: '\r\n\r\n' } )) // Doesn't get saved to disk.

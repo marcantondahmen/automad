@@ -8,14 +8,14 @@
  */
 
 
-@modal-background:			@base-body-background;
+@modal-background:			@navbar-background;
 @modal-dialog-background:	transparent;
-@modal-caption-color: 		@base-body-color;
 
 
 .hook-modal-dialog() {
 	
 	&&-blank {
+
 		min-height: 100%;
 		-webkit-transform: translateX(-5%);
 	    	    transform: translateX(-5%);
@@ -24,6 +24,26 @@
 		@media (min-width: @breakpoint-medium) {
 			-webkit-transform: translateY(-5%);
 		    	    transform: translateY(-5%);
+		}
+
+		& input {
+
+			color: @navbar-color;
+			border-color: @navbar-border;
+
+			&:focus {
+				color: @navbar-color;
+				border-color: @navbar-color;
+			}
+
+			&::-webkit-input-placeholder { 
+				color: @navbar-color;
+			}
+
+			&::-moz-placeholder { 
+				color: @navbar-color;
+			}
+
 		}
 		
 	}

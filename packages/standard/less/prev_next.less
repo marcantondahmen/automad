@@ -10,34 +10,41 @@
 
 .prev-next {
 
-	position: relative;
-	top: 0;
-	padding: 2rem 0 1.75rem 0;
-	font-size: 1.6rem;
-	line-height: 1;
-
-	@media (min-width: @breakpoint-large) {
-		position: absolute;
-		left: 0;
-		right: 0;
-		width: auto;
-		max-width: none !important;
-	}
-
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 1rem;
+	
 	& a {
 
-		position: absolute;
-		top: 0;
-		padding: 0.4rem 0;
+		display: flex;
+		flex-basis: 50%;
+		max-width: 50%;
+		padding: 0.5rem 0;
+		opacity: 1;
+		font-size: 1.15rem;
 
-		&.prev {
-			left: 0;
+		&:hover {
+			opacity: 0.5;
 		}
 
-		&.next {
-			right: 0;
+		& span + span {
+			margin-left: 0.7rem;
 		}
 
+	}
+
+	& .prev {
+		padding-right: 1rem;
+	}
+
+	& .next {
+		justify-content: flex-end;
+		padding-left: 1rem;
+	}
+	
+	& .arrow {
+		font-size: 1.35rem;
+		line-height: 1.35;
 	}
 
 }
