@@ -79,13 +79,6 @@ am-section {
 
 		}
 
-		& table,
-		& tr,
-		& th,
-		& td {
-			border-color: var(--am-section-color) !important;
-		}
-
 	}
 
 	& h1,
@@ -97,8 +90,12 @@ am-section {
 		color: inherit;
 	}
 
+	& table,
+	& tr,
+	& th,
+	& td,
 	& hr {
-		border-color: var(--am-section-border-color, #F0F0F0);
+		border-color: var(--am-section-border-color, #F0F0F0) !important;
 	}
 
 }
