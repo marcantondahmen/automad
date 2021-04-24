@@ -402,7 +402,7 @@ editor_section_gap: Јаз између блокова
 
 -
 
-editor_section_no_gap: Нема јаз између блокова
+editor_section_min_block_width: Минимална ширина блока
 
 -
 

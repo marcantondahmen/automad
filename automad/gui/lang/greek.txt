@@ -402,7 +402,7 @@ editor_section_gap: ΧΑΡ μεταξύ μπλοκ
 
 -
 
-editor_section_no_gap: Δεν υπάρχει κενό μεταξύ μπλοκ
+editor_section_min_block_width: Ελάχιστο πλάτος μπλοκ
 
 -
 

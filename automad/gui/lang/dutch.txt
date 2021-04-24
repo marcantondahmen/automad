@@ -402,7 +402,7 @@ editor_section_gap: Kloof tussen blokken
 
 -
 
-editor_section_no_gap: Geen opening tussen blokken
+editor_section_min_block_width: Minimale blokbreedte
 
 -
 

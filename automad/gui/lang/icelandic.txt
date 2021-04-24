@@ -402,7 +402,7 @@ editor_section_gap: Bilið milli blokkir
 
 -
 
-editor_section_no_gap: Engin bil milli blokkir
+editor_section_min_block_width: Lágmarks blokkbreidd
 
 -
 

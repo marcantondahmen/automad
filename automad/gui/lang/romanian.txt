@@ -402,7 +402,7 @@ editor_section_gap: Decalaj între blocuri
 
 -
 
-editor_section_no_gap: Nici un decalaj între blocuri
+editor_section_min_block_width: Lățimea minimă a blocului
 
 -
 

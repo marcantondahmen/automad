@@ -402,7 +402,7 @@ editor_section_gap: Gap mellem blokke
 
 -
 
-editor_section_no_gap: Ingen gap mellem blokke
+editor_section_min_block_width: Minimum blokbredde
 
 -
 

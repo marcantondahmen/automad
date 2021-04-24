@@ -402,7 +402,7 @@ editor_section_gap: Lohkojen välinen ero
 
 -
 
-editor_section_no_gap: Ei lohkojen välistä aukkoa
+editor_section_min_block_width: Minimi lohkon leveys
 
 -
 

@@ -402,7 +402,7 @@ editor_section_gap: Tarp blokų
 
 -
 
-editor_section_no_gap: Nėra tarpo tarp blokų
+editor_section_min_block_width: Minimalus bloko plotis
 
 -
 

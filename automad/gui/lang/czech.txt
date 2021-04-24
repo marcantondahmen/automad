@@ -402,7 +402,7 @@ editor_section_gap: Mezi bloky
 
 -
 
-editor_section_no_gap: Žádná mezera mezi bloky
+editor_section_min_block_width: Minimální šířka bloku
 
 -
 

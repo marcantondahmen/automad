@@ -402,7 +402,7 @@ editor_section_gap: Vahe plokkide vahel
 
 -
 
-editor_section_no_gap: Plokkide vahel ei ole vahe
+editor_section_min_block_width: Minimaalne ploki laius
 
 -
 

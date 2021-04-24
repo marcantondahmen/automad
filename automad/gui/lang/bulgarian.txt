@@ -402,7 +402,7 @@ editor_section_gap: Разликата между блокове
 
 -
 
-editor_section_no_gap: Няма празнина между блоковете
+editor_section_min_block_width: Минимална ширина на блока
 
 -
 

@@ -402,7 +402,7 @@ editor_section_gap: Bearna idir bloic
 
 -
 
-editor_section_no_gap: Gan bearna idir bloic
+editor_section_min_block_width: Leithead bloc íosta
 
 -
 

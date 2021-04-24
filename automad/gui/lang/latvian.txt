@@ -402,7 +402,7 @@ editor_section_gap: Plaisa starp blokiem
 
 -
 
-editor_section_no_gap: Nav starp blokiem
+editor_section_min_block_width: Minimālais bloka platums
 
 -
 
