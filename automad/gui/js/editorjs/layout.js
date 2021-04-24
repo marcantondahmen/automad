@@ -346,6 +346,14 @@ class AutomadLayout {
 					}
 				];
 
+			if (allowStretching) {
+				data.stretched = saved.stretched || false;
+			}
+
+			if (flex) {
+				data.widthFraction = saved.widthFraction || false;
+			}
+
 			const resetButton = new AutomadLayoutResetButton(api, data, wrapper, Object.assign(resetOption, {
 				icon: resetOption.icon,
 				buttonsClearRegex: /(widthFraction|stretched)/g,
@@ -355,8 +363,6 @@ class AutomadLayout {
 			mainWrapper.appendChild(resetButton.get());
 
 			if (allowStretching) {
-
-				data.stretched = saved.stretched || false;
 
 				const stretchButton = new AutomadLayoutButton(api, data, wrapper, Object.assign(stretchOption, {
 					icon: stretchOption.icon,
@@ -385,8 +391,6 @@ class AutomadLayout {
 			wrapper.appendChild(mainWrapper);
 
 			if (flex) {
-
-				data.widthFraction = saved.widthFraction || false;
 
 				widthFractionOptions.forEach(function (option) {
 

@@ -143,7 +143,7 @@
 
 								// Purge layout data.
 								data.blocks.forEach(block => {
-									['stretched', 'width'].forEach(key => {
+									['stretched', 'widthFraction'].forEach(key => {
 										if (!block.data[key]) {
 											delete block.data[key];
 										}
