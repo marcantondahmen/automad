@@ -551,6 +551,7 @@ class AutomadBlockSection {
 		this.modalEditor = Automad.blockEditor.createEditor({
 			holder: this.modalEditorId,
 			input: this.input,
+			autofocus: true,
 			flex: true,
 			onReady: () => {
 

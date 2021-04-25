@@ -68,6 +68,7 @@
 			options = Object.assign({
 				holder: false,
 				input: false,
+				autofocus: false,
 				readOnly: false,
 				placeholder: '',
 				flex: false,
@@ -98,7 +99,7 @@
 				tools: AutomadEditorConfig.tools(options.readOnly, options.flex),
 				readOnly: options.readOnly,
 				minHeight: false,
-				autofocus: false,
+				autofocus: options.autofocus,
 				placeholder: options.placeholder,
 				i18n: {
 					messages: {
