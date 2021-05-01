@@ -1,0 +1,657 @@
+title: Sections
+
+-
+
++hero: {
+  "time": 1619171672563,
+  "blocks": [
+    {
+      "type": "section",
+      "data": {
+        "content": {
+          "time": 1618997040428,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Sections are blocks that can contain other blocks. They can be styled, have background images and allow for creating complex layouts based on flexbox. And they can be nested! 👏&nbsp;</am-lineheight></am-fontsize>",
+                "large": false,
+                "alignment": "left",
+                "widthFraction": false
+              }
+            }
+          ],
+          "version": "2.20.2"
+        },
+        "style": {
+          "color": "#F4F5F7",
+          "backgroundColor": "#1F2022",
+          "paddingTop": "7rem",
+          "paddingBottom": "5rem"
+        },
+        "justify": "start",
+        "gap": "",
+        "minBlockWidth": "",
+        "stretched": true
+      }
+    }
+  ],
+  "version": "2.20.2"
+}
+
+-
+
++main: {
+  "time": 1619883524859,
+  "blocks": [
+    {
+      "type": "header",
+      "data": {
+        "text": "Layout",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Using sections, you can create beautiful and complex layouts. They can contain any kind of block and even other sections.",
+        "large": true,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "section",
+      "data": {
+        "content": {
+          "time": 1619162442267,
+          "blocks": [
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1618997746694,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "data": {
+                        "text": "First column, one row.",
+                        "large": false,
+                        "alignment": "left",
+                        "widthFraction": false
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "card": true,
+                  "matchRowHeight": true,
+                  "backgroundColor": "#f4f5f7",
+                  "borderRadius": "1rem",
+                  "paddingBottom": "20rem"
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/3"
+              }
+            },
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1619162308890,
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1619014137261,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "data": {
+                                "text": "Second column, first row ...",
+                                "large": false,
+                                "alignment": "left",
+                                "widthFraction": false
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "card": true,
+                          "matchRowHeight": true,
+                          "borderRadius": "1rem",
+                          "backgroundImage": "https://source.unsplash.com/GSIzNfR9GLE/700x700",
+                          "paddingBottom": "32rem"
+                        },
+                        "justify": "start",
+                        "gap": "",
+                        "minBlockWidth": "",
+                        "widthFraction": "1/1"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1618997760435,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "data": {
+                                "text": "... and a second row.",
+                                "large": false,
+                                "alignment": "left",
+                                "widthFraction": false
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "card": true,
+                          "matchRowHeight": true,
+                          "backgroundColor": "#f4f5f7",
+                          "borderRadius": "1rem",
+                          "paddingBottom": "4rem"
+                        },
+                        "justify": "start",
+                        "gap": "",
+                        "minBlockWidth": "",
+                        "widthFraction": "1/1"
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "matchRowHeight": true
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/3"
+              }
+            },
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1619111404165,
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1618997907894,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "data": {
+                                "text": "Third column, first row ...",
+                                "large": false,
+                                "alignment": "left",
+                                "widthFraction": false
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "card": true,
+                          "matchRowHeight": true,
+                          "backgroundColor": "#f4f5f7",
+                          "borderRadius": "1rem",
+                          "paddingBottom": "4rem"
+                        },
+                        "justify": "start",
+                        "gap": "",
+                        "widthFraction": "1/1"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1618997943309,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "data": {
+                                "text": "... a second ...",
+                                "large": false,
+                                "alignment": "left",
+                                "widthFraction": false
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "card": true,
+                          "matchRowHeight": true,
+                          "backgroundColor": "#f4f5f7",
+                          "borderRadius": "1rem",
+                          "paddingBottom": "4rem"
+                        },
+                        "justify": "start",
+                        "gap": "",
+                        "widthFraction": "1/1"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1618997933916,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "data": {
+                                "text": "... and a third row.",
+                                "large": false,
+                                "alignment": "left",
+                                "widthFraction": false
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "card": true,
+                          "matchRowHeight": true,
+                          "backgroundColor": "#f4f5f7",
+                          "borderRadius": "1rem",
+                          "paddingBottom": "8rem"
+                        },
+                        "justify": "start",
+                        "gap": "",
+                        "widthFraction": "1/1"
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "matchRowHeight": true
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/3"
+              }
+            }
+          ],
+          "version": "2.20.2"
+        },
+        "style": {
+          "paddingTop": "2rem",
+          "paddingBottom": "2rem"
+        },
+        "justify": "fill-row",
+        "gap": "",
+        "minBlockWidth": "24rem",
+        "stretched": true
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "You are in full control over flex properties such as the minimum block width, the gap size and the alignment of items.&nbsp;",
+        "large": true,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "section",
+      "data": {
+        "content": {
+          "time": 1619187143207,
+          "blocks": [
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1618999584790,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "data": {
+                        "text": "This section has ...",
+                        "large": false,
+                        "alignment": "left",
+                        "widthFraction": false
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "card": true,
+                  "matchRowHeight": true,
+                  "backgroundColor": "#F4F5F7",
+                  "backgroundImage": "https://source.unsplash.com/VYCDTBAP8P4/1000x1000",
+                  "paddingBottom": "20rem"
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/2"
+              }
+            },
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1619160355880,
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1618999558657,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "data": {
+                                "text": "... no vertical ...",
+                                "large": false,
+                                "alignment": "left",
+                                "widthFraction": false
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "card": true,
+                          "matchRowHeight": true,
+                          "backgroundColor": "#F4F5F7",
+                          "paddingBottom": "6rem"
+                        },
+                        "justify": "start",
+                        "gap": "",
+                        "minBlockWidth": "",
+                        "widthFraction": "1/1"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "data": {
+                        "content": {
+                          "time": 1619160236693,
+                          "blocks": [
+                            {
+                              "type": "section",
+                              "data": {
+                                "content": {
+                                  "time": 1619014563340,
+                                  "blocks": [
+                                    {
+                                      "type": "paragraph",
+                                      "data": {
+                                        "text": "... and ...",
+                                        "large": false,
+                                        "alignment": "left",
+                                        "widthFraction": false
+                                      }
+                                    }
+                                  ],
+                                  "version": "2.20.2"
+                                },
+                                "style": {
+                                  "card": true,
+                                  "matchRowHeight": true,
+                                  "backgroundColor": "#F4F5F7",
+                                  "paddingBottom": "6rem"
+                                },
+                                "justify": "fill-row",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                              }
+                            },
+                            {
+                              "type": "section",
+                              "data": {
+                                "content": {
+                                  "time": 1619014570225,
+                                  "blocks": [
+                                    {
+                                      "type": "paragraph",
+                                      "data": {
+                                        "text": "... horizontal gaps.",
+                                        "large": false,
+                                        "alignment": "left",
+                                        "widthFraction": false
+                                      }
+                                    }
+                                  ],
+                                  "version": "2.20.2"
+                                },
+                                "style": {
+                                  "card": true,
+                                  "matchRowHeight": true,
+                                  "backgroundColor": "#F4F5F7"
+                                },
+                                "justify": "fill-row",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                              }
+                            }
+                          ],
+                          "version": "2.20.2"
+                        },
+                        "style": {
+                          "matchRowHeight": true
+                        },
+                        "justify": "fill-row",
+                        "gap": "",
+                        "minBlockWidth": "2rem",
+                        "widthFraction": "1/1"
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "matchRowHeight": true
+                },
+                "justify": "fill-row",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/2"
+              }
+            }
+          ],
+          "version": "2.20.2"
+        },
+        "style": {
+          "overflowHidden": true,
+          "backgroundColor": "#e2e3e4",
+          "borderColor": "#e2e3e4",
+          "borderWidth": "1px",
+          "borderRadius": "1rem"
+        },
+        "justify": "fill-row",
+        "gap": "1px",
+        "minBlockWidth": ""
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "text": "Cards",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Cards are basically not more than styled sections. They are a bunch of blocks combined in one section that maybe has a border, a shadow, padding and even rounded corners.",
+        "large": true,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "section",
+      "data": {
+        "content": {
+          "time": 1619175712834,
+          "blocks": [
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1619173675247,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "data": {
+                        "text": "<am-fontsize style=\"font-size: 100%;\">Super card<br>with a slideshow<br></am-fontsize>",
+                        "large": true,
+                        "alignment": "left",
+                        "widthFraction": false
+                      }
+                    },
+                    {
+                      "type": "slider",
+                      "data": {
+                        "globs": "https://source.unsplash.com/GSIzNfR9GLE/700x700, https://source.unsplash.com/VYCDTBAP8P4/700x700",
+                        "width": 700,
+                        "height": 700,
+                        "dots": true,
+                        "autoplay": true,
+                        "stretched": true,
+                        "widthFraction": false
+                      }
+                    },
+                    {
+                      "type": "paragraph",
+                      "data": {
+                        "text": "Cards can contain any kind of content. You can also stretch images or slideshow over the entire card width.",
+                        "large": false,
+                        "alignment": "left",
+                        "widthFraction": false
+                      }
+                    },
+                    {
+                      "type": "buttons",
+                      "data": {
+                        "primaryText": "Button",
+                        "primaryLink": "#",
+                        "primaryStyle": {},
+                        "secondaryText": "",
+                        "secondaryLink": "",
+                        "secondaryStyle": {},
+                        "alignment": "left",
+                        "widthFraction": false
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "card": true,
+                  "overflowHidden": true,
+                  "shadow": true,
+                  "borderRadius": "1rem"
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/2"
+              }
+            },
+            {
+              "type": "section",
+              "data": {
+                "content": {
+                  "time": 1619175712373,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "data": {
+                        "text": "Card with a <br>background image",
+                        "large": true,
+                        "alignment": "left",
+                        "widthFraction": false
+                      }
+                    }
+                  ],
+                  "version": "2.20.2"
+                },
+                "style": {
+                  "card": true,
+                  "overflowHidden": true,
+                  "matchRowHeight": true,
+                  "borderColor": "#f4f5f7",
+                  "borderWidth": "2px",
+                  "borderRadius": "1rem",
+                  "backgroundImage": "https://source.unsplash.com/VYCDTBAP8P4/700x1200",
+                  "paddingBottom": "15rem"
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "widthFraction": "1/2"
+              }
+            }
+          ],
+          "version": "2.20.2"
+        },
+        "style": {},
+        "justify": "fill-row",
+        "gap": "",
+        "minBlockWidth": "20rem"
+      }
+    }
+  ],
+  "version": "2.20.2"
+}
+
+-
+
+colorPageText: #1F2022
+
+-
+
+colorCardText: #1F2022
+
+-
+
+colorCardBackground: #F4F5F7
+
+-
+
+colorCardBorder: #F4F5F7
+
+-
+
+colorCodeBackground: #F4F5F7
+
+-
+
+colorNavbarText: #F4F5F7
+
+-
+
+colorNavbarBackground: #1F2022
+
+-
+
+colorNavbarBorder: #404347
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+checkboxShowInNavbar: 1

@@ -2,6 +2,10 @@ title: Automad
 
 -
 
+hidden: on
+
+-
+
 url: https://automad.org
 
 -
@@ -35,6 +39,10 @@ checkboxShowInFooter: 1
 -
 
 checkboxShowInNavbar: 1
+
+-
+
+iconNav: ♡
 
 -
 
