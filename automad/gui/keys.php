@@ -129,6 +129,10 @@ class Keys {
 	
 	public static function inCurrentTemplate($Page, $Theme) {
 		
+		if (empty($Theme)) {
+			return array();
+		} 
+
 		// Don't use $Page->getTemplate() to prevent exit on errors.
 		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
 		$keys = self::inTemplate($file);
@@ -149,7 +153,7 @@ class Keys {
 		
 		$keys = array();
 	
-		if (file_exists($file)) {
+		if (is_readable($file)) {
 			
 			// Find all variable keys in the template file.
 			$content = file_get_contents($file);
@@ -220,6 +224,10 @@ class Keys {
 
 	private static function cleanUp($keys, $mask = array()) {
 	
+		if (empty($keys)) {
+			return array();
+		}
+
 		if (!empty($mask)) {
 			$keys = array_filter($keys, function($key) use ($mask) {
 				return !in_array($key, $mask);
