@@ -36,6 +36,7 @@
 
 
 namespace Automad\Blocks;
+use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
