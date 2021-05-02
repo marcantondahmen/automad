@@ -8,14 +8,15 @@
 # This script handles the release process for new Automad versions
 # by doing the following:
 #
-#	1.	Check whether the current branch is develop
-#	2.	Run tests
-#	3.	Update version numbers in automad/version.php and all related JSON files
-#	4.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
-#	5.	Commit changed files
-#	6.	Merge branch develop into master
-#	7.	Create tag for release
-#	8. 	Push changes to origin
+#	1.	Kill all running watch tasks
+#	2.	Check whether the current branch is develop
+#	3.	Run tests
+#	4.	Update version numbers in automad/version.php and all related JSON files
+#	5.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
+#	6.	Commit changed files
+#	7.	Merge branch develop into master
+#	8.	Create tag for release
+#	9. 	Push changes to origin
 
 
 # Test branch.
@@ -24,6 +25,10 @@ then
 	echo "Please checkout branch develop to create a release!"
 	exit 0
 fi
+
+
+# Kill all watch tasks.
+ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
@@ -127,7 +132,7 @@ git add -A && git commit -m "Prepared release $tag"
 echo
 
 
-# Update to branch default.
+# Check out master branch.
 echo "Checking out branch master ..."
 git checkout master
 echo
@@ -145,7 +150,7 @@ git tag -a -m "Release $tag" $tag
 echo
 
 
-# Update back to develop.
+# Check out back develop.
 echo "Checking out branch develop ..."
 git checkout develop
 echo
