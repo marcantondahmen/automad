@@ -3,12 +3,12 @@ title: Home
 -
 
 +main: {
-  "time": 1619885973594,
+  "time": 1619905102321,
   "blocks": [
     {
       "type": "paragraph",
       "data": {
-        "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Hello, I'm Automad. 👋<br>You've have just finished my installation successfully! Now it's time to publish your stories and projects. <a href=\"/dashboard\">Sign in</a> to the dashboard to get started.</am-lineheight></am-fontsize>",
+        "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Hello, I'm Automad. 👋 <br>You've have just finished my installation successfully! Now it's time to publish your stories and projects. <a href=\"/dashboard\">Sign in</a> to the dashboard to get started.</am-lineheight></am-fontsize>",
         "large": false,
         "alignment": "left"
       }

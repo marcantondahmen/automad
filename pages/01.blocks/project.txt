@@ -41,7 +41,7 @@ title: Blocks
 -
 
 +main: {
-  "time": 1619886037310,
+  "time": 1619905149204,
   "blocks": [
     {
       "type": "header",
@@ -147,7 +147,7 @@ title: Blocks
     {
       "type": "slider",
       "data": {
-        "globs": "https://source.unsplash.com/VYCDTBAP8P4/1200x800, https://source.unsplash.com/GSIzNfR9GLE/1200x800",
+        "globs": "https://source.unsplash.com/VYCDTBAP8P4/1200x800, https://source.unsplash.com/kjERLXaHjXc/1200x800",
         "width": 1200,
         "height": 800,
         "dots": true,
@@ -245,7 +245,7 @@ title: Blocks
       "type": "filelist",
       "data": {
         "file": "Default Template",
-        "glob": "/shared/*.png"
+        "glob": "/shared/*.png, /shared/*.ico"
       }
     },
     {
