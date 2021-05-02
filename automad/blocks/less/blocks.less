@@ -26,8 +26,8 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
@@ -43,8 +43,36 @@
 
 @import 'variables.less';
 @import 'buttons.less';
+@import 'flex.less';
 @import 'gallery.less';
 @import 'mail.less';
 @import 'paragraph.less';
+@import 'section.less';
 @import 'slider.less';
+@import 'stretched.less';
 @import 'toc.less';
+@import 'util.less';
+
+
+.am-block {
+
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: var(--am-block-max-width);
+	margin: 0 auto;
+
+	* + & {
+		margin-top: var(--am-block-margin-top);
+	}
+
+	& > figure {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	& figcaption {
+		padding: 0.75em 0 0 0;
+	}
+
+}

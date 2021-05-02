@@ -50,10 +50,6 @@ btn_duplicate_page: Afrit Síða
 
 -
 
-btn_edit: Breyta
-
--
-
 btn_edit_file_info: Breyttu skráarupplýsingum
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Fáðu fleiri þemu
 -
 
 btn_getting_data: Fær gögn ...
+
+-
+
+btn_help: Hjálp
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Nýlega breyttar síður
 -
 
 dropzone: Dragðu skrár hingað
+
+-
+
+editor_buttons_toolbox: Hnappar
+
+-
+
+editor_button_primary: Helstu hnappur
+
+-
+
+editor_button_secondary: Efri hnappur
+
+-
+
+editor_button_label: Texti
+
+-
+
+editor_button_link: Link.
+
+-
+
+editor_button_color: Texti lit.
+
+-
+
+editor_button_background_color: Bakgrunnur
+
+-
+
+editor_button_border_color: Landamæri lit.
+
+-
+
+editor_button_border_width: Border breidd
+
+-
+
+editor_button_border_radius: Corner Radius.
+
+-
+
+editor_button_padding_horizontal: Lárétt bilun
+
+-
+
+editor_button_padding_vertical: Lóðrétt bilun
+
+-
+
+editor_delimiter_toolbox: Afmörkun
+
+-
+
+editor_filelist_toolbox: Skráalisti
+
+-
+
+editor_filelist_template: Veldu Sniðmát
+
+-
+
+editor_filelist_default: Sjálfgefið sniðmát
+
+-
+
+editor_filelist_files: Glob Patterns (aðskilin með kommu)
+
+-
+
+editor_gallery_toolbox: Myndasafn
+
+-
+
+editor_gallery_files: Glob mynstur eða vefslóðir
+
+-
+
+editor_gallery_width: Breidd myndar í pixlum
+
+-
+
+editor_gallery_clean_bottom: Hreinn botnbrún
+
+-
+
+editor_heading_toolbox: Fyrirsögn
+
+-
+
+editor_image_toolbox: Mynd
+
+-
+
+editor_list_toolbox: Listi
+
+-
+
+editor_list_unordered: Kúlupunktar
+
+-
+
+editor_list_ordered: Númeraður listi
+
+-
+
+editor_mail_toolbox: Netfangsform
+
+-
+
+editor_mail_data_error: Vinsamlegast fyllið út alla reiti!
+
+-
+
+editor_mail_data_success: Tölvupóstur sendur!
+
+-
+
+editor_mail_data_placeholder_address: Netfangið þitt
+
+-
+
+editor_mail_data_placeholder_subject: Efni tölvupósts
+
+-
+
+editor_mail_data_placeholder_message: Aðili skilaboða
+
+-
+
+editor_mail_data_send: Senda póst
+
+-
+
+editor_mail_placeholder_address: Sláðu inn netfangið þitt hér
+
+-
+
+editor_mail_placeholder_error: Sláðu inn valfrjáls villuboð hér
+
+-
+
+editor_mail_placeholder_success: Sláðu inn valfrjáls árangursskilaboð hér
+
+-
+
+editor_mail_label_address: Netfangið þitt
+
+-
+
+editor_mail_label_success: Árangursskilaboð
+
+-
+
+editor_mail_label_error: Villu skilaboð
+
+-
+
+editor_mail_label_placeholder_address: Staðhafi fyrir tölvupóst
+
+-
+
+editor_mail_label_placeholder_subject: Staðhafi fyrir netfang tölvupósts
+
+-
+
+editor_mail_label_placeholder_message: Staður fyrir skilaboðaaðila
+
+-
+
+editor_mail_label_button: Hnappatexti
+
+-
+
+editor_section_toolbox: Layout kafla / kort
+
+-
+
+editor_section_justify_start: Stilltu þætti í átt að vinstri hliðinni
+
+-
+
+editor_section_justify_center: Samræma þætti í átt að miðjunni
+
+-
+
+editor_section_justify_end: Stilltu þætti í átt að hægri hliðinni
+
+-
+
+editor_section_justify_space_between: Rúm milli
+
+-
+
+editor_section_justify_space_evenly: Rúm jafnt
+
+-
+
+editor_section_justify_fill_row: Fylltu röð
+
+-
+
+editor_section_gap: Bilið milli blokkir
+
+-
+
+editor_section_min_block_width: Lágmarks blokkbreidd
+
+-
+
+editor_section_edit: Breyta
+
+-
+
+editor_section_card: Bjartsýni efni fyrir spil
+
+-
+
+editor_section_padding_top: Bili upp á við
+
+-
+
+editor_section_padding_bottom: Bili niður
+
+-
+
+editor_section_color: Texti lit
+
+-
+
+editor_section_background_color: Bakgrunns litur
+
+-
+
+editor_section_background_image: Bakgrunnsmynd
+
+-
+
+editor_section_background_blend_mode: Bakgrunnur blanda ham
+
+-
+
+editor_section_border_color: Landamæri lit
+
+-
+
+editor_section_border_width: Border breidd
+
+-
+
+editor_section_border_radius: Corner Radius
+
+-
+
+editor_section_shadow: Drop Shadow
+
+-
+
+editor_section_match_row_height: Fullur röð hæð
+
+-
+
+editor_pagelist_toolbox: Síðu Listi
+
+-
+
+editor_pagelist_template: Veldu Sniðmát
+
+-
+
+editor_pagelist_default: Sjálfgefið sniðmát
+
+-
+
+editor_pagelist_url_regex: Vefslóð Regex sía
+
+-
+
+editor_pagelist_type: Tegund
+
+-
+
+editor_pagelist_filter_tag: Sía eftir merki
+
+-
+
+editor_pagelist_filter_template: Sía eftir sniðmát
+
+-
+
+editor_pagelist_limit_offset: Limit og Offset
+
+-
+
+editor_pagelist_sort_var: Raða eftir breytu
+
+-
+
+editor_pagelist_sort_order: Flokkun
+
+-
+
+editor_paragraph_toolbox: Texti
+
+-
+
+editor_paragraph_large: Stærri leturstærð
+
+-
+
+editor_quote_toolbox: Tilvitnun
+
+-
+
+editor_quote_placeholder: Sláðu inn texta
+
+-
+
+editor_quote_placeholder_caption: Sláðu inn myndatexta
+
+-
+
+editor_slider_toolbox: Myndasýning
+
+-
+
+editor_slider_width: Breidd
+
+-
+
+editor_slider_height: Hæð
+
+-
+
+editor_slider_files: Glob mynstur eða vefslóðir
+
+-
+
+editor_slider_dots: Sýna punktaleiðsögn
+
+-
+
+editor_slider_autoplay: Spilaðu sjálfkrafa
+
+-
+
+editor_snippet_toolbox: Sérsniðið sniðmát
+
+-
+
+editor_snippet_input: Úrtakskóði
+
+-
+
+editor_snippet_file: Veldu brotaskrá
+
+-
+
+editor_table_toolbox: Tafla Listi
+
+-
+
+editor_code: Upprunakóði
+
+-
+
+editor_toc: Efnisyfirlit
+
+-
+
+editor_left: Vinstri
+
+-
+
+editor_center: Miðja
+
+-
+
+editor_edit_style: Breyta stíl
+
+-
+
+editor_layout_default: Sjálfgefið skipulag
+
+-
+
+editor_layout_stretch: Stækkaðu kubbinn í fulla breidd
+
+-
+
+editor_layout_width: Breidd
+
+-
+
+editor_ui_placeholder: Smelltu hér til að bæta við fyrstu blokkinni þinni ...
+
+-
+
+editor_ui_add: Bæta við
+
+-
+
+editor_ui_settings: Smelltu til að opna stillingar eða dragðu til að færa lokun
+
+-
+
+editor_ui_delete: Eyða lokun
+
+-
+
+editor_ui_move_up: Færðu blokk upp
+
+-
+
+editor_ui_move_down: Færðu blokk niður
+
+-
+
+editor_ui_convert: Umbreyta blokk í
+
+-
+
+editor_ui_browse: Skoðaðu skrár
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Veldu staðsetningu fyrir nýju síðuna
 
 -
 
+page_date: Dagsetning
+
+-
+
 page_move_destination: Veldu áfangastað til að flytja
 
 -
@@ -451,6 +879,10 @@ page_var_name: Breytilegt heiti
 -
 
 page_vars_content: Innihald
+
+-
+
+page_vars_color: Litir
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Viltu beita völdu þema og uppfæra listann yfir tiltækar 
 -
 
 shared_vars_content: Sjálfgefið efni
+
+-
+
+shared_vars_color: Sjálfgefnir litir
 
 -
 

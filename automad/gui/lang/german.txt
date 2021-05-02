@@ -50,10 +50,6 @@ btn_duplicate_page: Seite duplizieren
 
 -
 
-btn_edit: Bearbeiten
-
--
-
 btn_edit_file_info: Dateiinfo bearbeiten
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Holen Sie sich mehr Themen
 -
 
 btn_getting_data: Daten abrufen ...
+
+-
+
+btn_help: Hilfe
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Kürzlich bearbeitete Seiten
 -
 
 dropzone: Fügen Sie Dateien per Drag-and-Drop hier ein
+
+-
+
+editor_buttons_toolbox: Tasten
+
+-
+
+editor_button_primary: Hauptknopf
+
+-
+
+editor_button_secondary: Sekundärer Knopf
+
+-
+
+editor_button_label: Text
+
+-
+
+editor_button_link: Verknüpfung
+
+-
+
+editor_button_color: Textfarbe
+
+-
+
+editor_button_background_color: Hintergrund
+
+-
+
+editor_button_border_color: Randfarbe
+
+-
+
+editor_button_border_width: Rahmenbreite
+
+-
+
+editor_button_border_radius: Eckenradius
+
+-
+
+editor_button_padding_horizontal: Horizontaler Abstand
+
+-
+
+editor_button_padding_vertical: Vertikaler Abstand
+
+-
+
+editor_delimiter_toolbox: Trennzeichen
+
+-
+
+editor_filelist_toolbox: Dateiliste
+
+-
+
+editor_filelist_template: Vorlage auswählen
+
+-
+
+editor_filelist_default: Standardvorlage
+
+-
+
+editor_filelist_files: Glob-Muster (durch Komma getrennt)
+
+-
+
+editor_gallery_toolbox: Bildergalerie
+
+-
+
+editor_gallery_files: Glob-Muster oder URLs
+
+-
+
+editor_gallery_width: Bildbreite in Pixel
+
+-
+
+editor_gallery_clean_bottom: Unterkante reinigen
+
+-
+
+editor_heading_toolbox: Überschrift
+
+-
+
+editor_image_toolbox: Bild
+
+-
+
+editor_list_toolbox: Liste
+
+-
+
+editor_list_unordered: Spiegelstriche
+
+-
+
+editor_list_ordered: Nummerierte Liste
+
+-
+
+editor_mail_toolbox: E-Mail-Formular
+
+-
+
+editor_mail_data_error: Bitte fülle alle Felder aus!
+
+-
+
+editor_mail_data_success: E-Mail erfolgreich gesendet!
+
+-
+
+editor_mail_data_placeholder_address: Deine Emailadresse
+
+-
+
+editor_mail_data_placeholder_subject: E-Mail Betreff
+
+-
+
+editor_mail_data_placeholder_message: Nachrichtentext
+
+-
+
+editor_mail_data_send: Mail senden
+
+-
+
+editor_mail_placeholder_address: Geben Sie hier Ihre E-Mail-Adresse ein
+
+-
+
+editor_mail_placeholder_error: Geben Sie hier eine optionale Fehlermeldung ein
+
+-
+
+editor_mail_placeholder_success: Geben Sie hier eine optionale Erfolgsmeldung ein
+
+-
+
+editor_mail_label_address: Deine Emailadresse
+
+-
+
+editor_mail_label_success: Erfolgsmeldung
+
+-
+
+editor_mail_label_error: Fehlermeldung
+
+-
+
+editor_mail_label_placeholder_address: Platzhalter für E-Mail
+
+-
+
+editor_mail_label_placeholder_subject: Platzhalter für E-Mail-Betreff
+
+-
+
+editor_mail_label_placeholder_message: Platzhalter für Nachrichtentext
+
+-
+
+editor_mail_label_button: Schaltflächentext
+
+-
+
+editor_section_toolbox: Layoutabschnitt / Karte
+
+-
+
+editor_section_justify_start: Elemente auf der linken Seite ausrichten
+
+-
+
+editor_section_justify_center: Elemente in Richtung der Mitte ausrichten
+
+-
+
+editor_section_justify_end: Elemente auf der rechten Seite ausrichten
+
+-
+
+editor_section_justify_space_between: Raum dazwischen
+
+-
+
+editor_section_justify_space_evenly: Platz gleichmäßig
+
+-
+
+editor_section_justify_fill_row: Zeile füllen
+
+-
+
+editor_section_gap: Lücke zwischen Blöcken
+
+-
+
+editor_section_min_block_width: Minimale Blockbreite
+
+-
+
+editor_section_edit: Bearbeiten
+
+-
+
+editor_section_card: Inhalte für Karten optimieren
+
+-
+
+editor_section_padding_top: Abstand nach oben
+
+-
+
+editor_section_padding_bottom: Abstand nach unten
+
+-
+
+editor_section_color: Textfarbe
+
+-
+
+editor_section_background_color: Hintergrundfarbe
+
+-
+
+editor_section_background_image: Hintergrundbild
+
+-
+
+editor_section_background_blend_mode: Hintergrund-Mischmodus
+
+-
+
+editor_section_border_color: Randfarbe
+
+-
+
+editor_section_border_width: Rahmenbreite
+
+-
+
+editor_section_border_radius: Eckenradius
+
+-
+
+editor_section_shadow: Schlagschatten
+
+-
+
+editor_section_match_row_height: Volle Reihenhöhe
+
+-
+
+editor_pagelist_toolbox: Seitenliste
+
+-
+
+editor_pagelist_template: Vorlage auswählen
+
+-
+
+editor_pagelist_default: Standardvorlage
+
+-
+
+editor_pagelist_url_regex: URL Regex Filter
+
+-
+
+editor_pagelist_type: Art
+
+-
+
+editor_pagelist_filter_tag: Nach Tag filtern
+
+-
+
+editor_pagelist_filter_template: Nach Vorlage filtern
+
+-
+
+editor_pagelist_limit_offset: Limit und Offset
+
+-
+
+editor_pagelist_sort_var: Nach Variable sortieren
+
+-
+
+editor_pagelist_sort_order: Sortierreihenfolge
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Größere Schriftgröße
+
+-
+
+editor_quote_toolbox: Zitat
+
+-
+
+editor_quote_placeholder: Geben Sie einen Text ein
+
+-
+
+editor_quote_placeholder_caption: Geben Sie eine Beschriftung ein
+
+-
+
+editor_slider_toolbox: Diashow
+
+-
+
+editor_slider_width: Breite
+
+-
+
+editor_slider_height: Höhe
+
+-
+
+editor_slider_files: Glob-Muster oder URLs
+
+-
+
+editor_slider_dots: Punktnavigation anzeigen
+
+-
+
+editor_slider_autoplay: Automatisches Abspielen
+
+-
+
+editor_snippet_toolbox: Benutzerdefiniertes Vorlagen-Snippet
+
+-
+
+editor_snippet_input: Snippet-Code
+
+-
+
+editor_snippet_file: Wählen Sie eine Snippet-Datei aus
+
+-
+
+editor_table_toolbox: Tabellarische Liste
+
+-
+
+editor_code: Quellcode
+
+-
+
+editor_toc: Inhaltsverzeichnis
+
+-
+
+editor_left: Links
+
+-
+
+editor_center: Center
+
+-
+
+editor_edit_style: Stil bearbeiten
+
+-
+
+editor_layout_default: Standardlayout
+
+-
+
+editor_layout_stretch: Erweitern Sie den Block auf volle Breite
+
+-
+
+editor_layout_width: Breite
+
+-
+
+editor_ui_placeholder: Klicken Sie hier, um Ihren ersten Block hinzuzufügen ...
+
+-
+
+editor_ui_add: Hinzufügen
+
+-
+
+editor_ui_settings: Klicken Sie, um die Einstellungen zu öffnen, oder ziehen Sie, um den Block zu verschieben
+
+-
+
+editor_ui_delete: Block löschen
+
+-
+
+editor_ui_move_up: Block nach oben bewegen
+
+-
+
+editor_ui_move_down: Block nach unten bewegen
+
+-
+
+editor_ui_convert: Block konvertieren in
+
+-
+
+editor_ui_browse: Dateien durchsuchen
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Wählen Sie einen Speicherort für die neue Seite
 
 -
 
+page_date: Datum
+
+-
+
 page_move_destination: Wählen Sie ein Ziel zum Verschieben
 
 -
@@ -451,6 +879,10 @@ page_var_name: Variablennamen
 -
 
 page_vars_content: Inhalt
+
+-
+
+page_vars_color: Farben
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Möchten Sie das ausgewählte Thema anwenden und die Liste d
 -
 
 shared_vars_content: Standardinhalt
+
+-
+
+shared_vars_color: Standardfarben
 
 -
 

@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -48,8 +48,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The form field component. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Field {
@@ -96,12 +96,18 @@ HTML;
 
 	private static function fieldImage($attr) {
 
+		$Text = Text::getObject();
+
 		return <<< HTML
-				<div class="am-form-icon-button-input uk-flex" data-am-select-image-field>
-					<button type="button" class="uk-button">
-						<i class="uk-icon-folder-open-o"></i>
-					</button>
-					<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+				<div data-am-select-image-field>
+					<figure></figure>
+					<div>
+						<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+						<button type="button" class="uk-button uk-text-muted">
+							<i class="uk-icon-folder-open-o"></i>&nbsp;
+							{$Text->btn_browse}
+						</button>
+					</div>
 				</div>
 HTML;
 
@@ -552,6 +558,20 @@ HTML;
 			$html .= self::fieldColor($color, $attr);
 			
 		} else if (strpos($key, '+') === 0) {
+
+			if (!self::isInPage()) {
+				$help = Text::get('btn_help');
+				$html .= <<<HTML
+						<a 
+						href="https://automad.org/user-guide/using-blocks" 
+						class="am-form-block-help uk-button uk-button-mini" 
+						target="_blank"
+						>
+							<i class="uk-icon-lightbulb-o"></i>&nbsp;
+							$help
+						</a>
+HTML;
+			}
 
 			$editorId = 'am-block-editor-' . str_replace('+', '', $key);
 			$html .= self::fieldBlockEditor($editorId, self::fullscreenBar($Automad, $label), $attr, $value);

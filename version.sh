@@ -3,7 +3,7 @@
 
 # version.sh
 # 
-# (c) 2013-2020 by Marc Anton Dahmen 
+# (c) 2013-2021 by Marc Anton Dahmen 
 #
 # A version number will be generated from the position of the working copy in the Git history.
 #

@@ -1,8 +1,8 @@
 /*
  *	Standard
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *  MIT license
  */
@@ -15,17 +15,26 @@
 @nav-nested-padding-vertical:  	0;
 @nav-nested-padding-horizontal:	0;
 
-@nav-side-color:               	@base-body-color;
+@nav-side-color:               	var(--color-nav);
 @nav-side-hover-background:    	transparent;
-@nav-side-hover-color:         	@text-color;
+@nav-side-hover-color:         	@nav-side-color;
 @nav-side-active-background:   	transparent;
-@nav-side-active-color:        	@text-color;
+@nav-side-active-color:        	@nav-side-color;
 @nav-side-nested-color:        	@nav-side-color;
-@nav-side-nested-hover-color:  	@text-color;
+@nav-side-nested-hover-color:  	@nav-side-color;
 
-@nav-dropdown-color:           	@base-body-color;
-@nav-dropdown-hover-background:	@panel-bg-color;
-@nav-dropdown-hover-color:     	@base-body-color;
+@nav-dropdown-color:           	@navbar-color;
+@dropdown-background: 			@navbar-background;
+@nav-dropdown-hover-background:	@nav-dropdown-color;
+@nav-dropdown-hover-color:     	@dropdown-background;
+
+:root {
+	--color-nav: @text-color;
+}
+
+.uk-modal-dialog {
+	--color-nav: @navbar-color;
+}
 
 .hook-nav-side() {
 	display: inline;
@@ -90,7 +99,7 @@
 
 .nav-link {
 
-	color: @base-body-color;
+	color: @nav-side-color;
 
 	&:hover,
 	&:active,
@@ -98,4 +107,12 @@
 		color: @text-muted-color;
 	}
 
+}
+
+.nav-icon {
+	position: relative;
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	margin-right: 0.5rem;
 }

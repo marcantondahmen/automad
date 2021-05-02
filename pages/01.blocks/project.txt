@@ -1,0 +1,335 @@
+title: Blocks
+
+-
+
++hero: {
+  "time": 1619886026457,
+  "blocks": [
+    {
+      "type": "section",
+      "data": {
+        "content": {
+          "time": 1619886025999,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Blocks a single units of content. There several types of them. They can be arranged by using the little grip icon to drag them around. ☝️ Check out some block samples below.</am-lineheight></am-fontsize>",
+                "large": false,
+                "alignment": "left"
+              }
+            }
+          ],
+          "version": "2.20.2"
+        },
+        "style": {
+          "color": "#F4F5F7",
+          "backgroundColor": "#1F2022",
+          "paddingTop": "7rem",
+          "paddingBottom": "5rem"
+        },
+        "justify": "start",
+        "gap": true,
+        "minBlockWidth": "",
+        "stretched": true
+      }
+    }
+  ],
+  "version": "2.20.2"
+}
+
+-
+
++main: {
+  "time": 1619905149204,
+  "blocks": [
+    {
+      "type": "header",
+      "data": {
+        "text": "Text Content",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "The default block is just a simple paragraph containing text content. Text can be easily <b>styled</b> using inline <i>styles</i>. Paragraphs can also be converted to lists or headlines.",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "lists",
+      "data": {
+        "style": "unordered",
+        "items": [
+          "This is a List Item of an unordered list.",
+          "Another List Item. List can also be ordered!",
+          "And a Third One, you get it ..."
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "data": {
+        "content": [
+          [
+            "This is a ",
+            "Table Header"
+          ],
+          [
+            "And this are ",
+            "some rows"
+          ],
+          [
+            "and some ",
+            "columns"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "quote",
+      "data": {
+        "text": "This is a super important and awesome quote! Please read it carefully!<br>",
+        "caption": "by Me",
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "text": "Images",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Easily embed single images. Note that can images and other blocks can be stretched to full width with just a click.",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "image",
+      "data": {
+        "url": "https://source.unsplash.com/GSIzNfR9GLE/1200x950",
+        "caption": ""
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Combine multiple images to a masonry <i>gallery</i>.",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "gallery",
+      "data": {
+        "globs": "https://source.unsplash.com/6rXpQzfCYlw/900x1000, https://source.unsplash.com/VYCDTBAP8P4/1000x700, https://source.unsplash.com/kjERLXaHjXc/1000x700",
+        "width": 350,
+        "cleanBottom": true
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Or use the <i>slideshows</i> block to display a selection of images in a carousel.",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "slider",
+      "data": {
+        "globs": "https://source.unsplash.com/VYCDTBAP8P4/1200x800, https://source.unsplash.com/kjERLXaHjXc/1200x800",
+        "width": 1200,
+        "height": 800,
+        "dots": true,
+        "autoplay": true
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "text": "Embedded",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Just paste any link to YouTube or Vimeo videos, Twitter posts, Soundcloud pages or CodePens to embed them into your page.&nbsp;",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "embed",
+      "data": {
+        "service": "mixcloud",
+        "source": "https://www.mixcloud.com/marcantondahmen/home-session-21/",
+        "embed": "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=/marcantondahmen/home-session-21/",
+        "height": 180,
+        "caption": "",
+        "span": ""
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "text": "Navigation",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "buttons",
+      "data": {
+        "primaryText": "A Button&nbsp;",
+        "primaryLink": "#navigation",
+        "primaryStyle": {
+          "borderColor": "#181818",
+          "hoverBorderColor": "#181818",
+          "hoverBackground": "#181818",
+          "hoverColor": "#FFFFFF",
+          "paddingHorizontal": "2rem",
+          "borderWidth": "2px"
+        },
+        "secondaryText": "A Second One",
+        "secondaryLink": "#navigation",
+        "secondaryStyle": {
+          "paddingHorizontal": "2rem",
+          "borderWidth": "2px"
+        },
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Generate page cards automatically using the <i>pagelist</i> block.",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "pagelist",
+      "data": {
+        "type": "all",
+        "matchUrl": "",
+        "filter": "",
+        "template": "",
+        "limit": "2",
+        "offset": "0",
+        "sortKey": ":path",
+        "sortOrder": "asc",
+        "file": "/standard/templates/blocks/pagelist/blog.php"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "Create a list of files defined by one ore more glob patterns using the <i>filelist</i> block.",
+        "large": false,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "filelist",
+      "data": {
+        "file": "Default Template",
+        "glob": "/shared/*.png, /shared/*.ico"
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "text": "Code",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "code",
+      "data": {
+        "code": "<div class=\"title\">\n    Automad is Awesome!\n</div>"
+      }
+    },
+    {
+      "type": "header",
+      "data": {
+        "text": "Email",
+        "level": 2,
+        "alignment": "left"
+      }
+    },
+    {
+      "type": "mail",
+      "data": {
+        "to": "hello@test.de",
+        "error": "Please fill out all fields!",
+        "success": "Successfully sent email!",
+        "placeholderEmail": "Your email address",
+        "placeholderSubject": "Email subject",
+        "placeholderMessage": "Message body",
+        "textButton": "Send Mail"
+      }
+    }
+  ],
+  "version": "2.20.2"
+}
+
+-
+
+colorPageText: #1F2022
+
+-
+
+colorPageBorder: #eaebed
+
+-
+
+colorCardText: #1F2022
+
+-
+
+colorCardBackground: #F4F5F7
+
+-
+
+colorCardBorder: #F4F5F7
+
+-
+
+colorCodeBackground: #F4F5F7
+
+-
+
+colorNavbarText: #F4F5F7
+
+-
+
+colorNavbarBackground: #1F2022
+
+-
+
+colorNavbarBorder: #404347
+
+-
+
+checkboxHideThumbnails: 1
+
+-
+
+checkboxHideTitle: 1
+
+-
+
+checkboxShowInNavbar: 1

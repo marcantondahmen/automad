@@ -50,10 +50,6 @@ btn_duplicate_page: Kopiera sida
 
 -
 
-btn_edit: Redigera
-
--
-
 btn_edit_file_info: Redigera filinformation
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Få fler teman
 -
 
 btn_getting_data: Få data ...
+
+-
+
+btn_help: Hjälp
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Nyligen redigerade sidor
 -
 
 dropzone: Dra filer hit
+
+-
+
+editor_buttons_toolbox: Knappar
+
+-
+
+editor_button_primary: Huvudknapp
+
+-
+
+editor_button_secondary: Sekundärknapp
+
+-
+
+editor_button_label: Text
+
+-
+
+editor_button_link: Länk
+
+-
+
+editor_button_color: Text färg
+
+-
+
+editor_button_background_color: Bakgrund
+
+-
+
+editor_button_border_color: Gräns färg
+
+-
+
+editor_button_border_width: Gränsbredd
+
+-
+
+editor_button_border_radius: Hörnradie
+
+-
+
+editor_button_padding_horizontal: Horisontellt avstånd
+
+-
+
+editor_button_padding_vertical: Vertikalt avstånd
+
+-
+
+editor_delimiter_toolbox: Avgränsare
+
+-
+
+editor_filelist_toolbox: Fil-lista
+
+-
+
+editor_filelist_template: Välj mall
+
+-
+
+editor_filelist_default: Standardmall
+
+-
+
+editor_filelist_files: Globmönster (åtskilda av komma)
+
+-
+
+editor_gallery_toolbox: Bildgalleri
+
+-
+
+editor_gallery_files: Glob mönster eller webbadresser
+
+-
+
+editor_gallery_width: Bildbredd i pixlar
+
+-
+
+editor_gallery_clean_bottom: Rengör underkanten
+
+-
+
+editor_heading_toolbox: Rubrik
+
+-
+
+editor_image_toolbox: Bild
+
+-
+
+editor_list_toolbox: Lista
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Numrerad lista
+
+-
+
+editor_mail_toolbox: E-postformulär
+
+-
+
+editor_mail_data_error: Fyll i alla fält!
+
+-
+
+editor_mail_data_success: Skickat e-postmeddelande!
+
+-
+
+editor_mail_data_placeholder_address: Din e-postadress
+
+-
+
+editor_mail_data_placeholder_subject: E-postämne
+
+-
+
+editor_mail_data_placeholder_message: Meddelandetext
+
+-
+
+editor_mail_data_send: Skicka brev
+
+-
+
+editor_mail_placeholder_address: Ange din e-postadress här
+
+-
+
+editor_mail_placeholder_error: Ange ett valfritt felmeddelande här
+
+-
+
+editor_mail_placeholder_success: Ange ett valfritt framgångsmeddelande här
+
+-
+
+editor_mail_label_address: Din e-postadress
+
+-
+
+editor_mail_label_success: Framgångsmeddelande
+
+-
+
+editor_mail_label_error: Felmeddelande
+
+-
+
+editor_mail_label_placeholder_address: Platshållare för e-post
+
+-
+
+editor_mail_label_placeholder_subject: Platshållare för e-postämne
+
+-
+
+editor_mail_label_placeholder_message: Platshållare för meddelandekroppen
+
+-
+
+editor_mail_label_button: Knapp-text
+
+-
+
+editor_section_toolbox: Layout Sektion / Kort
+
+-
+
+editor_section_justify_start: Justera elementen mot vänster sida
+
+-
+
+editor_section_justify_center: Justera element mot mitten
+
+-
+
+editor_section_justify_end: Justera elementen mot höger sida
+
+-
+
+editor_section_justify_space_between: Rymd mellan
+
+-
+
+editor_section_justify_space_evenly: Utrymme jämnt
+
+-
+
+editor_section_justify_fill_row: Fylla raden
+
+-
+
+editor_section_gap: Gap mellan block
+
+-
+
+editor_section_min_block_width: Minsta blockbredd
+
+-
+
+editor_section_edit: Redigera
+
+-
+
+editor_section_card: Optimera innehållet för kort
+
+-
+
+editor_section_padding_top: Spacing uppåt
+
+-
+
+editor_section_padding_bottom: Spacing down
+
+-
+
+editor_section_color: Text färg
+
+-
+
+editor_section_background_color: Bakgrundsfärg
+
+-
+
+editor_section_background_image: Bakgrundsbild
+
+-
+
+editor_section_background_blend_mode: Bakgrundsblandningsläge
+
+-
+
+editor_section_border_color: Gräns färg
+
+-
+
+editor_section_border_width: Gränsbredd
+
+-
+
+editor_section_border_radius: Hörnradie
+
+-
+
+editor_section_shadow: Droppskugga
+
+-
+
+editor_section_match_row_height: Fullrad höjd
+
+-
+
+editor_pagelist_toolbox: Sidlista
+
+-
+
+editor_pagelist_template: Välj mall
+
+-
+
+editor_pagelist_default: Standardmall
+
+-
+
+editor_pagelist_url_regex: URL-regexfilter
+
+-
+
+editor_pagelist_type: Typ
+
+-
+
+editor_pagelist_filter_tag: Filtrera efter tagg
+
+-
+
+editor_pagelist_filter_template: Filtrera efter mall
+
+-
+
+editor_pagelist_limit_offset: Limit och Offset
+
+-
+
+editor_pagelist_sort_var: Sortera efter variabel
+
+-
+
+editor_pagelist_sort_order: Sorteringsordning
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Större teckenstorlek
+
+-
+
+editor_quote_toolbox: Citat
+
+-
+
+editor_quote_placeholder: Ange en text
+
+-
+
+editor_quote_placeholder_caption: Ange en bildtext
+
+-
+
+editor_slider_toolbox: Bildspel
+
+-
+
+editor_slider_width: Bredd
+
+-
+
+editor_slider_height: Höjd
+
+-
+
+editor_slider_files: Glob mönster eller webbadresser
+
+-
+
+editor_slider_dots: Visa punktnavigering
+
+-
+
+editor_slider_autoplay: Autospela
+
+-
+
+editor_snippet_toolbox: Anpassad mallutdrag
+
+-
+
+editor_snippet_input: Kodavsnitt
+
+-
+
+editor_snippet_file: Välj en kodfil
+
+-
+
+editor_table_toolbox: Tabelllista
+
+-
+
+editor_code: Källkod
+
+-
+
+editor_toc: Innehållsförteckning
+
+-
+
+editor_left: Vänster
+
+-
+
+editor_center: Centrum
+
+-
+
+editor_edit_style: Redigeringsstil
+
+-
+
+editor_layout_default: Standardlayout
+
+-
+
+editor_layout_stretch: Expandera blocket till full bredd
+
+-
+
+editor_layout_width: Bredd
+
+-
+
+editor_ui_placeholder: Klicka här för att lägga till ditt första kvarter ...
+
+-
+
+editor_ui_add: Lägg till
+
+-
+
+editor_ui_settings: Klicka för att öppna inställningarna eller dra för att flytta blocket
+
+-
+
+editor_ui_delete: Ta bort block
+
+-
+
+editor_ui_move_up: Flytta blocket uppåt
+
+-
+
+editor_ui_move_down: Flytta blocket nedåt
+
+-
+
+editor_ui_convert: Konvertera block till
+
+-
+
+editor_ui_browse: Bläddra i filer
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Välj en plats för den nya sidan
 
 -
 
+page_date: Datum
+
+-
+
 page_move_destination: Välj en destination för flyttning
 
 -
@@ -451,6 +879,10 @@ page_var_name: Variabelt namn
 -
 
 page_vars_content: Innehåll
+
+-
+
+page_vars_color: Färger
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Vill du använda det valda temat och uppdatera listan över 
 -
 
 shared_vars_content: Standardinnehåll
+
+-
+
+shared_vars_color: Standardfärger
 
 -
 

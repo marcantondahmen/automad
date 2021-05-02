@@ -2,7 +2,6 @@ var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
-	googleFonts = require('gulp-google-webfonts'),
 	header = require('gulp-header'),
 	merge2 = require('merge2'),
 	less = require('gulp-less'),
@@ -80,7 +79,8 @@ gulp.task('automad-js', function() {
 	
 	return 	gulp.src([
 				'gui/js/*.js',
-				'gui/js/*/*.js'
+				'gui/js/*/*.js',
+				'gui/js/editorjs/*/*.js'
 			])
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
@@ -111,23 +111,16 @@ gulp.task('libs-js', function() {
 			gulp.src([
 				'node_modules/jquery/dist/jquery.min.js'
 			]),
+			// Sortable.
+			gulp.src([
+				'node_modules/sortablejs/Sortable.min.js'
+			]),
 			// Editor.js.
 			gulp.src([
 				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
-				'node_modules/@editorjs/embed/dist/bundle.js',
-				'node_modules/@editorjs/header/dist/bundle.js',
-				'node_modules/@editorjs/inline-code/dist/bundle.js',
-				'node_modules/@editorjs/list/dist/bundle.js',
-				'node_modules/@editorjs/marker/dist/bundle.js',
-				'node_modules/@editorjs/quote/dist/bundle.js',
-				'node_modules/@editorjs/raw/dist/bundle.js',
-				'node_modules/@editorjs/table/dist/bundle.js',
-				'node_modules/@editorjs/underline/dist/bundle.js',
 				'node_modules/editorjs-drag-drop/dist/bundle.js',
-				'node_modules/editorjs-inspector/dist/index.js',
-				'node_modules/editorjs-style/dist/index.js',
-				'node_modules/editorjs-undo/dist/bundle.js'
+				'node_modules/editorjs-style/dist/index.js'
 			]),
 			// CodeMirror. To be minified.
 			gulp.src([
@@ -267,8 +260,10 @@ gulp.task('watch', function() {
 	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
 	gulp.watch('gui/js/*.js', gulp.series('automad-js'));
 	gulp.watch('gui/js/*/*.js', gulp.series('automad-js'));
+	gulp.watch('gui/js/*/*/*.js', gulp.series('automad-js'));
 	gulp.watch('gui/less/*.less', gulp.series('automad-less'));
-	gulp.watch('gui/less/*/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/editorjs/*.less', gulp.series('automad-less'));
+	gulp.watch('gui/less/editorjs/*/*.less', gulp.series('automad-less'));
 	
 });
 

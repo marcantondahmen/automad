@@ -50,10 +50,6 @@ btn_duplicate_page: Pasikartojantis puslapis
 
 -
 
-btn_edit: Redaguoti
-
--
-
 btn_edit_file_info: Redaguoti failo informaciją
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Gaukite daugiau temų
 -
 
 btn_getting_data: Gaunami duomenys ...
+
+-
+
+btn_help: Pagalba
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Neseniai redaguoti puslapiai
 -
 
 dropzone: Vilkite failus čia
+
+-
+
+editor_buttons_toolbox: Mygtukai
+
+-
+
+editor_button_primary: Pagrindinis mygtukas
+
+-
+
+editor_button_secondary: Antrinis mygtukas
+
+-
+
+editor_button_label: Tekstas
+
+-
+
+editor_button_link: Nuoroda
+
+-
+
+editor_button_color: Teksto spalva
+
+-
+
+editor_button_background_color: Fonas
+
+-
+
+editor_button_border_color: Sienos spalva
+
+-
+
+editor_button_border_width: Pasienio plotis
+
+-
+
+editor_button_border_radius: Kampo spindulys
+
+-
+
+editor_button_padding_horizontal: Horizontalus tarpai
+
+-
+
+editor_button_padding_vertical: Vertikalus tarpai
+
+-
+
+editor_delimiter_toolbox: Apribotojas
+
+-
+
+editor_filelist_toolbox: Failų sąrašas
+
+-
+
+editor_filelist_template: Pasirinkite Šablonas
+
+-
+
+editor_filelist_default: Numatytasis šablonas
+
+-
+
+editor_filelist_files: �Glob Patterns“ (atskirta kableliais)
+
+-
+
+editor_gallery_toolbox: Vaizdų galerija
+
+-
+
+editor_gallery_files: Glob modeliai arba URL
+
+-
+
+editor_gallery_width: Vaizdo plotis pikseliais
+
+-
+
+editor_gallery_clean_bottom: Švarus apatinis kraštas
+
+-
+
+editor_heading_toolbox: Antraštė
+
+-
+
+editor_image_toolbox: Vaizdas
+
+-
+
+editor_list_toolbox: Sąrašas
+
+-
+
+editor_list_unordered: �Bullet Points“
+
+-
+
+editor_list_ordered: Sunumeruotas sąrašas
+
+-
+
+editor_mail_toolbox: Pašto forma
+
+-
+
+editor_mail_data_error: Užpildykite visus laukus!
+
+-
+
+editor_mail_data_success: El. Laiškas sėkmingai išsiųstas!
+
+-
+
+editor_mail_data_placeholder_address: Jūsų elektroninio pašto adresas
+
+-
+
+editor_mail_data_placeholder_subject: El.laiško tema
+
+-
+
+editor_mail_data_placeholder_message: Pranešimo turinys
+
+-
+
+editor_mail_data_send: Išsiųsti laišką
+
+-
+
+editor_mail_placeholder_address: Čia įveskite savo el. Pašto adresą
+
+-
+
+editor_mail_placeholder_error: Čia įveskite neprivalomą klaidos pranešimą
+
+-
+
+editor_mail_placeholder_success: Čia įveskite pasirinktinį sėkmės pranešimą
+
+-
+
+editor_mail_label_address: Jūsų elektroninio pašto adresas
+
+-
+
+editor_mail_label_success: Sėkmės pranešimas
+
+-
+
+editor_mail_label_error: Klaidos pranešimas
+
+-
+
+editor_mail_label_placeholder_address: El. Pašto rezervavimo vieta
+
+-
+
+editor_mail_label_placeholder_subject: El. Pašto temos rezervuota vieta
+
+-
+
+editor_mail_label_placeholder_message: Pranešimo turinio rezervuota vieta
+
+-
+
+editor_mail_label_button: Mygtuko tekstas
+
+-
+
+editor_section_toolbox: Išdėstymas skyrius / kortelė
+
+-
+
+editor_section_justify_start: Suderinti elementus į kairę pusę
+
+-
+
+editor_section_justify_center: Suderinti elementus į vidurį
+
+-
+
+editor_section_justify_end: Suderinti elementus į dešinę pusę
+
+-
+
+editor_section_justify_space_between: Tarpas tarp. \ T
+
+-
+
+editor_section_justify_space_evenly: Tolygiai
+
+-
+
+editor_section_justify_fill_row: Užpildykite eilutę
+
+-
+
+editor_section_gap: Tarp blokų
+
+-
+
+editor_section_min_block_width: Minimalus bloko plotis
+
+-
+
+editor_section_edit: Redaguoti
+
+-
+
+editor_section_card: Optimizuokite kortelių turinį
+
+-
+
+editor_section_padding_top: Tarpai aukštyn
+
+-
+
+editor_section_padding_bottom: Atstumas
+
+-
+
+editor_section_color: Teksto spalva
+
+-
+
+editor_section_background_color: Fono spalva
+
+-
+
+editor_section_background_image: Fono vaizdas
+
+-
+
+editor_section_background_blend_mode: Fono mišinio režimas
+
+-
+
+editor_section_border_color: Sienos spalva
+
+-
+
+editor_section_border_width: Pasienio plotis
+
+-
+
+editor_section_border_radius: Kampo spindulys
+
+-
+
+editor_section_shadow: Mesti šešėlį
+
+-
+
+editor_section_match_row_height: Visas eilės aukštis
+
+-
+
+editor_pagelist_toolbox: Puslapių sąrašas
+
+-
+
+editor_pagelist_template: Pasirinkite Šablonas
+
+-
+
+editor_pagelist_default: Numatytasis šablonas
+
+-
+
+editor_pagelist_url_regex: URL reguliavimo filtras
+
+-
+
+editor_pagelist_type: Tipas
+
+-
+
+editor_pagelist_filter_tag: Filtruoti pagal žymą
+
+-
+
+editor_pagelist_filter_template: Filtruoti pagal šabloną
+
+-
+
+editor_pagelist_limit_offset: Riba ir poslinkis
+
+-
+
+editor_pagelist_sort_var: Rūšiuoti pagal kintamąjį
+
+-
+
+editor_pagelist_sort_order: Rikiuoti
+
+-
+
+editor_paragraph_toolbox: Tekstas
+
+-
+
+editor_paragraph_large: Didesnis šrifto dydis
+
+-
+
+editor_quote_toolbox: Citata
+
+-
+
+editor_quote_placeholder: Įveskite tekstą
+
+-
+
+editor_quote_placeholder_caption: Įveskite antraštę
+
+-
+
+editor_slider_toolbox: Skaidrių demonstravimas
+
+-
+
+editor_slider_width: Plotis
+
+-
+
+editor_slider_height: Aukštis
+
+-
+
+editor_slider_files: Glob modeliai arba URL
+
+-
+
+editor_slider_dots: Rodyti taškų navigaciją
+
+-
+
+editor_slider_autoplay: Automatinis paleidimas
+
+-
+
+editor_snippet_toolbox: Tinkinto šablono fragmentas
+
+-
+
+editor_snippet_input: Fragmento kodas
+
+-
+
+editor_snippet_file: Pasirinkite fragmento failą
+
+-
+
+editor_table_toolbox: Lentelių sąrašas
+
+-
+
+editor_code: Pirminis kodas
+
+-
+
+editor_toc: Turinys
+
+-
+
+editor_left: Kairėje
+
+-
+
+editor_center: Centras
+
+-
+
+editor_edit_style: Redaguoti stilius
+
+-
+
+editor_layout_default: Numatytasis išdėstymas
+
+-
+
+editor_layout_stretch: Išplėskite bloką iki viso pločio
+
+-
+
+editor_layout_width: Plotis
+
+-
+
+editor_ui_placeholder: Spauskite čia norėdami pridėti savo pirmąjį bloką ...
+
+-
+
+editor_ui_add: Papildyti
+
+-
+
+editor_ui_settings: Spustelėkite, jei norite atidaryti nustatymus, arba vilkite, kad perkeltumėte bloką
+
+-
+
+editor_ui_delete: Ištrinti bloką
+
+-
+
+editor_ui_move_up: Perkelti bloką aukštyn
+
+-
+
+editor_ui_move_down: Perkelti bloką žemyn
+
+-
+
+editor_ui_convert: Konvertuoti bloką į
+
+-
+
+editor_ui_browse: Naršyti failus
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Pasirinkite naujo puslapio vietą
 
 -
 
+page_date: Data
+
+-
+
 page_move_destination: Pasirinkite kelionės tikslą
 
 -
@@ -451,6 +879,10 @@ page_var_name: Kintamojo pavadinimas
 -
 
 page_vars_content: Turinys
+
+-
+
+page_vars_color: Spalvos
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Ar norite pritaikyti pasirinktą temą ir atnaujinti galimų
 -
 
 shared_vars_content: Numatytasis turinys
+
+-
+
+shared_vars_color: Numatytosios spalvos
 
 -
 

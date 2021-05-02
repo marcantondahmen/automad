@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -45,64 +45,82 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The buttons block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-class Buttons {
+class Buttons extends Paragraph {
 
 	
 	/**	
 	 *	Render a buttons block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
 		$defaults = array(
 			'primaryText' => '',
 			'primaryLink' => '',
+			'primaryStyle' => (object) array(),
 			'secondaryText' => '',
 			'secondaryLink' => '',
+			'secondaryStyle' => (object) array(),
 			'alignment' => 'left'
 		);
 
 		$options = array_merge($defaults, (array) $data);
 		$data = (object) $options;
 		$html = '';
-		$class = ' class="am-buttons"';
 
-		if ($data->alignment == 'center') {
-			$class = ' class="am-buttons am-buttons-center"';
-		}
+		foreach (array('primary', 'secondary') as $item) {
 
-		if (trim($data->primaryText) && trim($data->primaryLink)) {
-			$primaryText = htmlspecialchars_decode($data->primaryText);
-			$html .= <<< HTML
-					<a 
-					href="$data->primaryLink"
-					class="am-button am-button-primary">
-						$primaryText
-					</a>
+			if (trim($data->{$item . 'Text'}) && trim($data->{$item . 'Link'})) {
+
+				$text = htmlspecialchars_decode($data->{$item . 'Text'});
+				$styleObj = $data->{$item . 'Style'};
+				$style = '';
+				$link = $data->{$item . 'Link'};
+
+				foreach ($styleObj as $key => $value) {
+					$style .= '--am-button-' . 
+							  strtolower(preg_replace('/([A-Z])/', '-$1', $key)) . 
+							  ": $value; ";
+				}
+
+				if ($style) {
+					$style = trim($style);
+					$style = 'style="' . $style . '"';
+				}
+
+				$html .= <<< HTML
+						<a 
+						href="$link"
+						class="am-button"
+						$style
+						>
+							$text
+						</a>
 HTML;
-		}
 
-		if (trim($data->secondaryText) && trim($data->secondaryLink)) {
-			$secondaryText = htmlspecialchars_decode($data->secondaryText);
-			$html .= <<< HTML
-					<a 
-					href="$data->secondaryLink"
-					class="am-button">
-						$secondaryText
-					</a>
-HTML;
+			}
+
 		}
 
 		if ($html) {
 
-			return "<section$class>$html</section>";
+			$classes = array();
+
+			if ($data->alignment == 'center') {
+				$classes[] = 'am-center';
+			}
+
+			$class = self::classAttr($classes);
+
+			return "<am-buttons $class>$html</am-buttons>";
 
 		}
 

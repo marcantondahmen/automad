@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Text class provides all methods related to the text modules used in the GUI. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Text {
@@ -125,7 +125,7 @@ class Text {
 
 
 	/**
-	 * 	Return the modules as object to be used in heredoc strings.
+	 *	Return the modules as object to be used in heredoc strings.
 	 * 
 	 *	@return object The modules array as object
 	 */
@@ -133,6 +133,21 @@ class Text {
 	public static function getObject() {
 
 		return (object) self::$modules;
+
+	}
+
+
+	/**
+	 *	Return array only including editor text modlues.
+	 *
+	 *	@return array The filtered modlues array
+	 */
+
+	public static function getEditorModules() {
+
+		return array_filter(self::$modules, function($item) {
+			return (strpos($item, 'editor_') === 0);
+		}, ARRAY_FILTER_USE_KEY);
 
 	}
 	

@@ -7,9 +7,11 @@ The Dark theme is a clean and elegant multi-purpose theme. It provides several o
 - [Templates](#templates)
 - [Colors](#colors)
 - [Writing Content](#writing-content)
+- [Overriding Theme Styles](#overriding-theme-styles)
 - [Pagelist Configuration](#pagelist-configuration)
 	- [Related Pages](#related-pages)
 - [Title, Navigation, Filtering and Sorting](#title-navigation-filtering-and-sorting)
+- [Transparent Navbars](#transparent-navbars)
 - [Logo and Brand](#logo-and-brand)
 - [Labels](#labels)
 - [Date Formats](#date-formats)
@@ -36,24 +38,49 @@ While there is a light and a dark theme serving as presets, all the colors used 
 
 | Name | Description |
 | ---- | ----------- |
-| Color Text | A custom override text color |
-| Color Bg | A custom override background color |
-| Color Border | A custom override border color |
-| Color Muted | A custom override color for muted and hovered text |
-| Color Panel Bg | A custom override color for panel backgrounds |
-| Color Code | A custom override code color |
+| Color Page Text | A custom override text color for a page |
+| Color Page Background | A custom override background color for a page |
+| Color Page Border | A custom override border color for a page |
+| Color Navbar Text | A custom override text color for a navbar |
+| Color Navbar Background | A custom override background color for a navbar |
+| Color Navbar Border | A custom override border color for a navbar |
+| Color Card Text | A custom override text color for cards |
+| Color Card Background | A custom override background color for cards |
+| Color Card Border | A custom override border color for cards |
+| Color Code Background | A custom override background color for code blocks |
 
 ## Writing Content
 
-There are two ways of writing content using this theme &mdash; **Blocks** and **Markdown** formatted text. 
-Please note that in case the **+Main** blocks variable has any content, the Markdown variables **Text** and **Text Teaser** are ignored! They only serve as an alternative and fallback content. 
+There are two block areas &mdash; the teaser and the main area.
 
 | Name | Description |
 | ---- | ----------- |
+| +Hero | The hero section. Note that you can stretch that area to the full width of a page. |
 | +Main | The main content block area. |
-| Text | An alternative content variable. It is only displays as long as the +Main variable is empty. |
-| Text Teaser | An alternative teaser variable. It is only displayed as long as the +Main variable is empty. |
 		
+## Overriding Theme Styles
+
+Apart from colors, also other styles can be overriden using CSS custom properties. Those overrides can be easily defined by adding a `<style>` tag to the `Items Header` variable of either a page or in the **Shared Data and Settings** section of the dashboard. The following example demonstrates how to change the font weight of the `h1` and `h2` headlines:
+
+	<style>
+	    :root {
+	        --h1-font-weight: 500;
+			--h2-font-weight: 480;
+	    }
+	</style>
+
+It is also possible to change the font family for headings by embedding some Google fonts as well:
+
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<style>
+	    :root {
+	        --heading-font-family: 'Lobster', cursive;
+	    }
+	</style>
+
+There are many other custom properties available. A full list can be found [here](https://github.com/marcantondahmen/automad/blob/master/packages/standard/less/variables.less).
+
 ## Pagelist Configuration
 
 This theme offers multiple options and two templates &mdash; **Blog** and **Portfolio** &mdash; to create pagelists. The following options can be used to control the content of such a pagelist. Pagelist templates can also be used to create a search results page.
@@ -64,7 +91,7 @@ This theme offers multiple options and two templates &mdash; **Blog** and **Port
 | Filter Pagelist By Url | Filters the pagelist by URLs matching a given regular expression like for example `(/portfolio|/blog)`. |
 | Notification No Search Results | The notification text for empty search results. |
 | Items Per Page | The maximum number of pages to be displayed in a pagelist at once. In case there are more pages to be shown, a pagination navigation will show up below automatically. |
-| Show Pages Below | Show only direct children of a custom local URL like `/custom/page` |
+| Url Show Pages Below | Show only direct children of a custom local URL like `/custom/page` |
 | Url Search Results | The local URL of the pagelist page to be used as the search results page. Note that the search field in the menu is only enabled in case an URL is defined. |
 | Url Tag Link Target | The target page to navigate to when clicking a tag. By default the parent page is used. |
 | Image Teaser | The filename or glob pattern for the image to be used as the teaser image in a pagelist. |
@@ -91,6 +118,12 @@ The following checkboxes can be used to control the visibility of pages and elem
 | Show In Footer | Add the page to the footer menu. |
 | Show In Navbar | Add the page to the navbar menu. |
 
+## Transparent Navbars
+
+By default the navbar inherits its background color from the page. In order to have a nice stretched 
+teaser image that also serves as background for your navbar, you can toggle the `Make Transparent Navbar` 
+checkbox to make the navbar fully transparent on load.
+
 ## Logo and Brand
 
 To set the brand name, a navbar logo and favicons, use the following options.
@@ -102,7 +135,8 @@ To set the brand name, a navbar logo and favicons, use the following options.
 | Logo Height | The height of your logo - this variable should be defined globally in the shared data section. |
 | Favicon | The local path to the icon to be used as favicon. |
 | Image Apple Touch Icon | The image to be used as the Apple touch icon. |
-| Page Icon Svg | A little SVG icon representing a page in a pagelist card. |
+| Icon Panel | A little SVG icon representing a page in a pagelist card. |
+| Icon Nav | A little SVG icon representing a page in a menu. |
 
 ## Labels
 

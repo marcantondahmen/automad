@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -48,11 +48,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The gallery block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-class Gallery {
+class Gallery extends Paragraph {
 
 
 	/**	
@@ -65,7 +65,10 @@ class Gallery {
 
 	public static function render($data, $Automad) {
 		
-		$masonryRowHeight = 50;
+		// Use a factor of 0.85 to multiply with the row height of the grid to get a good
+		// result since the aspect ratio is dependent on the actual row width and not the 
+		// minimum row width.
+		$masonryRowHeight = 20 * 0.85;
 		$defaults = array(
 			'globs' => '*.jpg, *.png, *.gif',
 			'width' => 250,
@@ -86,20 +89,13 @@ class Gallery {
 			$maxWidth = $data->width * 1.75;
 			$style = "<style scoped>@media (max-width: ${maxWidth}px) { .am-gallery-masonry { grid-template-columns: 1fr; } }</style>";
 
-			$figureAttr = '';
-
-			if ($data->stretched) {
-				$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
-			}
-
 			$cleanBottom = '';
 
 			if ($data->cleanBottom) {
 				$cleanBottom = ' am-gallery-masonry-clean-bottom';
 			}
 
-			$html = '<figure ' . $figureAttr . '>' . 
-					$style . 
+			$html = $style . 
 					'<div class="am-gallery-masonry' . $cleanBottom . '" style="--am-gallery-item-width:' . $data->width . 'px">';
 
 			foreach ($files as $file) {
@@ -122,7 +118,9 @@ HTML;
 
 			}
 
-			return $html . '</div></figure>';
+			$html .= '</div>';
+
+			return '<am-gallery ' . self::classAttr() . '>' . $html . '</am-gallery>';
 
 		}
 

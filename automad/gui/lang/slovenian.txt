@@ -50,10 +50,6 @@ btn_duplicate_page: Podvojena stran
 
 -
 
-btn_edit: Uredi
-
--
-
 btn_edit_file_info: Uredi podatke o datoteki
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Pridobite več tem
 -
 
 btn_getting_data: Pridobivanje podatkov ...
+
+-
+
+btn_help: Pomoč
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Nedavno urejene strani
 -
 
 dropzone: Povlecite datoteke sem
+
+-
+
+editor_buttons_toolbox: Gumbi
+
+-
+
+editor_button_primary: Glavni gumb
+
+-
+
+editor_button_secondary: Sekundarna tipka
+
+-
+
+editor_button_label: Besedilo
+
+-
+
+editor_button_link: Povezava
+
+-
+
+editor_button_color: Barva besedila
+
+-
+
+editor_button_background_color: Ozadje
+
+-
+
+editor_button_border_color: Barva meje
+
+-
+
+editor_button_border_width: Širina meje
+
+-
+
+editor_button_border_radius: Polmer kota
+
+-
+
+editor_button_padding_horizontal: Vodoravno razmik
+
+-
+
+editor_button_padding_vertical: Navpični razmik
+
+-
+
+editor_delimiter_toolbox: Ločilo
+
+-
+
+editor_filelist_toolbox: Seznam datotek
+
+-
+
+editor_filelist_template: Izberite Predloga
+
+-
+
+editor_filelist_default: Privzeta predloga
+
+-
+
+editor_filelist_files: Vzorci globusa (ločeni z vejico)
+
+-
+
+editor_gallery_toolbox: Galerija slik
+
+-
+
+editor_gallery_files: Glob vzorci ali URL-ji
+
+-
+
+editor_gallery_width: Širina slike v slikovnih pikah
+
+-
+
+editor_gallery_clean_bottom: Clean Bottom Edge
+
+-
+
+editor_heading_toolbox: Naslov
+
+-
+
+editor_image_toolbox: Slika
+
+-
+
+editor_list_toolbox: Seznam
+
+-
+
+editor_list_unordered: Bullet Točke
+
+-
+
+editor_list_ordered: Oštevilčen seznam
+
+-
+
+editor_mail_toolbox: E-poštni obrazec
+
+-
+
+editor_mail_data_error: Izpolnite vsa polja!
+
+-
+
+editor_mail_data_success: Uspešno poslano e-poštno sporočilo!
+
+-
+
+editor_mail_data_placeholder_address: Vaš email naslov
+
+-
+
+editor_mail_data_placeholder_subject: Zadeva e-pošte
+
+-
+
+editor_mail_data_placeholder_message: Telo sporočila
+
+-
+
+editor_mail_data_send: Pošlji pošto
+
+-
+
+editor_mail_placeholder_address: Tu vnesite svoj e-poštni naslov
+
+-
+
+editor_mail_placeholder_error: Sem vnesite neobvezno sporočilo o napaki
+
+-
+
+editor_mail_placeholder_success: Sem vnesite neobvezno sporočilo o uspehu
+
+-
+
+editor_mail_label_address: Vaš email naslov
+
+-
+
+editor_mail_label_success: Sporočilo o uspehu
+
+-
+
+editor_mail_label_error: Obvestilo o napaki
+
+-
+
+editor_mail_label_placeholder_address: Nadomestni znak za e-pošto
+
+-
+
+editor_mail_label_placeholder_subject: Nadomestni znak za zadevo e-pošte
+
+-
+
+editor_mail_label_placeholder_message: Nadomestni znak za telo sporočila
+
+-
+
+editor_mail_label_button: Besedilo gumba
+
+-
+
+editor_section_toolbox: Razdelek / kartica postavitve
+
+-
+
+editor_section_justify_start: Poravnajte elemente proti levi strani
+
+-
+
+editor_section_justify_center: Poravnajte elemente proti sredini
+
+-
+
+editor_section_justify_end: Poravnajte elemente proti desni strani
+
+-
+
+editor_section_justify_space_between: Prostor med
+
+-
+
+editor_section_justify_space_evenly: Enakomerno
+
+-
+
+editor_section_justify_fill_row: Izpolnite vrstico
+
+-
+
+editor_section_gap: Razmika med bloki
+
+-
+
+editor_section_min_block_width: Minimalno širino bloka
+
+-
+
+editor_section_edit: Uredi
+
+-
+
+editor_section_card: Optimizirajte vsebino za kartice
+
+-
+
+editor_section_padding_top: Razmik navzgor
+
+-
+
+editor_section_padding_bottom: Razmik
+
+-
+
+editor_section_color: Barva besedila
+
+-
+
+editor_section_background_color: Barva ozadja
+
+-
+
+editor_section_background_image: Slika ozadja
+
+-
+
+editor_section_background_blend_mode: Način mešanice ozadja
+
+-
+
+editor_section_border_color: Barva meje
+
+-
+
+editor_section_border_width: Širina meje
+
+-
+
+editor_section_border_radius: Polmer kota
+
+-
+
+editor_section_shadow: Drop Shadow.
+
+-
+
+editor_section_match_row_height: Celotna višina vrstice
+
+-
+
+editor_pagelist_toolbox: Seznam strani
+
+-
+
+editor_pagelist_template: Izberite Predloga
+
+-
+
+editor_pagelist_default: Privzeta predloga
+
+-
+
+editor_pagelist_url_regex: Filter regularnih izrazov URL
+
+-
+
+editor_pagelist_type: Tip
+
+-
+
+editor_pagelist_filter_tag: Filtriraj po oznaki
+
+-
+
+editor_pagelist_filter_template: Filtriraj po predlogi
+
+-
+
+editor_pagelist_limit_offset: Omejitev in odmik
+
+-
+
+editor_pagelist_sort_var: Razvrsti po spremenljivki
+
+-
+
+editor_pagelist_sort_order: Razvrsti vrstni red
+
+-
+
+editor_paragraph_toolbox: Besedilo
+
+-
+
+editor_paragraph_large: Večja velikost pisave
+
+-
+
+editor_quote_toolbox: Kvota
+
+-
+
+editor_quote_placeholder: Vnesite besedilo
+
+-
+
+editor_quote_placeholder_caption: Vnesite napis
+
+-
+
+editor_slider_toolbox: Diaprojekcija
+
+-
+
+editor_slider_width: Premer
+
+-
+
+editor_slider_height: Višina
+
+-
+
+editor_slider_files: Glob vzorci ali URL-ji
+
+-
+
+editor_slider_dots: Pokaži navigacijo s pikami
+
+-
+
+editor_slider_autoplay: Samodejno predvajanje
+
+-
+
+editor_snippet_toolbox: Delček predloge po meri
+
+-
+
+editor_snippet_input: Koda odrezka
+
+-
+
+editor_snippet_file: Izberite datoteko delčka
+
+-
+
+editor_table_toolbox: Tabelarični seznam
+
+-
+
+editor_code: Izvorna koda
+
+-
+
+editor_toc: Kazalo
+
+-
+
+editor_left: Levo
+
+-
+
+editor_center: Center
+
+-
+
+editor_edit_style: Uredi stil
+
+-
+
+editor_layout_default: Privzeta postavitev
+
+-
+
+editor_layout_stretch: Razširite blok na celotno širino
+
+-
+
+editor_layout_width: Premer
+
+-
+
+editor_ui_placeholder: Kliknite tukaj, da dodate svoj prvi blok ...
+
+-
+
+editor_ui_add: Dodaj
+
+-
+
+editor_ui_settings: Kliknite, da odprete nastavitve, ali povlecite, če želite premakniti blok
+
+-
+
+editor_ui_delete: Izbriši blok
+
+-
+
+editor_ui_move_up: Premakni blok navzgor
+
+-
+
+editor_ui_move_down: Premakni blok navzdol
+
+-
+
+editor_ui_convert: Pretvori blok v
+
+-
+
+editor_ui_browse: Prebrskajte datoteke
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Izberite mesto za novo stran
 
 -
 
+page_date: Datum
+
+-
+
 page_move_destination: Izberite cilj za premikanje
 
 -
@@ -451,6 +879,10 @@ page_var_name: Ime spremenljivke
 -
 
 page_vars_content: Vsebina
+
+-
+
+page_vars_color: Barve
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Ali želite zdaj uporabiti izbrano temo in posodobiti seznam
 -
 
 shared_vars_content: Privzeta vsebina
+
+-
+
+shared_vars_color: Privzete barve
 
 -
 

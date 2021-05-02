@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2014-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -279,7 +279,10 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					echo Components\Form\Field::render(
 						$this->getAutomad(), 
 						AM_KEY_DATE, 
-						$Page->get(AM_KEY_DATE)
+						$Page->get(AM_KEY_DATE),
+						false,
+						false,
+						Text::get('page_date')
 					); 
 
 					?>
@@ -336,6 +339,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 				}
 				
 				$textKeys = Keys::filterTextKeys($keys);
+				$colorKeys = Keys::filterColorKeys($keys);
 				$settingKeys = Keys::filterSettingKeys($keys);
 				$unusedDataKeys = array_diff(array_keys($data), $keys, Keys::$reserved);
 			
@@ -353,6 +357,27 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 						echo Components\Form\Group::render(
 							$this->getAutomad(),
 							$textKeys, 
+							$data, 
+							false, 
+							$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
+						); 
+
+						?>
+					</div>
+				<?php } ?>
+
+				<?php if (!empty($colorKeys)) { ?>
+					<!-- Color vars -->
+					<div class="uk-accordion-title">
+						<?php Text::e('page_vars_color'); ?> &mdash;
+						<?php echo count($colorKeys); ?>
+					</div>
+					<div class="uk-accordion-content">
+						<?php 
+
+						echo Components\Form\Group::render(
+							$this->getAutomad(),
+							$colorKeys, 
 							$data, 
 							false, 
 							$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))

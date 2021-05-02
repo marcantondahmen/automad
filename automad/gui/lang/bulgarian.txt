@@ -50,10 +50,6 @@ btn_duplicate_page: Дублирана страница
 
 -
 
-btn_edit: редактиране
-
--
-
 btn_edit_file_info: Редактиране на информация за файла
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Вземете още теми
 -
 
 btn_getting_data: Получаване на данни ...
+
+-
+
+btn_help: Помогне
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Наскоро редактирани страниц�
 -
 
 dropzone: Плъзнете файлове тук
+
+-
+
+editor_buttons_toolbox: Бутони
+
+-
+
+editor_button_primary: Главен бутон
+
+-
+
+editor_button_secondary: Вторичен бутон
+
+-
+
+editor_button_label: Текст
+
+-
+
+editor_button_link: Връзка
+
+-
+
+editor_button_color: Цвят на текста
+
+-
+
+editor_button_background_color: Заден план
+
+-
+
+editor_button_border_color: Граничен цвят
+
+-
+
+editor_button_border_width: Гранична ширина
+
+-
+
+editor_button_border_radius: Радиус на ъгъла
+
+-
+
+editor_button_padding_horizontal: Хоризонтално разстояние
+
+-
+
+editor_button_padding_vertical: Вертикално разстояние
+
+-
+
+editor_delimiter_toolbox: Разделител
+
+-
+
+editor_filelist_toolbox: Списък с файлове
+
+-
+
+editor_filelist_template: Изберете Шаблон
+
+-
+
+editor_filelist_default: Шаблон по подразбиране
+
+-
+
+editor_filelist_files: Модели на глобус (разделени със запетая)
+
+-
+
+editor_gallery_toolbox: Галерия с изображения
+
+-
+
+editor_gallery_files: Глоб модели или URL адреси
+
+-
+
+editor_gallery_width: Ширина на изображението в пиксели
+
+-
+
+editor_gallery_clean_bottom: Clean Bottom Edge
+
+-
+
+editor_heading_toolbox: Заглавие
+
+-
+
+editor_image_toolbox: Изображение
+
+-
+
+editor_list_toolbox: Списък
+
+-
+
+editor_list_unordered: Точки за куршуми
+
+-
+
+editor_list_ordered: Номериран списък
+
+-
+
+editor_mail_toolbox: Имейл формуляр
+
+-
+
+editor_mail_data_error: Моля, попълнете всички полета!
+
+-
+
+editor_mail_data_success: Успешно изпратен имейл!
+
+-
+
+editor_mail_data_placeholder_address: Вашата електронна поща
+
+-
+
+editor_mail_data_placeholder_subject: Тема на имейл
+
+-
+
+editor_mail_data_placeholder_message: Тяло на съобщението
+
+-
+
+editor_mail_data_send: Изпрати писмо
+
+-
+
+editor_mail_placeholder_address: Въведете тук своя имейл адрес
+
+-
+
+editor_mail_placeholder_error: Въведете тук незадължително съобщение за грешка
+
+-
+
+editor_mail_placeholder_success: Въведете тук незадължително съобщение за успех
+
+-
+
+editor_mail_label_address: Вашата електронна поща
+
+-
+
+editor_mail_label_success: Съобщение за успех
+
+-
+
+editor_mail_label_error: Съобщение за грешка
+
+-
+
+editor_mail_label_placeholder_address: Placeholder за имейл
+
+-
+
+editor_mail_label_placeholder_subject: Placeholder за тема на имейл
+
+-
+
+editor_mail_label_placeholder_message: Placeholder за Body Message
+
+-
+
+editor_mail_label_button: Текст на бутон
+
+-
+
+editor_section_toolbox: Разпределение / карта
+
+-
+
+editor_section_justify_start: Подравнете елементите към лявата страна
+
+-
+
+editor_section_justify_center: Подравнете елементите към средата
+
+-
+
+editor_section_justify_end: Подравнете елементите към дясната страна
+
+-
+
+editor_section_justify_space_between: Място между
+
+-
+
+editor_section_justify_space_evenly: Пространство равномерно
+
+-
+
+editor_section_justify_fill_row: Попълнете ред
+
+-
+
+editor_section_gap: Разликата между блокове
+
+-
+
+editor_section_min_block_width: Минимална ширина на блока
+
+-
+
+editor_section_edit: редактиране
+
+-
+
+editor_section_card: Оптимизиране на съдържанието за карти
+
+-
+
+editor_section_padding_top: Разстояние нагоре
+
+-
+
+editor_section_padding_bottom: Разстояние
+
+-
+
+editor_section_color: Цвят на текста
+
+-
+
+editor_section_background_color: Цвят на фона
+
+-
+
+editor_section_background_image: Фоново изображение
+
+-
+
+editor_section_background_blend_mode: Режим на фоново смес
+
+-
+
+editor_section_border_color: Граничен цвят
+
+-
+
+editor_section_border_width: Гранична ширина
+
+-
+
+editor_section_border_radius: Радиус на ъгъла
+
+-
+
+editor_section_shadow: Капка сянка
+
+-
+
+editor_section_match_row_height: Височина на пълен ред
+
+-
+
+editor_pagelist_toolbox: Списък със страници
+
+-
+
+editor_pagelist_template: Изберете Шаблон
+
+-
+
+editor_pagelist_default: Шаблон по подразбиране
+
+-
+
+editor_pagelist_url_regex: Филтър за регулярни изрази на URL
+
+-
+
+editor_pagelist_type: Тип
+
+-
+
+editor_pagelist_filter_tag: Филтрирайте по етикет
+
+-
+
+editor_pagelist_filter_template: Филтриране по шаблон
+
+-
+
+editor_pagelist_limit_offset: Limit и Offset
+
+-
+
+editor_pagelist_sort_var: Сортирай по променлива
+
+-
+
+editor_pagelist_sort_order: Сортирай ред
+
+-
+
+editor_paragraph_toolbox: Текст
+
+-
+
+editor_paragraph_large: По-голям размер на шрифта
+
+-
+
+editor_quote_toolbox: Цитат
+
+-
+
+editor_quote_placeholder: Въведете текст
+
+-
+
+editor_quote_placeholder_caption: Въведете надпис
+
+-
+
+editor_slider_toolbox: Слайдшоу
+
+-
+
+editor_slider_width: Ширина
+
+-
+
+editor_slider_height: Височина
+
+-
+
+editor_slider_files: Глоб модели или URL адреси
+
+-
+
+editor_slider_dots: Показване на навигация с точки
+
+-
+
+editor_slider_autoplay: Автоматично изпълнение
+
+-
+
+editor_snippet_toolbox: Фрагмент на персонализиран шаблон
+
+-
+
+editor_snippet_input: Код на фрагмент
+
+-
+
+editor_snippet_file: Изберете файл с фрагмент
+
+-
+
+editor_table_toolbox: Табличен списък
+
+-
+
+editor_code: Програмен код
+
+-
+
+editor_toc: Съдържание
+
+-
+
+editor_left: Наляво
+
+-
+
+editor_center: Център
+
+-
+
+editor_edit_style: Редактиране на стил
+
+-
+
+editor_layout_default: Оформление по подразбиране
+
+-
+
+editor_layout_stretch: Разгънете блока до пълната ширина
+
+-
+
+editor_layout_width: Ширина
+
+-
+
+editor_ui_placeholder: Кликнете тук, за да добавите първия си блок ...
+
+-
+
+editor_ui_add: Добавяне
+
+-
+
+editor_ui_settings: Щракнете, за да отворите настройките, или плъзнете, за да преместите блок
+
+-
+
+editor_ui_delete: Изтриване на блок
+
+-
+
+editor_ui_move_up: Преместване на блока нагоре
+
+-
+
+editor_ui_move_down: Преместване на блока надолу
+
+-
+
+editor_ui_convert: Преобразуване на блок в
+
+-
+
+editor_ui_browse: Преглед на файлове
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Изберете място за новата страниц�
 
 -
 
+page_date: Дата
+
+-
+
 page_move_destination: Изберете дестинация за преместване
 
 -
@@ -451,6 +879,10 @@ page_var_name: Име на променлива
 -
 
 page_vars_content: Съдържание
+
+-
+
+page_vars_color: Цветове
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Искате ли да приложите избраната
 -
 
 shared_vars_content: Съдържание по подразбиране
+
+-
+
+shared_vars_color: Цветове по подразбиране
 
 -
 

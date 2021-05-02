@@ -54,10 +54,6 @@ btn_duplicate_page: Duplicate Page
 
 -
 
-btn_edit: Edit
-
--
-
 btn_edit_file_info: Edit File Info
 
 -
@@ -79,6 +75,10 @@ btn_get_themes: Get More Themes
 -
 
 btn_getting_data: Getting Data ...
+
+-
+
+btn_help: Help
 
 -
 
@@ -224,6 +224,441 @@ dashboard_title: Dashboard
 
 
 dropzone: Drag Files Here
+
+-
+
+
+
+
+
+
+
+
+editor_buttons_toolbox: Buttons
+
+-
+
+editor_button_primary: Main Button
+
+-
+
+editor_button_secondary: Secondary Button 
+
+-
+
+editor_button_label: Text
+
+-
+
+editor_button_link: Link
+
+-
+
+editor_button_color: Text Color 
+
+-
+
+editor_button_background_color: Background 
+
+-
+
+editor_button_border_color: Border Color
+
+-
+
+editor_button_border_width: Border Width
+
+-
+
+editor_button_border_radius: Corner Radius
+
+-
+
+editor_button_padding_horizontal: Horizontal Spacing
+
+-
+
+editor_button_padding_vertical: Vertical Spacing
+
+-
+
+editor_delimiter_toolbox: Delimiter
+
+-
+
+editor_filelist_toolbox: File List
+
+-
+
+editor_filelist_template: Select Template 
+
+-
+
+editor_filelist_default: Default Template
+
+-
+
+editor_filelist_files: Glob Patterns (Separated by Comma)
+
+-
+
+editor_gallery_toolbox: Image Gallery 
+
+-
+
+editor_gallery_files: Glob Patterns or URLs
+
+-
+
+editor_gallery_width: Image Width in Pixels
+
+-
+
+editor_gallery_clean_bottom: Clean Bottom Edge
+
+-
+
+editor_heading_toolbox: Heading
+
+-
+
+editor_image_toolbox: Image
+
+-
+
+editor_list_toolbox: List 
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Numbered List
+
+-
+
+editor_mail_toolbox: Email Form
+
+-
+
+editor_mail_data_error: Please fill out all fields!
+
+-
+
+editor_mail_data_success: Successfully sent email!
+
+-
+
+editor_mail_data_placeholder_address: Your email address
+
+-
+
+editor_mail_data_placeholder_subject: Email subject
+
+-
+
+editor_mail_data_placeholder_message: Message body
+
+-
+
+editor_mail_data_send: Send Mail
+
+-
+
+editor_mail_placeholder_address: Enter your email address here
+
+-
+
+editor_mail_placeholder_error: Enter an optional error message here
+
+-
+
+editor_mail_placeholder_success: Enter an optional success message here
+
+-
+
+editor_mail_label_address: Your Email Address
+
+-
+
+editor_mail_label_success: Success Message
+
+-
+
+editor_mail_label_error: Error message
+
+-
+
+editor_mail_label_placeholder_address: Placeholder for Email
+
+-
+
+editor_mail_label_placeholder_subject: Placeholder for Email Subject
+
+-
+
+editor_mail_label_placeholder_message: Placeholder for Message Body
+
+-
+
+editor_mail_label_button: Button Text
+
+-
+
+editor_section_toolbox: Layout Section / Card
+
+-
+
+editor_section_justify_start: Align elements torward the left side
+
+-
+
+editor_section_justify_center: Align elements torward the middle
+
+-
+
+editor_section_justify_end: Align elements torward the right side
+
+-
+
+editor_section_justify_space_between: Space between
+
+-
+
+editor_section_justify_space_evenly: Space evenly 
+
+-
+
+editor_section_justify_fill_row: Fill row
+
+-
+
+editor_section_gap: Gap between blocks
+
+-
+
+editor_section_min_block_width: Minimum block width 
+
+-
+
+editor_section_edit: Edit
+
+-
+
+editor_section_card: Optimize Content for Cards
+
+-
+
+editor_section_overflow_hidden: Overflow hidden 
+
+-
+
+editor_section_padding_top: Spacing upwards
+
+-
+
+editor_section_padding_bottom: Spacing down
+
+-
+
+editor_section_color: Text Color
+
+-
+
+editor_section_background_color: Background Color 
+
+-
+
+editor_section_background_image: Background Image
+
+-
+
+editor_section_background_blend_mode: Background Blend Mode
+
+-
+
+editor_section_border_color: Border Color 
+
+-
+
+editor_section_border_width: Border Width
+
+-
+
+editor_section_border_radius: Corner Radius
+
+-
+
+editor_section_shadow: Drop Shadow
+
+-
+
+editor_section_match_row_height: Full Row Height
+
+-
+
+editor_pagelist_toolbox: Page List
+
+-
+
+editor_pagelist_template: Select Template 
+
+-
+
+editor_pagelist_default: Default Template
+
+-
+
+editor_pagelist_url_regex: URL Regex Filter
+
+-
+
+editor_pagelist_type: Type
+
+-
+
+editor_pagelist_filter_tag: Filter by Tag
+
+-
+
+editor_pagelist_filter_template: Filter by Template
+
+-
+
+editor_pagelist_limit_offset: Limit and Offset
+
+-
+
+editor_pagelist_sort_var: Sort by Variable
+
+-
+
+editor_pagelist_sort_order: Sort Order
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Larger Font Size
+
+-
+
+editor_quote_toolbox: Quote
+
+-
+
+editor_quote_placeholder: Enter a text
+
+-
+
+editor_quote_placeholder_caption: Enter a caption
+
+-
+
+editor_slider_toolbox: Slideshow
+
+-
+
+editor_slider_width: Width 
+
+-
+
+editor_slider_height: Height 
+
+-
+
+editor_slider_files: Glob Patterns or URLs
+
+-
+
+editor_slider_dots: Show Dot Navigation 
+
+-
+
+editor_slider_autoplay: Autoplay
+
+-
+
+editor_snippet_toolbox: Custom Template Snippet
+
+-
+
+editor_snippet_input: Snippet Code 
+
+-
+
+editor_snippet_file: Select a Snippet File
+
+-
+
+editor_table_toolbox: Tabular List
+
+-
+
+editor_code: Source Code
+
+-
+
+editor_toc: Table of Contents 
+
+-
+
+editor_left: Left 
+
+-
+
+editor_center: Center
+
+-
+
+editor_edit_style: Edit Style
+
+-
+
+editor_layout_default: Default layout
+
+-
+
+editor_layout_stretch: Expand the block to full width
+
+-
+
+editor_layout_width: Width
+
+-
+
+editor_ui_placeholder: Click here to add your first block ...
+
+-
+
+editor_ui_add: Add
+
+-
+
+editor_ui_settings: Click to open settings or drag to move block
+
+-
+
+editor_ui_delete: Delete block
+
+-
+
+editor_ui_move_up: Move block up 
+
+-
+
+editor_ui_move_down: Move block down
+
+-
+
+editor_ui_convert: Convert block to
+
+-
+
+editor_ui_browse: Browse Files
 
 -
 
@@ -528,6 +963,10 @@ page_add_location: Select a location for the new page
 
 -
 
+page_date: Date
+
+-
+
 page_move_destination: Select a destination for moving
 
 -
@@ -557,6 +996,10 @@ page_var_name: Variable Name
 -
 
 page_vars_content: Content
+
+-
+
+page_vars_color: Colors
 
 -
 
@@ -611,6 +1054,10 @@ shared_theme_apply: Do you want to apply the selected theme and update the list 
 -
 
 shared_vars_content: Default Content
+
+-
+
+shared_vars_color: Default Colors
 
 -
 

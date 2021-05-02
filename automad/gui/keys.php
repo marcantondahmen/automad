@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Keys class provides all methods to search all kind of content variables (keys of the data array) used in templates. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Keys {
@@ -86,6 +86,22 @@ class Keys {
 
 
 	/**
+	 * 	Get color variable keys from an array of keys.
+	 * 
+	 *	@param array $keys
+	 *	@return array The array with only text variables.
+	 */
+
+	public static function filterColorKeys($keys) {
+
+		return array_filter($keys, function($key) {
+			return preg_match('/^color/', $key);
+		});
+
+	}
+
+
+	/**
 	 * 	Get settings variable keys from an array of keys.
 	 * 
 	 *	@param array $keys
@@ -97,7 +113,7 @@ class Keys {
 		sort($keys);
 
 		return array_filter($keys, function($key) {
-			return (preg_match('/^(text|\+)/', $key) == false);
+			return (preg_match('/^(text|\+|color)/', $key) == false);
 		});
 
 	}
@@ -113,6 +129,10 @@ class Keys {
 	
 	public static function inCurrentTemplate($Page, $Theme) {
 		
+		if (empty($Theme)) {
+			return array();
+		} 
+
 		// Don't use $Page->getTemplate() to prevent exit on errors.
 		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
 		$keys = self::inTemplate($file);
@@ -133,7 +153,7 @@ class Keys {
 		
 		$keys = array();
 	
-		if (file_exists($file)) {
+		if (is_readable($file)) {
 			
 			// Find all variable keys in the template file.
 			$content = file_get_contents($file);
@@ -204,6 +224,10 @@ class Keys {
 
 	private static function cleanUp($keys, $mask = array()) {
 	
+		if (empty($keys)) {
+			return array();
+		}
+
 		if (!empty($mask)) {
 			$keys = array_filter($keys, function($key) use ($mask) {
 				return !in_array($key, $mask);

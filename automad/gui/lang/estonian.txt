@@ -50,10 +50,6 @@ btn_duplicate_page: Duplikaatleht
 
 -
 
-btn_edit: Muuda
-
--
-
 btn_edit_file_info: Redigeeri failiteavet
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Hankige rohkem teemasid
 -
 
 btn_getting_data: Andmete hankimine ...
+
+-
+
+btn_help: Abi
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Hiljuti muudetud lehed
 -
 
 dropzone: Lohistage failid siia
+
+-
+
+editor_buttons_toolbox: Nööbid
+
+-
+
+editor_button_primary: Põhinupp
+
+-
+
+editor_button_secondary: Sekundaarne nupp
+
+-
+
+editor_button_label: Tekst
+
+-
+
+editor_button_link: Link
+
+-
+
+editor_button_color: Teksti värv
+
+-
+
+editor_button_background_color: Taust
+
+-
+
+editor_button_border_color: Piir
+
+-
+
+editor_button_border_width: Piirilaius
+
+-
+
+editor_button_border_radius: Nurgaraadius
+
+-
+
+editor_button_padding_horizontal: Horisontaalne vahe
+
+-
+
+editor_button_padding_vertical: Vertikaalne vahe
+
+-
+
+editor_delimiter_toolbox: Piiraja
+
+-
+
+editor_filelist_toolbox: Faililoend
+
+-
+
+editor_filelist_template: Valige mall
+
+-
+
+editor_filelist_default: Vaikemall
+
+-
+
+editor_filelist_files: Gloobuse mustrid (eraldatud komaga)
+
+-
+
+editor_gallery_toolbox: Pildigalerii
+
+-
+
+editor_gallery_files: Glob mustrid või URL-id
+
+-
+
+editor_gallery_width: Pildi laius pikslites
+
+-
+
+editor_gallery_clean_bottom: Puhastage alumine serv
+
+-
+
+editor_heading_toolbox: Pealkiri
+
+-
+
+editor_image_toolbox: Pilt
+
+-
+
+editor_list_toolbox: Nimekiri
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Numbriloend
+
+-
+
+editor_mail_toolbox: E-posti vorm
+
+-
+
+editor_mail_data_error: Palun täitke kõik väljad!
+
+-
+
+editor_mail_data_success: E-posti saatmine õnnestus!
+
+-
+
+editor_mail_data_placeholder_address: Sinu emaili aadress
+
+-
+
+editor_mail_data_placeholder_subject: E-posti teema
+
+-
+
+editor_mail_data_placeholder_message: Sõnumi sisu
+
+-
+
+editor_mail_data_send: Kirja saatma
+
+-
+
+editor_mail_placeholder_address: Sisestage siia oma e-posti aadress
+
+-
+
+editor_mail_placeholder_error: Sisestage siia valikuline tõrketeade
+
+-
+
+editor_mail_placeholder_success: Sisestage siia valikuline eduteade
+
+-
+
+editor_mail_label_address: Sinu emaili aadress
+
+-
+
+editor_mail_label_success: Edusõnum
+
+-
+
+editor_mail_label_error: Veateade
+
+-
+
+editor_mail_label_placeholder_address: E-posti kohahoidja
+
+-
+
+editor_mail_label_placeholder_subject: E-posti teema kohahoidja
+
+-
+
+editor_mail_label_placeholder_message: Sõnumiteksti kohatäide
+
+-
+
+editor_mail_label_button: Nuputekst
+
+-
+
+editor_section_toolbox: Paigutusosa / kaart
+
+-
+
+editor_section_justify_start: Joondage elemendid vasakpoolse poole
+
+-
+
+editor_section_justify_center: Joondage elemendid keskele
+
+-
+
+editor_section_justify_end: Joondage elemendid paremale poole
+
+-
+
+editor_section_justify_space_between: Ruumi vahel
+
+-
+
+editor_section_justify_space_evenly: Ruumi ühtlaselt
+
+-
+
+editor_section_justify_fill_row: Täitke
+
+-
+
+editor_section_gap: Vahe plokkide vahel
+
+-
+
+editor_section_min_block_width: Minimaalne ploki laius
+
+-
+
+editor_section_edit: Redigeerima
+
+-
+
+editor_section_card: Kaartide sisu optimeerimine
+
+-
+
+editor_section_padding_top: Vahekaugus ülespoole
+
+-
+
+editor_section_padding_bottom: Vahemaad
+
+-
+
+editor_section_color: Teksti värv
+
+-
+
+editor_section_background_color: Taustavärv
+
+-
+
+editor_section_background_image: Taustapilt
+
+-
+
+editor_section_background_blend_mode: Taustapõletiku režiim
+
+-
+
+editor_section_border_color: Piir
+
+-
+
+editor_section_border_width: Piirilaius
+
+-
+
+editor_section_border_radius: Nurgaraadius
+
+-
+
+editor_section_shadow: Tilk vari
+
+-
+
+editor_section_match_row_height: Täisrea kõrgus
+
+-
+
+editor_pagelist_toolbox: Lehekülgede loend
+
+-
+
+editor_pagelist_template: Valige mall
+
+-
+
+editor_pagelist_default: Vaikemall
+
+-
+
+editor_pagelist_url_regex: URL-i regex-filter
+
+-
+
+editor_pagelist_type: Tüüp
+
+-
+
+editor_pagelist_filter_tag: Filtreeri sildi järgi
+
+-
+
+editor_pagelist_filter_template: Filtreeri malli järgi
+
+-
+
+editor_pagelist_limit_offset: Piir ja nihe
+
+-
+
+editor_pagelist_sort_var: Sordi muutuja järgi
+
+-
+
+editor_pagelist_sort_order: Sordi järjekord
+
+-
+
+editor_paragraph_toolbox: Tekst
+
+-
+
+editor_paragraph_large: Suurem fondi suurus
+
+-
+
+editor_quote_toolbox: Tsiteeri
+
+-
+
+editor_quote_placeholder: Sisestage tekst
+
+-
+
+editor_quote_placeholder_caption: Sisestage pealkiri
+
+-
+
+editor_slider_toolbox: Slaidiseanss
+
+-
+
+editor_slider_width: Laius
+
+-
+
+editor_slider_height: Kõrgus
+
+-
+
+editor_slider_files: Glob mustrid või URL-id
+
+-
+
+editor_slider_dots: Kuva punktnavigatsioon
+
+-
+
+editor_slider_autoplay: Automaatne esitamine
+
+-
+
+editor_snippet_toolbox: Kohandatud mallilõik
+
+-
+
+editor_snippet_input: Katkendi kood
+
+-
+
+editor_snippet_file: Valige katkefail
+
+-
+
+editor_table_toolbox: Tabelite loend
+
+-
+
+editor_code: Lähtekood
+
+-
+
+editor_toc: Sisukord
+
+-
+
+editor_left: Vasakule
+
+-
+
+editor_center: Keskus
+
+-
+
+editor_edit_style: Muuda stiili
+
+-
+
+editor_layout_default: Vaikimisi paigutus
+
+-
+
+editor_layout_stretch: Laiendage plokki täislaiusele
+
+-
+
+editor_layout_width: Laius
+
+-
+
+editor_ui_placeholder: Esimese ploki lisamiseks klõpsake siia ...
+
+-
+
+editor_ui_add: Lisama
+
+-
+
+editor_ui_settings: Klõpsake seadete avamiseks või lohistage ploki teisaldamiseks
+
+-
+
+editor_ui_delete: Kustuta plokk
+
+-
+
+editor_ui_move_up: Liigutage plokk üles
+
+-
+
+editor_ui_move_down: Liigutage plokk alla
+
+-
+
+editor_ui_convert: Teisenda plokk
+
+-
+
+editor_ui_browse: Sirvi faile
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Valige uue lehe asukoht
 
 -
 
+page_date: Kuupäev
+
+-
+
 page_move_destination: Valige kolimiseks sihtkoht
 
 -
@@ -451,6 +879,10 @@ page_var_name: Muutuja nimi
 -
 
 page_vars_content: Sisu
+
+-
+
+page_vars_color: Värvid
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Kas soovite valitud teema rakendada ja saadaolevate muutujat
 -
 
 shared_vars_content: Vaikimisi sisu
+
+-
+
+shared_vars_color: Vaikevärvid
 
 -
 

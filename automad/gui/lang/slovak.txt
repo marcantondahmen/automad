@@ -50,10 +50,6 @@ btn_duplicate_page: Duplicitná stránka
 
 -
 
-btn_edit: Upraviť
-
--
-
 btn_edit_file_info: Upraviť informácie o súbore
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Získajte viac motívov
 -
 
 btn_getting_data: Získavanie údajov ...
+
+-
+
+btn_help: Pomoc
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Naposledy upravené stránky
 -
 
 dropzone: Sem presuňte súbory
+
+-
+
+editor_buttons_toolbox: Gombíky
+
+-
+
+editor_button_primary: Hlavné tlačidlo
+
+-
+
+editor_button_secondary: Druhotné tlačidlo
+
+-
+
+editor_button_label: Text
+
+-
+
+editor_button_link: Spojenie
+
+-
+
+editor_button_color: Farba textu
+
+-
+
+editor_button_background_color: Pozadie
+
+-
+
+editor_button_border_color: Hraničná farba
+
+-
+
+editor_button_border_width: Hraničná šírka
+
+-
+
+editor_button_border_radius: Rohový polomer
+
+-
+
+editor_button_padding_horizontal: Horizontálny rozstup
+
+-
+
+editor_button_padding_vertical: Vertikálny rozstup
+
+-
+
+editor_delimiter_toolbox: Oddeľovač
+
+-
+
+editor_filelist_toolbox: Zoznam súborov
+
+-
+
+editor_filelist_template: Vyberte šablónu
+
+-
+
+editor_filelist_default: Predvolená šablóna
+
+-
+
+editor_filelist_files: Vzory globusu (oddelené čiarkou)
+
+-
+
+editor_gallery_toolbox: Galéria obrázkov
+
+-
+
+editor_gallery_files: Vzory alebo adresy URL
+
+-
+
+editor_gallery_width: Šírka obrázka v pixeloch
+
+-
+
+editor_gallery_clean_bottom: Vyčistite spodný okraj
+
+-
+
+editor_heading_toolbox: Nadpis
+
+-
+
+editor_image_toolbox: Obrázok
+
+-
+
+editor_list_toolbox: Zoznam
+
+-
+
+editor_list_unordered: Odrážky
+
+-
+
+editor_list_ordered: Číslovaný zoznam
+
+-
+
+editor_mail_toolbox: E-mailový formulár
+
+-
+
+editor_mail_data_error: Vyplňte všetky polia!
+
+-
+
+editor_mail_data_success: E-mail bol úspešne odoslaný!
+
+-
+
+editor_mail_data_placeholder_address: Vaša emailová adresa
+
+-
+
+editor_mail_data_placeholder_subject: Predmet emailu
+
+-
+
+editor_mail_data_placeholder_message: Telo správy
+
+-
+
+editor_mail_data_send: Poslať mail
+
+-
+
+editor_mail_placeholder_address: Sem zadajte svoju e-mailovú adresu
+
+-
+
+editor_mail_placeholder_error: Sem zadajte voliteľnú chybovú správu
+
+-
+
+editor_mail_placeholder_success: Sem zadajte voliteľnú správu o úspechu
+
+-
+
+editor_mail_label_address: Vaša emailová adresa
+
+-
+
+editor_mail_label_success: Správa o úspechu
+
+-
+
+editor_mail_label_error: Chybná správa
+
+-
+
+editor_mail_label_placeholder_address: Zástupný symbol pre e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Zástupný symbol pre predmet e-mailu
+
+-
+
+editor_mail_label_placeholder_message: Zástupný symbol pre telo správy
+
+-
+
+editor_mail_label_button: Text tlačidla
+
+-
+
+editor_section_toolbox: Sekcia rozloženia / karty
+
+-
+
+editor_section_justify_start: Zarovnajte prvky smerom k ľavej strane
+
+-
+
+editor_section_justify_center: Zarovnajte prvky smerom k stredu
+
+-
+
+editor_section_justify_end: Zarovnajte prvky smerom k pravej strane
+
+-
+
+editor_section_justify_space_between: Priestor medzi
+
+-
+
+editor_section_justify_space_evenly: Rovnomerne
+
+-
+
+editor_section_justify_fill_row: Vyplniť riadok
+
+-
+
+editor_section_gap: Medzera medzi blokmi
+
+-
+
+editor_section_min_block_width: Minimálna šírka bloku
+
+-
+
+editor_section_edit: Upraviť
+
+-
+
+editor_section_card: Optimalizujte obsah pre karty
+
+-
+
+editor_section_padding_top: Rozmiestnenie smerom nahor
+
+-
+
+editor_section_padding_bottom: Rozteč
+
+-
+
+editor_section_color: Farba textu
+
+-
+
+editor_section_background_color: Farba pozadia
+
+-
+
+editor_section_background_image: Obrázok na pozadí
+
+-
+
+editor_section_background_blend_mode: Režim Blend
+
+-
+
+editor_section_border_color: Hraničná farba
+
+-
+
+editor_section_border_width: Hraničná šírka
+
+-
+
+editor_section_border_radius: Rohový polomer
+
+-
+
+editor_section_shadow: Vrhať tieň
+
+-
+
+editor_section_match_row_height: Výška riadka
+
+-
+
+editor_pagelist_toolbox: Zoznam stránok
+
+-
+
+editor_pagelist_template: Vyberte šablónu
+
+-
+
+editor_pagelist_default: Predvolená šablóna
+
+-
+
+editor_pagelist_url_regex: Filter URL regulárneho výrazu
+
+-
+
+editor_pagelist_type: Typ
+
+-
+
+editor_pagelist_filter_tag: Filtrovať podľa značky
+
+-
+
+editor_pagelist_filter_template: Filtrovať podľa šablóny
+
+-
+
+editor_pagelist_limit_offset: Limit a offset
+
+-
+
+editor_pagelist_sort_var: Zoradiť podľa premennej
+
+-
+
+editor_pagelist_sort_order: Poradie zoradenia
+
+-
+
+editor_paragraph_toolbox: Text
+
+-
+
+editor_paragraph_large: Väčšia veľkosť písma
+
+-
+
+editor_quote_toolbox: Citát
+
+-
+
+editor_quote_placeholder: Zadajte text
+
+-
+
+editor_quote_placeholder_caption: Zadajte titulok
+
+-
+
+editor_slider_toolbox: Prezentácia
+
+-
+
+editor_slider_width: Šírka
+
+-
+
+editor_slider_height: Výška
+
+-
+
+editor_slider_files: Vzory alebo adresy URL
+
+-
+
+editor_slider_dots: Zobraziť bodovú navigáciu
+
+-
+
+editor_slider_autoplay: Automatické prehrávanie
+
+-
+
+editor_snippet_toolbox: Úryvok vlastnej šablóny
+
+-
+
+editor_snippet_input: Útržkový kód
+
+-
+
+editor_snippet_file: Vyberte súbor úryvkov
+
+-
+
+editor_table_toolbox: Tabuľkový zoznam
+
+-
+
+editor_code: Zdrojový kód
+
+-
+
+editor_toc: Obsah
+
+-
+
+editor_left: Vľavo
+
+-
+
+editor_center: Stred
+
+-
+
+editor_edit_style: Upraviť štýl
+
+-
+
+editor_layout_default: Predvolené rozloženie
+
+-
+
+editor_layout_stretch: Rozbaľte blok na celú šírku
+
+-
+
+editor_layout_width: Šírka
+
+-
+
+editor_ui_placeholder: Kliknutím sem pridajte svoj prvý blok ...
+
+-
+
+editor_ui_add: Pridať
+
+-
+
+editor_ui_settings: Kliknutím otvoríte nastavenia alebo presunutím presuniete blok
+
+-
+
+editor_ui_delete: Odstrániť blok
+
+-
+
+editor_ui_move_up: Posunúť blok nahor
+
+-
+
+editor_ui_move_down: Posunúť blok nadol
+
+-
+
+editor_ui_convert: Konvertovať blok na
+
+-
+
+editor_ui_browse: Prehľadávať súbory
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Vyberte umiestnenie pre novú stránku
 
 -
 
+page_date: Dátum
+
+-
+
 page_move_destination: Vyberte cieľ presunu
 
 -
@@ -451,6 +879,10 @@ page_var_name: Názov premennej
 -
 
 page_vars_content: Obsah
+
+-
+
+page_vars_color: Farby
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Chcete teraz použiť vybratú tému a aktualizovať zoznam 
 -
 
 shared_vars_content: Predvolený obsah
+
+-
+
+shared_vars_color: Predvolené farby
 
 -
 

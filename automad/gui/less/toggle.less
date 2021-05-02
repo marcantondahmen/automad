@@ -26,8 +26,8 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
@@ -72,10 +72,6 @@
 	
 	&[class*="am-toggle-switch"] {
 		
-		&.uk-button {
-			background-color: @form-background;
-		}
-
 		&:before {
 			content: '\f204';
 			position: relative;
@@ -87,9 +83,15 @@
 		}	
 		
 		&.uk-active {
-			
+
 			&:before {
 				content: '\f205';
+			}
+
+			.uk-button& {
+				color: @am-success;
+				background-color: transparent;
+				border-color: @am-success !important;
 			}
 			
 		}
@@ -123,7 +125,7 @@
 		}
 		
 	}
-	
+
 }
 
 // Fade in active container.

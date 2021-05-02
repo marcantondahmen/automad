@@ -26,11 +26,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2017-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 /*!
@@ -66,7 +66,7 @@
 			autocomplete: true,
 			enablescripts: false,
 			height: 500,
-			maxsplitsize: 1000,
+			maxsplitsize: 1100,
 			codemirror: {
 				mode: 'gfm',
 				lineWrapping: true,
@@ -433,7 +433,7 @@
 			});
 
 			editor.on('action.image', function() {
-				editor.editor.AutomadImage();
+				editor.editor.AutomadBlockImage();
 			});
 
 			editor.on('action.listUl', function () {

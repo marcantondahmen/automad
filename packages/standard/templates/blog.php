@@ -1,19 +1,21 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ snippets/header.php @>
-	<div class="content uk-block">
-		<@ snippets/content.php @>
-		<@ snippets/pagelist_config.php @>
+<@ elements/header.php @>
+	<main class="content uk-block">
+		<@ elements/content.php @>
+		<@ elements/pagelist_config.php @>
 		<@~ if not @{ checkboxHideFilters } @>
-			<div id="list" class="buttons-stacked uk-margin-bottom">
-				<@ snippets/filters.php @>
-				<@ snippets/clear_search.php @>
+			<div id="list" class="am-block buttons-stacked uk-margin-bottom">
+				<@ elements/filters.php @>
+				<@ elements/clear_search.php @>
 			</div>
 		<@ end ~@>
-		<@ if @{ checkboxUseAlternativePagelistLayout } @>
-			<@ blocks/pagelist/blog_alt.php @>
-		<@ else @>
-			<@ blocks/pagelist/blog.php @>
-		<@ end @>
-		<@ snippets/pagination.php @>
-	</div>
-<@ snippets/footer.php @>
+		<section <@ if @{ :pagelistDisplayCount } < 3 @>class="am-block"<@ end @>>
+			<@ if @{ checkboxUseAlternativePagelistLayout } @>
+				<@ blocks/pagelist/blog_alt.php @>
+			<@ else @>
+				<@ blocks/pagelist/blog.php @>
+			<@ end @>
+		</section>
+		<@ elements/pagination.php @>
+	</main>
+<@ elements/footer.php @>

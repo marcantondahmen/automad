@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2017-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -46,8 +46,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The InPage class provides all methods related to edit content directly in the page. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2017-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2017-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class InPage {
@@ -143,9 +143,9 @@ class InPage {
 							</div>
 						</div>
 					</div>
-					$modalSelectImage
-					$modalLink
 				</div>
+				$modalSelectImage
+				$modalLink
 HTML;
 		
 		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);
@@ -172,6 +172,7 @@ HTML;
 					// Cleanup window object by removing jQuery and UIkit.
 					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
 					Components\Header\BlockSnippetArrays::render() . "\n" .
+					Components\Header\EditorTextModules::render() . "\n" .
 					'<!-- Automad GUI end -->' . "\n";
 			
 		// Check if there is already any other script tag and try to prepend all assets as first items.
@@ -233,16 +234,32 @@ HTML;
 			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 		
-		// Enable valid buttons.
-		$str = str_replace(
-			array(AM_DEL_INPAGE_BUTTON_OPEN, AM_DEL_INPAGE_BUTTON_CLOSE), 
-			array(
-				Prefix::attributes(' <span class="am-inpage"><a href="#am-inpage-edit-modal" class="am-inpage-edit-button" data-uk-modal="{modal:false}" data-am-inpage-content=\''), 
-				Prefix::attributes('\'><i class="uk-icon-pencil"></i>&nbsp;&nbsp;' . Text::get('btn_edit') . '</a></span>&nbsp;&nbsp;')
-			), 
-			$str
-		);
-		
+		$open = preg_quote(AM_DEL_INPAGE_BUTTON_OPEN);
+		$close = preg_quote(AM_DEL_INPAGE_BUTTON_CLOSE);
+
+		$str = preg_replace_callback("/$open(.+?\"key\":\"([^\"]+)\".+?)$close/is", function($matches) {
+
+			$json = $matches[1];
+			$name = ucwords(str_replace('+', '' ,preg_replace('/([A-Z])/', ' $1', $matches[2])));
+
+			$html = <<< HTML
+					<span class="am-inpage">
+						<a 
+						href="#am-inpage-edit-modal" 
+						class="am-inpage-edit-button" 
+						data-uk-modal="{modal:false}" 
+						data-am-inpage-content='$json'
+						>
+							<i class="uk-icon-pencil"></i>&nbsp;
+							$name 
+						</a>
+					</span>
+HTML;
+
+			return Prefix::attributes($html);
+
+		}, $str);
+
 		return $str;
 		
 	}

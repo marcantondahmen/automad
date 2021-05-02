@@ -26,11 +26,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -56,15 +56,29 @@
 
 			},
 
+			colorPicker: function(cls, value) {
+
+				const wrapper = Automad.util.create.element('div', ['uk-flex']);
+
+				wrapper.dataset.amColorpicker = true;
+				wrapper.innerHTML = `
+					<input type="color" value="${value}">
+					<input type="text" class="${cls} am-u-form-controls am-u-width-1-1" value="${value}">
+				`;
+
+				return wrapper;
+
+			},
+
 			editable: function(cls, placeholder, value) {
 
-				var div = Automad.util.create.element('div', cls);
+				var span = Automad.util.create.element('span', cls);
 
-				div.contentEditable = true;
-				div.dataset.placeholder = placeholder;
-				div.innerHTML = value;
+				span.contentEditable = true;
+				span.dataset.placeholder = placeholder;
+				span.innerHTML = value;
 
-				return div;
+				return span;
 
 			},
 
@@ -75,6 +89,34 @@
 				label.textContent = text;
 
 				return label;
+
+			},
+
+			numberUnit: function(clsPrefix, value) {
+
+				const create = Automad.util.create,
+					  wrapper = create.element('div', ['am-form-input-group']),
+					  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
+
+				value = String(value);
+
+				var number = value.replace(/([^\d\.]+)/g, ''),
+					unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
+
+				wrapper.innerHTML = `
+					${create.editable(
+						['cdx-input', 'uk-text-right', `${clsPrefix}number`],
+						'',
+						number
+					).outerHTML}
+					${create.select(
+						['cdx-input', `${clsPrefix}unit`],
+						units,
+						unit
+					).outerHTML}
+				`;
+
+				return wrapper;
 
 			},
 
@@ -142,6 +184,19 @@
 
 			return (bytes / 1000).toFixed(2) + ' kb';
 				
+		},
+
+		getNumberUnitAsString: function(numberInput, unitSelect) {
+
+			const number = Automad.util.stripNbsp(numberInput.textContent).trim(),
+				  unit = unitSelect.value;
+
+			if (number.length) {
+				return `${number}${unit}`;
+			}
+
+			return '';
+
 		},
 
 		resolvePath: function(path) {

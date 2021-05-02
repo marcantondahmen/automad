@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -47,11 +47,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The slider block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-class Slider {
+class Slider extends Paragraph {
 
 
 	/**	
@@ -72,18 +72,12 @@ class Slider {
 					return Parse::fileIsImage($file);
 				});
 
-				$figureAttr = '';
-
-				if (!empty($data->stretched)) {
-					$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
-				}
-
 				$defaults = array('dots' => true, 'autoplay' => true);
 				$options = array_merge($defaults, (array) $data);
 				$options = array_intersect_key($options, $defaults);
 
 				$first = 'am-active';
-				$html = '<figure ' . $figureAttr . '><div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
+				$html = '<div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
 				
 				foreach ($files as $file) {
 
@@ -101,7 +95,11 @@ HTML;
 
 				}
 				
-				return $html . '</div></figure>';
+				$html .= '</div>';
+				$class = self::classAttr();
+
+				return "<am-slider $class>$html</am-slider>";
+
 
 			}
 

@@ -1,29 +1,29 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
-<div class="@{ :classes | def('cards masonry') }<@ if @{ :pagelistDisplayCount } > 3 @> am-stretched<@ end @>">
+<div class="@{ :classes | def('cards masonry clean') }">
 	<@ foreach in pagelist ~@>
-		<div class="card" <@ ../../snippets/colors_inline.php @>>
-			<div class="card-content uk-panel uk-panel-box">
-				<@ if not @{ :hideThumbnails } and not @{ pageIconSvg } @>
-					<@~ ../../snippets/set_imageteaser_variable.php @>
-					<@~ if @{ :imageTeaser } @>
+		<div class="card" <@ ../../elements/colors_inline.php @>>
+			<div class="card-content uk-panel small uk-panel-box">
+				<@ if not @{ :hideThumbnails } and not @{ iconPanel } @>
+					<@~ ../../elements/set_image_card_variable.php @>
+					<@~ if @{ :imageCard } @>
 						<div class="uk-panel-teaser">
-							<a href="@{ url }"><img src="@{ :imageTeaser }"></a>
+							<a href="@{ url }"><img src="@{ :imageCard }"></a>
 						</div>
 					<@~ end ~@>
 				<@ end @>
 				<div class="uk-panel-title panel-body">
 					<a href="@{ url }">
-						<@ ../../snippets/icon.php @>
+						<@ ../../elements/icon.php @>
 						@{ title }
 					</a>
 					<div class="text-subtitle">
-						<@ ../../snippets/date.php @>
+						<@ ../../elements/date.php @>
 						<@ if @{ date } and @{ tags } @><br><@ end @>
-						<@ ../../snippets/tags.php @>
+						<@ ../../elements/tags.php @>
 					</div>
 				</div>
-				<@ ../../snippets/more.php @>
+				<@ ../../elements/more.php @>
 			</div>
 		</div>
 	<@ else @>

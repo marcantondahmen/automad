@@ -26,8 +26,8 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
@@ -61,6 +61,8 @@
 
 	&-modal {
 
+		overflow-x: hidden;
+		background-color: @am-bg !important;
 		-webkit-transform: none !important;
 				transform: none !important;
 
@@ -114,7 +116,7 @@
 			// The button above the small text field to expand.
 			:not(.am-fullscreen-bar) > :not(.uk-flex) > & {
 				position: absolute;
-				margin-top: -@button-height + 0.29rem;
+				margin-top: -@button-height + 0.12rem;
 				right: 0;
 			}
 

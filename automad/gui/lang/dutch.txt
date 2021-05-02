@@ -50,10 +50,6 @@ btn_duplicate_page: Dubbele pagina
 
 -
 
-btn_edit: Bewerk
-
--
-
 btn_edit_file_info: Bewerk bestandsinfo
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Krijg meer thema's
 -
 
 btn_getting_data: Gegevens ophalen ...
+
+-
+
+btn_help: Helpen
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Onlangs bewerkte pagina's
 -
 
 dropzone: Sleep bestanden hierheen
+
+-
+
+editor_buttons_toolbox: Toetsen
+
+-
+
+editor_button_primary: Hoofdknop
+
+-
+
+editor_button_secondary: Secundaire knop
+
+-
+
+editor_button_label: Tekst
+
+-
+
+editor_button_link: Koppeling
+
+-
+
+editor_button_color: Tekst kleur
+
+-
+
+editor_button_background_color: Achtergrond
+
+-
+
+editor_button_border_color: Rand kleur
+
+-
+
+editor_button_border_width: Grensbreedte
+
+-
+
+editor_button_border_radius: Hoekradius
+
+-
+
+editor_button_padding_horizontal: Horizontale afstand
+
+-
+
+editor_button_padding_vertical: Verticale afstand
+
+-
+
+editor_delimiter_toolbox: Scheidingsteken
+
+-
+
+editor_filelist_toolbox: Bestandslijst
+
+-
+
+editor_filelist_template: Selecteer sjabloon
+
+-
+
+editor_filelist_default: Standaardsjabloon
+
+-
+
+editor_filelist_files: Glob Patterns (gescheiden door komma)
+
+-
+
+editor_gallery_toolbox: Afbeeldingengalerij
+
+-
+
+editor_gallery_files: Glob Patronen of URL's
+
+-
+
+editor_gallery_width: Afbeeldingsbreedte in pixels
+
+-
+
+editor_gallery_clean_bottom: Maak de onderkant schoon
+
+-
+
+editor_heading_toolbox: Rubriek
+
+-
+
+editor_image_toolbox: Beeld
+
+-
+
+editor_list_toolbox: Lijst
+
+-
+
+editor_list_unordered: Kogel punten
+
+-
+
+editor_list_ordered: Genummerde lijst
+
+-
+
+editor_mail_toolbox: E-mail formulier
+
+-
+
+editor_mail_data_error: Vul alstublieft alle vakken in!
+
+-
+
+editor_mail_data_success: E-mail succesvol verzonden!
+
+-
+
+editor_mail_data_placeholder_address: Jouw e-mailadres
+
+-
+
+editor_mail_data_placeholder_subject: E-mail onderwerp
+
+-
+
+editor_mail_data_placeholder_message: Bericht lichaam
+
+-
+
+editor_mail_data_send: Verzend mail
+
+-
+
+editor_mail_placeholder_address: Voer hier uw e-mailadres in
+
+-
+
+editor_mail_placeholder_error: Voer hier een optioneel foutbericht in
+
+-
+
+editor_mail_placeholder_success: Voer hier een optioneel succesbericht in
+
+-
+
+editor_mail_label_address: Jouw e-mailadres
+
+-
+
+editor_mail_label_success: Succesbericht
+
+-
+
+editor_mail_label_error: Foutmelding
+
+-
+
+editor_mail_label_placeholder_address: Tijdelijke aanduiding voor e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Tijdelijke aanduiding voor e-mailonderwerp
+
+-
+
+editor_mail_label_placeholder_message: Tijdelijke aanduiding voor berichttekst
+
+-
+
+editor_mail_label_button: Knop tekst
+
+-
+
+editor_section_toolbox: Lay-out sectie / kaart
+
+-
+
+editor_section_justify_start: Lijn elementen aan de linkerkant uit
+
+-
+
+editor_section_justify_center: Lijn elementen naar het midden uit
+
+-
+
+editor_section_justify_end: Lijn elementen aan de rechterkant uit
+
+-
+
+editor_section_justify_space_between: Ruimte tussen
+
+-
+
+editor_section_justify_space_evenly: Ruimte gelijkmatig
+
+-
+
+editor_section_justify_fill_row: Vullen rij
+
+-
+
+editor_section_gap: Kloof tussen blokken
+
+-
+
+editor_section_min_block_width: Minimale blokbreedte
+
+-
+
+editor_section_edit: Bewerk
+
+-
+
+editor_section_card: Intimaliseer inhoud voor kaarten
+
+-
+
+editor_section_padding_top: Naar boven
+
+-
+
+editor_section_padding_bottom: Afsnijden
+
+-
+
+editor_section_color: Tekst kleur
+
+-
+
+editor_section_background_color: Achtergrond kleur
+
+-
+
+editor_section_background_image: Achtergrond afbeelding
+
+-
+
+editor_section_background_blend_mode: Achtergrond Blend-modus
+
+-
+
+editor_section_border_color: Rand kleur
+
+-
+
+editor_section_border_width: Grensbreedte
+
+-
+
+editor_section_border_radius: Hoekradius
+
+-
+
+editor_section_shadow: Druppelschaduw
+
+-
+
+editor_section_match_row_height: Volledige rijhoogte
+
+-
+
+editor_pagelist_toolbox: Paginalijst
+
+-
+
+editor_pagelist_template: Selecteer sjabloon
+
+-
+
+editor_pagelist_default: Standaardsjabloon
+
+-
+
+editor_pagelist_url_regex: URL Regex-filter
+
+-
+
+editor_pagelist_type: Type
+
+-
+
+editor_pagelist_filter_tag: Filteren op tag
+
+-
+
+editor_pagelist_filter_template: Filter op sjabloon
+
+-
+
+editor_pagelist_limit_offset: Limiet en compensatie
+
+-
+
+editor_pagelist_sort_var: Sorteer op variabele
+
+-
+
+editor_pagelist_sort_order: Sorteervolgorde
+
+-
+
+editor_paragraph_toolbox: Tekst
+
+-
+
+editor_paragraph_large: Groter lettertype
+
+-
+
+editor_quote_toolbox: Citaat
+
+-
+
+editor_quote_placeholder: Voer een tekst in
+
+-
+
+editor_quote_placeholder_caption: Voer een bijschrift in
+
+-
+
+editor_slider_toolbox: Diavoorstelling
+
+-
+
+editor_slider_width: Breedte
+
+-
+
+editor_slider_height: Hoogte
+
+-
+
+editor_slider_files: Glob Patronen of URL's
+
+-
+
+editor_slider_dots: Toon puntnavigatie
+
+-
+
+editor_slider_autoplay: Automatisch afspelen
+
+-
+
+editor_snippet_toolbox: Aangepast sjabloonfragment
+
+-
+
+editor_snippet_input: Fragmentcode
+
+-
+
+editor_snippet_file: Selecteer een fragmentbestand
+
+-
+
+editor_table_toolbox: Lijst in tabelvorm
+
+-
+
+editor_code: Broncode
+
+-
+
+editor_toc: Inhoudsopgave
+
+-
+
+editor_left: Links
+
+-
+
+editor_center: Centrum
+
+-
+
+editor_edit_style: Edit Style
+
+-
+
+editor_layout_default: Standaard layout
+
+-
+
+editor_layout_stretch: Vouw het blok uit tot volledige breedte
+
+-
+
+editor_layout_width: Breedte
+
+-
+
+editor_ui_placeholder: Klik hier om uw eerste blok toe te voegen ...
+
+-
+
+editor_ui_add: Toevoegen
+
+-
+
+editor_ui_settings: Klik om instellingen te openen of sleep om het blok te verplaatsen
+
+-
+
+editor_ui_delete: Blok verwijderen
+
+-
+
+editor_ui_move_up: Verplaats het blok naar boven
+
+-
+
+editor_ui_move_down: Verplaats het blok naar beneden
+
+-
+
+editor_ui_convert: Converteer blok naar
+
+-
+
+editor_ui_browse: Bestanden doorbladeren
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Selecteer een locatie voor de nieuwe pagina
 
 -
 
+page_date: Datum
+
+-
+
 page_move_destination: Selecteer een bestemming om te verhuizen
 
 -
@@ -451,6 +879,10 @@ page_var_name: Variabele naam
 -
 
 page_vars_content: Inhoud
+
+-
+
+page_vars_color: Kleuren
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Wilt u het geselecteerde thema toepassen en de lijst met bes
 -
 
 shared_vars_content: Standaardinhoud
+
+-
+
+shared_vars_color: Standaardkleuren
 
 -
 

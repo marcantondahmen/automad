@@ -26,8 +26,8 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
@@ -98,8 +98,8 @@
 @base-h6-font-size:			0.86rem;
 @base-h6-line-height:		1.29rem;
 
-@base-selection-background:	@am-success;
-@base-selection-color:  	#FFFFFF;
+@base-selection-background:	mix(@am-bg, @am-success, 85%);
+@base-selection-color:  	@am-text;
 
 
 html {
@@ -134,6 +134,10 @@ body {
 
 		@media (min-width: 1900px) { 
 			font-size: 18px;
+		}
+
+		@media (min-width: 2100px) { 
+			font-size: 19px;
 		}
 
 	}

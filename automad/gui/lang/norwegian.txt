@@ -50,10 +50,6 @@ btn_duplicate_page: Dupliser side
 
 -
 
-btn_edit: Redigere
-
--
-
 btn_edit_file_info: Rediger filinfo
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Få flere temaer
 -
 
 btn_getting_data: Få data ...
+
+-
+
+btn_help: Hjelp
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Nylig redigerte sider
 -
 
 dropzone: Dra filer hit
+
+-
+
+editor_buttons_toolbox: Knapper
+
+-
+
+editor_button_primary: Hovedknappen
+
+-
+
+editor_button_secondary: Sekundær knapp
+
+-
+
+editor_button_label: Tekst
+
+-
+
+editor_button_link: Lenke
+
+-
+
+editor_button_color: Tekstfarge
+
+-
+
+editor_button_background_color: Bakgrunn
+
+-
+
+editor_button_border_color: Grensefarge
+
+-
+
+editor_button_border_width: Borderbredde
+
+-
+
+editor_button_border_radius: Hjørne radius
+
+-
+
+editor_button_padding_horizontal: Horisontal avstand
+
+-
+
+editor_button_padding_vertical: Vertikal avstand
+
+-
+
+editor_delimiter_toolbox: Avgrenser
+
+-
+
+editor_filelist_toolbox: Filliste
+
+-
+
+editor_filelist_template: Velg Mal
+
+-
+
+editor_filelist_default: Standard mal
+
+-
+
+editor_filelist_files: Globmønstre (atskilt med komma)
+
+-
+
+editor_gallery_toolbox: Bildegalleri
+
+-
+
+editor_gallery_files: Glob mønstre eller nettadresser
+
+-
+
+editor_gallery_width: Bildebredde i piksler
+
+-
+
+editor_gallery_clean_bottom: Rengjør bunnkanten
+
+-
+
+editor_heading_toolbox: Overskrift
+
+-
+
+editor_image_toolbox: Bilde
+
+-
+
+editor_list_toolbox: Liste
+
+-
+
+editor_list_unordered: Nøkkelpunkter
+
+-
+
+editor_list_ordered: Nummerert liste
+
+-
+
+editor_mail_toolbox: E-postskjema
+
+-
+
+editor_mail_data_error: Fyll ut alle feltene!
+
+-
+
+editor_mail_data_success: Vellykket sendt e-post!
+
+-
+
+editor_mail_data_placeholder_address: Din epostadresse
+
+-
+
+editor_mail_data_placeholder_subject: E-post Emne
+
+-
+
+editor_mail_data_placeholder_message: Melding kropp
+
+-
+
+editor_mail_data_send: Send e-post
+
+-
+
+editor_mail_placeholder_address: Skriv inn e-postadressen din her
+
+-
+
+editor_mail_placeholder_error: Skriv inn en valgfri feilmelding her
+
+-
+
+editor_mail_placeholder_success: Skriv inn en valgfri suksessmelding her
+
+-
+
+editor_mail_label_address: Din epostadresse
+
+-
+
+editor_mail_label_success: Suksessmelding
+
+-
+
+editor_mail_label_error: Feilmelding
+
+-
+
+editor_mail_label_placeholder_address: Plassholder for e-post
+
+-
+
+editor_mail_label_placeholder_subject: Plassholder for e-postemne
+
+-
+
+editor_mail_label_placeholder_message: Plassholder for meldingsorgan
+
+-
+
+editor_mail_label_button: Knappetekst
+
+-
+
+editor_section_toolbox: Layout Seksjon / kort
+
+-
+
+editor_section_justify_start: Juster elementene mot venstre side
+
+-
+
+editor_section_justify_center: Juster elementene mot midten
+
+-
+
+editor_section_justify_end: Juster elementer mot høyre side
+
+-
+
+editor_section_justify_space_between: Plass mellom
+
+-
+
+editor_section_justify_space_evenly: Plass jevnt
+
+-
+
+editor_section_justify_fill_row: Fyll rad
+
+-
+
+editor_section_gap: Gap mellom blokker
+
+-
+
+editor_section_min_block_width: Minimum blokkbredde
+
+-
+
+editor_section_edit: Redigere
+
+-
+
+editor_section_card: Optimaliser innhold for kort
+
+-
+
+editor_section_padding_top: Avstand oppover
+
+-
+
+editor_section_padding_bottom: Mellomrom ned
+
+-
+
+editor_section_color: Tekstfarge
+
+-
+
+editor_section_background_color: Bakgrunnsfarge
+
+-
+
+editor_section_background_image: Bakgrunnsbilde
+
+-
+
+editor_section_background_blend_mode: Bakgrunnsblandingsmodus
+
+-
+
+editor_section_border_color: Grensefarge
+
+-
+
+editor_section_border_width: Borderbredde
+
+-
+
+editor_section_border_radius: Hjørne radius
+
+-
+
+editor_section_shadow: Slipp skygge
+
+-
+
+editor_section_match_row_height: Full rad høyde
+
+-
+
+editor_pagelist_toolbox: Sideliste
+
+-
+
+editor_pagelist_template: Velg Mal
+
+-
+
+editor_pagelist_default: Standard mal
+
+-
+
+editor_pagelist_url_regex: URL Regex-filter
+
+-
+
+editor_pagelist_type: Type
+
+-
+
+editor_pagelist_filter_tag: Filtrer etter tag
+
+-
+
+editor_pagelist_filter_template: Filtrer etter mal
+
+-
+
+editor_pagelist_limit_offset: Grense og forskyvning
+
+-
+
+editor_pagelist_sort_var: Sorter etter variabel
+
+-
+
+editor_pagelist_sort_order: Sorteringsrekkefølge
+
+-
+
+editor_paragraph_toolbox: Tekst
+
+-
+
+editor_paragraph_large: Større skriftstørrelse
+
+-
+
+editor_quote_toolbox: Sitat
+
+-
+
+editor_quote_placeholder: Skriv inn en tekst
+
+-
+
+editor_quote_placeholder_caption: Skriv inn en billedtekst
+
+-
+
+editor_slider_toolbox: Lysbildefremvisning
+
+-
+
+editor_slider_width: Bredde
+
+-
+
+editor_slider_height: Høyde
+
+-
+
+editor_slider_files: Glob mønstre eller nettadresser
+
+-
+
+editor_slider_dots: Vis punktnavigasjon
+
+-
+
+editor_slider_autoplay: Auto spill
+
+-
+
+editor_snippet_toolbox: Tilpasset malutdrag
+
+-
+
+editor_snippet_input: Utdragskode
+
+-
+
+editor_snippet_file: Velg en kodefil
+
+-
+
+editor_table_toolbox: Tabelloversikt
+
+-
+
+editor_code: Kildekode
+
+-
+
+editor_toc: Innholdsfortegnelse
+
+-
+
+editor_left: Venstre
+
+-
+
+editor_center: Senter
+
+-
+
+editor_edit_style: Rediger stil
+
+-
+
+editor_layout_default: Standard oppsett
+
+-
+
+editor_layout_stretch: Utvid blokken til full bredde
+
+-
+
+editor_layout_width: Bredde
+
+-
+
+editor_ui_placeholder: Klikk her for å legge til din første blokk ...
+
+-
+
+editor_ui_add: Legg til
+
+-
+
+editor_ui_settings: Klikk for å åpne innstillingene, eller dra for å flytte blokkeringen
+
+-
+
+editor_ui_delete: Slett blokkering
+
+-
+
+editor_ui_move_up: Flytt blokken opp
+
+-
+
+editor_ui_move_down: Flytt blokken ned
+
+-
+
+editor_ui_convert: Konverter blokk til
+
+-
+
+editor_ui_browse: Bla gjennom filer
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Velg et sted for den nye siden
 
 -
 
+page_date: Dato
+
+-
+
 page_move_destination: Velg et reisemål for flytting
 
 -
@@ -451,6 +879,10 @@ page_var_name: Variabelnavn
 -
 
 page_vars_content: Innhold
+
+-
+
+page_vars_color: Farger
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Vil du bruke det valgte temaet og oppdatere listen over tilg
 -
 
 shared_vars_content: Standardinnhold
+
+-
+
+shared_vars_color: Standard farger
 
 -
 

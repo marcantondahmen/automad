@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2013-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -76,8 +76,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In case the page and the Automad object are deprecated, after creating both, they can be saved to cache using writePageToCache() and writeAutomadObjectToCache().
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Cache {
@@ -103,7 +103,16 @@ class Cache {
 	 */
 	
 	private $pageCacheFile;
-	
+
+
+	/**
+	 *	The filename for the object cache. 
+	 *	Note that in order to correctly handle caching of private pages, 
+	 *	a separate cache file is used when a user is in.
+	 */
+
+	private $objectCacheFile;
+
 
 	/**
 	 *	The latest modification time of the whole website (any file or directory).
@@ -111,6 +120,52 @@ class Cache {
 	
 	private $siteMTime;
 	
+
+	/**
+	 *	Clearing the cache is done by simply setting the stored Site's mTime to the current timestamp. 
+	 *	That will trigger a full cache rebuild. Note that this method is only being called from outside
+	 *	and doesn't require any cache instance. It therefore should be static in order to avoid unneeded 
+	 *	scanning of files when creating a new cache object.
+	 */
+
+	public static function clear() {
+		
+		Debug::log('Resetting the site modification time');
+		Cache::writeSiteMTime(time());
+		
+	}
+
+
+	/**
+	 *	Read the site's modification time from file. 
+	 *	This methods doesn't require any cache instance and should be static for performance reasons.
+	 *
+	 *	@return int The site's modification time.
+	 */
+
+	private static function readSiteMTime() {
+
+		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
+
+	}
+
+
+	/**
+	 *	Write the site's modification time to the cache. 
+	 *	This method is also used in other static methods and doesn't require any cache instance. 
+	 *	It therefore should be static for performance reasons.
+	 *
+	 *	@param int $siteMTime
+	 */
+
+	private static function writeSiteMTime($siteMTime) {
+
+		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
+		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+
+	}
+
 	
 	/**
 	 *	The constructor checks whether caching is enabled for the current request and
@@ -136,11 +191,16 @@ class Cache {
 			// Define boolean variable for page cache status only, 
 			// independent from the Automad object cache.
 			$this->pageCachingIsEnabled = true;
+
+			// Define object cache file for visitors.
+			$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
 			
-			// Disable page caching for in-page edit mode.
+			// Disable page caching for in-page edit mode and define ui cache file.
 			if (GUI\User::get()) {
-				Debug::log('In-page edit mode! Disable page caching.');
 				$this->pageCachingIsEnabled = false;
+				Debug::log('Page cache is disabled during editing.');
+				$this->objectCacheFile = AM_FILE_OBJECT_USER_CACHE;
+				Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 			}
 			
 			// Disable page caching $_GET is not empty.
@@ -168,17 +228,6 @@ class Cache {
 		
 	}
 	
-
-	/**
-	 *	Clearing the cache is done by simply deleting the stored Site's mTime file. That will trigger a full cache rebuild.
-	 */
-
-	public function clear() {
-		
-		FileSystem::deleteFile(AM_FILE_SITE_MTIME);
-		
-	}
-
 
 	/**
 	 *	Verify if the cached version of the visited page is existing and still up to date.
@@ -249,9 +298,9 @@ class Cache {
 		
 		if ($this->automadObjectCachingIsEnabled) {
 		
-			if (file_exists(AM_FILE_OBJECT_CACHE)) {
+			if (file_exists($this->objectCacheFile)) {
 		
-				$automadObjectMTime = filemtime(AM_FILE_OBJECT_CACHE);
+				$automadObjectMTime = filemtime($this->objectCacheFile);
 				
 				// Check if object didn't reach the cache's lifetime yet.
 				if (($automadObjectMTime + AM_CACHE_LIFETIME) > time()) {
@@ -340,6 +389,30 @@ class Cache {
 	
 	
 	/**
+	 *	Get all subdirectories of a given directory.
+	 *
+	 *	@param string $dir 
+	 *	@return array The array of directories including the given directory itself
+	 */
+
+	private function getDirectoriesRecursively($dir) {
+
+		$dirs = array($dir);
+
+		foreach (FileSystem::glob($dir . '/*', GLOB_ONLYDIR) as $d) {
+
+			if (strpos($dir, 'node_modules') === false) {
+				$dirs = array_merge($dirs, $this->getDirectoriesRecursively($d));
+			}
+
+		}
+
+		return $dirs;
+
+	}
+
+
+	/**
 	 *	Get an array of all subdirectories and all files under /pages, /shared, /themes and /config (and the version.php) 
 	 *	and determine the latest mtime among all these items.
 	 *	That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.
@@ -373,13 +446,8 @@ class Cache {
 				// Add base dir to string.
 				$dir = AM_BASE_DIR . $monitoredDir;
 			
-				// Also add the directory itself, to monitor the top level.	
-				$arrayDirs = array($dir);
-	
-				while ($dirs = FileSystem::glob($dir . '/*', GLOB_ONLYDIR)) {
-					$dir .= '/*';
-					$arrayDirs = array_merge($arrayDirs, $dirs);
-				}
+				// Get subdirectories including the top directory itself.
+				$arrayDirs = $this->getDirectoriesRecursively($dir);
 
 				// Get all files
 				$arrayFiles = array();
@@ -410,17 +478,15 @@ class Cache {
 			$siteMTime = $mTimes[$lastModifiedItem];
 			
 			// Save mTime
-			FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
-			Debug::log('Scanned directories and saved Site-mTime.');
+			Debug::log('Scanned directories to get the site modification time');
 			Debug::log($lastModifiedItem, 'Last modified item'); 
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime');
-			Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
+			Cache::writeSiteMTime($siteMTime);
 		
 		} else {
 			
 			// In between this delay, it just gets loaded from a file.
-			$siteMTime = unserialize(file_get_contents(AM_FILE_SITE_MTIME));
-			Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+			$siteMTime = Cache::readSiteMTime();
 			Debug::log(date('d. M Y, H:i:s', $siteMTime), 'Site-mTime is');
 			
 		}
@@ -428,8 +494,8 @@ class Cache {
 		return $siteMTime;
 		
 	}
-	
-	
+
+
 	/**
 	 *	Read the rendered page from the cached version.
 	 *
@@ -445,15 +511,15 @@ class Cache {
 	
 	
 	/**
-	 *	Read (unserialize) the Automad object from AM_FILE_OBJECT_CACHE and update the context to the requested page.
+	 *	Read (unserialize) the Automad object from $this->objectCacheFile and update the context to the requested page.
 	 *
 	 *	@return object Automad object
 	 */
 	
 	public function readAutomadObjectFromCache() {
 		
-		Debug::log(AM_FILE_OBJECT_CACHE, 'Reading cached Automad object from');
-		return unserialize(file_get_contents(AM_FILE_OBJECT_CACHE));
+		Debug::log($this->objectCacheFile, 'Reading cached Automad object from');
+		return unserialize(file_get_contents($this->objectCacheFile));
 		
 	}
 	
@@ -481,7 +547,7 @@ class Cache {
 	
 	
 	/**
-	 *	Write (serialize) the Automad object to AM_FILE_OBJECT_CACHE.
+	 *	Write (serialize) the Automad object to $this->objectCacheFile.
 	 *	
 	 *	@param object $Automad
 	 */
@@ -490,8 +556,8 @@ class Cache {
 		
 		if ($this->automadObjectCachingIsEnabled) {
 			
-			FileSystem::write(AM_FILE_OBJECT_CACHE, serialize($Automad));
-			Debug::log(AM_FILE_OBJECT_CACHE, 'Automad object written to');
+			FileSystem::write($this->objectCacheFile, serialize($Automad));
+			Debug::log($this->objectCacheFile, 'Automad object written to');
 			
 			// Only non-forwarded (no proxy) sites.
 			if (function_exists('curl_version') && !isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {

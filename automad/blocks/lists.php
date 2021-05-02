@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -45,21 +45,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The list block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-class Lists {
+class Lists extends Paragraph {
 
 
 	/**	
 	 *	Render a list block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
 		if ($data->style == 'ordered') {
 			$open = '<ol>';
@@ -77,8 +78,9 @@ class Lists {
 		}
 
 		$html .= $close;
+		$class = self::classAttr();
 
-		return $html;
+		return "<am-list $class>$html</am-list>";
 
 	}
 

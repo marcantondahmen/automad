@@ -26,14 +26,14 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
 
 
-@modal-z-index: 				1010;
+@modal-z-index: 				9010;
 @modal-background: 				rgba(0,0,0,0.05);
 
 @modal-dialog-background:		@am-bg;
@@ -47,6 +47,7 @@
 
 .hook-modal() {
 	overflow-y: auto !important;
+	z-index: @modal-z-index !important;
 }
 
 .hook-modal-dialog() {

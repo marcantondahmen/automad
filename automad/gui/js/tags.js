@@ -26,11 +26,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2018-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2018-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 

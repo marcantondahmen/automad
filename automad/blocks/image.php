@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -45,38 +45,37 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The image block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-class Image {
+class Image extends Paragraph {
 
 
 	/**	
 	 *	Render an image block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
+		$class = self::classAttr();
 		$caption = '';
-		$figureAttr = '';
-
+		
 		if (!empty($data->caption)) {
 			$caption = "<figcaption>$data->caption</figcaption>";
 		}
 
-		if (!empty($data->stretched)) {
-			$figureAttr = 'class="am-stretched" style="width: 100%; max-width: 100%;"';
-		}
-
 		return <<< HTML
-				<figure $figureAttr>
-					<img src="$data->url" />
-					$caption
-				</figure>
+				<am-img $class>
+					<figure>
+						<img src="$data->url" />
+						$caption
+					</figure>
+				</am-img>
 HTML;
 
 	}

@@ -26,15 +26,17 @@ class Mock extends TestCase {
 		$collection['/'] = new Core\Page(
 			array(
 				'title' => 'Test',
-				'url' => '/',
-				':path' => '/',
-				':origUrl' => '/',
+				'url' => '/page',
+				':path' => '/01.page/',
+				':origUrl' => '/page',
 				'theme' => '../automad/tests/templates',
 				':template' => $template,
 				'date' => '2018-07-21 12:00:00',
 				'test' => 'Test String',
 				'quoted' => '"Quoted" "Test" "String"',
-				'x' => '10'
+				'x' => '10',
+				'image' => 'image.jpg',
+				'link' => 'test'
 			), 
 			$Shared
 		);

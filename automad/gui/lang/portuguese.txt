@@ -50,10 +50,6 @@ btn_duplicate_page: Página duplicada
 
 -
 
-btn_edit: Editar
-
--
-
 btn_edit_file_info: Editar Informações do Arquivo
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Obtenha mais temas
 -
 
 btn_getting_data: Obtendo dados ...
+
+-
+
+btn_help: Ajuda
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Páginas editadas recentemente
 -
 
 dropzone: Arraste os arquivos aqui
+
+-
+
+editor_buttons_toolbox: Botões
+
+-
+
+editor_button_primary: Botão principal
+
+-
+
+editor_button_secondary: Botão secundário
+
+-
+
+editor_button_label: Texto
+
+-
+
+editor_button_link: Ligação
+
+-
+
+editor_button_color: Cor do texto
+
+-
+
+editor_button_background_color: Fundo
+
+-
+
+editor_button_border_color: Cor da borda
+
+-
+
+editor_button_border_width: Largura da fronteira
+
+-
+
+editor_button_border_radius: Raio de canto
+
+-
+
+editor_button_padding_horizontal: Espaçamento horizontal
+
+-
+
+editor_button_padding_vertical: Espaçamento vertical
+
+-
+
+editor_delimiter_toolbox: Delimitador
+
+-
+
+editor_filelist_toolbox: Lista de Arquivos
+
+-
+
+editor_filelist_template: Selecione o modelo
+
+-
+
+editor_filelist_default: Modelo Padrão
+
+-
+
+editor_filelist_files: Padrões Glob (separados por vírgula)
+
+-
+
+editor_gallery_toolbox: Galeria de imagens
+
+-
+
+editor_gallery_files: Padrões ou urls glob
+
+-
+
+editor_gallery_width: Largura da imagem em pixels
+
+-
+
+editor_gallery_clean_bottom: Limpe a borda inferior
+
+-
+
+editor_heading_toolbox: Cabeçalho
+
+-
+
+editor_image_toolbox: Imagem
+
+-
+
+editor_list_toolbox: Lista
+
+-
+
+editor_list_unordered: Tópicos
+
+-
+
+editor_list_ordered: Lista Numerada
+
+-
+
+editor_mail_toolbox: Formulário de Email
+
+-
+
+editor_mail_data_error: Por favor, preencha todos os campos!
+
+-
+
+editor_mail_data_success: Email enviado com sucesso!
+
+-
+
+editor_mail_data_placeholder_address: Seu endereço de email
+
+-
+
+editor_mail_data_placeholder_subject: Assunto do email
+
+-
+
+editor_mail_data_placeholder_message: Corpo da mensagem
+
+-
+
+editor_mail_data_send: Enviar correio
+
+-
+
+editor_mail_placeholder_address: Insira o seu endereço de e-mail aqui
+
+-
+
+editor_mail_placeholder_error: Insira uma mensagem de erro opcional aqui
+
+-
+
+editor_mail_placeholder_success: Insira uma mensagem de sucesso opcional aqui
+
+-
+
+editor_mail_label_address: Seu endereço de email
+
+-
+
+editor_mail_label_success: Mensagem de Sucesso
+
+-
+
+editor_mail_label_error: Mensagem de erro
+
+-
+
+editor_mail_label_placeholder_address: Espaço reservado para e-mail
+
+-
+
+editor_mail_label_placeholder_subject: Espaço reservado para assunto do email
+
+-
+
+editor_mail_label_placeholder_message: Espaço reservado para o corpo da mensagem
+
+-
+
+editor_mail_label_button: Botão de texto
+
+-
+
+editor_section_toolbox: Seção de layout / cartão
+
+-
+
+editor_section_justify_start: Alinhar elementos para o lado esquerdo
+
+-
+
+editor_section_justify_center: Alinhar elementos para o meio
+
+-
+
+editor_section_justify_end: Alinhar elementos para o lado direito
+
+-
+
+editor_section_justify_space_between: Espaço entre
+
+-
+
+editor_section_justify_space_evenly: Espaço uniformemente
+
+-
+
+editor_section_justify_fill_row: Encher a linha
+
+-
+
+editor_section_gap: Gap entre blocos
+
+-
+
+editor_section_min_block_width: Largura mínima do bloco
+
+-
+
+editor_section_edit: Editar
+
+-
+
+editor_section_card: Otimize o conteúdo para cartões
+
+-
+
+editor_section_padding_top: Espaçando para cima
+
+-
+
+editor_section_padding_bottom: Espaçamento para baixo
+
+-
+
+editor_section_color: Cor do texto
+
+-
+
+editor_section_background_color: Cor de fundo
+
+-
+
+editor_section_background_image: Imagem de fundo
+
+-
+
+editor_section_background_blend_mode: Modo de mistura de fundo
+
+-
+
+editor_section_border_color: Cor da borda
+
+-
+
+editor_section_border_width: Largura da fronteira
+
+-
+
+editor_section_border_radius: Raio de canto
+
+-
+
+editor_section_shadow: Drop Shadow
+
+-
+
+editor_section_match_row_height: Altura da fileira completa
+
+-
+
+editor_pagelist_toolbox: Lista de Páginas
+
+-
+
+editor_pagelist_template: Selecione o modelo
+
+-
+
+editor_pagelist_default: Modelo Padrão
+
+-
+
+editor_pagelist_url_regex: Filtro Regex de URL
+
+-
+
+editor_pagelist_type: Modelo
+
+-
+
+editor_pagelist_filter_tag: Filtrar por Tag
+
+-
+
+editor_pagelist_filter_template: Filtrar por modelo
+
+-
+
+editor_pagelist_limit_offset: Limite e Compensação
+
+-
+
+editor_pagelist_sort_var: Classificar por variável
+
+-
+
+editor_pagelist_sort_order: Ordem de classificação
+
+-
+
+editor_paragraph_toolbox: Texto
+
+-
+
+editor_paragraph_large: Tamanho de fonte maior
+
+-
+
+editor_quote_toolbox: Citar
+
+-
+
+editor_quote_placeholder: Insira um texto
+
+-
+
+editor_quote_placeholder_caption: Insira uma legenda
+
+-
+
+editor_slider_toolbox: Slideshow
+
+-
+
+editor_slider_width: Largura
+
+-
+
+editor_slider_height: Altura
+
+-
+
+editor_slider_files: Padrões ou urls glob
+
+-
+
+editor_slider_dots: Mostrar navegação por pontos
+
+-
+
+editor_slider_autoplay: Reprodução automática
+
+-
+
+editor_snippet_toolbox: Snippet de modelo personalizado
+
+-
+
+editor_snippet_input: Código de trecho
+
+-
+
+editor_snippet_file: Selecione um arquivo de trecho
+
+-
+
+editor_table_toolbox: Lista Tabular
+
+-
+
+editor_code: Código fonte
+
+-
+
+editor_toc: Índice
+
+-
+
+editor_left: Esquerda
+
+-
+
+editor_center: Centro
+
+-
+
+editor_edit_style: Editar estilo
+
+-
+
+editor_layout_default: Layout padrão
+
+-
+
+editor_layout_stretch: Expanda o bloco para a largura total
+
+-
+
+editor_layout_width: Largura
+
+-
+
+editor_ui_placeholder: Clique aqui para adicionar seu primeiro bloco ...
+
+-
+
+editor_ui_add: Adicionar
+
+-
+
+editor_ui_settings: Clique para abrir as configurações ou arraste para mover o bloco
+
+-
+
+editor_ui_delete: Excluir bloco
+
+-
+
+editor_ui_move_up: Mova o bloco para cima
+
+-
+
+editor_ui_move_down: Mova o bloco para baixo
+
+-
+
+editor_ui_convert: Converter bloco em
+
+-
+
+editor_ui_browse: Navegue arquivos
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Selecione um local para a nova página
 
 -
 
+page_date: Encontro
+
+-
+
 page_move_destination: Selecione um destino para mover
 
 -
@@ -451,6 +879,10 @@ page_var_name: Nome variável
 -
 
 page_vars_content: Conteúdo
+
+-
+
+page_vars_color: Cores
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Quer aplicar o tema selecionado e atualizar a lista de vari�
 -
 
 shared_vars_content: Conteúdo Padrão
+
+-
+
+shared_vars_color: Cores Padrão
 
 -
 

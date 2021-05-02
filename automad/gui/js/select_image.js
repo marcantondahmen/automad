@@ -26,11 +26,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -48,18 +48,80 @@
 
 		modalSelector: '#am-select-image-modal',
 
+		preview: function(input) {
+			
+			if (!input.value || /[\*,]/.test(input.value)) {
+				return;
+			}
+
+			const src = Automad.util.resolvePath(input.value);
+
+			fetch(src, { 
+				method: 'HEAD' 
+			})
+			.then(res => {
+
+				try {
+
+					const da = Automad.selectImage.dataAttr,
+						  wrapper = input.closest(`[${da.field}]`),
+						  figure = wrapper.querySelector('figure');
+
+					if (res.ok) {
+					
+						let img = figure.querySelector('img');
+
+						if (!img) {
+		
+							img = document.createElement('img');
+							figure.appendChild(img);
+							img.src = src;
+
+						} else {
+
+							if (src != img.src) {
+								img.src = src;
+							}
+
+						}
+	
+					} else {
+
+						figure.innerHTML = '';
+
+					}
+
+				} catch (event) {}
+
+			});
+
+		},
+
 		init: function() {
 
 			var si = Automad.selectImage,
 				da = si.dataAttr;
 
-			$(document).on('click', '[' + da.field + '] button', function() {
+			$(document).on('click', `[${da.field}] button`, function() {
 
 				var $input = $(this).parent().find('input');
 
 				si.dialog($input, false, function(url) {
-					$input.val(url).trigger('keydown');
+					$input.val(url);
+					$input[0].dispatchEvent(new Event('keydown', { bubbles: true }));
 				});
+
+			});
+
+			$(document).on('change keyup keydown', `[${da.field}] input`, (event) => {
+				si.preview(event.target);
+			});
+
+			$(document).on('ajaxComplete', () => {
+
+				const inputs = document.querySelectorAll(`[${da.field}] input`);
+
+				Array.from(inputs).forEach(input => si.preview(input));
 
 			});
 

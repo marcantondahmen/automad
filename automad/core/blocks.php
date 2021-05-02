@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -45,19 +45,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Blocks class.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Blocks {
 	
-
-	/**
-	 * 	True if the page contains a block variable.
-	 */
-
-	private static $pageHasBlocks = false;
-
 
 	/**
 	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
@@ -73,11 +66,6 @@ class Blocks {
 	 */
 
 	public static function injectAssets($str) {
-
-		// If no block was rendered before, just return $str.
-		if (!self::$pageHasBlocks) {
-			return $str;
-		}
 
 		$versionSanitized = Str::sanitize(AM_VERSION);
 		$css = AM_BASE_URL . '/automad/blocks/dist/blocks.min.css?v=' . $versionSanitized;
@@ -108,7 +96,7 @@ HTML;
 
 	public static function render($json, $Automad) {
 		
-		self::$pageHasBlocks = true;
+		$flexOpen = false;
 		$data = json_decode($json);
 		$html = '';
 
@@ -124,10 +112,32 @@ HTML;
 
 			try {
 
-				$html .= call_user_func_array(
+				$blockIsFlexItem = (!empty($block->data->widthFraction) && empty($block->data->stretched));
+
+				if (!$flexOpen && $blockIsFlexItem) {
+					$html .= '<am-flex>';
+					$flexOpen = true;
+				}
+
+				if ($flexOpen && !$blockIsFlexItem) {
+					$html .= '</am-flex>';
+					$flexOpen = false;
+				}
+
+				$blockHtml = call_user_func_array(
 					'\\Automad\\Blocks\\' . $block->type . '::render',
 					array($block->data, $Automad)
 				);
+
+				// Stretch block.
+				if (!empty($block->data->stretched)) {
+					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
+				} else if (!empty($block->data->widthFraction)) {
+					$widthFraction = str_replace('/', '-', $block->data->widthFraction);
+					$blockHtml = "<am-{$widthFraction}>$blockHtml</am-{$widthFraction}>";
+				}
+
+				$html .= $blockHtml;
 
 			} catch (\Exception $e) {
 
@@ -135,6 +145,10 @@ HTML;
 				
 			}
 
+		}
+
+		if ($flexOpen) {
+			$html .= '</am-flex>';
 		}
 
 		return $html;

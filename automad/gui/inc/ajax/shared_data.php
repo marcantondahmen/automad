@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2014-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -181,6 +181,7 @@ if ($data = Core\Request::post('data')) {
 			}
 			
 			$textKeys = Keys::filterTextKeys($keys);
+			$colorKeys = Keys::filterColorKeys($keys);
 			$settingKeys = Keys::filterSettingKeys($keys);
 			$unusedDataKeys = array_diff(array_keys($data), $keys, Keys::$reserved);
 
@@ -198,6 +199,27 @@ if ($data = Core\Request::post('data')) {
 					echo Components\Form\Group::render(
 						$this->getAutomad(), 
 						$textKeys, 
+						$data,
+						false,
+						$mainTheme
+					); 
+
+					?>
+				</div>
+			<?php } ?>
+
+			<!-- Color variables -->
+			<?php if ($colorKeys) { ?>
+				<div class="uk-accordion-title">
+					<?php Text::e('shared_vars_color'); ?> &mdash;
+					<?php echo count($colorKeys); ?>
+				</div>
+				<div class="uk-accordion-content">
+					<?php 
+
+					echo Components\Form\Group::render(
+						$this->getAutomad(), 
+						$colorKeys, 
 						$data,
 						false,
 						$mainTheme

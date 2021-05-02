@@ -26,11 +26,12 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
+
 
 .am-block-editor {
 	
@@ -38,36 +39,26 @@
 		
 		box-sizing: border-box;
 		width: 100%;
-		margin: 0.29rem 0;
-		padding: @am-block-padding;
-		border-radius: @am-block-radius;
+		min-height: 2.9rem;
+		margin: 0;
+		padding: 0;
+		background-color: rgba(255, 255, 255, 0.12);
 		border: @am-border-width solid transparent;
+		border-radius: @am-radius;
 		.transition(border-color 0.2s, box-shadow 0.2s;);
 
-		@media (min-width: @am-blocks-breakpoint-small) {
-			padding: @am-block-padding 2.85rem;
-		}
-
-		& + & {
-			margin-top: 0.29rem;
-		}
-
 		&__content {
-
+			box-sizing: border-box;
 			max-width: @am-block-max-width;
-
-			@media (min-width: @am-blocks-breakpoint-small) {
-				padding: 0 @am-block-content-padding;
-			}
-			
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+			padding: @am-block-padding;
 		}
 
-		&--stretched .ce-block__content {
-			
-			@media (min-width: @am-blocks-breakpoint-small) {
-				padding: 0 @am-block-content-padding-stretched;
-			}
-
+		&.stretched > .ce-block__content {
+			max-width: 100%;
+			margin: 0;
 		}
 
 		& [class^="uk-icon-"] {
@@ -77,11 +68,10 @@
 		&.ce-block--focused,
 		&.ce-block--selected {
 
-			.shadow;
-
 			& > .ce-block__content {
 
 				background-color: transparent !important;
+				.transition(border-color 0.2s, background-color 0.2s;);
 				
 				& img {
 					opacity: 1;
@@ -91,41 +81,20 @@
 
 		}
 
+		&.ce-block--selected > .ce-block__content {
+			background-color: mix(@am-bg, @am-success, 90%) !important;
+		}
+
 		&.ce-block--drop-target {
 			border: @am-border-width dashed @am-success;
 		}
 
-		& [data-placeholder]:empty:not(:focus):before {
-			content: attr(data-placeholder);
-			color: @am-muted;
-		}
-
-		&:last-child:not(.ce-block--focused) > div > [contenteditable][data-placeholder=""]:not(:focus):empty {
-			
-			&:after {
-				content: '\f245';
-				font-size: 1rem;
-				color: @am-border-color;
-				.icon-font;
-			}
-
-		}
-
 	}
 
-	@media (min-width: @am-blocks-breakpoint-fullscreen-large) {
-
-		.am-inpage & .ce-block__content,
-		&.am-fullscreen .ce-block__content {
-			padding: 0 @am-block-content-padding-fullscreen;
-		}
-
-		.am-inpage & .ce-block--stretched .ce-block__content,
-		&.am-fullscreen .ce-block--stretched .ce-block__content {
-			padding: 0 @am-block-content-padding-stretched;
-		}
-
-	}	
+	& [data-placeholder]:empty:before {
+		content: attr(data-placeholder);
+		color: @am-muted !important;
+	}
 
 	& .ce-block--drop-target .ce-block__content {
 
@@ -143,10 +112,10 @@
 
 	& .ce-stub {
 
+		box-sizing: border-box;
 		margin-top: 0;
 		margin-bottom: 0;
-		padding-top: 2rem;
-		padding-bottom: 2rem;
+		padding: 2rem 1rem;
 		color: @am-danger;
 		background-color: @am-bg;
 		border: @am-border-width dashed @am-danger;
@@ -156,16 +125,8 @@
 		}
 
 		&__info {
-
 			width: 100%;
 			margin-left: 0 !important;
-			padding: 0 @am-block-content-padding;
-
-			.am-fullscreen&,
-			.am-fullscreen-modal & {
-				padding: 0 @am-block-content-padding-fullscreen !important;
-			}
-
 		}
 
 	}

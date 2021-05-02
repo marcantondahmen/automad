@@ -1,0 +1,177 @@
+/*
+ *	                  ....
+ *	                .:   '':.
+ *	                ::::     ':..
+ *	                ::.         ''..
+ *	     .:'.. ..':.:::'    . :.   '':.
+ *	    :.   ''     ''     '. ::::.. ..:
+ *	    ::::.        ..':.. .''':::::  .
+ *	    :::::::..    '..::::  :. ::::  :
+ *	    ::'':::::::.    ':::.'':.::::  :
+ *	    :..   ''::::::....':     ''::  :
+ *	    :::::.    ':::::   :     .. '' .
+ *	 .''::::::::... ':::.''   ..''  :.''''.
+ *	 :..:::'':::::  :::::...:''        :..:
+ *	 ::::::. '::::  ::::::::  ..::        .
+ *	 ::::::::.::::  ::::::::  :'':.::   .''
+ *	 ::: '::::::::.' '':::::  :.' '':  :
+ *	 :::   :::::::::..' ::::  ::...'   .
+ *	 :::  .::::::::::   ::::  ::::  .:'
+ *	  '::'  '':::::::   ::::  : ::  :
+ *	            '::::   ::::  :''  .:
+ *	             ::::   ::::    ..''
+ *	             :::: ..:::: .:''
+ *	               ''''  '''''
+ *	
+ *
+ *	AUTOMAD
+ *
+ *	Copyright (c) 2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
+ *
+ *	Licensed under the MIT license.
+ */
+
+
+.tc-toolbar {
+
+	&--hidden {
+		visibility: hidden;
+	}
+
+	&--hor {
+		width: 100%;
+		height: 21px;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		position: absolute;
+		left: 0;
+		top: 1px;
+		z-index: 100;
+	}
+
+	&--ver {
+		height: 100%;
+		width: 21px;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		position: absolute;
+		top: 0;
+		left: -1px;
+		z-index: 100;
+	}
+
+	&__plus {
+
+		height: 1.5rem;
+		width: 1.5rem;
+		margin: 0;
+
+		&--hor {
+			margin-left: -0.75rem;
+			margin-top: -0.2rem;
+		}
+
+		&--ver {
+			margin-top: -0.75rem;
+		}
+
+		circle {
+			fill: @am-success !important;
+		}
+
+	}
+
+	&__shine-line {
+
+		&--hor {
+			min-height: 1px;
+			width: 100%;
+		}
+
+		&--ver {
+			min-width: 1px;
+			height: 100%;
+		}
+
+	}
+
+	&__shine-line--ver,
+	&__shine-line--hor {
+		background-color: @am-success;
+	}
+
+}
+
+.tc-editor {
+	padding: 10px;
+	position: relative;
+	box-sizing: content-box;
+	width: 100%;
+	left: -10px;
+}
+
+.tc-table {
+
+	width: 100%;
+	height: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+
+	&__wrap {
+		border: 1px solid @am-border-color;
+		border-radius: @am-radius;
+		position: relative;
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	&__cell {
+		border: 1px solid @am-border-color;
+		padding: 0;
+		vertical-align: top;
+	}
+
+	&__area {
+		padding: 0.57rem 0.71rem;
+		height: 100%;
+	}
+
+	&__inp {
+		outline: none;
+		flex-grow: 100;
+		min-height: 1.5em;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	tbody tr:first-child td {
+		border-top: none;
+	}
+
+	tbody tr:last-child td {
+		border-bottom: none;
+	}
+
+	tbody tr td:last-child {
+		border-right: none;
+	}
+
+	tbody tr td:first-child {
+		border-left: none;
+	}
+
+	& tr:first-child > td {
+
+		border-bottom-width: 0.14rem;
+
+		& .tc-table__inp {
+			font-weight: bold !important;
+		}
+		
+	}
+
+}

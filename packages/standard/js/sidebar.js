@@ -1,6 +1,6 @@
 /*!	
  * 	Standard.sidebar
- *	Copyright (c) 2020 by Marc Anton Dahmen - http://marcdahmen.de - MIT license
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de - MIT license
  */
 
 +function(Standard, $) {
@@ -15,7 +15,7 @@
 					containerSelector: false,
 					innerWrapperSelector: '.sidebar-inner',
 					resizeSensor: true,
-					topSpacing: 30,
+					topSpacing: 100,
 					bottomSpacing: 70
 				});
 				

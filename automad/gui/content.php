@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -47,8 +47,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Content class provides all methods to add, modify, move or delete content (pages, shared data and files). 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Content {
@@ -170,8 +170,7 @@ class Content {
 	
 	private function clearCache() {
 		
-		$Cache = new Core\Cache();
-		$Cache->clear();
+		Core\Cache::clear();
 		
 	}
 	
@@ -236,6 +235,7 @@ class Content {
 					
 					if (!$output['error'] = FileSystem::renameMedia($cachedFile, $resizedFile)) {
 						$output['success'] = Text::get('success_created') . ' "' . basename($resizedFile) . '"';
+						$this->clearCache();
 					}
 					
 				} else {
@@ -619,6 +619,7 @@ class Content {
 				}
 
 				FileSystem::write($path, $data);
+				$this->clearCache();
 
 			} 
 

@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2019-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2019-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -51,8 +51,7 @@ $output = array();
 if (Core\Request::post('reset')) {
 
 	if (Headless::resetTemplate()) {
-		$Cache = new Core\Cache();
-		$Cache->clear();
+		Core\Cache::clear();
 		$output['trigger'] = 'resetHeadlessTemplate';
 		$output['success'] = Text::get('success_reset_headless');
 	}

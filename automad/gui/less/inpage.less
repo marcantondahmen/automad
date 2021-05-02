@@ -26,8 +26,8 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2017-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2017-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  */
@@ -41,7 +41,9 @@
 	
 	body > & {
 		position: relative;	
+		display: block;
 		z-index: 9000;
+		padding: 0.75rem 1.5rem;
 	}
 	
 	&-menubar {
@@ -55,8 +57,9 @@
 		
 		& .uk-button-group {
 			
-			border-radius: @am-radius;
+			border-radius: 6px;
 			overflow: hidden;
+			border: 1px solid @am-border-color;
 			.shadow;	
 			
 			& > a {
@@ -100,10 +103,17 @@
 		margin-bottom: 0.14rem;
 		vertical-align: text-bottom;
 		letter-spacing: 0 !important;
-		border-color: transparent;
+		border-color: transparent !important;
+		text-decoration: none !important;
+		color: @button-success-color !important;
+		.shadow;
 
 		& > i {
 			color: inherit;
+		}
+
+		&:hover {
+			color: @button-success-hover-color !important;
 		}
 
 	}

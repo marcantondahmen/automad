@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2013-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2013-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -58,8 +58,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	In a last step, all URLs within the generated HTML get resolved to be relative to the server's root (or absolute), before $output gets returned.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2013-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class View {
@@ -961,7 +961,7 @@ class View {
 				}
 				
 			}, $str);
-			
+
 		return $this->resolveUrls($str, 'relativeUrlToBase', array($this->Automad->Context->get()));
 		
 	}
@@ -1020,14 +1020,27 @@ class View {
 					
 				}, $str);
 
+		// Remove all temporary edit buttons inside HTML tags to avoid confusing the URL resolver. 
+		$str = 	preg_replace_callback(
+					'/<([^>]+)>/s',
+					function($match) {
+						return '<' . preg_replace('/' . Regex::inPageEditButton() . '/s', '', $match[1]) . '>';
+					},
+					$str
+				);
+
 		// Find URLs in action, href and src attributes. 
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', function($match) use ($method, $parameters) {
-					$parameters = array_merge(array(0 => $match[3]), $parameters);
-					$url = call_user_func_array($method, $parameters);
-					// Matches 2 and 4 are quotes.
-					return $match[1] . '=' . $match[2] . $url . $match[4];
-				}, $str);
+		$str = 	preg_replace_callback(
+					'/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is', 
+					function($match) use ($method, $parameters) {
+						$parameters = array_merge(array(0 => $match[3]), $parameters);
+						$url = call_user_func_array($method, $parameters);
+						// Matches 2 and 4 are quotes.
+						return $match[1] . '=' . $match[2] . $url . $match[4];
+					}, 
+					$str
+				);
 				
 		// Inline styles (like background-image).
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
@@ -1097,9 +1110,9 @@ class View {
 					
 					Debug::log($matches['email'], 'Obfuscating');
 						
-					$html = '<a href="#" onclick="this.href=\'mailto:\'+ this.innerHTML.split(\'\').reverse().join(\'\')" style="unicode-bidi:bidi-override;direction:rtl">';
+					$html = "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>";
 					$html .= strrev($matches['email']);
-					$html .= "</a>&#x200E;";
+					$html .= '</a>&#x200E;';
 			
 					return $html;
 					

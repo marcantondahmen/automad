@@ -1,12 +1,12 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ snippets/header.php @>
+<@ elements/header.php @>
 	<div class="uk-flex">
-		<div class="uk-width-large-3-4">
+		<main class="uk-width-large-3-4">
 			<div class="content uk-block sidebar-block">
-				<@ snippets/content.php @>
-				<@ snippets/related_simple.php @>
+				<@ elements/content.php @>
+				<@ elements/related_simple.php @>
 			</div>
-		</div>
-		<@ snippets/sidebar.php @>
+		</main>
+		<@ elements/sidebar.php @>
 	</div>
-<@ snippets/footer.php @>
+<@ elements/footer.php @>

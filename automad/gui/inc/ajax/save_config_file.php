@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2014-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -62,6 +62,7 @@ if ($json = Core\Request::post('json')) {
 		}
 
 		if (Core\Config::write($config)) {
+			Core\Cache::clear();
 			$output['reload'] = true;
 		} else {
 			$output['error'] = Text::get('error_permission') . '<br>' . AM_CONFIG;

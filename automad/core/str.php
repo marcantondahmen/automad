@@ -27,11 +27,11 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
@@ -45,8 +45,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * 	The Str class holds all string methods.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
 class Str {
@@ -346,7 +346,7 @@ class Str {
 	
 	public static function stripTags($str) {
 		
-		return trim(strip_tags(Str::markdown($str)));
+		return trim(strip_tags(Str::markdown(strip_tags($str))));
 		
 	}
 		

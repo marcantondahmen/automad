@@ -1,66 +1,89 @@
 /*
  *	Standard
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *  MIT license
  */
 
 
-@panel-box-padding:             @utility-container-padding-horizontal;
-@panel-box-padding-large:		@utility-container-large-padding-horizontal;
+@panel-box-padding:				@cards-padding;
 
-@panel-box-background:          @panel-bg-color;
-@panel-box-color:               @text-color;
-@panel-box-hover-color:         @panel-box-color;
+@panel-box-background:			@card-bg-color;
+@panel-box-color:				@card-text-color;
+@panel-box-hover-color:			@panel-box-color;
 
-@panel-teaser-margin-bottom: 	30px;
+@panel-teaser-margin-bottom: 	@panel-box-padding;
 
-@panel-title-margin-bottom:     0.6rem;
-@panel-title-font-size:         1.65rem;
-@panel-title-line-height:       1.25;
-@panel-title-font-weight:       @base-heading-font-weight;
-@panel-title-color:             @panel-box-color;
-@panel-box-title-color:         @panel-box-color;
+@panel-title-margin-bottom:		0.5rem;
+@panel-title-font-size:			var(--h4-font-size);
+@panel-title-line-height:		var(--h4-line-height);
+@panel-title-font-weight:		var(--h4-font-weight);
+@panel-title-color:				@panel-box-color;
+@panel-box-title-color:			@panel-box-color;
 
 
 .hook-panel-box() {
-	
+
 	& + & {
 		margin-top: @cards-gap;
 	}
 
-	.cards & {
-		
-		& > .uk-panel-teaser {
+	& .uk-panel-teaser {
+		overflow: hidden;
+		margin-top: -@panel-box-padding;
+		margin-left: -@panel-box-padding;
+		margin-right: -@panel-box-padding;
+	}
+
+	& .uk-flex .uk-panel-teaser {
+
+		min-width: 30%;
+		max-width: 30%;
+		margin-left: @panel-box-padding;
+		margin-bottom: -@panel-box-padding;
+
+		& a {
+			position: absolute;
+			top: 0;
 			overflow: hidden;
-			margin-top: -@panel-box-padding;
-			margin-left: -@panel-box-padding;
-			margin-right: -@panel-box-padding;
-		}
-		
-		@media (min-width: @breakpoint-xlarge) {
-
-			padding: @panel-box-padding-large;
-
-			& > .uk-panel-teaser {
-				margin-top: -@panel-box-padding-large;
-				margin-left: -@panel-box-padding-large;
-				margin-right: -@panel-box-padding-large;
-			}
-
+			height: 100%;
 		}
 
-		& .uk-panel-title a:not([class]) {
+	}
 
-			letter-spacing: -0.016em;
+	& .uk-panel-title {
+
+		margin-top: -0.2em;
+
+		& a {
+
 			color: @panel-box-color;
+			opacity: 1;
+			.transition(opacity 0.2s;);
 
 			&:hover {
-				color: @muted-color;
+				color: @panel-box-color;
+				opacity: 0.7;
+				.transition(opacity 0.2s;);
 			}
 			
+		}
+
+	}
+
+	&.small {
+
+		& .uk-panel-title {
+			font-size: var(--h5-font-size);
+			font-weight: var(--h5-font-weight);
+			line-height: var(--h5-line-height);
+		}
+
+		& .text-subtitle {
+			padding-top: 0.3rem;
+			font-size: 0.8rem;
 		}
 
 	}
@@ -70,7 +93,7 @@
 .uk-panel-teaser,
 .panel-image {
 
-	.cards & img {
+	& img {
 
 		width: 100%;
 		height: 100%;
@@ -89,20 +112,32 @@
 
 .panel-more {
 
-	display: inline-block;
+	display: block;
 	padding: 0 1rem;
-	margin: 1rem 0 0 -1rem;
-	color: inherit;
+	margin: 1.5rem 0 0 -1rem;
+	color: @panel-box-color;
+	font-size: 1.1rem;
+	font-weight: 340;
+	opacity: 1;
+	.transition(opacity 0.2s;);
 	
 	&:hover {
-		color: @muted-color;
+		color: @panel-box-color;
+		opacity: 0.7;
+	}
+
+	.small & {
+		margin: 0.5rem 0 0 -1rem;
+		font-size: 1rem;
+		font-weight: 380;
 	}
 
 }
 
 .panel-icon {
 
-	margin-bottom: 1.65rem;
+	display: inline-block;
+	margin-bottom: @panel-box-padding;
 	
 	& svg {
 		max-width: 5rem;

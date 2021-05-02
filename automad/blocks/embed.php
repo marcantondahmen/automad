@@ -27,16 +27,15 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020 by Marc Anton Dahmen
- *	http://marcdahmen.de
+ *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
- *	http://automad.org/license
+ *	https://automad.org/license
  */
 
 
 namespace Automad\Blocks;
-use Automad\Core as Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -46,21 +45,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The embed block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020 by Marc Anton Dahmen - <http://marcdahmen.de>
- *	@license MIT license - http://automad.org/license
+ *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-class Embed {
+class Embed extends Paragraph {
 
 
 	/**	
 	 *	Render a embed block.
 	 *	
 	 *	@param object $data
+	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data) {
+	public static function render($data, $Automad) {
 
 		$attr = <<< HTML
 				scrolling="no"
@@ -107,11 +107,13 @@ HTML;
 
 		}
 
-		if (empty($data->caption)) {
-			return "<figure>$html</figure>";
-		} else {
-			return "<figure>$html<figcaption>$data->caption</figcaption></figure>";
+		if (!empty($data->caption)) {
+			$html .= "<figcaption>$data->caption</figcaption>";
 		}
+
+		$class = self::classAttr();
+
+		return "<am-embed $class><figure>$html</figure></am-embed>";
 
 	}
 

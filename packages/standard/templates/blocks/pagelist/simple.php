@@ -1,17 +1,30 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<section class="uk-margin-top uk-margin-bottom">
+<@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
+<section class="cards-simple">
 	<@ foreach in pagelist ~@>
-		<div class="uk-panel uk-panel-box" <@ ../../snippets/colors_inline.php @>>
-			<div class="uk-panel-title uk-margin-bottom-remove">
-				<a href="@{ url }" class="nav-link">
-					<@ ../../snippets/icon.php @>
-					@{ title }
-				</a>
+		<div class="card uk-panel uk-panel-box" <@ ../../elements/colors_inline.php @>>
+			<div class="uk-flex">
+				<div class="uk-width-3-4 uk-flex-item-1">
+					<div class="uk-panel-title uk-margin-bottom-remove">
+						<a href="@{ url }">
+							<@ ../../elements/icon.php @>
+							@{ title }
+						</a>
+					</div>
+					<@ ../../snippets/subtitle.php @>
+					<@~ ../../elements/set_teaser_variable.php @>
+					<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
+					<@ ../../elements/more.php @>
+				</div>
+				<@ if not @{ :hideThumbnails } and not @{ iconPanel } @>
+					<@~ ../../elements/set_image_card_variable.php @>
+					<@~ if @{ :imageCard } @>
+						<div class="uk-panel-teaser uk-width-1-4 uk-hidden-small">
+							<a href="@{ url }"><img src="@{ :imageCard }"></a>
+						</div>
+					<@~ end ~@>
+				<@ end @>
 			</div>
-			<@ ../../snippets/subtitle.php @>
-			<@~ ../../snippets/set_teaser_variable.php @>
-			<p class="content uk-margin-bottom-remove">@{ :teaser }</p>
-			<@ ../../snippets/more.php @>
 		</div>
 	<@~ end @>
 </section>

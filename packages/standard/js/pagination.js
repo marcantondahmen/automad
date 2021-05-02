@@ -1,6 +1,6 @@
 /*!
  *	Standard.pagination
- * 	Copyright (c) 2017-2020 by Marc Anton Dahmen - http://marcdahmen.de - MIT license
+ * 	Copyright (c) 2017-2021 by Marc Anton Dahmen - https://marcdahmen.de - MIT license
  */
 
 +function(Standard, $) {

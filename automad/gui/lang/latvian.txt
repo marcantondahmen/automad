@@ -50,10 +50,6 @@ btn_duplicate_page: Lapas dublikāts
 
 -
 
-btn_edit: Rediģēt
-
--
-
 btn_edit_file_info: Rediģēt faila informāciju
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Iegūstiet vairāk motīvu
 -
 
 btn_getting_data: Notiek datu iegūšana ...
+
+-
+
+btn_help: Palīdzība
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Nesen rediģētās lapas
 -
 
 dropzone: Velciet failus šeit
+
+-
+
+editor_buttons_toolbox: Pogas
+
+-
+
+editor_button_primary: Galvenā poga
+
+-
+
+editor_button_secondary: Sekundārā poga
+
+-
+
+editor_button_label: Teksts
+
+-
+
+editor_button_link: Saite
+
+-
+
+editor_button_color: Teksta krāsa
+
+-
+
+editor_button_background_color: Fons
+
+-
+
+editor_button_border_color: Robeža
+
+-
+
+editor_button_border_width: Robežu platums
+
+-
+
+editor_button_border_radius: Stūra rādiuss
+
+-
+
+editor_button_padding_horizontal: Horizontālā atstatums
+
+-
+
+editor_button_padding_vertical: Vertikālā atstāšana
+
+-
+
+editor_delimiter_toolbox: Norobežotājs
+
+-
+
+editor_filelist_toolbox: Failu saraksts
+
+-
+
+editor_filelist_template: Atlasiet Veidne
+
+-
+
+editor_filelist_default: Noklusējuma veidne
+
+-
+
+editor_filelist_files: Glob modeļi (atdalīts ar komatu)
+
+-
+
+editor_gallery_toolbox: Attēlu galerija
+
+-
+
+editor_gallery_files: Glob modeļi vai URL
+
+-
+
+editor_gallery_width: Attēla platums pikseļos
+
+-
+
+editor_gallery_clean_bottom: Notīriet apakšējo malu
+
+-
+
+editor_heading_toolbox: Virsraksts
+
+-
+
+editor_image_toolbox: Attēls
+
+-
+
+editor_list_toolbox: Saraksts
+
+-
+
+editor_list_unordered: Bullet Points
+
+-
+
+editor_list_ordered: Numurēts saraksts
+
+-
+
+editor_mail_toolbox: E-pasta veidlapa
+
+-
+
+editor_mail_data_error: Lūdzu, aizpildiet visus laukus!
+
+-
+
+editor_mail_data_success: E-pasts ir veiksmīgi nosūtīts!
+
+-
+
+editor_mail_data_placeholder_address: Tava epasta adrese
+
+-
+
+editor_mail_data_placeholder_subject: E-pasta tēma
+
+-
+
+editor_mail_data_placeholder_message: Ziņojuma pamatteksts
+
+-
+
+editor_mail_data_send: Nosūtīt pastu
+
+-
+
+editor_mail_placeholder_address: Šeit ievadiet savu e-pasta adresi
+
+-
+
+editor_mail_placeholder_error: Šeit ievadiet izvēles kļūdas ziņojumu
+
+-
+
+editor_mail_placeholder_success: Šeit ievadiet izvēles veiksmes ziņojumu
+
+-
+
+editor_mail_label_address: Tava epasta adrese
+
+-
+
+editor_mail_label_success: Veiksmes ziņojums
+
+-
+
+editor_mail_label_error: Kļūdas ziņojums
+
+-
+
+editor_mail_label_placeholder_address: Vietnieks e-pastam
+
+-
+
+editor_mail_label_placeholder_subject: E-pasta tēmas vietturis
+
+-
+
+editor_mail_label_placeholder_message: Vietnes ziņojuma pamatteksts
+
+-
+
+editor_mail_label_button: Pogas teksts
+
+-
+
+editor_section_toolbox: Izkārtojuma sadaļa / karte
+
+-
+
+editor_section_justify_start: Izlīdzināt elementus kreisajā pusē
+
+-
+
+editor_section_justify_center: Saskaņot elementus vidū
+
+-
+
+editor_section_justify_end: Izlīdzināt elementus uz labo pusi
+
+-
+
+editor_section_justify_space_between: Telpu starp
+
+-
+
+editor_section_justify_space_evenly: Vienmērīgi
+
+-
+
+editor_section_justify_fill_row: Aizpildīt rindu
+
+-
+
+editor_section_gap: Plaisa starp blokiem
+
+-
+
+editor_section_min_block_width: Minimālais bloka platums
+
+-
+
+editor_section_edit: Rediģēt
+
+-
+
+editor_section_card: Optimizējiet kartes saturu
+
+-
+
+editor_section_padding_top: Atstarpes uz augšu
+
+-
+
+editor_section_padding_bottom: Atstājot
+
+-
+
+editor_section_color: Teksta krāsa
+
+-
+
+editor_section_background_color: Fona krāsa
+
+-
+
+editor_section_background_image: Fona attēls
+
+-
+
+editor_section_background_blend_mode: Fona maisījuma režīms
+
+-
+
+editor_section_border_color: Robeža
+
+-
+
+editor_section_border_width: Robežu platums
+
+-
+
+editor_section_border_radius: Stūra rādiuss
+
+-
+
+editor_section_shadow: Nomest ēnu
+
+-
+
+editor_section_match_row_height: Pilna rindu augstums
+
+-
+
+editor_pagelist_toolbox: Lappušu saraksts
+
+-
+
+editor_pagelist_template: Atlasiet Veidne
+
+-
+
+editor_pagelist_default: Noklusējuma veidne
+
+-
+
+editor_pagelist_url_regex: URL regex filtrs
+
+-
+
+editor_pagelist_type: Tips
+
+-
+
+editor_pagelist_filter_tag: Filtrēt pēc taga
+
+-
+
+editor_pagelist_filter_template: Filtrēt pēc veidnes
+
+-
+
+editor_pagelist_limit_offset: Limits un nobīde
+
+-
+
+editor_pagelist_sort_var: Kārtot pēc mainīgā
+
+-
+
+editor_pagelist_sort_order: Šķirošanas secība
+
+-
+
+editor_paragraph_toolbox: Teksts
+
+-
+
+editor_paragraph_large: Lielāks fonta lielums
+
+-
+
+editor_quote_toolbox: Citāts
+
+-
+
+editor_quote_placeholder: Ievadiet tekstu
+
+-
+
+editor_quote_placeholder_caption: Ievadiet parakstu
+
+-
+
+editor_slider_toolbox: Slaidrāde
+
+-
+
+editor_slider_width: Platums
+
+-
+
+editor_slider_height: Augstums
+
+-
+
+editor_slider_files: Glob modeļi vai URL
+
+-
+
+editor_slider_dots: Rādīt punktu navigāciju
+
+-
+
+editor_slider_autoplay: Automātiskā atskaņošana
+
+-
+
+editor_snippet_toolbox: Pielāgots veidnes fragments
+
+-
+
+editor_snippet_input: Fragmenta kods
+
+-
+
+editor_snippet_file: Atlasiet fragmenta failu
+
+-
+
+editor_table_toolbox: Tabulu saraksts
+
+-
+
+editor_code: Avota kods
+
+-
+
+editor_toc: Satura rādītājs
+
+-
+
+editor_left: Pa kreisi
+
+-
+
+editor_center: Centrs
+
+-
+
+editor_edit_style: Rediģēt stilu
+
+-
+
+editor_layout_default: Noklusējuma izkārtojums
+
+-
+
+editor_layout_stretch: Paplašiniet bloku līdz pilnam platumam
+
+-
+
+editor_layout_width: Platums
+
+-
+
+editor_ui_placeholder: Noklikšķiniet šeit, lai pievienotu savu pirmo bloku ...
+
+-
+
+editor_ui_add: Pievienot
+
+-
+
+editor_ui_settings: Noklikšķiniet, lai atvērtu iestatījumus, vai velciet, lai pārvietotu bloku
+
+-
+
+editor_ui_delete: Dzēst bloku
+
+-
+
+editor_ui_move_up: Pārvietot bloku uz augšu
+
+-
+
+editor_ui_move_down: Pārvietot bloku uz leju
+
+-
+
+editor_ui_convert: Konvertēt bloku uz
+
+-
+
+editor_ui_browse: Pārlūkot failus
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Atlasiet jaunās lapas atrašanās vietu
 
 -
 
+page_date: Datums
+
+-
+
 page_move_destination: Izvēlieties pārvietošanās galamērķi
 
 -
@@ -451,6 +879,10 @@ page_var_name: Mainīgā nosaukums
 -
 
 page_vars_content: Saturs
+
+-
+
+page_vars_color: Krāsas
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Vai vēlaties lietot atlasīto motīvu un atjaunināt pieeja
 -
 
 shared_vars_content: Noklusējuma saturs
+
+-
+
+shared_vars_color: Noklusējuma krāsas
 
 -
 

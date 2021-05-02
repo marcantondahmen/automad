@@ -50,10 +50,6 @@ btn_duplicate_page: Дублікат сторінки
 
 -
 
-btn_edit: Редагувати
-
--
-
 btn_edit_file_info: Редагувати інформацію про файл
 
 -
@@ -75,6 +71,10 @@ btn_get_themes: Отримайте більше тем
 -
 
 btn_getting_data: Отримання даних ...
+
+-
+
+btn_help: Допомога
 
 -
 
@@ -195,6 +195,430 @@ dashboard_recently_edited: Нещодавно відредаговані сто�
 -
 
 dropzone: Перетягніть файли сюди
+
+-
+
+editor_buttons_toolbox: Кнопки
+
+-
+
+editor_button_primary: Основна кнопка
+
+-
+
+editor_button_secondary: Вторинна кнопка
+
+-
+
+editor_button_label: Текст
+
+-
+
+editor_button_link: Посилання
+
+-
+
+editor_button_color: Текстовий колір
+
+-
+
+editor_button_background_color: Фон
+
+-
+
+editor_button_border_color: Колір кордону
+
+-
+
+editor_button_border_width: Ширина кордону
+
+-
+
+editor_button_border_radius: Кутовий радіус
+
+-
+
+editor_button_padding_horizontal: Горизонтальний інтервал
+
+-
+
+editor_button_padding_vertical: Вертикальний інтервал
+
+-
+
+editor_delimiter_toolbox: Розділювач
+
+-
+
+editor_filelist_toolbox: Список файлів
+
+-
+
+editor_filelist_template: Виберіть Шаблон
+
+-
+
+editor_filelist_default: Шаблон за замовчуванням
+
+-
+
+editor_filelist_files: Шаблони глобусів (розділені комами)
+
+-
+
+editor_gallery_toolbox: Галерея зображень
+
+-
+
+editor_gallery_files: Шаблони або URL-адреси
+
+-
+
+editor_gallery_width: Ширина зображення в пікселях
+
+-
+
+editor_gallery_clean_bottom: Чистий нижній край
+
+-
+
+editor_heading_toolbox: Заголовок
+
+-
+
+editor_image_toolbox: Зображення
+
+-
+
+editor_list_toolbox: Список
+
+-
+
+editor_list_unordered: Кульові окуляри
+
+-
+
+editor_list_ordered: Нумерований список
+
+-
+
+editor_mail_toolbox: Форма електронної пошти
+
+-
+
+editor_mail_data_error: Будь ласка, заповніть усі поля!
+
+-
+
+editor_mail_data_success: Успішно надіслано електронне повідомлення!
+
+-
+
+editor_mail_data_placeholder_address: Ваша електронна адреса
+
+-
+
+editor_mail_data_placeholder_subject: Тема електронної пошти
+
+-
+
+editor_mail_data_placeholder_message: Тіло повідомлення
+
+-
+
+editor_mail_data_send: Надіслати пошту
+
+-
+
+editor_mail_placeholder_address: Введіть тут свою електронну адресу
+
+-
+
+editor_mail_placeholder_error: Введіть сюди необов’язкове повідомлення про помилку
+
+-
+
+editor_mail_placeholder_success: Введіть сюди необов’язкове повідомлення про успіх
+
+-
+
+editor_mail_label_address: Ваша електронна адреса
+
+-
+
+editor_mail_label_success: Повідомлення про успіх
+
+-
+
+editor_mail_label_error: Повідомлення про помилку
+
+-
+
+editor_mail_label_placeholder_address: Заповнювач для електронної пошти
+
+-
+
+editor_mail_label_placeholder_subject: Заповнювач для теми електронної пошти
+
+-
+
+editor_mail_label_placeholder_message: Заповнювач для тіла повідомлення
+
+-
+
+editor_mail_label_button: Текст кнопки
+
+-
+
+editor_section_toolbox: Розділ / картка макета
+
+-
+
+editor_section_justify_start: Вирівняти елементи до лівої сторони
+
+-
+
+editor_section_justify_center: Вирівнювати елементи до середини
+
+-
+
+editor_section_justify_end: Вирівняти елементи до правої сторони
+
+-
+
+editor_section_justify_space_between: Простір між
+
+-
+
+editor_section_justify_space_evenly: Простір рівномірно
+
+-
+
+editor_section_justify_fill_row: Наповнювати
+
+-
+
+editor_section_gap: Розрив між блоками
+
+-
+
+editor_section_min_block_width: Мінімальна ширина блоку
+
+-
+
+editor_section_edit: Редагувати
+
+-
+
+editor_section_card: Оптимізувати вміст для карт
+
+-
+
+editor_section_padding_top: Відстань вгору
+
+-
+
+editor_section_padding_bottom: Пробіл
+
+-
+
+editor_section_color: Текстовий колір
+
+-
+
+editor_section_background_color: Колір фону
+
+-
+
+editor_section_background_image: Фонове зображення
+
+-
+
+editor_section_background_blend_mode: Фоновий режим суміші
+
+-
+
+editor_section_border_color: Колір кордону
+
+-
+
+editor_section_border_width: Ширина кордону
+
+-
+
+editor_section_border_radius: Кутовий радіус
+
+-
+
+editor_section_shadow: Тінь
+
+-
+
+editor_section_match_row_height: Повна висота рядка
+
+-
+
+editor_pagelist_toolbox: Список сторінок
+
+-
+
+editor_pagelist_template: Виберіть Шаблон
+
+-
+
+editor_pagelist_default: Шаблон за замовчуванням
+
+-
+
+editor_pagelist_url_regex: Фільтр регулярних виразів URL
+
+-
+
+editor_pagelist_type: Тип
+
+-
+
+editor_pagelist_filter_tag: Фільтрувати за тегом
+
+-
+
+editor_pagelist_filter_template: Фільтрувати за шаблоном
+
+-
+
+editor_pagelist_limit_offset: Обмеження та зміщення
+
+-
+
+editor_pagelist_sort_var: Сортувати за змінною
+
+-
+
+editor_pagelist_sort_order: Порядок сортування
+
+-
+
+editor_paragraph_toolbox: Текст
+
+-
+
+editor_paragraph_large: Більший розмір шрифту
+
+-
+
+editor_quote_toolbox: Цитата
+
+-
+
+editor_quote_placeholder: Введіть текст
+
+-
+
+editor_quote_placeholder_caption: Введіть підпис
+
+-
+
+editor_slider_toolbox: Слайд-шоу
+
+-
+
+editor_slider_width: Ширина
+
+-
+
+editor_slider_height: Висота
+
+-
+
+editor_slider_files: Шаблони або URL-адреси
+
+-
+
+editor_slider_dots: Показати крапкову навігацію
+
+-
+
+editor_slider_autoplay: Автоматичне відтворення
+
+-
+
+editor_snippet_toolbox: Фрагмент спеціального шаблону
+
+-
+
+editor_snippet_input: Код фрагмента
+
+-
+
+editor_snippet_file: Виберіть файл фрагмента
+
+-
+
+editor_table_toolbox: Табличний список
+
+-
+
+editor_code: Вихідний код
+
+-
+
+editor_toc: Зміст
+
+-
+
+editor_left: Ліворуч
+
+-
+
+editor_center: Центр
+
+-
+
+editor_edit_style: Редагувати стиль
+
+-
+
+editor_layout_default: Макет за замовчуванням
+
+-
+
+editor_layout_stretch: Розгорніть блок на всю ширину
+
+-
+
+editor_layout_width: Ширина
+
+-
+
+editor_ui_placeholder: Натисніть тут, щоб додати свій перший блок ...
+
+-
+
+editor_ui_add: Додати
+
+-
+
+editor_ui_settings: Клацніть, щоб відкрити налаштування, або перетягніть, щоб перемістити блок
+
+-
+
+editor_ui_delete: Видалити блок
+
+-
+
+editor_ui_move_up: Перемістити блок вгору
+
+-
+
+editor_ui_move_down: Перемістити блок вниз
+
+-
+
+editor_ui_convert: Перетворити блок на
+
+-
+
+editor_ui_browse: Переглядати файли
 
 -
 
@@ -422,6 +846,10 @@ page_add_location: Виберіть місце для нової сторінк�
 
 -
 
+page_date: Дата
+
+-
+
 page_move_destination: Виберіть пункт призначення для переїзду
 
 -
@@ -451,6 +879,10 @@ page_var_name: Назва змінної
 -
 
 page_vars_content: Зміст
+
+-
+
+page_vars_color: Кольори
 
 -
 
@@ -491,6 +923,10 @@ shared_theme_apply: Ви хочете застосувати обрану тем
 -
 
 shared_vars_content: Вміст за замовчуванням
+
+-
+
+shared_vars_color: Кольори за замовчуванням
 
 -
 
