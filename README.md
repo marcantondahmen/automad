@@ -24,7 +24,7 @@ Follow this [guide](https://automad.org/getting-started#composer) to finish the 
 
 ### Docker
 
-In case you quickly want to get Automad up and running including a webserver and PHP 8, you use the official Docker image. The first time you run this image, a new user account for the Automad dashboard will be created automatically. The account details are displayed in the terminal and therefore the image shouldn't run in detached mode.
+It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8**. The first time you run the image, a new user account for the Automad dashboard will be created automatically. That moment the account details will be displayed in the terminal window and therefore the image should **not** run in detached mode then.
 
 	docker run -p 80:80 automad/automad
 
