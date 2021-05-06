@@ -24,13 +24,15 @@ Follow this [guide](https://automad.org/getting-started#composer) to finish the 
 
 ### Docker
 
-It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8**. The first time you run the image, a new user account for the Automad dashboard will be created automatically. That moment the account details will be displayed in the terminal window and therefore the image should **not** run in detached mode then.
+It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8**. 
 
-	docker run -p 80:80 automad/automad
+	docker run -dp 80:80 --name mysite automad/automad
 
-After the first run you can use the following command to run the image in detached mode.
+The first time you run the image, a new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container. You can show these logs using the following command:
 
-	docker run -dp 80:80 automad/automad
+	docker logs mysite
+
+Your can now navigate to [localhost](http://localhost) to view your new site.
 
 ### Manual Download
 
