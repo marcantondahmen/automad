@@ -57,8 +57,8 @@ class PackageManager {
 	/**
 	 * 	The path to the composer.json file.
 	 */
-	private static $composerFile = AM_BASE_DIR . '/composer.json';
 
+	private static $composerFile = AM_BASE_DIR . '/composer.json';
 
 
 	/**
