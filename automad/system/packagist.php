@@ -69,13 +69,26 @@ class Packagist {
 			)
 		);
 
-		$data = self::request('https://packagist.org/search.json?' . $query);
+		$results = array();
+		$url = 'https://packagist.org/search.json?' . $query;
 
-		if (!empty($data->results)) {
-			return $data->results;
+		while ($url) {
+
+			$data = self::request($url);
+
+			if (!empty($data->results)) {
+				$results = array_merge($results, $data->results);
+			}
+
+			if (!empty($data->next)) {
+				$url = $data->next;
+			} else {
+				$url = false;
+			}
+
 		}
 
-		return array();
+		return $results;
 
 	}
 

@@ -12,11 +12,30 @@ A flat-file content management system and template engine
 
 ## Installation
 
+Automad can be installed using [Docker](https://docker.com), [Composer](https://getcomposer.org) or manually.
+
+### Composer
+
 The fastest way to get Automad up and running is to use Composer.
 
 	composer create-project automad/automad .
 
-Follow this [guide](https://automad.org/getting-started#composer) to finish the installation and get started quickly.    
+Follow this [guide](https://automad.org/getting-started#composer) to finish the installation and get started quickly.
+
+### Docker
+
+It is also possible to run Automad in a [Docker](https://hub.docker.com/r/automad/automad) container including **Nginx** and **PHP 8**. 
+
+	docker run -dp 80:80 --name mysite automad/automad
+
+The first time you run the image, a new user account for the Automad dashboard will be created automatically. The account details will be logged by the running container. You can show these logs using the following command:
+
+	docker logs mysite
+
+Your can now navigate to [localhost](http://localhost) to view your new site.
+
+### Manual Download
+
 Alternatively Automad can also be [installed manually](https://automad.org/getting-started#manual-installation).
 
 ## Documentation
