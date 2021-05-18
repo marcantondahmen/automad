@@ -1,5 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 		<footer class="uk-block">
+			<@ prev_next.php @>
 			<div class="am-block footer uk-margin-bottom">
 				<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
 					<li>
