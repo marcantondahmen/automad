@@ -274,7 +274,27 @@ editor_gallery_files: GLOCH vzory nebo URL
 
 -
 
-editor_gallery_width: Šířka obrázku v pixelech
+editor_gallery_layout: Rozložení
+
+-
+
+editor_gallery_layout_vertical: Vertikální
+
+-
+
+editor_gallery_layout_horizontal: Horizontální
+
+-
+
+editor_gallery_width: Šířka sloupce
+
+-
+
+editor_gallery_height: Výška řádku
+
+-
+
+editor_gallery_gap: Mezera
 
 -
 

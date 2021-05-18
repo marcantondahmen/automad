@@ -274,7 +274,27 @@ editor_gallery_files: Patrones de globo o URL
 
 -
 
-editor_gallery_width: Ancho de imagen en píxeles
+editor_gallery_layout: Diseño
+
+-
+
+editor_gallery_layout_vertical: Vertical
+
+-
+
+editor_gallery_layout_horizontal: Horizontal
+
+-
+
+editor_gallery_width: Ancho de columna
+
+-
+
+editor_gallery_height: Altura de la fila
+
+-
+
+editor_gallery_gap: Brecha
 
 -
 

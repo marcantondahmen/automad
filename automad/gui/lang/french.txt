@@ -274,7 +274,27 @@ editor_gallery_files: Modèles de globules ou URL
 
 -
 
-editor_gallery_width: Largeur d'image en pixels
+editor_gallery_layout: Mise en page
+
+-
+
+editor_gallery_layout_vertical: Verticale
+
+-
+
+editor_gallery_layout_horizontal: Horizontale
+
+-
+
+editor_gallery_width: Largeur de colonne
+
+-
+
+editor_gallery_height: Hauteur de rangée
+
+-
+
+editor_gallery_gap: Écart
 
 -
 

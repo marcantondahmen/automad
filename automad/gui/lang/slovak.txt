@@ -274,7 +274,27 @@ editor_gallery_files: Vzory alebo adresy URL
 
 -
 
-editor_gallery_width: Šírka obrázka v pixeloch
+editor_gallery_layout: Rozloženie
+
+-
+
+editor_gallery_layout_vertical: Vertikálny
+
+-
+
+editor_gallery_layout_horizontal: Horizontálny
+
+-
+
+editor_gallery_width: Šírka stĺpca
+
+-
+
+editor_gallery_height: Riadková výška
+
+-
+
+editor_gallery_gap: Rozdiel
 
 -
 

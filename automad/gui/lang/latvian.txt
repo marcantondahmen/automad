@@ -274,7 +274,27 @@ editor_gallery_files: Glob modeļi vai URL
 
 -
 
-editor_gallery_width: Attēla platums pikseļos
+editor_gallery_layout: Izkārtojums
+
+-
+
+editor_gallery_layout_vertical: Vertikāls
+
+-
+
+editor_gallery_layout_horizontal: Horizontāls
+
+-
+
+editor_gallery_width: Kolonnas platums
+
+-
+
+editor_gallery_height: Rindu augstums
+
+-
+
+editor_gallery_gap: Plaisa
 
 -
 

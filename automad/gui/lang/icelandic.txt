@@ -274,7 +274,27 @@ editor_gallery_files: Glob mynstur eða vefslóðir
 
 -
 
-editor_gallery_width: Breidd myndar í pixlum
+editor_gallery_layout: Skipulag
+
+-
+
+editor_gallery_layout_vertical: Lóðrétt
+
+-
+
+editor_gallery_layout_horizontal: Lárétt
+
+-
+
+editor_gallery_width: Dálkurbreidd
+
+-
+
+editor_gallery_height: Röð hæð
+
+-
+
+editor_gallery_gap: Bili
 
 -
 

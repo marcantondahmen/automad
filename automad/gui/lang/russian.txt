@@ -274,7 +274,27 @@ editor_gallery_files: Шаблоны шаблонов или URL
 
 -
 
-editor_gallery_width: Ширина изображения в пикселях
+editor_gallery_layout: Макет
+
+-
+
+editor_gallery_layout_vertical: Вертикальный
+
+-
+
+editor_gallery_layout_horizontal: Горизонтальный
+
+-
+
+editor_gallery_width: Ширина колонки
+
+-
+
+editor_gallery_height: Высота строки
+
+-
+
+editor_gallery_gap: Зазор
 
 -
 

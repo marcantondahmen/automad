@@ -274,7 +274,27 @@ editor_gallery_files: Globe uzorci ili urls
 
 -
 
-editor_gallery_width: Širina slike u pikselima
+editor_gallery_layout: Izgled
+
+-
+
+editor_gallery_layout_vertical: Vertikalan
+
+-
+
+editor_gallery_layout_horizontal: Horizontalno
+
+-
+
+editor_gallery_width: Širina stupca
+
+-
+
+editor_gallery_height: Visina reda
+
+-
+
+editor_gallery_gap: Jaz
 
 -
 

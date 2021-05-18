@@ -310,7 +310,27 @@ editor_gallery_files: Glob Patterns or URLs
 
 -
 
-editor_gallery_width: Image Width in Pixels
+editor_gallery_layout: Layout 
+
+-
+
+editor_gallery_layout_vertical: Vertical
+
+-
+
+editor_gallery_layout_horizontal: Horizontal 
+
+-
+
+editor_gallery_width: Column Width
+
+-
+
+editor_gallery_height: Row height
+
+-
+
+editor_gallery_gap: Gap
 
 -
 

@@ -274,7 +274,27 @@ editor_gallery_files: Глоб обрасци или УРЛ-ови
 
 -
 
-editor_gallery_width: Ширина слике у пикселима
+editor_gallery_layout: Распоред
+
+-
+
+editor_gallery_layout_vertical: Вертикала
+
+-
+
+editor_gallery_layout_horizontal: Хоризонталан
+
+-
+
+editor_gallery_width: Ширина колона
+
+-
+
+editor_gallery_height: Висине реда
+
+-
+
+editor_gallery_gap: Празнина
 
 -
 

@@ -274,7 +274,27 @@ editor_gallery_files: Padrões ou urls glob
 
 -
 
-editor_gallery_width: Largura da imagem em pixels
+editor_gallery_layout: Layout
+
+-
+
+editor_gallery_layout_vertical: Vertical
+
+-
+
+editor_gallery_layout_horizontal: Horizontal
+
+-
+
+editor_gallery_width: Largura da coluna
+
+-
+
+editor_gallery_height: Altura da linha
+
+-
+
+editor_gallery_gap: Lacuna
 
 -
 

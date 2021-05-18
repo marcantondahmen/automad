@@ -274,7 +274,27 @@ editor_gallery_files: Glob mønstre eller nettadresser
 
 -
 
-editor_gallery_width: Bildebredde i piksler
+editor_gallery_layout: Oppsett
+
+-
+
+editor_gallery_layout_vertical: Vertikal
+
+-
+
+editor_gallery_layout_horizontal: Horisontal
+
+-
+
+editor_gallery_width: Kolonnebredde
+
+-
+
+editor_gallery_height: Rørhøyde
+
+-
+
+editor_gallery_gap: Mellomrom
 
 -
 
