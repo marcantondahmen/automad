@@ -150,14 +150,19 @@
 
 	&-group {
 
+		display: flex;
+
 		& > *.uk-button {
+			flex-grow: 1;
 			margin-left: 0;
 			border-radius: 0;
 		}
 
-		& .uk-button {
+		& .uk-button + .uk-button {
 
-			&-success:not(:first-child) {
+			margin-left: -@am-border-width;
+
+			&-success {
 				border-left-color: @button-success-hover-background;
 			}
 
