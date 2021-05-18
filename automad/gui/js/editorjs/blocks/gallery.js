@@ -60,43 +60,117 @@ class AutomadBlockGallery {
 
 	constructor({data, api, config}) {
 
-		var create = Automad.util.create,
-			t = AutomadEditorTranslation.get;
-
 		this.api = api;
 
 		this.data = {
 			globs: data.globs || '*.jpg, *.png',
-			width: data.width || 250,
+			layout: data.layout || 'vertical',
+			width: data.width || '250px',
+			height: data.height || '10rem',
+			gap: data.gap || '5px',
 			cleanBottom: data.cleanBottom !== undefined ? data.cleanBottom : true
 		};
 
 		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
+		this.inputs = {};
+		this.wrapper = this.drawView();
 
-		this.inputs = {
-			width: create.editable(['cdx-input'], 'px', this.data.width)
-		};
-		
-		var icon = document.createElement('div'),
-			title = document.createElement('div'),
-			selection = document.createElement('div');
-		
-		this.imageSelection = new AutomadEditorImageSelection(this.data.globs, selection);
-		
-		icon.innerHTML = AutomadBlockGallery.toolbox.icon;
-		icon.classList.add('am-block-icon');
-		title.innerHTML = AutomadBlockGallery.toolbox.title;
-		title.classList.add('am-block-title');
+	}
+
+
+	drawView() {
+
+		const create = Automad.util.create,
+			  t = AutomadEditorTranslation.get,
+			  wrapper = create.element('div', ['am-block-gallery', 'uk-panel', 'uk-panel-box']),
+			  selectionWrapper = create.element('div', []),
+			  optionWrapper = create.element('div', []);
+
+		this.imageSelection = new AutomadEditorImageSelection(this.data.globs, selectionWrapper);
+
+		wrapper.innerHTML = `
+			<div class="am-block-icon">${AutomadBlockGallery.toolbox.icon}</div>
+			<div class="am-block-title">${AutomadBlockGallery.toolbox.title}</div>
+			<hr>
+			${create.label(t('gallery_files')).outerHTML}
+		`;
+
+		optionWrapper.innerHTML = `
+			${create.label(t('gallery_layout'), ['am-block-label', 'uk-margin-top-remove']).outerHTML}
+			<div class="am-block-gallery-layout">
+				<div class="am-block-gallery-layout-tabs">
+					<div class="vertical">${t('gallery_layout_vertical')}</div>
+					<div class="horizontal">${t('gallery_layout_horizontal')}</div>
+				</div>
+				<div class="am-block-gallery-layout-options">
+					<div class="vertical">
+						<div>
+							${create.label(t('gallery_width')).outerHTML}
+							${create.numberUnit('width-', this.data.width).outerHTML}
+						</div>
+						<div class="uk-form-row">
+							${create.label('Masonry').outerHTML}
+							<label
+							class="${this.data.cleanBottom == true ? 'uk-active' : ''} am-toggle-switch uk-text-truncate uk-button uk-text-left uk-width-1-1"
+							data-am-toggle
+							>
+								${t('gallery_clean_bottom')}
+								<input type="checkbox" class="clean-bottom" ${this.data.cleanBottom == true ? 'checked' : ''}>
+							</label>
+						</div>
+					</div>
+					<div class="horizontal">
+						<div>
+							${create.label(t('gallery_height')).outerHTML}
+							${create.numberUnit('height-', this.data.height).outerHTML}
+						</div>
+					</div>
+				</div>
+			</div>
+			${create.label(t('gallery_gap')).outerHTML}
+			${create.numberUnit('gap-', this.data.gap).outerHTML}
+		`;
+
+		wrapper.appendChild(selectionWrapper);
+		wrapper.appendChild(create.element('hr', []));
+		wrapper.appendChild(optionWrapper);
+
+		['vertical', 'horizontal'].forEach((layout) => {
+
+			const tab = optionWrapper.querySelector(`.am-block-gallery-layout-tabs .${layout}`),
+				  form = optionWrapper.querySelector(`.am-block-gallery-layout-options .${layout}`);
+
+			tab.classList.toggle('active', (layout == this.data.layout));
+			form.classList.toggle('active', (layout == this.data.layout));
+			
+			tab.addEventListener('click', () => {
+
+				const active = optionWrapper.querySelectorAll('.active');
+
+				Array.from(active).forEach((item) => {
+					item.classList.remove('active');
+				});
+
+				tab.classList.add('active');
+				form.classList.add('active');
+				
 	
-		this.wrapper = document.createElement('div');
-		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
-		this.wrapper.appendChild(icon);
-		this.wrapper.appendChild(title);
-		this.wrapper.appendChild(document.createElement('hr'));
-		this.wrapper.appendChild(create.label(t('gallery_files')));
-		this.wrapper.appendChild(selection);
-		this.wrapper.appendChild(create.label(t('gallery_width')));
-		this.wrapper.appendChild(this.inputs.width);
+
+				this.data.layout = layout;
+
+			});
+
+		});
+
+		this.inputs.gapNumber = wrapper.querySelector('.gap-number');
+		this.inputs.gapUnit = wrapper.querySelector('.gap-unit');
+		this.inputs.widthNumber = wrapper.querySelector('.width-number');
+		this.inputs.widthUnit = wrapper.querySelector('.width-unit');
+		this.inputs.heightNumber = wrapper.querySelector('.height-number');
+		this.inputs.heightUnit = wrapper.querySelector('.height-unit');
+		this.inputs.cleanBottom = wrapper.querySelector('.clean-bottom');
+
+		return wrapper;
 
 	}
 
@@ -108,38 +182,21 @@ class AutomadBlockGallery {
 
 	save() {
 
-		var stripNbsp = Automad.util.stripNbsp;
+		var getNumberUnitAsString = Automad.util.getNumberUnitAsString;
 
 		return Object.assign(this.data, {
 			globs: this.imageSelection.save(),
-			width: parseInt(stripNbsp(this.inputs.width.innerHTML))
+			gap: getNumberUnitAsString(this.inputs.gapNumber, this.inputs.gapUnit),
+			width: getNumberUnitAsString(this.inputs.widthNumber, this.inputs.widthUnit),
+			height: getNumberUnitAsString(this.inputs.heightNumber, this.inputs.heightUnit),
+			cleanBottom: this.inputs.cleanBottom.checked
 		});
 
 	}
 
 	renderSettings() {
 
-		var create = Automad.util.create,
-			wrapper = create.element('div', []),
-			inner = create.element('div', ['cdx-settings-1-1']),
-			block = this,
-			button = create.element('div', ['cdx-settings-button']);
-
-		button.classList.toggle('cdx-settings-button--active', this.data['cleanBottom']);
-		button.innerHTML = '<svg width="18px" height="16px" viewBox="-50 68.5 18 16"><path d="M-32,79.5c0,0.553-0.448,1-1,1h-6c-0.552,0-1-0.447-1-1v-4c0-0.553,0.448-1,1-1h6c0.552,0,1,0.447,1,1V79.5z"/><path d="M-32,71.5c0,0.553-0.448,1-1,1h-6c-0.552,0-1-0.447-1-1v-2c0-0.553,0.448-1,1-1h6c0.552,0,1,0.447,1,1V71.5z"/><path d="M-32,83.521c0,0.541-0.438,0.979-0.979,0.979h-16.041c-0.541,0-0.979-0.438-0.979-0.979l0,0 c0-0.541,0.438-0.979,0.979-0.979h16.041C-32.438,82.541-32,82.979-32,83.521L-32,83.521z"/><path d="M-50,69.5c0-0.553,0.448-1,1-1h6c0.552,0,1,0.447,1,1v4c0,0.553-0.448,1-1,1h-6c-0.552,0-1-0.447-1-1V69.5z"/><path d="M-50,77.5c0-0.553,0.448-1,1-1h6c0.552,0,1,0.447,1,1v2c0,0.553-0.448,1-1,1h-6c-0.552,0-1-0.447-1-1V77.5z"/></svg>';
-		
-		button.addEventListener('click', function () {
-			block.data['cleanBottom'] = !block.data['cleanBottom'];
-			button.classList.toggle('cdx-settings-button--active');
-		});
-
-		this.api.tooltip.onHover(button, AutomadEditorTranslation.get('gallery_clean_bottom'), { placement: 'top' });
-
-		inner.appendChild(button);
-		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
-
-		return wrapper;
+		return this.layoutSettings;
 
 	}
 

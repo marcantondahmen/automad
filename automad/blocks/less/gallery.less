@@ -35,6 +35,39 @@
 
 .am-gallery {
 
+	&-flex {
+
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		margin-left: ~"calc(var(--am-gallery-gap) * -1)";
+		margin-bottom: ~"calc(var(--am-gallery-gap) * -1)";
+
+		&-item {
+
+			flex-grow: 1;
+			max-height: var(--am-gallery-flex-item-height);
+			padding-left: var(--am-gallery-gap);
+			padding-bottom: var(--am-gallery-gap);
+
+			& img {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+				min-height: 100% !important;
+				min-width: 100% !important;
+			}
+
+		}
+
+		&:after {
+			content: '';
+			flex-grow: 10;
+			min-width: 30%;
+		}
+
+	}
+
 	&-masonry {
 
 		display: grid;
