@@ -160,7 +160,7 @@ echo
 
 # Commit changes.
 echo "Committing changes ..."
-git add -A && git commit -m "build(release): prepared release $tag"
+git add -A && git commit -m "build(release): prepare release $tag"
 echo
 
 
@@ -172,7 +172,7 @@ echo
 
 # Merging.
 echo "Merging branch develop ..."
-git merge develop --no-ff -m "build(release): merged branch develop (release $tag)"
+git merge develop --no-ff -m "build(release): merge branch develop (release $tag)"
 echo
 
 
