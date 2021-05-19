@@ -18,9 +18,11 @@
 #	8.	Create tag for release
 #	9. 	Push changes to origin
 
+
 # Change to the base directory of the repository.
 dir=$(dirname "$0")
 cd "$dir/.."
+
 
 # Test branch.
 if [[ $(git branch | grep \* | cut -d ' ' -f2) != "develop" ]]
@@ -35,7 +37,7 @@ ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
-bash $dir/phpunit
+bash $dir/phpunit.sh
 echo
 
 
