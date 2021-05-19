@@ -274,7 +274,27 @@ editor_gallery_files: Шаблони або URL-адреси
 
 -
 
-editor_gallery_width: Ширина зображення в пікселях
+editor_gallery_layout: Макет
+
+-
+
+editor_gallery_layout_vertical: Вертикальний
+
+-
+
+editor_gallery_layout_horizontal: Горизонтальний
+
+-
+
+editor_gallery_width: Ширина стовпця
+
+-
+
+editor_gallery_height: Висота рядка
+
+-
+
+editor_gallery_gap: Розрив
 
 -
 

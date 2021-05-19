@@ -41,7 +41,7 @@ title: Blocks
 -
 
 +main: {
-  "time": 1619905149204,
+  "time": 1621370852415,
   "blocks": [
     {
       "type": "header",
@@ -132,7 +132,10 @@ title: Blocks
       "type": "gallery",
       "data": {
         "globs": "https://source.unsplash.com/6rXpQzfCYlw/900x1000, https://source.unsplash.com/VYCDTBAP8P4/1000x700, https://source.unsplash.com/kjERLXaHjXc/1000x700",
-        "width": 350,
+        "layout": "vertical",
+        "width": "350px",
+        "height": "10rem",
+        "gap": "25px",
         "cleanBottom": true
       }
     },

@@ -49,8 +49,35 @@ then
 fi
 
 
+# Choose type of release.
 echo "Current version is: $latestTag"
-read -p "Please enter a new version number: " tag
+echo 
+
+IFS='.' read -ra elem <<< "$latestTag"
+
+major=${elem[0]}
+minor=${elem[1]}
+patch=${elem[2]}
+
+newMajorTag=$((major + 1)).0.0
+newMinorTag=$major.$((minor + 1)).0
+newPatchTag=$major.$minor.$((patch + 1))
+
+echo "Choose type of release:"
+echo
+echo "  1) Patch $newPatchTag (default)"
+echo "  2) Minor $newMinorTag"
+echo "  3) Major $newMajorTag"
+echo
+read -n 1 -p "Please select a number or press Enter for a patch: " option
+echo
+
+case $option in 
+	1) tag=$newPatchTag;;
+	2) tag=$newMinorTag;;
+	3) tag=$newMajorTag;;
+	*) tag=$newPatchTag;;
+esac
 
 
 # Wait for confirmation.
@@ -58,16 +85,16 @@ while true
 do
 	read -p "Create release \"$tag\"? (y/n) " continue
 	case $continue in
-        [Yy]* ) 
+		[Yy]* ) 
 			break
 			;;
-        [Nn]* ) 
+		[Nn]* ) 
 			exit 0
 			;;
-        * ) 
+		* ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-    esac
+	esac
 done
 echo
 
@@ -112,23 +139,23 @@ while true
 do
 	read -p "Commit and merge? (y/n) " continue
 	case $continue in
-        [Yy]* ) 
+		[Yy]* ) 
 			break
 			;;
-        [Nn]* ) 
+		[Nn]* ) 
 			exit 0
 			;;
-        * ) 
+		* ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-    esac
+	esac
 done
 echo
 
 
 # Commit changes.
 echo "Committing changes ..."
-git add -A && git commit -m "Prepared release $tag"
+git add -A && git commit -m "build(release): prepared release $tag"
 echo
 
 
@@ -140,7 +167,7 @@ echo
 
 # Merging.
 echo "Merging branch develop ..."
-git merge develop --no-ff -m "Merged branch develop (release $tag)"
+git merge develop --no-ff -m "build(release): merged branch develop (release $tag)"
 echo
 
 
@@ -165,7 +192,7 @@ while true
 do
 	read -p "Push changes to origin? (y/n) " continue
 	case $continue in
-        [Yy]* ) 
+		[Yy]* ) 
 			echo "Pushing branches ..."
 			git push origin --all -u
 			echo "Pushing tags ..."
@@ -173,13 +200,13 @@ do
 			echo
 			break
 			;;
-        [Nn]* ) 
+		[Nn]* ) 
 			exit 0
 			;;
-        * ) 
+		* ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-    esac
+	esac
 done
 
 # Show branches.

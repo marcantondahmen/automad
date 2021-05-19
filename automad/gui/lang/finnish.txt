@@ -274,7 +274,27 @@ editor_gallery_files: Glob Mallit tai URL-osoitteet
 
 -
 
-editor_gallery_width: Kuvan leveys pikseleinä
+editor_gallery_layout: Layout
+
+-
+
+editor_gallery_layout_vertical: Pystysuora
+
+-
+
+editor_gallery_layout_horizontal: Horisontaalinen
+
+-
+
+editor_gallery_width: Sarakkeen leveys
+
+-
+
+editor_gallery_height: Rivin korkeus
+
+-
+
+editor_gallery_gap: Kuilu
 
 -
 

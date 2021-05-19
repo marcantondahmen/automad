@@ -6,4 +6,3 @@
 <@ else @>
 	@{ +main }
 <@ end @>
-<@ prev_next.php @>

@@ -274,7 +274,27 @@ editor_gallery_files: Modele globale sau adrese URL
 
 -
 
-editor_gallery_width: Lățimea imaginii în pixeli
+editor_gallery_layout: Layout
+
+-
+
+editor_gallery_layout_vertical: Vertical
+
+-
+
+editor_gallery_layout_horizontal: Orizontală
+
+-
+
+editor_gallery_width: Lățimea coloanei
+
+-
+
+editor_gallery_height: Înălțimea rândului
+
+-
+
+editor_gallery_gap: Decalaj
 
 -
 

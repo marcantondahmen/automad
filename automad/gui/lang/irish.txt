@@ -274,7 +274,27 @@ editor_gallery_files: Patrúin nó URLanna Glob
 
 -
 
-editor_gallery_width: Leithead Íomhá i bPicteilíní
+editor_gallery_layout: Leagan leagan amach
+
+-
+
+editor_gallery_layout_vertical: Infhiteagrach
+
+-
+
+editor_gallery_layout_horizontal: Cothrománach
+
+-
+
+editor_gallery_width: Leithead an cholúin
+
+-
+
+editor_gallery_height: Airde a chéile
+
+-
+
+editor_gallery_gap: Bearna
 
 -
 

@@ -274,7 +274,27 @@ editor_gallery_files: Modelli di glob o URL
 
 -
 
-editor_gallery_width: Larghezza immagine in pixel
+editor_gallery_layout: Disposizione
+
+-
+
+editor_gallery_layout_vertical: Verticale
+
+-
+
+editor_gallery_layout_horizontal: Orizzontale
+
+-
+
+editor_gallery_width: Larghezza della colonna
+
+-
+
+editor_gallery_height: Altezza della riga
+
+-
+
+editor_gallery_gap: Gap.
 
 -
 

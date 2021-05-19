@@ -274,7 +274,27 @@ editor_gallery_files: Глоб модели или URL адреси
 
 -
 
-editor_gallery_width: Ширина на изображението в пиксели
+editor_gallery_layout: Оформление
+
+-
+
+editor_gallery_layout_vertical: Вертикален
+
+-
+
+editor_gallery_layout_horizontal: Хоризонтално
+
+-
+
+editor_gallery_width: Ширина на колоната
+
+-
+
+editor_gallery_height: Височина на реда
+
+-
+
+editor_gallery_gap: Празнина
 
 -
 

@@ -101,7 +101,7 @@
 
 		init: function() {
 
-			var items = document.querySelectorAll('h2, h3, h4'),
+			var items = document.querySelectorAll('h2[id], h3[id], h4[id]'),
 				containers = document.querySelectorAll('am-toc');
 
 			for (var i = 0; i < containers.length; ++i) {

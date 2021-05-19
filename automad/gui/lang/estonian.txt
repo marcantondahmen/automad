@@ -274,7 +274,27 @@ editor_gallery_files: Glob mustrid või URL-id
 
 -
 
-editor_gallery_width: Pildi laius pikslites
+editor_gallery_layout: Paigutus
+
+-
+
+editor_gallery_layout_vertical: Vertikaalne
+
+-
+
+editor_gallery_layout_horizontal: Horisontaalne
+
+-
+
+editor_gallery_width: Veergu laius
+
+-
+
+editor_gallery_height: Rida kõrgus
+
+-
+
+editor_gallery_gap: Vahe
 
 -
 

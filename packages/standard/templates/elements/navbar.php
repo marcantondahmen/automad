@@ -27,7 +27,7 @@
 						<# @{ checkboxShowInNavbar } #>
 						<@ newPagelist { 
 							excludeHidden: false, 
-							match: '{ "checkboxShowInNavbar": "/.+/" }' 
+							match: '{ "checkboxShowInNavbar": "/[^0]+/" }' 
 						} @>
 						<@~ foreach in pagelist ~@>
 							<li<@ if @{ :current } @> class="uk-active"<@ end @>>

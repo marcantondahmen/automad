@@ -274,7 +274,27 @@ editor_gallery_files: Glob mønstre eller webadresser
 
 -
 
-editor_gallery_width: Billedbredde i pixel
+editor_gallery_layout: Layout
+
+-
+
+editor_gallery_layout_vertical: Lodret
+
+-
+
+editor_gallery_layout_horizontal: Vandret
+
+-
+
+editor_gallery_width: Kolonnebredde
+
+-
+
+editor_gallery_height: Rækkehøjde
+
+-
+
+editor_gallery_gap: Gap.
 
 -
 

@@ -274,7 +274,27 @@ editor_gallery_files: Wzory globu lub adresy URL
 
 -
 
-editor_gallery_width: Szerokość obrazu w pikselach
+editor_gallery_layout: Układ
+
+-
+
+editor_gallery_layout_vertical: Pionowy
+
+-
+
+editor_gallery_layout_horizontal: Poziomy
+
+-
+
+editor_gallery_width: Szerokość kolumny
+
+-
+
+editor_gallery_height: Wysokość wiersza
+
+-
+
+editor_gallery_gap: Luka
 
 -
 

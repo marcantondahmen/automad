@@ -274,7 +274,27 @@ editor_gallery_files: Glob modeliai arba URL
 
 -
 
-editor_gallery_width: Vaizdo plotis pikseliais
+editor_gallery_layout: Išdėstymas
+
+-
+
+editor_gallery_layout_vertical: Vertikalus.
+
+-
+
+editor_gallery_layout_horizontal: Horizontalus. \ T
+
+-
+
+editor_gallery_width: Stulpelio plotis
+
+-
+
+editor_gallery_height: Eilės aukštis
+
+-
+
+editor_gallery_gap: Atotrūkis
 
 -
 

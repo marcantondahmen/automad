@@ -274,7 +274,27 @@ editor_gallery_files: Glob Patronen of URL's
 
 -
 
-editor_gallery_width: Afbeeldingsbreedte in pixels
+editor_gallery_layout: Lay-out
+
+-
+
+editor_gallery_layout_vertical: Verticaal
+
+-
+
+editor_gallery_layout_horizontal: Horizontaal
+
+-
+
+editor_gallery_width: Kolombreedte
+
+-
+
+editor_gallery_height: Rijhoogte
+
+-
+
+editor_gallery_gap: Kloof
 
 -
 

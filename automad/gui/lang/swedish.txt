@@ -274,7 +274,27 @@ editor_gallery_files: Glob mönster eller webbadresser
 
 -
 
-editor_gallery_width: Bildbredd i pixlar
+editor_gallery_layout: Layout
+
+-
+
+editor_gallery_layout_vertical: Vertikal
+
+-
+
+editor_gallery_layout_horizontal: Horisontell
+
+-
+
+editor_gallery_width: Kolumnbredd
+
+-
+
+editor_gallery_height: Radhöjd
+
+-
+
+editor_gallery_gap: Glipa
 
 -
 

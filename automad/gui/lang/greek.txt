@@ -274,7 +274,27 @@ editor_gallery_files: Glob Patterns ή URLS
 
 -
 
-editor_gallery_width: Πλάτος εικόνας σε εικονοστοιχεία
+editor_gallery_layout: Σχέδιο
+
+-
+
+editor_gallery_layout_vertical: Κατακόρυφος
+
+-
+
+editor_gallery_layout_horizontal: Οριζόντιος
+
+-
+
+editor_gallery_width: Πλάτος στήλης
+
+-
+
+editor_gallery_height: Ύψος σειράς
+
+-
+
+editor_gallery_gap: Χάσμα
 
 -
 
