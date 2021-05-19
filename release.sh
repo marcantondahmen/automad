@@ -85,16 +85,16 @@ while true
 do
 	read -p "Create release \"$tag\"? (y/n) " continue
 	case $continue in
-        [Yy]* ) 
+		[Yy]* ) 
 			break
 			;;
-        [Nn]* ) 
+		[Nn]* ) 
 			exit 0
 			;;
-        * ) 
+		* ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-    esac
+	esac
 done
 echo
 
@@ -139,23 +139,23 @@ while true
 do
 	read -p "Commit and merge? (y/n) " continue
 	case $continue in
-        [Yy]* ) 
+		[Yy]* ) 
 			break
 			;;
-        [Nn]* ) 
+		[Nn]* ) 
 			exit 0
 			;;
-        * ) 
+		* ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-    esac
+	esac
 done
 echo
 
 
 # Commit changes.
 echo "Committing changes ..."
-git add -A && git commit -m "Prepared release $tag"
+git add -A && git commit -m "build(release): prepared release $tag"
 echo
 
 
@@ -167,7 +167,7 @@ echo
 
 # Merging.
 echo "Merging branch develop ..."
-git merge develop --no-ff -m "Merged branch develop (release $tag)"
+git merge develop --no-ff -m "build(release): merged branch develop (release $tag)"
 echo
 
 
@@ -192,7 +192,7 @@ while true
 do
 	read -p "Push changes to origin? (y/n) " continue
 	case $continue in
-        [Yy]* ) 
+		[Yy]* ) 
 			echo "Pushing branches ..."
 			git push origin --all -u
 			echo "Pushing tags ..."
@@ -200,13 +200,13 @@ do
 			echo
 			break
 			;;
-        [Nn]* ) 
+		[Nn]* ) 
 			exit 0
 			;;
-        * ) 
+		* ) 
 			echo "Please only enter \"y\" or \"n\"."
 			;;
-    esac
+	esac
 done
 
 # Show branches.
