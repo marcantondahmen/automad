@@ -15,6 +15,9 @@
 # If 1.0.0-beta was the lasted release and the next commit on a dev branch will be 123 commits ahead of that tag,
 # the generated version number will be 1.0.0-beta+123.
 
+# Change to the base directory of the repository.
+dir=$(dirname "$0")
+cd "$dir/.."
 
 file="automad/version.php"
 
