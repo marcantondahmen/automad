@@ -2,6 +2,10 @@
 
 # Run this script to checkout develop and start a fresh feature, bugfix or refactor branch.
 
+# Change to the base directory of the repository.
+dir=$(dirname "$0")
+cd "$dir/.."
+
 if [[ $(git status -s) ]]
 then
 	echo "Working directory is not clean!"
