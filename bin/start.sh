@@ -31,9 +31,27 @@ case $option in
 	*) branchType="feat";;
 esac
 
-read -p "Please enter a name: " branchName
+read -p "Please enter a scope: " branchScope
 
-branch=$branchType/$( echo $branchName | sed -e 's/\(.*\)/\L\1/' | sed 's/ /_/g' )
+read -p "Please enter a name:  " branchName
+
+branch="$branchType/$branchScope/$( echo $branchName | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g' )"
+
+while true
+do
+	read -n 1 -p "Create $branch? (y/n) " option 
+	case $option in
+		[Yy]* ) 
+			break
+			;;
+		[Nn]* ) 
+			exit 0
+			;;
+		* ) 
+			echo "Please only enter \"y\" or \"n\"."
+			;;
+	esac
+done
 
 git branch $branch
 git checkout $branch
