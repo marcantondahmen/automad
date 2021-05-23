@@ -1,4 +1,4 @@
-name: "tagged-release"
+name: "release"
 
 on:
   push:
@@ -7,11 +7,13 @@ on:
 
 jobs:
   tagged-release:
-    name: "Tagged Release"
+    name: "Filtered Release Notes"
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "marvinpinto/action-automatic-releases@v1.2.0"
+      - uses: "marcantondahmen/release-notes-action@0.1.0"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          draft: true
+          draft: false
+          filter: "^(feat|fix)"
+          strict: false
