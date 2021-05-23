@@ -10,7 +10,7 @@ branch=$(git branch | egrep -v "(master|develop)" | grep \* | sed "s|\* ||")
 
 if [[ ! $branch ]] 
 then
-	echo "You are not on a feature, bugfix or refactor branch!"
+	echo "You are not on a feature or bugfix branch!"
 	exit 0
 fi
 

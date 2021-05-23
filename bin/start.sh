@@ -19,7 +19,6 @@ echo "Choose type of branch:"
 echo
 echo "  1) Feature (default)"
 echo "  2) Bugfix"
-echo "  3) Refactor"
 echo
 read -n 1 -p "Please select a number or press Enter for a Feature: " option
 echo
@@ -27,7 +26,6 @@ echo
 case $option in 
 	1) branchType="feat";;
 	2) branchType="fix";;
-	3) branchType="refactor";;
 	*) branchType="feat";;
 esac
 
