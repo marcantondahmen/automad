@@ -42,5 +42,4 @@ ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
 msg="$( echo $branch | sed -E 's|([^/]+)/([^/]+)/(.*)|\1(\2): \3|' | sed 's|_| |g' )"
 
 git checkout develop
-git merge $branch --no-ff -m "$msg"
-git branch --delete $branch
+git merge $branch --no-ff -m "$msg" && git branch --delete $branch && git push -d origin $branch
