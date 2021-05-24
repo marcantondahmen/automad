@@ -1,4 +1,4 @@
-name: "release"
+name: "release-notes"
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - "*"
 
 jobs:
-  tagged-release:
-    name: "Filtered Release Notes"
+  release-notes:
+    name: "Regex Filtered Release Notes"
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "marcantondahmen/release-notes-action@0.1.1"
+      - uses: "marcantondahmen/release-notes-action@master"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
