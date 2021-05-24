@@ -16,4 +16,4 @@ jobs:
           prerelease: false
           draft: false
           filter: "^(feat|fix)"
-          strict: false
+          strict: true
