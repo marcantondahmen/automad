@@ -36,7 +36,15 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Debug;
+use Automad\Core\Request;
+use Automad\GUI\Components\Alert\ThemeReadme;
+use Automad\GUI\Components\Card\Theme;
+use Automad\GUI\Components\Form\FieldHidden;
+use Automad\GUI\Components\Form\Group;
+use Automad\GUI\Controllers\Headless;
+use Automad\GUI\Utils\Keys;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,7 +64,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-if ($data = Core\Request::post('data')) {
+if ($data = Request::post('data')) {
 
 	// Save changes.
 	$output = $this->getContent()->saveSharedData($data);
@@ -89,7 +97,7 @@ if ($data = Core\Request::post('data')) {
 			/>
 		</div>
 				
-		<?php echo Components\Alert\ThemeReadme::render($mainTheme); ?>
+		<?php echo ThemeReadme::render($mainTheme); ?>
 
 		<div 
 		class="uk-accordion" 
@@ -138,12 +146,12 @@ if ($data = Core\Request::post('data')) {
 					>
 						<?php 
 						
-						Core\Debug::log($themes, 'themes');
+						Debug::log($themes, 'themes');
 						$i = 0;
 						
 						foreach ($themes as $Theme) { 
 							$id = 'am-theme-' . ++$i;
-							echo '<li>' . Components\Card\Theme::render($Theme, $mainTheme, $id) . '</li>';
+							echo '<li>' . Theme::render($Theme, $mainTheme, $id) . '</li>';
 						} 
 						
 						?> 	
@@ -176,7 +184,7 @@ if ($data = Core\Request::post('data')) {
 		
 				// Also submit the saved theme form the non-headless mode.
 				// The value gets stored in a hidden input field.
-				echo Components\Form\FieldHidden::render(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
+				echo FieldHidden::render(AM_KEY_THEME, $this->getAutomad()->Shared->get(AM_KEY_THEME));
 			
 			}
 			
@@ -196,7 +204,7 @@ if ($data = Core\Request::post('data')) {
 				<div class="uk-accordion-content">
 					<?php 
 
-					echo Components\Form\Group::render(
+					echo Group::render(
 						$this->getAutomad(), 
 						$textKeys, 
 						$data,
@@ -217,7 +225,7 @@ if ($data = Core\Request::post('data')) {
 				<div class="uk-accordion-content">
 					<?php 
 
-					echo Components\Form\Group::render(
+					echo Group::render(
 						$this->getAutomad(), 
 						$colorKeys, 
 						$data,
@@ -238,7 +246,7 @@ if ($data = Core\Request::post('data')) {
 				<div class="uk-accordion-content">
 					<?php 
 
-					echo Components\Form\Group::render(
+					echo Group::render(
 						$this->getAutomad(), 
 						$settingKeys, 
 						$data,
@@ -259,7 +267,7 @@ if ($data = Core\Request::post('data')) {
 				<?php 
 
 				// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-				echo Components\Form\Group::render(
+				echo Group::render(
 					$this->getAutomad(), 
 					$unusedDataKeys, 
 					$data, 

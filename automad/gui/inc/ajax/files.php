@@ -36,7 +36,15 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Parse;
+use Automad\Core\Request;
+use Automad\GUI\Components\Grid\Files;
+use Automad\GUI\Components\Modal\CopyResized;
+use Automad\GUI\Components\Modal\EditFileInfo;
+use Automad\GUI\Components\Modal\Upload;
+use Automad\GUI\Components\Modal\Import;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,7 +63,7 @@ $output = array();
 
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, its URL has to be submitted along with the form data.
-$url = Core\Request::post('url');
+$url = Request::post('url');
 
 if (!array_key_exists($url, $this->getAutomad()->getCollection())) {
 	$url = '';
@@ -67,12 +75,12 @@ if (!array_key_exists($url, $this->getAutomad()->getCollection())) {
 $path = $this->getContent()->getPathByPostUrl();
 
 // Delete files in $_POST['delete'].
-if ($delete = Core\Request::post('delete')) {	
+if ($delete = Request::post('delete')) {	
 	$output = $this->getContent()->deleteFiles($delete, $path);
 }
 
 // Get files for each allowed file type.
-$files = FileSystem::globGrep($path . '*.*', '/\.(' . implode('|', Core\Parse::allowedFileTypes()) . ')$/i');
+$files = FileSystem::globGrep($path . '*.*', '/\.(' . implode('|', Parse::allowedFileTypes()) . ')$/i');
 
 ob_start();
 
@@ -121,9 +129,9 @@ if ($files) { ?>
 	</ul>
 	
 	<?php 
-		echo Components\Grid\Files::render($files); 
-		echo Components\Modal\CopyResized::render($url);
-		echo Components\Modal\EditFileInfo::render($modalTitle, $url);
+		echo Files::render($files); 
+		echo CopyResized::render($url);
+		echo EditFileInfo::render($modalTitle, $url);
 	?>
 	
 <?php } else { ?>
@@ -148,8 +156,8 @@ if ($files) { ?>
 	
 <?php } 
 
-echo Components\Modal\Upload::render($url);
-echo Components\Modal\Import::render($url);
+echo Upload::render($url);
+echo Import::render($url);
 
 $output['html'] = ob_get_contents();
 ob_end_clean();

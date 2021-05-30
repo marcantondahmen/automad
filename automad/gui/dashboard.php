@@ -36,7 +36,16 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Automad;
+use Automad\Core\Cache;
+use Automad\Core\Debug;
+use Automad\Core\Request;
+use Automad\Core\Shared;
+use Automad\GUI\Controllers\Themelist;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Prefix;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -46,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	The Dashboard class loads the required dashboard elements for the requested context. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2014-2018 Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2014-2021 Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
@@ -125,15 +134,15 @@ class Dashboard {
 			
 			// Check if context/ajax matches an existing .php file.
 			// If there is no (or no matching context), load the dashboard page.
-			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Core\Request::query('context') . '.php', FileSystem::glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
-				$inc = 'context/' . Core\Request::query('context');
-			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Core\Request::query('ajax') . '.php', FileSystem::glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
-				$inc = 'ajax/' . Core\Request::query('ajax');
+			if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/' . Request::query('context') . '.php', FileSystem::glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/context/*.php'))) {		
+				$inc = 'context/' . Request::query('context');
+			} else if (in_array(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/' . Request::query('ajax') . '.php', FileSystem::glob(AM_BASE_DIR . AM_DIR_GUI_INC . '/ajax/*.php'))) {		
+				$inc = 'ajax/' . Request::query('ajax');
 			} else {
 				$inc = 'start';
 			}
 	
-		} else if (Core\Request::query('ajax')) {
+		} else if (Request::query('ajax')) {
 			
 			// Send a redirect URL as answer to an Ajax request when nobody is logged in.
 			die(json_encode(array('redirect' => AM_BASE_INDEX . AM_PAGE_DASHBOARD)));
@@ -184,14 +193,14 @@ class Dashboard {
 
 		if (!$this->Automad) {
 
-			$Cache = new Core\Cache();
+			$Cache = new Cache();
 
 			if ($Cache->automadObjectCacheIsApproved()) {
 				$this->Automad = $Cache->readAutomadObjectFromCache();
 			} else {
-				$this->Automad = new Core\Automad();
+				$this->Automad = new Automad();
 				$Cache->writeAutomadObjectToCache($this->Automad);
-				Core\Debug::log('Created a new Automad instance for the dashboard');
+				Debug::log('Created a new Automad instance for the dashboard');
 			}
 
 		}
@@ -210,7 +219,7 @@ class Dashboard {
 	private function getShared() {
 
 		if (!$this->Shared) {
-			$this->Shared = new Core\Shared();
+			$this->Shared = new Shared();
 		}
 
 		return $this->Shared;
@@ -262,7 +271,7 @@ class Dashboard {
 	private function jsonOutput($output = array()) {
 		
 		header('Content-Type: application/json');
-		$output['debug'] = Core\Debug::getLog();
+		$output['debug'] = Debug::getLog();
 
 		echo json_encode($output);
 

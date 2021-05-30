@@ -36,6 +36,8 @@
 
 
 namespace Automad\GUI;
+use Automad\GUI\Controllers\Accounts;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

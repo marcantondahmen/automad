@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI\Components\System;
-use Automad\GUI\Components as Components;
-use Automad\GUI\Text as Text;
+use Automad\Core\Str;
+use Automad\GUI\Components\Form\Select;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -70,7 +71,7 @@ class Language {
 			if (strpos($file, 'english.txt') !== false) {
 				$value = '';
 			} else {
-				$value = \Automad\Core\Str::stripStart($file, AM_BASE_DIR);
+				$value = Str::stripStart($file, AM_BASE_DIR);
 			}
 
 			$key = ucfirst(str_replace('.txt', '', basename($file)));
@@ -78,7 +79,7 @@ class Language {
 
 		}
 
-		$button = Components\Form\Select::render(
+		$button = Select::render(
 			'language', 
 			$languages, 
 			AM_FILE_GUI_TRANSLATION,

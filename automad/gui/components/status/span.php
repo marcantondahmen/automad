@@ -54,7 +54,7 @@ class Span {
 	
 	/**
 	 *  Create a span for an AJAX status request.
-	 *      
+	 *
 	 *	@param string $status
 	 *	@return string The HTML for the status span
 	 */

@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\Header;
-use Automad\GUI as GUI;
+use Automad\GUI\Utils\FileSystem;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -64,9 +64,9 @@ class BlockSnippetArrays {
 		return 	'<script>var AutomadBlockTemplates = ' . 
 				json_encode(
 					array(
-						'filelist' => GUI\FileSystem::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
-						'pagelist' => GUI\FileSystem::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
-						'snippets' => GUI\FileSystem::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/')
+						'filelist' => FileSystem::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
+						'pagelist' => FileSystem::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
+						'snippets' => FileSystem::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/')
 					), 
 					JSON_UNESCAPED_SLASHES
 				) .

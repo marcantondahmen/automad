@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\Header;
-use Automad\GUI as GUI;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,7 +61,7 @@ class EditorTextModules {
 	
 	public static function render() {
 		
-		$json = json_encode(GUI\Text::getEditorModules());
+		$json = json_encode(Text::getEditorModules());
 
 		return 	"<script>var AutomadEditorTextModules = $json</script>";
 

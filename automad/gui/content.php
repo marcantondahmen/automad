@@ -36,8 +36,16 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\Core\Request as Request;
+use Automad\Core\Automad;
+use Automad\Core\Cache;
+use Automad\Core\Debug;
+use Automad\Core\Image;
+use Automad\Core\Parse;
+use Automad\Core\Request;
+use Automad\Core\Selection;
+use Automad\Core\Str;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -95,8 +103,8 @@ class Content {
 				// Check if the current page's directory is writable.
 				if (is_writable(dirname($this->getPageFilePath($Page)))) {
 	
-					Core\Debug::log($Page->url, 'page');
-					Core\Debug::log($subpage, 'new subpage');
+					Debug::log($Page->url, 'page');
+					Debug::log($subpage, 'new subpage');
 	
 					// The new page's properties.
 					$title = $subpage['title'];
@@ -105,7 +113,7 @@ class Content {
 					$template = basename($themeTemplate);
 					
 					// Save new subpage below the current page's path.		
-					$subdir = Core\Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
+					$subdir = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
 					
 					// If $subdir is an empty string after sanitizing, set it to 'untitled'.
 					if (!$subdir) {
@@ -170,7 +178,7 @@ class Content {
 	
 	private function clearCache() {
 		
-		Core\Cache::clear();
+		Cache::clear();
 		
 	}
 	
@@ -216,14 +224,14 @@ class Content {
 		
 			$file = $directory . $options['filename'];
 		
-			Core\Debug::log($file, 'file');
-			Core\Debug::log($options, 'options');
+			Debug::log($file, 'file');
+			Debug::log($options, 'options');
 				
 			if (file_exists($file)) {
 				
 				if (is_writable($directory)) {
 					
-					$img = new Core\Image(
+					$img = new Image(
 						$file, 
 						$width, 
 						$height,
@@ -320,7 +328,7 @@ class Content {
 
 				FileSystem::movePageDir($Page->path, '..' . AM_DIR_TRASH . dirname($Page->path), $this->extractPrefixFromPath($Page->path), $title);
 				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
-				Core\Debug::log($Page->url, 'deleted');
+				Debug::log($Page->url, 'deleted');
 
 				$this->clearCache();
 
@@ -411,7 +419,7 @@ class Content {
 	
 			$path = $this->getPathByPostUrl();
 			$oldFile = $path . basename($oldName);
-			$newFile = $path . Core\Str::sanitize(basename($newName));
+			$newFile = $path . Str::sanitize(basename($newName));
 			
 			if (FileSystem::isAllowedFileType($newFile)) {
 				
@@ -512,7 +520,7 @@ class Content {
 		
 		$pages = array();
 	
-		if ($query = Core\Request::query('query')) {
+		if ($query = Request::query('query')) {
 		
 			$collection = $this->Automad->getCollection();
 		
@@ -524,7 +532,7 @@ class Content {
 							
 			} else {
 			
-				$Selection = new Core\Selection($collection);
+				$Selection = new Selection($collection);
 				$Selection->filterByKeywords($query);
 				$Selection->sortPages(AM_KEY_MTIME . ' desc');
 				$pages = $Selection->getSelection(false);
@@ -563,7 +571,7 @@ class Content {
 			}
 		}
 		
-		Core\Debug::log($template, 'Template');
+		Debug::log($template, 'Template');
 		return $template;
 
 	}
@@ -591,7 +599,7 @@ class Content {
 				}
 
 				$importUrl = $protocol . getenv('HTTP_HOST') . AM_BASE_URL . $importUrl;
-				Core\Debug::log($importUrl, 'Local URL');
+				Debug::log($importUrl, 'Local URL');
 
 			}
 
@@ -609,7 +617,7 @@ class Content {
 			
 			} else {
 
-				$fileName = Core\Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
+				$fileName = Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
 
 				if ($url = Request::post('url')) {
 					$Page = $this->Automad->getPage($url);
@@ -677,10 +685,10 @@ class Content {
 				if ($postData && is_array($postData)) {
 					
 					// Merge and save data.
-					$data = array_merge(Core\Parse::textFile($this->getPageFilePath($Page)), $postData);
+					$data = array_merge(Parse::textFile($this->getPageFilePath($Page)), $postData);
 					FileSystem::writeData($data, $this->getPageFilePath($Page));
-					Core\Debug::log($data, 'saved data');
-					Core\Debug::log($this->getPageFilePath($Page), 'data file');
+					Debug::log($data, 'saved data');
+					Debug::log($this->getPageFilePath($Page), 'data file');
 					
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
 					if (!empty($postData[AM_KEY_TITLE]) && $Page->url != '/') {
@@ -693,7 +701,7 @@ class Content {
 							$postData[AM_KEY_TITLE]
 						);
 						
-						Core\Debug::log($newPagePath, 'renamed page');
+						Debug::log($newPagePath, 'renamed page');
 						
 					}
 					
@@ -707,7 +715,7 @@ class Content {
 						// the requested page and the title of the page and therefore the URL has changed.
 						
 						// Rebuild Automad object, since the file structure has changed.
-						$Automad = new Core\Automad();
+						$Automad = new Automad();
 						
 						// Find new URL and return redirect URL.
 						foreach ($Automad->getCollection() as $key => $Page) {
@@ -797,8 +805,8 @@ class Content {
 						// Move page
 						$newPagePath = FileSystem::movePageDir($Page->path, $dest->path, $this->extractPrefixFromPath($Page->path), $title);	
 						$output['redirect'] = $this->contextUrlByPath($newPagePath);
-						Core\Debug::log($Page->path, 'page');
-						Core\Debug::log($dest->path, 'destination');
+						Debug::log($Page->path, 'page');
+						Debug::log($dest->path, 'destination');
 						
 						$this->clearCache();
 		
@@ -837,7 +845,7 @@ class Content {
 	private function contextUrlByPath($path) {
 		
 		// Rebuild Automad object, since the file structure has changed.
-		$Automad = new Core\Automad();
+		$Automad = new Automad();
 		
 		// Find new URL and return redirect query string.
 		foreach ($Automad->getCollection() as $key => $Page) {
@@ -912,7 +920,7 @@ class Content {
 					unlink($this->getPageFilePath($Page));
 
 					// Build the path of the data file by appending the basename of 'theme_template' to $Page->path.
-					$newTemplate = Core\Str::stripEnd(basename($themeTemplate), '.php');
+					$newTemplate = Str::stripEnd(basename($themeTemplate), '.php');
 					$newPageFile = FileSystem::fullPagePath($Page->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
 					
 					// Save new file within current directory, even when the prefix/title changed. 
@@ -1021,7 +1029,7 @@ class Content {
 	public function upload() {
 		
 		$output = array();
-		Core\Debug::log($_POST + $_FILES, 'files');
+		Debug::log($_POST + $_FILES, 'files');
 
 		// Set path.
 		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
@@ -1040,7 +1048,7 @@ class Content {
 	
 					// Check if file has a valid filename (allowed file type).
 					if (FileSystem::isAllowedFileType($_FILES['files']['name'][$i])) {
-						$newFile = $path . Core\Str::sanitize($_FILES['files']['name'][$i]);
+						$newFile = $path . Str::sanitize($_FILES['files']['name'][$i]);
 						move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFile);
 					} else {
 						$errors[] = Text::get('error_file_format') . ' "' . FileSystem::getExtension($_FILES['files']['name'][$i]) . '"';

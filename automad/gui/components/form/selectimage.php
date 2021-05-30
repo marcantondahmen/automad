@@ -36,7 +36,8 @@
 
 
 namespace Automad\GUI\Components\Form;
-use Automad\Core as Core;
+use Automad\Core\Image;
+use Automad\Core\Str;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -81,10 +82,10 @@ HTML;
 				if ($basename) {
 					$value = basename($file);
 				} else {
-					$value = Core\Str::stripStart($file, AM_BASE_DIR);
+					$value = Str::stripStart($file, AM_BASE_DIR);
 				}
 
-				$image = new Core\Image($file, 200, 200, true);
+				$image = new Image($file, 200, 200, true);
 				$imageUrl = AM_BASE_URL . $image->file;
 
 				$html .= <<< HTML

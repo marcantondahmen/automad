@@ -35,8 +35,9 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core as Core;
+namespace Automad\GUI\Controllers;
+use Automad\Core\Str;
+use Automad\GUI\Utils\FileSystem;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -70,7 +71,7 @@ class Theme {
 	public function __construct($themeJSON, $composerInstalled) {
 		
 		$json = false;
-		$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
+		$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 		$defaults = array(
 						'name' => $path, 
 						'description' => false, 

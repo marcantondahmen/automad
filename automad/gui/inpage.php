@@ -36,7 +36,15 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Regex;
+use Automad\Core\Str;
+use Automad\GUI\Components\Header\BlockSnippetArrays;
+use Automad\GUI\Components\Header\EditorTextModules;
+use Automad\GUI\Components\Modal\Link;
+use Automad\GUI\Components\Modal\SelectImage;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\Prefix;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,7 +62,7 @@ class InPage {
 	
 	
 	/**
-	 *  The constructor.
+	 *	The constructor.
 	 */
 	
 	public function __construct() {
@@ -70,8 +78,8 @@ class InPage {
 	
 	
 	/**
-	 *  Process the page markup and inject all needed GUI markup if an user is logged in.
-	 *      
+	 *	Process the page markup and inject all needed GUI markup if an user is logged in.
+	 *
 	 *	@param string $str
 	 *	@return string The processed $str
 	 */
@@ -91,7 +99,7 @@ class InPage {
 	
 	/**
 	 *	Inject GUI markup like bottom menu and modal dialogs.
-	 *      
+	 *
 	 *	@param string $str
 	 *	@return string The processed $str
 	 */
@@ -100,16 +108,16 @@ class InPage {
 		
 		$urlBase = AM_BASE_URL;
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlData = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_data'));
-		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Core\Str::sanitize(Text::get('btn_files'));
+		$urlData = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_data'));
+		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_files'));
 		$urlSys = $urlGui . '?context=system_settings';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		$request = AM_REQUEST;
 		$logoSvg = file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg');
 		$Text = Text::getObject();
 		
-		$modalSelectImage = Components\Modal\SelectImage::render();
-		$modalLink = Components\Modal\Link::render();
+		$modalSelectImage = SelectImage::render();
+		$modalLink = Link::render();
 
 		$queryString = '';
 		
@@ -162,7 +170,7 @@ HTML;
 	
 	private function injectAssets($str) {
 		
-		$versionSanitized = Core\Str::sanitize(AM_VERSION);
+		$versionSanitized = Str::sanitize(AM_VERSION);
 		$assets = 	"\n" .
 					'<!-- Automad GUI -->' . "\n" .
 					'<link href="' . AM_BASE_URL . '/automad/gui/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
@@ -171,8 +179,8 @@ HTML;
 					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/gui/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
 					// Cleanup window object by removing jQuery and UIkit.
 					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
-					Components\Header\BlockSnippetArrays::render() . "\n" .
-					Components\Header\EditorTextModules::render() . "\n" .
+					BlockSnippetArrays::render() . "\n" .
+					EditorTextModules::render() . "\n" .
 					'<!-- Automad GUI end -->' . "\n";
 			
 		// Check if there is already any other script tag and try to prepend all assets as first items.
@@ -187,7 +195,7 @@ HTML;
 	
 	/**
 	 *  Inject a temporary markup for an edit button.
-	 *      
+	 *
 	 *	@param string $value
 	 *	@param string $key
 	 *	@param object $Context
@@ -212,9 +220,9 @@ HTML;
 	
 	
 	/**
-	 * 	Process the temporary buttons to edit variable in the page. 
-	 *  All invalid buttons (within tags and in links) will be removed.
-	 *      
+	 *	Process the temporary buttons to edit variable in the page. 
+	 *	All invalid buttons (within tags and in links) will be removed.
+	 *
 	 *	@param string $str
 	 *	@return string The processed markup
 	 */
@@ -225,13 +233,13 @@ HTML;
 		// Within HTML tags.	
 		// Like <div data-attr="...">
 		$str = preg_replace_callback('/\<[^>]+\>/is', function($matches) {
-			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
+			return preg_replace('/' . Regex::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 		
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
 		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function($matches) {
-			return preg_replace('/' . Core\Regex::inPageEditButton() . '/is', '', $matches[0]);
+			return preg_replace('/' . Regex::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 		
 		$open = preg_quote(AM_DEL_INPAGE_BUTTON_OPEN);

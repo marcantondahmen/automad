@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+use Automad\Core;
+use Automad\System;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -36,7 +36,8 @@
 
 
 namespace Automad\GUI\Components\Alert;
-use Automad\GUI\Text as Text;
+use Automad\GUI\Components\Modal\Readme;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,7 +70,7 @@ class ThemeReadme {
 			
 			if ($Theme && $Theme->readme) {
 
-				$html = \Automad\GUI\Components\Modal\Readme::render($id, $Theme->readme);
+				$html = Readme::render($id, $Theme->readme);
 				$html .= <<< HTML
 						<a href="#$id" class="am-alert-readme uk-alert" data-uk-modal>
 							$Text->theme_readme_alert

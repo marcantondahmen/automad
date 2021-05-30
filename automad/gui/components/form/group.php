@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\Form;
-use Automad\GUI\Text as Text;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -135,7 +135,7 @@ class Group {
 						</div>
 					</div>
 HTML;
-								
+
 		} 
 		
 		return $html;

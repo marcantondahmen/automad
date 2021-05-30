@@ -35,8 +35,9 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core\Request as Request;
+namespace Automad\GUI\Controllers;
+use Automad\Core\Request;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -72,17 +73,17 @@ class Accounts {
 			if ($password1 == $password2) {
 		
 				// Get all accounts from file.
-				$accounts = Accounts::get();
+				$accounts = self::get();
 		
 				// Check, if user exists already.
 				if (!isset($accounts[$username])) {
 		
 					// Add user to accounts array.
-					$accounts[$username] = Accounts::passwordHash($password1);
+					$accounts[$username] = self::passwordHash($password1);
 					ksort($accounts);
 				
 					// Write array with all accounts back to file.
-					if (Accounts::write($accounts)) {
+					if (self::write($accounts)) {
 				
 						$output['success'] = Text::get('success_added') . ' "' . $username . '"';
 				
@@ -134,7 +135,7 @@ class Accounts {
 			// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
 			if (is_writable(AM_FILE_ACCOUNTS)) {
 				
-				$accounts = Accounts::get();
+				$accounts = self::get();
 				$deleted = array();
 	
 				foreach ($users as $userToDelete) {
@@ -149,7 +150,7 @@ class Accounts {
 				}
 
 				// Write array with all accounts back to file.
-				if (Accounts::write($accounts)) {
+				if (self::write($accounts)) {
 					$output['success'] = Text::get('success_remove') . ' "' . implode('", "', $deleted) . '"';
 				}
 		
@@ -183,7 +184,7 @@ class Accounts {
 			if ($username && $password1 && ($password1 === $password2)) {
 		
 				$accounts = array();
-				$accounts[$username] = Accounts::passwordHash($password1);
+				$accounts[$username] = self::passwordHash($password1);
 		
 				// Download accounts.php
 				header('Expires: -1');
@@ -193,7 +194,7 @@ class Accounts {
 				header('Content-Transfer-Encoding: binary');
 				header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
 				ob_end_flush();
-				echo Accounts::generatePHP($accounts);
+				echo self::generatePHP($accounts);
 				die;
 		
 			} else {
@@ -278,7 +279,7 @@ class Accounts {
 
 	public static function write($accounts) {
 		
-		$success = FileSystem::write(AM_FILE_ACCOUNTS, Accounts::generatePHP($accounts));
+		$success = FileSystem::write(AM_FILE_ACCOUNTS, self::generatePHP($accounts));
 		
 		if ($success && function_exists('opcache_invalidate')) {
 			opcache_invalidate(AM_FILE_ACCOUNTS, true);

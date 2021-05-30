@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\Grid;
-use Automad\GUI\Components\Card as Card;
+use Automad\GUI\Components\Card\Page;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,7 +65,7 @@ class Pages {
 		$cards = '';
 		
 		foreach ($pages as $Page) {
-			$cards .= '<li>' . Card\Page::render($Page) . '</li>';		
+			$cards .= '<li>' . Page::render($Page) . '</li>';		
 		}
 			
 		return <<< HTML

@@ -35,8 +35,11 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core as Core;
+namespace Automad\GUI\Controllers;
+use Automad\Core\Debug;
+use Automad\Core\Str;
+use Automad\GUI\Controllers\Theme;
+use Automad\GUI\Utils\FileSystem;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -75,7 +78,7 @@ class Themelist {
 		
 		$this->composerInstalled = $this->getComposerInstalled();
 		$this->themes = $this->collectThemes();
-		Core\Debug::log($this->themes, 'New instance created');
+		Debug::log($this->themes, 'New instance created');
 		
 	}
 
@@ -110,7 +113,7 @@ class Themelist {
 				if (is_readable($themeJSON) && is_array($templates) && $templates) {
 					
 					// If a theme.json file and at least one .php file exist, use that directoy as a theme.
-					$path = Core\Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
+					$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 					$themes[$path] = new Theme($themeJSON, $this->composerInstalled);
 					
 				} else {

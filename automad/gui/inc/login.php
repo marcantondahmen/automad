@@ -36,6 +36,8 @@
 
 
 namespace Automad\GUI;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -92,4 +94,4 @@ $this->element('header');
 $this->element('footer');
 
 
-?>		
+?>

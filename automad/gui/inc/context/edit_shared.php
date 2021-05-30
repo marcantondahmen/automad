@@ -36,6 +36,11 @@
 
 
 namespace Automad\GUI;
+use Automad\GUI\Components\Loading;
+use Automad\GUI\Components\Modal\Link;
+use Automad\GUI\Components\Modal\SelectImage;
+use Automad\GUI\Components\Nav\Switcher;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -58,7 +63,7 @@ $this->element('header');
 		</ul>
 	
 		<?php 
-			echo Components\Nav\Switcher::render('#am-shared-content', array(
+			echo Switcher::render('#am-shared-content', array(
 				array(
 					'icon' => '<i class="uk-icon-file-text"></i>',
 					'text' => Text::get('btn_data')
@@ -78,7 +83,7 @@ $this->element('header');
 				data-am-init 
 				data-am-handler="shared_data"
 				>
-					<?php echo Components\Loading::render(); ?>
+					<?php echo Loading::render(); ?>
 				</form>
 			</li>
 			<!-- Files -->
@@ -89,16 +94,16 @@ $this->element('header');
 				data-am-handler="files" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<?php echo Components\Loading::render(); ?>
+					<?php echo Loading::render(); ?>
 				</form>
 			</li>
 		</ul>
 		
 		<!-- Select Image Modal -->
-		<?php echo Components\Modal\SelectImage::render(); ?>
+		<?php echo SelectImage::render(); ?>
 
 		<!-- Add Link Modal -->
-		<?php echo Components\Modal\Link::render(); ?>
+		<?php echo Link::render(); ?>
 
 <?php
 

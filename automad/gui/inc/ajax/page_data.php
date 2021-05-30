@@ -36,7 +36,17 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Parse;
+use Automad\Core\Request;
+use Automad\GUI\Components\Alert\ThemeReadme;
+use Automad\GUI\Components\Form\CheckboxPrivate;
+use Automad\GUI\Components\Form\CheckboxHidden;
+use Automad\GUI\Components\Form\Field;
+use Automad\GUI\Components\Form\Group;
+use Automad\GUI\Components\Form\SelectTemplate;
+use Automad\GUI\Controllers\Headless;
+use Automad\GUI\Utils\Keys;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -59,13 +69,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 // Array for returned JSON data.
 $output = array();
-$url = Core\Request::post('url');
+$url = Request::post('url');
 
 // Verify page's URL - The page must exist in the site's collection.
 if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 
 	// If the posted form contains any "data", save the form's data to the page file.
-	if ($data = Core\Request::post('data')) {
+	if ($data = Request::post('data')) {
 	
 		// Save page and replace $output with the returned $output array (error or redirect).
 		$output = $this->getContent()->savePage($url, $data);
@@ -76,7 +86,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 		// get the page's data from its .txt file and return a form's inner HTML containing these information.
 		
 		// Get page's data.
-		$data = Core\Parse::textFile($this->getContent()->getPageFilePath($Page));
+		$data = Parse::textFile($this->getContent()->getPageFilePath($Page));
 
 		// Set up all standard variables.
 	
@@ -140,14 +150,14 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 			</div>
 			<?php 
 			
-			echo Components\Form\CheckboxPrivate::render(
+			echo CheckboxPrivate::render(
 				'data[' . AM_KEY_PRIVATE . ']', 
 				$private); 
 			
 			?>
 			<?php 
 
-			echo Components\Alert\ThemeReadme::render(
+			echo ThemeReadme::render(
 				$this->getThemelist()->getThemeByKey($Page->get(AM_KEY_THEME))
 			); 
 
@@ -173,7 +183,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 								</div>	
 								<?php 
 
-								echo Components\Form\SelectTemplate::render(
+								echo SelectTemplate::render(
 									$this->getAutomad(),
 									$this->getThemelist(),
 									'theme_template', 
@@ -241,7 +251,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 						</div>
 					<?php } ?>
 					<!-- Visibility -->
-					<?php echo Components\Form\CheckboxHidden::render(
+					<?php echo CheckboxHidden::render(
 						'data[' . AM_KEY_HIDDEN . ']',
 						$hidden
 					); ?>
@@ -262,7 +272,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<!-- Redirect -->
 					<?php 
 
-					echo Components\Form\Field::render(
+					echo Field::render(
 						$this->getAutomad(), 
 						AM_KEY_URL, 
 						$data[AM_KEY_URL],
@@ -276,7 +286,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<!-- Date -->
 					<?php 
 
-					echo Components\Form\Field::render(
+					echo Field::render(
 						$this->getAutomad(), 
 						AM_KEY_DATE, 
 						$Page->get(AM_KEY_DATE),
@@ -290,7 +300,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<div class="uk-form-row">	
 						<?php 	
 						
-						$tags = Core\Parse::csv(htmlspecialchars($data[AM_KEY_TAGS]));
+						$tags = Parse::csv(htmlspecialchars($data[AM_KEY_TAGS]));
 						sort($tags);
 						
 						$Pagelist = $this->getAutomad()->getPagelist();
@@ -354,7 +364,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<div class="uk-accordion-content">
 						<?php 
 
-						echo Components\Form\Group::render(
+						echo Group::render(
 							$this->getAutomad(),
 							$textKeys, 
 							$data, 
@@ -375,7 +385,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<div class="uk-accordion-content">
 						<?php 
 
-						echo Components\Form\Group::render(
+						echo Group::render(
 							$this->getAutomad(),
 							$colorKeys, 
 							$data, 
@@ -396,7 +406,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<div class="uk-accordion-content">
 						<?php
 
-						echo Components\Form\Group::render(
+						echo Group::render(
 							$this->getAutomad(),
 							$settingKeys, 
 							$data, 
@@ -417,7 +427,7 @@ if ($url && ($Page = $this->getAutomad()->getPage($url))) {
 					<?php 
 
 					// Pass the prefix for all IDs related to adding variables according to the IDs defined in 'add_variable.js'.
-					echo Components\Form\Group::render(
+					echo Group::render(
 						$this->getAutomad(), 
 						$unusedDataKeys, 
 						$data, 

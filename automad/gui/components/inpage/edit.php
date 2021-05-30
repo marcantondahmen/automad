@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\InPage;
-use Automad\GUI\Components\Form\Field as Field;
+use Automad\GUI\Components\Form\Field;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

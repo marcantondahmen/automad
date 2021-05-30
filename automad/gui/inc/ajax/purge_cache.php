@@ -36,7 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Debug;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,7 +54,7 @@ $tempDir = FileSystem::purgeCache();
 
 if ($tempDir) {
 	$output['success'] = Text::get('success_cache_purged');
-	Core\Debug::log($tempDir, 'temp directory');
+	Debug::log($tempDir, 'temp directory');
 } else {
 	$output['error'] = Text::get('error_cache_purged');
 }

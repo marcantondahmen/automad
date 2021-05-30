@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+use Automad\Core\Request;
+use Automad\GUI\Utils\Text;
+use Automad\System\Composer;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -50,9 +51,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-if ($package = Core\Request::post('package')) {
+if ($package = Request::post('package')) {
 
-	$Composer = new System\Composer();
+	$Composer = new Composer();
 	$output['error'] = $Composer->run('require ' . $package);
 	$output['trigger'] = 'composerDone';
 	

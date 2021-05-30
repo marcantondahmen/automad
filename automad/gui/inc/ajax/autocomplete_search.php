@@ -35,6 +35,10 @@
  */
 
 
+namespace Automad\GUI;
+use Automad\GUI\Components\Autocomplete\Search;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -43,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-echo Automad\GUI\Components\Autocomplete\Search::render($this->getAutomad());
+echo Search::render($this->getAutomad());
 
 
 ?>

@@ -36,7 +36,14 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Request;
+use Automad\GUI\Components\Loading;
+use Automad\GUI\Components\Modal\Link;
+use Automad\GUI\Components\Modal\SelectImage;
+use Automad\GUI\Components\Nav\Breadcrumbs;
+use Automad\GUI\Components\Nav\SiteTree;
+use Automad\GUI\Components\Nav\Switcher;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -47,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$url = Core\Request::query('url');
+$url = Request::query('url');
 
 
 if ($Page = $this->getAutomad()->getPage($url)) {
@@ -62,7 +69,7 @@ $this->element('header');
 		
 		<?php if ($Page) { 
 			
-			echo Components\Nav\Breadcrumbs::render($this->getAutomad());
+			echo Breadcrumbs::render($this->getAutomad());
 		
 			$items = array(
 				array(
@@ -111,7 +118,7 @@ $this->element('header');
 				);
 			}
 		
-			echo Components\Nav\Switcher::render('#am-page-content', $items, $dropdown, $Page->private);
+			echo Switcher::render('#am-page-content', $items, $dropdown, $Page->private);
 			
 		?>
 	
@@ -125,7 +132,7 @@ $this->element('header');
 				data-am-url="<?php echo $url; ?>"
 				data-am-path="<?php echo $Page->get(AM_KEY_PATH); ?>"
 				>
-					<?php echo Components\Loading::render(); ?>
+					<?php echo Loading::render(); ?>
 				</form>
 		    </li>
 			<!-- Files -->
@@ -137,16 +144,16 @@ $this->element('header');
 				data-am-url="<?php echo $url; ?>" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
-					<?php echo Components\Loading::render(); ?>
+					<?php echo Loading::render(); ?>
 				</form>
 			</li>
 		</ul>
 		
 		<!-- Select Image Modal -->
-		<?php echo Components\Modal\SelectImage::render($url); ?>
+		<?php echo SelectImage::render($url); ?>
 
 		<!-- Add Link Modal -->
-		<?php echo Components\Modal\Link::render(); ?>
+		<?php echo Link::render(); ?>
 
 		<!-- Move Page Modal -->
 		<div id="am-move-page-modal" class="uk-modal">
@@ -160,7 +167,7 @@ $this->element('header');
 						<?php Text::e('page_move_destination'); ?>
 					</label>
 					<div data-am-tree="#am-move-page-input">
-						<?php echo Components\Nav\SiteTree::render($this->getAutomad(), '', array(), true, false); ?>
+						<?php echo SiteTree::render($this->getAutomad(), '', array(), true, false); ?>
 					</div>
 				</div>
 				<form data-am-handler="move_page" data-am-url="<?php echo $url; ?>">

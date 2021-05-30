@@ -36,8 +36,10 @@
 
 
 namespace Automad\GUI\Components\Card;
-use Automad\Core as Core;
-use Automad\GUI as GUI;
+use Automad\Core\Image;
+use Automad\GUI\Components\Modal\Readme;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,14 +67,14 @@ class Theme {
 
 	public static function render($Theme, $activeTheme, $id) {
 
-		$Text = GUI\Text::getObject();
+		$Text = Text::getObject();
 		$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
-		$files = GUI\FileSystem::glob($path . '/*');
+		$files = FileSystem::glob($path . '/*');
 		$key = AM_KEY_THEME;
 	
 		// Set icon.
 		if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
-			$img = new Core\Image(reset($images), 600, 450, true);
+			$img = new Image(reset($images), 600, 450, true);
 			$icon = '<img src="' . AM_BASE_URL . $img->file . '" width="' . $img->width . '" height="' . $img->height . '" />';
 		} else {
 			$icon = '<i class="uk-icon-code"></i>';
@@ -140,7 +142,7 @@ HTML;
 HTML;
 		}
 
-		$readme = GUI\Components\Modal\Readme::render($id . '-modal', $Theme->readme);
+		$readme = Readme::render($id . '-modal', $Theme->readme);
 
 		return <<< HTML
 					$readme
@@ -178,7 +180,7 @@ HTML;
 						</div>
 					</div>
 HTML;
-			
+
 	}
 
 

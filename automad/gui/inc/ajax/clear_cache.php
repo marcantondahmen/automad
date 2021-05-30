@@ -36,7 +36,8 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Cache;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 $output = array();
-Core\Cache::clear();
+Cache::clear();
 $output['success'] = Text::get('success_cache_cleared');
 $this->jsonOutput($output);
 

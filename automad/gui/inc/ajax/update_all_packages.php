@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+use Automad\Core\Cache;
+use Automad\GUI\Utils\Text;
+use Automad\System\Composer;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -49,13 +50,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $output = array();
 
-$Composer = new System\Composer();
+$Composer = new Composer();
 $output['error'] = $Composer->run('update');
 $output['trigger'] = 'composerDone';
 	
 if (!$output['error']) {
 	$output['success'] = Text::get('success_packages_updated_all');
-	Core\Cache::clear();
+	Cache::clear();
 }
 
 $this->jsonOutput($output);

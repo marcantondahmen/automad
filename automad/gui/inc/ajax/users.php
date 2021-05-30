@@ -36,6 +36,11 @@
 
 
 namespace Automad\GUI;
+use Automad\Core\Request;
+use Automad\Core\Str;
+use Automad\GUI\Controllers\Accounts;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -47,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 // Delete selected users.
-if ($delete = \Automad\Core\Request::post('delete')) {	
+if ($delete = Request::post('delete')) {	
 	$output = Accounts::delete($delete);
 } else {
 	$output = array();
@@ -62,7 +67,7 @@ ob_start();
 
 foreach (Accounts::get() as $user => $hash) { 
 	
-	$id = 'am-user-' . \Automad\Core\Str::sanitize($user);
+	$id = 'am-user-' . Str::sanitize($user);
 
 	?>
 		<li>

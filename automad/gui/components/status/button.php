@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\Status;
-use Automad\GUI\Text as Text;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,7 +55,7 @@ class Button {
 	
 	/**
 	 *  Create a status button for an AJAX status request with loading animation.
-	 *      
+	 * 
 	 *	@param string $status
 	 *	@param string $tab
 	 *	@return string The HTML for the status button

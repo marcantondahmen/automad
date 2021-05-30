@@ -36,6 +36,8 @@
 
 
 namespace Automad\GUI\Components\Status;
+use Automad\Core\Request;
+use Automad\GUI\Components\Status\Response;
 
 
 
@@ -47,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-if ($item = \Automad\Core\Request::post('item')) {
+if ($item = Request::post('item')) {
 
 	$this->jsonOutput(Response::render($item));
 

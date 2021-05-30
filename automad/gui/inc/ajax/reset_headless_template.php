@@ -36,7 +36,10 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Cache;
+use Automad\Core\Request;
+use Automad\GUI\Controllers\Headless;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -48,10 +51,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $output = array();
 
-if (Core\Request::post('reset')) {
+if (Request::post('reset')) {
 
 	if (Headless::resetTemplate()) {
-		Core\Cache::clear();
+		Cache::clear();
 		$output['trigger'] = 'resetHeadlessTemplate';
 		$output['success'] = Text::get('success_reset_headless');
 	}

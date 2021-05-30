@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+use Automad\Core\Parse;
+use Automad\GUI\Utils\Text;
+use Automad\System\Update;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -58,11 +59,11 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 } else {
 	
 	// Test if server supports all required functions/extensions.
-	if (System\Update::supported()) {
+	if (Update::supported()) {
 		
 		if (!empty($_POST['update'])) {
 		
-			$output = System\Update::run();
+			$output = Update::run();
 		
 		} else {
 		
@@ -70,7 +71,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 			ob_start();
 	
 			// Get version and test connection.
-			if ($version = System\Update::getVersion()) {
+			if ($version = Update::getVersion()) {
 		
 				// Check if an the current installation is outdated.
 				if (version_compare(AM_VERSION, $version, '<')) {
@@ -107,7 +108,7 @@ if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
 							<?php Text::e('sys_update_items'); ?>
 						</p>
 						<ul>
-							<?php foreach (Core\Parse::csv(AM_UPDATE_ITEMS) as $item) {	
+							<?php foreach (Parse::csv(AM_UPDATE_ITEMS) as $item) {	
 								echo '<li>' . $item . '</li>';
 							} ?>
 						</ul>

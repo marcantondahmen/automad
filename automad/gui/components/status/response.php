@@ -36,11 +36,13 @@
 
 
 namespace Automad\GUI\Components\Status;
-use Automad\Core as Core;
-use Automad\System as System;
-use Automad\GUI\Text as Text;
-use Automad\GUI\Accounts as Accounts;
-use Automad\GUI\Headless as Headless;
+use Automad\Core\Debug;
+use Automad\Core\Str;
+use Automad\System\Composer;
+use Automad\System\Update;
+use Automad\GUI\Utils\Text;
+use Automad\GUI\Controllers\Accounts;
+use Automad\GUI\Controllers\Headless;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -66,7 +68,7 @@ class Response {
 
 	public static function render($item) {
 
-		Core\Debug::log($item, 'Getting status');
+		Debug::log($item, 'Getting status');
 		$output = array();
 
 		if ($item == 'cache') {
@@ -85,7 +87,7 @@ class Response {
 			
 			$output['status'] = '';
 			$tooltip = Text::get('sys_status_debug_enabled');
-			$tab = Core\Str::sanitize(Text::get('sys_debug'));
+			$tab = Str::sanitize(Text::get('sys_debug'));
 			
 			if (AM_DEBUG_ENABLED) {
 				$output['status'] = <<< HTML
@@ -104,7 +106,7 @@ HTML;
 		
 		if ($item == 'headless_template') {
 
-			$template = Core\Str::stripStart(Headless::getTemplate(), AM_BASE_DIR);
+			$template = Str::stripStart(Headless::getTemplate(), AM_BASE_DIR);
 			$badge = '';
 
 			if ($template != AM_HEADLESS_TEMPLATE) {
@@ -120,7 +122,7 @@ HTML;
 
 		if ($item == 'update') {
 			
-			$updateVersion = System\Update::getVersion();
+			$updateVersion = Update::getVersion();
 			
 			if (version_compare(AM_VERSION, $updateVersion, '<')) {
 				$output['status'] = '<i class="uk-icon-download uk-icon-justify"></i>&nbsp;&nbsp;' .
@@ -136,7 +138,7 @@ HTML;
 
 		if ($item == 'update_badge') {
 			
-			$updateVersion = System\Update::getVersion();
+			$updateVersion = Update::getVersion();
 			
 			if (version_compare(AM_VERSION, $updateVersion, '<')) {
 				$output['status'] = '<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i></span>';
@@ -157,7 +159,7 @@ HTML;
 
 		if ($item == 'outdated_packages') {
 
-			$Composer = new System\Composer();
+			$Composer = new Composer();
 			$buffer = $Composer->run('show -oD -f json', true);
 
 			if ($buffer) {

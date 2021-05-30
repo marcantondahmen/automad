@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\Grid;
-use Automad\GUI\Components\Card as Card;
+use Automad\GUI\Components\Card\File;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,7 +69,7 @@ class Files {
 		
 		foreach ($files as $file) {
 			$id = 'am-file-' . ++$i;
-			$cards .= '<li>' . Card\File::render($file, $id) . '</li>';		
+			$cards .= '<li>' . File::render($file, $id) . '</li>';		
 		}
 			
 		return <<< HTML
@@ -83,12 +83,6 @@ class Files {
 HTML;
 		
 	}
-	
-
-	
-
-
-
 
 
 }

@@ -35,7 +35,7 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\GUI\Utils;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -45,8 +45,8 @@ if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
 }
 
 
-use Automad\Core as Core;
-use Automad\GUI as GUI;
+use Automad\Core;
+use Automad\GUI;
 
 
 // Set default timezone if not set.

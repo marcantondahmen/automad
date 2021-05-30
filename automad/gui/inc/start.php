@@ -36,7 +36,12 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Cache;
+use Automad\Core\Selection;
+use Automad\Core\Str;
+use Automad\GUI\Components\Grid\Pages;
+use Automad\GUI\Components\Status\Button;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -47,9 +52,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$Cache = new Core\Cache();
+$Cache = new Cache();
 $mTime = $Cache->getSiteMTime();
-$Selection = new Core\Selection($this->getAutomad()->getCollection());
+$Selection = new Selection($this->getAutomad()->getCollection());
 $Selection->sortPages(AM_KEY_MTIME . ' desc');
 $latestPages = $Selection->getSelection(false, false, 0, 12);
 
@@ -91,7 +96,7 @@ $this->element('header');
 			<?php if (AM_HEADLESS_ENABLED) { ?>
 				<li class="uk-margin-small-bottom">
 					<a 
-					href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_headless')); ?>"
+					href="?context=system_settings#<?php echo Str::sanitize(Text::get('sys_headless')); ?>"
 					class="uk-button uk-button-success uk-button-large uk-text-truncate uk-width-1-1 uk-text-left"
 					>
 						<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;
@@ -107,16 +112,16 @@ $this->element('header');
 				</li>
 			<?php } ?>
 			<li class="uk-margin-small-bottom">
-				<?php echo Components\Status\Button::render('cache', Core\Str::sanitize(Text::get('sys_cache'))); ?>
+				<?php echo Button::render('cache', Str::sanitize(Text::get('sys_cache'))); ?>
 			</li>
 			<li class="uk-margin-small-bottom">
-				<?php echo Components\Status\Button::render('update', Core\Str::sanitize(Text::get('sys_update'))); ?>
+				<?php echo Button::render('update', Str::sanitize(Text::get('sys_update'))); ?>
 			</li>
 		</ul>
 
 		<div class="uk-margin-large-top">
 			<h2><?php Text::e('dashboard_recently_edited'); ?></h2>
-			<?php echo Components\Grid\Pages::render($latestPages); ?>
+			<?php echo Pages::render($latestPages); ?>
 		</div>
 
 		<!-- Server Info Modal -->

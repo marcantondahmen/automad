@@ -35,8 +35,8 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core as Core;
+namespace Automad\GUI\Controllers;
+use Automad\GUI\Utils\FileSystem;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Headless extends Core\Headless { 
+class Headless extends \Automad\Core\Headless { 
 
 
 	/**	

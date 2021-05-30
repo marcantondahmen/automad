@@ -36,8 +36,8 @@
 
 
 namespace Automad\GUI\Components\Modal;
-use Automad\GUI\Text as Text;
-use Automad\Core\Str as Str;
+use Automad\Core\Str;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

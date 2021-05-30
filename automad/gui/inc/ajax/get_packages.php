@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+use Automad\GUI\Components\Card\Package;
+use Automad\GUI\Controllers\PackageManager;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -81,7 +82,7 @@ if ($packages = PackageManager::getPackages()) {
 		data-uk-grid-match="{target:'.uk-panel'}"
 		>
 			<?php foreach ($packages as $package) { 
-				echo '<li>' . Components\Card\Package::render($package) . '</li>';
+				echo '<li>' . Package::render($package) . '</li>';
 			} ?> 
 		</ul>
 

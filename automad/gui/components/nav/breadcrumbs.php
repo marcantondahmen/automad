@@ -36,7 +36,8 @@
 
 
 namespace Automad\GUI\Components\Nav;
-use Automad\Core as Core;
+use Automad\Core\Request;
+use Automad\Core\Selection;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,8 +63,8 @@ class Breadcrumbs {
 
 	public static function render($Automad) {
 
-		$Selection = new Core\Selection($Automad->getCollection());
-		$Selection->filterBreadcrumbs(Core\Request::query('url'));
+		$Selection = new Selection($Automad->getCollection());
+		$Selection->filterBreadcrumbs(Request::query('url'));
 		$pages = $Selection->getSelection(false);
 		
 		$html = '<ul class="am-breadcrumbs uk-subnav uk-subnav-pill uk-margin-top">';

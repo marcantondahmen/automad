@@ -36,9 +36,9 @@
 
 
 namespace Automad\GUI\Components\System;
-use Automad\GUI\Components as Components;
-use Automad\GUI\Text as Text;
-use Automad\GUI\FileSystem as FileSystem;
+use Automad\GUI\Components\Form\Select;
+use Automad\GUI\Utils\Text;
+use Automad\GUI\Utils\FileSystem;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -71,7 +71,7 @@ class Cache {
 			$enabled = '';
 		}
 
-		$monitor = Components\Form\Select::render(
+		$monitor = Select::render(
 			'cache[monitor-delay]',
 			array(
 				'1 min' => 60,
@@ -82,7 +82,7 @@ class Cache {
 			Text::get('sys_cache_monitor')
 		); 
 
-		$lifetime = Components\Form\Select::render(
+		$lifetime = Select::render(
 			'cache[lifetime]',
 			array(
 				'1 h' => 3600,

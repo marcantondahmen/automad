@@ -35,9 +35,9 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+namespace Automad\GUI\Controllers;
+use Automad\Core\Debug;
+use Automad\System\Packagist;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -95,13 +95,13 @@ class PackageManager {
 
 		// For now only get theme packages and therefore set the tags 
 		// parameter to 'theme'.
-		$packages = System\Packagist::getPackages('automad-package');
+		$packages = Packagist::getPackages('automad-package');
 		$installed = array();
 		$available = array();
 		$installedPackages = self::getInstalled();
 
-		Core\Debug::log($packages, 'Packages on Packagist');
-		Core\Debug::log($installedPackages, 'Installed packages');
+		Debug::log($packages, 'Packages on Packagist');
+		Debug::log($installedPackages, 'Installed packages');
 
 		if ($packages) {
 

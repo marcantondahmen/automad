@@ -36,7 +36,12 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Request;
+use Automad\Core\Str;
+use Automad\GUI\Components\Form\Search;
+use Automad\GUI\Components\Logo;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -45,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 if (User::get()) {
 
 	// Get form handler to be submitted. If no matching handler exists, set an empty string.
-	$context = Core\Request::query('context');
+	$context = Request::query('context');
 	$handlers = array('edit_page' => 'page_data', 'edit_shared' => 'shared_data');
 
 	if (isset($handlers[$context])) {
@@ -61,13 +66,13 @@ if (User::get()) {
 			<!-- Logo -->
 			<div class="am-navbar-logo">
 				<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
-					<?php echo Components\Logo::render(); ?>
+					<?php echo Logo::render(); ?>
 				</a>
 			</div>
 			<!-- Search -->
 			<div class="am-navbar-search">
 				<?php 
-					echo Components\Form\Search::render(
+					echo Search::render(
 						Text::get('search_placeholder') . ' ' . 
 						htmlspecialchars($this->getShared()->get(AM_KEY_SITENAME)),
 						'[Ctrl + ⇧ + Space]'
@@ -121,7 +126,7 @@ if (User::get()) {
 									</a>
 								</li>
 								<li>
-									<a href="?context=system_settings#<?php echo Core\Str::sanitize(Text::get('sys_user'), true); ?>">
+									<a href="?context=system_settings#<?php echo Str::sanitize(Text::get('sys_user'), true); ?>">
 										<i class="uk-icon-user uk-icon-justify"></i>&nbsp;
 										<?php Text::e('btn_manage_users'); ?>
 									</a>

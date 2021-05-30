@@ -36,9 +36,10 @@
 
 
 namespace Automad\GUI\Components\Form;
-use Automad\GUI\Components\Fullscreen\Bar as Bar;
-use Automad\Core as Core;
-use Automad\GUI\Text as Text;
+use Automad\Core\Request;
+use Automad\Core\Str;
+use Automad\GUI\Components\Fullscreen\Bar;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -332,7 +333,7 @@ HTML;
 			return false;	
 		} 
 
-		if ($url = Core\Request::post('url')) {
+		if ($url = Request::post('url')) {
 			$Page = $Automad->getPage($url);
 			$title = htmlspecialchars($Page->get(AM_KEY_TITLE));
 		} else {
@@ -352,7 +353,7 @@ HTML;
 
 	private static function isInPage() {
 
-		return (strpos(Core\Request::query('ajax'), 'inpage') !== false);
+		return (strpos(Request::query('ajax'), 'inpage') !== false);
 
 	}
 
@@ -479,8 +480,8 @@ HTML;
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 		
-		$url = Core\Request::post('url');
-		$context = Core\Request::post('context');
+		$url = Request::post('url');
+		$context = Request::post('context');
 
 		// The field ID.
 		$id = 'am-input-data-' . $key;
@@ -531,12 +532,12 @@ HTML;
 			$formatDate = 'Y-m-d';
 			$formatTime = 'H:i';
 			
-			$attrDate = 'value="' . Core\Str::dateFormat($value, $formatDate) . '" readonly="true"';
-			$attrTime = 'value="' . Core\Str::dateFormat($value, $formatTime) . '" readonly="true"';
+			$attrDate = 'value="' . Str::dateFormat($value, $formatDate) . '" readonly="true"';
+			$attrTime = 'value="' . Str::dateFormat($value, $formatTime) . '" readonly="true"';
 			
 			if ($url || $context) {
-				$attrDate .= ' placeholder="' . Core\Str::dateFormat($shared, $formatDate) . '"';
-				$attrTime .= ' placeholder="' . Core\Str::dateFormat($shared, $formatTime) . '"';
+				$attrDate .= ' placeholder="' . Str::dateFormat($shared, $formatDate) . '"';
+				$attrTime .= ' placeholder="' . Str::dateFormat($shared, $formatTime) . '"';
 			}
 			
 			$html .= self::fieldDate($attr, $attrDate, $attrTime);

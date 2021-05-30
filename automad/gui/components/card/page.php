@@ -36,8 +36,10 @@
 
 
 namespace Automad\GUI\Components\Card;
-use Automad\Core as Core;
-use Automad\GUI\Text as Text;
+use Automad\Core\FileSystem;
+use Automad\Core\Image;
+use Automad\Core\Str;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,17 +58,17 @@ class Page {
 
 	/**
 	 *	Generate thumbnail for page grid.
-	 *      
-	 *	@param string $file  
-	 *	@param float $w     
-	 *	@param float $h     
+	 *
+	 *	@param string $file
+	 *	@param float $w
+	 *	@param float $h
 	 *	@param string $gridW (uk-width-* suffix) 
 	 *	@return string The generated markup
 	 */
 	
 	private static function thumbnail($file, $w, $h, $gridW) {
 		
-		$img = new Core\Image($file, $w, $h, true);
+		$img = new Image($file, $w, $h, true);
 		return 	'<li class="uk-width-' . $gridW . '"><img src="' . AM_BASE_URL . $img->file . '" /></li>';
 	
 	}
@@ -145,7 +147,7 @@ class Page {
 		$link = '?context=edit_page&url=' . urlencode($Page->get(AM_KEY_ORIG_URL));
 
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
-		$images = Core\FileSystem::globGrep($path . '*.*', '/(jpg|jpeg|png|gif)$/i');
+		$images = FileSystem::globGrep($path . '*.*', '/(jpg|jpeg|png|gif)$/i');
 		
 		if (!empty($images)) {
 			$preview = self::layout($images);
@@ -154,7 +156,7 @@ class Page {
 		}
 
 		$pageTitle = htmlspecialchars($Page->get(AM_KEY_TITLE));
-		$pageMTime = Core\Str::dateFormat($Page->getMtime(), 'j. M Y');
+		$pageMTime = Str::dateFormat($Page->getMtime(), 'j. M Y');
 		$pageUrl = AM_BASE_INDEX . $Page->url;
 		$Text = Text::getObject();
 

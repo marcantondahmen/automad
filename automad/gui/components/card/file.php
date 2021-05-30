@@ -36,9 +36,11 @@
 
 
 namespace Automad\GUI\Components\Card;
-use Automad\GUI\FileSystem as FileSystem;
-use Automad\GUI\Text as Text;
-use Automad\Core as Core;
+use Automad\Core\Image;
+use Automad\Core\Parse;
+use Automad\Core\Str;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -64,11 +66,11 @@ class File {
 
 	private static function getPreview($file) {
 
-		if (Core\Parse::fileIsImage($file)) {
+		if (Parse::fileIsImage($file)) {
 
-			$imgPanel = new Core\Image($file, 320, 240, true);
+			$imgPanel = new Image($file, 320, 240, true);
 			$url = AM_BASE_URL . $imgPanel->file;
-							
+			
 			$preview = <<< HTML
 						<img src="$url" width="$imgPanel->width" height="$imgPanel->height" />
 						<div class="uk-panel-badge uk-badge"> 
@@ -111,14 +113,14 @@ HTML;
 		$data = array(
 			'img' => false, 
 			'filename' => basename($file), 
-			'caption' => htmlspecialchars(Core\Parse::caption($file)), 
+			'caption' => htmlspecialchars(Parse::caption($file)), 
 			'extension' => htmlspecialchars(FileSystem::getExtension($file)),
-			'download' => AM_BASE_URL . Core\Str::stripStart($file, AM_BASE_DIR) 
+			'download' => AM_BASE_URL . Str::stripStart($file, AM_BASE_DIR) 
 		);
 
-		if (Core\Parse::fileIsImage($file)) { 
+		if (Parse::fileIsImage($file)) { 
 			
-			$imgModal = new Core\Image($file, 1600, 1200, false);
+			$imgModal = new Image($file, 1600, 1200, false);
 	
 			$data['img'] = array(
 				'src' => AM_BASE_URL . $imgModal->file,
@@ -149,9 +151,9 @@ HTML;
 		$preview = self::getPreview($file);
 		$jsonData = json_encode($data);
 		$title = basename($file);
-		$caption = Core\Str::shorten(htmlspecialchars_decode($data->caption), 100);
+		$caption = Str::shorten(htmlspecialchars_decode($data->caption), 100);
 		$mTime = date('M j, Y H:i', filemtime($file));
-		$clipboard = Core\Str::stripStart($file, AM_BASE_DIR);
+		$clipboard = Str::stripStart($file, AM_BASE_DIR);
 		$basename = basename($file);
 		$resize = '';
 		$Text = Text::getObject();
@@ -167,7 +169,7 @@ HTML;
 
 		}
 
-		if (Core\Parse::fileIsImage($file)) {
+		if (Parse::fileIsImage($file)) {
 
 			$resize = <<< HTML
 						<li>

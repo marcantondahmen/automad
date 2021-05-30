@@ -36,7 +36,11 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Cache;
+use Automad\Core\Config;
+use Automad\Core\Debug;
+use Automad\Core\Request;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,16 +55,16 @@ $output = array();
 
 
 // Get config from json file, if exsiting.
-$config = Core\Config::read();
+$config = Config::read();
 ksort($config);
 
 
-if ($type = Core\Request::post('type')) {
+if ($type = Request::post('type')) {
 	
 	// Cache
 	if ($type == 'cache') {
 		
-		$cache = Core\Request::post('cache');
+		$cache = Request::post('cache');
 		
 		if (isset($cache['enabled'])) {
 			$config['AM_CACHE_ENABLED'] = true;
@@ -76,7 +80,7 @@ if ($type = Core\Request::post('type')) {
 	// Language
 	if ($type == 'language') {
 
-		$language = Core\Request::post('language');
+		$language = Request::post('language');
 		$config['AM_FILE_GUI_TRANSLATION'] = $language;
 		$output['redirect'] = '#3';
 		$output['reload'] = true;
@@ -111,11 +115,11 @@ if ($type = Core\Request::post('type')) {
 }
 
 
-if (Core\Config::write($config)) {
+if (Config::write($config)) {
 
-	Core\Debug::log($config, 'Updated config file');
+	Debug::log($config, 'Updated config file');
 	$output['success'] = Text::get('success_config_update');
-	Core\Cache::clear();
+	Cache::clear();
 
 } else {
 

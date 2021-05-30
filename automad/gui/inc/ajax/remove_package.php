@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
-use Automad\System as System;
+use Automad\Core\Request;
+use Automad\System\Composer;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -50,9 +51,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 $output = array();
 
 
-if ($package = Core\Request::post('package')) {
+if ($package = Request::post('package')) {
 
-	$Composer = new System\Composer();
+	$Composer = new Composer();
 	$output['error'] = $Composer->run('remove ' . $package);
 	$output['trigger'] = 'composerDone';
 	

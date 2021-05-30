@@ -36,7 +36,7 @@
 
 
 namespace Automad\GUI\Components\System;
-use Automad\GUI\Components as Components;
+use Automad\GUI\Components\Loading;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,7 +62,7 @@ class Update {
 	public static function render() {
 
 		return  '<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">' .
-					Components\Loading::render() .
+					Loading::render() .
 				'</form>';
 
 	}

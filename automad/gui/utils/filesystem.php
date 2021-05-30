@@ -35,8 +35,8 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core as Core;
+namespace Automad\GUI\Utils;
+use Automad\Core;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -88,7 +88,7 @@ class FileSystem extends Core\FileSystem {
 		if ($suffix) {
 			
 			$path = self::fullPagePath($path);
-			$files = FileSystem::glob($path . '*.' . AM_FILE_EXT_DATA);
+			$files = self::glob($path . '*.' . AM_FILE_EXT_DATA);
 			
 			if (!empty($files)) {
 				
@@ -105,7 +105,7 @@ class FileSystem extends Core\FileSystem {
 	
 
 	/**
-	 *  Unlike FileSystem::movePageDir(), this method only copies all files within a page directory without (!) any subdirectories.
+	 *  Unlike self::movePageDir(), this method only copies all files within a page directory without (!) any subdirectories.
 	 *      
 	 *	@param string $source
 	 *	@param string $dest
@@ -118,7 +118,7 @@ class FileSystem extends Core\FileSystem {
 		$dest = self::fullPagePath($dest);
 		
 		// Get files in directory to be copied.
-		$files = FileSystem::glob($source . '*');
+		$files = self::glob($source . '*');
 		$files = array_filter($files, 'is_file');
 		
 		// Create directoy and copy files.
@@ -261,7 +261,7 @@ class FileSystem extends Core\FileSystem {
 		
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
-		$newParentPath = FileSystem::normalizeSlashes($newParentPath);
+		$newParentPath = self::normalizeSlashes($newParentPath);
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
@@ -325,8 +325,8 @@ class FileSystem extends Core\FileSystem {
 			
 				// Collect items to be removed.
 				$cacheItems = array_merge(
-					FileSystem::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
-					FileSystem::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
+					self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/*', GLOB_ONLYDIR),
+					self::glob(AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '*')
 				);
 				
 				foreach ($cacheItems as $item) {
@@ -341,7 +341,7 @@ class FileSystem extends Core\FileSystem {
 			}	
 			
 		}
-				
+		
 	}
 
 

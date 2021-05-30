@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI;
+use Automad\GUI\Controllers\User;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

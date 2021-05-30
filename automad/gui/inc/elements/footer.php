@@ -36,6 +36,12 @@
 
 
 namespace Automad\GUI;
+use Automad\GUI\Components\Form\CheckboxPrivate;
+use Automad\GUI\Components\Form\SelectTemplate;
+use Automad\GUI\Components\Modal\About;
+use Automad\GUI\Components\Nav\SiteTree;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -57,7 +63,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 			</div>
 
 			<!-- About Modal -->
-			<?php echo Components\Modal\About::render('am-about-modal'); ?>
+			<?php echo About::render('am-about-modal'); ?>
 
 			<!-- Add Page Modal -->
 			<div id="am-add-page-modal" class="uk-modal">
@@ -79,13 +85,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							required 
 							/>
 						</div>
-						<?php echo Components\Form\CheckboxPrivate::render('subpage[private]'); ?>
+						<?php echo CheckboxPrivate::render('subpage[private]'); ?>
 						<hr>
 						<?php if (!AM_HEADLESS_ENABLED) { ?>
 							<div class="uk-form-row">
 								<label class="uk-form-label uk-margin-top-remove"><?php Text::e('page_theme_template'); ?></label>
 								<?php 
-									echo Components\Form\SelectTemplate::render(
+									echo SelectTemplate::render(
 										$this->getAutomad(),
 										$this->getThemelist(),
 										'subpage[theme_template]'
@@ -99,7 +105,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							<?php Text::e('page_add_location'); ?>
 						</label>
 						<div data-am-tree="#am-add-page-input">
-							<?php echo Components\Nav\SiteTree::render($this->getAutomad(), '', array(), false, false); ?>
+							<?php echo SiteTree::render($this->getAutomad(), '', array(), false, false); ?>
 						</div>
 					</div>
 					<div class="uk-modal-footer uk-text-right">

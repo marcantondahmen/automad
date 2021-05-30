@@ -36,7 +36,10 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Request;
+use Automad\GUI\Components\Form\SelectImage;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,7 +55,7 @@ $output = array();
 
 // Check if file from a specified page or the shared files will be listed and managed.
 // To display a file list of a certain page, its URL has to be submitted along with the form data.
-$url = Core\Request::post('url');
+$url = Request::post('url');
 
 if (!array_key_exists($url, $this->getAutomad()->getCollection())) {
 	$url = '';
@@ -114,8 +117,8 @@ ob_start();
 
 <?php
 
-echo Components\Form\SelectImage::render($pageFiles, Text::get('images_page'), true);
-echo Components\Form\SelectImage::render($sharedFiles, Text::get('images_shared'));
+echo SelectImage::render($pageFiles, Text::get('images_page'), true);
+echo SelectImage::render($sharedFiles, Text::get('images_shared'));
 
 $output['html'] = ob_get_contents();
 ob_end_clean();

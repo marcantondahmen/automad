@@ -36,7 +36,15 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\GUI\Components\Modal\EditConfig;
+use Automad\GUI\Components\Nav\Switcher;
+use Automad\GUI\Components\System\Cache;
+use Automad\GUI\Components\System\Debug;
+use Automad\GUI\Components\System\Headless;
+use Automad\GUI\Components\System\Language;
+use Automad\GUI\Components\System\Update;
+use Automad\GUI\Components\System\Users;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -59,7 +67,7 @@ $this->element('header');
 		</ul>
 		<?php
 		 
-			echo Components\Nav\Switcher::render('#am-sys-content', array(
+			echo Switcher::render('#am-sys-content', array(
 				array(
 					'icon' => '<i class="uk-icon-rocket"></i>',
 					'text' => Text::get('sys_cache')
@@ -92,34 +100,34 @@ $this->element('header');
 				'</a>'
 			)); 
 			
-			echo Components\Modal\EditConfig::render('am-edit-config-modal');
+			echo EditConfig::render('am-edit-config-modal');
 
 		?> 
 
 		<ul id="am-sys-content" class="uk-switcher">
 			<!-- Cache -->
 			<li>
-				<?php echo Components\System\Cache::render(); ?>
+				<?php echo Cache::render(); ?>
 			</li>
 			<!-- User -->
 			<li>
-				<?php echo Components\System\Users::render(); ?>
+				<?php echo Users::render(); ?>
 			</li>
 			<!-- Update -->
 			<li>
-				<?php echo Components\System\Update::render(); ?>
+				<?php echo Update::render(); ?>
 			</li>
 			<!-- Language -->
 			<li>
-				<?php echo Components\System\Language::render(); ?>
+				<?php echo Language::render(); ?>
 			</li>
 			<!-- Headless --> 
 			<li>
-				<?php echo Components\System\Headless::render(); ?>
+				<?php echo Headless::render(); ?>
 			</li>
 			<!-- Debug -->
 			<li>
-				<?php echo Components\System\Debug::render(); ?>
+				<?php echo Debug::render(); ?>
 			</li>
 		</ul>
 

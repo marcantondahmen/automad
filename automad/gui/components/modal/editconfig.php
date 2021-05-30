@@ -36,8 +36,8 @@
 
 
 namespace Automad\GUI\Components\Modal;
-use Automad\GUI\Text as Text;
-use Automad\Core as Core;
+use Automad\Core\Str;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -64,7 +64,7 @@ class EditConfig {
 	public static function render($id) {
 
 		$Text = Text::getObject();
-		$file = Core\Str::stripStart(AM_CONFIG, AM_BASE_DIR);
+		$file = Str::stripStart(AM_CONFIG, AM_BASE_DIR);
 		
 		return <<< HTML
 				<div id="$id" class="uk-modal">

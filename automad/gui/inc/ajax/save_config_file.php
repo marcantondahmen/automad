@@ -36,7 +36,10 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Cache;
+use Automad\Core\Config;
+use Automad\Core\Request;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -49,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 $output = array();
 
-if ($json = Core\Request::post('json')) {
+if ($json = Request::post('json')) {
 
 	$config = json_decode($json, true);
 	
@@ -61,8 +64,8 @@ if ($json = Core\Request::post('json')) {
 			$config['AM_ALLOWED_FILE_TYPES'] = trim(preg_replace('/,?\s*php\w?/is', '', $config['AM_ALLOWED_FILE_TYPES']), ', ');
 		}
 
-		if (Core\Config::write($config)) {
-			Core\Cache::clear();
+		if (Config::write($config)) {
+			Cache::clear();
 			$output['reload'] = true;
 		} else {
 			$output['error'] = Text::get('error_permission') . '<br>' . AM_CONFIG;
@@ -76,7 +79,7 @@ if ($json = Core\Request::post('json')) {
 
 } else {
 	
-	$config = Core\Config::read();
+	$config = Config::read();
 	$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 	
 	$output['html'] = <<< HTML

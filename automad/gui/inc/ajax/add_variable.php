@@ -35,6 +35,11 @@
  */
 
 
+namespace Automad\GUI;
+use Automad\Core\Request;
+use Automad\GUI\Components\Form\Field;
+
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
@@ -42,9 +47,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	Add a form field for a variable.
  */
 
-if ($name = Automad\Core\Request::post('name')) {
+if ($name = Request::post('name')) {
 
-	$html = Automad\GUI\Components\Form\Field::render($this->getAutomad(), $name, '', true);
+	$html = Field::render($this->getAutomad(), $name, '', true);
 	$this->jsonOutput(array('html' => $html));
 
 }

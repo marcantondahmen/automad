@@ -36,7 +36,9 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Request;
+use Automad\GUI\Components\Grid\Pages;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -47,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 
 
-$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Core\Request::query('query') . '"';
+$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Request::query('query') . '"';
 $this->element('header');
 
 
@@ -62,7 +64,7 @@ $results = $this->getContent()->getSearchResults();
 		</ul>
 		<h2 class="uk-margin-top-remove">
 			<i class="uk-icon-angle-double-left"></i>
-			<?php echo Core\Request::query('query'); ?>
+			<?php echo Request::query('query'); ?>
 			<i class="uk-icon-angle-double-right"></i>&nbsp;
 			<span class="uk-badge"><?php echo count($results); ?></span>
 		</h2>
@@ -71,7 +73,7 @@ $results = $this->getContent()->getSearchResults();
 
 if ($results) {
 	
-	echo Components\Grid\Pages::render($results);
+	echo Pages::render($results);
 	
 } else {
 	

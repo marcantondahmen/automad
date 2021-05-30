@@ -36,7 +36,13 @@
 
 
 namespace Automad\GUI;
-use Automad\Core as Core;
+use Automad\Core\Request;
+use Automad\GUI\Components\Form\Search;
+use Automad\GUI\Components\Logo;
+use Automad\GUI\Components\Nav\SiteTree;
+use Automad\GUI\Components\Status\Span;
+use Automad\GUI\Controllers\User;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,11 +60,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>"
 						class="am-sidebar-logo"
 						>
-							<?php echo Components\Logo::render(); ?>
+							<?php echo Logo::render(); ?>
 						</a>	
 					</div>
 					<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
-						<?php echo Components\Form\Search::render(Text::get('search_placeholder')); ?>
+						<?php echo Search::render(Text::get('search_placeholder')); ?>
 					</div>
 					<ul class="uk-nav uk-nav-side uk-margin-small-top">
 						<li class="uk-nav-header">
@@ -72,30 +78,30 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 								</a>
 							</li>
 						<?php } ?>
-						<li<?php if (!Core\Request::query('context')) { echo ' class="uk-active"'; }?>>
+						<li<?php if (!Request::query('context')) { echo ' class="uk-active"'; }?>>
 							<a href="<?php echo AM_BASE_INDEX . AM_PAGE_DASHBOARD; ?>">
 								<i class="uk-icon-tv uk-icon-justify"></i>&nbsp;
 								<?php Text::e('dashboard_title'); ?>
 							</a>
 						</li>
-						<li<?php if (Core\Request::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
+						<li<?php if (Request::query('context') == 'system_settings') { echo ' class="uk-active"'; }?>>
 							<a href="?context=system_settings">
 								<i class="uk-icon-sliders uk-icon-justify"></i>&nbsp;
 								<?php Text::e('sys_title'); ?>&nbsp;
-								<?php echo Components\Status\Span::render('update_badge'); ?>
+								<?php echo Span::render('update_badge'); ?>
 							</a>
 						</li>
-						<li<?php if (Core\Request::query('context') == 'edit_shared') { echo ' class="uk-active"'; }?>>
+						<li<?php if (Request::query('context') == 'edit_shared') { echo ' class="uk-active"'; }?>>
 							<a href="?context=edit_shared">
 								<i class="uk-icon-files-o uk-icon-justify"></i>&nbsp;
 								<?php Text::e('shared_title'); ?>
 							</a>
 						</li>
-						<li<?php if (Core\Request::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
+						<li<?php if (Request::query('context') == 'packages') { echo ' class="uk-active"'; }?>>
 							<a href="?context=packages">
 								<i class="uk-icon-download uk-icon-justify"></i>&nbsp;
 								<?php Text::e('packages_title'); ?>&nbsp;
-								<?php echo Components\Status\Span::render('outdated_packages'); ?>
+								<?php echo Span::render('outdated_packages'); ?>
 							</a>
 						</li>
 						<li class="uk-nav-divider"></li>
@@ -106,7 +112,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 							  		'&nbsp;&mdash;&nbsp;' . 
 							  		count($this->getAutomad()->getCollection());
 									
-						echo Components\Nav\SiteTree::render(
+						echo SiteTree::render(
 							$this->getAutomad(),
 							'',  
 							array('context' => 'edit_page'), 
@@ -132,4 +138,3 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 		</div>	
 	</div>	
 	<?php } ?> 
-			

@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI\Components\Form;
+use Automad\GUI\Utils\Text;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,7 +63,7 @@ class CheckboxHidden {
 
 	public static function render($key, $hidden = false) {
 
-		$Text = \Automad\GUI\Text::getObject();
+		$Text = Text::getObject();
 		$checked = '';
 
 		if ($hidden) {
