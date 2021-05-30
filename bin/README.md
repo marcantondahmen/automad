@@ -1,22 +1,22 @@
 # Bin
 
-There are some little scripts in this directory to keep the development workflow consistent by automating certain things such as releases, tests, and the handling of feature/bugfix branches.
+There are some little scripts in this directory to keep the development workflow consistent by automating certain things such as releases, tests, and the handling of feature/bugfix/refactor branches.
 
-- [Features/Bugfixes](#featuresbugfixes)
-	- [Starting a Feature/Bugfix](#starting-a-featurebugfix)
+- [Features, Bugfixes and Refactor Branches](#features-bugfixes-and-refactor-branches)
+	- [Starting a Branch](#starting-a-branch)
 	- [Commiting on a Branch](#commiting-on-a-branch)
 		- [Excluding Commits from the Changelog](#excluding-commits-from-the-changelog)
-	- [Finishing a Feature/Bugfix](#finishing-a-featurebugfix)
+	- [Finishing a Branch](#finishing-a-branch)
 - [Releases](#releases)
 - [Tests](#tests)
 
-## Features/Bugfixes
+## Features, Bugfixes and Refactor Branches
 
-In case a feature/bugfix is expected to be more complex than just a single commit, it should be developed on a separate branch.
+In case developing a feature/bugfix or refactoring is expected to be more complex than just a single commit, it should be done on a separate branch.
 
-### Starting a Feature/Bugfix
+### Starting a Branch
 
-To start a new feature/bugfix branch simply run the following command:
+To start a new feature/bugfix/refactor branch simply run the following command:
 
     bash bin/start.sh 
 
@@ -30,11 +30,11 @@ Please note that GitHub releases are created when a tag is pushed to `origin`. T
 
 #### Excluding Commits from the Changelog 
 
-When a *feature/bugfix* is finished, the branch name is used to create a commit message for the merge that qualifies to be included into the changelog. Therefore all commits on that branch are **not** supposed to generate changelog entries. To exclude such commits, a message simply has to violate the requirements by not starting with `feat` or `fix` or not following the *conventional commits* specification.
+When a new *feature* or a *bugfix* is finished, the branch name is used to create a commit message for the merge that qualifies to be included into the changelog. Therefore all commits on that branch are **not** supposed to generate changelog entries. To exclude such commits, a message simply has to violate the requirements by not starting with `feat` or `fix` or not following the *conventional commits* specification. Merges of refactor branches are excluded from the changelog.
 
-### Finishing a Feature/Bugfix
+### Finishing a Branch
 
-When finishing a *feature/bugfix*, its branched is merged back to the `develop` branch. The branch name is used to generate the commit message following this pattern according to the example above:
+When finishing a *feature*, a *bugfix* or refactoring, the branch is merged back to the `develop` branch. Its name is used to generate the commit message following this pattern according to the example above:
 
     feat(scope): feature name
 
