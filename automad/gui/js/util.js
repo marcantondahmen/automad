@@ -155,7 +155,7 @@
 		},
 
 		// Convert data attribute string in dataAPI string. 
-		// For example "data-am-handler" gets converted into "amHandler".
+		// For example "data-am-controller" gets converted into "amController".
 		dataCamelCase: function(str) {
 			
 			str = str.replace(/data-/g, '');

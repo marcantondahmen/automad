@@ -81,7 +81,7 @@ class EditConfig {
 									<i class="uk-icon-close"></i>&nbsp;
 									$Text->btn_close
 								</a>
-								<button class="uk-button uk-button-success" data-am-submit="save_config_file">
+								<button class="uk-button uk-button-success" data-am-submit="Config::save">
 									<i class="uk-icon-check"></i>&nbsp;
 									$Text->btn_save
 								</button>
@@ -92,7 +92,7 @@ class EditConfig {
 						</p>
 						<form 
 						class="uk-form" 
-						data-am-handler="save_config_file"
+						data-am-controller="Config::save"
 						data-am-init
 						></form>
 					</div>

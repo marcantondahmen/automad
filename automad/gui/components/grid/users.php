@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2019-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,49 +35,49 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core\Cache;
-use Automad\Core\Request;
-use Automad\GUI\Controllers\Headless;
-use Automad\GUI\Utils\FileSystem;
-use Automad\GUI\Utils\Text;
+namespace Automad\GUI\Components\Grid;
 
+use Automad\GUI\Components\Card\User;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Headless template editor.
+/**
+ *	The user grid component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-$output = array();
+class Users {
 
-if ($template = Request::post('template')) {
 
-	if (FileSystem::write(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM, $template)) {
-		Cache::clear();
-		$output['success'] = Text::get('success_saved');
+	/**
+	 *	Create a grid based user list for the given array of users.
+	 *
+	 *	@param array $users
+	 *	@return string The HTML for the grid
+	 */
+	
+	public static function render($users) {
+	
+		$cards = '';
+
+		foreach ($users as $user => $hash) {
+			$cards .= User::render($user);
+		}
+
+		return <<< HTML
+			<ul 
+			class="uk-grid uk-grid-width-medium-1-4" 
+			data-uk-grid-margin
+			>
+				$cards
+			</ul>
+HTML;
+
 	}
 
-} else {
-
-	// Start buffering the HTML.
-	ob_start();
-
-	?>
-		<div class="uk-overflow-container">
-			<textarea class="uk-form-controls uk-width-1-1" name="template" rows="10"><?php 
-				echo htmlspecialchars(Headless::loadTemplate()); 
-			?></textarea>			
-		</div>
-	<?php
-
-	// Save buffer to JSON array.
-	$output['html'] = ob_get_contents();
-	ob_end_clean();	
 
 }
-
-$this->jsonOutput($output);
-
-?>

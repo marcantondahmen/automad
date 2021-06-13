@@ -108,19 +108,19 @@
 
 			var dataAttrForm = Automad.link.dataAttr.form,
 				$form = $('[' + dataAttrForm + ']').first(),
-				handler = $form.data(Automad.util.dataCamelCase(dataAttrForm));
+				controller = $form.data(Automad.util.dataCamelCase(dataAttrForm));
 
 			if ($form.length > 0) {
 
-				$.post(handler, function(data) {
+				$.post(controller, function(data) {
 
 					var $element = $form.find('.uk-autocomplete').first(),
-						options = { source: data, minLength: 1 },
+						options = { source: data.autocomplete, minLength: 1 },
 						$autocomplete = UIkit.autocomplete($element, options);
 
 					$autocomplete.on('selectitem.uk.autocomplete', function(data, element) {
 						$form.find('input').val(element.value);
-						$form.find('button').click();
+						$form.find('button').trigger('click');
 					});
 
 				}, 'json');

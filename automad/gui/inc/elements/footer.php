@@ -72,7 +72,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<?php Text::e('btn_add_page'); ?>
 						<a href="#" class="uk-modal-close uk-close"></a>
 					</div>
-					<form class="uk-form uk-form-stacked" data-am-handler="add_page">
+					<form class="uk-form uk-form-stacked" data-am-controller="Page::add">
 						<input id="am-add-page-input" type="hidden" name="url" value="" />
 						<div class="uk-form-row">
 							<label for="am-add-page-modal-input-title" class="uk-form-label uk-margin-top-remove">Title</label>
@@ -112,7 +112,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 						<button type="button" class="uk-modal-close uk-button">
 							<i class="uk-icon-close"></i>&nbsp;&nbsp;<?php Text::e('btn_close'); ?>
 						</button>
-						<button type="button" class="uk-button uk-button-success" data-am-submit="add_page">
+						<button type="button" class="uk-button uk-button-success" data-am-submit="Page::add">
 							<i class="uk-icon-plus"></i>&nbsp;&nbsp;<?php Text::e('btn_add_page'); ?>
 						</button>
 					</div>

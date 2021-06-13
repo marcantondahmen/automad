@@ -80,7 +80,7 @@ HTML;
 
 			$button = <<< HTML
 					<div class="am-panel-bottom-right">
-						<form data-am-handler="remove_package">
+						<form data-am-controller="PackageManager::remove">
 							<input type="hidden" name="package" value="$package->name">
 							<button 
 							class="uk-button uk-button-small"
@@ -90,7 +90,7 @@ HTML;
 								&nbsp;<i class="uk-icon-times"></i>	
 							</button>
 						</form>
-						<form class="uk-hidden" data-am-handler="update_package">
+						<form class="uk-hidden" data-am-controller="PackageManager::update">
 							<input type="hidden" name="package" value="$package->name">
 							<button 
 							class="uk-button uk-button-success uk-button-small"
@@ -106,7 +106,7 @@ HTML;
 		} else {
 
 			$button = <<< HTML
-					<form class="am-panel-bottom-right" data-am-handler="install_package">
+					<form class="am-panel-bottom-right" data-am-controller="PackageManager::install">
 						<input type="hidden" name="package" value="$package->name">
 						<button 
 						class="uk-button uk-button-small"

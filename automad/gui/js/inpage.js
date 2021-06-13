@@ -51,7 +51,7 @@
 		
 		dataAttr: {
 			content: 'data-am-inpage-content',
-			handler: 'data-am-inpage-handler'
+			controller: 'data-am-inpage-controller'
 		},
 		
 		modal: {
@@ -64,7 +64,7 @@
 					param = $button.data(u.dataCamelCase(ip.dataAttr.content)),
 					$modal = $(ip.selectors.modal),
 					$form = $modal.find('form'),
-					handler = $form.data(u.dataCamelCase(ip.dataAttr.handler)),
+					controller = $form.data(u.dataCamelCase(ip.dataAttr.controller)),
 					$loader = $('<i></i>', { 'class': 'uk-icon-circle-o-notch uk-icon-spin uk-icon-small' })
 						  	  .appendTo($form);
 					
@@ -72,7 +72,7 @@
 				$(ip.selectors.fields).remove();
 				
 				// Get form content.
-				$.post(handler, param, function(data) {
+				$.post(controller, param, function(data) {
 							
 					if (data.html) {
 						
@@ -103,10 +103,10 @@
 				e.preventDefault();
 					
 				var	$form = $(e.target),
-					handler = $form.data(Automad.util.dataCamelCase(Automad.inPage.dataAttr.handler)),
+					controller = $form.data(Automad.util.dataCamelCase(Automad.inPage.dataAttr.controller)),
 					param =	$form.serializeArray();
 				
-				$.post(handler, param, function(data) {
+				$.post(controller, param, function(data) {
 					
 					if (data.redirect) {
 						window.location.href = data.redirect;
@@ -134,7 +134,7 @@
 	}
 	
 	$(document).on('click', '[href="' + Automad.inPage.selectors.modal + '"]', Automad.inPage.modal.init);
-	$(document).on('submit', '[' + Automad.inPage.dataAttr.handler + ']', Automad.inPage.modal.submit);
+	$(document).on('submit', '[' + Automad.inPage.dataAttr.controller + ']', Automad.inPage.modal.submit);
 	$(document).on('ready', Automad.inPage.menubar.init);
 	
 }(window.Automad = window.Automad || {}, jQuery);

@@ -92,22 +92,22 @@ $this->element('header');
 						Text::get('btn_inpage_edit') . 
 					'</a>', 
 					// Duplicate Page.
-					'<a href="#" data-am-submit="duplicate_page">' . 
+					'<a href="#" data-am-submit="Page::duplicate">' . 
 						'<i class="uk-icon-clone uk-icon-justify"></i>&nbsp;&nbsp;' . 
 						Text::get('btn_duplicate_page') . 
 					'</a>' . 
-					'<form data-am-handler="duplicate_page" data-am-url="' . $url . '"></form>',
+					'<form data-am-controller="Page::duplicate" data-am-url="' . $url . '"></form>',
 					// Move Page.
 					'<a href="#am-move-page-modal" data-uk-modal>' .
 						'<i class="uk-icon-arrows uk-icon-justify"></i>&nbsp;&nbsp;' . 
 						Text::get('btn_move_page') . 
 					'</a>',
 					// Delete Page.
-					'<a href="#" data-am-submit="delete_page">' .
+					'<a href="#" data-am-submit="Page::delete">' .
 						'<i class="uk-icon-remove uk-icon-justify"></i>&nbsp;&nbsp;' . 
 						Text::get('btn_delete_page') . 
 					'</a>' .
-					'<form data-am-handler="delete_page" data-am-url="' . $url . '" data-am-confirm="' . Text::get('confirm_delete_page') . '">' .
+					'<form data-am-controller="Page::delete" data-am-url="' . $url . '" data-am-confirm="' . Text::get('confirm_delete_page') . '">' .
 					'<input type="hidden" name="title" value="' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '" />' .
 					'</form>',
 					// Copy page URL to clipboard.
@@ -128,7 +128,7 @@ $this->element('header');
 				<form 
 				class="uk-form uk-form-stacked" 
 				data-am-init 
-				data-am-handler="page_data" 
+				data-am-controller="Page::data" 
 				data-am-url="<?php echo $url; ?>"
 				data-am-path="<?php echo $Page->get(AM_KEY_PATH); ?>"
 				>
@@ -140,7 +140,7 @@ $this->element('header');
 				<form 
 				class="uk-form uk-form-stacked" 
 				data-am-init 
-				data-am-handler="files" 
+				data-am-controller="FileCollection::edit" 
 				data-am-url="<?php echo $url; ?>" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
@@ -170,7 +170,7 @@ $this->element('header');
 						<?php echo SiteTree::render($this->getAutomad(), '', array(), true, false); ?>
 					</div>
 				</div>
-				<form data-am-handler="move_page" data-am-url="<?php echo $url; ?>">
+				<form data-am-controller="Page::move" data-am-url="<?php echo $url; ?>">
 					<input 
 					type="hidden" 
 					name="title" 
@@ -183,7 +183,7 @@ $this->element('header');
 						<i class="uk-icon-close"></i>&nbsp;
 						<?php Text::e('btn_close'); ?>
 					</button>
-					<button type="button" class="uk-button uk-button-success" data-am-submit="move_page">
+					<button type="button" class="uk-button uk-button-success" data-am-submit="Page::move">
 						<i class="uk-icon-arrows"></i>&nbsp;
 						<?php Text::e('btn_move_page'); ?>
 					</button>

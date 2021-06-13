@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2018-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,18 +35,44 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\GUI\Components\Form;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Copy an image resized.
+/**
+ *	The headless template editor component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
+class HeadlessEditor {
 
-$this->jsonOutput($this->getContent()->copyResized());
+
+	/**	
+	 *	Create a headless template editor component.
+	 * 
+	 *	@param string $template
+	 *	@return string The HTML for the editor
+	 */
+
+	public static function render($template) {
+
+		$template = htmlspecialchars($template);
+
+		return <<<HTML
+			<div class="uk-overflow-container">
+				<textarea 
+				class="uk-form-controls uk-width-1-1" 
+				name="template" rows="10"
+				>$template</textarea>
+			</div>
+HTML;
+
+	}
 
 
-?>
+}

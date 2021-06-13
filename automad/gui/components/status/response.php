@@ -36,6 +36,7 @@
 
 
 namespace Automad\GUI\Components\Status;
+
 use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\System\Composer;
@@ -43,7 +44,7 @@ use Automad\System\Update;
 use Automad\GUI\Utils\Text;
 use Automad\GUI\Controllers\Accounts;
 use Automad\GUI\Controllers\Headless;
-
+use Automad\GUI\Controllers\PackageManager;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -159,12 +160,11 @@ HTML;
 
 		if ($item == 'outdated_packages') {
 
-			$Composer = new Composer();
-			$buffer = $Composer->run('show -oD -f json', true);
+			$output = PackageManager::getOutdatedPackages();
 
-			if ($buffer) {
+			if (!empty($output['buffer'])) {
 				
-				$data = json_decode($buffer);
+				$data = json_decode($output['buffer']);
 
 				if (!empty($data->installed)) {
 					$count = count($data->installed);

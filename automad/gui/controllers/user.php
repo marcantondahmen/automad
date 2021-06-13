@@ -36,11 +36,10 @@
 
 
 namespace Automad\GUI\Controllers;
+
 use Automad\Core\Request;
 use Automad\GUI\Controllers\Accounts;
-use Automad\GUI\Controllers\User;
 use Automad\GUI\Utils\Text;
-
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -36,9 +36,11 @@
 
 
 namespace Automad\GUI\Controllers;
-use Automad\Core\Request;
-use Automad\GUI\Utils\Text;
 
+use Automad\Core\Request;
+use Automad\GUI\Components\Grid\Users;
+use Automad\GUI\Utils\FileSystem;
+use Automad\GUI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -164,6 +166,28 @@ class Accounts {
 	
 		return $output;
 		
+	}
+
+
+	/**
+	 *	Optionally remove posted accounts and 
+	 *	return the accounts grid.
+	 *
+	 *	@return array $output
+	 */
+
+	public static function edit() {
+
+		if ($delete = Request::post('delete')) {
+			$output = self::delete($delete);
+		} else {
+			$output = array();
+		}
+
+		$output['html'] = Users::render(self::get());
+
+		return $output;
+
 	}
 	
 	

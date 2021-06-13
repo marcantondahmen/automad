@@ -81,7 +81,7 @@ $this->element('header');
 				<form 
 				class="uk-form uk-form-stacked" 
 				data-am-init 
-				data-am-handler="shared_data"
+				data-am-controller="Shared::data"
 				>
 					<?php echo Loading::render(); ?>
 				</form>
@@ -91,7 +91,7 @@ $this->element('header');
 				<form 
 				class="uk-form uk-form-stacked" 
 				data-am-init 
-				data-am-handler="files" 
+				data-am-controller="FileCollection::edit" 
 				data-am-confirm="<?php Text::e('confirm_delete_files'); ?>"
 				>
 					<?php echo Loading::render(); ?>

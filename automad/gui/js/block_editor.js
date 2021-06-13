@@ -276,7 +276,7 @@
 
 	$(document).on('ajaxComplete', function (e, xhr, settings) {
 
-		if (settings.url.includes('page_data') || settings.url.includes('shared_data') || settings.url.includes('inpage_edit')) {
+		if (settings.url.includes('Page::data') || settings.url.includes('Shared::data') || settings.url.includes('InPage::edit')) {
 			Automad.blockEditor.init();
 		}
 

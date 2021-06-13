@@ -36,8 +36,8 @@
 
 
 namespace Automad\GUI\Utils;
-use Automad\Core;
 
+use Automad\Core\Regex;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -163,11 +163,11 @@ class Keys {
 				array(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_CLOSE), 
 				$content
 			);
-			preg_match_all('/' . Core\Regex::variableKeyGUI() . '/is', $content, $matches);
+			preg_match_all('/' . Regex::variableKeyGUI() . '/is', $content, $matches);
 			$keys = $matches['varName'];
 			
 			// Match markup to get includes recursively.
-			preg_match_all('/' . Core\Regex::markup() . '/is', $content, $matches, PREG_SET_ORDER);
+			preg_match_all('/' . Regex::markup() . '/is', $content, $matches, PREG_SET_ORDER);
 		
 			foreach ($matches as $match) {
 			
@@ -237,6 +237,6 @@ class Keys {
 		return array_unique(array_diff($keys, self::$reserved));
 		
 	}
-	
-		
+
+
 }

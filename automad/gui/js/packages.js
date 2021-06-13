@@ -93,7 +93,7 @@
 			// Trigger filter also when packages got reloaded.
 			$(document).ajaxComplete(function (e, xhr, settings) {
 				
-				if (settings.url == '?ajax=get_packages') {
+				if (settings.url == '?controller=PackageManager::getPackages') {
 					update();
 				}
 				
@@ -111,13 +111,13 @@
 
 				var $this = $(this);
 
-				$.get('?ajax=get_packages', function (data) {
+				$.get('?controller=PackageManager::getPackages', function (data) {
 
 					if (data.html) {
 
 						$this.html(data.html);
 
-						$.get('?ajax=outdated_packages', function (data) {
+						$.get('?controller=PackageManager::getOutdatedPackages', function (data) {
 
 							if (data.buffer) {
 

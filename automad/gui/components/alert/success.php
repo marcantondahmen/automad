@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2019-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,30 +35,39 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core\Cache;
-use Automad\GUI\Utils\Text;
-use Automad\System\Composer;
+namespace Automad\GUI\Components\Alert;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Update all packages.
+/**
+ *	The success alert component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-$output = array();
+class Success {
 
-$Composer = new Composer();
-$output['error'] = $Composer->run('update');
-$output['trigger'] = 'composerDone';
-	
-if (!$output['error']) {
-	$output['success'] = Text::get('success_packages_updated_all');
-	Cache::clear();
+
+	/**
+	 *	Render a success alert box.
+	 *
+	 *	@param string $text
+	 *	@return string The rendered alert box markup
+	 */
+
+	public static function render($text) {
+
+		return <<< HTML
+			<div class="uk-alert uk-alert-success">
+				$text
+			</div>
+HTML;
+
+	}
+
+
 }
-
-$this->jsonOutput($output);
-
-?>

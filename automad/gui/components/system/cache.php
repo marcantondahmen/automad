@@ -97,7 +97,7 @@ class Cache {
 			$purge = <<< HTML
 					<!-- Purge Cache -->
 					<p>$Text->sys_cache_purge_info</p>
-					<form data-am-handler="purge_cache">
+					<form data-am-controller="Cache::purge">
 						<button type="submit" class="uk-button uk-button-success uk-button-large">
 							$Text->sys_cache_purge
 							&nbsp;<i class="uk-icon-angle-right"></i>
@@ -112,7 +112,7 @@ HTML;
 				<!-- Cache Enable / Settings -->
 				<form 
 				class="uk-form uk-form-stacked" 
-				data-am-handler="update_config" 
+				data-am-controller="Config::update" 
 				data-am-auto-submit
 				>
 					<!-- Cache Enable -->
@@ -142,7 +142,7 @@ HTML;
 				<div id="am-cache-actions" class="am-toggle-container uk-margin-large-top">
 					<!-- Clear Cache -->
 					<p>$Text->sys_cache_clear_info</p>	
-					<form data-am-handler="clear_cache">
+					<form data-am-controller="Cache::clear">
 						<button type="submit" class="uk-button uk-button-success uk-button-large uk-margin-bottom">
 							<i class="uk-icon-refresh"></i>&nbsp;
 							$Text->sys_cache_clear

@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,40 +35,73 @@
  */
 
 
-namespace Automad\GUI\Components\Autocomplete;
+namespace Automad\GUI\Controllers;
 
+use Automad\Core\Request;
+use Automad\GUI\Components\Autocomplete\Link;
+use Automad\GUI\Components\Autocomplete\Search;
+use Automad\GUI\Components\Form\Field;
+use Automad\GUI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The autocomplete JSON data for links component. 
+ *	The UI controller class.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Link {
+class UI {
 
 
 	/**
-	 *	Return a JSON formatted string to be used as autocomplete infomation in a link field.
+	 *	Return the autocomplete values for a link field.
 	 *
-	 *	@param object $Automad
-	 *	@return string The JSON encoded autocomplete data
+	 *	@return array the autocomplete data as part of the $output array
 	 */
-	
-	public static function render($Automad) {
-		
-		$output = array();
-		$autocomplete = array();
 
-		foreach ($Automad->getCollection() as $Page) {
-			$autocomplete[] = array('value' => $Page->url, 'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)));
+	public static function autocompleteLink() {
+
+		$Automad = UICache::get();
+		
+		return Link::render($Automad);
+
+	}
+
+
+	/**
+	 *	Return the autocomplete values for a search field.
+	 *
+	 *	@return array the autocomplete data as part of the $output array
+	 */
+
+	public static function autocompleteSearch() {
+
+		$Automad = UICache::get();
+
+		return Search::render($Automad);
+
+	}
+
+
+	/**
+	 *	Return the UI component for a variable field based on the name.
+	 *
+	 *	@return array the component HTML as part of the $output array
+	 */
+
+	public static function field() {
+
+		$output = array();
+
+		if ($name = Request::post('name')) {
+			$Automad = UICache::get();
+			$output['html'] = Field::render($Automad, $name, '', true);
 		}
 
-		$output['autocomplete'] = $autocomplete;
 		return $output;
 
 	}

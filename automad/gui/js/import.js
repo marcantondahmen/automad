@@ -64,7 +64,7 @@
 					$form = $modal.closest('form'),
 					url = $modal.data(Automad.util.dataCamelCase(ai.dataAttr.url));
 
-				$.post('?ajax=import', { url: url, importUrl: importUrl}, function(data) {
+				$.post('?controller=File::import', { url: url, importUrl: importUrl}, function(data) {
 					
 					if (data.error) {
 

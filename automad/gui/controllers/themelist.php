@@ -36,11 +36,11 @@
 
 
 namespace Automad\GUI\Controllers;
+
 use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\GUI\Controllers\Theme;
 use Automad\GUI\Utils\FileSystem;
-
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -64,14 +64,14 @@ class Themelist {
 	
 	
 	/**
-	 * 	The Theme objects array.
+	 *	The Theme objects array.
 	 */
 	
 	private $themes;
 	
 	
 	/**
-	 * 	The constructor.
+	 *	The constructor.
 	 */
 	
 	public function __construct() {

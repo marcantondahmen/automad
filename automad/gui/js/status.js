@@ -58,8 +58,8 @@
 				var $container = $(this),
 					item = $container.data(Automad.util.dataCamelCase(s.dataAttr));
 				
-				$.post('?ajax=status', {'item': item}, function(data) {
-					$container.html(data.status);		
+				$.post('?controller=Status::get', {'item': item}, function(data) {
+					$container.html(data.status);
 				}, 'json');
 				
 			});
@@ -78,14 +78,14 @@
 			$doc.ajaxComplete(function(e, xhr, settings) {
 				
 				var triggers = [
-								'?ajax=users', 
-								'?ajax=add_user', 
-								'?ajax=edit_headless_template',
-								'?ajax=reset_headless_template',
-								'?ajax=update_config',
-								'?ajax=get_packages',
-								'?ajax=update_system'
-							];
+					'?controller=Accounts::edit', 
+					'?controller=Accounts::add', 
+					'?controller=Headless::editTemplate',
+					'?controller=Headless::resetTemplate',
+					'?controller=Config::update',
+					'?controller=PackageManager::getPackages',
+					'?controller=System::update'
+				];
 
 				if (triggers.includes(settings.url)) {
 					s.get();

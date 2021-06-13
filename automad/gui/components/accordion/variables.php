@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,18 +35,62 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\GUI\Components\Accordion;
+use Automad\GUI\Components\Form\Group;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Move a page to an existing parent page.
+/**
+ *	The variable accordion item component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
+class Variables {
 
-$this->jsonOutput($this->getContent()->movePage());
+
+	/**
+	 *	A group of variable fields in an accordion.
+	 *
+	 *	@param object $Automad 
+	 *	@param array $keys 
+	 *	@param array $data 
+	 *	@param object $theme
+	 *	@param string $title
+	 *	@return string the rendered accordion item
+	 */
+
+	public static function render($Automad, $keys, $data, $Theme, $title) {
+
+		if (empty($keys)) {
+			return '';
+		}
+
+		$fn = function($expression) {
+			return $expression;
+		};
+
+		return <<< HTML
+			<div class="uk-accordion-title">
+				$title &mdash;
+				{$fn(count($keys))}
+			</div>
+			<div class="uk-accordion-content">
+				{$fn(Group::render(
+					$Automad,
+					$keys,
+					$data,
+					false,
+					$Theme
+				))}
+			</div>
+HTML;
+
+	}
 
 
-?>
+}

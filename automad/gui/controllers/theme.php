@@ -36,9 +36,9 @@
 
 
 namespace Automad\GUI\Controllers;
+
 use Automad\Core\Str;
 use Automad\GUI\Utils\FileSystem;
-
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,70 +35,58 @@
  */
 
 
-namespace Automad\GUI\Components\System;
-use Automad\Core\Str;
-use Automad\GUI\Components\Form\Select;
-use Automad\GUI\Utils\Text;
+namespace Automad\GUI\Components\Layout;
 
+use Automad\GUI\Components\Grid\Packages as GridPackages;
+use Automad\GUI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The language system setting component. 
+ *	The packages layout.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Language {
+class Packages {
 
 
 	/**
-	 * 	Renders the language component.
-	 * 
-	 *	@return string The rendered HTML
+	 *	Render the packages layout.
+	 *
+	 *	@param array $packages
+	 *	@return string the rendered packages layout.
 	 */
 
-	public static function render() {
+	public static function render($packages) {
 
-		$Text = Text::getObject();
-		$languages = array();
-		
-		foreach (glob(dirname(AM_FILE_GUI_TEXT_MODULES) . '/*.txt') as $file) {
-			
-			if (strpos($file, 'english.txt') !== false) {
-				$value = '';
-			} else {
-				$value = Str::stripStart($file, AM_BASE_DIR);
-			}
-
-			$key = ucfirst(str_replace('.txt', '', basename($file)));
-			$languages[$key] = $value;
-
-		}
-
-		$button = Select::render(
-			'language', 
-			$languages, 
-			AM_FILE_GUI_TRANSLATION,
-			'',
-			'uk-button-large uk-button-success'
-		);
+		$fn = function($expression) {
+			return $expression;
+		};
 
 		return <<< HTML
-				<p>$Text->sys_language_info</p>
-				<form 
-				class="uk-form uk-form-stacked"
-				data-am-controller="Config::update" 
-				data-am-auto-submit
+			<form class="uk-display-inline-block" data-am-controller="PackageManager::updateAll">
+				<button 
+				class="uk-button uk-button-success"
+				data-uk-modal="{target:'#am-modal-update-all-packages-progress',keyboard:false,bgclose:false}"
 				>
-					<input type="hidden" name="type" value="language" />
-					$button
-				</form>
+					<i class="uk-icon-refresh"></i>&nbsp;
+					{$fn(Text::get('packages_update_all'))}
+				</button>&nbsp;
+			</form>
+			<a 
+			href="https://packages.automad.org" 
+			class="uk-button uk-button-link uk-hidden-small" 
+			target="_blank"
+			>
+				<i class="uk-icon-folder-open-o"></i>&nbsp;
+				{$fn(Text::get('packages_browse'))}
+			</a>
+			{$fn(GridPackages::render($packages))}
 HTML;
-
 
 	}
 

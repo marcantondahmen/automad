@@ -80,7 +80,7 @@ class SelectImage {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-handler="select_image" 
+						data-am-controller="Image::select" 
 						$url
 						data-am-dashboard="$dashboard"
 						data-am-init

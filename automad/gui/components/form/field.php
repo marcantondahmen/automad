@@ -353,7 +353,7 @@ HTML;
 
 	private static function isInPage() {
 
-		return (strpos(Request::query('ajax'), 'inpage') !== false);
+		return (Request::query('controller') == 'InPage::edit');
 
 	}
 

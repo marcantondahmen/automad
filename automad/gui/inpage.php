@@ -143,7 +143,7 @@ class InPage {
 							<div class="uk-container uk-container-center">
 								<form 
 								class="uk-form uk-form-stacked" 
-								data-am-inpage-handler="${urlGui}?ajax=inpage_edit"
+								data-am-inpage-controller="${urlGui}?controller=InPage::edit"
 								>
 									<input type="hidden" name="url" value="$request" />
 									<input type="hidden" name="query" value="$queryString" />

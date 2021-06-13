@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,55 +35,65 @@
  */
 
 
-namespace Automad\GUI\Components\System;
-use Automad\GUI\Utils\Text;
+namespace Automad\GUI\Utils;
 
+use Automad\Core\Automad;
+use Automad\Core\Cache;
+use Automad\Core\Debug;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The debug system setting component. 
+ *	The UI cache is the cache of the main Automad object including private pages that are
+ *	only accessible when a user is logged in. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Debug {
+class UICache {
 
 
 	/**
-	 * 	Renders the debug component.
-	 * 
-	 *	@return string The rendered HTML
+	 *	Restore Automad object including private pages from cache or create 
+	 *	a new version and write it to the cache if outdated.
+	 *
+	 *	@return object the Automad object
 	 */
+	
+	public static function get() {
 
-	public static function render() {
+		$Cache = new Cache();
 
-		$Text = Text::getObject();
-
-		if (AM_DEBUG_ENABLED) { 
-			$enabled = 'checked'; 
+		if ($Cache->automadObjectCacheIsApproved()) {
+			$Automad = $Cache->readAutomadObjectFromCache();
 		} else {
-			$enabled = '';
+			$Automad = new Automad();
+			$Cache->writeAutomadObjectToCache($Automad);
+			Debug::log('Created a new Automad instance for the dashboard');
 		}
 
-		return <<< HTML
-				<p>$Text->sys_debug_info</p>
-				<form class="uk-form" data-am-controller="Config::update" data-am-auto-submit>
-					<input type="hidden" name="type" value="debug" />
-					<label class="am-toggle-switch-large" data-am-toggle>
-						$Text->sys_debug_enable
-						<input 
-						type="checkbox" 
-						name="debug" 
-						value="on"
-						$enabled
-						/>
-					</label>
-				</form>
-HTML;
+		return $Automad;
+
+	}
+
+
+	/**
+	 *	Force a rebuild of the UI cache.
+	 *
+	 *	@return object The fresh Automad object
+	 */
+
+	public static function rebuild() {
+
+		$Automad = new Automad();
+		$Cache = new Cache();
+		$Cache->writeAutomadObjectToCache($Automad);
+		Debug::log('Rebuilt Automad cache for the dashboard');
+
+		return $Automad;
 
 	}
 

@@ -63,6 +63,7 @@ class Search {
 	
 	public static function render($Automad) {
 		
+		$output = array();
 		$titles = array();
 		$urls = array();
 		$tags = array();
@@ -86,7 +87,9 @@ class Search {
 			$values[]['value'] = $value;
 		}
 		
-		return json_encode($values, JSON_UNESCAPED_SLASHES);
+		$output['autocomplete'] = $values;
+		
+		return $output;
 		
 	}
 	

@@ -115,7 +115,7 @@
 			
 			u.$input.fileupload({
 				
-				url: '?ajax=upload',
+				url: '?controller=FileCollection::upload',
 				dataType: 'json',
 				dropZone: u.$dropzone,
 				sequentialUploads: true,

@@ -104,8 +104,8 @@
 			// Temporary disable button to avoid submitting the form twice.
 			$button.prop('disabled', true);
 			
-			// Post form data to the handler.
-			$.post('?ajax=copy_resized', param, function(data) {
+			// Post form data to the controller.
+			$.post('?controller=Image::copyResized', param, function(data) {
 				
 				// Re-enable button again after AJAX call.
 				$button.prop('disabled', false);

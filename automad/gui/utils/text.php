@@ -36,8 +36,9 @@
 
 
 namespace Automad\GUI\Utils;
-use Automad\Core;
 
+use Automad\Core\Parse;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -81,7 +82,7 @@ class Text {
 	
 	public static function parseModules() {
 		
-		Text::$modules = Core\Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
+		Text::$modules = Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
 		
 		if (AM_FILE_GUI_TRANSLATION) {
 			
@@ -89,7 +90,7 @@ class Text {
 			
 			if (is_readable($translationFile)) {
 				
-				$translation = Core\Parse::textFile($translationFile);
+				$translation = Parse::textFile($translationFile);
 				
 				if (is_array($translation)) {
 					Text::$modules = array_merge(Text::$modules, $translation);
@@ -100,7 +101,7 @@ class Text {
 		}
 		
 		array_walk(Text::$modules, function(&$item) {
-			$item = Core\Str::markdown($item, true);
+			$item = Str::markdown($item, true);
 			// Remove all line breaks to avoid problems when using text modules in JS notify.
 			$item = str_replace(array("\n", "\r"), '', $item);
 		});
@@ -150,6 +151,6 @@ class Text {
 		}, ARRAY_FILTER_USE_KEY);
 
 	}
-	
-	
+
+
 }

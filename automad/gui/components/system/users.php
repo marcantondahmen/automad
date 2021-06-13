@@ -79,7 +79,7 @@ class Users {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-handler="users" 
+						data-am-controller="Accounts::edit" 
 						data-am-init 
 						data-am-confirm="$Text->confirm_delete_users"
 						></form>
@@ -88,7 +88,7 @@ class Users {
 								<i class="uk-icon-close"></i>&nbsp;
 								$Text->btn_close
 							</button>
-							<button type="button" class="uk-button uk-button-success" data-am-submit="users">
+							<button type="button" class="uk-button uk-button-success" data-am-submit="Accounts::edit">
 								<i class="uk-icon-user-times"></i>&nbsp;
 								$Text->btn_remove_selected
 							</button>
@@ -109,7 +109,7 @@ class Users {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-handler="add_user" 
+						data-am-controller="Accounts::add" 
 						data-am-close-on-success="#am-add-user-modal"
 						>		
 							<input 
@@ -169,7 +169,7 @@ class Users {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-handler="change_password" 
+						data-am-controller="User::changePassword" 
 						data-am-close-on-success="#am-change-password-modal"
 						>
 							<input 

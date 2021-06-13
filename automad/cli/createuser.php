@@ -34,15 +34,14 @@
  *	https://automad.org/license
  */
 
-
-use Automad\GUI as GUI;
+use Automad\GUI\Controllers\Accounts;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL;
 
 if (is_readable(AM_FILE_ACCOUNTS)) {
-	$accounts = GUI\Accounts::get();
+	$accounts = Accounts::get();
 } else {
 	$accounts = array();
 }
@@ -50,9 +49,9 @@ if (is_readable(AM_FILE_ACCOUNTS)) {
 $name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 $password = substr(str_shuffle(MD5(microtime())), 0, 10);
 
-$accounts[$name] = GUI\Accounts::passwordHash($password);
+$accounts[$name] = Accounts::passwordHash($password);
 
-if (GUI\Accounts::write($accounts)) {
+if (Accounts::write($accounts)) {
 	echo PHP_EOL;
 	echo '--------------------' . PHP_EOL;
 	echo 'Name:     ' . $name . PHP_EOL;

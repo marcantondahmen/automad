@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,35 +35,39 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core\Cache;
-use Automad\Core\Request;
-use Automad\GUI\Utils\Text;
-use Automad\System\Composer;
+namespace Automad\GUI\Components\Alert;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Update single package.
+/**
+ *	The danger alert component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-$output = array();
+class Danger {
 
-if ($package = Request::post('package')) {
 
-	$Composer = new Composer();
-	$output['error'] = $Composer->run('update --with-dependencies ' . $package);
-	$output['trigger'] = 'composerDone';
-		
-	if (!$output['error']) {
-		$output['success'] = Text::get('success_package_updated') . '<br>' . $package;
-		Cache::clear();
+	/**
+	 *	Render a danger alert box.
+	 *
+	 *	@param string $text
+	 *	@return string The rendered alert box markup
+	 */
+
+	public static function render($text) {
+
+		return <<< HTML
+			<div class="uk-alert uk-alert-danger">
+				$text
+			</div>
+HTML;
+
 	}
 
+
 }
-
-$this->jsonOutput($output);
-
-?>

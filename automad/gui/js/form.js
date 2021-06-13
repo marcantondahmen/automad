@@ -54,19 +54,19 @@
 			 *
 			 * 	FORM ATTRIBUTES:
 			 *	
-			 * 	data-am-handler="handler"			Generally, all forms with a [data-am-handler] attribute will be sumbitted to their AJAX handler, 
-			 *										specified in "data-am-handler".
+			 * 	data-am-controller="controller"		Generally, all forms with a [data-am-controller] attribute will be sumbitted to their AJAX controller, 
+			 *										specified in "data-am-controller".
 			 *										For example: 
-			 * 										"<form data-am-handler="page_data"></form>"
-			 *										will submit the form to "?ajax=page_data"
+			 * 										"<form data-am-controller="Page::data"></form>"
+			 *										will submit the form to "?controller=Page::data"
 			 *
-			 *      								Note that a page can only (!) have once a handler with the same name.
-			 *      								Having multiple forms with the same handler confuses button and watch states.
+			 *      								Note that a page can only (!) have once a controller with the same name.
+			 *      								Having multiple forms with the same controller confuses button and watch states.
 			 *
 			 * 	data-am-dashboard="url"				The URL of the dashboard.
 			 * 										This is required to add a base URL to AJAX requests in in-page editing.
 			 * 
-			 * 	data-am-url="page"					To notify the AJAX handler, that the request belongs to a certain page, the URL has to be 
+			 * 	data-am-url="page"					To notify the AJAX controller, that the request belongs to a certain page, the URL has to be 
 			 *										included in the request.
 			 *										Therefore the data attribute "data-am-url" must be added to the form tag. 
 			 *						
@@ -92,12 +92,12 @@
 			 *
 			 * 	BUTTON ATTRIBUTES:
 			 *
-			 *	data-am-submit="handler"			A button or link with that attribute will be used as submit button for a form having a
-			 * 										"data-am-handler" attribute set to the given handler value.
+			 *	data-am-submit="controller"			A button or link with that attribute will be used as submit button for a form having a
+			 * 										"data-am-controller" attribute set to the given controller value.
 			 * 										Note that those buttons automatically get disabled on load and re-enable on changes.
 			 */
 			
-			handler: 		'data-am-handler',
+			controller: 		'data-am-controller',
 			dashboard:		'data-am-dashboard',
 			url:			'data-am-url',
 			submit:			'data-am-submit',
@@ -116,12 +116,12 @@
 		ajaxPost: function(e) {
 			
 			/*
-			 *	Generally, all forms with a [data-am-handler] attribute will be sumbitted to their AJAX handler,
-			 * 	specified in "data-am-handler".
+			 *	Generally, all forms with a [data-am-controller] attribute will be sumbitted to their AJAX controller,
+			 * 	specified in "data-am-controller".
 			 *
 			 * 	For example: 
-			 *  "<form data-am-handler="page_data"></form>"
-			 *  will submit the form to "?ajax=page_data"
+			 *  "<form data-am-controller="Page::data"></form>"
+			 *  will submit the form to "?controller=Page::data"
 			 *
 			 * 	Server Data:
 			 * 	The function expects the data from the server to be in JSON format.
@@ -150,7 +150,7 @@
 				$form = $(e.target),
 				
 				// Action
-				handler = $form.data(Automad.util.dataCamelCase(f.dataAttr.handler)),
+				controller = $form.data(Automad.util.dataCamelCase(f.dataAttr.controller)),
 
 				// Dashboard base URL.
 				dashboard = $form.data(Automad.util.dataCamelCase(f.dataAttr.dashboard)),
@@ -173,8 +173,8 @@
 				dashboard = '';
 			}
 
-			// Post form data to the handler.
-			$.post(dashboard + '?ajax=' + handler, param, function(data) {
+			// Post form data to the controller.
+			$.post(dashboard + '?controller=' + controller, param, function(data) {
 			
 				// In case the returned JSON contains a redirect URL, simply redirect the page.
 				// A redirect might be needed, in case other elements on the page, like the navigation, have to be updated as well.
@@ -285,15 +285,15 @@
 			// Submitting forms.
 			
 			// Handle AJAX post on submit event.
-		 	$doc.on('submit', '[' + da.handler + ']', f.confirm);
+		 	$doc.on('submit', '[' + da.controller + ']', f.confirm);
 			
 			// Submit forms when clicking buttons (possibly outside the form) having "data-am-submit" attribute.
 			$doc.on('click', '[' + da.submit + ']', function(e) {
 				
-				var	handler = $(this).data(Automad.util.dataCamelCase(da.submit));
+				var	controller = $(this).data(Automad.util.dataCamelCase(da.submit));
 				
 				e.preventDefault();
-				$('form[' + da.handler + '="' + handler + '"]').submit();
+				$('form[' + da.controller + '="' + controller + '"]').submit();
 				
 			});
 			
@@ -339,10 +339,10 @@
 
 			// Handle enter key.
 			
-			// Disable form submission on pressing enter in input field in general, if form has 'data-am-handler' attribute.
+			// Disable form submission on pressing enter in input field in general, if form has 'data-am-controller' attribute.
 			// Prevent accidental submission of parent form when pressing enter in nested and injected input fields 
 			// such as the file rename dialog.
-			$doc.on('keydown', '[' + da.handler + '] input', function(e) {
+			$doc.on('keydown', '[' + da.controller + '] input', function(e) {
 				
 				if (e.which == 13) {
 					e.preventDefault();
@@ -384,30 +384,30 @@
 				// On an 'ajaxComplete' event it is important to actually only disable the related submit button and
 				// not just all on the current page. Otherwise a file upload would disable the save button of the page
 				// data section as well. Therefore the actual ajax request has to be analysed.
-				var	handler = settings.url.replace('?ajax=', '');
+				var	controller = settings.url.replace('?controller=', '');
 				
-				$('button[' + da.submit + '="' + handler + '"]').prop('disabled', true);
+				$('button[' + da.submit + '="' + controller + '"]').prop('disabled', true);
 				
 				// Removed class for unsaved form fields from children.
-				$('[' + da.handler + '="' + handler + '"]').find('.' + f.unsavedClassInput).removeClass(f.unsavedClassInput);
+				$('[' + da.controller + '="' + controller + '"]').find('.' + f.unsavedClassInput).removeClass(f.unsavedClassInput);
 				
 			});
 			
-			// Add 'am-unsaved-{handler}' class to the <html> element on form changes
+			// Add 'am-unsaved-{controller}' class to the <html> element on form changes
 			// and re-enable related (only!) submit buttons after touching any form element.
 			var onFormChange = function() {
 
-					var $form = $(this).closest('[' + da.handler + ']'),
-						handler = $form.data(Automad.util.dataCamelCase(da.handler));
+					var $form = $(this).closest('[' + da.controller + ']'),
+						controller = $form.data(Automad.util.dataCamelCase(da.controller));
 
-					$('html').addClass(f.unsavedClassPrefix + handler);
-					$('button[' + da.submit + '="' + handler + '"]:disabled, .am-inpage [type="submit"]').prop('disabled', false);
+					$('html').addClass(f.unsavedClassPrefix + controller);
+					$('button[' + da.submit + '="' + controller + '"]:disabled, .am-inpage [type="submit"]').prop('disabled', false);
 
 					// Change label color to flag input as changed.
 					$(this).closest('.uk-form-row, .am-inpage form').find('.uk-form-label').addClass(f.unsavedClassInput);
 
 				},
-				noAuto = `[${da.handler}]:not([${da.autoSubmit}])`,
+				noAuto = `[${da.controller}]:not([${da.autoSubmit}])`,
 				noExclude = `:not([${da.watchExclude}])`;
 
 			$doc.on('drop cut paste keydown', 
@@ -427,12 +427,12 @@
 				onFormChange
 			);
 			
-			// Remove 'am-unsaved-{handler}' class from <html> element on saving a form with a matching {handler}.
-			$doc.on('submit', '[' + da.handler + '], .am-inpage form', function(){
+			// Remove 'am-unsaved-{controller}' class from <html> element on saving a form with a matching {controller}.
+			$doc.on('submit', '[' + da.controller + '], .am-inpage form', function(){
 				
-				var handler = $(this).data(Automad.util.dataCamelCase(da.handler));
+				var controller = $(this).data(Automad.util.dataCamelCase(da.controller));
 				
-				$('html').removeClass(f.unsavedClassPrefix + handler);
+				$('html').removeClass(f.unsavedClassPrefix + controller);
 				
 			});
 			
@@ -537,10 +537,10 @@
 					// Clear registered changes class from html and reset the form.
 					$(this).find('form').each(function() {
 						
-						var handler = $(this).data(Automad.util.dataCamelCase(Automad.form.dataAttr.handler));
+						var controller = $(this).data(Automad.util.dataCamelCase(Automad.form.dataAttr.controller));
 						
 						// Remove unsaved class from html element.
-						$('html').removeClass(Automad.form.unsavedClassPrefix + handler);
+						$('html').removeClass(Automad.form.unsavedClassPrefix + controller);
 						
 						// Reset form.
 						this.reset();

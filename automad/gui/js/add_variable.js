@@ -72,7 +72,7 @@
 			
 				if (name) {
 					
-					$.post('?ajax=add_variable', {name: name}, function(data) {
+					$.post('?controller=UI::field', {name: name}, function(data) {
 						
 						// Hide modal on success.
 						UIkit.modal(a.selectors.modal).hide();

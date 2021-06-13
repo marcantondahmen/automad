@@ -132,8 +132,8 @@
 			// Temporary disable button to avoid submitting the form twice.
 			$button.prop('disabled', true);
 			
-			// Post form data to the handler.
-			$.post('?ajax=edit_file_info', param, function(data) {
+			// Post form data to the controller.
+			$.post('?controller=File::editInfo', param, function(data) {
 				
 				// Re-enable button again after AJAX call.
 				$button.prop('disabled', false);

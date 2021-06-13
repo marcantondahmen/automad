@@ -68,9 +68,9 @@
 		
 		if ($('.am-dashboard').length > 0) {
 			
-			$.post('?ajax=autocomplete_search', function(data) {
+			$.post('?controller=UI::autocompleteSearch', function(data) {
 
-				var options = { source: data, minLength: 2 };
+				var options = { source: data.autocomplete, minLength: 2 };
 
 				$(Automad.search.selector + ' .uk-autocomplete').each(function() {
 					UIkit.autocomplete($(this), options);

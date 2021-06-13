@@ -73,7 +73,7 @@ class Headless {
 				<!-- Headless Mode Enable -->
 				<form 
 				class="uk-form uk-form-stacked" 
-				data-am-handler="update_config" 
+				data-am-controller="Config::update" 
 				data-am-auto-submit
 				>
 					<!-- Headless Mode Enable -->
@@ -122,14 +122,14 @@ class Headless {
 								<a 
 								href="#"
 								class="uk-button"
-								data-am-submit="reset_headless_template"
+								data-am-submit="Headless::resetTemplate"
 								>
 									<i class="uk-icon-refresh"></i>&nbsp;
 									$Text->btn_reset
 								</a>
 								<button 
 								class="uk-button uk-button-success"
-								data-am-submit="edit_headless_template"
+								data-am-submit="Headless::editTemplate"
 								>
 									<i class="uk-icon-check"></i>&nbsp;
 									$Text->btn_save
@@ -138,14 +138,14 @@ class Headless {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-handler="edit_headless_template" 
+						data-am-controller="Headless::editTemplate" 
 						data-am-init-on="resetHeadlessTemplate"
 						data-am-init
 						></form>
 					</div>
 				</div>
 				<form 
-				data-am-handler="reset_headless_template"
+				data-am-controller="Headless::resetTemplate"
 				data-am-confirm="$Text->confirm_reset_headless"
 				>
 					<input type="hidden" name="reset" value="1" />

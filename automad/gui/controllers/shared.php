@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
  *	                  ....
  *	                .:   '':.
@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2019-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -39,91 +39,78 @@ namespace Automad\GUI\Controllers;
 
 use Automad\Core\Cache;
 use Automad\Core\Request;
-use Automad\GUI\Components\Form\HeadlessEditor;
+use Automad\GUI\Components\Layout\SharedData;
 use Automad\GUI\Utils\FileSystem;
 use Automad\GUI\Utils\Text;
+use Automad\GUI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The headless controller.
+ *	The Shared data controller.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2019-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Headless extends \Automad\Core\Headless {
+class Shared {
 
 
 	/**
-	 *	Save the updated template or render the editor in case no template was posted.
+	 *	Send form when there is no posted data in the request or save data if there is.
 	 *
-	 *	@return array $output
-	 */
-
-	public static function editTemplate() {
-
-		$output = array();
-
-		if ($template = Request::post('template')) {
-
-			if (FileSystem::write(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM, $template)) {
-				Cache::clear();
-				$output['success'] = Text::get('success_saved');
-			}
-
-		} else {
-
-			$output['html'] = HeadlessEditor::render(self::loadTemplate());
-
-		}
-
-		return $output;
-
-	}
-
-
-	/**
-	 *	Get the content of the template in use.
-	 *
-	 *	@return string The content of the template in use
-	 */
-
-	public static function loadTemplate() {
-
-		$file = self::getTemplate();
-
-		if (is_readable($file)) {
-			return file_get_contents($file);
-		}
-
-	}
-
-
-	/**
-	 *	Reset the headless template by deleting the custom template file.
-	 * 
 	 *	@return array the $output array
 	 */
 
-	public static function resetTemplate() {
+	public static function data() {
 
+		$Automad = UICache::get();
 		$output = array();
 
-		if (Request::post('reset')) {
-
-			if (FileSystem::deleteFile(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM)) {
-				Cache::clear();
-				$output['trigger'] = 'resetHeadlessTemplate';
-				$output['success'] = Text::get('success_reset_headless');
-			}
+		if ($data = Request::post('data')) {
+			// Save changes.
+			$output = self::save($Automad, $data);
+		} else {
+			// If there is no data, just get the form ready.
+			$SharedData = new SharedData($Automad);
+			$output['html'] = $SharedData->render();
 		}
 
 		return $output;
 
 	}
 
+
+	/**
+	 *	Save shared data.
+	 *
+	 *	@param object $Automad
+	 *	@param array $data
+	 *	@return array the $output array
+	 */
+
+	private static function save($Automad, $data) {
+
+		$output = array();
+
+		if (is_writable(AM_FILE_SHARED_DATA)) {
+
+			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
+			Cache::clear();
+
+			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Automad->Shared->get(AM_KEY_THEME)) {
+				$output['reload'] = true;
+			} else {
+				$output['success'] = Text::get('success_saved');
+			}
+		} else {
+			$output['error'] = Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>';
+		}
+
+		return $output;
+	}
+	
 
 }

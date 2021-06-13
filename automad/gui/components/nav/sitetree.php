@@ -39,7 +39,7 @@ namespace Automad\GUI\Components\Nav;
 use Automad\Core\Request;
 use Automad\Core\Selection;
 use Automad\GUI\Content;
-
+use Automad\GUI\Controllers\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -105,7 +105,7 @@ class SiteTree {
 					
 					// Set title in tree.
 					$title = htmlspecialchars($Page->get(AM_KEY_TITLE));
-					$prefix = $Content->extractPrefixFromPath($Page->path);
+					$prefix = Page::extractPrefixFromPath($Page->path);
 					
 					if (strlen($prefix) > 0) {
 						$title = $prefix . ' &ndash; ' . $title;

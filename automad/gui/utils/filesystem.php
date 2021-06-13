@@ -36,8 +36,11 @@
 
 
 namespace Automad\GUI\Utils;
-use Automad\Core;
 
+use Automad\Core\Parse;
+use Automad\Core\Regex;
+use Automad\Core\Request;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,11 +53,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class FileSystem extends Core\FileSystem {
+class FileSystem extends \Automad\Core\FileSystem {
 	
 
 	/**
-	 * 	The cached array of items in the packages directory.
+	 *	The cached array of items in the packages directory.
 	 */
 
 	private static $packageDirectoryItems = array();
@@ -62,7 +65,7 @@ class FileSystem extends Core\FileSystem {
 	
 	/**
 	 *	Append a suffix to a path just before the trailing slash.
-	 *      
+	 * 
 	 *	@param string $path
 	 *	@param string $suffix
 	 *	@return string The path with appended suffix
@@ -76,9 +79,9 @@ class FileSystem extends Core\FileSystem {
 	
 	
 	/**
-	 * 	Open a data text file under the given path, read the data, 
-	 *  append a suffix to the title variable and write back the data.
-	 *      
+	 *	Open a data text file under the given path, read the data, 
+	 *	append a suffix to the title variable and write back the data.
+	 * 
 	 *	@param string $path   
 	 *	@param string $suffix 
 	 */
@@ -93,7 +96,7 @@ class FileSystem extends Core\FileSystem {
 			if (!empty($files)) {
 				
 				$file = reset($files);
-				$data = Core\Parse::textFile($file);
+				$data = Parse::textFile($file);
 				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
 				self::writeData($data, $file);
 						
@@ -105,8 +108,9 @@ class FileSystem extends Core\FileSystem {
 	
 
 	/**
-	 *  Unlike self::movePageDir(), this method only copies all files within a page directory without (!) any subdirectories.
-	 *      
+	 *	Unlike self::movePageDir(), this method only copies all files 
+	 *	within a page directory without (!) any subdirectories.
+	 * 
 	 *	@param string $source
 	 *	@param string $dest
 	 */
@@ -134,8 +138,8 @@ class FileSystem extends Core\FileSystem {
 	
 	
 	/**
-	 *  Deletes a file and its caption (if existing).
-	 *      
+	 *	Deletes a file and its caption (if existing).
+	 *
 	 *	@param string $file
 	 *	@return string Only error messages - false in case no errors occured!
 	 */
@@ -192,6 +196,27 @@ class FileSystem extends Core\FileSystem {
 
 
 	/**
+	 *	Return the file system path for the directory of a page based on $_POST['url'].
+	 *	In case URL is empty, return the '/shared' directory.
+	 *
+	 *	@param object $Automad
+	 *	@return string The full path to the related directory
+	 */
+
+	public static function getPathByPostUrl($Automad) {
+
+		$url = Request::post('url');
+
+		if ($url && ($Page = $Automad->getPage($url))) {
+			return FileSystem::fullPagePath($Page->path);
+		} else {
+			return AM_BASE_DIR . AM_DIR_SHARED . '/';
+		}
+
+	}
+
+
+	/**
 	 *	Get all items in the packages directory, optionally filtered by a regex string.
 	 *
 	 *	@param string $filter
@@ -230,7 +255,7 @@ class FileSystem extends Core\FileSystem {
 
 			if (!in_array(basename($item), $exclude)) {
 
-				$items[] = Core\Str::stripStart($item, $base);
+				$items[] = Str::stripStart($item, $base);
 				
 				if (is_dir($item)) {
 					$items = array_merge($items, self::listDirectoryRecursively($item, $base));
@@ -265,8 +290,8 @@ class FileSystem extends Core\FileSystem {
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 		
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
-		$prefix = ltrim(Core\Str::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
-		$title = Core\Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
+		$prefix = ltrim(Str::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
+		$title = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
 		
 		// If the title is an empty string after sanitizing, set it to 'untitled'.
 		if (!$title) {
@@ -442,7 +467,7 @@ class FileSystem extends Core\FileSystem {
 			
 			// Only keep variables keys starting with a letter. 
 			// (ignore any kind of system variable)
-			if (preg_match('/^' . Core\Regex::$charClassTextFileVariables . '+$/', $key)) {
+			if (preg_match('/^' . Regex::$charClassTextFileVariables . '+$/', $key)) {
 				$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
 			}
 			

@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,9 +35,9 @@
  */
 
 
-namespace Automad\GUI\Components\System;
-use Automad\Core\Str;
-use Automad\GUI\Components\Form\Select;
+namespace Automad\GUI\Components\Accordion;
+
+use Automad\GUI\Components\Form\Group;
 use Automad\GUI\Utils\Text;
 
 
@@ -45,60 +45,48 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The language system setting component. 
+ *	The unused variable accordion item component. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Language {
+class UnusedVariables {
 
 
 	/**
-	 * 	Renders the language component.
+	 *	All unused variable fields in an accordion.
 	 * 
-	 *	@return string The rendered HTML
+	 *	@param object $Automad
+	 *	@param array $keys
+	 *	@param array $data
+	 *	@param string $title
+	 *	@return string the rendered unused variables accordion item
 	 */
 
-	public static function render() {
+	public static function render($Automad, $keys, $data, $title) {
 
-		$Text = Text::getObject();
-		$languages = array();
-		
-		foreach (glob(dirname(AM_FILE_GUI_TEXT_MODULES) . '/*.txt') as $file) {
-			
-			if (strpos($file, 'english.txt') !== false) {
-				$value = '';
-			} else {
-				$value = Str::stripStart($file, AM_BASE_DIR);
-			}
+		$fn = function ($expression) {
+			return $expression;
+		};
 
-			$key = ucfirst(str_replace('.txt', '', basename($file)));
-			$languages[$key] = $value;
-
-		}
-
-		$button = Select::render(
-			'language', 
-			$languages, 
-			AM_FILE_GUI_TRANSLATION,
-			'',
-			'uk-button-large uk-button-success'
-		);
-
+		// Pass the prefix for all IDs related to adding variables 
+		// according to the IDs defined in JS.
 		return <<< HTML
-				<p>$Text->sys_language_info</p>
-				<form 
-				class="uk-form uk-form-stacked"
-				data-am-controller="Config::update" 
-				data-am-auto-submit
-				>
-					<input type="hidden" name="type" value="language" />
-					$button
-				</form>
+			<div class="uk-accordion-title">
+				$title &mdash;
+				<span data-am-count="#am-add-variable-container .uk-form-row"></span>
+			</div>
+			<div class="uk-accordion-content">
+				{$fn(Group::render(
+					$Automad,
+					$keys,
+					$data,
+					'am-add-variable'
+				))}
+			</div>
 HTML;
-
 
 	}
 

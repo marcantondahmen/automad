@@ -61,9 +61,17 @@ class Update {
 
 	public static function render() {
 
-		return  '<form class="uk-form uk-form-stacked" data-am-init data-am-handler="update_system">' .
-					Loading::render() .
-				'</form>';
+		$loader = Loading::render();
+
+		return <<< HTML
+			<form 
+			class="uk-form uk-form-stacked" 
+			data-am-init 
+			data-am-controller="System::update"
+			>
+				$loader
+			</form>
+HTML;
 
 	}
 

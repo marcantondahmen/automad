@@ -63,8 +63,8 @@ class Link {
 
 		$Text = Text::getObject();
 
-		// Add dashboard URL to handler to make dialog work in in-Page edit mode.
-		$autocomplete = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?ajax=autocomplete_link';
+		// Add dashboard URL to controller to make dialog work in in-Page edit mode.
+		$autocomplete = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?controller=UI::autocompleteLink';
 
 		return <<< HTML
 

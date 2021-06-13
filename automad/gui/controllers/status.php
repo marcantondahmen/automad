@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *	                  ....
  *	                .:   '':.
@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2014-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,22 +35,40 @@
  */
 
 
-namespace Automad\GUI;
+namespace Automad\GUI\Controllers;
 
+use Automad\Core\Request;
+use Automad\GUI\Components\Status\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	Add a new page without a page context.
- *	This handler does exactly the same like the 'add_subpage' handler.
- *	Since there can only be one form-handler per page and there is also the 
- *	possibility to add a page as a subpage when editing a page, this is the handler to add a page
- *	from the sidebar.
+/**
+ *	The status controller.
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
+class Status {
 
-$this->jsonOutput($this->getContent()->addPage());
+
+	/**
+	 *	Get a config item status.
+	 *
+	 *	@return array the $output array
+	 */
+
+	public static function get() {
+
+		if ($item = Request::post('item')) {
+			return Response::render($item);
+		}
+
+		return array();
+
+	}
 
 
-?>
+}
