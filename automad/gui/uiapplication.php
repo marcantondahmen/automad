@@ -43,7 +43,6 @@ use Automad\Core\Request;
 use Automad\Core\Shared;
 use Automad\GUI\Controllers\Themelist;
 use Automad\GUI\Controllers\User;
-use Automad\GUI\Utils\AutomadProvider;
 use Automad\GUI\Utils\FileSystem;
 use Automad\GUI\Utils\Prefix;
 use Automad\GUI\Utils\Text;
@@ -53,14 +52,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Dashboard class loads the required dashboard elements for the requested context. 
+ *	The UIApplication class loads the required dashboard elements for the requested context. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2014-2021 Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Dashboard {
+class UIApplication {
 	
 	
 	/**
