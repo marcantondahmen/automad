@@ -211,7 +211,7 @@ class Page {
 					$title
 				);
 
-				$output['redirect'] = '?context=edit_page&url=' . urlencode($Page->parentUrl);
+				$output['redirect'] = '?view=Page&url=' . urlencode($Page->parentUrl);
 				Debug::log($Page->url, 'deleted');
 
 				Cache::clear();
@@ -385,10 +385,10 @@ class Page {
 
 
 	/**
-	 *	Return updated context URL based on $path.
+	 *	Return updated view URL based on $path.
 	 *
 	 *	@param string $path
-	 *	@return string The context URL to the new page
+	 *	@return string The view URL to the new page
 	 */
 
 	private static function contextUrlByPath($path) {
@@ -404,7 +404,7 @@ class Page {
 			if ($Page->path == $path) {
 				// Just return a redirect URL (might be the old URL), 
 				// to also reflect the possible renaming in all the GUI's navigation.
-				return '?context=edit_page&url=' . urlencode($key);
+				return '?view=Page&url=' . urlencode($key);
 			}
 			
 		}

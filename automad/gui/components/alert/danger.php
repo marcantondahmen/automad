@@ -61,11 +61,7 @@ class Danger {
 
 	public static function render($text) {
 
-		return <<< HTML
-			<div class="uk-alert uk-alert-danger">
-				$text
-			</div>
-HTML;
+		return Alert::render($text, 'uk-alert-danger');
 
 	}
 

@@ -70,7 +70,7 @@ class Search {
 		
 		return  <<< HTML
 				<form class="uk-form uk-width-1-1" action="$dashboard" method="get" data-am-search>
-					<input type="hidden" name="context" value="search" />
+					<input type="hidden" name="view" value="Search" />
 					<div class="uk-autocomplete uk-width-1-1">
 						<input
 						class="uk-form-controls uk-width-1-1"

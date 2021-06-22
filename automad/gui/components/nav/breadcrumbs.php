@@ -93,7 +93,7 @@ class Breadcrumbs {
 					$class .= ' class="uk-hidden-small"';
 				}
 				
-				$html .= '<li' . $class . '><a href="?context=edit_page&url=' . urlencode($url) . '">' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '</a></li>';
+				$html .= '<li' . $class . '><a href="?view=Page&url=' . urlencode($url) . '">' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '</a></li>';
 				
 				if ($i > 1) {
 					$html .= '<li' . $class . '><i class="uk-icon-angle-right"></i></li>';

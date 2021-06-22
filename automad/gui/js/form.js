@@ -156,7 +156,7 @@
 				dashboard = $form.data(Automad.util.dataCamelCase(f.dataAttr.dashboard)),
 				
 				// Optional URL parameter.
-				// Only needed, to identify a page, in case the form relates to a certain page (edit_page.php).
+				// Only needed, to identify a page, in case the form relates to a certain page.
 				// Can be omitted for general form actions.
 				url = $form.data(Automad.util.dataCamelCase(f.dataAttr.url));
 							

@@ -144,7 +144,7 @@ class Page {
 
 	public static function render($Page) {
 
-		$link = '?context=edit_page&url=' . urlencode($Page->get(AM_KEY_ORIG_URL));
+		$link = '?view=Page&url=' . urlencode($Page->get(AM_KEY_ORIG_URL));
 
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
 		$images = FileSystem::globGrep($path . '*.*', '/(jpg|jpeg|png|gif)$/i');

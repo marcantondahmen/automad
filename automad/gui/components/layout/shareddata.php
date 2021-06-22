@@ -283,7 +283,7 @@ HTML;
 					$themes
 				</ul>
 				<a 
-				href="?context=packages" 
+				href="?view=packages" 
 				class="uk-button uk-button-large uk-button-success uk-margin-top"
 				>
 					<i class="uk-icon-download"></i>&nbsp;

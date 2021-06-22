@@ -86,7 +86,7 @@ session_start();
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 
 	$Dashboard = new GUI\Dashboard();
-	$output = $Dashboard->output;
+	$output = $Dashboard->get();
 	
 } else {
 

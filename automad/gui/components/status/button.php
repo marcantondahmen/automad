@@ -67,7 +67,7 @@ class Button {
 
 		return <<< HTML
 				<a
-		 		href="?context=system_settings#$tab"
+		 		href="?view=System#$tab"
 				class="uk-button uk-button-large uk-width-1-1 uk-text-left uk-text-truncate"
 				data-am-status="$status"
 		 		>

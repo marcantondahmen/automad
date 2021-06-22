@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,60 +35,40 @@
  */
 
 
-namespace Automad\GUI;
-use Automad\Core\Request;
-use Automad\GUI\Components\Grid\Pages;
-use Automad\GUI\Utils\Text;
+namespace Automad\GUI\Components\Alert;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
-/*
- *	The GUI search results page.
+/**
+ *	A generic alert component. 
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
  */
 
-
-$this->guiTitle = $this->guiTitle . ' / ' . Text::get('search_title') . ' > "' . Request::query('query') . '"';
-$this->element('header');
+class Alert {
 
 
-$results = $this->getContent()->getSearchResults();
+	/**
+	 *	Render a generic alert box.
+	 *
+	 *	@param string $text
+	 *	@param string $class
+	 *	@return string The rendered alert box markup
+	 */
+
+	public static function render($text, $class = false) {
+
+		return <<< HTML
+			<div class="uk-alert $class">
+				$text
+			</div>
+HTML;
+
+	}
 
 
-?>
-		
-		<ul class="uk-subnav uk-subnav-pill uk-margin-top">
-			<li class="uk-disabled"><i class="uk-icon-search"></i></li>
-			<li><a href=""><?php Text::e('search_title'); ?></a></li>
-		</ul>
-		<h2 class="uk-margin-top-remove">
-			<i class="uk-icon-angle-double-left"></i>
-			<?php echo Request::query('query'); ?>
-			<i class="uk-icon-angle-double-right"></i>&nbsp;
-			<span class="uk-badge"><?php echo count($results); ?></span>
-		</h2>
-		
-<?php
-
-if ($results) {
-	
-	echo Pages::render($results);
-	
-} else {
-	
-?>
-		
-		<div class="uk-alert uk-alert-danger uk-margin-top">
-			<?php Text::e('search_no_results'); ?>
-		</div>
-			
-<?php
-	
 }
-
-
-$this->element('footer');
-
-
-?>

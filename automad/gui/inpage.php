@@ -108,9 +108,9 @@ class InPage {
 		
 		$urlBase = AM_BASE_URL;
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlData = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_data'));
-		$urlFiles = $urlGui . '?' . http_build_query(array('context' => 'edit_page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_files'));
-		$urlSys = $urlGui . '?context=system_settings';
+		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_data'));
+		$urlFiles = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_files'));
+		$urlSys = $urlGui . '?view=System';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		$request = AM_REQUEST;
 		$logoSvg = file_get_contents(AM_BASE_DIR . '/automad/gui/svg/logo.svg');

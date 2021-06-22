@@ -38,7 +38,6 @@
 namespace Automad\GUI\Components\Nav;
 use Automad\Core\Request;
 use Automad\Core\Selection;
-use Automad\GUI\Content;
 use Automad\GUI\Controllers\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -74,8 +73,6 @@ class SiteTree {
 		$selection = new Selection($Automad->getCollection());
 		$selection->filterByParentUrl($parent);
 		$selection->sortPages();
-		
-		$Content = new Content($Automad);
 		
 		if ($pages = $selection->getSelection(false)) {
 			

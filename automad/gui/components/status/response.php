@@ -93,7 +93,7 @@ class Response {
 			if (AM_DEBUG_ENABLED) {
 				$output['status'] = <<< HTML
 					<a 
-					href="?context=system_settings#$tab" 
+					href="?view=System#$tab" 
 					class="am-u-button am-u-button-danger" 
 					title="$tooltip" 
 					data-uk-tooltip="{pos:'bottom-right'}"
