@@ -36,8 +36,8 @@
 
 
 namespace Automad\GUI\Components\Accordion;
-use Automad\GUI\Components\Form\Group;
 
+use Automad\GUI\Components\Form\Group;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
