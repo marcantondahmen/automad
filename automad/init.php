@@ -85,8 +85,8 @@ session_start();
 // Split GUI from regular pages.
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
 
-	$UIApplication = new GUI\UIApplication();
-	$output = $UIApplication->output;
+	$Dashboard = new GUI\Dashboard();
+	$output = $Dashboard->output;
 	
 } else {
 
