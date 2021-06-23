@@ -108,12 +108,12 @@ echo
 echo "Updating version numbers ..."
 echo "<?php define('AM_VERSION', '$tag'); ?>" > automad/version.php
 
-for json in {automad,packages/{*/*,*}}/{package,theme}.json
+for json in {automad,packages/{*/*,*}}/{package,package-lock,theme}.json
 do
 	if [[ -f $json ]]
 	then
 		mv $json $json.bak
-		sed "/version/s/[0-9][^\"]*/$tag/" $json.bak > $json
+		sed "1,/version/s/[0-9][^\"]*/$tag/" $json.bak > $json
 		rm $json.bak
 	fi
 done
