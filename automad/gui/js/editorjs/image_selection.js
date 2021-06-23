@@ -66,7 +66,7 @@ class AutomadEditorImageSelection {
 
 			fields.appendChild(item);
 
-			Automad.selectImage.dialog(false, true, (value) => {
+			Automad.selectImage.dialog(false, false, (value) => {
 				input.value = value;
 				input.dispatchEvent(new Event('keydown', { bubbles: true }));
 			});
