@@ -43,6 +43,7 @@ class AutomadBlockPagelist {
 	static get sanitize() {
 		return {
 			type: false,
+			excludeHidden: false,
 			matchUrl: false,
 			filter: false,
 			template: false,
@@ -70,6 +71,7 @@ class AutomadBlockPagelist {
 
 		this.data = {
 			type: data.type || '',
+			excludeHidden: data.excludeHidden !== undefined ? data.excludeHidden : true,
 			matchUrl: data.matchUrl || '',
 			filter: data.filter || '',
 			template: data.template || '',
@@ -105,6 +107,21 @@ class AutomadBlockPagelist {
 					${create.label(t('pagelist_url_regex')).outerHTML}
 					${create.editable(['cdx-input', 'am-block-match-url'], 'work|blog', this.data.matchUrl).outerHTML}
 				</li>
+				<li class="uk-width-medium-1-1">
+					<div class="uk-form-row uk-margin-small-top">
+						<label
+						class="${this.data.excludeHidden == true ? 'uk-active' : ''} am-toggle-switch uk-text-truncate uk-button uk-text-left uk-width-1-1"
+						data-am-toggle
+						>
+							${t('pagelist_exclude_hidden')}
+							<input 
+							type="checkbox" 
+							class="am-block-exclude-hidden"
+							${this.data.excludeHidden == true ? 'checked' : ''}
+							>
+						</label>
+					</div>
+				</li>
 				<li class="uk-width-medium-1-3">
 					${create.label(t('pagelist_type')).outerHTML}
 					${create.select(['cdx-input', 'am-block-type'], ['all', 'children', 'related', 'siblings'], this.data.type).outerHTML}
@@ -136,6 +153,7 @@ class AutomadBlockPagelist {
 
 		this.inputs = {
 			type: this.wrapper.querySelector('.am-block-type'),
+			excludeHidden: this.wrapper.querySelector('.am-block-exclude-hidden'),
 			matchUrl: this.wrapper.querySelector('.am-block-match-url'),
 			filter: this.wrapper.querySelector('.am-block-filter'),
 			template: this.wrapper.querySelector('.am-block-template'),
@@ -160,6 +178,7 @@ class AutomadBlockPagelist {
 
 		return Object.assign(this.data, {
 			type: this.inputs.type.value,
+			excludeHidden: this.inputs.excludeHidden.checked,
 			matchUrl: stripNbsp(this.inputs.matchUrl.innerHTML),
 			filter: stripNbsp(this.inputs.filter.innerHTML),
 			template: stripNbsp(this.inputs.template.innerHTML),

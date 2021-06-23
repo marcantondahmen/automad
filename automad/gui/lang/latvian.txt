@@ -490,6 +490,10 @@ editor_pagelist_default: Noklusējuma veidne
 
 -
 
+editor_pagelist_exclude_hidden: Izslēgt slēptās lapas
+
+-
+
 editor_pagelist_url_regex: URL regex filtrs
 
 -

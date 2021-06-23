@@ -490,6 +490,10 @@ editor_pagelist_default: Oletusmalli
 
 -
 
+editor_pagelist_exclude_hidden: Sulje piilotetut sivut
+
+-
+
 editor_pagelist_url_regex: URL Regex -suodatin
 
 -

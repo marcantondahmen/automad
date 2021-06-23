@@ -490,6 +490,10 @@ editor_pagelist_default: Sjálfgefið sniðmát
 
 -
 
+editor_pagelist_exclude_hidden: Útiloka falinn síður
+
+-
+
 editor_pagelist_url_regex: Vefslóð Regex sía
 
 -

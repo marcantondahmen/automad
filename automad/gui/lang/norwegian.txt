@@ -490,6 +490,10 @@ editor_pagelist_default: Standard mal
 
 -
 
+editor_pagelist_exclude_hidden: Utelukke skjulte sider
+
+-
+
 editor_pagelist_url_regex: URL Regex-filter
 
 -

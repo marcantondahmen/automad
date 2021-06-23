@@ -490,6 +490,10 @@ editor_pagelist_default: Шаблон за замовчуванням
 
 -
 
+editor_pagelist_exclude_hidden: Виключити приховані сторінки
+
+-
+
 editor_pagelist_url_regex: Фільтр регулярних виразів URL
 
 -

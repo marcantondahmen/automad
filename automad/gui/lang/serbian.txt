@@ -490,6 +490,10 @@ editor_pagelist_default: Подразумевани образац
 
 -
 
+editor_pagelist_exclude_hidden: Искључите скривене странице
+
+-
+
 editor_pagelist_url_regex: УРЛ регуларни израз
 
 -

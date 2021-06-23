@@ -490,6 +490,10 @@ editor_pagelist_default: Plantilla predeterminada
 
 -
 
+editor_pagelist_exclude_hidden: Excluir páginas ocultas
+
+-
+
 editor_pagelist_url_regex: Filtro Regex de URL
 
 -

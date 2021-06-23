@@ -490,6 +490,10 @@ editor_pagelist_default: Numatytasis šablonas
 
 -
 
+editor_pagelist_exclude_hidden: Išskirti paslėptus puslapius
+
+-
+
 editor_pagelist_url_regex: URL reguliavimo filtras
 
 -

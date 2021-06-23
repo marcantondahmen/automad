@@ -490,6 +490,10 @@ editor_pagelist_default: Domyślny szablon
 
 -
 
+editor_pagelist_exclude_hidden: Wyklucz ukryte strony
+
+-
+
 editor_pagelist_url_regex: URL Regex Filter
 
 -

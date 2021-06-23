@@ -490,6 +490,10 @@ editor_pagelist_default: Προεπιλεγμένο πρότυπο
 
 -
 
+editor_pagelist_exclude_hidden: Αποκλείστε κρυμμένες σελίδες
+
+-
+
 editor_pagelist_url_regex: Φίλτρο Regex URL
 
 -
