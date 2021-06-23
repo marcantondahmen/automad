@@ -490,6 +490,10 @@ editor_pagelist_default: Standardskabelon
 
 -
 
+editor_pagelist_exclude_hidden: Ekskluder skjulte sider
+
+-
+
 editor_pagelist_url_regex: URL Regex-filter
 
 -

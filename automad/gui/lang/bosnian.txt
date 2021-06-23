@@ -490,6 +490,10 @@ editor_pagelist_default: Zadani predložak
 
 -
 
+editor_pagelist_exclude_hidden: Isključite skrivene stranice
+
+-
+
 editor_pagelist_url_regex: URL regularni izraz
 
 -
