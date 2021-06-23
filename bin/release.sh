@@ -37,7 +37,7 @@ ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
-bash $dir/phpunit.sh
+bash bin/phpunit.sh
 echo
 
 
