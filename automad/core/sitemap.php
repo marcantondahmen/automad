@@ -37,6 +37,7 @@
 
 namespace Automad\Core;
 
+use Automad\GUI\User as User;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -60,13 +61,17 @@ class Sitemap {
 	
 	public function __construct($collection) {
 		
-		$sitemap = AM_BASE_DIR . '/sitemap.xml';
-	
-		// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
-		if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
-			$this->generate($collection, $sitemap);
-		} else {
-			Debug::log('Permissions denied!');
+		if (!User::get()) {
+
+			$sitemap = AM_BASE_DIR . '/sitemap.xml';
+
+			// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.
+			if ((is_writable(AM_BASE_DIR) && !file_exists($sitemap)) || is_writable($sitemap)) {
+				$this->generate($collection, $sitemap);
+			} else {
+				Debug::log('Permissions denied!');
+			}
+
 		}
 	
 	}

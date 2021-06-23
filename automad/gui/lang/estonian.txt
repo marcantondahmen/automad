@@ -490,6 +490,10 @@ editor_pagelist_default: Vaikemall
 
 -
 
+editor_pagelist_exclude_hidden: Välista peidetud leheküljed
+
+-
+
 editor_pagelist_url_regex: URL-i regex-filter
 
 -

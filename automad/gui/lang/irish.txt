@@ -490,6 +490,10 @@ editor_pagelist_default: Teimpléad Réamhshocraithe
 
 -
 
+editor_pagelist_exclude_hidden: Eisiamh na leathanaigh i bhfolach
+
+-
+
 editor_pagelist_url_regex: Scagaire URL Regex
 
 -

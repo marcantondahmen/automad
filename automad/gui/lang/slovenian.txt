@@ -490,6 +490,10 @@ editor_pagelist_default: Privzeta predloga
 
 -
 
+editor_pagelist_exclude_hidden: Izključite skrite strani
+
+-
+
 editor_pagelist_url_regex: Filter regularnih izrazov URL
 
 -

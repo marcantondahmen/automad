@@ -70,6 +70,7 @@ class Pagelist extends Paragraph {
 		$defaults = array(
 			'type' => '',
 			'matchUrl' => '',
+			'excludeHidden' => true,
 			'filter' => '',
 			'template' => '',
 			'excludeCurrent' => true,

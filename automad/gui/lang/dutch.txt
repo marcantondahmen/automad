@@ -490,6 +490,10 @@ editor_pagelist_default: Standaardsjabloon
 
 -
 
+editor_pagelist_exclude_hidden: Verborgen pagina's uitsluiten
+
+-
+
 editor_pagelist_url_regex: URL Regex-filter
 
 -

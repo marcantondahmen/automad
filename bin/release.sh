@@ -19,6 +19,11 @@
 #	9. 	Push changes to origin
 
 
+# Change to the base directory of the repository.
+dir=$(dirname "$0")
+cd "$dir/.."
+
+
 # Test branch.
 if [[ $(git branch | grep \* | cut -d ' ' -f2) != "develop" ]]
 then
@@ -32,7 +37,7 @@ ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
-bash phpunit.sh
+bash bin/phpunit.sh
 echo
 
 
@@ -103,12 +108,12 @@ echo
 echo "Updating version numbers ..."
 echo "<?php define('AM_VERSION', '$tag'); ?>" > automad/version.php
 
-for json in {automad,packages/{*/*,*}}/{package,theme}.json
+for json in {automad,packages/{*/*,*}}/{package,package-lock,theme}.json
 do
 	if [[ -f $json ]]
 	then
 		mv $json $json.bak
-		sed "/version/s/[0-9][^\"]*/$tag/" $json.bak > $json
+		sed "1,/version/s/[0-9][^\"]*/$tag/" $json.bak > $json
 		rm $json.bak
 	fi
 done
@@ -155,7 +160,7 @@ echo
 
 # Commit changes.
 echo "Committing changes ..."
-git add -A && git commit -m "build(release): prepared release $tag"
+git add -A && git commit -m "build(release): prepare release $tag"
 echo
 
 
@@ -167,7 +172,7 @@ echo
 
 # Merging.
 echo "Merging branch develop ..."
-git merge develop --no-ff -m "build(release): merged branch develop (release $tag)"
+git merge develop --no-ff -m "build(release): merge branch develop (release $tag)"
 echo
 
 

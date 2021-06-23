@@ -490,6 +490,10 @@ editor_pagelist_default: Standardmall
 
 -
 
+editor_pagelist_exclude_hidden: Utesluta dolda sidor
+
+-
+
 editor_pagelist_url_regex: URL-regexfilter
 
 -

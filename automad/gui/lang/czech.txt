@@ -490,6 +490,10 @@ editor_pagelist_default: Výchozí šablona
 
 -
 
+editor_pagelist_exclude_hidden: Vyloučit skryté stránky
+
+-
+
 editor_pagelist_url_regex: Filtr regulárních výrazů URL
 
 -
