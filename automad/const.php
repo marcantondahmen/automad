@@ -110,8 +110,7 @@ Config::set('AM_DIR_CACHE', '/cache');
 Config::set('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
 Config::set('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
 Config::set('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
-Config::set('AM_DIR_GUI_INC', '/automad/gui/inc');
-Config::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the GUI.
+Config::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 // FILE
 Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)	
@@ -124,7 +123,7 @@ Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PRE
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_OBJECT_USER_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_user');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
-Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/english.txt');
+Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/ui/lang/english.txt');
 Config::set('AM_FILE_GUI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
 Config::set('AM_ALLOWED_FILE_TYPES', 
 	// Archives

@@ -37,7 +37,7 @@
 
 
 use Automad\Core as Core;
-use Automad\GUI as GUI;
+use Automad\UI as UI;
 use Automad\System as System;
 
 

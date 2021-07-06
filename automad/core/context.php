@@ -93,7 +93,7 @@ class Context {
 	
 	public function set($Page) {
 		
-		// Test whether $Page is empty - that can happen, when accessing the GUI.
+		// Test whether $Page is empty - that can happen, when accessing the UI.
 		if (!empty($Page)) {
 			$this->Page = $Page;
 			Debug::log($Page, 'Set context to ' . $Page->url);

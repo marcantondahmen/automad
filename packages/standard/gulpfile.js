@@ -82,7 +82,7 @@ gulp.task('standard-js', function() {
 				'node_modules/sticky-sidebar/dist/sticky-sidebar.min.js'
 			]),
 			gulp.src([
-				'../../automad/gui/js/scroll_position.js',
+				'../../automad/ui/js/scroll_position.js',
 				'js/*.js'
 			])
 			.pipe(uglify(uglifyOptions))

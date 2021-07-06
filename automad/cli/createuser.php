@@ -34,7 +34,7 @@
  *	https://automad.org/license
  */
 
-use Automad\GUI\Controllers\Accounts;
+use Automad\UI\Controllers\Accounts;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 

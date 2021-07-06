@@ -2,7 +2,7 @@
 
 ## Installing Development Dependencies for the Dashboard
 
-To compile all GUI `dist` files, **Gulp** and other dependencies must be installed first in `automad/gui`. Run `gulp` to compile all `dist` files.
+To compile all UI `dist` files, **Gulp** and other dependencies must be installed first in `automad/ui`. Run `gulp` to compile all `dist` files.
 
     cd gui
     npm install
@@ -19,13 +19,7 @@ All namespaces and class names are `PascalCased`. All corresponding filenames ar
 However, unit test classes use an underscore to separate the `_Test` suffix from the actual tested class name for better readability. The corresponding files are lowercase as well and keep the underscore.
 
     Automad\Core\Parse_Test > automad/tests/core/parse_test.php
-    
-### Dashboard Context and AJAX Handler Files
 
-All context and AJAX handlers filenames are lowercase and use an underscore as word separator.
-
-    https://domain.com/dashboard?context=edit_shared > automad/gui/inc/context/edit_shared.php
-    
 ### Variables
 
 All class properties and normal variables are `camelCased`. Object variables of class instances are always named like the corresponding class and therefore are `PascalCased`.

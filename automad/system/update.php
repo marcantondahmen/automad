@@ -40,7 +40,7 @@ namespace Automad\System;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Str;
-use Automad\GUI\Utils\Text;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -272,7 +272,7 @@ class Update {
 	
 	private static function preloadClasses() {
 		
-		require_once(AM_BASE_DIR . '/automad/gui/utils/prefix.php');
+		require_once(AM_BASE_DIR . '/automad/ui/utils/prefix.php');
 		
 	}
 	

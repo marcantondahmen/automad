@@ -36,7 +36,7 @@
 
 
 namespace Automad\Core;
-use Automad\GUI\Controllers\User; 
+use Automad\UI\Controllers\User; 
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -350,7 +350,7 @@ class Automad {
 	
 	private function getRequestedPage() {
 		
-		// Check whether the GUI is requesting the currently edited page.
+		// Check whether the UI is requesting the currently edited page.
 		if (AM_REQUEST == AM_PAGE_DASHBOARD) {	
 			return $this->getPage(Request::post('url'));
 		} else {
@@ -365,7 +365,7 @@ class Automad {
 	
 
 	/**
-	 *	Get an array of reseverd URLs - all real directories within the base directory and the GUI URL. 
+	 *	Get an array of reseverd URLs - all real directories within the base directory and the UI URL. 
 	 */
 
 	private function getReservedUrls() {
@@ -375,7 +375,7 @@ class Automad {
 			$this->reservedUrls[] = '/' . basename($dir);
 		}
 		
-		// Add the GUI URL if enabled.
+		// Add the UI URL if enabled.
 		if (AM_PAGE_DASHBOARD) {
 			$this->reservedUrls[] = AM_PAGE_DASHBOARD;
 		}
