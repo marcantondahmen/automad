@@ -1,13 +1,5 @@
 # Automad Development Guide
 
-## Installing Development Dependencies for the Dashboard
-
-To compile all UI `dist` files, **Gulp** and other dependencies must be installed first in `automad/ui`. Run `gulp` to compile all `dist` files.
-
-    cd gui
-    npm install
-    gulp
-
 ## PHP Naming Convention
 
 ### Class Names and Class Files
@@ -32,13 +24,7 @@ All class properties and normal variables are `camelCased`. Object variables of 
 All methods are `camelCased`.
 
     $Cache->pageCacheIsApproved()
-    
-### Console Commands
 
-All console commands and corresponding filenames are lowercase and don't have any word separator.
-
-    php automad/console createuser > automad/cli/createuser.php
-    
 ### Composer Packages
 
 Composer packages are excluded from Automad's internal naming convention in terms of directory structure, filenames and classes.  
