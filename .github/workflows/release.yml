@@ -15,5 +15,5 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           draft: false
-          filter: "^(feat|fix)"
+          filter: "^(feat|fix|refactor)"
           strict: true
