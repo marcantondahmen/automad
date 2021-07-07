@@ -82,7 +82,7 @@ class CreateUser extends Command {
 
 	public static function run() {
 		
-		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL;
+		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
 		if (is_readable(AM_FILE_ACCOUNTS)) {
 			$accounts = Accounts::get();
@@ -95,12 +95,10 @@ class CreateUser extends Command {
 		$accounts[$name] = Accounts::passwordHash($password);
 
 		if (Accounts::write($accounts)) {
-			echo PHP_EOL;
 			echo '--------------------' . PHP_EOL;
 			echo 'Name:     ' . $name . PHP_EOL;
 			echo 'Password: ' . $password . PHP_EOL;
 			echo '--------------------' . PHP_EOL;
-			echo PHP_EOL;
 		} else {
 			echo 'Error! Creating of user account failed.' . PHP_EOL;
 		}

@@ -63,6 +63,7 @@ class Console {
 
 		echo 'Automad Console version ' . AM_VERSION . PHP_EOL . PHP_EOL;
 		$this->runCommand($argv);
+		echo PHP_EOL;
 
 	}
 

@@ -82,7 +82,7 @@ class Update extends Command {
 	public static function run() {
 
 		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			exit('Can\'t run updates within the development repository!' . PHP_EOL);
+			exit('Can\'t run updates within the development repository!' . PHP_EOL . PHP_EOL);
 		}
 
 		echo 'Automad version ' . AM_VERSION . PHP_EOL;
@@ -108,6 +108,6 @@ class Update extends Command {
 		}
 
 	}
-	
+
 
 }
