@@ -36,8 +36,14 @@
 
 
 namespace Automad\System;
-use Automad\Core as Core;
 
+use Automad\Core\Debug;
+use Automad\Core\FileSystem;
+use Automad\Core\Str;
+use Composer\Console\Application;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Process\PhpExecutableFinder;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -105,7 +111,7 @@ class Composer {
 		$this->pharUrl = 'https://getcomposer.org/download/' . $this->composerVersion . '/composer.phar';
 		$this->installDirCacheFile = AM_BASE_DIR . AM_DIR_CACHE . '/' . 
 									 AM_FILE_PREFIX_CACHE . '_composer_' . 
-									 Core\Str::sanitize($this->composerVersion, true) . 
+									 Str::sanitize($this->composerVersion, true) . 
 									 '_dir';
 		$this->setUp();
 
@@ -154,7 +160,7 @@ class Composer {
 			curl_close($curl);
 			fclose($fp);
 			
-			Core\Debug::log($phar, 'Downloaded Composer PHAR');
+			Debug::log($phar, 'Downloaded Composer PHAR');
 
 		}
 		
@@ -164,7 +170,7 @@ class Composer {
 
 
 	/**
-	 * 	Read the Composer install directory from cache to reuse the installation
+	 *	Read the Composer install directory from cache to reuse the installation
 	 *	in case Composer was already used before. In case Composer hasn't been used before,
 	 *	a new path will be generated and save to the cache.
 	 *
@@ -177,11 +183,11 @@ class Composer {
 		if (is_readable($this->installDirCacheFile)) {
 		
 			$installDir = file_get_contents($this->installDirCacheFile);
-			Core\Debug::log($installDir, 'Getting Composer installation directory from cache');
+			Debug::log($installDir, 'Getting Composer installation directory from cache');
 			
 			// To verify that the directory actually contains Composer, simply test for existance of the autoloader.
 			if (!is_readable($installDir . $this->extractionDir . $this->autoloader)) {
-				Core\Debug::log($installDir . $this->extractionDir . $this->autoloader, 'Autoloader not found');
+				Debug::log($installDir . $this->extractionDir . $this->autoloader, 'Autoloader not found');
 				return $this->newInstallDir();
 			}
 		
@@ -202,11 +208,11 @@ class Composer {
 
 	private function newInstallDir() {
 
-		$tmp = Core\FileSystem::getTmpDir();
+		$tmp = FileSystem::getTmpDir();
 		$installDir = $tmp . '/composer_' . time();
-		Core\Debug::log($installDir, 'Generating new Composer installation path');
-		Core\FileSystem::write($this->installDirCacheFile, $installDir);
-		Core\FileSystem::makeDir($installDir);
+		Debug::log($installDir, 'Generating new Composer installation path');
+		FileSystem::write($this->installDirCacheFile, $installDir);
+		FileSystem::makeDir($installDir);
 		
 		return $installDir;
 
@@ -230,14 +236,14 @@ class Composer {
 		set_time_limit(-1);
 		ini_set('memory_limit', -1);
 				
-		$input = new \Symfony\Component\Console\Input\StringInput($command);
-		$output = new \Symfony\Component\Console\Output\BufferedOutput();
-		$application = new \Composer\Console\Application();
+		$input = new StringInput($command);
+		$output = new BufferedOutput();
+		$application = new Application();
 		
 		$application->setAutoExit(false);
 		$application->setCatchExceptions(false);
 		
-		Core\Debug::log($command, 'Command');
+		Debug::log($command, 'Command');
 
 		$buffer = null;
 
@@ -245,7 +251,7 @@ class Composer {
 
 			$application->run($input, $output);
 			$buffer = $output->fetch();
-			Core\Debug::log($buffer, 'Buffer');
+			Debug::log($buffer, 'Buffer');
 
 		} catch (\Exception $e) {
 
@@ -256,7 +262,7 @@ class Composer {
 				return 'The exec() function is disabled in your php.ini file!';
 			}
 
-			$binFinder = new \Symfony\Component\Process\PhpExecutableFinder();
+			$binFinder = new PhpExecutableFinder();
 			$php = $binFinder->find();
 			$phar = $this->getInstallDir() . '/composer.phar';
 			$exitCode = null;
@@ -264,9 +270,9 @@ class Composer {
 			@exec("$php $phar $command 2>&1", $output, $exitCode);
 			$buffer = implode("\n", $output);
 
-			Core\Debug::log("$php $phar $command", 'Use exec() function as fallback');
-			Core\Debug::log($exitCode, 'exec() exit code');
-			Core\Debug::log($buffer, 'exec() buffer');
+			Debug::log("$php $phar $command", 'Use exec() function as fallback');
+			Debug::log($exitCode, 'exec() exit code');
+			Debug::log($buffer, 'exec() buffer');
 
 			if ($exitCode !== 0) {
 				return $e->getMessage();
@@ -276,8 +282,8 @@ class Composer {
 
 		$bufferNoWarning = preg_replace('/\<warning\>.*?\<\/warning\>\s*/is', '', $buffer);
 
-		Core\Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
-		Core\Debug::log($bufferNoWarning, 'Buffer without warning');
+		Debug::log(round(memory_get_peak_usage() / 1024 / 1024) . ' mb', 'Memory used');
+		Debug::log($bufferNoWarning, 'Buffer without warning');
 
 		if ($getBuffer) {
 			return $bufferNoWarning;
@@ -304,7 +310,7 @@ class Composer {
 			$file = $this->downloadPhar($installDir);
 			
 			if (!is_readable($file)) {
-				Core\Debug::log($file, 'Download of composer.phar failed');
+				Debug::log($file, 'Download of composer.phar failed');
 				return false;
 			}
 
@@ -318,13 +324,13 @@ class Composer {
 		$autoloader = $installDir . $this->extractionDir . $this->autoloader;
 
 		if (!is_readable($autoloader)) {
-			Core\Debug::log($autoloader, 'Composer autoloader not found');
+			Debug::log($autoloader, 'Composer autoloader not found');
 			return false;
 		}		
 
 		putenv('COMPOSER_HOME=' . $installDir . '/home');
 
-		Core\Debug::log($autoloader, 'Require Composer autoloader');
+		Debug::log($autoloader, 'Require Composer autoloader');
 		require_once($autoloader);
 
 		if ($updatePackageInstaller) {
