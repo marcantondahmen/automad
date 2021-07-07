@@ -36,9 +36,11 @@
 
 
 namespace Automad\System;
-use Automad\Core as Core;
-use Automad\GUI as GUI;
 
+use Automad\Core\FileSystem;
+use Automad\Core\Parse;
+use Automad\Core\Str;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -74,7 +76,7 @@ class Update {
 		
 		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
 		
-		Core\FileSystem::makeDir($backup);
+		FileSystem::makeDir($backup);
 		
 		foreach($items as $item) {
 			
@@ -85,9 +87,9 @@ class Update {
 			if (file_exists($itemPath)) {
 				
 				if (is_writable($itemPath) && is_writable(dirname($itemPath))) {
-					Core\FileSystem::makeDir(dirname($backupPath));
+					FileSystem::makeDir(dirname($backupPath));
 					$success = rename($itemPath, $backupPath);
-					self::log('Backing up ' . Core\Str::stripStart($itemPath, AM_BASE_DIR) . ' to ' . Core\Str::stripStart($backupPath, AM_BASE_DIR));
+					self::log('Backing up ' . Str::stripStart($itemPath, AM_BASE_DIR) . ' to ' . Str::stripStart($backupPath, AM_BASE_DIR));
 				} else {
 					$success = false;
 				}
@@ -129,7 +131,7 @@ class Update {
 	
 	private static function items() {
 		
-		$items = Core\Parse::csv(AM_UPDATE_ITEMS);
+		$items = Parse::csv(AM_UPDATE_ITEMS);
 		
 		if (is_array($items)) {
 			
@@ -156,7 +158,7 @@ class Update {
 		
 		$archive = AM_BASE_DIR . AM_UPDATE_TEMP . '/download/' . self::$timestamp . '.zip';
 		
-		Core\FileSystem::makeDir(dirname($archive));
+		FileSystem::makeDir(dirname($archive));
 		
 		set_time_limit(0);
 		
@@ -232,7 +234,7 @@ class Update {
 	private static function log($data) {
 		
 		$file = AM_BASE_DIR . AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
-		Core\FileSystem::makeDir(dirname($file));
+		FileSystem::makeDir(dirname($file));
 		file_put_contents($file, $data . "\r\n", FILE_APPEND);
 		
 		return $file;
@@ -270,7 +272,7 @@ class Update {
 	
 	private static function preloadClasses() {
 		
-		require_once(AM_BASE_DIR . '/automad/gui/prefix.php');
+		require_once(AM_BASE_DIR . '/automad/ui/utils/prefix.php');
 		
 	}
 	
@@ -286,13 +288,13 @@ class Update {
 		$items = self::items();
 		
 		if (!$items) {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_items') . '</div>';
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_items') . '</div>';
 			$output['cli'] = 'Invalid list of items to be updated!';
 			return $output;
 		}
 		
 		if (!self::permissionsGranted($items)) {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_permission') . '</div>';
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_permission') . '</div>';
 			$output['cli'] = 'Permission denied!';
 			return $output;
 		}
@@ -340,27 +342,27 @@ class Update {
 				$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
 				
 				$output['html'] = 	'<div class="uk-alert uk-alert-success">' . 
-										GUI\Text::get('sys_update_not_required') . ' ' .
-										GUI\Text::get('sys_update_current_version') . ' ' .
+										Text::get('sys_update_not_required') . ' ' .
+										Text::get('sys_update_current_version') . ' ' .
 										$version . '.' .
 									'</div>' .
 				 					'<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
 						   				'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' . 
-						   				GUI\Text::get('btn_open_log') .
+						   				Text::get('btn_open_log') .
 						   			'</a>';
 				
-				$output['success'] = GUI\Text::get('success_update');
+				$output['success'] = Text::get('success_update');
 				$output['cli'] = 'Successfully updated to version ' . $version;
 				
 			} else {
 				
-				$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_failed') . '</div>';
+				$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_failed') . '</div>';
 				
 			}
 			
 		} else {
 			
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . GUI\Text::get('error_update_download') . '</div>';
+			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_download') . '</div>';
 			
 		}
 		
@@ -408,10 +410,10 @@ class Update {
 					
 					$filename = AM_BASE_DIR . preg_replace('/^([\w\-]+)/', '', $name);
 
-					if (Core\FileSystem::write($filename, $zip->getFromName($name)) !== false) {
-						self::log('Extracted ' . Core\Str::stripStart($filename, AM_BASE_DIR));
+					if (FileSystem::write($filename, $zip->getFromName($name)) !== false) {
+						self::log('Extracted ' . Str::stripStart($filename, AM_BASE_DIR));
 					} else {
-						self::log('Error extracting ' . Core\Str::stripStart($filename, AM_BASE_DIR));
+						self::log('Error extracting ' . Str::stripStart($filename, AM_BASE_DIR));
 						$success = false;
 					}
 					

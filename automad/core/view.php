@@ -36,7 +36,7 @@
 
 
 namespace Automad\Core;
-use Automad\GUI as GUI;
+use Automad\UI as UI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -134,7 +134,7 @@ class View {
 		$this->headless = $headless;
 		$this->Runtime = new Runtime($Automad);
 		$this->Toolbox = new Toolbox($Automad);
-		$this->InPage = new GUI\InPage();
+		$this->InPage = new UI\InPage();
 		$Page = $Automad->Context->get();
 		
 		// Redirect page, if the defined URL variable differs from the original URL.

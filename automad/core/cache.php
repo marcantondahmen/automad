@@ -36,7 +36,7 @@
 
 
 namespace Automad\Core;
-use Automad\GUI as GUI;
+use Automad\UI\Controllers\User;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -196,7 +196,7 @@ class Cache {
 			$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
 			
 			// Disable page caching for in-page edit mode and define ui cache file.
-			if (GUI\User::get()) {
+			if (User::get()) {
 				$this->pageCachingIsEnabled = false;
 				Debug::log('Page cache is disabled during editing.');
 				$this->objectCacheFile = AM_FILE_OBJECT_USER_CACHE;

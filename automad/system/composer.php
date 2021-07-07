@@ -37,7 +37,6 @@
 
 namespace Automad\System;
 use Automad\Core as Core;
-use Automad\GUI as GUI;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');

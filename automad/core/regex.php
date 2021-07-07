@@ -387,7 +387,7 @@ class Regex {
 	
 	
 	/**
-	 * 	A simplified pattern to match all used variable names in a template (GUI).
+	 * 	A simplified pattern to match all used variable names in a template (UI).
 	 * 	
 	 *	@return string The regex pattern.
 	 */

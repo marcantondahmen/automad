@@ -45,8 +45,8 @@ if (version_compare(PHP_VERSION, $requiredVersion, '<')) {
 }
 
 
-use Automad\Core as Core;
-use Automad\GUI as GUI;
+use Automad\Core;
+use Automad\UI;
 
 
 // Set default timezone if not set.
@@ -82,11 +82,11 @@ session_set_cookie_params(0, '/', '', false, true);
 session_start();
 
 
-// Split GUI from regular pages.
+// Split UI from regular pages.
 if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
-	
-	$Dashboard = new GUI\Dashboard();
-	$output = $Dashboard->output;
+
+	$Dashboard = new UI\Dashboard();
+	$output = $Dashboard->get();
 	
 } else {
 

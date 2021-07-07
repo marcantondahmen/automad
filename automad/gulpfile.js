@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
-	distDashboard = 'gui/dist',
+	distDashboard = 'ui/dist',
 	distBlocks = 'blocks/dist',
 	cleanCSSOptions = {
 		format: { wrapAt: 500 },
@@ -66,7 +66,7 @@ gulp.task('blocks-js', function () {
 });
 
 
-// Concat, minify and prefix the GUI js.
+// Concat, minify and prefix the UI js.
 gulp.task('automad-js', function() {
 	
 	var	uglifyOptions = { 
@@ -81,15 +81,15 @@ gulp.task('automad-js', function() {
 	
 	return  merge2(
 				gulp.src([
-					'gui/js/*.js'
+					'ui/js/*.js'
 				])
 				.pipe(sort()),
 				gulp.src([
-					'gui/js/*/*.js'
+					'ui/js/*/*.js'
 				])
 				.pipe(sort()),
 				gulp.src([
-					'gui/js/editorjs/*/*.js'
+					'ui/js/editorjs/*/*.js'
 				])
 				.pipe(sort())
 			)
@@ -235,7 +235,7 @@ gulp.task('blocks-less', function() {
 // Compile, minify and prefix automad.less.
 gulp.task('automad-less', function() {
 
-	return 	gulp.src('gui/less/automad.less')
+	return 	gulp.src('ui/less/automad.less')
 			.pipe(less())
 			.on('error', onError)
 			.pipe(autoprefixer({ grid: false }))
@@ -269,12 +269,12 @@ gulp.task('watch', function() {
 
 	gulp.watch('blocks/js/*.js', gulp.series('blocks-js'));
 	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
-	gulp.watch('gui/js/*.js', gulp.series('automad-js'));
-	gulp.watch('gui/js/*/*.js', gulp.series('automad-js'));
-	gulp.watch('gui/js/*/*/*.js', gulp.series('automad-js'));
-	gulp.watch('gui/less/*.less', gulp.series('automad-less'));
-	gulp.watch('gui/less/editorjs/*.less', gulp.series('automad-less'));
-	gulp.watch('gui/less/editorjs/*/*.less', gulp.series('automad-less'));
+	gulp.watch('ui/js/*.js', gulp.series('automad-js'));
+	gulp.watch('ui/js/*/*.js', gulp.series('automad-js'));
+	gulp.watch('ui/js/*/*/*.js', gulp.series('automad-js'));
+	gulp.watch('ui/less/*.less', gulp.series('automad-less'));
+	gulp.watch('ui/less/editorjs/*.less', gulp.series('automad-less'));
+	gulp.watch('ui/less/editorjs/*/*.less', gulp.series('automad-less'));
 	
 });
 
