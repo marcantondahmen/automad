@@ -36,10 +36,10 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core\Parse as Parse;
-use Automad\Core\Image as Image;
-use Automad\Core\Str as Str;
 
+use Automad\Core\Parse;
+use Automad\Core\Image;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Gallery extends Paragraph {
+class Gallery extends Block {
 
 
 	/**

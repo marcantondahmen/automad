@@ -36,8 +36,8 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core\Str as Str;
 
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Header extends Paragraph {
+class Header extends Block {
 
 
 	/**	

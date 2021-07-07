@@ -36,9 +36,9 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core\View as View;
-use Automad\Core as Core;
 
+use Automad\Core\Blocks;
+use Automad\Core\View;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -101,8 +101,8 @@ class Snippet {
 
 		}
 
-		$View->mergeExtensionAssets(Core\Blocks::$extensionAssets);
-		Core\Blocks::$extensionAssets = $View->extensionAssets;
+		$View->mergeExtensionAssets(Blocks::$extensionAssets);
+		Blocks::$extensionAssets = $View->extensionAssets;
 		
 		self::$snippetIsRendering = false;
 

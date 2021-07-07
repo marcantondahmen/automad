@@ -49,23 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Paragraph {
-
-
-	/**
-	 *	Return a class attribute for the wrapping block element.
-	 *
-	 *	@param array $custom
-	 *	@return string the attribute string
-	 */
-
-	protected static function classAttr($custom = array()) {
-
-		$classes = array_merge(array('am-block'), $custom);
-
-		return 'class="' . join(' ', $classes) . '"';
-
-	}
+class Paragraph extends Block {
 
 
 	/**

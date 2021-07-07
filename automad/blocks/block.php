@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -37,36 +37,44 @@
 
 namespace Automad\Blocks;
 
-use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The raw HTML and markdown block.
+ *	The abstract base block.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Raw extends Block {
+abstract class Block {
 
 
-	/**	
-	 *	Render a raw block.
+	/**
+	 *	Render a paragraph block.
 	 *	
 	 *	@param object $data
 	 *	@param object $Automad
 	 *	@return string the rendered HTML
 	 */
 
-	public static function render($data, $Automad) {
+	abstract public static function render($data, $Automad);
 
-		$html = Str::markdown($data->code);
-		$class = self::classAttr();
 
-		return "<am-raw $class>$html</am-raw>";
+	/**
+	 *	Return a class attribute for the wrapping block element.
+	 *
+	 *	@param array $custom
+	 *	@return string the attribute string
+	 */
+
+	protected static function classAttr($custom = array()) {
+
+		$classes = array_merge(array('am-block'), $custom);
+
+		return 'class="' . join(' ', $classes) . '"';
 
 	}
 

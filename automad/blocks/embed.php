@@ -36,8 +36,8 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core as Core;
 
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Embed extends Paragraph {
+class Embed extends Block {
 
 
 	/**	
@@ -72,7 +72,7 @@ HTML;
 
 		if ($data->service == 'twitter') {
 
-			$url = Core\Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
+			$url = Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
 			$html = <<< HTML
 					<blockquote class="twitter-tweet tw-align-center" style="visibility: hidden;">
 						<a href="$url"></a>

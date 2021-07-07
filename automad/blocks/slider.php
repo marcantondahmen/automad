@@ -36,9 +36,9 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core\Parse as Parse;
-use Automad\Core\Image as Image;
 
+use Automad\Core\Parse;
+use Automad\Core\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Slider extends Paragraph {
+class Slider extends Block {
 
 
 	/**	

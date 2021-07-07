@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Delimiter extends Paragraph {
+class Delimiter extends Block {
 
 
 	/**	

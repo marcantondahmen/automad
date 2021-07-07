@@ -36,8 +36,8 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core as Core;
 
+use Automad\Core\Blocks;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Section extends Paragraph {
+class Section extends Block {
 
 
 	/**
@@ -64,7 +64,7 @@ class Section extends Paragraph {
 	public static function render($data, $Automad) {
 
 		$json = json_encode($data->content);
-		$html = Core\Blocks::render($json, $Automad);
+		$html = Blocks::render($json, $Automad);
 		$style = '';
 		$classes = array();
 

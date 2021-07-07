@@ -36,8 +36,6 @@
 
 
 namespace Automad\Blocks;
-use Automad\Core\Str as Str;
-
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Toc extends Paragraph {
+class Toc extends Block {
 
 
 	/**	

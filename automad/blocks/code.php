@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Code extends Paragraph {
+class Code extends Block {
 
 
 	/**	

@@ -36,8 +36,8 @@
 
 
 namespace Automad\Blocks;
-use Automad\System as System;
 
+use Automad\System\Mail as SystemMail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  *	@license MIT license - https://automad.org/license
  */
 
-class Mail extends Paragraph {
+class Mail extends Block {
 
 
 	/**	
@@ -77,7 +77,7 @@ class Mail extends Paragraph {
 			$options = array_merge($defaults, (array) $data);
 			$data = (object) $options;
 
-			$status = System\Mail::send($data, $Automad);
+			$status = SystemMail::send($data, $Automad);
 
 			if ($status) {
 				$status = "<h3>$status</h3>";
