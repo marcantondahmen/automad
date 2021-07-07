@@ -27,37 +27,53 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2018-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
  *	https://automad.org/license
  */
 
-use Automad\UI\Controllers\Accounts;
+
+namespace Automad\UI\Commands;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
-echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL;
 
-if (is_readable(AM_FILE_ACCOUNTS)) {
-	$accounts = Accounts::get();
-} else {
-	$accounts = array();
-}
+/**
+ *	The abstract base command class.
+ *
+ *	@author Marc Anton Dahmen
+ *	@copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
+ *	@license MIT license - https://automad.org/license
+ */
 
-$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
-$password = substr(str_shuffle(MD5(microtime())), 0, 10);
+abstract class Command {
 
-$accounts[$name] = Accounts::passwordHash($password);
 
-if (Accounts::write($accounts)) {
-	echo PHP_EOL;
-	echo '--------------------' . PHP_EOL;
-	echo 'Name:     ' . $name . PHP_EOL;
-	echo 'Password: ' . $password . PHP_EOL;
-	echo '--------------------' . PHP_EOL;
-	echo PHP_EOL;
-} else {
-	echo 'Error! Creating of user account failed.' . PHP_EOL;
+	/**
+	 *	Get the command name.
+	 *
+	 *	@return string the command name
+	 */
+
+	abstract public static function name();
+
+
+	/**
+	 *	Get the command help.
+	 *
+	 *	@return string the command help
+	 */
+
+	abstract public static function help();
+
+
+	/**
+	 *	The actual command action.
+	 */
+
+	abstract public static function run();
+
+
 }

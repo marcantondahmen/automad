@@ -36,14 +36,10 @@
  */
 
 
-use Automad\Core as Core;
-use Automad\UI as UI;
-use Automad\System as System;
+use Automad\UI\Console;
 
-
-// Test for CLI.
 if (http_response_code() || !defined('STDIN')) {
-    exit('CLI only!');
+	exit('CLI only!');
 }
 
 define('AUTOMAD', true);
@@ -53,26 +49,4 @@ define('AM_BASE_DIR', dirname(dirname(__FILE__)));
 require AM_BASE_DIR . '/automad/autoload.php'; 
 require AM_BASE_DIR . '/automad/const.php'; 
 
-echo 'Automad Console version ' . AM_VERSION . PHP_EOL;
-
-if (empty($argv[1])) {
-	
-	echo 'The following commands are available: ' . PHP_EOL . PHP_EOL;
-	
-	foreach (glob(AM_BASE_DIR . '/automad/cli/*') as $command) {
-		echo '  ' . str_replace('.php', '', basename($command)) . PHP_EOL;
-	}
-	
-	echo PHP_EOL;
-	
-} else {
-	
-	$command = AM_BASE_DIR . '/automad/cli/' . $argv[1] . '.php';
-	
-	if (is_readable($command)) {
-		require $command;
-	} else {
-		echo 'Command "' . $argv[1] . '" not found!' . PHP_EOL;
-	}
-	
-}
+$console = new Console($argv);
