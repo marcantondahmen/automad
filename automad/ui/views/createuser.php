@@ -55,6 +55,13 @@ class CreateUser extends View {
 
 
 	/**
+	 *	Disable navbar and sidebar.
+	 */
+
+	protected $hasNav = false;
+
+	
+	/**
 	 *	Render body.
 	 *
 	 *	@return string the rendered items
