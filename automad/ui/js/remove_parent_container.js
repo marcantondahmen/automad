@@ -45,7 +45,7 @@
 		var	$parent = $(this).parent();
 		
 		// Trigger change event on removal to detect removed form fields.
-		$parent.find('input, textarea, select').trigger('change');
+		$parent.find('input, textarea, select').trigger('keydown');
 		$parent.remove();
 		$(document).trigger('count.automad');
 		
