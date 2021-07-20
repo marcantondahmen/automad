@@ -70,6 +70,9 @@
 
 						const input = form.querySelector('input');
 
+						input.removeAttribute('disabled');
+
+						const autocomplete = form.querySelector('.uk-autocomplete');
 						const options = {
 								source: data.autocomplete,
 								minLength: 0,
@@ -89,15 +92,12 @@
 							`
 						};
 
-						input.removeAttribute('disabled');
-
-						const UIkitAutocomplete = UIkit.autocomplete($(form.querySelector('.uk-autocomplete')), options);
+						const UIkitAutocomplete = UIkit.autocomplete($(autocomplete), options);
+						
+						form.querySelector('.uk-dropdown').dataset.amPlaceholder = autocomplete.dataset.amDropdownEmpty;
 
 						input.addEventListener('focus', () => {
-
 							UIkitAutocomplete.show();
-							input.dispatchEvent(new Event('keyup'));
-
 						});
 
 						UIkitAutocomplete.on('selectitem.uk.autocomplete', () => {
@@ -108,7 +108,7 @@
 
 							setTimeout(() => {
 								input.value = '';
-							}, 50);
+							}, 20);
 
 						});
 

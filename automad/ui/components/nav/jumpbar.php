@@ -37,6 +37,7 @@
 
 namespace Automad\UI\Components\Nav;
 
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -66,20 +67,24 @@ class JumpBar {
 			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 
+		$Text = Text::getObject();
+
 		return <<< HTML
 				<form 
 				class="uk-form uk-width-1-1" 
 				data-am-controller="UI::jump" 
 				data-am-jumpbar
 				>
-					<div class="uk-autocomplete uk-width-1-1">
+					<div 
+					class="uk-autocomplete uk-width-1-1"
+					data-am-dropdown-empty="{$Text->jumpbar_dropdown_empty}"
+					>
 						<input
 						class="uk-form-controls uk-width-1-1"
 						name="target"
 						type="search"
 						placeholder="$placeholder"
 						$tooltip
-						required
 						data-am-watch-exclude
 						/>
 					</div> 
