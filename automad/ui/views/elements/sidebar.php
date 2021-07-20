@@ -38,8 +38,8 @@
 namespace Automad\UI\Views\Elements;
 
 use Automad\Core\Request;
-use Automad\UI\Components\Form\Search;
 use Automad\UI\Components\Logo;
+use Automad\UI\Components\Nav\JumpBar;
 use Automad\UI\Components\Nav\SiteTree;
 use Automad\UI\Components\Status\Span;
 use Automad\UI\Controllers\User;
@@ -95,8 +95,8 @@ class Sidebar {
 									{$fn(Logo::render())}
 								</a>
 							</div>
-							<div class="am-sidebar-search uk-visible-small uk-margin-bottom">
-								{$fn(Search::render(Text::get('search_placeholder')))}
+							<div class="am-sidebar-jump uk-visible-small uk-margin-bottom">
+								{$fn(JumpBar::render(Text::get('jumpbar_placeholder')))}
 							</div>
 							<ul class="uk-nav uk-nav-side uk-margin-small-top">
 								<li class="uk-nav-header">

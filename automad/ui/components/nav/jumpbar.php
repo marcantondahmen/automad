@@ -35,29 +35,29 @@
  */
 
 
-namespace Automad\UI\Components\Form;
+namespace Automad\UI\Components\Nav;
 
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The search field component. 
+ *	The jump bar component. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Search {
+class JumpBar {
 
 
 	/**
-	 *	Create a search field.
+	 *	Create a jump bar field.
 	 *
 	 *	@param string $placeholder
 	 *	@param string $tooltip
-	 *	@return string The HTML for the search field
+	 *	@return string The HTML for the jump bar
 	 */
 	
 	public static function render($placeholder = '', $tooltip = '') {
@@ -66,19 +66,21 @@ class Search {
 			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 
-		$dashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		
-		return  <<< HTML
-				<form class="uk-form uk-width-1-1" action="$dashboard" method="get" data-am-search>
-					<input type="hidden" name="view" value="Search" />
+		return <<< HTML
+				<form 
+				class="uk-form uk-width-1-1" 
+				data-am-controller="UI::jump" 
+				data-am-jumpbar
+				>
 					<div class="uk-autocomplete uk-width-1-1">
 						<input
 						class="uk-form-controls uk-width-1-1"
-						name="query"
+						name="target"
 						type="search"
 						placeholder="$placeholder"
 						$tooltip
 						required
+						data-am-watch-exclude
 						/>
 					</div> 
 				</form>

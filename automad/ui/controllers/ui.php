@@ -38,8 +38,8 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
+use Automad\UI\Components\Autocomplete\JumpBar;
 use Automad\UI\Components\Autocomplete\Link;
-use Automad\UI\Components\Autocomplete\Search;
 use Automad\UI\Components\Form\Field;
 use Automad\UI\Utils\UICache;
 
@@ -78,11 +78,11 @@ class UI {
 	 *	@return array the autocomplete data as part of the $output array
 	 */
 
-	public static function autocompleteSearch() {
+	public static function autocompleteJump() {
 
 		$Automad = UICache::get();
 
-		return Search::render($Automad);
+		return JumpBar::render($Automad);
 
 	}
 
@@ -105,6 +105,27 @@ class UI {
 		return $output;
 
 	}
-	
+
+
+	/**
+	 *	Redirect to a given target URL.
+	 *
+	 *	@return array the output array including the redirect URL
+	 */
+
+	public static function jump() {
+
+		$output = array();
+
+		if ($target = Request::post('target')) {
+			if (strpos($target, '?view=') !== false) {
+				$output['redirect'] = $target;
+			}
+		}
+
+		return $output;
+
+	}
+
 
 }

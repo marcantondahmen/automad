@@ -39,8 +39,8 @@ namespace Automad\UI\Views\Elements;
 
 use Automad\Core\Request;
 use Automad\Core\Str;
-use Automad\UI\Components\Form\Search;
 use Automad\UI\Components\Logo;
+use Automad\UI\Components\Nav\JumpBar;
 use Automad\UI\Controllers\User;
 use Automad\UI\Utils\Text;
 
@@ -84,10 +84,9 @@ class Navbar {
 							{$fn(Logo::render())}
 						</a>
 					</div>
-					<div class="am-navbar-search">
-						{$fn(Search::render(
-							Text::get('search_placeholder') . ' ' . 
-							htmlspecialchars($Automad->Shared->get(AM_KEY_SITENAME)),
+					<div class="am-navbar-jump">
+						{$fn(JumpBar::render(
+							Text::get('jumpbar_placeholder'),
 							'[Ctrl + ⇧ + Space]'
 						))}
 					</div>
