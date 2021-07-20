@@ -118,7 +118,7 @@ class UI {
 		$output = array();
 
 		if ($target = Request::post('target')) {
-			if (strpos($target, '?view=') !== false) {
+			if (strpos($target, '?view=') !== false || $target == AM_BASE_INDEX) {
 				$output['redirect'] = $target;
 			}
 		}

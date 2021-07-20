@@ -68,6 +68,7 @@ class JumpBar {
 		$output = array();
 		$values = array();
 	
+		$values = array_merge($values, self::inPage());
 		$values = array_merge($values, self::settings());
 		$values = array_merge($values, self::shared());
 		$values = array_merge($values, self::packages());
@@ -107,6 +108,26 @@ class JumpBar {
 		}
 
 		return $items;
+	}
+
+
+	/**
+	 *	Generate autocomplete items for the in-page edit mode.
+	 *
+	 *	@return array the generated items
+	 */
+
+	private static function inPage() {
+
+		return array(
+			[
+				'url' => AM_BASE_INDEX,
+				'value' => Text::get('btn_inpage_edit'),
+				'title' => Text::get('btn_inpage_edit'),
+				'subtitle' => '',
+				'icon' => 'bookmark-o'
+			]
+		);
 	}
 
 
