@@ -40,13 +40,17 @@
 		left: 0;
 		right: 0;
 
+		&:empty {
+			display: none;
+		}
+
 		& li:not([data-value*="view=System"]) + li[data-value*="view=System"],
 		& li:not([data-value*="view=Shared"]) + li[data-value*="view=Shared"],
 		& li:not([data-value*="view=Packages"]) + li[data-value*="view=Packages"],
 		& li:not([data-value*="view=Page"]) + li[data-value*="view=Page"] {
 			margin-top: @dropdown-padding;
 			padding-top: @dropdown-padding;
-			border-top: @am-hairline;
+			border-top: @am-hairline-px;
 		}
 
 		& [data-value] {
@@ -57,18 +61,16 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
-				color: @am-muted;
+				//color: @am-muted;
 			}
 
 			& span {
-				padding-left: 0.25rem;
+				padding: 0 0.25rem;
 				white-space: nowrap;
 			}
 
-			& i,
-			& span:nth-child(2) {
-				padding-right: 0.25rem;
-				color: @am-text;
+			& :nth-child(3) {
+				opacity: 0.4;
 			} 
 
 		}

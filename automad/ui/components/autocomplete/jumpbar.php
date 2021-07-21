@@ -176,7 +176,7 @@ class JumpBar {
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_headless'),
 				'title' => Text::get('sys_headless'),
 				'subtitle' => '',
-				'icon' => 'cloud'
+				'icon' => 'headless'
 			],
 			[
 				'url' => $sysUrl . Str::sanitize(Text::get('sys_debug')),
