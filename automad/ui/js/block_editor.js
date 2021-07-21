@@ -212,6 +212,7 @@
 
 				if (msg.includes('closest') || 
 					msg.includes('updateCurrentInput') ||
+					msg.includes('normalize') ||
 					msg.includes('DOMException')) {
 					event.preventDefault();
 				}
