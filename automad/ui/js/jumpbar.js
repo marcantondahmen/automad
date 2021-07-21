@@ -91,21 +91,16 @@
 										</li>
 									{{/items}}
 								</ul>
-							`
-						};
+								`
+							};
 
 						const UIkitAutocomplete = UIkit.autocomplete($(autocomplete), options);
 						const UIkitSearchData = UIkitAutocomplete.options.source[searchDataIndex];
-						
+
 						input.addEventListener('focus', () => {
-
 							UIkitAutocomplete.show();
-							const tooltip = UIkit.tooltip('.uk-tooltip');
-
-							setTimeout(() => {
-								tooltip.hide();
-							}, 5);
-
+							input.dispatchEvent(new Event('keyup'));
+							setTimeout(() => { UIkit.tooltip('.uk-tooltip').hide(); }, 5);
 						});
 
 						input.addEventListener('keyup', () => {
@@ -119,15 +114,9 @@
 						});
 
 						UIkitAutocomplete.on('selectitem.uk.autocomplete', () => {
-
 							input.value = UIkitAutocomplete.selected[0].dataset.value;
-							
 							$(form).submit();
-
-							setTimeout(() => {
-								input.value = '';
-							}, 20);
-
+							setTimeout(() => { input.value = ''; }, 20);
 						});
 
 					}
