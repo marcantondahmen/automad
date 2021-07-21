@@ -87,7 +87,7 @@ class Navbar {
 					<div class="am-navbar-jump">
 						{$fn(JumpBar::render(
 							Text::get('jumpbar_placeholder'),
-							'[Ctrl + ⇧ + Space]'
+							'[Ctrl + J]'
 						))}
 					</div>
 					<div class="am-navbar-buttons">
