@@ -81,21 +81,38 @@ class Dashboard {
 			if ($controller = Request::query('controller')) {
 
 				// Controllers.
+				$method = "{$namespaceControllers}{$controller}";
+				$parts = explode('::', $method);
+				$class = $parts[0];
+				
 				header('Content-Type: application/json');
-				$output = call_user_func("{$namespaceControllers}{$controller}");
-				$output['debug'] = Debug::getLog();
+				
+				if (!empty($parts[1]) && $this->classFileExists($class) && method_exists($class, $parts[1])) {
+					$output = call_user_func($method);
+					$output['debug'] = Debug::getLog();
+				} else {
+					header('HTTP/1.0 404 Not Found');
+					$output = array();
+				}
+				
 				$this->output = json_encode($output, JSON_UNESCAPED_SLASHES);
 
 			} else {
 
 				// Views.
+				$default = 'Home';
 				$view = Request::query('view');
 				
 				if (!$view) {
-					$view = 'Home';
+					$view = $default;
 				}
 
 				$class = "{$namespaceViews}{$view}";
+				
+				if (!$this->classFileExists($class)) {
+					$class = "{$namespaceViews}{$default}";
+				}
+
 				$object = new $class;
 				$this->output = $object->render();
 
@@ -135,6 +152,21 @@ class Dashboard {
 		$this->output = preg_replace('/^\t{0,3}/m', '', $this->output);
 
 		return Prefix::tags($this->output);
+
+	}
+
+
+	/**
+	 *	Test whether a file of a given class is readable.
+	 *
+	 *	@return boolean true in case the file is readable.
+	 */
+
+	private function classFileExists($className) {
+
+		return is_readable(
+			AM_BASE_DIR . '/' . strtolower(str_replace('\\', '/', $className) . '.php')
+		);
 
 	}
 
