@@ -68,6 +68,7 @@ class JumpBar {
 		$output = array();
 		$values = array();
 	
+		$values = array_merge($values, self::search());
 		$values = array_merge($values, self::inPage());
 		$values = array_merge($values, self::settings());
 		$values = array_merge($values, self::shared());
@@ -186,6 +187,26 @@ class JumpBar {
 			]
 		);
 
+	}
+
+
+	/**
+	 *	Generate autocomplete items for search.
+	 *
+	 *	@return array the generated items
+	 */
+
+	private static function search() {
+
+		return array(
+			[
+				'url' => AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Search',
+				'value' => Text::get('jumpbar_search'),
+				'title' => Text::get('jumpbar_search'),
+				'subtitle' => '',
+				'icon' => 'search'
+			]
+		);
 	}
 
 

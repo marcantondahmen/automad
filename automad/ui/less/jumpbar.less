@@ -40,17 +40,6 @@
 		left: 0;
 		right: 0;
 
-		&:empty {
-			margin-top: @dropdown-margin-top !important;
-		}
-		
-		&:empty:before {
-			content: attr(data-am-placeholder);
-			display: block;
-			padding: @nav-padding-vertical @nav-divider-margin-horizontal;
-			color: @am-muted;
-		}
-		
 		& li:not([data-value*="view=System"]) + li[data-value*="view=System"],
 		& li:not([data-value*="view=Shared"]) + li[data-value*="view=Shared"],
 		& li:not([data-value*="view=Packages"]) + li[data-value*="view=Packages"],

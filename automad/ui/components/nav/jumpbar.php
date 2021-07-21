@@ -67,8 +67,6 @@ class JumpBar {
 			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
 
-		$Text = Text::getObject();
-
 		return <<< HTML
 				<form 
 				class="uk-form uk-width-1-1" 
@@ -77,7 +75,6 @@ class JumpBar {
 				>
 					<div 
 					class="uk-autocomplete uk-width-1-1"
-					data-am-dropdown-empty="{$Text->jumpbar_dropdown_empty}"
 					>
 						<input
 						class="uk-form-controls uk-width-1-1"

@@ -66,6 +66,8 @@
 
 				$.post('?controller=UI::autocompleteJump', function (data) {
 
+					const searchDataIndex = 0;
+					const searchData = Object.assign({}, data.autocomplete[searchDataIndex]);					
 					const initJumpBar = (form) => {
 
 						const input = form.querySelector('input');
@@ -93,11 +95,27 @@
 						};
 
 						const UIkitAutocomplete = UIkit.autocomplete($(autocomplete), options);
+						const UIkitSearchData = UIkitAutocomplete.options.source[searchDataIndex];
 						
-						form.querySelector('.uk-dropdown').dataset.amPlaceholder = autocomplete.dataset.amDropdownEmpty;
-
 						input.addEventListener('focus', () => {
+
 							UIkitAutocomplete.show();
+							const tooltip = UIkit.tooltip('.uk-tooltip');
+
+							setTimeout(() => {
+								tooltip.hide();
+							}, 5);
+
+						});
+
+						input.addEventListener('keyup', () => {
+							UIkitSearchData.url = `${searchData.url}&search=${encodeURIComponent(input.value)}`;
+							UIkitSearchData.value = `${searchData.value} ${input.value}`;
+							UIkitSearchData.subtitle = input.value;
+						});
+
+						UIkitAutocomplete.on('show.uk.autocomplete', () => {
+							UIkitAutocomplete.pick('next', true);
 						});
 
 						UIkitAutocomplete.on('selectitem.uk.autocomplete', () => {
