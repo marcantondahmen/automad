@@ -66,7 +66,7 @@ class Search {
 		$Automad = UICache::get();
 		$pages = array();
 
-		if ($query = Request::query('query')) {
+		if ($query = Request::query('search')) {
 
 			$collection = $Automad->getCollection();
 

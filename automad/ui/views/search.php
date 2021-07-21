@@ -76,7 +76,7 @@ class Search extends View {
 			</ul>
 			<h2 class="uk-margin-top-remove">
 				<i class="uk-icon-angle-double-left"></i>
-				{$fn(Request::query('query'))}
+				{$fn(Request::query('search'))}
 				<i class="uk-icon-angle-double-right"></i>&nbsp;
 				<span class="uk-badge">{$fn(count($results))}</span>
 			</h2>
