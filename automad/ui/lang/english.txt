@@ -906,10 +906,6 @@ jumpbar_placeholder: Jump to ...
 
 -
 
-jumpbar_search: Search
-
--
-
 
 
 
@@ -1123,7 +1119,7 @@ search_no_results: No pages found!
 
 -
 
-search_title: Search Results
+search_title: Search
 
 -
 

@@ -106,6 +106,12 @@ class Sidebar {
 									AM_BASE_INDEX . '/', 
 									$Automad->Shared->get(AM_KEY_SITENAME)
 								))}
+								<li class="{$active((Request::query('view') == 'Search'))}">
+									<a href="?view=Search">
+										<i class="uk-icon-search uk-icon-justify"></i>&nbsp;
+										{$fn(Text::get('search_title'))}
+									</a>
+								</li>
 								<li class="{$active((!Request::query('view')))}">
 									<a href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}">
 										<i class="uk-icon-tv uk-icon-justify"></i>&nbsp;

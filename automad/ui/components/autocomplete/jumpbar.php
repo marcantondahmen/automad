@@ -201,8 +201,8 @@ class JumpBar {
 		return array(
 			[
 				'url' => AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Search',
-				'value' => Text::get('jumpbar_search'),
-				'title' => Text::get('jumpbar_search'),
+				'value' => Text::get('search_title'),
+				'title' => Text::get('search_title'),
 				'subtitle' => '',
 				'icon' => 'search'
 			]
