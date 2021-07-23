@@ -1115,7 +1115,15 @@ shared_var_name: Variable Name
 
 
 
-search_no_results: No pages found!
+search_no_results: Your search did not return any results.
+
+-
+
+search_placeholder: Search
+
+-
+
+search_replace_placeholder: Replace
 
 -
 

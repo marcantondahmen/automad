@@ -40,7 +40,6 @@ namespace Automad\UI\Views;
 use Automad\Core\Request;
 use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Components\Grid\Pages;
-use Automad\UI\Controllers\Search as ControllersSearch;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -65,8 +64,6 @@ class Search extends View {
 
 	protected function body() {
 
-		$results = ControllersSearch::results();
-
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -74,13 +71,32 @@ class Search extends View {
 				<li class="uk-disabled"><i class="uk-icon-search"></i></li>
 				<li><a href="">{$fn(Text::get('search_title'))}</a></li>
 			</ul>
-			<h2 class="uk-margin-top-remove">
-				<i class="uk-icon-angle-double-left"></i>
-				{$fn(Request::query('search'))}
-				<i class="uk-icon-angle-double-right"></i>&nbsp;
-				<span class="uk-badge">{$fn(count($results))}</span>
-			</h2>
-			{$fn($this->results($results))}
+			<div class="uk-form" data-am-search>
+				<div class="am-sticky uk-form-row">
+					<input 
+					class="uk-width-1-1" 
+					type="search" 
+					name="searchValue" 
+					placeholder="{$fn(Text::get('search_placeholder'))}"
+					value="{$fn(Request::query('search'))}"
+					>
+				</div>
+				<div class="uk-form-row">
+					<input 
+					class="uk-width-1-1" 
+					type="text" 
+					name="replaceValue" 
+					placeholder="{$fn(Text::get('search_replace_placeholder'))}"
+					value=""
+					>
+				</div>
+				<button type="button" name="replaceSelected">Replace Selected</button>
+				<button type="button" name="checkAll">Check All</button>
+				<button type="button" name="unCheckAll">Uncheck All</button>
+				<label for="">Regex</label>
+				<input type="checkbox" name="isRegex">
+				<form class="uk-form"></form>
+			</div>
 HTML;
 
 	}
@@ -97,23 +113,6 @@ HTML;
 		$title = Text::get('search_title');
 
 		return "$title &mdash; Automad";
-
-	}
-
-
-	/**
-	 *	Render page grid or alert.
-	 *
-	 *	@return string the rendered page grid
-	 */
-
-	private function results($results) {
-
-		if ($results) {
-			return Pages::render($results);
-		}
-
-		return Alert::render(Text::get('search_no_results'), 'uk-alert-danger uk-margin-top');
 
 	}
 

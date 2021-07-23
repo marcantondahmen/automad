@@ -35,60 +35,60 @@
  */
 
 
-namespace Automad\UI\Controllers;
+namespace Automad\UI\Components\Card;
 
-use Automad\Core\Request;
-use Automad\UI\Components\Alert\Alert;
-use Automad\UI\Components\Layout\SearchResults;
-use Automad\UI\Models\Search as ModelsSearch;
-use Automad\UI\Utils\Text;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Search controller.
+ *	The search match card component. 
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Search { 
+class SearchFileResults {
 
 
 	/**
-	 *	Perform a search and replace.
-	 * 
-	 *	@return array the output array
+	 *	Render a search match card.
+	 *
+	 *	@param string $file
+	 *	@param object $fileResults
+	 *	@return string the rendered card
 	 */
 
-	public static function searchAndReplace() {
+	public static function render($file, $fileResults) {
 
-		$output = array();
-		$Search = new ModelsSearch(
-			Request::post('searchValue'),
-			Request::post('isRegex')
-		);
+		$dir = dirname($file);
+		$id = 'am-search-file-' . Str::sanitize($dir, true, 500);
+		$results = '';
 
-		if (Request::post('replaceSelected')) {
-			$Search->replaceInFiles(
-				Request::post('replaceValue'), 
-				Request::post('files')
-			);
-		} 
-
-		$resultsPerFile = $Search->searchPerFile();
-
-		if (!$html = SearchResults::render($resultsPerFile)) {
-			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
+		foreach ($fileResults as $match) {
+			$results .= "<hr><small class='uk-text-muted'>{$match->key}</small><br>{$match->context}";
 		}
-
-		$output['html'] = $html;
-
-		return $output;
+		
+		return <<< HTML
+			<div id="$id" class="uk-panel uk-panel-box uk-active uk-margin-small-top">
+				<div class="uk-flex uk-flex-space-between">
+					<div class="uk-text-truncate">
+						<i class="uk-icon-file-text-o"></i>&nbsp; 
+						$dir
+					</div>
+					<label 
+					class="am-toggle-checkbox uk-active" 
+					data-am-toggle="#$id">
+						<input type="checkbox" name="files[]" value="$file" checked="on" />
+					</label>
+				</div>
+				$results
+			</div>
+HTML;
 
 	}
-	
+
 
 }

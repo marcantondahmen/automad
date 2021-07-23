@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *	                  ....
  *	                .:   '':.
@@ -35,60 +35,88 @@
  */
 
 
-namespace Automad\UI\Controllers;
-
-use Automad\Core\Request;
-use Automad\UI\Components\Alert\Alert;
-use Automad\UI\Components\Layout\SearchResults;
-use Automad\UI\Models\Search as ModelsSearch;
-use Automad\UI\Utils\Text;
+namespace Automad\UI\Models;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Search controller.
+ *	A wrapper class for all results for a given data field.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Search { 
+class SearchDataFieldResults {
 
 
 	/**
-	 *	Perform a search and replace.
-	 * 
-	 *	@return array the output array
+	 *	The field name.
 	 */
 
-	public static function searchAndReplace() {
+	public $key;
 
-		$output = array();
-		$Search = new ModelsSearch(
-			Request::post('searchValue'),
-			Request::post('isRegex')
+
+	/**
+	 *	The original search string or regex.
+	 */
+
+	public $searchValue;
+
+
+	/**
+	 *	An array with all found matches in the field value. 
+	 *	Note that the matches can differ in case the search value is an unescaped regex string.
+	 */
+
+	public $matches = false;
+
+
+	/**
+	 *	A presenation string of all joined matches with wrapping context.
+	 */
+
+	public $context = '';
+	
+
+	/**
+	 * Initialize a new field results instance.
+	 *
+	 * @param string $searchValue
+	 * @param string $key
+	 * @param string $value
+	 */
+
+	public function __construct($searchValue, $key, $value) {
+
+		$this->key = $key;
+		$this->searchValue = $searchValue;
+
+		preg_match_all(
+			'/(.{0,20})(' . $searchValue . ')(.{0,20})/is',
+			$value,
+			$matches,
+			PREG_SET_ORDER
 		);
 
-		if (Request::post('replaceSelected')) {
-			$Search->replaceInFiles(
-				Request::post('replaceValue'), 
-				Request::post('files')
-			);
-		} 
+		if (!empty($matches[0])) {
 
-		$resultsPerFile = $Search->searchPerFile();
+			$parts = array();
 
-		if (!$html = SearchResults::render($resultsPerFile)) {
-			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
+			foreach ($matches as $match) {
+				$parts[] = preg_replace('/\s+/', ' ', trim("{$match[1]}<mark>{$match[2]}</mark>{$match[3]}"));
+			}
+
+			$this->context = join(' ... ', $parts);
+
+			foreach ($matches as $match) {
+				$this->matches[] = $match[2];
+			}
+
 		}
 
-		$output['html'] = $html;
-
-		return $output;
-
 	}
-	
+
 
 }

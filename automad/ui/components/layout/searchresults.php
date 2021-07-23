@@ -35,60 +35,42 @@
  */
 
 
-namespace Automad\UI\Controllers;
+namespace Automad\UI\Components\Layout;
 
-use Automad\Core\Request;
-use Automad\UI\Components\Alert\Alert;
-use Automad\UI\Components\Layout\SearchResults;
-use Automad\UI\Models\Search as ModelsSearch;
-use Automad\UI\Utils\Text;
+use Automad\UI\Components\Card\SearchFileResults;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Search controller.
+ *	The search layout.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Search { 
+class SearchResults {
 
 
 	/**
-	 *	Perform a search and replace.
-	 * 
-	 *	@return array the output array
+	 *	Render the search results layout.
+	 *
+	 *	@param array $resultsPerFile
+	 *	@return string the rendered search results layout.
 	 */
 
-	public static function searchAndReplace() {
+	public static function render($resultsPerFile) {
 
-		$output = array();
-		$Search = new ModelsSearch(
-			Request::post('searchValue'),
-			Request::post('isRegex')
-		);
+		$html = '';
 
-		if (Request::post('replaceSelected')) {
-			$Search->replaceInFiles(
-				Request::post('replaceValue'), 
-				Request::post('files')
-			);
-		} 
-
-		$resultsPerFile = $Search->searchPerFile();
-
-		if (!$html = SearchResults::render($resultsPerFile)) {
-			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
+		foreach ($resultsPerFile as $file => $match) {
+			$html .= SearchFileResults::render($file, $match);
 		}
 
-		$output['html'] = $html;
-
-		return $output;
+		return $html;
 
 	}
-	
+
 
 }
