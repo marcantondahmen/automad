@@ -37,9 +37,11 @@
 
 namespace Automad\UI\Controllers;
 
+use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Components\Layout\SearchResults;
+use Automad\UI\Models\Replacement;
 use Automad\UI\Models\Search as ModelsSearch;
 use Automad\UI\Utils\Text;
 
@@ -66,19 +68,27 @@ class Search {
 	public static function searchAndReplace() {
 
 		$output = array();
+		
+		if (Request::post('replaceSelected')) {
+
+			$Replacement = new Replacement(
+				Request::post('searchValue'),
+				Request::post('replaceValue'), 
+				Request::post('isRegex')
+			);
+
+			$Replacement->replaceInFiles(Request::post('files'));
+
+		}
+
 		$Search = new ModelsSearch(
 			Request::post('searchValue'),
 			Request::post('isRegex')
 		);
 
-		if (Request::post('replaceSelected')) {
-			$Search->replaceInFiles(
-				Request::post('replaceValue'), 
-				Request::post('files')
-			);
-		} 
-
 		$resultsPerFile = $Search->searchPerFile();
+
+		Debug::log($resultsPerFile, 'Results per file');
 
 		if (!$html = SearchResults::render($resultsPerFile)) {
 			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');

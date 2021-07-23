@@ -83,38 +83,18 @@ class SearchDataFieldResults {
 	/**
 	 * Initialize a new field results instance.
 	 *
-	 * @param string $searchValue
 	 * @param string $key
-	 * @param string $value
+	 * @param string $searchValue
+	 * @param array $matches
+	 * @param string $context
 	 */
 
-	public function __construct($searchValue, $key, $value) {
+	public function __construct($key, $searchValue, $matches, $context) {
 
 		$this->key = $key;
 		$this->searchValue = $searchValue;
-
-		preg_match_all(
-			'/(.{0,20})(' . $searchValue . ')(.{0,20})/is',
-			$value,
-			$matches,
-			PREG_SET_ORDER
-		);
-
-		if (!empty($matches[0])) {
-
-			$parts = array();
-
-			foreach ($matches as $match) {
-				$parts[] = preg_replace('/\s+/', ' ', trim("{$match[1]}<mark>{$match[2]}</mark>{$match[3]}"));
-			}
-
-			$this->context = join(' ... ', $parts);
-
-			foreach ($matches as $match) {
-				$this->matches[] = $match[2];
-			}
-
-		}
+		$this->matches = $matches;
+		$this->context = $context;
 
 	}
 

@@ -66,6 +66,7 @@ class SearchFileResults {
 		$dir = dirname($file);
 		$id = 'am-search-file-' . Str::sanitize($dir, true, 500);
 		$results = '';
+		$keys = json_encode(array_keys($fileResults));
 
 		foreach ($fileResults as $match) {
 			$results .= "<hr><small class='uk-text-muted'>{$match->key}</small><br>{$match->context}";
@@ -81,7 +82,7 @@ class SearchFileResults {
 					<label 
 					class="am-toggle-checkbox uk-active" 
 					data-am-toggle="#$id">
-						<input type="checkbox" name="files[]" value="$file" checked="on" />
+						<input type="checkbox" name="files[$file]" value='$keys' checked="on" />
 					</label>
 				</div>
 				$results

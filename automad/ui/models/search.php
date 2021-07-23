@@ -89,21 +89,6 @@ class Search {
 
 
 	/**
-	 *	Replace matches with a given string in a given list of files.
-	 *
-	 *	@param string $replace
-	 *	@param array $files
-	 *	@return boolean true on success
-	 */
-
-	public function replaceInFiles($replace, $files) {
-
-		return false;
-
-	}
-
-
-	/**
 	 *	Perform a search in all data arrays and return an associative 
 	 *	array with a file path as key and its matches as value.
 	 *
@@ -151,7 +136,14 @@ class Search {
 		foreach ($data as $key => $value) {
 
 			if (strpos($key, '+') === 0) {
-				$match = $this->searchBlockField($key, $value);
+
+				try {
+					$data = json_decode($value);
+					$match = $this->searchBlocksRecursively($key, $data->blocks);
+				} catch (Exception $error) {
+					$match = false;
+				}
+				
 			} else {
 				$match = $this->searchTextField($key, $value);
 			}
@@ -180,10 +172,38 @@ class Search {
 			return false;
 		}
 
-		$SearchDataFieldResults = new SearchDataFieldResults($this->searchValue, $key, $value);
+		$fieldMatches = array();
 
-		if ($SearchDataFieldResults->matches) {
-			return $SearchDataFieldResults;
+		preg_match_all(
+			'/(.{0,20})(' . $this->searchValue . ')(.{0,20})/is',
+			$value,
+			$matches,
+			PREG_SET_ORDER
+		);
+
+		if (!empty($matches[0])) {
+
+			$parts = array();
+
+			foreach ($matches as $match) {
+				$parts[] = preg_replace('/\s+/', ' ', trim("{$match[1]}<mark>{$match[2]}</mark>{$match[3]}"));
+			}
+
+			$context = join(' ... ', $parts);
+
+			foreach ($matches as $match) {
+				$fieldMatches[] = $match[2];
+			}
+
+		}
+
+		if ($fieldMatches) {
+			return new SearchDataFieldResults(
+				$key, 
+				$this->searchValue, 
+				$fieldMatches, 
+				$context
+			);
 		}
 
 		return false;
@@ -192,26 +212,60 @@ class Search {
 
 
 	/**
-	 *	Perform a search in a single block field and return a
+	 *	Perform a search in a block field recursively and return a
 	 *	`SearchDataFieldResults` object for a given search value.
 	 *
 	 *	@return object a `SearchDataFieldResults` object
 	 */
 
-	private function searchBlockField($key, $value) {
+	private function searchBlocksRecursively($key, $blocks) {
 
-		$value = str_replace('\\', '', $value);
-		$value = strip_tags($value);
-		$value = preg_replace('/"time":\s*\d+,/s', ' ', $value);
-		$value = preg_replace('/"version":\s*"[\w\.\-]+"/s', ' ', $value);
-		$value = preg_replace('/\s+/s', ' ', $value);
-		$value = preg_replace('/(\{|,)\s*"\w+"\:/ms', str_repeat(' ', 100), $value);
-		$value = preg_replace('/[\[\]\{\}]+/s', ' ', $value);
-		$value = trim(str_replace('"', '', $value));
+		$results = array();
 
-		return $this->searchTextField($key, $value);
+		foreach ($blocks as $block) {
 
+			if ($block->type == 'section') {
+
+				if ($res = $this->searchBlocksRecursively($key, $block->data->content->blocks)) {
+					$results[] = $res;
+				}
+
+			} else {
+
+				foreach ($block->data as $value) {
+
+					if (is_string($value)) {
+						if ($res = $this->searchTextField($key, $value)) {
+							$results[] = $res;
+						}
+					}
+					
+				}
+
+			}
+
+		}
+
+		$matches = array();
+		$contextArray = array();
+
+		foreach ($results as $result) {
+			$matches = array_merge($matches, $result->matches);
+			$contextArray[] = $result->context;
+		}
+
+		if (!empty($matches)) {
+			return new SearchDataFieldResults(
+				$key,
+				$this->searchValue,
+				$matches,
+				join(' ... ', $contextArray)
+			);
+		}
+
+		return false;
+	
 	}
 
-	
+
 }
