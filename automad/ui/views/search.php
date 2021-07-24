@@ -38,7 +38,6 @@
 namespace Automad\UI\Views;
 
 use Automad\Core\Request;
-use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

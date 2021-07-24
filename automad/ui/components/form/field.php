@@ -282,6 +282,7 @@ HTML;
 	 *
 	 *	@param string $editorId
 	 *	@param string $fullscreenBar
+	 *	@param string $attr
 	 *	@param string $value
 	 *	@return string The rendered markup 
 	 */

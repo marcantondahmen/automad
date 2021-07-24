@@ -219,7 +219,8 @@ class Search {
 			AM_KEY_HIDDEN,
 			AM_KEY_PRIVATE,
 			AM_KEY_THEME,
-			AM_KEY_URL
+			AM_KEY_URL,
+			AM_KEY_TITLE
 		);
 
 		if (preg_match('/^(:|date|checkbox|tags|color)/', $key) || in_array($key, $ignoredKeys)) {
