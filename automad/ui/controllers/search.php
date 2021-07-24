@@ -44,6 +44,7 @@ use Automad\UI\Components\Layout\SearchResults;
 use Automad\UI\Models\Replacement;
 use Automad\UI\Models\Search as ModelsSearch;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -83,6 +84,7 @@ class Search {
 		}
 
 		$Search = new ModelsSearch(
+			UICache::get(),
 			Request::post('searchValue'),
 			Request::post('isRegex'),
 			Request::post('isCaseSensitive')
