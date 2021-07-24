@@ -43,6 +43,7 @@ use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Components\Layout\SearchResults;
 use Automad\UI\Models\Replacement;
 use Automad\UI\Models\Search as ModelsSearch;
+use Automad\UI\Models\Search\FileKeys;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
 
@@ -72,14 +73,25 @@ class Search {
 		
 		if (Request::post('replaceSelected')) {
 
-			$Replacement = new Replacement(
-				Request::post('searchValue'),
-				Request::post('replaceValue'), 
-				Request::post('isRegex'),
-				Request::post('isCaseSensitive')
-			);
+			$files = Request::post('files');
 
-			$Replacement->replaceInFiles(Request::post('files'));
+			if (!empty($files)) {
+
+				$fileKeysArray = array();
+				$Replacement = new Replacement(
+					Request::post('searchValue'),
+					Request::post('replaceValue'),
+					Request::post('isRegex'),
+					Request::post('isCaseSensitive')
+				);
+
+				foreach ($files as $path => $keysJson) {
+					$fileKeysArray[] = new FileKeys($path, json_decode($keysJson, true));
+				}
+
+				$Replacement->replaceInFiles($fileKeysArray);
+
+			}
 
 		}
 

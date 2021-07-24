@@ -107,23 +107,23 @@ class Replacement {
 	/**
 	 *	Replace matches with a given string in a given list of files.
 	 *
-	 *	@param array $fileKeys
+	 *	@see \Automad\UI\Models\Search\FileKeys
+	 *	@param array $fileKeysArray
 	 *	@return boolean true on success
 	 */
 
-	public function replaceInFiles($fileKeys) {
+	public function replaceInFiles($fileKeysArray) {
 
-		if (!$this->replaceValue || empty($fileKeys)) {
+		if (!$this->replaceValue || empty($fileKeysArray)) {
 			Debug::log('No files or replacement string');
 			return false;
 		}
 
-		foreach ($fileKeys as $file => $keysJson) {
+		foreach ($fileKeysArray as $FileKeys) {
 
-			$file = AM_BASE_DIR . $file;
-			$keys = json_decode($keysJson, true);
+			$file = AM_BASE_DIR . $FileKeys->path;
 			$data = Parse::textFile($file);
-			$data = $this->replaceInData($data, $keys);
+			$data = $this->replaceInData($data, $FileKeys->keys);
 
 			FileSystem::writeData($data, $file);
 			
