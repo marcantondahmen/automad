@@ -38,6 +38,8 @@
 namespace Automad\UI\Models;
 
 use Automad\Core\Str;
+use Automad\UI\Models\Search\FieldResults;
+use Automad\UI\Models\Search\FileResults;
 use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,30 +71,42 @@ class Search {
 
 
 	/**
+	 *	The search regex flags.
+	 */
+
+	private $regexFlags;
+
+
+	/**
 	 *	Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
 	 *	@param string $searchValue
 	 *	@param boolean $isRegex
+	 *	@param boolean $isCaseSensitive
 	 */
 
-	public function __construct($searchValue, $isRegex) {
+	public function __construct($searchValue, $isRegex, $isCaseSensitive) {
 
 		$this->Automad = UICache::get();
+		$this->searchValue = $searchValue;
+		$this->regexFlags = 'is';
 
 		if ($isRegex == false) {
 			$this->searchValue = preg_quote($searchValue, '/');
-		} else {
-			$this->searchValue = $searchValue;
+		} 
+
+		if ($isCaseSensitive) {
+			$this->regexFlags = 's';
 		}
 
 	}
 
 
 	/**
-	 *	Perform a search in all data arrays and return an associative 
-	 *	array with a file path as key and its matches as value.
+	 *	Perform a search in all data arrays and return an array with `FileResults`.
 	 *
-	 *	@return array an associative array of file => matches pairs
+	 *	@see \Automad\UI\Models\Search\FileResults
+	 *	@return array an array of `FileResults`
 	 */
 
 	public function searchPerFile() {
@@ -105,15 +119,15 @@ class Search {
 
 		$sharedData = $this->Automad->Shared->data;
 
-		if ($resultsPerDataField = $this->searchData($sharedData)) {
+		if ($fieldResultsArray = $this->searchData($sharedData)) {
 			$path = Str::stripStart(AM_FILE_SHARED_DATA, AM_BASE_DIR);
-			$resultsPerFile[$path] = $resultsPerDataField;
+			$resultsPerFile[] = new FileResults($path, $fieldResultsArray);
 		}
 
 		foreach ($this->Automad->getCollection() as $Page) {
-			if ($resultsPerDataField = $this->searchData($Page->data)) {
+			if ($fieldResultsArray = $this->searchData($Page->data)) {
 				$path = AM_DIR_PAGES . $Page->path . $Page->get(':template') . '.' . AM_FILE_EXT_DATA;
-				$resultsPerFile[$path] = $resultsPerDataField;
+				$resultsPerFile[] = new FileResults($path, $fieldResultsArray, $Page->origUrl);
 			}
 		}
 
@@ -123,15 +137,17 @@ class Search {
 
 
 	/**
-	 *	Perform a search in a single data array and return an associative 
-	 *	array with a variable field as key and its matches as value.
+	 *	Perform a search in a single data array and return an
+	 *	array of `\Automad\UI\Models\Search\FieldResults`.
 	 *
-	 *	@return array an associative array of field => matches pairs
+	 *	@see \Automad\UI\Models\Search\FieldResults
+	 *	@param array $data
+	 *	@return array an array of `FieldResults` objects
 	 */
 
 	private function searchData($data) {
 
-		$resultsPerDataField = array();
+		$fieldResultsArray = array();
 
 		foreach ($data as $key => $value) {
 
@@ -139,31 +155,33 @@ class Search {
 
 				try {
 					$data = json_decode($value);
-					$match = $this->searchBlocksRecursively($key, $data->blocks);
+					$FieldResults = $this->searchBlocksRecursively($key, $data->blocks);
 				} catch (Exception $error) {
-					$match = false;
+					$FieldResults = false;
 				}
 				
 			} else {
-				$match = $this->searchTextField($key, $value);
+				$FieldResults = $this->searchTextField($key, $value);
 			}
 
-			if (!empty($match)) {
-				$resultsPerDataField[$key] = $match;
+			if (!empty($FieldResults)) {
+				$fieldResultsArray[] = $FieldResults;
 			}
 
 		}
 
-		return $resultsPerDataField;
+		return $fieldResultsArray;
 
 	}
 
 
 	/**
 	 *	Perform a search in a single data field and return a
-	 *	`SearchDataFieldResults` object for a given search value.
+	 *	`FieldResults` object for a given search value.
 	 *
-	 *	@return object a `SearchDataFieldResults` object
+	 *	@param string $key
+	 *	@param string $value
+	 *	@return \Automad\UI\Models\Search\FieldResults the field results
 	 */
 
 	private function searchTextField($key, $value) {
@@ -175,8 +193,8 @@ class Search {
 		$fieldMatches = array();
 
 		preg_match_all(
-			'/(.{0,20})(' . $this->searchValue . ')(.{0,20})/is',
-			$value,
+			'/(.{0,20})(' . $this->searchValue . ')(.{0,20})/' . $this->regexFlags,
+			strip_tags($value),
 			$matches,
 			PREG_SET_ORDER
 		);
@@ -198,9 +216,8 @@ class Search {
 		}
 
 		if ($fieldMatches) {
-			return new SearchDataFieldResults(
+			return new FieldResults(
 				$key, 
-				$this->searchValue, 
 				$fieldMatches, 
 				$context
 			);
@@ -213,9 +230,11 @@ class Search {
 
 	/**
 	 *	Perform a search in a block field recursively and return a
-	 *	`SearchDataFieldResults` object for a given search value.
+	 *	`FieldResults` object for a given search value.
 	 *
-	 *	@return object a `SearchDataFieldResults` object
+	 *	@param string $key
+	 *	@param object $blocks
+	 *	@return \Automad\UI\Models\Search\FieldResults the field results
 	 */
 
 	private function searchBlocksRecursively($key, $blocks) {
@@ -255,9 +274,8 @@ class Search {
 		}
 
 		if (!empty($matches)) {
-			return new SearchDataFieldResults(
+			return new FieldResults(
 				$key,
-				$this->searchValue,
 				$matches,
 				join(' ... ', $contextArray)
 			);

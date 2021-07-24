@@ -39,7 +39,6 @@ namespace Automad\UI\Views;
 
 use Automad\Core\Request;
 use Automad\UI\Components\Alert\Alert;
-use Automad\UI\Components\Grid\Pages;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -73,15 +72,35 @@ class Search extends View {
 			</ul>
 			<div class="uk-form" data-am-search>
 				<div class="am-sticky uk-form-row">
-					<input 
-					class="uk-width-1-1" 
-					type="search" 
-					name="searchValue" 
-					placeholder="{$fn(Text::get('search_placeholder'))}"
-					value="{$fn(Request::query('search'))}"
-					>
+					<div class="uk-flex">
+						<input 
+						class="uk-width-1-1" 
+						type="search" 
+						name="searchValue" 
+						placeholder="{$fn(Text::get('search_placeholder'))}"
+						value="{$fn(Request::query('search'))}"
+						>
+						<label 
+						class="am-u-button uk-button-large uk-text-nowrap" 
+						title="{$fn(Text::get('search_is_regex'))}"
+						data-uk-tooltip
+						data-am-toggle
+						> 
+							.*
+							<input type="checkbox" name="isRegex">
+						</label>
+						<label 
+						class="am-u-button uk-button-large uk-text-nowrap" 
+						title="{$fn(Text::get('search_is_case_sensitive'))}"
+						data-uk-tooltip
+						data-am-toggle
+						> 
+							Aa
+							<input type="checkbox" name="isCaseSensitive">
+						</label>
+					</div>
 				</div>
-				<div class="uk-form-row">
+				<div class="uk-form-row uk-margin-small-bottom">
 					<input 
 					class="uk-width-1-1" 
 					type="text" 
@@ -90,12 +109,34 @@ class Search extends View {
 					value=""
 					>
 				</div>
-				<button type="button" name="replaceSelected">Replace Selected</button>
-				<button type="button" name="checkAll">Check All</button>
-				<button type="button" name="unCheckAll">Uncheck All</button>
-				<label for="">Regex</label>
-				<input type="checkbox" name="isRegex">
-				<form class="uk-form"></form>
+				<div class="uk-flex uk-flex-space-between">
+					<button 
+					type="button" 
+					class="uk-button uk-button-success" 
+					name="replaceSelected"
+					>
+						<i class="uk-icon-refresh"></i>&nbsp;
+						{$fn(Text::get('search_replace_selected'))}
+					</button>
+					<div>
+						<div class="uk-button-group">
+							<button type="button" class="uk-button" name="checkAll">
+								<span class="uk-hidden-small">
+									{$fn(Text::get('search_replace_check_all'))}&nbsp;
+								</span>
+								<i class="uk-icon-check-circle"></i>
+							</button>
+							<button type="button" class="uk-button" name="unCheckAll">
+								<span class="uk-hidden-small">
+									{$fn(Text::get('search_replace_uncheck_all'))}&nbsp;
+
+								</span>
+								<i class="uk-icon-circle-thin"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<form class="uk-margin-large-top"></form>
 			</div>
 HTML;
 

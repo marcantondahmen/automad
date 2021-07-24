@@ -39,7 +39,6 @@ namespace Automad\UI\Models;
 
 use Automad\Core\Debug;
 use Automad\Core\Parse;
-use Automad\Core\Str;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\UICache;
 
@@ -58,13 +57,6 @@ class Replacement {
 
 
 	/**
-	 *	The Automad object.
-	 */
-
-	private $Automad;
-
-
-	/**
 	 *	The search value.
 	 */
 
@@ -79,21 +71,32 @@ class Replacement {
 
 
 	/**
+	 *	The search regex flags.
+	 */
+
+	private $regexFlags;
+
+
+	/**
 	 *	Initialize a new replacer model.
 	 *
 	 *	@param string $searchValue
 	 *	@param string $replaceValue
 	 *	@param boolean $isRegex
+	 *	@param boolean $isCaseSensitive
 	 */
 
-	public function __construct($searchValue, $replaceValue, $isRegex) {
+	public function __construct($searchValue, $replaceValue, $isRegex, $isCaseSensitive) {
 
-		$this->Automad = UICache::get();
+		$this->searchValue = $searchValue;
+		$this->regexFlags = 'is';
 
 		if ($isRegex == false) {
 			$this->searchValue = preg_quote($searchValue, '/');
-		} else {
-			$this->searchValue = $searchValue;
+		}
+
+		if ($isCaseSensitive) {
+			$this->regexFlags = 's';
 		}
 
 		$this->replaceValue = $replaceValue;
@@ -157,7 +160,7 @@ class Replacement {
 			} else {
 
 				$data[$key] = preg_replace(
-					'/' . $this->searchValue . '/is',
+					'/' . $this->searchValue . '/' . $this->regexFlags,
 					$this->replaceValue,
 					$data[$key]
 				);
@@ -193,7 +196,7 @@ class Replacement {
 					if (is_string($value)) {
 
 						$block->data->{$key} = preg_replace(
-							'/' . $this->searchValue . '/is',
+							'/' . $this->searchValue . '/' . $this->regexFlags,
 							$this->replaceValue,
 							$block->data->{$key}
 						);

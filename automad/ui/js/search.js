@@ -57,16 +57,33 @@
 			const replaceButton = container.querySelector('[name="replaceSelected"]');
 			const checkAllButton = container.querySelector('[name="checkAll"]');
 			const unCheckAllButton = container.querySelector('[name="unCheckAll"]');
-			const regexCheckbox = container.querySelector('[name="isRegex"]')
+			const regexCheckbox = container.querySelector('[name="isRegex"]');
+			const caseCheckbox = container.querySelector('[name="isCaseSensitive"]');
 			
 			this.form = container.querySelector('form');
 			
 			searchField.addEventListener('keyup', UIkit.Utils.debounce(() => {
-				this.search(searchField.value, regexCheckbox.checked);
+				this.search(
+					searchField.value, 
+					regexCheckbox.checked,
+					caseCheckbox.checked
+				);
 			}, 200));
 
 			regexCheckbox.addEventListener('change', () => {
-				this.search(searchField.value, regexCheckbox.checked);
+				this.search(
+					searchField.value,
+					regexCheckbox.checked,
+					caseCheckbox.checked
+				);
+			});
+
+			caseCheckbox.addEventListener('change', () => {
+				this.search(
+					searchField.value,
+					regexCheckbox.checked,
+					caseCheckbox.checked
+				);
 			});
 
 			replaceButton.addEventListener('click', () => {
@@ -74,18 +91,23 @@
 					{ name: 'searchValue', value: searchField.value },
 					{ name: 'replaceValue', value: replaceField.value },
 					{ name: 'replaceSelected', value: true },
-					{ name: 'isRegex', value: regexCheckbox.checked ? 1 : 0 }
+					{ name: 'isRegex', value: regexCheckbox.checked ? 1 : 0 },
+					{ name: 'isCaseSensitive', value: caseCheckbox.checked ? 1 : 0 }
 				])
 			});
 
-			this.search(searchField.value, regexCheckbox.checked);
+			this.search(
+				searchField.value,
+				regexCheckbox.checked,
+				caseCheckbox.checked
+			);
 
-			checkAllButton.addEventListener('click', () => { this.toggleAll(container, true)});
-			unCheckAllButton.addEventListener('click', () => { this.toggleAll(container, false)});
+			checkAllButton.addEventListener('click', () => { this.toggleAll(true)});
+			unCheckAllButton.addEventListener('click', () => { this.toggleAll(false)});
 			
 		},
 
-		search: function(value, isRegex) {
+		search: function(value, isRegex, isCaseSensitive) {
 
 			if (history.pushState) {
 
@@ -100,7 +122,8 @@
 
 			this.submit([
 				{ name: 'searchValue', value: value },
-				{ name: 'isRegex', value: isRegex ? 1 : 0 }
+				{ name: 'isRegex', value: isRegex ? 1 : 0 },
+				{ name: 'isCaseSensitive', value: isCaseSensitive ? 1 : 0 }
 			]);
 
 		},
@@ -120,13 +143,14 @@
 			.then((response) => response.json())
 			.then((json) => {
 				this.form.innerHTML = json.html;
-			});
+			})
+			.catch((error) => { console.log(error); });
 
 		},
 
-		toggleAll: function(container, state) {
+		toggleAll: function(state) {
 
-			const checkboxes = container.querySelectorAll('[data-am-toggle] > input');
+			const checkboxes = this.form.querySelectorAll('[data-am-toggle] > input');
 
 			Array.from(checkboxes).forEach((box) => {
 				box.checked = state;

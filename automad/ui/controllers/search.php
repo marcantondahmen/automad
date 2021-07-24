@@ -74,7 +74,8 @@ class Search {
 			$Replacement = new Replacement(
 				Request::post('searchValue'),
 				Request::post('replaceValue'), 
-				Request::post('isRegex')
+				Request::post('isRegex'),
+				Request::post('isCaseSensitive')
 			);
 
 			$Replacement->replaceInFiles(Request::post('files'));
@@ -83,14 +84,15 @@ class Search {
 
 		$Search = new ModelsSearch(
 			Request::post('searchValue'),
-			Request::post('isRegex')
+			Request::post('isRegex'),
+			Request::post('isCaseSensitive')
 		);
 
-		$resultsPerFile = $Search->searchPerFile();
+		$fileResultsArray = $Search->searchPerFile();
 
-		Debug::log($resultsPerFile, 'Results per file');
+		Debug::log($fileResultsArray, 'Results per file');
 
-		if (!$html = SearchResults::render($resultsPerFile)) {
+		if (!$html = SearchResults::render($fileResultsArray)) {
 			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
 		}
 

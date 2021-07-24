@@ -35,66 +35,59 @@
  */
 
 
-namespace Automad\UI\Models;
+namespace Automad\UI\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	A wrapper class for all results for a given data field.
+ *	A wrapper class for all results for a given data file.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class SearchDataFieldResults {
+class FileResults {
 
 
 	/**
-	 *	The field name.
+	 *	The file path.
 	 */
 
-	public $key;
+	public $path;
 
 
 	/**
-	 *	The original search string or regex.
+	 *	The page URL or false for shared data.
 	 */
 
-	public $searchValue;
+	public $url;
 
 
 	/**
-	 *	An array with all found matches in the field value. 
-	 *	Note that the matches can differ in case the search value is an unescaped regex string.
-	 */
-
-	public $matches = false;
-
-
-	/**
-	 *	A presenation string of all joined matches with wrapping context.
-	 */
-
-	public $context = '';
-	
-
-	/**
-	 * Initialize a new field results instance.
+	 *	The array of `FieldResults`.
 	 *
-	 * @param string $key
-	 * @param string $searchValue
-	 * @param array $matches
-	 * @param string $context
+	 *	@see \Automad\UI\Models\Search\FieldResults
 	 */
 
-	public function __construct($key, $searchValue, $matches, $context) {
+	public $fieldResultsArray;
 
-		$this->key = $key;
-		$this->searchValue = $searchValue;
-		$this->matches = $matches;
-		$this->context = $context;
+
+	/**
+	 *	Initialize a new field results instance.
+	 *
+	 *	@see \Automad\UI\Models\Search\FieldResults
+	 *	@param string $path
+	 *	@param array $fieldResultsArray
+	 *	@param string $url
+	 */
+
+	public function __construct($path, $fieldResultsArray, $url = false) {
+
+		$this->path = $path;
+		$this->fieldResultsArray = $fieldResultsArray;
+		$this->url = $url;
 
 	}
 
