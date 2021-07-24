@@ -37,10 +37,10 @@
 
 namespace Automad\UI\Models;
 
+use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\UI\Models\Search\FieldResults;
 use Automad\UI\Models\Search\FileResults;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -80,14 +80,15 @@ class Search {
 	/**
 	 *	Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
+	 *	@param \Automad\Core\Automad $Automad
 	 *	@param string $searchValue
 	 *	@param boolean $isRegex
 	 *	@param boolean $isCaseSensitive
 	 */
 
-	public function __construct($searchValue, $isRegex, $isCaseSensitive) {
+	public function __construct($Automad, $searchValue, $isRegex, $isCaseSensitive) {
 
-		$this->Automad = UICache::get();
+		$this->Automad = $Automad;
 		$this->searchValue = $searchValue;
 		$this->regexFlags = 'is';
 
@@ -137,8 +138,36 @@ class Search {
 
 
 	/**
+	 *	Check whether a property name represents a valid block property.
+	 *
+	 *	@param string $property
+	 *	@return boolean true if the property name is in the whitelist
+	 */
+
+	private function isValidBlockProperty($property) {
+
+		$validProperties = array(
+			'text', 
+			'items', 
+			'content', 
+			'caption', 
+			'url', 
+			'globs', 
+			'primaryText', 
+			'primaryLink', 
+			'secondaryText', 
+			'secondaryLink', 
+			'code'
+		);
+
+		return in_array($property, $validProperties);
+
+	}
+
+
+	/**
 	 *	Perform a search in a single data array and return an
-	 *	array of `\Automad\UI\Models\Search\FieldResults`.
+	 *	array of `FieldResults`.
 	 *
 	 *	@see \Automad\UI\Models\Search\FieldResults
 	 *	@param array $data
@@ -186,7 +215,15 @@ class Search {
 
 	private function searchTextField($key, $value) {
 
-		if (preg_match('/(:|hidden|private|date|checkbox|tags|color)/', $key)) {
+		$ignoredKeys = array(
+			AM_KEY_HIDDEN,
+			AM_KEY_PRIVATE,
+			AM_KEY_THEME,
+			AM_KEY_URL
+		);
+
+		if (preg_match('/^(:|date|checkbox|tags|color)/', $key) || in_array($key, $ignoredKeys)) {
+			Debug::log($key, 'Ignore key');
 			return false;
 		}
 
@@ -251,9 +288,9 @@ class Search {
 
 			} else {
 
-				foreach ($block->data as $value) {
+				foreach ($block->data as $blockProperty => $value) {
 
-					if (is_string($value)) {
+					if (is_string($value) && $this->isValidBlockProperty($blockProperty)) {
 						if ($res = $this->searchTextField($key, $value)) {
 							$results[] = $res;
 						}

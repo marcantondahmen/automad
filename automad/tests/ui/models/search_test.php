@@ -114,7 +114,7 @@ class Search_Test extends TestCase {
 						'/shared/data.txt',
 						array(
 							new FieldResults(
-								'text',
+								'shared',
 								array('default text content'),
 								'Shared <mark>default text content</mark>'
 							)
@@ -122,6 +122,18 @@ class Search_Test extends TestCase {
 						false
 					)
 				)
+			),
+			array(
+				'text-search',
+				false,
+				true,
+				array()
+			),
+			array(
+				'left',
+				true,
+				true,
+				array()
 			)
 		);
 

@@ -24,7 +24,7 @@ class Mock extends TestCase {
 	public function createAutomad($template = '') {
 		
 		$Shared = new Shared();
-		$Shared->data['text'] = 'Shared default text content'; 
+		$Shared->data['shared'] = 'Shared default text content'; 
 		$collection = $this->createCollection($Shared, $template);
 		$methods = array_diff(
 			get_class_methods('\Automad\Core\Automad'), 
