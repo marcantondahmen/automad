@@ -290,12 +290,20 @@ class Search {
 
 				foreach ($block->data as $blockProperty => $value) {
 
-					if (is_string($value) && $this->isValidBlockProperty($blockProperty)) {
-						if ($res = $this->searchTextField($key, $value)) {
-							$results[] = $res;
+					if ($this->isValidBlockProperty($blockProperty)) {
+
+						if (is_array($value)) {
+							$value = json_encode($value);
 						}
+
+						if (is_string($value)) {
+							if ($res = $this->searchTextField($key, $value)) {
+								$results[] = $res;
+							}
+						}
+
 					}
-					
+
 				}
 
 			}

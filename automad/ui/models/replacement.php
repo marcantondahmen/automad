@@ -193,14 +193,25 @@ class Replacement {
 
 				foreach ($block->data as $key => $value) {
 
+					$isJson = false;
+
+					if (is_array($value)) {
+						$value = json_encode($value);
+						$isJson = true;
+					}
+
 					if (is_string($value)) {
 
 						$block->data->{$key} = preg_replace(
 							'/' . $this->searchValue . '/' . $this->regexFlags,
 							$this->replaceValue,
-							$block->data->{$key}
+							$value
 						);
 
+					}
+
+					if ($isJson) {
+						$block->data->{$key} = json_decode($block->data->{$key});
 					}
 
 				}
