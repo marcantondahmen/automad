@@ -95,7 +95,7 @@ class Dashboard {
 					$output = array();
 				}
 				
-				$this->output = json_encode($output, JSON_UNESCAPED_SLASHES);
+				$this->output = json_encode($this->utf8Encode($output), JSON_UNESCAPED_SLASHES);
 
 			} else {
 
@@ -167,6 +167,46 @@ class Dashboard {
 		return is_readable(
 			AM_BASE_DIR . '/' . strtolower(str_replace('\\', '/', $className) . '.php')
 		);
+
+	}
+
+
+	/**
+	 *	Recursively utf8 encode data.
+	 * 
+	 *	@param mixed $data
+	 *	@return mixed $data
+	 */
+
+	private function utf8Encode($data) {
+
+		if (is_string($data)) {
+
+			return utf8_encode($data);
+
+		} else if (is_array($data)) {
+
+			$return = array();
+
+			foreach ($data as $key => $value) {
+				$return[$key] = $this->utf8Encode($value);
+			};
+
+			return $return;
+
+		} else if (is_object($data)) {
+
+			foreach ($data as $key => $value) {
+				$data->{$key} = $this->utf8Encode($value);
+			};
+
+			return $data;
+
+		} else {
+
+			return $data;
+
+		}
 
 	}
 
