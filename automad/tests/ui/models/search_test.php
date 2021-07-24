@@ -33,7 +33,10 @@ class Search_Test extends TestCase {
 
 		$results = $Search->searchPerFile();
 
-		$this->assertSame(serialize($results), serialize($expected));
+		$this->assertSame(
+			json_encode($results, JSON_PRETTY_PRINT), 
+			json_encode($expected, JSON_PRETTY_PRINT)
+		);
 
 	}
 
@@ -134,6 +137,24 @@ class Search_Test extends TestCase {
 				true,
 				true,
 				array()
+			),
+			array(
+				'first column .*? header',
+				true,
+				false,
+				array(
+					new FileResults(
+						'/pages/01.block-search/default.txt',
+						array(
+							new FieldResults(
+								'+main',
+								array('First Column Table Header'),
+								'[["<mark>First Column Table Header</mark>","Second Column Tab'
+							)
+						),
+						'/block-search'
+					)
+				)
 			)
 		);
 

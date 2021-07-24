@@ -112,6 +112,21 @@ class Mock extends TestCase {
 									}
 								},
 								{
+									"type": "table",
+									"data": {
+										"content": [
+											[
+												"First Column Table Header",
+												"Second Column Table Header"
+											],
+											[
+												"First table row and column",
+												"First table row and second column"
+											]
+										]
+									}
+								},
+								{
 									"type": "section",
 									"data": {
 										"content": {
