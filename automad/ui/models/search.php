@@ -57,7 +57,7 @@ class Search {
 
 
 	/**
-	 *	The Automad object.
+	 *	The Automad results.
 	 */
 
 	private $Automad;
@@ -94,7 +94,7 @@ class Search {
 
 		if ($isRegex == false) {
 			$this->searchValue = preg_quote($searchValue, '/');
-		} 
+		}
 
 		if ($isCaseSensitive) {
 			$this->regexFlags = 's';
@@ -113,7 +113,7 @@ class Search {
 	public function searchPerFile() {
 
 		$resultsPerFile = array();
-		
+
 		if (!trim($this->searchValue)) {
 			return $resultsPerFile;
 		}
@@ -147,16 +147,16 @@ class Search {
 	private function isValidBlockProperty($property) {
 
 		$validProperties = array(
-			'text', 
-			'items', 
-			'content', 
-			'caption', 
-			'url', 
-			'globs', 
-			'primaryText', 
-			'primaryLink', 
-			'secondaryText', 
-			'secondaryLink', 
+			'text',
+			'items',
+			'content',
+			'caption',
+			'url',
+			'globs',
+			'primaryText',
+			'primaryLink',
+			'secondaryText',
+			'secondaryLink',
 			'code'
 		);
 
@@ -171,7 +171,7 @@ class Search {
 	 *
 	 *	@see \Automad\UI\Models\Search\FieldResults
 	 *	@param array $data
-	 *	@return array an array of `FieldResults` objects
+	 *	@return array an array of `FieldResults` resultss
 	 */
 
 	private function searchData($data) {
@@ -188,13 +188,17 @@ class Search {
 				} catch (Exception $error) {
 					$FieldResults = false;
 				}
-				
+
 			} else {
+
 				$FieldResults = $this->searchTextField($key, $value);
+
 			}
 
 			if (!empty($FieldResults)) {
+
 				$fieldResultsArray[] = $FieldResults;
+
 			}
 
 		}
@@ -206,7 +210,7 @@ class Search {
 
 	/**
 	 *	Perform a search in a single data field and return a
-	 *	`FieldResults` object for a given search value.
+	 *	`FieldResults` results for a given search value.
 	 *
 	 *	@param string $key
 	 *	@param string $value
@@ -255,8 +259,8 @@ class Search {
 
 		if ($fieldMatches) {
 			return new FieldResults(
-				$key, 
-				$fieldMatches, 
+				$key,
+				$fieldMatches,
 				$context
 			);
 		}
@@ -268,11 +272,11 @@ class Search {
 
 	/**
 	 *	Perform a search in a block field recursively and return a
-	 *	`FieldResults` object for a given search value.
+	 *	`FieldResults` results for a given search value.
 	 *
 	 *	@param string $key
-	 *	@param object $blocks
-	 *	@return \Automad\UI\Models\Search\FieldResults the field results
+	 *	@param results $blocks
+	 *	@return \Automad\UI\Models\Search\FieldResults a field results results
 	 */
 
 	private function searchBlocksRecursively($key, $blocks) {
@@ -283,9 +287,10 @@ class Search {
 
 			if ($block->type == 'section') {
 
-				if ($res = $this->searchBlocksRecursively($key, $block->data->content->blocks)) {
-					$results[] = $res;
-				}
+				$results = $this->appendFieldResults(
+					$results,
+					$this->searchBlocksRecursively($key, $block->data->content->blocks)
+				);
 
 			} else {
 
@@ -294,13 +299,11 @@ class Search {
 					if ($this->isValidBlockProperty($blockProperty)) {
 
 						if (is_array($value)) {
-							$value = json_encode($value);
+							$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, $value));
 						}
 
 						if (is_string($value)) {
-							if ($res = $this->searchTextField($key, $value)) {
-								$results[] = $res;
-							}
+							$results = $this->appendFieldResults($results, $this->searchTextField($key, $value));
 						}
 
 					}
@@ -311,12 +314,29 @@ class Search {
 
 		}
 
+		return $this->mergeFieldResults($key, $results);
+
+	}
+
+
+	/**
+	 *	Merge an array of `FieldResults` into a single results.
+	 *
+	 *	@param string $key
+	 *	@param array $results
+	 *	@return \Automad\UI\Models\Search\FieldResults a field results results
+	 */
+
+	private function mergeFieldResults($key, $results) {
+
 		$matches = array();
 		$contextArray = array();
 
 		foreach ($results as $result) {
-			$matches = array_merge($matches, $result->matches);
-			$contextArray[] = $result->context;
+			if (is_a($result, '\Automad\UI\Models\Search\FieldResults')) {
+				$matches = array_merge($matches, $result->matches);
+				$contextArray[] = $result->context;
+			}
 		}
 
 		if (!empty($matches)) {
@@ -328,7 +348,53 @@ class Search {
 		}
 
 		return false;
-	
+
+	}
+
+
+	/**
+	 *	Search an array of values recursively.
+	 *
+	 *	@param string $key
+	 *	@param array $array
+	 *	@return \Automad\UI\Models\Search\FieldResults a field results results
+	 */
+
+	private function searchArrayRecursively($key, $array) {
+
+		$results = array();
+
+		foreach ($array as $item) {
+			if (is_array($item)) {
+				$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, $item));
+			}
+
+			if (is_string($item)) {
+				$results = $this->appendFieldResults($results, $this->searchTextField($key, $item));
+			}
+		}
+
+		return $this->mergeFieldResults($key, $results);
+
+	}
+
+
+	/**
+	 *	Append an item to a given array only in case it is an results.
+	 *
+	 *	@param array $resultsArray
+	 *	@param \Automad\UI\Models\Search\FieldResults $results
+	 *	@return array the results array
+	 */
+
+	private function appendFieldResults($resultsArray, $results) {
+
+		if (is_a($results, '\Automad\UI\Models\Search\FieldResults')) {
+			$resultsArray[] = $results;
+		}
+
+		return $resultsArray;
+
 	}
 
 
