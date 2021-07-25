@@ -42,6 +42,12 @@
 	// Cover overlapping content (like selected panels) below with shadow when switcher is sticky.
 	box-shadow: 1.43rem 0 0 @am-bg, -1.43rem 0 0 @am-bg;
 
+	& .uk-flex {
+		& * + * {
+			margin-left: @am-sticky-padding;
+		}
+	}
+
 	@media (min-height: 700px) {
 
 		position: sticky;

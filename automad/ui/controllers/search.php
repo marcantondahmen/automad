@@ -37,8 +37,14 @@
 
 namespace Automad\UI\Controllers;
 
+use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\Core\Selection;
+use Automad\UI\Components\Alert\Alert;
+use Automad\UI\Components\Layout\SearchResults;
+use Automad\UI\Models\Replacement;
+use Automad\UI\Models\Search as ModelsSearch;
+use Automad\UI\Models\Search\FileKeys;
+use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,45 +62,59 @@ class Search {
 
 
 	/**
-	 *	Get search results.
+	 *	Perform a search and replace.
 	 * 
-	 *	@return array the results array
+	 *	@return array the output array
 	 */
 
-	public static function results() {
+	public static function searchAndReplace() {
 
-		$Automad = UICache::get();
-		$pages = array();
+		$output = array();
+		
+		if (Request::post('replaceSelected')) {
 
-		if ($query = Request::query('query')) {
+			$files = Request::post('files');
 
-			$collection = $Automad->getCollection();
+			if (!empty($files)) {
 
-			if (array_key_exists($query, $collection)) {
+				$fileKeysArray = array();
+				$Replacement = new Replacement(
+					Request::post('searchValue'),
+					Request::post('replaceValue'),
+					Request::post('isRegex'),
+					Request::post('isCaseSensitive')
+				);
 
-				// If $query matches an actual URL of an existing page, just get that page to be the only match in the $pages array.
-				// Since $pages has only one element, the request gets directly redirected to the edit page (see below).
-				$pages = array($Automad->getPage($query));
+				foreach ($files as $path => $keysJson) {
+					$fileKeysArray[] = new FileKeys($path, json_decode($keysJson, true));
+				}
 
-			} else {
+				$Replacement->replaceInFiles($fileKeysArray);
 
-				$Selection = new Selection($collection);
-				$Selection->filterByKeywords($query);
-				$Selection->sortPages(AM_KEY_MTIME . ' desc');
-				$pages = $Selection->getSelection(false);
 			}
 
-			// Redirect to edit mode for a single result or in case $query represents an actually existing URL.
-			if (count($pages) == 1) {
-				$Page = reset($pages);
-				header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Page&url=' . urlencode($Page->origUrl));
-				die();
-			}
 		}
 
-		return $pages;
+		$Search = new ModelsSearch(
+			UICache::get(),
+			Request::post('searchValue'),
+			Request::post('isRegex'),
+			Request::post('isCaseSensitive')
+		);
+
+		$fileResultsArray = $Search->searchPerFile();
+
+		Debug::log($fileResultsArray, 'Results per file');
+
+		if (!$html = SearchResults::render($fileResultsArray)) {
+			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
+		}
+
+		$output['html'] = $html;
+
+		return $output;
 
 	}
-
+	
 
 }

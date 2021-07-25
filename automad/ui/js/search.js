@@ -26,7 +26,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,63 +35,132 @@
 
 
 /*
- *	Get autocomplete data from AJAX request and 
- *	submit selected forms when clicking on an autocomplete item or 
- *	pressing enter when an autocomplete item is focused.      
+ *	Search and replace form handling. 
  */
-
+	
 +function(Automad, $, UIkit) {
-
+	
 	Automad.search = {
 		
-		selector: '[data-am-search]',
+		form: null,
 		
-		submitForm: function(e) {
+		init: function() {
 			
-			e.preventDefault();
+			const container = document.querySelector('[data-am-search]');
 			
-			var $form = $(e.target).closest('form');
+			if (!container) {
+				return false;
+			}
 			
-			// Set timeout to make sure that the selected dropdown item is passed as value.
-			setTimeout(function() {	
-				$form.submit();
-			}, 50);
+			const searchField = container.querySelector('[name="searchValue"]');
+			const replaceField = container.querySelector('[name="replaceValue"]');
+			const replaceButton = container.querySelector('[name="replaceSelected"]');
+			const checkAllButton = container.querySelector('[name="checkAll"]');
+			const unCheckAllButton = container.querySelector('[name="unCheckAll"]');
+			const regexCheckbox = container.querySelector('[name="isRegex"]');
+			const caseCheckbox = container.querySelector('[name="isCaseSensitive"]');
 			
-		}
-		
-	};
-	
-	// Get autocomplete data.
-	// Note that to prevent getting data when being in page editing context, the AJAX request is only
-	// submitted in case there is an actual autocomplete element on the page, meaning the current context is the dashboard.
-	$(document).on('ready', function() {
-		
-		if ($('.am-dashboard').length > 0) {
+			this.form = container.querySelector('form');
 			
-			$.post('?controller=UI::autocompleteSearch', function(data) {
+			searchField.addEventListener('keyup', UIkit.Utils.debounce(() => {
+				this.search(
+					searchField.value, 
+					regexCheckbox.checked,
+					caseCheckbox.checked
+				);
+			}, 200));
 
-				var options = { source: data.autocomplete, minLength: 2 };
+			regexCheckbox.addEventListener('change', () => {
+				this.search(
+					searchField.value,
+					regexCheckbox.checked,
+					caseCheckbox.checked
+				);
+			});
 
-				$(Automad.search.selector + ' .uk-autocomplete').each(function() {
-					UIkit.autocomplete($(this), options);
-				});
-				
-			}, 'json');
+			caseCheckbox.addEventListener('change', () => {
+				this.search(
+					searchField.value,
+					regexCheckbox.checked,
+					caseCheckbox.checked
+				);
+			});
+
+			replaceButton.addEventListener('click', () => {
+				this.submit([
+					{ name: 'searchValue', value: searchField.value },
+					{ name: 'replaceValue', value: replaceField.value },
+					{ name: 'replaceSelected', value: true },
+					{ name: 'isRegex', value: regexCheckbox.checked ? 1 : 0 },
+					{ name: 'isCaseSensitive', value: caseCheckbox.checked ? 1 : 0 }
+				])
+			});
+
+			this.search(
+				searchField.value,
+				regexCheckbox.checked,
+				caseCheckbox.checked
+			);
+
+			checkAllButton.addEventListener('click', () => { this.toggleAll(true)});
+			unCheckAllButton.addEventListener('click', () => { this.toggleAll(false)});
 			
+		},
+
+		search: function(value, isRegex, isCaseSensitive) {
+
+			if (history.pushState) {
+
+				const url = window.location.href.replace(
+					/(&search=.*)?$/,
+					`&search=${encodeURIComponent(value)}`
+				);
+
+				window.history.pushState({ path: url }, '', url);
+
+			}
+
+			this.submit([
+				{ name: 'searchValue', value: value },
+				{ name: 'isRegex', value: isRegex ? 1 : 0 },
+				{ name: 'isCaseSensitive', value: isCaseSensitive ? 1 : 0 }
+			]);
+
+		},
+
+		submit: function(fields) {
+
+			const formData = new FormData(this.form);
+
+			fields.forEach((field) => {
+				formData.append(field.name, field.value);
+			});
+
+			fetch('?controller=Search::searchAndReplace', {
+				method: 'POST',
+				body: formData
+			})
+			.then((response) => response.json())
+			.then((json) => {
+				this.form.innerHTML = json.html;
+			})
+			.catch((error) => { console.log(error); });
+
+		},
+
+		toggleAll: function(state) {
+
+			const checkboxes = this.form.querySelectorAll('[data-am-toggle] > input');
+
+			Array.from(checkboxes).forEach((box) => {
+				box.checked = state;
+				Automad.toggle.update($(box));
+			});
+
 		}
 		
-	});
+	}
 	
-	// Submit autocomplete form on hitting the return key.
-	$(document).on('keydown', Automad.search.selector + ' .uk-autocomplete input[type="search"]', function(e) {
-		
-		if (e.which == 13) {
-			Automad.search.submitForm(e);	
-		}
-		
-	});
-	
-	// Submit form when selecting an autocomplete value (navbar only).
-	$(document).on('click', Automad.search.selector + ' .uk-dropdown a', Automad.search.submitForm);
+	$(document).on('ready', () => { Automad.search.init(); });
 	
 }(window.Automad = window.Automad || {}, jQuery, UIkit);

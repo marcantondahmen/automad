@@ -59,7 +59,7 @@ class Variables {
 	 *	@param object $Automad 
 	 *	@param array $keys 
 	 *	@param array $data 
-	 *	@param object $theme
+	 *	@param object $Theme
 	 *	@param string $title
 	 *	@return string the rendered accordion item
 	 */

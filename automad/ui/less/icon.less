@@ -36,10 +36,12 @@
 @icon-font-path:				"../../../lib/vendor/uikit/uikit/src/fonts";
 
 
-.am-icon-headless {
+.am-icon-headless,
+.uk-icon-headless {
 
 	&:after {
 		content: '{ }';
+		font-family: @base-body-font-family;
 		position: relative;
 		top: -0.11rem;
 		font-weight: 620;

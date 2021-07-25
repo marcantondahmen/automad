@@ -806,6 +806,10 @@ images_shared: Allmänna bilder
 
 -
 
+jumpbar_placeholder: Hoppa till ...
+
+-
+
 link_placeholder: Börja skriva en sidrubrik eller klistra in en extern länk här
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Variabelt namn
 
 -
 
-search_no_results: Inga sidor hittades!
+search_no_results: Din sökning återvände inte några resultat.
 
 -
 
-search_placeholder: Sök i
+search_placeholder: Sök
 
 -
 
-search_title: Sökresultat
+search_replace_placeholder: Byta ut
+
+-
+
+search_replace_selected: Byt ut valda
+
+-
+
+search_replace_check_all: Markera alla
+
+-
+
+search_replace_uncheck_all: Avbocka alla
+
+-
+
+search_is_case_sensitive: Skiftlägeskänsliga
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Sök
 
 -
 

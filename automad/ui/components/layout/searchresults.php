@@ -27,7 +27,7 @@
  *
  *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
+ *	Copyright (c) 2021 by Marc Anton Dahmen
  *	https://marcdahmen.de
  *
  *	Licensed under the MIT license.
@@ -35,56 +35,43 @@
  */
 
 
-namespace Automad\UI\Components\Form;
+namespace Automad\UI\Components\Layout;
 
+use Automad\UI\Components\Card\SearchFileResults;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The search field component. 
+ *	The search layout.
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Search {
+class SearchResults {
 
 
 	/**
-	 *	Create a search field.
+	 *	Render the search results layout.
 	 *
-	 *	@param string $placeholder
-	 *	@param string $tooltip
-	 *	@return string The HTML for the search field
+	 *	@see \Automad\UI\Models\Search\FileResults
+	 *	@param array $fileResultsArray
+	 *	@return string the rendered search results layout.
 	 */
-	
-	public static function render($placeholder = '', $tooltip = '') {
-		
-		if ($tooltip) {
-			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
+
+	public static function render($fileResultsArray) {
+
+		$html = '';
+
+		foreach ($fileResultsArray as $FileResults) {
+			$html .= SearchFileResults::render($FileResults);
 		}
 
-		$dashboard = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		
-		return  <<< HTML
-				<form class="uk-form uk-width-1-1" action="$dashboard" method="get" data-am-search>
-					<input type="hidden" name="view" value="Search" />
-					<div class="uk-autocomplete uk-width-1-1">
-						<input
-						class="uk-form-controls uk-width-1-1"
-						name="query"
-						type="search"
-						placeholder="$placeholder"
-						$tooltip
-						required
-						/>
-					</div> 
-				</form>
-HTML;
-		
+		return $html;
+
 	}
-	
+
 
 }

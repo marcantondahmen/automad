@@ -806,6 +806,10 @@ images_shared: Vispārīgi attēli
 
 -
 
+jumpbar_placeholder: Pārlēkt uz ...
+
+-
+
 link_placeholder: Sāciet rakstīt lapas nosaukumu vai šeit ielīmējiet ārēju saiti
 
 -
@@ -966,7 +970,7 @@ shared_var_name: Mainīgā nosaukums
 
 -
 
-search_no_results: Nav atrasta neviena lapa!
+search_no_results: Jūsu meklēšana neatdeva rezultātus.
 
 -
 
@@ -974,7 +978,31 @@ search_placeholder: Meklēt
 
 -
 
-search_title: Meklēšanas rezultāti
+search_replace_placeholder: Aizvietot
+
+-
+
+search_replace_selected: Nomainiet izvēlēto
+
+-
+
+search_replace_check_all: Pārbaudi visu
+
+-
+
+search_replace_uncheck_all: Noņemiet atzīmi no visiem
+
+-
+
+search_is_case_sensitive: Lietuve
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Meklēt
 
 -
 

@@ -902,6 +902,17 @@ install_title: Create User Account
 
 
 
+jumpbar_placeholder: Jump to ...
+
+-
+
+
+
+
+
+
+
+
 link_placeholder: Start typing a page title or paste an external link here
 
 -
@@ -1104,15 +1115,39 @@ shared_var_name: Variable Name
 
 
 
-search_no_results: No pages found!
+search_no_results: Your search did not return any results.
 
 -
 
-search_placeholder: Search in
+search_placeholder: Search
 
 -
 
-search_title: Search Results
+search_replace_placeholder: Replace
+
+-
+
+search_replace_selected: Replace Selected
+
+-
+
+search_replace_check_all: Check All
+
+-
+
+search_replace_uncheck_all: Uncheck All
+
+-
+
+search_is_case_sensitive: Case Sensitive
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Search
 
 -
 

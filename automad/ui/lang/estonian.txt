@@ -806,6 +806,10 @@ images_shared: Üldised pildid
 
 -
 
+jumpbar_placeholder: Hüppa ...
+
+-
+
 link_placeholder: Alustage lehe pealkirja tippimist või kleepige siia väline link
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Muutuja nimi
 
 -
 
-search_no_results: Ühtegi lehte ei leitud!
+search_no_results: Teie otsing ei taganud mingeid tulemusi.
 
 -
 
-search_placeholder: Otsige
+search_placeholder: Otsing
 
 -
 
-search_title: Otsingu tulemused
+search_replace_placeholder: Asendama
+
+-
+
+search_replace_selected: Vahetage valitud
+
+-
+
+search_replace_check_all: Kontrollige kõiki
+
+-
+
+search_replace_uncheck_all: Tühjendage kõik
+
+-
+
+search_is_case_sensitive: Tõstutundlik
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Otsing
 
 -
 

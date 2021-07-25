@@ -806,6 +806,10 @@ images_shared: Bendrieji vaizdai
 
 -
 
+jumpbar_placeholder: Peršokti į ...
+
+-
+
 link_placeholder: Pradėkite rašyti puslapio pavadinimą arba čia įklijuokite išorinę nuorodą
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Kintamojo pavadinimas
 
 -
 
-search_no_results: Nerasta puslapių!
+search_no_results: Jūsų paieška negrąžino jokių rezultatų.
 
 -
 
-search_placeholder: Ieškoti
+search_placeholder: Paieška
 
 -
 
-search_title: Paieškos rezultatai
+search_replace_placeholder: Pakeisti
+
+-
+
+search_replace_selected: Pakeiskite pasirinktą
+
+-
+
+search_replace_check_all: Viską Patikrink
+
+-
+
+search_replace_uncheck_all: Atžymėk visus
+
+-
+
+search_is_case_sensitive: Dykuma
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Paieška
 
 -
 

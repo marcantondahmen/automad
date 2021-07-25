@@ -806,6 +806,10 @@ images_shared: Генерал Имагес
 
 -
 
+jumpbar_placeholder: Скочи на ...
+
+-
+
 link_placeholder: Почните да куцате наслов странице или овде налепите спољну везу
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Назив променљиве
 
 -
 
-search_no_results: Није пронађена ниједна страница!
+search_no_results: Ваша претрага није вратила никакве резултате.
 
 -
 
-search_placeholder: Претрага у
+search_placeholder: Претрага
 
 -
 
-search_title: Резултати претраге
+search_replace_placeholder: Заменити
+
+-
+
+search_replace_selected: Замените одабрано
+
+-
+
+search_replace_check_all: Штиклирати све
+
+-
+
+search_replace_uncheck_all: Поништите све
+
+-
+
+search_is_case_sensitive: Велика и мала слова
+
+-
+
+search_is_regex: Регек
+
+-
+
+search_title: Претрага
 
 -
 

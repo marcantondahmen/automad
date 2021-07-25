@@ -87,7 +87,7 @@
 			tab = Automad.switcher.getActiveTab();
 		
 		// Only update if the hash doesn't match the active tab.	
-		if ($active.index() != tab && tab > 0) {
+		if ($active.index() != tab) {
 			$switcher.children('button').eq(tab).click();
 		}
 			

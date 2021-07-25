@@ -806,6 +806,10 @@ images_shared: Algemene afbeeldingen
 
 -
 
+jumpbar_placeholder: Spring naar ...
+
+-
+
 link_placeholder: Begin met het typen van een paginatitel of plak hier een externe link
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Variabele naam
 
 -
 
-search_no_results: Geen pagina's gevonden!
+search_no_results: Uw zoekopdracht heeft geen resultaten opgeleverd.
 
 -
 
-search_placeholder: Zoek in
+search_placeholder: Zoeken
 
 -
 
-search_title: Zoekresultaten
+search_replace_placeholder: Vervangen
+
+-
+
+search_replace_selected: Vervang geselecteerde
+
+-
+
+search_replace_check_all: Controleer alles
+
+-
+
+search_replace_uncheck_all: Schakel alles uit
+
+-
+
+search_is_case_sensitive: Hoofdlettergevoelig
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Zoeken
 
 -
 

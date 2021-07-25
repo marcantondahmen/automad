@@ -85,16 +85,17 @@ class Dashboard {
 				$parts = explode('::', $method);
 				$class = $parts[0];
 				
-				header('Content-Type: application/json');
+				header('Content-Type: application/json; charset=utf-8');
 				
 				if (!empty($parts[1]) && $this->classFileExists($class) && method_exists($class, $parts[1])) {
 					$output = call_user_func($method);
+					Debug::log($output, 'OUTPUT');
 					$output['debug'] = Debug::getLog();
 				} else {
 					header('HTTP/1.0 404 Not Found');
 					$output = array();
 				}
-				
+
 				$this->output = json_encode($output, JSON_UNESCAPED_SLASHES);
 
 			} else {
@@ -122,7 +123,7 @@ class Dashboard {
 
 			// In case a controller is requested without being authenticated, redirect page to login page.
 			if (Request::query('controller')) {
-				header('Content-Type: application/json');
+				header('Content-Type: application/json; charset=utf-8');
 				die(json_encode(array('redirect' => AM_BASE_INDEX . AM_PAGE_DASHBOARD)));
 			}
 

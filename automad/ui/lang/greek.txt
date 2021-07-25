@@ -806,6 +806,10 @@ images_shared: Γενικές εικόνες
 
 -
 
+jumpbar_placeholder: Πηδάω σε ...
+
+-
+
 link_placeholder: Ξεκινήστε να πληκτρολογείτε έναν τίτλο σελίδας ή επικολλήστε έναν εξωτερικό σύνδεσμο εδώ
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Μεταβλητό όνομα
 
 -
 
-search_no_results: Δεν βρέθηκαν σελίδες!
+search_no_results: Η αναζήτησή σας δεν επιστρέφει αποτελέσματα.
 
 -
 
-search_placeholder: Αναζήτηση στο
+search_placeholder: Αναζήτηση
 
 -
 
-search_title: Αποτελέσματα αναζήτησης
+search_replace_placeholder: Αντικαθιστώ
+
+-
+
+search_replace_selected: Αντικαταστήστε την επιλεγμένη
+
+-
+
+search_replace_check_all: Ελεγξε τα ολα
+
+-
+
+search_replace_uncheck_all: Ξετσεκαρε τα ολα
+
+-
+
+search_is_case_sensitive: Διάκριση πεζών
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Αναζήτηση
 
 -
 

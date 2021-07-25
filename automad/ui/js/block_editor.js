@@ -161,7 +161,7 @@
 								}
 
 								if (blocksCurrent != blocksNew) {
-									$input.val(JSON.stringify(data, null, 2)).trigger('change');
+									$input.val(JSON.stringify(data, null, 4)).trigger('change');
 								}
 
 							});
@@ -212,6 +212,7 @@
 
 				if (msg.includes('closest') || 
 					msg.includes('updateCurrentInput') ||
+					msg.includes('normalize') ||
 					msg.includes('DOMException')) {
 					event.preventDefault();
 				}

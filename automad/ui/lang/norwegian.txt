@@ -806,6 +806,10 @@ images_shared: Generelle bilder
 
 -
 
+jumpbar_placeholder: Hoppe til ...
+
+-
+
 link_placeholder: Begynn å skrive en sidetittel eller lim inn en ekstern lenke her
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Variabelnavn
 
 -
 
-search_no_results: Ingen sider funnet!
+search_no_results: Søket ditt returnerte ikke noen resultater.
 
 -
 
-search_placeholder: Søk i
+search_placeholder: Søk
 
 -
 
-search_title: Søkeresultater
+search_replace_placeholder: Erstatte
+
+-
+
+search_replace_selected: Erstatt valgt
+
+-
+
+search_replace_check_all: Sjekk alt
+
+-
+
+search_replace_uncheck_all: Fjern merket for alt
+
+-
+
+search_is_case_sensitive: Saksfølsom
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Søk
 
 -
 

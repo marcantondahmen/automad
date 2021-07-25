@@ -806,6 +806,10 @@ images_shared: Общи изображения
 
 -
 
+jumpbar_placeholder: Направо към ...
+
+-
+
 link_placeholder: Започнете да пишете заглавие на страница или поставете тук външна връзка
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Име на променлива
 
 -
 
-search_no_results: Няма намерени страници!
+search_no_results: Вашето търсене не е връщало никакви резултати.
 
 -
 
-search_placeholder: Търсене в
+search_placeholder: Търсене
 
 -
 
-search_title: Резултати от търсенето
+search_replace_placeholder: Заместник
+
+-
+
+search_replace_selected: Заменете избрания
+
+-
+
+search_replace_check_all: Провери всичко
+
+-
+
+search_replace_uncheck_all: Махнете отметката от всички
+
+-
+
+search_is_case_sensitive: Различаващ главни от малки букви
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Търсене
 
 -
 

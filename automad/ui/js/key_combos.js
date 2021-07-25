@@ -51,15 +51,9 @@
 						case 's':
 							e.preventDefault();
 							$('.am-navbar [data-am-submit], .am-inpage .uk-open [type="submit"]').click();
-							break;				
-					}
-				}
-
-				if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
-					switch (String.fromCharCode(e.which).toLowerCase()) {
-						case ' ':
-							e.preventDefault();
-							$('.am-navbar-search [name="query"]').focus();
+							break;
+						case 'j':
+							$('.am-navbar-jump [name="target"]').blur().focus();
 							break;
 					}
 				}

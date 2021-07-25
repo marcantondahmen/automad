@@ -806,6 +806,10 @@ images_shared: Všeobecné obrázky
 
 -
 
+jumpbar_placeholder: Skoč do ...
+
+-
+
 link_placeholder: Začnite písať názov stránky alebo sem vložte externý odkaz
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Názov premennej
 
 -
 
-search_no_results: Nenašli sa žiadne stránky!
+search_no_results: Vaše vyhľadávanie nevrátilo žiadne výsledky.
 
 -
 
-search_placeholder: Hľadať v
+search_placeholder: Vyhľadávanie
 
 -
 
-search_title: Výsledky vyhľadávania
+search_replace_placeholder: Nahradiť
+
+-
+
+search_replace_selected: Vymeňte vybraté
+
+-
+
+search_replace_check_all: Skontrolujte všetky
+
+-
+
+search_replace_uncheck_all: Odznačiť všetky
+
+-
+
+search_is_case_sensitive: Citlivý na veľkosť písmen
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Vyhľadávanie
 
 -
 

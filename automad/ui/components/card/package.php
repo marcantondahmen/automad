@@ -36,7 +36,6 @@
 
 
 namespace Automad\UI\Components\Card;
-use Automad\Core;
 use Automad\UI\Utils\Text;
 
 

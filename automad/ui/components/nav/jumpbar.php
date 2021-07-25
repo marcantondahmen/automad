@@ -35,61 +35,58 @@
  */
 
 
-namespace Automad\UI\Components\Autocomplete;
+namespace Automad\UI\Components\Nav;
 
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The autocomplete JSON data for search component. 
+ *	The jump bar component. 
  *
  *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  *	@license MIT license - https://automad.org/license
  */
 
-class Search {
+class JumpBar {
 
 
 	/**
-	 *	Return a JSON formatted string to be used as autocomplete infomation in a search field.
-	 *	
-	 *	The collected data consists of all page titles, URLs and all available tags.
+	 *	Create a jump bar field.
 	 *
-	 *	@param object $Automad
-	 *	@return string The JSON encoded autocomplete data
+	 *	@param string $placeholder
+	 *	@param string $tooltip
+	 *	@return string The HTML for the jump bar
 	 */
 	
-	public static function render($Automad) {
+	public static function render($placeholder = '', $tooltip = '') {
 		
-		$output = array();
-		$titles = array();
-		$urls = array();
-		$tags = array();
-		$values = array();
-		
-		foreach ($Automad->getCollection() as $Page) {
-			$titles[] = $Page->get(AM_KEY_TITLE);
-			$urls[] = $Page->origUrl;
-			$tags = array_merge($tags, $Page->tags);
+		if ($tooltip) {
+			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}
-		
-		$titles = array_unique($titles);
-		$tags = array_unique($tags);
-		
-		// Sort arrays separately to keep titles, urls and tags grouped.
-		sort($titles);
-		sort($tags);
-		sort($urls);
-		
-		foreach (array_merge($titles, $tags, $urls) as $value) {
-			$values[]['value'] = $value;
-		}
-		
-		$output['autocomplete'] = $values;
-		
-		return $output;
+
+		return <<< HTML
+				<form 
+				class="uk-form uk-width-1-1" 
+				data-am-controller="UI::jump" 
+				data-am-jumpbar
+				>
+					<div 
+					class="uk-autocomplete uk-width-1-1"
+					>
+						<input
+						class="uk-form-controls uk-width-1-1"
+						name="target"
+						type="search"
+						placeholder="$placeholder"
+						$tooltip
+						data-am-watch-exclude
+						/>
+					</div> 
+				</form>
+HTML;
 		
 	}
 	

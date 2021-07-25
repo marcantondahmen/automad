@@ -37,6 +37,8 @@
 // No special markup needed.
 [data-am-toggle] {
 	
+	min-width: 3rem;
+
 	& input {
 		display: none;
 	}
@@ -49,10 +51,16 @@
 		cursor: pointer;
 	}
 
+	&.uk-active {
+		color: @am-success;
+		border-color: @am-success;
+	}
+
 	// Checkboxes.
 	&.am-toggle-checkbox {
 		
 		height: 1.29rem;
+		min-width: 0;
 		vertical-align: baseline;
 		color: @am-border-color;
 		
