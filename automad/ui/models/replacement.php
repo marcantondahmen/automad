@@ -193,26 +193,7 @@ class Replacement {
 
 				foreach ($block->data as $key => $value) {
 
-					$isJson = false;
-
-					if (is_array($value)) {
-						$value = json_encode($value);
-						$isJson = true;
-					}
-
-					if (is_string($value)) {
-
-						$block->data->{$key} = preg_replace(
-							'/' . $this->searchValue . '/' . $this->regexFlags,
-							$this->replaceValue,
-							$value
-						);
-
-					}
-
-					if ($isJson) {
-						$block->data->{$key} = json_decode($block->data->{$key});
-					}
+					$block->data->{$key} = $this->replaceInValueRecursively($value);
 
 				}
 
@@ -221,6 +202,42 @@ class Replacement {
 		}
 
 		return $blocks;
+
+	}
+
+
+	/**
+	 *	Replace searched string in a value that is either a string or an multidimensional array of strings.
+	 *
+	 *	@param mixed $value
+	 *	@return mixed $value
+	 */
+
+	private function replaceInValueRecursively($value) {
+
+		if (is_array($value)) {
+
+			$array = array();
+
+			foreach ($value as $item) {
+				$array[] = $this->replaceInValueRecursively($item);
+			}
+
+			$value = $array;
+			
+		}
+
+		if (is_string($value)) {
+
+			$value = preg_replace(
+				'/' . $this->searchValue . '/' . $this->regexFlags,
+				$this->replaceValue,
+				$value
+			);
+
+		}
+
+		return $value;
 
 	}
 
