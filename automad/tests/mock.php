@@ -4,6 +4,7 @@ namespace Automad\Tests;
 
 use Automad\Core\Context;
 use Automad\Core\Page;
+use Automad\Core\Parse;
 use Automad\Core\Shared;
 use PHPUnit\Framework\TestCase;
 
@@ -44,7 +45,7 @@ class Mock extends TestCase {
 							
 		$AutomadMock->method('getCollection')->willReturn($collection);
 		$AutomadMock->Shared = $Shared;
-		$AutomadMock->Context = new Context($collection['/']);
+		$AutomadMock->Context = new Context($collection['/page']);
 		
 		return $AutomadMock;
 		
@@ -61,98 +62,56 @@ class Mock extends TestCase {
 
 	private function createCollection($Shared, $template) {
 
+		$theme = '../automad/tests/templates';
+
 		return array(
 			'/' => new Page(
 				array(
-					'title' => 'Test',
-					'url' => '/page',
-					':path' => '/01.page/',
-					':origUrl' => '/page',
-					'theme' => '../automad/tests/templates',
-					':template' => $template,
-					'date' => '2018-07-21 12:00:00',
-					'test' => 'Test String',
-					'quoted' => '"Quoted" "Test" "String"',
-					'x' => '10',
-					'image' => 'image.jpg',
-					'link' => 'test'
+					'title' => 'Home',
+					'url' => '/',
+					':path' => '/',
+					':origUrl' => '/',
+					'theme' => $theme,
+					':template' => $template
 				),
 				$Shared
 			),
-			'/text-search' => new Page(
-				array(
-					'title' => 'Text Search',
-					'url' => '/text-search',
-					':path' => '/01.text-search/',
-					':origUrl' => '/text-search',
-					'theme' => '../automad/tests/templates',
-					':template' => $template,
-					'text' => 'find this lower case string',
+			'/page' => new Page(
+				array_merge(
+					array(
+						'url' => '/page',
+						':path' => '/01.page/',
+						':origUrl' => '/page',
+						'theme' => $theme,
+						':template' => $template
+					),
+					Parse::textFile(__DIR__ . '/data/page.txt')
 				),
 				$Shared
 			),
-			'/block-search' => new Page(
-				array(
-					'title' => 'Block Search',
-					'url' => '/block-search',
-					':path' => '/01.block-search/',
-					':origUrl' => '/block-search',
-					'theme' => '../automad/tests/templates',
-					':template' => $template,
-					'+main' => <<< JSON
-						{
-							"time": 1627118722514,
-							"blocks": [
-								{
-									"type": "header",
-									"data": {
-										"text": "Find this String",
-										"level": 2,
-										"alignment": "left"
-									}
-								},
-								{
-									"type": "table",
-									"data": {
-										"content": [
-											[
-												"First Column Table Header",
-												"Second Column Table Header"
-											],
-											[
-												"First table row and column",
-												"First table row and second column"
-											]
-										]
-									}
-								},
-								{
-									"type": "section",
-									"data": {
-										"content": {
-											"time": 1627118702124,
-											"blocks": [
-												{
-													"type": "paragraph",
-													"data": {
-														"text": "Find this String",
-														"large": false,
-														"alignment": "left"
-													}
-												}
-											],
-											"version": "2.20.2"
-										},
-										"style": {},
-										"justify": "start",
-										"gap": "",
-										"minBlockWidth": ""
-									}
-								}
-							],
-							"version": "2.20.2"
-						}
-JSON
+			'/text' => new Page(
+				array_merge(
+					array(
+						'url' => '/text',
+						':path' => '/01.text/',
+						':origUrl' => '/text',
+						'theme' => $theme,
+						':template' => $template,
+					),
+					Parse::textFile(__DIR__ . '/data/text.txt')
+				),
+				$Shared
+			),
+			'/blocks' => new Page(
+				array_merge(
+					array(
+						'url' => '/blocks',
+						':path' => '/01.blocks/',
+						':origUrl' => '/blocks',
+						'theme' => $theme,
+						':template' => $template,
+					),
+					Parse::textFile(__DIR__ . '/data/blocks.txt')
 				),
 				$Shared
 			)

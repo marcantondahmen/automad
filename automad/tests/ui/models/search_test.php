@@ -44,67 +44,67 @@ class Search_Test extends TestCase {
 
 		return array(
 			array(
-				'find',
+				'simple',
 				false,
 				false,
 				array(
 					new FileResults(
-						'/pages/01.text-search/default.txt',
+						'/pages/01.text/default.txt',
 						array(
 							new FieldResults(
 								'text',
-								array('find'),
-								'<mark>find</mark> this lower case str'
+								array('simple'),
+								'A <mark>simple</mark> sample text'
 							)
 						),
-						'/text-search'
+						'/text'
 					),
 					new FileResults(
-						'/pages/01.block-search/default.txt',
+						'/pages/01.blocks/default.txt',
 						array(
 							new FieldResults(
 								'+main',
-								array('Find', 'Find'),
-								'<mark>Find</mark> this String ... <mark>Find</mark> this String'
+								array('Simple', 'simple'),
+								'A <mark>Simple</mark> First Column Table ... A <mark>simple</mark> paragraph text'
 							)
 						),
-						'/block-search'
+						'/blocks'
 					)
 				)
 			),
 			array(
-				'find',
+				'Simple',
 				false,
 				true,
 				array(
 					new FileResults(
-						'/pages/01.text-search/default.txt',
+						'/pages/01.blocks/default.txt',
 						array(
 							new FieldResults(
-								'text',
-								array('find'),
-								'<mark>find</mark> this lower case str'
+								'+main',
+								array('Simple'),
+								'A <mark>Simple</mark> First Column Table'
 							)
 						),
-						'/text-search'
+						'/blocks'
 					)
 				)
 			),
 			array(
-				'this\s*lo.er.*?case',
+				'si.*?fi.st co.umn .able',
 				true,
 				false,
 				array(
 					new FileResults(
-						'/pages/01.text-search/default.txt',
+						'/pages/01.blocks/default.txt',
 						array(
 							new FieldResults(
-								'text',
-								array('this lower case'),
-								'find <mark>this lower case</mark> string'
+								'+main',
+								array('Simple First Column Table'),
+								'A <mark>Simple First Column Table</mark> Header'
 							)
 						),
-						'/text-search'
+						'/blocks'
 					)
 				)
 			),
@@ -127,32 +127,31 @@ class Search_Test extends TestCase {
 				)
 			),
 			array(
-				'text-search',
-				false,
-				true,
-				array()
-			),
-			array(
-				'left',
+				'left', // Test ignoring blacklisted properties
 				true,
 				true,
 				array()
 			),
 			array(
-				'first column .*? header',
+				'table.(row|header)',
 				true,
 				false,
 				array(
 					new FileResults(
-						'/pages/01.block-search/default.txt',
+						'/pages/01.blocks/default.txt',
 						array(
 							new FieldResults(
 								'+main',
-								array('First Column Table Header'),
-								'[["<mark>First Column Table Header</mark>","Second Column Tab'
+								array(
+									'Table Header',
+									'Table Header',
+									'table row',
+									'table row'
+								),
+								'Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column'
 							)
 						),
-						'/block-search'
+						'/blocks'
 					)
 				)
 			)
