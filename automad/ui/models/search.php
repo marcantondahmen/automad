@@ -37,7 +37,6 @@
 
 namespace Automad\UI\Models;
 
-use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\UI\Models\Search\FieldResults;
 use Automad\UI\Models\Search\FileResults;
@@ -228,7 +227,6 @@ class Search {
 		);
 
 		if (preg_match('/^(:|date|checkbox|tags|color)/', $key) || in_array($key, $ignoredKeys)) {
-			Debug::log($key, 'Ignore key');
 			return false;
 		}
 
