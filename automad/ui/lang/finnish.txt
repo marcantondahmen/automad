@@ -806,6 +806,10 @@ images_shared: Yleiset kuvat
 
 -
 
+jumpbar_placeholder: Hypätä ...
+
+-
+
 link_placeholder: Aloita sivun otsikon kirjoittaminen tai liitä ulkoinen linkki tähän
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Muuttujan nimi
 
 -
 
-search_no_results: Sivuja ei löytynyt!
+search_no_results: Haku ei palauta tuloksia.
 
 -
 
-search_placeholder: Etsi
+search_placeholder: Hae
 
 -
 
-search_title: Hakutulokset
+search_replace_placeholder: Korvata
+
+-
+
+search_replace_selected: Vaihda valittu
+
+-
+
+search_replace_check_all: Tarkista kaikki
+
+-
+
+search_replace_uncheck_all: Poista kaikki
+
+-
+
+search_is_case_sensitive: Tapauskohtainen
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Hae
 
 -
 

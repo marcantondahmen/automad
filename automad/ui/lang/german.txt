@@ -806,6 +806,10 @@ images_shared: Allgemeine Bilder
 
 -
 
+jumpbar_placeholder: Springe zu ...
+
+-
+
 link_placeholder: Geben Sie hier einen Seitentitel ein oder fügen Sie hier einen externen Link ein
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Variablennamen
 
 -
 
-search_no_results: Keine Seiten gefunden!
+search_no_results: Deine Suche ergab keine Treffer.
 
 -
 
-search_placeholder: Suchen in
+search_placeholder: Suche
 
 -
 
-search_title: Suchergebnisse
+search_replace_placeholder: Ersetzen
+
+-
+
+search_replace_selected: Ausgewählte ersetzen
+
+-
+
+search_replace_check_all: Alles überprüfen
+
+-
+
+search_replace_uncheck_all: Alle deaktivieren
+
+-
+
+search_is_case_sensitive: Gehäuseempfindlichkeit.
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Suche
 
 -
 

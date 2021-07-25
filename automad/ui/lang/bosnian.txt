@@ -806,6 +806,10 @@ images_shared: General Images
 
 -
 
+jumpbar_placeholder: Skoči na ...
+
+-
+
 link_placeholder: Počnite tipkati naslov stranice ili ovdje zalijepite vanjsku vezu
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Naziv varijable
 
 -
 
-search_no_results: Nije pronađena nijedna stranica!
+search_no_results: Vaša pretraga nije vratila nikakve rezultate.
 
 -
 
-search_placeholder: Pretražite u
+search_placeholder: Pretražiti
 
 -
 
-search_title: Rezultati pretrage
+search_replace_placeholder: Zamijeniti
+
+-
+
+search_replace_selected: Zamijenite odabrano
+
+-
+
+search_replace_check_all: Provjeri sve
+
+-
+
+search_replace_uncheck_all: Poništiti sve
+
+-
+
+search_is_case_sensitive: Velika i mala slova
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Pretražiti
 
 -
 

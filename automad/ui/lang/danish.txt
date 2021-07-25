@@ -806,6 +806,10 @@ images_shared: Generelle billeder
 
 -
 
+jumpbar_placeholder: Hop til ...
+
+-
+
 link_placeholder: Begynd at skrive en sidetitel, eller indsæt et eksternt link her
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Variabelt navn
 
 -
 
-search_no_results: Ingen sider fundet!
+search_no_results: Din søgning returnerede ikke nogen resultater.
 
 -
 
-search_placeholder: Søg i
+search_placeholder: Søg
 
 -
 
-search_title: Søgeresultater
+search_replace_placeholder: Erstatte
+
+-
+
+search_replace_selected: Udskift valgt
+
+-
+
+search_replace_check_all: Tjek alle
+
+-
+
+search_replace_uncheck_all: Fjern markeringen af alle
+
+-
+
+search_is_case_sensitive: Sagsfølsomt
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Søg
 
 -
 

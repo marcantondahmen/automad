@@ -806,6 +806,10 @@ images_shared: Splošne slike
 
 -
 
+jumpbar_placeholder: Skočiti ...
+
+-
+
 link_placeholder: Začnite vnašati naslov strani ali sem prilepite zunanjo povezavo
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Ime spremenljivke
 
 -
 
-search_no_results: Ni najdenih strani!
+search_no_results: Vaše iskanje ni vrnilo rezultatov.
 
 -
 
-search_placeholder: Išči v
+search_placeholder: Iskanje
 
 -
 
-search_title: Rezultati iskanja
+search_replace_placeholder: Zamenjati
+
+-
+
+search_replace_selected: Zamenjajte izbrano
+
+-
+
+search_replace_check_all: Preveri vse
+
+-
+
+search_replace_uncheck_all: Počistite vse
+
+-
+
+search_is_case_sensitive: Občutljivo na velike in male črke
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Iskanje
 
 -
 

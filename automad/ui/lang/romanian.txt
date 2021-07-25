@@ -806,6 +806,10 @@ images_shared: Imagini generale
 
 -
 
+jumpbar_placeholder: Sari la ...
+
+-
+
 link_placeholder: Începeți să tastați un titlu de pagină sau lipiți un link extern aici
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Numele variabilei
 
 -
 
-search_no_results: Nu au fost găsite pagini!
+search_no_results: Căutarea dvs. nu a returnat niciun rezultat.
 
 -
 
-search_placeholder: Cauta in
+search_placeholder: Căutare
 
 -
 
-search_title: Rezultatele cautarii
+search_replace_placeholder: A inlocui
+
+-
+
+search_replace_selected: Înlocuiți selectat
+
+-
+
+search_replace_check_all: Selectați toate
+
+-
+
+search_replace_uncheck_all: Deselecteaza tot
+
+-
+
+search_is_case_sensitive: Caz sensibil
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Căutare
 
 -
 

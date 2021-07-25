@@ -806,6 +806,10 @@ images_shared: Íomhánna Ginearálta
 
 -
 
+jumpbar_placeholder: Léim go ...
+
+-
+
 link_placeholder: Tosaigh teideal leathanaigh a chlóscríobh nó greamaigh nasc seachtrach anseo
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Ainm Athraitheach
 
 -
 
-search_no_results: Níor aimsíodh aon leathanaigh!
+search_no_results: Níor sheol do chuardach aon torthaí ar ais.
 
 -
 
-search_placeholder: Cuardaigh isteach
+search_placeholder: Cíor
 
 -
 
-search_title: Torthaí Cuardaigh
+search_replace_placeholder: Cuir in ionad
+
+-
+
+search_replace_selected: Athraigh an t-ionad
+
+-
+
+search_replace_check_all: Seiceáil go léir
+
+-
+
+search_replace_uncheck_all: Díthiceáil go léir
+
+-
+
+search_is_case_sensitive: Cás íogair
+
+-
+
+search_is_regex: Regex
+
+-
+
+search_title: Cíor
 
 -
 

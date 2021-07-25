@@ -806,6 +806,10 @@ images_shared: Загальні образи
 
 -
 
+jumpbar_placeholder: Перейти до ...
+
+-
+
 link_placeholder: Почніть вводити заголовок сторінки або вставте сюди зовнішнє посилання
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Назва змінної
 
 -
 
-search_no_results: Сторінок не знайдено!
+search_no_results: Ваш пошук не повернув жодних результатів.
 
 -
 
-search_placeholder: Шукати в
+search_placeholder: Пошук
 
 -
 
-search_title: Результати пошуку
+search_replace_placeholder: Замінити
+
+-
+
+search_replace_selected: Замінити вибрано
+
+-
+
+search_replace_check_all: Перевірити все
+
+-
+
+search_replace_uncheck_all: Знімати все
+
+-
+
+search_is_case_sensitive: Чутливий до регістру
+
+-
+
+search_is_regex: Регулятор
+
+-
+
+search_title: Пошук
 
 -
 

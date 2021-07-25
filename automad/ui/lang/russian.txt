@@ -806,6 +806,10 @@ images_shared: Общие изображения
 
 -
 
+jumpbar_placeholder: Перейти к ...
+
+-
+
 link_placeholder: Начните вводить заголовок страницы или вставьте сюда внешнюю ссылку
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Имя переменной
 
 -
 
-search_no_results: Страниц не найдено!
+search_no_results: Ваш поиск не вернул никаких результатов.
 
 -
 
-search_placeholder: Искать в
+search_placeholder: Поиск
 
 -
 
-search_title: результаты поиска
+search_replace_placeholder: Заменять
+
+-
+
+search_replace_selected: Заменить выбранное
+
+-
+
+search_replace_check_all: Отметить все
+
+-
+
+search_replace_uncheck_all: Снять все
+
+-
+
+search_is_case_sensitive: Деликатный случай
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Поиск
 
 -
 

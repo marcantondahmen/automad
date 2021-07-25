@@ -806,6 +806,10 @@ images_shared: Almennar myndir
 
 -
 
+jumpbar_placeholder: Hoppa til ...
+
+-
+
 link_placeholder: Byrjaðu að slá inn síðuheiti eða límdu utanaðkomandi hlekk hér
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Breytilegt heiti
 
 -
 
-search_no_results: Engar síður fundust!
+search_no_results: Leitin þín skilaði ekki neinum árangri.
 
 -
 
-search_placeholder: Leitaðu í
+search_placeholder: Leit
 
 -
 
-search_title: Leitarniðurstöður
+search_replace_placeholder: Skipta út
+
+-
+
+search_replace_selected: Skipta út valið
+
+-
+
+search_replace_check_all: Athugaðu allt
+
+-
+
+search_replace_uncheck_all: Hakaðu úr öllum
+
+-
+
+search_is_case_sensitive: Málangur
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Leit
 
 -
 

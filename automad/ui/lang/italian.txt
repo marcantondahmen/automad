@@ -806,6 +806,10 @@ images_shared: Immagini generali
 
 -
 
+jumpbar_placeholder: Salta a ...
+
+-
+
 link_placeholder: Inizia a digitare il titolo di una pagina o incolla qui un link esterno
 
 -
@@ -966,15 +970,39 @@ shared_var_name: Nome variabile
 
 -
 
-search_no_results: Nessuna pagina trovata!
+search_no_results: La tua ricerca non ha restituito alcun risultato.
 
 -
 
-search_placeholder: Cerca nel
+search_placeholder: Ricerca
 
 -
 
-search_title: Risultati di ricerca
+search_replace_placeholder: Sostituire
+
+-
+
+search_replace_selected: Sostituisci selezionato
+
+-
+
+search_replace_check_all: Seleziona tutto
+
+-
+
+search_replace_uncheck_all: Deseleziona tutto
+
+-
+
+search_is_case_sensitive: Che tiene conto del maiuscolo o minuscolo
+
+-
+
+search_is_regex: Regex.
+
+-
+
+search_title: Ricerca
 
 -
 

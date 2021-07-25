@@ -1127,6 +1127,26 @@ search_replace_placeholder: Replace
 
 -
 
+search_replace_selected: Replace Selected
+
+-
+
+search_replace_check_all: Check All
+
+-
+
+search_replace_uncheck_all: Uncheck All
+
+-
+
+search_is_case_sensitive: Case Sensitive
+
+-
+
+search_is_regex: Regex
+
+-
+
 search_title: Search
 
 -
