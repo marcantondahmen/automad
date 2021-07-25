@@ -115,7 +115,7 @@ class App {
 		} 
 		
 		if (AM_HEADLESS_ENABLED) {
-			header('Content-Type: application/json');
+			header('Content-Type: application/json; charset=utf-8');
 		}
 
 		$Cache = new Cache();
