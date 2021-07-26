@@ -89,7 +89,6 @@ class Dashboard {
 				
 				if (!empty($parts[1]) && $this->classFileExists($class) && method_exists($class, $parts[1])) {
 					$output = call_user_func($method);
-					Debug::log($output, 'OUTPUT');
 					$output['debug'] = Debug::getLog();
 				} else {
 					header('HTTP/1.0 404 Not Found');
