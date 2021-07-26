@@ -88,11 +88,11 @@ class Search {
 	public function __construct($Automad, $searchValue, $isRegex, $isCaseSensitive) {
 
 		$this->Automad = $Automad;
-		$this->searchValue = $searchValue;
+		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'is';
-
-		if ($isRegex == false) {
-			$this->searchValue = preg_quote($searchValue, '/');
+		
+		if ($isRegex) {
+			$this->searchValue = str_replace('/', '\/', $searchValue);
 		}
 
 		if ($isCaseSensitive) {

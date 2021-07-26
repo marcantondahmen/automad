@@ -46,7 +46,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Replacer model.
+ *	The Replacement model.
  *
  *	@author Marc Anton Dahmen
  *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
@@ -88,11 +88,11 @@ class Replacement {
 
 	public function __construct($searchValue, $replaceValue, $isRegex, $isCaseSensitive) {
 
-		$this->searchValue = $searchValue;
+		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'is';
-
-		if ($isRegex == false) {
-			$this->searchValue = preg_quote($searchValue, '/');
+		
+		if ($isRegex) {
+			$this->searchValue = str_replace('/', '\/', $searchValue);
 		}
 
 		if ($isCaseSensitive) {

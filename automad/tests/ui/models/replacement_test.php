@@ -65,8 +65,8 @@ class Replacement_Test extends TestCase {
 			),
 			// Text, no regex, not case sensitive.
 			array(
-				'simple',
-				'simple replaced',
+				'/Url/to/Page',
+				'/replaced/url/to/page',
 				false,
 				false,
 				array('text'),
@@ -75,13 +75,23 @@ class Replacement_Test extends TestCase {
 			),
 			// Text, no regex, case sensitive.
 			array(
-				'Simple',
-				'simple replaced',
+				'/url/To/page',
+				'/replaced/url/to/page',
 				false,
 				true,
 				array('text'),
 				Parse::textFile(__DIR__ . '/../../data/text.txt'),
 				Parse::textFile(__DIR__ . '/../../data/text.txt')
+			),
+			// Text, regex, case sensitive.
+			array(
+				'/url/.*/page',
+				'/replaced/url/to/page',
+				true,
+				true,
+				array('text'),
+				Parse::textFile(__DIR__ . '/../../data/text.txt'),
+				Parse::textFile(__DIR__ . '/../../data/text_replaced.txt')
 			)
 		);
 

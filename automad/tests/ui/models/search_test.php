@@ -54,7 +54,7 @@ class Search_Test extends TestCase {
 							new FieldResults(
 								'text',
 								array('simple'),
-								'A <mark>simple</mark> sample text'
+								'A <mark>simple</mark> sample text with a'
 							)
 						),
 						'/text'
