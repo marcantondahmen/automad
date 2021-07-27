@@ -89,14 +89,14 @@ class Replacement {
 	public function __construct($searchValue, $replaceValue, $isRegex, $isCaseSensitive) {
 
 		$this->searchValue = preg_quote($searchValue, '/');
-		$this->regexFlags = 'is';
+		$this->regexFlags = 'ims';
 		
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
 		}
 
 		if ($isCaseSensitive) {
-			$this->regexFlags = 's';
+			$this->regexFlags = 'ms';
 		}
 
 		$this->replaceValue = $replaceValue;

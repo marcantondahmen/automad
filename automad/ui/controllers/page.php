@@ -37,12 +37,14 @@
 
 namespace Automad\UI\Controllers;
 
-use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\Core\Str;
 use Automad\UI\Components\Layout\PageData;
+use Automad\UI\Models\Replacement;
+use Automad\UI\Models\Search;
+use Automad\UI\Models\Search\FileKeys;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -352,6 +354,8 @@ class Page {
 							$title
 						);
 
+						self::updatePageLinks($Page, $newPagePath);
+
 						$output['redirect'] = self::contextUrlByPath($newPagePath);
 						Debug::log($Page->path, 'page');
 						Debug::log($dest->path, 'destination');
@@ -394,20 +398,7 @@ class Page {
 	private static function contextUrlByPath($path) {
 
 		// Rebuild Automad object, since the file structure has changed.
-		$Automad = new Automad();
-		$Cache = new Cache();
-		$Cache->writeAutomadObjectToCache($Automad);
-
-		// Find new URL and return redirect query string.
-		foreach ($Automad->getCollection() as $key => $Page) {
-
-			if ($Page->path == $path) {
-				// Just return a redirect URL (might be the old URL), 
-				// to also reflect the possible renaming in all the UI's navigation.
-				return '?view=Page&url=' . urlencode($key);
-			}
-			
-		}
+		return '?view=Page&url=' . urlencode(self::urlByPath(UICache::rebuild(), $path));
 
 	}
 
@@ -524,6 +515,8 @@ class Page {
 							$data['title']
 						);
 	
+						self::updatePageLinks($Page, $newPagePath);
+						
 					} else {
 			
 						// In case the page is the home page, the path is just '/'.
@@ -578,6 +571,86 @@ class Page {
 		
 		return $output;
 		
+	}
+
+
+	/**
+	 *	Return updated page URL based on $path.
+	 *
+	 *	@param \Automad\Core\Automad $Automad
+	 *	@param string $path
+	 *	@return string The page URL
+	 */
+
+	private static function urlByPath($Automad, $path) {
+
+		// Find new URL and return redirect query string.
+		foreach ($Automad->getCollection() as $url => $Page) {
+			if ($Page->path == $path) {
+				return $url;
+			}
+		}
+
+	}
+
+
+	/**
+	 *	Update all file and page links based on a new path.
+	 *
+	 *	@param \Automad\Core\Page $Page
+	 *	@param string $path
+	 *	@return boolean true on success
+	 */
+
+	private static function updatePageLinks($Page, $newPath) {
+
+		Cache::clear();
+
+		$Automad = UICache::rebuild();
+		$oldUrl = $Page->origUrl;
+		$oldPath = $Page->path;
+
+		if ($oldPath == $newPath) {
+			return false;
+		}
+
+		$newUrl = self::urlByPath($Automad, $newPath);
+
+		$replace = array(
+			rtrim(AM_DIR_PAGES . $oldPath, '/') => rtrim(AM_DIR_PAGES . $newPath, '/'),
+			$oldUrl => $newUrl
+		);
+
+		foreach ($replace as $old => $new) {
+
+			$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
+			$replaceValue = $new;
+
+			$Search = new Search($Automad, $searchValue, true, false);
+			$fileResultsArray = $Search->searchPerFile();
+			$fileKeysArray = array();
+
+			foreach ($fileResultsArray as $FileResults) {
+
+				$keys = array();
+
+				foreach ($FileResults->fieldResultsArray as $FieldResults) {
+					$keys[] = $FieldResults->key;
+				}
+
+				$fileKeysArray[] = new FileKeys($FileResults->path, $keys);
+
+			}
+
+			$Replacement = new Replacement($searchValue, $replaceValue, true, false);
+			$Replacement->replaceInFiles($fileKeysArray);
+
+		}
+
+		Cache::clear();
+
+		return true;
+
 	}
 
 

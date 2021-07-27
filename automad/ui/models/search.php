@@ -89,14 +89,14 @@ class Search {
 
 		$this->Automad = $Automad;
 		$this->searchValue = preg_quote($searchValue, '/');
-		$this->regexFlags = 'is';
+		$this->regexFlags = 'ims';
 		
 		if ($isRegex) {
 			$this->searchValue = str_replace('/', '\/', $searchValue);
 		}
 
 		if ($isCaseSensitive) {
-			$this->regexFlags = 's';
+			$this->regexFlags = 'ms';
 		}
 
 	}
