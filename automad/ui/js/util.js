@@ -1,51 +1,46 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	Helper tools. 
+ * Helper tools.
  */
 
-+function(Automad, $) {
-	
++(function (Automad, $) {
 	Automad.util = {
-		
 		create: {
-
-			element: function(tag, cls) {
-
+			element: function (tag, cls) {
 				var element = document.createElement(tag);
 
 				for (var i = 0; i < cls.length; i++) {
@@ -53,11 +48,9 @@
 				}
 
 				return element;
-
 			},
 
-			colorPicker: function(cls, value) {
-
+			colorPicker: function (cls, value) {
 				const wrapper = Automad.util.create.element('div', ['uk-flex']);
 
 				wrapper.dataset.amColorpicker = true;
@@ -67,11 +60,9 @@
 				`;
 
 				return wrapper;
-
 			},
 
-			editable: function(cls, placeholder, value) {
-
+			editable: function (cls, placeholder, value) {
 				var span = Automad.util.create.element('span', cls);
 
 				span.contentEditable = true;
@@ -79,54 +70,50 @@
 				span.innerHTML = value;
 
 				return span;
-
 			},
 
-			label: function(text, cls = ['am-block-label']) {
-
+			label: function (text, cls = ['am-block-label']) {
 				var label = Automad.util.create.element('label', cls);
 
 				label.textContent = text;
 
 				return label;
-
 			},
 
-			numberUnit: function(clsPrefix, value) {
-
+			numberUnit: function (clsPrefix, value) {
 				const create = Automad.util.create,
-					  wrapper = create.element('div', ['am-form-input-group']),
-					  units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
+					wrapper = create.element('div', ['am-form-input-group']),
+					units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
 
 				value = String(value);
 
 				var number = value.replace(/([^\d\.]+)/g, ''),
-					unit = value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
+					unit =
+						value.replace(/.+?(px|em|rem|%|vh|vw)/g, '$1') || 'px';
 
 				wrapper.innerHTML = `
-					${create.editable(
-						['cdx-input', 'uk-text-right', `${clsPrefix}number`],
-						'',
-						number
-					).outerHTML}
-					${create.select(
-						['cdx-input', `${clsPrefix}unit`],
-						units,
-						unit
-					).outerHTML}
+					${
+						create.editable(
+							[
+								'cdx-input',
+								'uk-text-right',
+								`${clsPrefix}number`,
+							],
+							'',
+							number
+						).outerHTML
+					}
+					${create.select(['cdx-input', `${clsPrefix}unit`], units, unit).outerHTML}
 				`;
 
 				return wrapper;
-
 			},
 
-			select: function(cls, options, selected) {
-
+			select: function (cls, options, selected) {
 				var select = Automad.util.create.element('select', cls),
 					optionMarkup = [];
 
-				options.forEach(function(value) {
-
+				options.forEach(function (value) {
 					let html,
 						text,
 						selectedAttr = '';
@@ -134,42 +121,36 @@
 					if (value == selected) {
 						selectedAttr = ' selected';
 					}
-					
-					text = 	value
-							.replace(/^[\/\\\\]/g, '')
-							.replace(/[\/\\\\]/g, ' > ')
-							.replace(/_/g, ' ')
-							.replace('.php', '');
+
+					text = value
+						.replace(/^[\/\\\\]/g, '')
+						.replace(/[\/\\\\]/g, ' > ')
+						.replace(/_/g, ' ')
+						.replace('.php', '');
 
 					html = `<option value="${value}"${selectedAttr}>${text}</option>`;
 					optionMarkup.push(html);
-
 				});
-				
+
 				select.innerHTML = optionMarkup.join('');
-				
+
 				return select;
-
-			}
-
+			},
 		},
 
-		// Convert data attribute string in dataAPI string. 
+		// Convert data attribute string in dataAPI string.
 		// For example "data-am-controller" gets converted into "amController".
-		dataCamelCase: function(str) {
-			
+		dataCamelCase: function (str) {
 			str = str.replace(/data-/g, '');
-			str = str.replace(/\-[a-z]/g, function(s) {
+			str = str.replace(/\-[a-z]/g, function (s) {
 				return s.charAt(1).toUpperCase();
 			});
-			
+
 			return str;
-			
 		},
-		
+
 		// Format bytes.
-		formatBytes: function(bytes) {
-		
+		formatBytes: function (bytes) {
 			if (typeof bytes !== 'number') {
 				return '';
 			}
@@ -183,24 +164,22 @@
 			}
 
 			return (bytes / 1000).toFixed(2) + ' kb';
-				
 		},
 
-		getNumberUnitAsString: function(numberInput, unitSelect) {
-
-			const number = Automad.util.stripNbsp(numberInput.textContent).trim(),
-				  unit = unitSelect.value;
+		getNumberUnitAsString: function (numberInput, unitSelect) {
+			const number = Automad.util
+					.stripNbsp(numberInput.textContent)
+					.trim(),
+				unit = unitSelect.value;
 
 			if (number.length) {
 				return `${number}${unit}`;
 			}
 
 			return '';
-
 		},
 
-		resolvePath: function(path) {
-
+		resolvePath: function (path) {
 			var pagePath = $('[data-am-path]').data('amPath'),
 				$inPage = $('[data-am-base-url]'),
 				baseUrl = '.';
@@ -222,11 +201,9 @@
 			} else {
 				return baseUrl + '/pages' + pagePath + path;
 			}
-
 		},
 
-		resolveUrl: function(url) {
-
+		resolveUrl: function (url) {
 			var pageUrl = $('[data-am-url]').data('amUrl');
 
 			if (pageUrl === undefined) {
@@ -242,15 +219,10 @@
 			} else {
 				return '.' + pageUrl + '/' + url;
 			}
-
 		},
 
-		stripNbsp: function(str) {
-
+		stripNbsp: function (str) {
 			return str.replace(/\&nbsp;/g, ' ').trim();
-
-		}
-		
-	}
-		
-}(window.Automad = window.Automad || {}, jQuery);
+		},
+	};
+})((window.Automad = window.Automad || {}), jQuery);

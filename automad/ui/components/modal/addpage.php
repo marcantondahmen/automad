@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Components\Modal;
 
@@ -44,32 +43,26 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The add page modal. 
+ * The add page modal.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class AddPage {
-
-
 	/**
 	 * 	Renders the about modal.
 	 *
-	 *	@param object $Automad
-	 *	@param object $Themelist
-	 *	@return string The rendered HTML
+	 * @param object $Automad
+	 * @param object $Themelist
+	 * @return string The rendered HTML
 	 */
-
 	public static function render($Automad, $Themelist) {
-
 		$fn = function ($expression) {
 			return $expression;
 		};
-		
+
 		return <<< HTML
 
 			<div id="am-add-page-modal" class="uk-modal">
@@ -123,22 +116,17 @@ class AddPage {
 				</div>
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The template selection dropdown.
+	 * The template selection dropdown.
 	 *
-	 *	@param object $Automad
-	 *	@param object $Themelist
-	 *	@return string the rendered dropdown
+	 * @param object $Automad
+	 * @param object $Themelist
+	 * @return string the rendered dropdown
 	 */
-
 	private static function template($Automad, $Themelist) {
-
 		if (!AM_HEADLESS_ENABLED) {
-
 			$fn = function ($expression) {
 				return $expression;
 			};
@@ -149,16 +137,12 @@ HTML;
 						{$fn(Text::get('page_theme_template'))}
 					</label>
 					{$fn(SelectTemplate::render(
-						$Automad,
-						$Themelist,
-						'subpage[theme_template]'
-					))}
+				$Automad,
+				$Themelist,
+				'subpage[theme_template]'
+			))}
 				</div>
 HTML;
-		
 		}
-
 	}
-
-
 }

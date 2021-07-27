@@ -1,40 +1,38 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
-
 .am-block-section {
-
 	position: relative;
 	box-sizing: border-box;
 	height: 100%;
@@ -46,7 +44,6 @@
 	}
 
 	& section {
-
 		display: block;
 		box-sizing: border-box;
 		border: @am-border-width dashed @am-border-color;
@@ -58,7 +55,6 @@
 		}
 
 		& .codex-editor {
-
 			z-index: 0;
 
 			&__redactor {
@@ -66,13 +62,10 @@
 				padding: 0;
 				padding-bottom: @button-height !important;
 			}
-
 		}
-
 	}
 
 	& > .am-section-overlay-focus {
-
 		// Only show overlay when block is focused (see below).
 		// When focused it has the same dimensions as the section:after element.
 		background-color: @am-bg;
@@ -85,7 +78,6 @@
 			opacity: 0.2;
 			pointer-events: auto;
 		}
-
 	}
 
 	& section:after,
@@ -123,7 +115,6 @@
 	}
 
 	&-modal {
-
 		&-container {
 			position: relative;
 			z-index: @modal-z-index - 1;
@@ -150,14 +141,12 @@
 		}
 
 		& .uk-modal-close {
-
 			padding: 0 0.25rem;
 			color: @am-text;
 
 			&:hover {
 				color: @am-muted;
 			}
-			
 		}
 
 		& .uk-dropdown {
@@ -170,11 +159,9 @@
 		& .uk-modal-dialog > .am-block-editor-container {
 			border-radius: @am-radius;
 		}
-
 	}
 
 	&-flex {
-
 		min-height: 5rem;
 
 		& .codex-editor {
@@ -182,7 +169,6 @@
 		}
 
 		& .codex-editor__redactor {
-
 			display: flex;
 			flex-wrap: wrap;
 			height: 100%;
@@ -194,16 +180,13 @@
 				min-width: 8rem;
 			}
 
-			& > [class*="width-fraction-"] {
-
+			& > [class*='width-fraction-'] {
 				& > div {
 					max-width: none;
 				}
-
 			}
 
 			& > .width-fraction {
-
 				&-1-4 {
 					flex-basis: 1 / 4 * 100%;
 				}
@@ -227,9 +210,7 @@
 				&-1-1 {
 					flex-basis: 100%;
 				}
-
 			}
-
 		}
 
 		&.justify-start > div > .codex-editor__redactor {
@@ -257,7 +238,6 @@
 		}
 
 		&-settings {
-
 			display: flex;
 			flex-wrap: wrap;
 			margin: 0 -@modal-dialog-padding;
@@ -265,7 +245,6 @@
 			border-bottom: @am-hairline;
 
 			& > div {
-				
 				display: flex;
 				align-items: center;
 				padding: 0.4rem 0.6rem;
@@ -280,13 +259,11 @@
 				&:last-child {
 					flex-grow: 1;
 				}
-
 			}
 
 			& .cdx-settings-button {
-
 				width: @am-settings-height !important;
-				
+
 				& + * {
 					margin-left: 2px;
 				}
@@ -294,11 +271,9 @@
 				& svg {
 					padding: 0.1rem;
 				}
-
 			}
 
 			& .am-section-flex-size-settings {
-
 				display: flex;
 				align-items: center;
 
@@ -310,11 +285,7 @@
 				& .am-form-input-group {
 					width: 8rem;
 				}
-
 			}
-
 		}
-
 	}
-
 }

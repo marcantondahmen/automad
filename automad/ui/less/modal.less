@@ -1,49 +1,47 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
+@modal-z-index: 9010;
+@modal-background: rgba(0, 0, 0, 0.05);
 
-@modal-z-index: 				9010;
-@modal-background: 				rgba(0,0,0,0.05);
+@modal-dialog-background: @am-bg;
+@modal-dialog-padding: 1.07rem;
+@modal-header-margin-bottom: @utility-margin;
+@modal-footer-margin-top: @utility-margin;
 
-@modal-dialog-background:		@am-bg;
-@modal-dialog-padding:			1.07rem;
-@modal-header-margin-bottom:	@utility-margin;
-@modal-footer-margin-top:		@utility-margin;
-
-@modal-dialog-large-width: 		58rem;
-@modal-dialog-large-width-large:58rem;
-
+@modal-dialog-large-width: 58rem;
+@modal-dialog-large-width-large: 58rem;
 
 .hook-modal() {
 	overflow-y: auto !important;
@@ -51,16 +49,14 @@
 }
 
 .hook-modal-dialog() {
-	
 	outline: none;
-	
+
 	&:not(&-blank) {
 		border-radius: @am-radius-large;
 		.shadow;
 	}
 
 	&-about {
-
 		width: @modal-dialog-width * 0.55;
 
 		& .am-logo {
@@ -79,57 +75,50 @@
 		& a * {
 			outline: none;
 		}
-
 	}
 
 	&-blank {
 		box-sizing: border-box;
 		-webkit-transform: translateY(0);
-    			transform: translateY(0);
+		transform: translateY(0);
 		height: 100%;
 		padding-bottom: @utility-margin-large;
 	}
-			
+
 	& hr {
 		margin: @utility-margin -@modal-dialog-padding !important;
 		border-top: @am-hairline;
 	}
-	
+
 	&.am-modal-dialog-code {
-		
 		padding-bottom: 0;
 		overflow: hidden;
 
 		& textarea {
 			box-shadow: none;
 		}
-
 	}
-			
 }
 
-.hook-modal-header() {	
-
+.hook-modal-header() {
 	color: @am-text;
 	font-weight: inherit;
-	
+
 	& .uk-close {
 		float: right;
 		font-size: 1rem;
 		line-height: @base-body-line-height;
 		margin-top: 0.14rem;
 	}
-	
 }
 
 .am-modal-dialog-code {
-
 	& form {
 		margin: -@modal-dialog-padding;
 		margin-top: 0;
 		border-top: @am-hairline;
 	}
-	
+
 	& textarea {
 		overflow: auto;
 		margin: 0;
@@ -143,5 +132,4 @@
 	& .uk-icon-spin {
 		padding: @modal-dialog-padding !important;
 	}
-
 }

@@ -1,59 +1,56 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
+@am-panel-bottom-height: 3rem;
+@am-panel-bottom-height-large: 3.5rem;
+@am-panel-bottom-link-height: 2.14rem;
+@am-panel-bottom-link-padding: @panel-box-padding / 2;
 
-@am-panel-bottom-height: 		3rem;
-@am-panel-bottom-height-large: 	3.5rem;
-@am-panel-bottom-link-height:	2.14rem;
-@am-panel-bottom-link-padding: 	@panel-box-padding / 2;
+@panel-title-margin-bottom: 0;
+@panel-title-font-size: inherit;
+@panel-title-line-height: inherit;
+@panel-title-font-weight: 590;
 
-@panel-title-margin-bottom:     0;
-@panel-title-font-size:         inherit;
-@panel-title-line-height:       inherit;
-@panel-title-font-weight:		590;
-
-@panel-box-padding:				0.86rem;
-@panel-box-color:				@am-text;
-@panel-box-title-color:			@am-text;
-@panel-box-background:			#FFFFFF;
-@panel-box-badge-top:          	@panel-box-padding;
-@panel-box-badge-right:			@panel-box-padding - 0.18rem;
-@panel-teaser-margin-bottom:	0;
-
+@panel-box-padding: 0.86rem;
+@panel-box-color: @am-text;
+@panel-box-title-color: @am-text;
+@panel-box-background: #ffffff;
+@panel-box-badge-top: @panel-box-padding;
+@panel-box-badge-right: @panel-box-padding - 0.18rem;
+@panel-teaser-margin-bottom: 0;
 
 .hook-panel-box() {
-	
 	border-radius: @am-radius-large;
 	cursor: default;
 	border: @am-hairline;
@@ -73,22 +70,20 @@
 		border-top-right-radius: @am-radius-large - @am-border-width;
 		border-bottom: @am-hairline;
 	}
-	
+
 	& + & {
 		margin-top: 0.29rem;
 	}
 
 	& > a {
-
 		&,
 		&:hover,
 		&:active,
 		&:focus {
 			color: inherit;
 		}
-
 	}
-	
+
 	& p {
 		margin: 0.36rem 0;
 	}
@@ -98,11 +93,9 @@
 		margin-left: -@panel-box-padding !important;
 		margin-right: -@panel-box-padding !important;
 	}
-	
 }
 
 .hook-panel-badge() {
-	
 	&.uk-badge {
 		font-size: 0.64rem;
 		line-height: 1.21rem;
@@ -114,11 +107,9 @@
 		background-color: @panel-box-background;
 		border: @am-hairline;
 	}
-	
 }
 
 .hook-panel-title() {
-
 	margin: 0 -@panel-box-padding;
 	padding: @panel-box-padding;
 	padding-top: @panel-box-padding - 3;
@@ -129,23 +120,18 @@
 	&:first-child {
 		padding-top: 0;
 	}
-
 }
 
 .am-panel {
-
 	&-link {
-
 		color: @base-link-color;
-		
+
 		&:hover {
 			color: @base-link-hover-color;
 		}
-		
 	}
 
 	&-bottom {
-		
 		display: block;
 		height: @am-panel-bottom-height;
 		margin: -@panel-box-padding;
@@ -168,27 +154,22 @@
 		}
 
 		&-left {
-
 			left: 0;
 
 			& .uk-button {
 				margin-left: @am-panel-bottom-link-padding;
 			}
-			
 		}
 
 		&-right {
-
 			right: 0;
 
 			& .uk-button {
 				margin-right: @am-panel-bottom-link-padding;
 			}
-
 		}
 
 		&-link {
-
 			display: inline-block;
 			font-size: 1rem;
 			height: @am-panel-bottom-link-height !important;
@@ -208,9 +189,6 @@
 				border: none;
 				background-color: transparent;
 			}
-
 		}
-		
 	}
-
 }

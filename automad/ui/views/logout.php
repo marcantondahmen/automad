@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Views;
 
@@ -44,33 +43,25 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The logout page.
+ * The logout page.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Logout extends View {
-
-
 	/**
-	 *	Disable navbar and sidebar.
+	 * Disable navbar and sidebar.
 	 */
-
 	protected $hasNav = false;
-	
 
 	/**
-	 *	Render body.
+	 * Render body.
 	 *
-	 *	@return string the rendered items
+	 * @return string the rendered items
 	 */
-
 	protected function body() {
-
 		$isLoggedOut = User::logout();
 		$fn = $this->fn;
 
@@ -82,38 +73,29 @@ class Logout extends View {
 				{$fn($this->alert($isLoggedOut))}
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	Get the title for the dashboard view.
+	 * Get the title for the dashboard view.
 	 *
-	 *	@return string the rendered items
+	 * @return string the rendered items
 	 */
-
 	protected function title() {
-
 		$title = Text::get('log_out_title');
 
 		return "$title &mdash; Automad";
-
 	}
 
-
 	/**
-	 *	Render the success or error alert.
+	 * Render the success or error alert.
 	 *
-	 *	@param boolean $isLoggedOut
-	 *	@return string the rendered alert box with buttons
+	 * @param boolean $isLoggedOut
+	 * @return string the rendered alert box with buttons
 	 */
-
 	private function alert($isLoggedOut) {
-
 		$fn = $this->fn;
 
 		if ($isLoggedOut) {
-
 			return <<< HTML
 				{$fn(Success::render(Text::get('success_log_out')))}
 				<div class="uk-text-right">
@@ -131,14 +113,8 @@ HTML;
 					</a>
 				</div>
 HTML;
-
 		} else {
-
 			return Danger::render(Text::get('error_log_out'));
-				
 		}
-
 	}
-
-
 }

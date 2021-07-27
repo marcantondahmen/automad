@@ -1,68 +1,64 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 class AutomadEditorImageSelection {
-
 	constructor(csv, container) {
-
 		const images = csv.replace(/\s/g, '').split(',');
 
 		this.container = container;
 		this.render(images);
-
 	}
 
 	render(images) {
-
 		const fields = document.createElement('div'),
-			  button = document.createElement('div');
+			button = document.createElement('div');
 
-		images.forEach(item => {
+		images.forEach((item) => {
 			fields.appendChild(this.renderItem(item));
 		});
 
 		fields.classList.add('am-sortable');
 
 		button.classList.add('uk-button');
-		button.innerHTML = `<i class="uk-icon-plus"></i>&nbsp; ${AutomadEditorTranslation.get('ui_add')}`;
+		button.innerHTML = `<i class="uk-icon-plus"></i>&nbsp; ${AutomadEditorTranslation.get(
+			'ui_add'
+		)}`;
 
 		button.addEventListener('click', () => {
-
 			const item = this.renderItem(''),
-				  input = item.querySelector('input');
+				input = item.querySelector('input');
 
 			fields.appendChild(item);
 
@@ -70,7 +66,6 @@ class AutomadEditorImageSelection {
 				input.value = value;
 				input.dispatchEvent(new Event('keydown', { bubbles: true }));
 			});
-
 		});
 
 		this.container.appendChild(fields);
@@ -86,18 +81,18 @@ class AutomadEditorImageSelection {
 			chosenClass: 'sortable-chosen',
 			dragClass: 'sortable-drag',
 		});
-
 	}
 
 	renderItem(value) {
-
 		const wrapper = Automad.util.create.element('div', ['am-item']);
 
 		wrapper.setAttribute('data-am-select-image-field', '');
 		wrapper.innerHTML = `
 			<figure></figure>
 			<div>
-				<input type="text" class="uk-form-controls uk-width-1-1" value="${this.sanitize(value)}" />
+				<input type="text" class="uk-form-controls uk-width-1-1" value="${this.sanitize(
+					value
+				)}" />
 				<button type="button" class="uk-button">
 					<i class="uk-icon-folder-open-o"></i>&nbsp;
 					${AutomadEditorTranslation.get('ui_browse')}
@@ -114,32 +109,24 @@ class AutomadEditorImageSelection {
 		Automad.selectImage.preview(wrapper.querySelector('input'));
 
 		return wrapper;
-
 	}
 
 	save() {
-
 		const inputs = this.container.querySelectorAll('input'),
-			  images = [];
+			images = [];
 
-		Array.from(inputs).forEach(input => {
-
+		Array.from(inputs).forEach((input) => {
 			const value = this.sanitize(input.value);
 
 			if (value.length > 0) {
 				images.push(value);
 			}
-			
 		});
 
 		return images.join(', ');
-
 	}
 
 	sanitize(str) {
-
 		return str.replace(/[^\w\-\/\:\?\=\&\+\*\.]/g, '');
-
 	}
-
 }

@@ -4,26 +4,11 @@ namespace Automad\Core;
 
 use PHPUnit\Framework\TestCase;
 
-
 /**
- *	@testdox Automad\Core\Pipe
+ * @testdox Automad\Core\Pipe
  */
-
 class Pipe_Test extends TestCase {
-
-	
-	/**
-	 *	@dataProvider dataForTestProcessIsEqual
-	 */
-	
-	public function testProcessIsEqual($value, $functions, $expected) {
-		
-		$this->assertEquals(Pipe::process($value, $functions), $expected);
-		
-	}
-	
 	public function dataForTestProcessIsEqual() {
-		
 		return array(
 			array(
 				'',
@@ -58,8 +43,15 @@ class Pipe_Test extends TestCase {
 				40
 			)
 		);
-		
 	}
-	
-	
+
+	/**
+	 * @dataProvider dataForTestProcessIsEqual
+	 * @param mixed $value
+	 * @param mixed $functions
+	 * @param mixed $expected
+	 */
+	public function testProcessIsEqual($value, $functions, $expected) {
+		$this->assertEquals(Pipe::process($value, $functions), $expected);
+	}
 }

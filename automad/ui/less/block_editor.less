@@ -1,37 +1,36 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
-
 
 @import 'editorjs/block.less';
 @import 'editorjs/inline.less';
@@ -39,7 +38,6 @@
 @import 'editorjs/settings.less';
 @import 'editorjs/toolbar.less';
 @import 'editorjs/tooltips.less';
-
 
 @am-blocks-breakpoint-small: 651px;
 @am-blocks-breakpoint-small-max: (@am-blocks-breakpoint-small - 1px);
@@ -54,11 +52,9 @@
 @am-block-button-active-hover-background: @button-hover-background;
 
 .am-block-editor {
-
 	position: relative;
 
 	&-container {
-
 		box-sizing: border-box;
 		position: relative;
 		width: 100%;
@@ -75,11 +71,9 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
-
 	}
 
 	.am-inpage & {
-
 		@media (min-width: @utility-container-max-width) {
 			box-sizing: border-box;
 			width: 100vw;
@@ -87,7 +81,6 @@
 			padding: 0 0.75rem;
 			margin-left: 50%;
 		}
-
 	}
 
 	& .codex-editor {
@@ -95,7 +88,6 @@
 	}
 
 	& .codex-editor__loader {
-		
 		height: 5rem;
 
 		&:before {
@@ -106,11 +98,9 @@
 			border: 2px solid @am-text;
 			border-top-color: transparent;
 		}
-
 	}
 
 	& .codex-editor__redactor {
-		
 		padding: 0.2rem;
 		padding-bottom: 3.45rem !important;
 		margin-right: 0;
@@ -118,7 +108,6 @@
 		@media (min-width: @breakpoint-medium) {
 			padding: 2rem;
 		}
-
 	}
 
 	& svg {
@@ -128,7 +117,7 @@
 	// Resize SVG icons.
 	.svgWidth(@n) when (@n >= 4) {
 		.svgWidth(@n - 1);
-		& svg[width^=~'"@{n}"']:not([width$="em"]) {
+		& svg[width^=~'"@{n}"']:not([width$='em']) {
 			width: round(@n / 14, 2) * 1em !important;
 		}
 	}
@@ -137,11 +126,10 @@
 
 	.svgHeight(@n) when (@n >= 8) {
 		.svgHeight(@n - 1);
-		& svg[height^=~'"@{n}"']:not([height$="em"]) {
+		& svg[height^=~'"@{n}"']:not([height$='em']) {
 			height: round(@n / 14, 2) * 1em !important;
 		}
 	}
 
 	.svgHeight(24);
-
 }

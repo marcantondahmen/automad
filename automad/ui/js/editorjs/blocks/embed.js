@@ -1,26 +1,23 @@
 /*
- *	This EditorJS block is based on the original embed block by CodeX and
- *	is extended to support the Automad block grid layout.
- *	https://github.com/editor-js/embed
+ * This EditorJS block is based on the original embed block by CodeX and
+ * is extended to support the Automad block grid layout.
+ * https://github.com/editor-js/embed
  *
- *	Copyright (c) 2018 CodeX (team@ifmo.su)
- *	Copyright (c) 2021 Marc Anton Dahmen
- *	MIT License
- *	
- *	------------------------------------------------------------------------
- *	
- *	The debounce function is part of Underscore.js
- *	https://underscorejs.org
+ * Copyright (c) 2018 CodeX (team@ifmo.su)
+ * Copyright (c) 2021 Marc Anton Dahmen
+ * MIT License
  *
- *	Copyright (c) 2009-2020 Jeremy Ashkenas, DocumentCloud and Investigative
- *	MIT License
+ * ------------------------------------------------------------------------
+ *
+ * The debounce function is part of Underscore.js
+ * https://underscorejs.org
+ *
+ * Copyright (c) 2009-2020 Jeremy Ashkenas, DocumentCloud and Investigative
+ * MIT License
  */
 
-
-+function (Automad) {
-
++(function (Automad) {
 	Automad.embedUtils = {
-
 		/**
 		 * Returns a function, that, as long as it continues to be invoked, will not
 		 * be triggered. The function will be called after it stops being called for
@@ -37,7 +34,6 @@
 		 */
 
 		debounce: function (func, wait, immediate) {
-
 			var timeout, args, context, timestamp, result;
 			if (null == wait) wait = 100;
 
@@ -53,7 +49,7 @@
 						context = args = null;
 					}
 				}
-			};
+			}
 
 			var debounced = function () {
 				context = this;
@@ -87,15 +83,11 @@
 			};
 
 			return debounced;
-		}
-
-	}
-
-}(window.Automad = window.Automad || {});
-
+		},
+	};
+})((window.Automad = window.Automad || {}));
 
 class AutomadBlockEmbed {
-	
 	static get isReadOnlySupported() {
 		return true;
 	}
@@ -107,35 +99,37 @@ class AutomadBlockEmbed {
 	}
 
 	static prepare({ config = {} }) {
-
 		const { services = {} } = config;
 
 		let entries = Object.entries(Automad.editorJS.embedServices);
 
-		const enabledServices = Object
-			.entries(services)
+		const enabledServices = Object.entries(services)
 			.filter(([key, value]) => {
 				return typeof value === 'boolean' && value === true;
 			})
 			.map(([key]) => key);
 
-		const userServices = Object
-			.entries(services)
+		const userServices = Object.entries(services)
 			.filter(([key, value]) => {
 				return typeof value === 'object';
 			})
-			.filter(([key, service]) => AutomadBlockEmbed.checkServiceConfig(service))
+			.filter(([key, service]) =>
+				AutomadBlockEmbed.checkServiceConfig(service)
+			)
 			.map(([key, service]) => {
 				const { regex, embedUrl, html, height, width, id } = service;
 
-				return [key, {
-					regex,
-					embedUrl,
-					html,
-					height,
-					width,
-					id,
-				}];
+				return [
+					key,
+					{
+						regex,
+						embedUrl,
+						html,
+						height,
+						width,
+						id,
+					},
+				];
 			});
 
 		if (enabledServices.length) {
@@ -144,45 +138,49 @@ class AutomadBlockEmbed {
 
 		entries = entries.concat(userServices);
 
-		AutomadBlockEmbed.services = entries.reduce((result, [key, service]) => {
-			if (!(key in result)) {
-				result[key] = service;
+		AutomadBlockEmbed.services = entries.reduce(
+			(result, [key, service]) => {
+				if (!(key in result)) {
+					result[key] = service;
+
+					return result;
+				}
+
+				result[key] = Object.assign({}, result[key], service);
 
 				return result;
-			}
+			},
+			{}
+		);
 
-			result[key] = Object.assign({}, result[key], service);
+		AutomadBlockEmbed.patterns = entries.reduce((result, [key, item]) => {
+			result[key] = item.regex;
 
 			return result;
 		}, {});
-
-		AutomadBlockEmbed.patterns = entries
-			.reduce((result, [key, item]) => {
-				result[key] = item.regex;
-
-				return result;
-			}, {});
-
 	}
 
 	static checkServiceConfig(config) {
-
 		const { regex, embedUrl, html, height, width, id } = config;
 
-		let isValid = regex && regex instanceof RegExp &&
-			embedUrl && typeof embedUrl === 'string' &&
-			html && typeof html === 'string';
+		let isValid =
+			regex &&
+			regex instanceof RegExp &&
+			embedUrl &&
+			typeof embedUrl === 'string' &&
+			html &&
+			typeof html === 'string';
 
 		isValid = isValid && (id !== undefined ? id instanceof Function : true);
-		isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
-		isValid = isValid && (width !== undefined ? Number.isFinite(width) : true);
+		isValid =
+			isValid && (height !== undefined ? Number.isFinite(height) : true);
+		isValid =
+			isValid && (width !== undefined ? Number.isFinite(width) : true);
 
 		return isValid;
-
 	}
 
 	constructor({ data, api, config, readOnly }) {
-
 		this.api = api;
 		this._data = {};
 		this.element = null;
@@ -192,11 +190,15 @@ class AutomadBlockEmbed {
 
 		this.layout = {
 			span: data.span || '',
-			stretched: data.stretched || ''
+			stretched: data.stretched || '',
 		};
 
-		this.settings = AutomadLayout.renderSettings(this.layout, data, api, config);
-
+		this.settings = AutomadLayout.renderSettings(
+			this.layout,
+			data,
+			api,
+			config
+		);
 	}
 
 	set data(data) {
@@ -224,7 +226,9 @@ class AutomadBlockEmbed {
 
 	get data() {
 		if (this.element) {
-			const caption = this.element.querySelector(`.${this.api.styles.input}`);
+			const caption = this.element.querySelector(
+				`.${this.api.styles.input}`
+			);
 
 			this._data.caption = caption ? caption.innerHTML : '';
 		}
@@ -246,7 +250,6 @@ class AutomadBlockEmbed {
 	}
 
 	render() {
-
 		if (!this.data.service) {
 			const container = document.createElement('div');
 
@@ -261,7 +264,11 @@ class AutomadBlockEmbed {
 		const template = document.createElement('template');
 		const preloader = this.createPreloader();
 
-		container.classList.add(this.CSS.baseClass, this.CSS.container, this.CSS.containerLoading);
+		container.classList.add(
+			this.CSS.baseClass,
+			this.CSS.container,
+			this.CSS.containerLoading
+		);
 		caption.classList.add(this.CSS.input, this.CSS.caption);
 
 		container.appendChild(preloader);
@@ -279,19 +286,16 @@ class AutomadBlockEmbed {
 		container.appendChild(template.content.firstChild);
 		container.appendChild(caption);
 
-		embedIsReady
-			.then(() => {
-				container.classList.remove(this.CSS.containerLoading);
-			});
+		embedIsReady.then(() => {
+			container.classList.remove(this.CSS.containerLoading);
+		});
 
 		this.element = container;
 
 		return container;
-
 	}
 
 	createPreloader() {
-
 		const preloader = document.createElement('preloader');
 		const url = document.createElement('div');
 
@@ -303,7 +307,6 @@ class AutomadBlockEmbed {
 		preloader.appendChild(url);
 
 		return preloader;
-
 	}
 
 	save() {
@@ -311,10 +314,15 @@ class AutomadBlockEmbed {
 	}
 
 	onPaste(event) {
-
 		const { key: service, data: url } = event.detail;
 
-		const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = AutomadBlockEmbed.services[service];
+		const {
+			regex,
+			embedUrl,
+			width,
+			height,
+			id = (ids) => ids.shift(),
+		} = AutomadBlockEmbed.services[service];
 		const result = regex.exec(url).slice(1);
 		const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
 
@@ -325,17 +333,17 @@ class AutomadBlockEmbed {
 			width,
 			height,
 		};
-
 	}
 
 	embedIsReady(targetNode) {
-
 		const PRELOADER_DELAY = 450;
 
 		let observer = null;
 
 		return new Promise((resolve, reject) => {
-			observer = new MutationObserver(Automad.embedUtils.debounce(resolve, PRELOADER_DELAY));
+			observer = new MutationObserver(
+				Automad.embedUtils.debounce(resolve, PRELOADER_DELAY)
+			);
 			observer.observe(targetNode, {
 				childList: true,
 				subtree: true,
@@ -343,11 +351,9 @@ class AutomadBlockEmbed {
 		}).then(() => {
 			observer.disconnect();
 		});
-
 	}
 
 	renderSettings() {
 		return this.settings;
 	}
-
 }

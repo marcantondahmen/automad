@@ -1,37 +1,37 @@
 <?php 
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
 
@@ -43,18 +43,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Keys class provides all methods to search all kind of content variables (keys of the data array) used in templates. 
+ * The Keys class provides all methods to search all kind of content variables (keys of the data array) used in templates. 
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
 
 class Keys {
 	
 	
 	/**
-	 *	Array with reserved variable keys.
+	 * Array with reserved variable keys.
 	 */
 	
 	public static $reserved = array(
@@ -72,8 +72,8 @@ class Keys {
 	/**
 	 * 	Get text variable keys from an array of keys.
 	 * 
-	 *	@param array $keys
-	 *	@return array The array with only text variables.
+	 * @param array $keys
+	 * @return array The array with only text variables.
 	 */
 
 	public static function filterTextKeys($keys) {
@@ -88,8 +88,8 @@ class Keys {
 	/**
 	 * 	Get color variable keys from an array of keys.
 	 * 
-	 *	@param array $keys
-	 *	@return array The array with only text variables.
+	 * @param array $keys
+	 * @return array The array with only text variables.
 	 */
 
 	public static function filterColorKeys($keys) {
@@ -104,8 +104,8 @@ class Keys {
 	/**
 	 * 	Get settings variable keys from an array of keys.
 	 * 
-	 *	@param array $keys
-	 *	@return array The array with only settings variables.
+	 * @param array $keys
+	 * @return array The array with only settings variables.
 	 */
 
 	public static function filterSettingKeys($keys) {
@@ -120,11 +120,11 @@ class Keys {
 
 	
 	/**
-	 *	Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
-	 *	
-	 *	@param object $Page
-	 *	@param object $Theme
-	 *	@return array Keys in the currently used template (without reserved keys)
+	 * Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
+	 * 
+	 * @param object $Page
+	 * @param object $Theme
+	 * @return array Keys in the currently used template (without reserved keys)
 	 */
 	
 	public static function inCurrentTemplate($Page, $Theme) {
@@ -143,10 +143,10 @@ class Keys {
 
 
 	/**
-	 *	Find all variable keys in a template and all included snippets (and ignore those keys in $this->reserved).
-	 *	
-	 *	@param string $file
-	 *	@return array Keys in a given template (without reserved keys)
+	 * Find all variable keys in a template and all included snippets (and ignore those keys in $this->reserved).
+	 * 
+	 * @param string $file
+	 * @return array Keys in a given template (without reserved keys)
 	 */
 	
 	public static function inTemplate($file) {
@@ -194,10 +194,10 @@ class Keys {
 
 
 	/**
-	 *	Find all variable keys in templates of a given theme.
-	 *	
-	 *	@param object $Theme
-	 *	@return array Keys in all templates of the given Theme (without reserved keys)
+	 * Find all variable keys in templates of a given theme.
+	 * 
+	 * @param object $Theme
+	 * @return array Keys in all templates of the given Theme (without reserved keys)
 	 */
 	
 	public static function inTheme($Theme) {
@@ -214,12 +214,12 @@ class Keys {
 	
 	
 	/**
-	 *	Cleans up an array of keys. All reserved and duplicate keys get removed 
-	 *	and the optional UI mask is applied.
+	 * Cleans up an array of keys. All reserved and duplicate keys get removed 
+	 * and the optional UI mask is applied.
 	 * 
-	 *	@param array $keys
-	 *	@param array $mask
-	 *	@return array The sorted and filtered keys array
+	 * @param array $keys
+	 * @param array $mask
+	 * @return array The sorted and filtered keys array
 	 */
 
 	private static function cleanUp($keys, $mask = array()) {

@@ -1,49 +1,46 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 class AutomadFontSize extends AutomadInlineTool {
-
-
 	static get title() {
 		return 'Font Size';
 	}
 
 	static get sanitize() {
 		return {
-			'am-fontsize': true
+			'am-fontsize': true,
 		};
 	}
 
@@ -56,26 +53,42 @@ class AutomadFontSize extends AutomadInlineTool {
 	}
 
 	get options() {
-		return ['70%', '80%', '90%', '100%', '110%', '120%', '130%', '140%', '150%', '160%', '170%', '180%', '190%', '200%'];
+		return [
+			'70%',
+			'80%',
+			'90%',
+			'100%',
+			'110%',
+			'120%',
+			'130%',
+			'140%',
+			'150%',
+			'160%',
+			'170%',
+			'180%',
+			'190%',
+			'200%',
+		];
 	}
 
 	renderActions() {
-
 		const create = Automad.util.create,
-			  label = create.label(AutomadFontSize.title);
+			label = create.label(AutomadFontSize.title);
 
-		this.select = create.select([this.cls.input], this.options, this.selected);
+		this.select = create.select(
+			[this.cls.input],
+			this.options,
+			this.selected
+		);
 		this.wrapper = create.element('span', [this.cls.wrapper]);
 		this.wrapper.appendChild(label);
 		this.wrapper.appendChild(this.select);
 		this.wrapper.hidden = true;
 
 		return this.wrapper;
-
 	}
 
 	showActions(node) {
-
 		const { fontSize } = node.style;
 
 		this.select.value = fontSize ? fontSize : '100%';
@@ -86,13 +99,10 @@ class AutomadFontSize extends AutomadInlineTool {
 		};
 
 		this.wrapper.hidden = false;
-
 	}
 
 	hideActions() {
 		this.select.onchange = null;
 		this.wrapper.hidden = true;
 	}
-
-
 }

@@ -6,42 +6,10 @@ use Automad\Core\Parse;
 use PHPUnit\Framework\TestCase;
 
 /**
- *	@testdox Automad\UI\Models\Replacement
+ * @testdox Automad\UI\Models\Replacement
  */
-
 class Replacement_Test extends TestCase {
-
-
-	/**
-	 *	@dataProvider dataForTestReplaceInDataIsSame
-	 *	@testdox replaceInData()
-	 */
-
-	public function testReplaceInDataIsSame($searchValue, $replaceValue, $isRegex, $isCaseSensitive, $keys, $data, $expected) {
-
-		$ReplacementReflection = new \ReflectionClass('\Automad\UI\Models\Replacement');
-
-		$replaceInData = $ReplacementReflection->getMethod('replaceInData');
-		$replaceInData->setAccessible(true);
-
-		$Replacement = new Replacement(
-			$searchValue,
-			$replaceValue,
-			$isRegex,
-			$isCaseSensitive
-		);
-
-		$replacedData = $replaceInData->invokeArgs($Replacement, [$data, $keys]);
-
-		$this->assertSame(
-			json_encode($replacedData, JSON_PRETTY_PRINT), 
-			json_encode($expected, JSON_PRETTY_PRINT)
-		);
-
-	}
-
 	public function dataForTestReplaceInDataIsSame() {
-
 		return array(
 			// Blocks, no regex, not case sensitive.
 			array(
@@ -94,8 +62,37 @@ class Replacement_Test extends TestCase {
 				Parse::textFile(__DIR__ . '/../../data/text_replaced.txt')
 			)
 		);
-
 	}
 
+	/**
+	 * @dataProvider dataForTestReplaceInDataIsSame
+	 * @testdox replaceInData()
+	 * @param mixed $searchValue
+	 * @param mixed $replaceValue
+	 * @param mixed $isRegex
+	 * @param mixed $isCaseSensitive
+	 * @param mixed $keys
+	 * @param mixed $data
+	 * @param mixed $expected
+	 */
+	public function testReplaceInDataIsSame($searchValue, $replaceValue, $isRegex, $isCaseSensitive, $keys, $data, $expected) {
+		$ReplacementReflection = new \ReflectionClass('\Automad\UI\Models\Replacement');
 
+		$replaceInData = $ReplacementReflection->getMethod('replaceInData');
+		$replaceInData->setAccessible(true);
+
+		$Replacement = new Replacement(
+			$searchValue,
+			$replaceValue,
+			$isRegex,
+			$isCaseSensitive
+		);
+
+		$replacedData = $replaceInData->invokeArgs($Replacement, array($data, $keys));
+
+		$this->assertSame(
+			json_encode($replacedData, JSON_PRETTY_PRINT),
+			json_encode($expected, JSON_PRETTY_PRINT)
+		);
+	}
 }

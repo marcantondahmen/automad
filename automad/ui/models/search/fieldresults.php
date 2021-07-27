@@ -1,37 +1,37 @@
 <?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
 
@@ -41,44 +41,44 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	A wrapper class for all results for a given data field.
+ * A wrapper class for all results for a given data field.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
 
 class FieldResults {
 
 
 	/**
-	 *	The field name.
+	 * The field name.
 	 */
 
 	public $key;
 
 
 	/**
-	 *	An array with all found matches in the field value. 
-	 *	Note that the matches can differ in case the search value is an unescaped regex string.
+	 * An array with all found matches in the field value. 
+	 * Note that the matches can differ in case the search value is an unescaped regex string.
 	 */
 
 	public $matches = false;
 
 
 	/**
-	 *	A presenation string of all joined matches with wrapping context.
+	 * A presenation string of all joined matches with wrapping context.
 	 */
 
 	public $context = '';
 	
 
 	/**
-	 *	Initialize a new field results instance.
+	 * Initialize a new field results instance.
 	 *
-	 *	@param string $key
-	 *	@param array $matches
-	 *	@param string $context
+	 * @param string $key
+	 * @param array $matches
+	 * @param string $context
 	 */
 
 	public function __construct($key, $matches, $context) {

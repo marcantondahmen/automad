@@ -4,40 +4,16 @@ namespace Automad\Core;
 
 use PHPUnit\Framework\TestCase;
 
-
 /**
- *	@testdox Automad\Core\Regex
+ * @testdox Automad\Core\Regex
  */
-
 class Regex_Test extends TestCase {
-	
-	
-	/**
-	 *	@dataProvider dataForTestCsvIsSame
-	 *	@testdox csv() matches: $str
-	 */
-	
-	public function testCsvIsSame($str, $expected) {
-		
-		$result = array();
-		
-		preg_match_all('/' . Regex::csv() . '/', $str, $matches, PREG_SET_ORDER);
-		
-		foreach ($matches as $match) {
-			$result[] = $match[1];
-		}
-		
-		$this->assertSame($result, $expected);
-		
-	}
-	
 	public function dataForTestCsvIsSame() {
-		
 		return array(
 			array(
-				'"String", 10, @{ var | function (parameter, @{ var }) }', 
+				'"String", 10, @{ var | function (parameter, @{ var }) }',
 				array(
-					'"String"', 
+					'"String"',
 					'10',
 					'@{ var | function (parameter, @{ var }) }'
 				)
@@ -58,28 +34,13 @@ class Regex_Test extends TestCase {
 				)
 			)
 		);
-		
 	}
-	
-	
-	/**
-	 *	@dataProvider dataForTestExpressionHasArraySubset
-	 *	@testdox expression("$prefix") matches: $str
-	 */
-	
-	public function testExpressionHasArraySubset($str, $prefix, $expected) {
-			
-		preg_match_all('/' . Regex::expression($prefix) . '/', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches[0]);
-		
-	}
-	
+
 	public function dataForTestExpressionHasArraySubset() {
-		
 		return array(
 			array(
-				'@{ var } > 5', 
-				'test', 
+				'@{ var } > 5',
+				'test',
 				array(
 					'testLeftVar' => '@{ var }',
 					'testOperator' => '>',
@@ -103,24 +64,39 @@ class Regex_Test extends TestCase {
 				)
 			)
 		);
-		
 	}
-	
-	
-	/**
-	 *	@dataProvider dataForTestMarkupHasArraySubset
-	 *	@testdox markup() matches: $str
-	 */
-	
-	public function testMarkupHasArraySubset($str, $expected) {
-		
-		preg_match_all('/' . Regex::markup() . '/is', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches[0]);
-		
+
+	public function dataForTestKeyValueHasArraySubset() {
+		return array(
+			array(
+				'{ "key1": false, key2: @{ var | function ("param") }, key3: "\"Quoted\" Text" }',
+				array(
+					array(
+						'key' => '"key1"',
+						'value' => 'false'
+					),
+					array(
+						'key' => 'key2',
+						'value' => '@{ var | function ("param") }'
+					),array(
+						'key' => 'key3',
+						'value' => '"\"Quoted\" Text" '
+					)
+				)
+			),
+			array(
+				"{ key: 'Some text with a @{ variable | function }' }",
+				array(
+					array(
+						'key' => 'key',
+						'value' => "'Some text with a @{ variable | function }' "
+					)
+				)
+			)
+		);
 	}
-	
+
 	public function dataForTestMarkupHasArraySubset() {
-		
 		return array(
 			array(
 				'<@ path/to/file.php @>',
@@ -181,69 +157,9 @@ class Regex_Test extends TestCase {
 				)
 			)
 		);
-		
 	}
-	
-	
-	/**
-	 *	@dataProvider dataForTestKeyValueHasArraySubset
-	 *	@testdox keyValue() matches: $str
-	 */
-	
-	public function testKeyValueHasArraySubset($str, $expected) {
-		
-		preg_match_all('/' . Regex::keyValue() . '/is', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches);
-		
-	}
-	
-	public function dataForTestKeyValueHasArraySubset() {
-		
-		return array(
-			array(
-				'{ "key1": false, key2: @{ var | function ("param") }, key3: "\"Quoted\" Text" }',
-				array(
-					array(
-						'key' => '"key1"',
-						'value' => 'false'
-					),
-					array(
-						'key' => 'key2',
-						'value' => '@{ var | function ("param") }'
-					),array(
-						'key' => 'key3',
-						'value' => '"\"Quoted\" Text" '
-					)
-				)
-			),
-			array(
-				"{ key: 'Some text with a @{ variable | function }' }",
-				array(
-					array(
-						'key' => 'key',
-						'value' => "'Some text with a @{ variable | function }' "
-					)
-				)
-			)
-		);
-		
-	}
-	
-	
-	/**
-	 *	@dataProvider dataForTestPipeHasArraySubset
-	 *	@testdox pipe("$prefix") matches: $str
-	 */
-	
-	public function testPipeHasArraySubset($str, $prefix, $expected) {
-		
-		preg_match_all('/' . Regex::pipe($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches);
-		
-	}
-	
+
 	public function dataForTestPipeHasArraySubset() {
-		
 		return array(
 			array(
 				'| function (boolean, "string", 10, @{ var | sanitize }) | +5',
@@ -260,24 +176,9 @@ class Regex_Test extends TestCase {
 				)
 			)
 		);
-		
 	}
-	
-	
-	/**
-	 *	@dataProvider dataForTestVariableHasArraySubset
-	 *	@testdox variable("$prefix") matches: $str
-	 */
-	
-	public function testVariableHasArraySubset($str, $prefix, $expected) {
-		
-		preg_match_all('/' . Regex::variable($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches[0]);
-		
-	}
-	
+
 	public function dataForTestVariableHasArraySubset() {
-		
 		return array(
 			array(
 				'@{ variable | 100 }',
@@ -296,8 +197,81 @@ class Regex_Test extends TestCase {
 				)
 			)
 		);
-		
 	}
 
-	
+	/**
+	 * @dataProvider dataForTestCsvIsSame
+	 * @testdox csv() matches: $str
+	 * @param mixed $str
+	 * @param mixed $expected
+	 */
+	public function testCsvIsSame($str, $expected) {
+		$result = array();
+
+		preg_match_all('/' . Regex::csv() . '/', $str, $matches, PREG_SET_ORDER);
+
+		foreach ($matches as $match) {
+			$result[] = $match[1];
+		}
+
+		$this->assertSame($result, $expected);
+	}
+
+	/**
+	 * @dataProvider dataForTestExpressionHasArraySubset
+	 * @testdox expression("$prefix") matches: $str
+	 * @param mixed $str
+	 * @param mixed $prefix
+	 * @param mixed $expected
+	 */
+	public function testExpressionHasArraySubset($str, $prefix, $expected) {
+		preg_match_all('/' . Regex::expression($prefix) . '/', $str, $matches, PREG_SET_ORDER);
+		$this->assertArraySubset($expected, $matches[0]);
+	}
+
+	/**
+	 * @dataProvider dataForTestKeyValueHasArraySubset
+	 * @testdox keyValue() matches: $str
+	 * @param mixed $str
+	 * @param mixed $expected
+	 */
+	public function testKeyValueHasArraySubset($str, $expected) {
+		preg_match_all('/' . Regex::keyValue() . '/is', $str, $matches, PREG_SET_ORDER);
+		$this->assertArraySubset($expected, $matches);
+	}
+
+	/**
+	 * @dataProvider dataForTestMarkupHasArraySubset
+	 * @testdox markup() matches: $str
+	 * @param mixed $str
+	 * @param mixed $expected
+	 */
+	public function testMarkupHasArraySubset($str, $expected) {
+		preg_match_all('/' . Regex::markup() . '/is', $str, $matches, PREG_SET_ORDER);
+		$this->assertArraySubset($expected, $matches[0]);
+	}
+
+	/**
+	 * @dataProvider dataForTestPipeHasArraySubset
+	 * @testdox pipe("$prefix") matches: $str
+	 * @param mixed $str
+	 * @param mixed $prefix
+	 * @param mixed $expected
+	 */
+	public function testPipeHasArraySubset($str, $prefix, $expected) {
+		preg_match_all('/' . Regex::pipe($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
+		$this->assertArraySubset($expected, $matches);
+	}
+
+	/**
+	 * @dataProvider dataForTestVariableHasArraySubset
+	 * @testdox variable("$prefix") matches: $str
+	 * @param mixed $str
+	 * @param mixed $prefix
+	 * @param mixed $expected
+	 */
+	public function testVariableHasArraySubset($str, $prefix, $expected) {
+		preg_match_all('/' . Regex::variable($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
+		$this->assertArraySubset($expected, $matches[0]);
+	}
 }

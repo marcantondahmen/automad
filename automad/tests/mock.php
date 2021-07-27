@@ -10,25 +10,20 @@ use PHPUnit\Framework\TestCase;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 class Mock extends TestCase {
-	
-		
 	/**
-	 *	Create a mock of the Automad object with a single page.
+	 * Create a mock of the Automad object with a single page.
 	 * 	A template can be passed optionally to the page.
 	 *
-	 *	@param string $template
-	 *	@return object The Automad Mock
+	 * @param string $template
+	 * @return object The Automad Mock
 	 */
-		
 	public function createAutomad($template = '') {
-		
 		$Shared = new Shared();
-		$Shared->data['shared'] = 'Shared default text content'; 
+		$Shared->data['shared'] = 'Shared default text content';
 		$collection = $this->createCollection($Shared, $template);
 		$methods = array_diff(
-			get_class_methods('\Automad\Core\Automad'), 
+			get_class_methods('\Automad\Core\Automad'),
 			array(
 				'getPage',
 				'getRequestedPage',
@@ -37,31 +32,27 @@ class Mock extends TestCase {
 				'loadTemplate'
 			)
 		);
-	
+
 		$AutomadMock = $this->getMockBuilder('\Automad\Core\Automad')
 							->setMethods($methods)
 							->disableOriginalConstructor()
 							->getMock();
-							
+
 		$AutomadMock->method('getCollection')->willReturn($collection);
 		$AutomadMock->Shared = $Shared;
 		$AutomadMock->Context = new Context($collection['/page']);
-		
+
 		return $AutomadMock;
-		
 	}
 
-
 	/**
-	 *	Create a collection of test pages.
+	 * Create a collection of test pages.
 	 *
-	 *	@param \Automad\Core\Shared $Shared
-	 *	@param string $template
-	 *	@return array the collection
+	 * @param \Automad\Core\Shared $Shared
+	 * @param string $template
+	 * @return array the collection
 	 */
-
 	private function createCollection($Shared, $template) {
-
 		$theme = '../automad/tests/templates';
 
 		return array(
@@ -116,8 +107,5 @@ class Mock extends TestCase {
 				$Shared
 			)
 		);
-
 	}
-	
-	
 }

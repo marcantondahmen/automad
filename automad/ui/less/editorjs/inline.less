@@ -1,44 +1,41 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
-
 
 @am-inline-actions-padding: 0.8rem;
 
 .am-block-editor {
-
 	& .ce-inline-toolbar {
-
 		display: flex !important;
 		z-index: 110;
 		flex-direction: column;
@@ -55,7 +52,6 @@
 			width: 24rem;
 			max-width: 24rem !important;
 		}
-
 	}
 
 	& .ce-inline-toolbar__toggler-and-button-wrapper,
@@ -76,7 +72,6 @@
 	}
 
 	& .ce-inline-toolbar__actions {
-		
 		order: 3;
 		display: flex;
 		flex-wrap: wrap;
@@ -99,7 +94,6 @@
 		}
 
 		& > div:not([class]) {
-
 			flex-basis: 100%;
 			border-top: @am-hairline;
 			margin-top: -@am-border-width;
@@ -116,7 +110,6 @@
 			}
 
 			& label {
-
 				flex-direction: column !important;
 				align-items: stretch !important;
 				padding-top: @am-inline-actions-padding;
@@ -126,7 +119,6 @@
 					width: 100% !important;
 				}
 			}
-
 		}
 
 		& > [hidden],
@@ -135,7 +127,6 @@
 		}
 
 		& .am-inline-tool-action {
-
 			& .am-block-label {
 				margin-top: 0 !important;
 			}
@@ -144,7 +135,6 @@
 				box-sizing: border-box;
 				width: 100%;
 			}
-
 		}
 
 		& input,
@@ -157,8 +147,7 @@
 			font-size: 0.8rem;
 		}
 
-		& input[type="color"] {
-		
+		& input[type='color'] {
 			box-sizing: border-box;
 			width: @form-height;
 			min-width: @form-height;
@@ -171,9 +160,9 @@
 			-webkit-appearance: none;
 
 			&::-webkit-color-swatch-wrapper {
-				padding: 0;	
+				padding: 0;
 			}
-			
+
 			&::-moz-color-swatch {
 				border: @am-hairline;
 				border-radius: @am-radius;
@@ -183,14 +172,11 @@
 				border: @am-hairline;
 				border-radius: @am-radius;
 			}
-
 		}
-
 	}
 
 	& .ce-inline-toolbar__dropdown,
 	& .ce-inline-tool {
-
 		box-sizing: border-box;
 		height: 2.45rem;
 		width: 2.45rem;
@@ -213,7 +199,6 @@
 		}
 
 		&--active {
-
 			color: @am-block-button-active-color;
 			background-color: @am-block-button-active-background;
 
@@ -222,13 +207,10 @@
 				color: @am-block-button-active-color;
 				background-color: @am-block-button-active-hover-background;
 			}
-
 		}
-
 	}
 
 	& .ce-inline-toolbar__dropdown {
-
 		width: 3.5rem;
 		border-right: @am-hairline;
 
@@ -241,25 +223,21 @@
 		& .icon--toggler-down {
 			margin-top: 0.1rem;
 		}
-
 	}
 
 	& .ce-inline-tool {
-
 		font-size: 0.64rem;
 
 		@media (max-width: @am-blocks-breakpoint-small-max) {
 			font-size: 0.6rem;
 		}
 
-		&[data-tool="link"] {
+		&[data-tool='link'] {
 			font-size: 0.78rem;
 		}
-
 	}
 
 	& .ce-conversion-toolbar {
-
 		order: 2;
 		position: relative;
 		left: 0;
@@ -282,7 +260,6 @@
 	}
 
 	& .ce-conversion-tool {
-
 		padding: 0.36rem 0.71rem;
 		font-weight: @base-body-font-weight;
 		color: @nav-dropdown-color;
@@ -300,7 +277,6 @@
 		}
 
 		&__icon {
-
 			width: 1rem;
 			height: 1rem;
 			font-size: 0.8rem !important;
@@ -312,9 +288,6 @@
 				width: auto;
 				height: 100%;
 			}
-
 		}
-
 	}
-
 }

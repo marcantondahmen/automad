@@ -1,95 +1,85 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 namespace Automad\UI\Components\Form;
-use Automad\UI\Utils\Text;
 
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The form group component. 
+ * The form group component.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Group {
-
-	
 	/**
-	 *	Create form fields for page/shared variables.         
-	 *      
-	 *  Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.   
+	 * Create form fields for page/shared variables.
+	 *
+	 *  Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.
 	 *  Note used prefix must match the ID selectors defined in 'add_variable.js'.
 	 *
-	 *	@param object $Automad
-	 *	@param array $keys
-	 *	@param array $data
-	 *	@param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
-	 *	@param object $Theme
-	 *	@return string The HTML for the textarea
+	 * @param object $Automad
+	 * @param array $keys
+	 * @param array $data
+	 * @param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
+	 * @param object $Theme
+	 * @return string The HTML for the textarea
 	 */
-	
 	public static function render($Automad, $keys, $data = array(), $addVariableIdPrefix = false, $Theme = false) {
-			
 		$Text = Text::getObject();
 		$html = '';
-		
+
 		// The HTML for the variable fields.
 		foreach ($keys as $key) {
-		
 			if (isset($data[$key])) {
 				$value = $data[$key];
 			} else {
 				$value = '';
 			}
-	
+
 			// Note that passing $addVariableIdPrefix only to create remove buttons if string is not empty.
 			$html .= Field::render($Automad, $key, $value, $addVariableIdPrefix, $Theme);
-			
 		}
-		
+
 		// Optionally create the HTML for a dialog to add more variables to the form.
 		// Therefore $addVariableIdPrefix has to be defined.
 		if ($addVariableIdPrefix) {
-			
 			$addVarModalId = $addVariableIdPrefix . '-modal';
 			$addVarSubmitId = $addVariableIdPrefix . '-submit';
 			$addVarInputlId = $addVariableIdPrefix . '-input';
@@ -135,12 +125,8 @@ class Group {
 						</div>
 					</div>
 HTML;
+		}
 
-		} 
-		
 		return $html;
-			
 	}
-	
-
 }

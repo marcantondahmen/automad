@@ -1,53 +1,50 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 class AutomadLink extends AutomadInlineTool {
-
-
 	get shortcut() {
 		return 'CMD+L';
 	}
-	
+
 	static get title() {
 		return 'Link';
 	}
 
 	static get sanitize() {
 		return {
-			'a': true
+			a: true,
 		};
 	}
 
@@ -60,9 +57,8 @@ class AutomadLink extends AutomadInlineTool {
 	}
 
 	renderActions() {
-
 		const create = Automad.util.create,
-			  label = create.label(AutomadLink.title);
+			label = create.label(AutomadLink.title);
 
 		this.input = create.element('input', [this.cls.input]);
 		this.input.type = 'text';
@@ -72,11 +68,9 @@ class AutomadLink extends AutomadInlineTool {
 		this.wrapper.hidden = true;
 
 		return this.wrapper;
-
 	}
 
 	showActions(node) {
-
 		const href = node.getAttribute('href');
 
 		this.input.value = href ? href : '';
@@ -87,13 +81,10 @@ class AutomadLink extends AutomadInlineTool {
 		};
 
 		this.wrapper.hidden = false;
-
 	}
 
 	hideActions() {
 		this.input.onchange = null;
 		this.wrapper.hidden = true;
 	}
-
-
 }

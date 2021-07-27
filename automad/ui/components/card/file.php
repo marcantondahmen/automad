@@ -1,153 +1,66 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 namespace Automad\UI\Components\Card;
+
 use Automad\Core\Image;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
-
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The file card component. 
+ * The file card component.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class File {
-
-
 	/**
-	 *	Get file preview.
-	 *	
-	 *	@param string $file
-	 *	@return string The generated HTML of the preview
+	 * Render a file card.
+	 *
+	 * @param string $file
+	 * @param string $id
+	 * @return string The HTML of the card
 	 */
-
-	private static function getPreview($file) {
-
-		if (Parse::fileIsImage($file)) {
-
-			$imgPanel = new Image($file, 320, 240, true);
-			$url = AM_BASE_URL . $imgPanel->file;
-			
-			$preview = <<< HTML
-						<img src="$url" width="$imgPanel->width" height="$imgPanel->height" />
-						<div class="uk-panel-badge uk-badge"> 
-							$imgPanel->originalWidth 
-							<i class="uk-icon-times"></i>
-							$imgPanel->originalHeight
-						</div>
-HTML;
-
-		} else {
-
-			$preview = '<i class="uk-icon-file-o am-files-icon-' . FileSystem::getExtension($file) . '"></i>';
-			
-		}
-
-		return <<< HTML
-				<a 
-				href="#am-edit-file-info-modal" 
-				class="uk-panel-teaser uk-display-block" 
-				data-uk-modal
-				>
-					<div class="am-cover-4by3">
-						$preview
-					</div>
-				</a>
-HTML;
-
-	}
-
-
-	/**
-	 *	Get file data and resized images.
-	 *	
-	 *	@param string $file
-	 *	@return array The file data array
-	 */
-
-	private static function getFileData($file) {
-
-		$data = array(
-			'img' => false, 
-			'filename' => basename($file), 
-			'caption' => htmlspecialchars(Parse::caption($file)), 
-			'extension' => htmlspecialchars(FileSystem::getExtension($file)),
-			'download' => AM_BASE_URL . Str::stripStart($file, AM_BASE_DIR) 
-		);
-
-		if (Parse::fileIsImage($file)) { 
-			
-			$imgModal = new Image($file, 1600, 1200, false);
-	
-			$data['img'] = array(
-				'src' => AM_BASE_URL . $imgModal->file,
-				'width' => $imgModal->width,
-				'height' => $imgModal->height,
-				'originalWidth' => $imgModal->originalWidth,
-				'originalHeight' => $imgModal->originalHeight
-			);
-			
-		} 
-
-		return $data;
-
-	}
-
-	
-	/**
-	 *	Render a file card.
-	 *	
-	 *	@param string $file
-	 *	@param string $id
-	 *	@return string The HTML of the card
-	 */
-
 	public static function render($file, $id) {
-
-		$data = (object) self::getFileData($file);	
+		$data = (object) self::getFileData($file);
 		$preview = self::getPreview($file);
 		$jsonData = json_encode($data);
 		$title = basename($file);
@@ -159,18 +72,15 @@ HTML;
 		$Text = Text::getObject();
 
 		if ($caption) {
-
 			$caption = <<< HTML
 						<div class="uk-text-small uk-text-truncate uk-hidden-small">
 							<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
 							$caption
 						</div>
 HTML;
-
 		}
 
 		if (Parse::fileIsImage($file)) {
-
 			$resize = <<< HTML
 						<li>
 							<a href="#am-copy-resized-modal"
@@ -181,7 +91,6 @@ HTML;
 							</a>
 						</li>
 HTML;
-
 		}
 
 		return <<< HTML
@@ -241,8 +150,71 @@ HTML;
 					</div>
 				</div>
 HTML;
-
 	}
 
+	/**
+	 * Get file data and resized images.
+	 *
+	 * @param string $file
+	 * @return array The file data array
+	 */
+	private static function getFileData($file) {
+		$data = array(
+			'img' => false,
+			'filename' => basename($file),
+			'caption' => htmlspecialchars(Parse::caption($file)),
+			'extension' => htmlspecialchars(FileSystem::getExtension($file)),
+			'download' => AM_BASE_URL . Str::stripStart($file, AM_BASE_DIR)
+		);
 
+		if (Parse::fileIsImage($file)) {
+			$imgModal = new Image($file, 1600, 1200, false);
+
+			$data['img'] = array(
+				'src' => AM_BASE_URL . $imgModal->file,
+				'width' => $imgModal->width,
+				'height' => $imgModal->height,
+				'originalWidth' => $imgModal->originalWidth,
+				'originalHeight' => $imgModal->originalHeight
+			);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Get file preview.
+	 *
+	 * @param string $file
+	 * @return string The generated HTML of the preview
+	 */
+	private static function getPreview($file) {
+		if (Parse::fileIsImage($file)) {
+			$imgPanel = new Image($file, 320, 240, true);
+			$url = AM_BASE_URL . $imgPanel->file;
+
+			$preview = <<< HTML
+						<img src="$url" width="$imgPanel->width" height="$imgPanel->height" />
+						<div class="uk-panel-badge uk-badge"> 
+							$imgPanel->originalWidth 
+							<i class="uk-icon-times"></i>
+							$imgPanel->originalHeight
+						</div>
+HTML;
+		} else {
+			$preview = '<i class="uk-icon-file-o am-files-icon-' . FileSystem::getExtension($file) . '"></i>';
+		}
+
+		return <<< HTML
+				<a 
+				href="#am-edit-file-info-modal" 
+				class="uk-panel-teaser uk-display-block" 
+				data-uk-modal
+				>
+					<div class="am-cover-4by3">
+						$preview
+					</div>
+				</a>
+HTML;
+	}
 }

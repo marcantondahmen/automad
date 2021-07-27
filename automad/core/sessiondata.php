@@ -1,99 +1,84 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2018-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2018-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\Core;
 
-
 defined('AUTOMAD') or die('Direct access not permitted!');
- 
- 
-/**
- *	The SessionData class handles setting and getting items of $_SESSION['data'].
- *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2018-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
- */
- 
-class SessionData {
-	
-    	
-		/**
-		 *	Set a key/value pair in the session data array.
-		 *
-		 *	@param string $key
-		 *	@param string $value
-		 */
 
-		public static function set($key, $value) {
-			
-			if (!isset($_SESSION['data'])) {
-				$_SESSION['data'] = array();
-			}
-			
-			$_SESSION['data'][$key] = $value;
-            
+/**
+ * The SessionData class handles setting and getting items of $_SESSION['data'].
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2018-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
+ */
+class SessionData {
+	/**
+	 * Get the session data array or just one value in case $key is defined.
+	 *
+	 * @param string $key
+	 * @return mixed The data array or a single value
+	 */
+	public static function get($key = false) {
+		if (!isset($_SESSION['data'])) {
+			$_SESSION['data'] = array();
 		}
-		
-		
-		/**
-		 *	Get the session data array or just one value in case $key is defined.
-		 *	
-		 *	@param string $key
-		 *	@return mixed The data array or a single value
-		 */
-		
-		public static function get($key = false) {
-			
-			if (!isset($_SESSION['data'])) {
-				$_SESSION['data'] = array();
-			}
-			
-			if ($key) {
-				if (array_key_exists($key, $_SESSION['data'])) {
-					return $_SESSION['data'][$key];
-				} else {
-                    return false;
-                }
+
+		if ($key) {
+			if (array_key_exists($key, $_SESSION['data'])) {
+				return $_SESSION['data'][$key];
 			} else {
-				return $_SESSION['data'];
+				return false;
 			}
-			
+		} else {
+			return $_SESSION['data'];
 		}
-		
-		
+	}
+
+	/**
+	 * Set a key/value pair in the session data array.
+	 *
+	 * @param string $key
+	 * @param string $value
+	 */
+	public static function set($key, $value) {
+		if (!isset($_SESSION['data'])) {
+			$_SESSION['data'] = array();
+		}
+
+		$_SESSION['data'][$key] = $value;
+	}
 }

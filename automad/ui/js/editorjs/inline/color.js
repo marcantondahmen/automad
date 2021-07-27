@@ -1,49 +1,46 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 class AutomadColor extends AutomadInlineTool {
-
-
 	static get title() {
 		return 'Text Color';
 	}
 
 	static get sanitize() {
 		return {
-			'am-color': true
+			'am-color': true,
 		};
 	}
 
@@ -60,27 +57,26 @@ class AutomadColor extends AutomadInlineTool {
 	}
 
 	renderActions() {
-
 		const create = Automad.util.create,
-			  label = create.label(this.constructor.title);
+			label = create.label(this.constructor.title);
 
 		this.colorPicker = create.element('input', [this.cls.input]);
 		this.colorPicker.type = 'color';
 		this.colorPicker.value = this.defaultColor;
-	
+
 		this.wrapper = create.element('span', [this.cls.wrapper]);
 		this.wrapper.appendChild(label);
 		this.wrapper.appendChild(this.colorPicker);
 		this.wrapper.hidden = true;
-		
-		return this.wrapper;
 
+		return this.wrapper;
 	}
 
 	showActions(node) {
-
 		const { color } = node.style;
-		this.colorPicker.value = color ? this.convertToHex(color) : this.defaultColor;
+		this.colorPicker.value = color
+			? this.convertToHex(color)
+			: this.defaultColor;
 		node.style.color = this.colorPicker.value;
 
 		this.colorPicker.onchange = () => {
@@ -88,7 +84,6 @@ class AutomadColor extends AutomadInlineTool {
 		};
 
 		this.wrapper.hidden = false;
-
 	}
 
 	hideActions() {
@@ -97,7 +92,6 @@ class AutomadColor extends AutomadInlineTool {
 	}
 
 	convertToHex(color) {
-
 		const rgb = color.match(/(\d+)/g);
 
 		let hexr = parseInt(rgb[0]).toString(16);
@@ -109,23 +103,17 @@ class AutomadColor extends AutomadInlineTool {
 		hexb = hexb.length === 1 ? '0' + hexb : hexb;
 
 		return '#' + hexr + hexg + hexb;
-
 	}
-
-
 }
 
-
 class AutomadBackground extends AutomadColor {
-
-
 	static get title() {
 		return 'Background';
 	}
 
 	static get sanitize() {
 		return {
-			'am-background': true
+			'am-background': true,
 		};
 	}
 
@@ -142,17 +130,15 @@ class AutomadBackground extends AutomadColor {
 	}
 
 	showActions(node) {
-
 		const { backgroundColor } = node.style;
-		this.colorPicker.value = backgroundColor ? this.convertToHex(backgroundColor) : this.defaultColor;
+		this.colorPicker.value = backgroundColor
+			? this.convertToHex(backgroundColor)
+			: this.defaultColor;
 		node.style.backgroundColor = this.colorPicker.value;
 
 		this.colorPicker.onchange = () => {
 			node.style.backgroundColor = this.colorPicker.value;
 		};
 		this.wrapper.hidden = false;
-
 	}
-
-
 }

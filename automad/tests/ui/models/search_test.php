@@ -7,41 +7,11 @@ use Automad\UI\Models\Search\FieldResults;
 use Automad\UI\Models\Search\FileResults;
 use PHPUnit\Framework\TestCase;
 
-
 /**
- *	@testdox Automad\UI\Models\Search
+ * @testdox Automad\UI\Models\Search
  */
-
 class Search_Test extends TestCase {
-
-
-	/**
-	 *	@dataProvider dataForTestSearchPerFileIsSame
-	 *	@testdox searchPerFile()
-	 */
-
-	public function testSearchPerFileIsSame($searchValue, $isRegex, $isCaseSensitive, $expected) {
-
-
-		$Mock = new Mock();
-		$Search = new Search(
-			$Mock->createAutomad('default'),
-			$searchValue,
-			$isRegex,
-			$isCaseSensitive
-		);
-
-		$results = $Search->searchPerFile();
-
-		$this->assertSame(
-			json_encode($results, JSON_PRETTY_PRINT), 
-			json_encode($expected, JSON_PRETTY_PRINT)
-		);
-
-	}
-
 	public function dataForTestSearchPerFileIsSame() {
-
 		return array(
 			array(
 				'simple',
@@ -156,7 +126,30 @@ class Search_Test extends TestCase {
 				)
 			)
 		);
-
 	}
 
+	/**
+	 * @dataProvider dataForTestSearchPerFileIsSame
+	 * @testdox searchPerFile()
+	 * @param mixed $searchValue
+	 * @param mixed $isRegex
+	 * @param mixed $isCaseSensitive
+	 * @param mixed $expected
+	 */
+	public function testSearchPerFileIsSame($searchValue, $isRegex, $isCaseSensitive, $expected) {
+		$Mock = new Mock();
+		$Search = new Search(
+			$Mock->createAutomad('default'),
+			$searchValue,
+			$isRegex,
+			$isCaseSensitive
+		);
+
+		$results = $Search->searchPerFile();
+
+		$this->assertSame(
+			json_encode($results, JSON_PRETTY_PRINT),
+			json_encode($expected, JSON_PRETTY_PRINT)
+		);
+	}
 }

@@ -1,138 +1,128 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	Add link dialog. 
+ * Add link dialog.
  */
 
-+function (Automad, $, UIkit) {
-
++(function (Automad, $, UIkit) {
 	Automad.link = {
-
 		dataAttr: {
-			'form': 'data-am-link',
-			'field': 'data-am-link-field'
+			form: 'data-am-link',
+			field: 'data-am-link-field',
 		},
-		
+
 		modalSelector: '#am-link-modal',
 
-		init: function() {
-
+		init: function () {
 			var link = Automad.link,
 				da = link.dataAttr;
 
-			$(document).on('click', '[' + da.field + '] button', function() {
-
+			$(document).on('click', '[' + da.field + '] button', function () {
 				link.click(this);
-
 			});
-
 		},
 
-		click: function(button) {
-
+		click: function (button) {
 			var $input = $(button).parent().find('input');
 
 			Automad.link.dialog($input, function (url) {
-
 				$input.val(url).trigger('keydown').trigger('change');
-
 			});
-
 		},
 
-		dialog: function(elementFocusOnHide, callback) {
-
+		dialog: function (elementFocusOnHide, callback) {
 			var modal = UIkit.modal(Automad.link.modalSelector),
-				onClick = function(url) {
-
+				onClick = function (url) {
 					if (modal.isActive()) {
-
 						if (typeof callback == 'function') {
 							callback(url);
 						}
 
 						modal.hide();
-
 					}
-
 				};
 
 			modal.show().find('input').val('');
 
-			modal.on('click.automad.link', '.uk-form button', function() {
+			modal.on('click.automad.link', '.uk-form button', function () {
 				onClick($(this).parent().find('input').val());
 			});
 
-			modal.on('hide.uk.modal.automad.link', function() {
+			modal.on('hide.uk.modal.automad.link', function () {
 				elementFocusOnHide.focus();
-				modal.off('.automad.link')
+				modal.off('.automad.link');
 			});
-
 		},
 
-		autocomplete: function() {
-
+		autocomplete: function () {
 			var dataAttrForm = Automad.link.dataAttr.form,
 				$form = $('[' + dataAttrForm + ']').first(),
-				controller = $form.data(Automad.util.dataCamelCase(dataAttrForm));
+				controller = $form.data(
+					Automad.util.dataCamelCase(dataAttrForm)
+				);
 
 			if ($form.length > 0) {
+				$.post(
+					controller,
+					function (data) {
+						var $element = $form.find('.uk-autocomplete').first(),
+							options = {
+								source: data.autocomplete,
+								minLength: 1,
+							},
+							$autocomplete = UIkit.autocomplete(
+								$element,
+								options
+							);
 
-				$.post(controller, function(data) {
-
-					var $element = $form.find('.uk-autocomplete').first(),
-						options = { source: data.autocomplete, minLength: 1 },
-						$autocomplete = UIkit.autocomplete($element, options);
-
-					$autocomplete.on('selectitem.uk.autocomplete', function(data, element) {
-						$form.find('input').val(element.value);
-						$form.find('button').trigger('click');
-					});
-
-				}, 'json');
-
+						$autocomplete.on(
+							'selectitem.uk.autocomplete',
+							function (data, element) {
+								$form.find('input').val(element.value);
+								$form.find('button').trigger('click');
+							}
+						);
+					},
+					'json'
+				);
 			}
-
-		}
-
+		},
 	};
 
 	Automad.link.init();
 
 	$(document).on('ready', Automad.link.autocomplete);
-
-}(window.Automad = window.Automad || {}, jQuery, UIkit);
+})((window.Automad = window.Automad || {}), jQuery, UIkit);

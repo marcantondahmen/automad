@@ -1,74 +1,81 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	Search and replace form handling. 
+ * Search and replace form handling.
  */
-	
-+function(Automad, $, UIkit) {
-	
+
++(function (Automad, $, UIkit) {
 	Automad.search = {
-		
 		form: null,
-		
-		init: function() {
-			
+
+		init: function () {
 			const container = document.querySelector('[data-am-search]');
-			
+
 			if (!container) {
 				return false;
 			}
-			
+
 			const searchField = container.querySelector('[name="searchValue"]');
-			const replaceField = container.querySelector('[name="replaceValue"]');
-			const replaceButton = container.querySelector('[name="replaceSelected"]');
+			const replaceField = container.querySelector(
+				'[name="replaceValue"]'
+			);
+			const replaceButton = container.querySelector(
+				'[name="replaceSelected"]'
+			);
 			const checkAllButton = container.querySelector('[name="checkAll"]');
-			const unCheckAllButton = container.querySelector('[name="unCheckAll"]');
+			const unCheckAllButton = container.querySelector(
+				'[name="unCheckAll"]'
+			);
 			const regexCheckbox = container.querySelector('[name="isRegex"]');
-			const caseCheckbox = container.querySelector('[name="isCaseSensitive"]');
-			
+			const caseCheckbox = container.querySelector(
+				'[name="isCaseSensitive"]'
+			);
+
 			this.form = container.querySelector('form');
-			
-			searchField.addEventListener('keyup', UIkit.Utils.debounce(() => {
-				this.search(
-					searchField.value, 
-					regexCheckbox.checked,
-					caseCheckbox.checked
-				);
-			}, 200));
+
+			searchField.addEventListener(
+				'keyup',
+				UIkit.Utils.debounce(() => {
+					this.search(
+						searchField.value,
+						regexCheckbox.checked,
+						caseCheckbox.checked
+					);
+				}, 200)
+			);
 
 			regexCheckbox.addEventListener('change', () => {
 				this.search(
@@ -92,8 +99,11 @@
 					{ name: 'replaceValue', value: replaceField.value },
 					{ name: 'replaceSelected', value: true },
 					{ name: 'isRegex', value: regexCheckbox.checked ? 1 : 0 },
-					{ name: 'isCaseSensitive', value: caseCheckbox.checked ? 1 : 0 }
-				])
+					{
+						name: 'isCaseSensitive',
+						value: caseCheckbox.checked ? 1 : 0,
+					},
+				]);
 			});
 
 			this.search(
@@ -102,34 +112,32 @@
 				caseCheckbox.checked
 			);
 
-			checkAllButton.addEventListener('click', () => { this.toggleAll(true)});
-			unCheckAllButton.addEventListener('click', () => { this.toggleAll(false)});
-			
+			checkAllButton.addEventListener('click', () => {
+				this.toggleAll(true);
+			});
+			unCheckAllButton.addEventListener('click', () => {
+				this.toggleAll(false);
+			});
 		},
 
-		search: function(value, isRegex, isCaseSensitive) {
-
+		search: function (value, isRegex, isCaseSensitive) {
 			if (history.pushState) {
-
 				const url = window.location.href.replace(
 					/(&search=.*)?$/,
 					`&search=${encodeURIComponent(value)}`
 				);
 
 				window.history.pushState({ path: url }, '', url);
-
 			}
 
 			this.submit([
 				{ name: 'searchValue', value: value },
 				{ name: 'isRegex', value: isRegex ? 1 : 0 },
-				{ name: 'isCaseSensitive', value: isCaseSensitive ? 1 : 0 }
+				{ name: 'isCaseSensitive', value: isCaseSensitive ? 1 : 0 },
 			]);
-
 		},
 
-		submit: function(fields) {
-
+		submit: function (fields) {
 			const formData = new FormData(this.form);
 
 			fields.forEach((field) => {
@@ -138,29 +146,30 @@
 
 			fetch('?controller=Search::searchAndReplace', {
 				method: 'POST',
-				body: formData
+				body: formData,
 			})
-			.then((response) => response.json())
-			.then((json) => {
-				this.form.innerHTML = json.html;
-			})
-			.catch((error) => { console.log(error); });
-
+				.then((response) => response.json())
+				.then((json) => {
+					this.form.innerHTML = json.html;
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		},
 
-		toggleAll: function(state) {
-
-			const checkboxes = this.form.querySelectorAll('[data-am-toggle] > input');
+		toggleAll: function (state) {
+			const checkboxes = this.form.querySelectorAll(
+				'[data-am-toggle] > input'
+			);
 
 			Array.from(checkboxes).forEach((box) => {
 				box.checked = state;
 				Automad.toggle.update($(box));
 			});
+		},
+	};
 
-		}
-		
-	}
-	
-	$(document).on('ready', () => { Automad.search.init(); });
-	
-}(window.Automad = window.Automad || {}, jQuery, UIkit);
+	$(document).on('ready', () => {
+		Automad.search.init();
+	});
+})((window.Automad = window.Automad || {}), jQuery, UIkit);

@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Views;
 
@@ -45,26 +44,20 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The page editing page.
+ * The page editing page.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Shared extends View {
-
-
 	/**
-	 *	Render body.
+	 * Render body.
 	 *
-	 *	@return string the rendered items
+	 * @return string the rendered items
 	 */
-
 	protected function body() {
-
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -72,16 +65,7 @@ class Shared extends View {
 				<li class="uk-disabled uk-hidden-small"><i class="uk-icon-files-o"></i></li>
 				<li><a href="">{$fn(Text::get('shared_title'))}</a></li>
 			</ul>
-			{$fn(Switcher::render('#am-shared-content', array(
-				array(
-					'icon' => '<i class="uk-icon-file-text"></i>',
-					'text' => Text::get('btn_data')
-				),
-				array(
-					'icon' => '<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>',
-					'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
-				)
-			)))}
+			{$fn($this->switcher())}
 			<ul id="am-shared-content" class="uk-switcher">
 				<li>
 					<form 
@@ -106,23 +90,34 @@ class Shared extends View {
 			{$fn(SelectImage::render())}
 			{$fn(Link::render())}
 HTML;
-
 	}
 
-
 	/**
-	 *	Get the title for the dashboard view.
+	 * Get the title for the dashboard view.
 	 *
-	 *	@return string the rendered items
+	 * @return string the rendered items
 	 */
-
 	protected function title() {
-
 		$title = Text::get('shared_title');
 
 		return "$title &mdash; Automad";
-
 	}
 
-
+	/**
+	 * Render the switcher menu.
+	 *
+	 * @return string the switcher markup
+	 */
+	private function switcher() {
+		return Switcher::render('#am-shared-content', array(
+			array(
+				'icon' => '<i class="uk-icon-file-text"></i>',
+				'text' => Text::get('btn_data')
+			),
+			array(
+				'icon' => '<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>',
+				'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
+			)
+		));
+	}
 }

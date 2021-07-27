@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Views;
 
@@ -46,26 +45,20 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The home page.
+ * The home page.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Home extends View {
-
-
 	/**
-	 *	Render body.
+	 * Render body.
 	 *
-	 *	@return string the rendered items
+	 * @return string the rendered items
 	 */
-
 	protected function body() {
-
 		$Cache = new Cache();
 		$mTime = intval($Cache->getSiteMTime());
 		$Selection = new Selection($this->Automad->getCollection());
@@ -150,37 +143,28 @@ class Home extends View {
 				</div>
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	Get the title for the dashboard view.
+	 * Get the title for the dashboard view.
 	 *
-	 *	@return string the rendered items
+	 * @return string the rendered items
 	 */
-
 	protected function title() {
-
 		$title = Text::get('dashboard_title');
 
 		return "$title &mdash; Automad";
-
 	}
 
-
 	/**
-	 *	Render the main edit button. 
+	 * Render the main edit button.
 	 *
-	 *	@return string the rendered button
+	 * @return string the rendered button
 	 */
-
 	private function editButton() {
-
 		$fn = $this->fn;
 
 		if (AM_HEADLESS_ENABLED) {
-
 			return <<< HTML
 				<li class="uk-margin-small-bottom">
 					<a 
@@ -192,9 +176,7 @@ HTML;
 					</a>
 				</li>
 HTML;
-
 		} else {
-
 			return <<< HTML
 				<li class="uk-margin-small-bottom">
 					<a href="{$fn(AM_BASE_INDEX . '/')}" 
@@ -205,10 +187,6 @@ HTML;
 					</a>
 				</li>
 HTML;
-
 		}
-
 	}
-
-
 }

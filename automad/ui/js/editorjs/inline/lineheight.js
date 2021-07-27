@@ -1,49 +1,46 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 class AutomadLineHeight extends AutomadInlineTool {
-
-
 	static get title() {
 		return 'Line Height';
 	}
 
 	static get sanitize() {
 		return {
-			'am-lineheight': true
+			'am-lineheight': true,
 		};
 	}
 
@@ -56,26 +53,42 @@ class AutomadLineHeight extends AutomadInlineTool {
 	}
 
 	get options() {
-		return ['inherit', '0.8', '0.9', '1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8', '1.9', '2.0'];
+		return [
+			'inherit',
+			'0.8',
+			'0.9',
+			'1.0',
+			'1.1',
+			'1.2',
+			'1.3',
+			'1.4',
+			'1.5',
+			'1.6',
+			'1.7',
+			'1.8',
+			'1.9',
+			'2.0',
+		];
 	}
 
 	renderActions() {
-
 		const create = Automad.util.create,
-			  label = create.label(AutomadLineHeight.title);
+			label = create.label(AutomadLineHeight.title);
 
-		this.select = create.select([this.cls.input], this.options, this.selected);
+		this.select = create.select(
+			[this.cls.input],
+			this.options,
+			this.selected
+		);
 		this.wrapper = create.element('span', [this.cls.wrapper]);
 		this.wrapper.appendChild(label);
 		this.wrapper.appendChild(this.select);
 		this.wrapper.hidden = true;
 
 		return this.wrapper;
-
 	}
 
 	showActions(node) {
-
 		const { lineHeight } = node.style;
 
 		this.select.value = lineHeight ? lineHeight : 'inherit';
@@ -87,13 +100,10 @@ class AutomadLineHeight extends AutomadInlineTool {
 		};
 
 		this.wrapper.hidden = false;
-
 	}
 
 	hideActions() {
 		this.select.onchange = null;
 		this.wrapper.hidden = true;
 	}
-
-
 }

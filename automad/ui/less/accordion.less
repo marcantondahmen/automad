@@ -1,58 +1,55 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
+@accordion-title-margin-bottom: 0;
+@accordion-title-padding-vertical: 0.36rem;
+@accordion-title-padding-horizontal: 0;
+@accordion-title-font-size: 1rem;
+@accordion-title-line-height: @base-body-line-height;
+@accordion-title-background: @am-bg;
 
-@accordion-title-margin-bottom:         0;
-@accordion-title-padding-vertical:      0.36rem;
-@accordion-title-padding-horizontal:    0;
-@accordion-title-font-size:             1rem;
-@accordion-title-line-height:           @base-body-line-height;
-@accordion-title-background:            @am-bg;
-
-@accordion-content-padding-horizontal:  0;
-@accordion-content-padding-bottom:      @utility-margin-small;
- 
+@accordion-content-padding-horizontal: 0;
+@accordion-content-padding-bottom: @utility-margin-small;
 
 .hook-accordion() {
-    & [data-wrapper] {
-        margin: 0 -0.71rem;
-        padding: 0 0.71rem;
-    }
+	& [data-wrapper] {
+		margin: 0 -0.71rem;
+		padding: 0 0.71rem;
+	}
 }
- 
+
 .hook-accordion-title() {
-	
 	position: relative;
 	margin-top: @utility-margin;
 	margin-left: 1.1rem;
@@ -66,7 +63,7 @@
 	&:hover {
 		background-color: @button-background;
 	}
-    
+
 	&:before {
 		content: '\f054';
 		position: absolute;
@@ -78,19 +75,16 @@
 		font-size: 0.8em;
 		padding-right: 0.29rem;
 	}
-	
+
 	&.uk-active:before {
 		content: '\f078';
 		top: 0.71rem;
 	}
-
 }
- 
+
 .hook-accordion-content() {
-	
 	// Hide content before accordion is initialized to avoid flicker.
 	:not([data-wrapper]) > & {
 		display: none;
 	}
-	
 }

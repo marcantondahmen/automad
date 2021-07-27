@@ -1,58 +1,53 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
+@am-code-bg: #f6f6f6;
 
-@am-code-bg: 				#F6F6F6;
-
-@text-muted-color:		    @am-muted;
-@text-danger-color:			@am-danger;
-@text-small-font-size:		0.69rem;
-@text-small-line-height:    1.21rem;
-
+@text-muted-color: @am-muted;
+@text-danger-color: @am-danger;
+@text-small-font-size: 0.69rem;
+@text-small-line-height: 1.21rem;
 
 .am-text {
-	
 	& img {
-		
-		&[src$="jpg"],
-		&[src$="png"],
-		&[src$="gif"] {
+		&[src$='jpg'],
+		&[src$='png'],
+		&[src$='gif'] {
 			margin: 0.72rem 0;
 			border-radius: @am-radius;
 			max-width: 100%;
 		}
-		
 	}
 
 	& h1 {
@@ -61,30 +56,29 @@
 		margin: 2.85rem 0 2.15rem 0;
 		line-height: 1.35;
 	}
-	
+
 	& h2 {
 		font-size: 1.72rem;
 		font-weight: 670;
 		margin: 2.85rem 0 1.43rem 0;
 		line-height: 1.425;
 	}
-	
+
 	& h3 {
 		font-size: 1.45rem;
 		font-weight: 620;
 		margin: 2.14rem 0 0.72rem 0;
 		line-height: 1.5;
 	}
-	
+
 	& h4 {
 		font-size: 1.22rem;
 		font-weight: 580;
 		margin: 1.43rem 0 0.72rem 0;
 		line-height: 1.5;
 	}
-	
+
 	& a {
-		
 		color: @base-link-color;
 
 		&,
@@ -95,14 +89,13 @@
 		&:hover {
 			color: @base-link-hover-color;
 		}
-		
 	}
 
 	b,
 	strong {
 		font-weight: bold;
 	}
-	
+
 	& p {
 		margin: 0.72rem 0;
 	}
@@ -113,11 +106,9 @@
 
 	& ul:not([class]),
 	& ol:not([class]) {
-
 		padding-left: 2rem;
 
 		& li {
-
 			padding-top: 0.15rem;
 			padding-bottom: 0.15rem;
 
@@ -126,9 +117,7 @@
 				margin-top: 0;
 				margin-bottom: 0;
 			}
-
 		}
-
 	}
 
 	& code {
@@ -140,22 +129,20 @@
 		color: @am-text;
 		background-color: @am-code-bg;
 	}
-	
+
 	& pre {
-		
 		margin: 1.43rem 0;
 		padding: 1rem;
 		font-size: 0.925em;
 		border-radius: @am-radius;
 		background-color: @am-code-bg;
-		
+
 		& > code {
 			padding: 0;
 			font-size: inherit;
 		}
-		
 	}
-	
+
 	& blockquote {
 		margin: 1.43rem 0;
 		padding: 1.43rem;
@@ -166,7 +153,6 @@
 	}
 
 	& table:not([class]) {
-
 		width: 100%;
 		max-width: 100%;
 		margin: 1.43rem 0;
@@ -175,9 +161,8 @@
 		border-radius: @am-radius;
 		box-shadow: 0 0 0 @am-border-width @am-border-color;
 
-		& th, 
+		& th,
 		& td {
-
 			padding: 0.5rem 0.75rem;
 			border-bottom: @am-border-width solid @am-border-color;
 			border-left: @am-border-width solid @am-border-color;
@@ -186,7 +171,6 @@
 			&:first-child {
 				border-left: none;
 			}
-
 		}
 
 		& th {
@@ -201,7 +185,5 @@
 		& tr:nth-child(even) {
 			background-color: #fcfcfc;
 		}
-
 	}
-
 }

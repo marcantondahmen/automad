@@ -1,36 +1,68 @@
-<?php 
+<?php
 
 namespace Automad\Core;
 
 use Automad\Tests\Mock;
 use PHPUnit\Framework\TestCase;
 
-
 /**
- *	@testdox Automad\Core\View
+ * @testdox Automad\Core\View
  */
-
 class View_Test extends TestCase {
-	
-	
-	/**
-	 *	@dataProvider dataForTestRenderIsEqual
-	 *	@testdox render $template: $expected
-	 */
-	
-	public function testRenderIsEqual($template, $expected) {
-		
-		$Mock = new Mock();
-		$View = new View($Mock->createAutomad($template));
-		$rendered = $View->render();
-		$rendered = trim(str_replace('\n', '', $rendered));
-		
-		$this->assertEquals($expected, $rendered);
-		
+	public function dataForTestHeadlessJSONIsEqual() {
+		return array(
+			array(
+				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
+				'{"test": "<img src=\"/pages/01.page/image.jpg\" srcset=\"/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w\"><a href=\"/index.php/page/test\">Test</a>"}'
+			),
+			array(
+				"This is a\n\rmultiline test.",
+				'{"test": "This is a\\\\nmultiline test."}'
+			),
+			array(
+				'{"test":""}',
+				'{"test": "{\"test\":\"\"}"}'
+			)
+		);
 	}
-	
+
+	public function dataForTestHeadlessValueIsEqual() {
+		return array(
+			array(
+				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
+				'<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
+			),
+			array(
+				"This is a\n\rmultiline test.",
+				'This is a\nmultiline test.'
+			),
+			array(
+				'{"test":""}',
+				'{"test":""}'
+			)
+		);
+	}
+
+	public function dataForTestInPageRenderIsEqual() {
+		$data = array();
+		$templates = array(
+			'email_01' => '<a href="#">test</a>' . "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" . '<a href="#">test</a>',
+			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
+			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
+		);
+
+		foreach ($templates as $template => $expected) {
+			$data[] = array(
+				$template,
+				$expected
+			);
+		}
+
+		return $data;
+	}
+
 	public function dataForTestRenderIsEqual() {
-		
 		$data = array();
 		$templates = array(
 			'pipe_def_01' => 'Test String',
@@ -64,28 +96,24 @@ class View_Test extends TestCase {
 			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
 			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
 		);
-		
+
 		foreach ($templates as $template => $expected) {
-			
 			$data[] = array(
 				$template,
 				$expected
 			);
-			
 		}
-		
+
 		return $data;
-		
 	}
-	
 
 	/**
-	 *	@dataProvider dataForTestHeadlessValueIsEqual
-	 *	@testdox render $value: $expected
+	 * @dataProvider dataForTestHeadlessJSONIsEqual
+	 * @testdox render $value: $expected
+	 * @param mixed $value
+	 * @param mixed $expected
 	 */
-
-	public function testHeadlessValueIsEqual($value, $expected) {
-		
+	public function testHeadlessJSONIsEqual($value, $expected) {
 		$Mock = new Mock();
 		$AutomadMock = $Mock->createAutomad();
 		$Page = $AutomadMock->Context->get();
@@ -93,115 +121,62 @@ class View_Test extends TestCase {
 		$Page->data['test'] = $value;
 		// Render view in headless mode.
 		$View = new View($AutomadMock, true);
-		// Convert JSON output back into array to check if 
+
+		$this->assertEquals($expected, $View->render());
+	}
+
+	/**
+	 * @dataProvider dataForTestHeadlessValueIsEqual
+	 * @testdox render $value: $expected
+	 * @param mixed $value
+	 * @param mixed $expected
+	 */
+	public function testHeadlessValueIsEqual($value, $expected) {
+		$Mock = new Mock();
+		$AutomadMock = $Mock->createAutomad();
+		$Page = $AutomadMock->Context->get();
+		// Set test to $value.
+		$Page->data['test'] = $value;
+		// Render view in headless mode.
+		$View = new View($AutomadMock, true);
+		// Convert JSON output back into array to check if
 		// $value matches $expected.
 		$array = json_decode($View->render());
-		
+
 		$this->assertEquals($expected, $array->test);
-		
 	}
-
-	public function dataForTestHeadlessValueIsEqual() {
-		
-		return array(
-			array(
-				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
-				'<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
-			),
-			array(
-				"This is a\n\rmultiline test.",
-				'This is a\nmultiline test.'
-			),
-			array(
-				'{"test":""}',
-				'{"test":""}'
-			)
-		);
-
-	}
-
 
 	/**
-	 *	@dataProvider dataForTestHeadlessJSONIsEqual
-	 *	@testdox render $value: $expected
+	 * @dataProvider dataForTestInPageRenderIsEqual
+	 * @testdox render $template: $expected
+	 * @param mixed $template
+	 * @param mixed $expected
 	 */
-
-	public function testHeadlessJSONIsEqual($value, $expected) {
-		
-		$Mock = new Mock();
-		$AutomadMock = $Mock->createAutomad();
-		$Page = $AutomadMock->Context->get();
-		// Set test to $value.
-		$Page->data['test'] = $value;
-		// Render view in headless mode.
-		$View = new View($AutomadMock, true);
-		
-		$this->assertEquals($expected, $View->render());
-		
-	}
-
-	public function dataForTestHeadlessJSONIsEqual() {
-		
-		return array(
-			array(
-				'<img src="image.jpg" srcset="image.jpg 500w, image_large.jpg 1200w"><a href="test">Test</a>',
-				'{"test": "<img src=\"/pages/01.page/image.jpg\" srcset=\"/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w\"><a href=\"/index.php/page/test\">Test</a>"}'
-			),
-			array(
-				"This is a\n\rmultiline test.",
-				'{"test": "This is a\\\\nmultiline test."}'
-			),
-			array(
-				'{"test":""}',
-				'{"test": "{\"test\":\"\"}"}'
-			)
-		);
-
-	}
-	
-
-	/**
-	 *	@dataProvider dataForTestInPageRenderIsEqual
-	 *	@testdox render $template: $expected
-	 */
-
 	public function testInPageRenderIsEqual($template, $expected) {
-
 		$_SESSION['username'] = 'test';
 
 		$Mock = new Mock();
 		$View = new View($Mock->createAutomad($template));
 		$rendered = $View->render();
 		$rendered = trim(str_replace('\n', '', $rendered));
-		
+
 		$this->assertEquals($expected, $rendered);
 
 		$_SESSION['username'] = false;
-
 	}
 
-	public function dataForTestInPageRenderIsEqual() {
+	/**
+	 * @dataProvider dataForTestRenderIsEqual
+	 * @testdox render $template: $expected
+	 * @param mixed $template
+	 * @param mixed $expected
+	 */
+	public function testRenderIsEqual($template, $expected) {
+		$Mock = new Mock();
+		$View = new View($Mock->createAutomad($template));
+		$rendered = $View->render();
+		$rendered = trim(str_replace('\n', '', $rendered));
 
-		$data = array();
-		$templates = array(
-			'email_01' => '<a href="#">test</a>' . "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" . '<a href="#">test</a>',
-			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
-		);
-		
-		foreach ($templates as $template => $expected) {
-			
-			$data[] = array(
-				$template,
-				$expected
-			);
-			
-		}
-		
-		return $data;
-
+		$this->assertEquals($expected, $rendered);
 	}
-
-
 }

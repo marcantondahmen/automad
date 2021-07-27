@@ -1,39 +1,38 @@
 <?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Views\Elements;
 
@@ -47,27 +46,21 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The Dashboard sidebar element. 
+ * The Dashboard sidebar element.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Sidebar {
-
-
 	/**
-	 *	Render the dashboard sidebar.
+	 * Render the dashboard sidebar.
 	 *
-	 *	@param object $Automad
-	 *	@return string the rendered dashboard sidebar
+	 * @param object $Automad
+	 * @return string the rendered dashboard sidebar
 	 */
-
 	public static function render($Automad) {
-
 		if (!User::get()) {
 			return false;
 		}
@@ -102,10 +95,7 @@ class Sidebar {
 								<li class="uk-nav-header">
 									{$fn(Text::get('sidebar_header_global'))}
 								</li>
-								{$fn(self::inPageLink(
-									AM_BASE_INDEX . '/', 
-									$Automad->Shared->get(AM_KEY_SITENAME)
-								))}
+								{$fn(self::inPageLink(AM_BASE_INDEX . '/', $Automad->Shared->get(AM_KEY_SITENAME)))}
 								<li class="{$active((Request::query('view') == 'Search'))}">
 									<a href="?view=Search">
 										<i class="uk-icon-search uk-icon-justify"></i>&nbsp;
@@ -140,13 +130,7 @@ class Sidebar {
 								</li>
 								<li class="uk-nav-divider"></li>
 							</ul>
-							{$fn(SiteTree::render(
-								$Automad,
-								'',
-								array('view' => 'Page'),
-								false,
-								Text::get('sidebar_header_pages') . '&nbsp;&mdash;&nbsp;' . count($Automad->getCollection())
-							))}
+							{$fn(SiteTree::render($Automad, '', array('view' => 'Page'), false, Text::get('sidebar_header_pages') . '&nbsp;&mdash;&nbsp;' . count($Automad->getCollection())))}
 							<ul class="uk-nav uk-nav-side uk-hidden-large">
 								<li class="uk-nav-divider"></li>
 								<li>
@@ -164,20 +148,16 @@ class Sidebar {
 				</div>	
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	Render a link to the homepage.
+	 * Render a link to the homepage.
 	 *
-	 *	@param string $url
-	 *	@param string $sitename
-	 *	@return string the rendered menu item
+	 * @param string $url
+	 * @param string $sitename
+	 * @return string the rendered menu item
 	 */
-
 	private static function inPageLink($url, $sitename) {
-
 		if (AM_HEADLESS_ENABLED) {
 			return false;
 		}
@@ -190,8 +170,5 @@ HTML;
 				</a>
 			</li>
 HTML;
-
 	}
-
-
 }

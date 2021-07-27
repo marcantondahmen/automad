@@ -1,23 +1,25 @@
 /*
- *	This EditorJS block is based on the original table by CodeX and
- *	is extended to support the Automad block grid layout.
- *	https://github.com/editor-js/table
+ * This EditorJS block is based on the original table by CodeX and
+ * is extended to support the Automad block grid layout.
+ * https://github.com/editor-js/table
  *
- *	Copyright (c) 2018 CodeX (team@ifmo.su)
- *	Copyright (c) 2021 Marc Anton Dahmen
- *	MIT License
+ * Copyright (c) 2018 CodeX (team@ifmo.su)
+ * Copyright (c) 2021 Marc Anton Dahmen
+ * MIT License
  */
 
-
-+function (Automad) {
-
++(function (Automad) {
 	Automad.tableUtils = {
-
-		isNotMissed: function(elem) {
-			return (!(elem === undefined || elem === null));
+		isNotMissed: function (elem) {
+			return !(elem === undefined || elem === null);
 		},
 
-		create: function(tagName, cssClasses = null, attrs = null, children = null) {
+		create: function (
+			tagName,
+			cssClasses = null,
+			attrs = null,
+			children = null
+		) {
 			const elem = document.createElement(tagName);
 
 			if (Automad.tableUtils.isNotMissed(cssClasses)) {
@@ -42,18 +44,18 @@
 			return elem;
 		},
 
-		getCoords: function(elem) {
+		getCoords: function (elem) {
 			const rect = elem.getBoundingClientRect();
 
 			return {
 				y1: Math.floor(rect.top + window.pageYOffset),
 				x1: Math.floor(rect.left + window.pageXOffset),
 				x2: Math.floor(rect.right + window.pageXOffset),
-				y2: Math.floor(rect.bottom + window.pageYOffset)
+				y2: Math.floor(rect.bottom + window.pageYOffset),
 			};
 		},
 
-		getSideByCoords: function(coords, x, y) {
+		getSideByCoords: function (coords, x, y) {
 			let side;
 			const sizeArea = 10;
 
@@ -90,24 +92,23 @@
 			wrapper: 'tc-table__wrap',
 			editor: 'tc-editor',
 			toolBarHor: 'tc-toolbar--hor',
-			toolBarVer: 'tc-toolbar--ver'
-		}
-
-	}
-
-}(window.Automad = window.Automad || {});
-
+			toolBarVer: 'tc-toolbar--ver',
+		},
+	};
+})((window.Automad = window.Automad || {}));
 
 /**
  * An item with a menu that appears when you hover over a _table border
  */
 
 class BorderToolBar {
-
 	constructor() {
 		this._plusButton = this._generatePlusButton();
 		this._highlightingLine = this._generateHighlightingLine();
-		this._toolbar = this._generateToolBar([this._plusButton, this._highlightingLine]);
+		this._toolbar = this._generateToolBar([
+			this._plusButton,
+			this._highlightingLine,
+		]);
 	}
 
 	hide() {
@@ -117,23 +118,29 @@ class BorderToolBar {
 	show() {
 		this._toolbar.classList.remove(Automad.tableUtils.CSS.hidden);
 		this._highlightingLine.classList.remove(Automad.tableUtils.CSS.hidden);
-	};
+	}
 
 	hideLine() {
 		this._highlightingLine.classList.add(Automad.tableUtils.CSS.hidden);
-	};
+	}
 
 	get htmlElement() {
 		return this._toolbar;
 	}
 
 	_generatePlusButton() {
-		const button = Automad.tableUtils.create('div', [Automad.tableUtils.CSS.plusButton]);
+		const button = Automad.tableUtils.create('div', [
+			Automad.tableUtils.CSS.plusButton,
+		]);
 
-		button.innerHTML = '<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#1070ff"/><path fill="#FFF" d="M10.9 9.1h3.7a.9.9 0 1 1 0 1.8h-3.7v3.7a.9.9 0 1 1-1.8 0v-3.7H5.4a.9.9 0 0 1 0-1.8h3.7V5.4a.9.9 0 0 1 1.8 0v3.7z"/></svg>';
+		button.innerHTML =
+			'<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#1070ff"/><path fill="#FFF" d="M10.9 9.1h3.7a.9.9 0 1 1 0 1.8h-3.7v3.7a.9.9 0 1 1-1.8 0v-3.7H5.4a.9.9 0 0 1 0-1.8h3.7V5.4a.9.9 0 0 1 1.8 0v3.7z"/></svg>';
 		button.addEventListener('click', (event) => {
 			event.stopPropagation();
-			const e = new CustomEvent('click', { 'detail': { 'x': event.pageX, 'y': event.pageY }, 'bubbles': true });
+			const e = new CustomEvent('click', {
+				detail: { x: event.pageX, y: event.pageY },
+				bubbles: true,
+			});
 
 			this._toolbar.dispatchEvent(e);
 		});
@@ -141,11 +148,13 @@ class BorderToolBar {
 	}
 
 	_generateHighlightingLine() {
-		const line = Automad.tableUtils.create('div', [Automad.tableUtils.CSS.highlightingLine]);
+		const line = Automad.tableUtils.create('div', [
+			Automad.tableUtils.CSS.highlightingLine,
+		]);
 
 		line.addEventListener('click', (event) => {
 			event.stopPropagation();
-			const e = new CustomEvent('click', { 'bubbles': true });
+			const e = new CustomEvent('click', { bubbles: true });
 
 			this._toolbar.dispatchEvent(e);
 		});
@@ -153,12 +162,16 @@ class BorderToolBar {
 	}
 
 	_generateToolBar(children) {
-		const bar = Automad.tableUtils.create('div', [Automad.tableUtils.CSS.hidden], null, children);
+		const bar = Automad.tableUtils.create(
+			'div',
+			[Automad.tableUtils.CSS.hidden],
+			null,
+			children
+		);
 
 		bar.addEventListener('mouseleave', (event) => {
 			this._recalcMousePos(event);
-		}
-		);
+		});
 
 		return bar;
 	}
@@ -167,8 +180,14 @@ class BorderToolBar {
 		this.hide();
 		const area = document.elementFromPoint(event.pageX, event.pageY);
 
-		if (area !== null && area.classList.contains(Automad.tableUtils.CSS.area)) {
-			const e = new MouseEvent('mouseover', { clientX: event.pageX, clientY: event.pageY });
+		if (
+			area !== null &&
+			area.classList.contains(Automad.tableUtils.CSS.area)
+		) {
+			const e = new MouseEvent('mouseover', {
+				clientX: event.pageX,
+				clientY: event.pageY,
+			});
 			area.dispatchEvent(e);
 		}
 	}
@@ -179,19 +198,24 @@ class BorderToolBar {
  */
 
 class HorizontalBorderToolBar extends BorderToolBar {
-	
 	constructor() {
 		super();
 
 		this._toolbar.classList.add(Automad.tableUtils.CSS.toolBarHor);
-		this._plusButton.classList.add(Automad.tableUtils.CSS.horizontalPlusButton);
-		this._highlightingLine.classList.add(Automad.tableUtils.CSS.horizontalHighlightingLine);
+		this._plusButton.classList.add(
+			Automad.tableUtils.CSS.horizontalPlusButton
+		);
+		this._highlightingLine.classList.add(
+			Automad.tableUtils.CSS.horizontalHighlightingLine
+		);
 	}
 
 	showIn(y) {
-		const halfHeight = Math.floor(Number.parseInt(window.getComputedStyle(this._toolbar).height) / 2);
+		const halfHeight = Math.floor(
+			Number.parseInt(window.getComputedStyle(this._toolbar).height) / 2
+		);
 
-		this._toolbar.style.top = (y - halfHeight) + 'px';
+		this._toolbar.style.top = y - halfHeight + 'px';
 		this.show();
 	}
 }
@@ -201,22 +225,26 @@ class HorizontalBorderToolBar extends BorderToolBar {
  */
 
 class VerticalBorderToolBar extends BorderToolBar {
-	
 	constructor() {
 		super();
 
 		this._toolbar.classList.add(Automad.tableUtils.CSS.toolBarVer);
-		this._plusButton.classList.add(Automad.tableUtils.CSS.verticalPlusButton);
-		this._highlightingLine.classList.add(Automad.tableUtils.CSS.verticalHighlightingLine);
+		this._plusButton.classList.add(
+			Automad.tableUtils.CSS.verticalPlusButton
+		);
+		this._highlightingLine.classList.add(
+			Automad.tableUtils.CSS.verticalHighlightingLine
+		);
 	}
 
 	showIn(x) {
-		const halfWidth = Math.floor(Number.parseInt(window.getComputedStyle(this._toolbar).width) / 2);
+		const halfWidth = Math.floor(
+			Number.parseInt(window.getComputedStyle(this._toolbar).width) / 2
+		);
 
-		this._toolbar.style.left = (x - halfWidth) + 'px';
+		this._toolbar.style.left = x - halfWidth + 'px';
 		this.show();
 	}
-
 }
 
 /**
@@ -224,7 +252,6 @@ class VerticalBorderToolBar extends BorderToolBar {
  */
 
 class AutomadBlockTable {
-	
 	static get isReadOnlySupported() {
 		return true;
 	}
@@ -244,8 +271,18 @@ class AutomadBlockTable {
 		this.api = api;
 		this.readOnly = readOnly;
 		this.data = data;
-		this._tableConstructor = new TableConstructor(this.data, config, api, readOnly);
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
+		this._tableConstructor = new TableConstructor(
+			this.data,
+			config,
+			api,
+			readOnly
+		);
+		this.layoutSettings = AutomadLayout.renderSettings(
+			this.data,
+			data,
+			api,
+			config
+		);
 	}
 
 	render() {
@@ -253,7 +290,6 @@ class AutomadBlockTable {
 	}
 
 	save(toolsContent) {
-
 		const table = toolsContent.querySelector('table');
 		const data = [];
 		const rows = table.rows;
@@ -261,13 +297,15 @@ class AutomadBlockTable {
 		for (let i = 0; i < rows.length; i++) {
 			const row = rows[i];
 			const cols = Array.from(row.cells);
-			const inputs = cols.map(cell => cell.querySelector('.' + Automad.tableUtils.CSS.input));
+			const inputs = cols.map((cell) =>
+				cell.querySelector('.' + Automad.tableUtils.CSS.input)
+			);
 			const isWorthless = inputs.every(this._isEmpty);
 
 			if (isWorthless) {
 				continue;
 			}
-			data.push(inputs.map(input => input.innerHTML));
+			data.push(inputs.map((input) => input.innerHTML));
 		}
 
 		return Object.assign(this.data, {
@@ -276,9 +314,7 @@ class AutomadBlockTable {
 	}
 
 	renderSettings() {
-
 		return this.layoutSettings;
-
 	}
 
 	_isEmpty(input) {
@@ -286,9 +322,7 @@ class AutomadBlockTable {
 	}
 }
 
-
 class Table {
-
 	constructor(readOnly) {
 		this.readOnly = readOnly;
 		this._numberOfColumns = 0;
@@ -311,7 +345,7 @@ class Table {
 
 			this._fillCell(cell);
 		}
-	};
+	}
 
 	addRow(index = -1) {
 		this._numberOfRows++;
@@ -320,7 +354,7 @@ class Table {
 		this._fillRow(row);
 
 		return row;
-	};
+	}
 
 	get htmlElement() {
 		return this._element;
@@ -335,18 +369,34 @@ class Table {
 	}
 
 	_createTableWrapper() {
-		return Automad.tableUtils.create('div', [Automad.tableUtils.CSS.wrapper], null, [Automad.tableUtils.create('table', [Automad.tableUtils.CSS.table])]);
+		return Automad.tableUtils.create(
+			'div',
+			[Automad.tableUtils.CSS.wrapper],
+			null,
+			[Automad.tableUtils.create('table', [Automad.tableUtils.CSS.table])]
+		);
 	}
 
 	_createContenteditableArea() {
-		return Automad.tableUtils.create('div', [Automad.tableUtils.CSS.input], { contenteditable: !this.readOnly });
+		return Automad.tableUtils.create(
+			'div',
+			[Automad.tableUtils.CSS.input],
+			{ contenteditable: !this.readOnly }
+		);
 	}
 
 	_fillCell(cell) {
 		cell.classList.add(Automad.tableUtils.CSS.cell);
 		const content = this._createContenteditableArea();
 
-		cell.appendChild(Automad.tableUtils.create('div', [Automad.tableUtils.CSS.area], null, [content]));
+		cell.appendChild(
+			Automad.tableUtils.create(
+				'div',
+				[Automad.tableUtils.CSS.area],
+				null,
+				[content]
+			)
+		);
 	}
 
 	_fillRow(row) {
@@ -358,13 +408,21 @@ class Table {
 	}
 
 	_hangEvents() {
-		this._table.addEventListener('focus', (event) => {
-			this._focusEditField(event);
-		}, true);
+		this._table.addEventListener(
+			'focus',
+			(event) => {
+				this._focusEditField(event);
+			},
+			true
+		);
 
-		this._table.addEventListener('blur', (event) => {
-			this._blurEditField(event);
-		}, true);
+		this._table.addEventListener(
+			'blur',
+			(event) => {
+				this._blurEditField(event);
+			},
+			true
+		);
 
 		this._table.addEventListener('keydown', (event) => {
 			this._pressedEnterInEditField(event);
@@ -374,17 +432,23 @@ class Table {
 			this._clickedOnCell(event);
 		});
 
-		this._table.addEventListener('mouseover', (event) => {
-			this._mouseEnterInDetectArea(event);
-			event.stopPropagation();
-		}, true);
+		this._table.addEventListener(
+			'mouseover',
+			(event) => {
+				this._mouseEnterInDetectArea(event);
+				event.stopPropagation();
+			},
+			true
+		);
 	}
 
 	_focusEditField(event) {
 		if (!event.target.classList.contains(Automad.tableUtils.CSS.input)) {
 			return;
 		}
-		this._selectedCell = event.target.closest('.' + Automad.tableUtils.CSS.cell);
+		this._selectedCell = event.target.closest(
+			'.' + Automad.tableUtils.CSS.cell
+		);
 	}
 
 	_blurEditField(event) {
@@ -407,7 +471,9 @@ class Table {
 		if (!event.target.classList.contains(Automad.tableUtils.CSS.cell)) {
 			return;
 		}
-		const content = event.target.querySelector('.' + Automad.tableUtils.CSS.input);
+		const content = event.target.querySelector(
+			'.' + Automad.tableUtils.CSS.input
+		);
 
 		content.focus();
 	}
@@ -417,21 +483,27 @@ class Table {
 			return;
 		}
 
-		const coordsCell = Automad.tableUtils.getCoords(event.target.closest('TD'));
-		const side = Automad.tableUtils.getSideByCoords(coordsCell, event.pageX, event.pageY);
+		const coordsCell = Automad.tableUtils.getCoords(
+			event.target.closest('TD')
+		);
+		const side = Automad.tableUtils.getSideByCoords(
+			coordsCell,
+			event.pageX,
+			event.pageY
+		);
 
-		event.target.dispatchEvent(new CustomEvent('mouseInActivatingArea', {
-			detail: {
-				side: side,
-			},
-			bubbles: true,
-		}));
+		event.target.dispatchEvent(
+			new CustomEvent('mouseInActivatingArea', {
+				detail: {
+					side: side,
+				},
+				bubbles: true,
+			})
+		);
 	}
 }
 
-
 class TableConstructor {
-	
 	constructor(data, config, api, readOnly) {
 		this.readOnly = readOnly;
 
@@ -442,12 +514,19 @@ class TableConstructor {
 		this._fillTable(data, size);
 
 		/** creating container around table */
-		this._container = Automad.tableUtils.create('div', [Automad.tableUtils.CSS.editor, api.styles.block], null, [this._table.htmlElement]);
+		this._container = Automad.tableUtils.create(
+			'div',
+			[Automad.tableUtils.CSS.editor, api.styles.block],
+			null,
+			[this._table.htmlElement]
+		);
 
 		/** creating ToolBars */
 		this._verticalToolBar = new VerticalBorderToolBar();
 		this._horizontalToolBar = new HorizontalBorderToolBar();
-		this._table.htmlElement.appendChild(this._horizontalToolBar.htmlElement);
+		this._table.htmlElement.appendChild(
+			this._horizontalToolBar.htmlElement
+		);
 		this._table.htmlElement.appendChild(this._verticalToolBar.htmlElement);
 
 		/** Activated elements */
@@ -471,9 +550,15 @@ class TableConstructor {
 	_fillTable(data, size) {
 		if (data.content !== undefined) {
 			for (let i = 0; i < size.rows && i < data.content.length; i++) {
-				for (let j = 0; j < size.cols && j < data.content[i].length; j++) {
+				for (
+					let j = 0;
+					j < size.cols && j < data.content[i].length;
+					j++
+				) {
 					// get current cell and her editable part
-					const input = this._table.body.rows[i].cells[j].querySelector('.' + Automad.tableUtils.CSS.input);
+					const input = this._table.body.rows[i].cells[
+						j
+					].querySelector('.' + Automad.tableUtils.CSS.input);
 
 					input.innerHTML = data.content[i][j];
 				}
@@ -485,12 +570,16 @@ class TableConstructor {
 		const isValidArray = Array.isArray(data.content);
 		const isNotEmptyArray = isValidArray ? data.content.length : false;
 		const contentRows = isValidArray ? data.content.length : undefined;
-		const contentCols = isNotEmptyArray ? data.content[0].length : undefined;
+		const contentCols = isNotEmptyArray
+			? data.content[0].length
+			: undefined;
 		const parsedRows = Number.parseInt(config.rows);
 		const parsedCols = Number.parseInt(config.cols);
 		// value of config have to be positive number
-		const configRows = !isNaN(parsedRows) && parsedRows > 0 ? parsedRows : undefined;
-		const configCols = !isNaN(parsedCols) && parsedCols > 0 ? parsedCols : undefined;
+		const configRows =
+			!isNaN(parsedRows) && parsedRows > 0 ? parsedRows : undefined;
+		const configCols =
+			!isNaN(parsedCols) && parsedCols > 0 ? parsedCols : undefined;
 		const defaultRows = 2;
 		const defaultCols = 2;
 		const rows = contentRows || configRows || defaultRows;
@@ -505,7 +594,7 @@ class TableConstructor {
 
 		return {
 			rows: rows,
-			cols: cols
+			cols: cols,
 		};
 	}
 
@@ -550,7 +639,9 @@ class TableConstructor {
 	_mouseInActivatingAreaListener(event) {
 		this._hoveredCellSide = event.detail.side;
 		const areaCoords = Automad.tableUtils.getCoords(event.target);
-		const containerCoords = Automad.tableUtils.getCoords(this._table.htmlElement);
+		const containerCoords = Automad.tableUtils.getCoords(
+			this._table.htmlElement
+		);
 
 		this._hoveredCell = event.target.closest('TD');
 
@@ -564,21 +655,36 @@ class TableConstructor {
 		}
 
 		if (this._hoveredCellSide === 'top') {
-			this._showToolBar(this._horizontalToolBar, areaCoords.y1 - containerCoords.y1 - 2);
+			this._showToolBar(
+				this._horizontalToolBar,
+				areaCoords.y1 - containerCoords.y1 - 2
+			);
 		}
 		if (this._hoveredCellSide === 'bottom') {
-			this._showToolBar(this._horizontalToolBar, areaCoords.y2 - containerCoords.y1 - 1);
+			this._showToolBar(
+				this._horizontalToolBar,
+				areaCoords.y2 - containerCoords.y1 - 1
+			);
 		}
 		if (this._hoveredCellSide === 'left') {
-			this._showToolBar(this._verticalToolBar, areaCoords.x1 - containerCoords.x1 - 2);
+			this._showToolBar(
+				this._verticalToolBar,
+				areaCoords.x1 - containerCoords.x1 - 2
+			);
 		}
 		if (this._hoveredCellSide === 'right') {
-			this._showToolBar(this._verticalToolBar, areaCoords.x2 - containerCoords.x1 - 1);
+			this._showToolBar(
+				this._verticalToolBar,
+				areaCoords.x2 - containerCoords.x1 - 1
+			);
 		}
 	}
 
 	_isToolbar(elem) {
-		return !!(elem.closest('.' + Automad.tableUtils.CSS.toolBarHor) || elem.closest('.' + Automad.tableUtils.CSS.toolBarVer));
+		return !!(
+			elem.closest('.' + Automad.tableUtils.CSS.toolBarHor) ||
+			elem.closest('.' + Automad.tableUtils.CSS.toolBarVer)
+		);
 	}
 
 	_leaveDetectArea(event) {
@@ -616,7 +722,9 @@ class TableConstructor {
 		const detailHasData = isNaN(event.detail) && event.detail !== null;
 
 		if (detailHasData) {
-			const containerCoords = Automad.tableUtils.getCoords(this._table.htmlElement);
+			const containerCoords = Automad.tableUtils.getCoords(
+				this._table.htmlElement
+			);
 			let coord;
 
 			if (typeCoord === 'x') {
@@ -653,7 +761,10 @@ class TableConstructor {
 	}
 
 	_isBottomOrRight() {
-		return this._hoveredCellSide === 'bottom' || this._hoveredCellSide === 'right';
+		return (
+			this._hoveredCellSide === 'bottom' ||
+			this._hoveredCellSide === 'right'
+		);
 	}
 
 	_addRow() {
@@ -698,13 +809,19 @@ class TableConstructor {
 
 	_mouseEnterInDetectArea(event) {
 		const coords = Automad.tableUtils.getCoords(this._container);
-		let side = Automad.tableUtils.getSideByCoords(coords, event.pageX, event.pageY);
+		let side = Automad.tableUtils.getSideByCoords(
+			coords,
+			event.pageX,
+			event.pageY
+		);
 
-		event.target.dispatchEvent(new CustomEvent('mouseInActivatingArea', {
-			'detail': {
-				'side': side
-			},
-			'bubbles': true
-		}));
+		event.target.dispatchEvent(
+			new CustomEvent('mouseInActivatingArea', {
+				detail: {
+					side: side,
+				},
+				bubbles: true,
+			})
+		);
 	}
 }

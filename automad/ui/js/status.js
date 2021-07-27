@@ -1,102 +1,96 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2014-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2014-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	Get system status items. 
- *	
- *	To get the status of any config setting (constant),
+ * Get system status items.
+ *
+ * To get the status of any config setting (constant),
  * 	the container has to have a 'data-am-status' attribute.
- *  The requested item for each container is then passed via 
- *  'data-am-status="item"'. 
+ *  The requested item for each container is then passed via
+ *  'data-am-status="item"'.
  */
 
-+function(Automad, $) {
-	
++(function (Automad, $) {
 	Automad.status = {
-		
 		dataAttr: 'data-am-status',
-		
-		get: function() {
-		
-			var	s = Automad.status;
-			
-			$('[' + s.dataAttr + ']').each(function() {
-		
+
+		get: function () {
+			var s = Automad.status;
+
+			$('[' + s.dataAttr + ']').each(function () {
 				var $container = $(this),
-					item = $container.data(Automad.util.dataCamelCase(s.dataAttr));
-				
-				$.post('?controller=Status::get', {'item': item}, function(data) {
-					$container.html(data.status);
-				}, 'json');
-				
+					item = $container.data(
+						Automad.util.dataCamelCase(s.dataAttr)
+					);
+
+				$.post(
+					'?controller=Status::get',
+					{ item: item },
+					function (data) {
+						$container.html(data.status);
+					},
+					'json'
+				);
 			});
-			
 		},
-		
-		init: function() {
-			
-			var	$doc = $(document),
+
+		init: function () {
+			var $doc = $(document),
 				s = Automad.status;
-				
-			$doc.ready(function() {
+
+			$doc.ready(function () {
 				s.get();
 			});
 
-			$doc.ajaxComplete(function(e, xhr, settings) {
-				
+			$doc.ajaxComplete(function (e, xhr, settings) {
 				var triggers = [
-					'?controller=Accounts::edit', 
-					'?controller=Accounts::add', 
+					'?controller=Accounts::edit',
+					'?controller=Accounts::add',
 					'?controller=Headless::editTemplate',
 					'?controller=Headless::resetTemplate',
 					'?controller=Config::update',
 					'?controller=PackageManager::getPackages',
-					'?controller=System::update'
+					'?controller=System::update',
 				];
 
 				if (triggers.includes(settings.url)) {
 					s.get();
 				}
-				
 			});
-			
-		}
-	
+		},
 	};
-	
+
 	Automad.status.init();
-	
-}(window.Automad = window.Automad || {}, jQuery);	
+})((window.Automad = window.Automad || {}), jQuery);

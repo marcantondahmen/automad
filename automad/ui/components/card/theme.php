@@ -1,77 +1,70 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 namespace Automad\UI\Components\Card;
+
 use Automad\Core\Image;
 use Automad\UI\Components\Modal\Readme;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
-
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The theme card component. 
+ * The theme card component.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Theme {
-
-
 	/**
-	 *	Render a theme card.
-	 *	
-	 *	@param object $Theme
-	 *	@param object $activeTheme
-	 *	@param string $id
-	 *	@return string The HTML of the card
+	 * Render a theme card.
+	 *
+	 * @param object $Theme
+	 * @param object $activeTheme
+	 * @param string $id
+	 * @return string The HTML of the card
 	 */
-
 	public static function render($Theme, $activeTheme, $id) {
-
 		$Text = Text::getObject();
 		$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
 		$files = FileSystem::glob($path . '/*');
 		$key = AM_KEY_THEME;
-	
+
 		// Set icon.
 		if ($images = preg_grep('/\.(jpg|jpeg|png|gif$)/i', $files)) {
 			$img = new Image(reset($images), 600, 450, true);
@@ -86,15 +79,13 @@ class Theme {
 		if ($activeTheme) {
 			if ($Theme->path === $activeTheme->path) {
 				$attrChecked = ' checked';
-			} 
+			}
 		}
 
 		if ($Theme->readme) {
-
 			$icon = <<< HTML
 					<a href="#{$id}-modal" data-uk-modal>$icon</a>
 HTML;
-
 		}
 
 		$badge = '';
@@ -106,7 +97,7 @@ HTML;
 			$badge = <<< HTML
 					<div class="uk-panel-badge uk-badge">$Theme->version</div>
 HTML;
-		} 
+		}
 
 		if ($Theme->author) {
 			$author = <<< HTML
@@ -180,8 +171,5 @@ HTML;
 						</div>
 					</div>
 HTML;
-
 	}
-
-
 }

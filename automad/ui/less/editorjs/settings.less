@@ -1,46 +1,43 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
-
 
 @am-settings-height: 2.5rem;
 @am-settings-gap: 2px;
 
 .am-block-editor {
-
 	& .ce-settings {
-		
-		width: ~"calc((3 * @{am-settings-height}) + (4 * @{am-settings-gap}))";
+		width: ~'calc((3 * @{am-settings-height}) + (4 * @{am-settings-gap}))';
 		background-color: @am-block-dropdown-background;
 		border: @am-hairline !important;
 		border-radius: @am-radius;
@@ -54,13 +51,10 @@
 		}
 
 		&__plugin-zone {
-
 			& > div > div + div {
 				border-top: @am-hairline-px;
 			}
-
 		}
-
 	}
 
 	& .cdx-settings,
@@ -82,16 +76,13 @@
 	}
 
 	& .am-block-settings-layout {
-
 		& > * {
 			border-bottom: @am-hairline-px;
 		}
-
 	}
 
 	& .cdx-settings-button,
 	& .ce-settings__button {
-
 		width: auto;
 		height: @am-settings-height;
 		margin: 0 !important;
@@ -110,7 +101,6 @@
 		}
 
 		&--active {
-
 			color: @am-block-button-active-color !important;
 			background-color: @am-block-button-active-background !important;
 
@@ -120,11 +110,9 @@
 				color: @am-block-button-active-color !important;
 				background-color: @am-block-button-active-hover-background !important;
 			}
-
 		}
 
 		&.disabled {
-
 			color: @am-muted;
 			cursor: default !important;
 
@@ -132,14 +120,11 @@
 				color: @am-muted !important;
 				background-color: transparent !important;
 			}
-
 		}
-
 	}
 
 	& .ce-settings__button--confirm {
 		color: @button-danger-color !important;
 		background-color: @button-danger-background !important;
 	}
-
 }

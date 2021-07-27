@@ -1,37 +1,37 @@
 <?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
 
@@ -45,44 +45,44 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Search model.
+ * The Search model.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
 
 class Search {
 
 
 	/**
-	 *	The Automad results.
+	 * The Automad results.
 	 */
 
 	private $Automad;
 
 
 	/**
-	 *	The search value.
+	 * The search value.
 	 */
 
 	private $searchValue;
 
 
 	/**
-	 *	The search regex flags.
+	 * The search regex flags.
 	 */
 
 	private $regexFlags;
 
 
 	/**
-	 *	Initialize a new search model for a search value, optionally used as a regular expression.
+	 * Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
-	 *	@param \Automad\Core\Automad $Automad
-	 *	@param string $searchValue
-	 *	@param boolean $isRegex
-	 *	@param boolean $isCaseSensitive
+	 * @param \Automad\Core\Automad $Automad
+	 * @param string $searchValue
+	 * @param boolean $isRegex
+	 * @param boolean $isCaseSensitive
 	 */
 
 	public function __construct($Automad, $searchValue, $isRegex, $isCaseSensitive) {
@@ -103,10 +103,10 @@ class Search {
 
 
 	/**
-	 *	Perform a search in all data arrays and return an array with `FileResults`.
+	 * Perform a search in all data arrays and return an array with `FileResults`.
 	 *
-	 *	@see \Automad\UI\Models\Search\FileResults
-	 *	@return array an array of `FileResults`
+	 * @see \Automad\UI\Models\Search\FileResults
+	 * @return array an array of `FileResults`
 	 */
 
 	public function searchPerFile() {
@@ -137,10 +137,10 @@ class Search {
 
 
 	/**
-	 *	Check whether a property name represents a valid block property.
+	 * Check whether a property name represents a valid block property.
 	 *
-	 *	@param string $property
-	 *	@return boolean true if the property name is in the whitelist
+	 * @param string $property
+	 * @return boolean true if the property name is in the whitelist
 	 */
 
 	private function isValidBlockProperty($property) {
@@ -165,12 +165,12 @@ class Search {
 
 
 	/**
-	 *	Perform a search in a single data array and return an
-	 *	array of `FieldResults`.
+	 * Perform a search in a single data array and return an
+	 * array of `FieldResults`.
 	 *
-	 *	@see \Automad\UI\Models\Search\FieldResults
-	 *	@param array $data
-	 *	@return array an array of `FieldResults` resultss
+	 * @see \Automad\UI\Models\Search\FieldResults
+	 * @param array $data
+	 * @return array an array of `FieldResults` resultss
 	 */
 
 	private function searchData($data) {
@@ -208,12 +208,12 @@ class Search {
 
 
 	/**
-	 *	Perform a search in a single data field and return a
-	 *	`FieldResults` results for a given search value.
+	 * Perform a search in a single data field and return a
+	 * `FieldResults` results for a given search value.
 	 *
-	 *	@param string $key
-	 *	@param string $value
-	 *	@return \Automad\UI\Models\Search\FieldResults the field results
+	 * @param string $key
+	 * @param string $value
+	 * @return \Automad\UI\Models\Search\FieldResults the field results
 	 */
 
 	private function searchTextField($key, $value) {
@@ -269,12 +269,12 @@ class Search {
 
 
 	/**
-	 *	Perform a search in a block field recursively and return a
-	 *	`FieldResults` results for a given search value.
+	 * Perform a search in a block field recursively and return a
+	 * `FieldResults` results for a given search value.
 	 *
-	 *	@param string $key
-	 *	@param results $blocks
-	 *	@return \Automad\UI\Models\Search\FieldResults a field results results
+	 * @param string $key
+	 * @param results $blocks
+	 * @return \Automad\UI\Models\Search\FieldResults a field results results
 	 */
 
 	private function searchBlocksRecursively($key, $blocks) {
@@ -318,11 +318,11 @@ class Search {
 
 
 	/**
-	 *	Merge an array of `FieldResults` into a single results.
+	 * Merge an array of `FieldResults` into a single results.
 	 *
-	 *	@param string $key
-	 *	@param array $results
-	 *	@return \Automad\UI\Models\Search\FieldResults a field results results
+	 * @param string $key
+	 * @param array $results
+	 * @return \Automad\UI\Models\Search\FieldResults a field results results
 	 */
 
 	private function mergeFieldResults($key, $results) {
@@ -351,11 +351,11 @@ class Search {
 
 
 	/**
-	 *	Search an array of values recursively.
+	 * Search an array of values recursively.
 	 *
-	 *	@param string $key
-	 *	@param array $array
-	 *	@return \Automad\UI\Models\Search\FieldResults a field results results
+	 * @param string $key
+	 * @param array $array
+	 * @return \Automad\UI\Models\Search\FieldResults a field results results
 	 */
 
 	private function searchArrayRecursively($key, $array) {
@@ -378,11 +378,11 @@ class Search {
 
 
 	/**
-	 *	Append an item to a given array only in case it is an results.
+	 * Append an item to a given array only in case it is an results.
 	 *
-	 *	@param array $resultsArray
-	 *	@param \Automad\UI\Models\Search\FieldResults $results
-	 *	@return array the results array
+	 * @param array $resultsArray
+	 * @param \Automad\UI\Models\Search\FieldResults $results
+	 * @return array the results array
 	 */
 
 	private function appendFieldResults($resultsArray, $results) {

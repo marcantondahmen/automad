@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Components\Layout;
 
@@ -49,89 +48,65 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The shared data layout component. 
+ * The shared data layout component.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class SharedData {
-
-
 	/**
-	 *	The Automad object.
+	 * The Automad object.
 	 */
-
-	private $Automad = NULL;
-
+	private $Automad = null;
 
 	/**
-	 *	The data array.
+	 * All color keys.
 	 */
-
-	private $data = NULL;
-
+	private $colorKeys = null;
 
 	/**
-	 *	A helper to use function within heredoc strings.
+	 * The data array.
 	 */
-
-	private $fn = NULL;
-
+	private $data = null;
 
 	/**
-	 *	The data array.
+	 * A helper to use function within heredoc strings.
 	 */
-
-	private $themes = NULL;
-
+	private $fn = null;
 
 	/**
-	 *	The data array.
+	 * The data array.
 	 */
-
-	private $mainTheme = NULL;
-
+	private $mainTheme = null;
 
 	/**
-	 *	All text content keys.
+	 * All settings variable keys.
 	 */
-
-	private $textKeys = NULL;
-
+	private $settingKeys = null;
 
 	/**
-	 *	All color keys.
+	 * All text content keys.
 	 */
-
-	private $colorKeys = NULL;
-
+	private $textKeys = null;
 
 	/**
-	 *	All settings variable keys.
+	 * The data array.
 	 */
-
-	private $settingKeys = NULL;
-
+	private $themes = null;
 
 	/**
-	 *	All unused variable keys.
+	 * All unused variable keys.
 	 */
-
-	private $unusedDataKeys = NULL;
-
+	private $unusedDataKeys = null;
 
 	/**
-	 *	The shared data layout constructor.
+	 * The shared data layout constructor.
 	 *
-	 *	@param object $Automad
+	 * @param object $Automad
 	 */
-
 	public function __construct($Automad) {
-
 		$this->Automad = $Automad;
 		$this->data = $Automad->Shared->data;
 
@@ -144,39 +119,31 @@ class SharedData {
 		};
 
 		if (!AM_HEADLESS_ENABLED) {
-
 			if ($this->mainTheme) {
 				$keys = Keys::inTheme($this->mainTheme);
 			} else {
 				$keys = array();
 			}
-
 		} else {
-
 			$keys = Keys::inTemplate(Headless::getTemplate());
 
 			// Also submit the saved theme form the non-headless mode.
 			// The value gets stored in a hidden input field.
 			echo FieldHidden::render(AM_KEY_THEME, $Automad->Shared->get(AM_KEY_THEME));
-
 		}
 
 		$this->textKeys = Keys::filterTextKeys($keys);
 		$this->colorKeys = Keys::filterColorKeys($keys);
 		$this->settingKeys = Keys::filterSettingKeys($keys);
 		$this->unusedDataKeys = array_diff(array_keys($this->data), $keys, Keys::$reserved);
-
 	}
 
-
 	/**
-	 *	Create the main page data form.
-	 * 
-	 *	@return string The rendered HTML
+	 * Create the main page data form.
+	 *
+	 * @return string The rendered HTML
 	 */
-
 	public function render() {
-
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -187,47 +154,20 @@ class SharedData {
 			data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
 			>
 				{$fn($this->themes())}
-				{$fn(Variables::render(
-					$this->Automad,
-					$this->textKeys, 
-					$this->data, 
-					$this->mainTheme, 
-					Text::get('shared_vars_content')
-				))}
-				{$fn(Variables::render(
-					$this->Automad,
-					$this->colorKeys, 
-					$this->data, 
-					$this->mainTheme, 
-					Text::get('shared_vars_color')
-				))}
-				{$fn(Variables::render(
-					$this->Automad,
-					$this->settingKeys, 
-					$this->data, 
-					$this->mainTheme, 
-					Text::get('shared_vars_settings')
-				))}
-				{$fn(UnusedVariables::render(
-					$this->Automad,
-					$this->unusedDataKeys,
-					$this->data,
-					Text::get('shared_vars_unused')
-				))}
+				{$fn(Variables::render($this->Automad, $this->textKeys, $this->data, $this->mainTheme, Text::get('shared_vars_content')))}
+				{$fn(Variables::render($this->Automad, $this->colorKeys, $this->data, $this->mainTheme, Text::get('shared_vars_color')))}
+				{$fn(Variables::render($this->Automad, $this->settingKeys, $this->data, $this->mainTheme, Text::get('shared_vars_settings')))}
+				{$fn(UnusedVariables::render($this->Automad, $this->unusedDataKeys, $this->data, Text::get('shared_vars_unused')))}
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The themes section.
-	 * 
-	 *	@return string the rendered themes section HTML
+	 * The themes section.
+	 *
+	 * @return string the rendered themes section HTML
 	 */
-
 	private function themes() {
-
 		if (AM_HEADLESS_ENABLED) {
 			return '';
 		}
@@ -291,18 +231,14 @@ HTML;
 				</a>
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The title field.
-	 * 
-	 *	@return string the rendered title field
+	 * The title field.
+	 *
+	 * @return string the rendered title field
 	 */
-
 	private function title() {
-
 		$fn = $this->fn;
 
 		return <<<HTML
@@ -319,8 +255,5 @@ HTML;
 				/>
 			</div>
 HTML;
-
 	}
-
-
 }

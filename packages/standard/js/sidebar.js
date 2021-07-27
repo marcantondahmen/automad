@@ -1,30 +1,22 @@
-/*!	
+/*!
  * 	Standard.sidebar
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de - MIT license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de - MIT license
  */
 
-+function(Standard, $) {
-
++(function (Standard, $) {
 	Standard.sidebar = {
-
-		init: function() {
-
+		init: function () {
 			if ($('#sidebar').length) {
-
 				new StickySidebar('#sidebar', {
 					containerSelector: false,
 					innerWrapperSelector: '.sidebar-inner',
 					resizeSensor: true,
 					topSpacing: 100,
-					bottomSpacing: 70
+					bottomSpacing: 70,
 				});
-				
 			}
-
-		}
-
-	}
+		},
+	};
 
 	$(document).on('ready', Standard.sidebar.init);
-
-}(window.Standard = window.Standard || {}, jQuery);
+})((window.Standard = window.Standard || {}), jQuery);

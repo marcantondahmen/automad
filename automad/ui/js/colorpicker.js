@@ -1,51 +1,47 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	Color picker. 
+ * Color picker.
  */
 
-+function (Automad, $) {
-
++(function (Automad, $) {
 	Automad.colorPicker = {
-
 		selector: '[data-am-colorpicker]',
 
-		init: function() {
-
+		init: function () {
 			var $doc = $(document),
 				cp = Automad.colorPicker;
 
@@ -53,19 +49,15 @@
 
 			// Add .uk-active class to [data-am-colorpicker] when the text input is focused.
 			$doc.on('focus', cp.selector + ' input[type="text"]', function (e) {
-
 				var $input = $(e.target);
 
 				$input.on('blur.automad', function () {
 					$input.off('blur.automad');
 				});
-
 			});
-
 		},
 
-		update: function(e) {
-
+		update: function (e) {
 			var $input = $(e.target),
 				cp = Automad.colorPicker,
 				color = $input.val(),
@@ -79,12 +71,9 @@
 			if (!color) {
 				color = $text.attr('placeholder');
 				$picker.val(color);
-			} 
-
-		}
-
-	}
+			}
+		},
+	};
 
 	Automad.colorPicker.init();
-
-}(window.Automad = window.Automad || {}, jQuery);
+})((window.Automad = window.Automad || {}), jQuery);

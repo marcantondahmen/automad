@@ -1,37 +1,36 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
-
 
 @import 'plugins/code.less';
 @import 'plugins/delimiter.less';
@@ -44,11 +43,8 @@
 @import 'plugins/section.less';
 @import 'plugins/table.less';
 
-
 .am-block-editor {
-
 	& .cdx-block {
-
 		padding: 0;
 		left: 0;
 		// Reset font-weight to make inline tools work in Firefox.
@@ -57,11 +53,9 @@
 		& > img {
 			margin: 0 !important;
 		}
-
 	}
 
 	& .cdx-input {
-	
 		display: block;
 		box-sizing: border-box;
 		overflow: hidden;
@@ -89,11 +83,10 @@
 		&:hover {
 			color: @form-color;
 		}
-		
+
 		&:focus {
 			.form-focus;
 		}
-
 	}
 
 	& select.cdx-input {
@@ -102,7 +95,6 @@
 	}
 
 	& .am-block-label {
-
 		display: inline-block;
 		max-width: 100%;
 		margin-top: @utility-margin;
@@ -117,7 +109,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		
+
 		&:not(.uk-margin-top-remove) {
 			margin-top: @utility-margin-small !important;
 		}
@@ -126,7 +118,6 @@
 		& + *:empty {
 			margin-top: 0 !important;
 		}
-
 	}
 
 	& .ce-block .uk-panel-box > hr {
@@ -139,7 +130,6 @@
 	}
 
 	& .am-block-icon {
-
 		margin-bottom: 0.75rem;
 		font-size: 1.25rem;
 
@@ -148,7 +138,6 @@
 			margin: 0 auto;
 			fill: @am-text;
 		}
-
 	}
 
 	& .am-block-title {
@@ -159,11 +148,10 @@
 		text-transform: capitalize;
 		overflow-x: auto;
 		overflow-y: hidden;
-  		white-space: nowrap;
-	} 
+		white-space: nowrap;
+	}
 
 	& .am-style-dropdown {
-		
 		width: 25rem;
 		max-width: 80vw;
 		padding: 0.5rem;
@@ -171,7 +159,5 @@
 		& .uk-grid > div > :first-child {
 			margin-top: 0 !important;
 		}
-
 	}
-
 }

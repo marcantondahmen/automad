@@ -1,37 +1,37 @@
 <?php 
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
 
@@ -46,29 +46,29 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The FileSystem class provides all methods related to file system operations. 
+ * The FileSystem class provides all methods related to file system operations. 
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
 
 class FileSystem extends \Automad\Core\FileSystem {
 	
 
 	/**
-	 *	The cached array of items in the packages directory.
+	 * The cached array of items in the packages directory.
 	 */
 
 	private static $packageDirectoryItems = array();
 
 	
 	/**
-	 *	Append a suffix to a path just before the trailing slash.
+	 * Append a suffix to a path just before the trailing slash.
 	 * 
-	 *	@param string $path
-	 *	@param string $suffix
-	 *	@return string The path with appended suffix
+	 * @param string $path
+	 * @param string $suffix
+	 * @return string The path with appended suffix
 	 */
 	
 	public static function appendSuffixToPath($path, $suffix) {
@@ -79,11 +79,11 @@ class FileSystem extends \Automad\Core\FileSystem {
 	
 	
 	/**
-	 *	Open a data text file under the given path, read the data, 
-	 *	append a suffix to the title variable and write back the data.
+	 * Open a data text file under the given path, read the data, 
+	 * append a suffix to the title variable and write back the data.
 	 * 
-	 *	@param string $path   
-	 *	@param string $suffix 
+	 * @param string $path   
+	 * @param string $suffix 
 	 */
 	
 	public static function appendSuffixToTitle($path, $suffix) {
@@ -108,11 +108,11 @@ class FileSystem extends \Automad\Core\FileSystem {
 	
 
 	/**
-	 *	Unlike self::movePageDir(), this method only copies all files 
-	 *	within a page directory without (!) any subdirectories.
+	 * Unlike self::movePageDir(), this method only copies all files 
+	 * within a page directory without (!) any subdirectories.
 	 * 
-	 *	@param string $source
-	 *	@param string $dest
+	 * @param string $source
+	 * @param string $dest
 	 */
 	
 	public static function copyPageFiles($source, $dest) {
@@ -138,10 +138,10 @@ class FileSystem extends \Automad\Core\FileSystem {
 	
 	
 	/**
-	 *	Deletes a file and its caption (if existing).
+	 * Deletes a file and its caption (if existing).
 	 *
-	 *	@param string $file
-	 *	@return string Only error messages - false in case no errors occured!
+	 * @param string $file
+	 * @return string Only error messages - false in case no errors occured!
 	 */
 	
 	public static function deleteMedia($file) {
@@ -180,8 +180,8 @@ class FileSystem extends \Automad\Core\FileSystem {
 	/**
 	 *  Get the full file system path for the given path.
 	 *      
-	 *	@param string $path
-	 *	@return string The full path
+	 * @param string $path
+	 * @return string The full path
 	 */
 
 	public static function fullPagePath($path) {
@@ -196,11 +196,11 @@ class FileSystem extends \Automad\Core\FileSystem {
 
 
 	/**
-	 *	Return the file system path for the directory of a page based on $_POST['url'].
-	 *	In case URL is empty, return the '/shared' directory.
+	 * Return the file system path for the directory of a page based on $_POST['url'].
+	 * In case URL is empty, return the '/shared' directory.
 	 *
-	 *	@param object $Automad
-	 *	@return string The full path to the related directory
+	 * @param object $Automad
+	 * @return string The full path to the related directory
 	 */
 
 	public static function getPathByPostUrl($Automad) {
@@ -217,10 +217,10 @@ class FileSystem extends \Automad\Core\FileSystem {
 
 
 	/**
-	 *	Get all items in the packages directory, optionally filtered by a regex string.
+	 * Get all items in the packages directory, optionally filtered by a regex string.
 	 *
-	 *	@param string $filter
-	 *	@return array A filtered list with all items in the packages directory
+	 * @param string $filter
+	 * @return array A filtered list with all items in the packages directory
 	 */
 
 	public static function getPackagesDirectoryItems($filter = '') {
@@ -238,12 +238,12 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 
-	/**	
+	/** 
 	 * 	Recursively list all items in a directory.
 	 * 	
-	 *	@param string $directory
-	 *	@param string $base
-	 *	@return array The list of items
+	 * @param string $directory
+	 * @param string $base
+	 * @return array The list of items
 	 */
 
 	public static function listDirectoryRecursively($directory, $base = AM_BASE_DIR) {
@@ -271,15 +271,15 @@ class FileSystem extends \Automad\Core\FileSystem {
 
 
 	/**
-	 *	Move a directory to a new location.
-	 *	The final path is composed of the parent directoy, the prefix and the title.
-	 *	In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
+	 * Move a directory to a new location.
+	 * The final path is composed of the parent directoy, the prefix and the title.
+	 * In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
 	 *
-	 *	@param string $oldPath
-	 *	@param string $newParentPath (destination)
-	 *	@param string $prefix
-	 *	@param string $title
-	 *	@return string $newPath
+	 * @param string $oldPath
+	 * @param string $newParentPath (destination)
+	 * @param string $prefix
+	 * @param string $title
+	 * @return string $newPath
 	 */
 
 	public static function movePageDir($oldPath, $newParentPath, $prefix, $title) {
@@ -328,7 +328,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	/**
 	 * 	Move all items in /cache to the PHP temp directory.
 	 *
-	 *	@return string $tmp
+	 * @return string $tmp
 	 */
 
 	public static function purgeCache() {
@@ -373,9 +373,9 @@ class FileSystem extends \Automad\Core\FileSystem {
 	/**
 	 *  Renames a file and its caption (if existing).
 	 *      
-	 *	@param string $oldFile
-	 *	@param string $newFile
-	 *	@return string Only error messages - false in case no errors occured!          
+	 * @param string $oldFile
+	 * @param string $newFile
+	 * @return string Only error messages - false in case no errors occured!          
 	 */
 	
 	public static function renameMedia($oldFile, $newFile) {
@@ -432,9 +432,9 @@ class FileSystem extends \Automad\Core\FileSystem {
 	/**
 	 *  Creates an unique suffix for a path to avoid conflicts with existing directories.
 	 *      
-	 *	@param string $path
-	 *	@param string $prefix (prepended to the numerical suffix)
-	 *	@return string The suffix
+	 * @param string $path
+	 * @param string $prefix (prepended to the numerical suffix)
+	 * @return string The suffix
 	 */
 	
 	public static function uniquePathSuffix($path, $prefix = '') {
@@ -454,8 +454,8 @@ class FileSystem extends \Automad\Core\FileSystem {
 	/**
 	 *  Format, filter and write the data array a text file.
 	 *      
-	 *	@param array $data
-	 *	@param string $file
+	 * @param array $data
+	 * @param string $file
 	 */
 	
 	public static function writeData($data, $file) {

@@ -1,140 +1,149 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2017-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2017-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	In page editing. 
+ * In page editing.
  */
-	
-+function(Automad, $) {
-	
+
++(function (Automad, $) {
 	Automad.inPage = {
-		
 		selectors: {
 			modal: '#am-inpage-edit-modal',
 			fields: '#am-inpage-edit-fields',
 			menubar: '.am-inpage-menubar',
-			dragHandle: '.am-drag-handle'
+			dragHandle: '.am-drag-handle',
 		},
-		
+
 		dataAttr: {
 			content: 'data-am-inpage-content',
-			controller: 'data-am-inpage-controller'
+			controller: 'data-am-inpage-controller',
 		},
-		
+
 		modal: {
-			
-			init: function() {
-				
-				var	$button = $(this),
+			init: function () {
+				var $button = $(this),
 					ip = Automad.inPage,
 					u = Automad.util,
 					param = $button.data(u.dataCamelCase(ip.dataAttr.content)),
 					$modal = $(ip.selectors.modal),
 					$form = $modal.find('form'),
-					controller = $form.data(u.dataCamelCase(ip.dataAttr.controller)),
-					$loader = $('<i></i>', { 'class': 'uk-icon-circle-o-notch uk-icon-spin uk-icon-small' })
-						  	  .appendTo($form);
-					
+					controller = $form.data(
+						u.dataCamelCase(ip.dataAttr.controller)
+					),
+					$loader = $('<i></i>', {
+						class: 'uk-icon-circle-o-notch uk-icon-spin uk-icon-small',
+					}).appendTo($form);
+
 				// Remove inputs from previous call.
 				$(ip.selectors.fields).remove();
-				
+
 				// Get form content.
-				$.post(controller, param, function(data) {
-							
-					if (data.html) {
-						
-						var $fields = $(data.html).appendTo($form).hide();
-										
-						// Delay resizing to avoid flicker.
-						setTimeout(function() {
-							$(window).resize();
-						}, 400);
-						
-						// Delay fade in to avoid flicker.
-						setTimeout(function() {
-							$loader.remove();
-							$fields.fadeIn(300, function() {
+				$.post(
+					controller,
+					param,
+					function (data) {
+						if (data.html) {
+							var $fields = $(data.html).appendTo($form).hide();
+
+							// Delay resizing to avoid flicker.
+							setTimeout(function () {
 								$(window).resize();
-								$fields.find('.uk-form-controls, textarea, [contenteditable]').first().focus();	
-							});
-						}, 600);
-							
-					}
-								
-				}, 'json');
-					
+							}, 400);
+
+							// Delay fade in to avoid flicker.
+							setTimeout(function () {
+								$loader.remove();
+								$fields.fadeIn(300, function () {
+									$(window).resize();
+									$fields
+										.find(
+											'.uk-form-controls, textarea, [contenteditable]'
+										)
+										.first()
+										.focus();
+								});
+							}, 600);
+						}
+					},
+					'json'
+				);
 			},
-			
-			submit: function(e) {
-				
+
+			submit: function (e) {
 				e.preventDefault();
-					
-				var	$form = $(e.target),
-					controller = $form.data(Automad.util.dataCamelCase(Automad.inPage.dataAttr.controller)),
-					param =	$form.serializeArray();
-				
-				$.post(controller, param, function(data) {
-					
-					if (data.redirect) {
-						window.location.href = data.redirect;
-					}
-						
-				}, 'json');
-					
-			}
-			
+
+				var $form = $(e.target),
+					controller = $form.data(
+						Automad.util.dataCamelCase(
+							Automad.inPage.dataAttr.controller
+						)
+					),
+					param = $form.serializeArray();
+
+				$.post(
+					controller,
+					param,
+					function (data) {
+						if (data.redirect) {
+							window.location.href = data.redirect;
+						}
+					},
+					'json'
+				);
+			},
 		},
-		
+
 		menubar: {
-			
-			init: function() {
-				
+			init: function () {
 				var ips = Automad.inPage.selectors,
 					$menubar = $(ips.menubar).draggabilly({
-						handle: ips.dragHandle
+						handle: ips.dragHandle,
 					});
-				
-			}
-				
-		}
-		
-	}
-	
-	$(document).on('click', '[href="' + Automad.inPage.selectors.modal + '"]', Automad.inPage.modal.init);
-	$(document).on('submit', '[' + Automad.inPage.dataAttr.controller + ']', Automad.inPage.modal.submit);
+			},
+		},
+	};
+
+	$(document).on(
+		'click',
+		'[href="' + Automad.inPage.selectors.modal + '"]',
+		Automad.inPage.modal.init
+	);
+	$(document).on(
+		'submit',
+		'[' + Automad.inPage.dataAttr.controller + ']',
+		Automad.inPage.modal.submit
+	);
 	$(document).on('ready', Automad.inPage.menubar.init);
-	
-}(window.Automad = window.Automad || {}, jQuery);
+})((window.Automad = window.Automad || {}), jQuery);

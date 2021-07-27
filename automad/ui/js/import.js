@@ -1,94 +1,89 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 /*
- *	Import file from URL dialog. 
+ * Import file from URL dialog.
  */
 
-+function (Automad, $, UIkit) {
-
++(function (Automad, $, UIkit) {
 	Automad.import = {
-
 		selectors: {
 			modal: '#am-import-modal',
 			button: '#am-import-modal .uk-form button',
-			input: '#am-import-modal [name="importUrl"]'
+			input: '#am-import-modal [name="importUrl"]',
 		},
 
 		dataAttr: {
-			url: 'data-am-url'
+			url: 'data-am-url',
 		},
 
-		init: function() {
-
+		init: function () {
 			var ai = Automad.import;
 
-			$(document).on('click', ai.selectors.button, function() {
-
+			$(document).on('click', ai.selectors.button, function () {
 				var $modal = $(ai.selectors.modal),
 					$input = $(ai.selectors.input),
 					importUrl = $input.val(),
 					$form = $modal.closest('form'),
-					url = $modal.data(Automad.util.dataCamelCase(ai.dataAttr.url));
+					url = $modal.data(
+						Automad.util.dataCamelCase(ai.dataAttr.url)
+					);
 
-				$.post('?controller=File::import', { url: url, importUrl: importUrl}, function(data) {
-					
-					if (data.error) {
+				$.post(
+					'?controller=File::import',
+					{ url: url, importUrl: importUrl },
+					function (data) {
+						if (data.error) {
+							Automad.notify.error(data.error);
+						} else {
+							$modal.on(
+								'hide.uk.modal.automad.import',
+								function () {
+									$modal.off('automad.import');
+									$form.empty().submit();
+								}
+							);
 
-						Automad.notify.error(data.error);
-						
-					} else {
-
-						$modal.on('hide.uk.modal.automad.import', function() {
-							$modal.off('automad.import');
-							$form.empty().submit();
-						});
-
-						UIkit.modal(ai.selectors.modal).hide();
-						
-					}
-					
-				}, 'json');
-
+							UIkit.modal(ai.selectors.modal).hide();
+						}
+					},
+					'json'
+				);
 			});
-
-		}
-
+		},
 	};
 
 	Automad.import.init();
-
-}(window.Automad = window.Automad || {}, jQuery, UIkit);
+})((window.Automad = window.Automad || {}), jQuery, UIkit);

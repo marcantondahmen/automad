@@ -1,40 +1,38 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
-
 .embed-tool {
-
 	& iframe {
 		pointer-events: none;
 		max-width: 100%;
@@ -43,7 +41,6 @@
 	}
 
 	&--loading {
-
 		& .embed-tool__caption {
 			display: none;
 		}
@@ -58,7 +55,6 @@
 	}
 
 	&__preloader {
-
 		display: none;
 		z-index: 10;
 		position: relative;
@@ -83,7 +79,6 @@
 			box-sizing: border-box;
 			animation: embed-preloader-spin 2s infinite linear;
 		}
-
 	}
 
 	&__url {
@@ -104,10 +99,9 @@
 	}
 
 	&__caption {
-
 		margin-top: 7px;
 
-		&[contentEditable=true][data-placeholder]::before{
+		&[contentEditable='true'][data-placeholder]::before {
 			position: absolute;
 			content: attr(data-placeholder);
 			color: @am-muted;
@@ -115,9 +109,9 @@
 			opacity: 0;
 		}
 
-		&[contentEditable=true][data-placeholder]:empty {
+		&[contentEditable='true'][data-placeholder]:empty {
 			&::before {
-				 opacity: 1;
+				opacity: 1;
 			}
 
 			&:focus::before {

@@ -1,30 +1,27 @@
 /*
- *	Standard
+ * Standard
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *  MIT license
+ * MIT license
  */
 
+@utility-margin: 3rem;
+@utility-margin-small: 1.5rem;
+@utility-margin-large: 4.5rem;
 
-@utility-margin:								3.0rem;
-@utility-margin-small:							1.5rem;
-@utility-margin-large:							4.5rem;
+@utility-container-max-width: 90rem;
+@utility-container-padding-horizontal: 1.75rem;
+@utility-container-large-max-width: 90rem;
+@utility-container-large-padding-horizontal: 1.75rem;
 
-@utility-container-max-width:					90rem;
-@utility-container-padding-horizontal:			1.75rem;
-@utility-container-large-max-width:  			90rem;
-@utility-container-large-padding-horizontal:	1.75rem;
-
-@breakpoint-small:								480px;
-@breakpoint-medium:								768px;
-@breakpoint-large:								1020px;
-@breakpoint-xlarge:								1250px;
-
+@breakpoint-small: 480px;
+@breakpoint-medium: 768px;
+@breakpoint-large: 1020px;
+@breakpoint-xlarge: 1250px;
 
 .uk-container {
-
 	body > & {
 		margin-top: 7rem;
 	}
@@ -32,5 +29,4 @@
 	:not(.navbar) + & {
 		margin-top: @utility-margin;
 	}
-
 }

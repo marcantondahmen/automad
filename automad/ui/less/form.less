@@ -1,65 +1,64 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
 
+@form-height: @button-large-height;
+@form-large-height: 3.14rem;
+@form-padding: 0.29rem 0.86rem 0.43rem 0.86rem;
+@form-large-padding: 0.43rem 0.86rem;
+@form-border: @am-border-color;
+@form-border-width: @am-border-width;
+@form-color: @am-text;
+@form-background: #fafafa;
 
-@form-height:				@button-large-height;
-@form-large-height: 		3.14rem;
-@form-padding:				0.29rem 0.86rem 0.43rem 0.86rem;
-@form-large-padding: 		0.43rem 0.86rem;
-@form-border:				@am-border-color;
-@form-border-width:			@am-border-width;
-@form-color:				@am-text;
-@form-background:       	#FAFAFA;
+@form-gutter: 0;
 
-@form-gutter: 				0;
+@form-focus-border: @am-success;
+@form-focus-background: @form-background;
+@form-focus-color: @form-color;
 
-@form-focus-border:			@am-success;
-@form-focus-background:		@form-background;
-@form-focus-color:			@form-color;
+@form-disabled-border: @form-border;
+@form-disabled-background: @form-background;
+@form-disabled-color: @am-muted;
 
-@form-disabled-border:      @form-border;
-@form-disabled-background:  @form-background;
-@form-disabled-color:		@am-muted;
+@form-stacked-font-weight: @base-body-font-weight;
+@form-stacked-margin-bottom: 0.29rem;
 
-@form-stacked-font-weight:	@base-body-font-weight;
-@form-stacked-margin-bottom:0.29rem;
+@form-placeholder-color: @am-muted;
 
-@form-placeholder-color:	@am-muted;
-
-@form-icon-width: 			2.2rem;
-@form-icon-font-size:		1rem;
-@form-icon-color:			mix(@am-muted, @am-border-color);
+@form-icon-width: 2.2rem;
+@form-icon-font-size: 1rem;
+@form-icon-color: mix(@am-muted, @am-border-color);
 
 .hook-form() {
 	box-sizing: border-box;
@@ -79,7 +78,6 @@
 }
 
 .hook-form-stacked-label() {
-	
 	display: inline-block;
 	margin-top: @utility-margin;
 	margin-bottom: @form-stacked-margin-bottom;
@@ -90,14 +88,13 @@
 	line-height: @button-mini-height;
 	color: @am-text;
 	background-color: @am-bg;
-	
+
 	&.am-form-changed:before {
 		content: '\f111';
 		&:extend([class*='uk-icon-']);
 		padding-right: 0.36rem;
 		color: @am-success;
-	} 
-	
+	}
 }
 
 // All textareas but not the HTML editors.
@@ -107,20 +104,18 @@
 	padding-top: 0.71rem;
 	padding-bottom: 0.57rem;
 	min-height: 5rem;
-	// Disable height transitions. 
+	// Disable height transitions.
 	.transition(height 0s, color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;);
 }
 
 textarea,
 .uk-form-controls {
-	
 	-moz-tab-size: 4;
 	tab-size: 4;
 
 	& + & {
 		margin-top: 0.29rem;
 	}
-
 }
 
 .uk-form-select.uk-button:not(.uk-button-large) {
@@ -130,20 +125,18 @@ textarea,
 	padding-top: 0;
 	padding-bottom: 0;
 }
- 
-.uk-form-icon {
 
-	& > [class*="uk-icon-"] {
+.uk-form-icon {
+	& > [class*='uk-icon-'] {
 		line-height: @form-height - (2 * @am-border-width);
 		margin-top: 0;
 		top: 0;
 		left: 0.29rem;
 	}
-	
+
 	&:not(.uk-form-icon-flip) > input {
-		padding-left: (@form-icon-width + 0.29rem) !important;	
+		padding-left: (@form-icon-width + 0.29rem) !important;
 	}
-	
 }
 
 .uk-modal textarea {
@@ -151,7 +144,6 @@ textarea,
 }
 
 .am-form {
-
 	&-block-help {
 		position: absolute;
 		display: inline-block;
@@ -168,15 +160,12 @@ textarea,
 	}
 
 	&-input-button {
-
-		& input[type="text"],
+		& input[type='text'],
 		& > div {
-
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;
 
 			& + button {
-
 				height: @button-large-height;
 				line-height: @button-large-line-height;
 				border-top-left-radius: 0;
@@ -190,17 +179,12 @@ textarea,
 				&:not(.uk-button-success) {
 					border-color: @form-border;
 				}
-
 			}
-
 		}
-
 	}
 
 	&-icon-button-input {
-
 		& > button {
-
 			position: absolute;
 			height: @form-height;
 			line-height: @form-height;
@@ -208,26 +192,22 @@ textarea,
 			min-width: @form-height;
 			background-color: transparent !important;
 			border: none;
-		
+
 			& > i {
 				line-height: inherit !important;
 			}
-
 		}
 
-		& > input[type="text"] {
+		& > input[type='text'] {
 			padding-left: 2.86rem;
 		}
-
 	}
 
 	&-input-group {
-		
 		display: flex;
 
 		& > *,
 		.am-block-editor & > .cdx-input {
-
 			margin-top: 0 !important;
 			border-radius: 0;
 			margin-left: -@am-border-width !important;
@@ -247,9 +227,6 @@ textarea,
 				position: relative;
 				z-index: 2;
 			}
-
 		}
-
 	}
-
 }

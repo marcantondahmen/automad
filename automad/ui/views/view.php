@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Views;
 
@@ -50,87 +49,51 @@ use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The base for all dashboard views.
+ * The base for all dashboard views.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 abstract class View {
-
+	/**
+	 * The Automad object.
+	 */
+	protected $Automad = null;
 
 	/**
-	 *	Define whether a navbar and sidebar exist.
+	 * This property stores a simple helper to output expression in strings.
 	 */
-
-	protected $hasNav = True;
-
-
-	/**
-	 *	The Automad object.
-	 */
-
-	protected $Automad = NULL;
-
-
-	/**
-	 *	The Automad object.
-	 */
-
-	protected $Themelist = NULL;
-
-
-	/**
-	 *	This property stores a simple helper to output expression in strings.
-	 */
-
 	protected $fn;
 
+	/**
+	 * Define whether a navbar and sidebar exist.
+	 */
+	protected $hasNav = true;
 
 	/**
-	 *	Render body.
-	 *
-	 *	@return string the rendered items
+	 * The Automad object.
 	 */
-
-	abstract protected function body();
-
+	protected $Themelist = null;
 
 	/**
-	 *	Get the title for the dashboard view.
-	 *
-	 *	@return string the rendered items
+	 * The page constructor.
 	 */
-
-	abstract protected function title();
-
-
-	/**
-	 *	The page constructor.
-	 */
-
 	public function __construct() {
-		
 		$this->Automad = UICache::get();
 		$this->Themelist = new Themelist();
 		$this->fn = function ($expression) {
 			return $expression;
 		};
-
 	}
 
-
 	/**
-	 *	Render a dashboard page.
+	 * Render a dashboard page.
 	 *
-	 *	@return string the rendered dashboard
+	 * @return string the rendered dashboard
 	 */
-
 	public function render() {
-
 		$fn = $this->fn;
 
 		$versionSanitized = Str::sanitize(AM_VERSION);
@@ -179,50 +142,50 @@ abstract class View {
 			</body>
 			</html>
 HTML;
-
 	}
 
+	/**
+	 * Render body.
+	 *
+	 * @return string the rendered items
+	 */
+	abstract protected function body();
 
 	/**
-	 *	Render a navbar.
+	 * Render a navbar.
 	 *
-	 *	@return string the rendered navbar
+	 * @return string the rendered navbar
 	 */
-
 	protected function navbar() {
-
 		if ($this->hasNav) {
 			return Navbar::render($this->Automad);
 		}
-		
-
 	}
 
-
 	/**
-	 *	Render a sidebar.
+	 * Render a sidebar.
 	 *
-	 *	@return string the rendered sidebar
+	 * @return string the rendered sidebar
 	 */
-
 	protected function sidebar() {
-
 		if ($this->hasNav) {
 			return Sidebar::render($this->Automad);
 		}
-		
-
 	}
 
+	/**
+	 * Get the title for the dashboard view.
+	 *
+	 * @return string the rendered items
+	 */
+	abstract protected function title();
 
 	/**
-	 *	Render footer in case a user is logged in.
+	 * Render footer in case a user is logged in.
 	 *
-	 *	@return string the rendered footer
+	 * @return string the rendered footer
 	 */
-
 	private function footer() {
-
 		if (!$this->Automad) {
 			return false;
 		}
@@ -242,8 +205,5 @@ HTML;
 			{$fn(About::render('am-about-modal'))}
 			{$fn(AddPage::render($this->Automad, $this->Themelist))}
 HTML;
-
 	}
-
-
 }

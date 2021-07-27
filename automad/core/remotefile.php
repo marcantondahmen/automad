@@ -1,102 +1,98 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\Core;
 
-
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The remote file class.
+ * The remote file class.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class RemoteFile {
-
-
 	/**
-	 *	The local copy in the downloads directory of the external file.
+	 * The local copy in the downloads directory of the external file.
 	 */
-
-	private $localCopy = False;
-
+	private $localCopy = false;
 
 	/**
-	 *	The constructor.
+	 * The constructor.
 	 *
-	 *	@param string $url
+	 * @param string $url
 	 */
-
 	public function __construct($url) {
-
 		$this->localCopy = $this->download($url);
-
 	}
 
+	/**
+	 * Returns the local copy's path.
+	 *
+	 * @return string The local copy's path.
+	 */
+	public function getLocalCopy() {
+		return $this->localCopy;
+	}
 
 	/**
-	 *	Downloads the remote file to the cache/downloads directory.
+	 * Downloads the remote file to the cache/downloads directory.
 	 *
-	 *	@param string $url 
-	 *	@return string The local copy's file path or false
+	 * @param string $url
+	 * @return string The local copy's file path or false
 	 */
-
 	private function download($url) {
-
 		$downloads = AM_BASE_DIR . AM_DIR_CACHE . '/downloads';
 		FileSystem::makeDir($downloads);
 		$file = $downloads . '/' . AM_FILE_PREFIX_CACHE . '_' . sha1($url);
-		
+
 		$existing = FileSystem::glob("$file*");
 
 		if (!empty($existing)) {
 			$file = $existing[0];
 			Debug::log(array($url, $file), 'Already downloaded before');
+
 			return $file;
 		}
 
 		set_time_limit(0);
-		
+
 		$fp = fopen($file, 'w+');
-		
+
 		$options = array(
 			CURLOPT_TIMEOUT => 120,
 			CURLOPT_FILE => $fp,
@@ -104,20 +100,21 @@ class RemoteFile {
 			CURLOPT_FRESH_CONNECT => 1,
 			CURLOPT_URL => $url
 		);
-		
+
 		$curl = curl_init();
 		curl_setopt_array($curl, $options);
-		curl_exec($curl); 
-		
+		curl_exec($curl);
+
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
 			$file = false;
 		}
-		
+
 		curl_close($curl);
 		fclose($fp);
 
 		if (!$file) {
 			Debug::log($url, 'File not found');
+
 			return false;
 		}
 
@@ -129,21 +126,5 @@ class RemoteFile {
 		Debug::log(array($url, $file), 'Downloaded');
 
 		return $file;
-
 	}
-
-
-	/**
-	 *	Returns the local copy's path.
-	 *
-	 *	@return string The local copy's path.
-	 */
-	
-	public function getLocalCopy() {
-
-		return $this->localCopy;
-
-	}
-
-
 }

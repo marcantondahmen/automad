@@ -1,37 +1,37 @@
 <?php 
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2017-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2017-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
 
@@ -42,21 +42,21 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Prefix class provides helper to use standard UIkit classes without needing to prefix them manually to avoid conflicts (in page editing). 
+ * The Prefix class provides helper to use standard UIkit classes without needing to prefix them manually to avoid conflicts (in page editing). 
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2017-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2017-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
 
 class Prefix {
 	
 	
 	/**
-	 *	The custom prefix to replace 'uk-'.
-	 *	
-	 *	The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
- 	 *	would also match prefixed classes like am-uk-icon-*.
+	 * The custom prefix to replace 'uk-'.
+	 * 
+	 * The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
+ 	 * would also match prefixed classes like am-uk-icon-*.
 	 */
 	
 	private static $prefix = 'am-u-';
@@ -65,8 +65,8 @@ class Prefix {
 	/**
 	 *  Replace the prefixes of UIkit classes and data attributes in a string.
 	 *      
-	 *	@param string $str
-	 *	@return string The processed $str
+	 * @param string $str
+	 * @return string The processed $str
 	 */
 	
 	public static function attributes($str) {
@@ -83,8 +83,8 @@ class Prefix {
 	/**
 	 *  Search for HTML tags in a string and replace the prefixes of UIkit classes and data attributes.
 	 *      
-	 *	@param string $str
-	 *	@return string The processed $str
+	 * @param string $str
+	 * @return string The processed $str
 	 */
 	
 	public static function tags($str) {

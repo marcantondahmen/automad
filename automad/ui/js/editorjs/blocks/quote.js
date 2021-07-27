@@ -1,16 +1,14 @@
 /*
- *	This EditorJS block is based on the original quote block by CodeX and
- *	is extended to support the Automad block grid layout.
- *	https://github.com/editor-js/quote
+ * This EditorJS block is based on the original quote block by CodeX and
+ * is extended to support the Automad block grid layout.
+ * https://github.com/editor-js/quote
  *
- *	Copyright (c) 2018 CodeX (team@ifmo.su)
- *	Copyright (c) 2021 Marc Anton Dahmen
- *	MIT License
+ * Copyright (c) 2018 CodeX (team@ifmo.su)
+ * Copyright (c) 2021 Marc Anton Dahmen
+ * MIT License
  */
 
-
 class AutomadBlockQuote {
-	
 	static get isReadOnlySupported() {
 		return true;
 	}
@@ -59,7 +57,9 @@ class AutomadBlockQuote {
 			 * To create string from Quote data, concatenate text and caption
 			 */
 			export: function (quoteData) {
-				return quoteData.caption ? `${quoteData.text} — ${quoteData.caption}` : quoteData.text;
+				return quoteData.caption
+					? `${quoteData.text} — ${quoteData.caption}`
+					: quoteData.text;
 			},
 		};
 	}
@@ -82,19 +82,29 @@ class AutomadBlockQuote {
 		this.api = api;
 		this.readOnly = readOnly;
 
-		this.quotePlaceholder = config.quotePlaceholder || AutomadBlockQuote.DEFAULT_QUOTE_PLACEHOLDER;
-		this.captionPlaceholder = config.captionPlaceholder || AutomadBlockQuote.DEFAULT_CAPTION_PLACEHOLDER;
+		this.quotePlaceholder =
+			config.quotePlaceholder ||
+			AutomadBlockQuote.DEFAULT_QUOTE_PLACEHOLDER;
+		this.captionPlaceholder =
+			config.captionPlaceholder ||
+			AutomadBlockQuote.DEFAULT_CAPTION_PLACEHOLDER;
 
 		this.data = {
 			text: data.text || '',
 			caption: data.caption || '',
-			alignment: Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment ||
+			alignment:
+				(Object.values(ALIGNMENTS).includes(data.alignment) &&
+					data.alignment) ||
 				config.defaultAlignment ||
 				DEFAULT_ALIGNMENT,
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(this.data, data, api, config);
-
+		this.layoutSettings = AutomadLayout.renderSettings(
+			this.data,
+			data,
+			api,
+			config
+		);
 	}
 
 	get CSS() {
@@ -115,18 +125,21 @@ class AutomadBlockQuote {
 			{
 				name: 'left',
 				icon: AutomadEditorIcons.get.alignLeft,
-				title: AutomadEditorTranslation.get('left')
+				title: AutomadEditorTranslation.get('left'),
 			},
 			{
 				name: 'center',
 				icon: AutomadEditorIcons.get.alignCenter,
-				title: AutomadEditorTranslation.get('center')
+				title: AutomadEditorTranslation.get('center'),
 			},
 		];
 	}
 
 	render() {
-		const container = this._make('blockquote', [this.CSS.baseClass, this.CSS.wrapper]);
+		const container = this._make('blockquote', [
+			this.CSS.baseClass,
+			this.CSS.wrapper,
+		]);
 		const quote = this._make('div', [this.CSS.input, this.CSS.text], {
 			contentEditable: !this.readOnly,
 			innerHTML: this.data.text,
@@ -156,19 +169,21 @@ class AutomadBlockQuote {
 	}
 
 	renderSettings() {
-
 		const wrapper = document.createElement('div');
 		const inner = this._make('div', [this.CSS.settingsWrapper], {});
-		const capitalize = str => str[0].toUpperCase() + str.substr(1);
+		const capitalize = (str) => str[0].toUpperCase() + str.substr(1);
 
 		this.settings
-			.map(tune => {
+			.map((tune) => {
 				const el = this._make('div', this.CSS.settingsButton, {
 					innerHTML: tune.icon,
 					title: `${capitalize(tune.name)} alignment`,
 				});
 
-				el.classList.toggle(this.CSS.settingsButtonActive, tune.name === this.data.alignment);
+				el.classList.toggle(
+					this.CSS.settingsButtonActive,
+					tune.name === this.data.alignment
+				);
 				this.api.tooltip.onHover(el, tune.title, { placement: 'top' });
 				inner.appendChild(el);
 
@@ -181,16 +196,19 @@ class AutomadBlockQuote {
 					elements.forEach((el, i) => {
 						const { name } = this.settings[i];
 
-						el.classList.toggle(this.CSS.settingsButtonActive, name === this.data.alignment);
+						el.classList.toggle(
+							this.CSS.settingsButtonActive,
+							name === this.data.alignment
+						);
 					});
 				});
 			});
 
 		wrapper.appendChild(inner);
 		wrapper.appendChild(this.layoutSettings);
-		
+
 		return wrapper;
-	};
+	}
 
 	_toggleTune(tune) {
 		this.data.alignment = tune;
@@ -211,5 +229,4 @@ class AutomadBlockQuote {
 
 		return el;
 	}
-
 }

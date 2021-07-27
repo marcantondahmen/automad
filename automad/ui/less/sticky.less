@@ -1,42 +1,40 @@
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2019-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2019-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
+ * Licensed under the MIT license.
  */
-
 
 @am-sticky-padding: 0.5rem;
 
 .am-sticky {
-
 	background-color: @am-bg;
 	padding: @am-sticky-padding 0;
 	// Cover overlapping content (like selected panels) below with shadow when switcher is sticky.
@@ -49,36 +47,31 @@
 	}
 
 	@media (min-height: 700px) {
-
 		position: sticky;
 		top: 4.64rem;
 		z-index: 980;
 
 		html.am-scrolled-secondary &:after {
-			
 			content: '';
 			position: absolute;
 			bottom: -0.072rem;
 			width: 100vw;
 			margin-left: -@utility-container-padding-horizontal;
 			border-bottom: @am-hairline;
-			
+
 			@media (min-width: @utility-container-max-width) {
-				margin-left: ~"calc(((100vw - @{utility-container-max-width}) / -2) - @{utility-container-padding-horizontal})";
+				margin-left: ~'calc(((100vw - @{utility-container-max-width}) / -2) - @{utility-container-padding-horizontal})';
 			}
-			
+
 			@media (min-width: @breakpoint-large) {
-				width: ~"calc(100vw - @{am-sidebar-width})";
-				margin-left: ~"calc(((100vw - @{utility-container-max-width}) / -2) + @{am-sidebar-width} - @{utility-container-padding-horizontal})";
+				width: ~'calc(100vw - @{am-sidebar-width})';
+				margin-left: ~'calc(((100vw - @{utility-container-max-width}) / -2) + @{am-sidebar-width} - @{utility-container-padding-horizontal})';
 			}
-			
+
 			@media (min-width: @breakpoint-large) and (max-width: ((2 * @am-sidebar-width) + @utility-container-max-width)) {
-				width: ~"calc(100vw - @{am-sidebar-width})";
+				width: ~'calc(100vw - @{am-sidebar-width})';
 				margin-left: -@utility-container-padding-horizontal;
 			}
-			
 		}
-
 	}
-
 }

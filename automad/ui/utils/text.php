@@ -1,37 +1,37 @@
 <?php 
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
  *
- *	AUTOMAD
+ * AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
 
@@ -44,18 +44,18 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 
 
 /**
- *	The Text class provides all methods related to the text modules used in the UI. 
+ * The Text class provides all methods related to the text modules used in the UI. 
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
 
 class Text {
 	
 	
 	/**
-	 *	Array of UI text modules.
+	 * Array of UI text modules.
 	 */
 	
 	private static $modules = array();
@@ -64,7 +64,7 @@ class Text {
 	/**
 	 *  Short version of echo Text::get().
 	 *
-	 *	@param string $key
+	 * @param string $key
 	 */
 	
 	public static function e($key) {
@@ -75,9 +75,9 @@ class Text {
 	
 	
 	/**
-	 *	Parse the text modules file and store all modules in Text::$modules.
-	 *	In case AM_FILE_GUI_TRANSLATION is defined, the translated text modules 
-	 *	will be merged into Text:$modules.
+	 * Parse the text modules file and store all modules in Text::$modules.
+	 * In case AM_FILE_GUI_TRANSLATION is defined, the translated text modules 
+	 * will be merged into Text:$modules.
 	 */
 	
 	public static function parseModules() {
@@ -110,10 +110,10 @@ class Text {
 	
 	
 	/**
-	 *	Return the requested text module.
+	 * Return the requested text module.
 	 *
-	 *	@param string $key
-	 *	@return string The requested text module
+	 * @param string $key
+	 * @return string The requested text module
 	 */
 	
 	public static function get($key) {
@@ -126,9 +126,9 @@ class Text {
 
 
 	/**
-	 *	Return the modules as object to be used in heredoc strings.
+	 * Return the modules as object to be used in heredoc strings.
 	 * 
-	 *	@return object The modules array as object
+	 * @return object The modules array as object
 	 */
 
 	public static function getObject() {
@@ -139,9 +139,9 @@ class Text {
 
 
 	/**
-	 *	Return array only including editor text modlues.
+	 * Return array only including editor text modlues.
 	 *
-	 *	@return array The filtered modlues array
+	 * @return array The filtered modlues array
 	 */
 
 	public static function getEditorModules() {

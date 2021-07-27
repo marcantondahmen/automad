@@ -1,39 +1,38 @@
 <?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Components\Layout;
 
@@ -53,118 +52,88 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The page data layout component. 
+ * The page data layout component.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class PageData {
-
+	/**
+	 * The Automad object.
+	 */
+	private $Automad = null;
 
 	/**
-	 *	The Automad object.
+	 * All color keys.
 	 */
-
-	private $Automad = NULL;
-
+	private $colorKeys = null;
 
 	/**
-	 *	The page data array.
+	 * The page data array.
 	 */
-
-	private $data = NULL;
-
+	private $data = null;
 
 	/**
-	 *	A helper to use function within heredoc strings.
+	 * A helper to use function within heredoc strings.
 	 */
-
-	private $fn = NULL;
-
+	private $fn = null;
 
 	/**
-	 *	Page is hidden.
+	 * Page is hidden.
 	 */
-
 	private $hidden = false;
 
+	/**
+	 * The Page object.
+	 */
+	private $Page = null;
 
 	/**
-	 *	The Page object.
+	 * Page is private.
 	 */
-
-	private $Page = NULL;
-
-
-	/**
-	 *	Page is private.
-	 */
-
 	private $private = false;
 
-
 	/**
-	 *	The themelist object.
+	 * All settings variable keys.
 	 */
-
-	private $Themelist = NULL;
-
+	private $settingKeys = null;
 
 	/**
-	 *	The page URL.
+	 * All text content keys.
 	 */
-
-	private $url = NULL;
-
+	private $textKeys = null;
 
 	/**
-	 *	All text content keys.
+	 * The themelist object.
 	 */
-
-	private $textKeys = NULL;
-
+	private $Themelist = null;
 
 	/**
-	 *	All color keys.
+	 * All unused variable keys.
 	 */
-
-	private $colorKeys = NULL;
-
+	private $unusedDataKeys = null;
 
 	/**
-	 *	All settings variable keys.
+	 * The page URL.
 	 */
-
-	private $settingKeys = NULL;
-
+	private $url = null;
 
 	/**
-	 *	All unused variable keys.
-	 */
-
-	private $unusedDataKeys = NULL;
-
-
-	/**
-	 *	The page data layout constructor.
+	 * The page data layout constructor.
 	 *
-	 *	@param object $Automad
-	 *	@param object $Page
+	 * @param object $Automad
+	 * @param object $Page
 	 */
-
 	public function __construct($Automad, $Page) {
-
 		$this->Automad = $Automad;
 		$this->Page = $Page;
 		$this->data = Parse::textFile(Page::getPageFilePath($Page));
 		$this->url = $Page->get(AM_KEY_URL);
 		$this->Themelist = new Themelist();
 
-		$this->fn = function($expression) {
+		$this->fn = function ($expression) {
 			return $expression;
 		};
 
@@ -201,18 +170,14 @@ class PageData {
 		$this->colorKeys = Keys::filterColorKeys($keys);
 		$this->settingKeys = Keys::filterSettingKeys($keys);
 		$this->unusedDataKeys = array_diff(array_keys($this->data), $keys, Keys::$reserved);
-
 	}
 
-
 	/**
-	 *	Create the main page data form.
-	 * 
-	 *	@return string The rendered HTML
+	 * Create the main page data form.
+	 *
+	 * @return string The rendered HTML
 	 */
-
 	public function render() {
-
 		$fn = $this->fn;
 		$Theme = $this->Themelist->getThemeByKey($this->Page->get(AM_KEY_THEME));
 
@@ -225,47 +190,20 @@ class PageData {
 			data-uk-accordion="{duration: 200, showfirst: false, collapse: false}"
 			>
 				{$fn($this->settings())}
-				{$fn(Variables::render(
-					$this->Automad,
-					$this->textKeys,
-					$this->data,
-					$Theme,
-					Text::get('page_vars_content')
-				))}
-				{$fn(Variables::render(
-					$this->Automad,
-					$this->colorKeys,
-					$this->data,
-					$Theme,
-					Text::get('page_vars_color')
-				))}
-				{$fn(Variables::render(
-					$this->Automad,
-					$this->settingKeys,
-					$this->data,
-					$Theme,
-					Text::get('page_vars_settings')
-				))}
-				{$fn(UnusedVariables::render(
-					$this->Automad,
-					$this->unusedDataKeys,
-					$this->data,
-					Text::get('page_vars_unused')
-				))}
+				{$fn(Variables::render($this->Automad, $this->textKeys, $this->data, $Theme, Text::get('page_vars_content')))}
+				{$fn(Variables::render($this->Automad, $this->colorKeys, $this->data, $Theme, Text::get('page_vars_color')))}
+				{$fn(Variables::render($this->Automad, $this->settingKeys, $this->data, $Theme, Text::get('page_vars_settings')))}
+				{$fn(UnusedVariables::render($this->Automad, $this->unusedDataKeys, $this->data, Text::get('page_vars_unused')))}
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The inpage link.
+	 * The inpage link.
 	 *
-	 *	@return string the rendered inpage link HTML
+	 * @return string the rendered inpage link HTML
 	 */
-
 	private function inpage() {
-
 		if (AM_HEADLESS_ENABLED) {
 			return '';
 		}
@@ -279,7 +217,7 @@ HTML;
 
 		return <<< HTML
 			<a 
-			href="{$fn(AM_BASE_INDEX .$this->url)}" 
+			href="{$fn(AM_BASE_INDEX . $this->url)}" 
 			class="uk-button uk-button-mini uk-margin-small-top uk-text-truncate uk-display-inline-block" 
 			title="{$fn(Text::get('btn_inpage_edit'))}" 
 			data-uk-tooltip="pos:'bottom'"
@@ -287,18 +225,14 @@ HTML;
 				$name
 			</a>
 HTML;
-
 	}
 
-
 	/**
-	 *	The prefix field.
+	 * The prefix field.
 	 *
-	 *	@return string the rendered prefix field.
+	 * @return string the rendered prefix field.
 	 */
-
 	private function prefix() {
-
 		if ($this->url == '/') {
 			return '';
 		}
@@ -319,18 +253,14 @@ HTML;
 				/>
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The redirect field.
+	 * The redirect field.
 	 *
-	 *	@return string the rendered redirect field.
+	 * @return string the rendered redirect field.
 	 */
-
 	private function redirect() {
-
 		if ($this->url == '/') {
 			return '';
 		}
@@ -343,18 +273,14 @@ HTML;
 			false,
 			Text::get('page_redirect')
 		);
-
 	}
 
-
 	/**
-	 *	The select template modal and button.
-	 * 
-	 *	@return string the rendered select template modal and button HTML
+	 * The select template modal and button.
+	 *
+	 * @return string the rendered select template modal and button HTML
 	 */
-
 	private function selectTemplate() {
-
 		if (AM_HEADLESS_ENABLED) {
 			return '';
 		}
@@ -363,13 +289,11 @@ HTML;
 		$themePath = $this->Automad->Shared->get(AM_KEY_THEME);
 
 		if ($this->data[AM_KEY_THEME]) {
-
 			$themePath = $this->data[AM_KEY_THEME];
 
 			if ($Theme = $this->Themelist->getThemeByKey($this->data[AM_KEY_THEME])) {
 				$themeName = $Theme->name . ' / ';
 			}
-
 		}
 
 		$template = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $themePath . '/' . $this->Page->template . '.php';
@@ -391,13 +315,7 @@ HTML;
 						{$fn(Text::get('page_theme_template'))}
 						<a href="#" class="uk-modal-close uk-close"></a>
 					</div>
-					{$fn(SelectTemplate::render(
-						$this->Automad,
-						$this->Themelist,
-						'theme_template', 
-						$this->data[AM_KEY_THEME], 
-						$this->Page->template
-					))} 
+					{$fn(SelectTemplate::render($this->Automad, $this->Themelist, 'theme_template', $this->data[AM_KEY_THEME], $this->Page->template))} 
 					<div class="uk-modal-footer uk-text-right">
 						<button class="uk-modal-close uk-button">
 							<i class="uk-icon-close"></i>&nbsp;
@@ -433,18 +351,14 @@ HTML;
 				</button>
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The settings section.
-	 * 
-	 *	@return string the rendered settings section HTML
+	 * The settings section.
+	 *
+	 * @return string the rendered settings section HTML
 	 */
-
 	private function settings() {
-
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -457,28 +371,24 @@ HTML;
 				{$fn($this->prefix())}
 				{$fn($this->redirect())}
 				{$fn(Field::render(
-					$this->Automad,
-					AM_KEY_DATE,
-					$this->Page->get(AM_KEY_DATE),
-					false,
-					false,
-					Text::get('page_date')
-				))}
+			$this->Automad,
+			AM_KEY_DATE,
+			$this->Page->get(AM_KEY_DATE),
+			false,
+			false,
+			Text::get('page_date')
+		))}
 				{$fn($this->tags())}
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The tags field.
-	 * 
-	 *	@return string the rendered tags field
+	 * The tags field.
+	 *
+	 * @return string the rendered tags field
 	 */
-
 	private function tags() {
-
 		$tags = Parse::csv(htmlspecialchars($this->data[AM_KEY_TAGS]));
 		sort($tags);
 
@@ -521,18 +431,14 @@ HTML;
 				/>
 			</div>
 HTML;
-
 	}
 
-
 	/**
-	 *	The title field.
-	 * 
-	 *	@return string the rendered title field
+	 * The title field.
+	 *
+	 * @return string the rendered title field
 	 */
-
 	private function title() {
-
 		$fn = $this->fn;
 
 		return	<<<HTML
@@ -552,8 +458,5 @@ HTML;
 				{$fn($this->inpage())}
 			</div>
 HTML;
-
 	}
-
-
 }
