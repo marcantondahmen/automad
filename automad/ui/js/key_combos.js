@@ -54,7 +54,7 @@
 							break;
 						case 'j':
 							$('.am-navbar-jump [name="target"]').blur().focus();
-							break;
+							return false;
 					}
 				}
 
