@@ -234,7 +234,7 @@ class Search {
 
 		preg_match_all(
 			'/(?P<contextBefore>.{0,20})(?P<match>' . $this->searchValue . ')(?P<contextAfter>.{0,20})/' . $this->regexFlags,
-			strip_tags($value),
+			$value,
 			$matches,
 			PREG_SET_ORDER
 		);
