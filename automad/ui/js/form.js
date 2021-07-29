@@ -48,49 +48,50 @@
 			 * Important attributes to handle forms.
 			 *
 			 *
-			 * 	FORM ATTRIBUTES:
+			 * FORM ATTRIBUTES:
 			 *
-			 * 	data-am-controller="controller"		Generally, all forms with a [data-am-controller] attribute will be sumbitted to their AJAX controller,
-			 * 									specified in "data-am-controller".
-			 * 									For example:
-			 * 										"<form data-am-controller="Page::data"></form>"
-			 * 									will submit the form to "?controller=Page::data"
+			 * data-am-controller="controller"		Generally, all forms with a [data-am-controller] attribute will be 
+			 *										sumbitted to their AJAX controller, specified in "data-am-controller".
+
+			 *										For example:
+			 *										"<form data-am-controller="Page::data"></form>"
+			 *										will submit the form to "?controller=Page::data"
 			 *
-			 *      								Note that a page can only (!) have once a controller with the same name.
-			 *      								Having multiple forms with the same controller confuses button and watch states.
+			 *										Note that a page can only (!) have once a controller with the same name.
+			 *										Having multiple forms with the same controller confuses button and watch states.
 			 *
-			 * 	data-am-dashboard="url"				The URL of the dashboard.
-			 * 										This is required to add a base URL to AJAX requests in in-page editing.
+			 * data-am-dashboard="url"				The URL of the dashboard.
+			 *										This is required to add a base URL to AJAX requests in in-page editing.
 			 *
-			 * 	data-am-url="page"					To notify the AJAX controller, that the request belongs to a certain page, the URL has to be
-			 * 									included in the request.
-			 * 									Therefore the data attribute "data-am-url" must be added to the form tag.
+			 * data-am-url="page"					To notify the AJAX controller, that the request belongs to a certain page, 
+			 *										the URL has to be included in the request.
+			 *										Therefore the data attribute "data-am-url" must be added to the form tag.
 			 *
-			 * data-am-init						Automatically submit form when a page gets loaded.
+			 * data-am-init							Automatically submit form when a page gets loaded.
 			 *
-			 * 	data-am-auto-submit					Automatically submit form on changes.
+			 * data-am-auto-submit					Automatically submit form on changes.
 			 *
-			 * 	data-am-close-on-success="#form"	Closes a modal window with the given ID on success.
+			 * data-am-close-on-success="#form"		Closes a modal window with the given ID on success.
 			 *
-			 * 	data-am-confirm="Text..."			Confirm submission
+			 * data-am-confirm="Text..."			Confirm submission
 			 *
-			 * 	data-am-init-on="Event"				Submit a form on any given event
+			 * data-am-init-on="Event"				Submit a form on any given event
 			 *
 			 *
-			 * 	INPUT ATTRIBUTES:
+			 * INPUT ATTRIBUTES:
 			 *
 			 * data-am-enter="#button"				Trigger click event on pressing the enter key. Must be added to an input field.
 			 *
-			 *  data-am-watch-exclude				Exclude field from being watched for changes.
+			 * data-am-watch-exclude				Exclude field from being watched for changes.
 			 *
-			 * 	data-am-modal-on-change="#modal"	Opens a modal on changes.
+			 * data-am-modal-on-change="#modal"		Opens a modal on changes.
 			 *
 			 *
-			 * 	BUTTON ATTRIBUTES:
+			 * BUTTON ATTRIBUTES:
 			 *
 			 * data-am-submit="controller"			A button or link with that attribute will be used as submit button for a form having a
-			 * 										"data-am-controller" attribute set to the given controller value.
-			 * 										Note that those buttons automatically get disabled on load and re-enable on changes.
+			 *										"data-am-controller" attribute set to the given controller value.
+			 *										Note that those buttons automatically get disabled on load and re-enable on changes.
 			 */
 
 			controller: 'data-am-controller',
@@ -111,33 +112,33 @@
 		ajaxPost: function (e) {
 			/*
 			 * Generally, all forms with a [data-am-controller] attribute will be sumbitted to their AJAX controller,
-			 * 	specified in "data-am-controller".
+			 * specified in "data-am-controller".
 			 *
-			 * 	For example:
-			 *  "<form data-am-controller="Page::data"></form>"
-			 *  will submit the form to "?controller=Page::data"
+			 * For example:
+			 * "<form data-am-controller="Page::data"></form>"
+			 * will submit the form to "?controller=Page::data"
 			 *
-			 * 	Server Data:
-			 * 	The function expects the data from the server to be in JSON format.
+			 * Server Data:
+			 * The function expects the data from the server to be in JSON format.
 			 *
-			 *  1.	data.redirect
-			 *   	will redirect the page to the given URL.
+			 * 1.	data.redirect
+			 *		will redirect the page to the given URL.
 			 *
-			 * 	2.	data.html
-			 * 		if any string in data.html gets returned from the server,
-			 * 		the form's (inner) HTML will be replaced.
+			 * 2.	data.html
+			 *		if any string in data.html gets returned from the server,
+			 *		the form's (inner) HTML will be replaced.
 			 *
-			 *  3.	data.error
-			 *   	will alert the error message in a notification box.
+			 * 3.	data.error
+			 *		will alert the error message in a notification box.
 			 *
-			 * 	4.	data.success
-			 * 		will alert the success message in a notification box.
+			 * 4.	data.success
+			 *		will alert the success message in a notification box.
 			 *
-			 * 	5.	data.reload
-			 * 		will reload the current page.
+			 * 5.	data.reload
+			 *		will reload the current page.
 			 *
-			 * 	6.	data.trigger
-			 * 		will trigger an event.
+			 * 6.	data.trigger
+			 *		will trigger an event.
 			 */
 
 			var f = Automad.form,
