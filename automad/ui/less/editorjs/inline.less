@@ -43,7 +43,6 @@
 		background-color: @am-bg;
 		border: @am-hairline !important;
 		border-radius: @am-radius;
-		overflow: hidden;
 		.shadow;
 
 		@media (max-width: @am-blocks-breakpoint-small-max) {
@@ -55,9 +54,13 @@
 	}
 
 	& .ce-inline-toolbar__toggler-and-button-wrapper,
-	& .ce-inline-toolbar__actions,
 	& .ce-conversion-toolbar {
 		overflow: hidden;
+	}
+
+	& .ce-inline-toolbar__toggler-and-button-wrapper,
+	& .ce-inline-toolbar__actions,
+	& .ce-conversion-toolbar {
 		padding: 0;
 		background-color: transparent;
 		border: none;
