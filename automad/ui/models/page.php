@@ -38,6 +38,7 @@ namespace Automad\UI\Models;
 
 use Automad\Core\Cache;
 use Automad\Core\Str;
+use Automad\UI\Models\Search\FileKeys;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\UICache;
 
