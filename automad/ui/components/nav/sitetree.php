@@ -38,7 +38,7 @@ namespace Automad\UI\Components\Nav;
 
 use Automad\Core\Request;
 use Automad\Core\Selection;
-use Automad\UI\Controllers\Page;
+use Automad\UI\Models\Page;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

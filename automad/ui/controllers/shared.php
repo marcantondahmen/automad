@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Controllers;
 
@@ -46,26 +45,20 @@ use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The Shared data controller.
+ * The Shared data controller.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Shared {
-
-
 	/**
-	 *	Send form when there is no posted data in the request or save data if there is.
+	 * Send form when there is no posted data in the request or save data if there is.
 	 *
-	 *	@return array the $output array
+	 * @return array the $output array
 	 */
-
 	public static function data() {
-
 		$Automad = UICache::get();
 		$output = array();
 
@@ -79,24 +72,19 @@ class Shared {
 		}
 
 		return $output;
-
 	}
 
-
 	/**
-	 *	Save shared data.
+	 * Save shared data.
 	 *
-	 *	@param object $Automad
-	 *	@param array $data
-	 *	@return array the $output array
+	 * @param object $Automad
+	 * @param array $data
+	 * @return array the $output array
 	 */
-
 	private static function save($Automad, $data) {
-
 		$output = array();
 
 		if (is_writable(AM_FILE_SHARED_DATA)) {
-
 			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 			Cache::clear();
 
@@ -111,6 +99,4 @@ class Shared {
 
 		return $output;
 	}
-	
-
 }

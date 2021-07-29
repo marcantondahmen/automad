@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Controllers;
 
@@ -45,35 +44,27 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The Config controller.
+ * The Config controller.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Config {
-
-
 	/**
-	 *	Save the posted configuartion to the config.php file.
+	 * Save the posted configuartion to the config.php file.
 	 *
-	 *	@return array the $output array
+	 * @return array the $output array
 	 */
-
 	public static function save() {
-
 		$output = array();
 
 		if ($json = Request::post('json')) {
-
 			$config = json_decode($json, true);
 
 			if (json_last_error() === JSON_ERROR_NONE) {
-
-				// Make sure 'php' and other PHP extensions like 'php5' are removed 
+				// Make sure 'php' and other PHP extensions like 'php5' are removed
 				// from the list of allowed file types.
 				if (!empty($config['AM_ALLOWED_FILE_TYPES'])) {
 					$config['AM_ALLOWED_FILE_TYPES'] = trim(preg_replace('/,?\s*php\w?/is', '', $config['AM_ALLOWED_FILE_TYPES']), ', ');
@@ -85,15 +76,10 @@ class Config {
 				} else {
 					$output['error'] = Text::get('error_permission') . '<br>' . AM_CONFIG;
 				}
-
 			} else {
-
 				$output['error'] = Text::get('error_json');
-				
 			}
-
 		} else {
-
 			$config = CoreConfig::read();
 			$json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
@@ -105,22 +91,17 @@ class Config {
 						>$json</textarea>
 					</div>
 HTML;
-
 		}
 
 		return $output;
-
 	}
 
-
 	/**
-	 *	Update a single configuration item.
+	 * Update a single configuration item.
 	 *
-	 *	@return array the $output array
+	 * @return array the $output array
 	 */
-
 	public static function update() {
-
 		$output = array();
 
 		// Get config from json file, if exsiting.
@@ -128,10 +109,8 @@ HTML;
 		ksort($config);
 
 		if ($type = Request::post('type')) {
-
 			// Cache
 			if ($type == 'cache') {
-
 				$cache = Request::post('cache');
 
 				if (isset($cache['enabled'])) {
@@ -146,7 +125,6 @@ HTML;
 
 			// Language
 			if ($type == 'language') {
-
 				$language = Request::post('language');
 				$config['AM_FILE_GUI_TRANSLATION'] = $language;
 				$output['redirect'] = '#3';
@@ -155,7 +133,6 @@ HTML;
 
 			// Headless
 			if ($type == 'headless') {
-
 				if (isset($_POST['headless'])) {
 					$config['AM_HEADLESS_ENABLED'] = true;
 				} else {
@@ -168,7 +145,6 @@ HTML;
 
 			// Debugging
 			if ($type == 'debug') {
-
 				if (isset($_POST['debug'])) {
 					$config['AM_DEBUG_ENABLED'] = true;
 				} else {
@@ -178,18 +154,13 @@ HTML;
 		}
 
 		if (CoreConfig::write($config)) {
-
 			Debug::log($config, 'Updated config file');
 			$output['success'] = Text::get('success_config_update');
 			Cache::clear();
 		} else {
-
 			$output['error'] = Text::get('error_permission') . '<br>' . AM_CONFIG;
 		}
 
 		return $output;
-
 	}
-
-
 }

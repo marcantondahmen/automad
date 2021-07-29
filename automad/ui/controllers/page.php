@@ -39,11 +39,8 @@ namespace Automad\UI\Controllers;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\Core\Str;
 use Automad\UI\Components\Layout\PageData;
-use Automad\UI\Models\Replacement;
-use Automad\UI\Models\Search;
-use Automad\UI\Models\Search\FileKeys;
+use Automad\UI\Models\Page as ModelsPage;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -74,55 +71,19 @@ class Page {
 
 			if (is_array($subpage) && !empty($subpage['title'])) {
 				// Check if the current page's directory is writable.
-				if (is_writable(dirname(self::getPageFilePath($Page)))) {
+				if (is_writable(dirname(ModelsPage::getPageFilePath($Page)))) {
 					Debug::log($Page->url, 'page');
 					Debug::log($subpage, 'new subpage');
 
 					// The new page's properties.
 					$title = $subpage['title'];
 					$themeTemplate = self::getTemplateNameFromArray($subpage, 'theme_template');
-					$theme = dirname($themeTemplate);
-					$template = basename($themeTemplate);
+					$isPrivate = (!empty($subpage['private']));
 
-					// Save new subpage below the current page's path.
-					$subdir = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
-
-					// If $subdir is an empty string after sanitizing, set it to 'untitled'.
-					if (!$subdir) {
-						$subdir = 'untitled';
-					}
-
-					// Add trailing slash.
-					$subdir .= '/';
-
-					// Build path.
-					$newPagePath = $Page->path . $subdir;
-					$suffix = FileSystem::uniquePathSuffix($newPagePath);
-					$newPagePath = FileSystem::appendSuffixToPath($newPagePath, $suffix);
-
-					// Data. Also directly append possibly existing suffix to title here.
-					$data = array(
-						AM_KEY_TITLE => $title . ucwords(str_replace('-', ' ', $suffix)),
-						AM_KEY_PRIVATE => (!empty($subpage['private']))
-					);
-
-					if ($theme != '.') {
-						$data[AM_KEY_THEME] = $theme;
-					}
-
-					// Set date.
-					$data[AM_KEY_DATE] = date('Y-m-d H:i:s');
-
-					// Build the file name and save the txt file.
-					$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
-					FileSystem::writeData($data, $file);
-
-					$output['redirect'] = self::contextUrlByPath($newPagePath);
-
-					Cache::clear();
+					$output['redirect'] = ModelsPage::add($Page, $title, $themeTemplate, $isPrivate);
 				} else {
 					$output['error'] = Text::get('error_permission') .
-									   '<p>' . dirname(self::getPageFilePath($Page)) . '</p>';
+									   '<p>' . dirname(ModelsPage::getPageFilePath($Page)) . '</p>';
 				}
 			} else {
 				$output['error'] = Text::get('error_page_title');
@@ -148,7 +109,7 @@ class Page {
 			// If the posted form contains any "data", save the form's data to the page file.
 			if ($data = Request::post('data')) {
 				// Save page and replace $output with the returned $output array (error or redirect).
-				$output = self::save($Page, $url, $data);
+				$output = self::save($Page, $url, $data, Request::post('prefix'));
 			} else {
 				// If only the URL got submitted, just get the form ready.
 				$PageData = new PageData($Automad, $Page);
@@ -173,14 +134,9 @@ class Page {
 		// Validate $_POST.
 		if ($url && ($Page = $Automad->getPage($url)) && $url != '/' && $title) {
 			// Check if the page's directory and parent directory are wirtable.
-			if (is_writable(dirname(self::getPageFilePath($Page)))
-				&& is_writable(dirname(dirname(self::getPageFilePath($Page))))) {
-				FileSystem::movePageDir(
-					$Page->path,
-					'..' . AM_DIR_TRASH . dirname($Page->path),
-					self::extractPrefixFromPath($Page->path),
-					$title
-				);
+			if (is_writable(dirname(ModelsPage::getPageFilePath($Page)))
+				&& is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
+				ModelsPage::delete($Page, $title);
 
 				$output['redirect'] = '?view=Page&url=' . urlencode($Page->parentUrl);
 				Debug::log($Page->url, 'deleted');
@@ -188,7 +144,7 @@ class Page {
 				Cache::clear();
 			} else {
 				$output['error'] = Text::get('error_permission') .
-								   '<p>' . dirname(dirname(self::getPageFilePath($Page))) . '</p>';
+								   '<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>';
 			}
 		} else {
 			$output['error'] = Text::get('error_page_not_found');
@@ -211,21 +167,7 @@ class Page {
 			if ($url != '/' && ($Page = $Automad->getPage($url))) {
 				// Check permissions.
 				if (is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
-					// Build path and suffix.
-					$duplicatePath = $Page->path;
-					$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
-					$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
-
-					// Copy files.
-					FileSystem::copyPageFiles($Page->path, $duplicatePath);
-
-					// Append suffix to title variable.
-					FileSystem::appendSuffixToTitle($duplicatePath, $suffix);
-
-					// Redirect to new page.
-					$output['redirect'] = self::contextUrlByPath($duplicatePath);
-
-					Cache::clear();
+					$output['redirect'] = ModelsPage::duplicate($Page);
 				} else {
 					$output['error'] = Text::get('error_permission');
 				}
@@ -235,26 +177,6 @@ class Page {
 		}
 
 		return $output;
-	}
-
-	/**
-	 * Extract the deepest directory's prefix from a given path.
-	 *
-	 * @param string $path
-	 * @return string Prefix
-	 */
-	public static function extractPrefixFromPath($path) {
-		return substr(basename($path), 0, strpos(basename($path), '.'));
-	}
-
-	/**
-	 * Return the full file system path of a page's data file.
-	 *
-	 * @param object $Page
-	 * @return string The full file system path
-	 */
-	public static function getPageFilePath($Page) {
-		return FileSystem::fullPagePath($Page->path) . $Page->template . '.' . AM_FILE_EXT_DATA;
 	}
 
 	/**
@@ -281,24 +203,24 @@ class Page {
 				// Check if new parent directory is writable.
 				if (is_writable(FileSystem::fullPagePath($dest->path))) {
 					// Check if the current page's directory and parent directory is writable.
-					if (is_writable(dirname(self::getPageFilePath($Page)))
-						&& is_writable(dirname(dirname(self::getPageFilePath($Page))))) {
+					if (is_writable(dirname(ModelsPage::getPageFilePath($Page)))
+						&& is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
 						// Move page
-						$newPagePath = self::moveDirAndUpdateLinks(
+						$newPagePath = ModelsPage::moveDirAndUpdateLinks(
 							$Page,
 							$dest->path,
-							self::extractPrefixFromPath($Page->path),
+							ModelsPage::extractPrefixFromPath($Page->path),
 							$title
 						);
 
-						$output['redirect'] = self::contextUrlByPath($newPagePath);
+						$output['redirect'] = ModelsPage::contextUrlByPath($newPagePath);
 						Debug::log($Page->path, 'page');
 						Debug::log($dest->path, 'destination');
 
 						Cache::clear();
 					} else {
 						$output['error'] = Text::get('error_permission') .
-										   '<p>' . dirname(dirname(self::getPageFilePath($Page))) . '</p>';
+										   '<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>';
 					}
 				} else {
 					$output['error'] = Text::get('error_permission') .
@@ -313,40 +235,7 @@ class Page {
 	}
 
 	/**
-	 * Move a page directory and update all related links.
-	 *
-	 * @param \Automad\Core\Page $Page
-	 * @param string $destPath
-	 * @param string $prefix
-	 * @param string $title
-	 * @return string the new page path
-	 */
-	protected static function moveDirAndUpdateLinks($Page, $destPath, $prefix, $title) {
-		$newPagePath = FileSystem::movePageDir(
-			$Page->path,
-			$destPath,
-			$prefix,
-			$title
-		);
-
-		self::updatePageLinks($Page, $newPagePath);
-
-		return $newPagePath;
-	}
-
-	/**
-	 * Return updated view URL based on $path.
-	 *
-	 * @param string $path
-	 * @return string The view URL to the new page
-	 */
-	private static function contextUrlByPath($path) {
-		// Rebuild Automad object, since the file structure has changed.
-		return '?view=Page&url=' . urlencode(self::urlByPath(UICache::rebuild(), $path));
-	}
-
-	/**
-	 * 	Get the theme/template file from posted data or return a default template name
+	 * 	Get the theme/template file from posted data or return a default template name.
 	 *
 	 * @param array $array
 	 * @param string $key
@@ -372,9 +261,10 @@ class Page {
 	 * @param object $Page
 	 * @param string $url
 	 * @param array $data
-	 * @return array $output (AJAX response)
+	 * @param string $prefix
+	 * @return array $output
 	 */
-	private static function save($Page, $url, $data) {
+	private static function save($Page, $url, $data, $prefix) {
 		$output = array();
 
 		// A title is required for building the page's path.
@@ -384,99 +274,19 @@ class Page {
 			// Since the directory of the homepage is just "pages" and its parent directory
 			// is the base directory, it should not be necessary to set the base directoy permissions
 			// to 777, since the homepage directory will never be renamed or moved.
-			if ($url =='/' || is_writable(dirname(dirname(self::getPageFilePath($Page))))) {
+			if ($url =='/' || is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
 				// Check if the page's file and the page's directory is writable.
-				if (is_writable(self::getPageFilePath($Page))
-					&& is_writable(dirname(self::getPageFilePath($Page)))) {
-					// Trim data.
-					$data = array_map('trim', $data);
-
-					// Remove empty data.
-					// Needs to be done here, to be able to simply test for empty title field.
-					$data = array_filter($data, 'strlen');
-
-					// Check if privacy has changed to trigger a reload.
-					if (isset($data[AM_KEY_PRIVATE])
-						&& $data[AM_KEY_PRIVATE]
-						&& $data[AM_KEY_PRIVATE] != 'false') {
-						$private = true;
-					} else {
-						$private = false;
-					}
-
-					$changedPrivacy = ($private != $Page->private);
-
+				if (is_writable(ModelsPage::getPageFilePath($Page))
+					&& is_writable(dirname(ModelsPage::getPageFilePath($Page)))) {
 					// The theme and the template get passed as theme/template.php combination separate
 					// form $_POST['data']. That information has to be parsed first and "subdivided".
 					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
-					// Get correct theme name.
-					// If the theme is not set and there is no slash passed within 'theme_template',
-					// the resulting dirname is just a dot.
-					// In that case, $data[AM_KEY_THEME] gets removed (no theme - use site theme).
-					if (dirname($themeTemplate) != '.') {
-						$data[AM_KEY_THEME] = dirname($themeTemplate);
-					} else {
-						unset($data[AM_KEY_THEME]);
-					}
-
-					// Delete old (current) file, in case, the template has changed.
-					unlink(self::getPageFilePath($Page));
-
-					// Build the path of the data file by appending
-					// the basename of 'theme_template' to $Page->path.
-					$newTemplate = Str::stripEnd(basename($themeTemplate), '.php');
-					$newPageFile = FileSystem::fullPagePath($Page->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
-
-					// Save new file within current directory, even when the prefix/title changed.
-					// Renaming/moving is done in a later step, to keep files and subpages
-					// bundled to the current text file.
-					FileSystem::writeData($data, $newPageFile);
-
-					// If the page is not the homepage,
-					// rename the page's directory including all children and all files, after
-					// saving according to the (new) title and prefix.
-					// FileSystem::movePageDir() will check if renaming is needed, and will
-					// skip moving, when old and new path are equal.
-					if ($url != '/') {
-						$prefix = Request::post('prefix');
-
-						$newPagePath = self::moveDirAndUpdateLinks(
-							$Page,
-							dirname($Page->path),
-							$prefix,
-							$data[AM_KEY_TITLE]
-						);
-					} else {
-						// In case the page is the home page, the path is just '/'.
-						$newPagePath = '/';
-					}
-
-					// Check whether the dashboard has to be redirected.
-					// Only in case the page path (title and prefix) or the theme/template has changed,
-					// the page has to be redirected to update the site tree and variables.
-					$newTheme = '';
-
-					if (isset($data[AM_KEY_THEME])) {
-						$newTheme = $data[AM_KEY_THEME];
-					}
-
-					$currentTheme = '';
-
-					if (isset($Page->data[AM_KEY_THEME])) {
-						$currentTheme = $Page->data[AM_KEY_THEME];
-					}
-
-					if (($Page->path != $newPagePath)
-						|| ($currentTheme != $newTheme)
-						|| ($Page->template != $newTemplate)
-						|| $changedPrivacy) {
-						$output['redirect'] = self::contextUrlByPath($newPagePath);
+					if ($redirectUrl = ModelsPage::save($Page, $url, $data, $themeTemplate, $prefix)) {
+						$output['redirect'] = $redirectUrl;
 					} else {
 						$output['success'] = Text::get('success_saved');
 					}
-
-					Cache::clear();
 				} else {
 					$output['error'] = Text::get('error_permission');
 				}
@@ -489,74 +299,5 @@ class Page {
 		}
 
 		return $output;
-	}
-
-	/**
-	 * Update all file and page links based on a new path.
-	 *
-	 * @param \Automad\Core\Page $Page
-	 * @param string $path
-	 * @param mixed $newPath
-	 * @return boolean true on success
-	 */
-	private static function updatePageLinks($Page, $newPath) {
-		Cache::clear();
-
-		$Automad = UICache::rebuild();
-		$oldUrl = $Page->origUrl;
-		$oldPath = $Page->path;
-
-		if ($oldPath == $newPath) {
-			return false;
-		}
-
-		$newUrl = self::urlByPath($Automad, $newPath);
-
-		$replace = array(
-			rtrim(AM_DIR_PAGES . $oldPath, '/') => rtrim(AM_DIR_PAGES . $newPath, '/'),
-			$oldUrl => $newUrl
-		);
-
-		foreach ($replace as $old => $new) {
-			$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
-			$replaceValue = $new;
-
-			$Search = new Search($Automad, $searchValue, true, false);
-			$fileResultsArray = $Search->searchPerFile();
-			$fileKeysArray = array();
-
-			foreach ($fileResultsArray as $FileResults) {
-				$keys = array();
-
-				foreach ($FileResults->fieldResultsArray as $FieldResults) {
-					$keys[] = $FieldResults->key;
-				}
-
-				$fileKeysArray[] = new FileKeys($FileResults->path, $keys);
-			}
-
-			$Replacement = new Replacement($searchValue, $replaceValue, true, false);
-			$Replacement->replaceInFiles($fileKeysArray);
-		}
-
-		Cache::clear();
-
-		return true;
-	}
-
-	/**
-	 * Return updated page URL based on $path.
-	 *
-	 * @param \Automad\Core\Automad $Automad
-	 * @param string $path
-	 * @return string The page URL
-	 */
-	private static function urlByPath($Automad, $path) {
-		// Find new URL and return redirect query string.
-		foreach ($Automad->getCollection() as $url => $Page) {
-			if ($Page->path == $path) {
-				return $url;
-			}
-		}
 	}
 }

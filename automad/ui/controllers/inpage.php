@@ -41,6 +41,7 @@ use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\UI\Components\InPage\Edit;
+use Automad\UI\Models\Page;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\UICache;
 
@@ -53,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class InPage extends Page {
+class InPage {
 	/**
 	 * Handle AJAX request for editing a data variable in-page context.
 	 *
@@ -78,18 +79,18 @@ class InPage extends Page {
 				// Else send back form fields.
 				if ($postData && is_array($postData)) {
 					// Merge and save data.
-					$data = array_merge(Parse::textFile(self::getPageFilePath($Page)), $postData);
-					FileSystem::writeData($data, self::getPageFilePath($Page));
+					$data = array_merge(Parse::textFile(Page::getPageFilePath($Page)), $postData);
+					FileSystem::writeData($data, Page::getPageFilePath($Page));
 					Debug::log($data, 'saved data');
-					Debug::log(self::getPageFilePath($Page), 'data file');
+					Debug::log(Page::getPageFilePath($Page), 'data file');
 
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
 					if (!empty($postData[AM_KEY_TITLE]) && $Page->url != '/') {
 						// Move directory.
-						$newPagePath = self::moveDirAndUpdateLinks(
+						$newPagePath = Page::moveDirAndUpdateLinks(
 							$Page,
 							dirname($Page->path),
-							self::extractPrefixFromPath($Page->path),
+							Page::extractPrefixFromPath($Page->path),
 							$postData[AM_KEY_TITLE]
 						);
 

@@ -1,317 +1,136 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2016-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
 use Automad\UI\Components\Grid\Users;
-use Automad\UI\Utils\FileSystem;
+use Automad\UI\Models\Accounts as ModelsAccounts;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The Accounts class provides all methods for creating and loading user accounts. 
+ * The Accounts class provides all methods for creating and loading user accounts.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
 class Accounts {
-	
-	
 	/**
-	 *	Add user account based on $_POST.
+	 * Add user account based on $_POST.
 	 *
-	 *	@return array $output (error/success)
+	 * @return array $output (error/success)
 	 */
-	
 	public static function add() {
-		
 		$output = array();
+
 		$username = Request::post('username');
 		$password1 = Request::post('password1');
 		$password2 = Request::post('password2');
 
-		if ($username && $password1 && $password2) {
-	
-			// Check if password1 equals password2.
-			if ($password1 == $password2) {
-		
-				// Get all accounts from file.
-				$accounts = self::get();
-		
-				// Check, if user exists already.
-				if (!isset($accounts[$username])) {
-		
-					// Add user to accounts array.
-					$accounts[$username] = self::passwordHash($password1);
-					ksort($accounts);
-				
-					// Write array with all accounts back to file.
-					if (self::write($accounts)) {
-				
-						$output['success'] = Text::get('success_added') . ' "' . $username . '"';
-				
-					} else {
-	
-						$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
-				
-					}
-			
-				} else {
-		
-					$output['error'] = '"' . $username . '" ' . Text::get('error_existing');	
-			
-				}
-		
-			} else {
-		
-				$output['error'] = Text::get('error_password_repeat');
-		
-			}
-	
-		} else {
-	
-			$output['error'] = Text::get('error_form');
-	
-		}
-		
-		return $output;
-		
-	}
-	
-	
-	/**
-	 *	Delete one ore more user accounts.
-	 *
-	 *	@param array $users
-	 *	@return array $output (error/success)
-	 */
-	
-	public static function delete($users) {
-	
-		$output = array();
-	
-		if (is_array($users)) {
-			
-			// Only delete users from list, if accounts.txt is writable.
-			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
-			// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
-			// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
-			if (is_writable(AM_FILE_ACCOUNTS)) {
-				
-				$accounts = self::get();
-				$deleted = array();
-	
-				foreach ($users as $userToDelete) {
-		
-					if (isset($accounts[$userToDelete])) {
-			
-						unset($accounts[$userToDelete]);
-						$deleted[] = $userToDelete;
-			
-					}
-		
-				}
+		$output['error'] = ModelsAccounts::add($username, $password1, $password2);
 
-				// Write array with all accounts back to file.
-				if (self::write($accounts)) {
-					$output['success'] = Text::get('success_remove') . ' "' . implode('", "', $deleted) . '"';
-				}
-		
-			} else {
-		
-				$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
-		
-			}
-			
+		if (!$output['error']) {
+			$output['success'] = Text::get('success_added') . ' "' . $username . '"';
 		}
-	
+
 		return $output;
-		
 	}
 
-
 	/**
-	 *	Optionally remove posted accounts and 
-	 *	return the accounts grid.
+	 * Optionally remove posted accounts and
+	 * return the accounts grid.
 	 *
-	 *	@return array $output
+	 * @return array $output
 	 */
-
 	public static function edit() {
+		$output = array();
 
-		if ($delete = Request::post('delete')) {
-			$output = self::delete($delete);
-		} else {
-			$output = array();
+		if ($users = Request::post('delete')) {
+			$output = self::delete($users);
 		}
 
-		$output['html'] = Users::render(self::get());
+		$output['html'] = Users::render(ModelsAccounts::get());
 
 		return $output;
-
 	}
-	
-	
+
 	/**
-	 *	Install the first user account.
+	 * Install the first user account.
 	 *
-	 *	@return string Error message in case of an error.
+	 * @return string Error message in case of an error.
 	 */
-	
 	public static function install() {
-		
 		if (!empty($_POST)) {
-	
-			$username = Request::post('username');
-			$password1 = Request::post('password1');
-			$password2 = Request::post('password2');
-
-			if ($username && $password1 && ($password1 === $password2)) {
-		
-				$accounts = array();
-				$accounts[$username] = self::passwordHash($password1);
-		
-				// Download accounts.php
-				header('Expires: -1');
-				header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-				header('Pragma: public');
-				header('Content-Type: application/octet-stream');
-				header('Content-Transfer-Encoding: binary');
-				header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
-				ob_end_flush();
-				echo self::generatePHP($accounts);
-				die;
-		
-			} else {
-		
-				return Text::get('error_form');
-	
-			}
-	
+			return ModelsAccounts::install(
+				Request::post('username'),
+				Request::post('password1'),
+				Request::post('password2')
+			);
 		}
-			
-	}
-	
-
-	/**
-	 *	Generate the PHP code for the accounts file. Basically the code returns the unserialized serialized array with all users.
-	 *	That way, the accounts array can be stored as PHP.
-	 *	The accounts file has to be a PHP file for security reasons. When trying to access the file directly via the browser, 
-	 *	it gets executed instead of revealing any user names.
-	 *	
-	 *	@param array $accounts
-	 *	@return string The PHP code
-	 */
-	
-	public static function generatePHP($accounts) {
-		
-		return 	"<?php defined('AUTOMAD') or die('Direct access not permitted!');\n" .
-			'return unserialize(\'' . serialize($accounts) . '\');' .
-			"\n?>";
-			
-	} 
-	
-	
-	/**
-	 *	Get the accounts array by including the accounts PHP file.
-	 *
-	 *	@return array The registered accounts
-	 */
-	
-	public static function get() {
-		
-		return (include AM_FILE_ACCOUNTS);
-		
-	}
-	
-	
-	/**
-	 *	Create hash from password to store in accounts.txt.
-	 *
-	 *	@param string $password
-	 *	@return string Hashed/salted password
-	 */
-
-	public static function passwordHash($password) {
-		
-		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
-		
-		return crypt($password, $salt);
-		
 	}
 
-
 	/**
-	 *	Verify if a password matches its hashed version.
+	 * Verify if a password matches its hashed version.
 	 *
-	 *	@param string $password (clear text)
-	 *	@param string $hash (hashed password)
-	 *	@return boolean true/false 
+	 * @param string $password (clear text)
+	 * @param string $hash (hashed password)
+	 * @return boolean true/false
 	 */
-
 	public static function passwordVerified($password, $hash) {
-		
-		return ($hash === crypt($password, $hash));
-		
+		return ModelsAccounts::passwordVerified($password, $hash);
 	}
-	
-	
-	/**
-	 *	Save the accounts array as PHP to AM_FILE_ACCOUNTS.
-	 *
-	 *	@return boolean Success (true/false)
-	 */
 
-	public static function write($accounts) {
-		
-		$success = FileSystem::write(AM_FILE_ACCOUNTS, self::generatePHP($accounts));
-		
-		if ($success && function_exists('opcache_invalidate')) {
-			opcache_invalidate(AM_FILE_ACCOUNTS, true);
+	/**
+	 * Delete one ore more user accounts.
+	 *
+	 * @param array $users
+	 * @return array $output (error/success)
+	 */
+	private static function delete($users) {
+		$output = array();
+
+		$output['error'] = ModelsAccounts::delete($users);
+
+		if (!$output['error']) {
+			$output['success'] = Text::get('success_remove') . ' "' . implode('", "', $users) . '"';
 		}
 
-		return $success;
-
+		return $output;
 	}
-
-
 }

@@ -1,39 +1,38 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\UI\Controllers;
 
@@ -44,43 +43,33 @@ use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The Cache controller.
+ * The Cache controller.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
-class Cache { 
-
-
+class Cache {
 	/**
-	 *	Clear the cache.
-	 * 
-	 *	@return array the $output array
+	 * Clear the cache.
+	 *
+	 * @return array the $output array
 	 */
-
 	public static function clear() {
-
 		$output = array();
 		CoreCache::clear();
 		$output['success'] = Text::get('success_cache_cleared');
-		
-		return $output;
 
+		return $output;
 	}
 
-
 	/**
-	 *	Purge the cache directory.
+	 * Purge the cache directory.
 	 *
-	 *	@return array the $output array
+	 * @return array the $output array
 	 */
-
 	public static function purge() {
-
 		$output = array();
 		$tempDir = FileSystem::purgeCache();
 
@@ -92,8 +81,5 @@ class Cache {
 		}
 
 		return $output;
-
 	}
-	
-
 }

@@ -45,8 +45,8 @@ use Automad\UI\Components\Form\CheckboxHidden;
 use Automad\UI\Components\Form\CheckboxPrivate;
 use Automad\UI\Components\Form\Field;
 use Automad\UI\Components\Form\SelectTemplate;
-use Automad\UI\Controllers\Page;
 use Automad\UI\Controllers\Themelist;
+use Automad\UI\Models\Page;
 use Automad\UI\Utils\Keys;
 use Automad\UI\Utils\Text;
 
