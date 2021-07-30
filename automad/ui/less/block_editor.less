@@ -56,7 +56,6 @@
 
 	&-container {
 		box-sizing: border-box;
-		position: relative;
 		width: 100%;
 		padding: 0;
 		border: @am-border-width dashed @am-border-color;
@@ -84,7 +83,7 @@
 	}
 
 	& .codex-editor {
-		z-index: 200;
+		position: static;
 	}
 
 	& .codex-editor__loader {
