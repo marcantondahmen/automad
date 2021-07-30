@@ -41,6 +41,7 @@ use Automad\UI\Components\Alert\Success;
 use Automad\UI\Components\Layout\SystemUpdate;
 use Automad\UI\Utils\Text;
 use Automad\System\Update;
+use Automad\UI\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -55,40 +56,42 @@ class System {
 	/**
 	 * System updates.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function update() {
-		$output = array();
+		$Response = new Response();
 
 		// To prevent accidental updates within the development repository, exit updater in case the base directoy contains "/automad-dev".
 		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			$output['html'] = Danger::render("Can't run updates within the development repository!");
+			$Response->setHtml(Danger::render("Can't run updates within the development repository!"));
 		} else {
 			// Test if server supports all required functions/extensions.
 			if (Update::supported()) {
 				if (!empty($_POST['update'])) {
-					$output = Update::run();
+					$Response = Update::run();
 				} else {
 					if ($version = Update::getVersion()) {
 						// Check if an the current installation is outdated.
 						if (version_compare(AM_VERSION, $version, '<')) {
-							$output['html'] = SystemUpdate::render($version);
+							$Response->setHtml(SystemUpdate::render($version));
 						} else {
-							$output['html'] = Success::render(
-								Text::get('sys_update_not_required') . ' ' .
-								Text::get('sys_update_current_version') . ' ' .
-								AM_VERSION
+							$Response->setHtml(
+								Success::render(
+									Text::get('sys_update_not_required') . ' ' .
+									Text::get('sys_update_current_version') . ' ' .
+									AM_VERSION
+								)
 							);
 						}
 					} else {
-						$output['html'] = Danger::render(Text::get('error_update_connection'));
+						$Response->setHtml(Danger::render(Text::get('error_update_connection')));
 					}
 				}
 			} else {
-				$output['html'] = Danger::render(Text::get('error_update_not_supported'));
+				$Response->setHtml(Danger::render(Text::get('error_update_not_supported')));
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 }

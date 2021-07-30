@@ -38,6 +38,7 @@ namespace Automad\UI\Controllers;
 
 use Automad\Core\Cache as CoreCache;
 use Automad\Core\Debug;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
@@ -54,32 +55,32 @@ class Cache {
 	/**
 	 * Clear the cache.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function clear() {
-		$output = array();
+		$Response = new Response();
 		CoreCache::clear();
-		$output['success'] = Text::get('success_cache_cleared');
+		$Response->setSuccess(Text::get('success_cache_cleared'));
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Purge the cache directory.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function purge() {
-		$output = array();
+		$Response = new Response();
 		$tempDir = FileSystem::purgeCache();
 
 		if ($tempDir) {
-			$output['success'] = Text::get('success_cache_purged');
+			$Response->setSuccess(Text::get('success_cache_purged'));
 			Debug::log($tempDir, 'temp directory');
 		} else {
-			$output['error'] = Text::get('error_cache_purged');
+			$Response->setError(Text::get('error_cache_purged'));
 		}
 
-		return $output;
+		return $Response;
 	}
 }

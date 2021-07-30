@@ -41,6 +41,7 @@ use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Components\Layout\PageData;
 use Automad\UI\Models\Page as ModelsPage;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -58,11 +59,11 @@ class Page {
 	/**
 	 * Add page based on data in $_POST.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function add() {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 		$url = Request::post('url');
 
 		// Validation of $_POST. URL, title and template must exist and != false.
@@ -80,54 +81,56 @@ class Page {
 					$themeTemplate = self::getTemplateNameFromArray($subpage, 'theme_template');
 					$isPrivate = (!empty($subpage['private']));
 
-					$output['redirect'] = ModelsPage::add($Page, $title, $themeTemplate, $isPrivate);
+					$Response->setRedirect(ModelsPage::add($Page, $title, $themeTemplate, $isPrivate));
 				} else {
-					$output['error'] = Text::get('error_permission') .
-									   '<p>' . dirname(ModelsPage::getPageFilePath($Page)) . '</p>';
+					$Response->setError(
+						Text::get('error_permission') .
+						'<p>' . dirname(ModelsPage::getPageFilePath($Page)) . '</p>'
+					);
 				}
 			} else {
-				$output['error'] = Text::get('error_page_title');
+				$Response->setError(Text::get('error_page_title'));
 			}
 		} else {
-			$output['error'] = Text::get('error_no_destination');
+			$Response->setError(Text::get('error_no_destination'));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Send form when there is no posted data in the request or save data if there is.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function data() {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 		$url = Request::post('url');
 
 		if ($url && ($Page = $Automad->getPage($url))) {
 			// If the posted form contains any "data", save the form's data to the page file.
 			if ($data = Request::post('data')) {
-				// Save page and replace $output with the returned $output array (error or redirect).
-				$output = self::save($Page, $url, $data, Request::post('prefix'));
+				// Save page and replace $Response with the returned $Response object (error or redirect).
+				$Response = self::save($Page, $url, $data, Request::post('prefix'));
 			} else {
 				// If only the URL got submitted, just get the form ready.
 				$PageData = new PageData($Automad, $Page);
-				$output['html'] = $PageData->render();
+				$Response->setHtml($PageData->render());
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Delete page.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function delete() {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 		$url = Request::post('url');
 		$title = Request::post('title');
 
@@ -138,55 +141,57 @@ class Page {
 				&& is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
 				ModelsPage::delete($Page, $title);
 
-				$output['redirect'] = '?view=Page&url=' . urlencode($Page->parentUrl);
+				$Response->setRedirect('?view=Page&url=' . urlencode($Page->parentUrl));
 				Debug::log($Page->url, 'deleted');
 
 				Cache::clear();
 			} else {
-				$output['error'] = Text::get('error_permission') .
-								   '<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>';
+				$Response->setError(
+					Text::get('error_permission') .
+					'<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>'
+				);
 			}
 		} else {
-			$output['error'] = Text::get('error_page_not_found');
+			$Response->setError(Text::get('error_page_not_found'));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Duplicate a page.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function duplicate() {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 		$url = Request::post('url');
 
 		if ($url) {
 			if ($url != '/' && ($Page = $Automad->getPage($url))) {
 				// Check permissions.
 				if (is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
-					$output['redirect'] = ModelsPage::duplicate($Page);
+					$Response->setRedirect(ModelsPage::duplicate($Page));
 				} else {
-					$output['error'] = Text::get('error_permission');
+					$Response->setError(Text::get('error_permission'));
 				}
 			} else {
-				$output['error'] = Text::get('error_page_not_found');
+				$Response->setError(Text::get('error_page_not_found'));
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Move a page.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function move() {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 		$url = Request::post('url');
 		$dest = Request::post('destination');
 		$title = Request::post('title');
@@ -213,25 +218,29 @@ class Page {
 							$title
 						);
 
-						$output['redirect'] = ModelsPage::contextUrlByPath($newPagePath);
+						$Response->setRedirect(ModelsPage::contextUrlByPath($newPagePath));
 						Debug::log($Page->path, 'page');
 						Debug::log($dest->path, 'destination');
 
 						Cache::clear();
 					} else {
-						$output['error'] = Text::get('error_permission') .
-										   '<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>';
+						$Response->setError(
+							Text::get('error_permission') .
+							'<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>'
+						);
 					}
 				} else {
-					$output['error'] = Text::get('error_permission') .
-									   '<p>' . FileSystem::fullPagePath($dest->path) . '</p>';
+					$Response->setError(
+						Text::get('error_permission') .
+						'<p>' . FileSystem::fullPagePath($dest->path) . '</p>'
+					);
 				}
 			}
 		} else {
-			$output['error'] = Text::get('error_no_destination');
+			$Response->setError(Text::get('error_no_destination'));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
@@ -262,10 +271,10 @@ class Page {
 	 * @param string $url
 	 * @param array $data
 	 * @param string $prefix
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	private static function save($Page, $url, $data, $prefix) {
-		$output = array();
+		$Response = new Response();
 
 		// A title is required for building the page's path.
 		// If there is no title provided, an error will be returned instead of saving and moving the page.
@@ -283,21 +292,21 @@ class Page {
 					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
 					if ($redirectUrl = ModelsPage::save($Page, $url, $data, $themeTemplate, $prefix)) {
-						$output['redirect'] = $redirectUrl;
+						$Response->setRedirect($redirectUrl);
 					} else {
-						$output['success'] = Text::get('success_saved');
+						$Response->setSuccess(Text::get('success_saved'));
 					}
 				} else {
-					$output['error'] = Text::get('error_permission');
+					$Response->setError(Text::get('error_permission'));
 				}
 			} else {
-				$output['error'] = Text::get('error_permission');
+				$Response->setError(Text::get('error_permission'));
 			}
 		} else {
 			// If the title is missing, just return an error.
-			$output['error'] = Text::get('error_page_title');
+			$Response->setError(Text::get('error_page_title'));
 		}
 
-		return $output;
+		return $Response;
 	}
 }

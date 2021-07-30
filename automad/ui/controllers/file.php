@@ -38,6 +38,7 @@ namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
 use Automad\UI\Models\File as ModelsFile;
+use Automad\UI\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -52,31 +53,37 @@ class File {
 	/**
 	 * Edit file information (file name and caption).
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function editInfo() {
-		$output = array();
-		$output['error'] = ModelsFile::editInfo(
-			Request::post('new-name'),
-			Request::post('old-name'),
-			Request::post('caption')
+		$Response = new Response();
+
+		$Response->setError(
+			ModelsFile::editInfo(
+				Request::post('new-name'),
+				Request::post('old-name'),
+				Request::post('caption')
+			)
 		);
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Import file from URL.
 	 *
-	 * @return array The $output array with possible error messages.
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function import() {
-		$output = array();
-		$output['error'] = ModelsFile::import(
-			Request::post('importUrl'),
-			Request::post('url')
+		$Response = new Response();
+
+		$Response->setError(
+			ModelsFile::import(
+				Request::post('importUrl'),
+				Request::post('url')
+			)
 		);
 
-		return $output;
+		return $Response;
 	}
 }

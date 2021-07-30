@@ -39,6 +39,7 @@ namespace Automad\UI\Controllers;
 use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\UI\Components\Layout\SharedData;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -56,22 +57,22 @@ class Shared {
 	/**
 	 * Send form when there is no posted data in the request or save data if there is.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function data() {
 		$Automad = UICache::get();
-		$output = array();
 
 		if ($data = Request::post('data')) {
 			// Save changes.
-			$output = self::save($Automad, $data);
+			$Response = self::save($Automad, $data);
 		} else {
 			// If there is no data, just get the form ready.
 			$SharedData = new SharedData($Automad);
-			$output['html'] = $SharedData->render();
+			$Response = new Response();
+			$Response->setHtml($SharedData->render());
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
@@ -79,24 +80,24 @@ class Shared {
 	 *
 	 * @param object $Automad
 	 * @param array $data
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	private static function save($Automad, $data) {
-		$output = array();
+		$Response = new Response();
 
 		if (is_writable(AM_FILE_SHARED_DATA)) {
 			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
 			Cache::clear();
 
 			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Automad->Shared->get(AM_KEY_THEME)) {
-				$output['reload'] = true;
+				$Response->setReload(true);
 			} else {
-				$output['success'] = Text::get('success_saved');
+				$Response->setSuccess(Text::get('success_saved'));
 			}
 		} else {
-			$output['error'] = Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>';
+			$Response->setError(Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>');
 		}
 
-		return $output;
+		return $Response;
 	}
 }

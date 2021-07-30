@@ -43,6 +43,7 @@ use Automad\UI\Components\Layout\SearchResults;
 use Automad\UI\Models\Replacement;
 use Automad\UI\Models\Search as ModelsSearch;
 use Automad\UI\Models\Search\FileKeys;
+use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
 
@@ -59,10 +60,10 @@ class Search {
 	/**
 	 * Perform a search and replace.
 	 *
-	 * @return array the output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function searchAndReplace() {
-		$output = array();
+		$Response = new Response();
 
 		if (Request::post('replaceSelected')) {
 			$files = Request::post('files');
@@ -99,8 +100,8 @@ class Search {
 			$html = Alert::render(Text::get('search_no_results'), 'uk-margin-top');
 		}
 
-		$output['html'] = $html;
+		$Response->setHtml($html);
 
-		return $output;
+		return $Response;
 	}
 }

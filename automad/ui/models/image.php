@@ -40,6 +40,7 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Image as CoreImage;
 use Automad\UI\Components\Layout\SelectImage;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -62,16 +63,16 @@ class Image {
 	 * @param string $crop
 	 * @param string $filename
 	 * @param string $url
-	 * @return array the output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function copyResized($filename, $url, $width, $height, $crop) {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 
 		if (!((is_numeric($width) || is_bool($width)) && (is_numeric($height) || is_bool($height)))) {
-			$output['error'] = Text::get('error_file_size');
+			$Response->setError(Text::get('error_file_size'));
 
-			return $output;
+			return $Response;
 		}
 
 		if ($filename) {
@@ -103,26 +104,28 @@ class Image {
 						$file
 					);
 
-					if (!$output['error'] = FileSystem::renameMedia($cachedFile, $resizedFile)) {
-						$output['success'] = Text::get('success_created') . ' "' . basename($resizedFile) . '"';
+					if (!$error = FileSystem::renameMedia($cachedFile, $resizedFile)) {
+						$Response->setSuccess(Text::get('success_created') . ' "' . basename($resizedFile) . '"');
 						Cache::clear();
+					} else {
+						$Response->setError($error);
 					}
 				} else {
-					$output['error'] = Text::get('error_permission') . ' "' . $directory . '"';
+					$Response->setError(Text::get('error_permission') . ' "' . $directory . '"');
 				}
 			} else {
-				$output['error'] = Text::get('error_file_not_found');
+				$Response->setError(Text::get('error_file_not_found'));
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Select an image.
 	 *
 	 * @param string $url
-	 * @return array the $output array
+	 * @return string the rendered HTML
 	 */
 	public static function select($url) {
 		$Automad = UICache::get();

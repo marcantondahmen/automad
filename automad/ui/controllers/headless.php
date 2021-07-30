@@ -39,6 +39,7 @@ namespace Automad\UI\Controllers;
 use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\UI\Components\Form\HeadlessEditor;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
@@ -55,21 +56,21 @@ class Headless extends \Automad\Core\Headless {
 	/**
 	 * Save the updated template or render the editor in case no template was posted.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function editTemplate() {
-		$output = array();
+		$Response = new Response();
 
 		if ($template = Request::post('template')) {
 			if (FileSystem::write(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM, $template)) {
 				Cache::clear();
-				$output['success'] = Text::get('success_saved');
+				$Response->setSuccess(Text::get('success_saved'));
 			}
 		} else {
-			$output['html'] = HeadlessEditor::render(self::loadTemplate());
+			$Response->setHtml(HeadlessEditor::render(self::loadTemplate()));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
@@ -88,19 +89,19 @@ class Headless extends \Automad\Core\Headless {
 	/**
 	 * Reset the headless template by deleting the custom template file.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function resetTemplate() {
-		$output = array();
+		$Response = new Response();
 
 		if (Request::post('reset')) {
 			if (FileSystem::deleteFile(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM)) {
 				Cache::clear();
-				$output['trigger'] = 'resetHeadlessTemplate';
-				$output['success'] = Text::get('success_reset_headless');
+				$Response->setTrigger('resetHeadlessTemplate');
+				$Response->setSuccess(Text::get('success_reset_headless'));
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 }

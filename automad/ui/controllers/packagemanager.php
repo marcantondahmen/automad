@@ -43,6 +43,7 @@ use Automad\UI\Components\Layout\Packages;
 use Automad\UI\Utils\Text;
 use Automad\System\Composer;
 use Automad\System\Packagist;
+use Automad\UI\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -62,25 +63,25 @@ class PackageManager {
 	/**
 	 * Get a list of outdated packages.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function getOutdatedPackages() {
-		$output = array();
+		$Response = new Response();
 
 		$Composer = new Composer();
-		$output['buffer'] = $Composer->run('show -oD -f json', true);
+		$Response->setBuffer($Composer->run('show -oD -f json', true));
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Get a list of theme packages available on Packagist
 	 * where the installed ones are at the beginning.
 	 *
-	 * @return array The output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function getPackages() {
-		$output = array();
+		$Response = new Response();
 
 		// For now only get theme packages and therefore set the tags
 		// parameter to 'theme'.
@@ -106,96 +107,96 @@ class PackageManager {
 			}
 
 			$packages = array_merge($installed, $available);
-			$output['html'] = Packages::render($packages);
+			$Response->setHtml(Packages::render($packages));
 		} else {
-			$output['error'] = Text::get('error_packages');
+			$Response->setError(Text::get('error_packages'));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Install a package.
 	 *
-	 * @return array The output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function install() {
-		$output = array();
+		$Response = new Response();
 
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
-			$output['error'] = $Composer->run('require ' . $package);
-			$output['trigger'] = 'composerDone';
+			$Response->setError($Composer->run('require ' . $package));
+			$Response->setTrigger('composerDone');
 
-			if (!$output['error']) {
-				$output['success'] = Text::get('success_installed') . '<br>' . $package;
+			if (!$Response->getError()) {
+				$Response->setSuccess(Text::get('success_installed') . '<br>' . $package);
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Remove a package.
 	 *
-	 * @return array The output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function remove() {
-		$output = array();
+		$Response = new Response();
 
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
-			$output['error'] = $Composer->run('remove ' . $package);
-			$output['trigger'] = 'composerDone';
+			$Response->setError($Composer->run('remove ' . $package));
+			$Response->setTrigger('composerDone');
 
-			if (!$output['error']) {
-				$output['success'] = Text::get('success_remove') . '<br>' . $package;
+			if (!$Response->getError()) {
+				$Response->setSuccess(Text::get('success_remove') . '<br>' . $package);
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Update a single package.
 	 *
-	 * @return array The output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function update() {
-		$output = array();
+		$Response = new Response();
 
 		if ($package = Request::post('package')) {
 			$Composer = new Composer();
-			$output['error'] = $Composer->run('update --with-dependencies ' . $package);
-			$output['trigger'] = 'composerDone';
+			$Response->setError($Composer->run('update --with-dependencies ' . $package));
+			$Response->setTrigger('composerDone');
 
-			if (!$output['error']) {
-				$output['success'] = Text::get('success_package_updated') . '<br>' . $package;
+			if (!$Response->getError()) {
+				$Response->setSuccess(Text::get('success_package_updated') . '<br>' . $package);
 				Cache::clear();
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Update all packages.
 	 *
-	 * @return array The output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function updateAll() {
-		$output = array();
+		$Response = new Response();
 
 		$Composer = new Composer();
-		$output['error'] = $Composer->run('update');
-		$output['trigger'] = 'composerDone';
+		$Response->setError($Composer->run('update'));
+		$Response->setTrigger('composerDone');
 
-		if (!$output['error']) {
-			$output['success'] = Text::get('success_packages_updated_all');
+		if (!$Response->getError()) {
+			$Response->setSuccess(Text::get('success_packages_updated_all'));
 			Cache::clear();
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**

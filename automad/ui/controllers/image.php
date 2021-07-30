@@ -39,6 +39,7 @@ namespace Automad\UI\Controllers;
 use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Models\Image as ModelsImage;
+use Automad\UI\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -53,7 +54,7 @@ class Image {
 	/**
 	 * Copy an image resized based on $_POST.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function copyResized() {
 		$options = array_merge(
@@ -81,15 +82,15 @@ class Image {
 	/**
 	 * Select an image.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function select() {
-		$output = array();
+		$Response = new Response();
 
 		// Check if file from a specified page or the shared files will be listed and managed.
 		// To display a file list of a certain page, its URL has to be submitted along with the form data.
-		$output['html'] = ModelsImage::select(Request::post('url'));
+		$Response->setHtml(ModelsImage::select(Request::post('url')));
 
-		return $output;
+		return $Response;
 	}
 }

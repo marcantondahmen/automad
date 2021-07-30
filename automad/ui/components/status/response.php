@@ -43,6 +43,7 @@ use Automad\UI\Utils\Text;
 use Automad\UI\Controllers\Headless;
 use Automad\UI\Controllers\PackageManager;
 use Automad\UI\Models\Accounts;
+use Automad\UI\Response as UIResponse;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -58,29 +59,33 @@ class Response {
 	 * 	Get the current status response of a given system item or packages.
 	 *
 	 * @param string $item
-	 * @return array The output array with the generated status return markup
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function render($item) {
 		Debug::log($item, 'Getting status');
-		$output = array();
+		$Response = new UIResponse();
 
 		if ($item == 'cache') {
 			if (AM_CACHE_ENABLED) {
-				$output['status'] = '<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
-									Text::get('sys_status_cache_enabled');
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_cache_enabled')
+				);
 			} else {
-				$output['status'] = '<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
-									Text::get('sys_status_cache_disabled');
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_cache_disabled')
+				);
 			}
 		}
 
 		if ($item == 'debug') {
-			$output['status'] = '';
+			$Response->setStatus('');
 			$tooltip = Text::get('sys_status_debug_enabled');
 			$tab = Str::sanitize(Text::get('sys_debug'));
 
 			if (AM_DEBUG_ENABLED) {
-				$output['status'] = <<< HTML
+				$html = <<< HTML
 					<a 
 					href="?view=System#$tab" 
 					class="am-u-button am-u-button-danger" 
@@ -88,8 +93,9 @@ class Response {
 					data-uk-tooltip="{pos:'bottom-right'}"
 					>
 						<i class="am-u-icon-bug"></i>
-					</a>	
+					</a>
 HTML;
+				$Response->setStatus($html);
 			}
 		}
 
@@ -101,22 +107,28 @@ HTML;
 				$badge = ' uk-badge-success';
 			}
 
-			$output['status'] = '<span class="uk-badge uk-badge-notification uk-margin-top-remove' . $badge . '">' .
-								'<i class="uk-icon-file-text"></i>&nbsp&nbsp;' .
-								trim($template, '\\/') .
-								'</span>';
+			$Response->setStatus(
+				'<span class="uk-badge uk-badge-notification uk-margin-top-remove' . $badge . '">' .
+				'<i class="uk-icon-file-text"></i>&nbsp&nbsp;' .
+				trim($template, '\\/') .
+				'</span>'
+			);
 		}
 
 		if ($item == 'update') {
 			$updateVersion = Update::getVersion();
 
 			if (version_compare(AM_VERSION, $updateVersion, '<')) {
-				$output['status'] = '<i class="uk-icon-download uk-icon-justify"></i>&nbsp;&nbsp;' .
-									Text::get('sys_status_update_available') .
-									'&nbsp;&nbsp;<span class="uk-badge uk-badge-success">' . $updateVersion . '</span>';
+				$Response->setStatus(
+					'<i class="uk-icon-download uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_update_available') .
+					'&nbsp;&nbsp;<span class="uk-badge uk-badge-success">' . $updateVersion . '</span>'
+				);
 			} else {
-				$output['status'] = '<i class="uk-icon-check uk-icon-justify"></i>&nbsp;&nbsp;' .
-									Text::get('sys_status_update_not_available');
+				$Response->setStatus(
+					'<i class="uk-icon-check uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_update_not_available')
+				);
 			}
 		}
 
@@ -124,33 +136,36 @@ HTML;
 			$updateVersion = Update::getVersion();
 
 			if (version_compare(AM_VERSION, $updateVersion, '<')) {
-				$output['status'] = '<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i></span>';
-			} else {
-				$output['status'] = '';
+				$Response->setStatus(
+					'<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i></span>'
+				);
 			}
 		}
 
 		if ($item == 'users') {
-			$output['status'] = '<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
-								Text::get('sys_user_registered') .
-								'&nbsp;&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>';
+			$Response->setStatus(
+				'<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
+				Text::get('sys_user_registered') .
+				'&nbsp;&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>'
+			);
 		}
 
 		if ($item == 'outdated_packages') {
-			$output = PackageManager::getOutdatedPackages();
+			$Response = PackageManager::getOutdatedPackages();
 
-			if (!empty($output['buffer'])) {
-				$data = json_decode($output['buffer']);
+			if ($Response->getBuffer()) {
+				$data = json_decode($Response->getBuffer());
 
 				if (!empty($data->installed)) {
 					$count = count($data->installed);
-					$output['status'] = '<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i>&nbsp; ' . $count . '</span>';
-				} else {
-					$output['status'] = '';
+					$Response->setStatus(
+						'<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i>&nbsp); ' .
+						$count . '</span>'
+					);
 				}
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 }

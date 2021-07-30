@@ -77,14 +77,14 @@ class Dashboard {
 				header('Content-Type: application/json; charset=utf-8');
 
 				if (!empty($parts[1]) && $this->classFileExists($class) && method_exists($class, $parts[1])) {
-					$output = call_user_func($method);
-					$output['debug'] = Debug::getLog();
+					$Response = call_user_func($method);
+					$Response->setDebug(Debug::getLog());
 				} else {
 					header('HTTP/1.0 404 Not Found');
-					$output = array();
+					$Response = new Response();
 				}
 
-				$this->output = json_encode($output, JSON_UNESCAPED_SLASHES);
+				$this->output = $Response->json();
 			} else {
 				// Views.
 				$default = 'Home';
@@ -107,7 +107,11 @@ class Dashboard {
 			// In case a controller is requested without being authenticated, redirect page to login page.
 			if (Request::query('controller')) {
 				header('Content-Type: application/json; charset=utf-8');
-				die(json_encode(array('redirect' => AM_BASE_INDEX . AM_PAGE_DASHBOARD)));
+
+				$Response = new Response();
+				$Response->setRedirect(AM_BASE_INDEX . AM_PAGE_DASHBOARD);
+
+				exit($Response->json());
 			}
 
 			$view = 'CreateUser';

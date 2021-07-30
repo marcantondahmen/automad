@@ -77,7 +77,7 @@ class File {
 				}
 
 				// Write caption.
-				if (empty($output['error'])) {
+				if (!$error) {
 					$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
 
 					// Only if file exists already or $caption is empty.

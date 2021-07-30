@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\Autocomplete;
 
+use Automad\UI\Response;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -50,18 +52,18 @@ class Link {
 	 * Return a JSON formatted string to be used as autocomplete infomation in a link field.
 	 *
 	 * @param object $Automad
-	 * @return string The JSON encoded autocomplete data
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function render($Automad) {
-		$output = array();
+		$Response = new Response();
 		$autocomplete = array();
 
 		foreach ($Automad->getCollection() as $Page) {
 			$autocomplete[] = array('value' => $Page->url, 'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)));
 		}
 
-		$output['autocomplete'] = $autocomplete;
+		$Response->setAutocomplete($autocomplete);
 
-		return $output;
+		return $Response;
 	}
 }

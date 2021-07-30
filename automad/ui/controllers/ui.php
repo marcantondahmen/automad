@@ -40,6 +40,7 @@ use Automad\Core\Request;
 use Automad\UI\Components\Autocomplete\JumpBar;
 use Automad\UI\Components\Autocomplete\Link;
 use Automad\UI\Components\Form\Field;
+use Automad\UI\Response;
 use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,7 +56,7 @@ class UI {
 	/**
 	 * Return the autocomplete values for a search field.
 	 *
-	 * @return array the autocomplete data as part of the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function autocompleteJump() {
 		$Automad = UICache::get();
@@ -66,7 +67,7 @@ class UI {
 	/**
 	 * Return the autocomplete values for a link field.
 	 *
-	 * @return array the autocomplete data as part of the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function autocompleteLink() {
 		$Automad = UICache::get();
@@ -77,33 +78,33 @@ class UI {
 	/**
 	 * Return the UI component for a variable field based on the name.
 	 *
-	 * @return array the component HTML as part of the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function field() {
-		$output = array();
+		$Response = new Response();
 
 		if ($name = Request::post('name')) {
 			$Automad = UICache::get();
-			$output['html'] = Field::render($Automad, $name, '', true);
+			$Response->setHtml(Field::render($Automad, $name, '', true));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Redirect to a given target URL.
 	 *
-	 * @return array the output array including the redirect URL
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function jump() {
-		$output = array();
+		$Response = new Response();
 
 		if ($target = Request::post('target')) {
 			if (strpos($target, '?view=') !== false || $target == AM_BASE_INDEX) {
-				$output['redirect'] = $target;
+				$Response->setRedirect($target);
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 }

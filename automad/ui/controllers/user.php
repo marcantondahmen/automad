@@ -38,6 +38,7 @@ namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
 use Automad\UI\Models\Accounts;
+use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -53,10 +54,10 @@ class User {
 	/**
 	 * Change the password of the currently logged in user based on $_POST.
 	 *
-	 * @return array $output (error/success)
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function changePassword() {
-		$output = array();
+		$Response = new Response();
 		$currentPassword = Request::post('current-password');
 		$newPassword1 = Request::post('new-password1');
 		$newPassword2 = Request::post('new-password2');
@@ -73,24 +74,24 @@ class User {
 
 						// Write array with all accounts back to file.
 						if (Accounts::write($accounts)) {
-							$output['success'] = Text::get('success_password_changed');
+							$Response->setSuccess(Text::get('success_password_changed'));
 						} else {
-							$output['error'] = Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+							$Response->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
 						}
 					} else {
-						$output['error'] = Text::get('error_password_current');
+						$Response->setError(Text::get('error_password_current'));
 					}
 				} else {
-					$output['error'] = Text::get('error_password_reuse');
+					$Response->setError(Text::get('error_password_reuse'));
 				}
 			} else {
-				$output['error'] = Text::get('error_password_repeat');
+				$Response->setError(Text::get('error_password_repeat'));
 			}
 		} else {
-			$output['error'] = Text::get('error_form');
+			$Response->setError(Text::get('error_form'));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**

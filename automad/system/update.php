@@ -39,6 +39,9 @@ namespace Automad\System;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\UI\Components\Alert\Danger;
+use Automad\UI\Components\Alert\Success;
+use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -88,23 +91,25 @@ class Update {
 	/**
 	 * Run the actual update.
 	 *
-	 * @return array The $output array (AJAX response)
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function run() {
+		$Response = new Response();
+
 		$items = self::items();
 
 		if (!$items) {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_items') . '</div>';
-			$output['cli'] = 'Invalid list of items to be updated!';
+			$Response->setHtml(Danger::render(Text::get('error_update_items')));
+			$Response->setCli('Invalid list of items to be updated!');
 
-			return $output;
+			return $Response;
 		}
 
 		if (!self::permissionsGranted($items)) {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_permission') . '</div>';
-			$output['cli'] = 'Permission denied!';
+			$Response->setHtml(Danger::render(Text::get('error_update_permission')));
+			$Response->setCli('Permission denied!');
 
-			return $output;
+			return $Response;
 		}
 
 		self::$timestamp = date('Ymd-His');
@@ -139,26 +144,28 @@ class Update {
 				$log = self::log('Successfully updated Automad to version ' . $version);
 				$logUrl = str_replace(AM_BASE_DIR, AM_BASE_URL, $log);
 
-				$output['html'] = 	'<div class="uk-alert uk-alert-success">' .
-										Text::get('sys_update_not_required') . ' ' .
-										Text::get('sys_update_current_version') . ' ' .
-										$version . '.' .
-									'</div>' .
-									'<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
-										'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' .
-										Text::get('btn_open_log') .
-									'</a>';
+				$Response->setHtml(
+					Success::render(
+						Text::get('sys_update_not_required') . ' ' .
+						Text::get('sys_update_current_version') . ' ' .
+						$version . '.'
+					) .
+					'<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
+						'<i class="uk-icon-file-text-o"></i>&nbsp;&nbsp;' .
+						Text::get('btn_open_log') .
+					'</a>'
+				);
 
-				$output['success'] = Text::get('success_update');
-				$output['cli'] = 'Successfully updated to version ' . $version;
+				$Response->setSuccess(Text::get('success_update'));
+				$Response->setCli('Successfully updated to version ' . $version);
 			} else {
-				$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_failed') . '</div>';
+				$Response->setHtml(Danger::render(Text::get('error_update_failed')));
 			}
 		} else {
-			$output['html'] = '<div class="uk-alert uk-alert-danger">' . Text::get('error_update_download') . '</div>';
+			$Response->setHtml(Danger::render(Text::get('error_update_download')));
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
@@ -313,6 +320,10 @@ class Update {
 	 */
 	private static function preloadClasses() {
 		require_once(AM_BASE_DIR . '/automad/ui/utils/prefix.php');
+		require_once(AM_BASE_DIR . '/automad/ui/components/alert/alert.php');
+		require_once(AM_BASE_DIR . '/automad/ui/components/alert/danger.php');
+		require_once(AM_BASE_DIR . '/automad/ui/components/alert/success.php');
+		require_once(AM_BASE_DIR . '/automad/ui/utils/text.php');
 	}
 
 	/**

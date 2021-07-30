@@ -81,10 +81,10 @@ class Update extends Command {
 
 		if (version_compare(AM_VERSION, $updateVersion, '<')) {
 			echo 'Updating to version ' . $updateVersion . PHP_EOL;
-			$output = SystemUpdate::run();
+			$Response = SystemUpdate::run();
 
-			if (!empty($output['cli'])) {
-				echo $output['cli'] . PHP_EOL;
+			if (!empty($Response->getCli())) {
+				echo $Response->getCli() . PHP_EOL;
 			} else {
 				echo 'Error! Update has failed!' . PHP_EOL;
 			}

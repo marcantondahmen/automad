@@ -39,6 +39,7 @@ namespace Automad\UI\Controllers;
 use Automad\Core\Request;
 use Automad\UI\Components\Grid\Users;
 use Automad\UI\Models\Accounts as ModelsAccounts;
+use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,40 +55,42 @@ class Accounts {
 	/**
 	 * Add user account based on $_POST.
 	 *
-	 * @return array $output (error/success)
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function add() {
-		$output = array();
+		$Response = new Response();
 
 		$username = Request::post('username');
 		$password1 = Request::post('password1');
 		$password2 = Request::post('password2');
 
-		$output['error'] = ModelsAccounts::add($username, $password1, $password2);
+		$error = ModelsAccounts::add($username, $password1, $password2);
 
-		if (!$output['error']) {
-			$output['success'] = Text::get('success_added') . ' "' . $username . '"';
+		if ($error) {
+			$Response->setError($error);
+		} else {
+			$Response->setSuccess(Text::get('success_added') . ' "' . $username . '"');
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
 	 * Optionally remove posted accounts and
 	 * return the accounts grid.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function edit() {
-		$output = array();
+		$Response = new Response();
 
 		if ($users = Request::post('delete')) {
-			$output = self::delete($users);
+			$Response = self::delete($users);
 		}
 
-		$output['html'] = Users::render(ModelsAccounts::get());
+		$Response->setHtml(Users::render(ModelsAccounts::get()));
 
-		return $output;
+		return $Response;
 	}
 
 	/**
@@ -120,17 +123,17 @@ class Accounts {
 	 * Delete one ore more user accounts.
 	 *
 	 * @param array $users
-	 * @return array $output (error/success)
+	 * @return \Automad\UI\Response the response object
 	 */
 	private static function delete($users) {
-		$output = array();
+		$Response = new Response();
 
-		$output['error'] = ModelsAccounts::delete($users);
+		$Response->setError(ModelsAccounts::delete($users));
 
-		if (!$output['error']) {
-			$output['success'] = Text::get('success_remove') . ' "' . implode('", "', $users) . '"';
+		if (!$Response->getError()) {
+			$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');
 		}
 
-		return $output;
+		return $Response;
 	}
 }

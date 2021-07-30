@@ -52,13 +52,9 @@ class Status {
 	/**
 	 * Get a config item status.
 	 *
-	 * @return array the $output array
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function get() {
-		if ($item = Request::post('item')) {
-			return Response::render($item);
-		}
-
-		return array();
+		return Response::render(Request::post('item'));
 	}
 }

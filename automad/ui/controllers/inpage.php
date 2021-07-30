@@ -42,6 +42,7 @@ use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\UI\Components\InPage\Edit;
 use Automad\UI\Models\Page;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\UICache;
 
@@ -63,11 +64,11 @@ class InPage {
 	 * saved back into the .txt file.
 	 * In case the title variable gets modified, the page directory gets renamed accordingly.
 	 *
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function edit() {
 		$Automad = UICache::get();
-		$output = array();
+		$Response = new Response();
 		$context = Request::post('context');
 		$postData = Request::post('data');
 		$url = Request::post('url');
@@ -100,6 +101,8 @@ class InPage {
 					// Clear cache to reflect changes.
 					Cache::clear();
 
+					$redirectUrl = '';
+
 					// If the page directory got renamed, find the new URL.
 					if ($Page->url == $url && isset($newPagePath)) {
 						// The page has to be redirected to a new url in case the edited context is actually
@@ -111,7 +114,7 @@ class InPage {
 						// Find new URL and return redirect URL.
 						foreach ($Automad->getCollection() as $key => $Page) {
 							if ($Page->path == $newPagePath) {
-								$output['redirect'] = AM_BASE_INDEX . $key;
+								$redirectUrl = AM_BASE_INDEX . $key;
 
 								break;
 							}
@@ -126,15 +129,17 @@ class InPage {
 						//
 						// 2.	The context is the current page, but the title didn't change and
 						// 		therefore the URL stays the same.
-						$output['redirect'] = AM_BASE_INDEX . $url;
+						$redirectUrl = AM_BASE_INDEX . $url;
 					}
 
 					// Append query string if not empty.
 					$queryString = Request::post('query');
 
 					if ($queryString) {
-						$output['redirect'] .= '?' . $queryString;
+						$redirectUrl .= '?' . $queryString;
 					}
+
+					$Response->setRedirect($redirectUrl);
 				} else {
 					// Return form fields if key is defined.
 					if ($key = Request::post('key')) {
@@ -146,12 +151,12 @@ class InPage {
 
 						// Note that $Page->path has to be added to make
 						// image previews work in CodeMirror.
-						$output['html'] = Edit::render($Automad, $key, $value, $context, $Page->path);
+						$Response->setHtml(Edit::render($Automad, $key, $value, $context, $Page->path));
 					}
 				}
 			}
 		}
 
-		return $output;
+		return $Response;
 	}
 }

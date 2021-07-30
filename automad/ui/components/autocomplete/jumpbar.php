@@ -38,6 +38,7 @@ namespace Automad\UI\Components\Autocomplete;
 
 use Automad\Core\Selection;
 use Automad\Core\Str;
+use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -56,10 +57,10 @@ class JumpBar {
 	 * The collected data consists of all page titles, URLs and all available tags.
 	 *
 	 * @param object $Automad
-	 * @return string The JSON encoded autocomplete data
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function render($Automad) {
-		$output = array();
+		$Response = new Response();
 		$values = array();
 
 		$values = array_merge($values, self::search());
@@ -69,9 +70,9 @@ class JumpBar {
 		$values = array_merge($values, self::packages());
 		$values = array_merge($values, self::pages($Automad->getCollection()));
 
-		$output['autocomplete'] = $values;
+		$Response->setAutocomplete($values);
 
-		return $output;
+		return $Response;
 	}
 
 	/**

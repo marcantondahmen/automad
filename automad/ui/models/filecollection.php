@@ -38,6 +38,7 @@ namespace Automad\UI\Models;
 
 use Automad\Core\Cache;
 use Automad\Core\Str;
+use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
@@ -56,10 +57,10 @@ class FileCollection {
 	 *
 	 * @param array $files
 	 * @param string $path
-	 * @return array $output
+	 * @return \Automad\UI\Response the response object
 	 */
 	public static function deleteFiles($files, $path) {
-		$output = array();
+		$Response = new Response();
 
 		// Check if directory is writable.
 		if (is_writable($path)) {
@@ -79,13 +80,13 @@ class FileCollection {
 
 			Cache::clear();
 
-			$output['success'] = Text::get('success_remove') . '<br />' . implode('<br />', $success);
-			$output['error'] = implode('<br />', $errors);
+			$Response->setSuccess(Text::get('success_remove') . '<br />' . implode('<br />', $success));
+			$Response->setError(implode('<br />', $errors));
 		} else {
-			$output['error'] = Text::get('error_permission') . ' "' . basename($path) . '"';
+			$Response->setError(Text::get('error_permission') . ' "' . basename($path) . '"');
 		}
 
-		return $output;
+		return $Response;
 	}
 
 	/**
@@ -93,7 +94,7 @@ class FileCollection {
 	 *
 	 * @param array $files
 	 * @param string $path
-	 * @return array $output
+	 * @return string an error message or false on success
 	 */
 	public static function upload($files, $path) {
 		$error = '';
