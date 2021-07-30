@@ -801,6 +801,10 @@ error_update_failed: Update failed! Please restore your installation from a back
 
 -
 
+error_update_php_version: Your PHP version doesn't support the latest Automad version. Please upgrade PHP to version
+
+-
+
 error_update_not_supported: Updates are not supported by your server! The updater requires cURL and ZIP libraries to be installed.
 
 -

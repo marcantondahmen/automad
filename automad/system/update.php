@@ -105,6 +105,13 @@ class Update {
 			return $Response;
 		}
 
+		if ($phpVersion = self::higherPHPVersionRequired()) {
+			$Response->setHtml(Danger::render(Text::get('error_update_php_version') . " $phpVersion+."));
+			$Response->setCli("Your PHP version doesn't support the latest Automad version. Please upgrade PHP to version $phpVersion+.");
+
+			return $Response;
+		}
+
 		if (!self::permissionsGranted($items)) {
 			$Response->setHtml(Danger::render(Text::get('error_update_permission')));
 			$Response->setCli('Permission denied!');
@@ -265,6 +272,47 @@ class Update {
 	}
 
 	/**
+	 * Check if the server's PHP version matches the minimum requirements in the remote composer.json file.
+	 *
+	 * @return string a version number in case PHP is outdated or an empty string
+	 */
+	private static function higherPHPVersionRequired() {
+		$requiredVersion = '';
+
+		$options = array(
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_FRESH_CONNECT => 1,
+			CURLOPT_URL => AM_UPDATE_REPO_RAW_URL . '/' . AM_UPDATE_BRANCH . '/composer.json'
+		);
+
+		$curl = curl_init();
+		curl_setopt_array($curl, $options);
+		$output = curl_exec($curl);
+
+		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200 && !curl_errno($curl)) {
+			try {
+				$data = json_decode($output);
+				$composerRequiredVersion = preg_replace('/[^\d\.]*/', '', $data->require->php);
+
+				self::log("The required PHP version is $composerRequiredVersion");
+
+				if (version_compare(PHP_VERSION, $composerRequiredVersion, '<')) {
+					$requiredVersion = $composerRequiredVersion;
+					self::log("The server's PHP version in outdated!");
+				}
+			} catch (\Exception $e) {
+				self::log($e);
+			}
+		}
+
+		curl_close($curl);
+
+		return $requiredVersion;
+	}
+
+	/**
 	 * Get items to be updated from config.
 	 *
 	 * @return array The array of items to be updated or false on error
@@ -336,7 +384,7 @@ class Update {
 	private static function unpack($archive, $items) {
 		$success = true;
 		$zip = new \ZipArchive();
-		$itemsMatchRegex = 	'/^[\w\-]+(' . addcslashes(implode('|', $items), '/') . ')/';
+		$itemsMatchRegex = '/^[\w\-]+(' . addcslashes(implode('|', $items), '/') . ')/';
 
 		if ($zip->open($archive)) {
 			// Iterate over zip entries and unpack item in case
