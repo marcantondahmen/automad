@@ -749,6 +749,10 @@ error_import: The file import has failed!
 
 -
 
+error_invalid_username: Invalid username! A username can only contain the following characters: 
+
+-
+
 error_json: Invalid JSON! The contents of the configuration file is not formatted correctly.
 
 -

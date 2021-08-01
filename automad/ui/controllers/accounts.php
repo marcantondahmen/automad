@@ -37,6 +37,7 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
+use Automad\Core\Resolve;
 use Automad\UI\Components\Grid\Users;
 use Automad\UI\Models\Accounts as ModelsAccounts;
 use Automad\UI\Response;
@@ -64,13 +65,17 @@ class Accounts {
 		$password1 = Request::post('password1');
 		$password2 = Request::post('password2');
 
-		$error = ModelsAccounts::add($username, $password1, $password2);
-
-		if ($error) {
-			$Response->setError($error);
-		} else {
-			$Response->setSuccess(Text::get('success_added') . ' "' . $username . '"');
+		if (!self::validUsername($username)) {
+			return self::invalidUsernameResponse();
 		}
+
+		if ($error = ModelsAccounts::add($username, $password1, $password2)) {
+			$Response->setError($error);
+
+			return $Response;
+		}
+
+		$Response->setSuccess(Text::get('success_added') . ' "' . $username . '"');
 
 		return $Response;
 	}
@@ -100,6 +105,12 @@ class Accounts {
 	 */
 	public static function install() {
 		if (!empty($_POST)) {
+			if (!self::validUsername(Request::post('username'))) {
+				$Response = self::invalidUsernameResponse();
+
+				return $Response->getError();
+			}
+
 			return ModelsAccounts::install(
 				Request::post('username'),
 				Request::post('password1'),
@@ -135,5 +146,29 @@ class Accounts {
 		}
 
 		return $Response;
+	}
+
+	/**
+	 * A response containing the invalid username error message.
+	 *
+	 * @return \Automad\UI\Response the response object
+	 */
+	private static function invalidUsernameResponse() {
+		$Response = new Response();
+		$Response->setError(Text::get('error_invalid_username') . ' "a-z", "A-Z", ".", "-", "_", "@"');
+
+		return $Response;
+	}
+
+	/**
+	 * Verify if a given username is valid.
+	 *
+	 * @param string $username
+	 * @return boolean true in case the username is valid
+	 */
+	private static function validUsername($username) {
+		preg_match('/[^@\w\.\-]/', $username, $matches);
+
+		return empty($matches);
 	}
 }
