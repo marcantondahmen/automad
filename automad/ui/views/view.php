@@ -186,7 +186,7 @@ HTML;
 	 * @return string the rendered footer
 	 */
 	private function footer() {
-		if (!$this->Automad) {
+		if (!$this->hasNav) {
 			return false;
 		}
 
