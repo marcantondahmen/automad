@@ -702,6 +702,10 @@ error_import: Import súboru zlyhal!
 
 -
 
+error_invalid_username: Neplatné užívateľské meno! Užívateľské meno môže obsahovať iba nasledujúce znaky:
+
+-
+
 error_json: Neplatný JSON! Obsah konfiguračného súboru nie je správne naformátovaný.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Neplatný zoznam položiek, ktoré sa majú aktualizovať!
 -
 
 error_update_failed: Aktualizacia neuspešná! Obnovte svoju inštaláciu zo zálohy.
+
+-
+
+error_update_php_version: Vaša verzia PHP nepodporuje najnovšiu verziu AUTOMAD. Aktualizujte PHP na verziu
 
 -
 

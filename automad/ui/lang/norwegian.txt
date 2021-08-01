@@ -702,6 +702,10 @@ error_import: Filimporten mislyktes!
 
 -
 
+error_invalid_username: Ugyldig brukernavn! Et brukernavn kan bare inneholde følgende tegn:
+
+-
+
 error_json: Ugyldig JSON! Innholdet i konfigurasjonsfilen er ikke formatert riktig.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Ugyldig liste over elementer som skal oppdateres!
 -
 
 error_update_failed: Oppdatering mislyktes! Gjenopprett installasjonen fra en sikkerhetskopi.
+
+-
+
+error_update_php_version: Din PHP-versjon støtter ikke den nyeste Automad-versjonen. Vennligst oppgrader PHP til versjon
 
 -
 

@@ -702,6 +702,10 @@ error_import: Uvoz datoteke nije uspio!
 
 -
 
+error_invalid_username: Nevažeće korisničko ime! Korisničko ime može sadržavati samo sljedeće znakove:
+
+-
+
 error_json: Nevažeći JSON! Sadržaj konfiguracijske datoteke nije pravilno formatiran.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Nevažeća lista stavki koje treba ažurirati!
 -
 
 error_update_failed: Ažuriranje nije uspjelo! Obnovite instalaciju iz sigurnosne kopije.
+
+-
+
+error_update_php_version: Vaša PHP verzija ne podržava najnoviju verziju automobila. Nadogradite PHP na verziju
 
 -
 

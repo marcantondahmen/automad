@@ -702,6 +702,10 @@ error_import: L'importazione del file è fallita!
 
 -
 
+error_invalid_username: Nome utente non valido! Un nome utente può contenere solo i seguenti caratteri:
+
+-
+
 error_json: JSON non valido! Il contenuto del file di configurazione non è formattato correttamente.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Elenco di articoli non valido da aggiornare!
 -
 
 error_update_failed: Aggiornamento non riuscito! Ripristina l'installazione da un backup.
+
+-
+
+error_update_php_version: La versione PHP non supporta la versione più recente ATRAD. Si prega di aggiornare PHP alla versione
 
 -
 

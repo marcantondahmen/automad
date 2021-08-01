@@ -702,6 +702,10 @@ error_import: Filimporten mislykkedes!
 
 -
 
+error_invalid_username: Ugyldigt brugernavn! Et brugernavn kan kun indeholde følgende tegn:
+
+-
+
 error_json: Ugyldig JSON! Indholdet af konfigurationsfilen er ikke formateret korrekt.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Ugyldig liste over emner, der skal opdateres!
 -
 
 error_update_failed: Opdatering fejlede! Gendan din installation fra en sikkerhedskopi.
+
+-
+
+error_update_php_version: Din PHP-version understøtter ikke den nyeste automadeversion. Venligst opgrader PHP til version
 
 -
 

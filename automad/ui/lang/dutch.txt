@@ -702,6 +702,10 @@ error_import: Het importeren van het bestand is mislukt!
 
 -
 
+error_invalid_username: Ongeldige gebruikersnaam! Een gebruikersnaam kan alleen de volgende tekens bevatten:
+
+-
+
 error_json: Ongeldige JSON! De inhoud van het configuratiebestand is niet correct opgemaakt.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Ongeldige lijst met te updaten items!
 -
 
 error_update_failed: Update mislukt! Herstel uw installatie vanaf een back-up.
+
+-
+
+error_update_php_version: Uw PHP-versie ondersteunt de nieuwste automaatversie niet. Gelieve PHP naar versie te upgraden
 
 -
 

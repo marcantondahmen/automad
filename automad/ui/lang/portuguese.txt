@@ -702,6 +702,10 @@ error_import: A importação do arquivo falhou!
 
 -
 
+error_invalid_username: Nome de usuário Inválido! Um nome de usuário só pode conter os seguintes caracteres:
+
+-
+
 error_json: JSON inválido! O conteúdo do arquivo de configuração não está formatado corretamente.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Lista inválida de itens a serem atualizados!
 -
 
 error_update_failed: Atualização falhou! Restaure sua instalação a partir de um backup.
+
+-
+
+error_update_php_version: Sua versão PHP não suporta a versão mais recente do Automad. Por favor, atualize PHP para a versão
 
 -
 

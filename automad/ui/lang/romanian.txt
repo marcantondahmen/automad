@@ -702,6 +702,10 @@ error_import: Importul fișierului a eșuat!
 
 -
 
+error_invalid_username: Nume de utilizator invalid! Un nume de utilizator poate conține numai următoarele caractere:
+
+-
+
 error_json: JSON nevalid! Conținutul fișierului de configurare nu este formatat corect.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Lista nevalidă de articole care trebuie actualizate!
 -
 
 error_update_failed: Actualizare esuata! Vă rugăm să restaurați instalarea dintr-o copie de rezervă.
+
+-
+
+error_update_php_version: Versiunea dvs. PHP nu acceptă cea mai recentă versiune de automobil. Vă rugăm să faceți upgrade PHP la versiune
 
 -
 

@@ -702,6 +702,10 @@ error_import: Tiedoston tuonti epäonnistui!
 
 -
 
+error_invalid_username: Virheellinen käyttäjätunnus! Käyttäjätunnus voi sisältää vain seuraavat merkit:
+
+-
+
 error_json: Virheellinen JSON! Kokoonpanotiedoston sisältö ei ole alustettu oikein.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Virheellinen luettelo päivitettävistä tuotteista!
 -
 
 error_update_failed: Päivitys epäonnistui! Palauta asennus varmuuskopiosta.
+
+-
+
+error_update_php_version: PHP-versio ei tue uusinta Autod-versiota. Päivitä PHP versioon
 
 -
 

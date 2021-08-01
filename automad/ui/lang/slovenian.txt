@@ -702,6 +702,10 @@ error_import: Uvoz datoteke ni uspel!
 
 -
 
+error_invalid_username: Neveljavno uporabniško ime! Uporabniško ime lahko vsebuje samo naslednje znake:
+
+-
+
 error_json: Neveljaven JSON! Vsebina konfiguracijske datoteke ni pravilno oblikovana.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Neveljaven seznam elementov, ki jih je treba posodobiti!
 -
 
 error_update_failed: Posodobitev ni uspela! Obnovite namestitev iz varnostne kopije.
+
+-
+
+error_update_php_version: Vaša različica PHP ne podpira najnovejše različice AUTHAD. Nadgradite PHP na različico
 
 -
 

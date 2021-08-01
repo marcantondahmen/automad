@@ -702,6 +702,10 @@ error_import: Nepavyko importuoti failo!
 
 -
 
+error_invalid_username: Neteisingas vartotojo vardas! Vartotojo vardas gali būti tik šie simboliai:
+
+-
+
 error_json: Netinkamas JSON! Konfigūracijos failo turinys netinkamai suformatuotas.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Neteisingas atnaujinamų elementų sąrašas!
 -
 
 error_update_failed: Atnaujinimas nepavyko! Atkurkite diegimą iš atsarginės kopijos.
+
+-
+
+error_update_php_version: Jūsų PHP versija nepalaiko naujausios automatinės versijos. Prašome atnaujinti PHP į versiją
 
 -
 

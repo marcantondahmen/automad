@@ -702,6 +702,10 @@ error_import: Theip ar allmhairiú an chomhaid!
 
 -
 
+error_invalid_username: Ainm Úsáideora neamhbhailí! Ní féidir ach na carachtair seo a leanas a bheith in ainm úsáideora:
+
+-
+
 error_json: JSON neamhbhailí! Níl ábhar an chomhaid chumraíochta formáidithe i gceart.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Liosta neamhbhailí earraí le nuashonrú!
 -
 
 error_update_failed: Theip ar an nuashonrú! Cuir do shuiteáil ar ais ó chúltaca.
+
+-
+
+error_update_php_version: Ní thacaíonn do leagan PHP leis an leagan uathoibrithe is déanaí. Uasghrádú a dhéanamh ar PHP le Leagan
 
 -
 

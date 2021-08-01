@@ -702,6 +702,10 @@ error_import: L'importation du fichier a échoué!
 
 -
 
+error_invalid_username: Nom d'utilisateur invalide! Un nom d'utilisateur ne peut contenir que les caractères suivants:
+
+-
+
 error_json: JSON invalide! Le contenu du fichier de configuration n'est pas formaté correctement.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Liste non valide des éléments à mettre à jour!
 -
 
 error_update_failed: Mise à jour a échoué! Veuillez restaurer votre installation à partir d'une sauvegarde.
+
+-
+
+error_update_php_version: Votre version PHP ne prend pas en charge la dernière version automate. Veuillez mettre à niveau PHP en version
 
 -
 

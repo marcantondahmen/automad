@@ -702,6 +702,10 @@ error_import: Filimporten misslyckades!
 
 -
 
+error_invalid_username: Ogiltigt användarnamn! Ett användarnamn kan bara innehålla följande tecken:
+
+-
+
 error_json: Ogiltig JSON! Innehållet i konfigurationsfilen är inte formaterat korrekt.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Ogiltig lista över objekt som ska uppdateras!
 -
 
 error_update_failed: Uppdateringen misslyckades! Återställ din installation från en säkerhetskopia.
+
+-
+
+error_update_php_version: Din PHP-version stöder inte den senaste automadversionen. Vänligen uppgradera php till version
 
 -
 

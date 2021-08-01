@@ -702,6 +702,10 @@ error_import: Der Dateiimport ist fehlgeschlagen!
 
 -
 
+error_invalid_username: Ungültiger Benutzername! Ein Benutzername kann nur die folgenden Zeichen enthalten:
+
+-
+
 error_json: Ungültiger JSON! Der Inhalt der Konfigurationsdatei ist nicht korrekt formatiert.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Ungültige Liste der zu aktualisierenden Elemente!
 -
 
 error_update_failed: Update fehlgeschlagen! Bitte stellen Sie Ihre Installation aus einem Backup wieder her.
+
+-
+
+error_update_php_version: Ihre PHP-Version unterstützt nicht die neueste Automad-Version. Bitte aktualisieren Sie PHP auf die Version
 
 -
 

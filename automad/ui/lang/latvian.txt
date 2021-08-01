@@ -702,6 +702,10 @@ error_import: Failu importēšana neizdevās!
 
 -
 
+error_invalid_username: Nederīgs lietotājvārds! Lietotājvārds var saturēt tikai šādas rakstzīmes:
+
+-
+
 error_json: Nederīgs JSON! Konfigurācijas faila saturs nav pareizi formatēts.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Nederīgs atjaunināmo vienumu saraksts!
 -
 
 error_update_failed: Atjaunināšana neizdevās! Lūdzu, atjaunojiet instalāciju no dublējuma.
+
+-
+
+error_update_php_version: Jūsu PHP versija neatbalsta jaunāko Automad versiju. Lūdzu, atjauniniet PHP uz versiju
 
 -
 

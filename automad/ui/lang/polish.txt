@@ -702,6 +702,10 @@ error_import: Import pliku nie powiódł się!
 
 -
 
+error_invalid_username: Zła nazwa użytkownika! Nazwa użytkownika może zawierać tylko następujące znaki:
+
+-
+
 error_json: Nieprawidłowy JSON! Zawartość pliku konfiguracyjnego nie jest poprawnie sformatowana.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Nieprawidłowa lista elementów do aktualizacji!
 -
 
 error_update_failed: Aktualizacja nie powiodła się! Przywróć instalację z kopii zapasowej.
+
+-
+
+error_update_php_version: Twoja wersja PHP nie obsługuje najnowszej wersji Automad. Proszę uaktualnić PHP do wersji
 
 -
 

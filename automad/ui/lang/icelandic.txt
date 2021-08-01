@@ -702,6 +702,10 @@ error_import: Innflutningur skráa mistókst!
 
 -
 
+error_invalid_username: Ógilt notandanafn! Notandanafn getur aðeins innihaldið eftirfarandi stafi:
+
+-
+
 error_json: Ógilt JSON! Innihald stillingarskrárinnar er ekki sniðið rétt.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Ógildur listi yfir atriði sem á að uppfæra!
 -
 
 error_update_failed: Uppfærsla mistókst! Vinsamlegast endurheimtu uppsetningu þína frá öryggisafrit.
+
+-
+
+error_update_php_version: PHP útgáfa þín styður ekki nýjustu automad útgáfuna. Vinsamlegast uppfærðu PHP til útgáfu
 
 -
 

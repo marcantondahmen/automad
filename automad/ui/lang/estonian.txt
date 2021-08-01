@@ -702,6 +702,10 @@ error_import: Failide importimine nurjus!
 
 -
 
+error_invalid_username: Vale kasutajanimi! Kasutajanimi võib sisaldada ainult järgmisi märke:
+
+-
+
 error_json: Kehtetu JSON! Konfiguratsioonifaili sisu pole õigesti vormindatud.
 
 -
@@ -751,6 +755,10 @@ error_update_items: Vale värskendatavate üksuste loend!
 -
 
 error_update_failed: Uuendus ebaõnnestus! Taastage install varukoopiast.
+
+-
+
+error_update_php_version: Teie PHP versioon ei toeta uusimaid Autod versiooni. Palun uuendage PHP versioonile
 
 -
 
