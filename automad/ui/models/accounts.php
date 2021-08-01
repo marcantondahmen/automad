@@ -36,7 +36,6 @@
 
 namespace Automad\UI\Models;
 
-use Automad\Core\Request;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
@@ -59,10 +58,6 @@ class Accounts {
 	 * @return string an error message or false on success.
 	 */
 	public static function add($username, $password1, $password2) {
-		$username = Request::post('username');
-		$password1 = Request::post('password1');
-		$password2 = Request::post('password2');
-
 		if ($username && $password1 && $password2) {
 			// Check if password1 equals password2.
 			if ($password1 == $password2) {
@@ -156,7 +151,7 @@ class Accounts {
 	public static function install($username, $password1, $password2) {
 		if ($username && $password1 && ($password1 === $password2)) {
 			$accounts = array();
-			$accounts[$username] = ModelsAccounts::passwordHash($password1);
+			$accounts[$username] = self::passwordHash($password1);
 
 			// Download accounts.php
 			header('Expires: -1');
@@ -166,7 +161,7 @@ class Accounts {
 			header('Content-Transfer-Encoding: binary');
 			header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
 			ob_end_flush();
-			echo ModelsAccounts::generatePHP($accounts);
+			echo self::generatePHP($accounts);
 			exit();
 		} else {
 			return Text::get('error_form');
