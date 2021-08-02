@@ -590,6 +590,29 @@ class AutomadBlockSection {
 			this.modalWrapper.querySelector('.am-section-background-image')
 		);
 
+		const styleSettings = this.modalWrapper.querySelector(
+			`#${this.modalDropdownId}`
+		);
+
+		const styleInputs = styleSettings.querySelectorAll(
+			'input, select, [contenteditable]'
+		);
+
+		Array.from(styleInputs).forEach((element) => {
+			const update = () => {
+				setTimeout(() => {
+					console.log('hello');
+					this.saveStyleSettings();
+					this.applyStyleSettings(
+						document.getElementById(this.modalEditorId)
+					);
+				}, 100);
+			};
+
+			element.addEventListener('input', update);
+			element.addEventListener('keydown', update);
+		});
+
 		const flexSettings = this.modalWrapper.querySelector(
 			`.${AutomadBlockSection.cls.flexSettings}`
 		);
@@ -606,18 +629,6 @@ class AutomadBlockSection {
 
 		this.initToggles();
 		this.applyDialogSize();
-
-		se.$('input, select, [contenteditable]').on(
-			'change input keydown',
-			() => {
-				setTimeout(() => {
-					this.saveStyleSettings();
-					this.applyStyleSettings(
-						document.getElementById(this.modalEditorId)
-					);
-				}, 50);
-			}
-		);
 
 		const modal = se.UIkit.modal(`#${this.modalId}`, {
 			modal: false,
