@@ -298,7 +298,7 @@ class Search {
 		$fieldMatches = array();
 
 		preg_match_all(
-			'/(?P<contextBefore>.{0,20})(?P<match>' . $this->searchValue . ')(?P<contextAfter>.{0,20})/' . $this->regexFlags,
+			'/(?P<before>(?:^|\s).{0,50})(?P<match>' . $this->searchValue . ')(?P<after>.{0,50}(?:\s|$))/' . $this->regexFlags,
 			$value,
 			$matches,
 			PREG_SET_ORDER
@@ -308,7 +308,11 @@ class Search {
 			$parts = array();
 
 			foreach ($matches as $match) {
-				$parts[] = preg_replace('/\s+/', ' ', trim("{$match['contextBefore']}<mark>{$match['match']}</mark>{$match['contextAfter']}"));
+				$parts[] = preg_replace(
+					'/\s+/',
+					' ',
+					trim("{$match['before']}<mark>{$match['match']}</mark>{$match['after']}")
+				);
 			}
 
 			$context = join(' ... ', $parts);

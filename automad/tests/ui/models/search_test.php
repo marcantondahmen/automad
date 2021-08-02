@@ -24,7 +24,7 @@ class Search_Test extends TestCase {
 							new FieldResults(
 								'text',
 								array('simple'),
-								'A <mark>simple</mark> sample text with a'
+								'A <mark>simple</mark> sample text with a [link](/url/to/page)'
 							)
 						),
 						'/text'
@@ -35,7 +35,7 @@ class Search_Test extends TestCase {
 							new FieldResults(
 								'+main',
 								array('Simple', 'simple'),
-								'A <mark>Simple</mark> First Column Table ... A <mark>simple</mark> paragraph text'
+								'A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text'
 							)
 						),
 						'/blocks'
@@ -53,7 +53,7 @@ class Search_Test extends TestCase {
 							new FieldResults(
 								'+main',
 								array('Simple'),
-								'A <mark>Simple</mark> First Column Table'
+								'A <mark>Simple</mark> First Column Table Header'
 							)
 						),
 						'/blocks'
@@ -118,7 +118,7 @@ class Search_Test extends TestCase {
 									'table row',
 									'table row'
 								),
-								'Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column'
+								'A Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column'
 							)
 						),
 						'/blocks'
