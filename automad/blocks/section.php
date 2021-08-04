@@ -78,6 +78,10 @@ class Section extends Block {
 				$classes[] = 'am-card';
 			}
 
+			if (!empty($data->style->class)) {
+				$classes = array_merge($classes, explode(' ', $data->style->class));
+			}
+
 			if (!empty($data->style->backgroundImage)) {
 				$style .= " background-image: url('{$data->style->backgroundImage}');";
 			}

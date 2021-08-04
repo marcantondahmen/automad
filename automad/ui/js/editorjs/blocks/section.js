@@ -70,9 +70,7 @@ class AutomadBlockSection {
 	static get sanitize() {
 		return {
 			content: true, // Allow HTML tags
-			style: {
-				css: false,
-			},
+			style: false,
 		};
 	}
 
@@ -247,6 +245,7 @@ class AutomadBlockSection {
 					paddingTop: '',
 					paddingBottom: '',
 					overflowHidden: false,
+					class: '',
 				},
 				this.data.style
 			);
@@ -404,6 +403,8 @@ class AutomadBlockSection {
 							}
 						</div>
 					</div>
+					${create.label('Class (CSS)').outerHTML}
+					${create.editable(['cdx-input', 'am-section-class'], '', style.class).outerHTML}
 				</div>
 			</div>
 		`;
@@ -454,6 +455,7 @@ class AutomadBlockSection {
 		inputs.paddingBottomUnit = wrapper.querySelector(
 			'.am-section-padding-bottom-unit'
 		);
+		inputs.class = wrapper.querySelector('.am-section-class');
 
 		this.data.style = {
 			card: inputs.card.checked,
@@ -481,6 +483,7 @@ class AutomadBlockSection {
 				inputs.paddingBottomNumber,
 				inputs.paddingBottomUnit
 			),
+			class: inputs.class.innerHTML,
 		};
 
 		if (this.data.style.backgroundBlendMode == 'normal') {
@@ -601,7 +604,6 @@ class AutomadBlockSection {
 		Array.from(styleInputs).forEach((element) => {
 			const update = () => {
 				setTimeout(() => {
-					console.log('hello');
 					this.saveStyleSettings();
 					this.applyStyleSettings(
 						document.getElementById(this.modalEditorId)
