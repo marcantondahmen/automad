@@ -42,8 +42,10 @@ class AutomadBlockButtons {
 		return {
 			primaryText: {},
 			primaryLink: false,
+			primaryStyle: false,
 			secondaryText: {},
 			secondaryLink: false,
+			secondaryStyle: false,
 		};
 	}
 
@@ -325,6 +327,7 @@ class AutomadBlockButtons {
 		`;
 
 		const grid = wrapper.querySelector('.uk-grid');
+		const dropdown = wrapper.querySelector('.am-style-dropdown');
 
 		settings.forEach((group) => {
 			const div = create.element('div', []);
@@ -366,6 +369,16 @@ class AutomadBlockButtons {
 
 			grid.appendChild(div);
 		});
+
+		const classLabel = create.label('Class (CSS)');
+		const classInput = create.editable(['cdx-input'], '', obj.class || '');
+
+		classInput.addEventListener('input', () => {
+			obj.class = classInput.innerHTML;
+		});
+
+		dropdown.appendChild(classLabel);
+		dropdown.appendChild(classInput);
 
 		parent.appendChild(wrapper);
 	}

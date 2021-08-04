@@ -74,11 +74,14 @@ class Buttons extends Block {
 				$styleObj = $data->{$item . 'Style'};
 				$style = '';
 				$link = $data->{$item . 'Link'};
+				$class = '';
 
 				foreach ($styleObj as $key => $value) {
-					$style .= '--am-button-' .
-							  strtolower(preg_replace('/([A-Z])/', '-$1', $key)) .
-							  ": $value; ";
+					if ($key != 'class') {
+						$style .= '--am-button-' .
+						strtolower(preg_replace('/([A-Z])/', '-$1', $key)) .
+						": $value; ";
+					}
 				}
 
 				if ($style) {
@@ -86,10 +89,14 @@ class Buttons extends Block {
 					$style = 'style="' . $style . '"';
 				}
 
+				if (!empty($styleObj->class)) {
+					$class = " {$styleObj->class}";
+				}
+
 				$html .= <<< HTML
 						<a 
 						href="$link"
-						class="am-button"
+						class="am-button{$class}"
 						$style
 						>
 							$text
