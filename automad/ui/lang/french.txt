@@ -310,6 +310,14 @@ editor_image_toolbox: Image
 
 -
 
+editor_image_caption: Faire entrer une légende
+
+-
+
+editor_image_link: Utilisez l'image comme lien
+
+-
+
 editor_list_toolbox: Lister
 
 -

@@ -310,6 +310,14 @@ editor_image_toolbox: Vaizdas
 
 -
 
+editor_image_caption: Įveskite antraštę
+
+-
+
+editor_image_link: Naudoti vaizdą kaip nuorodą
+
+-
+
 editor_list_toolbox: Sąrašas
 
 -

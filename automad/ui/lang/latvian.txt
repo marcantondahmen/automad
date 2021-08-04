@@ -310,6 +310,14 @@ editor_image_toolbox: Attēls
 
 -
 
+editor_image_caption: Ievadiet parakstu
+
+-
+
+editor_image_link: Izmantojiet attēlu kā saiti
+
+-
+
 editor_list_toolbox: Saraksts
 
 -

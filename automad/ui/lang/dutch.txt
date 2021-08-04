@@ -310,6 +310,14 @@ editor_image_toolbox: Beeld
 
 -
 
+editor_image_caption: Voer een bijschrift in
+
+-
+
+editor_image_link: Gebruik afbeelding als link
+
+-
+
 editor_list_toolbox: Lijst
 
 -

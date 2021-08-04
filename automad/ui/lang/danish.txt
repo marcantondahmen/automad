@@ -310,6 +310,14 @@ editor_image_toolbox: Billede
 
 -
 
+editor_image_caption: Indtast en billedtekst.
+
+-
+
+editor_image_link: Brug billede som link
+
+-
+
 editor_list_toolbox: Liste
 
 -

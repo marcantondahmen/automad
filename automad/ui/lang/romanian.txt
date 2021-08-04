@@ -310,6 +310,14 @@ editor_image_toolbox: Imagine
 
 -
 
+editor_image_caption: Introduceți o legendă
+
+-
+
+editor_image_link: Utilizați imaginea ca link
+
+-
+
 editor_list_toolbox: Listă
 
 -

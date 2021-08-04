@@ -310,6 +310,14 @@ editor_image_toolbox: Слика
 
 -
 
+editor_image_caption: Унесите натпис
+
+-
+
+editor_image_link: Користите слику као везу
+
+-
+
 editor_list_toolbox: Листа
 
 -

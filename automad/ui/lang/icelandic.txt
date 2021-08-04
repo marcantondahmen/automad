@@ -310,6 +310,14 @@ editor_image_toolbox: Mynd
 
 -
 
+editor_image_caption: Sláðu inn yfirskrift.
+
+-
+
+editor_image_link: Notaðu mynd sem tengil
+
+-
+
 editor_list_toolbox: Listi
 
 -

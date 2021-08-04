@@ -310,6 +310,14 @@ editor_image_toolbox: Изображение
 
 -
 
+editor_image_caption: Введите заголовок
+
+-
+
+editor_image_link: Используйте изображение как ссылка
+
+-
+
 editor_list_toolbox: Список
 
 -

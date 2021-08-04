@@ -310,6 +310,14 @@ editor_image_toolbox: Εικόνα
 
 -
 
+editor_image_caption: Εισάγετε μια λεζάντα
+
+-
+
+editor_image_link: Χρησιμοποιήστε την εικόνα ως σύνδεσμος
+
+-
+
 editor_list_toolbox: Λίστα
 
 -

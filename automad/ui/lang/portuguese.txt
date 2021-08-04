@@ -310,6 +310,14 @@ editor_image_toolbox: Imagem
 
 -
 
+editor_image_caption: Digite uma legenda
+
+-
+
+editor_image_link: Use imagem como link
+
+-
+
 editor_list_toolbox: Lista
 
 -

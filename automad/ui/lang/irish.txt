@@ -310,6 +310,14 @@ editor_image_toolbox: Íomha
 
 -
 
+editor_image_caption: Cuir isteach fotheideal
+
+-
+
+editor_image_link: Úsáid Íomhá mar Nasc
+
+-
+
 editor_list_toolbox: Liosta
 
 -

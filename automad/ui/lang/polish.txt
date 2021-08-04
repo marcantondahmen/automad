@@ -310,6 +310,14 @@ editor_image_toolbox: Wizerunek
 
 -
 
+editor_image_caption: Wprowadź podpis
+
+-
+
+editor_image_link: Użyj obrazu jako link
+
+-
+
 editor_list_toolbox: Lista
 
 -

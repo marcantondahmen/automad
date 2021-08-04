@@ -310,6 +310,14 @@ editor_image_toolbox: Immagine
 
 -
 
+editor_image_caption: Inserisci una didascalia
+
+-
+
+editor_image_link: Usa l'immagine come link
+
+-
+
 editor_list_toolbox: Elenco
 
 -

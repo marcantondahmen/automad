@@ -310,6 +310,14 @@ editor_image_toolbox: Kuva
 
 -
 
+editor_image_caption: Anna kuvateksti
+
+-
+
+editor_image_link: Käytä kuvaa linkkinä
+
+-
+
 editor_list_toolbox: Lista
 
 -

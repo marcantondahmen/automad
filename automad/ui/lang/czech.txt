@@ -310,6 +310,14 @@ editor_image_toolbox: Obraz
 
 -
 
+editor_image_caption: Zadejte titulek
+
+-
+
+editor_image_link: Použijte obrázek jako odkaz
+
+-
+
 editor_list_toolbox: Seznam
 
 -

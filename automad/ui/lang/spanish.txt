@@ -310,6 +310,14 @@ editor_image_toolbox: Imagen
 
 -
 
+editor_image_caption: Entrar en un título
+
+-
+
+editor_image_link: Usa la imagen como enlace
+
+-
+
 editor_list_toolbox: Lista
 
 -

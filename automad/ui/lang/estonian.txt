@@ -310,6 +310,14 @@ editor_image_toolbox: Pilt
 
 -
 
+editor_image_caption: Sisestage pealkiri
+
+-
+
+editor_image_link: Kasutage pilti linkina
+
+-
+
 editor_list_toolbox: Nimekiri
 
 -

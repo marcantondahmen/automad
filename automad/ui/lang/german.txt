@@ -310,6 +310,14 @@ editor_image_toolbox: Bild
 
 -
 
+editor_image_caption: Geben Sie eine Bildunterschrift ein
+
+-
+
+editor_image_link: Verwenden Sie das Bild als Link
+
+-
+
 editor_list_toolbox: Liste
 
 -
