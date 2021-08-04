@@ -46,6 +46,13 @@ class AutomadBlockImage {
 		};
 	}
 
+	static get sanitize() {
+		return {
+			caption: {},
+			link: false,
+		};
+	}
+
 	static get toolbox() {
 		return {
 			title: AutomadEditorTranslation.get('image_toolbox'),
@@ -59,6 +66,7 @@ class AutomadBlockImage {
 		this.data = {
 			url: data.url || '',
 			caption: data.caption || '',
+			link: data.link || '',
 		};
 
 		this.settings = AutomadLayout.renderSettings(
@@ -77,8 +85,33 @@ class AutomadBlockImage {
 			this.data.caption
 		);
 
+		const linkWrapper = document.createElement('div');
+		linkWrapper.classList.add('am-form-icon-button-input', 'uk-flex');
+
+		const linkButton = document.createElement('button');
+		linkButton.type = 'button';
+		linkButton.classList.add('uk-button', 'uk-button-large');
+		linkButton.innerHTML = '<i class="uk-icon-link"></i>';
+
+		api.listeners.on(linkButton, 'click', () => {
+			Automad.link.click(linkButton);
+		});
+
+		this.link = document.createElement('input');
+		this.link.type = 'text';
+		this.link.value = this.data.link;
+		this.link.classList.add(
+			'am-block-link',
+			'uk-form-controls',
+			'uk-width-1-1'
+		);
+
+		linkWrapper.appendChild(linkButton);
+		linkWrapper.appendChild(this.link);
+
 		this.wrapper.appendChild(this.img);
 		this.wrapper.appendChild(this.caption);
+		this.wrapper.appendChild(linkWrapper);
 
 		this.button = document.createElement('div');
 		this.button.innerHTML =
@@ -90,10 +123,8 @@ class AutomadBlockImage {
 			'uk-text-center'
 		);
 
-		var block = this;
-
-		this.button.addEventListener('click', function () {
-			block.select();
+		this.button.addEventListener('click', () => {
+			this.select();
 		});
 	}
 
@@ -130,6 +161,7 @@ class AutomadBlockImage {
 		return Object.assign(this.data, {
 			url: this.data.url,
 			caption: this.caption.innerHTML,
+			link: this.link.value,
 		});
 	}
 
