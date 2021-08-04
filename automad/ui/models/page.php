@@ -313,25 +313,7 @@ class Page {
 		);
 
 		foreach ($replace as $old => $new) {
-			$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
-			$replaceValue = $new;
-
-			$Search = new Search($Automad, $searchValue, true, false);
-			$fileResultsArray = $Search->searchPerFile();
-			$fileKeysArray = array();
-
-			foreach ($fileResultsArray as $FileResults) {
-				$keys = array();
-
-				foreach ($FileResults->fieldResultsArray as $FieldResults) {
-					$keys[] = $FieldResults->key;
-				}
-
-				$fileKeysArray[] = new FileKeys($FileResults->path, $keys);
-			}
-
-			$Replacement = new Replacement($searchValue, $replaceValue, true, false);
-			$Replacement->replaceInFiles($fileKeysArray);
+			Links::update($Automad, $old, $new);
 		}
 
 		Cache::clear();

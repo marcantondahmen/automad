@@ -39,6 +39,7 @@ namespace Automad\UI\Models;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Str;
+use Automad\UI\Components\Modal\Link;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -71,9 +72,17 @@ class File {
 			$newFile = $path . Str::sanitize(basename($newName));
 
 			if (FileSystem::isAllowedFileType($newFile)) {
-				// Rename file and caption if needed.
+				// Rename file and caption if needed and update all file links.
 				if ($newFile != $oldFile) {
 					$error = FileSystem::renameMedia($oldFile, $newFile);
+
+					if (!$error) {
+						Links::update(
+							$Automad,
+							Str::stripStart($oldFile, AM_BASE_DIR),
+							Str::stripStart($newFile, AM_BASE_DIR)
+						);
+					}
 				}
 
 				// Write caption.
