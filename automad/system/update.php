@@ -94,8 +94,10 @@ class Update {
 	 * @return \Automad\UI\Response the response object
 	 */
 	public static function run() {
-		$Response = new Response();
+		self::$timestamp = date('Ymd-His');
+		self::log('Starting update ' . date('c'));
 
+		$Response = new Response();
 		$items = self::items();
 
 		if (!$items) {
@@ -119,8 +121,6 @@ class Update {
 			return $Response;
 		}
 
-		self::$timestamp = date('Ymd-His');
-		self::log('Starting update ' . date('c'));
 		self::log('Version to be updated: ' . AM_VERSION);
 		self::log('Updating items: ' . implode(', ', $items));
 
@@ -303,7 +303,7 @@ class Update {
 					self::log("The server's PHP version in outdated!");
 				}
 			} catch (\Exception $e) {
-				self::log($e);
+				self::log($e->getMessage());
 			}
 		}
 
