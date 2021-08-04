@@ -81,7 +81,7 @@ class AutomadBlockImage {
 		this.img = document.createElement('img');
 		this.caption = Automad.util.create.editable(
 			['cdx-input'],
-			'Enter a caption',
+			AutomadEditorTranslation.get('image_caption'),
 			this.data.caption
 		);
 
@@ -99,6 +99,7 @@ class AutomadBlockImage {
 
 		this.link = document.createElement('input');
 		this.link.type = 'text';
+		this.link.placeholder = AutomadEditorTranslation.get('image_link');
 		this.link.value = this.data.link;
 		this.link.classList.add(
 			'am-block-link',

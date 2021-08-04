@@ -346,6 +346,14 @@ editor_image_toolbox: Image
 
 -
 
+editor_image_caption: Enter a caption
+
+-
+
+editor_image_link: Use image as link
+
+-
+
 editor_list_toolbox: List 
 
 -
