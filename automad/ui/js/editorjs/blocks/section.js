@@ -613,6 +613,7 @@ class AutomadBlockSection {
 
 			element.addEventListener('input', update);
 			element.addEventListener('keydown', update);
+			element.addEventListener('change', update);
 		});
 
 		const flexSettings = this.modalWrapper.querySelector(
