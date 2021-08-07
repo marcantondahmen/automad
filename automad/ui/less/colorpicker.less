@@ -1,0 +1,70 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+[data-am-colorpicker] {
+	& > input[type='color'] {
+		position: absolute;
+		box-sizing: border-box;
+		width: @form-height;
+		min-width: @form-height;
+		height: @form-height;
+		max-height: @form-height;
+		min-height: @form-height;
+		padding: 0.71rem;
+		border: none !important;
+		outline: none;
+		background-color: transparent !important;
+		box-shadow: none !important;
+		cursor: pointer;
+		-webkit-appearance: none;
+
+		&::-webkit-color-swatch-wrapper {
+			padding: 0;
+		}
+
+		&::-moz-color-swatch {
+			border: @am-hairline;
+			border-radius: 100%;
+		}
+
+		&::-webkit-color-swatch {
+			border: @am-hairline;
+			border-radius: 100%;
+		}
+	}
+
+	& > input[type='text'] {
+		padding-left: 2.86rem;
+	}
+}

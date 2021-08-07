@@ -1,0 +1,93 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@badge-color: @button-primary-color;
+@badge-background: @button-primary-background;
+@badge-padding-horizontal: 0.5rem;
+@badge-font-size: 0.75rem;
+@badge-font-weight: 560;
+@badge-line-height: 1.26rem;
+@badge-text-transform: none;
+@badge-hover-color: @badge-color;
+
+@badge-success-background: @button-success-background;
+
+@badge-notification-font-size: 0.86rem;
+@badge-notification-line-height: 1.86rem;
+
+.hook-badge() {
+	margin-top: -0.175rem;
+	border-radius: 4rem;
+	min-width: 1.6rem;
+	padding-top: 0;
+	padding-bottom: 0;
+	box-sizing: border-box;
+	text-align: center;
+
+	&.am-badge-folder {
+		position: relative;
+		max-width: 1.36rem;
+		min-width: 1.36rem;
+		z-index: 5;
+		font-size: 0.71rem;
+		padding: 0;
+		margin-top: 0;
+		border-radius: 0.18rem;
+		line-height: 1.07rem;
+		color: @am-bg;
+		background-color: @am-text;
+
+		&:before {
+			content: '';
+			position: absolute;
+			display: inline-block;
+			top: -0.21rem;
+			left: 0;
+			height: 0.43rem;
+			width: 0.71rem;
+			border-top-left-radius: 0.21rem;
+			border-top-right-radius: 0.36rem;
+			background-color: inherit;
+		}
+	}
+}
+
+.hook-badge-success() {
+	color: #ffffff;
+}
+
+.uk-badge-notification {
+	padding: 0 0.86rem;
+	font-weight: inherit;
+}

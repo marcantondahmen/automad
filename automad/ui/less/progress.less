@@ -1,0 +1,62 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2017-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@progress-height: 1.21rem;
+@progress-margin-vertical: 0.36rem;
+@progress-background: @button-hover-background;
+
+@progress-bar-background: @am-success;
+@progress-bar-font-size: @text-small-font-size;
+@progress-bar-color: @button-hover-background;
+
+@progress-bar-success-background: @am-success;
+@progress-bar-warning-background: @am-danger;
+@progress-bar-danger-background: @am-danger;
+
+.hook-progress() {
+	border-radius: @am-radius;
+
+	&.am-progress-panel {
+		height: auto;
+		margin: 0;
+		cursor: default;
+
+		& .uk-progress-bar {
+			padding: @alert-padding 1.07rem;
+			font-size: @base-body-font-size;
+			line-height: @base-body-line-height;
+			text-align: left;
+		}
+	}
+}

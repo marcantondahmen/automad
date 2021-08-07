@@ -1,0 +1,128 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2018-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@am-tag-font-size: @button-small-font-size;
+@am-tag-height: 1.43rem;
+@am-tag-padding: 0 0.57rem;
+@am-tag-radius: @am-tag-height;
+@am-tag-margin: 0.57rem;
+
+[data-am-tags] {
+	box-sizing: border-box;
+	min-height: @form-height;
+	padding: @am-tag-margin 0 0 @am-tag-margin;
+	background-color: @form-background;
+	border: @am-border-width solid @form-border;
+	border-radius: @am-radius;
+}
+
+.taggle {
+	&_list {
+		padding: 0;
+		margin: 0;
+
+		& > li {
+			display: inline-block;
+			white-space: nowrap;
+			max-height: @am-tag-height;
+			margin: 0 @am-tag-margin @am-tag-margin 0;
+			font-size: @am-tag-font-size;
+			line-height: @am-tag-height;
+			border-radius: @am-tag-radius;
+			font-weight: 500;
+
+			&.taggle {
+				padding: @am-tag-padding;
+				color: @badge-color;
+				background-color: @badge-success-background;
+				cursor: default;
+
+				& .close {
+					&:extend(.uk-close);
+					margin-top: -0.072rem;
+					margin-left: -0.29rem;
+					margin-right: -0.64rem;
+					padding: 0 0.21rem;
+					cursor: pointer;
+					font-size: 1rem;
+					line-height: @am-tag-height;
+					vertical-align: top;
+
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
+	& .uk-autocomplete {
+		display: inline-block;
+		max-height: @am-tag-height !important;
+		height: @am-tag-height !important;
+		padding: 0;
+		margin: 0;
+	}
+
+	.uk-autocomplete input[type='text']&_input {
+		display: inline-block;
+		box-sizing: border-box;
+		position: relative;
+		top: -0.072rem;
+		width: 8.57rem !important;
+		height: @am-tag-height;
+		min-height: 0;
+		margin: 0;
+		padding: @am-tag-padding !important;
+		font-size: @am-tag-font-size;
+		line-height: @am-tag-height - (2 * @am-border-width);
+		border-radius: @am-tag-radius;
+		border-width: @am-border-width;
+		border-color: @am-success;
+
+		&:not(:focus) {
+			border-style: dashed;
+			border-color: #d9d9d9;
+		}
+	}
+
+	&_sizer {
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		top: -35.71rem;
+		z-index: -1;
+		visibility: hidden;
+	}
+}

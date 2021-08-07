@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 define('AUTOMAD', true);
 define('AM_BASE_DIR', __DIR__ . '/../..');

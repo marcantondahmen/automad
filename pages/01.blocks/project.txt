@@ -3,290 +3,310 @@ title: Blocks
 -
 
 +hero: {
-  "time": 1619886026457,
-  "blocks": [
-    {
-      "type": "section",
-      "data": {
-        "content": {
-          "time": 1619886025999,
-          "blocks": [
-            {
-              "type": "paragraph",
-              "data": {
-                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Blocks a single units of content. There several types of them. They can be arranged by using the little grip icon to drag them around. ☝️ Check out some block samples below.</am-lineheight></am-fontsize>",
-                "large": false,
-                "alignment": "left"
-              }
+    "time": 1628357018662,
+    "blocks": [
+        {
+            "type": "section",
+            "data": {
+                "content": {
+                    "time": 1628357018201,
+                    "blocks": [
+                        {
+                            "type": "paragraph",
+                            "data": {
+                                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Blocks are single units of content. There are several types of them. They can be arranged by using the little grip icon to drag them around. ☝️ Check out some examples below.</am-lineheight></am-fontsize>",
+                                "large": false,
+                                "alignment": "left"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
+                },
+                "style": {
+                    "backgroundColor": "#F4F5F7",
+                    "paddingTop": "11.25rem",
+                    "paddingBottom": "7rem"
+                },
+                "justify": "start",
+                "gap": true,
+                "minBlockWidth": "",
+                "stretched": true
             }
-          ],
-          "version": "2.20.2"
-        },
-        "style": {
-          "color": "#F4F5F7",
-          "backgroundColor": "#1F2022",
-          "paddingTop": "7rem",
-          "paddingBottom": "5rem"
-        },
-        "justify": "start",
-        "gap": true,
-        "minBlockWidth": "",
-        "stretched": true
-      }
-    }
-  ],
-  "version": "2.20.2"
+        }
+    ],
+    "version": "2.20.2"
 }
 
 -
 
 +main: {
-  "time": 1621370852415,
-  "blocks": [
-    {
-      "type": "header",
-      "data": {
-        "text": "Text Content",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "The default block is just a simple paragraph containing text content. Text can be easily <b>styled</b> using inline <i>styles</i>. Paragraphs can also be converted to lists or headlines.",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "lists",
-      "data": {
-        "style": "unordered",
-        "items": [
-          "This is a List Item of an unordered list.",
-          "Another List Item. List can also be ordered!",
-          "And a Third One, you get it ..."
-        ]
-      }
-    },
-    {
-      "type": "table",
-      "data": {
-        "content": [
-          [
-            "This is a ",
-            "Table Header"
-          ],
-          [
-            "And this are ",
-            "some rows"
-          ],
-          [
-            "and some ",
-            "columns"
-          ]
-        ]
-      }
-    },
-    {
-      "type": "quote",
-      "data": {
-        "text": "This is a super important and awesome quote! Please read it carefully!<br>",
-        "caption": "by Me",
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Images",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Easily embed single images. Note that can images and other blocks can be stretched to full width with just a click.",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "image",
-      "data": {
-        "url": "https://source.unsplash.com/GSIzNfR9GLE/1200x950",
-        "caption": ""
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Combine multiple images to a masonry <i>gallery</i>.",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "gallery",
-      "data": {
-        "globs": "https://source.unsplash.com/6rXpQzfCYlw/900x1000, https://source.unsplash.com/VYCDTBAP8P4/1000x700, https://source.unsplash.com/kjERLXaHjXc/1000x700",
-        "layout": "vertical",
-        "width": "350px",
-        "height": "10rem",
-        "gap": "25px",
-        "cleanBottom": true
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Or use the <i>slideshows</i> block to display a selection of images in a carousel.",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "slider",
-      "data": {
-        "globs": "https://source.unsplash.com/VYCDTBAP8P4/1200x800, https://source.unsplash.com/kjERLXaHjXc/1200x800",
-        "width": 1200,
-        "height": 800,
-        "dots": true,
-        "autoplay": true
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Embedded",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Just paste any link to YouTube or Vimeo videos, Twitter posts, Soundcloud pages or CodePens to embed them into your page.&nbsp;",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "embed",
-      "data": {
-        "service": "mixcloud",
-        "source": "https://www.mixcloud.com/marcantondahmen/home-session-21/",
-        "embed": "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=/marcantondahmen/home-session-21/",
-        "height": 180,
-        "caption": "",
-        "span": ""
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Navigation",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "buttons",
-      "data": {
-        "primaryText": "A Button&nbsp;",
-        "primaryLink": "#navigation",
-        "primaryStyle": {
-          "borderColor": "#181818",
-          "hoverBorderColor": "#181818",
-          "hoverBackground": "#181818",
-          "hoverColor": "#FFFFFF",
-          "paddingHorizontal": "2rem",
-          "borderWidth": "2px"
+    "time": 1628357879876,
+    "blocks": [
+        {
+            "type": "header",
+            "data": {
+                "text": "Images",
+                "level": 2,
+                "alignment": "left"
+            }
         },
-        "secondaryText": "A Second One",
-        "secondaryLink": "#navigation",
-        "secondaryStyle": {
-          "paddingHorizontal": "2rem",
-          "borderWidth": "2px"
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "The <i>Image Gallery</i> block provides an easy way to generate beautiful grid layouts. Clicking an image in the grid opens a <i>lightbox</i> slideshow in fullscreen.",
+                "large": false,
+                "alignment": "left"
+            }
         },
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Generate page cards automatically using the <i>pagelist</i> block.",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "pagelist",
-      "data": {
-        "type": "all",
-        "matchUrl": "",
-        "filter": "",
-        "template": "",
-        "limit": "2",
-        "offset": "0",
-        "sortKey": ":path",
-        "sortOrder": "asc",
-        "file": "/standard/templates/blocks/pagelist/blog.php"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Create a list of files defined by one ore more glob patterns using the <i>filelist</i> block.",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "filelist",
-      "data": {
-        "file": "Default Template",
-        "glob": "/shared/*.png, /shared/*.ico"
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Code",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "code",
-      "data": {
-        "code": "<div class=\"title\">\n    Automad is Awesome!\n</div>"
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Email",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "mail",
-      "data": {
-        "to": "hello@test.de",
-        "error": "Please fill out all fields!",
-        "success": "Successfully sent email!",
-        "placeholderEmail": "Your email address",
-        "placeholderSubject": "Email subject",
-        "placeholderMessage": "Message body",
-        "textButton": "Send Mail"
-      }
-    }
-  ],
-  "version": "2.20.2"
+        {
+            "type": "gallery",
+            "data": {
+                "globs": "https://source.unsplash.com/ueJ2oJeEK-U/900x900, https://source.unsplash.com/Uxqlfigh6oE/900x1600, https://source.unsplash.com/zSgzGRdJmMY/1600x900, https://source.unsplash.com/Exiil1L7hQI/1600x900, https://source.unsplash.com/gj1dnc7yRG0/1600x900, https://source.unsplash.com/frnNGfhsAN4/900x900, https://source.unsplash.com/jSbBnR22cXc/900x1600, https://source.unsplash.com/nWidMEQsnAQ/1600x900, https://source.unsplash.com/lauuoxHBK5k/1600x900",
+                "layout": "vertical",
+                "width": "150px",
+                "height": "10rem",
+                "gap": "0.5rem",
+                "cleanBottom": true
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "By default all images are arranged in a masonry layout with <i>coulmns</i>. Optionally the grid can be modified to have a clean bottom edge. Alternatively it is also possible to use a <i>row layout</i> instead.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "gallery",
+            "data": {
+                "globs": "https://source.unsplash.com/Uxqlfigh6oE/900x1600, https://source.unsplash.com/nWidMEQsnAQ/1600x900, https://source.unsplash.com/frnNGfhsAN4/900x1600, https://source.unsplash.com/zSgzGRdJmMY/1600x900, https://source.unsplash.com/gj1dnc7yRG0/1600x900, https://source.unsplash.com/ueJ2oJeEK-U/900x1600, https://source.unsplash.com/Exiil1L7hQI/1600x900, https://source.unsplash.com/jSbBnR22cXc/900x1600",
+                "layout": "horizontal",
+                "width": "250px",
+                "height": "9rem",
+                "gap": "0.5rem",
+                "cleanBottom": true
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Image selections can also be displayed as slideshows. They can be configured to show controls and change images automatically.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "slider",
+            "data": {
+                "globs": "https://source.unsplash.com/q2xKzfyg83w/1600x900, https://source.unsplash.com/PzYgEB4_pa0/1600x900, https://source.unsplash.com/Exiil1L7hQI/1600x900, https://source.unsplash.com/lauuoxHBK5k/1600x900",
+                "width": 1600,
+                "height": 900,
+                "dots": true,
+                "autoplay": true
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Single images can be used as well. They can have captions and may also be used as links to other pages.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "image",
+            "data": {
+                "url": "https://source.unsplash.com/gj1dnc7yRG0/1600x900",
+                "caption": "This is a caption",
+                "link": "#text-content"
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Text Content",
+                "level": 2,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "The default block is just a simple paragraph containing text content. Text can be easily <b>styled</b> using inline <i>styles</i>. Paragraphs can also be converted to lists or headlines.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "lists",
+            "data": {
+                "style": "unordered",
+                "items": [
+                    "This is a List Item of an unordered list.",
+                    "Another List Item. List can also be ordered!",
+                    "And a Third One, you get it ..."
+                ]
+            }
+        },
+        {
+            "type": "table",
+            "data": {
+                "content": [
+                    [
+                        "This is a ",
+                        "Table Header"
+                    ],
+                    [
+                        "And this are ",
+                        "some rows"
+                    ],
+                    [
+                        "and some ",
+                        "columns"
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "quote",
+            "data": {
+                "text": "This is a super important and awesome quote! Please read it carefully!<br>",
+                "caption": "by Me",
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Embedded",
+                "level": 2,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Just paste any link to YouTube or Vimeo videos, Twitter posts, Soundcloud pages or CodePens to embed them into your page.&nbsp;",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "embed",
+            "data": {
+                "service": "mixcloud",
+                "source": "https://www.mixcloud.com/marcantondahmen/home-session-21/",
+                "embed": "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=/marcantondahmen/home-session-21/",
+                "height": 180,
+                "caption": "",
+                "span": ""
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Navigation",
+                "level": 2,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "buttons",
+            "data": {
+                "primaryText": "A Button&nbsp;",
+                "primaryLink": "#navigation",
+                "primaryStyle": {
+                    "borderColor": "#181818",
+                    "hoverBorderColor": "#181818",
+                    "hoverBackground": "#181818",
+                    "hoverColor": "#FFFFFF",
+                    "paddingHorizontal": "2rem",
+                    "borderWidth": "2px"
+                },
+                "secondaryText": "A Second One",
+                "secondaryLink": "#navigation",
+                "secondaryStyle": {
+                    "paddingHorizontal": "2rem",
+                    "borderWidth": "2px"
+                },
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Generate page cards automatically using the <i>pagelist</i> block.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "pagelist",
+            "data": {
+                "type": "all",
+                "excludeHidden": true,
+                "matchUrl": "",
+                "filter": "",
+                "template": "",
+                "limit": "2",
+                "offset": "0",
+                "sortKey": ":path",
+                "sortOrder": "asc",
+                "file": "/standard/templates/blocks/pagelist/blog.php"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Create a list of files defined by one ore more glob patterns using the <i>filelist</i> block.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "filelist",
+            "data": {
+                "file": "Default Template",
+                "glob": "/shared/*.png, /shared/*.ico"
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Code",
+                "level": 2,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "code",
+            "data": {
+                "code": "<div class=\"title\">\n    Automad is Awesome!\n</div>"
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Email",
+                "level": 2,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "mail",
+            "data": {
+                "to": "hello@test.de",
+                "error": "Please fill out all fields!",
+                "success": "Successfully sent email!",
+                "placeholderEmail": "Your email address",
+                "placeholderSubject": "Email subject",
+                "placeholderMessage": "Message body",
+                "textButton": "Send Mail"
+            }
+        }
+    ],
+    "version": "2.20.2"
 }
 
 -
@@ -315,15 +335,11 @@ colorCodeBackground: #F4F5F7
 
 -
 
-colorNavbarText: #F4F5F7
+colorNavbarBackground: #F4F5F7
 
 -
 
-colorNavbarBackground: #1F2022
-
--
-
-colorNavbarBorder: #404347
+colorNavbarBorder: #eaeaeb
 
 -
 
@@ -332,6 +348,10 @@ checkboxHideThumbnails: 1
 -
 
 checkboxHideTitle: 1
+
+-
+
+checkboxMakeNavbarTransparent: 1
 
 -
 

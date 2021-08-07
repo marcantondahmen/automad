@@ -2,169 +2,195 @@ title: Home
 
 -
 
-+main: {
-  "time": 1619905102321,
-  "blocks": [
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Hello, I'm Automad. 👋 <br>You've have just finished my installation successfully! Now it's time to publish your stories and projects. <a href=\"/dashboard\">Sign in</a> to the dashboard to get started.</am-lineheight></am-fontsize>",
-        "large": false,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "section",
-      "data": {
-        "content": {
-          "time": 1619885973139,
-          "blocks": [
-            {
-              "type": "section",
-              "data": {
++hero: {
+    "time": 1628351480342,
+    "blocks": [
+        {
+            "type": "section",
+            "data": {
                 "content": {
-                  "time": 1619885972685,
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "<am-fontsize style=\"font-size: 200%;\">👩‍💻</am-fontsize>",
-                        "large": false,
-                        "alignment": "left"
-                      }
-                    },
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "Compose your pages using a powerful and flexible block editor.",
-                        "large": true,
-                        "alignment": "left"
-                      }
-                    },
-                    {
-                      "type": "delimiter",
-                      "data": {}
-                    },
-                    {
-                      "type": "buttons",
-                      "data": {
-                        "primaryText": "<am-fontsize style=\"font-size: 120%;\">Learn More</am-fontsize>",
-                        "primaryLink": "/blocks",
-                        "primaryStyle": {
-                          "borderRadius": "0.4rem",
-                          "paddingHorizontal": "1rem",
-                          "borderColor": "#EEEFF1",
-                          "background": "#EEEFF1",
-                          "hoverBackground": "#FFFFFF",
-                          "color": "#1F2022",
-                          "hoverColor": "#1F2022",
-                          "hoverBorderColor": "#EEEFF1"
-                        },
-                        "secondaryText": "",
-                        "secondaryLink": "",
-                        "secondaryStyle": {},
-                        "alignment": "left"
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
+                    "time": 1628351383230,
+                    "blocks": [
+                        {
+                            "type": "paragraph",
+                            "data": {
+                                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Hello, I'm Automad. 👋 <br>You've have just finished my installation successfully! Now it's time to publish your stories and projects. <a href=\"/dashboard\">Sign in</a> to the dashboard to get started.</am-lineheight></am-fontsize>",
+                                "large": false,
+                                "alignment": "left"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
                 },
                 "style": {
-                  "card": true,
-                  "matchRowHeight": true,
-                  "color": "#1F2022",
-                  "backgroundColor": "#FFFFFF",
-                  "borderColor": "#EAEBED",
-                  "borderRadius": "1rem"
+                    "paddingTop": "11.25rem"
                 },
                 "justify": "start",
                 "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/2"
-              }
-            },
-            {
-              "type": "section",
-              "data": {
-                "content": {
-                  "time": 1618923103336,
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "<am-fontsize style=\"font-size: 200%;\"><am-lineheight style=\"line-height: 0.9; display: inline-block;\">☝️</am-lineheight></am-fontsize>",
-                        "large": false,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    },
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "Realize complex and colorful layouts and cards using flexbox sections.&nbsp;",
-                        "large": true,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    },
-                    {
-                      "type": "delimiter",
-                      "data": {
-                        "widthFraction": false
-                      }
-                    },
-                    {
-                      "type": "buttons",
-                      "data": {
-                        "primaryText": "<am-fontsize style=\"font-size: 120%;\">About Sections</am-fontsize>",
-                        "primaryLink": "/sections",
-                        "primaryStyle": {
-                          "borderRadius": "0.4rem",
-                          "paddingHorizontal": "1rem",
-                          "borderColor": "#1F2022",
-                          "hoverBorderColor": "#1F2022",
-                          "color": "#F4F5F7",
-                          "hoverColor": "#F4F5F7",
-                          "background": "#1F2022",
-                          "hoverBackground": "#2e2f32"
-                        },
-                        "secondaryText": "",
-                        "secondaryLink": "",
-                        "secondaryStyle": {},
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    }
-                  ],
-                  "version": "2.19.1"
-                },
-                "style": {
-                  "card": true,
-                  "matchRowHeight": true,
-                  "color": "#F4F5F7",
-                  "backgroundColor": "#2A2B2E",
-                  "borderColor": "#3C3D42",
-                  "borderRadius": "1rem"
-                },
-                "justify": "start",
-                "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/2"
-              }
+                "minBlockWidth": ""
             }
-          ],
-          "version": "2.20.2"
-        },
-        "style": {
-          "paddingTop": "2rem"
-        },
-        "justify": "fill-row",
-        "gap": "",
-        "minBlockWidth": ""
-      }
-    }
-  ],
-  "version": "2.20.2"
+        }
+    ],
+    "version": "2.20.2"
+}
+
+-
+
++main: {
+    "time": 1628351518499,
+    "blocks": [
+        {
+            "type": "section",
+            "data": {
+                "content": {
+                    "time": 1619885973139,
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1619885972685,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "<am-fontsize style=\"font-size: 200%;\">👩‍💻</am-fontsize>",
+                                                "large": false,
+                                                "alignment": "left"
+                                            }
+                                        },
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "Compose your pages using a powerful and flexible block editor.",
+                                                "large": true,
+                                                "alignment": "left"
+                                            }
+                                        },
+                                        {
+                                            "type": "delimiter",
+                                            "data": {}
+                                        },
+                                        {
+                                            "type": "buttons",
+                                            "data": {
+                                                "primaryText": "<am-fontsize style=\"font-size: 120%;\">Learn More</am-fontsize>",
+                                                "primaryLink": "/blocks",
+                                                "primaryStyle": {
+                                                    "borderRadius": "0.4rem",
+                                                    "paddingHorizontal": "1rem",
+                                                    "borderColor": "#EEEFF1",
+                                                    "background": "#EEEFF1",
+                                                    "hoverBackground": "#FFFFFF",
+                                                    "color": "#1F2022",
+                                                    "hoverColor": "#1F2022",
+                                                    "hoverBorderColor": "#EEEFF1"
+                                                },
+                                                "secondaryText": "",
+                                                "secondaryLink": "",
+                                                "secondaryStyle": {},
+                                                "alignment": "left"
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "card": true,
+                                    "matchRowHeight": true,
+                                    "color": "#1F2022",
+                                    "backgroundColor": "#FFFFFF",
+                                    "borderColor": "#EAEBED",
+                                    "borderRadius": "1rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1618923103336,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "<am-fontsize style=\"font-size: 200%;\"><am-lineheight style=\"line-height: 0.9; display: inline-block;\">☝️</am-lineheight></am-fontsize>",
+                                                "large": false,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        },
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "Realize complex and colorful layouts and cards using flexbox sections.&nbsp;",
+                                                "large": true,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        },
+                                        {
+                                            "type": "delimiter",
+                                            "data": {
+                                                "widthFraction": false
+                                            }
+                                        },
+                                        {
+                                            "type": "buttons",
+                                            "data": {
+                                                "primaryText": "<am-fontsize style=\"font-size: 120%;\">About Sections</am-fontsize>",
+                                                "primaryLink": "/sections",
+                                                "primaryStyle": {
+                                                    "borderRadius": "0.4rem",
+                                                    "paddingHorizontal": "1rem",
+                                                    "borderColor": "#1F2022",
+                                                    "hoverBorderColor": "#1F2022",
+                                                    "color": "#F4F5F7",
+                                                    "hoverColor": "#F4F5F7",
+                                                    "background": "#1F2022",
+                                                    "hoverBackground": "#2e2f32"
+                                                },
+                                                "secondaryText": "",
+                                                "secondaryLink": "",
+                                                "secondaryStyle": {},
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.19.1"
+                                },
+                                "style": {
+                                    "card": true,
+                                    "matchRowHeight": true,
+                                    "color": "#F4F5F7",
+                                    "backgroundColor": "#2A2B2E",
+                                    "borderColor": "#3C3D42",
+                                    "borderRadius": "1rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
+                },
+                "style": {
+                    "paddingTop": "1rem"
+                },
+                "justify": "fill-row",
+                "gap": "",
+                "minBlockWidth": ""
+            }
+        }
+    ],
+    "version": "2.20.2"
 }
 
 -
@@ -198,6 +224,10 @@ checkboxHideThumbnails: 1
 -
 
 checkboxHideTitle: 1
+
+-
+
+checkboxMakeNavbarTransparent: 1
 
 -
 

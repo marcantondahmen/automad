@@ -3,617 +3,747 @@ title: Sections
 -
 
 +hero: {
-  "time": 1619171672563,
-  "blocks": [
-    {
-      "type": "section",
-      "data": {
-        "content": {
-          "time": 1618997040428,
-          "blocks": [
-            {
-              "type": "paragraph",
-              "data": {
-                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Sections are blocks that can contain other blocks. They can be styled, have background images and allow for creating complex layouts based on flexbox. And they can be nested! 👏&nbsp;</am-lineheight></am-fontsize>",
-                "large": false,
-                "alignment": "left",
-                "widthFraction": false
-              }
+    "time": 1628357296121,
+    "blocks": [
+        {
+            "type": "section",
+            "data": {
+                "content": {
+                    "time": 1628357295659,
+                    "blocks": [
+                        {
+                            "type": "paragraph",
+                            "data": {
+                                "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Sections are blocks that contain other blocks. They can be styled, have background images and allow for creating complex flexbox layouts. 👏 They also can be nested!</am-lineheight></am-fontsize>",
+                                "large": false,
+                                "alignment": "left"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
+                },
+                "style": {
+                    "backgroundColor": "#F4F5F7",
+                    "backgroundBlendMode": "soft-light",
+                    "paddingTop": "11.25rem",
+                    "paddingBottom": "7rem"
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "",
+                "stretched": true
             }
-          ],
-          "version": "2.20.2"
         },
-        "style": {
-          "color": "#F4F5F7",
-          "backgroundColor": "#1F2022",
-          "paddingTop": "7rem",
-          "paddingBottom": "5rem"
-        },
-        "justify": "start",
-        "gap": "",
-        "minBlockWidth": "",
-        "stretched": true
-      }
-    }
-  ],
-  "version": "2.20.2"
+        {
+            "type": "section",
+            "data": {
+                "content": {
+                    "time": 1628355970641,
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1628355970185,
+                                    "blocks": [
+                                        {
+                                            "type": "header",
+                                            "data": {
+                                                "text": "<am-fontsize style=\"font-size: 120%;\">Hero Sections</am-fontsize>",
+                                                "level": 2,
+                                                "alignment": "left",
+                                                "widthFraction": "1/1"
+                                            }
+                                        },
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "<am-fontsize style=\"font-size: 140%;\"><am-lineheight style=\"line-height: 1.4; display: inline-block;\">You can stretch a section block to the full width of a page and add a nice background image to create beautiful heros.</am-lineheight></am-fontsize>",
+                                                "large": false,
+                                                "alignment": "left",
+                                                "widthFraction": "1/1"
+                                            }
+                                        },
+                                        {
+                                            "type": "buttons",
+                                            "data": {
+                                                "primaryText": "<am-fontsize style=\"font-size: 130%;\"><am-lineheight style=\"line-height: 1.6; display: inline-block;\">Push Me</am-lineheight></am-fontsize>",
+                                                "primaryLink": "/sections",
+                                                "primaryStyle": {
+                                                    "color": "#ffffff",
+                                                    "borderColor": "#ffffff",
+                                                    "borderWidth": "2px",
+                                                    "paddingHorizontal": "2rem",
+                                                    "borderRadius": "6px",
+                                                    "hoverBackground": "#242424",
+                                                    "hoverColor": "#ffffff",
+                                                    "hoverBorderColor": "#ffffff"
+                                                },
+                                                "secondaryText": "",
+                                                "secondaryLink": "",
+                                                "secondaryStyle": {},
+                                                "alignment": "left",
+                                                "widthFraction": "1/1"
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "paddingTop": "4rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/3"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
+                },
+                "style": {
+                    "color": "#ffffff",
+                    "backgroundColor": "#ebebeb",
+                    "backgroundImage": "https://source.unsplash.com/2cFZ_FB08UM/1600x900",
+                    "backgroundBlendMode": "multiply",
+                    "paddingTop": "0px",
+                    "paddingBottom": "28rem"
+                },
+                "justify": "start",
+                "gap": "",
+                "minBlockWidth": "24rem",
+                "stretched": true
+            }
+        }
+    ],
+    "version": "2.20.2"
 }
 
 -
 
 +main: {
-  "time": 1619883524859,
-  "blocks": [
-    {
-      "type": "header",
-      "data": {
-        "text": "Layout",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Using sections, you can create beautiful and complex layouts. They can contain any kind of block and even other sections.",
-        "large": true,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "section",
-      "data": {
-        "content": {
-          "time": 1619162442267,
-          "blocks": [
-            {
-              "type": "section",
-              "data": {
-                "content": {
-                  "time": 1618997746694,
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "First column, one row.",
-                        "large": false,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
-                },
-                "style": {
-                  "card": true,
-                  "matchRowHeight": true,
-                  "backgroundColor": "#f4f5f7",
-                  "borderRadius": "1rem",
-                  "paddingBottom": "20rem"
-                },
-                "justify": "start",
-                "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/3"
-              }
-            },
-            {
-              "type": "section",
-              "data": {
-                "content": {
-                  "time": 1619162308890,
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1619014137261,
-                          "blocks": [
-                            {
-                              "type": "paragraph",
-                              "data": {
-                                "text": "Second column, first row ...",
-                                "large": false,
-                                "alignment": "left",
-                                "widthFraction": false
-                              }
-                            }
-                          ],
-                          "version": "2.20.2"
-                        },
-                        "style": {
-                          "card": true,
-                          "matchRowHeight": true,
-                          "borderRadius": "1rem",
-                          "backgroundImage": "https://source.unsplash.com/GSIzNfR9GLE/700x700",
-                          "paddingBottom": "32rem"
-                        },
-                        "justify": "start",
-                        "gap": "",
-                        "minBlockWidth": "",
-                        "widthFraction": "1/1"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1618997760435,
-                          "blocks": [
-                            {
-                              "type": "paragraph",
-                              "data": {
-                                "text": "... and a second row.",
-                                "large": false,
-                                "alignment": "left",
-                                "widthFraction": false
-                              }
-                            }
-                          ],
-                          "version": "2.20.2"
-                        },
-                        "style": {
-                          "card": true,
-                          "matchRowHeight": true,
-                          "backgroundColor": "#f4f5f7",
-                          "borderRadius": "1rem",
-                          "paddingBottom": "4rem"
-                        },
-                        "justify": "start",
-                        "gap": "",
-                        "minBlockWidth": "",
-                        "widthFraction": "1/1"
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
-                },
-                "style": {
-                  "matchRowHeight": true
-                },
-                "justify": "start",
-                "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/3"
-              }
-            },
-            {
-              "type": "section",
-              "data": {
-                "content": {
-                  "time": 1619111404165,
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1618997907894,
-                          "blocks": [
-                            {
-                              "type": "paragraph",
-                              "data": {
-                                "text": "Third column, first row ...",
-                                "large": false,
-                                "alignment": "left",
-                                "widthFraction": false
-                              }
-                            }
-                          ],
-                          "version": "2.20.2"
-                        },
-                        "style": {
-                          "card": true,
-                          "matchRowHeight": true,
-                          "backgroundColor": "#f4f5f7",
-                          "borderRadius": "1rem",
-                          "paddingBottom": "4rem"
-                        },
-                        "justify": "start",
-                        "gap": "",
-                        "widthFraction": "1/1"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1618997943309,
-                          "blocks": [
-                            {
-                              "type": "paragraph",
-                              "data": {
-                                "text": "... a second ...",
-                                "large": false,
-                                "alignment": "left",
-                                "widthFraction": false
-                              }
-                            }
-                          ],
-                          "version": "2.20.2"
-                        },
-                        "style": {
-                          "card": true,
-                          "matchRowHeight": true,
-                          "backgroundColor": "#f4f5f7",
-                          "borderRadius": "1rem",
-                          "paddingBottom": "4rem"
-                        },
-                        "justify": "start",
-                        "gap": "",
-                        "widthFraction": "1/1"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1618997933916,
-                          "blocks": [
-                            {
-                              "type": "paragraph",
-                              "data": {
-                                "text": "... and a third row.",
-                                "large": false,
-                                "alignment": "left",
-                                "widthFraction": false
-                              }
-                            }
-                          ],
-                          "version": "2.20.2"
-                        },
-                        "style": {
-                          "card": true,
-                          "matchRowHeight": true,
-                          "backgroundColor": "#f4f5f7",
-                          "borderRadius": "1rem",
-                          "paddingBottom": "8rem"
-                        },
-                        "justify": "start",
-                        "gap": "",
-                        "widthFraction": "1/1"
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
-                },
-                "style": {
-                  "matchRowHeight": true
-                },
-                "justify": "start",
-                "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/3"
-              }
+    "time": 1628358097169,
+    "blocks": [
+        {
+            "type": "header",
+            "data": {
+                "text": "Flexbox",
+                "level": 2,
+                "alignment": "left"
             }
-          ],
-          "version": "2.20.2"
         },
-        "style": {
-          "paddingTop": "2rem",
-          "paddingBottom": "2rem"
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Sections can also be used to create more complex layouts based on flexbox. They can contain any kind of block and even other sections.&nbsp;",
+                "large": false,
+                "alignment": "left"
+            }
         },
-        "justify": "fill-row",
-        "gap": "",
-        "minBlockWidth": "24rem",
-        "stretched": true
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "You are in full control over flex properties such as the minimum block width, the gap size and the alignment of items.&nbsp;",
-        "large": true,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "section",
-      "data": {
-        "content": {
-          "time": 1619187143207,
-          "blocks": [
-            {
-              "type": "section",
-              "data": {
+        {
+            "type": "section",
+            "data": {
                 "content": {
-                  "time": 1618999584790,
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "This section has ...",
-                        "large": false,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
-                },
-                "style": {
-                  "card": true,
-                  "matchRowHeight": true,
-                  "backgroundColor": "#F4F5F7",
-                  "backgroundImage": "https://source.unsplash.com/VYCDTBAP8P4/1000x1000",
-                  "paddingBottom": "20rem"
-                },
-                "justify": "start",
-                "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/2"
-              }
-            },
-            {
-              "type": "section",
-              "data": {
-                "content": {
-                  "time": 1619160355880,
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1618999558657,
-                          "blocks": [
-                            {
-                              "type": "paragraph",
-                              "data": {
-                                "text": "... no vertical ...",
-                                "large": false,
-                                "alignment": "left",
-                                "widthFraction": false
-                              }
-                            }
-                          ],
-                          "version": "2.20.2"
-                        },
-                        "style": {
-                          "card": true,
-                          "matchRowHeight": true,
-                          "backgroundColor": "#F4F5F7",
-                          "paddingBottom": "6rem"
-                        },
-                        "justify": "start",
-                        "gap": "",
-                        "minBlockWidth": "",
-                        "widthFraction": "1/1"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "data": {
-                        "content": {
-                          "time": 1619160236693,
-                          "blocks": [
-                            {
-                              "type": "section",
-                              "data": {
+                    "time": 1619162442267,
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "data": {
                                 "content": {
-                                  "time": 1619014563340,
-                                  "blocks": [
-                                    {
-                                      "type": "paragraph",
-                                      "data": {
-                                        "text": "... and ...",
-                                        "large": false,
-                                        "alignment": "left",
-                                        "widthFraction": false
-                                      }
-                                    }
-                                  ],
-                                  "version": "2.20.2"
+                                    "time": 1618997746694,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "First column, one row.",
+                                                "large": false,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
                                 },
                                 "style": {
-                                  "card": true,
-                                  "matchRowHeight": true,
-                                  "backgroundColor": "#F4F5F7",
-                                  "paddingBottom": "6rem"
+                                    "card": true,
+                                    "matchRowHeight": true,
+                                    "backgroundColor": "#f4f5f7",
+                                    "borderRadius": "1rem",
+                                    "paddingBottom": "20rem"
                                 },
-                                "justify": "fill-row",
+                                "justify": "start",
                                 "gap": "",
                                 "minBlockWidth": "",
-                                "widthFraction": "1/2"
-                              }
-                            },
-                            {
-                              "type": "section",
-                              "data": {
+                                "widthFraction": "1/3"
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "data": {
                                 "content": {
-                                  "time": 1619014570225,
-                                  "blocks": [
-                                    {
-                                      "type": "paragraph",
-                                      "data": {
-                                        "text": "... horizontal gaps.",
-                                        "large": false,
-                                        "alignment": "left",
-                                        "widthFraction": false
-                                      }
-                                    }
-                                  ],
-                                  "version": "2.20.2"
+                                    "time": 1619162308890,
+                                    "blocks": [
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1619014137261,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "paragraph",
+                                                            "data": {
+                                                                "text": "Second column, first row ...",
+                                                                "large": false,
+                                                                "alignment": "left",
+                                                                "widthFraction": false
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "card": true,
+                                                    "matchRowHeight": true,
+                                                    "borderRadius": "1rem",
+                                                    "backgroundImage": "https://source.unsplash.com/GSIzNfR9GLE/700x700",
+                                                    "paddingBottom": "32rem"
+                                                },
+                                                "justify": "start",
+                                                "gap": "",
+                                                "minBlockWidth": "",
+                                                "widthFraction": "1/1"
+                                            }
+                                        },
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1618997760435,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "paragraph",
+                                                            "data": {
+                                                                "text": "... and a second row.",
+                                                                "large": false,
+                                                                "alignment": "left",
+                                                                "widthFraction": false
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "card": true,
+                                                    "matchRowHeight": true,
+                                                    "backgroundColor": "#f4f5f7",
+                                                    "borderRadius": "1rem",
+                                                    "paddingBottom": "4rem"
+                                                },
+                                                "justify": "start",
+                                                "gap": "",
+                                                "minBlockWidth": "",
+                                                "widthFraction": "1/1"
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
                                 },
                                 "style": {
-                                  "card": true,
-                                  "matchRowHeight": true,
-                                  "backgroundColor": "#F4F5F7"
+                                    "matchRowHeight": true
                                 },
-                                "justify": "fill-row",
+                                "justify": "start",
                                 "gap": "",
                                 "minBlockWidth": "",
-                                "widthFraction": "1/2"
-                              }
+                                "widthFraction": "1/3"
                             }
-                          ],
-                          "version": "2.20.2"
                         },
-                        "style": {
-                          "matchRowHeight": true
-                        },
-                        "justify": "fill-row",
-                        "gap": "",
-                        "minBlockWidth": "2rem",
-                        "widthFraction": "1/1"
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1619111404165,
+                                    "blocks": [
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1618997907894,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "paragraph",
+                                                            "data": {
+                                                                "text": "Third column, first row ...",
+                                                                "large": false,
+                                                                "alignment": "left",
+                                                                "widthFraction": false
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "card": true,
+                                                    "matchRowHeight": true,
+                                                    "backgroundColor": "#f4f5f7",
+                                                    "borderRadius": "1rem",
+                                                    "paddingBottom": "4rem"
+                                                },
+                                                "justify": "start",
+                                                "gap": "",
+                                                "widthFraction": "1/1"
+                                            }
+                                        },
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1618997943309,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "paragraph",
+                                                            "data": {
+                                                                "text": "... a second ...",
+                                                                "large": false,
+                                                                "alignment": "left",
+                                                                "widthFraction": false
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "card": true,
+                                                    "matchRowHeight": true,
+                                                    "backgroundColor": "#f4f5f7",
+                                                    "borderRadius": "1rem",
+                                                    "paddingBottom": "4rem"
+                                                },
+                                                "justify": "start",
+                                                "gap": "",
+                                                "widthFraction": "1/1"
+                                            }
+                                        },
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1618997933916,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "paragraph",
+                                                            "data": {
+                                                                "text": "... and a third row.",
+                                                                "large": false,
+                                                                "alignment": "left",
+                                                                "widthFraction": false
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "card": true,
+                                                    "matchRowHeight": true,
+                                                    "backgroundColor": "#f4f5f7",
+                                                    "borderRadius": "1rem",
+                                                    "paddingBottom": "8rem"
+                                                },
+                                                "justify": "start",
+                                                "gap": "",
+                                                "widthFraction": "1/1"
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "matchRowHeight": true
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/3"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
                 },
                 "style": {
-                  "matchRowHeight": true
+                    "paddingTop": "2rem",
+                    "paddingBottom": "2rem"
                 },
                 "justify": "fill-row",
                 "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/2"
-              }
+                "minBlockWidth": "24rem",
+                "stretched": true
             }
-          ],
-          "version": "2.20.2"
         },
-        "style": {
-          "overflowHidden": true,
-          "backgroundColor": "#e2e3e4",
-          "borderColor": "#e2e3e4",
-          "borderWidth": "1px",
-          "borderRadius": "1rem"
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "You are in full control over flex properties such as the minimum block width, the gap size and the alignment of items.&nbsp;",
+                "large": false,
+                "alignment": "left"
+            }
         },
-        "justify": "fill-row",
-        "gap": "1px",
-        "minBlockWidth": ""
-      }
-    },
-    {
-      "type": "header",
-      "data": {
-        "text": "Cards",
-        "level": 2,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "paragraph",
-      "data": {
-        "text": "Cards are basically not more than styled sections. They are a bunch of blocks combined in one section that maybe has a border, a shadow, padding and even rounded corners.",
-        "large": true,
-        "alignment": "left"
-      }
-    },
-    {
-      "type": "section",
-      "data": {
-        "content": {
-          "time": 1619175712834,
-          "blocks": [
-            {
-              "type": "section",
-              "data": {
+        {
+            "type": "section",
+            "data": {
                 "content": {
-                  "time": 1619173675247,
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "<am-fontsize style=\"font-size: 100%;\">Super card<br>with a slideshow<br></am-fontsize>",
-                        "large": true,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    },
-                    {
-                      "type": "slider",
-                      "data": {
-                        "globs": "https://source.unsplash.com/GSIzNfR9GLE/700x700, https://source.unsplash.com/VYCDTBAP8P4/700x700",
-                        "width": 700,
-                        "height": 700,
-                        "dots": true,
-                        "autoplay": true,
-                        "stretched": true,
-                        "widthFraction": false
-                      }
-                    },
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "Cards can contain any kind of content. You can also stretch images or slideshow over the entire card width.",
-                        "large": false,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    },
-                    {
-                      "type": "buttons",
-                      "data": {
-                        "primaryText": "Button",
-                        "primaryLink": "#",
-                        "primaryStyle": {},
-                        "secondaryText": "",
-                        "secondaryLink": "",
-                        "secondaryStyle": {},
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
+                    "time": 1628196622969,
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1618999584790,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "This section has ...",
+                                                "large": false,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "card": true,
+                                    "matchRowHeight": true,
+                                    "backgroundColor": "#F4F5F7",
+                                    "backgroundImage": "https://source.unsplash.com/VYCDTBAP8P4/1000x1000",
+                                    "paddingBottom": "20rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1619160355880,
+                                    "blocks": [
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1618999558657,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "paragraph",
+                                                            "data": {
+                                                                "text": "... no vertical ...",
+                                                                "large": false,
+                                                                "alignment": "left",
+                                                                "widthFraction": false
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "card": true,
+                                                    "matchRowHeight": true,
+                                                    "backgroundColor": "#F4F5F7",
+                                                    "paddingBottom": "6rem"
+                                                },
+                                                "justify": "start",
+                                                "gap": "",
+                                                "minBlockWidth": "",
+                                                "widthFraction": "1/1"
+                                            }
+                                        },
+                                        {
+                                            "type": "section",
+                                            "data": {
+                                                "content": {
+                                                    "time": 1619160236693,
+                                                    "blocks": [
+                                                        {
+                                                            "type": "section",
+                                                            "data": {
+                                                                "content": {
+                                                                    "time": 1619014563340,
+                                                                    "blocks": [
+                                                                        {
+                                                                            "type": "paragraph",
+                                                                            "data": {
+                                                                                "text": "... and ...",
+                                                                                "large": false,
+                                                                                "alignment": "left",
+                                                                                "widthFraction": false
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "version": "2.20.2"
+                                                                },
+                                                                "style": {
+                                                                    "card": true,
+                                                                    "matchRowHeight": true,
+                                                                    "backgroundColor": "#F4F5F7",
+                                                                    "paddingBottom": "6rem"
+                                                                },
+                                                                "justify": "fill-row",
+                                                                "gap": "",
+                                                                "minBlockWidth": "",
+                                                                "widthFraction": "1/2"
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "data": {
+                                                                "content": {
+                                                                    "time": 1619014570225,
+                                                                    "blocks": [
+                                                                        {
+                                                                            "type": "paragraph",
+                                                                            "data": {
+                                                                                "text": "... horizontal gaps.",
+                                                                                "large": false,
+                                                                                "alignment": "left",
+                                                                                "widthFraction": false
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "version": "2.20.2"
+                                                                },
+                                                                "style": {
+                                                                    "card": true,
+                                                                    "matchRowHeight": true,
+                                                                    "backgroundColor": "#F4F5F7"
+                                                                },
+                                                                "justify": "fill-row",
+                                                                "gap": "",
+                                                                "minBlockWidth": "",
+                                                                "widthFraction": "1/2"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "version": "2.20.2"
+                                                },
+                                                "style": {
+                                                    "matchRowHeight": true
+                                                },
+                                                "justify": "fill-row",
+                                                "gap": "",
+                                                "minBlockWidth": "2rem",
+                                                "widthFraction": "1/1"
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "matchRowHeight": true
+                                },
+                                "justify": "fill-row",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
                 },
                 "style": {
-                  "card": true,
-                  "overflowHidden": true,
-                  "shadow": true,
-                  "borderRadius": "1rem"
+                    "overflowHidden": true,
+                    "shadow": true,
+                    "backgroundColor": "#e2e3e4",
+                    "borderColor": "#e2e3e4",
+                    "borderWidth": "2px",
+                    "borderRadius": "1rem"
+                },
+                "justify": "fill-row",
+                "gap": "2px",
+                "minBlockWidth": ""
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Cards",
+                "level": 2,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Cards are basically not more than styled sections. They are a bunch of blocks combined in one section that maybe has a border, a shadow, padding and even rounded corners.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "section",
+            "data": {
+                "content": {
+                    "time": 1619175712834,
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1619173675247,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "<am-fontsize style=\"font-size: 100%;\">Super card<br>with a slideshow<br></am-fontsize>",
+                                                "large": true,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        },
+                                        {
+                                            "type": "slider",
+                                            "data": {
+                                                "globs": "https://source.unsplash.com/GSIzNfR9GLE/700x700, https://source.unsplash.com/VYCDTBAP8P4/700x700",
+                                                "width": 700,
+                                                "height": 700,
+                                                "dots": true,
+                                                "autoplay": true,
+                                                "stretched": true,
+                                                "widthFraction": false
+                                            }
+                                        },
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "Cards can contain any kind of content. You can also stretch images or slideshow over the entire card width.",
+                                                "large": false,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        },
+                                        {
+                                            "type": "buttons",
+                                            "data": {
+                                                "primaryText": "Button",
+                                                "primaryLink": "#",
+                                                "primaryStyle": {},
+                                                "secondaryText": "",
+                                                "secondaryLink": "",
+                                                "secondaryStyle": {},
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "card": true,
+                                    "overflowHidden": true,
+                                    "shadow": true,
+                                    "borderRadius": "1rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1619175712373,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "Card with a <br>background image",
+                                                "large": true,
+                                                "alignment": "left",
+                                                "widthFraction": false
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "card": true,
+                                    "overflowHidden": true,
+                                    "matchRowHeight": true,
+                                    "borderColor": "#f4f5f7",
+                                    "borderWidth": "2px",
+                                    "borderRadius": "1rem",
+                                    "backgroundImage": "https://source.unsplash.com/VYCDTBAP8P4/700x1200",
+                                    "paddingBottom": "15rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
+                },
+                "style": {},
+                "justify": "fill-row",
+                "gap": "",
+                "minBlockWidth": "20rem"
+            }
+        },
+        {
+            "type": "header",
+            "data": {
+                "text": "Styling Other Blocks",
+                "level": 3,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Aside from being a card, sections can also be used to control the appearance of just one single block such as a gallery. The gallery block below has rounded corners, a white border and drops a shadow — all those styles are actually applied to the wrapping section.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "section",
+            "data": {
+                "content": {
+                    "time": 1628356729014,
+                    "blocks": [
+                        {
+                            "type": "gallery",
+                            "data": {
+                                "globs": "https://source.unsplash.com/Uxqlfigh6oE/900x1600, https://source.unsplash.com/nWidMEQsnAQ/1600x900, https://source.unsplash.com/frnNGfhsAN4/900x1600, https://source.unsplash.com/zSgzGRdJmMY/1600x900, https://source.unsplash.com/gj1dnc7yRG0/1600x900, https://source.unsplash.com/ueJ2oJeEK-U/900x1600, https://source.unsplash.com/Exiil1L7hQI/1600x900, https://source.unsplash.com/jSbBnR22cXc/900x1600",
+                                "layout": "horizontal",
+                                "width": "250px",
+                                "height": "9rem",
+                                "gap": "2px",
+                                "cleanBottom": true,
+                                "widthFraction": "1/1"
+                            }
+                        }
+                    ],
+                    "version": "2.20.2"
+                },
+                "style": {
+                    "overflowHidden": true,
+                    "shadow": true,
+                    "borderColor": "#ffffff",
+                    "borderWidth": "2px",
+                    "borderRadius": "1rem"
                 },
                 "justify": "start",
                 "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/2"
-              }
-            },
-            {
-              "type": "section",
-              "data": {
-                "content": {
-                  "time": 1619175712373,
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "data": {
-                        "text": "Card with a <br>background image",
-                        "large": true,
-                        "alignment": "left",
-                        "widthFraction": false
-                      }
-                    }
-                  ],
-                  "version": "2.20.2"
-                },
-                "style": {
-                  "card": true,
-                  "overflowHidden": true,
-                  "matchRowHeight": true,
-                  "borderColor": "#f4f5f7",
-                  "borderWidth": "2px",
-                  "borderRadius": "1rem",
-                  "backgroundImage": "https://source.unsplash.com/VYCDTBAP8P4/700x1200",
-                  "paddingBottom": "15rem"
-                },
-                "justify": "start",
-                "gap": "",
-                "minBlockWidth": "",
-                "widthFraction": "1/2"
-              }
+                "minBlockWidth": ""
             }
-          ],
-          "version": "2.20.2"
-        },
-        "style": {},
-        "justify": "fill-row",
-        "gap": "",
-        "minBlockWidth": "20rem"
-      }
-    }
-  ],
-  "version": "2.20.2"
+        }
+    ],
+    "version": "2.20.2"
 }
 
 -
@@ -638,19 +768,19 @@ colorCodeBackground: #F4F5F7
 
 -
 
-colorNavbarText: #F4F5F7
+colorNavbarBackground: #F4F5F7
 
 -
 
-colorNavbarBackground: #1F2022
-
--
-
-colorNavbarBorder: #404347
+colorNavbarBorder: #eaeaeb
 
 -
 
 checkboxHideTitle: 1
+
+-
+
+checkboxMakeNavbarTransparent: 1
 
 -
 

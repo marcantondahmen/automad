@@ -1,68 +1,61 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 namespace Automad\Blocks;
-use Automad\Core as Core;
 
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The embed block.
+ * The embed block.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
-class Embed extends Paragraph {
-
-
-	/**	
-	 *	Render a embed block.
-	 *	
-	 *	@param object $data
-	 *	@param object $Automad
-	 *	@return string the rendered HTML
+class Embed extends Block {
+	/**
+	 * Render a embed block.
+	 *
+	 * @param object $data
+	 * @param object $Automad
+	 * @return string the rendered HTML
 	 */
-
 	public static function render($data, $Automad) {
-
 		$attr = <<< HTML
 				scrolling="no"
 				frameborder="no"
@@ -71,17 +64,14 @@ class Embed extends Paragraph {
 HTML;
 
 		if ($data->service == 'twitter') {
-
-			$url = Core\Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
+			$url = Str::stripStart($data->embed, 'https://twitframe.com/show?url=');
 			$html = <<< HTML
 					<blockquote class="twitter-tweet tw-align-center" style="visibility: hidden;">
 						<a href="$url"></a>
 					</blockquote>
 					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 HTML;
-
-		} else if (!empty($data->width)) {
-
+		} elseif (!empty($data->width)) {
 			$paddingTop = $data->height / $data->width * 100;
 			$html = <<< HTML
 					<div style="position: relative; padding-top: $paddingTop%;">
@@ -93,9 +83,7 @@ HTML;
 						</iframe>
 					</div>
 HTML;
-
 		} else {
-
 			$html = <<< HTML
 					<iframe 
 					src="$data->embed"
@@ -105,7 +93,6 @@ HTML;
 					>
 					</iframe>
 HTML;
-
 		}
 
 		if (!empty($data->caption)) {
@@ -115,8 +102,5 @@ HTML;
 		$class = self::classAttr();
 
 		return "<am-embed $class><figure>$html</figure></am-embed>";
-
 	}
-
-
 }

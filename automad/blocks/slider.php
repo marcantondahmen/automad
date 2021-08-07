@@ -1,74 +1,65 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
 
-
 namespace Automad\Blocks;
-use Automad\Core\Parse as Parse;
-use Automad\Core\Image as Image;
 
+use Automad\Core\Parse;
+use Automad\Core\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
-
 /**
- *	The slider block.
+ * The slider block.
  *
- *	@author Marc Anton Dahmen
- *	@copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
- *	@license MIT license - https://automad.org/license
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
  */
-
-class Slider extends Paragraph {
-
-
-	/**	
-	 *	Render a slider block.
-	 *	
-	 *	@param object $data
-	 *	@param object $Automad
-	 *	@return string the rendered HTML
+class Slider extends Block {
+	/**
+	 * Render a slider block.
+	 *
+	 * @param object $data
+	 * @param object $Automad
+	 * @return string the rendered HTML
 	 */
-
 	public static function render($data, $Automad) {
-
 		if (!empty($data->globs) && !empty($data->width) && !empty($data->height)) {
-
 			if ($files = Parse::fileDeclaration($data->globs, $Automad->Context->get())) {
-
-				$files = array_filter($files, function($file) {
+				$files = array_filter($files, function ($file) {
 					return Parse::fileIsImage($file);
 				});
 
@@ -78,9 +69,8 @@ class Slider extends Paragraph {
 
 				$first = 'am-active';
 				$html = '<div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
-				
-				foreach ($files as $file) {
 
+				foreach ($files as $file) {
 					$Image = new Image($file, $data->width, $data->height, true);
 					$caption = Parse::caption($file);
 
@@ -92,20 +82,13 @@ class Slider extends Paragraph {
 HTML;
 
 					$first = '';
-
 				}
-				
+
 				$html .= '</div>';
 				$class = self::classAttr();
 
 				return "<am-slider $class>$html</am-slider>";
-
-
 			}
-
 		}
-
 	}
-
-
 }

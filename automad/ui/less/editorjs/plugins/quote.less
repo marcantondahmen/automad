@@ -1,0 +1,67 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.cdx-quote-icon svg {
+	transform: rotate(180deg);
+}
+
+blockquote.cdx-block.cdx-quote {
+	margin: 0 !important;
+	padding-left: 1rem !important;
+	background-color: transparent !important;
+	border-left: 3px solid @am-text !important;
+}
+
+.am-block-editor .cdx-input.cdx-quote__text {
+	margin-top: 0 !important;
+}
+
+.cdx-quote__caption {
+}
+
+.cdx-quote [contentEditable='true'][data-placeholder]::before {
+	position: absolute;
+	content: attr(data-placeholder);
+	color: @am-muted;
+	font-weight: normal;
+	opacity: 0;
+}
+
+.cdx-quote [contentEditable='true'][data-placeholder]:empty::before {
+	opacity: 1;
+}
+
+.cdx-quote [contentEditable='true'][data-placeholder]:empty:focus::before {
+	opacity: 0;
+}

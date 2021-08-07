@@ -1,47 +1,42 @@
-<?php 
+<?php
 /*
- *	                  ....
- *	                .:   '':.
- *	                ::::     ':..
- *	                ::.         ''..
- *	     .:'.. ..':.:::'    . :.   '':.
- *	    :.   ''     ''     '. ::::.. ..:
- *	    ::::.        ..':.. .''':::::  .
- *	    :::::::..    '..::::  :. ::::  :
- *	    ::'':::::::.    ':::.'':.::::  :
- *	    :..   ''::::::....':     ''::  :
- *	    :::::.    ':::::   :     .. '' .
- *	 .''::::::::... ':::.''   ..''  :.''''.
- *	 :..:::'':::::  :::::...:''        :..:
- *	 ::::::. '::::  ::::::::  ..::        .
- *	 ::::::::.::::  ::::::::  :'':.::   .''
- *	 ::: '::::::::.' '':::::  :.' '':  :
- *	 :::   :::::::::..' ::::  ::...'   .
- *	 :::  .::::::::::   ::::  ::::  .:'
- *	  '::'  '':::::::   ::::  : ::  :
- *	            '::::   ::::  :''  .:
- *	             ::::   ::::    ..''
- *	             :::: ..:::: .:''
- *	               ''''  '''''
- *	
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
  *
- *	AUTOMAD
  *
- *	Copyright (c) 2013-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * AUTOMAD
  *
- *	Licensed under the MIT license.
- *	https://automad.org/license
+ * Copyright (c) 2013-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
  */
-
 
 namespace Automad\Core;
 
-
 defined('AUTOMAD') or die('Direct access not permitted!');
-
-
-
 
 // Set config file.
 define('AM_CONFIG', AM_BASE_DIR . '/config/config.php');
@@ -52,13 +47,10 @@ Config::overrides();
 // Define debugging already here to be available when parsing the request.
 Config::set('AM_DEBUG_ENABLED', false);
 
-
-
-
 // Set base URL for all URLs relative to the root.
 if (getenv('HTTP_X_FORWARDED_HOST') || getenv('HTTP_X_FORWARDED_SERVER')) {
 	// In case the site is behind a proxy, set AM_BASE_URL to AM_BASE_PROXY.
-	// AM_BASE_PROXY can be separately defined to enable running a site with and without a proxy in parallel. 
+	// AM_BASE_PROXY can be separately defined to enable running a site with and without a proxy in parallel.
 	Config::set('AM_BASE_PROXY', '');
 	Config::set('AM_BASE_URL', AM_BASE_PROXY);
 	Debug::log(getenv('HTTP_X_FORWARDED_SERVER'), 'Proxy');
@@ -66,9 +58,6 @@ if (getenv('HTTP_X_FORWARDED_HOST') || getenv('HTTP_X_FORWARDED_SERVER')) {
 	// In case the site is not running behind a proxy server, just get the base URL from the script name.
 	Config::set('AM_BASE_URL', str_replace('/index.php', '', getenv('SCRIPT_NAME')));
 }
-
-
-
 
 Debug::log(getenv('SERVER_SOFTWARE'), 'Server Software');
 
@@ -86,20 +75,11 @@ if ((strpos(strtolower(getenv('SERVER_SOFTWARE')), 'apache') !== false && file_e
 // Define AM_BASE_INDEX as the prefix for all page URLs.
 Config::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 
-
-
-
 // An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
 Config::set('AM_BASE_SITEMAP', '');
 
-
-
-
 // Get the requested URL.
 define('AM_REQUEST', Request::page());
-
-
-
 
 // Define all constants which are not defined yet by the config file.
 // DIR
@@ -110,25 +90,25 @@ Config::set('AM_DIR_CACHE', '/cache');
 Config::set('AM_DIR_CACHE_PAGES', AM_DIR_CACHE . '/pages');
 Config::set('AM_DIR_CACHE_IMAGES', AM_DIR_CACHE . '/images');
 Config::set('AM_DIR_TRASH', AM_DIR_CACHE . '/trash');
-Config::set('AM_DIR_GUI_INC', '/automad/gui/inc');
-Config::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the GUI.
+Config::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 // FILE
-Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)	
+Config::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 Config::set('AM_FILE_EXT_CAPTION', 'caption');
 Config::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 Config::set('AM_FILE_EXT_PAGE_CACHE', 'html');
 Config::set('AM_FILE_EXT_HEADLESS_CACHE', 'json');
-Config::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA); 
+Config::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA);
 Config::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 Config::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
 Config::set('AM_FILE_OBJECT_USER_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_user');
 Config::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
-Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/gui/lang/english.txt');
+Config::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/ui/lang/english.txt');
 Config::set('AM_FILE_GUI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
-Config::set('AM_ALLOWED_FILE_TYPES', 
+Config::set(
+	'AM_ALLOWED_FILE_TYPES',
 	// Archives
-	'dmg, iso, rar, tar, zip, ' .	
+	'dmg, iso, rar, tar, zip, ' .
 	// Audio
 	'aiff, m4a, mp3, ogg, wav, ' .
 	// Graphics
@@ -225,5 +205,5 @@ Config::set('AM_UPDATE_REPO_RAW_URL', 'https://raw.githubusercontent.com/marcant
 Config::set('AM_UPDATE_REPO_VERSION_FILE', '/automad/version.php');
 Config::set('AM_UPDATE_TEMP', AM_DIR_CACHE . '/update');
 
-// Version number 
+// Version number
 include AM_BASE_DIR . '/automad/version.php';

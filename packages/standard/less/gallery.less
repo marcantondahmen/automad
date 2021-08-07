@@ -1,21 +1,30 @@
 /*
- *	Standard
+ * Standard
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *  MIT license
+ * MIT license
  */
 
-
 .am-gallery-masonry {
-
 	@media (min-width: @font-large-breakpoint) {
-		grid-template-columns: repeat(auto-fill, minmax(~"calc(var(--am-gallery-item-width) * @{font-large-factor})", 1fr));
+		grid-template-columns: repeat(
+			auto-fill,
+			minmax(
+				~'calc(var(--am-gallery-item-width) * @{font-large-factor})',
+				1fr
+			)
+		);
 	}
 
 	@media (min-width: @font-xlarge-breakpoint) {
-		grid-template-columns: repeat(auto-fill, minmax(~"calc(var(--am-gallery-item-width) * @{font-xlarge-factor})", 1fr));
+		grid-template-columns: repeat(
+			auto-fill,
+			minmax(
+				~'calc(var(--am-gallery-item-width) * @{font-xlarge-factor})',
+				1fr
+			)
+		);
 	}
-
 }

@@ -1,0 +1,452 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@am-md-transition-delay: 0.1s;
+@am-md-selection-color: @base-selection-color;
+@am-md-selection-background: @base-selection-background;
+
+@am-md-navbar-background: @am-bg;
+@am-md-navbar-padding: 0;
+
+@am-md-navbar-nav-height: @button-height;
+@am-md-navbar-nav-padding-horizontal: 0.85rem;
+@am-md-navbar-nav-line-height: @am-md-navbar-nav-height;
+@am-md-navbar-nav-color: @am-text;
+
+@am-md-navbar-nav-hover-background: @button-hover-background;
+@am-md-navbar-nav-hover-color: @am-text;
+@am-md-navbar-nav-onclick-background: @am-md-navbar-nav-hover-background;
+@am-md-navbar-nav-onclick-color: @am-md-navbar-nav-hover-color;
+@am-md-navbar-nav-active-background: @am-bg;
+@am-md-navbar-nav-active-color: @am-success;
+
+@am-md-content-border: @am-border-color;
+@am-md-content-background: @am-bg;
+@am-md-content-padding: 1.79rem;
+@am-md-content-padding-fullscreen: 2.5rem;
+
+.uk-markdowneditor {
+	position: relative;
+	border: none;
+
+	.am-fullscreen & {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	&-navbar {
+		position: absolute;
+		z-index: 100;
+		top: @am-border-width;
+		left: @am-border-width;
+		right: @am-border-width;
+		display: flex;
+		justify-content: space-between;
+		box-sizing: border-box;
+		width: auto;
+		overflow: auto;
+		padding: 0 @am-md-navbar-padding;
+		background: @am-md-navbar-background;
+		border-top-left-radius: @am-radius - @am-border-width;
+		border-top-right-radius: @am-radius - @am-border-width;
+		border-bottom: @am-hairline;
+
+		.am-fullscreen & {
+			position: fixed;
+			top: @am-fullscreen-bar-height;
+			left: 0;
+			right: 0;
+			border-radius: 0;
+			padding: 0
+				(@am-fullscreen-padding - @am-md-navbar-nav-padding-horizontal);
+		}
+
+		&-nav {
+			display: flex;
+			width: auto;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			overflow: visible;
+
+			& > li > a {
+				display: block;
+				box-sizing: border-box;
+				text-decoration: none;
+				height: @am-md-navbar-nav-height;
+				padding: 0 @am-md-navbar-nav-padding-horizontal;
+				line-height: @am-md-navbar-nav-line-height;
+				color: @am-md-navbar-nav-color;
+				font-size: inherit;
+				cursor: pointer;
+
+				& svg {
+					height: 1rem;
+					width: auto;
+					margin-top: -0.14rem;
+					fill: @am-md-navbar-nav-color;
+					stroke: @am-md-navbar-nav-color;
+					.transition(fill 0.2s;);
+				}
+			}
+
+			& > li:hover > a,
+			& > li > a:focus {
+				background-color: @am-md-navbar-nav-hover-background;
+				color: @am-md-navbar-nav-hover-color;
+				outline: none;
+
+				& svg {
+					fill: @am-md-navbar-nav-hover-color;
+					stroke: @am-md-navbar-nav-hover-color;
+				}
+			}
+
+			& > li > a:active {
+				background-color: @am-md-navbar-nav-onclick-background;
+				color: @am-md-navbar-nav-onclick-color;
+
+				& svg {
+					fill: @am-md-navbar-nav-onclick-color;
+					stroke: @am-md-navbar-nav-onclick-color;
+				}
+			}
+
+			& > li.uk-active > a {
+				background-color: @am-md-navbar-nav-active-background;
+				color: @am-md-navbar-nav-active-color;
+
+				& svg {
+					fill: @am-md-navbar-nav-active-color;
+					stroke: @am-md-navbar-nav-active-color;
+				}
+
+				&:hover {
+					background-color: @am-md-navbar-nav-hover-background;
+				}
+			}
+		}
+	}
+
+	&-content {
+		border-left: 0.072rem solid @am-md-content-border;
+		border-right: @am-border-width solid @am-md-content-border;
+		border-bottom: @am-border-width solid @am-md-content-border;
+		border: none;
+		background-color: transparent;
+	}
+
+	&-code,
+	&-preview {
+		box-sizing: border-box;
+	}
+
+	&-code .CodeMirror,
+	&-preview {
+		box-sizing: border-box;
+		overflow: hidden;
+		height: auto !important;
+		min-height: @form-height;
+		padding: @am-md-content-padding;
+		padding-top: @am-md-content-padding + @am-md-navbar-nav-height;
+		border: @am-border-width solid @form-border;
+		border-radius: @am-radius;
+
+		.am-fullscreen & {
+			position: fixed;
+			box-sizing: border-box;
+			top: @am-md-navbar-nav-height + @am-fullscreen-bar-height;
+			bottom: 0;
+			padding: @am-md-content-padding-fullscreen;
+			border: none;
+			border-radius: 0;
+			overflow: auto !important;
+			overflow-x: hidden !important;
+		}
+	}
+
+	&-code .CodeMirror {
+		font-family: @base-code-font-family;
+		font-size: @base-code-font-size;
+		color: @form-color;
+		background-color: @form-background;
+		-moz-tab-size: 4;
+		tab-size: 4;
+
+		.am-fullscreen & {
+			padding: 0;
+			left: 0;
+			right: 50%;
+		}
+
+		.am-fullscreen [data-mode='tab'] & {
+			right: 0;
+		}
+
+		&.CodeMirror-focused {
+			color: @form-focus-color;
+			background-color: @form-focus-background;
+			.form-focus;
+		}
+
+		& .CodeMirror-line,
+		& .CodeMirror-placeholder {
+			font-weight: @base-body-font-weight;
+		}
+
+		& .CodeMirror-placeholder {
+			color: @form-placeholder-color;
+		}
+
+		& .CodeMirror-scroll {
+			box-sizing: border-box;
+			overflow-x: hidden !important;
+
+			.am-fullscreen & {
+				padding: @am-md-content-padding-fullscreen;
+			}
+		}
+
+		& .CodeMirror-sizer {
+			margin: 0 !important;
+		}
+
+		// Delay transition to avoid flickering when clicken on any button in the CodeMirror navbar.
+		&,
+		& * {
+			.transition(color 0.2s @am-md-transition-delay, background-color 0.2s @am-md-transition-delay, border-color 0.2s @am-md-transition-delay, box-shadow 0.2s @am-md-transition-delay;);
+		}
+	}
+
+	&-preview {
+		position: relative;
+		color: @form-focus-color;
+		background-color: @am-bg;
+
+		.am-fullscreen & {
+			left: 50%;
+			right: 0;
+		}
+
+		.am-fullscreen [data-mode='tab'] & {
+			left: 0;
+		}
+
+		& :first-child {
+			margin-top: 0;
+		}
+	}
+}
+
+[data-mode='split'] .uk-markdowneditor-button-code,
+[data-mode='split'] .uk-markdowneditor-button-preview {
+	display: none;
+}
+
+[data-mode='tab'][data-active-tab='code'] .uk-markdowneditor-preview,
+[data-mode='tab'][data-active-tab='preview'] .uk-markdowneditor-code {
+	display: none;
+}
+
+[data-mode='split'] .uk-markdowneditor-code,
+[data-mode='split'] .uk-markdowneditor-preview {
+	float: left;
+	width: 50%;
+}
+
+[data-mode='split'] .uk-markdowneditor-preview {
+	border-left: @am-hairline;
+}
+
+.CodeMirror-lines {
+	padding: 0; // Vertical padding around content.
+}
+
+.CodeMirror pre {
+	padding: 0; // Horizontal padding of content.
+}
+
+.CodeMirror-scrollbar-filler,
+.CodeMirror-gutter-filler {
+	background-color: inherit; // The little square between H and V scrollbars.
+}
+
+.cm-s-default {
+	font-weight: @base-body-font-weight;
+
+	& .cm-header {
+		color: inherit;
+	}
+
+	& .cm-quote {
+		color: inherit;
+	}
+
+	& .cm-keyword {
+		color: inherit;
+	}
+
+	& .cm-atom {
+		color: inherit;
+	}
+
+	& .cm-number {
+		color: inherit;
+	}
+
+	& .cm-def {
+		color: inherit;
+	}
+
+	& .cm-variable,
+	& .cm-punctuation,
+	& .cm-property,
+	& .cm-operator {
+		color: inherit;
+	}
+
+	& .cm-variable-2 {
+		color: @am-success;
+	}
+
+	& .cm-variable-3 {
+		color: inherit;
+	}
+
+	& .cm-comment {
+		color: inherit;
+	}
+
+	& .cm-string {
+		color: inherit;
+		font-style: italic;
+	}
+
+	& .cm-string-2 {
+		color: inherit;
+	}
+
+	& .cm-meta {
+		color: inherit;
+	}
+
+	& .cm-qualifier {
+		color: inherit;
+	}
+
+	& .cm-builtin {
+		color: inherit;
+	}
+
+	& .cm-bracket {
+		color: inherit;
+	}
+
+	& .cm-tag {
+		color: inherit;
+	}
+
+	& .cm-attribute {
+		color: inherit;
+	}
+
+	& .cm-hr {
+		color: inherit;
+	}
+
+	& .cm-link {
+		color: @am-success;
+	}
+
+	& .cm-url {
+		color: @am-muted;
+	}
+
+	& .cm-error {
+		color: inherit;
+	}
+
+	&.CodeMirror .CodeMirror-matchingbracket {
+		color: @am-danger;
+		font-weight: bold;
+	}
+
+	& .CodeMirror-selected,
+	& .CodeMirror-selectedtext {
+		color: @am-md-selection-color;
+		background-color: @am-md-selection-background;
+	}
+
+	& .CodeMirror-line::selection,
+	& .CodeMirror-line > span::selection,
+	& .CodeMirror-line > span > span::selection {
+		color: @am-md-selection-color;
+		background-color: @am-md-selection-background;
+	}
+
+	& .CodeMirror-line::-moz-selection,
+	& .CodeMirror-line > span::-moz-selection,
+	& .CodeMirror-line > span > span::-moz-selection {
+		color: @am-md-selection-color;
+		background-color: @am-md-selection-background;
+	}
+}
+
+.cm-negative {
+	color: inherit;
+}
+
+.cm-header,
+.cm-strong {
+	font-weight: bold;
+}
+
+.cm-em {
+	font-style: italic;
+}
+
+.cm-link {
+	text-decoration: none;
+}
+
+.cm-strikethrough {
+	text-decoration: line-through;
+}
+
+.cm-invalidchar {
+	color: inherit;
+}

@@ -1,0 +1,156 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@am-fullscreen-padding: 1.43rem;
+@am-fullscreen-bar-height: 3.86rem;
+
+.am-fullscreen {
+	position: fixed;
+	box-sizing: border-box;
+	z-index: 1020;
+	top: 0;
+	left: 0;
+	padding: (@am-fullscreen-bar-height + @utility-margin)
+		@am-fullscreen-padding @utility-margin-large @am-fullscreen-padding;
+	width: 100%;
+	height: 100vh;
+	overflow: auto;
+	background-color: @am-bg;
+
+	&-page {
+		overflow: hidden;
+
+		& .uk-tooltip {
+			display: none !important;
+		}
+	}
+
+	&-modal {
+		overflow-x: hidden;
+		background-color: @am-bg !important;
+		-webkit-transform: none !important;
+		transform: none !important;
+
+		& .uk-modal-dialog-blank {
+			-webkit-transform: none !important;
+			transform: none !important;
+			height: auto;
+			min-height: 100vh;
+			padding-top: @am-fullscreen-bar-height + @utility-margin;
+			padding-bottom: @utility-margin-large;
+		}
+	}
+
+	&-bar {
+		display: none;
+		box-sizing: border-box;
+		position: fixed;
+		z-index: 1050;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: @am-fullscreen-bar-height;
+		padding: 0 @am-fullscreen-padding;
+		border-bottom: @am-hairline;
+		background-color: @am-bg;
+
+		&-button {
+			&:extend(.uk-button);
+			min-width: @button-height;
+			max-width: @button-height;
+			margin-left: 0.64rem;
+			margin-right: -0.43rem;
+			text-align: center;
+			padding-left: 0;
+			padding-right: 0;
+			border-radius: @button-height / 2;
+			background-color: transparent;
+			border-color: transparent;
+			cursor: pointer;
+
+			&:hover,
+			&:focus {
+				color: @am-muted;
+				background-color: transparent;
+				outline: none;
+			}
+
+			// The button above the small text field to expand.
+			:not(.am-fullscreen-bar) > :not(.uk-flex) > & {
+				position: absolute;
+				margin-top: -@button-height + 0.12rem;
+				right: 0;
+			}
+
+			// Hide expand button when in fullscreen.
+			.am-fullscreen > & {
+				display: none;
+			}
+		}
+
+		& .uk-flex-item-1 {
+			padding: 0.36rem 0 !important;
+		}
+
+		& .uk-form-label {
+			margin: -0.072rem 0 0 0.86rem !important;
+			padding: 0.32rem 0.5rem 0.29rem 0.5rem;
+			line-height: 1.2;
+			border-radius: 4rem;
+			border: @am-hairline;
+		}
+	}
+
+	.uk-modal-dialog-blank &-bar,
+	&-page & &-bar {
+		display: block;
+	}
+
+	& &-container {
+		width: 58rem;
+		max-width: 100%;
+		margin: 0 auto;
+		padding-bottom: @utility-margin-large;
+
+		&-large {
+			width: 72rem;
+		}
+	}
+
+	&-page {
+		.uk-modal:not(.am-sidebar) {
+			z-index: 1100;
+		}
+	}
+}

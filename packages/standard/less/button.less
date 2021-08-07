@@ -1,53 +1,45 @@
 /*
- *	Standard
+ * Standard
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *  MIT license
+ * MIT license
  */
 
+@button-border-width: @border-width;
 
-@button-border-width:		@border-width;
+@button-background: transparent;
+@button-color: @base-body-color;
+@button-hover-background: transparent;
+@button-hover-color: @text-color;
+@button-active-background: @button-hover-background;
+@button-active-color: @button-hover-color;
 
-@button-background:			transparent;
-@button-color:				@base-body-color;
-@button-hover-background:	transparent;
-@button-hover-color:		@text-color;
-@button-active-background:	@button-hover-background;
-@button-active-color:		@button-hover-color;
-
-@button-height:				2.35rem;
-@button-line-height:		@button-height;
+@button-height: 2.35rem;
+@button-line-height: @button-height;
 @button-padding-horizontal: 1rem;
 
-@button-radius:				var(--button-radius);
-
+@button-radius: var(--button-radius);
 
 .hook-button() {
 	.button;
 }
 
 .hook-button-misc() {
-	
 	.buttons-stacked {
-		
 		padding-top: 4rem;
 		margin-top: -3rem;
-		
+
 		& > * {
 			margin-right: 0.55rem;
 			margin-top: 1rem;
 		}
-		
 	}
-	
 }
 
 .am-button,
 .am-mail-button {
-
 	font-weight: 430 !important;
 	.transition(background-color 0.2s, box-shadow 0.2s, border-color 0.2s;);
-
 }

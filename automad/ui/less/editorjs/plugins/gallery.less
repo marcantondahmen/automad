@@ -1,0 +1,94 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-block-gallery {
+	&-layout {
+		margin: 1rem 0 0 0 !important;
+		padding: 0;
+		border: @am-hairline;
+		border-width: 1px;
+		border-radius: @am-radius-small;
+		overflow: hidden;
+
+		&-tabs {
+			width: 100%;
+			display: flex;
+
+			& > div {
+				flex-grow: 1;
+				flex-basis: 50%;
+				line-height: @button-height;
+				border-bottom: @am-hairline;
+				text-align: center;
+				cursor: pointer;
+				color: @am-muted;
+				background-color: @button-hover-background;
+				.transition(background-color 0.2s;);
+
+				&:not(:first-child) {
+					border-left: @am-hairline;
+				}
+
+				&.active {
+					color: @am-text;
+					background-color: @am-bg;
+					border-bottom-color: transparent;
+				}
+
+				&:hover {
+					background-color: @am-bg;
+				}
+			}
+		}
+
+		&-options {
+			padding: 0 0.75rem 0.75rem 0.75rem;
+
+			& > :not(.active) {
+				display: none;
+			}
+
+			& > div {
+				display: flex;
+				margin: -0.5rem;
+
+				& > div {
+					flex-grow: 1;
+					flex-basis: 33%;
+					padding: 0.5rem;
+				}
+			}
+		}
+	}
+}

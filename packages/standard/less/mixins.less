@@ -1,12 +1,11 @@
 /*
- *	Standard
+ * Standard
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *  MIT license
+ * MIT license
  */
-
 
 .outline(@radius: @button-radius) {
 	border: @border-width solid @border-color;
@@ -14,7 +13,6 @@
 }
 
 .hover-underline() {
-
 	color: inherit;
 	padding: 1px 0;
 	border-bottom: 1px solid transparent;
@@ -23,11 +21,9 @@
 		color: inherit !important;
 		border-bottom: 1px solid;
 	}
-
 }
 
 .button(@radius: @button-radius) {
-
 	font-weight: 500;
 	border: @button-border-width solid @border-color;
 	.outline(@radius);
@@ -37,7 +33,6 @@
 	&.uk-active {
 		border-color: inherit;
 	}
-
 }
 
 .transition(@parameters) {

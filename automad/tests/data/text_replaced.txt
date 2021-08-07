@@ -1,0 +1,5 @@
+title: Text
+
+-
+
+text: A simple sample text with a [link](/replaced/url/to/page)

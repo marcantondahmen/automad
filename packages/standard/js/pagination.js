@@ -1,39 +1,37 @@
 /*!
- *	Standard.pagination
+ * Standard.pagination
  * 	Copyright (c) 2017-2021 by Marc Anton Dahmen - https://marcdahmen.de - MIT license
  */
 
-+function(Standard, $) {
-	
++(function (Standard, $) {
 	Standard.pagination = {
-		
-		init: function() {
-			
-			$('[data-uk-pagination]').on('select.uk.pagination', function(e, index) {
-				e.preventDefault();
-				Standard.pagination.update(index);
-			});	
-			
+		init: function () {
+			$('[data-uk-pagination]').on(
+				'select.uk.pagination',
+				function (e, index) {
+					e.preventDefault();
+					Standard.pagination.update(index);
+				}
+			);
 		},
-		
-		update: function(index) {
-			
+
+		update: function (index) {
 			var url = window.location.href;
-			
+
 			index++;
-			
+
 			if (/[?&]page\s*=/.test(url)) {
-				window.location.href = url.replace(/(?:([?&])page\s*=[^?&]*)/, "$1page=" + index);
+				window.location.href = url.replace(
+					/(?:([?&])page\s*=[^?&]*)/,
+					'$1page=' + index
+				);
 			} else if (/\?/.test(url)) {
-				window.location.href = url + "&page=" + index;
+				window.location.href = url + '&page=' + index;
 			} else {
-				window.location.href = url + "?page=" + index;
+				window.location.href = url + '?page=' + index;
 			}
-
-		}
-		
+		},
 	};
-	
-	$(document).on('ready', Standard.pagination.init);
 
-}(window.Standard = window.Standard || {}, jQuery);
+	$(document).on('ready', Standard.pagination.init);
+})((window.Standard = window.Standard || {}), jQuery);

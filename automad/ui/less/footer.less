@@ -1,0 +1,61 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@am-footer-height: 1.79rem;
+@am-footer-padding-top: 7.14rem;
+
+body > .uk-container-center {
+	position: relative;
+	min-height: 100vh;
+	padding-bottom: (
+		@am-footer-height + @am-footer-padding-top + @am-body-padding-bottom
+	);
+
+	// Fixing vh unit bug on iOS (and other) touch devices.
+	// Since iOS UI elements overlap the window initially before scrolling down,
+	// the min-height gets reduced by 5rem.
+	.uk-touch & {
+		min-height: ~'calc(100vh - 5rem)';
+	}
+
+	& .am-footer {
+		min-height: @am-footer-height;
+		padding: 0 @utility-container-padding-horizontal @am-body-padding-bottom
+			@utility-container-padding-horizontal;
+
+		& * {
+			color: #cccccc;
+		}
+	}
+}

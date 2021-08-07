@@ -1,0 +1,127 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2017-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-inpage {
+	&:extend(html all);
+	background: transparent;
+	line-height: inherit;
+
+	body > & {
+		position: relative;
+		display: block;
+		z-index: 9000;
+		padding: 0.75rem 1.5rem;
+	}
+
+	&-menubar {
+		display: inline-block;
+		position: fixed;
+		top: ~'calc(100% - 4.64rem)';
+		left: ~'calc(50% - 10.71rem)';
+		width: 21.42rem;
+		text-align: center;
+
+		& .uk-button-group {
+			border-radius: 6px;
+			overflow: hidden;
+			border: 1px solid @am-border-color;
+			.shadow;
+
+			& > a {
+				margin-left: 0;
+			}
+		}
+	}
+
+	&-menu-button {
+		&:extend(.uk-button all,
+		.uk-button-large all);
+		padding: 0 0.86rem;
+		border-color: transparent !important;
+		border-radius: 0;
+
+		& > .am-logo {
+			position: relative;
+			height: 1.43rem;
+			min-height: 1.43rem;
+			top: -0.14rem;
+		}
+
+		&.am-drag-handle {
+			&,
+			&:hover,
+			&:active {
+				color: #d2d2d2;
+				cursor: move;
+			}
+		}
+	}
+
+	& > &-edit-button {
+		&:extend(.uk-button all,
+		.uk-button-success all,
+		.uk-button-small all);
+		margin-bottom: 0.14rem;
+		vertical-align: text-bottom;
+		letter-spacing: 0 !important;
+		border-color: transparent !important;
+		text-decoration: none !important;
+		color: @button-success-color !important;
+		.shadow;
+
+		& > i {
+			color: inherit;
+		}
+
+		&:hover {
+			color: @button-success-hover-color !important;
+		}
+	}
+
+	& .uk-form-stacked .uk-form-label {
+		margin-top: 0;
+	}
+
+	& :-ms-input-placeholder {
+		color: @form-placeholder-color !important;
+	}
+
+	& ::-moz-placeholder {
+		color: @form-placeholder-color !important;
+	}
+
+	& ::-webkit-input-placeholder {
+		color: @form-placeholder-color !important;
+	}
+}

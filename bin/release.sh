@@ -12,7 +12,7 @@
 #	2.	Check whether the current branch is develop
 #	3.	Run tests
 #	4.	Update version numbers in automad/version.php and all related JSON files
-#	5.	Run Gulp tasks for GUI and themes (to update version numbers in dist files)
+#	5.	Run Gulp tasks for UI and themes (to update version numbers in dist files)
 #	6.	Commit changed files
 #	7.	Merge branch develop into master
 #	8.	Create tag for release

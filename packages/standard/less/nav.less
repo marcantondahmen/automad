@@ -1,32 +1,31 @@
 /*
- *	Standard
+ * Standard
  *
- *	Copyright (c) 2020-2021 by Marc Anton Dahmen
- *	https://marcdahmen.de
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
  *
- *  MIT license
+ * MIT license
  */
 
+@nav-padding-vertical: 0;
+@nav-padding-horizontal: 0;
 
-@nav-padding-vertical:         	0;
-@nav-padding-horizontal:       	0;
+@nav-nested-padding-left: 1rem;
+@nav-nested-padding-vertical: 0;
+@nav-nested-padding-horizontal: 0;
 
-@nav-nested-padding-left:      	1rem;
-@nav-nested-padding-vertical:  	0;
-@nav-nested-padding-horizontal:	0;
+@nav-side-color: var(--color-nav);
+@nav-side-hover-background: transparent;
+@nav-side-hover-color: @nav-side-color;
+@nav-side-active-background: transparent;
+@nav-side-active-color: @nav-side-color;
+@nav-side-nested-color: @nav-side-color;
+@nav-side-nested-hover-color: @nav-side-color;
 
-@nav-side-color:               	var(--color-nav);
-@nav-side-hover-background:    	transparent;
-@nav-side-hover-color:         	@nav-side-color;
-@nav-side-active-background:   	transparent;
-@nav-side-active-color:        	@nav-side-color;
-@nav-side-nested-color:        	@nav-side-color;
-@nav-side-nested-hover-color:  	@nav-side-color;
-
-@nav-dropdown-color:           	@navbar-color;
-@dropdown-background: 			@navbar-background;
-@nav-dropdown-hover-background:	@nav-dropdown-color;
-@nav-dropdown-hover-color:     	@dropdown-background;
+@nav-dropdown-color: @navbar-color;
+@dropdown-background: @navbar-background;
+@nav-dropdown-hover-background: @nav-dropdown-color;
+@nav-dropdown-hover-color: @dropdown-background;
 
 :root {
 	--color-nav: @text-color;
@@ -46,7 +45,6 @@
 }
 
 .hook-nav-misc() {
-	
 	.uk-nav-side:first-child {
 		margin-top: -0.4rem;
 	}
@@ -56,9 +54,8 @@
 	}
 
 	.uk-nav.uk-nav-side .uk-nav {
-
 		margin: 0.8rem 0;
-		
+
 		& > li {
 			margin: 0;
 			padding: 2px 0;
@@ -69,7 +66,6 @@
 			font-weight: @base-body-font-weight;
 			line-height: @base-body-line-height;
 		}
-
 	}
 
 	.uk-nav:last-child .uk-nav:last-child {
@@ -78,27 +74,23 @@
 
 	.uk-nav.uk-nav-autocomplete,
 	.uk-nav.uk-nav-dropdown {
-		
 		& > li > a {
 			padding: 6px 15px;
 			border: none;
-			.transition(background-color 0.2s;);	
+			.transition(background-color 0.2s;);
 		}
-		
 	}
-
 }
 
 .hook-nav-side-hover() {
-	border-bottom-color: @nav-side-color; 
+	border-bottom-color: @nav-side-color;
 }
 
 .hook-nav-side-active() {
-	border-bottom-color: @nav-side-color; 
+	border-bottom-color: @nav-side-color;
 }
 
 .nav-link {
-
 	color: @nav-side-color;
 
 	&:hover,
@@ -106,7 +98,6 @@
 	&:focus {
 		color: @text-muted-color;
 	}
-
 }
 
 .nav-icon {
