@@ -42,7 +42,7 @@ checkboxShowInNavbar: 1
 
 -
 
-iconNav: ♡
+iconNav: ↓
 
 -
 
