@@ -159,7 +159,7 @@ HTML;
 				if (!empty($data->installed)) {
 					$count = count($data->installed);
 					$Response->setStatus(
-						'<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i>&nbsp); ' .
+						'<span class="uk-badge uk-badge-success"><i class="uk-icon-refresh"></i>&nbsp ' .
 						$count . '</span>'
 					);
 				}
