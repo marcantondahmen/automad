@@ -80,10 +80,6 @@
 			margin: 0.36rem 0 0 0 !important;
 		}
 
-		&:not(:last-child) {
-			margin-bottom: 0.36rem !important;
-		}
-
 		&:hover {
 			color: @form-color;
 		}
@@ -96,6 +92,10 @@
 	& select.cdx-input {
 		padding-top: 0.57rem;
 		padding-bottom: 0.64rem;
+	}
+
+	& * + .am-form-icon-button-input {
+		margin-top: 0.36rem;
 	}
 
 	& .am-block-label {
