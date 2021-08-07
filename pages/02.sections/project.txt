@@ -122,7 +122,7 @@ title: Sections
 -
 
 +main: {
-    "time": 1628356799815,
+    "time": 1628358097169,
     "blocks": [
         {
             "type": "header",
@@ -135,7 +135,7 @@ title: Sections
         {
             "type": "paragraph",
             "data": {
-                "text": "Using sections, you can create beautiful and complex flexbox layouts. They can contain any kind of block and even other sections.&nbsp;",
+                "text": "Sections can also be used to create more complex layouts based on flexbox. They can contain any kind of block and even other sections.&nbsp;",
                 "large": false,
                 "alignment": "left"
             }
@@ -697,14 +697,14 @@ title: Sections
             "type": "header",
             "data": {
                 "text": "Styling Other Blocks",
-                "level": 2,
+                "level": 3,
                 "alignment": "left"
             }
         },
         {
             "type": "paragraph",
             "data": {
-                "text": "Sections can also be used to control the appearance of other blocks such as a gallery. The gallery block below has rounded corners, a white border and drops a shadow — all those styles are actually applied to the wrapping section.",
+                "text": "Aside from being a card, sections can also be used to control the appearance of just one single block such as a gallery. The gallery block below has rounded corners, a white border and drops a shadow — all those styles are actually applied to the wrapping section.",
                 "large": false,
                 "alignment": "left"
             }

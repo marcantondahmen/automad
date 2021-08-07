@@ -40,7 +40,7 @@ title: Blocks
 -
 
 +main: {
-    "time": 1628355873637,
+    "time": 1628357879876,
     "blocks": [
         {
             "type": "header",
@@ -91,17 +91,9 @@ title: Blocks
         {
             "type": "paragraph",
             "data": {
-                "text": "Image selections can also be displayed as <i>slideshows</i>. They can be configured to show controls and change images automatically.",
+                "text": "Image selections can also be displayed as slideshows. They can be configured to show controls and change images automatically.",
                 "large": false,
                 "alignment": "left"
-            }
-        },
-        {
-            "type": "image",
-            "data": {
-                "url": "https://source.unsplash.com/gj1dnc7yRG0/1600x900",
-                "caption": "This is a caption",
-                "link": "/sections"
             }
         },
         {
@@ -120,6 +112,14 @@ title: Blocks
                 "text": "Single images can be used as well. They can have captions and may also be used as links to other pages.",
                 "large": false,
                 "alignment": "left"
+            }
+        },
+        {
+            "type": "image",
+            "data": {
+                "url": "https://source.unsplash.com/gj1dnc7yRG0/1600x900",
+                "caption": "This is a caption",
+                "link": "#text-content"
             }
         },
         {
