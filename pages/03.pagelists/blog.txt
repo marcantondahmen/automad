@@ -2,6 +2,10 @@ title: Pagelists
 
 -
 
+tags: Blocks, Navigation, Templates
+
+-
+
 +hero: {
     "time": 1628444291927,
     "blocks": [
@@ -59,10 +63,6 @@ colorNavbarBackground: #F4F5F7
 -
 
 colorNavbarBorder: #eaeaeb
-
--
-
-checkboxHideFilters: 1
 
 -
 

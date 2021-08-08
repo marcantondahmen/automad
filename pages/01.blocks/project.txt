@@ -2,6 +2,10 @@ title: Blocks
 
 -
 
+tags: Blocks, Content
+
+-
+
 +hero: {
     "time": 1628357018662,
     "blocks": [

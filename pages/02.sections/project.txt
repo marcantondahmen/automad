@@ -2,6 +2,10 @@ title: Sections
 
 -
 
+tags: Blocks, Layout
+
+-
+
 +hero: {
     "time": 1628357296121,
     "blocks": [
