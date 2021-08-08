@@ -24,4 +24,4 @@ ogImage: *.png, *.jpg, /shared/image-landscape.png
 
 -
 
-urlSearchResults: /
+urlSearchResults: /pagelists

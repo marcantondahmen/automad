@@ -40,7 +40,7 @@ title: Blocks
 -
 
 +main: {
-    "time": 1628357879876,
+    "time": 1628443413494,
     "blocks": [
         {
             "type": "header",
@@ -236,7 +236,7 @@ title: Blocks
         {
             "type": "paragraph",
             "data": {
-                "text": "Generate page cards automatically using the <i>pagelist</i> block.",
+                "text": "Generate page cards automatically using the <i>pagelist</i> block with the <i>blog</i> template.",
                 "large": false,
                 "alignment": "left"
             }
@@ -254,6 +254,75 @@ title: Blocks
                 "sortKey": ":path",
                 "sortOrder": "asc",
                 "file": "/standard/templates/blocks/pagelist/blog.php"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "Or the standard <i>portfolio</i> template ...",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "pagelist",
+            "data": {
+                "type": "all",
+                "excludeHidden": true,
+                "matchUrl": "",
+                "filter": "",
+                "template": "",
+                "limit": "2",
+                "offset": "0",
+                "sortKey": ":path",
+                "sortOrder": "desc",
+                "file": "/standard/templates/blocks/pagelist/portfolio.php"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "... a <i>simple</i> template ...",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "pagelist",
+            "data": {
+                "type": "all",
+                "excludeHidden": true,
+                "matchUrl": "",
+                "filter": "",
+                "template": "",
+                "limit": "2",
+                "offset": "0",
+                "sortKey": ":path",
+                "sortOrder": "asc",
+                "file": "/standard/templates/blocks/pagelist/simple.php"
+            }
+        },
+        {
+            "type": "paragraph",
+            "data": {
+                "text": "... or just <i>images</i>.",
+                "large": false,
+                "alignment": "left"
+            }
+        },
+        {
+            "type": "pagelist",
+            "data": {
+                "type": "all",
+                "excludeHidden": true,
+                "matchUrl": "",
+                "filter": "",
+                "template": "",
+                "limit": "2",
+                "offset": "0",
+                "sortKey": ":path",
+                "sortOrder": "asc",
+                "file": "/standard/templates/blocks/pagelist/images.php"
             }
         },
         {
@@ -343,10 +412,6 @@ colorNavbarBorder: #eaeaeb
 
 -
 
-checkboxHideThumbnails: 1
-
--
-
 checkboxHideTitle: 1
 
 -
@@ -355,4 +420,4 @@ checkboxMakeNavbarTransparent: 1
 
 -
 
-checkboxShowInNavbar: 1
+imageCard: https://source.unsplash.com/hrMav18bnsc/800x800
