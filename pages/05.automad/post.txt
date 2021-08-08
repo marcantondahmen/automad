@@ -38,10 +38,6 @@ checkboxShowInFooter: 1
 
 -
 
-checkboxShowInNavbar: 1
-
--
-
 iconNav: ↓
 
 -

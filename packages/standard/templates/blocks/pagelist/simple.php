@@ -1,5 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
+<@ set { 
+	:visibilityCache: @{ :hideThumbnails | def (0) },
+	:hideThumbnails: @{ checkboxHideThumbnails } 
+} @>
 <section class="cards-simple">
 	<@ foreach in pagelist ~@>
 		<div class="card uk-panel uk-panel-box" <@ ../../elements/colors_inline.php @>>
@@ -28,3 +31,6 @@
 		</div>
 	<@~ end @>
 </section>
+<@ set { 
+	:hideThumbnails: @{ :visibilityCache } 
+} @>

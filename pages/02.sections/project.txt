@@ -2,6 +2,10 @@ title: Sections
 
 -
 
+tags: Blocks, Layout
+
+-
+
 +hero: {
     "time": 1628357296121,
     "blocks": [
@@ -784,4 +788,4 @@ checkboxMakeNavbarTransparent: 1
 
 -
 
-checkboxShowInNavbar: 1
+imageCard: https://source.unsplash.com/HRXijmxSkF8/800x800

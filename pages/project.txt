@@ -2,6 +2,10 @@ title: Home
 
 -
 
+hidden: on
+
+-
+
 +hero: {
     "time": 1628351480342,
     "blocks": [
@@ -37,13 +41,13 @@ title: Home
 -
 
 +main: {
-    "time": 1628351518499,
+    "time": 1628452422764,
     "blocks": [
         {
             "type": "section",
             "data": {
                 "content": {
-                    "time": 1619885973139,
+                    "time": 1628452367348,
                     "blocks": [
                         {
                             "type": "section",
@@ -177,6 +181,71 @@ title: Home
                                 "minBlockWidth": "",
                                 "widthFraction": "1/2"
                             }
+                        },
+                        {
+                            "type": "section",
+                            "data": {
+                                "content": {
+                                    "time": 1628452366888,
+                                    "blocks": [
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "<am-fontsize style=\"font-size: 200%;\"><am-lineheight style=\"line-height: 0.9; display: inline-block;\">👏</am-lineheight></am-fontsize>",
+                                                "large": false,
+                                                "alignment": "left"
+                                            }
+                                        },
+                                        {
+                                            "type": "paragraph",
+                                            "data": {
+                                                "text": "Create dynamic page card grids, blogs, portfolios or search pages using pagelist templates and blocks.&nbsp;",
+                                                "large": true,
+                                                "alignment": "left"
+                                            }
+                                        },
+                                        {
+                                            "type": "delimiter",
+                                            "data": {}
+                                        },
+                                        {
+                                            "type": "buttons",
+                                            "data": {
+                                                "primaryText": "<am-fontsize style=\"font-size: 120%;\">About Pagelists</am-fontsize>",
+                                                "primaryLink": "/pagelists",
+                                                "primaryStyle": {
+                                                    "borderRadius": "0.4rem",
+                                                    "paddingHorizontal": "1rem",
+                                                    "borderColor": "#2A2B2E",
+                                                    "hoverBorderColor": "#2A2B2E",
+                                                    "color": "#F4F5F7",
+                                                    "hoverColor": "#F4F5F7",
+                                                    "background": "#2A2B2E",
+                                                    "hoverBackground": "#1F2022"
+                                                },
+                                                "secondaryText": "",
+                                                "secondaryLink": "",
+                                                "secondaryStyle": {},
+                                                "alignment": "left"
+                                            }
+                                        }
+                                    ],
+                                    "version": "2.20.2"
+                                },
+                                "style": {
+                                    "card": true,
+                                    "matchRowHeight": true,
+                                    "color": "#F4F5F7",
+                                    "backgroundColor": "#1F2022",
+                                    "borderColor": "#2A2B2E",
+                                    "borderWidth": "2px",
+                                    "borderRadius": "1rem"
+                                },
+                                "justify": "start",
+                                "gap": "",
+                                "minBlockWidth": "",
+                                "widthFraction": "1/2"
+                            }
                         }
                     ],
                     "version": "2.20.2"
@@ -186,7 +255,7 @@ title: Home
                 },
                 "justify": "fill-row",
                 "gap": "",
-                "minBlockWidth": ""
+                "minBlockWidth": "22rem"
             }
         }
     ],
