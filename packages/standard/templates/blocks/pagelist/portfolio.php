@@ -1,5 +1,8 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ set { :hideThumbnails: @{ checkboxHideThumbnails } } @>
+<@ set { 
+	:visibilityCache: @{ :hideThumbnails | def (0) },
+	:hideThumbnails: @{ checkboxHideThumbnails } 
+} @>
 <div class="@{ :classes | def('cards masonry clean') }">
 	<@ foreach in pagelist ~@>
 		<div class="card" <@ ../../elements/colors_inline.php @>>
@@ -36,3 +39,6 @@
 		</div>
 	<@~ end @>
 </div>
+<@ set { 
+	:hideThumbnails: @{ :visibilityCache } 
+} @>
