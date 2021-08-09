@@ -36,6 +36,9 @@
 
 namespace Automad\Core;
 
+use Michelf\MarkdownExtra;
+use URLify;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -158,7 +161,7 @@ class Str {
 		if (strpos($str, "\n") === false && $multilineOnly) {
 			return $str;
 		} else {
-			$str = \Michelf\MarkdownExtra::defaultTransform($str);
+			$str = MarkdownExtra::defaultTransform($str);
 
 			return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function ($matches) {
 				$id = self::sanitize(self::stripTags($matches[2]), true, 100);
@@ -205,6 +208,10 @@ class Str {
 	 * @return string The sanitized string
 	 */
 	public static function sanitize($str, $removeDots = false, $maxChars = 100) {
+		if (strlen($str) === 0) {
+			return '';
+		}
+
 		// If dots should be removed from $str, replace them with '-', since URLify::filter() only removes them fully without replacing.
 		if ($removeDots) {
 			$str = str_replace('.', '-', $str);
@@ -221,12 +228,12 @@ class Str {
 		// Note: $maps gets directly manipulated without using URLify::add_chars().
 		// Using the add_chars() method would extend $maps every time, Str::sanitize() gets called.
 		// Adding a new array to $maps using a key avoids that and just overwrites that same array after the first call without adding new elements.
-		\URLify::$maps['nonWordChars'] = array('=' => '-', '&' => '-and-', '+' => '-plus-', '@' => '-at-', '|' => '-', '*' => '-x-');
-		\URLify::$remove_list = array();
+		URLify::$maps['nonWordChars'] = array('=' => '-', '&' => '-and-', '+' => '-plus-', '@' => '-at-', '|' => '-', '*' => '-x-');
+		URLify::$remove_list = array();
 
 		// Since all possible dots got removed already above (if $removeDots is true),
 		// $str should be filtered as filename to keep dots if they are still in $str and $removeDots is false.
-		return \URLify::filter($str, $maxChars, '', true);
+		return URLify::filter($str, $maxChars, '', true);
 	}
 
 	/**
