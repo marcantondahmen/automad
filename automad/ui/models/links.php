@@ -54,9 +54,10 @@ class Links {
 	 * @param \Automad\Core\Automad $Automad
 	 * @param string $old
 	 * @param string $new
+	 * @param string $dataFilePath
 	 * @return boolean true on success
 	 */
-	public static function update($Automad, $old, $new) {
+	public static function update($Automad, $old, $new, $dataFilePath = false) {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 
@@ -65,13 +66,15 @@ class Links {
 		$fileKeysArray = array();
 
 		foreach ($fileResultsArray as $FileResults) {
-			$keys = array();
+			if ($dataFilePath === $FileResults->path || empty($dataFilePath)) {
+				$keys = array();
 
-			foreach ($FileResults->fieldResultsArray as $FieldResults) {
-				$keys[] = $FieldResults->key;
+				foreach ($FileResults->fieldResultsArray as $FieldResults) {
+					$keys[] = $FieldResults->key;
+				}
+
+				$fileKeysArray[] = new FileKeys($FileResults->path, $keys);
 			}
-
-			$fileKeysArray[] = new FileKeys($FileResults->path, $keys);
 		}
 
 		$Replacement = new Replacement($searchValue, $replaceValue, true, false);
