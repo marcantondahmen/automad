@@ -276,6 +276,10 @@ class Str {
 	 * @return string the slug
 	 */
 	public static function slug($str, $removeDots = false, $maxChars = 100) {
+		if (strlen($str) === 0) {
+			return '';
+		}
+
 		$slug = self::sanitize($str, $removeDots, $maxChars);
 
 		if (strlen($slug) === 0 || (strlen($slug) < 6 && strlen($str) > 12)) {
