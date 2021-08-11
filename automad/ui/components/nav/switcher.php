@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Switcher {
 	/**
-	 *  Create a sticky switcher menu with an optional dropdown menu.
+	 * Create a sticky switcher menu with an optional dropdown menu.
 	 *
 	 * @param string $target
 	 * @param array $items Main menu items
@@ -65,7 +65,7 @@ class Switcher {
 
 		foreach ($items as $item) {
 			// Clean up text to be used as id (also remove possible count badges).
-			$tab = Str::sanitize(preg_replace('/&\w+;/', '', strip_tags($item['text'])), true);
+			$tab = Str::slug(preg_replace('/&\w+;/', '', strip_tags($item['text'])), true);
 
 			$html .= '<button class="uk-button uk-button-large" data-am-tab="' . $tab . '">' .
 					 '<span class="uk-visible-small">' . $item['icon'] . '</span>' .

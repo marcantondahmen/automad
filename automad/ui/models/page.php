@@ -66,7 +66,7 @@ class Page {
 		$template = basename($themeTemplate);
 
 		// Save new subpage below the current page's path.
-		$subdir = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
+		$subdir = Str::slug($title, true, AM_DIRNAME_MAX_LEN);
 
 		// If $subdir is an empty string after sanitizing, set it to 'untitled'.
 		if (!$subdir) {

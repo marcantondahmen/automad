@@ -57,7 +57,7 @@ class User {
 	 * @return string the rendered user card
 	 */
 	public static function render($user) {
-		$id = 'am-user-' . Str::sanitize($user);
+		$id = 'am-user-' . Str::slug($user);
 		$fn = function ($expression) {
 			return $expression;
 		};

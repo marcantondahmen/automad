@@ -40,7 +40,6 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\Core\Str;
-use Automad\UI\Components\Modal\Link;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -70,7 +69,8 @@ class File {
 			$Automad = UICache::get();
 			$path = FileSystem::getPathByPostUrl($Automad);
 			$oldFile = $path . basename($oldName);
-			$newFile = $path . Str::sanitize(basename($newName));
+			$extension = FileSystem::getExtension($oldFile);
+			$newFile = $path . Str::slug(basename(preg_replace('/\.' . $extension . '$/i', '', $newName))) . '.' . $extension;
 
 			if (FileSystem::isAllowedFileType($newFile)) {
 				// Rename file and caption if needed and update all file links.
@@ -156,7 +156,7 @@ class File {
 			if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
 				$error = Text::get('error_import');
 			} else {
-				$fileName = Str::sanitize(preg_replace('/\?.*/', '', basename($importUrl)));
+				$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)));
 
 				if ($pageUrl) {
 					$Automad = UICache::get();

@@ -109,7 +109,7 @@ class FileCollection {
 				for ($i = 0; $i < count($files['files']['name']); $i++) {
 					// Check if file has a valid filename (allowed file type).
 					if (FileSystem::isAllowedFileType($files['files']['name'][$i])) {
-						$newFile = $path . Str::sanitize($files['files']['name'][$i]);
+						$newFile = $path . Str::slug($files['files']['name'][$i]);
 						move_uploaded_file($files['files']['tmp_name'][$i], $newFile);
 					} else {
 						$errors[] = Text::get('error_file_format') . ' "' .

@@ -365,7 +365,7 @@ class Automad {
 		$slug = preg_replace($pattern, $replacement, $slug);
 
 		// Clean up $slug
-		$slug = Str::sanitize($slug);
+		$slug = Str::slug($slug);
 
 		// Build URL:
 		// The ltrim (/) is needed to prevent a double / in front of every url,

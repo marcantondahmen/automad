@@ -166,42 +166,42 @@ class JumpBar {
 
 		return array(
 			array(
-				'url' => $sysUrl . Str::sanitize(Text::get('sys_cache')),
+				'url' => $sysUrl . Str::slug(Text::get('sys_cache')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_cache'),
 				'title' => Text::get('sys_cache'),
 				'subtitle' => '',
 				'icon' => 'rocket'
 			),
 			array(
-				'url' => $sysUrl . Str::sanitize(Text::get('sys_user')),
+				'url' => $sysUrl . Str::slug(Text::get('sys_user')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_user'),
 				'title' => Text::get('sys_user'),
 				'subtitle' => '',
 				'icon' => 'user'
 			),
 			array(
-				'url' => $sysUrl . Str::sanitize(Text::get('sys_update')),
+				'url' => $sysUrl . Str::slug(Text::get('sys_update')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_update'),
 				'title' => Text::get('sys_update'),
 				'subtitle' => '',
 				'icon' => 'refresh'
 			),
 			array(
-				'url' => $sysUrl . Str::sanitize(Text::get('sys_language')),
+				'url' => $sysUrl . Str::slug(Text::get('sys_language')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_language'),
 				'title' => Text::get('sys_language'),
 				'subtitle' => '',
 				'icon' => 'flag'
 			),
 			array(
-				'url' => $sysUrl . Str::sanitize(Text::get('sys_headless')),
+				'url' => $sysUrl . Str::slug(Text::get('sys_headless')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_headless'),
 				'title' => Text::get('sys_headless'),
 				'subtitle' => '',
 				'icon' => 'headless'
 			),
 			array(
-				'url' => $sysUrl . Str::sanitize(Text::get('sys_debug')),
+				'url' => $sysUrl . Str::slug(Text::get('sys_debug')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_debug'),
 				'title' => Text::get('sys_debug'),
 				'subtitle' => '',

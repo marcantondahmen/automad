@@ -234,7 +234,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
 		$prefix = ltrim(Str::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
-		$title = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
+		$title = Str::slug($title, true, AM_DIRNAME_MAX_LEN);
 
 		// If the title is an empty string after sanitizing, set it to 'untitled'.
 		if (!$title) {
