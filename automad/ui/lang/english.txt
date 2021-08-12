@@ -1030,6 +1030,10 @@ page_prefix: Prefix (Order in Navigation)
 
 -
 
+page_slug: Directory Name
+
+-
+
 page_redirect: Redirect page to another URL
 
 -

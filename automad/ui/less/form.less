@@ -65,6 +65,12 @@
 	min-height: @form-height;
 	line-height: @base-body-line-height;
 	border-radius: @am-radius;
+
+	&:invalid:not([value='']),
+	&:focus:invalid:not([value='']) {
+		color: @am-danger;
+		border-color: @am-danger;
+	}
 }
 
 .hook-form-disabled() {

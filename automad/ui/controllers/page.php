@@ -112,7 +112,13 @@ class Page {
 			// If the posted form contains any "data", save the form's data to the page file.
 			if ($data = Request::post('data')) {
 				// Save page and replace $Response with the returned $Response object (error or redirect).
-				$Response = self::save($Page, $url, $data, Request::post('prefix'));
+				$Response = self::save(
+					$Page,
+					$url,
+					$data,
+					Request::post('prefix'),
+					Request::post('slug')
+				);
 			} else {
 				// If only the URL got submitted, just get the form ready.
 				$PageData = new PageData($Automad, $Page);
@@ -215,7 +221,7 @@ class Page {
 							$Page,
 							$dest->path,
 							ModelsPage::extractPrefixFromPath($Page->path),
-							$title
+							ModelsPage::extractSlugFromPath($Page->path)
 						);
 
 						$Response->setRedirect(ModelsPage::contextUrlByPath($newPagePath));
@@ -271,9 +277,10 @@ class Page {
 	 * @param string $url
 	 * @param array $data
 	 * @param string $prefix
+	 * @param string $slug
 	 * @return \Automad\UI\Response the response object
 	 */
-	private static function save($Page, $url, $data, $prefix) {
+	private static function save($Page, $url, $data, $prefix, $slug) {
 		$Response = new Response();
 
 		// A title is required for building the page's path.
@@ -291,7 +298,7 @@ class Page {
 					// form $_POST['data']. That information has to be parsed first and "subdivided".
 					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
-					if ($redirectUrl = ModelsPage::save($Page, $url, $data, $themeTemplate, $prefix)) {
+					if ($redirectUrl = ModelsPage::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
 						$Response->setRedirect($redirectUrl);
 					} else {
 						$Response->setSuccess(Text::get('success_saved'));

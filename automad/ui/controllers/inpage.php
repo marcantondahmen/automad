@@ -92,7 +92,7 @@ class InPage {
 							$Page,
 							dirname($Page->path),
 							Page::extractPrefixFromPath($Page->path),
-							$postData[AM_KEY_TITLE]
+							Page::extractSlugFromPath($Page->path)
 						);
 
 						Debug::log($newPagePath, 'renamed page');
