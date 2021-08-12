@@ -183,15 +183,15 @@ class Page {
 	 * @param \Automad\Core\Page $Page
 	 * @param string $destPath
 	 * @param string $prefix
-	 * @param string $title
+	 * @param string $slug
 	 * @return string the new page path
 	 */
-	public static function moveDirAndUpdateLinks($Page, $destPath, $prefix, $title) {
+	public static function moveDirAndUpdateLinks($Page, $destPath, $prefix, $slug) {
 		$newPagePath = FileSystem::movePageDir(
 			$Page->path,
 			$destPath,
 			$prefix,
-			$title
+			$slug
 		);
 
 		self::updatePageLinks($Page, $newPagePath);
