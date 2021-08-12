@@ -256,9 +256,11 @@ class Page {
 		// FileSystem::movePageDir() will check if renaming is needed, and will
 		// skip moving, when old and new path are equal.
 		if ($url != '/') {
-			if (strlen($slug) === 0) {
-				$slug = $data[AM_KEY_TITLE];
-			}
+			$slug = self::updateSlug(
+				$Page->get(AM_KEY_TITLE),
+				$data[AM_KEY_TITLE],
+				$slug
+			);
 
 			$newPagePath = self::moveDirAndUpdateLinks(
 				$Page,
@@ -296,6 +298,22 @@ class Page {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Update slug in case it is not a custom one and just represents a sanitized version of the title.
+	 *
+	 * @param string $currentTitle
+	 * @param string $newTitle
+	 * @param string $slug
+	 * @return string the updated directory name slug
+	 */
+	public static function updateSlug($currentTitle, $newTitle, $slug) {
+		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
+			$slug = $newTitle;
+		}
+
+		return $slug;
 	}
 
 	/**
