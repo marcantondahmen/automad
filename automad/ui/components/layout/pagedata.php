@@ -234,10 +234,11 @@ HTML;
 	 * @param string $key
 	 * @param string $value
 	 * @param string $label
+	 * @param string $class
 	 * @param string $attributes
 	 * @return string the rendered input field
 	 */
-	private function input($key, $value, $label, $attributes = '') {
+	private function input($key, $value, $label, $class = '', $attributes = '') {
 		$id = "am-input-$key";
 
 		return <<< HTML
@@ -247,7 +248,7 @@ HTML;
 				</label>
 				<input 
 				id="$id" 
-				class="uk-form-controls uk-width-1-1" 
+				class="uk-form-controls uk-width-1-1 $class" 
 				type="text" 
 				name="$key" 
 				value="$value" 
@@ -411,6 +412,7 @@ HTML;
 			'slug',
 			$slug,
 			Text::get('page_slug') . ' (Slug)',
+			'am-validate',
 			'data-am-slug pattern="^(?=[a-z0-9])[a-z0-9\-]*[a-z0-9]$"'
 		);
 	}
