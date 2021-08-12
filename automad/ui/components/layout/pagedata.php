@@ -406,6 +406,10 @@ HTML;
 	 * @return string the slug input field HTML
 	 */
 	private function slug() {
+		if ($this->url == '/') {
+			return '';
+		}
+
 		$slug = Page::extractSlugFromPath($this->Page->path);
 
 		return $this->input(
