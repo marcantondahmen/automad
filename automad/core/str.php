@@ -268,7 +268,7 @@ class Str {
 	 * Creates a slug for save diretory names, ids or similar from a given string.
 	 *
 	 * In case the sanitized string is empty or the string is shorter than 6 chars while the
-	 * input string is longer than 12 chars, the string is replaced with a md5 hash shortened to 12 chars.
+	 * input string is longer than 12 chars, the string is replaced with a md5 hash shortened to 16 chars.
 	 *
 	 * @param string $str
 	 * @param boolean $removeDots
