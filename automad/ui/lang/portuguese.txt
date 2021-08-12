@@ -906,6 +906,10 @@ page_prefix: Prefixo (ordem na navegação)
 
 -
 
+page_slug: Nome do diretório
+
+-
+
 page_redirect: Redirecionar a página para outro URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Limpar diretório de cache
 
 -
 
-sys_cache_purge_info: Em contraste com simplesmente limpar o cache, limpar o diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagem e página, bem como uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de tempos em tempos ou na reinicialização. No entanto, em alguns sistemas, esse diretório deve ser limpo manualmente.
+sys_cache_purge_info: Em contraste com a simples limpeza do cache, a purga o diretório de cache também moverá todos os arquivos temporários, páginas excluídas, backups de atualização e imagens armazenadas em cache para o diretório temporário do sistema. Isso forçará uma reconstrução completa do cache de imagem e página, bem como uma limpeza de todas as páginas excluídas. Na maioria dos sistemas, o diretório temporário será limpo automaticamente de vez em quando ou na reinicialização. No entanto, em alguns sistemas, os diretórios temporários devem ser purgados manualmente.
 
 -
 

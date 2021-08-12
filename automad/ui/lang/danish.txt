@@ -906,6 +906,10 @@ page_prefix: Præfiks (rækkefølge i navigation)
 
 -
 
+page_slug: Directory Name.
+
+-
+
 page_redirect: Omdiriger siden til en anden URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Rens cache-bibliotek
 
 -
 
-sys_cache_purge_info: I modsætning til simpelthen at rydde cachen vil rensning af cache-biblioteket også flytte alle midlertidige filer, slettede sider, opdaterings-sikkerhedskopier og cachelagrede billeder til systemets temprary-bibliotek. Dette vil tvinge en fuldstændig genopbygning af billed- og sidecache samt oprydning af alle slettede sider. På de fleste systemer renses den midlertidige mappe automatisk fra tid til anden eller ved genstart. På nogle systemer skal kataloget imidlertid ryddes manuelt.
+sys_cache_purge_info: I modsætning til blot at rydde cachen, vil rensning af cache-mappen også flytte alle midlertidige filer, slettede sider, opdateringsbackups og cachelagrede billeder til systemets midlertidige mappe. Dette vil tvinge en fuld genopbygning af billed- og sidekuffen samt en oprydning af alle slettede sider. På de fleste systemer vil den midlertidige mappe blive renset automatisk fra tid til anden eller på genstart. Men på nogle systemer skal midlertidige mapper renses manuelt.
 
 -
 

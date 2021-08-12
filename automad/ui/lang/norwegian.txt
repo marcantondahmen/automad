@@ -906,6 +906,10 @@ page_prefix: Prefiks (rekkefølge i navigasjon)
 
 -
 
+page_slug: Katalognavn
+
+-
+
 page_redirect: Viderekoble siden til en annen URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Rens hurtigbufferkatalog
 
 -
 
-sys_cache_purge_info: I motsetning til å bare tømme hurtigbufferen, vil rensing av hurtigbufferkatalogen også flytte alle midlertidige filer, slettede sider, sikkerhetskopier av oppdateringer og hurtigbufrede bilder til den midlertidige katalogen til systemet. Dette vil tvinge en fullstendig gjenoppbygging av bilde- og sidebufferen, samt opprydding av alle slettede sider. På de fleste systemer blir den midlertidige katalogen renset automatisk fra tid til annen eller ved omstart. Imidlertid må katalogen tømmes manuelt på noen systemer.
+sys_cache_purge_info: I motsetning til bare å rydde hurtigbufferen, vil rensing av cache-katalogen også flytte alle midlertidige filer, slettede sider, oppdateringsbackups og bufret bilder til den midlertidige katalogen til systemet. Dette vil tvinge en fullbygging av bilde- og sidebufferen, samt en opprydding av alle slettede sider. På de fleste systemer vil den midlertidige katalogen bli rengjort automatisk fra tid til annen eller på omstart. Men på enkelte systemer må midlertidige kataloger renses manuelt.
 
 -
 

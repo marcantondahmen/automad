@@ -906,6 +906,10 @@ page_prefix: Prefiksas (tvarka navigacijoje)
 
 -
 
+page_slug: Rodyklės pavadinimas
+
+-
+
 page_redirect: Nukreipkite puslapį į kitą URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Išvalyti talpyklos katalogą
 
 -
 
-sys_cache_purge_info: Priešingai nei paprasčiausiai išvalant talpyklą, išvalius talpyklos katalogą, visi laikini failai, ištrinti puslapiai, atnaujinimo atsarginės kopijos ir talpyklos vaizdai bus perkelti į laikiną sistemos katalogą. Tai privers visiškai atkurti vaizdą ir puslapių talpyklą, taip pat išvalyti visus ištrintus puslapius. Daugumoje sistemų laikinas katalogas retkarčiais arba iš naujo paleidžiamas automatiškai. Tačiau kai kuriose sistemose tą katalogą reikia išvalyti rankiniu būdu.
+sys_cache_purge_info: Skirtingai nuo kliringo talpyklos, išvalymo talpyklos katalogą taip pat perkelti visus laikinus failus, ištrintus puslapius, atnaujinti atsargines kopijas ir talpyklų vaizdus į laikiną katalogą sistemos. Tai priverstų visapusišką vaizdą ir puslapio talpyklą, taip pat visų ištrintų puslapių valymą. Daugumoje sistemų laikinas katalogas bus automatiškai išvalytas nuo laiko arba iš naujo paleisti. Tačiau kai kuriose sistemose laikinieji katalogai turi būti išvalyti rankiniu būdu.
 
 -
 

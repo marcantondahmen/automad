@@ -906,6 +906,10 @@ page_prefix: Préfixe (ordre dans la navigation)
 
 -
 
+page_slug: Nom de répertoire
+
+-
+
 page_redirect: Rediriger la page vers une autre URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Purger le répertoire du cache
 
 -
 
-sys_cache_purge_info: Contrairement à la simple suppression du cache, la purge du répertoire du cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images mises en cache vers le répertoire temporaire du système. Cela forcera une reconstruction complète de l'image et du cache de page ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou au redémarrage. Cependant, sur certains systèmes, ce répertoire doit être effacé manuellement.
+sys_cache_purge_info: Contrairement à simplement effacer le cache, purger le répertoire de cache déplacera également tous les fichiers temporaires, les pages supprimées, les sauvegardes de mise à jour et les images en cache au répertoire temporaire du système. Cela obligera une reconstruction complète de l'image et du cache de page ainsi qu'un nettoyage de toutes les pages supprimées. Sur la plupart des systèmes, le répertoire temporaire sera nettoyé automatiquement de temps en temps ou sur redémarrage. Cependant, sur certains systèmes, les répertoires temporaires doivent être purgés manuellement.
 
 -
 

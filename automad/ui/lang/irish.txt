@@ -906,6 +906,10 @@ page_prefix: Réimír (Ordú Nascleanúna)
 
 -
 
+page_slug: Ainm Eolaire
+
+-
+
 page_redirect: Leathanach a atreorú chuig URL eile
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Eolaire Purge Cache
 
 -
 
-sys_cache_purge_info: I gcodarsnacht leis an taisce a ghlanadh, bogfaidh eolaire an taisce gach comhad sealadach, leathanaigh scriosta, cúltacaí nuashonraithe agus íomhánna taiscthe chuig eolaire sealadach an chórais. Cuirfidh sé seo atógáil iomlán ar an taisce íomhá agus leathanaigh chomh maith le glanadh na leathanach scriosta go léir. I bhformhór na gcóras, glanfar an t-eolaire sealadach go huathoibríoch ó am go ham nó ar atosaigh. Mar sin féin, ar roinnt córais caithfear an eolaire sin a ghlanadh de láimh.
+sys_cache_purge_info: I gcodarsnacht leis sin chun an taisce a ghlanadh, déanfaidh tú an t-eolaire cache a ghlanadh freisin, bogfaidh an t-eolaire taisce go léir go léir, scriosadh leathanaigh, cúltacaí nuashonraithe agus íomhánna cacháilte chuig an eolaire sealadach den chóras. Cuirfidh sé seo iallach iomlán ar atógáil iomlán an íomhá agus an taisce leathanaigh chomh maith le glantachán de na leathanaigh scriosta go léir. Ar an gcuid is mó de na córais déanfar an t-eolaire sealadach a ghlanadh suas go huathoibríoch ó am go ham nó ar Atosaigh. Mar sin féin, ar roinnt córas caithfear eolairí sealadacha a ghlanadh de láimh.
 
 -
 

@@ -906,6 +906,10 @@ page_prefix: Präfix (Reihenfolge in der Navigation)
 
 -
 
+page_slug: Verzeichnisname
+
+-
+
 page_redirect: Seite zu einer anderen URL umleiten
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Cache-Verzeichnis löschen
 
 -
 
-sys_cache_purge_info: Im Gegensatz zum einfachen Löschen des Caches werden beim Löschen des Cache-Verzeichnisses auch alle temporären Dateien, gelöschten Seiten, Aktualisierungssicherungen und zwischengespeicherten Bilder in das temporäre Verzeichnis des Systems verschoben. Dies erzwingt eine vollständige Neuerstellung des Bild- und Seitencaches sowie eine Bereinigung aller gelöschten Seiten. Auf den meisten Systemen wird das temporäre Verzeichnis von Zeit zu Zeit oder beim Neustart automatisch bereinigt. Auf einigen Systemen muss dieses Verzeichnis jedoch manuell gelöscht werden.
+sys_cache_purge_info: Im Gegensatz zum einfachen Löschen des Cache verschiebt das Cache-Verzeichnis auch alle temporären Dateien, gelöschten Seiten, Update-Backups und zwischengespeicherten Bildern in das temporäre Verzeichnis des Systems. Dadurch wird ein vollständiger Wiederaufbau des Bild- und Seiten-Cache sowie eine Bereinigung aller gelöschten Seiten zwingen. Auf den meisten Systemen wird das temporäre Verzeichnis automatisch von Zeit zu Zeit oder zum Neustart aufgeräumt. Bei einigen Systemen müssen jedoch temporäre Verzeichnisse manuell gelöscht werden.
 
 -
 
