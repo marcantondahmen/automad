@@ -906,6 +906,10 @@ page_prefix: Predpona (vrstni red v navigaciji)
 
 -
 
+page_slug: Ime imenika.
+
+-
+
 page_redirect: Preusmeri stran na drug URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Izbriši imenik predpomnilnika
 
 -
 
-sys_cache_purge_info: V nasprotju s preprostim čiščenjem predpomnilnika bo čiščenje imenika predpomnilnika premaknilo tudi vse začasne datoteke, izbrisane strani, varnostne kopije posodobitev in predpomnjene slike v časovni imenik sistema. To bo zahtevalo popolno obnovo predpomnilnika slik in strani ter čiščenje vseh izbrisanih strani. V večini sistemov se začasni imenik občasno ali ob ponovnem zagonu samodejno očisti. Vendar je treba v nekaterih sistemih ta imenik ročno počistiti.
+sys_cache_purge_info: V nasprotju s tem, da preprosto izbrišete predpomnilnik, opustitev imenika predpomnilnika, premakne vse začasne datoteke, izbrisane strani, posodobitev-varnostne kopije in predpomnjene slike v začasni imenik sistema. To bo prisililo celotno obnovo slike in predpomnilnika s strani, kot tudi čiščenje vseh izbrisanih strani. Na večini sistemov se začasni imenik samodejno očisti od časa do časa ali na ponovni zagon. Vendar pa je treba na nekaterih sistemih začasnih imenikov očistiti ročno.
 
 -
 

@@ -297,8 +297,6 @@ class Search {
 
 		$fieldMatches = array();
 
-		$value = htmlspecialchars($value);
-
 		preg_match_all(
 			'/(?P<before>(?:^|\s).{0,50})(?P<match>' . $this->searchValue . ')(?P<after>.{0,50}(?:\s|$))/' . $this->regexFlags,
 			$value,
@@ -310,10 +308,14 @@ class Search {
 			$parts = array();
 
 			foreach ($matches as $match) {
+				$before = htmlspecialchars($match['before']);
+				$marked = htmlspecialchars($match['match']);
+				$after = htmlspecialchars($match['after']);
+
 				$parts[] = preg_replace(
 					'/\s+/',
 					' ',
-					trim("{$match['before']}<mark>{$match['match']}</mark>{$match['after']}")
+					trim("$before<mark>$marked</mark>$after")
 				);
 			}
 

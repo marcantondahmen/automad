@@ -96,10 +96,10 @@ class Home extends View {
 			<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-small-top">
 				{$fn($this->editButton())}
 				<li class="uk-margin-small-bottom">
-					{$fn(Button::render('cache', Str::sanitize(Text::get('sys_cache'))))}
+					{$fn(Button::render('cache', Str::slug(Text::get('sys_cache'))))}
 				</li>
 				<li class="uk-margin-small-bottom">
-					{$fn(Button::render('update', Str::sanitize(Text::get('sys_update'))))}
+					{$fn(Button::render('update', Str::slug(Text::get('sys_update'))))}
 				</li>
 			</ul>
 			<div class="uk-margin-large-top">
@@ -168,7 +168,7 @@ HTML;
 			return <<< HTML
 				<li class="uk-margin-small-bottom">
 					<a 
-					href="?view=System#{$fn(Str::sanitize(Text::get('sys_headless')))}"
+					href="?view=System#{$fn(Str::slug(Text::get('sys_headless')))}"
 					class="uk-button uk-button-success uk-button-large uk-text-truncate uk-width-1-1 uk-text-left"
 					>
 						<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;

@@ -57,7 +57,7 @@ class SearchFileResults {
 	 */
 	public static function render($FileResults) {
 		$dir = dirname($FileResults->path);
-		$id = 'am-search-file-' . Str::sanitize($dir, true, 500);
+		$id = 'am-search-file-' . Str::slug($dir, true, 500);
 		$results = '';
 		$keys = array();
 		$editText = $FileResults->url;

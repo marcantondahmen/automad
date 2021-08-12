@@ -906,6 +906,10 @@ page_prefix: Prefix (Comandă în navigare)
 
 -
 
+page_slug: Numele directorului.
+
+-
+
 page_redirect: Redirecționați pagina către o altă adresă URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Ștergeți directorul cache
 
 -
 
-sys_cache_purge_info: Spre deosebire de ștergerea memoriei cache, purjarea directorului cache va muta, de asemenea, toate fișierele temporare, paginile șterse, backup-urile de actualizare și imaginile memorate în cache în directorul temporar al sistemului. Acest lucru va forța o reconstrucție completă a imaginii și a paginii cache, precum și o curățare a tuturor paginilor șterse. Pe majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme acel director trebuie șters manual.
+sys_cache_purge_info: Spre deosebire de simple eliminare a cache-ului, purtarea directorului cache va muta, de asemenea, toate fișierele temporare, paginile șterse, actualizarea-back-uri și imaginile cache în directorul temporar al sistemului. Aceasta va forța o reconstrucție completă a imaginii și a cache-ului de pagină, precum și o curățare a tuturor paginilor șterse. În majoritatea sistemelor, directorul temporar va fi curățat automat din când în când sau la repornire. Cu toate acestea, pe unele sisteme, directoarele temporare trebuie curățate manual.
 
 -
 

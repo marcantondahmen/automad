@@ -87,12 +87,18 @@ class InPage {
 
 					// If the title has changed, the page directory has to be renamed as long as it is not the home page.
 					if (!empty($postData[AM_KEY_TITLE]) && $Page->url != '/') {
+						$slug = Page::updateSlug(
+							$Page->get(AM_KEY_TITLE),
+							$postData[AM_KEY_TITLE],
+							Page::extractSlugFromPath($Page->path)
+						);
+
 						// Move directory.
 						$newPagePath = Page::moveDirAndUpdateLinks(
 							$Page,
 							dirname($Page->path),
 							Page::extractPrefixFromPath($Page->path),
-							$postData[AM_KEY_TITLE]
+							$slug
 						);
 
 						Debug::log($newPagePath, 'renamed page');

@@ -906,6 +906,10 @@ page_prefix: Prefix (beställning i navigering)
 
 -
 
+page_slug: Katalognamn
+
+-
+
 page_redirect: Omdirigera sidan till en annan URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Rensa cachekatalog
 
 -
 
-sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensar cachekatalogen också alla tillfälliga filer, raderade sidor, säkerhetskopior och cachade bilder till systemets temporära katalog. Detta kommer att tvinga en fullständig ombyggnad av bild- och sidcache samt en sanering av alla borttagna sidor. I de flesta system rensas den tillfälliga katalogen automatiskt då och då eller vid omstart. Men på vissa system måste katalogen rensas manuellt.
+sys_cache_purge_info: Till skillnad från att helt enkelt rensa cacheminnet, rensa cachekatalogen, flyttar också alla temporära filer, raderade sidor, uppdateringsbackups och cachade bilder till systemets tillfälliga katalog. Detta kommer att tvinga en fullständig ombyggnad av bild- och sidcache samt en rengöring av alla borttagna sidor. På de flesta system städas den tillfälliga katalogen automatiskt från tid till annan eller omstart. Men på vissa system måste tillfälliga kataloger renas manuellt.
 
 -
 

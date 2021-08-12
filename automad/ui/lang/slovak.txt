@@ -906,6 +906,10 @@ page_prefix: Predpona (poradie v navigácii)
 
 -
 
+page_slug: Názov adresára
+
+-
+
 page_redirect: Presmerujte stránku na inú adresu URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Vymazať adresár medzipamäte
 
 -
 
-sys_cache_purge_info: Na rozdiel od jednoduchého vyčistenia medzipamäte, vyčistenie adresára medzipamäte tiež presunie všetky dočasné súbory, odstránené stránky, zálohy aktualizácií a obrázky z vyrovnávacej pamäte do dočasného adresára systému. Toto vynúti úplné opätovné vytvorenie medzipamäte obrázkov a stránok, ako aj vyčistenie všetkých odstránených stránok. Vo väčšine systémov bude dočasný adresár občas vyčistený automaticky alebo po reštarte. V niektorých systémoch však musí byť tento adresár vymazaný manuálne.
+sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamäte, čistenie adresára cache bude tiež presunúť všetky dočasné súbory, odstránené stránky, aktualizovať zálohovanie a obrázky v pamäti cache do dočasného adresára systému. To bude nútiť plnú obnovu obrázka a vyrovnávacej pamäte s obrázkami, ako aj čistenie všetkých vymazaných stránok. Na väčšine systémov sa dočasný adresár automaticky vyčistí automaticky z času na čas alebo na reštartu. Avšak, na niektorých systémoch sa musia dočasné adresáre vymaľovať manuálne.
 
 -
 

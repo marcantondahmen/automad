@@ -906,6 +906,10 @@ page_prefix: Eesliide (navigeerimisjärjestus)
 
 -
 
+page_slug: Kataloogi nimi
+
+-
+
 page_redirect: Suuna leht teisele URL-ile
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Puhasta vahemälu kataloog
 
 -
 
-sys_cache_purge_info: Erinevalt vahemälu tühjendamisest teisaldab vahemälukataloogi puhastamine kõik ajutised failid, kustutatud lehed, värskenduse varukoopiad ja vahemällu salvestatud pildid süsteemi ajutisse kataloogi. See sunnib pildi ja lehe vahemälu täielikult taastama ning puhastama kõik kustutatud lehed. Enamikus süsteemidest puhastatakse ajutine kataloog aeg-ajalt või taaskäivitamisel automaatselt. Mõnes süsteemis tuleb see kataloog käsitsi kustutada.
+sys_cache_purge_info: Erinevalt vahemälu lihtsalt kustutamisest liigub vahemälu kataloogi puhastamine ka kõik ajutised failid, kustutatud leheküljed, update-varukoopiad ja vahemällu salvestatud pildid süsteemi ajutisele kataloogile. See sunnib pildi ja lehe vahemälu täielikku ümberehitamist ning kõigi kustutatud lehekülgede puhastamist. Enamikus süsteemides puhastatakse ajutine kataloog aeg-ajalt või taaskäivitamisel automaatselt. Kuid mõnede süsteemide ajutiste kataloogide tuleb puhastada käsitsi.
 
 -
 

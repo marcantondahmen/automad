@@ -85,6 +85,8 @@
 			 * data-am-watch-exclude				Exclude field from being watched for changes.
 			 *
 			 * data-am-modal-on-change="#modal"		Opens a modal on changes.
+			 * 
+			 * data-am-slug							Fix input to be a valid slug.
 			 *
 			 *
 			 * BUTTON ATTRIBUTES:
@@ -106,6 +108,7 @@
 			enter: 'data-am-enter',
 			watchExclude: 'data-am-watch-exclude',
 			modalOnChange: 'data-am-modal-on-change',
+			slug: 'data-am-slug',
 		},
 
 		// Post form.
@@ -453,6 +456,17 @@
 				UIkit.modal(
 					$(this).data(Automad.util.dataCamelCase(da.modalOnChange))
 				).show();
+			});
+
+			// Convert input to be a valid slug.
+			$doc.on('keyup paste drop', `input[${da.slug}]`, (event) => {
+				const input = event.target;
+
+				input.value = input.value
+					.toLowerCase()
+					.replace(/[^\w\-]/g, '-');
+				input.value = input.value.replace(/\-+/g, '-');
+				$(input).trigger('change');
 			});
 
 			// Events.

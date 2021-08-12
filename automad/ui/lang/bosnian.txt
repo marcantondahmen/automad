@@ -906,6 +906,10 @@ page_prefix: Prefiks (Redoslijed u navigaciji)
 
 -
 
+page_slug: Naziv direktorija
+
+-
+
 page_redirect: Preusmjerite stranicu na drugi URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Purge Cache Directory
 
 -
 
-sys_cache_purge_info: Za razliku od jednostavnog brisanja predmemorije, čišćenje direktorija predmemorije također će premjestiti sve privremene datoteke, izbrisane stranice, sigurnosne kopije ažuriranja i predmemorirane slike u privremeni direktorij sistema. Ovo će prisiliti potpunu obnovu predmemorije slika i stranica, kao i čišćenje svih izbrisanih stranica. Na većini sistema privremeni direktorij će se automatski očistiti s vremena na vrijeme ili prilikom ponovnog pokretanja. Međutim, na nekim sistemima taj se direktorij mora ručno očistiti.
+sys_cache_purge_info: Za razliku od jednostavnog uklanjanja predmemorije, čišćenje imenika predmemorije također će premjestiti sve privremene datoteke, izbrisane stranice, ažurirati sigurnosne kopije i spremljene slike na privremeni direktorij sustava. Ovo će prisiliti potpunu obnovu predmemorije slike i stranice kao i čišćenje svih izbrisanih stranica. Na većini sistema privremeni direktorij će se povremeno očistiti automatski ili na ponovno pokretanje. Međutim, na nekim sustavima privremeni direktorij moraju biti pročišćen ručno.
 
 -
 

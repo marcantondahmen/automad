@@ -906,6 +906,10 @@ page_prefix: Prefikss (secība navigācijā)
 
 -
 
+page_slug: Direktorija nosaukums
+
+-
+
 page_redirect: Novirziet lapu uz citu URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Notīrīt kešatmiņas direktoriju
 
 -
 
-sys_cache_purge_info: Pretstatā vienkārši kešatmiņas tīrīšanai, kešatmiņas direktorija tīrīšana arī visus pagaidu failus, izdzēstās lapas, atjaunināšanas dublējumkopijas un kešatmiņā saglabātos attēlus pārvietos uz sistēmas pagaidu direktoriju. Tas piespiedīs pilnībā atjaunot attēlu un lapu kešatmiņu, kā arī notīrīt visas izdzēstās lapas. Lielākajā daļā sistēmu pagaidu direktorijs laiku pa laikam tiek automātiski iztīrīts vai tiek restartēts. Tomēr dažās sistēmās šis direktorijs ir jānotīra manuāli.
+sys_cache_purge_info: Turpretī vienkārši iztīrīt kešatmiņu, kešatmiņas attīrīšana arī pārvietot visus pagaidu failus, izdzēstos lapas, atjaunināšanas dublējumus un kešatmiņas attēlus uz sistēmas pagaidu direktoriju. Tas piespiestu pilnu attēla un lapas kešatmiņas atjaunošanu, kā arī visu dzēsto lapu tīrīšanu. Lielākajā daļā sistēmu pagaidu direktorija tiks iztīrīta automātiski, laiku pa laikam vai atsāknēšanai. Tomēr dažās sistēmās pagaidu katalogi ir jāiztīra manuāli.
 
 -
 

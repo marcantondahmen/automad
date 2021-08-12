@@ -906,6 +906,10 @@ page_prefix: Voorvoegsel (volgorde in navigatie)
 
 -
 
+page_slug: Directory naam
+
+-
+
 page_redirect: Leid de pagina om naar een andere URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Cachemap leegmaken
 
 -
 
-sys_cache_purge_info: In tegenstelling tot het simpelweg wissen van de cache, zal het opschonen van de cachemap ook alle tijdelijke bestanden, verwijderde pagina's, updateback-ups en cachebeelden naar de tijdelijke map van het systeem verplaatsen. Dit zal een volledige herbouw van de afbeelding en de paginacache afdwingen, evenals een opschoning van alle verwijderde pagina's. Op de meeste systemen wordt de tijdelijke map van tijd tot tijd automatisch opgeschoond of bij het opnieuw opstarten. Op sommige systemen moet die map echter handmatig worden gewist.
+sys_cache_purge_info: In tegenstelling tot het eenvoudig opruimen van de cache, zal het zuiveren van de cachedirectory ook alle tijdelijke bestanden, verwijderde pagina's, update-back-ups en cache afbeeldingen naar de tijdelijke map van het systeem. Dit dwingt een volledige herbouw van de beeld- en pagina-cache, evenals een opruiming van alle verwijderde pagina's. Op de meeste systemen wordt de tijdelijke map automatisch opgeruimd van tijd tot tijd of op opnieuw opstarten. Op sommige systemen moet tijdelijke mappen echter handmatig worden gezuiverd.
 
 -
 

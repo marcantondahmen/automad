@@ -906,6 +906,10 @@ page_prefix: Prefiks (kolejność w nawigacji)
 
 -
 
+page_slug: Nazwa katalogu.
+
+-
+
 page_redirect: Przekieruj stronę do innego adresu URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Wyczyść katalog pamięci podręcznej
 
 -
 
-sys_cache_purge_info: W przeciwieństwie do zwykłego czyszczenia pamięci podręcznej, wyczyszczenie katalogu pamięci podręcznej spowoduje również przeniesienie wszystkich plików tymczasowych, usuniętych stron, kopii zapasowych aktualizacji i obrazów w pamięci podręcznej do tymczasowego katalogu systemu. Wymusi to pełną przebudowę obrazu i pamięci podręcznej stron, a także wyczyszczenie wszystkich usuniętych stron. W większości systemów katalog tymczasowy będzie czyszczony automatycznie od czasu do czasu lub po ponownym uruchomieniu. Jednak w niektórych systemach ten katalog należy wyczyścić ręcznie.
+sys_cache_purge_info: W przeciwieństwie do po prostu czyszczenia pamięci podręcznej, oczyszczanie katalogu pamięci podręcznej przeniesie również wszystkie pliki tymczasowe, usunięte strony, aktualizacja kopii zapasowych i buforowane obrazy do tymczasowego katalogu systemu. Spowoduje to zmuszanie pełnej odbudowy obrazu i pamięci podręcznej obrazu, a także oczyszczania wszystkich usuniętych stron. W większości systemów Tymczasowy katalog zostanie automatycznie oczyszczony od czasu do czasu lub na ponownym uruchomieniu. Jednak w niektórych systemach katalogów tymczasowych musi być oczyszczony ręcznie.
 
 -
 

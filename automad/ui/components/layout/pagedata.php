@@ -38,6 +38,7 @@ namespace Automad\UI\Components\Layout;
 
 use Automad\Core\Headless;
 use Automad\Core\Parse;
+use Automad\Core\Str;
 use Automad\UI\Components\Accordion\UnusedVariables;
 use Automad\UI\Components\Accordion\Variables;
 use Automad\UI\Components\Alert\ThemeReadme;
@@ -228,6 +229,36 @@ HTML;
 	}
 
 	/**
+	 * Create an input field.
+	 *
+	 * @param string $key
+	 * @param string $value
+	 * @param string $label
+	 * @param string $class
+	 * @param string $attributes
+	 * @return string the rendered input field
+	 */
+	private function input($key, $value, $label, $class = '', $attributes = '') {
+		$id = "am-input-$key";
+
+		return <<< HTML
+			<div class="uk-form-row">
+				<label for="$id" class="uk-form-label uk-text-truncate">
+					$label
+				</label>
+				<input 
+				id="$id" 
+				class="uk-form-controls uk-width-1-1 $class" 
+				type="text" 
+				name="$key" 
+				value="$value" 
+				$attributes
+				/>
+			</div>
+HTML;
+	}
+
+	/**
 	 * The prefix field.
 	 *
 	 * @return string the rendered prefix field.
@@ -237,22 +268,7 @@ HTML;
 			return '';
 		}
 
-		$fn = $this->fn;
-
-		return <<< HTML
-			<div class="uk-form-row">
-				<label for="am-input-prefix" class="uk-form-label uk-text-truncate">
-					{$fn(Text::get('page_prefix'))}
-				</label>
-				<input 
-				id="am-input-prefix" 
-				class="uk-form-controls uk-width-1-1" 
-				type="text" 
-				name="prefix" 
-				value="{$fn(Page::extractPrefixFromPath($this->Page->path))}" 
-				/>
-			</div>
-HTML;
+		return $this->input('prefix', Page::extractPrefixFromPath($this->Page->path), Text::get('page_prefix'));
 	}
 
 	/**
@@ -369,6 +385,7 @@ HTML;
 				{$fn($this->selectTemplate())}
 				{$fn(CheckboxHidden::render('data[' . AM_KEY_HIDDEN . ']', $this->hidden))}
 				{$fn($this->prefix())}
+				{$fn($this->slug())}
 				{$fn($this->redirect())}
 				{$fn(Field::render(
 			$this->Automad,
@@ -381,6 +398,23 @@ HTML;
 				{$fn($this->tags())}
 			</div>
 HTML;
+	}
+
+	/**
+	 * The page directory slug.
+	 *
+	 * @return string the slug input field HTML
+	 */
+	private function slug() {
+		$slug = Page::extractSlugFromPath($this->Page->path);
+
+		return $this->input(
+			'slug',
+			$slug,
+			Text::get('page_slug') . ' (Slug)',
+			'am-validate',
+			'data-am-slug pattern="^(?=[a-z0-9])[a-z0-9\-]*[a-z0-9]$"'
+		);
 	}
 
 	/**

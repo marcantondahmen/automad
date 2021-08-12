@@ -906,6 +906,10 @@ page_prefix: Forskeyti (röð í leiðsögn)
 
 -
 
+page_slug: Nafn skráar
+
+-
+
 page_redirect: Beina síðu á aðra slóð
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Hreinsa skyndiminnisskrá
 
 -
 
-sys_cache_purge_info: Öfugt við það að hreinsa skyndiminnið, hreinsar skyndiminnismappinn einnig allar tímabundnar skrár, eyddar síður, uppfærsluafrit og skyndimyndir í temprary skrá kerfisins. Þetta mun knýja á um enduruppbyggingu skyndiminnis myndarinnar og blaðsíðunnar auk hreinsunar á öllum eyttum síðum. Í flestum kerfum verður tímabundna skráin hreinsuð sjálfkrafa af og til eða við endurræsingu. Hins vegar á sumum kerfum að hreinsa skrána handvirkt.
+sys_cache_purge_info: Öfugt við einfaldlega að hreinsa skyndiminni, hreinsa skyndiminni skráin einnig færa allar tímabundnar skrár, eytt síðum, uppfæra öryggisafrit og afritaðar myndir í tímabundna skrá kerfisins. Þetta mun neyða fullri endurbyggingu myndarinnar og síðu skyndiminni sem og hreinsun allra eytts síðna. Á flestum kerfum verður tímabundin skráin hreinsuð sjálfkrafa frá einum tíma til annars eða á endurræsa. Hins vegar á sumum kerfum þarf að hreinsa tímabundna möppur handvirkt.
 
 -
 

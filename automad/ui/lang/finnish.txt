@@ -906,6 +906,10 @@ page_prefix: Etuliite (järjestys navigoinnissa)
 
 -
 
+page_slug: Hakemiston nimi
+
+-
+
 page_redirect: Ohjaa sivu toiseen URL-osoitteeseen
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Tyhjennä välimuistihakemisto
 
 -
 
-sys_cache_purge_info: Toisin kuin välimuistin tyhjentäminen, välimuistihakemiston tyhjentäminen siirtää kaikki väliaikaiset tiedostot, poistetut sivut, päivitysvarmuuskopiot ja välimuistissa olevat kuvat järjestelmän temprary-hakemistoon. Tämä pakottaa kuvan ja sivun välimuistin täydellisen uudelleenrakentamisen sekä kaikkien poistettujen sivujen siivoamisen. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan ajoittain tai uudelleenkäynnistyksen yhteydessä. Joissakin järjestelmissä kyseinen hakemisto on kuitenkin tyhjennettävä manuaalisesti.
+sys_cache_purge_info: Toisin kuin yksinkertaisesti välimuistin puhdistaminen, välimuistin purkaminen siirtää myös kaikki väliaikaiset tiedostot, poistetut sivut, päivitys-varmuuskopiot ja välimuistissa olevat kuvat järjestelmän väliaikaiseen hakemistoon. Tämä pakottaa kuvan ja sivun välimuistin täydellisen uudelleenrakentamisen sekä kaikkien poistettujen sivujen puhdistus. Useimmissa järjestelmissä väliaikainen hakemisto puhdistetaan automaattisesti aika ajoin tai uudelleenkäynnistykseen. Joillakin järjestelmillä on kuitenkin puhdistettava manuaalisesti.
 
 -
 

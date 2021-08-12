@@ -141,8 +141,8 @@ class InPage {
 	private function injectMarkup($str) {
 		$urlBase = AM_BASE_URL;
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_data'));
-		$urlFiles = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::sanitize(Text::get('btn_files'));
+		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::slug(Text::get('btn_data'));
+		$urlFiles = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::slug(Text::get('btn_files'));
 		$urlSys = $urlGui . '?view=System';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		$request = AM_REQUEST;

@@ -223,10 +223,10 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $oldPath
 	 * @param string $newParentPath (destination)
 	 * @param string $prefix
-	 * @param string $title
+	 * @param string $slug
 	 * @return string $newPath
 	 */
-	public static function movePageDir($oldPath, $newParentPath, $prefix, $title) {
+	public static function movePageDir($oldPath, $newParentPath, $prefix, $slug) {
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
 		$newParentPath = self::normalizeSlashes($newParentPath);
@@ -234,18 +234,13 @@ class FileSystem extends \Automad\Core\FileSystem {
 
 		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
 		$prefix = ltrim(Str::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
-		$title = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
-
-		// If the title is an empty string after sanitizing, set it to 'untitled'.
-		if (!$title) {
-			$title = 'untitled';
-		}
+		$slug = Str::slug($slug, true, AM_DIRNAME_MAX_LEN);
 
 		// Add trailing slash.
-		$title .= '/';
+		$slug .= '/';
 
 		// Build new path.
-		$newPath = $newParentPath . $prefix . $title;
+		$newPath = $newParentPath . $prefix . $slug;
 
 		// Contiune only if old and new paths are different.
 		if ($oldPath != $newPath) {

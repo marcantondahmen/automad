@@ -38,7 +38,6 @@ namespace Automad\UI\Models;
 
 use Automad\Core\Cache;
 use Automad\Core\Str;
-use Automad\UI\Models\Search\FileKeys;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\UICache;
 
@@ -66,12 +65,7 @@ class Page {
 		$template = basename($themeTemplate);
 
 		// Save new subpage below the current page's path.
-		$subdir = Str::sanitize($title, true, AM_DIRNAME_MAX_LEN);
-
-		// If $subdir is an empty string after sanitizing, set it to 'untitled'.
-		if (!$subdir) {
-			$subdir = 'untitled';
-		}
+		$subdir = Str::slug($title, true, AM_DIRNAME_MAX_LEN);
 
 		// Add trailing slash.
 		$subdir .= '/';
@@ -161,6 +155,19 @@ class Page {
 	}
 
 	/**
+	 * Extract the slug without the prefix from a given path.
+	 *
+	 * @param string $path
+	 * @return string the slug
+	 */
+	public static function extractSlugFromPath($path) {
+		$slug = basename($path);
+		$prefix = self::extractPrefixFromPath($slug);
+
+		return Str::stripStart($slug, "$prefix.");
+	}
+
+	/**
 	 * Return the full file system path of a page's data file.
 	 *
 	 * @param object $Page
@@ -176,15 +183,15 @@ class Page {
 	 * @param \Automad\Core\Page $Page
 	 * @param string $destPath
 	 * @param string $prefix
-	 * @param string $title
+	 * @param string $slug
 	 * @return string the new page path
 	 */
-	public static function moveDirAndUpdateLinks($Page, $destPath, $prefix, $title) {
+	public static function moveDirAndUpdateLinks($Page, $destPath, $prefix, $slug) {
 		$newPagePath = FileSystem::movePageDir(
 			$Page->path,
 			$destPath,
 			$prefix,
-			$title
+			$slug
 		);
 
 		self::updatePageLinks($Page, $newPagePath);
@@ -200,9 +207,10 @@ class Page {
 	 * @param array $data
 	 * @param string $themeTemplate
 	 * @param string $prefix
+	 * @param string $slug
 	 * @return string a redirect URL in case the page was moved or its privacy has changed
 	 */
-	public static function save($Page, $url, $data, $themeTemplate, $prefix) {
+	public static function save($Page, $url, $data, $themeTemplate, $prefix, $slug) {
 		// Trim data.
 		$data = array_map('trim', $data);
 
@@ -248,11 +256,17 @@ class Page {
 		// FileSystem::movePageDir() will check if renaming is needed, and will
 		// skip moving, when old and new path are equal.
 		if ($url != '/') {
+			$slug = self::updateSlug(
+				$Page->get(AM_KEY_TITLE),
+				$data[AM_KEY_TITLE],
+				$slug
+			);
+
 			$newPagePath = self::moveDirAndUpdateLinks(
 				$Page,
 				dirname($Page->path),
 				$prefix,
-				$data[AM_KEY_TITLE]
+				$slug
 			);
 		} else {
 			// In case the page is the home page, the path is just '/'.
@@ -284,6 +298,22 @@ class Page {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Update slug in case it is not a custom one and just represents a sanitized version of the title.
+	 *
+	 * @param string $currentTitle
+	 * @param string $newTitle
+	 * @param string $slug
+	 * @return string the updated directory name slug
+	 */
+	public static function updateSlug($currentTitle, $newTitle, $slug) {
+		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
+			$slug = $newTitle;
+		}
+
+		return $slug;
 	}
 
 	/**

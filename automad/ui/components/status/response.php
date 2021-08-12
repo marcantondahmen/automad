@@ -82,7 +82,7 @@ class Response {
 		if ($item == 'debug') {
 			$Response->setStatus('');
 			$tooltip = Text::get('sys_status_debug_enabled');
-			$tab = Str::sanitize(Text::get('sys_debug'));
+			$tab = Str::slug(Text::get('sys_debug'));
 
 			if (AM_DEBUG_ENABLED) {
 				$html = <<< HTML

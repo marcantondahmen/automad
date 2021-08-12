@@ -66,7 +66,7 @@ class Language {
 				$value = Str::stripStart($file, AM_BASE_DIR);
 			}
 
-			$key = ucfirst(str_replace('.txt', '', basename($file)));
+			$key = ucfirst(str_replace(array('_', '.txt'), array(' ', ''), basename($file)));
 			$languages[$key] = $value;
 		}
 

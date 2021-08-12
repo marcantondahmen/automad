@@ -906,6 +906,10 @@ page_prefix: Prefisso (ordine nella navigazione)
 
 -
 
+page_slug: Nome della directory.
+
+-
+
 page_redirect: Reindirizza la pagina a un altro URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Elimina directory cache
 
 -
 
-sys_cache_purge_info: In contrasto con la semplice cancellazione della cache, l'eliminazione della directory della cache sposterà anche tutti i file temporanei, le pagine eliminate, i backup di aggiornamento e le immagini memorizzate nella cache nella directory temporanea del sistema. Ciò forzerà una ricostruzione completa dell'immagine e della cache della pagina, nonché una pulizia di tutte le pagine eliminate. Sulla maggior parte dei sistemi, la directory temporanea verrà eliminata automaticamente di tanto in tanto o al riavvio. Tuttavia, su alcuni sistemi tale directory deve essere cancellata manualmente.
+sys_cache_purge_info: In contrasto per semplicemente cancellare la cache, spurgo della directory della cache spostano anche tutti i file temporanei, le pagine eliminate, le pagine eliminate, gli aggiornamenti e le immagini memorizzate nella cache nella directory temporanea del sistema. Ciò costringerà una ricostruzione completa dell'immagine e della cache della pagina e di una pulizia di tutte le pagine cancellate. Sulla maggior parte dei sistemi la directory temporanea verrà ripulita automaticamente di volta in volta o sul riavvio. Tuttavia, su alcune directory temporanee dei sistemi deve essere spuntata manualmente.
 
 -
 

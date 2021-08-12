@@ -65,7 +65,7 @@ class Header extends Block {
 		}
 
 		return 	'<h' . $data->level .
-				' id="' . Str::sanitize(strip_tags($data->text), true) . '" ' .
+				' id="' . Str::slug(strip_tags($data->text), true) . '" ' .
 				self::classAttr($classes) . '>' .
 					htmlspecialchars_decode($data->text) .
 				'</h' . $data->level . '>';

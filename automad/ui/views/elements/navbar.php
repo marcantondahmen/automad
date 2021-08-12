@@ -112,7 +112,7 @@ class Navbar {
 											</a>
 										</li>
 										<li>
-											<a href="?view=System#{$fn(Str::sanitize(Text::get('sys_user'), true))}">
+											<a href="?view=System#{$fn(Str::slug(Text::get('sys_user'), true))}">
 												<i class="uk-icon-user uk-icon-justify"></i>&nbsp;
 												{$fn(Text::get('btn_manage_users'))}
 											</a>

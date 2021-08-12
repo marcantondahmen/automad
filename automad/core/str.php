@@ -233,15 +233,7 @@ class Str {
 
 		// Since all possible dots got removed already above (if $removeDots is true),
 		// $str should be filtered as filename to keep dots if they are still in $str and $removeDots is false.
-		$sanitized = URLify::filter($str, $maxChars, '', true);
-
-		// In case the sanitized string is empty or the string is shorter than 6 chars while the
-		// input string is longer than 12 chars, the string is replaced with a md5 hash shortened to 12 chars.
-		if (strlen($sanitized) === 0 || (strlen($sanitized) < 6 && strlen($str) > 12)) {
-			$sanitized = substr(md5($str), 0, 12);
-		}
-
-		return $sanitized;
+		return URLify::filter($str, $maxChars, '', true);
 	}
 
 	/**
@@ -270,6 +262,31 @@ class Str {
 		}
 
 		return trim($str);
+	}
+
+	/**
+	 * Creates a slug for save diretory names, ids or similar from a given string.
+	 *
+	 * In case the sanitized string is empty or the string is shorter than 6 chars while the
+	 * input string is longer than 12 chars, the string is replaced with a md5 hash shortened to 16 chars.
+	 *
+	 * @param string $str
+	 * @param boolean $removeDots
+	 * @param integer $maxChars
+	 * @return string the slug
+	 */
+	public static function slug($str, $removeDots = false, $maxChars = 100) {
+		if (strlen($str) === 0) {
+			return '';
+		}
+
+		$slug = self::sanitize($str, $removeDots, $maxChars);
+
+		if (strlen($slug) === 0 || (strlen($slug) < 6 && strlen($str) > 12)) {
+			$slug = substr(md5($str), 0, 16);
+		}
+
+		return $slug;
 	}
 
 	/**

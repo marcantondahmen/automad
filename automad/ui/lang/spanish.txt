@@ -906,6 +906,10 @@ page_prefix: Prefijo (orden en navegación)
 
 -
 
+page_slug: Nombre del directorio
+
+-
+
 page_redirect: Redirigir la página a otra URL
 
 -
@@ -1110,7 +1114,7 @@ sys_cache_purge: Purgar directorio de caché
 
 -
 
-sys_cache_purge_info: En contraste con simplemente borrar la caché, la depuración del directorio de la caché también moverá todos los archivos temporales, las páginas eliminadas, las copias de seguridad de actualización y las imágenes almacenadas en caché al directorio temporal del sistema. Esto forzará una reconstrucción completa de la memoria caché de la imagen y la página, así como una limpieza de todas las páginas eliminadas. En la mayoría de los sistemas, el directorio temporal se limpiará automáticamente de vez en cuando o al reiniciar. Sin embargo, en algunos sistemas, ese directorio debe borrarse manualmente.
+sys_cache_purge_info: En contraste, simplemente borrar el caché, la purga del directorio de caché también moverá todos los archivos temporales, las páginas eliminadas, las copias de seguridad de actualizaciones y las imágenes en caché al directorio temporal del sistema. Esto forzará una reconstrucción completa de la imagen de la imagen y la página de caché, así como una limpieza de todas las páginas eliminadas. En la mayoría de los sistemas, el directorio temporal se limpiará automáticamente de vez en cuando o en reinicio. Sin embargo, en algunos sistemas, los directorios temporales deben purgarse manualmente.
 
 -
 
