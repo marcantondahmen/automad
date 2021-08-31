@@ -41,13 +41,13 @@ hidden: on
 -
 
 +main: {
-    "time": 1628452422764,
+    "time": 1630342273082,
     "blocks": [
         {
             "type": "section",
             "data": {
                 "content": {
-                    "time": 1628452367348,
+                    "time": 1630342272626,
                     "blocks": [
                         {
                             "type": "section",
@@ -186,7 +186,7 @@ hidden: on
                             "type": "section",
                             "data": {
                                 "content": {
-                                    "time": 1628452366888,
+                                    "time": 1630342272170,
                                     "blocks": [
                                         {
                                             "type": "paragraph",
@@ -211,7 +211,7 @@ hidden: on
                                         {
                                             "type": "buttons",
                                             "data": {
-                                                "primaryText": "<am-fontsize style=\"font-size: 120%;\">About Pagelists</am-fontsize>",
+                                                "primaryText": "<am-fontsize style=\"font-size: 120%;\">More About Pagelists</am-fontsize>",
                                                 "primaryLink": "/pagelists",
                                                 "primaryStyle": {
                                                     "borderRadius": "0.4rem",
