@@ -22,7 +22,7 @@ btn_browse: Parcourir les fichiers
 
 -
 
-btn_close: Proche
+btn_close: Fermer
 
 -
 
@@ -70,11 +70,11 @@ btn_get_themes: Obtenez plus de thèmes
 
 -
 
-btn_getting_data: Obtention de données ...
+btn_getting_data: Obtention des données ...
 
 -
 
-btn_help: Aider
+btn_help: Aide
 
 -
 
@@ -82,7 +82,7 @@ btn_hide_page: Masquer la page dans la navigation
 
 -
 
-btn_home: Home
+btn_home: Accueil
 
 -
 
@@ -270,7 +270,7 @@ editor_gallery_toolbox: Galerie d'images
 
 -
 
-editor_gallery_files: Modèles de globules ou URL
+editor_gallery_files: Modèles globaux ou URLs
 
 -
 
@@ -310,7 +310,7 @@ editor_image_toolbox: Image
 
 -
 
-editor_image_caption: Faire entrer une légende
+editor_image_caption: Entrez une légende
 
 -
 
@@ -322,7 +322,7 @@ editor_list_toolbox: Lister
 
 -
 
-editor_list_unordered: Points de balle
+editor_list_unordered: Liste à puce
 
 -
 
@@ -398,7 +398,7 @@ editor_mail_label_button: Texte du bouton
 
 -
 
-editor_section_toolbox: Section de la disposition / carte
+editor_section_toolbox: Disposition de la Section / Carte
 
 -
 
@@ -406,7 +406,7 @@ editor_section_justify_start: Aligner des éléments vers le côté gauche
 
 -
 
-editor_section_justify_center: Aligner des éléments vers le milieu
+editor_section_justify_center: Aligner des éléments au milieu
 
 -
 
@@ -462,7 +462,7 @@ editor_section_background_image: Image de fond
 
 -
 
-editor_section_background_blend_mode: Mode de fond de fond
+editor_section_background_blend_mode: Mode de mélange de l'arrière-plan
 
 -
 
@@ -562,7 +562,7 @@ editor_slider_height: Hauteur
 
 -
 
-editor_slider_files: Modèles de globules ou URL
+editor_slider_files: Modèles globaux ou URLs
 
 -
 
@@ -578,7 +578,7 @@ editor_snippet_toolbox: Extrait de modèle personnalisé
 
 -
 
-editor_snippet_input: Code d'extrait
+editor_snippet_input: Extrait de code
 
 -
 
@@ -766,7 +766,7 @@ error_update_failed: Mise à jour a échoué! Veuillez restaurer votre installat
 
 -
 
-error_update_php_version: Votre version PHP ne prend pas en charge la dernière version automate. Veuillez mettre à niveau PHP en version
+error_update_php_version: Votre version de PHP ne prend pas en charge la dernière version d'Automad. Veuillez mettre à niveau la version de PHP
 
 -
 
@@ -798,11 +798,11 @@ image_crop: Recadrer l'image
 
 -
 
-image_height_px: Hauteur (pixels)
+image_height_px: Hauteur (en pixels)
 
 -
 
-image_width_px: Largeur (pixels)
+image_width_px: Largeur (en pixels)
 
 -
 
@@ -814,7 +814,7 @@ image_select: Sélectionnez une image
 
 -
 
-images_page: Images de page
+images_page: Images de la page
 
 -
 
@@ -942,7 +942,7 @@ page_vars_unused: Variables inutilisées
 
 -
 
-page_visibility: Visibility
+page_visibility: Visibilité
 
 -
 
@@ -954,7 +954,7 @@ sidebar_header_global: Globale
 
 -
 
-sidebar_header_pages: Des pages
+sidebar_header_pages: Pages
 
 -
 
@@ -994,7 +994,7 @@ search_no_results: Votre recherche n'a donné aucun résultat.
 
 -
 
-search_placeholder: Chercher
+search_placeholder: Cherchez
 
 -
 
@@ -1002,19 +1002,19 @@ search_replace_placeholder: Remplacer
 
 -
 
-search_replace_selected: Remplacer sélectionné
+search_replace_selected: Remplacer la sélection
 
 -
 
-search_replace_check_all: Vérifie tout
+search_replace_check_all: Tout cocher
 
 -
 
-search_replace_uncheck_all: Décocher tout
+search_replace_uncheck_all: Tout décocher
 
 -
 
-search_is_case_sensitive: Sensible aux majuscules et minuscules
+search_is_case_sensitive: Sensible à la casse
 
 -
 
@@ -1074,7 +1074,7 @@ success_update: Automad mis à jour avec succès!
 
 -
 
-success_packages_updated_all: Mise à jour réussie de tous les packages
+success_packages_updated_all: Mise à jour de tous les packages réussie
 
 -
 
@@ -1246,7 +1246,7 @@ sys_user_registered: Utilisateurs enregistrés
 
 -
 
-sys_user_you: Tue
+sys_user_you: Tu
 
 -
 
