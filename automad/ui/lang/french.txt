@@ -22,7 +22,7 @@ btn_browse: Parcourir les fichiers
 
 -
 
-btn_close: Proche
+btn_close: Fermer
 
 -
 
