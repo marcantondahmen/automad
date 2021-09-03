@@ -38,6 +38,7 @@ namespace Automad;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Sitemap;
@@ -76,7 +77,10 @@ class App {
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
 
-		require AM_BASE_DIR . '/automad/const.php';
+		define('AM_CONFIG', AM_BASE_DIR . '/config/config.php');
+
+		Config::overrides();
+		Config::defaults();
 
 		Debug::errorReporting();
 
