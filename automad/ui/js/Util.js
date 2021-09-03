@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.util = {
+	Automad.Util = {
 		create: {
 			element: function (tag, cls) {
 				var element = document.createElement(tag);
@@ -51,7 +51,7 @@
 			},
 
 			colorPicker: function (cls, value) {
-				const wrapper = Automad.util.create.element('div', ['uk-flex']);
+				const wrapper = Automad.Util.create.element('div', ['uk-flex']);
 
 				wrapper.dataset.amColorpicker = true;
 				wrapper.innerHTML = `
@@ -63,7 +63,7 @@
 			},
 
 			editable: function (cls, placeholder, value) {
-				var span = Automad.util.create.element('span', cls);
+				var span = Automad.Util.create.element('span', cls);
 
 				span.contentEditable = true;
 				span.dataset.placeholder = placeholder;
@@ -73,7 +73,7 @@
 			},
 
 			label: function (text, cls = ['am-block-label']) {
-				var label = Automad.util.create.element('label', cls);
+				var label = Automad.Util.create.element('label', cls);
 
 				label.textContent = text;
 
@@ -81,7 +81,7 @@
 			},
 
 			numberUnit: function (clsPrefix, value) {
-				const create = Automad.util.create,
+				const create = Automad.Util.create,
 					wrapper = create.element('div', ['am-form-input-group']),
 					units = ['px', 'em', 'rem', '%', 'vw', 'vh'];
 
@@ -110,7 +110,7 @@
 			},
 
 			select: function (cls, options, selected) {
-				var select = Automad.util.create.element('select', cls),
+				var select = Automad.Util.create.element('select', cls),
 					optionMarkup = [];
 
 				options.forEach(function (value) {
@@ -167,9 +167,9 @@
 		},
 
 		getNumberUnitAsString: function (numberInput, unitSelect) {
-			const number = Automad.util
-					.stripNbsp(numberInput.textContent)
-					.trim(),
+			const number = Automad.Util.stripNbsp(
+					numberInput.textContent
+				).trim(),
 				unit = unitSelect.value;
 
 			if (number.length) {

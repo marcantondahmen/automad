@@ -53,7 +53,7 @@ class AutomadBlockFilelist {
 	}
 
 	constructor({ data, api, config }) {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
 		this.data = {
@@ -114,7 +114,7 @@ class AutomadBlockFilelist {
 	}
 
 	save() {
-		var stripNbsp = Automad.util.stripNbsp;
+		var stripNbsp = Automad.Util.stripNbsp;
 
 		return Object.assign(this.data, {
 			file: this.inputs.file.value,

@@ -38,17 +38,17 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.tags = {
+	Automad.Tags = {
 		containerId: 'am-taggle',
 		inputId: 'am-input-data-tags',
 		dataAttr: 'data-am-tags',
 
 		init: function () {
-			var t = Automad.tags,
+			var t = Automad.Tags,
 				$container = $('#' + t.containerId);
 
 			if ($container.length) {
-				var u = Automad.util,
+				var u = Automad.Util,
 					$input = $('#' + t.inputId),
 					options = $container.data(u.dataCamelCase(t.dataAttr)),
 					taggle = new Taggle(t.containerId, {
@@ -104,5 +104,5 @@
 		},
 	};
 
-	$(document).on('ajaxComplete', Automad.tags.init);
+	$(document).on('ajaxComplete', Automad.Tags.init);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

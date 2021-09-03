@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.switcher = {
+	Automad.Switcher = {
 		dataAttr: {
 			switcher: 'data-uk-switcher',
 			tab: 'data-am-tab',
@@ -54,7 +54,7 @@
 					return parseInt(hash);
 				} else {
 					return $(
-						'[' + Automad.switcher.dataAttr.tab + '="' + hash + '"]'
+						'[' + Automad.Switcher.dataAttr.tab + '="' + hash + '"]'
 					).index();
 				}
 			} else {
@@ -66,16 +66,16 @@
 	// Override UIkit defaults to show the tab defined in the hash.
 	UIkit.on('beforeready.uk.dom', function () {
 		$.extend(UIkit.components.switcher.prototype.defaults, {
-			active: Automad.switcher.getActiveTab(),
+			active: Automad.Switcher.getActiveTab(),
 		});
 	});
 
 	// Check if the hash value matches the active tab and update the switcher if needed.
 	// That will be the case, when a link outside the actual switcher tries to change the active tab.
 	$(window).on('hashchange', function () {
-		var $switcher = $('[' + Automad.switcher.dataAttr.switcher + ']'),
+		var $switcher = $('[' + Automad.Switcher.dataAttr.switcher + ']'),
 			$active = $switcher.children('.uk-active'),
-			tab = Automad.switcher.getActiveTab();
+			tab = Automad.Switcher.getActiveTab();
 
 		// Only update if the hash doesn't match the active tab.
 		if ($active.index() != tab) {
@@ -85,11 +85,11 @@
 
 	// Update the hash on show event.
 	$(document).on('ready', function () {
-		$('[' + Automad.switcher.dataAttr.switcher + ']').on(
+		$('[' + Automad.Switcher.dataAttr.switcher + ']').on(
 			'show.uk.switcher',
 			function (event, $tab) {
 				window.location.hash = $tab.data(
-					Automad.util.dataCamelCase(Automad.switcher.dataAttr.tab)
+					Automad.Util.dataCamelCase(Automad.Switcher.dataAttr.tab)
 				);
 			}
 		);

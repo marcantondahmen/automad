@@ -38,12 +38,12 @@
  */
 
 +(function (Automad, $) {
-	Automad.colorPicker = {
+	Automad.ColorPicker = {
 		selector: '[data-am-colorpicker]',
 
 		init: function () {
 			var $doc = $(document),
-				cp = Automad.colorPicker;
+				cp = Automad.ColorPicker;
 
 			$doc.on('change keyup', cp.selector + ' input', cp.update);
 
@@ -59,7 +59,7 @@
 
 		update: function (e) {
 			var $input = $(e.target),
-				cp = Automad.colorPicker,
+				cp = Automad.ColorPicker,
 				color = $input.val(),
 				$combo = $input.closest(cp.selector),
 				$picker = $combo.find('[type="color"]'),
@@ -75,5 +75,5 @@
 		},
 	};
 
-	Automad.colorPicker.init();
+	Automad.ColorPicker.init();
 })((window.Automad = window.Automad || {}), jQuery);

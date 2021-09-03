@@ -80,7 +80,7 @@ class AutomadBlockGallery {
 	}
 
 	drawView() {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			t = AutomadEditorTranslation.get,
 			wrapper = create.element('div', [
 				'am-block-gallery',
@@ -194,7 +194,7 @@ class AutomadBlockGallery {
 	}
 
 	save() {
-		var getNumberUnitAsString = Automad.util.getNumberUnitAsString;
+		var getNumberUnitAsString = Automad.Util.getNumberUnitAsString;
 
 		return Object.assign(this.data, {
 			globs: this.imageSelection.save(),

@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.copyResized = {
+	Automad.CopyResized = {
 		dataAttr: {
 			fileInfo: 'data-am-file-info',
 			url: 'data-am-url',
@@ -54,7 +54,7 @@
 		},
 
 		destroy: function () {
-			var s = Automad.copyResized.selectors;
+			var s = Automad.CopyResized.selectors;
 
 			$(s.filename).val('');
 			$(s.width).val('');
@@ -62,11 +62,11 @@
 		},
 
 		init: function () {
-			var cr = Automad.copyResized,
+			var cr = Automad.CopyResized,
 				da = cr.dataAttr,
 				s = cr.selectors,
 				$panel = $(this).closest('[' + da.fileInfo + ']'),
-				info = $panel.data(Automad.util.dataCamelCase(da.fileInfo)),
+				info = $panel.data(Automad.Util.dataCamelCase(da.fileInfo)),
 				$modal = $(s.modal);
 
 			$(s.filename).val(info.filename);
@@ -82,12 +82,12 @@
 		},
 
 		submit: function (e) {
-			var cr = Automad.copyResized,
+			var cr = Automad.CopyResized,
 				s = cr.selectors,
 				$button = $(e.target),
 				param = {
 					url: $(s.modal).data(
-						Automad.util.dataCamelCase(cr.dataAttr.url)
+						Automad.Util.dataCamelCase(cr.dataAttr.url)
 					), // If URL is empty, the "/shared" files will be managed.
 					filename: $(s.filename).val(),
 					width: $(s.width).val(),
@@ -107,11 +107,11 @@
 					$button.prop('disabled', false);
 
 					if (data.error) {
-						Automad.notify.error(data.error);
+						Automad.Notify.error(data.error);
 					}
 
 					if (data.success) {
-						Automad.notify.success(data.success);
+						Automad.Notify.success(data.success);
 					}
 
 					// Wait for the modal to be hidden before refreshing the filelist,
@@ -138,14 +138,14 @@
 	// Modal setup.
 	$(document).on(
 		'click',
-		'a[href="' + Automad.copyResized.selectors.modal + '"]',
-		Automad.copyResized.init
+		'a[href="' + Automad.CopyResized.selectors.modal + '"]',
+		Automad.CopyResized.init
 	);
 
 	// Submit AJAX call.
 	$(document).on(
 		'click',
-		Automad.copyResized.selectors.button,
-		Automad.copyResized.submit
+		Automad.CopyResized.selectors.button,
+		Automad.CopyResized.submit
 	);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

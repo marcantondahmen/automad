@@ -43,16 +43,16 @@
  */
 
 +(function (Automad, $) {
-	Automad.status = {
+	Automad.Status = {
 		dataAttr: 'data-am-status',
 
 		get: function () {
-			var s = Automad.status;
+			var s = Automad.Status;
 
 			$('[' + s.dataAttr + ']').each(function () {
 				var $container = $(this),
 					item = $container.data(
-						Automad.util.dataCamelCase(s.dataAttr)
+						Automad.Util.dataCamelCase(s.dataAttr)
 					);
 
 				$.post(
@@ -68,7 +68,7 @@
 
 		init: function () {
 			var $doc = $(document),
-				s = Automad.status;
+				s = Automad.Status;
 
 			$doc.ready(function () {
 				s.get();
@@ -92,5 +92,5 @@
 		},
 	};
 
-	Automad.status.init();
+	Automad.Status.init();
 })((window.Automad = window.Automad || {}), jQuery);

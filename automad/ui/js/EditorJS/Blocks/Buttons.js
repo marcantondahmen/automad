@@ -57,7 +57,7 @@ class AutomadBlockButtons {
 	}
 
 	constructor({ data, api, config }) {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
 		this.api = api;
@@ -146,7 +146,7 @@ class AutomadBlockButtons {
 
 		for (let i = 0; i < linkButtons.length; ++i) {
 			api.listeners.on(linkButtons[i], 'click', function () {
-				Automad.link.click(linkButtons[i]);
+				Automad.Link.click(linkButtons[i]);
 			});
 		}
 
@@ -243,7 +243,7 @@ class AutomadBlockButtons {
 	}
 
 	renderStyleSettings(parent, obj) {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			t = AutomadEditorTranslation.get,
 			wrapper = create.element('div', [
 				'uk-position-relative',
@@ -350,7 +350,7 @@ class AutomadBlockButtons {
 									combo.querySelector('[contenteditable]'),
 								unit = combo.querySelector('select');
 
-							value = Automad.util.getNumberUnitAsString(
+							value = Automad.Util.getNumberUnitAsString(
 								number,
 								unit
 							);

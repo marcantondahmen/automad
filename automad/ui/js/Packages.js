@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.packages = {
+	Automad.Packages = {
 		dataAttr: {
 			packages: 'data-am-packages',
 			filter: 'data-am-packages-filter',
@@ -47,7 +47,7 @@
 		composerDone: function () {
 			$('html').on('composerDone', function () {
 				// Refresh packages list.
-				Automad.packages.get();
+				Automad.Packages.get();
 
 				// Close open modal.
 				window.setTimeout(function () {
@@ -57,7 +57,7 @@
 		},
 
 		filter: function () {
-			var p = Automad.packages,
+			var p = Automad.Packages,
 				$input = $('[' + p.dataAttr.filter + ']'),
 				update = function () {
 					var filter = $input.val().toLowerCase().split(' ');
@@ -91,7 +91,7 @@
 		},
 
 		get: function () {
-			var p = Automad.packages;
+			var p = Automad.Packages;
 
 			$('[' + p.dataAttr.packages + ']').each(function () {
 				var $this = $(this);
@@ -144,11 +144,11 @@
 		},
 
 		init: function () {
-			Automad.packages.composerDone();
-			Automad.packages.get();
-			Automad.packages.filter();
+			Automad.Packages.composerDone();
+			Automad.Packages.get();
+			Automad.Packages.filter();
 		},
 	};
 
-	$(document).on('ready', Automad.packages.init);
+	$(document).on('ready', Automad.Packages.init);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

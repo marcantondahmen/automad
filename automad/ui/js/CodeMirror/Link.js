@@ -37,7 +37,7 @@
 	CodeMirror.defineExtension('AutomadLink', function () {
 		var cm = this;
 
-		Automad.link.dialog(cm, function (url) {
+		Automad.Link.dialog(cm, function (url) {
 			var selection = cm.getSelection();
 
 			if (!selection) {

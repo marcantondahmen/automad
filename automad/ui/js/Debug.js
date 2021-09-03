@@ -39,7 +39,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.debug = {
+	Automad.Debug = {
 		init: function () {
 			$(document).ajaxComplete(function (e, xhr, settings) {
 				// The debug property in the JSON response will be defined by
@@ -60,5 +60,5 @@
 		},
 	};
 
-	Automad.debug.init();
+	Automad.Debug.init();
 })((window.Automad = window.Automad || {}), jQuery);

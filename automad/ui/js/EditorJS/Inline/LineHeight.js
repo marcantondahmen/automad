@@ -72,7 +72,7 @@ class AutomadLineHeight extends AutomadInlineTool {
 	}
 
 	renderActions() {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			label = create.label(AutomadLineHeight.title);
 
 		this.select = create.select(

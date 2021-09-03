@@ -51,7 +51,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.siteTree = {
+	Automad.SiteTree = {
 		class: {
 			active: 'uk-active',
 			iconOpen: 'am-tree-icon-open',
@@ -63,7 +63,7 @@
 
 		// The site tree can also be used to select an URL to be used as an input field value.
 		urlAsValue: function ($tree, $input) {
-			var t = Automad.siteTree,
+			var t = Automad.SiteTree,
 				$links = $tree.find('a[href^="?"]'),
 				$currentPageLink = $tree.find(
 					'.' + t.class.active + ' > a[href^="?"]'
@@ -105,13 +105,13 @@
 
 		// Initialize the site trees.
 		init: function () {
-			var t = Automad.siteTree,
+			var t = Automad.SiteTree,
 				$trees = $('[' + t.dataAttr + ']');
 
 			$trees.each(function () {
 				var $tree = $(this),
 					inputSelector = $tree.data(
-						Automad.util.dataCamelCase(t.dataAttr)
+						Automad.Util.dataCamelCase(t.dataAttr)
 					);
 
 				$tree
@@ -155,5 +155,5 @@
 		},
 	};
 
-	$(document).ready(Automad.siteTree.init);
+	$(document).ready(Automad.SiteTree.init);
 })((window.Automad = window.Automad || {}), jQuery);

@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.addVariable = {
+	Automad.AddVariable = {
 		selectors: {
 			container: '#am-add-variable-container',
 			modal: '#am-add-variable-modal',
@@ -55,8 +55,8 @@
 			// There must be an existing target container with the ID '#am-custom-variables'
 			// within the page's markup. The created variable input will be appended to that target container.
 
-			var a = Automad.addVariable,
-				u = Automad.util,
+			var a = Automad.AddVariable,
+				u = Automad.Util,
 				$submit = $(e.target),
 				$container = $(a.selectors.container),
 				$modalInput = $(a.selectors.modalInput),
@@ -87,12 +87,12 @@
 						}
 					);
 				} else {
-					Automad.notify.error(
+					Automad.Notify.error(
 						$submit.data(u.dataCamelCase(a.dataAttr.errorName))
 					);
 				}
 			} else {
-				Automad.notify.error(
+				Automad.Notify.error(
 					$submit.data(u.dataCamelCase(a.dataAttr.errorExists))
 				);
 			}
@@ -101,7 +101,7 @@
 
 	$(document).on(
 		'click',
-		Automad.addVariable.selectors.submit,
-		Automad.addVariable.append
+		Automad.AddVariable.selectors.submit,
+		Automad.AddVariable.append
 	);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

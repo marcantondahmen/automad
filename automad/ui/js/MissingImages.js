@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.missingImg = {
+	Automad.MissingImages = {
 		init: function () {
 			$(document).ajaxComplete(function (e, xhr, settings) {
 				if (
@@ -73,5 +73,5 @@
 		},
 	};
 
-	Automad.missingImg.init();
+	Automad.MissingImages.init();
 })((window.Automad = window.Automad || {}), jQuery);

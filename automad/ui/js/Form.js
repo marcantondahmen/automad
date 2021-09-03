@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.form = {
+	Automad.Form = {
 		unsavedClassPrefix: 'am-unsaved-',
 
 		unsavedClassInput: 'am-form-changed',
@@ -144,20 +144,20 @@
 			 *		will trigger an event.
 			 */
 
-			var f = Automad.form,
+			var f = Automad.Form,
 				$form = $(e.target),
 				// Action
 				controller = $form.data(
-					Automad.util.dataCamelCase(f.dataAttr.controller)
+					Automad.Util.dataCamelCase(f.dataAttr.controller)
 				),
 				// Dashboard base URL.
 				dashboard = $form.data(
-					Automad.util.dataCamelCase(f.dataAttr.dashboard)
+					Automad.Util.dataCamelCase(f.dataAttr.dashboard)
 				),
 				// Optional URL parameter.
 				// Only needed, to identify a page, in case the form relates to a certain page.
 				// Can be omitted for general form actions.
-				url = $form.data(Automad.util.dataCamelCase(f.dataAttr.url));
+				url = $form.data(Automad.Util.dataCamelCase(f.dataAttr.url));
 
 			// Get parameters.
 			var param = $form.serializeArray();
@@ -204,12 +204,12 @@
 
 					// Display error, if existing.
 					if (data.error) {
-						Automad.notify.error(data.error);
+						Automad.Notify.error(data.error);
 					}
 
 					// Display success, if existing.
 					if (data.success) {
-						Automad.notify.success(data.success);
+						Automad.Notify.success(data.success);
 					}
 
 					// If the request returns no error, optionally close wrapping modal.
@@ -217,7 +217,7 @@
 					if (!data.error) {
 						// Close wrapping modal if form has 'data-am-close-on-success="#modal"' attribute.
 						var modalSelector = $form.data(
-							Automad.util.dataCamelCase(f.dataAttr.close)
+							Automad.Util.dataCamelCase(f.dataAttr.close)
 						);
 
 						if (modalSelector) {
@@ -237,7 +237,7 @@
 						}
 
 						if (data.error) {
-							Automad.notify.error(data.error);
+							Automad.Notify.error(data.error);
 						}
 					}
 				});
@@ -247,10 +247,10 @@
 		confirm: function (e) {
 			e.preventDefault();
 
-			var f = Automad.form,
+			var f = Automad.Form,
 				$form = $(e.target),
 				confirmMessage = $form.data(
-					Automad.util.dataCamelCase(f.dataAttr.confirm)
+					Automad.Util.dataCamelCase(f.dataAttr.confirm)
 				);
 
 			// If confirmation is required (confirmMessage is not empty)
@@ -269,7 +269,7 @@
 		// Init form events.
 		init: function () {
 			var $doc = $(document),
-				f = Automad.form,
+				f = Automad.Form,
 				da = f.dataAttr;
 
 			// Submitting forms.
@@ -280,7 +280,7 @@
 			// Submit forms when clicking buttons (possibly outside the form) having "data-am-submit" attribute.
 			$doc.on('click', '[' + da.submit + ']', function (e) {
 				var controller = $(this).data(
-					Automad.util.dataCamelCase(da.submit)
+					Automad.Util.dataCamelCase(da.submit)
 				);
 
 				e.preventDefault();
@@ -290,7 +290,7 @@
 			// Submit forms with a data-am-init attribute automatically on load.
 			$doc.ready(function () {
 				// All forms with attribute [data-am-init] get submitted when page is ready to get initial content via AJAX.
-				$('[' + Automad.form.dataAttr.init + ']').trigger('submit');
+				$('[' + Automad.Form.dataAttr.init + ']').trigger('submit');
 			});
 
 			// Init a form on a given event.
@@ -310,7 +310,7 @@
 				$('[' + da.initOn + ']').each(function () {
 					var $form = $(this),
 						event = $form.data(
-							Automad.util.dataCamelCase(da.initOn)
+							Automad.Util.dataCamelCase(da.initOn)
 						);
 
 					// Add namespace to event name when binding to be able
@@ -338,7 +338,7 @@
 			$doc.on('keydown', '[' + da.enter + ']', function (e) {
 				if (e.which == 13) {
 					var button = $(e.target).data(
-						Automad.util.dataCamelCase(da.enter)
+						Automad.Util.dataCamelCase(da.enter)
 					);
 
 					$(button).click();
@@ -391,7 +391,7 @@
 			var onFormChange = function () {
 					var $form = $(this).closest('[' + da.controller + ']'),
 						controller = $form.data(
-							Automad.util.dataCamelCase(da.controller)
+							Automad.Util.dataCamelCase(da.controller)
 						);
 
 					$('html').addClass(f.unsavedClassPrefix + controller);
@@ -437,7 +437,7 @@
 				'[' + da.controller + '], .am-inpage form',
 				function () {
 					var controller = $(this).data(
-						Automad.util.dataCamelCase(da.controller)
+						Automad.Util.dataCamelCase(da.controller)
 					);
 
 					$('html').removeClass(f.unsavedClassPrefix + controller);
@@ -454,7 +454,7 @@
 			// Open modal window on changes.
 			$doc.on('change', '[' + da.modalOnChange + ']', function () {
 				UIkit.modal(
-					$(this).data(Automad.util.dataCamelCase(da.modalOnChange))
+					$(this).data(Automad.Util.dataCamelCase(da.modalOnChange))
 				).show();
 			});
 
@@ -517,7 +517,7 @@
 					// Clearing the form is important to avoid auto-submitting unwanted changes
 					// before updating the form.
 					$(this)
-						.find('[' + Automad.form.dataAttr.init + ']')
+						.find('[' + Automad.Form.dataAttr.init + ']')
 						.each(function () {
 							$(this)
 								.empty()
@@ -548,14 +548,14 @@
 						.find('form')
 						.each(function () {
 							var controller = $(this).data(
-								Automad.util.dataCamelCase(
-									Automad.form.dataAttr.controller
+								Automad.Util.dataCamelCase(
+									Automad.Form.dataAttr.controller
 								)
 							);
 
 							// Remove unsaved class from html element.
 							$('html').removeClass(
-								Automad.form.unsavedClassPrefix + controller
+								Automad.Form.unsavedClassPrefix + controller
 							);
 
 							// Reset form.
@@ -566,5 +566,5 @@
 		},
 	};
 
-	Automad.form.init();
+	Automad.Form.init();
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

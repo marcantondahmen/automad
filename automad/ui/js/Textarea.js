@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.textarea = {
+	Automad.Textarea = {
 		// Do not select textareas of HTML editors!
 		// Since CodeMirror also creates textareas, it is not enough to just filter by ':not([data-uk-markdowneditor])'.
 		// Those textareas created by CodeMirror don't have the '.uk-form-controls' class, so that class must be part of the
@@ -68,7 +68,7 @@
 		},
 
 		init: function () {
-			var t = Automad.textarea,
+			var t = Automad.Textarea,
 				$doc = $(document),
 				triggerResize = function () {
 					$(t.selector).trigger('update.automad.textarea');
@@ -138,5 +138,5 @@
 		},
 	};
 
-	Automad.textarea.init();
+	Automad.Textarea.init();
 })((window.Automad = window.Automad || {}), jQuery);

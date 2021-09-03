@@ -56,7 +56,7 @@ class AutomadBlockSnippet {
 	}
 
 	constructor({ data, api, config }) {
-		var create = Automad.util.create;
+		var create = Automad.Util.create;
 
 		this.api = api;
 
@@ -120,7 +120,7 @@ class AutomadBlockSnippet {
 		this.api.listeners.on(
 			this.inputs.snippet,
 			'keydown',
-			Automad.textarea.handleTabs,
+			Automad.Textarea.handleTabs,
 			true
 		);
 		this.inputs.snippet.value = this.data.snippet;

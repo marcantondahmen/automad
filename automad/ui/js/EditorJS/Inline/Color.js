@@ -57,7 +57,7 @@ class AutomadColor extends AutomadInlineTool {
 	}
 
 	renderActions() {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			label = create.label(this.constructor.title);
 
 		this.colorPicker = create.element('input', [this.cls.input]);

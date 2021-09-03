@@ -50,7 +50,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.toggle = {
+	Automad.Toggle = {
 		labelDataAttr: 'data-am-toggle',
 
 		class: {
@@ -59,14 +59,14 @@
 
 		// Toggle checkboxes.
 		checkbox: function (e) {
-			Automad.toggle.update($(e.target));
+			Automad.Toggle.update($(e.target));
 		},
 
 		// Initially update all inputs with a data-am-toggle attribute
 		// to update visibility status of related containers and labels.
 		init: function () {
-			$('[' + Automad.toggle.labelDataAttr + '] input').each(function () {
-				Automad.toggle.update($(this));
+			$('[' + Automad.Toggle.labelDataAttr + '] input').each(function () {
+				Automad.Toggle.update($(this));
 			});
 		},
 
@@ -75,17 +75,17 @@
 			// Find all radio inputs with the same name as the triggering element and update them all.
 			$('input[name="' + $(e.target).attr('name') + '"]').each(
 				function () {
-					Automad.toggle.update($(this));
+					Automad.Toggle.update($(this));
 				}
 			);
 		},
 
 		// Update the label of a nested input and the visibility of an optional element.
 		update: function ($input) {
-			var t = Automad.toggle,
+			var t = Automad.Toggle,
 				$label = $input.parent(),
 				toggleContainer = $label.data(
-					Automad.util.dataCamelCase(t.labelDataAttr)
+					Automad.Util.dataCamelCase(t.labelDataAttr)
 				);
 
 			// Update label.
@@ -111,15 +111,15 @@
 	// Handle events for checkboxes and radio inputs separately.
 	$(document).on(
 		'change',
-		'[' + Automad.toggle.labelDataAttr + '] [type="checkbox"]',
-		Automad.toggle.checkbox
+		'[' + Automad.Toggle.labelDataAttr + '] [type="checkbox"]',
+		Automad.Toggle.checkbox
 	);
 	$(document).on(
 		'change',
-		'[' + Automad.toggle.labelDataAttr + '] [type="radio"]',
-		Automad.toggle.radio
+		'[' + Automad.Toggle.labelDataAttr + '] [type="radio"]',
+		Automad.Toggle.radio
 	);
 
 	// Initially check visibility status of related containers.
-	$(document).on('ready ajaxComplete', Automad.toggle.init);
+	$(document).on('ready ajaxComplete', Automad.Toggle.init);
 })((window.Automad = window.Automad || {}), jQuery);

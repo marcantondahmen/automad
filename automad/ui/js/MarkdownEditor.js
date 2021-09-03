@@ -599,7 +599,7 @@
 							'![' +
 							alt +
 							'](' +
-							Automad.util.resolvePath(file) +
+							Automad.Util.resolvePath(file) +
 							')'
 						);
 					}
@@ -614,7 +614,7 @@
 							'[' +
 							text +
 							'](' +
-							Automad.util.resolveUrl(url) +
+							Automad.Util.resolveUrl(url) +
 							')'
 						);
 					}

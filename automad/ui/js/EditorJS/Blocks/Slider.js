@@ -58,7 +58,7 @@ class AutomadBlockSlider {
 	}
 
 	constructor({ data, api, config }) {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
 		this.api = api;
@@ -135,7 +135,7 @@ class AutomadBlockSlider {
 	}
 
 	save() {
-		var stripNbsp = Automad.util.stripNbsp;
+		var stripNbsp = Automad.Util.stripNbsp;
 
 		return Object.assign(this.data, {
 			globs: this.imageSelection.save(),
@@ -145,7 +145,7 @@ class AutomadBlockSlider {
 	}
 
 	renderSettings() {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			wrapper = document.createElement('div'),
 			inner = create.element('div', ['cdx-settings-1-2']),
 			block = this;

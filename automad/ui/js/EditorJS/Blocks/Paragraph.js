@@ -87,7 +87,7 @@ class AutomadBlockParagraph {
 	}
 
 	drawView(large) {
-		var div = Automad.util.create.editable(
+		var div = Automad.Util.create.editable(
 			[this._CSS.wrapper, this._CSS.block],
 			'',
 			''
@@ -154,7 +154,7 @@ class AutomadBlockParagraph {
 	}
 
 	renderSettings() {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			cls = 'cdx-settings-button',
 			clsActive = 'cdx-settings-button--active',
 			wrapper = create.element('div', []),

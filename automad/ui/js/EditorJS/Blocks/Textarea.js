@@ -73,12 +73,12 @@ class AutomadBlockTextarea {
 	}
 
 	drawView() {
-		var code = Automad.util.create.element('textarea', [
+		var code = Automad.Util.create.element('textarea', [
 				'ce-code',
 				'cdx-input',
 			]),
-			label = Automad.util.create.label(this.label()),
-			wrapper = Automad.util.create.element('div', [
+			label = Automad.Util.create.label(this.label()),
+			wrapper = Automad.Util.create.element('div', [
 				this.api.styles.block,
 			]);
 
@@ -90,7 +90,7 @@ class AutomadBlockTextarea {
 		this.api.listeners.on(
 			this.input,
 			'keydown',
-			Automad.textarea.handleTabs,
+			Automad.Textarea.handleTabs,
 			true
 		);
 

@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.inPage = {
+	Automad.InPage = {
 		selectors: {
 			modal: '#am-inpage-edit-modal',
 			fields: '#am-inpage-edit-fields',
@@ -54,8 +54,8 @@
 		modal: {
 			init: function () {
 				var $button = $(this),
-					ip = Automad.inPage,
-					u = Automad.util,
+					ip = Automad.InPage,
+					u = Automad.Util,
 					param = $button.data(u.dataCamelCase(ip.dataAttr.content)),
 					$modal = $(ip.selectors.modal),
 					$form = $modal.find('form'),
@@ -106,8 +106,8 @@
 
 				var $form = $(e.target),
 					controller = $form.data(
-						Automad.util.dataCamelCase(
-							Automad.inPage.dataAttr.controller
+						Automad.Util.dataCamelCase(
+							Automad.InPage.dataAttr.controller
 						)
 					),
 					param = $form.serializeArray();
@@ -127,7 +127,7 @@
 
 		menubar: {
 			init: function () {
-				var ips = Automad.inPage.selectors,
+				var ips = Automad.InPage.selectors,
 					$menubar = $(ips.menubar).draggabilly({
 						handle: ips.dragHandle,
 					});
@@ -137,13 +137,15 @@
 
 	$(document).on(
 		'click',
-		'[href="' + Automad.inPage.selectors.modal + '"]',
-		Automad.inPage.modal.init
+		'[href="' + Automad.InPage.selectors.modal + '"]',
+		Automad.InPage.modal.init
 	);
+
 	$(document).on(
 		'submit',
-		'[' + Automad.inPage.dataAttr.controller + ']',
-		Automad.inPage.modal.submit
+		'[' + Automad.InPage.dataAttr.controller + ']',
+		Automad.InPage.modal.submit
 	);
-	$(document).on('ready', Automad.inPage.menubar.init);
+
+	$(document).on('ready', Automad.InPage.menubar.init);
 })((window.Automad = window.Automad || {}), jQuery);

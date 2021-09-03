@@ -37,7 +37,7 @@
 	CodeMirror.defineExtension('AutomadBlockImage', function () {
 		var cm = this;
 
-		Automad.selectImage.dialog(cm, true, function (url) {
+		Automad.SelectImage.dialog(cm, true, function (url) {
 			cm.replaceRange('![](' + url + ')\n', cm.getCursor());
 			$(cm.getTextArea()).trigger('keydown');
 		});

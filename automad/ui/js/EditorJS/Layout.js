@@ -59,7 +59,7 @@ class AutomadLayoutButton {
 		this.wrapper = wrapper;
 		this.cls = api.styles.settingsButton;
 		this.clsActive = api.styles.settingsButtonActive;
-		this.button = Automad.util.create.element('div', [
+		this.button = Automad.Util.create.element('div', [
 			this.cls,
 			this.options.name,
 		]);
@@ -286,7 +286,7 @@ class AutomadLayout {
 	static renderSettings(data, saved, api, config) {
 		const allowStretching = config.allowStretching || false,
 			flex = config.flex || false,
-			element = Automad.util.create.element,
+			element = Automad.Util.create.element,
 			t = AutomadEditorTranslation.get,
 			wrapper = element('div', [AutomadEditorConfig.cls.settingsLayout]);
 

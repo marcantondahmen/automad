@@ -37,8 +37,8 @@
  * 	Wrapper for the UIkit notify plugin.
  */
 
-+(function (Automad, $, UIkit) {
-	Automad.notify = {
++(function (Automad, UIkit) {
+	Automad.Notify = {
 		error: function (text) {
 			UIkit.notify(text, {
 				timeout: 0,
@@ -55,4 +55,4 @@
 			});
 		},
 	};
-})((window.Automad = window.Automad || {}), jQuery, UIkit);
+})((window.Automad = window.Automad || {}), UIkit);

@@ -82,7 +82,7 @@ class AutomadBlockSection {
 	}
 
 	constructor({ data, config, api }) {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get,
 			idSuffix = Date.now();
 
@@ -199,7 +199,7 @@ class AutomadBlockSection {
 
 		this.holder.innerHTML = '';
 
-		this.editor = Automad.blockEditor.createEditor({
+		this.editor = Automad.BlockEditor.createEditor({
 			holder: this.holder,
 			input: this.input,
 			readOnly: true,
@@ -228,7 +228,7 @@ class AutomadBlockSection {
 	}
 
 	renderStyleSettings() {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			t = AutomadEditorTranslation.get,
 			style = Object.assign(
 				{
@@ -465,21 +465,21 @@ class AutomadBlockSection {
 			color: inputs.color.value,
 			backgroundColor: inputs.backgroundColor.value,
 			borderColor: inputs.borderColor.value,
-			borderWidth: Automad.util.getNumberUnitAsString(
+			borderWidth: Automad.Util.getNumberUnitAsString(
 				inputs.borderWidthNumber,
 				inputs.borderWidthUnit
 			),
-			borderRadius: Automad.util.getNumberUnitAsString(
+			borderRadius: Automad.Util.getNumberUnitAsString(
 				inputs.borderRadiusNumber,
 				inputs.borderRadiusUnit
 			),
 			backgroundImage: inputs.backgroundImage.value,
 			backgroundBlendMode: inputs.backgroundBlendMode.value,
-			paddingTop: Automad.util.getNumberUnitAsString(
+			paddingTop: Automad.Util.getNumberUnitAsString(
 				inputs.paddingTopNumber,
 				inputs.paddingTopUnit
 			),
-			paddingBottom: Automad.util.getNumberUnitAsString(
+			paddingBottom: Automad.Util.getNumberUnitAsString(
 				inputs.paddingBottomNumber,
 				inputs.paddingBottomUnit
 			),
@@ -504,7 +504,7 @@ class AutomadBlockSection {
 			element.removeAttribute('style');
 
 			if (style.backgroundImage) {
-				element.style.backgroundImage = `url('${Automad.util.resolvePath(
+				element.style.backgroundImage = `url('${Automad.Util.resolvePath(
 					style.backgroundImage
 				)}')`;
 				element.style.backgroundPosition = '50% 50%';
@@ -556,12 +556,12 @@ class AutomadBlockSection {
 		const toggles = this.modalWrapper.querySelectorAll('label > input');
 
 		Array.from(toggles).forEach((item) => {
-			Automad.toggle.update(Automad.sectionEditor.$(item));
+			Automad.Toggle.update(Automad.sectionEditor.$(item));
 		});
 	}
 
 	showModal() {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			se = Automad.sectionEditor;
 
 		this.destroyModal();
@@ -589,7 +589,7 @@ class AutomadBlockSection {
 		`;
 
 		this.container.appendChild(this.modalWrapper);
-		Automad.selectImage.preview(
+		Automad.SelectImage.preview(
 			this.modalWrapper.querySelector('.am-section-background-image')
 		);
 
@@ -639,7 +639,7 @@ class AutomadBlockSection {
 			keyboard: false,
 		});
 
-		this.modalEditor = Automad.blockEditor.createEditor({
+		this.modalEditor = Automad.BlockEditor.createEditor({
 			holder: this.modalEditorId,
 			input: this.input,
 			autofocus: true,
@@ -707,7 +707,7 @@ class AutomadBlockSection {
 	}
 
 	renderFlexSettings(settings, key) {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			wrapper = create.element('div', []);
 
 		settings.forEach((obj) => {
@@ -759,7 +759,7 @@ class AutomadBlockSection {
 	}
 
 	renderSizeSettings(option) {
-		const create = Automad.util.create,
+		const create = Automad.Util.create,
 			wrapper = create.element('div', []),
 			inner = create.element('span', ['am-section-flex-size-settings']);
 
@@ -772,7 +772,7 @@ class AutomadBlockSection {
 
 		[input, unit].forEach((field) => {
 			field.addEventListener('input', () => {
-				this.data[option.name] = Automad.util.getNumberUnitAsString(
+				this.data[option.name] = Automad.Util.getNumberUnitAsString(
 					input,
 					unit
 				);

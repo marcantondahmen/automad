@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.import = {
+	Automad.Import = {
 		selectors: {
 			modal: '#am-import-modal',
 			button: '#am-import-modal .uk-form button',
@@ -50,7 +50,7 @@
 		},
 
 		init: function () {
-			var ai = Automad.import;
+			var ai = Automad.Import;
 
 			$(document).on('click', ai.selectors.button, function () {
 				var $modal = $(ai.selectors.modal),
@@ -58,7 +58,7 @@
 					importUrl = $input.val(),
 					$form = $modal.closest('form'),
 					url = $modal.data(
-						Automad.util.dataCamelCase(ai.dataAttr.url)
+						Automad.Util.dataCamelCase(ai.dataAttr.url)
 					);
 
 				$.post(
@@ -66,7 +66,7 @@
 					{ url: url, importUrl: importUrl },
 					function (data) {
 						if (data.error) {
-							Automad.notify.error(data.error);
+							Automad.Notify.error(data.error);
 						} else {
 							$modal.on(
 								'hide.uk.modal.automad.import',
@@ -85,5 +85,5 @@
 		},
 	};
 
-	Automad.import.init();
+	Automad.Import.init();
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

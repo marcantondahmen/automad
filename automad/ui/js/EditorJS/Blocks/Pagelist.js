@@ -61,7 +61,7 @@ class AutomadBlockPagelist {
 	}
 
 	constructor({ data, api, config }) {
-		var create = Automad.util.create,
+		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
 		this.api = api;
@@ -234,7 +234,7 @@ class AutomadBlockPagelist {
 	}
 
 	save() {
-		var stripNbsp = Automad.util.stripNbsp;
+		var stripNbsp = Automad.Util.stripNbsp;
 
 		return Object.assign(this.data, {
 			type: this.inputs.type.value,

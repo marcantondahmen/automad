@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.scrollbars = {
+	Automad.Scrollbars = {
 		defaults: {
 			scrollToItem: false,
 		},
@@ -46,8 +46,8 @@
 		dataAttr: 'data-am-scroll-box',
 
 		init: function () {
-			var s = Automad.scrollbars,
-				u = Automad.util;
+			var s = Automad.Scrollbars,
+				u = Automad.Util;
 
 			$('[' + s.dataAttr + ']').each(function () {
 				var $box = $(this),
@@ -99,5 +99,5 @@
 		},
 	};
 
-	$(document).ready(Automad.scrollbars.init);
+	$(document).ready(Automad.Scrollbars.init);
 })((window.Automad = window.Automad || {}), jQuery);

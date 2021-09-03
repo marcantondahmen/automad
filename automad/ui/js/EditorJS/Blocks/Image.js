@@ -79,7 +79,7 @@ class AutomadBlockImage {
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('cdx-block');
 		this.img = document.createElement('img');
-		this.caption = Automad.util.create.editable(
+		this.caption = Automad.Util.create.editable(
 			['cdx-input'],
 			AutomadEditorTranslation.get('image_caption'),
 			this.data.caption
@@ -94,7 +94,7 @@ class AutomadBlockImage {
 		linkButton.innerHTML = '<i class="uk-icon-link"></i>';
 
 		api.listeners.on(linkButton, 'click', () => {
-			Automad.link.click(linkButton);
+			Automad.Link.click(linkButton);
 		});
 
 		this.link = document.createElement('input');
@@ -131,7 +131,7 @@ class AutomadBlockImage {
 
 	insertImage(url) {
 		if (url) {
-			this.img.src = Automad.util.resolvePath(url);
+			this.img.src = Automad.Util.resolvePath(url);
 			this.data.url = url;
 			this.button.parentNode.replaceChild(this.wrapper, this.button);
 		}
@@ -140,7 +140,7 @@ class AutomadBlockImage {
 	select() {
 		var block = this;
 
-		Automad.selectImage.dialog(false, true, function (url) {
+		Automad.SelectImage.dialog(false, true, function (url) {
 			block.insertImage(url);
 		});
 	}
@@ -151,7 +151,7 @@ class AutomadBlockImage {
 
 	render() {
 		if (this.data && this.data.url) {
-			this.img.src = Automad.util.resolvePath(this.data.url);
+			this.img.src = Automad.Util.resolvePath(this.data.url);
 			return this.wrapper;
 		} else {
 			return this.button;

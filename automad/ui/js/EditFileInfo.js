@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.editFileInfo = {
+	Automad.EditFileInfo = {
 		dataAttr: {
 			fileInfo: 'data-am-file-info',
 			url: 'data-am-url',
@@ -59,7 +59,7 @@
 		// Since the modal window is nested within the actual file list form, it is very important to
 		// reset all input fields of the edit dialog before submitting the files form.
 		destroy: function () {
-			var efi = Automad.editFileInfo,
+			var efi = Automad.EditFileInfo,
 				da = efi.dataAttr,
 				s = efi.selectors;
 
@@ -73,8 +73,8 @@
 
 		// Initialize the modal window by adding the info for old and new names and also define the required properties.
 		init: function () {
-			var efi = Automad.editFileInfo,
-				u = Automad.util,
+			var efi = Automad.EditFileInfo,
+				u = Automad.Util,
 				da = efi.dataAttr,
 				s = efi.selectors,
 				$panel = $(this).closest('[' + da.fileInfo + ']'),
@@ -115,12 +115,12 @@
 
 		// The actual AJAX call to edit the current file.
 		submit: function (e) {
-			var efi = Automad.editFileInfo,
+			var efi = Automad.EditFileInfo,
 				s = efi.selectors,
 				$button = $(e.target),
 				param = {
 					url: $(s.modal).data(
-						Automad.util.dataCamelCase(efi.dataAttr.url)
+						Automad.Util.dataCamelCase(efi.dataAttr.url)
 					), // If URL is empty, the "/shared" files will be managed.
 					'old-name': $(s.oldName).val(),
 					'new-name': $(s.newName).val(),
@@ -139,7 +139,7 @@
 					$button.prop('disabled', false);
 
 					if (data.error) {
-						Automad.notify.error(data.error);
+						Automad.Notify.error(data.error);
 					}
 
 					// Wait for the modal to be hidden before refreshing the filelist,
@@ -166,14 +166,14 @@
 	// Modal setup.
 	$(document).on(
 		'click',
-		'a[href="' + Automad.editFileInfo.selectors.modal + '"]',
-		Automad.editFileInfo.init
+		'a[href="' + Automad.EditFileInfo.selectors.modal + '"]',
+		Automad.EditFileInfo.init
 	);
 
 	// Submit AJAX call.
 	$(document).on(
 		'click',
-		Automad.editFileInfo.selectors.button,
-		Automad.editFileInfo.submit
+		Automad.EditFileInfo.selectors.button,
+		Automad.EditFileInfo.submit
 	);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

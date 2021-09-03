@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.selectImage = {
+	Automad.SelectImage = {
 		dataAttr: {
 			field: 'data-am-select-image-field',
 		},
@@ -50,13 +50,13 @@
 				return;
 			}
 
-			const src = Automad.util.resolvePath(input.value);
+			const src = Automad.Util.resolvePath(input.value);
 
 			fetch(src, {
 				method: 'HEAD',
 			}).then((res) => {
 				try {
-					const da = Automad.selectImage.dataAttr,
+					const da = Automad.SelectImage.dataAttr,
 						wrapper = input.closest(`[${da.field}]`),
 						figure = wrapper.querySelector('figure');
 
@@ -80,7 +80,7 @@
 		},
 
 		init: function () {
-			var si = Automad.selectImage,
+			var si = Automad.SelectImage,
 				da = si.dataAttr;
 
 			$(document).on('click', `[${da.field}] button`, function () {
@@ -110,7 +110,7 @@
 		},
 
 		dialog: function (elementFocusOnHide, resize, callback) {
-			var modalSelector = Automad.selectImage.modalSelector,
+			var modalSelector = Automad.SelectImage.modalSelector,
 				modal = UIkit.modal(modalSelector),
 				onClick = function (url, modalElementClicked) {
 					if (modal.isActive()) {
@@ -176,5 +176,5 @@
 		},
 	};
 
-	Automad.selectImage.init();
+	Automad.SelectImage.init();
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

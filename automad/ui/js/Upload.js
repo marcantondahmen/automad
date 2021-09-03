@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.upload = {
+	Automad.Upload = {
 		dataAttr: {
 			url: 'data-am-url',
 			dropzoneText: 'data-am-dropzone-text',
@@ -68,8 +68,8 @@
 
 		// Init the upload modal.
 		init: function (e) {
-			var u = Automad.upload,
-				util = Automad.util,
+			var u = Automad.Upload,
+				util = Automad.Util,
 				da = u.dataAttr,
 				iconDropzone = '<i class="uk-icon-arrows"></i>&nbsp;&nbsp;',
 				iconBrowse = '<i class="uk-icon-folder-open"></i>&nbsp;&nbsp;';
@@ -98,7 +98,7 @@
 				.insertAfter(u.$dropzone)
 				.click(function () {
 					// Make a button click trigger the file input for browsing.
-					Automad.upload.$input.click();
+					Automad.Upload.$input.click();
 					return false;
 				});
 
@@ -119,7 +119,7 @@
 
 		// Init the plugin.
 		plugin: function () {
-			var u = Automad.upload;
+			var u = Automad.Upload;
 
 			u.$input.fileupload({
 				url: '?controller=FileCollection::upload',
@@ -146,7 +146,7 @@
 							data.files[i].name +
 							'</div>' +
 							'<div class="uk-text-small uk-text-muted">' +
-							Automad.util.formatBytes(data.files[i].size) +
+							Automad.Util.formatBytes(data.files[i].size) +
 							'</div>';
 					});
 
@@ -224,14 +224,14 @@
 	// Init modal.
 	$(document).on(
 		'click',
-		'[href="' + Automad.upload.selectors.modal + '"]',
-		Automad.upload.init
+		'[href="' + Automad.Upload.selectors.modal + '"]',
+		Automad.Upload.init
 	);
 
 	// Prevent the default action when a file is dropped on the window.
 	$(document).on(
 		'drop dragover',
-		Automad.upload.selectors.modal,
+		Automad.Upload.selectors.modal,
 		function (e) {
 			e.preventDefault();
 		}

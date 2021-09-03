@@ -38,12 +38,12 @@
  */
 
 +(function (Automad, $) {
-	Automad.datetime = {
+	Automad.DateTime = {
 		selector: '[data-am-datetime]',
 
 		init: function () {
 			var $doc = $(document),
-				dt = Automad.datetime;
+				dt = Automad.DateTime;
 
 			$doc.on(
 				'change',
@@ -104,7 +104,7 @@
 		update: {
 			date: function (e) {
 				var $datepicker = $(e.target),
-					dt = Automad.datetime,
+					dt = Automad.DateTime,
 					$combo = $datepicker.closest(dt.selector),
 					$datetime = $combo.find('input[type="hidden"]'),
 					date = $datepicker.val(),
@@ -128,7 +128,7 @@
 
 			time: function (e) {
 				var $timepicker = $(e.target),
-					dt = Automad.datetime,
+					dt = Automad.DateTime,
 					$combo = $timepicker.closest(dt.selector),
 					$datetime = $combo.find('input[type="hidden"]'),
 					time = $timepicker.val(),
@@ -150,5 +150,5 @@
 		},
 	};
 
-	Automad.datetime.init();
+	Automad.DateTime.init();
 })((window.Automad = window.Automad || {}), jQuery);

@@ -38,14 +38,14 @@
  */
 
 +(function (Automad, $) {
-	Automad.clipboard = {
+	Automad.Clipboard = {
 		dataAttr: 'data-am-clipboard',
 
 		copy: function (e) {
 			e.preventDefault();
 
 			var text = $(this).data(
-					Automad.util.dataCamelCase(Automad.clipboard.dataAttr)
+					Automad.Util.dataCamelCase(Automad.Clipboard.dataAttr)
 				),
 				$input = $('<input type="text" />')
 					.css({
@@ -76,14 +76,14 @@
 			$input.remove();
 
 			if (success) {
-				Automad.notify.success(text);
+				Automad.Notify.success(text);
 			}
 		},
 	};
 
 	$(document).on(
 		'click',
-		'[' + Automad.clipboard.dataAttr + ']',
-		Automad.clipboard.copy
+		'[' + Automad.Clipboard.dataAttr + ']',
+		Automad.Clipboard.copy
 	);
 })((window.Automad = window.Automad || {}), jQuery);

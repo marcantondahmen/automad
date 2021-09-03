@@ -37,7 +37,7 @@
  * 	Remove tooltip component on touch screens.
  */
 
-+(function (Automad, $, UIkit) {
++(function ($, UIkit) {
 	$(document).on('ready ajaxComplete', function () {
 		setTimeout(function () {
 			$('html.uk-touch [data-uk-tooltip]').removeAttr('data-uk-tooltip');
@@ -66,4 +66,4 @@
 			},
 		});
 	});
-})((window.Automad = window.Automad || {}), jQuery, UIkit);
+})(jQuery, UIkit);

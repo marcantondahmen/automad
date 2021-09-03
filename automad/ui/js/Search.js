@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.search = {
+	Automad.Search = {
 		form: null,
 
 		init: function () {
@@ -164,12 +164,12 @@
 
 			Array.from(checkboxes).forEach((box) => {
 				box.checked = state;
-				Automad.toggle.update($(box));
+				Automad.Toggle.update($(box));
 			});
 		},
 	};
 
 	$(document).on('ready', () => {
-		Automad.search.init();
+		Automad.Search.init();
 	});
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

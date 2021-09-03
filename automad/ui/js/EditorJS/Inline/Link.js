@@ -78,7 +78,7 @@ class AutomadLink extends AutomadInlineTool {
 	}
 
 	renderActions() {
-		const create = Automad.util.create;
+		const create = Automad.Util.create;
 		const label = create.label(AutomadLink.title);
 		const script = create.element('script', []);
 

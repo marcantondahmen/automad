@@ -62,7 +62,7 @@ class AutomadEditorImageSelection {
 
 			fields.appendChild(item);
 
-			Automad.selectImage.dialog(false, false, (value) => {
+			Automad.SelectImage.dialog(false, false, (value) => {
 				input.value = value;
 				input.dispatchEvent(new Event('keydown', { bubbles: true }));
 			});
@@ -84,7 +84,7 @@ class AutomadEditorImageSelection {
 	}
 
 	renderItem(value) {
-		const wrapper = Automad.util.create.element('div', ['am-item']);
+		const wrapper = Automad.Util.create.element('div', ['am-item']);
 
 		wrapper.setAttribute('data-am-select-image-field', '');
 		wrapper.innerHTML = `
@@ -106,7 +106,7 @@ class AutomadEditorImageSelection {
 			wrapper.remove();
 		});
 
-		Automad.selectImage.preview(wrapper.querySelector('input'));
+		Automad.SelectImage.preview(wrapper.querySelector('input'));
 
 		return wrapper;
 	}

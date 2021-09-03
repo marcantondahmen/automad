@@ -38,21 +38,21 @@
  */
 
 +(function (Automad, $) {
-	Automad.toggleDefault = {
+	Automad.ToggleDefault = {
 		dataAttr: 'data-am-toggle-default',
 
 		update: function ($select) {
 			var $toggle = $select.closest(
-				'[' + Automad.toggleDefault.dataAttr + ']'
+				'[' + Automad.ToggleDefault.dataAttr + ']'
 			);
 
 			$toggle.attr('data-selected', $select.find(':selected').val());
 		},
 
 		init: function () {
-			$('[' + Automad.toggleDefault.dataAttr + '] select').each(
+			$('[' + Automad.ToggleDefault.dataAttr + '] select').each(
 				function () {
-					Automad.toggleDefault.update($(this));
+					Automad.ToggleDefault.update($(this));
 				}
 			);
 		},
@@ -60,11 +60,11 @@
 
 	$(document).on(
 		'change',
-		'[' + Automad.toggleDefault.dataAttr + '] select',
+		'[' + Automad.ToggleDefault.dataAttr + '] select',
 		function (event) {
-			Automad.toggleDefault.update($(this));
+			Automad.ToggleDefault.update($(this));
 		}
 	);
 
-	$(document).on('ready ajaxComplete', Automad.toggleDefault.init);
+	$(document).on('ready ajaxComplete', Automad.ToggleDefault.init);
 })((window.Automad = window.Automad || {}), jQuery);

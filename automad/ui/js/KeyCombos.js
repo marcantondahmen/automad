@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.keyCombos = {
+	Automad.KeyCombos = {
 		init: function () {
 			$(window).bind('keydown', function (e) {
 				if (e.ctrlKey || e.metaKey) {
@@ -58,5 +58,5 @@
 		},
 	};
 
-	Automad.keyCombos.init();
+	Automad.KeyCombos.init();
 })((window.Automad = window.Automad || {}), jQuery);

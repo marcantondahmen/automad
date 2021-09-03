@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.fullscreen = {
+	Automad.Fullscreen = {
 		classes: {
 			fullscreenWrapper: 'am-fullscreen',
 			fullscreenHtml: 'am-fullscreen-page',
@@ -49,7 +49,7 @@
 		},
 
 		init: function () {
-			var fs = Automad.fullscreen,
+			var fs = Automad.Fullscreen,
 				fsc = fs.classes,
 				$doc = $(document);
 
@@ -75,5 +75,5 @@
 		},
 	};
 
-	Automad.fullscreen.init();
+	Automad.Fullscreen.init();
 })((window.Automad = window.Automad || {}), jQuery);

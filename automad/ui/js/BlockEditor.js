@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.blockEditor = {
+	Automad.BlockEditor = {
 		dataAttr: 'data-am-block-editor',
 
 		makeReadOnly: function (editor) {
@@ -180,7 +180,7 @@
 							layout.settingsButtonObserver();
 							layout.initPasteHandler();
 						} else {
-							Automad.blockEditor.makeReadOnly(editor, data);
+							Automad.BlockEditor.makeReadOnly(editor, data);
 						}
 
 						options.onReady();
@@ -207,7 +207,7 @@
 		},
 
 		init: function () {
-			var be = Automad.blockEditor,
+			var be = Automad.BlockEditor,
 				selector = '[' + be.dataAttr + ']',
 				triggerChange = function () {
 					var block = $(this)
@@ -230,7 +230,7 @@
 
 			$(selector).each(function () {
 				var $wrapper = $(this),
-					id = $wrapper.data(Automad.util.dataCamelCase(be.dataAttr)),
+					id = $wrapper.data(Automad.Util.dataCamelCase(be.dataAttr)),
 					input = this.querySelector('input');
 
 				// Remove data attribute to prevent multiple initializations.
@@ -269,7 +269,7 @@
 			settings.url.includes('Shared::data') ||
 			settings.url.includes('InPage::edit')
 		) {
-			Automad.blockEditor.init();
+			Automad.BlockEditor.init();
 		}
 	});
 })((window.Automad = window.Automad || {}), jQuery);

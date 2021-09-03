@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.link = {
+	Automad.Link = {
 		dataAttr: {
 			form: 'data-am-link',
 			field: 'data-am-link-field',
@@ -47,7 +47,7 @@
 		modalSelector: '#am-link-modal',
 
 		init: function () {
-			var link = Automad.link,
+			var link = Automad.Link,
 				da = link.dataAttr;
 
 			$(document).on('click', '[' + da.field + '] button', function () {
@@ -58,13 +58,13 @@
 		click: function (button) {
 			var $input = $(button).parent().find('input');
 
-			Automad.link.dialog($input, function (url) {
+			Automad.Link.dialog($input, function (url) {
 				$input.val(url).trigger('keydown').trigger('change');
 			});
 		},
 
 		dialog: function (elementFocusOnHide, callback) {
-			var modal = UIkit.modal(Automad.link.modalSelector),
+			var modal = UIkit.modal(Automad.Link.modalSelector),
 				onClick = function (url) {
 					if (modal.isActive()) {
 						if (typeof callback == 'function') {
@@ -88,10 +88,10 @@
 		},
 
 		autocomplete: function () {
-			var dataAttrForm = Automad.link.dataAttr.form,
+			var dataAttrForm = Automad.Link.dataAttr.form,
 				$form = $('[' + dataAttrForm + ']').first(),
 				controller = $form.data(
-					Automad.util.dataCamelCase(dataAttrForm)
+					Automad.Util.dataCamelCase(dataAttrForm)
 				);
 
 			if ($form.length > 0) {
@@ -122,7 +122,7 @@
 		},
 	};
 
-	Automad.link.init();
+	Automad.Link.init();
 
-	$(document).on('ready', Automad.link.autocomplete);
+	$(document).on('ready', Automad.Link.autocomplete);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

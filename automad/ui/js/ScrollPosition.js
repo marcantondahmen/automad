@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $) {
-	Automad.scrollPosition = {
+	Automad.ScrollPosition = {
 		init: function () {
 			var $doc = $(document),
 				$html = $('html');
@@ -75,5 +75,5 @@
 		},
 	};
 
-	$(document).ready(Automad.scrollPosition.init);
+	$(document).ready(Automad.ScrollPosition.init);
 })((window.Automad = window.Automad || {}), jQuery);

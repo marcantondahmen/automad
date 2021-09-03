@@ -38,16 +38,16 @@
  */
 
 +(function (Automad, $) {
-	Automad.count = {
+	Automad.Count = {
 		dataAttr: 'data-am-count',
 
 		get: function (e) {
-			var c = Automad.count;
+			var c = Automad.Count;
 
 			$('[' + c.dataAttr + ']').each(function () {
 				var $counter = $(this),
 					target = $counter.data(
-						Automad.util.dataCamelCase(c.dataAttr)
+						Automad.Util.dataCamelCase(c.dataAttr)
 					);
 
 				$counter.text($(target).length);
@@ -55,12 +55,12 @@
 		},
 
 		init: function () {
-			var c = Automad.count,
+			var c = Automad.Count,
 				$doc = $(document);
 
 			$doc.on('ready ajaxComplete count.automad', c.get);
 		},
 	};
 
-	Automad.count.init();
+	Automad.Count.init();
 })((window.Automad = window.Automad || {}), jQuery);
