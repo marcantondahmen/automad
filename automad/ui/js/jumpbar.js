@@ -38,7 +38,7 @@
  */
 
 +(function (Automad, $, UIkit) {
-	Automad.jumpBar = {
+	Automad.jumpbar = {
 		selector: '[data-am-jumpbar]',
 
 		init: function () {
@@ -50,7 +50,7 @@
 			// element on the page, meaning the current context is the dashboard.
 			if (dashboard) {
 				const jumpBarForms = Array.from(
-					document.querySelectorAll(`${Automad.jumpBar.selector}`)
+					document.querySelectorAll(`${Automad.jumpbar.selector}`)
 				);
 
 				// Initially disable the input field in order to prevent normal search request before
@@ -145,5 +145,5 @@
 		},
 	};
 
-	$(document).on('ready', Automad.jumpBar.init);
+	$(document).on('ready', Automad.jumpbar.init);
 })((window.Automad = window.Automad || {}), jQuery, UIkit);

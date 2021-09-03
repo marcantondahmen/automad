@@ -48,9 +48,13 @@ if (file_exists($packagesAutoload)) {
 
 // Automad.
 spl_autoload_register(function ($class) {
-	$file = strtolower(str_replace('\\', '/', $class)) . '.php';
+	$prefix = 'Automad\\';
 
-	if (strpos($file, 'automad') === 0 && strpos($file, 'automad/composer') === false) {
-		require_once AM_BASE_DIR . '/' . $file;
+	if (strpos($class, $prefix) === 0) {
+		$file = AM_BASE_DIR . '/automad/src/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+
+		if (file_exists($file)) {
+			require_once $file;
+		}
 	}
 });
