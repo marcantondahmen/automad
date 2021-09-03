@@ -73,7 +73,9 @@ class App {
 		require_once __DIR__ . '/Core/FileSystem.php';
 		define('AM_BASE_DIR', FileSystem::normalizeSlashes(dirname(dirname(__DIR__))));
 
-		require AM_BASE_DIR . '/automad/autoload.php';
+		require_once __DIR__ . '/Autoload.php';
+		Autoload::init();
+
 		require AM_BASE_DIR . '/automad/const.php';
 
 		Debug::errorReporting();
