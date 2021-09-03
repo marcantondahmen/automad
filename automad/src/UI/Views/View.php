@@ -115,11 +115,11 @@ abstract class View {
 				content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				>
 				<title>{$fn($this->title())}</title>
-				<link href="{$fn(AM_BASE_URL)}/automad/ui/dist/favicon.ico?v=$versionSanitized" rel="shortcut icon" type="image/x-icon" />
-				<link href="{$fn(AM_BASE_URL)}/automad/ui/dist/libs.min.css?v=$versionSanitized" rel="stylesheet">
-				<link href="{$fn(AM_BASE_URL)}/automad/ui/dist/automad.min.css?v=$versionSanitized" rel="stylesheet">
-				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/ui/dist/libs.min.js?v=$versionSanitized"></script>
-				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/ui/dist/automad.min.js?v=$versionSanitized"></script>
+				<link href="{$fn(AM_BASE_URL)}/automad/dist/favicon.ico?v=$versionSanitized" rel="shortcut icon" type="image/x-icon" />
+				<link href="{$fn(AM_BASE_URL)}/automad/dist/libs.min.css?v=$versionSanitized" rel="stylesheet">
+				<link href="{$fn(AM_BASE_URL)}/automad/dist/automad.min.css?v=$versionSanitized" rel="stylesheet">
+				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/dist/libs.min.js?v=$versionSanitized"></script>
+				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/dist/automad.min.js?v=$versionSanitized"></script>
 				{$fn(BlockSnippetArrays::render())}
 				{$fn(EditorTextModules::render())}
 			</head>

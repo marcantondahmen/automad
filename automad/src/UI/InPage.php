@@ -114,10 +114,10 @@ class InPage {
 		$versionSanitized = Str::sanitize(AM_VERSION);
 		$assets = 	"\n" .
 					'<!-- Automad UI -->' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/ui/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/ui/dist/automad.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/ui/dist/libs.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/ui/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
+					'<link href="' . AM_BASE_URL . '/automad/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
+					'<link href="' . AM_BASE_URL . '/automad/dist/automad.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
+					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/libs.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
+					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
 					// Cleanup window object by removing jQuery and UIkit.
 					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
 					BlockSnippetArrays::render() . "\n" .

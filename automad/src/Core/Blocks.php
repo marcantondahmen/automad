@@ -59,8 +59,8 @@ class Blocks {
 	 */
 	public static function injectAssets($str) {
 		$versionSanitized = Str::sanitize(AM_VERSION);
-		$css = AM_BASE_URL . '/automad/blocks/dist/blocks.min.css?v=' . $versionSanitized;
-		$js = AM_BASE_URL . '/automad/blocks/dist/blocks.min.js?v=' . $versionSanitized;
+		$css = AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . $versionSanitized;
+		$js = AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . $versionSanitized;
 
 		$assets = <<< HTML
 					<link href="$css" rel="stylesheet">
