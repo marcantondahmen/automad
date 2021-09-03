@@ -1,3 +1,41 @@
+const headerTemplate = `/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ * 
+ * version <%= pkg.version %>
+ *
+ * Copyright (c) 2014-<%= new Date().getFullYear() %> by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
+ */
+`;
+
 var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	cleanCSS = require('gulp-clean-css'),
@@ -10,7 +48,6 @@ var gulp = require('gulp'),
 	sort = require('gulp-sort'),
 	uglify = require('gulp-uglify-es').default,
 	gutil = require('gulp-util'),
-	fs = require('fs'),
 	pkg = require('./package.json'),
 	dist = 'dist',
 	cleanCSSOptions = {
@@ -57,7 +94,7 @@ gulp.task('blocks-js', function () {
 		.pipe(sort())
 		.pipe(concat('blocks.min.js'))
 		.pipe(uglify(uglifyOptions))
-		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+		.pipe(header(headerTemplate, { pkg: pkg }))
 		.pipe(gulp.dest(dist));
 });
 
@@ -81,7 +118,7 @@ gulp.task('automad-js', function () {
 		)
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
-			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			.pipe(header(headerTemplate, { pkg: pkg }))
 			// Rename custom scrollbars.
 			// This has to be done accordingly within the libs-js task.
 			.pipe(replace('.mCustomScrollbar(', '.am_mCustomScrollbar('))
@@ -224,7 +261,7 @@ gulp.task('blocks-less', function () {
 		.on('error', onError)
 		.pipe(autoprefixer({ grid: false }))
 		.pipe(cleanCSS(cleanCSSOptions))
-		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+		.pipe(header(headerTemplate, { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest(dist));
 });
@@ -238,7 +275,7 @@ gulp.task('automad-less', function () {
 			.on('error', onError)
 			.pipe(autoprefixer({ grid: false }))
 			.pipe(cleanCSS(cleanCSSOptions))
-			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			.pipe(header(headerTemplate, { pkg: pkg }))
 			.pipe(rename({ suffix: '.min' }))
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))

@@ -12,7 +12,6 @@
     "draggabilly": "^2.1.1",
     "editorjs-drag-drop": "^0.1.1",
     "editorjs-style": "^3.0.1",
-    "fs": "0.0.2",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^3.0.4",
