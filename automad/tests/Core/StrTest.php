@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @testdox Automad\Core\Str
  */
-class Str_Test extends TestCase {
+class StrTest extends TestCase {
 	public function dataForTestDefIsEqual() {
 		return array(
 			array('', 'Some string.', 'Some string.'),

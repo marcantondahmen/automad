@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @testdox Automad\Core\Parse
  */
-class Parse_Test extends TestCase {
+class ParseTest extends TestCase {
 	public function dataForTestCsvIsSame() {
 		return array(
 			array(

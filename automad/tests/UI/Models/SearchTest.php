@@ -2,7 +2,7 @@
 
 namespace Automad\UI\Models;
 
-use Automad\Tests\Mock;
+use Automad\Test\Mock;
 use Automad\UI\Models\Search\FieldResults;
 use Automad\UI\Models\Search\FileResults;
 use PHPUnit\Framework\TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Automad\Tests;
+namespace Automad\Test;
 
 use Automad\Core\Context;
 use Automad\Core\Page;
@@ -13,7 +13,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class Mock extends TestCase {
 	/**
 	 * Create a mock of the Automad object with a single page.
-	 * 	A template can be passed optionally to the page.
+	 * A template can be passed optionally to the page.
 	 *
 	 * @param string $template
 	 * @return object The Automad Mock
@@ -54,6 +54,7 @@ class Mock extends TestCase {
 	 */
 	private function createCollection($Shared, $template) {
 		$theme = '../automad/tests/templates';
+		$testsDir = AM_BASE_DIR . '/automad/tests';
 
 		return array(
 			'/' => new Page(
@@ -76,7 +77,7 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template
 					),
-					Parse::textFile(__DIR__ . '/data/page.txt')
+					Parse::textFile($testsDir . '/data/page.txt')
 				),
 				$Shared
 			),
@@ -89,7 +90,7 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template,
 					),
-					Parse::textFile(__DIR__ . '/data/text.txt')
+					Parse::textFile($testsDir . '/data/text.txt')
 				),
 				$Shared
 			),
@@ -102,7 +103,7 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template,
 					),
-					Parse::textFile(__DIR__ . '/data/blocks.txt')
+					Parse::textFile($testsDir . '/data/blocks.txt')
 				),
 				$Shared
 			)

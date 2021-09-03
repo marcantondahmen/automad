@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @testdox Automad\Core\Pipe
  */
-class Pipe_Test extends TestCase {
+class PipeTest extends TestCase {
 	public function dataForTestProcessIsEqual() {
 		return array(
 			array(

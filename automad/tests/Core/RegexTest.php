@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @testdox Automad\Core\Regex
  */
-class Regex_Test extends TestCase {
+class RegexTest extends TestCase {
 	public function dataForTestCsvIsSame() {
 		return array(
 			array(

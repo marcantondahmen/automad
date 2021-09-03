@@ -2,13 +2,13 @@
 
 namespace Automad\Core;
 
-use Automad\Tests\Mock;
+use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @testdox Automad\Core\View
  */
-class View_Test extends TestCase {
+class ViewTest extends TestCase {
 	public function dataForTestHeadlessJSONIsEqual() {
 		return array(
 			array(

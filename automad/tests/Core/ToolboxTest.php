@@ -2,13 +2,13 @@
 
 namespace Automad\Core;
 
-use Automad\Tests\Mock;
+use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @testdox Automad\Core\Toolbox
  */
-class Toolbox_Test extends TestCase {
+class ToolboxTest extends TestCase {
 	public function dataForTestSetSessionIsEqual() {
 		return array(
 			array('%key1', 'Some Session Value', 'Some Session Value'),

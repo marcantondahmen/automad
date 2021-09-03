@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @testdox Automad\UI\Models\Replacement
  */
-class Replacement_Test extends TestCase {
+class ReplacementTest extends TestCase {
 	public function dataForTestReplaceInDataIsSame() {
 		return array(
 			// Blocks, no regex, not case sensitive.
