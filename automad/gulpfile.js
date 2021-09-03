@@ -12,8 +12,7 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	fs = require('fs'),
 	pkg = require('./package.json'),
-	distDashboard = 'ui/dist',
-	distBlocks = 'blocks/dist',
+	dist = 'dist',
 	cleanCSSOptions = {
 		format: { wrapAt: 500 },
 		rebase: false,
@@ -59,7 +58,7 @@ gulp.task('blocks-js', function () {
 		.pipe(concat('blocks.min.js'))
 		.pipe(uglify(uglifyOptions))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
-		.pipe(gulp.dest(distBlocks));
+		.pipe(gulp.dest(dist));
 });
 
 // Concat, minify and prefix the UI js.
@@ -78,7 +77,7 @@ gulp.task('automad-js', function () {
 		merge2(
 			gulp.src(['ui/js/*.js']).pipe(sort()),
 			gulp.src(['ui/js/*/*.js']).pipe(sort()),
-			gulp.src(['ui/js/editorjs/*/*.js']).pipe(sort())
+			gulp.src(['ui/js/*/*/*.js']).pipe(sort())
 		)
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
@@ -89,7 +88,7 @@ gulp.task('automad-js', function () {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(distDashboard))
+			.pipe(gulp.dest(dist))
 	);
 });
 
@@ -213,7 +212,7 @@ gulp.task('libs-js', function () {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(distDashboard))
+			.pipe(gulp.dest(dist))
 	);
 });
 
@@ -227,7 +226,7 @@ gulp.task('blocks-less', function () {
 		.pipe(cleanCSS(cleanCSSOptions))
 		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(gulp.dest(distBlocks));
+		.pipe(gulp.dest(dist));
 });
 
 // Compile, minify and prefix automad.less.
@@ -244,7 +243,7 @@ gulp.task('automad-less', function () {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(distDashboard))
+			.pipe(gulp.dest(dist))
 	);
 });
 
@@ -257,7 +256,7 @@ gulp.task('libs-css', function () {
 		])
 		.pipe(cleanCSS(cleanCSSOptions))
 		.pipe(concat('libs.min.css', { newLine: '\r\n\r\n' }))
-		.pipe(gulp.dest(distDashboard));
+		.pipe(gulp.dest(dist));
 });
 
 // Watch task.
