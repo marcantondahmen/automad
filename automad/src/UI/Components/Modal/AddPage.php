@@ -95,7 +95,7 @@ class AddPage {
 						<label class="uk-form-label uk-margin-top-remove">
 							{$fn(Text::get('page_add_location'))}
 						</label>
-						<div data-am-tree="#am-add-page-input">
+						<div data-am-site-tree="#am-add-page-input">
 							{$fn(SiteTree::render($Automad, '', array(), false, false))}
 						</div>
 					</div>

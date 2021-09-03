@@ -113,7 +113,7 @@ class Page extends View {
 						<label class="uk-form-label uk-margin-top-remove">
 							{$fn(Text::get('page_move_destination'))}
 						</label>
-						<div data-am-tree="#am-move-page-input">
+						<div data-am-site-tree="#am-move-page-input">
 							{$fn(SiteTree::render($this->Automad, '', array(), true, false))}
 						</div>
 					</div>

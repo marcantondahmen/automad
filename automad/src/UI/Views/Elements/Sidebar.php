@@ -79,7 +79,7 @@ class Sidebar {
 			<div id="am-sidebar" class="am-sidebar uk-modal">
 				<div class="am-sidebar-modal-dialog uk-modal-dialog uk-modal-dialog-blank">
 					<div data-am-scroll-box='{"scrollToItem": ".uk-active"}'>
-						<div data-am-tree>
+						<div data-am-site-tree>
 							<div class="am-navbar-push uk-visible-large uk-margin-bottom">
 								<a 
 								href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}"

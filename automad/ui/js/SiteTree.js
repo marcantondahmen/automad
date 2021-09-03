@@ -34,17 +34,17 @@
  */
 
 /*
- * Initialize the site tree having a 'data-am-tree' attribute by creating toggle buttons
+ * Initialize the site tree having a 'data-am-site-tree' attribute by creating toggle buttons
  * for all nodes and collapsing all inactive ones.
  *
  * The site tree can also be used to select pages and inject their URL in to an input field
  * instead of just navigating to that page.
- * To use a site tree for selection only, the 'data-am-tree' attribute must be
+ * To use a site tree for selection only, the 'data-am-site-tree' attribute must be
  * set to the selector of the input field.
  *
  * Leaving the attribute empty will disable selection and keep the default link behavior instead.
  *
- * <div data-am-tree="#am-move-page-input">
+ * <div data-am-site-tree="#am-move-page-input">
  *     ...
  * </div>
  *
@@ -54,12 +54,12 @@
 	Automad.SiteTree = {
 		class: {
 			active: 'uk-active',
-			iconOpen: 'am-tree-icon-open',
-			iconClose: 'am-tree-icon-close',
-			toggle: 'am-tree-toggle',
+			iconOpen: 'am-site-tree-icon-open',
+			iconClose: 'am-site-tree-icon-close',
+			toggle: 'am-site-tree-toggle',
 		},
 
-		dataAttr: 'data-am-tree',
+		dataAttr: 'data-am-site-tree',
 
 		// The site tree can also be used to select an URL to be used as an input field value.
 		urlAsValue: function ($tree, $input) {
@@ -147,7 +147,7 @@
 						});
 					});
 
-				// Use the URL as input value if data-am-tree is not empty.
+				// Use the URL as input value if data-am-site-tree is not empty.
 				if (inputSelector.length > 0) {
 					t.urlAsValue($tree, $(inputSelector));
 				}

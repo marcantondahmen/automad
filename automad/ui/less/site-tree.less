@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-[data-am-tree] {
+[data-am-site-tree] {
 	.am-sidebar & {
 		padding: 0 @utility-container-padding-horizontal @am-body-padding-bottom
 			@utility-container-padding-horizontal;
@@ -44,7 +44,7 @@
 		border-radius: @am-radius;
 
 		& li.uk-active > a,
-		& li a:not(.am-tree-toggle):hover {
+		& li a:not(.am-site-tree-toggle):hover {
 			color: @button-success-color;
 			background-color: @button-success-background;
 		}
@@ -59,12 +59,12 @@
 		position: relative;
 	}
 
-	& a:not(.am-tree-toggle) {
+	& a:not(.am-site-tree-toggle) {
 		width: auto;
 	}
 }
 
-.am-tree-toggle {
+.am-site-tree-toggle {
 	position: absolute !important;
 	z-index: 2;
 	left: -1.43rem;
@@ -81,7 +81,7 @@
 	}
 }
 
-[class*='am-tree-icon-'] {
+[class*='am-site-tree-icon-'] {
 	&:extend([class*='uk-icon-'] all);
 	font-size: 1em;
 	width: 0.71rem;
@@ -89,7 +89,7 @@
 	color: @am-text;
 }
 
-.am-tree-icon {
+.am-site-tree-icon {
 	&-open {
 		&:extend(.uk-icon-chevron-right all);
 	}
