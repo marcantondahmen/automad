@@ -38,6 +38,7 @@ namespace Automad\UI\Components\Layout;
 
 use Automad\Core\Headless;
 use Automad\Core\Parse;
+use Automad\System\Themelist;
 use Automad\UI\Components\Accordion\UnusedVariables;
 use Automad\UI\Components\Accordion\Variables;
 use Automad\UI\Components\Alert\ThemeReadme;
@@ -48,7 +49,6 @@ use Automad\UI\Components\Form\SelectTemplate;
 use Automad\UI\Models\PageModel;
 use Automad\UI\Utils\Keys;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\Themelist;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

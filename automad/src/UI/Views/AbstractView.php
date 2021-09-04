@@ -37,6 +37,7 @@
 namespace Automad\UI\Views;
 
 use Automad\Core\Str;
+use Automad\System\Themelist;
 use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\About;
@@ -44,7 +45,6 @@ use Automad\UI\Components\Modal\AddPage;
 use Automad\UI\Views\Elements\Navbar;
 use Automad\UI\Views\Elements\Sidebar;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\Themelist;
 use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

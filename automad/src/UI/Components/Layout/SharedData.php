@@ -37,6 +37,7 @@
 namespace Automad\UI\Components\Layout;
 
 use Automad\Core\Debug;
+use Automad\System\Themelist;
 use Automad\UI\Components\Accordion\UnusedVariables;
 use Automad\UI\Components\Accordion\Variables;
 use Automad\UI\Components\Alert\ThemeReadme;
@@ -44,7 +45,6 @@ use Automad\UI\Components\Card\Theme;
 use Automad\UI\Components\Form\FieldHidden;
 use Automad\UI\Utils\Keys;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\Themelist;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
