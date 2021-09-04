@@ -37,7 +37,7 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Cache;
-use Automad\Core\Config as CoreConfig;
+use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Response;
@@ -52,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Config {
+class ConfigController {
 	/**
 	 * Save the posted configuartion to the config.php file.
 	 *
@@ -71,7 +71,7 @@ class Config {
 					$config['AM_ALLOWED_FILE_TYPES'] = trim(preg_replace('/,?\s*php\w?/is', '', $config['AM_ALLOWED_FILE_TYPES']), ', ');
 				}
 
-				if (CoreConfig::write($config)) {
+				if (Config::write($config)) {
 					Cache::clear();
 					$Response->setReload(true);
 				} else {
@@ -81,7 +81,7 @@ class Config {
 				$Response->setError(Text::get('error_json'));
 			}
 		} else {
-			$config = CoreConfig::read();
+			$config = Config::read();
 			$json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
 			$html = <<< HTML
@@ -108,7 +108,7 @@ HTML;
 		$Response = new Response();
 
 		// Get config from json file, if exsiting.
-		$config = CoreConfig::read();
+		$config = Config::read();
 		ksort($config);
 
 		if ($type = Request::post('type')) {
@@ -156,7 +156,7 @@ HTML;
 			}
 		}
 
-		if (CoreConfig::write($config)) {
+		if (Config::write($config)) {
 			Debug::log($config, 'Updated config file');
 			$Response->setSuccess(Text::get('success_config_update'));
 			Cache::clear();

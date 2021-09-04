@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Page {
+class PageModel {
 	/**
 	 * Add page.
 	 *
@@ -343,7 +343,7 @@ class Page {
 		);
 
 		foreach ($replace as $old => $new) {
-			Links::update($Automad, $old, $new);
+			LinksModel::update($Automad, $old, $new);
 		}
 
 		Cache::clear();

@@ -40,9 +40,9 @@ use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\System\Update;
 use Automad\UI\Utils\Text;
-use Automad\UI\Controllers\Headless;
-use Automad\UI\Controllers\PackageManager;
-use Automad\UI\Models\Accounts;
+use Automad\UI\Controllers\HeadlessController;
+use Automad\UI\Controllers\PackageManagerController;
+use Automad\UI\Models\AccountsModel;
 use Automad\UI\Response as UIResponse;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -100,7 +100,7 @@ HTML;
 		}
 
 		if ($item == 'headless_template') {
-			$template = Str::stripStart(Headless::getTemplate(), AM_BASE_DIR);
+			$template = Str::stripStart(HeadlessController::getTemplate(), AM_BASE_DIR);
 			$badge = '';
 
 			if ($template != AM_HEADLESS_TEMPLATE) {
@@ -146,12 +146,12 @@ HTML;
 			$Response->setStatus(
 				'<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
 				Text::get('sys_user_registered') .
-				'&nbsp;&nbsp;<span class="uk-badge">' . count(Accounts::get()) . '</span>'
+				'&nbsp;&nbsp;<span class="uk-badge">' . count(AccountsModel::get()) . '</span>'
 			);
 		}
 
 		if ($item == 'outdated_packages') {
-			$Response = PackageManager::getOutdatedPackages();
+			$Response = PackageManagerController::getOutdatedPackages();
 
 			if ($Response->getBuffer()) {
 				$data = json_decode($Response->getBuffer());

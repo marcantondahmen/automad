@@ -34,27 +34,36 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
-
-use Automad\Core\Request;
-use Automad\UI\Components\Status\Response;
+namespace Automad\UI\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The status controller.
+ * A data class to store file => key associations.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Status {
+class FileKeysModel {
 	/**
-	 * Get a config item status.
-	 *
-	 * @return \Automad\UI\Response the response object
+	 * The keys array.
 	 */
-	public static function get() {
-		return Response::render(Request::post('item'));
+	public $keys;
+
+	/**
+	 * The file path.
+	 */
+	public $path;
+
+	/**
+	 * Initialize a new FileKeysModel instance.
+	 *
+	 * @param string $path
+	 * @param array $keys
+	 */
+	public function __construct($path, $keys) {
+		$this->path = $path;
+		$this->keys = $keys;
 	}
 }

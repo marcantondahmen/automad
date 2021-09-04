@@ -40,9 +40,9 @@ use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Components\Layout\SearchResults;
-use Automad\UI\Models\Replacement;
-use Automad\UI\Models\Search as ModelsSearch;
-use Automad\UI\Models\Search\FileKeys;
+use Automad\UI\Models\ReplacementModel;
+use Automad\UI\Models\SearchModel;
+use Automad\UI\Models\Search\FileKeysModel;
 use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
@@ -56,7 +56,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Search {
+class SearchController {
 	/**
 	 * Perform a search and replace.
 	 *
@@ -70,7 +70,7 @@ class Search {
 
 			if (!empty($files)) {
 				$fileKeysArray = array();
-				$Replacement = new Replacement(
+				$ReplacementModel = new ReplacementModel(
 					Request::post('searchValue'),
 					Request::post('replaceValue'),
 					Request::post('isRegex'),
@@ -78,14 +78,14 @@ class Search {
 				);
 
 				foreach ($files as $path => $keysJson) {
-					$fileKeysArray[] = new FileKeys($path, json_decode($keysJson, true));
+					$fileKeysArray[] = new FileKeysModel($path, json_decode($keysJson, true));
 				}
 
-				$Replacement->replaceInFiles($fileKeysArray);
+				$ReplacementModel->replaceInFiles($fileKeysArray);
 			}
 		}
 
-		$Search = new ModelsSearch(
+		$Search = new SearchModel(
 			UICache::get(),
 			Request::post('searchValue'),
 			Request::post('isRegex'),

@@ -3,14 +3,14 @@
 namespace Automad\UI\Models;
 
 use Automad\Test\Mock;
-use Automad\UI\Models\Search\FieldResults;
-use Automad\UI\Models\Search\FileResults;
+use Automad\UI\Models\Search\FieldResultsModel;
+use Automad\UI\Models\Search\FileResultsModel;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\UI\Models\Search
+ * @testdox Automad\UI\Models\SearchModel
  */
-class Search_Test extends TestCase {
+class SearchTest extends TestCase {
 	public function dataForTestSearchPerFileIsSame() {
 		return array(
 			array(
@@ -18,10 +18,10 @@ class Search_Test extends TestCase {
 				false,
 				false,
 				array(
-					new FileResults(
+					new FileResultsModel(
 						'/pages/01.text/default.txt',
 						array(
-							new FieldResults(
+							new FieldResultsModel(
 								'text',
 								array('simple'),
 								'A <mark>simple</mark> sample text with a [link](/url/to/page)'
@@ -29,10 +29,10 @@ class Search_Test extends TestCase {
 						),
 						'/text'
 					),
-					new FileResults(
+					new FileResultsModel(
 						'/pages/01.blocks/default.txt',
 						array(
-							new FieldResults(
+							new FieldResultsModel(
 								'+main',
 								array('Simple', 'simple'),
 								'A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text'
@@ -47,10 +47,10 @@ class Search_Test extends TestCase {
 				false,
 				true,
 				array(
-					new FileResults(
+					new FileResultsModel(
 						'/pages/01.blocks/default.txt',
 						array(
-							new FieldResults(
+							new FieldResultsModel(
 								'+main',
 								array('Simple'),
 								'A <mark>Simple</mark> First Column Table Header'
@@ -65,10 +65,10 @@ class Search_Test extends TestCase {
 				true,
 				false,
 				array(
-					new FileResults(
+					new FileResultsModel(
 						'/pages/01.blocks/default.txt',
 						array(
-							new FieldResults(
+							new FieldResultsModel(
 								'+main',
 								array('Simple First Column Table'),
 								'A <mark>Simple First Column Table</mark> Header'
@@ -83,10 +83,10 @@ class Search_Test extends TestCase {
 				true,
 				false,
 				array(
-					new FileResults(
+					new FileResultsModel(
 						'/shared/data.txt',
 						array(
-							new FieldResults(
+							new FieldResultsModel(
 								'shared',
 								array('default text content'),
 								'Shared <mark>default text content</mark>'
@@ -107,10 +107,10 @@ class Search_Test extends TestCase {
 				true,
 				false,
 				array(
-					new FileResults(
+					new FileResultsModel(
 						'/pages/01.blocks/default.txt',
 						array(
-							new FieldResults(
+							new FieldResultsModel(
 								'+main',
 								array(
 									'Table Header',
@@ -138,14 +138,14 @@ class Search_Test extends TestCase {
 	 */
 	public function testSearchPerFileIsSame($searchValue, $isRegex, $isCaseSensitive, $expected) {
 		$Mock = new Mock();
-		$Search = new Search(
+		$SearchModel = new SearchModel(
 			$Mock->createAutomad('default'),
 			$searchValue,
 			$isRegex,
 			$isCaseSensitive
 		);
 
-		$results = $Search->searchPerFile();
+		$results = $SearchModel->searchPerFile();
 
 		$this->assertSame(
 			json_encode($results, JSON_PRETTY_PRINT),

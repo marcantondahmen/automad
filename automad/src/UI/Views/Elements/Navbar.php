@@ -40,7 +40,7 @@ use Automad\Core\Request;
 use Automad\Core\Str;
 use Automad\UI\Components\Logo;
 use Automad\UI\Components\Nav\Jumpbar;
-use Automad\UI\Controllers\User;
+use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,7 +60,7 @@ class Navbar {
 	 * @return string the rendered dashboard navbar
 	 */
 	public static function render($Automad) {
-		if (!User::get()) {
+		if (!UserModel::getName()) {
 			return false;
 		}
 
@@ -107,7 +107,7 @@ class Navbar {
 												<i class="uk-icon-power-off uk-icon-justify"></i>&nbsp;
 												{$fn(Text::get('btn_log_out'))}
 												<i class="uk-icon-angle-double-left"></i>
-												{$fn(ucwords(User::get()))}
+												{$fn(ucwords(UserModel::getName()))}
 												<i class="uk-icon-angle-double-right"></i>
 											</a>
 										</li>

@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Views;
 
-use Automad\UI\Controllers\User;
+use Automad\UI\Controllers\UserController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,7 +60,7 @@ class Login extends View {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$error = User::login();
+		$error = UserController::login();
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -121,7 +121,7 @@ HTML;
 		if (!empty($error)) {
 			return <<< HTML
 				<script type="text/javascript">
-					Automad.notify.error('$error');
+					Automad.Notify.error('$error');
 				</script>
 HTML;
 		}

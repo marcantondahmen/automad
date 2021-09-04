@@ -38,7 +38,7 @@ namespace Automad\UI;
 
 use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\UI\Controllers\User;
+use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Prefix;
 use Automad\UI\Utils\Text;
 
@@ -67,10 +67,11 @@ class Dashboard {
 		$namespaceViews = __NAMESPACE__ . '\\Views\\';
 		$namespaceControllers = __NAMESPACE__ . '\\Controllers\\';
 
-		if (User::get()) {
+		if (UserModel::getName()) {
 			if ($controller = Request::query('controller')) {
 				// Controllers.
 				$method = "{$namespaceControllers}{$controller}";
+				$method = str_replace('::', 'Controller::', $method);
 				$parts = explode('::', $method);
 				$class = $parts[0];
 

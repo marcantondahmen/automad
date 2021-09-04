@@ -53,7 +53,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class File {
+class FileModel {
 	/**
 	 * Edit file information (file name and caption).
 	 *
@@ -78,7 +78,7 @@ class File {
 					$error = FileSystem::renameMedia($oldFile, $newFile);
 
 					if (!$error) {
-						Links::update(
+						LinksModel::update(
 							$Automad,
 							Str::stripStart($oldFile, AM_BASE_DIR),
 							Str::stripStart($newFile, AM_BASE_DIR)
@@ -89,7 +89,7 @@ class File {
 							// basename since they belong to the same page.
 							$file = AM_DIR_PAGES . $Page->path . $Page->template . '.' . AM_FILE_EXT_DATA;
 
-							Links::update(
+							LinksModel::update(
 								$Automad,
 								basename($oldFile),
 								basename($newFile),

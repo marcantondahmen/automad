@@ -36,9 +36,10 @@
 
 namespace Automad\UI\Models;
 
+use Automad\Core\Automad;
 use Automad\Core\Str;
-use Automad\UI\Models\Search\FieldResults;
-use Automad\UI\Models\Search\FileResults;
+use Automad\UI\Models\Search\FieldResultsModel;
+use Automad\UI\Models\Search\FileResultsModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -49,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Search {
+class SearchModel {
 	/**
 	 * The Automad results.
 	 */
@@ -68,7 +69,7 @@ class Search {
 	/**
 	 * Initialize a new search model for a search value, optionally used as a regular expression.
 	 *
-	 * @param \Automad\Core\Automad $Automad
+	 * @param Automad $Automad
 	 * @param string $searchValue
 	 * @param boolean $isRegex
 	 * @param boolean $isCaseSensitive
@@ -88,10 +89,10 @@ class Search {
 	}
 
 	/**
-	 * Perform a search in all data arrays and return an array with `FileResults`.
+	 * Perform a search in all data arrays and return an array with `FileResultsModel`.
 	 *
-	 * @see \Automad\UI\Models\Search\FileResults
-	 * @return array an array of `FileResults`
+	 * @see FileResultsModel
+	 * @return array an array of `FileResultsModel`
 	 */
 	public function searchPerFile() {
 		$resultsPerFile = array();
@@ -104,13 +105,13 @@ class Search {
 
 		if ($fieldResultsArray = $this->searchData($sharedData)) {
 			$path = Str::stripStart(AM_FILE_SHARED_DATA, AM_BASE_DIR);
-			$resultsPerFile[] = new FileResults($path, $fieldResultsArray);
+			$resultsPerFile[] = new FileResultsModel($path, $fieldResultsArray);
 		}
 
 		foreach ($this->Automad->getCollection() as $Page) {
 			if ($fieldResultsArray = $this->searchData($Page->data)) {
 				$path = AM_DIR_PAGES . $Page->path . $Page->get(':template') . '.' . AM_FILE_EXT_DATA;
-				$resultsPerFile[] = new FileResults($path, $fieldResultsArray, $Page->origUrl);
+				$resultsPerFile[] = new FileResultsModel($path, $fieldResultsArray, $Page->origUrl);
 			}
 		}
 
@@ -121,11 +122,11 @@ class Search {
 	 * Append an item to a given array only in case it is an results.
 	 *
 	 * @param array $resultsArray
-	 * @param \Automad\UI\Models\Search\FieldResults $results
+	 * @param FieldResultsModel $results
 	 * @return array the results array
 	 */
 	private function appendFieldResults($resultsArray, $results) {
-		if (is_a($results, '\Automad\UI\Models\Search\FieldResults')) {
+		if (is_a($results, '\Automad\UI\Models\Search\FieldResultsModel')) {
 			$resultsArray[] = $results;
 		}
 
@@ -157,25 +158,25 @@ class Search {
 	}
 
 	/**
-	 * Merge an array of `FieldResults` into a single results.
+	 * Merge an array of `FieldResultsModel` into a single results.
 	 *
 	 * @param string $key
 	 * @param array $results
-	 * @return \Automad\UI\Models\Search\FieldResults a field results results
+	 * @return FieldResultsModel a field results results
 	 */
 	private function mergeFieldResults($key, $results) {
 		$matches = array();
 		$contextArray = array();
 
 		foreach ($results as $result) {
-			if (is_a($result, '\Automad\UI\Models\Search\FieldResults')) {
+			if (is_a($result, '\Automad\UI\Models\Search\FieldResultsModel')) {
 				$matches = array_merge($matches, $result->matches);
 				$contextArray[] = $result->context;
 			}
 		}
 
 		if (!empty($matches)) {
-			return new FieldResults(
+			return new FieldResultsModel(
 				$key,
 				$matches,
 				join(' ... ', $contextArray)
@@ -190,7 +191,7 @@ class Search {
 	 *
 	 * @param string $key
 	 * @param array $array
-	 * @return \Automad\UI\Models\Search\FieldResults a field results results
+	 * @return FieldResultsModel a field results results
 	 */
 	private function searchArrayRecursively($key, $array) {
 		$results = array();
@@ -210,11 +211,11 @@ class Search {
 
 	/**
 	 * Perform a search in a block field recursively and return a
-	 * `FieldResults` results for a given search value.
+	 * `FieldResultsModel` results for a given search value.
 	 *
 	 * @param string $key
 	 * @param results $blocks
-	 * @return \Automad\UI\Models\Search\FieldResults a field results results
+	 * @return FieldResultsModel a field results results
 	 */
 	private function searchBlocksRecursively($key, $blocks) {
 		$results = array();
@@ -245,11 +246,11 @@ class Search {
 
 	/**
 	 * Perform a search in a single data array and return an
-	 * array of `FieldResults`.
+	 * array of `FieldResultsModel`.
 	 *
-	 * @see \Automad\UI\Models\Search\FieldResults
+	 * @see FieldResultsModel
 	 * @param array $data
-	 * @return array an array of `FieldResults` resultss
+	 * @return array an array of `FieldResultsModel` resultss
 	 */
 	private function searchData($data) {
 		$fieldResultsArray = array();
@@ -258,16 +259,16 @@ class Search {
 			if (strpos($key, '+') === 0) {
 				try {
 					$data = json_decode($value);
-					$FieldResults = $this->searchBlocksRecursively($key, $data->blocks);
+					$FieldResultsModel = $this->searchBlocksRecursively($key, $data->blocks);
 				} catch (Exception $error) {
-					$FieldResults = false;
+					$FieldResultsModel = false;
 				}
 			} else {
-				$FieldResults = $this->searchTextField($key, $value);
+				$FieldResultsModel = $this->searchTextField($key, $value);
 			}
 
-			if (!empty($FieldResults)) {
-				$fieldResultsArray[] = $FieldResults;
+			if (!empty($FieldResultsModel)) {
+				$fieldResultsArray[] = $FieldResultsModel;
 			}
 		}
 
@@ -276,11 +277,11 @@ class Search {
 
 	/**
 	 * Perform a search in a single data field and return a
-	 * `FieldResults` results for a given search value.
+	 * `FieldResultsModel` results for a given search value.
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @return \Automad\UI\Models\Search\FieldResults the field results
+	 * @return FieldResultsModel the field results
 	 */
 	private function searchTextField($key, $value) {
 		$ignoredKeys = array(
@@ -327,7 +328,7 @@ class Search {
 		}
 
 		if ($fieldMatches) {
-			return new FieldResults(
+			return new FieldResultsModel(
 				$key,
 				$fieldMatches,
 				$context

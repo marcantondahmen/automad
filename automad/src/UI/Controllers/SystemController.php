@@ -36,66 +36,60 @@
 
 namespace Automad\UI\Controllers;
 
-use Automad\Core\Cache;
-use Automad\Core\Request;
-use Automad\UI\Components\Layout\SharedData;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
+use Automad\UI\Components\Alert\Danger;
+use Automad\UI\Components\Alert\Success;
+use Automad\UI\Components\Layout\SystemUpdate;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\UICache;
+use Automad\System\Update;
+use Automad\UI\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Shared data controller.
+ * The system controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Shared {
+class SystemController {
 	/**
-	 * Send form when there is no posted data in the request or save data if there is.
+	 * System updates.
 	 *
 	 * @return \Automad\UI\Response the response object
 	 */
-	public static function data() {
-		$Automad = UICache::get();
-
-		if ($data = Request::post('data')) {
-			// Save changes.
-			$Response = self::save($Automad, $data);
-		} else {
-			// If there is no data, just get the form ready.
-			$SharedData = new SharedData($Automad);
-			$Response = new Response();
-			$Response->setHtml($SharedData->render());
-		}
-
-		return $Response;
-	}
-
-	/**
-	 * Save shared data.
-	 *
-	 * @param object $Automad
-	 * @param array $data
-	 * @return \Automad\UI\Response the response object
-	 */
-	private static function save($Automad, $data) {
+	public static function update() {
 		$Response = new Response();
 
-		if (is_writable(AM_FILE_SHARED_DATA)) {
-			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
-			Cache::clear();
-
-			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Automad->Shared->get(AM_KEY_THEME)) {
-				$Response->setReload(true);
-			} else {
-				$Response->setSuccess(Text::get('success_saved'));
-			}
+		// To prevent accidental updates within the development repository, exit updater in case the base directoy contains "/automad-dev".
+		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
+			$Response->setHtml(Danger::render("Can't run updates within the development repository!"));
 		} else {
-			$Response->setError(Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>');
+			// Test if server supports all required functions/extensions.
+			if (Update::supported()) {
+				if (!empty($_POST['update'])) {
+					$Response = Update::run();
+				} else {
+					if ($version = Update::getVersion()) {
+						// Check if an the current installation is outdated.
+						if (version_compare(AM_VERSION, $version, '<')) {
+							$Response->setHtml(SystemUpdate::render($version));
+						} else {
+							$Response->setHtml(
+								Success::render(
+									Text::get('sys_update_not_required') . ' ' .
+									Text::get('sys_update_current_version') . ' ' .
+									AM_VERSION
+								)
+							);
+						}
+					} else {
+						$Response->setHtml(Danger::render(Text::get('error_update_connection')));
+					}
+				}
+			} else {
+				$Response->setHtml(Danger::render(Text::get('error_update_not_supported')));
+			}
 		}
 
 		return $Response;

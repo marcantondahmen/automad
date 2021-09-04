@@ -34,44 +34,53 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models\Search;
+namespace Automad\UI\Controllers;
+
+use Automad\Core\Cache;
+use Automad\Core\Debug;
+use Automad\UI\Response;
+use Automad\UI\Utils\FileSystem;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A wrapper class for all results for a given data field.
+ * The Cache controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FieldResults {
+class CacheController {
 	/**
-	 * A presenation string of all joined matches with wrapping context.
-	 */
-	public $context = '';
-
-	/**
-	 * The field name.
-	 */
-	public $key;
-
-	/**
-	 * An array with all found matches in the field value.
-	 * Note that the matches can differ in case the search value is an unescaped regex string.
-	 */
-	public $matches = false;
-
-	/**
-	 * Initialize a new field results instance.
+	 * Clear the cache.
 	 *
-	 * @param string $key
-	 * @param array $matches
-	 * @param string $context
+	 * @return \Automad\UI\Response the response object
 	 */
-	public function __construct($key, $matches, $context) {
-		$this->key = $key;
-		$this->matches = $matches;
-		$this->context = $context;
+	public static function clear() {
+		$Response = new Response();
+		Cache::clear();
+		$Response->setSuccess(Text::get('success_cache_cleared'));
+
+		return $Response;
+	}
+
+	/**
+	 * Purge the cache directory.
+	 *
+	 * @return \Automad\UI\Response the response object
+	 */
+	public static function purge() {
+		$Response = new Response();
+		$tempDir = FileSystem::purgeCache();
+
+		if ($tempDir) {
+			$Response->setSuccess(Text::get('success_cache_purged'));
+			Debug::log($tempDir, 'temp directory');
+		} else {
+			$Response->setError(Text::get('error_cache_purged'));
+		}
+
+		return $Response;
 	}
 }

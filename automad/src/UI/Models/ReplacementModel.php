@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Replacement {
+class ReplacementModel {
 	/**
 	 * The search regex flags.
 	 */
@@ -92,7 +92,7 @@ class Replacement {
 	/**
 	 * Replace matches with a given string in a given list of files.
 	 *
-	 * @see \Automad\UI\Models\Search\FileKeys
+	 * @see \Automad\UI\Models\Search\FileKeysModel
 	 * @param array $fileKeysArray
 	 * @return boolean true on success
 	 */
@@ -103,10 +103,10 @@ class Replacement {
 			return false;
 		}
 
-		foreach ($fileKeysArray as $FileKeys) {
-			$file = AM_BASE_DIR . $FileKeys->path;
+		foreach ($fileKeysArray as $FileKeysModel) {
+			$file = AM_BASE_DIR . $FileKeysModel->path;
 			$data = Parse::textFile($file);
-			$data = $this->replaceInData($data, $FileKeys->keys);
+			$data = $this->replaceInData($data, $FileKeysModel->keys);
 
 			FileSystem::writeData($data, $file);
 		}

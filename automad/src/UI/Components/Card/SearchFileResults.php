@@ -52,25 +52,25 @@ class SearchFileResults {
 	/**
 	 * Render a search match card.
 	 *
-	 * @param \Automad\UI\Models\Search\FileResults $FileResults
+	 * @param \Automad\UI\Models\Search\FileResultsModel $FileResultsModel
 	 * @return string the rendered card
 	 */
-	public static function render($FileResults) {
-		$dir = dirname($FileResults->path);
+	public static function render($FileResultsModel) {
+		$dir = dirname($FileResultsModel->path);
 		$id = 'am-search-file-' . Str::slug($dir, true, 500);
 		$results = '';
 		$keys = array();
-		$editText = $FileResults->url;
-		$editUrl = '?view=Page&url=' . urlencode($FileResults->url);
+		$editText = $FileResultsModel->url;
+		$editUrl = '?view=Page&url=' . urlencode($FileResultsModel->url);
 
-		if (!$FileResults->url) {
+		if (!$FileResultsModel->url) {
 			$editText = Text::get('shared_title');
 			$editUrl = '?view=Shared';
 		}
 
-		foreach ($FileResults->fieldResultsArray as $FieldResults) {
-			$keys[] = $FieldResults->key;
-			$results .= "<hr><small class='uk-text-muted'>{$FieldResults->key}</small><br>{$FieldResults->context}";
+		foreach ($FileResultsModel->fieldResultsArray as $FieldResultsModel) {
+			$keys[] = $FieldResultsModel->key;
+			$results .= "<hr><small class='uk-text-muted'>{$FieldResultsModel->key}</small><br>{$FieldResultsModel->context}";
 		}
 
 		$keysJson = json_encode($keys);
@@ -85,7 +85,7 @@ class SearchFileResults {
 					<label 
 					class="am-toggle-checkbox uk-active" 
 					data-am-toggle="#$id">
-						<input type="checkbox" name="files[{$FileResults->path}]" value='$keysJson' checked="on" />
+						<input type="checkbox" name="files[{$FileResultsModel->path}]" value='$keysJson' checked="on" />
 					</label>
 				</div>
 				$results

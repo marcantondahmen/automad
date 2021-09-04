@@ -51,13 +51,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileCollection {
+class FileCollectionModel {
 	/**
 	 * Delete files.
 	 *
 	 * @param array $files
 	 * @param string $path
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function deleteFiles($files, $path) {
 		$Response = new Response();

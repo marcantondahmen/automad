@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Views;
 
-use Automad\UI\Controllers\Accounts;
+use Automad\UI\Controllers\AccountsController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,7 +60,7 @@ class CreateUser extends View {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$error = Accounts::install();
+		$error = AccountsController::install();
 
 		$fn = $this->fn;
 
@@ -145,7 +145,7 @@ HTML;
 		if (!empty($error)) {
 			return <<< HTML
 				<script type="text/javascript">
-					Automad.notify.error('$error');
+					Automad.Notify.error('$error');
 					$('form input').first().focus();
 				</script>
 HTML;

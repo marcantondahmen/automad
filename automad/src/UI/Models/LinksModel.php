@@ -34,53 +34,52 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\UI\Models;
 
-use Automad\Core\Cache as CoreCache;
-use Automad\Core\Debug;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\Text;
+use Automad\UI\Models\Search\FileKeysModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Cache controller.
+ * The links model.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Cache {
+class LinksModel {
 	/**
-	 * Clear the cache.
+	 * Update all links to a page or file after renaming or moving content.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @param \Automad\Core\Automad $Automad
+	 * @param string $old
+	 * @param string $new
+	 * @param string $dataFilePath
+	 * @return boolean true on success
 	 */
-	public static function clear() {
-		$Response = new Response();
-		CoreCache::clear();
-		$Response->setSuccess(Text::get('success_cache_cleared'));
+	public static function update($Automad, $old, $new, $dataFilePath = false) {
+		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
+		$replaceValue = $new;
 
-		return $Response;
-	}
+		$SearchModel = new SearchModel($Automad, $searchValue, true, false);
+		$fileResultsArray = $SearchModel->searchPerFile();
+		$fileKeysArray = array();
 
-	/**
-	 * Purge the cache directory.
-	 *
-	 * @return \Automad\UI\Response the response object
-	 */
-	public static function purge() {
-		$Response = new Response();
-		$tempDir = FileSystem::purgeCache();
+		foreach ($fileResultsArray as $FileResultsModel) {
+			if ($dataFilePath === $FileResultsModel->path || empty($dataFilePath)) {
+				$keys = array();
 
-		if ($tempDir) {
-			$Response->setSuccess(Text::get('success_cache_purged'));
-			Debug::log($tempDir, 'temp directory');
-		} else {
-			$Response->setError(Text::get('error_cache_purged'));
+				foreach ($FileResultsModel->fieldResultsArray as $FieldResultsModel) {
+					$keys[] = $FieldResultsModel->key;
+				}
+
+				$fileKeysArray[] = new FileKeysModel($FileResultsModel->path, $keys);
+			}
 		}
 
-		return $Response;
+		$ReplacementModel = new ReplacementModel($searchValue, $replaceValue, true, false);
+		$ReplacementModel->replaceInFiles($fileKeysArray);
+
+		return true;
 	}
 }

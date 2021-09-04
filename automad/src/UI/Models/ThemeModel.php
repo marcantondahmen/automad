@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\UI\Models;
 
 use Automad\Core\Str;
 use Automad\UI\Utils\FileSystem;
@@ -42,13 +42,13 @@ use Automad\UI\Utils\FileSystem;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Theme class.
+ * The Theme model.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2019 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Theme {
+class ThemeModel {
 	/**
 	 * 	Theme data.
 	 */

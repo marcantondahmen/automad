@@ -38,7 +38,7 @@
 
 namespace Automad\UI\Commands;
 
-use Automad\UI\Models\Accounts;
+use Automad\UI\Models\AccountsModel;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -85,16 +85,16 @@ class CreateUser extends Command {
 		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
 		if (is_readable(AM_FILE_ACCOUNTS)) {
-			$accounts = Accounts::get();
+			$accounts = AccountsModel::get();
 		} else {
 			$accounts = array();
 		}
 
 		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
-		$accounts[$name] = Accounts::passwordHash($password);
+		$accounts[$name] = AccountsModel::passwordHash($password);
 
-		if (Accounts::write($accounts)) {
+		if (AccountsModel::write($accounts)) {
 			echo '--------------------' . PHP_EOL;
 			echo 'Name:     ' . $name . PHP_EOL;
 			echo 'Password: ' . $password . PHP_EOL;

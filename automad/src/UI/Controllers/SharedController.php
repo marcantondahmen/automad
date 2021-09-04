@@ -36,11 +36,9 @@
 
 namespace Automad\UI\Controllers;
 
-use Automad\Core\Debug;
-use Automad\Core\Parse;
+use Automad\Core\Cache;
 use Automad\Core\Request;
-use Automad\UI\Components\Layout\FileCollection as LayoutFileCollection;
-use Automad\UI\Models\FileCollection as ModelsFileCollection;
+use Automad\UI\Components\Layout\SharedData;
 use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
@@ -49,66 +47,56 @@ use Automad\UI\Utils\UICache;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The file collection controller.
+ * The Shared data controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileCollection {
+class SharedController {
 	/**
-	 * Remove selected files from the selection or
-	 * simply return the collection of uploaded files for a context.
+	 * Send form when there is no posted data in the request or save data if there is.
 	 *
 	 * @return \Automad\UI\Response the response object
 	 */
-	public static function edit() {
+	public static function data() {
 		$Automad = UICache::get();
-		$Response = new Response();
-		$url = Request::post('url');
 
-		// Check if file from a specified page or the shared files will be listed and managed.
-		// To display a file list of a certain page, its URL has to be submitted along with the form data.
-		if (!array_key_exists($url, $Automad->getCollection())) {
-			$url = '';
-			$modalTitle = Text::get('shared_title');
+		if ($data = Request::post('data')) {
+			// Save changes.
+			$Response = self::save($Automad, $data);
 		} else {
-			$modalTitle = $Automad->getPage($url)->get(AM_KEY_TITLE);
+			// If there is no data, just get the form ready.
+			$SharedData = new SharedData($Automad);
+			$Response = new Response();
+			$Response->setHtml($SharedData->render());
 		}
-
-		$path = FileSystem::getPathByPostUrl($Automad);
-
-		// Delete files in $_POST['delete'].
-		if ($delete = Request::post('delete')) {
-			$Response = ModelsFileCollection::deleteFiles($delete, $path);
-		}
-
-		// Get files for each allowed file type.
-		$files = FileSystem::globGrep(
-			$path . '*.*',
-			'/\.(' . implode('|', Parse::allowedFileTypes()) . ')$/i'
-		);
-
-		$Response->setHtml(LayoutFileCollection::render($files, $url, $modalTitle));
 
 		return $Response;
 	}
 
 	/**
-	 * Upload controller based on $_POST and $_FILES.
+	 * Save shared data.
 	 *
+	 * @param object $Automad
+	 * @param array $data
 	 * @return \Automad\UI\Response the response object
 	 */
-	public static function upload() {
-		$Automad = UICache::get();
-		Debug::log($_POST + $_FILES, 'files');
-
-		// Set path.
-		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
-		$path = FileSystem::getPathByPostUrl($Automad);
-
+	private static function save($Automad, $data) {
 		$Response = new Response();
-		$Response->setError(ModelsFileCollection::upload($_FILES, $path));
+
+		if (is_writable(AM_FILE_SHARED_DATA)) {
+			FileSystem::writeData($data, AM_FILE_SHARED_DATA);
+			Cache::clear();
+
+			if (!empty($data[AM_KEY_THEME]) && $data[AM_KEY_THEME] != $Automad->Shared->get(AM_KEY_THEME)) {
+				$Response->setReload(true);
+			} else {
+				$Response->setSuccess(Text::get('success_saved'));
+			}
+		} else {
+			$Response->setError(Text::get('error_permission') . '<br /><small>' . AM_FILE_SHARED_DATA . '</small>');
+		}
 
 		return $Response;
 	}

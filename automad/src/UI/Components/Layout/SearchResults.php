@@ -51,15 +51,15 @@ class SearchResults {
 	/**
 	 * Render the search results layout.
 	 *
-	 * @see \Automad\UI\Models\Search\FileResults
+	 * @see \Automad\UI\Models\Search\FileResultsModel
 	 * @param array $fileResultsArray
 	 * @return string the rendered search results layout.
 	 */
 	public static function render($fileResultsArray) {
 		$html = '';
 
-		foreach ($fileResultsArray as $FileResults) {
-			$html .= SearchFileResults::render($FileResults);
+		foreach ($fileResultsArray as $FileResultsModel) {
+			$html .= SearchFileResults::render($FileResultsModel);
 		}
 
 		return $html;

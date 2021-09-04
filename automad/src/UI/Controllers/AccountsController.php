@@ -37,9 +37,8 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
-use Automad\Core\Resolve;
 use Automad\UI\Components\Grid\Users;
-use Automad\UI\Models\Accounts as ModelsAccounts;
+use Automad\UI\Models\AccountsModel;
 use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 
@@ -52,11 +51,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Accounts {
+class AccountsController {
 	/**
 	 * Add user account based on $_POST.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function add() {
 		$Response = new Response();
@@ -69,7 +68,7 @@ class Accounts {
 			return self::invalidUsernameResponse();
 		}
 
-		if ($error = ModelsAccounts::add($username, $password1, $password2)) {
+		if ($error = AccountsModel::add($username, $password1, $password2)) {
 			$Response->setError($error);
 
 			return $Response;
@@ -93,7 +92,7 @@ class Accounts {
 			$Response = self::delete($users);
 		}
 
-		$Response->setHtml(Users::render(ModelsAccounts::get()));
+		$Response->setHtml(Users::render(AccountsModel::get()));
 
 		return $Response;
 	}
@@ -111,7 +110,7 @@ class Accounts {
 				return $Response->getError();
 			}
 
-			return ModelsAccounts::install(
+			return AccountsModel::install(
 				Request::post('username'),
 				Request::post('password1'),
 				Request::post('password2')
@@ -127,7 +126,7 @@ class Accounts {
 	 * @return boolean true/false
 	 */
 	public static function passwordVerified($password, $hash) {
-		return ModelsAccounts::passwordVerified($password, $hash);
+		return AccountsModel::passwordVerified($password, $hash);
 	}
 
 	/**
@@ -139,7 +138,7 @@ class Accounts {
 	private static function delete($users) {
 		$Response = new Response();
 
-		$Response->setError(ModelsAccounts::delete($users));
+		$Response->setError(AccountsModel::delete($users));
 
 		if (!$Response->getError()) {
 			$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');

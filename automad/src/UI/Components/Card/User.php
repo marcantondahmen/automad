@@ -37,7 +37,7 @@
 namespace Automad\UI\Components\Card;
 
 use Automad\Core\Str;
-use Automad\UI\Controllers\User as ControllersUser;
+use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -76,7 +76,7 @@ class User {
 							{$fn(self::checkbox($user, $id))}
 						</div>
 					</div>
-				</div>	
+				</div>
 			</li>
 HTML;
 	}
@@ -93,7 +93,7 @@ HTML;
 			return $expression;
 		};
 
-		if ($user == ControllersUser::get()) {
+		if ($user == UserModel::getName()) {
 			return <<< HTML
 				<div class="am-panel-bottom-link uk-text-muted">
 					{$fn(Text::get('sys_user_you'))}

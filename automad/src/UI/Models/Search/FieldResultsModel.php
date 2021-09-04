@@ -34,52 +34,44 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
-
-use Automad\UI\Models\Search\FileKeys;
+namespace Automad\UI\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The links model.
+ * A wrapper class for all results for a given data field.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Links {
+class FieldResultsModel {
 	/**
-	 * Update all links to a page or file after renaming or moving content.
-	 *
-	 * @param \Automad\Core\Automad $Automad
-	 * @param string $old
-	 * @param string $new
-	 * @param string $dataFilePath
-	 * @return boolean true on success
+	 * A presenation string of all joined matches with wrapping context.
 	 */
-	public static function update($Automad, $old, $new, $dataFilePath = false) {
-		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
-		$replaceValue = $new;
+	public $context = '';
 
-		$Search = new Search($Automad, $searchValue, true, false);
-		$fileResultsArray = $Search->searchPerFile();
-		$fileKeysArray = array();
+	/**
+	 * The field name.
+	 */
+	public $key;
 
-		foreach ($fileResultsArray as $FileResults) {
-			if ($dataFilePath === $FileResults->path || empty($dataFilePath)) {
-				$keys = array();
+	/**
+	 * An array with all found matches in the field value.
+	 * Note that the matches can differ in case the search value is an unescaped regex string.
+	 */
+	public $matches = false;
 
-				foreach ($FileResults->fieldResultsArray as $FieldResults) {
-					$keys[] = $FieldResults->key;
-				}
-
-				$fileKeysArray[] = new FileKeys($FileResults->path, $keys);
-			}
-		}
-
-		$Replacement = new Replacement($searchValue, $replaceValue, true, false);
-		$Replacement->replaceInFiles($fileKeysArray);
-
-		return true;
+	/**
+	 * Initialize a new field results instance.
+	 *
+	 * @param string $key
+	 * @param array $matches
+	 * @param string $context
+	 */
+	public function __construct($key, $matches, $context) {
+		$this->key = $key;
+		$this->matches = $matches;
+		$this->context = $context;
 	}
 }

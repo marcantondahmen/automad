@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2019-2021 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,69 +36,72 @@
 
 namespace Automad\UI\Controllers;
 
-use Automad\Core\Cache;
 use Automad\Core\Request;
-use Automad\UI\Components\Form\HeadlessEditor;
+use Automad\UI\Components\Autocomplete\Jumpbar;
+use Automad\UI\Components\Autocomplete\Link;
+use Automad\UI\Components\Form\Field;
 use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\Text;
+use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The headless controller.
+ * The UI controller class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2019-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Headless extends \Automad\Core\Headless {
+class UIController {
 	/**
-	 * Save the updated template or render the editor in case no template was posted.
+	 * Return the autocomplete values for a search field.
 	 *
 	 * @return \Automad\UI\Response the response object
 	 */
-	public static function editTemplate() {
+	public static function autocompleteJump() {
+		$Automad = UICache::get();
+
+		return Jumpbar::render($Automad);
+	}
+
+	/**
+	 * Return the autocomplete values for a link field.
+	 *
+	 * @return \Automad\UI\Response the response object
+	 */
+	public static function autocompleteLink() {
+		$Automad = UICache::get();
+
+		return Link::render($Automad);
+	}
+
+	/**
+	 * Return the UI component for a variable field based on the name.
+	 *
+	 * @return \Automad\UI\Response the response object
+	 */
+	public static function field() {
 		$Response = new Response();
 
-		if ($template = Request::post('template')) {
-			if (FileSystem::write(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM, $template)) {
-				Cache::clear();
-				$Response->setSuccess(Text::get('success_saved'));
-			}
-		} else {
-			$Response->setHtml(HeadlessEditor::render(self::loadTemplate()));
+		if ($name = Request::post('name')) {
+			$Automad = UICache::get();
+			$Response->setHtml(Field::render($Automad, $name, '', true));
 		}
 
 		return $Response;
 	}
 
 	/**
-	 * Get the content of the template in use.
-	 *
-	 * @return string The content of the template in use
-	 */
-	public static function loadTemplate() {
-		$file = self::getTemplate();
-
-		if (is_readable($file)) {
-			return file_get_contents($file);
-		}
-	}
-
-	/**
-	 * Reset the headless template by deleting the custom template file.
+	 * Redirect to a given target URL.
 	 *
 	 * @return \Automad\UI\Response the response object
 	 */
-	public static function resetTemplate() {
+	public static function jump() {
 		$Response = new Response();
 
-		if (Request::post('reset')) {
-			if (FileSystem::deleteFile(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM)) {
-				Cache::clear();
-				$Response->setTrigger('resetHeadlessTemplate');
-				$Response->setSuccess(Text::get('success_reset_headless'));
+		if ($target = Request::post('target')) {
+			if (strpos($target, '?view=') !== false || $target == AM_BASE_INDEX) {
+				$Response->setRedirect($target);
 			}
 		}
 

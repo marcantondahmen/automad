@@ -38,7 +38,7 @@ namespace Automad\UI\Views;
 
 use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Components\Alert\Success;
-use Automad\UI\Controllers\User;
+use Automad\UI\Controllers\UserController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,7 +62,7 @@ class Logout extends View {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$isLoggedOut = User::logout();
+		$isLoggedOut = UserController::logout();
 		$fn = $this->fn;
 
 		return <<< HTML

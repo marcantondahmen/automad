@@ -40,7 +40,7 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Components\Layout\PageData;
-use Automad\UI\Models\Page as ModelsPage;
+use Automad\UI\Models\PageModel;
 use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Page {
+class PageController {
 	/**
 	 * Add page based on data in $_POST.
 	 *
@@ -72,7 +72,7 @@ class Page {
 
 			if (is_array($subpage) && !empty($subpage['title'])) {
 				// Check if the current page's directory is writable.
-				if (is_writable(dirname(ModelsPage::getPageFilePath($Page)))) {
+				if (is_writable(dirname(PageModel::getPageFilePath($Page)))) {
 					Debug::log($Page->url, 'page');
 					Debug::log($subpage, 'new subpage');
 
@@ -81,11 +81,11 @@ class Page {
 					$themeTemplate = self::getTemplateNameFromArray($subpage, 'theme_template');
 					$isPrivate = (!empty($subpage['private']));
 
-					$Response->setRedirect(ModelsPage::add($Page, $title, $themeTemplate, $isPrivate));
+					$Response->setRedirect(PageModel::add($Page, $title, $themeTemplate, $isPrivate));
 				} else {
 					$Response->setError(
 						Text::get('error_permission') .
-						'<p>' . dirname(ModelsPage::getPageFilePath($Page)) . '</p>'
+						'<p>' . dirname(PageModel::getPageFilePath($Page)) . '</p>'
 					);
 				}
 			} else {
@@ -143,9 +143,9 @@ class Page {
 		// Validate $_POST.
 		if ($url && ($Page = $Automad->getPage($url)) && $url != '/' && $title) {
 			// Check if the page's directory and parent directory are wirtable.
-			if (is_writable(dirname(ModelsPage::getPageFilePath($Page)))
-				&& is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
-				ModelsPage::delete($Page, $title);
+			if (is_writable(dirname(PageModel::getPageFilePath($Page)))
+				&& is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
+				PageModel::delete($Page, $title);
 
 				$Response->setRedirect('?view=Page&url=' . urlencode($Page->parentUrl));
 				Debug::log($Page->url, 'deleted');
@@ -154,7 +154,7 @@ class Page {
 			} else {
 				$Response->setError(
 					Text::get('error_permission') .
-					'<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>'
+					'<p>' . dirname(dirname(PageModel::getPageFilePath($Page))) . '</p>'
 				);
 			}
 		} else {
@@ -178,7 +178,7 @@ class Page {
 			if ($url != '/' && ($Page = $Automad->getPage($url))) {
 				// Check permissions.
 				if (is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
-					$Response->setRedirect(ModelsPage::duplicate($Page));
+					$Response->setRedirect(PageModel::duplicate($Page));
 				} else {
 					$Response->setError(Text::get('error_permission'));
 				}
@@ -214,17 +214,17 @@ class Page {
 				// Check if new parent directory is writable.
 				if (is_writable(FileSystem::fullPagePath($dest->path))) {
 					// Check if the current page's directory and parent directory is writable.
-					if (is_writable(dirname(ModelsPage::getPageFilePath($Page)))
-						&& is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
+					if (is_writable(dirname(PageModel::getPageFilePath($Page)))
+						&& is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
 						// Move page
-						$newPagePath = ModelsPage::moveDirAndUpdateLinks(
+						$newPagePath = PageModel::moveDirAndUpdateLinks(
 							$Page,
 							$dest->path,
-							ModelsPage::extractPrefixFromPath($Page->path),
-							ModelsPage::extractSlugFromPath($Page->path)
+							PageModel::extractPrefixFromPath($Page->path),
+							PageModel::extractSlugFromPath($Page->path)
 						);
 
-						$Response->setRedirect(ModelsPage::contextUrlByPath($newPagePath));
+						$Response->setRedirect(PageModel::contextUrlByPath($newPagePath));
 						Debug::log($Page->path, 'page');
 						Debug::log($dest->path, 'destination');
 
@@ -232,7 +232,7 @@ class Page {
 					} else {
 						$Response->setError(
 							Text::get('error_permission') .
-							'<p>' . dirname(dirname(ModelsPage::getPageFilePath($Page))) . '</p>'
+							'<p>' . dirname(dirname(PageModel::getPageFilePath($Page))) . '</p>'
 						);
 					}
 				} else {
@@ -290,15 +290,15 @@ class Page {
 			// Since the directory of the homepage is just "pages" and its parent directory
 			// is the base directory, it should not be necessary to set the base directoy permissions
 			// to 777, since the homepage directory will never be renamed or moved.
-			if ($url =='/' || is_writable(dirname(dirname(ModelsPage::getPageFilePath($Page))))) {
+			if ($url =='/' || is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
 				// Check if the page's file and the page's directory is writable.
-				if (is_writable(ModelsPage::getPageFilePath($Page))
-					&& is_writable(dirname(ModelsPage::getPageFilePath($Page)))) {
+				if (is_writable(PageModel::getPageFilePath($Page))
+					&& is_writable(dirname(PageModel::getPageFilePath($Page)))) {
 					// The theme and the template get passed as theme/template.php combination separate
 					// form $_POST['data']. That information has to be parsed first and "subdivided".
 					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
-					if ($redirectUrl = ModelsPage::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
+					if ($redirectUrl = PageModel::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
 						$Response->setRedirect($redirectUrl);
 					} else {
 						$Response->setSuccess(Text::get('success_saved'));

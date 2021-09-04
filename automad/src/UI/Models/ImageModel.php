@@ -38,7 +38,7 @@ namespace Automad\UI\Models;
 
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\Image as CoreImage;
+use Automad\Core\Image;
 use Automad\UI\Components\Layout\SelectImage;
 use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Image {
+class ImageModel {
 	/**
 	 * Copy an image resized based on $_POST.
 	 *
@@ -63,7 +63,7 @@ class Image {
 	 * @param string $crop
 	 * @param string $filename
 	 * @param string $url
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function copyResized($filename, $url, $width, $height, $crop) {
 		$Automad = UICache::get();
@@ -90,7 +90,7 @@ class Image {
 
 			if (file_exists($file)) {
 				if (is_writable($directory)) {
-					$img = new CoreImage(
+					$img = new Image(
 						$file,
 						$width,
 						$height,

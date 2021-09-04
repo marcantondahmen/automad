@@ -37,7 +37,7 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
-use Automad\UI\Models\File as ModelsFile;
+use Automad\UI\Models\FileModel;
 use Automad\UI\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class File {
+class FileController {
 	/**
 	 * Edit file information (file name and caption).
 	 *
@@ -59,7 +59,7 @@ class File {
 		$Response = new Response();
 
 		$Response->setError(
-			ModelsFile::editInfo(
+			FileModel::editInfo(
 				Request::post('new-name'),
 				Request::post('old-name'),
 				Request::post('caption')
@@ -78,7 +78,7 @@ class File {
 		$Response = new Response();
 
 		$Response->setError(
-			ModelsFile::import(
+			FileModel::import(
 				Request::post('importUrl'),
 				Request::post('url')
 			)

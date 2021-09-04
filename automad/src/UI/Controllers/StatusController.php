@@ -34,46 +34,27 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models\Search;
+namespace Automad\UI\Controllers;
+
+use Automad\Core\Request;
+use Automad\UI\Components\Status\Response;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A wrapper class for all results for a given data file.
+ * The status controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileResults {
+class StatusController {
 	/**
-	 * The array of `FieldResults`.
+	 * Get a config item status.
 	 *
-	 * @see \Automad\UI\Models\Search\FieldResults
+	 * @return \Automad\UI\Response the response object
 	 */
-	public $fieldResultsArray;
-
-	/**
-	 * The file path.
-	 */
-	public $path;
-
-	/**
-	 * The page URL or false for shared data.
-	 */
-	public $url;
-
-	/**
-	 * Initialize a new field results instance.
-	 *
-	 * @see \Automad\UI\Models\Search\FieldResults
-	 * @param string $path
-	 * @param array $fieldResultsArray
-	 * @param string $url
-	 */
-	public function __construct($path, $fieldResultsArray, $url = false) {
-		$this->path = $path;
-		$this->fieldResultsArray = $fieldResultsArray;
-		$this->url = $url;
+	public static function get() {
+		return Response::render(Request::post('item'));
 	}
 }
