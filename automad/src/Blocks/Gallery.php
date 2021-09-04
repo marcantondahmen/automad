@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Gallery extends Block {
+class Gallery extends AbstractBlock {
 	/**
 	 * Render a gallery block.
 	 *

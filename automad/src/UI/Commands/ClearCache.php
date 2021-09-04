@@ -47,7 +47,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ClearCache extends Command {
+class ClearCache extends AbstractCommand {
 	/**
 	 * Get the command help.
 	 *

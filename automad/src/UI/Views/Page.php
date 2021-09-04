@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Page extends View {
+class Page extends AbstractView {
 	/**
 	 * Render body.
 	 *

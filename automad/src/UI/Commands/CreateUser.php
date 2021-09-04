@@ -51,7 +51,7 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @license MIT license - https://automad.org/license
  */
 
-class CreateUser extends Command {
+class CreateUser extends AbstractCommand {
 
 
 	/**
