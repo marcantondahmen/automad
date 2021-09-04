@@ -56,18 +56,18 @@ class Config {
 	 */
 	public static function defaults() {
 		// Define debugging already here to be available when parsing the request.
-		Config::set('AM_DEBUG_ENABLED', false);
+		self::set('AM_DEBUG_ENABLED', false);
 
 		// Set base URL for all URLs relative to the root.
 		if (getenv('HTTP_X_FORWARDED_HOST') || getenv('HTTP_X_FORWARDED_SERVER')) {
 			// In case the site is behind a proxy, set AM_BASE_URL to AM_BASE_PROXY.
 			// AM_BASE_PROXY can be separately defined to enable running a site with and without a proxy in parallel.
-			Config::set('AM_BASE_PROXY', '');
-			Config::set('AM_BASE_URL', AM_BASE_PROXY);
+			self::set('AM_BASE_PROXY', '');
+			self::set('AM_BASE_URL', AM_BASE_PROXY);
 			Debug::log(getenv('HTTP_X_FORWARDED_SERVER'), 'Proxy');
 		} else {
 			// In case the site is not running behind a proxy server, just get the base URL from the script name.
-			Config::set('AM_BASE_URL', str_replace('/index.php', '', getenv('SCRIPT_NAME')));
+			self::set('AM_BASE_URL', str_replace('/index.php', '', getenv('SCRIPT_NAME')));
 		}
 
 		Debug::log(getenv('SERVER_SOFTWARE'), 'Server Software');
@@ -75,16 +75,16 @@ class Config {
 		// Check whether pretty URLs are enabled.
 		if ((strpos(strtolower(getenv('SERVER_SOFTWARE')), 'apache') !== false && file_exists(AM_BASE_DIR . '/.htaccess')) || strpos(strtolower(getenv('SERVER_SOFTWARE')), 'nginx') !== false) {
 			// If .htaccess exists on Apache or the server software is Nginx, assume that pretty URLs are enabled and AM_INDEX is empty.
-			Config::set('AM_INDEX', '');
+			self::set('AM_INDEX', '');
 			Debug::log('Pretty URLs are enabled.');
 		} else {
 			// For all other environments, AM_INDEX will be defined as fallback and pretty URLs are disabled.
-			Config::set('AM_INDEX', '/index.php');
+			self::set('AM_INDEX', '/index.php');
 			Debug::log('Pretty URLs are disabled');
 		}
 
 		// Define AM_BASE_INDEX as the prefix for all page URLs.
-		Config::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
+		self::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 
 		// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
 		self::set('AM_BASE_SITEMAP', '');
