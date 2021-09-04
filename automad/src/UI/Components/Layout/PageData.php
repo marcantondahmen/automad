@@ -46,9 +46,9 @@ use Automad\UI\Components\Form\CheckboxPrivate;
 use Automad\UI\Components\Form\Field;
 use Automad\UI\Components\Form\SelectTemplate;
 use Automad\UI\Models\PageModel;
-use Automad\UI\Models\ThemelistModel;
 use Automad\UI\Utils\Keys;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\Themelist;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -108,7 +108,7 @@ class PageData {
 	/**
 	 * The themelist object.
 	 */
-	private $ThemelistModel = null;
+	private $Themelist = null;
 
 	/**
 	 * All unused variable keys.
@@ -131,7 +131,7 @@ class PageData {
 		$this->Page = $Page;
 		$this->data = Parse::textFile(PageModel::getPageFilePath($Page));
 		$this->url = $Page->get(AM_KEY_URL);
-		$this->ThemelistModel = new ThemelistModel();
+		$this->Themelist = new Themelist();
 
 		$this->fn = function ($expression) {
 			return $expression;
@@ -161,7 +161,7 @@ class PageData {
 
 		// All other fields.
 		if (!AM_HEADLESS_ENABLED) {
-			$keys = Keys::inCurrentTemplate($Page, $this->ThemelistModel->getThemeByKey($Page->get(AM_KEY_THEME)));
+			$keys = Keys::inCurrentTemplate($Page, $this->Themelist->getThemeByKey($Page->get(AM_KEY_THEME)));
 		} else {
 			$keys = Keys::inTemplate(Headless::getTemplate());
 		}
@@ -179,7 +179,7 @@ class PageData {
 	 */
 	public function render() {
 		$fn = $this->fn;
-		$Theme = $this->ThemelistModel->getThemeByKey($this->Page->get(AM_KEY_THEME));
+		$Theme = $this->Themelist->getThemeByKey($this->Page->get(AM_KEY_THEME));
 
 		return <<< HTML
 			{$fn($this->title())}
@@ -306,7 +306,7 @@ HTML;
 		if ($this->data[AM_KEY_THEME]) {
 			$themePath = $this->data[AM_KEY_THEME];
 
-			if ($Theme = $this->ThemelistModel->getThemeByKey($this->data[AM_KEY_THEME])) {
+			if ($Theme = $this->Themelist->getThemeByKey($this->data[AM_KEY_THEME])) {
 				$themeName = $Theme->name . ' / ';
 			}
 		}
@@ -330,7 +330,7 @@ HTML;
 						{$fn(Text::get('page_theme_template'))}
 						<a href="#" class="uk-modal-close uk-close"></a>
 					</div>
-					{$fn(SelectTemplate::render($this->Automad, $this->ThemelistModel, 'theme_template', $this->data[AM_KEY_THEME], $this->Page->template))} 
+					{$fn(SelectTemplate::render($this->Automad, $this->Themelist, 'theme_template', $this->data[AM_KEY_THEME], $this->Page->template))} 
 					<div class="uk-modal-footer uk-text-right">
 						<button class="uk-modal-close uk-button">
 							<i class="uk-icon-close"></i>&nbsp;

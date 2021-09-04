@@ -41,10 +41,10 @@ use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\About;
 use Automad\UI\Components\Modal\AddPage;
-use Automad\UI\Models\ThemelistModel;
 use Automad\UI\Views\Elements\Navbar;
 use Automad\UI\Views\Elements\Sidebar;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\Themelist;
 use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -75,14 +75,14 @@ abstract class AbstractView {
 	/**
 	 * The Automad object.
 	 */
-	protected $ThemelistModel = null;
+	protected $Themelist = null;
 
 	/**
 	 * The page constructor.
 	 */
 	public function __construct() {
 		$this->Automad = UICache::get();
-		$this->ThemelistModel = new ThemelistModel();
+		$this->Themelist = new Themelist();
 		$this->fn = function ($expression) {
 			return $expression;
 		};
@@ -203,7 +203,7 @@ HTML;
 				</a>
 			</div>
 			{$fn(About::render('am-about-modal'))}
-			{$fn(AddPage::render($this->Automad, $this->ThemelistModel))}
+			{$fn(AddPage::render($this->Automad, $this->Themelist))}
 HTML;
 	}
 }

@@ -34,29 +34,28 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\UI\Utils;
 
 use Automad\Core\Debug;
 use Automad\Core\Str;
-use Automad\UI\Utils\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Themelist model.
+ * The Themelist utility class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2019 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ThemelistModel {
+class Themelist {
 	/**
 	 * An array of installed Composer packages.
 	 */
 	private $composerInstalled;
 
 	/**
-	 * The ThemeModel objects array.
+	 * The Theme objects array.
 	 */
 	private $themes;
 
@@ -83,9 +82,9 @@ class ThemelistModel {
 	}
 
 	/**
-	 * 	Return the ThemeModel objects array.
+	 * 	Return the Theme objects array.
 	 *
-	 * @return array The array of ThemeModel objects
+	 * @return array The array of Theme objects
 	 */
 	public function getThemes() {
 		return $this->themes;
@@ -117,7 +116,7 @@ class ThemelistModel {
 				if (is_readable($themeJSON) && is_array($templates) && $templates) {
 					// If a theme.json file and at least one .php file exist, use that directoy as a theme.
 					$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
-					$themes[$path] = new ThemeModel($themeJSON, $this->composerInstalled);
+					$themes[$path] = new Theme($themeJSON, $this->composerInstalled);
 				} else {
 					// Else check subdirectories for theme.json files.
 					$themes = array_merge($themes, $this->collectThemes($dir));

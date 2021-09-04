@@ -34,28 +34,27 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\UI\Utils;
 
 use Automad\Core\Str;
-use Automad\UI\Utils\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Theme model.
+ * The Theme utility class stores all meta data of an installed theme.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2019 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ThemeModel {
+class Theme {
 	/**
-	 * 	Theme data.
+	 * Theme data.
 	 */
 	public $data = array();
 
 	/**
-	 * 	The constructor.
+	 * The constructor.
 	 *
 	 * @param string $themeJSON
 	 * @param array $composerInstalled
@@ -147,7 +146,7 @@ class ThemeModel {
 	}
 
 	/**
-	 * 	Return the tooltip for the requested variable name (key in the data array).
+	 * Return the tooltip for the requested variable name (key in the data array).
 	 *
 	 * @param string $key
 	 * @return string The tooltip text
