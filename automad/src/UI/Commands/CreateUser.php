@@ -23,7 +23,7 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- * 
+ *
  *
  * AUTOMAD
  *
@@ -34,14 +34,11 @@
  * https://automad.org/license
  */
 
-
-
 namespace Automad\UI\Commands;
 
 use Automad\UI\Models\AccountsModel;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
-
 
 /**
  * The createuser command.
@@ -50,38 +47,29 @@ defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
  * @copyright Copyright (c) 2018-2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-
 class CreateUser extends AbstractCommand {
-
+	/**
+	 * Get the command help.
+	 *
+	 * @return string the command help
+	 */
+	public static function help() {
+		return 'Create a new user with a random name and password.';
+	}
 
 	/**
 	 * Get the command name.
 	 *
 	 * @return string the command name
 	 */
-
 	public static function name() {
 		return 'createuser';
 	}
 
-
-	/**
-	 * Get the command help.
-	 *
-	 * @return string the command help
-	 */
-
-	public static function help() {
-		return 'Create a new user with a random name and password.';
-	}
-
-
 	/**
 	 * The actual command action.
 	 */
-
 	public static function run() {
-		
 		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
 		if (is_readable(AM_FILE_ACCOUNTS)) {
@@ -102,8 +90,5 @@ class CreateUser extends AbstractCommand {
 		} else {
 			echo 'Error! Creating of user account failed.' . PHP_EOL;
 		}
-
 	}
-
-
 }
