@@ -37,12 +37,12 @@
  * Get system status items.
  *
  * To get the status of any config setting (constant),
- * 	the container has to have a 'data-am-status' attribute.
- *  The requested item for each container is then passed via
- *  'data-am-status="item"'.
+ * the container has to have a 'data-am-status' attribute.
+ * The requested item for each container is then passed via
+ * 'data-am-status="item"'.
  */
 
-+(function (Automad, $) {
++(function (Automad, $, UIkit) {
 	Automad.Status = {
 		dataAttr: 'data-am-status',
 
@@ -74,23 +74,25 @@
 				s.get();
 			});
 
-			$doc.ajaxComplete(function (e, xhr, settings) {
-				var triggers = [
-					'?controller=Accounts::edit',
-					'?controller=Accounts::add',
-					'?controller=Headless::editTemplate',
-					'?controller=Headless::resetTemplate',
-					'?controller=Config::update',
-					'?controller=PackageManager::getPackages',
-					'?controller=System::update',
-				];
+			$doc.ajaxComplete(
+				UIkit.Utils.debounce(function (e, xhr, settings) {
+					var triggers = [
+						'?controller=Accounts::edit',
+						'?controller=Accounts::add',
+						'?controller=Headless::editTemplate',
+						'?controller=Headless::resetTemplate',
+						'?controller=Config::update',
+						'?controller=PackageManager::getPackages',
+						'?controller=System::update',
+					];
 
-				if (triggers.includes(settings.url)) {
-					s.get();
-				}
-			});
+					if (triggers.includes(settings.url)) {
+						s.get();
+					}
+				}, 1000)
+			);
 		},
 	};
 
 	Automad.Status.init();
-})((window.Automad = window.Automad || {}), jQuery);
+})((window.Automad = window.Automad || {}), jQuery, UIkit);
