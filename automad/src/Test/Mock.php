@@ -1,4 +1,38 @@
 <?php
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ *
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
+ */
 
 namespace Automad\Test;
 
@@ -10,6 +44,13 @@ use PHPUnit\Framework\TestCase;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
+/**
+ * The test mock class.
+ *
+ * @author Marc Anton Dahmen
+ * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
+ * @license MIT license - https://automad.org/license
+ */
 class Mock extends TestCase {
 	/**
 	 * Create a mock of the Automad object with a single page.
