@@ -161,7 +161,7 @@ class Dashboard {
 		register_shutdown_function(function () {
 			$error = error_get_last();
 
-			if (is_array($error) && !empty($error['type'])) {
+			if (is_array($error) && !empty($error['type']) && $error['type'] === 1) {
 				http_response_code(500);
 				exit(json_encode($error, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 			}
