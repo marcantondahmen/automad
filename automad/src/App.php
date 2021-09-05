@@ -77,8 +77,6 @@ class App {
 		require_once __DIR__ . '/Autoload.php';
 		Autoload::init();
 
-		define('AM_CONFIG', AM_BASE_DIR . '/config/config.php');
-
 		Config::overrides();
 		Config::defaults();
 

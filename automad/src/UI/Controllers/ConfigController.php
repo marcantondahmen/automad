@@ -75,7 +75,7 @@ class ConfigController {
 					Cache::clear();
 					$Response->setReload(true);
 				} else {
-					$Response->setError(Text::get('error_permission') . '<br>' . AM_CONFIG);
+					$Response->setError(Text::get('error_permission') . '<br>' . Config::$file);
 				}
 			} else {
 				$Response->setError(Text::get('error_json'));
@@ -161,7 +161,7 @@ HTML;
 			$Response->setSuccess(Text::get('success_config_update'));
 			Cache::clear();
 		} else {
-			$Response->setError(Text::get('error_permission') . '<br>' . AM_CONFIG);
+			$Response->setError(Text::get('error_permission') . '<br>' . Config::$file);
 		}
 
 		return $Response;

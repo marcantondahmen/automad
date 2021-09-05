@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Modal;
 
+use Automad\Core\Config;
 use Automad\Core\Str;
 use Automad\UI\Utils\Text;
 
@@ -57,7 +58,7 @@ class EditConfig {
 	 */
 	public static function render($id) {
 		$Text = Text::getObject();
-		$file = Str::stripStart(AM_CONFIG, AM_BASE_DIR);
+		$file = Str::stripStart(Config::$file, AM_BASE_DIR);
 
 		return <<< HTML
 				<div id="$id" class="uk-modal">
