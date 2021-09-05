@@ -39,7 +39,7 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * 	The Toolbox class holds all methods to be used within the template files.
+ * The Toolbox class holds all methods to be used within the template files.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Toolbox {
 	/**
-	 * 	Automad object.
+	 * Automad object.
 	 */
 	private $Automad;
 
@@ -57,25 +57,26 @@ class Toolbox {
 	private $collection;
 
 	/**
-	 * 	The Automad object is passed as an argument. It shouldn't be created again (performance).
-	 * @param mixed $Automad
+	 * The Automad object is passed as an argument. It shouldn't be created again (performance).
+	 *
+	 * @param Automad $Automad
 	 */
-	public function __construct($Automad) {
+	public function __construct(Automad $Automad) {
 		$this->Automad = $Automad;
 		$this->collection = $this->Automad->getCollection();
 	}
 
 	/**
-	 * 	Generate breadcrumbs to the current page, if the page's level is > 0 (not homepage / search results / page not found).
+	 * Generate breadcrumbs to the current page, if the page's level is > 0 (not homepage / search results / page not found).
 	 *
-	 * 	Options:
-	 * 	- class: false (class of <ul> element)
-	 * 	- excludeHidden: false (exclude hidden pages)
+	 * Options:
+	 * - class: false (class of <ul> element)
+	 * - excludeHidden: false (exclude hidden pages)
 	 *
 	 * @param array $options
 	 * @return string The HTML of a breadcrumb navigation
 	 */
-	public function breadcrumbs($options = array()) {
+	public function breadcrumbs(array $options = array()) {
 		if ($this->Automad->Context->get()->level > 0) {
 			$options = 	array_merge(
 				array(
@@ -107,30 +108,30 @@ class Toolbox {
 	}
 
 	/**
-	 * 	Configure the filelist to be used in foreach loops.
+	 * Configure the filelist to be used in foreach loops.
 	 *
 	 * @param array $options
 	 */
-	public function filelist($options = array()) {
+	public function filelist(array $options = array()) {
 		$this->Automad->getFilelist()->config($options);
 	}
 
 	/**
 	 * Place an image.
 	 *
-	 * 	Options:
-	 *  - file: false (filepath or glob pattern - when using a glob pattern, the first match is used)
-	 *  - width: false (width in pixels)
-	 *  - height: false (height in pixels)
-	 *  - crop: false (crop image)
-	 *  - class: false (class for the <img /> element)
+	 * Options:
+	 * - file: false (filepath or glob pattern - when using a glob pattern, the first match is used)
+	 * - width: false (width in pixels)
+	 * - height: false (height in pixels)
+	 * - crop: false (crop image)
+	 * - class: false (class for the <img /> element)
 	 *
 	 * @param array $options - (file: path/to/file (or glob pattern), width: px, height: px, crop: 1)
 	 * @return string The HTML for the image output
 	 */
-	public function img($options = array()) {
+	public function img(array $options = array()) {
 		// Default options
-		$defaults = 	array(
+		$defaults = array(
 			'file' => false,
 			'width' => false,
 			'height' => false,
@@ -161,18 +162,18 @@ class Toolbox {
 	/**
 	 * Generate a list for the navigation below a given URL.
 	 *
-	 * 	Options:
-	 * 	- context: '/' (The parent URL)
-	 *  - hompage: false (include homepage to first-level nav)
-	 *  - excludeHidden: true (exclude hidden pages)
-	 *  - class: false (class of the <ul> element)
-	 *  - active: false (class of the active <li> element)
+	 * Options:
+	 * - context: '/' (The parent URL)
+	 * - hompage: false (include homepage to first-level nav)
+	 * - excludeHidden: true (exclude hidden pages)
+	 * - class: false (class of the <ul> element)
+	 * - active: false (class of the active <li> element)
 	 *
 	 * @param array $options
 	 * @return string The HTML of a navigation list
 	 */
-	public function nav($options = array()) {
-		$defaults = 	array(
+	public function nav(array $options = array()) {
+		$defaults = array(
 			'context' => '/',
 			'homepage' => false,
 			'excludeHidden' => true,
@@ -226,24 +227,24 @@ class Toolbox {
 
 	/**
 	 * Generate a list for the navigation below the current page.
-	 *  Options are the same like those for nav() except the 'context' option.
+	 * Options are the same like those for nav() except the 'context' option.
 	 *
 	 * @param array $options
 	 * @return string The HTML of the navigation list
 	 */
-	public function navChildren($options = array()) {
+	public function navChildren(array $options = array()) {
 		// Always set 'context' to the current page's URL by merging that parameter with the other specified options.
 		return $this->nav(array_merge($options, array('context' => $this->Automad->Context->get()->url)));
 	}
 
 	/**
 	 * Generate a list for the navigation below the current page's parent.
-	 *  Options are the same like those for nav() except the 'context' option.
+	 * Options are the same like those for nav() except the 'context' option.
 	 *
 	 * @param array $options
 	 * @return string The HTML of the navigation list
 	 */
-	public function navSiblings($options = array()) {
+	public function navSiblings(array $options = array()) {
 		// Set context to current parentUrl and overwrite passed options
 		return $this->nav(array_merge($options, array('context' => $this->Automad->Context->get()->parentUrl)));
 	}
@@ -255,27 +256,27 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The HTML of the navigation list
 	 */
-	public function navTop($options = array()) {
+	public function navTop(array $options = array()) {
 		// Set context to '/' and overwrite passed options.
 		return $this->nav(array_merge($options, array('context' => '/')));
 	}
 
 	/**
-	 * 	Generate full navigation tree.
+	 * Generate full navigation tree.
 	 *
-	 *  Options:
-	 *  - all: true (expand all pages or only in current path)
-	 *  - context: '' (parent URL)
-	 *  - rootLevel: false (a kind of flexible context page at a given level)
-	 *  - excludeHidden: true (exclude hidden pages)
-	 *  - class: false (class of the <ul> element)
-	 *  - active: false (class of the active <li> element)
+	 * Options:
+	 * - all: true (expand all pages or only in current path)
+	 * - context: '' (parent URL)
+	 * - rootLevel: false (a kind of flexible context page at a given level)
+	 * - excludeHidden: true (exclude hidden pages)
+	 * - class: false (class of the <ul> element)
+	 * - active: false (class of the active <li> element)
 	 *
 	 * @param array $options - (all: expand all pages (boolean), context: "/parenturl", rootLevel: integer)
 	 * @return string The HTML of the tree
 	 */
-	public function navTree($options = array()) {
-		$defaults = 	array(
+	public function navTree(array $options = array()) {
+		$defaults = array(
 			'all' => true,
 			'context' => '',
 			'rootLevel' => false,
@@ -355,7 +356,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function newPagelist($options = array()) {
+	public function newPagelist(array $options = array()) {
 		$this->pagelist(array_merge($this->Automad->getPagelist()->getDefaults(), $options));
 	}
 
@@ -378,7 +379,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function pagelist($options = array()) {
+	public function pagelist(array $options = array()) {
 		$this->Automad->getPagelist()->config($options);
 	}
 
@@ -388,7 +389,7 @@ class Toolbox {
 	 * @param array $options
 	 * @return string The merged query string
 	 */
-	public function queryStringMerge($options) {
+	public function queryStringMerge(array $options) {
 		return http_build_query(array_merge($_GET, $options));
 	}
 
@@ -397,8 +398,8 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function redirect($options) {
-		$options = 	array_merge(array(
+	public function redirect(array $options) {
+		$options = array_merge(array(
 			'url' => false,
 			'code' => 302
 		), $options);
@@ -414,7 +415,7 @@ class Toolbox {
 	 *
 	 * @param array $options
 	 */
-	public function set($options) {
+	public function set(array $options) {
 		foreach ($options as $key => $value) {
 			if (preg_match('/' . Regex::$charClassAllVariables . '/', $key)) {
 				if (strpos($key, '%') === 0) {

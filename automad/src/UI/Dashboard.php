@@ -142,10 +142,10 @@ class Dashboard {
 	/**
 	 * Test whether a file of a given class is readable.
 	 *
-	 * @param mixed $className
-	 * @return boolean true in case the file is readable.
+	 * @param string $className
+	 * @return bool true in case the file is readable.
 	 */
-	private function classFileExists($className) {
+	private function classFileExists(string $className) {
 		$prefix = 'Automad\\';
 		$file = AM_BASE_DIR . '/automad/src/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
 

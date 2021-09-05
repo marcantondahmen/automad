@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
 use Automad\Core\Parse;
 use Automad\Core\Image;
 
@@ -53,10 +54,10 @@ class Slider extends AbstractBlock {
 	 * Render a slider block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		if (!empty($data->globs) && !empty($data->width) && !empty($data->height)) {
 			if ($files = Parse::fileDeclaration($data->globs, $Automad->Context->get())) {
 				$files = array_filter($files, function ($file) {

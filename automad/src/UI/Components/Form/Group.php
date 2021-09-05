@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\Form;
 
+use Automad\Core\Automad;
+use Automad\System\Theme;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,14 +56,14 @@ class Group {
 	 *  Passing a string for $addVariableIdPrefix will create the required markup for a modal dialog to add variables.
 	 *  Note used prefix must match the ID selectors defined in 'add_variable.js'.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param array $keys
 	 * @param array $data
-	 * @param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
-	 * @param object $Theme
+	 * @param string|null $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
+	 * @param Theme|null $Theme
 	 * @return string The HTML for the textarea
 	 */
-	public static function render($Automad, $keys, $data = array(), $addVariableIdPrefix = false, $Theme = false) {
+	public static function render(Automad $Automad, array $keys, array $data = array(), ?string $addVariableIdPrefix = null, ?Theme $Theme = null) {
 		$Text = Text::getObject();
 		$html = '';
 

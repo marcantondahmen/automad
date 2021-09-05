@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Link {
 	/**
-	 *  Create the modal dialog for adding links.
+	 * Create the modal dialog for adding links.
 	 *
 	 * @return string The HTML for the modal dialog
 	 */
@@ -60,7 +60,6 @@ class Link {
 		$autocomplete = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?controller=UI::autocompleteLink';
 
 		return <<< HTML
-
 			<div id="am-link-modal" class="uk-modal">
 				<div class="uk-modal-dialog">
 					<div class="uk-modal-header">
@@ -93,7 +92,6 @@ class Link {
 					</div>
 				</div>
 			</div>
-
 HTML;
 	}
 }

@@ -56,10 +56,9 @@ class Navbar {
 	/**
 	 * Render the dashboard navbar.
 	 *
-	 * @param object $Automad
 	 * @return string the rendered dashboard navbar
 	 */
-	public static function render($Automad) {
+	public static function render() {
 		if (!UserModel::getName()) {
 			return false;
 		}
@@ -69,7 +68,6 @@ class Navbar {
 		};
 
 		return <<< HTML
-		
 			<nav class="am-navbar">
 				<div class="am-navbar-nav">
 					<div class="am-navbar-logo">

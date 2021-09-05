@@ -49,16 +49,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Import {
 	/**
-	 *  Create the import modal dialog.
+	 * Create the import modal dialog.
 	 *
-	 * @param string $url
+	 * @param string|null $url
 	 * @return string The HTML for the modal dialog
 	 */
-	public static function render($url = false) {
+	public static function render(?string $url = null) {
 		$Text = Text::getObject();
 
 		return <<< HTML
-
 				<div 
 				id="am-import-modal" 
 				class="uk-modal" 
@@ -77,7 +76,6 @@ class Import {
 						</div>
 					</div>
 				</div>
-
 HTML;
 	}
 }

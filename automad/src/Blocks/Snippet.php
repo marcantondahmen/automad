@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\View;
 
@@ -58,10 +59,10 @@ class Snippet {
 	 * Render a snippet block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		// Prevent infinite recursion.
 		if (self::$snippetIsRendering) {
 			return false;

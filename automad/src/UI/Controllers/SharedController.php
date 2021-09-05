@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Controllers;
 
+use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Request;
 use Automad\UI\Components\Layout\SharedData;
@@ -57,7 +58,7 @@ class SharedController {
 	/**
 	 * Send form when there is no posted data in the request or save data if there is.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function data() {
 		$Automad = UICache::get();
@@ -78,11 +79,11 @@ class SharedController {
 	/**
 	 * Save shared data.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param array $data
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
-	private static function save($Automad, $data) {
+	private static function save(Automad $Automad, array $data) {
 		$Response = new Response();
 
 		if (is_writable(AM_FILE_SHARED_DATA)) {

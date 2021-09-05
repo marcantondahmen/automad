@@ -83,7 +83,7 @@ class AccountsController {
 	 * Optionally remove posted accounts and
 	 * return the accounts grid.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function edit() {
 		$Response = new Response();
@@ -123,9 +123,9 @@ class AccountsController {
 	 *
 	 * @param string $password (clear text)
 	 * @param string $hash (hashed password)
-	 * @return boolean true/false
+	 * @return bool true/false
 	 */
-	public static function passwordVerified($password, $hash) {
+	public static function passwordVerified(string $password, string $hash) {
 		return AccountsModel::passwordVerified($password, $hash);
 	}
 
@@ -133,9 +133,9 @@ class AccountsController {
 	 * Delete one ore more user accounts.
 	 *
 	 * @param array $users
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
-	private static function delete($users) {
+	private static function delete(array $users) {
 		$Response = new Response();
 
 		$Response->setError(AccountsModel::delete($users));
@@ -150,7 +150,7 @@ class AccountsController {
 	/**
 	 * A response containing the invalid username error message.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	private static function invalidUsernameResponse() {
 		$Response = new Response();
@@ -163,9 +163,9 @@ class AccountsController {
 	 * Verify if a given username is valid.
 	 *
 	 * @param string $username
-	 * @return boolean true in case the username is valid
+	 * @return bool true in case the username is valid
 	 */
-	private static function validUsername($username) {
+	private static function validUsername(string $username) {
 		preg_match('/[^@\w\.\-]/', $username, $matches);
 
 		return empty($matches);

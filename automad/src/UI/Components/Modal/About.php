@@ -49,12 +49,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class About {
 	/**
-	 * 	Renders the about modal.
+	 * Renders the about modal.
 	 *
 	 * @param string $id
 	 * @return string The rendered HTML
 	 */
-	public static function render($id) {
+	public static function render(string $id) {
 		$Text = Text::getObject();
 		$logo = file_get_contents(AM_BASE_DIR . '/automad/ui/svg/logo.svg');
 		$version = AM_VERSION;

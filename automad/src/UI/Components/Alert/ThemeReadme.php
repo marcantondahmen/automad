@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Alert;
 
+use Automad\System\Theme;
 use Automad\UI\Components\Modal\Readme;
 use Automad\UI\Utils\Text;
 
@@ -52,11 +53,11 @@ class ThemeReadme {
 	/**
 	 * Render a theme readme alert box.
 	 *
-	 * @param object $Theme
+	 * @param Theme $Theme
 	 * @param string $id
 	 * @return string The rendered alert box markup
 	 */
-	public static function render($Theme, $id = 'am-readme-modal') {
+	public static function render(Theme $Theme, string $id = 'am-readme-modal') {
 		if (!AM_HEADLESS_ENABLED) {
 			$Text = Text::getObject();
 

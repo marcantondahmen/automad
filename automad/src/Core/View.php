@@ -36,12 +36,12 @@
 
 namespace Automad\Core;
 
-use Automad\UI as UI;
+use Automad\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * 	The View class holds all methods to render the current page using a template file.
+ * The View class holds all methods to render the current page using a template file.
  *
  * When render() is called, first the template file gets loaded.
  * The output, basically the raw template HTML (including the generated HTML by PHP in the template file)
@@ -61,17 +61,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class View {
 	/**
-	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
+	 * Multidimensional array of collected extension assets grouped by type (CSS/JS).
 	 */
 	public $extensionAssets = array();
 
 	/**
-	 * 	The Automad object.
+	 * The Automad object.
 	 */
 	private $Automad;
 
 	/**
-	 * 	Set the headless mode for the current view.
+	 * Set the headless mode for the current view.
 	 */
 	private $headless;
 
@@ -86,7 +86,7 @@ class View {
 	private $Runtime;
 
 	/**
-	 * 	An array of snippets defined within a template.
+	 * An array of snippets defined within a template.
 	 */
 	private $snippets = array();
 
@@ -96,22 +96,22 @@ class View {
 	private $template;
 
 	/**
-	 * 	The Toolbox object.
+	 * The Toolbox object.
 	 */
 	private $Toolbox;
 
 	/**
 	 * Define $Automad and $Page, check if the page gets redirected and get the template name.
 	 *
-	 * @param object $Automad
-	 * @param boolean $headless
+	 * @param Automad $Automad
+	 * @param bool $headless
 	 */
-	public function __construct($Automad, $headless = false) {
+	public function __construct(Automad $Automad, bool $headless = false) {
 		$this->Automad = $Automad;
 		$this->headless = $headless;
 		$this->Runtime = new Runtime($Automad);
 		$this->Toolbox = new Toolbox($Automad);
-		$this->InPage = new UI\InPage();
+		$this->InPage = new InPage();
 		$Page = $Automad->Context->get();
 
 		// Redirect page, if the defined URL variable differs from the original URL.
@@ -134,7 +134,8 @@ class View {
 	/**
 	 * Process the full markup - variables, includes, methods and other constructs.
 	 *
-	 * 	Replace variable keys with its values, call Toolbox methods, call Extensions, execute statements (with, loops and conditions) and include template elements recursively.
+	 * Replace variable keys with its values, call Toolbox methods, call Extensions,
+	 * execute statements (with, loops and conditions) and include template elements recursively.
 	 * For example <@ file.php @>, <@ method { options } @>, <@ foreach in ... @> ... <@ end @> or <@ if @{var} @> ... <@ else @> ... <@ end @>.
 	 *
 	 * With and foreach:
@@ -156,7 +157,7 @@ class View {
 	 * - @{:heightResized}
 	 * - @{:caption}
 	 *
-	 *  Tags/Filters:
+	 * Tags/Filters:
 	 * Inside other foreach loops, the following runtime variables can be used within a snippet:
 	 * - @{:filter}
 	 * - @{:tag}
@@ -167,7 +168,7 @@ class View {
 	 * @param string $directory - The directory of the currently included file/template
 	 * @return string The interpreted string
 	 */
-	public function interpret($str, $directory) {
+	public function interpret(string $str, string $directory) {
 		// Strip whitespace.
 		$str = $this->stripWhitespace($str);
 
@@ -175,7 +176,7 @@ class View {
 		$str = $this->preProcessWrappingStatements($str);
 
 		$str = preg_replace_callback('/' . Regex::markup() . '/is', function ($matches) use ($directory) {
-				// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
+			// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 			// In-page editing gets enabled here.
 			if (!empty($matches['var'])) {
 				return $this->processContent($matches['var'], false, true);
@@ -210,17 +211,17 @@ class View {
 
 				// Call snippet or method in order of priority: Snippets, Toolbox methods and extensions.
 				if (array_key_exists($call, $this->snippets)) {
-						// Process a registered snippet.
+					// Process a registered snippet.
 					Debug::log($call, 'Process registered snippet');
 
 					return $this->interpret($this->snippets[$call], $directory);
 				} elseif (method_exists($this->Toolbox, $call)) {
-						// Call a toolbox method, in case there is no matching snippet.
+					// Call a toolbox method, in case there is no matching snippet.
 					Debug::log($options, 'Calling method ' . $call . ' and passing the following options');
 
 					return $this->Toolbox->$call($options);
 				} else {
-						// Try an extension, if no snippet or toolbox method was found.
+					// Try an extension, if no snippet or toolbox method was found.
 					Debug::log($call . ' is not a snippet or core method. Will look for a matching extension ...');
 					$Extension = new Extension($call, $options, $this->Automad);
 					$this->mergeExtensionAssets($Extension->getAssets());
@@ -242,7 +243,7 @@ class View {
 
 				// Previous or next page. Use lowercase matches to be case insensitive.
 				if (strtolower($matches['with']) == 'prev' || strtolower($matches['with']) == 'next') {
-						// Cache the current pagelist config and temporary disable the excludeHidden parameter to also
+					// Cache the current pagelist config and temporary disable the excludeHidden parameter to also
 					// get the neighbors of a hidden page.
 					$pagelistConfigShelf = $this->Automad->getPagelist()->config();
 					$this->Automad->getPagelist()->config(array('excludeHidden' => false));
@@ -350,7 +351,7 @@ class View {
 				$runtimeShelf = $this->Runtime->shelve();
 
 				if (strtolower($matches['foreach']) == 'pagelist') {
-						// Pagelist
+					// Pagelist
 
 					// Get pages.
 					$pages = $this->Automad->getPagelist()->getPages();
@@ -385,7 +386,7 @@ class View {
 					// Restore context.
 					$Context->set($contextShelf);
 				} elseif (strtolower($matches['foreach']) == 'filters') {
-						// Filters (tags of the pages in the pagelist)
+					// Filters (tags of the pages in the pagelist)
 					// Each filter can be used as @{:filter} within a snippet.
 
 					foreach ($this->Automad->getPagelist()->getTags() as $filter) {
@@ -397,7 +398,7 @@ class View {
 						$html .= $this->interpret($foreachSnippet, $directory);
 					}
 				} elseif (strtolower($matches['foreach']) == 'tags') {
-						// Tags (of the current page)
+					// Tags (of the current page)
 					// Each tag can be used as @{:tag} within a snippet.
 
 					foreach ($Context->get()->tags as $tag) {
@@ -409,7 +410,7 @@ class View {
 						$html .= $this->interpret($foreachSnippet, $directory);
 					}
 				} else {
-						// Files
+					// Files
 					// The file path and the basename can be used like @{:file} and @{:basename} within a snippet.
 
 					if (strtolower($matches['foreach']) == 'filelist') {
@@ -459,9 +460,9 @@ class View {
 
 				// Process each part and merge the partial result with the final result.
 				foreach ($parts as $part) {
-						// Separate comparisons from boolean expressions and get a partial result.
+					// Separate comparisons from boolean expressions and get a partial result.
 					if (!empty($part['expressionOperator'])) {
-							// Comparison.
+						// Comparison.
 
 						// Merge default keys with $part to make sure each key exists in $part without testing.
 						$part = array_merge(
@@ -520,7 +521,7 @@ class View {
 									break;
 							}
 					} else {
-							// Boolean.
+						// Boolean.
 
 						// Get the value of the given variable.
 						$expressionVar = $this->processContent($part['expressionVar']);
@@ -570,7 +571,7 @@ class View {
 	 *
 	 * @param array $assets (Array containing two sub-arrays: $assets['.css'] and $assets['.js'])
 	 */
-	public function mergeExtensionAssets($assets) {
+	public function mergeExtensionAssets(array $assets) {
 		// Make sure, $this->extensionAssets has a basic structure to enable merging new assets.
 		$this->extensionAssets = array_merge(array('.css' => array(), '.js' => array()), $this->extensionAssets);
 
@@ -588,7 +589,7 @@ class View {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	public function obfuscateEmails($str) {
+	public function obfuscateEmails(string $str) {
 		if ($this->headless) {
 			return $str;
 		}
@@ -600,8 +601,8 @@ class View {
 		// within <a></a> tags from stand-alone ones.
 		$regex = '/(<a\s[^>]*href="mailto.+?<\/a>|(?P<email>' . $regexEmail . '))/is';
 
-		return 	preg_replace_callback($regex, function ($matches) {
-				// Only stand-alone addresses are obfuscated.
+		return preg_replace_callback($regex, function ($matches) {
+			// Only stand-alone addresses are obfuscated.
 			if (!empty($matches['email'])) {
 				Debug::log($matches['email'], 'Obfuscating');
 
@@ -619,7 +620,7 @@ class View {
 	}
 
 	/**
-	 * 	Render the current page.
+	 * Render the current page.
 	 *
 	 * @return string The fully rendered HTML for the current page.
 	 */
@@ -646,7 +647,7 @@ class View {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	public function resizeImages($str) {
+	public function resizeImages(string $str) {
 		return preg_replace_callback('/(\/[\w\.\-\/]+(?:jpg|jpeg|gif|png))\?(\d+)x(\d+)/is', function ($match) {
 			$file = AM_BASE_DIR . $match[1];
 
@@ -668,11 +669,11 @@ class View {
 	 * @param array $parameters
 	 * @return string The processed string
 	 */
-	public function resolveUrls($str, $method, $parameters = array()) {
+	public function resolveUrls(string $str, string $method, array $parameters = array()) {
 		$method = '\Automad\Core\Resolve::' . $method;
 
 		// Find URLs in markdown like ![...](image.jpg?100x100).
-		$str =	preg_replace_callback('/(\!\[[^\]]*\]\()([^\)]+\.(?:jpg|jpeg|gif|png))([^\)]*\))/is', function ($match) use ($method, $parameters) {
+		$str = preg_replace_callback('/(\!\[[^\]]*\]\()([^\)]+\.(?:jpg|jpeg|gif|png))([^\)]*\))/is', function ($match) use ($method, $parameters) {
 			$parameters = array_merge(array(0 => $match[2]), $parameters);
 			$url = call_user_func_array($method, $parameters);
 
@@ -684,30 +685,30 @@ class View {
 		}, $str);
 
 		// Remove all temporary edit buttons inside HTML tags to avoid confusing the URL resolver.
-		$str = 	preg_replace_callback(
+		$str = preg_replace_callback(
 			'/<([^>]+)>/s',
 			function ($match) {
-						return '<' . preg_replace('/' . Regex::inPageEditButton() . '/s', '', $match[1]) . '>';
-					},
+				return '<' . preg_replace('/' . Regex::inPageEditButton() . '/s', '', $match[1]) . '>';
+			},
 			$str
 		);
 
 		// Find URLs in action, href and src attributes.
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback(
+		$str = preg_replace_callback(
 			'/(<[^>]+(?:action|href|src))=((?:\\\\)?")(.+?)((?:\\\\)?")/is',
 			function ($match) use ($method, $parameters) {
-						$parameters = array_merge(array(0 => $match[3]), $parameters);
-						$url = call_user_func_array($method, $parameters);
-						// Matches 2 and 4 are quotes.
-						return $match[1] . '=' . $match[2] . $url . $match[4];
-					},
+				$parameters = array_merge(array(0 => $match[3]), $parameters);
+				$url = call_user_func_array($method, $parameters);
+				// Matches 2 and 4 are quotes.
+				return $match[1] . '=' . $match[2] . $url . $match[4];
+			},
 			$str
 		);
 
 		// Inline styles (like background-image).
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+)url\(\'?(.+?)\'?\)/is', function ($match) use ($method, $parameters) {
+		$str = preg_replace_callback('/(<[^>]+)url\(\'?(.+?)\'?\)/is', function ($match) use ($method, $parameters) {
 			$parameters = array_merge(array(0 => $match[2]), $parameters);
 			$url = call_user_func_array($method, $parameters);
 
@@ -716,7 +717,7 @@ class View {
 
 		// Image srcset attributes.
 		// Note that all URLs in markdown code blocks will be ignored (<[^>]+).
-		$str = 	preg_replace_callback('/(<[^>]+srcset)=((?:\\\\)?")([^"]+)((?:\\\\)?")/is', function ($match) use ($method, $parameters) {
+		$str = preg_replace_callback('/(<[^>]+srcset)=((?:\\\\)?")([^"]+)((?:\\\\)?")/is', function ($match) use ($method, $parameters) {
 			$urls = preg_replace_callback('/([^,\s]+)\s+(\w+)/is', function ($match) use ($method, $parameters) {
 				$parameters = array_merge(array(0 => $match[1]), $parameters);
 
@@ -735,19 +736,19 @@ class View {
 	 * @param string $str
 	 * @return string The meta tag
 	 */
-	private function addMetaTags($str) {
+	private function addMetaTags(string $str) {
 		$meta =  "\n\t" . '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
 
 		return str_replace('<head>', '<head>' . $meta, $str);
 	}
 
 	/**
-	 * 	Create the HTML tags for each file in $this->extensionAssets and prepend them to the closing </head> tag.
+	 * Create the HTML tags for each file in $this->extensionAssets and prepend them to the closing </head> tag.
 	 *
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	private function createExtensionAssetTags($str) {
+	private function createExtensionAssetTags(string $str) {
 		Debug::log($this->extensionAssets, 'Assets');
 
 		$html = '';
@@ -776,7 +777,7 @@ class View {
 	 * @param string $key
 	 * @return string The value
 	 */
-	private function getValue($key) {
+	private function getValue(string $key) {
 		if (strpos($key, '?') === 0) {
 			// Query string parameter.
 			$key = substr($key, 1);
@@ -805,12 +806,12 @@ class View {
 	}
 
 	/**
-	 * 	Preprocess recursive statements to identify the top-level (outer) statements within a parsed string.
+	 * Preprocess recursive statements to identify the top-level (outer) statements within a parsed string.
 	 *
 	 * @param string $str
 	 * @return string The preprocessed $str where all outer opening statement delimiters get an additional marker appended.
 	 */
-	private function preProcessWrappingStatements($str) {
+	private function preProcessWrappingStatements(string $str) {
 		$depth = 0;
 		$regex = 	'/(' .
 					'(?P<begin>' . preg_quote(AM_DEL_STATEMENT_OPEN) . '\s*(?:if|for|foreach|with|snippet)\s.*?' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')|' .
@@ -819,7 +820,7 @@ class View {
 					')/is';
 
 		return 	preg_replace_callback($regex, function ($match) use (&$depth) {
-				// Convert $match to the actually needed string.
+			// Convert $match to the actually needed string.
 			$return = array_unique($match);
 			$return = array_filter($return);
 			$return = implode($return);
@@ -854,15 +855,15 @@ class View {
 	 * In case a variable is used as an option value for a method and is not part of a string, that variable doesn't need to be
 	 * wrapped in double quotes to work within the JSON string - the double quotes get added automatically.
 	 *
-	 *  By setting $inPageEdit to true, for every processed variable, a temporary markup for an edit button is appended to the actual value.
-	 *  That temporary button still has to be processed later by calling processInPageEditButtons().
+	 * By setting $inPageEdit to true, for every processed variable, a temporary markup for an edit button is appended to the actual value.
+	 * That temporary button still has to be processed later by calling processInPageEditButtons().
 	 *
 	 * @param string $str
-	 * @param boolean $isOptionString
-	 * @param boolean $inPageEdit
+	 * @param bool $isOptionString
+	 * @param bool $inPageEdit
 	 * @return string The processed $str
 	 */
-	private function processContent($str, $isOptionString = false, $inPageEdit = false) {
+	private function processContent(string $str, bool $isOptionString = false, bool $inPageEdit = false) {
 		// Prepare JSON strings by wrapping all stand-alone variables in quotes.
 		if ($isOptionString) {
 			$str = preg_replace_callback('/' . Regex::keyValue() . '/s', function ($pair) {
@@ -875,7 +876,7 @@ class View {
 		}
 
 		return 	preg_replace_callback('/' . Regex::variable('var') . '/s', function ($matches) use ($isOptionString, $inPageEdit) {
-				// Get the value.
+			// Get the value.
 			$value = $this->getValue($matches['varName']);
 
 			// Resolve URLs in content before passing it to pipe functions
@@ -956,7 +957,7 @@ class View {
 	 * @param string $directory
 	 * @return string $html
 	 */
-	private function processFileSnippet($file, $options, $snippet, $directory) {
+	private function processFileSnippet(string $file, array $options, string $snippet, string $directory) {
 		// Shelve runtime data.
 		$runtimeShelf = $this->Runtime->shelve();
 
@@ -1004,7 +1005,7 @@ class View {
 	 * @param string $str
 	 * @return string The processed string
 	 */
-	private function stripWhitespace($str) {
+	private function stripWhitespace(string $str) {
 		$str = preg_replace('/\s*(' . preg_quote(AM_DEL_STATEMENT_OPEN) . ')~/is', '$1', $str);
 		$str = preg_replace('/~(' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')\s*/is', '$1', $str);
 

@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Nav;
 
+use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\Core\Selection;
 
@@ -52,10 +53,10 @@ class Breadcrumbs {
 	/**
 	 * Create a breadcrumb navigation based on $_GET.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string The breadcrumb naviagtion markup
 	 */
-	public static function render($Automad) {
+	public static function render(Automad $Automad) {
 		$Selection = new Selection($Automad->getCollection());
 		$Selection->filterBreadcrumbs(Request::query('url'));
 		$pages = $Selection->getSelection(false);

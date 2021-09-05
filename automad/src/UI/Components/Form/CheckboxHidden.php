@@ -52,10 +52,10 @@ class CheckboxHidden {
 	 * 	Create a checkbox to hide a page.
 	 *
 	 * @param string $key
-	 * @param string $hidden
+	 * @param bool $hidden
 	 * @return string The HTML for the hidden input field
 	 */
-	public static function render($key, $hidden = false) {
+	public static function render(string $key, $hidden = false) {
 		$Text = Text::getObject();
 		$checked = '';
 

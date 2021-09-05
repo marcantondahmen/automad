@@ -38,6 +38,7 @@ namespace Automad\UI\Controllers;
 
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\Page;
 use Automad\Core\Request;
 use Automad\UI\Components\Layout\PageData;
 use Automad\UI\Models\PageModel;
@@ -59,7 +60,7 @@ class PageController {
 	/**
 	 * Add page based on data in $_POST.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function add() {
 		$Automad = UICache::get();
@@ -101,7 +102,7 @@ class PageController {
 	/**
 	 * Send form when there is no posted data in the request or save data if there is.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function data() {
 		$Automad = UICache::get();
@@ -132,7 +133,7 @@ class PageController {
 	/**
 	 * Delete page.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function delete() {
 		$Automad = UICache::get();
@@ -167,7 +168,7 @@ class PageController {
 	/**
 	 * Duplicate a page.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function duplicate() {
 		$Automad = UICache::get();
@@ -193,7 +194,7 @@ class PageController {
 	/**
 	 * Move a page.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function move() {
 		$Automad = UICache::get();
@@ -253,10 +254,10 @@ class PageController {
 	 * 	Get the theme/template file from posted data or return a default template name.
 	 *
 	 * @param array $array
-	 * @param string $key
+	 * @param string|null $key
 	 * @return string The template filename
 	 */
-	private static function getTemplateNameFromArray($array = false, $key = false) {
+	private static function getTemplateNameFromArray(?array $array = null, ?string $key = null) {
 		$template = 'data.php';
 
 		if (is_array($array) && $key) {
@@ -273,14 +274,14 @@ class PageController {
 	/**
 	 * Save a page.
 	 *
-	 * @param object $Page
+	 * @param Page $Page
 	 * @param string $url
 	 * @param array $data
 	 * @param string $prefix
 	 * @param string $slug
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
-	private static function save($Page, $url, $data, $prefix, $slug) {
+	private static function save(Page $Page, string $url, array $data, string $prefix, string $slug) {
 		$Response = new Response();
 
 		// A title is required for building the page's path.

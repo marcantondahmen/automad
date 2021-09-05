@@ -53,7 +53,7 @@ class Sitemap {
 	 *
 	 * @param array $collection
 	 */
-	public function __construct($collection) {
+	public function __construct(array $collection) {
 		if (!UserModel::getName()) {
 			$sitemap = AM_BASE_DIR . '/sitemap.xml';
 
@@ -72,7 +72,7 @@ class Sitemap {
 	 * @param array $collection
 	 * @param string $sitemap
 	 */
-	private function generate($collection, $sitemap) {
+	private function generate(array $collection, string $sitemap) {
 		if (!$base = AM_BASE_SITEMAP) {
 			$protocol = 'http';
 

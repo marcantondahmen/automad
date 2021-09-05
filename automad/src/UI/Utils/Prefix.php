@@ -55,12 +55,12 @@ class Prefix {
 	private static $prefix = 'am-u-';
 
 	/**
-	 *  Replace the prefixes of UIkit classes and data attributes in a string.
+	 * Replace the prefixes of UIkit classes and data attributes in a string.
 	 *
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	public static function attributes($str) {
+	public static function attributes(string $str) {
 		// Also match escaped quotes to handle AJAX requests.
 		$regex = '/(class=[\\\\"\']+[\w\s\-]+|data\-[\w\-]+(=[\\\\"\']+(\{[^\}]+|[^\\\\"\']+))?)/is';
 
@@ -70,12 +70,12 @@ class Prefix {
 	}
 
 	/**
-	 *  Search for HTML tags in a string and replace the prefixes of UIkit classes and data attributes.
+	 * Search for HTML tags in a string and replace the prefixes of UIkit classes and data attributes.
 	 *
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	public static function tags($str) {
+	public static function tags(string $str) {
 		// Only replace prefixes within real HTML tags (not converted to HTML entities) and therefore avoid possible collisions with user content.
 		return preg_replace_callback('/<\w+[^>]*>/is', function ($matches) {
 			return self::attributes($matches[0]);

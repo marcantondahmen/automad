@@ -67,7 +67,7 @@ class Regex {
 	public static $number = '\d+(?:\.\d+)?';
 
 	/**
-	 * 	The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
+	 * The outer statement marker helps to distinguish all outer wrapping statements from the inner statements.
 	 */
 	public static $outerStatementMarker = '#';
 
@@ -78,10 +78,10 @@ class Regex {
 	 * relative reference to the wrapping main variable pattern to match variables
 	 * within parameters.
 	 *
-	 * @param boolean $isVariableSubpattern
+	 * @param bool $isVariableSubpattern
 	 * @return string The regex matching a comma separated parameter string.
 	 */
-	public static function csv($isVariableSubpattern = false) {
+	public static function csv(bool $isVariableSubpattern = false) {
 		if ($isVariableSubpattern) {
 			return 	self::value('(?-7)') .
 					'(?:,' . self::value('(?-8)') . ')*?';
@@ -98,16 +98,16 @@ class Regex {
 	 *
 	 * Valid expressions are:
 	 *
-	 * -	@{var} >= 5
-	 * -	@{var} != "Text ..."
-	 * -	@{var} = 'Text'
-	 * -	not @{var}
-	 * -	!@{var}
+	 * - @{var} >= 5
+	 * - @{var} != "Text ..."
+	 * - @{var} = 'Text'
+	 * - not @{var}
+	 * - !@{var}
 	 *
-	 * @param string $namedReferencePrefix
+	 * @param string|null $namedReferencePrefix
 	 * @return string The regex
 	 */
-	public static function expression($namedReferencePrefix = false) {
+	public static function expression(?string $namedReferencePrefix = null) {
 		if ($namedReferencePrefix) {
 			$left = $namedReferencePrefix . 'Left';
 			$operator = '?P<' . $namedReferencePrefix . 'Operator>';
@@ -222,10 +222,10 @@ class Regex {
 	 * - 5
 	 * - 1.5
 	 *
-	 * @param string $namedReferencePrefix
+	 * @param string|null $namedReferencePrefix
 	 * @return string The regex
 	 */
-	public static function operand($namedReferencePrefix = false) {
+	public static function operand(?string $namedReferencePrefix = null) {
 		if ($namedReferencePrefix) {
 			$doubleQuoted = '?P<' . $namedReferencePrefix . 'DoubleQuoted>';
 			$singleQuoted = '?P<' . $namedReferencePrefix . 'SingleQuoted>';
@@ -247,16 +247,16 @@ class Regex {
 	 * - "| name (parameters)"
 	 * - "| +5"
 	 *
-	 * 	Parameters can be strings wrapped in quotes,
-	 * 	single words without quotes, numbers and variables.
-	 * 	In case $isVariableSubpattern is true, relative references to the wrapping
-	 * 	variable pattern are used to match variables.
+	 * Parameters can be strings wrapped in quotes,
+	 * single words without quotes, numbers and variables.
+	 * In case $isVariableSubpattern is true, relative references to the wrapping
+	 * variable pattern are used to match variables.
 	 *
-	 * @param string $namedReferencePrefix
-	 * @param boolean $isVariableSubpattern
+	 * @param string|null $namedReferencePrefix
+	 * @param bool $isVariableSubpattern
 	 * @return string The regex to match functions and their parameters or math operations
 	 */
-	public static function pipe($namedReferencePrefix = false, $isVariableSubpattern = false) {
+	public static function pipe(?string $namedReferencePrefix = null, bool $isVariableSubpattern = false) {
 		if ($namedReferencePrefix) {
 			$function = 	'?P<' . $namedReferencePrefix . 'Function>';
 			$parameters =	'?P<' . $namedReferencePrefix . 'Parameters>';
@@ -296,7 +296,7 @@ class Regex {
 	 * @param string $subpatternVar
 	 * @return string The regex matching a function parameter.
 	 */
-	public static function value($subpatternVar) {
+	public static function value(string $subpatternVar) {
 		// Any quoted string. Single and double quotes are allowed.
 		// Use possessive quantifiers to improve performance of very long values.
 		$string = '"(?:[^"\\\\]|\\\\.)*+"|\'(?:[^\'\\\\]|\\\\.)*+\'';
@@ -309,14 +309,14 @@ class Regex {
 	 * A prefix can be defined as the first parameter to create named backreferences for each capturing group.
 	 * Like: @{var|function1(...)|function2(...)| ... }
 	 *
-	 * 	In case the pattern is used as a subpattern of the pipe() method, $pipeReference can be specified to
-	 * 	reference the whole pipe pattern by using a relative reference or (?R).
+	 * In case the pattern is used as a subpattern of the pipe() method, $pipeReference can be specified to
+	 * reference the whole pipe pattern by using a relative reference or (?R).
 	 *
-	 * @param string $namedReferencePrefix
-	 * @param string $pipeReference
+	 * @param string|null $namedReferencePrefix
+	 * @param string|null $pipeReference
 	 * @return string The regex to match variables.
 	 */
-	public static function variable($namedReferencePrefix = false, $pipeReference = false) {
+	public static function variable(?string $namedReferencePrefix = null, ?string $pipeReference = null) {
 		if ($namedReferencePrefix) {
 			$name = 		'?P<' . $namedReferencePrefix . 'Name>';
 			$functions =	'?P<' . $namedReferencePrefix . 'Functions>';
@@ -336,7 +336,7 @@ class Regex {
 	}
 
 	/**
-	 * 	A simplified pattern to match all used variable names in a template (UI).
+	 * A simplified pattern to match all used variable names in a template (UI).
 	 *
 	 * @return string The regex pattern.
 	 */

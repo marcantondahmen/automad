@@ -54,7 +54,7 @@ class Files {
 	 * @param array $files
 	 * @return string The HTML for the grid
 	 */
-	public static function render($files) {
+	public static function render(array $files) {
 		sort($files);
 		$i = 0;
 

@@ -47,13 +47,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Packagist {
 	/**
-	 * 	Get a list op packages from Packagist filtered by type and tag.
+	 * Get a list op packages from Packagist filtered by type and tag.
 	 *
 	 * @param string $type
 	 * @param string $tag
 	 * @return array The list of packages
 	 */
-	public static function getPackages($type = '', $tag = '') {
+	public static function getPackages(string $type = '', string $tag = '') {
 		$query = http_build_query(
 			array(
 				'type' => $type,
@@ -82,12 +82,12 @@ class Packagist {
 	}
 
 	/**
-	 * 	Make a request to the Packagist API.
+	 * Make a request to the Packagist API.
 	 *
 	 * @param string $url
 	 * @return array The response data
 	 */
-	private static function request($url) {
+	private static function request(string $url) {
 		$data = array();
 
 		$options = array(

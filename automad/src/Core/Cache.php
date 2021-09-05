@@ -109,12 +109,13 @@ class Cache {
 	/**
 	 * The constructor checks whether caching is enabled for the current request and
 	 * determines the $pageCacheFile to make it available within the instance.
-	 * 	In case of any submitted data (get or post), caching will be disabled to make sure
-	 * 	that possible modifications of the session data array will always be reflected
-	 * 	in the cache. Note that caching of such submitted data (get or post) would possibly
-	 * 	only update the session data array for the requesting user. All other user could therefore
-	 * 	not trigger any updates to their sessions, because the request is already cached and
-	 * 	the template would not be parsed again.
+	 *
+	 * In case of any submitted data (get or post), caching will be disabled to make sure
+	 * that possible modifications of the session data array will always be reflected
+	 * in the cache. Note that caching of such submitted data (get or post) would possibly
+	 * only update the session data array for the requesting user. All other user could therefore
+	 * not trigger any updates to their sessions, because the request is already cached and
+	 * the template would not be parsed again.
 	 */
 	public function __construct() {
 		if (AM_CACHE_ENABLED) {
@@ -361,9 +362,9 @@ class Cache {
 	/**
 	 * Write (serialize) the Automad object to $this->objectCacheFile.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 */
-	public function writeAutomadObjectToCache($Automad) {
+	public function writeAutomadObjectToCache(Automad $Automad) {
 		if ($this->automadObjectCachingIsEnabled) {
 			FileSystem::write($this->objectCacheFile, serialize($Automad));
 			Debug::log($this->objectCacheFile, 'Automad object written to');
@@ -385,7 +386,7 @@ class Cache {
 	 *
 	 * @param string $output
 	 */
-	public function writePageToCache($output) {
+	public function writePageToCache(string $output) {
 		if ($this->pageCachingIsEnabled) {
 			FileSystem::write($this->pageCacheFile, $output);
 			Debug::log($this->pageCacheFile, 'Page written to');
@@ -400,7 +401,7 @@ class Cache {
 	 * @param string $dir
 	 * @return array The array of directories including the given directory itself
 	 */
-	private function getDirectoriesRecursively($dir) {
+	private function getDirectoriesRecursively(string $dir) {
 		$dirs = array($dir);
 
 		foreach (FileSystem::glob($dir . '/*', GLOB_ONLYDIR) as $d) {
@@ -481,7 +482,7 @@ class Cache {
 	 *
 	 * @param int $siteMTime
 	 */
-	private static function writeSiteMTime($siteMTime) {
+	private static function writeSiteMTime(int $siteMTime) {
 		FileSystem::write(AM_FILE_SITE_MTIME, serialize($siteMTime));
 		Debug::log(AM_FILE_SITE_MTIME, 'Site-mTime written to');
 	}

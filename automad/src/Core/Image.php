@@ -115,11 +115,11 @@ class Image {
 	 * The constructor defines the main object properties from the given parameters and initiates the main methods.
 	 *
 	 * @param string $originalFile
-	 * @param integer $requestedWidth
-	 * @param integer $requestedHeight
-	 * @param boolean $crop
+	 * @param int $requestedWidth
+	 * @param int $requestedHeight
+	 * @param bool $crop
 	 */
-	public function __construct($originalFile = false, $requestedWidth = false, $requestedHeight = false, $crop = false) {
+	public function __construct(string $originalFile, ?int $requestedWidth = null, ?int $requestedHeight = null, bool $crop = false) {
 		if ($originalFile) {
 			ini_set('memory_limit', -1);
 

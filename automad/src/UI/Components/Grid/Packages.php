@@ -54,7 +54,7 @@ class Packages {
 	 * @param array $packages
 	 * @return string The HTML for the grid
 	 */
-	public static function render($packages) {
+	public static function render(array $packages) {
 		$cards = '';
 
 		foreach ($packages as $package) {

@@ -36,6 +36,8 @@
 
 namespace Automad\System;
 
+use Automad\Core\Automad;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -47,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Mail {
 	/**
-	 * 	Save status to avoid a second trigger for example in pagelists or teaser snippets.
+	 * Save status to avoid a second trigger for example in pagelists or teaser snippets.
 	 */
 	private static $sent = false;
 
@@ -55,10 +57,10 @@ class Mail {
 	 * Send mail.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the sendig status
 	 */
-	public static function send($data, $Automad) {
+	public static function send(object $data, Automad $Automad) {
 		// Prevent a second call.
 		if (self::$sent) {
 			return $data->success;

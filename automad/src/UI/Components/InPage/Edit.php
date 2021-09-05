@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\InPage;
 
+use Automad\Core\Automad;
 use Automad\UI\Components\Form\Field;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,14 +52,14 @@ class Edit {
 	/**
 	 * 	Create in-page edit field.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param string $key
 	 * @param string $value
 	 * @param string $context
 	 * @param string $path
 	 * @return string The HTML for the in-page edit field
 	 */
-	public static function render($Automad, $key, $value, $context, $path) {
+	public static function render(Automad $Automad, string $key, $value, string $context, string $path) {
 		$field = Field::render($Automad, $key, $value);
 		$label = Field::labelFromKey($key);
 		$title = $Automad->getPage($context)->get(AM_KEY_TITLE);

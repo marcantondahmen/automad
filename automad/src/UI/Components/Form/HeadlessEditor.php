@@ -52,7 +52,7 @@ class HeadlessEditor {
 	 * @param string $template
 	 * @return string The HTML for the editor
 	 */
-	public static function render($template) {
+	public static function render(string $template) {
 		$template = htmlspecialchars($template);
 
 		return <<<HTML

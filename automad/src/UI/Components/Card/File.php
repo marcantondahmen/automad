@@ -59,7 +59,7 @@ class File {
 	 * @param string $id
 	 * @return string The HTML of the card
 	 */
-	public static function render($file, $id) {
+	public static function render(string $file, string $id) {
 		$data = (object) self::getFileData($file);
 		$preview = self::getPreview($file);
 		$jsonData = json_encode($data);
@@ -158,7 +158,7 @@ HTML;
 	 * @param string $file
 	 * @return array The file data array
 	 */
-	private static function getFileData($file) {
+	private static function getFileData(string $file) {
 		$data = array(
 			'img' => false,
 			'filename' => basename($file),
@@ -188,7 +188,7 @@ HTML;
 	 * @param string $file
 	 * @return string The generated HTML of the preview
 	 */
-	private static function getPreview($file) {
+	private static function getPreview(string $file) {
 		if (Parse::fileIsImage($file)) {
 			$imgPanel = new Image($file, 320, 240, true);
 			$url = AM_BASE_URL . $imgPanel->file;

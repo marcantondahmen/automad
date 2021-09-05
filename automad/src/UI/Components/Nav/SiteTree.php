@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Nav;
 
+use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\Core\Selection;
 use Automad\UI\Models\PageModel;
@@ -53,14 +54,14 @@ class SiteTree {
 	/**
 	 * Create recursive site tree for editing a page.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param string $parent
 	 * @param array $parameters (additional query string parameters to be passed along with the url)
-	 * @param boolean $hideCurrent
-	 * @param string $header
+	 * @param bool $hideCurrent
+	 * @param string|null $header
 	 * @return string The branch's HTML
 	 */
-	public static function render($Automad, $parent, $parameters, $hideCurrent = false, $header = false) {
+	public static function render(Automad $Automad, string $parent, array $parameters, bool $hideCurrent = false, ?string $header = null) {
 		$current = Request::query('url');
 
 		$selection = new Selection($Automad->getCollection());

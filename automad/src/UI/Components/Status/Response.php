@@ -56,12 +56,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Response {
 	/**
-	 * 	Get the current status response of a given system item or packages.
+	 * Get the current status response of a given system item or packages.
 	 *
 	 * @param string $item
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
-	public static function render($item) {
+	public static function render(string $item) {
 		Debug::log($item, 'Getting status');
 		$Response = new UIResponse();
 

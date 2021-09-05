@@ -47,34 +47,34 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Context {
 	/**
-	 * 	The context Page.
+	 * The context Page.
 	 */
 	private $Page;
 
 	/**
-	 * 	The constructor.
+	 * The constructor.
 	 *
-	 * @param object $Page
+	 * @param Page $Page
 	 */
-	public function __construct($Page) {
+	public function __construct(?Page $Page) {
 		$this->set($Page);
 	}
 
 	/**
-	 * 	Return $Page.
+	 * Return $Page.
 	 *
-	 * @return object $Page
+	 * @return Page $Page
 	 */
 	public function get() {
 		return $this->Page;
 	}
 
 	/**
-	 * 	Set the context.
+	 * Set the context.
 	 *
-	 * @param object $Page
+	 * @param Page $Page
 	 */
-	public function set($Page) {
+	public function set(?Page $Page) {
 		// Test whether $Page is empty - that can happen, when accessing the UI.
 		if (!empty($Page)) {
 			$this->Page = $Page;

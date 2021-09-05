@@ -55,7 +55,7 @@ class SearchResults {
 	 * @param array $fileResultsArray
 	 * @return string the rendered search results layout.
 	 */
-	public static function render($fileResultsArray) {
+	public static function render(array $fileResultsArray) {
 		$html = '';
 
 		foreach ($fileResultsArray as $FileResultsModel) {

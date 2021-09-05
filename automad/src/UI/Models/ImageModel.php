@@ -58,14 +58,14 @@ class ImageModel {
 	/**
 	 * Copy an image resized based on $_POST.
 	 *
-	 * @param string $width
-	 * @param string $height
-	 * @param string $crop
 	 * @param string $filename
 	 * @param string $url
+	 * @param mixed $width
+	 * @param mixed $height
+	 * @param mixed $crop
 	 * @return Response the response object
 	 */
-	public static function copyResized($filename, $url, $width, $height, $crop) {
+	public static function copyResized(string $filename, string $url, $width, $height, $crop) {
 		$Automad = UICache::get();
 		$Response = new Response();
 
@@ -127,7 +127,7 @@ class ImageModel {
 	 * @param string $url
 	 * @return string the rendered HTML
 	 */
-	public static function select($url) {
+	public static function select(string $url) {
 		$Automad = UICache::get();
 		$pageImages = array();
 

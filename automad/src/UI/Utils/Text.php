@@ -55,21 +55,12 @@ class Text {
 	private static $modules = array();
 
 	/**
-	 *  Short version of echo Text::get().
-	 *
-	 * @param string $key
-	 */
-	public static function e($key) {
-		echo Text::get($key);
-	}
-
-	/**
 	 * Return the requested text module.
 	 *
 	 * @param string $key
 	 * @return string The requested text module
 	 */
-	public static function get($key) {
+	public static function get(string $key) {
 		if (isset(Text::$modules[$key])) {
 			return Text::$modules[$key];
 		}

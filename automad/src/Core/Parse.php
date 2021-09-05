@@ -63,7 +63,7 @@ class Parse {
 	 * @param string $file
 	 * @return string The caption string
 	 */
-	public static function caption($file) {
+	public static function caption(string $file) {
 		// Build filename of the caption file.
 		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
 		Debug::log($captionFile);
@@ -74,12 +74,12 @@ class Parse {
 	}
 
 	/**
-	 *  Split and trim comma separated string.
+	 * Split and trim comma separated string.
 	 *
 	 * @param string $str
 	 * @return array The array of separate and trimmed strings
 	 */
-	public static function csv($str) {
+	public static function csv(string $str) {
 		$array = explode(AM_PARSE_STR_SEPARATOR, $str);
 		$array = array_filter($array, 'strlen');
 
@@ -93,11 +93,11 @@ class Parse {
 	 * and each path gets resolved to be relative to the Automad installation directory.
 	 *
 	 * @param string $str
-	 * @param object $Page (current page)
-	 * @param boolean $stripBaseDir
+	 * @param Page $Page
+	 * @param bool $stripBaseDir
 	 * @return array An array with resolved file paths
 	 */
-	public static function fileDeclaration($str, $Page, $stripBaseDir = false) {
+	public static function fileDeclaration(string $str, Page $Page, bool $stripBaseDir = false) {
 		$files = array();
 
 		if ($str) {
@@ -130,7 +130,7 @@ class Parse {
 	 * @param string $file
 	 * @return boolean True if $file is an image file
 	 */
-	public static function fileIsImage($file) {
+	public static function fileIsImage(string $file) {
 		return (in_array(FileSystem::getExtension($file), array('jpg', 'jpeg', 'png', 'gif')));
 	}
 
@@ -140,7 +140,7 @@ class Parse {
 	 * @param string $str
 	 * @return array $options - associative array
 	 */
-	public static function jsonOptions($str) {
+	public static function jsonOptions(string $str) {
 		$options = array();
 
 		if ($str) {
@@ -201,7 +201,7 @@ class Parse {
 	 * @param string $file
 	 * @return array $vars
 	 */
-	public static function textFile($file) {
+	public static function textFile(string $file) {
 		$vars = array();
 
 		if (!file_exists($file)) {

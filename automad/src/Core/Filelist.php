@@ -62,9 +62,9 @@ class Filelist {
 	/**
 	 * The constructor.
 	 *
-	 * @param object $Context
+	 * @param Context $Context
 	 */
-	public function __construct($Context) {
+	public function __construct(Context $Context) {
 		$this->Context = $Context;
 	}
 
@@ -73,7 +73,7 @@ class Filelist {
 	 *
 	 * @param array $options
 	 */
-	public function config($options) {
+	public function config(array $options) {
 		$this->options = array_merge($this->options, $options);
 	}
 

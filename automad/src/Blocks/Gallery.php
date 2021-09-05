@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
 use Automad\Core\Parse;
 use Automad\Core\Image;
 use Automad\Core\Str;
@@ -54,10 +55,10 @@ class Gallery extends AbstractBlock {
 	 * Render a gallery block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		$defaults = array(
 			'globs' => '*.jpg, *.png, *.gif',
 			'layout' => 'vertical',

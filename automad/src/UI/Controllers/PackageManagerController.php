@@ -63,7 +63,7 @@ class PackageManagerController {
 	/**
 	 * Get a list of outdated packages.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function getOutdatedPackages() {
 		$Response = new Response();
@@ -78,7 +78,7 @@ class PackageManagerController {
 	 * Get a list of theme packages available on Packagist
 	 * where the installed ones are at the beginning.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function getPackages() {
 		$Response = new Response();
@@ -118,7 +118,7 @@ class PackageManagerController {
 	/**
 	 * Install a package.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function install() {
 		$Response = new Response();
@@ -139,7 +139,7 @@ class PackageManagerController {
 	/**
 	 * Remove a package.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function remove() {
 		$Response = new Response();
@@ -160,7 +160,7 @@ class PackageManagerController {
 	/**
 	 * Update a single package.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function update() {
 		$Response = new Response();
@@ -182,7 +182,7 @@ class PackageManagerController {
 	/**
 	 * Update all packages.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function updateAll() {
 		$Response = new Response();

@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Views;
 
+use Automad\Core\Page as CorePage;
 use Automad\Core\Request;
 use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Components\Loading;
@@ -163,11 +164,11 @@ HTML;
 	/**
 	 * Render the switcher menu.
 	 *
-	 * @param object $Page
+	 * @param CorePage $Page
 	 * @param string $url
 	 * @return string the switcher markup
 	 */
-	private function switcher($Page, $url) {
+	private function switcher(CorePage $Page, string $url) {
 		$items = array(
 			array(
 				'icon' => '<i class="uk-icon-file-text"></i>',

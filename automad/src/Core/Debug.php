@@ -115,7 +115,7 @@ class Debug {
 	 * @param mixed $element (The actual content to log)
 	 * @param string $description (Basic info, class, method etc.)
 	 */
-	public static function log($element, $description = '') {
+	public static function log($element, string $description = '') {
 		if (AM_DEBUG_ENABLED) {
 			// Start timer. self::timerStart() only saves the time on the first call.
 			self::timerStart();

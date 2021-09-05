@@ -155,20 +155,20 @@ class Response {
 	 * Set the autocomplete property.
 	 *
 	 * @see $autocomplete
-	 * @param string $value
+	 * @param array $values
 	 */
-	public function setAutocomplete($value) {
-		$this->autocomplete = $value;
+	public function setAutocomplete(array $values) {
+		$this->autocomplete = $values;
 	}
 
 	/**
 	 * Set the buffer property.
 	 *
 	 * @see $buffer
-	 * @param string $value
+	 * @param string $buffer
 	 */
-	public function setBuffer($value) {
-		$this->buffer = $value;
+	public function setBuffer(string $buffer) {
+		$this->buffer = $buffer;
 	}
 
 	/**
@@ -177,7 +177,7 @@ class Response {
 	 * @see $cli
 	 * @param string $value
 	 */
-	public function setCli($value) {
+	public function setCli(string $value) {
 		$this->cli = $value;
 	}
 
@@ -185,10 +185,10 @@ class Response {
 	 * Set the debug property.
 	 *
 	 * @see $debug
-	 * @param string $value
+	 * @param array $log
 	 */
-	public function setDebug($value) {
-		$this->debug = $value;
+	public function setDebug(array $log) {
+		$this->debug = $log;
 	}
 
 	/**
@@ -197,7 +197,7 @@ class Response {
 	 * @see $error
 	 * @param string $value
 	 */
-	public function setError($value) {
+	public function setError(string $value) {
 		$this->error = $value;
 	}
 
@@ -205,29 +205,29 @@ class Response {
 	 * Set the html property.
 	 *
 	 * @see $html
-	 * @param string $value
+	 * @param string $html
 	 */
-	public function setHtml($value) {
-		$this->html = $value;
+	public function setHtml(string $html) {
+		$this->html = $html;
 	}
 
 	/**
 	 * Set the redirect property.
 	 *
 	 * @see $redirect
-	 * @param string $value
+	 * @param string $url
 	 */
-	public function setRedirect($value) {
-		$this->redirect = $value;
+	public function setRedirect(string $url) {
+		$this->redirect = $url;
 	}
 
 	/**
 	 * Set the reload property.
 	 *
 	 * @see $reload
-	 * @param string $value
+	 * @param bool $value
 	 */
-	public function setReload($value) {
+	public function setReload(bool $value) {
 		$this->reload = $value;
 	}
 
@@ -237,7 +237,7 @@ class Response {
 	 * @see $status
 	 * @param string $value
 	 */
-	public function setStatus($value) {
+	public function setStatus(string $value) {
 		$this->status = $value;
 	}
 
@@ -247,7 +247,7 @@ class Response {
 	 * @see $success
 	 * @param string $value
 	 */
-	public function setSuccess($value) {
+	public function setSuccess(string $value) {
 		$this->success = $value;
 	}
 
@@ -257,7 +257,7 @@ class Response {
 	 * @see $trigger
 	 * @param string $value
 	 */
-	public function setTrigger($value) {
+	public function setTrigger(string $value) {
 		$this->trigger = $value;
 	}
 }

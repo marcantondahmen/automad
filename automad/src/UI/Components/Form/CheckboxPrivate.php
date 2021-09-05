@@ -52,10 +52,10 @@ class CheckboxPrivate {
 	 * 	Create a checkbox to make a page private.
 	 *
 	 * @param string $key
-	 * @param string $private
+	 * @param bool $private
 	 * @return string The HTML for the private input field
 	 */
-	public static function render($key, $private = false) {
+	public static function render(string $key, $private = false) {
 		$Text = Text::getObject();
 		$checked = '';
 

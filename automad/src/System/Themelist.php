@@ -74,17 +74,18 @@ class Themelist {
 	 * 	corresponding to the AM_KEY_THEME variable.
 	 *
 	 * @param string $key
-	 * @return object The requested theme object
+	 * @return Theme The requested theme object
 	 */
-	public function getThemeByKey($key) {
+	public function getThemeByKey(string $key) {
 		if ($key && array_key_exists($key, $this->themes)) {
 			return $this->themes[$key];
 		}
 	}
 
 	/**
-	 * 	Return the Theme objects array.
+	 * Return the Theme objects array.
 	 *
+	 * @see Theme
 	 * @return array The array of Theme objects
 	 */
 	public function getThemes() {
@@ -92,17 +93,17 @@ class Themelist {
 	}
 
 	/**
-	 * 	Collect installed themes recursively.
+	 * Collect installed themes recursively.
 	 *
 	 * A theme must be located below the "themes" directory.
 	 * It is possible to group themes in subdirectories, like "themes/theme" or "themes/subdir/theme".
 	 *
 	 * To be a valid theme, a directory must contain a "theme.json" file and at least one ".php" file.
 	 *
-	 * @param string $path
+	 * @param string|null $path
 	 * @return array An array containing all themes as objects.
 	 */
-	private function collectThemes($path = false) {
+	private function collectThemes(?string $path = null) {
 		if (!$path) {
 			$path = AM_BASE_DIR . AM_DIR_PACKAGES;
 		}

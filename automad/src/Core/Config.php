@@ -263,12 +263,12 @@ class Config {
 	}
 
 	/**
-	 * 	Define constant, if not defined already.
+	 * Define constant, if not defined already.
 	 *
 	 * @param string $name
 	 * @param string $value
 	 */
-	public static function set($name, $value) {
+	public static function set(string $name, string $value) {
 		if (!defined($name)) {
 			define($name, $value);
 		}
@@ -278,9 +278,9 @@ class Config {
 	 * Write the configuration file.
 	 *
 	 * @param array $config
-	 * @return boolean True on success
+	 * @return bool True on success
 	 */
-	public static function write($config) {
+	public static function write(array $config) {
 		$json = json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
 		$content = "<?php return <<< JSON\r\n$json\r\nJSON;\r\n";
 		$success = FileSystem::write(self::$file, $content);

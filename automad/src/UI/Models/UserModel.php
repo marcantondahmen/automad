@@ -62,9 +62,9 @@ class UserModel {
 	 *
 	 * @param string $username
 	 * @param string $password
-	 * @return boolean false on error.
+	 * @return bool false on error
 	 */
-	public static function login($username, $password) {
+	public static function login(string $username, string $password) {
 		$accounts = AccountsModel::get();
 
 		if (isset($accounts[$username]) && AccountsModel::passwordVerified($password, $accounts[$username])) {
@@ -84,7 +84,7 @@ class UserModel {
 	/**
 	 * Log out user.
 	 *
-	 * @return boolean true on success
+	 * @return bool true on success
 	 */
 	public static function logout() {
 		unset($_SESSION);

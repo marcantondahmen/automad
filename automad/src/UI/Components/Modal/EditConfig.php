@@ -51,12 +51,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class EditConfig {
 	/**
-	 * 	Renders the config file edit modal.
+	 * Renders the config file edit modal.
 	 *
 	 * @param string $id
 	 * @return string The rendered HTML
 	 */
-	public static function render($id) {
+	public static function render(string $id) {
 		$Text = Text::getObject();
 		$file = Str::stripStart(Config::$file, AM_BASE_DIR);
 

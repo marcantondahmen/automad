@@ -47,17 +47,17 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Blocks {
 	/**
-	 * 	Multidimensional array of collected extension assets grouped by type (CSS/JS).
+	 * Multidimensional array of collected extension assets grouped by type (CSS/JS).
 	 */
 	public static $extensionAssets = array();
 
 	/**
-	 * 	Inject block assets into the header of a page.
+	 * Inject block assets into the header of a page.
 	 *
-	 * @param mixed $str
+	 * @param string $str
 	 * @return string the processed HTML
 	 */
-	public static function injectAssets($str) {
+	public static function injectAssets(string $str) {
 		$versionSanitized = Str::sanitize(AM_VERSION);
 		$css = AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . $versionSanitized;
 		$js = AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . $versionSanitized;
@@ -76,13 +76,13 @@ HTML;
 	}
 
 	/**
-	 * 	Render blocks created by the EditorJS block editor.
+	 * Render blocks created by the EditorJS block editor.
 	 *
 	 * @param string $json
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($json, $Automad) {
+	public static function render(string $json, Automad $Automad) {
 		$flexOpen = false;
 		$data = json_decode($json);
 		$html = '';

@@ -38,6 +38,7 @@ namespace Automad\UI\Components\Card;
 
 use Automad\Core\FileSystem;
 use Automad\Core\Image;
+use Automad\Core\Page as CorePage;
 use Automad\Core\Str;
 use Automad\UI\Utils\Text;
 
@@ -54,10 +55,10 @@ class Page {
 	/**
 	 * Render a page card.
 	 *
-	 * @param object $Page
+	 * @param CorePage $Page
 	 * @return string The HTML of the card
 	 */
-	public static function render($Page) {
+	public static function render(CorePage $Page) {
 		$link = '?view=Page&url=' . urlencode($Page->get(AM_KEY_ORIG_URL));
 
 		$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
@@ -128,7 +129,7 @@ HTML;
 	 * @param array $images
 	 * @return string The generated HTML
 	 */
-	private static function layout($images) {
+	private static function layout(array $images) {
 		$count = count($images);
 		$wFull = 320;
 		$hFull = 240;
@@ -188,9 +189,9 @@ HTML;
 	 * @param string $gridW (uk-width-* suffix)
 	 * @return string The generated markup
 	 */
-	private static function thumbnail($file, $w, $h, $gridW) {
+	private static function thumbnail(string $file, float $w, float $h, string $gridW) {
 		$img = new Image($file, $w, $h, true);
 
-		return 	'<li class="uk-width-' . $gridW . '"><img src="' . AM_BASE_URL . $img->file . '" /></li>';
+		return '<li class="uk-width-' . $gridW . '"><img src="' . AM_BASE_URL . $img->file . '" /></li>';
 	}
 }

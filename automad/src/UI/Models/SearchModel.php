@@ -71,10 +71,10 @@ class SearchModel {
 	 *
 	 * @param Automad $Automad
 	 * @param string $searchValue
-	 * @param boolean $isRegex
-	 * @param boolean $isCaseSensitive
+	 * @param bool $isRegex
+	 * @param bool $isCaseSensitive
 	 */
-	public function __construct($Automad, $searchValue, $isRegex, $isCaseSensitive) {
+	public function __construct(Automad $Automad, string $searchValue, bool $isRegex, bool $isCaseSensitive) {
 		$this->Automad = $Automad;
 		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'ims';
@@ -122,10 +122,10 @@ class SearchModel {
 	 * Append an item to a given array only in case it is an results.
 	 *
 	 * @param array $resultsArray
-	 * @param FieldResultsModel $results
+	 * @param FieldResultsModel|null $results
 	 * @return array the results array
 	 */
-	private function appendFieldResults($resultsArray, $results) {
+	private function appendFieldResults(array $resultsArray, ?FieldResultsModel $results) {
 		if (is_a($results, '\Automad\UI\Models\Search\FieldResultsModel')) {
 			$resultsArray[] = $results;
 		}
@@ -137,9 +137,9 @@ class SearchModel {
 	 * Check whether a property name represents a valid block property.
 	 *
 	 * @param string $property
-	 * @return boolean true if the property name is in the whitelist
+	 * @return bool true if the property name is in the whitelist
 	 */
-	private function isValidBlockProperty($property) {
+	private function isValidBlockProperty(string $property) {
 		$validProperties = array(
 			'text',
 			'items',
@@ -162,9 +162,9 @@ class SearchModel {
 	 *
 	 * @param string $key
 	 * @param array $results
-	 * @return FieldResultsModel a field results results
+	 * @return FieldResultsModel|null a field results results
 	 */
-	private function mergeFieldResults($key, $results) {
+	private function mergeFieldResults(string $key, array $results) {
 		$matches = array();
 		$contextArray = array();
 
@@ -183,7 +183,7 @@ class SearchModel {
 			);
 		}
 
-		return false;
+		return null;
 	}
 
 	/**
@@ -193,7 +193,7 @@ class SearchModel {
 	 * @param array $array
 	 * @return FieldResultsModel a field results results
 	 */
-	private function searchArrayRecursively($key, $array) {
+	private function searchArrayRecursively(string $key, array $array) {
 		$results = array();
 
 		foreach ($array as $item) {
@@ -214,10 +214,10 @@ class SearchModel {
 	 * `FieldResultsModel` results for a given search value.
 	 *
 	 * @param string $key
-	 * @param results $blocks
-	 * @return FieldResultsModel a field results results
+	 * @param array $blocks
+	 * @return FieldResultsModel|null a field results results
 	 */
-	private function searchBlocksRecursively($key, $blocks) {
+	private function searchBlocksRecursively(string $key, array $blocks) {
 		$results = array();
 
 		foreach ($blocks as $block) {
@@ -252,7 +252,7 @@ class SearchModel {
 	 * @param array $data
 	 * @return array an array of `FieldResultsModel` resultss
 	 */
-	private function searchData($data) {
+	private function searchData(array $data) {
 		$fieldResultsArray = array();
 
 		foreach ($data as $key => $value) {
@@ -283,7 +283,7 @@ class SearchModel {
 	 * @param string $value
 	 * @return FieldResultsModel the field results
 	 */
-	private function searchTextField($key, $value) {
+	private function searchTextField(string $key, string $value) {
 		$ignoredKeys = array(
 			AM_KEY_HIDDEN,
 			AM_KEY_PRIVATE,
@@ -335,6 +335,6 @@ class SearchModel {
 			);
 		}
 
-		return false;
+		return null;
 	}
 }

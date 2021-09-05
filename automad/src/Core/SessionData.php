@@ -49,10 +49,10 @@ class SessionData {
 	/**
 	 * Get the session data array or just one value in case $key is defined.
 	 *
-	 * @param string $key
+	 * @param string|null $key
 	 * @return mixed The data array or a single value
 	 */
-	public static function get($key = false) {
+	public static function get(?string $key = null) {
 		if (!isset($_SESSION['data'])) {
 			$_SESSION['data'] = array();
 		}
@@ -72,9 +72,9 @@ class SessionData {
 	 * Set a key/value pair in the session data array.
 	 *
 	 * @param string $key
-	 * @param string $value
+	 * @param mixed $value
 	 */
-	public static function set($key, $value) {
+	public static function set(string $key, $value) {
 		if (!isset($_SESSION['data'])) {
 			$_SESSION['data'] = array();
 		}

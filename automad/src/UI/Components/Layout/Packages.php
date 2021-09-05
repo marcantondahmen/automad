@@ -55,7 +55,7 @@ class Packages {
 	 * @param array $packages
 	 * @return string the rendered packages layout.
 	 */
-	public static function render($packages) {
+	public static function render(array $packages) {
 		$fn = function ($expression) {
 			return $expression;
 		};

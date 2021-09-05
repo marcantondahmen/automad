@@ -57,22 +57,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * create an instance of the class "\example1" ($object) and call the method "$object->example1()" of that class.
  * The namespace would just be "\".
  * The full naming scheme would be:
- * - namespace:	\
- * - directory:	/packages/example1 (must be lowercase)
- * - file:			/packages/example1/example1.php (must be lowercase)
- * - class:		Example1
- * - method:		Example1
+ * - namespace: \
+ * - directory: /packages/example1 (must be lowercase)
+ * - file:      /packages/example1/example1.php (must be lowercase)
+ * - class:     Example1
+ * - method:    Example1
  *
  * Example 2 - Extension in a subdirectory (like a vendor name):
  * An extension call like <@ vendor/example2 @> would load the file "/packages/vendor/example2/example2.php",
  * create an instance of the class "\vendor\example2" ($object) and call the method "$object->example2()" of that class.
  * The namespace in this case would be "\vendor".
  * The full naming scheme would be:
- * - namespace:	\vendor
- * - directory:	/packages/vendor/example2 (must be lowercase)
- * - file:			/packages/vendor/example2/example2.php (must be lowercase)
- * - class:		Example2
- * - method:		Example2
+ * - namespace: \vendor
+ * - directory: /packages/vendor/example2 (must be lowercase)
+ * - file:      /packages/vendor/example2/example2.php (must be lowercase)
+ * - class:     Example2
+ * - method:    Example2
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
@@ -94,9 +94,9 @@ class Extension {
 	 *
 	 * @param string $extension
 	 * @param array $options
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 */
-	public function __construct($extension, $options, $Automad) {
+	public function __construct(string $extension, array $options, Automad $Automad) {
 		Debug::log($extension);
 
 		// Building the class name.
@@ -162,11 +162,11 @@ class Extension {
 	}
 
 	/**
-	 * 	Collect all assets (CSS & JS files) belonging to $class and store them in $this->assets.
+	 * Collect all assets (CSS & JS files) belonging to $class and store them in $this->assets.
 	 *
 	 * @param string $class
 	 */
-	private function collectAssets($class) {
+	private function collectAssets(string $class) {
 		$Reflection = new \ReflectionClass($class);
 		$path = dirname($Reflection->getFileName());
 		Debug::log($path, 'Getting assets for ' . $class . ' in');

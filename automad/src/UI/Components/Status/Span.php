@@ -47,12 +47,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Span {
 	/**
-	 *  Create a span for an AJAX status request.
+	 * Create a span for an AJAX status request.
 	 *
 	 * @param string $status
 	 * @return string The HTML for the status span
 	 */
-	public static function render($status) {
+	public static function render(string $status) {
 		return '<span data-am-status="' . $status . '"></span>';
 	}
 }

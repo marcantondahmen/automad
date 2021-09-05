@@ -50,13 +50,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Readme {
 	/**
-	 *  Create the readme modal dialog.
+	 * Create the readme modal dialog.
 	 *
 	 * @param string $id
 	 * @param string $readme
 	 * @return string The HTML for the modal dialog
 	 */
-	public static function render($id, $readme) {
+	public static function render(string $id, string $readme) {
 		if ($readme) {
 			$Text = Text::getObject();
 			$readme = Str::markdown(file_get_contents($readme));

@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Accordion;
 
+use Automad\Core\Automad;
 use Automad\UI\Components\Form\Group;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,13 +52,13 @@ class UnusedVariables {
 	/**
 	 * All unused variable fields in an accordion.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param array $keys
 	 * @param array $data
 	 * @param string $title
 	 * @return string the rendered unused variables accordion item
 	 */
-	public static function render($Automad, $keys, $data, $title) {
+	public static function render(Automad $Automad, array $keys, array $data, string $title) {
 		$fn = function ($expression) {
 			return $expression;
 		};

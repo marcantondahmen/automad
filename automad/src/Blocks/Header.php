@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,10 +53,10 @@ class Header extends AbstractBlock {
 	 * Render a header block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		$classes = array();
 
 		if (!empty($data->alignment)) {

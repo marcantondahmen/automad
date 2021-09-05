@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Users {
 	/**
-	 * 	Renders the users component.
+	 * Renders the users component.
 	 *
 	 * @return string The rendered HTML
 	 */

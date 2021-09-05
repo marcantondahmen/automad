@@ -54,7 +54,7 @@ class Pages {
 	 * @param array $pages
 	 * @return string The HTML for the grid
 	 */
-	public static function render($pages) {
+	public static function render(array $pages) {
 		$cards = '';
 
 		foreach ($pages as $Page) {

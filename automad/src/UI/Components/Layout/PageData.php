@@ -36,7 +36,9 @@
 
 namespace Automad\UI\Components\Layout;
 
+use Automad\Core\Automad;
 use Automad\Core\Headless;
+use Automad\Core\Page;
 use Automad\Core\Parse;
 use Automad\System\Themelist;
 use Automad\UI\Components\Accordion\UnusedVariables;
@@ -123,10 +125,10 @@ class PageData {
 	/**
 	 * The page data layout constructor.
 	 *
-	 * @param object $Automad
-	 * @param object $Page
+	 * @param Automad $Automad
+	 * @param Page $Page
 	 */
-	public function __construct($Automad, $Page) {
+	public function __construct(Automad $Automad, Page $Page) {
 		$this->Automad = $Automad;
 		$this->Page = $Page;
 		$this->data = Parse::textFile(PageModel::getPageFilePath($Page));
@@ -237,7 +239,7 @@ HTML;
 	 * @param string $attributes
 	 * @return string the rendered input field
 	 */
-	private function input($key, $value, $label, $class = '', $attributes = '') {
+	private function input(string $key, $value, string $label, string $class = '', string $attributes = '') {
 		$id = "am-input-$key";
 
 		return <<< HTML
@@ -285,7 +287,7 @@ HTML;
 			AM_KEY_URL,
 			$this->data[AM_KEY_URL],
 			false,
-			false,
+			null,
 			Text::get('page_redirect')
 		);
 	}
@@ -386,14 +388,7 @@ HTML;
 				{$fn($this->prefix())}
 				{$fn($this->slug())}
 				{$fn($this->redirect())}
-				{$fn(Field::render(
-			$this->Automad,
-			AM_KEY_DATE,
-			$this->Page->get(AM_KEY_DATE),
-			false,
-			false,
-			Text::get('page_date')
-		))}
+				{$fn(Field::render($this->Automad, AM_KEY_DATE, $this->Page->get(AM_KEY_DATE), false, null, Text::get('page_date')))}
 				{$fn($this->tags())}
 			</div>
 HTML;

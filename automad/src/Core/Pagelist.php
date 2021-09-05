@@ -80,12 +80,12 @@ class Pagelist {
 	);
 
 	/**
-	 * 	Defines whether the pagelist excludes the current page or not.
+	 * Defines whether the pagelist excludes the current page or not.
 	 */
 	private $excludeCurrent;
 
 	/**
-	 * 	Defines whether the pagelist excludes hidden pages or not.
+	 * Defines whether the pagelist excludes hidden pages or not.
 	 */
 	private $excludeHidden;
 
@@ -100,12 +100,12 @@ class Pagelist {
 	private $limit;
 
 	/**
-	 * 	Defines a JSON string to be used as paramter for the $Selection->match() method.
+	 * Defines a JSON string to be used as paramter for the $Selection->match() method.
 	 */
 	private $match;
 
 	/**
-	 * 	Defines the offset within the array of pages returned by getPages().
+	 * Defines the offset within the array of pages returned by getPages().
 	 */
 	private $offset;
 
@@ -138,9 +138,9 @@ class Pagelist {
 	 * Initialize the Pagelist.
 	 *
 	 * @param array $collection
-	 * @param object $Context
+	 * @param Context $Context
 	 */
-	public function __construct($collection, $Context) {
+	public function __construct(array $collection, Context $Context) {
 		$this->collection = $collection;
 		$this->Context = $Context;
 		$this->config($this->defaults);
@@ -168,7 +168,7 @@ class Pagelist {
 	 * @param array $options
 	 * @return array Updated $options
 	 */
-	public function config($options = array()) {
+	public function config(array $options = array()) {
 		// Turn all (but only) array items also existing in $defaults into class properties.
 		// Only items existing in $options will be changed and will override the existings values defined with the first call ($defaults).
 		foreach (array_intersect_key($options, $this->defaults) as $key => $value) {
@@ -201,10 +201,10 @@ class Pagelist {
 	 * even if pages with such tags are not returned due to the limit. Sorting a pagelist will also sort all pages and therefore the set of returned pages might
 	 * always be different.
 	 *
-	 * @param boolean $ignoreLimit
+	 * @param bool $ignoreLimit
 	 * @return array The filtered and sorted array of Page objects
 	 */
-	public function getPages($ignoreLimit = false) {
+	public function getPages(bool $ignoreLimit = false) {
 		$offset = 0;
 		$limit = null;
 		$Selection = new Selection($this->getRelevant());

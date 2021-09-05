@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Cache {
 	/**
-	 * 	Renders the cache component.
+	 * Renders the cache component.
 	 *
 	 * @return string The rendered HTML
 	 */

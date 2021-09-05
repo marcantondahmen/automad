@@ -64,7 +64,7 @@ class InPageController {
 	 * saved back into the .txt file.
 	 * In case the title variable gets modified, the page directory gets renamed accordingly.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function edit() {
 		$Automad = UICache::get();

@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Utils;
 
+use Automad\Core\Automad;
+use Automad\Core\FileSystem as CoreFileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Regex;
 use Automad\Core\Request;
@@ -50,7 +52,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileSystem extends \Automad\Core\FileSystem {
+class FileSystem extends CoreFileSystem {
 	/**
 	 * The cached array of items in the packages directory.
 	 */
@@ -63,7 +65,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $suffix
 	 * @return string The path with appended suffix
 	 */
-	public static function appendSuffixToPath($path, $suffix) {
+	public static function appendSuffixToPath(string $path, string $suffix) {
 		return rtrim($path, '/') . $suffix . '/';
 	}
 
@@ -74,7 +76,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $path
 	 * @param string $suffix
 	 */
-	public static function appendSuffixToTitle($path, $suffix) {
+	public static function appendSuffixToTitle(string $path, string $suffix) {
 		if ($suffix) {
 			$path = self::fullPagePath($path);
 			$files = self::glob($path . '*.' . AM_FILE_EXT_DATA);
@@ -95,7 +97,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $source
 	 * @param string $dest
 	 */
-	public static function copyPageFiles($source, $dest) {
+	public static function copyPageFiles(string $source, string $dest) {
 		// Sanatize dirs.
 		$source = self::fullPagePath($source);
 		$dest = self::fullPagePath($dest);
@@ -120,7 +122,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $file
 	 * @return string Only error messages - false in case no errors occured!
 	 */
-	public static function deleteMedia($file) {
+	public static function deleteMedia(string $file) {
 		if (is_writable($file)) {
 			if (unlink($file)) {
 				$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
@@ -143,12 +145,12 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 	/**
-	 *  Get the full file system path for the given path.
+	 * Get the full file system path for the given path.
 	 *
 	 * @param string $path
 	 * @return string The full path
 	 */
-	public static function fullPagePath($path) {
+	public static function fullPagePath(string $path) {
 		if (strpos($path, AM_BASE_DIR . AM_DIR_PAGES) !== 0) {
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $path;
 		}
@@ -162,7 +164,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $filter
 	 * @return array A filtered list with all items in the packages directory
 	 */
-	public static function getPackagesDirectoryItems($filter = '') {
+	public static function getPackagesDirectoryItems(string $filter = '') {
 		if (empty(self::$packageDirectoryItems)) {
 			self::$packageDirectoryItems = self::listDirectoryRecursively(AM_BASE_DIR . AM_DIR_PACKAGES, AM_BASE_DIR . AM_DIR_PACKAGES);
 		}
@@ -178,10 +180,10 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * Return the file system path for the directory of a page based on $_POST['url'].
 	 * In case URL is empty, return the '/shared' directory.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string The full path to the related directory
 	 */
-	public static function getPathByPostUrl($Automad) {
+	public static function getPathByPostUrl(Automad $Automad) {
 		$url = Request::post('url');
 
 		if ($url && ($Page = $Automad->getPage($url))) {
@@ -192,13 +194,13 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 	/**
-	 * 	Recursively list all items in a directory.
+	 * Recursively list all items in a directory.
 	 *
 	 * @param string $directory
 	 * @param string $base
 	 * @return array The list of items
 	 */
-	public static function listDirectoryRecursively($directory, $base = AM_BASE_DIR) {
+	public static function listDirectoryRecursively(string $directory, string $base = AM_BASE_DIR) {
 		$items = array();
 		$exclude = array('node_modules', 'vendor');
 
@@ -226,7 +228,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	 * @param string $slug
 	 * @return string $newPath
 	 */
-	public static function movePageDir($oldPath, $newParentPath, $prefix, $slug) {
+	public static function movePageDir(string $oldPath, string $newParentPath, string $prefix, string $slug) {
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
 		$newParentPath = self::normalizeSlashes($newParentPath);
@@ -260,7 +262,7 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 	/**
-	 * 	Move all items in /cache to the PHP temp directory.
+	 * Move all items in /cache to the PHP temp directory.
 	 *
 	 * @return string $tmp
 	 */
@@ -297,13 +299,13 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 	/**
-	 *  Renames a file and its caption (if existing).
+	 * Renames a file and its caption (if existing).
 	 *
 	 * @param string $oldFile
 	 * @param string $newFile
 	 * @return string Only error messages - false in case no errors occured!
 	 */
-	public static function renameMedia($oldFile, $newFile) {
+	public static function renameMedia(string $oldFile, string $newFile) {
 		if (is_writable(dirname($oldFile))) {
 			if (is_writable($oldFile)) {
 				if (!file_exists($newFile)) {
@@ -336,13 +338,13 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 	/**
-	 *  Creates an unique suffix for a path to avoid conflicts with existing directories.
+	 * Creates an unique suffix for a path to avoid conflicts with existing directories.
 	 *
 	 * @param string $path
 	 * @param string $prefix (prepended to the numerical suffix)
 	 * @return string The suffix
 	 */
-	public static function uniquePathSuffix($path, $prefix = '') {
+	public static function uniquePathSuffix(string $path, string $prefix = '') {
 		$i = 1;
 		$suffix = $prefix;
 
@@ -354,12 +356,12 @@ class FileSystem extends \Automad\Core\FileSystem {
 	}
 
 	/**
-	 *  Format, filter and write the data array a text file.
+	 * Format, filter and write the data array a text file.
 	 *
 	 * @param array $data
 	 * @param string $file
 	 */
-	public static function writeData($data, $file) {
+	public static function writeData(array $data, string $file) {
 		$pairs = array();
 		$data = array_filter($data, 'strlen');
 

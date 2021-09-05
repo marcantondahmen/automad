@@ -37,6 +37,7 @@
 namespace Automad\UI\Components\Card;
 
 use Automad\Core\Str;
+use Automad\UI\Models\Search\FileResultsModel;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,10 +53,10 @@ class SearchFileResults {
 	/**
 	 * Render a search match card.
 	 *
-	 * @param \Automad\UI\Models\Search\FileResultsModel $FileResultsModel
+	 * @param FileResultsModel $FileResultsModel
 	 * @return string the rendered card
 	 */
-	public static function render($FileResultsModel) {
+	public static function render(FileResultsModel $FileResultsModel) {
 		$dir = dirname($FileResultsModel->path);
 		$id = 'am-search-file-' . Str::slug($dir, true, 500);
 		$results = '';

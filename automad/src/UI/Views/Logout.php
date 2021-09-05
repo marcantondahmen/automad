@@ -89,10 +89,10 @@ HTML;
 	/**
 	 * Render the success or error alert.
 	 *
-	 * @param boolean $isLoggedOut
+	 * @param bool $isLoggedOut
 	 * @return string the rendered alert box with buttons
 	 */
-	private function alert($isLoggedOut) {
+	private function alert(bool $isLoggedOut) {
 		$fn = $this->fn;
 
 		if ($isLoggedOut) {

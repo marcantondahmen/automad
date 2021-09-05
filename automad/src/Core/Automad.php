@@ -50,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Automad {
 	/**
-	 * 	Automad's Context object.
+	 * Automad's Context object.
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Context class for all objects using the Automad object as parameter.
 	 */
@@ -64,14 +64,14 @@ class Automad {
 	public $Shared;
 
 	/**
-	 * 	Array holding all the site's pages and the related data.
+	 * Array holding all the site's pages and the related data.
 	 *
 	 * To access the data for a specific page, use the url as key: $this->collection['url'].
 	 */
 	private $collection = array();
 
 	/**
-	 * 	Automad's Filelist object
+	 * Automad's Filelist object
 	 *
 	 * The object is part of the Automad class to allow to access always the same instance of the Filelist class for all objects using the Automad object as parameter.
 	 */
@@ -109,7 +109,7 @@ class Automad {
 	}
 
 	/**
-	 * 	Define properties to be cached.
+	 * Define properties to be cached.
 	 *
 	 * @return array $itemsToCache
 	 */
@@ -121,7 +121,7 @@ class Automad {
 	}
 
 	/**
-	 * 	Set new Context after being restored from cache.
+	 * Set new Context after being restored from cache.
 	 */
 	public function __wakeup() {
 		Debug::log(get_object_vars($this), 'Automad object got unserialized');
@@ -131,7 +131,7 @@ class Automad {
 	/**
 	 * Tests wheter the currently requested page actually exists and is not an error page.
 	 *
-	 * @return boolean True if existing
+	 * @return bool True if existing
 	 */
 	public function currentPageExists() {
 		$Page = $this->Context->get();
@@ -140,7 +140,7 @@ class Automad {
 	}
 
 	/**
-	 * 	Return $collection array.
+	 * Return $collection array.
 	 *
 	 * @return array $this->collection
 	 */
@@ -151,7 +151,7 @@ class Automad {
 	/**
 	 * Return Automad's instance of the Filelist class and create instance when accessed for the first time.
 	 *
-	 * @return object Filelist object
+	 * @return Filelist Filelist object
 	 */
 	public function getFilelist() {
 		if (!$this->Filelist) {
@@ -162,12 +162,12 @@ class Automad {
 	}
 
 	/**
-	 * 	If existing, return the page object for the passed relative URL.
+	 * If existing, return the page object for the passed relative URL.
 	 *
 	 * @param string $url
-	 * @return object $page or NULL
+	 * @return Page|null Page or null
 	 */
-	public function getPage($url) {
+	public function getPage(string $url) {
 		if (array_key_exists($url, $this->collection)) {
 			return $this->collection[$url];
 		}
@@ -176,7 +176,7 @@ class Automad {
 	/**
 	 * Return Automad's instance of the Pagelist class and create instance when accessed for the first time.
 	 *
-	 * @return object Pagelist object
+	 * @return Pagelist Pagelist object
 	 */
 	public function getPagelist() {
 		if (!$this->Pagelist) {
@@ -198,7 +198,7 @@ class Automad {
 	 * @param string $file
 	 * @return string The buffered output
 	 */
-	public function loadTemplate($file) {
+	public function loadTemplate(string $file) {
 		$Automad = $this;
 
 		if (is_readable($file)) {
@@ -225,10 +225,10 @@ class Automad {
 	 * To access the data of a specific page within the $collection array, the page's url serves as the key: $this->collection['/path/to/page']
 	 *
 	 * @param string $path
-	 * @param number $level
+	 * @param int $level
 	 * @param string $parentUrl
 	 */
-	private function collectPages($path = '/', $level = 0, $parentUrl = '') {
+	private function collectPages(string $path = '/', int $level = 0, string $parentUrl = '') {
 		// First check, if $path contains any data files.
 		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
 		if ($files = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
@@ -308,9 +308,9 @@ class Automad {
 	}
 
 	/**
-	 * 	Return the page object for the requested page.
+	 * Return the page object for the requested page.
 	 *
-	 * @return object A page object or NULL
+	 * @return Page|null A page object or null
 	 */
 	private function getRequestedPage() {
 		// Check whether the UI is requesting the currently edited page.
@@ -358,7 +358,7 @@ class Automad {
 	 * @param string $slug
 	 * @return string $url
 	 */
-	private function makeUrl($parentUrl, $slug) {
+	private function makeUrl(string $parentUrl, string $slug) {
 		// strip prefix from $slug
 		$pattern = '/[a-zA-Z0-9_-]+\./';
 		$replacement = '';
@@ -397,7 +397,7 @@ class Automad {
 	/**
 	 * Create a temporary page for a missing page and send a 404 header.
 	 *
-	 * @return object The error page
+	 * @return Page The error page
 	 */
 	private function pageNotFound() {
 		header('HTTP/1.0 404 Not Found');

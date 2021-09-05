@@ -54,7 +54,7 @@ class Users {
 	 * @param array $users
 	 * @return string The HTML for the grid
 	 */
-	public static function render($users) {
+	public static function render(array $users) {
 		$cards = '';
 
 		foreach ($users as $user => $hash) {

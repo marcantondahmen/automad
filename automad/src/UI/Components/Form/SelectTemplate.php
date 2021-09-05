@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\Form;
 
+use Automad\Core\Automad;
+use Automad\System\Themelist;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,14 +53,14 @@ class SelectTemplate {
 	/**
 	 * Create a select box containing all installed themes/templates to be included in a HTML form.
 	 *
-	 * @param object $Automad
-	 * @param object $Themelist
+	 * @param Automad $Automad
+	 * @param Themelist $Themelist
 	 * @param string $name
-	 * @param string $selectedTheme
-	 * @param string $selectedTemplate
+	 * @param string|null $selectedTheme
+	 * @param string|null $selectedTemplate
 	 * @return string The HTML for the select box including a label and a wrapping div.
 	 */
-	public static function render($Automad, $Themelist, $name = '', $selectedTheme = false, $selectedTemplate = false) {
+	public static function render(Automad $Automad, Themelist $Themelist, string $name = '', ?string $selectedTheme = null, ?string $selectedTemplate = null) {
 		$themes = $Themelist->getThemes();
 		$mainTheme = $Themelist->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
 

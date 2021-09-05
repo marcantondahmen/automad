@@ -62,7 +62,7 @@ class FileKeysModel {
 	 * @param string $path
 	 * @param array $keys
 	 */
-	public function __construct($path, $keys) {
+	public function __construct(string $path, array $keys) {
 		$this->path = $path;
 		$this->keys = $keys;
 	}

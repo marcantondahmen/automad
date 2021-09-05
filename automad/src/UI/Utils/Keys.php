@@ -36,7 +36,9 @@
 
 namespace Automad\UI\Utils;
 
+use Automad\Core\Page;
 use Automad\Core\Regex;
+use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -63,24 +65,24 @@ class Keys {
 	);
 
 	/**
-	 * 	Get color variable keys from an array of keys.
+	 * Get color variable keys from an array of keys.
 	 *
 	 * @param array $keys
 	 * @return array The array with only text variables.
 	 */
-	public static function filterColorKeys($keys) {
+	public static function filterColorKeys(array $keys) {
 		return array_filter($keys, function ($key) {
 			return preg_match('/^color/', $key);
 		});
 	}
 
 	/**
-	 * 	Get settings variable keys from an array of keys.
+	 * Get settings variable keys from an array of keys.
 	 *
 	 * @param array $keys
 	 * @return array The array with only settings variables.
 	 */
-	public static function filterSettingKeys($keys) {
+	public static function filterSettingKeys(array $keys) {
 		sort($keys);
 
 		return array_filter($keys, function ($key) {
@@ -89,12 +91,12 @@ class Keys {
 	}
 
 	/**
-	 * 	Get text variable keys from an array of keys.
+	 * Get text variable keys from an array of keys.
 	 *
 	 * @param array $keys
 	 * @return array The array with only text variables.
 	 */
-	public static function filterTextKeys($keys) {
+	public static function filterTextKeys(array $keys) {
 		return array_filter($keys, function ($key) {
 			return preg_match('/^(text|\+)/', $key);
 		});
@@ -103,11 +105,11 @@ class Keys {
 	/**
 	 * Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
 	 *
-	 * @param object $Page
-	 * @param object $Theme
+	 * @param Page $Page
+	 * @param Theme|null $Theme
 	 * @return array Keys in the currently used template (without reserved keys)
 	 */
-	public static function inCurrentTemplate($Page, $Theme) {
+	public static function inCurrentTemplate(Page $Page, ?Theme $Theme = null) {
 		if (empty($Theme)) {
 			return array();
 		}
@@ -125,7 +127,7 @@ class Keys {
 	 * @param string $file
 	 * @return array Keys in a given template (without reserved keys)
 	 */
-	public static function inTemplate($file) {
+	public static function inTemplate(string $file) {
 		$keys = array();
 
 		if (is_readable($file)) {
@@ -163,10 +165,10 @@ class Keys {
 	/**
 	 * Find all variable keys in templates of a given theme.
 	 *
-	 * @param object $Theme
+	 * @param Theme $Theme
 	 * @return array Keys in all templates of the given Theme (without reserved keys)
 	 */
-	public static function inTheme($Theme) {
+	public static function inTheme(Theme $Theme) {
 		$keys = array();
 
 		foreach ($Theme->templates as $file) {
@@ -184,7 +186,7 @@ class Keys {
 	 * @param array $mask
 	 * @return array The sorted and filtered keys array
 	 */
-	private static function cleanUp($keys, $mask = array()) {
+	private static function cleanUp(array $keys, array $mask = array()) {
 		if (empty($keys)) {
 			return array();
 		}

@@ -49,12 +49,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class SelectImage {
 	/**
-	 *  Create the modal dialog for selecting images.
+	 * Create the modal dialog for selecting images.
 	 *
-	 * @param string $url
+	 * @param string|null $url
 	 * @return string The HTML for the modal dialog
 	 */
-	public static function render($url = '') {
+	public static function render(?string $url = null) {
 		if ($url) {
 			$url = 'data-am-url="' . $url . '"';
 		}
@@ -64,7 +64,7 @@ class SelectImage {
 
 		$Text = Text::getObject();
 
-		return 	<<< HTML
+		return <<< HTML
 				<div id="am-select-image-modal" class="am-select-image-modal uk-modal">
 					<div class="uk-modal-dialog">
 						<div class="uk-modal-header">

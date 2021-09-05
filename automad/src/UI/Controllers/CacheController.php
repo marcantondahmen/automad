@@ -55,7 +55,7 @@ class CacheController {
 	/**
 	 * Clear the cache.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function clear() {
 		$Response = new Response();
@@ -68,7 +68,7 @@ class CacheController {
 	/**
 	 * Purge the cache directory.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function purge() {
 		$Response = new Response();

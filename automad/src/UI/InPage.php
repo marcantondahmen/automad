@@ -36,6 +36,7 @@
 
 namespace Automad\UI;
 
+use Automad\Core\Context;
 use Automad\Core\Regex;
 use Automad\Core\Str;
 use Automad\UI\Components\Header\BlockSnippetArrays;
@@ -72,7 +73,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	public function createUI($str) {
+	public function createUI(string $str) {
 		if (UserModel::getName()) {
 			$str = $this->injectAssets($str);
 			$str = $this->injectMarkup($str);
@@ -83,14 +84,14 @@ class InPage {
 	}
 
 	/**
-	 *  Inject a temporary markup for an edit button.
+	 * Inject a temporary markup for an edit button.
 	 *
-	 * @param string $value
+	 * @param string|null $value
 	 * @param string $key
-	 * @param object $Context
+	 * @param Context $Context
 	 * @return string The processed $value
 	 */
-	public function injectTemporaryEditButton($value, $key, $Context) {
+	public function injectTemporaryEditButton(?string $value, string $key, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $key) && UserModel::getName()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN .
@@ -110,7 +111,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed markup
 	 */
-	private function injectAssets($str) {
+	private function injectAssets(string $str) {
 		$versionSanitized = Str::sanitize(AM_VERSION);
 		$assets = 	"\n" .
 					'<!-- Automad UI -->' . "\n" .
@@ -138,7 +139,7 @@ class InPage {
 	 * @param string $str
 	 * @return string The processed $str
 	 */
-	private function injectMarkup($str) {
+	private function injectMarkup(string $str) {
 		$urlBase = AM_BASE_URL;
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
 		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . Str::slug(Text::get('btn_data'));
@@ -199,7 +200,7 @@ HTML;
 	 * @param string $str
 	 * @return string The processed markup
 	 */
-	private function processTemporaryEditButtons($str) {
+	private function processTemporaryEditButtons(string $str) {
 		// Remove invalid buttons.
 		// Within HTML tags.
 		// Like <div data-attr="...">

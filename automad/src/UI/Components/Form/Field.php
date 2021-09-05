@@ -36,8 +36,10 @@
 
 namespace Automad\UI\Components\Form;
 
+use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\Core\Str;
+use Automad\System\Theme;
 use Automad\UI\Components\Fullscreen\Bar;
 use Automad\UI\Utils\Text;
 
@@ -57,7 +59,7 @@ class Field {
 	 * @param string $key
 	 * @return string The converted label.
 	 */
-	public static function labelFromKey($key) {
+	public static function labelFromKey(string $key) {
 		$label = str_replace('+', '', $key);
 		$label = ucwords(trim(preg_replace('/([A-Z])/', ' $1', str_replace('_', ' ', $label))));
 
@@ -67,15 +69,15 @@ class Field {
 	/**
 	 * Create a form field depending on the name.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param string $key
 	 * @param string $value
-	 * @param boolean $removeButton
-	 * @param object $Theme
-	 * @param string $label
+	 * @param bool $removeButton
+	 * @param Theme|null $Theme
+	 * @param string|null $label
 	 * @return string The generated HTML
 	 */
-	public static function render($Automad, $key = '', $value = '', $removeButton = false, $Theme = false, $label = false) {
+	public static function render(Automad $Automad, string $key = '', $value = '', bool $removeButton = false, ?Theme $Theme = null, ?string $label = null) {
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 
@@ -181,7 +183,7 @@ HTML;
 	 * @param string $value
 	 * @return string The rendered markup
 	 */
-	private static function fieldBlockEditor($editorId, $fullscreenBar, $attr, $value) {
+	private static function fieldBlockEditor(string $editorId, string $fullscreenBar, string $attr, $value) {
 		return <<< HTML
 				<div class="am-block-editor" data-am-block-editor="$editorId">		
 					$fullscreenBar
@@ -198,10 +200,10 @@ HTML;
 	 * @param string $attr
 	 * @param string $value
 	 * @param string $shared
-	 * @param boolean $isPage
+	 * @param bool $isPage
 	 * @return string The rendered markup
 	 */
-	private static function fieldCheckbox($text, $attr, $value, $shared, $isPage) {
+	private static function fieldCheckbox(string $text, string $attr, $value, $shared, bool $isPage) {
 		if ($isPage) {
 			$options = array(
 				(object) array(
@@ -268,7 +270,7 @@ HTML;
 	 * @param string $attr
 	 * @return string The rendered markup
 	 */
-	private static function fieldColor($color, $attr) {
+	private static function fieldColor(string $color, string $attr) {
 		return <<< HTML
 				<div class="uk-flex" data-am-colorpicker> 
 				 	<input type="color" value="$color" />
@@ -285,7 +287,7 @@ HTML;
 	 * @param string $attrTime
 	 * @return string The rendered markup
 	 */
-	private static function fieldDate($attr, $attrDate, $attrTime) {
+	private static function fieldDate(string $attr, string $attrDate, string $attrTime) {
 		return <<< HTML
 				<div class="uk-flex" data-am-datetime>
 					<input type="hidden" $attr />
@@ -321,7 +323,7 @@ HTML;
 	 * @param string $value
 	 * @return string The rendered markup
 	 */
-	private static function fieldDefault($attr, $value) {
+	private static function fieldDefault(string $attr, $value) {
 		return <<< HTML
 				<textarea 
 				$attr 
@@ -336,7 +338,7 @@ HTML;
 	 * @param string $attr
 	 * @return string The rendered markup
 	 */
-	private static function fieldImage($attr) {
+	private static function fieldImage(string $attr) {
 		$Text = Text::getObject();
 
 		return <<< HTML
@@ -361,7 +363,7 @@ HTML;
 	 * @param string $value
 	 * @return string The rendered markup.
 	 */
-	private static function fieldText($fullscreenBar, $attr, $value) {
+	private static function fieldText(string $fullscreenBar, string $attr, $value) {
 		$class = '';
 
 		if (self::isInPage()) {
@@ -387,7 +389,7 @@ HTML;
 	 * @param string $attr
 	 * @return string The rendered markup
 	 */
-	private static function fieldUrl($attr) {
+	private static function fieldUrl(string $attr) {
 		return <<< HTML
 				<div class="am-form-icon-button-input uk-flex" data-am-link-field>
 					<button type="button" class="uk-button">
@@ -401,11 +403,11 @@ HTML;
 	/**
 	 * Return the fullscreen bar markup when not in in-page edit mode.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @param string $label
 	 * @return string The rendered markup
 	 */
-	private static function fullscreenBar($Automad, $label) {
+	private static function fullscreenBar(Automad $Automad, string $label) {
 		if (self::isInPage()) {
 			return false;
 		}
@@ -436,7 +438,7 @@ HTML;
 	 * @param string $id
 	 * @return string The rendered markup
 	 */
-	private static function labelHtml($label, $id) {
+	private static function labelHtml(string $label, string $id) {
 		if (self::isInPage()) {
 			return false;
 		}
@@ -449,10 +451,10 @@ HTML;
 	/**
 	 * Return the remove button markup if needed.
 	 *
-	 * @param boolean $hasRemoveButton
+	 * @param bool $hasRemoveButton
 	 * @return string The rendered markup
 	 */
-	private static function removeButton($hasRemoveButton) {
+	private static function removeButton(bool $hasRemoveButton) {
 		if ($hasRemoveButton) {
 			$Text = Text::getObject();
 
@@ -470,11 +472,11 @@ HTML;
 	/**
 	 * Create tooltip dropdown.
 	 *
-	 * @param object $Theme
+	 * @param Theme $Theme
 	 * @param string $key
 	 * @return string The markup for the dropdown.
 	 */
-	private static function tooltip($Theme, $key) {
+	private static function tooltip(?Theme $Theme, string $key) {
 		if (self::isInPage()) {
 			return false;
 		}
@@ -493,7 +495,6 @@ HTML;
 								$tooltip
 							</div>
 						</div>
-
 HTML;
 			}
 		}

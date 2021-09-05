@@ -70,7 +70,7 @@ class Pipe {
 	 * @param array $functions
 	 * @return string The modified $value
 	 */
-	public static function process($value, $functions) {
+	public static function process(string $value, array $functions) {
 		Debug::log($functions);
 
 		foreach ($functions as $function) {
@@ -92,7 +92,7 @@ class Pipe {
 	 * @param string $value
 	 * @return string $value
 	 */
-	private static function extension($function, $parameters, $value) {
+	private static function extension(string $function, array $parameters, string $value) {
 		$class = '\\' . str_replace('/', '\\', $function);
 
 		if (!class_exists($class, false)) {
@@ -124,7 +124,7 @@ class Pipe {
 	 * @param string $value
 	 * @return number $value
 	 */
-	private static function math($operator, $number, $value) {
+	private static function math(string $operator, string $number, string $value) {
 		$number = floatval($number);
 		$value = floatval($value);
 
@@ -160,7 +160,7 @@ class Pipe {
 	 * @param string $value
 	 * @return string $value
 	 */
-	private static function stringFunction($function, $parameters, $value) {
+	private static function stringFunction(string $function, array $parameters, string $value) {
 		if (!$parameters) {
 			$parameters = array();
 		}

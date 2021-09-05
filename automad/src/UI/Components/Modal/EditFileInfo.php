@@ -49,13 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class EditFileInfo {
 	/**
-	 *  Create the file edit modal dialog.
+	 * Create the file edit modal dialog.
 	 *
 	 * @param string $title
-	 * @param string $url
+	 * @param string|null $url
 	 * @return string The HTML for the modal dialog
 	 */
-	public static function render($title, $url = false) {
+	public static function render(string $title, ?string $url = null) {
 		$Text = Text::getObject();
 
 		return <<< HTML

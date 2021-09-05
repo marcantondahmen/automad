@@ -36,7 +36,9 @@
 
 namespace Automad\UI\Models;
 
+use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\Page;
 use Automad\Core\Str;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\UICache;
@@ -54,13 +56,13 @@ class PageModel {
 	/**
 	 * Add page.
 	 *
-	 * @param \Automad\Core\Page $Parent
+	 * @param Page $Parent
 	 * @param string $title
 	 * @param string $themeTemplate
-	 * @param boolean $isPrivate
+	 * @param bool $isPrivate
 	 * @return string the URL to the new page
 	 */
-	public static function add($Parent, $title, $themeTemplate, $isPrivate) {
+	public static function add(Page $Parent, string $title, string $themeTemplate, bool $isPrivate) {
 		$theme = dirname($themeTemplate);
 		$template = basename($themeTemplate);
 
@@ -103,7 +105,7 @@ class PageModel {
 	 * @param string $path
 	 * @return string The view URL to the new page
 	 */
-	public static function contextUrlByPath($path) {
+	public static function contextUrlByPath(string $path) {
 		// Rebuild Automad object, since the file structure has changed.
 		return '?view=Page&url=' . urlencode(self::urlByPath(UICache::rebuild(), $path));
 	}
@@ -111,11 +113,11 @@ class PageModel {
 	/**
 	 * Delete page.
 	 *
-	 * @param \Automad\Core\Page $Page
+	 * @param Page $Page
 	 * @param string $title
-	 * @return boolean true on success
+	 * @return bool true on success
 	 */
-	public static function delete($Page, $title) {
+	public static function delete(Page $Page, string $title) {
 		return FileSystem::movePageDir(
 			$Page->path,
 			'..' . AM_DIR_TRASH . dirname($Page->path),
@@ -127,10 +129,10 @@ class PageModel {
 	/**
 	 * Duplicate a page.
 	 *
-	 * @param \Automad\Core\Page $Page
+	 * @param Page $Page
 	 * @return string the new URL
 	 */
-	public static function duplicate($Page) {
+	public static function duplicate(Page $Page) {
 		// Build path and suffix.
 		$duplicatePath = $Page->path;
 		$suffix = FileSystem::uniquePathSuffix($duplicatePath, '-copy');
@@ -150,7 +152,7 @@ class PageModel {
 	 * @param string $path
 	 * @return string Prefix
 	 */
-	public static function extractPrefixFromPath($path) {
+	public static function extractPrefixFromPath(string $path) {
 		return substr(basename($path), 0, strpos(basename($path), '.'));
 	}
 
@@ -160,7 +162,7 @@ class PageModel {
 	 * @param string $path
 	 * @return string the slug
 	 */
-	public static function extractSlugFromPath($path) {
+	public static function extractSlugFromPath(string $path) {
 		$slug = basename($path);
 		$prefix = self::extractPrefixFromPath($slug);
 
@@ -170,23 +172,23 @@ class PageModel {
 	/**
 	 * Return the full file system path of a page's data file.
 	 *
-	 * @param object $Page
+	 * @param Page $Page
 	 * @return string The full file system path
 	 */
-	public static function getPageFilePath($Page) {
+	public static function getPageFilePath(Page $Page) {
 		return FileSystem::fullPagePath($Page->path) . $Page->template . '.' . AM_FILE_EXT_DATA;
 	}
 
 	/**
 	 * Move a page directory and update all related links.
 	 *
-	 * @param \Automad\Core\Page $Page
+	 * @param Page $Page
 	 * @param string $destPath
 	 * @param string $prefix
 	 * @param string $slug
 	 * @return string the new page path
 	 */
-	public static function moveDirAndUpdateLinks($Page, $destPath, $prefix, $slug) {
+	public static function moveDirAndUpdateLinks(Page $Page, string $destPath, string $prefix, string $slug) {
 		$newPagePath = FileSystem::movePageDir(
 			$Page->path,
 			$destPath,
@@ -202,7 +204,7 @@ class PageModel {
 	/**
 	 * Save page data.
 	 *
-	 * @param \Automad\Core\Page $Page
+	 * @param Page $Page
 	 * @param string $url
 	 * @param array $data
 	 * @param string $themeTemplate
@@ -210,7 +212,7 @@ class PageModel {
 	 * @param string $slug
 	 * @return string a redirect URL in case the page was moved or its privacy has changed
 	 */
-	public static function save($Page, $url, $data, $themeTemplate, $prefix, $slug) {
+	public static function save(Page $Page, string $url, array $data, string $themeTemplate, string $prefix, string $slug) {
 		// Trim data.
 		$data = array_map('trim', $data);
 
@@ -308,7 +310,7 @@ class PageModel {
 	 * @param string $slug
 	 * @return string the updated directory name slug
 	 */
-	public static function updateSlug($currentTitle, $newTitle, $slug) {
+	public static function updateSlug(string $currentTitle, string $newTitle, string $slug) {
 		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
 			$slug = $newTitle;
 		}
@@ -319,12 +321,11 @@ class PageModel {
 	/**
 	 * Update all file and page links based on a new path.
 	 *
-	 * @param \Automad\Core\Page $Page
-	 * @param string $path
-	 * @param mixed $newPath
-	 * @return boolean true on success
+	 * @param Page $Page
+	 * @param string $newPath
+	 * @return bool true on success
 	 */
-	private static function updatePageLinks($Page, $newPath) {
+	private static function updatePageLinks(Page $Page, string $newPath) {
 		Cache::clear();
 
 		$Automad = UICache::rebuild();
@@ -354,11 +355,11 @@ class PageModel {
 	/**
 	 * Return updated page URL based on $path.
 	 *
-	 * @param \Automad\Core\Automad $Automad
+	 * @param Automad $Automad
 	 * @param string $path
 	 * @return string The page URL
 	 */
-	private static function urlByPath($Automad, $path) {
+	private static function urlByPath(Automad $Automad, string $path) {
 		// Find new URL and return redirect query string.
 		foreach ($Automad->getCollection() as $url => $Page) {
 			if ($Page->path == $path) {

@@ -55,7 +55,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Composer {
 	/**
-	 * 	Composer autoloader within the temporary extraction directory.
+	 * Composer autoloader within the temporary extraction directory.
 	 */
 	private $autoloader = '/vendor/autoload.php';
 
@@ -65,7 +65,7 @@ class Composer {
 	private $composerVersion = '2.1.6';
 
 	/**
-	 * 	Composer extraction directory within temporary directory.
+	 * Composer extraction directory within temporary directory.
 	 */
 	private $extractionDir = '/src';
 
@@ -75,7 +75,7 @@ class Composer {
 	private $installDirCacheFile = false;
 
 	/**
-	 * 	The download URL for the composer.phar file.
+	 * The download URL for the composer.phar file.
 	 */
 	private $pharUrl = false;
 
@@ -98,9 +98,9 @@ class Composer {
 	}
 
 	/**
-	 * 	Set up Composer by downloading and extracting the composer.phar to a temporary directory
-	 * 	outside the document root, defining some environment variables, registering a shutdown
-	 * 	function and including the autoloader.
+	 * Set up Composer by downloading and extracting the composer.phar to a temporary directory
+	 * outside the document root, defining some environment variables, registering a shutdown
+	 * function and including the autoloader.
 	 */
 	private function setUp() {
 		$installDir = $this->getInstallDir();
@@ -143,13 +143,13 @@ class Composer {
 	}
 
 	/**
-	 * 	Run a given Composer command.
+	 * Run a given Composer command.
 	 *
 	 * @param string $command
 	 * @param bool $getBuffer
 	 * @return string The command output on false or in case $getBuffer is true
 	 */
-	public function run($command, $getBuffer = false) {
+	public function run(string $command, bool $getBuffer = false) {
 		$this->shutdownOnError();
 
 		chdir(AM_BASE_DIR);
@@ -213,7 +213,7 @@ class Composer {
 	 * @param string $dir
 	 * @return string The full path to the downloaded composer.phar file
 	 */
-	private function downloadPhar($dir) {
+	private function downloadPhar(string $dir) {
 		$phar = false;
 
 		if (is_writable($dir)) {
@@ -279,7 +279,7 @@ class Composer {
 	}
 
 	/**
-	 * 	Generate a fresh installation directory for Composer.
+	 * Generate a fresh installation directory for Composer.
 	 *
 	 * @return string The path to the directory
 	 */

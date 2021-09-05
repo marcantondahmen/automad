@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Update {
 	/**
-	 * 	Renders the update component.
+	 * Renders the update component.
 	 *
 	 * @return string The rendered HTML
 	 */

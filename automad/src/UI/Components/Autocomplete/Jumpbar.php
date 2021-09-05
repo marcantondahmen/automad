@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Autocomplete;
 
+use Automad\Core\Automad;
 use Automad\Core\Selection;
 use Automad\Core\Str;
 use Automad\UI\Response;
@@ -56,10 +57,10 @@ class Jumpbar {
 	 *
 	 * The collected data consists of all page titles, URLs and all available tags.
 	 *
-	 * @param object $Automad
-	 * @return \Automad\UI\Response the response object
+	 * @param Automad $Automad
+	 * @return Response the response object
 	 */
-	public static function render($Automad) {
+	public static function render(Automad $Automad) {
 		$Response = new Response();
 		$values = array();
 
@@ -115,7 +116,7 @@ class Jumpbar {
 	 * @param array $pages
 	 * @return array the generated items
 	 */
-	private static function pages($pages) {
+	private static function pages(array $pages) {
 		$Selection = new Selection($pages);
 		$Selection->sortPages(AM_KEY_MTIME . ' desc');
 

@@ -52,7 +52,7 @@ class StatusController {
 	/**
 	 * Get a config item status.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function get() {
 		return Response::render(Request::post('item'));

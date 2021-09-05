@@ -56,7 +56,7 @@ class SystemController {
 	/**
 	 * System updates.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function update() {
 		$Response = new Response();

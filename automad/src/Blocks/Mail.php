@@ -36,6 +36,7 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
 use Automad\System\Mail as SystemMail;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -52,10 +53,10 @@ class Mail extends AbstractBlock {
 	 * Render a mail form block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		if (!empty($data->to)) {
 			$defaults = array(
 				'error' => '',

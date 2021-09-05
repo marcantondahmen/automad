@@ -51,10 +51,10 @@ class CopyResized {
 	/**
 	 *  Create the copy resized modal dialog.
 	 *
-	 * @param string $url
+	 * @param string|null $url
 	 * @return string The HTML for the modal dialog
 	 */
-	public static function render($url = false) {
+	public static function render(?string $url = null) {
 		$Text = Text::getObject();
 
 		return <<< HTML

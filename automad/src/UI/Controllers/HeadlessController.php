@@ -57,7 +57,7 @@ class HeadlessController extends Headless {
 	/**
 	 * Save the updated template or render the editor in case no template was posted.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function editTemplate() {
 		$Response = new Response();
@@ -90,7 +90,7 @@ class HeadlessController extends Headless {
 	/**
 	 * Reset the headless template by deleting the custom template file.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function resetTemplate() {
 		$Response = new Response();

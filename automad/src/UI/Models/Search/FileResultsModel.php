@@ -59,7 +59,7 @@ class FileResultsModel {
 	public $path;
 
 	/**
-	 * The page URL or false for shared data.
+	 * The page URL or null for shared data.
 	 */
 	public $url;
 
@@ -69,11 +69,11 @@ class FileResultsModel {
 	 * @see FieldResultsModel
 	 * @param string $path
 	 * @param array $fieldResultsArray
-	 * @param string $url
+	 * @param string|null $url
 	 */
-	public function __construct($path, $fieldResultsArray, $url = false) {
+	public function __construct(string $path, array $fieldResultsArray, ?string $url = null) {
 		$this->path = $path;
 		$this->fieldResultsArray = $fieldResultsArray;
-		$this->url = $url;
+		$this->url = (string) $url;
 	}
 }

@@ -91,7 +91,7 @@ class Update {
 	/**
 	 * Run the actual update.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function run() {
 		self::$timestamp = date('Ymd-His');
@@ -178,7 +178,7 @@ class Update {
 	/**
 	 * Test if the server supports all required functions.
 	 *
-	 * @return boolean True on success, false on error
+	 * @return bool True on success, false on error
 	 */
 	public static function supported() {
 		return (function_exists('curl_version') && class_exists('ZipArchive'));
@@ -188,9 +188,9 @@ class Update {
 	 * Move currently installed items to /cache/update/backup.
 	 *
 	 * @param array $items
-	 * @return boolean True on success, false on error
+	 * @return bool True on success, false on error
 	 */
-	private static function backupCurrent($items) {
+	private static function backupCurrent(array $items) {
 		self::preloadClasses();
 
 		$backup = AM_BASE_DIR . AM_UPDATE_TEMP . '/backup/' . self::$timestamp;
@@ -226,14 +226,14 @@ class Update {
 	 * @param string $str
 	 * @return string The version number
 	 */
-	private static function extractVersion($str) {
+	private static function extractVersion(string $str) {
 		if (preg_match('/\d[^\'"]+/', $str, $matches)) {
 			return $matches[0];
 		}
 	}
 
 	/**
-	 * 	Download zip-archive to be installed.
+	 * Download zip-archive to be installed.
 	 *
 	 * @return string Path to the downloaded archive or false on error
 	 */
@@ -337,7 +337,7 @@ class Update {
 	 * @param string $data
 	 * @return string The path to the log file
 	 */
-	private static function log($data) {
+	private static function log(string $data) {
 		$file = AM_BASE_DIR . AM_UPDATE_TEMP . '/' . self::$timestamp . '.log';
 		FileSystem::makeDir(dirname($file));
 		file_put_contents($file, $data . "\r\n", FILE_APPEND);
@@ -349,9 +349,9 @@ class Update {
 	 * Test if permissions for all items to be updated are granted.
 	 *
 	 * @param array $items
-	 * @return boolean True on success, false on error
+	 * @return bool True on success, false on error
 	 */
-	private static function permissionsGranted($items) {
+	private static function permissionsGranted(array $items) {
 		foreach ($items as $item) {
 			$item = AM_BASE_DIR . $item;
 
@@ -379,9 +379,9 @@ class Update {
 	 *
 	 * @param string $archive
 	 * @param array $items
-	 * @return boolean True on success, false on error
+	 * @return bool True on success, false on error
 	 */
-	private static function unpack($archive, $items) {
+	private static function unpack(string $archive, array $items) {
 		$success = true;
 		$zip = new \ZipArchive();
 		$itemsMatchRegex = '/^[\w\-]+(' . addcslashes(implode('|', $items), '/') . ')/';

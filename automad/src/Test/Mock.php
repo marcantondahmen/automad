@@ -59,7 +59,7 @@ class Mock extends TestCase {
 	 * @param string $template
 	 * @return object The Automad Mock
 	 */
-	public function createAutomad($template = '') {
+	public function createAutomad(string $template = '') {
 		$Shared = new Shared();
 		$Shared->data['shared'] = 'Shared default text content';
 		$collection = $this->createCollection($Shared, $template);
@@ -89,11 +89,11 @@ class Mock extends TestCase {
 	/**
 	 * Create a collection of test pages.
 	 *
-	 * @param \Automad\Core\Shared $Shared
+	 * @param Shared $Shared
 	 * @param string $template
 	 * @return array the collection
 	 */
-	private function createCollection($Shared, $template) {
+	private function createCollection(Shared $Shared, string $template) {
 		$theme = '../automad/tests/templates';
 		$testsDir = AM_BASE_DIR . '/automad/tests';
 

@@ -114,10 +114,10 @@ HTML;
 	/**
 	 * Render the error notification in case there is one.
 	 *
-	 * @param mixed $error
+	 * @param string|null $error
 	 * @return string the rendered notification
 	 */
-	private function error($error) {
+	private function error(?string $error = null) {
 		if (!empty($error)) {
 			return <<< HTML
 				<script type="text/javascript">

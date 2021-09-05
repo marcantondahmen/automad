@@ -76,7 +76,7 @@ class Shared {
 	 * @param string $key
 	 * @return string The requested value
 	 */
-	public function get($key) {
+	public function get(string $key) {
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
 		}
@@ -86,9 +86,9 @@ class Shared {
 	 * Set key/value pair in data.
 	 *
 	 * @param string $key
-	 * @param string $value
+	 * @param mixed $value
 	 */
-	public function set($key, $value) {
+	public function set(string $key, $value) {
 		$this->data[$key] = $value;
 	}
 }

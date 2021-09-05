@@ -53,7 +53,7 @@ class Console {
 	 *
 	 * @param array $argv
 	 */
-	public function __construct($argv) {
+	public function __construct(array $argv) {
 		echo 'Automad Console version ' . AM_VERSION . PHP_EOL . PHP_EOL;
 		$this->runCommand($argv);
 		echo PHP_EOL;
@@ -93,7 +93,7 @@ class Console {
 	 *
 	 * @param array $commands
 	 */
-	private function help($commands) {
+	private function help(array $commands) {
 		echo PHP_EOL . 'Commands: ' . PHP_EOL;
 
 		foreach ($commands as $name => $command) {
@@ -106,7 +106,7 @@ class Console {
 	 *
 	 * @param array $argv
 	 */
-	private function runCommand($argv) {
+	private function runCommand(array $argv) {
 		$commands = $this->getCommands();
 
 		if (empty($argv[1])) {

@@ -53,7 +53,7 @@ class Alert {
 	 * @param string $class
 	 * @return string The rendered alert box markup
 	 */
-	public static function render($text, $class = false) {
+	public static function render(string $text, string $class = '') {
 		return <<< HTML
 			<div class="uk-alert $class">
 				$text

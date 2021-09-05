@@ -39,7 +39,7 @@ namespace Automad\Core;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * 	The Selection class holds all methods to filter and sort the collection of pages and return them as a new selection.
+ * The Selection class holds all methods to filter and sort the collection of pages and return them as a new selection.
  *
  * Every instance can return a filtered and sorted array of pages without hurting the original Automad object.
  * That means the Automad class object has to be created only once.
@@ -54,7 +54,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Selection {
 	/**
-	 * 	Initially holds the whole collection.
+	 * Initially holds the whole collection.
 	 *
 	 * $selection is basically the internal working copy of the collection array.
 	 * It can be sorted and filtered without hurting the original collection.
@@ -62,11 +62,11 @@ class Selection {
 	private $selection = array();
 
 	/**
-	 * 	Pass a set of pages to $this->selection excluding all hidden pages.
+	 * Pass a set of pages to $this->selection excluding all hidden pages.
 	 *
-	 * @param array $pages (normally Automad::getCollection() or any other selection array)
+	 * @param array $pages
 	 */
-	public function __construct($pages) {
+	public function __construct(array $pages) {
 		$this->selection = $pages;
 	}
 
@@ -82,7 +82,7 @@ class Selection {
 	 *
 	 * @param string $url
 	 */
-	public function excludePage($url) {
+	public function excludePage(string $url) {
 		if ($url && array_key_exists($url, $this->selection)) {
 			unset($this->selection[$url]);
 		}
@@ -93,7 +93,7 @@ class Selection {
 	 *
 	 * @param string $url
 	 */
-	public function filterBreadcrumbs($url) {
+	public function filterBreadcrumbs(string $url) {
 		// Test wheter $url is the URL of a real page.
 		// "Real" pages have a URL (not like search or error pages) and they exist in the selection array (not hidden).
 		// For all other $url, just the home page will be returned.
@@ -125,7 +125,7 @@ class Selection {
 	 *
 	 * @param string $str
 	 */
-	public function filterByKeywords($str) {
+	public function filterByKeywords(string $str) {
 		if ($str) {
 			$filtered = array();
 
@@ -161,7 +161,7 @@ class Selection {
 	 *
 	 * @param string $parent
 	 */
-	public function filterByParentUrl($parent) {
+	public function filterByParentUrl(string $parent) {
 		$filtered = array();
 
 		foreach ($this->selection as $key => $Page) {
@@ -179,7 +179,7 @@ class Selection {
 	 *
 	 * @param string $tag
 	 */
-	public function filterByTag($tag) {
+	public function filterByTag(string $tag) {
 		if ($tag) {
 			$filtered = array();
 
@@ -200,7 +200,7 @@ class Selection {
 	 *
 	 * @param string $regex
 	 */
-	public function filterByTemplate($regex) {
+	public function filterByTemplate(string $regex) {
 		if ($regex) {
 			$filtered = array();
 
@@ -223,7 +223,7 @@ class Selection {
 	 *
 	 * @param string $url
 	 */
-	public function filterPrevAndNextToUrl($url) {
+	public function filterPrevAndNextToUrl(string $url) {
 		if (array_key_exists($url, $this->selection)) {
 			// To be able to hide the hidden pages as neighbors and jump directly to the closest non-hidden pages (both sides),
 			// in case one or both neigbors is/are hidden, $this->excludeHidden() has to be called here already, because only excluding the hidden pages
@@ -270,9 +270,9 @@ class Selection {
 	 * Filter all pages having one or more tag in common with $Page. If there are not tags defined for the passed page,
 	 * the selection will be an empty array. (no tags = no related pages)
 	 *
-	 * @param object $Page
+	 * @param Page $Page
 	 */
-	public function filterRelated($Page) {
+	public function filterRelated(Page $Page) {
 		$tags = $Page->tags;
 
 		$filtered = array();
@@ -294,13 +294,13 @@ class Selection {
 	/**
 	 * 	Return the array with the selected (filtered and sorted) pages.
 	 *
-	 * @param boolean $excludeHidden
-	 * @param boolean $excludeCurrent
-	 * @param integer $offset
-	 * @param integer $limit
+	 * @param bool $excludeHidden
+	 * @param bool $excludeCurrent
+	 * @param int $offset
+	 * @param int $limit
 	 * @return array $this->selection
 	 */
-	public function getSelection($excludeHidden = true, $excludeCurrent = false, $offset = 0, $limit = null) {
+	public function getSelection(bool $excludeHidden = true, bool $excludeCurrent = false, int $offset = 0, ?int $limit = null) {
 		if ($excludeHidden) {
 			$this->excludeHidden();
 		}
@@ -318,7 +318,7 @@ class Selection {
 	 *
 	 * @param array $options
 	 */
-	public function match($options) {
+	public function match(?array $options) {
 		if (empty($options)) {
 			return false;
 		}
@@ -343,14 +343,14 @@ class Selection {
 	 * The option string consists of multiple pairs of
 	 * a data key and a sort order, separated by a comma like this:
 	 * $Selection->sortPages('date desc, title asc')
-	 * 	The above example will sort first all pages in the selection by 'date' (descending) and then by 'title' (ascending).
+	 * The above example will sort first all pages in the selection by 'date' (descending) and then by 'title' (ascending).
 	 *
-	 * 	Valid values for the order are 'asc' and 'desc'.
-	 * 	In case a sort order is missing in a key/order combination, the 'asc' is used as a fallback.
+	 * Valid values for the order are 'asc' and 'desc'.
+	 * In case a sort order is missing in a key/order combination, the 'asc' is used as a fallback.
 	 *
-	 * @param string $options (comma separated list of keys and order)
+	 * @param string|null $options
 	 */
-	public function sortPages($options = false) {
+	public function sortPages(?string $options = null) {
 		$sort = array();
 		$parameters = array();
 

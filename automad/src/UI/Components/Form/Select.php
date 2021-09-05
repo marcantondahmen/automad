@@ -56,7 +56,7 @@ class Select {
 	 * @param string $class
 	 * @return string The HTML for the button
 	 */
-	public static function render($name, $values, $selected, $prefix = '', $class = '') {
+	public static function render(string $name, array $values, $selected, string $prefix = '', string $class = '') {
 		// Set checked value, if $checked is not in $values, to prevent submitting an empty value.
 		if (!in_array($selected, $values)) {
 			$selected = reset($values);

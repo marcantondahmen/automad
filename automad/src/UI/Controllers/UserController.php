@@ -115,7 +115,7 @@ class UserController {
 	/**
 	 * Log out user.
 	 *
-	 * @return boolean true on success
+	 * @return bool true on success
 	 */
 	public static function logout() {
 		return UserModel::logout();

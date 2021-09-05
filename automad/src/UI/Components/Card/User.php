@@ -56,7 +56,7 @@ class User {
 	 * @param string $user
 	 * @return string the rendered user card
 	 */
-	public static function render($user) {
+	public static function render(string $user) {
 		$id = 'am-user-' . Str::slug($user);
 		$fn = function ($expression) {
 			return $expression;
@@ -88,7 +88,7 @@ HTML;
 	 * @param string $id
 	 * @return string the rendered checkbox
 	 */
-	private static function checkbox($user, $id) {
+	private static function checkbox(string $user, string $id) {
 		$fn = function ($expression) {
 			return $expression;
 		};

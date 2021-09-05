@@ -54,7 +54,7 @@ class Package {
 	 * @param object $package
 	 * @return string The HTML of the card
 	 */
-	public static function render($package) {
+	public static function render(object $package) {
 		$Text = Text::getObject();
 		$badge = '';
 		$button = '';

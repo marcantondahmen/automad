@@ -62,7 +62,7 @@ class FileModel {
 	 * @param string $caption
 	 * @return string an error message or false on success
 	 */
-	public static function editInfo($newName, $oldName, $caption) {
+	public static function editInfo(string $newName, string $oldName, string $caption) {
 		$error = '';
 
 		if ($oldName && $newName) {
@@ -126,10 +126,10 @@ class FileModel {
 	 * Import file from URL.
 	 *
 	 * @param string $importUrl
-	 * @param string $pageUrl
+	 * @param string|null $pageUrl
 	 * @return array an error message or false on success
 	 */
-	public static function import($importUrl, $pageUrl = false) {
+	public static function import(string $importUrl, ?string $pageUrl = null) {
 		$error = '';
 
 		if ($importUrl) {

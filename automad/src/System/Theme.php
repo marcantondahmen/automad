@@ -42,10 +42,10 @@ use Automad\Core\Str;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Theme utility class stores all meta data of an installed theme.
+ * The Theme class stores all meta data of an installed theme.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2018-2019 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2018-2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Theme {
@@ -60,7 +60,7 @@ class Theme {
 	 * @param string $themeJSON
 	 * @param array $composerInstalled
 	 */
-	public function __construct($themeJSON, $composerInstalled) {
+	public function __construct(string $themeJSON, array $composerInstalled) {
 		$json = false;
 		$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
 		$defaults = array(
@@ -126,7 +126,7 @@ class Theme {
 	 * @param string $key The property name
 	 * @return string The returned value from the data array
 	 */
-	public function __get($key) {
+	public function __get(string $key) {
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
 		}
@@ -138,7 +138,7 @@ class Theme {
 	 * @param string $mask "page" or "shared"
 	 * @return array The mask array
 	 */
-	public function getMask($mask) {
+	public function getMask(string $mask) {
 		if (array_key_exists($mask, $this->data['masks'])) {
 			return $this->data['masks'][$mask];
 		}
@@ -152,7 +152,7 @@ class Theme {
 	 * @param string $key
 	 * @return string The tooltip text
 	 */
-	public function getTooltip($key) {
+	public function getTooltip(string $key) {
 		if (array_key_exists($key, $this->data['tooltips'])) {
 			return $this->data['tooltips'][$key];
 		}

@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Views\Elements;
 
+use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\UI\Components\Logo;
 use Automad\UI\Components\Nav\Jumpbar;
@@ -57,10 +58,10 @@ class Sidebar {
 	/**
 	 * Render the dashboard sidebar.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered dashboard sidebar
 	 */
-	public static function render($Automad) {
+	public static function render(Automad $Automad) {
 		if (!UserModel::getName()) {
 			return false;
 		}
@@ -141,11 +142,11 @@ class Sidebar {
 										{$fn(ucwords(UserModel::getName()))}
 										<i class="uk-icon-angle-double-right"></i>
 									</a>
-								</li>	
+								</li>
 							</ul>
-						</div>	
+						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
 HTML;
 	}
@@ -157,7 +158,7 @@ HTML;
 	 * @param string $sitename
 	 * @return string the rendered menu item
 	 */
-	private static function inPageLink($url, $sitename) {
+	private static function inPageLink(string $url, string $sitename) {
 		if (AM_HEADLESS_ENABLED) {
 			return false;
 		}

@@ -53,7 +53,7 @@ class Jumpbar {
 	 * @param string $tooltip
 	 * @return string The HTML for the jump bar
 	 */
-	public static function render($placeholder = '', $tooltip = '') {
+	public static function render(string $placeholder = '', string $tooltip = '') {
 		if ($tooltip) {
 			$tooltip = 'title="' . htmlspecialchars($tooltip) . '" data-uk-tooltip="{pos:\'bottom\'}" ';
 		}

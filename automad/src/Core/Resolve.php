@@ -60,7 +60,7 @@ class Resolve {
 	 * @param string $url
 	 * @return string The resolved URL
 	 */
-	public static function absoluteUrlToRoot($url) {
+	public static function absoluteUrlToRoot(string $url) {
 		// Skip URLs starting with "//".
 		if (strpos($url, '//') === 0) {
 			return $url;
@@ -70,7 +70,8 @@ class Resolve {
 		if (strpos($url, '/') === 0) {
 			// Relative to root
 			if (FileSystem::isAllowedFileType($url) || $url == '/' || strpos($url, '/?') === 0 || strpos($url, '/#') === 0) {
-				// Skip adding a possible '/index.php' when linking to files and to the homepage (possibly including a query string or anchor link),
+				// Skip adding a possible '/index.php' when linking to files and to the homepage
+				// (possibly including a query string or anchor link),
 				// also if rewriting is disabled.
 				return AM_BASE_URL . $url;
 			} else {
@@ -93,7 +94,7 @@ class Resolve {
 	 * @param string $filePath
 	 * @return string The resolved file path
 	 */
-	public static function filePath($pagePath, $filePath) {
+	public static function filePath(string $pagePath, string $filePath) {
 		if (strpos($filePath, '/') === 0) {
 			// Relative to root
 			return AM_BASE_DIR . $filePath;
@@ -113,10 +114,10 @@ class Resolve {
 	 * ../       -> /parent
 	 *
 	 * @param string $url
-	 * @param object $Page
+	 * @param Page $Page
 	 * @return string The resolved URL
 	 */
-	public static function relativeUrlToBase($url, $Page) {
+	public static function relativeUrlToBase(string $url, Page $Page) {
 		// Skip any protocol, mailto, tel and skype links.
 		if (preg_match('/(\:\/\/|^[a-z]+\:)/is', $url)) {
 			return $url;

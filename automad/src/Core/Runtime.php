@@ -60,9 +60,9 @@ class Runtime {
 	/**
 	 * The constructor.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 */
-	public function __construct($Automad) {
+	public function __construct(Automad $Automad) {
 		$this->Automad = $Automad;
 		Debug::log('Created new instance');
 	}
@@ -73,7 +73,7 @@ class Runtime {
 	 * @param string $key
 	 * @return string The value of $key or NULL if the requested variable doesn't exsist
 	 */
-	public function get($key) {
+	public function get(string $key) {
 		// Check whether $key is generated within a loop and therefore stored in $this->data or
 		// if $key is related to the context, filelist or pagelist object.
 		if (array_key_exists($key, $this->data)) {
@@ -124,7 +124,7 @@ class Runtime {
 	 * @param string $key
 	 * @param mixed $value
 	 */
-	public function set($key, $value) {
+	public function set(string $key, $value) {
 		$this->data[$key] = $value;
 	}
 
@@ -144,7 +144,7 @@ class Runtime {
 	 *
 	 * @param array $shelf
 	 */
-	public function unshelve($shelf) {
+	public function unshelve(array $shelf) {
 		$this->data = $shelf;
 		Debug::log($this->data, 'Unshelving');
 	}

@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Models;
 
+use Automad\Core\Automad;
 use Automad\UI\Models\Search\FileKeysModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,13 +52,13 @@ class LinksModel {
 	/**
 	 * Update all links to a page or file after renaming or moving content.
 	 *
-	 * @param \Automad\Core\Automad $Automad
+	 * @param Automad $Automad
 	 * @param string $old
 	 * @param string $new
-	 * @param string $dataFilePath
-	 * @return boolean true on success
+	 * @param string|null $dataFilePath
+	 * @return bool true on success
 	 */
-	public static function update($Automad, $old, $new, $dataFilePath = false) {
+	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null) {
 		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
 		$replaceValue = $new;
 

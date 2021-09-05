@@ -53,7 +53,7 @@ class FieldHidden {
 	 * @param string $value
 	 * @return string The HTML for the hidden input field
 	 */
-	public static function render($key = '', $value = '') {
+	public static function render(string $key = '', $value = '') {
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 

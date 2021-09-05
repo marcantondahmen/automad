@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Debug {
 	/**
-	 * 	Renders the debug component.
+	 * Renders the debug component.
 	 *
 	 * @return string The rendered HTML
 	 */

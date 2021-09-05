@@ -59,7 +59,7 @@ class FileCollectionModel {
 	 * @param string $path
 	 * @return Response the response object
 	 */
-	public static function deleteFiles($files, $path) {
+	public static function deleteFiles(array $files, string $path) {
 		$Response = new Response();
 
 		// Check if directory is writable.
@@ -96,7 +96,7 @@ class FileCollectionModel {
 	 * @param string $path
 	 * @return string an error message or false on success
 	 */
-	public static function upload($files, $path) {
+	public static function upload(array $files, string $path) {
 		$error = '';
 
 		// Move uploaded files

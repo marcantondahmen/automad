@@ -36,6 +36,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -50,10 +52,10 @@ class Code extends AbstractBlock {
 	 * Render a code block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		$code = htmlspecialchars($data->code);
 
 		return '<pre ' . self::classAttr() . '><code>' . $code . '</code></pre>';

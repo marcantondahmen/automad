@@ -54,10 +54,10 @@ class SelectImage {
 	 *
 	 * @param array $files
 	 * @param string $title
-	 * @param boolean $basename
+	 * @param bool $basename
 	 * @return string The HTML of the panel
 	 */
-	public static function render($files, $title, $basename = false) {
+	public static function render(array $files, string $title, bool $basename = false) {
 		if ($files) {
 			$count = count($files);
 

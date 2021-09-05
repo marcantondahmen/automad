@@ -60,7 +60,7 @@ class SearchController {
 	/**
 	 * Perform a search and replace.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function searchAndReplace() {
 		$Response = new Response();

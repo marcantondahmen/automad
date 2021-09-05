@@ -49,13 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Button {
 	/**
-	 *  Create a status button for an AJAX status request with loading animation.
+	 * Create a status button for an AJAX status request with loading animation.
 	 *
 	 * @param string $status
 	 * @param string $tab
 	 * @return string The HTML for the status button
 	 */
-	public static function render($status, $tab) {
+	public static function render(string $status, string $tab) {
 		$Text = Text::getObject();
 
 		return <<< HTML

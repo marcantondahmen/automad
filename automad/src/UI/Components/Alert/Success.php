@@ -52,7 +52,7 @@ class Success {
 	 * @param string $text
 	 * @return string The rendered alert box markup
 	 */
-	public static function render($text) {
+	public static function render(string $text) {
 		return Alert::render($text, 'uk-alert-success');
 	}
 }

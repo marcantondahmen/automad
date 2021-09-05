@@ -49,14 +49,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Page {
 	/**
-	 * 	The $data array holds all the information stored as "key: value" in the text file and some other system generated information (:path, :level, :template ...).
+	 * The $data array holds all the information stored as "key: value" in the text file and some other system generated information (:path, :level, :template ...).
 	 *
 	 * The key can be everything alphanumeric as long as there is a matching var set in the template files.
 	 * Out of all possible keys ther are two very special ones:
 	 *
-	 * - "title": 				The title of the page - will also be used for sorting
-	 * - "tags" (or better AM_KEY_TAGS): 	The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page
-	 * 					The original string will remain in the $data array for seaching
+	 * - "title": The title of the page - will also be used for sorting
+	 * - "tags":  The tags (or what ever is set in the const.php) will be extracted and stored as an array in the main properties of that page
+	 *            The original string will remain in the $data array for seaching
 	 */
 	public $data = array();
 
@@ -74,21 +74,21 @@ class Page {
 	 * Set main properties.
 	 *
 	 * @param array $data
-	 * @param object $Shared
+	 * @param Shared $Shared
 	 */
-	public function __construct($data, $Shared) {
+	public function __construct(array $data, Shared $Shared) {
 		$this->data = $data;
 		$this->Shared = $Shared;
 		$this->tags = $this->extractTags();
 	}
 
 	/**
-	 *  Make basic data items accessible as page properties.
+	 * Make basic data items accessible as page properties.
 	 *
-	 * @param string $key The property name
+	 * @param string $key
 	 * @return string The returned value from the data array
 	 */
-	public function __get($key) {
+	public function __get(string $key) {
 		// Map property names to the defined keys of the data array.
 		$keyMap = array(
 			'hidden' => AM_KEY_HIDDEN,
@@ -120,7 +120,7 @@ class Page {
 	 * @param string $key
 	 * @return string The requested value
 	 */
-	public function get($key) {
+	public function get(string $key) {
 		// Check whether the requested data is part of the data array or has to be generated.
 		if (array_key_exists($key, $this->data)) {
 			// Return value from the data array.
@@ -165,7 +165,7 @@ class Page {
 	}
 
 	/**
-	 * 	Return the template of the page.
+	 * Return the template of the page.
 	 *
 	 * @return string The full file system path of the template file.
 	 */
@@ -187,7 +187,7 @@ class Page {
 	/**
 	 * Check if page is the current page.
 	 *
-	 * @return boolean
+	 * @return bool true if the the page is the currently requested page
 	 */
 	public function isCurrent() {
 		return (AM_REQUEST == $this->url);
@@ -196,7 +196,7 @@ class Page {
 	/**
 	 * Check if the page URL is a part the current page's URL.
 	 *
-	 * @return boolean
+	 * @return bool true if the the page is a parent of the currently requested page or the requeste page itself
 	 */
 	public function isInCurrentPath() {
 		// Test if AM_REQUEST starts with or is equal to $this->url.

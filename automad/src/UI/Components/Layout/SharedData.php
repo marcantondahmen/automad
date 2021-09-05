@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Layout;
 
+use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\System\Themelist;
 use Automad\UI\Components\Accordion\UnusedVariables;
@@ -104,9 +105,9 @@ class SharedData {
 	/**
 	 * The shared data layout constructor.
 	 *
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 */
-	public function __construct($Automad) {
+	public function __construct(Automad $Automad) {
 		$this->Automad = $Automad;
 		$this->data = $Automad->Shared->data;
 

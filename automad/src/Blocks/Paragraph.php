@@ -36,6 +36,8 @@
 
 namespace Automad\Blocks;
 
+use Automad\Core\Automad;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -50,10 +52,10 @@ class Paragraph extends AbstractBlock {
 	 * Render a paragraph block.
 	 *
 	 * @param object $data
-	 * @param object $Automad
+	 * @param Automad $Automad
 	 * @return string the rendered HTML
 	 */
-	public static function render($data, $Automad) {
+	public static function render(object $data, Automad $Automad) {
 		$classes = array();
 		$text = htmlspecialchars_decode($data->text);
 

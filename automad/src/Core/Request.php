@@ -127,7 +127,7 @@ class Request {
 	 * @param string $key
 	 * @return string The value for the requested key
 	 */
-	public static function post($key) {
+	public static function post(string $key) {
 		if (isset($_POST[$key])) {
 			return $_POST[$key];
 		} else {
@@ -138,12 +138,12 @@ class Request {
 	/**
 	 * Return a sanitized value of a query string parameter or any empty string, if that parameter doesn't exist.
 	 * Note: Since this method always returns a string, it should not be used to test whether a parameter exists in the query string,
-	 * 	because a non-existing parameter and an empty string as a parameter's value will return the same.
+	 * because a non-existing parameter and an empty string as a parameter's value will return the same.
 	 *
 	 * @param string $key
 	 * @return string The value for the requested query key
 	 */
-	public static function query($key) {
+	public static function query(string $key) {
 		if (isset($_GET[$key])) {
 			return htmlspecialchars($_GET[$key]);
 		} else {

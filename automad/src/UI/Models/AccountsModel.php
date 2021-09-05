@@ -57,7 +57,7 @@ class AccountsModel {
 	 * @param string $password2
 	 * @return string an error message or false on success.
 	 */
-	public static function add($username, $password1, $password2) {
+	public static function add(string $username, string $password1, string $password2) {
 		if ($username && $password1 && $password2) {
 			// Check if password1 equals password2.
 			if ($password1 == $password2) {
@@ -93,7 +93,7 @@ class AccountsModel {
 	 * @param array $users
 	 * @return string an error message or false on success.
 	 */
-	public static function delete($users) {
+	public static function delete(array $users) {
 		if (is_array($users)) {
 			// Only delete users from list, if accounts.txt is writable.
 			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
@@ -126,7 +126,7 @@ class AccountsModel {
 	 * @param array $accounts
 	 * @return string The PHP code
 	 */
-	public static function generatePHP($accounts) {
+	public static function generatePHP(array $accounts) {
 		return 	"<?php defined('AUTOMAD') or die('Direct access not permitted!');\n" .
 				'return unserialize(\'' . serialize($accounts) . '\');' . "\n?>";
 	}
@@ -148,7 +148,7 @@ class AccountsModel {
 	 * @param string $password2
 	 * @return string Error message in case of an error.
 	 */
-	public static function install($username, $password1, $password2) {
+	public static function install(string $username, string $password1, string $password2) {
 		if ($username && $password1 && ($password1 === $password2)) {
 			$accounts = array();
 			$accounts[$username] = self::passwordHash($password1);
@@ -174,7 +174,7 @@ class AccountsModel {
 	 * @param string $password
 	 * @return string Hashed/salted password
 	 */
-	public static function passwordHash($password) {
+	public static function passwordHash(string $password) {
 		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
 
 		return crypt($password, $salt);
@@ -185,19 +185,19 @@ class AccountsModel {
 	 *
 	 * @param string $password (clear text)
 	 * @param string $hash (hashed password)
-	 * @return boolean true/false
+	 * @return bool true if the password is verified
 	 */
-	public static function passwordVerified($password, $hash) {
+	public static function passwordVerified(string $password, string $hash) {
 		return ($hash === crypt($password, $hash));
 	}
 
 	/**
 	 * Save the accounts array as PHP to AM_FILE_ACCOUNTS.
 	 *
-	 * @param mixed $accounts
-	 * @return boolean Success (true/false)
+	 * @param array $accounts
+	 * @return bool Success (true/false)
 	 */
-	public static function write($accounts) {
+	public static function write(array $accounts) {
 		$success = FileSystem::write(AM_FILE_ACCOUNTS, self::generatePHP($accounts));
 
 		if ($success && function_exists('opcache_invalidate')) {

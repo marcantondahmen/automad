@@ -69,7 +69,7 @@ class FieldResultsModel {
 	 * @param array $matches
 	 * @param string $context
 	 */
-	public function __construct($key, $matches, $context) {
+	public function __construct(string $key, array $matches, string $context) {
 		$this->key = $key;
 		$this->matches = $matches;
 		$this->context = $context;

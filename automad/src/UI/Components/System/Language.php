@@ -51,7 +51,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Language {
 	/**
-	 * 	Renders the language component.
+	 * Renders the language component.
 	 *
 	 * @return string The rendered HTML
 	 */

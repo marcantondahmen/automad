@@ -53,7 +53,7 @@ class Bar {
 	 * @param string $label
 	 * @return string The breadcrumb naviagtion markup
 	 */
-	public static function render($title, $label) {
+	public static function render(string $title, string $label) {
 		return <<< HTML
 				<button 
 				type="button" 

@@ -56,7 +56,7 @@ class RemoteFile {
 	 *
 	 * @param string $url
 	 */
-	public function __construct($url) {
+	public function __construct(string $url) {
 		$this->localCopy = $this->download($url);
 	}
 
@@ -75,7 +75,7 @@ class RemoteFile {
 	 * @param string $url
 	 * @return string The local copy's file path or false
 	 */
-	private function download($url) {
+	private function download(string $url) {
 		$downloads = AM_BASE_DIR . AM_DIR_CACHE . '/downloads';
 		FileSystem::makeDir($downloads);
 		$file = $downloads . '/' . AM_FILE_PREFIX_CACHE . '_' . sha1($url);

@@ -52,7 +52,7 @@ class FileSystem {
 	 * @param string $file
 	 * @return bool Return true if the file was deleted succsessfully
 	 */
-	public static function deleteFile($file) {
+	public static function deleteFile(string $file) {
 		if (is_file($file)) {
 			if (is_writable($file) && is_writable(dirname($file))) {
 				return unlink($file);
@@ -66,7 +66,7 @@ class FileSystem {
 	 * @param string $file
 	 * @return string The extension
 	 */
-	public static function getExtension($file) {
+	public static function getExtension(string $file) {
 		$pathInfo = pathinfo($file);
 
 		if (!empty($pathInfo['extension'])) {
@@ -78,9 +78,9 @@ class FileSystem {
 	 * 	Get file extension for images based on mime types.
 	 *
 	 * @param string $file
-	 * @return	string The extension or false
+	 * @return mixed The extension or false
 	 */
-	public static function getImageExtensionFromMimeType($file) {
+	public static function getImageExtensionFromMimeType(string $file) {
 		try {
 			$getimagesize = getimagesize($file);
 			$type = $getimagesize['mime'];
@@ -111,11 +111,11 @@ class FileSystem {
 	}
 
 	/**
-	 * 	Return the path of the temp dir if it is writable by the webserver.
-	 *  In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
-	 *  while other locations like '/var/tmp' do not get purged by the system.
-	 *  But since '/tmp' is only available on macos and linux,
-	 *  sys_get_temp_dir() is used as fallback.
+	 * Return the path of the temp dir if it is writable by the webserver.
+	 * In any case, '/tmp' is the preferred directory, because of automatic cleanup at reboot,
+	 * while other locations like '/var/tmp' do not get purged by the system.
+	 * But since '/tmp' is only available on macos and linux,
+	 * sys_get_temp_dir() is used as fallback.
 	 *
 	 * @return string The path to the temp dir
 	 */
@@ -137,10 +137,10 @@ class FileSystem {
 	 * on some systems instead of empty arrays.
 	 *
 	 * @param string $pattern
-	 * @param integer $flags
+	 * @param int $flags
 	 * @return array The list of matching files
 	 */
-	public static function glob($pattern, $flags = 0) {
+	public static function glob(string $pattern, int $flags = 0) {
 		$files = glob($pattern, $flags);
 
 		if (!$files) {
@@ -161,10 +161,10 @@ class FileSystem {
 	 *
 	 * @param string $pattern
 	 * @param string $regex
-	 * @param integer $flags
+	 * @param int $flags
 	 * @return array The filtered list of matching files
 	 */
-	public static function globGrep($pattern, $regex, $flags = 0) {
+	public static function globGrep(string $pattern, string $regex, int $flags = 0) {
 		return array_values(preg_grep($regex, self::glob($pattern, $flags)));
 	}
 
@@ -176,9 +176,9 @@ class FileSystem {
 	 * "/url/file.jpg" will return true, "/url/file" or "/url/file.something" will return false.
 	 *
 	 * @param string $str
-	 * @return boolean
+	 * @return bool
 	 */
-	public static function isAllowedFileType($str) {
+	public static function isAllowedFileType(string $str) {
 		// Remove possible query string
 		$str = preg_replace('/\?.*/', '', $str);
 
@@ -199,9 +199,9 @@ class FileSystem {
 	 * Create directory if not existing.
 	 *
 	 * @param string $path
-	 * @return boolean True on success, else false
+	 * @return bool True on success, else false
 	 */
-	public static function makeDir($path) {
+	public static function makeDir(string $path) {
 		if (!file_exists($path)) {
 			$umask = umask(0);
 			$return = mkdir($path, AM_PERM_DIR, true);
@@ -218,7 +218,7 @@ class FileSystem {
 	 * @param string $path
 	 * @return string The processed path with only forward slashes
 	 */
-	public static function normalizeSlashes($path) {
+	public static function normalizeSlashes(string $path) {
 		return str_replace('\\', '/', $path);
 	}
 
@@ -227,9 +227,9 @@ class FileSystem {
 	 *
 	 * @param string $file
 	 * @param string $content
-	 * @return boolean True on success, else false
+	 * @return bool True on success, else false
 	 */
-	public static function write($file, $content) {
+	public static function write(string $file, string $content) {
 		self::makeDir(dirname($file));
 
 		if (!file_exists($file)) {

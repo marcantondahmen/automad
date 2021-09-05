@@ -56,12 +56,12 @@ class FileCollection {
 	/**
 	 * Render the file collection layout.
 	 *
-	 * @param mixed $files
-	 * @param mixed $url
-	 * @param mixed $modalTitle
+	 * @param array $files
+	 * @param string $url
+	 * @param string $modalTitle
 	 * @return string the rendered file collection layout.
 	 */
-	public static function render($files, $url, $modalTitle) {
+	public static function render(array $files, string $url, string $modalTitle) {
 		$fn = function ($expression) {
 			return $expression;
 		};

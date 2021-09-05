@@ -56,7 +56,7 @@ class UIController {
 	/**
 	 * Return the autocomplete values for a search field.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function autocompleteJump() {
 		$Automad = UICache::get();
@@ -67,7 +67,7 @@ class UIController {
 	/**
 	 * Return the autocomplete values for a link field.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function autocompleteLink() {
 		$Automad = UICache::get();
@@ -78,7 +78,7 @@ class UIController {
 	/**
 	 * Return the UI component for a variable field based on the name.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function field() {
 		$Response = new Response();
@@ -94,7 +94,7 @@ class UIController {
 	/**
 	 * Redirect to a given target URL.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function jump() {
 		$Response = new Response();

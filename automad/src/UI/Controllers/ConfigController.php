@@ -56,7 +56,7 @@ class ConfigController {
 	/**
 	 * Save the posted configuartion to the config.php file.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function save() {
 		$Response = new Response();
@@ -102,7 +102,7 @@ HTML;
 	/**
 	 * Update a single configuration item.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function update() {
 		$Response = new Response();

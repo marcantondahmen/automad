@@ -56,7 +56,7 @@ class SelectImage {
 	 * @param array $sharedImages
 	 * @return string the rendered selection layout
 	 */
-	public static function render($pageImages, $sharedImages) {
+	public static function render(array $pageImages, array $sharedImages) {
 		$fn = function ($expression) {
 			return $expression;
 		};

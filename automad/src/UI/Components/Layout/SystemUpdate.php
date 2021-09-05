@@ -55,7 +55,7 @@ class SystemUpdate {
 	 * @param string $version
 	 * @return string the rendered system update layout.
 	 */
-	public static function render($version) {
+	public static function render(string $version) {
 		$winAlert = '';
 		$items = '';
 		$fn = function ($expression) {

@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Headless {
 	/**
-	 * 	Renders the headless component.
+	 * Renders the headless component.
 	 *
 	 * @return string The rendered HTML
 	 */

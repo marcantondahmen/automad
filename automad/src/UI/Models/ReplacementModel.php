@@ -67,14 +67,14 @@ class ReplacementModel {
 	private $searchValue;
 
 	/**
-	 * Initialize a new replacer model.
+	 * Initialize a new replacement model.
 	 *
 	 * @param string $searchValue
 	 * @param string $replaceValue
-	 * @param boolean $isRegex
-	 * @param boolean $isCaseSensitive
+	 * @param bool $isRegex
+	 * @param bool $isCaseSensitive
 	 */
-	public function __construct($searchValue, $replaceValue, $isRegex, $isCaseSensitive) {
+	public function __construct(string $searchValue, string $replaceValue, bool $isRegex, bool $isCaseSensitive) {
 		$this->searchValue = preg_quote($searchValue, '/');
 		$this->regexFlags = 'ims';
 
@@ -94,9 +94,9 @@ class ReplacementModel {
 	 *
 	 * @see \Automad\UI\Models\Search\FileKeysModel
 	 * @param array $fileKeysArray
-	 * @return boolean true on success
+	 * @return bool true on success
 	 */
-	public function replaceInFiles($fileKeysArray) {
+	public function replaceInFiles(array $fileKeysArray) {
 		if (!$this->replaceValue || empty($fileKeysArray)) {
 			Debug::log('No files or replacement string');
 
@@ -117,10 +117,10 @@ class ReplacementModel {
 	/**
 	 * Replace matches in block data recursively.
 	 *
-	 * @param object $blocks
-	 * @return object the processed block data
+	 * @param array $blocks
+	 * @return array the processed blocks
 	 */
-	private function replaceInBlocksRecursively($blocks) {
+	private function replaceInBlocksRecursively(array $blocks) {
 		foreach ($blocks as $block) {
 			if ($block->type == 'section') {
 				$block->data->content->blocks = $this->replaceInBlocksRecursively($block->data->content->blocks);
@@ -141,7 +141,7 @@ class ReplacementModel {
 	 * @param array $keys
 	 * @return array the processed data array
 	 */
-	private function replaceInData($data, $keys) {
+	private function replaceInData(array $data, array $keys) {
 		foreach ($keys as $key) {
 			if (strpos($key, '+') === 0) {
 				$fieldData = json_decode($data[$key]);
@@ -167,7 +167,7 @@ class ReplacementModel {
 	/**
 	 * Replace searched string in a value that is either a string or an multidimensional array of strings.
 	 *
-	 * @param mixed $value
+	 * @param array|string $value
 	 * @return mixed $value
 	 */
 	private function replaceInValueRecursively($value) {

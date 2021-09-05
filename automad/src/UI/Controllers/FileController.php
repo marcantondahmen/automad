@@ -53,7 +53,7 @@ class FileController {
 	/**
 	 * Edit file information (file name and caption).
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function editInfo() {
 		$Response = new Response();
@@ -72,7 +72,7 @@ class FileController {
 	/**
 	 * Import file from URL.
 	 *
-	 * @return \Automad\UI\Response the response object
+	 * @return Response the response object
 	 */
 	public static function import() {
 		$Response = new Response();

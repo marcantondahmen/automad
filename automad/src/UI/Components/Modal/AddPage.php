@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\Modal;
 
+use Automad\Core\Automad;
+use Automad\System\Themelist;
 use Automad\UI\Components\Form\CheckboxPrivate;
 use Automad\UI\Components\Form\SelectTemplate;
 use Automad\UI\Components\Nav\SiteTree;
@@ -52,13 +54,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class AddPage {
 	/**
-	 * 	Renders the about modal.
+	 * Renders the about modal.
 	 *
-	 * @param object $Automad
-	 * @param object $Themelist
+	 * @param Automad $Automad
+	 * @param Themelist $Themelist
 	 * @return string The rendered HTML
 	 */
-	public static function render($Automad, $Themelist) {
+	public static function render(Automad $Automad, Themelist $Themelist) {
 		$fn = function ($expression) {
 			return $expression;
 		};
