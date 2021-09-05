@@ -39,9 +39,11 @@ namespace Automad\System;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Str;
+use Automad\UI\Components\Alert\Alert;
 use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Components\Alert\Success;
 use Automad\UI\Response;
+use Automad\UI\Utils\Prefix;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -367,11 +369,11 @@ class Update {
 	 * Preload required classes before removing old installation.
 	 */
 	private static function preloadClasses() {
-		require_once(AM_BASE_DIR . '/automad/ui/utils/prefix.php');
-		require_once(AM_BASE_DIR . '/automad/ui/components/alert/alert.php');
-		require_once(AM_BASE_DIR . '/automad/ui/components/alert/danger.php');
-		require_once(AM_BASE_DIR . '/automad/ui/components/alert/success.php');
-		require_once(AM_BASE_DIR . '/automad/ui/utils/text.php');
+		Prefix::tags('');
+		Alert::render('');
+		Danger::render('');
+		Success::render('');
+		Text::getObject();
 	}
 
 	/**
