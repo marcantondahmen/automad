@@ -72,7 +72,7 @@ class Console {
 		}
 
 		$classList = array_filter(get_declared_classes(), function ($cls) {
-			return (strpos($cls, 'Automad\UI\Commands') !== false && strpos($cls, 'Commands\Command') === false);
+			return (strpos($cls, 'Automad\UI\Commands') !== false && strpos($cls, 'Commands\AbstractCommand') === false);
 		});
 
 		$commands = array();
