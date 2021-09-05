@@ -38,12 +38,12 @@
 	&-buttons {
 		border-radius: @am-radius;
 		background-color: @button-background;
-		border: @am-border-width solid @am-switcher-border-color;
+		border: @am-border-width-px solid @am-switcher-border-color;
 		border-left: none;
 
 		& > div {
 			max-width: 100%;
-			margin: -0.072rem 0;
+			margin: -@am-border-width-px 0;
 		}
 
 		& [data-uk-switcher]:last-child {
@@ -58,6 +58,7 @@
 			overflow: hidden;
 			text-overflow: clip;
 			border-color: @am-switcher-border-color;
+			border-width: @am-border-width-px;
 			border-left: none;
 			border-right: none;
 
