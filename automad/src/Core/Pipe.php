@@ -157,10 +157,10 @@ class Pipe {
 	 *
 	 * @param string $function
 	 * @param array $parameters
-	 * @param string $value
+	 * @param string|null $value
 	 * @return string $value
 	 */
-	private static function stringFunction(string $function, array $parameters, string $value) {
+	private static function stringFunction(string $function, array $parameters, ?string $value = null) {
 		if (!$parameters) {
 			$parameters = array();
 		}
