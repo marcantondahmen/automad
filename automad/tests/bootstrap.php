@@ -1,6 +1,7 @@
 <?php
 
-namespace Automad;
+use Automad\Autoload;
+use Automad\Core\Config;
 
 define('AUTOMAD', true);
 define('AM_BASE_DIR', __DIR__ . '/../..');
@@ -9,8 +10,5 @@ define('AM_HEADLESS_TEMPLATE_CUSTOM', AM_HEADLESS_TEMPLATE);
 
 require_once AM_BASE_DIR . '/automad/src/Autoload.php';
 Autoload::init();
-
-use Automad\Core\Config;
-
 Config::overrides();
 Config::defaults();
