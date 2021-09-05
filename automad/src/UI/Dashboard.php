@@ -78,10 +78,11 @@ class Dashboard {
 				header('Content-Type: application/json; charset=utf-8');
 
 				if (!empty($parts[1]) && $this->classFileExists($class) && method_exists($class, $parts[1])) {
+					$this->registerControllerErrorHandler();
 					$Response = call_user_func($method);
 					$Response->setDebug(Debug::getLog());
 				} else {
-					header('HTTP/1.0 404 Not Found');
+					http_response_code(404);
 					$Response = new Response();
 				}
 
@@ -149,5 +150,21 @@ class Dashboard {
 		$file = AM_BASE_DIR . '/automad/src/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
 
 		return is_readable($file);
+	}
+
+	/**
+	 * Register a error handler that sends a 500 response code in case of a fatal error created by a controller.
+	 */
+	private function registerControllerErrorHandler() {
+		error_reporting(0);
+
+		register_shutdown_function(function () {
+			$error = error_get_last();
+
+			if (is_array($error) && !empty($error['type'])) {
+				http_response_code(500);
+				exit(json_encode($error, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+			}
+		});
 	}
 }
