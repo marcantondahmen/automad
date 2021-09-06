@@ -357,7 +357,7 @@ class PatternAssembly {
 	 *
 	 * @return string The regex pattern.
 	 */
-	public static function variableKeyGUI() {
+	public static function variableKeyUI() {
 		return preg_quote(AM_DEL_VAR_OPEN) . '\s*(?P<varName>' . self::$charClassTextFileVariables . '+)';
 	}
 }

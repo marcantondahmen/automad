@@ -139,7 +139,7 @@ class Keys {
 				array(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_CLOSE),
 				$content
 			);
-			preg_match_all('/' . PatternAssembly::variableKeyGUI() . '/is', $content, $matches);
+			preg_match_all('/' . PatternAssembly::variableKeyUI() . '/is', $content, $matches);
 			$keys = $matches['varName'];
 
 			// Match markup to get includes recursively.
