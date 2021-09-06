@@ -104,7 +104,7 @@ class Runtime {
 					// Get the caption for the currently used ":file".
 					// In case ":file" is "image.jpg", the parsed caption file is "image.jpg.caption" and the returned value is stored in ":caption".
 					if (isset($this->data[AM_KEY_FILE])) {
-						return Parse::caption(AM_BASE_DIR . $this->data[AM_KEY_FILE]);
+						return FileUtils::caption(AM_BASE_DIR . $this->data[AM_KEY_FILE]);
 					} else {
 						return false;
 					}

@@ -118,7 +118,7 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template
 					),
-					Parse::textFile($testsDir . '/data/page.txt')
+					Parse::dataFile($testsDir . '/data/page.txt')
 				),
 				$Shared
 			),
@@ -131,7 +131,7 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template,
 					),
-					Parse::textFile($testsDir . '/data/text.txt')
+					Parse::dataFile($testsDir . '/data/text.txt')
 				),
 				$Shared
 			),
@@ -144,7 +144,7 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template,
 					),
-					Parse::textFile($testsDir . '/data/blocks.txt')
+					Parse::dataFile($testsDir . '/data/blocks.txt')
 				),
 				$Shared
 			)

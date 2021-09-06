@@ -37,7 +37,7 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
-use Automad\Core\Parse;
+use Automad\Core\FileUtils;
 use Automad\Core\Image;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -59,9 +59,9 @@ class Slider extends AbstractBlock {
 	 */
 	public static function render(object $data, Automad $Automad) {
 		if (!empty($data->globs) && !empty($data->width) && !empty($data->height)) {
-			if ($files = Parse::fileDeclaration($data->globs, $Automad->Context->get())) {
+			if ($files = FileUtils::fileDeclaration($data->globs, $Automad->Context->get())) {
 				$files = array_filter($files, function ($file) {
-					return Parse::fileIsImage($file);
+					return FileUtils::fileIsImage($file);
 				});
 
 				$defaults = array('dots' => true, 'autoplay' => true);
@@ -73,7 +73,7 @@ class Slider extends AbstractBlock {
 
 				foreach ($files as $file) {
 					$Image = new Image($file, $data->width, $data->height, true);
-					$caption = Parse::caption($file);
+					$caption = FileUtils::caption($file);
 
 					$html .= <<< HTML
 							<div class="am-slider-item $first">

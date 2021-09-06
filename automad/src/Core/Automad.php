@@ -238,7 +238,7 @@ class Automad {
 			$url = $this->makeUrl($parentUrl, basename($path));
 
 			// Get content from text file.
-			$data = Parse::textFile($file);
+			$data = Parse::dataFile($file);
 
 			// Check if page is private.
 			if (array_key_exists(AM_KEY_PRIVATE, $data)) {

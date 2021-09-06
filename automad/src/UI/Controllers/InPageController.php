@@ -80,7 +80,7 @@ class InPageController {
 				// Else send back form fields.
 				if ($postData && is_array($postData)) {
 					// Merge and save data.
-					$data = array_merge(Parse::textFile(PageModel::getPageFilePath($Page)), $postData);
+					$data = array_merge(Parse::dataFile(PageModel::getPageFilePath($Page)), $postData);
 					FileSystem::writeData($data, PageModel::getPageFilePath($Page));
 					Debug::log($data, 'saved data');
 					Debug::log(PageModel::getPageFilePath($Page), 'data file');

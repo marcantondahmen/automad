@@ -83,7 +83,7 @@ class FileSystem extends CoreFileSystem {
 
 			if (!empty($files)) {
 				$file = reset($files);
-				$data = Parse::textFile($file);
+				$data = Parse::dataFile($file);
 				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
 				self::writeData($data, $file);
 			}

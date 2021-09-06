@@ -285,7 +285,7 @@ class View {
 				}
 
 				// If no matching page exists, check for a file.
-				$files = Parse::fileDeclaration($url, $Context->get(), true);
+				$files = FileUtils::fileDeclaration($url, $Context->get(), true);
 
 				if (!empty($files)) {
 					$file = $files[0];
@@ -418,7 +418,7 @@ class View {
 						$files = $this->Automad->getFilelist()->getFiles();
 					} else {
 						// Parse given glob pattern within any kind of quotes or from a variable value.
-						$files = Parse::fileDeclaration($this->processContent(trim($matches['foreach'], '\'"')), $Context->get(), true);
+						$files = FileUtils::fileDeclaration($this->processContent(trim($matches['foreach'], '\'"')), $Context->get(), true);
 					}
 
 					foreach ($files as $file) {
@@ -966,7 +966,7 @@ class View {
 		$this->Runtime->set(AM_KEY_BASENAME, basename($file));
 
 		// If $file is an image, also provide width and height (and possibly a new filename after a resize).
-		if (Parse::fileIsImage($file)) {
+		if (FileUtils::fileIsImage($file)) {
 			// The Original file size.
 			$imgSize = getimagesize(AM_BASE_DIR . $file);
 			$this->Runtime->set(AM_KEY_WIDTH, $imgSize[0]);

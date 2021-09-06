@@ -60,7 +60,7 @@ class ParseTest extends TestCase {
 	 * @param mixed $str
 	 */
 	public function testFileIsImageIsFalse($str) {
-		$this->assertFalse(Parse::fileIsImage($str));
+		$this->assertFalse(FileUtils::fileIsImage($str));
 	}
 
 	/**
@@ -69,7 +69,7 @@ class ParseTest extends TestCase {
 	 * @param mixed $str
 	 */
 	public function testFileIsImageIsTrue($str) {
-		$this->assertTrue(Parse::fileIsImage($str));
+		$this->assertTrue(FileUtils::fileIsImage($str));
 	}
 
 	/**

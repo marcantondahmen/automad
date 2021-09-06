@@ -143,7 +143,7 @@ class Toolbox {
 		$options = array_merge($defaults, $options);
 
 		if ($options['file']) {
-			$files = Parse::fileDeclaration($options['file'], $this->Automad->Context->get());
+			$files = FileUtils::fileDeclaration($options['file'], $this->Automad->Context->get());
 			$file = reset($files);
 			$img = new Image($file, $options['width'], $options['height'], $options['crop']);
 

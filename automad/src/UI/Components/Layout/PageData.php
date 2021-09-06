@@ -131,7 +131,7 @@ class PageData {
 	public function __construct(Automad $Automad, Page $Page) {
 		$this->Automad = $Automad;
 		$this->Page = $Page;
-		$this->data = Parse::textFile(PageModel::getPageFilePath($Page));
+		$this->data = Parse::dataFile(PageModel::getPageFilePath($Page));
 		$this->url = $Page->get(AM_KEY_URL);
 		$this->Themelist = new Themelist();
 

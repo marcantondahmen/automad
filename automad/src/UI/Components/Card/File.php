@@ -36,8 +36,8 @@
 
 namespace Automad\UI\Components\Card;
 
+use Automad\Core\FileUtils;
 use Automad\Core\Image;
-use Automad\Core\Parse;
 use Automad\Core\Str;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
@@ -80,7 +80,7 @@ class File {
 HTML;
 		}
 
-		if (Parse::fileIsImage($file)) {
+		if (FileUtils::fileIsImage($file)) {
 			$resize = <<< HTML
 						<li>
 							<a href="#am-copy-resized-modal"
@@ -162,12 +162,12 @@ HTML;
 		$data = array(
 			'img' => false,
 			'filename' => basename($file),
-			'caption' => htmlspecialchars(Parse::caption($file)),
+			'caption' => htmlspecialchars(FileUtils::caption($file)),
 			'extension' => htmlspecialchars(FileSystem::getExtension($file)),
 			'download' => AM_BASE_URL . Str::stripStart($file, AM_BASE_DIR)
 		);
 
-		if (Parse::fileIsImage($file)) {
+		if (FileUtils::fileIsImage($file)) {
 			$imgModal = new Image($file, 1600, 1200, false);
 
 			$data['img'] = array(
@@ -189,7 +189,7 @@ HTML;
 	 * @return string The generated HTML of the preview
 	 */
 	private static function getPreview(string $file) {
-		if (Parse::fileIsImage($file)) {
+		if (FileUtils::fileIsImage($file)) {
 			$imgPanel = new Image($file, 320, 240, true);
 			$url = AM_BASE_URL . $imgPanel->file;
 

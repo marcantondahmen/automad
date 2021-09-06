@@ -188,7 +188,7 @@ class FileSystem {
 		// Possible extension
 		$extension = strtolower(pathinfo($str, PATHINFO_EXTENSION));
 
-		if (in_array($extension, Parse::allowedFileTypes())) {
+		if (in_array($extension, FileUtils::allowedFileTypes())) {
 			return true;
 		} else {
 			return false;

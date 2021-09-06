@@ -87,7 +87,7 @@ class Filelist {
 	 */
 	public function getFiles() {
 		// Find files.
-		$files = Parse::fileDeclaration($this->options['glob'], $this->Context->get(), true);
+		$files = FileUtils::fileDeclaration($this->options['glob'], $this->Context->get(), true);
 
 		// Sort files.
 		switch ($this->options['sort']) {

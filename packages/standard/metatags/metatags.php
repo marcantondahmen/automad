@@ -11,7 +11,10 @@
 
 namespace Standard;
 
-use Automad\Core as Core;
+use Automad\Core\Automad;
+use Automad\Core\FileUtils;
+use Automad\Core\Image;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -23,7 +26,7 @@ class MetaTags {
 	 * @param object $Automad
 	 * @return string the output of the extension
 	 */
-	public function MetaTags($options, $Automad) {
+	public function MetaTags(array $options, Automad $Automad) {
 		$Page = $Automad->Context->get();
 
 		$defaults = array(
@@ -55,7 +58,7 @@ class MetaTags {
 		$html .= '<meta name="viewport" content="' . $options['viewport'] . '" />';
 
 		if ($options['description']) {
-			$html .= '<meta name="description" content="' . htmlspecialchars(Core\Str::shorten($options['description'], 160)) . '" />';
+			$html .= '<meta name="description" content="' . htmlspecialchars(Str::shorten($options['description'], 160)) . '" />';
 		}
 
 		if ($options['ogTitle']) {
@@ -63,18 +66,18 @@ class MetaTags {
 		}
 
 		if ($options['ogDescription']) {
-			$html .= '<meta property="og:description" content="' . htmlspecialchars(Core\Str::shorten($options['ogDescription'], 320)) . '" />';
+			$html .= '<meta property="og:description" content="' . htmlspecialchars(Str::shorten($options['ogDescription'], 320)) . '" />';
 		}
 
 		$html .= '<meta property="og:type" content="' . $options['ogType'] . '" />' .
 				 '<meta property="og:url" content="' . $baseIndex . $Page->url . '" />';
 
 		if ($options['ogImage']) {
-			$files = Core\Parse::fileDeclaration($options['ogImage'], $Page);
+			$files = FileUtils::fileDeclaration($options['ogImage'], $Page);
 
 			if ($files) {
 				$file = reset($files);
-				$Image = new Core\Image($file);
+				$Image = new Image($file);
 				$imageUrl =  $baseUrl . $Image->file;
 			} else {
 				$imageUrl = $options['ogImage'];

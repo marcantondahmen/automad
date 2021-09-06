@@ -18,8 +18,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('+main'),
-				Parse::textFile(__DIR__ . '/../../data/blocks.txt'),
-				Parse::textFile(__DIR__ . '/../../data/blocks_replaced.txt')
+				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
+				Parse::dataFile(__DIR__ . '/../../data/blocks_replaced.txt')
 			),
 			// Blocks, regex, not case sensitive.
 			array(
@@ -28,8 +28,8 @@ class ReplacementTest extends TestCase {
 				true,
 				false,
 				array('+main'),
-				Parse::textFile(__DIR__ . '/../../data/blocks.txt'),
-				Parse::textFile(__DIR__ . '/../../data/blocks_replaced.txt')
+				Parse::dataFile(__DIR__ . '/../../data/blocks.txt'),
+				Parse::dataFile(__DIR__ . '/../../data/blocks_replaced.txt')
 			),
 			// Text, no regex, not case sensitive.
 			array(
@@ -38,8 +38,8 @@ class ReplacementTest extends TestCase {
 				false,
 				false,
 				array('text'),
-				Parse::textFile(__DIR__ . '/../../data/text.txt'),
-				Parse::textFile(__DIR__ . '/../../data/text_replaced.txt')
+				Parse::dataFile(__DIR__ . '/../../data/text.txt'),
+				Parse::dataFile(__DIR__ . '/../../data/text_replaced.txt')
 			),
 			// Text, no regex, case sensitive.
 			array(
@@ -48,8 +48,8 @@ class ReplacementTest extends TestCase {
 				false,
 				true,
 				array('text'),
-				Parse::textFile(__DIR__ . '/../../data/text.txt'),
-				Parse::textFile(__DIR__ . '/../../data/text.txt')
+				Parse::dataFile(__DIR__ . '/../../data/text.txt'),
+				Parse::dataFile(__DIR__ . '/../../data/text.txt')
 			),
 			// Text, regex, case sensitive.
 			array(
@@ -58,8 +58,8 @@ class ReplacementTest extends TestCase {
 				true,
 				true,
 				array('text'),
-				Parse::textFile(__DIR__ . '/../../data/text.txt'),
-				Parse::textFile(__DIR__ . '/../../data/text_replaced.txt')
+				Parse::dataFile(__DIR__ . '/../../data/text.txt'),
+				Parse::dataFile(__DIR__ . '/../../data/text_replaced.txt')
 			)
 		);
 	}

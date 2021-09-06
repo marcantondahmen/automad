@@ -37,7 +37,7 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Debug;
-use Automad\Core\Parse;
+use Automad\Core\FileUtils;
 use Automad\Core\Request;
 use Automad\UI\Components\Layout\FileCollection;
 use Automad\UI\Models\FileCollectionModel;
@@ -86,7 +86,7 @@ class FileCollectionController {
 		// Get files for each allowed file type.
 		$files = FileSystem::globGrep(
 			$path . '*.*',
-			'/\.(' . implode('|', Parse::allowedFileTypes()) . ')$/i'
+			'/\.(' . implode('|', FileUtils::allowedFileTypes()) . ')$/i'
 		);
 
 		$Response->setHtml(FileCollection::render($files, $url, $modalTitle));

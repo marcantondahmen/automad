@@ -61,7 +61,7 @@ class Shared {
 		);
 
 		// Merge defaults with settings from file.
-		$this->data = array_merge($defaults, Parse::textFile(AM_FILE_SHARED_DATA));
+		$this->data = array_merge($defaults, Parse::dataFile(AM_FILE_SHARED_DATA));
 		Debug::log(array('Defaults' => $defaults, 'Shared Data' => $this->data));
 
 		// Check whether there is a theme defined in the Shared object data.

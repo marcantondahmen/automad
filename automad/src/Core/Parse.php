@@ -47,30 +47,15 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Parse {
 	/**
-	 * Return an array with the allowed file types.
+	 * Please use `FileUtils::caption()` instead.
 	 *
-	 * @return array An array of file types
-	 */
-	public static function allowedFileTypes() {
-		return self::csv(AM_ALLOWED_FILE_TYPES);
-	}
-
-	/**
-	 * Read a file's caption file and parse contained markdown syntax.
-	 *
-	 * The caption filename is build out of the actual filename with the appended ".caption" extension, like "image.jpg.caption".
-	 *
+	 * @see FileUtils::caption()
+	 * @deprecated 1.9.0
 	 * @param string $file
-	 * @return string The caption string
+	 * @return array An array with resolved file paths
 	 */
 	public static function caption(string $file) {
-		// Build filename of the caption file.
-		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
-		Debug::log($captionFile);
-
-		if (is_readable($captionFile)) {
-			return file_get_contents($captionFile);
-		}
+		return FileUtils::caption($file);
 	}
 
 	/**
@@ -87,51 +72,51 @@ class Parse {
 	}
 
 	/**
-	 * Parse a file declaration string where multiple glob patterns or URLs can be separated by a comma
-	 * and return an array with the resolved/downloaded file paths.
-	 * If $stripBaseDir is true, the base directory will be stripped from the path
-	 * and each path gets resolved to be relative to the Automad installation directory.
+	 * Loads and parses a text file.
 	 *
+	 * First it separates the different blocks into simple key/value pairs.
+	 * Then it creates an array of vars by splitting the pairs.
+	 *
+	 * @param string $file
+	 * @return array $vars
+	 */
+	public static function dataFile(string $file) {
+		$vars = array();
+
+		if (!file_exists($file)) {
+			return $vars;
+		}
+
+		// Get file content and normalize line breaks.
+		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
+
+		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line.
+		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . Regex::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, null, PREG_SPLIT_NO_EMPTY);
+
+		// Split $pairs into an array of vars.
+		foreach ($pairs as $pair) {
+			list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $pair, 2);
+			$vars[trim($key)] = trim($value);
+		}
+
+		// Remove undefined (empty) items.
+		$vars = array_filter($vars, 'strlen');
+
+		return $vars;
+	}
+
+	/**
+	 * Please use `FileUtils::fileDeclaration()` instead.
+	 *
+	 * @see FileUtils::fileDeclaration()
+	 * @deprecated 1.9.0
 	 * @param string $str
 	 * @param Page $Page
 	 * @param bool $stripBaseDir
 	 * @return array An array with resolved file paths
 	 */
 	public static function fileDeclaration(string $str, Page $Page, bool $stripBaseDir = false) {
-		$files = array();
-
-		if ($str) {
-			foreach (self::csv($str) as $item) {
-				if (preg_match('/\:\/\//is', $item)) {
-					$RemoteFile = new RemoteFile($item);
-
-					if ($file = $RemoteFile->getLocalCopy()) {
-						$files[] = $file;
-					}
-				} elseif ($f = FileSystem::glob(Resolve::filePath($Page->path, $item))) {
-					$f = array_filter($f, '\Automad\Core\FileSystem::isAllowedFileType');
-					$files = array_merge($files, $f);
-				}
-			}
-
-			if ($stripBaseDir) {
-				array_walk($files, function (&$file) {
-					$file = Str::stripStart($file, AM_BASE_DIR);
-				});
-			}
-		}
-
-		return $files;
-	}
-
-	/**
-	 *  Parse a filename to check whether a file is an image or not.
-	 *
-	 * @param string $file
-	 * @return boolean True if $file is an image file
-	 */
-	public static function fileIsImage(string $file) {
-		return (in_array(FileSystem::getExtension($file), array('jpg', 'jpeg', 'png', 'gif')));
+		return FileUtils::fileDeclaration($str, $Page, $stripBaseDir);
 	}
 
 	/**
@@ -190,39 +175,5 @@ class Parse {
 		}
 
 		return $options;
-	}
-
-	/**
-	 * Loads and parses a text file.
-	 *
-	 * First it separates the different blocks into simple key/value pairs.
-	 * Then it creates an array of vars by splitting the pairs.
-	 *
-	 * @param string $file
-	 * @return array $vars
-	 */
-	public static function textFile(string $file) {
-		$vars = array();
-
-		if (!file_exists($file)) {
-			return $vars;
-		}
-
-		// Get file content and normalize line breaks.
-		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
-
-		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line.
-		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . Regex::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, null, PREG_SPLIT_NO_EMPTY);
-
-		// Split $pairs into an array of vars.
-		foreach ($pairs as $pair) {
-			list($key, $value) = explode(AM_PARSE_PAIR_SEPARATOR, $pair, 2);
-			$vars[trim($key)] = trim($value);
-		}
-
-		// Remove undefined (empty) items.
-		$vars = array_filter($vars, 'strlen');
-
-		return $vars;
 	}
 }

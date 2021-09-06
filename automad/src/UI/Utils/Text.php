@@ -92,13 +92,13 @@ class Text {
 	 * will be merged into Text:$modules.
 	 */
 	public static function parseModules() {
-		Text::$modules = Parse::textFile(AM_FILE_GUI_TEXT_MODULES);
+		Text::$modules = Parse::dataFile(AM_FILE_GUI_TEXT_MODULES);
 
 		if (AM_FILE_GUI_TRANSLATION) {
 			$translationFile = AM_BASE_DIR . AM_FILE_GUI_TRANSLATION;
 
 			if (is_readable($translationFile)) {
-				$translation = Parse::textFile($translationFile);
+				$translation = Parse::dataFile($translationFile);
 
 				if (is_array($translation)) {
 					Text::$modules = array_merge(Text::$modules, $translation);

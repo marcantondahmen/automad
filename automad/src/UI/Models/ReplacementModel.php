@@ -105,7 +105,7 @@ class ReplacementModel {
 
 		foreach ($fileKeysArray as $FileKeysModel) {
 			$file = AM_BASE_DIR . $FileKeysModel->path;
-			$data = Parse::textFile($file);
+			$data = Parse::dataFile($file);
 			$data = $this->replaceInData($data, $FileKeysModel->keys);
 
 			FileSystem::writeData($data, $file);

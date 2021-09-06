@@ -37,7 +37,7 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
-use Automad\Core\Parse;
+use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Core\Str;
 
@@ -71,9 +71,9 @@ class Gallery extends AbstractBlock {
 		$data = array_merge($defaults, (array) $data);
 		$data = (object) $data;
 
-		if ($files = Parse::fileDeclaration($data->globs, $Automad->Context->get())) {
+		if ($files = FileUtils::fileDeclaration($data->globs, $Automad->Context->get())) {
 			$files = array_filter($files, function ($file) {
-				return Parse::fileIsImage($file);
+				return FileUtils::fileIsImage($file);
 			});
 
 			if ($data->layout == 'vertical') {
@@ -106,7 +106,7 @@ class Gallery extends AbstractBlock {
 
 		foreach ($files as $file) {
 			$Image = new Image($file, false, 2 * $pixelHeight);
-			$caption = Str::stripTags(Parse::caption($file));
+			$caption = Str::stripTags(FileUtils::caption($file));
 			$file = Str::stripStart($file, AM_BASE_DIR);
 			$width = round($Image->width / 2);
 
@@ -160,7 +160,7 @@ HTML;
 
 		foreach ($files as $file) {
 			$Image = new Image($file, 2 * $pixelWidth);
-			$caption = Str::stripTags(Parse::caption($file));
+			$caption = Str::stripTags(FileUtils::caption($file));
 			$file = Str::stripStart($file, AM_BASE_DIR);
 			$span = round($Image->height / ($masonryRowHeight * 2));
 
