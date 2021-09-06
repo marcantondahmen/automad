@@ -186,7 +186,7 @@ class View {
 		// Identify the outer statements.
 		$str = $this->preProcessWrappingStatements($str);
 
-		$str = preg_replace_callback('/' . Regex::markup() . '/is', function ($matches) use ($directory) {
+		$str = preg_replace_callback('/' . PatternAssembly::markup() . '/is', function ($matches) use ($directory) {
 			// Variable - if the variable syntax gets matched, simply process that string as content to get the value.
 			// In-page editing gets enabled here.
 			if (!empty($matches['var'])) {
@@ -467,7 +467,7 @@ class View {
 				}
 
 				// Match each part of a logically combined expression separately.
-				preg_match_all('/(?P<operator>^|' . Regex::$logicalOperator . '\s+)' . Regex::expression('expression') . '/is', trim($matches['if']), $parts, PREG_SET_ORDER);
+				preg_match_all('/(?P<operator>^|' . PatternAssembly::$logicalOperator . '\s+)' . PatternAssembly::expression('expression') . '/is', trim($matches['if']), $parts, PREG_SET_ORDER);
 
 				// Process each part and merge the partial result with the final result.
 				foreach ($parts as $part) {
@@ -699,7 +699,7 @@ class View {
 		$str = preg_replace_callback(
 			'/<([^>]+)>/s',
 			function ($match) {
-				return '<' . preg_replace('/' . Regex::inPageEditButton() . '/s', '', $match[1]) . '>';
+				return '<' . preg_replace('/' . PatternAssembly::inPageEditButton() . '/s', '', $match[1]) . '>';
 			},
 			$str
 		);
@@ -843,7 +843,7 @@ class View {
 
 			// Append a marker to the opening delimiter in case depth === 0.
 			if ($depth === 0) {
-				$return = str_replace(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_OPEN . Regex::$outerStatementMarker, $return);
+				$return = str_replace(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_OPEN . PatternAssembly::$outerStatementMarker, $return);
 			}
 
 			// Increase depth after (!) return was possible modified (in case depth === 0) in case the match is begin or else.
@@ -877,7 +877,7 @@ class View {
 	private function processContent(string $str, bool $isOptionString = false, bool $inPageEdit = false) {
 		// Prepare JSON strings by wrapping all stand-alone variables in quotes.
 		if ($isOptionString) {
-			$str = preg_replace_callback('/' . Regex::keyValue() . '/s', function ($pair) {
+			$str = preg_replace_callback('/' . PatternAssembly::keyValue() . '/s', function ($pair) {
 				if (strpos($pair['value'], AM_DEL_VAR_OPEN) === 0) {
 					$pair['value'] = '"' . trim($pair['value']) . '"';
 				}
@@ -886,7 +886,7 @@ class View {
 			}, $str);
 		}
 
-		return 	preg_replace_callback('/' . Regex::variable('var') . '/s', function ($matches) use ($isOptionString, $inPageEdit) {
+		return 	preg_replace_callback('/' . PatternAssembly::variable('var') . '/s', function ($matches) use ($isOptionString, $inPageEdit) {
 			// Get the value.
 			$value = $this->getValue($matches['varName']);
 
@@ -898,14 +898,14 @@ class View {
 			// Get pipe functions.
 			$functions = array();
 
-			preg_match_all('/' . Regex::pipe('pipe') . '/s', $matches['varFunctions'], $pipes, PREG_SET_ORDER);
+			preg_match_all('/' . PatternAssembly::pipe('pipe') . '/s', $matches['varFunctions'], $pipes, PREG_SET_ORDER);
 
 			foreach ($pipes as $pipe) {
 				if (!empty($pipe['pipeFunction'])) {
 					$parametersArray = array();
 
 					if (isset($pipe['pipeParameters'])) {
-						preg_match_all('/' . Regex::csv() . '/s', $pipe['pipeParameters'], $pipeParameters, PREG_SET_ORDER);
+						preg_match_all('/' . PatternAssembly::csv() . '/s', $pipe['pipeParameters'], $pipeParameters, PREG_SET_ORDER);
 
 						foreach ($pipeParameters as $match) {
 							$parameter = trim($match[1]);

@@ -5,7 +5,7 @@ namespace Automad\Engine;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\Engine\Regex
+ * @testdox Automad\Engine\PatternAssembly
  */
 class RegexTest extends TestCase {
 	public function dataForTestCsvIsSame() {
@@ -208,7 +208,7 @@ class RegexTest extends TestCase {
 	public function testCsvIsSame($str, $expected) {
 		$result = array();
 
-		preg_match_all('/' . Regex::csv() . '/', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::csv() . '/', $str, $matches, PREG_SET_ORDER);
 
 		foreach ($matches as $match) {
 			$result[] = $match[1];
@@ -225,7 +225,7 @@ class RegexTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testExpressionHasArraySubset($str, $prefix, $expected) {
-		preg_match_all('/' . Regex::expression($prefix) . '/', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::expression($prefix) . '/', $str, $matches, PREG_SET_ORDER);
 		$this->assertArraySubset($expected, $matches[0]);
 	}
 
@@ -236,7 +236,7 @@ class RegexTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testKeyValueHasArraySubset($str, $expected) {
-		preg_match_all('/' . Regex::keyValue() . '/is', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::keyValue() . '/is', $str, $matches, PREG_SET_ORDER);
 		$this->assertArraySubset($expected, $matches);
 	}
 
@@ -247,7 +247,7 @@ class RegexTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testMarkupHasArraySubset($str, $expected) {
-		preg_match_all('/' . Regex::markup() . '/is', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::markup() . '/is', $str, $matches, PREG_SET_ORDER);
 		$this->assertArraySubset($expected, $matches[0]);
 	}
 
@@ -259,7 +259,7 @@ class RegexTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testPipeHasArraySubset($str, $prefix, $expected) {
-		preg_match_all('/' . Regex::pipe($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::pipe($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
 		$this->assertArraySubset($expected, $matches);
 	}
 
@@ -271,7 +271,7 @@ class RegexTest extends TestCase {
 	 * @param mixed $expected
 	 */
 	public function testVariableHasArraySubset($str, $prefix, $expected) {
-		preg_match_all('/' . Regex::variable($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::variable($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
 		$this->assertArraySubset($expected, $matches[0]);
 	}
 }

@@ -425,7 +425,7 @@ class Toolbox {
 	 */
 	public function set(array $options) {
 		foreach ($options as $key => $value) {
-			if (preg_match('/' . Regex::$charClassAllVariables . '/', $key)) {
+			if (preg_match('/' . PatternAssembly::$charClassAllVariables . '/', $key)) {
 				if (strpos($key, '%') === 0) {
 					SessionData::set($key, $value);
 				} else {

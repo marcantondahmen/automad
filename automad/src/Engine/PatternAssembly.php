@@ -39,13 +39,13 @@ namespace Automad\Engine;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * 	The Regex class holds all methods relating regular expressions.
+ * The PatternAssembly class contains all methods to assemble regular expressions patterns.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Regex {
+class PatternAssembly {
 	/**
 	 * The character class to be used within a regex matching all allowed characters for all kine of variable names (content in .txt files, system variables ( :var ) and query string items ( ?var )).
 	 */

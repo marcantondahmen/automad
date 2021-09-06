@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\Engine\Regex;
+use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -93,7 +93,7 @@ class Parse {
 		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
 
 		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line.
-		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . Regex::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, null, PREG_SPLIT_NO_EMPTY);
+		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . PatternAssembly::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, null, PREG_SPLIT_NO_EMPTY);
 
 		// Split $pairs into an array of vars.
 		foreach ($pairs as $pair) {
@@ -139,7 +139,7 @@ class Parse {
 			// Clean up "dirty" JSON by replacing single with double quotes and
 			// wrapping all keys in double quotes.
 			$pairs = array();
-			preg_match_all('/' . Regex::keyValue() . '/s', $str, $matches, PREG_SET_ORDER);
+			preg_match_all('/' . PatternAssembly::keyValue() . '/s', $str, $matches, PREG_SET_ORDER);
 
 			foreach ($matches as $match) {
 				$key = '"' . trim($match['key'], '"') . '"';
