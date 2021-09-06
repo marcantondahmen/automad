@@ -1,11 +1,11 @@
 <?php
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\Core\Regex
+ * @testdox Automad\Engine\Regex
  */
 class RegexTest extends TestCase {
 	public function dataForTestCsvIsSame() {

@@ -1,12 +1,13 @@
 <?php
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
+use Automad\Core\SessionData;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\Core\Toolbox
+ * @testdox Automad\Engine\Toolbox
  */
 class ToolboxTest extends TestCase {
 	public function dataForTestSetSessionIsEqual() {

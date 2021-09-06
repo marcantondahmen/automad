@@ -1,11 +1,11 @@
 <?php
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\Core\Pipe
+ * @testdox Automad\Engine\Pipe
  */
 class PipeTest extends TestCase {
 	public function dataForTestProcessIsEqual() {
