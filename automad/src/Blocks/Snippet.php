@@ -38,7 +38,7 @@ namespace Automad\Blocks;
 
 use Automad\Core\Automad;
 use Automad\Core\Blocks;
-use Automad\Core\View;
+use Automad\Engine\View;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

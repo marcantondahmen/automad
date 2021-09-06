@@ -36,6 +36,8 @@
 
 namespace Automad\Core;
 
+use Automad\Engine\Regex;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**

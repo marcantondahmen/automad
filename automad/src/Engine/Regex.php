@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -122,7 +122,7 @@ class Regex {
 			$var = '?:';
 		}
 
-		return '(?:' . Regex::operand($left) . '\s*(' . $operator . '!?=|>=?|<=?)\s*' . Regex::operand($right) . '|(' . $not . '!|not\s+)?(' . $var . Regex::variable() . '))';
+		return '(?:' . self::operand($left) . '\s*(' . $operator . '!?=|>=?|<=?)\s*' . self::operand($right) . '|(' . $not . '!|not\s+)?(' . $var . self::variable() . '))';
 	}
 
 	/**
@@ -154,7 +154,7 @@ class Regex {
 	 * @return string The markup regex
 	 */
 	public static function markup() {
-		$var = Regex::variable();
+		$var = self::variable();
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
 
@@ -163,29 +163,29 @@ class Regex {
 
 		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?';
 
-		$statementSubpatterns['snippet'] = 	Regex::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
+		$statementSubpatterns['snippet'] = 	self::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
 											'snippet\s+(?P<snippet>[\w\-]+)' .
 											'\s*' . $statementClose .
 											'(?P<snippetSnippet>.*?)' .
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											$statementOpen . self::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 
-		$statementSubpatterns['with'] = 	Regex::$outerStatementMarker . '\s*' . // Note the additional preparsed marker!
+		$statementSubpatterns['with'] = 	self::$outerStatementMarker . '\s*' . // Note the additional preparsed marker!
 											'with\s+(?P<with>' .
 												'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
 											')' .
 											'\s*(?P<withOptions>\{.*?\})?' .
 											'\s*' . $statementClose .
 											'(?P<withSnippet>.*?)' .
-											'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											'(?:' . $statementOpen . self::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
+											$statementOpen . self::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 
-		$statementSubpatterns['for'] =		Regex::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
-											'for\s+(?P<forStart>' . Regex::variable() . '|' . Regex::$number . ')\s+to\s+(?P<forEnd>' . Regex::variable() . '|' . Regex::$number . ')' .
+		$statementSubpatterns['for'] =		self::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
+											'for\s+(?P<forStart>' . self::variable() . '|' . self::$number . ')\s+to\s+(?P<forEnd>' . self::variable() . '|' . self::$number . ')' .
 											'\s*' . $statementClose .
 											'(?P<forSnippet>.*?)' .
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											$statementOpen . self::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 
-		$statementSubpatterns['foreach'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
+		$statementSubpatterns['foreach'] = 	self::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
 											'foreach\s+in\s+(?P<foreach>' .
 												'pagelist|' .
 												'filters|' .
@@ -196,15 +196,15 @@ class Regex {
 											'\s*(?P<foreachOptions>\{.*?\})?' .
 											'\s*' . $statementClose .
 											'(?P<foreachSnippet>.*?)' .
-											'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+											'(?:' . $statementOpen . self::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
+											$statementOpen . self::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 
-		$statementSubpatterns['condition'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-												'if\s+(?P<if>' . Regex::expression() . '(\s+' . Regex::$logicalOperator . '\s+' . Regex::expression() . ')*)' .
+		$statementSubpatterns['condition'] = 	self::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
+												'if\s+(?P<if>' . self::expression() . '(\s+' . self::$logicalOperator . '\s+' . self::expression() . ')*)' .
 												'\s*' . $statementClose .
 												'(?P<ifSnippet>.*?)' .
-												'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
-												$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
+												'(?:' . $statementOpen . self::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
+												$statementOpen . self::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
 
 		// (variable | statements)
 		return '((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')';
@@ -238,7 +238,7 @@ class Regex {
 			$var = '?:';
 		}
 
-		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . Regex::$number . ')|(' . $var . Regex::variable() . '))';
+		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . self::$number . ')|(' . $var . self::variable() . '))';
 	}
 
 	/**
@@ -285,7 +285,7 @@ class Regex {
 				'|' .
 				// Math.
 				'\s*(' . $operator . '[\+\-\*\/])\s*(' .
-				$num . Regex::$number . '|' . $subpatternMathVar .
+				$num . self::$number . '|' . $subpatternMathVar .
 				')\s*' .
 				')';
 	}

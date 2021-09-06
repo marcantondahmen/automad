@@ -39,9 +39,9 @@ namespace Automad\UI\Utils;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem as CoreFileSystem;
 use Automad\Core\Parse;
-use Automad\Core\Regex;
 use Automad\Core\Request;
 use Automad\Core\Str;
+use Automad\Engine\Regex;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

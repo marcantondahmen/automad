@@ -37,9 +37,9 @@
 namespace Automad\UI\Components\Layout;
 
 use Automad\Core\Automad;
-use Automad\Core\Headless;
 use Automad\Core\Page;
 use Automad\Core\Parse;
+use Automad\Engine\Headless;
 use Automad\System\Themelist;
 use Automad\UI\Components\Accordion\UnusedVariables;
 use Automad\UI\Components\Accordion\Variables;

@@ -37,7 +37,7 @@
 namespace Automad\UI\Utils;
 
 use Automad\Core\Page;
-use Automad\Core\Regex;
+use Automad\Engine\Regex;
 use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

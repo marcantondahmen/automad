@@ -34,8 +34,19 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
+use Automad\Core\Automad;
+use Automad\Core\Blocks;
+use Automad\Core\Debug;
+use Automad\Core\FileUtils;
+use Automad\Core\Image;
+use Automad\Core\Parse;
+use Automad\Core\Request;
+use Automad\Core\Resolve;
+use Automad\Core\Selection;
+use Automad\Core\SessionData;
+use Automad\Core\Str;
 use Automad\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

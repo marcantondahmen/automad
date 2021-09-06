@@ -37,8 +37,8 @@
 namespace Automad\UI;
 
 use Automad\Core\Context;
-use Automad\Core\Regex;
 use Automad\Core\Str;
+use Automad\Engine\Regex;
 use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\Link;
