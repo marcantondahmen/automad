@@ -78,7 +78,7 @@ class MetaTags {
 			if ($files) {
 				$file = reset($files);
 				$Image = new Image($file);
-				$imageUrl =  $baseUrl . $Image->file;
+				$imageUrl = $baseUrl . $Image->file;
 			} else {
 				$imageUrl = $options['ogImage'];
 			}

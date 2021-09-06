@@ -20,10 +20,6 @@ imageFavicon: /shared/favicon.ico
 
 -
 
-ogImage: *.png, *.jpg, /shared/image-landscape.png
-
--
-
 urlSearchResults: /pagelists
 
 -
