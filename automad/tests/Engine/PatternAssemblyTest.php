@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @testdox Automad\Engine\PatternAssembly
  */
-class RegexTest extends TestCase {
+class PatternAssemblyTest extends TestCase {
 	public function dataForTestCsvIsSame() {
 		return array(
 			array(
@@ -245,9 +245,10 @@ class RegexTest extends TestCase {
 	 * @testdox markup() matches: $str
 	 * @param mixed $str
 	 * @param mixed $expected
+	 * @param mixed $prefix
 	 */
 	public function testMarkupHasArraySubset($str, $expected) {
-		preg_match_all('/' . PatternAssembly::markup() . '/is', $str, $matches, PREG_SET_ORDER);
+		preg_match_all('/' . PatternAssembly::template() . '/is', $str, $matches, PREG_SET_ORDER);
 		$this->assertArraySubset($expected, $matches[0]);
 	}
 
