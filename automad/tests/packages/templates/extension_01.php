@@ -1,0 +1,1 @@
+<@ Vendor/Extension { parameter: 'Test' } @>

@@ -94,7 +94,7 @@ class Mock extends TestCase {
 	 * @return array the collection
 	 */
 	private function createCollection(Shared $Shared, string $template) {
-		$theme = '../automad/tests/templates';
+		$theme = 'templates';
 		$testsDir = AM_BASE_DIR . '/automad/tests';
 
 		return array(
