@@ -64,4 +64,13 @@ class IncludeProcessor extends AbstractFeatureProcessors {
 			}
 		}
 	}
+
+	public static function syntaxPattern() {
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+
+		return  $statementOpen . '\s*' .
+				'(?P<file>[\w\/\-\.]+\.[a-z0-9]{2,5})' .
+				'\s*' . $statementClose;
+	}
 }

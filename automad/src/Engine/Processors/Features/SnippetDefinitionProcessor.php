@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
+use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -54,5 +55,18 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessors {
 
 			Debug::log($this->SnippetCollection->getCollection(), 'Registered snippet "' . $matches['snippet'] . '"');
 		}
+	}
+
+	public static function syntaxPattern() {
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+
+		return  $statementOpen . '\s*' .
+				PatternAssembly::$outerStatementMarker . '\s*' .
+				'snippet\s+(?P<snippet>[\w\-]+)' .
+				'\s*' . $statementClose .
+				'(?P<snippetSnippet>.*?)' .
+				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				'\s*' . $statementClose;
 	}
 }

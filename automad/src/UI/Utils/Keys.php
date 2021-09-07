@@ -143,7 +143,7 @@ class Keys {
 			$keys = $matches['varName'];
 
 			// Match markup to get includes recursively.
-			preg_match_all('/' . PatternAssembly::markup() . '/is', $content, $matches, PREG_SET_ORDER);
+			preg_match_all('/' . PatternAssembly::template() . '/is', $content, $matches, PREG_SET_ORDER);
 
 			foreach ($matches as $match) {
 				// Recursive include.

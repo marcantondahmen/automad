@@ -171,4 +171,21 @@ class ConditionalProcessor extends AbstractFeatureProcessors {
 			}
 		}
 	}
+
+	public static function syntaxPattern() {
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+
+		return  $statementOpen . '\s*' .
+				PatternAssembly::$outerStatementMarker . '\s*' .
+				'if\s+(?P<if>' . PatternAssembly::expression() .
+				'(\s+' . PatternAssembly::$logicalOperator . '\s+' . PatternAssembly::expression() . ')*)' .
+				'\s*' . $statementClose .
+				'(?P<ifSnippet>.*?)' .
+				'(?:' . $statementOpen . PatternAssembly::$outerStatementMarker .
+					'\s*else\s*' .
+				$statementClose . '(?P<ifElseSnippet>.*?)' . ')?' .
+				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				'\s*' . $statementClose;
+	}
 }

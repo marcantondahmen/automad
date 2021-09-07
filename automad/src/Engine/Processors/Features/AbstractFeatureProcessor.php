@@ -79,6 +79,8 @@ abstract class AbstractFeatureProcessors {
 
 	abstract public function process(array $matches, string $directory);
 
+	abstract public static function syntaxPattern();
+
 	protected function initTemplateProcessor() {
 		return new TemplateProcessor(
 			$this->Automad,

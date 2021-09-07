@@ -149,85 +149,6 @@ class PatternAssembly {
 	}
 
 	/**
-	 * Return the regex to match any kind of Automad markup such as variables, toolbox methods, includes, extensions, snippets, loops and conditions.
-	 *
-	 * @return string The markup regex
-	 */
-	public static function markup() {
-		$var = self::variable();
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
-
-		// The subpatterns don't include the wrapping delimiter <@ subpattern @>.
-
-		$statementSubpatterns = array(
-			'include' =>	'(?P<file>[\w\/\-\.]+\.[a-z0-9]{2,5})',
-
-			'call' => 		'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?',
-
-			'snippet' =>	self::$outerStatementMarker . '\s*' .
-							'snippet\s+(?P<snippet>[\w\-]+)' .
-							'\s*' . $statementClose .
-							'(?P<snippetSnippet>.*?)' .
-							$statementOpen . self::$outerStatementMarker . '\s*end',
-
-			'with' =>		self::$outerStatementMarker . '\s*' .
-							'with\s+(?P<with>' .
-								'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
-							')' .
-							'\s*(?P<withOptions>\{.*?\})?' .
-							'\s*' . $statementClose .
-							'(?P<withSnippet>.*?)' .
-							'(?:' . $statementOpen . self::$outerStatementMarker .
-								'\s*else\s*' .
-							$statementClose . '(?P<withElseSnippet>.*?)' . ')?' .
-							$statementOpen . self::$outerStatementMarker . '\s*end',
-
-			'for' => 		self::$outerStatementMarker . '\s*' .
-							'for\s+(?P<forStart>' .
-								self::variable() . '|' . self::$number .
-							')\s+to\s+(?P<forEnd>' .
-								self::variable() . '|' . self::$number .
-							')\s*' . $statementClose .
-							'(?P<forSnippet>.*?)' .
-							$statementOpen . self::$outerStatementMarker . '\s*end',
-
-			'foreach' =>	self::$outerStatementMarker . '\s*' .
-							'foreach\s+in\s+(?P<foreach>' .
-								'pagelist|' .
-								'filters|' .
-								'tags|' .
-								'filelist|' .
-								'"[^"]*"|' . "'[^']*'|" . $var .
-							')' .
-							'\s*(?P<foreachOptions>\{.*?\})?' .
-							'\s*' . $statementClose .
-							'(?P<foreachSnippet>.*?)' .
-							'(?:' . $statementOpen . self::$outerStatementMarker .
-								'\s*else\s*' .
-							$statementClose . '(?P<foreachElseSnippet>.*?)' . ')?' .
-							$statementOpen . self::$outerStatementMarker . '\s*end',
-
-			'condition' =>	self::$outerStatementMarker . '\s*' .
-							'if\s+(?P<if>' . self::expression() . '(\s+' . self::$logicalOperator . '\s+' . self::expression() . ')*)' .
-							'\s*' . $statementClose .
-							'(?P<ifSnippet>.*?)' .
-							'(?:' . $statementOpen . self::$outerStatementMarker .
-								'\s*else\s*' .
-							$statementClose . '(?P<ifElseSnippet>.*?)' . ')?' .
-							$statementOpen . self::$outerStatementMarker . '\s*end'
-		);
-
-		// (variable | statements)
-		return 	'((?P<var>' .
-				$var . ')|' .
-				$statementOpen .
-					'\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' .
-				$statementClose .
-				')';
-	}
-
-	/**
 	 * Return the regex to match one operand of an expression.
 	 *
 	 * Valid operands are:
@@ -304,6 +225,25 @@ class PatternAssembly {
 				'\s*(' . $operator . '[\+\-\*\/])\s*(' .
 				$num . self::$number . '|' . $subpatternMathVar .
 				')\s*' .
+				')';
+	}
+
+	/**
+	 * Return the regex to match any kind of Automad template such as variables,
+	 * toolbox methods, includes, extensions, snippets, loops and conditions.
+	 *
+	 * @return string The template regex
+	 */
+	public static function template() {
+		$statementPatterns = array();
+
+		foreach (FeatureProvider::getProcessorClasses() as $cls) {
+			$statementPatterns[] = $cls::syntaxPattern();
+		}
+
+		return  '(' .
+				'(?P<var>' . PatternAssembly::variable() . ')|' .
+				implode('|', $statementPatterns) .
 				')';
 	}
 

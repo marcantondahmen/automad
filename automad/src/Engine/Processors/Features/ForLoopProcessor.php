@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
+use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -73,5 +74,21 @@ class ForLoopProcessor extends AbstractFeatureProcessors {
 
 			return $html;
 		}
+	}
+
+	public static function syntaxPattern() {
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+
+		return  $statementOpen . '\s*' .
+				PatternAssembly::$outerStatementMarker . '\s*' .
+				'for\s+(?P<forStart>' .
+					PatternAssembly::variable() . '|' . PatternAssembly::$number .
+				')\s+to\s+(?P<forEnd>' .
+					PatternAssembly::variable() . '|' . PatternAssembly::$number .
+				')\s*' . $statementClose .
+				'(?P<forSnippet>.*?)' .
+				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				'\s*' . $statementClose;
 	}
 }

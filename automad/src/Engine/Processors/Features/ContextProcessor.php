@@ -40,6 +40,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Parse;
 use Automad\Core\Selection;
+use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -131,5 +132,24 @@ class ContextProcessor extends AbstractFeatureProcessors {
 				return $TemplateProcessor->process($matches['withElseSnippet'], $directory);
 			}
 		}
+	}
+
+	public static function syntaxPattern() {
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+
+		return  $statementOpen . '\s*' .
+				PatternAssembly::$outerStatementMarker . '\s*' .
+				'with\s+(?P<with>' .
+					'"[^"]*"|' . "'[^']*'|" . PatternAssembly::variable() . '|prev|next' .
+				')' .
+				'\s*(?P<withOptions>\{.*?\})?' .
+				'\s*' . $statementClose .
+				'(?P<withSnippet>.*?)' .
+				'(?:' . $statementOpen . PatternAssembly::$outerStatementMarker .
+					'\s*else\s*' .
+				$statementClose . '(?P<withElseSnippet>.*?)' . ')?' .
+				$statementOpen . PatternAssembly::$outerStatementMarker . '\s*end' .
+				'\s*' . $statementClose;
 	}
 }

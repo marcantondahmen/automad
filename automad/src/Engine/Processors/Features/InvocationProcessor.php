@@ -91,4 +91,13 @@ class InvocationProcessor extends AbstractFeatureProcessors {
 			}
 		}
 	}
+
+	public static function syntaxPattern() {
+		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
+		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
+
+		return  $statementOpen . '\s*' .
+				'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?' .
+				'\s*' . $statementClose;
+	}
 }

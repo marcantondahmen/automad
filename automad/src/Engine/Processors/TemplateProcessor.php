@@ -37,9 +37,9 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Core\Automad;
-use Automad\Core\FileSystem;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
+use Automad\Engine\FeatureProvider;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Runtime;
 
@@ -57,11 +57,11 @@ class TemplateProcessor {
 
 	private $Automad;
 
+	private $featureProcessors;
+
 	private $Runtime;
 
 	private $SnippetCollection;
-
-	private $featureProcessors;
 
 	public function __construct(
 		Automad $Automad,
@@ -84,13 +84,17 @@ class TemplateProcessor {
 		$output = PreProcessor::prepareWrappingStatements($output);
 
 		$output = preg_replace_callback(
-			'/' . PatternAssembly::markup() . '/is',
+			'/' . PatternAssembly::template() . '/is',
 			function ($matches) use ($directory) {
-				foreach ($this->featureProcessors as $processor) {
-					$processed = $processor->process($matches, $directory);
+				if (!empty($matches['var'])) {
+					return $this->ContentProcessor->processVariables($matches['var'], false, true);
+				}
 
-					if (!empty($processed)) {
-						return $processed;
+				foreach ($this->featureProcessors as $processor) {
+					$featureOutput = $processor->process($matches, $directory);
+
+					if (!empty($featureOutput)) {
+						return $featureOutput;
 					}
 				}
 			},
@@ -105,19 +109,9 @@ class TemplateProcessor {
 	}
 
 	private function initFeatureProcessors() {
-		$files = FileSystem::glob(__DIR__ . '/Features/*.php');
-
-		foreach ($files as $file) {
-			require_once $file;
-		}
-
-		$processorClasses = array_filter(get_declared_classes(), function ($cls) {
-			return (strpos($cls, 'Engine\Processors\Features') !== false && strpos($cls, 'Abstract') === false);
-		});
-
 		$processors = array();
 
-		foreach ($processorClasses as $cls) {
+		foreach (FeatureProvider::getProcessorClasses() as $cls) {
 			$processors[$cls] = new $cls(
 				$this->Automad,
 				$this->Runtime,
