@@ -38,6 +38,7 @@ namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
 use Automad\Core\Parse;
+use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Extension;
 use Automad\Engine\Toolbox;
 
@@ -85,7 +86,7 @@ class InvocationProcessor extends AbstractFeatureProcessors {
 				// Try an extension, if no snippet or toolbox method was found.
 				Debug::log($call . ' is not a snippet or core method. Will look for a matching extension ...');
 				$Extension = new Extension($call, $options, $this->Automad);
-				$this->AssetCollection->merge($Extension->getAssets());
+				AssetCollection::merge($Extension->getAssets());
 
 				return $Extension->getOutput();
 			}

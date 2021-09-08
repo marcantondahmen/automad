@@ -52,16 +52,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PostProcessor {
-	private $AssetCollection;
 	private $headless;
 	private $InPage;
 
 	public function __construct(
-		AssetCollection $AssetCollection,
 		InPage $InPage,
 		bool $headless
 	) {
-		$this->AssetCollection = $AssetCollection;
 		$this->InPage = $InPage;
 		$this->headless = $headless;
 	}
@@ -91,13 +88,13 @@ class PostProcessor {
 	}
 
 	/**
-	 * Create the HTML tags for each file in the AssetCollection and prepend them to the closing </head> tag.
+	 * Create the HTML tags for each file in the asset collection and prepend them to the closing </head> tag.
 	 *
 	 * @param string $str
 	 * @return string The processed string
 	 */
 	private function createExtensionAssetTags(string $str) {
-		$assets = $this->AssetCollection->get();
+		$assets = AssetCollection::get();
 		Debug::log($assets, 'Assets');
 
 		$html = '';

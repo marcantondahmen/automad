@@ -39,7 +39,6 @@ namespace Automad\Engine;
 use Automad\Core\Automad;
 use Automad\Core\Debug;
 use Automad\Core\Resolve;
-use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\PostProcessor;
@@ -98,14 +97,12 @@ class View {
 		Debug::log($this->template, 'Render template');
 
 		$Runtime = new Runtime($this->Automad);
-		$AssetCollection = new AssetCollection();
 		$SnippetCollection = new SnippetCollection();
 		$InPage = new InPage();
 
 		$ContentProcessor = new ContentProcessor(
 			$this->Automad,
 			$Runtime,
-			$AssetCollection,
 			$SnippetCollection,
 			$InPage,
 			$this->headless
@@ -114,7 +111,6 @@ class View {
 		$TemplateProcessor = new TemplateProcessor(
 			$this->Automad,
 			$Runtime,
-			$AssetCollection,
 			$SnippetCollection,
 			$ContentProcessor
 		);
@@ -124,7 +120,7 @@ class View {
 			dirname($this->template)
 		);
 
-		$PostProcessor = new PostProcessor($AssetCollection, $InPage, $this->headless);
+		$PostProcessor = new PostProcessor($InPage, $this->headless);
 
 		$output = $PostProcessor->process($output);
 

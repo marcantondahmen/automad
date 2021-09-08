@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Core\Automad;
-use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\FeatureProvider;
 use Automad\Engine\PatternAssembly;
@@ -53,8 +52,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class TemplateProcessor {
-	private $AssetCollection;
-
 	private $Automad;
 
 	private $featureProcessors;
@@ -66,13 +63,11 @@ class TemplateProcessor {
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
-		AssetCollection $AssetCollection,
 		SnippetCollection $SnippetCollection,
 		ContentProcessor $ContentProcessor
 	) {
 		$this->Automad = $Automad;
 		$this->Runtime = $Runtime;
-		$this->AssetCollection = $AssetCollection;
 		$this->SnippetCollection = $SnippetCollection;
 		$this->ContentProcessor = $ContentProcessor;
 
@@ -115,7 +110,6 @@ class TemplateProcessor {
 			$processors[$cls] = new $cls(
 				$this->Automad,
 				$this->Runtime,
-				$this->AssetCollection,
 				$this->SnippetCollection,
 				$this->ContentProcessor
 			);

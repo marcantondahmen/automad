@@ -43,7 +43,6 @@ use Automad\Core\Image;
 use Automad\Core\Request;
 use Automad\Core\SessionData;
 use Automad\Core\Str;
-use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
@@ -60,8 +59,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ContentProcessor {
-	private $AssetCollection;
-
 	private $Automad;
 
 	private $headless;
@@ -75,14 +72,12 @@ class ContentProcessor {
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
-		AssetCollection $AssetCollection,
 		SnippetCollection $SnippetCollection,
 		InPage $InPage,
 		bool $headless
 	) {
 		$this->Automad = $Automad;
 		$this->Runtime = $Runtime;
-		$this->AssetCollection = $AssetCollection;
 		$this->SnippetCollection = $SnippetCollection;
 		$this->InPage = $InPage;
 		$this->headless = $headless;
@@ -134,12 +129,10 @@ class ContentProcessor {
 		$TemplateProcessor = new TemplateProcessor(
 			$this->Automad,
 			$this->Runtime,
-			$this->AssetCollection,
 			$this->SnippetCollection,
 			new ContentProcessor(
 				$this->Automad,
 				$this->Runtime,
-				$this->AssetCollection,
 				$this->SnippetCollection,
 				$this->InPage,
 				$this->headless
@@ -288,8 +281,6 @@ class ContentProcessor {
 				$this->Automad->Context->get()->get($key),
 				$this->Automad
 			);
-
-			$this->AssetCollection->merge(Blocks::$extensionAssets);
 
 			return $value;
 		} else {

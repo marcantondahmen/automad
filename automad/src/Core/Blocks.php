@@ -47,11 +47,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Blocks {
 	/**
-	 * Multidimensional array of collected extension assets grouped by type (CSS/JS).
-	 */
-	public static $extensionAssets = array();
-
-	/**
 	 * Inject block assets into the header of a page.
 	 *
 	 * @param string $str

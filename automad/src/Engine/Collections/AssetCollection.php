@@ -46,22 +46,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class AssetCollection {
-	private $assets = array();
+	private static $assets = array();
 
-	public function __construct() {
+	public static function get() {
+		return self::$assets;
 	}
 
-	public function get() {
-		return $this->assets;
-	}
-
-	public function merge(array $assets) {
+	public static function merge(array $assets) {
 		// Make sure, $this->assets has a basic structure to enable merging new assets.
-		$this->assets = array_merge(array('.css' => array(), '.js' => array()), $this->assets);
+		self::$assets = array_merge(array('.css' => array(), '.js' => array()), self::$assets);
 
 		foreach (array('.css', '.js') as $type) {
 			if (!empty($assets[$type])) {
-				$this->assets[$type] = array_merge($this->assets[$type], $assets[$type]);
+				self::$assets[$type] = array_merge(self::$assets[$type], $assets[$type]);
 			}
 		}
 	}

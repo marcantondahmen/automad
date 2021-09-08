@@ -37,8 +37,6 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
-use Automad\Core\Blocks;
-use Automad\Engine\Collections\AssetCollection;
 use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
@@ -76,14 +74,12 @@ class Snippet {
 		self::$snippetIsRendering = true;
 
 		$Runtime = new Runtime($Automad);
-		$AssetCollection = new AssetCollection();
 		$SnippetCollection = new SnippetCollection();
 		$InPage = new InPage();
 
 		$ContentProcessor = new ContentProcessor(
 			$Automad,
 			$Runtime,
-			$AssetCollection,
 			$SnippetCollection,
 			$InPage,
 			false
@@ -92,7 +88,6 @@ class Snippet {
 		$TemplateProcessor = new TemplateProcessor(
 			$Automad,
 			$Runtime,
-			$AssetCollection,
 			$SnippetCollection,
 			$ContentProcessor
 		);
@@ -118,9 +113,6 @@ class Snippet {
 				$output .= $TemplateProcessor->process($template, dirname($file));
 			}
 		}
-
-		$AssetCollection->merge(Blocks::$extensionAssets);
-		Blocks::$extensionAssets = $AssetCollection->get();
 
 		self::$snippetIsRendering = false;
 
