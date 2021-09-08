@@ -51,12 +51,28 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class TemplateProcessor {
+	/**
+	 * The main Automad instance.
+	 */
 	private $Automad;
 
+	/**
+	 * An array of all existing feature processor instances.
+	 */
 	private $featureProcessors;
 
+	/**
+	 * The Runtime instance.
+	 */
 	private $Runtime;
 
+	/**
+	 * The template processor constructor.
+	 *
+	 * @param Automad $Automad
+	 * @param Runtime $Runtime
+	 * @param ContentProcessor $ContentProcessor
+	 */
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
@@ -68,6 +84,13 @@ class TemplateProcessor {
 		$this->featureProcessors = $this->initFeatureProcessors();
 	}
 
+	/**
+	 * The main template render process basically applies all feature processors to the rendered template.
+	 *
+	 * @param string $template
+	 * @param string $directory
+	 * @return string the processed template
+	 */
 	public function process(string $template, string $directory) {
 		$output = PreProcessor::stripWhitespace($template);
 		$output = PreProcessor::prepareWrappingStatements($output);
@@ -97,6 +120,11 @@ class TemplateProcessor {
 		);
 	}
 
+	/**
+	 * Create instances of all existing feature processors and bundle them in an array.
+	 *
+	 * @return array the array of feature processor instances
+	 */
 	private function initFeatureProcessors() {
 		$processors = array();
 

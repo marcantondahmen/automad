@@ -51,6 +51,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ForEachLoopProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process `foreach` and `foreach ... else` loops.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 * @return string the processed string
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['foreach'])) {
 			$Context = $this->Automad->Context;
@@ -176,6 +183,11 @@ class ForEachLoopProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match foreach loops.
+	 *
+	 * @return string the foreach loop pattern
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

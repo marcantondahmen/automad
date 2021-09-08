@@ -135,8 +135,8 @@ class PatternAssembly {
 	}
 
 	/**
-	 * 	Return a regex pattern to match key/value pairs in an invalid JSON string
-	 * 	without valid quoting/escaping.
+	 * Return a regex pattern to match key/value pairs in an invalid JSON string
+	 * without valid quoting/escaping.
 	 *
 	 * @return string The generated pattern.
 	 */

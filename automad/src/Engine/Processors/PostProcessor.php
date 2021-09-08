@@ -52,9 +52,22 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PostProcessor {
+	/**
+	 * A boolean variable that contains the headless state
+	 */
 	private $headless;
+
+	/**
+	 * The InPage instance.
+	 */
 	private $InPage;
 
+	/**
+	 * The post-processor constructor.
+	 *
+	 * @param InPage $InPage
+	 * @param bool $headless
+	 */
 	public function __construct(
 		InPage $InPage,
 		bool $headless
@@ -63,6 +76,12 @@ class PostProcessor {
 		$this->headless = $headless;
 	}
 
+	/**
+	 * Run all required post-process steps.
+	 *
+	 * @param string $output
+	 * @return string the final output
+	 */
 	public function process(string $output) {
 		$output = $this->createExtensionAssetTags($output);
 		$output = $this->addMetaTags($output);

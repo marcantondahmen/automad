@@ -48,6 +48,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class URLProcessor {
+	/**
+	 * Find and resolve URLs using the specified resolving method and parameters.
+	 *
+	 * @param string $str
+	 * @param string $method
+	 * @param array $parameters
+	 * @return string the processed string
+	 */
 	public static function resolveUrls(string $str, string $method, array $parameters = array()) {
 		$method = '\Automad\Core\Resolve::' . $method;
 

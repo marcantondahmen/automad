@@ -47,28 +47,29 @@ use Automad\UI\InPage;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The View class holds all methods to render the current page using a template file.
- *
- * When render() is called, first the template file gets loaded.
- * The output, basically the raw template HTML (including the generated HTML by PHP in the template file)
- * gets stored in $output.
- *
- * In a second step all statements and content in $output gets processed.
- *
- * That way, it is possible that the template.php file can include HTML as well as PHP, while the "user-generated" content in the text files
- * can not have any executable code (PHP). There are no "eval" functions needed, since all the PHP gets only included from the template files,
- * which should not be edited by users anyway.
- *
- * In a last step, all URLs within the generated HTML get resolved to be relative to the server's root (or absolute), before $output gets returned.
+ * The View class is responsible for rendering the requeste page.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2013-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class View {
+	/**
+	 * The main Automad instance.
+	 */
 	private $Automad;
+
+	/**
+	 * A boolean variable that contains the headless state
+	 */
 	private $headless;
 
+	/**
+	 * The view constructor.
+	 *
+	 * @param Automad $Automad
+	 * @param bool $headless
+	 */
 	public function __construct(Automad $Automad, bool $headless = false) {
 		$this->Automad = $Automad;
 		$this->headless = $headless;
@@ -92,6 +93,11 @@ class View {
 		Debug::log($Page, 'New instance created for the current page');
 	}
 
+	/**
+	 * Render a page.
+	 *
+	 * @return string the rendered page
+	 */
 	public function render() {
 		Debug::log($this->template, 'Render template');
 

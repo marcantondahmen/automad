@@ -44,19 +44,36 @@ use Automad\Engine\Runtime;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract processor.
+ * The abstract feature processor class. All feature processors based on this class must implement
+ * a `process()` and a static `syntaxPattern()` method.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 abstract class AbstractFeatureProcessors {
+	/**
+	 * The main Automad instance.
+	 */
 	protected $Automad;
 
+	/**
+	 * The content processor instance.
+	 */
 	protected $ContentProcessor;
 
+	/**
+	 * The Runtime instance.
+	 */
 	protected $Runtime;
 
+	/**
+	 * The feature processor constructor.
+	 *
+	 * @param Automad $Automad
+	 * @param Runtime $Runtime
+	 * @param ContentProcessor $ContentProcessor
+	 */
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
@@ -67,10 +84,25 @@ abstract class AbstractFeatureProcessors {
 		$this->ContentProcessor = $ContentProcessor;
 	}
 
+	/**
+	 * The actual processor that is used to process a template substring
+	 * that matches the pattern returned by the `syntaxPattern()` method.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 */
 	abstract public function process(array $matches, string $directory);
 
+	/**
+	 * The actual pattern that is used to trigger the processor.
+	 */
 	abstract public static function syntaxPattern();
 
+	/**
+	 * Create a new instance of the template processor.
+	 *
+	 * @return TemplateProcessor the template processor instance
+	 */
 	protected function initTemplateProcessor() {
 		return new TemplateProcessor(
 			$this->Automad,

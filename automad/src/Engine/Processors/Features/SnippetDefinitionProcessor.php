@@ -50,6 +50,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class SnippetDefinitionProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process snippet definitions and add them to the snippet collection.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['snippet'])) {
 			SnippetCollection::add($matches['snippet'], $matches['snippetSnippet']);
@@ -58,6 +64,11 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match snippet definitions.
+	 *
+	 * @return string the snippet definition pattern
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

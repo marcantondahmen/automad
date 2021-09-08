@@ -53,6 +53,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class InvocationProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process invocations of Toolbox methods, snippets or extensions.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 * @return string the processed template string
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['call'])) {
 			$call = $matches['call'];
@@ -93,6 +100,11 @@ class InvocationProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match invocations.
+	 *
+	 * @return string the invocation regex pattern
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

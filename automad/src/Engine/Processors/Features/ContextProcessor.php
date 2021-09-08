@@ -52,6 +52,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ContextProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process `with` and `with ... else` statements.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 * @return sting the processed template string
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['with'])) {
 			$Context = $this->Automad->Context;
@@ -134,6 +141,11 @@ class ContextProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match context change statements in a template string.
+	 *
+	 * @return string the regex pattern for context change statements
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

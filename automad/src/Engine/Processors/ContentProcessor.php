@@ -58,14 +58,34 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ContentProcessor {
+	/**
+	 * The main Automad instance.
+	 */
 	private $Automad;
 
+	/**
+	 * A boolean variable that contains the headless state
+	 */
 	private $headless;
 
+	/**
+	 * The InPage instance.
+	 */
 	private $InPage;
 
+	/**
+	 * The Runtime instance.
+	 */
 	private $Runtime;
 
+	/**
+	 * The content processor constructor.
+	 *
+	 * @param Automad $Automad
+	 * @param Runtime $Runtime
+	 * @param InPage $InPage
+	 * @param bool $headless
+	 */
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
@@ -79,13 +99,13 @@ class ContentProcessor {
 	}
 
 	/**
-	 * Process a file related snippet like <@ foreach "*.jpg" { options } @> ... <@ end @>.
+	 * Process a file related snippet like `<@ foreach "*.jpg" { options } @> ... <@ end @>`.
 	 *
 	 * @param string $file
 	 * @param array $options
 	 * @param string $snippet
 	 * @param string $directory
-	 * @return string $html
+	 * @return string the processed file snippet
 	 */
 	public function processFileSnippet(string $file, array $options, string $snippet, string $directory) {
 		// Shelve runtime data.

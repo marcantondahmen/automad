@@ -49,6 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ForLoopProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process `for` loops.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 * @return string the processed string
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['forSnippet'])) {
 			$start = intval($this->ContentProcessor->processVariables($matches['forStart']));
@@ -76,6 +83,11 @@ class ForLoopProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match for loops.
+	 *
+	 * @return string the for loop pattern
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

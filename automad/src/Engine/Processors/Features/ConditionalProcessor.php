@@ -49,6 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class ConditionalProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process `if` and `if ... else` statements.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 * @return string the processed string
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['if'])) {
 			$ifSnippet = $matches['ifSnippet'];
@@ -88,7 +95,8 @@ class ConditionalProcessor extends AbstractFeatureProcessors {
 						$part
 					);
 
-					// Parse both sides of the expression. All possible matches for each side can get merged in to one string, since there will be only one item for left/right not empty.
+					// Parse both sides of the expression. All possible matches for each side can get merged in to one string,
+					// since there will be only one item for left/right not empty.
 					$left = $this->ContentProcessor->processVariables(
 						stripslashes($part['expressionLeftDoubleQuoted']) .
 						stripslashes($part['expressionLeftSingleQuoted']) .
@@ -140,7 +148,8 @@ class ConditionalProcessor extends AbstractFeatureProcessors {
 					$partialResult = (empty($part['expressionNot']) == !empty($expressionVar));
 				}
 
-				// Combine results based on logical operator - note that for the first part, the operator will be empty of course.
+				// Combine results based on logical operator - note that for the first part,
+				// the operator will be empty of course.
 				switch (strtolower(trim($part['operator']))) {
 					case '':
 						$result = $partialResult;
@@ -172,6 +181,11 @@ class ConditionalProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match conditionals in a template string.
+	 *
+	 * @return string the regex pattern for conditionals
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

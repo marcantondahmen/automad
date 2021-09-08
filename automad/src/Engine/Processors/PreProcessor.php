@@ -48,6 +48,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class PreProcessor {
+	/**
+	 * Preprocess recursive statements to identify the top-level (outer) statements within a parsed string.
+	 *
+	 * @param string $str
+	 * @return string The preprocessed string where all outer opening statement delimiters get an additional marker appended.
+	 */
 	public static function prepareWrappingStatements(string $str) {
 		$depth = 0;
 		$regex = 	'/(' .
@@ -81,6 +87,12 @@ class PreProcessor {
 		}, $str);
 	}
 
+	/**
+	 * Strip whitespace before or after delimiters when using `<@~` or `~@>`.
+	 *
+	 * @param string $str
+	 * @return string The processed string
+	 */
 	public static function stripWhitespace(string $str) {
 		$str = preg_replace('/\s*(' . preg_quote(AM_DEL_STATEMENT_OPEN) . ')~/is', '$1', $str);
 		$str = preg_replace('/~(' . preg_quote(AM_DEL_STATEMENT_CLOSE) . ')\s*/is', '$1', $str);

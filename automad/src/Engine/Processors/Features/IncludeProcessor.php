@@ -49,6 +49,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class IncludeProcessor extends AbstractFeatureProcessors {
+	/**
+	 * Process include statements.
+	 *
+	 * @param array $matches
+	 * @param string $directory
+	 * @return string the processed string
+	 */
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['file'])) {
 			Debug::log($matches['file'], 'Matched include');
@@ -65,6 +72,11 @@ class IncludeProcessor extends AbstractFeatureProcessors {
 		}
 	}
 
+	/**
+	 * The pattern that is used to match include statements.
+	 *
+	 * @return string the regex pattern that matches include statements
+	 */
 	public static function syntaxPattern() {
 		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
 		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);

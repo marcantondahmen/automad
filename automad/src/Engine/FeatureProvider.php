@@ -41,15 +41,23 @@ use Automad\Core\FileSystem;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Feature provider class.
+ * The feature provider class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class FeatureProvider {
+	/**
+	 * An array with names of all existing feature processor classes.
+	 */
 	private static $processorClasses = array();
 
+	/**
+	 * Return the array of feature processor class names.
+	 *
+	 * @return string the class name array
+	 */
 	public static function getProcessorClasses() {
 		if (empty(self::$processorClasses)) {
 			self::$processorClasses = self::findProcessorClasses();
@@ -58,6 +66,11 @@ class FeatureProvider {
 		return self::$processorClasses;
 	}
 
+	/**
+	 * Find all existing feature processors.
+	 *
+	 * @return string the class name array
+	 */
 	private static function findProcessorClasses() {
 		$files = FileSystem::glob(__DIR__ . '/Processors/Features/*.php');
 
