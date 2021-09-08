@@ -111,7 +111,8 @@ class ViewTest extends TestCase {
 								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . Str::sanitize(AM_VERSION) . '"></script>' .
 								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css" />' .
 								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/tests/packages/vendor/extension/script.js"></script>' .
-								'</head>Asset Test'
+								'</head>Asset Test',
+			'snippet_01' => 'Snippet Test / Snippet Test'
 		);
 
 		foreach ($templates as $template => $expected) {
