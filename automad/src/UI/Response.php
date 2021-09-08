@@ -165,9 +165,9 @@ class Response {
 	 * Set the buffer property.
 	 *
 	 * @see $buffer
-	 * @param string $buffer
+	 * @param string|null $buffer
 	 */
-	public function setBuffer(string $buffer) {
+	public function setBuffer(?string $buffer = null) {
 		$this->buffer = $buffer;
 	}
 
@@ -175,9 +175,9 @@ class Response {
 	 * Set the cli property.
 	 *
 	 * @see $cli
-	 * @param string $value
+	 * @param string|null $value
 	 */
-	public function setCli(string $value) {
+	public function setCli(?string $value = null) {
 		$this->cli = $value;
 	}
 
@@ -195,9 +195,9 @@ class Response {
 	 * Set the error property.
 	 *
 	 * @see $error
-	 * @param string $value
+	 * @param string|null $value
 	 */
-	public function setError(string $value) {
+	public function setError(?string $value = null) {
 		$this->error = $value;
 	}
 
@@ -205,9 +205,9 @@ class Response {
 	 * Set the html property.
 	 *
 	 * @see $html
-	 * @param string $html
+	 * @param string|null $html
 	 */
-	public function setHtml(string $html) {
+	public function setHtml(?string $html = null) {
 		$this->html = $html;
 	}
 
@@ -215,9 +215,9 @@ class Response {
 	 * Set the redirect property.
 	 *
 	 * @see $redirect
-	 * @param string $url
+	 * @param string|null $url
 	 */
-	public function setRedirect(string $url) {
+	public function setRedirect(?string $url = null) {
 		$this->redirect = $url;
 	}
 
@@ -235,9 +235,9 @@ class Response {
 	 * Set the status property.
 	 *
 	 * @see $status
-	 * @param string $value
+	 * @param string|null $value
 	 */
-	public function setStatus(string $value) {
+	public function setStatus(?string $value = null) {
 		$this->status = $value;
 	}
 
@@ -245,9 +245,9 @@ class Response {
 	 * Set the success property.
 	 *
 	 * @see $success
-	 * @param string $value
+	 * @param string|null $value
 	 */
-	public function setSuccess(string $value) {
+	public function setSuccess(?string $value = null) {
 		$this->success = $value;
 	}
 
