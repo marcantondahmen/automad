@@ -1,0 +1,102 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+[data-am-site-tree] {
+	.am-sidebar & {
+		padding: 0 @utility-container-padding-horizontal @am-body-padding-bottom
+			@utility-container-padding-horizontal;
+	}
+
+	.uk-form-stacked & {
+		padding: 0.57rem 1.14rem;
+		border: @am-border-width dashed @am-border-color;
+		border-radius: @am-radius;
+
+		& li.uk-active > a,
+		& li a:not(.am-site-tree-toggle):hover {
+			color: @button-success-color;
+			background-color: @button-success-background;
+		}
+	}
+
+	& > ul {
+		margin-left: -@nav-padding-horizontal;
+		margin-right: -@nav-padding-horizontal;
+	}
+
+	& ul li {
+		position: relative;
+	}
+
+	& a:not(.am-site-tree-toggle) {
+		width: auto;
+	}
+}
+
+.am-site-tree-toggle {
+	position: absolute !important;
+	z-index: 2;
+	left: -1.43rem;
+	padding: @nav-padding-vertical 0.36rem !important;
+	line-height: @button-mini-line-height;
+	font-size: @button-mini-font-size;
+
+	&,
+	&:focus,
+	&:hover,
+	&:active {
+		color: @nav-side-color !important;
+		background-color: transparent !important;
+	}
+}
+
+[class*='am-site-tree-icon-'] {
+	&:extend([class*='uk-icon-'] all);
+	font-size: 1em;
+	width: 0.71rem;
+	text-align: center !important;
+	color: @am-text;
+}
+
+.am-site-tree-icon {
+	&-open {
+		&:extend(.uk-icon-chevron-right all);
+	}
+
+	&-close {
+		&:extend(.uk-icon-chevron-down all);
+		position: relative;
+		top: -0.2em;
+	}
+}

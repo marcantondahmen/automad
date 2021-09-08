@@ -81,7 +81,7 @@ gulp.task('standard-js', function () {
 			.pipe(uglify(uglifyOptions)),
 		gulp.src(['node_modules/sticky-sidebar/dist/sticky-sidebar.min.js']),
 		gulp
-			.src(['../../automad/ui/js/scroll_position.js', 'js/*.js'])
+			.src(['../../automad/ui/js/ScrollPosition.js', 'js/*.js'])
 			.pipe(uglify(uglifyOptions))
 	)
 		.pipe(concat('standard.min.js', { newLine: '\r\n\r\n' }))

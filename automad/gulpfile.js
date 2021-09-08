@@ -1,3 +1,41 @@
+const headerTemplate = `/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ * 
+ * version <%= pkg.version %>
+ *
+ * Copyright (c) 2014-<%= new Date().getFullYear() %> by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ * https://automad.org/license
+ */
+`;
+
 var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	cleanCSS = require('gulp-clean-css'),
@@ -10,10 +48,8 @@ var gulp = require('gulp'),
 	sort = require('gulp-sort'),
 	uglify = require('gulp-uglify-es').default,
 	gutil = require('gulp-util'),
-	fs = require('fs'),
 	pkg = require('./package.json'),
-	distDashboard = 'ui/dist',
-	distBlocks = 'blocks/dist',
+	dist = 'dist',
 	cleanCSSOptions = {
 		format: { wrapAt: 500 },
 		rebase: false,
@@ -58,8 +94,8 @@ gulp.task('blocks-js', function () {
 		.pipe(sort())
 		.pipe(concat('blocks.min.js'))
 		.pipe(uglify(uglifyOptions))
-		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
-		.pipe(gulp.dest(distBlocks));
+		.pipe(header(headerTemplate, { pkg: pkg }))
+		.pipe(gulp.dest(dist));
 });
 
 // Concat, minify and prefix the UI js.
@@ -78,18 +114,18 @@ gulp.task('automad-js', function () {
 		merge2(
 			gulp.src(['ui/js/*.js']).pipe(sort()),
 			gulp.src(['ui/js/*/*.js']).pipe(sort()),
-			gulp.src(['ui/js/editorjs/*/*.js']).pipe(sort())
+			gulp.src(['ui/js/*/*/*.js']).pipe(sort())
 		)
 			.pipe(concat('automad.min.js'))
 			.pipe(uglify(uglifyOptions))
-			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			.pipe(header(headerTemplate, { pkg: pkg }))
 			// Rename custom scrollbars.
 			// This has to be done accordingly within the libs-js task.
 			.pipe(replace('.mCustomScrollbar(', '.am_mCustomScrollbar('))
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(distDashboard))
+			.pipe(gulp.dest(dist))
 	);
 });
 
@@ -213,7 +249,7 @@ gulp.task('libs-js', function () {
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(distDashboard))
+			.pipe(gulp.dest(dist))
 	);
 });
 
@@ -225,9 +261,9 @@ gulp.task('blocks-less', function () {
 		.on('error', onError)
 		.pipe(autoprefixer({ grid: false }))
 		.pipe(cleanCSS(cleanCSSOptions))
-		.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+		.pipe(header(headerTemplate, { pkg: pkg }))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(gulp.dest(distBlocks));
+		.pipe(gulp.dest(dist));
 });
 
 // Compile, minify and prefix automad.less.
@@ -239,12 +275,12 @@ gulp.task('automad-less', function () {
 			.on('error', onError)
 			.pipe(autoprefixer({ grid: false }))
 			.pipe(cleanCSS(cleanCSSOptions))
-			.pipe(header(fs.readFileSync('header.txt', 'utf8'), { pkg: pkg }))
+			.pipe(header(headerTemplate, { pkg: pkg }))
 			.pipe(rename({ suffix: '.min' }))
 			// Prefix all UIkit items.
 			.pipe(replace(customize.cls.search, customize.cls.replace))
 			.pipe(replace(customize.da.search, customize.da.replace))
-			.pipe(gulp.dest(distDashboard))
+			.pipe(gulp.dest(dist))
 	);
 });
 
@@ -257,7 +293,7 @@ gulp.task('libs-css', function () {
 		])
 		.pipe(cleanCSS(cleanCSSOptions))
 		.pipe(concat('libs.min.css', { newLine: '\r\n\r\n' }))
-		.pipe(gulp.dest(distDashboard));
+		.pipe(gulp.dest(dist));
 });
 
 // Watch task.

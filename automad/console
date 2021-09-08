@@ -35,6 +35,8 @@
  * http://automad.org/license
  */
 
+use Automad\Autoload;
+use Automad\Core\Config;
 use Automad\UI\Console;
 
 if (http_response_code() || !defined('STDIN')) {
@@ -45,7 +47,10 @@ define('AUTOMAD', true);
 define('AUTOMAD_CONSOLE', true);
 define('AM_BASE_DIR', dirname(dirname(__FILE__)));
 
-require AM_BASE_DIR . '/automad/autoload.php';
-require AM_BASE_DIR . '/automad/const.php';
+require_once AM_BASE_DIR . '/automad/src/Autoload.php';
+
+Autoload::init();
+Config::overrides();
+Config::defaults();
 
 $console = new Console($argv);

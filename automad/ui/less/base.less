@@ -45,10 +45,11 @@
 @am-body-padding-bottom: @utility-margin;
 
 @am-border-width: 0.072rem;
+@am-border-width-px: unit(round(@am-border-width * 16), px);
 @am-border-color: #e0e0e0;
 @am-border-dark-color: #333333;
 @am-hairline: 0.072rem solid @am-border-color;
-@am-hairline-px: (unit(round(@am-border-width * 16), px)) solid @am-border-color;
+@am-hairline-px: @am-border-width-px solid @am-border-color;
 
 @am-nav-font-weight: @base-body-font-weight;
 

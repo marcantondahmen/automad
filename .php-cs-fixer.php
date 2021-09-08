@@ -18,6 +18,8 @@ return (new PhpCsFixer\Config())
 		'ordered_class_elements' => array(
 			'sort_algorithm' => 'alpha'
 		),
+		'ordered_imports' => true,
+		'function_typehint_space' => true,
 		'method_argument_space' => array(
 			'on_multiline' => 'ensure_fully_multiline',
 			'after_heredoc' => true
@@ -42,14 +44,25 @@ return (new PhpCsFixer\Config())
 		'no_trailing_whitespace' => true,
 		'no_whitespace_before_comma_in_array' => true,
 		'no_whitespace_in_blank_line' => true,
-		'phpdoc_add_missing_param_annotation' => true,
+		'nullable_type_declaration_for_default_null_value' => array(
+			'use_nullable_type_declaration' => true
+		),
+		'phpdoc_add_missing_param_annotation' => array(
+			'only_untyped' => false
+		),
 		'phpdoc_align' => array(
 			'align' => 'left'
 		),
 		'phpdoc_indent' => true,
 		'phpdoc_order' => true,
+		'phpdoc_scalar' => true,
 		'phpdoc_trim' => true,
+		'phpdoc_trim_consecutive_blank_line_separation' => true,
 		'return_type_declaration' => true,
+		'phpdoc_types' => true,
+		'phpdoc_types_order' => array(
+			'null_adjustment' => 'always_last'
+		),
 		'single_blank_line_before_namespace' => true,
 		'single_blank_line_at_eof' => true,
 		'single_line_after_imports' => true,
