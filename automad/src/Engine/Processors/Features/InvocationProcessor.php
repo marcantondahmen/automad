@@ -39,6 +39,7 @@ namespace Automad\Engine\Processors\Features;
 use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Engine\Collections\AssetCollection;
+use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Extension;
 use Automad\Engine\Toolbox;
 
@@ -68,10 +69,9 @@ class InvocationProcessor extends AbstractFeatureProcessors {
 			}
 
 			$Toolbox = new Toolbox($this->Automad);
-			$snippet = $this->SnippetCollection->get($call);
 
 			// Call snippet or method in order of priority: Snippets, Toolbox methods and extensions.
-			if ($snippet) {
+			if ($snippet = SnippetCollection::get($call)) {
 				// Process a registered snippet.
 				Debug::log($call, 'Process registered snippet');
 				$TemplateProcessor = $this->initTemplateProcessor();

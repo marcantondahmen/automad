@@ -46,22 +46,19 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class SnippetCollection {
-	private $snippets = array();
+	private static $snippets = array();
 
-	public function __construct() {
+	public static function add(string $name, string $body) {
+		self::$snippets[$name] = $body;
 	}
 
-	public function add(string $name, string $body) {
-		$this->snippets[$name] = $body;
-	}
-
-	public function get(string $name) {
-		if (array_key_exists($name, $this->snippets)) {
-			return $this->snippets[$name];
+	public static function get(string $name) {
+		if (array_key_exists($name, self::$snippets)) {
+			return self::$snippets[$name];
 		}
 	}
 
-	public function getCollection() {
-		return $this->snippets;
+	public static function getCollection() {
+		return self::$snippets;
 	}
 }

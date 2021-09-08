@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors;
 
 use Automad\Core\Automad;
-use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\FeatureProvider;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Runtime;
@@ -58,19 +57,14 @@ class TemplateProcessor {
 
 	private $Runtime;
 
-	private $SnippetCollection;
-
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
-		SnippetCollection $SnippetCollection,
 		ContentProcessor $ContentProcessor
 	) {
 		$this->Automad = $Automad;
 		$this->Runtime = $Runtime;
-		$this->SnippetCollection = $SnippetCollection;
 		$this->ContentProcessor = $ContentProcessor;
-
 		$this->featureProcessors = $this->initFeatureProcessors();
 	}
 
@@ -110,7 +104,6 @@ class TemplateProcessor {
 			$processors[$cls] = new $cls(
 				$this->Automad,
 				$this->Runtime,
-				$this->SnippetCollection,
 				$this->ContentProcessor
 			);
 		}

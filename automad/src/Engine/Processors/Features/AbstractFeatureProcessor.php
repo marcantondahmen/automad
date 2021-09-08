@@ -37,7 +37,6 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Automad;
-use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Engine\Runtime;
@@ -58,17 +57,13 @@ abstract class AbstractFeatureProcessors {
 
 	protected $Runtime;
 
-	protected $SnippetCollection;
-
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
-		SnippetCollection $SnippetCollection,
 		ContentProcessor $ContentProcessor
 	) {
 		$this->Automad = $Automad;
 		$this->Runtime = $Runtime;
-		$this->SnippetCollection = $SnippetCollection;
 		$this->ContentProcessor = $ContentProcessor;
 	}
 
@@ -80,7 +75,6 @@ abstract class AbstractFeatureProcessors {
 		return new TemplateProcessor(
 			$this->Automad,
 			$this->Runtime,
-			$this->SnippetCollection,
 			$this->ContentProcessor
 		);
 	}

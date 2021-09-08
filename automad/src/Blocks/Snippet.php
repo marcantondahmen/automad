@@ -37,7 +37,6 @@
 namespace Automad\Blocks;
 
 use Automad\Core\Automad;
-use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
 use Automad\Engine\Runtime;
@@ -74,13 +73,11 @@ class Snippet {
 		self::$snippetIsRendering = true;
 
 		$Runtime = new Runtime($Automad);
-		$SnippetCollection = new SnippetCollection();
 		$InPage = new InPage();
 
 		$ContentProcessor = new ContentProcessor(
 			$Automad,
 			$Runtime,
-			$SnippetCollection,
 			$InPage,
 			false
 		);
@@ -88,7 +85,6 @@ class Snippet {
 		$TemplateProcessor = new TemplateProcessor(
 			$Automad,
 			$Runtime,
-			$SnippetCollection,
 			$ContentProcessor
 		);
 

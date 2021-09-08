@@ -37,6 +37,7 @@
 namespace Automad\Engine\Processors\Features;
 
 use Automad\Core\Debug;
+use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,9 +52,9 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class SnippetDefinitionProcessor extends AbstractFeatureProcessors {
 	public function process(array $matches, string $directory) {
 		if (!empty($matches['snippet'])) {
-			$this->SnippetCollection->add($matches['snippet'], $matches['snippetSnippet']);
+			SnippetCollection::add($matches['snippet'], $matches['snippetSnippet']);
 
-			Debug::log($this->SnippetCollection->getCollection(), 'Registered snippet "' . $matches['snippet'] . '"');
+			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $matches['snippet'] . '"');
 		}
 	}
 

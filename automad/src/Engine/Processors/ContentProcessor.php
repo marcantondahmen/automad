@@ -43,7 +43,6 @@ use Automad\Core\Image;
 use Automad\Core\Request;
 use Automad\Core\SessionData;
 use Automad\Core\Str;
-use Automad\Engine\Collections\SnippetCollection;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
 use Automad\Engine\Runtime;
@@ -67,18 +66,14 @@ class ContentProcessor {
 
 	private $Runtime;
 
-	private $SnippetCollection;
-
 	public function __construct(
 		Automad $Automad,
 		Runtime $Runtime,
-		SnippetCollection $SnippetCollection,
 		InPage $InPage,
 		bool $headless
 	) {
 		$this->Automad = $Automad;
 		$this->Runtime = $Runtime;
-		$this->SnippetCollection = $SnippetCollection;
 		$this->InPage = $InPage;
 		$this->headless = $headless;
 	}
@@ -129,11 +124,9 @@ class ContentProcessor {
 		$TemplateProcessor = new TemplateProcessor(
 			$this->Automad,
 			$this->Runtime,
-			$this->SnippetCollection,
 			new ContentProcessor(
 				$this->Automad,
 				$this->Runtime,
-				$this->SnippetCollection,
 				$this->InPage,
 				$this->headless
 			)
