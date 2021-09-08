@@ -71,8 +71,8 @@ class PostProcessor {
 		$output = $this->addMetaTags($output);
 		$output = $this->obfuscateEmails($output);
 		$output = $this->resizeImages($output);
-		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = Blocks::injectAssets($output);
+		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 
 		return $output;
@@ -104,7 +104,7 @@ class PostProcessor {
 
 		if (isset($assets['.css'])) {
 			foreach ($assets['.css'] as $file) {
-				$html .= '<link type="text/css" rel="stylesheet" href="' . $file . '" />';
+				$html .= '<link rel="stylesheet" href="' . $file . '" />';
 				Debug::log($file, 'Created tag for');
 			}
 		}
