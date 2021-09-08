@@ -53,11 +53,11 @@ class ThemeReadme {
 	/**
 	 * Render a theme readme alert box.
 	 *
-	 * @param Theme $Theme
+	 * @param Theme|null $Theme
 	 * @param string $id
 	 * @return string The rendered alert box markup
 	 */
-	public static function render(Theme $Theme, string $id = 'am-readme-modal') {
+	public static function render(?Theme $Theme = null, string $id = 'am-readme-modal') {
 		if (!AM_HEADLESS_ENABLED) {
 			$Text = Text::getObject();
 

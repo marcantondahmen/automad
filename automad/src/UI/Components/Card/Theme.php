@@ -60,7 +60,7 @@ class Theme {
 	 * @param string $id
 	 * @return string The HTML of the card
 	 */
-	public static function render(SystemTheme $Theme, SystemTheme $activeTheme, string $id) {
+	public static function render(?SystemTheme $Theme, ?SystemTheme $activeTheme, string $id) {
 		$Text = Text::getObject();
 		$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
 		$files = FileSystem::glob($path . '/*');

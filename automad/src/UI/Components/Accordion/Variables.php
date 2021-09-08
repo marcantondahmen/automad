@@ -56,11 +56,11 @@ class Variables {
 	 * @param Automad $Automad
 	 * @param array $keys
 	 * @param array $data
-	 * @param Theme $Theme
+	 * @param Theme|null $Theme
 	 * @param string $title
 	 * @return string the rendered accordion item
 	 */
-	public static function render(Automad $Automad, array $keys, array $data, Theme $Theme, string $title) {
+	public static function render(Automad $Automad, array $keys, array $data, ?Theme $Theme, string $title) {
 		if (empty($keys)) {
 			return '';
 		}
