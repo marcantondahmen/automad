@@ -42,7 +42,7 @@ use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Sitemap;
-use Automad\Core\View;
+use Automad\Engine\View;
 use Automad\UI\Dashboard;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

@@ -47,11 +47,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Blocks {
 	/**
-	 * Multidimensional array of collected extension assets grouped by type (CSS/JS).
-	 */
-	public static $extensionAssets = array();
-
-	/**
 	 * Inject block assets into the header of a page.
 	 *
 	 * @param string $str
@@ -59,19 +54,17 @@ class Blocks {
 	 */
 	public static function injectAssets(string $str) {
 		$versionSanitized = Str::sanitize(AM_VERSION);
-		$css = AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . $versionSanitized;
-		$js = AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . $versionSanitized;
+		$css = '/automad/dist/blocks.min.css?v=' . $versionSanitized;
+		$js = '/automad/dist/blocks.min.js?v=' . $versionSanitized;
 
-		$assets = <<< HTML
-					<link href="$css" rel="stylesheet">
-					<script type="text/javascript" src="$js"></script>
-HTML;
+		$assets = '<link rel="stylesheet" href="' . $css . '">';
+		$assets .= '<script type="text/javascript" src="' . $js . '"></script>';
 
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
-			return preg_replace('/(\<(script|link).*\<\/head\>)/is', $assets . "\n$1", $str);
+			return preg_replace('/(\<(script|link).*\<\/head\>)/is', $assets . '$1', $str);
 		} else {
-			return str_replace('</head>', $assets . "\n</head>", $str);
+			return str_replace('</head>', $assets . '</head>', $str);
 		}
 	}
 

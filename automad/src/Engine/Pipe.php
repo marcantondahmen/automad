@@ -34,7 +34,10 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Engine;
+
+use Automad\Core\Debug;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

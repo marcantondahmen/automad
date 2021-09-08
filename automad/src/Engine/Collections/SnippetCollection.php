@@ -27,36 +27,58 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2019-2021 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Engine\Collections;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Headless class provides helpers for the headless mode.
+ * The snippet collection.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2019-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Headless {
+class SnippetCollection {
 	/**
-	 * Checks whether a custom headless template exists and returns its path.
-	 * In case there is no custom template, the path to the default template is returned.
-	 *
-	 * @return string The path to the template file
+	 * An array for collection snippet definitions.
 	 */
-	public static function getTemplate() {
-		if (is_readable(AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM)) {
-			return AM_BASE_DIR . AM_HEADLESS_TEMPLATE_CUSTOM;
-		}
+	private static $snippets = array();
 
-		return AM_BASE_DIR . AM_HEADLESS_TEMPLATE;
+	/**
+	 * Add a snippet definition to the collection.
+	 *
+	 * @param string $name
+	 * @param string $body
+	 */
+	public static function add(string $name, string $body) {
+		self::$snippets[$name] = $body;
+	}
+
+	/**
+	 * Get a snippet definition body.
+	 *
+	 * @param string $name
+	 * @return string the snippet body
+	 */
+	public static function get(string $name) {
+		if (array_key_exists($name, self::$snippets)) {
+			return self::$snippets[$name];
+		}
+	}
+
+	/**
+	 * Get the full collection of snippet definitions.
+	 *
+	 * @return array the array of snippet definitions.
+	 */
+	public static function getCollection() {
+		return self::$snippets;
 	}
 }

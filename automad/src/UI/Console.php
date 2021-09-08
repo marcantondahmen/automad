@@ -78,7 +78,7 @@ class Console {
 		$commands = array();
 
 		foreach ($classList as $cls) {
-			$command = new $cls;
+			$command = new $cls();
 			$commands[$command->name()] = (object) array(
 				'class' => $cls,
 				'help' => $command->help()

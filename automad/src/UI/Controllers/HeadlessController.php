@@ -37,8 +37,8 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Cache;
-use Automad\Core\Headless;
 use Automad\Core\Request;
+use Automad\Engine\Headless;
 use Automad\UI\Components\Form\HeadlessEditor;
 use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;

@@ -37,8 +37,8 @@
 namespace Automad\UI;
 
 use Automad\Core\Context;
-use Automad\Core\Regex;
 use Automad\Core\Str;
+use Automad\Engine\PatternAssembly;
 use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\Link;
@@ -205,13 +205,13 @@ HTML;
 		// Within HTML tags.
 		// Like <div data-attr="...">
 		$str = preg_replace_callback('/\<[^>]+\>/is', function ($matches) {
-			return preg_replace('/' . Regex::inPageEditButton() . '/is', '', $matches[0]);
+			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 
 		// In head, script, links, buttons etc.
 		// Like <head>...</head>
 		$str = preg_replace_callback('/\<(a|button|head|script|select|textarea)\b.+?\<\/\1\>/is', function ($matches) {
-			return preg_replace('/' . Regex::inPageEditButton() . '/is', '', $matches[0]);
+			return preg_replace('/' . PatternAssembly::inPageEditButton() . '/is', '', $matches[0]);
 		}, $str);
 
 		$open = preg_quote(AM_DEL_INPAGE_BUTTON_OPEN);

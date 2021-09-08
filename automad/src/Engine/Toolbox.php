@@ -34,7 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Engine;
+
+use Automad\Core\Automad;
+use Automad\Core\FileUtils;
+use Automad\Core\Image;
+use Automad\Core\Resolve;
+use Automad\Core\Selection;
+use Automad\Core\SessionData;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -417,7 +425,7 @@ class Toolbox {
 	 */
 	public function set(array $options) {
 		foreach ($options as $key => $value) {
-			if (preg_match('/' . Regex::$charClassAllVariables . '/', $key)) {
+			if (preg_match('/' . PatternAssembly::$charClassAllVariables . '/', $key)) {
 				if (strpos($key, '%') === 0) {
 					SessionData::set($key, $value);
 				} else {

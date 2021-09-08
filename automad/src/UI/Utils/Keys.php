@@ -37,7 +37,7 @@
 namespace Automad\UI\Utils;
 
 use Automad\Core\Page;
-use Automad\Core\Regex;
+use Automad\Engine\PatternAssembly;
 use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -139,11 +139,11 @@ class Keys {
 				array(AM_DEL_STATEMENT_OPEN, AM_DEL_STATEMENT_CLOSE),
 				$content
 			);
-			preg_match_all('/' . Regex::variableKeyGUI() . '/is', $content, $matches);
+			preg_match_all('/' . PatternAssembly::variableKeyUI() . '/is', $content, $matches);
 			$keys = $matches['varName'];
 
 			// Match markup to get includes recursively.
-			preg_match_all('/' . Regex::markup() . '/is', $content, $matches, PREG_SET_ORDER);
+			preg_match_all('/' . PatternAssembly::template() . '/is', $content, $matches, PREG_SET_ORDER);
 
 			foreach ($matches as $match) {
 				// Recursive include.

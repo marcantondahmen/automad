@@ -39,9 +39,9 @@ namespace Automad\UI\Utils;
 use Automad\Core\Automad;
 use Automad\Core\FileSystem as CoreFileSystem;
 use Automad\Core\Parse;
-use Automad\Core\Regex;
 use Automad\Core\Request;
 use Automad\Core\Str;
+use Automad\Engine\PatternAssembly;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -368,7 +368,7 @@ class FileSystem extends CoreFileSystem {
 		foreach ($data as $key => $value) {
 			// Only keep variables keys starting with a letter.
 			// (ignore any kind of system variable)
-			if (preg_match('/^' . Regex::$charClassTextFileVariables . '+$/', $key)) {
+			if (preg_match('/^' . PatternAssembly::$charClassTextFileVariables . '+$/', $key)) {
 				$pairs[] = $key . AM_PARSE_PAIR_SEPARATOR . ' ' . $value;
 			}
 		}

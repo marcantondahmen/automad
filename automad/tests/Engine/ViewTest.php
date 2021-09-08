@@ -1,12 +1,13 @@
 <?php
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
+use Automad\Core\Str;
 use Automad\Test\Mock;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @testdox Automad\Core\View
+ * @testdox Automad\Engine\View
  */
 class ViewTest extends TestCase {
 	public function dataForTestHeadlessJSONIsEqual() {
@@ -46,10 +47,14 @@ class ViewTest extends TestCase {
 	public function dataForTestInPageRenderIsEqual() {
 		$data = array();
 		$templates = array(
-			'email_01' => '<a href="#">test</a>' . "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" . '<a href="#">test</a>',
-			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
+			'email_01' =>   '<a href="#">test</a>' .
+							"<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
+							'<a href="#">test</a>',
+			'email_02' => 	'<a href="mailto:test@test.com"><span></span>test@test.com</a>',
+			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
+							'<a href="/index.php/page/test">Test</a>',
+			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
+							'<a href="/index.php/page/test">Test</a>'
 		);
 
 		foreach ($templates as $template => $expected) {
@@ -91,10 +96,23 @@ class ViewTest extends TestCase {
 			'querystringmerge_02' => 'source=0&key1=some-key-value-pair.',
 			'set_01' => 'Test 1, Test 2',
 			'session_get_01' => 'Session Test',
-			'email_01' => '<a href="#">test</a>' . "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" . '<a href="#">test</a>',
+			'email_01' => '<a href="#">test</a>' .
+						  "<a href='#' onclick='this.href=`mailto:` + this.innerHTML.split(``).reverse().join(``)' style='unicode-bidi:bidi-override;direction:rtl'>moc.tset-tset.tset@tset-tset.tset</a>&#x200E;" .
+						  '<a href="#">test</a>',
 			'email_02' => '<a href="mailto:test@test.com"><span></span>test@test.com</a>',
-			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>',
-			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w"><a href="/index.php/page/test">Test</a>'
+			'resolve_01' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
+							'<a href="/index.php/page/test">Test</a>',
+			'resolve_02' => '<img src="/pages/01.page/image.jpg" srcset="/pages/01.page/image.jpg 500w, /pages/01.page/image_large.jpg 1200w">' .
+							'<a href="/index.php/page/test">Test</a>',
+			'extension_01' => 'Test',
+			'extension_02' => 	'<head>' .
+								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
+								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . Str::sanitize(AM_VERSION) . '">' .
+								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . Str::sanitize(AM_VERSION) . '"></script>' .
+								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css" />' .
+								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/tests/packages/vendor/extension/script.js"></script>' .
+								'</head>Asset Test',
+			'snippet_01' => 'Snippet Test / Snippet Test'
 		);
 
 		foreach ($templates as $template => $expected) {

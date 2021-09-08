@@ -34,18 +34,18 @@
  * https://automad.org/license
  */
 
-namespace Automad\Core;
+namespace Automad\Engine;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * 	The Regex class holds all methods relating regular expressions.
+ * The PatternAssembly class contains all methods to assemble regular expressions patterns.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Regex {
+class PatternAssembly {
 	/**
 	 * The character class to be used within a regex matching all allowed characters for all kine of variable names (content in .txt files, system variables ( :var ) and query string items ( ?var )).
 	 */
@@ -122,7 +122,7 @@ class Regex {
 			$var = '?:';
 		}
 
-		return '(?:' . Regex::operand($left) . '\s*(' . $operator . '!?=|>=?|<=?)\s*' . Regex::operand($right) . '|(' . $not . '!|not\s+)?(' . $var . Regex::variable() . '))';
+		return '(?:' . self::operand($left) . '\s*(' . $operator . '!?=|>=?|<=?)\s*' . self::operand($right) . '|(' . $not . '!|not\s+)?(' . $var . self::variable() . '))';
 	}
 
 	/**
@@ -135,8 +135,8 @@ class Regex {
 	}
 
 	/**
-	 * 	Return a regex pattern to match key/value pairs in an invalid JSON string
-	 * 	without valid quoting/escaping.
+	 * Return a regex pattern to match key/value pairs in an invalid JSON string
+	 * without valid quoting/escaping.
 	 *
 	 * @return string The generated pattern.
 	 */
@@ -146,68 +146,6 @@ class Regex {
 		$pair = '\s*' . $key . '\s*:\s*' . $value . '\s*';
 
 		return '(?<=(\{|,))(' . $pair . ')(?=(\}|,))';
-	}
-
-	/**
-	 * Return the regex to match any kind of Automad markup such as variables, toolbox methods, includes, extensions, snippets, loops and conditions.
-	 *
-	 * @return string The markup regex
-	 */
-	public static function markup() {
-		$var = Regex::variable();
-		$statementOpen = preg_quote(AM_DEL_STATEMENT_OPEN);
-		$statementClose = preg_quote(AM_DEL_STATEMENT_CLOSE);
-
-		// The subpatterns don't include the wrapping delimiter <@ subpattern @>.
-		$statementSubpatterns['include'] = 	'(?P<file>[\w\/\-\.]+\.[a-z0-9]{2,5})';
-
-		$statementSubpatterns['call'] = 	'(?P<call>[\w\/\-]+)\s*(?P<callOptions>\{.*?\})?';
-
-		$statementSubpatterns['snippet'] = 	Regex::$outerStatementMarker . '\s*' . //Note the additional preparsed marker!
-											'snippet\s+(?P<snippet>[\w\-]+)' .
-											'\s*' . $statementClose .
-											'(?P<snippetSnippet>.*?)' .
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-
-		$statementSubpatterns['with'] = 	Regex::$outerStatementMarker . '\s*' . // Note the additional preparsed marker!
-											'with\s+(?P<with>' .
-												'"[^"]*"|' . "'[^']*'|" . $var . '|prev|next' .
-											')' .
-											'\s*(?P<withOptions>\{.*?\})?' .
-											'\s*' . $statementClose .
-											'(?P<withSnippet>.*?)' .
-											'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<withElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-
-		$statementSubpatterns['for'] =		Regex::$outerStatementMarker . '\s*' . 	// Note the additional preparsed marker!
-											'for\s+(?P<forStart>' . Regex::variable() . '|' . Regex::$number . ')\s+to\s+(?P<forEnd>' . Regex::variable() . '|' . Regex::$number . ')' .
-											'\s*' . $statementClose .
-											'(?P<forSnippet>.*?)' .
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-
-		$statementSubpatterns['foreach'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-											'foreach\s+in\s+(?P<foreach>' .
-												'pagelist|' .
-												'filters|' .
-												'tags|' .
-												'filelist|' .
-												'"[^"]*"|' . "'[^']*'|" . $var .
-											')' .
-											'\s*(?P<foreachOptions>\{.*?\})?' .
-											'\s*' . $statementClose .
-											'(?P<foreachSnippet>.*?)' .
-											'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<foreachElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
-											$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-
-		$statementSubpatterns['condition'] = 	Regex::$outerStatementMarker . '\s*' .	// Note the additional preparsed marker!
-												'if\s+(?P<if>' . Regex::expression() . '(\s+' . Regex::$logicalOperator . '\s+' . Regex::expression() . ')*)' .
-												'\s*' . $statementClose .
-												'(?P<ifSnippet>.*?)' .
-												'(?:' . $statementOpen . Regex::$outerStatementMarker . '\s*else\s*' . $statementClose . '(?P<ifElseSnippet>.*?)' . ')?' . // Note the additional preparsed marker!
-												$statementOpen . Regex::$outerStatementMarker . '\s*end'; // Note the additional preparsed marker!
-
-		// (variable | statements)
-		return '((?P<var>' . $var . ')|' . $statementOpen . '\s*(?:' . implode('|', $statementSubpatterns) . ')\s*' . $statementClose . ')';
 	}
 
 	/**
@@ -238,7 +176,7 @@ class Regex {
 			$var = '?:';
 		}
 
-		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . Regex::$number . ')|(' . $var . Regex::variable() . '))';
+		return '(?:"(' . $doubleQuoted . '(?:[^"\\\\]|\\\\.)*)"|\'(' . $singleQuoted . '(?:[^\'\\\\]|\\\\.)*)\'|(' . $num . self::$number . ')|(' . $var . self::variable() . '))';
 	}
 
 	/**
@@ -285,8 +223,27 @@ class Regex {
 				'|' .
 				// Math.
 				'\s*(' . $operator . '[\+\-\*\/])\s*(' .
-				$num . Regex::$number . '|' . $subpatternMathVar .
+				$num . self::$number . '|' . $subpatternMathVar .
 				')\s*' .
+				')';
+	}
+
+	/**
+	 * Return the regex to match any kind of Automad template such as variables,
+	 * toolbox methods, includes, extensions, snippets, loops and conditions.
+	 *
+	 * @return string The template regex
+	 */
+	public static function template() {
+		$statementPatterns = array();
+
+		foreach (FeatureProvider::getProcessorClasses() as $cls) {
+			$statementPatterns[] = $cls::syntaxPattern();
+		}
+
+		return  '(' .
+				'(?P<var>' . PatternAssembly::variable() . ')|' .
+				implode('|', $statementPatterns) .
 				')';
 	}
 
@@ -340,7 +297,7 @@ class Regex {
 	 *
 	 * @return string The regex pattern.
 	 */
-	public static function variableKeyGUI() {
+	public static function variableKeyUI() {
 		return preg_quote(AM_DEL_VAR_OPEN) . '\s*(?P<varName>' . self::$charClassTextFileVariables . '+)';
 	}
 }
