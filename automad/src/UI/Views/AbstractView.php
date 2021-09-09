@@ -37,7 +37,7 @@
 namespace Automad\UI\Views;
 
 use Automad\Core\Str;
-use Automad\System\Themelist;
+use Automad\System\ThemeCollection;
 use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\About;
@@ -75,14 +75,14 @@ abstract class AbstractView {
 	/**
 	 * The Automad object.
 	 */
-	protected $Themelist = null;
+	protected $ThemeCollection = null;
 
 	/**
 	 * The page constructor.
 	 */
 	public function __construct() {
 		$this->Automad = UICache::get();
-		$this->Themelist = new Themelist();
+		$this->ThemeCollection = new ThemeCollection();
 		$this->fn = function ($expression) {
 			return $expression;
 		};
@@ -203,7 +203,7 @@ HTML;
 				</a>
 			</div>
 			{$fn(About::render('am-about-modal'))}
-			{$fn(AddPage::render($this->Automad, $this->Themelist))}
+			{$fn(AddPage::render($this->Automad, $this->ThemeCollection))}
 HTML;
 	}
 }
