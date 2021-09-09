@@ -38,8 +38,8 @@ namespace Automad\UI;
 
 use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Prefix;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -67,7 +67,7 @@ class Dashboard {
 		$namespaceViews = __NAMESPACE__ . '\\Views\\';
 		$namespaceControllers = __NAMESPACE__ . '\\Controllers\\';
 
-		if (UserModel::getName()) {
+		if (Session::getUsername()) {
 			if ($controller = Request::query('controller')) {
 				// Controllers.
 				$method = "{$namespaceControllers}{$controller}";

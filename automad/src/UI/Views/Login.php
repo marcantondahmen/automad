@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Views;
 
-use Automad\UI\Controllers\UserController;
+use Automad\UI\Controllers\SessionController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,7 +60,7 @@ class Login extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$error = UserController::login();
+		$error = SessionController::login();
 		$fn = $this->fn;
 
 		return <<< HTML

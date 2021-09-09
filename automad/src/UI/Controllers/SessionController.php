@@ -34,51 +34,37 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\UI\Controllers;
+
+use Automad\Core\Request;
+use Automad\UI\Utils\Session;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The User class provides all methods related to a user account.
+ * The Session controller class provides all methods related to a user session.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class UserModel {
-	/**
-	 * Return the currently logged in user.
-	 *
-	 * @return string Username
-	 */
-	public static function getName() {
-		if (isset($_SESSION['username'])) {
-			return $_SESSION['username'];
-		}
-	}
-
+class SessionController {
 	/**
 	 * Verify login information based on $_POST.
 	 *
-	 * @param string $username
-	 * @param string $password
-	 * @return bool false on error
+	 * @return string Error message in case of an error.
 	 */
-	public static function login(string $username, string $password) {
-		$accounts = AccountsModel::get();
-
-		if (isset($accounts[$username]) && AccountsModel::passwordVerified($password, $accounts[$username])) {
-			session_regenerate_id(true);
-			$_SESSION['username'] = $username;
-
-			// In case of using a proxy,
-			// it is safer to just refresh the current page instead of rebuilding the currently requested URL.
-			header('Refresh:0');
-
-			die;
+	public static function login() {
+		if (!empty($_POST)) {
+			if (($username = Request::post('username')) && ($password = Request::post('password'))) {
+				if (!Session::login($username, $password)) {
+					return Text::get('error_login');
+				}
+			} else {
+				return Text::get('error_login');
+			}
 		}
-
-		return false;
 	}
 
 	/**
@@ -87,13 +73,6 @@ class UserModel {
 	 * @return bool true on success
 	 */
 	public static function logout() {
-		unset($_SESSION);
-		$success = session_destroy();
-
-		if (!isset($_SESSION) && $success) {
-			return true;
-		} else {
-			return false;
-		}
+		return Session::logout();
 	}
 }

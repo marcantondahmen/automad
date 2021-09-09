@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\UI\Models\UserModel;
+use Automad\UI\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -133,7 +133,7 @@ class Cache {
 			$this->objectCacheFile = AM_FILE_OBJECT_CACHE;
 
 			// Disable page caching for in-page edit mode and define ui cache file.
-			if (UserModel::getName()) {
+			if (Session::getUsername()) {
 				$this->pageCachingIsEnabled = false;
 				Debug::log('Page cache is disabled during editing.');
 				$this->objectCacheFile = AM_FILE_OBJECT_USER_CACHE;

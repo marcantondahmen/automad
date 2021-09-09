@@ -38,8 +38,8 @@ namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
 use Automad\UI\Models\AccountsModel;
-use Automad\UI\Models\UserModel;
 use Automad\UI\Response;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,9 +69,9 @@ class UserController {
 					// Get all accounts from file.
 					$accounts = AccountsModel::get();
 
-					if (AccountsModel::passwordVerified($currentPassword, $accounts[UserModel::getName()])) {
+					if (AccountsModel::passwordVerified($currentPassword, $accounts[Session::getUsername()])) {
 						// Change entry for current user with accounts array.
-						$accounts[UserModel::getName()] = AccountsModel::passwordHash($newPassword1);
+						$accounts[Session::getUsername()] = AccountsModel::passwordHash($newPassword1);
 
 						// Write array with all accounts back to file.
 						if (AccountsModel::write($accounts)) {
@@ -93,31 +93,5 @@ class UserController {
 		}
 
 		return $Response;
-	}
-
-	/**
-	 * Verify login information based on $_POST.
-	 *
-	 * @return string Error message in case of an error.
-	 */
-	public static function login() {
-		if (!empty($_POST)) {
-			if (($username = Request::post('username')) && ($password = Request::post('password'))) {
-				if (!UserModel::login($username, $password)) {
-					return Text::get('error_login');
-				}
-			} else {
-				return Text::get('error_login');
-			}
-		}
-	}
-
-	/**
-	 * Log out user.
-	 *
-	 * @return bool true on success
-	 */
-	public static function logout() {
-		return UserModel::logout();
 	}
 }

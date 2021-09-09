@@ -202,7 +202,7 @@ class Users {
 							</div>
 						</form>
 					</div>
-				</div>			
+				</div>
 HTML;
 	}
 }
