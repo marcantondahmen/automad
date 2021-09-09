@@ -37,7 +37,7 @@
 namespace Automad\UI\Components\Card;
 
 use Automad\Core\Image;
-use Automad\System\Theme as SystemTheme;
+use Automad\Types\Theme as TypesTheme;
 use Automad\UI\Components\Modal\Readme;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
@@ -55,12 +55,12 @@ class Theme {
 	/**
 	 * Render a theme card.
 	 *
-	 * @param SystemTheme $Theme
-	 * @param SystemTheme $activeTheme
+	 * @param TypesTheme $Theme
+	 * @param TypesTheme $activeTheme
 	 * @param string $id
 	 * @return string The HTML of the card
 	 */
-	public static function render(?SystemTheme $Theme, ?SystemTheme $activeTheme, string $id) {
+	public static function render(?TypesTheme $Theme, ?TypesTheme $activeTheme, string $id) {
 		$Text = Text::getObject();
 		$path = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Theme->path;
 		$files = FileSystem::glob($path . '/*');

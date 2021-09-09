@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Components\Alert;
 
-use Automad\System\Theme;
+use Automad\Types\Theme;
 use Automad\UI\Components\Modal\Readme;
 use Automad\UI\Utils\Text;
 

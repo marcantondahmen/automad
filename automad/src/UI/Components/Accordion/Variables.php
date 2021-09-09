@@ -37,7 +37,7 @@
 namespace Automad\UI\Components\Accordion;
 
 use Automad\Core\Automad;
-use Automad\System\Theme;
+use Automad\Types\Theme;
 use Automad\UI\Components\Form\Group;
 
 defined('AUTOMAD') or die('Direct access not permitted!');

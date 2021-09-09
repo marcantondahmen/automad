@@ -39,7 +39,7 @@ namespace Automad\UI\Components\Form;
 use Automad\Core\Automad;
 use Automad\Core\Request;
 use Automad\Core\Str;
-use Automad\System\Theme;
+use Automad\Types\Theme;
 use Automad\UI\Components\Fullscreen\Bar;
 use Automad\UI\Utils\Text;
 
