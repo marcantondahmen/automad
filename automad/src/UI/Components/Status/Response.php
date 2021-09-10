@@ -41,7 +41,7 @@ use Automad\Core\Str;
 use Automad\System\Update;
 use Automad\UI\Controllers\HeadlessController;
 use Automad\UI\Controllers\PackageManagerController;
-use Automad\UI\Models\AccountsModel;
+use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Response as UIResponse;
 use Automad\UI\Utils\Text;
 
@@ -143,12 +143,12 @@ HTML;
 		}
 
 		if ($item == 'users') {
-			$AccountsModel = new AccountsModel();
+			$UserCollectionModel = new UserCollectionModel();
 
 			$Response->setStatus(
 				'<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
 				Text::get('sys_user_registered') .
-				'&nbsp;&nbsp;<span class="uk-badge">' . count($AccountsModel->users) . '</span>'
+				'&nbsp;&nbsp;<span class="uk-badge">' . count($UserCollectionModel->users) . '</span>'
 			);
 		}
 

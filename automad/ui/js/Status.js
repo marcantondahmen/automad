@@ -77,8 +77,8 @@
 			$doc.ajaxComplete(
 				UIkit.Utils.debounce(function (e, xhr, settings) {
 					var triggers = [
-						'?controller=Accounts::edit',
-						'?controller=Accounts::add',
+						'?controller=UserCollection::edit',
+						'?controller=UserCollection::createUser',
 						'?controller=Headless::editTemplate',
 						'?controller=Headless::resetTemplate',
 						'?controller=Config::update',

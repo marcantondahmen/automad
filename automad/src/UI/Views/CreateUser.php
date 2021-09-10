@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Views;
 
-use Automad\UI\Controllers\AccountsController;
+use Automad\UI\Controllers\UserCollectionController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,7 +60,7 @@ class CreateUser extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$error = AccountsController::install();
+		$error = UserCollectionController::install();
 
 		$fn = $this->fn;
 

@@ -37,7 +37,7 @@
 namespace Automad\UI\Commands;
 
 use Automad\Types\User;
-use Automad\UI\Models\AccountsModel;
+use Automad\UI\Models\UserCollectionModel;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -73,13 +73,13 @@ class CreateUser extends AbstractCommand {
 	public static function run() {
 		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
-		$AccountsModel = new AccountsModel();
+		$UserCollectionModel = new UserCollectionModel();
 
 		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
 
-		$AccountsModel->createUser($name, $password, $password);
-		$error = $AccountsModel->save();
+		$UserCollectionModel->createUser($name, $password, $password);
+		$error = $UserCollectionModel->save();
 
 		if (!$error) {
 			echo '--------------------' . PHP_EOL;

@@ -38,7 +38,7 @@ namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
 use Automad\UI\Components\Grid\Users;
-use Automad\UI\Models\AccountsModel;
+use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Response;
 use Automad\UI\Utils\Text;
 
@@ -51,13 +51,13 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class AccountsController {
+class UserCollectionController {
 	/**
 	 * Add user account based on $_POST.
 	 *
 	 * @return Response the response object
 	 */
-	public static function add() {
+	public static function createUser() {
 		$Response = new Response();
 
 		$username = Request::post('username');
@@ -69,15 +69,15 @@ class AccountsController {
 			return self::invalidUsernameResponse();
 		}
 
-		$AccountsModel = new AccountsModel();
+		$UserCollectionModel = new UserCollectionModel();
 
-		if ($error = $AccountsModel->createUser($username, $password1, $password2, $email)) {
+		if ($error = $UserCollectionModel->createUser($username, $password1, $password2, $email)) {
 			$Response->setError($error);
 
 			return $Response;
 		}
 
-		if ($error = $AccountsModel->save()) {
+		if ($error = $UserCollectionModel->save()) {
 			$Response->setError($error);
 
 			return $Response;
@@ -96,17 +96,17 @@ class AccountsController {
 	 */
 	public static function edit() {
 		$Response = new Response();
-		$AccountsModel = new AccountsModel();
+		$UserCollectionModel = new UserCollectionModel();
 
 		if ($users = Request::post('delete')) {
-			$Response->setError($AccountsModel->delete($users));
+			$Response->setError($UserCollectionModel->delete($users));
 
 			if (!$Response->getError()) {
 				$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');
 			}
 		}
 
-		$Response->setHtml(Users::render($AccountsModel->users));
+		$Response->setHtml(Users::render($UserCollectionModel->users));
 
 		return $Response;
 	}
@@ -124,9 +124,9 @@ class AccountsController {
 				return $Response->getError();
 			}
 
-			$AccountsModel = new AccountsModel();
+			$UserCollectionModel = new UserCollectionModel();
 
-			if ($error = $AccountsModel->createUser(
+			if ($error = $UserCollectionModel->createUser(
 				Request::post('username'),
 				Request::post('password1'),
 				Request::post('password2'),
@@ -143,7 +143,7 @@ class AccountsController {
 			header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
 			ob_end_flush();
 
-			exit($AccountsModel->generatePHP());
+			exit($UserCollectionModel->generatePHP());
 		}
 	}
 
