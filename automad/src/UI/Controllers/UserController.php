@@ -67,17 +67,17 @@ class UserController {
 			if ($newPassword1 == $newPassword2) {
 				if ($currentPassword != $newPassword1) {
 					// Get all accounts from file.
-					$accounts = AccountsModel::get();
+					$AccountsModel = new AccountsModel();
+					$User = $AccountsModel->getUser(Session::getUsername());
 
-					if (AccountsModel::passwordVerified($currentPassword, $accounts[Session::getUsername()])) {
+					if ($User->verifyPassword($currentPassword)) {
 						// Change entry for current user with accounts array.
-						$accounts[Session::getUsername()] = AccountsModel::passwordHash($newPassword1);
+						$User->setPasswordHash($newPassword1);
+						$AccountsModel->updateUser($User);
+						$Response->setError($AccountsModel->save());
 
-						// Write array with all accounts back to file.
-						if (AccountsModel::write($accounts)) {
+						if (!$Response->getError()) {
 							$Response->setSuccess(Text::get('success_password_changed'));
-						} else {
-							$Response->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
 						}
 					} else {
 						$Response->setError(Text::get('error_password_current'));

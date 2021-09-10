@@ -39,11 +39,11 @@ namespace Automad\UI\Components\Status;
 use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\System\Update;
-use Automad\UI\Utils\Text;
 use Automad\UI\Controllers\HeadlessController;
 use Automad\UI\Controllers\PackageManagerController;
 use Automad\UI\Models\AccountsModel;
 use Automad\UI\Response as UIResponse;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -143,10 +143,12 @@ HTML;
 		}
 
 		if ($item == 'users') {
+			$AccountsModel = new AccountsModel();
+
 			$Response->setStatus(
 				'<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
 				Text::get('sys_user_registered') .
-				'&nbsp;&nbsp;<span class="uk-badge">' . count(AccountsModel::get()) . '</span>'
+				'&nbsp;&nbsp;<span class="uk-badge">' . count($AccountsModel->users) . '</span>'
 			);
 		}
 

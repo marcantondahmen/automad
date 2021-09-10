@@ -1425,6 +1425,10 @@ sys_user_add_repeat: Repeat Password
 
 -
 
+sys_user_email: Email
+
+-
+
 sys_user_registered: Registered Users
 
 -

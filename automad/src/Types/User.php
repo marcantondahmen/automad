@@ -59,18 +59,60 @@ class User {
 	/**
 	 * The encrypted password.
 	 */
-	public $passwordEncrypted;
+	private $passwordHash;
 
 	/**
 	 * The constructor.
 	 *
 	 * @param string $name
-	 * @param string $passwordEncrypted
+	 * @param string $password
 	 * @param string|null $email
 	 */
-	public function __construct(string $name, string $passwordEncrypted, ?string $email = null) {
+	public function __construct(string $name, string $password, ?string $email = null) {
 		$this->name = $name;
-		$this->passwordEncrypted = $passwordEncrypted;
 		$this->email = $email;
+		$this->setPasswordHash($password);
+	}
+
+	/**
+	 * Get a hashed version of a user password.
+	 *
+	 * @return string the hashed password
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+
+	/**
+	 * Store a hashed version of a given clear text password.
+	 *
+	 * @param string $password
+	 */
+	public function setPasswordHash(string $password) {
+		$this->passwordHash = $this->hash($password);
+	}
+
+	/**
+	 * Verify if a password matches its saved hashed version.
+	 *
+	 * @param string $password
+	 * @return bool true if the password is verified
+	 */
+	public function verifyPassword(string $password) {
+		$hash = $this->passwordHash;
+
+		return ($hash === crypt($password, $hash));
+	}
+
+	/**
+	 * Create hash from password to store in accounts.txt.
+	 *
+	 * @param string $password
+	 * @return string Hashed/salted password
+	 */
+	private function hash(string $password) {
+		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
+
+		return crypt($password, $salt);
 	}
 }

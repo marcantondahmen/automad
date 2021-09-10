@@ -105,7 +105,7 @@ class Users {
 						class="uk-form" 
 						data-am-controller="Accounts::add" 
 						data-am-close-on-success="#am-add-user-modal"
-						>		
+						>
 							<input 
 							class="uk-form-controls uk-form-large uk-width-1-1" 
 							type="text" 
@@ -113,7 +113,15 @@ class Users {
 							placeholder="$Text->sys_user_add_name"
 							data-am-enter="#am-add-user-submit" 
 							required
-							/>	
+							/>
+							<input
+							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+							type="email" 
+							name="email" 
+							placeholder="$Text->sys_user_email"  
+							data-am-enter="#am-add-user-submit" 
+							required
+							/>
 							<input 
 							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
 							type="password" 
@@ -122,8 +130,8 @@ class Users {
 							autocomplete="new-password"
 							data-am-enter="#am-add-user-submit" 
 							required
-							/>		
-							<input 
+							/>
+							<input
 							class="uk-form-controls uk-width-1-1" 
 							type="password" 
 							name="password2" 

@@ -84,6 +84,12 @@ class CreateUser extends AbstractView {
 						/>
 						<input 
 						class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+						type="email" 
+						name="email" 
+						placeholder="{$fn(Text::get('sys_user_email'))}" 
+						/>
+						<input 
+						class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
 						type="password" 
 						name="password1" 
 						placeholder="{$fn(Text::get('sys_user_add_password'))}" 

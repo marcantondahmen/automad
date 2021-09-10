@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Models;
 
+use Automad\Types\User;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Text;
 
@@ -50,30 +51,34 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class AccountsModel {
 	/**
+	 * The collection of existing user objects.
+	 */
+	public $users;
+
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		$this->users = $this->loadUsers();
+	}
+
+	/**
 	 * Add user account.
 	 *
 	 * @param string $username
 	 * @param string $password1
 	 * @param string $password2
+	 * @param string|null $email
 	 * @return string an error message or false on success.
 	 */
-	public static function add(string $username, string $password1, string $password2) {
+	public function createUser(string $username, string $password1, string $password2, ?string $email = null) {
 		if ($username && $password1 && $password2) {
 			// Check if password1 equals password2.
 			if ($password1 == $password2) {
-				// Get all accounts from file.
-				$accounts = self::get();
-
 				// Check, if user exists already.
-				if (!isset($accounts[$username])) {
+				if (!isset($this->users[$username])) {
 					// Add user to accounts array.
-					$accounts[$username] = self::passwordHash($password1);
-					ksort($accounts);
-
-					// Write array with all accounts back to file.
-					if (!self::write($accounts)) {
-						return Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
-					}
+					$this->users[$username] = new User($username, $password1, $email);
 				} else {
 					return '"' . $username . '" ' . Text::get('error_existing');
 				}
@@ -93,22 +98,20 @@ class AccountsModel {
 	 * @param array $users
 	 * @return string an error message or false on success.
 	 */
-	public static function delete(array $users) {
+	public function delete(array $users) {
 		if (is_array($users)) {
 			// Only delete users from list, if accounts.txt is writable.
 			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
 			// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
 			// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
 			if (is_writable(AM_FILE_ACCOUNTS)) {
-				$accounts = self::get();
-
 				foreach ($users as $userToDelete) {
-					if (isset($accounts[$userToDelete])) {
-						unset($accounts[$userToDelete]);
+					if (isset($this->users[$userToDelete])) {
+						unset($this->users[$userToDelete]);
 					}
 				}
 
-				self::write($accounts);
+				$this->save();
 			} else {
 				return Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 			}
@@ -123,87 +126,74 @@ class AccountsModel {
 	 * The accounts file has to be a PHP file for security reasons. When trying to access the file directly via the browser,
 	 * it gets executed instead of revealing any user names.
 	 *
-	 * @param array $accounts
-	 * @return string The PHP code
+	 * @return string the PHP code
 	 */
-	public static function generatePHP(array $accounts) {
-		return 	"<?php defined('AUTOMAD') or die('Direct access not permitted!');\n" .
-				'return unserialize(\'' . serialize($accounts) . '\');' . "\n?>";
+	public function generatePHP() {
+		return "<?php\ndefined('AUTOMAD') or die();\nreturn unserialize('" . serialize($this->users) . "');";
 	}
 
 	/**
-	 * Get the accounts array by including the accounts PHP file.
+	 * Return a user.
 	 *
-	 * @return array The registered accounts
+	 * @param string $name
+	 * @return User the requested user account
 	 */
-	public static function get() {
-		return (include AM_FILE_ACCOUNTS);
-	}
-
-	/**
-	 * Install the first user account.
-	 *
-	 * @param string $username
-	 * @param string $password1
-	 * @param string $password2
-	 * @return string Error message in case of an error.
-	 */
-	public static function install(string $username, string $password1, string $password2) {
-		if ($username && $password1 && ($password1 === $password2)) {
-			$accounts = array();
-			$accounts[$username] = self::passwordHash($password1);
-
-			// Download accounts.php
-			header('Expires: -1');
-			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-			header('Pragma: public');
-			header('Content-Type: application/octet-stream');
-			header('Content-Transfer-Encoding: binary');
-			header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
-			ob_end_flush();
-			echo self::generatePHP($accounts);
-			exit();
-		} else {
-			return Text::get('error_form');
+	public function getUser(string $name) {
+		if (array_key_exists($name, $this->users)) {
+			return $this->users[$name];
 		}
-	}
 
-	/**
-	 * Create hash from password to store in accounts.txt.
-	 *
-	 * @param string $password
-	 * @return string Hashed/salted password
-	 */
-	public static function passwordHash(string $password) {
-		$salt = '$2y$10$' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 22);
-
-		return crypt($password, $salt);
-	}
-
-	/**
-	 * Verify if a password matches its hashed version.
-	 *
-	 * @param string $password (clear text)
-	 * @param string $hash (hashed password)
-	 * @return bool true if the password is verified
-	 */
-	public static function passwordVerified(string $password, string $hash) {
-		return ($hash === crypt($password, $hash));
+		return null;
 	}
 
 	/**
 	 * Save the accounts array as PHP to AM_FILE_ACCOUNTS.
 	 *
-	 * @param array $accounts
-	 * @return bool Success (true/false)
+	 * @return bool|string False on success or an error message
 	 */
-	public static function write(array $accounts) {
-		$success = FileSystem::write(AM_FILE_ACCOUNTS, self::generatePHP($accounts));
+	public function save() {
+		ksort($this->users);
 
-		if ($success && function_exists('opcache_invalidate')) {
+		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
+			return Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+		}
+
+		if (function_exists('opcache_invalidate')) {
 			opcache_invalidate(AM_FILE_ACCOUNTS, true);
 		}
 
-		return $success;
+		return false;
+	}
+
+	/**
+	 * Update or add a single user object.
+	 *
+	 * @param User $User
+	 */
+	public function updateUser(User $User) {
+		$this->users[$User->name] = $User;
+	}
+
+	/**
+	 * Get the accounts array by including the accounts PHP file.
+	 *
+	 * @see User
+	 * @return array The registered accounts
+	 */
+	private function loadUsers() {
+		if (!is_readable(AM_FILE_ACCOUNTS)) {
+			return array();
+		}
+
+		$accounts = (include AM_FILE_ACCOUNTS);
+
+		// Check for legacy accounts format and convert it to the new one.
+		foreach ($accounts as $name => $data) {
+			if (is_string($data)) {
+				$accounts[$name] = new User($name, $data);
+			}
+		}
+
+		return $accounts;
 	}
 }

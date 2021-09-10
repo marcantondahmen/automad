@@ -63,12 +63,21 @@ class AccountsController {
 		$username = Request::post('username');
 		$password1 = Request::post('password1');
 		$password2 = Request::post('password2');
+		$email = Request::post('email');
 
 		if (!self::validUsername($username)) {
 			return self::invalidUsernameResponse();
 		}
 
-		if ($error = AccountsModel::add($username, $password1, $password2)) {
+		$AccountsModel = new AccountsModel();
+
+		if ($error = $AccountsModel->createUser($username, $password1, $password2, $email)) {
+			$Response->setError($error);
+
+			return $Response;
+		}
+
+		if ($error = $AccountsModel->save()) {
 			$Response->setError($error);
 
 			return $Response;
@@ -87,12 +96,17 @@ class AccountsController {
 	 */
 	public static function edit() {
 		$Response = new Response();
+		$AccountsModel = new AccountsModel();
 
 		if ($users = Request::post('delete')) {
-			$Response = self::delete($users);
+			$Response->setError($AccountsModel->delete($users));
+
+			if (!$Response->getError()) {
+				$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');
+			}
 		}
 
-		$Response->setHtml(Users::render(AccountsModel::get()));
+		$Response->setHtml(Users::render($AccountsModel->users));
 
 		return $Response;
 	}
@@ -110,41 +124,27 @@ class AccountsController {
 				return $Response->getError();
 			}
 
-			return AccountsModel::install(
+			$AccountsModel = new AccountsModel();
+
+			if ($error = $AccountsModel->createUser(
 				Request::post('username'),
 				Request::post('password1'),
-				Request::post('password2')
-			);
+				Request::post('password2'),
+				Request::post('email')
+			)) {
+				return $error;
+			}
+
+			header('Expires: -1');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: public');
+			header('Content-Type: application/octet-stream');
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
+			ob_end_flush();
+
+			exit($AccountsModel->generatePHP());
 		}
-	}
-
-	/**
-	 * Verify if a password matches its hashed version.
-	 *
-	 * @param string $password (clear text)
-	 * @param string $hash (hashed password)
-	 * @return bool true/false
-	 */
-	public static function passwordVerified(string $password, string $hash) {
-		return AccountsModel::passwordVerified($password, $hash);
-	}
-
-	/**
-	 * Delete one ore more user accounts.
-	 *
-	 * @param array $users
-	 * @return Response the response object
-	 */
-	private static function delete(array $users) {
-		$Response = new Response();
-
-		$Response->setError(AccountsModel::delete($users));
-
-		if (!$Response->getError()) {
-			$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');
-		}
-
-		return $Response;
 	}
 
 	/**

@@ -67,9 +67,14 @@ class Session {
 	 * @return bool false on error
 	 */
 	public static function login(string $username, string $password) {
-		$accounts = AccountsModel::get();
+		$AccountsModel = new AccountsModel();
+		$User = $AccountsModel->getUser($username);
 
-		if (isset($accounts[$username]) && AccountsModel::passwordVerified($password, $accounts[$username])) {
+		if (empty($User)) {
+			return false;
+		}
+
+		if ($User->verifyPassword($password)) {
 			session_regenerate_id(true);
 			$_SESSION['username'] = $username;
 
@@ -77,7 +82,7 @@ class Session {
 			// it is safer to just refresh the current page instead of rebuilding the currently requested URL.
 			header('Refresh:0');
 
-			die;
+			exit();
 		}
 
 		return false;
