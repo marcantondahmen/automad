@@ -75,6 +75,30 @@ class User {
 	}
 
 	/**
+	 * Serialize object.
+	 *
+	 * @return array the associative array of properties
+	 */
+	public function __serialize() {
+		return array(
+			'name' => $this->name,
+			'email' => $this->email,
+			'passwordHash' => $this->passwordHash
+		);
+	}
+
+	/**
+	 * Unserialize object.
+	 *
+	 * @param array $properties
+	 */
+	public function __unserialize(array $properties) {
+		$this->name = $properties['name'];
+		$this->email = $properties['email'];
+		$this->passwordHash = $properties['passwordHash'];
+	}
+
+	/**
 	 * Get a hashed version of a user password.
 	 *
 	 * @return string the hashed password
