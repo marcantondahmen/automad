@@ -45,7 +45,7 @@ use Automad\UI\Utils\Text;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Accounts class provides all methods for creating and loading user accounts.
+ * The user collection class provides all methods for creating and loading user accounts.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
