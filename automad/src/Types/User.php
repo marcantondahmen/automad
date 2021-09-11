@@ -67,11 +67,20 @@ class User {
 	 * @param string $name
 	 * @param string $password
 	 * @param string|null $email
+	 * @param bool $convertLegacy
 	 */
-	public function __construct(string $name, string $password, ?string $email = null) {
+	public function __construct(string $name, string $password, ?string $email = null, ?bool $convertLegacy = false) {
 		$this->name = $name;
 		$this->email = $email;
 		$this->setPasswordHash($password);
+
+		// Legacy account files (pre version 1.9) can't be unserialized to User objects.
+		// In case of reading such a legacy file, User objects have to be constructed.
+		// Since in such case there is no clear password but only an already hashed one instead,
+		// The password hash property has to be overwritten with that already existing hash.
+		if ($convertLegacy && strpos($password, '$2y$') === 0) {
+			$this->passwordHash = $password;
+		}
 	}
 
 	/**

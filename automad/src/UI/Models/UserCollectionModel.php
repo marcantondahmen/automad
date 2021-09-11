@@ -129,7 +129,7 @@ class UserCollectionModel {
 	 * @return string the PHP code
 	 */
 	public function generatePHP() {
-		return "<?php\ndefined('AUTOMAD') or die();\nreturn unserialize('" . serialize($this->users) . "');";
+		return "<?php\ndefined('AUTOMAD') or die();\nreturn '" . serialize($this->users) . "';";
 	}
 
 	/**
@@ -188,12 +188,16 @@ class UserCollectionModel {
 		$accounts = (include AM_FILE_ACCOUNTS);
 
 		// Check for legacy accounts format and convert it to the new one.
-		foreach ($accounts as $name => $data) {
-			if (is_string($data)) {
-				$accounts[$name] = new User($name, $data);
+		if (is_array($accounts)) {
+			foreach ($accounts as $name => $data) {
+				if (is_string($data)) {
+					$accounts[$name] = new User($name, $data, null, true);
+				}
 			}
+
+			return $accounts;
 		}
 
-		return $accounts;
+		return unserialize($accounts);
 	}
 }
