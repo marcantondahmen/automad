@@ -155,7 +155,11 @@ class Users {
 				class="uk-button uk-button-success" 
 				data-uk-modal 
 				data-am-status="users"
-				></a>&nbsp;
+				>
+					<i class="uk-icon-users uk-icon-justify"></i>&nbsp;
+					$Text->sys_user_registered
+					&nbsp;<span class="uk-badge">&nbsp;</span>
+				</a>&nbsp;
 				<div id="am-users-modal" class="uk-modal">
 					<div class="uk-modal-dialog">
 						<div class="uk-modal-header">
