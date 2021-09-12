@@ -761,6 +761,10 @@ error_invalid_username: Invalid username! A username can only contain the follow
 
 -
 
+error_invalid_email: Invalid email address!
+
+-
+
 error_json: Invalid JSON! The contents of the configuration file is not formatted correctly.
 
 -
@@ -1389,23 +1393,7 @@ sys_user: Users
 
 -
 
-sys_user_info: You can add or remove more users or change your password here.
-
--
-
-sys_user_change_password: Change Your Password
-
--
-
-sys_user_change_password_current: Current Password
-
--
-
-sys_user_change_password_new: New Password
-
--
-
-sys_user_change_password_repeat: Repeat Password
+sys_user_info: Below you can find all information related to your account. You can change your username, password or email here. In order to enable password resets, make sure you have entered a vaild and active email address.
 
 -
 
@@ -1413,15 +1401,15 @@ sys_user_add: Add User
 
 -
 
-sys_user_add_name: Username
+sys_user_name: Username
 
 -
 
-sys_user_add_password: Password
+sys_user_password: Password
 
 -
 
-sys_user_add_repeat: Repeat Password
+sys_user_repeat_password: Repeat Password
 
 -
 
@@ -1429,7 +1417,27 @@ sys_user_email: Email
 
 -
 
+sys_user_send_test_email: Send Test Email
+
+-
+
+sys_user_change_password: Change Your Password
+
+-
+
+sys_user_current_password: Current Password
+
+-
+
+sys_user_new_password: New Password
+
+-
+
 sys_user_registered: Registered Users
+
+-
+
+sys_user_registered_info: Here you can add or remove other users.
 
 -
 

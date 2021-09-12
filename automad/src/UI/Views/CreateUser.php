@@ -80,7 +80,7 @@ class CreateUser extends AbstractView {
 						class="uk-form-controls uk-form-large uk-width-1-1" 
 						type="text" 
 						name="username" 
-						placeholder="{$fn(Text::get('sys_user_add_name'))}" 
+						placeholder="{$fn(Text::get('sys_user_name'))}" 
 						/>
 						<input 
 						class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
@@ -92,13 +92,13 @@ class CreateUser extends AbstractView {
 						class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
 						type="password" 
 						name="password1" 
-						placeholder="{$fn(Text::get('sys_user_add_password'))}" 
+						placeholder="{$fn(Text::get('sys_user_password'))}" 
 						/>
 						<input 
 						class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
 						type="password" 
 						name="password2" 
-						placeholder="{$fn(Text::get('sys_user_add_repeat'))}" 
+						placeholder="{$fn(Text::get('sys_user_repeat_password'))}" 
 						/>
 						<div class="uk-text-right">
 							<button 

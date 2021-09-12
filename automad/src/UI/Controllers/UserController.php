@@ -94,4 +94,28 @@ class UserController {
 
 		return $Response;
 	}
+
+	/**
+	 * Edit user account info such as username and email.
+	 *
+	 * @return Response the response
+	 */
+	public static function edit() {
+		$Response = new Response();
+		$username = Request::post('username');
+		$email = Request::post('email');
+
+		$UserCollectionModel = new UserCollectionModel();
+		$Response->setError($UserCollectionModel->editCurrentUserInfo($username, $email));
+
+		if (empty($Response->getError())) {
+			$Response->setError($UserCollectionModel->save());
+
+			if (empty($Response->getError())) {
+				$Response->setReload(true);
+			}
+		}
+
+		return $Response;
+	}
 }

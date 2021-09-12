@@ -65,10 +65,6 @@ class UserCollectionController {
 		$password2 = Request::post('password2');
 		$email = Request::post('email');
 
-		if (!self::validUsername($username)) {
-			return self::invalidUsernameResponse();
-		}
-
 		$UserCollectionModel = new UserCollectionModel();
 
 		if ($error = $UserCollectionModel->createUser($username, $password1, $password2, $email)) {
@@ -118,12 +114,6 @@ class UserCollectionController {
 	 */
 	public static function install() {
 		if (!empty($_POST)) {
-			if (!self::validUsername(Request::post('username'))) {
-				$Response = self::invalidUsernameResponse();
-
-				return $Response->getError();
-			}
-
 			$UserCollectionModel = new UserCollectionModel();
 
 			if ($error = $UserCollectionModel->createUser(
@@ -145,29 +135,5 @@ class UserCollectionController {
 
 			exit($UserCollectionModel->generatePHP());
 		}
-	}
-
-	/**
-	 * A response containing the invalid username error message.
-	 *
-	 * @return Response the response object
-	 */
-	private static function invalidUsernameResponse() {
-		$Response = new Response();
-		$Response->setError(Text::get('error_invalid_username') . ' "a-z", "A-Z", ".", "-", "_", "@"');
-
-		return $Response;
-	}
-
-	/**
-	 * Verify if a given username is valid.
-	 *
-	 * @param string $username
-	 * @return bool true in case the username is valid
-	 */
-	private static function validUsername(string $username) {
-		preg_match('/[^@\w\.\-]/', $username, $matches);
-
-		return empty($matches);
 	}
 }

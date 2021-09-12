@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\System;
 
+use Automad\UI\Models\UserCollectionModel;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -55,16 +57,105 @@ class Users {
 	 */
 	public static function render() {
 		$Text = Text::getObject();
+		$UserCollectionModel = new UserCollectionModel();
+		$username = Session::getUsername();
+		$User = $UserCollectionModel->getUser($username);
+		$email = $User->email;
 
 		return <<< HTML
 				<p>$Text->sys_user_info</p>
+				<div class="uk-panel uk-panel-box uk-margin-top">
+					<i class="uk-icon-user uk-icon-small"></i>
+					<form 
+					class="uk-form uk-form-stacked uk-margin-small-top"
+					data-am-controller="User::edit"
+					>
+						<div class="uk-grid uk-grid-width-large-1-2 uk-margin-small-bottom" data-uk-grid-margin>
+							<div class="uk-form-row">
+								<label for="am-user-name" class="uk-form-label uk-margin-top-remove">$Text->sys_user_name</label>
+								<input id="am-user-name" type="text" class="uk-form-controls uk-width-1-1" name="username" value="$username" required>
+							</div>
+							<div class="uk-form-row">
+								<label for="am-user-email" class="uk-form-label uk-margin-top-remove">$Text->sys_user_email</label>
+								<input id="am-user-email" type="email" class="uk-form-controls uk-width-1-1" name="email" value="$email" required>
+							</div>
+						</div>
+						<button 
+						type="button" 
+						class="uk-button"
+						data-am-submit="User::edit"
+						>
+							<i class="uk-icon-check"></i>&nbsp;
+							$Text->btn_save
+						</button>
+					</form>
+					<hr>
+					<!-- Change password -->
+					<a 
+					href="#am-change-password-modal" 
+					class="uk-button uk-button-success" 
+					data-uk-modal
+					>
+						<i class="uk-icon-unlock-alt"></i>&nbsp;
+						$Text->sys_user_change_password
+					</a>
+					<div id="am-change-password-modal" class="uk-modal">
+						<div class="uk-modal-dialog">
+							<div class="uk-modal-header">
+								$Text->sys_user_change_password
+								<a href="#" class="uk-modal-close uk-close"></a>
+							</div>
+							<form 
+							class="uk-form" 
+							data-am-controller="User::changePassword" 
+							data-am-close-on-success="#am-change-password-modal"
+							>
+								<input 
+								class="uk-form-controls uk-width-1-1" 
+								type="password" 
+								name="current-password" 
+								placeholder="$Text->sys_user_current_password"  
+								data-am-enter="#am-change-password-submit" 
+								required
+								/>
+								<input 
+								class="uk-form-controls uk-width-1-1" 
+								type="password" 
+								name="new-password1" 
+								placeholder="$Text->sys_user_new_password"  
+								data-am-enter="#am-change-password-submit" 
+								required
+								/>
+								<input 
+								class="uk-form-controls uk-width-1-1" 
+								type="password" 
+								name="new-password2" 
+								placeholder="$Text->sys_user_repeat_password"  
+								data-am-enter="#am-change-password-submit" 
+								required
+								/>
+								<div class="uk-modal-footer uk-text-right">
+									<button type="button" class="uk-modal-close uk-button">
+										<i class="uk-icon-close"></i>&nbsp;
+										$Text->btn_close
+									</button>
+									<button id="am-change-password-submit" type="submit" class="uk-button uk-button-success">
+										<i class="uk-icon-check"></i>&nbsp;
+										$Text->btn_save
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<p class="uk-margin-large-top">$Text->sys_user_registered_info</p>
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
-				class="uk-button uk-button-large uk-button-success" 
+				class="uk-button uk-button-success" 
 				data-uk-modal 
 				data-am-status="users"
-				></a>
+				></a>&nbsp;
 				<div id="am-users-modal" class="uk-modal">
 					<div class="uk-modal-dialog">
 						<div class="uk-modal-header">
@@ -73,7 +164,7 @@ class Users {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-controller="Accounts::edit" 
+						data-am-controller="UserCollection::edit" 
 						data-am-init 
 						data-am-confirm="$Text->confirm_delete_users"
 						></form>
@@ -82,7 +173,7 @@ class Users {
 								<i class="uk-icon-close"></i>&nbsp;
 								$Text->btn_close
 							</button>
-							<button type="button" class="uk-button uk-button-success" data-am-submit="Accounts::edit">
+							<button type="button" class="uk-button uk-button-success" data-am-submit="UserCollection::edit">
 								<i class="uk-icon-user-times"></i>&nbsp;
 								$Text->btn_remove_selected
 							</button>
@@ -90,8 +181,7 @@ class Users {
 					</div>
 				</div>
 				<!-- Add User -->
-				<br />
-				<a href="#am-add-user-modal" class="uk-button uk-margin-top" data-uk-modal>
+				<a href="#am-add-user-modal" class="uk-button uk-button-link" data-uk-modal>
 					<i class="uk-icon-user-plus"></i>&nbsp;
 					$Text->sys_user_add
 				</a>
@@ -103,14 +193,14 @@ class Users {
 						</div>
 						<form 
 						class="uk-form" 
-						data-am-controller="Accounts::add" 
+						data-am-controller="UserCollection::createUser" 
 						data-am-close-on-success="#am-add-user-modal"
 						>
 							<input 
 							class="uk-form-controls uk-form-large uk-width-1-1" 
 							type="text" 
 							name="username" 
-							placeholder="$Text->sys_user_add_name"
+							placeholder="$Text->sys_user_name"
 							data-am-enter="#am-add-user-submit" 
 							required
 							/>
@@ -126,7 +216,7 @@ class Users {
 							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
 							type="password" 
 							name="password1" 
-							placeholder="$Text->sys_user_add_password"  
+							placeholder="$Text->sys_user_password"  
 							autocomplete="new-password"
 							data-am-enter="#am-add-user-submit" 
 							required
@@ -135,7 +225,7 @@ class Users {
 							class="uk-form-controls uk-width-1-1" 
 							type="password" 
 							name="password2" 
-							placeholder="$Text->sys_user_add_repeat"  
+							placeholder="$Text->sys_user_repeat_password"  
 							autocomplete="new-password"
 							data-am-enter="#am-add-user-submit" 
 							required
@@ -148,64 +238,6 @@ class Users {
 								<button id="am-add-user-submit" type="submit" class="uk-button uk-button-success">
 									<i class="uk-icon-user-plus"></i>&nbsp;
 									$Text->btn_add
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- Change Password -->
-				<br />
-				<a 
-				href="#am-change-password-modal" 
-				class="uk-button uk-margin-small-top" 
-				data-uk-modal
-				>
-					<i class="uk-icon-key"></i>&nbsp;
-					$Text->sys_user_change_password
-				</a>
-				<div id="am-change-password-modal" class="uk-modal">
-					<div class="uk-modal-dialog">
-						<div class="uk-modal-header">
-							$Text->sys_user_change_password
-							<a href="#" class="uk-modal-close uk-close"></a>
-						</div>
-						<form 
-						class="uk-form" 
-						data-am-controller="User::changePassword" 
-						data-am-close-on-success="#am-change-password-modal"
-						>
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="current-password" 
-							placeholder="$Text->sys_user_change_password_current"  
-							data-am-enter="#am-change-password-submit" 
-							required
-							/>
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="new-password1" 
-							placeholder="$Text->sys_user_change_password_new"  
-							data-am-enter="#am-change-password-submit" 
-							required
-							/>
-							<input 
-							class="uk-form-controls uk-width-1-1" 
-							type="password" 
-							name="new-password2" 
-							placeholder="$Text->sys_user_change_password_repeat"  
-							data-am-enter="#am-change-password-submit" 
-							required
-							/>
-							<div class="uk-modal-footer uk-text-right">
-								<button type="button" class="uk-modal-close uk-button">
-									<i class="uk-icon-close"></i>&nbsp;
-									$Text->btn_close
-								</button>
-								<button id="am-change-password-submit" type="submit" class="uk-button uk-button-success">
-									<i class="uk-icon-check"></i>&nbsp;
-									$Text->btn_save
 								</button>
 							</div>
 						</form>

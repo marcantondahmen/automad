@@ -38,6 +38,7 @@ namespace Automad\UI\Models;
 
 use Automad\Types\User;
 use Automad\UI\Utils\FileSystem;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -72,6 +73,14 @@ class UserCollectionModel {
 	 * @return string an error message or false on success.
 	 */
 	public function createUser(string $username, string $password1, string $password2, ?string $email = null) {
+		if (!$this->validUsername($username)) {
+			return $this->invalidUsernameError();
+		}
+
+		if (!$this->validEmail($email)) {
+			return $this->invalidEmailError();
+		}
+
 		if ($username && $password1 && $password2) {
 			// Check if password1 equals password2.
 			if ($password1 == $password2) {
@@ -116,6 +125,47 @@ class UserCollectionModel {
 				return Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
 			}
 		}
+
+		return false;
+	}
+
+	/**
+	 * Edit info of the currently logged in user.
+	 *
+	 * @param string $username
+	 * @param string $email
+	 * @return string an error message in case of error or false in case of success
+	 */
+	public function editCurrentUserInfo(string $username, string $email) {
+		$User = $this->getUser(Session::getUsername());
+
+		if (!$User) {
+			return Text::get('error_form');
+		}
+
+		$username = trim($username);
+		$email = trim($email);
+
+		if (!$this->validUsername($username)) {
+			return $this->invalidUsernameError();
+		}
+
+		if (!$this->validEmail($email)) {
+			return $this->invalidEmailError();
+		}
+
+		if ($User->name != $username) {
+			if (!array_key_exists($username, $this->users)) {
+				unset($this->users[$User->name]);
+				$User->name = $username;
+				$_SESSION['username'] = $username;
+			} else {
+				return '"' . $username . '" ' . Text::get('error_existing');
+			}
+		}
+
+		$User->email = $email;
+		$this->updateUser($User);
 
 		return false;
 	}
@@ -175,6 +225,24 @@ class UserCollectionModel {
 	}
 
 	/**
+	 * The invalid email error message.
+	 *
+	 * @return string the error message
+	 */
+	private function invalidEmailError() {
+		return Text::get('error_invalid_email');
+	}
+
+	/**
+	 * The invalid username error message.
+	 *
+	 * @return string the error message
+	 */
+	private function invalidUsernameError() {
+		return Text::get('error_invalid_username') . ' "a-z", "A-Z", ".", "-", "_", "@"';
+	}
+
+	/**
 	 * Get the accounts array by including the accounts PHP file.
 	 *
 	 * @see User
@@ -199,5 +267,29 @@ class UserCollectionModel {
 		}
 
 		return unserialize($accounts);
+	}
+
+	/**
+	 * Verify if a given email address is valid.
+	 *
+	 * @param string $email
+	 * @return bool true in case the username is valid
+	 */
+	private function validEmail(string $email) {
+		preg_match('/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/', $email, $matches);
+
+		return $matches;
+	}
+
+	/**
+	 * Verify if a given username is valid.
+	 *
+	 * @param string $username
+	 * @return bool true in case the username is valid
+	 */
+	private function validUsername(string $username) {
+		preg_match('/[^@\w\.\-]/', $username, $matches);
+
+		return empty($matches);
 	}
 }
