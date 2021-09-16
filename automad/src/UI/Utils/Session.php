@@ -49,6 +49,29 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Session {
 	/**
+	 * Clears the reset token hash
+	 */
+	public static function clearResetTokenHash() {
+		unset($_SESSION['reset']);
+	}
+
+	/**
+	 * Return the reset token hash for a given user.
+	 *
+	 * @param string $username
+	 * @return string the token hash
+	 */
+	public static function getResetTokenHash(string $username) {
+		if (isset($_SESSION['reset'])) {
+			if (isset($_SESSION['reset'][$username])) {
+				return $_SESSION['reset'][$username];
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Return the currently logged in user.
 	 *
 	 * @return string Username
@@ -102,5 +125,15 @@ class Session {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Set the reset token hash for a given user.
+	 *
+	 * @param string $username
+	 * @param string $tokenHash
+	 */
+	public static function setResetTokenHash(string $username, string $tokenHash) {
+		$_SESSION['reset'] = array($username => $tokenHash);
 	}
 }

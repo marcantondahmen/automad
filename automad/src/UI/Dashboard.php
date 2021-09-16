@@ -116,10 +116,16 @@ class Dashboard {
 				exit($Response->json());
 			}
 
-			$view = 'CreateUser';
+			$requestedView = Request::query('view');
 
-			if (file_exists(AM_FILE_ACCOUNTS)) {
+			if ($requestedView == 'ResetPassword') {
+				$view = $requestedView;
+			} else {
 				$view = 'Login';
+			}
+
+			if (!file_exists(AM_FILE_ACCOUNTS)) {
+				$view = 'CreateUser';
 			}
 
 			$class = "{$namespaceViews}{$view}";

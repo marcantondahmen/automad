@@ -37,7 +37,12 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
+use Automad\UI\Components\Alert\Danger;
+use Automad\UI\Components\Layout\PasswordReset\ResetForm;
+use Automad\UI\Components\Layout\PasswordReset\ResetSuccess;
+use Automad\UI\Components\Layout\PasswordReset\TokenRequestForm;
 use Automad\UI\Models\UserCollectionModel;
+use Automad\UI\Models\UserModel;
 use Automad\UI\Response;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
@@ -66,22 +71,12 @@ class UserController {
 		if ($currentPassword && $newPassword1 && $newPassword2) {
 			if ($newPassword1 == $newPassword2) {
 				if ($currentPassword != $newPassword1) {
-					// Get all accounts from file.
-					$UserCollectionModel = new UserCollectionModel();
-					$User = $UserCollectionModel->getUser(Session::getUsername());
-
-					if ($User->verifyPassword($currentPassword)) {
-						// Change entry for current user with accounts array.
-						$User->setPasswordHash($newPassword1);
-						$UserCollectionModel->updateUser($User);
-						$Response->setError($UserCollectionModel->save());
-
-						if (!$Response->getError()) {
-							$Response->setSuccess(Text::get('success_password_changed'));
-						}
-					} else {
-						$Response->setError(Text::get('error_password_current'));
-					}
+					$UserModel = new UserModel();
+					$Response = $UserModel->changePassword(
+						Session::getUsername(),
+						$currentPassword,
+						$newPassword1
+					);
 				} else {
 					$Response->setError(Text::get('error_password_reuse'));
 				}
@@ -117,5 +112,48 @@ class UserController {
 		}
 
 		return $Response;
+	}
+
+	/**
+	 * Reset a user password by email.
+	 *
+	 * @return string the form HTML
+	 */
+	public static function resetPassword() {
+		$UserModel = new UserModel();
+		$UserCollectionModel = new UserCollectionModel();
+
+		$username = trim(Request::post('username'));
+		$token = Request::post('token');
+		$newPassword1 = Request::post('password1');
+		$newPassword2 = Request::post('password2');
+
+		$User = $UserCollectionModel->getUser($username);
+
+		if ($username && !$User) {
+			return TokenRequestForm::render(Text::get('error_user_not_found'));
+		}
+
+		if ($User && $token && $newPassword1 && $newPassword2) {
+			if ($UserModel->verifyPasswordResetToken($User->name, $token)) {
+				if ($error = $UserModel->resetPassword($User, $newPassword1, $newPassword2)) {
+					return ResetForm::render($User->name, $error);
+				} else {
+					return ResetSuccess::render();
+				}
+			} else {
+				return ResetForm::render($User->name, Text::get('error_password_reset_verification'));
+			}
+		}
+
+		if ($User) {
+			if ($error = $UserModel->sendPasswordResetToken($User)) {
+				return TokenRequestForm::render($error);
+			}
+
+			return ResetForm::render($User->name);
+		}
+
+		return TokenRequestForm::render();
 	}
 }

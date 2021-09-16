@@ -93,7 +93,7 @@ class Users {
 					<!-- Change password -->
 					<a 
 					href="#am-change-password-modal" 
-					class="uk-button uk-button-success" 
+					class="uk-button" 
 					data-uk-modal
 					>
 						<i class="uk-icon-unlock-alt"></i>&nbsp;

@@ -103,6 +103,7 @@ HTML;
 					href="{$fn(AM_BASE_INDEX . '/')}" 
 					class="uk-button uk-button-link"
 					>
+						<i class="uk-icon-home"></i>&nbsp;
 						{$fn(Text::get('btn_home'))}
 					</a>
 					<a 

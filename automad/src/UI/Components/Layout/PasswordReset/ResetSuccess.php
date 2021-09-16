@@ -34,79 +34,45 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Components\Card;
+namespace Automad\UI\Components\Layout\PasswordReset;
 
-use Automad\Core\Str;
-use Automad\UI\Utils\Session;
+use Automad\UI\Components\Alert\Success;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The user card component.
+ * The password reset success layout.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class User {
+class ResetSuccess {
 	/**
-	 * Render a user card.
+	 * Render the success layout.
 	 *
-	 * @param string $user
-	 * @return string the rendered user card
+	 * @return string the rendered layout.
 	 */
-	public static function render(string $user) {
-		$id = 'am-user-' . Str::slug($user);
+	public static function render() {
 		$fn = function ($expression) {
 			return $expression;
 		};
 
 		return <<< HTML
-			<li>
-				<div id="$id" class="uk-panel uk-panel-box">
-					<div class="uk-margin-small-bottom">
-						<i class="uk-icon-user uk-icon-medium"></i>
-					</div>
-					<div class="uk-margin-small-bottom">
-						$user
-					</div>
-					<div class="am-panel-bottom">
-						<div class="am-panel-bottom-right">
-							{$fn(self::checkbox($user, $id))}
-						</div>
-					</div>
-				</div>
-			</li>
-HTML;
-	}
-
-	/**
-	 * Render a user selection checkbox.
-	 *
-	 * @param string $user
-	 * @param string $id
-	 * @return string the rendered checkbox
-	 */
-	private static function checkbox(string $user, string $id) {
-		$fn = function ($expression) {
-			return $expression;
-		};
-
-		if ($user == Session::getUsername()) {
-			return <<< HTML
-				<div class="am-panel-bottom-link uk-text-muted">
-					{$fn(Text::get('sys_user_you'))}
-				</div>
-HTML;
-		}
-
-		return <<< HTML
-			<label 
-			class="am-toggle-checkbox am-panel-bottom-link" 
-			data-am-toggle="#$id">
-				<input type="checkbox" name="delete[]" value="$user" />
-			</label>
+			{$fn(Success::render(Text::get('success_password_changed')))}
+			<div class="uk-text-right">
+				<a href="{$fn(AM_BASE_INDEX . '/')}" class="uk-button uk-button-link">
+					<i class="uk-icon-home"></i>&nbsp;
+					{$fn(Text::get('btn_home'))}
+				</a>
+				<a 
+				href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
+				class="uk-button uk-button-success"
+				>
+					{$fn(Text::get('btn_login'))}
+				</a>
+			</div>
 HTML;
 	}
 }

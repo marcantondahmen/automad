@@ -77,7 +77,7 @@ class UserCollectionModel {
 			return $this->invalidUsernameError();
 		}
 
-		if (!$this->validEmail($email)) {
+		if ($email && !$this->validEmail($email)) {
 			return $this->invalidEmailError();
 		}
 
@@ -186,7 +186,7 @@ class UserCollectionModel {
 	 * Return a user.
 	 *
 	 * @param string $name
-	 * @return User the requested user account
+	 * @return User|null the requested user account
 	 */
 	public function getUser(string $name) {
 		if (array_key_exists($name, $this->users)) {
@@ -199,7 +199,7 @@ class UserCollectionModel {
 	/**
 	 * Save the accounts array as PHP to AM_FILE_ACCOUNTS.
 	 *
-	 * @return bool|string False on success or an error message
+	 * @return string|null Null on success or an error message
 	 */
 	public function save() {
 		ksort($this->users);
@@ -212,7 +212,7 @@ class UserCollectionModel {
 			opcache_invalidate(AM_FILE_ACCOUNTS, true);
 		}
 
-		return false;
+		return null;
 	}
 
 	/**
@@ -275,7 +275,7 @@ class UserCollectionModel {
 	 * @param string $email
 	 * @return bool true in case the username is valid
 	 */
-	private function validEmail(string $email) {
+	private function validEmail(?string $email = null) {
 		preg_match('/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/', $email, $matches);
 
 		return $matches;
