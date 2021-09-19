@@ -44,6 +44,7 @@ use Automad\UI\Components\Layout\PasswordReset\TokenRequestForm;
 use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Models\UserModel;
 use Automad\UI\Response;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
@@ -97,19 +98,19 @@ class UserController {
 	 */
 	public static function edit() {
 		$Response = new Response();
+		$Messenger = new Messenger();
+		$UserCollectionModel = new UserCollectionModel();
+
 		$username = Request::post('username');
 		$email = Request::post('email');
 
-		$UserCollectionModel = new UserCollectionModel();
-		$Response->setError($UserCollectionModel->editCurrentUserInfo($username, $email));
-
-		if (empty($Response->getError())) {
-			$Response->setError($UserCollectionModel->save());
-
-			if (empty($Response->getError())) {
+		if ($UserCollectionModel->editCurrentUserInfo($username, $email, $Messenger)) {
+			if ($UserCollectionModel->save($Messenger)) {
 				$Response->setReload(true);
 			}
 		}
+
+		$Response->setError($Messenger->getError());
 
 		return $Response;
 	}
@@ -122,6 +123,7 @@ class UserController {
 	public static function resetPassword() {
 		$UserModel = new UserModel();
 		$UserCollectionModel = new UserCollectionModel();
+		$Messenger = new Messenger();
 
 		$username = trim(Request::post('username'));
 		$token = Request::post('token');
@@ -136,10 +138,10 @@ class UserController {
 
 		if ($User && $token && $newPassword1 && $newPassword2) {
 			if ($UserModel->verifyPasswordResetToken($User->name, $token)) {
-				if ($error = $UserModel->resetPassword($User, $newPassword1, $newPassword2)) {
-					return ResetForm::render($User->name, $error);
-				} else {
+				if ($UserModel->resetPassword($User, $newPassword1, $newPassword2, $Messenger)) {
 					return ResetSuccess::render();
+				} else {
+					return ResetForm::render($User->name, $Messenger->getError());
 				}
 			} else {
 				return ResetForm::render($User->name, Text::get('error_password_reset_verification'));
@@ -147,11 +149,11 @@ class UserController {
 		}
 
 		if ($User) {
-			if ($error = $UserModel->sendPasswordResetToken($User)) {
-				return TokenRequestForm::render($error);
+			if ($UserModel->sendPasswordResetToken($User, $Messenger)) {
+				return ResetForm::render($User->name);
 			}
 
-			return ResetForm::render($User->name);
+			return TokenRequestForm::render($Messenger->getError());
 		}
 
 		return TokenRequestForm::render();

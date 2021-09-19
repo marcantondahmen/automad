@@ -40,6 +40,7 @@ use Automad\Core\Request;
 use Automad\UI\Components\Grid\Users;
 use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Response;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -59,6 +60,7 @@ class UserCollectionController {
 	 */
 	public static function createUser() {
 		$Response = new Response();
+		$Messenger = new Messenger();
 
 		$username = Request::post('username');
 		$password1 = Request::post('password1');
@@ -67,14 +69,14 @@ class UserCollectionController {
 
 		$UserCollectionModel = new UserCollectionModel();
 
-		if ($error = $UserCollectionModel->createUser($username, $password1, $password2, $email)) {
-			$Response->setError($error);
+		if (!$UserCollectionModel->createUser($username, $password1, $password2, $email, $Messenger)) {
+			$Response->setError($Messenger->getError());
 
 			return $Response;
 		}
 
-		if ($error = $UserCollectionModel->save()) {
-			$Response->setError($error);
+		if (!$UserCollectionModel->save($Messenger)) {
+			$Response->setError($Messenger->getError());
 
 			return $Response;
 		}
@@ -92,13 +94,14 @@ class UserCollectionController {
 	 */
 	public static function edit() {
 		$Response = new Response();
+		$Messenger = new Messenger();
 		$UserCollectionModel = new UserCollectionModel();
 
 		if ($users = Request::post('delete')) {
-			$Response->setError($UserCollectionModel->delete($users));
-
-			if (!$Response->getError()) {
+			if ($UserCollectionModel->delete($users, $Messenger)) {
 				$Response->setSuccess(Text::get('success_remove') . ' "' . implode('", "', $users) . '"');
+			} else {
+				$Response->setError($Messenger->getError());
 			}
 		}
 
@@ -110,19 +113,21 @@ class UserCollectionController {
 	/**
 	 * Install the first user account.
 	 *
-	 * @return string Error message in case of an error.
+	 * @return string|null Error message in case of an error
 	 */
 	public static function install() {
 		if (!empty($_POST)) {
 			$UserCollectionModel = new UserCollectionModel();
+			$Messenger = new Messenger();
 
-			if ($error = $UserCollectionModel->createUser(
+			if (!$UserCollectionModel->createUser(
 				Request::post('username'),
 				Request::post('password1'),
 				Request::post('password2'),
-				Request::post('email')
+				Request::post('email'),
+				$Messenger
 			)) {
-				return $error;
+				return $Messenger->getError();
 			}
 
 			header('Expires: -1');

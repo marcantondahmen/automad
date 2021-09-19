@@ -34,61 +34,44 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
-
-use Automad\Core\Request;
-use Automad\UI\Models\FileModel;
-use Automad\UI\Response;
-use Automad\UI\Utils\Messenger;
+namespace Automad\UI\Utils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The file controller.
+ * The Messenger object allows for pushing error messages to the calling method in order to separate return values from error details.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileController {
+class Messenger {
 	/**
-	 * Edit file information (file name and caption).
-	 *
-	 * @return Response the response object
+	 * The last pushed error.
 	 */
-	public static function editInfo() {
-		$Response = new Response();
-		$Messenger = new Messenger();
+	private $error = null;
 
-		FileModel::editInfo(
-			Request::post('new-name'),
-			Request::post('old-name'),
-			Request::post('caption'),
-			$Messenger
-		);
-
-		$Response->setError($Messenger->getError());
-
-		return $Response;
+	/**
+	 * The messenger constructor.
+	 */
+	public function __construct() {
 	}
 
 	/**
-	 * Import file from URL.
+	 * Return the stored error message.
 	 *
-	 * @return Response the response object
+	 * @return string|null the error message
 	 */
-	public static function import() {
-		$Response = new Response();
-		$Messenger = new Messenger();
+	public function getError() {
+		return $this->error;
+	}
 
-		FileModel::import(
-			Request::post('importUrl'),
-			Request::post('url'),
-			$Messenger
-		);
-
-		$Response->setError($Messenger->getError());
-
-		return $Response;
+	/**
+	 * Set the last error.
+	 *
+	 * @param string $message
+	 */
+	public function setError(string $message) {
+		$this->error = $message;
 	}
 }

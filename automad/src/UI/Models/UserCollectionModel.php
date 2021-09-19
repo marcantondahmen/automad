@@ -38,6 +38,7 @@ namespace Automad\UI\Models;
 
 use Automad\Types\User;
 use Automad\UI\Utils\FileSystem;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
@@ -70,44 +71,53 @@ class UserCollectionModel {
 	 * @param string $password1
 	 * @param string $password2
 	 * @param string|null $email
-	 * @return string an error message or false on success.
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public function createUser(string $username, string $password1, string $password2, ?string $email = null) {
+	public function createUser(string $username, string $password1, string $password2, ?string $email = null, Messenger $Messenger) {
 		if (!$this->validUsername($username)) {
-			return $this->invalidUsernameError();
+			$Messenger->setError($this->invalidUsernameError());
+
+			return false;
 		}
 
 		if ($email && !$this->validEmail($email)) {
-			return $this->invalidEmailError();
+			$Messenger->setError($this->invalidEmailError());
+
+			return false;
 		}
 
-		if ($username && $password1 && $password2) {
-			// Check if password1 equals password2.
-			if ($password1 == $password2) {
-				// Check, if user exists already.
-				if (!isset($this->users[$username])) {
-					// Add user to accounts array.
-					$this->users[$username] = new User($username, $password1, $email);
-				} else {
-					return '"' . $username . '" ' . Text::get('error_existing');
-				}
-			} else {
-				return Text::get('error_password_repeat');
-			}
-		} else {
-			return Text::get('error_form');
+		if (!$username || !$password1 || !$password2) {
+			$Messenger->setError(Text::get('error_form'));
+
+			return false;
 		}
 
-		return false;
+		if ($password1 != $password2) {
+			$Messenger->setError(Text::get('error_password_repeat'));
+
+			return false;
+		}
+
+		if (isset($this->users[$username])) {
+			$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
+
+			return false;
+		}
+
+		$this->users[$username] = new User($username, $password1, $email);
+
+		return true;
 	}
 
 	/**
 	 * Delete one ore more user accounts.
 	 *
 	 * @param array $users
-	 * @return string an error message or false on success.
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public function delete(array $users) {
+	public function delete(array $users, Messenger $Messenger) {
 		if (is_array($users)) {
 			// Only delete users from list, if accounts.txt is writable.
 			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
@@ -120,9 +130,11 @@ class UserCollectionModel {
 					}
 				}
 
-				$this->save();
+				return $this->save($Messenger);
 			} else {
-				return Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+				$Messenger->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
+
+				return false;
 			}
 		}
 
@@ -134,24 +146,31 @@ class UserCollectionModel {
 	 *
 	 * @param string $username
 	 * @param string $email
-	 * @return string an error message in case of error or false in case of success
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public function editCurrentUserInfo(string $username, string $email) {
+	public function editCurrentUserInfo(string $username, string $email, Messenger $Messenger) {
 		$User = $this->getUser(Session::getUsername());
 
-		if (!$User) {
-			return Text::get('error_form');
+		if (!$User || !$username) {
+			$Messenger->setError(Text::get('error_form'));
+
+			return false;
 		}
 
 		$username = trim($username);
 		$email = trim($email);
 
 		if (!$this->validUsername($username)) {
-			return $this->invalidUsernameError();
+			$Messenger->setError($this->invalidUsernameError());
+
+			return false;
 		}
 
 		if (!$this->validEmail($email)) {
-			return $this->invalidEmailError();
+			$Messenger->setError($this->invalidEmailError());
+
+			return false;
 		}
 
 		if ($User->name != $username) {
@@ -160,14 +179,16 @@ class UserCollectionModel {
 				$User->name = $username;
 				$_SESSION['username'] = $username;
 			} else {
-				return '"' . $username . '" ' . Text::get('error_existing');
+				$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
+
+				return false;
 			}
 		}
 
 		$User->email = $email;
 		$this->updateUser($User);
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -199,20 +220,23 @@ class UserCollectionModel {
 	/**
 	 * Save the accounts array as PHP to AM_FILE_ACCOUNTS.
 	 *
-	 * @return string|null Null on success or an error message
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public function save() {
+	public function save(Messenger $Messenger) {
 		ksort($this->users);
 
 		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
-			return Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>';
+			$Messenger->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
+
+			return false;
 		}
 
 		if (function_exists('opcache_invalidate')) {
 			opcache_invalidate(AM_FILE_ACCOUNTS, true);
 		}
 
-		return null;
+		return true;
 	}
 
 	/**

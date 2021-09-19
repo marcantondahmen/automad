@@ -38,6 +38,7 @@ namespace Automad\UI\Models;
 
 use Automad\Types\User;
 use Automad\UI\Response;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
@@ -57,19 +58,22 @@ class UserModel {
 	 * @param string $username
 	 * @param string $currentPassword
 	 * @param string $newPassword
+	 * @return Response the response object
 	 */
 	public function changePassword(string $username, string $currentPassword, string $newPassword) {
 		$Response = new Response();
+		$Messenger = new Messenger();
 		$UserCollectionModel = new UserCollectionModel();
 		$User = $UserCollectionModel->getUser($username);
 
 		if ($User->verifyPassword($currentPassword)) {
 			$User->setPasswordHash($newPassword);
 			$UserCollectionModel->updateUser($User);
-			$Response->setError($UserCollectionModel->save());
 
-			if (!$Response->getError()) {
+			if ($UserCollectionModel->save($Messenger)) {
 				$Response->setSuccess(Text::get('success_password_changed'));
+			} else {
+				$Response->setError($Messenger->getError());
 			}
 		} else {
 			$Response->setError(Text::get('error_password_current'));
@@ -84,53 +88,65 @@ class UserModel {
 	 * @param User $User
 	 * @param string $newPassword1
 	 * @param string $newPassword2
-	 * @return string|null an error message or null
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public function resetPassword(User $User, string $newPassword1, string $newPassword2) {
-		$UserCollectionModel = new UserCollectionModel();
+	public function resetPassword(User $User, string $newPassword1, string $newPassword2, Messenger $Messenger) {
+		if ($newPassword1 !== $newPassword2) {
+			$Messenger->setError(Text::get('error_password_repeat'));
 
-		if ($newPassword1 === $newPassword2) {
-			$User->setPasswordHash($newPassword1);
-			$UserCollectionModel->updateUser($User);
-
-			if ($error = $UserCollectionModel->save()) {
-				return $error;
-			} else {
-				Session::clearResetTokenHash();
-
-				return null;
-			}
-		} else {
-			return Text::get('error_password_repeat');
+			return false;
 		}
+
+		$User->setPasswordHash($newPassword1);
+
+		$UserCollectionModel = new UserCollectionModel();
+		$UserCollectionModel->updateUser($User);
+
+		if (!$UserCollectionModel->save($Messenger)) {
+			return false;
+		}
+
+		Session::clearResetTokenHash();
+
+		return true;
 	}
 
 	/**
 	 * Send password reset token and store it in session.
 	 *
 	 * @param User $User
-	 * @return string|null an error message or null
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public function sendPasswordResetToken(User $User) {
-		if ($email = $User->email) {
-			$token = strtoupper(substr(hash('sha256', microtime() . $User->getPasswordHash()), 0, 16));
-			$tokenHash = password_hash($token, PASSWORD_DEFAULT);
-			Session::setResetTokenHash($User->name, $tokenHash);
+	public function sendPasswordResetToken(User $User, Messenger $Messenger) {
+		$email = $User->email;
 
-			$domain = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+		if (!$email) {
+			$Messenger->setError(Text::get('error_user_no_email'));
 
-			$subject = "Automad: Password Reset on $domain";
-			$message = "Dear $User->name,\r\n\r\na password reset has been requested for your account on $domain.\r\n" .
+			return false;
+		}
+
+		$token = strtoupper(substr(hash('sha256', microtime() . $User->getPasswordHash()), 0, 16));
+		$tokenHash = password_hash($token, PASSWORD_DEFAULT);
+		Session::setResetTokenHash($User->name, $tokenHash);
+
+		$domain = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+
+		$subject = "Automad: Password Reset on $domain";
+		$message = "Dear $User->name,\r\n\r\na password reset has been requested for your account on $domain.\r\n" .
 					   "The following token can be used to reset your password:\r\n\r\n$token\r\n\r\n" .
 					   "In case you did not request the reset yourself, you can ignore this message.\r\n\r\n" .
 					   'Automad';
 
-			if (!mail($email, $subject, $message)) {
-				return Text::get('error_send_email');
-			}
-		} else {
-			return Text::get('error_user_no_email');
+		if (!mail($email, $subject, $message)) {
+			$Messenger->setError(Text::get('error_send_email'));
+
+			return false;
 		}
+
+		return true;
 	}
 
 	/**

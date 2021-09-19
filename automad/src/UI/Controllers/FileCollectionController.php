@@ -107,9 +107,6 @@ class FileCollectionController {
 		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
 		$path = FileSystem::getPathByPostUrl($Automad);
 
-		$Response = new Response();
-		$Response->setError(FileCollectionModel::upload($_FILES, $path));
-
-		return $Response;
+		return FileCollectionModel::upload($_FILES, $path);
 	}
 }
