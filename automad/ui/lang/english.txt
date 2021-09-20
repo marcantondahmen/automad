@@ -1464,7 +1464,7 @@ sys_user_email: Email
 
 -
 
-sys_user_send_test_email: Send Test Email
+sys_user_alert_no_email: You have not yet added a valid email address to your account. Note that a valid email address is required in order to be able to reset your password. Click here to add an email now.
 
 -
 
