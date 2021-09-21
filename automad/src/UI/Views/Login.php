@@ -90,7 +90,7 @@ class Login extends AbstractView {
 						</a>
 						<span>
 							<a href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=ResetPassword')}" class="uk-button uk-button-link">
-								{$fn(Text::get('btn_reset_password'))}
+								{$fn(Text::get('btn_forgot_password'))}
 							</a>
 							<button type="submit" class="uk-button uk-button-success">
 								{$fn(Text::get('btn_login'))}

@@ -74,6 +74,10 @@ btn_files: Uploaded Files
 
 -
 
+btn_forgot_password: Forgot Password
+
+-
+
 btn_get_themes: Get More Themes
 
 -
@@ -162,11 +166,15 @@ btn_reset: Reset
 
 -
 
-btn_reset_password: Reset Password
+btn_save_password: Save Password
 
 -
 
 btn_save: Save Changes
+
+-
+
+btn_submit: Submit
 
 -
 
@@ -1109,19 +1117,19 @@ page_private: private
 
 
 
-reset_password_title: Reset Password
+reset_password_title: Create a New Password
 
 -
 
-reset_password_enter_username: Please enter your username in order to request a password reset token.
+reset_password_enter_username: Please enter your username in order to request an authentication token by email to create a new password for your account.
 
 -
 
-reset_password_enter_new_password: Please enter now the token that you have received by email along with a new password.
+reset_password_enter_new_password: Please enter now the authentication token that you have received by email along with a new password.
 
 -
 
-reset_password_token: Token
+reset_password_token: Authentication Token
 
 -
 

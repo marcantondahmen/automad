@@ -84,8 +84,7 @@ class TokenRequestForm {
 						{$fn(Text::get('btn_cancel'))}
 					</a>
 					<button type="submit" class="uk-button uk-button-success">
-						{$fn(Text::get('btn_ok'))}&nbsp;
-						<i class="uk-icon-check"></i>
+						{$fn(Text::get('btn_submit'))}
 					</button>
 				</div>
 HTML;

@@ -100,7 +100,7 @@ class ResetForm {
 						{$fn(Text::get('btn_cancel'))}
 					</a>
 					<button type="submit" class="uk-button uk-button-success">
-						{$fn(Text::get('btn_reset_password'))}
+						{$fn(Text::get('btn_save_password'))}
 					</button>
 				</div>
 HTML;
