@@ -37,6 +37,7 @@
 namespace Automad\UI\Models;
 
 use Automad\Types\User;
+use Automad\UI\Components\Email\PasswordResetEmail;
 use Automad\UI\Response;
 use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Session;
@@ -132,15 +133,13 @@ class UserModel {
 		$tokenHash = password_hash($token, PASSWORD_DEFAULT);
 		Session::setResetTokenHash($User->name, $tokenHash);
 
-		$domain = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+		$subject = 'Automad: Your Password Reset Token';
+		$message = PasswordResetEmail::render($website, $User->name, $token);
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= 'Content-type: text/html; charset=UTF-8';
 
-		$subject = "Automad: Password Reset on $domain";
-		$message = "Dear $User->name,\r\n\r\na password reset has been requested for your account on $domain.\r\n" .
-					   "The following token can be used to reset your password:\r\n\r\n$token\r\n\r\n" .
-					   "In case you did not request the reset yourself, you can ignore this message.\r\n\r\n" .
-					   'Automad';
-
-		if (!mail($email, $subject, $message)) {
+		if (!mail($email, $subject, $message, $headers)) {
 			$Messenger->setError(Text::get('error_send_email'));
 
 			return false;
