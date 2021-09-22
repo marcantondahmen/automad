@@ -134,7 +134,7 @@ class UserModel {
 		Session::setResetTokenHash($User->name, $tokenHash);
 
 		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
-		$subject = 'Automad: Your Password Reset Token';
+		$subject = 'Automad: ' . Text::get('email_reset_password_subject');
 		$message = PasswordResetEmail::render($website, $User->name, $token);
 		$headers = "MIME-Version: 1.0\r\n";
 		$headers .= 'Content-type: text/html; charset=UTF-8';

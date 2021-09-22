@@ -267,7 +267,7 @@ class UserCollectionModel {
 		$link = $protocol . '://' . $_SERVER['SERVER_NAME'] . $port .
 				AM_BASE_INDEX . AM_PAGE_DASHBOARD .
 				'?view=ResetPassword&username=' . urlencode($username);
-		$subject = 'Automad: You have been added as a new user';
+		$subject = 'Automad: ' . Text::get('email_invite_subject');
 		$message = InvitationEmail::render($website, $username, $link);
 		$headers = "MIME-Version: 1.0\r\n";
 		$headers .= 'Content-type: text/html; charset=UTF-8';

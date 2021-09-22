@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\Email;
 
+use Automad\UI\Utils\Text;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -57,12 +59,13 @@ class InvitationEmail extends AbstractEmailBody {
 	public static function render(string $website, string $username, string $link) {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
+		$Text = Text::getObject();
+		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('email_invite_text'));
 
 		$content = <<< HTML
-			<h1 $h1Style>Welcome $username,</h1>
+			<h1 $h1Style>$Text->email_hello $username,</h1>
 			<p $pStyle>
-				a new user account on <b>$website</b> has been created for you.
-				You can use the following link in order to create a password and finish your account setup.
+				$inviteText
 			</p>
 			<p $pStyle>
 				<a 
@@ -78,7 +81,7 @@ class InvitationEmail extends AbstractEmailBody {
 					font-size: 18px; 
 					line-height: 48px;
 				">
-					Create Password
+					$Text->email_invite_button
 				</a>
 			</p>
 		HTML;

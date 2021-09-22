@@ -36,6 +36,8 @@
 
 namespace Automad\UI\Components\Email;
 
+use Automad\UI\Utils\Text;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -57,12 +59,13 @@ class PasswordResetEmail extends AbstractEmailBody {
 	public static function render(string $website, string $username, string $token) {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
+		$Text = Text::getObject();
+		$textTop = str_replace('{}', "<b>$website</b>", Text::get('email_reset_password_text_top'));
 
 		$content = <<< HTML
-			<h1 $h1Style>Dear $username,</h1>
+			<h1 $h1Style>$Text->email_hello $username,</h1>
 			<p $pStyle>
-				an authentication token for your account on <b>$website</b> has been requested and can be found below.
-				You can use that token in order to create a new password for you now.
+				$textTop
 			</p>
 			<p style="
 				text-align: center; 
@@ -76,7 +79,7 @@ class PasswordResetEmail extends AbstractEmailBody {
 				$token
 			</p>
 			<p $pStyle>
-				In case you did not initiate this request yourself, you can safely ignore this message.
+				$Text->email_reset_password_text_bottom
 			</p>
 		HTML;
 
