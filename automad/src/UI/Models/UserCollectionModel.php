@@ -37,6 +37,7 @@
 namespace Automad\UI\Models;
 
 use Automad\Types\User;
+use Automad\UI\Components\Email\InvitationEmail;
 use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Session;
@@ -75,6 +76,9 @@ class UserCollectionModel {
 	 * @return bool true on success
 	 */
 	public function createUser(string $username, string $password1, string $password2, ?string $email = null, Messenger $Messenger) {
+		$username = trim($username);
+		$email = trim($email);
+
 		if (!$this->validUsername($username)) {
 			$Messenger->setError($this->invalidUsernameError());
 
@@ -234,6 +238,44 @@ class UserCollectionModel {
 
 		if (function_exists('opcache_invalidate')) {
 			opcache_invalidate(AM_FILE_ACCOUNTS, true);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Send invitation email.
+	 *
+	 * @param string $username
+	 * @param string $email
+	 * @param Messenger $Messenger
+	 * @return bool true on success
+	 */
+	public function sendInvitation(string $username, string $email, Messenger $Messenger) {
+		$protocol = 'http';
+		$port = '';
+
+		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+			$protocol = 'https';
+		}
+
+		if (!in_array($_SERVER['SERVER_PORT'], array(80, 443))) {
+			$port = ":$_SERVER[SERVER_PORT]";
+		}
+
+		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+		$link = $protocol . '://' . $_SERVER['SERVER_NAME'] . $port .
+				AM_BASE_INDEX . AM_PAGE_DASHBOARD .
+				'?view=ResetPassword&username=' . urlencode($username);
+		$subject = 'Automad: You have been added as a new user';
+		$message = InvitationEmail::render($website, $username, $link);
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= 'Content-type: text/html; charset=UTF-8';
+
+		if (!mail($email, $subject, $message, $headers)) {
+			$Messenger->setError(Text::get('error_send_email'));
+
+			return false;
 		}
 
 		return true;

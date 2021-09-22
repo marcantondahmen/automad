@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Layout\PasswordReset;
 
+use Automad\Core\Request;
 use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Utils\Text;
 
@@ -76,7 +77,8 @@ class TokenRequestForm {
 				type="text" 
 				name="username" 
 				placeholder="{$fn(Text::get('login_username'))}" 
-				required 
+				value="{$fn(Request::query('username'))}"
+				required
 				/>
 				<div class="uk-text-right">
 					<a href="{$fn(AM_BASE_INDEX . '/')}" class="uk-button uk-button-link">

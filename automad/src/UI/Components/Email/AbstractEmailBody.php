@@ -39,47 +39,61 @@ namespace Automad\UI\Components\Email;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A password reset email body.
+ * An abstract HTML email.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class PasswordResetEmail extends AbstractEmailBody {
+abstract class AbstractEmailBody {
 	/**
-	 * Render a password reset email body.
-	 *
-	 * @param string $website
-	 * @param string $username
-	 * @param string $token
-	 * @return string The rendered password reset email body
+	 * The basic h1 style.
 	 */
-	public static function render(string $website, string $username, string $token) {
-		$h1Style = self::$h1Style;
+	protected static $h1Style = 'style="font-size: 27px; font-weight: 600;"';
+
+	/**
+	 * The basic paragraph style.
+	 */
+	protected static $paragraphStyle = 'style="font-size: 16px; line-height: 22px;"';
+
+	/**
+	 * The wrapping body markup.
+	 *
+	 * @param string $content
+	 * @return string the rendered body
+	 */
+	protected static function body(string $content) {
 		$pStyle = self::$paragraphStyle;
 
-		$content = <<< HTML
-			<h1 $h1Style>Dear $username,</h1>
-			<p $pStyle>
-				an authentication token for your account on <b>$website</b> has been requested and can be found below.
-				You can use that token in order to create a new password for you now.
-			</p>
-			<p style="
-				text-align: center; 
-				margin: 30px 0; 
-				border: 1px solid #e5e5e5; 
-				border-radius: 6px; 
-				font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
-				font-size: 18px; 
-				line-height: 48px;
-			">
-				$token
-			</p>
-			<p $pStyle>
-				In case you did not initiate this request yourself, you can safely ignore this message.
-			</p>
-		HTML;
-
-		return self::body($content);
+		return <<< HTML
+				<!doctype html>
+				<html>
+					<head>
+						<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1">
+					</head>
+					<body style="
+						padding: 15px 0; 
+						font-family: -apple-system, BlinkMacSystemFont, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+						font-size: 16px; 
+						line-height: 22px;
+					">
+						<table border="0" cellpadding="0" cellspacing="0" height="90%" width="95%">
+							<tbody>
+								<tr>
+									<td width="25%"> </td>
+									<td width="400px" style="min-width: 400px; max-width: 400px;">
+										$content
+										<p $pStyle>
+											<b>Automad</b>
+										</p>
+									</td>
+									<td width="25%"> </td>
+								</tr>
+							</tbody>
+						</table>
+					</body>
+				</html>
+				HTML;
 	}
 }

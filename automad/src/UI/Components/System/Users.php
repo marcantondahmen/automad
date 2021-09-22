@@ -65,7 +65,7 @@ class Users {
 		return <<< HTML
 				<p>$Text->sys_user_info</p>
 				<div class="uk-panel uk-panel-box uk-margin-top">
-					<i class="uk-icon-user uk-icon-small"></i>
+					<i class="uk-icon-user uk-icon-medium"></i>
 					<form 
 					class="uk-form uk-form-stacked uk-margin-small-top"
 					data-am-controller="User::edit"
@@ -152,7 +152,7 @@ class Users {
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
-				class="uk-button uk-button-success" 
+				class="uk-button uk-button-success uk-button-large" 
 				data-uk-modal 
 				data-am-status="users"
 				>
@@ -184,8 +184,55 @@ class Users {
 						</div>
 					</div>
 				</div>
+				<br>
+				<!-- Invite User -->
+				<a href="#am-invite-user-modal" class="uk-button uk-margin-small-top" data-uk-modal>
+					<i class="uk-icon-send"></i>&nbsp;
+					$Text->sys_user_invite
+				</a>
+				<div id="am-invite-user-modal" class="uk-modal">
+					<div class="uk-modal-dialog">
+						<div class="uk-modal-header">
+							$Text->sys_user_invite
+							<a href="#" class="uk-modal-close uk-close"></a>
+						</div>
+						<form 
+						class="uk-form" 
+						data-am-controller="UserCollection::inviteUser" 
+						data-am-close-on-success="#am-invite-user-modal"
+						>
+							<input 
+							class="uk-form-controls uk-form-large uk-width-1-1" 
+							type="text" 
+							name="username" 
+							placeholder="$Text->sys_user_name"
+							data-am-enter="#am-invite-user-submit" 
+							required
+							/>
+							<input
+							class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+							type="email" 
+							name="email" 
+							placeholder="$Text->sys_user_email"  
+							data-am-enter="#am-invite-user-submit" 
+							required
+							/>
+							<div class="uk-modal-footer uk-text-right">
+								<button type="button" class="uk-modal-close uk-button">
+									<i class="uk-icon-close"></i>&nbsp;
+									$Text->btn_close
+								</button>
+								<button id="am-invite-user-submit" type="submit" class="uk-button uk-button-success">
+									<i class="uk-icon-send"></i>&nbsp;
+									$Text->btn_invite
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br>
 				<!-- Add User -->
-				<a href="#am-add-user-modal" class="uk-button uk-button-link" data-uk-modal>
+				<a href="#am-add-user-modal" class="uk-button uk-margin-small-top" data-uk-modal>
 					<i class="uk-icon-user-plus"></i>&nbsp;
 					$Text->sys_user_add
 				</a>

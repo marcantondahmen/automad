@@ -141,4 +141,41 @@ class UserCollectionController {
 			exit($UserCollectionModel->generatePHP());
 		}
 	}
+
+	/**
+	 * Invite a new user by email.
+	 *
+	 * @return Response a response object
+	 */
+	public static function inviteUser() {
+		$Response = new Response();
+		$UserCollectionModel = new UserCollectionModel();
+		$Messenger = new Messenger();
+
+		$username = trim(Request::post('username'));
+		$email = trim(Request::post('email'));
+		$password = str_shuffle(sha1(microtime()));
+
+		if (!$UserCollectionModel->createUser($username, $password, $password, $email, $Messenger)) {
+			$Response->setError($Messenger->getError());
+
+			return $Response;
+		}
+
+		if (!$UserCollectionModel->save($Messenger)) {
+			$Response->setError($Messenger->getError());
+
+			return $Response;
+		}
+
+		if (!$UserCollectionModel->sendInvitation($username, $email, $Messenger)) {
+			$Response->setError($Messenger->getError());
+
+			return $Response;
+		}
+
+		$Response->setSuccess(Text::get('success_user_invite'));
+
+		return $Response;
+	}
 }

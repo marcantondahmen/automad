@@ -79,6 +79,7 @@
 					var triggers = [
 						'?controller=UserCollection::edit',
 						'?controller=UserCollection::createUser',
+						'?controller=UserCollection::inviteUser',
 						'?controller=Headless::editTemplate',
 						'?controller=Headless::resetTemplate',
 						'?controller=Config::update',
