@@ -105,7 +105,7 @@ class UserCollectionController {
 			}
 		}
 
-		$Response->setHtml(Users::render($UserCollectionModel->users));
+		$Response->setHtml(Users::render($UserCollectionModel->getCollection()));
 
 		return $Response;
 	}

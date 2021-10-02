@@ -70,13 +70,13 @@ class TokenRequestForm {
 		return <<< HTML
 				$alert
 				<p>
-					{$fn(Text::get('reset_password_enter_username'))}
+					{$fn(Text::get('reset_password_enter_name_or_email'))}
 				</p>
 				<input 
 				class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
 				type="text" 
-				name="username" 
-				placeholder="{$fn(Text::get('login_username'))}" 
+				name="name-or-email" 
+				placeholder="{$fn(Text::get('login_name_or_email'))}" 
 				value="{$fn(Request::query('username'))}"
 				required
 				/>

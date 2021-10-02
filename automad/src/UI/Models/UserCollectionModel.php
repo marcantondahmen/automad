@@ -56,13 +56,23 @@ class UserCollectionModel {
 	/**
 	 * The collection of existing user objects.
 	 */
-	public $users;
+	private $users;
+
+	/**
+	 * The class name of the user type.
+	 */
+	private $userType = 'Automad\Types\User';
+
+	/**
+	 * The replacement for the user type class in a serialized string.
+	 */
+	private $userTypeSerialized = 'O:*:"~"';
 
 	/**
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->users = $this->loadUsers();
+		$this->users = $this->load();
 	}
 
 	/**
@@ -103,13 +113,19 @@ class UserCollectionModel {
 			return false;
 		}
 
-		if (isset($this->users[$username])) {
+		if ($this->getUser($username)) {
 			$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
 
 			return false;
 		}
 
-		$this->users[$username] = new User($username, $password1, $email);
+		if ($this->getUser($email)) {
+			$Messenger->setError('"' . $email . '" ' . Text::get('error_existing'));
+
+			return false;
+		}
+
+		$this->users[] = new User($username, $password1, $email);
 
 		return true;
 	}
@@ -123,15 +139,13 @@ class UserCollectionModel {
 	 */
 	public function delete(array $users, Messenger $Messenger) {
 		if (is_array($users)) {
-			// Only delete users from list, if accounts.txt is writable.
+			// Only delete users from list, if accounts.php is writable.
 			// It is important, to verify write access here, to make sure that all accounts stored in account.txt are also returned in the HTML.
 			// Otherwise, they would be deleted from the array without actually being deleted from the file, in case accounts.txt is write protected.
 			// So it is not enough to just check, if file_put_contents was successful, because that would be simply too late.
 			if (is_writable(AM_FILE_ACCOUNTS)) {
-				foreach ($users as $userToDelete) {
-					if (isset($this->users[$userToDelete])) {
-						unset($this->users[$userToDelete]);
-					}
+				foreach ($users as $username) {
+					unset($this->users[$this->getUserId($username)]);
 				}
 
 				return $this->save($Messenger);
@@ -154,7 +168,11 @@ class UserCollectionModel {
 	 * @return bool true on success
 	 */
 	public function editCurrentUserInfo(string $username, string $email, Messenger $Messenger) {
-		$User = $this->getUser(Session::getUsername());
+		$id = $this->getUserId(Session::getUsername());
+		$User = $this->users[$id];
+
+		// Unset temporary the array item here in order to check easily for duplicate eamils or names.
+		unset($this->users[$id]);
 
 		if (!$User || !$username) {
 			$Messenger->setError(Text::get('error_form'));
@@ -177,20 +195,24 @@ class UserCollectionModel {
 			return false;
 		}
 
-		if ($User->name != $username) {
-			if (!array_key_exists($username, $this->users)) {
-				unset($this->users[$User->name]);
-				$User->name = $username;
-				$_SESSION['username'] = $username;
-			} else {
-				$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
+		if ($this->getUser($username)) {
+			$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
 
-				return false;
-			}
+			return false;
 		}
 
+		if ($this->getUser($email)) {
+			$Messenger->setError('"' . $email . '" ' . Text::get('error_existing'));
+
+			return false;
+		}
+
+		$User->name = $username;
+		$_SESSION['username'] = $username;
+
 		$User->email = $email;
-		$this->updateUser($User);
+
+		$this->users[$id] = $User;
 
 		return true;
 	}
@@ -204,18 +226,43 @@ class UserCollectionModel {
 	 * @return string the PHP code
 	 */
 	public function generatePHP() {
-		return "<?php\ndefined('AUTOMAD') or die();\nreturn '" . serialize($this->users) . "';";
+		ksort($this->users);
+
+		// The actual class name is replaced with a placeholder in order
+		// to be able to refactor the type class in the future easily.
+		$serialized = str_replace(
+			'O:' . strlen($this->userType) . ':"' . $this->userType . '"',
+			$this->userTypeSerialized,
+			serialize($this->users)
+		);
+
+		return "<?php\ndefined('AUTOMAD') or die();\nreturn '" . $serialized . "';";
 	}
 
 	/**
-	 * Return a user.
+	 * Return the user collection array.
 	 *
-	 * @param string $name
+	 * @return array the user collection array
+	 */
+	public function getCollection() {
+		return $this->users;
+	}
+
+	/**
+	 * Return a user by name or email address.
+	 *
+	 * @param string $nameOrEmail
 	 * @return User|null the requested user account
 	 */
-	public function getUser(string $name) {
-		if (array_key_exists($name, $this->users)) {
-			return $this->users[$name];
+	public function getUser(string $nameOrEmail) {
+		if (empty($nameOrEmail)) {
+			return null;
+		}
+
+		foreach ($this->users as $User) {
+			if ($nameOrEmail === $User->name || $nameOrEmail === $User->email) {
+				return $User;
+			}
 		}
 
 		return null;
@@ -228,8 +275,6 @@ class UserCollectionModel {
 	 * @return bool true on success
 	 */
 	public function save(Messenger $Messenger) {
-		ksort($this->users);
-
 		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
 			$Messenger->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
 
@@ -282,12 +327,39 @@ class UserCollectionModel {
 	}
 
 	/**
-	 * Update or add a single user object.
+	 * Convert legacy accounts file content.
 	 *
-	 * @param User $User
+	 * @param array $contents
+	 * @return string the serialized accounts
 	 */
-	public function updateUser(User $User) {
-		$this->users[$User->name] = $User;
+	private function convertLegacyAccountsFile(array $contents) {
+		$accounts = array();
+
+		foreach ($contents as $name => $passwordHash) {
+			$accounts[] = (object) array('name' => $name, 'passwordHash' => $passwordHash);
+		}
+
+		return str_replace(
+			'O:8:"stdClass"',
+			$this->userTypeSerialized,
+			serialize($accounts)
+		);
+	}
+
+	/**
+	 * Return a user id by name or email address.
+	 *
+	 * @param string $nameOrEmail
+	 * @return int|null the requested user id
+	 */
+	private function getUserId(string $nameOrEmail) {
+		foreach ($this->users as $id => $User) {
+			if ($nameOrEmail === $User->name || $nameOrEmail === $User->email) {
+				return $id;
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -314,25 +386,25 @@ class UserCollectionModel {
 	 * @see User
 	 * @return array The registered accounts
 	 */
-	private function loadUsers() {
+	private function load() {
 		if (!is_readable(AM_FILE_ACCOUNTS)) {
 			return array();
 		}
 
-		$accounts = (include AM_FILE_ACCOUNTS);
+		$contents = include AM_FILE_ACCOUNTS;
 
-		// Check for legacy accounts format and convert it to the new one.
-		if (is_array($accounts)) {
-			foreach ($accounts as $name => $data) {
-				if (is_string($data)) {
-					$accounts[$name] = new User($name, $data, null, true);
-				}
-			}
-
-			return $accounts;
+		// Lagacy support.
+		if (is_array($contents)) {
+			$contents = $this->convertLegacyAccountsFile($contents);
 		}
 
-		return unserialize($accounts);
+		$serialized = str_replace(
+			$this->userTypeSerialized,
+			'O:' . strlen($this->userType) . ':"' . $this->userType . '"',
+			$contents
+		);
+
+		return unserialize($serialized);
 	}
 
 	/**

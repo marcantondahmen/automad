@@ -892,7 +892,7 @@ error_update_permission: Can't run update! Permissions denied!
 
 -
 
-error_user_not_found: Invalid username. The user is not registered.
+error_user_not_found: Invalid username or email address.
 
 -
 
@@ -1023,7 +1023,7 @@ login_title: Login
 
 -
 
-login_username: Username
+login_name_or_email: Username or Email
 
 -
 
@@ -1160,7 +1160,7 @@ reset_password_title: Create Password
 
 -
 
-reset_password_enter_username: Please enter your username in order to request an authentication token by email to create a new password for your account.
+reset_password_enter_name_or_email: Please enter your username or email address in order to request an authentication token by to create a new password for your account.
 
 -
 

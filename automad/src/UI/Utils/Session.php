@@ -85,13 +85,13 @@ class Session {
 	/**
 	 * Verify login information based on $_POST.
 	 *
-	 * @param string $username
+	 * @param string $nameOrEmail
 	 * @param string $password
 	 * @return bool false on error
 	 */
-	public static function login(string $username, string $password) {
+	public static function login(string $nameOrEmail, string $password) {
 		$UserCollectionModel = new UserCollectionModel();
-		$User = $UserCollectionModel->getUser($username);
+		$User = $UserCollectionModel->getUser($nameOrEmail);
 
 		if (empty($User)) {
 			return false;
@@ -99,7 +99,7 @@ class Session {
 
 		if ($User->verifyPassword($password)) {
 			session_regenerate_id(true);
-			$_SESSION['username'] = $username;
+			$_SESSION['username'] = $User->name;
 
 			// In case of using a proxy,
 			// it is safer to just refresh the current page instead of rebuilding the currently requested URL.

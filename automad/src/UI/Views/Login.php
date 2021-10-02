@@ -72,8 +72,8 @@ class Login extends AbstractView {
 					<input 
 					class="uk-form-controls uk-width-1-1" 
 					type="text" 
-					name="username" 
-					placeholder="{$fn(Text::get('login_username'))}" 
+					name="name-or-email" 
+					placeholder="{$fn(Text::get('login_name_or_email'))}" 
 					required 
 					/>
 					<input 

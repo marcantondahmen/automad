@@ -125,20 +125,22 @@ class UserController {
 		$UserCollectionModel = new UserCollectionModel();
 		$Messenger = new Messenger();
 
-		$username = trim(Request::post('username'));
+		// Only one field will be defined, so they can just be concatenated here.
+		$nameOrEmail = trim(Request::post('name-or-email') . Request::post('username'));
+
 		$token = Request::post('token');
 		$newPassword1 = Request::post('password1');
 		$newPassword2 = Request::post('password2');
 
-		$User = $UserCollectionModel->getUser($username);
+		$User = $UserCollectionModel->getUser($nameOrEmail);
 
-		if ($username && !$User) {
+		if ($nameOrEmail && !$User) {
 			return TokenRequestForm::render(Text::get('error_user_not_found'));
 		}
 
 		if ($User && $token && $newPassword1 && $newPassword2) {
 			if ($UserModel->verifyPasswordResetToken($User->name, $token)) {
-				if ($UserModel->resetPassword($User, $newPassword1, $newPassword2, $Messenger)) {
+				if ($UserModel->resetPassword($User->name, $newPassword1, $newPassword2, $Messenger)) {
 					return ResetSuccess::render();
 				} else {
 					return ResetForm::render($User->name, $Messenger->getError());

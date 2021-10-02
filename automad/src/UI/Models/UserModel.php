@@ -69,7 +69,6 @@ class UserModel {
 
 		if ($User->verifyPassword($currentPassword)) {
 			$User->setPasswordHash($newPassword);
-			$UserCollectionModel->updateUser($User);
 
 			if ($UserCollectionModel->save($Messenger)) {
 				$Response->setSuccess(Text::get('success_password_changed'));
@@ -86,23 +85,22 @@ class UserModel {
 	/**
 	 * Handle password resetting.
 	 *
-	 * @param User $User
+	 * @param string $username
 	 * @param string $newPassword1
 	 * @param string $newPassword2
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function resetPassword(User $User, string $newPassword1, string $newPassword2, Messenger $Messenger) {
+	public function resetPassword(string $username, string $newPassword1, string $newPassword2, Messenger $Messenger) {
 		if ($newPassword1 !== $newPassword2) {
 			$Messenger->setError(Text::get('error_password_repeat'));
 
 			return false;
 		}
 
-		$User->setPasswordHash($newPassword1);
-
 		$UserCollectionModel = new UserCollectionModel();
-		$UserCollectionModel->updateUser($User);
+		$User = $UserCollectionModel->getUser($username);
+		$User->setPasswordHash($newPassword1);
 
 		if (!$UserCollectionModel->save($Messenger)) {
 			return false;

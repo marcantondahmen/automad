@@ -146,9 +146,8 @@ HTML;
 			$UserCollectionModel = new UserCollectionModel();
 
 			$Response->setStatus(
-				'<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
 				Text::get('sys_user_registered') .
-				'&nbsp;&nbsp;<span class="uk-badge">' . count($UserCollectionModel->users) . '</span>'
+				'&nbsp;&nbsp;<span class="uk-badge">' . count($UserCollectionModel->getCollection()) . '</span>'
 			);
 		}
 

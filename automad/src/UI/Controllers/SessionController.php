@@ -57,8 +57,8 @@ class SessionController {
 	 */
 	public static function login() {
 		if (!empty($_POST)) {
-			if (($username = Request::post('username')) && ($password = Request::post('password'))) {
-				if (!Session::login($username, $password)) {
+			if (($nameOrEmail = Request::post('name-or-email')) && ($password = Request::post('password'))) {
+				if (!Session::login($nameOrEmail, $password)) {
 					return Text::get('error_login');
 				}
 			} else {

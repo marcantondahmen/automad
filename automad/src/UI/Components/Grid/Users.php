@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Components\Grid;
 
+use Automad\Types\User as TypesUser;
 use Automad\UI\Components\Card\User;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -51,14 +52,15 @@ class Users {
 	/**
 	 * Create a grid based user list for the given array of users.
 	 *
+	 * @see TypesUser
 	 * @param array $users
 	 * @return string The HTML for the grid
 	 */
 	public static function render(array $users) {
 		$cards = '';
 
-		foreach ($users as $user => $hash) {
-			$cards .= User::render($user);
+		foreach ($users as $User) {
+			$cards .= User::render($User->name);
 		}
 
 		return <<< HTML
