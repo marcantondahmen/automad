@@ -59,6 +59,7 @@ class InvitationEmail extends AbstractEmailBody {
 	public static function render(string $website, string $username, string $link) {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
+		$codeStyle = self::$codeStyle;
 		$Text = Text::getObject();
 		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('email_invite_text'));
 
@@ -67,15 +68,18 @@ class InvitationEmail extends AbstractEmailBody {
 			<p $pStyle>
 				$inviteText
 			</p>
+			<p $codeStyle>
+				$Text->sys_user_name: $username
+			</p>
 			<p $pStyle>
 				<a 
 				href="$link" 
 				style="
 					display: block;
 					text-align: center; 
-					margin: 5px 0 20px 0; 
+					margin: 0 0 20px 0; 
 					color: #ffffff;
-					background-color: #1070ff;
+					background-color: #121212;
 					border-radius: 6px; 
 					text-decoration: none;
 					font-size: 18px; 

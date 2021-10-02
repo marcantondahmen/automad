@@ -59,6 +59,7 @@ class PasswordResetEmail extends AbstractEmailBody {
 	public static function render(string $website, string $username, string $token) {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
+		$codeStyle = self::$codeStyle;
 		$Text = Text::getObject();
 		$textTop = str_replace('{}', "<b>$website</b>", Text::get('email_reset_password_text_top'));
 
@@ -67,15 +68,7 @@ class PasswordResetEmail extends AbstractEmailBody {
 			<p $pStyle>
 				$textTop
 			</p>
-			<p style="
-				text-align: center; 
-				margin: 30px 0; 
-				border: 1px solid #e5e5e5; 
-				border-radius: 6px; 
-				font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
-				font-size: 18px; 
-				line-height: 48px;
-			">
+			<p $codeStyle>
 				$token
 			</p>
 			<p $pStyle>

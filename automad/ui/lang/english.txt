@@ -721,11 +721,15 @@ email_hello: Hello
 
 -
 
+email_automatic: This email has been sent automatically. Please do not reply to this email.
+
+-
+
 email_invite_subject: You have been added as a new user!
 
 -
 
-email_invite_text: a new user account on {} has been created for you. You can use the following link in order to create a password.
+email_invite_text: a new user account on {} has been created for you. You can use the button below to create your password.
 
 -
 
