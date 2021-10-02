@@ -48,8 +48,10 @@
 @subnav-pill-active-color: @subnav-active-color;
 
 .hook-subnav-pill() {
+	display: inline-block !important;
 	font-size: @text-small-font-size;
 	font-weight: @am-nav-font-weight;
+	line-height: 1.2rem;
 	border-radius: @am-radius-small;
 	white-space: nowrap;
 	overflow: hidden;
@@ -81,7 +83,8 @@
 	align-items: center;
 	position: relative;
 	margin: 0 - (@subnav-pill-padding-horizontal + @subnav-margin-horizontal);
-	min-height: 2.14rem;
+	margin-top: 1.85rem !important;
+	min-height: 2.75rem;
 
 	& > li {
 		display: flex;

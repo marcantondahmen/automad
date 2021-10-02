@@ -139,7 +139,7 @@ class Sidebar {
 										<i class="uk-icon-power-off"></i>&nbsp;
 										{$fn(Text::get('btn_log_out'))}
 										<i class="uk-icon-angle-double-left"></i>
-										{$fn(ucwords(Session::getUsername()))}
+										{$fn(Session::getUsername())}
 										<i class="uk-icon-angle-double-right"></i>
 									</a>
 								</li>

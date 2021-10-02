@@ -64,99 +64,95 @@ class Users {
 
 		return <<< HTML
 				<p>$Text->sys_user_info</p>
-				<div class="uk-panel uk-panel-box uk-margin-top">
-					<i class="uk-icon-user uk-icon-medium"></i>
-					<form 
-					class="uk-form uk-form-stacked uk-margin-small-top"
-					data-am-controller="User::edit"
-					>
-						<div class="uk-grid uk-grid-width-large-1-2 uk-margin-small-bottom" data-uk-grid-margin>
-							<div class="uk-form-row">
-								<label for="am-user-name" class="uk-form-label uk-margin-top-remove">$Text->sys_user_name</label>
-								<input id="am-user-name" type="text" class="uk-form-controls uk-width-1-1" name="username" value="$username" required>
-							</div>
-							<div class="uk-form-row">
-								<label for="am-user-email" class="uk-form-label uk-margin-top-remove">$Text->sys_user_email</label>
-								<input id="am-user-email" type="email" class="uk-form-controls uk-width-1-1" name="email" value="$email" required>
-							</div>
+				<form 
+				class="uk-form uk-form-stacked uk-margin-top uk-margin-bottom"
+				data-am-controller="User::edit"
+				>
+					<div class="uk-grid uk-grid-width-large-1-2">
+						<div class="uk-form-row">
+							<label for="am-user-name" class="uk-form-label uk-margin-top-remove">$Text->sys_user_name</label>
+							<input id="am-user-name" type="text" class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" name="username" value="$username" required>
 						</div>
-						<button 
-						type="button" 
-						class="uk-button"
-						data-am-submit="User::edit"
-						>
-							<i class="uk-icon-check"></i>&nbsp;
-							$Text->btn_save
-						</button>
-					</form>
-					<hr>
-					<!-- Change password -->
-					<a 
-					href="#am-change-password-modal" 
-					class="uk-button" 
-					data-uk-modal
-					>
-						<i class="uk-icon-unlock-alt"></i>&nbsp;
-						$Text->sys_user_change_password
-					</a>
-					<div id="am-change-password-modal" class="uk-modal">
-						<div class="uk-modal-dialog">
-							<div class="uk-modal-header">
-								$Text->sys_user_change_password
-								<a href="#" class="uk-modal-close uk-close"></a>
-							</div>
-							<form 
-							class="uk-form" 
-							data-am-controller="User::changePassword" 
-							data-am-close-on-success="#am-change-password-modal"
-							>
-								<input 
-								class="uk-form-controls uk-width-1-1" 
-								type="password" 
-								name="current-password" 
-								placeholder="$Text->sys_user_current_password"  
-								data-am-enter="#am-change-password-submit" 
-								required
-								/>
-								<input 
-								class="uk-form-controls uk-width-1-1" 
-								type="password" 
-								name="new-password1" 
-								placeholder="$Text->sys_user_new_password"  
-								data-am-enter="#am-change-password-submit" 
-								required
-								/>
-								<input 
-								class="uk-form-controls uk-width-1-1" 
-								type="password" 
-								name="new-password2" 
-								placeholder="$Text->sys_user_repeat_password"  
-								data-am-enter="#am-change-password-submit" 
-								required
-								/>
-								<div class="uk-modal-footer uk-text-right">
-									<button type="button" class="uk-modal-close uk-button">
-										<i class="uk-icon-close"></i>&nbsp;
-										$Text->btn_close
-									</button>
-									<button id="am-change-password-submit" type="submit" class="uk-button uk-button-success">
-										<i class="uk-icon-check"></i>&nbsp;
-										$Text->btn_save
-									</button>
-								</div>
-							</form>
+						<div class="uk-form-row">
+							<label for="am-user-email" class="uk-form-label uk-margin-top-remove">$Text->sys_user_email</label>
+							<input id="am-user-email" type="email" class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" name="email" value="$email" required>
 						</div>
 					</div>
+					<button 
+					type="button" 
+					class="uk-button uk-button-success"
+					data-am-submit="User::edit"
+					>
+						<i class="uk-icon-check"></i>&nbsp;
+						$Text->btn_save
+					</button>
+				</form>
+				<!-- Change password -->
+				<a 
+				href="#am-change-password-modal" 
+				class="uk-button uk-button-danger" 
+				data-uk-modal
+				>
+					<i class="uk-icon-unlock-alt"></i>&nbsp;
+					$Text->sys_user_change_password
+				</a>
+				<div id="am-change-password-modal" class="uk-modal">
+					<div class="uk-modal-dialog">
+						<div class="uk-modal-header">
+							$Text->sys_user_change_password
+							<a href="#" class="uk-modal-close uk-close"></a>
+						</div>
+						<form 
+						class="uk-form" 
+						data-am-controller="User::changePassword" 
+						data-am-close-on-success="#am-change-password-modal"
+						>
+							<input 
+							class="uk-form-controls uk-width-1-1" 
+							type="password" 
+							name="current-password" 
+							placeholder="$Text->sys_user_current_password"  
+							data-am-enter="#am-change-password-submit" 
+							required
+							/>
+							<input 
+							class="uk-form-controls uk-width-1-1" 
+							type="password" 
+							name="new-password1" 
+							placeholder="$Text->sys_user_new_password"  
+							data-am-enter="#am-change-password-submit" 
+							required
+							/>
+							<input 
+							class="uk-form-controls uk-width-1-1" 
+							type="password" 
+							name="new-password2" 
+							placeholder="$Text->sys_user_repeat_password"  
+							data-am-enter="#am-change-password-submit" 
+							required
+							/>
+							<div class="uk-modal-footer uk-text-right">
+								<button type="button" class="uk-modal-close uk-button">
+									<i class="uk-icon-close"></i>&nbsp;
+									$Text->btn_close
+								</button>
+								<button id="am-change-password-submit" type="submit" class="uk-button uk-button-success">
+									<i class="uk-icon-check"></i>&nbsp;
+									$Text->btn_save
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
+				
 				<p class="uk-margin-large-top">$Text->sys_user_registered_info</p>
 				<!-- Registered Users -->
 				<a 
 				href="#am-users-modal" 
-				class="uk-button uk-button-success uk-button-large" 
+				class="uk-button uk-button-large" 
 				data-uk-modal 
 				data-am-status="users"
 				>
-					<i class="uk-icon-users uk-icon-justify"></i>&nbsp;
 					$Text->sys_user_registered
 					&nbsp;<span class="uk-badge">&nbsp;</span>
 				</a>&nbsp;
@@ -185,11 +181,18 @@ class Users {
 					</div>
 				</div>
 				<br>
-				<!-- Invite User -->
-				<a href="#am-invite-user-modal" class="uk-button uk-margin-small-top" data-uk-modal>
-					<i class="uk-icon-send"></i>&nbsp;
-					$Text->sys_user_invite
-				</a>
+				<!-- Invite & Add User Buttons -->
+				<div class="uk-button-group uk-margin-small-top">
+					<a href="#am-invite-user-modal" class="uk-button" data-uk-modal>
+						<i class="uk-icon-send"></i>&nbsp;
+						$Text->sys_user_invite
+					</a>
+					<a href="#am-add-user-modal" class="uk-button" data-uk-modal>
+						<i class="uk-icon-user-plus"></i>&nbsp;
+						$Text->sys_user_add
+					</a>
+				</div>
+				<!-- Invite User Modal -->
 				<div id="am-invite-user-modal" class="uk-modal">
 					<div class="uk-modal-dialog">
 						<div class="uk-modal-header">
@@ -230,12 +233,7 @@ class Users {
 						</form>
 					</div>
 				</div>
-				<br>
-				<!-- Add User -->
-				<a href="#am-add-user-modal" class="uk-button uk-margin-small-top" data-uk-modal>
-					<i class="uk-icon-user-plus"></i>&nbsp;
-					$Text->sys_user_add
-				</a>
+				<!-- Add User Modal -->
 				<div id="am-add-user-modal" class="uk-modal">
 					<div class="uk-modal-dialog">
 						<div class="uk-modal-header">
