@@ -26,10 +26,6 @@ btn_browse: Browse Files
 
 -
 
-btn_cancel: Cancel
-
--
-
 btn_close: Close
 
 -
@@ -1160,7 +1156,7 @@ reset_password_title: Create Password
 
 -
 
-reset_password_enter_name_or_email: Please enter your username or email address in order to request an authentication token by to create a new password for your account.
+reset_password_enter_name_or_email: Please enter your username or email address in order to request an authentication token to create a new password for your account.
 
 -
 
@@ -1304,7 +1300,7 @@ success_password_changed: Your password has been changed successfully!
 
 -
 
-success_log_out: Logged Out Successfully
+success_log_out: You have successfully logged out!
 
 -
 

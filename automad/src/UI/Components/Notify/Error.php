@@ -27,46 +27,40 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Components\Layout\PasswordReset;
-
-use Automad\UI\Utils\Text;
+namespace Automad\UI\Components\Notify;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The password reset success layout.
+ * The error notification component.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ResetSuccess {
+class Error {
 	/**
-	 * Render the success layout.
+	 * Create an error notification.
 	 *
-	 * @return string the rendered layout.
+	 * @param string|null $error
+	 * @return string The HTML for an error notification
 	 */
-	public static function render() {
-		$fn = function ($expression) {
-			return $expression;
-		};
+	public static function render(?string $error = null) {
+		if (!$error) {
+			return '';
+		}
 
 		return <<< HTML
-			{$fn(Text::get('success_password_changed'))}
-			<hr>
-			<a 
-			href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
-			class="uk-button uk-button-primary uk-width-1-1"
-			>
-				{$fn(Text::get('btn_login'))}
-			</a>
+			<script type="text/javascript">
+				Automad.Notify.error('$error');
+			</script>
 HTML;
 	}
 }

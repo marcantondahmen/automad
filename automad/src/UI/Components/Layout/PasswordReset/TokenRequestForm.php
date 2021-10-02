@@ -38,6 +38,7 @@ namespace Automad\UI\Components\Layout\PasswordReset;
 
 use Automad\Core\Request;
 use Automad\UI\Components\Alert\Danger;
+use Automad\UI\Components\Notify\Error;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,34 +62,21 @@ class TokenRequestForm {
 			return $expression;
 		};
 
-		$alert = '';
-
-		if ($error) {
-			$alert = Danger::render($error);
-		}
-
 		return <<< HTML
-				$alert
-				<p>
-					{$fn(Text::get('reset_password_enter_name_or_email'))}
-				</p>
-				<input 
-				class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
-				type="text" 
-				name="name-or-email" 
-				placeholder="{$fn(Text::get('login_name_or_email'))}" 
-				value="{$fn(Request::query('username'))}"
-				required
-				/>
-				<div class="uk-text-right">
-					<a href="{$fn(AM_BASE_INDEX . '/')}" class="uk-button uk-button-link">
-						<i class="uk-icon-close"></i>&nbsp;
-						{$fn(Text::get('btn_cancel'))}
-					</a>
-					<button type="submit" class="uk-button uk-button-success">
-						{$fn(Text::get('btn_submit'))}
-					</button>
-				</div>
+			{$fn(Error::render($error))}
+			{$fn(Text::get('reset_password_enter_name_or_email'))}
+			<hr>
+			<input 
+			class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
+			type="text" 
+			name="name-or-email" 
+			placeholder="{$fn(Text::get('login_name_or_email'))}" 
+			value="{$fn(Request::query('username'))}"
+			required
+			/>
+			<button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+				{$fn(Text::get('btn_submit'))}
+			</button>
 HTML;
 	}
 }

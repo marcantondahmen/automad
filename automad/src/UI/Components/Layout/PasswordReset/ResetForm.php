@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Components\Layout\PasswordReset;
 
-use Automad\UI\Components\Alert\Danger;
+use Automad\UI\Components\Notify\Error;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,48 +61,35 @@ class ResetForm {
 			return $expression;
 		};
 
-		$alert = '';
-
-		if ($error) {
-			$alert = Danger::render($error);
-		}
-
 		return <<< HTML
-				$alert
-				<p>
-					{$fn(Text::get('reset_password_enter_new_password'))}
-				</p>
-				<input type="hidden" name="username" value="$username">
-				<input
-				class="uk-form-controls uk-width-1-1 uk-margin-small-top"
-				type="text"
-				name="token"
-				placeholder="{$fn(Text::get('reset_password_token'))}"
-				required
-				/>
-				<input
-				class="uk-form-controls uk-width-1-1 uk-margin-small-top"
-				type="password"
-				name="password1"
-				placeholder="{$fn(Text::get('sys_user_password'))}"
-				required
-				/>
-				<input
-				class="uk-form-controls uk-width-1-1 uk-margin-small-bottom"
-				type="password"
-				name="password2"
-				placeholder="{$fn(Text::get('sys_user_repeat_password'))}"
-				required
-				/>
-				<div class="uk-text-right">
-					<a href="{$fn(AM_BASE_INDEX . '/')}" class="uk-button uk-button-link">
-						<i class="uk-icon-close"></i>&nbsp;
-						{$fn(Text::get('btn_cancel'))}
-					</a>
-					<button type="submit" class="uk-button uk-button-success">
-						{$fn(Text::get('btn_save_password'))}
-					</button>
-				</div>
+			{$fn(Error::render($error))}
+			{$fn(Text::get('reset_password_enter_new_password'))}
+			<hr>
+			<input type="hidden" name="username" value="$username">
+			<input
+			class="uk-form-controls uk-width-1-1"
+			type="text"
+			name="token"
+			placeholder="{$fn(Text::get('reset_password_token'))}"
+			required
+			/>
+			<input
+			class="uk-form-controls uk-width-1-1 uk-margin-small-top"
+			type="password"
+			name="password1"
+			placeholder="{$fn(Text::get('sys_user_password'))}"
+			required
+			/>
+			<input
+			class="uk-form-controls uk-width-1-1 uk-margin-small-bottom"
+			type="password"
+			name="password2"
+			placeholder="{$fn(Text::get('sys_user_repeat_password'))}"
+			required
+			/>
+			<button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+				{$fn(Text::get('btn_save_password'))}
+			</button>
 HTML;
 	}
 }

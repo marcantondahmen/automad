@@ -38,6 +38,7 @@ namespace Automad\UI\Views;
 
 use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Components\Alert\Success;
+use Automad\UI\Components\Nav\NoUserNavbar;
 use Automad\UI\Controllers\SessionController;
 use Automad\UI\Utils\Text;
 
@@ -66,10 +67,8 @@ class Logout extends AbstractView {
 		$fn = $this->fn;
 
 		return <<< HTML
-			<div class="uk-width-medium-1-2 uk-container-center">
-				<h1>
-					{$fn($this->Automad->Shared->get(AM_KEY_SITENAME))}
-				</h1>
+			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME)))}
+			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				{$fn($this->alert($isLoggedOut))}
 			</div>
 HTML;
@@ -97,21 +96,27 @@ HTML;
 
 		if ($isLoggedOut) {
 			return <<< HTML
-				{$fn(Success::render(Text::get('success_log_out')))}
-				<div class="uk-text-right">
-					<a 
-					href="{$fn(AM_BASE_INDEX . '/')}" 
-					class="uk-button uk-button-link"
-					>
-						<i class="uk-icon-home"></i>&nbsp;
-						{$fn(Text::get('btn_home'))}
-					</a>
-					<a 
-					href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
-					class="uk-button uk-button-success"
-					>
-						{$fn(Text::get('btn_login'))}
-					</a>
+				<div class="uk-panel uk-panel-box">
+					{$fn(Text::get('success_log_out'))}
+					<hr>
+					<div class="uk-grid uk-grid-width-medium-1-2">
+						<div>
+							<a 
+							href="{$fn(AM_BASE_INDEX . '/')}" 
+							class="uk-button uk-width-1-1"
+							>
+								{$fn(Text::get('btn_home'))}
+							</a>
+						</div>
+						<div>
+							<a 
+							href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
+							class="uk-button uk-button-primary uk-width-1-1"
+							>
+								{$fn(Text::get('btn_login'))}
+							</a>
+						</div>
+					</div>
 				</div>
 HTML;
 		} else {

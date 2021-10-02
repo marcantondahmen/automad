@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Views;
 
+use Automad\UI\Components\Nav\NoUserNavbar;
 use Automad\UI\Controllers\UserController;
 use Automad\UI\Utils\Text;
 
@@ -63,12 +64,12 @@ class ResetPassword extends AbstractView {
 		$fn = $this->fn;
 
 		return <<< HTML
-			<div class="uk-width-medium-1-2 uk-container-center">
-				<h1 class="uk-margin-large-bottom">
-					{$fn($this->Automad->Shared->get(AM_KEY_SITENAME))}
-				</h1>
+			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME)))}
+			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				<form class="uk-form" method="post">
-					{$fn(UserController::resetPassword())}
+					<div class="uk-panel uk-panel-box">
+						{$fn(UserController::resetPassword())}
+					</div>
 				</form>
 			</div>
 HTML;

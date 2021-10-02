@@ -27,46 +27,45 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Components\Layout\PasswordReset;
-
-use Automad\UI\Utils\Text;
+namespace Automad\UI\Components\Nav;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The password reset success layout.
+ * The no user navbar component.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ResetSuccess {
+class NoUserNavbar {
 	/**
-	 * Render the success layout.
+	 * Create a no user navbar.
 	 *
-	 * @return string the rendered layout.
+	 * @param string $sitename
+	 * @return string The HTML for no user navbar
 	 */
-	public static function render() {
-		$fn = function ($expression) {
-			return $expression;
-		};
+	public static function render(string $sitename) {
+		$home = AM_BASE_INDEX . '/';
 
 		return <<< HTML
-			{$fn(Text::get('success_password_changed'))}
-			<hr>
-			<a 
-			href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
-			class="uk-button uk-button-primary uk-width-1-1"
-			>
-				{$fn(Text::get('btn_login'))}
-			</a>
+			<div class="am-fullscreen-bar uk-display-block">
+				<div class="uk-flex uk-flex-space-between uk-flex-middle uk-height-1-1">
+					<div class="uk-flex-item-1 uk-text-truncate uk-margin-small-right">
+						$sitename
+					</div>
+					<a href="$home" class="am-fullscreen-bar-button">
+						<i class="am-u-icon-close"></i>
+					</a>
+				</div>
+			</div>
 HTML;
 	}
 }
