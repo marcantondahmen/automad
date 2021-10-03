@@ -66,6 +66,10 @@ btn_files: Geüploade bestanden
 
 -
 
+btn_forgot_password: Wachtwoord vergeten
+
+-
+
 btn_get_themes: Krijg meer thema's
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: In-Page Edit Mode
 
 -
 
+btn_invite: Verstuur uitnodiging
+
+-
+
 btn_install: Installeren
 
 -
@@ -102,11 +110,11 @@ btn_link: Koppeling
 
 -
 
-btn_log_out: Uitloggen
+btn_log_out: Afmelden
 
 -
 
-btn_login: Log in
+btn_login: Inloggen
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Reset
 
 -
 
+btn_save_password: Wachtwoord opslaan
+
+-
+
 btn_save: Wijzigingen opslaan
+
+-
+
+btn_submit: Indienen
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Bestanden doorbladeren
 
 -
 
+email_hello: Hallo
+
+-
+
+email_automatic: Deze e-mail is automatisch verzonden. Gelieve deze e-mail niet te beantwoorden.
+
+-
+
+email_invite_subject: U bent toegevoegd als een nieuwe gebruiker!
+
+-
+
+email_invite_text: Een nieuw gebruikersaccount op {} is voor u gemaakt. U kunt de onderstaande knop gebruiken om uw wachtwoord te maken.
+
+-
+
+email_invite_button: Maak nu een wachtwoord
+
+-
+
+email_reset_password_subject: Uw authenticatie-token
+
+-
+
+email_reset_password_text_top: Het gevraagde authenticatietoken voor uw account op {} vindt u hieronder. U kunt die token gebruiken om nu een nieuw wachtwoord voor u te maken.
+
+-
+
+email_reset_password_text_bottom: Als u dit verzoek niet initieert, kunt u dit bericht veilig negeren.
+
+-
+
 error_cache_purged: De cachemap kan niet worden verwijderd!
 
 -
@@ -714,6 +762,10 @@ error_invalid_username: Ongeldige gebruikersnaam! Een gebruikersnaam kan alleen 
 
 -
 
+error_invalid_email: Ongeldig e-mail! Een e-mailadres kan alleen de volgende tekens bevatten:
+
+-
+
 error_json: Ongeldige JSON! De inhoud van het configuratiebestand is niet correct opgemaakt.
 
 -
@@ -742,7 +794,15 @@ error_password_reuse: Gebruik uw oude wachtwoord niet opnieuw!
 
 -
 
+error_password_reset_verification: Het authenticatietoken is ongeldig of is al verlopen!
+
+-
+
 error_permission: Toestemmingen geweigerd:
+
+-
+
+error_send_email: Fout bij het verzenden van e-mail!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Updates worden niet ondersteund door uw server! De u
 -
 
 error_update_permission: Kan update niet uitvoeren! Toestemmingen geweigerd!
+
+-
+
+error_user_not_found: Ongeldige gebruikersnaam of e-mailadres.
+
+-
+
+error_user_no_email: Er is geen e-mailadres opgeslagen voor het gevraagde gebruikersaccount.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Voeg een link toe
 
 -
 
-login_title: Log in
+login_title: Log in op het dashboard
 
 -
 
-login_username: Gebruikersnaam
+login_name_or_email: Gebruikersnaam of email
 
 -
 
@@ -950,6 +1018,22 @@ page_private: Privaat
 
 -
 
+reset_password_title: Maak een wachtwoord
+
+-
+
+reset_password_enter_name_or_email: Voer uw gebruikersnaam of e-mailadres in om een authenticatietoken aan te vragen om een nieuw wachtwoord voor uw account aan te maken.
+
+-
+
+reset_password_enter_new_password: Een e-mail inclusief een authenticatietoken is net naar u verzonden. Voer die token nu hieronder in, samen met een nieuw wachtwoord.
+
+-
+
+reset_password_token: Authenticatie-token
+
+-
+
 sidebar_header_global: Globaal
 
 -
@@ -1050,11 +1134,11 @@ success_installed: Succesvol geïnstalleerd
 
 -
 
-success_password_changed: Uw wachtwoord is succesvol gewijzigd!
+success_password_changed: Je wachtwoord is met succes veranderd!
 
 -
 
-success_log_out: Succesvol uitgelogd
+success_log_out: Je bent succesvol uitgelogd!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Opgeslagen wijzigingen
 -
 
 success_update: Automad bijgewerkt!
+
+-
+
+success_user_invite: De uitnodiging is succesvol verzonden.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Gebruikers
 
 -
 
-sys_user_info: U kunt hier meer gebruikers toevoegen of verwijderen of uw wachtwoord wijzigen.
-
--
-
-sys_user_change_password: Wijzig uw wachtwoord
-
--
-
-sys_user_change_password_current: Huidig wachtwoord
-
--
-
-sys_user_change_password_new: Nieuw paswoord
-
--
-
-sys_user_change_password_repeat: Herhaal wachtwoord
+sys_user_info: Hier vindt u alle informatie die gerelateerd is aan uw account en uw gebruikersnaam, wachtwoord of e-mail wijzigen. Om uw wachtwoord per e-mail te kunnen resetten, moet u ervoor zorgen dat u een Vaild en Active E-mailadres hieronder hebt ingevoerd.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Voeg gebruiker toe
 
 -
 
-sys_user_add_name: Gebruikersnaam
+sys_user_invite: Nodig de gebruiker uit per e-mail
 
 -
 
-sys_user_add_password: Wachtwoord
+sys_user_name: Gebruikersnaam
 
 -
 
-sys_user_add_repeat: Herhaal wachtwoord
+sys_user_password: Wachtwoord
+
+-
+
+sys_user_repeat_password: Herhaal wachtwoord
+
+-
+
+sys_user_email: E-mail
+
+-
+
+sys_user_alert_no_email: U hebt nog geen geldig e-mailadres toegevoegd aan uw account. Merk op dat een geldig e-mailadres vereist is om uw wachtwoord opnieuw in te stellen. Klik hier om een e-mail nu toe te voegen.
+
+-
+
+sys_user_change_password: Wijzig uw wachtwoord
+
+-
+
+sys_user_current_password: huidig wachtwoord
+
+-
+
+sys_user_new_password: nieuw paswoord
 
 -
 
 sys_user_registered: Geregistreerde gebruikers
+
+-
+
+sys_user_registered_info: Het is ook mogelijk om andere gebruikers te registreren om ervoor te zorgen dat ze inhoud kunnen bewerken.
 
 -
 

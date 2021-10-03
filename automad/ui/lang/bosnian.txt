@@ -66,6 +66,10 @@ btn_files: Otpremljene datoteke
 
 -
 
+btn_forgot_password: Zaboravili ste lozinku
+
+-
+
 btn_get_themes: Nabavite još tema
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Način uređivanja na stranici
 
 -
 
+btn_invite: Pošalji pozivnicu
+
+-
+
 btn_install: Instalirajte
 
 -
@@ -106,7 +114,7 @@ btn_log_out: Odjaviti se
 
 -
 
-btn_login: Ulogovati se
+btn_login: Prijaviti se
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Resetovati
 
 -
 
+btn_save_password: Spremi lozinku
+
+-
+
 btn_save: Sačuvaj promjene
+
+-
+
+btn_submit: Predati
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Pregledajte datoteke
 
 -
 
+email_hello: zdravo
+
+-
+
+email_automatic: Ovaj je e-mail automatski poslan. Molimo ne odgovarajte na ovaj e-mail.
+
+-
+
+email_invite_subject: Dodani ste kao novi korisnik!
+
+-
+
+email_invite_text: Za vas je stvoren novi korisnički račun na {}. Možete koristiti donji gumb za kreiranje lozinke.
+
+-
+
+email_invite_button: Kreirajte lozinku sada
+
+-
+
+email_reset_password_subject: Vaš token za autentifikaciju
+
+-
+
+email_reset_password_text_top: Traženi token za provjeru autentičnosti za vaš račun na {} možete pronaći u nastavku. Možete koristiti taj token da biste sada stvorili novu lozinku za vas.
+
+-
+
+email_reset_password_text_bottom: U slučaju da niste pokrenuli ovaj zahtjev, možete sigurno zanemariti ovu poruku.
+
+-
+
 error_cache_purged: Nije moguće očistiti direktorij predmemorije!
 
 -
@@ -686,7 +734,7 @@ error_login: Nevažeće korisničko ime ili lozinka
 
 -
 
-error_log_out: Odjava nije uspjela!
+error_log_out: Odjava nije uspjelo!
 
 -
 
@@ -711,6 +759,10 @@ error_import: Uvoz datoteke nije uspio!
 -
 
 error_invalid_username: Nevažeće korisničko ime! Korisničko ime može sadržavati samo sljedeće znakove:
+
+-
+
+error_invalid_email: Nevažeći email! Adresa e-pošte može sadržavati samo sljedeće znakove:
 
 -
 
@@ -742,7 +794,15 @@ error_password_reuse: Ne koristite ponovo staru lozinku!
 
 -
 
+error_password_reset_verification: Token za provjeru autentičnosti nije važeći ili je već istekao!
+
+-
+
 error_permission: Odbijene dozvole:
+
+-
+
+error_send_email: Pogreška prilikom slanja e-pošte!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Vaš server ne podržava ažuriranja! Program za až
 -
 
 error_update_permission: Nije moguće pokrenuti ažuriranje! Dozvole odbijene!
+
+-
+
+error_user_not_found: Nevažeće korisničko ime ili adresu e-pošte.
+
+-
+
+error_user_no_email: Ne postoji adresa e-pošte pohranjena za traženi korisnički račun.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Dodaj vezu
 
 -
 
-login_title: Ulogovati se
+login_title: Prijavite se na nadzornu ploču
 
 -
 
-login_username: Korisničko ime
+login_name_or_email: Korisničko ime ili e-mail
 
 -
 
@@ -846,7 +914,7 @@ login_password: Lozinka
 
 -
 
-log_out_title: Odjavljeni
+log_out_title: Odjavio se
 
 -
 
@@ -947,6 +1015,22 @@ page_visibility: Visibility
 -
 
 page_private: Privatno
+
+-
+
+reset_password_title: Napravi sifru
+
+-
+
+reset_password_enter_name_or_email: Unesite svoje korisničko ime ili adresu e-pošte kako biste zatražili token za provjeru autentičnosti da biste stvorili novu lozinku za svoj račun.
+
+-
+
+reset_password_enter_new_password: E-mail, uključujući token za autentifikaciju, samo vam je poslao. Molimo unesite taj token sada dolje zajedno sa novom lozinkom.
+
+-
+
+reset_password_token: Token za provjeru autentičnosti
 
 -
 
@@ -1054,7 +1138,7 @@ success_password_changed: Vaša lozinka je uspješno promijenjena!
 
 -
 
-success_log_out: Odjava uspješna
+success_log_out: Uspješno ste se odjavili!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Spremljene promjene
 -
 
 success_update: Uspješno ažuriran Automad!
+
+-
+
+success_user_invite: Poziv je uspješno poslan.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Korisnici
 
 -
 
-sys_user_info: Ovdje možete dodati ili ukloniti više korisnika ili promijeniti lozinku.
-
--
-
-sys_user_change_password: Promijenite lozinku
-
--
-
-sys_user_change_password_current: Trenutna šifra
-
--
-
-sys_user_change_password_new: Nova šifra
-
--
-
-sys_user_change_password_repeat: Ponovi lozinku
+sys_user_info: Ovdje možete pronaći sve informacije vezane za vaš račun i promijeniti svoje korisničko ime, lozinku ili e-poštu. Da biste mogli resetirati lozinku putem e-maila, provjerite jeste li ušli u vaild i aktivnu adresu e-pošte u nastavku.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Dodaj korisnika
 
 -
 
-sys_user_add_name: Korisničko ime
+sys_user_invite: Pozovite korisnika putem e-maila
 
 -
 
-sys_user_add_password: Lozinka
+sys_user_name: Korisničko ime
 
 -
 
-sys_user_add_repeat: Ponovi lozinku
+sys_user_password: Lozinka
+
+-
+
+sys_user_repeat_password: Ponovi lozinku
+
+-
+
+sys_user_email: E-pošta
+
+-
+
+sys_user_alert_no_email: Još niste dodali valjanu adresu e-pošte na vaš račun. Imajte na umu da je potrebna valjana adresa e-pošte kako biste mogli resetirati lozinku. Kliknite ovdje da biste dodali e-poštu sada.
+
+-
+
+sys_user_change_password: Promijenite lozinku
+
+-
+
+sys_user_current_password: trenutna šifra
+
+-
+
+sys_user_new_password: Nova šifra
 
 -
 
 sys_user_registered: Registrirani korisnici
+
+-
+
+sys_user_registered_info: Također je moguće registrirati ostale korisnike kako bi im omogućili uređivanje sadržaja.
 
 -
 

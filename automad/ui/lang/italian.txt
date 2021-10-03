@@ -66,6 +66,10 @@ btn_files: File caricati
 
 -
 
+btn_forgot_password: Ha dimenticato la password
+
+-
+
 btn_get_themes: Ottieni più temi
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Modalità di modifica in-page
 
 -
 
+btn_invite: Spedire un invito
+
+-
+
 btn_install: Installare
 
 -
@@ -102,11 +110,11 @@ btn_link: Link
 
 -
 
-btn_log_out: Disconnettersi
+btn_log_out: disconnessione
 
 -
 
-btn_login: Accesso
+btn_login: Registrazione
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Ripristina
 
 -
 
+btn_save_password: Salva la password
+
+-
+
 btn_save: Salvare le modifiche
+
+-
+
+btn_submit: Invia
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Sfoglia i file
 
 -
 
+email_hello: Ciao
+
+-
+
+email_automatic: Questa email è stata inviata automaticamente. Per favore non rispondere a questa email.
+
+-
+
+email_invite_subject: Sei stato aggiunto come un nuovo utente!
+
+-
+
+email_invite_text: È stato creato un nuovo account utente su {} per te. È possibile utilizzare il pulsante qui sotto per creare la tua password.
+
+-
+
+email_invite_button: Crea password ora
+
+-
+
+email_reset_password_subject: Il tuo token di autenticazione
+
+-
+
+email_reset_password_text_top: Il token di autenticazione richiesto per il tuo account su {} può essere trovato di seguito. Puoi usare quel token per creare una nuova password per te ora.
+
+-
+
+email_reset_password_text_bottom: Nel caso in cui non hai iniziato questa richiesta, puoi tranquillamente ignorare questo messaggio.
+
+-
+
 error_cache_purged: La directory della cache non può essere eliminata!
 
 -
@@ -686,7 +734,7 @@ error_login: Nome utente o password errati
 
 -
 
-error_log_out: Logout fallito!
+error_log_out: Firmi fallito!
 
 -
 
@@ -711,6 +759,10 @@ error_import: L'importazione del file è fallita!
 -
 
 error_invalid_username: Nome utente non valido! Un nome utente può contenere solo i seguenti caratteri:
+
+-
+
+error_invalid_email: E-mail non valido! Un indirizzo email può contenere solo i seguenti caratteri:
 
 -
 
@@ -742,7 +794,15 @@ error_password_reuse: Non riutilizzare la vecchia password!
 
 -
 
+error_password_reset_verification: Il token di autenticazione non è valido o è già scaduto!
+
+-
+
 error_permission: Autorizzazioni negate:
+
+-
+
+error_send_email: Errore durante l'invio di email!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Gli aggiornamenti non sono supportati dal tuo server
 -
 
 error_update_permission: Impossibile eseguire l'aggiornamento! Autorizzazioni negate!
+
+-
+
+error_user_not_found: Nome utente o indirizzo email non valido.
+
+-
+
+error_user_no_email: Non esiste un indirizzo email memorizzato per l'account utente richiesto.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Aggiungi collegamento
 
 -
 
-login_title: Accesso
+login_title: Accedi al cruscotto
 
 -
 
-login_username: Nome utente
+login_name_or_email: Nome utente o email
 
 -
 
@@ -950,6 +1018,22 @@ page_private: Privata
 
 -
 
+reset_password_title: Crea password
+
+-
+
+reset_password_enter_name_or_email: Inserisci il tuo nome utente o indirizzo email per richiedere un token di autenticazione per creare una nuova password per il tuo account.
+
+-
+
+reset_password_enter_new_password: Una e-mail inclusa un token di autenticazione è stato inviato solo a te. Si prega di inserire quel token ora sotto con una nuova password.
+
+-
+
+reset_password_token: Token di autenticazione
+
+-
+
 sidebar_header_global: Globale
 
 -
@@ -1050,11 +1134,11 @@ success_installed: Installato con successo
 
 -
 
-success_password_changed: La tua password è stata modificata con successo!
+success_password_changed: La tua password è stata cambiata con successo!
 
 -
 
-success_log_out: Disconnesso con successo
+success_log_out: Ti sei disconnesso con successo!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Modifiche salvate
 -
 
 success_update: Automad aggiornato con successo!
+
+-
+
+success_user_invite: L'invito è stato inviato con successo.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Utenti
 
 -
 
-sys_user_info: Puoi aggiungere o rimuovere più utenti o modificare la password qui.
-
--
-
-sys_user_change_password: Cambia la tua password
-
--
-
-sys_user_change_password_current: Password attuale
-
--
-
-sys_user_change_password_new: Nuova password
-
--
-
-sys_user_change_password_repeat: Ripeti la password
+sys_user_info: Qui puoi trovare tutte le informazioni relative al tuo account e modificare il tuo nome utente, password o e-mail. Per poter ripristinare la tua password via e-mail, assicurati di aver inserito un indirizzo email vaild e attivo di seguito.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Aggiungi utente
 
 -
 
-sys_user_add_name: Nome utente
+sys_user_invite: Invita l'utente via e-mail
 
 -
 
-sys_user_add_password: Parola d'ordine
+sys_user_name: Nome utente
 
 -
 
-sys_user_add_repeat: Ripeti la password
+sys_user_password: Parola d'ordine
+
+-
+
+sys_user_repeat_password: Ripeti la password
+
+-
+
+sys_user_email: E-mail
+
+-
+
+sys_user_alert_no_email: Non hai ancora aggiunto un indirizzo email valido al tuo account. Si noti che è richiesto un indirizzo email valido per poter ripristinare la password. Clicca qui per aggiungere un'email ora.
+
+-
+
+sys_user_change_password: Cambia la tua password
+
+-
+
+sys_user_current_password: password attuale
+
+-
+
+sys_user_new_password: nuova password
 
 -
 
 sys_user_registered: Utente registrato
+
+-
+
+sys_user_registered_info: È anche possibile registrare altri utenti per consentire loro di modificare il contenuto.
 
 -
 

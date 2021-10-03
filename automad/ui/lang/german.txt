@@ -66,6 +66,10 @@ btn_files: Hochgeladene Dateien
 
 -
 
+btn_forgot_password: Passwort vergessen
+
+-
+
 btn_get_themes: Holen Sie sich mehr Themen
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: In-Page-Bearbeitungsmodus
 
 -
 
+btn_invite: Einladung senden
+
+-
+
 btn_install: Installieren
 
 -
@@ -106,7 +114,7 @@ btn_log_out: Ausloggen
 
 -
 
-btn_login: Anmeldung
+btn_login: Einloggen
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Zurücksetzen
 
 -
 
+btn_save_password: Passwort speichern
+
+-
+
 btn_save: Änderungen speichern
+
+-
+
+btn_submit: einreichen
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Dateien durchsuchen
 
 -
 
+email_hello: Hallo
+
+-
+
+email_automatic: Diese E-Mail wurde automatisch gesendet. Bitte antworten Sie nicht auf diese Email.
+
+-
+
+email_invite_subject: Sie wurden als neuer Benutzer hinzugefügt!
+
+-
+
+email_invite_text: Für Sie wurde ein neues Benutzerkonto auf {} erstellt. Sie können die Schaltfläche unten verwenden, um Ihr Passwort zu erstellen.
+
+-
+
+email_invite_button: Kennwort jetzt erstellen.
+
+-
+
+email_reset_password_subject: Ihr Authentifizierungstoken
+
+-
+
+email_reset_password_text_top: Das angeforderte Authentifizierungstoken für Ihr Konto auf {} finden Sie unten. Sie können dieses Token verwenden, um jetzt ein neues Passwort für Sie zu erstellen.
+
+-
+
+email_reset_password_text_bottom: Falls Sie diese Anfrage nicht selbst initiiert haben, können Sie diese Nachricht sicher ignorieren.
+
+-
+
 error_cache_purged: Das Cache-Verzeichnis konnte nicht gelöscht werden!
 
 -
@@ -714,6 +762,10 @@ error_invalid_username: Ungültiger Benutzername! Ein Benutzername kann nur die 
 
 -
 
+error_invalid_email: Ungültige E-Mail! Eine E-Mail-Adresse kann nur die folgenden Zeichen enthalten:
+
+-
+
 error_json: Ungültiger JSON! Der Inhalt der Konfigurationsdatei ist nicht korrekt formatiert.
 
 -
@@ -742,7 +794,15 @@ error_password_reuse: Verwenden Sie Ihr altes Passwort nicht wieder!
 
 -
 
+error_password_reset_verification: Das Authentifizierungstoken ist ungültig oder ist bereits abgelaufen!
+
+-
+
 error_permission: Berechtigungen verweigert:
+
+-
+
+error_send_email: Fehler beim Senden von E-Mails!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Updates werden von Ihrem Server nicht unterstützt! 
 -
 
 error_update_permission: Update kann nicht ausgeführt werden! Berechtigungen verweigert!
+
+-
+
+error_user_not_found: Ungültiger Benutzername oder E-Mail-Adresse.
+
+-
+
+error_user_no_email: Für das angeforderte Benutzerkonto gibt es keine E-Mail-Adresse.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Link hinzufügen
 
 -
 
-login_title: Einloggen
+login_title: Melden Sie sich beim Dashboard an
 
 -
 
-login_username: Nutzername
+login_name_or_email: Benutzername oder E-Mail-Adresse
 
 -
 
@@ -950,6 +1018,22 @@ page_private: Privat
 
 -
 
+reset_password_title: Passwort erstellen
+
+-
+
+reset_password_enter_name_or_email: Bitte geben Sie Ihren Benutzernamen- oder E-Mail-Adresse ein, um ein Authentifizierungs-Token anzufordern, um ein neues Passwort für Ihr Konto zu erstellen.
+
+-
+
+reset_password_enter_new_password: Eine E-Mail mit einem Authentifizierungstoken ist nur an Sie gesendet. Bitte geben Sie dieses Token jetzt unten mit einem neuen Passwort ein.
+
+-
+
+reset_password_token: Authentifizierungstoken
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -1054,7 +1138,7 @@ success_password_changed: Ihr Passwort wurde erfolgreich geändert!
 
 -
 
-success_log_out: Erfolgreich abgemeldet
+success_log_out: Du hast dich erfolgreich abgemeldet!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Änderungen gespeichert
 -
 
 success_update: Automad erfolgreich aktualisiert!
+
+-
+
+success_user_invite: Die Einladung wurde erfolgreich gesendet.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Benutzer
 
 -
 
-sys_user_info: Hier können Sie weitere Benutzer hinzufügen oder entfernen oder Ihr Passwort ändern.
-
--
-
-sys_user_change_password: Ändern Sie Ihr Passwort
-
--
-
-sys_user_change_password_current: Derzeitiges Passwort
-
--
-
-sys_user_change_password_new: Neues Kennwort
-
--
-
-sys_user_change_password_repeat: Wiederhole das Passwort
+sys_user_info: Hier finden Sie alle Informationen zu Ihrem Konto und ändern Ihren Benutzernamen, Ihr Passwort oder Ihre E-Mail-Adresse. Um Ihr Passwort per E-Mail zurücksetzen zu können, stellen Sie sicher, dass Sie unten eine Vaild- und aktive E-Mail-Adresse eingegeben haben.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Benutzer hinzufügen
 
 -
 
-sys_user_add_name: Nutzername
+sys_user_invite: Benutzer per E-Mail einladen
 
 -
 
-sys_user_add_password: Passwort
+sys_user_name: Nutzername
 
 -
 
-sys_user_add_repeat: Wiederhole das Passwort
+sys_user_password: Passwort
+
+-
+
+sys_user_repeat_password: Passwort wiederholen
+
+-
+
+sys_user_email: Email
+
+-
+
+sys_user_alert_no_email: Sie haben Ihrem Konto noch keine gültige E-Mail-Adresse hinzugefügt. Beachten Sie, dass eine gültige E-Mail-Adresse erforderlich ist, um Ihr Passwort zurücksetzen zu können. Klicken Sie hier, um jetzt eine E-Mail hinzuzufügen.
+
+-
+
+sys_user_change_password: Ändern Sie Ihr Passwort
+
+-
+
+sys_user_current_password: Aktuelles Passwort
+
+-
+
+sys_user_new_password: Neues Kennwort
 
 -
 
 sys_user_registered: Registrierte Benutzer
+
+-
+
+sys_user_registered_info: Es ist auch möglich, andere Benutzer zu registrieren, damit sie Inhalte bearbeiten können.
 
 -
 

@@ -66,6 +66,10 @@ btn_files: Naložene datoteke
 
 -
 
+btn_forgot_password: Ste pozabili geslo
+
+-
+
 btn_get_themes: Pridobite več tem
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Način urejanja na strani
 
 -
 
+btn_invite: Pošlji vabilo
+
+-
+
 btn_install: Namestite
 
 -
@@ -106,7 +114,7 @@ btn_log_out: Odjava
 
 -
 
-btn_login: Vpiši se
+btn_login: Prijaviti se
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Ponastaviti
 
 -
 
+btn_save_password: Shrani geslo
+
+-
+
 btn_save: Shrani spremembe
+
+-
+
+btn_submit: Pošlji
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Prebrskajte datoteke
 
 -
 
+email_hello: zdravo
+
+-
+
+email_automatic: To e-poštno sporočilo je bilo poslano samodejno. Prosim, ne odgovarjajte na to e-poštno sporočilo.
+
+-
+
+email_invite_subject: Dodali ste kot nov uporabnik!
+
+-
+
+email_invite_text: Za vas je bil ustvarjen nov uporabniški račun na {}. Spodnji gumb lahko uporabite, da ustvarite geslo.
+
+-
+
+email_invite_button: Ustvarite geslo
+
+-
+
+email_reset_password_subject: Vaš znak za preverjanje pristnosti
+
+-
+
+email_reset_password_text_top: Zahtevani žeton za preverjanje pristnosti za vaš račun na {} je na voljo spodaj. To žeton lahko uporabite za ustvarjanje novega gesla za vas zdaj.
+
+-
+
+email_reset_password_text_bottom: V primeru, da tega zahtevka niste sprožili, lahko to sporočilo varno prezrete.
+
+-
+
 error_cache_purged: Imenika predpomnilnika ni bilo mogoče očistiti!
 
 -
@@ -714,6 +762,10 @@ error_invalid_username: Neveljavno uporabniško ime! Uporabniško ime lahko vseb
 
 -
 
+error_invalid_email: Neveljavna e-pošta! E-poštni naslov lahko vsebuje samo naslednje znake:
+
+-
+
 error_json: Neveljaven JSON! Vsebina konfiguracijske datoteke ni pravilno oblikovana.
 
 -
@@ -742,7 +794,15 @@ error_password_reuse: Ne uporabljajte starega gesla!
 
 -
 
+error_password_reset_verification: Žeton za preverjanje pristnosti je neveljaven ali je že potekel!
+
+-
+
 error_permission: Zavrnjena dovoljenja:
+
+-
+
+error_send_email: Napaka pri pošiljanju e-pošte!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Vaš strežnik ne podpira posodobitev! Posodabljalni
 -
 
 error_update_permission: Posodobitve ni mogoče zagnati! Dovoljenja zavrnjena!
+
+-
+
+error_user_not_found: Neveljavno uporabniško ime ali e-poštni naslov.
+
+-
+
+error_user_no_email: Za zahtevani uporabniški račun ni shranjen e-poštnega naslova.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Dodaj povezavo
 
 -
 
-login_title: Vpiši se
+login_title: Prijavite se na armaturno ploščo
 
 -
 
-login_username: Uporabniško ime
+login_name_or_email: Uporabnisko ime ali e-posta
 
 -
 
@@ -846,7 +914,7 @@ login_password: Geslo
 
 -
 
-log_out_title: Odjavljeni
+log_out_title: Podpisan
 
 -
 
@@ -947,6 +1015,22 @@ page_visibility: Visibility
 -
 
 page_private: Zasebno
+
+-
+
+reset_password_title: Ustvari geslo
+
+-
+
+reset_password_enter_name_or_email: Vnesite svoje uporabniško ime ali e-poštni naslov, da zahtevate žeton za preverjanje pristnosti, da ustvarite novo geslo za vaš račun.
+
+-
+
+reset_password_enter_new_password: E-pošta, vključno z žetonom pristnosti, je bila poslana. Vnesite ta žeton zdaj spodaj z novim geslom.
+
+-
+
+reset_password_token: Preverjanje pristnosti Token.
 
 -
 
@@ -1054,7 +1138,7 @@ success_password_changed: Vaše geslo je bilo uspešno spremenjeno!
 
 -
 
-success_log_out: Odjava uspešna
+success_log_out: Uspešno ste se odjavili!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Shranjene spremembe
 -
 
 success_update: Uspešno posodobljen Automad!
+
+-
+
+success_user_invite: Vabilo je bilo uspešno poslano.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Uporabniki
 
 -
 
-sys_user_info: Tu lahko dodate ali odstranite več uporabnikov ali spremenite geslo.
-
--
-
-sys_user_change_password: Zamenjajte geslo
-
--
-
-sys_user_change_password_current: Trenutno geslo
-
--
-
-sys_user_change_password_new: Novo geslo
-
--
-
-sys_user_change_password_repeat: Ponovite geslo
+sys_user_info: Tukaj lahko najdete vse informacije, povezane z vašim računom in spremenite svoje uporabniško ime, geslo ali e-pošto. Da bi lahko ponastavili geslo po e-pošti, se prepričajte, da ste vnesli želeni in aktivni e-poštni naslov spodaj.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Dodaj uporabnika
 
 -
 
-sys_user_add_name: Uporabniško ime
+sys_user_invite: Povabite uporabnika po e-pošti
 
 -
 
-sys_user_add_password: Geslo
+sys_user_name: Uporabniško ime
 
 -
 
-sys_user_add_repeat: Ponovite geslo
+sys_user_password: Geslo
+
+-
+
+sys_user_repeat_password: Ponovite geslo
+
+-
+
+sys_user_email: E-naslov
+
+-
+
+sys_user_alert_no_email: Za vaš račun še niste dodali veljavnega e-poštnega naslova. Upoštevajte, da je potreben veljaven e-poštni naslov, da bi lahko ponastavili svoje geslo. Kliknite tukaj, če želite zdaj dodati e-pošto.
+
+-
+
+sys_user_change_password: Zamenjajte geslo
+
+-
+
+sys_user_current_password: trenutno geslo
+
+-
+
+sys_user_new_password: novo geslo
 
 -
 
 sys_user_registered: Registrirani uporabniki
+
+-
+
+sys_user_registered_info: Prav tako je mogoče registrirati druge uporabnike, da bi jim omogočili urejanje vsebine.
 
 -
 

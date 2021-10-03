@@ -66,6 +66,10 @@ btn_files: Nahrané soubory
 
 -
 
+btn_forgot_password: Zapomenuté heslo
+
+-
+
 btn_get_themes: Získejte více motivů
 
 -
@@ -91,6 +95,10 @@ btn_import: Importovat z URL
 -
 
 btn_inpage_edit: Režim úprav na stránce
+
+-
+
+btn_invite: Poslat pozvánku
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Resetovat
 
 -
 
+btn_save_password: Uložit heslo
+
+-
+
 btn_save: Uložit změny
+
+-
+
+btn_submit: Předložit
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Procházet soubory
 
 -
 
+email_hello: Ahoj
+
+-
+
+email_automatic: Tento e-mail byl odeslán automaticky. Prosím neodpovídejte na tento email.
+
+-
+
+email_invite_subject: Byl jste přidán jako nový uživatel!
+
+-
+
+email_invite_text: Byl pro vás vytvořen nový uživatelský účet na {}. Můžete použít níže uvedené tlačítko pro vytvoření hesla.
+
+-
+
+email_invite_button: Vytvořte heslo nyní
+
+-
+
+email_reset_password_subject: Token ověřování
+
+-
+
+email_reset_password_text_top: Níže naleznete požadovaný ověřovací token pro váš účet na {} níže. Můžete použít ten token, abyste pro vás nyní vytvořili nové heslo.
+
+-
+
+email_reset_password_text_bottom: V případě, že jste tento požadavek nespustil, můžete tuto zprávu bezpečně ignorovat.
+
+-
+
 error_cache_purged: Adresář mezipaměti nelze vymazat!
 
 -
@@ -686,7 +734,7 @@ error_login: Neplatné uživatelské jméno či heslo
 
 -
 
-error_log_out: Odhlášení se nezdařilo!
+error_log_out: Odhlásit se Selhalo!
 
 -
 
@@ -711,6 +759,10 @@ error_import: Import souboru se nezdařil!
 -
 
 error_invalid_username: Neplatné uživatelské jméno! Uživatelské jméno může obsahovat pouze následující znaky:
+
+-
+
+error_invalid_email: Neplatný e-mail! E-mailová adresa může obsahovat pouze následující znaky:
 
 -
 
@@ -742,7 +794,15 @@ error_password_reuse: Nepoužívejte znovu své staré heslo!
 
 -
 
+error_password_reset_verification: Ověřovací token je neplatný nebo již vypršel!
+
+-
+
 error_permission: Oprávnění odepřena:
+
+-
+
+error_send_email: Chyba odesílání e-mailu!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Váš server nepodporuje aktualizace! Aktualizátor 
 -
 
 error_update_permission: Aktualizaci nelze spustit! Oprávnění zamítnuta!
+
+-
+
+error_user_not_found: Neplatné uživatelské jméno nebo e-mailová adresa.
+
+-
+
+error_user_no_email: Pro požadovaný uživatelský účet není uložena žádná e-mailová adresa.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Přidat odkaz
 
 -
 
-login_title: Přihlásit se
+login_title: Přihlaste se do řídicího panelu
 
 -
 
-login_username: Uživatelské jméno
+login_name_or_email: Uživatelské jméno nebo email
 
 -
 
@@ -846,7 +914,7 @@ login_password: Heslo
 
 -
 
-log_out_title: Odhlásit
+log_out_title: Odhlášeno
 
 -
 
@@ -947,6 +1015,22 @@ page_visibility: Visibility
 -
 
 page_private: Soukromé
+
+-
+
+reset_password_title: Vytvořit heslo
+
+-
+
+reset_password_enter_name_or_email: Zadejte prosím své uživatelské jméno nebo e-mailovou adresu, abyste mohli požádat o ověřovací token vytvořit nové heslo pro váš účet.
+
+-
+
+reset_password_enter_new_password: E-mail včetně autentizačního tokenu vám byl poslán. Zadejte prosím token nyní pod spolu s novým heslem.
+
+-
+
+reset_password_token: Token autentizace
 
 -
 
@@ -1054,7 +1138,7 @@ success_password_changed: Vaše heslo bylo úspěšně změněno!
 
 -
 
-success_log_out: Úspěšně odhlášeno
+success_log_out: Úspěšně jste se odhlásili!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Uložené změny
 -
 
 success_update: Automad byl úspěšně aktualizován!
+
+-
+
+success_user_invite: Pozvánka byla úspěšně odeslána.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Uživatelé
 
 -
 
-sys_user_info: Zde můžete přidat nebo odebrat více uživatelů nebo změnit heslo.
-
--
-
-sys_user_change_password: Změňte si své heslo
-
--
-
-sys_user_change_password_current: Aktuální heslo
-
--
-
-sys_user_change_password_new: Nové heslo
-
--
-
-sys_user_change_password_repeat: Zopakovat heslo
+sys_user_info: Zde naleznete všechny informace týkající se vašeho účtu a změnit své uživatelské jméno, heslo nebo e-mail. Aby bylo možné obnovit heslo e-mailem, ujistěte se, že jste zadali ve Vaild a Aktivní e-mailovou adresu níže.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Přidat uživatele
 
 -
 
-sys_user_add_name: Uživatelské jméno
+sys_user_invite: Pozvat uživatele e-mailem
 
 -
 
-sys_user_add_password: Heslo
+sys_user_name: Uživatelské jméno
 
 -
 
-sys_user_add_repeat: Zopakovat heslo
+sys_user_password: Heslo
+
+-
+
+sys_user_repeat_password: Zopakovat heslo
+
+-
+
+sys_user_email: E-mailem
+
+-
+
+sys_user_alert_no_email: Do účtu ještě nepřidali platnou e-mailovou adresu. Všimněte si, že platná e-mailová adresa je nutná, aby bylo možné obnovit heslo. Klikněte zde a přidejte nyní e-mail.
+
+-
+
+sys_user_change_password: Změňte si své heslo
+
+-
+
+sys_user_current_password: Aktuální heslo
+
+-
+
+sys_user_new_password: nové heslo
 
 -
 
 sys_user_registered: Registrovaní uživatelé
+
+-
+
+sys_user_registered_info: Je také možné zaregistrovat další uživatele, aby bylo možné upravit obsah.
 
 -
 
