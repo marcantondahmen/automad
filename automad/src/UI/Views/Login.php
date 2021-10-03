@@ -67,10 +67,10 @@ class Login extends AbstractView {
 		$fn = $this->fn;
 
 		return <<< HTML
-			{$fn(NoUserNavbar::render($sitename))}
+			{$fn(NoUserNavbar::render($sitename, Text::get('btn_login')))}
 			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				<div class="uk-panel uk-panel-box">
-					{$fn(Text::get('dashboard_title'))}
+					{$fn(Text::get('login_title'))}
 					<hr>
 					<form class="uk-form" method="post">
 						<input 
@@ -81,7 +81,7 @@ class Login extends AbstractView {
 						required 
 						/>
 						<input 
-						class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
+						class="uk-form-controls uk-width-1-1" 
 						type="password" 
 						name="password" 
 						placeholder="{$fn(Text::get('login_password'))}" 
@@ -91,7 +91,7 @@ class Login extends AbstractView {
 							<div>
 								<a 
 								href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=ResetPassword')}" 
-								class="uk-button uk-width-1-1"
+								class="uk-button uk-width-1-1 uk-margin-small-top"
 								>
 									{$fn(Text::get('btn_forgot_password'))}
 								</a>
@@ -99,7 +99,7 @@ class Login extends AbstractView {
 							<div>
 								<button 
 								type="submit" 
-								class="uk-button uk-button-primary uk-width-1-1"
+								class="uk-button uk-button-success uk-width-1-1 uk-margin-small-top"
 								>
 									{$fn(Text::get('btn_login'))}
 								</button>

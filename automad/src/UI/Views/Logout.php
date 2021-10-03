@@ -67,7 +67,7 @@ class Logout extends AbstractView {
 		$fn = $this->fn;
 
 		return <<< HTML
-			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME)))}
+			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME), Text::get('log_out_title')))}
 			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				{$fn($this->alert($isLoggedOut))}
 			</div>
@@ -99,7 +99,7 @@ HTML;
 				<div class="uk-panel uk-panel-box">
 					{$fn(Text::get('success_log_out'))}
 					<hr>
-					<div class="uk-grid uk-grid-width-medium-1-2">
+					<div class="uk-grid uk-grid-width-medium-1-2" data-uk-margin>
 						<div>
 							<a 
 							href="{$fn(AM_BASE_INDEX . '/')}" 
@@ -111,7 +111,7 @@ HTML;
 						<div>
 							<a 
 							href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
-							class="uk-button uk-button-primary uk-width-1-1"
+							class="uk-button uk-button-success uk-width-1-1"
 							>
 								{$fn(Text::get('btn_login'))}
 							</a>

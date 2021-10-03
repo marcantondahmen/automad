@@ -63,7 +63,7 @@ class ResetSuccess {
 			<hr>
 			<a 
 			href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
-			class="uk-button uk-button-primary uk-width-1-1"
+			class="uk-button uk-button-success uk-width-1-1"
 			>
 				{$fn(Text::get('btn_login'))}
 			</a>

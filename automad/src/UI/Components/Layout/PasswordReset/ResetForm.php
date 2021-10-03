@@ -87,7 +87,7 @@ class ResetForm {
 			placeholder="{$fn(Text::get('sys_user_repeat_password'))}"
 			required
 			/>
-			<button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+			<button type="submit" class="uk-button uk-button-success uk-width-1-1">
 				{$fn(Text::get('btn_save_password'))}
 			</button>
 HTML;

@@ -74,7 +74,7 @@ class TokenRequestForm {
 			value="{$fn(Request::query('username'))}"
 			required
 			/>
-			<button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+			<button type="submit" class="uk-button uk-button-success uk-width-1-1">
 				{$fn(Text::get('btn_submit'))}
 			</button>
 HTML;

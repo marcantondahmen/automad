@@ -114,11 +114,11 @@ btn_link: Link
 
 -
 
-btn_log_out: Log out
+btn_log_out: Sign out
 
 -
 
-btn_login: Log in
+btn_login: Sign in
 
 -
 
@@ -788,7 +788,7 @@ error_login: Invalid username or password
 
 -
 
-error_log_out: Log out failed!
+error_log_out: Sign out failed!
 
 -
 
@@ -978,7 +978,7 @@ Other users can be added later via the system preferences.
 -
 
 install_login: ### Move Account File   
-Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can login to the dashboard.
+Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can sign in to the dashboard.
 
 -
 
@@ -1019,7 +1019,7 @@ link_title: Add Link
 
 
 
-login_title: Login
+login_title: Sign in to the dashboard
 
 -
 
@@ -1031,7 +1031,7 @@ login_password: Password
 
 -
 
-log_out_title: Logged Out
+log_out_title: Signed Out
 
 -
 
@@ -1304,7 +1304,7 @@ success_password_changed: Your password has been changed successfully!
 
 -
 
-success_log_out: You have successfully logged out!
+success_log_out: You have successfully signed out!
 
 -
 

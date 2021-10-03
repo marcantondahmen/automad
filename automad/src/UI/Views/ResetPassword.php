@@ -64,7 +64,7 @@ class ResetPassword extends AbstractView {
 		$fn = $this->fn;
 
 		return <<< HTML
-			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME)))}
+			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME), Text::get('reset_password_title')))}
 			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				<form class="uk-form" method="post">
 					<div class="uk-panel uk-panel-box">
