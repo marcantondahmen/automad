@@ -66,6 +66,10 @@ btn_files: Fișiere încărcate
 
 -
 
+btn_forgot_password: Ați uitat parola
+
+-
+
 btn_get_themes: Obțineți mai multe teme
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Mod de editare în pagină
 
 -
 
+btn_invite: Trimite invitatia
+
+-
+
 btn_install: Instalare
 
 -
@@ -102,11 +110,11 @@ btn_link: Legătură
 
 -
 
-btn_log_out: Deconectează-te
+btn_log_out: Sign out
 
 -
 
-btn_login: Autentificare
+btn_login: Loghează-te
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Resetați
 
 -
 
+btn_save_password: Salveaza parola
+
+-
+
 btn_save: Salvează modificările
+
+-
+
+btn_submit: Trimite
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Cauta fisiere
 
 -
 
+email_hello: Buna ziua
+
+-
+
+email_automatic: Acest e-mail a fost trimis automat. Vă rugăm să nu răspundeți la acest e-mail.
+
+-
+
+email_invite_subject: Ați adăugat ca un utilizator nou!
+
+-
+
+email_invite_text: Un nou cont de utilizator pe {} a fost creat pentru tine. Puteți utiliza butonul de mai jos pentru a crea parola.
+
+-
+
+email_invite_button: Creați acum parola
+
+-
+
+email_reset_password_subject: Tokenul dvs. de autentificare
+
+-
+
+email_reset_password_text_top: Tokenul de autentificare solicitat pentru contul dvs. pe {} poate fi găsit mai jos. Puteți utiliza acel token pentru a crea acum o nouă parolă pentru dvs.
+
+-
+
+email_reset_password_text_bottom: În cazul în care nu ați inițiat această solicitare, puteți ignora în siguranță acest mesaj.
+
+-
+
 error_cache_purged: Directorul cache nu a putut fi eliminat!
 
 -
@@ -686,7 +734,7 @@ error_login: Nume de utilizator sau parola incorecte
 
 -
 
-error_log_out: Deconectarea a eșuat!
+error_log_out: Descrieți-vă că a eșuat!
 
 -
 
@@ -711,6 +759,10 @@ error_import: Importul fișierului a eșuat!
 -
 
 error_invalid_username: Nume de utilizator invalid! Un nume de utilizator poate conține numai următoarele caractere:
+
+-
+
+error_invalid_email: E-mail invalid! O adresă de e-mail poate conține numai următoarele caractere:
 
 -
 
@@ -742,7 +794,15 @@ error_password_reuse: Nu refolosiți vechea parolă!
 
 -
 
+error_password_reset_verification: Tokenul de autentificare este nevalid sau a expirat deja!
+
+-
+
 error_permission: Permisiuni refuzate:
+
+-
+
+error_send_email: Eroare la trimiterea de e-mail!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Actualizările nu sunt acceptate de serverul dvs.! A
 -
 
 error_update_permission: Nu se poate rula actualizarea! Permisiuni refuzate!
+
+-
+
+error_user_not_found: Numele de utilizator nevalid sau adresa de e-mail.
+
+-
+
+error_user_no_email: Nu există nicio adresă de e-mail stocată pentru contul de utilizator solicitat.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Adăugați un link
 
 -
 
-login_title: Autentificare
+login_title: Conectați-vă la tabloul de bord
 
 -
 
-login_username: Nume de utilizator
+login_name_or_email: Nume de utilizator sau email
 
 -
 
@@ -846,7 +914,7 @@ login_password: Parola
 
 -
 
-log_out_title: Delogat
+log_out_title: Semnat
 
 -
 
@@ -950,6 +1018,22 @@ page_private: Privat
 
 -
 
+reset_password_title: Creaza parola
+
+-
+
+reset_password_enter_name_or_email: Introduceți numele dvs. de utilizator sau adresa de e-mail pentru a solicita un jeton de autentificare pentru a crea o nouă parolă pentru contul dvs.
+
+-
+
+reset_password_enter_new_password: Un e-mail care include un token de autentificare tocmai ți-a fost trimis. Introduceți acel token acum de mai jos împreună cu o nouă parolă.
+
+-
+
+reset_password_token: Token de autentificare
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -1050,11 +1134,11 @@ success_installed: Instalat cu succes
 
 -
 
-success_password_changed: Parola dvs. a fost schimbată cu succes!
+success_password_changed: Parola dvs. a fost modificată cu succes!
 
 -
 
-success_log_out: Deconectat cu succes
+success_log_out: Te-ai deconectat cu succes!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Modificări salvate
 -
 
 success_update: Automad a fost actualizat cu succes!
+
+-
+
+success_user_invite: Invitația a fost trimisă cu succes.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Utilizatori
 
 -
 
-sys_user_info: Puteți adăuga sau elimina mai mulți utilizatori sau puteți schimba parola aici.
-
--
-
-sys_user_change_password: Schimbați-vă parola
-
--
-
-sys_user_change_password_current: Parola actuală
-
--
-
-sys_user_change_password_new: Parolă Nouă
-
--
-
-sys_user_change_password_repeat: Repeta parola
+sys_user_info: Aici puteți găsi toate informațiile referitoare la contul dvs. și puteți schimba numele de utilizator, parola sau e-mailul. Pentru a putea reseta parola prin e-mail, asigurați-vă că ați introdus o adresă de e-mail VAIL și activă de mai jos.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Adăugați utilizator
 
 -
 
-sys_user_add_name: Nume de utilizator
+sys_user_invite: Invitați utilizatorul prin e-mail
 
 -
 
-sys_user_add_password: Parola
+sys_user_name: Nume de utilizator
 
 -
 
-sys_user_add_repeat: Repeta parola
+sys_user_password: Parola
+
+-
+
+sys_user_repeat_password: Repeta parola
+
+-
+
+sys_user_email: E-mail
+
+-
+
+sys_user_alert_no_email: Nu ați adăugat încă o adresă de e-mail validă în contul dvs. Rețineți că este necesară o adresă de e-mail validă pentru a putea reseta parola. Faceți clic aici pentru a adăuga un e-mail acum.
+
+-
+
+sys_user_change_password: Schimbați-vă parola
+
+-
+
+sys_user_current_password: Parola actuală
+
+-
+
+sys_user_new_password: Parolă Nouă
 
 -
 
 sys_user_registered: Utilizatori Înregistrați
+
+-
+
+sys_user_registered_info: De asemenea, este posibil să se înregistreze alți utilizatori pentru a le permite să editeze conținut.
 
 -
 

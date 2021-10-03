@@ -36,7 +36,9 @@
 
 namespace Automad\UI\Views;
 
-use Automad\UI\Controllers\AccountsController;
+use Automad\UI\Components\Nav\NoUserNavbar;
+use Automad\UI\Components\Notify\Error;
+use Automad\UI\Controllers\UserCollectionController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,67 +62,67 @@ class CreateUser extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$error = AccountsController::install();
+		$error = UserCollectionController::install();
 
 		$fn = $this->fn;
 
 		return <<< HTML
-			<div class="uk-width-medium-1-2 uk-container-center">
-				<div class="uk-animation-fade">
-					<div class="uk-panel uk-panel-box">
-						<div class="uk-panel-title">
-							<i class="uk-icon-user-plus uk-icon-medium"></i>
-						</div>
-						<div class="am-text">
-							{$fn(Text::get('install_help'))}
-						</div>
+			{$fn(Error::render($error))}
+			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME), Text::get('install_title')))}
+			<div class="uk-width-medium-1-2 uk-container-center" data-am-create-user>
+				<div class="uk-panel uk-panel-box">
+					<div class="am-text">
+						{$fn(Text::get('install_help'))}
 					</div>
-					<form class="uk-form uk-margin-small-top" method="post">
+					<hr>
+					<form class="uk-form" method="post">
 						<input 
-						class="uk-form-controls uk-form-large uk-width-1-1" 
+						class="uk-form-controls uk-width-1-1" 
 						type="text" 
 						name="username" 
-						placeholder="{$fn(Text::get('sys_user_add_name'))}" 
+						placeholder="{$fn(Text::get('sys_user_name'))}" 
+						required
+						/>
+						<input 
+						class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
+						type="email" 
+						name="email" 
+						placeholder="{$fn(Text::get('sys_user_email'))}" 
+						required
 						/>
 						<input 
 						class="uk-form-controls uk-width-1-1 uk-margin-small-top" 
 						type="password" 
 						name="password1" 
-						placeholder="{$fn(Text::get('sys_user_add_password'))}" 
+						placeholder="{$fn(Text::get('sys_user_password'))}" 
+						required
 						/>
 						<input 
 						class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
 						type="password" 
 						name="password2" 
-						placeholder="{$fn(Text::get('sys_user_add_repeat'))}" 
+						placeholder="{$fn(Text::get('sys_user_repeat_password'))}" 
+						required
 						/>
-						<div class="uk-text-right">
-							<button 
-							type="submit" 
-							class="uk-button uk-button-success" 
-							data-uk-toggle="{target:'.uk-animation-fade'}"
-							>
-								<i class="uk-icon-download"></i>&nbsp;
-								{$fn(Text::get('btn_accounts_file'))}
-							</button>
-						</div>
+						<button 
+						type="submit" 
+						class="uk-button uk-button-success uk-width-1-1" 
+						>
+							<i class="uk-icon-download"></i>&nbsp;
+							{$fn(Text::get('btn_accounts_file'))}
+						</button>
 					</form>
 				</div>
-				<div class="uk-animation-fade uk-hidden">
-					<div class="uk-panel uk-panel-box uk-margin-small-bottom">
-						<div class="uk-panel-title">
-							<i class="uk-icon-cloud-upload uk-icon-medium"></i>
-						</div>
+				<div class="uk-panel uk-panel-box uk-margin-small-bottom uk-hidden">
+					<div class="am-text">
 						{$fn(Text::get('install_login'))}
 					</div>
-					<div class="uk-text-right">
-						<a href="" class="uk-button uk-button-success">
-							{$fn(Text::get('btn_login'))}
-						</a>
-					</div>
+					<hr>
+					<a href="" class="uk-button uk-button-success uk-width-1-1">
+						{$fn(Text::get('btn_login'))}
+					</a>
 				</div>
 			</div>
-			{$fn($this->error($error))}
 HTML;
 	}
 
@@ -133,22 +135,5 @@ HTML;
 		$title = Text::get('install_title');
 
 		return "$title &mdash; Automad";
-	}
-
-	/**
-	 * Render error notification in case or errors.
-	 *
-	 * @param string|null $error
-	 * @return string the error notification markup
-	 */
-	private function error(?string $error = null) {
-		if (!empty($error)) {
-			return <<< HTML
-				<script type="text/javascript">
-					Automad.Notify.error('$error');
-					$('form input').first().focus();
-				</script>
-HTML;
-		}
 	}
 }

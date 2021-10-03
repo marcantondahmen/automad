@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,64 +36,128 @@
 
 namespace Automad\UI\Models;
 
+use Automad\Types\User;
+use Automad\UI\Components\Email\PasswordResetEmail;
+use Automad\UI\Response;
+use Automad\UI\Utils\Messenger;
+use Automad\UI\Utils\Session;
+use Automad\UI\Utils\Text;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The User class provides all methods related to a user account.
+ * The user model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class UserModel {
 	/**
-	 * Return the currently logged in user.
-	 *
-	 * @return string Username
-	 */
-	public static function getName() {
-		if (isset($_SESSION['username'])) {
-			return $_SESSION['username'];
-		}
-	}
-
-	/**
-	 * Verify login information based on $_POST.
+	 * Change a user password
 	 *
 	 * @param string $username
-	 * @param string $password
-	 * @return bool false on error
+	 * @param string $currentPassword
+	 * @param string $newPassword
+	 * @return Response the response object
 	 */
-	public static function login(string $username, string $password) {
-		$accounts = AccountsModel::get();
+	public function changePassword(string $username, string $currentPassword, string $newPassword) {
+		$Response = new Response();
+		$Messenger = new Messenger();
+		$UserCollectionModel = new UserCollectionModel();
+		$User = $UserCollectionModel->getUser($username);
 
-		if (isset($accounts[$username]) && AccountsModel::passwordVerified($password, $accounts[$username])) {
-			session_regenerate_id(true);
-			$_SESSION['username'] = $username;
+		if ($User->verifyPassword($currentPassword)) {
+			$User->setPasswordHash($newPassword);
 
-			// In case of using a proxy,
-			// it is safer to just refresh the current page instead of rebuilding the currently requested URL.
-			header('Refresh:0');
-
-			die;
+			if ($UserCollectionModel->save($Messenger)) {
+				$Response->setSuccess(Text::get('success_password_changed'));
+			} else {
+				$Response->setError($Messenger->getError());
+			}
+		} else {
+			$Response->setError(Text::get('error_password_current'));
 		}
 
-		return false;
+		return $Response;
 	}
 
 	/**
-	 * Log out user.
+	 * Handle password resetting.
 	 *
+	 * @param string $username
+	 * @param string $newPassword1
+	 * @param string $newPassword2
+	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function logout() {
-		unset($_SESSION);
-		$success = session_destroy();
+	public function resetPassword(string $username, string $newPassword1, string $newPassword2, Messenger $Messenger) {
+		if ($newPassword1 !== $newPassword2) {
+			$Messenger->setError(Text::get('error_password_repeat'));
 
-		if (!isset($_SESSION) && $success) {
-			return true;
-		} else {
 			return false;
+		}
+
+		$UserCollectionModel = new UserCollectionModel();
+		$User = $UserCollectionModel->getUser($username);
+		$User->setPasswordHash($newPassword1);
+
+		if (!$UserCollectionModel->save($Messenger)) {
+			return false;
+		}
+
+		Session::clearResetTokenHash();
+
+		return true;
+	}
+
+	/**
+	 * Send password reset token and store it in session.
+	 *
+	 * @param User $User
+	 * @param Messenger $Messenger
+	 * @return bool true on success
+	 */
+	public function sendPasswordResetToken(User $User, Messenger $Messenger) {
+		$email = $User->email;
+
+		if (!$email) {
+			$Messenger->setError(Text::get('error_user_no_email'));
+
+			return false;
+		}
+
+		$token = strtoupper(substr(hash('sha256', microtime() . $User->getPasswordHash()), 0, 16));
+		$tokenHash = password_hash($token, PASSWORD_DEFAULT);
+		Session::setResetTokenHash($User->name, $tokenHash);
+
+		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
+		$subject = 'Automad: ' . Text::get('email_reset_password_subject');
+		$message = PasswordResetEmail::render($website, $User->name, $token);
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= 'Content-type: text/html; charset=UTF-8';
+
+		if (!mail($email, $subject, $message, $headers)) {
+			$Messenger->setError(Text::get('error_send_email'));
+
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Verify if the passed username/toke combination matches a token hash in the session data array.
+	 *
+	 * @param string $username
+	 * @param string $token
+	 * @return bool true if verified
+	 */
+	public function verifyPasswordResetToken(string $username, string $token) {
+		$tokenHash = Session::getResetTokenHash($username);
+
+		if ($tokenHash) {
+			return password_verify($token, $tokenHash);
 		}
 	}
 }

@@ -36,7 +36,9 @@
 
 namespace Automad\UI\Views;
 
-use Automad\UI\Controllers\UserController;
+use Automad\UI\Components\Nav\NoUserNavbar;
+use Automad\UI\Components\Notify\Error;
+use Automad\UI\Controllers\SessionController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -60,43 +62,53 @@ class Login extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$error = UserController::login();
+		$error = SessionController::login();
+		$sitename = $this->Automad->Shared->get(AM_KEY_SITENAME);
 		$fn = $this->fn;
 
 		return <<< HTML
-			<div class="uk-width-medium-1-2 uk-container-center">
-				<h1>
-					{$fn($this->Automad->Shared->get(AM_KEY_SITENAME))}
-				</h1>
-				<form class="uk-form uk-margin-top" method="post">
-					<input 
-					class="uk-form-controls uk-width-1-1" 
-					type="text" 
-					name="username" 
-					placeholder="{$fn(Text::get('login_username'))}" 
-					required 
-					/>
-					<input 
-					class="uk-form-controls uk-width-1-1 uk-margin-small-bottom" 
-					type="password" 
-					name="password" 
-					placeholder="{$fn(Text::get('login_password'))}" 
-					required 
-					/>
-					<div class="uk-text-right">
-						<a 
-						href="{$fn(AM_BASE_INDEX . '/')}" 
-						class="uk-button uk-button-link"
-						>
-							{$fn(Text::get('btn_home'))}
-						</a>
-						<button type="submit" class="uk-button uk-button-success">
-							{$fn(Text::get('btn_login'))}
-						</button>
-					</div>
-				</form>
+			{$fn(NoUserNavbar::render($sitename, Text::get('btn_login')))}
+			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
+				<div class="uk-panel uk-panel-box">
+					{$fn(Text::get('login_title'))}
+					<hr>
+					<form class="uk-form" method="post">
+						<input 
+						class="uk-form-controls uk-width-1-1" 
+						type="text" 
+						name="name-or-email" 
+						placeholder="{$fn(Text::get('login_name_or_email'))}" 
+						required 
+						/>
+						<input 
+						class="uk-form-controls uk-width-1-1" 
+						type="password" 
+						name="password" 
+						placeholder="{$fn(Text::get('login_password'))}" 
+						required 
+						/>
+						<div class="uk-grid uk-grid-width-medium-1-2">
+							<div>
+								<a 
+								href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=ResetPassword')}" 
+								class="uk-button uk-width-1-1 uk-margin-small-top"
+								>
+									{$fn(Text::get('btn_forgot_password'))}
+								</a>
+							</div>
+							<div>
+								<button 
+								type="submit" 
+								class="uk-button uk-button-success uk-width-1-1 uk-margin-small-top"
+								>
+									{$fn(Text::get('btn_login'))}
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-			{$fn($this->error($error))}
+			{$fn(Error::render($error))}
 HTML;
 	}
 
@@ -109,21 +121,5 @@ HTML;
 		$title = Text::get('login_title');
 
 		return "$title &mdash; Automad";
-	}
-
-	/**
-	 * Render the error notification in case there is one.
-	 *
-	 * @param string|null $error
-	 * @return string the rendered notification
-	 */
-	private function error(?string $error = null) {
-		if (!empty($error)) {
-			return <<< HTML
-				<script type="text/javascript">
-					Automad.Notify.error('$error');
-				</script>
-HTML;
-		}
 	}
 }

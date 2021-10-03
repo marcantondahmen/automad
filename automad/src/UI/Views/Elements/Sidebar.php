@@ -42,7 +42,7 @@ use Automad\UI\Components\Logo;
 use Automad\UI\Components\Nav\Jumpbar;
 use Automad\UI\Components\Nav\SiteTree;
 use Automad\UI\Components\Status\Span;
-use Automad\UI\Models\UserModel;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,7 +62,7 @@ class Sidebar {
 	 * @return string the rendered dashboard sidebar
 	 */
 	public static function render(Automad $Automad) {
-		if (!UserModel::getName()) {
+		if (!Session::getUsername()) {
 			return false;
 		}
 
@@ -139,7 +139,7 @@ class Sidebar {
 										<i class="uk-icon-power-off"></i>&nbsp;
 										{$fn(Text::get('btn_log_out'))}
 										<i class="uk-icon-angle-double-left"></i>
-										{$fn(ucwords(UserModel::getName()))}
+										{$fn(Session::getUsername())}
 										<i class="uk-icon-angle-double-right"></i>
 									</a>
 								</li>

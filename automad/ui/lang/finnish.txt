@@ -66,6 +66,10 @@ btn_files: Ladatut tiedostot
 
 -
 
+btn_forgot_password: Unohtuiko salasana
+
+-
+
 btn_get_themes: Hanki lisää teemoja
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Sivun muokkaustila
 
 -
 
+btn_invite: Lähetä kutsu
+
+-
+
 btn_install: Asentaa
 
 -
@@ -102,7 +110,7 @@ btn_link: Linkki
 
 -
 
-btn_log_out: Kirjautua ulos
+btn_log_out: Kirjaudu ulos
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Nollaa
 
 -
 
+btn_save_password: Tallenna salasana
+
+-
+
 btn_save: Tallenna muutokset
+
+-
+
+btn_submit: Lähetä
 
 -
 
@@ -654,6 +670,38 @@ editor_ui_browse: Selaa tiedostoja
 
 -
 
+email_hello: Hei
+
+-
+
+email_automatic: Tämä sähköposti on lähetetty automaattisesti. Ole hyvä ja älä vastaa tähän sähköpostiin.
+
+-
+
+email_invite_subject: Olet lisätty uusi käyttäjä!
+
+-
+
+email_invite_text: Uusi käyttäjätili {} on luotu sinulle. Voit luoda salasanasi alla olevaan painikkeeseen.
+
+-
+
+email_invite_button: Luo salasana nyt
+
+-
+
+email_reset_password_subject: Todennusmerkki
+
+-
+
+email_reset_password_text_top: Pyydetty todennusmerkki tilillesi {} löytyy alla. Voit käyttää tätä tunnusta, jotta voit luoda uuden salasanan nyt.
+
+-
+
+email_reset_password_text_bottom: Jos et käynnistänyt tätä pyyntöä itse, voit turvallisesti sivuuttaa tämän viestin.
+
+-
+
 error_cache_purged: Välimuistihakemistoa ei voitu tyhjentää!
 
 -
@@ -686,7 +734,7 @@ error_login: Väärä käyttäjänimi tai salasana
 
 -
 
-error_log_out: Kirjautuminen ulos epäonnistui!
+error_log_out: Kirjaudu ulos epäonnistui!
 
 -
 
@@ -711,6 +759,10 @@ error_import: Tiedoston tuonti epäonnistui!
 -
 
 error_invalid_username: Virheellinen käyttäjätunnus! Käyttäjätunnus voi sisältää vain seuraavat merkit:
+
+-
+
+error_invalid_email: Virheellinen sähköpostiosoite! Sähköpostiosoite voi sisältää vain seuraavat merkit:
 
 -
 
@@ -742,7 +794,15 @@ error_password_reuse: Älä käytä vanhaa salasanaasi uudelleen!
 
 -
 
+error_password_reset_verification: Todennusmerkki on virheellinen tai on jo päättynyt jo!
+
+-
+
 error_permission: Estetyt käyttöoikeudet:
+
+-
+
+error_send_email: Virhe lähettämällä sähköpostia!
 
 -
 
@@ -775,6 +835,14 @@ error_update_not_supported: Palvelimesi ei tue päivityksiä! Päivitysohjelma v
 -
 
 error_update_permission: Päivitystä ei voi suorittaa! Luvat evätty!
+
+-
+
+error_user_not_found: Virheellinen käyttäjätunnus tai sähköpostiosoite.
+
+-
+
+error_user_no_email: Pyydetty käyttäjätilille ei ole tallennettu sähköpostiosoitetta.
 
 -
 
@@ -834,11 +902,11 @@ link_title: Lisää linkki
 
 -
 
-login_title: Kirjaudu sisään
+login_title: Kirjaudu sisään kojelautaan
 
 -
 
-login_username: Käyttäjätunnus
+login_name_or_email: Käyttäjätunnus tai sähköpostiosoite
 
 -
 
@@ -846,7 +914,7 @@ login_password: Salasana
 
 -
 
-log_out_title: Kirjautunut ulos
+log_out_title: Kirjautui ulos
 
 -
 
@@ -950,6 +1018,22 @@ page_private: Yksityinen
 
 -
 
+reset_password_title: Luo salasana
+
+-
+
+reset_password_enter_name_or_email: Anna käyttäjätunnuksesi tai sähköpostiosoitteesi, jotta voit pyytää todennusmerkkiä luodaksesi uuden salasanan tilillesi.
+
+-
+
+reset_password_enter_new_password: Sähköposti, johon kuuluu todennusmerkki, on lähettänyt sinulle. Anna kyseinen tunnus nyt uuden salasanan kanssa.
+
+-
+
+reset_password_token: Todennusmerkki
+
+-
+
 sidebar_header_global: Maailmanlaajuinen
 
 -
@@ -1050,11 +1134,11 @@ success_installed: Asennus onnistui
 
 -
 
-success_password_changed: Salasanasi vaihdettiin onnistuneesti!
+success_password_changed: Salasanasi on vaihdettu onnistuneesti!
 
 -
 
-success_log_out: Kirjautuminen ulos onnistuneesti
+success_log_out: Olet onnistuneesti kirjautunut ulos!
 
 -
 
@@ -1071,6 +1155,10 @@ success_saved: Tallennetut muutokset
 -
 
 success_update: Päivitetty Automad!
+
+-
+
+success_user_invite: Kutsu on lähetetty onnistuneesti.
 
 -
 
@@ -1206,23 +1294,7 @@ sys_user: Käyttäjät
 
 -
 
-sys_user_info: Voit lisätä tai poistaa lisää käyttäjiä tai vaihtaa salasanasi täällä.
-
--
-
-sys_user_change_password: Vaihda salasanasi
-
--
-
-sys_user_change_password_current: Nykyinen salasana
-
--
-
-sys_user_change_password_new: Uusi salasana
-
--
-
-sys_user_change_password_repeat: Toista salasana
+sys_user_info: Täältä löydät kaikki tilillesi liittyvät tiedot ja vaihda käyttäjätunnuksesi, salasanasi tai sähköpostiosoitteesi. Jotta voit palauttaa salasanasi sähköpostitse, varmista, että olet antanut alla olevan Vaild- ja aktiivisen sähköpostiosoitteen.
 
 -
 
@@ -1230,19 +1302,47 @@ sys_user_add: Lisää käyttäjä
 
 -
 
-sys_user_add_name: Käyttäjätunnus
+sys_user_invite: Kutsu käyttäjä sähköpostitse
 
 -
 
-sys_user_add_password: Salasana
+sys_user_name: Käyttäjätunnus
 
 -
 
-sys_user_add_repeat: Toista salasana
+sys_user_password: Salasana
+
+-
+
+sys_user_repeat_password: Toista salasana
+
+-
+
+sys_user_email: Sähköposti
+
+-
+
+sys_user_alert_no_email: Et ole vielä lisännyt tiliisi voimassa olevaa sähköpostiosoitetta. Huomaa, että voimassa oleva sähköpostiosoite vaaditaan salasanan palauttamiseksi. Klikkaa tästä lisätäksesi sähköpostin nyt.
+
+-
+
+sys_user_change_password: Vaihda salasanasi
+
+-
+
+sys_user_current_password: Nykyinen salasana
+
+-
+
+sys_user_new_password: uusi salasana
 
 -
 
 sys_user_registered: Rekisteröityneet käyttäjät
+
+-
+
+sys_user_registered_info: On myös mahdollista rekisteröidä muita käyttäjiä, jotta ne voivat muokata sisältöä.
 
 -
 

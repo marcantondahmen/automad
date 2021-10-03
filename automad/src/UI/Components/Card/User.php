@@ -37,7 +37,7 @@
 namespace Automad\UI\Components\Card;
 
 use Automad\Core\Str;
-use Automad\UI\Models\UserModel;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -69,7 +69,7 @@ class User {
 						<i class="uk-icon-user uk-icon-medium"></i>
 					</div>
 					<div class="uk-margin-small-bottom">
-						{$fn(ucwords($user))}
+						$user
 					</div>
 					<div class="am-panel-bottom">
 						<div class="am-panel-bottom-right">
@@ -93,7 +93,7 @@ HTML;
 			return $expression;
 		};
 
-		if ($user == UserModel::getName()) {
+		if ($user == Session::getUsername()) {
 			return <<< HTML
 				<div class="am-panel-bottom-link uk-text-muted">
 					{$fn(Text::get('sys_user_you'))}

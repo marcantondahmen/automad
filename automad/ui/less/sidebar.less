@@ -56,7 +56,11 @@
 		width: @am-sidebar-width;
 		// Always keep 4.25rem free space at right to close sidebar.
 		max-width: ~'calc(100vw - 4.25rem)';
-		border-right: @am-hairline;
+
+		& > [data-am-scroll-box] {
+			background-color: @am-bg;
+			border-right: @am-hairline;
+		}
 
 		@media (max-width: @breakpoint-medium-max) {
 			height: 100vh;

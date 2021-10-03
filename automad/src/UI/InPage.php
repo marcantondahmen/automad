@@ -43,8 +43,8 @@ use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
-use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Prefix;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,7 +61,7 @@ class InPage {
 	 * The constructor.
 	 */
 	public function __construct() {
-		if (UserModel::getName()) {
+		if (Session::getUsername()) {
 			// Prepare text modules.
 			Text::parseModules();
 		}
@@ -74,7 +74,7 @@ class InPage {
 	 * @return string The processed $str
 	 */
 	public function createUI(string $str) {
-		if (UserModel::getName()) {
+		if (Session::getUsername()) {
 			$str = $this->injectAssets($str);
 			$str = $this->injectMarkup($str);
 			$str = $this->processTemporaryEditButtons($str);
@@ -93,7 +93,7 @@ class InPage {
 	 */
 	public function injectTemporaryEditButton(?string $value, string $key, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
-		if (preg_match('/^(\+|\w)/', $key) && UserModel::getName()) {
+		if (preg_match('/^(\+|\w)/', $key) && Session::getUsername()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN .
 						json_encode(array(
 							'context' => $Context->get()->origUrl,
