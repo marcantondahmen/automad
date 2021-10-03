@@ -965,20 +965,19 @@ images_shared: General Images
 
 
 
-install_help: ### Create User Account  
-Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
-      				
-1. 	Create an user account using the form below and download the created file to your computer. 
+install_help: Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
+       
+1. 	Create an user account using the form below and download the created file to your computer.   
 2. 	Move the downloaded file to the "/config" directory within your Automad installation.   
 	(via a file browser, FTP or SSH) 
-				
+       
 After completing these steps, the dashboard should be ready to use. 
 Other users can be added later via the system preferences.
 
 -
 
-install_login: ### Move Account File   
-Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can sign in to the dashboard.
+install_login: Please move now the downloaded file to your "/config" directory. 
+After you have successfully finished this installation process, you can sign in to the dashboard.
 
 -
 
