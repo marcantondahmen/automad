@@ -85,13 +85,13 @@ class ConfigController {
 			$json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
 			$html = <<< HTML
-					<div class="uk-overflow-container">
-						<textarea 
-						class="uk-form-controls uk-width-1-1"
-						name="json"
-						>$json</textarea>
-					</div>
-HTML;
+				<div class="uk-overflow-container">
+					<textarea 
+					class="uk-form-controls uk-width-1-1"
+					name="json"
+					>$json</textarea>
+				</div>
+			HTML;
 
 			$Response->setHtml($html);
 		}

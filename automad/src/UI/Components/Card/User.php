@@ -78,7 +78,7 @@ class User {
 					</div>
 				</div>
 			</li>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -98,7 +98,7 @@ HTML;
 				<div class="am-panel-bottom-link uk-text-muted">
 					{$fn(Text::get('sys_user_you'))}
 				</div>
-HTML;
+			HTML;
 		}
 
 		return <<< HTML
@@ -107,6 +107,6 @@ HTML;
 			data-am-toggle="#$id">
 				<input type="checkbox" name="delete[]" value="$user" />
 			</label>
-HTML;
+		HTML;
 	}
 }

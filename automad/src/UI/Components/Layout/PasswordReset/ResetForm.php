@@ -90,6 +90,6 @@ class ResetForm {
 			<button type="submit" class="uk-button uk-button-success uk-width-1-1">
 				{$fn(Text::get('btn_save_password'))}
 			</button>
-HTML;
+		HTML;
 	}
 }

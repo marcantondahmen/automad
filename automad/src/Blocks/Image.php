@@ -70,12 +70,12 @@ class Image extends AbstractBlock {
 		}
 
 		return <<< HTML
-				<am-img $class>
-					<figure>
-						$img
-						$caption
-					</figure>
-				</am-img>
-HTML;
+			<am-img $class>
+				<figure>
+					$img
+					$caption
+				</figure>
+			</am-img>
+		HTML;
 	}
 }

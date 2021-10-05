@@ -64,28 +64,28 @@ class Edit {
 		$label = Field::labelFromKey($key);
 		$title = $Automad->getPage($context)->get(AM_KEY_TITLE);
 
-		return 	<<<HTML
-				<div id="am-inpage-edit-fields" data-am-path="$path">
-					<div class="am-fullscreen-bar">
-						<div class="uk-flex uk-flex-space-between uk-flex-middle uk-height-1-1">
-							<div class="uk-flex-item-1 uk-text-truncate uk-margin-small-right">
-								<i class="uk-icon-file-text-o"></i>&nbsp;
-								$title
-								<span class="uk-form-label">$label</span>
-							</div>
-							<div class="am-icon-buttons">
-								<button type="submit" class="uk-button uk-button-success" disabled>
-									<i class="uk-icon-check"></i>
-								</button>
-							</div>
-							<button type="button" class="am-fullscreen-bar-button uk-modal-close uk-button">
-								<i class="uk-icon-close"></i> 
+		return <<<HTML
+			<div id="am-inpage-edit-fields" data-am-path="$path">
+				<div class="am-fullscreen-bar">
+					<div class="uk-flex uk-flex-space-between uk-flex-middle uk-height-1-1">
+						<div class="uk-flex-item-1 uk-text-truncate uk-margin-small-right">
+							<i class="uk-icon-file-text-o"></i>&nbsp;
+							$title
+							<span class="uk-form-label">$label</span>
+						</div>
+						<div class="am-icon-buttons">
+							<button type="submit" class="uk-button uk-button-success" disabled>
+								<i class="uk-icon-check"></i>
 							</button>
 						</div>
+						<button type="button" class="am-fullscreen-bar-button uk-modal-close uk-button">
+							<i class="uk-icon-close"></i> 
+						</button>
 					</div>
-					<input type="hidden" name="context" value="$context" />
-					$field
 				</div>
-HTML;
+				<input type="hidden" name="context" value="$context" />
+				$field
+			</div>
+		HTML;
 	}
 }

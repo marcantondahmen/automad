@@ -197,7 +197,7 @@ class PageData {
 				{$fn(Variables::render($this->Automad, $this->settingKeys, $this->data, $Theme, Text::get('page_vars_settings')))}
 				{$fn(UnusedVariables::render($this->Automad, $this->unusedDataKeys, $this->data, Text::get('page_vars_unused')))}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -226,7 +226,7 @@ HTML;
 			>
 				$name
 			</a>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -256,7 +256,7 @@ HTML;
 				$attributes
 				/>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -367,7 +367,7 @@ HTML;
 					</div>
 				</button>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -391,7 +391,7 @@ HTML;
 				{$fn(Field::render($this->Automad, AM_KEY_DATE, $this->Page->get(AM_KEY_DATE), false, null, Text::get('page_date')))}
 				{$fn($this->tags())}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -462,7 +462,7 @@ HTML;
 				value="" 
 				/>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -473,7 +473,7 @@ HTML;
 	private function title() {
 		$fn = $this->fn;
 
-		return	<<<HTML
+		return <<<HTML
 			<div class="uk-form-row">
 				<label for="am-input-data-title" class="uk-form-label uk-margin-top-remove">
 					{$fn(ucwords(AM_KEY_TITLE))}
@@ -489,6 +489,6 @@ HTML;
 				/>
 				{$fn($this->inpage())}
 			</div>
-HTML;
+		HTML;
 	}
 }

@@ -63,19 +63,19 @@ class Debug {
 		}
 
 		return <<< HTML
-				<p>$Text->sys_debug_info</p>
-				<form class="uk-form" data-am-controller="Config::update" data-am-auto-submit>
-					<input type="hidden" name="type" value="debug" />
-					<label class="am-toggle-switch-large" data-am-toggle>
-						$Text->sys_debug_enable
-						<input 
-						type="checkbox" 
-						name="debug" 
-						value="on"
-						$enabled
-						/>
-					</label>
-				</form>
-HTML;
+			<p>$Text->sys_debug_info</p>
+			<form class="uk-form" data-am-controller="Config::update" data-am-auto-submit>
+				<input type="hidden" name="type" value="debug" />
+				<label class="am-toggle-switch-large" data-am-toggle>
+					$Text->sys_debug_enable
+					<input 
+					type="checkbox" 
+					name="debug" 
+					value="on"
+					$enabled
+					/>
+				</label>
+			</form>
+		HTML;
 	}
 }

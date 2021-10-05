@@ -63,21 +63,21 @@ class CheckboxPrivate {
 			$checked = 'checked';
 		}
 
-		return 	<<<HTML
-				<div class="uk-margin-top">
-					<label 
-					class="am-toggle-switch-large" 
-					data-am-toggle
-					>
-						$Text->btn_page_private
-						<input 
-						id="am-checkbox-private" 
-						type="checkbox" 
-						name="$key"
-						$checked 
-						/>
-					</label>
-				</div>
-HTML;
+		return <<<HTML
+			<div class="uk-margin-top">
+				<label 
+				class="am-toggle-switch-large" 
+				data-am-toggle
+				>
+					$Text->btn_page_private
+					<input 
+					id="am-checkbox-private" 
+					type="checkbox" 
+					name="$key"
+					$checked 
+					/>
+				</label>
+			</div>
+		HTML;
 	}
 }

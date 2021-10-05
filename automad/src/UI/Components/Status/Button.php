@@ -59,14 +59,14 @@ class Button {
 		$Text = Text::getObject();
 
 		return <<< HTML
-				<a
-		 		href="?view=System#$tab"
-				class="uk-button uk-button-large uk-width-1-1 uk-text-left uk-text-truncate"
-				data-am-status="$status"
-		 		>
-					<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp; 
-					$Text->btn_getting_data
-				</a>
-HTML;
+			<a
+			href="?view=System#$tab"
+			class="uk-button uk-button-large uk-width-1-1 uk-text-left uk-text-truncate"
+			data-am-status="$status"
+			>
+				<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-justify"></i>&nbsp; 
+				$Text->btn_getting_data
+			</a>
+		HTML;
 	}
 }

@@ -100,6 +100,6 @@ class SelectImage {
 			</div>
 			{$fn(FormSelectImage::render($pageImages, Text::get('images_page'), true))}
 			{$fn(FormSelectImage::render($sharedImages, Text::get('images_shared')))}
-HTML;
+		HTML;
 	}
 }

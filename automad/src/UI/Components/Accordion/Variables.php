@@ -77,6 +77,6 @@ class Variables {
 			<div class="uk-accordion-content">
 				{$fn(Group::render($Automad, $keys, $data, false, $Theme))}
 			</div>
-HTML;
+		HTML;
 	}
 }

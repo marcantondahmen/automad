@@ -62,26 +62,26 @@ class Readme {
 			$readme = Str::markdown(file_get_contents($readme));
 
 			return <<< HTML
-					<div id="$id" class="uk-modal">
-						<div class="uk-modal-dialog uk-modal-dialog-large">
-							<div class="uk-modal-header">
-								Readme
-								<a href="#" class="uk-modal-close uk-close"></a>
-							</div>
-							<div class="am-text">
-								$readme
-							</div>
-							<div class="uk-modal-footer uk-text-right">
-								<button 
-								class="uk-modal-close uk-button"
-								>
-									<i class="uk-icon-close"></i>&nbsp;
-									$Text->btn_close
-								</button>
-							</div>
+				<div id="$id" class="uk-modal">
+					<div class="uk-modal-dialog uk-modal-dialog-large">
+						<div class="uk-modal-header">
+							Readme
+							<a href="#" class="uk-modal-close uk-close"></a>
+						</div>
+						<div class="am-text">
+							$readme
+						</div>
+						<div class="uk-modal-footer uk-text-right">
+							<button 
+							class="uk-modal-close uk-button"
+							>
+								<i class="uk-icon-close"></i>&nbsp;
+								$Text->btn_close
+							</button>
 						</div>
 					</div>
-HTML;
+				</div>
+			HTML;
 		}
 	}
 }

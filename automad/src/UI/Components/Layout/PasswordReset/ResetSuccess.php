@@ -67,6 +67,6 @@ class ResetSuccess {
 			>
 				{$fn(Text::get('btn_login'))}
 			</a>
-HTML;
+		HTML;
 	}
 }

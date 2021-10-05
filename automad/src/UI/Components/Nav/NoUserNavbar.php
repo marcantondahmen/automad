@@ -68,6 +68,6 @@ class NoUserNavbar {
 					</a>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 }

@@ -72,7 +72,7 @@ class ResetPassword extends AbstractView {
 					</div>
 				</form>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**

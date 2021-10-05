@@ -79,15 +79,15 @@ class Language {
 		);
 
 		return <<< HTML
-				<p>$Text->sys_language_info</p>
-				<form 
-				class="uk-form uk-form-stacked"
-				data-am-controller="Config::update" 
-				data-am-auto-submit
-				>
-					<input type="hidden" name="type" value="language" />
-					$button
-				</form>
-HTML;
+			<p>$Text->sys_language_info</p>
+			<form 
+			class="uk-form uk-form-stacked"
+			data-am-controller="Config::update" 
+			data-am-auto-submit
+			>
+				<input type="hidden" name="type" value="language" />
+				$button
+			</form>
+		HTML;
 	}
 }

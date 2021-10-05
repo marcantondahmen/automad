@@ -61,7 +61,7 @@ abstract class AbstractEmailBody {
 			font-size: 18px; 
 			line-height: 48px;
 		"
-HTML;
+	HTML;
 
 	/**
 	 * The basic h1 style.
@@ -84,37 +84,37 @@ HTML;
 		$Text = Text::getObject();
 
 		return <<< HTML
-				<!doctype html>
-				<html>
-					<head>
-						<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-						<meta name="viewport" content="width=device-width, initial-scale=1">
-					</head>
-					<body style="
-						padding: 15px 0; 
-						font-family: -apple-system, BlinkMacSystemFont, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-						font-size: 16px; 
-						line-height: 22px;
-					">
-						<table border="0" cellpadding="0" cellspacing="0" height="90%" width="95%">
-							<tbody>
-								<tr>
-									<td width="25%"></td>
-									<td width="400px" style="min-width: 400px; max-width: 400px;">
-										$content
-										<p $pStyle>
-											$Text->email_automatic
-											<br>
-											<br>
-											<b>Automad</b>
-										</p>
-									</td>
-									<td width="25%"></td>
-								</tr>
-							</tbody>
-						</table>
-					</body>
-				</html>
-				HTML;
+			<!doctype html>
+			<html>
+				<head>
+					<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+					<meta name="viewport" content="width=device-width, initial-scale=1">
+				</head>
+				<body style="
+					padding: 15px 0; 
+					font-family: -apple-system, BlinkMacSystemFont, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+					font-size: 16px; 
+					line-height: 22px;
+				">
+					<table border="0" cellpadding="0" cellspacing="0" height="90%" width="95%">
+						<tbody>
+							<tr>
+								<td width="25%"></td>
+								<td width="400px" style="min-width: 400px; max-width: 400px;">
+									$content
+									<p $pStyle>
+										$Text->email_automatic
+										<br>
+										<br>
+										<b>Automad</b>
+									</p>
+								</td>
+								<td width="25%"></td>
+							</tr>
+						</tbody>
+					</table>
+				</body>
+			</html>
+			HTML;
 	}
 }

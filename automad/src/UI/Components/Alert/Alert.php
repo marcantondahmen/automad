@@ -58,6 +58,6 @@ class Alert {
 			<div class="uk-alert $class">
 				$text
 			</div>
-HTML;
+		HTML;
 	}
 }

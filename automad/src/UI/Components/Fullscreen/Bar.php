@@ -55,29 +55,29 @@ class Bar {
 	 */
 	public static function render(string $title, string $label) {
 		return <<< HTML
-				<button 
-				type="button" 
-				class="am-fullscreen-bar-button"
-				data-am-fullscreen
-				>
-					<i class="uk-icon-expand"></i>
-				</button>
-				<div class="am-fullscreen-bar">
-					<div class="uk-flex uk-flex-space-between uk-flex-middle uk-height-1-1">
-						<div class="uk-flex-item-1 uk-text-truncate uk-margin-small-right">
-							<span class="uk-hidden-small"><i class="uk-icon-file-text-o"></i>&nbsp;</span>
-							$title
-							<span class="uk-form-label">$label</span>
-						</div>
-						<button 
-						type="button" 
-						class="am-fullscreen-bar-button"
-						data-am-fullscreen
-						>
-							<i class="uk-icon-compress"></i>
-						</button>
+			<button 
+			type="button" 
+			class="am-fullscreen-bar-button"
+			data-am-fullscreen
+			>
+				<i class="uk-icon-expand"></i>
+			</button>
+			<div class="am-fullscreen-bar">
+				<div class="uk-flex uk-flex-space-between uk-flex-middle uk-height-1-1">
+					<div class="uk-flex-item-1 uk-text-truncate uk-margin-small-right">
+						<span class="uk-hidden-small"><i class="uk-icon-file-text-o"></i>&nbsp;</span>
+						$title
+						<span class="uk-form-label">$label</span>
 					</div>
+					<button 
+					type="button" 
+					class="am-fullscreen-bar-button"
+					data-am-fullscreen
+					>
+						<i class="uk-icon-compress"></i>
+					</button>
 				</div>
-HTML;
+			</div>
+		HTML;
 	}
 }

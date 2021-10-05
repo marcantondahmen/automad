@@ -61,6 +61,6 @@ class Error {
 			<script type="text/javascript">
 				Automad.Notify.error('$error');
 			</script>
-HTML;
+		HTML;
 	}
 }

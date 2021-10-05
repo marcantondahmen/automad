@@ -140,8 +140,6 @@ class Dashboard {
 	 * @return string the rendered output.
 	 */
 	public function get() {
-		$this->output = preg_replace('/^\t{0,3}/m', '', $this->output);
-
 		return Prefix::tags($this->output);
 	}
 

@@ -59,24 +59,24 @@ class Jumpbar {
 		}
 
 		return <<< HTML
-				<form 
-				class="uk-form uk-width-1-1" 
-				data-am-controller="UI::jump" 
-				data-am-jumpbar
+			<form 
+			class="uk-form uk-width-1-1" 
+			data-am-controller="UI::jump" 
+			data-am-jumpbar
+			>
+				<div 
+				class="uk-autocomplete uk-width-1-1"
 				>
-					<div 
-					class="uk-autocomplete uk-width-1-1"
-					>
-						<input
-						class="uk-form-controls uk-width-1-1"
-						name="target"
-						type="search"
-						placeholder="$placeholder"
-						$tooltip
-						data-am-watch-exclude
-						/>
-					</div> 
-				</form>
-HTML;
+					<input
+					class="uk-form-controls uk-width-1-1"
+					name="target"
+					type="search"
+					placeholder="$placeholder"
+					$tooltip
+					data-am-watch-exclude
+					/>
+				</div> 
+			</form>
+		HTML;
 	}
 }

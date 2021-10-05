@@ -77,6 +77,6 @@ class TokenRequestForm {
 			<button type="submit" class="uk-button uk-button-success uk-width-1-1">
 				{$fn(Text::get('btn_submit'))}
 			</button>
-HTML;
+		HTML;
 	}
 }

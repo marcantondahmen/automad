@@ -134,7 +134,7 @@ class Navbar {
 					</div>
 				</div>
 			</nav>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -160,7 +160,7 @@ HTML;
 				>
 					<i class="uk-icon-check"></i>
 				</button>
-HTML;
+			HTML;
 		}
 	}
 }

@@ -37,8 +37,8 @@
 namespace Automad\UI\Components\System;
 
 use Automad\UI\Components\Form\Select;
-use Automad\UI\Utils\Text;
 use Automad\UI\Utils\FileSystem;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -88,61 +88,61 @@ class Cache {
 
 		if ($tmp = FileSystem::getTmpDir()) {
 			$purge = <<< HTML
-					<!-- Purge Cache -->
-					<p>$Text->sys_cache_purge_info</p>
-					<form data-am-controller="Cache::purge">
-						<button type="submit" class="uk-button uk-button-success uk-button-large">
-							$Text->sys_cache_purge
-							&nbsp;<i class="uk-icon-angle-right"></i>
-							&nbsp;<span class="uk-badge">$tmp</span>
-						</button>
-					</form>
-HTML;
+				<!-- Purge Cache -->
+				<p>$Text->sys_cache_purge_info</p>
+				<form data-am-controller="Cache::purge">
+					<button type="submit" class="uk-button uk-button-success uk-button-large">
+						$Text->sys_cache_purge
+						&nbsp;<i class="uk-icon-angle-right"></i>
+						&nbsp;<span class="uk-badge">$tmp</span>
+					</button>
+				</form>
+			HTML;
 		}
 
 		return <<< HTML
-				<p>$Text->sys_cache_info</p>
-				<!-- Cache Enable / Settings -->
-				<form 
-				class="uk-form uk-form-stacked" 
-				data-am-controller="Config::update" 
-				data-am-auto-submit
+			<p>$Text->sys_cache_info</p>
+			<!-- Cache Enable / Settings -->
+			<form 
+			class="uk-form uk-form-stacked" 
+			data-am-controller="Config::update" 
+			data-am-auto-submit
+			>
+				<!-- Cache Enable -->
+				<input type="hidden" name="type" value="cache" />		
+				<label 
+				class="am-toggle-switch-large" 
+				data-am-toggle="#am-cache-settings, #am-cache-actions"
 				>
-					<!-- Cache Enable -->
-					<input type="hidden" name="type" value="cache" />		
-					<label 
-					class="am-toggle-switch-large" 
-					data-am-toggle="#am-cache-settings, #am-cache-actions"
-					>
-						$Text->sys_cache_enable
-						<input 
-						type="checkbox" 
-						name="cache[enabled]" 
-						value="on"
-						$enabled 
-						/>
-					</label>
-					<!-- Cache Settings -->
-					<div id="am-cache-settings" class="am-toggle-container">
-						<!-- Cache Monitor Delay -->
-						<p class="uk-margin-large-top">$Text->sys_cache_monitor_info</p>
-						$monitor
-						<!-- Cache Lifetime -->
-						<p class="uk-margin-large-top">$Text->sys_cache_lifetime_info</p>
-						$lifetime
-					</div>	
-				</form>
-				<div id="am-cache-actions" class="am-toggle-container uk-margin-large-top">
-					<!-- Clear Cache -->
-					<p>$Text->sys_cache_clear_info</p>	
-					<form data-am-controller="Cache::clear">
-						<button type="submit" class="uk-button uk-button-success uk-button-large uk-margin-bottom">
-							<i class="uk-icon-refresh"></i>&nbsp;
-							$Text->sys_cache_clear
-						</button>
-					</form>	
-					$purge
-				</div>
-HTML;
+					$Text->sys_cache_enable
+					<input 
+					type="checkbox" 
+					name="cache[enabled]" 
+					value="on"
+					$enabled 
+					/>
+				</label>
+				<!-- Cache Settings -->
+				<div id="am-cache-settings" class="am-toggle-container">
+					<!-- Cache Monitor Delay -->
+					<p class="uk-margin-large-top">$Text->sys_cache_monitor_info</p>
+					$monitor
+					<!-- Cache Lifetime -->
+					<p class="uk-margin-large-top">$Text->sys_cache_lifetime_info</p>
+					$lifetime
+				</div>	
+			</form>
+			<div id="am-cache-actions" class="am-toggle-container uk-margin-large-top">
+				<!-- Clear Cache -->
+				<p>$Text->sys_cache_clear_info</p>	
+				<form data-am-controller="Cache::clear">
+					<button type="submit" class="uk-button uk-button-success uk-button-large uk-margin-bottom">
+						<i class="uk-icon-refresh"></i>&nbsp;
+						$Text->sys_cache_clear
+					</button>
+				</form>	
+				$purge
+			</div>
+		HTML;
 	}
 }

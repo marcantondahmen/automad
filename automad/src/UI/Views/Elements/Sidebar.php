@@ -148,7 +148,7 @@ class Sidebar {
 					</div>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -170,6 +170,6 @@ HTML;
 					$sitename
 				</a>
 			</li>
-HTML;
+		HTML;
 	}
 }

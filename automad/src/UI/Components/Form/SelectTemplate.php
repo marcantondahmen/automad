@@ -66,16 +66,16 @@ class SelectTemplate {
 
 		// Create HTML.
 		$html = <<< HTML
-				<div 
-				class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" 
-				data-uk-form-select
-				> 
-					<span></span>&nbsp;
-					<span class="uk-float-right">
-						<i class="uk-icon-caret-down"></i>
-					</span>
-					<select class="uk-width-1-1" name="$name">
-HTML;
+			<div 
+			class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" 
+			data-uk-form-select
+			> 
+				<span></span>&nbsp;
+				<span class="uk-float-right">
+					<i class="uk-icon-caret-down"></i>
+				</span>
+				<select class="uk-width-1-1" name="$name">
+		HTML;
 
 		// List templates of current main theme.
 		if ($mainTheme) {
@@ -118,9 +118,9 @@ HTML;
 		}
 
 		$html .= <<< HTML
-					</select>
-				 </div>
-HTML;
+				</select>
+			</div>
+		HTML;
 
 		return $html;
 	}

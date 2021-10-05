@@ -85,8 +85,8 @@ class Theme {
 
 		if ($Theme->readme) {
 			$icon = <<< HTML
-					<a href="#{$id}-modal" data-uk-modal>$icon</a>
-HTML;
+				<a href="#{$id}-modal" data-uk-modal>$icon</a>
+			HTML;
 		}
 
 		$badge = '';
@@ -96,81 +96,81 @@ HTML;
 
 		if ($Theme->version) {
 			$badge = <<< HTML
-					<div class="uk-panel-badge uk-badge">$Theme->version</div>
-HTML;
+				<div class="uk-panel-badge uk-badge">$Theme->version</div>
+			HTML;
 		}
 
 		if ($Theme->author) {
 			$author = <<< HTML
-					<div class="uk-text-small uk-hidden-small">
-						<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
-						$Theme->author
-					</div>
-HTML;
+				<div class="uk-text-small uk-hidden-small">
+					<i class="uk-icon-copyright uk-icon-justify"></i>&nbsp;
+					$Theme->author
+				</div>
+			HTML;
 		}
 
 		if ($Theme->license) {
 			$license = <<< HTML
-					<div class="uk-text-small uk-hidden-small">
-						<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
-						$Theme->license
-					</div>
-HTML;
+				<div class="uk-text-small uk-hidden-small">
+					<i class="uk-icon-balance-scale uk-icon-justify"></i>&nbsp;
+					$Theme->license
+				</div>
+			HTML;
 		}
 
 		if ($Theme->readme) {
 			$readmeButton = <<< HTML
-							<div class="am-panel-bottom-left">
-								<a 
-								href="#{$id}-modal"
-								class="am-panel-bottom-link"
-								title="$Text->btn_readme"
-								data-uk-tooltip
-								data-uk-modal
-								>
-									<i class="uk-icon-file-text-o"></i>
-								</a>
-							</div>
-HTML;
+				<div class="am-panel-bottom-left">
+					<a 
+					href="#{$id}-modal"
+					class="am-panel-bottom-link"
+					title="$Text->btn_readme"
+					data-uk-tooltip
+					data-uk-modal
+					>
+						<i class="uk-icon-file-text-o"></i>
+					</a>
+				</div>
+			HTML;
 		}
 
 		$readme = Readme::render($id . '-modal', $Theme->readme);
 
 		return <<< HTML
-					$readme
-					<div id="$id" class="uk-panel uk-panel-box">
-						<div class="uk-panel-teaser">
-							<div class="am-cover-4by3">
-								$icon
-							</div>
-						</div>
-						$badge
-						<div class="uk-panel-title">
-							$Theme->name
-						</div>
-						<div class="uk-text-small uk-hidden-small">
-							$Theme->description
-						</div>
-						$author
-						$license
-						<div class="am-panel-bottom">
-							$readmeButton	
-							<div class="am-panel-bottom-right">
-								<label 
-								class="am-toggle-checkbox am-panel-bottom-link" 
-								data-am-toggle="#$id"
-								>
-									<input 
-									type="radio" 
-									name="data[$key]" 
-									value="$Theme->path" 
-									data-am-modal-on-change="#am-apply-theme-modal"
-									$attrChecked 
-									/>
-								</label>
-							</div>
-						</div>
+			$readme
+			<div id="$id" class="uk-panel uk-panel-box">
+				<div class="uk-panel-teaser">
+					<div class="am-cover-4by3">
+						$icon
 					</div>
-HTML;
+				</div>
+				$badge
+				<div class="uk-panel-title">
+					$Theme->name
+				</div>
+				<div class="uk-text-small uk-hidden-small">
+					$Theme->description
+				</div>
+				$author
+				$license
+				<div class="am-panel-bottom">
+					$readmeButton	
+					<div class="am-panel-bottom-right">
+						<label 
+						class="am-toggle-checkbox am-panel-bottom-link" 
+						data-am-toggle="#$id"
+						>
+							<input 
+							type="radio" 
+							name="data[$key]" 
+							value="$Theme->path" 
+							data-am-modal-on-change="#am-apply-theme-modal"
+							$attrChecked 
+							/>
+						</label>
+					</div>
+				</div>
+			</div>
+		HTML;
 	}
 }

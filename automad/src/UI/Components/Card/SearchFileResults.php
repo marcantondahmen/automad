@@ -91,6 +91,6 @@ class SearchFileResults {
 				</div>
 				$results
 			</div>
-HTML;
+		HTML;
 	}
 }

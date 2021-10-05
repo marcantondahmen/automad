@@ -67,12 +67,12 @@ class Quote extends AbstractBlock {
 		$class = self::classAttr($classes);
 
 		return <<< HTML
-				<am-quote $class>
-					<figure>
-						<blockquote>$data->text</blockquote>
-						<figcaption>$data->caption</figcaption>
-					</figure>
-				</am-quote>
-HTML;
+			<am-quote $class>
+				<figure>
+					<blockquote>$data->text</blockquote>
+					<figcaption>$data->caption</figcaption>
+				</figure>
+			</am-quote>
+		HTML;
 	}
 }

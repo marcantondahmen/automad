@@ -94,7 +94,8 @@ class Response {
 					>
 						<i class="am-u-icon-bug"></i>
 					</a>
-HTML;
+				HTML;
+
 				$Response->setStatus($html);
 			}
 		}

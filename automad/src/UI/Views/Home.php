@@ -146,7 +146,7 @@ class Home extends AbstractView {
 					</div>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -179,7 +179,7 @@ HTML;
 						{$fn(Text::get('sys_headless_enable'))}
 					</a>
 				</li>
-HTML;
+			HTML;
 		} else {
 			return <<< HTML
 				<li class="uk-margin-small-bottom">
@@ -190,7 +190,7 @@ HTML;
 						{$fn(Text::get('btn_inpage_edit'))}
 					</a>
 				</li>
-HTML;
+			HTML;
 		}
 	}
 
@@ -207,10 +207,10 @@ HTML;
 			$fn = $this->fn;
 
 			return <<< HTML
-					<a href="?view=System#{$fn(Str::slug(Text::get('sys_user')))}">
-						{$fn(Danger::render(Text::get('sys_user_alert_no_email')))}
-					</a>
-HTML;
+				<a href="?view=System#{$fn(Str::slug(Text::get('sys_user')))}">
+					{$fn(Danger::render(Text::get('sys_user_alert_no_email')))}
+				</a>
+			HTML;
 		}
 	}
 }

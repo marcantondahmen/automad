@@ -109,7 +109,7 @@ class Login extends AbstractView {
 				</div>
 			</div>
 			{$fn(Error::render($error))}
-HTML;
+		HTML;
 	}
 
 	/**

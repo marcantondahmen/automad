@@ -160,35 +160,35 @@ class InPage {
 		}
 
 		$html = <<< HTML
-				<div class="am-inpage" data-am-base-url="$urlBase">
-					<div class="am-inpage-menubar">
-						<div class="uk-button-group">
-							<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
-							<a href="$urlData" title="$Text->btn_data" $attr><i class="uk-icon-file-text-o"></i></a>
-							<a href="$urlFiles" title="$Text->btn_files" $attr><i class="uk-icon-folder-open-o"></i></a>
-							<a href="$urlSys" title="$Text->sys_title" $attr><i class="uk-icon-sliders"></i></a>
-							<a href="#" class="am-drag-handle am-inpage-menu-button">
-								<i class="uk-icon-arrows"></i>
-							</a>
-						</div>
+			<div class="am-inpage" data-am-base-url="$urlBase">
+				<div class="am-inpage-menubar">
+					<div class="uk-button-group">
+						<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
+						<a href="$urlData" title="$Text->btn_data" $attr><i class="uk-icon-file-text-o"></i></a>
+						<a href="$urlFiles" title="$Text->btn_files" $attr><i class="uk-icon-folder-open-o"></i></a>
+						<a href="$urlSys" title="$Text->sys_title" $attr><i class="uk-icon-sliders"></i></a>
+						<a href="#" class="am-drag-handle am-inpage-menu-button">
+							<i class="uk-icon-arrows"></i>
+						</a>
 					</div>
-					<div id="am-inpage-edit-modal" class="am-fullscreen-modal uk-modal">
-						<div class="uk-modal-dialog uk-modal-dialog-blank">
-							<div class="uk-container uk-container-center">
-								<form 
-								class="uk-form uk-form-stacked" 
-								data-am-inpage-controller="${urlGui}?controller=InPage::edit"
-								>
-									<input type="hidden" name="url" value="$request" />
-									<input type="hidden" name="query" value="$queryString" />
-								</form>
-							</div>
+				</div>
+				<div id="am-inpage-edit-modal" class="am-fullscreen-modal uk-modal">
+					<div class="uk-modal-dialog uk-modal-dialog-blank">
+						<div class="uk-container uk-container-center">
+							<form 
+							class="uk-form uk-form-stacked" 
+							data-am-inpage-controller="${urlGui}?controller=InPage::edit"
+							>
+								<input type="hidden" name="url" value="$request" />
+								<input type="hidden" name="query" value="$queryString" />
+							</form>
 						</div>
 					</div>
 				</div>
-				$modalSelectImage
-				$modalLink
-HTML;
+			</div>
+			$modalSelectImage
+			$modalLink
+		HTML;
 
 		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);
 	}
@@ -222,18 +222,18 @@ HTML;
 			$name = ucwords(str_replace('+', '', preg_replace('/([A-Z])/', ' $1', $matches[2])));
 
 			$html = <<< HTML
-					<span class="am-inpage">
-						<a 
-						href="#am-inpage-edit-modal" 
-						class="am-inpage-edit-button" 
-						data-uk-modal="{modal:false}" 
-						data-am-inpage-content='$json'
-						>
-							<i class="uk-icon-pencil"></i>&nbsp;
-							$name 
-						</a>
-					</span>
-HTML;
+				<span class="am-inpage">
+					<a 
+					href="#am-inpage-edit-modal" 
+					class="am-inpage-edit-button" 
+					data-uk-modal="{modal:false}" 
+					data-am-inpage-content='$json'
+					>
+						<i class="uk-icon-pencil"></i>&nbsp;
+						$name 
+					</a>
+				</span>
+			HTML;
 
 			return Prefix::attributes($html);
 		}, $str);

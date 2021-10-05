@@ -150,16 +150,17 @@ class Field {
 		} elseif (strpos($key, '+') === 0) {
 			if (!self::isInPage()) {
 				$help = Text::get('btn_help');
+
 				$html .= <<<HTML
-						<a 
-						href="https://automad.org/user-guide/using-blocks" 
-						class="am-form-block-help uk-button uk-button-mini" 
-						target="_blank"
-						>
-							<i class="uk-icon-lightbulb-o"></i>&nbsp;
-							$help
-						</a>
-HTML;
+					<a 
+					href="https://automad.org/user-guide/using-blocks" 
+					class="am-form-block-help uk-button uk-button-mini" 
+					target="_blank"
+					>
+						<i class="uk-icon-lightbulb-o"></i>&nbsp;
+						$help
+					</a>
+				HTML;
 			}
 
 			$editorId = 'am-block-editor-' . str_replace('+', '', $key);
@@ -185,12 +186,12 @@ HTML;
 	 */
 	private static function fieldBlockEditor(string $editorId, string $fullscreenBar, string $attr, $value) {
 		return <<< HTML
-				<div class="am-block-editor" data-am-block-editor="$editorId">		
-					$fullscreenBar
-					<input type="hidden" $attr value="$value">
-					<div id="$editorId" class="am-text am-block-editor-container am-fullscreen-container am-fullscreen-container-large"></div>
-				</div>
-HTML;
+			<div class="am-block-editor" data-am-block-editor="$editorId">		
+				$fullscreenBar
+				<input type="hidden" $attr value="$value">
+				<div id="$editorId" class="am-text am-block-editor-container am-fullscreen-container am-fullscreen-container-large"></div>
+			</div>
+		HTML;
 	}
 
 	/**
@@ -236,17 +237,17 @@ HTML;
 			}
 
 			return <<< HTML
-					<div 
-					class="uk-button uk-text-left uk-form-select uk-width-1-1" 
-					data-uk-form-select="{activeClass:''}" 
-					data-am-toggle-default="$shared"
-					> 
-						&nbsp; $text
-						<select $attr>
-							$optionsHtml
-						</select> 
-					</div>
-HTML;
+				<div 
+				class="uk-button uk-text-left uk-form-select uk-width-1-1" 
+				data-uk-form-select="{activeClass:''}" 
+				data-am-toggle-default="$shared"
+				> 
+					&nbsp; $text
+					<select $attr>
+						$optionsHtml
+					</select> 
+				</div>
+			HTML;
 		} else {
 			$checked = '';
 
@@ -255,11 +256,11 @@ HTML;
 			}
 
 			return <<< HTML
-					<label class="am-toggle-switch uk-button" data-am-toggle> 
-						$text
-						<input $attr type="checkbox" $checked>
-					</label>
-HTML;
+				<label class="am-toggle-switch uk-button" data-am-toggle> 
+					$text
+					<input $attr type="checkbox" $checked>
+				</label>
+			HTML;
 		}
 	}
 
@@ -272,11 +273,11 @@ HTML;
 	 */
 	private static function fieldColor(string $color, string $attr) {
 		return <<< HTML
-				<div class="uk-flex" data-am-colorpicker> 
-				 	<input type="color" value="$color" />
-				 	<input type="text" class="uk-form-controls uk-width-1-1" $attr />
-				</div>
-HTML;
+			<div class="uk-flex" data-am-colorpicker> 
+				<input type="color" value="$color" />
+				<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+			</div>
+		HTML;
 	}
 
 	/**
@@ -289,31 +290,31 @@ HTML;
 	 */
 	private static function fieldDate(string $attr, string $attrDate, string $attrTime) {
 		return <<< HTML
-				<div class="uk-flex" data-am-datetime>
-					<input type="hidden" $attr />
-					<div class="uk-form-icon"> 
-						<i class="uk-icon-calendar"></i>
-						<input 
-						type="text" 
-						class="uk-width-1-1" 
-						$attrDate 
-						data-uk-datepicker="{format:'YYYY-MM-DD',pos:'bottom'}" 
-						/>
-					</div>
-					<div class="uk-form-icon">
-						<i class="uk-icon-clock-o"></i>
-						<input 
-						type="text" 
-						class="uk-width-1-1" 
-						$attrTime 
-						data-uk-timepicker="{format:'24h'}" 
-						/>
-					</div>
-					<button type="button" class="uk-button" data-am-clear-date>
-						<i class="uk-icon-remove"></i>
-					</button>
+			<div class="uk-flex" data-am-datetime>
+				<input type="hidden" $attr />
+				<div class="uk-form-icon"> 
+					<i class="uk-icon-calendar"></i>
+					<input 
+					type="text" 
+					class="uk-width-1-1" 
+					$attrDate 
+					data-uk-datepicker="{format:'YYYY-MM-DD',pos:'bottom'}" 
+					/>
 				</div>
-HTML;
+				<div class="uk-form-icon">
+					<i class="uk-icon-clock-o"></i>
+					<input 
+					type="text" 
+					class="uk-width-1-1" 
+					$attrTime 
+					data-uk-timepicker="{format:'24h'}" 
+					/>
+				</div>
+				<button type="button" class="uk-button" data-am-clear-date>
+					<i class="uk-icon-remove"></i>
+				</button>
+			</div>
+		HTML;
 	}
 
 	/**
@@ -325,11 +326,11 @@ HTML;
 	 */
 	private static function fieldDefault(string $attr, $value) {
 		return <<< HTML
-				<textarea 
-				$attr 
-				class="uk-form-controls uk-width-1-1" rows="10"
-				>$value</textarea>
-HTML;
+			<textarea 
+			$attr 
+			class="uk-form-controls uk-width-1-1" rows="10"
+			>$value</textarea>
+		HTML;
 	}
 
 	/**
@@ -342,17 +343,17 @@ HTML;
 		$Text = Text::getObject();
 
 		return <<< HTML
-				<div data-am-select-image-field>
-					<figure></figure>
-					<div>
-						<input type="text" class="uk-form-controls uk-width-1-1" $attr />
-						<button type="button" class="uk-button uk-text-muted">
-							<i class="uk-icon-folder-open-o"></i>&nbsp;
-							{$Text->btn_browse}
-						</button>
-					</div>
+			<div data-am-select-image-field>
+				<figure></figure>
+				<div>
+					<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+					<button type="button" class="uk-button uk-text-muted">
+						<i class="uk-icon-folder-open-o"></i>&nbsp;
+						{$Text->btn_browse}
+					</button>
 				</div>
-HTML;
+			</div>
+		HTML;
 	}
 
 	/**
@@ -371,16 +372,16 @@ HTML;
 		}
 
 		return <<< HTML
-				<div $class>
-					$fullscreenBar
-					<textarea 
-					$attr 
-					class="uk-form-controls uk-width-1-1" 
-					rows="10" 
-					data-uk-markdowneditor
-					>$value</textarea>
-				</div>
-HTML;
+			<div $class>
+				$fullscreenBar
+				<textarea 
+				$attr 
+				class="uk-form-controls uk-width-1-1" 
+				rows="10" 
+				data-uk-markdowneditor
+				>$value</textarea>
+			</div>
+		HTML;
 	}
 
 	/**
@@ -391,13 +392,13 @@ HTML;
 	 */
 	private static function fieldUrl(string $attr) {
 		return <<< HTML
-				<div class="am-form-icon-button-input uk-flex" data-am-link-field>
-					<button type="button" class="uk-button">
-						<i class="uk-icon-link"></i>
-					</button>
-					<input type="text" class="uk-form-controls uk-width-1-1" $attr />
-				</div>
-HTML;
+			<div class="am-form-icon-button-input uk-flex" data-am-link-field>
+				<button type="button" class="uk-button">
+					<i class="uk-icon-link"></i>
+				</button>
+				<input type="text" class="uk-form-controls uk-width-1-1" $attr />
+			</div>
+		HTML;
 	}
 
 	/**
@@ -459,13 +460,13 @@ HTML;
 			$Text = Text::getObject();
 
 			return <<< HTML
-				   <button 
-				   type="button" 
-				   class="am-remove-parent am-button-remove-parent uk-margin-top"
-				   title="$Text->btn_remove"
-				   data-uk-tooltip
-				   ><i class="uk-icon-remove"></i></button>
-HTML;
+				<button 
+				type="button" 
+				class="am-remove-parent am-button-remove-parent uk-margin-top"
+				title="$Text->btn_remove"
+				data-uk-tooltip
+				><i class="uk-icon-remove"></i></button>
+			HTML;
 		}
 	}
 
@@ -484,18 +485,18 @@ HTML;
 		if ($Theme) {
 			if ($tooltip = $Theme->getTooltip($key)) {
 				return <<< HTML
-						<div 
-						class="am-dropdown-tooltip" 
-						data-uk-dropdown
-						>
-							<div class="am-dropdown-tooltip-icon">
-								<i class="uk-icon-lightbulb-o"></i>
-							</div>
-							<div class="uk-dropdown">
-								$tooltip
-							</div>
+					<div 
+					class="am-dropdown-tooltip" 
+					data-uk-dropdown
+					>
+						<div class="am-dropdown-tooltip-icon">
+							<i class="uk-icon-lightbulb-o"></i>
 						</div>
-HTML;
+						<div class="uk-dropdown">
+							$tooltip
+						</div>
+					</div>
+				HTML;
 			}
 		}
 	}

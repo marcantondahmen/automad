@@ -62,12 +62,12 @@ class SelectImage {
 			$count = count($files);
 
 			$html = <<< HTML
-					<p class="uk-margin-top"> 
-						$title
-						&nbsp;<span class="uk-badge">$count</span>
-					</p>
-					<div class="am-select-image-grid">
-HTML;
+				<p class="uk-margin-top"> 
+					$title
+					&nbsp;<span class="uk-badge">$count</span>
+				</p>
+				<div class="am-select-image-grid">
+			HTML;
 
 			foreach ($files as $file) {
 				if ($basename) {
@@ -80,11 +80,11 @@ HTML;
 				$imageUrl = AM_BASE_URL . $image->file;
 
 				$html .= <<< HTML
-				 		 <label class="am-cover-1by1">
-							<img src="$imageUrl" title="$value" data-uk-tooltip>
-						 	<input type="hidden" name="imageUrl" value="$value">
-						 </label>
-HTML;
+					<label class="am-cover-1by1">
+						<img src="$imageUrl" title="$value" data-uk-tooltip>
+						<input type="hidden" name="imageUrl" value="$value">
+					</label>
+				HTML;
 			}
 
 			$html .= '</div>';

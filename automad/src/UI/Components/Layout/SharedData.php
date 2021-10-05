@@ -160,7 +160,7 @@ class SharedData {
 				{$fn(Variables::render($this->Automad, $this->settingKeys, $this->data, $this->mainTheme, Text::get('shared_vars_settings')))}
 				{$fn(UnusedVariables::render($this->Automad, $this->unusedDataKeys, $this->data, Text::get('shared_vars_unused')))}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -231,7 +231,7 @@ HTML;
 					{$fn(Text::get('btn_get_themes'))}
 				</a>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -255,6 +255,6 @@ HTML;
 				value="{$fn(htmlspecialchars($this->data[AM_KEY_SITENAME]))}" 
 				/>
 			</div>
-HTML;
+		HTML;
 	}
 }

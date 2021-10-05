@@ -76,11 +76,11 @@ class Slider extends AbstractBlock {
 					$caption = FileUtils::caption($file);
 
 					$html .= <<< HTML
-							<div class="am-slider-item $first">
-								<img src="$Image->file">
-								<div class="am-slider-caption">$caption</div>
-							</div>
-HTML;
+						<div class="am-slider-item $first">
+							<img src="$Image->file">
+							<div class="am-slider-caption">$caption</div>
+						</div>
+					HTML;
 
 					$first = '';
 				}

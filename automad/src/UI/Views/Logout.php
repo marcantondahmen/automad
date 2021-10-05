@@ -71,7 +71,7 @@ class Logout extends AbstractView {
 			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				{$fn($this->alert($isLoggedOut))}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -118,7 +118,7 @@ HTML;
 						</div>
 					</div>
 				</div>
-HTML;
+			HTML;
 		} else {
 			return Danger::render(Text::get('error_log_out'));
 		}

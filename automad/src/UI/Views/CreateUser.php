@@ -123,7 +123,7 @@ class CreateUser extends AbstractView {
 					</a>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**

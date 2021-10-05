@@ -70,6 +70,6 @@ class Users {
 			>
 				$cards
 			</ul>
-HTML;
+		HTML;
 	}
 }

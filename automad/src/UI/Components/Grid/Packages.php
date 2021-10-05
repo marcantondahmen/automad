@@ -62,13 +62,13 @@ class Packages {
 		}
 
 		return <<< HTML
-				<ul 
-				class="uk-grid uk-grid-width-medium-1-3 uk-margin-top" 
-				data-uk-grid-margin 
-				data-uk-grid-match="{target:'.uk-panel'}"
-				>
-					$cards
-				</ul>
-HTML;
+			<ul 
+			class="uk-grid uk-grid-width-medium-1-3 uk-margin-top" 
+			data-uk-grid-margin 
+			data-uk-grid-match="{target:'.uk-panel'}"
+			>
+				$cards
+			</ul>
+		HTML;
 	}
 }

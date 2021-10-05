@@ -111,16 +111,16 @@ class Gallery extends AbstractBlock {
 			$width = round($Image->width / 2);
 
 			$html .= <<< HTML
-					<a 
-					href="$file" 
-					class="am-gallery-flex-item am-gallery-img-small" 
-					style="width: {$width}px"
-					data-caption="$caption" 
-					data-am-block-lightbox
-					>
-						<img src="$Image->file" />
-					</a>
-HTML;
+				<a 
+				href="$file" 
+				class="am-gallery-flex-item am-gallery-img-small" 
+				style="width: {$width}px"
+				data-caption="$caption" 
+				data-am-block-lightbox
+				>
+					<img src="$Image->file" />
+				</a>
+			HTML;
 		}
 
 		$html .= '</div>';
@@ -165,15 +165,15 @@ HTML;
 			$span = round($Image->height / ($masonryRowHeight * 2));
 
 			$html .= <<< HTML
-					<div 
-					class="am-gallery-masonry-item"
-					style="--am-gallery-masonry-rows: $span;"
-					>
-						<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
-							<img src="$Image->file" />
-						</a>
-					</div>
-HTML;
+				<div 
+				class="am-gallery-masonry-item"
+				style="--am-gallery-masonry-rows: $span;"
+				>
+					<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
+						<img src="$Image->file" />
+					</a>
+				</div>
+			HTML;
 		}
 
 		$html .= '</div>';

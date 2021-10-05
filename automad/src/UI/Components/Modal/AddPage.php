@@ -66,7 +66,6 @@ class AddPage {
 		};
 
 		return <<< HTML
-
 			<div id="am-add-page-modal" class="uk-modal">
 				<div class="uk-modal-dialog">
 					<div class="uk-modal-header">
@@ -117,7 +116,7 @@ class AddPage {
 					</div>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -138,13 +137,9 @@ HTML;
 					<label class="uk-form-label uk-margin-top-remove">
 						{$fn(Text::get('page_theme_template'))}
 					</label>
-					{$fn(SelectTemplate::render(
-				$Automad,
-				$ThemeCollection,
-				'subpage[theme_template]'
-			))}
+					{$fn(SelectTemplate::render($Automad, $ThemeCollection, 'subpage[theme_template]'))}
 				</div>
-HTML;
+			HTML;
 		}
 	}
 }

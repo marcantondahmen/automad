@@ -92,6 +92,6 @@ class Link {
 					</div>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 }
