@@ -60,7 +60,7 @@ class AutomadBlockList {
 		};
 	}
 
-	constructor({ data, config, api, readOnly }) {
+	constructor({ data, api, readOnly }) {
 		this._elements = {
 			wrapper: null,
 		};

@@ -54,7 +54,7 @@ class AutomadBlockDelimiter {
 		};
 	}
 
-	constructor({ data, config, api }) {
+	constructor({ data, api }) {
 		this.api = api;
 
 		this._CSS = {

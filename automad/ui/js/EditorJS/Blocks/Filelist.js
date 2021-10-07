@@ -52,7 +52,7 @@ class AutomadBlockFilelist {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 

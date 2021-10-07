@@ -55,7 +55,7 @@ class AutomadBlockSnippet {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create;
 
 		this.api = api;

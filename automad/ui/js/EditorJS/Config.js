@@ -106,16 +106,9 @@ class AutomadEditorConfig {
 				paragraph: {
 					class: AutomadBlockParagraph,
 					inlineToolbar: inlineAll,
-					config: {
-						flex: flex,
-					},
 				},
 				section: {
 					class: AutomadBlockSection,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 				header: {
 					class: AutomadBlockHeader,
@@ -124,115 +117,60 @@ class AutomadEditorConfig {
 					config: {
 						levels: [1, 2, 3, 4, 5, 6],
 						defaultLevel: 2,
-						flex: flex,
 					},
 				},
 				lists: {
 					class: AutomadBlockList,
 					inlineToolbar: inlineAll,
-					config: {
-						flex: flex,
-					},
 				},
 				table: {
 					class: AutomadBlockTable,
 					inlineToolbar: inlineAll,
-					config: {
-						flex: flex,
-					},
 				},
 				quote: {
 					class: AutomadBlockQuote,
 					inlineToolbar: inlineAll,
-					config: {
-						flex: flex,
-					},
 				},
 				delimiter: {
 					class: AutomadBlockDelimiter,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 				image: {
 					class: AutomadBlockImage,
 					inlineToolbar: inlineAll,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 				gallery: {
 					class: AutomadBlockGallery,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 				slider: {
 					class: AutomadBlockSlider,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 				buttons: {
 					class: AutomadBlockButtons,
 					inlineToolbar: inlineReduced,
-					config: {
-						flex: flex,
-					},
 				},
 				pagelist: {
 					class: AutomadBlockPagelist,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 				filelist: {
 					class: AutomadBlockFilelist,
-					config: {
-						flex: flex,
-					},
 				},
 				toc: {
 					class: AutomadBlockToc,
-					config: {
-						flex: flex,
-					},
 				},
 				code: {
 					class: AutomadBlockTextareaCode,
-					config: {
-						flex: flex,
-					},
 				},
 				raw: {
 					class: AutomadBlockTextareaRaw,
-					config: {
-						flex: flex,
-					},
 				},
 				mail: {
 					class: AutomadBlockMail,
-					config: {
-						flex: flex,
-					},
 				},
 				snippet: {
 					class: AutomadBlockSnippet,
-					config: {
-						flex: flex,
-					},
 				},
 				embed: {
 					class: AutomadBlockEmbed,
-					config: {
-						allowStretching: true,
-						flex: flex,
-					},
 				},
 			},
 			inlineTools

@@ -57,7 +57,7 @@ class AutomadBlockSlider {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 

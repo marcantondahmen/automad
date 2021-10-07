@@ -49,7 +49,7 @@ class AutomadBlockToc {
 		};
 	}
 
-	constructor({ data, config, api }) {
+	constructor({ data, api }) {
 		this.data = {
 			style: data.style || 'ordered',
 		};

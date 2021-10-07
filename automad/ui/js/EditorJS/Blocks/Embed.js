@@ -180,7 +180,7 @@ class AutomadBlockEmbed {
 		return isValid;
 	}
 
-	constructor({ data, api, config, readOnly }) {
+	constructor({ data, api, readOnly }) {
 		this.api = api;
 		this._data = {};
 		this.element = null;

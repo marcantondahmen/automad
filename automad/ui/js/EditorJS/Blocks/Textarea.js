@@ -55,7 +55,7 @@ class AutomadBlockTextarea {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		this.api = api;
 
 		this.data = {
