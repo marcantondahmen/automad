@@ -81,6 +81,8 @@
 				var data = {};
 			}
 
+			data = this.convertLegacyData(data);
+
 			// In order to avoid infinite loops due to initializing section editors,
 			// the initialization of those readOnly preview editors has to be prevented as soon as
 			// there is no section data anymore.
@@ -220,6 +222,21 @@
 					});
 				} catch (e) {}
 			}
+		},
+
+		convertLegacyData: function (data) {
+			data.blocks.forEach((block) => {
+				if (block.tunes === undefined) {
+					block.tunes = {
+						layout: {
+							width: block.data.widthFraction || false,
+							stretched: block.data.stretched || false,
+						},
+					};
+				}
+			});
+
+			return data;
 		},
 
 		initErrorHandler: function () {
