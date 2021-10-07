@@ -90,7 +90,7 @@
 				return;
 			}
 
-			var editor = new EditorJS({
+			const editor = new EditorJS({
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
@@ -255,36 +255,19 @@
 		},
 
 		init: function () {
-			var be = Automad.BlockEditor,
-				selector = '[' + be.dataAttr + ']',
-				triggerChange = function () {
-					var block = $(this)
-							.closest(`.${AutomadEditorConfig.cls.editor}`)
-							.find(
-								`.cdx-block, .${AutomadEditorConfig.cls.blockContent}, .ce-block`
-							)
-							.first()
-							.get(0),
-						temp = document.createElement('div');
+			const selector = `[${this.dataAttr}]`;
+			const containers = Array.from(document.querySelectorAll(selector));
 
-					// Trigger a fake block changed event by adding and removing a temporary div.
-					try {
-						block.appendChild(temp);
-						block.removeChild(temp);
-					} catch (e) {}
-				};
+			this.initErrorHandler();
 
-			be.initErrorHandler();
-
-			$(selector).each(function () {
-				var $wrapper = $(this),
-					id = $wrapper.data(Automad.Util.dataCamelCase(be.dataAttr)),
-					input = this.querySelector('input');
+			containers.forEach((container) => {
+				const id = container.getAttribute(this.dataAttr);
+				const input = container.querySelector('input');
 
 				// Remove data attribute to prevent multiple initializations.
-				$wrapper.removeAttr(be.dataAttr);
+				container.removeAttribute(this.dataAttr);
 
-				be.createEditor({
+				this.createEditor({
 					holder: id,
 					input: input,
 					placeholder: AutomadEditorTranslation.get('ui_placeholder'),
