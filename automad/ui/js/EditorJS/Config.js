@@ -97,6 +97,12 @@ class AutomadEditorConfig {
 
 		return Object.assign(
 			{
+				layout: {
+					class: AutomadLayoutTune,
+					config: {
+						flex: flex,
+					},
+				},
 				paragraph: {
 					class: AutomadBlockParagraph,
 					inlineToolbar: inlineAll,

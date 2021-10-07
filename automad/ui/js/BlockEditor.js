@@ -96,6 +96,7 @@
 					options.readOnly,
 					options.flex
 				),
+				tunes: ['layout'],
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
@@ -133,40 +134,12 @@
 					},
 				},
 
-				onChange: function () {
-					if (!options.readOnly) {
-						try {
-							editor.save().then(function (data) {
-								// Purge layout data.
-								data.blocks.forEach((block) => {
-									['stretched', 'widthFraction'].forEach(
-										(key) => {
-											if (!block.data[key]) {
-												delete block.data[key];
-											}
-										}
-									);
-								});
-
-								// Only trigger change in case blocks actually have changed.
-								var blocksNew = JSON.stringify(data.blocks);
-
-								try {
-									var blocksCurrent = JSON.stringify(
-										JSON.parse($input.val()).blocks
-									);
-								} catch (e) {
-									var blocksCurrent = '';
-								}
-
-								if (blocksCurrent != blocksNew) {
-									$input
-										.val(JSON.stringify(data, null, 4))
-										.trigger('change');
-								}
-							});
-						} catch (e) {}
-					}
+				onChange: function (api, block) {
+					Automad.BlockEditor.save(
+						editor,
+						$input.get(0),
+						options.readOnly
+					);
 				},
 
 				onReady: function () {
@@ -185,10 +158,68 @@
 
 						options.onReady();
 					});
+
+					let holder = editor.configuration.holder;
+
+					if (
+						typeof holder === 'string' ||
+						holder instanceof String
+					) {
+						holder = document.getElementById(holder);
+					}
+
+					const save = () => {
+						Automad.BlockEditor.save(
+							editor,
+							$input.get(0),
+							options.readOnly
+						);
+					};
+
+					$(holder).on(
+						'click',
+						`.${AutomadEditorConfig.cls.settingsButton}`,
+						save
+					);
+
+					$(holder).on(
+						'change keyup keydown',
+						`.${AutomadEditorConfig.cls.input}, .${AutomadEditorConfig.cls.block} input, .${AutomadEditorConfig.cls.block} select`,
+						save
+					);
 				},
 			});
 
 			return editor;
+		},
+
+		save: function (editor, input, readOnly) {
+			if (!readOnly) {
+				const $input = $(input);
+
+				try {
+					editor.save().then(function (data) {
+						data.automadVersion = window.AM_VERSION;
+
+						// Only trigger change in case blocks actually have changed.
+						var blocksNew = JSON.stringify(data.blocks);
+
+						try {
+							var blocksCurrent = JSON.stringify(
+								JSON.parse($input.val()).blocks
+							);
+						} catch (e) {
+							var blocksCurrent = '';
+						}
+
+						if (blocksCurrent != blocksNew) {
+							$input
+								.val(JSON.stringify(data, null, 4))
+								.trigger('change');
+						}
+					});
+				} catch (e) {}
+			}
 		},
 
 		initErrorHandler: function () {

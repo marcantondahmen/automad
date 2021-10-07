@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@editorjs/editorjs": "^2.20.2",
+    "@editorjs/editorjs": "^2.22.2",
     "blueimp-file-upload": "^9.21.0",
     "codemirror": "^5.35.0",
     "draggabilly": "^2.1.1",
