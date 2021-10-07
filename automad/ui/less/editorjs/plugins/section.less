@@ -107,7 +107,12 @@
 		border-radius: @am-radius;
 		color: @button-color !important;
 		background-color: @button-background;
+		border: @am-hairline;
 		.shadow;
+
+		&:hover {
+			background-color: @button-hover-background;
+		}
 	}
 
 	& & .am-section-edit-button {
