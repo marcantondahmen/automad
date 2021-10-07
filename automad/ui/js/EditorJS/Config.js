@@ -98,7 +98,7 @@ class AutomadEditorConfig {
 		return Object.assign(
 			{
 				layout: {
-					class: AutomadLayoutTune,
+					class: AutomadTuneLayout,
 					config: {
 						flex: flex,
 					},

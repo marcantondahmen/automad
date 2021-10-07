@@ -33,7 +33,7 @@
  * https://automad.org/license
  */
 
-class AutomadLayoutTune {
+class AutomadTuneLayout {
 	static get isTune() {
 		return true;
 	}
