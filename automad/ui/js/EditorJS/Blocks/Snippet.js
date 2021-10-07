@@ -65,13 +65,6 @@ class AutomadBlockSnippet {
 			snippet: data.snippet || '',
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
-
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		var textarea = create.element('textarea', [
@@ -135,9 +128,5 @@ class AutomadBlockSnippet {
 			file: this.inputs.file.value,
 			snippet: this.inputs.snippet.value,
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

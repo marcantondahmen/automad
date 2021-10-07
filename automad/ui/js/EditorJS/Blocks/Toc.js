@@ -54,13 +54,6 @@ class AutomadBlockToc {
 			style: data.style || 'ordered',
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
-
 		this.api = api;
 
 		this.wrapper = document.createElement('div');
@@ -126,7 +119,6 @@ class AutomadBlockToc {
 		});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

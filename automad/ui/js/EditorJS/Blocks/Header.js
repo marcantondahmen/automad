@@ -55,13 +55,6 @@ class AutomadBlockHeader {
 		this._data = this.normalizeData(data);
 		this.settingsButtons = [];
 		this._element = this.getTag();
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 	}
 
 	normalizeData(data) {
@@ -159,7 +152,6 @@ class AutomadBlockHeader {
 
 		wrapper.appendChild(wrapperAlign);
 		wrapper.appendChild(wrapperLevels);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

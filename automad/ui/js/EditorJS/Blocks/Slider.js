@@ -71,13 +71,6 @@ class AutomadBlockSlider {
 			autoplay: data.autoplay !== undefined ? data.autoplay : true,
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
-
 		this.inputs = {
 			width: create.editable(['cdx-input'], 'px', this.data.width),
 			height: create.editable(['cdx-input'], 'px', this.data.height),
@@ -170,7 +163,6 @@ class AutomadBlockSlider {
 		});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

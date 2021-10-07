@@ -61,13 +61,6 @@ class AutomadBlockFilelist {
 			glob: data.glob || '*.*',
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
-
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
 		this.wrapper.innerHTML = `
@@ -120,9 +113,5 @@ class AutomadBlockFilelist {
 			file: this.inputs.file.value,
 			glob: stripNbsp(this.inputs.glob.innerHTML),
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

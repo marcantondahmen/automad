@@ -89,13 +89,6 @@ class AutomadBlockList {
 		};
 
 		this.data = data;
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this._data,
-			data,
-			api,
-			config
-		);
 	}
 
 	render() {
@@ -179,7 +172,6 @@ class AutomadBlockList {
 		});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

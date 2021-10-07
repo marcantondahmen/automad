@@ -69,13 +69,6 @@ class AutomadBlockImage {
 			link: data.link || '',
 		};
 
-		this.settings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
-
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('cdx-block');
 		this.img = document.createElement('img');
@@ -170,9 +163,5 @@ class AutomadBlockImage {
 		if (event.type == 'pattern') {
 			this.insertImage(event.detail.data);
 		}
-	}
-
-	renderSettings() {
-		return this.settings;
 	}
 }

@@ -187,18 +187,6 @@ class AutomadBlockEmbed {
 		this.readOnly = readOnly;
 
 		this.data = data;
-
-		this.layout = {
-			span: data.span || '',
-			stretched: data.stretched || '',
-		};
-
-		this.settings = AutomadLayout.renderSettings(
-			this.layout,
-			data,
-			api,
-			config
-		);
 	}
 
 	set data(data) {
@@ -310,7 +298,7 @@ class AutomadBlockEmbed {
 	}
 
 	save() {
-		return Object.assign(this.data, this.layout);
+		return this.data;
 	}
 
 	onPaste(event) {
@@ -351,9 +339,5 @@ class AutomadBlockEmbed {
 		}).then(() => {
 			observer.disconnect();
 		});
-	}
-
-	renderSettings() {
-		return this.settings;
 	}
 }

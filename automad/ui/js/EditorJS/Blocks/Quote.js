@@ -98,13 +98,6 @@ class AutomadBlockQuote {
 				config.defaultAlignment ||
 				DEFAULT_ALIGNMENT,
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 	}
 
 	get CSS() {
@@ -205,7 +198,6 @@ class AutomadBlockQuote {
 			});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

@@ -71,13 +71,6 @@ class AutomadBlockMail {
 			textButton: data.textButton || t('mail_data_send'),
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
-
 		this.inputs = {
 			to: create.editable(
 				['cdx-input'],
@@ -171,9 +164,5 @@ class AutomadBlockMail {
 			),
 			textButton: stripNbsp(this.inputs.textButton.innerHTML),
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

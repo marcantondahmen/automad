@@ -277,12 +277,6 @@ class AutomadBlockTable {
 			api,
 			readOnly
 		);
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 	}
 
 	render() {
@@ -311,10 +305,6 @@ class AutomadBlockTable {
 		return Object.assign(this.data, {
 			content: data,
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 
 	_isEmpty(input) {

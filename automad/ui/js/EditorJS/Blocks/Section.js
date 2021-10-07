@@ -179,13 +179,6 @@ class AutomadBlockSection {
 				icon: '<svg width="18px" height="18px" viewBox="0 0 20 20"><path d="M16,0H4C1.8,0,0,1.8,0,4v12c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V4C20,1.8,18.2,0,16,0z M18.5,16c0,1.4-1.1,2.5-2.5,2.5H4 c-1.4,0-2.5-1.1-2.5-2.5V4c0-1.4,1.1-2.5,2.5-2.5h12c1.4,0,2.5,1.1,2.5,2.5V16z"/><rect x="4" y="9" width="12" height="2"/><path d="M4.9,6.9L2.1,9.6C2,9.8,2,10.2,2.1,10.4l2.8,2.8c0.3,0.3,0.9,0.1,0.9-0.4V7.2C5.8,6.8,5.3,6.5,4.9,6.9z"/><path d="M15.1,6.9l2.8,2.8c0.2,0.2,0.2,0.5,0,0.7l-2.8,2.8c-0.3,0.3-0.9,0.1-0.9-0.4V7.2C14.2,6.8,14.7,6.5,15.1,6.9z"/></svg>',
 			},
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 	}
 
 	appendCallback() {
@@ -700,10 +693,6 @@ class AutomadBlockSection {
 		return Object.assign(this.data, {
 			content: this.getInputData(),
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 
 	renderFlexSettings(settings, key) {
