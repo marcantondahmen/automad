@@ -81,7 +81,7 @@ class AutomadBlockSection {
 		};
 	}
 
-	constructor({ data, config, api }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get,
 			idSuffix = Date.now();
@@ -656,20 +656,20 @@ class AutomadBlockSection {
 
 	applyDialogSize() {
 		const dialog = this.modalWrapper.querySelector('.uk-modal-dialog');
-		var widthFraction = 1;
+		var width = 1;
 
-		if (this.data.widthFraction) {
-			// Sanitize widthFraction string before passing it to eval().
-			widthFraction = eval(
-				this.data.widthFraction.replace(/[^\d\/]/g, '')
-			);
-		}
+		try {
+			if (this.tunes.layout.width) {
+				// Sanitize width string before passing it to eval().
+				width = eval(this.tunes.layout.width.replace(/[^\d\/]/g, ''));
+			}
 
-		if (this.data.stretched) {
-			widthFraction = 1;
-		}
+			if (this.tunes.layout.stretched) {
+				width = 1;
+			}
+		} catch (e) {}
 
-		dialog.style.width = `${widthFraction * 74 + 4}rem`;
+		dialog.style.width = `${width * 74 + 4}rem`;
 		dialog.style.maxWidth = '90vw';
 	}
 
@@ -686,7 +686,7 @@ class AutomadBlockSection {
 			data = {};
 		}
 
-		return data;
+		return Automad.BlockEditor.convertLegacyData(data);
 	}
 
 	save() {
