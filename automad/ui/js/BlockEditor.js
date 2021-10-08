@@ -81,14 +81,15 @@
 				var data = {};
 			}
 
-			data = this.convertLegacyData(data);
-
 			// In order to avoid infinite loops due to initializing section editors,
 			// the initialization of those readOnly preview editors has to be prevented as soon as
 			// there is no section data anymore.
 			if (typeof data.blocks === 'undefined' && options.readOnly) {
 				return;
 			}
+
+			const LegacyData = new AutomadLegacyData(data);
+			data = LegacyData.convert(data);
 
 			const editor = new EditorJS({
 				holder: options.holder,
@@ -222,49 +223,6 @@
 					});
 				} catch (e) {}
 			}
-		},
-
-		normalizeVersion: function (version) {
-			if (version === undefined) {
-				version = '0.0.0';
-			}
-
-			const normalized = version
-				.split('.')
-				.map((n) => {
-					return n.padStart(3, '0');
-				})
-				.join('');
-
-			return normalized;
-		},
-
-		convertLegacyData: function (data) {
-			if (data.blocks === undefined) {
-				return data;
-			}
-
-			if (
-				this.normalizeVersion(data.automadVersion) >=
-				this.normalizeVersion('1.9.0')
-			) {
-				return data;
-			}
-
-			console.log('Converting legacy block data ...');
-
-			data.blocks.forEach((block) => {
-				if (block.tunes === undefined) {
-					block.tunes = {
-						layout: {
-							width: block.data.widthFraction || false,
-							stretched: block.data.stretched || false,
-						},
-					};
-				}
-			});
-
-			return data;
 		},
 
 		initErrorHandler: function () {

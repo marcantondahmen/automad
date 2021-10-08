@@ -88,7 +88,6 @@ class Blocks {
 			return false;
 		}
 
-		$data = self::convertLegacyData($data);
 		$data = self::prepareData($data);
 
 		foreach ($data->blocks as $block) {
@@ -135,48 +134,15 @@ class Blocks {
 	}
 
 	/**
-	 * Convert legacy data such as layout information.
-	 *
-	 * @param object $data
-	 * @return object $data
-	 */
-	private static function convertLegacyData(object $data) {
-		$dataVersion = '0.0.0';
-
-		if (!empty($data->automadVersion)) {
-			$dataVersion = $data->automadVersion;
-		}
-
-		if (version_compare($dataVersion, '1.9.0', '>=')) {
-			return $data;
-		}
-
-		Debug::log($dataVersion, 'Converting legacy block data');
-
-		foreach ($data->blocks as $block) {
-			if (!isset($block->tunes)) {
-				$block->tunes = (object) array('layout' => (object) array());
-
-				if (!empty($block->data->widthFraction)) {
-					$block->tunes->layout->width = $block->data->widthFraction;
-				}
-
-				if (isset($block->data->stretched)) {
-					$block->tunes->layout->stretched = $block->data->stretched;
-				}
-			}
-		}
-
-		return $data;
-	}
-
-	/**
 	 * Prepare block data
 	 *
 	 * @param object $data
 	 * @return object $data
 	 */
 	private static function prepareData(object $data) {
+		$LegacyData = new LegacyData($data);
+		$data = $LegacyData->convert();
+
 		foreach ($data->blocks as $block) {
 			$block->tunes->layout = (object) array_merge(
 				array('width' => false, 'stretched' => false),
