@@ -112,18 +112,24 @@ class InPage {
 	 * @return string The processed markup
 	 */
 	private function injectAssets(string $str) {
+		$version = AM_VERSION;
+		$baseUrl = AM_BASE_URL;
 		$versionSanitized = Str::sanitize(AM_VERSION);
-		$assets = 	"\n" .
-					'<!-- Automad UI -->' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/dist/automad.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/libs.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
-					// Cleanup window object by removing jQuery and UIkit.
-					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
-					BlockSnippetArrays::render() . "\n" .
-					EditorTextModules::render() . "\n" .
-					'<!-- Automad UI end -->' . "\n";
+		$snippets = BlockSnippetArrays::render();
+		$editorText = EditorTextModules::render();
+
+		$assets = <<< HTML
+			<!-- Automad UI -->
+			<link href="{$baseUrl}/automad/dist/libs.min.css?v={$versionSanitized}" rel="stylesheet">
+			<link href="{$baseUrl}/automad/dist/automad.min.css?v={$versionSanitized}" rel="stylesheet">
+			<script>window.AM_VERSION = "{$version}"</script>
+			<script type="text/javascript" src="{$baseUrl}/automad/dist/libs.min.js?v={$versionSanitized}"></script>
+			<script type="text/javascript" src="{$baseUrl}/automad/dist/automad.min.js?v={$versionSanitized}"></script>
+			<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>
+			$snippets
+			$editorText
+			<!-- Automad UI end -->
+		HTML;
 
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {

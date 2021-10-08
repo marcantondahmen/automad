@@ -141,6 +141,18 @@ class Blocks {
 	 * @return object $data
 	 */
 	private static function convertLegacyData(object $data) {
+		$dataVersion = '0.0.0';
+
+		if (!empty($data->automadVersion)) {
+			$dataVersion = $data->automadVersion;
+		}
+
+		if (version_compare($dataVersion, '1.9.0', '>=')) {
+			return $data;
+		}
+
+		Debug::log($dataVersion, 'Converting legacy block data');
+
 		foreach ($data->blocks as $block) {
 			if (!isset($block->tunes)) {
 				$block->tunes = (object) array('layout' => (object) array());

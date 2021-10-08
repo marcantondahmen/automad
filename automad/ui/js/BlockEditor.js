@@ -224,7 +224,35 @@
 			}
 		},
 
+		normalizeVersion: function (version) {
+			if (version === undefined) {
+				version = '0.0.0';
+			}
+
+			const normalized = version
+				.split('.')
+				.map((n) => {
+					return n.padStart(3, '0');
+				})
+				.join('');
+
+			return normalized;
+		},
+
 		convertLegacyData: function (data) {
+			if (data.blocks === undefined) {
+				return data;
+			}
+
+			if (
+				this.normalizeVersion(data.automadVersion) >=
+				this.normalizeVersion('1.9.0')
+			) {
+				return data;
+			}
+
+			console.log('Converting legacy block data ...');
+
 			data.blocks.forEach((block) => {
 				if (block.tunes === undefined) {
 					block.tunes = {
