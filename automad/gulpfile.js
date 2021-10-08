@@ -149,6 +149,7 @@ gulp.task('libs-js', function () {
 				'node_modules/@editorjs/editorjs/dist/editor.js.LICENSE.txt',
 				'node_modules/@editorjs/editorjs/dist/editor.js',
 				'node_modules/@editorjs/nested-list/dist/nested-list.js',
+				'node_modules/@editorjs/quote/dist/bundle.js',
 				'node_modules/@editorjs/table/dist/table.js',
 				'node_modules/editorjs-drag-drop/dist/bundle.js',
 				'node_modules/editorjs-style/dist/index.js',
