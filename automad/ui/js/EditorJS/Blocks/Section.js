@@ -686,7 +686,8 @@ class AutomadBlockSection {
 			data = {};
 		}
 
-		return Automad.BlockEditor.convertLegacyData(data);
+		const LegacyData = new AutomadLegacyData(data);
+		return LegacyData.convert(data);
 	}
 
 	save() {
