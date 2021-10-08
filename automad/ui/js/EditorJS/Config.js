@@ -51,9 +51,10 @@ class AutomadEditorConfig {
 	}
 
 	static tools(readOnly, flex) {
-		var inlineTools = {},
-			inlineAll = false,
-			inlineReduced = false;
+		const t = AutomadEditorTranslation.get;
+		let inlineTools = {};
+		let inlineAll = false;
+		let inlineReduced = false;
 
 		if (!readOnly) {
 			inlineAll = [
@@ -130,6 +131,10 @@ class AutomadEditorConfig {
 				quote: {
 					class: AutomadBlockQuote,
 					inlineToolbar: inlineAll,
+					config: {
+						quotePlaceholder: t('quote_placeholder'),
+						captionPlaceholder: t('quote_placeholder_caption'),
+					},
 				},
 				delimiter: {
 					class: AutomadBlockDelimiter,

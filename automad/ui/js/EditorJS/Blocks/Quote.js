@@ -41,25 +41,6 @@ class AutomadBlockQuote extends Quote {
 		};
 	}
 
-	static get DEFAULT_QUOTE_PLACEHOLDER() {
-		return AutomadEditorTranslation.get('quote_placeholder');
-	}
-
-	static get DEFAULT_CAPTION_PLACEHOLDER() {
-		return AutomadEditorTranslation.get('quote_placeholder_caption');
-	}
-
-	static get ALIGNMENTS() {
-		return {
-			left: 'left',
-			center: 'center',
-		};
-	}
-
-	static get DEFAULT_ALIGNMENT() {
-		return AutomadBlockQuote.ALIGNMENTS.left;
-	}
-
 	get settings() {
 		return [
 			{

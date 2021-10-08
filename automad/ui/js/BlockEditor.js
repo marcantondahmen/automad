@@ -123,6 +123,22 @@
 								},
 							},
 						},
+						tools: {
+							lists: {
+								Unordered: t('list_unordered'),
+								Ordered: t('list_ordered'),
+							},
+							table: {
+								'Add column to left': t('table_add_col_left'),
+								'Add column to right': t('table_add_col_right'),
+								'Delete column': t('table_delete_col'),
+								'Add row above': t('table_add_row_above'),
+								'Add row below': t('table_add_row_below'),
+								'Delete row': t('table_delete_row'),
+								'With headings': t('table_with_headings'),
+								'Without headings': t('table_without_headings'),
+							},
+						},
 						blockTunes: {
 							delete: {
 								Delete: t('ui_delete'),
