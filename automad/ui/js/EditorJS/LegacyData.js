@@ -59,6 +59,7 @@ class AutomadLegacyData {
 		console.log('Converting legacy block data ...');
 
 		data = this.convertLayout(data);
+		data = this.convertLists(data);
 
 		return data;
 	}
@@ -87,6 +88,22 @@ class AutomadLegacyData {
 						stretched: block.data.stretched || false,
 					},
 				};
+			}
+		});
+
+		return data;
+	}
+
+	convertLists(data) {
+		data.blocks.forEach((block) => {
+			if (block.type == 'lists') {
+				block.data.items = block.data.items.map((item) => {
+					if (typeof item == 'string') {
+						return { content: item, items: [] };
+					}
+
+					return item;
+				});
 			}
 		});
 

@@ -49,6 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Lists extends AbstractBlock {
 	/**
+	 * The list type tag
+	 */
+	private static $tag;
+
+	/**
 	 * Render a list block.
 	 *
 	 * @param object $data
@@ -57,23 +62,35 @@ class Lists extends AbstractBlock {
 	 */
 	public static function render(object $data, Automad $Automad) {
 		if ($data->style == 'ordered') {
-			$open = '<ol>';
-			$close = '</ol>';
+			self::$tag = 'ol';
 		} else {
-			$open = '<ul>';
-			$close = '</ul>';
+			self::$tag = 'ul';
 		}
 
-		$html = $open;
-
-		foreach ($data->items as $item) {
-			$item = htmlspecialchars_decode($item);
-			$html .= "<li>$item</li>";
-		}
-
-		$html .= $close;
+		$html = self::renderItems((array) $data->items);
 		$class = self::classAttr();
 
 		return "<am-list $class>$html</am-list>";
+	}
+
+	/**
+	 * Render list items.
+	 *
+	 * @param array $items
+	 * @return string the rendered item
+	 */
+	private static function renderItems(array $items) {
+		$tag = self::$tag;
+		$html = "<$tag>";
+
+		foreach ($items as $item) {
+			$content = htmlspecialchars_decode($item->content);
+			$children = self::renderItems((array) $item->items);
+			$html .= "<li><span>$content</span>$children</li>";
+		}
+
+		$html .= "</$tag>";
+
+		return $html;
 	}
 }

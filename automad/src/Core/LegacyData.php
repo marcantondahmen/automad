@@ -85,6 +85,7 @@ class LegacyData {
 		Debug::log($dataVersion, 'Converting legacy block data');
 
 		$data = $this->convertLayout($data);
+		$data = $this->convertLists($data);
 
 		return $data;
 	}
@@ -107,6 +108,28 @@ class LegacyData {
 				if (isset($block->data->stretched)) {
 					$block->tunes->layout->stretched = $block->data->stretched;
 				}
+			}
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Convert legacy lists to new nested lists.
+	 *
+	 * @param object $data
+	 * @return object $data
+	 */
+	private function convertLists(object $data) {
+		foreach ($data->blocks as $block) {
+			if ($block->type == 'lists') {
+				$block->data->items = (object) array_map(function ($item) {
+					if (is_string($item)) {
+						return (object) array( 'content' => $item, 'items' => (object) array());
+					}
+
+					return $item;
+				}, (array) $block->data->items);
 			}
 		}
 
