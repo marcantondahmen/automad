@@ -1,6 +1,7 @@
 /*
  * This EditorJS block is based on the original embed block by CodeX and
- * is extended to support the Automad block grid layout.
+ * is extended to support custom services that are currently
+ * not supported as of version 2.4.6.
  * https://github.com/editor-js/embed
  *
  * Copyright (c) 2018 CodeX (team@ifmo.su)
