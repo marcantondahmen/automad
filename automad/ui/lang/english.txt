@@ -1280,15 +1280,15 @@ search_replace_selected: Replace Selected
 
 -
 
-search_replace_check_all: Check All
+search_replace_check_all: Choose All
 
 -
 
-search_replace_uncheck_all: Uncheck All
+search_replace_uncheck_all: Deselect All
 
 -
 
-search_is_case_sensitive: Case Sensitive
+search_is_case_sensitive: Upper / Lower Case
 
 -
 
