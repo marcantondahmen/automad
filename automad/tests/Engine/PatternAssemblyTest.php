@@ -214,7 +214,9 @@ class PatternAssemblyTest extends TestCase {
 			$result[] = $match[1];
 		}
 
-		$this->assertSame($result, $expected);
+		for ($i = 0; $i < count($result); $i++) {
+			$this->assertSame($result[$i], $expected[$i]);
+		}
 	}
 
 	/**
@@ -226,7 +228,12 @@ class PatternAssemblyTest extends TestCase {
 	 */
 	public function testExpressionHasArraySubset($str, $prefix, $expected) {
 		preg_match_all('/' . PatternAssembly::expression($prefix) . '/', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches[0]);
+
+		$result = $matches[0];
+
+		foreach ($expected as $key => $value) {
+			$this->assertSame($value, $result[$key]);
+		}
 	}
 
 	/**
@@ -237,7 +244,12 @@ class PatternAssemblyTest extends TestCase {
 	 */
 	public function testKeyValueHasArraySubset($str, $expected) {
 		preg_match_all('/' . PatternAssembly::keyValue() . '/is', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches);
+
+		foreach ($expected as $index => $subarray) {
+			foreach ($subarray as $key => $value) {
+				$this->assertSame($value, $matches[$index][$key]);
+			}
+		}
 	}
 
 	/**
@@ -249,7 +261,12 @@ class PatternAssemblyTest extends TestCase {
 	 */
 	public function testMarkupHasArraySubset($str, $expected) {
 		preg_match_all('/' . PatternAssembly::template() . '/is', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches[0]);
+
+		$result = $matches[0];
+
+		foreach ($expected as $key => $value) {
+			$this->assertSame($value, $result[$key]);
+		}
 	}
 
 	/**
@@ -261,7 +278,12 @@ class PatternAssemblyTest extends TestCase {
 	 */
 	public function testPipeHasArraySubset($str, $prefix, $expected) {
 		preg_match_all('/' . PatternAssembly::pipe($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches);
+
+		foreach ($expected as $index => $subarray) {
+			foreach ($subarray as $key => $value) {
+				$this->assertSame($value, $matches[$index][$key]);
+			}
+		}
 	}
 
 	/**
@@ -273,6 +295,11 @@ class PatternAssemblyTest extends TestCase {
 	 */
 	public function testVariableHasArraySubset($str, $prefix, $expected) {
 		preg_match_all('/' . PatternAssembly::variable($prefix) . '/i', $str, $matches, PREG_SET_ORDER);
-		$this->assertArraySubset($expected, $matches[0]);
+
+		$result = $matches[0];
+
+		foreach ($expected as $key => $value) {
+			$this->assertSame($value, $result[$key]);
+		}
 	}
 }

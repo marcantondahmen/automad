@@ -3,7 +3,7 @@
 dir=$(dirname "$0")
 cd "$dir/.."
 
-phar="phpunit-7.5.0.phar"
+phar="phpunit-9.5.10.phar"
 local="$(pwd)/$phar"
 url="https://phar.phpunit.de/$phar"
 
