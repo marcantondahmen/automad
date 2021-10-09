@@ -34,8 +34,8 @@ class SearchTest extends TestCase {
 						array(
 							new FieldResultsModel(
 								'+main',
-								array('Simple', 'simple'),
-								'A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text'
+								array('Simple', 'simple', 'simple'),
+								'A <mark>Simple</mark> First Column Table Header ... A <mark>simple</mark> paragraph text ... Another <mark>simple</mark> item'
 							)
 						),
 						'/blocks'
@@ -119,6 +119,26 @@ class SearchTest extends TestCase {
 									'table row'
 								),
 								'A Simple First Column <mark>Table Header</mark> ... Second Column <mark>Table Header</mark> ... First <mark>table row</mark> and column ... First <mark>table row</mark> and second column'
+							)
+						),
+						'/blocks'
+					)
+				)
+			),
+			array(
+				'third level',
+				false,
+				false,
+				array(
+					new FileResultsModel(
+						'/pages/01.blocks/default.txt',
+						array(
+							new FieldResultsModel(
+								'+main',
+								array(
+									'Third level'
+								),
+								'<mark>Third level</mark> item'
 							)
 						),
 						'/blocks'
