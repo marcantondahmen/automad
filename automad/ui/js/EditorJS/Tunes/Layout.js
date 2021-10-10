@@ -47,6 +47,7 @@ class AutomadTuneLayout {
 			'slider',
 			'pagelist',
 			'embed',
+			'table',
 		];
 
 		this.data = data || {};
