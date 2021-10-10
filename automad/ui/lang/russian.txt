@@ -606,6 +606,38 @@ editor_table_toolbox: Табличный список
 
 -
 
+editor_table_add_col_left: Добавить столбец слева
+
+-
+
+editor_table_add_col_right: Добавить столбец справа
+
+-
+
+editor_table_delete_col: Удалить колонку
+
+-
+
+editor_table_add_row_above: Добавьте строку выше
+
+-
+
+editor_table_add_row_below: Добавьте строку ниже
+
+-
+
+editor_table_delete_row: Удалить строку
+
+-
+
+editor_table_with_headings: Со столовыми заголовками
+
+-
+
+editor_table_without_headings: Без таблиц заголовков
+
+-
+
 editor_code: Исходный код
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Заменить выбранное
 
 -
 
-search_replace_check_all: Отметить все
+search_replace_check_all: Выберите все
 
 -
 
-search_replace_uncheck_all: Снять все
+search_replace_uncheck_all: Убрать выделение со всего
 
 -
 
-search_is_case_sensitive: Деликатный случай
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Верхний / нижний регистр
 
 -
 

@@ -606,6 +606,38 @@ editor_table_toolbox: Табличен списък
 
 -
 
+editor_table_add_col_left: Добавете колона отляво
+
+-
+
+editor_table_add_col_right: Добавете колона отдясно
+
+-
+
+editor_table_delete_col: Изтрий колона
+
+-
+
+editor_table_add_row_above: Добавете ред по-горе
+
+-
+
+editor_table_add_row_below: Добавете ред по-долу
+
+-
+
+editor_table_delete_row: Изтриване на ред
+
+-
+
+editor_table_with_headings: С таблични заглавия
+
+-
+
+editor_table_without_headings: Без таблични заглавия
+
+-
+
 editor_code: Програмен код
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Заменете избрания
 
 -
 
-search_replace_check_all: Провери всичко
+search_replace_check_all: Изберете всичко
 
 -
 
-search_replace_uncheck_all: Махнете отметката от всички
+search_replace_uncheck_all: Премахване на всички
 
 -
 
-search_is_case_sensitive: Различаващ главни от малки букви
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Горна / малка кутия
 
 -
 

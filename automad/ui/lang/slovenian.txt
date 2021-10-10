@@ -606,6 +606,38 @@ editor_table_toolbox: Tabelarični seznam
 
 -
 
+editor_table_add_col_left: Dodajte stolpec na levi
+
+-
+
+editor_table_add_col_right: Dodajte stolpec na desni
+
+-
+
+editor_table_delete_col: Brisanje stolpca
+
+-
+
+editor_table_add_row_above: Dodajte vrstico zgoraj
+
+-
+
+editor_table_add_row_below: Dodajte vrstico spodaj
+
+-
+
+editor_table_delete_row: Izbriši vrstico
+
+-
+
+editor_table_with_headings: S tabelami
+
+-
+
+editor_table_without_headings: Brez tabel
+
+-
+
 editor_code: Izvorna koda
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Zamenjajte izbrano
 
 -
 
-search_replace_check_all: Preveri vse
+search_replace_check_all: Izberite vse
 
 -
 
-search_replace_uncheck_all: Počistite vse
+search_replace_uncheck_all: Prekliči vse
 
 -
 
-search_is_case_sensitive: Občutljivo na velike in male črke
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Zgornji / mali črka
 
 -
 

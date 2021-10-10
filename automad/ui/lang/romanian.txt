@@ -606,6 +606,38 @@ editor_table_toolbox: Listă tabelară
 
 -
 
+editor_table_add_col_left: Adăugați o coloană din stânga
+
+-
+
+editor_table_add_col_right: Adăugați o coloană din dreapta
+
+-
+
+editor_table_delete_col: Ștergeți coloana
+
+-
+
+editor_table_add_row_above: Adăugați un rând de mai sus
+
+-
+
+editor_table_add_row_below: Adăugați un rând de mai jos
+
+-
+
+editor_table_delete_row: Ștergeți rândul
+
+-
+
+editor_table_with_headings: Cu titluri de masă
+
+-
+
+editor_table_without_headings: Fără titluri de masă
+
+-
+
 editor_code: Cod sursa
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Înlocuiți selectat
 
 -
 
-search_replace_check_all: Selectați toate
+search_replace_check_all: Alegeți totul
 
 -
 
-search_replace_uncheck_all: Deselecteaza tot
+search_replace_uncheck_all: Deselectați all
 
 -
 
-search_is_case_sensitive: Caz sensibil
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Carcasă superioară / mică
 
 -
 

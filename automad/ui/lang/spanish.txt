@@ -606,6 +606,38 @@ editor_table_toolbox: Lista tabular
 
 -
 
+editor_table_add_col_left: Añadir una columna a la izquierda
+
+-
+
+editor_table_add_col_right: Añadir una columna a la derecha
+
+-
+
+editor_table_delete_col: Eliminar columna
+
+-
+
+editor_table_add_row_above: Añadir una fila arriba
+
+-
+
+editor_table_add_row_below: Añadir una fila a continuación
+
+-
+
+editor_table_delete_row: Borrar fila
+
+-
+
+editor_table_with_headings: Con títulos de mesa
+
+-
+
+editor_table_without_headings: Sin títulos de mesa
+
+-
+
 editor_code: Código fuente
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Reemplazar seleccionado
 
 -
 
-search_replace_check_all: Comprobar todo
+search_replace_check_all: Elegir todos
 
 -
 
-search_replace_uncheck_all: Desmarcar todo
+search_replace_uncheck_all: Deseleccionar todo
 
 -
 
-search_is_case_sensitive: Distingue mayúsculas y minúsculas
-
--
-
-search_is_regex: Regalo
+search_is_case_sensitive: Caso superior / minúscula
 
 -
 

@@ -606,6 +606,38 @@ editor_table_toolbox: Lijst in tabelvorm
 
 -
 
+editor_table_add_col_left: Voeg een kolom aan de linkerkant toe
+
+-
+
+editor_table_add_col_right: Voeg een kolom aan de rechterkant toe
+
+-
+
+editor_table_delete_col: Verwijder kolom
+
+-
+
+editor_table_add_row_above: Voeg hierboven een rij toe
+
+-
+
+editor_table_add_row_below: Voeg hieronder een rij toe
+
+-
+
+editor_table_delete_row: Verwijder rij
+
+-
+
+editor_table_with_headings: Met tafelkoppen
+
+-
+
+editor_table_without_headings: Zonder tafelkoppen
+
+-
+
 editor_code: Broncode
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Vervang geselecteerde
 
 -
 
-search_replace_check_all: Controleer alles
+search_replace_check_all: Kies ze allemaal
 
 -
 
-search_replace_uncheck_all: Schakel alles uit
+search_replace_uncheck_all: Deselecteer alles
 
 -
 
-search_is_case_sensitive: Hoofdlettergevoelig
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Bovenste / kleine letters
 
 -
 

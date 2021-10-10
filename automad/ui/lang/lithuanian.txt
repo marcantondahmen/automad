@@ -606,6 +606,38 @@ editor_table_toolbox: Lentelių sąrašas
 
 -
 
+editor_table_add_col_left: Įdėkite stulpelį kairėje
+
+-
+
+editor_table_add_col_right: Įdėkite stulpelį dešinėje
+
+-
+
+editor_table_delete_col: Ištrinti stulpelį
+
+-
+
+editor_table_add_row_above: Pridėti eilutę virš
+
+-
+
+editor_table_add_row_below: Pridėti žemiau esančią eilutę
+
+-
+
+editor_table_delete_row: Ištrinti eilutę
+
+-
+
+editor_table_with_headings: Su lentelės antraštėmis
+
+-
+
+editor_table_without_headings: Be lentelės antraštės
+
+-
+
 editor_code: Pirminis kodas
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Pakeiskite pasirinktą
 
 -
 
-search_replace_check_all: Viską Patikrink
+search_replace_check_all: Pasirinkite visus
 
 -
 
-search_replace_uncheck_all: Atžymėk visus
+search_replace_uncheck_all: Atzymeti visus pasirinkimus
 
 -
 
-search_is_case_sensitive: Dykuma
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Viršutinė / mažoji raidė
 
 -
 

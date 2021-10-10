@@ -606,6 +606,38 @@ editor_table_toolbox: Tabulu saraksts
 
 -
 
+editor_table_add_col_left: Pievienojiet kolonnu kreisajā pusē
+
+-
+
+editor_table_add_col_right: Pievienojiet kolonnu pa labi
+
+-
+
+editor_table_delete_col: Dzēst kolonnu
+
+-
+
+editor_table_add_row_above: Pievienojiet rindu iepriekš
+
+-
+
+editor_table_add_row_below: Pievienojiet rindu zemāk
+
+-
+
+editor_table_delete_row: Dzēst rindu
+
+-
+
+editor_table_with_headings: Ar galda virsrakstiem
+
+-
+
+editor_table_without_headings: Bez galda virsrakstiem
+
+-
+
 editor_code: Avota kods
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Nomainiet izvēlēto
 
 -
 
-search_replace_check_all: Pārbaudi visu
+search_replace_check_all: Izvēlieties visu
 
 -
 
-search_replace_uncheck_all: Noņemiet atzīmi no visiem
+search_replace_uncheck_all: Atsijāt visu
 
 -
 
-search_is_case_sensitive: Lietuve
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Lielie / mazie burti
 
 -
 

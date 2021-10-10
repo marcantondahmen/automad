@@ -606,6 +606,38 @@ editor_table_toolbox: Tabelite loend
 
 -
 
+editor_table_add_col_left: Lisage vasakul veeru
+
+-
+
+editor_table_add_col_right: Lisage paremale veerg
+
+-
+
+editor_table_delete_col: Kustuta veerg
+
+-
+
+editor_table_add_row_above: Lisage ülalolev rida
+
+-
+
+editor_table_add_row_below: Lisage allpool rida
+
+-
+
+editor_table_delete_row: Kustuta rida
+
+-
+
+editor_table_with_headings: Tabeli pealkirjadega
+
+-
+
+editor_table_without_headings: Ilma tabeli pealkirjadeta
+
+-
+
 editor_code: Lähtekood
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Vahetage valitud
 
 -
 
-search_replace_check_all: Kontrollige kõiki
+search_replace_check_all: Valige kõik
 
 -
 
-search_replace_uncheck_all: Tühjendage kõik
+search_replace_uncheck_all: Tühistada kõik
 
 -
 
-search_is_case_sensitive: Tõstutundlik
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Ülemine / väiketähed
 
 -
 

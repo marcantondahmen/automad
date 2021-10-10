@@ -606,6 +606,38 @@ editor_table_toolbox: Табеларни списак
 
 -
 
+editor_table_add_col_left: Додајте колону са леве стране
+
+-
+
+editor_table_add_col_right: Додајте колону са десне стране
+
+-
+
+editor_table_delete_col: Обриши ступац
+
+-
+
+editor_table_add_row_above: Додајте горњи ред
+
+-
+
+editor_table_add_row_below: Додајте ред испод
+
+-
+
+editor_table_delete_row: Избрисати ред
+
+-
+
+editor_table_with_headings: Са тангима
+
+-
+
+editor_table_without_headings: Без наслова
+
+-
+
 editor_code: Изворни код
 
 -
@@ -1090,7 +1122,7 @@ search_replace_selected: Замените одабрано
 
 -
 
-search_replace_check_all: Штиклирати све
+search_replace_check_all: Изаберите све
 
 -
 
@@ -1098,11 +1130,7 @@ search_replace_uncheck_all: Поништите све
 
 -
 
-search_is_case_sensitive: Велика и мала слова
-
--
-
-search_is_regex: Регек
+search_is_case_sensitive: Велика / мала слова
 
 -
 
