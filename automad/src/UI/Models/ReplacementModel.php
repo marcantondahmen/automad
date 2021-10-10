@@ -167,15 +167,15 @@ class ReplacementModel {
 	/**
 	 * Replace searched string in a value that is either a string or an multidimensional array of strings.
 	 *
-	 * @param array|string $value
+	 * @param array|object|string $value
 	 * @return mixed $value
 	 */
 	private function replaceInValueRecursively($value) {
-		if (is_array($value)) {
+		if (is_array($value) || is_object($value)) {
 			$array = array();
 
-			foreach ($value as $item) {
-				$array[] = $this->replaceInValueRecursively($item);
+			foreach ($value as $key => $item) {
+				$array[$key] = $this->replaceInValueRecursively($item);
 			}
 
 			$value = $array;

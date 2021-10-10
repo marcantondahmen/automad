@@ -606,6 +606,38 @@ editor_table_toolbox: Tabellarische Liste
 
 -
 
+editor_table_add_col_left: Fügen Sie links eine Spalte hinzu
+
+-
+
+editor_table_add_col_right: Fügen Sie rechts eine Spalte hinzu
+
+-
+
+editor_table_delete_col: Spalte löschen
+
+-
+
+editor_table_add_row_above: Fügen Sie eine Reihe oben hinzu
+
+-
+
+editor_table_add_row_below: Fügen Sie eine Reihe unten hinzu
+
+-
+
+editor_table_delete_row: Zeile löschen
+
+-
+
+editor_table_with_headings: Mit Tabellenüberschriften
+
+-
+
+editor_table_without_headings: Ohne Tabellenüberschriften
+
+-
+
 editor_code: Quellcode
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Ausgewählte ersetzen
 
 -
 
-search_replace_check_all: Alles überprüfen
+search_replace_check_all: Alles auswählen
 
 -
 
-search_replace_uncheck_all: Alle deaktivieren
+search_replace_uncheck_all: Alle abwählen
 
 -
 
-search_is_case_sensitive: Gehäuseempfindlichkeit.
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Groß- / Kleinschreibung
 
 -
 

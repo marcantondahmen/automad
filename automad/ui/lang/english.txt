@@ -646,6 +646,38 @@ editor_table_toolbox: Tabular List
 
 -
 
+editor_table_add_col_left: Add a column on the left
+
+-
+
+editor_table_add_col_right: Add a column on the right
+
+-
+
+editor_table_delete_col: Delete column
+
+-
+
+editor_table_add_row_above: Add a row above 
+
+-
+
+editor_table_add_row_below: Add a row below 
+
+-
+
+editor_table_delete_row: Delete row 
+
+-
+
+editor_table_with_headings: With table headings 
+
+-
+
+editor_table_without_headings: Without table headings
+
+-
+
 editor_code: Source Code
 
 -
@@ -1248,15 +1280,15 @@ search_replace_selected: Replace Selected
 
 -
 
-search_replace_check_all: Check All
+search_replace_check_all: Choose All
 
 -
 
-search_replace_uncheck_all: Uncheck All
+search_replace_uncheck_all: Deselect All
 
 -
 
-search_is_case_sensitive: Case Sensitive
+search_is_case_sensitive: Upper / Lower Case
 
 -
 

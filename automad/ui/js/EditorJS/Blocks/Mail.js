@@ -54,7 +54,7 @@ class AutomadBlockMail {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
@@ -70,13 +70,6 @@ class AutomadBlockMail {
 				data.placeholderMessage || t('mail_data_placeholder_message'),
 			textButton: data.textButton || t('mail_data_send'),
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.inputs = {
 			to: create.editable(
@@ -171,9 +164,5 @@ class AutomadBlockMail {
 			),
 			textButton: stripNbsp(this.inputs.textButton.innerHTML),
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

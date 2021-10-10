@@ -606,6 +606,38 @@ editor_table_toolbox: 表格列表
 
 -
 
+editor_table_add_col_left: 在左侧添加列
+
+-
+
+editor_table_add_col_right: 在右侧添加列
+
+-
+
+editor_table_delete_col: 删除列
+
+-
+
+editor_table_add_row_above: 在上面添加一行
+
+-
+
+editor_table_add_row_below: 在下面添加一行
+
+-
+
+editor_table_delete_row: 删除行
+
+-
+
+editor_table_with_headings: 与表标题
+
+-
+
+editor_table_without_headings: 没有表标题
+
+-
+
 editor_code: 源代码
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: 替换选定
 
 -
 
-search_replace_check_all: 选择所有
+search_replace_check_all: 选择全部
 
 -
 
-search_replace_uncheck_all: 取消所有
+search_replace_uncheck_all: 取消选择所有人
 
 -
 
-search_is_case_sensitive: 区分大小写
-
--
-
-search_is_regex: 正则表达式
+search_is_case_sensitive: 大写/小写
 
 -
 

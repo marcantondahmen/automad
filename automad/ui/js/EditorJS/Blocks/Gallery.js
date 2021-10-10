@@ -56,7 +56,7 @@ class AutomadBlockGallery {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		this.api = api;
 
 		this.data = {
@@ -69,12 +69,6 @@ class AutomadBlockGallery {
 				data.cleanBottom !== undefined ? data.cleanBottom : true,
 		};
 
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 		this.inputs = {};
 		this.wrapper = this.drawView();
 	}
@@ -212,9 +206,5 @@ class AutomadBlockGallery {
 			),
 			cleanBottom: this.inputs.cleanBottom.checked,
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

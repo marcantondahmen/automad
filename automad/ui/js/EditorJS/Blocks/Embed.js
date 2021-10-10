@@ -1,6 +1,7 @@
 /*
  * This EditorJS block is based on the original embed block by CodeX and
- * is extended to support the Automad block grid layout.
+ * is extended to support custom services that are currently
+ * not supported as of version 2.4.6.
  * https://github.com/editor-js/embed
  *
  * Copyright (c) 2018 CodeX (team@ifmo.su)
@@ -180,25 +181,13 @@ class AutomadBlockEmbed {
 		return isValid;
 	}
 
-	constructor({ data, api, config, readOnly }) {
+	constructor({ data, api, readOnly }) {
 		this.api = api;
 		this._data = {};
 		this.element = null;
 		this.readOnly = readOnly;
 
 		this.data = data;
-
-		this.layout = {
-			span: data.span || '',
-			stretched: data.stretched || '',
-		};
-
-		this.settings = AutomadLayout.renderSettings(
-			this.layout,
-			data,
-			api,
-			config
-		);
 	}
 
 	set data(data) {
@@ -310,7 +299,7 @@ class AutomadBlockEmbed {
 	}
 
 	save() {
-		return Object.assign(this.data, this.layout);
+		return this.data;
 	}
 
 	onPaste(event) {
@@ -351,9 +340,5 @@ class AutomadBlockEmbed {
 		}).then(() => {
 			observer.disconnect();
 		});
-	}
-
-	renderSettings() {
-		return this.settings;
 	}
 }

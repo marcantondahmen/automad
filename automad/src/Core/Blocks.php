@@ -88,9 +88,14 @@ class Blocks {
 			return false;
 		}
 
+		$data = self::prepareData($data);
+
 		foreach ($data->blocks as $block) {
 			try {
-				$blockIsFlexItem = (!empty($block->data->widthFraction) && empty($block->data->stretched));
+				$width = $block->tunes->layout->width;
+				$stretched = $block->tunes->layout->stretched;
+
+				$blockIsFlexItem = ($width && !$stretched);
 
 				if (!$flexOpen && $blockIsFlexItem) {
 					$html .= '<am-flex>';
@@ -108,11 +113,11 @@ class Blocks {
 				);
 
 				// Stretch block.
-				if (!empty($block->data->stretched)) {
+				if ($stretched) {
 					$blockHtml = "<am-stretched>$blockHtml</am-stretched>";
-				} elseif (!empty($block->data->widthFraction)) {
-					$widthFraction = str_replace('/', '-', $block->data->widthFraction);
-					$blockHtml = "<am-{$widthFraction}>$blockHtml</am-{$widthFraction}>";
+				} elseif ($width) {
+					$w = str_replace('/', '-', $width);
+					$blockHtml = "<am-$w>$blockHtml</am-$w>";
 				}
 
 				$html .= $blockHtml;
@@ -126,5 +131,25 @@ class Blocks {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Prepare block data
+	 *
+	 * @param object $data
+	 * @return object $data
+	 */
+	private static function prepareData(object $data) {
+		$LegacyData = new LegacyData($data);
+		$data = $LegacyData->convert();
+
+		foreach ($data->blocks as $block) {
+			$block->tunes->layout = (object) array_merge(
+				array('width' => false, 'stretched' => false),
+				(array) $block->tunes->layout
+			);
+		}
+
+		return $data;
 	}
 }

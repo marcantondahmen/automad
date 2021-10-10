@@ -606,6 +606,38 @@ editor_table_toolbox: Liosta Táblach
 
 -
 
+editor_table_add_col_left: Cuir colún ar chlé
+
+-
+
+editor_table_add_col_right: Cuir colún ar dheis leis
+
+-
+
+editor_table_delete_col: Scrios an colún
+
+-
+
+editor_table_add_row_above: Cuir sraith thuas leis
+
+-
+
+editor_table_add_row_below: Cuir sraith thíos leis
+
+-
+
+editor_table_delete_row: Scrios an tsraith
+
+-
+
+editor_table_with_headings: Le ceannteidil boird
+
+-
+
+editor_table_without_headings: Gan ceannteidil bhoird
+
+-
+
 editor_code: Cód foinse
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Athraigh an t-ionad
 
 -
 
-search_replace_check_all: Seiceáil go léir
+search_replace_check_all: Roghnaigh go léir
 
 -
 
-search_replace_uncheck_all: Díthiceáil go léir
+search_replace_uncheck_all: Díleálach go léir
 
 -
 
-search_is_case_sensitive: Cás íogair
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Cás Uachtarach / Íochtarach
 
 -
 

@@ -33,11 +33,41 @@
  * https://automad.org/license
  */
 
-class AutomadBlockTable extends Table {
-	static get toolbox() {
-		return {
-			icon: '<svg width="18px" height="16px" viewBox="0 0 18 16"><path d="M14,0H4C1.8,0,0,1.8,0,4v8c0,2.2,1.8,4,4,4h10c2.2,0,4-1.8,4-4V4C18,1.8,16.2,0,14,0z M4,2h4v5H2V4C2,2.9,2.9,2,4,2z M4,14 c-1.1,0-2-0.9-2-2V9h6v5H4z M16,12c0,1.1-0.9,2-2,2h-4V9h6V12z M16,7h-6V2h4c1.1,0,2,0.9,2,2V7z"/></svg>',
-			title: AutomadEditorTranslation.get('table_toolbox'),
-		};
+class AutomadTuneLayout {
+	static get isTune() {
+		return true;
+	}
+
+	constructor({ api, data, config, block }) {
+		const stretchable = [
+			'section',
+			'delimiter',
+			'image',
+			'gallery',
+			'slider',
+			'pagelist',
+			'embed',
+			'table',
+		];
+
+		this.data = data || {};
+
+		this.settings = AutomadLayout.renderSettings(
+			this.data,
+			Object.assign({}, data),
+			api,
+			{
+				flex: config.flex,
+				allowStretching: stretchable.includes(block.name),
+			}
+		);
+	}
+
+	render() {
+		return this.settings;
+	}
+
+	save() {
+		return this.data;
 	}
 }

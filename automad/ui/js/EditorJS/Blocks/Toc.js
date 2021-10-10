@@ -49,17 +49,10 @@ class AutomadBlockToc {
 		};
 	}
 
-	constructor({ data, config, api }) {
+	constructor({ data, api }) {
 		this.data = {
 			style: data.style || 'ordered',
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.api = api;
 
@@ -126,7 +119,6 @@ class AutomadBlockToc {
 		});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

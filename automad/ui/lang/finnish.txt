@@ -606,6 +606,38 @@ editor_table_toolbox: Taulukko
 
 -
 
+editor_table_add_col_left: Lisää sarake vasemmalle
+
+-
+
+editor_table_add_col_right: Lisää sarake oikealle
+
+-
+
+editor_table_delete_col: Poista sarake
+
+-
+
+editor_table_add_row_above: Lisää yllä oleva rivi
+
+-
+
+editor_table_add_row_below: Lisää rivi alla
+
+-
+
+editor_table_delete_row: Poista rivi
+
+-
+
+editor_table_with_headings: Taulukon otsikoilla
+
+-
+
+editor_table_without_headings: Ilman pöydän otsikoita
+
+-
+
 editor_code: Lähdekoodi
 
 -
@@ -1090,7 +1122,7 @@ search_replace_selected: Vaihda valittu
 
 -
 
-search_replace_check_all: Tarkista kaikki
+search_replace_check_all: Valitse kaikki
 
 -
 
@@ -1098,11 +1130,7 @@ search_replace_uncheck_all: Poista kaikki
 
 -
 
-search_is_case_sensitive: Tapauskohtainen
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Ylempi / pienet kirjaimet
 
 -
 

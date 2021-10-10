@@ -606,6 +606,38 @@ editor_table_toolbox: Λίστα πινάκων
 
 -
 
+editor_table_add_col_left: Προσθέστε μια στήλη στα αριστερά
+
+-
+
+editor_table_add_col_right: Προσθέστε μια στήλη στα δεξιά
+
+-
+
+editor_table_delete_col: Διαγραφή στήλης
+
+-
+
+editor_table_add_row_above: Προσθέστε μια σειρά παραπάνω
+
+-
+
+editor_table_add_row_below: Προσθέστε μια σειρά παρακάτω
+
+-
+
+editor_table_delete_row: Διαγράψτε τη σειρά
+
+-
+
+editor_table_with_headings: Με τις επικεφαλίδες πίνακα
+
+-
+
+editor_table_without_headings: Χωρίς επικεφαλίδες πίνακα
+
+-
+
 editor_code: Πηγαίος κώδικας
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Αντικαταστήστε την επιλεγμέν�
 
 -
 
-search_replace_check_all: Ελεγξε τα ολα
+search_replace_check_all: Επιλέξτε όλα
 
 -
 
-search_replace_uncheck_all: Ξετσεκαρε τα ολα
+search_replace_uncheck_all: Αποεπιλογή όλων
 
 -
 
-search_is_case_sensitive: Διάκριση πεζών
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Άνω / πεζά
 
 -
 

@@ -606,6 +606,38 @@ editor_table_toolbox: 表紙リスト
 
 -
 
+editor_table_add_col_left: 左側の列を追加します
+
+-
+
+editor_table_add_col_right: 右側の列を追加します
+
+-
+
+editor_table_delete_col: 列を削除します
+
+-
+
+editor_table_add_row_above: 上記の行を追加してください
+
+-
+
+editor_table_add_row_below: 下の行を追加してください
+
+-
+
+editor_table_delete_row: 行を削除します
+
+-
+
+editor_table_with_headings: テーブルの見出しを使って
+
+-
+
+editor_table_without_headings: テーブルの見出しなしで
+
+-
+
 editor_code: ソースコード
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: 選択した交換
 
 -
 
-search_replace_check_all: すべてチェック
+search_replace_check_all: 全体を選ぶ
 
 -
 
-search_replace_uncheck_all: すべてのチェックを外して
+search_replace_uncheck_all: すべての選択を解除
 
 -
 
-search_is_case_sensitive: 大文字と小文字を区別
-
--
-
-search_is_regex: 正当
+search_is_case_sensitive: 上/小文字
 
 -
 

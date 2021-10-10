@@ -606,6 +606,38 @@ editor_table_toolbox: Tabulkový seznam
 
 -
 
+editor_table_add_col_left: Přidejte sloupec vlevo
+
+-
+
+editor_table_add_col_right: Přidat sloupec vpravo
+
+-
+
+editor_table_delete_col: Smazat sloupec
+
+-
+
+editor_table_add_row_above: Přidat řádek výše
+
+-
+
+editor_table_add_row_below: Přidat níže uvedený řádek
+
+-
+
+editor_table_delete_row: Smazat řádek
+
+-
+
+editor_table_with_headings: S tabulkovými záhlavími
+
+-
+
+editor_table_without_headings: Bez záhlaví tabulky
+
+-
+
 editor_code: Zdrojový kód
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Nahradit vybraný
 
 -
 
-search_replace_check_all: Zkontrolovat vše
+search_replace_check_all: Vyberte si vše
 
 -
 
-search_replace_uncheck_all: Zrušte zaškrtnutí všech
+search_replace_uncheck_all: Odznačit vše
 
 -
 
-search_is_case_sensitive: Rozeznává velká a malá písmena
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Horní / malá písmena
 
 -
 

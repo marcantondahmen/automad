@@ -118,6 +118,7 @@ abstract class AbstractView {
 				<link href="{$fn(AM_BASE_URL)}/automad/dist/favicon.ico?v=$versionSanitized" rel="shortcut icon" type="image/x-icon" />
 				<link href="{$fn(AM_BASE_URL)}/automad/dist/libs.min.css?v=$versionSanitized" rel="stylesheet">
 				<link href="{$fn(AM_BASE_URL)}/automad/dist/automad.min.css?v=$versionSanitized" rel="stylesheet">
+				<script>window.AM_VERSION = "{$fn(AM_VERSION)}"</script>
 				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/dist/libs.min.js?v=$versionSanitized"></script>
 				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/dist/automad.min.js?v=$versionSanitized"></script>
 				{$fn(BlockSnippetArrays::render())}

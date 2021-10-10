@@ -50,6 +50,40 @@ title: Blocks
                 "gap": "",
                 "minBlockWidth": ""
             }
+        },
+        {
+            "type": "lists",
+            "data": {
+                "style": "ordered",
+                "items": [
+                    {
+                        "content": "List item",
+                        "items": []
+                    },
+                    {
+                        "content": "Second list item",
+                        "items": []
+                    },
+                    {
+                        "content": "A nested list",
+                        "items": [
+                            {
+                                "content": "Second level",
+                                "items": [
+                                    {
+                                        "content": "Third level item",
+                                        "items": []
+                                    },
+                                    {
+                                        "content": "Another replaced item",
+                                        "items": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     ],
     "version": "2.20.2"

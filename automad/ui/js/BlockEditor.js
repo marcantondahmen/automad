@@ -88,7 +88,10 @@
 				return;
 			}
 
-			var editor = new EditorJS({
+			const LegacyData = new AutomadLegacyData(data);
+			data = LegacyData.convert(data);
+
+			const editor = new EditorJS({
 				holder: options.holder,
 				logLevel: 'ERROR',
 				data: data,
@@ -96,6 +99,7 @@
 					options.readOnly,
 					options.flex
 				),
+				tunes: ['layout'],
 				readOnly: options.readOnly,
 				minHeight: false,
 				autofocus: options.autofocus,
@@ -119,6 +123,22 @@
 								},
 							},
 						},
+						tools: {
+							lists: {
+								Unordered: t('list_unordered'),
+								Ordered: t('list_ordered'),
+							},
+							table: {
+								'Add column to left': t('table_add_col_left'),
+								'Add column to right': t('table_add_col_right'),
+								'Delete column': t('table_delete_col'),
+								'Add row above': t('table_add_row_above'),
+								'Add row below': t('table_add_row_below'),
+								'Delete row': t('table_delete_row'),
+								'With headings': t('table_with_headings'),
+								'Without headings': t('table_without_headings'),
+							},
+						},
 						blockTunes: {
 							delete: {
 								Delete: t('ui_delete'),
@@ -133,40 +153,12 @@
 					},
 				},
 
-				onChange: function () {
-					if (!options.readOnly) {
-						try {
-							editor.save().then(function (data) {
-								// Purge layout data.
-								data.blocks.forEach((block) => {
-									['stretched', 'widthFraction'].forEach(
-										(key) => {
-											if (!block.data[key]) {
-												delete block.data[key];
-											}
-										}
-									);
-								});
-
-								// Only trigger change in case blocks actually have changed.
-								var blocksNew = JSON.stringify(data.blocks);
-
-								try {
-									var blocksCurrent = JSON.stringify(
-										JSON.parse($input.val()).blocks
-									);
-								} catch (e) {
-									var blocksCurrent = '';
-								}
-
-								if (blocksCurrent != blocksNew) {
-									$input
-										.val(JSON.stringify(data, null, 4))
-										.trigger('change');
-								}
-							});
-						} catch (e) {}
-					}
+				onChange: function (api, block) {
+					Automad.BlockEditor.save(
+						editor,
+						$input.get(0),
+						options.readOnly
+					);
 				},
 
 				onReady: function () {
@@ -185,10 +177,68 @@
 
 						options.onReady();
 					});
+
+					let holder = editor.configuration.holder;
+
+					if (
+						typeof holder === 'string' ||
+						holder instanceof String
+					) {
+						holder = document.getElementById(holder);
+					}
+
+					const save = () => {
+						Automad.BlockEditor.save(
+							editor,
+							$input.get(0),
+							options.readOnly
+						);
+					};
+
+					$(holder).on(
+						'click',
+						`.${AutomadEditorConfig.cls.settingsButton}`,
+						save
+					);
+
+					$(holder).on(
+						'change keyup keydown',
+						`.${AutomadEditorConfig.cls.input}, .${AutomadEditorConfig.cls.block} input, .${AutomadEditorConfig.cls.block} select`,
+						save
+					);
 				},
 			});
 
 			return editor;
+		},
+
+		save: function (editor, input, readOnly) {
+			if (!readOnly) {
+				const $input = $(input);
+
+				try {
+					editor.save().then(function (data) {
+						data.automadVersion = window.AM_VERSION;
+
+						// Only trigger change in case blocks actually have changed.
+						var blocksNew = JSON.stringify(data.blocks);
+
+						try {
+							var blocksCurrent = JSON.stringify(
+								JSON.parse($input.val()).blocks
+							);
+						} catch (e) {
+							var blocksCurrent = '';
+						}
+
+						if (blocksCurrent != blocksNew) {
+							$input
+								.val(JSON.stringify(data, null, 4))
+								.trigger('change');
+						}
+					});
+				} catch (e) {}
+			}
 		},
 
 		initErrorHandler: function () {
@@ -207,36 +257,19 @@
 		},
 
 		init: function () {
-			var be = Automad.BlockEditor,
-				selector = '[' + be.dataAttr + ']',
-				triggerChange = function () {
-					var block = $(this)
-							.closest(`.${AutomadEditorConfig.cls.editor}`)
-							.find(
-								`.cdx-block, .${AutomadEditorConfig.cls.blockContent}, .ce-block`
-							)
-							.first()
-							.get(0),
-						temp = document.createElement('div');
+			const selector = `[${this.dataAttr}]`;
+			const containers = Array.from(document.querySelectorAll(selector));
 
-					// Trigger a fake block changed event by adding and removing a temporary div.
-					try {
-						block.appendChild(temp);
-						block.removeChild(temp);
-					} catch (e) {}
-				};
+			this.initErrorHandler();
 
-			be.initErrorHandler();
-
-			$(selector).each(function () {
-				var $wrapper = $(this),
-					id = $wrapper.data(Automad.Util.dataCamelCase(be.dataAttr)),
-					input = this.querySelector('input');
+			containers.forEach((container) => {
+				const id = container.getAttribute(this.dataAttr);
+				const input = container.querySelector('input');
 
 				// Remove data attribute to prevent multiple initializations.
-				$wrapper.removeAttr(be.dataAttr);
+				container.removeAttribute(this.dataAttr);
 
-				be.createEditor({
+				this.createEditor({
 					holder: id,
 					input: input,
 					placeholder: AutomadEditorTranslation.get('ui_placeholder'),
@@ -248,18 +281,6 @@
 					},
 				});
 			});
-
-			// Trigger changes when clicking a settings button or changing an input field.
-			$(document).on(
-				'click',
-				`.${AutomadEditorConfig.cls.settingsButton}`,
-				triggerChange
-			);
-			$(document).on(
-				'change keyup keydown',
-				`.${AutomadEditorConfig.cls.input}, .${AutomadEditorConfig.cls.block} input, .${AutomadEditorConfig.cls.block} select`,
-				triggerChange
-			);
 		},
 	};
 

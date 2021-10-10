@@ -107,7 +107,12 @@
 		border-radius: @am-radius;
 		color: @button-color !important;
 		background-color: @button-background;
+		border: @am-hairline;
 		.shadow;
+
+		&:hover {
+			background-color: @button-hover-background;
+		}
 	}
 
 	& & .am-section-edit-button {
@@ -184,13 +189,13 @@
 				min-width: 8rem;
 			}
 
-			& > [class*='width-fraction-'] {
+			& > [class*='width-'] {
 				& > div {
 					max-width: none;
 				}
 			}
 
-			& > .width-fraction {
+			& > .width {
 				&-1-4 {
 					flex-basis: 1 / 4 * 100%;
 				}
@@ -266,7 +271,7 @@
 				}
 			}
 
-			& .cdx-settings-button {
+			.am-u-modal-dialog & .cdx-settings-button {
 				width: @am-settings-height !important;
 
 				& + * {

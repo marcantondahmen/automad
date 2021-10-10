@@ -606,6 +606,38 @@ editor_table_toolbox: Tabelloversikt
 
 -
 
+editor_table_add_col_left: Legg til en kolonne til venstre
+
+-
+
+editor_table_add_col_right: Legg til en kolonne til høyre
+
+-
+
+editor_table_delete_col: Slett kolonne
+
+-
+
+editor_table_add_row_above: Legg til en rad over
+
+-
+
+editor_table_add_row_below: Legg til en rad under
+
+-
+
+editor_table_delete_row: Slett rad
+
+-
+
+editor_table_with_headings: Med bordoverskrifter
+
+-
+
+editor_table_without_headings: Uten bordskader
+
+-
+
 editor_code: Kildekode
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Erstatt valgt
 
 -
 
-search_replace_check_all: Sjekk alt
+search_replace_check_all: Velg alt
 
 -
 
-search_replace_uncheck_all: Fjern merket for alt
+search_replace_uncheck_all: Opphev alle
 
 -
 
-search_is_case_sensitive: Saksfølsom
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Øvre / små bokstaver
 
 -
 

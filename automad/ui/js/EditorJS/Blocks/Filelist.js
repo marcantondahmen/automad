@@ -52,7 +52,7 @@ class AutomadBlockFilelist {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
@@ -60,13 +60,6 @@ class AutomadBlockFilelist {
 			file: data.file || '',
 			glob: data.glob || '*.*',
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -120,9 +113,5 @@ class AutomadBlockFilelist {
 			file: this.inputs.file.value,
 			glob: stripNbsp(this.inputs.glob.innerHTML),
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

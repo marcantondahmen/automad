@@ -6,7 +6,10 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@editorjs/editorjs": "^2.20.2",
+    "@editorjs/editorjs": "^2.22.2",
+    "@editorjs/nested-list": "^1.0.2",
+    "@editorjs/quote": "^2.4.0",
+    "@editorjs/table": "^2.0.1",
     "blueimp-file-upload": "^9.21.0",
     "codemirror": "^5.35.0",
     "draggabilly": "^2.1.1",

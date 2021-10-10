@@ -606,6 +606,38 @@ editor_table_toolbox: Tabelllista
 
 -
 
+editor_table_add_col_left: Lägg till en kolumn till vänster
+
+-
+
+editor_table_add_col_right: Lägg till en kolumn till höger
+
+-
+
+editor_table_delete_col: Radera kolumnen
+
+-
+
+editor_table_add_row_above: Lägg till en rad ovanför
+
+-
+
+editor_table_add_row_below: Lägg till en rad nedan
+
+-
+
+editor_table_delete_row: Radera raden
+
+-
+
+editor_table_with_headings: Med bordsrubriker
+
+-
+
+editor_table_without_headings: Utan bordsrubriker
+
+-
+
 editor_code: Källkod
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Byt ut valda
 
 -
 
-search_replace_check_all: Markera alla
+search_replace_check_all: Välj alla
 
 -
 
-search_replace_uncheck_all: Avbocka alla
+search_replace_uncheck_all: Avmarkera alla
 
 -
 
-search_is_case_sensitive: Skiftlägeskänsliga
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Övre / små bokstäver
 
 -
 

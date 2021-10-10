@@ -606,6 +606,38 @@ editor_table_toolbox: Tafla Listi
 
 -
 
+editor_table_add_col_left: Bættu dálki til vinstri
+
+-
+
+editor_table_add_col_right: Bættu dálki til hægri
+
+-
+
+editor_table_delete_col: Eyða dálki
+
+-
+
+editor_table_add_row_above: Bættu við umf hér að ofan
+
+-
+
+editor_table_add_row_below: Bættu við röð hér að neðan
+
+-
+
+editor_table_delete_row: Eyða röð
+
+-
+
+editor_table_with_headings: Með töfluhausum
+
+-
+
+editor_table_without_headings: Án töfluhausar
+
+-
+
 editor_code: Upprunakóði
 
 -
@@ -1090,19 +1122,15 @@ search_replace_selected: Skipta út valið
 
 -
 
-search_replace_check_all: Athugaðu allt
+search_replace_check_all: Veldu allt.
 
 -
 
-search_replace_uncheck_all: Hakaðu úr öllum
+search_replace_uncheck_all: Afvelja allt
 
 -
 
-search_is_case_sensitive: Málangur
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Efri / lágstöfum
 
 -
 

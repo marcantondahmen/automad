@@ -1,6 +1,6 @@
 /*
  * This EditorJS block is based on the original header block by CodeX and
- * is extended to support the Automad block grid layout.
+ * is extended to support text align center and left tunes.
  * https://github.com/editor-js/header
  *
  * Copyright (c) 2018 CodeX (team@ifmo.su)
@@ -55,13 +55,6 @@ class AutomadBlockHeader {
 		this._data = this.normalizeData(data);
 		this.settingsButtons = [];
 		this._element = this.getTag();
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 	}
 
 	normalizeData(data) {
@@ -159,7 +152,6 @@ class AutomadBlockHeader {
 
 		wrapper.appendChild(wrapperAlign);
 		wrapper.appendChild(wrapperLevels);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}
