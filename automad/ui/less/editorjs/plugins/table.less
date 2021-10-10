@@ -32,135 +32,94 @@
  * Licensed under the MIT license.
  */
 
-.tc-toolbar {
-	&--hidden {
-		visibility: hidden;
+.am-block-editor {
+	.tc-toolbox {
+		--toolbox-padding: 0.4rem;
+		--popover-margin: 2rem;
+		--toggler-click-zone-size: 2rem;
+		--toggler-dots-color: @am-muted;
+		--toggler-dots-color-hovered: @am-muted;
+
+		z-index: 110;
 	}
 
-	&--hor {
-		width: 100%;
-		height: 21px;
-		display: flex;
-		align-items: center;
-		flex-direction: row;
-		position: absolute;
-		left: 0;
-		top: 1px;
-		z-index: 100;
+	.tc-wrap {
+		--color-background: @form-background;
+		--color-text-secondary: @am-muted;
+		--color-border: @am-border-color;
+		--cell-size: 2rem;
+		--toolbox-icon-size: 1.2rem;
+		--toolbox-padding: 0.4rem;
+
+		margin-top: 1.8rem;
 	}
 
-	&--ver {
-		height: 100%;
-		width: 21px;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		position: absolute;
-		top: 0;
-		left: -1px;
-		z-index: 100;
-	}
-
-	&__plus {
-		height: 1.5rem;
-		width: 1.5rem;
-		margin: 0;
-
-		&--hor {
-			margin-left: -0.75rem;
-			margin-top: -0.2rem;
-		}
-
-		&--ver {
-			margin-top: -0.75rem;
-		}
-
-		circle {
-			fill: @am-success !important;
+	.tc-table {
+		font-size: 0.85rem;
+		border-top: 1px solid var(--color-border);
+		line-height: 1.4;
+		&--heading {
+			& .tc-row:first-child {
+				font-weight: 520;
+			}
 		}
 	}
 
-	&__shine-line {
-		&--hor {
-			min-height: 1px;
-			width: 100%;
-		}
-
-		&--ver {
-			min-width: 1px;
-			height: 100%;
-		}
+	.tc-cell {
+		padding: 0.4rem 0.8rem;
 	}
 
-	&__shine-line--ver,
-	&__shine-line--hor {
-		background-color: @am-success;
+	.tc-add-column {
+		padding: 0.4rem 0;
 	}
-}
 
-.tc-editor {
-	padding: 10px;
-	position: relative;
-	box-sizing: content-box;
-	width: 100%;
-	left: -10px;
-}
+	.tc-add-row {
+		padding-left: 0.8rem;
+	}
 
-.tc-table {
-	width: 100%;
-	height: 100%;
-	border-collapse: collapse;
-	table-layout: fixed;
+	.tc-popover {
+		--color-border: @am-border-color;
+		--color-background: @am-bg;
+		--color-background-hover: @button-hover-background;
+		--color-background-confirm: @button-danger-background;
+		--color-background-confirm-hover: @button-danger-hover-background;
+		--color-text-confirm: @button-danger-color;
 
-	&__wrap {
-		border: 1px solid @am-border-color;
+		background: var(--color-background);
+		border: 1px solid var(--color-border);
 		border-radius: @am-radius;
-		position: relative;
-		height: 100%;
-		width: 100%;
-		box-sizing: border-box;
-	}
+		padding: 2px;
+		.shadow;
 
-	&__cell {
-		border: 1px solid @am-border-color;
-		padding: 0;
-		vertical-align: top;
-	}
+		&__item {
+			padding: 2px 14px 2px 2px;
+			border-radius: @am-radius-small;
 
-	&__area {
-		padding: 0.57rem 0.71rem;
-		height: 100%;
-	}
+			&:not(:last-of-type) {
+				margin-bottom: 2px;
+			}
 
-	&__inp {
-		outline: none;
-		flex-grow: 100;
-		min-height: 1.5em;
-		height: 100%;
-		overflow: hidden;
-	}
+			&-icon {
+				display: inline-flex;
+				width: 1.8rem;
+				height: 1.8rem;
+				align-items: center;
+				justify-content: center;
+				background: transparent !important;
+				border: none;
+				margin-right: 0.5rem;
+			}
 
-	tbody tr:first-child td {
-		border-top: none;
-	}
+			&-label {
+				line-height: 1.4;
+				font-size: 1rem;
+				font-weight: @base-body-font-weight;
+			}
 
-	tbody tr:last-child td {
-		border-bottom: none;
-	}
-
-	tbody tr td:last-child {
-		border-right: none;
-	}
-
-	tbody tr td:first-child {
-		border-left: none;
-	}
-
-	& tr:first-child > td {
-		border-bottom-width: 0.14rem;
-
-		& .tc-table__inp {
-			font-weight: bold !important;
+			&--confirm &-icon {
+				border: none;
+				background: transparent !important;
+			}
 		}
 	}
 }

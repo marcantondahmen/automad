@@ -32,13 +32,11 @@
  * Licensed under the MIT license.
  */
 
-
 am-stretched {
-
 	display: block;
 	padding: 0;
-	margin-left: ~"calc(var(--am-container-padding) * -1)" !important;
-	margin-right: ~"calc(var(--am-container-padding) * -1)" !important;
+	margin-left: ~'calc(var(--am-container-padding) * -1)' !important;
+	margin-right: ~'calc(var(--am-container-padding) * -1)' !important;
 
 	* + & {
 		margin-top: var(--am-block-margin-top);
@@ -49,21 +47,23 @@ am-stretched {
 	}
 
 	& > .am-block {
-		
 		max-width: none;
 
 		& > * > figcaption {
 			padding: 0.75em var(--am-container-padding);
 		}
-
 	}
 
+	& > am-table,
 	& > am-pagelist {
 		padding: 0 var(--am-container-padding);
+	}
+
+	& + & > am-table {
+		padding-top: var(--am-block-margin-top);
 	}
 
 	& img {
 		min-width: 100%;
 	}
-
 }
