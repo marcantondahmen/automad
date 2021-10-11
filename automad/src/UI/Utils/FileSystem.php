@@ -301,8 +301,20 @@ class FileSystem extends CoreFileSystem {
 				);
 
 				foreach ($cacheItems as $item) {
-					if (!rename($item, $trash . '/' . basename($item))) {
-						return false;
+					$dest = $trash . '/' . basename($item);
+
+					if (!@rename($item, $dest)) {
+						if (function_exists('exec')) {
+							$output = array();
+							$code = null;
+							@exec("mv $item $dest", $output, $code);
+
+							if ($code !== 0) {
+								return false;
+							}
+						} else {
+							return false;
+						}
 					}
 				}
 
