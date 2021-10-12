@@ -305,9 +305,16 @@ class FileSystem extends CoreFileSystem {
 
 					if (!@rename($item, $dest)) {
 						if (function_exists('exec')) {
+							if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+								$cmd = "move $item $dest";
+								$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
+							} else {
+								$cmd = "mv $item $dest";
+							}
+
 							$output = array();
 							$code = null;
-							@exec("mv $item $dest", $output, $code);
+							@exec($cmd, $output, $code);
 
 							if ($code !== 0) {
 								return false;
