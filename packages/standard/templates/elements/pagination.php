@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ if @{ :paginationCount } > 1 ~@>
 	<section>
 		<ul

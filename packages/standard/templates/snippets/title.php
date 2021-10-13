@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ if not @{ checkboxHideTitle } ~@>
 	<h1 class="am-block uk-margin-bottom-remove uk-margin-top-remove">
 		@{ title }

@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set_teaser_variable.php @>
 <@ set { :description: @{ metaDescription | def(@{ :teaser | stripTags }) } } @>
 <@ Standard/MetaTags { 
