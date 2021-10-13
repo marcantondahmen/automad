@@ -2,10 +2,10 @@
 /**
  * Automad Meta Tags
  *
- * 	An Automad meta tags extension.
+ * An Automad meta tags extension.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (C) 2018 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (C) 2018-2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license
  */
 

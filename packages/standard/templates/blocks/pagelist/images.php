@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <div class="@{ :classes | def('cards masonry clean') }">
 	<@ foreach in pagelist ~@>
 		<@~ ../../elements/set_image_card_variable.php @>

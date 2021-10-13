@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <# Reset variable to false in case there is no match. #>
 <@ set { :imageCard: false } @>
 <# Try to get image from variable. #>

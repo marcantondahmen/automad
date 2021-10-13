@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>	
 <@~ if @{ colorPageText } @>--color-page-text: @{ colorPageText };<@ end @>
 <@~ if @{ colorPageBackground } @>--color-page-bg: @{ colorPageBackground };<@ end @>
 <@~ if @{ colorPageBorder } @>--color-page-border: @{ colorPageBorder };<@ end @>
