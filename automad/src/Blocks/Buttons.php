@@ -96,14 +96,14 @@ class Buttons extends AbstractBlock {
 				}
 
 				$html .= <<< HTML
-						<a 
-						href="$link"
-						class="am-button{$class}"
-						$style
-						>
-							$text
-						</a>
-HTML;
+					<a 
+					href="$link"
+					class="am-button{$class}"
+					$style
+					>
+						$text
+					</a>
+				HTML;
 			}
 		}
 

@@ -55,7 +55,7 @@ class AutomadBlockSnippet {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create;
 
 		this.api = api;
@@ -64,13 +64,6 @@ class AutomadBlockSnippet {
 			file: data.file || '',
 			snippet: data.snippet || '',
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -135,9 +128,5 @@ class AutomadBlockSnippet {
 			file: this.inputs.file.value,
 			snippet: this.inputs.snippet.value,
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

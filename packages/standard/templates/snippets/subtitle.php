@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ if @{ date } or @{ tags } ~@>
 	<div class="text-subtitle">
 		<@ ../elements/date.php @>

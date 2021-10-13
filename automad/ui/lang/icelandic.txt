@@ -66,6 +66,10 @@ btn_files: Sendar skrár
 
 -
 
+btn_forgot_password: Gleymt lykilorð
+
+-
+
 btn_get_themes: Fáðu fleiri þemu
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Breytingarstilling á síðu
 
 -
 
+btn_invite: Senda boð
+
+-
+
 btn_install: Setja upp
 
 -
@@ -102,11 +110,11 @@ btn_link: Tengill
 
 -
 
-btn_log_out: Að skrá þig út
+btn_log_out: Útskrá
 
 -
 
-btn_login: Skrá inn
+btn_login: Skráðu þig inn
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Endurstilla
 
 -
 
+btn_save_password: Vista lykilorð
+
+-
+
 btn_save: Vista breytingar
+
+-
+
+btn_submit: Sendu inn
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Tafla Listi
 
 -
 
+editor_table_add_col_left: Bættu dálki til vinstri
+
+-
+
+editor_table_add_col_right: Bættu dálki til hægri
+
+-
+
+editor_table_delete_col: Eyða dálki
+
+-
+
+editor_table_add_row_above: Bættu við umf hér að ofan
+
+-
+
+editor_table_add_row_below: Bættu við röð hér að neðan
+
+-
+
+editor_table_delete_row: Eyða röð
+
+-
+
+editor_table_with_headings: Með töfluhausum
+
+-
+
+editor_table_without_headings: Án töfluhausar
+
+-
+
 editor_code: Upprunakóði
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Skoðaðu skrár
 
 -
 
+email_hello: Halló
+
+-
+
+email_automatic: Þessi tölvupóstur hefur verið sendur sjálfkrafa. Vinsamlegast svaraðu ekki þessum tölvupósti.
+
+-
+
+email_invite_subject: Þú hefur verið bætt við sem nýjan notanda!
+
+-
+
+email_invite_text: Ný notendareikningur á {} hefur verið búið til fyrir þig. Þú getur notað hnappinn hér að neðan til að búa til lykilorðið þitt.
+
+-
+
+email_invite_button: Búðu til lykilorð núna
+
+-
+
+email_reset_password_subject: Staðfestingarmerkið þitt
+
+-
+
+email_reset_password_text_top: Umbeðin staðfestingarmerki fyrir reikninginn þinn á {} má finna hér að neðan. Þú getur notað þessi tákn til að búa til nýtt lykilorð fyrir þig núna.
+
+-
+
+email_reset_password_text_bottom: Ef þú hefur ekki byrjað á þessari beiðni sjálfur geturðu örugglega hunsað þessa skilaboð.
+
+-
+
 error_cache_purged: Ekki var hægt að hreinsa skyndiminnismöppuna!
 
 -
@@ -686,7 +766,7 @@ error_login: Rangt notandanafn eða lykilorð
 
 -
 
-error_log_out: Útskráning mistókst!
+error_log_out: Skráðu þig mistókst!
 
 -
 
@@ -711,6 +791,10 @@ error_import: Innflutningur skráa mistókst!
 -
 
 error_invalid_username: Ógilt notandanafn! Notandanafn getur aðeins innihaldið eftirfarandi stafi:
+
+-
+
+error_invalid_email: Ógilt netfang! Netfang getur aðeins innihaldið eftirfarandi stafi:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Ekki endurnýta gamla lykilorðið þitt!
 
 -
 
+error_password_reset_verification: Staðfestingarmerkið er ógilt eða hefur útrunnið þegar!
+
+-
+
 error_permission: Heimildum hafnað:
+
+-
+
+error_send_email: Villa við að senda tölvupóst!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Uppfærslur eru ekki studdar af netþjóninum þínu
 -
 
 error_update_permission: Get ekki keyrt uppfærslu! Leyfi hafnað!
+
+-
+
+error_user_not_found: Ógilt notandanafn eða netfang.
+
+-
+
+error_user_no_email: Það er ekkert netfang sem er geymt fyrir umbeðna notendareikninginn.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Bæta við hlekk
 
 -
 
-login_title: Skrá inn
+login_title: Skráðu þig inn á mælaborðið
 
 -
 
-login_username: Notendanafn
+login_name_or_email: Notendanafn eða tölvupóstur
 
 -
 
@@ -846,7 +946,7 @@ login_password: Lykilorð
 
 -
 
-log_out_title: Útskráður
+log_out_title: Undirritaður út
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Einkaaðila
 
 -
 
+reset_password_title: Búa til lykilorð
+
+-
+
+reset_password_enter_name_or_email: Vinsamlegast sláðu inn notendanafnið þitt eða netfangið þitt til að biðja um staðfestingarmerki til að búa til nýtt lykilorð fyrir reikninginn þinn.
+
+-
+
+reset_password_enter_new_password: Netfang þar á meðal staðfestingarmerki hefur bara verið send til þín. Vinsamlegast sláðu inn þessi tákn núna fyrir neðan með nýju lykilorði.
+
+-
+
+reset_password_token: Staðfestingarmerki
+
+-
+
 sidebar_header_global: Alheimslegt
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Skipta út valið
 
 -
 
-search_replace_check_all: Athugaðu allt
+search_replace_check_all: Veldu allt.
 
 -
 
-search_replace_uncheck_all: Hakaðu úr öllum
+search_replace_uncheck_all: Afvelja allt
 
 -
 
-search_is_case_sensitive: Málangur
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Efri / lágstöfum
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: Vel uppsett
 
 -
 
-success_password_changed: Lykilorðinu þínu var breytt!
+success_password_changed: Lykilorðið þitt hefur verið breytt með góðum árangri!
 
 -
 
-success_log_out: Útskráður tókst
+success_log_out: Þú hefur skráð þig inn!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Vistaðar breytingar
 -
 
 success_update: Tókst að uppfæra Automad!
+
+-
+
+success_user_invite: Boðið hefur verið sent með góðum árangri.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Notendur
 
 -
 
-sys_user_info: Þú getur bætt við eða fjarlægt fleiri notendur eða breytt lykilorðinu þínu hér.
-
--
-
-sys_user_change_password: Breyttu lykilorðinu þínu
-
--
-
-sys_user_change_password_current: Núverandi lykilorð
-
--
-
-sys_user_change_password_new: Nýtt lykilorð
-
--
-
-sys_user_change_password_repeat: Endurtaktu lykilorð
+sys_user_info: Hér getur þú fundið allar upplýsingar sem tengjast reikningnum þínum og breyttu notendanafninu, lykilorðinu eða tölvupósti. Til þess að geta endurstillt lykilorðið þitt með tölvupósti skaltu ganga úr skugga um að þú hafir slegið inn Vail og Active Netfang hér að neðan.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Bæta við notanda
 
 -
 
-sys_user_add_name: Notendanafn
+sys_user_invite: Bjóddu notanda með tölvupósti
 
 -
 
-sys_user_add_password: Lykilorð
+sys_user_name: Notandanafn
 
 -
 
-sys_user_add_repeat: Endurtaktu lykilorð
+sys_user_password: Lykilorð
+
+-
+
+sys_user_repeat_password: Endurtaktu lykilorð
+
+-
+
+sys_user_email: Email.
+
+-
+
+sys_user_alert_no_email: Þú hefur ekki enn bætt við gilt netfangi á reikninginn þinn. Athugaðu að gilt netfang er nauðsynlegt til að geta endurstillt lykilorðið þitt. Smelltu hér til að bæta við tölvupósti núna.
+
+-
+
+sys_user_change_password: Breyttu lykilorðinu þínu
+
+-
+
+sys_user_current_password: Núverandi lykilorð
+
+-
+
+sys_user_new_password: nýtt lykilorð
 
 -
 
 sys_user_registered: Skráðir notendur
+
+-
+
+sys_user_registered_info: Einnig er hægt að skrá aðra notendur til að leyfa þeim að breyta efni.
 
 -
 

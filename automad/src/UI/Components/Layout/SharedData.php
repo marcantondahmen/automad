@@ -38,7 +38,7 @@ namespace Automad\UI\Components\Layout;
 
 use Automad\Core\Automad;
 use Automad\Core\Debug;
-use Automad\System\Themelist;
+use Automad\System\ThemeCollection;
 use Automad\UI\Components\Accordion\UnusedVariables;
 use Automad\UI\Components\Accordion\Variables;
 use Automad\UI\Components\Alert\ThemeReadme;
@@ -111,9 +111,9 @@ class SharedData {
 		$this->Automad = $Automad;
 		$this->data = $Automad->Shared->data;
 
-		$Themelist = new Themelist();
-		$this->themes = $Themelist->getThemes();
-		$this->mainTheme = $Themelist->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
+		$ThemeCollection = new ThemeCollection();
+		$this->themes = $ThemeCollection->getThemes();
+		$this->mainTheme = $ThemeCollection->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
 
 		$this->fn = function ($expression) {
 			return $expression;
@@ -160,7 +160,7 @@ class SharedData {
 				{$fn(Variables::render($this->Automad, $this->settingKeys, $this->data, $this->mainTheme, Text::get('shared_vars_settings')))}
 				{$fn(UnusedVariables::render($this->Automad, $this->unusedDataKeys, $this->data, Text::get('shared_vars_unused')))}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -231,7 +231,7 @@ HTML;
 					{$fn(Text::get('btn_get_themes'))}
 				</a>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -255,6 +255,6 @@ HTML;
 				value="{$fn(htmlspecialchars($this->data[AM_KEY_SITENAME]))}" 
 				/>
 			</div>
-HTML;
+		HTML;
 	}
 }

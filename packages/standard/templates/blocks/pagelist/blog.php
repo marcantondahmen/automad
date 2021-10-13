@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <@ set { 
 	:visibilityCache: @{ :hideThumbnails | def (0) },
 	:hideThumbnails: @{ checkboxHideThumbnails } 

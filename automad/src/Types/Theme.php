@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\System;
+namespace Automad\Types;
 
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
@@ -42,7 +42,7 @@ use Automad\Core\Str;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Theme class stores all meta data of an installed theme.
+ * The Theme type is a custom data type that stores all meta data of an installed theme.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2021 Marc Anton Dahmen - https://marcdahmen.de
@@ -50,9 +50,54 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Theme {
 	/**
-	 * Theme data.
+	 * The theme author.
 	 */
-	public $data = array();
+	public $author;
+
+	/**
+	 * The theme description.
+	 */
+	public $description = '';
+
+	/**
+	 * The theme license.
+	 */
+	public $license = '';
+
+	/**
+	 * A multidimensional mask array.
+	 */
+	public $masks = array();
+
+	/**
+	 * The theme name.
+	 */
+	public $name;
+
+	/**
+	 * The theme path.
+	 */
+	public $path;
+
+	/**
+	 * The theme readme path.
+	 */
+	public $readme = '';
+
+	/**
+	 * The templates array.
+	 */
+	public $templates = array();
+
+	/**
+	 * The tooltips array.
+	 */
+	public $tooltips = array();
+
+	/**
+	 * The theme version.
+	 */
+	public $version = '';
 
 	/**
 	 * The constructor.
@@ -63,6 +108,7 @@ class Theme {
 	public function __construct(string $themeJSON, array $composerInstalled) {
 		$json = false;
 		$path = Str::stripStart(dirname($themeJSON), AM_BASE_DIR . AM_DIR_PACKAGES . '/');
+
 		$defaults = array(
 			'name' => $path,
 			'description' => false,
@@ -108,28 +154,22 @@ class Theme {
 			return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php'));
 		});
 
-		$this->data = array_merge(
+		$data = array_merge(
 			$defaults,
 			$json,
-			$package,
-			array(
-				'path' => $path,
-				'templates' => $templates,
-				'readme' => $readme
-			)
+			$package
 		);
-	}
 
-	/**
-	 * Make theme data accessible as page properties.
-	 *
-	 * @param string $key The property name
-	 * @return string The returned value from the data array
-	 */
-	public function __get(string $key) {
-		if (array_key_exists($key, $this->data)) {
-			return $this->data[$key];
-		}
+		$this->author = $data['author'];
+		$this->description = $data['description'];
+		$this->license = $data['license'];
+		$this->masks = $data['masks'];
+		$this->name = $data['name'];
+		$this->path = $path;
+		$this->readme = $readme;
+		$this->templates = $templates;
+		$this->tooltips = $data['tooltips'];
+		$this->version = $data['version'];
 	}
 
 	/**
@@ -139,8 +179,8 @@ class Theme {
 	 * @return array The mask array
 	 */
 	public function getMask(string $mask) {
-		if (array_key_exists($mask, $this->data['masks'])) {
-			return $this->data['masks'][$mask];
+		if (array_key_exists($mask, $this->masks)) {
+			return $this->masks[$mask];
 		}
 
 		return array();
@@ -153,8 +193,8 @@ class Theme {
 	 * @return string The tooltip text
 	 */
 	public function getTooltip(string $key) {
-		if (array_key_exists($key, $this->data['tooltips'])) {
-			return $this->data['tooltips'][$key];
+		if (array_key_exists($key, $this->tooltips)) {
+			return $this->tooltips[$key];
 		}
 	}
 }

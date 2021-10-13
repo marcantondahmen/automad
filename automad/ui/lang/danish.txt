@@ -66,6 +66,10 @@ btn_files: Uploadede filer
 
 -
 
+btn_forgot_password: Glemt kodeord
+
+-
+
 btn_get_themes: Få flere temaer
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Redigeringstilstand på siden
 
 -
 
+btn_invite: Send invitation
+
+-
+
 btn_install: Installere
 
 -
@@ -106,7 +114,7 @@ btn_log_out: Log ud
 
 -
 
-btn_login: Log på
+btn_login: Log ind
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Nulstil
 
 -
 
+btn_save_password: Gem adgangskode
+
+-
+
 btn_save: Gem ændringer
+
+-
+
+btn_submit: Indsend
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Liste over tabeller
 
 -
 
+editor_table_add_col_left: Tilføj en kolonne til venstre
+
+-
+
+editor_table_add_col_right: Tilføj en kolonne til højre
+
+-
+
+editor_table_delete_col: Slet kolonne
+
+-
+
+editor_table_add_row_above: Tilføj en række ovenfor
+
+-
+
+editor_table_add_row_below: Tilføj en række nedenfor
+
+-
+
+editor_table_delete_row: Slet række
+
+-
+
+editor_table_with_headings: Med bordoverskrifter
+
+-
+
+editor_table_without_headings: Uden bordoverskrifter
+
+-
+
 editor_code: Kildekode
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Gennemse filer.
 
 -
 
+email_hello: Hej
+
+-
+
+email_automatic: Denne email er blevet sendt automatisk. Venligst svar ikke på denne email.
+
+-
+
+email_invite_subject: Du er blevet tilføjet som en ny bruger!
+
+-
+
+email_invite_text: En ny brugerkonto på {} er blevet oprettet for dig. Du kan bruge knappen nedenfor til at oprette dit kodeord.
+
+-
+
+email_invite_button: Opret adgangskode nu
+
+-
+
+email_reset_password_subject: Din Authentication TOKEN.
+
+-
+
+email_reset_password_text_top: Den ønskede godkendelsesstoken for din konto på {} kan findes nedenfor. Du kan bruge det token for at oprette en ny adgangskode til dig nu.
+
+-
+
+email_reset_password_text_bottom: Hvis du ikke har indledt denne anmodning selv, kan du sikkert ignorere denne besked.
+
+-
+
 error_cache_purged: Cache-biblioteket kunne ikke renses!
 
 -
@@ -714,6 +794,10 @@ error_invalid_username: Ugyldigt brugernavn! Et brugernavn kan kun indeholde fø
 
 -
 
+error_invalid_email: Ugyldig email! En e-mail-adresse kan kun indeholde følgende tegn:
+
+-
+
 error_json: Ugyldig JSON! Indholdet af konfigurationsfilen er ikke formateret korrekt.
 
 -
@@ -742,7 +826,15 @@ error_password_reuse: Genbrug ikke din gamle adgangskode!
 
 -
 
+error_password_reset_verification: Autentificeringstoken er ugyldig eller er udløbet allerede!
+
+-
+
 error_permission: Tilladelser nægtet:
+
+-
+
+error_send_email: Fejl ved at sende e-mail!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Opdateringer understøttes ikke af din server! Opdat
 -
 
 error_update_permission: Kan ikke køre opdatering! Tilladelser nægtet!
+
+-
+
+error_user_not_found: Ugyldigt brugernavn eller e-mail-adresse.
+
+-
+
+error_user_no_email: Der er ingen e-mail-adresse, der er gemt for den ønskede brugerkonto.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Tilføj link
 
 -
 
-login_title: Log på
+login_title: Log ind på instrumentbrættet
 
 -
 
-login_username: Brugernavn
+login_name_or_email: Brugernavn eller e-mail
 
 -
 
@@ -846,7 +946,7 @@ login_password: Adgangskode
 
 -
 
-log_out_title: Logget ud
+log_out_title: Underskrevet ud
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Privat
 
 -
 
+reset_password_title: Opret adgangskode
+
+-
+
+reset_password_enter_name_or_email: Indtast venligst dit brugernavn eller e-mail-adresse for at anmode om en godkendelsesstoken for at oprette en ny adgangskode til din konto.
+
+-
+
+reset_password_enter_new_password: En email, herunder en autentificeringstoken, er bare blevet sendt til dig. Indtast venligst Token nedenfor sammen med en ny adgangskode.
+
+-
+
+reset_password_token: Autentificering TOKEN.
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Udskift valgt
 
 -
 
-search_replace_check_all: Tjek alle
+search_replace_check_all: Vælg alt.
 
 -
 
-search_replace_uncheck_all: Fjern markeringen af alle
+search_replace_uncheck_all: Fravælg alle
 
 -
 
-search_is_case_sensitive: Sagsfølsomt
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Øvre / små bogstaver
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: Installeret
 
 -
 
-success_password_changed: Din adgangskode blev ændret med succes!
+success_password_changed: Dit kodeord er blevet ændret med succes!
 
 -
 
-success_log_out: Logget ud med succes
+success_log_out: Du har logget op!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Gemte ændringer
 -
 
 success_update: Automad er opdateret!
+
+-
+
+success_user_invite: Invitationen er blevet sendt med succes.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Brugere
 
 -
 
-sys_user_info: Du kan tilføje eller fjerne flere brugere eller ændre din adgangskode her.
-
--
-
-sys_user_change_password: Skift dit kodeord
-
--
-
-sys_user_change_password_current: Nuværende kodeord
-
--
-
-sys_user_change_password_new: Nyt kodeord
-
--
-
-sys_user_change_password_repeat: Gentag adgangskode
+sys_user_info: Her kan du finde alle oplysninger relateret til din konto og ændre dit brugernavn, adgangskode eller e-mail. For at kunne nulstille din adgangskode via e-mail, skal du sørge for, at du har indtastet en Vaild og Active e-mail-adresse nedenfor.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Tilføj bruger
 
 -
 
-sys_user_add_name: Brugernavn
+sys_user_invite: Inviter bruger via e-mail
 
 -
 
-sys_user_add_password: Adgangskode
+sys_user_name: Brugernavn.
 
 -
 
-sys_user_add_repeat: Gentag adgangskode
+sys_user_password: Adgangskode
+
+-
+
+sys_user_repeat_password: Gentag adgangskode
+
+-
+
+sys_user_email: Email.
+
+-
+
+sys_user_alert_no_email: Du har endnu ikke tilføjet en gyldig e-mail-adresse til din konto. Bemærk, at der kræves en gyldig e-mail-adresse for at kunne nulstille dit kodeord. Klik her for at tilføje en email nu.
+
+-
+
+sys_user_change_password: Skift dit kodeord
+
+-
+
+sys_user_current_password: Nuværende kodeord
+
+-
+
+sys_user_new_password: nyt kodeord
 
 -
 
 sys_user_registered: Registrerede brugere
+
+-
+
+sys_user_registered_info: Det er også muligt at registrere andre brugere for at give dem mulighed for at redigere indhold.
 
 -
 

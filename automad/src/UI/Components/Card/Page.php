@@ -85,42 +85,40 @@ class Page {
 		}
 
 		return <<< HTML
-
-				<div class="uk-panel uk-panel-box">
-					<a 
-					href="$link" 
-					class="uk-panel-teaser uk-display-block"
-					>
-						<div class="am-cover-4by3">
-							$preview
-						</div>
-					</a>
-					<div class="uk-panel-title">$pageTitle</div>
-					<div class="uk-text-small">$pageMTime</div>
-					<div class="am-panel-bottom">
-						<div class="am-panel-bottom-left">
-							<a 
-							href="$link" 
-							title="$Text->btn_edit_page"  
-							class="am-panel-bottom-link"
-							data-uk-tooltip
-							>
-								<i class="uk-icon-file-text-o"></i>
-							</a>
-							<a 
-							href="$pageUrl" 
-							title="$Text->btn_inpage_edit" 
-							class="am-panel-bottom-link"
-							data-uk-tooltip
-							>
-								<i class="uk-icon-bookmark-o"></i>
-							</a>
-						</div>
+			<div class="uk-panel uk-panel-box">
+				<a 
+				href="$link" 
+				class="uk-panel-teaser uk-display-block"
+				>
+					<div class="am-cover-4by3">
+						$preview
 					</div>
-					$badge
+				</a>
+				<div class="uk-panel-title">$pageTitle</div>
+				<div class="uk-text-small">$pageMTime</div>
+				<div class="am-panel-bottom">
+					<div class="am-panel-bottom-left">
+						<a 
+						href="$link" 
+						title="$Text->btn_edit_page"  
+						class="am-panel-bottom-link"
+						data-uk-tooltip
+						>
+							<i class="uk-icon-file-text-o"></i>
+						</a>
+						<a 
+						href="$pageUrl" 
+						title="$Text->btn_inpage_edit" 
+						class="am-panel-bottom-link"
+						data-uk-tooltip
+						>
+							<i class="uk-icon-bookmark-o"></i>
+						</a>
+					</div>
 				</div>
-
-HTML;
+				$badge
+			</div>
+		HTML;
 	}
 
 	/**

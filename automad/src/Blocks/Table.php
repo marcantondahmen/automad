@@ -57,30 +57,36 @@ class Table extends AbstractBlock {
 	 */
 	public static function render(object $data, Automad $Automad) {
 		$class = self::classAttr();
-		$html = "<am-table $class><table><thead>";
-		$first = true;
+		$html = "<am-table $class><table>";
 
-		// Initially set cell tag to "th".
-		$tag = 'th';
+		if (!empty($data->withHeadings)) {
+			$firstRow = array_shift($data->content);
+
+			$html .= '<thead>';
+			$html .= '<tr>';
+
+			foreach ($firstRow as $item) {
+				$html .= "<th>$item</th>";
+			}
+
+			$html .= '</tr>';
+			$html .= '</thead>';
+		}
+
+		$html .= '<tbody>';
 
 		foreach ($data->content as $row) {
 			$html .= '<tr>';
 
 			foreach ($row as $item) {
-				$html .= "<$tag>$item</$tag>";
+				$html .= "<td>$item</td>";
 			}
 
 			$html .= '</tr>';
-
-			if ($first) {
-				$html .= '</thead><tbody>';
-				$first = false;
-				// For every row after the first one, set the cell tag to "td".
-				$tag = 'td';
-			}
 		}
 
-		$html .= '</tbody></table></am-table>';
+		$html .= '</tbody>';
+		$html .= '</table></am-table>';
 
 		return $html;
 	}

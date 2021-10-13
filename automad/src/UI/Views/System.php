@@ -79,7 +79,7 @@ class System extends AbstractView {
 				<li>{$fn(Headless::render())}</li>
 				<li>{$fn(Debug::render())}</li>
 			</ul>
-HTML;
+		HTML;
 	}
 
 	/**

@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class SnippetDefinitionProcessor extends AbstractFeatureProcessors {
+class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	/**
 	 * Process snippet definitions and add them to the snippet collection.
 	 *

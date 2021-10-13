@@ -39,11 +39,11 @@ namespace Automad\UI\Components\Status;
 use Automad\Core\Debug;
 use Automad\Core\Str;
 use Automad\System\Update;
-use Automad\UI\Utils\Text;
 use Automad\UI\Controllers\HeadlessController;
 use Automad\UI\Controllers\PackageManagerController;
-use Automad\UI\Models\AccountsModel;
+use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Response as UIResponse;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -94,7 +94,8 @@ class Response {
 					>
 						<i class="am-u-icon-bug"></i>
 					</a>
-HTML;
+				HTML;
+
 				$Response->setStatus($html);
 			}
 		}
@@ -143,10 +144,11 @@ HTML;
 		}
 
 		if ($item == 'users') {
+			$UserCollectionModel = new UserCollectionModel();
+
 			$Response->setStatus(
-				'<i class="uk-icon-users uk-icon-justify"></i>&nbsp;&nbsp;' .
 				Text::get('sys_user_registered') .
-				'&nbsp;&nbsp;<span class="uk-badge">' . count(AccountsModel::get()) . '</span>'
+				'&nbsp;&nbsp;<span class="uk-badge">' . count($UserCollectionModel->getCollection()) . '</span>'
 			);
 		}
 

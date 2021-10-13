@@ -66,6 +66,10 @@ btn_files: Augšupielādētie faili
 
 -
 
+btn_forgot_password: Aizmirsi paroli
+
+-
+
 btn_get_themes: Iegūstiet vairāk motīvu
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Lapas rediģēšanas režīms
 
 -
 
+btn_invite: Nosūtīt ielūgumu
+
+-
+
 btn_install: Uzstādīt
 
 -
@@ -102,11 +110,11 @@ btn_link: Saite
 
 -
 
-btn_log_out: Izlogoties
+btn_log_out: Izrakstīties
 
 -
 
-btn_login: Pieslēgties
+btn_login: Ielogoties
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Atiestatīt
 
 -
 
+btn_save_password: Saglabājiet paroli
+
+-
+
 btn_save: Saglabāt izmaiņas
+
+-
+
+btn_submit: Iesniegt
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Tabulu saraksts
 
 -
 
+editor_table_add_col_left: Pievienojiet kolonnu kreisajā pusē
+
+-
+
+editor_table_add_col_right: Pievienojiet kolonnu pa labi
+
+-
+
+editor_table_delete_col: Dzēst kolonnu
+
+-
+
+editor_table_add_row_above: Pievienojiet rindu iepriekš
+
+-
+
+editor_table_add_row_below: Pievienojiet rindu zemāk
+
+-
+
+editor_table_delete_row: Dzēst rindu
+
+-
+
+editor_table_with_headings: Ar galda virsrakstiem
+
+-
+
+editor_table_without_headings: Bez galda virsrakstiem
+
+-
+
 editor_code: Avota kods
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Pārlūkot failus
 
 -
 
+email_hello: Sveiki
+
+-
+
+email_automatic: Šis e-pasts ir nosūtīts automātiski. Lūdzu, neatbildiet uz šo e-pastu.
+
+-
+
+email_invite_subject: Jūs esat pievienots kā jauns lietotājs!
+
+-
+
+email_invite_text: Jums ir izveidots jauns lietotāja konts {}. Lai izveidotu savu paroli, varat izmantot tālāk redzamo pogu.
+
+-
+
+email_invite_button: Izveidojiet paroli tagad
+
+-
+
+email_reset_password_subject: Jūsu autentifikācijas marķieris
+
+-
+
+email_reset_password_text_top: Pieprasītais autentifikācijas marķieris jūsu kontam uz {} var atrast zemāk. Jūs varat izmantot šo marķieri, lai izveidotu jaunu paroli jums tagad.
+
+-
+
+email_reset_password_text_bottom: Gadījumā, ja jūs neesat uzsācis šo pieprasījumu pats, jūs varat droši ignorēt šo ziņojumu.
+
+-
+
 error_cache_purged: Kešatmiņas direktoriju nevarēja iztīrīt!
 
 -
@@ -686,7 +766,7 @@ error_login: Nederīgs lietotājvārds vai parole
 
 -
 
-error_log_out: Neizdevās atteikties!
+error_log_out: Izrakstīšanās neizdevās!
 
 -
 
@@ -711,6 +791,10 @@ error_import: Failu importēšana neizdevās!
 -
 
 error_invalid_username: Nederīgs lietotājvārds! Lietotājvārds var saturēt tikai šādas rakstzīmes:
+
+-
+
+error_invalid_email: Nepareizs e-pasts! E-pasta adrese var saturēt tikai šādas rakstzīmes:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Nelietojiet atkārtoti izmantot savu veco paroli!
 
 -
 
+error_password_reset_verification: Autentifikācijas marķieris ir nederīgs vai jau beidzies jau!
+
+-
+
 error_permission: Noraidītās atļaujas:
+
+-
+
+error_send_email: Kļūda Nosūtot e-pastu!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Jūsu serveris neatbalsta atjauninājumus! Atjaunin�
 -
 
 error_update_permission: Nevar palaist atjauninājumu! Atļaujas liegtas!
+
+-
+
+error_user_not_found: Nederīgs lietotājvārds vai e-pasta adrese.
+
+-
+
+error_user_no_email: Pieprasītajam lietotāja kontam nav saglabāta e-pasta adrese.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Pievienot saiti
 
 -
 
-login_title: Pieslēgties
+login_title: Pierakstieties panelī
 
 -
 
-login_username: Lietotājvārds
+login_name_or_email: Lietotājvārds vai e-pastu
 
 -
 
@@ -846,7 +946,7 @@ login_password: Parole
 
 -
 
-log_out_title: Izlogojies
+log_out_title: Parakstīt
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Privāts
 
 -
 
+reset_password_title: Izveidot paroli
+
+-
+
+reset_password_enter_name_or_email: Lūdzu, ievadiet savu lietotājvārdu vai e-pasta adresi, lai pieprasītu autentifikācijas marķieri, lai izveidotu jaunu konta paroli.
+
+-
+
+reset_password_enter_new_password: E-pasts, ieskaitot autentifikācijas marķieri, kas tikko nosūtīts jums. Lūdzu, ievadiet šo marķieri tagad tālāk ar jaunu paroli.
+
+-
+
+reset_password_token: Autentifikācijas marķieris
+
+-
+
 sidebar_header_global: Globāls
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Nomainiet izvēlēto
 
 -
 
-search_replace_check_all: Pārbaudi visu
+search_replace_check_all: Izvēlieties visu
 
 -
 
-search_replace_uncheck_all: Noņemiet atzīmi no visiem
+search_replace_uncheck_all: Atsijāt visu
 
 -
 
-search_is_case_sensitive: Lietuve
-
--
-
-search_is_regex: Regex
+search_is_case_sensitive: Lielie / mazie burti
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: Veiksmīgi instalēta
 
 -
 
-success_password_changed: Jūsu parole tika veiksmīgi nomainīta!
+success_password_changed: Jūsu parole ir veiksmīgi mainīta!
 
 -
 
-success_log_out: Izrakstījies veiksmīgi
+success_log_out: Jūs esat veiksmīgi pieteicies!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Saglabātās izmaiņas
 -
 
 success_update: Veiksmīgi atjaunināts Automad!
+
+-
+
+success_user_invite: Uzaicinājums ir veiksmīgi nosūtīts.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Lietotāji
 
 -
 
-sys_user_info: Šeit varat pievienot vai noņemt vairāk lietotāju vai mainīt savu paroli.
-
--
-
-sys_user_change_password: Nomainiet paroli
-
--
-
-sys_user_change_password_current: Pašreizējā parole
-
--
-
-sys_user_change_password_new: Jauna parole
-
--
-
-sys_user_change_password_repeat: Atkārtojiet paroli
+sys_user_info: Šeit jūs varat atrast visu informāciju, kas saistīta ar jūsu kontu un mainīt savu lietotājvārdu, paroli vai e-pastu. Lai varētu atiestatīt savu paroli pa e-pastu, lūdzu, pārliecinieties, vai esat ievadījis Vaild un aktīvo e-pasta adresi zemāk.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Pievienot lietotāju
 
 -
 
-sys_user_add_name: Lietotājvārds
+sys_user_invite: Uzaiciniet lietotāju pa e-pastu
 
 -
 
-sys_user_add_password: Parole
+sys_user_name: Lietotājvārds
 
 -
 
-sys_user_add_repeat: Atkārtojiet paroli
+sys_user_password: Parole
+
+-
+
+sys_user_repeat_password: Atkārtojiet paroli
+
+-
+
+sys_user_email: E-pasta adrese
+
+-
+
+sys_user_alert_no_email: Jūs vēl neesat pievienojis derīgu e-pasta adresi savam kontam. Ņemiet vērā, ka ir nepieciešama derīga e-pasta adrese, lai varētu atiestatīt savu paroli. Noklikšķiniet šeit, lai tagad pievienotu e-pastu.
+
+-
+
+sys_user_change_password: Nomainiet paroli
+
+-
+
+sys_user_current_password: Pašreizējā parole
+
+-
+
+sys_user_new_password: jauna parole
 
 -
 
 sys_user_registered: Reģistrētie lietotāji
+
+-
+
+sys_user_registered_info: Ir iespējams arī reģistrēt citus lietotājus, lai tie varētu rediģēt saturu.
 
 -
 

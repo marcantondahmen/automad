@@ -37,15 +37,15 @@
 namespace Automad\UI\Views;
 
 use Automad\Core\Str;
-use Automad\System\Themelist;
+use Automad\System\ThemeCollection;
 use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\About;
 use Automad\UI\Components\Modal\AddPage;
-use Automad\UI\Views\Elements\Navbar;
-use Automad\UI\Views\Elements\Sidebar;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
+use Automad\UI\Views\Elements\Navbar;
+use Automad\UI\Views\Elements\Sidebar;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -75,14 +75,14 @@ abstract class AbstractView {
 	/**
 	 * The Automad object.
 	 */
-	protected $Themelist = null;
+	protected $ThemeCollection = null;
 
 	/**
 	 * The page constructor.
 	 */
 	public function __construct() {
 		$this->Automad = UICache::get();
-		$this->Themelist = new Themelist();
+		$this->ThemeCollection = new ThemeCollection();
 		$this->fn = function ($expression) {
 			return $expression;
 		};
@@ -118,6 +118,7 @@ abstract class AbstractView {
 				<link href="{$fn(AM_BASE_URL)}/automad/dist/favicon.ico?v=$versionSanitized" rel="shortcut icon" type="image/x-icon" />
 				<link href="{$fn(AM_BASE_URL)}/automad/dist/libs.min.css?v=$versionSanitized" rel="stylesheet">
 				<link href="{$fn(AM_BASE_URL)}/automad/dist/automad.min.css?v=$versionSanitized" rel="stylesheet">
+				<script>window.AM_VERSION = "{$fn(AM_VERSION)}"</script>
 				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/dist/libs.min.js?v=$versionSanitized"></script>
 				<script type="text/javascript" src="{$fn(AM_BASE_URL)}/automad/dist/automad.min.js?v=$versionSanitized"></script>
 				{$fn(BlockSnippetArrays::render())}
@@ -141,7 +142,7 @@ abstract class AbstractView {
 				</div>
 			</body>
 			</html>
-HTML;
+			HTML;
 	}
 
 	/**
@@ -203,7 +204,7 @@ HTML;
 				</a>
 			</div>
 			{$fn(About::render('am-about-modal'))}
-			{$fn(AddPage::render($this->Automad, $this->Themelist))}
-HTML;
+			{$fn(AddPage::render($this->Automad, $this->ThemeCollection))}
+		HTML;
 	}
 }

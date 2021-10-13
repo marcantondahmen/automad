@@ -66,6 +66,10 @@ btn_files: Įkelti failai
 
 -
 
+btn_forgot_password: Pamiršote slaptažodį
+
+-
+
 btn_get_themes: Gaukite daugiau temų
 
 -
@@ -91,6 +95,10 @@ btn_import: Importuoti iš URL
 -
 
 btn_inpage_edit: Redagavimo puslapyje režimas
+
+-
+
+btn_invite: Siųsti kvietimą
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Atstatyti
 
 -
 
+btn_save_password: Išsaugoti slaptažodį
+
+-
+
 btn_save: Išsaugoti pakeitimus
+
+-
+
+btn_submit: Pateikti
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Lentelių sąrašas
 
 -
 
+editor_table_add_col_left: Įdėkite stulpelį kairėje
+
+-
+
+editor_table_add_col_right: Įdėkite stulpelį dešinėje
+
+-
+
+editor_table_delete_col: Ištrinti stulpelį
+
+-
+
+editor_table_add_row_above: Pridėti eilutę virš
+
+-
+
+editor_table_add_row_below: Pridėti žemiau esančią eilutę
+
+-
+
+editor_table_delete_row: Ištrinti eilutę
+
+-
+
+editor_table_with_headings: Su lentelės antraštėmis
+
+-
+
+editor_table_without_headings: Be lentelės antraštės
+
+-
+
 editor_code: Pirminis kodas
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Naršyti failus
 
 -
 
+email_hello: Sveiki
+
+-
+
+email_automatic: Šis el. Laiškas išsiųstas automatiškai. Prašome neatsakyti į šį el. Laišką.
+
+-
+
+email_invite_subject: Jūs buvote pridedamas kaip naujas vartotojas!
+
+-
+
+email_invite_text: Jums sukurta nauja vartotojo paskyra {}. Jei norite sukurti slaptažodį, galite naudoti žemiau esantį mygtuką.
+
+-
+
+email_invite_button: Dabar sukurkite slaptažodį
+
+-
+
+email_reset_password_subject: Jūsų autentifikavimo simbolis
+
+-
+
+email_reset_password_text_top: Toliau pateikiamas prašomas autentifikavimo raktas jūsų paskyroje. Jūs galite naudoti šį raktą, kad galėtumėte sukurti naują slaptažodį.
+
+-
+
+email_reset_password_text_bottom: Jei nepradėjote šio prašymo, galite saugiai ignoruoti šį pranešimą.
+
+-
+
 error_cache_purged: Talpyklos katalogo nepavyko išvalyti!
 
 -
@@ -686,7 +766,7 @@ error_login: Neteisingas prisijungimo vardas arba slaptažodis
 
 -
 
-error_log_out: Nepavyko atsijungti!
+error_log_out: Pasirašykite nepavyko!
 
 -
 
@@ -711,6 +791,10 @@ error_import: Nepavyko importuoti failo!
 -
 
 error_invalid_username: Neteisingas vartotojo vardas! Vartotojo vardas gali būti tik šie simboliai:
+
+-
+
+error_invalid_email: Neteisingas el. pašto adresas! El. Pašto adresu gali būti tik šie simboliai:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Nenaudokite senojo slaptažodžio!
 
 -
 
+error_password_reset_verification: Autentifikavimo raktas yra neteisingas arba baigėsi jau!
+
+-
+
 error_permission: Atmesti leidimai:
+
+-
+
+error_send_email: Klaida siunčiant el. Laišką!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Jūsų serveris nepalaiko naujinių! Atnaujintojui r
 -
 
 error_update_permission: Nepavyksta paleisti atnaujinimo! Leidimai atmesti!
+
+-
+
+error_user_not_found: Neteisingas naudotojo vardas arba el. Pašto adresas.
+
+-
+
+error_user_no_email: Nėra el. Pašto adreso, saugomo vartotojo paskyrai.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Pridėti nuorodą
 
 -
 
-login_title: Prisijungti
+login_title: Prisijunkite prie prietaisų skydelio
 
 -
 
-login_username: Vartotojo vardas
+login_name_or_email: Vartotojo vardas arba elektroninio pašto adresas
 
 -
 
@@ -846,7 +946,7 @@ login_password: Slaptažodis
 
 -
 
-log_out_title: Atsijungęs
+log_out_title: Pasirašyta
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Privatus
 
 -
 
+reset_password_title: Sukurti slaptažodį
+
+-
+
+reset_password_enter_name_or_email: Prašome įvesti savo naudotojo vardą arba el. Pašto adresą, kad galėtumėte paprašyti autentifikavimo rakto, kad sukurtumėte naują paskyros slaptažodį.
+
+-
+
+reset_password_enter_new_password: Siunčiamas el. Laiškas, įskaitant autentifikavimo raktą. Prašome įvesti šį žetoną dabar žemiau su nauju slaptažodžiu.
+
+-
+
+reset_password_token: Autentifikavimo simbolis
+
+-
+
 sidebar_header_global: Visuotinis
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Pakeiskite pasirinktą
 
 -
 
-search_replace_check_all: Viską Patikrink
+search_replace_check_all: Pasirinkite visus
 
 -
 
-search_replace_uncheck_all: Atžymėk visus
+search_replace_uncheck_all: Atzymeti visus pasirinkimus
 
 -
 
-search_is_case_sensitive: Dykuma
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Viršutinė / mažoji raidė
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: Sėkmingai įdiegta
 
 -
 
-success_password_changed: Jūsų slaptažodis sėkmingai pakeistas!
+success_password_changed: Jūsų slaptažodis buvo sėkmingai pakeistas!
 
 -
 
-success_log_out: Sėkmingai atsijungiau
+success_log_out: Jūs sėkmingai atsijungėte!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Išsaugoti pakeitimai
 -
 
 success_update: Sėkmingai atnaujinta „Automad“!
+
+-
+
+success_user_invite: Kvietimas buvo sėkmingai išsiųstas.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Vartotojai
 
 -
 
-sys_user_info: Čia galite pridėti ar pašalinti daugiau vartotojų arba pakeisti slaptažodį.
-
--
-
-sys_user_change_password: Pasikeiskite slaptažodį
-
--
-
-sys_user_change_password_current: Dabartinis slaptažodis
-
--
-
-sys_user_change_password_new: Naujas Slaptažodis
-
--
-
-sys_user_change_password_repeat: Pakartokite slaptažodį
+sys_user_info: Čia rasite visą informaciją, susijusią su jūsų paskyra ir pakeiskite naudotojo vardą, slaptažodį ar el. Laišką. Kad galėtumėte iš naujo nustatyti slaptažodį el. Paštu, įsitikinkite, kad žemiau įvedėte "Vaild" ir aktyvų el. Pašto adresą.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Pridėti naudotoją
 
 -
 
-sys_user_add_name: Vartotojo vardas
+sys_user_invite: Pakvieskite vartotoją el. Paštu
 
 -
 
-sys_user_add_password: Slaptažodis
+sys_user_name: Vartotojo vardas
 
 -
 
-sys_user_add_repeat: Pakartokite slaptažodį
+sys_user_password: Slaptažodis
+
+-
+
+sys_user_repeat_password: Pakartokite slaptažodį
+
+-
+
+sys_user_email: El. Paštas. \ T
+
+-
+
+sys_user_alert_no_email: Jūs dar nepridėjote galiojančio el. Pašto adreso į savo paskyrą. Atkreipkite dėmesį, kad reikalingas galiojantis el. Pašto adresas, kad būtų galima iš naujo nustatyti slaptažodį. Spauskite čia norėdami pridėti el. Laišką.
+
+-
+
+sys_user_change_password: Pasikeiskite slaptažodį
+
+-
+
+sys_user_current_password: Dabartinis slaptažodis
+
+-
+
+sys_user_new_password: Naujas Slaptažodis
 
 -
 
 sys_user_registered: Registruoti vartotojai
+
+-
+
+sys_user_registered_info: Taip pat galima užregistruoti kitus vartotojus, kad jie galėtų redaguoti turinį.
 
 -
 

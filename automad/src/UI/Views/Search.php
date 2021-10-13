@@ -130,7 +130,7 @@ class Search extends AbstractView {
 				</div>
 				<form class="uk-margin-large-top"></form>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**

@@ -42,6 +42,7 @@ use Automad\Core\Image;
 use Automad\UI\Components\Layout\SelectImage;
 use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\UICache;
 
@@ -104,11 +105,13 @@ class ImageModel {
 						$file
 					);
 
-					if (!$error = FileSystem::renameMedia($cachedFile, $resizedFile)) {
+					$Messenger = new Messenger();
+
+					if (FileSystem::renameMedia($cachedFile, $resizedFile, $Messenger)) {
 						$Response->setSuccess(Text::get('success_created') . ' "' . basename($resizedFile) . '"');
 						Cache::clear();
 					} else {
-						$Response->setError($error);
+						$Response->setError($Messenger->getError());
 					}
 				} else {
 					$Response->setError(Text::get('error_permission') . ' "' . $directory . '"');

@@ -37,7 +37,7 @@
 namespace Automad\UI\Components\Modal;
 
 use Automad\Core\Automad;
-use Automad\System\Themelist;
+use Automad\System\ThemeCollection;
 use Automad\UI\Components\Form\CheckboxPrivate;
 use Automad\UI\Components\Form\SelectTemplate;
 use Automad\UI\Components\Nav\SiteTree;
@@ -57,16 +57,15 @@ class AddPage {
 	 * Renders the about modal.
 	 *
 	 * @param Automad $Automad
-	 * @param Themelist $Themelist
+	 * @param ThemeCollection $ThemeCollection
 	 * @return string The rendered HTML
 	 */
-	public static function render(Automad $Automad, Themelist $Themelist) {
+	public static function render(Automad $Automad, ThemeCollection $ThemeCollection) {
 		$fn = function ($expression) {
 			return $expression;
 		};
 
 		return <<< HTML
-
 			<div id="am-add-page-modal" class="uk-modal">
 				<div class="uk-modal-dialog">
 					<div class="uk-modal-header">
@@ -91,7 +90,7 @@ class AddPage {
 						</div>
 						{$fn(CheckboxPrivate::render('subpage[private]'))}
 						<hr>
-						{$fn(self::template($Automad, $Themelist))}
+						{$fn(self::template($Automad, $ThemeCollection))}
 					</form>
 					<div class="uk-form-stacked uk-margin-top">
 						<label class="uk-form-label uk-margin-top-remove">
@@ -117,17 +116,17 @@ class AddPage {
 					</div>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
 	 * The template selection dropdown.
 	 *
 	 * @param object $Automad
-	 * @param object $Themelist
+	 * @param object $ThemeCollection
 	 * @return string the rendered dropdown
 	 */
-	private static function template($Automad, $Themelist) {
+	private static function template($Automad, $ThemeCollection) {
 		if (!AM_HEADLESS_ENABLED) {
 			$fn = function ($expression) {
 				return $expression;
@@ -138,13 +137,9 @@ HTML;
 					<label class="uk-form-label uk-margin-top-remove">
 						{$fn(Text::get('page_theme_template'))}
 					</label>
-					{$fn(SelectTemplate::render(
-				$Automad,
-				$Themelist,
-				'subpage[theme_template]'
-			))}
+					{$fn(SelectTemplate::render($Automad, $ThemeCollection, 'subpage[theme_template]'))}
 				</div>
-HTML;
+			HTML;
 		}
 	}
 }

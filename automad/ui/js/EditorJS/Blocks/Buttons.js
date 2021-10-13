@@ -56,7 +56,7 @@ class AutomadBlockButtons {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
@@ -71,13 +71,6 @@ class AutomadBlockButtons {
 			secondaryStyle: data.secondaryStyle || {},
 			alignment: data.alignment || 'left',
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -233,7 +226,6 @@ class AutomadBlockButtons {
 			});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

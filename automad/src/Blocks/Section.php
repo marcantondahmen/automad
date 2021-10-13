@@ -133,9 +133,9 @@ class Section extends AbstractBlock {
 		$class = self::classAttr($classes);
 
 		return <<< HTML
-				<am-section $class $style>
-					$html
-				</am-section>
-HTML;
+			<am-section $class $style>
+				$html
+			</am-section>
+		HTML;
 	}
 }

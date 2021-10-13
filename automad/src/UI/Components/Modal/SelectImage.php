@@ -65,27 +65,27 @@ class SelectImage {
 		$Text = Text::getObject();
 
 		return <<< HTML
-				<div id="am-select-image-modal" class="am-select-image-modal uk-modal">
-					<div class="uk-modal-dialog">
-						<div class="uk-modal-header">
-							$Text->image_select
-							<a href="#" class="uk-modal-close uk-close"></a>
-						</div>
-						<form 
-						class="uk-form" 
-						data-am-controller="Image::select" 
-						$url
-						data-am-dashboard="$dashboard"
-						data-am-init
-						></form>
-						<div class="uk-modal-footer uk-text-right">
-							<button type="button" class="uk-modal-close uk-button">
-								<i class="uk-icon-close"></i>&nbsp;
-								$Text->btn_close
-							</button>
-						</div>
+			<div id="am-select-image-modal" class="am-select-image-modal uk-modal">
+				<div class="uk-modal-dialog">
+					<div class="uk-modal-header">
+						$Text->image_select
+						<a href="#" class="uk-modal-close uk-close"></a>
+					</div>
+					<form 
+					class="uk-form" 
+					data-am-controller="Image::select" 
+					$url
+					data-am-dashboard="$dashboard"
+					data-am-init
+					></form>
+					<div class="uk-modal-footer uk-text-right">
+						<button type="button" class="uk-modal-close uk-button">
+							<i class="uk-icon-close"></i>&nbsp;
+							$Text->btn_close
+						</button>
 					</div>
 				</div>
-HTML;
+			</div>
+		HTML;
 	}
 }

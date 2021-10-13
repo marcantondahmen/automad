@@ -36,7 +36,9 @@
 
 namespace Automad\UI\Commands;
 
-use Automad\UI\Models\AccountsModel;
+use Automad\Types\User;
+use Automad\UI\Models\UserCollectionModel;
+use Automad\UI\Utils\Messenger;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -72,17 +74,16 @@ class CreateUser extends AbstractCommand {
 	public static function run() {
 		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
-		if (is_readable(AM_FILE_ACCOUNTS)) {
-			$accounts = AccountsModel::get();
-		} else {
-			$accounts = array();
-		}
+		$UserCollectionModel = new UserCollectionModel();
+		$Messenger = new Messenger();
 
 		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
-		$accounts[$name] = AccountsModel::passwordHash($password);
 
-		if (AccountsModel::write($accounts)) {
+		$UserCollectionModel->createUser($name, $password, $password, null, $Messenger);
+		$UserCollectionModel->save($Messenger);
+
+		if (!$Messenger->getError()) {
 			echo '--------------------' . PHP_EOL;
 			echo 'Name:     ' . $name . PHP_EOL;
 			echo 'Password: ' . $password . PHP_EOL;

@@ -66,6 +66,10 @@ btn_files: 上传的文件
 
 -
 
+btn_forgot_password: 忘记密码
+
+-
+
 btn_get_themes: 获得更多主题
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: 在页面编辑模式
 
 -
 
+btn_invite: 发送邀请
+
+-
+
 btn_install: 安装
 
 -
@@ -106,7 +114,7 @@ btn_log_out: 登出
 
 -
 
-btn_login: 登录
+btn_login: 登入
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: 重置
 
 -
 
+btn_save_password: 保存密码
+
+-
+
 btn_save: 保存更改
+
+-
+
+btn_submit: 提交
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: 表格列表
 
 -
 
+editor_table_add_col_left: 在左侧添加列
+
+-
+
+editor_table_add_col_right: 在右侧添加列
+
+-
+
+editor_table_delete_col: 删除列
+
+-
+
+editor_table_add_row_above: 在上面添加一行
+
+-
+
+editor_table_add_row_below: 在下面添加一行
+
+-
+
+editor_table_delete_row: 删除行
+
+-
+
+editor_table_with_headings: 与表标题
+
+-
+
+editor_table_without_headings: 没有表标题
+
+-
+
 editor_code: 源代码
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: 浏览文件
 
 -
 
+email_hello: 你好
+
+-
+
+email_automatic: 此电子邮件已自动发送。 请不要回复这封邮件。
+
+-
+
+email_invite_subject: 您已被添加为新用户！
+
+-
+
+email_invite_text: {}上的新用户帐户已为您创建。 您可以使用下面的按钮创建密码。
+
+-
+
+email_invite_button: 立即创建密码
+
+-
+
+email_reset_password_subject: 您的身份验证令牌
+
+-
+
+email_reset_password_text_top: 下面可以在{}上找到所请求的身份验证令牌。 您可以使用该令牌，以便现在为您创建新密码。
+
+-
+
+email_reset_password_text_bottom: 如果您自己未启动此请求，您可以安全地忽略此消息。
+
+-
+
 error_cache_purged: 缓存目录无法清除！
 
 -
@@ -714,6 +794,10 @@ error_invalid_username: 无效的用户名！ 用户名只能包含以下字符�
 
 -
 
+error_invalid_email: 不合规电邮！ 电子邮件地址只能包含以下字符：
+
+-
+
 error_json: json无效！ 配置文件的内容未正确格式化。
 
 -
@@ -742,7 +826,15 @@ error_password_reuse: 不要重复使用您的旧密码！
 
 -
 
+error_password_reset_verification: 身份验证令牌无效或已过期！
+
+-
+
 error_permission: 拒绝权限：
+
+-
+
+error_send_email: 发送电子邮件错误！
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: 您的服务器不支持更新！ 更新程序需要
 -
 
 error_update_permission: 无法运行更新！ 权限被拒绝！
+
+-
+
+error_user_not_found: 用户名或电子邮件地址无效。
+
+-
+
+error_user_no_email: 没有为请求的用户帐户存储的电子邮件地址。
 
 -
 
@@ -834,11 +934,11 @@ link_title: 添加链接
 
 -
 
-login_title: 登录
+login_title: 登录仪表板
 
 -
 
-login_username: 用户名
+login_name_or_email: 用户名或电子邮件
 
 -
 
@@ -846,7 +946,7 @@ login_password: 密码
 
 -
 
-log_out_title: 登出
+log_out_title: 退出
 
 -
 
@@ -950,6 +1050,22 @@ page_private: 私人的
 
 -
 
+reset_password_title: 创建密码
+
+-
+
+reset_password_enter_name_or_email: 请输入您的用户名或电子邮件地址，以请求身份验证令牌以为您的帐户创建新密码。
+
+-
+
+reset_password_enter_new_password: 包括身份验证令牌的电子邮件只是发送给您。 请在下面输入该令牌以及新密码。
+
+-
+
+reset_password_token: 身份验证令牌
+
+-
+
 sidebar_header_global: 全球的
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: 替换选定
 
 -
 
-search_replace_check_all: 选择所有
+search_replace_check_all: 选择全部
 
 -
 
-search_replace_uncheck_all: 取消所有
+search_replace_uncheck_all: 取消选择所有人
 
 -
 
-search_is_case_sensitive: 区分大小写
-
--
-
-search_is_regex: 正则表达式
+search_is_case_sensitive: 大写/小写
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: 成功安装
 
 -
 
-success_password_changed: 您的密码已成功更改！
+success_password_changed: 你已经成功更改密码！
 
 -
 
-success_log_out: 成功退出
+success_log_out: 您已成功退出！
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: 保存更改
 -
 
 success_update: 成功更新了自动机构！
+
+-
+
+success_user_invite: 邀请已成功发送。
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: 用户
 
 -
 
-sys_user_info: 您可以在此添加或删除更多用户或更改密码。
-
--
-
-sys_user_change_password: 更改您的密码
-
--
-
-sys_user_change_password_current: 当前密码
-
--
-
-sys_user_change_password_new: 新密码
-
--
-
-sys_user_change_password_repeat: 重复输入密码
+sys_user_info: 在这里，您可以找到与您的帐户相关的所有信息，并更改您的用户名，密码或电子邮件。 为了能够通过电子邮件重置密码，请确保您已输入下面的Vaild和活动电子邮件地址。
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: 添加用户
 
 -
 
-sys_user_add_name: 用户名
+sys_user_invite: 通过电子邮件邀请用户
 
 -
 
-sys_user_add_password: 密码
+sys_user_name: 用户名
 
 -
 
-sys_user_add_repeat: 重复输入密码
+sys_user_password: 密码
+
+-
+
+sys_user_repeat_password: 重复输入密码
+
+-
+
+sys_user_email: 电子邮件
+
+-
+
+sys_user_alert_no_email: 您还没有为您的帐户添加有效的电子邮件地址。 请注意，需要有效的电子邮件地址才能重置密码。 点击此处立即添加电子邮件。
+
+-
+
+sys_user_change_password: 更改您的密码
+
+-
+
+sys_user_current_password: 当前密码
+
+-
+
+sys_user_new_password: 新密码
 
 -
 
 sys_user_registered: 注册用户
+
+-
+
+sys_user_registered_info: 还可以注册其他用户，以便允许它们编辑内容。
 
 -
 

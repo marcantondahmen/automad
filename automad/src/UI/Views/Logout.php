@@ -38,7 +38,8 @@ namespace Automad\UI\Views;
 
 use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Components\Alert\Success;
-use Automad\UI\Controllers\UserController;
+use Automad\UI\Components\Nav\NoUserNavbar;
+use Automad\UI\Controllers\SessionController;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,17 +63,15 @@ class Logout extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$isLoggedOut = UserController::logout();
+		$isLoggedOut = SessionController::logout();
 		$fn = $this->fn;
 
 		return <<< HTML
-			<div class="uk-width-medium-1-2 uk-container-center">
-				<h1>
-					{$fn($this->Automad->Shared->get(AM_KEY_SITENAME))}
-				</h1>
+			{$fn(NoUserNavbar::render($this->Automad->Shared->get(AM_KEY_SITENAME), Text::get('log_out_title')))}
+			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				{$fn($this->alert($isLoggedOut))}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -97,22 +96,29 @@ HTML;
 
 		if ($isLoggedOut) {
 			return <<< HTML
-				{$fn(Success::render(Text::get('success_log_out')))}
-				<div class="uk-text-right">
-					<a 
-					href="{$fn(AM_BASE_INDEX . '/')}" 
-					class="uk-button uk-button-link"
-					>
-						{$fn(Text::get('btn_home'))}
-					</a>
-					<a 
-					href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
-					class="uk-button uk-button-success"
-					>
-						{$fn(Text::get('btn_login'))}
-					</a>
+				<div class="uk-panel uk-panel-box">
+					{$fn(Text::get('success_log_out'))}
+					<hr>
+					<div class="uk-grid uk-grid-width-medium-1-2" data-uk-margin>
+						<div>
+							<a 
+							href="{$fn(AM_BASE_INDEX . '/')}" 
+							class="uk-button uk-width-1-1"
+							>
+								{$fn(Text::get('btn_home'))}
+							</a>
+						</div>
+						<div>
+							<a 
+							href="{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}" 
+							class="uk-button uk-button-success uk-width-1-1"
+							>
+								{$fn(Text::get('btn_login'))}
+							</a>
+						</div>
+					</div>
 				</div>
-HTML;
+			HTML;
 		} else {
 			return Danger::render(Text::get('error_log_out'));
 		}

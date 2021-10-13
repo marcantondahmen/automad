@@ -79,6 +79,6 @@ class Packages {
 				{$fn(Text::get('packages_browse'))}
 			</a>
 			{$fn(GridPackages::render($packages))}
-HTML;
+		HTML;
 	}
 }

@@ -62,13 +62,13 @@ class Pages {
 		}
 
 		return <<< HTML
-				<ul 
-				class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
-				data-uk-grid-match="{target:'.uk-panel'}" 
-				data-uk-grid-margin
-				>
-					$cards
-				</ul>
-HTML;
+			<ul 
+			class="uk-grid uk-grid-match uk-grid-width-1-2 uk-grid-width-small-1-3 uk-grid-width-medium-1-4 uk-margin-top" 
+			data-uk-grid-match="{target:'.uk-panel'}" 
+			data-uk-grid-margin
+			>
+				$cards
+			</ul>
+		HTML;
 	}
 }

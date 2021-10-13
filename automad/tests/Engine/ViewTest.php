@@ -109,8 +109,14 @@ class ViewTest extends TestCase {
 								'<meta name="Generator" content="Automad ' . AM_VERSION . '">' .
 								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/dist/blocks.min.css?v=' . Str::sanitize(AM_VERSION) . '">' .
 								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/blocks.min.js?v=' . Str::sanitize(AM_VERSION) . '"></script>' .
-								'<link rel="stylesheet" href="' . AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css" />' .
-								'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/tests/packages/vendor/extension/script.js"></script>' .
+								'<link rel="stylesheet" href="' .
+								AM_BASE_URL . '/automad/tests/packages/vendor/extension/styles.css?m=' .
+								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/styles.css') .
+								'" />' .
+								'<script type="text/javascript" src="' .
+								AM_BASE_URL . '/automad/tests/packages/vendor/extension/script.js?m=' .
+								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/script.js') .
+								'"></script>' .
 								'</head>Asset Test',
 			'snippet_01' => 'Snippet Test / Snippet Test'
 		);

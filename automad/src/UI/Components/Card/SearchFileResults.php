@@ -77,20 +77,20 @@ class SearchFileResults {
 		$keysJson = json_encode($keys);
 
 		return <<< HTML
-			<div id="$id" class="uk-panel uk-panel-box uk-active uk-margin-small-top">
+			<div id="$id" class="uk-panel uk-panel-box uk-margin-small-top">
 				<div class="uk-flex uk-flex-space-between">
 					<a href="$editUrl" class="am-panel-link uk-text-truncate">
 						<i class="uk-icon-file-text-o"></i>&nbsp; 
 						$editText
 					</a>
 					<label 
-					class="am-toggle-checkbox uk-active" 
+					class="am-toggle-checkbox" 
 					data-am-toggle="#$id">
-						<input type="checkbox" name="files[{$FileResultsModel->path}]" value='$keysJson' checked="on" />
+						<input type="checkbox" name="files[{$FileResultsModel->path}]" value='$keysJson' />
 					</label>
 				</div>
 				$results
 			</div>
-HTML;
+		HTML;
 	}
 }

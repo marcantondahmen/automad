@@ -75,7 +75,7 @@
 		margin-top: 0.29rem;
 	}
 
-	& > a {
+	& > a:not(.uk-button) {
 		&,
 		&:hover,
 		&:active,
@@ -90,8 +90,7 @@
 
 	& > hr,
 	.uk-modal-dialog & > hr {
-		margin-left: -@panel-box-padding !important;
-		margin-right: -@panel-box-padding !important;
+		margin: @panel-box-padding -@panel-box-padding !important;
 	}
 }
 

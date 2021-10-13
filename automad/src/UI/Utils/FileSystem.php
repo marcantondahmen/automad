@@ -120,28 +120,42 @@ class FileSystem extends CoreFileSystem {
 	 * Deletes a file and its caption (if existing).
 	 *
 	 * @param string $file
-	 * @return string Only error messages - false in case no errors occured!
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public static function deleteMedia(string $file) {
-		if (is_writable($file)) {
-			if (unlink($file)) {
-				$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+	public static function deleteMedia(string $file, Messenger $Messenger) {
+		$fileError = Text::get('error_permission') . ' "' . basename($file) . '"';
 
-				if (file_exists($captionFile)) {
-					if (is_writable($captionFile)) {
-						if (!unlink($captionFile)) {
-							return Text::get('error_permission') . ' "' . basename($captionFile) . '"';
-						}
-					} else {
-						return Text::get('error_permission') . ' "' . basename($captionFile) . '"';
-					}
-				}
-			} else {
-				return Text::get('error_permission') . ' "' . basename($file) . '"';
-			}
-		} else {
-			return Text::get('error_permission') . ' "' . basename($file) . '"';
+		if (!is_writable($file)) {
+			$Messenger->setError($fileError);
+
+			return false;
 		}
+
+		if (!unlink($file)) {
+			$Messenger->setError($fileError);
+
+			return false;
+		}
+
+		$captionFile = $file . '.' . AM_FILE_EXT_CAPTION;
+		$captionError = Text::get('error_permission') . ' "' . basename($captionFile) . '"';
+
+		if (file_exists($captionFile)) {
+			if (!is_writable($captionFile)) {
+				$Messenger->setError($captionError);
+
+				return false;
+			}
+
+			if (!unlink($captionFile)) {
+				$Messenger->setError($captionError);
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -287,8 +301,27 @@ class FileSystem extends CoreFileSystem {
 				);
 
 				foreach ($cacheItems as $item) {
-					if (!rename($item, $trash . '/' . basename($item))) {
-						return false;
+					$dest = $trash . '/' . basename($item);
+
+					if (!@rename($item, $dest)) {
+						if (function_exists('exec')) {
+							if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+								$cmd = "move $item $dest";
+								$cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
+							} else {
+								$cmd = "mv $item $dest";
+							}
+
+							$output = array();
+							$code = null;
+							@exec($cmd, $output, $code);
+
+							if ($code !== 0) {
+								return false;
+							}
+						} else {
+							return false;
+						}
 					}
 				}
 
@@ -303,38 +336,49 @@ class FileSystem extends CoreFileSystem {
 	 *
 	 * @param string $oldFile
 	 * @param string $newFile
-	 * @return string Only error messages - false in case no errors occured!
+	 * @param Messenger $Messenger
+	 * @return bool true on success
 	 */
-	public static function renameMedia(string $oldFile, string $newFile) {
-		if (is_writable(dirname($oldFile))) {
-			if (is_writable($oldFile)) {
-				if (!file_exists($newFile)) {
-					if (rename($oldFile, $newFile)) {
-						// Set new mtime to force refresh of page cache in case the new name was belonging to a delete file before.
-						touch($newFile);
+	public static function renameMedia(string $oldFile, string $newFile, Messenger $Messenger) {
+		if (!is_writable(dirname($oldFile))) {
+			$Messenger->setError(Text::get('error_permission') . ' "' . basename(dirname($oldFile)) . '"');
 
-						$oldCaptionFile = $oldFile . '.' . AM_FILE_EXT_CAPTION;
-						$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
-
-						if (file_exists($oldCaptionFile)) {
-							if (is_writable($oldCaptionFile) && (is_writable($newCaptionFile) || !file_exists($newCaptionFile))) {
-								rename($oldCaptionFile, $newCaptionFile);
-							} else {
-								return Text::get('error_permission') . ' "' . basename($newCaptionFile) . '"';
-							}
-						}
-					} else {
-						return Text::get('error_permission') . ' "' . basename($oldFile) . '"';
-					}
-				} else {
-					return '"' . $newFile . '" ' . Text::get('error_existing');
-				}
-			} else {
-				return Text::get('error_permission') . ' "' . basename($oldFile) . '"';
-			}
-		} else {
-			return Text::get('error_permission') . ' "' . basename(dirname($oldFile)) . '"';
+			return false;
 		}
+
+		if (!is_writable($oldFile)) {
+			$Messenger->setError(Text::get('error_permission') . ' "' . basename($oldFile) . '"');
+
+			return false;
+		}
+
+		if (file_exists($newFile)) {
+			$Messenger->setError('"' . $newFile . '" ' . Text::get('error_existing'));
+
+			return false;
+		}
+
+		if (!rename($oldFile, $newFile)) {
+			$Messenger->setError(Text::get('error_permission') . ' "' . basename($oldFile) . '"');
+		}
+
+		// Set new mtime to force refresh of page cache in case the new name was belonging to a delete file before.
+		touch($newFile);
+
+		$oldCaptionFile = $oldFile . '.' . AM_FILE_EXT_CAPTION;
+		$newCaptionFile = $newFile . '.' . AM_FILE_EXT_CAPTION;
+
+		if (file_exists($oldCaptionFile)) {
+			if (is_writable($oldCaptionFile) && (is_writable($newCaptionFile) || !file_exists($newCaptionFile))) {
+				rename($oldCaptionFile, $newCaptionFile);
+			} else {
+				$Messenger->setError(Text::get('error_permission') . ' "' . basename($newCaptionFile) . '"');
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**

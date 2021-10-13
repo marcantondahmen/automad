@@ -73,83 +73,83 @@ class File {
 
 		if ($caption) {
 			$caption = <<< HTML
-						<div class="uk-text-small uk-text-truncate uk-hidden-small">
-							<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
-							$caption
-						</div>
-HTML;
+				<div class="uk-text-small uk-text-truncate uk-hidden-small">
+					<i class="uk-icon-comment-o uk-icon-justify"></i>&nbsp;
+					$caption
+				</div>
+			HTML;
 		}
 
 		if (FileUtils::fileIsImage($file)) {
 			$resize = <<< HTML
-						<li>
-							<a href="#am-copy-resized-modal"
-							data-uk-modal
-							>
-								<i class="uk-icon-crop"></i>&nbsp;
-								$Text->btn_copy_resized
-							</a>
-						</li>
-HTML;
+				<li>
+					<a href="#am-copy-resized-modal"
+					data-uk-modal
+					>
+						<i class="uk-icon-crop"></i>&nbsp;
+						$Text->btn_copy_resized
+					</a>
+				</li>
+			HTML;
 		}
 
 		return <<< HTML
+			<div 
+			id="$id" 
+			class="uk-panel uk-panel-box" 
+			data-am-file-info='$jsonData'
+			>
+				$preview
 				<div 
-				id="$id" 
-				class="uk-panel uk-panel-box" 
-				data-am-file-info='$jsonData'
+				class="uk-panel-title" 
+				title="$title" 
 				>
-					$preview
-					<div 
-					class="uk-panel-title" 
-					title="$title" 
-					>
-						$title
-					</div>
-					$caption
-					<div class="uk-text-small uk-text-truncate uk-hidden-small">
-						<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;
-						$mTime
-					</div>
-					<div class="am-panel-bottom">
-						<div class="am-panel-bottom-left">
-							<div data-uk-dropdown="{mode:'click'}">
-								<div class="am-panel-bottom-link">
-									<i class="uk-icon-ellipsis-v"></i>
-								</div>
-								<div class="uk-dropdown uk-dropdown-small">
-									<ul class="uk-nav uk-nav-dropdown">
-										<li>
-											<a 
-											href="#am-edit-file-info-modal" 
-											data-uk-modal 
-											>
-												<i class="uk-icon-pencil"></i>&nbsp;
-												$Text->btn_edit_file_info
-											</a>
-										</li>
-										$resize
-										<li>
-											<a href="#" data-am-clipboard="$clipboard">
-												<i class="uk-icon-link"></i>&nbsp;
-												$Text->btn_copy_url_clipboard
-											</a>
-										</li>
-									</ul>
-								</div>
+					$title
+				</div>
+				$caption
+				<div class="uk-text-small uk-text-truncate uk-hidden-small">
+					<i class="uk-icon-calendar-o uk-icon-justify"></i>&nbsp;
+					$mTime
+				</div>
+				<div class="am-panel-bottom">
+					<div class="am-panel-bottom-left">
+						<div data-uk-dropdown="{mode:'click'}">
+							<div class="am-panel-bottom-link">
+								<i class="uk-icon-ellipsis-v"></i>
+							</div>
+							<div class="uk-dropdown uk-dropdown-small">
+								<ul class="uk-nav uk-nav-dropdown">
+									<li>
+										<a 
+										href="#am-edit-file-info-modal" 
+										data-uk-modal 
+										>
+											<i class="uk-icon-pencil"></i>&nbsp;
+											$Text->btn_edit_file_info
+										</a>
+									</li>
+									$resize
+									<li>
+										<a href="#" data-am-clipboard="$clipboard">
+											<i class="uk-icon-link"></i>&nbsp;
+											$Text->btn_copy_url_clipboard
+										</a>
+									</li>
+								</ul>
 							</div>
 						</div>
-						<div class="am-panel-bottom-right">
-							<label 
-							class="am-toggle-checkbox am-panel-bottom-link" 
-							data-am-toggle="#$id"
-							>
-								<input type="checkbox" name="delete[]" value="$basename" />
-							</label>
-						</div>
+					</div>
+					<div class="am-panel-bottom-right">
+						<label 
+						class="am-toggle-checkbox am-panel-bottom-link" 
+						data-am-toggle="#$id"
+						>
+							<input type="checkbox" name="delete[]" value="$basename" />
+						</label>
 					</div>
 				</div>
-HTML;
+			</div>
+		HTML;
 	}
 
 	/**
@@ -194,27 +194,27 @@ HTML;
 			$url = AM_BASE_URL . $imgPanel->file;
 
 			$preview = <<< HTML
-						<img src="$url" width="$imgPanel->width" height="$imgPanel->height" />
-						<div class="uk-panel-badge uk-badge"> 
-							$imgPanel->originalWidth 
-							<i class="uk-icon-times"></i>
-							$imgPanel->originalHeight
-						</div>
-HTML;
+				<img src="$url" width="$imgPanel->width" height="$imgPanel->height" />
+				<div class="uk-panel-badge uk-badge"> 
+					$imgPanel->originalWidth 
+					<i class="uk-icon-times"></i>
+					$imgPanel->originalHeight
+				</div>
+			HTML;
 		} else {
 			$preview = '<i class="uk-icon-file-o am-files-icon-' . FileSystem::getExtension($file) . '"></i>';
 		}
 
 		return <<< HTML
-				<a 
-				href="#am-edit-file-info-modal" 
-				class="uk-panel-teaser uk-display-block" 
-				data-uk-modal
-				>
-					<div class="am-cover-4by3">
-						$preview
-					</div>
-				</a>
-HTML;
+			<a 
+			href="#am-edit-file-info-modal" 
+			class="uk-panel-teaser uk-display-block" 
+			data-uk-modal
+			>
+				<div class="am-cover-4by3">
+					$preview
+				</div>
+			</a>
+		HTML;
 	}
 }

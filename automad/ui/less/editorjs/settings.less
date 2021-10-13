@@ -39,7 +39,7 @@
 	& .ce-settings {
 		width: ~'calc((3 * @{am-settings-height}) + (4 * @{am-settings-gap}))';
 		background-color: @am-block-dropdown-background;
-		border: @am-hairline !important;
+		border: @am-hairline-px !important;
 		border-radius: @am-radius;
 		text-align: center;
 		font-size: 0.87rem;
@@ -50,13 +50,14 @@
 			padding: 0;
 		}
 
-		&__plugin-zone {
-			& > div > div + div {
-				border-top: @am-hairline-px;
-			}
+		&__plugin-zone > div + div {
+			border-top: @am-hairline-px;
 		}
 	}
 
+	& .cdx-quote-settings,
+	& .cdx-nested-list__settings,
+	& .tc-settings,
 	& .cdx-settings,
 	& .cdx-settings-1-1,
 	& .cdx-settings-1-2,
@@ -71,6 +72,9 @@
 		grid-template-columns: 1fr;
 	}
 
+	& .cdx-quote-settings,
+	& .cdx-nested-list__settings,
+	& .tc-settings,
 	& .cdx-settings-1-2 {
 		grid-template-columns: 1fr 1fr;
 	}
@@ -83,7 +87,7 @@
 
 	& .cdx-settings-button,
 	& .ce-settings__button {
-		width: auto;
+		width: auto !important;
 		height: @am-settings-height;
 		margin: 0 !important;
 		color: @nav-dropdown-color;

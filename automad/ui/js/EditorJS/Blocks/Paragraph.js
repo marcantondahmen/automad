@@ -64,14 +64,6 @@ class AutomadBlockParagraph {
 		};
 
 		this.setAlignment(this.input);
-
-		this.layout = {};
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.layout,
-			data,
-			api,
-			config
-		);
 	}
 
 	onKeyUp(e) {
@@ -218,7 +210,6 @@ class AutomadBlockParagraph {
 		inner.appendChild(buttonLarge);
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

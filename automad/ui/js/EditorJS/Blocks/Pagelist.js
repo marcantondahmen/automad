@@ -60,7 +60,7 @@ class AutomadBlockPagelist {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
@@ -79,13 +79,6 @@ class AutomadBlockPagelist {
 			sortOrder: data.sortOrder || 'asc',
 			file: data.file || '',
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
@@ -248,9 +241,5 @@ class AutomadBlockPagelist {
 			sortOrder: this.inputs.sortOrder.value,
 			file: this.inputs.file.value,
 		});
-	}
-
-	renderSettings() {
-		return this.layoutSettings;
 	}
 }

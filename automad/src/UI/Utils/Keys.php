@@ -38,7 +38,7 @@ namespace Automad\UI\Utils;
 
 use Automad\Core\Page;
 use Automad\Engine\PatternAssembly;
-use Automad\System\Theme;
+use Automad\Types\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

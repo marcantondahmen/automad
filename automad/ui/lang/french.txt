@@ -66,6 +66,10 @@ btn_files: Fichiers téléchargés
 
 -
 
+btn_forgot_password: Mot de passe oublié
+
+-
+
 btn_get_themes: Obtenez plus de thèmes
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Mode d'édition sur la page
 
 -
 
+btn_invite: Envoyer une invitation
+
+-
+
 btn_install: Installer
 
 -
@@ -102,7 +110,7 @@ btn_link: Lien
 
 -
 
-btn_log_out: Se déconnecter
+btn_log_out: Déconnexion
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Réinitialiser
 
 -
 
+btn_save_password: Enregistrer le mot de passe
+
+-
+
 btn_save: Sauvegarder les modifications
+
+-
+
+btn_submit: Soumettre
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Liste tabulaire
 
 -
 
+editor_table_add_col_left: Ajouter une colonne à gauche
+
+-
+
+editor_table_add_col_right: Ajouter une colonne à droite
+
+-
+
+editor_table_delete_col: Supprimer la colonne
+
+-
+
+editor_table_add_row_above: Ajouter une ligne ci-dessus
+
+-
+
+editor_table_add_row_below: Ajouter une ligne ci-dessous
+
+-
+
+editor_table_delete_row: Supprimer la ligne
+
+-
+
+editor_table_with_headings: Avec des titres de table
+
+-
+
+editor_table_without_headings: Sans titres de table
+
+-
+
 editor_code: Code source
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Parcourir les fichiers
 
 -
 
+email_hello: Bonjour
+
+-
+
+email_automatic: Cet email a été envoyé automatiquement. S'il vous plait ne répondez pas à cet email.
+
+-
+
+email_invite_subject: Vous avez été ajouté comme nouvel utilisateur!
+
+-
+
+email_invite_text: Un nouveau compte d'utilisateur sur {} a été créé pour vous. Vous pouvez utiliser le bouton ci-dessous pour créer votre mot de passe.
+
+-
+
+email_invite_button: Créer un mot de passe maintenant
+
+-
+
+email_reset_password_subject: Votre jeton d'authentification
+
+-
+
+email_reset_password_text_top: Le jeton d'authentification demandé pour votre compte sur {} peut être trouvé ci-dessous. Vous pouvez utiliser ce jeton afin de créer un nouveau mot de passe pour vous maintenant.
+
+-
+
+email_reset_password_text_bottom: Si vous n'aviez pas initié cette demande vous-même, vous pouvez ignorer ce message en toute sécurité.
+
+-
+
 error_cache_purged: Le répertoire de cache n'a pas pu être purgé!
 
 -
@@ -686,7 +766,7 @@ error_login: Nom d'utilisateur ou mot de passe invalide
 
 -
 
-error_log_out: La déconnexion a échoué!
+error_log_out: Déconnexion a échoué!
 
 -
 
@@ -711,6 +791,10 @@ error_import: L'importation du fichier a échoué!
 -
 
 error_invalid_username: Nom d'utilisateur invalide! Un nom d'utilisateur ne peut contenir que les caractères suivants:
+
+-
+
+error_invalid_email: Email invalide! Une adresse e-mail ne peut contenir que les caractères suivants:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Ne réutilisez pas votre ancien mot de passe!
 
 -
 
+error_password_reset_verification: Le jeton d'authentification n'est pas valide ou a déjà expiré!
+
+-
+
 error_permission: Autorisations refusées:
+
+-
+
+error_send_email: Erreur lors de l'envoi de courrier électronique!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Les mises à jour ne sont pas prises en charge par v
 -
 
 error_update_permission: Impossible d'exécuter la mise à jour! Autorisations refusées!
+
+-
+
+error_user_not_found: Nom d'utilisateur ou adresse e-mail non valide.
+
+-
+
+error_user_no_email: Il n'y a pas d'adresse e-mail stockée pour le compte d'utilisateur demandé.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Ajouter un lien
 
 -
 
-login_title: S'identifier
+login_title: Connectez-vous au tableau de bord
 
 -
 
-login_username: Nom d'utilisateur
+login_name_or_email: Nom d'utilisateur ou email
 
 -
 
@@ -846,7 +946,7 @@ login_password: Mot de passe
 
 -
 
-log_out_title: Déconnecté
+log_out_title: Se déconnecter
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Privée
 
 -
 
+reset_password_title: Créer un mot de passe
+
+-
+
+reset_password_enter_name_or_email: Veuillez entrer votre nom d'utilisateur ou votre adresse e-mail afin de demander un jeton d'authentification pour créer un nouveau mot de passe pour votre compte.
+
+-
+
+reset_password_enter_new_password: Un email comprenant un jeton d'authentification vient de vous envoyer. Veuillez entrer ce jeton maintenant ci-dessous avec un nouveau mot de passe.
+
+-
+
+reset_password_token: Jeton d'authentification
+
+-
+
 sidebar_header_global: Globale
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Remplacer sélectionné
 
 -
 
-search_replace_check_all: Vérifie tout
+search_replace_check_all: Choisir tous
 
 -
 
-search_replace_uncheck_all: Décocher tout
+search_replace_uncheck_all: Tout déselectionner
 
 -
 
-search_is_case_sensitive: Sensible aux majuscules et minuscules
-
--
-
-search_is_regex: Regérer
+search_is_case_sensitive: Minuscules supérieure
 
 -
 
@@ -1054,7 +1166,7 @@ success_password_changed: Votre mot de passe a été changé avec succès!
 
 -
 
-success_log_out: Déconnexion réussie
+success_log_out: Vous avez décollé avec succès!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Modifications enregistrées
 -
 
 success_update: Automad mis à jour avec succès!
+
+-
+
+success_user_invite: L'invitation a été envoyée avec succès.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Utilisatrices
 
 -
 
-sys_user_info: Vous pouvez ajouter ou supprimer d'autres utilisateurs ou modifier votre mot de passe ici.
-
--
-
-sys_user_change_password: Changez votre mot de passe
-
--
-
-sys_user_change_password_current: Mot de passe actuel
-
--
-
-sys_user_change_password_new: Nouveau mot de passe
-
--
-
-sys_user_change_password_repeat: Répéter le mot de passe
+sys_user_info: Vous trouverez ici toutes les informations relatives à votre compte et modifier votre nom d'utilisateur, votre mot de passe ou votre email. Pour pouvoir réinitialiser votre mot de passe par courrier électronique, assurez-vous que vous avez entré une adresse e-mail Vaild et Active ci-dessous.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Ajouter un utilisateur
 
 -
 
-sys_user_add_name: Nom d'utilisateur
+sys_user_invite: Inviter l'utilisateur par email
 
 -
 
-sys_user_add_password: Mot de passe
+sys_user_name: Nom d'utilisateur
 
 -
 
-sys_user_add_repeat: Répéter le mot de passe
+sys_user_password: Mot de passe
+
+-
+
+sys_user_repeat_password: Répéter le mot de passe
+
+-
+
+sys_user_email: E-mail
+
+-
+
+sys_user_alert_no_email: Vous n'avez pas encore ajouté d'adresse électronique valide à votre compte. Notez qu'une adresse électronique valide est requise pour pouvoir réinitialiser votre mot de passe. Cliquez ici pour ajouter un email maintenant.
+
+-
+
+sys_user_change_password: Changez votre mot de passe
+
+-
+
+sys_user_current_password: Mot de passe actuel
+
+-
+
+sys_user_new_password: nouveau mot de passe
 
 -
 
 sys_user_registered: Utilisateurs enregistrés
+
+-
+
+sys_user_registered_info: Il est également possible d'enregistrer d'autres utilisateurs afin de leur permettre d'éditer du contenu.
 
 -
 

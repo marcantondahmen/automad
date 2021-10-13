@@ -76,7 +76,7 @@ class Packages extends AbstractView {
 				<i class="uk-icon-circle-o-notch uk-icon-spin uk-icon-small"></i>
 			</div>
 			{$fn($this->progress())}
-HTML;
+		HTML;
 	}
 
 	/**
@@ -129,7 +129,7 @@ HTML;
 						</div>
 					</div>
 				</div>
-HTML;
+			HTML;
 		}
 
 		return $modals;

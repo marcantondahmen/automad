@@ -58,7 +58,9 @@ class SnippetCollection {
 	 * @param string $body
 	 */
 	public static function add(string $name, string $body) {
-		self::$snippets[$name] = $body;
+		if (!array_key_exists($name, self::$snippets)) {
+			self::$snippets[$name] = $body;
+		}
 	}
 
 	/**

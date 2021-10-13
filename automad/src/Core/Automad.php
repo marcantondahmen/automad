@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\UI\Models\UserModel;
+use Automad\UI\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -100,7 +100,7 @@ class Automad {
 	public function __construct() {
 		$this->getReservedUrls();
 		$this->Shared = new Shared();
-		$this->user = UserModel::getName();
+		$this->user = Session::getUsername();
 		$this->collectPages();
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 

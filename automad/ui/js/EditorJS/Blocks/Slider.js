@@ -57,7 +57,7 @@ class AutomadBlockSlider {
 		};
 	}
 
-	constructor({ data, api, config }) {
+	constructor({ data, api }) {
 		var create = Automad.Util.create,
 			t = AutomadEditorTranslation.get;
 
@@ -70,13 +70,6 @@ class AutomadBlockSlider {
 			dots: data.dots !== undefined ? data.dots : true,
 			autoplay: data.autoplay !== undefined ? data.autoplay : true,
 		};
-
-		this.layoutSettings = AutomadLayout.renderSettings(
-			this.data,
-			data,
-			api,
-			config
-		);
 
 		this.inputs = {
 			width: create.editable(['cdx-input'], 'px', this.data.width),
@@ -170,7 +163,6 @@ class AutomadBlockSlider {
 		});
 
 		wrapper.appendChild(inner);
-		wrapper.appendChild(this.layoutSettings);
 
 		return wrapper;
 	}

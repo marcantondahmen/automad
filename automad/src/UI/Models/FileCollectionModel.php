@@ -40,6 +40,7 @@ use Automad\Core\Cache;
 use Automad\Core\Str;
 use Automad\UI\Response;
 use Automad\UI\Utils\FileSystem;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -68,19 +69,24 @@ class FileCollectionModel {
 			$errors = array();
 
 			foreach ($files as $f) {
+				$Messenger = new Messenger();
+
 				// Make sure submitted filename has no '../' (basename).
 				$file = $path . basename($f);
 
-				if ($error = FileSystem::deleteMedia($file)) {
-					$errors[] = $error;
-				} else {
+				if (FileSystem::deleteMedia($file, $Messenger)) {
 					$success[] = '"' . basename($file) . '"';
+				} else {
+					$errors[] = $Messenger->getError();
 				}
 			}
 
 			Cache::clear();
 
-			$Response->setSuccess(Text::get('success_remove') . '<br />' . implode('<br />', $success));
+			if (!empty($success)) {
+				$Response->setSuccess(Text::get('success_remove') . '<br />' . implode('<br />', $success));
+			}
+
 			$Response->setError(implode('<br />', $errors));
 		} else {
 			$Response->setError(Text::get('error_permission') . ' "' . basename($path) . '"');
@@ -94,10 +100,10 @@ class FileCollectionModel {
 	 *
 	 * @param array $files
 	 * @param string $path
-	 * @return string an error message or false on success
+	 * @return Response a response object
 	 */
 	public static function upload(array $files, string $path) {
-		$error = '';
+		$Response = new Response();
 
 		// Move uploaded files
 		if (isset($files['files']['name'])) {
@@ -120,13 +126,13 @@ class FileCollectionModel {
 				Cache::clear();
 
 				if ($errors) {
-					$error = implode('<br />', $errors);
+					$Response->setError(implode('<br />', $errors));
 				}
 			} else {
-				$error = Text::get('error_permission') . ' "' . basename($path) . '"';
+				$Response->setError(Text::get('error_permission') . ' "' . basename($path) . '"');
 			}
 		}
 
-		return $error;
+		return $Response;
 	}
 }

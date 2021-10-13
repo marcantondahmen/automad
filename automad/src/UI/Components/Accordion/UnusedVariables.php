@@ -73,6 +73,6 @@ class UnusedVariables {
 			<div class="uk-accordion-content">
 				{$fn(Group::render($Automad, $keys, $data, 'am-add-variable'))}
 			</div>
-HTML;
+		HTML;
 	}
 }

@@ -38,8 +38,8 @@ namespace Automad\UI;
 
 use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Prefix;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -67,7 +67,7 @@ class Dashboard {
 		$namespaceViews = __NAMESPACE__ . '\\Views\\';
 		$namespaceControllers = __NAMESPACE__ . '\\Controllers\\';
 
-		if (UserModel::getName()) {
+		if (Session::getUsername()) {
 			if ($controller = Request::query('controller')) {
 				// Controllers.
 				$method = "{$namespaceControllers}{$controller}";
@@ -116,10 +116,16 @@ class Dashboard {
 				exit($Response->json());
 			}
 
-			$view = 'CreateUser';
+			$requestedView = Request::query('view');
 
-			if (file_exists(AM_FILE_ACCOUNTS)) {
+			if ($requestedView == 'ResetPassword') {
+				$view = $requestedView;
+			} else {
 				$view = 'Login';
+			}
+
+			if (!file_exists(AM_FILE_ACCOUNTS)) {
+				$view = 'CreateUser';
 			}
 
 			$class = "{$namespaceViews}{$view}";
@@ -134,8 +140,6 @@ class Dashboard {
 	 * @return string the rendered output.
 	 */
 	public function get() {
-		$this->output = preg_replace('/^\t{0,3}/m', '', $this->output);
-
 		return Prefix::tags($this->output);
 	}
 

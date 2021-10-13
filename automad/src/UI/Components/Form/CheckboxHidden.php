@@ -63,24 +63,24 @@ class CheckboxHidden {
 			$checked = 'checked';
 		}
 
-		return 	<<<HTML
-				<div class="uk-form-row">
-					<label class="uk-form-label uk-text-truncate">
-						$Text->page_visibility
-					</label>
-					<label 
-					class="am-toggle-switch uk-button" 
-					data-am-toggle
-					>
-						$Text->btn_hide_page
-						<input 
-						id="am-checkbox-hidden" 
-						type="checkbox" 
-						name="$key"
-						$checked 
-						/>
-					</label>
-				</div>
-HTML;
+		return <<<HTML
+			<div class="uk-form-row">
+				<label class="uk-form-label uk-text-truncate">
+					$Text->page_visibility
+				</label>
+				<label 
+				class="am-toggle-switch uk-button" 
+				data-am-toggle
+				>
+					$Text->btn_hide_page
+					<input 
+					id="am-checkbox-hidden" 
+					type="checkbox" 
+					name="$key"
+					$checked 
+					/>
+				</label>
+			</div>
+		HTML;
 	}
 }

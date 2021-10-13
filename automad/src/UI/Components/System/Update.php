@@ -64,6 +64,6 @@ class Update {
 			>
 				$loader
 			</form>
-HTML;
+		HTML;
 	}
 }

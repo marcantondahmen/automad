@@ -142,7 +142,7 @@ class Page extends AbstractView {
 					</div>
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**

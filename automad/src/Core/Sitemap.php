@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\UI\Models\UserModel;
+use Automad\UI\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -54,7 +54,7 @@ class Sitemap {
 	 * @param array $collection
 	 */
 	public function __construct(array $collection) {
-		if (!UserModel::getName()) {
+		if (!Session::getUsername()) {
 			$sitemap = AM_BASE_DIR . '/sitemap.xml';
 
 			// If the base dir is writable without having a sitemap.xml or if sitemap.xml exists and is writable itself.

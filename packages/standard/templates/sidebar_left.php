@@ -1,5 +1,16 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<# 
+
+This template extends the "post.php" template.
+The "main" snippet is overriden to actually change the content of the page body.
+
+Note that the order of the block editor fields can be defined by simply adding the
+in those variables in the correct order to a comment block in the header of a template as follows:
+
+@{ +hero }
+@{ +main }
+
+#>
+<@ snippet main @>
 	<div class="uk-flex">
 		<@ elements/sidebar.php @>
 		<main class="uk-width-large-3-4">
@@ -9,4 +20,5 @@
 			</div>
 		</main>
 	</div>
-<@ elements/footer.php @>
+<@ end @>
+<@ post.php @>

@@ -66,6 +66,10 @@ btn_files: Отпремљене датотеке
 
 -
 
+btn_forgot_password: Заборавили сте лозинку
+
+-
+
 btn_get_themes: Набавите још тема
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Режим уређивања на страници
 
 -
 
+btn_invite: Пошаљи позивницу
+
+-
+
 btn_install: Инсталирај
 
 -
@@ -102,7 +110,7 @@ btn_link: Линк
 
 -
 
-btn_log_out: Одјавити се
+btn_log_out: Одјава
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Ресетовање
 
 -
 
+btn_save_password: Сачувај лозинку
+
+-
+
 btn_save: Сачувај промене
+
+-
+
+btn_submit: прихвати
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Табеларни списак
 
 -
 
+editor_table_add_col_left: Додајте колону са леве стране
+
+-
+
+editor_table_add_col_right: Додајте колону са десне стране
+
+-
+
+editor_table_delete_col: Обриши ступац
+
+-
+
+editor_table_add_row_above: Додајте горњи ред
+
+-
+
+editor_table_add_row_below: Додајте ред испод
+
+-
+
+editor_table_delete_row: Избрисати ред
+
+-
+
+editor_table_with_headings: Са тангима
+
+-
+
+editor_table_without_headings: Без наслова
+
+-
+
 editor_code: Изворни код
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Прегледајте датотеке
 
 -
 
+email_hello: Здраво
+
+-
+
+email_automatic: Ова адреса е-поште је послата аутоматски. Молим вас да не одговарате на овај мејл.
+
+-
+
+email_invite_subject: Додате сте као нови корисник!
+
+-
+
+email_invite_text: Нови кориснички налог на {} је створен за вас. Можете да користите дугме испод да бисте креирали лозинку.
+
+-
+
+email_invite_button: Креирајте лозинку сада
+
+-
+
+email_reset_password_subject: Ваш токен за аутентификацију
+
+-
+
+email_reset_password_text_top: Тражени токен аутентификације за ваш налог на {} можете пронаћи у наставку. Можете да користите тај токен да бисте сада створили нову лозинку за вас.
+
+-
+
+email_reset_password_text_bottom: У случају да сами нисте иницирали овај захтев, можете сигурно игнорисати ову поруку.
+
+-
+
 error_cache_purged: Није могуће очистити директоријум кеш меморије!
 
 -
@@ -686,7 +766,7 @@ error_login: погрешно корисничко име или лозинка
 
 -
 
-error_log_out: Одјава није успела!
+error_log_out: Одјавите се није успело!
 
 -
 
@@ -711,6 +791,10 @@ error_import: Увоз датотеке није успео!
 -
 
 error_invalid_username: Погрешно корисничко име! Корисничко име може да садржи само следеће знакове:
+
+-
+
+error_invalid_email: Неважећа е-маил! Адреса е-поште може да садржи само следеће знакове:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Не користите поново стару лозин
 
 -
 
+error_password_reset_verification: Токен за аутентификацију је неважећи или је већ истекао!
+
+-
+
 error_permission: Дозволе одбијене:
+
+-
+
+error_send_email: Грешка приликом слања е-поште!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Ваш сервер не подржава ажури
 -
 
 error_update_permission: Није могуће покренути ажурирање! Дозволе одбијене!
+
+-
+
+error_user_not_found: Неважеће корисничко име или адреса е-поште.
+
+-
+
+error_user_no_email: Не постоји адреса е-поште сачувана за тражени кориснички налог.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Додај везу
 
 -
 
-login_title: Пријавите се
+login_title: Пријавите се на контролну таблу
 
 -
 
-login_username: Корисничко име
+login_name_or_email: Корисничко име или е-маил
 
 -
 
@@ -846,7 +946,7 @@ login_password: Лозинка
 
 -
 
-log_out_title: Одјављени
+log_out_title: Одјавити се
 
 -
 
@@ -950,6 +1050,22 @@ page_private: приватни
 
 -
 
+reset_password_title: Направите лозинку
+
+-
+
+reset_password_enter_name_or_email: Молимо унесите своје корисничко име или адресу е-поште како бисте затражили токен за аутентификацију да бисте креирали нову лозинку за свој налог.
+
+-
+
+reset_password_enter_new_password: Послао вам је само е-пошту која укључује токен за аутентификацију. Унесите тај токен сада у даљем тексту заједно са новом лозинком.
+
+-
+
+reset_password_token: Токен за аутентификацију
+
+-
+
 sidebar_header_global: Глобално
 
 -
@@ -1006,7 +1122,7 @@ search_replace_selected: Замените одабрано
 
 -
 
-search_replace_check_all: Штиклирати све
+search_replace_check_all: Изаберите све
 
 -
 
@@ -1014,11 +1130,7 @@ search_replace_uncheck_all: Поништите све
 
 -
 
-search_is_case_sensitive: Велика и мала слова
-
--
-
-search_is_regex: Регек
+search_is_case_sensitive: Велика / мала слова
 
 -
 
@@ -1054,7 +1166,7 @@ success_password_changed: Ваша лозинка је успешно проме
 
 -
 
-success_log_out: Одјављени сте успешно
+success_log_out: Успешно сте се пријавили!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Сачуване промене
 -
 
 success_update: Успешно ажуриран Аутомад!
+
+-
+
+success_user_invite: Позив је успешно послато.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Корисници
 
 -
 
-sys_user_info: Овде можете додати или уклонити више корисника или променити лозинку.
-
--
-
-sys_user_change_password: Промените своју лозинку
-
--
-
-sys_user_change_password_current: Тренутна лозинка
-
--
-
-sys_user_change_password_new: Нова лозинка
-
--
-
-sys_user_change_password_repeat: Поновите лозинку
+sys_user_info: Овде можете пронаћи све информације које се односе на ваш налог и промените своје корисничко име, лозинку или е-пошту. Да бисте могли да ресетујете лозинку путем е-маила, молимо вас да будете сигурни да сте унели ваилду и активну адресу е-поште у наставку.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Додати корисника
 
 -
 
-sys_user_add_name: Корисничко име
+sys_user_invite: Позовите корисника путем е-маила
 
 -
 
-sys_user_add_password: Лозинка
+sys_user_name: Корисничко име
 
 -
 
-sys_user_add_repeat: Поновите лозинку
+sys_user_password: Лозинка
+
+-
+
+sys_user_repeat_password: Поновите лозинку
+
+-
+
+sys_user_email: Е-маил
+
+-
+
+sys_user_alert_no_email: Још нисте додали важећу адресу е-поште на свој рачун. Имајте на уму да је потребна ваљана адреса е-поште како би се могло ресетовати лозинку. Кликните овде да додате е-пошту одмах.
+
+-
+
+sys_user_change_password: Промените своју лозинку
+
+-
+
+sys_user_current_password: Тренутна лозинка
+
+-
+
+sys_user_new_password: Нова лозинка
 
 -
 
 sys_user_registered: регистровани корисници
+
+-
+
+sys_user_registered_info: Такође је могуће регистровати друге кориснике како би им омогућило да уређују садржај.
 
 -
 

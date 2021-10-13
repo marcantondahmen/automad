@@ -16,7 +16,7 @@
         "post-create-project-cmd": "@php automad/console createuser"
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "automad/package-installer": "^1.1"
     }
 }

@@ -66,6 +66,10 @@ btn_files: Lastede filer
 
 -
 
+btn_forgot_password: Glemt passord
+
+-
+
 btn_get_themes: Få flere temaer
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Redigeringsmodus på siden
 
 -
 
+btn_invite: Send invitasjon
+
+-
+
 btn_install: Installere
 
 -
@@ -106,7 +114,7 @@ btn_log_out: Logg ut
 
 -
 
-btn_login: Logg Inn
+btn_login: Logg inn
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Nullstille
 
 -
 
+btn_save_password: Lagre passord
+
+-
+
 btn_save: Lagre endringer
+
+-
+
+btn_submit: Sende inn
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Tabelloversikt
 
 -
 
+editor_table_add_col_left: Legg til en kolonne til venstre
+
+-
+
+editor_table_add_col_right: Legg til en kolonne til høyre
+
+-
+
+editor_table_delete_col: Slett kolonne
+
+-
+
+editor_table_add_row_above: Legg til en rad over
+
+-
+
+editor_table_add_row_below: Legg til en rad under
+
+-
+
+editor_table_delete_row: Slett rad
+
+-
+
+editor_table_with_headings: Med bordoverskrifter
+
+-
+
+editor_table_without_headings: Uten bordskader
+
+-
+
 editor_code: Kildekode
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Bla gjennom filer
 
 -
 
+email_hello: Hallo
+
+-
+
+email_automatic: Denne e-posten er sendt automatisk. Vennligst ikke svar på denne e-posten.
+
+-
+
+email_invite_subject: Du har blitt lagt til som en ny bruker!
+
+-
+
+email_invite_text: En ny brukerkonto på {} er opprettet for deg. Du kan bruke knappen nedenfor for å opprette passordet ditt.
+
+-
+
+email_invite_button: Opprett passord nå
+
+-
+
+email_reset_password_subject: Din godkjenningstoken
+
+-
+
+email_reset_password_text_top: Den forespurte godkjenningen token for kontoen din på {} finner du nedenfor. Du kan bruke det token for å skape et nytt passord for deg nå.
+
+-
+
+email_reset_password_text_bottom: I tilfelle du ikke startet denne forespørselen selv, kan du trygt ignorere denne meldingen.
+
+-
+
 error_cache_purged: Cache-katalogen kunne ikke tømmes!
 
 -
@@ -686,7 +766,7 @@ error_login: Ugyldig brukernavn eller passord
 
 -
 
-error_log_out: Meldingen mislyktes!
+error_log_out: Logg ut mislyktes!
 
 -
 
@@ -711,6 +791,10 @@ error_import: Filimporten mislyktes!
 -
 
 error_invalid_username: Ugyldig brukernavn! Et brukernavn kan bare inneholde følgende tegn:
+
+-
+
+error_invalid_email: Ugyldig epost! En e-postadresse kan bare inneholde følgende tegn:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Ikke bruk ditt gamle passord på nytt!
 
 -
 
+error_password_reset_verification: Autentiseringstokenet er ugyldig eller er allerede utløpt!
+
+-
+
 error_permission: Tillatelser nektet:
+
+-
+
+error_send_email: Feil ved å sende e-post!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Oppdateringer støttes ikke av serveren din! Oppdate
 -
 
 error_update_permission: Kan ikke kjøre oppdatering! Tillatelser nektet!
+
+-
+
+error_user_not_found: Ugyldig brukernavn eller e-postadresse.
+
+-
+
+error_user_no_email: Det er ingen e-postadresse som er lagret for den forespurte brukerkontoen.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Legg til lenke
 
 -
 
-login_title: Logg Inn
+login_title: Logg inn på dashbordet
 
 -
 
-login_username: Brukernavn
+login_name_or_email: Brukernavn eller e-post
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Privat
 
 -
 
+reset_password_title: Lag passord
+
+-
+
+reset_password_enter_name_or_email: Vennligst skriv inn brukernavnet eller e-postadressen din for å be om en godkjenningstoken for å opprette et nytt passord for kontoen din.
+
+-
+
+reset_password_enter_new_password: En e-post inkludert en autentisering token har bare blitt sendt til deg. Vennligst skriv inn det Token nå under sammen med et nytt passord.
+
+-
+
+reset_password_token: Autentisering Token
+
+-
+
 sidebar_header_global: Global
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Erstatt valgt
 
 -
 
-search_replace_check_all: Sjekk alt
+search_replace_check_all: Velg alt
 
 -
 
-search_replace_uncheck_all: Fjern merket for alt
+search_replace_uncheck_all: Opphev alle
 
 -
 
-search_is_case_sensitive: Saksfølsom
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Øvre / små bokstaver
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: Vellykket installert
 
 -
 
-success_password_changed: Passordet ditt ble endret!
+success_password_changed: Byttingen av passordet ditt er velykket!
 
 -
 
-success_log_out: Logget av vellykket
+success_log_out: Du har logget deg ut!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Lagrede endringer
 -
 
 success_update: Vellykket oppdatert Automad!
+
+-
+
+success_user_invite: Invitasjonen er sendt vellykket.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Brukere
 
 -
 
-sys_user_info: Du kan legge til eller fjerne flere brukere eller endre passordet her.
-
--
-
-sys_user_change_password: Bytt passord
-
--
-
-sys_user_change_password_current: Nåværende passord
-
--
-
-sys_user_change_password_new: Nytt passord
-
--
-
-sys_user_change_password_repeat: Gjenta passord
+sys_user_info: Her finner du all informasjon relatert til kontoen din og endrer brukernavn, passord eller e-post. For å kunne tilbakestille passordet ditt via e-post, må du sørge for at du har angitt en Vail-og aktiv e-postadresse nedenfor.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Legg til bruker
 
 -
 
-sys_user_add_name: Brukernavn
+sys_user_invite: Inviter bruker via e-post
 
 -
 
-sys_user_add_password: Passord
+sys_user_name: Brukernavn
 
 -
 
-sys_user_add_repeat: Gjenta passord
+sys_user_password: Passord
+
+-
+
+sys_user_repeat_password: Gjenta passord
+
+-
+
+sys_user_email: E-post
+
+-
+
+sys_user_alert_no_email: Du har ennå ikke lagt til en gyldig e-postadresse til kontoen din. Merk at en gyldig e-postadresse er nødvendig for å kunne tilbakestille passordet ditt. Klikk her for å legge til en epost nå.
+
+-
+
+sys_user_change_password: Bytt passord
+
+-
+
+sys_user_current_password: Nåværende passord
+
+-
+
+sys_user_new_password: Nytt passord
 
 -
 
 sys_user_registered: Registrerte brukere
+
+-
+
+sys_user_registered_info: Det er også mulig å registrere andre brukere for å tillate dem å redigere innhold.
 
 -
 

@@ -67,7 +67,7 @@ class SystemUpdate {
 				<div class="uk-alert uk-alert-danger uk-margin-top uk-margin-bottom-remove">
 					{$fn(Text::get('sys_update_windows_warning'))}
 				</div>
-HTML;
+			HTML;
 		}
 
 		foreach (Parse::csv(AM_UPDATE_ITEMS) as $item) {
@@ -111,6 +111,6 @@ HTML;
 					{$fn(Text::get('sys_update_progress'))}
 				</div>
 			</div>
-HTML;
+		HTML;
 	}
 }

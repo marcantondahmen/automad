@@ -112,7 +112,7 @@ class FileCollection {
 				{$fn(Files::render($files))}
 				{$fn(CopyResized::render($url))}
 				{$fn(EditFileInfo::render($modalTitle, $url))}
-HTML;
+			HTML;
 		} else {
 			$html = <<< HTML
 				<div class="uk-button-group">
@@ -132,7 +132,7 @@ HTML;
 						{$fn(Text::get('btn_import'))}
 					</a>
 				</div>
-HTML;
+			HTML;
 		}
 
 		$html .= Upload::render($url);

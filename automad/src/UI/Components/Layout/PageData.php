@@ -40,7 +40,7 @@ use Automad\Core\Automad;
 use Automad\Core\Page;
 use Automad\Core\Parse;
 use Automad\Engine\Headless;
-use Automad\System\Themelist;
+use Automad\System\ThemeCollection;
 use Automad\UI\Components\Accordion\UnusedVariables;
 use Automad\UI\Components\Accordion\Variables;
 use Automad\UI\Components\Alert\ThemeReadme;
@@ -110,7 +110,7 @@ class PageData {
 	/**
 	 * The themelist object.
 	 */
-	private $Themelist = null;
+	private $ThemeCollection = null;
 
 	/**
 	 * All unused variable keys.
@@ -133,7 +133,7 @@ class PageData {
 		$this->Page = $Page;
 		$this->data = Parse::dataFile(PageModel::getPageFilePath($Page));
 		$this->url = $Page->get(AM_KEY_URL);
-		$this->Themelist = new Themelist();
+		$this->ThemeCollection = new ThemeCollection();
 
 		$this->fn = function ($expression) {
 			return $expression;
@@ -163,7 +163,7 @@ class PageData {
 
 		// All other fields.
 		if (!AM_HEADLESS_ENABLED) {
-			$keys = Keys::inCurrentTemplate($Page, $this->Themelist->getThemeByKey($Page->get(AM_KEY_THEME)));
+			$keys = Keys::inCurrentTemplate($Page, $this->ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME)));
 		} else {
 			$keys = Keys::inTemplate(Headless::getTemplate());
 		}
@@ -181,7 +181,7 @@ class PageData {
 	 */
 	public function render() {
 		$fn = $this->fn;
-		$Theme = $this->Themelist->getThemeByKey($this->Page->get(AM_KEY_THEME));
+		$Theme = $this->ThemeCollection->getThemeByKey($this->Page->get(AM_KEY_THEME));
 
 		return <<< HTML
 			{$fn($this->title())}
@@ -197,7 +197,7 @@ class PageData {
 				{$fn(Variables::render($this->Automad, $this->settingKeys, $this->data, $Theme, Text::get('page_vars_settings')))}
 				{$fn(UnusedVariables::render($this->Automad, $this->unusedDataKeys, $this->data, Text::get('page_vars_unused')))}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -226,7 +226,7 @@ HTML;
 			>
 				$name
 			</a>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -256,7 +256,7 @@ HTML;
 				$attributes
 				/>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -308,7 +308,7 @@ HTML;
 		if ($this->data[AM_KEY_THEME]) {
 			$themePath = $this->data[AM_KEY_THEME];
 
-			if ($Theme = $this->Themelist->getThemeByKey($this->data[AM_KEY_THEME])) {
+			if ($Theme = $this->ThemeCollection->getThemeByKey($this->data[AM_KEY_THEME])) {
 				$themeName = $Theme->name . ' / ';
 			}
 		}
@@ -332,7 +332,7 @@ HTML;
 						{$fn(Text::get('page_theme_template'))}
 						<a href="#" class="uk-modal-close uk-close"></a>
 					</div>
-					{$fn(SelectTemplate::render($this->Automad, $this->Themelist, 'theme_template', $this->data[AM_KEY_THEME], $this->Page->template))} 
+					{$fn(SelectTemplate::render($this->Automad, $this->ThemeCollection, 'theme_template', $this->data[AM_KEY_THEME], $this->Page->template))} 
 					<div class="uk-modal-footer uk-text-right">
 						<button class="uk-modal-close uk-button">
 							<i class="uk-icon-close"></i>&nbsp;
@@ -367,7 +367,7 @@ HTML;
 					</div>
 				</button>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -391,7 +391,7 @@ HTML;
 				{$fn(Field::render($this->Automad, AM_KEY_DATE, $this->Page->get(AM_KEY_DATE), false, null, Text::get('page_date')))}
 				{$fn($this->tags())}
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -462,7 +462,7 @@ HTML;
 				value="" 
 				/>
 			</div>
-HTML;
+		HTML;
 	}
 
 	/**
@@ -473,7 +473,7 @@ HTML;
 	private function title() {
 		$fn = $this->fn;
 
-		return	<<<HTML
+		return <<<HTML
 			<div class="uk-form-row">
 				<label for="am-input-data-title" class="uk-form-label uk-margin-top-remove">
 					{$fn(ucwords(AM_KEY_TITLE))}
@@ -489,6 +489,6 @@ HTML;
 				/>
 				{$fn($this->inpage())}
 			</div>
-HTML;
+		HTML;
 	}
 }

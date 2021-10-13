@@ -65,12 +65,12 @@ class Select {
 		$prefix = ltrim($prefix . ' ');
 
 		$html = <<< HTML
-				<div class="uk-button $class uk-form-select" data-uk-form-select> 
-					$prefix
-					<span></span>&nbsp;
-					<i class="uk-icon-caret-down"></i> 
-					<select name="$name">
-HTML;
+			<div class="uk-button $class uk-form-select" data-uk-form-select> 
+				$prefix
+				<span></span>&nbsp;
+				<i class="uk-icon-caret-down"></i> 
+				<select name="$name">
+		HTML;
 
 		foreach ($values as $text => $value) {
 			if ($value === $selected) {
@@ -83,9 +83,9 @@ HTML;
 		}
 
 		$html .= <<< HTML
-					</select> 
-				</div>
-HTML;
+				</select> 
+			</div>
+		HTML;
 
 		return $html;
 	}

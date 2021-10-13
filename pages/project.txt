@@ -7,24 +7,33 @@ hidden: on
 -
 
 +hero: {
-    "time": 1628351480342,
+    "time": 1634156753079,
     "blocks": [
         {
+            "id": "kGy8Rb8NGw",
             "type": "section",
             "data": {
                 "content": {
-                    "time": 1628351383230,
+                    "time": 1634156753076,
                     "blocks": [
                         {
+                            "id": "qJU3MnVmWj",
                             "type": "paragraph",
                             "data": {
                                 "text": "<am-fontsize style=\"font-size: 180%;\"><am-lineheight style=\"line-height: 1.5; display: inline-block;\">Hello, I'm Automad. 👋 <br>You've have just finished my installation successfully! Now it's time to publish your stories and projects. <a href=\"/dashboard\">Sign in</a> to the dashboard to get started.</am-lineheight></am-fontsize>",
                                 "large": false,
                                 "alignment": "left"
+                            },
+                            "tunes": {
+                                "layout": {
+                                    "width": false,
+                                    "stretched": false
+                                }
                             }
                         }
                     ],
-                    "version": "2.20.2"
+                    "version": "2.22.2",
+                    "automadVersion": "1.9.0"
                 },
                 "style": {
                     "paddingTop": "11.25rem"
@@ -32,50 +41,81 @@ hidden: on
                 "justify": "start",
                 "gap": "",
                 "minBlockWidth": ""
+            },
+            "tunes": {
+                "layout": {
+                    "width": false,
+                    "stretched": false
+                }
             }
         }
     ],
-    "version": "2.20.2"
+    "version": "2.22.2",
+    "automadVersion": "1.9.0"
 }
 
 -
 
 +main: {
-    "time": 1630342273082,
+    "time": 1634156829326,
     "blocks": [
         {
+            "id": "F06l6xOwEE",
             "type": "section",
             "data": {
                 "content": {
-                    "time": 1630342272626,
+                    "time": 1634156829321,
                     "blocks": [
                         {
+                            "id": "_5F86dTQ5S",
                             "type": "section",
                             "data": {
                                 "content": {
-                                    "time": 1619885972685,
+                                    "time": 1634156800536,
                                     "blocks": [
                                         {
+                                            "id": "PLj5XMNlY1",
                                             "type": "paragraph",
                                             "data": {
                                                 "text": "<am-fontsize style=\"font-size: 200%;\">👩‍💻</am-fontsize>",
                                                 "large": false,
                                                 "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "bq598WQtMu",
                                             "type": "paragraph",
                                             "data": {
                                                 "text": "Compose your pages using a powerful and flexible block editor.",
                                                 "large": true,
                                                 "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "iBUmIz_rO5",
                                             "type": "delimiter",
-                                            "data": {}
+                                            "data": {},
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
+                                            }
                                         },
                                         {
+                                            "id": "82ESqHCxps",
                                             "type": "buttons",
                                             "data": {
                                                 "primaryText": "<am-fontsize style=\"font-size: 120%;\">Learn More</am-fontsize>",
@@ -94,10 +134,17 @@ hidden: on
                                                 "secondaryLink": "",
                                                 "secondaryStyle": {},
                                                 "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         }
                                     ],
-                                    "version": "2.20.2"
+                                    "version": "2.22.2",
+                                    "automadVersion": "1.9.0"
                                 },
                                 "style": {
                                     "card": true,
@@ -109,41 +156,67 @@ hidden: on
                                 },
                                 "justify": "start",
                                 "gap": "",
-                                "minBlockWidth": "",
-                                "widthFraction": "1/2"
+                                "minBlockWidth": ""
+                            },
+                            "tunes": {
+                                "layout": {
+                                    "width": "1/2",
+                                    "stretched": false
+                                }
                             }
                         },
                         {
+                            "id": "JbnysPBLkG",
                             "type": "section",
                             "data": {
                                 "content": {
-                                    "time": 1618923103336,
+                                    "time": 1634156812494,
                                     "blocks": [
                                         {
+                                            "id": "BACyyoKiI4",
                                             "type": "paragraph",
                                             "data": {
                                                 "text": "<am-fontsize style=\"font-size: 200%;\"><am-lineheight style=\"line-height: 0.9; display: inline-block;\">☝️</am-lineheight></am-fontsize>",
                                                 "large": false,
-                                                "alignment": "left",
-                                                "widthFraction": false
+                                                "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "nyjqY8WdJ_",
                                             "type": "paragraph",
                                             "data": {
-                                                "text": "Realize complex and colorful layouts and cards using flexbox sections.&nbsp;",
+                                                "text": "Realize complex and colorful layouts and cards using flexbox sections.",
                                                 "large": true,
-                                                "alignment": "left",
-                                                "widthFraction": false
+                                                "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "OHeXC5QlKF",
                                             "type": "delimiter",
                                             "data": {
                                                 "widthFraction": false
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "RYAdFON3hs",
                                             "type": "buttons",
                                             "data": {
                                                 "primaryText": "<am-fontsize style=\"font-size: 120%;\">About Sections</am-fontsize>",
@@ -161,12 +234,18 @@ hidden: on
                                                 "secondaryText": "",
                                                 "secondaryLink": "",
                                                 "secondaryStyle": {},
-                                                "alignment": "left",
-                                                "widthFraction": false
+                                                "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         }
                                     ],
-                                    "version": "2.19.1"
+                                    "version": "2.22.2",
+                                    "automadVersion": "1.9.0"
                                 },
                                 "style": {
                                     "card": true,
@@ -178,37 +257,65 @@ hidden: on
                                 },
                                 "justify": "start",
                                 "gap": "",
-                                "minBlockWidth": "",
-                                "widthFraction": "1/2"
+                                "minBlockWidth": ""
+                            },
+                            "tunes": {
+                                "layout": {
+                                    "width": "1/2",
+                                    "stretched": false
+                                }
                             }
                         },
                         {
+                            "id": "mDQFEYHKed",
                             "type": "section",
                             "data": {
                                 "content": {
-                                    "time": 1630342272170,
+                                    "time": 1634156829318,
                                     "blocks": [
                                         {
+                                            "id": "YJK6I60a4Q",
                                             "type": "paragraph",
                                             "data": {
                                                 "text": "<am-fontsize style=\"font-size: 200%;\"><am-lineheight style=\"line-height: 0.9; display: inline-block;\">👏</am-lineheight></am-fontsize>",
                                                 "large": false,
                                                 "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "mrgerzOmcE",
                                             "type": "paragraph",
                                             "data": {
-                                                "text": "Create dynamic page card grids, blogs, portfolios or search pages using pagelist templates and blocks.&nbsp;",
+                                                "text": "Create dynamic page card grids, blogs, portfolios or search pages using pagelist templates and blocks.",
                                                 "large": true,
                                                 "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         },
                                         {
+                                            "id": "f0NtrazdDr",
                                             "type": "delimiter",
-                                            "data": {}
+                                            "data": {},
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
+                                            }
                                         },
                                         {
+                                            "id": "T5nb5m43tP",
                                             "type": "buttons",
                                             "data": {
                                                 "primaryText": "<am-fontsize style=\"font-size: 120%;\">More About Pagelists</am-fontsize>",
@@ -227,10 +334,17 @@ hidden: on
                                                 "secondaryLink": "",
                                                 "secondaryStyle": {},
                                                 "alignment": "left"
+                                            },
+                                            "tunes": {
+                                                "layout": {
+                                                    "width": false,
+                                                    "stretched": false
+                                                }
                                             }
                                         }
                                     ],
-                                    "version": "2.20.2"
+                                    "version": "2.22.2",
+                                    "automadVersion": "1.9.0"
                                 },
                                 "style": {
                                     "card": true,
@@ -243,12 +357,18 @@ hidden: on
                                 },
                                 "justify": "start",
                                 "gap": "",
-                                "minBlockWidth": "",
-                                "widthFraction": "1/2"
+                                "minBlockWidth": ""
+                            },
+                            "tunes": {
+                                "layout": {
+                                    "width": "1/2",
+                                    "stretched": false
+                                }
                             }
                         }
                     ],
-                    "version": "2.20.2"
+                    "version": "2.22.2",
+                    "automadVersion": "1.9.0"
                 },
                 "style": {
                     "paddingTop": "1rem"
@@ -256,10 +376,17 @@ hidden: on
                 "justify": "fill-row",
                 "gap": "",
                 "minBlockWidth": "22rem"
+            },
+            "tunes": {
+                "layout": {
+                    "width": false,
+                    "stretched": false
+                }
             }
         }
     ],
-    "version": "2.20.2"
+    "version": "2.22.2",
+    "automadVersion": "1.9.0"
 }
 
 -

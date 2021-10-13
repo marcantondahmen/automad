@@ -37,7 +37,7 @@
 namespace Automad\UI\Components\Form;
 
 use Automad\Core\Automad;
-use Automad\System\Themelist;
+use Automad\System\ThemeCollection;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,28 +54,28 @@ class SelectTemplate {
 	 * Create a select box containing all installed themes/templates to be included in a HTML form.
 	 *
 	 * @param Automad $Automad
-	 * @param Themelist $Themelist
+	 * @param ThemeCollection $ThemeCollection
 	 * @param string $name
 	 * @param string|null $selectedTheme
 	 * @param string|null $selectedTemplate
 	 * @return string The HTML for the select box including a label and a wrapping div.
 	 */
-	public static function render(Automad $Automad, Themelist $Themelist, string $name = '', ?string $selectedTheme = null, ?string $selectedTemplate = null) {
-		$themes = $Themelist->getThemes();
-		$mainTheme = $Themelist->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
+	public static function render(Automad $Automad, ThemeCollection $ThemeCollection, string $name = '', ?string $selectedTheme = null, ?string $selectedTemplate = null) {
+		$themes = $ThemeCollection->getThemes();
+		$mainTheme = $ThemeCollection->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
 
 		// Create HTML.
 		$html = <<< HTML
-				<div 
-				class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" 
-				data-uk-form-select
-				> 
-					<span></span>&nbsp;
-					<span class="uk-float-right">
-						<i class="uk-icon-caret-down"></i>
-					</span>
-					<select class="uk-width-1-1" name="$name">
-HTML;
+			<div 
+			class="uk-form-select uk-button uk-button-large uk-button-success uk-width-1-1 uk-text-left" 
+			data-uk-form-select
+			> 
+				<span></span>&nbsp;
+				<span class="uk-float-right">
+					<i class="uk-icon-caret-down"></i>
+				</span>
+				<select class="uk-width-1-1" name="$name">
+		HTML;
 
 		// List templates of current main theme.
 		if ($mainTheme) {
@@ -118,9 +118,9 @@ HTML;
 		}
 
 		$html .= <<< HTML
-					</select>
-				 </div>
-HTML;
+				</select>
+			</div>
+		HTML;
 
 		return $html;
 	}

@@ -62,6 +62,6 @@ class HeadlessEditor {
 				name="template" rows="10"
 				>$template</textarea>
 			</div>
-HTML;
+		HTML;
 	}
 }

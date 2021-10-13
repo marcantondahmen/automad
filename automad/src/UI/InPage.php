@@ -43,8 +43,8 @@ use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
-use Automad\UI\Models\UserModel;
 use Automad\UI\Utils\Prefix;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -61,7 +61,7 @@ class InPage {
 	 * The constructor.
 	 */
 	public function __construct() {
-		if (UserModel::getName()) {
+		if (Session::getUsername()) {
 			// Prepare text modules.
 			Text::parseModules();
 		}
@@ -74,7 +74,7 @@ class InPage {
 	 * @return string The processed $str
 	 */
 	public function createUI(string $str) {
-		if (UserModel::getName()) {
+		if (Session::getUsername()) {
 			$str = $this->injectAssets($str);
 			$str = $this->injectMarkup($str);
 			$str = $this->processTemporaryEditButtons($str);
@@ -93,7 +93,7 @@ class InPage {
 	 */
 	public function injectTemporaryEditButton(?string $value, string $key, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
-		if (preg_match('/^(\+|\w)/', $key) && UserModel::getName()) {
+		if (preg_match('/^(\+|\w)/', $key) && Session::getUsername()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN .
 						json_encode(array(
 							'context' => $Context->get()->origUrl,
@@ -112,18 +112,24 @@ class InPage {
 	 * @return string The processed markup
 	 */
 	private function injectAssets(string $str) {
+		$version = AM_VERSION;
+		$baseUrl = AM_BASE_URL;
 		$versionSanitized = Str::sanitize(AM_VERSION);
-		$assets = 	"\n" .
-					'<!-- Automad UI -->' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/dist/libs.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
-					'<link href="' . AM_BASE_URL . '/automad/dist/automad.min.css?v=' . $versionSanitized . '" rel="stylesheet">' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/libs.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
-					'<script type="text/javascript" src="' . AM_BASE_URL . '/automad/dist/automad.min.js?v=' . $versionSanitized . '"></script>' . "\n" .
-					// Cleanup window object by removing jQuery and UIkit.
-					'<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>' . "\n" .
-					BlockSnippetArrays::render() . "\n" .
-					EditorTextModules::render() . "\n" .
-					'<!-- Automad UI end -->' . "\n";
+		$snippets = BlockSnippetArrays::render();
+		$editorText = EditorTextModules::render();
+
+		$assets = <<< HTML
+			<!-- Automad UI -->
+			<link href="{$baseUrl}/automad/dist/libs.min.css?v={$versionSanitized}" rel="stylesheet">
+			<link href="{$baseUrl}/automad/dist/automad.min.css?v={$versionSanitized}" rel="stylesheet">
+			<script>window.AM_VERSION = "{$version}"</script>
+			<script type="text/javascript" src="{$baseUrl}/automad/dist/libs.min.js?v={$versionSanitized}"></script>
+			<script type="text/javascript" src="{$baseUrl}/automad/dist/automad.min.js?v={$versionSanitized}"></script>
+			<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>
+			$snippets
+			$editorText
+			<!-- Automad UI end -->
+		HTML;
 
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
@@ -160,35 +166,35 @@ class InPage {
 		}
 
 		$html = <<< HTML
-				<div class="am-inpage" data-am-base-url="$urlBase">
-					<div class="am-inpage-menubar">
-						<div class="uk-button-group">
-							<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
-							<a href="$urlData" title="$Text->btn_data" $attr><i class="uk-icon-file-text-o"></i></a>
-							<a href="$urlFiles" title="$Text->btn_files" $attr><i class="uk-icon-folder-open-o"></i></a>
-							<a href="$urlSys" title="$Text->sys_title" $attr><i class="uk-icon-sliders"></i></a>
-							<a href="#" class="am-drag-handle am-inpage-menu-button">
-								<i class="uk-icon-arrows"></i>
-							</a>
-						</div>
+			<div class="am-inpage" data-am-base-url="$urlBase">
+				<div class="am-inpage-menubar">
+					<div class="uk-button-group">
+						<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
+						<a href="$urlData" title="$Text->btn_data" $attr><i class="uk-icon-file-text-o"></i></a>
+						<a href="$urlFiles" title="$Text->btn_files" $attr><i class="uk-icon-folder-open-o"></i></a>
+						<a href="$urlSys" title="$Text->sys_title" $attr><i class="uk-icon-sliders"></i></a>
+						<a href="#" class="am-drag-handle am-inpage-menu-button">
+							<i class="uk-icon-arrows"></i>
+						</a>
 					</div>
-					<div id="am-inpage-edit-modal" class="am-fullscreen-modal uk-modal">
-						<div class="uk-modal-dialog uk-modal-dialog-blank">
-							<div class="uk-container uk-container-center">
-								<form 
-								class="uk-form uk-form-stacked" 
-								data-am-inpage-controller="${urlGui}?controller=InPage::edit"
-								>
-									<input type="hidden" name="url" value="$request" />
-									<input type="hidden" name="query" value="$queryString" />
-								</form>
-							</div>
+				</div>
+				<div id="am-inpage-edit-modal" class="am-fullscreen-modal uk-modal">
+					<div class="uk-modal-dialog uk-modal-dialog-blank">
+						<div class="uk-container uk-container-center">
+							<form 
+							class="uk-form uk-form-stacked" 
+							data-am-inpage-controller="${urlGui}?controller=InPage::edit"
+							>
+								<input type="hidden" name="url" value="$request" />
+								<input type="hidden" name="query" value="$queryString" />
+							</form>
 						</div>
 					</div>
 				</div>
-				$modalSelectImage
-				$modalLink
-HTML;
+			</div>
+			$modalSelectImage
+			$modalLink
+		HTML;
 
 		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);
 	}
@@ -222,18 +228,18 @@ HTML;
 			$name = ucwords(str_replace('+', '', preg_replace('/([A-Z])/', ' $1', $matches[2])));
 
 			$html = <<< HTML
-					<span class="am-inpage">
-						<a 
-						href="#am-inpage-edit-modal" 
-						class="am-inpage-edit-button" 
-						data-uk-modal="{modal:false}" 
-						data-am-inpage-content='$json'
-						>
-							<i class="uk-icon-pencil"></i>&nbsp;
-							$name 
-						</a>
-					</span>
-HTML;
+				<span class="am-inpage">
+					<a 
+					href="#am-inpage-edit-modal" 
+					class="am-inpage-edit-button" 
+					data-uk-modal="{modal:false}" 
+					data-am-inpage-content='$json'
+					>
+						<i class="uk-icon-pencil"></i>&nbsp;
+						$name 
+					</a>
+				</span>
+			HTML;
 
 			return Prefix::attributes($html);
 		}, $str);

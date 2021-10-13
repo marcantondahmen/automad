@@ -89,7 +89,7 @@ class Shared extends AbstractView {
 			</ul>
 			{$fn(SelectImage::render())}
 			{$fn(Link::render())}
-HTML;
+		HTML;
 	}
 
 	/**

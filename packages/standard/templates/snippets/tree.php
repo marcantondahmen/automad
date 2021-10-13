@@ -1,4 +1,3 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <# Create snippet to be used recursively #>
 <@ snippet tree @>
 	<# Only show children/siblings in current path #>

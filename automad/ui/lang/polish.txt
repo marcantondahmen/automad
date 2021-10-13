@@ -66,6 +66,10 @@ btn_files: Przesłane pliki
 
 -
 
+btn_forgot_password: Zapomniałeś hasła
+
+-
+
 btn_get_themes: Pobierz więcej motywów
 
 -
@@ -94,6 +98,10 @@ btn_inpage_edit: Tryb edycji w treści strony
 
 -
 
+btn_invite: Wyślij zaproszenie
+
+-
+
 btn_install: Zainstalować
 
 -
@@ -102,11 +110,11 @@ btn_link: Połączyć
 
 -
 
-btn_log_out: Wyloguj
+btn_log_out: Wyloguj się
 
 -
 
-btn_login: Zaloguj sie
+btn_login: Zaloguj się
 
 -
 
@@ -154,7 +162,15 @@ btn_reset: Resetowanie
 
 -
 
+btn_save_password: Zapisz hasło
+
+-
+
 btn_save: Zapisz zmiany
+
+-
+
+btn_submit: Składać
 
 -
 
@@ -590,6 +606,38 @@ editor_table_toolbox: Lista tabelaryczna
 
 -
 
+editor_table_add_col_left: Dodaj kolumnę po lewej stronie
+
+-
+
+editor_table_add_col_right: Dodaj kolumnę po prawej stronie
+
+-
+
+editor_table_delete_col: Usuń kolumnę
+
+-
+
+editor_table_add_row_above: Dodaj wiersz powyżej
+
+-
+
+editor_table_add_row_below: Dodaj wiersz poniżej
+
+-
+
+editor_table_delete_row: Usuń rząd
+
+-
+
+editor_table_with_headings: Z pozycjami stołowymi
+
+-
+
+editor_table_without_headings: Bez nagłówków stołowych.
+
+-
+
 editor_code: Kod źródłowy
 
 -
@@ -654,6 +702,38 @@ editor_ui_browse: Przeglądaj pliki.
 
 -
 
+email_hello: dzień dobry
+
+-
+
+email_automatic: Ten e-mail został wysłany automatycznie. Proszę nie odpowiadać na ten email.
+
+-
+
+email_invite_subject: Zostałeś dodany jako nowy użytkownik!
+
+-
+
+email_invite_text: Nowe konto użytkownika na {} zostało utworzone dla Ciebie. Możesz użyć poniższego przycisku, aby utworzyć hasło.
+
+-
+
+email_invite_button: Utwórz hasło teraz.
+
+-
+
+email_reset_password_subject: Twój token uwierzytelniania.
+
+-
+
+email_reset_password_text_top: Żądany token uwierzytelniania do konta na {} można znaleźć poniżej. Możesz użyć tego tokena, aby utworzyć teraz nowe hasło.
+
+-
+
+email_reset_password_text_bottom: W przypadku, gdy nie zainicjował tego żądania siebie, możesz bezpiecznie zignorować tę wiadomość.
+
+-
+
 error_cache_purged: Nie można wyczyścić katalogu pamięci podręcznej!
 
 -
@@ -686,7 +766,7 @@ error_login: Nieprawidłowa nazwa użytkownika lub hasło
 
 -
 
-error_log_out: Wylogowanie się nie powiodło!
+error_log_out: Wyloguj się nie powiodło się!
 
 -
 
@@ -711,6 +791,10 @@ error_import: Import pliku nie powiódł się!
 -
 
 error_invalid_username: Zła nazwa użytkownika! Nazwa użytkownika może zawierać tylko następujące znaki:
+
+-
+
+error_invalid_email: Niepoprawny email! Adres e-mail może zawierać tylko następujące znaki:
 
 -
 
@@ -742,7 +826,15 @@ error_password_reuse: Nie używaj ponownie swojego starego hasła!
 
 -
 
+error_password_reset_verification: Token uwierzytelniania jest nieprawidłowy lub już wygasł!
+
+-
+
 error_permission: Odmowa uprawnień:
+
+-
+
+error_send_email: Błąd wysyłania wiadomości e-mail!
 
 -
 
@@ -775,6 +867,14 @@ error_update_not_supported: Aktualizacje nie są obsługiwane przez Twój serwer
 -
 
 error_update_permission: Nie można uruchomić aktualizacji! Odmowa uprawnień!
+
+-
+
+error_user_not_found: Nieprawidłowa nazwa użytkownika lub adres e-mail.
+
+-
+
+error_user_no_email: Nie ma adresu e-mail przechowywanego na żądane konto użytkownika.
 
 -
 
@@ -834,11 +934,11 @@ link_title: Dodaj link
 
 -
 
-login_title: Zaloguj sie
+login_title: Zaloguj się do pulpitu nawigacyjnego
 
 -
 
-login_username: Nazwa Użytkownika
+login_name_or_email: Nazwa użytkownika lub email
 
 -
 
@@ -846,7 +946,7 @@ login_password: Hasło
 
 -
 
-log_out_title: Wylogowano
+log_out_title: Wylogowany
 
 -
 
@@ -950,6 +1050,22 @@ page_private: Prywatny
 
 -
 
+reset_password_title: Stwórz hasło
+
+-
+
+reset_password_enter_name_or_email: Wprowadź swój adres użytkownika lub adres e-mail, aby poprosić o token uwierzytelniania, aby utworzyć nowe hasło do konta.
+
+-
+
+reset_password_enter_new_password: Wyślij wiadomość e-mail, w tym token uwierzytelniający. Wprowadź teraz token teraz wraz z nowym hasłem.
+
+-
+
+reset_password_token: Token uwierzytelniania
+
+-
+
 sidebar_header_global: Światowy
 
 -
@@ -1006,19 +1122,15 @@ search_replace_selected: Wymień wybrany
 
 -
 
-search_replace_check_all: Zaznacz wszystko
+search_replace_check_all: Wybierz wszystko
 
 -
 
-search_replace_uncheck_all: Odznacz wszystko
+search_replace_uncheck_all: Odznacz wszystkie
 
 -
 
-search_is_case_sensitive: Rozróżniana litera
-
--
-
-search_is_regex: Regex.
+search_is_case_sensitive: Wielkie / małe litery
 
 -
 
@@ -1050,11 +1162,11 @@ success_installed: Pomyślnie zainstalowano
 
 -
 
-success_password_changed: Twoje hasło zostało pomyślnie zmienione!
+success_password_changed: Twoje hasło zostało zmienione!
 
 -
 
-success_log_out: Wylogowano pomyślnie
+success_log_out: Pomyślnie wylogowałeś się!
 
 -
 
@@ -1071,6 +1183,10 @@ success_saved: Zapisane zmiany
 -
 
 success_update: Pomyślnie zaktualizowano Automada!
+
+-
+
+success_user_invite: Zaproszenie zostało pomyślnie wysłane.
 
 -
 
@@ -1206,23 +1322,7 @@ sys_user: Użytkownicy
 
 -
 
-sys_user_info: Tutaj możesz dodać lub usunąć więcej użytkowników lub zmienić swoje hasło.
-
--
-
-sys_user_change_password: Zmień swoje hasło
-
--
-
-sys_user_change_password_current: Aktualne hasło
-
--
-
-sys_user_change_password_new: Nowe hasło
-
--
-
-sys_user_change_password_repeat: Powtórz hasło
+sys_user_info: Tutaj znajdziesz wszystkie informacje związane z Twoim kontem i zmienić nazwę użytkownika, hasło lub e-mail. Aby móc zresetować hasło pocztą elektroniczną, upewnij się, że wpisałeś poniższy adres e-mail w Vaild i aktywny adres e-mail.
 
 -
 
@@ -1230,19 +1330,47 @@ sys_user_add: Dodaj użytkownika
 
 -
 
-sys_user_add_name: Nazwa Użytkownika
+sys_user_invite: Zapraszaj użytkownika pocztą elektroniczną
 
 -
 
-sys_user_add_password: Hasło
+sys_user_name: Nazwa użytkownika
 
 -
 
-sys_user_add_repeat: Powtórz hasło
+sys_user_password: Hasło
+
+-
+
+sys_user_repeat_password: Powtórz hasło
+
+-
+
+sys_user_email: E-mail
+
+-
+
+sys_user_alert_no_email: Do konta nie dodałeś prawidłowego adresu e-mail. Zauważ, że wymagany jest prawidłowy adres e-mail, aby móc zresetować hasło. Kliknij tutaj, aby dodać wiadomość e-mail teraz.
+
+-
+
+sys_user_change_password: Zmień swoje hasło
+
+-
+
+sys_user_current_password: Aktualne hasło
+
+-
+
+sys_user_new_password: nowe hasło
 
 -
 
 sys_user_registered: Zarejestrowani Użytkownicy
+
+-
+
+sys_user_registered_info: Możliwe jest również zarejestrowanie innych użytkowników, aby umożliwić im edycję treści.
 
 -
 

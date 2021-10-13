@@ -70,6 +70,10 @@ btn_files: Uploaded Files
 
 -
 
+btn_forgot_password: Forgot Password
+
+-
+
 btn_get_themes: Get More Themes
 
 -
@@ -98,6 +102,10 @@ btn_inpage_edit: In-Page Edit Mode
 
 -
 
+btn_invite: Send Invitation 
+
+-
+
 btn_install: Install
 
 -
@@ -106,11 +114,11 @@ btn_link: Link
 
 -
 
-btn_log_out: Log out
+btn_log_out: Sign out
 
 -
 
-btn_login: Log in
+btn_login: Sign in
 
 -
 
@@ -158,7 +166,15 @@ btn_reset: Reset
 
 -
 
+btn_save_password: Save Password
+
+-
+
 btn_save: Save Changes
+
+-
+
+btn_submit: Submit
 
 -
 
@@ -630,6 +646,38 @@ editor_table_toolbox: Tabular List
 
 -
 
+editor_table_add_col_left: Add a column on the left
+
+-
+
+editor_table_add_col_right: Add a column on the right
+
+-
+
+editor_table_delete_col: Delete column
+
+-
+
+editor_table_add_row_above: Add a row above 
+
+-
+
+editor_table_add_row_below: Add a row below 
+
+-
+
+editor_table_delete_row: Delete row 
+
+-
+
+editor_table_with_headings: With table headings 
+
+-
+
+editor_table_without_headings: Without table headings
+
+-
+
 editor_code: Source Code
 
 -
@@ -701,6 +749,45 @@ editor_ui_browse: Browse Files
 
 
 
+email_hello: Hello
+
+-
+
+email_automatic: This email has been sent automatically. Please do not reply to this email.
+
+-
+
+email_invite_subject: You have been added as a new user!
+
+-
+
+email_invite_text: a new user account on {} has been created for you. You can use the button below to create your password.
+
+-
+
+email_invite_button: Create Password Now
+
+-
+
+email_reset_password_subject: Your authentication token
+
+-
+
+email_reset_password_text_top: the requested authentication token for your account on {} can be found below. You can use that token in order to create a new password for you now.
+
+-
+
+email_reset_password_text_bottom: In case you did not initiate this request yourself, you can safely ignore this message.
+
+-
+
+
+
+
+
+
+
+
 error_cache_purged: The cache directory could not be purged!
 
 -
@@ -733,7 +820,7 @@ error_login: Invalid username or password
 
 -
 
-error_log_out: Log out failed!
+error_log_out: Sign out failed!
 
 -
 
@@ -758,6 +845,10 @@ error_import: The file import has failed!
 -
 
 error_invalid_username: Invalid username! A username can only contain the following characters: 
+
+-
+
+error_invalid_email: Invalid email address!
 
 -
 
@@ -789,7 +880,15 @@ error_password_reuse: Don't reuse your old password!
 
 -
 
+error_password_reset_verification: The authentication token is invalid or has expired already!
+
+-
+
 error_permission: Permissions denied:
+
+-
+
+error_send_email: Error sending email!
 
 -
 
@@ -822,6 +921,14 @@ error_update_not_supported: Updates are not supported by your server! The update
 -
 
 error_update_permission: Can't run update! Permissions denied! 
+
+-
+
+error_user_not_found: Invalid username or email address.
+
+-
+
+error_user_no_email: There is no email address stored for the requested user account.
 
 -
 
@@ -890,20 +997,19 @@ images_shared: General Images
 
 
 
-install_help: ### Create User Account  
-Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
-      				
-1. 	Create an user account using the form below and download the created file to your computer. 
+install_help: Before you can make use of the Automad dashboard, you have to register the first user by following these steps:    
+       
+1. 	Create an user account using the form below and download the created file to your computer.   
 2. 	Move the downloaded file to the "/config" directory within your Automad installation.   
 	(via a file browser, FTP or SSH) 
-				
+       
 After completing these steps, the dashboard should be ready to use. 
 Other users can be added later via the system preferences.
 
 -
 
-install_login: ### Move Account File   
-Please move now the downloaded file to your "/config" directory. After you have successfully finished this installation process, you can login to the dashboard.
+install_login: Please move now the downloaded file to your "/config" directory. 
+After you have successfully finished this installation process, you can sign in to the dashboard.
 
 -
 
@@ -944,11 +1050,11 @@ link_title: Add Link
 
 
 
-login_title: Login
+login_title: Sign in to the dashboard
 
 -
 
-login_username: Username
+login_name_or_email: Username or Email
 
 -
 
@@ -956,7 +1062,7 @@ login_password: Password
 
 -
 
-log_out_title: Logged Out
+log_out_title: Signed Out
 
 -
 
@@ -1081,6 +1187,29 @@ page_private: private
 
 
 
+reset_password_title: Create Password
+
+-
+
+reset_password_enter_name_or_email: Please enter your username or email address in order to request an authentication token to create a new password for your account.
+
+-
+
+reset_password_enter_new_password: An email including an authentication token just has been send to you. Please enter that token now below along with a new password.
+
+-
+
+reset_password_token: Authentication Token
+
+-
+
+
+
+
+
+
+
+
 sidebar_header_global: Global
 
 -
@@ -1151,15 +1280,15 @@ search_replace_selected: Replace Selected
 
 -
 
-search_replace_check_all: Check All
+search_replace_check_all: Choose All
 
 -
 
-search_replace_uncheck_all: Uncheck All
+search_replace_uncheck_all: Deselect All
 
 -
 
-search_is_case_sensitive: Case Sensitive
+search_is_case_sensitive: Upper / Lower Case
 
 -
 
@@ -1202,11 +1331,11 @@ success_installed: Successfully installed
 
 -
 
-success_password_changed: Your password got changed successfully!
+success_password_changed: Your password has been changed successfully!
 
 -
 
-success_log_out: Logged Out Successfully
+success_log_out: You have successfully signed out!
 
 -
 
@@ -1223,6 +1352,10 @@ success_saved: Saved changes
 -
 
 success_update: Successfully updated Automad!
+
+-
+
+success_user_invite: The invitation has been sent successfully.
 
 -
 
@@ -1389,23 +1522,7 @@ sys_user: Users
 
 -
 
-sys_user_info: You can add or remove more users or change your password here.
-
--
-
-sys_user_change_password: Change Your Password
-
--
-
-sys_user_change_password_current: Current Password
-
--
-
-sys_user_change_password_new: New Password
-
--
-
-sys_user_change_password_repeat: Repeat Password
+sys_user_info: Here you can find all information related to your account and change your username, password or email. In order to be able to reset your password by email, please make sure that you have entered a vaild and active email address below.
 
 -
 
@@ -1413,19 +1530,47 @@ sys_user_add: Add User
 
 -
 
-sys_user_add_name: Username
+sys_user_invite: Invite User by Email
 
 -
 
-sys_user_add_password: Password
+sys_user_name: Username
 
 -
 
-sys_user_add_repeat: Repeat Password
+sys_user_password: Password
+
+-
+
+sys_user_repeat_password: Repeat Password
+
+-
+
+sys_user_email: Email
+
+-
+
+sys_user_alert_no_email: You have not yet added a valid email address to your account. Note that a valid email address is required in order to be able to reset your password. Click here to add an email now.
+
+-
+
+sys_user_change_password: Change Your Password
+
+-
+
+sys_user_current_password: Current Password
+
+-
+
+sys_user_new_password: New Password
 
 -
 
 sys_user_registered: Registered Users
+
+-
+
+sys_user_registered_info: It is also possible to register other users in order to allow them to edit content. 
 
 -
 

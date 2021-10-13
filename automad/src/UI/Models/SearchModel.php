@@ -197,8 +197,8 @@ class SearchModel {
 		$results = array();
 
 		foreach ($array as $item) {
-			if (is_array($item)) {
-				$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, $item));
+			if (is_array($item) || is_object($item)) {
+				$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, (array) $item));
 			}
 
 			if (is_string($item)) {
@@ -229,8 +229,8 @@ class SearchModel {
 			} else {
 				foreach ($block->data as $blockProperty => $value) {
 					if ($this->isValidBlockProperty($blockProperty)) {
-						if (is_array($value)) {
-							$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, $value));
+						if (is_array($value) || is_object($value)) {
+							$results = $this->appendFieldResults($results, $this->searchArrayRecursively($key, (array) $value));
 						}
 
 						if (is_string($value)) {

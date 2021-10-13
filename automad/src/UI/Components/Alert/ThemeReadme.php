@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Components\Alert;
 
-use Automad\System\Theme;
+use Automad\Types\Theme;
 use Automad\UI\Components\Modal\Readme;
 use Automad\UI\Utils\Text;
 
@@ -64,10 +64,10 @@ class ThemeReadme {
 			if ($Theme && $Theme->readme) {
 				$html = Readme::render($id, $Theme->readme);
 				$html .= <<< HTML
-						<a href="#$id" class="am-alert-readme uk-alert" data-uk-modal>
-							$Text->theme_readme_alert
-						</a>
-HTML;
+					<a href="#$id" class="am-alert-readme uk-alert" data-uk-modal>
+						$Text->theme_readme_alert
+					</a>
+				HTML;
 
 				return $html;
 			}

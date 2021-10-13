@@ -39,17 +39,18 @@ namespace Automad\System;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
+use Automad\Types\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Themelist utility class.
+ * The theme collection system class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2019 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Themelist {
+class ThemeCollection {
 	/**
 	 * An array of installed Composer packages.
 	 */

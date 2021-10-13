@@ -38,6 +38,7 @@ namespace Automad\Engine\Processors;
 
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
+use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\UI\InPage;
@@ -88,10 +89,35 @@ class PostProcessor {
 		$output = $this->obfuscateEmails($output);
 		$output = $this->resizeImages($output);
 		$output = Blocks::injectAssets($output);
+		$output = $this->addCacheBustingTimestamps($output);
 		$output = URLProcessor::resolveUrls($output, 'absoluteUrlToRoot');
 		$output = $this->InPage->createUI($output);
 
 		return $output;
+	}
+
+	/**
+	 * Find all locally hosted assests and append a timestamp in order to avoid serving outdated files.
+	 *
+	 * @param string $str
+	 * @return string the processed output
+	 */
+	private function addCacheBustingTimestamps(string $str) {
+		$extensions = implode('|', FileUtils::allowedFileTypes());
+
+		return preg_replace_callback(
+			'#(?<=")/[/\w\-\.]+\.(?:' . $extensions . ')(?=")#is',
+			function ($matches) {
+				$file = AM_BASE_DIR . $matches[0];
+
+				if (strpos($file, AM_DIR_CACHE . '/') !== false || !is_readable($file)) {
+					return $matches[0];
+				}
+
+				return $matches[0] . '?m=' . filemtime($file);
+			},
+			$str
+		);
 	}
 
 	/**
