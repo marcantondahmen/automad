@@ -38,6 +38,7 @@ namespace Automad\Engine\Processors;
 
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
+use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\UI\InPage;
@@ -102,15 +103,21 @@ class PostProcessor {
 	 * @return string the processed output
 	 */
 	private function addCacheBustingTimestamps(string $str) {
-		return preg_replace_callback('#(?<=")/[/\w\-\.]+\.(?:css|js|jpe?g|png|gif|mp4)(?=")#is', function ($matches) {
-			$file = AM_BASE_DIR . $matches[0];
+		$extensions = implode('|', FileUtils::allowedFileTypes());
 
-			if (strpos($file, AM_DIR_CACHE . '/') !== false || !is_readable($file)) {
-				return $matches[0];
-			}
+		return preg_replace_callback(
+			'#(?<=")/[/\w\-\.]+\.(?:' . $extensions . ')(?=")#is',
+			function ($matches) {
+				$file = AM_BASE_DIR . $matches[0];
 
-			return $matches[0] . '?m=' . filemtime($file);
-		}, $str);
+				if (strpos($file, AM_DIR_CACHE . '/') !== false || !is_readable($file)) {
+					return $matches[0];
+				}
+
+				return $matches[0] . '?m=' . filemtime($file);
+			},
+			$str
+		);
 	}
 
 	/**
