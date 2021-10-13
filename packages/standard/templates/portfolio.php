@@ -1,5 +1,10 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
-<@ elements/header.php @>
+<# 
+
+This template extends the "post.php" template.
+The "main" snippet is overriden to actually change the content of the page body.
+
+#>
+<@ snippet main @>
 	<main class="content uk-block">
 		<@ elements/content.php @>
 		<@ elements/pagelist_config.php @>
@@ -19,4 +24,5 @@
 		</section>
 		<@ elements/pagination.php @>
 	</main>
-<@ elements/footer.php @>
+<@ end @>
+<@ post.php @>
