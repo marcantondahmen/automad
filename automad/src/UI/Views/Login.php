@@ -70,8 +70,6 @@ class Login extends AbstractView {
 			{$fn(NoUserNavbar::render($sitename, Text::get('btn_login')))}
 			<div class="uk-width-medium-1-2 uk-container-center uk-margin-large-top">
 				<div class="uk-panel uk-panel-box">
-					{$fn(Text::get('login_title'))}
-					<hr>
 					<form class="uk-form" method="post">
 						<input 
 						class="uk-form-controls uk-width-1-1" 

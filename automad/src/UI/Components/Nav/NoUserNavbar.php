@@ -60,8 +60,7 @@ class NoUserNavbar {
 			<div class="am-fullscreen-bar uk-display-block">
 				<div class="uk-flex uk-flex-space-between uk-flex-middle uk-height-1-1">
 					<div class="uk-flex-item-1 uk-text-truncate uk-margin-small-right">
-						$sitename
-						<span class="uk-hidden-small">&mdash; $title</span>
+						$sitename &mdash; $title
 					</div>
 					<a href="$home" class="am-fullscreen-bar-button">
 						<i class="am-u-icon-close"></i>
