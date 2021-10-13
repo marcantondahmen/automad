@@ -28,6 +28,7 @@ in those variables in the correct order to a comment block in the header of a te
 			<@ end @>
 		</section>
 		<@ elements/pagination.php @>
+		<@ elements/prev_next.php @>
 	</main>
 <@ end @>
 <@ post.php @>

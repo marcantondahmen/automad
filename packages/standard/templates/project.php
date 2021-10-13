@@ -13,6 +13,7 @@ in those variables in the correct order to a comment block in the header of a te
 <@ snippet main @>
 	<main class="content uk-block">
 		<@ elements/content.php @>
+		<@ elements/prev_next.php @>
 	</main>
 	<div class="content uk-block">
 		<@ elements/related_projects.php @>

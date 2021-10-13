@@ -36,6 +36,7 @@
 			<@ elements/header.php @>
 				<main class="content uk-block">
 					<@ elements/content.php @>
+					<@ elements/prev_next.php @>
 				</main>
 				<div class="content uk-block">
 					<@ elements/related_posts.php @>
@@ -49,7 +50,6 @@
 		#>
 		<@ main @>
 		<footer class="uk-block">
-			<@ elements/prev_next.php @>
 			<div class="am-block footer uk-margin-bottom">
 				<ul class="uk-grid uk-grid-width-medium-1-2" data-uk-grid-margin>
 					<li>

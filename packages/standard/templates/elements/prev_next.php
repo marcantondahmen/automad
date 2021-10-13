@@ -1,7 +1,7 @@
 <@~ if not @{ checkboxHidePrevNextNav } @>
 	<@~ newPagelist { type: 'siblings' } @>
 	<@~ if @{ :pagelistCount } @>
-		<nav class="am-block prev-next uk-margin-large-bottom">
+		<nav class="am-block prev-next">
 			<@ with prev ~@>
 				<a href="@{ url }" class="nav-link prev">
 					<span class="arrow">⟵</span>

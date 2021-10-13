@@ -15,6 +15,7 @@ in those variables in the correct order to a comment block in the header of a te
 		<main class="uk-width-large-3-4">
 			<div class="content uk-block sidebar-block">
 				<@ elements/content.php @>
+				<@ elements/prev_next.php @>
 				<@ elements/related_simple.php @>
 			</div>
 		</main>
