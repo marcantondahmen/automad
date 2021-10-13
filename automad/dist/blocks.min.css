@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  * 
- * version 1.8.7
+ * version 1.9.0
  *
  * Copyright (c) 2014-2021 by Marc Anton Dahmen
  * https://marcdahmen.de
@@ -59,5 +59,5 @@ am-section h4,am-section h5,am-section h6{color:inherit}am-section hr,am-section
 {opacity:.1}}@media (max-width:780px){.am-slider-next,.am-slider-prev{width:2.65rem;line-height:2.65rem;font-size:2.25rem}}.am-slider-next:hover,.am-slider-prev:hover{color:var(--am-slider-controls-color);opacity:.2!important}.am-slider-next:before,.am-slider-prev:before{position:relative;top:-2px}.am-slider-prev{left:0}.am-slider-prev:before{content:'<';margin-left:-.12em}.am-slider-next{right:0}.am-slider-next:before{content:'>';margin-right:-.12em}.am-slider-caption{position:absolute;top:0;
 left:50%;transform:translate(-50%,0);padding:.6rem 1rem;font-size:1rem;color:var(--am-slider-controls-color);background-color:var(--am-slider-controls-background)}.am-slider-caption:empty{display:none}@media (max-width:500px){.am-slider-caption{display:none}}.am-slider-dots{position:absolute;bottom:6px;left:50%;transform:translate(-50%,0)}@media (max-width:500px){.am-slider-dots{display:none}}.am-slider-dots a:before{content:'';display:inline-block;width:10px;height:10px;margin:0 5px;
 border-radius:100%;background-color:#fff;border:2px solid rgba(0,0,0,.3);opacity:.35}.am-slider-dots a.am-active:before{opacity:.7}am-stretched{display:block;padding:0;margin-left:calc(var(--am-container-padding) * -1)!important;margin-right:calc(var(--am-container-padding) * -1)!important}*+am-stretched{margin-top:var(--am-block-margin-top)}am-stretched+am-stretched{margin-top:0}am-stretched>.am-block{max-width:none}am-stretched>.am-block>*>figcaption{padding:.75em var(--am-container-padding)}
-am-stretched>am-pagelist{padding:0 var(--am-container-padding)}am-stretched img{min-width:100%}am-toc ol{counter-reset:item;padding-left:1.5em}am-toc ol li{display:block}am-toc ol li:before{content:counters(item, '.');counter-increment:item;padding-right:.6em}am-toc>ol{padding-left:.75em}.am-center{text-align:center}.am-block{display:block;box-sizing:border-box;width:100%;max-width:var(--am-block-max-width);margin:0 auto}*+.am-block{margin-top:var(--am-block-margin-top)}.am-block>figure{margin:
-0!important;padding:0!important}.am-block figcaption{padding:.75em 0 0 0}
+am-stretched>am-pagelist,am-stretched>am-table{padding:0 var(--am-container-padding)}am-stretched+am-stretched>am-pagelist,am-stretched+am-stretched>am-table{padding-top:var(--am-block-margin-top)}am-stretched img{min-width:100%}am-toc ol{counter-reset:item;padding-left:1.5em}am-toc ol li{display:block}am-toc ol li:before{content:counters(item, '.');counter-increment:item;padding-right:.6em}am-toc>ol{padding-left:.75em}.am-center{text-align:center}.am-block{display:block;box-sizing:border-box;
+width:100%;max-width:var(--am-block-max-width);margin:0 auto}*+.am-block{margin-top:var(--am-block-margin-top)}.am-block>figure{margin:0!important;padding:0!important}.am-block figcaption{padding:.75em 0 0 0}
