@@ -624,7 +624,6 @@ class AutomadBlockSection {
 		);
 
 		this.initToggles();
-		this.applyDialogSize();
 
 		const modal = se.UIkit.modal(`#${this.modalId}`, {
 			modal: false,
@@ -652,25 +651,6 @@ class AutomadBlockSection {
 		});
 
 		modal.show();
-	}
-
-	applyDialogSize() {
-		const dialog = this.modalWrapper.querySelector('.uk-modal-dialog');
-		var width = 1;
-
-		try {
-			if (this.tunes.layout.width) {
-				// Sanitize width string before passing it to eval().
-				width = eval(this.tunes.layout.width.replace(/[^\d\/]/g, ''));
-			}
-
-			if (this.tunes.layout.stretched) {
-				width = 1;
-			}
-		} catch (e) {}
-
-		dialog.style.width = `${width * 74 + 4}rem`;
-		dialog.style.maxWidth = '90vw';
 	}
 
 	render() {
