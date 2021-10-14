@@ -85,30 +85,36 @@ class TemplateProcessor {
 	}
 
 	/**
-	 * Process a template without actually generating any output and collect all
-	 * snippet definitions during render time in order to enable overriding elements
-	 * on an atomic level after actually including a template to be extended.
-	 *
-	 * @param string $output
-	 * @param string $directory
-	 */
-	public function collectSnippetDefinitions(string $output, string $directory) {
-		$this->processFeatures($output, $directory);
-
-		// Remove the snippet definition processor in order to keep overrides during render time.
-		// All snippets are already defined in the first run of processFeatures().
-		unset($this->featureProcessors['Automad\Engine\Processors\Features\SnippetDefinitionProcessor']);
-	}
-
-	/**
 	 * The main template render process basically applies all feature processors to the rendered template.
+	 * Note that the $collectSnippetDefinitions parameter controls whether snippets are added to the
+	 * snippet collection in order to enable basic inheritance.
 	 *
 	 * @param string $template
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template
 	 */
-	public function process(string $template, string $directory) {
-		$output = $this->processFeatures($template, $directory);
+	public function process(string $template, string $directory, bool $collectSnippetDefinitions) {
+		$output = PreProcessor::stripWhitespace($template);
+		$output = PreProcessor::prepareWrappingStatements($output);
+
+		$output = preg_replace_callback(
+			'/' . PatternAssembly::template() . '/is',
+			function ($matches) use ($directory, $collectSnippetDefinitions) {
+				if (!empty($matches['var'])) {
+					return $this->ContentProcessor->processVariables($matches['var'], false, true);
+				}
+
+				foreach ($this->featureProcessors as $processor) {
+					$featureOutput = $processor->process($matches, $directory, $collectSnippetDefinitions);
+
+					if (!empty($featureOutput)) {
+						return $featureOutput;
+					}
+				}
+			},
+			$output
+		);
 
 		return URLProcessor::resolveUrls(
 			$output,
@@ -134,35 +140,5 @@ class TemplateProcessor {
 		}
 
 		return $processors;
-	}
-
-	/**
-	 * Process the actual regex patterns of all features.
-	 *
-	 * @param string $template
-	 * @param string $directory
-	 * @return string the processed output
-	 */
-	private function processFeatures(string $template, string $directory) {
-		$output = PreProcessor::stripWhitespace($template);
-		$output = PreProcessor::prepareWrappingStatements($output);
-
-		return preg_replace_callback(
-			'/' . PatternAssembly::template() . '/is',
-			function ($matches) use ($directory) {
-				if (!empty($matches['var'])) {
-					return $this->ContentProcessor->processVariables($matches['var'], false, true);
-				}
-
-				foreach ($this->featureProcessors as $processor) {
-					$featureOutput = $processor->process($matches, $directory);
-
-					if (!empty($featureOutput)) {
-						return $featureOutput;
-					}
-				}
-			},
-			$output
-		);
 	}
 }

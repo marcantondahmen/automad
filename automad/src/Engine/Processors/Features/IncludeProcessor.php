@@ -54,9 +54,10 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory) {
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
 		if (!empty($matches['file'])) {
 			Debug::log($matches['file'], 'Matched include');
 			$file = $directory . '/' . $matches['file'];
@@ -65,7 +66,7 @@ class IncludeProcessor extends AbstractFeatureProcessor {
 				Debug::log($file, 'Including');
 				$TemplateProcessor = $this->initTemplateProcessor();
 
-				return $TemplateProcessor->process($this->Automad->loadTemplate($file), dirname($file));
+				return $TemplateProcessor->process($this->Automad->loadTemplate($file), dirname($file), $collectSnippetDefinitions);
 			} else {
 				Debug::log($file, 'File not found');
 			}
