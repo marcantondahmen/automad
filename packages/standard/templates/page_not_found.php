@@ -1,3 +1,4 @@
+<@ post.php @>
 <# 
 
 This template extends the "post.php" template.
@@ -23,4 +24,3 @@ The "main" snippet is overriden to actually change the content of the page body.
 		</div>
 	</main>
 <@ end @>
-<@ post.php @>
