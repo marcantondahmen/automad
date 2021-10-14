@@ -85,28 +85,6 @@ class TemplateProcessor {
 	}
 
 	/**
-	 * The main template render process basically applies all feature processors to the rendered template.
-	 *
-	 * @param string $template
-	 * @param string $directory
-	 * @return string the processed template
-	 */
-	public function process(string $template, string $directory) {
-		$output = PreProcessor::stripWhitespace($template);
-		$output = PreProcessor::prepareWrappingStatements($output);
-
-		$this->collectSnippetDefinitions($output, $directory);
-
-		$output = $this->processMatches($output, $directory);
-
-		return URLProcessor::resolveUrls(
-			$output,
-			'relativeUrlToBase',
-			array($this->Automad->Context->get())
-		);
-	}
-
-	/**
 	 * Process a template without actually generating any output and collect all
 	 * snippet definitions during render time in order to enable overriding elements
 	 * on an atomic level after actually including a template to be extended.
@@ -114,12 +92,29 @@ class TemplateProcessor {
 	 * @param string $output
 	 * @param string $directory
 	 */
-	private function collectSnippetDefinitions(string $output, string $directory) {
-		$this->processMatches($output, $directory);
+	public function collectSnippetDefinitions(string $output, string $directory) {
+		$this->processFeatures($output, $directory);
 
 		// Remove the snippet definition processor in order to keep overrides during render time.
-		// All snippets are already defined in the first run of processMatches().
+		// All snippets are already defined in the first run of processFeatures().
 		unset($this->featureProcessors['Automad\Engine\Processors\Features\SnippetDefinitionProcessor']);
+	}
+
+	/**
+	 * The main template render process basically applies all feature processors to the rendered template.
+	 *
+	 * @param string $template
+	 * @param string $directory
+	 * @return string the processed template
+	 */
+	public function process(string $template, string $directory) {
+		$output = $this->processFeatures($template, $directory);
+
+		return URLProcessor::resolveUrls(
+			$output,
+			'relativeUrlToBase',
+			array($this->Automad->Context->get())
+		);
 	}
 
 	/**
@@ -144,11 +139,14 @@ class TemplateProcessor {
 	/**
 	 * Process the actual regex patterns of all features.
 	 *
-	 * @param string $output
+	 * @param string $template
 	 * @param string $directory
 	 * @return string the processed output
 	 */
-	private function processMatches(string $output, string $directory) {
+	private function processFeatures(string $template, string $directory) {
+		$output = PreProcessor::stripWhitespace($template);
+		$output = PreProcessor::prepareWrappingStatements($output);
+
 		return preg_replace_callback(
 			'/' . PatternAssembly::template() . '/is',
 			function ($matches) use ($directory) {

@@ -117,10 +117,11 @@ class View {
 			$ContentProcessor
 		);
 
-		$output = $TemplateProcessor->process(
-			$this->Automad->loadTemplate($this->template),
-			dirname($this->template)
-		);
+		$output = $this->Automad->loadTemplate($this->template);
+		$directory = dirname($this->template);
+
+		$TemplateProcessor->collectSnippetDefinitions($output, $directory);
+		$output = $TemplateProcessor->process($output, $directory);
 
 		$PostProcessor = new PostProcessor($InPage, $this->headless);
 
