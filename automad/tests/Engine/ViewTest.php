@@ -118,7 +118,9 @@ class ViewTest extends TestCase {
 								filemtime(AM_BASE_DIR . '/automad/tests/packages/vendor/extension/script.js') .
 								'"></script>' .
 								'</head>Asset Test',
-			'snippet_01' => 'Snippet Test / Snippet Test'
+			'snippet_01' => 'Snippet Test / Snippet Test',
+			'inheritance_01' => 'derived',
+			'inheritance_02' => 'derived by user'
 		);
 
 		foreach ($templates as $template => $expected) {
