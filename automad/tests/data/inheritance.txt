@@ -1,0 +1,18 @@
++snippet: {
+    "time": 1634209444296,
+    "blocks": [
+        {
+            "id": "1CpTQHw3eC",
+            "type": "snippet",
+            "data": {
+                "file": "—",
+                "snippet": "<@ snippet test @>\n\tderived by user\n<@ end @>"
+            },
+            "tunes": {
+                "layout": {}
+            }
+        }
+    ],
+    "version": "2.22.2",
+    "automadVersion": "1.9.0"
+}

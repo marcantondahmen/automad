@@ -58,9 +58,10 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template string
 	 */
-	public function process(array $matches, string $directory) {
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
 		if (!empty($matches['call'])) {
 			$call = $matches['call'];
 			Debug::log($call, 'Matched call');
@@ -83,7 +84,7 @@ class InvocationProcessor extends AbstractFeatureProcessor {
 				Debug::log($call, 'Process registered snippet');
 				$TemplateProcessor = $this->initTemplateProcessor();
 
-				return $TemplateProcessor->process($snippet, $directory);
+				return $TemplateProcessor->process($snippet, $directory, $collectSnippetDefinitions);
 			} elseif (method_exists($Toolbox, $call)) {
 				// Call a toolbox method, in case there is no matching snippet.
 				Debug::log($options, 'Calling method ' . $call . ' and passing the following options');

@@ -117,10 +117,16 @@ class View {
 			$ContentProcessor
 		);
 
-		$output = $TemplateProcessor->process(
-			$this->Automad->loadTemplate($this->template),
-			dirname($this->template)
-		);
+		$output = $this->Automad->loadTemplate($this->template);
+		$directory = dirname($this->template);
+
+		// Process template first in order to collect all snippet definitions
+		// without saving the generated output.
+		$TemplateProcessor->process($output, $directory, true);
+
+		// Process template a second time but without actually registering any snippet
+		// definition but saving the output instead.
+		$output = $TemplateProcessor->process($output, $directory, false);
 
 		$PostProcessor = new PostProcessor($InPage, $this->headless);
 

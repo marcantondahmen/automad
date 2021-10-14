@@ -105,9 +105,10 @@ class ContentProcessor {
 	 * @param array $options
 	 * @param string $snippet
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed file snippet
 	 */
-	public function processFileSnippet(string $file, array $options, string $snippet, string $directory) {
+	public function processFileSnippet(string $file, array $options, string $snippet, string $directory, bool $collectSnippetDefinitions) {
 		// Shelve runtime data.
 		$runtimeShelf = $this->Runtime->shelve();
 
@@ -152,7 +153,7 @@ class ContentProcessor {
 			)
 		);
 
-		$html = $TemplateProcessor->process($snippet, $directory);
+		$html = $TemplateProcessor->process($snippet, $directory, $collectSnippetDefinitions);
 
 		// Unshelve runtime data.
 		$this->Runtime->unshelve($runtimeShelf);

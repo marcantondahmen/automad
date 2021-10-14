@@ -88,11 +88,10 @@ class Snippet {
 			$ContentProcessor
 		);
 
-		//$View = new View($Automad);
 		$output = '';
 
 		if (!empty($data->snippet)) {
-			$output .= $TemplateProcessor->process($data->snippet, AM_BASE_DIR . AM_DIR_PACKAGES);
+			$output .= $TemplateProcessor->process($data->snippet, AM_BASE_DIR . AM_DIR_PACKAGES, true);
 		}
 
 		if (!empty($data->file)) {
@@ -106,7 +105,7 @@ class Snippet {
 
 			if (is_readable($file)) {
 				$template = $Automad->loadTemplate($file);
-				$output .= $TemplateProcessor->process($template, dirname($file));
+				$output .= $TemplateProcessor->process($template, dirname($file), true);
 			}
 		}
 

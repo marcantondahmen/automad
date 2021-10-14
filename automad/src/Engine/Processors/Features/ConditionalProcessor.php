@@ -54,9 +54,10 @@ class ConditionalProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed string
 	 */
-	public function process(array $matches, string $directory) {
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
 		if (!empty($matches['if'])) {
 			$ifSnippet = $matches['ifSnippet'];
 			$ifElseSnippet = '';
@@ -172,11 +173,11 @@ class ConditionalProcessor extends AbstractFeatureProcessor {
 			if ($result) {
 				Debug::log('TRUE', 'Evaluating condition: if ' . $matches['if']);
 
-				return $TemplateProcessor->process($ifSnippet, $directory);
+				return $TemplateProcessor->process($ifSnippet, $directory, $collectSnippetDefinitions);
 			} else {
 				Debug::log('FALSE', 'Evaluating condition: if ' . $matches['if']);
 
-				return $TemplateProcessor->process($ifElseSnippet, $directory);
+				return $TemplateProcessor->process($ifElseSnippet, $directory, $collectSnippetDefinitions);
 			}
 		}
 	}

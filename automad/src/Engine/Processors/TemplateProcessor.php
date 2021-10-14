@@ -86,24 +86,27 @@ class TemplateProcessor {
 
 	/**
 	 * The main template render process basically applies all feature processors to the rendered template.
+	 * Note that the $collectSnippetDefinitions parameter controls whether snippets are added to the
+	 * snippet collection in order to enable basic inheritance.
 	 *
 	 * @param string $template
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 * @return string the processed template
 	 */
-	public function process(string $template, string $directory) {
+	public function process(string $template, string $directory, bool $collectSnippetDefinitions) {
 		$output = PreProcessor::stripWhitespace($template);
 		$output = PreProcessor::prepareWrappingStatements($output);
 
 		$output = preg_replace_callback(
 			'/' . PatternAssembly::template() . '/is',
-			function ($matches) use ($directory) {
+			function ($matches) use ($directory, $collectSnippetDefinitions) {
 				if (!empty($matches['var'])) {
 					return $this->ContentProcessor->processVariables($matches['var'], false, true);
 				}
 
 				foreach ($this->featureProcessors as $processor) {
-					$featureOutput = $processor->process($matches, $directory);
+					$featureOutput = $processor->process($matches, $directory, $collectSnippetDefinitions);
 
 					if (!empty($featureOutput)) {
 						return $featureOutput;

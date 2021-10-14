@@ -118,7 +118,8 @@ class Mock extends TestCase {
 						'theme' => $theme,
 						':template' => $template
 					),
-					Parse::dataFile($testsDir . '/data/page.txt')
+					Parse::dataFile($testsDir . '/data/page.txt'),
+					Parse::dataFile($testsDir . '/data/inheritance.txt')
 				),
 				$Shared
 			),

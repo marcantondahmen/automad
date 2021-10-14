@@ -55,9 +55,10 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	 *
 	 * @param array $matches
 	 * @param string $directory
+	 * @param bool $collectSnippetDefinitions
 	 */
-	public function process(array $matches, string $directory) {
-		if (!empty($matches['snippet'])) {
+	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
+		if (!empty($matches['snippet']) && $collectSnippetDefinitions) {
 			SnippetCollection::add($matches['snippet'], $matches['snippetSnippet']);
 
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $matches['snippet'] . '"');
