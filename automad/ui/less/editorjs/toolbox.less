@@ -34,13 +34,14 @@
 
 .am-block-editor {
 	& .ce-toolbox {
-		overflow: scroll;
+		overflow: auto;
 		font-size: 0.86rem;
 		border-radius: @am-radius + 0.2rem;
 		background-color: @am-block-dropdown-background;
 
 		@media (max-width: @am-blocks-breakpoint-small-max) {
 			position: static;
+			flex-wrap: wrap;
 			transform: none !important;
 			align-items: center;
 			overflow-x: auto;
@@ -65,6 +66,10 @@
 			&:last-child {
 				border-top-right-radius: @am-radius - @am-border-width;
 				border-bottom-right-radius: @am-radius - @am-border-width;
+			}
+
+			@media (max-width: @am-blocks-breakpoint-small-max) {
+				border-radius: @am-radius;
 			}
 
 			&:hover,
