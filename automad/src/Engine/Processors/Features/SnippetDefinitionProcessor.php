@@ -58,10 +58,29 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 	 * @param bool $collectSnippetDefinitions
 	 */
 	public function process(array $matches, string $directory, bool $collectSnippetDefinitions) {
-		if (!empty($matches['snippet']) && $collectSnippetDefinitions) {
-			SnippetCollection::add($matches['snippet'], $matches['snippetSnippet']);
+		if (empty($matches['snippet'])) {
+			return null;
+		}
 
-			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $matches['snippet'] . '"');
+		$name = $matches['snippet'];
+		$body = $matches['snippetSnippet'];
+
+		// Always add and also override snippet definition while collecting snippets in order to enable inheritance.
+		if ($collectSnippetDefinitions) {
+			SnippetCollection::add($name, $body);
+			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
+
+			return null;
+		}
+
+		$collection = SnippetCollection::getCollection();
+
+		// In case a snippet definition doesn't exist in the collection yet, add it also
+		// during render time in order to catch also snippets that are nested in other snippets that
+		// are overriding even other snippets.
+		if (empty($collection[$name])) {
+			SnippetCollection::add($name, $body);
+			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
 		}
 	}
 
