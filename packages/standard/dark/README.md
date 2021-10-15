@@ -26,6 +26,7 @@ The following templates are included in this theme.
 | Name | Description |
 | ---- | ----------- |
 | Blog | A blog page grid template. Articles are displayed along with their teaser image, date, tags and the first paragraph. |
+| Blog Classic | A classic blog template. Articles are stacked vertically and displayed along with their teaser image, date, tags and the first paragraph. |
 | Portfolio | A portfolio page grid template. Projects are displayed along with their teaser image, date and tags. |
 | Post | A blog post template. Related pages are displayed below the main content. |
 | Project | A project page template. Related pages are displayed below the main content. |
@@ -57,7 +58,7 @@ There are two block areas &mdash; the teaser and the main area.
 | ---- | ----------- |
 | +Hero | The hero section. Note that you can stretch that area to the full width of a page. |
 | +Main | The main content block area. |
-		
+
 ## Overriding Theme Styles
 
 Apart from colors, also other styles can be overriden using CSS custom properties. Those overrides can be easily defined by adding a `<style>` tag to the `Items Header` variable of either a page or in the **Shared Data and Settings** section of the dashboard. The following example demonstrates how to change the font weight of the `h1` and `h2` headlines:
@@ -65,7 +66,7 @@ Apart from colors, also other styles can be overriden using CSS custom propertie
 	<style>
 	    :root {
 	        --h1-font-weight: 500;
-			--h2-font-weight: 480;
+	        --h2-font-weight: 480;
 	    }
 	</style>
 

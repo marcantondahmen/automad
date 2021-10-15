@@ -98,6 +98,7 @@
 	& figure {
 		box-sizing: border-box;
 		width: 2 * @form-height;
+		min-width: 1rem;
 		height: 2 * @form-height;
 		padding: 0;
 		overflow: hidden;
@@ -124,6 +125,7 @@
 		flex-direction: column;
 		align-content: stretch;
 		flex-grow: 1;
+		max-width: ~'calc(100% - 3rem)';
 
 		& > input[type='text'],
 		& > .uk-button {
@@ -135,6 +137,10 @@
 		}
 
 		& > .uk-button {
+			max-width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			color: @am-muted;
 		}
 
@@ -152,25 +158,28 @@
 	}
 
 	& .am-delete {
-		line-height: 2 * @form-height;
-		width: 2.5rem;
-		border-left: none;
+		padding: 0;
 		border-radius: 0;
-		color: @am-muted;
 	}
 
 	& .am-drag {
-		box-sizing: border-box;
-		line-height: 2 * @form-height;
-		width: 2.5rem;
 		text-align: center;
-		color: @am-muted;
 		background-color: @am-bg;
 		cursor: grab;
 		border: @am-hairline-px;
-		border-left: none;
 		border-top-right-radius: @am-radius;
 		border-bottom-right-radius: @am-radius;
+	}
+
+	& .am-delete,
+	& .am-drag {
+		display: block;
+		box-sizing: border-box;
+		line-height: 2 * @form-height;
+		width: 2.5rem;
+		min-width: 1rem;
+		color: @am-muted;
+		border-left: none;
 	}
 }
 

@@ -73,7 +73,11 @@ class AutomadBlockButtons {
 		};
 
 		this.wrapper = document.createElement('div');
-		this.wrapper.classList.add('uk-panel', 'uk-panel-box');
+		this.wrapper.classList.add(
+			'uk-panel',
+			'uk-panel-box',
+			'am-block-buttons'
+		);
 		this.wrapper.innerHTML = `
 			<ul class="uk-grid uk-grid-width-medium-1-2 uk-form" data-uk-grid-margin>
 				<div>
@@ -88,9 +92,9 @@ class AutomadBlockButtons {
 				</div>
 			</ul>
 			<hr>
-			<ul class="uk-grid uk-grid-width-medium-1-2 uk-form">
+			<ul class="uk-grid uk-grid-width-medium-1-2 uk-form" data-uk-grid-margin>
 				<li class="primary">
-					<div class="am-block-title">${t('button_primary')}</div>
+					<div class="am-block-title uk-text-truncate">${t('button_primary')}</div>
 					<div class="style"></div>
 					${create.label(t('button_label')).outerHTML}
 					${
@@ -111,7 +115,7 @@ class AutomadBlockButtons {
 					</div>
 				</li>
 				<li class="secondary">
-					<div class="am-block-title">${t('button_secondary')}</div>
+					<div class="am-block-title uk-text-truncate">${t('button_secondary')}</div>
 					<div class="style"></div>
 					${create.label(t('button_label')).outerHTML}
 					${
@@ -308,7 +312,7 @@ class AutomadBlockButtons {
 
 		wrapper.innerHTML = `
 			<div class="uk-form" data-uk-dropdown="{mode:'click',pos:'bottom-center'}">
-				<div class="uk-button uk-width-1-1 uk-text-left">
+				<div class="uk-button uk-width-1-1 uk-text-left uk-text-truncate">
 					<i class="uk-icon-sliders"></i>&nbsp;
 					${t('edit_style')}
 				</div>
