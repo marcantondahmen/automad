@@ -41,10 +41,14 @@
 
 		@media (max-width: @am-blocks-breakpoint-small-max) {
 			position: static;
-			flex-wrap: wrap;
 			transform: none !important;
 			align-items: center;
 			overflow-x: auto;
+
+			&--opened {
+				flex-wrap: wrap;
+				overflow-x: auto;
+			}
 		}
 
 		@media (min-width: @am-blocks-breakpoint-small) {
