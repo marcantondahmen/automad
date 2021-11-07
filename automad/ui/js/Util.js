@@ -124,7 +124,7 @@
 
 					text = value
 						.replace(/^[\/\\\\]/g, '')
-						.replace(/[\/\\\\]/g, ' > ')
+						.replace(/[\/\\\\]/g, ' / ')
 						.replace(/_/g, ' ')
 						.replace('.php', '');
 
