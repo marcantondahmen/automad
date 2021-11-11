@@ -190,7 +190,7 @@ class Page {
 	 * @return bool true if the the page is the currently requested page
 	 */
 	public function isCurrent() {
-		return (AM_REQUEST == $this->url);
+		return (AM_REQUEST == $this->origUrl);
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Page {
 		// while /path/to/page/ would not match.
 		// Since that will also exculde the current page (it will have the trailing slash more that AM_REQUEST), it has to be testes as well if $this->url equals AM_REQUEST.
 		// To always include the homepage as well, rtrim($this->url, '/') avoids a double "//" for the URL "/".
-		return (strpos(AM_REQUEST, rtrim($this->url, '/') . '/') === 0 || $this->url == AM_REQUEST);
+		return (strpos(AM_REQUEST, rtrim($this->origUrl, '/') . '/') === 0 || $this->origUrl == AM_REQUEST);
 	}
 
 	/**

@@ -121,7 +121,8 @@ class ViewTest extends TestCase {
 			'snippet_01' => 'Snippet Test / Snippet Test',
 			'inheritance_01' => 'derived',
 			'inheritance_02' => 'derived by user',
-			'inheritance_03' => 'nested derived'
+			'inheritance_03' => 'nested derived',
+			'inheritance_04' => 'nested derived override',
 		);
 
 		foreach ($templates as $template => $expected) {

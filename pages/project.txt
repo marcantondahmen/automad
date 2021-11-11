@@ -391,30 +391,6 @@ hidden: on
 
 -
 
-colorPageText: #F4F5F7
-
--
-
-colorPageBackground: #1F2022
-
--
-
-colorPageBorder: #323437
-
--
-
-colorNavbarText: #F4F5F7
-
--
-
-colorNavbarBackground: #1F2022
-
--
-
-colorNavbarBorder: #404347
-
--
-
 checkboxHideThumbnails: 1
 
 -
@@ -424,18 +400,6 @@ checkboxHideTitle: 1
 -
 
 checkboxMakeNavbarTransparent: 1
-
--
-
-checkboxHideFilters: 1
-
--
-
-checkboxShowAllPagesInPagelist: 1
-
--
-
-sortPagelist: :path asc
 
 -
 

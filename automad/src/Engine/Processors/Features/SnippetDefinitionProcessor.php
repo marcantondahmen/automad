@@ -64,8 +64,12 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 
 		$name = $matches['snippet'];
 		$body = $matches['snippetSnippet'];
+		$collection = SnippetCollection::getCollection();
 
-		// Always add and also override snippet definition while collecting snippets in order to enable inheritance.
+		// It is very important to differentiate between the first time a template is processed,
+		// with $collectSnippetDefinitions == true, and the final one where the actual output is generated.
+		// The first run only collects definitions and also allows for overriding them based on other definitions
+		// using the same name and that occur after their actual evaluation in a template.
 		if ($collectSnippetDefinitions) {
 			SnippetCollection::add($name, $body);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');
@@ -73,11 +77,13 @@ class SnippetDefinitionProcessor extends AbstractFeatureProcessor {
 			return null;
 		}
 
-		$collection = SnippetCollection::getCollection();
-
-		// In case a snippet definition doesn't exist in the collection yet, add it also
-		// during render time in order to catch also snippets that are nested in other snippets that
-		// are overriding even other snippets.
+		// Now the point is that in the second run, when $collectSnippetDefinitions == false,
+		// definitions that are already part of the collection must (!) not be overriden because
+		// that would revert the overrides that have been collected in the first run back to the
+		// original version right before they are evaluated. However, since the overrides have not been evaluated
+		// yet, snippets that are defined within another overriding snippet also must be added to the collection
+		// before the engine is able the evaluate them. Therefore in any case undefined (!) snippet entries always
+		// have to be registered.
 		if (empty($collection[$name])) {
 			SnippetCollection::add($name, $body);
 			Debug::log(SnippetCollection::getCollection(), 'Registered snippet "' . $name . '"');

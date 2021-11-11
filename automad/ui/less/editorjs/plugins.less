@@ -150,10 +150,27 @@
 	}
 
 	& .am-block-file-select {
+		display: flex;
+		align-items: center;
 		text-transform: capitalize;
 		overflow-x: auto;
 		overflow-y: hidden;
 		white-space: nowrap;
+
+		& > span {
+			display: inline-block;
+			max-width: ~'calc(100% - 1.8rem)';
+			padding-left: 0.4rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			direction: rtl;
+			text-align: left;
+		}
+
+		& > select {
+			border: none !important;
+		}
 	}
 
 	& .am-style-dropdown {

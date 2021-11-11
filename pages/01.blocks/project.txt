@@ -59,7 +59,7 @@ tags: Blocks, Content
 -
 
 +main: {
-    "time": 1634156631016,
+    "time": 1636309873754,
     "blocks": [
         {
             "id": "VvHQ0VKT-X",
@@ -265,7 +265,7 @@ tags: Blocks, Content
             "id": "Z02OFLaICl",
             "type": "table",
             "data": {
-                "withHeadings": false,
+                "withHeadings": true,
                 "content": [
                     [
                         "This is a ",
@@ -653,7 +653,7 @@ tags: Blocks, Content
         }
     ],
     "version": "2.22.2",
-    "automadVersion": "1.9.0"
+    "automadVersion": "1.9.3"
 }
 
 -

@@ -61,10 +61,7 @@
 				$container = $(a.selectors.container),
 				$modalInput = $(a.selectors.modalInput),
 				idPrefix = 'am-input-data-',
-				name = $modalInput
-					.val()
-					.replace(/[^\w\.\-]/g, '_')
-					.toLowerCase();
+				name = $modalInput.val().replace(/[^\w\.\-]/g, '_');
 
 			// Check if there is already a variable with the same name.
 			if ($('#' + idPrefix + name).length == 0) {
