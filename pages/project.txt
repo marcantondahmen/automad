@@ -403,16 +403,4 @@ checkboxMakeNavbarTransparent: 1
 
 -
 
-checkboxHideFilters: 1
-
--
-
-checkboxShowAllPagesInPagelist: 1
-
--
-
-sortPagelist: :path asc
-
--
-
 theme: standard/dark
