@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  * 
- * version 1.9.3
+ * version 1.9.4
  *
  * Copyright (c) 2014-2021 by Marc Anton Dahmen
  * https://marcdahmen.de
