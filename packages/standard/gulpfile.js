@@ -7,26 +7,26 @@
  * MIT license
  */
 
-var gulp = require('gulp'),
-	autoprefixer = require('gulp-autoprefixer'),
-	cleanCSS = require('gulp-clean-css'),
-	concat = require('gulp-concat'),
-	header = require('gulp-header'),
-	merge2 = require('merge2'),
-	less = require('gulp-less'),
-	rename = require('gulp-rename'),
-	uglify = require('gulp-uglify-es').default,
-	gutil = require('gulp-util'),
-	cleanCSSOptions = {
-		format: { wrapAt: 500 },
-		rebase: false,
-	};
+const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
+const beep = require('beepbeep');
+const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const header = require('gulp-header');
+const merge2 = require('merge2');
+const less = require('gulp-less');
+const log = require('fancy-log');
+const rename = require('gulp-rename');
+const uglify = require('gulp-uglify-es').default;
+const cleanCSSOptions = {
+	format: { wrapAt: 500 },
+	rebase: false,
+};
 
 // Error handling to prevent watch task to fail silently without restarting.
-var onError = function (err) {
-	gutil.log(gutil.colors.red('ERROR', err.plugin), err.message);
-	gutil.beep();
-	new gutil.PluginError(err.plugin, err, { showStack: true });
+const onError = function (err) {
+	log.error(err);
+	beep();
 	this.emit('end');
 };
 

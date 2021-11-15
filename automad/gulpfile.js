@@ -36,44 +36,45 @@ const headerTemplate = `/*
  */
 `;
 
-var gulp = require('gulp'),
-	autoprefixer = require('gulp-autoprefixer'),
-	cleanCSS = require('gulp-clean-css'),
-	concat = require('gulp-concat'),
-	header = require('gulp-header'),
-	merge2 = require('merge2'),
-	less = require('gulp-less'),
-	rename = require('gulp-rename'),
-	replace = require('gulp-replace'),
-	sort = require('gulp-sort'),
-	uglify = require('gulp-uglify-es').default,
-	gutil = require('gulp-util'),
-	pkg = require('./package.json'),
-	dist = 'dist',
-	cleanCSSOptions = {
-		format: { wrapAt: 500 },
-		rebase: false,
+const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
+const beep = require('beepbeep');
+const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const header = require('gulp-header');
+const merge2 = require('merge2');
+const less = require('gulp-less');
+const log = require('fancy-log');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const sort = require('gulp-sort');
+const uglify = require('gulp-uglify-es').default;
+const pkg = require('./package.json');
+const dist = 'dist';
+const cleanCSSOptions = {
+	format: { wrapAt: 500 },
+	rebase: false,
+};
+
+// UIkit prefix.
+// The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
+// would also match prefixed classes like am-uk-icon-*.
+const prefix = 'am-u-';
+const customize = {
+	cls: {
+		search: /uk-([a-z\d\-]+)/g,
+		replace: prefix + '$1',
 	},
-	// UIkit prefix.
-	// The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
-	// would also match prefixed classes like am-uk-icon-*.
-	prefix = 'am-u-',
-	customize = {
-		cls: {
-			search: /uk-([a-z\d\-]+)/g,
-			replace: prefix + '$1',
-		},
-		da: {
-			search: /data-uk-/g,
-			replace: 'data-' + prefix,
-		},
-	};
+	da: {
+		search: /data-uk-/g,
+		replace: 'data-' + prefix,
+	},
+};
 
 // Error handling to prevent watch task to fail silently without restarting.
-var onError = function (err) {
-	gutil.log(gutil.colors.red('ERROR', err.plugin), err.message);
-	gutil.beep();
-	new gutil.PluginError(err.plugin, err, { showStack: true });
+const onError = function (err) {
+	log.error(err);
+	beep();
 	this.emit('end');
 };
 
