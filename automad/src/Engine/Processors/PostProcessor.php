@@ -36,6 +36,7 @@
 
 namespace Automad\Engine\Processors;
 
+use Automad\Core\Automad;
 use Automad\Core\Blocks;
 use Automad\Core\Debug;
 use Automad\Core\FileUtils;
