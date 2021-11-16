@@ -40,7 +40,9 @@ use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\Config;
 use Automad\Core\Debug;
+use Automad\Core\Feed;
 use Automad\Core\FileSystem;
+use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Core\Sitemap;
 use Automad\Engine\View;
@@ -130,10 +132,23 @@ class App {
 			});
 		}
 
+		if (AM_FEED_ENABLED) {
+			$Router->register(AM_FEED_URL, function () {
+				header('Content-Type: application/rss+xml; charset=UTF-8');
 
+				$Cache = new Cache();
 
+				if ($Cache->pageCacheIsApproved()) {
+					return $Cache->readPageFromCache();
+				}
 
+				$Feed = new Feed(
+					$this->getAutomad($Cache),
+					Parse::csv(AM_FEED_FIELDS)
+				);
 
+				return $Feed->get();
+			});
 		}
 
 		$Router->register('/', function () use ($request) {

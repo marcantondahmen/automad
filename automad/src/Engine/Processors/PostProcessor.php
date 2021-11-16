@@ -41,6 +41,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
+use Automad\System\Server;
 use Automad\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -54,6 +55,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class PostProcessor {
 	/**
+	 * The Automad instance.
+	 */
+	private $Automad;
+
+	/**
 	 * A boolean variable that contains the headless state
 	 */
 	private $headless;
@@ -66,13 +72,16 @@ class PostProcessor {
 	/**
 	 * The post-processor constructor.
 	 *
+	 * @param Automad $Automad
 	 * @param InPage $InPage
 	 * @param bool $headless
 	 */
 	public function __construct(
+		Automad $Automad,
 		InPage $InPage,
 		bool $headless
 	) {
+		$this->Automad = $Automad;
 		$this->InPage = $InPage;
 		$this->headless = $headless;
 	}
@@ -128,6 +137,11 @@ class PostProcessor {
 	 */
 	private function addMetaTags(string $str) {
 		$meta = '<meta name="Generator" content="Automad ' . AM_VERSION . '">';
+
+		if (AM_FEED_ENABLED) {
+			$sitename = $this->Automad->Shared->get(AM_KEY_SITENAME);
+			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . '" href="' . Server::url() . AM_BASE_INDEX . AM_FEED_URL . '">';
+		}
 
 		return str_replace('<head>', '<head>' . $meta, $str);
 	}

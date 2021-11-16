@@ -139,6 +139,11 @@ class Config {
 		self::set('AM_PAGE_NOT_FOUND_TEMPLATE', 'page_not_found');
 		self::set('AM_PAGE_DASHBOARD', '/dashboard');
 
+		// FEED
+		self::set('AM_FEED_ENABLED', true);
+		self::set('AM_FEED_URL', '/feed');
+		self::set('AM_FEED_FIELDS', '+hero, +main');
+
 		// PERMISSIONS
 		self::set('AM_PERM_DIR', 0755);
 		self::set('AM_PERM_FILE', 0644);
