@@ -124,6 +124,7 @@ class Feed {
 		$output = '';
 
 		foreach ($pages as $Page) {
+			$this->Automad->Context->set($Page);
 			$link = Server::url() . AM_BASE_INDEX . $Page->url;
 			$content = $this->getPageContent($Page);
 			$output .= "\n";
