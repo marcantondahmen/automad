@@ -41,6 +41,7 @@ use Automad\Core\Cache;
 use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\Router;
 use Automad\Core\Sitemap;
 use Automad\Engine\View;
 use Automad\UI\Dashboard;
@@ -85,7 +86,7 @@ class App {
 		$this->runPermissionCheck();
 		$this->startSession();
 
-		$output = $this->getOutput();
+		$output = $this->render(AM_REQUEST);
 
 		if (AM_DEBUG_ENABLED) {
 			echo str_replace('</body>', Debug::consoleLog() . '</body>', $output);
@@ -95,27 +96,12 @@ class App {
 	}
 
 	/**
-	 * Get the generated output for the current request.
+	 * Get Automad from cache or create new instance.
 	 *
-	 * @return string the rendered output
+	 * @param Cache $Cache
+	 * @return Automad The Automad object
 	 */
-	private function getOutput() {
-		if (AM_REQUEST == AM_PAGE_DASHBOARD && AM_PAGE_DASHBOARD) {
-			$Dashboard = new Dashboard();
-
-			return $Dashboard->get();
-		}
-
-		if (AM_HEADLESS_ENABLED) {
-			header('Content-Type: application/json; charset=utf-8');
-		}
-
-		$Cache = new Cache();
-
-		if ($Cache->pageCacheIsApproved()) {
-			return $Cache->readPageFromCache();
-		}
-
+	private function getAutomad(Cache $Cache) {
 		if ($Cache->automadObjectCacheIsApproved()) {
 			$Automad = $Cache->readAutomadObjectFromCache();
 		} else {
@@ -124,16 +110,59 @@ class App {
 			new Sitemap($Automad->getCollection());
 		}
 
-		$View = new View($Automad, AM_HEADLESS_ENABLED);
-		$output = $View->render();
+		return $Automad;
+	}
 
-		if ($Automad->currentPageExists()) {
-			$Cache->writePageToCache($output);
-		} else {
-			Debug::log(AM_REQUEST, 'Page not found! Caching will be skipped!');
+	/**
+	 * Get the generated output for the current request.
+	 *
+	 * @param string $request
+	 * @return string the rendered output
+	 */
+	private function render(string $request) {
+		$Router = new Router();
+
+		if (AM_PAGE_DASHBOARD) {
+			$Router->register(AM_PAGE_DASHBOARD, function () {
+				$Dashboard = new Dashboard();
+
+				return $Dashboard->get();
+			});
 		}
 
-		return $output;
+
+
+
+
+		}
+
+		$Router->register('/', function () use ($request) {
+			if (AM_HEADLESS_ENABLED) {
+				header('Content-Type: application/json; charset=utf-8');
+			}
+
+			$Cache = new Cache();
+
+			if ($Cache->pageCacheIsApproved()) {
+				return $Cache->readPageFromCache();
+			}
+
+			$Automad = $this->getAutomad($Cache);
+			$View = new View($Automad, AM_HEADLESS_ENABLED);
+			$output = $View->render();
+
+			if ($Automad->currentPageExists()) {
+				$Cache->writePageToCache($output);
+			} else {
+				Debug::log($request, 'Page not found! Caching will be skipped!');
+			}
+
+			return $output;
+		});
+
+		$callable = $Router->get($request);
+
+		return $callable();
 	}
 
 	/**
