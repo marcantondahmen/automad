@@ -151,7 +151,7 @@ class App {
 			});
 		}
 
-		$Router->register('/', function () use ($request) {
+		$Router->register('/.*', function () use ($request) {
 			if (AM_HEADLESS_ENABLED) {
 				header('Content-Type: application/json; charset=utf-8');
 			}

@@ -67,7 +67,7 @@ class Router {
 	 */
 	public function get(string $url) {
 		foreach ($this->routes as $route => $callable) {
-			if (preg_match("#$route#i", $url)) {
+			if (preg_match("#^$route$#i", $url)) {
 				Debug::log($route, $url);
 
 				return $callable;
