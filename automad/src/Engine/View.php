@@ -130,7 +130,7 @@ class View {
 		// are registered in this step.
 		$output = $TemplateProcessor->process($output, $directory, false);
 
-		$PostProcessor = new PostProcessor($InPage, $this->headless);
+		$PostProcessor = new PostProcessor($this->Automad, $InPage, $this->headless);
 
 		$output = $PostProcessor->process($output);
 

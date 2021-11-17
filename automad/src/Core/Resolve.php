@@ -36,6 +36,8 @@
 
 namespace Automad\Core;
 
+use Automad\System\Server;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -50,6 +52,20 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class Resolve {
+	/**
+	 * Resolve absolute URLs (starting with a slash) to the domain.
+	 *
+	 * Example:
+	 * /page -> https://domain/base-url/index.php/page or
+	 * /page -> https://domain/base-url/page
+	 *
+	 * @param string $url
+	 * @return string The resolved URL
+	 */
+	public static function absoluteUrlToDomain(string $url) {
+		return Server::url() . self::absoluteUrlToRoot($url);
+	}
+
 	/**
 	 * Resolve absolute URLs (starting with a slash) to root in case Automad is installed within a subdirectory.
 	 *
