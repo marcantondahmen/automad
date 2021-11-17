@@ -141,7 +141,7 @@ class PostProcessor {
 
 		if (AM_FEED_ENABLED) {
 			$sitename = $this->Automad->Shared->get(AM_KEY_SITENAME);
-			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . '" href="' . Server::url() . AM_BASE_INDEX . AM_FEED_URL . '">';
+			$meta .= '<link rel="alternate" type="application/rss+xml" title="' . $sitename . ' | RSS" href="' . Server::url() . AM_BASE_INDEX . AM_FEED_URL . '">';
 		}
 
 		return str_replace('<head>', '<head>' . $meta, $str);
