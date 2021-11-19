@@ -40,6 +40,7 @@ use Automad\UI\Components\Modal\EditConfig;
 use Automad\UI\Components\Nav\Switcher;
 use Automad\UI\Components\System\Cache;
 use Automad\UI\Components\System\Debug;
+use Automad\UI\Components\System\Feed;
 use Automad\UI\Components\System\Headless;
 use Automad\UI\Components\System\Language;
 use Automad\UI\Components\System\Update;
@@ -75,6 +76,7 @@ class System extends AbstractView {
 				<li>{$fn(Cache::render())}</li>
 				<li>{$fn(Users::render())}</li>
 				<li>{$fn(Update::render())}</li>
+				<li>{$fn(Feed::render())}</li>
 				<li>{$fn(Language::render())}</li>
 				<li>{$fn(Headless::render())}</li>
 				<li>{$fn(Debug::render())}</li>
@@ -113,6 +115,10 @@ class System extends AbstractView {
 				array(
 					'icon' => '<i class="uk-icon-refresh"></i>',
 					'text' => Text::get('sys_update')
+				),
+				array(
+					'icon' => '<i class="uk-icon-rss"></i>',
+					'text' => Text::get('sys_feed')
 				),
 				array(
 					'icon' => '<i class="uk-icon-flag"></i>',

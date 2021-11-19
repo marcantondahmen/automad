@@ -126,6 +126,21 @@ class ConfigController {
 				$config['AM_CACHE_LIFETIME'] = intval($cache['lifetime']);
 			}
 
+			// Feed
+			if ($type == 'feed') {
+				if (Request::post('feed')) {
+					$config['AM_FEED_ENABLED'] = true;
+				} else {
+					$config['AM_FEED_ENABLED'] = false;
+				}
+
+				if ($fields = Request::post('fields')) {
+					$config['AM_FEED_FIELDS'] = join(', ', $fields);
+				} else {
+					$config['AM_FEED_FIELDS'] = '';
+				}
+			}
+
 			// Language
 			if ($type == 'language') {
 				$language = Request::post('language');
