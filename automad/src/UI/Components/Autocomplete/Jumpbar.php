@@ -188,6 +188,13 @@ class Jumpbar {
 				'icon' => 'refresh'
 			),
 			array(
+				'url' => $sysUrl . Str::slug(Text::get('sys_feed')),
+				'value' => Text::get('sys_title') . ' ' . Text::get('sys_feed'),
+				'title' => Text::get('sys_feed'),
+				'subtitle' => '',
+				'icon' => 'rss'
+			),
+			array(
 				'url' => $sysUrl . Str::slug(Text::get('sys_language')),
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_language'),
 				'title' => Text::get('sys_language'),
