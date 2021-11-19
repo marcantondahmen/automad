@@ -5,6 +5,8 @@
     "AM_CACHE_LIFETIME": 43200,
     "AM_CACHE_MONITOR_DELAY": 120,
     "AM_DEBUG_ENABLED": false,
+    "AM_FEED_ENABLED": true,
+    "AM_FEED_FIELDS": "+hero, +main",
     "AM_FILE_GUI_TRANSLATION": "",
     "AM_HEADLESS_ENABLED": false
 }
