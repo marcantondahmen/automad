@@ -56,6 +56,6 @@ class EditorTextModules {
 	public static function render() {
 		$json = json_encode(Text::getEditorModules());
 
-		return 	"<script>var AutomadEditorTextModules = $json</script>";
+		return 	"<script>const AutomadEditorTextModules = $json</script>";
 	}
 }

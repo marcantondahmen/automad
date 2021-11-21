@@ -44,6 +44,7 @@ use Automad\UI\Controllers\PackageManagerController;
 use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Response as UIResponse;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -82,7 +83,7 @@ class Response {
 		if ($item == 'debug') {
 			$Response->setStatus('');
 			$tooltip = Text::get('sys_status_debug_enabled');
-			$tab = Str::slug(Text::get('sys_debug'));
+			$tab = URLHashes::get()->system->debug;
 
 			if (AM_DEBUG_ENABLED) {
 				$html = <<< HTML
