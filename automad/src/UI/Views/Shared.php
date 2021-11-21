@@ -39,8 +39,8 @@ namespace Automad\UI\Views;
 use Automad\UI\Components\Loading;
 use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
-use Automad\UI\Components\Nav\Switcher;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -58,6 +58,7 @@ class Shared extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
+		$hashes = URLHashes::get();
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -66,8 +67,8 @@ class Shared extends AbstractView {
 				<li><a href="">{$fn(Text::get('shared_title'))}</a></li>
 			</ul>
 			{$fn($this->switcher())}
-			<ul id="am-shared-content" class="uk-switcher">
-				<li>
+			<div class="uk-margin-top">
+				<div data-am-switcher-item="#{$hashes->content->data}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -75,8 +76,8 @@ class Shared extends AbstractView {
 					>
 						{$fn(Loading::render())}
 					</form>
-				</li>
-				<li>
+				</div>
+				<div data-am-switcher-item="#{$hashes->content->files}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -85,8 +86,8 @@ class Shared extends AbstractView {
 					>
 						{$fn(Loading::render())}
 					</form>
-				</li>
-			</ul>
+				</div>
+			</div>
 			{$fn(SelectImage::render())}
 			{$fn(Link::render())}
 		HTML;
@@ -109,15 +110,33 @@ class Shared extends AbstractView {
 	 * @return string the switcher markup
 	 */
 	private function switcher() {
-		return Switcher::render('#am-shared-content', array(
-			array(
-				'icon' => '<i class="uk-icon-file-text"></i>',
-				'text' => Text::get('btn_data')
-			),
-			array(
-				'icon' => '<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>',
-				'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
-			)
-		));
+		$fn = $this->fn;
+
+		return <<< HTML
+			<div class="am-sticky">
+				<div class="am-switcher am-switcher-bar uk-flex">
+					<div class="am-switcher-tabs uk-flex-item-1">
+						<a 
+						href="#{$fn(URLHashes::get()->content->data)}"
+						class="am-switcher-link"
+						>
+							<span class="uk-visible-small"><i class="uk-icon-file-text"></i></span>
+							<span class="uk-hidden-small">{$fn(Text::get('btn_data'))}</span>
+						</a>
+						<a 
+						href="#{$fn(URLHashes::get()->content->files)}"
+						class="am-switcher-link"
+						>
+							<span class="uk-visible-small">
+								<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>
+							</span>
+							<span class="uk-hidden-small">
+								{$fn(Text::get('btn_files'))}&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		HTML;
 	}
 }

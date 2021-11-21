@@ -32,54 +32,75 @@
  * Licensed under the MIT license.
  */
 
-@am-switcher-border-color: @am-border-color;
+@am-switcher-duration: 0.2s;
+
+[data-am-switcher-item] {
+	display: none;
+
+	&.active {
+		display: block;
+	}
+}
 
 .am-switcher {
-	&-buttons {
+	&-bar {
+		border: @am-hairline-px;
 		border-radius: @am-radius;
-		background-color: @button-background;
-		border: @am-border-width-px solid @am-switcher-border-color;
-		border-left: none;
 
-		& > div {
-			max-width: 100%;
+		& > * {
 			margin: -@am-border-width-px 0;
 		}
 
-		& [data-uk-switcher]:last-child {
-			overflow: hidden;
-			border-radius: @am-radius;
-		}
-
-		& .uk-button {
-			margin: 0;
+		& [data-uk-dropdown] .uk-button {
+			margin-right: -@am-border-width-px;
 			border-radius: 0;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: clip;
-			border-color: @am-switcher-border-color;
-			border-width: @am-border-width-px;
+			border-top-right-radius: @am-radius;
+			border-bottom-right-radius: @am-radius;
+			border: @am-hairline-px;
 			border-left: none;
-			border-right: none;
+		}
+	}
 
-			&[data-am-tab] {
-				&.uk-active {
-					color: @button-primary-color;
-					background-color: @button-primary-background;
-					border-color: @button-primary-background;
+	&-tabs {
+		display: flex;
 
-					& .uk-badge {
-						color: @button-primary-background;
-						background-color: @button-primary-color;
-					}
+		& > a {
+			padding: 0 @button-large-padding-horizontal;
+			line-height: @button-large-line-height;
+			font-size: @button-large-font-size;
+			border: none;
+			border-top: @am-hairline-px;
+			border-bottom: @am-hairline-px;
+			border-radius: 0;
+			color: @button-color;
+			outline: 0 !important;
+
+			&:first-child {
+				margin-left: -@am-border-width-px;
+				border-top-left-radius: @am-radius;
+				border-bottom-left-radius: @am-radius;
+				border-left: @am-hairline-px;
+			}
+
+			&:hover,
+			&:focus {
+				background-color: @button-hover-background;
+			}
+
+			&:active {
+				box-shadow: inset 0 0.14rem 0.57rem rgba(0, 0, 0, 0.1);
+			}
+
+			&.active {
+				color: @button-primary-color;
+				background-color: @button-primary-background;
+				border-color: @button-primary-background;
+
+				& .uk-badge {
+					color: @button-primary-background;
+					background-color: @button-primary-color;
 				}
 			}
-		}
-
-		& > div:first-child > button:first-child {
-			border-left: @am-border-width solid @am-switcher-border-color;
-			border-top-left-radius: @am-radius;
-			border-bottom-left-radius: @am-radius;
 		}
 	}
 
@@ -87,23 +108,6 @@
 		padding: 0 0.7rem;
 		font-size: @button-large-font-size;
 		line-height: @button-large-line-height;
-	}
-
-	& [data-uk-dropdown] {
-		position: relative;
-		float: right;
-
-		& .uk-button {
-			border-top-right-radius: @am-radius;
-			border-bottom-right-radius: @am-radius;
-		}
-	}
-}
-
-.uk-switcher {
-	margin-top: @utility-margin-large - @am-sticky-padding;
-
-	& > li {
-		backface-visibility: hidden;
+		border: 1px solid transparent;
 	}
 }

@@ -212,7 +212,6 @@ gulp.task('libs-js', function () {
 					'../lib/vendor/uikit/uikit/src/js/core/modal.js',
 					'../lib/vendor/uikit/uikit/src/js/core/nav.js',
 					'../lib/vendor/uikit/uikit/src/js/core/offcanvas.js',
-					'../lib/vendor/uikit/uikit/src/js/core/switcher.js',
 					'../lib/vendor/uikit/uikit/src/js/core/tab.js',
 					'../lib/vendor/uikit/uikit/src/js/core/cover.js',
 					// Selected components.
