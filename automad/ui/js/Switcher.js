@@ -59,10 +59,6 @@
 			content[hash] = item;
 		});
 
-		if (!window.location.hash) {
-			window.location.hash = Object.keys(content)[0];
-		}
-
 		const selectors = {
 			link: '.am-switcher-link',
 			label: '.am-switcher-dropdown-label',
@@ -94,8 +90,24 @@
 			}
 		};
 
+		const body = document.querySelector('body');
+
 		const update = () => {
+			if (
+				!window.location.hash ||
+				typeof content[window.location.hash] === 'undefined'
+			) {
+				window.location.hash = Object.keys(content)[0];
+			}
+
 			const hash = window.location.hash;
+			const bodyClass = `am-switcher-hash-${hash.replace('#', '')}`;
+
+			body.className = body.className.replace(
+				/am\-switcher\-hash\-\w+/g,
+				''
+			);
+			body.classList.add(bodyClass);
 
 			toggleContent(hash);
 			updateSwitcher(hash);
