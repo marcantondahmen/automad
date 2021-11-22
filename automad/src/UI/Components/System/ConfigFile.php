@@ -65,7 +65,7 @@ class ConfigFile {
 			class="uk-button uk-button-success uk-button-large"
 			data-uk-modal
 			>
-				<i class="uk-icon-file-text-o"></i>&nbsp;
+				<i class="uk-icon-pencil"></i>&nbsp;
 				$Text->sys_config_edit
 			</a>
 			$modal

@@ -1426,7 +1426,7 @@ sys_config_info: Advanced settings can be managed by directly editing the config
 
 -
 
-sys_config_edit: Open Editor
+sys_config_edit: Edit Configuration File
 
 -
 
