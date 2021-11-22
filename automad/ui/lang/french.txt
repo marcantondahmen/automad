@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Contrairement à simplement effacer le cache, purger le r�
 
 -
 
-sys_config: Modifier le fichier de configuration
+sys_config: Fichier de configuration
 
 -
 
-sys_config_warning: Notez que seuls les utilisateurs expérimentés doivent modifier le fichier de configuration pour éviter d'endommager votre installation. En cas de problème, supprimez manuellement le fichier de configuration de votre serveur afin de restaurer les paramètres par défaut.
+sys_config_info: Les paramètres avancés peuvent être gérés en modifiant directement le fichier de configuration. Veuillez noter que seuls les utilisateurs expérimentés doivent modifier le fichier de configuration pour éviter d'endommager votre installation. En cas de problème, veuillez supprimer le fichier de configuration manuellement de votre serveur afin de restaurer les paramètres par défaut.
+
+-
+
+sys_config_edit: Modifier le fichier de configuration
 
 -
 
 sys_debug_info: Lorsque le débogage est activé, tous les processus d'Automad seront enregistrés dans la console de votre navigateur. Le débogage n'est nécessaire que pour le développement ou le dépannage et doit être désactivé dans tous les autres cas.
+
+-
+
+sys_feed_info: Lorsque l'option Flux RSS est activée, Automad générera automatiquement un document de flux RSS et la publiera sous l'URL affichée ci-dessous afin de permettre aux utilisateurs de suivre vos derniers messages.
+
+-
+
+sys_feed_url: L'aliment RSS sera disponible sous le lien suivant. Vous pouvez l'ajouter à votre navigation en ajoutant une nouvelle page et en utilisant l'URL ci-dessous en tant que valeur pour le champ Redirection.
+
+-
+
+sys_feed_fields: Vous pouvez trier, ajouter ou supprimer les champs qui doivent être inclus dans le flux RSS en les faisant glisser sur l'une des deux zones ci-dessous.
+
+-
+
+sys_feed_fields_info_used: Déplacer des éléments dans cette zone afin de les ajouter au flux RSS
+
+-
+
+sys_feed_fields_info_unused: Déplacer des éléments dans cette zone afin de les retirer de l'aliment RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: La mise en cache est désactivée
 -
 
 sys_status_debug_enabled: Le débogage est activé
+
+-
+
+sys_status_debug_disabled: Le débogage est désactivé
+
+-
+
+sys_status_feed_enabled: RSS Feed est activé
+
+-
+
+sys_status_feed_disabled: RSS Feed est désactivé
+
+-
+
+sys_status_headless_enabled: Headless Mode est activé
+
+-
+
+sys_status_headless_disabled: Headless Mode est désactivé
 
 -
 

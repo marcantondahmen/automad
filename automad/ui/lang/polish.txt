@@ -1234,15 +1234,39 @@ sys_cache_purge_info: W przeciwieństwie do po prostu czyszczenia pamięci podr�
 
 -
 
-sys_config: Edytuj plik konfiguracyjny
+sys_config: Plik konfiguracyjny
 
 -
 
-sys_config_warning: Należy pamiętać, że tylko doświadczeni użytkownicy powinni edytować plik konfiguracyjny, aby uniknąć uszkodzenia instalacji. Jeśli coś pójdzie nie tak, usuń ręcznie plik konfiguracyjny z serwera, aby przywrócić ustawienia domyślne.
+sys_config_info: Zaawansowane ustawienia mogą być zarządzane przez bezpośrednio edycję pliku konfiguracyjnego. Należy pamiętać, że tylko doświadczeni użytkownicy powinni edytować plik konfiguracyjny, aby uniknąć uszkodzenia instalacji. W przypadku, gdy coś pójdzie nie tak, usuń plik konfiguracyjny ręcznie z serwera, aby przywrócić ustawienia domyślne.
+
+-
+
+sys_config_edit: Edytuj plik konfiguracyjny.
 
 -
 
 sys_debug_info: Gdy debugowanie jest włączone, wszystkie procesy Automada będą rejestrowane w konsoli przeglądarki. Debugowanie jest potrzebne tylko do programowania lub rozwiązywania problemów i powinno być wyłączone we wszystkich innych przypadkach.
+
+-
+
+sys_feed_info: Po włączeniu opcji RSS Automad automatycznie generuje dokument podajnika RSS i opublikuje go pod adresem URL, który jest wyświetlany poniżej, aby umożliwić użytkownikom podążanie za najnowszymi postami.
+
+-
+
+sys_feed_url: Kanał RSS będzie dostępny na poniższym ogniu. Możesz dodać go do nawigacji, dodając nową stronę i używając adresu URL jako wartość dla pola przekierowania.
+
+-
+
+sys_feed_fields: Możesz sortować, dodać lub usunąć pola, które powinny być zawarte w kanale RSS, przeciągając je na jeden z dwóch poniżej obszarów poniżej.
+
+-
+
+sys_feed_fields_info_used: Przenieś elementy do tego obszaru, aby dodać je do kanału RSS
+
+-
+
+sys_feed_fields_info_unused: Przenieś elementy do tego obszaru, aby usunąć je z kanału RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Buforowanie jest wyłączone
 -
 
 sys_status_debug_enabled: Debugowanie jest włączone
+
+-
+
+sys_status_debug_disabled: Debugowanie jest wyłączone
+
+-
+
+sys_status_feed_enabled: RSS Feed jest włączony
+
+-
+
+sys_status_feed_disabled: RSS Feed jest wyłączona
+
+-
+
+sys_status_headless_enabled: Headless Mode jest włączony
+
+-
+
+sys_status_headless_disabled: Headless Mode jest wyłączona
 
 -
 

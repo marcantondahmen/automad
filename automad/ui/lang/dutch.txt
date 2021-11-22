@@ -1234,15 +1234,39 @@ sys_cache_purge_info: In tegenstelling tot het eenvoudig opruimen van de cache, 
 
 -
 
-sys_config: Bewerk het configuratiebestand
+sys_config: Configuratiebestand
 
 -
 
-sys_config_warning: Merk op dat alleen ervaren gebruikers het configuratiebestand moeten bewerken om schade aan uw installatie te voorkomen. Mocht er iets misgaan, verwijder dan het configuratiebestand handmatig van uw server om de standaardinstellingen te herstellen.
+sys_config_info: Geavanceerde instellingen kunnen worden beheerd door het configuratiebestand rechtstreeks te bewerken. Houd er rekening mee dat alleen ervaren gebruikers het configuratiebestand moeten bewerken om schade aan uw installatie te voorkomen. Als er iets misgaat, verwijdert u het configuratiebestand handmatig van uw server om de standaardinstellingen te herstellen.
+
+-
+
+sys_config_edit: Configuratiebestand bewerken
 
 -
 
 sys_debug_info: Als foutopsporing is ingeschakeld, worden alle Automad-processen gelogd naar de console van uw browser. Foutopsporing is alleen nodig voor ontwikkeling of probleemoplossing en moet in alle andere gevallen worden uitgeschakeld.
+
+-
+
+sys_feed_info: Wanneer de RSS-invoeroptie is ingeschakeld, genereert AutoMAD automatisch een RSS-feed-document en publiceert u deze onder de hieronder weergegeven URL om gebruikers in staat te stellen uw nieuwste posten te volgen.
+
+-
+
+sys_feed_url: De RSS-feed is beschikbaar onder de volgende link. U kunt het aan uw navigatie toevoegen door een nieuwe pagina toe te voegen en de URL hieronder te gebruiken als waarde voor het veld Redirecte.
+
+-
+
+sys_feed_fields: U kunt de velden toevoegen, toevoegen of verwijderen die in de RSS-feed moeten worden opgenomen door ze naar een van de twee onderstaande gebieden te slepen.
+
+-
+
+sys_feed_fields_info_used: Verplaats elementen naar dit gebied om ze toe te voegen aan de RSS-feed
+
+-
+
+sys_feed_fields_info_unused: Verplaats elementen naar dit gebied om ze uit de RSS-feed te verwijderen
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Caching is uitgeschakeld
 -
 
 sys_status_debug_enabled: Foutopsporing is ingeschakeld
+
+-
+
+sys_status_debug_disabled: Foutopsporing is uitgeschakeld
+
+-
+
+sys_status_feed_enabled: RSS Feed is ingeschakeld
+
+-
+
+sys_status_feed_disabled: RSS Feed is uitgeschakeld
+
+-
+
+sys_status_headless_enabled: Headless Mode is ingeschakeld
+
+-
+
+sys_status_headless_disabled: Headless Mode is uitgeschakeld
 
 -
 

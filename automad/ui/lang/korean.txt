@@ -1234,15 +1234,39 @@ sys_cache_purge_info: 캐시를 단순히 지우는 것과는 대조적으로 �
 
 -
 
-sys_config: 구성 파일 편집
+sys_config: 구성 파일
 
 -
 
-sys_config_warning: 숙련 된 사용자 만 구성 파일을 편집하여 설치가 손상되지 않도록해야합니다. 뭔가 잘못되는 경우 기본 설정을 복원하려면 서버에서 구성 파일을 수동으로 삭제하십시오.
+sys_config_info: 고급 설정은 구성 파일을 직접 편집하여 관리 할 수 있습니다. 설치가 손상되지 않도록 경험있는 사용자 만 구성 파일을 편집해야합니다. 뭔가 잘못되는 경우 기본 설정을 복원하려면 서버에서 구성 파일을 수동으로 삭제하십시오.
+
+-
+
+sys_config_edit: 구성 파일 편집
 
 -
 
 sys_debug_info: 디버깅이 활성화되면 모든 Automad의 프로세스가 브라우저의 콘솔에 기록됩니다. 디버깅은 개발 또는 문제 해결을 위해서만 필요하며 다른 모든 경우에서 비활성화해야합니다.
+
+-
+
+sys_feed_info: RSS FEED 옵션이 활성화되면 AUTOMAD는 RSS 피드 문서를 자동으로 생성하고 사용자가 최신 게시물을 따를 수 있도록 아래에 표시된 URL 아래에 다음과 같은 URL 아래에 게시됩니다.
+
+-
+
+sys_feed_url: RSS 피드는 다음 링크에서 사용할 수 있습니다. 새 페이지를 추가하고 리디렉션 필드의 값으로 아래의 URL을 사용하여 탐색에 추가 할 수 있습니다.
+
+-
+
+sys_feed_fields: RSS 피드에 포함되어야하는 필드를 정렬, 추가 또는 제거하여 아래 두 영역 중 하나로 드래그 할 수 있습니다.
+
+-
+
+sys_feed_fields_info_used: RSS 피드에 추가하려면 요소를이 영역으로 이동하십시오.
+
+-
+
+sys_feed_fields_info_unused: RSS 피드에서 제거하기 위해 요소를이 영역으로 이동하십시오.
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: 캐싱이 비활성화되었습니다
 -
 
 sys_status_debug_enabled: 디버깅이 활성화됩니다
+
+-
+
+sys_status_debug_disabled: 디버깅이 비활성화되었습니다
+
+-
+
+sys_status_feed_enabled: RSS Feed가 활성화되었습니다
+
+-
+
+sys_status_feed_disabled: RSS Feed가 비활성화되었습니다
+
+-
+
+sys_status_headless_enabled: Headless Mode가 활성화되었습니다
+
+-
+
+sys_status_headless_disabled: Headless Mode가 비활성화되어 있습니다
 
 -
 
