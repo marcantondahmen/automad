@@ -1418,11 +1418,15 @@ sys_cache_purge_info: In contrast to simply clearing the cache, purging the cach
 
 -
 
-sys_config: Edit Configuration File 
+sys_config: Configuration File
 
 -
 
-sys_config_warning: Note that only experienced users should edit the configuration file to avoid damage to your installation. In case something goes wrong, please delete the configuration file manually from your server in order to restore the default settings.
+sys_config_info: Advanced settings can be managed by directly editing the configuration file. Please note that only experienced users should edit the configuration file to avoid damage to your installation. In case something goes wrong, please delete the configuration file manually from your server in order to restore the default settings.
+
+-
+
+sys_config_edit: Open Editor
 
 -
 
@@ -1438,11 +1442,11 @@ sys_debug_info: When debugging is enabled, all of Automad's processes will be lo
 
 -
 
-sys_feed: Feed
+sys_feed: RSS Feed
 
 -
 
-sys_feed_info: When the feed is enabled, Automad will generate and provide a RSS feed automatically in order to let your users know whenever you add new posts.
+sys_feed_info: When the RSS feed is enabled, Automad will generate and provide a it automatically in order to let your users know whenever you add new posts.
 
 -
 
@@ -1499,6 +1503,26 @@ sys_status_cache_disabled: Caching is disabled
 -
 
 sys_status_debug_enabled: Debugging is enabled
+
+-
+
+sys_status_debug_disabled: Debugging is disabled
+
+-
+
+sys_status_feed_enabled: RSS Feed is enabled
+
+-
+
+sys_status_feed_disabled: RSS Feed is disabled
+
+-
+
+sys_status_headless_enabled: Headless Mode is enabled
+
+-
+
+sys_status_headless_disabled: Headless Mode is disabled
 
 -
 

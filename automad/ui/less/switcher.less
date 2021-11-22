@@ -32,8 +32,6 @@
  * Licensed under the MIT license.
  */
 
-@am-switcher-duration: 0.2s;
-
 [data-am-switcher-item] {
 	display: none;
 
@@ -51,13 +49,22 @@
 			margin: -@am-border-width-px 0;
 		}
 
-		& [data-uk-dropdown] .uk-button {
+		& [data-uk-dropdown] {
+			position: relative;
+			margin-left: 0;
 			margin-right: -@am-border-width-px;
-			border-radius: 0;
-			border-top-right-radius: @am-radius;
-			border-bottom-right-radius: @am-radius;
-			border: @am-hairline-px;
-			border-left: none;
+
+			& .uk-button {
+				border-radius: 0;
+				border-top-right-radius: @am-radius;
+				border-bottom-right-radius: @am-radius;
+				border: @am-hairline-px;
+				border-left: none;
+			}
+
+			& .uk-dropdown {
+				right: 0;
+			}
 		}
 	}
 

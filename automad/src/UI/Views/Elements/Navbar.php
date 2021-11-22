@@ -80,7 +80,7 @@ class Navbar {
 					</div>
 					<div class="am-navbar-buttons">
 						<div class="am-icon-buttons">
-							<span data-am-status="debug"></span>
+							<span data-am-status="debug_navbar"></span>
 							<a 
 							href="#am-add-page-modal" 
 							class="uk-button uk-button-primary" 

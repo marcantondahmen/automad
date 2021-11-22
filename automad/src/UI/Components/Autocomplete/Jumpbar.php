@@ -216,6 +216,13 @@ class Jumpbar {
 				'title' => Text::get('sys_debug'),
 				'subtitle' => '',
 				'icon' => 'bug'
+			),
+			array(
+				'url' => $sysUrl . $hashes->system->config,
+				'value' => Text::get('sys_title') . ' ' . Text::get('sys_config'),
+				'title' => Text::get('sys_config'),
+				'subtitle' => '',
+				'icon' => 'file-text-o'
 			)
 		);
 	}
