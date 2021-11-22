@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Za razliku od jednostavnog uklanjanja predmemorije, čiš�
 
 -
 
-sys_config: Uredi konfiguracijsku datoteku
+sys_config: Konfiguracijska datoteka
 
 -
 
-sys_config_warning: Imajte na umu da bi samo iskusni korisnici trebali uređivati konfiguracijsku datoteku kako bi izbjegli oštećenje vaše instalacije. U slučaju da nešto pođe po zlu, molimo vas da ručno izbrišete konfiguracijsku datoteku sa vašeg servera kako biste vratili zadane postavke.
+sys_config_info: Napredne postavke mogu se upravljati izravno uređivanjem konfiguracijske datoteke. Imajte na umu da bi samo iskusni korisnici trebali uređivati konfiguracijsku datoteku kako bi se izbjegla oštećenja na vašoj instalaciji. U slučaju da nešto pođe po zlu, obrišite datoteku konfiguracije ručno sa svog servera da biste vratili zadane postavke.
+
+-
+
+sys_config_edit: Uređivanje konfiguracijske datoteke
 
 -
 
 sys_debug_info: Kada je omogućeno otklanjanje pogrešaka, svi Automadovi procesi bit će evidentirani na konzoli vašeg preglednika. Otklanjanje pogrešaka potrebno je samo za razvoj ili rješavanje problema i trebalo bi ga onemogućiti u svim ostalim slučajevima.
+
+-
+
+sys_feed_info: Kada je omogućena opcija RSS feed, Automad će automatski generirati RSS feed dokument i objaviti je pod URL-om koji se prikazuje u nastavku kako bi se omogućilo korisnicima da korisnicima slijede vaše najnovije postove.
+
+-
+
+sys_feed_url: RSS feed bit će dostupan pod sljedećim vezama. Možete ga dodati na navigaciju dodavanjem nove stranice i pomoću URL-a ispod kao vrijednost za preusmjeravanje polja.
+
+-
+
+sys_feed_fields: Možete sortirati ili ukloniti polja koja bi trebala biti uključena u RSS feed povlačenjem na jedan od dva područja u nastavku.
+
+-
+
+sys_feed_fields_info_used: Pomičite elemente u ovo područje kako biste ih dodali u RSS feed
+
+-
+
+sys_feed_fields_info_unused: Pomicanje elemenata u ovo područje kako bi ih uklonili iz RSS feeda
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Predmemoriranje je onemogućeno
 -
 
 sys_status_debug_enabled: Otklanjanje pogrešaka je omogućeno
+
+-
+
+sys_status_debug_disabled: Otklanjanje pogrešaka je onemogućeno
+
+-
+
+sys_status_feed_enabled: RSS Feed je omogućen
+
+-
+
+sys_status_feed_disabled: RSS Feed je onemogućen
+
+-
+
+sys_status_headless_enabled: Headless Mode je omogućen
+
+-
+
+sys_status_headless_disabled: Headless Mode je onemogućen
 
 -
 

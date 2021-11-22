@@ -136,7 +136,7 @@ class Feed {
 
 		$keys = array_unique($keys);
 		$keys = array_filter($keys, function ($key) {
-			return preg_match('/^(\+|text|image)/', $key);
+			return preg_match('/^(\+|text)/', $key);
 		});
 
 		return $keys;

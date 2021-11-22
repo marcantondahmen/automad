@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Skirtingai nuo kliringo talpyklos, išvalymo talpyklos kat
 
 -
 
-sys_config: Redaguoti konfigūracijos failą
+sys_config: Konfigūracijos failas
 
 -
 
-sys_config_warning: Atminkite, kad tik patyrę vartotojai turėtų redaguoti konfigūracijos failą, kad būtų išvengta jūsų įrenginio pažeidimo. Jei kažkas negerai, ištrinkite konfigūracijos failą rankiniu būdu iš savo serverio, kad atkurtumėte numatytuosius nustatymus.
+sys_config_info: Išplėstinius nustatymus galima tvarkyti tiesiogiai redaguojant konfigūracijos failą. Atkreipkite dėmesį, kad tik patyrę vartotojai turėtų redaguoti konfigūracijos failą, kad būtų išvengta diegimo sugadinimo. Jei kažkas negerai, ištrinti konfigūracijos failą rankiniu būdu iš savo serverio, kad atkurtumėte numatytuosius nustatymus.
+
+-
+
+sys_config_edit: Redaguoti konfigūracijos failą
 
 -
 
 sys_debug_info: Įgalinus derinimą, visi „Automad“ procesai bus užregistruoti jūsų naršyklės konsolėje. Derinimas reikalingas tik kuriant ar šalinant triktis. Visais kitais atvejais jis turėtų būti išjungtas.
+
+-
+
+sys_feed_info: Kai "RSS Feed" parinktis yra įjungta, automada automatiškai generuos RSS kanalo dokumentą ir jį paskelbs pagal žemiau rodomą URL, kad naudotojai galėtų sekti naujausius pranešimus.
+
+-
+
+sys_feed_url: RSS kanalas bus prieinamas pagal šią nuorodą. Jūs galite pridėti jį prie savo navigacijos pridedant naują puslapį ir naudodami žemiau pateiktą URL kaip vertę peradresuoti lauką.
+
+-
+
+sys_feed_fields: Galite rūšiuoti, pridėti arba pašalinti laukus, kurie turėtų būti įtraukti į RSS kanalą, vilkdami juos ant vienos iš dviejų žemiau esančių sričių.
+
+-
+
+sys_feed_fields_info_used: Perkelti elementus į šią sritį, kad juos pridėtumėte prie RSS kanalo
+
+-
+
+sys_feed_fields_info_unused: Perkelti elementus į šią sritį, kad juos pašalintumėte iš RSS kanalo
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Talpinimas išjungtas
 -
 
 sys_status_debug_enabled: Derinimas įgalintas
+
+-
+
+sys_status_debug_disabled: Derinimas yra išjungtas
+
+-
+
+sys_status_feed_enabled: RSS Feed yra įjungta
+
+-
+
+sys_status_feed_disabled: RSS Feed yra neįgalus
+
+-
+
+sys_status_headless_enabled: Headless Mode yra įjungta
+
+-
+
+sys_status_headless_disabled: Headless Mode yra neįgalus
 
 -
 

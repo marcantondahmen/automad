@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Öfugt við einfaldlega að hreinsa skyndiminni, hreinsa s
 
 -
 
-sys_config: Breyta stillingarskrá
+sys_config: Stillingarskrá
 
 -
 
-sys_config_warning: Athugaðu að aðeins reyndir notendur ættu að breyta stillingarskránni til að koma í veg fyrir skemmdir á uppsetningunni þinni. Ef eitthvað fer úrskeiðis skaltu eyða stillingarskránni handvirkt af netþjóninum þínum til að endurheimta sjálfgefnar stillingar.
+sys_config_info: Hægt er að stjórna háþróaðri stillingum með því að breyta stillingarskránni beint. Vinsamlegast athugaðu að aðeins reyndar notendur ættu að breyta stillingarskránni til að koma í veg fyrir skemmdir á uppsetningu þinni. Ef eitthvað fer úrskeiðis skaltu vinsamlegast eyða uppsetningarskránni handvirkt frá þjóninum þínum til að endurheimta sjálfgefna stillingar.
+
+-
+
+sys_config_edit: Breyta stillingarskrá
 
 -
 
 sys_debug_info: Þegar kembiforrit er virkt verða allir ferlar Automad skráðir í stjórnborð vafrans. Villuleit er aðeins þörf fyrir þróun eða bilanaleit og ætti að vera óvirk í öllum öðrum tilvikum.
+
+-
+
+sys_feed_info: Þegar RSS-fóðrið er virkt, mun Automad sjálfkrafa búa til RSS Feed skjal og birta það undir slóðinni sem birtist hér að neðan til að leyfa notendum að fylgja nýjustu innleggunum þínum.
+
+-
+
+sys_feed_url: RSS straumurinn verður laus undir eftirfarandi tengil. Þú getur bætt því við flakk með því að bæta við nýjum síðu og nota slóðina hér að neðan sem gildi fyrir tilvísunina.
+
+-
+
+sys_feed_fields: Þú getur raðað, bætt við eða fjarlægt reitina sem ætti að vera með í RSS strauminum með því að draga þau á einn af tveimur svæðum hér að neðan.
+
+-
+
+sys_feed_fields_info_used: Færðu þætti á þessu sviði til að bæta þeim við RSS strauminn
+
+-
+
+sys_feed_fields_info_unused: Færðu þætti á þessu sviði til að fjarlægja þau úr RSS-straumnum
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Skyndiminnkun er óvirk
 -
 
 sys_status_debug_enabled: Kembiforrit er virkt
+
+-
+
+sys_status_debug_disabled: Kembiforrit er óvirkt
+
+-
+
+sys_status_feed_enabled: RSS Feed er virkur
+
+-
+
+sys_status_feed_disabled: RSS Feed er óvirk
+
+-
+
+sys_status_headless_enabled: Headless Mode er virkur
+
+-
+
+sys_status_headless_disabled: Headless Mode er óvirk
 
 -
 

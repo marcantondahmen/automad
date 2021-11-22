@@ -1234,15 +1234,39 @@ sys_cache_purge_info: I gcodarsnacht leis sin chun an taisce a ghlanadh, déanfa
 
 -
 
-sys_config: Cuir Comhad Cumraíochta in Eagar
+sys_config: Comhad cumraíochta
 
 -
 
-sys_config_warning: Tabhair faoi deara nár cheart ach d’úsáideoirí a bhfuil taithí acu an comhad cumraíochta a chur in eagar chun damáiste do shuiteáil a sheachaint. Sa chás go dtéann rud éigin mícheart, scrios an comhad cumraíochta de láimh ó do fhreastalaí d’fhonn na socruithe réamhshocraithe a chur ar ais.
+sys_config_info: Is féidir le socruithe chun cinn a bhainistiú trí eagarthóireacht dhíreach an comhad cumraíochta. Tabhair faoi deara nach n-eagródh ach úsáideoirí a bhfuil taithí acu ach an comhad cumraíochta a chur in eagar chun damáiste do do shuiteáil a sheachaint. I gcás go dtéann rud éigin mícheart, scrios an comhad cumraíochta de láimh ó do fhreastalaí le do thoil chun na socruithe réamhshocraithe a athchóiriú.
+
+-
+
+sys_config_edit: Cuir an comhad cumraíochta in eagar
 
 -
 
 sys_debug_info: Nuair a chumasófar dífhabhtú, logálfar próisis uile Automad chuig consól do bhrabhsálaí. Ní theastaíonn dífhabhtú ach le haghaidh forbartha nó fabhtcheartaithe agus ba cheart go mbeadh sé faoi mhíchumas i ngach cás eile.
+
+-
+
+sys_feed_info: Nuair a chumasaítear an rogha fotha RSS, ginfidh an auderad doiciméad beatha RSS go huathoibríoch agus foilseoidh sé é faoin URL atá ar taispeáint thíos chun ligean d'úsáideoirí do chuid post is nuaí a leanúint.
+
+-
+
+sys_feed_url: Beidh an fotha RSS ar fáil faoin nasc seo a leanas. Is féidir leat é a chur le do loingseoireacht trí leathanach nua a chur leis agus an URL thíos a úsáid mar luach don réimse atreoraithe.
+
+-
+
+sys_feed_fields: Is féidir leat na réimsí ba chóir a chur san áireamh sa Bheatha RSS a shórtáil, a chur leis nó a bhaint trí iad a tharraingt isteach ar cheann de na dhá réimse thíos.
+
+-
+
+sys_feed_fields_info_used: Eilimintí a bhogadh isteach sa limistéar seo chun iad a chur leis an bhfotha RSS
+
+-
+
+sys_feed_fields_info_unused: Bog eilimintí isteach sa limistéar seo chun iad a bhaint as an bhfotha RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Tá caching faoi mhíchumas
 -
 
 sys_status_debug_enabled: Cumasaítear dífhabhtú
+
+-
+
+sys_status_debug_disabled: Tá dífhabhtú faoi mhíchumas
+
+-
+
+sys_status_feed_enabled: Cumasaítear RSS Feed
+
+-
+
+sys_status_feed_disabled: Tá RSS Feed faoi mhíchumas
+
+-
+
+sys_status_headless_enabled: Cumasaítear Headless Mode9
+
+-
+
+sys_status_headless_disabled: Tá Headless Mode faoi mhíchumas
 
 -
 

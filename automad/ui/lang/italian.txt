@@ -1234,15 +1234,39 @@ sys_cache_purge_info: In contrasto per semplicemente cancellare la cache, spurgo
 
 -
 
-sys_config: File Modifica configurazione
+sys_config: File di configurazione
 
 -
 
-sys_config_warning: Tieni presente che solo gli utenti esperti dovrebbero modificare il file di configurazione per evitare danni all'installazione. Nel caso in cui qualcosa vada storto, eliminare manualmente il file di configurazione dal server per ripristinare le impostazioni predefinite.
+sys_config_info: Le impostazioni avanzate possono essere gestite modificando direttamente il file di configurazione. Si noti che solo gli utenti esperti devono modificare il file di configurazione per evitare danni alla tua installazione. Nel caso in cui qualcosa vada storto, eliminare manualmente il file di configurazione dal server per ripristinare le impostazioni predefinite.
+
+-
+
+sys_config_edit: Modifica file di configurazione
 
 -
 
 sys_debug_info: Quando il debug è abilitato, tutti i processi di Automad verranno registrati nella console del browser. Il debug è necessario solo per lo sviluppo o la risoluzione dei problemi e dovrebbe essere disabilitato in tutti gli altri casi.
+
+-
+
+sys_feed_info: Quando l'opzione Feed RSS è abilitata, Automad genererà automaticamente un documento di feed RSS e pubblicherà il suo URL che viene visualizzato di seguito per consentire agli utenti di seguire i tuoi post più nuovi.
+
+-
+
+sys_feed_url: Il feed RSS sarà disponibile nell'ambito del seguente link. Puoi aggiungerlo alla tua navigazione aggiungendo una nuova pagina e utilizzando l'URL sottostante come valore per il campo Reindirizzamento.
+
+-
+
+sys_feed_fields: È possibile ordinare, aggiungere o rimuovere i campi che dovrebbero essere inclusi nel feed RSS trascinandoli su una delle due aree sottostanti.
+
+-
+
+sys_feed_fields_info_used: Spostare gli elementi in quest'area per aggiungerli al feed RSS
+
+-
+
+sys_feed_fields_info_unused: Spostare gli elementi in quest'area per rimuoverli dal feed RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: La memorizzazione nella cache è disabilitata
 -
 
 sys_status_debug_enabled: Il debug è abilitato
+
+-
+
+sys_status_debug_disabled: Il debug è disabilitato
+
+-
+
+sys_status_feed_enabled: RSS Feed è abilitato
+
+-
+
+sys_status_feed_disabled: RSS Feed è disabilitato
+
+-
+
+sys_status_headless_enabled: Headless Mode è abilitato
+
+-
+
+sys_status_headless_disabled: Headless Mode è disabilitato
 
 -
 

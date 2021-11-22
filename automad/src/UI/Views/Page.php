@@ -44,8 +44,8 @@ use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
 use Automad\UI\Components\Nav\Breadcrumbs;
 use Automad\UI\Components\Nav\SiteTree;
-use Automad\UI\Components\Nav\Switcher;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -63,6 +63,7 @@ class Page extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
+		$hashes = URLHashes::get();
 		$url = Request::query('url');
 		$Page = $this->Automad->getPage($url);
 
@@ -78,8 +79,8 @@ class Page extends AbstractView {
 		return <<< HTML
 			{$fn(Breadcrumbs::render($this->Automad))}
 			{$fn($this->switcher($Page, $url))}
-			<ul id="am-page-content" class="uk-switcher">
-				<li>
+			<div class="uk-margin-top">
+				<div data-am-switcher-item="#{$hashes->content->data}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -89,8 +90,8 @@ class Page extends AbstractView {
 					>
 						{$fn(Loading::render())}
 					</form>
-				</li>
-				<li>
+				</div>
+				<div data-am-switcher-item="#{$hashes->content->files}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -100,8 +101,8 @@ class Page extends AbstractView {
 					>
 						{$fn(Loading::render())}
 					</form>
-				</li>
-			</ul>
+				</div>
+			</div>
 			{$fn(SelectImage::render($url))}
 			{$fn(Link::render())}
 			<div id="am-move-page-modal" class="uk-modal">
@@ -169,58 +170,98 @@ class Page extends AbstractView {
 	 * @return string the switcher markup
 	 */
 	private function switcher(CorePage $Page, string $url) {
-		$items = array(
-			array(
-				'icon' => '<i class="uk-icon-file-text"></i>',
-				'text' => Text::get('btn_data')
-			),
-			array(
-				'icon' => '<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>',
-				'text' => Text::get('btn_files') . '&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>'
-			)
-		);
+		$fn = $this->fn;
+		$private = '';
+		$dropdown = '';
 
-		$dropdown = array();
-
-		if ($url != '/') {
-			$dropdown = array(
-				// Edit data inpage.
-				'<a href="' . AM_BASE_INDEX . $url . '">' .
-					'<i class="uk-icon-pencil uk-icon-justify"></i>&nbsp;&nbsp;' .
-					Text::get('btn_inpage_edit') .
-				'</a>',
-				// Duplicate Page.
-				'<a href="#" data-am-submit="Page::duplicate">' .
-					'<i class="uk-icon-clone uk-icon-justify"></i>&nbsp;&nbsp;' .
-					Text::get('btn_duplicate_page') .
-				'</a>' .
-				'<form data-am-controller="Page::duplicate" data-am-url="' . $url . '"></form>',
-				// Move Page.
-				'<a href="#am-move-page-modal" data-uk-modal>' .
-					'<i class="uk-icon-arrows uk-icon-justify"></i>&nbsp;&nbsp;' .
-					Text::get('btn_move_page') .
-				'</a>',
-				// Delete Page.
-				'<a href="#" data-am-submit="Page::delete">' .
-					'<i class="uk-icon-remove uk-icon-justify"></i>&nbsp;&nbsp;' .
-					Text::get('btn_delete_page') .
-				'</a>' .
-				'<form data-am-controller="Page::delete" data-am-url="' . $url . '" data-am-confirm="' . Text::get('confirm_delete_page') . '">' .
-					'<input type="hidden" name="title" value="' . htmlspecialchars($Page->get(AM_KEY_TITLE)) . '" />' .
-				'</form>',
-				// Copy page URL to clipboard.
-				'<a href="#" data-am-clipboard="' . $url . '">' .
-					'<i class="uk-icon-link uk-icon-justify"></i>&nbsp;&nbsp;' .
-					Text::get('btn_copy_url_clipboard') .
-				'</a>'
-			);
+		if ($Page->private) {
+			$private = '<i class="am-switcher-icon uk-icon-lock" title="' . Text::get('page_private') . '" data-uk-tooltip></i>';
 		}
 
-		return Switcher::render(
-			'#am-page-content',
-			$items,
-			$dropdown,
-			$Page->private
-		);
+		if ($url != '/') {
+			$dropdown = <<< HTML
+				<div data-uk-dropdown="{mode:'click', pos:'bottom-right'}">
+					<a href="#" class="uk-button uk-button-large">
+						<span class="uk-visible-large">{$fn(Text::get('btn_more'))}&nbsp;&nbsp;<i class="uk-icon-caret-down"></i></span>
+						<i class="uk-hidden-large uk-icon-ellipsis-v uk-icon-justify"></i>
+					</a>
+					<div class="uk-dropdown uk-dropdown-small">
+						<ul class="uk-nav uk-nav-dropdown">
+							<li>
+								<a href="{$fn(AM_BASE_INDEX . $url)}">
+									<i class="uk-icon-pencil uk-icon-justify"></i>&nbsp;
+									{$fn(Text::get('btn_inpage_edit'))}
+								</a>
+							</li>
+							<li>
+								<a href="#" data-am-submit="Page::duplicate">
+									<i class="uk-icon-clone uk-icon-justify"></i>&nbsp;
+									{$fn(Text::get('btn_duplicate_page'))}
+								</a>
+								<form data-am-controller="Page::duplicate" data-am-url="$url"></form>
+							</li>
+							<li>
+								<a href="#am-move-page-modal" data-uk-modal>
+									<i class="uk-icon-arrows uk-icon-justify"></i>&nbsp;
+									{$fn(Text::get('btn_move_page'))}
+								</a>
+							</li>
+							<li>
+								<a href="#" data-am-submit="Page::delete">
+									<i class="uk-icon-remove uk-icon-justify"></i>&nbsp;
+									{$fn(Text::get('btn_delete_page'))}
+								</a>
+								<form 
+								data-am-controller="Page::delete" 
+								data-am-url="$url" 
+								data-am-confirm="{$fn(Text::get('confirm_delete_page'))}"
+								>
+									<input 
+									type="hidden" 
+									name="title" 
+									value="{$fn(htmlspecialchars($Page->get(AM_KEY_TITLE)))}" 
+									/>
+								</form>
+							</li>
+							<li>
+								<a href="#" data-am-clipboard="$url">
+									<i class="uk-icon-link uk-icon-justify"></i>&nbsp;
+									{$fn(Text::get('btn_copy_url_clipboard'))}
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			HTML;
+		}
+
+		return <<< HTML
+			<div class="am-sticky">
+				<div class="am-switcher am-switcher-bar uk-flex">
+					<div class="am-switcher-tabs uk-flex-item-1">
+						<a 
+						href="#{$fn(URLHashes::get()->content->data)}" 
+						class="am-switcher-link"
+						>
+							<span class="uk-visible-small"><i class="uk-icon-file-text"></i></span>
+							<span class="uk-hidden-small">{$fn(Text::get('btn_data'))}</span>
+						</a>
+						<a 
+						href="#{$fn(URLHashes::get()->content->files)}" 
+						class="am-switcher-link"
+						>
+							<span class="uk-visible-small">
+								<span class="uk-badge am-badge-folder" data-am-count="[data-am-file-info]"></span>
+							</span>
+							<span class="uk-hidden-small">
+								{$fn(Text::get('btn_files'))}&nbsp;&nbsp;<span class="uk-badge" data-am-count="[data-am-file-info]"></span>
+							</span>
+						</a>
+					</div>
+					$private
+					$dropdown
+				</div>
+			</div>
+		HTML;
 	}
 }

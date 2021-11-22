@@ -1234,15 +1234,39 @@ sys_cache_purge_info: キャッシュをクリアするだけでなく、キャ�
 
 -
 
-sys_config: 設定ファイルを編集します
+sys_config: 設定ファイル
 
 -
 
-sys_config_warning: インストールの損傷を避けるために、経験豊富なユーザーのみが構成ファイルを編集する必要があります。 何かがうまくいかない場合は、デフォルト設定を復元するためにサーバーから設定ファイルを手動で削除してください。
+sys_config_info: 詳細設定は、設定ファイルを直接編集することで管理できます。 あなたのインストールの損傷を避けるために、経験豊富なユーザーのみが設定ファイルを編集する必要があります。 問題が発生した場合は、デフォルト設定を復元するためにサーバーから設定ファイルを手動で削除してください。
+
+-
+
+sys_config_edit: 設定ファイルを編集します
 
 -
 
 sys_debug_info: デバッグが有効になっていると、Automadのすべてのプロセスがブラウザのコンソールに記録されます。 デバッグは開発またはトラブルシューティングにのみ必要とされ、他のすべての場合では無効にする必要があります。
+
+-
+
+sys_feed_info: RSSフィードオプションが有効になっている場合、AutomAdは自動的にRSSフィード文書を生成し、ユーザーが最新の投稿に従うことを可能にするために、以下に表示されるURLの下にそれを公開します。
+
+-
+
+sys_feed_url: RSSフィードは次のリンクの下で利用可能になります。 新しいページを追加し、下のURLをリダイレクトフィールドの値として使用することで、ナビゲーションに追加できます。
+
+-
+
+sys_feed_fields: RSSフィードに含めるべきフィールドを下の2つの領域のいずれかにドラッグしてソート、追加または削除できます。
+
+-
+
+sys_feed_fields_info_used: RSSフィードに追加するために要素をこの領域に移動する
+
+-
+
+sys_feed_fields_info_unused: RSSフィードからそれらを削除するために要素をこの領域に移動する
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: キャッシングは無効です
 -
 
 sys_status_debug_enabled: デバッグは有効です
+
+-
+
+sys_status_debug_disabled: デバッグは無効です
+
+-
+
+sys_status_feed_enabled: RSS Feedが有効になっています
+
+-
+
+sys_status_feed_disabled: RSS Feedは無効です
+
+-
+
+sys_status_headless_enabled: Headless Modeが有効になっています
+
+-
+
+sys_status_headless_disabled: Headless Modeは無効です
 
 -
 

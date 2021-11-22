@@ -1234,15 +1234,39 @@ sys_cache_purge_info: I modsætning til blot at rydde cachen, vil rensning af ca
 
 -
 
-sys_config: Rediger konfigurationsfil
+sys_config: Konfigurationsfil
 
 -
 
-sys_config_warning: Bemærk, at kun erfarne brugere skal redigere konfigurationsfilen for at undgå beskadigelse af din installation. Hvis noget går galt, skal du slette konfigurationsfilen manuelt fra din server for at gendanne standardindstillingerne.
+sys_config_info: Avancerede indstillinger kan styres ved direkte redigering af konfigurationsfilen. Bemærk venligst, at kun erfarne brugere skal redigere konfigurationsfilen for at undgå beskadigelse af din installation. Hvis noget går galt, skal du slette konfigurationsfilen manuelt fra din server for at gendanne standardindstillingerne.
+
+-
+
+sys_config_edit: Rediger konfigurationsfil
 
 -
 
 sys_debug_info: Når fejlretning er aktiveret, vil alle Automads processer blive logget på din browsers konsol. Fejlfinding er kun nødvendig til udvikling eller fejlfinding og bør deaktiveres i alle andre tilfælde.
+
+-
+
+sys_feed_info: Når RSS-feed-indstillingen er aktiveret, genererer Automad automatisk et RSS-feeddokument og offentliggør det under den webadresse, der vises nedenfor for at give brugerne mulighed for at følge dine nyeste indlæg.
+
+-
+
+sys_feed_url: RSS-feedet vil være tilgængelige under følgende link. Du kan tilføje den til din navigation ved at tilføje en ny side og ved hjælp af URL'en nedenfor som værdi for omdirigeringsfeltet.
+
+-
+
+sys_feed_fields: Du kan sortere, tilføje eller fjerne de felter, der skal medtages i RSS-feedet ved at trække dem på et af de to områder nedenfor.
+
+-
+
+sys_feed_fields_info_used: Flyt elementer i dette område for at tilføje dem til RSS-feedet
+
+-
+
+sys_feed_fields_info_unused: Flyt elementer i dette område for at fjerne dem fra RSS-feedet
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Caching er deaktiveret
 -
 
 sys_status_debug_enabled: Fejlfinding er aktiveret
+
+-
+
+sys_status_debug_disabled: Debugging er deaktiveret
+
+-
+
+sys_status_feed_enabled: RSS Feed er aktiveret
+
+-
+
+sys_status_feed_disabled: RSS Feed er deaktiveret
+
+-
+
+sys_status_headless_enabled: Headless Mode er aktiveret
+
+-
+
+sys_status_headless_disabled: Headless Mode er deaktiveret
 
 -
 

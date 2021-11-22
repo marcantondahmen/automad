@@ -44,6 +44,7 @@ use Automad\UI\Controllers\PackageManagerController;
 use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Response as UIResponse;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -59,7 +60,7 @@ class Response {
 	 * Get the current status response of a given system item or packages.
 	 *
 	 * @param string $item
-	 * @return Response the response object
+	 * @return UIResponse the response object
 	 */
 	public static function render(string $item) {
 		Debug::log($item, 'Getting status');
@@ -79,10 +80,38 @@ class Response {
 			}
 		}
 
+		if ($item == 'feed') {
+			if (AM_FEED_ENABLED) {
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_feed_enabled')
+				);
+			} else {
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_feed_disabled')
+				);
+			}
+		}
+
 		if ($item == 'debug') {
-			$Response->setStatus('');
+			if (AM_DEBUG_ENABLED) {
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_debug_enabled')
+				);
+			} else {
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_debug_disabled')
+				);
+			}
+		}
+
+		if ($item == 'debug_navbar') {
+			$Response->setStatus('<span></span>');
 			$tooltip = Text::get('sys_status_debug_enabled');
-			$tab = Str::slug(Text::get('sys_debug'));
+			$tab = URLHashes::get()->system->debug;
 
 			if (AM_DEBUG_ENABLED) {
 				$html = <<< HTML
@@ -97,6 +126,20 @@ class Response {
 				HTML;
 
 				$Response->setStatus($html);
+			}
+		}
+
+		if ($item == 'headless') {
+			if (AM_HEADLESS_ENABLED) {
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_headless_enabled')
+				);
+			} else {
+				$Response->setStatus(
+					'<i class="uk-icon-toggle-off uk-icon-justify"></i>&nbsp;&nbsp;' .
+					Text::get('sys_status_headless_disabled')
+				);
 			}
 		}
 

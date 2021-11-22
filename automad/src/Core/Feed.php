@@ -66,8 +66,6 @@ class Feed {
 	 * @param array $fields
 	 */
 	public function __construct(Automad $Automad, array $fields) {
-		Debug::log($fields, 'Created new Feed');
-
 		$this->Automad = $Automad;
 		$this->fields = $fields;
 	}

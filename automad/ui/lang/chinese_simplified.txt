@@ -1234,15 +1234,39 @@ sys_cache_purge_info: 与简单地清除缓存，清除缓存目录也将将所�
 
 -
 
-sys_config: 编辑配置文件
+sys_config: 配置文件
 
 -
 
-sys_config_warning: 请注意，只有经验丰富的用户应编辑配置文件以避免损坏您的安装。 如果出现问题，请从服务器手动删除配置文件，以便恢复默认设置。
+sys_config_info: 可以通过直接编辑配置文件来管理高级设置。 请注意，只有经验丰富的用户应编辑配置文件以避免损坏您的安装。 如果出现问题，请从服务器手动删除配置文件以恢复默认设置。
+
+-
+
+sys_config_edit: 编辑配置文件
 
 -
 
 sys_debug_info: 启用调试后，所有Automad的进程都将记录到浏览器的控制台。 只需要调试，仅需要开发或故障排除，并且应在所有其他情况下禁用。
+
+-
+
+sys_feed_info: 启用RSS进给选项后，Automad将自动生成RSS馈送文档并在下面显示的URL下发布它，以允许用户遵循您最新帖子。
+
+-
+
+sys_feed_url: RSS Feed将在以下链接下提供。 您可以通过添加新页面将其添加到导航中，并使用以下URL作为重定向字段的值。
+
+-
+
+sys_feed_fields: 您可以通过将它们拖动到下面的两个区域之一来对RSS Feed中包含的字段进行排序，添加或删除应包含在RSS Feed中的字段。
+
+-
+
+sys_feed_fields_info_used: 将元素移动到此区域中，以便将它们添加到RSS Feed中
+
+-
+
+sys_feed_fields_info_unused: 将元素移动到此区域中，以便从RSS馈送中删除它们
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: 缓存已禁用
 -
 
 sys_status_debug_enabled: 启用调试
+
+-
+
+sys_status_debug_disabled: 调试被禁用
+
+-
+
+sys_status_feed_enabled: RSS Feed已启用
+
+-
+
+sys_status_feed_disabled: RSS Feed被禁用
+
+-
+
+sys_status_headless_enabled: 启用了Headless Mode
+
+-
+
+sys_status_headless_disabled: Headless Mode被禁用
 
 -
 
