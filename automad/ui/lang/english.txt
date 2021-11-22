@@ -1446,11 +1446,11 @@ sys_feed: RSS Feed
 
 -
 
-sys_feed_info: When the RSS feed is enabled, Automad will generate and provide a it automatically in order to let your users know whenever you add new posts.
+sys_feed_info: When the RSS feed option is enabled, Automad will automatically generate an RSS feed document and publish it under the URL that is displayed below in order to allow users to follow your newest posts.
 
 -
 
-sys_feed_enable: Enable RSS Feed
+sys_feed_enable: RSS Feed
 
 -
 
@@ -1458,15 +1458,15 @@ sys_feed_url: The RSS feed will be available under the following link. You can a
 
 -
 
-sys_feed_fields: You can sort, add or remove the fields that should be included in the feed items by dragging them between the two lists below. 
+sys_feed_fields: You can sort, add or remove the fields that should be included in the RSS feed by dragging them onto one of the two areas below.
 
 -
 
-sys_feed_fields_info_used: Drag fields here in order to add them to the feed
+sys_feed_fields_info_used: Move elements into this area in order to add them to the RSS feed
 
 -
 
-sys_feed_fields_info_unused: Drag fields here in order to remove them from the feed
+sys_feed_fields_info_unused: Move elements into this area in order to remove them from the RSS feed
 
 -
 
