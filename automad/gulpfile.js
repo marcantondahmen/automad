@@ -39,6 +39,7 @@ const headerTemplate = `/*
 const gulp = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const beep = require('beepbeep');
+const browserSync = require('browser-sync').create();
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const header = require('gulp-header');
@@ -299,16 +300,24 @@ gulp.task('libs-css', function () {
 		.pipe(gulp.dest(dist));
 });
 
+// Browser sync.
+
+gulp.task('reload', function (done) {
+	browserSync.reload();
+	done();
+});
+
 // Watch task.
 gulp.task('watch', function () {
-	gulp.watch('blocks/js/*.js', gulp.series('blocks-js'));
-	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
-	gulp.watch('ui/js/*.js', gulp.series('automad-js'));
-	gulp.watch('ui/js/*/*.js', gulp.series('automad-js'));
-	gulp.watch('ui/js/*/*/*.js', gulp.series('automad-js'));
-	gulp.watch('ui/less/*.less', gulp.series('automad-less'));
-	gulp.watch('ui/less/editorjs/*.less', gulp.series('automad-less'));
-	gulp.watch('ui/less/editorjs/*/*.less', gulp.series('automad-less'));
+	browserSync.init({
+		proxy: 'localhost:8080/automad-development',
+	});
+
+	gulp.watch('blocks/js/*.js', gulp.series('blocks-js', 'reload'));
+	gulp.watch('blocks/less/*.less', gulp.series('blocks-less', 'reload'));
+	gulp.watch('ui/js/**/*.js', gulp.series('automad-js', 'reload'));
+	gulp.watch('ui/less/**/*.less', gulp.series('automad-less', 'reload'));
+	gulp.watch('src/**/*.php', gulp.series('reload'));
 });
 
 // The default task.
