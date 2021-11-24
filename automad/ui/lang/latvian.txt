@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Turpretī vienkārši iztīrīt kešatmiņu, kešatmiņas 
 
 -
 
-sys_config: Rediģēt konfigurācijas failu
+sys_config: Konfigurācijas fails
 
 -
 
-sys_config_warning: Ņemiet vērā, ka konfigurācijas failu drīkst rediģēt tikai pieredzējuši lietotāji, lai nesabojātu instalāciju. Ja kaut kas noiet greizi, lūdzu, manuāli izdzēsiet konfigurācijas failu no sava servera, lai atjaunotu noklusējuma iestatījumus.
+sys_config_info: Papildu iestatījumus var pārvaldīt, tieši rediģējot konfigurācijas failu. Lūdzu, ņemiet vērā, ka tikai pieredzējušiem lietotājiem vajadzētu rediģēt konfigurācijas failu, lai izvairītos no ierīces bojājumiem. Gadījumā, ja kaut kas noiet greizi, lūdzu, izdzēsiet konfigurācijas failu manuāli no sava servera, lai atjaunotu noklusējuma iestatījumus.
+
+-
+
+sys_config_edit: Rediģēt konfigurācijas failu
 
 -
 
 sys_debug_info: Kad atkļūdošana ir iespējota, visi Automad procesi tiks reģistrēti jūsu pārlūkprogrammas konsolē. Atkļūdošana ir nepieciešama tikai izstrādei vai problēmu novēršanai, un visos pārējos gadījumos tā ir jāatspējo.
+
+-
+
+sys_feed_info: Kad RSS plūsmas opcija ir iespējota, Automad automātiski ģenerēs RSS plūsmas dokumentu un publicēt to zem URL, kas tiek parādīts zemāk, lai ļautu lietotājiem sekot jaunākajām ziņām.
+
+-
+
+sys_feed_url: RSS plūsma būs pieejama šādā saitē. To var pievienot savai navigācijai, pievienojot jaunu lapu un izmantojot zemāku URL kā vērtību novirzīšanas jomā.
+
+-
+
+sys_feed_fields: Jūs varat kārtot, pievienot vai noņemt laukus, kas jāiekļauj RSS plūsmā, velkot tos vienā no divām zemāk minētajām vietām.
+
+-
+
+sys_feed_fields_info_used: Pārvietojiet elementus šajā jomā, lai tos pievienotu RSS plūsmai
+
+-
+
+sys_feed_fields_info_unused: Pārvietojiet elementus šajā jomā, lai tos noņemtu no RSS plūsmas
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Kešatmiņa ir atspējota
 -
 
 sys_status_debug_enabled: Atkļūdošana ir iespējota
+
+-
+
+sys_status_debug_disabled: Atkļūdošana ir atspējota
+
+-
+
+sys_status_feed_enabled: RSS Feed ir iespējots
+
+-
+
+sys_status_feed_disabled: RSS Feed ir atspējots
+
+-
+
+sys_status_headless_enabled: Headless Mode ir iespējots
+
+-
+
+sys_status_headless_disabled: Headless Mode ir atspējots
 
 -
 

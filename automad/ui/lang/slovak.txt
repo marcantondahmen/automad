@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Na rozdiel od jednoduchého vymazania vyrovnávacej pamät
 
 -
 
-sys_config: Upravte konfiguračný súbor
+sys_config: Konfiguračný súbor
 
 -
 
-sys_config_warning: Upozorňujeme, že konfiguračný súbor by mali upravovať iba skúsení používatelia, aby nedošlo k poškodeniu vašej inštalácie. V prípade, že sa niečo pokazí, vymažte konfiguračný súbor ručne zo servera, aby ste obnovili pôvodné nastavenia.
+sys_config_info: Rozšírené nastavenia môžu byť spravované priamo editovaním konfiguračného súboru. Upozorňujeme, že iba skúsení používatelia by mali upraviť konfiguračný súbor, aby sa zabránilo poškodeniu inštalácie. V prípade, že sa niečo pokazí, odstráňte konfiguračný súbor manuálne z vášho servera, aby ste obnovili predvolené nastavenia.
+
+-
+
+sys_config_edit: Upraviť konfiguračný súbor
 
 -
 
 sys_debug_info: Keď je povolené ladenie, všetky procesy Automadu sa prihlásia do konzoly vášho prehliadača. Ladenie je potrebné iba na vývoj alebo riešenie problémov a vo všetkých ostatných prípadoch by malo byť deaktivované.
+
+-
+
+sys_feed_info: Keď je povolená možnosť RSS FEED, automaticky vytvorí dokument RSS kanál a uverejní ho pod adresu URL, ktorá je zobrazená nižšie, aby sa umožnilo používateľom nasledovať vaše najnovšie príspevky.
+
+-
+
+sys_feed_url: RSS kanál bude k dispozícii podľa nasledujúceho odkazu. Môžete ho pridať na navigáciu pridaním novej stránky a pomocou hodnoty URL nižšie ako hodnoty pre presmerovanie.
+
+-
+
+sys_feed_fields: Môžete triediť, pridať alebo odstrániť polia, ktoré by mali byť zahrnuté do informačného kanála RSS pretiahnutím na jednu z týchto dvoch oblastí nižšie.
+
+-
+
+sys_feed_fields_info_used: Presunúť prvky do tejto oblasti, aby ste ich pridali do informačného kanála RSS
+
+-
+
+sys_feed_fields_info_unused: Presunúť prvky do tejto oblasti, aby ste ich odstránili z informačného kanála RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Ukladanie do vyrovnávacej pamäte je zakázané
 -
 
 sys_status_debug_enabled: Ladenie je povolené
+
+-
+
+sys_status_debug_disabled: Debugovanie je zakázané
+
+-
+
+sys_status_feed_enabled: RSS Feed je povolený
+
+-
+
+sys_status_feed_disabled: RSS Feed je zakázaný
+
+-
+
+sys_status_headless_enabled: 302478229 je povolený
+
+-
+
+sys_status_headless_disabled: Headless Mode je zakázané
 
 -
 

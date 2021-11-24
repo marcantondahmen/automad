@@ -81,9 +81,6 @@ class EditConfig {
 							</button>
 						</div>
 					</div>
-					<p class="uk-margin-top uk-margin-bottom">
-						$Text->sys_config_warning
-					</p>
 					<form 
 					class="uk-form" 
 					data-am-controller="Config::save"

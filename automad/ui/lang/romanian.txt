@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Spre deosebire de simple eliminare a cache-ului, purtarea 
 
 -
 
-sys_config: Editați fișierul de configurare
+sys_config: Fișier de configurare
 
 -
 
-sys_config_warning: Rețineți că numai utilizatorii experimentați ar trebui să editeze fișierul de configurare pentru a evita deteriorarea instalării dvs. În cazul în care ceva nu merge bine, vă rugăm să ștergeți manual fișierul de configurare de pe serverul dvs. pentru a restabili setările implicite.
+sys_config_info: Setările avansate pot fi gestionate prin editarea directă a fișierului de configurare. Vă rugăm să rețineți că numai utilizatorii experimentați ar trebui să editeze fișierul de configurare pentru a evita deteriorarea instalării. În cazul în care ceva nu merge bine, ștergeți manual fișierul de configurare de pe serverul dvs. pentru a restabili setările implicite.
+
+-
+
+sys_config_edit: Editați fișierul de configurare
 
 -
 
 sys_debug_info: Când depanarea este activată, toate procesele Automad vor fi înregistrate în consola browserului. Depanarea este necesară doar pentru dezvoltare sau depanare și ar trebui să fie dezactivată în toate celelalte cazuri.
+
+-
+
+sys_feed_info: Când opțiunea RSS Feed este activată, Automad va genera automat un document de alimentare RSS și îl publică sub adresa URL afișată mai jos pentru a permite utilizatorilor să urmeze cele mai noi postări.
+
+-
+
+sys_feed_url: Feedul RSS va fi disponibil sub următorul link. Puteți să-l adăugați la navigarea prin adăugarea unei pagini noi și utilizând adresa URL de mai jos ca valoare pentru câmpul Redirect.
+
+-
+
+sys_feed_fields: Puteți sorta, adăuga sau elimina câmpurile care ar trebui să fie incluse în feedul RSS, tragându-le pe una din cele două zone de mai jos.
+
+-
+
+sys_feed_fields_info_used: Mutați elementele în această zonă pentru a le adăuga la feedul RSS
+
+-
+
+sys_feed_fields_info_unused: Mutați elementele în această zonă pentru a le elimina din feedul RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Memorarea în cache este dezactivată
 -
 
 sys_status_debug_enabled: Depanarea este activată
+
+-
+
+sys_status_debug_disabled: Depanarea este dezactivată
+
+-
+
+sys_status_feed_enabled: RSS Feed este activată
+
+-
+
+sys_status_feed_disabled: RSS Feed este dezactivată
+
+-
+
+sys_status_headless_enabled: Headless Mode este activat
+
+-
+
+sys_status_headless_disabled: Headless Mode este dezactivat
 
 -
 

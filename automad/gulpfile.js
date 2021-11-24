@@ -36,44 +36,46 @@ const headerTemplate = `/*
  */
 `;
 
-var gulp = require('gulp'),
-	autoprefixer = require('gulp-autoprefixer'),
-	cleanCSS = require('gulp-clean-css'),
-	concat = require('gulp-concat'),
-	header = require('gulp-header'),
-	merge2 = require('merge2'),
-	less = require('gulp-less'),
-	rename = require('gulp-rename'),
-	replace = require('gulp-replace'),
-	sort = require('gulp-sort'),
-	uglify = require('gulp-uglify-es').default,
-	gutil = require('gulp-util'),
-	pkg = require('./package.json'),
-	dist = 'dist',
-	cleanCSSOptions = {
-		format: { wrapAt: 500 },
-		rebase: false,
+const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
+const beep = require('beepbeep');
+const browserSync = require('browser-sync').create();
+const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const header = require('gulp-header');
+const merge2 = require('merge2');
+const less = require('gulp-less');
+const log = require('fancy-log');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const sort = require('gulp-sort');
+const uglify = require('gulp-uglify-es').default;
+const pkg = require('./package.json');
+const dist = 'dist';
+const cleanCSSOptions = {
+	format: { wrapAt: 500 },
+	rebase: false,
+};
+
+// UIkit prefix.
+// The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
+// would also match prefixed classes like am-uk-icon-*.
+const prefix = 'am-u-';
+const customize = {
+	cls: {
+		search: /uk-([a-z\d\-]+)/g,
+		replace: prefix + '$1',
 	},
-	// UIkit prefix.
-	// The prefix can not contain 'uk-' since selectors like [class*="uk-icon-"]
-	// would also match prefixed classes like am-uk-icon-*.
-	prefix = 'am-u-',
-	customize = {
-		cls: {
-			search: /uk-([a-z\d\-]+)/g,
-			replace: prefix + '$1',
-		},
-		da: {
-			search: /data-uk-/g,
-			replace: 'data-' + prefix,
-		},
-	};
+	da: {
+		search: /data-uk-/g,
+		replace: 'data-' + prefix,
+	},
+};
 
 // Error handling to prevent watch task to fail silently without restarting.
-var onError = function (err) {
-	gutil.log(gutil.colors.red('ERROR', err.plugin), err.message);
-	gutil.beep();
-	new gutil.PluginError(err.plugin, err, { showStack: true });
+const onError = function (err) {
+	log.error(err);
+	beep();
 	this.emit('end');
 };
 
@@ -211,7 +213,6 @@ gulp.task('libs-js', function () {
 					'../lib/vendor/uikit/uikit/src/js/core/modal.js',
 					'../lib/vendor/uikit/uikit/src/js/core/nav.js',
 					'../lib/vendor/uikit/uikit/src/js/core/offcanvas.js',
-					'../lib/vendor/uikit/uikit/src/js/core/switcher.js',
 					'../lib/vendor/uikit/uikit/src/js/core/tab.js',
 					'../lib/vendor/uikit/uikit/src/js/core/cover.js',
 					// Selected components.
@@ -299,16 +300,24 @@ gulp.task('libs-css', function () {
 		.pipe(gulp.dest(dist));
 });
 
+// Browser sync.
+
+gulp.task('reload', function (done) {
+	browserSync.reload();
+	done();
+});
+
 // Watch task.
 gulp.task('watch', function () {
-	gulp.watch('blocks/js/*.js', gulp.series('blocks-js'));
-	gulp.watch('blocks/less/*.less', gulp.series('blocks-less'));
-	gulp.watch('ui/js/*.js', gulp.series('automad-js'));
-	gulp.watch('ui/js/*/*.js', gulp.series('automad-js'));
-	gulp.watch('ui/js/*/*/*.js', gulp.series('automad-js'));
-	gulp.watch('ui/less/*.less', gulp.series('automad-less'));
-	gulp.watch('ui/less/editorjs/*.less', gulp.series('automad-less'));
-	gulp.watch('ui/less/editorjs/*/*.less', gulp.series('automad-less'));
+	browserSync.init({
+		proxy: 'localhost:8080/automad-development',
+	});
+
+	gulp.watch('blocks/js/*.js', gulp.series('blocks-js', 'reload'));
+	gulp.watch('blocks/less/*.less', gulp.series('blocks-less', 'reload'));
+	gulp.watch('ui/js/**/*.js', gulp.series('automad-js', 'reload'));
+	gulp.watch('ui/less/**/*.less', gulp.series('automad-less', 'reload'));
+	gulp.watch('src/**/*.php', gulp.series('reload'));
 });
 
 // The default task.

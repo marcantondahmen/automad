@@ -169,7 +169,7 @@ class Cache {
 	 * This enforced rebuilt is needed to avoid issues when deploying a site via tools like rsync and therefore possibly having inconsistent timestamps.
 	 * The lifetime therefore makes sure, that - after a certain period - the object gets created correctly in all cases.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function automadObjectCacheIsApproved() {
 		if ($this->automadObjectCachingIsEnabled) {
@@ -298,7 +298,7 @@ class Cache {
 	 * This enforced rebuilt is needed to avoid issues when deploying a site via tools like rsync and therefore possibly having inconsistent timestamps.
 	 * The lifetime therefore makes sure, that - after a certain period - the page gets rendered correctly in all cases.
 	 *
-	 * @return boolean True, if the cached version is valid.
+	 * @return bool True, if the cached version is valid.
 	 */
 	public function pageCacheIsApproved() {
 		if ($this->pageCachingIsEnabled) {
@@ -357,6 +357,18 @@ class Cache {
 		Debug::log($this->pageCacheFile, 'Reading cached page from');
 
 		return file_get_contents($this->pageCacheFile);
+	}
+
+	/**
+	 * Read the site's modification time from file.
+	 * This methods doesn't require any cache instance and should be static for performance reasons.
+	 *
+	 * @return int The site's modification time.
+	 */
+	public static function readSiteMTime() {
+		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
+
+		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
 	}
 
 	/**
@@ -461,18 +473,6 @@ class Cache {
 		Debug::log($pageCacheFile);
 
 		return $pageCacheFile;
-	}
-
-	/**
-	 * Read the site's modification time from file.
-	 * This methods doesn't require any cache instance and should be static for performance reasons.
-	 *
-	 * @return int The site's modification time.
-	 */
-	private static function readSiteMTime() {
-		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
-
-		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
 	}
 
 	/**

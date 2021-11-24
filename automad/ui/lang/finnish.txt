@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Toisin kuin yksinkertaisesti välimuistin puhdistaminen, v
 
 -
 
-sys_config: Muokkaa määritystiedostoa
+sys_config: Konfigurointitiedosto
 
 -
 
-sys_config_warning: Huomaa, että vain kokeneiden käyttäjien tulisi muokata määritystiedostoa asennuksen vahingoittumisen välttämiseksi. Jos jokin menee pieleen, poista määritystiedosto palvelimeltasi manuaalisesti palauttaaksesi oletusasetukset.
+sys_config_info: Lisäasetuksia voidaan hallita muokkaamalla asetustiedostoa suoraan. Huomioithan, että vain kokeneiden käyttäjien tulisi muokata kokoonpanotiedostoa, jotta vältetään asennuksen vaurioituminen. Jos jotain menee pieleen, poista konfigurointitiedosto manuaalisesti palvelimestasi oletusasetusten palauttamiseksi.
+
+-
+
+sys_config_edit: Muokkaa kokoonpanotiedostoa
 
 -
 
 sys_debug_info: Kun virheenkorjaus on käytössä, kaikki Automadin prosessit kirjataan selaimesi konsoliin. Virheenkorjausta tarvitaan vain kehitykseen tai vianmääritykseen, ja se tulisi poistaa käytöstä kaikissa muissa tapauksissa.
+
+-
+
+sys_feed_info: Kun RSS-syötteen vaihtoehto on käytössä, Autod tuottaa automaattisesti RSS-syötteen asiakirjan ja julkaisee sen alla olevassa URL-osoitteessa, jotta käyttäjät voivat seurata uusimmat viestit.
+
+-
+
+sys_feed_url: RSS-syöte on saatavilla seuraavassa linkissä. Voit lisätä sen navigoosi lisäämällä uusi sivu ja käyttämällä alla olevaa URL-osoitetta uudelleenohjauskentälle.
+
+-
+
+sys_feed_fields: Voit lajitella, lisätä tai poistaa kentät, jotka on sisällytettävä RSS-syötteeseen vetämällä ne yhteen seuraavista kahdesta alueesta.
+
+-
+
+sys_feed_fields_info_used: Siirrä elementtejä tähän alueeseen, jotta ne voidaan lisätä RSS-syötteeseen
+
+-
+
+sys_feed_fields_info_unused: Siirrä elementtejä tähän alueeseen poistaaksesi ne RSS-syötteestä
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Välimuisti on poistettu käytöstä
 -
 
 sys_status_debug_enabled: Virheenkorjaus on käytössä
+
+-
+
+sys_status_debug_disabled: Debugging on poistettu käytöstä
+
+-
+
+sys_status_feed_enabled: RSS Feed on käytössä
+
+-
+
+sys_status_feed_disabled: RSS Feed on poistettu käytöstä
+
+-
+
+sys_status_headless_enabled: Headless Mode on käytössä
+
+-
+
+sys_status_headless_disabled: Headless Mode on poistettu käytöstä
 
 -
 

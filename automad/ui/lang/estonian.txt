@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Erinevalt vahemälu lihtsalt kustutamisest liigub vahemäl
 
 -
 
-sys_config: Redigeeri konfiguratsioonifaili
+sys_config: Konfiguratsioonifail
 
 -
 
-sys_config_warning: Pange tähele, et teie installi kahjustamise vältimiseks peaksid konfiguratsioonifaili muutma ainult kogenud kasutajad. Kui midagi läheb valesti, kustutage vaikeseadete taastamiseks konfiguratsioonifail oma serverist käsitsi.
+sys_config_info: Täiustatud seadeid saab juhtida konfiguratsioonifaili otseselt redigeerides. Pane tähele, et ainult kogenud kasutajad peaksid muutma konfiguratsioonifaili, et vältida teie paigaldamise kahjustusi. Kui midagi läheb valesti, kustutage konfiguratsioonifail käsitsi serverist, et taastada vaikeseaded.
+
+-
+
+sys_config_edit: Muuda konfiguratsioonifaili
 
 -
 
 sys_debug_info: Kui silumine on lubatud, logitakse kõik Automadi protsessid teie brauseri konsooli. Silumist on vaja ainult arendamiseks või tõrkeotsinguks ning see tuleks kõigil muudel juhtudel keelata.
+
+-
+
+sys_feed_info: Kui RSS-sööda valik on lubatud, genereerib AUTOMAD automaatselt RSS-kanalite dokumendi ja avaldab selle URL-i all, mis kuvatakse allpool, et võimaldada kasutajatel teie uusimaid postitusi jälgida.
+
+-
+
+sys_feed_url: RSS-kanal on saadaval järgmise lingi all. Saate selle oma navigeerimiseks lisada uue lehe lisamisega ja URL-i abil allapoole suunatud valdkonna väärtusena.
+
+-
+
+sys_feed_fields: Sorteerige, lisage või eemaldage väljad, mis peaksid kuuluma RSS-voogesse, lohistades neid ühele allpool toodud kahest piirkonnast.
+
+-
+
+sys_feed_fields_info_used: Liigutage elemente selles piirkonnas, et lisada need RSS-söödale
+
+-
+
+sys_feed_fields_info_unused: Liigutage elemendid sellesse piirkonda sellesse, et need RSS-söödast eemaldada
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Vahemälu salvestamine on keelatud
 -
 
 sys_status_debug_enabled: Silumine on lubatud
+
+-
+
+sys_status_debug_disabled: Silumine on keelatud
+
+-
+
+sys_status_feed_enabled: RSS Feed on lubatud
+
+-
+
+sys_status_feed_disabled: RSS Feed on keelatud
+
+-
+
+sys_status_headless_enabled: Headless Mode on lubatud
+
+-
+
+sys_status_headless_disabled: Headless Mode on keelatud
 
 -
 

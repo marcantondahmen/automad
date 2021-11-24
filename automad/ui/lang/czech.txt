@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Na rozdíl od jednoduše vymazání mezipaměti, vypracov�
 
 -
 
-sys_config: Upravit konfigurační soubor
+sys_config: Konfigurační soubor
 
 -
 
-sys_config_warning: Upozorňujeme, že konfigurační soubor by měli upravovat pouze zkušení uživatelé, aby nedošlo k poškození instalace. V případě, že se něco pokazí, odstraňte prosím konfigurační soubor ručně ze serveru, abyste obnovili výchozí nastavení.
+sys_config_info: Pokročilá nastavení lze spravovat přímo úpravou konfiguračního souboru. Upozorňujeme, že pouze zkušení uživatelé by měli upravit konfigurační soubor, aby nedošlo k poškození instalace. V případě, že se něco pokazí, odstraňte konfigurační soubor ručně z serveru, abyste obnovili výchozí nastavení.
+
+-
+
+sys_config_edit: Upravit konfigurační soubor
 
 -
 
 sys_debug_info: Když je povoleno ladění, budou všechny procesy Automadu protokolovány do konzoly vašeho prohlížeče. Ladění je potřeba pouze pro vývoj nebo řešení problémů a ve všech ostatních případech by mělo být deaktivováno.
+
+-
+
+sys_feed_info: Je-li povolena možnost RSS zdroj, automaticky automaticky generuje Dokument pro podávání zdrojů RSS a publikovat jej pod adresou URL, která je zobrazena níže, aby uživatelé umožňovali následovat vaše nejnovější příspěvky.
+
+-
+
+sys_feed_url: RSS zdroj bude k dispozici pod následujícím odkazem. Můžete jej přidat do navigace přidáním nové stránky a pomocí níže uvedené adresy URL jako hodnota pro přesměrování pole.
+
+-
+
+sys_feed_fields: Můžete třídit, přidat nebo odebrat pole, která by měla být zahrnuta do kanálu RSS tažením na jednu ze dvou oblastí níže.
+
+-
+
+sys_feed_fields_info_used: Přesuňte prvky do této oblasti, abyste je mohli přidat do kanálu RSS
+
+-
+
+sys_feed_fields_info_unused: Přesuňte prvky do této oblasti, abyste je odstranili z kanálu RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Ukládání do mezipaměti je deaktivováno
 -
 
 sys_status_debug_enabled: Ladění je povoleno
+
+-
+
+sys_status_debug_disabled: Ladění je zakázáno
+
+-
+
+sys_status_feed_enabled: RSS Feed je povoleno
+
+-
+
+sys_status_feed_disabled: RSS Feed je zakázáno
+
+-
+
+sys_status_headless_enabled: Headless Mode je povoleno
+
+-
+
+sys_status_headless_disabled: Headless Mode je zakázáno
 
 -
 

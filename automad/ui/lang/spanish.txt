@@ -1234,15 +1234,39 @@ sys_cache_purge_info: En contraste, simplemente borrar el caché, la purga del d
 
 -
 
-sys_config: Editar archivo de configuración
+sys_config: Archivo de configuración
 
 -
 
-sys_config_warning: Tenga en cuenta que solo los usuarios experimentados deben editar el archivo de configuración para evitar daños en su instalación. En caso de que algo salga mal, elimine el archivo de configuración manualmente de su servidor para restaurar la configuración predeterminada.
+sys_config_info: La configuración avanzada se puede administrar editando directamente el archivo de configuración. Tenga en cuenta que solo los usuarios experimentados deben editar el archivo de configuración para evitar daños en su instalación. En caso de que algo salga mal, elimine el archivo de configuración manualmente de su servidor para restaurar la configuración predeterminada.
+
+-
+
+sys_config_edit: Editar archivo de configuración
 
 -
 
 sys_debug_info: Cuando la depuración está habilitada, todos los procesos de Automad se registrarán en la consola de su navegador. La depuración solo es necesaria para el desarrollo o la resolución de problemas y debe desactivarse en todos los demás casos.
+
+-
+
+sys_feed_info: Cuando la opción Feed RSS está habilitada, Automad generará automáticamente un documento de alimentación RSS y lo publicará en la URL que se muestra a continuación para permitir a los usuarios seguir sus publicaciones más recientes.
+
+-
+
+sys_feed_url: La fuente RSS estará disponible bajo el siguiente enlace. Puede agregarlo a su navegación agregando una nueva página y use la URL a continuación como valor para el campo Redirect.
+
+-
+
+sys_feed_fields: Puede ordenar, agregar o quitar los campos que deben incluirse en la fuente RSS arrastrándolos a una de las dos áreas a continuación.
+
+-
+
+sys_feed_fields_info_used: Mueva elementos a esta área para agregarlos a la fuente RSS
+
+-
+
+sys_feed_fields_info_unused: Mueva elementos a esta área para eliminarlos de la fuente RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: El almacenamiento en caché está deshabilitado
 -
 
 sys_status_debug_enabled: La depuración está habilitada
+
+-
+
+sys_status_debug_disabled: La depuración está deshabilitada
+
+-
+
+sys_status_feed_enabled: RSS Feed está habilitado
+
+-
+
+sys_status_feed_disabled: RSS Feed está deshabilitado
+
+-
+
+sys_status_headless_enabled: Headless Mode está habilitado
+
+-
+
+sys_status_headless_disabled: Headless Mode está deshabilitado
 
 -
 

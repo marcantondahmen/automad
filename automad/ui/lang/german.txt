@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Im Gegensatz zum einfachen Löschen des Cache verschiebt d
 
 -
 
-sys_config: Konfigurationsdatei bearbeiten
+sys_config: Konfigurationsdatei
 
 -
 
-sys_config_warning: Beachten Sie, dass nur erfahrene Benutzer die Konfigurationsdatei bearbeiten sollten, um Schäden an Ihrer Installation zu vermeiden. Falls etwas schief geht, löschen Sie die Konfigurationsdatei bitte manuell von Ihrem Server, um die Standardeinstellungen wiederherzustellen.
+sys_config_info: Erweiterte Einstellungen können durch direkte Bearbeitung der Konfigurationsdatei verwaltet werden. Bitte beachten Sie, dass nur erfahrene Benutzer die Konfigurationsdatei bearbeiten sollten, um Schäden an Ihrer Installation zu vermeiden. Falls etwas schief geht, löschen Sie bitte die Konfigurationsdatei manuell von Ihrem Server, um die Standardeinstellungen wiederherzustellen.
+
+-
+
+sys_config_edit: Konfigurationsdatei bearbeiten
 
 -
 
 sys_debug_info: Wenn das Debuggen aktiviert ist, werden alle Prozesse von Automad in der Konsole Ihres Browsers protokolliert. Das Debuggen ist nur für die Entwicklung oder Fehlerbehebung erforderlich und sollte in allen anderen Fällen deaktiviert werden.
+
+-
+
+sys_feed_info: Wenn die RSS-Feed-Option aktiviert ist, generiert Automad automatisch ein RSS-Feed-Dokument und veröffentlicht sie unter der untenstehenden URL, damit Benutzer Ihren neuesten Beiträgen folgen können.
+
+-
+
+sys_feed_url: Der RSS-Feed ist unter dem folgenden Link verfügbar. Sie können es Ihrer Navigation hinzufügen, indem Sie eine neue Seite hinzufügen und die URL unten als Wert für das Feld Redirect verwenden.
+
+-
+
+sys_feed_fields: Sie können die Felder sortieren, hinzufügen oder entfernen, die in den RSS-Feed einbezogen werden sollen, indem Sie sie auf einen der beiden Bereiche unten ziehen.
+
+-
+
+sys_feed_fields_info_used: Verschieben Sie Elemente in diesen Bereich, um sie dem RSS-Feed hinzuzufügen
+
+-
+
+sys_feed_fields_info_unused: Verschieben Sie Elemente in diesen Bereich, um sie aus dem RSS-Feed zu entfernen
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Das Caching ist deaktiviert
 -
 
 sys_status_debug_enabled: Das Debuggen ist aktiviert
+
+-
+
+sys_status_debug_disabled: Debugging ist deaktiviert
+
+-
+
+sys_status_feed_enabled: RSS Feed ist aktiviert
+
+-
+
+sys_status_feed_disabled: RSS Feed ist deaktiviert
+
+-
+
+sys_status_headless_enabled: Headless Mode ist aktiviert
+
+-
+
+sys_status_headless_disabled: Headless Mode ist deaktiviert
 
 -
 

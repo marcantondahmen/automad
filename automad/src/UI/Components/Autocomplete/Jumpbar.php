@@ -41,6 +41,7 @@ use Automad\Core\Selection;
 use Automad\Core\Str;
 use Automad\UI\Response;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -164,49 +165,64 @@ class Jumpbar {
 	 */
 	private static function settings() {
 		$sysUrl = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=System#';
+		$hashes = URLHashes::get();
 
 		return array(
 			array(
-				'url' => $sysUrl . Str::slug(Text::get('sys_cache')),
+				'url' => $sysUrl . $hashes->system->cache,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_cache'),
 				'title' => Text::get('sys_cache'),
 				'subtitle' => '',
 				'icon' => 'rocket'
 			),
 			array(
-				'url' => $sysUrl . Str::slug(Text::get('sys_user')),
+				'url' => $sysUrl . $hashes->system->users,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_user'),
 				'title' => Text::get('sys_user'),
 				'subtitle' => '',
 				'icon' => 'user'
 			),
 			array(
-				'url' => $sysUrl . Str::slug(Text::get('sys_update')),
+				'url' => $sysUrl . $hashes->system->update,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_update'),
 				'title' => Text::get('sys_update'),
 				'subtitle' => '',
 				'icon' => 'refresh'
 			),
 			array(
-				'url' => $sysUrl . Str::slug(Text::get('sys_language')),
+				'url' => $sysUrl . $hashes->system->feed,
+				'value' => Text::get('sys_title') . ' ' . Text::get('sys_feed'),
+				'title' => Text::get('sys_feed'),
+				'subtitle' => '',
+				'icon' => 'rss'
+			),
+			array(
+				'url' => $sysUrl . $hashes->system->language,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_language'),
 				'title' => Text::get('sys_language'),
 				'subtitle' => '',
 				'icon' => 'flag'
 			),
 			array(
-				'url' => $sysUrl . Str::slug(Text::get('sys_headless')),
+				'url' => $sysUrl . $hashes->system->headless,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_headless'),
 				'title' => Text::get('sys_headless'),
 				'subtitle' => '',
 				'icon' => 'headless'
 			),
 			array(
-				'url' => $sysUrl . Str::slug(Text::get('sys_debug')),
+				'url' => $sysUrl . $hashes->system->debug,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_debug'),
 				'title' => Text::get('sys_debug'),
 				'subtitle' => '',
 				'icon' => 'bug'
+			),
+			array(
+				'url' => $sysUrl . $hashes->system->config,
+				'value' => Text::get('sys_title') . ' ' . Text::get('sys_config'),
+				'title' => Text::get('sys_config'),
+				'subtitle' => '',
+				'icon' => 'file-text-o'
 			)
 		);
 	}

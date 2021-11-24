@@ -27,42 +27,48 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Components\Header;
+namespace Automad\UI\Components\System;
 
-use Automad\UI\Utils\FileSystem;
+use Automad\UI\Components\Modal\EditConfig;
+use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The block snippet arrays as JS variable.
+ * The config file component.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class BlockSnippetArrays {
+class ConfigFile {
 	/**
-	 * Return a script tag to define the block snippet arrays for the block editor.
+	 * Renders the config file component.
 	 *
-	 * @return string The script tag
+	 * @return string The rendered HTML
 	 */
 	public static function render() {
-		return 	'<script>const AutomadBlockTemplates = ' .
-				json_encode(
-					array(
-						'filelist' => FileSystem::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
-						'pagelist' => FileSystem::getPackagesDirectoryItems('/\/blocks\/pagelist\/[^\/]+\.php$/'),
-						'snippets' => FileSystem::getPackagesDirectoryItems('/\/snippets\/[^\/]+\.php$/')
-					),
-					JSON_UNESCAPED_SLASHES
-				) .
-				'</script>';
+		$Text = Text::getObject();
+		$modal = EditConfig::render('am-edit-config-modal');
+
+		return <<< HTML
+			<p>$Text->sys_config_info</p>
+			<a 
+			href="#am-edit-config-modal" 
+			class="uk-button uk-button-success uk-button-large"
+			data-uk-modal
+			>
+				<i class="uk-icon-pencil"></i>&nbsp;
+				$Text->sys_config_edit
+			</a>
+			$modal
+		HTML;
 	}
 }

@@ -1234,15 +1234,39 @@ sys_cache_purge_info: V nasprotju s tem, da preprosto izbrišete predpomnilnik, 
 
 -
 
-sys_config: Uredi konfiguracijsko datoteko
+sys_config: Konfiguracijska datoteka
 
 -
 
-sys_config_warning: Upoštevajte, da bi morali samo izkušeni uporabniki urediti konfiguracijsko datoteko, da ne bi poškodovali vaše namestitve. Če gre kaj narobe, iz strežnika ročno izbrišite konfiguracijsko datoteko, da obnovite privzete nastavitve.
+sys_config_info: Napredne nastavitve lahko upravljate z neposredno urejanjem konfiguracijske datoteke. Upoštevajte, da morajo samo izkušeni uporabniki urediti konfiguracijsko datoteko, da se izognete poškodbam naprave. V primeru, da je nekaj narobe, izbrišite konfiguracijsko datoteko ročno iz strežnika, da se obnovite privzete nastavitve.
+
+-
+
+sys_config_edit: Uredi konfiguracijsko datoteko
 
 -
 
 sys_debug_info: Ko je odpravljanje napak omogočeno, bodo vsi procesi Automada zabeleženi v konzolo brskalnika. Odpravljanje napak je potrebno samo za razvoj ali odpravljanje težav in bi ga bilo treba onemogočiti v vseh drugih primerih.
+
+-
+
+sys_feed_info: Ko je možnost RSS Feed omogočena, bo Automad samodejno ustvaril RSS Feed dokument in ga objavi pod URL, ki je prikazan spodaj, da bi uporabnikom omogočil sledenje vašim najnovejšim delom.
+
+-
+
+sys_feed_url: Vir RSS bo na voljo pod naslednjo povezavo. Dodate ga na navigacijo, tako da dodate novo stran in s pomočjo URL-ja spodaj kot vrednost za preusmeritev polja.
+
+-
+
+sys_feed_fields: Lahko razvrstite, dodajate ali odstranite polja, ki jih je treba vključiti v vir RSS, tako da jih povlečete na eno od obeh področij spodaj.
+
+-
+
+sys_feed_fields_info_used: Premaknite elemente na to območje, da jih dodamo na vir RSS
+
+-
+
+sys_feed_fields_info_unused: Premaknite elemente na to območje, da jih odstranite iz vira RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Predpomnjenje je onemogočeno
 -
 
 sys_status_debug_enabled: Odpravljanje napak je omogočeno
+
+-
+
+sys_status_debug_disabled: Odpravljanje napak je onemogočeno
+
+-
+
+sys_status_feed_enabled: RSS Feed je omogočen
+
+-
+
+sys_status_feed_disabled: RSS Feed je onemogočen
+
+-
+
+sys_status_headless_enabled: Headless Mode je omogočen
+
+-
+
+sys_status_headless_disabled: Headless Mode je onemogočen
 
 -
 

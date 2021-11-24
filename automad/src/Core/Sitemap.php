@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\System\Server;
 use Automad\UI\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -74,13 +75,7 @@ class Sitemap {
 	 */
 	private function generate(array $collection, string $sitemap) {
 		if (!$base = AM_BASE_SITEMAP) {
-			$protocol = 'http';
-
-			if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
-				$protocol = 'https';
-			}
-
-			$base = $protocol . '://' . $_SERVER['SERVER_NAME'] . AM_BASE_INDEX;
+			$base = Server::url() . AM_BASE_INDEX;
 		}
 
 		$xml =  '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .

@@ -1234,15 +1234,39 @@ sys_cache_purge_info: Em contraste com a simples limpeza do cache, a purga o dir
 
 -
 
-sys_config: Editar Arquivo de Configuração
+sys_config: Arquivo de configuração
 
 -
 
-sys_config_warning: Observe que apenas usuários experientes devem editar o arquivo de configuração para evitar danos à instalação. Caso algo dê errado, exclua o arquivo de configuração manualmente de seu servidor para restaurar as configurações padrão.
+sys_config_info: Configurações avançadas podem ser gerenciadas editando diretamente o arquivo de configuração. Por favor, note que apenas os usuários experientes devem editar o arquivo de configuração para evitar danos à sua instalação. No caso de algo der errado, exclua o arquivo de configuração manualmente do seu servidor para restaurar as configurações padrão.
+
+-
+
+sys_config_edit: Editar arquivo de configuração.
 
 -
 
 sys_debug_info: Quando a depuração está habilitada, todos os processos do Automad serão registrados no console do seu navegador. A depuração é necessária apenas para desenvolvimento ou solução de problemas e deve ser desativada em todos os outros casos.
+
+-
+
+sys_feed_info: Quando a opção de feed RSS estiver ativada, o Automad gerará automaticamente um documento de feed RSS e publicá-lo sob o URL exibido abaixo para permitir que os usuários seguem seus posts mais novos.
+
+-
+
+sys_feed_url: O feed RSS estará disponível no seguinte link. Você pode adicioná-lo à sua navegação adicionando uma nova página e usando a URL abaixo como valor para o campo de redirecionamento.
+
+-
+
+sys_feed_fields: Você pode classificar, adicionar ou remover os campos que devem ser incluídos no feed RSS arrastando-os para uma das duas áreas abaixo.
+
+-
+
+sys_feed_fields_info_used: Mover elementos para esta área para adicioná-los ao feed RSS
+
+-
+
+sys_feed_fields_info_unused: Mover elementos para esta área para removê-los do feed RSS
 
 -
 
@@ -1271,6 +1295,26 @@ sys_status_cache_disabled: Cache está desativado
 -
 
 sys_status_debug_enabled: A depuração está habilitada
+
+-
+
+sys_status_debug_disabled: Depuração é desativada
+
+-
+
+sys_status_feed_enabled: RSS Feed está habilitado
+
+-
+
+sys_status_feed_disabled: RSS Feed está desativado
+
+-
+
+sys_status_headless_enabled: Headless Mode está habilitado
+
+-
+
+sys_status_headless_disabled: Headless Mode é desativado
 
 -
 

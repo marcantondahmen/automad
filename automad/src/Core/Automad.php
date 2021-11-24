@@ -310,18 +310,21 @@ class Automad {
 	/**
 	 * Return the page object for the requested page.
 	 *
-	 * @return Page|null A page object or null
+	 * @return Page A page object
 	 */
 	private function getRequestedPage() {
-		// Check whether the UI is requesting the currently edited page.
 		if (AM_REQUEST == AM_PAGE_DASHBOARD) {
 			return $this->getPage(Request::post('url'));
+		}
+
+		if (AM_FEED_ENABLED && AM_REQUEST == AM_FEED_URL) {
+			return $this->getPage('/');
+		}
+
+		if ($Page = $this->getPage(AM_REQUEST)) {
+			return $Page;
 		} else {
-			if ($Page = $this->getPage(AM_REQUEST)) {
-				return $Page;
-			} else {
-				return $this->pageNotFound();
-			}
+			return $this->pageNotFound();
 		}
 	}
 
@@ -337,6 +340,10 @@ class Automad {
 		// Add the UI URL if enabled.
 		if (AM_PAGE_DASHBOARD) {
 			$this->reservedUrls[] = AM_PAGE_DASHBOARD;
+		}
+
+		if (AM_FEED_ENABLED) {
+			$this->reservedUrls[] = AM_FEED_URL;
 		}
 
 		Debug::log($this->reservedUrls);
