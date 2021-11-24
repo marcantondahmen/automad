@@ -49,13 +49,14 @@ class Server {
 	public static function url() {
 		$protocol = 'http';
 		$port = '';
+		$serverPort = getenv('SERVER_PORT');
 
 		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 			$protocol = 'https';
 		}
 
-		if (!in_array($_SERVER['SERVER_PORT'], array(80, 443))) {
-			$port = ":$_SERVER[SERVER_PORT]";
+		if ($serverPort && !in_array($serverPort, array(80, 443))) {
+			$port = ":$serverPort";
 		}
 
 		return $protocol . '://' . $_SERVER['SERVER_NAME'] . $port;
