@@ -88,6 +88,9 @@ class Config {
 			Debug::log('Pretty URLs are disabled');
 		}
 
+		// Custom override for Server::url() method.
+		self::set('AM_SERVER', '');
+
 		// Define AM_BASE_INDEX as the prefix for all page URLs.
 		self::set('AM_BASE_INDEX', AM_BASE_URL . AM_INDEX);
 

@@ -47,6 +47,10 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Server {
 	public static function url() {
+		if (AM_SERVER) {
+			return AM_SERVER;
+		}
+
 		$protocol = 'http';
 		$port = '';
 		$serverPort = getenv('SERVER_PORT');
