@@ -54,7 +54,7 @@ class BlockSnippetArrays {
 	 * @return string The script tag
 	 */
 	public static function render() {
-		return 	'<script>const AutomadBlockTemplates = ' .
+		return 	'<script>var AutomadBlockTemplates = ' .
 				json_encode(
 					array(
 						'filelist' => FileSystem::getPackagesDirectoryItems('/\/blocks\/filelist\/[^\/]+\.php$/'),
