@@ -304,6 +304,16 @@ gulp.task('font-inter', function () {
 	).pipe(gulp.dest(`${dist}/fonts/inter`));
 });
 
+gulp.task('font-bootstrap-icons', function () {
+	return gulp
+		.src([
+			'node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2',
+			'node_modules/bootstrap-icons/LICENSE.md',
+			'node_modules/bootstrap-icons/README.md',
+		])
+		.pipe(gulp.dest(`${dist}/fonts/bootstrap-icons`));
+});
+
 // Concat all css files used by npm dependencies.
 gulp.task('libs-css', function () {
 	return gulp
