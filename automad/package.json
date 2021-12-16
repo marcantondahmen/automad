@@ -35,5 +35,6 @@
     "merge2": "^1.4.1",
     "sortablejs": "^1.14.0",
     "taggle": "^1.13.0"
+    "typeface-inter": "^3.18.1",
   }
 }

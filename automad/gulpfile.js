@@ -288,6 +288,22 @@ gulp.task('automad-less', function () {
 	);
 });
 
+
+gulp.task('font-inter', function () {
+	return merge2(
+		gulp
+			.src('node_modules/typeface-inter/Inter Web/Inter-roman.var.woff2')
+			.pipe(rename('inter-roman-var.woff2')),
+		gulp
+			.src('node_modules/typeface-inter/Inter Web/Inter-italic.var.woff2')
+			.pipe(rename('inter-italic-var.woff2')),
+		gulp.src([
+			'node_modules/typeface-inter/LICENSE.txt',
+			'node_modules/typeface-inter/README.md',
+		])
+	).pipe(gulp.dest(`${dist}/fonts/inter`));
+});
+
 // Concat all css files used by npm dependencies.
 gulp.task('libs-css', function () {
 	return gulp
