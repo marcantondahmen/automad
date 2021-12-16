@@ -1,0 +1,139 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@inter: 'fonts/inter/';
+
+@font-face {
+	font-family: 'Inter';
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: normal;
+	font-named-instance: 'Regular';
+	src: url('@{inter}inter-roman-var.woff2?v=3.18.1') format('woff2');
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: italic;
+	font-named-instance: 'Italic';
+	src: url('@{inter}inter-italic-var.woff2?v=3.18.1') format('woff2');
+}
+
+:root {
+	--am-base-font-family: 'Inter';
+	--am-base-font-weight: '430';
+	--am-base-line-height: 1.6;
+	--am-base-font-size: 15px;
+
+	@media (min-width: 400px) {
+		--am-base-font-size: 16px;
+	}
+
+	@media (min-width: 1950px) {
+		--am-base-font-size: 17px;
+	}
+
+	@media (min-width: 2250px) {
+		--am-base-font-size: 18px;
+	}
+
+	@media (min-width: 2500px) {
+		--am-base-font-size: 19px;
+	}
+
+	--am-clr-base: #121212;
+	--am-clr-muted: #cfcfcf;
+	--am-clr-primary: #121212;
+	--am-clr-success: #1070ff;
+	--am-clr-danger: #ff2f2f;
+
+	--am-bg-base: #ffffff;
+
+	--am-border-width: 1px;
+	--am-border-clr: #e2e2e2;
+	--am-hairline: var(--am-border-width) solid var(--am-border-clr);
+
+	--am-radius: 0.3rem;
+	--am-radius-large: 0.6rem;
+	--am-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1),
+		0 1rem 1rem -0.7rem rgba(0, 0, 0, 0.1);
+
+	--am-scrollbar-clr: var(--am-border-clr);
+
+	// Layout
+	--am-body-padding-horizontal: 1.25rem;
+	--am-space-top: 4rem;
+
+	@media (min-width: @l-breakpoint-medium) {
+		--am-space-top: 6rem;
+		--am-body-padding-horizontal: 1.75rem;
+	}
+
+	--am-space-small: 0.75rem;
+	--am-space-medium: 1.5rem;
+	--am-space-large: 3rem;
+
+	// Navbar
+	--am-navbar-height: 4rem;
+
+	// Modal
+	--am-modal-overlay-bg: rgba(0, 0, 0, 0.05);
+	--am-modal-overlay-padding: 1rem 1rem;
+
+	@media (min-width: @l-breakpoint-medium) {
+		--am-modal-overlay-padding: 4rem 1rem;
+	}
+
+	--am-modal-dialog-padding: 1rem;
+	--am-modal-dialog-width: 30rem;
+
+	// Dropdown
+	--am-dropdown-clr: var(--am-clr-base);
+	--am-dropdown-bg: var(--am-bg-base);
+	--am-dropdown-active-clr: var(--am-bg-base);
+	--am-dropdown-active-bg: var(--am-clr-success);
+
+	// Input
+	--am-input-bg: #fafafa;
+	--am-input-height: 2.85rem;
+	--am-input-padding: 0.29rem 0.86rem 0.43rem 0.86rem;
+	--am-input-large-font-size: 1.2rem;
+	--am-input-large-height: 3.15rem;
+	--am-input-large-padding: 0.43rem 0.86rem;
+
+	// Sidenav
+	--am-nav-item-active-bg: #e8e8e8;
+}

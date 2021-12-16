@@ -1,0 +1,97 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-l-sidebar {
+	padding: 0;
+	background-color: var(--am-bg-base);
+	border-right: var(--am-hairline);
+
+	@media (max-width: @l-breakpoint-medium) {
+		position: fixed;
+		z-index: 110;
+		top: 0;
+		height: 100%;
+		width: @l-sidebar-width;
+		transform: translate3d(-@l-sidebar-width, 0, 0);
+		transition: transform 0.2s ease-out;
+
+		.am-l-page--sidebar-open & {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+
+	@media (min-width: @l-breakpoint-medium) {
+		grid-column: 1 / span 1;
+		grid-row: 1 / span 3;
+	}
+
+	&__overlay {
+		display: none;
+
+		@media (max-width: @l-breakpoint-medium) {
+			display: block;
+			position: fixed;
+			z-index: 100;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 0;
+			background-color: transparent;
+			transition: width 0s linear 0.2s, background-color 0.2s;
+
+			.am-l-page--sidebar-open & {
+				width: 100%;
+				background-color: var(--am-modal-overlay-bg);
+				transition: width 0s, background-color 0.2s;
+			}
+		}
+	}
+
+	&__content {
+		position: sticky;
+		display: grid;
+		grid-template-rows: var(--am-navbar-height) var(--am-space-top) auto;
+		top: 0;
+		overflow: auto;
+	}
+
+	&__logo {
+		grid-row: 1 / span 2;
+		padding: 0 var(--am-body-padding-horizontal);
+	}
+
+	&__nav {
+		grid-row: 3 / span 1;
+	}
+}

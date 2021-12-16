@@ -1,0 +1,60 @@
+<html class="am-ui" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Automad — UI Demo</title>
+	<link href="../../dist/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link rel="stylesheet" href="../../dist/ui.bundle.css">
+	<script>window.dashboard = '../../../dashboard';</script>
+	<script src="../../dist/ui.bundle.js"></script>
+</head>
+<body>
+	<div class="am-l-page am-l-page--sidebar">
+		<am-toggle class="am-l-sidebar__overlay" target="body" cls="am-l-page--sidebar-open"></am-toggle>
+		<nav class="am-l-sidebar">
+			<am-sidebar class="am-l-sidebar__content">
+				<div class="am-l-sidebar__logo">
+					logo
+				</div>
+				<div class="am-l-sidebar__nav">
+					<nav class="am-c-nav">
+						<span class="am-c-nav__label">Global</span>
+						<span class="am-c-nav__item">
+							<a href="" class="am-c-nav__link">Home</a>
+						</span>
+						<span class="am-c-nav__item">
+							<a href="" class="am-c-nav__link">System</a>
+						</span>
+					</nav>
+					<nav class="am-c-nav">
+						<span class="am-c-nav__label">Pages</span>
+						<am-tree pages='[
+							{ "url": "/", "title": "Home", "path": "/", "parent": ""},
+							{ "url": "/page-1", "title": "Page 1", "path": "/01.page-1", "parent": "/"},
+							{ "url": "/page-2", "title": "Page 2", "path": "/02.page-2", "parent": "/"},
+							{ "url": "/page-3", "title": "Page 3", "path": "/03.page-3", "parent": "/"},
+							{ "url": "/page-1/sub-page", "title": "Sub Page", "path": "/01.page-1/sub-page", "parent": "/page-1"},
+							{ "url": "/page-1/sub-page/sub", "title": "Sub Sub Page", "path": "/01.page-1/sub-page/sub", "parent": "/page-1/sub-page"}
+						]'></am-tree>
+					</nav>
+				</div>
+			</am-sidebar>
+		</nav>
+		<nav class="am-l-navbar">
+			<div class="am-l-navbar__jump">
+				<am-jumpbar controller="UI::autocompleteJump"></am-jumpbar>
+			</div>
+			<div class="am-l-navbar__buttons">
+				<am-toggle target="body" cls="am-l-page--sidebar-open">XXX</am-toggle>
+			</div>
+		</nav>
+		<main class="am-l-main">
+			<div class="am-l-main__content">
+				<am-form-submit class="am-e-button" form="Page::data">Save</am-form-submit>
+				<am-form-page controller="Page::data" watch page="/blocks" init></am-form-page>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

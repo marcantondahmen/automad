@@ -1,0 +1,79 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2021 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-ui {
+	html&,
+	& body {
+		height: 100%;
+		min-height: 100%;
+		font-family: var(--am-base-font-family);
+		font-size: var(--am-base-font-size);
+		line-height: var(--am-base-line-height);
+		color: var(--am-clr-base);
+		background-color: var(--am-bg-base);
+		scrollbar-width: thin;
+		scrollbar-color: var(--am-scrollbar-clr) transparent;
+	}
+
+	& body {
+		overflow-x: hidden;
+	}
+
+	& * {
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--am-scrollbar-clr);
+			border-radius: 1rem;
+			border: 2px solid var(--am-bg-base);
+			min-height: 3rem;
+		}
+	}
+
+	a,
+	button {
+		transition: color 0.2s, background-color 0.2s, border 0.2s;
+	}
+
+	hr {
+		margin: var(--am-space-large) 0;
+		border: none;
+		border-bottom: 1px solid var(--am-border-clr);
+	}
+}
