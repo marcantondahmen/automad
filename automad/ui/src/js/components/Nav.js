@@ -37,14 +37,16 @@ import { create } from '../utils/create';
 import { BaseComponent } from './BaseComponent';
 
 /**
- * <am-tree pages='[
+ * <am-nav-tree pages='[
  *     { "url": "/", "title": "Home", "path": "/", "parent": ""},
  *     { "url": "/page-1", "title": "Page 1", "path": "/01.page-1", "parent": "/"},
  *     ...
- * ]'></am-tree>
+ * ]'></am-nav-tree>
+ *
+ * <am-nav-item view="System" icon="sliders" text="System ..."></am-nav-item>
  */
 
-class Tree extends BaseComponent {
+class NavTree extends BaseComponent {
 	static get observedAttributes() {
 		return ['pages'];
 	}
@@ -75,16 +77,16 @@ class Tree extends BaseComponent {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
 			'details',
-			[this.cls.sideNavItem],
+			[this.cls.navItem],
 			{ style: `--level: ${level}` },
 			parent
 		);
-		const link = create('summary', [this.cls.sideNavLink], {}, wrapper);
-		const children = create('div', [this.cls.sideNavChildren], {}, wrapper);
+		const link = create('summary', [this.cls.navLink], {}, wrapper);
+		const children = create('div', [this.cls.navChildren], {}, wrapper);
 		const searchParams = new URLSearchParams(window.location.search);
 
 		wrapper.classList.toggle(
-			this.cls.sideNavItemActive,
+			this.cls.navItemActive,
 			page.url == searchParams.get('url')
 		);
 
@@ -100,7 +102,7 @@ class Tree extends BaseComponent {
 	}
 
 	unfoldToActive() {
-		const activeItem = query(`.${this.cls.sideNavItemActive}`);
+		const activeItem = query(`.${this.cls.navItemActive}`);
 
 		if (activeItem) {
 			queryParents('details', activeItem).forEach((item) => {
@@ -110,18 +112,46 @@ class Tree extends BaseComponent {
 	}
 
 	toggleChildrenIcons() {
-		const childrenContainers = queryAll(
-			`.${this.cls.sideNavChildren}`,
-			this
-		);
+		const childrenContainers = queryAll(`.${this.cls.navChildren}`, this);
 
 		childrenContainers.forEach((item) => {
 			item.previousSibling.classList.toggle(
-				this.cls.sideNavLinkHasChildren,
+				this.cls.navLinkHasChildren,
 				item.childElementCount
 			);
 		});
 	}
 }
 
-customElements.define('am-tree', Tree);
+class NavItem extends BaseComponent {
+	static get observedAttributes() {
+		return ['view', 'icon', 'text'];
+	}
+
+	connectedCallback() {
+		const searchParams = new URLSearchParams(window.location.search);
+
+		this.classList.add(this.cls.navItem);
+		this.innerHTML = this.render();
+
+		this.classList.toggle(
+			this.cls.navItemActive,
+			this.elementAttributes.view == searchParams.get('view')
+		);
+	}
+
+	render() {
+		return `
+			<a 
+			href="?view=${this.elementAttributes.view}" 
+			class="${this.cls.navLink}"
+			>
+				<i class="bi bi-${this.elementAttributes.icon}"></i>
+				${this.elementAttributes.text}
+			</a>
+		`;
+	}
+}
+
+customElements.define('am-nav-tree', NavTree);
+customElements.define('am-nav-item', NavItem);

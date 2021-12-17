@@ -48,6 +48,7 @@
 		display: flex;
 		flex-direction: column;
 
+		am-nav-item&--active,
 		&--active > summary {
 			background-color: var(--am-nav-item-active-bg);
 		}
@@ -94,6 +95,10 @@
 				color: inherit;
 				text-decoration: none;
 			}
+		}
+
+		& .bi {
+			padding-right: 0.2em;
 		}
 	}
 }

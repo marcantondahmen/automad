@@ -47,7 +47,7 @@ class Sidebar extends BaseComponent {
 	}
 
 	setHeightAndScroll() {
-		const activeItem = query(`.${this.cls.sideNavItemActive}`, this);
+		const activeItem = query(`.${this.cls.navItemActive}`, this);
 
 		this.style.setProperty('height', `${window.innerHeight}px`);
 

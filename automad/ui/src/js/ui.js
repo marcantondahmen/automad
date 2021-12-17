@@ -37,6 +37,6 @@ import './components/Field';
 import './components/Form';
 import './components/Jumpbar';
 import './components/Modal';
+import './components/Nav';
 import './components/Sidebar';
 import './components/Toggle';
-import './components/Tree';
