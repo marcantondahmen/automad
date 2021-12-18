@@ -39,4 +39,5 @@ import './components/Jumpbar';
 import './components/Modal';
 import './components/Nav';
 import './components/Sidebar';
+import './components/Switcher';
 import './components/Toggle';
