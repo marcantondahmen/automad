@@ -56,8 +56,9 @@ import { BaseComponent } from './BaseComponent';
  *     Submit
  * </am-form-submit>
  *
- * All the above applies also to specialized forms such as the FormPage class.
- * <am-form-page controller="Page::data" page="/url" init watch></am-form-page>
+ * The FormPage class doesn't need the watch and init properties
+ * as this is anyways the intended behavior.
+ * <am-form-page controller="Page::data" page="/url"></am-form-page>
  * <am-form-submit form="Page::data">
  *     Submit
  * </am-form-submit>
@@ -117,8 +118,6 @@ class Form extends BaseComponent {
 
 	connectedCallback() {
 		if (this.hasAttribute('init')) {
-			create('div', [this.cls.spinner], {}, this);
-
 			this.submit();
 		}
 
@@ -186,18 +185,66 @@ class Form extends BaseComponent {
 }
 
 class FormPage extends Form {
+	connectedCallback() {
+		this.containers = this.createContainers();
+
+		this.submit();
+		this.watch();
+	}
+
+	createContainers() {
+		const containers = {};
+
+		['settings', 'text', 'color'].forEach((item) => {
+			const container = create(
+				'am-switcher-content',
+				[],
+				{ hash: item },
+				this
+			);
+
+			create('div', [this.cls.spinner], {}, container);
+			containers[item] = container;
+		});
+
+		return containers;
+	}
+
 	processResponse(response) {
 		if (typeof response.data === 'undefined') {
 			return false;
 		}
 
 		const page = response.data.page;
-		const keys = Object.values(response.data.keys);
+		const keys = response.data.keys;
 		const tooltips = response.data.tooltips;
 
-		this.innerHTML = '';
+		this.fieldGroup({
+			container: this.containers.text,
+			keys: keys.text,
+			page,
+			tooltips,
+		});
 
-		keys.forEach((key) => {
+		this.fieldGroup({
+			container: this.containers.settings,
+			keys: keys.settings,
+			page,
+			tooltips,
+		});
+
+		this.fieldGroup({
+			container: this.containers.color,
+			keys: keys.color,
+			page,
+			tooltips,
+		});
+	}
+
+	fieldGroup({ container, keys, page, tooltips }) {
+		container.innerHTML = '';
+
+		Object.values(keys).forEach((key) => {
 			let fieldType = 'am-field';
 
 			if (key.startsWith('+')) {
@@ -228,7 +275,7 @@ class FormPage extends Form {
 				fieldType = 'am-field-url';
 			}
 
-			const field = create(fieldType, [], {}, this);
+			const field = create(fieldType, [], {}, container);
 
 			field.data = {
 				key: key,
