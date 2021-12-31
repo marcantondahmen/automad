@@ -32,13 +32,13 @@
  * Licensed under the MIT license.
  */
 
-export const baseURL = () => {
+export const getBaseURL = () => {
 	if (
 		typeof window.Automad === 'undefined' ||
 		typeof window.Automad.baseURL === 'undefined'
 	) {
 		console.error(
-			'The Dashboard URL is not defined. Please define "window.Automad.baseURL".'
+			'The base URL is not defined. Please define "window.Automad.baseURL".'
 		);
 
 		return false;
@@ -47,7 +47,7 @@ export const baseURL = () => {
 	return window.Automad.baseURL;
 };
 
-export const dashboardURL = () => {
+export const getDashboardURL = () => {
 	if (
 		typeof window.Automad === 'undefined' ||
 		typeof window.Automad.dashboardURL === 'undefined'
@@ -60,6 +60,21 @@ export const dashboardURL = () => {
 	}
 
 	return window.Automad.dashboardURL;
+};
+
+export const getSwitcherSections = () => {
+	if (
+		typeof window.Automad === 'undefined' ||
+		typeof window.Automad.sections === 'undefined'
+	) {
+		console.error(
+			'The sections object is not defined. Please define "window.Automad.sections".'
+		);
+
+		return false;
+	}
+
+	return window.Automad.sections;
 };
 
 export const debounce = (callback, timeout = 50) => {

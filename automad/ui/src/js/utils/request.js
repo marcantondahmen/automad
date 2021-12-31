@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { dashboardURL } from './core';
+import { getDashboardURL } from './core';
 
 const request = async (url, data = null) => {
 	const init = { method: 'GET' };
@@ -53,7 +53,7 @@ const request = async (url, data = null) => {
 };
 
 const requestDashboard = async (slug, data = null) => {
-	const dashboard = dashboardURL();
+	const dashboard = getDashboardURL();
 
 	if (!dashboard) {
 		return false;

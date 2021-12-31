@@ -9,7 +9,27 @@
 	<script>
 		window.Automad = {
 			baseURL: '../../..',
-			dashboardURL: '../../../dashboard'
+			dashboardURL: '../../../dashboard',
+			sections: {
+				system: {
+					overview: 'overview',
+					cache: 'cache',
+					users: 'users',
+					update: 'update',
+					feed: 'feed',
+					language: 'language',
+					headless: 'headless',
+					debug: 'debug',
+					config: 'config'
+				},
+				content: {
+					settings: 'settings',
+					text: 'text',
+					colors: 'colors',
+					unused: 'unused',
+					files: 'files'
+				}
+			}
 		}
 	</script>
 	<script src="../../../dashboard?view=TextModules"></script>

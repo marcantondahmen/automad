@@ -33,7 +33,13 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { baseURL, listen, query, text, titleCase } from '../../utils/core';
+import {
+	getBaseURL,
+	getSwitcherSections,
+	query,
+	text,
+	titleCase,
+} from '../../utils/core';
 import { create } from '../../utils/create';
 import { Field } from '../Field';
 import { Form } from '../Form';
@@ -47,15 +53,15 @@ import { Form } from '../Form';
  * </am-form-submit>
  */
 
-const createField = (fieldType, container, data, cls = []) => {
-	const field = create(fieldType, cls, {}, container);
+const createField = (fieldType, section, data, cls = []) => {
+	const field = create(fieldType, cls, {}, section);
 
 	field.data = data;
 
 	return field;
 };
 
-const fieldGroup = ({ container, keys, pageData, tooltips, removable }) => {
+const fieldGroup = ({ section, keys, pageData, tooltips, removable }) => {
 	keys.forEach((key) => {
 		let fieldType = 'am-field-textarea';
 
@@ -87,7 +93,7 @@ const fieldGroup = ({ container, keys, pageData, tooltips, removable }) => {
 			fieldType = 'am-field-url';
 		}
 
-		createField(fieldType, container, {
+		createField(fieldType, section, {
 			key: key,
 			value: pageData[key],
 			tooltip: tooltips[key],
@@ -153,37 +159,40 @@ const themeStatus = ({ pageData, shared, themes, template, themeKey }) => {
 
 class Page extends Form {
 	connectedCallback() {
-		this.containers = this.createContainers();
+		this.sections = this.createSections();
 
 		this.submit();
 	}
 
-	createContainers() {
-		const containers = {};
+	createSections() {
+		const sections = {};
+		const sectionIds = getSwitcherSections();
+		const content = sectionIds.content;
 
-		['settings', 'text', 'colors', 'unused'].forEach((item) => {
-			const container = create(
-				'am-switcher-section',
-				[],
-				{ name: item },
-				this
-			);
+		[
+			content.settings,
+			content.text,
+			content.colors,
+			content.unused,
+		].forEach((name) => {
+			const section = create('am-switcher-section', [], { name }, this);
 
-			create('div', [this.cls.spinner], {}, container);
-			containers[item] = container;
+			create('div', [this.cls.spinner], {}, section);
+			sections[name] = section;
 		});
 
-		return containers;
+		console.log(sections);
+
+		return sections;
 	}
 
 	mainSettings({
-		container,
+		section,
 		url,
 		prefix,
 		slug,
 		pageData,
 		shared,
-		tags,
 		allTags,
 		reserved,
 		themes,
@@ -197,7 +206,7 @@ class Page extends Form {
 				label,
 			};
 
-			return createField(fieldType, container, data, []);
+			return createField(fieldType, section, data, []);
 		};
 
 		const title = createMainField('am-field', reserved['AM_KEY_TITLE']);
@@ -207,15 +216,15 @@ class Page extends Form {
 		create(
 			'a',
 			[],
-			{ href: `${baseURL()}${pageData[reserved['AM_KEY_URL']]}` },
-			container
+			{ href: `${getBaseURL()}${pageData[reserved['AM_KEY_URL']]}` },
+			section
 		).innerHTML = pageData[reserved['AM_KEY_URL']] || url;
 
 		createMainField('am-field-checkbox-large', reserved['AM_KEY_PRIVATE']);
 
 		createField(
 			'am-form-page-field-template',
-			container,
+			section,
 			{
 				pageData,
 				shared,
@@ -229,14 +238,14 @@ class Page extends Form {
 		createMainField('am-field-checkbox', reserved['AM_KEY_HIDDEN']);
 
 		if (url != '/') {
-			createField('am-field', container, {
+			createField('am-field', section, {
 				key: 'prefix',
 				value: prefix,
 				name: 'prefix',
 				label: text('page_prefix'),
 			});
 
-			createField('am-field', container, {
+			createField('am-field', section, {
 				key: 'slug',
 				value: slug,
 				name: 'slug',
@@ -250,7 +259,6 @@ class Page extends Form {
 			text('page_redirect')
 		);
 
-		console.log(allTags);
 		const tagsField = createMainField(
 			'am-form-page-field-tags',
 			reserved['AM_KEY_TAGS'],
@@ -267,8 +275,8 @@ class Page extends Form {
 
 		this.watch();
 
-		Object.values(this.containers).forEach((container) => {
-			container.innerHTML = '';
+		Object.values(this.sections).forEach((section) => {
+			section.innerHTML = '';
 		});
 
 		const {
@@ -277,7 +285,6 @@ class Page extends Form {
 			slug,
 			pageData,
 			shared,
-			tags,
 			allTags,
 			themes,
 			template,
@@ -296,22 +303,21 @@ class Page extends Form {
 		}
 
 		this.mainSettings({
-			container: this.containers.settings,
+			section: this.sections.settings,
 			url,
 			prefix,
 			slug,
 			pageData,
 			shared,
-			tags,
 			allTags,
 			reserved: keys.reserved,
 			themes,
 			template,
 		});
 
-		Object.keys(this.containers).forEach((item) => {
+		Object.keys(this.sections).forEach((item) => {
 			fieldGroup({
-				container: this.containers[item],
+				section: this.sections[item],
 				keys: keys[item],
 				pageData,
 				tooltips,
@@ -395,16 +401,10 @@ class FieldSelectTemplate extends Field {
 		this.render({ value, themes, mainTheme });
 	}
 
-	createOptions(
-		templates,
-		container,
-		value,
-		themeName = '*',
-		themePath = ''
-	) {
+	createOptions(templates, section, value, themeName = '*', themePath = '') {
 		templates.forEach((template) => {
 			const file = templatePath(template, themePath);
-			const option = create('option', [], { value: file }, container);
+			const option = create('option', [], { value: file }, section);
 
 			option.textContent = templateName(file, themeName);
 
