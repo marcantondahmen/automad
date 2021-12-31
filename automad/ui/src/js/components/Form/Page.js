@@ -166,22 +166,19 @@ class Page extends Form {
 
 	createSections() {
 		const sections = {};
-		const sectionIds = getSwitcherSections();
-		const content = sectionIds.content;
+		const content = getSwitcherSections().content;
 
-		[
-			content.settings,
-			content.text,
-			content.colors,
-			content.unused,
-		].forEach((name) => {
-			const section = create('am-switcher-section', [], { name }, this);
+		['settings', 'text', 'colors', 'unused'].forEach((key) => {
+			const section = create(
+				'am-switcher-section',
+				[],
+				{ name: content[key] },
+				this
+			);
 
 			create('div', [this.cls.spinner], {}, section);
-			sections[name] = section;
+			sections[key] = section;
 		});
-
-		console.log(sections);
 
 		return sections;
 	}
