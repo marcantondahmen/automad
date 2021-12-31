@@ -71,7 +71,7 @@ export class BaseComponent extends HTMLElement {
 			navLinkHasChildren: 'am-c-nav__link--has-children',
 			navChildren: 'am-c-nav__children',
 			spinner: 'am-e-spinner',
-			switcherItemActive: 'am-c-switcher-item--active',
+			switcherLinkActive: 'am-c-switcher-link--active',
 		};
 	}
 

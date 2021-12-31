@@ -35,105 +35,116 @@
 import { BaseComponent } from './BaseComponent';
 import { listen, query, queryAll } from '../utils/core';
 
-const hashUpdatEventName = 'am-hashupdate';
-const itemTag = 'am-switcher-item';
-
-const getHash = () => {
-	return window.location.hash.replace('#', '');
-};
-
 /**
- * The label content is set dynamically when the hash changes.
+ * The label content is set dynamically when the item changes.
  * <am-switcher-label></am-switcher-label>
  *
  * A switcher can have any layout and is not more that a container with items.
  * <am-switcher>
- *     <am-switcher-item hash="text">Text</am-switcher-item>
- *     <am-switcher-item hash="settings">Settings</am-switcher-item>
+ *     <am-switcher-link section="text">Text</am-switcher-link>
+ *     <am-switcher-link section="settings">Settings</am-switcher-link>
  * </am-switcher>
  *
- * The content visibility is also dynamically controlled by hash updates.
- * <am-switcher-content hash="text">
+ * The content visibility is also dynamically controlled by item updates.
+ * <am-switcher-section name="text">
  *     ...
- * </am-switcher-content>
- * <am-switcher-content hash="settings">
+ * </am-switcher-section>
+ * <am-switcher-section name="settings">
  *     ...
- * </am-switcher-content>
+ * </am-switcher-section>
  */
+
+const switcherChangeEventName = 'am-switcher-change';
+const linkTag = 'am-switcher-link';
+
+const getActiveSection = () => {
+	const searchParams = new URLSearchParams(window.location.search);
+
+	return searchParams.get('section') || '';
+};
+
+const setActiveSection = (section) => {
+	const url = new URL(window.location.href);
+
+	url.searchParams.set('section', section);
+	window.history.pushState(null, null, url);
+	window.dispatchEvent(new Event(switcherChangeEventName));
+};
 
 class Switcher extends BaseComponent {
 	connectedCallback() {
-		setTimeout(this.updateHash.bind(this), 0);
+		setTimeout(() => {
+			this.onChange();
+			window.dispatchEvent(new Event(switcherChangeEventName));
+		}, 0);
 
-		listen(window, 'hashchange', this.updateHash.bind(this));
+		listen(window, switcherChangeEventName, this.onChange.bind(this));
 	}
 
-	updateHash() {
-		let hash = getHash() || false;
-		const hashes = [];
+	onChange() {
+		let activeSection = getActiveSection();
+		const sections = [];
 
-		queryAll(itemTag, this).forEach((item) => {
-			hashes.push(item.getAttribute('hash'));
+		queryAll(linkTag, this).forEach((link) => {
+			sections.push(link.getAttribute('section'));
 		});
 
-		if (hashes.indexOf(hash) == -1) {
-			window.location.hash = hashes[0];
+		if (sections.indexOf(activeSection) == -1) {
+			setActiveSection(sections[0]);
 		}
-
-		window.dispatchEvent(new Event(hashUpdatEventName));
 	}
 }
 
-class SwitcherItem extends BaseComponent {
+class SwitcherLink extends BaseComponent {
 	static get observedAttributes() {
-		return ['hash'];
+		return ['section'];
 	}
 
 	connectedCallback() {
-		listen(window, hashUpdatEventName, this.toggle.bind(this));
+		listen(window, switcherChangeEventName, this.toggle.bind(this));
 		listen(this, 'click', this.select.bind(this));
 	}
 
 	toggle() {
 		this.classList.toggle(
-			this.cls.switcherItemActive,
-			this.elementAttributes.hash == getHash()
+			this.cls.switcherLinkActive,
+			this.elementAttributes.section == getActiveSection()
 		);
 	}
 
 	select() {
-		window.location.hash = this.elementAttributes.hash;
+		setActiveSection(this.elementAttributes.section);
 	}
 }
 
-class SwitcherContent extends BaseComponent {
+class SwitcherSection extends BaseComponent {
 	static get observedAttributes() {
-		return ['hash'];
+		return ['name'];
 	}
 
 	connectedCallback() {
-		listen(window, hashUpdatEventName, this.toggle.bind(this));
-
-		this.toggle();
+		listen(window, switcherChangeEventName, this.toggle.bind(this));
 	}
 
 	toggle() {
 		this.classList.toggle(
 			this.cls.hidden,
-			this.elementAttributes.hash != getHash()
+			this.elementAttributes.name != getActiveSection()
 		);
 	}
 }
 
 class SwitcherLabel extends BaseComponent {
 	connectedCallback() {
-		listen(window, hashUpdatEventName, () => {
-			this.innerHTML = query(`${itemTag}[hash="${getHash()}"]`).innerHTML;
+		listen(window, switcherChangeEventName, () => {
+			this.innerHTML = query(
+				`${linkTag}[section="${getActiveSection()}"]`
+			).innerHTML;
 		});
 	}
 }
 
 customElements.define('am-switcher', Switcher);
-customElements.define('am-switcher-item', SwitcherItem);
+customElements.define('am-switcher-link', SwitcherLink);
 customElements.define('am-switcher-label', SwitcherLabel);
-customElements.define('am-switcher-content', SwitcherContent);
+customElements.define('am-switcher-section', SwitcherSection);

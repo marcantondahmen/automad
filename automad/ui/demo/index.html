@@ -6,7 +6,13 @@
 	<title>Automad — UI Demo</title>
 	<link href="../../dist/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<link rel="stylesheet" href="../../dist/ui.bundle.css">
-	<script>window.dashboard = '../../../dashboard';</script>
+	<script>
+		window.Automad = {
+			baseURL: '../../..',
+			dashboardURL: '../../../dashboard'
+		}
+	</script>
+	<script src="../../../dashboard?view=TextModules"></script>
 	<script src="../../dist/ui.bundle.js"></script>
 </head>
 <body>
@@ -19,24 +25,23 @@
 				</div>
 				<div class="am-l-sidebar__nav">
 					<nav class="am-c-nav">
-						<span class="am-c-nav__label">Global</span>
 						<span class="am-c-nav__item">
 							<a href="" class="am-c-nav__link">Home</a>
 						</span>
-						<span class="am-c-nav__item">
-							<a href="" class="am-c-nav__link">System</a>
-						</span>
+						<am-nav-item view="" icon="window-sidebar" text="Dashboard"></am-nav-item>
+						<am-nav-item view="Settings" icon="sliders" text="System Settings"></am-nav-item>
+						<am-nav-item view="Packages" icon="box-seam" text="Packages"></am-nav-item>
 					</nav>
 					<nav class="am-c-nav">
 						<span class="am-c-nav__label">Pages</span>
-						<am-tree pages='[
+						<am-nav-tree pages='[
 							{ "url": "/", "title": "Home", "path": "/", "parent": ""},
 							{ "url": "/page-1", "title": "Page 1", "path": "/01.page-1", "parent": "/"},
 							{ "url": "/page-2", "title": "Page 2", "path": "/02.page-2", "parent": "/"},
 							{ "url": "/page-3", "title": "Page 3", "path": "/03.page-3", "parent": "/"},
 							{ "url": "/page-1/sub-page", "title": "Sub Page", "path": "/01.page-1/sub-page", "parent": "/page-1"},
 							{ "url": "/page-1/sub-page/sub", "title": "Sub Sub Page", "path": "/01.page-1/sub-page/sub", "parent": "/page-1/sub-page"}
-						]'></am-tree>
+						]'></am-nav-tree>
 					</nav>
 				</div>
 			</am-sidebar>
@@ -51,8 +56,17 @@
 		</nav>
 		<main class="am-l-main">
 			<div class="am-l-main__content">
+				<div>
+					<am-switcher-label></am-switcher-label>
+				</div>
+				<am-switcher>
+					<am-switcher-link section="settings">Settings</am-switcher-link>
+					<am-switcher-link section="text">Text</am-switcher-link>
+					<am-switcher-link section="colors">Colors</am-switcher-link>
+					<am-switcher-link section="unused">Unused</am-switcher-link>
+				</am-switcher>
 				<am-form-submit class="am-e-button" form="Page::data">Save</am-form-submit>
-				<am-form-page controller="Page::data" watch page="/blocks" init></am-form-page>
+				<am-form-page controller="Page::data" page="/blocks"></am-form-page>
 			</div>
 		</main>
 	</div>

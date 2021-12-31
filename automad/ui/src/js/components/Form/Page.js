@@ -163,9 +163,9 @@ class Page extends Form {
 
 		['settings', 'text', 'colors', 'unused'].forEach((item) => {
 			const container = create(
-				'am-switcher-content',
+				'am-switcher-section',
 				[],
-				{ hash: item },
+				{ name: item },
 				this
 			);
 
