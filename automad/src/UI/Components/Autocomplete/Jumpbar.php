@@ -38,10 +38,9 @@ namespace Automad\UI\Components\Autocomplete;
 
 use Automad\Core\Automad;
 use Automad\Core\Selection;
-use Automad\Core\Str;
 use Automad\UI\Response;
+use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -89,7 +88,7 @@ class Jumpbar {
 				'value' => Text::get('btn_inpage_edit'),
 				'title' => Text::get('btn_inpage_edit'),
 				'subtitle' => '',
-				'icon' => 'bookmark-o'
+				'icon' => 'house'
 			)
 		);
 	}
@@ -129,10 +128,10 @@ class Jumpbar {
 			$item['value'] = $Page->get(AM_KEY_TITLE) . ' ' . $Page->origUrl;
 			$item['title'] = $Page->get(AM_KEY_TITLE);
 			$item['subtitle'] = $Page->origUrl;
-			$item['icon'] = 'file-text-o';
+			$item['icon'] = 'file-earmark-text';
 
 			if ($Page->get(AM_KEY_PRIVATE)) {
-				$item['icon'] = 'lock';
+				$item['icon'] = 'file-earmark-lock2';
 			}
 
 			$items[] = $item;
@@ -165,64 +164,64 @@ class Jumpbar {
 	 */
 	private static function settings() {
 		$sysUrl = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=System#';
-		$hashes = URLHashes::get();
+		$sections = SwitcherSections::get();
 
 		return array(
 			array(
-				'url' => $sysUrl . $hashes->system->cache,
+				'url' => $sysUrl . $sections->system->cache,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_cache'),
 				'title' => Text::get('sys_cache'),
 				'subtitle' => '',
-				'icon' => 'rocket'
+				'icon' => 'lightning'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->users,
+				'url' => $sysUrl . $sections->system->users,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_user'),
 				'title' => Text::get('sys_user'),
 				'subtitle' => '',
-				'icon' => 'user'
+				'icon' => 'people'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->update,
+				'url' => $sysUrl . $sections->system->update,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_update'),
 				'title' => Text::get('sys_update'),
 				'subtitle' => '',
-				'icon' => 'refresh'
+				'icon' => 'arrow-repeat'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->feed,
+				'url' => $sysUrl . $sections->system->feed,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_feed'),
 				'title' => Text::get('sys_feed'),
 				'subtitle' => '',
 				'icon' => 'rss'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->language,
+				'url' => $sysUrl . $sections->system->language,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_language'),
 				'title' => Text::get('sys_language'),
 				'subtitle' => '',
 				'icon' => 'flag'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->headless,
+				'url' => $sysUrl . $sections->system->headless,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_headless'),
 				'title' => Text::get('sys_headless'),
 				'subtitle' => '',
-				'icon' => 'headless'
+				'icon' => 'cloud'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->debug,
+				'url' => $sysUrl . $sections->system->debug,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_debug'),
 				'title' => Text::get('sys_debug'),
 				'subtitle' => '',
 				'icon' => 'bug'
 			),
 			array(
-				'url' => $sysUrl . $hashes->system->config,
+				'url' => $sysUrl . $sections->system->config,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_config'),
 				'title' => Text::get('sys_config'),
 				'subtitle' => '',
-				'icon' => 'file-text-o'
+				'icon' => 'file-earmark-code'
 			)
 		);
 	}
@@ -239,7 +238,7 @@ class Jumpbar {
 				'value' => Text::get('shared_title') . ' shared',
 				'title' => Text::get('shared_title'),
 				'subtitle' => '',
-				'icon' => 'files-o'
+				'icon' => 'globe'
 			)
 		);
 	}

@@ -39,8 +39,8 @@ namespace Automad\UI\Views;
 use Automad\UI\Components\Loading;
 use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
+use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -58,7 +58,7 @@ class Shared extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$hashes = URLHashes::get();
+		$sections = SwitcherSections::get();
 		$fn = $this->fn;
 
 		return <<< HTML
@@ -68,7 +68,7 @@ class Shared extends AbstractView {
 			</ul>
 			{$fn($this->switcher())}
 			<div class="uk-margin-top">
-				<div data-am-switcher-item="#{$hashes->content->data}">
+				<div data-am-switcher-item="#{$sections->content->data}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -77,7 +77,7 @@ class Shared extends AbstractView {
 						{$fn(Loading::render())}
 					</form>
 				</div>
-				<div data-am-switcher-item="#{$hashes->content->files}">
+				<div data-am-switcher-item="#{$sections->content->files}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -117,14 +117,14 @@ class Shared extends AbstractView {
 				<div class="am-switcher am-switcher-bar uk-flex">
 					<div class="am-switcher-tabs uk-flex-item-1">
 						<a 
-						href="#{$fn(URLHashes::get()->content->data)}"
+						href="#{$fn(SwitcherSections::get()->content->data)}"
 						class="am-switcher-link"
 						>
 							<span class="uk-visible-small"><i class="uk-icon-file-text"></i></span>
 							<span class="uk-hidden-small">{$fn(Text::get('btn_data'))}</span>
 						</a>
 						<a 
-						href="#{$fn(URLHashes::get()->content->files)}"
+						href="#{$fn(SwitcherSections::get()->content->files)}"
 						class="am-switcher-link"
 						>
 							<span class="uk-visible-small">

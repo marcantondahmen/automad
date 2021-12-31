@@ -45,7 +45,7 @@ use Automad\UI\Components\Status\Button;
 use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
+use Automad\UI\Utils\SwitcherSections;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -101,10 +101,10 @@ class Home extends AbstractView {
 			<ul class="uk-grid uk-grid-width-medium-1-3 uk-margin-small-top">
 				{$fn($this->editButton())}
 				<li class="uk-margin-small-bottom">
-					{$fn(Button::render('cache', URLHashes::get()->system->cache))}
+					{$fn(Button::render('cache', SwitcherSections::get()->system->cache))}
 				</li>
 				<li class="uk-margin-small-bottom">
-					{$fn(Button::render('update', URLHashes::get()->system->update))}
+					{$fn(Button::render('update', SwitcherSections::get()->system->update))}
 				</li>
 			</ul>
 			<div class="uk-margin-large-top">
@@ -173,7 +173,7 @@ class Home extends AbstractView {
 			return <<< HTML
 				<li class="uk-margin-small-bottom">
 					<a 
-					href="?view=System#{$fn(URLHashes::get()->system->headless)}"
+					href="?view=System#{$fn(SwitcherSections::get()->system->headless)}"
 					class="uk-button uk-button-success uk-button-large uk-text-truncate uk-width-1-1 uk-text-left"
 					>
 						<i class="uk-icon-toggle-on uk-icon-justify"></i>&nbsp;
@@ -208,7 +208,7 @@ class Home extends AbstractView {
 			$fn = $this->fn;
 
 			return <<< HTML
-				<a href="?view=System#{$fn(URLHashes::get()->system->users)}">
+				<a href="?view=System#{$fn(SwitcherSections::get()->system->users)}">
 					{$fn(Danger::render(Text::get('sys_user_alert_no_email')))}
 				</a>
 			HTML;

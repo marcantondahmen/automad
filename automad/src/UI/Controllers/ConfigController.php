@@ -42,7 +42,7 @@ use Automad\Core\Debug;
 use Automad\Core\Request;
 use Automad\UI\Response;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
+use Automad\UI\Utils\SwitcherSections;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -145,8 +145,8 @@ class ConfigController {
 			// Language
 			if ($type == 'language') {
 				$language = Request::post('language');
-				$config['AM_FILE_GUI_TRANSLATION'] = $language;
-				$Response->setRedirect('#' . URLHashes::get()->system->language);
+				$config['AM_FILE_UI_TRANSLATION'] = $language;
+				$Response->setRedirect('#' . SwitcherSections::get()->system->language);
 				$Response->setReload(true);
 			}
 

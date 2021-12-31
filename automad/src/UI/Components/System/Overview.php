@@ -36,8 +36,8 @@
 
 namespace Automad\UI\Components\System;
 
+use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -56,21 +56,21 @@ class Overview {
 	 */
 	public static function render() {
 		$Text = Text::getObject();
-		$hashes = URLHashes::get();
+		$sections = SwitcherSections::get();
 		$fn = function ($expression) {
 			return $expression;
 		};
 
 		return <<< HTML
 			<div class="am-system-overview uk-grid">
-				{$fn(self::item($Text->sys_cache, $hashes->system->cache, 'rocket', 'cache', 3))}
-				{$fn(self::item($Text->sys_update, $hashes->system->update, 'refresh', 'update', 3))}
-				{$fn(self::item($Text->sys_feed, $hashes->system->feed, 'rss', 'feed'))}
-				{$fn(self::item($Text->sys_headless, $hashes->system->headless, 'headless', 'headless'))}
-				{$fn(self::item($Text->sys_debug, $hashes->system->debug, 'bug', 'debug'))}
-				{$fn(self::item($Text->sys_user, $hashes->system->users, 'user'))}
-				{$fn(self::item($Text->sys_language, $hashes->system->language, 'flag'))}
-				{$fn(self::item($Text->sys_config, $hashes->system->config, 'file-text-o'))}
+				{$fn(self::item($Text->sys_cache, $sections->system->cache, 'rocket', 'cache', 3))}
+				{$fn(self::item($Text->sys_update, $sections->system->update, 'refresh', 'update', 3))}
+				{$fn(self::item($Text->sys_feed, $sections->system->feed, 'rss', 'feed'))}
+				{$fn(self::item($Text->sys_headless, $sections->system->headless, 'headless', 'headless'))}
+				{$fn(self::item($Text->sys_debug, $sections->system->debug, 'bug', 'debug'))}
+				{$fn(self::item($Text->sys_user, $sections->system->users, 'user'))}
+				{$fn(self::item($Text->sys_language, $sections->system->language, 'flag'))}
+				{$fn(self::item($Text->sys_config, $sections->system->config, 'file-text-o'))}
 			</div>
 		HTML;
 	}

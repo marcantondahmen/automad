@@ -45,7 +45,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class URLHashes {
+class SwitcherSections {
 	/**
 	 * The URL hashes used in the UI.
 	 */
@@ -62,7 +62,10 @@ class URLHashes {
 			'config' => 'config'
 		),
 		'content' => array(
-			'data' => 'data',
+			'settings' => 'settings',
+			'text' => 'text',
+			'colors' => 'colors',
+			'unused' => 'unused',
 			'files' => 'files'
 		)
 	);

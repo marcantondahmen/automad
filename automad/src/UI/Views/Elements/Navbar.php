@@ -41,7 +41,7 @@ use Automad\UI\Components\Logo;
 use Automad\UI\Components\Nav\Jumpbar;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
+use Automad\UI\Utils\SwitcherSections;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -110,7 +110,7 @@ class Navbar {
 											</a>
 										</li>
 										<li>
-											<a href="?view=System#{$fn(URLHashes::get()->system->users)}">
+											<a href="?view=System#{$fn(SwitcherSections::get()->system->users)}">
 												<i class="uk-icon-user uk-icon-justify"></i>&nbsp;
 												{$fn(Text::get('btn_manage_users'))}
 											</a>

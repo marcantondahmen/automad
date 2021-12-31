@@ -44,8 +44,8 @@ use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
 use Automad\UI\Components\Nav\Breadcrumbs;
 use Automad\UI\Components\Nav\SiteTree;
+use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -63,7 +63,7 @@ class Page extends AbstractView {
 	 * @return string the rendered items
 	 */
 	protected function body() {
-		$hashes = URLHashes::get();
+		$sections = SwitcherSections::get();
 		$url = Request::query('url');
 		$Page = $this->Automad->getPage($url);
 
@@ -80,7 +80,7 @@ class Page extends AbstractView {
 			{$fn(Breadcrumbs::render($this->Automad))}
 			{$fn($this->switcher($Page, $url))}
 			<div class="uk-margin-top">
-				<div data-am-switcher-item="#{$hashes->content->data}">
+				<div data-am-switcher-item="#{$sections->content->data}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -91,7 +91,7 @@ class Page extends AbstractView {
 						{$fn(Loading::render())}
 					</form>
 				</div>
-				<div data-am-switcher-item="#{$hashes->content->files}">
+				<div data-am-switcher-item="#{$sections->content->files}">
 					<form 
 					class="uk-form uk-form-stacked" 
 					data-am-init 
@@ -240,14 +240,14 @@ class Page extends AbstractView {
 				<div class="am-switcher am-switcher-bar uk-flex">
 					<div class="am-switcher-tabs uk-flex-item-1">
 						<a 
-						href="#{$fn(URLHashes::get()->content->data)}" 
+						href="#{$fn(SwitcherSections::get()->content->data)}" 
 						class="am-switcher-link"
 						>
 							<span class="uk-visible-small"><i class="uk-icon-file-text"></i></span>
 							<span class="uk-hidden-small">{$fn(Text::get('btn_data'))}</span>
 						</a>
 						<a 
-						href="#{$fn(URLHashes::get()->content->files)}" 
+						href="#{$fn(SwitcherSections::get()->content->files)}" 
 						class="am-switcher-link"
 						>
 							<span class="uk-visible-small">

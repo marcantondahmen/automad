@@ -46,7 +46,7 @@ use Automad\UI\Components\Modal\SelectImage;
 use Automad\UI\Utils\Prefix;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\URLHashes;
+use Automad\UI\Utils\SwitcherSections;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -149,8 +149,8 @@ class InPage {
 	private function injectMarkup(string $str) {
 		$urlBase = AM_BASE_URL;
 		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . URLHashes::get()->content->data;
-		$urlFiles = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . URLHashes::get()->content->files;
+		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . SwitcherSections::get()->content->data;
+		$urlFiles = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . SwitcherSections::get()->content->files;
 		$urlSys = $urlGui . '?view=System';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		$request = AM_REQUEST;
