@@ -154,6 +154,9 @@ class Theme {
 			return false === in_array(basename($file), array(AM_PAGE_NOT_FOUND_TEMPLATE . '.php'));
 		});
 
+		// Reindex array in order to force correct JSON encoding.
+		$templates = array_values($templates);
+
 		$data = array_merge(
 			$defaults,
 			$json,

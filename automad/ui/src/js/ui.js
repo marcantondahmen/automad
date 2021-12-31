@@ -35,6 +35,7 @@
 import './components/Autocomplete';
 import './components/Field';
 import './components/Form';
+import './components/Form/Page';
 import './components/Jumpbar';
 import './components/Modal';
 import './components/Nav';

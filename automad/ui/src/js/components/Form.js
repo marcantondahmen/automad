@@ -33,7 +33,6 @@
  */
 
 import { debounce, listen, queryAll } from '../utils/core';
-import { create } from '../utils/create';
 import { requestController } from '../utils/request';
 import { BaseComponent } from './BaseComponent';
 
@@ -53,13 +52,6 @@ import { BaseComponent } from './BaseComponent';
  *     ...
  * </am-form>
  * <am-form-submit form="Page::add">
- *     Submit
- * </am-form-submit>
- *
- * The FormPage class doesn't need the watch and init properties
- * as this is anyways the intended behavior.
- * <am-form-page controller="Page::data" page="/url"></am-form-page>
- * <am-form-submit form="Page::data">
  *     Submit
  * </am-form-submit>
  */
@@ -88,7 +80,7 @@ class FormSubmit extends BaseComponent {
 	}
 }
 
-class Form extends BaseComponent {
+export class Form extends BaseComponent {
 	static get observedAttributes() {
 		return ['controller', 'page'];
 	}
@@ -161,11 +153,7 @@ class Form extends BaseComponent {
 		this.processResponse(response);
 	}
 
-	processResponse(response) {
-		if (response.html) {
-			this.innerHTML = response.html;
-		}
-	}
+	processResponse(response) {}
 
 	watch() {
 		const onChange = debounce((event) => {
@@ -184,112 +172,5 @@ class Form extends BaseComponent {
 	}
 }
 
-class FormPage extends Form {
-	connectedCallback() {
-		this.containers = this.createContainers();
-
-		this.submit();
-		this.watch();
-	}
-
-	createContainers() {
-		const containers = {};
-
-		['settings', 'text', 'color'].forEach((item) => {
-			const container = create(
-				'am-switcher-content',
-				[],
-				{ hash: item },
-				this
-			);
-
-			create('div', [this.cls.spinner], {}, container);
-			containers[item] = container;
-		});
-
-		return containers;
-	}
-
-	processResponse(response) {
-		if (typeof response.data === 'undefined') {
-			return false;
-		}
-
-		const page = response.data.page;
-		const keys = response.data.keys;
-		const tooltips = response.data.tooltips;
-
-		this.fieldGroup({
-			container: this.containers.text,
-			keys: keys.text,
-			page,
-			tooltips,
-		});
-
-		this.fieldGroup({
-			container: this.containers.settings,
-			keys: keys.settings,
-			page,
-			tooltips,
-		});
-
-		this.fieldGroup({
-			container: this.containers.color,
-			keys: keys.color,
-			page,
-			tooltips,
-		});
-	}
-
-	fieldGroup({ container, keys, page, tooltips }) {
-		container.innerHTML = '';
-
-		Object.values(keys).forEach((key) => {
-			let fieldType = 'am-field';
-
-			if (key.startsWith('+')) {
-				fieldType = 'am-field-editor';
-			}
-
-			if (key.startsWith('checkbox')) {
-				fieldType = 'am-field-checkbox';
-			}
-
-			if (key.startsWith('color')) {
-				fieldType = 'am-field-color';
-			}
-
-			if (key.startsWith('date')) {
-				fieldType = 'am-field-date';
-			}
-
-			if (key.startsWith('text')) {
-				fieldType = 'am-field-markdown';
-			}
-
-			if (key.startsWith('image')) {
-				fieldType = 'am-field-image';
-			}
-
-			if (key.startsWith('url')) {
-				fieldType = 'am-field-url';
-			}
-
-			const field = create(fieldType, [], {}, container);
-
-			field.data = {
-				key: key,
-				value: page[key],
-				tooltip: tooltips[key],
-				name: `data[${key}]`,
-			};
-		});
-	}
-}
-
-class FormShared extends Form {}
-
 customElements.define('am-form-submit', FormSubmit);
 customElements.define('am-form', Form);
-customElements.define('am-form-page', FormPage);
-customElements.define('am-form-shared', FormShared);

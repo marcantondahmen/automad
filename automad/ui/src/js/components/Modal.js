@@ -40,9 +40,12 @@ import { BaseComponent } from './BaseComponent';
  *     Open
  * </am-modal-toggle>
  * <am-modal id="modal" nokey noclick>
- *     <am-modal-dialog>
- *         ...
- *     </am-modal-dialog>
+ *     <div class="am-c-modal__dialog">
+ *         <div class="am-c-modal__header">
+ *             <span>Title</span>
+ *             <am-modal-close>Close</am-modal-close>
+ *         </div>
+ *     </div>
  * </am-modal>
  */
 
@@ -65,7 +68,7 @@ class ModalToggle extends BaseComponent {
 class ModalClose extends BaseComponent {
 	connectedCallback() {
 		const close = () => {
-			const modal = this.closest(`am-modal`);
+			const modal = this.closest('am-modal');
 
 			modal.close();
 		};
@@ -92,6 +95,8 @@ class Modal extends BaseComponent {
 	}
 
 	connectedCallback() {
+		this.classList.add(this.cls.modal);
+
 		if (this.useClick) {
 			listen(this, 'click', (event) => {
 				if (this === event.target) {

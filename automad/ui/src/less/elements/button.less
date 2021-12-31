@@ -33,7 +33,30 @@
  */
 
 .am-e-button {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--am-flex-gap);
+	line-height: 2.5rem;
+	padding: 0 0.7rem;
+	border: var(--am-hairline);
+	border-radius: var(--am-radius);
+	cursor: pointer;
+	user-select: none;
+
 	&[disabled] {
 		color: var(--am-clr-muted);
+		cursor: not-allowed;
+	}
+
+	&--success:not([disabled]) {
+		color: var(--am-button-success-clr);
+		background-color: var(--am-button-success-bg);
+		border-color: var(--am-button-success-border);
+	}
+
+	&--danger:not([disabled]) {
+		color: var(--am-button-danger-clr);
+		background-color: var(--am-button-danger-bg);
+		border-color: var(--am-button-danger-border);
 	}
 }

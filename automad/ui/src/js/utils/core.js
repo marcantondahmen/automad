@@ -32,16 +32,34 @@
  * Licensed under the MIT license.
  */
 
-export const dashboardURL = () => {
-	if (typeof window.dashboard === 'undefined') {
+export const baseURL = () => {
+	if (
+		typeof window.Automad === 'undefined' ||
+		typeof window.Automad.baseURL === 'undefined'
+	) {
 		console.error(
-			'The Dashboard URL is not defined. Please define "window.dashboard".'
+			'The Dashboard URL is not defined. Please define "window.Automad.baseURL".'
 		);
 
 		return false;
 	}
 
-	return window.dashboard;
+	return window.Automad.baseURL;
+};
+
+export const dashboardURL = () => {
+	if (
+		typeof window.Automad === 'undefined' ||
+		typeof window.Automad.dashboardURL === 'undefined'
+	) {
+		console.error(
+			'The Dashboard URL is not defined. Please define "window.Automad.dashboardURL".'
+		);
+
+		return false;
+	}
+
+	return window.Automad.dashboardURL;
 };
 
 export const debounce = (callback, timeout = 50) => {
@@ -54,6 +72,20 @@ export const debounce = (callback, timeout = 50) => {
 			callback.apply(this, args);
 		}, timeout);
 	};
+};
+
+export const htmlSpecialChars = (value) => {
+	const chars = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#039;',
+	};
+
+	return value.replace(/[&<>"']/g, (char) => {
+		return chars[char];
+	});
 };
 
 export const listen = (element, eventNamesString, callback, selector = '') => {
@@ -103,4 +135,22 @@ export const queryParents = (selector, element) => {
 	}
 
 	return parents;
+};
+
+export const text = (key) => {
+	try {
+		return window.Automad.textModules[key];
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const titleCase = (str) => {
+	return str
+		.replace(/\//g, ' / ')
+		.replace(/(?!^)([A-Z]+)/g, ' $1')
+		.replace('_', ' ')
+		.split(' ')
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(' ');
 };

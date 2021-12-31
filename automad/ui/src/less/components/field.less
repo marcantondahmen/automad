@@ -39,9 +39,11 @@
 		margin-top: var(--am-space-medium);
 	}
 
-	&--changed {
-		& label {
-			color: var(--am-clr-success);
-		}
+	&__label {
+		font-size: var(--am-font-size-small);
+	}
+
+	&--changed &__label {
+		color: var(--am-clr-success);
 	}
 }

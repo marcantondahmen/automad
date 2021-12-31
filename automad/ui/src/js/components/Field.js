@@ -32,114 +32,160 @@
  * Licensed under the MIT license.
  */
 
+import { htmlSpecialChars, listen, titleCase } from '../utils/core';
+import { create } from '../utils/create';
 import { BaseComponent } from './BaseComponent';
 
-class Field extends BaseComponent {
+const createId = (key) => {
+	return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
+};
+
+const createLabel = (key) => {
+	return titleCase(key.replace(/\+(.)/, '+ $1'))
+		.replace('+ ', '+')
+		.replace('Color ', '')
+		.replace('Checkbox ', '');
+};
+
+class FieldRemove extends BaseComponent {
+	connectedCallback() {
+		listen(this, 'click', () => {
+			this.closest(`.${this.cls.field}`).remove();
+		});
+	}
+}
+
+export class Field extends BaseComponent {
 	connectedCallback() {
 		this.classList.add(this.cls.field);
 	}
 
-	set data({ key, value, name, tooltip }) {
-		const id = this.createId(key);
-		const label = this.createLabel(key);
+	set data({ key, value, name, tooltip, removable, label }) {
+		const id = createId(key);
 
-		if (typeof value === 'undefined') {
-			value = '';
+		value = value || '';
+		tooltip = tooltip || '';
+		label = label || createLabel(key);
+
+		if (typeof value === 'string' || value instanceof String) {
+			value = htmlSpecialChars(value);
 		}
 
-		value = this.convertHtmlSpecialChars(value);
-
-		this.innerHTML = this.render({ name, id, label, value, tooltip });
-	}
-
-	convertHtmlSpecialChars(value) {
-		const chars = {
-			'&': '&amp;',
-			'<': '&lt;',
-			'>': '&gt;',
-			'"': '&quot;',
-			"'": '&#039;',
+		this._data = {
+			name,
+			id,
+			label,
+			value,
+			tooltip,
+			removable,
 		};
 
-		return value.replace(/[&<>"']/g, (char) => {
-			return chars[char];
-		});
+		this.render();
 	}
 
-	createId(key) {
-		return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
-	}
+	label() {
+		const { id, label, tooltip, removable } = this._data;
+		const removeButton = removable
+			? '<am-field-remove><i class="bi bi-trash"></i></am-field-remove>'
+			: '';
+		const wrapper = create('div', [], {}, this);
 
-	createLabel(key) {
-		return key
-			.replace(/(?!^)([A-Z])/g, ' $1')
-			.replace(/\+(.)/, '+ $1')
-			.split(' ')
-			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-			.join(' ')
-			.replace('+ ', '+')
-			.replace('Checkbox ', '');
-	}
-
-	render({ name, id, label, value, tooltip }) {
-		return `
-			<label for="${id}" title="${tooltip}">${label}</label>
-			<textarea 
-			id="${id}" 
-			name="${name}" 
-			class="${this.cls.input}"
-			>${value}</textarea>
+		wrapper.innerHTML = `
+			<label 
+			class="${this.cls.fieldLabel}" 
+			for="${id}" 
+			title="${tooltip}">
+				${label}
+			</label>
+			${removeButton}
 		`;
+	}
+
+	input() {
+		const { name, id, value } = this._data;
+		const input = create(
+			'input',
+			[this.cls.input],
+			{ id, name, value, type: 'text' },
+			this
+		);
+	}
+
+	render() {
+		this.label();
+		this.input();
 	}
 }
 
 class FieldEditor extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
 	}
 }
 
 class FieldCheckbox extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
+	}
+}
+
+class FieldCheckboxLarge extends Field {
+	render() {
+		super.render();
+	}
+}
+
+class FieldCheckboxPage extends Field {
+	render() {
+		super.render();
 	}
 }
 
 class FieldColor extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
 	}
 }
 
 class FieldDate extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
 	}
 }
 
 class FieldMarkdown extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
 	}
 }
 
 class FieldImage extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
+	}
+}
+
+class FieldTextarea extends Field {
+	render() {
+		super.render();
 	}
 }
 
 class FieldURL extends Field {
-	render({ name, id, label, value, tooltip }) {
-		return super.render({ name, id, label, value, tooltip });
+	render() {
+		super.render();
 	}
 }
 
+customElements.define('am-field-remove', FieldRemove);
 customElements.define('am-field', Field);
 customElements.define('am-field-editor', FieldEditor);
 customElements.define('am-field-checkbox', FieldCheckbox);
+customElements.define('am-field-checkbox-large', FieldCheckboxLarge);
+customElements.define('am-field-checkbox-page', FieldCheckboxPage);
 customElements.define('am-field-color', FieldColor);
 customElements.define('am-field-date', FieldDate);
 customElements.define('am-field-markdown', FieldMarkdown);
 customElements.define('am-field-image', FieldImage);
+customElements.define('am-field-textarea', FieldTextarea);
 customElements.define('am-field-url', FieldURL);
