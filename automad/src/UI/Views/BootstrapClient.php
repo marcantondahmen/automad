@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,24 +36,27 @@
 
 namespace Automad\UI\Views;
 
-use Automad\Core\Config;
+use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The text modules JS file.
+ * The bootstrap JS file containing all required settings for the UI.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class TextModules extends AbstractView {
+class BootstrapClient extends AbstractView {
+	/**
+	 * Render the Javascript file content and set caching headers accordingly
+	 *
+	 * @return string the Javascript file
+	 */
 	public function render() {
-		$json = json_encode(Text::getObject());
-		$configMTime = gmdate('D, d M Y H:i:s', filemtime(Config::$file)) . ' GMT';
-		$etag = md5($json);
-		$ifModSince = getenv('HTTP_IF_MODIFIED_SINCE');
+		$js = $this->compileJS();
+		$etag = md5($js);
 		$ifNoneMatch = trim(
 			str_replace(
 				array('"', '\''),
@@ -62,27 +65,42 @@ class TextModules extends AbstractView {
 			)
 		);
 
-		header('Cache-Control: public');
 		header('Content-Type: application/javascript');
+		header('Cache-Control: max-age=86400');
 
-		if (($ifNoneMatch == $etag || !$ifNoneMatch) && ($ifModSince && $ifModSince == $configMTime)) {
+		if ($ifNoneMatch == $etag) {
 			header('HTTP/1.1 304 Not Modified');
 			exit();
 		}
 
-		header('Last-Modified: ' . $configMTime);
 		header('Etag: ' . $etag);
 
-		return <<< JS
-			((Automad) => {
-				Automad.textModules = $json
-			})(window.Automad = window.Automad || {});
-		JS;
+		return $js;
 	}
 
 	protected function body() {
 	}
 
 	protected function title() {
+	}
+
+	/**
+	 * Compile the Javascript file including all bootstrap information.
+	 *
+	 * @return string the Javascript file content
+	 */
+	private function compileJS() {
+		$fn = $this->fn;
+
+		return <<< JS
+			(() => {
+				window.Automad = {
+					baseURL: '{$fn(AM_BASE_INDEX)}',
+					dashboardURL: '{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}',
+					sections: {$fn(json_encode(SwitcherSections::get()))},
+					textModules: {$fn(json_encode(Text::getObject()))}
+				}
+			})();
+			JS;
 	}
 }

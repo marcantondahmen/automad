@@ -6,33 +6,7 @@
 	<title>Automad — UI Demo</title>
 	<link href="../../dist/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<link rel="stylesheet" href="../../dist/ui.bundle.css">
-	<script>
-		window.Automad = {
-			baseURL: '../../..',
-			dashboardURL: '../../../dashboard',
-			sections: {
-				system: {
-					overview: 'overview',
-					cache: 'cache',
-					users: 'users',
-					update: 'update',
-					feed: 'feed',
-					language: 'language',
-					headless: 'headless',
-					debug: 'debug',
-					config: 'config'
-				},
-				content: {
-					settings: 'settings',
-					text: 'text',
-					colors: 'colors',
-					unused: 'unused',
-					files: 'files'
-				}
-			}
-		}
-	</script>
-	<script src="../../../dashboard?view=TextModules"></script>
+	<script src="../../../dashboard?view=BootstrapClient"></script>
 	<script src="../../dist/ui.bundle.js"></script>
 </head>
 <body>
@@ -76,17 +50,50 @@
 		</nav>
 		<main class="am-l-main">
 			<div class="am-l-main__content">
+
 				<div>
+
 					<am-switcher-label></am-switcher-label>
 				</div>
+
 				<am-switcher>
+					
 					<am-switcher-link section="settings">Settings</am-switcher-link>
 					<am-switcher-link section="text">Text</am-switcher-link>
 					<am-switcher-link section="colors">Colors</am-switcher-link>
 					<am-switcher-link section="unused">Unused</am-switcher-link>
+					
 				</am-switcher>
+
 				<am-form-submit class="am-e-button" form="Page::data">Save</am-form-submit>
 				<am-form-page controller="Page::data" page="/blocks"></am-form-page>
+
+
+				<!-- <hr>
+				<am-autocomplete controller="UI::autocompleteLink"></am-autocomplete>
+
+
+				<hr>
+
+				
+
+				<hr>
+
+				<am-form controller="Page::add" watch page="/">
+					<input class="am-e-input" type="text" name="test-field">
+					<select class="am-e-input" name="select-field" id="">
+						<option value="option1">Hello</option>
+						<option value="option2">Hello2</option>
+					</select>
+					<textarea class="am-e-input" name="text-area" id="" cols="30" rows="10"></textarea>
+				</am-form>
+
+				<br>
+
+				<am-form-submit class="am-e-button" controller="Page::add">Submit</am-form-submit><br>
+				 -->
+				
+				
 			</div>
 		</main>
 	</div>
