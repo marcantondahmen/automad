@@ -43,6 +43,7 @@ use Automad\Core\Parse;
 use Automad\Core\Router;
 use Automad\Core\Str;
 use Automad\Engine\View;
+use Automad\UI\Bootstrap;
 use Automad\UI\Dashboard;
 use Automad\UI\Response;
 use Automad\UI\Utils\Session;
@@ -63,6 +64,13 @@ class Routes {
 	 * @param Router $Router
 	 */
 	public static function init(Router $Router) {
+		$Router->register(
+			AM_PAGE_DASHBOARD . '/bootstrap.js',
+			function () {
+				return Bootstrap::file();
+			}
+		);
+
 		$Router->register(
 			AM_PAGE_DASHBOARD . '/api/.*',
 			function () {

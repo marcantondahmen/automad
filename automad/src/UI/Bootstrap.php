@@ -34,10 +34,13 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Views;
+namespace Automad\UI;
 
+use Automad\System\ThemeCollection;
+use Automad\UI\Utils\Session;
 use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
+use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -48,14 +51,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class BootstrapClient extends AbstractView {
+class Bootstrap {
 	/**
 	 * Render the Javascript file content and set caching headers accordingly
 	 *
 	 * @return string the Javascript file
 	 */
-	public function render() {
-		$js = $this->compileJS();
+	public static function file() {
+		$js = self::compile();
 		$etag = md5($js);
 		$ifNoneMatch = trim(
 			str_replace(
@@ -65,7 +68,7 @@ class BootstrapClient extends AbstractView {
 			)
 		);
 
-		header('Content-Type: application/javascript');
+		header('Content-Type: application/javascript; charset=utf-8');
 		header('Cache-Control: max-age=86400');
 
 		if ($ifNoneMatch == $etag) {
@@ -74,14 +77,9 @@ class BootstrapClient extends AbstractView {
 		}
 
 		header('Etag: ' . $etag);
+		http_response_code(200);
 
 		return $js;
-	}
-
-	protected function body() {
-	}
-
-	protected function title() {
 	}
 
 	/**
@@ -89,16 +87,34 @@ class BootstrapClient extends AbstractView {
 	 *
 	 * @return string the Javascript file content
 	 */
-	private function compileJS() {
-		$fn = $this->fn;
+	private static function compile() {
+		$fn = function ($expression) {
+			return $expression;
+		};
+
+		$Automad = UICache::get();
+
+		$sections = '{}';
+		$tags = '[]';
+		$themes = '{}';
+
+		if (Session::getUsername()) {
+			$sections = json_encode(SwitcherSections::get());
+			$tags = json_encode($Automad->getPagelist()->getTags());
+			$ThemeCollection = new ThemeCollection();
+			$themes = json_encode($ThemeCollection->getThemes(), JSON_UNESCAPED_SLASHES);
+		}
 
 		return <<< JS
 			(() => {
 				window.Automad = {
+					version: '{$fn(AM_VERSION)}',
 					baseURL: '{$fn(AM_BASE_INDEX)}',
 					dashboardURL: '{$fn(AM_BASE_INDEX . AM_PAGE_DASHBOARD)}',
-					sections: {$fn(json_encode(SwitcherSections::get()))},
-					textModules: {$fn(json_encode(Text::getObject()))}
+					sections: $sections,
+					tags: $tags,
+					text: {$fn(json_encode(Text::getObject()))},
+					themes: $themes
 				}
 			})();
 			JS;
