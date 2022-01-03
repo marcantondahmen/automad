@@ -66,7 +66,10 @@ class Router {
 	 * @param string $url
 	 */
 	public function get(string $url) {
-		foreach ($this->routes as $route => $callable) {
+		foreach ($this->routes as $item) {
+			$route = $item['route'];
+			$callable = $item['callable'];
+
 			if (preg_match("#^$route$#i", $url)) {
 				Debug::log($route, $url);
 
@@ -78,12 +81,18 @@ class Router {
 	}
 
 	/**
-	 * Register a new route.
+	 * Register a new route in case $condition is true.
 	 *
 	 * @param string $route
 	 * @param callable $callable
+	 * @param mixed $condition
 	 */
-	public function register(string $route, callable $callable) {
-		$this->routes[$route] = $callable;
+	public function register(string $route, callable $callable, $condition = true) {
+		if ($condition && $route) {
+			$this->routes[] = array(
+				'route' => $route,
+				'callable' => $callable
+			);
+		}
 	}
 }

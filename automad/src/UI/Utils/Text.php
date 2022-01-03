@@ -36,6 +36,7 @@
 
 namespace Automad\UI\Utils;
 
+use Automad\Core\Debug;
 use Automad\Core\Parse;
 use Automad\Core\Str;
 
@@ -52,7 +53,7 @@ class Text {
 	/**
 	 * Array of UI text modules.
 	 */
-	private static $modules = array();
+	private static $modules = null;
 
 	/**
 	 * Return the requested text module.
@@ -61,6 +62,8 @@ class Text {
 	 * @return string The requested text module
 	 */
 	public static function get(string $key) {
+		self::parseModules();
+
 		if (isset(Text::$modules[$key])) {
 			return Text::$modules[$key];
 		}
@@ -72,6 +75,8 @@ class Text {
 	 * @return array The filtered modlues array
 	 */
 	public static function getEditorModules() {
+		self::parseModules();
+
 		return array_filter(self::$modules, function ($item) {
 			return (strpos($item, 'editor_') === 0);
 		}, ARRAY_FILTER_USE_KEY);
@@ -83,19 +88,25 @@ class Text {
 	 * @return object The modules array as object
 	 */
 	public static function getObject() {
+		self::parseModules();
+
 		return (object) self::$modules;
 	}
 
 	/**
 	 * Parse the text modules file and store all modules in Text::$modules.
-	 * In case AM_FILE_GUI_TRANSLATION is defined, the translated text modules
+	 * In case AM_FILE_UI_TRANSLATION is defined, the translated text modules
 	 * will be merged into Text:$modules.
 	 */
-	public static function parseModules() {
-		Text::$modules = Parse::dataFile(AM_FILE_GUI_TEXT_MODULES);
+	private static function parseModules() {
+		if (self::$modules) {
+			return false;
+		}
 
-		if (AM_FILE_GUI_TRANSLATION) {
-			$translationFile = AM_BASE_DIR . AM_FILE_GUI_TRANSLATION;
+		Text::$modules = Parse::dataFile(AM_FILE_UI_TEXT_MODULES);
+
+		if (AM_FILE_UI_TRANSLATION) {
+			$translationFile = AM_BASE_DIR . AM_FILE_UI_TRANSLATION;
 
 			if (is_readable($translationFile)) {
 				$translation = Parse::dataFile($translationFile);
@@ -111,5 +122,7 @@ class Text {
 			// Remove all line breaks to avoid problems when using text modules in JS notify.
 			$item = str_replace(array("\n", "\r"), '', $item);
 		});
+
+		Debug::log('Parsed text modules');
 	}
 }

@@ -217,6 +217,23 @@ class Cache {
 	}
 
 	/**
+	 * Get Automad from cache or create new instance.
+	 *
+	 * @return Automad The Automad object
+	 */
+	public function getAutomad() {
+		if ($this->automadObjectCacheIsApproved()) {
+			$Automad = $this->readAutomadObjectFromCache();
+		} else {
+			$Automad = new Automad();
+			$this->writeAutomadObjectToCache($Automad);
+			new Sitemap($Automad->getCollection());
+		}
+
+		return $Automad;
+	}
+
+	/**
 	 * Get an array of all subdirectories and all files under /pages, /shared, /themes and /config (and the version.php)
 	 * and determine the latest mtime among all these items.
 	 * That time basically represents the site's modification time, to find out the lastes edit/removal/add of a page.

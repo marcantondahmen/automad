@@ -98,24 +98,6 @@ class App {
 	}
 
 	/**
-	 * Get Automad from cache or create new instance.
-	 *
-	 * @param Cache $Cache
-	 * @return Automad The Automad object
-	 */
-	private function getAutomad(Cache $Cache) {
-		if ($Cache->automadObjectCacheIsApproved()) {
-			$Automad = $Cache->readAutomadObjectFromCache();
-		} else {
-			$Automad = new Automad();
-			$Cache->writeAutomadObjectToCache($Automad);
-			new Sitemap($Automad->getCollection());
-		}
-
-		return $Automad;
-	}
-
-	/**
 	 * Get the generated output for the current request.
 	 *
 	 * @param string $request
@@ -123,58 +105,7 @@ class App {
 	 */
 	private function render(string $request) {
 		$Router = new Router();
-
-		if (AM_PAGE_DASHBOARD) {
-			$Router->register(AM_PAGE_DASHBOARD, function () {
-				$Dashboard = new Dashboard();
-
-				return $Dashboard->get();
-			});
-		}
-
-		if (AM_FEED_ENABLED) {
-			$Router->register(AM_FEED_URL, function () {
-				header('Content-Type: application/rss+xml; charset=UTF-8');
-
-				$Cache = new Cache();
-
-				if ($Cache->pageCacheIsApproved()) {
-					return $Cache->readPageFromCache();
-				}
-
-				$Feed = new Feed(
-					$this->getAutomad($Cache),
-					Parse::csv(AM_FEED_FIELDS)
-				);
-
-				return $Feed->get();
-			});
-		}
-
-		$Router->register('/.*', function () use ($request) {
-			if (AM_HEADLESS_ENABLED) {
-				header('Content-Type: application/json; charset=utf-8');
-			}
-
-			$Cache = new Cache();
-
-			if ($Cache->pageCacheIsApproved()) {
-				return $Cache->readPageFromCache();
-			}
-
-			$Automad = $this->getAutomad($Cache);
-			$View = new View($Automad, AM_HEADLESS_ENABLED);
-			$output = $View->render();
-
-			if ($Automad->currentPageExists()) {
-				$Cache->writePageToCache($output);
-			} else {
-				Debug::log($request, 'Page not found! Caching will be skipped!');
-			}
-
-			return $output;
-		});
-
+		Routes::init($Router);
 		$callable = $Router->get($request);
 
 		return $callable();
