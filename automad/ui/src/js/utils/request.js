@@ -63,7 +63,8 @@ const requestDashboard = async (slug, data = null) => {
 };
 
 export const requestController = async (controller, data) => {
-	const response = await requestDashboard(`?controller=${controller}`, data);
+	const route = controller.replace('Controller::', '/');
+	const response = await requestDashboard(`/api/${route}`, data);
 	const responseData = await response.json();
 
 	return responseData;

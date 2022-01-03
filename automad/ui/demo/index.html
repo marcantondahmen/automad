@@ -6,7 +6,7 @@
 	<title>Automad — UI Demo</title>
 	<link href="../../dist/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<link rel="stylesheet" href="../../dist/ui.bundle.css">
-	<script src="../../../dashboard?view=BootstrapClient"></script>
+	<script src="../../../dashboard/bootstrap.js"></script>
 	<script src="../../dist/ui.bundle.js"></script>
 </head>
 <body>
@@ -42,7 +42,7 @@
 		</nav>
 		<nav class="am-l-navbar">
 			<div class="am-l-navbar__jump">
-				<am-jumpbar controller="UI::autocompleteJump"></am-jumpbar>
+				<am-jumpbar controller="UIController::autocompleteJump"></am-jumpbar>
 			</div>
 			<div class="am-l-navbar__buttons">
 				<am-toggle target="body" cls="am-l-page--sidebar-open">XXX</am-toggle>
@@ -65,8 +65,8 @@
 					
 				</am-switcher>
 
-				<am-form-submit class="am-e-button" form="Page::data">Save</am-form-submit>
-				<am-form-page controller="Page::data" page="/blocks"></am-form-page>
+				<am-form-submit class="am-e-button" form="PageController::data">Save</am-form-submit>
+				<am-form-page controller="PageController::data" page="/blocks"></am-form-page>
 
 
 				<!-- <hr>
