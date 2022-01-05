@@ -36,6 +36,7 @@
 
 namespace Automad\Core;
 
+use Automad\Routes;
 use Automad\UI\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -329,22 +330,23 @@ class Automad {
 	}
 
 	/**
-	 * Get an array of reseverd URLs - all real directories within the base directory and the UI URL.
+	 * Get the list of taken URLs that can't be used as page URLs.
 	 */
 	private function getReservedUrls() {
+		foreach (Routes::$registered as $route) {
+			$url = preg_replace('#^(/[\w\-\_]*).*$#i', '$1', $route['route']);
+
+			if ($url != '/') {
+				$this->reservedUrls[] = $url;
+			}
+		}
+
 		// Get all real directories.
 		foreach (FileSystem::glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
 			$this->reservedUrls[] = '/' . basename($dir);
 		}
 
-		// Add the UI URL if enabled.
-		if (AM_PAGE_DASHBOARD) {
-			$this->reservedUrls[] = AM_PAGE_DASHBOARD;
-		}
-
-		if (AM_FEED_ENABLED) {
-			$this->reservedUrls[] = AM_FEED_URL;
-		}
+		$this->reservedUrls = array_unique($this->reservedUrls);
 
 		Debug::log($this->reservedUrls);
 	}

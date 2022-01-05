@@ -59,6 +59,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Routes {
 	/**
+	 * An array of reserved routes that can't be used by any page.
+	 */
+	public static $registered = array();
+
+	/**
 	 * Register routes to a giver Router.
 	 *
 	 * @param Router $Router
@@ -68,7 +73,8 @@ class Routes {
 			AM_PAGE_DASHBOARD . '/bootstrap.js',
 			function () {
 				return Bootstrap::file();
-			}
+			},
+			AM_PAGE_DASHBOARD
 		);
 
 		$Router->register(
@@ -168,5 +174,7 @@ class Routes {
 
 			return $output;
 		});
+
+		self::$registered = $Router->getRoutes();
 	}
 }

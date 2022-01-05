@@ -81,6 +81,15 @@ class Router {
 	}
 
 	/**
+	 * Get the routes array.
+	 *
+	 * @return array the array of routes
+	 */
+	public function getRoutes() {
+		return $this->routes;
+	}
+
+	/**
 	 * Register a new route in case $condition is true.
 	 *
 	 * @param string $route
