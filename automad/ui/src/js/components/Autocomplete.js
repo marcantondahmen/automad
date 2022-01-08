@@ -42,15 +42,13 @@ import { requestController } from '../utils/request';
  */
 
 export class Autocomplete extends BaseComponent {
+	controller = 'UIController::autocompleteLink';
 	items = [];
 	itemsFiltered = [];
 	selectedIndex = null;
 	initialIndex = null;
 	minInputLength = 1;
 
-	static get observedAttributes() {
-		return ['controller'];
-	}
 
 	connectedCallback() {
 		this.input = create(
@@ -71,7 +69,7 @@ export class Autocomplete extends BaseComponent {
 	}
 
 	async init() {
-		const data = await requestController(this.elementAttributes.controller);
+		const data = await requestController(this.controller);
 
 		if (typeof data.autocomplete === 'undefined') {
 			return false;

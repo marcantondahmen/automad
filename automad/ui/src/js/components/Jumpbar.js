@@ -40,6 +40,7 @@ import { create } from '../utils/create';
  */
 
 class Jumpbar extends Autocomplete {
+	controller = 'UIController::autocompleteJump';
 	initialIndex = 0;
 	minInputLength = 0;
 
