@@ -38,18 +38,59 @@ import { create } from '../utils/create';
 import { requestController } from '../utils/request';
 
 /**
- * <am-autocomplete controller="UI::autocompleteLink"></am-autocomplete>
+ * An input field with page autocompletion.
+ * ```
+ * <am-autocomplete></am-autocomplete>
+ * ```
+ *
+ * @extends BaseComponent
  */
-
 export class Autocomplete extends BaseComponent {
+	/**
+	 * The controller.
+	 *
+	 * @type {string}
+	 */
 	controller = 'UIController::autocompleteLink';
+
+	/**
+	 * Autocompletion items.
+	 *
+	 * @type {Array}
+	 */
 	items = [];
+
+	/**
+	 * The filtered autocompletion items.
+	 *
+	 * @type {Array}
+	 */
 	itemsFiltered = [];
+
+	/**
+	 * The selected index.
+	 *
+	 * @type {(null|number)}
+	 */
 	selectedIndex = null;
+
+	/**
+	 * The initial index.
+	 *
+	 * @type {(null|number)}
+	 */
 	initialIndex = null;
+
+	/**
+	 * The minimum input value length to trigger the dropdown.
+	 *
+	 * @type {number}
+	 */
 	minInputLength = 1;
 
-
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		this.input = create(
 			'input',
@@ -68,6 +109,12 @@ export class Autocomplete extends BaseComponent {
 		this.init();
 	}
 
+	/**
+	 * Init the autocompletion.
+	 *
+	 * @returns {boolean|null}
+	 * @async
+	 */
 	async init() {
 		const data = await requestController(this.controller);
 
@@ -90,18 +137,36 @@ export class Autocomplete extends BaseComponent {
 		this.update();
 	}
 
+	/**
+	 * Create a dropdown item element.
+	 *
+	 * @param {Object} item
+	 * @returns {HTMLElement}
+	 */
 	createItemElement(item) {
 		const element = create('a', [this.cls.dropdownItem], {});
 
-		element.innerHTML = `${item.title}`;
+		element.innerHTML = `
+			<i class="bi bi-link"></i>
+			<span>${item.title}</span>
+		`;
 
 		return element;
 	}
 
+	/**
+	 * Create an item value.
+	 *
+	 * @param {Object} item
+	 * @returns {string}
+	 */
 	createItemValue(item) {
 		return item.value.toLowerCase();
 	}
 
+	/**
+	 * Render the dropdown.
+	 */
 	renderDropdown() {
 		this.dropdown.innerHTML = '';
 
@@ -110,6 +175,9 @@ export class Autocomplete extends BaseComponent {
 		});
 	}
 
+	/**
+	 * Update the dropdown and the list of filtered items based on the current input value.
+	 */
 	update() {
 		const filters = this.input.value.toLowerCase().split(' ');
 
@@ -135,6 +203,11 @@ export class Autocomplete extends BaseComponent {
 		this.toggleActiveItemStyle();
 	}
 
+	/**
+	 * Handle key down events.
+	 *
+	 * @param {Event} event
+	 */
 	onKeyDownEvent(event) {
 		switch (event.keyCode) {
 			case 38:
@@ -154,6 +227,11 @@ export class Autocomplete extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Handle key up events.
+	 *
+	 * @param {Event} event
+	 */
 	onKeyUpEvent(event) {
 		if (![38, 40, 13, 9, 27].includes(event.keyCode)) {
 			this.update();
@@ -161,6 +239,11 @@ export class Autocomplete extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Handle mouse over events.
+	 *
+	 * @param {Event} event
+	 */
 	onMouseOverEvent(event) {
 		let item = event.target;
 
@@ -173,6 +256,9 @@ export class Autocomplete extends BaseComponent {
 		this.toggleActiveItemStyle();
 	}
 
+	/**
+	 * Register events for the input field.
+	 */
 	registerInputEvents() {
 		listen(this.input, 'keydown', this.onKeyDownEvent.bind(this));
 		listen(this.input, 'keyup', debounce(this.onKeyUpEvent.bind(this)));
@@ -185,6 +271,9 @@ export class Autocomplete extends BaseComponent {
 		});
 	}
 
+	/**
+	 * Register events for the dropdown.
+	 */
 	registerDropdownEvents() {
 		listen(
 			this.dropdown,
@@ -205,6 +294,9 @@ export class Autocomplete extends BaseComponent {
 		);
 	}
 
+	/**
+	 * Toggle item styles in order to highlight the active item.
+	 */
 	toggleActiveItemStyle() {
 		this.itemsFiltered.forEach((item, index) => {
 			item.element.classList.toggle(
@@ -214,12 +306,18 @@ export class Autocomplete extends BaseComponent {
 		});
 	}
 
+	/**
+	 * Close the dropdown.
+	 */
 	close() {
 		this.selectedIndex = this.initialIndex;
 		this.toggleActiveItemStyle();
 		this.dropdown.classList.add(this.cls.hidden);
 	}
 
+	/**
+	 * Open the dropdown.
+	 */
 	open() {
 		if (this.input.value.length >= this.minInputLength) {
 			this.update();
@@ -227,6 +325,9 @@ export class Autocomplete extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Highlight and save the index of the previous item in the dropdown.
+	 */
 	prev() {
 		this.selectedIndex--;
 
@@ -237,6 +338,9 @@ export class Autocomplete extends BaseComponent {
 		this.toggleActiveItemStyle();
 	}
 
+	/**
+	 * Highlight and save the index of the next item in the dropdown.
+	 */
 	next() {
 		if (this.selectedIndex === null) {
 			this.selectedIndex = 0;
@@ -251,6 +355,11 @@ export class Autocomplete extends BaseComponent {
 		this.toggleActiveItemStyle();
 	}
 
+	/**
+	 * Select an item and use the item value as the input value.
+	 *
+	 * @param {Event} event
+	 */
 	select(event) {
 		event.preventDefault();
 

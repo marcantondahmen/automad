@@ -32,25 +32,36 @@
  * Licensed under the MIT license.
  */
 
-import { query, queryAll, queryParents } from '../utils/core';
+import { getDashboardURL, query, queryAll, queryParents } from '../utils/core';
 import { create } from '../utils/create';
 import { BaseComponent } from './BaseComponent';
 
 /**
+ * The navigation tree component.
+ * ```
  * <am-nav-tree pages='[
  *     { "url": "/", "title": "Home", "path": "/", "parent": ""},
  *     { "url": "/page-1", "title": "Page 1", "path": "/01.page-1", "parent": "/"},
  *     ...
  * ]'></am-nav-tree>
+ * ```
  *
- * <am-nav-item view="System" icon="sliders" text="System ..."></am-nav-item>
+ * @extends BaseComponent
  */
-
 class NavTree extends BaseComponent {
+	/**
+	 * The array of observed attributes.
+	 *
+	 * @type {Array}
+	 * @static
+	 */
 	static get observedAttributes() {
 		return ['pages'];
 	}
 
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		const pages = JSON.parse(this.elementAttributes.pages);
 		const tree = {};
@@ -73,6 +84,13 @@ class NavTree extends BaseComponent {
 		this.toggleChildrenIcons();
 	}
 
+	/**
+	 * Create a tree item.
+	 *
+	 * @param {Object} page - the page data object
+	 * @param {HTMLElement} parent - the children container of the parent tree node
+	 * @returns {{wrapper: HTMLElement, link: HTMLElement, children: HTMLElement}}
+	 */
 	createItem(page, parent) {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
@@ -95,12 +113,18 @@ class NavTree extends BaseComponent {
 		}
 
 		link.innerHTML = `
-			<a href="?view=Page&url=${encodeURIComponent(page.url)}">${page.title}</a>
+			<a href="${getDashboardURL}/Page?url=${encodeURIComponent(page.url)}">
+				<i class="bi bi-file-earmark-text"></i>
+				<span>${page.title}</span>
+			</a>
 		`;
 
 		return { wrapper, link, children };
 	}
 
+	/**
+	 * Unfold the tree to reveal the active item.
+	 */
 	unfoldToActive() {
 		const activeItem = query(`.${this.cls.navItemActive}`);
 
@@ -111,6 +135,9 @@ class NavTree extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Toggle visibility of the children arrow indicators depending on the existance of children.
+	 */
 	toggleChildrenIcons() {
 		const childrenContainers = queryAll(`.${this.cls.navChildren}`, this);
 
@@ -123,31 +150,60 @@ class NavTree extends BaseComponent {
 	}
 }
 
+/**
+ * A simple link in the sidebar navigation.
+ * ```
+ * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
+ * ```
+ *
+ * @extends BaseComponent
+ */
 class NavItem extends BaseComponent {
+	/**
+	 * The array of observed attributes.
+	 *
+	 * @type {Array}
+	 * @static
+	 */
 	static get observedAttributes() {
 		return ['view', 'icon', 'text'];
 	}
 
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		const searchParams = new URLSearchParams(window.location.search);
+		const activeView = searchParams.get('view') || '';
 
 		this.classList.add(this.cls.navItem);
-		this.innerHTML = this.render();
-
 		this.classList.toggle(
 			this.cls.navItemActive,
-			this.elementAttributes.view == searchParams.get('view')
+			this.elementAttributes.view == activeView
 		);
+
+		this.innerHTML = this.render();
 	}
 
+	/**
+	 * Render the component.
+	 *
+	 * @returns {string} the rendered HTML
+	 */
 	render() {
+		let link = './';
+
+		if (this.elementAttributes.view) {
+			link = `${getDashboardURL}/${this.elementAttributes.view}`;
+		}
+
 		return `
 			<a 
-			href="?view=${this.elementAttributes.view}" 
+			href="${link}" 
 			class="${this.cls.navLink}"
 			>
 				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				${this.elementAttributes.text}
+				<span>${this.elementAttributes.text}</span>
 			</a>
 		`;
 	}

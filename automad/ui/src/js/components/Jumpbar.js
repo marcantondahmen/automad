@@ -36,14 +36,41 @@ import { Autocomplete } from './Autocomplete';
 import { create } from '../utils/create';
 
 /**
- * <am-jumpbar controller="UI::autocompleteJump"></am-jumpbar>
+ * The Jumpbar field element.
+ * ```
+ * <am-jumpbar></am-jumpbar>
+ * ```
+ *
+ * @extends Autocomplete
  */
-
 class Jumpbar extends Autocomplete {
+	/**
+	 * The controller.
+	 *
+	 * @type {string}
+	 */
 	controller = 'UIController::autocompleteJump';
+
+	/**
+	 * The initial index.
+	 *
+	 * @type {(null|number)}
+	 */
 	initialIndex = 0;
+
+	/**
+	 * The minimum input value length to trigger the dropdown.
+	 *
+	 * @type {number}
+	 */
 	minInputLength = 0;
 
+	/**
+	 * Create a dropdown item.
+	 *
+	 * @param {Object} item
+	 * @returns {HTMLElement} the dropdown item element
+	 */
 	createItemElement(item) {
 		const element = create('a', [this.cls.dropdownItem], {
 			href: item.url,
@@ -54,20 +81,37 @@ class Jumpbar extends Autocomplete {
 		return element;
 	}
 
+	/**
+	 * Create a value for a dropdown item.
+	 *
+	 * @param {Object} item
+	 * @returns {string} the item value
+	 */
 	createItemValue(item) {
 		return item.value.toLowerCase();
 	}
 
+	/**
+	 * Create the inner HTML for a dropdown item.
+	 *
+	 * @param {string} icon
+	 * @param {string} title
+	 * @param {string} subtitle
+	 * @returns {string} the HTML string
+	 */
 	itemHtml(icon, title, subtitle) {
 		return `
-			<i class="bi-${icon}"></i>&nbsp;
-			${title}
+			<i class="bi bi-${icon}"></i>
+			<span>${title}</span>
 			<span class="${this.cls.muted}">
 				${subtitle}
 			</span>
 		`;
 	}
 
+	/**
+	 * Update the dropdown and the list of filtered items based on the current input value.
+	 */
 	update() {
 		const search = this.itemsFiltered[0];
 
@@ -86,6 +130,11 @@ class Jumpbar extends Autocomplete {
 		super.update();
 	}
 
+	/**
+	 * Select an item and use the item value as the input value.
+	 *
+	 * @param {Event} event
+	 */
 	select(event) {
 		if (this.selectedIndex !== null) {
 			this.itemsFiltered[this.selectedIndex].element.click();

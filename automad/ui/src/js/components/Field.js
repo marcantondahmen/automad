@@ -36,10 +36,22 @@ import { htmlSpecialChars, listen, titleCase } from '../utils/core';
 import { create } from '../utils/create';
 import { BaseComponent } from './BaseComponent';
 
+/**
+ * Create an ID from a field key.
+ *
+ * @param {string} key
+ * @returns {string}
+ */
 const createId = (key) => {
 	return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
 };
 
+/**
+ * Create a label text from a field key.
+ *
+ * @param {string} key
+ * @returns {string}
+ */
 const createLabel = (key) => {
 	return titleCase(key.replace(/\+(.)/, '+ $1'))
 		.replace('+ ', '+')
@@ -47,7 +59,15 @@ const createLabel = (key) => {
 		.replace('Checkbox ', '');
 };
 
+/**
+ * A button that remove its parent field.
+ *
+ * @extends BaseComponent
+ */
 class FieldRemove extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		listen(this, 'click', () => {
 			this.closest(`.${this.cls.field}`).remove();
@@ -55,12 +75,31 @@ class FieldRemove extends BaseComponent {
 	}
 }
 
+/**
+ * A standard input field with a label.
+ *
+ * @extends BaseComponent
+ */
 export class Field extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		this.classList.add(this.cls.field);
 	}
 
-	set data({ key, value, name, tooltip, removable, label }) {
+	/**
+	 * The field data.
+	 *
+	 * @param {Object} params
+	 * @param {string} params.key
+	 * @param {string} params.value
+	 * @param {string} params.name
+	 * @param {string} params.tooltip
+	 * @param {string} params.label
+	 * @param {boolean} params.removable
+	 */
+	set data({ key, value, name, tooltip, label, removable }) {
 		const id = createId(key);
 
 		value = value || '';
@@ -83,6 +122,9 @@ export class Field extends BaseComponent {
 		this.render();
 	}
 
+	/**
+	 * Create a label.
+	 */
 	label() {
 		const { id, label, tooltip, removable } = this._data;
 		const removeButton = removable
@@ -101,6 +143,9 @@ export class Field extends BaseComponent {
 		`;
 	}
 
+	/**
+	 * Create an input field.
+	 */
 	input() {
 		const { name, id, value } = this._data;
 		const input = create(
@@ -111,67 +156,150 @@ export class Field extends BaseComponent {
 		);
 	}
 
+	/**
+	 * Render the field.
+	 */
 	render() {
 		this.label();
 		this.input();
 	}
 }
 
+/**
+ * A block editor field.
+ *
+ * @extends Field
+ */
 class FieldEditor extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A checkbox field.
+ *
+ * @extends Field
+ */
 class FieldCheckbox extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A large checkbox field.
+ *
+ * @extends Field
+ */
 class FieldCheckboxLarge extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A checkbox field that can have a default global value.
+ *
+ * @extends Field
+ */
 class FieldCheckboxPage extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A color field.
+ *
+ * @extends Field
+ */
 class FieldColor extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A date field.
+ *
+ * @extends Field
+ */
 class FieldDate extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A Markdown editor field.
+ *
+ * @extends Field
+ */
 class FieldMarkdown extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * An image field.
+ *
+ * @extends Field
+ */
 class FieldImage extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * A multiline text field.
+ *
+ * @extends Field
+ */
 class FieldTextarea extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}
 }
 
+/**
+ * An URL field.
+ *
+ * @extends Field
+ */
 class FieldURL extends Field {
+	/**
+	 * Render the field.
+	 */
 	render() {
 		super.render();
 	}

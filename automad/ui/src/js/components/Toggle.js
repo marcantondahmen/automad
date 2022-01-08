@@ -35,11 +35,31 @@
 import { BaseComponent } from './BaseComponent';
 import { listen, queryAll } from '../utils/core';
 
+/**
+ * A simple toggle link component.
+ *
+ * ```
+ * <am-toggle target="body" cls="am-l-page--sidebar-open">
+ *     Menu
+ * </am-toggle>
+ * ```
+ *
+ * @extends BaseComponent
+ */
 class Toggle extends BaseComponent {
+	/**
+	 * The array of observed attributes.
+	 *
+	 * @type {Array}
+	 * @static
+	 */
 	static get observedAttributes() {
 		return ['target', 'cls'];
 	}
 
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		listen(this, 'click', () => {
 			const elements = queryAll(this.elementAttributes.target);

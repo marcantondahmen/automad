@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -47,14 +47,14 @@ import { Field } from '../Field';
 import { Form } from '../Form';
 
 /**
- * The Page class doesn't need the watch and init properties
- * as this is anyways the intended behavior.
- * <am-form-page controller="Page::data" page="/url"></am-form-page>
- * <am-form-submit form="Page::data">
- *     Submit
- * </am-form-submit>
+ * Create a form field and set its data.
+ *
+ * @param {string} fieldType - The field type name
+ * @param {HTMLElement} section - the section node where the field is created in
+ * @param {Object} data - the field data object
+ * @param {Array} cls - the array with optional class name
+ * @returns {Field} - the generated field
  */
-
 const createField = (fieldType, section, data, cls = []) => {
 	const field = create(fieldType, cls, {}, section);
 
@@ -63,6 +63,16 @@ const createField = (fieldType, section, data, cls = []) => {
 	return field;
 };
 
+/**
+ * Create a group of form fields within a given section element based on a set of keys.
+ *
+ * @param {Object} params
+ * @param {HTMLElement} params.section - the section node where the field is created in
+ * @param {Array} params.keys - the array of variable keys for the field group
+ * @param {Object} params.pageData - the data object that was loaded from the page's data file
+ * @param {Object} params.tooltips - the field tooltips
+ * @param {boolean} params.removable - true if the field should be removable
+ */
 const fieldGroup = ({ section, keys, pageData, tooltips, removable }) => {
 	keys.forEach((key) => {
 		let fieldType = 'am-field-textarea';
@@ -105,6 +115,13 @@ const fieldGroup = ({ section, keys, pageData, tooltips, removable }) => {
 	});
 };
 
+/**
+ * Beautify a template path to be used as name.
+ *
+ * @param {string} template - the path of a given template
+ * @param {string} [themeName] - an optional theme name
+ * @returns {string} the beautified template name
+ */
 const templateName = (template, themeName = '') => {
 	const templateName = template
 		.split('/')
@@ -114,6 +131,13 @@ const templateName = (template, themeName = '') => {
 	return titleCase([themeName, templateName].join('/'));
 };
 
+/**
+ * Simplify a template/theme path combination to represent a theme variable value.
+ *
+ * @param {string} template - a template path
+ * @param {string} [path] - an optional path
+ * @returns {string}
+ */
 const templatePath = (template, path = '') => {
 	const templateName = template
 		.split('/')
@@ -123,6 +147,16 @@ const templatePath = (template, path = '') => {
 	return [path, templateName].filter((item) => item.length).join('/');
 };
 
+/**
+ * Get all status info about the selected template.
+ *
+ * @param {Object} params
+ * @param {Object} params.pageData - the data object that was loaded from the page's data file
+ * @param {Object} params.shared - the shared data object
+ * @param {string} params.template - a template path
+ * @param {string} params.themeKey - the field name for themes
+ * @returns {{buttonLabel: string, buttonClass: string, buttonIcon: string, selectedTemplate: string, mainTheme: Object}}
+ */
 const themeStatus = ({ pageData, shared, template, themeKey }) => {
 	const themes = getThemes();
 	let mainTheme = themes[shared[themeKey]];
@@ -160,13 +194,32 @@ const themeStatus = ({ pageData, shared, template, themeKey }) => {
 	};
 };
 
+/**
+ * A page data form element.
+ * The Page class doesn't need the watch and init properties
+ * as this is anyways the intended behavior.
+ * ```
+ * <am-form-page controller="Page::data" page="/url"></am-form-page>
+ * <am-form-submit form="Page::data">Submit</am-form-submit>
+ * ```
+ *
+ * @extends Form
+ */
 class Page extends Form {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		this.sections = this.createSections();
 
 		this.submit();
 	}
 
+	/**
+	 * Create switcher sections for the different kind of variable fields.
+	 *
+	 * @returns {Object}
+	 */
 	createSections() {
 		const sections = {};
 		const content = getSwitcherSections().content;
@@ -186,6 +239,19 @@ class Page extends Form {
 		return sections;
 	}
 
+	/**
+	 * Create the main settings fields.
+	 *
+	 * @param {Object} params
+	 * @param {HTMLElement} params.section - the section element where the fields are created in
+	 * @param {string} params.url - the page URL
+	 * @param {string} params.prefix - the directory prefix
+	 * @param {string} params.slug - the page slug
+	 * @param {Object} params.pageData - the data that was loaded from the data file
+	 * @param {Object} params.shared - the shared data object
+	 * @param {Object} params.reserved - the reserved keys object
+	 * @param {string} params.template - the page template path
+	 */
 	mainSettings({
 		section,
 		url,
@@ -198,6 +264,14 @@ class Page extends Form {
 	}) {
 		const allTags = getTags();
 
+		/**
+		 * Create a field for one of the main settings.
+		 *
+		 * @param {string} fieldType
+		 * @param {string} key
+		 * @param {string} [label]
+		 * @returns {Field}
+		 */
 		const createMainField = (fieldType, key, label = '') => {
 			const data = {
 				key,
@@ -267,6 +341,11 @@ class Page extends Form {
 		tagsField.init(allTags);
 	}
 
+	/**
+	 * Create the form after the response was received successfully.
+	 *
+	 * @param {Object} response - the response data
+	 */
 	processResponse(response) {
 		if (typeof response.data === 'undefined') {
 			return false;
@@ -317,11 +396,34 @@ class Page extends Form {
 	}
 }
 
+/**
+ * The template field button.
+ *
+ * @extends Field
+ */
 class FieldTemplate extends Field {
+	/**
+	 * The field data.
+	 *
+	 * @param {Object} params
+	 * @param {Object} params.pageData
+	 * @param {Object} params.shared
+	 * @param {string} params.template
+	 * @param {string} params.themeKey
+	 */
 	set data({ pageData, shared, template, themeKey }) {
 		this.render({ pageData, shared, template, themeKey });
 	}
 
+	/**
+	 * Render a template field button.
+	 *
+	 * @param {Object} params
+	 * @param {Object} params.pageData
+	 * @param {Object} params.shared
+	 * @param {string} params.template
+	 * @param {string} params.themeKey
+	 */
 	render({ pageData, shared, template, themeKey }) {
 		const {
 			buttonLabel,
@@ -384,11 +486,32 @@ class FieldTemplate extends Field {
 	}
 }
 
+/**
+ * The actual template select field.
+ *
+ * @extends Field
+ */
 class FieldSelectTemplate extends Field {
+	/**
+	 * The field data.
+	 *
+	 * @param {Object} params
+	 * @param {string} params.value
+	 * @param {Object} params.mainTheme
+	 */
 	set data({ value, mainTheme }) {
 		this.render({ value, mainTheme });
 	}
 
+	/**
+	 * Create a set of options for the a optgroup.
+	 *
+	 * @param {Array} templates - the templates array
+	 * @param {HTMLElement} section - the section element
+	 * @param {string} value - the currently used template
+	 * @param {string} [themeName] - the optional theme name for the current group
+	 * @param {string} [themePath] - the optional theme path
+	 */
 	createOptions(templates, section, value, themeName = '*', themePath = '') {
 		templates.forEach((template) => {
 			const file = templatePath(template, themePath);
@@ -402,6 +525,13 @@ class FieldSelectTemplate extends Field {
 		});
 	}
 
+	/**
+	 * Render the field.
+	 *
+	 * @param {Object} params
+	 * @param {string} params.value
+	 * @param {Object} params.mainTheme
+	 */
 	render({ value, mainTheme }) {
 		const themes = getThemes();
 		const select = create(
@@ -429,7 +559,15 @@ class FieldSelectTemplate extends Field {
 	}
 }
 
+/**
+ * A tags input field.
+ *
+ * @extends Field
+ */
 class FieldTags extends Field {
+	/**
+	 * Create the input field.
+	 */
 	input() {
 		const { name, id, value } = this._data;
 		this.field = create(
@@ -445,6 +583,12 @@ class FieldTags extends Field {
 		this.field.innerHTML = value;
 	}
 
+	/**
+	 * Init a new Tagify instance.
+	 *
+	 * @see {@link options https://github.com/yairEO/tagify}
+	 * @param {Array} allTags - the array for tags autocompletion
+	 */
 	init(allTags) {
 		const tagify = new Tagify(this.field, {
 			whitelist: allTags,

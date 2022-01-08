@@ -38,34 +38,40 @@ import { requestController } from '../utils/request';
 import { BaseComponent } from './BaseComponent';
 
 /**
- * Self initialized form with watched submit button and page URL:
- * <am-form controller="Class::method" init watch></am-form>
- *
- * Submit buttons are connected to a form by the "form" attribute.
+ * A submit button element. Submit buttons are connected to a form by the "form" attribute.
  * The "form" attribute uses the controller of the related form to connect.
- * <am-form-submit form="Class::method">
- *     Submit
- * </am-form-submit>
- *
- * Normal form with watched button:
- * <am-form controller="Page::add" page="/url" watch>
+ * ```
+ * <am-form controller="Class::method" page="/url" watch>
  *     <input name="title">
- *     ...
  * </am-form>
- * <am-form-submit form="Page::add">
- *     Submit
- * </am-form-submit>
+ * <am-form-submit form="Class::method">Submit</am-form-submit>
+ * ```
+ *
+ * @extends BaseComponent
  */
-
 class FormSubmit extends BaseComponent {
+	/**
+	 * The observed attributes.
+	 *
+	 * @type {Array}
+	 * @static
+	 */
 	static get observedAttributes() {
 		return ['form'];
 	}
 
+	/**
+	 * The forms that are submitted by this button.
+	 *
+	 * @type {Array}
+	 */
 	get relatedForms() {
 		return queryAll(`[controller="${this.elementAttributes.form}"]`);
 	}
 
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		const submit = () => {
 			if (this.hasAttribute('disabled')) {
@@ -81,17 +87,56 @@ class FormSubmit extends BaseComponent {
 	}
 }
 
+/**
+ * A basic form.
+ *
+ * The following options are available and can be passed as attributes:
+ * - `controller` (required)
+ * - `page`
+ * - `init`
+ * - `watch`
+ * - `focus`
+ *
+ * Self initialized form with watched submit button and page URL:
+ * ```
+ * <am-form controller="Class::method" init watch></am-form>
+ * ```
+ * Focus the first input of a for when being connected:
+ * ```
+ * <am-form controller="Class::method" focus>
+ *     <input>
+ * </am-form>
+ * ```
+ *
+ * @extends BaseComponent
+ */
 export class Form extends BaseComponent {
+	/**
+	 * The observed attributes.
+	 *
+	 * @type {Array}
+	 * @static
+	 */
 	static get observedAttributes() {
 		return ['controller', 'page'];
 	}
 
+	/**
+	 * All related submit buttons.
+	 *
+	 * @type {Array}
+	 */
 	get submitButtons() {
 		return queryAll(
 			`am-form-submit[form="${this.elementAttributes.controller}"]`
 		);
 	}
 
+	/**
+	 * The form data object.
+	 *
+	 * @type {Object}
+	 */
 	get formData() {
 		const data = {};
 
@@ -109,6 +154,9 @@ export class Form extends BaseComponent {
 		return data;
 	}
 
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
 	connectedCallback() {
 		if (this.hasAttribute('init')) {
 			this.submit();
@@ -125,18 +173,30 @@ export class Form extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Disable all connected submit buttons.
+	 */
 	disbableButtons() {
 		this.submitButtons.forEach((button) => {
 			button.setAttribute('disabled', '');
 		});
 	}
 
+	/**
+	 * Enable all connected submit buttons.
+	 */
 	enableButtons() {
 		this.submitButtons.forEach((button) => {
 			button.removeAttribute('disabled');
 		});
 	}
 
+	/**
+	 * Update the class of the containing field to be marked as changed.
+	 *
+	 * @param {HTMLElement} element - The input element that has changed
+	 * @param {boolean} changed
+	 */
 	updateFieldStatus(element, changed) {
 		const field = element.closest(`.${this.cls.field}`);
 
@@ -145,12 +205,18 @@ export class Form extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Reset all fields to be marked as unchanged.
+	 */
 	resetFieldStatus() {
 		queryAll(`.${this.cls.input}`, this).forEach((input) => {
 			this.updateFieldStatus(input, false);
 		});
 	}
 
+	/**
+	 * Submit the form.
+	 */
 	async submit() {
 		const response = await requestController(
 			this.elementAttributes.controller,
@@ -165,6 +231,11 @@ export class Form extends BaseComponent {
 		this.processResponse(response);
 	}
 
+	/**
+	 * Process the response that is received after submitting the form.
+	 *
+	 * @param {Object} response
+	 */
 	processResponse(response) {
 		if (response.error) {
 			notifyError(response.error);
@@ -179,6 +250,9 @@ export class Form extends BaseComponent {
 		}
 	}
 
+	/**
+	 * Watch the form for changes.
+	 */
 	watch() {
 		const onChange = debounce((event) => {
 			this.enableButtons();
