@@ -38,6 +38,7 @@
     "modern-normalize": "^1.1.0",
     "sortablejs": "^1.14.0",
     "style-loader": "^3.3.1",
+    "toastify-js": "^1.11.2",
     "typeface-inter": "^3.18.1",
     "vinyl-named": "^1.1.0",
     "webpack": "^5.64.4",

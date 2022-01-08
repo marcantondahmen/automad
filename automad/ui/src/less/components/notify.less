@@ -32,16 +32,48 @@
  * Licensed under the MIT license.
  */
 
-@modules: '../../../node_modules';
+.am-c-notify {
+	display: flex;
+	gap: 1.2em;
+	max-width: 20rem;
+	padding: 0.6rem 1rem;
+	color: var(--am-clr-success);
+	background: var(--am-bg-base);
+	box-shadow: var(--am-shadow);
+	border: var(--am-border-width) solid;
+	border-radius: var(--am-radius);
 
-@import (less) '@{modules}/modern-normalize/modern-normalize.css';
-@import (less) '@{modules}/bootstrap-icons/font/bootstrap-icons.css';
-@import '@{modules}/@yaireo/tagify/dist/tagify.css';
-@import '@{modules}/toastify-js/src/toastify.css';
+	&--error {
+		color: var(--am-clr-danger);
+	}
 
-@import 'blocks/blocks.less';
-@import 'components/components.less';
-@import 'elements/elements.less';
-@import 'layout/layout.less';
-@import 'themes/themes.less';
-@import 'utils/utils.less';
+	&__node {
+		display: flex;
+		gap: 0.75em;
+		// align-items: center;
+	}
+
+	&__icon {
+		font-size: 1.5em;
+		line-height: 1.4;
+	}
+
+	&__text {
+		align-self: center;
+	}
+
+	&__close {
+		//align-self: center;
+		opacity: 0.3;
+		transition: opacity 0.2s;
+		padding-left: 0.8em;
+
+		&:before {
+			content: '×';
+		}
+	}
+
+	&:hover &__close {
+		opacity: 1;
+	}
+}
