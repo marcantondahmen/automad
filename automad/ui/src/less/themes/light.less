@@ -55,7 +55,7 @@
 :root {
 	--am-base-font-family: 'Inter';
 	--am-base-font-weight: '430';
-	--am-base-line-height: 1.6;
+	--am-base-line-height: 1.5;
 	--am-base-font-size: 15px;
 
 	@media (min-width: 400px) {
@@ -93,6 +93,9 @@
 
 	--am-scrollbar-clr: var(--am-border-clr);
 
+	// Typography
+	--am-font-size-small: 0.75rem;
+
 	// Layout
 	--am-body-padding-horizontal: 1.25rem;
 	--am-space-top: 4rem;
@@ -106,6 +109,21 @@
 	--am-space-medium: 1.5rem;
 	--am-space-large: 3rem;
 
+	// Flex
+	--am-flex-gap: 0.4em;
+
+	// Buttons
+	--am-button-clr: var(--am-clr-base);
+	--am-button-bg: var(--am-bg-base);
+
+	--am-button-success-clr: var(--am-bg-base);
+	--am-button-success-bg: var(--am-clr-success);
+	--am-button-success-border: var(--am-clr-success);
+
+	--am-button-danger-clr: var(--am-bg-base);
+	--am-button-danger-bg: var(--am-clr-danger);
+	--am-button-danger-border: var(--am-clr-danger);
+
 	// Navbar
 	--am-navbar-height: 4rem;
 
@@ -118,7 +136,7 @@
 	}
 
 	--am-modal-dialog-padding: 1rem;
-	--am-modal-dialog-width: 30rem;
+	--am-modal-dialog-width: 36rem;
 
 	// Dropdown
 	--am-dropdown-clr: var(--am-clr-base);
@@ -134,6 +152,11 @@
 	--am-input-large-height: 3.15rem;
 	--am-input-large-padding: 0.43rem 0.86rem;
 
-	// Sidenav
-	--am-nav-item-active-bg: #e8e8e8;
+	// Sidebar nav
+	--am-nav-padding-horizontal: 0.4rem;
+	--am-nav-item-line-height: 2rem;
+	--am-nav-item-active-clr: var(--am-bg-base);
+	--am-nav-item-active-bg: var(--am-clr-base);
+	--am-nav-link-hover-clr: var(--am-clr-base);
+	--am-nav-link-hover-bg: #f2f2f2;
 }

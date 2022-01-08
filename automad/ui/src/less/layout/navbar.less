@@ -39,13 +39,16 @@
 	justify-content: space-between;
 	border-bottom: var(--am-hairline);
 
-	grid-column: 2 / span 1;
 	grid-row: 1 / span 1;
 
-	@media (min-width: @l-breakpoint-large) {
-		display: grid;
-		justify-content: stretch;
-		grid-template-columns: auto minmax(0, @l-sidebar-width);
+	&--sidebar {
+		grid-column: 2 / span 1;
+
+		@media (min-width: @l-breakpoint-large) {
+			display: grid;
+			justify-content: stretch;
+			grid-template-columns: auto minmax(0, @l-sidebar-width);
+		}
 	}
 
 	&__jump {

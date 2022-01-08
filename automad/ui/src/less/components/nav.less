@@ -35,30 +35,32 @@
 .am-c-nav {
 	display: flex;
 	flex-direction: column;
+	padding: 0 var(--am-nav-padding-horizontal);
 
 	& + & {
 		margin-top: 2rem;
 	}
 
 	&__label {
-		padding: 0 var(--am-body-padding-horizontal);
+		padding: 0 ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal))';
 	}
 
 	&__item {
 		display: flex;
 		flex-direction: column;
-
-		am-nav-item&--active,
-		&--active > summary {
-			background-color: var(--am-nav-item-active-bg);
-		}
+		line-height: var(--am-nav-item-line-height);
 	}
 
 	&__link {
+		display: flex;
+		align-items: center;
+		gap: var(--am-flex-gap);
+		margin-bottom: var(--am-border-width);
 		padding: 0 1rem;
-		padding-left: ~'calc(var(--am-body-padding-horizontal) + (1rem * var(--level, 0)))';
+		padding-left: ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal) + (1rem * var(--level, 0)))';
 		color: var(--am-clr-base);
 		text-decoration: none;
+		border-radius: var(--am-radius);
 
 		summary& {
 			display: flex;
@@ -75,10 +77,9 @@
 
 			&::before {
 				content: '';
-				display: inline-block;
 				font-size: 0.45rem;
 				line-height: 1;
-				width: 0.9rem;
+				width: 0.55rem;
 			}
 
 			&--has-children::before {
@@ -90,6 +91,9 @@
 			}
 
 			& > a {
+				display: inherit;
+				align-items: inherit;
+				gap: inherit;
 				flex-grow: 1;
 				user-select: none;
 				color: inherit;
@@ -97,8 +101,14 @@
 			}
 		}
 
-		& .bi {
-			padding-right: 0.2em;
+		&:hover {
+			color: var(--am-nav-link-hover-clr);
+			background-color: var(--am-nav-link-hover-bg);
 		}
+	}
+
+	&__item--active > &__link {
+		color: var(--am-nav-item-active-clr);
+		background-color: var(--am-nav-item-active-bg);
 	}
 }

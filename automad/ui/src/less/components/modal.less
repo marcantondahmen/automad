@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-am-modal {
+.am-c-modal {
 	display: block;
 	position: fixed;
 	z-index: 200;
@@ -46,13 +46,13 @@ am-modal {
 	opacity: 0;
 	transition: transform 0s linear 0.2s, opacity 0.2s;
 
-	&.am-c-modal--open {
+	&--open {
 		transform: translateY(0);
 		opacity: 1;
 		transition: transform 0s linear, opacity 0.2s;
 	}
 
-	&-dialog {
+	&__dialog {
 		position: relative;
 		display: block;
 		width: 100%;
@@ -64,9 +64,42 @@ am-modal {
 		box-shadow: var(--am-shadow);
 		top: -2%;
 		transition: top 0.2s;
+	}
 
-		.am-c-modal--open > & {
-			top: 0;
+	&--open > &__dialog {
+		top: 0;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		margin: ~'calc(var(--am-modal-dialog-padding) * -1)';
+		margin-bottom: var(--am-space-small);
+		padding: var(--am-modal-dialog-padding);
+		padding-bottom: var(--am-space-small);
+		border-bottom: var(--am-hairline);
+	}
+
+	&__close {
+		cursor: pointer;
+		transition: color 0.2s;
+
+		&:before {
+			content: '✗';
+			margin: 0 -0.5rem;
+			padding: 0 0.5rem;
 		}
+
+		&:hover {
+			color: var(--am-clr-muted);
+		}
+	}
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: var(--am-flex-gap);
+		margin-top: var(--am-space-medium);
 	}
 }
