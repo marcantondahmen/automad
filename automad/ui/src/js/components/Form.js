@@ -32,7 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { debounce, listen, queryAll } from '../utils/core';
+import { debounce, listen, query, queryAll } from '../utils/core';
+import { notifyError } from '../utils/notify';
 import { requestController } from '../utils/request';
 import { BaseComponent } from './BaseComponent';
 
@@ -116,6 +117,12 @@ export class Form extends BaseComponent {
 		if (this.hasAttribute('watch')) {
 			this.watch();
 		}
+
+		if (this.hasAttribute('focus')) {
+			setTimeout(() => {
+				query('input').focus();
+			}, 0);
+		}
 	}
 
 	disbableButtons() {
@@ -131,12 +138,14 @@ export class Form extends BaseComponent {
 	}
 
 	updateFieldStatus(element, changed) {
-		element
-			.closest(`.${this.cls.field}`)
-			.classList.toggle(this.cls.fieldChanged, changed);
+		const field = element.closest(`.${this.cls.field}`);
+
+		if (field) {
+			field.classList.toggle(this.cls.fieldChanged, changed);
+		}
 	}
 
-	resetInputStatus() {
+	resetFieldStatus() {
 		queryAll(`.${this.cls.input}`, this).forEach((input) => {
 			this.updateFieldStatus(input, false);
 		});
@@ -148,12 +157,27 @@ export class Form extends BaseComponent {
 			this.formData
 		);
 
-		this.disbableButtons();
-		this.resetInputStatus();
+		if (this.hasAttribute('watch')) {
+			this.disbableButtons();
+		}
+
+		this.resetFieldStatus();
 		this.processResponse(response);
 	}
 
-	processResponse(response) {}
+	processResponse(response) {
+		if (response.error) {
+			notifyError(response.error);
+		}
+
+		if (response.redirect) {
+			window.location.href = data.redirect;
+		}
+
+		if (response.reload) {
+			window.location.reload();
+		}
+	}
 
 	watch() {
 		const onChange = debounce((event) => {
