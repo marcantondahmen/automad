@@ -36,6 +36,8 @@ import Tagify from '@yaireo/tagify';
 import {
 	getBaseURL,
 	getSwitcherSections,
+	getTags,
+	getThemes,
 	query,
 	text,
 	titleCase,
@@ -121,7 +123,8 @@ const templatePath = (template, path = '') => {
 	return [path, templateName].filter((item) => item.length).join('/');
 };
 
-const themeStatus = ({ pageData, shared, themes, template, themeKey }) => {
+const themeStatus = ({ pageData, shared, template, themeKey }) => {
+	const themes = getThemes();
 	let mainTheme = themes[shared[themeKey]];
 
 	if (typeof mainTheme == 'undefined') {
@@ -190,11 +193,11 @@ class Page extends Form {
 		slug,
 		pageData,
 		shared,
-		allTags,
 		reserved,
-		themes,
 		template,
 	}) {
+		const allTags = getTags();
+
 		const createMainField = (fieldType, key, label = '') => {
 			const data = {
 				key,
@@ -225,7 +228,6 @@ class Page extends Form {
 			{
 				pageData,
 				shared,
-				themes,
 				template,
 				themeKey: reserved['AM_KEY_THEME'],
 			},
@@ -276,20 +278,13 @@ class Page extends Form {
 			section.innerHTML = '';
 		});
 
-		const {
-			url,
-			prefix,
-			slug,
-			pageData,
-			shared,
-			allTags,
-			themes,
-			template,
-			keys,
-		} = response.data;
+		const { url, prefix, slug, pageData, shared, template, keys } =
+			response.data;
+
+		const themeKey = keys.reserved['AM_KEY_THEME'];
+		const themes = getThemes();
 
 		let tooltips = {};
-		const themeKey = keys.reserved['AM_KEY_THEME'];
 
 		try {
 			tooltips = themes[pageData[themeKey]].tooltips;
@@ -306,9 +301,7 @@ class Page extends Form {
 			slug,
 			pageData,
 			shared,
-			allTags,
 			reserved: keys.reserved,
-			themes,
 			template,
 		});
 
@@ -325,11 +318,11 @@ class Page extends Form {
 }
 
 class FieldTemplate extends Field {
-	set data({ pageData, shared, themes, template, themeKey }) {
-		this.render({ pageData, shared, themes, template, themeKey });
+	set data({ pageData, shared, template, themeKey }) {
+		this.render({ pageData, shared, template, themeKey });
 	}
 
-	render({ pageData, shared, themes, template, themeKey }) {
+	render({ pageData, shared, template, themeKey }) {
 		const {
 			buttonLabel,
 			buttonIcon,
@@ -339,7 +332,6 @@ class FieldTemplate extends Field {
 		} = themeStatus({
 			pageData,
 			shared,
-			themes,
 			template,
 			themeKey,
 		});
@@ -388,14 +380,13 @@ class FieldTemplate extends Field {
 		select.data = {
 			value: selectedTemplate,
 			mainTheme,
-			themes,
 		};
 	}
 }
 
 class FieldSelectTemplate extends Field {
-	set data({ value, themes, mainTheme }) {
-		this.render({ value, themes, mainTheme });
+	set data({ value, mainTheme }) {
+		this.render({ value, mainTheme });
 	}
 
 	createOptions(templates, section, value, themeName = '*', themePath = '') {
@@ -411,7 +402,8 @@ class FieldSelectTemplate extends Field {
 		});
 	}
 
-	render({ value, themes, mainTheme }) {
+	render({ value, mainTheme }) {
+		const themes = getThemes();
 		const select = create(
 			'select',
 			[this.cls.input],

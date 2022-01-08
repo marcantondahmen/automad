@@ -33,48 +33,43 @@
  */
 
 export const getBaseURL = () => {
-	if (
-		typeof window.Automad === 'undefined' ||
-		typeof window.Automad.baseURL === 'undefined'
-	) {
-		console.error(
-			'The base URL is not defined. Please define "window.Automad.baseURL".'
-		);
-
-		return false;
+	try {
+		return window.Automad.baseURL;
+	} catch {
+		console.error('window.Automad.baseURL is not defined.');
 	}
-
-	return window.Automad.baseURL;
 };
 
 export const getDashboardURL = () => {
-	if (
-		typeof window.Automad === 'undefined' ||
-		typeof window.Automad.dashboardURL === 'undefined'
-	) {
-		console.error(
-			'The Dashboard URL is not defined. Please define "window.Automad.dashboardURL".'
-		);
-
-		return false;
+	try {
+		return window.Automad.dashboardURL;
+	} catch {
+		console.error('window.Automad.dashboardURL is not defined.');
 	}
+};
 
-	return window.Automad.dashboardURL;
+export const getTags = () => {
+	try {
+		return window.Automad.tags;
+	} catch {
+		console.error('window.Automad.tags is not defined.');
+	}
+};
+
+export const getThemes = () => {
+	try {
+		return window.Automad.themes;
+	} catch {
+		console.error('window.Automad.themes is not defined.');
+	}
 };
 
 export const getSwitcherSections = () => {
-	if (
-		typeof window.Automad === 'undefined' ||
-		typeof window.Automad.sections === 'undefined'
-	) {
-		console.error(
-			'The sections object is not defined. Please define "window.Automad.sections".'
-		);
-
-		return false;
+	try {
+		return window.Automad.sections;
+	} catch {
+		console.error('window.Automad.sections is not defined.');
 	}
-
-	return window.Automad.sections;
 };
 
 export const debounce = (callback, timeout = 50) => {
@@ -154,9 +149,9 @@ export const queryParents = (selector, element) => {
 
 export const text = (key) => {
 	try {
-		return window.Automad.textModules[key];
+		return window.Automad.text[key];
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 };
 
