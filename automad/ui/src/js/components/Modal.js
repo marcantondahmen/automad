@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, query } from '../utils/core';
+import { classes, listen, query } from '../utils/core';
 import { BaseComponent } from './BaseComponent';
 
 /**
@@ -64,14 +64,14 @@ class Modal extends BaseComponent {
 	 * @type {boolean}
 	 */
 	get isOpen() {
-		return this.matches(`.${this.cls.modalOpen}`);
+		return this.matches(`.${classes.modalOpen}`);
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		this.classList.add(this.cls.modal);
+		this.classList.add(classes.modal);
 
 		if (!this.hasAttribute('noclick')) {
 			listen(this, 'click', (event) => {
@@ -105,7 +105,7 @@ class Modal extends BaseComponent {
 	 * Close the modal.
 	 */
 	close() {
-		this.classList.remove(this.cls.modalOpen);
+		this.classList.remove(classes.modalOpen);
 		this.toggleBodyOverflow();
 	}
 
@@ -113,7 +113,7 @@ class Modal extends BaseComponent {
 	 * Open the modal.
 	 */
 	open() {
-		this.classList.add(this.cls.modalOpen);
+		this.classList.add(classes.modalOpen);
 		this.toggleBodyOverflow();
 	}
 
@@ -124,8 +124,8 @@ class Modal extends BaseComponent {
 		const body = query('body');
 
 		body.classList.toggle(
-			this.cls.overflowHidden,
-			query(`.${this.cls.modalOpen}`)
+			classes.overflowHidden,
+			query(`.${classes.modalOpen}`)
 		);
 	}
 }

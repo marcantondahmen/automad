@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { debounce, listen, query } from '../utils/core';
+import { classes, debounce, listen, query } from '../utils/core';
 import { BaseComponent } from './BaseComponent';
 
 /**
@@ -76,7 +76,7 @@ class Sidebar extends BaseComponent {
 	 * Set the container height and scroll to the active item.
 	 */
 	setHeightAndScroll() {
-		const activeItem = query(`.${this.cls.navItemActive}`, this);
+		const activeItem = query(`.${classes.navItemActive}`, this);
 
 		this.style.setProperty('height', `${window.innerHeight}px`);
 

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { debounce, listen, query, queryAll } from '../utils/core';
+import { classes, debounce, listen, query, queryAll } from '../utils/core';
 import { notifyError } from '../utils/notify';
 import { requestController } from '../utils/request';
 import { BaseComponent } from './BaseComponent';
@@ -198,10 +198,10 @@ export class Form extends BaseComponent {
 	 * @param {boolean} changed
 	 */
 	updateFieldStatus(element, changed) {
-		const field = element.closest(`.${this.cls.field}`);
+		const field = element.closest(`.${classes.field}`);
 
 		if (field) {
-			field.classList.toggle(this.cls.fieldChanged, changed);
+			field.classList.toggle(classes.fieldChanged, changed);
 		}
 	}
 
@@ -209,7 +209,7 @@ export class Form extends BaseComponent {
 	 * Reset all fields to be marked as unchanged.
 	 */
 	resetFieldStatus() {
-		queryAll(`.${this.cls.input}`, this).forEach((input) => {
+		queryAll(`.${classes.input}`, this).forEach((input) => {
 			this.updateFieldStatus(input, false);
 		});
 	}

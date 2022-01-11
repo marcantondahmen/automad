@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from './BaseComponent';
-import { listen, query, queryAll } from '../utils/core';
+import { classes, listen, query, queryAll } from '../utils/core';
 
 const switcherChangeEventName = 'am-switcher-change';
 const linkTag = 'am-switcher-link';
@@ -136,7 +136,7 @@ class SwitcherLink extends BaseComponent {
 	 */
 	toggle() {
 		this.classList.toggle(
-			this.cls.switcherLinkActive,
+			classes.switcherLinkActive,
 			this.elementAttributes.section == getActiveSection()
 		);
 	}
@@ -183,7 +183,7 @@ class SwitcherSection extends BaseComponent {
 	 */
 	toggle() {
 		this.classList.toggle(
-			this.cls.hidden,
+			classes.hidden,
 			this.elementAttributes.name != getActiveSection()
 		);
 	}

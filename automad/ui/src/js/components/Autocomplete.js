@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from './BaseComponent';
-import { debounce, listen } from '../utils/core';
+import { classes, debounce, listen } from '../utils/core';
 import { create } from '../utils/create';
 import { requestController } from '../utils/request';
 
@@ -94,14 +94,14 @@ export class Autocomplete extends BaseComponent {
 	connectedCallback() {
 		this.input = create(
 			'input',
-			[this.cls.input, this.cls.inputLarge],
+			[classes.input, classes.inputLarge],
 			{ type: 'text' },
 			this
 		);
 
 		this.dropdown = create(
 			'div',
-			[this.cls.dropdown, this.cls.hidden],
+			[classes.dropdown, classes.hidden],
 			{},
 			this
 		);
@@ -144,7 +144,7 @@ export class Autocomplete extends BaseComponent {
 	 * @returns {HTMLElement}
 	 */
 	createItemElement(item) {
-		const element = create('a', [this.cls.dropdownItem], {});
+		const element = create('a', [classes.dropdownItem], {});
 
 		element.innerHTML = `
 			<i class="bi bi-link"></i>
@@ -247,8 +247,8 @@ export class Autocomplete extends BaseComponent {
 	onMouseOverEvent(event) {
 		let item = event.target;
 
-		if (!item.matches(`.${this.cls.dropdownItem}`)) {
-			item = event.target.closest(`.${this.cls.dropdownItem}`);
+		if (!item.matches(`.${classes.dropdownItem}`)) {
+			item = event.target.closest(`.${classes.dropdownItem}`);
 		}
 
 		this.selectedIndex = Array.from(this.dropdown.children).indexOf(item);
@@ -281,7 +281,7 @@ export class Autocomplete extends BaseComponent {
 			(event) => {
 				this.onMouseOverEvent(event);
 			},
-			`.${this.cls.dropdownItem}`
+			`.${classes.dropdownItem}`
 		);
 
 		listen(
@@ -290,7 +290,7 @@ export class Autocomplete extends BaseComponent {
 			(event) => {
 				this.select(event);
 			},
-			`.${this.cls.dropdownItem}`
+			`.${classes.dropdownItem}`
 		);
 	}
 
@@ -300,7 +300,7 @@ export class Autocomplete extends BaseComponent {
 	toggleActiveItemStyle() {
 		this.itemsFiltered.forEach((item, index) => {
 			item.element.classList.toggle(
-				this.cls.dropdownItemActive,
+				classes.dropdownItemActive,
 				index == this.selectedIndex
 			);
 		});
@@ -312,7 +312,7 @@ export class Autocomplete extends BaseComponent {
 	close() {
 		this.selectedIndex = this.initialIndex;
 		this.toggleActiveItemStyle();
-		this.dropdown.classList.add(this.cls.hidden);
+		this.dropdown.classList.add(classes.hidden);
 	}
 
 	/**
@@ -321,7 +321,7 @@ export class Autocomplete extends BaseComponent {
 	open() {
 		if (this.input.value.length >= this.minInputLength) {
 			this.update();
-			this.dropdown.classList.remove(this.cls.hidden);
+			this.dropdown.classList.remove(classes.hidden);
 		}
 	}
 

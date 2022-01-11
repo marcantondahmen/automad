@@ -32,7 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { htmlSpecialChars, listen, titleCase } from '../utils/core';
+import {
+	classes,
+	htmlSpecialChars,
+	listen,
+	text,
+	titleCase,
+} from '../utils/core';
 import { create } from '../utils/create';
 import { BaseComponent } from './BaseComponent';
 
@@ -70,7 +76,7 @@ class FieldRemove extends BaseComponent {
 	 */
 	connectedCallback() {
 		listen(this, 'click', () => {
-			this.closest(`.${this.cls.field}`).remove();
+			this.closest(`.${classes.field}`).remove();
 		});
 	}
 }
@@ -85,7 +91,7 @@ export class Field extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		this.classList.add(this.cls.field);
+		this.classList.add(classes.field);
 	}
 
 	/**
@@ -134,7 +140,7 @@ export class Field extends BaseComponent {
 
 		wrapper.innerHTML = `
 			<label 
-			class="${this.cls.fieldLabel}" 
+			class="${classes.fieldLabel}" 
 			for="${id}" 
 			title="${tooltip}">
 				${label}
@@ -150,7 +156,7 @@ export class Field extends BaseComponent {
 		const { name, id, value } = this._data;
 		const input = create(
 			'input',
-			[this.cls.input],
+			[classes.input],
 			{ id, name, value, type: 'text' },
 			this
 		);

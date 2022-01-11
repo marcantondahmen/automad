@@ -34,6 +34,7 @@
 
 import { Autocomplete } from './Autocomplete';
 import { create } from '../utils/create';
+import { classes } from '../utils/core';
 
 /**
  * The Jumpbar field element.
@@ -72,7 +73,7 @@ class Jumpbar extends Autocomplete {
 	 * @returns {HTMLElement} the dropdown item element
 	 */
 	createItemElement(item) {
-		const element = create('a', [this.cls.dropdownItem], {
+		const element = create('a', [classes.dropdownItem], {
 			href: item.url,
 		});
 
@@ -103,7 +104,7 @@ class Jumpbar extends Autocomplete {
 		return `
 			<i class="bi bi-${icon}"></i>
 			<span>${title}</span>
-			<span class="${this.cls.muted}">
+			<span class="${classes.muted}">
 				${subtitle}
 			</span>
 		`;

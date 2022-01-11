@@ -34,6 +34,7 @@
 
 import Tagify from '@yaireo/tagify';
 import {
+	classes,
 	getBaseURL,
 	getSwitcherSections,
 	getTags,
@@ -232,7 +233,7 @@ class Page extends Form {
 				this
 			);
 
-			create('div', [this.cls.spinner], {}, section);
+			create('div', [classes.spinner], {}, section);
 			sections[key] = section;
 		});
 
@@ -285,7 +286,7 @@ class Page extends Form {
 
 		const title = createMainField('am-field', reserved['AM_KEY_TITLE']);
 
-		query('input', title).classList.add(this.cls.inputTitle);
+		query('input', title).classList.add(classes.inputTitle);
 
 		create(
 			'a',
@@ -447,7 +448,7 @@ class FieldTemplate extends Field {
 		);
 
 		button.innerHTML = `
-			<label class="${this.cls.fieldLabel}">${text('page_theme_template')}</label>
+			<label class="${classes.fieldLabel}">${text('page_theme_template')}</label>
 			<am-modal-toggle modal="#am-page-template-modal" class="am-e-button am-e-button--${buttonClass} am-u-flex">
 				<i class="bi bi-${buttonIcon}"></i>
 				<span class="am-u-flex__item-grow">
@@ -458,18 +459,18 @@ class FieldTemplate extends Field {
 		`;
 
 		modal.innerHTML = `
-			<div class="${this.cls.modalDialog}">
-				<div class="${this.cls.modalHeader}">
+			<div class="${classes.modalDialog}">
+				<div class="${classes.modalHeader}">
 					<span>${text('page_theme_template')}</span>
-					<am-modal-close class="${this.cls.modalClose}"></am-modal-close>
+					<am-modal-close class="${classes.modalClose}"></am-modal-close>
 				</div>
 				<am-form-page-select-template></am-form-page-select-template>
-				<div class="${this.cls.modalFooter}">
-					<am-modal-close class="${this.cls.button}">
+				<div class="${classes.modalFooter}">
+					<am-modal-close class="${classes.button}">
 						${text('btn_close')}
 					</am-modal-close>
-					<am-form-submit class="${this.cls.button} ${
-			this.cls.buttonSuccess
+					<am-form-submit class="${classes.button} ${
+			classes.buttonSuccess
 		}" form="Page::data">
 						${text('btn_apply_reload')}
 					</am-form-submit>
@@ -536,7 +537,7 @@ class FieldSelectTemplate extends Field {
 		const themes = getThemes();
 		const select = create(
 			'select',
-			[this.cls.input],
+			[classes.input],
 			{ name: 'theme_template' },
 			this
 		);
@@ -572,7 +573,7 @@ class FieldTags extends Field {
 		const { name, id, value } = this._data;
 		this.field = create(
 			'textarea',
-			[this.cls.input],
+			[classes.input],
 			{
 				name,
 				id,

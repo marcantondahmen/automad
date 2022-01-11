@@ -33,6 +33,44 @@
  */
 
 /**
+ * The object with all classes used for HTML elements that are used by components.
+ *
+ * @type {Object}
+ */
+export const classes = {
+	button: 'am-e-button',
+	buttonSuccess: 'am-e-button--success',
+	hidden: 'am-u-display-none',
+	overflowHidden: 'am-u-overflow-hidden',
+	dropdownItem: 'am-c-dropdown__item',
+	dropdownItemActive: 'am-c-dropdown__item--active',
+	dropdown: 'am-c-dropdown',
+	field: 'am-c-field',
+	fieldChanged: 'am-c-field--changed',
+	fieldLabel: 'am-c-field__label',
+	input: 'am-e-input',
+	inputLarge: 'am-e-input--large',
+	inputTitle: 'am-e-input--title',
+	muted: 'am-u-text-muted',
+	modal: 'am-c-modal',
+	modalOpen: 'am-c-modal--open',
+	modalDialog: 'am-c-modal__dialog',
+	modalHeader: 'am-c-modal__header',
+	modalClose: 'am-c-modal__close',
+	modalFooter: 'am-c-modal__footer',
+	nav: 'am-c-nav',
+	navItem: 'am-c-nav__item',
+	navItemActive: 'am-c-nav__item--active',
+	navLabel: 'am-c-nav__label',
+	navLink: 'am-c-nav__link',
+	navLinkHasChildren: 'am-c-nav__link--has-children',
+	navChildren: 'am-c-nav__children',
+	navSpinner: 'am-c-nav__spinner',
+	spinner: 'am-e-spinner',
+	switcherLinkActive: 'am-c-switcher-link--active',
+};
+
+/**
  * Get the Automad base URL.
  *
  * @returns {string} the Automad base URL
