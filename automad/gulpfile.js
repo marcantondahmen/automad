@@ -53,6 +53,7 @@ const replace = require('gulp-replace');
 const sort = require('gulp-sort');
 const uglify = require('gulp-uglify-es').default;
 const webpack = require('webpack-stream');
+const webpackConfig = require('./webpack.config');
 const pkg = require('./package.json');
 const dist = 'dist';
 const cleanCSSOptions = {
@@ -108,34 +109,25 @@ gulp.task('ui-less', function () {
 		'src: url("./fonts/bootstrap-icons/$1") format("woff2")';
 
 	return gulp
-		.src('ui/src/less/ui.less')
+		.src('ui/src/styles/ui.less')
 		.pipe(less())
 		.on('error', onError)
 		.pipe(autoprefixer({ grid: false }))
 		.pipe(replace(iconsRegex, iconsReplace))
 		.pipe(cleanCSS(cleanCSSOptions))
-		.pipe(rename({ suffix: '.bundle' }))
 		.pipe(gulp.dest(dist));
 });
 
 // UI Webpack.
-gulp.task('ui-js', function () {
+gulp.task('ui-ts', function () {
 	return gulp
-		.src('ui/src/js/ui.js')
+		.src('ui/src/index.js')
 		.pipe(
 			named(function (file) {
-				return 'ui.bundle';
+				return 'ui';
 			})
 		)
-		.pipe(
-			webpack(
-				{
-					mode: 'production',
-					devtool: 'source-map',
-				},
-				compiler
-			)
-		)
+		.pipe(webpack(webpackConfig, compiler))
 		.pipe(gulp.dest(dist));
 });
 
@@ -182,7 +174,7 @@ gulp.task('watch', function () {
 	gulp.watch('blocks/less/*.less', gulp.series('blocks-less', 'reload'));
 
 	gulp.watch('ui/src/less/**/*.less', gulp.series('ui-less', 'reload'));
-	gulp.watch('ui/src/js/**/*.js', gulp.series('ui-js', 'reload'));
+	gulp.watch('ui/src/js/**/*.js', gulp.series('ui-ts', 'reload'));
 	gulp.watch('src/**/*.php', gulp.series('reload'));
 	gulp.watch('ui/demo/*.html', gulp.series('reload'));
 });
@@ -190,5 +182,5 @@ gulp.task('watch', function () {
 // The default task.
 gulp.task(
 	'default',
-	gulp.series('blocks-js', 'blocks-less', 'ui-js', 'ui-less')
+	gulp.series('blocks-js', 'blocks-less', 'ui-ts', 'ui-less')
 );
