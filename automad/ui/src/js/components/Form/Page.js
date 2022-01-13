@@ -44,6 +44,7 @@ import {
 	titleCase,
 } from '../../utils/core';
 import { create } from '../../utils/create';
+import { BaseComponent } from '../BaseComponent';
 import { Field } from '../Field';
 import { Form } from '../Form';
 
@@ -75,35 +76,24 @@ const createField = (fieldType, section, data, cls = []) => {
  * @param {boolean} params.removable - true if the field should be removable
  */
 const fieldGroup = ({ section, keys, pageData, tooltips, removable }) => {
+	const prefixMap = {
+		'+': 'am-field-editor',
+		checkbox: 'am-field-checkbox-page',
+		color: 'am-field-color',
+		date: 'am-field-date',
+		text: 'am-field-markdown',
+		image: 'am-field-image',
+		url: 'am-field-url',
+	};
+
 	keys.forEach((key) => {
 		let fieldType = 'am-field-textarea';
 
-		if (key.startsWith('+')) {
-			fieldType = 'am-field-editor';
-		}
-
-		if (key.startsWith('checkbox')) {
-			fieldType = 'am-field-checkbox-page';
-		}
-
-		if (key.startsWith('color')) {
-			fieldType = 'am-field-color';
-		}
-
-		if (key.startsWith('date')) {
-			fieldType = 'am-field-date';
-		}
-
-		if (key.startsWith('text')) {
-			fieldType = 'am-field-markdown';
-		}
-
-		if (key.startsWith('image')) {
-			fieldType = 'am-field-image';
-		}
-
-		if (key.startsWith('url')) {
-			fieldType = 'am-field-url';
+		for (const [prefix, value] of Object.entries(prefixMap)) {
+			if (key.startsWith(prefix)) {
+				fieldType = value;
+				break;
+			}
 		}
 
 		createField(fieldType, section, {
@@ -225,7 +215,7 @@ class Page extends Form {
 		const sections = {};
 		const content = getSwitcherSections().content;
 
-		['settings', 'text', 'colors', 'unused'].forEach((key) => {
+		['settings', 'text', 'colors'].forEach((key) => {
 			const section = create(
 				'am-switcher-section',
 				[],
@@ -263,8 +253,6 @@ class Page extends Form {
 		reserved,
 		template,
 	}) {
-		const allTags = getTags();
-
 		/**
 		 * Create a field for one of the main settings.
 		 *
@@ -338,8 +326,6 @@ class Page extends Form {
 			reserved['AM_KEY_TAGS'],
 			text('page_tags')
 		);
-
-		tagsField.init(allTags);
 	}
 
 	/**
@@ -358,8 +344,16 @@ class Page extends Form {
 			section.innerHTML = '';
 		});
 
-		const { url, prefix, slug, pageData, shared, template, keys } =
-			response.data;
+		const {
+			url,
+			prefix,
+			slug,
+			pageData,
+			shared,
+			template,
+			keys,
+			keysUnused,
+		} = response.data;
 
 		const themeKey = keys.reserved['AM_KEY_THEME'];
 		const themes = getThemes();
@@ -391,7 +385,15 @@ class Page extends Form {
 				keys: keys[item],
 				pageData,
 				tooltips,
-				removable: item == 'unused',
+				removable: false,
+			});
+
+			fieldGroup({
+				section: this.sections[item],
+				keys: keysUnused[item],
+				pageData,
+				tooltips,
+				removable: true,
 			});
 		});
 	}
@@ -400,9 +402,9 @@ class Page extends Form {
 /**
  * The template field button.
  *
- * @extends Field
+ * @extends BaseComponent
  */
-class FieldTemplate extends Field {
+class FieldTemplate extends BaseComponent {
 	/**
 	 * The field data.
 	 *
@@ -414,6 +416,13 @@ class FieldTemplate extends Field {
 	 */
 	set data({ pageData, shared, template, themeKey }) {
 		this.render({ pageData, shared, template, themeKey });
+	}
+
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback() {
+		this.classList.add(classes.field);
 	}
 
 	/**
@@ -439,7 +448,7 @@ class FieldTemplate extends Field {
 			themeKey,
 		});
 
-		const button = create('div', [this.cls.field], {}, this);
+		const button = create('div', [classes.field], {}, this);
 		const modal = create(
 			'am-modal',
 			[],
@@ -469,9 +478,10 @@ class FieldTemplate extends Field {
 					<am-modal-close class="${classes.button}">
 						${text('btn_close')}
 					</am-modal-close>
-					<am-form-submit class="${classes.button} ${
-			classes.buttonSuccess
-		}" form="Page::data">
+					<am-form-submit 
+					class="${classes.button} ${classes.buttonSuccess}" 
+					form="Page::data"
+					>
 						${text('btn_apply_reload')}
 					</am-form-submit>
 				</div>
@@ -490,9 +500,9 @@ class FieldTemplate extends Field {
 /**
  * The actual template select field.
  *
- * @extends Field
+ * @extends BaseComponent
  */
-class FieldSelectTemplate extends Field {
+class FieldSelectTemplate extends BaseComponent {
 	/**
 	 * The field data.
 	 *
@@ -502,6 +512,13 @@ class FieldSelectTemplate extends Field {
 	 */
 	set data({ value, mainTheme }) {
 		this.render({ value, mainTheme });
+	}
+
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback() {
+		this.classList.add(classes.field);
 	}
 
 	/**
@@ -571,7 +588,7 @@ class FieldTags extends Field {
 	 */
 	input() {
 		const { name, id, value } = this._data;
-		this.field = create(
+		const textarea = create(
 			'textarea',
 			[classes.input],
 			{
@@ -581,18 +598,10 @@ class FieldTags extends Field {
 			this
 		);
 
-		this.field.innerHTML = value;
-	}
+		textarea.innerHTML = value;
 
-	/**
-	 * Init a new Tagify instance.
-	 *
-	 * @see {@link options https://github.com/yairEO/tagify}
-	 * @param {Array} allTags - the array for tags autocompletion
-	 */
-	init(allTags) {
-		const tagify = new Tagify(this.field, {
-			whitelist: allTags,
+		new Tagify(textarea, {
+			whitelist: getTags(),
 			originalInputValueFormat: (tags) =>
 				tags.map((item) => item.value).join(', '),
 		});

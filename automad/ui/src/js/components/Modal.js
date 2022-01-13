@@ -125,7 +125,7 @@ class Modal extends BaseComponent {
 
 		body.classList.toggle(
 			classes.overflowHidden,
-			query(`.${classes.modalOpen}`)
+			query(`.${classes.modalOpen}`) != null
 		);
 	}
 }
@@ -175,7 +175,9 @@ class ModalClose extends BaseComponent {
 		const close = () => {
 			const modal = this.closest('am-modal');
 
-			modal.close();
+			if (modal instanceof Modal) {
+				modal.close();
+			}
 		};
 
 		listen(this, 'click', close.bind(this));

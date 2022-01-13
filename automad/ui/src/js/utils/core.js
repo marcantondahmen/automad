@@ -40,7 +40,7 @@
 export const classes = {
 	button: 'am-e-button',
 	buttonSuccess: 'am-e-button--success',
-	hidden: 'am-u-display-none',
+	displayNone: 'am-u-display-none',
 	overflowHidden: 'am-u-overflow-hidden',
 	dropdownItem: 'am-c-dropdown__item',
 	dropdownItemActive: 'am-c-dropdown__item--active',
@@ -177,7 +177,7 @@ export const htmlSpecialChars = (value) => {
 /**
  * Register event listeners.
  *
- * @param {HTMLElement} element - the element to register the event listeners to
+ * @param {(HTMLElement|Document|Window)} element - the element to register the event listeners to
  * @param {string} eventNamesString - a string of one or more event names separated by a space
  * @param {function} callback - the callback
  * @param {string} selector - the sector to be used as filter
@@ -215,8 +215,8 @@ export const listen = (element, eventNamesString, callback, selector = '') => {
  * Query the first element matching a `selector` from another `element`.
  *
  * @param {string} selector
- * @param {HTMLElement} [element] - optional, defaults to `document`
- * @returns {(HTMLElement|null)}
+ * @param {(HTMLElement|Document)} [element] - optional, defaults to `document`
+ * @returns {any}
  */
 export const query = (selector, element = document) => {
 	return element.querySelector(selector);
@@ -226,7 +226,7 @@ export const query = (selector, element = document) => {
  * Query an array of elements matching a `selector` from another `element`.
  *
  * @param {string} selector
- * @param {HTMLElement} [element] - optional, defaults to `document`
+ * @param {(HTMLElement|Document)} [element] - optional, defaults to `document`
  * @returns {Array}
  */
 export const queryAll = (selector, element = document) => {

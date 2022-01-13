@@ -183,7 +183,7 @@ class SwitcherSection extends BaseComponent {
 	 */
 	toggle() {
 		this.classList.toggle(
-			classes.hidden,
+			classes.displayNone,
 			this.elementAttributes.name != getActiveSection()
 		);
 	}

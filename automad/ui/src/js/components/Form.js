@@ -242,7 +242,7 @@ export class Form extends BaseComponent {
 		}
 
 		if (response.redirect) {
-			window.location.href = data.redirect;
+			window.location.href = response.redirect;
 		}
 
 		if (response.reload) {

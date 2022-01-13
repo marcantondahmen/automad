@@ -101,7 +101,7 @@ export class Autocomplete extends BaseComponent {
 
 		this.dropdown = create(
 			'div',
-			[classes.dropdown, classes.hidden],
+			[classes.dropdown, classes.displayNone],
 			{},
 			this
 		);
@@ -112,17 +112,17 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Init the autocompletion.
 	 *
-	 * @returns {boolean|null}
+	 * @returns {Promise}
 	 * @async
 	 */
 	async init() {
-		const data = await requestController(this.controller);
+		const response = await requestController(this.controller);
 
-		if (typeof data.autocomplete === 'undefined') {
+		if (typeof response.data === 'undefined') {
 			return false;
 		}
 
-		data.autocomplete.forEach((item) => {
+		response.data.forEach((item) => {
 			this.items.push({
 				element: this.createItemElement(item),
 				value: this.createItemValue(item),
@@ -312,7 +312,7 @@ export class Autocomplete extends BaseComponent {
 	close() {
 		this.selectedIndex = this.initialIndex;
 		this.toggleActiveItemStyle();
-		this.dropdown.classList.add(classes.hidden);
+		this.dropdown.classList.add(classes.displayNone);
 	}
 
 	/**
@@ -321,7 +321,7 @@ export class Autocomplete extends BaseComponent {
 	open() {
 		if (this.input.value.length >= this.minInputLength) {
 			this.update();
-			this.dropdown.classList.remove(classes.hidden);
+			this.dropdown.classList.remove(classes.displayNone);
 		}
 	}
 

@@ -112,7 +112,11 @@ export class Field extends BaseComponent {
 		tooltip = tooltip || '';
 		label = label || createLabel(key);
 
-		if (typeof value === 'string' || value instanceof String) {
+		if (removable) {
+			label = `${label} (${text('page_var_unused')})`;
+		}
+
+		if (typeof value === 'string') {
 			value = htmlSpecialChars(value);
 		}
 

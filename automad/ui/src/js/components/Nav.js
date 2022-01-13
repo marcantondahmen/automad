@@ -32,43 +32,71 @@
  * Licensed under the MIT license.
  */
 
-import { getDashboardURL, query, queryAll, queryParents } from '../utils/core';
+import {
+	classes,
+	getDashboardURL,
+	query,
+	queryAll,
+	queryParents,
+	text,
+} from '../utils/core';
 import { create } from '../utils/create';
+import { requestController } from '../utils/request';
 import { BaseComponent } from './BaseComponent';
+
+/**
+ * Test whether a view is active.
+ * @param {string} view
+ * @returns {boolean}
+ */
+const isActiveView = (view) => {
+	const regex = new RegExp(`\/${view}\$`, 'i');
+	return window.location.pathname.match(regex) != null;
+};
 
 /**
  * The navigation tree component.
  * ```
- * <am-nav-tree pages='[
- *     { "url": "/", "title": "Home", "path": "/", "parent": ""},
- *     { "url": "/page-1", "title": "Page 1", "path": "/01.page-1", "parent": "/"},
- *     ...
- * ]'></am-nav-tree>
+ * <am-nav-tree controller="UIController::navTree"></am-nav-tree>
  * ```
  *
  * @extends BaseComponent
  */
 class NavTree extends BaseComponent {
 	/**
-	 * The array of observed attributes.
+	 * The controller.
 	 *
-	 * @type {Array}
-	 * @static
+	 * @type {string}
 	 */
-	static get observedAttributes() {
-		return ['pages'];
-	}
+	controller = 'UIController::navTree';
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		const pages = JSON.parse(this.elementAttributes.pages);
-		const tree = {};
+		this.classList.add(classes.nav);
 
-		this.removeAttribute('pages');
+		create('span', [classes.navLabel], {}, this).innerHTML = text(
+			'sidebar_header_pages'
+		);
+
+		this.loading = create('div', [classes.navSpinner], {}, this);
+		create('div', [classes.spinner], {}, this.loading);
+		this.init();
+	}
+
+	/**
+	 * Init the navTree.
+	 */
+	async init() {
+		const response = await requestController(this.controller);
+		const pages = response.data;
+		const tree = {};
+		let parent;
 
 		pages.sort((a, b) => (a.path > b.path ? 1 : b.path > a.path ? -1 : 0));
+
+		this.loading.remove();
 
 		pages.forEach((page) => {
 			if (typeof tree[page.parent] == 'undefined') {
@@ -95,26 +123,32 @@ class NavTree extends BaseComponent {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
 			'details',
-			[this.cls.navItem],
+			[classes.navItem],
 			{ style: `--level: ${level}` },
 			parent
 		);
-		const link = create('summary', [this.cls.navLink], {}, wrapper);
-		const children = create('div', [this.cls.navChildren], {}, wrapper);
+		const link = create('summary', [classes.navLink], {}, wrapper);
+		const children = create('div', [classes.navChildren], {}, wrapper);
 		const searchParams = new URLSearchParams(window.location.search);
 
 		wrapper.classList.toggle(
-			this.cls.navItemActive,
-			page.url == searchParams.get('url')
+			classes.navItemActive,
+			page.url == searchParams.get('url') && isActiveView('Page')
 		);
 
 		if (!level) {
 			wrapper.setAttribute('open', true);
 		}
 
+		let icon = 'file-earmark-text';
+
+		if (page.private) {
+			icon = 'file-earmark-lock2-fill';
+		}
+
 		link.innerHTML = `
-			<a href="${getDashboardURL}/Page?url=${encodeURIComponent(page.url)}">
-				<i class="bi bi-file-earmark-text"></i>
+			<a href="${getDashboardURL()}/Page?url=${encodeURIComponent(page.url)}">
+				<i class="bi bi-${icon}"></i>
 				<span>${page.title}</span>
 			</a>
 		`;
@@ -126,7 +160,7 @@ class NavTree extends BaseComponent {
 	 * Unfold the tree to reveal the active item.
 	 */
 	unfoldToActive() {
-		const activeItem = query(`.${this.cls.navItemActive}`);
+		const activeItem = query(`.${classes.navItemActive}`);
 
 		if (activeItem) {
 			queryParents('details', activeItem).forEach((item) => {
@@ -139,11 +173,11 @@ class NavTree extends BaseComponent {
 	 * Toggle visibility of the children arrow indicators depending on the existance of children.
 	 */
 	toggleChildrenIcons() {
-		const childrenContainers = queryAll(`.${this.cls.navChildren}`, this);
+		const childrenContainers = queryAll(`.${classes.navChildren}`, this);
 
 		childrenContainers.forEach((item) => {
 			item.previousSibling.classList.toggle(
-				this.cls.navLinkHasChildren,
+				classes.navLinkHasChildren,
 				item.childElementCount
 			);
 		});
@@ -173,13 +207,10 @@ class NavItem extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		const searchParams = new URLSearchParams(window.location.search);
-		const activeView = searchParams.get('view') || '';
-
-		this.classList.add(this.cls.navItem);
+		this.classList.add(classes.navItem);
 		this.classList.toggle(
-			this.cls.navItemActive,
-			this.elementAttributes.view == activeView
+			classes.navItemActive,
+			isActiveView(this.elementAttributes.view)
 		);
 
 		this.innerHTML = this.render();
@@ -194,13 +225,13 @@ class NavItem extends BaseComponent {
 		let link = './';
 
 		if (this.elementAttributes.view) {
-			link = `${getDashboardURL}/${this.elementAttributes.view}`;
+			link = `${getDashboardURL()}/${this.elementAttributes.view}`;
 		}
 
 		return `
 			<a 
 			href="${link}" 
-			class="${this.cls.navLink}"
+			class="${classes.navLink}"
 			>
 				<i class="bi bi-${this.elementAttributes.icon}"></i>
 				<span>${this.elementAttributes.text}</span>

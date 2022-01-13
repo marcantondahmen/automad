@@ -37,15 +37,12 @@ import { query } from './core';
 import { create } from './create';
 
 const options = {
-	close: true,
-	duration: 3000,
+	close: false,
 	gravity: 'top',
 	position: 'right',
 	stopOnFocus: true,
-	className: 'info',
 	escapeMarkup: false,
 	destination: false,
-	close: false,
 };
 
 /**
@@ -53,7 +50,7 @@ const options = {
  *
  * @see {@link toastify https://github.com/apvarun/toastify-js}
  * @see {@link icons https://icons.getbootstrap.com}
- * @param {Objects} params
+ * @param {Object} params
  * @param {string} params.message
  * @param {string} params.icon
  * @param {number} params.duration
