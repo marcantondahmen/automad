@@ -34,10 +34,14 @@
 
 .am-l-navbar {
 	position: sticky;
+	z-index: 50;
 	display: flex;
-	top: 0;
 	justify-content: space-between;
+	align-items: center;
+	height: var(--am-navbar-height);
+	top: 0;
 	border-bottom: var(--am-hairline);
+	background-color: var(--am-bg-base);
 
 	grid-row: 1 / span 1;
 
@@ -51,13 +55,25 @@
 		}
 	}
 
+	&__logo {
+		min-width: ~'calc((100% - @{l-main-width}) / 2)';
+		padding-left: var(--am-body-padding-horizontal);
+
+		@media (min-width: @l-breakpoint-medium) {
+			display: none;
+		}
+	}
+
 	&__jump {
 		display: flex;
 		justify-self: center;
-		height: var(--am-navbar-height);
-		width: 100%;
 		max-width: @l-main-width;
 		padding: 0 var(--am-body-padding-horizontal);
+		flex-grow: 1;
+
+		@media (min-width: @l-breakpoint-large) {
+			width: @l-main-width;
+		}
 
 		& > * {
 			flex-grow: 1;
@@ -65,8 +81,10 @@
 	}
 
 	&__buttons {
-		height: var(--am-navbar-height);
-		padding: 0 var(--am-body-padding-horizontal);
-		text-align: right;
+		display: flex;
+		justify-content: right;
+		gap: var(--am-navbar-gap);
+		min-width: ~'calc((100% - @{l-main-width}) / 2)';
+		padding-right: var(--am-body-padding-horizontal);
 	}
 }
