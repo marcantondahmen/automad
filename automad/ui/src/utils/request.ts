@@ -33,16 +33,20 @@
  */
 
 import { getDashboardURL } from './core';
+import { KeyValueMap } from './types';
 
 /**
  * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.
  *
- * @param {string} url
- * @param {Object} [data]
- * @returns {Promise}
+ * @param url
+ * @param [data]
+ * @returns the Promise
  */
-const request = async (url, data = null) => {
-	const init = { method: 'GET' };
+const request = async (
+	url: string,
+	data: KeyValueMap = null
+): Promise<Response> => {
+	const init: KeyValueMap = { method: 'GET' };
 
 	if (data !== null) {
 		const formData = new FormData();
@@ -63,18 +67,19 @@ const request = async (url, data = null) => {
  * Use the `request` function to send a request to a dashboard URL.
  *
  * @see {@link request}
- * @param {string} slug
- * @param {Object} [data]
- * @returns {Promise}
+ * @param slug
+ * @param [data]
+ * @returns the Promise
  */
-const requestDashboard = async (slug, data = null) => {
+const requestDashboard = async (
+	slug: string,
+	data: KeyValueMap = null
+): Promise<Response> => {
 	const dashboard = getDashboardURL();
 
-	if (!dashboard) {
-		return false;
+	if (dashboard) {
+		return request(`${dashboard}${slug}`, data);
 	}
-
-	return request(`${dashboard}${slug}`, data);
 };
 
 /**
@@ -83,11 +88,14 @@ const requestDashboard = async (slug, data = null) => {
  *
  * @see {@link request}
  * @see {@link requestDashboard}
- * @param {string} controller
- * @param {Object} [data]
- * @returns {Promise}
+ * @param controller
+ * @param [data]
+ * @returns the Promise
  */
-export const requestController = async (controller, data = null) => {
+export const requestController = async (
+	controller: string,
+	data: KeyValueMap = null
+): Promise<KeyValueMap> => {
 	const route = controller.replace('Controller::', '/');
 	const response = await requestDashboard(`/api/${route}`, data);
 	const responseData = await response.json();

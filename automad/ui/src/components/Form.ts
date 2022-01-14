@@ -35,37 +35,35 @@
 import { classes, debounce, listen, query, queryAll } from '../utils/core';
 import { notifyError } from '../utils/notify';
 import { requestController } from '../utils/request';
-import { BaseComponent } from './BaseComponent';
+import { InputElement, KeyValueMap } from '../utils/types';
+import { BaseComponent } from './Base';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.
  * The "form" attribute uses the controller of the related form to connect.
- * ```
+ *
+ * @example
  * <am-form controller="Class::method" page="/url" watch>
  *     <input name="title">
  * </am-form>
  * <am-form-submit form="Class::method">Submit</am-form-submit>
- * ```
  *
  * @extends BaseComponent
  */
-class FormSubmit extends BaseComponent {
+class FormSubmitComponent extends BaseComponent {
 	/**
 	 * The observed attributes.
 	 *
-	 * @type {Array}
 	 * @static
 	 */
-	static get observedAttributes() {
+	static get observedAttributes(): string[] {
 		return ['form'];
 	}
 
 	/**
 	 * The forms that are submitted by this button.
-	 *
-	 * @type {Array}
 	 */
-	get relatedForms() {
+	get relatedForms(): Element[] {
 		return queryAll(`[controller="${this.elementAttributes.form}"]`);
 	}
 
@@ -78,7 +76,7 @@ class FormSubmit extends BaseComponent {
 				return false;
 			}
 
-			this.relatedForms.forEach((form) => {
+			this.relatedForms.forEach((form: FormComponent) => {
 				form.submit();
 			});
 		};
@@ -98,35 +96,33 @@ class FormSubmit extends BaseComponent {
  * - `focus`
  *
  * Self initialized form with watched submit button and page URL:
- * ```
+ *
+ * @example
  * <am-form controller="Class::method" init watch></am-form>
- * ```
+ *
  * Focus the first input of a for when being connected:
- * ```
+ *
+ * @example
  * <am-form controller="Class::method" focus>
  *     <input>
  * </am-form>
- * ```
  *
  * @extends BaseComponent
  */
-export class Form extends BaseComponent {
+export class FormComponent extends BaseComponent {
 	/**
 	 * The observed attributes.
 	 *
-	 * @type {Array}
 	 * @static
 	 */
-	static get observedAttributes() {
+	static get observedAttributes(): string[] {
 		return ['controller', 'page'];
 	}
 
 	/**
 	 * All related submit buttons.
-	 *
-	 * @type {Array}
 	 */
-	get submitButtons() {
+	protected get submitButtons(): Element[] {
 		return queryAll(
 			`am-form-submit[form="${this.elementAttributes.controller}"]`
 		);
@@ -134,17 +130,15 @@ export class Form extends BaseComponent {
 
 	/**
 	 * The form data object.
-	 *
-	 * @type {Object}
 	 */
-	get formData() {
-		const data = {};
+	get formData(): KeyValueMap {
+		const data: KeyValueMap = {};
 
 		if (this.elementAttributes.page) {
 			data.url = this.elementAttributes.page;
 		}
 
-		queryAll('[name]', this).forEach((field) => {
+		queryAll('[name]', this).forEach((field: InputElement) => {
 			const name = field.getAttribute('name');
 			const value = field.value;
 
@@ -157,7 +151,7 @@ export class Form extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		if (this.hasAttribute('init')) {
 			this.submit();
 		}
@@ -168,7 +162,7 @@ export class Form extends BaseComponent {
 
 		if (this.hasAttribute('focus')) {
 			setTimeout(() => {
-				query('input').focus();
+				(query('input') as InputElement).focus();
 			}, 0);
 		}
 	}
@@ -176,7 +170,7 @@ export class Form extends BaseComponent {
 	/**
 	 * Disable all connected submit buttons.
 	 */
-	disbableButtons() {
+	private disbableButtons(): void {
 		this.submitButtons.forEach((button) => {
 			button.setAttribute('disabled', '');
 		});
@@ -185,7 +179,7 @@ export class Form extends BaseComponent {
 	/**
 	 * Enable all connected submit buttons.
 	 */
-	enableButtons() {
+	private enableButtons(): void {
 		this.submitButtons.forEach((button) => {
 			button.removeAttribute('disabled');
 		});
@@ -194,10 +188,10 @@ export class Form extends BaseComponent {
 	/**
 	 * Update the class of the containing field to be marked as changed.
 	 *
-	 * @param {HTMLElement} element - The input element that has changed
-	 * @param {boolean} changed
+	 * @param element - The input element that has changed
+	 * @param changed
 	 */
-	updateFieldStatus(element, changed) {
+	private updateFieldStatus(element: HTMLElement, changed: boolean): void {
 		const field = element.closest(`.${classes.field}`);
 
 		if (field) {
@@ -208,8 +202,8 @@ export class Form extends BaseComponent {
 	/**
 	 * Reset all fields to be marked as unchanged.
 	 */
-	resetFieldStatus() {
-		queryAll(`.${classes.input}`, this).forEach((input) => {
+	private resetFieldStatus(): void {
+		queryAll(`.${classes.input}`, this).forEach((input: InputElement) => {
 			this.updateFieldStatus(input, false);
 		});
 	}
@@ -217,7 +211,7 @@ export class Form extends BaseComponent {
 	/**
 	 * Submit the form.
 	 */
-	async submit() {
+	async submit(): Promise<void> {
 		const response = await requestController(
 			this.elementAttributes.controller,
 			this.formData
@@ -234,9 +228,9 @@ export class Form extends BaseComponent {
 	/**
 	 * Process the response that is received after submitting the form.
 	 *
-	 * @param {Object} response
+	 * @param response
 	 */
-	processResponse(response) {
+	protected processResponse(response: KeyValueMap): void {
 		if (response.error) {
 			notifyError(response.error);
 		}
@@ -253,10 +247,10 @@ export class Form extends BaseComponent {
 	/**
 	 * Watch the form for changes.
 	 */
-	watch() {
-		const onChange = debounce((event) => {
+	protected watch(): void {
+		const onChange = debounce((event: Event) => {
 			this.enableButtons();
-			this.updateFieldStatus(event.target, true);
+			this.updateFieldStatus(event.target as InputElement, true);
 		}, 100);
 
 		listen(
@@ -270,5 +264,5 @@ export class Form extends BaseComponent {
 	}
 }
 
-customElements.define('am-form-submit', FormSubmit);
-customElements.define('am-form', Form);
+customElements.define('am-form-submit', FormSubmitComponent);
+customElements.define('am-form', FormComponent);

@@ -35,14 +35,15 @@
 import Toastify from 'toastify-js';
 import { query } from './core';
 import { create } from './create';
+import { KeyValueMap } from './types';
 
-const options = {
+const defaults: Toastify.Options = {
 	close: false,
 	gravity: 'top',
 	position: 'right',
 	stopOnFocus: true,
 	escapeMarkup: false,
-	destination: false,
+	destination: null,
 };
 
 /**
@@ -50,13 +51,13 @@ const options = {
  *
  * @see {@link toastify https://github.com/apvarun/toastify-js}
  * @see {@link icons https://icons.getbootstrap.com}
- * @param {Object} params
- * @param {string} params.message
- * @param {string} params.icon
- * @param {number} params.duration
- * @param {string} params.className
+ * @param params
+ * @param params.message
+ * @param params.icon
+ * @param params.duration
+ * @param params.className
  */
-const notify = ({ message, icon, duration, className }) => {
+const notify = ({ message, icon, duration, className }: KeyValueMap) => {
 	const ui = query('html.am-ui > body, body .am-ui');
 	const node = create('div', ['am-c-notify__node'], {});
 
@@ -66,8 +67,8 @@ const notify = ({ message, icon, duration, className }) => {
 
 	className = `am-c-notify ${className}`;
 
-	const toast = Toastify(
-		Object.assign(options, {
+	const toast: KeyValueMap = Toastify(
+		Object.assign(defaults, {
 			node,
 			duration,
 			className,
@@ -76,15 +77,17 @@ const notify = ({ message, icon, duration, className }) => {
 				toast.hideToast();
 			},
 		})
-	).showToast();
+	);
+
+	toast.showToast();
 };
 
 /**
  * Show an error notification.
  *
- * @param {string} message
+ * @param message
  */
-export const notifyError = (message) => {
+export const notifyError = (message: string): void => {
 	notify({
 		message,
 		duration: -1,
@@ -96,9 +99,9 @@ export const notifyError = (message) => {
 /**
  * Show a success notification.
  *
- * @param {string} message
+ * @param message
  */
-export const notifySuccess = (message) => {
+export const notifySuccess = (message: string): void => {
 	notify({
 		message,
 		duration: 3000,

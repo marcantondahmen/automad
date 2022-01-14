@@ -40,25 +40,38 @@ import {
 	titleCase,
 } from '../utils/core';
 import { create } from '../utils/create';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from './Base';
+
+interface FieldInitData {
+	key: string;
+	value: string;
+	name: string;
+	tooltip: string;
+	label: string;
+	removable: boolean;
+}
+
+interface FieldRenderData extends Omit<FieldInitData, 'key'> {
+	id: string;
+}
 
 /**
  * Create an ID from a field key.
  *
- * @param {string} key
- * @returns {string}
+ * @param key
+ * @returns the generated ID
  */
-const createId = (key) => {
+const createId = (key: string): string => {
 	return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
 };
 
 /**
  * Create a label text from a field key.
  *
- * @param {string} key
- * @returns {string}
+ * @param key
+ * @returns the generated label
  */
-const createLabel = (key) => {
+const createLabel = (key: string): string => {
 	return titleCase(key.replace(/\+(.)/, '+ $1'))
 		.replace('+ ', '+')
 		.replace('Color ', '')
@@ -70,11 +83,11 @@ const createLabel = (key) => {
  *
  * @extends BaseComponent
  */
-class FieldRemove extends BaseComponent {
+class FieldRemoveComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		listen(this, 'click', () => {
 			this.closest(`.${classes.field}`).remove();
 		});
@@ -86,26 +99,31 @@ class FieldRemove extends BaseComponent {
  *
  * @extends BaseComponent
  */
-export class Field extends BaseComponent {
+export class FieldComponent extends BaseComponent {
+	/**
+	 * The internal field data.
+	 */
+	protected _data: FieldRenderData;
+
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		this.classList.add(classes.field);
 	}
 
 	/**
 	 * The field data.
 	 *
-	 * @param {Object} params
-	 * @param {string} params.key
-	 * @param {string} params.value
-	 * @param {string} params.name
-	 * @param {string} params.tooltip
-	 * @param {string} params.label
-	 * @param {boolean} params.removable
+	 * @param params
+	 * @param params.key
+	 * @param params.value
+	 * @param params.name
+	 * @param params.tooltip
+	 * @param params.label
+	 * @param params.removable
 	 */
-	set data({ key, value, name, tooltip, label, removable }) {
+	set data({ key, value, name, tooltip, label, removable }: FieldInitData) {
 		const id = createId(key);
 
 		value = value || '';
@@ -135,7 +153,7 @@ export class Field extends BaseComponent {
 	/**
 	 * Create a label.
 	 */
-	label() {
+	label(): void {
 		const { id, label, tooltip, removable } = this._data;
 		const removeButton = removable
 			? '<am-field-remove><i class="bi bi-trash"></i></am-field-remove>'
@@ -156,9 +174,9 @@ export class Field extends BaseComponent {
 	/**
 	 * Create an input field.
 	 */
-	input() {
+	input(): void {
 		const { name, id, value } = this._data;
-		const input = create(
+		create(
 			'input',
 			[classes.input],
 			{ id, name, value, type: 'text' },
@@ -169,7 +187,7 @@ export class Field extends BaseComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		this.label();
 		this.input();
 	}
@@ -178,13 +196,13 @@ export class Field extends BaseComponent {
 /**
  * A block editor field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldEditor extends Field {
+class FieldEditorComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -192,13 +210,13 @@ class FieldEditor extends Field {
 /**
  * A checkbox field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldCheckbox extends Field {
+class FieldCheckboxComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -206,13 +224,13 @@ class FieldCheckbox extends Field {
 /**
  * A large checkbox field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldCheckboxLarge extends Field {
+class FieldCheckboxLargeComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -220,13 +238,13 @@ class FieldCheckboxLarge extends Field {
 /**
  * A checkbox field that can have a default global value.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldCheckboxPage extends Field {
+class FieldCheckboxPageComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -234,13 +252,13 @@ class FieldCheckboxPage extends Field {
 /**
  * A color field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldColor extends Field {
+class FieldColorComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -248,13 +266,13 @@ class FieldColor extends Field {
 /**
  * A date field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldDate extends Field {
+class FieldDateComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -262,13 +280,13 @@ class FieldDate extends Field {
 /**
  * A Markdown editor field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldMarkdown extends Field {
+class FieldMarkdownComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -276,13 +294,13 @@ class FieldMarkdown extends Field {
 /**
  * An image field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldImage extends Field {
+class FieldImageComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -290,13 +308,13 @@ class FieldImage extends Field {
 /**
  * A multiline text field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldTextarea extends Field {
+class FieldTextareaComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
@@ -304,26 +322,26 @@ class FieldTextarea extends Field {
 /**
  * An URL field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldURL extends Field {
+class FieldURLComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	render() {
+	render(): void {
 		super.render();
 	}
 }
 
-customElements.define('am-field-remove', FieldRemove);
-customElements.define('am-field', Field);
-customElements.define('am-field-editor', FieldEditor);
-customElements.define('am-field-checkbox', FieldCheckbox);
-customElements.define('am-field-checkbox-large', FieldCheckboxLarge);
-customElements.define('am-field-checkbox-page', FieldCheckboxPage);
-customElements.define('am-field-color', FieldColor);
-customElements.define('am-field-date', FieldDate);
-customElements.define('am-field-markdown', FieldMarkdown);
-customElements.define('am-field-image', FieldImage);
-customElements.define('am-field-textarea', FieldTextarea);
-customElements.define('am-field-url', FieldURL);
+customElements.define('am-field-remove', FieldRemoveComponent);
+customElements.define('am-field', FieldComponent);
+customElements.define('am-field-editor', FieldEditorComponent);
+customElements.define('am-field-checkbox', FieldCheckboxComponent);
+customElements.define('am-field-checkbox-large', FieldCheckboxLargeComponent);
+customElements.define('am-field-checkbox-page', FieldCheckboxPageComponent);
+customElements.define('am-field-color', FieldColorComponent);
+customElements.define('am-field-date', FieldDateComponent);
+customElements.define('am-field-markdown', FieldMarkdownComponent);
+customElements.define('am-field-image', FieldImageComponent);
+customElements.define('am-field-textarea', FieldTextareaComponent);
+customElements.define('am-field-url', FieldURLComponent);

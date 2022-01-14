@@ -32,61 +32,66 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from './Base';
 import { classes, debounce, listen } from '../utils/core';
 import { create } from '../utils/create';
 import { requestController } from '../utils/request';
+import { KeyValueMap } from '../utils/types';
+
+export interface Item {
+	element: HTMLElement;
+	value: string;
+	item: KeyValueMap;
+}
 
 /**
  * An input field with page autocompletion.
- * ```
+ *
+ * @example
  * <am-autocomplete></am-autocomplete>
- * ```
  *
  * @extends BaseComponent
  */
-export class Autocomplete extends BaseComponent {
+export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * The controller.
-	 *
-	 * @type {string}
 	 */
-	controller = 'UIController::autocompleteLink';
+	protected controller = 'UIController::autocompleteLink';
 
 	/**
 	 * Autocompletion items.
-	 *
-	 * @type {Array}
 	 */
-	items = [];
+	protected items: Item[] = [];
 
 	/**
 	 * The filtered autocompletion items.
-	 *
-	 * @type {Array}
 	 */
-	itemsFiltered = [];
+	protected itemsFiltered: Item[];
 
 	/**
 	 * The selected index.
-	 *
-	 * @type {(null|number)}
 	 */
-	selectedIndex = null;
+	protected selectedIndex: number | null = null;
 
 	/**
 	 * The initial index.
-	 *
-	 * @type {(null|number)}
 	 */
-	initialIndex = null;
+	protected initialIndex: number | null = null;
 
 	/**
 	 * The minimum input value length to trigger the dropdown.
-	 *
-	 * @type {number}
 	 */
-	minInputLength = 1;
+	protected minInputLength = 1;
+
+	/**
+	 * The input element.
+	 */
+	protected input: HTMLInputElement;
+
+	/**
+	 * The dropdown element.
+	 */
+	protected dropdown: HTMLDivElement;
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -112,38 +117,37 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Init the autocompletion.
 	 *
-	 * @returns {Promise}
+	 * @returns a Promise
 	 * @async
 	 */
-	async init() {
+	private async init(): Promise<void> {
 		const response = await requestController(this.controller);
+		const data: KeyValueMap[] = response.data;
 
-		if (typeof response.data === 'undefined') {
-			return false;
-		}
-
-		response.data.forEach((item) => {
-			this.items.push({
-				element: this.createItemElement(item),
-				value: this.createItemValue(item),
-				item: item,
+		if (typeof response.data !== 'undefined') {
+			response.data.forEach((item: KeyValueMap) => {
+				this.items.push({
+					element: this.createItemElement(item),
+					value: this.createItemValue(item),
+					item: item,
+				});
 			});
-		});
 
-		this.itemsFiltered = this.items;
+			this.itemsFiltered = this.items;
 
-		this.registerDropdownEvents();
-		this.registerInputEvents();
-		this.update();
+			this.registerDropdownEvents();
+			this.registerInputEvents();
+			this.update();
+		}
 	}
 
 	/**
 	 * Create a dropdown item element.
 	 *
-	 * @param {Object} item
-	 * @returns {HTMLElement}
+	 * @param item
+	 * @returns the created element
 	 */
-	createItemElement(item) {
+	protected createItemElement(item: KeyValueMap): HTMLElement {
 		const element = create('a', [classes.dropdownItem], {});
 
 		element.innerHTML = `
@@ -157,17 +161,17 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Create an item value.
 	 *
-	 * @param {Object} item
-	 * @returns {string}
+	 * @param item
+	 * @returns the value
 	 */
-	createItemValue(item) {
+	protected createItemValue(item: KeyValueMap): string {
 		return item.value.toLowerCase();
 	}
 
 	/**
 	 * Render the dropdown.
 	 */
-	renderDropdown() {
+	protected renderDropdown(): void {
 		this.dropdown.innerHTML = '';
 
 		this.itemsFiltered.forEach((item) => {
@@ -178,7 +182,7 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Update the dropdown and the list of filtered items based on the current input value.
 	 */
-	update() {
+	protected update(): void {
 		const filters = this.input.value.toLowerCase().split(' ');
 
 		this.itemsFiltered = [];
@@ -206,9 +210,9 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Handle key down events.
 	 *
-	 * @param {Event} event
+	 * @param event
 	 */
-	onKeyDownEvent(event) {
+	protected onKeyDownEvent(event: KeyboardEvent): void {
 		switch (event.keyCode) {
 			case 38:
 				this.prev();
@@ -230,9 +234,9 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Handle key up events.
 	 *
-	 * @param {Event} event
+	 * @param event
 	 */
-	onKeyUpEvent(event) {
+	protected onKeyUpEvent(event: KeyboardEvent): void {
 		if (![38, 40, 13, 9, 27].includes(event.keyCode)) {
 			this.update();
 			this.open();
@@ -242,16 +246,16 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Handle mouse over events.
 	 *
-	 * @param {Event} event
+	 * @param event
 	 */
-	onMouseOverEvent(event) {
-		let item = event.target;
+	protected onMouseOverEvent(event: MouseEvent): void {
+		let target = event.target as HTMLElement;
 
-		if (!item.matches(`.${classes.dropdownItem}`)) {
-			item = event.target.closest(`.${classes.dropdownItem}`);
+		if (!target.matches(`.${classes.dropdownItem}`)) {
+			target = target.closest(`.${classes.dropdownItem}`);
 		}
 
-		this.selectedIndex = Array.from(this.dropdown.children).indexOf(item);
+		this.selectedIndex = Array.from(this.dropdown.children).indexOf(target);
 
 		this.toggleActiveItemStyle();
 	}
@@ -259,13 +263,13 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Register events for the input field.
 	 */
-	registerInputEvents() {
+	protected registerInputEvents(): void {
 		listen(this.input, 'keydown', this.onKeyDownEvent.bind(this));
 		listen(this.input, 'keyup', debounce(this.onKeyUpEvent.bind(this)));
 		listen(this.input, 'focus', this.open.bind(this));
 
-		listen(document, 'click', (event) => {
-			if (!this.contains(event.target)) {
+		listen(document, 'click', (event: MouseEvent) => {
+			if (!this.contains(event.target as Element)) {
 				this.close();
 			}
 		});
@@ -274,11 +278,11 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Register events for the dropdown.
 	 */
-	registerDropdownEvents() {
+	protected registerDropdownEvents(): void {
 		listen(
 			this.dropdown,
 			'mouseover',
-			(event) => {
+			(event: MouseEvent) => {
 				this.onMouseOverEvent(event);
 			},
 			`.${classes.dropdownItem}`
@@ -287,7 +291,7 @@ export class Autocomplete extends BaseComponent {
 		listen(
 			this.dropdown,
 			'click',
-			(event) => {
+			(event: MouseEvent) => {
 				this.select(event);
 			},
 			`.${classes.dropdownItem}`
@@ -297,7 +301,7 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Toggle item styles in order to highlight the active item.
 	 */
-	toggleActiveItemStyle() {
+	protected toggleActiveItemStyle(): void {
 		this.itemsFiltered.forEach((item, index) => {
 			item.element.classList.toggle(
 				classes.dropdownItemActive,
@@ -309,7 +313,7 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Close the dropdown.
 	 */
-	close() {
+	close(): void {
 		this.selectedIndex = this.initialIndex;
 		this.toggleActiveItemStyle();
 		this.dropdown.classList.add(classes.displayNone);
@@ -318,7 +322,7 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Open the dropdown.
 	 */
-	open() {
+	open(): void {
 		if (this.input.value.length >= this.minInputLength) {
 			this.update();
 			this.dropdown.classList.remove(classes.displayNone);
@@ -328,7 +332,7 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Highlight and save the index of the previous item in the dropdown.
 	 */
-	prev() {
+	prev(): void {
 		this.selectedIndex--;
 
 		if (this.selectedIndex < 0) {
@@ -341,7 +345,7 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Highlight and save the index of the next item in the dropdown.
 	 */
-	next() {
+	next(): void {
 		if (this.selectedIndex === null) {
 			this.selectedIndex = 0;
 		} else {
@@ -358,9 +362,9 @@ export class Autocomplete extends BaseComponent {
 	/**
 	 * Select an item and use the item value as the input value.
 	 *
-	 * @param {Event} event
+	 * @param event
 	 */
-	select(event) {
+	select(event: Event): void {
 		event.preventDefault();
 
 		if (this.selectedIndex !== null) {
@@ -371,4 +375,4 @@ export class Autocomplete extends BaseComponent {
 	}
 }
 
-customElements.define('am-autocomplete', Autocomplete);
+customElements.define('am-autocomplete', AutocompleteComponent);

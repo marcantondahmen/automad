@@ -42,22 +42,69 @@ import {
 	query,
 	text,
 	titleCase,
-} from '../../utils/core';
-import { create } from '../../utils/create';
-import { BaseComponent } from '../BaseComponent';
-import { Field } from '../Field';
-import { Form } from '../Form';
+} from '../utils/core';
+import { create } from '../utils/create';
+import { KeyValueMap, Theme } from '../utils/types';
+import { BaseComponent } from './Base';
+import { FieldComponent } from './Field';
+import { FormComponent } from './Form';
+import { SwitcherSectionComponent } from './Switcher';
+
+type SwitcherSectionName = 'settings' | 'text' | 'colors';
+
+type SwitcherSectionCollection = {
+	[name in SwitcherSectionName]: SwitcherSectionComponent;
+};
+
+interface FieldGroupData {
+	section: SwitcherSectionComponent;
+	keys: string[];
+	pageData: KeyValueMap;
+	tooltips: KeyValueMap;
+	removable: boolean;
+}
+
+interface ThemeStatus {
+	buttonLabel: string;
+	buttonClass: string;
+	buttonIcon: string;
+	selectedTemplate: string;
+	mainTheme: Theme;
+}
+
+interface MainSettingsData {
+	section: SwitcherSectionComponent;
+	url: string;
+	prefix: string;
+	slug: string;
+	pageData: KeyValueMap;
+	shared: KeyValueMap;
+	reserved: KeyValueMap;
+	template: string;
+}
+
+interface TemplateFieldData {
+	pageData: KeyValueMap;
+	shared: KeyValueMap;
+	template: string;
+	themeKey: string;
+}
 
 /**
  * Create a form field and set its data.
  *
- * @param {string} fieldType - The field type name
- * @param {HTMLElement} section - the section node where the field is created in
- * @param {Object} data - the field data object
- * @param {Array} cls - the array with optional class name
- * @returns {Field} - the generated field
+ * @param fieldType the field type name
+ * @param section the section node where the field is created in
+ * @param data the field data object
+ * @param cls the array with optional class name
+ * @returns the generated field
  */
-const createField = (fieldType, section, data, cls = []) => {
+const createField = (
+	fieldType: string,
+	section: HTMLElement,
+	data: KeyValueMap,
+	cls: string[] = []
+): FieldComponent => {
 	const field = create(fieldType, cls, {}, section);
 
 	field.data = data;
@@ -68,14 +115,20 @@ const createField = (fieldType, section, data, cls = []) => {
 /**
  * Create a group of form fields within a given section element based on a set of keys.
  *
- * @param {Object} params
- * @param {HTMLElement} params.section - the section node where the field is created in
- * @param {Array} params.keys - the array of variable keys for the field group
- * @param {Object} params.pageData - the data object that was loaded from the page's data file
- * @param {Object} params.tooltips - the field tooltips
- * @param {boolean} params.removable - true if the field should be removable
+ * @param params
+ * @param params.section - the section node where the field is created in
+ * @param params.keys - the array of variable keys for the field group
+ * @param params.pageData - the data object that was loaded from the page's data file
+ * @param params.tooltips - the field tooltips
+ * @param params.removable - true if the field should be removable
  */
-const fieldGroup = ({ section, keys, pageData, tooltips, removable }) => {
+const fieldGroup = ({
+	section,
+	keys,
+	pageData,
+	tooltips,
+	removable,
+}: FieldGroupData): void => {
 	const prefixMap = {
 		'+': 'am-field-editor',
 		checkbox: 'am-field-checkbox-page',
@@ -109,11 +162,11 @@ const fieldGroup = ({ section, keys, pageData, tooltips, removable }) => {
 /**
  * Beautify a template path to be used as name.
  *
- * @param {string} template - the path of a given template
- * @param {string} [themeName] - an optional theme name
- * @returns {string} the beautified template name
+ * @param template - the path of a given template
+ * @param [themeName] - an optional theme name
+ * @returns the beautified template name
  */
-const templateName = (template, themeName = '') => {
+const templateName = (template: string, themeName: string = ''): string => {
 	const templateName = template
 		.split('/')
 		.reverse()[0]
@@ -125,11 +178,11 @@ const templateName = (template, themeName = '') => {
 /**
  * Simplify a template/theme path combination to represent a theme variable value.
  *
- * @param {string} template - a template path
- * @param {string} [path] - an optional path
- * @returns {string}
+ * @param template - a template path
+ * @param [path] - an optional path
+ * @returns the template path
  */
-const templatePath = (template, path = '') => {
+const templatePath = (template: string, path: string = ''): string => {
 	const templateName = template
 		.split('/')
 		.reverse()[0]
@@ -141,14 +194,19 @@ const templatePath = (template, path = '') => {
 /**
  * Get all status info about the selected template.
  *
- * @param {Object} params
- * @param {Object} params.pageData - the data object that was loaded from the page's data file
- * @param {Object} params.shared - the shared data object
- * @param {string} params.template - a template path
- * @param {string} params.themeKey - the field name for themes
- * @returns {{buttonLabel: string, buttonClass: string, buttonIcon: string, selectedTemplate: string, mainTheme: Object}}
+ * @param params
+ * @param params.pageData - the data object that was loaded from the page's data file
+ * @param params.shared - the shared data object
+ * @param params.template - a template path
+ * @param params.themeKey - the field name for themes
+ * @returns the UI items the represent a theme status
  */
-const themeStatus = ({ pageData, shared, template, themeKey }) => {
+const themeStatus = ({
+	pageData,
+	shared,
+	template,
+	themeKey,
+}: TemplateFieldData): ThemeStatus => {
 	const themes = getThemes();
 	let mainTheme = themes[shared[themeKey]];
 
@@ -186,64 +244,67 @@ const themeStatus = ({ pageData, shared, template, themeKey }) => {
 };
 
 /**
- * A page data form element.
- * The Page class doesn't need the watch and init properties
- * as this is anyways the intended behavior.
- * ```
- * <am-form-page controller="Page::data" page="/url"></am-form-page>
- * <am-form-submit form="Page::data">Submit</am-form-submit>
- * ```
+ * Create switcher sections for the different kind of variable fields.
  *
- * @extends Form
+ * @param form - the main page data form that serves as wrapper
+ * @returns the switcher section collection
  */
-class Page extends Form {
+const createSections = (form: PageFormComponent): SwitcherSectionCollection => {
+	const createSection = (key: string): SwitcherSectionComponent => {
+		return create('am-switcher-section', [], { name: content[key] }, form);
+	};
+
+	const content = getSwitcherSections().content;
+
+	const sections: SwitcherSectionCollection = {
+		settings: createSection('settings'),
+		text: createSection('text'),
+		colors: createSection('colors'),
+	};
+
+	return sections;
+};
+
+/**
+ * A page data form element.
+ * The FormPageComponent class doesn't need the watch and init properties
+ * as this is anyways the intended behavior.
+ *
+ * @example
+ * <am-form-page controller="FormPageComponent::data" page="/url"></am-form-page>
+ * <am-form-submit form="FormPageComponent::data">Submit</am-form-submit>
+ *
+ * @extends FormComponent
+ */
+class PageFormComponent extends FormComponent {
+	/**
+	 * The section collection object.
+	 */
+	sections: SwitcherSectionCollection;
+
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
-		this.sections = this.createSections();
+		this.sections = createSections(this);
 
 		this.submit();
 	}
 
 	/**
-	 * Create switcher sections for the different kind of variable fields.
-	 *
-	 * @returns {Object}
-	 */
-	createSections() {
-		const sections = {};
-		const content = getSwitcherSections().content;
-
-		['settings', 'text', 'colors'].forEach((key) => {
-			const section = create(
-				'am-switcher-section',
-				[],
-				{ name: content[key] },
-				this
-			);
-
-			create('div', [classes.spinner], {}, section);
-			sections[key] = section;
-		});
-
-		return sections;
-	}
-
-	/**
 	 * Create the main settings fields.
 	 *
-	 * @param {Object} params
-	 * @param {HTMLElement} params.section - the section element where the fields are created in
-	 * @param {string} params.url - the page URL
-	 * @param {string} params.prefix - the directory prefix
-	 * @param {string} params.slug - the page slug
-	 * @param {Object} params.pageData - the data that was loaded from the data file
-	 * @param {Object} params.shared - the shared data object
-	 * @param {Object} params.reserved - the reserved keys object
-	 * @param {string} params.template - the page template path
+	 * @param params
+	 * @param params.section - the section element where the fields are created in
+	 * @param params.url - the page URL
+	 * @param params.prefix - the directory prefix
+	 * @param params.slug - the page slug
+	 * @param params.pageData - the data that was loaded from the data file
+	 * @param params.shared - the shared data object
+	 * @param params.reserved - the reserved keys object
+	 * @param params.template - the page template path
 	 */
-	mainSettings({
+	private mainSettings({
 		section,
 		url,
 		prefix,
@@ -252,16 +313,20 @@ class Page extends Form {
 		shared,
 		reserved,
 		template,
-	}) {
+	}: MainSettingsData): void {
 		/**
 		 * Create a field for one of the main settings.
 		 *
-		 * @param {string} fieldType
-		 * @param {string} key
-		 * @param {string} [label]
-		 * @returns {Field}
+		 * @param fieldType
+		 * @param key
+		 * @param [label]
+		 * @returns the generated field
 		 */
-		const createMainField = (fieldType, key, label = '') => {
+		const createMainField = (
+			fieldType: string,
+			key: string,
+			label: string = ''
+		): FieldComponent => {
 			const data = {
 				key,
 				value: pageData[key],
@@ -321,7 +386,7 @@ class Page extends Form {
 			text('page_redirect')
 		);
 
-		const tagsField = createMainField(
+		createMainField(
 			'am-form-page-field-tags',
 			reserved['AM_KEY_TAGS'],
 			text('page_tags')
@@ -331,71 +396,70 @@ class Page extends Form {
 	/**
 	 * Create the form after the response was received successfully.
 	 *
-	 * @param {Object} response - the response data
+	 * @param response - the response data
 	 */
-	processResponse(response) {
-		if (typeof response.data === 'undefined') {
-			return false;
-		}
+	protected processResponse(response: KeyValueMap): void {
+		if (typeof response.data !== 'undefined') {
+			this.watch();
 
-		this.watch();
+			Object.values(this.sections).forEach((section) => {
+				section.innerHTML = '';
+			});
 
-		Object.values(this.sections).forEach((section) => {
-			section.innerHTML = '';
-		});
+			const {
+				url,
+				prefix,
+				slug,
+				pageData,
+				shared,
+				template,
+				keys,
+				keysUnused,
+			} = response.data;
 
-		const {
-			url,
-			prefix,
-			slug,
-			pageData,
-			shared,
-			template,
-			keys,
-			keysUnused,
-		} = response.data;
+			const themeKey = keys.reserved['AM_KEY_THEME'];
+			const themes = getThemes();
+			const reserved = keys.reserved;
 
-		const themeKey = keys.reserved['AM_KEY_THEME'];
-		const themes = getThemes();
+			let tooltips = {};
 
-		let tooltips = {};
-
-		try {
-			tooltips = themes[pageData[themeKey]].tooltips;
-		} catch (e) {
 			try {
-				tooltips = themes[shared[themeKey]].tooltips;
-			} catch (e) {}
+				tooltips = themes[pageData[themeKey]].tooltips;
+			} catch (e) {
+				try {
+					tooltips = themes[shared[themeKey]].tooltips;
+				} catch (e) {}
+			}
+
+			this.mainSettings({
+				section: this.sections.settings,
+				url,
+				prefix,
+				slug,
+				pageData,
+				shared,
+				reserved,
+				template,
+			});
+
+			Object.keys(this.sections).forEach((item: SwitcherSectionName) => {
+				fieldGroup({
+					section: this.sections[item],
+					keys: keys[item],
+					pageData,
+					tooltips,
+					removable: false,
+				});
+
+				fieldGroup({
+					section: this.sections[item],
+					keys: keysUnused[item],
+					pageData,
+					tooltips,
+					removable: true,
+				});
+			});
 		}
-
-		this.mainSettings({
-			section: this.sections.settings,
-			url,
-			prefix,
-			slug,
-			pageData,
-			shared,
-			reserved: keys.reserved,
-			template,
-		});
-
-		Object.keys(this.sections).forEach((item) => {
-			fieldGroup({
-				section: this.sections[item],
-				keys: keys[item],
-				pageData,
-				tooltips,
-				removable: false,
-			});
-
-			fieldGroup({
-				section: this.sections[item],
-				keys: keysUnused[item],
-				pageData,
-				tooltips,
-				removable: true,
-			});
-		});
 	}
 }
 
@@ -404,37 +468,42 @@ class Page extends Form {
  *
  * @extends BaseComponent
  */
-class FieldTemplate extends BaseComponent {
+class FieldTemplateComponent extends BaseComponent {
 	/**
 	 * The field data.
 	 *
-	 * @param {Object} params
-	 * @param {Object} params.pageData
-	 * @param {Object} params.shared
+	 * @param {KeyValueMap} params
+	 * @param {KeyValueMap} params.pageData
+	 * @param {KeyValueMap} params.shared
 	 * @param {string} params.template
 	 * @param {string} params.themeKey
 	 */
-	set data({ pageData, shared, template, themeKey }) {
+	set data({ pageData, shared, template, themeKey }: TemplateFieldData) {
 		this.render({ pageData, shared, template, themeKey });
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		this.classList.add(classes.field);
 	}
 
 	/**
 	 * Render a template field button.
 	 *
-	 * @param {Object} params
-	 * @param {Object} params.pageData
-	 * @param {Object} params.shared
-	 * @param {string} params.template
-	 * @param {string} params.themeKey
+	 * @param params
+	 * @param params.pageData
+	 * @param params.shared
+	 * @param params.template
+	 * @param params.themeKey
 	 */
-	render({ pageData, shared, template, themeKey }) {
+	private render({
+		pageData,
+		shared,
+		template,
+		themeKey,
+	}: TemplateFieldData): void {
 		const {
 			buttonLabel,
 			buttonIcon,
@@ -480,7 +549,7 @@ class FieldTemplate extends BaseComponent {
 					</am-modal-close>
 					<am-form-submit 
 					class="${classes.button} ${classes.buttonSuccess}" 
-					form="Page::data"
+					form="FormPageComponent::data"
 					>
 						${text('btn_apply_reload')}
 					</am-form-submit>
@@ -488,7 +557,10 @@ class FieldTemplate extends BaseComponent {
 			</div>
 		`;
 
-		const select = query('am-form-page-select-template', modal);
+		const select = query(
+			'am-form-page-select-template',
+			modal
+		) as FieldSelectTemplateComponent;
 
 		select.data = {
 			value: selectedTemplate,
@@ -502,35 +574,41 @@ class FieldTemplate extends BaseComponent {
  *
  * @extends BaseComponent
  */
-class FieldSelectTemplate extends BaseComponent {
+class FieldSelectTemplateComponent extends BaseComponent {
 	/**
 	 * The field data.
 	 *
-	 * @param {Object} params
-	 * @param {string} params.value
-	 * @param {Object} params.mainTheme
+	 * @param params
+	 * @param params.value
+	 * @param params.mainTheme
 	 */
-	set data({ value, mainTheme }) {
+	set data({ value, mainTheme }: KeyValueMap) {
 		this.render({ value, mainTheme });
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		this.classList.add(classes.field);
 	}
 
 	/**
 	 * Create a set of options for the a optgroup.
 	 *
-	 * @param {Array} templates - the templates array
-	 * @param {HTMLElement} section - the section element
-	 * @param {string} value - the currently used template
-	 * @param {string} [themeName] - the optional theme name for the current group
-	 * @param {string} [themePath] - the optional theme path
+	 * @param templates - the templates array
+	 * @param section - the section element
+	 * @param value - the currently used template
+	 * @param [themeName] - the optional theme name for the current group
+	 * @param [themePath] - the optional theme path
 	 */
-	createOptions(templates, section, value, themeName = '*', themePath = '') {
+	private createOptions(
+		templates: string[],
+		section: SwitcherSectionComponent,
+		value: string,
+		themeName: string = '*',
+		themePath: string = ''
+	): void {
 		templates.forEach((template) => {
 			const file = templatePath(template, themePath);
 			const option = create('option', [], { value: file }, section);
@@ -546,11 +624,11 @@ class FieldSelectTemplate extends BaseComponent {
 	/**
 	 * Render the field.
 	 *
-	 * @param {Object} params
-	 * @param {string} params.value
-	 * @param {Object} params.mainTheme
+	 * @param params
+	 * @param params.value
+	 * @param params.mainTheme
 	 */
-	render({ value, mainTheme }) {
+	private render({ value, mainTheme }: KeyValueMap): void {
 		const themes = getThemes();
 		const select = create(
 			'select',
@@ -563,7 +641,7 @@ class FieldSelectTemplate extends BaseComponent {
 
 		this.createOptions(mainTheme.templates, mainGroup, value);
 
-		Object.values(themes).forEach((theme) => {
+		Object.values(themes).forEach((theme: KeyValueMap) => {
 			const group = create('optgroup', [], { label: theme.name }, select);
 
 			this.createOptions(
@@ -580,13 +658,13 @@ class FieldSelectTemplate extends BaseComponent {
 /**
  * A tags input field.
  *
- * @extends Field
+ * @extends FieldComponent
  */
-class FieldTags extends Field {
+class FieldTagsComponent extends FieldComponent {
 	/**
 	 * Create the input field.
 	 */
-	input() {
+	input(): void {
 		const { name, id, value } = this._data;
 		const textarea = create(
 			'textarea',
@@ -608,7 +686,10 @@ class FieldTags extends Field {
 	}
 }
 
-customElements.define('am-form-page-field-template', FieldTemplate);
-customElements.define('am-form-page-select-template', FieldSelectTemplate);
-customElements.define('am-form-page-field-tags', FieldTags);
-customElements.define('am-form-page', Page);
+customElements.define('am-form-page-field-template', FieldTemplateComponent);
+customElements.define(
+	'am-form-page-select-template',
+	FieldSelectTemplateComponent
+);
+customElements.define('am-form-page-field-tags', FieldTagsComponent);
+customElements.define('am-form-page', PageFormComponent);

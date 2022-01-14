@@ -33,11 +33,12 @@
  */
 
 import { classes, debounce, listen, query } from '../utils/core';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from './Base';
 
 /**
  * The sidebar scroll container.
- * ```
+ *
+ * @example
  * <am-sidebar class="am-l-sidebar__content">
  *     <div class="am-l-sidebar__logo">...</div>
  *     <div class="am-l-sidebar__nav">
@@ -54,15 +55,14 @@ import { BaseComponent } from './BaseComponent';
  *         </nav>
  *     </div>
  * </am-sidebar>
- * ```
  *
  * @extends BaseComponent
  */
-class Sidebar extends BaseComponent {
+class SidebarComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		setTimeout(this.setHeightAndScroll.bind(this), 0);
 
 		listen(
@@ -75,7 +75,7 @@ class Sidebar extends BaseComponent {
 	/**
 	 * Set the container height and scroll to the active item.
 	 */
-	setHeightAndScroll() {
+	private setHeightAndScroll(): void {
 		const activeItem = query(`.${classes.navItemActive}`, this);
 
 		this.style.setProperty('height', `${window.innerHeight}px`);
@@ -86,4 +86,4 @@ class Sidebar extends BaseComponent {
 	}
 }
 
-customElements.define('am-sidebar', Sidebar);
+customElements.define('am-sidebar', SidebarComponent);

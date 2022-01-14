@@ -33,7 +33,7 @@
  */
 
 import { classes, listen, query } from '../utils/core';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from './Base';
 
 /**
  * A modal component.
@@ -41,7 +41,7 @@ import { BaseComponent } from './BaseComponent';
  * - `noesc` - Disable the ESC key
  * - `noclick` - Disable closing the modal by clicking on the overlay
  *
- * ```
+ * @example
  * <am-modal-toggle modal="#modal">
  *     Open
  * </am-modal-toggle>
@@ -53,28 +53,25 @@ import { BaseComponent } from './BaseComponent';
  *         </div>
  *     </div>
  * </am-modal>
- * ```
  *
  * @extends BaseComponent
  */
-class Modal extends BaseComponent {
+class ModalComponent extends BaseComponent {
 	/**
 	 * True if the modal dialog is open.
-	 *
-	 * @type {boolean}
 	 */
-	get isOpen() {
+	get isOpen(): boolean {
 		return this.matches(`.${classes.modalOpen}`);
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		this.classList.add(classes.modal);
 
 		if (!this.hasAttribute('noclick')) {
-			listen(this, 'click', (event) => {
+			listen(this, 'click', (event: MouseEvent) => {
 				if (this === event.target) {
 					this.close();
 				}
@@ -82,7 +79,7 @@ class Modal extends BaseComponent {
 		}
 
 		if (!this.hasAttribute('noesc')) {
-			listen(window, 'keydown', (event) => {
+			listen(window, 'keydown', (event: KeyboardEvent) => {
 				if (this.isOpen && event.keyCode == 27) {
 					this.close();
 				}
@@ -93,7 +90,7 @@ class Modal extends BaseComponent {
 	/**
 	 * Toggle the modal.
 	 */
-	toggle() {
+	toggle(): void {
 		if (this.isOpen) {
 			this.close();
 		} else {
@@ -104,7 +101,7 @@ class Modal extends BaseComponent {
 	/**
 	 * Close the modal.
 	 */
-	close() {
+	close(): void {
 		this.classList.remove(classes.modalOpen);
 		this.toggleBodyOverflow();
 	}
@@ -112,7 +109,7 @@ class Modal extends BaseComponent {
 	/**
 	 * Open the modal.
 	 */
-	open() {
+	open(): void {
 		this.classList.add(classes.modalOpen);
 		this.toggleBodyOverflow();
 	}
@@ -120,7 +117,7 @@ class Modal extends BaseComponent {
 	/**
 	 * Toggle the body overflow class when the modal is open.
 	 */
-	toggleBodyOverflow() {
+	private toggleBodyOverflow(): void {
 		const body = query('body');
 
 		body.classList.toggle(
@@ -133,26 +130,25 @@ class Modal extends BaseComponent {
 /**
  * A modal toggle button.
  *
- * @see {@link Modal}
+ * @see {@link ModalComponent}
  * @extends BaseComponent
  */
-class ModalToggle extends BaseComponent {
+class ModalToggleComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
-	 * @type {Array}
 	 * @static
 	 */
-	static get observedAttributes() {
+	static get observedAttributes(): string[] {
 		return ['modal'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		const toggle = () => {
-			const modal = query(this.elementAttributes.modal);
+			const modal = query(this.elementAttributes.modal) as ModalComponent;
 
 			modal.toggle();
 		};
@@ -164,18 +160,18 @@ class ModalToggle extends BaseComponent {
 /**
  * A modal close button that is placed inside the modal dialog.
  *
- * @see {@link Modal}
+ * @see {@link ModalComponent}
  * @extends BaseComponent
  */
-class ModalClose extends BaseComponent {
+class ModalCloseComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		const close = () => {
 			const modal = this.closest('am-modal');
 
-			if (modal instanceof Modal) {
+			if (modal instanceof ModalComponent) {
 				modal.close();
 			}
 		};
@@ -184,6 +180,6 @@ class ModalClose extends BaseComponent {
 	}
 }
 
-customElements.define('am-modal', Modal);
-customElements.define('am-modal-toggle', ModalToggle);
-customElements.define('am-modal-close', ModalClose);
+customElements.define('am-modal', ModalComponent);
+customElements.define('am-modal-toggle', ModalToggleComponent);
+customElements.define('am-modal-close', ModalCloseComponent);

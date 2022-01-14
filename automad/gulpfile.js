@@ -121,7 +121,7 @@ gulp.task('ui-less', function () {
 // UI Webpack.
 gulp.task('ui-ts', function () {
 	return gulp
-		.src('ui/src/index.js')
+		.src('ui/src/index.ts')
 		.pipe(
 			named(function (file) {
 				return 'ui';
@@ -173,10 +173,9 @@ gulp.task('watch', function () {
 	gulp.watch('blocks/js/*.js', gulp.series('blocks-js', 'reload'));
 	gulp.watch('blocks/less/*.less', gulp.series('blocks-less', 'reload'));
 
-	gulp.watch('ui/src/less/**/*.less', gulp.series('ui-less', 'reload'));
-	gulp.watch('ui/src/js/**/*.js', gulp.series('ui-ts', 'reload'));
+	gulp.watch('ui/src/styles/**/*.less', gulp.series('ui-less', 'reload'));
+	gulp.watch('ui/src/**/*.ts', gulp.series('ui-ts', 'reload'));
 	gulp.watch('src/**/*.php', gulp.series('reload'));
-	gulp.watch('ui/demo/*.html', gulp.series('reload'));
 });
 
 // The default task.

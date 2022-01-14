@@ -42,61 +42,82 @@ import {
 } from '../utils/core';
 import { create } from '../utils/create';
 import { requestController } from '../utils/request';
-import { BaseComponent } from './BaseComponent';
+import { KeyValueMap } from '../utils/types';
+import { BaseComponent } from './Base';
+
+interface Page {
+	url: string;
+	title: string;
+	path: string;
+	parent: string;
+	private: boolean;
+}
+
+interface NavItem {
+	wrapper: HTMLElement;
+	link: HTMLElement;
+	children: HTMLElement;
+}
 
 /**
  * Test whether a view is active.
- * @param {string} view
- * @returns {boolean}
+ *
+ * @param view
+ * @returns true if the view mathes the URL path
  */
-const isActiveView = (view) => {
+const isActiveView = (view: string): boolean => {
 	const regex = new RegExp(`\/${view}\$`, 'i');
 	return window.location.pathname.match(regex) != null;
 };
 
 /**
  * The navigation tree component.
- * ```
+ *
+ * @example
  * <am-nav-tree controller="UIController::navTree"></am-nav-tree>
- * ```
  *
  * @extends BaseComponent
  */
-class NavTree extends BaseComponent {
+class NavTreeComponent extends BaseComponent {
+	/**
+	 * The preloader.
+	 */
+	private preloader: HTMLElement;
+
 	/**
 	 * The controller.
-	 *
-	 * @type {string}
 	 */
-	controller = 'UIController::navTree';
+	protected controller = 'UIController::navTree';
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		this.classList.add(classes.nav);
 
 		create('span', [classes.navLabel], {}, this).innerHTML = text(
 			'sidebar_header_pages'
 		);
 
-		this.loading = create('div', [classes.navSpinner], {}, this);
-		create('div', [classes.spinner], {}, this.loading);
+		this.preloader = create('div', [classes.navSpinner], {}, this);
+		create('div', [classes.spinner], {}, this.preloader);
 		this.init();
 	}
 
 	/**
 	 * Init the navTree.
 	 */
-	async init() {
+	private async init(): Promise<void> {
 		const response = await requestController(this.controller);
-		const pages = response.data;
-		const tree = {};
-		let parent;
+		const pages: Page[] = response.data;
+		const tree: KeyValueMap = {};
+		let parent: HTMLElement;
 
-		pages.sort((a, b) => (a.path > b.path ? 1 : b.path > a.path ? -1 : 0));
+		pages.sort((a: KeyValueMap, b: KeyValueMap) =>
+			a.path > b.path ? 1 : b.path > a.path ? -1 : 0
+		);
 
-		this.loading.remove();
+		this.preloader.remove();
 
 		pages.forEach((page) => {
 			if (typeof tree[page.parent] == 'undefined') {
@@ -115,11 +136,11 @@ class NavTree extends BaseComponent {
 	/**
 	 * Create a tree item.
 	 *
-	 * @param {Object} page - the page data object
-	 * @param {HTMLElement} parent - the children container of the parent tree node
-	 * @returns {{wrapper: HTMLElement, link: HTMLElement, children: HTMLElement}}
+	 * @param page - the page data object
+	 * @param parent - the children container of the parent tree node
+	 * @returns the NavItem object
 	 */
-	createItem(page, parent) {
+	private createItem(page: Page, parent: HTMLElement): NavItem {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
 			'details',
@@ -159,12 +180,14 @@ class NavTree extends BaseComponent {
 	/**
 	 * Unfold the tree to reveal the active item.
 	 */
-	unfoldToActive() {
-		const activeItem = query(`.${classes.navItemActive}`);
+	private unfoldToActive(): void {
+		const activeItem = query(
+			`.${classes.navItemActive}`
+		) as NavItemComponent;
 
 		if (activeItem) {
-			queryParents('details', activeItem).forEach((item) => {
-				item.setAttribute('open', true);
+			queryParents('details', activeItem).forEach((item: HTMLElement) => {
+				item.setAttribute('open', '');
 			});
 		}
 	}
@@ -172,13 +195,13 @@ class NavTree extends BaseComponent {
 	/**
 	 * Toggle visibility of the children arrow indicators depending on the existance of children.
 	 */
-	toggleChildrenIcons() {
+	private toggleChildrenIcons(): void {
 		const childrenContainers = queryAll(`.${classes.navChildren}`, this);
 
-		childrenContainers.forEach((item) => {
-			item.previousSibling.classList.toggle(
+		childrenContainers.forEach((item: Element) => {
+			(item.previousSibling as Element).classList.toggle(
 				classes.navLinkHasChildren,
-				item.childElementCount
+				item.childElementCount > 0
 			);
 		});
 	}
@@ -186,27 +209,26 @@ class NavTree extends BaseComponent {
 
 /**
  * A simple link in the sidebar navigation.
- * ```
+ *
+ * @example
  * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
- * ```
  *
  * @extends BaseComponent
  */
-class NavItem extends BaseComponent {
+class NavItemComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
-	 * @type {Array}
 	 * @static
 	 */
-	static get observedAttributes() {
+	static get observedAttributes(): string[] {
 		return ['view', 'icon', 'text'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
 		this.classList.add(classes.navItem);
 		this.classList.toggle(
 			classes.navItemActive,
@@ -219,9 +241,9 @@ class NavItem extends BaseComponent {
 	/**
 	 * Render the component.
 	 *
-	 * @returns {string} the rendered HTML
+	 * @returns the rendered HTML
 	 */
-	render() {
+	render(): string {
 		let link = './';
 
 		if (this.elementAttributes.view) {
@@ -240,5 +262,5 @@ class NavItem extends BaseComponent {
 	}
 }
 
-customElements.define('am-nav-tree', NavTree);
-customElements.define('am-nav-item', NavItem);
+customElements.define('am-nav-tree', NavTreeComponent);
+customElements.define('am-nav-item', NavItemComponent);

@@ -32,47 +32,42 @@
  * Licensed under the MIT license.
  */
 
-import { Autocomplete } from './Autocomplete';
+import { AutocompleteComponent } from './Autocomplete';
 import { create } from '../utils/create';
 import { classes } from '../utils/core';
+import { KeyValueMap } from '../utils/types';
 
 /**
  * The Jumpbar field element.
- * ```
- * <am-jumpbar></am-jumpbar>
- * ```
  *
- * @extends Autocomplete
+ * @example
+ * <am-jumpbar></am-jumpbar>
+ *
+ * @extends AutocompleteComponent
  */
-class Jumpbar extends Autocomplete {
+class JumpbarComponent extends AutocompleteComponent {
 	/**
 	 * The controller.
-	 *
-	 * @type {string}
 	 */
-	controller = 'UIController::autocompleteJump';
+	protected controller = 'UIController::autocompleteJump';
 
 	/**
 	 * The initial index.
-	 *
-	 * @type {(null|number)}
 	 */
-	initialIndex = 0;
+	protected initialIndex: null | number = 0;
 
 	/**
 	 * The minimum input value length to trigger the dropdown.
-	 *
-	 * @type {number}
 	 */
-	minInputLength = 0;
+	protected minInputLength = 0;
 
 	/**
 	 * Create a dropdown item.
 	 *
-	 * @param {Object} item
-	 * @returns {HTMLElement} the dropdown item element
+	 * @param item
+	 * @returns the dropdown item element
 	 */
-	createItemElement(item) {
+	protected createItemElement(item: KeyValueMap): HTMLElement {
 		const element = create('a', [classes.dropdownItem], {
 			href: item.url,
 		});
@@ -85,22 +80,22 @@ class Jumpbar extends Autocomplete {
 	/**
 	 * Create a value for a dropdown item.
 	 *
-	 * @param {Object} item
-	 * @returns {string} the item value
+	 * @param item
+	 * @returns the item value
 	 */
-	createItemValue(item) {
+	protected createItemValue(item: KeyValueMap): string {
 		return item.value.toLowerCase();
 	}
 
 	/**
 	 * Create the inner HTML for a dropdown item.
 	 *
-	 * @param {string} icon
-	 * @param {string} title
-	 * @param {string} subtitle
-	 * @returns {string} the HTML string
+	 * @param icon
+	 * @param title
+	 * @param subtitle
+	 * @returns the HTML string
 	 */
-	itemHtml(icon, title, subtitle) {
+	private itemHtml(icon: string, title: string, subtitle: string): string {
 		return `
 			<i class="bi bi-${icon}"></i>
 			<span>${title}</span>
@@ -113,7 +108,7 @@ class Jumpbar extends Autocomplete {
 	/**
 	 * Update the dropdown and the list of filtered items based on the current input value.
 	 */
-	update() {
+	protected update(): void {
 		const search = this.itemsFiltered[0];
 
 		search.element.setAttribute(
@@ -134,9 +129,9 @@ class Jumpbar extends Autocomplete {
 	/**
 	 * Select an item and use the item value as the input value.
 	 *
-	 * @param {Event} event
+	 * @param event
 	 */
-	select(event) {
+	select(event: Event) {
 		if (this.selectedIndex !== null) {
 			this.itemsFiltered[this.selectedIndex].element.click();
 		}
@@ -145,4 +140,4 @@ class Jumpbar extends Autocomplete {
 	}
 }
 
-customElements.define('am-jumpbar', Jumpbar);
+customElements.define('am-jumpbar', JumpbarComponent);

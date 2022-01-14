@@ -33,43 +33,33 @@
  */
 
 /**
- * The Automad base component. All Automad components are based on this class.
+ * Create a new element including class names and attributes and optionally append it to a given parent node.
  *
- * @extends HTMLElement
+ * @param tag - the tag name
+ * @param classes - an array of class names that are added to the element
+ * @param attributes - an object of attributes (key/value pairs) that are added to the element
+ * @param [parent] - the optional node where the element will be appendend to
+ * @returns the created element
  */
-export class BaseComponent extends HTMLElement {
-	/**
-	 * Key/value pairs of the element attributes.
-	 *
-	 * @type {Object}
-	 */
-	elementAttributes = {};
+export const create = (
+	tag: string,
+	classes: Array<any> = [],
+	attributes: object = {},
+	parent: HTMLElement | null = null
+): any => {
+	const element = document.createElement(tag);
 
-	/**
-	 * The class constructor.
-	 */
-	constructor() {
-		super();
+	classes.forEach((cls) => {
+		element.classList.add(cls);
+	});
+
+	for (const [key, value] of Object.entries(attributes)) {
+		element.setAttribute(key, value);
 	}
 
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @type {Array}
-	 * @static
-	 */
-	static get observedAttributes() {
-		return [];
+	if (parent) {
+		parent.appendChild(element);
 	}
 
-	/**
-	 * The callback that is used when attributes are changed or on initialization.
-	 *
-	 * @param {string} name
-	 * @param {string} oldValue
-	 * @param {string} newValue
-	 */
-	attributeChangedCallback(name, oldValue, newValue) {
-		this.elementAttributes[name] = newValue || '';
-	}
-}
+	return element;
+};

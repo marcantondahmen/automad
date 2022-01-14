@@ -1,4 +1,4 @@
-/*!
+/*
  *                    ....
  *                  .:   '':.
  *                  ::::     ':..
@@ -32,13 +32,41 @@
  * Licensed under the MIT license.
  */
 
-import './components/Autocomplete';
-import './components/Field';
-import './components/Form';
-import './components/Form/Page';
-import './components/Jumpbar';
-import './components/Modal';
-import './components/Nav';
-import './components/Sidebar';
-import './components/Switcher';
-import './components/Toggle';
+import { BaseComponent } from './Base';
+import { listen, queryAll } from '../utils/core';
+
+/**
+ * A simple toggle link component.
+ *
+ * @example
+ * <am-toggle target="body" cls="am-l-page--sidebar-open">
+ *     Menu
+ * </am-toggle>
+ *
+ * @extends BaseComponent
+ */
+class ToggleComponent extends BaseComponent {
+	/**
+	 * The array of observed attributes.
+	 *
+	 * @static
+	 */
+	static get observedAttributes(): string[] {
+		return ['target', 'cls'];
+	}
+
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		listen(this, 'click', () => {
+			const elements = queryAll(this.elementAttributes.target);
+
+			elements.forEach((element) => {
+				element.classList.toggle(this.elementAttributes.cls);
+			});
+		});
+	}
+}
+
+customElements.define('am-toggle', ToggleComponent);

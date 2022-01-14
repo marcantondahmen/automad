@@ -32,12 +32,26 @@
  * Licensed under the MIT license.
  */
 
+import { KeyValueMap, ThemeCollection } from './types';
+
+declare global {
+	interface Window {
+		Automad: any;
+	}
+
+	interface Event {
+		path: string[];
+	}
+
+	interface ParentNode {
+		closest: any;
+	}
+}
+
 /**
  * The object with all classes used for HTML elements that are used by components.
- *
- * @type {Object}
  */
-export const classes = {
+export const classes: KeyValueMap = {
 	button: 'am-e-button',
 	buttonSuccess: 'am-e-button--success',
 	displayNone: 'am-u-display-none',
@@ -73,9 +87,9 @@ export const classes = {
 /**
  * Get the Automad base URL.
  *
- * @returns {string} the Automad base URL
+ * @returns the Automad base URL
  */
-export const getBaseURL = () => {
+export const getBaseURL = (): string => {
 	try {
 		return window.Automad.baseURL;
 	} catch {
@@ -86,9 +100,9 @@ export const getBaseURL = () => {
 /**
  * Get the Automad dashboard URL.
  *
- * @returns {string} the Automad dashboard URL
+ * @returns the Automad dashboard URL
  */
-export const getDashboardURL = () => {
+export const getDashboardURL = (): string => {
 	try {
 		return window.Automad.dashboardURL;
 	} catch {
@@ -99,9 +113,9 @@ export const getDashboardURL = () => {
 /**
  * Get the array of globally used tags.
  *
- * @returns {Array} the array of globally used tags
+ * @returns the array of globally used tags
  */
-export const getTags = () => {
+export const getTags = (): string[] => {
 	try {
 		return window.Automad.tags;
 	} catch {
@@ -112,9 +126,9 @@ export const getTags = () => {
 /**
  * Get the installed themes.
  *
- * @returns {Object} the installed themes
+ * @returns the installed themes
  */
-export const getThemes = () => {
+export const getThemes = (): ThemeCollection => {
 	try {
 		return window.Automad.themes;
 	} catch {
@@ -125,9 +139,9 @@ export const getThemes = () => {
 /**
  * Get the available switcher sections names.
  *
- * @returns {Object} the available switcher sections names
+ * @returns the available switcher sections names
  */
-export const getSwitcherSections = () => {
+export const getSwitcherSections = (): KeyValueMap => {
 	try {
 		return window.Automad.sections;
 	} catch {
@@ -138,14 +152,17 @@ export const getSwitcherSections = () => {
 /**
  * Debounce a function.
  *
- * @param {function} callback
- * @param {number} timeout
- * @returns {function} the debounced function
+ * @param callback
+ * @param timeout
+ * @returns the debounced function
  */
-export const debounce = (callback, timeout = 50) => {
-	let timer;
+export const debounce = (
+	callback: Function,
+	timeout: number = 50
+): Function => {
+	let timer: NodeJS.Timer;
 
-	return (...args) => {
+	return (...args: any) => {
 		clearTimeout(timer);
 
 		timer = setTimeout(() => {
@@ -157,11 +174,11 @@ export const debounce = (callback, timeout = 50) => {
 /**
  * Convert all HTML special characters.
  *
- * @param {string} value
- * @returns {string} the converted string
+ * @param value
+ * @returns the converted string
  */
-export const htmlSpecialChars = (value) => {
-	const chars = {
+export const htmlSpecialChars = (value: string): string => {
+	const chars: KeyValueMap = {
 		'&': '&amp;',
 		'<': '&lt;',
 		'>': '&gt;',
@@ -169,7 +186,7 @@ export const htmlSpecialChars = (value) => {
 		"'": '&#039;',
 	};
 
-	return value.replace(/[&<>"']/g, (char) => {
+	return value.replace(/[&<>"']/g, (char: string) => {
 		return chars[char];
 	});
 };
@@ -177,12 +194,17 @@ export const htmlSpecialChars = (value) => {
 /**
  * Register event listeners.
  *
- * @param {(HTMLElement|Document|Window)} element - the element to register the event listeners to
- * @param {string} eventNamesString - a string of one or more event names separated by a space
- * @param {function} callback - the callback
- * @param {string} selector - the sector to be used as filter
+ * @param element - the element to register the event listeners to
+ * @param eventNamesString - a string of one or more event names separated by a space
+ * @param callback - the callback
+ * @param selector - the sector to be used as filter
  */
-export const listen = (element, eventNamesString, callback, selector = '') => {
+export const listen = (
+	element: HTMLElement | Document | Window,
+	eventNamesString: string,
+	callback: Function,
+	selector: string = ''
+): void => {
 	const eventNames = eventNamesString
 		.split(' ')
 		.filter((str) => str.length > 0);
@@ -197,7 +219,7 @@ export const listen = (element, eventNamesString, callback, selector = '') => {
 			const path =
 				event.path || (event.composedPath && event.composedPath());
 
-			path.forEach((_element) => {
+			path.forEach((_element: any) => {
 				try {
 					if (_element.matches(selector)) {
 						if (typeof callback === 'function') {
@@ -214,33 +236,42 @@ export const listen = (element, eventNamesString, callback, selector = '') => {
 /**
  * Query the first element matching a `selector` from another `element`.
  *
- * @param {string} selector
- * @param {(HTMLElement|Document)} [element] - optional, defaults to `document`
- * @returns {any}
+ * @param selector
+ * @param [element] - optional, defaults to `document`
+ * @returns the first matched element
  */
-export const query = (selector, element = document) => {
+export const query = (
+	selector: string,
+	element: Document | HTMLElement = document
+): Element => {
 	return element.querySelector(selector);
 };
 
 /**
  * Query an array of elements matching a `selector` from another `element`.
  *
- * @param {string} selector
- * @param {(HTMLElement|Document)} [element] - optional, defaults to `document`
- * @returns {Array}
+ * @param selector
+ * @param [element] - optional, defaults to `document`
+ * @returns an array of matched elements
  */
-export const queryAll = (selector, element = document) => {
+export const queryAll = (
+	selector: string,
+	element: HTMLElement | Document = document
+): Element[] => {
 	return Array.from(element.querySelectorAll(selector));
 };
 
 /**
  * Query an array of parents of a given `element` that are matching `selector`.
  *
- * @param {string} selector
- * @param {HTMLElement} element
- * @returns {Array}
+ * @param selector
+ * @param element
+ * @returns an array of matched parent elements
  */
-export const queryParents = (selector, element) => {
+export const queryParents = (
+	selector: string,
+	element: HTMLElement
+): Element[] => {
 	const parents = [];
 	let parent = element.closest(selector);
 
@@ -255,10 +286,10 @@ export const queryParents = (selector, element) => {
 /**
  * Get a text module by key.
  *
- * @param {string} key
- * @returns {string}
+ * @param key
+ * @returns the requested text module
  */
-export const text = (key) => {
+export const text = (key: string): string => {
 	try {
 		return window.Automad.text[key];
 	} catch (error) {
@@ -269,10 +300,10 @@ export const text = (key) => {
 /**
  * Title case a given string.
  *
- * @param {string} str
- * @returns {string}
+ * @param str
+ * @returns the converted string
  */
-export const titleCase = (str) => {
+export const titleCase = (str: string): string => {
 	return str
 		.replace(/\//g, ' / ')
 		.replace(/(?!^)([A-Z]+)/g, ' $1')

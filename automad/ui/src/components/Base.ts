@@ -32,29 +32,46 @@
  * Licensed under the MIT license.
  */
 
+import { KeyValueMap } from '../utils/types';
+
 /**
- * Create a new element including class names and attributes and optionally append it to a given parent node.
+ * The Automad base component. All Automad components are based on this class.
  *
- * @param {string} tag - the tag name
- * @param {Array} classes - an array of class names that are added to the element
- * @param {Object} attributes - an object of attributes (key/value pairs) that are added to the element
- * @param {(HTMLElement|null)} [parent] - the optional node where the element will be appendend to
- * @returns {any}
+ * @extends HTMLElement
  */
-export const create = (tag, classes = [], attributes = {}, parent = null) => {
-	const element = document.createElement(tag);
+export class BaseComponent extends HTMLElement {
+	/**
+	 * Key/value pairs of the element attributes.
+	 */
+	protected elementAttributes: KeyValueMap = {};
 
-	classes.forEach((cls) => {
-		element.classList.add(cls);
-	});
-
-	for (const [key, value] of Object.entries(attributes)) {
-		element.setAttribute(key, value);
+	/**
+	 * The class constructor.
+	 */
+	constructor() {
+		super();
 	}
 
-	if (parent) {
-		parent.appendChild(element);
+	/**
+	 * The array of observed attributes.
+	 * @static
+	 */
+	static get observedAttributes(): string[] {
+		return [];
 	}
 
-	return element;
-};
+	/**
+	 * The callback that is used when attributes are changed or on initialization.
+	 *
+	 * @param name
+	 * @param oldValue
+	 * @param newValue
+	 */
+	attributeChangedCallback(
+		name: string,
+		oldValue: string,
+		newValue: string
+	): void {
+		this.elementAttributes[name] = newValue || '';
+	}
+}
