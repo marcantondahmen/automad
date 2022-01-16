@@ -93,6 +93,28 @@ export const classes: KeyValueMap = {
 };
 
 /**
+ * Debounce a function.
+ *
+ * @param callback
+ * @param timeout
+ * @returns the debounced function
+ */
+export const debounce = (
+	callback: Function,
+	timeout: number = 50
+): Function => {
+	let timer: NodeJS.Timer;
+
+	return (...args: any) => {
+		clearTimeout(timer);
+
+		timer = setTimeout(() => {
+			callback.apply(this, args);
+		}, timeout);
+	};
+};
+
+/**
  * Get the Automad base URL.
  *
  * @returns the Automad base URL
@@ -169,28 +191,6 @@ export const getSwitcherSections = (): KeyValueMap => {
 };
 
 /**
- * Debounce a function.
- *
- * @param callback
- * @param timeout
- * @returns the debounced function
- */
-export const debounce = (
-	callback: Function,
-	timeout: number = 50
-): Function => {
-	let timer: NodeJS.Timer;
-
-	return (...args: any) => {
-		clearTimeout(timer);
-
-		timer = setTimeout(() => {
-			callback.apply(this, args);
-		}, timeout);
-	};
-};
-
-/**
  * Convert all HTML special characters.
  *
  * @param value
@@ -208,6 +208,17 @@ export const htmlSpecialChars = (value: string): string => {
 	return value.replace(/[&<>"']/g, (char: string) => {
 		return chars[char];
 	});
+};
+
+/**
+ * Test whether a view is active.
+ *
+ * @param view
+ * @returns true if the view mathes the URL path
+ */
+export const isActiveView = (view: string): boolean => {
+	const regex = new RegExp(`\/${view}\$`, 'i');
+	return window.location.pathname.match(regex) != null;
 };
 
 /**

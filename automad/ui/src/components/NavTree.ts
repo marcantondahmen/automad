@@ -36,6 +36,7 @@ import {
 	classes,
 	getDashboardURL,
 	getPageURL,
+	isActiveView,
 	query,
 	queryAll,
 	queryParents,
@@ -59,17 +60,6 @@ interface NavItem {
 	link: HTMLElement;
 	children: HTMLElement;
 }
-
-/**
- * Test whether a view is active.
- *
- * @param view
- * @returns true if the view mathes the URL path
- */
-const isActiveView = (view: string): boolean => {
-	const regex = new RegExp(`\/${view}\$`, 'i');
-	return window.location.pathname.match(regex) != null;
-};
 
 /**
  * The navigation tree component.
@@ -181,9 +171,7 @@ class NavTreeComponent extends BaseComponent {
 	 * Unfold the tree to reveal the active item.
 	 */
 	private unfoldToActive(): void {
-		const activeItem = query(
-			`.${classes.navItemActive}`
-		) as NavItemComponent;
+		const activeItem = query(`.${classes.navItemActive}`) as HTMLElement;
 
 		if (activeItem) {
 			queryParents('details', activeItem).forEach((item: HTMLElement) => {
@@ -207,60 +195,4 @@ class NavTreeComponent extends BaseComponent {
 	}
 }
 
-/**
- * A simple link in the sidebar navigation.
- *
- * @example
- * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
- *
- * @extends BaseComponent
- */
-class NavItemComponent extends BaseComponent {
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['view', 'icon', 'text'];
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.classList.add(classes.navItem);
-		this.classList.toggle(
-			classes.navItemActive,
-			isActiveView(this.elementAttributes.view)
-		);
-
-		this.innerHTML = this.render();
-	}
-
-	/**
-	 * Render the component.
-	 *
-	 * @returns the rendered HTML
-	 */
-	render(): string {
-		let link = './';
-
-		if (this.elementAttributes.view) {
-			link = `${getDashboardURL()}/${this.elementAttributes.view}`;
-		}
-
-		return `
-			<a 
-			href="${link}" 
-			class="${classes.navLink}"
-			>
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				<span>${this.elementAttributes.text}</span>
-			</a>
-		`;
-	}
-}
-
 customElements.define('am-nav-tree', NavTreeComponent);
-customElements.define('am-nav-item', NavItemComponent);

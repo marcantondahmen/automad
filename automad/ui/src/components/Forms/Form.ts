@@ -46,53 +46,6 @@ import { InputElement, KeyValueMap } from '../../utils/types';
 import { BaseComponent } from '../Base';
 
 /**
- * A submit button element. Submit buttons are connected to a form by the "form" attribute.
- * The "form" attribute uses the controller of the related form to connect.
- *
- * @example
- * <am-form controller="Class::method" watch>
- *     <input name="title">
- * </am-form>
- * <am-form-submit form="Class::method">Submit</am-form-submit>
- *
- * @extends BaseComponent
- */
-class FormSubmitComponent extends BaseComponent {
-	/**
-	 * The observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['form'];
-	}
-
-	/**
-	 * The forms that are submitted by this button.
-	 */
-	get relatedForms(): Element[] {
-		return queryAll(`[controller="${this.elementAttributes.form}"]`);
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback() {
-		const submit = () => {
-			if (this.hasAttribute('disabled')) {
-				return false;
-			}
-
-			this.relatedForms.forEach((form: FormComponent) => {
-				form.submit();
-			});
-		};
-
-		listen(this, 'click', submit.bind(this));
-	}
-}
-
-/**
  * A basic form.
  *
  * The following options are available and can be passed as attributes:
@@ -141,7 +94,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected get submitButtons(): HTMLElement[] {
 		return queryAll(
-			`am-form-submit[form="${this.elementAttributes.controller}"]`
+			`am-submit[form="${this.elementAttributes.controller}"]`
 		);
 	}
 
@@ -325,5 +278,4 @@ export class FormComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-form-submit', FormSubmitComponent);
 customElements.define('am-form', FormComponent);

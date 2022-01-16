@@ -56,7 +56,7 @@ import { BaseComponent } from './Base';
  *
  * @extends BaseComponent
  */
-class ModalComponent extends BaseComponent {
+export class ModalComponent extends BaseComponent {
 	/**
 	 * True if the modal dialog is open.
 	 */
@@ -127,59 +127,4 @@ class ModalComponent extends BaseComponent {
 	}
 }
 
-/**
- * A modal toggle button.
- *
- * @see {@link ModalComponent}
- * @extends BaseComponent
- */
-class ModalToggleComponent extends BaseComponent {
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['modal'];
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		const toggle = () => {
-			const modal = query(this.elementAttributes.modal) as ModalComponent;
-
-			modal.toggle();
-		};
-
-		listen(this, 'click', toggle.bind(this));
-	}
-}
-
-/**
- * A modal close button that is placed inside the modal dialog.
- *
- * @see {@link ModalComponent}
- * @extends BaseComponent
- */
-class ModalCloseComponent extends BaseComponent {
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		const close = () => {
-			const modal = this.closest('am-modal');
-
-			if (modal instanceof ModalComponent) {
-				modal.close();
-			}
-		};
-
-		listen(this, 'click', close.bind(this));
-	}
-}
-
 customElements.define('am-modal', ModalComponent);
-customElements.define('am-modal-toggle', ModalToggleComponent);
-customElements.define('am-modal-close', ModalCloseComponent);
