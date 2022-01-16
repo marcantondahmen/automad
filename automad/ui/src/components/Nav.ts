@@ -35,6 +35,7 @@
 import {
 	classes,
 	getDashboardURL,
+	getPageURL,
 	query,
 	queryAll,
 	queryParents,
@@ -150,11 +151,10 @@ class NavTreeComponent extends BaseComponent {
 		);
 		const link = create('summary', [classes.navLink], {}, wrapper);
 		const children = create('div', [classes.navChildren], {}, wrapper);
-		const searchParams = new URLSearchParams(window.location.search);
 
 		wrapper.classList.toggle(
 			classes.navItemActive,
-			page.url == searchParams.get('url') && isActiveView('Page')
+			page.url == getPageURL() && isActiveView('Page')
 		);
 
 		if (!level) {

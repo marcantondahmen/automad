@@ -52,18 +52,26 @@ declare global {
  * The object with all classes used for HTML elements that are used by components.
  */
 export const classes: KeyValueMap = {
+	alert: 'am-c-alert',
+	alertDanger: 'am-c-alert--danger',
+	alertSuccess: 'am-c-alert--success',
+	alertIcon: 'am-c-alert__icon',
+	alertText: 'am-c-alert__text',
 	button: 'am-e-button',
 	buttonSuccess: 'am-e-button--success',
 	displayNone: 'am-u-display-none',
 	overflowHidden: 'am-u-overflow-hidden',
+	dropdownItems: 'am-c-dropdown__items',
+	dropdownItemsFullWidth: 'am-c-dropdown__items--full-width',
 	dropdownItem: 'am-c-dropdown__item',
 	dropdownItemActive: 'am-c-dropdown__item--active',
 	dropdown: 'am-c-dropdown',
+	dropdownOpen: 'am-c-dropdown--open',
+	dropdownForm: 'am-c-dropdown--form',
 	field: 'am-c-field',
 	fieldChanged: 'am-c-field--changed',
 	fieldLabel: 'am-c-field__label',
 	input: 'am-e-input',
-	inputLarge: 'am-e-input--large',
 	inputTitle: 'am-e-input--title',
 	muted: 'am-u-text-muted',
 	modal: 'am-c-modal',
@@ -108,6 +116,17 @@ export const getDashboardURL = (): string => {
 	} catch {
 		console.error('window.Automad.dashboardURL is not defined.');
 	}
+};
+
+/**
+ * Get the current page URL from the query string.
+ *
+ * @returns a page URL
+ */
+export const getPageURL = (): string => {
+	const searchParams = new URLSearchParams(window.location.search);
+
+	return searchParams.get('url');
 };
 
 /**
@@ -192,6 +211,26 @@ export const htmlSpecialChars = (value: string): string => {
 };
 
 /**
+ * Register a keycombo.
+ *
+ * @param key
+ * @param callback
+ */
+export const keyCombo = (key: string, callback: Function): void => {
+	listen(window, 'keydown', (event: KeyboardEvent) => {
+		if (event.ctrlKey || event.metaKey) {
+			const _key: string = String.fromCharCode(event.which).toLowerCase();
+
+			if (key == _key) {
+				event.preventDefault();
+				callback.apply(event.target, [event]);
+				return;
+			}
+		}
+	});
+};
+
+/**
  * Register event listeners.
  *
  * @param element - the element to register the event listeners to
@@ -222,10 +261,8 @@ export const listen = (
 			path.forEach((_element: any) => {
 				try {
 					if (_element.matches(selector)) {
-						if (typeof callback === 'function') {
-							callback.apply(event.target, [event]);
-							return;
-						}
+						callback.apply(event.target, [event]);
+						return;
 					}
 				} catch (error) {}
 			});
@@ -243,7 +280,7 @@ export const listen = (
 export const query = (
 	selector: string,
 	element: Document | HTMLElement = document
-): Element => {
+): HTMLElement => {
 	return element.querySelector(selector);
 };
 
@@ -257,7 +294,7 @@ export const query = (
 export const queryAll = (
 	selector: string,
 	element: HTMLElement | Document = document
-): Element[] => {
+): HTMLElement[] => {
 	return Array.from(element.querySelectorAll(selector));
 };
 
@@ -271,9 +308,9 @@ export const queryAll = (
 export const queryParents = (
 	selector: string,
 	element: HTMLElement
-): Element[] => {
-	const parents = [];
-	let parent = element.closest(selector);
+): HTMLElement[] => {
+	const parents: HTMLElement[] = [];
+	let parent = element.closest(selector) as HTMLElement;
 
 	while (parent !== null) {
 		parents.push(parent);

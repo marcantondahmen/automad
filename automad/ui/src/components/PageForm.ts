@@ -39,6 +39,7 @@ import {
 	getSwitcherSections,
 	getTags,
 	getThemes,
+	keyCombo,
 	query,
 	text,
 	titleCase,
@@ -267,12 +268,12 @@ const createSections = (form: PageFormComponent): SwitcherSectionCollection => {
 
 /**
  * A page data form element.
- * The FormPageComponent class doesn't need the watch and init properties
+ * The PageFormComponent class doesn't need the watch and init properties
  * as this is anyways the intended behavior.
  *
  * @example
- * <am-form-page controller="FormPageComponent::data" page="/url"></am-form-page>
- * <am-form-submit form="FormPageComponent::data">Submit</am-form-submit>
+ * <am-page-form controller="PageController::data"></am-page-form>
+ * <am-form-submit form="PageController::data">Submit</am-form-submit>
  *
  * @extends FormComponent
  */
@@ -280,7 +281,12 @@ class PageFormComponent extends FormComponent {
 	/**
 	 * The section collection object.
 	 */
-	sections: SwitcherSectionCollection;
+	private sections: SwitcherSectionCollection;
+
+	/**
+	 * Enable watching.
+	 */
+	protected watchChanges: boolean = true;
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -289,6 +295,12 @@ class PageFormComponent extends FormComponent {
 		this.sections = createSections(this);
 
 		this.submit();
+
+		keyCombo('s', () => {
+			if (this.hasUnsavedChanges) {
+				this.submit();
+			}
+		});
 	}
 
 	/**
@@ -351,7 +363,7 @@ class PageFormComponent extends FormComponent {
 		createMainField('am-field-checkbox-large', reserved['AM_KEY_PRIVATE']);
 
 		createField(
-			'am-form-page-field-template',
+			'am-page-form-field-template',
 			section,
 			{
 				pageData,
@@ -387,10 +399,23 @@ class PageFormComponent extends FormComponent {
 		);
 
 		createMainField(
-			'am-form-page-field-tags',
+			'am-page-form-field-tags',
 			reserved['AM_KEY_TAGS'],
 			text('page_tags')
 		);
+	}
+
+	/**
+	 * Show alert box for missing page.
+	 */
+	private pageNotFound() {
+		this.innerHTML = `
+			<am-alert 
+			icon="question-circle" 
+			text="error_page_not_found"
+			type="danger"
+			></am-alert>
+		`;
 	}
 
 	/**
@@ -399,67 +424,71 @@ class PageFormComponent extends FormComponent {
 	 * @param response - the response data
 	 */
 	protected processResponse(response: KeyValueMap): void {
-		if (typeof response.data !== 'undefined') {
-			this.watch();
+		if (typeof response.data == 'undefined') {
+			this.pageNotFound();
 
-			Object.values(this.sections).forEach((section) => {
-				section.innerHTML = '';
-			});
-
-			const {
-				url,
-				prefix,
-				slug,
-				pageData,
-				shared,
-				template,
-				keys,
-				keysUnused,
-			} = response.data;
-
-			const themeKey = keys.reserved['AM_KEY_THEME'];
-			const themes = getThemes();
-			const reserved = keys.reserved;
-
-			let tooltips = {};
-
-			try {
-				tooltips = themes[pageData[themeKey]].tooltips;
-			} catch (e) {
-				try {
-					tooltips = themes[shared[themeKey]].tooltips;
-				} catch (e) {}
-			}
-
-			this.mainSettings({
-				section: this.sections.settings,
-				url,
-				prefix,
-				slug,
-				pageData,
-				shared,
-				reserved,
-				template,
-			});
-
-			Object.keys(this.sections).forEach((item: SwitcherSectionName) => {
-				fieldGroup({
-					section: this.sections[item],
-					keys: keys[item],
-					pageData,
-					tooltips,
-					removable: false,
-				});
-
-				fieldGroup({
-					section: this.sections[item],
-					keys: keysUnused[item],
-					pageData,
-					tooltips,
-					removable: true,
-				});
-			});
+			return;
 		}
+
+		this.watch();
+
+		Object.values(this.sections).forEach((section) => {
+			section.innerHTML = '';
+		});
+
+		const {
+			url,
+			prefix,
+			slug,
+			pageData,
+			shared,
+			template,
+			keys,
+			keysUnused,
+		} = response.data;
+
+		const themeKey = keys.reserved['AM_KEY_THEME'];
+		const themes = getThemes();
+		const reserved = keys.reserved;
+
+		let tooltips = {};
+
+		try {
+			tooltips = themes[pageData[themeKey]].tooltips;
+		} catch (e) {
+			try {
+				tooltips = themes[shared[themeKey]].tooltips;
+			} catch (e) {}
+		}
+
+		this.mainSettings({
+			section: this.sections.settings,
+			url,
+			prefix,
+			slug,
+			pageData,
+			shared,
+			reserved,
+			template,
+		});
+
+		Object.keys(this.sections).forEach((item: SwitcherSectionName) => {
+			fieldGroup({
+				section: this.sections[item],
+				keys: keys[item],
+				pageData,
+				tooltips,
+				removable: false,
+			});
+
+			fieldGroup({
+				section: this.sections[item],
+				keys: keysUnused[item],
+				pageData,
+				tooltips,
+				removable: true,
+			});
+		});
 	}
 }
 
@@ -542,14 +571,14 @@ class FieldTemplateComponent extends BaseComponent {
 					<span>${text('page_theme_template')}</span>
 					<am-modal-close class="${classes.modalClose}"></am-modal-close>
 				</div>
-				<am-form-page-select-template></am-form-page-select-template>
+				<am-page-form-select-template></am-page-form-select-template>
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
 						${text('btn_close')}
 					</am-modal-close>
 					<am-form-submit 
 					class="${classes.button} ${classes.buttonSuccess}" 
-					form="FormPageComponent::data"
+					form="PageController::data"
 					>
 						${text('btn_apply_reload')}
 					</am-form-submit>
@@ -558,7 +587,7 @@ class FieldTemplateComponent extends BaseComponent {
 		`;
 
 		const select = query(
-			'am-form-page-select-template',
+			'am-page-form-select-template',
 			modal
 		) as FieldSelectTemplateComponent;
 
@@ -663,6 +692,8 @@ class FieldSelectTemplateComponent extends BaseComponent {
 class FieldTagsComponent extends FieldComponent {
 	/**
 	 * Create the input field.
+	 *
+	 * @see {@link tagify https://github.com/yairEO/tagify}
 	 */
 	input(): void {
 		const { name, id, value } = this._data;
@@ -678,18 +709,24 @@ class FieldTagsComponent extends FieldComponent {
 
 		textarea.innerHTML = value;
 
-		new Tagify(textarea, {
+		const tagify = new Tagify(textarea, {
 			whitelist: getTags(),
 			originalInputValueFormat: (tags) =>
 				tags.map((item) => item.value).join(', '),
 		});
+
+		tagify.on('change', (event: Event) => {
+			const form: PageFormComponent = this.closest('am-page-form');
+
+			form.onChange(textarea);
+		});
 	}
 }
 
-customElements.define('am-form-page-field-template', FieldTemplateComponent);
+customElements.define('am-page-form-field-template', FieldTemplateComponent);
 customElements.define(
-	'am-form-page-select-template',
+	'am-page-form-select-template',
 	FieldSelectTemplateComponent
 );
-customElements.define('am-form-page-field-tags', FieldTagsComponent);
-customElements.define('am-form-page', PageFormComponent);
+customElements.define('am-page-form-field-tags', FieldTagsComponent);
+customElements.define('am-page-form', PageFormComponent);

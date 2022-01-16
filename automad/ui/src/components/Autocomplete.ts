@@ -54,6 +54,15 @@ export interface Item {
  */
 export class AutocompleteComponent extends BaseComponent {
 	/**
+	 * The array of observed attributes.
+	 *
+	 * @static
+	 */
+	static get observedAttributes(): string[] {
+		return ['placeholder'];
+	}
+
+	/**
 	 * The controller.
 	 */
 	protected controller = 'UIController::autocompleteLink';
@@ -96,17 +105,20 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback() {
+	connectedCallback(): void {
+		const placeholder: string = this.elementAttributes.placeholder || '';
+		this.classList.add(classes.dropdown, classes.dropdownForm);
+
 		this.input = create(
 			'input',
-			[classes.input, classes.inputLarge],
-			{ type: 'text' },
+			[classes.input],
+			{ type: 'text', placeholder },
 			this
 		);
 
 		this.dropdown = create(
 			'div',
-			[classes.dropdown, classes.displayNone],
+			[classes.dropdownItems, classes.dropdownItemsFullWidth],
 			{},
 			this
 		);
@@ -122,7 +134,6 @@ export class AutocompleteComponent extends BaseComponent {
 	 */
 	private async init(): Promise<void> {
 		const response = await requestController(this.controller);
-		const data: KeyValueMap[] = response.data;
 
 		if (typeof response.data !== 'undefined') {
 			response.data.forEach((item: KeyValueMap) => {
@@ -316,7 +327,7 @@ export class AutocompleteComponent extends BaseComponent {
 	close(): void {
 		this.selectedIndex = this.initialIndex;
 		this.toggleActiveItemStyle();
-		this.dropdown.classList.add(classes.displayNone);
+		this.classList.remove(classes.dropdownOpen);
 	}
 
 	/**
@@ -325,7 +336,7 @@ export class AutocompleteComponent extends BaseComponent {
 	open(): void {
 		if (this.input.value.length >= this.minInputLength) {
 			this.update();
-			this.dropdown.classList.remove(classes.displayNone);
+			this.classList.add(classes.dropdownOpen);
 		}
 	}
 

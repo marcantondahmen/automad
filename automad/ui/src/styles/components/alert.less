@@ -1,4 +1,4 @@
-/*!
+/*
  *                    ....
  *                  .:   '':.
  *                  ::::     ':..
@@ -22,23 +22,49 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import './components/Autocomplete';
-import './components/Field';
-import './components/Form';
-import './components/Jumpbar';
-import './components/Modal';
-import './components/Nav';
-import './components/PageForm';
-import './components/Sidebar';
-import './components/Switcher';
-import './components/Toggle';
+.am-c-alert {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--am-alert-gap);
+	margin: var(--am-space-medium) 0;
+	padding: var(--am-alert-padding);
+	border: var(--am-border-width) solid;
+	border-radius: var(--am-radius);
+	box-shadow: var(--am-shadow);
+	--multiplier: ~'calc(30rem - 100%)';
+
+	&--danger {
+		color: var(--am-clr-danger);
+	}
+
+	&--success {
+		color: var(--am-clr-success);
+	}
+
+	& > * {
+		flex-basis: ~'calc(var(--multiplier) * 999)';
+		max-width: 100%;
+	}
+
+	&__icon {
+		width: min-content;
+		font-size: var(--am-alert-icon-size);
+		line-height: inherit;
+		color: inherit;
+	}
+
+	&__text {
+		flex-grow: 1;
+		color: inherit;
+	}
+}

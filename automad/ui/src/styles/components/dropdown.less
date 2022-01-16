@@ -33,16 +33,45 @@
  */
 
 .am-c-dropdown {
-	display: flex;
-	flex-direction: column;
-	background-color: var(--am-bg-base);
-	border-radius: var(--am-radius);
-	border: var(--am-hairline);
-	box-shadow: var(--am-shadow);
-	overflow: hidden;
+	position: relative;
 
-	&:empty {
+	&--form input:focus {
+		border: var(--am-hairline);
+	}
+
+	&--form&--open input {
+		position: relative;
+		z-index: 2;
+		border-radius: var(--am-radius) var(--am-radius) 0 0;
+	}
+
+	&__items {
+		position: absolute;
 		display: none;
+		flex-direction: column;
+		background-color: var(--am-bg-base);
+		border-radius: var(--am-radius);
+		border: var(--am-hairline);
+		box-shadow: var(--am-shadow);
+		overflow: hidden;
+
+		&:empty {
+			display: none;
+		}
+
+		&--full-width {
+			width: 100%;
+		}
+	}
+
+	&--form > &__items {
+		top: 0;
+		padding-top: var(--am-input-height) !important;
+		border-top: 0;
+	}
+
+	&--open &__items {
+		display: flex;
 	}
 
 	&__item {

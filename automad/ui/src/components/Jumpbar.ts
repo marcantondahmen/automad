@@ -34,7 +34,7 @@
 
 import { AutocompleteComponent } from './Autocomplete';
 import { create } from '../utils/create';
-import { classes } from '../utils/core';
+import { classes, keyCombo } from '../utils/core';
 import { KeyValueMap } from '../utils/types';
 
 /**
@@ -60,6 +60,22 @@ class JumpbarComponent extends AutocompleteComponent {
 	 * The minimum input value length to trigger the dropdown.
 	 */
 	protected minInputLength = 0;
+
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		super.connectedCallback();
+
+		keyCombo('j', () => {
+			if (this.input === document.activeElement) {
+				this.input.blur();
+				this.close();
+			} else {
+				this.input.focus();
+			}
+		});
+	}
 
 	/**
 	 * Create a dropdown item.
