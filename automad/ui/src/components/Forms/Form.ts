@@ -39,11 +39,11 @@ import {
 	listen,
 	query,
 	queryAll,
-} from '../utils/core';
-import { notifyError } from '../utils/notify';
-import { requestController } from '../utils/request';
-import { InputElement, KeyValueMap } from '../utils/types';
-import { BaseComponent } from './Base';
+} from '../../utils/core';
+import { notifyError } from '../../utils/notify';
+import { requestController } from '../../utils/request';
+import { InputElement, KeyValueMap } from '../../utils/types';
+import { BaseComponent } from '../Base';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.

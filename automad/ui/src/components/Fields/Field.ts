@@ -38,9 +38,9 @@ import {
 	listen,
 	text,
 	titleCase,
-} from '../utils/core';
-import { create } from '../utils/create';
-import { BaseComponent } from './Base';
+} from '../../utils/core';
+import { create } from '../../utils/create';
+import { BaseComponent } from '../Base';
 
 interface FieldInitData {
 	key: string;

@@ -32,14 +32,14 @@
  * Licensed under the MIT license.
  */
 
+import './components/Fields/Field';
+import './components/Forms/Form';
+import './components/Forms/PageData';
 import './components/Alert';
 import './components/Autocomplete';
-import './components/Field';
-import './components/Form';
 import './components/Jumpbar';
 import './components/Modal';
 import './components/Nav';
-import './components/PageForm';
 import './components/Sidebar';
 import './components/Switcher';
 import './components/Toggle';

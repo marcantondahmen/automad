@@ -43,13 +43,13 @@ import {
 	query,
 	text,
 	titleCase,
-} from '../utils/core';
-import { create } from '../utils/create';
-import { KeyValueMap, Theme } from '../utils/types';
-import { BaseComponent } from './Base';
-import { FieldComponent } from './Field';
+} from '../../utils/core';
+import { create } from '../../utils/create';
+import { KeyValueMap, Theme } from '../../utils/types';
+import { BaseComponent } from '../Base';
+import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
-import { SwitcherSectionComponent } from './Switcher';
+import { SwitcherSectionComponent } from '../Switcher';
 
 type SwitcherSectionName = 'settings' | 'text' | 'colors';
 
@@ -272,7 +272,7 @@ const createSections = (form: PageFormComponent): SwitcherSectionCollection => {
  * as this is anyways the intended behavior.
  *
  * @example
- * <am-page-form controller="PageController::data"></am-page-form>
+ * <am-page-data controller="PageController::data"></am-page-data>
  * <am-form-submit form="PageController::data">Submit</am-form-submit>
  *
  * @extends FormComponent
@@ -716,7 +716,7 @@ class FieldTagsComponent extends FieldComponent {
 		});
 
 		tagify.on('change', (event: Event) => {
-			const form: PageFormComponent = this.closest('am-page-form');
+			const form: PageFormComponent = this.closest('am-page-data');
 
 			form.onChange(textarea);
 		});
@@ -729,4 +729,4 @@ customElements.define(
 	FieldSelectTemplateComponent
 );
 customElements.define('am-page-form-field-tags', FieldTagsComponent);
-customElements.define('am-page-form', PageFormComponent);
+customElements.define('am-page-data', PageFormComponent);
