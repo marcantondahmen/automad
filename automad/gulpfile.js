@@ -121,7 +121,7 @@ gulp.task('ui-less', function () {
 // UI Webpack.
 gulp.task('ui-ts', function () {
 	return gulp
-		.src('ui/src/index.ts')
+		.src('ui/src/ui.ts')
 		.pipe(
 			named(function (file) {
 				return 'ui';
