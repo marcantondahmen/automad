@@ -35,6 +35,7 @@
 .am-c-nav {
 	display: flex;
 	flex-direction: column;
+	max-width: 100%;
 	padding: 0 var(--am-nav-padding-horizontal);
 
 	& + & {
@@ -61,6 +62,13 @@
 		color: var(--am-clr-base);
 		text-decoration: none;
 		border-radius: var(--am-radius);
+
+		& > span {
+			min-width: 0;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 
 		summary& {
 			display: flex;
