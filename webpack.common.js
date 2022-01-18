@@ -41,7 +41,7 @@ module.exports = (env, argv) => {
 			extensions: ['.ts', '.js'],
 		},
 		optimization: {
-			minimizer: [new CssMinimizerPlugin()],
+			minimizer: [new CssMinimizerPlugin(), '...'],
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
