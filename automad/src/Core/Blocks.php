@@ -36,6 +36,8 @@
 
 namespace Automad\Core;
 
+use Automad\System\Asset;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -53,12 +55,8 @@ class Blocks {
 	 * @return string the processed HTML
 	 */
 	public static function injectAssets(string $str) {
-		$versionSanitized = Str::sanitize(AM_VERSION);
-		$css = '/automad/dist/blocks.min.css?v=' . $versionSanitized;
-		$js = '/automad/dist/blocks.min.js?v=' . $versionSanitized;
-
-		$assets = '<link rel="stylesheet" href="' . $css . '">';
-		$assets .= '<script type="text/javascript" src="' . $js . '"></script>';
+		$assets = Asset::css('blocks.min.css', '') .
+				  Asset::js('blocks.min.js', '');
 
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
