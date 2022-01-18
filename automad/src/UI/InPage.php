@@ -43,7 +43,6 @@ use Automad\UI\Components\Header\BlockSnippetArrays;
 use Automad\UI\Components\Header\EditorTextModules;
 use Automad\UI\Components\Modal\Link;
 use Automad\UI\Components\Modal\SelectImage;
-use Automad\UI\Utils\Prefix;
 use Automad\UI\Utils\Session;
 use Automad\UI\Utils\Text;
 use Automad\UI\Utils\SwitcherSections;
@@ -197,7 +196,7 @@ class InPage {
 			$modalLink
 		HTML;
 
-		return str_replace('</body>', Prefix::tags($html) . '</body>', $str);
+		return str_replace('</body>', $html . '</body>', $str);
 	}
 
 	/**
@@ -228,7 +227,7 @@ class InPage {
 			$json = $matches[1];
 			$name = ucwords(str_replace('+', '', preg_replace('/([A-Z])/', ' $1', $matches[2])));
 
-			$html = <<< HTML
+			return <<< HTML
 				<span class="am-inpage">
 					<a 
 					href="#am-inpage-edit-modal" 
@@ -241,8 +240,6 @@ class InPage {
 					</a>
 				</span>
 			HTML;
-
-			return Prefix::attributes($html);
 		}, $str);
 
 		return $str;

@@ -37,7 +37,6 @@
 namespace Automad\UI;
 
 use Automad\Core\Debug;
-use Automad\UI\Utils\Prefix;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -101,7 +100,7 @@ class Dashboard {
 
 		$object = new $class;
 
-		return Prefix::tags($object->render());
+		return $object->render();
 	}
 
 	/**
