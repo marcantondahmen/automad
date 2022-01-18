@@ -314,7 +314,7 @@ class Automad {
 	 * @return Page A page object
 	 */
 	private function getRequestedPage() {
-		if (AM_REQUEST == AM_PAGE_DASHBOARD) {
+		if (strpos(AM_REQUEST, AM_PAGE_DASHBOARD) === 0) {
 			return $this->getPage(Request::post('url'));
 		}
 

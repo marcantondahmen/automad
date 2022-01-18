@@ -78,6 +78,14 @@ class Routes {
 		);
 
 		$Router->register(
+			AM_PAGE_DASHBOARD . '/api/Session/login',
+			function () {
+				return Dashboard::api('Session/login');
+			},
+			AM_PAGE_DASHBOARD
+		);
+
+		$Router->register(
 			AM_PAGE_DASHBOARD . '/api/.*',
 			function () {
 				$apiRoute = trim(Str::stripStart(AM_REQUEST, AM_PAGE_DASHBOARD . '/api'), '/');
