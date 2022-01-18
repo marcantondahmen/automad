@@ -35,7 +35,17 @@
 .am-l-page {
 	position: relative;
 	display: grid;
-	grid-template-rows: var(--am-navbar-height) var(--am-space-top) auto;
+	align-items: start;
+	grid-template-rows:
+		[top]
+		var(--am-navbar-height)
+		[nav-bottom]
+		var(--am-space-top)
+		[main-top]
+		auto
+		[footer-top]
+		auto
+		[bottom];
 
 	&--sidebar {
 		grid-template-columns: 0px 100%;

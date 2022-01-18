@@ -34,10 +34,20 @@
 
 .am-l-main {
 	display: grid;
-	grid-row: 3 / span 1;
+	grid-row: main-top / footer-top;
+
+	&--centered {
+		width: 100%;
+		max-width: @l-center-width;
+		margin: 0 auto;
+	}
 
 	&--sidebar {
 		grid-column: 2 / span 1;
+	}
+
+	&__row {
+		display: grid;
 
 		@media (min-width: @l-breakpoint-medium) {
 			grid-template-columns: minmax(@l-main-width, auto) minmax(
@@ -47,10 +57,12 @@
 		}
 	}
 
-	&--centered {
-		width: 100%;
-		max-width: @l-center-width;
-		margin: 0 auto;
+	&__row--sticky {
+		position: sticky;
+		z-index: 50;
+		top: var(--am-navbar-height);
+		border-bottom: var(--am-hairline);
+		background-color: var(--am-bg-base);
 	}
 
 	&__content {
