@@ -1,0 +1,34 @@
+{
+  "name": "automad",
+  "version": "1.10.1",
+  "description": "Automad",
+  "author": "Marc Anton Dahmen",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev:automad": "webpack --config automad/webpack.config.js --mode development",
+    "build:automad": "webpack --config automad/webpack.config.js --mode production"
+  },
+  "devDependencies": {
+    "@types/toastify-js": "^1.11.0",
+    "@types/yaireo__tagify": "^4.9.0",
+    "@yaireo/tagify": "^4.9.4",
+    "bootstrap-icons": "^1.7.2",
+    "browser-sync": "^2.27.7",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "file-loader": "^6.2.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "mini-css-extract-plugin": "^2.5.2",
+    "modern-normalize": "^1.1.0",
+    "toastify-js": "^1.11.2",
+    "ts-loader": "^9.2.6",
+    "typeface-inter": "^3.18.1",
+    "typescript": "^4.5.4",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-merge": "^5.8.0"
+  }
+}

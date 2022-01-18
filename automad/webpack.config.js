@@ -1,16 +1,14 @@
-module.exports = {
-	module: {
-		rules: [
-			{
-				test: /\.ts$/,
-				use: 'ts-loader',
-				exclude: /node_modules/,
-			},
-		],
-	},
-	resolve: {
-		extensions: ['.ts', '.js'],
-	},
-	mode: 'production',
-	devtool: 'source-map',
-};
+const path = require('path');
+const { merge } = require('webpack-merge');
+const common = require('../webpack.common');
+
+module.exports = (env, argv) =>
+	merge(common(env, argv), {
+		entry: {
+			ui: './automad/ui/src/ui.ts',
+		},
+		output: {
+			path: path.resolve(__dirname, 'dist'),
+			filename: '[name].bundle.js',
+		},
+	});

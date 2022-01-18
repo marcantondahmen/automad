@@ -32,6 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import './styles/ui.less';
+
 import './components/Fields/Checkbox';
 import './components/Fields/CheckboxLarge';
 import './components/Fields/CheckboxPage';
