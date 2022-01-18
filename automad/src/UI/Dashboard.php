@@ -85,16 +85,10 @@ class Dashboard {
 	public static function view(string $view) {
 		Debug::log($view);
 
-		$default = 'Home';
-
-		if (!$view) {
-			$view = $default;
-		}
-
 		$class = __NAMESPACE__ . '\\Views\\' . $view;
 
-		if (!self::classFileExists($class)) {
-			header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD, true, 301);
+		if (!$view || !self::classFileExists($class)) {
+			header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/Home', true, 301);
 			exit();
 		}
 
