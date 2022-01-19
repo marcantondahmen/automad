@@ -35,7 +35,7 @@
 import { BaseComponent } from './Base';
 import { classes, debounce, listen } from '../utils/core';
 import { create } from '../utils/create';
-import { requestController } from '../utils/request';
+import { CachedControllerRequest } from '../utils/request';
 import { KeyValueMap } from '../utils/types';
 
 export interface Item {
@@ -133,7 +133,7 @@ export class AutocompleteComponent extends BaseComponent {
 	 * @async
 	 */
 	private async init(): Promise<void> {
-		const response = await requestController(this.controller);
+		const response = await CachedControllerRequest.fetch(this.controller);
 
 		if (typeof response.data !== 'undefined') {
 			response.data.forEach((item: KeyValueMap) => {

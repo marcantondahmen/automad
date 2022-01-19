@@ -34,6 +34,7 @@
 
 import { getDashboardURL } from './core';
 import { KeyValueMap } from './types';
+import md5 from 'crypto-js/md5';
 
 /**
  * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.
@@ -102,3 +103,38 @@ export const requestController = async (
 
 	return responseData;
 };
+
+interface ControllerRequestHashmap {
+	[key: string]: Promise<KeyValueMap>;
+}
+
+/**
+ * A wrapper class to cache requests to the same controller using the same data
+ * and re-use its responses instead of requesting the backend multiple times.
+ */
+export class CachedControllerRequest {
+	/**
+	 * The actual hashmap to store the returned promises.
+	 */
+	static cache: ControllerRequestHashmap = {};
+
+	/**
+	 * Fetch a controller in case there is no cached promise yet.
+	 *
+	 * @param controller
+	 * @param data
+	 * @returns the promise that is returned by the controller request or the cached one
+	 */
+	static async fetch(
+		controller: string,
+		data: KeyValueMap = null
+	): Promise<KeyValueMap> {
+		const hash = md5(JSON.stringify({ controller, data })).toString();
+
+		if (typeof this.cache[hash] === 'undefined') {
+			this.cache[hash] = requestController(controller, data);
+		}
+
+		return this.cache[hash];
+	}
+}

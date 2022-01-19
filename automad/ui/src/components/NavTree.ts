@@ -43,7 +43,7 @@ import {
 	text,
 } from '../utils/core';
 import { create } from '../utils/create';
-import { requestController } from '../utils/request';
+import { CachedControllerRequest } from '../utils/request';
 import { KeyValueMap } from '../utils/types';
 import { BaseComponent } from './Base';
 
@@ -99,7 +99,7 @@ class NavTreeComponent extends BaseComponent {
 	 * Init the navTree.
 	 */
 	private async init(): Promise<void> {
-		const response = await requestController(this.controller);
+		const response = await CachedControllerRequest.fetch(this.controller);
 		const pages: Page[] = response.data;
 		const tree: KeyValueMap = {};
 		let parent: HTMLElement;
