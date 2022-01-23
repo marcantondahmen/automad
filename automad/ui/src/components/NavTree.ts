@@ -34,18 +34,18 @@
 
 import {
 	classes,
-	getDashboardURL,
 	getPageURL,
 	isActiveView,
+	listen,
 	query,
 	queryAll,
 	queryParents,
-	text,
 } from '../utils/core';
 import { create } from '../utils/create';
-import { CachedControllerRequest } from '../utils/request';
+
 import { KeyValueMap } from '../utils/types';
 import { BaseComponent } from './Base';
+import { App } from '../utils/app';
 
 interface Page {
 	url: string;
@@ -86,7 +86,7 @@ class NavTreeComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(classes.nav);
 
-		create('span', [classes.navLabel], {}, this).innerHTML = text(
+		create('span', [classes.navLabel], {}, this).innerHTML = App.text(
 			'sidebar_header_pages'
 		);
 
@@ -98,9 +98,8 @@ class NavTreeComponent extends BaseComponent {
 	/**
 	 * Init the navTree.
 	 */
-	private async init(): Promise<void> {
-		const response = await CachedControllerRequest.fetch(this.controller);
-		const pages: Page[] = response.data;
+	private init(): void {
+		const pages: Page[] = App.navTree as Page[];
 		const tree: KeyValueMap = {};
 		let parent: HTMLElement;
 
@@ -158,10 +157,10 @@ class NavTreeComponent extends BaseComponent {
 		}
 
 		link.innerHTML = `
-			<a href="${getDashboardURL()}/Page?url=${encodeURIComponent(page.url)}">
+			<am-link target="Page?url=${encodeURIComponent(page.url)}">
 				<i class="bi bi-${icon}"></i>
 				<span>${page.title}</span>
-			</a>
+			</am-link>
 		`;
 
 		return { wrapper, link, children };

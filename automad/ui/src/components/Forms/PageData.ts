@@ -32,20 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import {
-	classes,
-	getBaseURL,
-	getSwitcherSections,
-	getThemes,
-	keyCombo,
-	query,
-	text,
-} from '../../utils/core';
+import { classes, keyCombo, query } from '../../utils/core';
 import { create } from '../../utils/create';
 import { KeyValueMap } from '../../utils/types';
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher';
+import { App } from '../../utils/app';
 
 type SwitcherSectionName = 'settings' | 'text' | 'colors';
 
@@ -149,10 +142,15 @@ const fieldGroup = ({
  */
 const createSections = (form: PageDataComponent): SwitcherSectionCollection => {
 	const createSection = (key: string): SwitcherSectionComponent => {
-		return create('am-switcher-section', [], { name: content[key] }, form);
+		return create(
+			'am-switcher-section',
+			[classes.spinner],
+			{ name: content[key] },
+			form
+		);
 	};
 
-	const content = getSwitcherSections().content;
+	const content = App.sections.content;
 
 	const sections: SwitcherSectionCollection = {
 		settings: createSection('settings'),
@@ -253,7 +251,7 @@ export class PageDataComponent extends FormComponent {
 		create(
 			'a',
 			[],
-			{ href: `${getBaseURL()}${pageData[reserved['AM_KEY_URL']]}` },
+			{ href: `${App.baseURL}${pageData[reserved['AM_KEY_URL']]}` },
 			section
 		).innerHTML = pageData[reserved['AM_KEY_URL']] || url;
 
@@ -278,27 +276,27 @@ export class PageDataComponent extends FormComponent {
 				key: 'prefix',
 				value: prefix,
 				name: 'prefix',
-				label: text('page_prefix'),
+				label: App.text('page_prefix'),
 			});
 
 			createField('am-field', section, {
 				key: 'slug',
 				value: slug,
 				name: 'slug',
-				label: text('page_slug'),
+				label: App.text('page_slug'),
 			});
 		}
 
 		createMainField(
 			'am-url',
 			reserved['AM_KEY_URL'],
-			text('page_redirect')
+			App.text('page_redirect')
 		);
 
 		createMainField(
 			'am-page-tags',
 			reserved['AM_KEY_TAGS'],
-			text('page_tags')
+			App.text('page_tags')
 		);
 	}
 
@@ -330,7 +328,7 @@ export class PageDataComponent extends FormComponent {
 		this.watch();
 
 		Object.values(this.sections).forEach((section) => {
-			section.innerHTML = '';
+			section.classList.remove(classes.spinner);
 		});
 
 		const {
@@ -345,7 +343,7 @@ export class PageDataComponent extends FormComponent {
 		} = response.data;
 
 		const themeKey = keys.reserved['AM_KEY_THEME'];
-		const themes = getThemes();
+		const themes = App.themes;
 		const reserved = keys.reserved;
 
 		let tooltips = {};

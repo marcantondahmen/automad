@@ -13,6 +13,10 @@ module.exports = (env, argv) => {
 					exclude: /node_modules/,
 				},
 				{
+					test: /\.html$/,
+					loader: 'html-loader',
+				},
+				{
 					test: /\.(less|css)$/i,
 					use: [
 						MiniCssExtractPlugin.loader,
@@ -21,7 +25,7 @@ module.exports = (env, argv) => {
 					],
 				},
 				{
-					test: /\.woff2?/i,
+					test: /\.woff2?$/i,
 					type: 'asset/resource',
 					generator: {
 						filename: (pathData) => {

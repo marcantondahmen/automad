@@ -35,8 +35,8 @@
 import { BaseComponent } from './Base';
 import { classes, debounce, listen } from '../utils/core';
 import { create } from '../utils/create';
-import { CachedControllerRequest } from '../utils/request';
 import { KeyValueMap } from '../utils/types';
+import { App } from '../utils/app';
 
 export interface Item {
 	element: HTMLElement;
@@ -63,9 +63,11 @@ export class AutocompleteComponent extends BaseComponent {
 	}
 
 	/**
-	 * The controller.
+	 * The autocomplete data.
 	 */
-	protected controller = 'UIController::autocompleteLink';
+	protected get data(): KeyValueMap[] {
+		return App.autocomplete;
+	}
 
 	/**
 	 * Autocompletion items.
@@ -106,7 +108,9 @@ export class AutocompleteComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const placeholder: string = this.elementAttributes.placeholder || '';
+		const placeholder: string = App.text(
+			this.elementAttributes.placeholder
+		);
 		this.classList.add(classes.dropdown, classes.dropdownForm);
 
 		this.input = create(
@@ -130,13 +134,10 @@ export class AutocompleteComponent extends BaseComponent {
 	 * Init the autocompletion.
 	 *
 	 * @returns a Promise
-	 * @async
 	 */
-	private async init(): Promise<void> {
-		const response = await CachedControllerRequest.fetch(this.controller);
-
-		if (typeof response.data !== 'undefined') {
-			response.data.forEach((item: KeyValueMap) => {
+	private init(): void {
+		if (typeof this.data !== 'undefined') {
+			this.data.forEach((item: KeyValueMap) => {
 				this.items.push({
 					element: this.createItemElement(item),
 					value: this.createItemValue(item),

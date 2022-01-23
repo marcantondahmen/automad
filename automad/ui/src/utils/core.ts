@@ -32,13 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, ThemeCollection } from './types';
+import { App } from './app';
+import { KeyValueMap } from './types';
 
 declare global {
-	interface Window {
-		Automad: any;
-	}
-
 	interface Event {
 		path: string[];
 	}
@@ -57,6 +54,8 @@ export const classes: KeyValueMap = {
 	alertSuccess: 'am-c-alert--success',
 	alertIcon: 'am-c-alert__icon',
 	alertText: 'am-c-alert__text',
+	breadcrumbs: 'am-c-breadcrumbs',
+	breadcrumbsItem: 'am-c-breadcrumbs__item',
 	button: 'am-e-button',
 	buttonSuccess: 'am-e-button--success',
 	displayNone: 'am-u-display-none',
@@ -115,32 +114,6 @@ export const debounce = (
 };
 
 /**
- * Get the Automad base URL.
- *
- * @returns the Automad base URL
- */
-export const getBaseURL = (): string => {
-	try {
-		return window.Automad.baseURL;
-	} catch {
-		console.error('window.Automad.baseURL is not defined.');
-	}
-};
-
-/**
- * Get the Automad dashboard URL.
- *
- * @returns the Automad dashboard URL
- */
-export const getDashboardURL = (): string => {
-	try {
-		return window.Automad.dashboardURL;
-	} catch {
-		console.error('window.Automad.dashboardURL is not defined.');
-	}
-};
-
-/**
  * Get the current page URL from the query string.
  *
  * @returns a page URL
@@ -149,45 +122,6 @@ export const getPageURL = (): string => {
 	const searchParams = new URLSearchParams(window.location.search);
 
 	return searchParams.get('url');
-};
-
-/**
- * Get the array of globally used tags.
- *
- * @returns the array of globally used tags
- */
-export const getTags = (): string[] => {
-	try {
-		return window.Automad.tags;
-	} catch {
-		console.error('window.Automad.tags is not defined.');
-	}
-};
-
-/**
- * Get the installed themes.
- *
- * @returns the installed themes
- */
-export const getThemes = (): ThemeCollection => {
-	try {
-		return window.Automad.themes;
-	} catch {
-		console.error('window.Automad.themes is not defined.');
-	}
-};
-
-/**
- * Get the available switcher sections names.
- *
- * @returns the available switcher sections names
- */
-export const getSwitcherSections = (): KeyValueMap => {
-	try {
-		return window.Automad.sections;
-	} catch {
-		console.error('window.Automad.sections is not defined.');
-	}
 };
 
 /**
@@ -329,20 +263,6 @@ export const queryParents = (
 	}
 
 	return parents;
-};
-
-/**
- * Get a text module by key.
- *
- * @param key
- * @returns the requested text module
- */
-export const text = (key: string): string => {
-	try {
-		return window.Automad.text[key];
-	} catch (error) {
-		console.error(error);
-	}
 };
 
 /**

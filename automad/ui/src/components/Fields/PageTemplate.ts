@@ -32,10 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { classes, getThemes, text, titleCase } from '../../utils/core';
+import { classes, titleCase } from '../../utils/core';
 import { create } from '../../utils/create';
 import { KeyValueMap, Theme } from '../../utils/types';
 import { BaseComponent } from '../Base';
+import { App } from '../../utils/app';
 
 interface TemplateFieldData {
 	pageData: KeyValueMap;
@@ -100,7 +101,7 @@ const themeStatus = ({
 	template,
 	themeKey,
 }: TemplateFieldData): ThemeStatus => {
-	const themes = getThemes();
+	const themes = App.themes;
 	let mainTheme = themes[shared[themeKey]];
 
 	if (typeof mainTheme == 'undefined') {
@@ -175,7 +176,7 @@ const createTemplateSelect = (
 	mainTheme: Theme,
 	selectedTemplate: string
 ): HTMLSelectElement => {
-	const themes = getThemes();
+	const themes = App.themes;
 	const select = create('select', [classes.input], {
 		name: 'theme_template',
 	});
@@ -262,7 +263,7 @@ class PageTemplateComponent extends BaseComponent {
 		const select = createTemplateSelect(mainTheme, selectedTemplate);
 
 		button.innerHTML = `
-			<label class="${classes.fieldLabel}">${text('page_theme_template')}</label>
+			<label class="${classes.fieldLabel}">${App.text('page_theme_template')}</label>
 			<am-modal-toggle modal="#am-page-template-modal" class="am-e-button am-e-button--${buttonClass} am-u-flex">
 				<i class="bi bi-${buttonIcon}"></i>
 				<span class="am-u-flex__item-grow">
@@ -275,19 +276,19 @@ class PageTemplateComponent extends BaseComponent {
 		modal.innerHTML = `
 			<div class="${classes.modalDialog}">
 				<div class="${classes.modalHeader}">
-					<span>${text('page_theme_template')}</span>
+					<span>${App.text('page_theme_template')}</span>
 					<am-modal-close class="${classes.modalClose}"></am-modal-close>
 				</div>
 				${select.outerHTML}
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
-						${text('btn_close')}
+						${App.text('btn_close')}
 					</am-modal-close>
 					<am-submit 
 					class="${classes.button} ${classes.buttonSuccess}" 
 					form="PageController::data"
 					>
-						${text('btn_apply_reload')}
+						${App.text('btn_apply_reload')}
 					</am-submit>
 				</div>
 			</div>

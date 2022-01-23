@@ -26,52 +26,47 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap } from '../utils/types';
+import { Partials, renderTemplate } from '../../utils/template';
+import { BaseComponent } from '../Base';
 
 /**
- * The Automad base component. All Automad components are based on this class.
+ * The base view component.
  *
- * @extends HTMLElement
+ * @extends BaseComponent
  */
-export abstract class BaseComponent extends HTMLElement {
+export abstract class BaseViewComponent extends BaseComponent {
 	/**
-	 * Key/value pairs of the element attributes.
+	 * The template for the view.
 	 */
-	elementAttributes: KeyValueMap = {};
+	protected template = '';
 
 	/**
-	 * The class constructor.
+	 * An array of partials that must be provided in order to render partial references.
 	 */
-	constructor() {
-		super();
-	}
+	protected partials: Partials = {};
 
 	/**
-	 * The array of observed attributes.
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return [];
-	}
-
-	/**
-	 * The callback that is used when attributes are changed or on initialization.
+	 * The public init function that is called on the created element.
 	 *
-	 * @param name
-	 * @param oldValue
-	 * @param newValue
+	 * @returns the pending promise
 	 */
-	attributeChangedCallback(
-		name: string,
-		oldValue: string,
-		newValue: string
-	): void {
-		this.elementAttributes[name] = newValue || '';
+	async init(): Promise<HTMLElement> {
+		this.setDocumentTitle();
+		this.innerHTML = renderTemplate(this.template, this.partials);
+
+		return this;
+	}
+
+	/**
+	 * Set the document title.
+	 */
+	protected setDocumentTitle(): void {
+		document.title = 'Automad';
 	}
 }

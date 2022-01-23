@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { getDashboardURL } from './core';
+import { App } from './app';
 import { KeyValueMap } from './types';
-import md5 from 'crypto-js/md5';
 
 /**
  * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.
@@ -43,7 +42,7 @@ import md5 from 'crypto-js/md5';
  * @param [data]
  * @returns the Promise
  */
-const request = async (
+export const request = async (
 	url: string,
 	data: KeyValueMap = null
 ): Promise<Response> => {
@@ -76,11 +75,7 @@ const requestDashboard = async (
 	slug: string,
 	data: KeyValueMap = null
 ): Promise<Response> => {
-	const dashboard = getDashboardURL();
-
-	if (dashboard) {
-		return request(`${dashboard}${slug}`, data);
-	}
+	return request(`${App.dashboardURL}${slug}`, data);
 };
 
 /**
@@ -103,38 +98,3 @@ export const requestController = async (
 
 	return responseData;
 };
-
-interface ControllerRequestHashmap {
-	[key: string]: Promise<KeyValueMap>;
-}
-
-/**
- * A wrapper class to cache requests to the same controller using the same data
- * and re-use its responses instead of requesting the backend multiple times.
- */
-export class CachedControllerRequest {
-	/**
-	 * The actual hashmap to store the returned promises.
-	 */
-	static cache: ControllerRequestHashmap = {};
-
-	/**
-	 * Fetch a controller in case there is no cached promise yet.
-	 *
-	 * @param controller
-	 * @param data
-	 * @returns the promise that is returned by the controller request or the cached one
-	 */
-	static async fetch(
-		controller: string,
-		data: KeyValueMap = null
-	): Promise<KeyValueMap> {
-		const hash = md5(JSON.stringify({ controller, data })).toString();
-
-		if (typeof this.cache[hash] === 'undefined') {
-			this.cache[hash] = requestController(controller, data);
-		}
-
-		return this.cache[hash];
-	}
-}

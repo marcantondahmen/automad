@@ -32,57 +32,44 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../utils/app';
-import { classes, isActiveView } from '../utils/core';
-import { BaseComponent } from './Base';
+import { Partials } from '../../utils/template';
+import { BaseViewComponent } from './BaseView';
+import sidebar from './Templates/SidebarView.html';
 
 /**
- * A simple link in the sidebar navigation.
+ * The Automad base component. All Automad components are based on this class.
  *
- * @example
- * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
- *
- * @extends BaseComponent
+ * @extends BaseViewComponent
  */
-class NavItemComponent extends BaseComponent {
+export abstract class SidebarViewComponent extends BaseViewComponent {
 	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
+	 * The template for the view.
 	 */
-	static get observedAttributes(): string[] {
-		return ['view', 'icon', 'text'];
-	}
+	protected template: string = sidebar;
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * An array of partials that must be provided in order to render partial references.
 	 */
-	connectedCallback(): void {
-		this.classList.add(classes.navItem);
-		this.classList.toggle(
-			classes.navItemActive,
-			isActiveView(this.elementAttributes.view)
-		);
-
-		this.innerHTML = this.render();
-	}
+	protected partials: Partials = {
+		main: this.renderMainPartial,
+		save: this.renderSaveButtonPartial,
+	};
 
 	/**
-	 * Render the component.
+	 * Render the main partial.
 	 *
 	 * @returns the rendered HTML
 	 */
-	render(): string {
-		return `
-			<am-link 
-			target="${this.elementAttributes.view}" 
-			class="${classes.navLink}"
-			>
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				<span>${App.text(this.elementAttributes.text)}</span>
-			</am-link>
-		`;
+	protected renderMainPartial(): string {
+		return '';
+	}
+
+	/**
+	 * Render the save button partial.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderSaveButtonPartial(): string {
+		return '';
 	}
 }
-
-customElements.define('am-nav-item', NavItemComponent);

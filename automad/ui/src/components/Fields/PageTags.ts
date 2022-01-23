@@ -33,10 +33,11 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { classes, getTags } from '../../utils/core';
+import { classes } from '../../utils/core';
 import { create } from '../../utils/create';
 import { PageDataComponent } from '../Forms/PageData';
 import { FieldComponent } from './Field';
+import { App } from '../../utils/app';
 
 /**
  * A tags input field.
@@ -64,7 +65,7 @@ class PageTagsComponent extends FieldComponent {
 		textarea.innerHTML = value;
 
 		const tagify = new Tagify(textarea, {
-			whitelist: getTags(),
+			whitelist: App.tags,
 			originalInputValueFormat: (tags) =>
 				tags.map((item) => item.value).join(', '),
 		});

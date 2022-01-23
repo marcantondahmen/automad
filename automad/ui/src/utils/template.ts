@@ -26,52 +26,54 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap } from '../utils/types';
+import { App } from './app';
+
+export interface Partials {
+	[key: string]: any;
+}
 
 /**
- * The Automad base component. All Automad components are based on this class.
+ * Render a template.
  *
- * @extends HTMLElement
+ * @param template
+ * @param partials
+ * @returns the rendered and merged HTML
  */
-export abstract class BaseComponent extends HTMLElement {
+export const renderTemplate = (
+	template: string,
+	partials: Partials
+): string => {
 	/**
-	 * Key/value pairs of the element attributes.
+	 * {% partial %}
 	 */
-	elementAttributes: KeyValueMap = {};
+	template = template.replace(
+		/\{\%\s*(\w+)\s*\%\}/g,
+		(match: string, partial: string) => partials[partial].apply(this)
+	);
 
 	/**
-	 * The class constructor.
+	 * {{ text:btn_save }}
+	 * {{ app:base }}
 	 */
-	constructor() {
-		super();
-	}
+	template = template.replace(
+		/\{\{\s*(\w+):(\w+)\s*\}\}/g,
+		(match: string, $1: string, $2: string): string => {
+			switch ($1) {
+				case 'app':
+					return App.state[$2];
+				case 'text':
+					return App.text($2);
+			}
 
-	/**
-	 * The array of observed attributes.
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return [];
-	}
+			return '';
+		}
+	);
 
-	/**
-	 * The callback that is used when attributes are changed or on initialization.
-	 *
-	 * @param name
-	 * @param oldValue
-	 * @param newValue
-	 */
-	attributeChangedCallback(
-		name: string,
-		oldValue: string,
-		newValue: string
-	): void {
-		this.elementAttributes[name] = newValue || '';
-	}
-}
+	return template;
+};

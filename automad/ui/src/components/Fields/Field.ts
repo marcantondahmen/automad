@@ -32,15 +32,10 @@
  * Licensed under the MIT license.
  */
 
-import {
-	classes,
-	htmlSpecialChars,
-	listen,
-	text,
-	titleCase,
-} from '../../utils/core';
+import { classes, htmlSpecialChars, titleCase } from '../../utils/core';
 import { create } from '../../utils/create';
 import { BaseComponent } from '../Base';
+import { App } from '../../utils/app';
 
 interface FieldInitData {
 	key: string;
@@ -115,7 +110,7 @@ export class FieldComponent extends BaseComponent {
 		label = label || createLabel(key);
 
 		if (removable) {
-			label = `${label} (${text('page_var_unused')})`;
+			label = `${label} (${App.text('page_var_unused')})`;
 		}
 
 		if (typeof value === 'string') {

@@ -33,56 +33,44 @@
  */
 
 import { App } from '../utils/app';
-import { classes, isActiveView } from '../utils/core';
+import { listen } from '../utils/core';
 import { BaseComponent } from './Base';
 
 /**
- * A simple link in the sidebar navigation.
+ * A simple link component to change the dashboard view.
  *
  * @example
- * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
+ * <am-link target="Page?url=..."></am-link>
+ * <am-link external="http://..."></am-link>
  *
  * @extends BaseComponent
  */
-class NavItemComponent extends BaseComponent {
+class LinkComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['view', 'icon', 'text'];
+		return ['target', 'external'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.navItem);
-		this.classList.toggle(
-			classes.navItemActive,
-			isActiveView(this.elementAttributes.view)
-		);
+		listen(this, 'click', () => {
+			if (this.elementAttributes.external) {
+				window.location = this.elementAttributes.external;
+			}
 
-		this.innerHTML = this.render();
-	}
+			const base = `${window.location.origin}${App.dashboardURL}/`;
+			const url = new URL(this.elementAttributes.target, base);
 
-	/**
-	 * Render the component.
-	 *
-	 * @returns the rendered HTML
-	 */
-	render(): string {
-		return `
-			<am-link 
-			target="${this.elementAttributes.view}" 
-			class="${classes.navLink}"
-			>
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				<span>${App.text(this.elementAttributes.text)}</span>
-			</am-link>
-		`;
+			window.history.pushState(null, null, url);
+			App.root.updateView();
+		});
 	}
 }
 
-customElements.define('am-nav-item', NavItemComponent);
+customElements.define('am-link', LinkComponent);

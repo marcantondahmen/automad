@@ -32,57 +32,60 @@
  * Licensed under the MIT license.
  */
 
-import { classes } from '../utils/core';
+import { classes, getPageURL } from '../utils/core';
+import { create } from '../utils/create';
+import { requestController } from '../utils/request';
 import { KeyValueMap } from '../utils/types';
 import { BaseComponent } from './Base';
 import { App } from '../utils/app';
 
 /**
- * A simple alert box component.
+ * A breadcrumbs nav for a page.
  *
  * @example
- * <am-alert
- * icon="exclamation-circle"
- * text="error_page_not_found"
- * type="danger"
- * ></am-alert>
+ * <am-page-breadcrumbs></am-page-breadcrumbs>
  *
  * @extends BaseComponent
  */
-class AlertComponent extends BaseComponent {
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['icon', 'text', 'type'];
-	}
-
+class PageBreadcrumbsComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const types: KeyValueMap = {
-			danger: classes.alertDanger,
-			success: classes.alertSuccess,
-		};
+		this.init();
+	}
 
-		this.classList.add(classes.alert);
+	/**
+	 * Fetch the breadcrumb data and init the componenten.
+	 */
+	private async init(): Promise<void> {
+		this.classList.add(classes.spinner, classes.breadcrumbs);
 
-		if (this.elementAttributes.type) {
-			this.classList.add(types[this.elementAttributes.type]);
-		}
+		const response = await requestController(
+			'PageController::breadcrumbs',
+			{ url: getPageURL() }
+		);
 
-		this.innerHTML = `
-			<div class="${classes.alertIcon}">
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-			</div>
-			<div class="${classes.alertText}">
-				${App.text(this.elementAttributes.text)}
-			</div>
-		`;
+		this.classList.remove(classes.spinner);
+		this.render(response.data);
+	}
+
+	/**
+	 * Render the actual component.
+	 *
+	 * @param data
+	 */
+	private render(data: KeyValueMap): void {
+		data.forEach((page: KeyValueMap) => {
+			const href = `${App.dashboardURL}/Page?url=${encodeURIComponent(
+				page.url
+			)}`;
+
+			const link = create('a', [classes.breadcrumbsItem], { href }, this);
+
+			link.innerHTML = `<i class="bi bi-chevron-right"></i> ${page.title}`;
+		});
 	}
 }
 
-customElements.define('am-alert', AlertComponent);
+customElements.define('am-page-breadcrumbs', PageBreadcrumbsComponent);

@@ -51,15 +51,20 @@ import './components/Fields/Url';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 
+import './components/Views/Page';
+
 import './components/Alert';
 import './components/Autocomplete';
 import './components/Jumpbar';
+import './components/Link';
 import './components/Modal';
 import './components/ModalClose';
 import './components/ModalToggle';
 import './components/NavItem';
 import './components/NavTree';
+import './components/PageBreadcrumbs';
 import './components/RemoveField';
+import './components/Root';
 import './components/Sidebar';
 import './components/Submit';
 import './components/Switcher';

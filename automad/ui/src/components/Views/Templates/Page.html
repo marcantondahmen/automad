@@ -1,0 +1,19 @@
+<section class="am-l-main__row">
+	<nav class="am-l-main__content">
+		<am-page-breadcrumbs></am-page-breadcrumbs>
+	</nav>
+</section>
+<section class="am-l-main__row am-l-main__row--sticky">
+	<menu class="am-l-main__content">
+		<am-switcher>
+			<am-switcher-link section="settings">{{ text:page_settings }}</am-switcher-link>
+			<am-switcher-link section="text">{{ text:page_vars_content }}</am-switcher-link>
+			<am-switcher-link section="colors">{{ text:page_vars_color }}</am-switcher-link>
+		</am-switcher>
+	</menu>
+</section>
+<section class="am-l-main__row">
+	<div class="am-l-main__content">
+		<am-page-data controller="PageController::data"></am-page-data>
+	</div>
+</section>

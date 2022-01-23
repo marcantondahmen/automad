@@ -32,57 +32,36 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../utils/app';
-import { classes, isActiveView } from '../utils/core';
-import { BaseComponent } from './Base';
+import { App } from '../../utils/app';
+import { viewMap } from '../Root';
+import { SidebarViewComponent } from './SidebarView';
+import html from './Templates/Page.html';
 
 /**
- * A simple link in the sidebar navigation.
+ * The page view.
  *
- * @example
- * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
- *
- * @extends BaseComponent
+ * @extends SidebarViewComponent
  */
-class NavItemComponent extends BaseComponent {
+export class PageComponent extends SidebarViewComponent {
 	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['view', 'icon', 'text'];
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.classList.add(classes.navItem);
-		this.classList.toggle(
-			classes.navItemActive,
-			isActiveView(this.elementAttributes.view)
-		);
-
-		this.innerHTML = this.render();
-	}
-
-	/**
-	 * Render the component.
+	 * Render the main partial.
 	 *
 	 * @returns the rendered HTML
 	 */
-	render(): string {
-		return `
-			<am-link 
-			target="${this.elementAttributes.view}" 
-			class="${classes.navLink}"
-			>
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				<span>${App.text(this.elementAttributes.text)}</span>
-			</am-link>
-		`;
+	protected renderMainPartial(): string {
+		return html;
+	}
+
+	/**
+	 * Render the save button partial.
+	 *
+	 * @returns the rendered HTML
+	 */
+	protected renderSaveButtonPartial(): string {
+		return `<am-submit form="PageController::data">${App.text(
+			'btn_save'
+		)}</am-submit>`;
 	}
 }
 
-customElements.define('am-nav-item', NavItemComponent);
+customElements.define(viewMap.Page, PageComponent);

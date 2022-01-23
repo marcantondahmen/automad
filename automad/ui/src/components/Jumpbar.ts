@@ -36,6 +36,7 @@ import { AutocompleteComponent } from './Autocomplete';
 import { create } from '../utils/create';
 import { classes, keyCombo } from '../utils/core';
 import { KeyValueMap } from '../utils/types';
+import { App } from '../utils/app';
 
 /**
  * The Jumpbar field element.
@@ -47,9 +48,11 @@ import { KeyValueMap } from '../utils/types';
  */
 class JumpbarComponent extends AutocompleteComponent {
 	/**
-	 * The controller.
+	 * The autocomplete data.
 	 */
-	protected controller = 'UIController::autocompleteJump';
+	protected get data(): KeyValueMap[] {
+		return App.jumpbar;
+	}
 
 	/**
 	 * The initial index.
@@ -84,9 +87,15 @@ class JumpbarComponent extends AutocompleteComponent {
 	 * @returns the dropdown item element
 	 */
 	protected createItemElement(item: KeyValueMap): HTMLElement {
-		const element = create('a', [classes.dropdownItem], {
-			href: item.url,
+		const attributes: KeyValueMap = {};
+
+		['external', 'target'].forEach((attribute: string): void => {
+			if (item[attribute]) {
+				attributes[attribute] = item[attribute];
+			}
 		});
+
+		const element = create('am-link', [classes.dropdownItem], attributes);
 
 		element.innerHTML = this.itemHtml(item.icon, item.title, item.subtitle);
 

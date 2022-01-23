@@ -33,56 +33,66 @@
  */
 
 import { App } from '../utils/app';
-import { classes, isActiveView } from '../utils/core';
+import { create } from '../utils/create';
 import { BaseComponent } from './Base';
 
+type ViewName = 'Page' | 'System' | 'Shared' | 'Home' | 'Packages';
+
+type Views = {
+	[name in ViewName]: string;
+};
+
+const getViewSlug = (dashboard: string): ViewName => {
+	const regex = new RegExp(`^${dashboard}\/`, 'i');
+
+	return (window.location.pathname.replace(regex, '') as ViewName) || 'Home';
+};
+
+export const viewMap: Views = {
+	Page: 'am-page',
+	System: 'am-system',
+	Shared: 'am-shared',
+	Home: 'am-home',
+	Packages: 'am-packages',
+};
+
 /**
- * A simple link in the sidebar navigation.
- *
- * @example
- * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
+ * The root app component.
  *
  * @extends BaseComponent
  */
-class NavItemComponent extends BaseComponent {
+export class RootComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['view', 'icon', 'text'];
+		return ['dashboard'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.navItem);
-		this.classList.toggle(
-			classes.navItemActive,
-			isActiveView(this.elementAttributes.view)
-		);
-
-		this.innerHTML = this.render();
+		this.init();
 	}
 
-	/**
-	 * Render the component.
-	 *
-	 * @returns the rendered HTML
-	 */
-	render(): string {
-		return `
-			<am-link 
-			target="${this.elementAttributes.view}" 
-			class="${classes.navLink}"
-			>
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				<span>${App.text(this.elementAttributes.text)}</span>
-			</am-link>
-		`;
+	private async init(): Promise<void> {
+		await App.bootstrap(this);
+
+		this.updateView();
+	}
+
+	async updateView(): Promise<void> {
+		await App.updateState();
+
+		const slug = getViewSlug(this.elementAttributes.dashboard);
+		const view = await create(viewMap[slug], [], {}).init();
+
+		this.innerHTML = '';
+		this.appendChild(view);
 	}
 }
 
-customElements.define('am-nav-item', NavItemComponent);
+customElements.define('am-root', RootComponent);
