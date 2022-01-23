@@ -34,6 +34,8 @@
 
 import { App } from '../core/app';
 import { create } from '../core/create';
+import { waitForPendingRequests } from '../core/request';
+import { query } from '../core/utils';
 import { BaseComponent } from './Base';
 
 type ViewName = 'Page' | 'System' | 'Shared' | 'Home' | 'Packages';
@@ -78,20 +80,32 @@ export class RootComponent extends BaseComponent {
 		this.init();
 	}
 
+	/**
+	 * Init the root component.
+	 */
 	private async init(): Promise<void> {
 		await App.bootstrap(this);
 
 		this.updateView();
 	}
 
+	/**
+	 * Update the root component.
+	 */
 	async updateView(): Promise<void> {
 		await App.updateState();
 
 		const slug = getViewSlug(this.elementAttributes.dashboard);
 		const view = await create(viewMap[slug], [], {}).init();
 
+		await waitForPendingRequests();
+
 		this.innerHTML = '';
 		this.appendChild(view);
+
+		setTimeout(() => {
+			query('html').scrollTop = 0;
+		}, 0);
 	}
 }
 

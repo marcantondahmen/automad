@@ -32,7 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import { App } from './app';
 import { KeyValueMap } from './types';
 
 declare global {
@@ -111,6 +110,18 @@ export const debounce = (
 			callback.apply(this, args);
 		}, timeout);
 	};
+};
+
+/**
+ * Fires an event on an element or the window.
+ * @param name
+ * @param [element]
+ */
+export const fire = (
+	name: string,
+	element: HTMLElement | Document | Window = window
+): void => {
+	element.dispatchEvent(new Event(name));
 };
 
 /**

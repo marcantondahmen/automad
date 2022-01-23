@@ -34,6 +34,7 @@
 
 import { App } from './app';
 import { KeyValueMap } from './types';
+import { fire, listen } from './utils';
 
 /**
  * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.
@@ -41,6 +42,7 @@ import { KeyValueMap } from './types';
  * @param url
  * @param [data]
  * @returns the Promise
+ * @async
  */
 export const request = async (
 	url: string,
@@ -70,6 +72,7 @@ export const request = async (
  * @param slug
  * @param [data]
  * @returns the Promise
+ * @async
  */
 const requestDashboard = async (
 	slug: string,
@@ -87,14 +90,76 @@ const requestDashboard = async (
  * @param controller
  * @param [data]
  * @returns the Promise
+ * @async
  */
 export const requestController = async (
 	controller: string,
 	data: KeyValueMap = null
 ): Promise<KeyValueMap> => {
+	PendingRequests.add();
+
 	const route = controller.replace('Controller::', '/');
 	const response = await requestDashboard(`/api/${route}`, data);
 	const responseData = await response.json();
 
+	PendingRequests.remove();
+
 	return responseData;
 };
+
+/**
+ * Wait for pending requests to be finished.
+ *
+ * @returns a promise that resolves as soon there is no pending request
+ */
+export const waitForPendingRequests = async (): Promise<any> => {
+	return new Promise((resolve, reject) => {
+		const listener = () => {
+			if (PendingRequests.idle) {
+				resolve(true);
+
+				window.removeEventListener(PendingRequests.eventName, listener);
+			}
+		};
+
+		window.addEventListener(PendingRequests.eventName, listener);
+	});
+};
+
+/**
+ * A util class that tracks the number of pending requests.
+ */
+class PendingRequests {
+	/**
+	 * The event name that is used when the count changes.
+	 */
+	static eventName = 'AutomadPendingRequestsChange';
+
+	/**
+	 * The number of currently pending requests.
+	 */
+	private static count: number = 0;
+
+	/**
+	 * Return true if the number of pending request is 0.
+	 */
+	static get idle(): boolean {
+		return this.count <= 0;
+	}
+
+	/**
+	 * Add a request,
+	 */
+	static add() {
+		this.count++;
+		fire(this.eventName);
+	}
+
+	/**
+	 * Remove a request.
+	 */
+	static remove() {
+		this.count--;
+		fire(this.eventName);
+	}
+}

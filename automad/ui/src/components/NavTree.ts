@@ -71,11 +71,6 @@ interface NavItem {
  */
 class NavTreeComponent extends BaseComponent {
 	/**
-	 * The preloader.
-	 */
-	private preloader: HTMLElement;
-
-	/**
 	 * The controller.
 	 */
 	protected controller = 'UIController::navTree';
@@ -90,8 +85,6 @@ class NavTreeComponent extends BaseComponent {
 			'sidebar_header_pages'
 		);
 
-		this.preloader = create('div', [classes.navSpinner], {}, this);
-		create('div', [classes.spinner], {}, this.preloader);
 		this.init();
 	}
 
@@ -106,8 +99,6 @@ class NavTreeComponent extends BaseComponent {
 		pages.sort((a: KeyValueMap, b: KeyValueMap) =>
 			a.path > b.path ? 1 : b.path > a.path ? -1 : 0
 		);
-
-		this.preloader.remove();
 
 		pages.forEach((page) => {
 			if (typeof tree[page.parent] == 'undefined') {

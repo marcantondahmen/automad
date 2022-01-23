@@ -35,7 +35,7 @@
 import { BaseComponent } from './Base';
 import { classes, listen, query, queryAll } from '../core/utils';
 
-const switcherChangeEventName = 'am-switcher-change';
+const switcherChangeEventName = 'AutomadSwitcherChange';
 const linkTag = 'am-switcher-link';
 
 /**

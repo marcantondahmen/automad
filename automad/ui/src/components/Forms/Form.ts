@@ -81,12 +81,17 @@ export class FormComponent extends BaseComponent {
 	protected watchChanges: boolean = false;
 
 	/**
-	 * The observed attributes.
-	 *
-	 * @static
+	 * Get the controller attribute already before attributes are observed.
 	 */
-	static get observedAttributes(): string[] {
-		return ['controller'];
+	protected get controller(): string {
+		return this.getAttribute('controller');
+	}
+
+	/**
+	 * The form inits itself when created.
+	 */
+	protected get initSelf(): boolean {
+		return this.hasAttribute('init');
 	}
 
 	/**
@@ -120,10 +125,19 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The form constructor.
 	 */
-	connectedCallback(): void {
-		if (this.hasAttribute('init')) {
+	constructor() {
+		super();
+
+		this.init();
+	}
+
+	/**
+	 * Initialize the form.
+	 */
+	protected async init(): Promise<void> {
+		if (this.initSelf) {
 			this.submit();
 		}
 
@@ -202,10 +216,12 @@ export class FormComponent extends BaseComponent {
 
 	/**
 	 * Submit the form.
+	 *
+	 * @async
 	 */
 	async submit(): Promise<void> {
 		const response = await requestController(
-			this.elementAttributes.controller,
+			this.controller,
 			this.formData
 		);
 

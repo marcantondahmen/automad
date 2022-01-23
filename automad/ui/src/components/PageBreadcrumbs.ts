@@ -49,9 +49,11 @@ import { App } from '../core/app';
  */
 class PageBreadcrumbsComponent extends BaseComponent {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * The constructor.
 	 */
-	connectedCallback(): void {
+	constructor() {
+		super();
+
 		this.init();
 	}
 
@@ -59,14 +61,13 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	 * Fetch the breadcrumb data and init the componenten.
 	 */
 	private async init(): Promise<void> {
-		this.classList.add(classes.spinner, classes.breadcrumbs);
+		this.classList.add(classes.breadcrumbs);
 
 		const response = await requestController(
 			'PageController::breadcrumbs',
 			{ url: getPageURL() }
 		);
 
-		this.classList.remove(classes.spinner);
 		this.render(response.data);
 	}
 

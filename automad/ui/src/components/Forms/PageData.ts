@@ -142,12 +142,7 @@ const fieldGroup = ({
  */
 const createSections = (form: PageDataComponent): SwitcherSectionCollection => {
 	const createSection = (key: string): SwitcherSectionComponent => {
-		return create(
-			'am-switcher-section',
-			[classes.spinner],
-			{ name: content[key] },
-			form
-		);
+		return create('am-switcher-section', [], { name: content[key] }, form);
 	};
 
 	const content = App.sections.content;
@@ -184,13 +179,25 @@ export class PageDataComponent extends FormComponent {
 	protected watchChanges: boolean = true;
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * Enable self init.
 	 */
-	connectedCallback() {
+	protected get initSelf(): boolean {
+		return true;
+	}
+
+	/**
+	 * Initialize the form.
+	 */
+	protected async init(): Promise<void> {
 		this.sections = createSections(this);
 
-		this.submit();
+		super.init();
+	}
 
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
 		keyCombo('s', () => {
 			if (this.hasUnsavedChanges) {
 				this.submit();
@@ -326,10 +333,6 @@ export class PageDataComponent extends FormComponent {
 		}
 
 		this.watch();
-
-		Object.values(this.sections).forEach((section) => {
-			section.classList.remove(classes.spinner);
-		});
 
 		const {
 			url,
