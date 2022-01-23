@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from './Base';
-import { classes, listen, query, queryAll } from '../utils/core';
+import { classes, listen, query, queryAll } from '../core/utils';
 
 const switcherChangeEventName = 'am-switcher-change';
 const linkTag = 'am-switcher-link';

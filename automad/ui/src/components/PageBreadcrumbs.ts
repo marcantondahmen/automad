@@ -32,12 +32,12 @@
  * Licensed under the MIT license.
  */
 
-import { classes, getPageURL } from '../utils/core';
-import { create } from '../utils/create';
-import { requestController } from '../utils/request';
-import { KeyValueMap } from '../utils/types';
+import { classes, getPageURL } from '../core/utils';
+import { create } from '../core/create';
+import { requestController } from '../core/request';
+import { KeyValueMap } from '../core/types';
 import { BaseComponent } from './Base';
-import { App } from '../utils/app';
+import { App } from '../core/app';
 
 /**
  * A breadcrumbs nav for a page.

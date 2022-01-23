@@ -33,10 +33,10 @@
  */
 
 import { BaseComponent } from './Base';
-import { classes, debounce, listen } from '../utils/core';
-import { create } from '../utils/create';
-import { KeyValueMap } from '../utils/types';
-import { App } from '../utils/app';
+import { classes, debounce, listen } from '../core/utils';
+import { create } from '../core/create';
+import { KeyValueMap } from '../core/types';
+import { App } from '../core/app';
 
 export interface Item {
 	element: HTMLElement;

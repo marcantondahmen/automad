@@ -32,11 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { classes, titleCase } from '../../utils/core';
-import { create } from '../../utils/create';
-import { KeyValueMap, Theme } from '../../utils/types';
+import { classes, titleCase } from '../../core/utils';
+import { create } from '../../core/create';
+import { KeyValueMap, Theme } from '../../core/types';
 import { BaseComponent } from '../Base';
-import { App } from '../../utils/app';
+import { App } from '../../core/app';
 
 interface TemplateFieldData {
 	pageData: KeyValueMap;

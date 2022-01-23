@@ -32,13 +32,13 @@
  * Licensed under the MIT license.
  */
 
-import { classes, keyCombo, query } from '../../utils/core';
-import { create } from '../../utils/create';
-import { KeyValueMap } from '../../utils/types';
+import { classes, keyCombo, query } from '../../core/utils';
+import { create } from '../../core/create';
+import { KeyValueMap } from '../../core/types';
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher';
-import { App } from '../../utils/app';
+import { App } from '../../core/app';
 
 type SwitcherSectionName = 'settings' | 'text' | 'colors';
 

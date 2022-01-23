@@ -33,7 +33,7 @@
  */
 
 import Toastify from 'toastify-js';
-import { query } from './core';
+import { query } from './utils';
 import { create } from './create';
 import { KeyValueMap } from './types';
 

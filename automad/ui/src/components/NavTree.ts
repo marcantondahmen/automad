@@ -40,12 +40,12 @@ import {
 	query,
 	queryAll,
 	queryParents,
-} from '../utils/core';
-import { create } from '../utils/create';
+} from '../core/utils';
+import { create } from '../core/create';
 
-import { KeyValueMap } from '../utils/types';
+import { KeyValueMap } from '../core/types';
 import { BaseComponent } from './Base';
-import { App } from '../utils/app';
+import { App } from '../core/app';
 
 interface Page {
 	url: string;

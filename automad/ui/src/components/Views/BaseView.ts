@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Partials, renderTemplate } from '../../utils/template';
+import { Partials, renderTemplate } from '../../core/template';
 import { BaseComponent } from '../Base';
 
 /**

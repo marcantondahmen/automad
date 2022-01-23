@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from './Base';
-import { listen, queryAll } from '../utils/core';
+import { listen, queryAll } from '../core/utils';
 
 /**
  * A simple toggle link component.

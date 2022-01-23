@@ -33,10 +33,10 @@
  */
 
 import { AutocompleteComponent } from './Autocomplete';
-import { create } from '../utils/create';
-import { classes, keyCombo } from '../utils/core';
-import { KeyValueMap } from '../utils/types';
-import { App } from '../utils/app';
+import { create } from '../core/create';
+import { classes, keyCombo } from '../core/utils';
+import { KeyValueMap } from '../core/types';
+import { App } from '../core/app';
 
 /**
  * The Jumpbar field element.

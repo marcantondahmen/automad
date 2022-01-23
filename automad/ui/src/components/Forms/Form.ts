@@ -39,10 +39,10 @@ import {
 	listen,
 	query,
 	queryAll,
-} from '../../utils/core';
-import { notifyError } from '../../utils/notify';
-import { requestController } from '../../utils/request';
-import { InputElement, KeyValueMap } from '../../utils/types';
+} from '../../core/utils';
+import { notifyError } from '../../core/notify';
+import { requestController } from '../../core/request';
+import { InputElement, KeyValueMap } from '../../core/types';
 import { BaseComponent } from '../Base';
 
 /**

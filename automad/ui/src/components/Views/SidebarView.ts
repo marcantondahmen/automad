@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../../utils/template';
+import { Partials } from '../../core/template';
 import { BaseViewComponent } from './BaseView';
 import sidebar from './Templates/SidebarView.html';
 

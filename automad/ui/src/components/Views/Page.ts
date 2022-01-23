@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../../utils/app';
+import { App } from '../../core/app';
 import { viewMap } from '../Root';
 import { SidebarViewComponent } from './SidebarView';
 import html from './Templates/Page.html';

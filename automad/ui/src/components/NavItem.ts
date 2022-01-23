@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../utils/app';
-import { classes, isActiveView } from '../utils/core';
+import { App } from '../core/app';
+import { classes, isActiveView } from '../core/utils';
 import { BaseComponent } from './Base';
 
 /**

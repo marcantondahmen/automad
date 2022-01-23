@@ -33,11 +33,11 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import { classes } from '../../utils/core';
-import { create } from '../../utils/create';
+import { classes } from '../../core/utils';
+import { create } from '../../core/create';
 import { PageDataComponent } from '../Forms/PageData';
 import { FieldComponent } from './Field';
-import { App } from '../../utils/app';
+import { App } from '../../core/app';
 
 /**
  * A tags input field.

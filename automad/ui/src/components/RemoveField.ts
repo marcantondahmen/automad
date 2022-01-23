@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, listen } from '../utils/core';
+import { classes, listen } from '../core/utils';
 import { BaseComponent } from './Base';
 
 /**

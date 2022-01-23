@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../utils/app';
-import { create } from '../utils/create';
+import { App } from '../core/app';
+import { create } from '../core/create';
 import { BaseComponent } from './Base';
 
 type ViewName = 'Page' | 'System' | 'Shared' | 'Home' | 'Packages';
