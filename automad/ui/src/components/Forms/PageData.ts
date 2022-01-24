@@ -37,8 +37,8 @@ import { create } from '../../core/create';
 import { KeyValueMap } from '../../core/types';
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
-import { SwitcherSectionComponent } from '../Switcher';
 import { App } from '../../core/app';
+import { SwitcherSectionComponent } from '../SwitcherSection';
 
 type SwitcherSectionName = 'settings' | 'text' | 'colors';
 

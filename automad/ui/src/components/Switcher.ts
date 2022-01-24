@@ -33,17 +33,19 @@
  */
 
 import { BaseComponent } from './Base';
-import { classes, listen, query, queryAll } from '../core/utils';
+import { listen, query, queryAll } from '../core/utils';
+import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
+import { SwitcherLabelComponent } from './SwitcherLabel';
+import { SwitcherSectionComponent } from './SwitcherSection';
 
-const switcherChangeEventName = 'AutomadSwitcherChange';
-const linkTag = 'am-switcher-link';
+export const switcherChangeEventName = 'AutomadSwitcherChange';
 
 /**
  * Get the section name from the query string.
  *
  * @returns the section name that is used in the query string
  */
-const getActiveSection = (): string => {
+export const getActiveSection = (): string => {
 	const searchParams = new URLSearchParams(window.location.search);
 
 	return searchParams.get('section') || '';
@@ -54,7 +56,7 @@ const getActiveSection = (): string => {
  *
  * @param section
  */
-const setActiveSection = (section: string): void => {
+export const setActiveSection = (section: string): void => {
 	const url = new URL(window.location.href);
 
 	url.searchParams.set('section', section);
@@ -76,7 +78,7 @@ const setActiveSection = (section: string): void => {
  * @see {@link SwitcherSectionComponent}
  * @extends BaseComponent
  */
-class SwitcherComponent extends BaseComponent {
+export class SwitcherComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
@@ -108,111 +110,4 @@ class SwitcherComponent extends BaseComponent {
 	}
 }
 
-/**
- * A switcher link that is part of a switcher menu component.
- *
- * @see {@link SwitcherComponent}
- * @extends BaseComponent
- */
-class SwitcherLinkComponent extends BaseComponent {
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['section'];
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		listen(window, switcherChangeEventName, this.toggle.bind(this));
-		listen(this, 'click', this.select.bind(this));
-	}
-
-	/**
-	 * Toggle the active state of the switcher link.
-	 */
-	toggle(): void {
-		this.classList.toggle(
-			classes.switcherLinkActive,
-			this.elementAttributes.section == getActiveSection()
-		);
-	}
-
-	/**
-	 * Set the active section.
-	 */
-	select(): void {
-		setActiveSection(this.elementAttributes.section);
-	}
-}
-
-/**
- * A switcher section that contains the content that will be toggled by a switcher menu.
- *
- * @example
- * <am-switcher-section name="settings">...</am-switcher-section>
- * <am-switcher-section name="text">...</am-switcher-section>
- *
- * @see {@link SwitcherComponent}
- * @extends BaseComponent
- */
-export class SwitcherSectionComponent extends BaseComponent {
-	/**
-	 * The array of observed attributes.
-	 *
-	 * @static
-	 */
-	static get observedAttributes(): string[] {
-		return ['name'];
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.toggle();
-
-		listen(window, switcherChangeEventName, this.toggle.bind(this));
-	}
-
-	/**
-	 * Toggle the section visiblity based on the query string.
-	 */
-	toggle(): void {
-		this.classList.toggle(
-			classes.displayNone,
-			this.elementAttributes.name != getActiveSection()
-		);
-
-		query('html').scrollTop = 0;
-	}
-}
-
-/**
- * A label that reflects the active switcher link content.
- *
- * @see {@link SwitcherComponent}
- * @extends BaseComponent
- */
-
-class SwitcherLabelComponent extends BaseComponent {
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		listen(window, switcherChangeEventName, () => {
-			this.innerHTML = query(
-				`${linkTag}[section="${getActiveSection()}"]`
-			).innerHTML;
-		});
-	}
-}
-
 customElements.define('am-switcher', SwitcherComponent);
-customElements.define('am-switcher-link', SwitcherLinkComponent);
-customElements.define('am-switcher-label', SwitcherLabelComponent);
-customElements.define('am-switcher-section', SwitcherSectionComponent);

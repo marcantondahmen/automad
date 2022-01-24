@@ -68,4 +68,7 @@ import './components/Root';
 import './components/Sidebar';
 import './components/Submit';
 import './components/Switcher';
+import './components/SwitcherLabel';
+import './components/SwitcherLink';
+import './components/SwitcherSection';
 import './components/Toggle';
