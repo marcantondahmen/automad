@@ -51,7 +51,7 @@ import './components/Fields/Url';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 
-import './components/Views/Page';
+import './components/Pages/Page';
 
 import './components/Alert';
 import './components/Autocomplete';

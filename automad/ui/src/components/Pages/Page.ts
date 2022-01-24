@@ -34,15 +34,15 @@
 
 import { App } from '../../core/app';
 import { viewMap } from '../Root';
-import { SidebarViewComponent } from './SidebarView';
+import { SidebarLayoutComponent } from './SidebarLayout';
 import html from './Templates/Page.html';
 
 /**
  * The page view.
  *
- * @extends SidebarViewComponent
+ * @extends SidebarLayoutComponent
  */
-export class PageComponent extends SidebarViewComponent {
+export class PageComponent extends SidebarLayoutComponent {
 	/**
 	 * Render the main partial.
 	 *

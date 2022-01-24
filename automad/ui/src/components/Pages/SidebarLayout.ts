@@ -26,48 +26,50 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { Partials, renderTemplate } from '../../core/template';
-import { BaseComponent } from '../Base';
+import { Partials } from '../../core/template';
+import { BaseLayoutComponent } from './BaseLayout';
+import sidebar from './Templates/SidebarLayout.html';
 
 /**
- * The base view component.
+ * The Automad base component. All Automad components are based on this class.
  *
- * @extends BaseComponent
+ * @extends BaseLayoutComponent
  */
-export abstract class BaseViewComponent extends BaseComponent {
+export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
 	/**
 	 * The template for the view.
 	 */
-	protected template = '';
+	protected template: string = sidebar;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
 	 */
-	protected partials: Partials = {};
+	protected partials: Partials = {
+		main: this.renderMainPartial,
+		save: this.renderSaveButtonPartial,
+	};
 
 	/**
-	 * The public init function that is called on the created element in order to
-	 * init the view befor it is connected.
+	 * Render the main partial.
 	 *
-	 * @returns the rendered view
+	 * @returns the rendered HTML
 	 */
-	init(): HTMLElement {
-		this.setDocumentTitle();
-		this.innerHTML = renderTemplate(this.template, this.partials);
-
-		return this;
+	protected renderMainPartial(): string {
+		return '';
 	}
 
 	/**
-	 * Set the document title.
+	 * Render the save button partial.
+	 *
+	 * @returns the rendered HTML
 	 */
-	protected setDocumentTitle(): void {
-		document.title = 'Automad';
+	protected renderSaveButtonPartial(): string {
+		return '';
 	}
 }
