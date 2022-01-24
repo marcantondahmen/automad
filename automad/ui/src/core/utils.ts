@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { Route } from './router';
 import { KeyValueMap } from './types';
 
 declare global {
@@ -156,13 +157,13 @@ export const htmlSpecialChars = (value: string): string => {
 };
 
 /**
- * Test whether a view is active.
+ * Test whether a slug is active.
  *
- * @param view
- * @returns true if the view mathes the URL path
+ * @param slug
+ * @returns true if the slug mathes the URL path
  */
-export const isActiveView = (view: string): boolean => {
-	const regex = new RegExp(`\/${view}\$`, 'i');
+export const isActivePage = (slug: Route): boolean => {
+	const regex = new RegExp(`\/${slug}\$`, 'i');
 	return window.location.pathname.match(regex) != null;
 };
 

@@ -33,7 +33,7 @@
  */
 
 import { App } from '../../core/app';
-import { viewMap } from '../Root';
+import { getTagFromRoute, routePage } from '../../core/router';
 import { SidebarLayoutComponent } from './SidebarLayout';
 import html from './Templates/Page.html';
 
@@ -64,4 +64,4 @@ export class PageComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(viewMap.Page, PageComponent);
+customElements.define(getTagFromRoute(routePage), PageComponent);

@@ -35,28 +35,9 @@
 import { App } from '../core/app';
 import { create } from '../core/create';
 import { waitForPendingRequests } from '../core/request';
+import { getRouteOrRedirect, getTagFromRoute } from '../core/router';
 import { classes, query } from '../core/utils';
 import { BaseComponent } from './Base';
-
-type ViewName = 'Page' | 'System' | 'Shared' | 'Home' | 'Packages';
-
-type Views = {
-	[name in ViewName]: string;
-};
-
-const getViewSlug = (dashboard: string): ViewName => {
-	const regex = new RegExp(`^${dashboard}\/`, 'i');
-
-	return (window.location.pathname.replace(regex, '') as ViewName) || 'Home';
-};
-
-export const viewMap: Views = {
-	Page: 'am-page',
-	System: 'am-system',
-	Shared: 'am-shared',
-	Home: 'am-home',
-	Packages: 'am-packages',
-};
 
 /**
  * The root app component.
@@ -107,8 +88,8 @@ export class RootComponent extends BaseComponent {
 
 		this.progressBar(50);
 
-		const slug = getViewSlug(this.elementAttributes.dashboard);
-		const view = create(viewMap[slug], [], {}).init();
+		const route = getRouteOrRedirect();
+		const page = create(getTagFromRoute(route), [], {}).init();
 
 		this.progressBar(70);
 
@@ -118,12 +99,12 @@ export class RootComponent extends BaseComponent {
 		const sidebarScroll = sidebar?.scrollTop;
 
 		if (typeof this.node !== 'undefined') {
-			this.node.replaceWith(view);
+			this.node.replaceWith(page);
 		} else {
-			this.appendChild(view);
+			this.appendChild(page);
 		}
 
-		this.node = view;
+		this.node = page;
 
 		sidebar = query('am-sidebar');
 

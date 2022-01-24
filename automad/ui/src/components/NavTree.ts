@@ -35,17 +35,16 @@
 import {
 	classes,
 	getPageURL,
-	isActiveView,
-	listen,
+	isActivePage,
 	query,
 	queryAll,
 	queryParents,
 } from '../core/utils';
 import { create } from '../core/create';
-
 import { KeyValueMap } from '../core/types';
 import { BaseComponent } from './Base';
 import { App } from '../core/app';
+import { routePage } from '../core/router';
 
 interface Page {
 	url: string;
@@ -134,7 +133,7 @@ class NavTreeComponent extends BaseComponent {
 
 		wrapper.classList.toggle(
 			classes.navItemActive,
-			page.url == getPageURL() && isActiveView('Page')
+			page.url == getPageURL() && isActivePage(routePage)
 		);
 
 		if (!level) {
@@ -148,7 +147,7 @@ class NavTreeComponent extends BaseComponent {
 		}
 
 		link.innerHTML = `
-			<am-link target="Page?url=${encodeURIComponent(page.url)}">
+			<am-link target="${routePage}?url=${encodeURIComponent(page.url)}">
 				<i class="bi bi-${icon}"></i>
 				<span>${page.title}</span>
 			</am-link>

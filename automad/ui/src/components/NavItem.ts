@@ -33,14 +33,14 @@
  */
 
 import { App } from '../core/app';
-import { classes, isActiveView } from '../core/utils';
+import { classes, isActivePage } from '../core/utils';
 import { BaseComponent } from './Base';
 
 /**
  * A simple link in the sidebar navigation.
  *
  * @example
- * <am-nav-item view="System" icon="sliders" text="System"></am-nav-item>
+ * <am-nav-item page="system" icon="sliders" text="System"></am-nav-item>
  *
  * @extends BaseComponent
  */
@@ -51,7 +51,7 @@ class NavItemComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['view', 'icon', 'text'];
+		return ['page', 'icon', 'text'];
 	}
 
 	/**
@@ -61,7 +61,7 @@ class NavItemComponent extends BaseComponent {
 		this.classList.add(classes.navItem);
 		this.classList.toggle(
 			classes.navItemActive,
-			isActiveView(this.elementAttributes.view)
+			isActivePage(this.elementAttributes.page)
 		);
 
 		this.innerHTML = this.render();
@@ -75,7 +75,7 @@ class NavItemComponent extends BaseComponent {
 	render(): string {
 		return `
 			<am-link 
-			target="${this.elementAttributes.view}" 
+			target="${this.elementAttributes.page}" 
 			class="${classes.navLink}"
 			>
 				<i class="bi bi-${this.elementAttributes.icon}"></i>
