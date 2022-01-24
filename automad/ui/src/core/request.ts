@@ -114,15 +114,23 @@ export const requestController = async (
  */
 export const waitForPendingRequests = async (): Promise<any> => {
 	return new Promise((resolve, reject) => {
-		const listener = () => {
+		const checkPendingRequests = () => {
 			if (PendingRequests.idle) {
 				resolve(true);
 
-				window.removeEventListener(PendingRequests.eventName, listener);
+				window.removeEventListener(
+					PendingRequests.eventName,
+					checkPendingRequests
+				);
 			}
 		};
 
-		window.addEventListener(PendingRequests.eventName, listener);
+		window.addEventListener(
+			PendingRequests.eventName,
+			checkPendingRequests
+		);
+
+		checkPendingRequests();
 	});
 };
 

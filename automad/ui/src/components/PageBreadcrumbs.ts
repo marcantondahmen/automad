@@ -78,11 +78,14 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	 */
 	private render(data: KeyValueMap): void {
 		data.forEach((page: KeyValueMap) => {
-			const href = `${App.dashboardURL}/Page?url=${encodeURIComponent(
-				page.url
-			)}`;
+			const target = `Page?url=${encodeURIComponent(page.url)}`;
 
-			const link = create('a', [classes.breadcrumbsItem], { href }, this);
+			const link = create(
+				'am-link',
+				[classes.breadcrumbsItem],
+				{ target },
+				this
+			);
 
 			link.innerHTML = `<i class="bi bi-chevron-right"></i> ${page.title}`;
 		});

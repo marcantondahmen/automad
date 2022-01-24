@@ -103,6 +103,8 @@ class SwitcherComponent extends BaseComponent {
 		if (sections.indexOf(activeSection) == -1) {
 			setActiveSection(sections[0]);
 		}
+
+		query('html').scrollTop = 0;
 	}
 }
 
@@ -172,6 +174,8 @@ export class SwitcherSectionComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		this.toggle();
+
 		listen(window, switcherChangeEventName, this.toggle.bind(this));
 	}
 
@@ -183,6 +187,8 @@ export class SwitcherSectionComponent extends BaseComponent {
 			classes.displayNone,
 			this.elementAttributes.name != getActiveSection()
 		);
+
+		query('html').scrollTop = 0;
 	}
 }
 

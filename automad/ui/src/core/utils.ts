@@ -85,8 +85,8 @@ export const classes: KeyValueMap = {
 	navLink: 'am-c-nav__link',
 	navLinkHasChildren: 'am-c-nav__link--has-children',
 	navChildren: 'am-c-nav__children',
-	navSpinner: 'am-c-nav__spinner',
-	spinner: 'am-e-spinner',
+	root: 'am-c-root',
+	rootLoading: 'am-c-root--loading',
 	switcherLinkActive: 'am-c-switcher-link--active',
 };
 

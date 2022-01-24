@@ -63,26 +63,16 @@ class SidebarComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		setTimeout(this.setHeightAndScroll.bind(this), 0);
-
-		listen(
-			window,
-			'resize',
-			debounce(this.setHeightAndScroll.bind(this), 200)
-		);
+		this.setHeight();
+		setTimeout(this.setHeight.bind(this), 0);
+		listen(window, 'resize', debounce(this.setHeight.bind(this), 200));
 	}
 
 	/**
-	 * Set the container height and scroll to the active item.
+	 * Set the container height.
 	 */
-	private setHeightAndScroll(): void {
-		const activeItem = query(`.${classes.navItemActive}`, this);
-
+	private setHeight(): void {
 		this.style.setProperty('height', `${window.innerHeight}px`);
-
-		if (activeItem) {
-			activeItem.scrollIntoView();
-		}
 	}
 }
 
