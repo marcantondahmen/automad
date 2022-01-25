@@ -34,7 +34,7 @@
 
 import { RootComponent } from '../components/Root';
 import { request, requestController } from './request';
-import { KeyValueMap, ThemeCollection } from './types';
+import { KeyValueMap, ThemeCollection } from '../types';
 
 /**
  * The static class that provides the app state and root element to be used across the application.

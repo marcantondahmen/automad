@@ -33,8 +33,8 @@
  */
 
 import { App } from './app';
-import { KeyValueMap } from './types';
-import { fire, listen } from './utils';
+import { KeyValueMap } from '../types';
+import { fire } from './utils';
 
 /**
  * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.

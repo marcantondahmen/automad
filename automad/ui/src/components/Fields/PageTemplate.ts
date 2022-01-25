@@ -34,24 +34,14 @@
 
 import { classes, titleCase } from '../../core/utils';
 import { create } from '../../core/create';
-import { KeyValueMap, Theme } from '../../core/types';
+import {
+	KeyValueMap,
+	TemplateButtonStatus,
+	TemplateFieldData,
+	Theme,
+} from '../../types';
 import { BaseComponent } from '../Base';
 import { App } from '../../core/app';
-
-interface TemplateFieldData {
-	pageData: KeyValueMap;
-	shared: KeyValueMap;
-	template: string;
-	themeKey: string;
-}
-
-interface ThemeStatus {
-	buttonLabel: string;
-	buttonClass: string;
-	buttonIcon: string;
-	selectedTemplate: string;
-	mainTheme: Theme;
-}
 
 /**
  * Beautify a template path to be used as name.
@@ -100,7 +90,7 @@ const themeStatus = ({
 	shared,
 	template,
 	themeKey,
-}: TemplateFieldData): ThemeStatus => {
+}: TemplateFieldData): TemplateButtonStatus => {
 	const themes = App.themes;
 	let mainTheme = themes[shared[themeKey]];
 

@@ -32,44 +32,30 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../../types';
-import { BaseLayoutComponent } from './BaseLayout';
-import sidebar from './Templates/SidebarLayout.html';
+import { KeyValueMap, Theme } from '.';
+import { SwitcherSectionComponent } from '../components/SwitcherSection';
 
-/**
- * The Automad base component. All Automad components are based on this class.
- *
- * @extends BaseLayoutComponent
- */
-export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
-	/**
-	 * The template for the view.
-	 */
-	protected template: string = sidebar;
+export type InputElement = HTMLInputElement | HTMLTextAreaElement;
 
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {
-		main: this.renderMainPartial,
-		save: this.renderSaveButtonPartial,
-	};
+export interface TemplateButtonStatus {
+	buttonLabel: string;
+	buttonClass: string;
+	buttonIcon: string;
+	selectedTemplate: string;
+	mainTheme: Theme;
+}
 
-	/**
-	 * Render the main partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderMainPartial(): string {
-		return '';
-	}
+export interface TemplateFieldData {
+	pageData: KeyValueMap;
+	shared: KeyValueMap;
+	template: string;
+	themeKey: string;
+}
 
-	/**
-	 * Render the save button partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderSaveButtonPartial(): string {
-		return '';
-	}
+export interface FieldGroupData {
+	section: SwitcherSectionComponent;
+	keys: string[];
+	pageData: KeyValueMap;
+	tooltips: KeyValueMap;
+	removable: boolean;
 }

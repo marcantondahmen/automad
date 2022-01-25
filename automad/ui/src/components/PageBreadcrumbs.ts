@@ -35,9 +35,8 @@
 import { classes, getPageURL } from '../core/utils';
 import { create } from '../core/create';
 import { requestController } from '../core/request';
-import { KeyValueMap } from '../core/types';
+import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
-import { App } from '../core/app';
 
 /**
  * A breadcrumbs nav for a page.

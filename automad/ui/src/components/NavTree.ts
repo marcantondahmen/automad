@@ -41,24 +41,10 @@ import {
 	queryParents,
 } from '../core/utils';
 import { create } from '../core/create';
-import { KeyValueMap } from '../core/types';
+import { KeyValueMap, NavTreeItem, NavTreePageData } from '../types';
 import { BaseComponent } from './Base';
 import { App } from '../core/app';
 import { routePage } from '../core/router';
-
-interface Page {
-	url: string;
-	title: string;
-	path: string;
-	parent: string;
-	private: boolean;
-}
-
-interface NavItem {
-	wrapper: HTMLElement;
-	link: HTMLElement;
-	children: HTMLElement;
-}
 
 /**
  * The navigation tree component.
@@ -91,7 +77,7 @@ class NavTreeComponent extends BaseComponent {
 	 * Init the navTree.
 	 */
 	private init(): void {
-		const pages: Page[] = App.navTree as Page[];
+		const pages: NavTreePageData[] = App.navTree as NavTreePageData[];
 		const tree: KeyValueMap = {};
 		let parent: HTMLElement;
 
@@ -120,7 +106,10 @@ class NavTreeComponent extends BaseComponent {
 	 * @param parent - the children container of the parent tree node
 	 * @returns the NavItem object
 	 */
-	private createItem(page: Page, parent: HTMLElement): NavItem {
+	private createItem(
+		page: NavTreePageData,
+		parent: HTMLElement
+	): NavTreeItem {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
 			'details',

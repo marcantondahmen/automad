@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { Route } from '../types';
 import { App } from './app';
 
 export const routeHome = 'home';
@@ -40,15 +41,13 @@ export const routeShared = 'shared';
 export const routePackages = 'packages';
 export const routePage = 'page';
 
-const routes = [
+export const routes = [
 	routeHome,
 	routeSystem,
 	routeShared,
 	routePackages,
 	routePage,
 ] as const;
-
-export type Route = typeof routes[number];
 
 /**
  * Get the page slug from a dashboard URL.

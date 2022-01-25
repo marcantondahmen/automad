@@ -35,7 +35,7 @@
 import Toastify from 'toastify-js';
 import { query } from './utils';
 import { create } from './create';
-import { KeyValueMap } from './types';
+import { KeyValueMap } from '../types';
 
 const defaults: Toastify.Options = {
 	close: false,

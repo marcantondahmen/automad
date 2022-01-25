@@ -32,24 +32,22 @@
  * Licensed under the MIT license.
  */
 
-export interface KeyValueMap {
-	[key: string | number]: any;
-}
+import { KeyValueMap } from '.';
+import { SwitcherSectionComponent } from '../components/SwitcherSection';
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
+export type PageSectionName = 'settings' | 'text' | 'colors';
 
-export interface Theme {
-	author: string;
-	description: string;
-	license: string;
-	name: string;
-	path: string;
-	readme: string;
-	templates: string[];
-	tooltips: KeyValueMap;
-	version?: string;
-}
+export type PageSectionCollection = {
+	[name in PageSectionName]: SwitcherSectionComponent;
+};
 
-export interface ThemeCollection {
-	[key: string]: Theme;
+export interface PageMainSettingsData {
+	section: SwitcherSectionComponent;
+	url: string;
+	prefix: string;
+	slug: string;
+	pageData: KeyValueMap;
+	shared: KeyValueMap;
+	reserved: KeyValueMap;
+	template: string;
 }

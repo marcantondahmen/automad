@@ -42,7 +42,7 @@ import {
 } from '../../core/utils';
 import { notifyError } from '../../core/notify';
 import { requestController } from '../../core/request';
-import { InputElement, KeyValueMap } from '../../core/types';
+import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
 
 /**

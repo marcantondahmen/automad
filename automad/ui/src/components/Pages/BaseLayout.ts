@@ -32,7 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { Partials, renderTemplate } from '../../core/template';
+import { renderTemplate } from '../../core/template';
+import { Partials } from '../../types';
 import { BaseComponent } from '../Base';
 
 /**

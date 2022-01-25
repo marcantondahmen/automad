@@ -35,7 +35,7 @@
 import { AutocompleteComponent } from './Autocomplete';
 import { create } from '../core/create';
 import { classes, keyCombo } from '../core/utils';
-import { KeyValueMap } from '../core/types';
+import { KeyValueMap } from '../types';
 import { App } from '../core/app';
 
 /**

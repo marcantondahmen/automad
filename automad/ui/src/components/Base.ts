@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap } from '../core/types';
+import { KeyValueMap } from '../types';
 
 /**
  * The Automad base component. All Automad components are based on this class.

@@ -34,36 +34,17 @@
 
 import { classes, keyCombo, query } from '../../core/utils';
 import { create } from '../../core/create';
-import { KeyValueMap } from '../../core/types';
+import {
+	FieldGroupData,
+	KeyValueMap,
+	PageMainSettingsData,
+	PageSectionCollection,
+	PageSectionName,
+} from '../../types';
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { App } from '../../core/app';
 import { SwitcherSectionComponent } from '../SwitcherSection';
-
-type SwitcherSectionName = 'settings' | 'text' | 'colors';
-
-type SwitcherSectionCollection = {
-	[name in SwitcherSectionName]: SwitcherSectionComponent;
-};
-
-interface FieldGroupData {
-	section: SwitcherSectionComponent;
-	keys: string[];
-	pageData: KeyValueMap;
-	tooltips: KeyValueMap;
-	removable: boolean;
-}
-
-interface MainSettingsData {
-	section: SwitcherSectionComponent;
-	url: string;
-	prefix: string;
-	slug: string;
-	pageData: KeyValueMap;
-	shared: KeyValueMap;
-	reserved: KeyValueMap;
-	template: string;
-}
 
 /**
  * Create a form field and set its data.
@@ -140,14 +121,14 @@ const fieldGroup = ({
  * @param form - the main page data form that serves as wrapper
  * @returns the switcher section collection
  */
-const createSections = (form: PageDataComponent): SwitcherSectionCollection => {
+const createSections = (form: PageDataComponent): PageSectionCollection => {
 	const createSection = (key: string): SwitcherSectionComponent => {
 		return create('am-switcher-section', [], { name: content[key] }, form);
 	};
 
 	const content = App.sections.content;
 
-	const sections: SwitcherSectionCollection = {
+	const sections: PageSectionCollection = {
 		settings: createSection('settings'),
 		text: createSection('text'),
 		colors: createSection('colors'),
@@ -171,7 +152,7 @@ export class PageDataComponent extends FormComponent {
 	/**
 	 * The section collection object.
 	 */
-	private sections: SwitcherSectionCollection;
+	private sections: PageSectionCollection;
 
 	/**
 	 * Enable watching.
@@ -227,7 +208,7 @@ export class PageDataComponent extends FormComponent {
 		shared,
 		reserved,
 		template,
-	}: MainSettingsData): void {
+	}: PageMainSettingsData): void {
 		/**
 		 * Create a field for one of the main settings.
 		 *
@@ -370,7 +351,7 @@ export class PageDataComponent extends FormComponent {
 			template,
 		});
 
-		Object.keys(this.sections).forEach((item: SwitcherSectionName) => {
+		Object.keys(this.sections).forEach((item: PageSectionName) => {
 			fieldGroup({
 				section: this.sections[item],
 				keys: keys[item],

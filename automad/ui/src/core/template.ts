@@ -32,11 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import { Partials } from '../types';
 import { App } from './app';
-
-export interface Partials {
-	[key: string]: any;
-}
 
 /**
  * Render a template.

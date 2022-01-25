@@ -32,44 +32,63 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../../types';
-import { BaseLayoutComponent } from './BaseLayout';
-import sidebar from './Templates/SidebarLayout.html';
+import { routes } from '../core/router';
 
-/**
- * The Automad base component. All Automad components are based on this class.
- *
- * @extends BaseLayoutComponent
- */
-export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
-	/**
-	 * The template for the view.
-	 */
-	protected template: string = sidebar;
+export {
+	InputElement,
+	TemplateButtonStatus,
+	TemplateFieldData,
+	FieldGroupData,
+} from './form';
 
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {
-		main: this.renderMainPartial,
-		save: this.renderSaveButtonPartial,
-	};
+export {
+	PageSectionName,
+	PageSectionCollection,
+	PageMainSettingsData,
+} from './page';
 
-	/**
-	 * Render the main partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderMainPartial(): string {
-		return '';
-	}
+export interface KeyValueMap {
+	[key: string | number]: any;
+}
 
-	/**
-	 * Render the save button partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderSaveButtonPartial(): string {
-		return '';
-	}
+export interface AutocompleteItem {
+	element: HTMLElement;
+	value: string;
+	item: KeyValueMap;
+}
+
+export interface NavTreePageData {
+	url: string;
+	title: string;
+	path: string;
+	parent: string;
+	private: boolean;
+}
+
+export interface NavTreeItem {
+	wrapper: HTMLElement;
+	link: HTMLElement;
+	children: HTMLElement;
+}
+
+export interface Partials {
+	[key: string]: any;
+}
+
+export type Route = typeof routes[number];
+
+export interface Theme {
+	author: string;
+	description: string;
+	license: string;
+	name: string;
+	path: string;
+	readme: string;
+	templates: string[];
+	tooltips: KeyValueMap;
+	version?: string;
+}
+
+export interface ThemeCollection {
+	[key: string]: Theme;
 }

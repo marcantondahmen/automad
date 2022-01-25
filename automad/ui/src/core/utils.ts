@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Route } from './router';
-import { KeyValueMap } from './types';
+import { KeyValueMap, Route } from '../types';
 
 declare global {
 	interface Event {

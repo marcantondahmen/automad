@@ -33,7 +33,7 @@
  */
 
 import { classes } from '../core/utils';
-import { KeyValueMap } from '../core/types';
+import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 import { App } from '../core/app';
 

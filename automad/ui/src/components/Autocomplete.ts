@@ -35,14 +35,8 @@
 import { BaseComponent } from './Base';
 import { classes, debounce, listen } from '../core/utils';
 import { create } from '../core/create';
-import { KeyValueMap } from '../core/types';
+import { AutocompleteItem, KeyValueMap } from '../types';
 import { App } from '../core/app';
-
-export interface Item {
-	element: HTMLElement;
-	value: string;
-	item: KeyValueMap;
-}
 
 /**
  * An input field with page autocompletion.
@@ -72,12 +66,12 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * Autocompletion items.
 	 */
-	protected items: Item[] = [];
+	protected items: AutocompleteItem[] = [];
 
 	/**
 	 * The filtered autocompletion items.
 	 */
-	protected itemsFiltered: Item[];
+	protected itemsFiltered: AutocompleteItem[];
 
 	/**
 	 * The selected index.
