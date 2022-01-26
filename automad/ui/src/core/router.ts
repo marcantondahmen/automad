@@ -33,23 +33,12 @@
  */
 
 import { App } from '.';
-import { Route } from '../types';
 
-export const routeLogin = 'login';
-export const routeHome = 'home';
-export const routeSystem = 'system';
-export const routeShared = 'shared';
-export const routePackages = 'packages';
-export const routePage = 'page';
-
-export const routes = [
-	routeLogin,
-	routeHome,
-	routeSystem,
-	routeShared,
-	routePackages,
-	routePage,
-] as const;
+export enum Routes {
+	login,
+	home,
+	page,
+}
 
 /**
  * Get the page slug from a dashboard URL.
@@ -68,7 +57,7 @@ const getSlug = (): string => {
  * @returns true if the route is a defined route
  */
 const isValidRoute = (route: string) => {
-	return route && routes.includes(route as Route);
+	return route && route in Routes;
 };
 
 /**
@@ -76,14 +65,14 @@ const isValidRoute = (route: string) => {
  *
  * @returns a valid route or redirect in case the slug is unknown
  */
-export const getRouteOrRedirect = (): Route => {
+export const getRouteOrRedirect = (): string => {
 	const slug = getSlug();
 
 	if (isValidRoute(slug)) {
-		return slug as Route;
+		return slug;
 	}
 
-	window.location.href = `${App.dashboardURL}/${routeHome}`;
+	window.location.href = `${App.dashboardURL}/${Routes[Routes.home]}`;
 };
 
 /**
@@ -92,6 +81,6 @@ export const getRouteOrRedirect = (): Route => {
  * @param route
  * @returns the tag namm
  */
-export const getTagFromRoute = (route: Route): string => {
+export const getTagFromRoute = (route: string): string => {
 	return `am-${route}`;
 };

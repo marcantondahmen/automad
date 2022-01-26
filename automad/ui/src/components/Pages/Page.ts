@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, routePage } from '../../core';
+import { App, getTagFromRoute, Routes } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 import html from './Templates/Page.html';
 
@@ -63,4 +63,4 @@ export class PageComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(routePage), PageComponent);
+customElements.define(getTagFromRoute(Routes[Routes.page]), PageComponent);

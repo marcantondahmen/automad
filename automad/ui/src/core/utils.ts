@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Route } from '../types';
+import { KeyValueMap } from '../types';
 
 declare global {
 	interface Event {
@@ -161,7 +161,7 @@ export const htmlSpecialChars = (value: string): string => {
  * @param slug
  * @returns true if the slug mathes the URL path
  */
-export const isActivePage = (slug: Route): boolean => {
+export const isActivePage = (slug: string): boolean => {
 	const regex = new RegExp(`\/${slug}\$`, 'i');
 	return window.location.pathname.match(regex) != null;
 };

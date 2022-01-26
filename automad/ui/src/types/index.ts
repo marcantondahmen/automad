@@ -32,8 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import { routes } from '../core/router';
-
 export * from './form';
 export * from './page';
 
@@ -64,8 +62,6 @@ export interface NavTreeItem {
 export interface Partials {
 	[key: string]: any;
 }
-
-export type Route = typeof routes[number];
 
 export interface Theme {
 	author: string;

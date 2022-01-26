@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { getTagFromRoute, routeLogin } from '../../core';
+import { getTagFromRoute, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
@@ -60,4 +60,4 @@ export class LoginComponent extends CenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(routeLogin), LoginComponent);
+customElements.define(getTagFromRoute(Routes[Routes.login]), LoginComponent);
