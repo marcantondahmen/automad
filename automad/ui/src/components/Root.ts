@@ -32,11 +32,15 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../core/app';
-import { create } from '../core/create';
-import { waitForPendingRequests } from '../core/request';
-import { getRouteOrRedirect, getTagFromRoute } from '../core/router';
-import { classes, query } from '../core/utils';
+import {
+	classes,
+	App,
+	getRouteOrRedirect,
+	create,
+	getTagFromRoute,
+	waitForPendingRequests,
+	query,
+} from '../core';
 import { BaseComponent } from './Base';
 
 /**

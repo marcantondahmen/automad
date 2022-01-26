@@ -32,9 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, getPageURL } from '../core/utils';
-import { create } from '../core/create';
-import { requestController } from '../core/request';
+import { classes, requestController, getPageURL, create } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 

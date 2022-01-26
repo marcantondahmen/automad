@@ -33,8 +33,7 @@
  */
 
 import Toastify from 'toastify-js';
-import { query } from './utils';
-import { create } from './create';
+import { query, create } from '.';
 import { KeyValueMap } from '../types';
 
 const defaults: Toastify.Options = {

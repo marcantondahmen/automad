@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { App } from './app';
+import { App, fire } from '.';
 import { KeyValueMap } from '../types';
-import { fire } from './utils';
 
 /**
  * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.

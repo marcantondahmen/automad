@@ -26,49 +26,29 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { renderTemplate } from '../../core';
-import { Partials } from '../../types';
-import { BaseComponent } from '../Base';
+import { getTagFromRoute, routeHome } from '../../core';
+import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
- * The base view component.
+ * The page view.
  *
- * @extends BaseComponent
+ * @extends SidebarLayoutComponent
  */
-export abstract class BaseLayoutComponent extends BaseComponent {
+export class HomeComponent extends SidebarLayoutComponent {
 	/**
-	 * The template for the view.
-	 */
-	protected template = '';
-
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {};
-
-	/**
-	 * The public init function that is called on the created element in order to
-	 * init the view befor it is connected.
+	 * Render the main partial.
 	 *
-	 * @returns the rendered view
+	 * @returns the rendered HTML
 	 */
-	init(): HTMLElement {
-		this.setDocumentTitle();
-		this.innerHTML = renderTemplate(this.template, this.partials);
-
-		return this;
-	}
-
-	/**
-	 * Set the document title.
-	 */
-	protected setDocumentTitle(): void {
-		document.title = 'Automad';
+	protected renderMainPartial(): string {
+		return 'Home';
 	}
 }
+
+customElements.define(getTagFromRoute(routeHome), HomeComponent);

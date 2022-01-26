@@ -34,17 +34,17 @@
 
 import {
 	classes,
+	create,
+	App,
 	getPageURL,
 	isActivePage,
+	routePage,
 	query,
-	queryAll,
 	queryParents,
-} from '../core/utils';
-import { create } from '../core/create';
+	queryAll,
+} from '../core';
 import { KeyValueMap, NavTreeItem, NavTreePageData } from '../types';
 import { BaseComponent } from './Base';
-import { App } from '../core/app';
-import { routePage } from '../core/router';
 
 /**
  * The navigation tree component.

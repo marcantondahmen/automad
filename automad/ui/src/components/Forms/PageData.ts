@@ -32,8 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import { classes, keyCombo, query } from '../../core/utils';
-import { create } from '../../core/create';
 import {
 	FieldGroupData,
 	KeyValueMap,
@@ -43,8 +41,8 @@ import {
 } from '../../types';
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
-import { App } from '../../core/app';
 import { SwitcherSectionComponent } from '../SwitcherSection';
+import { App, classes, create, keyCombo, query } from '../../core';
 
 /**
  * Create a form field and set its data.

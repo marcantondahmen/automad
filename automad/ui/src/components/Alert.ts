@@ -32,10 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { classes } from '../core/utils';
+import { classes, App } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
-import { App } from '../core/app';
 
 /**
  * A simple alert box component.

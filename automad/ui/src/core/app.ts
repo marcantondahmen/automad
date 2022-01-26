@@ -33,7 +33,7 @@
  */
 
 import { RootComponent } from '../components/Root';
-import { request, requestController } from './request';
+import { request, requestController } from '.';
 import { KeyValueMap, ThemeCollection } from '../types';
 
 /**

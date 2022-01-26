@@ -32,10 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { classes, htmlSpecialChars, titleCase } from '../../core/utils';
-import { create } from '../../core/create';
+import { App, classes, create, htmlSpecialChars, titleCase } from '../../core';
 import { BaseComponent } from '../Base';
-import { App } from '../../core/app';
 
 interface FieldInitData {
 	key: string;

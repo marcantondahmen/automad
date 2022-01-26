@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { debounce, listen } from '../core/utils';
+import { debounce, listen } from '../core';
 import { BaseComponent } from './Base';
 
 /**

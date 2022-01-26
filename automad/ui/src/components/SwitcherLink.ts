@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from './Base';
-import { classes, listen } from '../core/utils';
+import { classes, listen } from '../core';
 import {
 	getActiveSection,
 	setActiveSection,

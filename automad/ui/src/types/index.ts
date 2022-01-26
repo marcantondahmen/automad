@@ -34,18 +34,8 @@
 
 import { routes } from '../core/router';
 
-export {
-	InputElement,
-	TemplateButtonStatus,
-	TemplateFieldData,
-	FieldGroupData,
-} from './form';
-
-export {
-	PageSectionName,
-	PageSectionCollection,
-	PageMainSettingsData,
-} from './page';
+export * from './form';
+export * from './page';
 
 export interface KeyValueMap {
 	[key: string | number]: any;

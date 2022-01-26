@@ -32,9 +32,10 @@
  * Licensed under the MIT license.
  */
 
+import { App } from '.';
 import { Route } from '../types';
-import { App } from './app';
 
+export const routeLogin = 'login';
 export const routeHome = 'home';
 export const routeSystem = 'system';
 export const routeShared = 'shared';
@@ -42,6 +43,7 @@ export const routePackages = 'packages';
 export const routePage = 'page';
 
 export const routes = [
+	routeLogin,
 	routeHome,
 	routeSystem,
 	routeShared,

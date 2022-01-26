@@ -33,7 +33,7 @@
  */
 
 import { Partials } from '../types';
-import { App } from './app';
+import { App } from '.';
 
 /**
  * Render a template.

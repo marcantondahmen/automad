@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../core/app';
-import { listen } from '../core/utils';
+import { listen, App } from '../core';
 import { BaseComponent } from './Base';
 
 /**

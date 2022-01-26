@@ -26,49 +26,38 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { renderTemplate } from '../../core';
-import { Partials } from '../../types';
-import { BaseComponent } from '../Base';
+import { getTagFromRoute, routeLogin } from '../../core';
+import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
- * The base view component.
+ * The page view.
  *
- * @extends BaseComponent
+ * @extends CenteredLayoutComponent
  */
-export abstract class BaseLayoutComponent extends BaseComponent {
+export class LoginComponent extends CenteredLayoutComponent {
 	/**
-	 * The template for the view.
-	 */
-	protected template = '';
-
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {};
-
-	/**
-	 * The public init function that is called on the created element in order to
-	 * init the view befor it is connected.
+	 * Render the main partial.
 	 *
-	 * @returns the rendered view
+	 * @returns the rendered HTML
 	 */
-	init(): HTMLElement {
-		this.setDocumentTitle();
-		this.innerHTML = renderTemplate(this.template, this.partials);
-
-		return this;
+	protected renderMainPartial(): string {
+		return 'Login';
 	}
 
 	/**
-	 * Set the document title.
+	 * Render the navbar title partial.
+	 *
+	 * @returns the rendered HTML
 	 */
-	protected setDocumentTitle(): void {
-		document.title = 'Automad';
+	protected renderTitlePartial(): string {
+		return 'Login here ...';
 	}
 }
+
+customElements.define(getTagFromRoute(routeLogin), LoginComponent);

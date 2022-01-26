@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../../core/app';
-import { getTagFromRoute, routePage } from '../../core/router';
+import { App, getTagFromRoute, routePage } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 import html from './Templates/Page.html';
 

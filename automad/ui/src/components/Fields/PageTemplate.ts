@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, titleCase } from '../../core/utils';
-import { create } from '../../core/create';
+import { App, classes, create, titleCase } from '../../core';
 import {
 	KeyValueMap,
 	TemplateButtonStatus,
@@ -41,7 +40,6 @@ import {
 	Theme,
 } from '../../types';
 import { BaseComponent } from '../Base';
-import { App } from '../../core/app';
 
 /**
  * Beautify a template path to be used as name.

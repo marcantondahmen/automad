@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, queryAll } from '../core/utils';
+import { listen, queryAll } from '../core';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
 

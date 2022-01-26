@@ -33,10 +33,8 @@
  */
 
 import { BaseComponent } from './Base';
-import { classes, debounce, listen } from '../core/utils';
-import { create } from '../core/create';
 import { AutocompleteItem, KeyValueMap } from '../types';
-import { App } from '../core/app';
+import { App, classes, create, listen, debounce } from '../core';
 
 /**
  * An input field with page autocompletion.

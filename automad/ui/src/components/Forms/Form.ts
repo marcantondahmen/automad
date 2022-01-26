@@ -37,11 +37,11 @@ import {
 	debounce,
 	getPageURL,
 	listen,
+	notifyError,
 	query,
 	queryAll,
-} from '../../core/utils';
-import { notifyError } from '../../core/notify';
-import { requestController } from '../../core/request';
+	requestController,
+} from '../../core';
 import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
 

@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from './Base';
-import { listen, query } from '../core/utils';
+import { listen, query } from '../core';
 import {
 	getActiveSection,
 	switcherChangeEventName,

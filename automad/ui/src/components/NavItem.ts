@@ -32,8 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App } from '../core/app';
-import { classes, isActivePage } from '../core/utils';
+import { classes, isActivePage, App } from '../core';
 import { BaseComponent } from './Base';
 
 /**

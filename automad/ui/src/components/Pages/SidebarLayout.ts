@@ -34,7 +34,7 @@
 
 import { Partials } from '../../types';
 import { BaseLayoutComponent } from './BaseLayout';
-import sidebar from './Templates/SidebarLayout.html';
+import layout from './Templates/SidebarLayout.html';
 
 /**
  * The Automad base component. All Automad components are based on this class.
@@ -45,7 +45,7 @@ export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
 	/**
 	 * The template for the view.
 	 */
-	protected template: string = sidebar;
+	protected template: string = layout;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
