@@ -34,54 +34,44 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Utils;
-
-use Automad\Core\Automad;
-use Automad\Core\Cache;
-use Automad\Core\Debug;
+namespace Automad\API\Utils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The UI cache is the cache of the main Automad object including private pages that are
- * only accessible when a user is logged in.
+ * The Messenger object allows for pushing error messages to the calling method in order to separate return values from error details.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class UICache {
+class Messenger {
 	/**
-	 * Restore Automad object including private pages from cache or create
-	 * a new version and write it to the cache if outdated.
-	 *
-	 * @return object the Automad object
+	 * The last pushed error.
 	 */
-	public static function get() {
-		$Cache = new Cache();
+	private $error = null;
 
-		if ($Cache->automadObjectCacheIsApproved()) {
-			$Automad = $Cache->readAutomadObjectFromCache();
-		} else {
-			$Automad = new Automad();
-			$Cache->writeAutomadObjectToCache($Automad);
-			Debug::log('Created a new Automad instance for the dashboard');
-		}
-
-		return $Automad;
+	/**
+	 * The messenger constructor.
+	 */
+	public function __construct() {
 	}
 
 	/**
-	 * Force a rebuild of the UI cache.
+	 * Return the stored error message.
 	 *
-	 * @return object The fresh Automad object
+	 * @return string|null the error message
 	 */
-	public static function rebuild() {
-		$Automad = new Automad();
-		$Cache = new Cache();
-		$Cache->writeAutomadObjectToCache($Automad);
-		Debug::log('Rebuilt Automad cache for the dashboard');
+	public function getError() {
+		return $this->error;
+	}
 
-		return $Automad;
+	/**
+	 * Set the last error.
+	 *
+	 * @param string $message
+	 */
+	public function setError(string $message) {
+		$this->error = $message;
 	}
 }

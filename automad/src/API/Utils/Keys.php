@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Utils;
+namespace Automad\API\Utils;
 
 use Automad\Core\Page;
 use Automad\Engine\PatternAssembly;
@@ -71,9 +71,9 @@ class Keys {
 	 * @return array The array with only text variables.
 	 */
 	public static function filterColorKeys(array $keys) {
-		return array_filter($keys, function ($key) {
+		return array_values(array_filter($keys, function ($key) {
 			return preg_match('/^color/', $key);
-		});
+		}));
 	}
 
 	/**
@@ -85,9 +85,9 @@ class Keys {
 	public static function filterSettingKeys(array $keys) {
 		sort($keys);
 
-		return array_filter($keys, function ($key) {
+		return array_values(array_filter($keys, function ($key) {
 			return (preg_match('/^(text|\+|color)/', $key) == false);
-		});
+		}));
 	}
 
 	/**
@@ -97,9 +97,9 @@ class Keys {
 	 * @return array The array with only text variables.
 	 */
 	public static function filterTextKeys(array $keys) {
-		return array_filter($keys, function ($key) {
+		return array_values(array_filter($keys, function ($key) {
 			return preg_match('/^(text|\+)/', $key);
-		});
+		}));
 	}
 
 	/**

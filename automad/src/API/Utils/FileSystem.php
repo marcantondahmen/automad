@@ -27,14 +27,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * Copyright (c) 2016-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Utils;
+namespace Automad\API\Utils;
 
 use Automad\Core\Automad;
 use Automad\Core\FileSystem as CoreFileSystem;
@@ -49,7 +49,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The FileSystem class provides all methods related to file system operations.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class FileSystem extends CoreFileSystem {

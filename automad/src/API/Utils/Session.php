@@ -27,24 +27,24 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * Copyright (c) 2016-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Utils;
+namespace Automad\API\Utils;
 
-use Automad\UI\Models\UserCollectionModel;
+use Automad\API\Models\UserCollectionModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Session model class provides all methods related to a user session.
+ * The Session util class provides all methods related to a user session.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2016-2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Session {
@@ -101,11 +101,7 @@ class Session {
 			session_regenerate_id(true);
 			$_SESSION['username'] = $User->name;
 
-			// In case of using a proxy,
-			// it is safer to just refresh the current page instead of rebuilding the currently requested URL.
-			header('Refresh:0');
-
-			exit();
+			return true;
 		}
 
 		return false;
