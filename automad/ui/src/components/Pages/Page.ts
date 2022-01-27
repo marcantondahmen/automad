@@ -34,7 +34,7 @@
 
 import { App, getTagFromRoute, Routes } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
-import html from './Templates/Page.html';
+import main from './Templates/Page.html';
 
 /**
  * The page view.
@@ -48,7 +48,7 @@ export class PageComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return html;
+		return main;
 	}
 
 	/**
@@ -57,7 +57,7 @@ export class PageComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderSaveButtonPartial(): string {
-		return `<am-submit form="PageController::data">${App.text(
+		return `<am-submit form="Page/data">${App.text(
 			'btn_save'
 		)}</am-submit>`;
 	}
