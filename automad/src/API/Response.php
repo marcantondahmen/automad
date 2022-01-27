@@ -27,14 +27,14 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI;
+namespace Automad\API;
 
 use Automad\Core\Debug;
 
@@ -44,24 +44,14 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Response class.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Response {
 	/**
-	 * The output buffer for autocomplete JSON data.
+	 * The main response data object.
 	 */
-	private $autocomplete = null;
-
-	/**
-	 * The output buffer used by Composer commands.
-	 */
-	private $buffer = null;
-
-	/**
-	 * The output buffer used by CLI commands.
-	 */
-	private $cli = null;
+	private $data = null;
 
 	/**
 	 * The debug output buffer.
@@ -74,11 +64,6 @@ class Response {
 	private $error = null;
 
 	/**
-	 * The main rendered output of a view or component.
-	 */
-	private $html = null;
-
-	/**
 	 * The output buffer used to store a redirect URL.
 	 */
 	private $redirect = null;
@@ -89,55 +74,15 @@ class Response {
 	private $reload = null;
 
 	/**
-	 * The status output buffer.
-	 */
-	private $status = null;
-
-	/**
 	 * The output buffer used for success notifications.
 	 */
 	private $success = null;
-
-	/**
-	 * The output buffer used to store the event name that is triggered after sending a response.
-	 */
-	private $trigger = null;
 
 	/**
 	 * The output constructor.
 	 */
 	public function __construct() {
 		Debug::log('Instanciated new Response instance');
-	}
-
-	/**
-	 * Get the buffer property.
-	 *
-	 * @see $buffer
-	 * @return string $buffer
-	 */
-	public function getBuffer() {
-		return $this->buffer;
-	}
-
-	/**
-	 * Get the cli property.
-	 *
-	 * @see $cli
-	 * @return string $cli
-	 */
-	public function getCli() {
-		return $this->cli;
-	}
-
-	/**
-	 * Get the error property.
-	 *
-	 * @see $error
-	 * @return string $error
-	 */
-	public function getError() {
-		return $this->error;
 	}
 
 	/**
@@ -152,33 +97,13 @@ class Response {
 	}
 
 	/**
-	 * Set the autocomplete property.
+	 * Set the response data.
 	 *
-	 * @see $autocomplete
-	 * @param array $values
+	 * @see $data
+	 * @param array $data
 	 */
-	public function setAutocomplete(array $values) {
-		$this->autocomplete = $values;
-	}
-
-	/**
-	 * Set the buffer property.
-	 *
-	 * @see $buffer
-	 * @param string|null $buffer
-	 */
-	public function setBuffer(?string $buffer = null) {
-		$this->buffer = $buffer;
-	}
-
-	/**
-	 * Set the cli property.
-	 *
-	 * @see $cli
-	 * @param string|null $value
-	 */
-	public function setCli(?string $value = null) {
-		$this->cli = $value;
+	public function setData(array $data) {
+		$this->data = $data;
 	}
 
 	/**
@@ -202,16 +127,6 @@ class Response {
 	}
 
 	/**
-	 * Set the html property.
-	 *
-	 * @see $html
-	 * @param string|null $html
-	 */
-	public function setHtml(?string $html = null) {
-		$this->html = $html;
-	}
-
-	/**
 	 * Set the redirect property.
 	 *
 	 * @see $redirect
@@ -232,16 +147,6 @@ class Response {
 	}
 
 	/**
-	 * Set the status property.
-	 *
-	 * @see $status
-	 * @param string|null $value
-	 */
-	public function setStatus(?string $value = null) {
-		$this->status = $value;
-	}
-
-	/**
 	 * Set the success property.
 	 *
 	 * @see $success
@@ -249,15 +154,5 @@ class Response {
 	 */
 	public function setSuccess(?string $value = null) {
 		$this->success = $value;
-	}
-
-	/**
-	 * Set the trigger property.
-	 *
-	 * @see $trigger
-	 * @param string $value
-	 */
-	public function setTrigger(string $value) {
-		$this->trigger = $value;
 	}
 }
