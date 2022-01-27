@@ -39,7 +39,11 @@ export enum Routes {
 	login,
 	resetpassword,
 	logout,
+	search,
 	home,
+	system,
+	shared,
+	packages,
 	page,
 }
 

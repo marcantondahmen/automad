@@ -95,7 +95,7 @@ class Jumpbar {
 	private static function packages() {
 		return array(
 			array(
-				'target' => 'Packages',
+				'target' => 'packages',
 				'value' => Text::get('packages_title'),
 				'title' => Text::get('packages_title'),
 				'subtitle' => '',
