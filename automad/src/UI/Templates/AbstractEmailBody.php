@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Components\Email;
+namespace Automad\UI\Templates;
 
 use Automad\UI\Utils\Text;
 
