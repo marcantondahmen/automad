@@ -27,7 +27,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2014-2021 by Marc Anton Dahmen
+ * Copyright (c) 2014-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -36,93 +36,43 @@
 
 namespace Automad\UI;
 
-use Automad\Core\Debug;
+use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The dashboard class handles all user interactions using the dashboard.
+ * The base for all dashboard views.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2014-2021 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2014-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class Dashboard {
-	/**
-	 * Get the JSON response for a requested API route
-	 *
-	 * @param string $apiRoute
-	 * @return string the JSON formatted response
-	 */
-	public static function api(string $apiRoute) {
-		Debug::log($apiRoute);
+	public static function render() {
+		$fn = function ($expression) {
+			return $expression;
+		};
 
-		$method = __NAMESPACE__ . '\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
-		$parts = explode('::', $method);
-		$class = $parts[0];
-
-		header('Content-Type: application/json; charset=utf-8');
-
-		if (!empty($parts[1]) && self::classFileExists($class) && method_exists($class, $parts[1])) {
-			self::registerControllerErrorHandler();
-			$Response = call_user_func($method);
-		} else {
-			http_response_code(404);
-			$Response = new Response();
-		}
-
-		$Response->setDebug(Debug::getLog());
-
-		return $Response->json();
-	}
-
-	/**
-	 * Get the rendered requested view.
-	 *
-	 * @param string $view
-	 * @return string the rendered view
-	 */
-	public static function view(string $view) {
-		Debug::log($view);
-
-		$class = __NAMESPACE__ . '\\Views\\' . $view;
-
-		if (!$view || !self::classFileExists($class)) {
-			header('Location: ' . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/Home', true, 301);
-			exit();
-		}
-
-		$object = new $class;
-
-		return $object->render();
-	}
-
-	/**
-	 * Test whether a file of a given class is readable.
-	 *
-	 * @param string $className
-	 * @return bool true in case the file is readable.
-	 */
-	private static function classFileExists(string $className) {
-		$prefix = 'Automad\\';
-		$file = AM_BASE_DIR . '/automad/src/' . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
-
-		return is_readable($file);
-	}
-
-	/**
-	 * Register a error handler that sends a 500 response code in case of a fatal error created by a controller.
-	 */
-	private static function registerControllerErrorHandler() {
-		error_reporting(0);
-
-		register_shutdown_function(function () {
-			$error = error_get_last();
-
-			if (is_array($error) && !empty($error['type']) && $error['type'] === 1) {
-				http_response_code(500);
-				exit(json_encode($error, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-			}
-		});
+		return <<< HTML
+			<!DOCTYPE html>
+			<html lang="en" class="am-ui">
+			<head>
+				<meta charset="utf-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<meta name="robots" content="noindex">
+				<meta
+				name="viewport"
+				content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+				>
+				<title>Automad</title>
+				{$fn(Asset::icon('favicon.ico'))}
+				{$fn(Asset::css('ui.bundle.css'))}
+				{$fn(Asset::js('ui.bundle.js'))}
+			</head>
+			<body>
+				<am-root base="{$fn(AM_BASE_INDEX)}"></am-root>
+			</body>
+			</html>
+			HTML;
 	}
 }
