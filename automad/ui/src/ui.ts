@@ -51,7 +51,12 @@ import './components/Fields/Url';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 
+import './components/Pages/Home';
+import './components/Pages/Login';
+import './components/Pages/Logout';
 import './components/Pages/Page';
+import './components/Pages/ResetPassword';
+import './components/Pages/Setup';
 
 import './components/Alert';
 import './components/Autocomplete';

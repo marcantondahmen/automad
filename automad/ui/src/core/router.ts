@@ -35,7 +35,10 @@
 import { App } from '.';
 
 export enum Routes {
+	setup,
 	login,
+	resetpassword,
+	logout,
 	home,
 	page,
 }
