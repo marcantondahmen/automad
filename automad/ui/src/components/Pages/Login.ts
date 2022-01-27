@@ -34,6 +34,7 @@
 
 import { getTagFromRoute, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
+import main from './Templates/Login.html';
 
 /**
  * The page view.
@@ -47,7 +48,7 @@ export class LoginComponent extends CenteredLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return 'Login';
+		return main;
 	}
 
 	/**
