@@ -34,14 +34,14 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\API\Models;
 
+use Automad\API\Utils\FileSystem;
+use Automad\API\Utils\Messenger;
+use Automad\API\Utils\Session;
 use Automad\System\Server;
 use Automad\Types\User;
-use Automad\UI\Components\Email\InvitationEmail;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\Messenger;
-use Automad\UI\Utils\Session;
+use Automad\UI\Templates\InvitationEmail;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -299,7 +299,7 @@ class UserCollectionModel {
 	 */
 	public function sendInvitation(string $username, string $email, Messenger $Messenger) {
 		$website = $_SERVER['SERVER_NAME'] . AM_BASE_URL;
-		$link = Server::url() . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=ResetPassword&username=' . urlencode($username);
+		$link = Server::url() . AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/ResetPassword&username=' . urlencode($username);
 		$subject = 'Automad: ' . Text::get('email_invite_subject');
 		$message = InvitationEmail::render($website, $username, $link);
 		$headers = "MIME-Version: 1.0\r\n";
