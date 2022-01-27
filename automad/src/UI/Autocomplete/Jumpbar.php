@@ -34,11 +34,10 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Components\Autocomplete;
+namespace Automad\UI\Autocomplete;
 
 use Automad\Core\Automad;
 use Automad\Core\Selection;
-use Automad\UI\Response;
 use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
 
@@ -53,15 +52,12 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Jumpbar {
 	/**
-	 * Return a JSON formatted string to be used as autocomplete infomation in a jump field.
-	 *
-	 * The collected data consists of all page titles, URLs and all available tags.
+	 * Generate the autocomplete object for the jumpbar.
 	 *
 	 * @param Automad $Automad
-	 * @return Response the response object
+	 * @return array
 	 */
 	public static function render(Automad $Automad) {
-		$Response = new Response();
 		$values = array();
 
 		$values = array_merge($values, self::search());
@@ -71,9 +67,7 @@ class Jumpbar {
 		$values = array_merge($values, self::packages());
 		$values = array_merge($values, self::pages($Automad->getCollection()));
 
-		$Response->setAutocomplete($values);
-
-		return $Response;
+		return $values;
 	}
 
 	/**
@@ -84,7 +78,7 @@ class Jumpbar {
 	private static function inPage() {
 		return array(
 			array(
-				'url' => AM_BASE_INDEX,
+				'external' => AM_BASE_INDEX,
 				'value' => Text::get('btn_inpage_edit'),
 				'title' => Text::get('btn_inpage_edit'),
 				'subtitle' => '',
@@ -101,11 +95,11 @@ class Jumpbar {
 	private static function packages() {
 		return array(
 			array(
-				'url' => AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Packages',
+				'target' => 'Packages',
 				'value' => Text::get('packages_title'),
 				'title' => Text::get('packages_title'),
 				'subtitle' => '',
-				'icon' => 'download'
+				'icon' => 'box-seam'
 			)
 		);
 	}
@@ -124,7 +118,7 @@ class Jumpbar {
 
 		foreach ($Selection->getSelection(false) as $Page) {
 			$item = array();
-			$item['url'] = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Page&url=' . urlencode($Page->origUrl);
+			$item['target'] = 'page?url=' . urlencode($Page->origUrl);
 			$item['value'] = $Page->get(AM_KEY_TITLE) . ' ' . $Page->origUrl;
 			$item['title'] = $Page->get(AM_KEY_TITLE);
 			$item['subtitle'] = $Page->origUrl;
@@ -148,7 +142,7 @@ class Jumpbar {
 	private static function search() {
 		return array(
 			array(
-				'url' => AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Search',
+				'target' => 'search',
 				'value' => Text::get('search_title'),
 				'title' => Text::get('search_title'),
 				'subtitle' => '',
@@ -163,61 +157,61 @@ class Jumpbar {
 	 * @return array the generated items
 	 */
 	private static function settings() {
-		$sysUrl = AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=System#';
+		$sysUrl = 'system?section=';
 		$sections = SwitcherSections::get();
 
 		return array(
 			array(
-				'url' => $sysUrl . $sections->system->cache,
+				'target' => $sysUrl . $sections->system->cache,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_cache'),
 				'title' => Text::get('sys_cache'),
 				'subtitle' => '',
 				'icon' => 'lightning'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->users,
+				'target' => $sysUrl . $sections->system->users,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_user'),
 				'title' => Text::get('sys_user'),
 				'subtitle' => '',
 				'icon' => 'people'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->update,
+				'target' => $sysUrl . $sections->system->update,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_update'),
 				'title' => Text::get('sys_update'),
 				'subtitle' => '',
 				'icon' => 'arrow-repeat'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->feed,
+				'target' => $sysUrl . $sections->system->feed,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_feed'),
 				'title' => Text::get('sys_feed'),
 				'subtitle' => '',
 				'icon' => 'rss'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->language,
+				'target' => $sysUrl . $sections->system->language,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_language'),
 				'title' => Text::get('sys_language'),
 				'subtitle' => '',
 				'icon' => 'flag'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->headless,
+				'target' => $sysUrl . $sections->system->headless,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_headless'),
 				'title' => Text::get('sys_headless'),
 				'subtitle' => '',
 				'icon' => 'cloud'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->debug,
+				'target' => $sysUrl . $sections->system->debug,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_debug'),
 				'title' => Text::get('sys_debug'),
 				'subtitle' => '',
 				'icon' => 'bug'
 			),
 			array(
-				'url' => $sysUrl . $sections->system->config,
+				'target' => $sysUrl . $sections->system->config,
 				'value' => Text::get('sys_title') . ' ' . Text::get('sys_config'),
 				'title' => Text::get('sys_config'),
 				'subtitle' => '',
@@ -234,11 +228,11 @@ class Jumpbar {
 	private static function shared() {
 		return array(
 			array(
-				'url' => AM_BASE_INDEX . AM_PAGE_DASHBOARD . '?view=Shared',
+				'target' => 'shared',
 				'value' => Text::get('shared_title') . ' shared',
 				'title' => Text::get('shared_title'),
 				'subtitle' => '',
-				'icon' => 'globe'
+				'icon' => 'file-earmark-medical'
 			)
 		);
 	}
