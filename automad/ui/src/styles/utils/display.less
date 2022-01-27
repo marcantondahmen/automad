@@ -36,4 +36,16 @@
 	&-none {
 		display: none;
 	}
+
+	&-none-small {
+		@media (max-width: @l-breakpoint-medium-max) {
+			display: none;
+		}
+	}
+
+	&-small {
+		@media (min-width: @l-breakpoint-medium) {
+			display: none;
+		}
+	}
 }

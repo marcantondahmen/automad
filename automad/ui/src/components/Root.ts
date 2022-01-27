@@ -35,7 +35,7 @@
 import {
 	classes,
 	App,
-	getRouteOrRedirect,
+	getValidRouteOrRedirect,
 	create,
 	getTagFromRoute,
 	waitForPendingRequests,
@@ -60,7 +60,7 @@ export class RootComponent extends BaseComponent {
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['dashboard'];
+		return ['base'];
 	}
 
 	/**
@@ -92,7 +92,7 @@ export class RootComponent extends BaseComponent {
 
 		this.progressBar(50);
 
-		const route = getRouteOrRedirect();
+		const route = getValidRouteOrRedirect();
 		const page = create(getTagFromRoute(route), [], {}).init();
 
 		this.progressBar(70);

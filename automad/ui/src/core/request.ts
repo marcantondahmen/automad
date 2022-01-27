@@ -36,7 +36,8 @@ import { App, fire } from '.';
 import { KeyValueMap } from '../types';
 
 /**
- * Request a given URL and optionally post an object as data. When no data is passed, the request mehod will automatically be `GET`.
+ * Request a given URL and optionally post an object as data.
+ * When no data is passed, the request mehod will automatically be `GET`.
  *
  * @param url
  * @param [data]
@@ -65,40 +66,21 @@ export const request = async (
 };
 
 /**
- * Use the `request` function to send a request to a dashboard URL.
+ * Send a request to an API endpoint such as `Page/data`.
  *
  * @see {@link request}
- * @param slug
+ * @param route
  * @param [data]
  * @returns the Promise
  * @async
  */
-const requestDashboard = async (
-	slug: string,
-	data: KeyValueMap = null
-): Promise<Response> => {
-	return request(`${App.dashboardURL}${slug}`, data);
-};
-
-/**
- * Use the `requestDashboard` function to send a request to a controller such as `PageController::data`.
- * The controller will automatically converted to the `Page/data` route.
- *
- * @see {@link request}
- * @see {@link requestDashboard}
- * @param controller
- * @param [data]
- * @returns the Promise
- * @async
- */
-export const requestController = async (
-	controller: string,
+export const requestAPI = async (
+	route: string,
 	data: KeyValueMap = null
 ): Promise<KeyValueMap> => {
 	PendingRequests.add();
 
-	const route = controller.replace('Controller::', '/');
-	const response = await requestDashboard(`/api/${route}`, data);
+	const response = await request(`${App.baseURL}/api/${route}`, data);
 	const responseData = await response.json();
 
 	PendingRequests.remove();

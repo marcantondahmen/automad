@@ -38,13 +38,13 @@ import { FormComponent } from './Forms/Form';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.
- * The "form" attribute uses the controller of the related form to connect.
+ * The "form" attribute uses the api of the related form to connect.
  *
  * @example
- * <am-form controller="Class::method" watch>
+ * <am-form api="Class/method" watch>
  *     <input name="title">
  * </am-form>
- * <am-submit form="Class::method">Submit</am-submit>
+ * <am-submit form="Class/method">Submit</am-submit>
  *
  * @extends BaseComponent
  */
@@ -62,7 +62,7 @@ class SubmitComponent extends BaseComponent {
 	 * The forms that are submitted by this button.
 	 */
 	get relatedForms(): Element[] {
-		return queryAll(`[controller="${this.elementAttributes.form}"]`);
+		return queryAll(`[api="${this.elementAttributes.form}"]`);
 	}
 
 	/**

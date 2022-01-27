@@ -40,7 +40,7 @@ import {
 	notifyError,
 	query,
 	queryAll,
-	requestController,
+	requestAPI,
 } from '../../core';
 import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
@@ -49,7 +49,7 @@ import { BaseComponent } from '../Base';
  * A basic form.
  *
  * The following options are available and can be passed as attributes:
- * - `controller` (required)
+ * - `api` (required)
  * - `init`
  * - `watch`
  * - `focus`
@@ -58,12 +58,12 @@ import { BaseComponent } from '../Base';
  * Self initialized form with watched submit button:
  *
  * @example
- * <am-form controller="Class::method" init watch></am-form>
+ * <am-form api="Class/method" init watch></am-form>
  *
  * Focus the first input of a for when being connected:
  *
  * @example
- * <am-form controller="Class::method" focus>
+ * <am-form api="Class/method" focus>
  *     <input>
  * </am-form>
  *
@@ -81,10 +81,10 @@ export class FormComponent extends BaseComponent {
 	protected watchChanges: boolean = false;
 
 	/**
-	 * Get the controller attribute already before attributes are observed.
+	 * Get the api attribute already before attributes are observed.
 	 */
-	protected get controller(): string {
-		return this.getAttribute('controller');
+	protected get api(): string {
+		return this.getAttribute('api');
 	}
 
 	/**
@@ -98,9 +98,7 @@ export class FormComponent extends BaseComponent {
 	 * All related submit buttons.
 	 */
 	protected get submitButtons(): HTMLElement[] {
-		return queryAll(
-			`am-submit[form="${this.elementAttributes.controller}"]`
-		);
+		return queryAll(`am-submit[form="${this.api}"]`);
 	}
 
 	/**
@@ -220,10 +218,7 @@ export class FormComponent extends BaseComponent {
 	 * @async
 	 */
 	async submit(): Promise<void> {
-		const response = await requestController(
-			this.controller,
-			this.formData
-		);
+		const response = await requestAPI(this.api, this.formData);
 
 		if (this.watchChanges) {
 			this.disbableButtons();
@@ -240,16 +235,16 @@ export class FormComponent extends BaseComponent {
 	 * @param response
 	 */
 	protected processResponse(response: KeyValueMap): void {
-		if (response.error) {
-			notifyError(response.error);
-		}
-
 		if (response.redirect) {
 			window.location.href = response.redirect;
 		}
 
 		if (response.reload) {
 			window.location.reload();
+		}
+
+		if (response.error) {
+			notifyError(response.error);
 		}
 	}
 

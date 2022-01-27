@@ -141,8 +141,8 @@ const createSections = (form: PageDataComponent): PageSectionCollection => {
  * as this is anyways the intended behavior.
  *
  * @example
- * <am-page-data controller="PageController::data"></am-page-data>
- * <am-submit form="PageController::data">Submit</am-submit>
+ * <am-page-data api="Page/data"></am-page-data>
+ * <am-submit form="Page/data">Submit</am-submit>
  *
  * @extends FormComponent
  */
@@ -305,6 +305,8 @@ export class PageDataComponent extends FormComponent {
 	 * @param response - the response data
 	 */
 	protected processResponse(response: KeyValueMap): void {
+		super.processResponse(response);
+
 		if (typeof response.data == 'undefined') {
 			this.pageNotFound();
 

@@ -65,11 +65,15 @@
 	}
 
 	&__jump {
-		display: flex;
+		display: none;
 		justify-self: center;
 		max-width: @l-main-width;
 		padding: 0 var(--am-body-padding-horizontal);
 		flex-grow: 1;
+
+		@media (min-width: @l-breakpoint-small) {
+			display: flex;
+		}
 
 		@media (min-width: @l-breakpoint-large) {
 			width: @l-main-width;

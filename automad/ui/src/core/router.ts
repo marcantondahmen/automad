@@ -61,11 +61,12 @@ const isValidRoute = (route: string) => {
 };
 
 /**
- * Get the slug from the page URL or redirect to the home page in case the route is invalid.
+ * Get the slug from the page URL or redirect to
+ * the home/login page in case the rout is invalid.
  *
- * @returns a valid route or redirect in case the slug is unknown
+ * @returns a valid route the home page in case the slug is unknown
  */
-export const getRouteOrRedirect = (): string => {
+export const getValidRouteOrRedirect = (): string => {
 	const slug = getSlug();
 
 	if (isValidRoute(slug)) {

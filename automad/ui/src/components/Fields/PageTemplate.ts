@@ -274,7 +274,7 @@ class PageTemplateComponent extends BaseComponent {
 					</am-modal-close>
 					<am-submit 
 					class="${classes.button} ${classes.buttonSuccess}" 
-					form="PageController::data"
+					form="Page/data"
 					>
 						${App.text('btn_apply_reload')}
 					</am-submit>

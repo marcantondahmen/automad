@@ -50,15 +50,15 @@ import { BaseComponent } from './Base';
  * The navigation tree component.
  *
  * @example
- * <am-nav-tree controller="UIController::navTree"></am-nav-tree>
+ * <am-nav-tree api="UI/navTree"></am-nav-tree>
  *
  * @extends BaseComponent
  */
 class NavTreeComponent extends BaseComponent {
 	/**
-	 * The controller.
+	 * The api endpoint.
 	 */
-	protected controller = 'UIController::navTree';
+	protected api = 'UI/navTree';
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -77,7 +77,7 @@ class NavTreeComponent extends BaseComponent {
 	 * Init the navTree.
 	 */
 	private init(): void {
-		const pages: NavTreePageData[] = App.navTree as NavTreePageData[];
+		const pages: NavTreePageData[] = App.pages as NavTreePageData[];
 		const tree: KeyValueMap = {};
 		let parent: HTMLElement;
 

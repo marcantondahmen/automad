@@ -33,7 +33,7 @@
  */
 
 import { RootComponent } from '../components/Root';
-import { request, requestController } from '.';
+import { request, requestAPI } from '.';
 import { KeyValueMap, ThemeCollection } from '../types';
 
 /**
@@ -81,8 +81,8 @@ export class App {
 	/**
 	 * The pages array used to build the nav tree.
 	 */
-	static get navTree(): KeyValueMap[] {
-		return this._state.navTree;
+	static get pages(): KeyValueMap[] {
+		return this._state.pages;
 	}
 
 	/**
@@ -133,8 +133,8 @@ export class App {
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
-		const api = `${root.elementAttributes.dashboard}/api`;
-		const response = await request(`${api}/UI/bootstrap`);
+		const api = `${root.elementAttributes.base}/api`;
+		const response = await request(`${api}/App/bootstrap`);
 		const json = await response.json();
 
 		this._root = root;
@@ -145,7 +145,7 @@ export class App {
 	 * Update the state according to a change of view.
 	 */
 	static async updateState(): Promise<void> {
-		const response = await requestController('UIController::updateState');
+		const response = await requestAPI('App/updateState');
 
 		this._state = Object.assign(this._state, response.data);
 	}

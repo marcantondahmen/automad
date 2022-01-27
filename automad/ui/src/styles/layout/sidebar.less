@@ -37,7 +37,7 @@
 	background-color: var(--am-bg-base);
 	border-right: var(--am-hairline);
 
-	@media (max-width: @l-breakpoint-medium) {
+	@media (max-width: @l-breakpoint-medium-max) {
 		position: fixed;
 		z-index: 110;
 		top: 0;
@@ -61,7 +61,7 @@
 	&__overlay {
 		display: none;
 
-		@media (max-width: @l-breakpoint-medium) {
+		@media (max-width: @l-breakpoint-medium-max) {
 			display: block;
 			position: fixed;
 			z-index: 100;
@@ -90,9 +90,23 @@
 	&__logo {
 		grid-row: 1 / span 2;
 		padding: 0 var(--am-body-padding-horizontal);
+
+		@media (max-width: @l-breakpoint-small-max) {
+			display: none;
+		}
 	}
 
 	&__nav {
-		grid-row: 3 / span 1;
+		grid-row: 1 / span 3;
+
+		@media (min-width: @l-breakpoint-medium) {
+			grid-row: 3 / span 1;
+		}
+	}
+
+	&__jump {
+		@media (min-width: @l-breakpoint-small) {
+			display: none;
+		}
 	}
 }

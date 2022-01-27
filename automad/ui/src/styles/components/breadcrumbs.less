@@ -32,32 +32,12 @@
  * Licensed under the MIT license.
  */
 
-.am-l-page {
-	position: relative;
-	display: grid;
-	align-items: start;
-	grid-template-rows:
-		[top]
-		var(--am-navbar-height)
-		[nav-bottom]
-		var(--am-space-top)
-		[main-top]
-		auto
-		[footer-top]
-		auto
-		[bottom];
+.am-c-breadcrumbs {
+	display: flex;
+	gap: var(--am-flex-gap);
+	min-height: 2.4rem;
 
-	&--sidebar {
-		grid-template-columns: 0px 100%;
-
-		@media (min-width: @l-breakpoint-medium) {
-			grid-template-columns: @l-sidebar-width auto;
-		}
-	}
-
-	@media (max-width: @l-breakpoint-medium-max) {
-		&--sidebar-open {
-			overflow: hidden;
-		}
+	&__item {
+		cursor: pointer;
 	}
 }

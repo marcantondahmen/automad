@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, requestController, getPageURL, create } from '../core';
+import { classes, requestAPI, getPageURL, create, Routes } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 
@@ -60,10 +60,9 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	private async init(): Promise<void> {
 		this.classList.add(classes.breadcrumbs);
 
-		const response = await requestController(
-			'PageController::breadcrumbs',
-			{ url: getPageURL() }
-		);
+		const response = await requestAPI('Page/breadcrumbs', {
+			url: getPageURL(),
+		});
 
 		this.render(response.data);
 	}
@@ -75,7 +74,9 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	 */
 	private render(data: KeyValueMap): void {
 		data.forEach((page: KeyValueMap) => {
-			const target = `Page?url=${encodeURIComponent(page.url)}`;
+			const target = `${Routes[Routes.page]}?url=${encodeURIComponent(
+				page.url
+			)}`;
 
 			const link = create(
 				'am-link',
