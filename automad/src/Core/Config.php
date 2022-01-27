@@ -97,9 +97,6 @@ class Config {
 		// An optional base protocol/domain combination for the sitemap.xml in case of being behind a proxy.
 		self::set('AM_BASE_SITEMAP', '');
 
-		// Get the requested URL.
-		define('AM_REQUEST', Request::page());
-
 		// Define all constants which are not defined yet by the config file.
 		// DIR
 		self::set('AM_DIR_PAGES', '/pages');
@@ -120,10 +117,10 @@ class Config {
 		self::set('AM_FILE_SHARED_DATA', AM_BASE_DIR . AM_DIR_SHARED . '/data.' . AM_FILE_EXT_DATA);
 		self::set('AM_FILE_SITE_MTIME', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_site_mtime');
 		self::set('AM_FILE_OBJECT_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object');
-		self::set('AM_FILE_OBJECT_USER_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_user');
+		self::set('AM_FILE_OBJECT_API_CACHE', AM_BASE_DIR . AM_DIR_CACHE . '/' . AM_FILE_PREFIX_CACHE . '_automad_object_api');
 		self::set('AM_FILE_ACCOUNTS', AM_BASE_DIR . '/config/accounts.php');
-		self::set('AM_FILE_GUI_TEXT_MODULES', AM_BASE_DIR . '/automad/ui/lang/english.txt');
-		self::set('AM_FILE_GUI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
+		self::set('AM_FILE_UI_TEXT_MODULES', AM_BASE_DIR . '/automad/ui/lang/english.txt');
+		self::set('AM_FILE_UI_TRANSLATION', ''); // Base dir will be added automatically to enable external configuration.
 		self::set(
 			'AM_ALLOWED_FILE_TYPES',
 			// Archives

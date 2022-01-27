@@ -43,6 +43,7 @@ use Automad\Core\Debug;
 use Automad\Core\Feed;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
+use Automad\Core\Request;
 use Automad\Core\Router;
 use Automad\Core\Sitemap;
 use Automad\Engine\View;
@@ -84,6 +85,8 @@ class App {
 		Config::defaults();
 
 		Debug::errorReporting();
+
+		define('AM_REQUEST', Request::page());
 
 		$this->runPermissionCheck();
 		$this->startSession();

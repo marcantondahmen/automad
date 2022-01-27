@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\UI\Utils\Session;
+use Automad\API\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -136,7 +136,7 @@ class Cache {
 			if (Session::getUsername()) {
 				$this->pageCachingIsEnabled = false;
 				Debug::log('Page cache is disabled during editing.');
-				$this->objectCacheFile = AM_FILE_OBJECT_USER_CACHE;
+				$this->objectCacheFile = AM_FILE_OBJECT_API_CACHE;
 				Debug::log($this->objectCacheFile, 'Using separate object cache during editing.');
 			}
 

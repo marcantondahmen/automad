@@ -36,8 +36,8 @@
 
 namespace Automad\Core;
 
+use Automad\API\Utils\Session;
 use Automad\System\Server;
-use Automad\UI\Utils\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
