@@ -136,6 +136,42 @@ export const getPageURL = (): string => {
 };
 
 /**
+ * Handle the rendering of template literals and optionally escape values
+ * that are preceeded with a `$`.
+ *
+ * @example
+ * return html`
+ *     <p>${ value }</p>
+ *     <p>$${ escapedValue }</p>
+ * `;
+ *
+ * @see {@link 2ality https://2ality.com/2015/01/template-strings-html.html#the-template-handler}
+ * @param strings
+ * @param values
+ * @returns the rendered template
+ */
+export const html = (strings: any, ...values: any[]): string => {
+	let raw = strings.raw;
+
+	let result = '';
+
+	values.forEach((value, i) => {
+		let section = raw[i];
+
+		if (section.endsWith('$')) {
+			value = htmlSpecialChars(value);
+			section = section.slice(0, -1);
+		}
+
+		result += section + value;
+	});
+
+	result += raw[raw.length - 1];
+
+	return result;
+};
+
+/**
  * Convert all HTML special characters.
  *
  * @param value

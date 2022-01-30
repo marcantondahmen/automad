@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, requestAPI, getPageURL, create, Routes } from '../core';
+import { classes, requestAPI, getPageURL, create, Routes, html } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 
@@ -85,7 +85,8 @@ class PageBreadcrumbsComponent extends BaseComponent {
 				this
 			);
 
-			link.innerHTML = `<i class="bi bi-chevron-right"></i> ${page.title}`;
+			link.innerHTML = html`<i class="bi bi-chevron-right"></i>
+				$${page.title}`;
 		});
 	}
 }

@@ -34,7 +34,7 @@
 
 import { AutocompleteComponent } from './Autocomplete';
 import { KeyValueMap } from '../types';
-import { App, keyCombo, create, classes } from '../core';
+import { App, keyCombo, create, classes, html } from '../core';
 
 /**
  * The Jumpbar field element.
@@ -119,12 +119,10 @@ class JumpbarComponent extends AutocompleteComponent {
 	 * @returns the HTML string
 	 */
 	private itemHtml(icon: string, title: string, subtitle: string): string {
-		return `
+		return html`
 			<i class="bi bi-${icon}"></i>
-			<span>${title}</span>
-			<span class="${classes.muted}">
-				${subtitle}
-			</span>
+			<span>$${title}</span>
+			<span class="${classes.muted}">$${subtitle}</span>
 		`;
 	}
 

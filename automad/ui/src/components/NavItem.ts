@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, isActivePage, App } from '../core';
+import { classes, isActivePage, App, html } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -72,10 +72,10 @@ class NavItemComponent extends BaseComponent {
 	 * @returns the rendered HTML
 	 */
 	render(): string {
-		return `
-			<am-link 
-			target="${this.elementAttributes.page}" 
-			class="${classes.navLink}"
+		return html`
+			<am-link
+				target="${this.elementAttributes.page}"
+				class="${classes.navLink}"
 			>
 				<i class="bi bi-${this.elementAttributes.icon}"></i>
 				<span>${App.text(this.elementAttributes.text)}</span>

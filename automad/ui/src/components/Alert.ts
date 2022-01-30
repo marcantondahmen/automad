@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, App } from '../core';
+import { classes, App, html } from '../core';
 import { KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 
@@ -73,7 +73,7 @@ class AlertComponent extends BaseComponent {
 			this.classList.add(types[this.elementAttributes.type]);
 		}
 
-		this.innerHTML = `
+		this.innerHTML = html`
 			<div class="${classes.alertIcon}">
 				<i class="bi bi-${this.elementAttributes.icon}"></i>
 			</div>

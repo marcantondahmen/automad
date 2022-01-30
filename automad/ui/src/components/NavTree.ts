@@ -42,6 +42,7 @@ import {
 	queryParents,
 	queryAll,
 	Routes,
+	html,
 } from '../core';
 import { KeyValueMap, NavTreeItem, NavTreePageData } from '../types';
 import { BaseComponent } from './Base';
@@ -135,10 +136,14 @@ class NavTreeComponent extends BaseComponent {
 			icon = 'file-earmark-lock2-fill';
 		}
 
-		link.innerHTML = `
-			<am-link target="${Routes[Routes.page]}?url=${encodeURIComponent(page.url)}">
+		link.innerHTML = html`
+			<am-link
+				target="${Routes[Routes.page]}?url=${encodeURIComponent(
+					page.url
+				)}"
+			>
 				<i class="bi bi-${icon}"></i>
-				<span>${page.title}</span>
+				<span>$${page.title}</span>
 			</am-link>
 		`;
 

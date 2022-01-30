@@ -34,7 +34,7 @@
 
 import { BaseComponent } from './Base';
 import { AutocompleteItem, KeyValueMap } from '../types';
-import { App, classes, create, listen, debounce } from '../core';
+import { App, classes, create, listen, debounce, html } from '../core';
 
 /**
  * An input field with page autocompletion.
@@ -154,9 +154,9 @@ export class AutocompleteComponent extends BaseComponent {
 	protected createItemElement(item: KeyValueMap): HTMLElement {
 		const element = create('a', [classes.dropdownItem], {});
 
-		element.innerHTML = `
+		element.innerHTML = html`
 			<i class="bi bi-link"></i>
-			<span>${item.title}</span>
+			<span>$${item.title}</span>
 		`;
 
 		return element;
