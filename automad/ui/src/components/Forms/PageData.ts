@@ -35,6 +35,7 @@
 import {
 	FieldGroupData,
 	KeyValueMap,
+	PageFieldGroups,
 	PageMainSettingsData,
 	PageSectionCollection,
 	PageSectionName,
@@ -42,7 +43,7 @@ import {
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../SwitcherSection';
-import { App, classes, create, keyCombo, query } from '../../core';
+import { App, classes, create, html, keyCombo, query } from '../../core';
 
 /**
  * Create a form field and set its data.
@@ -74,15 +75,8 @@ const createField = (
  * @param params.keys - the array of variable keys for the field group
  * @param params.pageData - the data object that was loaded from the page's data file
  * @param params.tooltips - the field tooltips
- * @param params.removable - true if the field should be removable
  */
-const fieldGroup = ({
-	section,
-	keys,
-	pageData,
-	tooltips,
-	removable,
-}: FieldGroupData): void => {
+const fieldGroup = ({ section, fields, tooltips }: FieldGroupData): void => {
 	const prefixMap = {
 		'+': 'am-editor',
 		checkbox: 'am-checkbox-page',
@@ -93,7 +87,7 @@ const fieldGroup = ({
 		url: 'am-url',
 	};
 
-	keys.forEach((key) => {
+	Object.keys(fields).forEach((key) => {
 		let fieldType = 'am-textarea';
 
 		for (const [prefix, value] of Object.entries(prefixMap)) {
@@ -105,10 +99,9 @@ const fieldGroup = ({
 
 		createField(fieldType, section, {
 			key: key,
-			value: pageData[key],
+			value: fields[key],
 			tooltip: tooltips[key],
 			name: `data[${key}]`,
-			removable,
 		});
 	});
 };
@@ -133,6 +126,38 @@ const createSections = (form: PageDataComponent): PageSectionCollection => {
 	};
 
 	return sections;
+};
+
+/**
+ * Split the incoming fields into predifend groups.
+ *
+ * @param fields
+ * @returns the field groups
+ */
+const prepareFieldGroups = (fields: KeyValueMap): PageFieldGroups => {
+	const groups: PageFieldGroups = {
+		settings: {},
+		text: {},
+		colors: {},
+	};
+
+	Object.keys(fields).forEach((name) => {
+		const match = name.match(/^(\+|text|color|.)/);
+
+		switch (match[1]) {
+			case '+':
+			case 'text':
+				groups.text[name] = fields[name];
+				break;
+			case 'color':
+				groups.colors[name] = fields[name];
+				break;
+			default:
+				groups.settings[name] = fields[name];
+		}
+	});
+
+	return groups;
 };
 
 /**
@@ -202,9 +227,8 @@ export class PageDataComponent extends FormComponent {
 		url,
 		prefix,
 		slug,
-		pageData,
+		fields,
 		shared,
-		reserved,
 		template,
 	}: PageMainSettingsData): void {
 		/**
@@ -222,7 +246,7 @@ export class PageDataComponent extends FormComponent {
 		): FieldComponent => {
 			const data = {
 				key,
-				value: pageData[key],
+				value: fields[key],
 				name: `data[${key}]`,
 				label,
 			};
@@ -230,32 +254,35 @@ export class PageDataComponent extends FormComponent {
 			return createField(fieldType, section, data, []);
 		};
 
-		const title = createMainField('am-field', reserved['AM_KEY_TITLE']);
+		const title = createMainField(
+			'am-field',
+			App.reservedFields.AM_KEY_TITLE
+		);
 
 		query('input', title).classList.add(classes.inputTitle);
 
 		create(
 			'a',
 			[],
-			{ href: `${App.baseURL}${pageData[reserved['AM_KEY_URL']]}` },
+			{ href: `${App.baseURL}${fields[App.reservedFields.AM_KEY_URL]}` },
 			section
-		).innerHTML = pageData[reserved['AM_KEY_URL']] || url;
+		).innerHTML = fields[App.reservedFields.AM_KEY_URL] || url;
 
-		createMainField('am-checkbox-large', reserved['AM_KEY_PRIVATE']);
+		createMainField('am-checkbox-large', App.reservedFields.AM_KEY_PRIVATE);
 
 		createField(
 			'am-page-template',
 			section,
 			{
-				pageData,
+				fields,
 				shared,
 				template,
-				themeKey: reserved['AM_KEY_THEME'],
+				themeKey: App.reservedFields.AM_KEY_THEME,
 			},
 			[]
 		);
 
-		createMainField('am-checkbox', reserved['AM_KEY_HIDDEN']);
+		createMainField('am-checkbox', App.reservedFields.AM_KEY_HIDDEN);
 
 		if (url != '/') {
 			createField('am-field', section, {
@@ -275,13 +302,13 @@ export class PageDataComponent extends FormComponent {
 
 		createMainField(
 			'am-url',
-			reserved['AM_KEY_URL'],
+			App.reservedFields.AM_KEY_URL,
 			App.text('page_redirect')
 		);
 
 		createMainField(
 			'am-page-tags',
-			reserved['AM_KEY_TAGS'],
+			App.reservedFields.AM_KEY_TAGS,
 			App.text('page_tags')
 		);
 	}
@@ -290,11 +317,11 @@ export class PageDataComponent extends FormComponent {
 	 * Show alert box for missing page.
 	 */
 	private pageNotFound() {
-		this.innerHTML = `
-			<am-alert 
-			icon="question-circle" 
-			text="error_page_not_found"
-			type="danger"
+		this.innerHTML = html`
+			<am-alert
+				icon="question-circle"
+				text="error_page_not_found"
+				type="danger"
 			></am-alert>
 		`;
 	}
@@ -315,57 +342,36 @@ export class PageDataComponent extends FormComponent {
 
 		this.watch();
 
-		const {
-			url,
-			prefix,
-			slug,
-			pageData,
-			shared,
-			template,
-			keys,
-			keysUnused,
-		} = response.data;
+		const { url, prefix, slug, fields, shared, template } = response.data;
 
-		const themeKey = keys.reserved['AM_KEY_THEME'];
+		const themeKey = App.reservedFields.AM_KEY_THEME;
 		const themes = App.themes;
-		const reserved = keys.reserved;
 
 		let tooltips = {};
 
-		try {
-			tooltips = themes[pageData[themeKey]].tooltips;
-		} catch (e) {
-			try {
-				tooltips = themes[shared[themeKey]].tooltips;
-			} catch (e) {}
+		if (fields[themeKey]) {
+			tooltips = themes[fields[themeKey]].tooltips;
+		} else {
+			tooltips = themes[shared[themeKey]].tooltips;
 		}
+
+		const fieldGroups = prepareFieldGroups(fields);
 
 		this.mainSettings({
 			section: this.sections.settings,
 			url,
 			prefix,
 			slug,
-			pageData,
+			fields,
 			shared,
-			reserved,
 			template,
 		});
 
 		Object.keys(this.sections).forEach((item: PageSectionName) => {
 			fieldGroup({
 				section: this.sections[item],
-				keys: keys[item],
-				pageData,
+				fields: fieldGroups[item],
 				tooltips,
-				removable: false,
-			});
-
-			fieldGroup({
-				section: this.sections[item],
-				keys: keysUnused[item],
-				pageData,
-				tooltips,
-				removable: true,
 			});
 		});
 	}

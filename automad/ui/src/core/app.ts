@@ -86,6 +86,13 @@ export class App {
 	}
 
 	/**
+	 * The map of reserved field names.
+	 */
+	static get reservedFields(): KeyValueMap {
+		return this._state.reservedFields;
+	}
+
+	/**
 	 * The section name map.
 	 */
 	static get sections(): KeyValueMap {

@@ -46,7 +46,7 @@ export interface TemplateButtonStatus {
 }
 
 export interface TemplateFieldData {
-	pageData: KeyValueMap;
+	fields: KeyValueMap;
 	shared: KeyValueMap;
 	template: string;
 	themeKey: string;
@@ -54,8 +54,6 @@ export interface TemplateFieldData {
 
 export interface FieldGroupData {
 	section: SwitcherSectionComponent;
-	keys: string[];
-	pageData: KeyValueMap;
+	fields: KeyValueMap;
 	tooltips: KeyValueMap;
-	removable: boolean;
 }

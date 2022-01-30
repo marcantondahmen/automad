@@ -41,13 +41,16 @@ export type PageSectionCollection = {
 	[name in PageSectionName]: SwitcherSectionComponent;
 };
 
+export type PageFieldGroups = {
+	[name in PageSectionName]: KeyValueMap;
+};
+
 export interface PageMainSettingsData {
 	section: SwitcherSectionComponent;
 	url: string;
 	prefix: string;
 	slug: string;
-	pageData: KeyValueMap;
+	fields: KeyValueMap;
 	shared: KeyValueMap;
-	reserved: KeyValueMap;
 	template: string;
 }

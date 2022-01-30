@@ -54,53 +54,15 @@ class Keys {
 	 * Array with reserved variable keys.
 	 */
 	public static $reserved = array(
-		AM_KEY_DATE,
-		AM_KEY_HIDDEN,
-		AM_KEY_PRIVATE,
-		AM_KEY_TAGS,
-		AM_KEY_THEME,
-		AM_KEY_TITLE,
-		AM_KEY_SITENAME,
-		AM_KEY_URL
+		'AM_KEY_DATE' => AM_KEY_DATE,
+		'AM_KEY_HIDDEN' => AM_KEY_HIDDEN,
+		'AM_KEY_PRIVATE' => AM_KEY_PRIVATE,
+		'AM_KEY_TAGS' => AM_KEY_TAGS,
+		'AM_KEY_THEME' => AM_KEY_THEME,
+		'AM_KEY_TITLE' => AM_KEY_TITLE,
+		'AM_KEY_SITENAME' => AM_KEY_SITENAME,
+		'AM_KEY_URL' => AM_KEY_URL
 	);
-
-	/**
-	 * Get color variable keys from an array of keys.
-	 *
-	 * @param array $keys
-	 * @return array The array with only text variables.
-	 */
-	public static function filterColorKeys(array $keys) {
-		return array_values(array_filter($keys, function ($key) {
-			return preg_match('/^color/', $key);
-		}));
-	}
-
-	/**
-	 * Get settings variable keys from an array of keys.
-	 *
-	 * @param array $keys
-	 * @return array The array with only settings variables.
-	 */
-	public static function filterSettingKeys(array $keys) {
-		sort($keys);
-
-		return array_values(array_filter($keys, function ($key) {
-			return (preg_match('/^(text|\+|color)/', $key) == false);
-		}));
-	}
-
-	/**
-	 * Get text variable keys from an array of keys.
-	 *
-	 * @param array $keys
-	 * @return array The array with only text variables.
-	 */
-	public static function filterTextKeys(array $keys) {
-		return array_values(array_filter($keys, function ($key) {
-			return preg_match('/^(text|\+)/', $key);
-		}));
-	}
 
 	/**
 	 * Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
@@ -197,6 +159,6 @@ class Keys {
 			});
 		}
 
-		return array_unique(array_diff($keys, self::$reserved));
+		return array_unique(array_diff($keys, array_values(self::$reserved)));
 	}
 }

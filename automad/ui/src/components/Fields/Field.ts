@@ -32,7 +32,14 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, htmlSpecialChars, titleCase } from '../../core';
+import {
+	App,
+	classes,
+	create,
+	html,
+	htmlSpecialChars,
+	titleCase,
+} from '../../core';
 import { BaseComponent } from '../Base';
 
 interface FieldInitData {
@@ -41,7 +48,6 @@ interface FieldInitData {
 	name: string;
 	tooltip: string;
 	label: string;
-	removable: boolean;
 }
 
 interface FieldRenderData extends Omit<FieldInitData, 'key'> {
@@ -98,18 +104,13 @@ export class FieldComponent extends BaseComponent {
 	 * @param params.name
 	 * @param params.tooltip
 	 * @param params.label
-	 * @param params.removable
 	 */
-	set data({ key, value, name, tooltip, label, removable }: FieldInitData) {
+	set data({ key, value, name, tooltip, label }: FieldInitData) {
 		const id = createId(key);
 
 		value = value || '';
 		tooltip = tooltip || '';
 		label = label || createLabel(key);
-
-		if (removable) {
-			label = `${label} (${App.text('page_var_unused')})`;
-		}
 
 		if (typeof value === 'string') {
 			value = htmlSpecialChars(value);
@@ -121,7 +122,6 @@ export class FieldComponent extends BaseComponent {
 			label,
 			value,
 			tooltip,
-			removable,
 		};
 
 		this.render();
@@ -131,20 +131,13 @@ export class FieldComponent extends BaseComponent {
 	 * Create a label.
 	 */
 	label(): void {
-		const { id, label, tooltip, removable } = this._data;
-		const removeButton = removable
-			? '<am-remove-field><i class="bi bi-trash"></i></am-remove-field>'
-			: '';
+		const { id, label, tooltip } = this._data;
 		const wrapper = create('div', [], {}, this);
 
-		wrapper.innerHTML = `
-			<label 
-			class="${classes.fieldLabel}" 
-			for="${id}" 
-			title="${tooltip}">
+		wrapper.innerHTML = html`
+			<label class="${classes.fieldLabel}" for="${id}" title="${tooltip}">
 				${label}
 			</label>
-			${removeButton}
 		`;
 	}
 

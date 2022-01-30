@@ -58,6 +58,8 @@ class PageController {
 	/**
 	 * Get a breadcrumb trail for a requested page.
 	 *
+	 * /api/Page/breadcrumbs
+	 *
 	 * @return Response the response data
 	 */
 	public static function breadcrumbs() {
@@ -87,6 +89,8 @@ class PageController {
 	/**
 	 * Send form when there is no posted data in the request or save data if there is.
 	 *
+	 * /api/Page/data
+	 *
 	 * @return Response the response object
 	 */
 	public static function data() {
@@ -105,7 +109,11 @@ class PageController {
 				$keys = Keys::inCurrentTemplate($Page, $Theme);
 				$data = Parse::dataFile(PageModel::getPageFilePath($Page));
 
-				$unusedKeys = array_values(array_diff(array_keys($data), $keys, Keys::$reserved));
+				$fields = array_merge(
+					array_fill_keys(Keys::$reserved, ''),
+					array_fill_keys($keys, ''),
+					$data
+				);
 
 				$Response->setData(
 					array(
@@ -113,28 +121,8 @@ class PageController {
 						'prefix' => PageModel::extractPrefixFromPath($Page->path),
 						'slug' => PageModel::extractSlugFromPath($Page->path),
 						'template' => $Page->getTemplate(),
-						'pageData' => $data,
-						'shared' => $Automad->Shared->data,
-						'keys' => array(
-							'reserved' => array(
-								'AM_KEY_DATE' => AM_KEY_DATE,
-								'AM_KEY_HIDDEN' => AM_KEY_HIDDEN,
-								'AM_KEY_PRIVATE' => AM_KEY_PRIVATE,
-								'AM_KEY_TAGS' => AM_KEY_TAGS,
-								'AM_KEY_THEME' => AM_KEY_THEME,
-								'AM_KEY_TITLE' => AM_KEY_TITLE,
-								'AM_KEY_SITENAME' => AM_KEY_SITENAME,
-								'AM_KEY_URL' => AM_KEY_URL
-							),
-							'settings' => Keys::filterSettingKeys($keys),
-							'text' => Keys::filterTextKeys($keys),
-							'colors' => Keys::filterColorKeys($keys)
-						),
-						'keysUnused' => array(
-							'settings' => Keys::filterSettingKeys($unusedKeys),
-							'text' => Keys::filterTextKeys($unusedKeys),
-							'colors' => Keys::filterColorKeys($unusedKeys)
-						)
+						'fields' => $fields,
+						'shared' => $Automad->Shared->data
 					)
 				);
 			}

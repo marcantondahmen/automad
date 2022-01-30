@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, titleCase } from '../../core';
+import { App, classes, create, html, titleCase } from '../../core';
 import {
 	KeyValueMap,
 	TemplateButtonStatus,
@@ -77,14 +77,14 @@ const templatePath = (template: string, path: string = ''): string => {
  * Get all status info about the selected template.
  *
  * @param params
- * @param params.pageData - the data object that was loaded from the page's data file
+ * @param params.fields - the data object that was loaded from the page's data file
  * @param params.shared - the shared data object
  * @param params.template - a template path
  * @param params.themeKey - the field name for themes
  * @returns the UI items the represent a theme status
  */
 const themeStatus = ({
-	pageData,
+	fields,
 	shared,
 	template,
 	themeKey,
@@ -103,8 +103,8 @@ const themeStatus = ({
 	let buttonIcon = 'file-earmark-code';
 	let buttonClass = 'success';
 
-	if (typeof themes[pageData[themeKey]] != 'undefined') {
-		appliedTheme = themes[pageData[themeKey]];
+	if (typeof themes[fields[themeKey]] != 'undefined') {
+		appliedTheme = themes[fields[themeKey]];
 		buttonLabel = titleCase(`${appliedTheme.name}/${selectedTemplate}`);
 		selectedTemplate = templatePath(template, appliedTheme.path);
 	}
@@ -197,13 +197,13 @@ class PageTemplateComponent extends BaseComponent {
 	 * The field data.
 	 *
 	 * @param {KeyValueMap} params
-	 * @param {KeyValueMap} params.pageData
+	 * @param {KeyValueMap} params.fields
 	 * @param {KeyValueMap} params.shared
 	 * @param {string} params.template
 	 * @param {string} params.themeKey
 	 */
-	set data({ pageData, shared, template, themeKey }: TemplateFieldData) {
-		this.render({ pageData, shared, template, themeKey });
+	set data({ fields, shared, template, themeKey }: TemplateFieldData) {
+		this.render({ fields, shared, template, themeKey });
 	}
 
 	/**
@@ -217,13 +217,13 @@ class PageTemplateComponent extends BaseComponent {
 	 * Render a template field button.
 	 *
 	 * @param params
-	 * @param params.pageData
+	 * @param params.fields
 	 * @param params.shared
 	 * @param params.template
 	 * @param params.themeKey
 	 */
 	private render({
-		pageData,
+		fields,
 		shared,
 		template,
 		themeKey,
@@ -235,7 +235,7 @@ class PageTemplateComponent extends BaseComponent {
 			selectedTemplate,
 			mainTheme,
 		} = themeStatus({
-			pageData,
+			fields,
 			shared,
 			template,
 			themeKey,
@@ -250,31 +250,36 @@ class PageTemplateComponent extends BaseComponent {
 		);
 		const select = createTemplateSelect(mainTheme, selectedTemplate);
 
-		button.innerHTML = `
-			<label class="${classes.fieldLabel}">${App.text('page_theme_template')}</label>
-			<am-modal-toggle modal="#am-page-template-modal" class="am-e-button am-e-button--${buttonClass} am-u-flex">
+		button.innerHTML = html`
+			<label class="${classes.fieldLabel}"
+				>${App.text('page_theme_template')}</label
+			>
+			<am-modal-toggle
+				modal="#am-page-template-modal"
+				class="${classes.button} ${classes.button}--${buttonClass} ${classes.flex}"
+			>
 				<i class="bi bi-${buttonIcon}"></i>
-				<span class="am-u-flex__item-grow">
-					${buttonLabel}
-				</span>
+				<span class="${classes.flexItemGrow}">${buttonLabel}</span>
 				<i class="bi bi-pen"></i>
 			</am-modal-toggle>
 		`;
 
-		modal.innerHTML = `
+		modal.innerHTML = html`
 			<div class="${classes.modalDialog}">
 				<div class="${classes.modalHeader}">
 					<span>${App.text('page_theme_template')}</span>
-					<am-modal-close class="${classes.modalClose}"></am-modal-close>
+					<am-modal-close
+						class="${classes.modalClose}"
+					></am-modal-close>
 				</div>
 				${select.outerHTML}
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
 						${App.text('btn_close')}
 					</am-modal-close>
-					<am-submit 
-					class="${classes.button} ${classes.buttonSuccess}" 
-					form="Page/data"
+					<am-submit
+						class="${classes.button} ${classes.buttonSuccess}"
+						form="Page/data"
 					>
 						${App.text('btn_apply_reload')}
 					</am-submit>

@@ -69,6 +69,8 @@ export const classes: KeyValueMap = {
 	field: 'am-c-field',
 	fieldChanged: 'am-c-field--changed',
 	fieldLabel: 'am-c-field__label',
+	flex: 'am-u-flex',
+	flexItemGrow: 'am-u-flex__item-grow',
 	input: 'am-e-input',
 	inputTitle: 'am-e-input--title',
 	muted: 'am-u-text-muted',

@@ -72,7 +72,6 @@ import './components/ModalToggle';
 import './components/NavItem';
 import './components/NavTree';
 import './components/PageBreadcrumbs';
-import './components/RemoveField';
 import './components/Root';
 import './components/Sidebar';
 import './components/Submit';

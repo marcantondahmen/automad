@@ -39,6 +39,7 @@ namespace Automad\API\Controllers;
 use Automad\API\Models\AppModel;
 use Automad\API\Response;
 use Automad\API\Utils\APICache;
+use Automad\API\Utils\Keys;
 use Automad\System\ThemeCollection;
 use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
@@ -70,6 +71,7 @@ class AppController {
 			'base' => AM_BASE_URL,
 			'baseIndex' => AM_BASE_INDEX,
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
+			'reservedFields' => Keys::$reserved
 		));
 
 		return $Response;
