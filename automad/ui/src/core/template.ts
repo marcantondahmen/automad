@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../types';
+import { KeyValueMap, Partials } from '../types';
 import { App } from '.';
 
 /**
@@ -56,14 +56,15 @@ export const renderTemplate = (
 
 	/**
 	 * {{ text:btn_save }}
+	 * {{ app:sections.content.files }}
 	 * {{ app:base }}
 	 */
 	template = template.replace(
-		/\{\{\s*(\w+):(\w+)\s*\}\}/g,
+		/\{\{\s*(\w+):([\.\w]+)\s*\}\}/g,
 		(match: string, $1: string, $2: string): string => {
 			switch ($1) {
 				case 'app':
-					return App.state[$2];
+					return resolve(App.state, $2);
 				case 'text':
 					return App.text($2);
 			}
@@ -73,4 +74,22 @@ export const renderTemplate = (
 	);
 
 	return template;
+};
+
+/**
+ * Resolve a dot notation path and return the corresponding value of a given nested object structure.
+ *
+ * @param object
+ * @param $2
+ * @returns the resolved value
+ */
+const resolve = (object: KeyValueMap, $2: string): any => {
+	const parts = $2.split('.');
+	let temp = object;
+
+	parts.forEach((key) => {
+		temp = temp[key];
+	});
+
+	return temp;
 };
