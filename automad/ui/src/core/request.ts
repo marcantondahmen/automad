@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, fire } from '.';
+import { App, fire, notifyError } from '.';
 import { KeyValueMap } from '../types';
 
 /**
@@ -80,8 +80,15 @@ export const requestAPI = async (
 ): Promise<KeyValueMap> => {
 	PendingRequests.add();
 
-	const response = await request(`${App.baseURL}/api/${route}`, data);
-	const responseData = await response.json();
+	let responseData;
+
+	try {
+		const response = await request(`${App.baseURL}/api/${route}`, data);
+		responseData = await response.json();
+	} catch {
+		notifyError(`${App.text('error_request')} (${route})`);
+		responseData = {};
+	}
 
 	PendingRequests.remove();
 
