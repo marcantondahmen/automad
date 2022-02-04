@@ -32,44 +32,19 @@
  * Licensed under the MIT license.
  */
 
-import { Partials } from '../../types';
-import { BaseLayoutComponent } from './BaseLayout';
-import { sidebarLayout } from './Templates/SidebarLayoutTemplate';
+import { App, html } from '../../../core';
+import { Partials } from '../../../types';
 
-/**
- * The Automad base component. All Automad components are based on this class.
- *
- * @extends BaseLayoutComponent
- */
-export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
-	/**
-	 * The template render function used to render the view.
-	 */
-	protected render: Function = sidebarLayout;
-
-	/**
-	 * An array of partials that must be provided in order to render partial references.
-	 */
-	protected partials: Partials = {
-		main: this.renderMainPartial(),
-		save: this.renderSaveButtonPartial(),
-	};
-
-	/**
-	 * Render the main partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderMainPartial(): string {
-		return '';
-	}
-
-	/**
-	 * Render the save button partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderSaveButtonPartial(): string {
-		return '';
-	}
-}
+export const centered = ({ title, main }: Partials) => {
+	return html`
+		<div class="am-l-page am-l-page--centered">
+			<nav class="am-l-navbar am-l-navbar--centered">
+				<div>$${title}</div>
+				<div>
+					<a href="${App.baseURL}">close</a>
+				</div>
+			</nav>
+			<main class="am-l-main am-l-main--centered">${main}</main>
+		</div>
+	`;
+};

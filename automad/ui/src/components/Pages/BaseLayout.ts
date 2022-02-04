@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { renderTemplate } from '../../core';
+import { setDocumentTitle } from '../../core';
 import { Partials } from '../../types';
 import { BaseComponent } from '../Base';
 
@@ -43,9 +43,16 @@ import { BaseComponent } from '../Base';
  */
 export abstract class BaseLayoutComponent extends BaseComponent {
 	/**
-	 * The template for the view.
+	 * The template render function used to render the view.
 	 */
-	protected template = '';
+	protected render: Function;
+
+	/**
+	 * Set the page title that is used a document title suffix.
+	 */
+	protected get pageTitle(): string {
+		return '';
+	}
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
@@ -59,16 +66,9 @@ export abstract class BaseLayoutComponent extends BaseComponent {
 	 * @returns the rendered view
 	 */
 	init(): HTMLElement {
-		this.setDocumentTitle();
-		this.innerHTML = renderTemplate(this.template, this.partials);
+		setDocumentTitle(this.pageTitle);
+		this.innerHTML = this.render(this.partials);
 
 		return this;
-	}
-
-	/**
-	 * Set the document title.
-	 */
-	protected setDocumentTitle(): void {
-		document.title = 'Automad';
 	}
 }

@@ -60,7 +60,7 @@ export interface NavTreeItem {
 }
 
 export interface Partials {
-	[key: string]: any;
+	[key: string]: string;
 }
 
 export interface Theme {

@@ -315,6 +315,15 @@ export const queryParents = (
 };
 
 /**
+ * Set the document title.
+ *
+ * @param page
+ */
+export const setDocumentTitle = (page: string): void => {
+	document.title = `Automad — ${htmlSpecialChars(page)}`;
+};
+
+/**
  * Title case a given string.
  *
  * @param str

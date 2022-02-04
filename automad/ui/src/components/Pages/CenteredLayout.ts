@@ -34,7 +34,7 @@
 
 import { Partials } from '../../types';
 import { BaseLayoutComponent } from './BaseLayout';
-import layout from './Templates/CenteredLayout.html';
+import { centered } from './Templates/CenteredLayoutTemplate';
 
 /**
  * The Automad base component. All Automad components are based on this class.
@@ -43,16 +43,16 @@ import layout from './Templates/CenteredLayout.html';
  */
 export abstract class CenteredLayoutComponent extends BaseLayoutComponent {
 	/**
-	 * The template for the view.
+	 * The template render function used to render the view.
 	 */
-	protected template: string = layout;
+	protected render: Function = centered;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
 	 */
 	protected partials: Partials = {
-		main: this.renderMainPartial,
-		title: this.renderTitlePartial,
+		main: this.renderMainPartial(),
+		title: this.renderTitlePartial(),
 	};
 
 	/**

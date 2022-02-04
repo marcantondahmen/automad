@@ -37,5 +37,4 @@ export * from './create';
 export * from './notify';
 export * from './request';
 export * from './router';
-export * from './template';
 export * from './utils';

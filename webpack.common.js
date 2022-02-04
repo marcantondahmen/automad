@@ -13,10 +13,6 @@ module.exports = (env, argv) => {
 					exclude: /node_modules/,
 				},
 				{
-					test: /\.html$/,
-					loader: 'html-loader',
-				},
-				{
 					test: /\.(less|css)$/i,
 					use: [
 						MiniCssExtractPlugin.loader,
