@@ -34,14 +34,14 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Models;
+namespace Automad\Models;
 
-use Automad\API\Utils\FileSystem;
-use Automad\API\Utils\Messenger;
-use Automad\API\Utils\Session;
+use Automad\Auth\Session;
+use Automad\Core\FileSystem;
 use Automad\System\Server;
-use Automad\Types\User;
+use Automad\System\User;
 use Automad\UI\Templates\InvitationEmail;
+use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -62,7 +62,7 @@ class UserCollectionModel {
 	/**
 	 * The class name of the user type.
 	 */
-	private $userType = 'Automad\Types\User';
+	private $userType = 'Automad\System\User';
 
 	/**
 	 * The replacement for the user type class in a serialized string.

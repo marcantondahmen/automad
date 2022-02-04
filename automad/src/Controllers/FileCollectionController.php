@@ -34,54 +34,68 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Utils;
+namespace Automad\Controllers;
 
-use Automad\Core\Automad;
+use Automad\API\Response;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
+use Automad\Core\Request;
+use Automad\Models\FileCollectionModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The API cache is the cache of the main Automad object including private pages that are
- * only accessible when a user is logged in.
+ * The file collection controller.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class APICache {
+class FileCollectionController {
 	/**
-	 * Restore Automad object including private pages from cache or create
-	 * a new version and write it to the cache if outdated.
+	 * Remove selected files from the selection or
+	 * simply return the collection of uploaded files for a context.
 	 *
-	 * @return object the Automad object
+	 * @return Response the response object
 	 */
-	public static function get() {
+	public static function list() {
 		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+		$path = FileSystem::getPathByPostUrl($Automad);
+		$url = Request::post('url');
 
-		if ($Cache->automadObjectCacheIsApproved()) {
-			$Automad = $Cache->readAutomadObjectFromCache();
-		} else {
-			$Automad = new Automad();
-			$Cache->writeAutomadObjectToCache($Automad);
-			Debug::log('Created a new Automad instance for the dashboard');
+		if (!$url) {
+			$url = AM_DIR_SHARED;
 		}
 
-		return $Automad;
+		Debug::log($_POST);
+
+		if ($delete = Request::post('delete')) {
+			$Response = FileCollectionModel::deleteFiles($delete, $path);
+		} else {
+			$Response = new Response();
+		}
+
+		$data = array('files' => FileCollectionModel::list($path, $url));
+		$Response->setData($data);
+
+		return $Response;
 	}
 
 	/**
-	 * Force a rebuild of the UI cache.
+	 * Upload controller based on $_POST and $_FILES.
 	 *
-	 * @return object The fresh Automad object
+	 * @return Response the response object
 	 */
-	public static function rebuild() {
-		$Automad = new Automad();
-		$Cache = new Cache();
-		$Cache->writeAutomadObjectToCache($Automad);
-		Debug::log('Rebuilt Automad cache for the dashboard');
+	/* public static function upload() {
+		$Automad = UICache::get();
+		Debug::log($_POST + $_FILES, 'files');
 
-		return $Automad;
-	}
+		// Set path.
+		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
+		$path = FileSystem::getPathByPostUrl($Automad);
+
+		return FileCollectionModel::upload($_FILES, $path);
+	} */
 }

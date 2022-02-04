@@ -34,52 +34,61 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Models;
+namespace Automad\Models;
 
-use Automad\API\Utils\FileSystem;
-use Automad\Core\Page;
-use Automad\Core\Str;
+use Automad\Core\Automad;
+use Automad\UI\Autocomplete\Jumpbar;
+use Automad\UI\Autocomplete\Links;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The App model handles all data modelling related to page data.
+ * The App model handles all data modelling related to the app state of the dashboard.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class PageModel {
+class AppModel {
 	/**
-	 * Extract the deepest directory's prefix from a given path.
+	 * Build the autocomplete data for the jumpbar.
 	 *
-	 * @param string $path
-	 * @return string Prefix
+	 * @param Automad $Automad
+	 * @return array the rendered data array
 	 */
-	public static function extractPrefixFromPath(string $path) {
-		return substr(basename($path), 0, strpos(basename($path), '.'));
+	public static function autocompleteJumpbar(Automad $Automad) {
+		return Jumpbar::render($Automad);
 	}
 
 	/**
-	 * Extract the slug without the prefix from a given path.
+	 * Build the autocomplete data for links.
 	 *
-	 * @param string $path
-	 * @return string the slug
+	 * @param Automad $Automad
+	 * @return array the rendered data array
 	 */
-	public static function extractSlugFromPath(string $path) {
-		$slug = basename($path);
-		$prefix = self::extractPrefixFromPath($slug);
-
-		return Str::stripStart($slug, "$prefix.");
+	public static function autocompleteLinks(Automad $Automad) {
+		return Links::render($Automad);
 	}
 
 	/**
-	 * Return the full file system path of a page's data file.
+	 * Build the pages array that is used to build a nav tree.
 	 *
-	 * @param Page $Page
-	 * @return string The full file system path
+	 * @param Automad $Automad
+	 * @return array the rendered data array
 	 */
-	public static function getPageFilePath(Page $Page) {
-		return FileSystem::fullPagePath($Page->path) . $Page->template . '.' . AM_FILE_EXT_DATA;
+	public static function pages(Automad $Automad) {
+		$pages = array();
+
+		foreach ($Automad->getCollection() as $Page) {
+			$pages[] = array(
+				'url' => $Page->origUrl,
+				'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)),
+				'path' => $Page->path,
+				'parent' => $Page->parentUrl,
+				'private' => $Page->private
+			);
+		}
+
+		return $pages;
 	}
 }

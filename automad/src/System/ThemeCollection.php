@@ -39,7 +39,7 @@ namespace Automad\System;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Str;
-use Automad\Types\Theme;
+use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -34,10 +34,10 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Controllers;
+namespace Automad\Controllers;
 
 use Automad\API\Response;
-use Automad\API\Utils\Session;
+use Automad\Auth\Session;
 use Automad\Core\Request;
 use Automad\UI\Utils\Text;
 
@@ -53,6 +53,8 @@ defined('AUTOMAD') or die('Direct access not permitted!');
 class SessionController {
 	/**
 	 * Verify login information based on $_POST.
+	 *
+	 * /api/Session/login
 	 *
 	 * @return string Error message in case of an error.
 	 */
@@ -70,6 +72,8 @@ class SessionController {
 
 	/**
 	 * Log out user.
+	 *
+	 * /api/Session/logout
 	 *
 	 * @return bool true on success
 	 */

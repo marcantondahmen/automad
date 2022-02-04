@@ -36,7 +36,7 @@
 
 namespace Automad\UI\Commands;
 
-use Automad\Types\User;
+use Automad\System\User;
 use Automad\UI\Models\UserCollectionModel;
 use Automad\UI\Utils\Messenger;
 

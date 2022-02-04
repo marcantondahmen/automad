@@ -34,61 +34,52 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Models;
+namespace Automad\Models;
 
-use Automad\Core\Automad;
-use Automad\UI\Autocomplete\Jumpbar;
-use Automad\UI\Autocomplete\Links;
+use Automad\Core\FileSystem;
+use Automad\Core\Page;
+use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The App model handles all data modelling related to the app state of the dashboard.
+ * The App model handles all data modelling related to page data.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class AppModel {
+class PageModel {
 	/**
-	 * Build the autocomplete data for the jumpbar.
+	 * Extract the deepest directory's prefix from a given path.
 	 *
-	 * @param Automad $Automad
-	 * @return array the rendered data array
+	 * @param string $path
+	 * @return string Prefix
 	 */
-	public static function autocompleteJumpbar(Automad $Automad) {
-		return Jumpbar::render($Automad);
+	public static function extractPrefixFromPath(string $path) {
+		return substr(basename($path), 0, strpos(basename($path), '.'));
 	}
 
 	/**
-	 * Build the autocomplete data for links.
+	 * Extract the slug without the prefix from a given path.
 	 *
-	 * @param Automad $Automad
-	 * @return array the rendered data array
+	 * @param string $path
+	 * @return string the slug
 	 */
-	public static function autocompleteLinks(Automad $Automad) {
-		return Links::render($Automad);
+	public static function extractSlugFromPath(string $path) {
+		$slug = basename($path);
+		$prefix = self::extractPrefixFromPath($slug);
+
+		return Str::stripStart($slug, "$prefix.");
 	}
 
 	/**
-	 * Build the pages array that is used to build a nav tree.
+	 * Return the full file system path of a page's data file.
 	 *
-	 * @param Automad $Automad
-	 * @return array the rendered data array
+	 * @param Page $Page
+	 * @return string The full file system path
 	 */
-	public static function pages(Automad $Automad) {
-		$pages = array();
-
-		foreach ($Automad->getCollection() as $Page) {
-			$pages[] = array(
-				'url' => $Page->origUrl,
-				'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)),
-				'path' => $Page->path,
-				'parent' => $Page->parentUrl,
-				'private' => $Page->private
-			);
-		}
-
-		return $pages;
+	public static function getPageFilePath(Page $Page) {
+		return FileSystem::fullPagePath($Page->path) . $Page->template . '.' . AM_FILE_EXT_DATA;
 	}
 }

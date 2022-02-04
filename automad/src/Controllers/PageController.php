@@ -34,15 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Controllers;
+namespace Automad\Controllers;
 
-use Automad\API\Models\PageModel;
 use Automad\API\Response;
-use Automad\API\Utils\APICache;
-use Automad\API\Utils\Keys;
+use Automad\Core\Cache;
 use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Selection;
+use Automad\Models\PageModel;
+use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -63,7 +63,8 @@ class PageController {
 	 * @return Response the response data
 	 */
 	public static function breadcrumbs() {
-		$Automad = APICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
 
@@ -94,7 +95,8 @@ class PageController {
 	 * @return Response the response object
 	 */
 	public static function data() {
-		$Automad = APICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
 
@@ -106,14 +108,16 @@ class PageController {
 				// If only the URL got submitted, just get the form ready.
 				$ThemeCollection = new ThemeCollection();
 				$Theme = $ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME));
-				$keys = Keys::inCurrentTemplate($Page, $Theme);
+				$keys = Fields::inCurrentTemplate($Page, $Theme);
 				$data = Parse::dataFile(PageModel::getPageFilePath($Page));
 
 				$fields = array_merge(
-					array_fill_keys(Keys::$reserved, ''),
+					array_fill_keys(Fields::$reserved, ''),
 					array_fill_keys($keys, ''),
 					$data
 				);
+
+				ksort($fields);
 
 				$Response->setData(
 					array(

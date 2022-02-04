@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Types;
+namespace Automad\System;
 
 use Automad\Core\FileSystem;
 use Automad\Core\Str;

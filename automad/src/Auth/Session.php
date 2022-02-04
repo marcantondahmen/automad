@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Utils;
+namespace Automad\Auth;
 
 use Automad\API\Models\UserCollectionModel;
 

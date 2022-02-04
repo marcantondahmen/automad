@@ -34,24 +34,24 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Utils;
+namespace Automad\System;
 
 use Automad\Core\Page;
 use Automad\Engine\PatternAssembly;
-use Automad\Types\Theme;
+use Automad\System\Theme;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Keys class provides all methods to search all kind of content variables (keys of the data array) used in templates.
+ * The Fields class provides all methods to search all kind of content variables (fields of the data array) used in templates.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Keys {
+class Fields {
 	/**
-	 * Array with reserved variable keys.
+	 * Array with reserved variable fields.
 	 */
 	public static $reserved = array(
 		'AM_KEY_DATE' => AM_KEY_DATE,
@@ -65,11 +65,11 @@ class Keys {
 	);
 
 	/**
-	 * Find all variable keys in the currently used template and all included snippets (and ignore those keys in $this->reserved).
+	 * Find all variable fields in the currently used template and all included snippets (and ignore those fields in $this->reserved).
 	 *
 	 * @param Page $Page
 	 * @param Theme|null $Theme
-	 * @return array Keys in the currently used template (without reserved keys)
+	 * @return array fields in the currently used template (without reserved fields)
 	 */
 	public static function inCurrentTemplate(Page $Page, ?Theme $Theme = null) {
 		if (empty($Theme)) {
@@ -78,22 +78,22 @@ class Keys {
 
 		// Don't use $Page->getTemplate() to prevent exit on errors.
 		$file = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $Page->get(AM_KEY_THEME) . '/' . $Page->template . '.php';
-		$keys = self::inTemplate($file);
+		$fields = self::inTemplate($file);
 
-		return self::cleanUp($keys, $Theme->getMask('page'));
+		return self::cleanUp($fields, $Theme->getMask('page'));
 	}
 
 	/**
-	 * Find all variable keys in a template and all included snippets (and ignore those keys in $this->reserved).
+	 * Find all variable fields in a template and all included snippets (and ignore those fields in $this->reserved).
 	 *
 	 * @param string $file
-	 * @return array Keys in a given template (without reserved keys)
+	 * @return array fields in a given template (without reserved fields)
 	 */
 	public static function inTemplate(string $file) {
-		$keys = array();
+		$fields = array();
 
 		if (is_readable($file)) {
-			// Find all variable keys in the template file.
+			// Find all variable fields in the template file.
 			$content = file_get_contents($file);
 			// Remove ~ characters to match includes correctly.
 			$content = str_replace(
@@ -102,7 +102,7 @@ class Keys {
 				$content
 			);
 			preg_match_all('/' . PatternAssembly::variableKeyUI() . '/is', $content, $matches);
-			$keys = $matches['varName'];
+			$fields = $matches['varName'];
 
 			// Match markup to get includes recursively.
 			preg_match_all('/' . PatternAssembly::template() . '/is', $content, $matches, PREG_SET_ORDER);
@@ -113,52 +113,52 @@ class Keys {
 					$include = dirname($file) . '/' . $match['file'];
 
 					if (file_exists($include)) {
-						$keys = array_merge($keys, self::inTemplate($include));
+						$fields = array_merge($fields, self::inTemplate($include));
 					}
 				}
 			}
 
-			$keys = self::cleanUp($keys);
+			$fields = self::cleanUp($fields);
 		}
 
-		return $keys;
+		return $fields;
 	}
 
 	/**
-	 * Find all variable keys in templates of a given theme.
+	 * Find all variable fields in templates of a given theme.
 	 *
 	 * @param Theme $Theme
-	 * @return array Keys in all templates of the given Theme (without reserved keys)
+	 * @return array fields in all templates of the given Theme (without reserved fields)
 	 */
 	public static function inTheme(Theme $Theme) {
-		$keys = array();
+		$fields = array();
 
 		foreach ($Theme->templates as $file) {
-			$keys = array_merge($keys, self::inTemplate($file));
+			$fields = array_merge($fields, self::inTemplate($file));
 		}
 
-		return self::cleanUp($keys, $Theme->getMask('shared'));
+		return self::cleanUp($fields, $Theme->getMask('shared'));
 	}
 
 	/**
-	 * Cleans up an array of keys. All reserved and duplicate keys get removed
+	 * Cleans up an array of fields. All reserved and duplicate fields get removed
 	 * and the optional UI mask is applied.
 	 *
-	 * @param array $keys
+	 * @param array $fields
 	 * @param array $mask
-	 * @return array The sorted and filtered keys array
+	 * @return array The sorted and filtered fields array
 	 */
-	private static function cleanUp(array $keys, array $mask = array()) {
-		if (empty($keys)) {
+	private static function cleanUp(array $fields, array $mask = array()) {
+		if (empty($fields)) {
 			return array();
 		}
 
 		if (!empty($mask)) {
-			$keys = array_filter($keys, function ($key) use ($mask) {
+			$fields = array_filter($fields, function ($key) use ($mask) {
 				return !in_array($key, $mask);
 			});
 		}
 
-		return array_unique(array_diff($keys, array_values(self::$reserved)));
+		return array_unique(array_diff($fields, array_values(self::$reserved)));
 	}
 }

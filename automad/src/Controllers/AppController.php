@@ -34,12 +34,12 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Controllers;
+namespace Automad\Controllers;
 
-use Automad\API\Models\AppModel;
 use Automad\API\Response;
-use Automad\API\Utils\APICache;
-use Automad\API\Utils\Keys;
+use Automad\Core\Cache;
+use Automad\Models\AppModel;
+use Automad\System\Fields;
 use Automad\System\ThemeCollection;
 use Automad\UI\Utils\SwitcherSections;
 use Automad\UI\Utils\Text;
@@ -71,7 +71,7 @@ class AppController {
 			'base' => AM_BASE_URL,
 			'baseIndex' => AM_BASE_INDEX,
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
-			'reservedFields' => Keys::$reserved
+			'reservedFields' => Fields::$reserved
 		));
 
 		return $Response;
@@ -84,7 +84,8 @@ class AppController {
 	 */
 	public static function updateState() {
 		$Response = new Response;
-		$Automad = APICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 
 		$Response->setData(array(
 			'tags' => $Automad->getPagelist()->getTags(),

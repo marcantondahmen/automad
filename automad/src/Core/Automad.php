@@ -36,8 +36,8 @@
 
 namespace Automad\Core;
 
-use Automad\API\API;
-use Automad\API\Utils\Session;
+use Automad\API\RequestHandler;
+use Automad\Auth\Session;
 use Automad\Routes;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -315,7 +315,7 @@ class Automad {
 	 * @return Page A page object
 	 */
 	private function getRequestedPage() {
-		if (strpos(AM_REQUEST, API::$apiBase) === 0) {
+		if (strpos(AM_REQUEST, RequestHandler::$apiBase) === 0) {
 			return $this->getPage(Request::post('url'));
 		}
 

@@ -36,9 +36,9 @@
 
 namespace Automad;
 
-use Automad\API\API;
+use Automad\API\RequestHandler;
 use Automad\API\Response;
-use Automad\API\Utils\Session;
+use Automad\Auth\Session;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\Feed;
@@ -69,13 +69,13 @@ class Routes {
 	 */
 	public static function init(Router $Router) {
 		$isLoggedIn = AM_PAGE_DASHBOARD && Session::getUsername();
-		$apiBase = API::$apiBase;
+		$apiBase = RequestHandler::$apiBase;
 
 		// API
 		$Router->register(
 			"$apiBase/.*",
 			function () {
-				return API::render();
+				return RequestHandler::getResponse();
 			},
 			$isLoggedIn
 		);
@@ -83,7 +83,7 @@ class Routes {
 		$Router->register(
 			"$apiBase/(Session/login|App/(bootstrap|updateState))",
 			function () {
-				return API::render();
+				return RequestHandler::getResponse();
 			},
 			AM_PAGE_DASHBOARD
 		);

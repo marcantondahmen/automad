@@ -48,7 +48,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @copyright Copyright (c) 2014-2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class API {
+class RequestHandler {
 	/**
 	 * The API base route.
 	 */
@@ -59,12 +59,12 @@ class API {
 	 *
 	 * @return string the JSON formatted response
 	 */
-	public static function render() {
+	public static function getResponse() {
 		$apiRoute = trim(Str::stripStart(AM_REQUEST, self::$apiBase), '/');
 
 		Debug::log($apiRoute);
 
-		$method = __NAMESPACE__ . '\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
+		$method = '\\Automad\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
 		$parts = explode('::', $method);
 		$class = $parts[0];
 

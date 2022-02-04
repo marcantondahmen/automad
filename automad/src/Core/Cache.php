@@ -36,7 +36,7 @@
 
 namespace Automad\Core;
 
-use Automad\API\Utils\Session;
+use Automad\Auth\Session;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -386,6 +386,20 @@ class Cache {
 		Debug::log(AM_FILE_SITE_MTIME, 'Reading Site-mTime from');
 
 		return unserialize(file_get_contents(AM_FILE_SITE_MTIME));
+	}
+
+	/**
+	 * Force a rebuild of the UI cache.
+	 *
+	 * @return object The fresh Automad object
+	 */
+	public function rebuild() {
+		$Automad = new Automad();
+
+		$this->writeAutomadObjectToCache($Automad);
+		Debug::log('Rebuilt Automad cache for the dashboard');
+
+		return $Automad;
 	}
 
 	/**
