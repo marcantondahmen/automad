@@ -192,7 +192,7 @@ const createTemplateSelect = (
  *
  * @extends BaseComponent
  */
-class PageTemplateComponent extends BaseComponent {
+export class PageTemplateComponent extends BaseComponent {
 	/**
 	 * The field data.
 	 *

@@ -40,8 +40,11 @@ import {
 	getTagFromRoute,
 	waitForPendingRequests,
 	query,
+	listen,
+	queryAll,
 } from '../core';
 import { BaseComponent } from './Base';
+import { FormComponent } from './Forms/Form';
 
 /**
  * The root app component.
@@ -71,6 +74,18 @@ export class RootComponent extends BaseComponent {
 	}
 
 	/**
+	 * Set a new URL and update the view accordingly.
+	 *
+	 * @param url
+	 */
+	setView(url: URL): void {
+		if (this.confirmViewUpdate()) {
+			window.history.pushState(null, null, url);
+			this.update();
+		}
+	}
+
+	/**
 	 * Init the root component.
 	 */
 	private async init(): Promise<void> {
@@ -79,13 +94,47 @@ export class RootComponent extends BaseComponent {
 
 		await App.bootstrap(this);
 
-		this.updateView();
+		this.update();
+
+		listen(window, 'popstate', () => {
+			App.root.update();
+		});
+	}
+
+	/**
+	 * Confirm updating the view in case a watched form has unsaved changes.
+	 *
+	 * @returns true in case the user confirms to update the view without saving changes.
+	 */
+	private confirmViewUpdate(): boolean {
+		const forms = queryAll('[watch]', this);
+		const message = App.text('confirm_discard_unsaved');
+		let hasChanges = false;
+		let confirmed = false;
+
+		forms.forEach((form: FormComponent) => {
+			if (form.hasUnsavedChanges) {
+				hasChanges = true;
+			}
+		});
+
+		if (!(hasChanges && !window.confirm(message))) {
+			confirmed = true;
+
+			// Reset the unsaved changes status property in order to
+			// avoid accumulation beforeunload event handlers.
+			forms.forEach((form: FormComponent) => {
+				form.hasUnsavedChanges = false;
+			});
+		}
+
+		return confirmed;
 	}
 
 	/**
 	 * Update the root component.
 	 */
-	async updateView(): Promise<void> {
+	private async update(): Promise<void> {
 		this.progressBar(25);
 
 		await App.updateState();

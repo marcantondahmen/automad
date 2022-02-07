@@ -32,27 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	classes,
-	create,
-	html,
-	htmlSpecialChars,
-	titleCase,
-} from '../../core';
+import { classes, create, html, htmlSpecialChars, titleCase } from '../../core';
+import { FieldInitData, FieldRenderData } from '../../types';
 import { BaseComponent } from '../Base';
-
-interface FieldInitData {
-	key: string;
-	value: string;
-	name: string;
-	tooltip: string;
-	label: string;
-}
-
-interface FieldRenderData extends Omit<FieldInitData, 'key'> {
-	id: string;
-}
 
 /**
  * Create an ID from a field key.
@@ -84,6 +66,11 @@ const createLabel = (key: string): string => {
  */
 export class FieldComponent extends BaseComponent {
 	/**
+	 * If true the field data is sanitized.
+	 */
+	protected sanitize = true;
+
+	/**
 	 * The internal field data.
 	 */
 	protected _data: FieldRenderData;
@@ -112,7 +99,7 @@ export class FieldComponent extends BaseComponent {
 		tooltip = tooltip || '';
 		label = label || createLabel(key);
 
-		if (typeof value === 'string') {
+		if (typeof value === 'string' && this.sanitize) {
 			value = htmlSpecialChars(value);
 		}
 

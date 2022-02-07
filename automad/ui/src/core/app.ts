@@ -34,7 +34,7 @@
 
 import { RootComponent } from '../components/Root';
 import { request, requestAPI } from '.';
-import { KeyValueMap, ThemeCollection } from '../types';
+import { KeyValueMap, Pages, ThemeCollection } from '../types';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
@@ -81,7 +81,7 @@ export class App {
 	/**
 	 * The pages array used to build the nav tree.
 	 */
-	static get pages(): KeyValueMap[] {
+	static get pages(): Pages {
 		return this._state.pages;
 	}
 

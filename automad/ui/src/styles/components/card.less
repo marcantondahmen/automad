@@ -22,50 +22,58 @@
  *               ::::   ::::    ..''
  *               :::: ..:::: .:''
  *                 ''''  '''''
- *
+ * 
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Theme } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+.am-c-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: var(--am-hairline);
+	border-radius: var(--am-radius);
+	font-size: var(--am-font-size-small);
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
+	&__image {
+		--radius: ~'calc(var(--am-radius) - var(--am-border-width))';
+		position: relative;
+		box-sizing: content-box;
+		height: 0;
+		padding-top: 100%;
+		margin-bottom: var(--am-card-padding);
+		overflow: hidden;
+		border-radius: var(--radius) var(--radius) 0 0;
 
-export interface TemplateButtonStatus {
-	buttonLabel: string;
-	buttonClass: string;
-	buttonIcon: string;
-	selectedTemplate: string;
-	mainTheme: Theme;
-}
+		& img {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 
-export interface TemplateFieldData {
-	fields: KeyValueMap;
-	shared: KeyValueMap;
-	template: string;
-	themeKey: string;
-}
+	&__title {
+		padding: var(--am-card-padding);
+		font-size: 1rem;
+	}
 
-export interface FieldGroupData {
-	section: SwitcherSectionComponent;
-	fields: KeyValueMap;
-	tooltips: KeyValueMap;
-}
+	&__body {
+		flex-grow: 1;
+		padding: var(--am-card-padding);
+	}
 
-export interface FieldInitData {
-	key: string;
-	value: string | KeyValueMap;
-	name: string;
-	tooltip?: string;
-	label?: string;
-}
+	&__footer {
+		padding: var(--am-card-padding);
+	}
 
-export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
-	id: string;
+	& * + * {
+		padding-top: 0;
+	}
 }

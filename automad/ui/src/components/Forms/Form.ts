@@ -38,6 +38,7 @@ import {
 	getPageURL,
 	listen,
 	notifyError,
+	notifySuccess,
 	query,
 	queryAll,
 	requestAPI,
@@ -54,6 +55,7 @@ import { BaseComponent } from '../Base';
  * - `watch`
  * - `focus`
  * - `enter`
+ * - `confirm`
  *
  * Self initialized form with watched submit button:
  *
@@ -73,7 +75,7 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * The change state of the form.
 	 */
-	protected hasUnsavedChanges: boolean = false;
+	hasUnsavedChanges: boolean = false;
 
 	/**
 	 * Changes are watched.
@@ -85,6 +87,13 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected get api(): string {
 		return this.getAttribute('api');
+	}
+
+	/**
+	 * The confirm modal message.
+	 */
+	protected get confirm(): string {
+		return this.getAttribute('confirm');
 	}
 
 	/**
@@ -102,6 +111,23 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * The array of valied field selectors that are used to collect the form data.
+	 */
+	protected get controls(): string[] {
+		return [
+			'input[type="text"]',
+			'input[type="password"]',
+			'input[type="datetime-local"]',
+			'input[type="hidden"]',
+			'input[type="checkbox"]',
+			'input[type="radio"]:checked',
+			'textarea',
+			'select',
+			'am-editor',
+		];
+	}
+
+	/**
 	 * The form data object.
 	 */
 	get formData(): KeyValueMap {
@@ -112,12 +138,16 @@ export class FormComponent extends BaseComponent {
 			data.url = pageUrl;
 		}
 
-		queryAll('[name]', this).forEach((field: InputElement) => {
-			const name = field.getAttribute('name');
-			const value = field.value;
+		queryAll(this.controls.join(','), this).forEach(
+			(field: InputElement) => {
+				const name = field.getAttribute('name');
+				const value = field.value;
 
-			data[name] = value;
-		});
+				if (name) {
+					data[name] = value;
+				}
+			}
+		);
 
 		return data;
 	}
@@ -136,7 +166,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected async init(): Promise<void> {
 		if (this.initSelf) {
-			this.submit();
+			this.submit(true);
 		}
 
 		if (this.hasAttribute('watch')) {
@@ -215,9 +245,18 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * Submit the form.
 	 *
+	 * @param skipConfirmOnInit
 	 * @async
 	 */
-	async submit(): Promise<void> {
+	async submit(skipConfirmOnInit: boolean = false): Promise<void> {
+		if (
+			!skipConfirmOnInit &&
+			this.confirm &&
+			!window.confirm(this.confirm)
+		) {
+			return null;
+		}
+
 		const response = await requestAPI(this.api, this.formData);
 
 		if (this.watchChanges) {
@@ -246,6 +285,10 @@ export class FormComponent extends BaseComponent {
 		if (response.error) {
 			notifyError(response.error);
 		}
+
+		if (response.success) {
+			notifySuccess(response.success);
+		}
 	}
 
 	/**
@@ -271,10 +314,10 @@ export class FormComponent extends BaseComponent {
 			this,
 			'keydown cut paste drop input',
 			onChangeHandler.bind(this),
-			'input, textarea'
+			'input, textarea, am-editor'
 		);
 
-		listen(this, 'change', onChangeHandler.bind(this), 'select');
+		listen(this, 'change', onChangeHandler.bind(this), 'select, am-editor');
 
 		listen(window, 'beforeunload', (event: Event) => {
 			if (this.hasUnsavedChanges) {

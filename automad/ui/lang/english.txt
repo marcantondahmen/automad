@@ -209,6 +209,10 @@ confirm_reset_headless: Are you sure you want to reset the custom headless-templ
 
 -
 
+confirm_discard_unsaved: Are you sure you want to discard your unsaved changes?
+
+-
+
 
 
 
@@ -812,6 +816,10 @@ error_file_size: Invalid file size!
 
 -
 
+error_request: Error fetching data from API!
+
+-
+
 error_form: Incomplete or incorrect data!<br />All fields are required and have to be completed as described!
 
 -
@@ -1152,10 +1160,6 @@ page_theme_template: Template
 
 -
 
-page_var_name: Variable Name
-
--
-
 page_vars_content: Content
 
 -
@@ -1164,11 +1168,7 @@ page_vars_color: Colors
 
 -
 
-page_vars_settings: Template Settings
-
--  
-
-page_vars_unused: Unused Variables
+page_var_unused: Not used
 
 -
 

@@ -26,50 +26,79 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { listen, App } from '../core';
+import { classes, html } from '../core';
+import { File } from '../types';
 import { BaseComponent } from './Base';
 
 /**
- * A simple link component to change the dashboard view.
+ * A file card component.
  *
  * @example
- * <am-link target="Page?url=..."></am-link>
- * <am-link external="http://..."></am-link>
+ * <am-file-card></am-file-card>
  *
  * @extends BaseComponent
  */
-class LinkComponent extends BaseComponent {
+class FileCardComponent extends BaseComponent {
 	/**
-	 * The array of observed attributes.
+	 * Set the file data and render the card.
 	 *
-	 * @static
+	 * @param file
 	 */
-	static get observedAttributes(): string[] {
-		return ['target', 'external'];
+	set data(file: File) {
+		this.render(file);
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', (event: Event) => {
-			if (this.elementAttributes.external) {
-				window.location.href = this.elementAttributes.external;
-			}
+		this.classList.add(classes.card);
+	}
 
-			const base = `${window.location.origin}${App.dashboardURL}/`;
-			const url = new URL(this.elementAttributes.target, base);
+	/**
+	 * Render the file card.
+	 *
+	 * @param file
+	 */
+	render(file: File) {
+		this.innerHTML = html`
+			${this.renderPreview(file)}
+			<div class="${classes.cardTitle}">$${file.basename}</div>
+			<div class="${classes.cardBody}">$${file.caption || ''}</div>
+			<div class="${classes.cardFooter}">
+				<label>Delete</label>
+				<input
+					type="checkbox"
+					name="delete[]"
+					value="$${file.basename}"
+				/>
+			</div>
+		`;
+	}
 
-			event.stopImmediatePropagation();
-			App.root.setView(url);
-		});
+	/**
+	 * Render the preview for the file.
+	 *
+	 * @param file
+	 * @returns the preview HTML
+	 */
+	renderPreview(file: File) {
+		if (file.thumbnail) {
+			return html`
+				<div class="${classes.cardImage}">
+					<img src="${file.thumbnail}" />
+				</div>
+			`;
+		}
+
+		return html``;
 	}
 }
 
-customElements.define('am-link', LinkComponent);
+customElements.define('am-file-card', FileCardComponent);

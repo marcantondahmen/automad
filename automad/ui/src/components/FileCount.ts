@@ -32,40 +32,33 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Theme } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+import { BaseComponent } from './Base';
+import { create, listen, queryAll } from '../core';
+import { FileCollectionUpdateEventName } from './Forms/FileCollectionList';
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
+/**
+ * A file count badge component that displays the total number of file card elements.
+ *
+ * @example
+ * <am-file-count></am-file-count>
+ *
+ * @extends BaseComponent
+ */
+class FileCountComponent extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		const badge = create('span', [], {}, this);
+		const update = () => {
+			const count = queryAll('am-file-card').length;
 
-export interface TemplateButtonStatus {
-	buttonLabel: string;
-	buttonClass: string;
-	buttonIcon: string;
-	selectedTemplate: string;
-	mainTheme: Theme;
+			badge.textContent = `${count}`;
+		};
+
+		listen(window, FileCollectionUpdateEventName, update.bind(this));
+		setTimeout(update.bind(this), 0);
+	}
 }
 
-export interface TemplateFieldData {
-	fields: KeyValueMap;
-	shared: KeyValueMap;
-	template: string;
-	themeKey: string;
-}
-
-export interface FieldGroupData {
-	section: SwitcherSectionComponent;
-	fields: KeyValueMap;
-	tooltips: KeyValueMap;
-}
-
-export interface FieldInitData {
-	key: string;
-	value: string | KeyValueMap;
-	name: string;
-	tooltip?: string;
-	label?: string;
-}
-
-export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
-	id: string;
-}
+customElements.define('am-file-count', FileCountComponent);

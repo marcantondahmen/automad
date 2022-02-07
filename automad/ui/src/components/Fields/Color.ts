@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { classes, create } from '../../core';
 import { FieldComponent } from './Field';
 
 /**
@@ -41,10 +42,16 @@ import { FieldComponent } from './Field';
  */
 class ColorComponent extends FieldComponent {
 	/**
-	 * Render the field.
+	 * Create an input field.
 	 */
-	render(): void {
-		super.render();
+	input(): void {
+		const { name, id, value } = this._data;
+		create(
+			'input',
+			[classes.input],
+			{ id, name, value, type: 'color' },
+			this
+		);
 	}
 }
 

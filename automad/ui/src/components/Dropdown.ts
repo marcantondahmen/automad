@@ -32,40 +32,35 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Theme } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+import { classes, listen } from '../core';
+import { BaseComponent } from './Base';
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
-
-export interface TemplateButtonStatus {
-	buttonLabel: string;
-	buttonClass: string;
-	buttonIcon: string;
-	selectedTemplate: string;
-	mainTheme: Theme;
+/**
+ * A simple dropdown menu component.
+ *
+ * @example
+ * <am-dropdown>
+ *     Menu
+ *     <div class="am-c-dropdown__items">
+ *         ...
+ *     </div>
+ * </am-dropdown>
+ *
+ * @extends BaseComponent
+ */
+class DropdownComponent extends BaseComponent {
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		listen(window, 'click', (event: MouseEvent) => {
+			if (event.target === this) {
+				this.classList.toggle(classes.dropdownOpen);
+			} else {
+				this.classList.remove(classes.dropdownOpen);
+			}
+		});
+	}
 }
 
-export interface TemplateFieldData {
-	fields: KeyValueMap;
-	shared: KeyValueMap;
-	template: string;
-	themeKey: string;
-}
-
-export interface FieldGroupData {
-	section: SwitcherSectionComponent;
-	fields: KeyValueMap;
-	tooltips: KeyValueMap;
-}
-
-export interface FieldInitData {
-	key: string;
-	value: string | KeyValueMap;
-	name: string;
-	tooltip?: string;
-	label?: string;
-}
-
-export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
-	id: string;
-}
+customElements.define('am-dropdown', DropdownComponent);

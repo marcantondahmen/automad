@@ -34,6 +34,7 @@
 
 import {
 	FieldGroupData,
+	FieldInitData,
 	KeyValueMap,
 	PageFieldGroups,
 	PageMainSettingsData,
@@ -43,7 +44,16 @@ import {
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../SwitcherSection';
-import { App, classes, create, html, keyCombo, query } from '../../core';
+import {
+	App,
+	classes,
+	create,
+	html,
+	keyCombo,
+	query,
+	setDocumentTitle,
+} from '../../core';
+import { PageTemplateComponent } from '../Fields/PageTemplate';
 
 /**
  * Create a form field and set its data.
@@ -57,7 +67,7 @@ import { App, classes, create, html, keyCombo, query } from '../../core';
 const createField = (
 	fieldType: string,
 	section: HTMLElement,
-	data: KeyValueMap,
+	data: FieldInitData,
 	cls: string[] = []
 ): FieldComponent => {
 	const field = create(fieldType, cls, {}, section);
@@ -88,21 +98,23 @@ const fieldGroup = ({ section, fields, tooltips }: FieldGroupData): void => {
 	};
 
 	Object.keys(fields).forEach((key) => {
-		let fieldType = 'am-textarea';
+		if (!Object.values(App.reservedFields).includes(key)) {
+			let fieldType = 'am-textarea';
 
-		for (const [prefix, value] of Object.entries(prefixMap)) {
-			if (key.startsWith(prefix)) {
-				fieldType = value;
-				break;
+			for (const [prefix, value] of Object.entries(prefixMap)) {
+				if (key.startsWith(prefix)) {
+					fieldType = value;
+					break;
+				}
 			}
-		}
 
-		createField(fieldType, section, {
-			key: key,
-			value: fields[key],
-			tooltip: tooltips[key],
-			name: `data[${key}]`,
-		});
+			createField(fieldType, section, {
+				key: key,
+				value: fields[key],
+				tooltip: tooltips[key],
+				name: `data[${key}]`,
+			});
+		}
 	});
 };
 
@@ -176,11 +188,6 @@ export class PageDataComponent extends FormComponent {
 	 * The section collection object.
 	 */
 	private sections: PageSectionCollection;
-
-	/**
-	 * Enable watching.
-	 */
-	protected watchChanges: boolean = true;
 
 	/**
 	 * Enable self init.
@@ -270,17 +277,19 @@ export class PageDataComponent extends FormComponent {
 
 		createMainField('am-checkbox-large', App.reservedFields.AM_KEY_PRIVATE);
 
-		createField(
+		const templateField = create(
 			'am-page-template',
-			section,
-			{
-				fields,
-				shared,
-				template,
-				themeKey: App.reservedFields.AM_KEY_THEME,
-			},
-			[]
-		);
+			[],
+			{},
+			section
+		) as PageTemplateComponent;
+
+		templateField.data = {
+			fields,
+			shared,
+			template,
+			themeKey: App.reservedFields.AM_KEY_THEME,
+		};
 
 		createMainField('am-checkbox', App.reservedFields.AM_KEY_HIDDEN);
 
@@ -346,6 +355,8 @@ export class PageDataComponent extends FormComponent {
 
 		const themeKey = App.reservedFields.AM_KEY_THEME;
 		const themes = App.themes;
+
+		setDocumentTitle(fields.title);
 
 		let tooltips = {};
 

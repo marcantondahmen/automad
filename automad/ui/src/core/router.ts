@@ -52,7 +52,7 @@ export enum Routes {
  *
  * @returns the slug
  */
-const getSlug = (): string => {
+export const getSlug = (): string => {
 	const regex = new RegExp(`^${App.dashboardURL}\/`, 'i');
 	return window.location.pathname.replace(regex, '');
 };

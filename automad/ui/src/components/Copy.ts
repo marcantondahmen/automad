@@ -32,40 +32,39 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Theme } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+import { listen, notifySuccess } from '../core';
+import { BaseComponent } from './Base';
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
+/**
+ * A copy to clipboard button component.
+ *
+ * @example
+ * <am-copy value="..."></am-copy>
+ *
+ * @extends BaseComponent
+ */
+class CopyComponent extends BaseComponent {
+	/**
+	 * The array of observed attributes.
+	 *
+	 * @static
+	 */
+	static get observedAttributes(): string[] {
+		return ['value'];
+	}
 
-export interface TemplateButtonStatus {
-	buttonLabel: string;
-	buttonClass: string;
-	buttonIcon: string;
-	selectedTemplate: string;
-	mainTheme: Theme;
+	/**
+	 * The callback function used when an element is created in the DOM.
+	 */
+	connectedCallback(): void {
+		listen(this, 'click', () => {
+			navigator.clipboard
+				.writeText(this.elementAttributes.value)
+				.then(() => {
+					notifySuccess(this.elementAttributes.value);
+				});
+		});
+	}
 }
 
-export interface TemplateFieldData {
-	fields: KeyValueMap;
-	shared: KeyValueMap;
-	template: string;
-	themeKey: string;
-}
-
-export interface FieldGroupData {
-	section: SwitcherSectionComponent;
-	fields: KeyValueMap;
-	tooltips: KeyValueMap;
-}
-
-export interface FieldInitData {
-	key: string;
-	value: string | KeyValueMap;
-	name: string;
-	tooltip?: string;
-	label?: string;
-}
-
-export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
-	id: string;
-}
+customElements.define('am-copy', CopyComponent);

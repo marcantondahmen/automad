@@ -54,3 +54,14 @@ export interface PageMainSettingsData {
 	shared: KeyValueMap;
 	template: string;
 }
+
+export interface PageMetaData {
+	url: string;
+	path: string;
+	title: string;
+	private: boolean;
+}
+
+export interface Pages {
+	[key: string]: PageMetaData;
+}

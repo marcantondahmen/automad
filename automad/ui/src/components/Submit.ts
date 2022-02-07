@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { listen, queryAll } from '../core';
+import { listen, queryAll, queryParents } from '../core';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
 
@@ -62,7 +62,13 @@ class SubmitComponent extends BaseComponent {
 	 * The forms that are submitted by this button.
 	 */
 	get relatedForms(): Element[] {
-		return queryAll(`[api="${this.elementAttributes.form}"]`);
+		let forms = queryAll(`[api="${this.elementAttributes.form}"]`);
+
+		if (forms.length == 0) {
+			forms = queryParents('am-form', this);
+		}
+
+		return forms;
 	}
 
 	/**
@@ -73,6 +79,8 @@ class SubmitComponent extends BaseComponent {
 			if (this.hasAttribute('disabled')) {
 				return false;
 			}
+
+			console.log(this.relatedForms);
 
 			this.relatedForms.forEach((form: FormComponent) => {
 				form.submit();

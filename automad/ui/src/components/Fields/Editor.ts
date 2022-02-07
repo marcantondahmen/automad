@@ -32,6 +32,8 @@
  * Licensed under the MIT license.
  */
 
+import { create } from '../../core';
+import { KeyValueMap } from '../../types';
 import { FieldComponent } from './Field';
 
 /**
@@ -41,10 +43,24 @@ import { FieldComponent } from './Field';
  */
 class EditorComponent extends FieldComponent {
 	/**
+	 * The editor value that serves a input value for the parent form.
+	 */
+	value: KeyValueMap;
+
+	/**
+	 * If true the field data is sanitized.
+	 */
+	protected sanitize = false;
+
+	/**
 	 * Render the field.
 	 */
-	render(): void {
-		super.render();
+	input(): void {
+		const { name, id, value } = this._data;
+		const editor = create('div', [], { id }, this);
+
+		this.setAttribute('name', name);
+		this.value = value as KeyValueMap;
 	}
 }
 

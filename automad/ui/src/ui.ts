@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import './styles/vendor.less';
 import './styles/ui.less';
 
 import './components/Fields/Checkbox';
@@ -48,6 +49,7 @@ import './components/Fields/PageTemplate';
 import './components/Fields/Textarea';
 import './components/Fields/Url';
 
+import './components/Forms/FileCollectionList';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 
@@ -64,6 +66,10 @@ import './components/Pages/System';
 
 import './components/Alert';
 import './components/Autocomplete';
+import './components/Copy';
+import './components/Dropdown';
+import './components/FileCard';
+import './components/FileCount';
 import './components/Jumpbar';
 import './components/Link';
 import './components/Modal';
@@ -72,6 +78,7 @@ import './components/ModalToggle';
 import './components/NavItem';
 import './components/NavTree';
 import './components/PageBreadcrumbs';
+import './components/PageSelectTree';
 import './components/Root';
 import './components/Sidebar';
 import './components/Submit';

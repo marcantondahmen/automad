@@ -45,6 +45,19 @@ export interface AutocompleteItem {
 	item: KeyValueMap;
 }
 
+export interface File {
+	basename: string;
+	extension: string;
+	mtime: string;
+	size: string;
+	path: string;
+	url: string;
+	caption: string;
+	thumbnail?: string;
+	width?: number;
+	height?: number;
+}
+
 export interface NavTreePageData {
 	url: string;
 	title: string;
@@ -55,8 +68,9 @@ export interface NavTreePageData {
 
 export interface NavTreeItem {
 	wrapper: HTMLElement;
-	link: HTMLElement;
+	summary: HTMLElement;
 	children: HTMLElement;
+	page: NavTreePageData;
 }
 
 export interface Partials {

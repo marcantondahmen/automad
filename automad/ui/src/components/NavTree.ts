@@ -51,15 +51,20 @@ import { BaseComponent } from './Base';
  * The navigation tree component.
  *
  * @example
- * <am-nav-tree api="UI/navTree"></am-nav-tree>
+ * <am-nav-tree hidecurrent></am-nav-tree>
  *
  * @extends BaseComponent
  */
-class NavTreeComponent extends BaseComponent {
+export class NavTreeComponent extends BaseComponent {
 	/**
 	 * The api endpoint.
 	 */
 	protected api = 'UI/navTree';
+
+	/**
+	 * The pages tree structure.
+	 */
+	protected tree: KeyValueMap = {};
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -77,9 +82,11 @@ class NavTreeComponent extends BaseComponent {
 	/**
 	 * Init the navTree.
 	 */
-	private init(): void {
-		const pages: NavTreePageData[] = App.pages as NavTreePageData[];
-		const tree: KeyValueMap = {};
+	protected init(): void {
+		const pages: NavTreePageData[] = this.filterPages(
+			Object.values(App.pages) as NavTreePageData[]
+		);
+
 		let parent: HTMLElement;
 
 		pages.sort((a: KeyValueMap, b: KeyValueMap) =>
@@ -87,17 +94,30 @@ class NavTreeComponent extends BaseComponent {
 		);
 
 		pages.forEach((page) => {
-			if (typeof tree[page.parent] == 'undefined') {
+			if (typeof this.tree[page.parent] == 'undefined') {
 				parent = this;
 			} else {
-				parent = tree[page.parent].children;
+				parent = this.tree[page.parent].children;
 			}
 
-			tree[page.url] = this.createItem(page, parent);
+			const item = this.createItem(page, parent);
+			this.tree[page.url] = item;
+
+			this.toggleItem(item, getPageURL());
 		});
 
 		this.unfoldToActive();
 		this.toggleChildrenIcons();
+	}
+
+	/**
+	 * Optionally define a filter function for the pages array.
+	 *
+	 * @param pages
+	 * @returns the array of filtered pages
+	 */
+	protected filterPages(pages: NavTreePageData[]): NavTreePageData[] {
+		return pages;
 	}
 
 	/**
@@ -118,17 +138,43 @@ class NavTreeComponent extends BaseComponent {
 			{ style: `--level: ${level}` },
 			parent
 		);
-		const link = create('summary', [classes.navLink], {}, wrapper);
+		const summary = create('summary', [classes.navLink], {}, wrapper);
 		const children = create('div', [classes.navChildren], {}, wrapper);
-
-		wrapper.classList.toggle(
-			classes.navItemActive,
-			page.url == getPageURL() && isActivePage(Routes[Routes.page])
-		);
 
 		if (!level) {
 			wrapper.setAttribute('open', true);
 		}
+
+		const item: NavTreeItem = {
+			wrapper,
+			summary,
+			children,
+			page,
+		};
+
+		this.createSummaryChild(item);
+
+		return item;
+	}
+
+	/**
+	 * Render the actual content of a summary as a link.
+	 *
+	 * @param item
+	 * @returns The actual tree item summery child
+	 */
+	protected createSummaryChild(item: NavTreeItem): string {
+		const { page, summary } = item;
+		const link = create(
+			'am-link',
+			[],
+			{
+				target: `${Routes[Routes.page]}?url=${encodeURIComponent(
+					page.url
+				)}`,
+			},
+			summary
+		);
 
 		let icon = 'file-earmark-text';
 
@@ -137,24 +183,34 @@ class NavTreeComponent extends BaseComponent {
 		}
 
 		link.innerHTML = html`
-			<am-link
-				target="${Routes[Routes.page]}?url=${encodeURIComponent(
-					page.url
-				)}"
-			>
-				<i class="bi bi-${icon}"></i>
-				<span>$${page.title}</span>
-			</am-link>
+			<i class="bi bi-${icon}"></i>
+			<span>$${page.title}</span>
 		`;
 
-		return { wrapper, link, children };
+		return link;
+	}
+
+	/**
+	 * Toggle an item to be active or inactive.
+	 *
+	 * @param item
+	 * @param url
+	 */
+	protected toggleItem(item: NavTreeItem, url: string): void {
+		item.wrapper.classList.toggle(
+			classes.navItemActive,
+			item.page.url == url && isActivePage(Routes[Routes.page])
+		);
 	}
 
 	/**
 	 * Unfold the tree to reveal the active item.
 	 */
 	private unfoldToActive(): void {
-		const activeItem = query(`.${classes.navItemActive}`) as HTMLElement;
+		const activeItem = query(
+			`.${classes.navItemActive}`,
+			this
+		) as HTMLElement;
 
 		if (activeItem) {
 			queryParents('details', activeItem).forEach((item: HTMLElement) => {

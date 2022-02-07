@@ -60,7 +60,7 @@ export const setActiveSection = (section: string): void => {
 	const url = new URL(window.location.href);
 
 	url.searchParams.set('section', section);
-	window.history.pushState(null, null, url);
+	window.history.replaceState(null, null, url);
 	window.dispatchEvent(new Event(switcherChangeEventName));
 };
 

@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { classes, create } from '../../core';
 import { FieldComponent } from './Field';
 
 /**
@@ -41,10 +42,18 @@ import { FieldComponent } from './Field';
  */
 class TextareaComponent extends FieldComponent {
 	/**
-	 * Render the field.
+	 * Create an input field.
 	 */
-	render(): void {
-		super.render();
+	input(): void {
+		const { name, id, value } = this._data;
+		const textarea = create(
+			'textarea',
+			[classes.input],
+			{ id, name },
+			this
+		);
+
+		textarea.value = value;
 	}
 }
 
