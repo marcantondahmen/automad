@@ -27,29 +27,28 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
+use Automad\Core\FileSystem;
 use Automad\Core\Page;
 use Automad\Core\Str;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Page model.
+ * The App model handles all data modelling related to page data.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PageModel {
@@ -106,23 +105,23 @@ class PageModel {
 	 * @return string The view URL to the new page
 	 */
 	public static function contextUrlByPath(string $path) {
+		$Cache = new Cache();
 		// Rebuild Automad object, since the file structure has changed.
-		return '?view=Page&url=' . urlencode(self::urlByPath(UICache::rebuild(), $path));
+		return AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/page?url=' . urlencode(self::urlByPath($Cache->rebuild(), $path));
 	}
 
 	/**
 	 * Delete page.
 	 *
 	 * @param Page $Page
-	 * @param string $title
 	 * @return bool true on success
 	 */
-	public static function delete(Page $Page, string $title) {
+	public static function delete(Page $Page) {
 		return FileSystem::movePageDir(
 			$Page->path,
 			'..' . AM_DIR_TRASH . dirname($Page->path),
 			self::extractPrefixFromPath($Page->path),
-			$title
+			self::extractSlugFromPath($Page->path)
 		);
 	}
 
@@ -326,9 +325,8 @@ class PageModel {
 	 * @return bool true on success
 	 */
 	private static function updatePageLinks(Page $Page, string $newPath) {
-		Cache::clear();
-
-		$Automad = UICache::rebuild();
+		$Cache = new Cache();
+		$Automad = $Cache->rebuild();
 		$oldUrl = $Page->origUrl;
 		$oldPath = $Page->path;
 
