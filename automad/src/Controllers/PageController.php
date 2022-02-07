@@ -27,33 +27,34 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Controllers;
 
+use Automad\API\Response;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\Core\Page;
+use Automad\Core\FileSystem;
+use Automad\Core\Parse;
 use Automad\Core\Request;
-use Automad\UI\Components\Layout\PageData;
-use Automad\UI\Models\PageModel;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
+use Automad\Core\Selection;
+use Automad\Models\PageModel;
+use Automad\System\Fields;
+use Automad\System\ThemeCollection;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Page controller.
+ * The App controller handles all requests related to page data.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2022 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class PageController {
@@ -100,12 +101,47 @@ class PageController {
 	}
 
 	/**
+	 * Get a breadcrumb trail for a requested page.
+	 *
+	 * /api/Page/breadcrumbs
+	 *
+	 * @return Response the response data
+	 */
+	public static function breadcrumbs() {
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+		$Response = new Response();
+		$url = Request::post('url');
+
+		if ($url && ($Page = $Automad->getPage($url))) {
+			$Selection = new Selection($Automad->getCollection());
+			$Selection->filterBreadcrumbs($url);
+
+			$breadcrumbs = array();
+
+			foreach ($Selection->getSelection(false) as $Page) {
+				$breadcrumbs[] = array(
+					'url' => $Page->origUrl,
+					'title' => $Page->get(AM_KEY_TITLE)
+				);
+			}
+
+			$Response->setData($breadcrumbs);
+		}
+
+		return $Response;
+	}
+
+	/**
 	 * Send form when there is no posted data in the request or save data if there is.
+	 *
+	 * /api/Page/data
 	 *
 	 * @return Response the response object
 	 */
 	public static function data() {
-		$Automad = UICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
 
@@ -122,8 +158,29 @@ class PageController {
 				);
 			} else {
 				// If only the URL got submitted, just get the form ready.
-				$PageData = new PageData($Automad, $Page);
-				$Response->setHtml($PageData->render());
+				$ThemeCollection = new ThemeCollection();
+				$Theme = $ThemeCollection->getThemeByKey($Page->get(AM_KEY_THEME));
+				$keys = Fields::inCurrentTemplate($Page, $Theme);
+				$data = Parse::dataFile(PageModel::getPageFilePath($Page));
+
+				$fields = array_merge(
+					array_fill_keys(Fields::$reserved, ''),
+					array_fill_keys($keys, ''),
+					$data
+				);
+
+				ksort($fields);
+
+				$Response->setData(
+					array(
+						'url' => $Page->origUrl,
+						'prefix' => PageModel::extractPrefixFromPath($Page->path),
+						'slug' => PageModel::extractSlugFromPath($Page->path),
+						'template' => $Page->getTemplate(),
+						'fields' => $fields,
+						'shared' => $Automad->Shared->data
+					)
+				);
 			}
 		}
 
@@ -133,22 +190,24 @@ class PageController {
 	/**
 	 * Delete page.
 	 *
+	 * /api/Page/delete
+	 *
 	 * @return Response the response object
 	 */
 	public static function delete() {
-		$Automad = UICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
-		$title = Request::post('title');
 
 		// Validate $_POST.
-		if ($url && ($Page = $Automad->getPage($url)) && $url != '/' && $title) {
+		if ($url && ($Page = $Automad->getPage($url)) && $url != '/') {
 			// Check if the page's directory and parent directory are wirtable.
 			if (is_writable(dirname(PageModel::getPageFilePath($Page)))
 				&& is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
-				PageModel::delete($Page, $title);
+				PageModel::delete($Page);
 
-				$Response->setRedirect('?view=Page&url=' . urlencode($Page->parentUrl));
+				$Response->setRedirect(AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/page?url=' . urlencode($Page->parentUrl));
 				Debug::log($Page->url, 'deleted');
 
 				Cache::clear();
@@ -168,10 +227,13 @@ class PageController {
 	/**
 	 * Duplicate a page.
 	 *
+	 * /api/Page/duplicate
+	 *
 	 * @return Response the response object
 	 */
 	public static function duplicate() {
-		$Automad = UICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
 
@@ -194,20 +256,21 @@ class PageController {
 	/**
 	 * Move a page.
 	 *
+	 * /api/Page/move
+	 *
 	 * @return Response the response object
 	 */
 	public static function move() {
-		$Automad = UICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
 		$url = Request::post('url');
-		$dest = Request::post('destination');
-		$title = Request::post('title');
+		$dest = Request::post('targetPage');
 
 		// Validation of $_POST. To avoid all kinds of unexpected trouble,
-		// the URL and the destination must exist in the Automad's collection and a title must be present.
+		// the URL and the destination must exist in the Automad's collection.
 		if ($url
 			&& $dest
-			&& $title
 			&& ($Page = $Automad->getPage($url))
 			&& ($dest = $Automad->getPage($dest))) {
 			// The home page can't be moved!
@@ -251,7 +314,7 @@ class PageController {
 	}
 
 	/**
-	 * 	Get the theme/template file from posted data or return a default template name.
+	 * Get the theme/template file from posted data or return a default template name.
 	 *
 	 * @param array $array
 	 * @param string|null $key
