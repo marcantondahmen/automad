@@ -32,7 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import './styles/vendor.less';
 import './styles/ui.less';
 
 import './components/Fields/Checkbox';

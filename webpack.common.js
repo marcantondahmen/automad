@@ -42,6 +42,16 @@ module.exports = (env, argv) => {
 		},
 		optimization: {
 			minimizer: [new CssMinimizerPlugin(), '...'],
+			splitChunks: {
+				cacheGroups: {
+					vendor: {
+						test: /node_modules/,
+						chunks: 'all',
+						name: 'vendor',
+						enforce: true,
+					},
+				},
+			},
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
