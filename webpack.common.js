@@ -3,13 +3,35 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+const minifyHTML = (html) => {
+	return html
+		.replace(/\s+/g, ' ')
+		.replace(/\s+\</g, '<')
+		.replace(/\<\s+/g, '<')
+		.replace(/\s+\>/g, '>')
+		.replace(/\>\s+/g, '>');
+};
+
 module.exports = (env, argv) => {
 	const config = {
 		module: {
 			rules: [
 				{
 					test: /\.ts$/,
-					use: 'ts-loader',
+					use: [
+						{
+							loader: 'string-replace-loader',
+							options: {
+								search: /(`[^`]+`)/g,
+								replace(match, p1, offset, string) {
+									return minifyHTML(p1);
+								},
+							},
+						},
+						{
+							loader: 'ts-loader',
+						},
+					],
 					exclude: /node_modules/,
 				},
 				{
