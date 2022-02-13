@@ -36,6 +36,10 @@
 
 namespace Automad\Core;
 
+use Automad\Engine\PatternAssembly;
+use Automad\UI\Utils\Messenger;
+use Automad\UI\Utils\Text;
+
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
@@ -274,7 +278,7 @@ class FileSystem {
 		$url = Request::post('url');
 
 		if ($url && ($Page = $Automad->getPage($url))) {
-			return FileSystem::fullPagePath($Page->path);
+			return self::fullPagePath($Page->path);
 		} else {
 			return AM_BASE_DIR . AM_DIR_SHARED . '/';
 		}

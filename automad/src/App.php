@@ -36,18 +36,11 @@
 
 namespace Automad;
 
-use Automad\Core\Automad;
-use Automad\Core\Cache;
 use Automad\Core\Config;
 use Automad\Core\Debug;
-use Automad\Core\Feed;
 use Automad\Core\FileSystem;
-use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Router;
-use Automad\Core\Sitemap;
-use Automad\Engine\View;
-use Automad\UI\Dashboard;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

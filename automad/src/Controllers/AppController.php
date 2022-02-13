@@ -38,6 +38,7 @@ namespace Automad\Controllers;
 
 use Automad\API\Response;
 use Automad\Core\Cache;
+use Automad\Core\FileUtils;
 use Automad\Models\AppModel;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
@@ -71,7 +72,8 @@ class AppController {
 			'base' => AM_BASE_URL,
 			'baseIndex' => AM_BASE_INDEX,
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
-			'reservedFields' => Fields::$reserved
+			'reservedFields' => Fields::$reserved,
+			'allowedFileTypes' => FileUtils::allowedFileTypes()
 		));
 
 		return $Response;
@@ -92,7 +94,8 @@ class AppController {
 			'pages' => AppModel::pages($Automad),
 			'jumpbar' => AppModel::autocompleteJumpbar($Automad),
 			'autocomplete' => AppModel::autocompleteLinks($Automad),
-			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME)
+			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
+			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME)
 		));
 
 		return $Response;

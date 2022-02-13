@@ -49,11 +49,12 @@
 		position: absolute;
 		display: none;
 		flex-direction: column;
+		max-height: ~'calc(100vh - 1.5rem)';
 		background-color: var(--am-bg-base);
 		border-radius: var(--am-radius);
 		border: var(--am-hairline);
 		box-shadow: var(--am-shadow);
-		overflow: hidden;
+		overflow: auto;
 
 		&:empty {
 			display: none;

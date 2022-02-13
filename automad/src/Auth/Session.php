@@ -36,7 +36,7 @@
 
 namespace Automad\Auth;
 
-use Automad\API\Models\UserCollectionModel;
+use Automad\Models\UserCollectionModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

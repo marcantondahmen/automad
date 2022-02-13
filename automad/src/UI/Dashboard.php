@@ -66,7 +66,9 @@ class Dashboard {
 				>
 				<title>Automad</title>
 				{$fn(Asset::icon('favicon.ico'))}
+				{$fn(Asset::css('vendor.bundle.css'))}
 				{$fn(Asset::css('ui.bundle.css'))}
+				{$fn(Asset::js('vendor.bundle.js'))}
 				{$fn(Asset::js('ui.bundle.js'))}
 			</head>
 			<body>

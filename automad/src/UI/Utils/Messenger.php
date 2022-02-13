@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\API\Utils;
+namespace Automad\UI\Utils;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -52,6 +52,11 @@ class Messenger {
 	private $error = null;
 
 	/**
+	 * The last pushed success.
+	 */
+	private $success = null;
+
+	/**
 	 * The messenger constructor.
 	 */
 	public function __construct() {
@@ -67,11 +72,29 @@ class Messenger {
 	}
 
 	/**
+	 * Return the stored success message.
+	 *
+	 * @return string|null the success message
+	 */
+	public function getSuccess() {
+		return $this->success;
+	}
+
+	/**
 	 * Set the last error.
 	 *
 	 * @param string $message
 	 */
 	public function setError(string $message) {
 		$this->error = $message;
+	}
+
+	/**
+	 * Set the last success message.
+	 *
+	 * @param string $message
+	 */
+	public function setSuccess(string $message) {
+		$this->success = $message;
 	}
 }
