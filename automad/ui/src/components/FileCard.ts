@@ -69,15 +69,11 @@ class FileCardComponent extends BaseComponent {
 	render(file: File) {
 		this.innerHTML = html`
 			${this.renderPreview(file)}
-			<div class="${classes.cardTitle}">$${file.basename}</div>
+			<div class="${classes.cardTitle}">${file.basename}</div>
 			<div class="${classes.cardBody}">$${file.caption || ''}</div>
 			<div class="${classes.cardFooter}">
 				<label>Delete</label>
-				<input
-					type="checkbox"
-					name="delete[]"
-					value="$${file.basename}"
-				/>
+				<input type="checkbox" name="delete[${file.basename}]" />
 			</div>
 		`;
 	}

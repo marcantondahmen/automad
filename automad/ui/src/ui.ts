@@ -86,3 +86,4 @@ import './components/SwitcherLabel';
 import './components/SwitcherLink';
 import './components/SwitcherSection';
 import './components/Toggle';
+import './components/Upload';

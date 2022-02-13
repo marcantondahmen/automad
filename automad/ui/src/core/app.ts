@@ -58,6 +58,13 @@ export class App {
 	}
 
 	/**
+	 * The array of allowed file types.
+	 */
+	static get allowedFileTypes(): string[] {
+		return this._state.allowedFileTypes;
+	}
+
+	/**
 	 * The base URL for the website.
 	 */
 	static get baseURL(): string {

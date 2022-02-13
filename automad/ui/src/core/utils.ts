@@ -96,6 +96,12 @@ export const classes: KeyValueMap = {
 	root: 'am-c-root',
 	rootLoading: 'am-c-root--loading',
 	switcherLinkActive: 'am-c-switcher-link--active',
+	upload: 'am-c-upload',
+	uploadDropzone: 'am-c-upload__dropzone',
+	uploadWindow: 'am-c-upload__window',
+	uploadWindowOpen: 'am-c-upload__window--open',
+	uploadWindowGrip: 'am-c-upload__window-grip',
+	uploadPreviews: 'am-c-upload__previews',
 };
 
 /**

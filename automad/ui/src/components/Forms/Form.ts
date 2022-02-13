@@ -33,6 +33,7 @@
  */
 
 import {
+	App,
 	classes,
 	debounce,
 	getPageURL,
@@ -107,7 +108,10 @@ export class FormComponent extends BaseComponent {
 	 * All related submit buttons.
 	 */
 	protected get submitButtons(): HTMLElement[] {
-		return queryAll(`am-submit[form="${this.api}"]`);
+		const external = queryAll(`am-submit[form="${this.api}"]`);
+		const internal = queryAll('am-submit:not([form])', this);
+
+		return external.concat(internal);
 	}
 
 	/**
@@ -119,7 +123,7 @@ export class FormComponent extends BaseComponent {
 			'input[type="password"]',
 			'input[type="datetime-local"]',
 			'input[type="hidden"]',
-			'input[type="checkbox"]',
+			'input[type="checkbox"]:checked',
 			'input[type="radio"]:checked',
 			'textarea',
 			'select',
@@ -275,7 +279,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected processResponse(response: KeyValueMap): void {
 		if (response.redirect) {
-			window.location.href = response.redirect;
+			App.root.setView(response.redirect);
 		}
 
 		if (response.reload) {
@@ -288,6 +292,13 @@ export class FormComponent extends BaseComponent {
 
 		if (response.success) {
 			notifySuccess(response.success);
+		}
+
+		if (response.debug) {
+			const log: KeyValueMap = {};
+
+			log[`API: ${this.api}`] = response.debug;
+			console.log(log);
 		}
 	}
 

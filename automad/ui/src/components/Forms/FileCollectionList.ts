@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, fire } from '../../core';
+import { classes, create, fire, queryAll } from '../../core';
 import { File, KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
@@ -84,6 +84,20 @@ export class FileCollectionListComponent extends FormComponent {
 		});
 
 		fire(FileCollectionUpdateEventName);
+	}
+
+	/**
+	 * Reset the selection and submit the form in order to refresh the list of files.
+	 */
+	refresh(): void {
+		queryAll('[type="checkbox"]', this).forEach(
+			(checkbox: HTMLInputElement) => {
+				checkbox.checked = false;
+			}
+		);
+
+		this.hasUnsavedChanges = false;
+		this.submit(true);
 	}
 }
 

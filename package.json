@@ -10,6 +10,8 @@
     "build:automad": "webpack --config automad/webpack.config.js --mode production"
   },
   "devDependencies": {
+    "@types/draggabilly": "^2.1.3",
+    "@types/dropzone": "^5.7.4",
     "@types/toastify-js": "^1.11.0",
     "@types/yaireo__tagify": "^4.9.0",
     "@yaireo/tagify": "^4.9.4",
@@ -18,6 +20,8 @@
     "browser-sync-webpack-plugin": "^2.3.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
+    "draggabilly": "^3.0.0",
+    "dropzone": "^6.0.0-beta.2",
     "file-loader": "^6.2.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",

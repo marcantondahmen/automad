@@ -42,6 +42,7 @@ use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Models\FileCollectionModel;
+use Automad\UI\Utils\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -64,6 +65,8 @@ class FileCollectionController {
 		$Automad = $Cache->getAutomad();
 		$path = FileSystem::getPathByPostUrl($Automad);
 		$url = Request::post('url');
+		$Response = new Response();
+		$Messenger = new Messenger();
 
 		if (!$url) {
 			$url = AM_DIR_SHARED;
@@ -72,13 +75,13 @@ class FileCollectionController {
 		Debug::log($_POST);
 
 		if ($delete = Request::post('delete')) {
-			$Response = FileCollectionModel::deleteFiles($delete, $path);
-		} else {
-			$Response = new Response();
+			FileCollectionModel::deleteFiles(array_keys($delete), $path, $Messenger);
 		}
 
 		$data = array('files' => FileCollectionModel::list($path, $url));
 		$Response->setData($data);
+		$Response->setError($Messenger->getError());
+		$Response->setSuccess($Messenger->getSuccess());
 
 		return $Response;
 	}
@@ -88,14 +91,37 @@ class FileCollectionController {
 	 *
 	 * @return Response the response object
 	 */
-	/* public static function upload() {
-		$Automad = UICache::get();
-		Debug::log($_POST + $_FILES, 'files');
+	public static function upload() {
+		Debug::log($_POST + $_FILES, 'file');
 
-		// Set path.
-		// If an URL is also posted, use that URL's page path. Without any URL, the /shared path is used.
-		$path = FileSystem::getPathByPostUrl($Automad);
+		if (!empty($_FILES['file']) && is_array($_FILES['file'])) {
+			$Cache = new Cache();
+			$Automad = $Cache->getAutomad();
+			$Messenger = new Messenger();
 
-		return FileCollectionModel::upload($_FILES, $path);
-	} */
+			$chunk = (object) array_merge(
+				array(
+					'dzchunkindex' => '',
+					'dzchunkbyteoffset' => '',
+					'dzchunksize' => 0,
+					'dztotalchunkcount' => 0,
+					'dzuuid' => '',
+					'tmp_name' => '',
+					'name' => ''
+				),
+				$_FILES['file'] + $_POST
+			);
+
+			FileCollectionModel::upload(
+				$chunk,
+				FileSystem::getPathByPostUrl($Automad),
+				$Messenger
+			);
+
+			$Response = new Response();
+			$Response->setError($Messenger->getError());
+
+			return $Response;
+		}
+	}
 }
