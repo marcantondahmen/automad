@@ -389,15 +389,17 @@ class Cache {
 	}
 
 	/**
-	 * Force a rebuild of the UI cache.
+	 * Force a rebuild of the cache.
 	 *
 	 * @return object The fresh Automad object
 	 */
 	public function rebuild() {
+		Cache::clear();
+
 		$Automad = new Automad();
 
 		$this->writeAutomadObjectToCache($Automad);
-		Debug::log('Rebuilt Automad cache for the dashboard');
+		Debug::log('Rebuilt Automad cache');
 
 		return $Automad;
 	}

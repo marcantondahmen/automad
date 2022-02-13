@@ -107,7 +107,7 @@ class PageModel {
 	public static function contextUrlByPath(string $path) {
 		$Cache = new Cache();
 		// Rebuild Automad object, since the file structure has changed.
-		return AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/page?url=' . urlencode(self::urlByPath($Cache->rebuild(), $path));
+		return 'page?url=' . urlencode(self::urlByPath($Cache->rebuild(), $path));
 	}
 
 	/**

@@ -32,8 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { classes, listen, query } from '../core';
+import { classes, listen, query, queryAll } from '../core';
 import { BaseComponent } from './Base';
+import { FormComponent } from './Forms/Form';
 
 /**
  * A modal component.
@@ -104,6 +105,7 @@ export class ModalComponent extends BaseComponent {
 	close(): void {
 		this.classList.remove(classes.modalOpen);
 		this.toggleBodyOverflow();
+		this.resetFormStatus();
 	}
 
 	/**
@@ -112,6 +114,17 @@ export class ModalComponent extends BaseComponent {
 	open(): void {
 		this.classList.add(classes.modalOpen);
 		this.toggleBodyOverflow();
+	}
+
+	/**
+	 * Reset all forms in the modal window.
+	 */
+	private resetFormStatus(): void {
+		const forms = queryAll('[watch]', this);
+
+		forms.forEach((form: FormComponent) => {
+			form.hasUnsavedChanges = false;
+		});
 	}
 
 	/**

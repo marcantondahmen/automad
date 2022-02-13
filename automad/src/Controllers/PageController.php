@@ -40,6 +40,7 @@ use Automad\API\Response;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
+use Automad\Core\Page;
 use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Selection;
@@ -61,33 +62,29 @@ class PageController {
 	/**
 	 * Add page based on data in $_POST.
 	 *
+	 * /api/Page/add
+	 *
 	 * @return Response the response object
 	 */
 	public static function add() {
-		$Automad = UICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$Response = new Response();
-		$url = Request::post('url');
+		$targetPage = Request::post('targetPage');
 
-		// Validation of $_POST. URL, title and template must exist and != false.
-		if ($url && ($Page = $Automad->getPage($url))) {
-			$subpage = Request::post('subpage');
+		if ($targetPage && ($Parent = $Automad->getPage($targetPage))) {
+			if ($title = Request::post('title')) {
+				if (is_writable(dirname(PageModel::getPageFilePath($Parent)))) {
+					Debug::log($Parent->url, 'parent page');
 
-			if (is_array($subpage) && !empty($subpage['title'])) {
-				// Check if the current page's directory is writable.
-				if (is_writable(dirname(PageModel::getPageFilePath($Page)))) {
-					Debug::log($Page->url, 'page');
-					Debug::log($subpage, 'new subpage');
+					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
+					$isPrivate = Request::post('private');
 
-					// The new page's properties.
-					$title = $subpage['title'];
-					$themeTemplate = self::getTemplateNameFromArray($subpage, 'theme_template');
-					$isPrivate = (!empty($subpage['private']));
-
-					$Response->setRedirect(PageModel::add($Page, $title, $themeTemplate, $isPrivate));
+					$Response->setRedirect(PageModel::add($Parent, $title, $themeTemplate, $isPrivate));
 				} else {
 					$Response->setError(
 						Text::get('error_permission') .
-						'<p>' . dirname(PageModel::getPageFilePath($Page)) . '</p>'
+						'<p>' . dirname(PageModel::getPageFilePath($Parent)) . '</p>'
 					);
 				}
 			} else {

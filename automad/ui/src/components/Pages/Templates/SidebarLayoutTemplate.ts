@@ -32,8 +32,9 @@
  * Licensed under the MIT license.
  */
 
-import { App, html } from '../../../core';
+import { App, classes, createField, html, titleCase } from '../../../core';
 import { Partials } from '../../../types';
+import { createTemplateSelect } from '../../Fields/PageTemplate';
 
 export const sidebarLayout = ({ save, main }: Partials) => {
 	return html`
@@ -98,13 +99,19 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 					<am-jumpbar placeholder="jumpbar_placeholder"></am-jumpbar>
 				</div>
 				<div class="am-l-navbar__buttons">
+					<am-modal-toggle
+						modal="#am-add-page-modal"
+						title="$${App.text('btn_add_page')}"
+					>
+						<i class="bi bi-plus"></i>
+					</am-modal-toggle>
 					${save}
 					<am-toggle
 						target="body"
 						cls="am-l-page--sidebar-open"
 						class="am-u-display-small"
 					>
-						Open
+						<i class="bi bi-list"></i>
 					</am-toggle>
 				</div>
 			</nav>
@@ -113,5 +120,46 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 				<div class="am-l-footer__content">Footer</div>
 			</footer>
 		</div>
+		<am-modal id="am-add-page-modal">
+			<div class="${classes.modalDialog}">
+				<am-form api="Page/add" watch>
+					<div class="${classes.modalHeader}">
+						<span>$${App.text('btn_add_page')}</span>
+						<am-modal-close
+							class="${classes.modalClose}"
+						></am-modal-close>
+					</div>
+					${createField('am-title', null, {
+						key: App.reservedFields.AM_KEY_TITLE,
+						name: App.reservedFields.AM_KEY_TITLE,
+						value: 'New Page',
+					}).outerHTML}
+					${createField('am-checkbox-large', null, {
+						key: App.reservedFields.AM_KEY_PRIVATE,
+						name: App.reservedFields.AM_KEY_PRIVATE,
+						value: false,
+					}).outerHTML}
+					<div class="${classes.field}">
+						<label class="${classes.fieldLabel}"
+							>${App.text('page_theme_template')}
+						</label>
+						${createTemplateSelect('').outerHTML}
+					</div>
+					<div class="${classes.field}">
+						<label class="${classes.fieldLabel}"
+							>${App.text('page_add_location')}
+						</label>
+						<am-page-select-tree></am-page-select-tree>
+					</div>
+					<div class="${classes.modalFooter}">
+						<am-submit
+							class="${classes.button} ${classes.buttonSuccess}"
+						>
+							$${App.text('btn_add_page')}
+						</am-submit>
+					</div>
+				</am-form>
+			</div>
+		</am-modal>
 	`;
 };

@@ -48,34 +48,13 @@ import {
 	App,
 	classes,
 	create,
+	createField,
 	html,
 	keyCombo,
 	query,
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
-
-/**
- * Create a form field and set its data.
- *
- * @param fieldType the field type name
- * @param section the section node where the field is created in
- * @param data the field data object
- * @param cls the array with optional class name
- * @returns the generated field
- */
-const createField = (
-	fieldType: string,
-	section: HTMLElement,
-	data: FieldInitData,
-	cls: string[] = []
-): FieldComponent => {
-	const field = create(fieldType, cls, {}, section);
-
-	field.data = data;
-
-	return field;
-};
 
 /**
  * Create a group of form fields within a given section element based on a set of keys.
@@ -235,7 +214,6 @@ export class PageDataComponent extends FormComponent {
 		prefix,
 		slug,
 		fields,
-		shared,
 		template,
 	}: PageMainSettingsData): void {
 		/**
@@ -261,12 +239,7 @@ export class PageDataComponent extends FormComponent {
 			return createField(fieldType, section, data, []);
 		};
 
-		const title = createMainField(
-			'am-field',
-			App.reservedFields.AM_KEY_TITLE
-		);
-
-		query('input', title).classList.add(classes.inputTitle);
+		createMainField('am-title', App.reservedFields.AM_KEY_TITLE);
 
 		create(
 			'a',
@@ -286,7 +259,6 @@ export class PageDataComponent extends FormComponent {
 
 		templateField.data = {
 			fields,
-			shared,
 			template,
 			themeKey: App.reservedFields.AM_KEY_THEME,
 		};
@@ -343,7 +315,7 @@ export class PageDataComponent extends FormComponent {
 	protected processResponse(response: KeyValueMap): void {
 		super.processResponse(response);
 
-		if (typeof response.data == 'undefined') {
+		if (typeof response.data == 'undefined' && !response.redirect) {
 			this.pageNotFound();
 
 			return;
@@ -374,7 +346,6 @@ export class PageDataComponent extends FormComponent {
 			prefix,
 			slug,
 			fields,
-			shared,
 			template,
 		});
 

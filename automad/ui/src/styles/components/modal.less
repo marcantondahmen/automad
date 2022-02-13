@@ -41,7 +41,7 @@ am-modal {
 	position: fixed;
 	z-index: 200;
 	width: 100vw;
-	height: 100%;
+	height: 100vh;
 	top: 0;
 	left: 0;
 	padding: var(--am-modal-overlay-padding);
@@ -49,6 +49,7 @@ am-modal {
 	transform: translateY(-100%);
 	opacity: 0;
 	transition: transform 0s linear 0.2s, opacity 0.2s;
+	overflow: auto;
 
 	&--open {
 		transform: translateY(0);

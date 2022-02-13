@@ -46,6 +46,7 @@ import './components/Fields/Markdown';
 import './components/Fields/PageTags';
 import './components/Fields/PageTemplate';
 import './components/Fields/Textarea';
+import './components/Fields/Title';
 import './components/Fields/Url';
 
 import './components/Forms/FileCollectionList';

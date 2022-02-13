@@ -66,10 +66,10 @@ export class PageComponent extends SidebarLayoutComponent {
 
 		if (getPageURL() !== '/') {
 			more = html`
-				<am-dropdown class="am-c-dropdown">
+				<am-dropdown class="${classes.dropdown}">
 					$${App.text('btn_more')}
-					<div class="am-c-dropdown__items">
-						<div class="am-c-dropdown__item">
+					<div class="${classes.dropdownItems}">
+						<div class="${classes.dropdownItem}">
 							<i class="bi bi-pencil"></i>
 							<a
 								href="${App.baseURL}${getPageURL()}"
@@ -78,7 +78,7 @@ export class PageComponent extends SidebarLayoutComponent {
 								$${App.text('btn_inpage_edit')}
 							</a>
 						</div>
-						<div class="am-c-dropdown__item">
+						<div class="${classes.dropdownItem}">
 							<am-form api="Page/duplicate">
 								<i class="bi bi-files"></i>
 								<am-submit
@@ -88,13 +88,13 @@ export class PageComponent extends SidebarLayoutComponent {
 								>
 							</am-form>
 						</div>
-						<div class="am-c-dropdown__item">
+						<div class="${classes.dropdownItem}">
 							<am-modal-toggle modal="#am-move-page-modal">
 								<i class="bi bi-arrows-move"></i>
 								$${App.text('btn_move_page')}
 							</am-modal-toggle>
 						</div>
-						<div class="am-c-dropdown__item">
+						<div class="${classes.dropdownItem}">
 							<am-form
 								api="Page/delete"
 								confirm="$${App.text('confirm_delete_page')}"
@@ -105,7 +105,7 @@ export class PageComponent extends SidebarLayoutComponent {
 								>
 							</am-form>
 						</div>
-						<div class="am-c-dropdown__item">
+						<div class="${classes.dropdownItem}">
 							<i class="bi bi-clipboard-plus"></i>
 							<am-copy value="${getPageURL()}">
 								$${App.text('btn_copy_url_clipboard')}
@@ -117,29 +117,30 @@ export class PageComponent extends SidebarLayoutComponent {
 
 			modal = html`
 				<am-modal id="am-move-page-modal">
-					<div class="am-c-modal__dialog">
-						<div class="am-c-modal__header">
-							<span>$${App.text('btn_move_page')}</span>
-							<am-modal-close
-								class="${classes.modalClose}"
-							></am-modal-close>
-						</div>
+					<div class="${classes.modalDialog}">
 						<am-form api="Page/move">
-							<div class="am-c-field">
-								<label class="am-c-field__label">
+							<div class="${classes.modalHeader}">
+								<span>$${App.text('btn_move_page')}</span>
+								<am-modal-close
+									class="${classes.modalClose}"
+								></am-modal-close>
+							</div>
+							<div class="${classes.field}">
+								<label class="${classes.fieldLabel}">
 									${App.text('page_move_destination')}
 								</label>
 								<am-page-select-tree
 									hidecurrent
 								></am-page-select-tree>
 							</div>
-
-							<am-submit
-								class="${classes.button} ${classes.buttonSuccess}"
-							>
-								$${App.text('btn_move_page')}
-								<i class="bi bi-arrows-move"></i>
-							</am-submit>
+							<div class="${classes.modalFooter}">
+								<am-submit
+									class="${classes.button} ${classes.buttonSuccess}"
+								>
+									$${App.text('btn_move_page')}
+									<i class="bi bi-arrows-move"></i>
+								</am-submit>
+							</div>
 						</am-form>
 					</div>
 				</am-modal>
@@ -186,9 +187,29 @@ export class PageComponent extends SidebarLayoutComponent {
 				<div class="am-l-main__content">
 					<am-page-data api="Page/data" watch></am-page-data>
 					<am-switcher-section name="${App.sections.content.files}">
-						<am-submit form="FileCollection/list"
-							>$${App.text('btn_remove_selected')}</am-submit
+						<am-upload></am-upload>
+
+						<!-- <am-modal-toggle
+							class="${classes.button}"
+							modal="#am-file-upload-modal"
 						>
+							${App.text('btn_upload')}
+						</am-modal-toggle>
+
+						 -->
+
+						<am-modal-toggle
+							class="${classes.button}"
+							modal="#am-file-import-modal"
+						>
+							${App.text('btn_import')}
+						</am-modal-toggle>
+						<am-submit
+							class="${classes.button}"
+							form="FileCollection/list"
+						>
+							$${App.text('btn_remove_selected')}
+						</am-submit>
 						<am-file-collection-list
 							confirm="$${App.text('confirm_delete_files')}"
 							api="FileCollection/list"
@@ -207,8 +228,11 @@ export class PageComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderSaveButtonPartial(): string {
-		return html`<am-submit form="Page/data">
-			${App.text('btn_save')}
+		return html`<am-submit
+			form="Page/data"
+			title="$${App.text('btn_save')}"
+		>
+			<i class="bi bi-check"></i>
 		</am-submit>`;
 	}
 }

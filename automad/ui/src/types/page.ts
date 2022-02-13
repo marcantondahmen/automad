@@ -51,7 +51,6 @@ export interface PageMainSettingsData {
 	prefix: string;
 	slug: string;
 	fields: KeyValueMap;
-	shared: KeyValueMap;
 	template: string;
 }
 

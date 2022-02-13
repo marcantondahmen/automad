@@ -32,6 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import { FieldComponent } from '../components/Fields/Field';
+import { FieldInitData } from '../types';
+
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
  *
@@ -62,4 +65,26 @@ export const create = (
 	}
 
 	return element;
+};
+
+/**
+ * Create a form field and set its data.
+ *
+ * @param fieldType the field type name
+ * @param section the section node where the field is created in
+ * @param data the field data object
+ * @param cls the array with optional class name
+ * @returns the generated field
+ */
+export const createField = (
+	fieldType: string,
+	parent: HTMLElement,
+	data: FieldInitData,
+	cls: string[] = []
+): FieldComponent => {
+	const field = create(fieldType, cls, {}, parent);
+
+	field.data = data;
+
+	return field;
 };

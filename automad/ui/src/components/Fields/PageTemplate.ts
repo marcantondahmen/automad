@@ -85,12 +85,11 @@ const templatePath = (template: string, path: string = ''): string => {
  */
 const themeStatus = ({
 	fields,
-	shared,
 	template,
 	themeKey,
 }: TemplateFieldData): TemplateButtonStatus => {
 	const themes = App.themes;
-	let mainTheme = themes[shared[themeKey]];
+	let mainTheme = themes[App.mainTheme];
 
 	if (typeof mainTheme == 'undefined') {
 		mainTheme = Object.values(themes)[0];
@@ -121,7 +120,6 @@ const themeStatus = ({
 		buttonClass,
 		buttonIcon,
 		selectedTemplate,
-		mainTheme,
 	};
 };
 
@@ -160,10 +158,10 @@ const createOptions = (
  * @param selectedTemplate
  * @returns the rendered element
  */
-const createTemplateSelect = (
-	mainTheme: Theme,
+export const createTemplateSelect = (
 	selectedTemplate: string
 ): HTMLSelectElement => {
+	const mainTheme = App.themes[App.mainTheme];
 	const themes = App.themes;
 	const select = create('select', [classes.input], {
 		name: 'theme_template',
@@ -198,12 +196,11 @@ export class PageTemplateComponent extends BaseComponent {
 	 *
 	 * @param {KeyValueMap} params
 	 * @param {KeyValueMap} params.fields
-	 * @param {KeyValueMap} params.shared
 	 * @param {string} params.template
 	 * @param {string} params.themeKey
 	 */
-	set data({ fields, shared, template, themeKey }: TemplateFieldData) {
-		this.render({ fields, shared, template, themeKey });
+	set data({ fields, template, themeKey }: TemplateFieldData) {
+		this.render({ fields, template, themeKey });
 	}
 
 	/**
@@ -218,28 +215,16 @@ export class PageTemplateComponent extends BaseComponent {
 	 *
 	 * @param params
 	 * @param params.fields
-	 * @param params.shared
 	 * @param params.template
 	 * @param params.themeKey
 	 */
-	private render({
-		fields,
-		shared,
-		template,
-		themeKey,
-	}: TemplateFieldData): void {
-		const {
-			buttonLabel,
-			buttonIcon,
-			buttonClass,
-			selectedTemplate,
-			mainTheme,
-		} = themeStatus({
-			fields,
-			shared,
-			template,
-			themeKey,
-		});
+	private render({ fields, template, themeKey }: TemplateFieldData): void {
+		const { buttonLabel, buttonIcon, buttonClass, selectedTemplate } =
+			themeStatus({
+				fields,
+				template,
+				themeKey,
+			});
 
 		const button = create('div', [classes.field], {}, this);
 		const modal = create(
@@ -248,7 +233,7 @@ export class PageTemplateComponent extends BaseComponent {
 			{ id: 'am-page-template-modal' },
 			this
 		);
-		const select = createTemplateSelect(mainTheme, selectedTemplate);
+		const select = createTemplateSelect(selectedTemplate);
 
 		button.innerHTML = html`
 			<label class="${classes.fieldLabel}"

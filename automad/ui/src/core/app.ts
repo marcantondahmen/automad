@@ -86,6 +86,13 @@ export class App {
 	}
 
 	/**
+	 * The main theme path.
+	 */
+	static get mainTheme(): string {
+		return this._state.mainTheme;
+	}
+
+	/**
 	 * The pages array used to build the nav tree.
 	 */
 	static get pages(): Pages {

@@ -32,38 +32,27 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Theme } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+import { classes, create } from '../../core';
+import { FieldComponent } from './Field';
 
-export type InputElement = HTMLInputElement | HTMLTextAreaElement;
-
-export interface TemplateButtonStatus {
-	buttonLabel: string;
-	buttonClass: string;
-	buttonIcon: string;
-	selectedTemplate: string;
+/**
+ * An URL field.
+ *
+ * @extends FieldComponent
+ */
+class TitleComponent extends FieldComponent {
+	/**
+	 * Render the field.
+	 */
+	input(): void {
+		const { name, id, value } = this._data;
+		create(
+			'input',
+			[classes.input, classes.inputTitle],
+			{ id, name, value, type: 'text' },
+			this
+		);
+	}
 }
 
-export interface TemplateFieldData {
-	fields: KeyValueMap;
-	template: string;
-	themeKey: string;
-}
-
-export interface FieldGroupData {
-	section: SwitcherSectionComponent;
-	fields: KeyValueMap;
-	tooltips: KeyValueMap;
-}
-
-export interface FieldInitData {
-	key: string;
-	value: string | KeyValueMap | boolean;
-	name: string;
-	tooltip?: string;
-	label?: string;
-}
-
-export interface FieldRenderData extends Omit<FieldInitData, 'key'> {
-	id: string;
-}
+customElements.define('am-title', TitleComponent);
