@@ -61,15 +61,15 @@ class Dashboard {
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<meta name="robots" content="noindex">
 				<meta
-				name="viewport"
-				content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+					name="viewport"
+					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				>
 				<title>Automad</title>
-				{$fn(Asset::icon('favicon.ico'))}
-				{$fn(Asset::css('vendor.bundle.css'))}
-				{$fn(Asset::css('ui.bundle.css'))}
-				{$fn(Asset::js('vendor.bundle.js'))}
-				{$fn(Asset::js('ui.bundle.js'))}
+				{$fn(Asset::icon('ui/dist/favicon.ico'))}
+				{$fn(Asset::css('ui/dist/vendor.bundle.css'))}
+				{$fn(Asset::css('ui/dist/ui.bundle.css'))}
+				{$fn(Asset::js('ui/dist/vendor.bundle.js'))}
+				{$fn(Asset::js('ui/dist/ui.bundle.js'))}
 			</head>
 			<body>
 				<am-root base="{$fn(AM_BASE_INDEX)}"></am-root>

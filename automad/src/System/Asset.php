@@ -39,7 +39,7 @@ namespace Automad\System;
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Asset handles loading and cache busting assets that are located in the main dist directory.
+ * The Asset handles loading and cache busting assets that are located in the automad directory.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2022 by Marc Anton Dahmen - https://marcdahmen.de
@@ -93,7 +93,7 @@ class Asset {
 			$baseUrl = AM_BASE_URL;
 		}
 
-		return "$baseUrl/automad/dist/$file";
+		return "$baseUrl/automad/$file";
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Asset {
 	 * @return int the modification time in seconds
 	 */
 	private static function mTime(string $file) {
-		$path = AM_BASE_DIR . '/automad/dist/' . $file;
+		$path = AM_BASE_DIR . '/automad/' . $file;
 
 		return filemtime($path);
 	}

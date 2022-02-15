@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev:automad": "webpack --config automad/webpack.config.js --mode development",
-    "build:automad": "webpack --config automad/webpack.config.js --mode production"
+    "dev:ui": "webpack --config automad/ui/webpack.config.js --mode development",
+    "build:ui": "webpack --config automad/ui/webpack.config.js --mode production"
   },
   "devDependencies": {
     "@types/draggabilly": "^2.1.3",
