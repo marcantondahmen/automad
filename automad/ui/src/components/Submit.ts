@@ -35,7 +35,7 @@
 import { listen, queryAll, queryParents } from '../core';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
-import { ModalComponent } from './Modal';
+import { ModalComponent } from './Modal/Modal';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.
@@ -66,7 +66,7 @@ class SubmitComponent extends BaseComponent {
 		let forms = queryAll(`[api="${this.elementAttributes.form}"]`);
 
 		if (forms.length == 0) {
-			forms = queryParents('am-form', this);
+			forms = queryParents('[api]', this);
 		}
 
 		return forms;

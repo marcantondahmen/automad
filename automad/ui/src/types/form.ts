@@ -33,7 +33,7 @@
  */
 
 import { KeyValueMap, Theme } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
 
 export type InputElement = HTMLInputElement | HTMLTextAreaElement;
 

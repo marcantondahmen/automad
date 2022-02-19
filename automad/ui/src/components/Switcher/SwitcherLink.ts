@@ -32,54 +32,57 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from './Base';
-import { classes, listen, query } from '../core';
+import { BaseComponent } from '../Base';
+import { classes, listen } from '../../core';
 import {
 	getActiveSection,
+	setActiveSection,
 	switcherChangeEventName,
 	SwitcherComponent,
 } from './Switcher';
 
+export const linkTag = 'am-switcher-link';
+
 /**
- * A switcher section that contains the content that will be toggled by a switcher menu.
- *
- * @example
- * <am-switcher-section name="settings">...</am-switcher-section>
- * <am-switcher-section name="text">...</am-switcher-section>
+ * A switcher link that is part of a switcher menu component.
  *
  * @see {@link SwitcherComponent}
  * @extends BaseComponent
  */
-export class SwitcherSectionComponent extends BaseComponent {
+export class SwitcherLinkComponent extends BaseComponent {
 	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {
-		return ['name'];
+		return ['section'];
 	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.toggle();
-
 		listen(window, switcherChangeEventName, this.toggle.bind(this));
+		listen(this, 'click', this.select.bind(this));
 	}
 
 	/**
-	 * Toggle the section visiblity based on the query string.
+	 * Toggle the active state of the switcher link.
 	 */
 	toggle(): void {
 		this.classList.toggle(
-			classes.displayNone,
-			this.elementAttributes.name != getActiveSection()
+			classes.switcherLinkActive,
+			this.elementAttributes.section == getActiveSection()
 		);
+	}
 
-		query('html').scrollTop = 0;
+	/**
+	 * Set the active section.
+	 */
+	select(): void {
+		setActiveSection(this.elementAttributes.section);
 	}
 }
 
-customElements.define('am-switcher-section', SwitcherSectionComponent);
+customElements.define('am-switcher-link', SwitcherLinkComponent);

@@ -32,31 +32,33 @@
  * Licensed under the MIT license.
  */
 
-import { listen } from '../core';
-import { BaseComponent } from './Base';
-import { ModalComponent } from './Modal';
+import { BaseComponent } from '../Base';
+import { listen, query } from '../../core';
+import {
+	getActiveSection,
+	switcherChangeEventName,
+	SwitcherComponent,
+} from './Switcher';
+import { linkTag } from './SwitcherLink';
 
 /**
- * A modal close button that is placed inside the modal dialog.
+ * A label that reflects the active switcher link content.
  *
- * @see {@link ModalComponent}
+ * @see {@link SwitcherComponent}
  * @extends BaseComponent
  */
-class ModalCloseComponent extends BaseComponent {
+
+export class SwitcherLabelComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const close = () => {
-			const modal = this.closest('am-modal');
-
-			if (modal instanceof ModalComponent) {
-				modal.close();
-			}
-		};
-
-		listen(this, 'click', close.bind(this));
+		listen(window, switcherChangeEventName, () => {
+			this.innerHTML = query(
+				`${linkTag}[section="${getActiveSection()}"]`
+			).innerHTML;
+		});
 	}
 }
 
-customElements.define('am-modal-close', ModalCloseComponent);
+customElements.define('am-switcher-label', SwitcherLabelComponent);

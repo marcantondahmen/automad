@@ -33,7 +33,7 @@
  */
 
 import { KeyValueMap } from '.';
-import { SwitcherSectionComponent } from '../components/SwitcherSection';
+import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
 
 export type PageSectionName = 'settings' | 'text' | 'colors';
 

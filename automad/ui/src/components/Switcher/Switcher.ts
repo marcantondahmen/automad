@@ -32,8 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from './Base';
-import { listen, query, queryAll } from '../core';
+import { BaseComponent } from '../Base';
+import { listen, query, queryAll } from '../../core';
 import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';

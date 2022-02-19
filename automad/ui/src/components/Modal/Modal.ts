@@ -40,10 +40,10 @@ import {
 	queryAll,
 	resetFieldStatus,
 	setFormData,
-} from '../core';
-import { InputElement, KeyValueMap } from '../types';
-import { BaseComponent } from './Base';
-import { FormComponent } from './Forms/Form';
+} from '../../core';
+import { KeyValueMap } from '../../types';
+import { BaseComponent } from '../Base';
+import { FormComponent } from '../Forms/Form';
 
 /**
  * A modal component.

@@ -60,6 +60,10 @@ import './components/Forms/FileCollectionList';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 
+import './components/Modal/Modal';
+import './components/Modal/ModalClose';
+import './components/Modal/ModalToggle';
+
 import './components/Pages/Home';
 import './components/Pages/Login';
 import './components/Pages/Logout';
@@ -71,15 +75,17 @@ import './components/Pages/Setup';
 import './components/Pages/Shared';
 import './components/Pages/System';
 
+import './components/Switcher/Switcher';
+import './components/Switcher/SwitcherLabel';
+import './components/Switcher/SwitcherLink';
+import './components/Switcher/SwitcherSection';
+
 import './components/Alert';
 import './components/Autocomplete';
 import './components/Copy';
 import './components/Dropdown';
 import './components/Jumpbar';
 import './components/Link';
-import './components/Modal';
-import './components/ModalClose';
-import './components/ModalToggle';
 import './components/NavItem';
 import './components/NavTree';
 import './components/PageBreadcrumbs';
@@ -87,8 +93,4 @@ import './components/PageSelectTree';
 import './components/Root';
 import './components/Sidebar';
 import './components/Submit';
-import './components/Switcher';
-import './components/SwitcherLabel';
-import './components/SwitcherLink';
-import './components/SwitcherSection';
 import './components/Toggle';

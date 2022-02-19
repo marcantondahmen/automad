@@ -35,7 +35,7 @@
 import { create, listen } from '../../core';
 import { File } from '../../types';
 import { BaseComponent } from '../Base';
-import { ModalComponent } from '../Modal';
+import { ModalComponent } from '../Modal/Modal';
 
 /**
  * A file edit modal toggle component.

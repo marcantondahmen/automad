@@ -43,7 +43,7 @@ import {
 } from '../../types';
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
-import { SwitcherSectionComponent } from '../SwitcherSection';
+import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
 	App,
 	classes,
