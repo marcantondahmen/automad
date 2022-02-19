@@ -40,6 +40,7 @@ import {
 	html,
 	Routes,
 } from '../../core';
+import { FilesChangedOnServerEventName } from '../Forms/FileCollectionList';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -62,60 +63,59 @@ export class PageComponent extends SidebarLayoutComponent {
 	 */
 	protected renderMainPartial(): string {
 		let more = '';
-		let modal = '';
+		let movePageModal = '';
 
 		if (getPageURL() !== '/') {
 			more = html`
-				<am-dropdown class="${classes.dropdown}">
+				<am-dropdown>
 					$${App.text('btn_more')}
 					<div class="${classes.dropdownItems}">
-						<div class="${classes.dropdownItem}">
+						<a
+							href="${App.baseURL}${getPageURL()}"
+							class="${classes.dropdownItem}"
+							target="_blank"
+						>
 							<i class="bi bi-pencil"></i>
-							<a
-								href="${App.baseURL}${getPageURL()}"
-								target="_blank"
-							>
-								$${App.text('btn_inpage_edit')}
-							</a>
-						</div>
-						<div class="${classes.dropdownItem}">
-							<am-form api="Page/duplicate">
+							<span>$${App.text('btn_inpage_edit')}</span>
+						</a>
+						<am-form api="Page/duplicate">
+							<am-submit class="${classes.dropdownItem}">
 								<i class="bi bi-files"></i>
-								<am-submit
-									>$${App.text(
-										'btn_duplicate_page'
-									)}</am-submit
-								>
-							</am-form>
-						</div>
-						<div class="${classes.dropdownItem}">
-							<am-modal-toggle modal="#am-move-page-modal">
-								<i class="bi bi-arrows-move"></i>
-								$${App.text('btn_move_page')}
-							</am-modal-toggle>
-						</div>
-						<div class="${classes.dropdownItem}">
-							<am-form
-								api="Page/delete"
-								confirm="$${App.text('confirm_delete_page')}"
-							>
+								<span>
+									$${App.text('btn_duplicate_page')}
+								</span>
+							</am-submit>
+						</am-form>
+						<am-modal-toggle
+							class="${classes.dropdownItem}"
+							modal="#am-move-page-modal"
+						>
+							<i class="bi bi-arrows-move"></i>
+							<span>$${App.text('btn_move_page')}</span>
+						</am-modal-toggle>
+						<am-form
+							api="Page/delete"
+							confirm="$${App.text('confirm_delete_page')}"
+						>
+							<am-submit class="${classes.dropdownItem}">
 								<i class="bi bi-trash2"></i>
-								<am-submit
-									>$${App.text('btn_delete_page')}</am-submit
-								>
-							</am-form>
-						</div>
-						<div class="${classes.dropdownItem}">
+								<span>$${App.text('btn_delete_page')}</span>
+							</am-submit>
+						</am-form>
+						<am-copy
+							class="${classes.dropdownItem}"
+							value="${getPageURL()}"
+						>
 							<i class="bi bi-clipboard-plus"></i>
-							<am-copy value="${getPageURL()}">
+							<span>
 								$${App.text('btn_copy_url_clipboard')}
-							</am-copy>
-						</div>
+							</span>
+						</am-copy>
 					</div>
 				</am-dropdown>
 			`;
 
-			modal = html`
+			movePageModal = html`
 				<am-modal id="am-move-page-modal">
 					<div class="${classes.modalDialog}">
 						<am-form api="Page/move">
@@ -188,16 +188,6 @@ export class PageComponent extends SidebarLayoutComponent {
 					<am-page-data api="Page/data" watch></am-page-data>
 					<am-switcher-section name="${App.sections.content.files}">
 						<am-upload></am-upload>
-
-						<!-- <am-modal-toggle
-							class="${classes.button}"
-							modal="#am-file-upload-modal"
-						>
-							${App.text('btn_upload')}
-						</am-modal-toggle>
-
-						 -->
-
 						<am-modal-toggle
 							class="${classes.button}"
 							modal="#am-file-import-modal"
@@ -218,7 +208,38 @@ export class PageComponent extends SidebarLayoutComponent {
 					</am-switcher-section>
 				</div>
 			</section>
-			${modal}
+			${movePageModal}
+			<am-modal id="am-file-import-modal">
+				<div class="${classes.modalDialog}">
+					<am-form
+						api="File/import"
+						event="${FilesChangedOnServerEventName}"
+					>
+						<div class="${classes.modalHeader}">
+							<span>$${App.text('btn_import')}</span>
+							<am-modal-close
+								class="${classes.modalClose}"
+							></am-modal-close>
+						</div>
+						<div class="${classes.field}">
+							<input
+								class="${classes.input}"
+								name="importUrl"
+								type="text"
+								placeholder="URL"
+							/>
+						</div>
+						<div class="${classes.modalFooter}">
+							<am-submit
+								class="${classes.button} ${classes.buttonSuccess}"
+							>
+								$${App.text('btn_import')}
+								<i class="bi bi-cloud-download"></i>
+							</am-submit>
+						</div>
+					</am-form>
+				</div>
+			</am-modal>
 		`;
 	}
 

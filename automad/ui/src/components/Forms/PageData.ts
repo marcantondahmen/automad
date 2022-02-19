@@ -178,7 +178,7 @@ export class PageDataComponent extends FormComponent {
 	/**
 	 * Initialize the form.
 	 */
-	protected async init(): Promise<void> {
+	protected init(): void {
 		this.sections = createSections(this);
 
 		super.init();
@@ -315,7 +315,7 @@ export class PageDataComponent extends FormComponent {
 	protected processResponse(response: KeyValueMap): void {
 		super.processResponse(response);
 
-		if (typeof response.data == 'undefined' && !response.redirect) {
+		if (response.code != 200) {
 			this.pageNotFound();
 
 			return;

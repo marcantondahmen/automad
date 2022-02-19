@@ -63,14 +63,19 @@
 		}
 	}
 
-	a,
-	button {
+	& a,
+	& button {
 		transition: color 0.2s, background-color 0.2s, border 0.2s;
 	}
 
-	hr {
+	& hr {
 		margin: var(--am-space-large) 0;
 		border: none;
 		border-bottom: 1px solid var(--am-border-clr);
+	}
+
+	& img {
+		max-width: 100%;
+		height: auto;
 	}
 }

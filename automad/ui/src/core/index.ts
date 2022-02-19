@@ -34,6 +34,7 @@
 
 export * from './app';
 export * from './create';
+export * from './form';
 export * from './notify';
 export * from './request';
 export * from './router';

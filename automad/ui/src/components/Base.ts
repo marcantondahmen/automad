@@ -54,6 +54,7 @@ export abstract class BaseComponent extends HTMLElement {
 
 	/**
 	 * The array of observed attributes.
+	 *
 	 * @static
 	 */
 	static get observedAttributes(): string[] {

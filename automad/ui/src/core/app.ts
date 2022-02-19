@@ -42,16 +42,22 @@ import { KeyValueMap, Pages, ThemeCollection } from '../types';
 export class App {
 	/**
 	 * The internal private state.
+	 *
+	 * @static
 	 */
 	private static _state: KeyValueMap;
 
 	/**
 	 * The internal private root element
+	 *
+	 * @static
 	 */
 	private static _root: RootComponent;
 
 	/**
 	 * The autocomplete map.
+	 *
+	 * @static
 	 */
 	static get autocomplete(): KeyValueMap[] {
 		return this._state.autocomplete;
@@ -59,6 +65,8 @@ export class App {
 
 	/**
 	 * The array of allowed file types.
+	 *
+	 * @static
 	 */
 	static get allowedFileTypes(): string[] {
 		return this._state.allowedFileTypes;
@@ -66,6 +74,8 @@ export class App {
 
 	/**
 	 * The base URL for the website.
+	 *
+	 * @static
 	 */
 	static get baseURL(): string {
 		return this._state.base;
@@ -73,6 +83,8 @@ export class App {
 
 	/**
 	 * The dashboard URL.
+	 *
+	 * @static
 	 */
 	static get dashboardURL(): string {
 		return this._state.dashboard;
@@ -80,6 +92,8 @@ export class App {
 
 	/**
 	 * The jumpbar autocomplete map.
+	 *
+	 * @static
 	 */
 	static get jumpbar(): KeyValueMap[] {
 		return this._state.jumpbar;
@@ -87,6 +101,8 @@ export class App {
 
 	/**
 	 * The main theme path.
+	 *
+	 * @static
 	 */
 	static get mainTheme(): string {
 		return this._state.mainTheme;
@@ -94,6 +110,8 @@ export class App {
 
 	/**
 	 * The pages array used to build the nav tree.
+	 *
+	 * @static
 	 */
 	static get pages(): Pages {
 		return this._state.pages;
@@ -101,6 +119,8 @@ export class App {
 
 	/**
 	 * The map of reserved field names.
+	 *
+	 * @static
 	 */
 	static get reservedFields(): KeyValueMap {
 		return this._state.reservedFields;
@@ -108,6 +128,8 @@ export class App {
 
 	/**
 	 * The section name map.
+	 *
+	 * @static
 	 */
 	static get sections(): KeyValueMap {
 		return this._state.sections;
@@ -115,6 +137,8 @@ export class App {
 
 	/**
 	 * The name of the site.
+	 *
+	 * @static
 	 */
 	static get sitename(): string {
 		return this._state.sitename;
@@ -122,6 +146,8 @@ export class App {
 
 	/**
 	 * The array of tags that are used across the site.
+	 *
+	 * @static
 	 */
 	static get tags(): string[] {
 		return this._state.tags;
@@ -129,6 +155,8 @@ export class App {
 
 	/**
 	 * The array of installed themes.
+	 *
+	 * @static
 	 */
 	static get themes(): ThemeCollection {
 		return this._state.themes;
@@ -136,6 +164,8 @@ export class App {
 
 	/**
 	 * The state.
+	 *
+	 * @static
 	 */
 	static get state(): KeyValueMap {
 		return this._state;
@@ -143,6 +173,8 @@ export class App {
 
 	/**
 	 * The root element.
+	 *
+	 * @static
 	 */
 	static get root(): RootComponent {
 		return this._root;
@@ -151,6 +183,8 @@ export class App {
 	/**
 	 * The bootstrap method that requested the basic state data.
 	 *
+	 * @static
+	 * @async
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
@@ -164,6 +198,9 @@ export class App {
 
 	/**
 	 * Update the state according to a change of view.
+	 *
+	 * @async
+	 * @static
 	 */
 	static async updateState(): Promise<void> {
 		const response = await requestAPI('App/updateState');
@@ -174,6 +211,7 @@ export class App {
 	/**
 	 * Get a text module by key.
 	 *
+	 * @static
 	 * @param key
 	 * @returns the requested text module
 	 */

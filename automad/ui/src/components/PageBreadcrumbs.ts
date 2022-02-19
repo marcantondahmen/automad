@@ -56,6 +56,8 @@ class PageBreadcrumbsComponent extends BaseComponent {
 
 	/**
 	 * Fetch the breadcrumb data and init the componenten.
+	 *
+	 * @async
 	 */
 	private async init(): Promise<void> {
 		this.classList.add(classes.breadcrumbs);
@@ -73,6 +75,10 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	 * @param data
 	 */
 	private render(data: KeyValueMap): void {
+		if (!data) {
+			return;
+		}
+
 		data.forEach((page: KeyValueMap) => {
 			const target = `${Routes[Routes.page]}?url=${encodeURIComponent(
 				page.url

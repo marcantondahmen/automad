@@ -128,23 +128,31 @@ export const waitForPendingRequests = async (): Promise<any> => {
 class PendingRequests {
 	/**
 	 * The event name that is used when the count changes.
+	 *
+	 * @static
 	 */
 	static eventName = 'AutomadPendingRequestsChange';
 
 	/**
 	 * The number of currently pending requests.
+	 *
+	 * @static
 	 */
 	private static count: number = 0;
 
 	/**
 	 * Return true if the number of pending request is 0.
+	 *
+	 * @static
 	 */
 	static get idle(): boolean {
 		return this.count <= 0;
 	}
 
 	/**
-	 * Add a request,
+	 * Add a request.
+	 *
+	 * @static
 	 */
 	static add() {
 		this.count++;
@@ -153,6 +161,8 @@ class PendingRequests {
 
 	/**
 	 * Remove a request.
+	 *
+	 * @static
 	 */
 	static remove() {
 		this.count--;

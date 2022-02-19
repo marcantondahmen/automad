@@ -26,6 +26,10 @@ btn_browse: Browse Files
 
 -
 
+btn_cancel: Cancel
+
+-
+
 btn_close: Close
 
 -
@@ -193,6 +197,10 @@ btn_upload: Upload
 
 
 
+confirm_cancel_upload: Are you sure to cancel the upload?
+
+-
+
 confirm_delete_files: Are you sure you want to delete the selected files?
 
 -
@@ -243,7 +251,7 @@ dashboard_title: Dashboard
 
 
 
-dropzone: Drag Files Here
+dropzone: Drop files here or click to browse
 
 -
 
@@ -932,6 +940,10 @@ error_update_permission: Can't run update! Permissions denied!
 
 -
 
+error_upload_cancelled: The upload has been cancelled
+
+-
+
 error_user_not_found: Invalid username or email address.
 
 -
@@ -1364,6 +1376,10 @@ success_packages_updated_all: Successfully updated all packages
 -
 
 success_package_updated: Successfully updated
+
+-
+
+success_upload: Successfully uploaded
 
 -
 

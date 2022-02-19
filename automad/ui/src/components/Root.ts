@@ -87,6 +87,8 @@ export class RootComponent extends BaseComponent {
 
 	/**
 	 * Init the root component.
+	 *
+	 * @async
 	 */
 	private async init(): Promise<void> {
 		this.classList.add(classes.root);
@@ -133,6 +135,8 @@ export class RootComponent extends BaseComponent {
 
 	/**
 	 * Update the root component.
+	 *
+	 * @async
 	 */
 	private async update(): Promise<void> {
 		this.progressBar(25);
