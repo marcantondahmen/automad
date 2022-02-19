@@ -43,9 +43,9 @@ import {
 	notifyError,
 	notifySuccess,
 	query,
-} from '../core';
-import { BaseComponent } from './Base';
-import { FileCollectionListComponent } from './Forms/FileCollectionList';
+} from '../../core';
+import { BaseComponent } from '../Base';
+import { FileCollectionListComponent } from '../Forms/FileCollectionList';
 
 /**
  * An upload component.

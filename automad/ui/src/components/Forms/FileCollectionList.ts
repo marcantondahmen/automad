@@ -32,11 +32,19 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, fire, queryAll } from '../../core';
+import { classes, create, fire, listen, queryAll } from '../../core';
 import { File, KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
 
-export const FileCollectionUpdateEventName = 'AutomadFileCollectionUpdate';
+/**
+ * Event that is fired by this file collection form after rendering the collection.
+ */
+export const FileCollectionRenderedEventName = 'AutomadFileCollectionRendered';
+
+/**
+ * Event that is fired by other forms after changing the current file collection on the server side.
+ */
+export const FilesChangedOnServerEventName = 'AutomadFilesChangedOnServer';
 
 /**
  * The file collection form component.
@@ -53,6 +61,17 @@ export class FileCollectionListComponent extends FormComponent {
 	 */
 	protected get initSelf(): boolean {
 		return true;
+	}
+
+	/**
+	 * Initialize the form.
+	 */
+	protected init(): void {
+		super.init();
+
+		listen(window, FilesChangedOnServerEventName, () => {
+			this.refresh();
+		});
 	}
 
 	/**
@@ -83,7 +102,7 @@ export class FileCollectionListComponent extends FormComponent {
 			card.data = file;
 		});
 
-		fire(FileCollectionUpdateEventName);
+		fire(FileCollectionRenderedEventName);
 	}
 
 	/**

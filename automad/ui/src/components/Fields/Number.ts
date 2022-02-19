@@ -26,39 +26,26 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { BaseComponent } from './Base';
-import { create, listen, queryAll } from '../core';
-import { FileCollectionUpdateEventName } from './Forms/FileCollectionList';
+import { FieldComponent } from './Field';
 
 /**
- * A file count badge component that displays the total number of file card elements.
+ * A number field.
  *
- * @example
- * <am-file-count></am-file-count>
- *
- * @extends BaseComponent
+ * @extends FieldComponent
  */
-class FileCountComponent extends BaseComponent {
+class NumberComponent extends FieldComponent {
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * Render the field.
 	 */
-	connectedCallback(): void {
-		const badge = create('span', [], {}, this);
-		const update = () => {
-			const count = queryAll('am-file-card').length;
-
-			badge.textContent = `${count}`;
-		};
-
-		listen(window, FileCollectionUpdateEventName, update.bind(this));
-		setTimeout(update.bind(this), 0);
+	render(): void {
+		super.render();
 	}
 }
 
-customElements.define('am-file-count', FileCountComponent);
+customElements.define('am-number', NumberComponent);

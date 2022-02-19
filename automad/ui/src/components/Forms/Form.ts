@@ -36,6 +36,8 @@ import {
 	App,
 	classes,
 	debounce,
+	fire,
+	getFormData,
 	getPageURL,
 	listen,
 	notifyError,
@@ -43,6 +45,8 @@ import {
 	query,
 	queryAll,
 	requestAPI,
+	resetFieldStatus,
+	updateFieldStatus,
 } from '../../core';
 import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
@@ -57,6 +61,7 @@ import { BaseComponent } from '../Base';
  * - `focus`
  * - `enter`
  * - `confirm`
+ * - `event`
  *
  * Self initialized form with watched submit button:
  *
@@ -67,6 +72,13 @@ import { BaseComponent } from '../Base';
  *
  * @example
  * <am-form api="Class/method" focus>
+ *     <input>
+ * </am-form>
+ *
+ * Fire an event on the window after getting a response from the server:
+ *
+ * @example
+ * <am-form api="File/import" event="FileCollectionUpdate">
  *     <input>
  * </am-form>
  *
@@ -115,43 +127,15 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
-	 * The array of valied field selectors that are used to collect the form data.
-	 */
-	protected get controls(): string[] {
-		return [
-			'input[type="text"]',
-			'input[type="password"]',
-			'input[type="datetime-local"]',
-			'input[type="hidden"]',
-			'input[type="checkbox"]:checked',
-			'input[type="radio"]:checked',
-			'textarea',
-			'select',
-			'am-editor',
-		];
-	}
-
-	/**
 	 * The form data object.
 	 */
 	get formData(): KeyValueMap {
-		const data: KeyValueMap = {};
+		const data: KeyValueMap = getFormData(this);
 		const pageUrl = getPageURL();
 
 		if (pageUrl) {
 			data.url = pageUrl;
 		}
-
-		queryAll(this.controls.join(','), this).forEach(
-			(field: InputElement) => {
-				const name = field.getAttribute('name');
-				const value = field.value;
-
-				if (name) {
-					data[name] = value;
-				}
-			}
-		);
 
 		return data;
 	}
@@ -168,7 +152,7 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * Initialize the form.
 	 */
-	protected async init(): Promise<void> {
+	protected init(): void {
 		if (this.initSelf) {
 			this.submit(true);
 		}
@@ -220,33 +204,6 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
-	 * Update the class of the containing field to be marked as changed.
-	 *
-	 * @param element - The input element that has changed
-	 * @param changed
-	 */
-	private updateFieldStatus(element: HTMLElement, changed: boolean): void {
-		const field = element.closest(`.${classes.field}`);
-
-		if (field) {
-			field.classList.toggle(classes.fieldChanged, changed);
-		}
-	}
-
-	/**
-	 * Reset all fields to be marked as unchanged.
-	 */
-	private resetFieldStatus(): void {
-		setTimeout(() => {
-			queryAll(`.${classes.input}`, this).forEach(
-				(input: InputElement) => {
-					this.updateFieldStatus(input, false);
-				}
-			);
-		}, 200);
-	}
-
-	/**
 	 * Submit the form.
 	 *
 	 * @param skipConfirmOnInit
@@ -267,9 +224,13 @@ export class FormComponent extends BaseComponent {
 			this.disbableButtons();
 		}
 
+		resetFieldStatus(this);
 		this.hasUnsavedChanges = false;
-		this.resetFieldStatus();
 		this.processResponse(response);
+
+		if (this.hasAttribute('event')) {
+			fire(this.getAttribute('event'));
+		}
 	}
 
 	/**
@@ -308,8 +269,8 @@ export class FormComponent extends BaseComponent {
 	 * @param input
 	 */
 	onChange(input: InputElement): void {
+		updateFieldStatus(input, true);
 		this.enableButtons();
-		this.updateFieldStatus(input, true);
 		this.hasUnsavedChanges = true;
 	}
 

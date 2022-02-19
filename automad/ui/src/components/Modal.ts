@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { classes, listen, query, queryAll } from '../core';
+import {
+	classes,
+	getFormData,
+	listen,
+	query,
+	queryAll,
+	resetFieldStatus,
+	setFormData,
+} from '../core';
+import { InputElement, KeyValueMap } from '../types';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
 
@@ -41,6 +50,7 @@ import { FormComponent } from './Forms/Form';
  * The following attributes can be added to a modal component:
  * - `noesc` - Disable the ESC key
  * - `noclick` - Disable closing the modal by clicking on the overlay
+ * - `destroy` - Self destroy on close
  *
  * @example
  * <am-modal-toggle modal="#modal">
@@ -58,6 +68,11 @@ import { FormComponent } from './Forms/Form';
  * @extends BaseComponent
  */
 export class ModalComponent extends BaseComponent {
+	/**
+	 * The form data of the form controls included in the modal.
+	 */
+	private formData: KeyValueMap;
+
 	/**
 	 * True if the modal dialog is open.
 	 */
@@ -105,7 +120,13 @@ export class ModalComponent extends BaseComponent {
 	close(): void {
 		this.classList.remove(classes.modalOpen);
 		this.toggleBodyOverflow();
-		this.resetFormStatus();
+		this.restoreInitialFormData();
+
+		if (this.hasAttribute('destroy')) {
+			setTimeout(() => {
+				this.remove();
+			}, 400);
+		}
 	}
 
 	/**
@@ -114,6 +135,7 @@ export class ModalComponent extends BaseComponent {
 	open(): void {
 		this.classList.add(classes.modalOpen);
 		this.toggleBodyOverflow();
+		this.saveInitialFormData();
 	}
 
 	/**
@@ -137,6 +159,23 @@ export class ModalComponent extends BaseComponent {
 			classes.overflowHidden,
 			query(`.${classes.modalOpen}`) != null
 		);
+	}
+
+	/**
+	 * Save the initial form values on opening.
+	 */
+	private saveInitialFormData(): void {
+		this.formData = getFormData(this);
+	}
+
+	/**
+	 * Restore the initial form data when modal was opened.
+	 */
+	private restoreInitialFormData(): void {
+		setFormData(this.formData, this);
+		resetFieldStatus(this);
+
+		this.resetFormStatus();
 	}
 }
 

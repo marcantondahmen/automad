@@ -35,6 +35,7 @@
 import { listen, queryAll, queryParents } from '../core';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
+import { ModalComponent } from './Modal';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.
@@ -72,6 +73,15 @@ class SubmitComponent extends BaseComponent {
 	}
 
 	/**
+	 * Get the parent modal if existing.
+	 */
+	get parentModal(): ModalComponent {
+		const modal = this.closest('am-modal') as ModalComponent;
+
+		return modal || null;
+	}
+
+	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
@@ -80,11 +90,15 @@ class SubmitComponent extends BaseComponent {
 				return false;
 			}
 
-			console.log(this.relatedForms);
-
 			this.relatedForms.forEach((form: FormComponent) => {
 				form.submit();
 			});
+
+			const modal = this.parentModal;
+
+			if (modal) {
+				modal.close();
+			}
 		};
 
 		listen(this, 'click', submit.bind(this));

@@ -26,46 +26,68 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, listen } from '../core';
-import { BaseComponent } from './Base';
+import { create, listen } from '../../core';
+import { File } from '../../types';
+import { BaseComponent } from '../Base';
+import { ModalComponent } from '../Modal';
 
 /**
- * A simple dropdown menu component.
- *
- * @example
- * <am-dropdown>
- *     Menu
- *     <div class="am-c-dropdown__items">
- *         ...
- *     </div>
- * </am-dropdown>
+ * A file edit modal toggle component.
  *
  * @extends BaseComponent
  */
-class DropdownComponent extends BaseComponent {
+export abstract class BaseFileEditComponent extends BaseComponent {
+	/**
+	 * The file data.
+	 */
+	data: File;
+
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.dropdown);
+		listen(this, 'click', () => {
+			if (!this.data) {
+				console.log('File data is not defined');
 
-		listen(window, 'click', (event: MouseEvent) => {
-			if (
-				event.target === this ||
-				(event.target as HTMLElement).parentNode === this
-			) {
-				this.classList.toggle(classes.dropdownOpen);
-			} else {
-				this.classList.remove(classes.dropdownOpen);
+				return;
 			}
+
+			const modal = this.createModal(this.data);
+
+			setTimeout(() => {
+				modal.open();
+			}, 0);
 		});
 	}
-}
 
-customElements.define('am-dropdown', DropdownComponent);
+	/**
+	 * Create a file edit modal component.
+	 *
+	 * @param file
+	 * @returns the created modal component
+	 */
+	private createModal(file: File): ModalComponent {
+		const modal = create('am-modal', [], { destroy: '' }, document.body);
+
+		modal.innerHTML = this.renderModal(file);
+
+		return modal;
+	}
+
+	/**
+	 * Render the actual modal markup.
+	 *
+	 * @param file
+	 * @returns the modal markup
+	 */
+	protected renderModal(file: File): string {
+		return '';
+	}
+}

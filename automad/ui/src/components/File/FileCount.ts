@@ -32,40 +32,33 @@
  * Licensed under the MIT license.
  */
 
-import { classes, listen } from '../core';
-import { BaseComponent } from './Base';
+import { BaseComponent } from '../Base';
+import { create, listen, queryAll } from '../../core';
+import { FileCollectionRenderedEventName } from '../Forms/FileCollectionList';
 
 /**
- * A simple dropdown menu component.
+ * A file count badge component that displays the total number of file card elements.
  *
  * @example
- * <am-dropdown>
- *     Menu
- *     <div class="am-c-dropdown__items">
- *         ...
- *     </div>
- * </am-dropdown>
+ * <am-file-count></am-file-count>
  *
  * @extends BaseComponent
  */
-class DropdownComponent extends BaseComponent {
+class FileCountComponent extends BaseComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		this.classList.add(classes.dropdown);
+		const badge = create('span', [], {}, this);
+		const update = () => {
+			const count = queryAll('am-file-card').length;
 
-		listen(window, 'click', (event: MouseEvent) => {
-			if (
-				event.target === this ||
-				(event.target as HTMLElement).parentNode === this
-			) {
-				this.classList.toggle(classes.dropdownOpen);
-			} else {
-				this.classList.remove(classes.dropdownOpen);
-			}
-		});
+			badge.textContent = `${count}`;
+		};
+
+		listen(window, FileCollectionRenderedEventName, update.bind(this));
+		setTimeout(update.bind(this), 0);
 	}
 }
 
-customElements.define('am-dropdown', DropdownComponent);
+customElements.define('am-file-count', FileCountComponent);
