@@ -40,6 +40,7 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Image;
+use Automad\Core\Str;
 use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
 
@@ -56,16 +57,19 @@ class ImageModel {
 	/**
 	 * Save an image.
 	 *
-	 * @param string $name
-	 * @param string $base64
 	 * @param string $path
+	 * @param string $name
+	 * @param string $extension
+	 * @param string $base64
 	 * @param Messenger $Messenger
 	 */
-	public static function save(string $path, string $name, string $base64, Messenger $Messenger) {
+	public static function save(string $path, string $name, string $extension, string $base64, Messenger $Messenger) {
 		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
 		$data = base64_decode($data);
 
-		if (FileSystem::write("$path$name", $data) === false) {
+		$name = $path . Str::slug($name) . '.' . $extension;
+
+		if (FileSystem::write($name, $data) === false) {
 			$Messenger->setError(Text::get('error_file_save') . ' ' . $name);
 		}
 	}

@@ -69,7 +69,8 @@ class ImageController {
 
 		ImageModel::save(
 			$path,
-			Request::post('fullName'),
+			Request::post('name'),
+			Request::post('extension'),
 			Request::post('imageBase64'),
 			$Messenger
 		);
