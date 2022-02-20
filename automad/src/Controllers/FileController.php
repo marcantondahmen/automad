@@ -27,18 +27,18 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Controllers;
 
+use Automad\API\Response;
 use Automad\Core\Request;
-use Automad\UI\Models\FileModel;
-use Automad\UI\Response;
+use Automad\Models\FileModel;
 use Automad\UI\Utils\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -47,7 +47,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The file controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class FileController {

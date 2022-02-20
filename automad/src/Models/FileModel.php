@@ -27,23 +27,22 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\Models;
 
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\Request;
 use Automad\Core\Str;
-use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -51,7 +50,7 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The file model.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class FileModel {
@@ -71,7 +70,8 @@ class FileModel {
 			return false;
 		}
 
-		$Automad = UICache::get();
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
 		$path = FileSystem::getPathByPostUrl($Automad);
 		$oldFile = $path . basename($oldName);
 		$extension = FileSystem::getExtension($oldFile);
@@ -171,7 +171,8 @@ class FileModel {
 		$fileName = Str::slug(preg_replace('/\?.*/', '', basename($importUrl)));
 
 		if ($pageUrl) {
-			$Automad = UICache::get();
+			$Cache = new Cache();
+			$Automad = $Cache->getAutomad();
 			$Page = $Automad->getPage($pageUrl);
 			$path = AM_BASE_DIR . AM_DIR_PAGES . $Page->path . $fileName;
 		} else {
