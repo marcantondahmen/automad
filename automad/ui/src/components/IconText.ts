@@ -26,35 +26,39 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, create } from '../../core';
-import { FieldComponent } from './Field';
+import { classes, create } from '../core';
+import { BaseComponent } from './Base';
 
 /**
- * A multiline text field.
+ * A simple icon with text component.
  *
- * @extends FieldComponent
+ * @example
+ * <am-icon-text icon="..." text="..."></am-icon-text>
+ *
+ * @extends BaseComponent
  */
-class TextareaComponent extends FieldComponent {
+class IconTextComponent extends BaseComponent {
 	/**
-	 * Create an input field.
+	 * The callback function used when an element is created in the DOM.
 	 */
-	input(): void {
-		const { name, id, value } = this._data;
-		const textarea = create(
-			'textarea',
-			[classes.input],
-			{ id, name },
-			this
-		);
+	connectedCallback(): void {
+		const icon = this.getAttribute('icon');
+		const text = this.getAttribute('text');
 
-		textarea.textContent = value;
+		this.removeAttribute('icon');
+		this.removeAttribute('text');
+
+		this.classList.add(classes.iconText);
+
+		create('i', ['bi', `bi-${icon}`], {}, this);
+		create('span', [], {}, this).textContent = text;
 	}
 }
 
-customElements.define('am-textarea', TextareaComponent);
+customElements.define('am-icon-text', IconTextComponent);

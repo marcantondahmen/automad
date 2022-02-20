@@ -155,8 +155,7 @@ export class AutocompleteComponent extends BaseComponent {
 		const element = create('a', [classes.dropdownItem], {});
 
 		element.innerHTML = html`
-			<i class="bi bi-link"></i>
-			<span>$${item.title}</span>
+			<am-icon-text icon="link" text="${item.title}"></am-icon-text>
 		`;
 
 		return element;

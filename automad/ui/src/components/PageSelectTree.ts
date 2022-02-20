@@ -113,8 +113,7 @@ class PageSelectTreeComponent extends NavTreeComponent {
 		}
 
 		label.innerHTML = html`
-			<i class="bi bi-${icon}"></i>
-			<span>$${page.title}</span>
+			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
 			<input
 				class="${classes.displayNone}"
 				type="radio"

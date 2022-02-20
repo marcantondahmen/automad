@@ -77,8 +77,10 @@ class NavItemComponent extends BaseComponent {
 				target="${this.elementAttributes.page}"
 				class="${classes.navLink}"
 			>
-				<i class="bi bi-${this.elementAttributes.icon}"></i>
-				<span>${App.text(this.elementAttributes.text)}</span>
+				<am-icon-text
+					icon="${this.elementAttributes.icon}"
+					text="${App.text(this.elementAttributes.text)}"
+				></am-icon-text>
 			</am-link>
 		`;
 	}

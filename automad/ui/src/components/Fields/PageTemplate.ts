@@ -243,8 +243,11 @@ export class PageTemplateComponent extends BaseComponent {
 				modal="#am-page-template-modal"
 				class="${classes.button} ${classes.button}--${buttonClass} ${classes.flex}"
 			>
-				<i class="bi bi-${buttonIcon}"></i>
-				<span class="${classes.flexItemGrow}">${buttonLabel}</span>
+				<am-icon-text
+					class="${classes.flexItemGrow}"
+					icon="${buttonIcon}"
+					text="${buttonLabel}"
+				></am-icon-text>
 				<i class="bi bi-pen"></i>
 			</am-modal-toggle>
 		`;

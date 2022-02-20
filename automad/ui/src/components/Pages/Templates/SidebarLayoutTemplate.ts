@@ -59,8 +59,10 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 							</span>
 							<span class="am-c-nav__item">
 								<a href="${App.baseURL}" class="am-c-nav__link">
-									<i class="bi bi-bookmark"></i>
-									$${App.sitename}
+									<am-icon-text
+										icon="bookmark"
+										text="$${App.sitename}"
+									></am-icon-text>
 								</a>
 							</span>
 							<am-nav-item

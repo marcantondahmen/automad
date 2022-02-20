@@ -183,8 +183,7 @@ export class NavTreeComponent extends BaseComponent {
 		}
 
 		link.innerHTML = html`
-			<i class="bi bi-${icon}"></i>
-			<span>$${page.title}</span>
+			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
 		`;
 
 		return link;

@@ -75,41 +75,47 @@ export class PageComponent extends SidebarLayoutComponent {
 							class="${classes.dropdownItem}"
 							target="_blank"
 						>
-							<i class="bi bi-pencil"></i>
-							<span>$${App.text('btn_inpage_edit')}</span>
+							<am-icon-text
+								icon="pencil"
+								text="${App.text('btn_inpage_edit')}"
+							></am-icon-text>
 						</a>
 						<am-form api="Page/duplicate">
 							<am-submit class="${classes.dropdownItem}">
-								<i class="bi bi-files"></i>
-								<span>
-									$${App.text('btn_duplicate_page')}
-								</span>
+								<am-icon-text
+									icon="files"
+									text="${App.text('btn_duplicate_page')}"
+								></am-icon-text>
 							</am-submit>
 						</am-form>
 						<am-modal-toggle
 							class="${classes.dropdownItem}"
 							modal="#am-move-page-modal"
 						>
-							<i class="bi bi-arrows-move"></i>
-							<span>$${App.text('btn_move_page')}</span>
+							<am-icon-text
+								icon="arrows-move"
+								text="${App.text('btn_move_page')}"
+							></am-icon-text>
 						</am-modal-toggle>
 						<am-form
 							api="Page/delete"
 							confirm="$${App.text('confirm_delete_page')}"
 						>
 							<am-submit class="${classes.dropdownItem}">
-								<i class="bi bi-trash2"></i>
-								<span>$${App.text('btn_delete_page')}</span>
+								<am-icon-text
+									icon="trash2"
+									text="${App.text('btn_delete_page')}"
+								></am-icon-text>
 							</am-submit>
 						</am-form>
 						<am-copy
 							class="${classes.dropdownItem}"
 							value="${getPageURL()}"
 						>
-							<i class="bi bi-clipboard-plus"></i>
-							<span>
-								$${App.text('btn_copy_url_clipboard')}
-							</span>
+							<am-icon-text
+								icon="clipboard-plus"
+								text="${App.text('btn_copy_url_clipboard')}"
+							></am-icon-text>
 						</am-copy>
 					</div>
 				</am-dropdown>
