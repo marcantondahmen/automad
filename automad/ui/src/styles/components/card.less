@@ -36,6 +36,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	gap: var(--am-card-padding);
 	border: var(--am-hairline);
 	border-radius: var(--am-radius);
 	font-size: var(--am-font-size-small);
@@ -43,39 +44,34 @@
 	&__image {
 		--radius: ~'calc(var(--am-radius) - var(--am-border-width))';
 		position: relative;
-		box-sizing: content-box;
-		height: 0;
-		padding-top: 100%;
-		margin-bottom: var(--am-card-padding);
+		display: flex;
 		overflow: hidden;
 		border-radius: var(--radius) var(--radius) 0 0;
 
 		& img {
-			position: absolute;
-			top: 0;
-			width: 100%;
-			height: 100%;
 			object-fit: cover;
+			inline-size: 100%;
+			aspect-ratio: 4 / 3;
 		}
-	}
-
-	&__title {
-		padding: var(--am-card-padding);
-		font-size: 1rem;
 	}
 
 	&__body {
 		flex-grow: 1;
-		padding: var(--am-card-padding);
+		gap: var(--am-card-padding);
+		padding: 0 var(--am-card-padding);
 	}
 
 	&__footer {
 		display: flex;
 		gap: var(--am-flex-gap);
 		padding: var(--am-card-padding);
+		padding-top: 0;
 	}
 
-	& * + * {
-		padding-top: 0;
+	&__title {
+		font-size: 1rem;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 }

@@ -35,7 +35,7 @@
 import { App, classes, html, queryAll } from '../../core';
 import { File } from '../../types';
 import { BaseComponent } from '../Base';
-import { FileEditComponent } from './FileEdit';
+import { FileInfoComponent } from './FileInfo';
 
 /**
  * A file card component.
@@ -65,10 +65,50 @@ class FileCardComponent extends BaseComponent {
 	 * @param file
 	 */
 	private render(file: File): void {
+		let dimensions = '';
+		let caption = '';
+
+		if (file.width && file.height) {
+			dimensions = html`
+				<am-icon-text
+					icon="aspect-ratio"
+					text="${file.width} ✗ ${file.height}"
+				></am-icon-text>
+			`;
+		}
+
+		if (file.caption) {
+			caption = html`
+				<am-icon-text
+					icon="text-left"
+					text="${file.caption}"
+				></am-icon-text>
+			`;
+		}
+
 		this.innerHTML = html`
 			${this.renderPreview(file)}
-			<div class="${classes.cardTitle}">${file.basename}</div>
-			<div class="${classes.cardBody}">$${file.caption || ''}</div>
+			<am-file-info
+				class="${classes.cardBody} ${classes.flex} ${classes.flexColumn}"
+			>
+				<div
+					class="${classes.cardTitle} ${classes.flexItemGrow}"
+					title="$${file.basename}"
+				>
+					${file.basename}
+				</div>
+				<div>
+					${caption} ${dimensions}
+					<am-icon-text
+						icon="calendar2-date"
+						text="${file.mtime || '-'}"
+					></am-icon-text>
+					<am-icon-text
+						icon="hdd"
+						text="${file.size || '-'}"
+					></am-icon-text>
+				</div>
+			</am-file-info>
 			<div class="${classes.cardFooter}">
 				${this.renderDropdown(file)}
 				<span>
@@ -78,11 +118,9 @@ class FileCardComponent extends BaseComponent {
 			</div>
 		`;
 
-		queryAll('am-file-edit, am-image-copy-resized', this).forEach(
-			(edit: FileEditComponent) => {
-				edit.data = file;
-			}
-		);
+		queryAll('am-file-info', this).forEach((edit: FileInfoComponent) => {
+			edit.data = file;
+		});
 	}
 
 	/**
@@ -94,13 +132,17 @@ class FileCardComponent extends BaseComponent {
 	private renderPreview(file: File): string {
 		if (file.thumbnail) {
 			return html`
-				<am-file-edit class="${classes.cardImage}">
+				<am-file-robot
+					file="${file.url}"
+					class="${classes.cardImage}"
+					title="$${file.basename}"
+				>
 					<img src="${file.thumbnail}" />
-				</am-file-edit>
+				</am-file-robot>
 			`;
 		}
 
-		return html`<am-file-edit></am-file-edit>`;
+		return html`<am-file-info></am-file-info>`;
 	}
 
 	/**
@@ -118,8 +160,10 @@ class FileCardComponent extends BaseComponent {
 					file="${file.url}"
 					class="${classes.dropdownItem}"
 				>
-					<i class="bi bi-pencil"></i>
-					<span>${App.text('image_edit')}</span>
+					<am-icon-text
+						icon="pencil"
+						text="${App.text('image_edit')}"
+					></am-icon-text>
 				</am-file-robot>
 			`;
 		}
@@ -129,16 +173,20 @@ class FileCardComponent extends BaseComponent {
 				<i class="bi bi-three-dots-vertical"></i>
 				<div class="${classes.dropdownItems}">
 					${editImage}
-					<am-file-edit class="${classes.dropdownItem}">
-						<i class="bi bi-card-heading"></i>
-						<span>${App.text('btn_edit_file_info')}</span>
-					</am-file-edit>
+					<am-file-info class="${classes.dropdownItem}">
+						<am-icon-text
+							icon="card-heading"
+							text="${App.text('btn_edit_file_info')}"
+						></am-icon-text>
+					</am-file-info>
 					<am-copy
 						class="${classes.dropdownItem}"
 						value="${file.url}"
 					>
-						<i class="bi bi-clipboard-plus"></i>
-						<span>${App.text('btn_copy_url_clipboard')}</span>
+						<am-icon-text
+							icon="clipboard-plus"
+							text="${App.text('btn_copy_url_clipboard')}"
+						></am-icon-text>
 					</am-copy>
 				</div>
 			</am-dropdown>

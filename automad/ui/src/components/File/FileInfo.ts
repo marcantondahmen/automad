@@ -43,7 +43,7 @@ import { ModalComponent } from '../Modal/Modal';
  *
  * @extends BaseComponent
  */
-export class FileEditComponent extends BaseComponent {
+export class FileInfoComponent extends BaseComponent {
 	/**
 	 * The file data.
 	 */
@@ -89,24 +89,11 @@ export class FileEditComponent extends BaseComponent {
 	 * @returns the modal markup
 	 */
 	protected renderModal(file: File): string {
-		let image = '';
-
-		if (file.thumbnail) {
-			image = html`
-				<am-file-robot file="${file.url}">
-					<img src="${file.url}" />
-				</am-file-robot>
-				<am-file-robot file="${file.url}" class="${classes.button}">
-					${App.text('image_edit')}
-				</am-file-robot>
-			`;
-		}
-
 		return html`
 			<am-form
 				api="File/editInfo"
 				event="${FilesChangedOnServerEventName}"
-				class="${classes.modalDialog} ${classes.modalDialogFullscreen}"
+				class="${classes.modalDialog}"
 			>
 				<div class="${classes.modalHeader}">
 					<span>${App.text('btn_edit_file_info')}</span>
@@ -114,40 +101,29 @@ export class FileEditComponent extends BaseComponent {
 						class="${classes.modalClose}"
 					></am-modal-close>
 				</div>
-				<div class="${classes.flex}">
-					<div>
-						${image}
-						<input
-							type="hidden"
-							name="old-name"
-							value="${file.basename}"
-						/>
-					</div>
-					<span>
-						${createField(
-							'am-field',
-							null,
-							{
-								key: 'new-name',
-								value: file.basename,
-								name: 'new-name',
-								label: App.text('file_name'),
-							},
-							[]
-						).outerHTML}
-						${createField(
-							'am-textarea',
-							null,
-							{
-								key: 'caption',
-								value: file.basename,
-								name: 'caption',
-								label: App.text('file_caption'),
-							},
-							[]
-						).outerHTML}
-					</span>
-				</div>
+				<input type="hidden" name="old-name" value="${file.basename}" />
+				${createField(
+					'am-field',
+					null,
+					{
+						key: 'new-name',
+						value: file.basename,
+						name: 'new-name',
+						label: App.text('file_name'),
+					},
+					[]
+				).outerHTML}
+				${createField(
+					'am-textarea',
+					null,
+					{
+						key: 'caption',
+						value: file.caption,
+						name: 'caption',
+						label: App.text('file_caption'),
+					},
+					[]
+				).outerHTML}
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
 						${App.text('btn_close')}
@@ -168,4 +144,4 @@ export class FileEditComponent extends BaseComponent {
 	}
 }
 
-customElements.define('am-file-edit', FileEditComponent);
+customElements.define('am-file-info', FileInfoComponent);

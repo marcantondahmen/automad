@@ -52,7 +52,7 @@ import './components/Fields/Url';
 
 import './components/File/FileCard';
 import './components/File/FileCount';
-import './components/File/FileEdit';
+import './components/File/FileInfo';
 import './components/File/FileRobot';
 import './components/File/Upload';
 
