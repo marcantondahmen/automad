@@ -986,6 +986,10 @@ image_crop: Crop Image
 
 -
 
+image_edit: Edit Image
+
+-
+
 image_height_px: Height (Pixels)
 
 -

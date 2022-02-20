@@ -53,7 +53,7 @@ import './components/Fields/Url';
 import './components/File/FileCard';
 import './components/File/FileCount';
 import './components/File/FileEdit';
-import './components/File/ImageCopyResized';
+import './components/File/FileRobot';
 import './components/File/Upload';
 
 import './components/Forms/FileCollectionList';

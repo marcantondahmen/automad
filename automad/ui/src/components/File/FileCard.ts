@@ -110,14 +110,17 @@ class FileCardComponent extends BaseComponent {
 	 * @returns the rendered dropdown
 	 */
 	private renderDropdown(file: File): string {
-		let resizeButton = '';
+		let editImage = '';
 
 		if (file.thumbnail) {
-			resizeButton = html`
-				<am-image-copy-resized class="${classes.dropdownItem}">
-					<i class="bi bi-crop"></i>
-					<span>${App.text('btn_copy_resized')}</span>
-				</am-image-copy-resized>
+			editImage = html`
+				<am-file-robot
+					file="${file.url}"
+					class="${classes.dropdownItem}"
+				>
+					<i class="bi bi-pencil"></i>
+					<span>${App.text('image_edit')}</span>
+				</am-file-robot>
 			`;
 		}
 
@@ -125,9 +128,9 @@ class FileCardComponent extends BaseComponent {
 			<am-dropdown>
 				<i class="bi bi-three-dots-vertical"></i>
 				<div class="${classes.dropdownItems}">
-					${resizeButton}
+					${editImage}
 					<am-file-edit class="${classes.dropdownItem}">
-						<i class="bi bi-pencil"></i>
+						<i class="bi bi-card-heading"></i>
 						<span>${App.text('btn_edit_file_info')}</span>
 					</am-file-edit>
 					<am-copy

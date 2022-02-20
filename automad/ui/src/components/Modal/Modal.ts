@@ -34,6 +34,7 @@
 
 import {
 	classes,
+	fire,
 	getFormData,
 	listen,
 	query,
@@ -44,6 +45,9 @@ import {
 import { KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
+
+export const modalOpenEventName = 'AutomadModalOpen';
+export const modalCloseEventName = 'AutomadModalClose';
 
 /**
  * A modal component.
@@ -122,6 +126,8 @@ export class ModalComponent extends BaseComponent {
 		this.toggleBodyOverflow();
 		this.restoreInitialFormData();
 
+		fire(modalCloseEventName, this);
+
 		if (this.hasAttribute('destroy')) {
 			setTimeout(() => {
 				this.remove();
@@ -136,6 +142,8 @@ export class ModalComponent extends BaseComponent {
 		this.classList.add(classes.modalOpen);
 		this.toggleBodyOverflow();
 		this.saveInitialFormData();
+
+		fire(modalOpenEventName, this);
 	}
 
 	/**

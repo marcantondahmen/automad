@@ -91,6 +91,11 @@ export class FormComponent extends BaseComponent {
 	hasUnsavedChanges: boolean = false;
 
 	/**
+	 * Additional data that can be added to the form data object.
+	 */
+	additionalData: KeyValueMap = {};
+
+	/**
 	 * Changes are watched.
 	 */
 	protected watchChanges: boolean = false;
@@ -130,7 +135,10 @@ export class FormComponent extends BaseComponent {
 	 * The form data object.
 	 */
 	get formData(): KeyValueMap {
-		const data: KeyValueMap = getFormData(this);
+		const data: KeyValueMap = Object.assign(
+			this.additionalData,
+			getFormData(this)
+		);
 		const pageUrl = getPageURL();
 
 		if (pageUrl) {
