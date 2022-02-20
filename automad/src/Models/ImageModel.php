@@ -27,24 +27,21 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\Models;
 
 use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\Image;
-use Automad\UI\Components\Layout\SelectImage;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
 use Automad\UI\Utils\Messenger;
 use Automad\UI\Utils\Text;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -52,76 +49,25 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * The Image controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
 class ImageModel {
 	/**
-	 * Copy an image resized based on $_POST.
+	 * Save an image.
 	 *
-	 * @param string $filename
-	 * @param string $url
-	 * @param mixed $width
-	 * @param mixed $height
-	 * @param mixed $crop
-	 * @return Response the response object
+	 * @param string $name
+	 * @param string $base64
+	 * @param string $path
+	 * @param Messenger $Messenger
 	 */
-	public static function copyResized(string $filename, string $url, $width, $height, $crop) {
-		$Automad = UICache::get();
-		$Response = new Response();
+	public static function save(string $path, string $name, string $base64, Messenger $Messenger) {
+		$data = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
+		$data = base64_decode($data);
 
-		if (!((is_numeric($width) || is_bool($width)) && (is_numeric($height) || is_bool($height)))) {
-			$Response->setError(Text::get('error_file_size'));
-
-			return $Response;
+		if (FileSystem::write("$path$name", $data) === false) {
+			$Messenger->setError(Text::get('error_file_save') . ' ' . $name);
 		}
-
-		if ($filename) {
-			// Get parent directory.
-			if ($url) {
-				$Page = $Automad->getPage($url);
-				$directory = AM_BASE_DIR . AM_DIR_PAGES . $Page->path;
-			} else {
-				$directory = AM_BASE_DIR . AM_DIR_SHARED . '/';
-			}
-
-			$file = $directory . $filename;
-
-			Debug::log($file, 'file');
-
-			if (file_exists($file)) {
-				if (is_writable($directory)) {
-					$img = new Image(
-						$file,
-						$width,
-						$height,
-						boolval($crop)
-					);
-
-					$cachedFile = AM_BASE_DIR . $img->file;
-					$resizedFile = preg_replace(
-						'/(\.\w{3,4})$/',
-						'-' . floor($img->width) . 'x' . floor($img->height) . '$1',
-						$file
-					);
-
-					$Messenger = new Messenger();
-
-					if (FileSystem::renameMedia($cachedFile, $resizedFile, $Messenger)) {
-						$Response->setSuccess(Text::get('success_created') . ' "' . basename($resizedFile) . '"');
-						Cache::clear();
-					} else {
-						$Response->setError($Messenger->getError());
-					}
-				} else {
-					$Response->setError(Text::get('error_permission') . ' "' . $directory . '"');
-				}
-			} else {
-				$Response->setError(Text::get('error_file_not_found'));
-			}
-		}
-
-		return $Response;
 	}
 
 	/**

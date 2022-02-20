@@ -34,12 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Controllers;
 
+use Automad\API\Response;
+use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\Request;
-use Automad\UI\Models\ImageModel;
-use Automad\UI\Response;
+use Automad\Models\ImageModel;
+use Automad\UI\Utils\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -52,31 +55,28 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class ImageController {
 	/**
-	 * Copy an image resized based on $_POST.
+	 * Save an image that was modified in FileRobot.
 	 *
 	 * @return Response the response object
 	 */
-	public static function copyResized() {
-		$options = array_merge(
-			array(
-				'url' => '',
-				'filename' => '',
-				'width' => false,
-				'height' => false,
-				'crop' => false
-			),
-			$_POST
+	public static function save() {
+		$Response = new Response();
+		$Messenger = new Messenger();
+
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+		$path = FileSystem::getPathByPostUrl($Automad);
+
+		ImageModel::save(
+			$path,
+			Request::post('fullName'),
+			Request::post('imageBase64'),
+			$Messenger
 		);
 
-		Debug::log($options, 'options');
+		$Response->setError($Messenger->getError());
 
-		return ImageModel::copyResized(
-			$options['filename'],
-			$options['url'],
-			$options['width'],
-			$options['height'],
-			$options['crop']
-		);
+		return $Response;
 	}
 
 	/**
@@ -89,7 +89,7 @@ class ImageController {
 
 		// Check if file from a specified page or the shared files will be listed and managed.
 		// To display a file list of a certain page, its URL has to be submitted along with the form data.
-		$Response->setHtml(ImageModel::select(Request::post('url')));
+		//$Response->setHtml(ImageModel::select(Request::post('url')));
 
 		return $Response;
 	}
