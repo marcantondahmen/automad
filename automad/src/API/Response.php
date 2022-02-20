@@ -49,6 +49,11 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  */
 class Response {
 	/**
+	 * The response code.
+	 */
+	private $code = null;
+
+	/**
 	 * The main response data object.
 	 */
 	private $data = null;
@@ -83,6 +88,8 @@ class Response {
 	 */
 	public function __construct() {
 		Debug::log('Instanciated new Response instance');
+
+		$this->setCode(200);
 	}
 
 	/**
@@ -94,6 +101,16 @@ class Response {
 		$properties = array_filter(get_object_vars($this));
 
 		return json_encode($properties, JSON_UNESCAPED_SLASHES);
+	}
+
+	/**
+	 * Set the response code.
+	 *
+	 * @param int $code
+	 */
+	public function setCode(int $code) {
+		$this->code = $code;
+		http_response_code($code);
 	}
 
 	/**

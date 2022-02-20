@@ -74,8 +74,8 @@ class RequestHandler {
 			self::registerControllerErrorHandler();
 			$Response = call_user_func($method);
 		} else {
-			http_response_code(404);
 			$Response = new Response();
+			$Response->setCode(404);
 		}
 
 		$Response->setDebug(Debug::getLog());
