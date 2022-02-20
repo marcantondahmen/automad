@@ -118,6 +118,6 @@ class FileUtils {
 	 * @return bool True if $file is an image file
 	 */
 	public static function fileIsImage(string $file) {
-		return (in_array(FileSystem::getExtension($file), array('jpg', 'jpeg', 'png', 'gif')));
+		return (in_array(FileSystem::getExtension($file), array('jpg', 'jpeg', 'png', 'gif', 'webp')));
 	}
 }

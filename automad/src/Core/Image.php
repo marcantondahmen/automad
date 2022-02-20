@@ -250,10 +250,14 @@ class Image {
 				$src = imagecreatefrompng($this->originalFile);
 
 				break;
+			case 'image/webp':
+				$src = imagecreatefromwebp($this->originalFile);
+
+				break;
 			default:
 				$src = false;
 
-						break;
+				break;
 		}
 
 		$dest = imagecreatetruecolor($this->width, $this->height);
@@ -278,6 +282,10 @@ class Image {
 				break;
 			case 'image/png':
 				imagepng($dest, $this->fileFullPath);
+
+				break;
+			case 'image/webp':
+				imagewebp($dest, $this->fileFullPath);
 
 				break;
 		}

@@ -128,7 +128,7 @@ class Config {
 			// Audio
 			'aiff, m4a, mp3, ogg, wav, ' .
 			// Graphics
-			'ai, dxf, eps, gif, ico, jpg, jpeg, png, psd, svg, tga, tiff, ' .
+			'ai, dxf, eps, gif, ico, jpg, jpeg, png, psd, svg, tga, tiff, webp, ' .
 			// Video
 			'avi, flv, mov, mp4, mpeg, ' .
 			// Other
