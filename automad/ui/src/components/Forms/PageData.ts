@@ -34,7 +34,6 @@
 
 import {
 	FieldGroupData,
-	FieldInitData,
 	KeyValueMap,
 	PageFieldGroups,
 	PageMainSettingsData,
@@ -46,12 +45,10 @@ import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
 	App,
-	classes,
 	create,
 	createField,
 	html,
 	keyCombo,
-	query,
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
@@ -182,6 +179,7 @@ export class PageDataComponent extends FormComponent {
 		this.sections = createSections(this);
 
 		super.init();
+		this.watch();
 	}
 
 	/**
@@ -321,7 +319,9 @@ export class PageDataComponent extends FormComponent {
 			return;
 		}
 
-		this.watch();
+		if (!response.data) {
+			return;
+		}
 
 		const { url, prefix, slug, fields, shared, template } = response.data;
 

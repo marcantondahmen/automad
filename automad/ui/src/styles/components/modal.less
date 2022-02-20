@@ -42,8 +42,8 @@ am-modal {
 	z-index: 200;
 	width: 100vw;
 	height: 100vh;
-	top: 0;
-	left: 0;
+	max-height: 100vh;
+	inset: 0;
 	padding: var(--am-modal-overlay-padding);
 	background-color: var(--am-modal-overlay-bg);
 	transform: translateY(-100%);
@@ -69,6 +69,16 @@ am-modal {
 		box-shadow: var(--am-shadow);
 		top: -2%;
 		transition: top 0.2s;
+
+		&--fullscreen {
+			position: fixed;
+			inset: 0;
+			width: 100%;
+			max-width: 100%;
+			margin: 0;
+			border-radius: 0;
+			box-shadow: none;
+		}
 	}
 
 	&--open > &__dialog {

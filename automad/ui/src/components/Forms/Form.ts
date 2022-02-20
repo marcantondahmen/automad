@@ -226,19 +226,26 @@ export class FormComponent extends BaseComponent {
 			return null;
 		}
 
+		const focused = document.activeElement as HTMLElement;
+		focused.blur();
+
 		const response = await requestAPI(this.api, this.formData);
 
-		if (this.watchChanges) {
-			this.disbableButtons();
-		}
+		setTimeout(() => {
+			resetFieldStatus(this);
+			this.hasUnsavedChanges = false;
+			this.processResponse(response);
 
-		resetFieldStatus(this);
-		this.hasUnsavedChanges = false;
-		this.processResponse(response);
+			if (this.watchChanges) {
+				this.disbableButtons();
+			}
 
-		if (this.hasAttribute('event')) {
-			fire(this.getAttribute('event'));
-		}
+			if (this.hasAttribute('event')) {
+				fire(this.getAttribute('event'));
+			}
+
+			focused.focus();
+		}, 200);
 	}
 
 	/**

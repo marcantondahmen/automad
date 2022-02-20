@@ -109,12 +109,13 @@ export class RootComponent extends BaseComponent {
 	 * @returns true in case the user confirms to update the view without saving changes.
 	 */
 	private confirmViewUpdate(): boolean {
-		const forms = queryAll('[watch]', this);
+		const forms = queryAll('[watch]');
 		const message = App.text('confirm_discard_unsaved');
 		let hasChanges = false;
 		let confirmed = false;
 
 		forms.forEach((form: FormComponent) => {
+			console.log(form.hasUnsavedChanges);
 			if (form.hasUnsavedChanges) {
 				hasChanges = true;
 			}
