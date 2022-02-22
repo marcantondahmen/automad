@@ -64,7 +64,7 @@ class SessionController {
 		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
 			$Response->setRedirect(AM_BASE_INDEX . AM_PAGE_DASHBOARD);
 		} else {
-			$Response->setError(Text::get('error_login'));
+			$Response->setError(Text::get('signInError'));
 		}
 
 		return $Response;

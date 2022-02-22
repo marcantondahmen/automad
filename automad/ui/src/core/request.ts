@@ -86,7 +86,7 @@ export const requestAPI = async (
 		const response = await request(`${App.baseURL}/api/${route}`, data);
 		responseData = await response.json();
 	} catch {
-		notifyError(`${App.text('error_request')} (${route})`);
+		notifyError(`${App.text('fetchingDataError')} (${route})`);
 		responseData = {};
 	}
 

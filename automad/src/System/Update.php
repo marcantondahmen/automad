@@ -155,8 +155,8 @@ class Update {
 
 				$Response->setHtml(
 					Success::render(
-						Text::get('sys_update_not_required') . ' ' .
-						Text::get('sys_update_current_version') . ' ' .
+						Text::get('systemUpToDate') . ' ' .
+						Text::get('systemUpdateCurrentVersion') . ' ' .
 						$version . '.'
 					) .
 					'<a href="' . $logUrl . '" target="_blank" class="uk-button">' .
@@ -165,7 +165,7 @@ class Update {
 					'</a>'
 				);
 
-				$Response->setSuccess(Text::get('success_update'));
+				$Response->setSuccess(Text::get('updatedAutomadSuccess'));
 				$Response->setCli('Successfully updated to version ' . $version);
 			} else {
 				$Response->setHtml(Danger::render(Text::get('error_update_failed')));

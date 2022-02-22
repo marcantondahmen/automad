@@ -72,9 +72,8 @@ export class NavTreeComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(classes.nav);
 
-		create('span', [classes.navLabel], {}, this).innerHTML = App.text(
-			'sidebar_header_pages'
-		);
+		create('span', [classes.navLabel], {}, this).innerHTML =
+			App.text('sidebarPages');
 
 		this.init();
 	}

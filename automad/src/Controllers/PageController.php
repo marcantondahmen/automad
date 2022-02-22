@@ -83,15 +83,15 @@ class PageController {
 					$Response->setRedirect(PageModel::add($Parent, $title, $themeTemplate, $isPrivate));
 				} else {
 					$Response->setError(
-						Text::get('error_permission') .
+						Text::get('permissionsDeniedError') .
 						'<p>' . dirname(PageModel::getPageFilePath($Parent)) . '</p>'
 					);
 				}
 			} else {
-				$Response->setError(Text::get('error_page_title'));
+				$Response->setError(Text::get('missingPageTitleError'));
 			}
 		} else {
-			$Response->setError(Text::get('error_no_destination'));
+			$Response->setError(Text::get('missingTargetPageError'));
 		}
 
 		return $Response;
@@ -179,6 +179,8 @@ class PageController {
 					)
 				);
 			}
+		} else {
+			$Response->setCode(404);
 		}
 
 		return $Response;
@@ -210,12 +212,12 @@ class PageController {
 				Cache::clear();
 			} else {
 				$Response->setError(
-					Text::get('error_permission') .
+					Text::get('permissionsDeniedError') .
 					'<p>' . dirname(dirname(PageModel::getPageFilePath($Page))) . '</p>'
 				);
 			}
 		} else {
-			$Response->setError(Text::get('error_page_not_found'));
+			$Response->setError(Text::get('pageNotFoundError'));
 		}
 
 		return $Response;
@@ -240,10 +242,10 @@ class PageController {
 				if (is_writable(dirname(FileSystem::fullPagePath($Page->path)))) {
 					$Response->setRedirect(PageModel::duplicate($Page));
 				} else {
-					$Response->setError(Text::get('error_permission'));
+					$Response->setError(Text::get('permissionsDeniedError'));
 				}
 			} else {
-				$Response->setError(Text::get('error_page_not_found'));
+				$Response->setError(Text::get('pageNotFoundError'));
 			}
 		}
 
@@ -292,19 +294,19 @@ class PageController {
 						Cache::clear();
 					} else {
 						$Response->setError(
-							Text::get('error_permission') .
+							Text::get('permissionsDeniedError') .
 							'<p>' . dirname(dirname(PageModel::getPageFilePath($Page))) . '</p>'
 						);
 					}
 				} else {
 					$Response->setError(
-						Text::get('error_permission') .
+						Text::get('permissionsDeniedError') .
 						'<p>' . FileSystem::fullPagePath($dest->path) . '</p>'
 					);
 				}
 			}
 		} else {
-			$Response->setError(Text::get('error_no_destination'));
+			$Response->setError(Text::get('missingTargetPageError'));
 		}
 
 		return $Response;
@@ -362,17 +364,17 @@ class PageController {
 					if ($redirectUrl = PageModel::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
 						$Response->setRedirect($redirectUrl);
 					} else {
-						$Response->setSuccess(Text::get('success_saved'));
+						$Response->setSuccess(Text::get('savedChangesSuccess'));
 					}
 				} else {
-					$Response->setError(Text::get('error_permission'));
+					$Response->setError(Text::get('permissionsDeniedError'));
 				}
 			} else {
-				$Response->setError(Text::get('error_permission'));
+				$Response->setError(Text::get('permissionsDeniedError'));
 			}
 		} else {
 			// If the title is missing, just return an error.
-			$Response->setError(Text::get('error_page_title'));
+			$Response->setError(Text::get('missingPageTitleError'));
 		}
 
 		return $Response;

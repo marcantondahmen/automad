@@ -70,7 +70,7 @@ class ImageModel {
 		$name = $path . Str::slug($name) . '.' . $extension;
 
 		if (FileSystem::write($name, $data) === false) {
-			$Messenger->setError(Text::get('error_file_save') . ' ' . $name);
+			$Messenger->setError(Text::get('couldNotSaveError') . ' ' . $name);
 		}
 	}
 

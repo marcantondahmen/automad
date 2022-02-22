@@ -237,7 +237,7 @@ export class PageTemplateComponent extends BaseComponent {
 
 		button.innerHTML = html`
 			<label class="${classes.fieldLabel}"
-				>${App.text('page_theme_template')}</label
+				>${App.text('pageTemplate')}</label
 			>
 			<am-modal-toggle
 				modal="#am-page-template-modal"
@@ -255,7 +255,7 @@ export class PageTemplateComponent extends BaseComponent {
 		modal.innerHTML = html`
 			<div class="${classes.modalDialog}">
 				<div class="${classes.modalHeader}">
-					<span>${App.text('page_theme_template')}</span>
+					<span>${App.text('pageTemplate')}</span>
 					<am-modal-close
 						class="${classes.modalClose}"
 					></am-modal-close>
@@ -263,13 +263,13 @@ export class PageTemplateComponent extends BaseComponent {
 				${select.outerHTML}
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
-						${App.text('btn_close')}
+						${App.text('close')}
 					</am-modal-close>
 					<am-submit
 						class="${classes.button} ${classes.buttonSuccess}"
 						form="Page/data"
 					>
-						${App.text('btn_apply_reload')}
+						${App.text('applyReload')}
 					</am-submit>
 				</div>
 			</div>

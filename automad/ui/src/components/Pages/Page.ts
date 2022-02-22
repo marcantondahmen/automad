@@ -68,7 +68,7 @@ export class PageComponent extends SidebarLayoutComponent {
 		if (getPageURL() !== '/') {
 			more = html`
 				<am-dropdown>
-					$${App.text('btn_more')}
+					$${App.text('more')}
 					<div class="${classes.dropdownItems}">
 						<a
 							href="${App.baseURL}${getPageURL()}"
@@ -77,14 +77,14 @@ export class PageComponent extends SidebarLayoutComponent {
 						>
 							<am-icon-text
 								icon="pencil"
-								text="${App.text('btn_inpage_edit')}"
+								text="${App.text('inPageEdit')}"
 							></am-icon-text>
 						</a>
 						<am-form api="Page/duplicate">
 							<am-submit class="${classes.dropdownItem}">
 								<am-icon-text
 									icon="files"
-									text="${App.text('btn_duplicate_page')}"
+									text="${App.text('duplicatePage')}"
 								></am-icon-text>
 							</am-submit>
 						</am-form>
@@ -94,17 +94,17 @@ export class PageComponent extends SidebarLayoutComponent {
 						>
 							<am-icon-text
 								icon="arrows-move"
-								text="${App.text('btn_move_page')}"
+								text="${App.text('movePage')}"
 							></am-icon-text>
 						</am-modal-toggle>
 						<am-form
 							api="Page/delete"
-							confirm="$${App.text('confirm_delete_page')}"
+							confirm="$${App.text('confirmDeletePage')}"
 						>
 							<am-submit class="${classes.dropdownItem}">
 								<am-icon-text
 									icon="trash2"
-									text="${App.text('btn_delete_page')}"
+									text="${App.text('deletePage')}"
 								></am-icon-text>
 							</am-submit>
 						</am-form>
@@ -114,7 +114,7 @@ export class PageComponent extends SidebarLayoutComponent {
 						>
 							<am-icon-text
 								icon="clipboard-plus"
-								text="${App.text('btn_copy_url_clipboard')}"
+								text="${App.text('copyUrlClipboard')}"
 							></am-icon-text>
 						</am-copy>
 					</div>
@@ -126,14 +126,14 @@ export class PageComponent extends SidebarLayoutComponent {
 					<div class="${classes.modalDialog}">
 						<am-form api="Page/move">
 							<div class="${classes.modalHeader}">
-								<span>$${App.text('btn_move_page')}</span>
+								<span>$${App.text('movePage')}</span>
 								<am-modal-close
 									class="${classes.modalClose}"
 								></am-modal-close>
 							</div>
 							<div class="${classes.field}">
 								<label class="${classes.fieldLabel}">
-									${App.text('page_move_destination')}
+									${App.text('selectTargetMovePage')}
 								</label>
 								<am-page-select-tree
 									hidecurrent
@@ -143,7 +143,7 @@ export class PageComponent extends SidebarLayoutComponent {
 								<am-submit
 									class="${classes.button} ${classes.buttonSuccess}"
 								>
-									$${App.text('btn_move_page')}
+									$${App.text('movePage')}
 									<i class="bi bi-arrows-move"></i>
 								</am-submit>
 							</div>
@@ -166,25 +166,26 @@ export class PageComponent extends SidebarLayoutComponent {
 							<am-switcher-link
 								section="${App.sections.content.settings}"
 							>
-								$${App.text('page_settings')}
+								$${App.text('pageSettings')}
 							</am-switcher-link>
 							<am-switcher-link
 								section="${App.sections.content.text}"
 							>
-								$${App.text('page_vars_content')}
+								$${App.text('pageContent')}
 							</am-switcher-link>
 							<am-switcher-link
 								section="${App.sections.content.colors}"
 							>
-								$${App.text('page_vars_color')}
+								$${App.text('pageColors')}
 							</am-switcher-link>
 							<am-switcher-link
 								section="${App.sections.content.files}"
 							>
-								$${App.text('btn_files')}
+								$${App.text('uploadedFiles')}
 								<am-file-count></am-file-count>
 							</am-switcher-link>
 						</am-switcher>
+						<am-private-indicator></am-private-indicator>
 						${more}
 					</div>
 				</menu>
@@ -198,16 +199,13 @@ export class PageComponent extends SidebarLayoutComponent {
 							class="${classes.button}"
 							modal="#am-file-import-modal"
 						>
-							${App.text('btn_import')}
+							${App.text('importFromUrl')}
 						</am-modal-toggle>
-						<am-submit
-							class="${classes.button}"
-							form="FileCollection/list"
-						>
-							$${App.text('btn_remove_selected')}
-						</am-submit>
+						<am-file-collection-submit>
+							$${App.text('deleteSelected')}
+						</am-file-collection-submit>
 						<am-file-collection-list
-							confirm="$${App.text('confirm_delete_files')}"
+							confirm="$${App.text('confirmDeleteSelectedFiles')}"
 							api="FileCollection/list"
 							watch
 						></am-file-collection-list>
@@ -222,7 +220,7 @@ export class PageComponent extends SidebarLayoutComponent {
 						event="${FilesChangedOnServerEventName}"
 					>
 						<div class="${classes.modalHeader}">
-							<span>$${App.text('btn_import')}</span>
+							<span>$${App.text('importFromUrl')}</span>
 							<am-modal-close
 								class="${classes.modalClose}"
 							></am-modal-close>
@@ -239,7 +237,7 @@ export class PageComponent extends SidebarLayoutComponent {
 							<am-submit
 								class="${classes.button} ${classes.buttonSuccess}"
 							>
-								$${App.text('btn_import')}
+								$${App.text('importFromUrl')}
 								<i class="bi bi-cloud-download"></i>
 							</am-submit>
 						</div>
@@ -255,10 +253,7 @@ export class PageComponent extends SidebarLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderSaveButtonPartial(): string {
-		return html`<am-submit
-			form="Page/data"
-			title="$${App.text('btn_save')}"
-		>
+		return html`<am-submit form="Page/data" title="$${App.text('save')}">
 			<i class="bi bi-check"></i>
 		</am-submit>`;
 	}

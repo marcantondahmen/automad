@@ -246,7 +246,11 @@ export class PageDataComponent extends FormComponent {
 			section
 		).innerHTML = fields[App.reservedFields.AM_KEY_URL] || url;
 
-		createMainField('am-checkbox-large', App.reservedFields.AM_KEY_PRIVATE);
+		createMainField(
+			'am-checkbox-large',
+			App.reservedFields.AM_KEY_PRIVATE,
+			App.text('keepPagePrivate')
+		);
 
 		const templateField = create(
 			'am-page-template',
@@ -261,34 +265,44 @@ export class PageDataComponent extends FormComponent {
 			themeKey: App.reservedFields.AM_KEY_THEME,
 		};
 
-		createMainField('am-checkbox', App.reservedFields.AM_KEY_HIDDEN);
+		createMainField(
+			'am-checkbox',
+			App.reservedFields.AM_KEY_HIDDEN,
+			App.text('hidePage')
+		);
+
+		createMainField(
+			'am-date',
+			App.reservedFields.AM_KEY_DATE,
+			App.text('date')
+		);
 
 		if (url != '/') {
 			createField('am-field', section, {
 				key: 'prefix',
 				value: prefix,
 				name: 'prefix',
-				label: App.text('page_prefix'),
+				label: App.text('pagePrefix'),
 			});
 
 			createField('am-field', section, {
 				key: 'slug',
 				value: slug,
 				name: 'slug',
-				label: App.text('page_slug'),
+				label: App.text('pageSlug'),
 			});
 		}
 
 		createMainField(
 			'am-url',
 			App.reservedFields.AM_KEY_URL,
-			App.text('page_redirect')
+			App.text('redirectPage')
 		);
 
 		createMainField(
 			'am-page-tags',
 			App.reservedFields.AM_KEY_TAGS,
-			App.text('page_tags')
+			App.text('pageTags')
 		);
 	}
 
@@ -299,7 +313,7 @@ export class PageDataComponent extends FormComponent {
 		this.innerHTML = html`
 			<am-alert
 				icon="question-circle"
-				text="error_page_not_found"
+				text="pageNotFoundError"
 				type="danger"
 			></am-alert>
 		`;

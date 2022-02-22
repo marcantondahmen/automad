@@ -50,12 +50,12 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 					<div class="am-l-sidebar__nav">
 						<div class="am-l-sidebar__jump">
 							<am-jumpbar
-								placeholder="jumpbar_placeholder"
+								placeholder="jumpbarPlaceholder"
 							></am-jumpbar>
 						</div>
 						<nav class="am-c-nav">
 							<span class="am-c-nav__label">
-								$${App.text('sidebar_header_global')}
+								$${App.text('sidebarGlobal')}
 							</span>
 							<span class="am-c-nav__item">
 								<a href="${App.baseURL}" class="am-c-nav__link">
@@ -68,27 +68,27 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 							<am-nav-item
 								page="search"
 								icon="search"
-								text="search_title"
+								text="searchTitle"
 							></am-nav-item>
 							<am-nav-item
 								page="home"
 								icon="window-sidebar"
-								text="dashboard_title"
+								text="dashboardTitle"
 							></am-nav-item>
 							<am-nav-item
 								page="system"
 								icon="sliders"
-								text="sys_title"
+								text="systemTitle"
 							></am-nav-item>
 							<am-nav-item
 								page="shared"
 								icon="file-earmark-medical"
-								text="shared_title"
+								text="sharedTitle"
 							></am-nav-item>
 							<am-nav-item
 								page="packages"
 								icon="box-seam"
-								text="packages_title"
+								text="packagesTitle"
 							></am-nav-item>
 						</nav>
 						<am-nav-tree></am-nav-tree>
@@ -98,12 +98,12 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 			<nav class="am-l-navbar am-l-navbar--sidebar">
 				<div class="am-l-navbar__logo">Logo</div>
 				<div class="am-l-navbar__jump">
-					<am-jumpbar placeholder="jumpbar_placeholder"></am-jumpbar>
+					<am-jumpbar placeholder="jumpbarPlaceholder"></am-jumpbar>
 				</div>
 				<div class="am-l-navbar__buttons">
 					<am-modal-toggle
 						modal="#am-add-page-modal"
-						title="$${App.text('btn_add_page')}"
+						title="$${App.text('addPage')}"
 					>
 						<i class="bi bi-plus"></i>
 					</am-modal-toggle>
@@ -126,7 +126,7 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 			<div class="${classes.modalDialog}">
 				<am-form api="Page/add" watch>
 					<div class="${classes.modalHeader}">
-						<span>$${App.text('btn_add_page')}</span>
+						<span>$${App.text('addPage')}</span>
 						<am-modal-close
 							class="${classes.modalClose}"
 						></am-modal-close>
@@ -143,13 +143,13 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 					}).outerHTML}
 					<div class="${classes.field}">
 						<label class="${classes.fieldLabel}"
-							>${App.text('page_theme_template')}
+							>${App.text('pageTemplate')}
 						</label>
 						${createTemplateSelect('').outerHTML}
 					</div>
 					<div class="${classes.field}">
 						<label class="${classes.fieldLabel}"
-							>${App.text('page_add_location')}
+							>${App.text('selectTargetNewPage')}
 						</label>
 						<am-page-select-tree></am-page-select-tree>
 					</div>
@@ -157,7 +157,7 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 						<am-submit
 							class="${classes.button} ${classes.buttonSuccess}"
 						>
-							$${App.text('btn_add_page')}
+							$${App.text('addPage')}
 						</am-submit>
 					</div>
 				</am-form>

@@ -42,7 +42,7 @@ import { BaseComponent } from './Base';
  * @example
  * <am-alert
  * icon="exclamation-circle"
- * text="error_page_not_found"
+ * text="pageNotFoundError"
  * type="danger"
  * ></am-alert>
  *

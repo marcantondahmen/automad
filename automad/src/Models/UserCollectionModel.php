@@ -103,25 +103,25 @@ class UserCollectionModel {
 		}
 
 		if (!$username || !$password1 || !$password2) {
-			$Messenger->setError(Text::get('error_form'));
+			$Messenger->setError(Text::get('invalidFormError'));
 
 			return false;
 		}
 
 		if ($password1 != $password2) {
-			$Messenger->setError(Text::get('error_password_repeat'));
+			$Messenger->setError(Text::get('repeatPassword'));
 
 			return false;
 		}
 
 		if ($this->getUser($username)) {
-			$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
+			$Messenger->setError('"' . $username . '" ' . Text::get('alreadyExists'));
 
 			return false;
 		}
 
 		if ($this->getUser($email)) {
-			$Messenger->setError('"' . $email . '" ' . Text::get('error_existing'));
+			$Messenger->setError('"' . $email . '" ' . Text::get('alreadyExists'));
 
 			return false;
 		}
@@ -151,7 +151,7 @@ class UserCollectionModel {
 
 				return $this->save($Messenger);
 			} else {
-				$Messenger->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
+				$Messenger->setError(Text::get('permissionsDeniedError') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
 
 				return false;
 			}
@@ -176,7 +176,7 @@ class UserCollectionModel {
 		unset($this->users[$id]);
 
 		if (!$User || !$username) {
-			$Messenger->setError(Text::get('error_form'));
+			$Messenger->setError(Text::get('invalidFormError'));
 
 			return false;
 		}
@@ -197,13 +197,13 @@ class UserCollectionModel {
 		}
 
 		if ($this->getUser($username)) {
-			$Messenger->setError('"' . $username . '" ' . Text::get('error_existing'));
+			$Messenger->setError('"' . $username . '" ' . Text::get('alreadyExists'));
 
 			return false;
 		}
 
 		if ($this->getUser($email)) {
-			$Messenger->setError('"' . $email . '" ' . Text::get('error_existing'));
+			$Messenger->setError('"' . $email . '" ' . Text::get('alreadyExists'));
 
 			return false;
 		}
@@ -277,7 +277,7 @@ class UserCollectionModel {
 	 */
 	public function save(Messenger $Messenger) {
 		if (!FileSystem::write(AM_FILE_ACCOUNTS, $this->generatePHP())) {
-			$Messenger->setError(Text::get('error_permission') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
+			$Messenger->setError(Text::get('permissionsDeniedError') . '<p>' . AM_FILE_ACCOUNTS . '</p>');
 
 			return false;
 		}
@@ -306,7 +306,7 @@ class UserCollectionModel {
 		$headers .= 'Content-type: text/html; charset=UTF-8';
 
 		if (!mail($email, $subject, $message, $headers)) {
-			$Messenger->setError(Text::get('error_send_email'));
+			$Messenger->setError(Text::get('sendMailError'));
 
 			return false;
 		}
@@ -356,7 +356,7 @@ class UserCollectionModel {
 	 * @return string the error message
 	 */
 	private function invalidEmailError() {
-		return Text::get('error_invalid_email');
+		return Text::get('invalidEmailError');
 	}
 
 	/**
@@ -365,7 +365,7 @@ class UserCollectionModel {
 	 * @return string the error message
 	 */
 	private function invalidUsernameError() {
-		return Text::get('error_invalid_username') . ' "a-z", "A-Z", ".", "-", "_", "@"';
+		return Text::get('invalidUsernameError') . ' "a-z", "A-Z", ".", "-", "_", "@"';
 	}
 
 	/**

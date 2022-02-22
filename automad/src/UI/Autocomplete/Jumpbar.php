@@ -79,8 +79,8 @@ class Jumpbar {
 		return array(
 			array(
 				'external' => AM_BASE_INDEX,
-				'value' => Text::get('btn_inpage_edit'),
-				'title' => Text::get('btn_inpage_edit'),
+				'value' => Text::get('inPageEdit'),
+				'title' => Text::get('inPageEdit'),
 				'subtitle' => '',
 				'icon' => 'house'
 			)
@@ -96,8 +96,8 @@ class Jumpbar {
 		return array(
 			array(
 				'target' => 'packages',
-				'value' => Text::get('packages_title'),
-				'title' => Text::get('packages_title'),
+				'value' => Text::get('packagesTitle'),
+				'title' => Text::get('packagesTitle'),
 				'subtitle' => '',
 				'icon' => 'box-seam'
 			)
@@ -143,8 +143,8 @@ class Jumpbar {
 		return array(
 			array(
 				'target' => 'search',
-				'value' => Text::get('search_title'),
-				'title' => Text::get('search_title'),
+				'value' => Text::get('searchTitle'),
+				'title' => Text::get('searchTitle'),
 				'subtitle' => '',
 				'icon' => 'search'
 			)
@@ -163,57 +163,57 @@ class Jumpbar {
 		return array(
 			array(
 				'target' => $sysUrl . $sections->system->cache,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_cache'),
-				'title' => Text::get('sys_cache'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemCache'),
+				'title' => Text::get('systemCache'),
 				'subtitle' => '',
 				'icon' => 'lightning'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->users,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_user'),
-				'title' => Text::get('sys_user'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemUsers'),
+				'title' => Text::get('systemUsers'),
 				'subtitle' => '',
 				'icon' => 'people'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->update,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_update'),
-				'title' => Text::get('sys_update'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemUpdate'),
+				'title' => Text::get('systemUpdate'),
 				'subtitle' => '',
 				'icon' => 'arrow-repeat'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->feed,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_feed'),
-				'title' => Text::get('sys_feed'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemRssFeed'),
+				'title' => Text::get('systemRssFeed'),
 				'subtitle' => '',
 				'icon' => 'rss'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->language,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_language'),
-				'title' => Text::get('sys_language'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemLanguage'),
+				'title' => Text::get('systemLanguage'),
 				'subtitle' => '',
 				'icon' => 'flag'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->headless,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_headless'),
-				'title' => Text::get('sys_headless'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemHeadless'),
+				'title' => Text::get('systemHeadless'),
 				'subtitle' => '',
 				'icon' => 'cloud'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->debug,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_debug'),
-				'title' => Text::get('sys_debug'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemDebug'),
+				'title' => Text::get('systemDebug'),
 				'subtitle' => '',
 				'icon' => 'bug'
 			),
 			array(
 				'target' => $sysUrl . $sections->system->config,
-				'value' => Text::get('sys_title') . ' ' . Text::get('sys_config'),
-				'title' => Text::get('sys_config'),
+				'value' => Text::get('systemTitle') . ' ' . Text::get('systemConfigFile'),
+				'title' => Text::get('systemConfigFile'),
 				'subtitle' => '',
 				'icon' => 'file-earmark-code'
 			)
@@ -229,8 +229,8 @@ class Jumpbar {
 		return array(
 			array(
 				'target' => 'shared',
-				'value' => Text::get('shared_title') . ' shared',
-				'title' => Text::get('shared_title'),
+				'value' => Text::get('sharedTitle') . ' shared',
+				'title' => Text::get('sharedTitle'),
 				'subtitle' => '',
 				'icon' => 'file-earmark-medical'
 			)

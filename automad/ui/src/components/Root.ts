@@ -110,12 +110,11 @@ export class RootComponent extends BaseComponent {
 	 */
 	private confirmViewUpdate(): boolean {
 		const forms = queryAll('[watch]');
-		const message = App.text('confirm_discard_unsaved');
+		const message = App.text('confirmDiscardUnsaved');
 		let hasChanges = false;
 		let confirmed = false;
 
 		forms.forEach((form: FormComponent) => {
-			console.log(form.hasUnsavedChanges);
 			if (form.hasUnsavedChanges) {
 				hasChanges = true;
 			}

@@ -162,7 +162,7 @@ class FileCardComponent extends BaseComponent {
 				>
 					<am-icon-text
 						icon="pencil"
-						text="${App.text('image_edit')}"
+						text="${App.text('editImage')}"
 					></am-icon-text>
 				</am-file-robot>
 			`;
@@ -176,7 +176,7 @@ class FileCardComponent extends BaseComponent {
 					<am-file-info class="${classes.dropdownItem}">
 						<am-icon-text
 							icon="card-heading"
-							text="${App.text('btn_edit_file_info')}"
+							text="${App.text('editFileInfo')}"
 						></am-icon-text>
 					</am-file-info>
 					<am-copy
@@ -185,7 +185,7 @@ class FileCardComponent extends BaseComponent {
 					>
 						<am-icon-text
 							icon="clipboard-plus"
-							text="${App.text('btn_copy_url_clipboard')}"
+							text="${App.text('copyUrlClipboard')}"
 						></am-icon-text>
 					</am-copy>
 				</div>

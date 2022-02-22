@@ -53,21 +53,21 @@ export class LoginComponent extends CenteredLayoutComponent {
 					class="am-e-input"
 					type="text"
 					name="name-or-email"
-					placeholder="$${App.text('login_name_or_email')}"
+					placeholder="$${App.text('usernameOrEmail')}"
 					required
 				/>
 				<input
 					class="am-e-input"
 					type="password"
 					name="password"
-					placeholder="$${App.text('login_password')}"
+					placeholder="$${App.text('password')}"
 					required
 				/>
 				<a href="./resetpassword" class="am-e-button">
-					$${App.text('btn_forgot_password')}
+					$${App.text('forgotPassword')}
 				</a>
 				<am-submit class="am-e-button" form="Session/login">
-					$${App.text('btn_login')}
+					$${App.text('signIn')}
 				</am-submit>
 			</am-form>
 		`;
@@ -79,7 +79,7 @@ export class LoginComponent extends CenteredLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderTitlePartial(): string {
-		return 'Login here ...';
+		return App.text('signIn');
 	}
 }
 

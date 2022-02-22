@@ -98,10 +98,10 @@ class UploadComponent extends BaseComponent {
 			acceptedFiles: acceptedFiles,
 			previewsContainer: this.queuePreviews,
 			addRemoveLinks: true,
-			dictInvalidFileType: App.text('error_file_format'),
-			dictCancelUpload: App.text('btn_cancel'),
-			dictUploadCanceled: App.text('error_upload_cancelled'),
-			dictCancelUploadConfirmation: App.text('confirm_cancel_upload'),
+			dictInvalidFileType: App.text('unsupportedFileTypeError'),
+			dictCancelUpload: App.text('cancel'),
+			dictUploadCanceled: App.text('uploadCancelled'),
+			dictCancelUploadConfirmation: App.text('confirmCancelUpload'),
 			chunking: true,
 			forceChunking: true,
 			parallelChunkUploads: false,
@@ -158,7 +158,7 @@ class UploadComponent extends BaseComponent {
 			'am-file-collection-list'
 		) as FileCollectionListComponent;
 
-		notifySuccess(html`$${App.text('success_upload')}:<br />${file.name}`);
+		notifySuccess(html`$${App.text('uploadedSuccess')}:<br />${file.name}`);
 
 		this.dropzone.removeFile(file);
 		fileCollection.refresh();
@@ -191,7 +191,7 @@ class UploadComponent extends BaseComponent {
 			this
 		);
 
-		form.innerHTML = html`<span>${App.text('dropzone')}</span>`;
+		form.innerHTML = html`<span>${App.text('dropFilesOrClick')}</span>`;
 
 		const page = getPageURL();
 

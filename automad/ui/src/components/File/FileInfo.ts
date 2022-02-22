@@ -96,7 +96,7 @@ export class FileInfoComponent extends BaseComponent {
 				class="${classes.modalDialog}"
 			>
 				<div class="${classes.modalHeader}">
-					<span>${App.text('btn_edit_file_info')}</span>
+					<span>${App.text('editFileInfo')}</span>
 					<am-modal-close
 						class="${classes.modalClose}"
 					></am-modal-close>
@@ -109,7 +109,7 @@ export class FileInfoComponent extends BaseComponent {
 						key: 'new-name',
 						value: file.basename,
 						name: 'new-name',
-						label: App.text('file_name'),
+						label: App.text('fileName'),
 					},
 					[]
 				).outerHTML}
@@ -120,23 +120,23 @@ export class FileInfoComponent extends BaseComponent {
 						key: 'caption',
 						value: file.caption,
 						name: 'caption',
-						label: App.text('file_caption'),
+						label: App.text('fileCaption'),
 					},
 					[]
 				).outerHTML}
 				<div class="${classes.modalFooter}">
 					<am-modal-close class="${classes.button}">
-						${App.text('btn_close')}
+						${App.text('close')}
 					</am-modal-close>
 					<a
 						href="${file.url}"
 						class="${classes.button}"
 						download="${file.basename}"
 					>
-						${App.text('btn_download_file')}
+						${App.text('downloadFile')}
 					</a>
 					<am-submit class="${classes.button}">
-						${App.text('btn_save')}
+						${App.text('save')}
 					</am-submit>
 				</div>
 			</am-form>

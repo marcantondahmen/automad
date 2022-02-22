@@ -85,12 +85,12 @@ class FileCollectionModel {
 			Cache::clear();
 
 			if (!empty($success)) {
-				$Messenger->setSuccess(Text::get('success_remove') . '<br />' . implode('<br />', $success));
+				$Messenger->setSuccess(Text::get('deteledSuccess') . '<br />' . implode('<br />', $success));
 			}
 
 			$Messenger->setError(implode('<br />', $errors));
 		} else {
-			$Messenger->setError(Text::get('error_permission') . ' "' . basename($path) . '"');
+			$Messenger->setError(Text::get('permissionsDeniedError') . ' "' . basename($path) . '"');
 		}
 
 		return !$Messenger->getError();
@@ -100,9 +100,8 @@ class FileCollectionModel {
 	 * List all files of a page or the shared data directory.
 	 *
 	 * @param string $path
-	 * @param string $url
 	 */
-	public static function list(string $path, string $url) {
+	public static function list(string $path) {
 		$files = array();
 		$globGrep = FileSystem::globGrep(
 			$path . '*.*',
@@ -148,7 +147,7 @@ class FileCollectionModel {
 
 		if (!FileSystem::isAllowedFileType($chunk->name)) {
 			$Messenger->setError(
-				Text::get('error_file_format') . ' "' .
+				Text::get('unsupportedFileTypeError') . ' "' .
 				FileSystem::getExtension($chunk->name) . '"'
 			);
 
@@ -157,7 +156,7 @@ class FileCollectionModel {
 
 		if (!is_writable($path)) {
 			$Messenger->setError(
-				Text::get('error_permission') .
+				Text::get('permissionsDeniedError') .
 				' "' . basename($path) . '"'
 			);
 

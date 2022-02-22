@@ -33,13 +33,9 @@
  */
 
 import FilerobotImageEditor from 'filerobot-image-editor';
-import {
-	FilerobotImageEditorConfig,
-	TABS,
-	TOOLS,
-} from 'react-filerobot-image-editor';
+import { FilerobotImageEditorConfig } from 'react-filerobot-image-editor';
 import { KeyValueMap } from '../../types';
-import { classes, create, fire, listen } from '../../core';
+import { App, classes, create, fire, listen } from '../../core';
 import { modalCloseEventName, ModalComponent } from '../Modal/Modal';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
@@ -130,9 +126,8 @@ class FileRobotComponent extends BaseComponent {
 				},
 			},
 			// https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultTranslations.js
-			translations: {},
+			translations: App.state.text,
 			onSave: (savedImageData: KeyValueMap, designState: any) => {
-				//console.log('saved', savedImageData, designState);
 				delete savedImageData.imageCanvas;
 				this.save(form, savedImageData);
 			},

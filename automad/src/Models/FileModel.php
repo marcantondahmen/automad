@@ -65,7 +65,7 @@ class FileModel {
 	 */
 	public static function editInfo(string $newName, string $oldName, string $caption, Messenger $Messenger) {
 		if (!$oldName || !$newName) {
-			$Messenger->setError(Text::get('error_form'));
+			$Messenger->setError(Text::get('invalidFormError'));
 
 			return false;
 		}
@@ -78,7 +78,7 @@ class FileModel {
 		$newFile = $path . Str::slug(basename(preg_replace('/\.' . $extension . '$/i', '', $newName))) . '.' . $extension;
 
 		if (!FileSystem::isAllowedFileType($newFile)) {
-			$Messenger->setError(Text::get('error_file_format') . ' "' . FileSystem::getExtension($newFile) . '"');
+			$Messenger->setError(Text::get('unsupportedFileTypeError') . ' "' . FileSystem::getExtension($newFile) . '"');
 
 			return false;
 		}
@@ -115,7 +115,7 @@ class FileModel {
 			if (is_writable($newCaptionFile) || !file_exists($newCaptionFile)) {
 				FileSystem::write($newCaptionFile, $caption);
 			} else {
-				$Messenger->setError(Text::get('error_file_save') . ' "' . basename($newCaptionFile) . '"');
+				$Messenger->setError(Text::get('couldNotSaveError') . ' "' . basename($newCaptionFile) . '"');
 			}
 		}
 
@@ -134,7 +134,7 @@ class FileModel {
 	 */
 	public static function import(string $importUrl, ?string $pageUrl = null, Messenger $Messenger) {
 		if (!$importUrl) {
-			$Messenger->setError(Text::get('error_no_url'));
+			$Messenger->setError(Text::get('missingUrlError'));
 
 			return false;
 		}
@@ -160,7 +160,7 @@ class FileModel {
 		$data = curl_exec($curl);
 
 		if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 200 || curl_errno($curl)) {
-			$Messenger->setError(Text::get('error_import'));
+			$Messenger->setError(Text::get('importFailedError'));
 			curl_close($curl);
 
 			return false;
@@ -191,7 +191,7 @@ class FileModel {
 				}
 			} else {
 				unlink($path);
-				$Messenger->setError(Text::get('error_file_format'));
+				$Messenger->setError(Text::get('unsupportedFileTypeError'));
 
 				return false;
 			}
