@@ -32,11 +32,11 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, createField, html, titleCase } from '../../../core';
+import { App, classes, createField, html } from '../../../core';
 import { Partials } from '../../../types';
 import { createTemplateSelect } from '../../Fields/PageTemplate';
 
-export const sidebarLayout = ({ save, main }: Partials) => {
+export const sidebarLayout = ({ main }: Partials) => {
 	return html`
 		<div class="am-l-page am-l-page--sidebar">
 			<am-toggle
@@ -53,12 +53,15 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 								placeholder="jumpbarPlaceholder"
 							></am-jumpbar>
 						</div>
-						<nav class="am-c-nav">
-							<span class="am-c-nav__label">
+						<nav class="${classes.nav}">
+							<span class="${classes.navLabel}">
 								$${App.text('sidebarGlobal')}
 							</span>
-							<span class="am-c-nav__item">
-								<a href="${App.baseURL}" class="am-c-nav__link">
+							<span class="${classes.navItem}">
+								<a
+									href="${App.baseURL}"
+									class="${classes.navLink}"
+								>
 									<am-icon-text
 										icon="bookmark"
 										text="$${App.sitename}"
@@ -107,7 +110,6 @@ export const sidebarLayout = ({ save, main }: Partials) => {
 					>
 						<i class="bi bi-plus"></i>
 					</am-modal-toggle>
-					${save}
 					<am-toggle
 						target="body"
 						cls="am-l-page--sidebar-open"

@@ -192,7 +192,7 @@ export class PageComponent extends SidebarLayoutComponent {
 			</section>
 			<section class="am-l-main__row">
 				<div class="am-l-main__content">
-					<am-page-data api="Page/data" watch></am-page-data>
+					<am-page-data api="Page/data"></am-page-data>
 					<am-switcher-section name="${App.sections.content.files}">
 						<am-upload></am-upload>
 						<am-modal-toggle

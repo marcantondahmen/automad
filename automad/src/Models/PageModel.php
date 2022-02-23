@@ -226,8 +226,6 @@ class PageModel {
 			$private = false;
 		}
 
-		$changedPrivacy = ($private != $Page->private);
-
 		// Get correct theme name.
 		// If the theme is not set and there is no slash passed within 'theme_template',
 		// the resulting dirname is just a dot.
@@ -291,10 +289,13 @@ class PageModel {
 
 		Cache::clear();
 
-		if (($Page->path != $newPagePath)
-						|| ($currentTheme != $newTheme)
-						|| ($Page->template != $newTemplate)
-						|| $changedPrivacy) {
+		if ($Page->path != $newPagePath ||
+			$currentTheme != $newTheme ||
+			$Page->template != $newTemplate ||
+			$data[AM_KEY_TITLE] != $Page->data[AM_KEY_TITLE] ||
+			$data[AM_KEY_URL] != $Page->data[AM_KEY_URL] ||
+			$private != $Page->private
+		) {
 			return self::contextUrlByPath($newPagePath);
 		}
 

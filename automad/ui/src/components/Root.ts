@@ -43,6 +43,7 @@ import {
 	listen,
 	queryAll,
 } from '../core';
+import { KeyValueMap, UIState } from '../types';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
 
@@ -56,6 +57,11 @@ export class RootComponent extends BaseComponent {
 	 * The main child of the root element that is basically a rendered view.
 	 */
 	private node: HTMLElement;
+
+	/**
+	 * The UI state.
+	 */
+	private uiState: UIState;
 
 	/**
 	 * The array of observed attributes.
@@ -149,33 +155,31 @@ export class RootComponent extends BaseComponent {
 		const page = create(getTagFromRoute(route), [], {}).init();
 
 		this.progressBar(70);
+		this.saveUIState();
 
 		await waitForPendingRequests();
 
-		let sidebar = query('am-sidebar');
-		const sidebarScroll = sidebar?.scrollTop;
-
 		if (typeof this.node !== 'undefined') {
 			this.node.replaceWith(page);
+			document.body.removeAttribute('class');
 		} else {
 			this.appendChild(page);
 		}
 
 		this.node = page;
 
-		sidebar = query('am-sidebar');
-
-		if (sidebar && sidebarScroll) {
-			sidebar.scrollTop = sidebarScroll;
-		}
-
 		this.progressBar(100);
+		this.applyUIState();
 
 		setTimeout(() => {
-			query('html').scrollTop = 0;
+			this.applyUIState();
 
 			this.progressBar(0);
 		}, 0);
+
+		setTimeout(() => {
+			this.applyUIState();
+		}, 200);
 	}
 
 	/**
@@ -195,6 +199,70 @@ export class RootComponent extends BaseComponent {
 		setTimeout(() => {
 			this.style.setProperty('--progress', `${progress}%`);
 		}, 500);
+	}
+
+	/**
+	 * Cache the UI state before changing the view.
+	 */
+	private saveUIState(): void {
+		const sidebar = query('am-sidebar');
+		const sidebarScroll = sidebar?.scrollTop;
+		const documentScroll = query('html').scrollTop;
+		const focused = document.activeElement as HTMLInputElement;
+
+		let focusedId = null;
+		let focusedCursorPosition = null;
+
+		if (focused) {
+			focusedId = focused.getAttribute('id');
+
+			try {
+				focusedCursorPosition = focused.selectionStart;
+			} catch {}
+		}
+
+		this.uiState = {
+			documentScroll,
+			sidebarScroll,
+			focusedId,
+			focusedCursorPosition,
+		};
+	}
+
+	/**
+	 * Load the UI state after changing the view.
+	 */
+	private applyUIState(): void {
+		const sidebar = query('am-sidebar');
+		const {
+			documentScroll,
+			sidebarScroll,
+			focusedId,
+			focusedCursorPosition,
+		} = this.uiState;
+
+		if (sidebar && sidebarScroll) {
+			sidebar.scrollTop = sidebarScroll;
+		}
+
+		query('html').scrollTop = documentScroll;
+
+		if (focusedId) {
+			const focused = document.getElementById(
+				focusedId
+			) as HTMLInputElement;
+
+			if (focused) {
+				focused.focus();
+
+				try {
+					focused.setSelectionRange(
+						focusedCursorPosition,
+						focusedCursorPosition
+					);
+				} catch {}
+			}
+		}
 	}
 }
 

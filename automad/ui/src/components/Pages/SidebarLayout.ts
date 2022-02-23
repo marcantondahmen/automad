@@ -52,7 +52,6 @@ export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
 	 */
 	protected partials: Partials = {
 		main: this.renderMainPartial(),
-		save: this.renderSaveButtonPartial(),
 	};
 
 	/**
@@ -61,15 +60,6 @@ export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return '';
-	}
-
-	/**
-	 * Render the save button partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderSaveButtonPartial(): string {
 		return '';
 	}
 }

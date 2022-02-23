@@ -94,19 +94,19 @@ cornerRadius: Corner Radius
 
 -
 
-couldNotSaveError: Could not save 
+couldNotSaveError: Could not save the changes
 
 -
 
-confirmCancelUpload: Are you sure to cancel the upload?
+confirmCancelUpload: Do you want to cancel the upload?
 
 -
 
-confirmDeletePage: Are you sure you want to delete the current page?
+confirmDeletePage: Do you want to delete the current page?
 
 -
 
-confirmDeleteSelectedFiles: Are you sure you want to delete the selected files?
+confirmDeleteSelectedFiles: Do you want to delete the selected files?
 
 -
 
@@ -479,10 +479,6 @@ saveAs: Save as
 -
 
 saveAsModalLabel: Save the image as
-
--
-
-savedChangesSuccess: Saved changes
 
 -
 

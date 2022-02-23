@@ -363,8 +363,6 @@ class PageController {
 
 					if ($redirectUrl = PageModel::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
 						$Response->setRedirect($redirectUrl);
-					} else {
-						$Response->setSuccess(Text::get('savedChangesSuccess'));
 					}
 				} else {
 					$Response->setError(Text::get('permissionsDeniedError'));

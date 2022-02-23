@@ -166,6 +166,13 @@ export class PageDataComponent extends FormComponent {
 	private sections: PageSectionCollection;
 
 	/**
+	 * Submit form data on changes.
+	 */
+	protected get auto(): boolean {
+		return true;
+	}
+
+	/**
 	 * Enable self init.
 	 */
 	protected get initSelf(): boolean {

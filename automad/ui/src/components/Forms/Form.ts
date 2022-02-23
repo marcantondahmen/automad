@@ -55,13 +55,14 @@ import { BaseComponent } from '../Base';
  * A basic form.
  *
  * The following options are available and can be passed as attributes:
- * - `api` (required)
- * - `init`
- * - `watch`
- * - `focus`
- * - `enter`
- * - `confirm`
- * - `event`
+ * - `api` (required) - the API endpoint
+ * - `init` - sumbit form when connected to DOM
+ * - `watch` - watch changes
+ * - `focus` - focus first input when connected
+ * - `enter` - submit using enter key
+ * - `confirm` - require confirmation before submitting
+ * - `event` - fire event when receiving the API response
+ * - `auto` - automatically submit form on change
  *
  * Self initialized form with watched submit button:
  *
@@ -105,6 +106,13 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected get api(): string {
 		return this.getAttribute('api');
+	}
+
+	/**
+	 * Submit form data on changes.
+	 */
+	protected get auto(): boolean {
+		return this.hasAttribute('auto');
 	}
 
 	/**
@@ -226,9 +234,6 @@ export class FormComponent extends BaseComponent {
 			return null;
 		}
 
-		const focused = document.activeElement as HTMLElement;
-		focused.blur();
-
 		const response = await requestAPI(this.api, this.formData);
 
 		setTimeout(() => {
@@ -243,8 +248,6 @@ export class FormComponent extends BaseComponent {
 			if (this.hasAttribute('event')) {
 				fire(this.getAttribute('event'));
 			}
-
-			focused.focus();
 		}, 200);
 	}
 
@@ -284,9 +287,13 @@ export class FormComponent extends BaseComponent {
 	 * @param input
 	 */
 	onChange(input: InputElement): void {
-		updateFieldStatus(input, true);
-		this.enableButtons();
-		this.hasUnsavedChanges = true;
+		if (this.auto) {
+			this.submit();
+		} else {
+			updateFieldStatus(input, true);
+			this.enableButtons();
+			this.hasUnsavedChanges = true;
+		}
 	}
 
 	/**
@@ -295,7 +302,7 @@ export class FormComponent extends BaseComponent {
 	protected watch(): void {
 		const onChangeHandler = debounce((event: Event) => {
 			this.onChange(event.target as InputElement);
-		}, 100);
+		}, 500);
 
 		listen(
 			this,

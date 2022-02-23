@@ -265,12 +265,6 @@ export class PageTemplateComponent extends BaseComponent {
 					<am-modal-close class="${classes.button}">
 						${App.text('close')}
 					</am-modal-close>
-					<am-submit
-						class="${classes.button} ${classes.buttonSuccess}"
-						form="Page/data"
-					>
-						${App.text('applyReload')}
-					</am-submit>
 				</div>
 			</div>
 		`;

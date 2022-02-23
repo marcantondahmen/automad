@@ -92,3 +92,10 @@ export interface Theme {
 export interface ThemeCollection {
 	[key: string]: Theme;
 }
+
+export interface UIState {
+	documentScroll: number;
+	sidebarScroll: number;
+	focusedId: string;
+	focusedCursorPosition: number;
+}
