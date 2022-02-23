@@ -43,7 +43,7 @@ import {
 	listen,
 	queryAll,
 } from '../core';
-import { KeyValueMap, UIState } from '../types';
+import { UIState } from '../types';
 import { BaseComponent } from './Base';
 import { FormComponent } from './Forms/Form';
 
@@ -57,11 +57,6 @@ export class RootComponent extends BaseComponent {
 	 * The main child of the root element that is basically a rendered view.
 	 */
 	private node: HTMLElement;
-
-	/**
-	 * The UI state.
-	 */
-	private uiState: UIState;
 
 	/**
 	 * The array of observed attributes.
@@ -83,11 +78,12 @@ export class RootComponent extends BaseComponent {
 	 * Set a new URL and update the view accordingly.
 	 *
 	 * @param url
+	 * @param useMainState
 	 */
-	setView(url: URL): void {
+	setView(url: URL, useMainState: boolean = false): void {
 		if (this.confirmViewUpdate()) {
 			window.history.pushState(null, null, url);
-			this.update();
+			this.update(this.saveUIState(useMainState));
 		}
 	}
 
@@ -142,9 +138,10 @@ export class RootComponent extends BaseComponent {
 	/**
 	 * Update the root component.
 	 *
+	 * @param uiState
 	 * @async
 	 */
-	private async update(): Promise<void> {
+	private async update(uiState: UIState = null): Promise<void> {
 		this.progressBar(25);
 
 		await App.updateState();
@@ -155,7 +152,6 @@ export class RootComponent extends BaseComponent {
 		const page = create(getTagFromRoute(route), [], {}).init();
 
 		this.progressBar(70);
-		this.saveUIState();
 
 		await waitForPendingRequests();
 
@@ -169,17 +165,13 @@ export class RootComponent extends BaseComponent {
 		this.node = page;
 
 		this.progressBar(100);
-		this.applyUIState();
 
-		setTimeout(() => {
-			this.applyUIState();
+		await waitForPendingRequests();
 
+		setTimeout(async () => {
 			this.progressBar(0);
+			this.applyUIState(uiState);
 		}, 0);
-
-		setTimeout(() => {
-			this.applyUIState();
-		}, 200);
 	}
 
 	/**
@@ -198,50 +190,65 @@ export class RootComponent extends BaseComponent {
 
 		setTimeout(() => {
 			this.style.setProperty('--progress', `${progress}%`);
-		}, 500);
+		}, 0);
 	}
 
 	/**
 	 * Cache the UI state before changing the view.
+	 *
+	 * @param useMainState
 	 */
-	private saveUIState(): void {
+	private saveUIState(useMainState: boolean): UIState {
 		const sidebar = query('am-sidebar');
 		const sidebarScroll = sidebar?.scrollTop;
-		const documentScroll = query('html').scrollTop;
-		const focused = document.activeElement as HTMLInputElement;
 
-		let focusedId = null;
-		let focusedCursorPosition = null;
+		const uiState: UIState = {
+			sidebarScroll,
+			documentScroll: 0,
+		};
 
-		if (focused) {
-			focusedId = focused.getAttribute('id');
+		if (useMainState) {
+			const documentScroll = query('html').scrollTop;
+			const focused = document.activeElement as HTMLInputElement;
 
-			try {
-				focusedCursorPosition = focused.selectionStart;
-			} catch {}
+			let focusedId = null;
+			let focusedCursorPosition = null;
+
+			if (focused) {
+				focusedId = focused.getAttribute('id');
+
+				try {
+					focusedCursorPosition = focused.selectionStart;
+				} catch {}
+			}
+
+			uiState.documentScroll = documentScroll;
+			uiState.focusedId = focusedId;
+			uiState.focusedCursorPosition = focusedCursorPosition;
 		}
 
-		this.uiState = {
-			documentScroll,
-			sidebarScroll,
-			focusedId,
-			focusedCursorPosition,
-		};
+		return uiState;
 	}
 
 	/**
 	 * Load the UI state after changing the view.
+	 *
+	 * @param uiState
 	 */
-	private applyUIState(): void {
+	private applyUIState(uiState: UIState): void {
+		if (!uiState) {
+			return;
+		}
+
 		const sidebar = query('am-sidebar');
 		const {
 			documentScroll,
 			sidebarScroll,
 			focusedId,
 			focusedCursorPosition,
-		} = this.uiState;
+		} = uiState;
 
-		if (sidebar && sidebarScroll) {
+		if (sidebar) {
 			sidebar.scrollTop = sidebarScroll;
 		}
 

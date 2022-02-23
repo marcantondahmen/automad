@@ -94,8 +94,8 @@ export interface ThemeCollection {
 }
 
 export interface UIState {
-	documentScroll: number;
 	sidebarScroll: number;
-	focusedId: string;
-	focusedCursorPosition: number;
+	documentScroll?: number;
+	focusedId?: string;
+	focusedCursorPosition?: number;
 }

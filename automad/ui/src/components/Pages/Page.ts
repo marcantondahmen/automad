@@ -246,17 +246,6 @@ export class PageComponent extends SidebarLayoutComponent {
 			</am-modal>
 		`;
 	}
-
-	/**
-	 * Render the save button partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderSaveButtonPartial(): string {
-		return html`<am-submit form="Page/data" title="$${App.text('save')}">
-			<i class="bi bi-check"></i>
-		</am-submit>`;
-	}
 }
 
 customElements.define(getTagFromRoute(Routes[Routes.page]), PageComponent);

@@ -289,11 +289,17 @@ class PageModel {
 
 		Cache::clear();
 
+		$newUrl = $Page->parentUrl . '/' . $slug;
+
+		if (!empty($data[AM_KEY_URL])) {
+			$newUrl = $data[AM_KEY_URL];
+		}
+
 		if ($Page->path != $newPagePath ||
 			$currentTheme != $newTheme ||
 			$Page->template != $newTemplate ||
 			$data[AM_KEY_TITLE] != $Page->data[AM_KEY_TITLE] ||
-			$data[AM_KEY_URL] != $Page->data[AM_KEY_URL] ||
+			$newUrl != $Page->url ||
 			$private != $Page->private
 		) {
 			return self::contextUrlByPath($newPagePath);
@@ -312,7 +318,7 @@ class PageModel {
 	 */
 	public static function updateSlug(string $currentTitle, string $newTitle, string $slug) {
 		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
-			$slug = $newTitle;
+			$slug = Str::slug($newTitle);
 		}
 
 		return $slug;

@@ -236,19 +236,17 @@ export class FormComponent extends BaseComponent {
 
 		const response = await requestAPI(this.api, this.formData);
 
-		setTimeout(() => {
-			resetFieldStatus(this);
-			this.hasUnsavedChanges = false;
-			this.processResponse(response);
+		resetFieldStatus(this);
+		this.hasUnsavedChanges = false;
+		this.processResponse(response);
 
-			if (this.watchChanges) {
-				this.disbableButtons();
-			}
+		if (this.watchChanges) {
+			this.disbableButtons();
+		}
 
-			if (this.hasAttribute('event')) {
-				fire(this.getAttribute('event'));
-			}
-		}, 200);
+		if (this.hasAttribute('event')) {
+			fire(this.getAttribute('event'));
+		}
 	}
 
 	/**
@@ -258,7 +256,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected processResponse(response: KeyValueMap): void {
 		if (response.redirect) {
-			App.root.setView(response.redirect);
+			App.root.setView(response.redirect, true);
 		}
 
 		if (response.reload) {

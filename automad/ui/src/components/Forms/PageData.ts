@@ -43,14 +43,7 @@ import {
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
-import {
-	App,
-	create,
-	createField,
-	html,
-	keyCombo,
-	setDocumentTitle,
-} from '../../core';
+import { App, create, createField, html, setDocumentTitle } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
 
 /**
@@ -187,17 +180,6 @@ export class PageDataComponent extends FormComponent {
 
 		super.init();
 		this.watch();
-	}
-
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		keyCombo('s', () => {
-			if (this.hasUnsavedChanges) {
-				this.submit();
-			}
-		});
 	}
 
 	/**
