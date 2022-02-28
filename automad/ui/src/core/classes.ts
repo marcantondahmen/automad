@@ -61,7 +61,6 @@ export const classes: KeyValueMap = {
 	dropdownOpen: 'am-c-dropdown--open',
 	dropdownForm: 'am-c-dropdown--form',
 	field: 'am-c-field',
-	fieldChanged: 'am-c-field--changed',
 	fieldLabel: 'am-c-field__label',
 	flex: 'am-u-flex',
 	flexColumn: 'am-u-flex--column',

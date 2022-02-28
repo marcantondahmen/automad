@@ -32,20 +32,29 @@
  * Licensed under the MIT license.
  */
 
-.am-e-spinner {
-	display: block;
+.am-c-spinner {
 	position: relative;
+	width: 1rem;
 	height: 1rem;
 
 	&:before {
 		content: '';
 		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 1rem;
 		height: 1rem;
 		border-radius: 1rem;
-		border: 1px solid;
+		border: 1px solid var(--am-clr-base);
 		border-left-color: transparent;
 		animation: 0.8s linear 0s infinite spinner;
+	}
+
+	body > & {
+		position: fixed;
+		bottom: 1rem;
+		right: 1rem;
 	}
 }
 

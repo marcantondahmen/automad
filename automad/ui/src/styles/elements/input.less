@@ -43,9 +43,15 @@
 	padding: var(--am-input-padding);
 	line-height: var(--am-base-line-height);
 	outline: none !important;
+	transition: border-color 0.2s;
 
 	&:focus {
 		border-color: var(--am-clr-success);
+	}
+
+	&:invalid:not(:focus),
+	&:invalid:focus:not(:placeholder-shown) {
+		border-color: var(--am-clr-danger);
 	}
 
 	&--large {
