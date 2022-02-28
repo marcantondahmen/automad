@@ -35,7 +35,7 @@
 import { App, classes, create, createField, html, listen } from '../../core';
 import { File } from '../../types';
 import { BaseComponent } from '../Base';
-import { FilesChangedOnServerEventName } from '../Forms/FileCollectionList';
+import { filesChangedOnServerEventName } from '../Forms/FileCollectionList';
 import { ModalComponent } from '../Modal/Modal';
 
 /**
@@ -92,7 +92,7 @@ export class FileInfoComponent extends BaseComponent {
 		return html`
 			<am-form
 				api="File/editInfo"
-				event="${FilesChangedOnServerEventName}"
+				event="${filesChangedOnServerEventName}"
 				class="${classes.modalDialog}"
 			>
 				<div class="${classes.modalHeader}">

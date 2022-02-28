@@ -109,10 +109,9 @@ class FileCardComponent extends BaseComponent {
 					></am-icon-text>
 				</div>
 			</am-file-info>
-			<div class="${classes.cardFooter}">
+			<div class="${classes.cardFooter} ${classes.flexBetween}">
 				${this.renderDropdown(file)}
 				<span>
-					<label>Delete</label>
 					<input type="checkbox" name="delete[${file.basename}]" />
 				</span>
 			</div>

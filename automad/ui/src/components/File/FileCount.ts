@@ -34,7 +34,7 @@
 
 import { BaseComponent } from '../Base';
 import { create, listen, queryAll } from '../../core';
-import { FileCollectionRenderedEventName } from '../Forms/FileCollectionList';
+import { fileCollectionRenderedEventName } from '../Forms/FileCollectionList';
 
 /**
  * A file count badge component that displays the total number of file card elements.
@@ -56,7 +56,7 @@ class FileCountComponent extends BaseComponent {
 			badge.textContent = `${count}`;
 		};
 
-		listen(window, FileCollectionRenderedEventName, update.bind(this));
+		listen(window, fileCollectionRenderedEventName, update.bind(this));
 		setTimeout(update.bind(this), 0);
 	}
 }

@@ -39,7 +39,8 @@ import { App, classes, create, fire, listen } from '../../core';
 import { modalCloseEventName, ModalComponent } from '../Modal/Modal';
 import { BaseComponent } from '../Base';
 import { FormComponent } from '../Forms/Form';
-import { FilesChangedOnServerEventName } from '../Forms/FileCollectionList';
+import { filesChangedOnServerEventName } from '../Forms/FileCollectionList';
+import { fileRobotTheme } from './FileRobotTheme';
 
 /**
  * A file robot wrapper component.
@@ -102,6 +103,7 @@ class FileRobotComponent extends BaseComponent {
 	 *
 	 * @see {@link Config https://github.com/scaleflex/filerobot-image-editor/tree/v4#vanillajs-example}
 	 * @see {@link Defaults https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultConfig.js}
+	 * @see {@link Theme https://github.com/scaleflex/filerobot-image-editor/tree/v4#theme}
 	 * @see {@link ThemeColors https://github.com/scaleflex/ui/blob/master/packages/ui/src/utils/types/palette/color.ts#L1}
 	 * @see {@link Translations https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultTranslations.js}
 	 * @param form
@@ -113,19 +115,7 @@ class FileRobotComponent extends BaseComponent {
 			savingPixelRatio: 1,
 			previewPixelRatio: window.devicePixelRatio,
 			useBackendTranslations: false,
-			theme: {
-				// More about themes:
-				// https://github.com/scaleflex/filerobot-image-editor/tree/v4#theme
-				palette: {
-					// Add palette colors here:
-					// https://github.com/scaleflex/ui/blob/master/packages/ui/src/utils/types/palette/color.ts#L1
-					'bg-primary-active': 'var(--am-input-bg)',
-				},
-				typography: {
-					fontFamily: 'Inter',
-				},
-			},
-			// https://github.com/scaleflex/filerobot-image-editor/blob/v4/packages/react-filerobot-image-editor/src/context/defaultTranslations.js
+			theme: fileRobotTheme,
 			translations: App.state.text,
 			onSave: (savedImageData: KeyValueMap, designState: any) => {
 				delete savedImageData.imageCanvas;
@@ -162,7 +152,7 @@ class FileRobotComponent extends BaseComponent {
 	): Promise<void> {
 		form.additionalData = savedImageData;
 		await form.submit();
-		fire(FilesChangedOnServerEventName);
+		fire(filesChangedOnServerEventName);
 	}
 }
 
