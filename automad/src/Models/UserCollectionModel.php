@@ -62,7 +62,7 @@ class UserCollectionModel {
 	/**
 	 * The class name of the user type.
 	 */
-	private $userType = 'Automad\System\User';
+	private $userType = 'Automad\Auth\User';
 
 	/**
 	 * The replacement for the user type class in a serialized string.

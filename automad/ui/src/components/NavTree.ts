@@ -43,6 +43,9 @@ import {
 	queryAll,
 	Routes,
 	html,
+	Bindings,
+	listen,
+	appStateChangedEventName,
 } from '../core';
 import { KeyValueMap, NavTreeItem, NavTreePageData } from '../types';
 import { BaseComponent } from './Base';
@@ -72,9 +75,7 @@ export class NavTreeComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(classes.nav);
 
-		create('span', [classes.navLabel], {}, this).innerHTML =
-			App.text('sidebarPages');
-
+		listen(window, appStateChangedEventName, this.init.bind(this));
 		this.init();
 	}
 
@@ -82,6 +83,10 @@ export class NavTreeComponent extends BaseComponent {
 	 * Init the navTree.
 	 */
 	protected init(): void {
+		this.innerHTML = '';
+
+		this.renderLabel();
+
 		const pages: NavTreePageData[] = this.filterPages(
 			Object.values(App.pages) as NavTreePageData[]
 		);
@@ -107,6 +112,14 @@ export class NavTreeComponent extends BaseComponent {
 
 		this.unfoldToActive();
 		this.toggleChildrenIcons();
+	}
+
+	/**
+	 * Render the tree label.
+	 */
+	protected renderLabel(): void {
+		create('span', [classes.navLabel], {}, this).innerHTML =
+			App.text('sidebarPages');
 	}
 
 	/**

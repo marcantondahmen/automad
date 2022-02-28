@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Theme } from '.';
+import { KeyValueMap } from '.';
 import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
 
 export type InputElement = HTMLInputElement | HTMLTextAreaElement;

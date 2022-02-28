@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, createField, html } from '../../../core';
+import { App, classes, createField, html, titleCase } from '../../../core';
 import { Partials } from '../../../types';
 import { createTemplateSelect } from '../../Fields/PageTemplate';
 
@@ -126,18 +126,25 @@ export const sidebarLayout = ({ main }: Partials) => {
 		</div>
 		<am-modal id="am-add-page-modal">
 			<div class="${classes.modalDialog}">
-				<am-form api="Page/add" watch>
+				<am-form api="Page/add">
 					<div class="${classes.modalHeader}">
 						<span>$${App.text('addPage')}</span>
 						<am-modal-close
 							class="${classes.modalClose}"
 						></am-modal-close>
 					</div>
-					${createField('am-title', null, {
-						key: App.reservedFields.AM_KEY_TITLE,
-						name: App.reservedFields.AM_KEY_TITLE,
-						value: 'New Page',
-					}).outerHTML}
+					${createField(
+						'am-title',
+						null,
+						{
+							key: `new-${App.reservedFields.AM_KEY_TITLE}`,
+							name: App.reservedFields.AM_KEY_TITLE,
+							label: titleCase(App.reservedFields.AM_KEY_TITLE),
+							value: '',
+						},
+						[],
+						{ required: '' }
+					).outerHTML}
 					${createField('am-checkbox-large', null, {
 						key: App.reservedFields.AM_KEY_PRIVATE,
 						name: App.reservedFields.AM_KEY_PRIVATE,

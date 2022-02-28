@@ -79,7 +79,7 @@ class PageBreadcrumbsComponent extends BaseComponent {
 			return;
 		}
 
-		data.forEach((page: KeyValueMap) => {
+		data.forEach((page: KeyValueMap, index: number) => {
 			const target = `${Routes[Routes.page]}?url=${encodeURIComponent(
 				page.url
 			)}`;
@@ -91,8 +91,22 @@ class PageBreadcrumbsComponent extends BaseComponent {
 				this
 			);
 
-			link.innerHTML = html`<i class="bi bi-chevron-right"></i>
-				$${page.title}`;
+			if (index == data.length - 1) {
+				link.innerHTML = html`
+					<i class="bi bi-chevron-right"></i>
+					<span bind="title"></span>
+				`;
+
+				link.setAttribute('bind', 'pageLinkUI');
+				link.setAttribute('bindto', 'target');
+			} else {
+				link.innerHTML = html`
+					<am-icon-text
+						icon="chevron-right"
+						text="$${page.title}"
+					></am-icon-text>
+				`;
+			}
 		});
 	}
 }

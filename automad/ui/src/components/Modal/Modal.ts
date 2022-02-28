@@ -38,13 +38,10 @@ import {
 	getFormData,
 	listen,
 	query,
-	queryAll,
-	resetFieldStatus,
 	setFormData,
 } from '../../core';
 import { KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
-import { FormComponent } from '../Forms/Form';
 
 export const modalOpenEventName = 'AutomadModalOpen';
 export const modalCloseEventName = 'AutomadModalClose';
@@ -144,17 +141,12 @@ export class ModalComponent extends BaseComponent {
 		this.saveInitialFormData();
 
 		fire(modalOpenEventName, this);
-	}
 
-	/**
-	 * Reset all forms in the modal window.
-	 */
-	private resetFormStatus(): void {
-		const forms = queryAll('[watch]', this);
+		const input = query('input, textarea', this);
 
-		forms.forEach((form: FormComponent) => {
-			form.hasUnsavedChanges = false;
-		});
+		if (input) {
+			input.focus();
+		}
 	}
 
 	/**
@@ -181,9 +173,6 @@ export class ModalComponent extends BaseComponent {
 	 */
 	private restoreInitialFormData(): void {
 		setFormData(this.formData, this);
-		resetFieldStatus(this);
-
-		this.resetFormStatus();
 	}
 }
 

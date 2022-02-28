@@ -33,8 +33,10 @@
  */
 
 import { RootComponent } from '../components/Root';
-import { request, requestAPI } from '.';
+import { fire, request, requestAPI } from '.';
 import { KeyValueMap, Pages, ThemeCollection } from '../types';
+
+export const appStateChangedEventName = 'AutomadAppStateChange';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
@@ -188,11 +190,12 @@ export class App {
 	 * @param root
 	 */
 	static async bootstrap(root: RootComponent): Promise<void> {
+		this._root = root;
+
 		const api = `${root.elementAttributes.base}/api`;
 		const response = await request(`${api}/App/bootstrap`);
 		const json = await response.json();
 
-		this._root = root;
 		this._state = json.data;
 	}
 
@@ -206,6 +209,7 @@ export class App {
 		const response = await requestAPI('App/updateState');
 
 		this._state = Object.assign(this._state, response.data);
+		fire(appStateChangedEventName);
 	}
 
 	/**

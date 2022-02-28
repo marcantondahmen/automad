@@ -44,7 +44,7 @@ class TitleComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	input(): void {
+	renderInput(): void {
 		const { name, id, value } = this._data;
 		create(
 			'input',

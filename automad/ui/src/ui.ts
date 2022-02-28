@@ -57,8 +57,10 @@ import './components/File/FileRobot';
 import './components/File/Upload';
 
 import './components/Forms/FileCollectionList';
+import './components/Forms/FileCollectionSubmit';
 import './components/Forms/Form';
 import './components/Forms/PageData';
+import './components/Forms/Submit';
 
 import './components/Modal/Modal';
 import './components/Modal/ModalClose';
@@ -91,7 +93,8 @@ import './components/NavItem';
 import './components/NavTree';
 import './components/PageBreadcrumbs';
 import './components/PageSelectTree';
+import './components/PrivateIndicator';
 import './components/Root';
 import './components/Sidebar';
-import './components/Submit';
+import './components/Spinner';
 import './components/Toggle';

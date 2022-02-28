@@ -62,7 +62,7 @@ class SessionController {
 		$Response = new Response();
 
 		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
-			$Response->setRedirect(AM_BASE_INDEX . AM_PAGE_DASHBOARD);
+			$Response->setRedirect('/home');
 		} else {
 			$Response->setError(Text::get('signInError'));
 		}

@@ -94,7 +94,7 @@ class Routes {
 				header('Content-Type: application/json; charset=utf-8');
 
 				$Response = new Response();
-				$Response->setRedirect(AM_BASE_INDEX . AM_PAGE_DASHBOARD);
+				$Response->setRedirect('/login');
 
 				exit($Response->json());
 			},

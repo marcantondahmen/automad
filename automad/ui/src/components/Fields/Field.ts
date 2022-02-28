@@ -32,7 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, html, htmlSpecialChars, titleCase } from '../../core';
+import {
+	App,
+	classes,
+	create,
+	html,
+	htmlSpecialChars,
+	listen,
+	query,
+	queryAll,
+	titleCase,
+} from '../../core';
 import { FieldInitData, FieldRenderData } from '../../types';
 import { BaseComponent } from '../Base';
 
@@ -62,6 +72,9 @@ const createLabel = (key: string): string => {
 /**
  * A standard input field with a label.
  *
+ * Fields can have several attributes:
+ * - `required` - with and empty value, a form can't be submitted
+ *
  * @extends BaseComponent
  */
 export class FieldComponent extends BaseComponent {
@@ -74,6 +87,13 @@ export class FieldComponent extends BaseComponent {
 	 * The internal field data.
 	 */
 	protected _data: FieldRenderData;
+
+	/**
+	 * Get the actual field input element.
+	 */
+	get input(): HTMLInputElement {
+		return query('[name]', this) as HTMLInputElement;
+	}
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -117,7 +137,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Create a label.
 	 */
-	label(): void {
+	renderlabel(): void {
 		const { id, label, tooltip } = this._data;
 		const wrapper = create('div', [], {}, this);
 
@@ -131,7 +151,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Create an input field.
 	 */
-	input(): void {
+	renderInput(): void {
 		const { name, id, value } = this._data;
 		create(
 			'input',
@@ -145,8 +165,23 @@ export class FieldComponent extends BaseComponent {
 	 * Render the field.
 	 */
 	render(): void {
-		this.label();
-		this.input();
+		this.renderlabel();
+		this.renderInput();
+		this.applyAttributes();
+	}
+
+	/**
+	 * Apply field attributes to actual input elements.
+	 */
+	private applyAttributes(): void {
+		queryAll('input, textarea', this).forEach((input: HTMLInputElement) => {
+			if (this.hasAttribute('required')) {
+				input.setAttribute('pattern', '.*\\S.*');
+				input.setAttribute('placeholder', App.text('requiredField'));
+				input.setAttribute('required', '');
+				this.removeAttribute('required');
+			}
+		});
 	}
 }
 

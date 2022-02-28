@@ -34,7 +34,15 @@
 
 import { BaseComponent } from './Base';
 import { AutocompleteItem, KeyValueMap } from '../types';
-import { App, classes, create, listen, debounce, html } from '../core';
+import {
+	App,
+	classes,
+	create,
+	listen,
+	debounce,
+	html,
+	appStateChangedEventName,
+} from '../core';
 
 /**
  * An input field with page autocompletion.
@@ -100,24 +108,9 @@ export class AutocompleteComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		const placeholder: string = App.text(
-			this.elementAttributes.placeholder
-		);
 		this.classList.add(classes.dropdown, classes.dropdownForm);
 
-		this.input = create(
-			'input',
-			[classes.input],
-			{ type: 'text', placeholder },
-			this
-		);
-
-		this.dropdown = create(
-			'div',
-			[classes.dropdownItems, classes.dropdownItemsFullWidth],
-			{},
-			this
-		);
+		listen(window, appStateChangedEventName, this.init.bind(this));
 
 		this.init();
 	}
@@ -129,6 +122,27 @@ export class AutocompleteComponent extends BaseComponent {
 	 */
 	private init(): void {
 		if (typeof this.data !== 'undefined') {
+			const placeholder: string = App.text(
+				this.elementAttributes.placeholder
+			);
+
+			this.innerHTML = '';
+			this.items = [];
+
+			this.input = create(
+				'input',
+				[classes.input],
+				{ type: 'text', placeholder },
+				this
+			);
+
+			this.dropdown = create(
+				'div',
+				[classes.dropdownItems, classes.dropdownItemsFullWidth],
+				{},
+				this
+			);
+
 			this.data.forEach((item: KeyValueMap) => {
 				this.items.push({
 					element: this.createItemElement(item),

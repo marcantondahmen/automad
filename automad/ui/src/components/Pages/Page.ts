@@ -40,7 +40,7 @@ import {
 	html,
 	Routes,
 } from '../../core';
-import { FilesChangedOnServerEventName } from '../Forms/FileCollectionList';
+import { filesChangedOnServerEventName } from '../Forms/FileCollectionList';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -71,7 +71,8 @@ export class PageComponent extends SidebarLayoutComponent {
 					$${App.text('more')}
 					<div class="${classes.dropdownItems}">
 						<a
-							href="${App.baseURL}${getPageURL()}"
+							bind="pageUrlWithBase"
+							bindto="href"
 							class="${classes.dropdownItem}"
 							target="_blank"
 						>
@@ -201,13 +202,15 @@ export class PageComponent extends SidebarLayoutComponent {
 						>
 							${App.text('importFromUrl')}
 						</am-modal-toggle>
-						<am-file-collection-submit>
+						<am-file-collection-submit
+							class="${classes.button}"
+							form="FileCollection/list"
+						>
 							$${App.text('deleteSelected')}
 						</am-file-collection-submit>
 						<am-file-collection-list
 							confirm="$${App.text('confirmDeleteSelectedFiles')}"
 							api="FileCollection/list"
-							watch
 						></am-file-collection-list>
 					</am-switcher-section>
 				</div>
@@ -217,7 +220,7 @@ export class PageComponent extends SidebarLayoutComponent {
 				<div class="${classes.modalDialog}">
 					<am-form
 						api="File/import"
-						event="${FilesChangedOnServerEventName}"
+						event="${filesChangedOnServerEventName}"
 					>
 						<div class="${classes.modalHeader}">
 							<span>$${App.text('importFromUrl')}</span>

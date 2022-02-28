@@ -430,6 +430,10 @@ repeatPassword: Please enter twice the same new password!
 
 -
 
+requiredField: Required
+
+-
+
 reset: Reset
 
 -

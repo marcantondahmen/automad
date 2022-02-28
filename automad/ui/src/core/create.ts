@@ -33,7 +33,7 @@
  */
 
 import { FieldComponent } from '../components/Fields/Field';
-import { FieldInitData } from '../types';
+import { FieldInitData, KeyValueMap } from '../types';
 
 /**
  * Create a new element including class names and attributes and optionally append it to a given parent node.
@@ -80,9 +80,10 @@ export const createField = (
 	fieldType: string,
 	parent: HTMLElement,
 	data: FieldInitData,
-	cls: string[] = []
+	cls: string[] = [],
+	attributes: KeyValueMap = {}
 ): FieldComponent => {
-	const field = create(fieldType, cls, {}, parent);
+	const field = create(fieldType, cls, attributes, parent);
 
 	field.data = data;
 

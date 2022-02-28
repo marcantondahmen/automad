@@ -33,6 +33,7 @@
  */
 
 export * from './app';
+export * from './bindings';
 export * from './classes';
 export * from './create';
 export * from './form';

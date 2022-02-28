@@ -43,7 +43,17 @@ import {
 import { FieldComponent } from '../Fields/Field';
 import { FormComponent } from './Form';
 import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
-import { App, create, createField, html, setDocumentTitle } from '../../core';
+import {
+	App,
+	Binding,
+	create,
+	createField,
+	fire,
+	html,
+	query,
+	Routes,
+	setDocumentTitle,
+} from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
 
 /**
@@ -143,8 +153,6 @@ const prepareFieldGroups = (fields: KeyValueMap): PageFieldGroups => {
 
 /**
  * A page data form element.
- * The PageDataComponent class doesn't need the watch and init properties
- * as this is anyways the intended behavior.
  *
  * @example
  * <am-page-data api="Page/data"></am-page-data>
@@ -157,6 +165,11 @@ export class PageDataComponent extends FormComponent {
 	 * The section collection object.
 	 */
 	private sections: PageSectionCollection;
+
+	/**
+	 * Wait for pending requests.
+	 */
+	protected parallel = false;
 
 	/**
 	 * Submit form data on changes.
@@ -179,7 +192,6 @@ export class PageDataComponent extends FormComponent {
 		this.sections = createSections(this);
 
 		super.init();
-		this.watch();
 	}
 
 	/**
@@ -188,7 +200,6 @@ export class PageDataComponent extends FormComponent {
 	 * @param params
 	 * @param params.section - the section element where the fields are created in
 	 * @param params.url - the page URL
-	 * @param params.prefix - the directory prefix
 	 * @param params.slug - the page slug
 	 * @param params.pageData - the data that was loaded from the data file
 	 * @param params.shared - the shared data object
@@ -198,7 +209,6 @@ export class PageDataComponent extends FormComponent {
 	private mainSettings({
 		section,
 		url,
-		prefix,
 		slug,
 		fields,
 		template,
@@ -214,7 +224,8 @@ export class PageDataComponent extends FormComponent {
 		const createMainField = (
 			fieldType: string,
 			key: string,
-			label: string = ''
+			label: string = '',
+			attributes: KeyValueMap = {}
 		): FieldComponent => {
 			const data = {
 				key,
@@ -223,15 +234,28 @@ export class PageDataComponent extends FormComponent {
 				label,
 			};
 
-			return createField(fieldType, section, data, []);
+			return createField(fieldType, section, data, [], attributes);
 		};
 
-		createMainField('am-title', App.reservedFields.AM_KEY_TITLE);
+		const titleField = createMainField(
+			'am-title',
+			App.reservedFields.AM_KEY_TITLE,
+			'',
+			{
+				required: '',
+			}
+		);
+
+		new Binding('title', titleField.input);
 
 		create(
 			'a',
 			[],
-			{ href: `${App.baseURL}${fields[App.reservedFields.AM_KEY_URL]}` },
+			{
+				href: `${App.baseURL}${fields[App.reservedFields.AM_KEY_URL]}`,
+				bind: 'pageUrlWithBase',
+				bindto: 'textContent href',
+			},
 			section
 		).innerHTML = fields[App.reservedFields.AM_KEY_URL] || url;
 
@@ -267,18 +291,25 @@ export class PageDataComponent extends FormComponent {
 		);
 
 		if (url != '/') {
-			createField('am-field', section, {
-				key: 'prefix',
-				value: prefix,
-				name: 'prefix',
-				label: App.text('pagePrefix'),
-			});
-
-			createField('am-field', section, {
+			const slugField = createField('am-field', section, {
 				key: 'slug',
 				value: slug,
 				name: 'slug',
 				label: App.text('pageSlug'),
+			});
+
+			new Binding('pageUrl', slugField.input, (value: string) => {
+				return `${url.replace(/[^\/]+$/, value)}`;
+			});
+
+			new Binding('pageUrlWithBase', slugField.input, (value: string) => {
+				return `${App.baseURL}${url.replace(/[^\/]+$/, value)}`;
+			});
+
+			new Binding('pageLinkUI', slugField.input, (value: string) => {
+				return `${Routes[Routes.page]}?url=${encodeURIComponent(
+					url.replace(/[^\/]+$/, value)
+				)}`;
 			});
 		}
 
@@ -326,7 +357,22 @@ export class PageDataComponent extends FormComponent {
 			return;
 		}
 
-		const { url, prefix, slug, fields, shared, template } = response.data;
+		if (response.data.update) {
+			this.updateUI(response.data.update);
+
+			return;
+		}
+
+		this.render(response.data);
+	}
+
+	/**
+	 * Create the actual form fields.
+	 *
+	 * @param data
+	 */
+	private render(data: KeyValueMap): void {
+		const { url, slug, fields, shared, template } = data;
 
 		const themeKey = App.reservedFields.AM_KEY_THEME;
 		const themes = App.themes;
@@ -346,7 +392,6 @@ export class PageDataComponent extends FormComponent {
 		this.mainSettings({
 			section: this.sections.settings,
 			url,
-			prefix,
 			slug,
 			fields,
 			template,
@@ -359,6 +404,26 @@ export class PageDataComponent extends FormComponent {
 				tooltips,
 			});
 		});
+	}
+
+	/**
+	 * Handle UI updates.
+	 *
+	 * @param update
+	 */
+	private async updateUI(update: KeyValueMap): Promise<void> {
+		if (update.slug && update.url && update.origUrl) {
+			const slugInput = query('[name="slug"]') as HTMLInputElement;
+			const url = new URL(window.location.href);
+
+			url.searchParams.set('url', update.origUrl);
+			window.history.replaceState(null, null, url);
+
+			slugInput.value = update.slug;
+			fire('input', slugInput);
+
+			await App.updateState();
+		}
 	}
 }
 

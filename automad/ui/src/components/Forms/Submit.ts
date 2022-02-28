@@ -32,24 +32,24 @@
  * Licensed under the MIT license.
  */
 
-import { listen, queryAll, queryParents } from '../core';
-import { BaseComponent } from './Base';
-import { FormComponent } from './Forms/Form';
-import { ModalComponent } from './Modal/Modal';
+import { listen, queryAll, queryParents } from '../../core';
+import { BaseComponent } from '../Base';
+import { FormComponent } from './Form';
+import { ModalComponent } from '../Modal/Modal';
 
 /**
  * A submit button element. Submit buttons are connected to a form by the "form" attribute.
  * The "form" attribute uses the api of the related form to connect.
  *
  * @example
- * <am-form api="Class/method" watch>
+ * <am-form api="Class/method">
  *     <input name="title">
  * </am-form>
  * <am-submit form="Class/method">Submit</am-submit>
  *
  * @extends BaseComponent
  */
-class SubmitComponent extends BaseComponent {
+export class SubmitComponent extends BaseComponent {
 	/**
 	 * The observed attributes.
 	 *
@@ -73,15 +73,6 @@ class SubmitComponent extends BaseComponent {
 	}
 
 	/**
-	 * Get the parent modal if existing.
-	 */
-	get parentModal(): ModalComponent {
-		const modal = this.closest('am-modal') as ModalComponent;
-
-		return modal || null;
-	}
-
-	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback() {
@@ -93,12 +84,6 @@ class SubmitComponent extends BaseComponent {
 			this.relatedForms.forEach((form: FormComponent) => {
 				form.submit();
 			});
-
-			const modal = this.parentModal;
-
-			if (modal) {
-				modal.close();
-			}
 		};
 
 		listen(this, 'click', submit.bind(this));

@@ -26,54 +26,47 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import Tagify from '@yaireo/tagify';
-import { App, classes, create } from '../../core';
-import { PageDataComponent } from '../Forms/PageData';
-import { FieldComponent } from './Field';
+import { listen, queryAll } from '../../core';
+import { FormComponent } from './Form';
+import { SubmitComponent } from './Submit';
 
 /**
- * A tags input field.
- *
- * @extends FieldComponent
+ * A submit button for the FileCollectionListComponent form.
+
+ * @extends SubmitComponent
  */
-class PageTagsComponent extends FieldComponent {
+class FileCollectionSubmitComponent extends SubmitComponent {
 	/**
-	 * Create the input field.
-	 *
-	 * @see {@link tagify https://github.com/yairEO/tagify}
+	 * The callback function used when an element is created in the DOM.
 	 */
-	renderInput(): void {
-		const { name, id, value } = this._data;
-		const textarea = create(
-			'textarea',
-			[classes.input],
-			{
-				name,
-				id,
-			},
-			this
-		);
+	connectedCallback() {
+		super.connectedCallback();
 
-		textarea.innerHTML = value;
+		this.toggleAttribute('disabled', true);
 
-		const tagify = new Tagify(textarea, {
-			whitelist: App.tags,
-			originalInputValueFormat: (tags) =>
-				tags.map((item) => item.value).join(', '),
-		});
-
-		tagify.on('change', (event: Event) => {
-			const form: PageDataComponent = this.closest('am-page-data');
-
-			form.onChange();
+		this.relatedForms.forEach((form: FormComponent) => {
+			listen(
+				form,
+				'change',
+				() => {
+					this.toggleAttribute(
+						'disabled',
+						queryAll(':checked', form).length == 0
+					);
+				},
+				'[type="checkbox"]'
+			);
 		});
 	}
 }
 
-customElements.define('am-page-tags', PageTagsComponent);
+customElements.define(
+	'am-file-collection-submit',
+	FileCollectionSubmitComponent
+);

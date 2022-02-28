@@ -35,6 +35,7 @@
 import {
 	App,
 	classes,
+	confirm,
 	debounce,
 	fire,
 	getFormData,
@@ -45,11 +46,12 @@ import {
 	query,
 	queryAll,
 	requestAPI,
-	resetFieldStatus,
-	updateFieldStatus,
 } from '../../core';
 import { InputElement, KeyValueMap } from '../../types';
 import { BaseComponent } from '../Base';
+import { ModalComponent } from '../Modal/Modal';
+
+export const autoSubmitTimeout = 750;
 
 /**
  * A basic form.
@@ -57,17 +59,16 @@ import { BaseComponent } from '../Base';
  * The following options are available and can be passed as attributes:
  * - `api` (required) - the API endpoint
  * - `init` - sumbit form when connected to DOM
- * - `watch` - watch changes
  * - `focus` - focus first input when connected
  * - `enter` - submit using enter key
  * - `confirm` - require confirmation before submitting
  * - `event` - fire event when receiving the API response
  * - `auto` - automatically submit form on change
  *
- * Self initialized form with watched submit button:
+ * Self initialized form that submits changes automatically:
  *
  * @example
- * <am-form api="Class/method" init watch></am-form>
+ * <am-form api="Class/method" init auto></am-form>
  *
  * Focus the first input of a for when being connected:
  *
@@ -87,19 +88,14 @@ import { BaseComponent } from '../Base';
  */
 export class FormComponent extends BaseComponent {
 	/**
-	 * The change state of the form.
-	 */
-	hasUnsavedChanges: boolean = false;
-
-	/**
 	 * Additional data that can be added to the form data object.
 	 */
 	additionalData: KeyValueMap = {};
 
 	/**
-	 * Changes are watched.
+	 * Allow parallel requests.
 	 */
-	protected watchChanges: boolean = false;
+	protected parallel: boolean = true;
 
 	/**
 	 * Get the api attribute already before attributes are observed.
@@ -157,6 +153,15 @@ export class FormComponent extends BaseComponent {
 	}
 
 	/**
+	 * Get the parent modal if existing.
+	 */
+	get parentModal(): ModalComponent {
+		const modal = this.closest('am-modal') as ModalComponent;
+
+		return modal || null;
+	}
+
+	/**
 	 * The form constructor.
 	 */
 	constructor() {
@@ -171,11 +176,6 @@ export class FormComponent extends BaseComponent {
 	protected init(): void {
 		if (this.initSelf) {
 			this.submit(true);
-		}
-
-		if (this.hasAttribute('watch')) {
-			this.watchChanges = true;
-			this.watch();
 		}
 
 		if (this.hasAttribute('focus')) {
@@ -197,26 +197,8 @@ export class FormComponent extends BaseComponent {
 				`.${classes.input}`
 			);
 		}
-	}
 
-	/**
-	 * Disable all connected submit buttons.
-	 */
-	private disbableButtons(): void {
-		setTimeout(() => {
-			this.submitButtons.forEach((button) => {
-				button.setAttribute('disabled', '');
-			});
-		}, 200);
-	}
-
-	/**
-	 * Enable all connected submit buttons.
-	 */
-	private enableButtons(): void {
-		this.submitButtons.forEach((button) => {
-			button.removeAttribute('disabled');
-		});
+		this.watch();
 	}
 
 	/**
@@ -226,26 +208,31 @@ export class FormComponent extends BaseComponent {
 	 * @async
 	 */
 	async submit(skipConfirmOnInit: boolean = false): Promise<void> {
-		if (
-			!skipConfirmOnInit &&
-			this.confirm &&
-			!window.confirm(this.confirm)
-		) {
-			return null;
+		if (!skipConfirmOnInit && this.confirm) {
+			const isConfirmed = await confirm(this.confirm);
+
+			if (!isConfirmed) {
+				return null;
+			}
 		}
 
-		const response = await requestAPI(this.api, this.formData);
+		if (this.verifyRequired()) {
+			await requestAPI(
+				this.api,
+				this.formData,
+				this.parallel,
+				this.processResponse.bind(this)
+			);
 
-		resetFieldStatus(this);
-		this.hasUnsavedChanges = false;
-		this.processResponse(response);
+			if (this.hasAttribute('event')) {
+				fire(this.getAttribute('event'));
+			}
 
-		if (this.watchChanges) {
-			this.disbableButtons();
-		}
+			const modal = this.parentModal;
 
-		if (this.hasAttribute('event')) {
-			fire(this.getAttribute('event'));
+			if (modal) {
+				modal.close();
+			}
 		}
 	}
 
@@ -256,7 +243,7 @@ export class FormComponent extends BaseComponent {
 	 */
 	protected processResponse(response: KeyValueMap): void {
 		if (response.redirect) {
-			App.root.setView(response.redirect, true);
+			App.root.setView(response.redirect);
 		}
 
 		if (response.reload) {
@@ -281,16 +268,10 @@ export class FormComponent extends BaseComponent {
 
 	/**
 	 * The callback that is called when a form input has changed.
-	 *
-	 * @param input
 	 */
-	onChange(input: InputElement): void {
+	onChange(): void {
 		if (this.auto) {
 			this.submit();
-		} else {
-			updateFieldStatus(input, true);
-			this.enableButtons();
-			this.hasUnsavedChanges = true;
 		}
 	}
 
@@ -298,29 +279,41 @@ export class FormComponent extends BaseComponent {
 	 * Watch the form for changes.
 	 */
 	protected watch(): void {
-		const onChangeHandler = debounce((event: Event) => {
-			this.onChange(event.target as InputElement);
-		}, 500);
+		const onChangeHandler = debounce(() => {
+			this.onChange();
+		}, autoSubmitTimeout);
 
 		listen(
 			this,
-			'keydown cut paste drop input',
+			'change keydown cut paste drop input change',
 			onChangeHandler.bind(this),
 			'input, textarea, am-editor'
 		);
 
 		listen(this, 'change', onChangeHandler.bind(this), 'select, am-editor');
+	}
 
-		listen(window, 'beforeunload', (event: Event) => {
-			if (this.hasUnsavedChanges) {
-				event.preventDefault();
-				event.returnValue = true;
-			} else {
-				delete event['returnValue'];
+	/**
+	 * Verifies that all required fields have values.
+	 *
+	 * @returns true if all required fields have values
+	 */
+	private verifyRequired(): boolean {
+		const requiredInputs: HTMLElement[] = queryAll('[required]', this);
+		const requiredEmpty: HTMLInputElement[] = [];
+
+		requiredInputs.forEach((input: HTMLInputElement) => {
+			if (!input.value.trim()) {
+				requiredEmpty.push(input);
 			}
 		});
 
-		setTimeout(this.disbableButtons.bind(this), 0);
+		if (requiredEmpty.length) {
+			requiredEmpty[0].focus();
+			return false;
+		}
+
+		return true;
 	}
 }
 

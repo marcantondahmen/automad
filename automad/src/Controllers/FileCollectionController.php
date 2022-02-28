@@ -64,13 +64,9 @@ class FileCollectionController {
 		$Cache = new Cache();
 		$Automad = $Cache->getAutomad();
 		$path = FileSystem::getPathByPostUrl($Automad);
-		$url = Request::post('url');
+
 		$Response = new Response();
 		$Messenger = new Messenger();
-
-		if (!$url) {
-			$url = AM_DIR_SHARED;
-		}
 
 		Debug::log($_POST);
 
@@ -78,7 +74,7 @@ class FileCollectionController {
 			FileCollectionModel::deleteFiles(array_keys($delete), $path, $Messenger);
 		}
 
-		$data = array('files' => FileCollectionModel::list($path, $url));
+		$data = array('files' => FileCollectionModel::list($path));
 		$Response->setData($data);
 		$Response->setError($Messenger->getError());
 		$Response->setSuccess($Messenger->getSuccess());

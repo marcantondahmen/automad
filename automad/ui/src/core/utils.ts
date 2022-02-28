@@ -32,6 +32,7 @@
  * Licensed under the MIT license.
  */
 
+import { App, classes, create } from '.';
 import { KeyValueMap } from '../types';
 
 declare global {
@@ -43,6 +44,72 @@ declare global {
 		closest: any;
 	}
 }
+
+/**
+ * A simple confirmation modal.
+ *
+ * @param text
+ * @async
+ */
+export const confirm = async (text: string): Promise<any> => {
+	let modal = create(
+		'am-modal',
+		[],
+		{ destroy: true, noclick: true },
+		App.root
+	);
+
+	modal.innerHTML = html`
+		<div class="${classes.modalDialog}">
+			<am-icon-text
+				icon="exclamation-circle"
+				text="$${text}"
+			></am-icon-text>
+			<div class="${classes.modalFooter}">
+				<am-modal-close class="${classes.button}">
+					<am-icon-text
+						icon="x"
+						text="$${App.text('cancel')}"
+					></am-icon-text>
+				</am-modal-close>
+				<am-modal-close
+					confirm
+					class="${classes.button} ${classes.buttonSuccess}"
+				>
+					<am-icon-text
+						icon="check"
+						text="$${App.text('ok')}"
+					></am-icon-text>
+				</am-modal-close>
+			</div>
+		</div>
+	`;
+
+	setTimeout(() => {
+		modal.open();
+	}, 0);
+
+	return new Promise((resolve, reject) => {
+		const execute = (event: Event) => {
+			let isConfirmed = false;
+
+			modal.close();
+			modal = null;
+
+			try {
+				const element = event.target as HTMLElement;
+
+				isConfirmed =
+					element.matches('[confirm]') ||
+					element.closest('[confirm]') != null;
+			} catch {}
+
+			resolve(isConfirmed);
+		};
+
+		listen(modal, 'click', execute);
+	});
+};
 
 /**
  * Debounce a function.

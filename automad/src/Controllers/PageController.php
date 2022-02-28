@@ -206,7 +206,8 @@ class PageController {
 				&& is_writable(dirname(dirname(PageModel::getPageFilePath($Page))))) {
 				PageModel::delete($Page);
 
-				$Response->setRedirect(AM_BASE_INDEX . AM_PAGE_DASHBOARD . '/page?url=' . urlencode($Page->parentUrl));
+				$Response->setSuccess(Text::get('deteledSuccess') . ' ' . $Page->origUrl);
+				$Response->setRedirect('page?url=' . urlencode($Page->parentUrl));
 				Debug::log($Page->url, 'deleted');
 
 				Cache::clear();
@@ -361,8 +362,12 @@ class PageController {
 					// form $_POST['data']. That information has to be parsed first and "subdivided".
 					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
-					if ($redirectUrl = PageModel::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
-						$Response->setRedirect($redirectUrl);
+					if ($result = PageModel::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
+						if (!empty($result['redirect'])) {
+							$Response->setRedirect($result['redirect']);
+						} else {
+							$Response->setData(array('update' => $result));
+						}
 					}
 				} else {
 					$Response->setError(Text::get('permissionsDeniedError'));

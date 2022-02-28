@@ -26,54 +26,26 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import Tagify from '@yaireo/tagify';
-import { App, classes, create } from '../../core';
-import { PageDataComponent } from '../Forms/PageData';
-import { FieldComponent } from './Field';
+import { BaseComponent } from './Base';
 
 /**
- * A tags input field.
+ * A spinner component.
  *
- * @extends FieldComponent
+ * @extends BaseComponent
  */
-class PageTagsComponent extends FieldComponent {
+class SpinnerComponent extends BaseComponent {
 	/**
-	 * Create the input field.
-	 *
-	 * @see {@link tagify https://github.com/yairEO/tagify}
+	 * The callback function used when an element is created in the DOM.
 	 */
-	renderInput(): void {
-		const { name, id, value } = this._data;
-		const textarea = create(
-			'textarea',
-			[classes.input],
-			{
-				name,
-				id,
-			},
-			this
-		);
-
-		textarea.innerHTML = value;
-
-		const tagify = new Tagify(textarea, {
-			whitelist: App.tags,
-			originalInputValueFormat: (tags) =>
-				tags.map((item) => item.value).join(', '),
-		});
-
-		tagify.on('change', (event: Event) => {
-			const form: PageDataComponent = this.closest('am-page-data');
-
-			form.onChange();
-		});
+	connectedCallback(): void {
+		this.classList.add('am-c-spinner');
 	}
 }
 
-customElements.define('am-page-tags', PageTagsComponent);
+customElements.define('am-spinner', SpinnerComponent);

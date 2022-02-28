@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, query, queryAll } from '.';
+import { query, queryAll } from '.';
 import { InputElement, KeyValueMap } from '../types';
 
 /**
@@ -65,7 +65,7 @@ export const getFormData = (container: HTMLElement): KeyValueMap => {
 			const value = field.value;
 
 			if (name) {
-				data[name] = value;
+				data[name] = value.trim();
 			}
 		}
 	);
@@ -105,36 +105,4 @@ export const setFormData = (
 			}
 		}
 	});
-};
-
-/**
- * Toggle the field status indicator.
- *
- * @param element
- * @param changed
- */
-export const updateFieldStatus = (
-	element: HTMLElement,
-	changed: boolean
-): void => {
-	const field = element.closest(`.${classes.field}`);
-
-	if (field) {
-		field.classList.toggle(classes.fieldChanged, changed);
-	}
-};
-
-/**
- * Reset the field status in a given container.
- *
- * @param container
- */
-export const resetFieldStatus = (container: HTMLElement): void => {
-	setTimeout(() => {
-		queryAll(`.${classes.input}`, container).forEach(
-			(input: InputElement) => {
-				updateFieldStatus(input, false);
-			}
-		);
-	}, 200);
 };

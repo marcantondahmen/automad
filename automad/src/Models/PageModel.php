@@ -255,7 +255,7 @@ class PageModel {
 		// FileSystem::movePageDir() will check if renaming is needed, and will
 		// skip moving, when old and new path are equal.
 		if ($url != '/') {
-			$slug = self::updateSlug(
+			$newSlug = self::updateSlug(
 				$Page->get(AM_KEY_TITLE),
 				$data[AM_KEY_TITLE],
 				$slug
@@ -265,7 +265,7 @@ class PageModel {
 				$Page,
 				dirname($Page->path),
 				$prefix,
-				$slug
+				$newSlug
 			);
 		} else {
 			// In case the page is the home page, the path is just '/'.
@@ -289,20 +289,34 @@ class PageModel {
 
 		Cache::clear();
 
-		$newUrl = $Page->parentUrl . '/' . $slug;
+		$newUrl = $Page->parentUrl . '/' . $newSlug;
+		$newOrigUrl = $newUrl;
 
 		if (!empty($data[AM_KEY_URL])) {
 			$newUrl = $data[AM_KEY_URL];
 		}
 
-		if ($Page->path != $newPagePath ||
+		if (
 			$currentTheme != $newTheme ||
-			$Page->template != $newTemplate ||
+			$Page->template != $newTemplate
+		) {
+			return array(
+				'redirect' => self::contextUrlByPath($newPagePath)
+			);
+		}
+
+		if ($Page->path != $newPagePath ||
 			$data[AM_KEY_TITLE] != $Page->data[AM_KEY_TITLE] ||
 			$newUrl != $Page->url ||
+			$newSlug != $slug ||
 			$private != $Page->private
 		) {
-			return self::contextUrlByPath($newPagePath);
+			return array(
+				'slug' => $newSlug,
+				'url' => $newUrl,
+				'path' => $newPagePath,
+				'origUrl' => $newOrigUrl
+			);
 		}
 
 		return false;
@@ -318,10 +332,10 @@ class PageModel {
 	 */
 	public static function updateSlug(string $currentTitle, string $newTitle, string $slug) {
 		if (strlen($slug) === 0 || $slug === Str::slug($currentTitle, true, AM_DIRNAME_MAX_LEN)) {
-			$slug = Str::slug($newTitle);
+			return Str::slug($newTitle);
 		}
 
-		return $slug;
+		return Str::slug($slug);
 	}
 
 	/**

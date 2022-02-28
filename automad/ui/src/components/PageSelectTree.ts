@@ -53,11 +53,10 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	}
 
 	/**
-	 * The callback function used when an element is created in the DOM.
+	 * Render the tree label.
 	 */
-	connectedCallback(): void {
-		this.classList.add(classes.nav);
-		this.init();
+	protected renderLabel(): void {
+		return;
 	}
 
 	/**

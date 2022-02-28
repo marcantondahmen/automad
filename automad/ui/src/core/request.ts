@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, fire, notifyError } from '.';
+import { App, create, fire, notifyError, query } from '.';
 import { KeyValueMap } from '../types';
 
 /**
@@ -67,17 +67,27 @@ export const request = async (
 
 /**
  * Send a request to an API endpoint such as `Page/data`.
+ * Optionally execute a callback function that takes the response data as argument.
+ * This is useful, in case the execution of the callback is critical and
+ * has to be within the timespan of a pending request.
  *
  * @see {@link request}
  * @param route
  * @param [data]
+ * @param [callback]
  * @returns the Promise
  * @async
  */
 export const requestAPI = async (
 	route: string,
-	data: KeyValueMap = null
+	data: KeyValueMap = null,
+	parallel: boolean = true,
+	callback: Function = null
 ): Promise<KeyValueMap> => {
+	if (parallel === false) {
+		await waitForPendingRequests();
+	}
+
 	PendingRequests.add();
 
 	let responseData;
@@ -85,6 +95,10 @@ export const requestAPI = async (
 	try {
 		const response = await request(`${App.baseURL}/api/${route}`, data);
 		responseData = await response.json();
+
+		if (typeof callback === 'function') {
+			callback.apply(this, [responseData]);
+		}
 	} catch {
 		notifyError(`${App.text('fetchingDataError')} (${route})`);
 		responseData = {};
@@ -155,6 +169,10 @@ class PendingRequests {
 	 * @static
 	 */
 	static add() {
+		if (!query('am-spinner')) {
+			create('am-spinner', [], {}, document.body);
+		}
+
 		this.count++;
 		fire(this.eventName);
 	}
@@ -165,7 +183,14 @@ class PendingRequests {
 	 * @static
 	 */
 	static remove() {
+		const spinner = query('am-spinner');
+
 		this.count--;
+
+		if (this.idle && spinner) {
+			spinner.remove();
+		}
+
 		fire(this.eventName);
 	}
 }

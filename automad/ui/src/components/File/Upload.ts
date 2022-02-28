@@ -199,7 +199,12 @@ class UploadComponent extends BaseComponent {
 			create(
 				'input',
 				[],
-				{ type: 'hidden', name: 'url', value: page },
+				{
+					type: 'hidden',
+					name: 'url',
+					bind: 'pageUrl',
+					bindto: 'value',
+				},
 				form
 			);
 		}
