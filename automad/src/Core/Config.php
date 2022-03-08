@@ -109,6 +109,7 @@ class Config {
 		self::set('AM_DIRNAME_MAX_LEN', 60); // Max dirname length when creating/moving pages with the UI.
 
 		// FILE
+		self::set('AM_FILE_INDEX', '.index');
 		self::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 		self::set('AM_FILE_EXT_CAPTION', 'caption');
 		self::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
@@ -208,6 +209,7 @@ class Config {
 		self::set('AM_KEY_HEIGHT_RESIZED', ':heightResized');
 		self::set('AM_KEY_CAPTION', ':caption');
 		self::set('AM_KEY_INDEX', ':i');
+		self::set('AM_KEY_PAGE_INDEX', ':index');
 		self::set('AM_KEY_FILELIST_COUNT', ':filelistCount');
 		self::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
 		self::set('AM_KEY_PAGELIST_DISPLAY_COUNT', ':pagelistDisplayCount');

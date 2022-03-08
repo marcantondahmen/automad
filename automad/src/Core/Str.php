@@ -199,9 +199,6 @@ class Str {
 	 * The returned string constists of the following characters: "a-z", "0-9", "-" and optional dots ".".
 	 * That means, this method is safe to be used with filenames as well, since it keeps by default the dots as suffix separators.
 	 *
-	 * Note: To produce fully safe prefixes and directory names,
-	 * possible dots should be removed by setting $removeDots = true.
-	 *
 	 * @param string|null $str
 	 * @param bool $removeDots
 	 * @param int $maxChars

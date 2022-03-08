@@ -26,7 +26,7 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
@@ -50,6 +50,63 @@
 		display: flex;
 		flex-direction: column;
 		line-height: var(--am-nav-item-line-height);
+
+		--level: 0;
+		--padding-left: ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal) + (1rem * var(--level)))';
+		.navTreeLevel(12);
+
+		&--chosen {
+			& summary:before {
+				content: '' !important;
+			}
+
+			& > .am-c-nav__children {
+				display: none;
+			}
+		}
+
+		&--ghost {
+			& summary:before {
+				content: '' !important;
+			}
+		}
+
+		&--drag {
+			& > * {
+				opacity: 0.25;
+			}
+		}
+	}
+
+	&--dragging &__children {
+		padding-bottom: var(--am-border-width);
+
+		& * {
+			cursor: grabbing !important;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			margin: 0.4rem 0;
+			margin-left: ~'calc(var(--padding-left) + 2rem)';
+			height: 4px;
+			border-radius: 4px;
+			background-color: var(--am-border-clr);
+		}
+	}
+
+	&__grip {
+		position: relative;
+		display: none;
+		flex-grow: 1;
+		text-align: right;
+		margin-right: -0.75rem;
+		opacity: 0.4;
+	}
+
+	:hover > &__grip {
+		display: block;
 	}
 
 	&__link {
@@ -58,7 +115,7 @@
 		gap: var(--am-flex-gap);
 		margin-bottom: var(--am-border-width);
 		padding: 0 1rem;
-		padding-left: ~'calc(var(--am-body-padding-horizontal) - var(--am-nav-padding-horizontal) + (1rem * var(--level, 0)))';
+		padding-left: var(--padding-left);
 		color: var(--am-clr-base);
 		text-decoration: none;
 		border-radius: var(--am-radius);
@@ -84,24 +141,28 @@
 				display: none;
 			}
 
-			&::before {
+			&:before {
 				content: '';
 				font-size: 0.45rem;
 				line-height: 1;
 				width: 0.55rem;
+				min-width: 0.55rem;
 			}
 
-			&--has-children::before {
+			.am-c-nav--dragging &:before,
+			&--has-children:before {
 				content: '▶';
+			}
 
-				[open] > & {
-					content: '▼';
-				}
+			.am-c-nav--dragging [open] > &:before,
+			[open] > &--has-children:before {
+				content: '▼';
 			}
 
 			& > label,
 			& > am-link {
 				display: inherit;
+				max-width: ~'calc(100% - 0.55rem)';
 				align-items: inherit;
 				gap: inherit;
 				flex-grow: 1;
@@ -121,5 +182,13 @@
 	&__item--active > &__link {
 		color: var(--am-nav-item-active-clr);
 		background-color: var(--am-nav-item-active-bg);
+	}
+}
+
+.navTreeLevel(@n, @i: 1) when (@i <= @n) {
+	& .am-c-nav__item {
+		--level: @i;
+
+		.navTreeLevel(@n, (@i + 1));
 	}
 }

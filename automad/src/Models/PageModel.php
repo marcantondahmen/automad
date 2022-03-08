@@ -40,6 +40,7 @@ use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
 use Automad\Core\Page;
+use Automad\Core\PageIndex;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -93,6 +94,7 @@ class PageModel {
 		$file = FileSystem::fullPagePath($newPagePath) . str_replace('.php', '', $template) . '.' . AM_FILE_EXT_DATA;
 		FileSystem::writeData($data, $file);
 
+		PageIndex::append($Parent->path, $newPagePath);
 		Cache::clear();
 
 		return self::contextUrlByPath($newPagePath);
@@ -117,11 +119,12 @@ class PageModel {
 	 * @return bool true on success
 	 */
 	public static function delete(Page $Page) {
+		PageIndex::remove(dirname($Page->path), $Page->path);
+
 		return FileSystem::movePageDir(
 			$Page->path,
 			'..' . AM_DIR_TRASH . dirname($Page->path),
-			self::extractPrefixFromPath($Page->path),
-			self::extractSlugFromPath($Page->path)
+			basename($Page->path)
 		);
 	}
 
@@ -140,32 +143,11 @@ class PageModel {
 		FileSystem::copyPageFiles($Page->path, $duplicatePath);
 		FileSystem::appendSuffixToTitle($duplicatePath, $suffix);
 
+		PageIndex::append(dirname($duplicatePath), $duplicatePath);
+
 		Cache::clear();
 
 		return self::contextUrlByPath($duplicatePath);
-	}
-
-	/**
-	 * Extract the deepest directory's prefix from a given path.
-	 *
-	 * @param string $path
-	 * @return string Prefix
-	 */
-	public static function extractPrefixFromPath(string $path) {
-		return substr(basename($path), 0, strpos(basename($path), '.'));
-	}
-
-	/**
-	 * Extract the slug without the prefix from a given path.
-	 *
-	 * @param string $path
-	 * @return string the slug
-	 */
-	public static function extractSlugFromPath(string $path) {
-		$slug = basename($path);
-		$prefix = self::extractPrefixFromPath($slug);
-
-		return Str::stripStart($slug, "$prefix.");
 	}
 
 	/**
@@ -183,18 +165,19 @@ class PageModel {
 	 *
 	 * @param Page $Page
 	 * @param string $destPath
-	 * @param string $prefix
 	 * @param string $slug
 	 * @return string the new page path
 	 */
-	public static function moveDirAndUpdateLinks(Page $Page, string $destPath, string $prefix, string $slug) {
+	public static function moveDirAndUpdateLinks(Page $Page, string $destPath, string $slug) {
+		PageIndex::remove(dirname($Page->path), $Page->path);
+
 		$newPagePath = FileSystem::movePageDir(
 			$Page->path,
 			$destPath,
-			$prefix,
 			$slug
 		);
 
+		PageIndex::append($destPath, $newPagePath);
 		self::updatePageLinks($Page, $newPagePath);
 
 		return $newPagePath;
@@ -207,11 +190,10 @@ class PageModel {
 	 * @param string $url
 	 * @param array $data
 	 * @param string $themeTemplate
-	 * @param string $prefix
 	 * @param string $slug
 	 * @return string a redirect URL in case the page was moved or its privacy has changed
 	 */
-	public static function save(Page $Page, string $url, array $data, string $themeTemplate, string $prefix, string $slug) {
+	public static function save(Page $Page, string $url, array $data, string $themeTemplate, string $slug) {
 		// Trim data.
 		$data = array_map('trim', $data);
 
@@ -244,16 +226,14 @@ class PageModel {
 		$newTemplate = Str::stripEnd(basename($themeTemplate), '.php');
 		$newPageFile = FileSystem::fullPagePath($Page->path) . $newTemplate . '.' . AM_FILE_EXT_DATA;
 
-		// Save new file within current directory, even when the prefix/title changed.
+		// Save new file within current directory, even when the title changed.
 		// Renaming/moving is done in a later step, to keep files and subpages
 		// bundled to the current text file.
 		FileSystem::writeData($data, $newPageFile);
 
 		// If the page is not the homepage,
 		// rename the page's directory including all children and all files, after
-		// saving according to the (new) title and prefix.
-		// FileSystem::movePageDir() will check if renaming is needed, and will
-		// skip moving, when old and new path are equal.
+		// saving according to the (new) title.
 		if ($url != '/') {
 			$newSlug = self::updateSlug(
 				$Page->get(AM_KEY_TITLE),
@@ -264,7 +244,6 @@ class PageModel {
 			$newPagePath = self::moveDirAndUpdateLinks(
 				$Page,
 				dirname($Page->path),
-				$prefix,
 				$newSlug
 			);
 		} else {
@@ -273,7 +252,7 @@ class PageModel {
 		}
 
 		// Check whether the dashboard has to be redirected.
-		// Only in case the page path (title and prefix) or the theme/template has changed,
+		// Only in case the page path or the theme/template has changed,
 		// the page has to be redirected to update the site tree and variables.
 		$newTheme = '';
 
@@ -289,13 +268,6 @@ class PageModel {
 
 		Cache::clear();
 
-		$newUrl = $Page->parentUrl . '/' . $newSlug;
-		$newOrigUrl = $newUrl;
-
-		if (!empty($data[AM_KEY_URL])) {
-			$newUrl = $data[AM_KEY_URL];
-		}
-
 		if (
 			$currentTheme != $newTheme ||
 			$Page->template != $newTemplate
@@ -307,10 +279,19 @@ class PageModel {
 
 		if ($Page->path != $newPagePath ||
 			$data[AM_KEY_TITLE] != $Page->data[AM_KEY_TITLE] ||
-			$newUrl != $Page->url ||
+			$data[AM_KEY_URL] != $Page->data[AM_KEY_URL] ||
 			$newSlug != $slug ||
 			$private != $Page->private
 		) {
+			$Cache = new Cache();
+			$Automad = $Cache->rebuild();
+			$newOrigUrl = self::urlByPath($Automad, $newPagePath);
+			$newUrl = $newOrigUrl;
+
+			if (!empty($data[AM_KEY_URL])) {
+				$newUrl = $data[AM_KEY_URL];
+			}
+
 			return array(
 				'slug' => $newSlug,
 				'url' => $newUrl,

@@ -81,10 +81,11 @@ class AppModel {
 
 		foreach ($Automad->getCollection() as $Page) {
 			$pages[$Page->origUrl] = array(
-				'url' => $Page->origUrl,
 				'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)),
+				'index' => $Page->index,
+				'url' => $Page->origUrl,
 				'path' => $Page->path,
-				'parent' => $Page->parentUrl,
+				'parentPath' => rtrim(dirname($Page->path), '/') . '/',
 				'private' => $Page->private
 			);
 		}

@@ -41,6 +41,7 @@ use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Page;
+use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Selection;
@@ -150,7 +151,6 @@ class PageController {
 					$Page,
 					$url,
 					$data,
-					Request::post('prefix'),
 					Request::post('slug')
 				);
 			} else {
@@ -171,8 +171,7 @@ class PageController {
 				$Response->setData(
 					array(
 						'url' => $Page->origUrl,
-						'prefix' => PageModel::extractPrefixFromPath($Page->path),
-						'slug' => PageModel::extractSlugFromPath($Page->path),
+						'slug' => basename($Page->path),
 						'template' => $Page->getTemplate(),
 						'fields' => $fields,
 						'shared' => $Automad->Shared->data
@@ -284,8 +283,7 @@ class PageController {
 						$newPagePath = PageModel::moveDirAndUpdateLinks(
 							$Page,
 							$dest->path,
-							PageModel::extractPrefixFromPath($Page->path),
-							PageModel::extractSlugFromPath($Page->path)
+							basename($Page->path)
 						);
 
 						$Response->setRedirect(PageModel::contextUrlByPath($newPagePath));
@@ -309,6 +307,27 @@ class PageController {
 		} else {
 			$Response->setError(Text::get('missingTargetPageError'));
 		}
+
+		return $Response;
+	}
+
+	/**
+	 * Update the index of a page after reordering it in the nav tree.
+	 *
+	 * @return Response the response object
+	 */
+	public static function updateIndex() {
+		$Response = new Response();
+
+		$parentPath = Request::post('parentPath');
+		$layout = json_decode(Request::post('layout'));
+
+		$Response->setData(
+			array(
+				'index' => PageIndex::write($parentPath, $layout),
+				'path' => $parentPath
+			)
+		);
 
 		return $Response;
 	}
@@ -340,11 +359,10 @@ class PageController {
 	 * @param Page $Page
 	 * @param string $url
 	 * @param array $data
-	 * @param string $prefix
 	 * @param string $slug
 	 * @return Response the response object
 	 */
-	private static function save(Page $Page, string $url, array $data, string $prefix, string $slug) {
+	private static function save(Page $Page, string $url, array $data, string $slug) {
 		$Response = new Response();
 
 		// A title is required for building the page's path.
@@ -362,7 +380,7 @@ class PageController {
 					// form $_POST['data']. That information has to be parsed first and "subdivided".
 					$themeTemplate = self::getTemplateNameFromArray($_POST, 'theme_template');
 
-					if ($result = PageModel::save($Page, $url, $data, $themeTemplate, $prefix, $slug)) {
+					if ($result = PageModel::save($Page, $url, $data, $themeTemplate, $slug)) {
 						if (!empty($result['redirect'])) {
 							$Response->setRedirect($result['redirect']);
 						} else {

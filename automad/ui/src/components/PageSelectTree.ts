@@ -33,7 +33,7 @@
  */
 
 import { classes, create, getPageURL, html, listen, query } from '../core';
-import { NavTreeItem, NavTreePageData } from '../types';
+import { NavTreeItem, PageMetaData } from '../types';
 import { NavTreeComponent } from './NavTree';
 
 /**
@@ -60,12 +60,17 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	}
 
 	/**
+	 * True if the tree can be sorted.
+	 */
+	protected isSortable: boolean = false;
+
+	/**
 	 * True if a page should be highlighted on init.
 	 *
 	 * @param page
 	 * @returns true if the page should be highlighted initially
 	 */
-	private isHighlightedOnInit(page: NavTreePageData): boolean {
+	private isHighlightedOnInit(page: PageMetaData): boolean {
 		if (this.hideCurrent) {
 			const parentOfActive = getPageURL()
 				.replace(/[^\/]+$/, '')
@@ -82,12 +87,12 @@ class PageSelectTreeComponent extends NavTreeComponent {
 	 * @param pages
 	 * @returns the array of filtered pages
 	 */
-	protected filterPages(pages: NavTreePageData[]): NavTreePageData[] {
+	protected filterPages(pages: PageMetaData[]): PageMetaData[] {
 		if (this.hideCurrent) {
 			const current = getPageURL();
 			const regex = new RegExp(`^${current}(\/|$)`);
 
-			return pages.filter((page: NavTreePageData) => {
+			return pages.filter((page: PageMetaData) => {
 				return page.url.match(regex) == null;
 			});
 		}

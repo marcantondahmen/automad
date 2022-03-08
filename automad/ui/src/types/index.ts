@@ -34,6 +34,7 @@
 
 export * from './form';
 export * from './page';
+import { PageMetaData } from '.';
 
 export interface KeyValueMap {
 	[key: string | number]: any;
@@ -58,19 +59,11 @@ export interface File {
 	height?: number;
 }
 
-export interface NavTreePageData {
-	url: string;
-	title: string;
-	path: string;
-	parent: string;
-	private: boolean;
-}
-
 export interface NavTreeItem {
 	wrapper: HTMLElement;
 	summary: HTMLElement;
 	children: HTMLElement;
-	page: NavTreePageData;
+	page: PageMetaData;
 }
 
 export interface Partials {

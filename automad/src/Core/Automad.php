@@ -87,23 +87,14 @@ class Automad {
 	private $Pagelist = false;
 
 	/**
-	 * An array of existing directories within the base directory (/automad, /config, /pages etc.)
-	 */
-	private $reservedUrls;
-
-	/**
-	 * The username of the currently logged in user or false.
-	 */
-	private $user;
-
-	/**
 	 * Parse sitewide settings, create $collection and set the context to the currently requested page.
 	 */
 	public function __construct() {
-		$this->getReservedUrls();
 		$this->Shared = new Shared();
-		$this->user = Session::getUsername();
-		$this->collectPages();
+
+		$PageCollection = new PageCollection('/', $this->Shared);
+		$this->collection = $PageCollection->get();
+
 		Debug::log(array('Shared' => $this->Shared, 'Collection' => $this->collection), 'New instance created');
 
 		// Set the context initially to the requested page.
@@ -220,96 +211,6 @@ class Automad {
 	}
 
 	/**
-	 * Searches $path recursively for files with the AM_FILE_EXT_DATA and adds the parsed data to $collection.
-	 *
-	 * After successful indexing, the $collection holds basically all information (except media files) from all pages of the whole site.
-	 * This makes searching and filtering very easy since all data is stored in one place.
-	 * To access the data of a specific page within the $collection array, the page's url serves as the key: $this->collection['/path/to/page']
-	 *
-	 * @param string $path
-	 * @param int $level
-	 * @param string $parentUrl
-	 */
-	private function collectPages(string $path = '/', int $level = 0, string $parentUrl = '') {
-		// First check, if $path contains any data files.
-		// If more that one file matches the pattern, the first one will be used as the page's data file and the others will just be ignored.
-		if ($files = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*.' . AM_FILE_EXT_DATA)) {
-			$file = reset($files);
-
-			// Set URL.
-			$url = $this->makeUrl($parentUrl, basename($path));
-
-			// Get content from text file.
-			$data = Parse::dataFile($file);
-
-			// Check if page is private.
-			if (array_key_exists(AM_KEY_PRIVATE, $data)) {
-				$private = ($data[AM_KEY_PRIVATE] && $data[AM_KEY_PRIVATE] !== 'false');
-			} else {
-				$private = false;
-			}
-
-			$data[AM_KEY_PRIVATE] = $private;
-
-			// Stop processing of page data and subdirectories if page is private and nobody is logged in.
-			if (!$this->user && $private) {
-				return false;
-			}
-
-			// In case the title is not set in the data file or is empty, use the slug of the URL instead.
-			// In case the title is missig for the home page, use the site name instead.
-			if (!array_key_exists(AM_KEY_TITLE, $data) || ($data[AM_KEY_TITLE] == '')) {
-				if (trim($url, '/')) {
-					// If page is not the home page...
-					$data[AM_KEY_TITLE] = ucwords(str_replace(array('_', '-'), ' ', basename($url)));
-				} else {
-					// If page is home page...
-					$data[AM_KEY_TITLE] = $this->Shared->get(AM_KEY_SITENAME);
-				}
-			}
-
-			// Check for an URL override in $data and use that URL if existing. If no URL is defined as override, add the created $url above to $data to be used as a page variable.
-			if (empty($data[AM_KEY_URL])) {
-				$data[AM_KEY_URL] = $url;
-			}
-
-			// Convert hidden value to boolean.
-			if (array_key_exists(AM_KEY_HIDDEN, $data)) {
-				$data[AM_KEY_HIDDEN] = ($data[AM_KEY_HIDDEN] && $data[AM_KEY_HIDDEN] !== 'false');
-			} else {
-				$data[AM_KEY_HIDDEN] = false;
-			}
-
-			// Save original URL.
-			// In case an URL for redirects is defined in the data file, the original URL will be used to resolve relative links.
-			$data[AM_KEY_ORIG_URL] = $url;
-
-			// Set read-only variables.
-			$data[AM_KEY_PATH] = $path;
-			$data[AM_KEY_LEVEL] = $level;
-			$data[AM_KEY_PARENT] = $parentUrl;
-			$data[AM_KEY_TEMPLATE] = str_replace('.' . AM_FILE_EXT_DATA, '', basename($file));
-
-			// The relative URL ($url) of the page becomes the key (in $collection).
-			// That way it is impossible to create twice the same url and it is very easy to access the page's data.
-			// It will actually always be the "real" Automad-URL, even if a redirect-URL is specified (that one will be stored in $Page->url and $data instead).
-			$this->collection[$url] = new Page($data, $this->Shared);
-
-			// $path gets only scanned for sub-pages, in case it contains a data file.
-			// That way it is impossible to generate pages without a parent page.
-			if ($dirs = FileSystem::glob(AM_BASE_DIR . AM_DIR_PAGES . $path . '*', GLOB_ONLYDIR)) {
-				// Sort $dirs array again to be independent from glob's default behavior in case of any inconsistency.
-				sort($dirs);
-
-				// Scan each directory recursively.
-				foreach ($dirs as $dir) {
-					$this->collectPages($path . basename($dir) . '/', $level + 1, $url);
-				}
-			}
-		}
-	}
-
-	/**
 	 * Return the page object for the requested page.
 	 *
 	 * @return Page A page object
@@ -328,80 +229,6 @@ class Automad {
 		} else {
 			return $this->pageNotFound();
 		}
-	}
-
-	/**
-	 * Get the list of taken URLs that can't be used as page URLs.
-	 */
-	private function getReservedUrls() {
-		foreach (Routes::$registered as $route) {
-			$url = preg_replace('#^(/[\w\-\_]*).*$#i', '$1', $route['route']);
-
-			if ($url != '/') {
-				$this->reservedUrls[] = $url;
-			}
-		}
-
-		// Get all real directories.
-		foreach (FileSystem::glob(AM_BASE_DIR . '/*', GLOB_ONLYDIR) as $dir) {
-			$this->reservedUrls[] = '/' . basename($dir);
-		}
-
-		$this->reservedUrls = array_unique($this->reservedUrls);
-
-		Debug::log($this->reservedUrls);
-	}
-
-	/**
-	 * Builds an URL out of the parent URL and the actual file system folder name.
-	 *
-	 * It is important to only transform the actual folder name (slug) and not the whole path,
-	 * because of handling possible duplicate parent folder names right.
-	 * If there are for example two folders on the level above, called xxx.folder/ and yyy.folder/,
-	 * they will be transformed into folder/ and folder-1/. If the URL from yyy.folder/child/ is made from the whole path,
-	 * it will return folder/child/ instead of folder-1/child/, even if the parent URL would be folder-1/.
-	 *
-	 * The prefix for sorting (xxx.folder) will be stripped.
-	 * In case the resulting url is already in use, a suffix (-1, -2 ...) gets appende to the new url.
-	 *
-	 * @param string $parentUrl
-	 * @param string $slug
-	 * @return string $url
-	 */
-	private function makeUrl(string $parentUrl, string $slug) {
-		// strip prefix from $slug
-		$pattern = '/[a-zA-Z0-9_-]+\./';
-		$replacement = '';
-		$slug = preg_replace($pattern, $replacement, $slug);
-
-		// Clean up $slug
-		$slug = Str::slug($slug);
-
-		// Build URL:
-		// The ltrim (/) is needed to prevent a double / in front of every url,
-		// since $parentUrl will be empty for level 0 and 1 (//path/to/page).
-		// Trimming all '/' and then prependig a single '/', makes sure that there is always just one slash
-		// at the beginning of the URL.
-		// The leading slash is better to have in case of the home page where the key becomes [/] insted of just []
-		$url = '/' . ltrim($parentUrl . '/' . $slug, '/');
-
-		// Merge reserved URLs with already used URLs in the collection.
-		$takenUrls = array_merge($this->reservedUrls, array_keys($this->collection));
-
-		// check if url already exists
-		if (in_array($url, $takenUrls)) {
-			$i = 0;
-			$newUrl = $url;
-
-			while (in_array($newUrl, $takenUrls)) {
-				$i++;
-				$newUrl = $url . '-' . $i;
-			}
-
-			$url = $newUrl;
-		}
-
-		return $url;
 	}
 
 	/**

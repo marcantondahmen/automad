@@ -412,30 +412,22 @@ class FileSystem {
 
 	/**
 	 * Move a directory to a new location.
-	 * The final path is composed of the parent directoy, the prefix and the title.
-	 * In case the resulting path is already occupied, an index get appended to the prefix, to be reproducible when resaving the page.
 	 *
 	 * @param string $oldPath
 	 * @param string $newParentPath (destination)
-	 * @param string $prefix
 	 * @param string $slug
 	 * @return string $newPath
 	 */
-	public static function movePageDir(string $oldPath, string $newParentPath, string $prefix, string $slug) {
+	public static function movePageDir(string $oldPath, string $newParentPath, string $slug) {
 		// Normalize parent path. In case of a 1st level page, dirname(page) will return '\' on windows.
 		// Therefore it is needed to convert all backslashes.
 		$newParentPath = self::normalizeSlashes($newParentPath);
 		$newParentPath = '/' . ltrim(trim($newParentPath, '/') . '/', '/');
 
-		// Not only sanitize strings, but also remove all dots, to make sure a single dot will work fine as a prefix.title separator.
-		$prefix = ltrim(Str::sanitize($prefix, true, AM_DIRNAME_MAX_LEN) . '.', '.');
-		$slug = Str::slug($slug, true, AM_DIRNAME_MAX_LEN);
-
-		// Add trailing slash.
-		$slug .= '/';
+		$slug = Str::slug($slug, true, AM_DIRNAME_MAX_LEN) . '/';
 
 		// Build new path.
-		$newPath = $newParentPath . $prefix . $slug;
+		$newPath = $newParentPath . $slug;
 
 		// Contiune only if old and new paths are different.
 		if ($oldPath != $newPath) {
@@ -574,15 +566,15 @@ class FileSystem {
 	 * Creates an unique suffix for a path to avoid conflicts with existing directories.
 	 *
 	 * @param string $path
-	 * @param string $prefix (prepended to the numerical suffix)
+	 * @param string $suffixPrefix (prepended to the numerical suffix)
 	 * @return string The suffix
 	 */
-	public static function uniquePathSuffix(string $path, string $prefix = '') {
+	public static function uniquePathSuffix(string $path, string $suffixPrefix = '') {
 		$i = 1;
-		$suffix = $prefix;
+		$suffix = $suffixPrefix;
 
 		while (file_exists(self::appendSuffixToPath(self::fullPagePath($path), $suffix))) {
-			$suffix = $prefix . '-' . $i++;
+			$suffix = $suffixPrefix . '-' . $i++;
 		}
 
 		return $suffix;

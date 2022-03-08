@@ -98,7 +98,8 @@ class Page {
 			'parentUrl' => AM_KEY_PARENT,
 			'path' =>AM_KEY_PATH,
 			'template' => AM_KEY_TEMPLATE,
-			'url' => AM_KEY_URL
+			'url' => AM_KEY_URL,
+			'index' => AM_KEY_PAGE_INDEX
 		);
 
 		if (array_key_exists($key, $keyMap)) {

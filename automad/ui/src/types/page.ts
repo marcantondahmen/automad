@@ -34,6 +34,7 @@
 
 import { KeyValueMap } from '.';
 import { SwitcherSectionComponent } from '../components/Switcher/SwitcherSection';
+import { Binding } from '../core';
 
 export type PageSectionName = 'settings' | 'text' | 'colors';
 
@@ -54,12 +55,21 @@ export interface PageMainSettingsData {
 }
 
 export interface PageMetaData {
+	title: string;
+	index: string;
 	url: string;
 	path: string;
-	title: string;
+	parentPath: string;
 	private: boolean;
 }
 
 export interface Pages {
 	[key: string]: PageMetaData;
+}
+
+export interface PageBindings {
+	pageUrlBinding: Binding;
+	pageUrlWithBaseBinding: Binding;
+	pageLinkUIBinding: Binding;
+	slugBinding: Binding;
 }

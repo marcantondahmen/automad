@@ -43,12 +43,13 @@ import {
 	queryAll,
 	Routes,
 	html,
-	Bindings,
 	listen,
 	appStateChangedEventName,
+	requestAPI,
 } from '../core';
-import { KeyValueMap, NavTreeItem, NavTreePageData } from '../types';
+import { KeyValueMap, NavTreeItem, PageMetaData } from '../types';
 import { BaseComponent } from './Base';
+import Sortable, { SortableEvent } from 'sortablejs';
 
 /**
  * The navigation tree component.
@@ -67,7 +68,17 @@ export class NavTreeComponent extends BaseComponent {
 	/**
 	 * The pages tree structure.
 	 */
-	protected tree: KeyValueMap = {};
+	protected tree: KeyValueMap;
+
+	/**
+	 * True if the tree can be sorted.
+	 */
+	protected isSortable: boolean = true;
+
+	/**
+	 * The array of Sortable instances.
+	 */
+	private sortables: Sortable[] = [];
 
 	/**
 	 * The callback function used when an element is created in the DOM.
@@ -84,34 +95,137 @@ export class NavTreeComponent extends BaseComponent {
 	 */
 	protected init(): void {
 		this.innerHTML = '';
+		this.tree = {};
 
 		this.renderLabel();
 
-		const pages: NavTreePageData[] = this.filterPages(
-			Object.values(App.pages) as NavTreePageData[]
+		const pages: PageMetaData[] = this.filterPages(
+			Object.values(App.pages) as PageMetaData[]
 		);
 
 		let parent: HTMLElement;
 
 		pages.sort((a: KeyValueMap, b: KeyValueMap) =>
-			a.path > b.path ? 1 : b.path > a.path ? -1 : 0
+			a.index > b.index ? 1 : b.index > a.index ? -1 : 0
 		);
 
 		pages.forEach((page) => {
-			if (typeof this.tree[page.parent] == 'undefined') {
+			if (typeof this.tree[page.parentPath] == 'undefined') {
 				parent = this;
 			} else {
-				parent = this.tree[page.parent].children;
+				parent = this.tree[page.parentPath].children;
 			}
 
 			const item = this.createItem(page, parent);
-			this.tree[page.url] = item;
+			this.tree[page.path] = item;
 
 			this.toggleItem(item, getPageURL());
 		});
 
 		this.unfoldToActive();
 		this.toggleChildrenIcons();
+		this.initSortable();
+	}
+
+	/**
+	 * Init Sortable JS.
+	 *
+	 * @see {@link github https://github.com/SortableJS/Sortable}
+	 */
+	private initSortable(): void {
+		if (!this.isSortable) {
+			return;
+		}
+
+		queryAll('details', this).forEach((details: HTMLElement) => {
+			let enterTimeout: NodeJS.Timer;
+
+			listen(details, 'dragenter', (event: MouseEvent) => {
+				if (details.contains(event.relatedTarget as HTMLElement)) {
+					return;
+				}
+
+				enterTimeout = setTimeout(() => {
+					details.toggleAttribute('open');
+				}, 750);
+			});
+
+			listen(details, 'dragleave', (event: MouseEvent) => {
+				if (enterTimeout) {
+					clearTimeout(enterTimeout);
+				}
+			});
+		});
+
+		const childrenContainers = queryAll(
+			`.${classes.navChildren}`,
+			this
+		) as HTMLElement[];
+
+		childrenContainers.forEach((container) => {
+			this.sortables.push(
+				new Sortable(container, {
+					group: 'navTree',
+					direction: 'vertical',
+
+					animation: 200,
+
+					emptyInsertThreshold: 0,
+
+					swapThreshold: 0.5,
+					invertedSwapThreshold: 0.5,
+					invertSwap: true,
+
+					ghostClass: classes.navItemGhost,
+					chosenClass: classes.navItemChosen,
+					dragClass: classes.navItemDrag,
+
+					onStart: () => {
+						this.classList.add(classes.navDragging);
+					},
+
+					onEnd: async (event: SortableEvent) => {
+						this.classList.remove(classes.navDragging);
+
+						const { item, from, to } = event;
+
+						const fromUrl = from.getAttribute('url');
+
+						const toUrl = to.getAttribute('url');
+						const toPath = to.getAttribute('path');
+						const toChildren: string[] = [];
+
+						Array.from(to.children).forEach((child) => {
+							toChildren.push(child.getAttribute('path'));
+						});
+
+						let redirect = null;
+
+						if (fromUrl != toUrl) {
+							this.sortables.forEach((sortable) => {
+								sortable.destroy();
+							});
+
+							const data = await requestAPI('Page/move', {
+								url: item.getAttribute('url'),
+								targetPage: toUrl,
+							});
+
+							redirect = data.redirect;
+						}
+
+						await requestAPI('Page/updateIndex', {
+							parentPath: toPath,
+							layout: JSON.stringify(toChildren),
+						});
+
+						if (redirect) {
+							App.root.setView(redirect);
+						}
+					},
+				})
+			);
+		});
 	}
 
 	/**
@@ -128,7 +242,7 @@ export class NavTreeComponent extends BaseComponent {
 	 * @param pages
 	 * @returns the array of filtered pages
 	 */
-	protected filterPages(pages: NavTreePageData[]): NavTreePageData[] {
+	protected filterPages(pages: PageMetaData[]): PageMetaData[] {
 		return pages;
 	}
 
@@ -139,19 +253,25 @@ export class NavTreeComponent extends BaseComponent {
 	 * @param parent - the children container of the parent tree node
 	 * @returns the NavItem object
 	 */
-	private createItem(
-		page: NavTreePageData,
-		parent: HTMLElement
-	): NavTreeItem {
+	private createItem(page: PageMetaData, parent: HTMLElement): NavTreeItem {
 		const level = (page.path.match(/\/./g) || []).length;
 		const wrapper = create(
 			'details',
 			[classes.navItem],
-			{ style: `--level: ${level}` },
+			{
+				path: page.path,
+				url: page.url,
+				title: page.path,
+			},
 			parent
 		);
 		const summary = create('summary', [classes.navLink], {}, wrapper);
-		const children = create('div', [classes.navChildren], {}, wrapper);
+		const children = create(
+			'div',
+			[classes.navChildren],
+			{ url: page.url, path: page.path },
+			wrapper
+		);
 
 		if (!level) {
 			wrapper.setAttribute('open', true);
@@ -189,13 +309,19 @@ export class NavTreeComponent extends BaseComponent {
 		);
 
 		let icon = 'file-earmark-text';
+		let grabIcon = '';
 
 		if (page.private) {
 			icon = 'file-earmark-lock2-fill';
 		}
 
+		if (this.isSortable) {
+			grabIcon = '<i class="bi bi-grip-vertical"></i>';
+		}
+
 		link.innerHTML = html`
 			<am-icon-text icon="${icon}" text="${page.title}"></am-icon-text>
+			<span class="${classes.navGrip}">${grabIcon}</span>
 		`;
 
 		return link;
