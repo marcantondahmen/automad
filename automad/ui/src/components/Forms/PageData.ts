@@ -35,6 +35,7 @@
 import {
 	FieldGroupData,
 	KeyValueMap,
+	PageBindings,
 	PageFieldGroups,
 	PageMainSettingsData,
 	PageSectionCollection,
@@ -46,11 +47,10 @@ import { SwitcherSectionComponent } from '../Switcher/SwitcherSection';
 import {
 	App,
 	Binding,
+	classes,
 	create,
 	createField,
-	fire,
 	html,
-	query,
 	Routes,
 	setDocumentTitle,
 } from '../../core';
@@ -105,7 +105,12 @@ const fieldGroup = ({ section, fields, tooltips }: FieldGroupData): void => {
  */
 const createSections = (form: PageDataComponent): PageSectionCollection => {
 	const createSection = (key: string): SwitcherSectionComponent => {
-		return create('am-switcher-section', [], { name: content[key] }, form);
+		return create(
+			'am-switcher-section',
+			[classes.switcherSectionFields],
+			{ name: content[key] },
+			form
+		);
 	};
 
 	const content = App.sections.content;
@@ -152,6 +157,76 @@ const prepareFieldGroups = (fields: KeyValueMap): PageFieldGroups => {
 };
 
 /**
+ * Init all URL and slug related bindings.
+ *
+ * @param data
+ * @return the page bindings object
+ */
+const createBindings = (data: KeyValueMap): PageBindings => {
+	const { slug, url } = data;
+
+	const slugBinding = new Binding('pageSlug', null, null, slug);
+	const pageUrlBinding = new Binding('pageUrl', null, null, url);
+
+	const pageUrlWithBaseBinding = new Binding(
+		'pageUrlWithBase',
+		null,
+		(url: string) => {
+			return `${App.baseURL}${url}`;
+		},
+		url
+	);
+
+	const pageLinkUIBinding = new Binding(
+		'pageLinkUI',
+		null,
+		(url: string) => {
+			return `${Routes[Routes.page]}?url=${encodeURIComponent(url)}`;
+		},
+		url
+	);
+
+	return {
+		slugBinding,
+		pageUrlBinding,
+		pageUrlWithBaseBinding,
+		pageLinkUIBinding,
+	};
+};
+
+/**
+ * Handle UI updates.
+ *
+ * @param update
+ * @return a promise
+ */
+const updateUI = async (
+	update: KeyValueMap,
+	pageBindings: PageBindings
+): Promise<void> => {
+	if (update.slug && update.origUrl) {
+		const { slug, origUrl } = update;
+		const urlObject = new URL(window.location.href);
+		const {
+			pageUrlBinding,
+			pageUrlWithBaseBinding,
+			pageLinkUIBinding,
+			slugBinding,
+		} = pageBindings;
+
+		urlObject.searchParams.set('url', update.origUrl);
+		window.history.replaceState(null, null, urlObject);
+
+		pageUrlBinding.value = origUrl;
+		pageUrlWithBaseBinding.value = origUrl;
+		pageLinkUIBinding.value = origUrl;
+		slugBinding.value = slug;
+
+		await App.updateState();
+	}
+};
+
+/**
  * A page data form element.
  *
  * @example
@@ -165,6 +240,11 @@ export class PageDataComponent extends FormComponent {
 	 * The section collection object.
 	 */
 	private sections: PageSectionCollection;
+
+	/**
+	 * The page bindings object.
+	 */
+	private pageBindings: PageBindings;
 
 	/**
 	 * Wait for pending requests.
@@ -291,26 +371,18 @@ export class PageDataComponent extends FormComponent {
 		);
 
 		if (url != '/') {
-			const slugField = createField('am-field', section, {
-				key: 'slug',
-				value: slug,
-				name: 'slug',
-				label: App.text('pageSlug'),
-			});
-
-			new Binding('pageUrl', slugField.input, (value: string) => {
-				return `${url.replace(/[^\/]+$/, value)}`;
-			});
-
-			new Binding('pageUrlWithBase', slugField.input, (value: string) => {
-				return `${App.baseURL}${url.replace(/[^\/]+$/, value)}`;
-			});
-
-			new Binding('pageLinkUI', slugField.input, (value: string) => {
-				return `${Routes[Routes.page]}?url=${encodeURIComponent(
-					url.replace(/[^\/]+$/, value)
-				)}`;
-			});
+			createField(
+				'am-field',
+				section,
+				{
+					key: 'slug',
+					value: null, // Defined by binding.
+					name: 'slug',
+					label: App.text('pageSlug'),
+				},
+				[],
+				{ bind: 'pageSlug', bindto: 'value' }
+			);
 		}
 
 		createMainField(
@@ -358,11 +430,12 @@ export class PageDataComponent extends FormComponent {
 		}
 
 		if (response.data.update) {
-			this.updateUI(response.data.update);
+			updateUI(response.data.update, this.pageBindings);
 
 			return;
 		}
 
+		this.pageBindings = createBindings(response.data);
 		this.render(response.data);
 	}
 
@@ -404,26 +477,6 @@ export class PageDataComponent extends FormComponent {
 				tooltips,
 			});
 		});
-	}
-
-	/**
-	 * Handle UI updates.
-	 *
-	 * @param update
-	 */
-	private async updateUI(update: KeyValueMap): Promise<void> {
-		if (update.slug && update.url && update.origUrl) {
-			const slugInput = query('[name="slug"]') as HTMLInputElement;
-			const url = new URL(window.location.href);
-
-			url.searchParams.set('url', update.origUrl);
-			window.history.replaceState(null, null, url);
-
-			slugInput.value = update.slug;
-			fire('input', slugInput);
-
-			await App.updateState();
-		}
 	}
 }
 

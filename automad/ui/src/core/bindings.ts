@@ -32,9 +32,8 @@
  * Licensed under the MIT license.
  */
 
-import { fire, listen, queryAll } from '.';
+import { create, fire, listen, queryAll } from '.';
 import { KeyValueMap } from '../types';
-const bindingChangedEventName = 'AutomadBindingChange';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.
@@ -62,6 +61,14 @@ export class Binding {
 	}
 
 	/**
+	 * Set the input value.
+	 */
+	set value(value) {
+		this.input.value = value;
+		fire('input', this.input);
+	}
+
+	/**
 	 * The constructor.
 	 *
 	 * @param name
@@ -70,13 +77,22 @@ export class Binding {
 	 */
 	constructor(
 		name: string,
-		input: HTMLInputElement,
-		modifier: Function = null
+		input: HTMLInputElement = null,
+		modifier: Function = null,
+		initial: any = null
 	) {
 		this.modifier = modifier;
-		this.input = input;
+
+		// In case no input is given, an empty input element will be create without
+		// appending it to the DOM.
+		// It will then just serve to store the value and trigger events.
+		this.input = input || create('input', [], {});
 
 		Bindings.add(name, this);
+
+		if (initial !== null) {
+			this.value = initial;
+		}
 	}
 }
 
@@ -135,10 +151,16 @@ export class Bindings {
 
 			const update = () => {
 				targetProperties.forEach((prop) => {
-					if (prop == 'textContent') {
-						element.textContent = binding.value;
-					} else {
-						element.setAttribute(prop, binding.value);
+					switch (prop) {
+						case 'textContent':
+							element.textContent = binding.value;
+							break;
+						case 'value':
+							(element as HTMLInputElement).value = binding.value;
+							fire('input', element);
+							break;
+						default:
+							element.setAttribute(prop, binding.value);
 					}
 				});
 			};

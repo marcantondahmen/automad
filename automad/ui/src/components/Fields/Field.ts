@@ -181,6 +181,13 @@ export class FieldComponent extends BaseComponent {
 				input.setAttribute('required', '');
 				this.removeAttribute('required');
 			}
+
+			['bind', 'bindto'].forEach((attr) => {
+				if (this.hasAttribute(attr)) {
+					input.setAttribute(attr, this.getAttribute(attr));
+					this.removeAttribute(attr);
+				}
+			});
 		});
 	}
 }
