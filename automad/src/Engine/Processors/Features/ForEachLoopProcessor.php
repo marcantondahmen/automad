@@ -100,7 +100,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 					// Set context to the current page in the loop.
 					$Context->set($Page);
 					// Set index for current page. The index can be used as @{:i}.
-					$this->Runtime->set(AM_KEY_INDEX, ++$i + $offset);
+					$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i + $offset);
 					// Parse snippet.
 					Debug::log($Page, 'Processing snippet in loop for page: "' . $Page->url . '"');
 					$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
@@ -122,7 +122,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 					// Store current filter in the system variable buffer.
 					$this->Runtime->set(AM_KEY_FILTER, $filter);
 					// Set index. The index can be used as @{:i}.
-					$this->Runtime->set(AM_KEY_INDEX, ++$i);
+					$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i);
 					$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
 				}
 			} elseif (strtolower($matches['foreach']) == 'tags') {
@@ -134,7 +134,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 					// Store current tag in the system variable buffer.
 					$this->Runtime->set(AM_KEY_TAG, $tag);
 					// Set index. The index can be used as @{:i}.
-					$this->Runtime->set(AM_KEY_INDEX, ++$i);
+					$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i);
 					$html .= $TemplateProcessor->process($foreachSnippet, $directory, $collectSnippetDefinitions);
 				}
 			} else {
@@ -156,7 +156,7 @@ class ForEachLoopProcessor extends AbstractFeatureProcessor {
 				foreach ($files as $file) {
 					Debug::log($file, 'Processing snippet in loop for file');
 					// Set index. The index can be used as @{:i}.
-					$this->Runtime->set(AM_KEY_INDEX, ++$i);
+					$this->Runtime->set(AM_KEY_LOOP_INDEX, ++$i);
 					$html .= $this->ContentProcessor->processFileSnippet(
 						$file,
 						Parse::jsonOptions(

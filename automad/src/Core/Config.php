@@ -208,7 +208,7 @@ class Config {
 		self::set('AM_KEY_WIDTH_RESIZED', ':widthResized');
 		self::set('AM_KEY_HEIGHT_RESIZED', ':heightResized');
 		self::set('AM_KEY_CAPTION', ':caption');
-		self::set('AM_KEY_INDEX', ':i');
+		self::set('AM_KEY_LOOP_INDEX', ':i');
 		self::set('AM_KEY_PAGE_INDEX', ':index');
 		self::set('AM_KEY_FILELIST_COUNT', ':filelistCount');
 		self::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');

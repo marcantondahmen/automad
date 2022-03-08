@@ -54,10 +54,11 @@ class IconTextComponent extends BaseComponent {
 		this.removeAttribute('icon');
 		this.removeAttribute('text');
 
-		this.classList.add(classes.iconText);
-
-		create('i', ['bi', `bi-${icon}`], {}, this);
-		create('span', [], {}, this).textContent = text;
+		if (icon && text) {
+			this.classList.add(classes.iconText);
+			create('i', ['bi', `bi-${icon}`], {}, this);
+			create('span', [], {}, this).textContent = text;
+		}
 	}
 }
 

@@ -64,6 +64,7 @@ export class SwitcherSectionComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
+		this.classList.add(classes.switcherSection);
 		this.toggle();
 
 		listen(window, switcherChangeEventName, this.toggle.bind(this));
@@ -74,8 +75,8 @@ export class SwitcherSectionComponent extends BaseComponent {
 	 */
 	toggle(): void {
 		this.classList.toggle(
-			classes.displayNone,
-			this.elementAttributes.name != getActiveSection()
+			classes.switcherSectionActive,
+			this.elementAttributes.name == getActiveSection()
 		);
 
 		query('html').scrollTop = 0;

@@ -26,25 +26,41 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-@l-sidebar-width: 21rem;
-@l-main-width: 68rem;
-@l-center-width: 24rem;
+.am-c-switcher {
+	&-section {
+		display: none;
 
-@l-breakpoint-large: ((2 * @l-sidebar-width) + @l-main-width);
-@l-breakpoint-large-max: @l-breakpoint-large - 0.01;
-@l-breakpoint-medium: (@l-sidebar-width + @l-main-width);
-@l-breakpoint-medium-max: @l-breakpoint-medium - 0.01;
-@l-breakpoint-small: 36rem;
-@l-breakpoint-small-max: @l-breakpoint-small - 0.01;
+		&--active {
+			display: block;
+		}
 
-@import 'footer.less';
-@import 'main.less';
-@import 'navbar.less';
-@import 'page.less';
-@import 'sidebar.less';
+		&--fields&--active {
+			display: flex;
+		}
+
+		&--fields {
+			flex-wrap: wrap;
+			column-gap: var(--am-space-medium);
+
+			& > .am-c-field {
+				flex-grow: 1;
+				width: 40%;
+				min-width: 24rem;
+			}
+
+			& > am-title.am-c-field,
+			& > am-checkbox-large.am-c-field,
+			& > am-page-template.am-c-field,
+			& > am-page-tags.am-c-field,
+			& > am-editor.am-c-field {
+				min-width: 100%;
+			}
+		}
+	}
+}

@@ -1,0 +1,166 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+@c-file-robot-tab-width: 7rem;
+
+.am-ui .am-c-modal .FIE_root {
+	& .FIE_topbar {
+		font-size: 1rem;
+
+		&-buttons-wrapper {
+			width: ~'calc(@{c-file-robot-tab-width} + 20%)';
+		}
+
+		&-center-options {
+			width: 20%;
+			justify-content: center;
+
+			& > * {
+				white-space: nowrap;
+			}
+
+			& button {
+				justify-content: center;
+
+				& svg {
+					min-width: 1em !important;
+					min-height: 1em;
+				}
+			}
+		}
+
+		&-close-button {
+			width: 20%;
+			justify-content: end;
+		}
+
+		&-save-wrapper {
+			width: auto !important;
+			height: 2rem !important;
+		}
+
+		&-history-buttons {
+			white-space: nowrap;
+		}
+	}
+
+	& .FIE_tabs {
+	}
+
+	& .FIE_tab {
+		border: var(--am-hairline);
+		border-radius: var(--am-radius);
+		padding: 0 0.4em;
+
+		&[aria-selected='true'] {
+			background-color: var(--am-button-active-bg);
+		}
+
+		&-label {
+			display: block;
+			width: @c-file-robot-tab-width;
+			max-width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: center;
+		}
+	}
+}
+
+.am-ui .SfxModal-Wrapper .SfxModal-Overlay {
+}
+
+.am-ui > body .SfxButton-root {
+	font-size: 0.8rem !important;
+	height: ~'calc(var(--am-button-line-height) - var(--am-border-width))' !important;
+	line-height: var(--am-button-line-height);
+	padding: 0 var(--am-button-padding);
+	border-radius: var(--am-radius);
+	overflow: hidden;
+
+	& > .SfxButton-Label {
+		font-family: var(--am-base-font-family);
+		font-size: inherit;
+	}
+}
+
+.am-ui .SfxModal-Wrapper > .SfxModal-Container[open] {
+	border-radius: var(--am-radius-large);
+	overflow: hidden;
+	box-shadow: var(--am-shadow);
+	width: var(--am-modal-dialog-width) !important;
+	max-width: 100%;
+	padding: var(--am-modal-dialog-padding);
+
+	& .SfxModalTitle-root {
+		padding: 0;
+		margin-bottom: var(--am-modal-dialog-padding);
+	}
+
+	& .SfxModalContent-root {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+
+		& > * {
+			flex-grow: 1;
+			width: 100%;
+		}
+	}
+
+	& .FIE_save-file-name-input {
+		width: 70%;
+	}
+
+	& .SfxSelect-Container {
+		width: 20%;
+		display: flex;
+
+		& > div {
+			min-width: 100% !important;
+			max-width: 100% !important;
+		}
+	}
+
+	& .SfxModalActions-root {
+		padding: 0;
+		justify-content: end;
+		margin-top: var(--am-modal-dialog-padding);
+	}
+}
+
+.am-ui .Menu-open {
+	overflow: hidden !important;
+}

@@ -46,7 +46,7 @@ export const sidebarLayout = ({ main }: Partials) => {
 			></am-toggle>
 			<nav class="am-l-sidebar">
 				<am-sidebar class="am-l-sidebar__content">
-					<div class="am-l-sidebar__logo"></div>
+					<div class="am-l-sidebar__logo">Logo</div>
 					<div class="am-l-sidebar__nav">
 						<div class="am-l-sidebar__jump">
 							<am-jumpbar

@@ -71,7 +71,7 @@ class ForLoopProcessor extends AbstractFeatureProcessor {
 			// The loop.
 			for ($i = $start; $i <= $end; $i++) {
 				// Set index variable. The index can be used as @{:i}.
-				$this->Runtime->set(AM_KEY_INDEX, $i);
+				$this->Runtime->set(AM_KEY_LOOP_INDEX, $i);
 				// Parse snippet.
 				Debug::log($i, 'Processing snippet in loop for index');
 				$html .= $TemplateProcessor->process($matches['forSnippet'], $directory, $collectSnippetDefinitions);
