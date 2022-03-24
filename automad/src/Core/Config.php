@@ -110,6 +110,7 @@ class Config {
 
 		// FILE
 		self::set('AM_FILE_INDEX', '.index');
+		self::set('AM_FILE_DEFAULT_TEMPLATE', 'standard/light/sidebar_left.php');
 		self::set('AM_FILE_EXT_DATA', 'txt'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)
 		self::set('AM_FILE_EXT_CAPTION', 'caption');
 		self::set('AM_FILE_PREFIX_CACHE', 'cached'); // Changing that constant will also require updating the .htaccess file! (for blocking direct access)

@@ -171,17 +171,13 @@ class Page {
 	 * @return string The full file system path of the template file.
 	 */
 	public function getTemplate() {
-		$templatePath = AM_BASE_DIR . AM_DIR_PACKAGES . '/' . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
+		$packages = AM_BASE_DIR . AM_DIR_PACKAGES . '/';
+		$templatePath = $packages . $this->get(AM_KEY_THEME) . '/' . $this->template . '.php';
 
 		if (file_exists($templatePath)) {
 			return $templatePath;
 		} else {
-			// Add backwards compatibility for old theme names and removed templates.
-			$templatePath = str_replace(array('/contact', '/gallery', '/profile'), '/project', $templatePath);
-			$templatePath = str_replace('_2_columns', '', $templatePath);
-			$templatePath = str_replace(array('/alpha', '/bravo'), '/light', $templatePath);
-
-			return $templatePath;
+			return $packages . AM_FILE_DEFAULT_TEMPLATE;
 		}
 	}
 
