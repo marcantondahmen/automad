@@ -63,6 +63,10 @@ class LinkComponent extends BaseComponent {
 				window.location.href = this.elementAttributes.external;
 			}
 
+			if (App.navigationIsLocked) {
+				return;
+			}
+
 			const base = `${window.location.origin}${App.dashboardURL}/`;
 			const url = new URL(this.elementAttributes.target, base);
 

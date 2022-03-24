@@ -33,6 +33,7 @@
  */
 
 import {
+	App,
 	classes,
 	fire,
 	getFormData,
@@ -73,6 +74,11 @@ export class ModalComponent extends BaseComponent {
 	 * The form data of the form controls included in the modal.
 	 */
 	private formData: KeyValueMap;
+
+	/**
+	 * The internal navigation lock id.
+	 */
+	private lockId: number;
 
 	/**
 	 * True if the modal dialog is open.
@@ -130,12 +136,16 @@ export class ModalComponent extends BaseComponent {
 				this.remove();
 			}, 400);
 		}
+
+		App.removeNavigationLock(this.lockId);
 	}
 
 	/**
 	 * Open the modal.
 	 */
 	open(): void {
+		this.lockId = App.addNavigationLock();
+
 		this.classList.add(classes.modalOpen);
 		this.toggleBodyOverflow();
 		this.saveInitialFormData();

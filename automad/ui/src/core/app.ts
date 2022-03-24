@@ -57,6 +57,20 @@ export class App {
 	private static _root: RootComponent;
 
 	/**
+	 * The internal state of the nav.
+	 *
+	 * @static
+	 */
+	private static navigationLocks: KeyValueMap = {};
+
+	/**
+	 * Internal lock id counter.
+	 *
+	 * @static
+	 */
+	private static latestLockId: number = 0;
+
+	/**
 	 * The autocomplete map.
 	 *
 	 * @static
@@ -183,6 +197,15 @@ export class App {
 	}
 
 	/**
+	 * True if the nav is blocked.
+	 *
+	 * @static
+	 */
+	static get navigationIsLocked() {
+		return Object.keys(this.navigationLocks).length > 0;
+	}
+
+	/**
 	 * The bootstrap method that requested the basic state data.
 	 *
 	 * @static
@@ -210,6 +233,30 @@ export class App {
 
 		this._state = Object.assign(this._state, response.data);
 		fire(appStateChangedEventName);
+	}
+
+	/**
+	 * Set the nav state to be disabled.
+	 *
+	 * @return the lock id
+	 * @static
+	 */
+	static addNavigationLock(): number {
+		const id = this.latestLockId++;
+
+		this.navigationLocks[id] = true;
+
+		return id;
+	}
+
+	/**
+	 * Set the nav state to not be disabled.
+	 *
+	 * @param id
+	 * @static
+	 */
+	static removeNavigationLock(id: number): void {
+		delete this.navigationLocks[id];
 	}
 
 	/**

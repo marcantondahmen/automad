@@ -33,7 +33,7 @@
  */
 
 import { BaseComponent } from '../Base';
-import { classes, listen } from '../../core';
+import { App, classes, listen } from '../../core';
 import {
 	getActiveSection,
 	setActiveSection,
@@ -81,6 +81,10 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 * Set the active section.
 	 */
 	select(): void {
+		if (App.navigationIsLocked) {
+			return;
+		}
+
 		setActiveSection(this.elementAttributes.section);
 	}
 }
