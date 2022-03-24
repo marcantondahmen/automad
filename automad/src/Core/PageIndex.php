@@ -99,6 +99,27 @@ class PageIndex {
 	}
 
 	/**
+	 * Replace a path in the index
+	 *
+	 * @param string $parentPath
+	 * @param string $old
+	 * @param string $new
+	 * @return bool true on success
+	 */
+	public static function replace(string $parentPath, string $old, string $new) {
+		$layout = self::read($parentPath);
+		if ($layout) {
+			$index = array_search(basename($old), $layout);
+
+			if ($index !== false) {
+				$layout[$index] = $new;
+
+				return self::write($parentPath, $layout);
+			}
+		}
+	}
+
+	/**
 	 * Update the index file for a given parent directory of a page.
 	 *
 	 * @param string $parentPath

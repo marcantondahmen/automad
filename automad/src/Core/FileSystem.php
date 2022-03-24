@@ -67,27 +67,6 @@ class FileSystem {
 	}
 
 	/**
-	 * Open a data text file under the given path, read the data,
-	 * append a suffix to the title variable and write back the data.
-	 *
-	 * @param string $path
-	 * @param string $suffix
-	 */
-	public static function appendSuffixToTitle(string $path, string $suffix) {
-		if ($suffix) {
-			$path = self::fullPagePath($path);
-			$files = self::glob($path . '*.' . AM_FILE_EXT_DATA);
-
-			if (!empty($files)) {
-				$file = reset($files);
-				$data = Parse::dataFile($file);
-				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
-				self::writeData($data, $file);
-			}
-		}
-	}
-
-	/**
 	 * Unlike self::movePageDir(), this method only copies all files
 	 * within a page directory without (!) any subdirectories.
 	 *
@@ -438,9 +417,6 @@ class FileSystem {
 			// Move dir.
 			self::makeDir(self::fullPagePath($newParentPath));
 			rename(self::fullPagePath($oldPath), self::fullPagePath($newPath));
-
-			// Update the page title in the .txt file to reflect the actual path suffix.
-			self::appendSuffixToTitle($newPath, $suffix);
 		}
 
 		return $newPath;

@@ -190,6 +190,7 @@ class Config {
 
 		// System variables depending on a context.
 		self::set('AM_KEY_ORIG_URL', ':origUrl');
+		self::set('AM_KEY_PAGE_INDEX', ':index');
 		self::set('AM_KEY_PATH', ':path');
 		self::set('AM_KEY_BASENAME', ':basename');
 		self::set('AM_KEY_PARENT', ':parent');
@@ -210,7 +211,6 @@ class Config {
 		self::set('AM_KEY_HEIGHT_RESIZED', ':heightResized');
 		self::set('AM_KEY_CAPTION', ':caption');
 		self::set('AM_KEY_LOOP_INDEX', ':i');
-		self::set('AM_KEY_PAGE_INDEX', ':index');
 		self::set('AM_KEY_FILELIST_COUNT', ':filelistCount');
 		self::set('AM_KEY_PAGELIST_COUNT', ':pagelistCount');
 		self::set('AM_KEY_PAGELIST_DISPLAY_COUNT', ':pagelistDisplayCount');
