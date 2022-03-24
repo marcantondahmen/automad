@@ -34,53 +34,44 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
-
-use Automad\Core\Automad;
-use Automad\UI\Models\Search\FileKeysModel;
+namespace Automad\Admin\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The links model.
+ * A wrapper class for all results for a given data field.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class LinksModel {
+class FieldResultsModel {
 	/**
-	 * Update all links to a page or file after renaming or moving content.
-	 *
-	 * @param Automad $Automad
-	 * @param string $old
-	 * @param string $new
-	 * @param string|null $dataFilePath
-	 * @return bool true on success
+	 * A presenation string of all joined matches with wrapping context.
 	 */
-	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null) {
-		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
-		$replaceValue = $new;
+	public $context = '';
 
-		$SearchModel = new SearchModel($Automad, $searchValue, true, false);
-		$fileResultsArray = $SearchModel->searchPerFile();
-		$fileKeysArray = array();
+	/**
+	 * The field name.
+	 */
+	public $key;
 
-		foreach ($fileResultsArray as $FileResultsModel) {
-			if ($dataFilePath === $FileResultsModel->path || empty($dataFilePath)) {
-				$keys = array();
+	/**
+	 * An array with all found matches in the field value.
+	 * Note that the matches can differ in case the search value is an unescaped regex string.
+	 */
+	public $matches = false;
 
-				foreach ($FileResultsModel->fieldResultsArray as $FieldResultsModel) {
-					$keys[] = $FieldResultsModel->key;
-				}
-
-				$fileKeysArray[] = new FileKeysModel($FileResultsModel->path, $keys);
-			}
-		}
-
-		$ReplacementModel = new ReplacementModel($searchValue, $replaceValue, true, false);
-		$ReplacementModel->replaceInFiles($fileKeysArray);
-
-		return true;
+	/**
+	 * Initialize a new field results instance.
+	 *
+	 * @param string $key
+	 * @param array $matches
+	 * @param string $context
+	 */
+	public function __construct(string $key, array $matches, string $context) {
+		$this->key = $key;
+		$this->matches = $matches;
+		$this->context = $context;
 	}
 }

@@ -34,11 +34,11 @@
  * https://automad.org/license
  */
 
-namespace Automad\Models;
+namespace Automad\Admin\Models;
 
+use Automad\Admin\UI\Autocomplete\Jumpbar;
+use Automad\Admin\UI\Autocomplete\Links;
 use Automad\Core\Automad;
-use Automad\UI\Autocomplete\Jumpbar;
-use Automad\UI\Autocomplete\Links;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

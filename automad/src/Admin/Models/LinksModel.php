@@ -34,46 +34,53 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models\Search;
+namespace Automad\Admin\Models;
+
+use Automad\Admin\Models\Search\FileKeysModel;
+use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A wrapper class for all results for a given data file.
+ * The links model.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileResultsModel {
+class LinksModel {
 	/**
-	 * The array of `FieldResultsModel`.
+	 * Update all links to a page or file after renaming or moving content.
 	 *
-	 * @see FieldResultsModel
+	 * @param Automad $Automad
+	 * @param string $old
+	 * @param string $new
+	 * @param string|null $dataFilePath
+	 * @return bool true on success
 	 */
-	public $fieldResultsArray;
+	public static function update(Automad $Automad, string $old, string $new, ?string $dataFilePath = null) {
+		$searchValue = '(?<=^|"|\(|\s)' . preg_quote($old) . '(?="|/|,|\?|#|\s|$)';
+		$replaceValue = $new;
 
-	/**
-	 * The file path.
-	 */
-	public $path;
+		$SearchModel = new SearchModel($Automad, $searchValue, true, false);
+		$fileResultsArray = $SearchModel->searchPerFile();
+		$fileKeysArray = array();
 
-	/**
-	 * The page URL or null for shared data.
-	 */
-	public $url;
+		foreach ($fileResultsArray as $FileResultsModel) {
+			if ($dataFilePath === $FileResultsModel->path || empty($dataFilePath)) {
+				$keys = array();
 
-	/**
-	 * Initialize a new field results instance.
-	 *
-	 * @see FieldResultsModel
-	 * @param string $path
-	 * @param array $fieldResultsArray
-	 * @param string|null $url
-	 */
-	public function __construct(string $path, array $fieldResultsArray, ?string $url = null) {
-		$this->path = $path;
-		$this->fieldResultsArray = $fieldResultsArray;
-		$this->url = (string) $url;
+				foreach ($FileResultsModel->fieldResultsArray as $FieldResultsModel) {
+					$keys[] = $FieldResultsModel->key;
+				}
+
+				$fileKeysArray[] = new FileKeysModel($FileResultsModel->path, $keys);
+			}
+		}
+
+		$ReplacementModel = new ReplacementModel($searchValue, $replaceValue, true, false);
+		$ReplacementModel->replaceInFiles($fileKeysArray);
+
+		return true;
 	}
 }

@@ -34,13 +34,14 @@
  * https://automad.org/license
  */
 
-namespace Automad\Models;
+namespace Automad\Admin\Models;
 
 use Automad\Core\Automad;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
 use Automad\Core\Page;
 use Automad\Core\PageIndex;
+use Automad\Core\Parse;
 use Automad\Core\Str;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -141,7 +142,7 @@ class PageModel {
 		$duplicatePath = FileSystem::appendSuffixToPath($duplicatePath, $suffix);
 
 		FileSystem::copyPageFiles($Page->path, $duplicatePath);
-		FileSystem::appendSuffixToTitle($duplicatePath, $suffix);
+		self::appendSuffixToTitle($duplicatePath, $suffix);
 
 		PageIndex::append(dirname($duplicatePath), $duplicatePath);
 
@@ -169,7 +170,7 @@ class PageModel {
 	 * @return string the new page path
 	 */
 	public static function moveDirAndUpdateLinks(Page $Page, string $destPath, string $slug) {
-		PageIndex::remove(dirname($Page->path), $Page->path);
+		$oldPath = $Page->path;
 
 		$newPagePath = FileSystem::movePageDir(
 			$Page->path,
@@ -177,7 +178,7 @@ class PageModel {
 			$slug
 		);
 
-		PageIndex::append($destPath, $newPagePath);
+		PageIndex::replace($destPath, $oldPath, $newPagePath);
 		self::updatePageLinks($Page, $newPagePath);
 
 		return $newPagePath;
@@ -246,6 +247,8 @@ class PageModel {
 				dirname($Page->path),
 				$newSlug
 			);
+
+			$newSlug = basename($newPagePath);
 		} else {
 			// In case the page is the home page, the path is just '/'.
 			$newPagePath = '/';
@@ -279,7 +282,6 @@ class PageModel {
 
 		if ($Page->path != $newPagePath ||
 			$data[AM_KEY_TITLE] != $Page->data[AM_KEY_TITLE] ||
-			$data[AM_KEY_URL] != $Page->data[AM_KEY_URL] ||
 			$newSlug != $slug ||
 			$private != $Page->private
 		) {
@@ -317,6 +319,27 @@ class PageModel {
 		}
 
 		return Str::slug($slug);
+	}
+
+	/**
+	 * Open a data text file under the given path, read the data,
+	 * append a suffix to the title variable and write back the data.
+	 *
+	 * @param string $path
+	 * @param string $suffix
+	 */
+	private static function appendSuffixToTitle(string $path, string $suffix) {
+		if ($suffix) {
+			$path = FileSystem::fullPagePath($path);
+			$files = FileSystem::glob($path . '*.' . AM_FILE_EXT_DATA);
+
+			if (!empty($files)) {
+				$file = reset($files);
+				$data = Parse::dataFile($file);
+				$data[AM_KEY_TITLE] .= ucwords(str_replace('-', ' ', $suffix));
+				FileSystem::writeData($data, $file);
+			}
+		}
 	}
 
 	/**

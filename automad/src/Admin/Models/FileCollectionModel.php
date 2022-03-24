@@ -34,16 +34,16 @@
  * https://automad.org/license
  */
 
-namespace Automad\Models;
+namespace Automad\Admin\Models;
 
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Core\Str;
-use Automad\UI\Utils\Messenger;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

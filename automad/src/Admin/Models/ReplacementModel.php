@@ -34,12 +34,12 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\Admin\Models;
 
+use Automad\Core\Cache;
 use Automad\Core\Debug;
+use Automad\Core\FileSystem;
 use Automad\Core\Parse;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\UICache;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -92,7 +92,7 @@ class ReplacementModel {
 	/**
 	 * Replace matches with a given string in a given list of files.
 	 *
-	 * @see \Automad\UI\Models\Search\FileKeysModel
+	 * @see \Automad\Admin\UI\Models\Search\FileKeysModel
 	 * @param array $fileKeysArray
 	 * @return bool true on success
 	 */
@@ -111,7 +111,9 @@ class ReplacementModel {
 			FileSystem::writeData($data, $file);
 		}
 
-		UICache::rebuild();
+		Cache::clear();
+		$Cache = new Cache();
+		$Cache->rebuild();
 	}
 
 	/**

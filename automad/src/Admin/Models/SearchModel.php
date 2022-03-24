@@ -34,12 +34,12 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models;
+namespace Automad\Admin\Models;
 
+use Automad\Admin\Models\Search\FieldResultsModel;
+use Automad\Admin\Models\Search\FileResultsModel;
 use Automad\Core\Automad;
 use Automad\Core\Str;
-use Automad\UI\Models\Search\FieldResultsModel;
-use Automad\UI\Models\Search\FileResultsModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -126,7 +126,7 @@ class SearchModel {
 	 * @return array the results array
 	 */
 	private function appendFieldResults(array $resultsArray, ?FieldResultsModel $results) {
-		if (is_a($results, '\Automad\UI\Models\Search\FieldResultsModel')) {
+		if (is_a($results, '\Automad\Admin\Models\Search\FieldResultsModel')) {
 			$resultsArray[] = $results;
 		}
 
@@ -169,7 +169,7 @@ class SearchModel {
 		$contextArray = array();
 
 		foreach ($results as $result) {
-			if (is_a($result, '\Automad\UI\Models\Search\FieldResultsModel')) {
+			if (is_a($result, '\Automad\Admin\Models\Search\FieldResultsModel')) {
 				$matches = array_merge($matches, $result->matches);
 				$contextArray[] = $result->context;
 			}

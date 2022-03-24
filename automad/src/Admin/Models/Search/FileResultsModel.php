@@ -34,22 +34,24 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Models\Search;
+namespace Automad\Admin\Models\Search;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * A data class to store file => key associations.
+ * A wrapper class for all results for a given data file.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileKeysModel {
+class FileResultsModel {
 	/**
-	 * The keys array.
+	 * The array of `FieldResultsModel`.
+	 *
+	 * @see FieldResultsModel
 	 */
-	public $keys;
+	public $fieldResultsArray;
 
 	/**
 	 * The file path.
@@ -57,13 +59,21 @@ class FileKeysModel {
 	public $path;
 
 	/**
-	 * Initialize a new FileKeysModel instance.
-	 *
-	 * @param string $path
-	 * @param array $keys
+	 * The page URL or null for shared data.
 	 */
-	public function __construct(string $path, array $keys) {
+	public $url;
+
+	/**
+	 * Initialize a new field results instance.
+	 *
+	 * @see FieldResultsModel
+	 * @param string $path
+	 * @param array $fieldResultsArray
+	 * @param string|null $url
+	 */
+	public function __construct(string $path, array $fieldResultsArray, ?string $url = null) {
 		$this->path = $path;
-		$this->keys = $keys;
+		$this->fieldResultsArray = $fieldResultsArray;
+		$this->url = (string) $url;
 	}
 }
