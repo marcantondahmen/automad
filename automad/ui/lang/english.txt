@@ -194,6 +194,10 @@ fileName: Filename
 
 -
 
+filterContent: Filter Content
+
+-
+
 filtersTab: Filters
 
 -

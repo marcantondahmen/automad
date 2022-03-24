@@ -86,6 +86,7 @@ import './components/Alert';
 import './components/Autocomplete';
 import './components/Copy';
 import './components/Dropdown';
+import './components/Filter';
 import './components/IconText';
 import './components/Jumpbar';
 import './components/Link';

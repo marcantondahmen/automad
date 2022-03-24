@@ -186,6 +186,7 @@ export class PageComponent extends SidebarLayoutComponent {
 								<am-file-count></am-file-count>
 							</am-switcher-link>
 						</am-switcher>
+						<am-filter placeholder="filterContent"></am-filter>
 						<am-private-indicator></am-private-indicator>
 						${more}
 					</div>
