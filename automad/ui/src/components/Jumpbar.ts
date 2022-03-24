@@ -68,14 +68,20 @@ class JumpbarComponent extends AutocompleteComponent {
 	connectedCallback(): void {
 		super.connectedCallback();
 
-		keyCombo('j', () => {
-			if (this.input === document.activeElement) {
-				this.input.blur();
-				this.close();
-			} else {
-				this.input.focus();
-			}
-		});
+		this.listeners.push(
+			keyCombo('j', () => {
+				if (App.navigationIsLocked) {
+					return;
+				}
+
+				if (this.input === document.activeElement) {
+					this.input.blur();
+					this.close();
+				} else {
+					this.input.focus();
+				}
+			})
+		);
 	}
 
 	/**

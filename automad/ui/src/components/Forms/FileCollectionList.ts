@@ -76,17 +76,23 @@ export class FileCollectionListComponent extends FormComponent {
 	protected init(): void {
 		super.init();
 
-		listen(window, filesChangedOnServerEventName, this.refresh.bind(this));
-		listen(window, appStateChangedEventName, this.refresh.bind(this));
+		this.listeners.push(
+			listen(
+				window,
+				`${appStateChangedEventName} ${filesChangedOnServerEventName}`,
+				this.refresh.bind(this)
+			)
+		);
 	}
 
 	/**
 	 * Create the form after the response was received successfully.
 	 *
 	 * @param response - the response data
+	 * @async
 	 */
-	protected processResponse(response: KeyValueMap): void {
-		super.processResponse(response);
+	protected async processResponse(response: KeyValueMap): Promise<void> {
+		await super.processResponse(response);
 
 		if (typeof response.data == 'undefined') {
 			return;

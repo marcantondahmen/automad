@@ -86,7 +86,10 @@ export class NavTreeComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(classes.nav);
 
-		listen(window, appStateChangedEventName, this.init.bind(this));
+		this.listeners.push(
+			listen(window, appStateChangedEventName, this.init.bind(this))
+		);
+
 		this.init();
 	}
 

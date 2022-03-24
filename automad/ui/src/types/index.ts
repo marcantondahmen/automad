@@ -59,6 +59,10 @@ export interface File {
 	height?: number;
 }
 
+export interface Listener {
+	remove: Function;
+}
+
 export interface NavTreeItem {
 	wrapper: HTMLElement;
 	summary: HTMLElement;

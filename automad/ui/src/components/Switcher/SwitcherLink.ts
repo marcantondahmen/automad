@@ -63,8 +63,11 @@ export class SwitcherLinkComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(window, switcherChangeEventName, this.toggle.bind(this));
-		listen(this, 'click', this.select.bind(this));
+		this.listeners.push(
+			listen(window, switcherChangeEventName, this.toggle.bind(this))
+		);
+
+		this.listeners.push(listen(this, 'click', this.select.bind(this)));
 	}
 
 	/**

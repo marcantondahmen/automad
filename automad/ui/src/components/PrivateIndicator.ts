@@ -51,7 +51,9 @@ class PrivateIndicatorComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(window, appStateChangedEventName, this.render.bind(this));
+		this.listeners.push(
+			listen(window, appStateChangedEventName, this.render.bind(this))
+		);
 
 		this.render();
 	}

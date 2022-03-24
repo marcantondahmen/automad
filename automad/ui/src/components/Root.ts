@@ -94,9 +94,11 @@ export class RootComponent extends BaseComponent {
 
 		this.update();
 
-		listen(window, 'popstate', () => {
-			App.root.update();
-		});
+		this.listeners.push(
+			listen(window, 'popstate', () => {
+				App.root.update();
+			})
+		);
 	}
 
 	/**

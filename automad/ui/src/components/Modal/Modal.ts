@@ -102,11 +102,13 @@ export class ModalComponent extends BaseComponent {
 		}
 
 		if (!this.hasAttribute('noesc')) {
-			listen(window, 'keydown', (event: KeyboardEvent) => {
-				if (this.isOpen && event.keyCode == 27) {
-					this.close();
-				}
-			});
+			this.listeners.push(
+				listen(window, 'keydown', (event: KeyboardEvent) => {
+					if (this.isOpen && event.keyCode == 27) {
+						this.close();
+					}
+				})
+			);
 		}
 	}
 

@@ -53,11 +53,13 @@ export class SwitcherLabelComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(window, switcherChangeEventName, () => {
-			this.innerHTML = query(
-				`${linkTag}[section="${getActiveSection()}"]`
-			).innerHTML;
-		});
+		this.listeners.push(
+			listen(window, switcherChangeEventName, () => {
+				this.innerHTML = query(
+					`${linkTag}[section="${getActiveSection()}"]`
+				).innerHTML;
+			})
+		);
 	}
 }
 

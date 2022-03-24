@@ -55,16 +55,18 @@ class DropdownComponent extends BaseComponent {
 	connectedCallback(): void {
 		this.classList.add(classes.dropdown);
 
-		listen(window, 'click', (event: MouseEvent) => {
-			if (
-				event.target === this ||
-				(event.target as HTMLElement).parentNode === this
-			) {
-				this.classList.toggle(classes.dropdownOpen);
-			} else {
-				this.classList.remove(classes.dropdownOpen);
-			}
-		});
+		this.listeners.push(
+			listen(window, 'click', (event: MouseEvent) => {
+				if (
+					event.target === this ||
+					(event.target as HTMLElement).parentNode === this
+				) {
+					this.classList.toggle(classes.dropdownOpen);
+				} else {
+					this.classList.remove(classes.dropdownOpen);
+				}
+			})
+		);
 	}
 }
 

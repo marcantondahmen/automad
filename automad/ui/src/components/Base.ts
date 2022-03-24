@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap } from '../types';
+import { KeyValueMap, Listener } from '../types';
 
 /**
  * The Automad base component. All Automad components are based on this class.
@@ -44,6 +44,11 @@ export abstract class BaseComponent extends HTMLElement {
 	 * Key/value pairs of the element attributes.
 	 */
 	elementAttributes: KeyValueMap = {};
+
+	/**
+	 * The array of event listeners that have to be remove on destruction.
+	 */
+	listeners: Listener[] = [];
 
 	/**
 	 * The class constructor.
@@ -74,5 +79,14 @@ export abstract class BaseComponent extends HTMLElement {
 		newValue: string
 	): void {
 		this.elementAttributes[name] = newValue || '';
+	}
+
+	/**
+	 * Remove all window event listeners when disconnecting.
+	 */
+	disconnectedCallback(): void {
+		this.listeners.forEach((listener) => {
+			listener.remove();
+		});
 	}
 }

@@ -67,7 +67,9 @@ export class SwitcherSectionComponent extends BaseComponent {
 		this.classList.add(classes.switcherSection);
 		this.toggle();
 
-		listen(window, switcherChangeEventName, this.toggle.bind(this));
+		this.listeners.push(
+			listen(window, switcherChangeEventName, this.toggle.bind(this))
+		);
 	}
 
 	/**
