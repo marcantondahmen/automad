@@ -34,9 +34,11 @@
  * https://automad.org/license
  */
 
-namespace Automad\Controllers;
+namespace Automad\Admin\Controllers;
 
-use Automad\API\Response;
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\PageModel;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
@@ -45,10 +47,8 @@ use Automad\Core\PageIndex;
 use Automad\Core\Parse;
 use Automad\Core\Request;
 use Automad\Core\Selection;
-use Automad\Models\PageModel;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -27,57 +27,68 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2016-2021 by Marc Anton Dahmen
+ * Copyright (c) 2021-2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Controllers;
+namespace Automad\Admin\Controllers;
 
-use Automad\API\Response;
-use Automad\Auth\Session;
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\FileModel;
+use Automad\Admin\UI\Utils\Messenger;
 use Automad\Core\Request;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Session controller class provides all methods related to a user session.
+ * The file controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2016-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class SessionController {
+class FileController {
 	/**
-	 * Verify login information based on $_POST.
+	 * Edit file information (file name and caption).
 	 *
-	 * /api/Session/login
-	 *
-	 * @return string Error message in case of an error.
+	 * @return Response the response object
 	 */
-	public static function login() {
+	public static function editInfo() {
 		$Response = new Response();
+		$Messenger = new Messenger();
 
-		if (Session::login(Request::post('name-or-email'), Request::post('password'))) {
-			$Response->setRedirect('/home');
-		} else {
-			$Response->setError(Text::get('signInError'));
-		}
+		FileModel::editInfo(
+			Request::post('new-name'),
+			Request::post('old-name'),
+			Request::post('caption'),
+			$Messenger
+		);
+
+		$Response->setError($Messenger->getError());
 
 		return $Response;
 	}
 
 	/**
-	 * Log out user.
+	 * Import file from URL.
 	 *
-	 * /api/Session/logout
-	 *
-	 * @return bool true on success
+	 * @return Response the response object
 	 */
-	public static function logout() {
-		return Session::logout();
+	public static function import() {
+		$Response = new Response();
+		$Messenger = new Messenger();
+
+		FileModel::import(
+			Request::post('importUrl'),
+			Request::post('url'),
+			$Messenger
+		);
+
+		$Response->setError($Messenger->getError());
+
+		return $Response;
 	}
 }

@@ -34,15 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\Controllers;
+namespace Automad\Admin\Controllers;
 
-use Automad\API\Response;
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\FileCollectionModel;
+use Automad\Admin\UI\Utils\Messenger;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
 use Automad\Core\FileSystem;
 use Automad\Core\Request;
-use Automad\Models\FileCollectionModel;
-use Automad\UI\Utils\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -27,43 +27,50 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021-2022 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\Controllers;
+namespace Automad\Admin\Controllers;
 
-use Automad\API\Response;
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\ImageModel;
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Core\Cache;
+use Automad\Core\FileSystem;
 use Automad\Core\Request;
-use Automad\Models\FileModel;
-use Automad\UI\Utils\Messenger;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The file controller.
+ * The Image controller.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021-2022 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class FileController {
+class ImageController {
 	/**
-	 * Edit file information (file name and caption).
+	 * Save an image that was modified in FileRobot.
 	 *
 	 * @return Response the response object
 	 */
-	public static function editInfo() {
+	public static function save() {
 		$Response = new Response();
 		$Messenger = new Messenger();
 
-		FileModel::editInfo(
-			Request::post('new-name'),
-			Request::post('old-name'),
-			Request::post('caption'),
+		$Cache = new Cache();
+		$Automad = $Cache->getAutomad();
+		$path = FileSystem::getPathByPostUrl($Automad);
+
+		ImageModel::save(
+			$path,
+			Request::post('name'),
+			Request::post('extension'),
+			Request::post('imageBase64'),
 			$Messenger
 		);
 
@@ -73,21 +80,16 @@ class FileController {
 	}
 
 	/**
-	 * Import file from URL.
+	 * Select an image.
 	 *
 	 * @return Response the response object
 	 */
-	public static function import() {
+	public static function select() {
 		$Response = new Response();
-		$Messenger = new Messenger();
 
-		FileModel::import(
-			Request::post('importUrl'),
-			Request::post('url'),
-			$Messenger
-		);
-
-		$Response->setError($Messenger->getError());
+		// Check if file from a specified page or the shared files will be listed and managed.
+		// To display a file list of a certain page, its URL has to be submitted along with the form data.
+		//$Response->setHtml(ImageModel::select(Request::post('url')));
 
 		return $Response;
 	}

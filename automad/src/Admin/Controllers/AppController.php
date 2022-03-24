@@ -34,16 +34,16 @@
  * https://automad.org/license
  */
 
-namespace Automad\Controllers;
+namespace Automad\Admin\Controllers;
 
-use Automad\API\Response;
+use Automad\Admin\API\Response;
+use Automad\Admin\Models\AppModel;
+use Automad\Admin\UI\Utils\SwitcherSections;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\FileUtils;
-use Automad\Models\AppModel;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
-use Automad\UI\Utils\SwitcherSections;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
