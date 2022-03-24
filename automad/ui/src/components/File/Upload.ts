@@ -32,7 +32,6 @@
  * Licensed under the MIT license.
  */
 
-import Draggabilly from 'draggabilly';
 import Dropzone, { DropzoneFile, DropzoneOptions } from 'dropzone';
 import {
 	App,
@@ -46,6 +45,7 @@ import {
 } from '../../core';
 import { BaseComponent } from '../Base';
 import { FileCollectionListComponent } from '../Forms/FileCollectionList';
+import { ModalComponent } from '../Modal/Modal';
 
 /**
  * An upload component.
@@ -71,12 +71,12 @@ class UploadComponent extends BaseComponent {
 	/**
 	 * The preview queue window.
 	 */
-	queueWindow: HTMLElement = null;
+	modal: ModalComponent = null;
 
 	/**
 	 * The preview container.
 	 */
-	queuePreviews: HTMLElement = null;
+	queue: HTMLElement = null;
 
 	/**
 	 * The dropzone instance options.
@@ -96,7 +96,7 @@ class UploadComponent extends BaseComponent {
 			parallelUploads: 2,
 			maxFilesize: 512,
 			acceptedFiles: acceptedFiles,
-			previewsContainer: this.queuePreviews,
+			previewsContainer: this.queue,
 			addRemoveLinks: true,
 			dictInvalidFileType: App.text('unsupportedFileTypeError'),
 			dictCancelUpload: App.text('cancel'),
@@ -117,12 +117,12 @@ class UploadComponent extends BaseComponent {
 		this.classList.add(classes.upload);
 
 		this.form = this.createForm();
-		this.queueWindow = this.createWindow();
-		this.queuePreviews = create(
+		this.modal = create('am-modal', [], { noclick: '', noesc: '' }, this);
+		this.queue = create(
 			'div',
-			[classes.uploadPreviews],
+			[classes.uploadPreviews, classes.modalDialog],
 			{},
-			this.queueWindow
+			this.modal
 		);
 
 		this.dropzone = new Dropzone(this.form, this.options);
@@ -158,7 +158,9 @@ class UploadComponent extends BaseComponent {
 			'am-file-collection-list'
 		) as FileCollectionListComponent;
 
-		notifySuccess(html`$${App.text('uploadedSuccess')}:<br />${file.name}`);
+		notifySuccess(
+			html`$${App.text('uploadedSuccess')}:<br />$${file.name}`
+		);
 
 		this.dropzone.removeFile(file);
 		fileCollection.refresh();
@@ -168,14 +170,14 @@ class UploadComponent extends BaseComponent {
 	 * The files added event handler.
 	 */
 	private onAddedFiles(): void {
-		this.queueWindow.classList.add(classes.uploadWindowOpen);
+		this.modal.open();
 	}
 
 	/**
 	 * The completed all event handler.
 	 */
 	private onQueueComplete(): void {
-		this.queueWindow.classList.remove(classes.uploadWindowOpen);
+		this.modal.close();
 	}
 
 	/**
@@ -210,22 +212,6 @@ class UploadComponent extends BaseComponent {
 		}
 
 		return form;
-	}
-
-	/**
-	 * Create the progress window.
-	 *
-	 * @returns the window element
-	 */
-	private createWindow(): HTMLElement {
-		const queueWindow = create('div', [classes.uploadWindow], {}, this);
-		const grip = create('div', [classes.uploadWindowGrip], {}, queueWindow);
-
-		grip.innerHTML = html`<i class="bi bi-grip-horizontal"></i>`;
-
-		new Draggabilly(queueWindow, { handle: grip });
-
-		return queueWindow;
 	}
 }
 

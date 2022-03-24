@@ -10,7 +10,6 @@
     "build:ui": "webpack --config automad/ui/webpack.config.js --mode production"
   },
   "devDependencies": {
-    "@types/draggabilly": "^2.1.3",
     "@types/dropzone": "^5.7.4",
     "@types/sortablejs": "^1.10.7",
     "@types/toastify-js": "^1.11.0",
@@ -21,7 +20,6 @@
     "browser-sync-webpack-plugin": "^2.3.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
-    "draggabilly": "^3.0.0",
     "dropzone": "^6.0.0-beta.2",
     "file-loader": "^6.2.0",
     "filerobot-image-editor": "^4.0.0-beta.32",
