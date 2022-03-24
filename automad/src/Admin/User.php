@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\Auth;
+namespace Automad\Admin;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

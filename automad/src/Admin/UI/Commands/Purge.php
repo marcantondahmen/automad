@@ -27,40 +27,50 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2020-2021 by Marc Anton Dahmen
+ * Copyright (c) 2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Autocomplete;
+namespace Automad\Admin\UI\Commands;
 
-use Automad\Core\Automad;
+use Automad\Admin\UI\Utils\FileSystem;
 
-defined('AUTOMAD') or die('Direct access not permitted!');
+defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The autocomplete JSON data for links component.
+ * The purge command.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Links {
+class Purge extends AbstractCommand {
 	/**
-	 * Generate the autocomplete object for a link field.
+	 * Get the command help.
 	 *
-	 * @param Automad $Automad
-	 * @return array
+	 * @return string the command help
 	 */
-	public static function render(Automad $Automad) {
-		$autocomplete = array();
+	public static function help() {
+		return 'Purge the cache directory including all cached images and deleted pages.';
+	}
 
-		foreach ($Automad->getCollection() as $Page) {
-			$autocomplete[] = array('value' => $Page->url, 'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)));
-		}
+	/**
+	 * Get the command name.
+	 *
+	 * @return string the command name
+	 */
+	public static function name() {
+		return 'purge';
+	}
 
-		return $autocomplete;
+	/**
+	 * The actual command action.
+	 */
+	public static function run() {
+		echo 'Purging cache directory ...' . PHP_EOL;
+		FileSystem::purgeCache();
 	}
 }

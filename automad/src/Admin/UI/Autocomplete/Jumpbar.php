@@ -34,12 +34,12 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Autocomplete;
+namespace Automad\Admin\UI\Autocomplete;
 
+use Automad\Admin\UI\Utils\SwitcherSections;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Automad;
 use Automad\Core\Selection;
-use Automad\UI\Utils\SwitcherSections;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

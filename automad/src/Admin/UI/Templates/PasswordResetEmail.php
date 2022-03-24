@@ -34,59 +34,45 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Templates;
+namespace Automad\Admin\UI\Templates;
 
-use Automad\UI\Utils\Text;
+use Automad\Admin\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * An invitation email body.
+ * A password reset email body.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class InvitationEmail extends AbstractEmailBody {
+class PasswordResetEmail extends AbstractEmailBody {
 	/**
-	 * Render an invitation email body.
+	 * Render a password reset email body.
 	 *
 	 * @param string $website
 	 * @param string $username
-	 * @param string $link
-	 * @return string The rendered invitation email body
+	 * @param string $token
+	 * @return string The rendered password reset email body
 	 */
-	public static function render(string $website, string $username, string $link) {
+	public static function render(string $website, string $username, string $token) {
 		$h1Style = self::$h1Style;
 		$pStyle = self::$paragraphStyle;
 		$codeStyle = self::$codeStyle;
 		$Text = Text::getObject();
-		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('email_invite_text'));
+		$textTop = str_replace('{}', "<b>$website</b>", Text::get('email_reset_password_text_top'));
 
 		$content = <<< HTML
 			<h1 $h1Style>$Text->email_hello $username,</h1>
 			<p $pStyle>
-				$inviteText
+				$textTop
 			</p>
 			<p $codeStyle>
-				$Text->sys_user_name: $username
+				$token
 			</p>
 			<p $pStyle>
-				<a 
-				href="$link" 
-				style="
-					display: block;
-					text-align: center; 
-					margin: 0 0 20px 0; 
-					color: #ffffff;
-					background-color: #121212;
-					border-radius: 6px; 
-					text-decoration: none;
-					font-size: 18px; 
-					line-height: 48px;
-				">
-					$Text->email_invite_button
-				</a>
+				$Text->email_reset_password_text_bottom
 			</p>
 		HTML;
 

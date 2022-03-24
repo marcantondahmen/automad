@@ -34,67 +34,62 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Utils;
+namespace Automad\Admin\UI\Templates;
+
+use Automad\Admin\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The Messenger object allows for pushing error messages to the calling method in order to separate return values from error details.
+ * An invitation email body.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Messenger {
+class InvitationEmail extends AbstractEmailBody {
 	/**
-	 * The last pushed error.
-	 */
-	private $error = null;
-
-	/**
-	 * The last pushed success.
-	 */
-	private $success = null;
-
-	/**
-	 * The messenger constructor.
-	 */
-	public function __construct() {
-	}
-
-	/**
-	 * Return the stored error message.
+	 * Render an invitation email body.
 	 *
-	 * @return string|null the error message
+	 * @param string $website
+	 * @param string $username
+	 * @param string $link
+	 * @return string The rendered invitation email body
 	 */
-	public function getError() {
-		return $this->error;
-	}
+	public static function render(string $website, string $username, string $link) {
+		$h1Style = self::$h1Style;
+		$pStyle = self::$paragraphStyle;
+		$codeStyle = self::$codeStyle;
+		$Text = Text::getObject();
+		$inviteText = str_replace('{}', "<b>$website</b>", Text::get('email_invite_text'));
 
-	/**
-	 * Return the stored success message.
-	 *
-	 * @return string|null the success message
-	 */
-	public function getSuccess() {
-		return $this->success;
-	}
+		$content = <<< HTML
+			<h1 $h1Style>$Text->email_hello $username,</h1>
+			<p $pStyle>
+				$inviteText
+			</p>
+			<p $codeStyle>
+				$Text->username: $username
+			</p>
+			<p $pStyle>
+				<a 
+				href="$link" 
+				style="
+					display: block;
+					text-align: center; 
+					margin: 0 0 20px 0; 
+					color: #ffffff;
+					background-color: #121212;
+					border-radius: 6px; 
+					text-decoration: none;
+					font-size: 18px; 
+					line-height: 48px;
+				">
+					$Text->email_invite_button
+				</a>
+			</p>
+		HTML;
 
-	/**
-	 * Set the last error.
-	 *
-	 * @param string $message
-	 */
-	public function setError(string $message) {
-		$this->error = $message;
-	}
-
-	/**
-	 * Set the last success message.
-	 *
-	 * @param string $message
-	 */
-	public function setSuccess(string $message) {
-		$this->success = $message;
+		return self::body($content);
 	}
 }

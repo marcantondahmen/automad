@@ -34,27 +34,29 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Commands;
+namespace Automad\Admin\UI\Commands;
 
-use Automad\System\Update as SystemUpdate;
+use Automad\System\User;
+use Automad\Admin\UI\Models\UserCollectionModel;
+use Automad\Admin\UI\Utils\Messenger;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The update command.
+ * The createuser command.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2018-2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class Update extends AbstractCommand {
+class CreateUser extends AbstractCommand {
 	/**
 	 * Get the command help.
 	 *
 	 * @return string the command help
 	 */
 	public static function help() {
-		return 'Update Automad to the latest version.';
+		return 'Create a new user with a random name and password.';
 	}
 
 	/**
@@ -63,33 +65,31 @@ class Update extends AbstractCommand {
 	 * @return string the command name
 	 */
 	public static function name() {
-		return 'update';
+		return 'createuser';
 	}
 
 	/**
 	 * The actual command action.
 	 */
 	public static function run() {
-		if (strpos(AM_BASE_DIR, '/automad-dev') !== false) {
-			exit('Can\'t run updates within the development repository!' . PHP_EOL . PHP_EOL);
-		}
+		echo 'Creating new user account for the Automad dashboard ...' . PHP_EOL . PHP_EOL;
 
-		echo 'Automad version ' . AM_VERSION . PHP_EOL;
-		echo 'Update branch is ' . AM_UPDATE_BRANCH . PHP_EOL;
+		$UserCollectionModel = new UserCollectionModel();
+		$Messenger = new Messenger();
 
-		$updateVersion = SystemUpdate::getVersion();
+		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
+		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
 
-		if (version_compare(AM_VERSION, $updateVersion, '<')) {
-			echo 'Updating to version ' . $updateVersion . PHP_EOL;
-			$Response = SystemUpdate::run();
+		$UserCollectionModel->createUser($name, $password, $password, null, $Messenger);
+		$UserCollectionModel->save($Messenger);
 
-			if (!empty($Response->getCli())) {
-				echo $Response->getCli() . PHP_EOL;
-			} else {
-				echo 'Error! Update has failed!' . PHP_EOL;
-			}
+		if (!$Messenger->getError()) {
+			echo '--------------------' . PHP_EOL;
+			echo 'Name:     ' . $name . PHP_EOL;
+			echo 'Password: ' . $password . PHP_EOL;
+			echo '--------------------' . PHP_EOL;
 		} else {
-			echo 'Up to date!' . PHP_EOL;
+			echo 'Error! Creating of user account failed.' . PHP_EOL;
 		}
 	}
 }

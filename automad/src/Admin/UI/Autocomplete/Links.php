@@ -27,41 +27,40 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2020-2021 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  * https://automad.org/license
  */
 
-namespace Automad\UI\Commands;
+namespace Automad\Admin\UI\Autocomplete;
 
-defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
+use Automad\Core\Automad;
+
+defined('AUTOMAD') or die('Direct access not permitted!');
 
 /**
- * The abstract base command class.
+ * The autocomplete JSON data for links component.
  *
  * @author Marc Anton Dahmen
- * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
+ * @copyright Copyright (c) 2020-2021 by Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-abstract class AbstractCommand {
+class Links {
 	/**
-	 * Get the command help.
+	 * Generate the autocomplete object for a link field.
 	 *
-	 * @return string the command help
+	 * @param Automad $Automad
+	 * @return array
 	 */
-	abstract public static function help();
+	public static function render(Automad $Automad) {
+		$autocomplete = array();
 
-	/**
-	 * Get the command name.
-	 *
-	 * @return string the command name
-	 */
-	abstract public static function name();
+		foreach ($Automad->getCollection() as $Page) {
+			$autocomplete[] = array('value' => $Page->url, 'title' => htmlspecialchars($Page->get(AM_KEY_TITLE)));
+		}
 
-	/**
-	 * The actual command action.
-	 */
-	abstract public static function run();
+		return $autocomplete;
+	}
 }

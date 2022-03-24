@@ -34,43 +34,34 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Commands;
-
-use Automad\Core\Cache;
+namespace Automad\Admin\UI\Commands;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
 /**
- * The clearcache command.
+ * The abstract base command class.
  *
  * @author Marc Anton Dahmen
  * @copyright Copyright (c) 2021 Marc Anton Dahmen - https://marcdahmen.de
  * @license MIT license - https://automad.org/license
  */
-class ClearCache extends AbstractCommand {
+abstract class AbstractCommand {
 	/**
 	 * Get the command help.
 	 *
 	 * @return string the command help
 	 */
-	public static function help() {
-		return 'Clear the page cache.';
-	}
+	abstract public static function help();
 
 	/**
 	 * Get the command name.
 	 *
 	 * @return string the command name
 	 */
-	public static function name() {
-		return 'clearcache';
-	}
+	abstract public static function name();
 
 	/**
 	 * The actual command action.
 	 */
-	public static function run() {
-		echo 'Clearing page cache ...' . PHP_EOL;
-		Cache::clear();
-	}
+	abstract public static function run();
 }

@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\API;
+namespace Automad\Admin\API;
 
 use Automad\Core\Debug;
 use Automad\Core\Str;
@@ -64,7 +64,7 @@ class RequestHandler {
 
 		Debug::log($apiRoute);
 
-		$method = '\\Automad\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
+		$method = '\\Automad\\Admin\\Controllers\\' . str_replace('/', 'Controller::', $apiRoute);
 		$parts = explode('::', $method);
 		$class = $parts[0];
 

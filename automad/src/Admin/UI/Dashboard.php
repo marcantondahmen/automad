@@ -34,7 +34,7 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI;
+namespace Automad\Admin\UI;
 
 use Automad\System\Asset;
 

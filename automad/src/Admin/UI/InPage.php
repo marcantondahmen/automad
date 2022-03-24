@@ -34,18 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI;
+namespace Automad\Admin\UI;
 
+use Automad\Admin\Session;
+use Automad\Admin\UI\Components\Modal\Link;
+use Automad\Admin\UI\Components\Modal\SelectImage;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Context;
-use Automad\Core\Str;
 use Automad\Engine\PatternAssembly;
-use Automad\UI\Components\Header\BlockSnippetArrays;
-use Automad\UI\Components\Header\EditorTextModules;
-use Automad\UI\Components\Modal\Link;
-use Automad\UI\Components\Modal\SelectImage;
-use Automad\UI\Utils\Session;
-use Automad\UI\Utils\Text;
-use Automad\UI\Utils\SwitcherSections;
+use Automad\System\Asset;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -61,10 +58,6 @@ class InPage {
 	 * The constructor.
 	 */
 	public function __construct() {
-		if (Session::getUsername()) {
-			// Prepare text modules.
-			Text::parseModules();
-		}
 	}
 
 	/**
@@ -112,22 +105,16 @@ class InPage {
 	 * @return string The processed markup
 	 */
 	private function injectAssets(string $str) {
-		$version = AM_VERSION;
-		$baseUrl = AM_BASE_URL;
-		$versionSanitized = Str::sanitize(AM_VERSION);
-		$snippets = BlockSnippetArrays::render();
-		$editorText = EditorTextModules::render();
+		$fn = function ($expression) {
+			return $expression;
+		};
 
 		$assets = <<< HTML
 			<!-- Automad UI -->
-			<link href="{$baseUrl}/automad/dist/libs.min.css?v={$versionSanitized}" rel="stylesheet">
-			<link href="{$baseUrl}/automad/dist/automad.min.css?v={$versionSanitized}" rel="stylesheet">
-			<script>window.AM_VERSION = "{$version}"</script>
-			<script type="text/javascript" src="{$baseUrl}/automad/dist/libs.min.js?v={$versionSanitized}"></script>
-			<script type="text/javascript" src="{$baseUrl}/automad/dist/automad.min.js?v={$versionSanitized}"></script>
-			<script type="text/javascript">$.noConflict(true);delete window.UIkit;delete window.UIkit2;</script>
-			$snippets
-			$editorText
+			{$fn(Asset::css('ui/dist/vendor.bundle.css'))}
+			{$fn(Asset::css('ui/dist/ui.bundle.css'))}
+			{$fn(Asset::js('ui/dist/vendor.bundle.js'))}
+			{$fn(Asset::js('ui/dist/ui.bundle.js'))}
 			<!-- Automad UI end -->
 		HTML;
 
@@ -147,17 +134,15 @@ class InPage {
 	 */
 	private function injectMarkup(string $str) {
 		$urlBase = AM_BASE_URL;
-		$urlGui = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
-		$urlData = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . SwitcherSections::get()->content->data;
-		$urlFiles = $urlGui . '?' . http_build_query(array('view' => 'Page', 'url' => AM_REQUEST)) . '#' . SwitcherSections::get()->content->files;
-		$urlSys = $urlGui . '?view=System';
+		$urlUI = AM_BASE_INDEX . AM_PAGE_DASHBOARD;
+		$urlSys = $urlUI . '/System';
 		$attr = 'class="am-inpage-menu-button" data-uk-tooltip';
 		$request = AM_REQUEST;
 		$logoSvg = file_get_contents(AM_BASE_DIR . '/automad/ui/svg/logo.svg');
 		$Text = Text::getObject();
 
-		$modalSelectImage = SelectImage::render();
-		$modalLink = Link::render();
+		//$modalSelectImage = SelectImage::render();
+		//$modalLink = Link::render();
 
 		$queryString = '';
 
@@ -165,14 +150,14 @@ class InPage {
 			$queryString = $_SERVER['QUERY_STRING'];
 		}
 
-		$html = <<< HTML
+		/* $html = <<< HTML
 			<div class="am-inpage" data-am-base-url="$urlBase">
 				<div class="am-inpage-menubar">
 					<div class="uk-button-group">
-						<a href="$urlGui" class="am-inpage-menu-button">$logoSvg</a>
+						<a href="$urlUI" class="am-inpage-menu-button">$logoSvg</a>
 						<a href="$urlData" title="$Text->btn_data" $attr><i class="uk-icon-file-text-o"></i></a>
-						<a href="$urlFiles" title="$Text->btn_files" $attr><i class="uk-icon-folder-open-o"></i></a>
-						<a href="$urlSys" title="$Text->sys_title" $attr><i class="uk-icon-sliders"></i></a>
+						<a href="$urlFiles" title="$Text->uploadedFiles" $attr><i class="uk-icon-folder-open-o"></i></a>
+						<a href="$urlSys" title="$Text->systemTitle" $attr><i class="uk-icon-sliders"></i></a>
 						<a href="#" class="am-drag-handle am-inpage-menu-button">
 							<i class="uk-icon-arrows"></i>
 						</a>
@@ -181,9 +166,9 @@ class InPage {
 				<div id="am-inpage-edit-modal" class="am-fullscreen-modal uk-modal">
 					<div class="uk-modal-dialog uk-modal-dialog-blank">
 						<div class="uk-container uk-container-center">
-							<form 
-							class="uk-form uk-form-stacked" 
-							data-am-inpage-controller="${urlGui}?controller=InPage::edit"
+							<form
+							class="uk-form uk-form-stacked"
+							data-am-inpage-controller="${urlUI}?controller=InPage::edit"
 							>
 								<input type="hidden" name="url" value="$request" />
 								<input type="hidden" name="query" value="$queryString" />
@@ -196,7 +181,7 @@ class InPage {
 			$modalLink
 		HTML;
 
-		return str_replace('</body>', $html . '</body>', $str);
+		return str_replace('</body>', $html . '</body>', $str); */
 	}
 
 	/**

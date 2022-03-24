@@ -34,9 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI;
+namespace Automad\Admin\UI;
 
-use Automad\UI\Utils\FileSystem;
+use Automad\Admin\UI\Utils\FileSystem;
 
 defined('AUTOMAD_CONSOLE') or die('Console only!' . PHP_EOL);
 
@@ -72,7 +72,7 @@ class Console {
 		}
 
 		$classList = array_filter(get_declared_classes(), function ($cls) {
-			return (strpos($cls, 'Automad\UI\Commands') !== false && strpos($cls, 'Commands\AbstractCommand') === false);
+			return (strpos($cls, 'Automad\Admin\UI\Commands') !== false && strpos($cls, 'Commands\AbstractCommand') === false);
 		});
 
 		$commands = array();

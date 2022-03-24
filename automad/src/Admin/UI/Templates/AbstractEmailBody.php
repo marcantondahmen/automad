@@ -34,9 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Templates;
+namespace Automad\Admin\UI\Templates;
 
-use Automad\UI\Utils\Text;
+use Automad\Admin\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

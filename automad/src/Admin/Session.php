@@ -34,9 +34,9 @@
  * https://automad.org/license
  */
 
-namespace Automad\Auth;
+namespace Automad\Admin;
 
-use Automad\Models\UserCollectionModel;
+use Automad\Admin\Models\UserCollectionModel;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
