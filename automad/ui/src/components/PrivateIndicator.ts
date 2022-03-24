@@ -67,7 +67,9 @@ class PrivateIndicatorComponent extends BaseComponent {
 		this.innerHTML = '';
 
 		if (App.pages[url]?.private) {
-			create('i', ['bi', 'bi-lock'], {}, this);
+			create('i', ['bi', 'bi-eye-slash-fill'], {}, this);
+		} else {
+			create('i', ['bi', 'bi-eye'], {}, this);
 		}
 	}
 }

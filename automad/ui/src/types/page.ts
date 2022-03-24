@@ -49,7 +49,6 @@ export type PageFieldGroups = {
 export interface PageMainSettingsData {
 	section: SwitcherSectionComponent;
 	url: string;
-	slug: string;
 	fields: KeyValueMap;
 	template: string;
 }

@@ -33,7 +33,7 @@
  */
 
 import { create, fire, listen, queryAll } from '.';
-import { KeyValueMap } from '../types';
+import { InputElement, KeyValueMap } from '../types';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.
@@ -42,7 +42,7 @@ export class Binding {
 	/**
 	 * The input element.
 	 */
-	input: HTMLInputElement;
+	input: InputElement;
 
 	/**
 	 * The modifier function that can optionally be defined to compute the value.
@@ -77,7 +77,7 @@ export class Binding {
 	 */
 	constructor(
 		name: string,
-		input: HTMLInputElement = null,
+		input: InputElement = null,
 		modifier: Function = null,
 		initial: any = null
 	) {
@@ -156,7 +156,7 @@ export class Bindings {
 							element.textContent = binding.value;
 							break;
 						case 'value':
-							(element as HTMLInputElement).value = binding.value;
+							(element as InputElement).value = binding.value;
 							fire('input', element);
 							break;
 						default:

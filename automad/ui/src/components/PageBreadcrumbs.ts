@@ -62,9 +62,8 @@ class PageBreadcrumbsComponent extends BaseComponent {
 	private async init(): Promise<void> {
 		this.classList.add(classes.breadcrumbs);
 
-		const response = await requestAPI('Page/breadcrumbs', {
-			url: getPageURL(),
-		});
+		const url = getPageURL();
+		const response = await requestAPI('Page/breadcrumbs', { url });
 
 		this.render(response.data);
 	}

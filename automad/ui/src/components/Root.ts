@@ -51,11 +51,6 @@ import { BaseComponent } from './Base';
  */
 export class RootComponent extends BaseComponent {
 	/**
-	 * The main child of the root element that is basically a rendered view.
-	 */
-	private node: HTMLElement;
-
-	/**
 	 * The array of observed attributes.
 	 *
 	 * @static
@@ -122,18 +117,12 @@ export class RootComponent extends BaseComponent {
 
 		await waitForPendingRequests();
 
-		if (typeof this.node !== 'undefined') {
-			this.node.replaceWith(page);
-			document.body.removeAttribute('class');
-		} else {
-			this.appendChild(page);
-		}
-
-		this.node = page;
+		this.innerHTML = '';
+		this.appendChild(page);
 
 		await waitForPendingRequests();
 
-		Bindings.connectElements(this.node);
+		Bindings.connectElements(this);
 
 		this.progressBar(100);
 

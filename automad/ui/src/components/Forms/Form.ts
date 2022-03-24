@@ -53,6 +53,10 @@ import { ModalComponent } from '../Modal/Modal';
 
 export const autoSubmitTimeout = 750;
 
+const debounced = debounce(async (callback: Function): Promise<void> => {
+	await callback();
+}, autoSubmitTimeout);
+
 /**
  * A basic form.
  *
@@ -95,7 +99,9 @@ export class FormComponent extends BaseComponent {
 	/**
 	 * Allow parallel requests.
 	 */
-	protected parallel: boolean = true;
+	protected get parallel(): boolean {
+		return true;
+	}
 
 	/**
 	 * Get the api attribute already before attributes are observed.
@@ -140,9 +146,11 @@ export class FormComponent extends BaseComponent {
 	 */
 	get formData(): KeyValueMap {
 		const data: KeyValueMap = Object.assign(
+			{},
 			this.additionalData,
 			getFormData(this)
 		);
+
 		const pageUrl = getPageURL();
 
 		if (pageUrl) {
@@ -212,27 +220,35 @@ export class FormComponent extends BaseComponent {
 			const isConfirmed = await confirm(this.confirm);
 
 			if (!isConfirmed) {
-				return null;
+				return;
 			}
 		}
+
+		const lockId = App.addNavigationLock();
 
 		if (this.verifyRequired()) {
 			await requestAPI(
 				this.api,
-				this.formData,
+				this,
 				this.parallel,
-				this.processResponse.bind(this)
+				async (data: KeyValueMap) => {
+					await this.processResponse(data);
+
+					if (this.hasAttribute('event')) {
+						fire(this.getAttribute('event'));
+					}
+
+					const modal = this.parentModal;
+
+					if (modal) {
+						modal.close();
+					}
+
+					App.removeNavigationLock(lockId);
+				}
 			);
-
-			if (this.hasAttribute('event')) {
-				fire(this.getAttribute('event'));
-			}
-
-			const modal = this.parentModal;
-
-			if (modal) {
-				modal.close();
-			}
+		} else {
+			App.removeNavigationLock(lockId);
 		}
 	}
 
@@ -240,8 +256,9 @@ export class FormComponent extends BaseComponent {
 	 * Process the response that is received after submitting the form.
 	 *
 	 * @param response
+	 * @async
 	 */
-	protected processResponse(response: KeyValueMap): void {
+	protected async processResponse(response: KeyValueMap): Promise<void> {
 		if (response.redirect) {
 			App.root.setView(response.redirect);
 		}
@@ -271,7 +288,13 @@ export class FormComponent extends BaseComponent {
 	 */
 	onChange(): void {
 		if (this.auto) {
-			this.submit();
+			const lockId = App.addNavigationLock();
+
+			debounced(async () => {
+				await this.submit();
+
+				App.removeNavigationLock(lockId);
+			});
 		}
 	}
 
@@ -279,18 +302,12 @@ export class FormComponent extends BaseComponent {
 	 * Watch the form for changes.
 	 */
 	protected watch(): void {
-		const onChangeHandler = debounce(() => {
-			this.onChange();
-		}, autoSubmitTimeout);
-
 		listen(
 			this,
-			'change keydown cut paste drop input change',
-			onChangeHandler.bind(this),
-			'input, textarea, am-editor'
+			'change keydown cut paste drop input',
+			this.onChange.bind(this),
+			'input, textarea, select, am-editor'
 		);
-
-		listen(this, 'change', onChangeHandler.bind(this), 'select, am-editor');
 	}
 
 	/**
@@ -300,9 +317,9 @@ export class FormComponent extends BaseComponent {
 	 */
 	private verifyRequired(): boolean {
 		const requiredInputs: HTMLElement[] = queryAll('[required]', this);
-		const requiredEmpty: HTMLInputElement[] = [];
+		const requiredEmpty: InputElement[] = [];
 
-		requiredInputs.forEach((input: HTMLInputElement) => {
+		requiredInputs.forEach((input: InputElement) => {
 			if (!input.value.trim()) {
 				requiredEmpty.push(input);
 			}

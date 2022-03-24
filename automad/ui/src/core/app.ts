@@ -229,9 +229,9 @@ export class App {
 	 * @static
 	 */
 	static async updateState(): Promise<void> {
-		const response = await requestAPI('App/updateState');
+		const response = await requestAPI('App/updateState', null, false);
 
-		this._state = Object.assign(this._state, response.data);
+		this._state = Object.assign({}, this._state, response.data);
 		fire(appStateChangedEventName);
 	}
 

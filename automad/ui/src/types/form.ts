@@ -54,14 +54,16 @@ export interface FieldGroupData {
 	section: SwitcherSectionComponent;
 	fields: KeyValueMap;
 	tooltips: KeyValueMap;
+	shared: KeyValueMap;
 }
 
 export interface FieldInitData {
 	key: string;
-	value: string | KeyValueMap | boolean;
+	value: string | number | KeyValueMap | boolean;
 	name: string;
 	tooltip?: string;
 	label?: string;
+	placeholder?: string | number | KeyValueMap | boolean;
 }
 
 export interface FieldRenderData extends Omit<FieldInitData, 'key'> {

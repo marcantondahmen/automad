@@ -36,14 +36,13 @@ import './styles/ui.less';
 
 import './components/Fields/Checkbox';
 import './components/Fields/CheckboxLarge';
-import './components/Fields/CheckboxPage';
+import './components/Fields/CheckboxSelect';
 import './components/Fields/Color';
 import './components/Fields/Date';
 import './components/Fields/Editor';
 import './components/Fields/Field';
 import './components/Fields/Image';
 import './components/Fields/Markdown';
-import './components/Fields/Number';
 import './components/Fields/PageTags';
 import './components/Fields/PageTemplate';
 import './components/Fields/Textarea';

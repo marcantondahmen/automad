@@ -33,6 +33,7 @@
  */
 
 import { App, create, fire, notifyError, query } from '.';
+import { FormComponent } from '../components/Forms/Form';
 import { KeyValueMap } from '../types';
 
 /**
@@ -73,23 +74,30 @@ export const request = async (
  *
  * @see {@link request}
  * @param route
- * @param [data]
+ * @param [dataOrForm]
  * @param [callback]
  * @returns the Promise
  * @async
  */
 export const requestAPI = async (
 	route: string,
-	data: KeyValueMap = null,
+	dataOrForm: KeyValueMap | FormComponent = null,
 	parallel: boolean = true,
 	callback: Function = null
 ): Promise<KeyValueMap> => {
-	if (parallel === false) {
-		await waitForPendingRequests();
+	if (!parallel) {
+		while (!PendingRequests.idle) {
+			await waitForPendingRequests();
+		}
 	}
 
 	PendingRequests.add();
 
+	// A form component can be used instead of a KeyValueMap to get the actual form data at the time when
+	// the request is send to the server in order to be able to avoid outdated data from when a
+	// non-parallel request was queued. Note that  between queuing a request and the actual time of submission,
+	// form data can change due to bindings.
+	let data = dataOrForm?.formData || dataOrForm;
 	let responseData;
 
 	try {

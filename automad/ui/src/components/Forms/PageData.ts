@@ -64,11 +64,17 @@ import { PageTemplateComponent } from '../Fields/PageTemplate';
  * @param params.keys - the array of variable keys for the field group
  * @param params.pageData - the data object that was loaded from the page's data file
  * @param params.tooltips - the field tooltips
+ * @param params.shared - the shared fallback data
  */
-const fieldGroup = ({ section, fields, tooltips }: FieldGroupData): void => {
+const fieldGroup = ({
+	section,
+	fields,
+	tooltips,
+	shared,
+}: FieldGroupData): void => {
 	const prefixMap = {
 		'+': 'am-editor',
-		checkbox: 'am-checkbox-page',
+		checkbox: 'am-checkbox-select',
 		color: 'am-color',
 		date: 'am-date',
 		text: 'am-markdown',
@@ -92,6 +98,7 @@ const fieldGroup = ({ section, fields, tooltips }: FieldGroupData): void => {
 				value: fields[key],
 				tooltip: tooltips[key],
 				name: `data[${key}]`,
+				placeholder: shared[key],
 			});
 		}
 	});
@@ -205,6 +212,8 @@ const updateUI = async (
 	pageBindings: PageBindings
 ): Promise<void> => {
 	if (update.slug && update.origUrl) {
+		const lockId = App.addNavigationLock();
+
 		const { slug, origUrl } = update;
 		const urlObject = new URL(window.location.href);
 		const {
@@ -214,15 +223,17 @@ const updateUI = async (
 			slugBinding,
 		} = pageBindings;
 
-		urlObject.searchParams.set('url', update.origUrl);
-		window.history.replaceState(null, null, urlObject);
-
 		pageUrlBinding.value = origUrl;
 		pageUrlWithBaseBinding.value = origUrl;
 		pageLinkUIBinding.value = origUrl;
 		slugBinding.value = slug;
 
+		urlObject.searchParams.set('url', update.origUrl);
+		window.history.replaceState(null, null, urlObject);
+
 		await App.updateState();
+
+		App.removeNavigationLock(lockId);
 	}
 };
 
@@ -249,7 +260,9 @@ export class PageDataComponent extends FormComponent {
 	/**
 	 * Wait for pending requests.
 	 */
-	protected parallel = false;
+	protected get parallel(): boolean {
+		return false;
+	}
 
 	/**
 	 * Submit form data on changes.
@@ -289,7 +302,6 @@ export class PageDataComponent extends FormComponent {
 	private mainSettings({
 		section,
 		url,
-		slug,
 		fields,
 		template,
 	}: PageMainSettingsData): void {
@@ -336,7 +348,7 @@ export class PageDataComponent extends FormComponent {
 				bind: 'pageUrlWithBase',
 				bindto: 'textContent href',
 			},
-			section
+			create('div', [], {}, section)
 		).innerHTML = fields[App.reservedFields.AM_KEY_URL] || url;
 
 		createMainField(
@@ -415,9 +427,10 @@ export class PageDataComponent extends FormComponent {
 	 * Create the form after the response was received successfully.
 	 *
 	 * @param response - the response data
+	 * @async
 	 */
-	protected processResponse(response: KeyValueMap): void {
-		super.processResponse(response);
+	protected async processResponse(response: KeyValueMap): Promise<void> {
+		await super.processResponse(response);
 
 		if (response.code != 200) {
 			this.pageNotFound();
@@ -430,7 +443,7 @@ export class PageDataComponent extends FormComponent {
 		}
 
 		if (response.data.update) {
-			updateUI(response.data.update, this.pageBindings);
+			await updateUI(response.data.update, this.pageBindings);
 
 			return;
 		}
@@ -445,7 +458,7 @@ export class PageDataComponent extends FormComponent {
 	 * @param data
 	 */
 	private render(data: KeyValueMap): void {
-		const { url, slug, fields, shared, template } = data;
+		const { url, fields, shared, template } = data;
 
 		const themeKey = App.reservedFields.AM_KEY_THEME;
 		const themes = App.themes;
@@ -465,7 +478,6 @@ export class PageDataComponent extends FormComponent {
 		this.mainSettings({
 			section: this.sections.settings,
 			url,
-			slug,
 			fields,
 			template,
 		});
@@ -475,6 +487,7 @@ export class PageDataComponent extends FormComponent {
 				section: this.sections[item],
 				fields: fieldGroups[item],
 				tooltips,
+				shared,
 			});
 		});
 	}

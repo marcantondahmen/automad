@@ -38,17 +38,7 @@ import { InputElement, KeyValueMap } from '../types';
 /**
  * The array of valied field selectors that are used to collect the form data.
  */
-const formDataControls: string[] = [
-	'input[type="text"]',
-	'input[type="password"]',
-	'input[type="datetime-local"]',
-	'input[type="hidden"]',
-	'input[type="checkbox"]:checked',
-	'input[type="radio"]:checked',
-	'textarea',
-	'select',
-	'am-editor',
-];
+const formDataControls: string[] = ['input', 'textarea', 'select', 'am-editor'];
 
 /**
  * Collect all the form data to be submitted. Note that excludes all values of unchecked checkboxes and radios.
@@ -59,13 +49,14 @@ const formDataControls: string[] = [
 export const getFormData = (container: HTMLElement): KeyValueMap => {
 	const data: KeyValueMap = {};
 
-	queryAll(formDataControls.join(','), container).forEach(
-		(field: InputElement) => {
-			const name = field.getAttribute('name');
-			const value = field.value;
+	queryAll(formDataControls.join(','), container).filter(
+		(input: HTMLInputElement) => {
+			const type = input.getAttribute('type');
+			const name = input.getAttribute('name');
+			const isCheckbox = ['checkbox', 'radio'].includes(type);
 
-			if (name) {
-				data[name] = value.trim();
+			if ((!isCheckbox || input.checked) && name) {
+				data[name] = input.value.trim();
 			}
 		}
 	);
@@ -90,16 +81,13 @@ export const setFormData = (
 	);
 
 	Object.keys(formData).forEach((name) => {
-		const control = query(
-			`[name="${name}"]`,
-			container
-		) as HTMLInputElement;
+		const control = query(`[name="${name}"]`, container) as InputElement;
 
 		if (control) {
 			const type = control.getAttribute('type');
 
 			if (['checkbox', 'radio'].includes(type)) {
-				control.checked = true;
+				(control as HTMLInputElement).checked = true;
 			} else {
 				control.value = formData[name];
 			}

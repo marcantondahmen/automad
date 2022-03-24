@@ -38,12 +38,11 @@ import {
 	create,
 	html,
 	htmlSpecialChars,
-	listen,
 	query,
 	queryAll,
 	titleCase,
 } from '../../core';
-import { FieldInitData, FieldRenderData } from '../../types';
+import { FieldInitData, FieldRenderData, InputElement } from '../../types';
 import { BaseComponent } from '../Base';
 
 /**
@@ -53,7 +52,7 @@ import { BaseComponent } from '../Base';
  * @returns the generated ID
  */
 const createId = (key: string): string => {
-	return `am-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
+	return `am-id-field__${key.replace(/(?!^)([A-Z])/g, '-$1').toLowerCase()}`;
 };
 
 /**
@@ -91,8 +90,8 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Get the actual field input element.
 	 */
-	get input(): HTMLInputElement {
-		return query('[name]', this) as HTMLInputElement;
+	get input(): InputElement {
+		return query('[name]', this) as InputElement;
 	}
 
 	/**
@@ -177,7 +176,7 @@ export class FieldComponent extends BaseComponent {
 	 * Apply field attributes to actual input elements.
 	 */
 	private applyAttributes(): void {
-		queryAll('input, textarea', this).forEach((input: HTMLInputElement) => {
+		queryAll('input, textarea', this).forEach((input: InputElement) => {
 			if (this.hasAttribute('required')) {
 				input.setAttribute('pattern', '.*\\S.*');
 				input.setAttribute('placeholder', App.text('requiredField'));

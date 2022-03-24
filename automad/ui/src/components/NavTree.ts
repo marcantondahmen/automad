@@ -315,7 +315,7 @@ export class NavTreeComponent extends BaseComponent {
 		let grabIcon = '';
 
 		if (page.private) {
-			icon = 'file-earmark-lock2-fill';
+			icon = 'eye-slash-fill';
 		}
 
 		if (this.isSortable) {

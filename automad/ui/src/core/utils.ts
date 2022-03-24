@@ -33,7 +33,7 @@
  */
 
 import { App, classes, create } from '.';
-import { KeyValueMap } from '../types';
+import { KeyValueMap, Listener } from '../types';
 
 declare global {
 	interface Event {
@@ -55,7 +55,7 @@ export const confirm = async (text: string): Promise<any> => {
 	let modal = create(
 		'am-modal',
 		[],
-		{ destroy: true, noclick: true },
+		{ destroy: '', noclick: '', noesc: '' },
 		App.root
 	);
 
@@ -107,7 +107,7 @@ export const confirm = async (text: string): Promise<any> => {
 			resolve(isConfirmed);
 		};
 
-		listen(modal, 'click', execute);
+		listen(modal, 'click', execute, 'am-modal-close');
 	});
 };
 
@@ -228,9 +228,10 @@ export const isActivePage = (slug: string): boolean => {
  *
  * @param key
  * @param callback
+ * @return the listener
  */
-export const keyCombo = (key: string, callback: Function): void => {
-	listen(window, 'keydown', (event: KeyboardEvent) => {
+export const keyCombo = (key: string, callback: Function): Listener => {
+	return listen(window, 'keydown', (event: KeyboardEvent) => {
 		if (event.ctrlKey || event.metaKey) {
 			const _key: string = String.fromCharCode(event.which).toLowerCase();
 
@@ -250,18 +251,49 @@ export const keyCombo = (key: string, callback: Function): void => {
  * @param eventNamesString - a string of one or more event names separated by a space
  * @param callback - the callback
  * @param selector - the sector to be used as filter
+ * @return listener object
  */
 export const listen = (
 	element: HTMLElement | Document | Window,
 	eventNamesString: string,
 	callback: Function,
 	selector: string = ''
-): void => {
+): Listener => {
 	const eventNames = eventNamesString
 		.split(' ')
 		.filter((str) => str.length > 0);
 
+	const handler = (event: Event) => {
+		if (!selector) {
+			callback.apply(event.target, [event]);
+			return;
+		}
+
+		const path = event.path || (event.composedPath && event.composedPath());
+
+		path.forEach((_element: any) => {
+			try {
+				if (_element.matches(selector)) {
+					callback.apply(event.target, [event]);
+					return;
+				}
+			} catch (error) {}
+		});
+	};
+
 	eventNames.forEach((eventName) => {
+		element.addEventListener(eventName, handler);
+	});
+
+	const remove = () => {
+		eventNames.forEach((eventName) => {
+			element.removeEventListener(eventName, handler);
+		});
+	};
+
+	return { remove };
+
+	/* eventNames.forEach((eventName) => {
 		element.addEventListener(eventName, function (event) {
 			if (!selector) {
 				callback.apply(event.target, [event]);
@@ -280,7 +312,7 @@ export const listen = (
 				} catch (error) {}
 			});
 		});
-	});
+	}); */
 };
 
 /**
@@ -339,7 +371,7 @@ export const queryParents = (
  * @param page
  */
 export const setDocumentTitle = (page: string): void => {
-	document.title = `Automad — ${htmlSpecialChars(page)}`;
+	document.title = `${htmlSpecialChars(page)} — Automad`;
 };
 
 /**

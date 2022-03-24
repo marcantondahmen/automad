@@ -150,6 +150,10 @@ deteledSuccess: Successfully removed
 
 -
 
+disable: Disable 
+
+-
+
 downloadFile: Download
 
 -
@@ -175,6 +179,10 @@ ellipse: Ellipse
 -
 
 ellipseTool: Ellipse
+
+-
+
+enable: Enable 
 
 -
 
@@ -446,6 +454,10 @@ resetOperations: Reset/delete all operations
 
 -
 
+resetPassword: Reset password 
+
+-
+
 resetSize: Reset to original image size
 
 -
@@ -506,6 +518,10 @@ sendMailError: Error sending email!
 
 -
 
+setupUserAccount: Setup user account
+
+-
+
 shadow: Shadow
 
 -
@@ -535,6 +551,10 @@ signIn: Sign in
 -
 
 signInError: Invalid username or password
+
+-
+
+signedOut: Signed out 
 
 -
 
@@ -651,6 +671,10 @@ uploadImageError: Error while uploading the image.
 -
 
 uploadWatermark: Upload watermark
+
+-
+
+useSharedDefault: Use global default setting
 
 -
 
