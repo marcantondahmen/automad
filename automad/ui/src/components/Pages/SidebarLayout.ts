@@ -59,7 +59,5 @@ export abstract class SidebarLayoutComponent extends BaseLayoutComponent {
 	 *
 	 * @returns the rendered HTML
 	 */
-	protected renderMainPartial(): string {
-		return '';
-	}
+	protected abstract renderMainPartial(): string;
 }

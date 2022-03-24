@@ -60,9 +60,7 @@ export abstract class CenteredLayoutComponent extends BaseLayoutComponent {
 	 *
 	 * @returns the rendered HTML
 	 */
-	protected renderMainPartial(): string {
-		return '';
-	}
+	protected abstract renderMainPartial(): string;
 
 	/**
 	 * Render the navbar title partial.
@@ -70,6 +68,6 @@ export abstract class CenteredLayoutComponent extends BaseLayoutComponent {
 	 * @returns the rendered HTML
 	 */
 	protected renderTitlePartial(): string {
-		return '';
+		return this.pageTitle;
 	}
 }

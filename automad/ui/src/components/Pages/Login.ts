@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, getTagFromRoute, html, Routes } from '../../core';
+import { App, classes, getTagFromRoute, html, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
@@ -42,6 +42,13 @@ import { CenteredLayoutComponent } from './CenteredLayout';
  */
 export class LoginComponent extends CenteredLayoutComponent {
 	/**
+	 * Set the page title that is used a document title suffix.
+	 */
+	protected get pageTitle(): string {
+		return App.text('signIn');
+	}
+
+	/**
 	 * Render the main partial.
 	 *
 	 * @returns the rendered HTML
@@ -50,14 +57,14 @@ export class LoginComponent extends CenteredLayoutComponent {
 		return html`
 			<am-form api="Session/login" focus enter>
 				<input
-					class="am-e-input"
+					class="${classes.input}"
 					type="text"
 					name="name-or-email"
 					placeholder="$${App.text('usernameOrEmail')}"
 					required
 				/>
 				<input
-					class="am-e-input"
+					class="${classes.input}"
 					type="password"
 					name="password"
 					placeholder="$${App.text('password')}"
@@ -71,15 +78,6 @@ export class LoginComponent extends CenteredLayoutComponent {
 				</am-submit>
 			</am-form>
 		`;
-	}
-
-	/**
-	 * Render the navbar title partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderTitlePartial(): string {
-		return App.text('signIn');
 	}
 }
 

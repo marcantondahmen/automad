@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { getTagFromRoute, Routes } from '../../core';
+import { App, getTagFromRoute, Routes } from '../../core';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -41,6 +41,13 @@ import { SidebarLayoutComponent } from './SidebarLayout';
  * @extends SidebarLayoutComponent
  */
 export class SearchComponent extends SidebarLayoutComponent {
+	/**
+	 * Set the page title that is used a document title suffix.
+	 */
+	protected get pageTitle(): string {
+		return App.text('searchTitle');
+	}
+
 	/**
 	 * Render the main partial.
 	 *

@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { getTagFromRoute, Routes } from '../../core';
+import { App, getTagFromRoute, Routes } from '../../core';
 import { CenteredLayoutComponent } from './CenteredLayout';
 
 /**
@@ -42,20 +42,18 @@ import { CenteredLayoutComponent } from './CenteredLayout';
  */
 export class ResetPasswordComponent extends CenteredLayoutComponent {
 	/**
+	 * Set the page title that is used a document title suffix.
+	 */
+	protected get pageTitle(): string {
+		return App.text('resetPassword');
+	}
+
+	/**
 	 * Render the main partial.
 	 *
 	 * @returns the rendered HTML
 	 */
 	protected renderMainPartial(): string {
-		return 'Reset password';
-	}
-
-	/**
-	 * Render the navbar title partial.
-	 *
-	 * @returns the rendered HTML
-	 */
-	protected renderTitlePartial(): string {
 		return 'Reset password';
 	}
 }

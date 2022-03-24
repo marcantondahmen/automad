@@ -50,9 +50,7 @@ export abstract class BaseLayoutComponent extends BaseComponent {
 	/**
 	 * Set the page title that is used a document title suffix.
 	 */
-	protected get pageTitle(): string {
-		return '';
-	}
+	protected abstract get pageTitle(): string;
 
 	/**
 	 * An array of partials that must be provided in order to render partial references.
