@@ -43,7 +43,7 @@ use Automad\Core\FileUtils;
 use Automad\Core\Image;
 use Automad\Engine\Collections\AssetCollection;
 use Automad\System\Server;
-use Automad\UI\InPage;
+use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

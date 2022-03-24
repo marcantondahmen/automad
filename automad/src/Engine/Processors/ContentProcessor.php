@@ -46,7 +46,7 @@ use Automad\Core\Str;
 use Automad\Engine\PatternAssembly;
 use Automad\Engine\Pipe;
 use Automad\Engine\Runtime;
-use Automad\UI\InPage;
+use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

@@ -36,9 +36,9 @@
 
 namespace Automad\Core;
 
+use Automad\Admin\UI\Utils\Messenger;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Engine\PatternAssembly;
-use Automad\UI\Utils\Messenger;
-use Automad\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

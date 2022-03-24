@@ -42,7 +42,7 @@ use Automad\Core\Resolve;
 use Automad\Engine\Processors\ContentProcessor;
 use Automad\Engine\Processors\PostProcessor;
 use Automad\Engine\Processors\TemplateProcessor;
-use Automad\UI\InPage;
+use Automad\Admin\UI\InPage;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 

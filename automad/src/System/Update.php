@@ -39,11 +39,11 @@ namespace Automad\System;
 use Automad\Core\FileSystem;
 use Automad\Core\Parse;
 use Automad\Core\Str;
-use Automad\UI\Components\Alert\Alert;
-use Automad\UI\Components\Alert\Danger;
-use Automad\UI\Components\Alert\Success;
-use Automad\UI\Response;
-use Automad\UI\Utils\Text;
+use Automad\Admin\UI\Components\Alert\Alert;
+use Automad\Admin\UI\Components\Alert\Danger;
+use Automad\Admin\UI\Components\Alert\Success;
+use Automad\Admin\UI\Response;
+use Automad\Admin\UI\Utils\Text;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
