@@ -32,20 +32,19 @@
  * Licensed under the MIT license.
  */
 
-import { FieldComponent } from './Field';
+import { classes } from '../../core';
+import { CheckboxComponent } from './Checkbox';
 
 /**
  * A large checkbox field.
  *
  * @extends FieldComponent
  */
-class CheckboxLargeComponent extends FieldComponent {
+class CheckboxLargeComponent extends CheckboxComponent {
 	/**
-	 * Render the field.
+	 * Checkbox styles.
 	 */
-	render(): void {
-		super.render();
-	}
+	protected classes = [classes.checkbox, classes.checkboxLarge];
 }
 
 customElements.define('am-checkbox-large', CheckboxLargeComponent);
