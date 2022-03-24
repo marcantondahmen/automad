@@ -54,12 +54,15 @@
 				min-width: 24rem;
 			}
 
-			& > am-title.am-c-field,
-			& > am-checkbox-large.am-c-field,
-			& > am-page-template.am-c-field,
-			& > am-page-tags.am-c-field,
-			& > am-editor.am-c-field {
-				min-width: 100%;
+			& > am-title,
+			& > am-checkbox-large,
+			& > am-page-template,
+			& > am-page-tags,
+			& > am-textarea,
+			& > am-editor {
+				&.am-c-field {
+					min-width: 100%;
+				}
 			}
 		}
 	}
