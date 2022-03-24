@@ -45,11 +45,11 @@ class TextareaComponent extends FieldComponent {
 	 * Create an input field.
 	 */
 	renderInput(): void {
-		const { name, id, value } = this._data;
+		const { name, id, value, placeholder } = this._data;
 		const textarea = create(
 			'textarea',
 			[classes.input],
-			{ id, name },
+			{ id, name, placeholder },
 			this
 		);
 

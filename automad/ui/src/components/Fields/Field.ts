@@ -111,13 +111,15 @@ export class FieldComponent extends BaseComponent {
 	 * @param params.name
 	 * @param params.tooltip
 	 * @param params.label
+	 * @param params.placeholder
 	 */
-	set data({ key, value, name, tooltip, label }: FieldInitData) {
+	set data({ key, value, name, tooltip, label, placeholder }: FieldInitData) {
 		const id = createId(key);
 
 		value = value || '';
 		tooltip = tooltip || '';
 		label = label || createLabel(key);
+		placeholder = placeholder || '';
 
 		if (typeof value === 'string' && this.sanitize) {
 			value = htmlSpecialChars(value);
@@ -129,6 +131,7 @@ export class FieldComponent extends BaseComponent {
 			label,
 			value,
 			tooltip,
+			placeholder,
 		};
 
 		this.render();
@@ -152,11 +155,11 @@ export class FieldComponent extends BaseComponent {
 	 * Create an input field.
 	 */
 	renderInput(): void {
-		const { name, id, value } = this._data;
+		const { name, id, value, placeholder } = this._data;
 		create(
 			'input',
 			[classes.input],
-			{ id, name, value, type: 'text' },
+			{ id, name, value, type: 'text', placeholder },
 			this
 		);
 	}

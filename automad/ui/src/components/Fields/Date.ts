@@ -45,11 +45,11 @@ class DateComponent extends FieldComponent {
 	 * Create an input field.
 	 */
 	renderInput(): void {
-		const { name, id, value } = this._data;
+		const { name, id, value, placeholder } = this._data;
 		create(
 			'input',
 			[classes.input],
-			{ id, name, value, type: 'datetime-local' },
+			{ id, name, value, type: 'datetime-local', placeholder },
 			this
 		);
 	}
