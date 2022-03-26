@@ -133,13 +133,13 @@ export class FieldComponent extends BaseComponent {
 			placeholder,
 		};
 
-		this.render();
+		this.init();
 	}
 
 	/**
 	 * Create a label.
 	 */
-	renderlabel(): void {
+	createLabel(): void {
 		const { id, label, tooltip } = this._data;
 		const wrapper = create('div', [], {}, this);
 
@@ -153,7 +153,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Create an input field.
 	 */
-	renderInput(): void {
+	createInput(): void {
 		const { name, id, value, placeholder } = this._data;
 		create(
 			'input',
@@ -166,9 +166,9 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Render the field.
 	 */
-	render(): void {
-		this.renderlabel();
-		this.renderInput();
+	init(): void {
+		this.createLabel();
+		this.createInput();
 		this.applyAttributes();
 	}
 

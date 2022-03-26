@@ -37,7 +37,6 @@ import {
 	KeyValueMap,
 	TemplateButtonStatus,
 	TemplateFieldData,
-	Theme,
 } from '../../types';
 import { BaseComponent } from '../Base';
 

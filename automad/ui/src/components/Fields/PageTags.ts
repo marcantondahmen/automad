@@ -48,7 +48,7 @@ class PageTagsComponent extends FieldComponent {
 	 *
 	 * @see {@link tagify https://github.com/yairEO/tagify}
 	 */
-	renderInput(): void {
+	createInput(): void {
 		const { name, id, value } = this._data;
 		const textarea = create(
 			'textarea',

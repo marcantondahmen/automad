@@ -39,13 +39,6 @@ import { FieldComponent } from './Field';
  *
  * @extends FieldComponent
  */
-class URLComponent extends FieldComponent {
-	/**
-	 * Render the field.
-	 */
-	render(): void {
-		super.render();
-	}
-}
+class URLComponent extends FieldComponent {}
 
 customElements.define('am-url', URLComponent);

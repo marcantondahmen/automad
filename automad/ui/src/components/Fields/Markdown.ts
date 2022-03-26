@@ -39,13 +39,6 @@ import { FieldComponent } from './Field';
  *
  * @extends FieldComponent
  */
-class MarkdownComponent extends FieldComponent {
-	/**
-	 * Render the field.
-	 */
-	render(): void {
-		super.render();
-	}
-}
+class MarkdownComponent extends FieldComponent {}
 
 customElements.define('am-markdown', MarkdownComponent);

@@ -44,7 +44,7 @@ class CheckboxSelectComponent extends FieldComponent {
 	/**
 	 * Render the input field.
 	 */
-	renderInput(): void {
+	createInput(): void {
 		const { name, id, value, label, placeholder } = this._data;
 
 		const wrapper = create(

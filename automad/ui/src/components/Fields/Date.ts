@@ -44,7 +44,7 @@ class DateComponent extends FieldComponent {
 	/**
 	 * Create an input field.
 	 */
-	renderInput(): void {
+	createInput(): void {
 		const { name, id, value, placeholder } = this._data;
 		create(
 			'input',

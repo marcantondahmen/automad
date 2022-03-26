@@ -55,7 +55,7 @@ class EditorComponent extends FieldComponent {
 	/**
 	 * Render the field.
 	 */
-	renderInput(): void {
+	createInput(): void {
 		const { name, id, value } = this._data;
 		const editor = create('div', [], { id }, this);
 

@@ -39,13 +39,6 @@ import { FieldComponent } from './Field';
  *
  * @extends FieldComponent
  */
-class ImageComponent extends FieldComponent {
-	/**
-	 * Render the field.
-	 */
-	render(): void {
-		super.render();
-	}
-}
+class ImageComponent extends FieldComponent {}
 
 customElements.define('am-image', ImageComponent);

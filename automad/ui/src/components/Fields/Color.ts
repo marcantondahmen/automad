@@ -44,7 +44,7 @@ class ColorComponent extends FieldComponent {
 	/**
 	 * Create an input field.
 	 */
-	renderInput(): void {
+	createInput(): void {
 		const { name, id, value } = this._data;
 		create(
 			'input',
