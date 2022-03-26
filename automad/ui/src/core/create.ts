@@ -73,7 +73,8 @@ export const create = (
  * @param fieldType the field type name
  * @param section the section node where the field is created in
  * @param data the field data object
- * @param cls the array with optional class name
+ * @param [cls] the array with optional class name
+ * @param [attributes] additional attributes
  * @returns the generated field
  */
 export const createField = (

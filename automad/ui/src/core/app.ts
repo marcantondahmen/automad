@@ -238,8 +238,8 @@ export class App {
 	/**
 	 * Set the nav state to be disabled.
 	 *
-	 * @return the lock id
 	 * @static
+	 * @return the lock id
 	 */
 	static addNavigationLock(): number {
 		const id = this.latestLockId++;
@@ -252,8 +252,8 @@ export class App {
 	/**
 	 * Set the nav state to not be disabled.
 	 *
-	 * @param id
 	 * @static
+	 * @param id
 	 */
 	static removeNavigationLock(id: number): void {
 		delete this.navigationLocks[id];

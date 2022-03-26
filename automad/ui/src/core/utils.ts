@@ -115,7 +115,7 @@ export const confirm = async (text: string): Promise<any> => {
  * Debounce a function.
  *
  * @param callback
- * @param timeout
+ * @param [timeout]
  * @returns the debounced function
  */
 export const debounce = (
@@ -250,7 +250,7 @@ export const keyCombo = (key: string, callback: Function): Listener => {
  * @param element - the element to register the event listeners to
  * @param eventNamesString - a string of one or more event names separated by a space
  * @param callback - the callback
- * @param selector - the sector to be used as filter
+ * @param [selector] - the sector to be used as filter
  * @return listener object
  */
 export const listen = (
@@ -292,27 +292,6 @@ export const listen = (
 	};
 
 	return { remove };
-
-	/* eventNames.forEach((eventName) => {
-		element.addEventListener(eventName, function (event) {
-			if (!selector) {
-				callback.apply(event.target, [event]);
-				return;
-			}
-
-			const path =
-				event.path || (event.composedPath && event.composedPath());
-
-			path.forEach((_element: any) => {
-				try {
-					if (_element.matches(selector)) {
-						callback.apply(event.target, [event]);
-						return;
-					}
-				} catch (error) {}
-			});
-		});
-	}); */
 };
 
 /**

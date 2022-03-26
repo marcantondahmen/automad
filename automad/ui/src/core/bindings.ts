@@ -72,8 +72,9 @@ export class Binding {
 	 * The constructor.
 	 *
 	 * @param name
-	 * @param input
-	 * @param modifier
+	 * @param [input]
+	 * @param [modifier]
+	 * @param [initial]
 	 */
 	constructor(
 		name: string,

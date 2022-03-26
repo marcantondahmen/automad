@@ -75,6 +75,7 @@ export const request = async (
  * @see {@link request}
  * @param route
  * @param [dataOrForm]
+ * @param [parallel]
  * @param [callback]
  * @returns the Promise
  * @async
