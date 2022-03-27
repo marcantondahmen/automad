@@ -33,12 +33,10 @@
  */
 
 import { BaseComponent } from '../Base';
-import { listen, query, queryAll } from '../../core';
+import { eventNames, listen, query, queryAll } from '../../core';
 import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
-
-export const switcherChangeEventName = 'AutomadSwitcherChange';
 
 /**
  * Get the section name from the query string.
@@ -61,7 +59,7 @@ export const setActiveSection = (section: string): void => {
 
 	url.searchParams.set('section', section);
 	window.history.replaceState(null, null, url);
-	window.dispatchEvent(new Event(switcherChangeEventName));
+	window.dispatchEvent(new Event(eventNames.switcherChange));
 };
 
 /**
@@ -85,11 +83,11 @@ export class SwitcherComponent extends BaseComponent {
 	connectedCallback(): void {
 		setTimeout(() => {
 			this.onChange();
-			window.dispatchEvent(new Event(switcherChangeEventName));
+			window.dispatchEvent(new Event(eventNames.switcherChange));
 		}, 0);
 
 		this.listeners.push(
-			listen(window, switcherChangeEventName, this.onChange.bind(this))
+			listen(window, eventNames.switcherChange, this.onChange.bind(this))
 		);
 	}
 

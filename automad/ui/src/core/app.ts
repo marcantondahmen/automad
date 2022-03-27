@@ -33,10 +33,8 @@
  */
 
 import { RootComponent } from '../components/Root';
-import { fire, request, requestAPI } from '.';
+import { eventNames, fire, request, requestAPI } from '.';
 import { KeyValueMap, Pages, ThemeCollection } from '../types';
-
-export const appStateChangedEventName = 'AutomadAppStateChange';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
@@ -232,7 +230,7 @@ export class App {
 		const response = await requestAPI('App/updateState', null, false);
 
 		this._state = Object.assign({}, this._state, response.data);
-		fire(appStateChangedEventName);
+		fire(eventNames.appStateChange);
 	}
 
 	/**

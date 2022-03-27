@@ -41,7 +41,7 @@ import {
 	listen,
 	debounce,
 	html,
-	appStateChangedEventName,
+	eventNames,
 } from '../core';
 
 /**
@@ -111,7 +111,7 @@ export class AutocompleteComponent extends BaseComponent {
 		this.classList.add(classes.dropdown, classes.dropdownForm);
 
 		this.listeners.push(
-			listen(window, appStateChangedEventName, this.init.bind(this))
+			listen(window, eventNames.appStateChange, this.init.bind(this))
 		);
 
 		this.init();

@@ -33,12 +33,8 @@
  */
 
 import { BaseComponent } from '../Base';
-import { classes, listen, query } from '../../core';
-import {
-	getActiveSection,
-	switcherChangeEventName,
-	SwitcherComponent,
-} from './Switcher';
+import { classes, eventNames, listen, query } from '../../core';
+import { getActiveSection, SwitcherComponent } from './Switcher';
 
 /**
  * A switcher section that contains the content that will be toggled by a switcher menu.
@@ -68,7 +64,7 @@ export class SwitcherSectionComponent extends BaseComponent {
 		this.toggle();
 
 		this.listeners.push(
-			listen(window, switcherChangeEventName, this.toggle.bind(this))
+			listen(window, eventNames.switcherChange, this.toggle.bind(this))
 		);
 	}
 

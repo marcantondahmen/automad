@@ -32,10 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, createField, html, listen } from '../../core';
+import {
+	App,
+	classes,
+	create,
+	createField,
+	eventNames,
+	html,
+	listen,
+} from '../../core';
 import { File } from '../../types';
 import { BaseComponent } from '../Base';
-import { filesChangedOnServerEventName } from '../Forms/FileCollectionList';
 import { ModalComponent } from '../Modal/Modal';
 
 /**
@@ -92,7 +99,7 @@ export class FileInfoComponent extends BaseComponent {
 		return html`
 			<am-form
 				api="File/editInfo"
-				event="${filesChangedOnServerEventName}"
+				event="${eventNames.filesChangeOnServer}"
 				class="${classes.modalDialog}"
 			>
 				<div class="${classes.modalHeader}">

@@ -35,12 +35,12 @@
 import {
 	App,
 	classes,
+	eventNames,
 	getPageURL,
 	getTagFromRoute,
 	html,
 	Routes,
 } from '../../core';
-import { filesChangedOnServerEventName } from '../Forms/FileCollectionList';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -221,7 +221,7 @@ export class PageComponent extends SidebarLayoutComponent {
 				<div class="${classes.modalDialog}">
 					<am-form
 						api="File/import"
-						event="${filesChangedOnServerEventName}"
+						event="${eventNames.filesChangeOnServer}"
 					>
 						<div class="${classes.modalHeader}">
 							<span>$${App.text('importFromUrl')}</span>

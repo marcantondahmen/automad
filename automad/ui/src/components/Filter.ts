@@ -32,10 +32,17 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create, debounce, listen, queryAll } from '../core';
+import {
+	App,
+	classes,
+	create,
+	debounce,
+	eventNames,
+	listen,
+	queryAll,
+} from '../core';
 import { InputElement } from '../types';
 import { BaseComponent } from './Base';
-import { switcherChangeEventName } from './Switcher/Switcher';
 
 /**
  * A field and card filter input component.
@@ -74,7 +81,7 @@ class FilterComponent extends BaseComponent {
 		);
 
 		this.listeners.push(
-			listen(window, switcherChangeEventName, () => {
+			listen(window, eventNames.switcherChange, () => {
 				input.value = '';
 				this.filter(input);
 			})

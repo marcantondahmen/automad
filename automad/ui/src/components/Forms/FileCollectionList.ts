@@ -33,25 +33,15 @@
  */
 
 import {
-	appStateChangedEventName,
 	classes,
 	create,
+	eventNames,
 	fire,
 	listen,
 	queryAll,
 } from '../../core';
 import { File, KeyValueMap } from '../../types';
 import { FormComponent } from './Form';
-
-/**
- * Event that is fired by this file collection form after rendering the collection.
- */
-export const fileCollectionRenderedEventName = 'AutomadFileCollectionRendered';
-
-/**
- * Event that is fired by other forms after changing the current file collection on the server side.
- */
-export const filesChangedOnServerEventName = 'AutomadFilesChangedOnServer';
 
 /**
  * The file collection form component.
@@ -79,7 +69,7 @@ export class FileCollectionListComponent extends FormComponent {
 		this.listeners.push(
 			listen(
 				window,
-				`${appStateChangedEventName} ${filesChangedOnServerEventName}`,
+				`${eventNames.appStateChange} ${eventNames.filesChangeOnServer}`,
 				this.refresh.bind(this)
 			)
 		);
@@ -112,7 +102,7 @@ export class FileCollectionListComponent extends FormComponent {
 			card.data = file;
 		});
 
-		fire(fileCollectionRenderedEventName);
+		fire(eventNames.fileCollectionRender);
 	}
 
 	/**

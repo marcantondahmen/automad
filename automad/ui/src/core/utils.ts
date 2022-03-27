@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, create } from '.';
+import { App, classes, create, listen } from '.';
 import { KeyValueMap, Listener } from '../types';
 
 declare global {
@@ -134,18 +134,6 @@ export const debounce = (
 };
 
 /**
- * Fires an event on an element or the window.
- * @param name
- * @param [element]
- */
-export const fire = (
-	name: string,
-	element: HTMLElement | Document | Window = window
-): void => {
-	element.dispatchEvent(new Event(name));
-};
-
-/**
  * Get the current page URL from the query string.
  *
  * @returns a page URL
@@ -242,56 +230,6 @@ export const keyCombo = (key: string, callback: Function): Listener => {
 			}
 		}
 	});
-};
-
-/**
- * Register event listeners.
- *
- * @param element - the element to register the event listeners to
- * @param eventNamesString - a string of one or more event names separated by a space
- * @param callback - the callback
- * @param [selector] - the sector to be used as filter
- * @return listener object
- */
-export const listen = (
-	element: HTMLElement | Document | Window,
-	eventNamesString: string,
-	callback: Function,
-	selector: string = ''
-): Listener => {
-	const eventNames = eventNamesString
-		.split(' ')
-		.filter((str) => str.length > 0);
-
-	const handler = (event: Event) => {
-		if (!selector) {
-			callback.apply(event.target, [event]);
-			return;
-		}
-
-		const path = event.path || (event.composedPath && event.composedPath());
-
-		path.forEach((_element: any) => {
-			try {
-				if (_element.matches(selector)) {
-					callback.apply(event.target, [event]);
-					return;
-				}
-			} catch (error) {}
-		});
-	};
-
-	eventNames.forEach((eventName) => {
-		element.addEventListener(eventName, handler);
-	});
-
-	const remove = () => {
-		eventNames.forEach((eventName) => {
-			element.removeEventListener(eventName, handler);
-		});
-	};
-
-	return { remove };
 };
 
 /**

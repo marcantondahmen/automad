@@ -32,13 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	appStateChangedEventName,
-	create,
-	getPageURL,
-	listen,
-} from '../core';
+import { App, create, eventNames, getPageURL, listen } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -52,7 +46,7 @@ class PrivateIndicatorComponent extends BaseComponent {
 	 */
 	connectedCallback(): void {
 		this.listeners.push(
-			listen(window, appStateChangedEventName, this.render.bind(this))
+			listen(window, eventNames.appStateChange, this.render.bind(this))
 		);
 
 		this.render();

@@ -44,8 +44,8 @@ import {
 	Routes,
 	html,
 	listen,
-	appStateChangedEventName,
 	requestAPI,
+	eventNames,
 } from '../core';
 import { KeyValueMap, NavTreeItem, PageMetaData } from '../types';
 import { BaseComponent } from './Base';
@@ -87,7 +87,7 @@ export class NavTreeComponent extends BaseComponent {
 		this.classList.add(classes.nav);
 
 		this.listeners.push(
-			listen(window, appStateChangedEventName, this.init.bind(this))
+			listen(window, eventNames.appStateChange, this.init.bind(this))
 		);
 
 		this.init();
