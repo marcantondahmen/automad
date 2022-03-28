@@ -123,33 +123,6 @@ export class App {
 	}
 
 	/**
-	 * The section name map.
-	 *
-	 * @static
-	 */
-	static get sections(): KeyValueMap {
-		return {
-			system: {
-				overview: 'overview',
-				cache: 'cache',
-				users: 'users',
-				update: 'update',
-				feed: 'feed',
-				language: 'language',
-				headless: 'headless',
-				debug: 'debug',
-				config: 'config',
-			},
-			content: {
-				settings: 'settings',
-				text: 'text',
-				colors: 'colors',
-				files: 'files',
-			},
-		};
-	}
-
-	/**
 	 * The name of the site.
 	 *
 	 * @static

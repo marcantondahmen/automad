@@ -41,6 +41,7 @@ import {
 	html,
 	Routes,
 } from '../../core';
+import { Sections } from '../Switcher/Switcher';
 import { SidebarLayoutComponent } from './SidebarLayout';
 
 /**
@@ -165,22 +166,22 @@ export class PageComponent extends SidebarLayoutComponent {
 					<div class="am-u-flex">
 						<am-switcher class="am-u-flex__item-grow">
 							<am-switcher-link
-								section="${App.sections.content.settings}"
+								section="${Sections[Sections.settings]}"
 							>
 								$${App.text('pageSettings')}
 							</am-switcher-link>
 							<am-switcher-link
-								section="${App.sections.content.text}"
+								section="${Sections[Sections.text]}"
 							>
 								$${App.text('pageContent')}
 							</am-switcher-link>
 							<am-switcher-link
-								section="${App.sections.content.colors}"
+								section="${Sections[Sections.colors]}"
 							>
 								$${App.text('pageColors')}
 							</am-switcher-link>
 							<am-switcher-link
-								section="${App.sections.content.files}"
+								section="${Sections[Sections.files]}"
 							>
 								$${App.text('uploadedFiles')}
 								<am-file-count></am-file-count>
@@ -195,7 +196,7 @@ export class PageComponent extends SidebarLayoutComponent {
 			<section class="am-l-main__row">
 				<div class="am-l-main__content">
 					<am-page-data api="Page/data"></am-page-data>
-					<am-switcher-section name="${App.sections.content.files}">
+					<am-switcher-section name="${Sections[Sections.files]}">
 						<am-upload></am-upload>
 						<am-modal-toggle
 							class="${classes.button}"

@@ -55,6 +55,7 @@ import {
 	setDocumentTitle,
 } from '../../core';
 import { PageTemplateComponent } from '../Fields/PageTemplate';
+import { Sections } from '../Switcher/Switcher';
 
 /**
  * Create a group of form fields within a given section element based on a set of keys.
@@ -111,21 +112,19 @@ const fieldGroup = ({
  * @returns the switcher section collection
  */
 const createSections = (form: PageDataComponent): PageSectionCollection => {
-	const createSection = (key: string): SwitcherSectionComponent => {
+	const createSection = (section: string): SwitcherSectionComponent => {
 		return create(
 			'am-switcher-section',
 			[classes.switcherSectionFields],
-			{ name: content[key] },
+			{ name: section },
 			form
 		);
 	};
 
-	const content = App.sections.content;
-
 	const sections: PageSectionCollection = {
-		settings: createSection('settings'),
-		text: createSection('text'),
-		colors: createSection('colors'),
+		settings: createSection(Sections[Sections.settings]),
+		text: createSection(Sections[Sections.text]),
+		colors: createSection(Sections[Sections.colors]),
 	};
 
 	return sections;

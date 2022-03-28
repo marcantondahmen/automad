@@ -35,7 +35,13 @@
 import { AutocompleteComponent } from './Autocomplete';
 import { JumpbarItemData, KeyValueMap, PageMetaData } from '../types';
 import { App, keyCombo, create, classes, html, Routes } from '../core';
+import { Sections } from './Switcher/Switcher';
 
+/**
+ * Return the jumpbar autocompletion data for the search.
+ *
+ * @returns the jumpbar autocompletion data for the search
+ */
 const searchData = (): JumpbarItemData[] => {
 	return [
 		{
@@ -47,6 +53,11 @@ const searchData = (): JumpbarItemData[] => {
 	];
 };
 
+/**
+ * Return the jumpbar autocompletion data for the in page edit mode.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
 const inPageData = (): JumpbarItemData[] => {
 	return [
 		{
@@ -58,6 +69,11 @@ const inPageData = (): JumpbarItemData[] => {
 	];
 };
 
+/**
+ * Return the jumpbar autocompletion data for the system settings.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
 const settingsData = (): JumpbarItemData[] => {
 	const item = (
 		section: string,
@@ -65,9 +81,7 @@ const settingsData = (): JumpbarItemData[] => {
 		icon: string
 	): JumpbarItemData => {
 		return {
-			target: `${Routes[Routes.system]}?section=${
-				App.sections.system[section]
-			}`,
+			target: `${Routes[Routes.system]}?section=${section}`,
 			value: `${App.text('systemTitle')} ${App.text(title)}`,
 			title: App.text(title),
 			icon,
@@ -75,19 +89,28 @@ const settingsData = (): JumpbarItemData[] => {
 	};
 
 	const data: JumpbarItemData[] = [
-		item('cache', 'systemCache', 'stack'),
-		item('users', 'systemUsers', 'people'),
-		item('update', 'systemUpdate', 'arrow-repeat'),
-		item('feed', 'systemRssFeed', 'rss'),
-		item('language', 'systemLanguage', 'translate'),
-		item('headless', 'systemHeadless', 'braces'),
-		item('debug', 'systemDebug', 'bug'),
-		item('config', 'systemConfigFile', 'file-earmark-code'),
+		item(Sections[Sections.cache], 'systemCache', 'stack'),
+		item(Sections[Sections.users], 'systemUsers', 'people'),
+		item(Sections[Sections.update], 'systemUpdate', 'arrow-repeat'),
+		item(Sections[Sections.feed], 'systemRssFeed', 'rss'),
+		item(Sections[Sections.language], 'systemLanguage', 'translate'),
+		item(Sections[Sections.headless], 'systemHeadless', 'braces'),
+		item(Sections[Sections.debug], 'systemDebug', 'bug'),
+		item(
+			Sections[Sections.config],
+			'systemConfigFile',
+			'file-earmark-code'
+		),
 	];
 
 	return data;
 };
 
+/**
+ * Return the jumpbar autocompletion data for the shared data.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
 const sharedData = (): JumpbarItemData[] => {
 	return [
 		{
@@ -99,6 +122,11 @@ const sharedData = (): JumpbarItemData[] => {
 	];
 };
 
+/**
+ * Return the jumpbar autocompletion data for the packages page.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
 const packagesData = (): JumpbarItemData[] => {
 	return [
 		{
@@ -110,6 +138,11 @@ const packagesData = (): JumpbarItemData[] => {
 	];
 };
 
+/**
+ * Return the jumpbar autocompletion data for pages, sorted by modification date.
+ *
+ * @returns the jumpbar autocompletion data array
+ */
 const pagesData = (): JumpbarItemData[] => {
 	const data: JumpbarItemData[] = [];
 	const pages: PageMetaData[] = Object.values(App.pages);
@@ -133,6 +166,11 @@ const pagesData = (): JumpbarItemData[] => {
 	return data;
 };
 
+/**
+ * Return the entire concatenated jumpbar autocompletion data.
+ *
+ * @returns the entire concatenated jumpbar autocompletion data array
+ */
 const jumpbarData = (): JumpbarItemData[] => {
 	return [].concat(
 		searchData(),

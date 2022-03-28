@@ -38,6 +38,22 @@ import { linkTag, SwitcherLinkComponent } from './SwitcherLink';
 import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
 
+export enum Sections {
+	overview,
+	cache,
+	users,
+	update,
+	feed,
+	language,
+	headless,
+	debug,
+	config,
+	settings,
+	text,
+	colors,
+	files,
+}
+
 /**
  * Get the section name from the query string.
  *
