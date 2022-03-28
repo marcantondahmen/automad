@@ -33,7 +33,12 @@
  */
 
 import { BaseComponent } from './Base';
-import { AutocompleteItem, KeyValueMap } from '../types';
+import {
+	AutocompleteItem,
+	AutocompleteItemData,
+	KeyValueMap,
+	PageMetaData,
+} from '../types';
 import {
 	App,
 	classes,
@@ -43,6 +48,24 @@ import {
 	html,
 	eventNames,
 } from '../core';
+
+const autocompleteData = (): AutocompleteItemData[] => {
+	const data: AutocompleteItemData[] = [];
+	const pages: PageMetaData[] = Object.values(App.pages);
+
+	pages.sort((a: KeyValueMap, b: KeyValueMap) =>
+		a.mTime < b.mTime ? 1 : b.mTime < a.mTime ? -1 : 0
+	);
+
+	pages.forEach((page: PageMetaData) => {
+		data.push({
+			value: page.url,
+			title: page.title,
+		});
+	});
+
+	return data;
+};
 
 /**
  * An input field with page autocompletion.
@@ -65,8 +88,8 @@ export class AutocompleteComponent extends BaseComponent {
 	/**
 	 * The autocomplete data.
 	 */
-	protected get data(): KeyValueMap[] {
-		return App.autocomplete;
+	protected get data(): AutocompleteItemData[] {
+		return autocompleteData();
 	}
 
 	/**

@@ -36,8 +36,6 @@
 
 namespace Automad\Admin\Models;
 
-use Automad\Admin\UI\Autocomplete\Jumpbar;
-use Automad\Admin\UI\Autocomplete\Links;
 use Automad\Core\Automad;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -50,26 +48,6 @@ defined('AUTOMAD') or die('Direct access not permitted!');
  * @license MIT license - https://automad.org/license
  */
 class AppModel {
-	/**
-	 * Build the autocomplete data for the jumpbar.
-	 *
-	 * @param Automad $Automad
-	 * @return array the rendered data array
-	 */
-	public static function autocompleteJumpbar(Automad $Automad) {
-		return Jumpbar::render($Automad);
-	}
-
-	/**
-	 * Build the autocomplete data for links.
-	 *
-	 * @param Automad $Automad
-	 * @return array the rendered data array
-	 */
-	public static function autocompleteLinks(Automad $Automad) {
-		return Links::render($Automad);
-	}
-
 	/**
 	 * Build the pages array that is used to build a nav tree.
 	 *
@@ -86,7 +64,8 @@ class AppModel {
 				'url' => $Page->origUrl,
 				'path' => $Page->path,
 				'parentPath' => rtrim(dirname($Page->path), '/') . '/',
-				'private' => $Page->private
+				'private' => $Page->private,
+				'mTime' => $Page->get(AM_KEY_MTIME)
 			);
 		}
 

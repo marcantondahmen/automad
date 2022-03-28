@@ -46,6 +46,20 @@ export interface AutocompleteItem {
 	item: KeyValueMap;
 }
 
+export interface AutocompleteItemData {
+	value: string;
+	title: string;
+}
+
+export interface JumpbarItemData {
+	value: string;
+	title: string;
+	icon: string;
+	subtitle?: string;
+	target?: string;
+	external?: string;
+}
+
 export interface File {
 	basename: string;
 	extension: string;

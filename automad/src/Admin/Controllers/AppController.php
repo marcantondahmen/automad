@@ -92,8 +92,6 @@ class AppController {
 		$Response->setData(array(
 			'tags' => $Automad->getPagelist()->getTags(),
 			'pages' => AppModel::pages($Automad),
-			'jumpbar' => AppModel::autocompleteJumpbar($Automad),
-			'autocomplete' => AppModel::autocompleteLinks($Automad),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
 			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME)
 		));

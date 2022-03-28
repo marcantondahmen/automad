@@ -69,15 +69,6 @@ export class App {
 	private static latestLockId: number = 0;
 
 	/**
-	 * The autocomplete map.
-	 *
-	 * @static
-	 */
-	static get autocomplete(): KeyValueMap[] {
-		return this._state.autocomplete;
-	}
-
-	/**
 	 * The array of allowed file types.
 	 *
 	 * @static
@@ -102,15 +93,6 @@ export class App {
 	 */
 	static get dashboardURL(): string {
 		return this._state.dashboard;
-	}
-
-	/**
-	 * The jumpbar autocomplete map.
-	 *
-	 * @static
-	 */
-	static get jumpbar(): KeyValueMap[] {
-		return this._state.jumpbar;
 	}
 
 	/**
