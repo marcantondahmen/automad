@@ -38,7 +38,6 @@ namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\AppModel;
-use Automad\Admin\UI\Utils\SwitcherSections;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\FileUtils;
@@ -66,7 +65,6 @@ class AppController {
 
 		$Response->setData(array(
 			'version' => AM_VERSION,
-			'sections' => SwitcherSections::get(),
 			'text' => Text::getObject(),
 			'themes' => $ThemeCollection->getThemes(),
 			'base' => AM_BASE_URL,

@@ -128,7 +128,25 @@ export class App {
 	 * @static
 	 */
 	static get sections(): KeyValueMap {
-		return this._state.sections;
+		return {
+			system: {
+				overview: 'overview',
+				cache: 'cache',
+				users: 'users',
+				update: 'update',
+				feed: 'feed',
+				language: 'language',
+				headless: 'headless',
+				debug: 'debug',
+				config: 'config',
+			},
+			content: {
+				settings: 'settings',
+				text: 'text',
+				colors: 'colors',
+				files: 'files',
+			},
+		};
 	}
 
 	/**
