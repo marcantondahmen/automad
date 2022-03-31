@@ -38,8 +38,10 @@ namespace Automad\Admin\Controllers;
 
 use Automad\Admin\API\Response;
 use Automad\Admin\Models\AppModel;
+use Automad\Admin\Models\UserCollectionModel;
 use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
+use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
 use Automad\System\Fields;
 use Automad\System\ThemeCollection;
@@ -86,12 +88,28 @@ class AppController {
 		$Response = new Response;
 		$Cache = new Cache();
 		$Automad = $Cache->getAutomad();
+		$UserCollectionModel = new UserCollectionModel();
 
 		$Response->setData(array(
 			'tags' => $Automad->getPagelist()->getTags(),
 			'pages' => AppModel::pages($Automad),
 			'sitename' => $Automad->Shared->get(AM_KEY_SITENAME),
-			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME)
+			'mainTheme' => $Automad->Shared->get(AM_KEY_THEME),
+			'system' => array(
+				'cache' => array(
+					'enabled' => AM_CACHE_ENABLED,
+					'lifetime' => AM_CACHE_LIFETIME,
+					'monitorDelay' => AM_CACHE_MONITOR_DELAY
+				),
+				'debug' => AM_DEBUG_ENABLED,
+				'feed' => array(
+					'enabled' => AM_FEED_ENABLED,
+					'fields' => AM_FEED_FIELDS
+				),
+				'translation' => AM_FILE_UI_TRANSLATION,
+				'users'=> $UserCollectionModel->getCollection(),
+				'tempDirectory' => FileSystem::getTmpDir()
+			)
 		));
 
 		return $Response;

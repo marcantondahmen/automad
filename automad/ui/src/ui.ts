@@ -80,6 +80,7 @@ import './components/Switcher/Switcher';
 import './components/Switcher/SwitcherLabel';
 import './components/Switcher/SwitcherLink';
 import './components/Switcher/SwitcherSection';
+import './components/Switcher/SystemMenu';
 
 import './components/Alert';
 import './components/Autocomplete';
@@ -95,6 +96,7 @@ import './components/PageBreadcrumbs';
 import './components/PageSelectTree';
 import './components/PrivateIndicator';
 import './components/Root';
+import './components/Select';
 import './components/Sidebar';
 import './components/Spinner';
 import './components/Toggle';

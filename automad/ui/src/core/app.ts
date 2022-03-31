@@ -34,7 +34,7 @@
 
 import { RootComponent } from '../components/Root';
 import { eventNames, fire, request, requestAPI } from '.';
-import { KeyValueMap, Pages, ThemeCollection } from '../types';
+import { KeyValueMap, Pages, SystemSettings, ThemeCollection } from '../types';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
@@ -147,6 +147,15 @@ export class App {
 	 */
 	static get themes(): ThemeCollection {
 		return this._state.themes;
+	}
+
+	/**
+	 * The system settings.
+	 *
+	 * @static
+	 */
+	static get system(): SystemSettings {
+		return this._state.system;
 	}
 
 	/**

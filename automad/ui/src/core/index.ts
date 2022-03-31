@@ -41,4 +41,5 @@ export * from './form';
 export * from './notify';
 export * from './request';
 export * from './router';
+export * from './toggles';
 export * from './utils';

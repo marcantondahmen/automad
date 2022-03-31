@@ -162,7 +162,7 @@ export const createTemplateSelect = (
 ): HTMLSelectElement => {
 	const mainTheme = App.themes[App.mainTheme];
 	const themes = App.themes;
-	const select = create('select', [classes.input], {
+	const select = create('select', [classes.select], {
 		name: 'theme_template',
 	});
 	const mainGroup = create('optgroup', [], { label: '*' }, select);

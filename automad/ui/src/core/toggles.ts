@@ -26,30 +26,31 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes } from '../../core';
-import { CheckboxComponent } from './Checkbox';
+import { classes } from './classes';
+import { listen } from './events';
+import { queryAll } from './utils';
 
-/**
- * A large checkbox field.
- *
- * @extends FieldComponent
- */
-class CheckboxLargeComponent extends CheckboxComponent {
-	/**
-	 * Checkbox styles.
-	 */
-	protected classes = [classes.checkbox, classes.checkboxLarge];
+export const initCheckboxToggles = (container: HTMLElement) => {
+	const checkboxes = queryAll(
+		'input[toggle]',
+		container
+	) as HTMLInputElement[];
 
-	/**
-	 * Remove label fpr large checkboxes.
-	 */
-	protected createLabel(): void {}
-}
+	checkboxes.forEach((checkbox) => {
+		const targets = queryAll(checkbox.getAttribute('toggle'));
+		const toggleTargets = () => {
+			targets.forEach((target) => {
+				target.classList.toggle(classes.displayNone, !checkbox.checked);
+			});
+		};
 
-customElements.define('am-checkbox-large', CheckboxLargeComponent);
+		listen(checkbox, 'change', toggleTargets);
+		toggleTargets();
+	});
+};

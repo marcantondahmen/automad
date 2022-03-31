@@ -26,30 +26,24 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes } from '../../core';
-import { CheckboxComponent } from './Checkbox';
+import { App, html } from '../../../../core';
 
-/**
- * A large checkbox field.
- *
- * @extends FieldComponent
- */
-class CheckboxLargeComponent extends CheckboxComponent {
-	/**
-	 * Checkbox styles.
-	 */
-	protected classes = [classes.checkbox, classes.checkboxLarge];
-
-	/**
-	 * Remove label fpr large checkboxes.
-	 */
-	protected createLabel(): void {}
-}
-
-customElements.define('am-checkbox-large', CheckboxLargeComponent);
+export const renderUpdateSection = (): string => {
+	return html`
+		<am-form>
+			<p>$${App.text('systemUpdateAvailable')}</p>
+			<p>$${App.text('systemUpdateCurrentVersion')}</p>
+			<p>$${App.text('systemUpdateItems')}</p>
+			<p>$${App.text('systemUpdateProgress')}</p>
+			<p>$${App.text('systemUpdateTo')}</p>
+			<p>$${App.text('systemUpdateWindowsWarning')}</p>
+			<p>$${App.text('systemUpToDate')}</p>
+		</am-form>
+	`;
+};

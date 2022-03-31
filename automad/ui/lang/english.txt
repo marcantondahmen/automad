@@ -126,6 +126,10 @@ cropTool: Crop
 
 -
 
+currentPassword: Current Password
+
+-
+
 custom: Custom
 
 -
@@ -343,6 +347,10 @@ name: Name
 -
 
 nameIsRequired: Name is required.
+
+-
+
+newPassword: New Password
 
 -
 
@@ -574,11 +582,67 @@ systemCache: Cache
 
 -
 
+systemCacheInfo: Caching is essential to speed up your site and should generally be enabled. However under some circumstances you might want to disable or clear your cache.
+
+-
+
+systemCacheClear: Clear Cache
+
+-
+
+systemCacheClearInfo: Clearing the site cache forces a rescan for updated pages and files. This action will not remove any page files or images from the cache directory.
+
+-
+
+systemCacheEnable: Caching
+
+-
+
+systemCacheMonitor: The checking interval is
+
+-
+
+systemCacheMonitorInfo: When caching is enabled, Automad will check regularly for changes in the file system. The frequency of those checks can be defined here.
+
+-
+
+systemCacheLifetime: The cache lifetime is 
+
+-
+
+systemCacheLifetimeInfo: All cached Automad data and pages have a maximum lifetime. After the lifetime of an object exceeds, its cache will be rebuilt when requested.   
+
+-
+
+systemCachePurge: Purge Cache Directory
+
+-
+
+systemCachePurgeInfo: In contrast to simply clearing the cache, purging the cache directory will also move all temporary files, deleted pages, update-backups and cached images to the temporary directory of the system. This will force a full rebuild of the image and page cache as well as a cleanup of all deleted pages. On most systems the temporary directory will be cleaned up automatically from time to time or on reboot. However, on some systems temporary directories has to be purged manually.
+
+-
+
 systemConfigFile: Configuration File
 
 -
 
+systemConfigFileInfo: Advanced settings can be managed by directly editing the configuration file. Please note that only experienced users should edit the configuration file to avoid damage to your installation. In case something goes wrong, please delete the configuration file manually from your server in order to restore the default settings.
+
+-
+
+systemConfigFileEdit: Edit Configuration File
+
+-
+
 systemDebug: Debug
+
+-
+
+systemDebugEnable: Debug Mode
+
+-
+
+systemDebugInfo: When debugging is enabled, all of Automad's processes will be logged to your browser's console. Debugging is only needed for development or troubleshooting and should be disabled in all other cases.
 
 -
 
@@ -590,7 +654,35 @@ systemLanguage: Language
 
 -
 
+systemLanguageInfo: There are several languages available for the Dashboard. The translations are created automatically. This feature is still in an experimental phase and therefore some translations might not be accurate.
+
+-
+
 systemRssFeed: RSS Feed
+
+-
+
+systemRssFeedEnable: RSS Feed
+
+-
+
+systemRssFeedFields: You can sort, add or remove the fields that should be included in the RSS feed by dragging them onto one of the two areas below.
+
+-
+
+systemRssFeedFieldsInfoUnused: Move elements into this area in order to remove them from the RSS feed
+
+-
+
+systemRssFeedFieldsInfoUsed: Move elements into this area in order to add them to the RSS feed
+
+-
+
+systemRssFeedInfo: When the RSS feed option is enabled, Automad will automatically generate an RSS feed document and publish it under the URL that is displayed below in order to allow users to follow your newest posts.
+
+-
+
+systemRssFeedUrl: The RSS feed will be available under the following link. You can add it to your navigation by adding a new page and using the URL below as value for the redirect field. 
 
 -
 
@@ -602,7 +694,27 @@ systemUpdate: Update
 
 -
 
+systemUpdateAvailable: A newer version of Automad is available and ready to be installed. Please backup your current installation before updating!
+
+-
+
 systemUpdateCurrentVersion: Your currently installed version is 
+
+-
+
+systemUpdateItems: Note that the following files and directories are affected by the update:
+
+-
+
+systemUpdateProgress: Please wait and don't close the window while updating ...
+
+-
+
+systemUpdateTo: Update to version
+
+-
+
+systemUpdateWindowsWarning: Make sure that all files of your installation are closed in external programs before running the update to avoid permissions issues!
 
 -
 
@@ -611,6 +723,34 @@ systemUpToDate: Automad is up to date.
 -
 
 systemUsers: Users
+
+-
+
+systemUsersAdd: Add User
+
+-
+
+systemUsersChangePassword: Change Your Password
+
+-
+
+systemUsersInfo: Here you can find all information related to your account and change your username, password or email. In order to be able to reset your password by email, please make sure that you have entered a vaild and active email address below.
+
+-
+
+systemUsersInvite: Invite User by Email
+
+-
+
+systemUsersRegistered: Registered Users
+
+-
+
+systemUsersRegisteredInfo: It is also possible to register other users in order to allow them to edit content. 
+
+-
+
+systemUsersYou: You
 
 -
 

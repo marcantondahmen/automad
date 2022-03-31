@@ -139,7 +139,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Create a label.
 	 */
-	createLabel(): void {
+	protected createLabel(): void {
 		const { id, label, tooltip } = this._data;
 		const wrapper = create('div', [], {}, this);
 
@@ -153,7 +153,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Create an input field.
 	 */
-	createInput(): void {
+	protected createInput(): void {
 		const { name, id, value, placeholder } = this._data;
 		create(
 			'input',
@@ -166,7 +166,7 @@ export class FieldComponent extends BaseComponent {
 	/**
 	 * Render the field.
 	 */
-	init(): void {
+	protected init(): void {
 		this.createLabel();
 		this.createInput();
 		this.applyAttributes();
@@ -184,7 +184,7 @@ export class FieldComponent extends BaseComponent {
 				this.removeAttribute('required');
 			}
 
-			['bind', 'bindto'].forEach((attr) => {
+			['bind', 'bindto', 'toggle'].forEach((attr) => {
 				if (this.hasAttribute(attr)) {
 					input.setAttribute(attr, this.getAttribute(attr));
 					this.removeAttribute(attr);

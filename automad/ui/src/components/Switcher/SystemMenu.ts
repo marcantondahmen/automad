@@ -32,24 +32,31 @@
  * Licensed under the MIT license.
  */
 
-import { classes } from '../../core';
-import { CheckboxComponent } from './Checkbox';
+import { classes, eventNames, listen } from '../../core';
+import { BaseComponent } from '../Base';
+import { getActiveSection, Sections } from './Switcher';
 
 /**
- * A large checkbox field.
+ * The system menu switcher wrapper.
  *
- * @extends FieldComponent
+ * @extends BaseComponent
  */
-class CheckboxLargeComponent extends CheckboxComponent {
+class SystemMenuComponent extends BaseComponent {
 	/**
-	 * Checkbox styles.
+	 * The callback function used when an element is created in the DOM.
 	 */
-	protected classes = [classes.checkbox, classes.checkboxLarge];
+	connectedCallback(): void {
+		this.listeners.push(
+			listen(window, eventNames.switcherChange, () => {
+				const section = getActiveSection();
 
-	/**
-	 * Remove label fpr large checkboxes.
-	 */
-	protected createLabel(): void {}
+				this.classList.toggle(
+					classes.displayNone,
+					section == Sections[Sections.overview]
+				);
+			})
+		);
+	}
 }
 
-customElements.define('am-checkbox-large', CheckboxLargeComponent);
+customElements.define('am-system-menu', SystemMenuComponent);

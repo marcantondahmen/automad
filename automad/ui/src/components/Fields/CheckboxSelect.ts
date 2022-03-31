@@ -49,7 +49,7 @@ class CheckboxSelectComponent extends FieldComponent {
 
 		const wrapper = create(
 			'div',
-			[classes.checkbox, classes.checkboxSelect],
+			[classes.checkbox, classes.checkboxSelect, classes.select],
 			{},
 			this
 		);

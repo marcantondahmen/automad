@@ -41,6 +41,7 @@ import {
 	waitForPendingRequests,
 	listen,
 	Bindings,
+	initCheckboxToggles,
 } from '../core';
 import { BaseComponent } from './Base';
 
@@ -123,6 +124,7 @@ export class RootComponent extends BaseComponent {
 		await waitForPendingRequests();
 
 		Bindings.connectElements(this);
+		initCheckboxToggles(this);
 
 		this.progressBar(100);
 
