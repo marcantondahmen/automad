@@ -50,14 +50,12 @@ class Packagist {
 	 * Get a list op packages from Packagist filtered by type and tag.
 	 *
 	 * @param string $type
-	 * @param string $tag
 	 * @return array The list of packages
 	 */
-	public static function getPackages(string $type = '', string $tag = '') {
+	public static function getPackages(string $type = '') {
 		$query = http_build_query(
 			array(
-				'type' => $type,
-				'tags' => $tag
+				'type' => $type
 			)
 		);
 
