@@ -63,7 +63,7 @@ export const sidebarLayout = ({ main }: Partials) => {
 									class="${classes.navLink}"
 								>
 									<am-icon-text
-										icon="bookmark"
+										icon="window-desktop"
 										text="$${App.sitename}"
 									></am-icon-text>
 								</a>

@@ -39,9 +39,9 @@ import {
 	fire,
 	listen,
 	queryAll,
-} from '../../core';
-import { File, KeyValueMap } from '../../types';
-import { FormComponent } from './Form';
+} from '../../../core';
+import { File, KeyValueMap } from '../../../types';
+import { FormComponent } from '../Form';
 
 /**
  * The file collection form component.

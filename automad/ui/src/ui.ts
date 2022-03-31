@@ -55,8 +55,8 @@ import './components/File/FileInfo';
 import './components/File/FileRobot';
 import './components/File/Upload';
 
-import './components/Forms/FileCollectionList';
-import './components/Forms/FileCollectionSubmit';
+import './components/Forms/FileCollection/List';
+import './components/Forms/FileCollection/Submit';
 import './components/Forms/Form';
 import './components/Forms/PageData';
 import './components/Forms/Submit';

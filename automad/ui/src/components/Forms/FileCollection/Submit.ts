@@ -26,51 +26,47 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, listen, queryParents } from '../core';
-import { BaseComponent } from './Base';
+import { listen, queryAll } from '../../../core';
+import { FormComponent } from '../Form';
+import { SubmitComponent } from '../Submit';
 
 /**
- * A simple dropdown menu component.
- *
- * @example
- * <am-dropdown>
- *     Menu
- *     <div class="am-c-dropdown__items">
- *         ...
- *     </div>
- * </am-dropdown>
- *
- * @extends BaseComponent
+ * A submit button for the FileCollectionListComponent form.
+
+ * @extends SubmitComponent
  */
-class DropdownComponent extends BaseComponent {
+class FileCollectionSubmitComponent extends SubmitComponent {
 	/**
 	 * The callback function used when an element is created in the DOM.
 	 */
-	connectedCallback(): void {
-		this.classList.add(classes.dropdown);
+	connectedCallback() {
+		super.connectedCallback();
 
-		this.listeners.push(
-			listen(window, 'click', (event: MouseEvent) => {
-				if (
-					event.target === this ||
-					queryParents(
-						'am-dropdown',
-						event.target as HTMLElement
-					).includes(this)
-				) {
-					this.classList.toggle(classes.dropdownOpen);
-				} else {
-					this.classList.remove(classes.dropdownOpen);
-				}
-			})
-		);
+		this.toggleAttribute('disabled', true);
+
+		this.relatedForms.forEach((form: FormComponent) => {
+			listen(
+				form,
+				'change',
+				() => {
+					this.toggleAttribute(
+						'disabled',
+						queryAll(':checked', form).length == 0
+					);
+				},
+				'[type="checkbox"]'
+			);
+		});
 	}
 }
 
-customElements.define('am-dropdown', DropdownComponent);
+customElements.define(
+	'am-file-collection-submit',
+	FileCollectionSubmitComponent
+);

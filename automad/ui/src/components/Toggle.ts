@@ -59,13 +59,15 @@ class ToggleComponent extends BaseComponent {
 	 * The callback function used when an element is created in the DOM.
 	 */
 	connectedCallback(): void {
-		listen(this, 'click', () => {
-			const elements = queryAll(this.elementAttributes.target);
+		this.listeners.push(
+			listen(this, 'click', () => {
+				const elements = queryAll(this.elementAttributes.target);
 
-			elements.forEach((element) => {
-				element.classList.toggle(this.elementAttributes.cls);
-			});
-		});
+				elements.forEach((element) => {
+					element.classList.toggle(this.elementAttributes.cls);
+				});
+			})
+		);
 	}
 }
 

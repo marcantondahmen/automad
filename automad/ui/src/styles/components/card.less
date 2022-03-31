@@ -41,6 +41,15 @@
 	border-radius: var(--am-radius);
 	font-size: var(--am-font-size-small);
 
+	&--link {
+		cursor: pointer;
+		transition: border 0.2s;
+
+		&:hover {
+			border-color: var(--am-clr-base);
+		}
+	}
+
 	&__image {
 		--radius: ~'calc(var(--am-radius) - var(--am-border-width))';
 		position: relative;
@@ -66,6 +75,10 @@
 		gap: var(--am-flex-gap);
 		padding: var(--am-card-padding);
 		padding-top: 0;
+	}
+
+	&__icon {
+		font-size: 2rem;
 	}
 
 	&__title {

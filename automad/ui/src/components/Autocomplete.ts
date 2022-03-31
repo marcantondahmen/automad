@@ -49,6 +49,11 @@ import {
 	eventNames,
 } from '../core';
 
+/**
+ * Compile the autocompletion data.
+ *
+ * @returns the autocomplete data
+ */
 const autocompleteData = (): AutocompleteItemData[] => {
 	const data: AutocompleteItemData[] = [];
 	const pages: PageMetaData[] = Object.values(App.pages);

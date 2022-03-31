@@ -26,51 +26,41 @@
  *
  * AUTOMAD
  *
- * Copyright (c) 2021 by Marc Anton Dahmen
+ * Copyright (c) 2022 by Marc Anton Dahmen
  * https://marcdahmen.de
  *
  * Licensed under the MIT license.
  */
 
-import { classes, listen, queryParents } from '../core';
-import { BaseComponent } from './Base';
-
-/**
- * A simple dropdown menu component.
- *
- * @example
- * <am-dropdown>
- *     Menu
- *     <div class="am-c-dropdown__items">
- *         ...
- *     </div>
- * </am-dropdown>
- *
- * @extends BaseComponent
- */
-class DropdownComponent extends BaseComponent {
-	/**
-	 * The callback function used when an element is created in the DOM.
-	 */
-	connectedCallback(): void {
-		this.classList.add(classes.dropdown);
-
-		this.listeners.push(
-			listen(window, 'click', (event: MouseEvent) => {
-				if (
-					event.target === this ||
-					queryParents(
-						'am-dropdown',
-						event.target as HTMLElement
-					).includes(this)
-				) {
-					this.classList.toggle(classes.dropdownOpen);
-				} else {
-					this.classList.remove(classes.dropdownOpen);
-				}
-			})
-		);
-	}
+export interface SystemSectionData {
+	section: string;
+	icon: string;
+	title: string;
+	info: string;
+	render: Function;
 }
 
-customElements.define('am-dropdown', DropdownComponent);
+interface CacheSettings {
+	enabled: boolean | 0 | 1;
+	lifetime: number;
+	monitorDelay: number;
+}
+
+interface FeedSettings {
+	enabled: boolean | 0 | 1;
+	fields: string;
+}
+
+interface UserSettings {
+	name: string;
+	email: string;
+}
+
+export interface SystemSettings {
+	cache: CacheSettings;
+	debug: boolean | 0 | 1;
+	feed: FeedSettings;
+	translation: string;
+	users: UserSettings[];
+	tempDirectory: string;
+}

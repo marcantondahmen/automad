@@ -44,7 +44,7 @@ import {
 	query,
 } from '../../core';
 import { BaseComponent } from '../Base';
-import { FileCollectionListComponent } from '../Forms/FileCollectionList';
+import { FileCollectionListComponent } from '../Forms/FileCollection/List';
 import { ModalComponent } from '../Modal/Modal';
 
 /**

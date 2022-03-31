@@ -34,6 +34,7 @@
 
 export * from './form';
 export * from './page';
+export * from './system';
 import { PageMetaData } from '.';
 
 export interface KeyValueMap {

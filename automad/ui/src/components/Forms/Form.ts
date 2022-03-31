@@ -62,17 +62,11 @@ const debounced = debounce(async (callback: Function): Promise<void> => {
  *
  * The following options are available and can be passed as attributes:
  * - `api` (required) - the API endpoint
- * - `init` - sumbit form when connected to DOM
  * - `focus` - focus first input when connected
  * - `enter` - submit using enter key
  * - `confirm` - require confirmation before submitting
  * - `event` - fire event when receiving the API response
  * - `auto` - automatically submit form on change
- *
- * Self initialized form that submits changes automatically:
- *
- * @example
- * <am-form api="Class/method" init auto></am-form>
  *
  * Focus the first input of a for when being connected:
  *
@@ -128,7 +122,7 @@ export class FormComponent extends BaseComponent {
 	 * The form inits itself when created.
 	 */
 	protected get initSelf(): boolean {
-		return this.hasAttribute('init');
+		return false;
 	}
 
 	/**
