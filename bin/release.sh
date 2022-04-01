@@ -12,7 +12,7 @@
 #	2.	Check whether the current branch is develop
 #	3.	Run tests
 #	4.	Update version numbers in automad/version.php and all related JSON files
-#	5.	Run Gulp tasks for UI and themes (to update version numbers in dist files)
+#	5.	Run webpack build
 #	6.	Commit changed files
 #	7.	Merge branch develop into master
 #	8.	Create tag for release
@@ -33,7 +33,7 @@ fi
 
 
 # Kill all watch tasks.
-ps | grep "gulp watch" | grep -v grep | awk '{print $1}' | xargs kill
+ps | grep "webpack" | grep -v grep | awk '{print $1}' | xargs kill
 
 
 # Run tests.
@@ -120,16 +120,9 @@ done
 echo
 
 
-# Running Gulp tasks.
-echo "Running Gulp tasks ..."
-(
-	cd automad
-	gulp
-)
-(
-	cd packages/standard
-	gulp
-)
+# Running webpack builds.
+echo "Build ..."
+npm run build
 echo
 
 
