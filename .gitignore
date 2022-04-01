@@ -27,3 +27,6 @@ lib/vendor/michelf/php-markdown/.travis.yml
 lib/vendor/michelf/php-markdown/phpunit.xml.dist
 phpunit-*.phar
 .phpunit.result.cache
+legacy
+*-legacy.*
+*.map
