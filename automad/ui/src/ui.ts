@@ -32,6 +32,9 @@
  * Licensed under the MIT license.
  */
 
+import 'modern-normalize/modern-normalize.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import './styles/ui.less';
 
 import './components/Fields/Checkbox';

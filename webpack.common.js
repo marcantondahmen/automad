@@ -42,6 +42,7 @@ module.exports = (env, argv) => {
 						'less-loader',
 					],
 				},
+				// Fix file name of inter font.
 				{
 					test: /\.woff2?$/i,
 					type: 'asset/resource',
@@ -55,6 +56,15 @@ module.exports = (env, argv) => {
 								.replace('.var', '-var')
 								.toLowerCase()}`;
 						},
+					},
+				},
+				// Ignore Bootstrap icons legacy woff file.
+				{
+					test: /bootstrap-icons\.css$/i,
+					loader: 'string-replace-loader',
+					options: {
+						search: /,\s*url\("[^"]+\/bootstrap-icons\.woff\?\w+"\)\s*format\("woff"\)/g,
+						replace: '',
 					},
 				},
 			],
