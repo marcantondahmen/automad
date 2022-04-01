@@ -92,7 +92,7 @@ class Str {
 	 * @return string The default value
 	 */
 	public static function def(?string $str, ?string $defaultValue = null) {
-		if (trim($str) === '') {
+		if ($str === null || trim($str) === '') {
 			$str = $defaultValue;
 		}
 
@@ -106,6 +106,10 @@ class Str {
 	 * @return string The escaped string
 	 */
 	public static function escape(?string $str) {
+		if ($str === null) {
+			return '';
+		}
+
 		// Escape values to be used in headless mode.
 		// The json_encode() function is used to create a valid JSON string
 		// with only one temporary key.
@@ -318,6 +322,8 @@ class Str {
 	 * @return string The clean string
 	 */
 	public static function stripTags(?string $str) {
-		return trim(strip_tags(Str::markdown(strip_tags($str))));
+		if ($str !== null) {
+			return trim(strip_tags(Str::markdown(strip_tags($str))));
+		}
 	}
 }
