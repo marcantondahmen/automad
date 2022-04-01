@@ -93,7 +93,12 @@ class Parse {
 		$content = preg_replace('/\r\n?/', "\n", file_get_contents($file));
 
 		// Split $content into data blocks on every line only containing one or more AM_PARSE_BLOCK_SEPARATOR and whitespace, followed by a key in a new line.
-		$pairs = preg_split('/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . PatternAssembly::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s', $content, null, PREG_SPLIT_NO_EMPTY);
+		$pairs = preg_split(
+			'/\n' . preg_quote(AM_PARSE_BLOCK_SEPARATOR) . '+\s*\n(?=' . PatternAssembly::$charClassTextFileVariables . '+' . preg_quote(AM_PARSE_PAIR_SEPARATOR) . ')/s',
+			$content,
+			-1,
+			PREG_SPLIT_NO_EMPTY
+		);
 
 		// Split $pairs into an array of vars.
 		foreach ($pairs as $pair) {
