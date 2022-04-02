@@ -1,0 +1,1 @@
+@{ date | dateFormat ('EEEE, d. MMMM Y', 'de_DE') }

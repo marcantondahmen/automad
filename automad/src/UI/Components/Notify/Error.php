@@ -49,10 +49,10 @@ class Error {
 	/**
 	 * Create an error notification.
 	 *
-	 * @param string|null $error
+	 * @param string $error
 	 * @return string The HTML for an error notification
 	 */
-	public static function render(?string $error = null) {
+	public static function render(string $error = '') {
 		if (!$error) {
 			return '';
 		}

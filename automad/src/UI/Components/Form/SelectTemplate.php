@@ -56,11 +56,11 @@ class SelectTemplate {
 	 * @param Automad $Automad
 	 * @param ThemeCollection $ThemeCollection
 	 * @param string $name
-	 * @param string|null $selectedTheme
-	 * @param string|null $selectedTemplate
+	 * @param string $selectedTheme
+	 * @param string $selectedTemplate
 	 * @return string The HTML for the select box including a label and a wrapping div.
 	 */
-	public static function render(Automad $Automad, ThemeCollection $ThemeCollection, string $name = '', ?string $selectedTheme = null, ?string $selectedTemplate = null) {
+	public static function render(Automad $Automad, ThemeCollection $ThemeCollection, string $name = '', string $selectedTheme = '', string $selectedTemplate = '') {
 		$themes = $ThemeCollection->getThemes();
 		$mainTheme = $ThemeCollection->getThemeByKey($Automad->Shared->get(AM_KEY_THEME));
 

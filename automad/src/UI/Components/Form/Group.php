@@ -59,11 +59,11 @@ class Group {
 	 * @param Automad $Automad
 	 * @param array $keys
 	 * @param array $data
-	 * @param string|null $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
+	 * @param string $addVariableIdPrefix (automatically prefixes all IDs for the HTML elements needed for the modal to add variables)
 	 * @param Theme|null $Theme
 	 * @return string The HTML for the textarea
 	 */
-	public static function render(Automad $Automad, array $keys, array $data = array(), ?string $addVariableIdPrefix = null, ?Theme $Theme = null) {
+	public static function render(Automad $Automad, array $keys, array $data = array(), string $addVariableIdPrefix = '', ?Theme $Theme = null) {
 		$Text = Text::getObject();
 		$html = '';
 

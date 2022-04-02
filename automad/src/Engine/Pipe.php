@@ -160,10 +160,10 @@ class Pipe {
 	 *
 	 * @param string $function
 	 * @param array $parameters
-	 * @param string|null $value
+	 * @param string $value
 	 * @return string $value
 	 */
-	private static function stringFunction(string $function, array $parameters, ?string $value = null) {
+	private static function stringFunction(string $function, array $parameters, string $value = '') {
 		if (!$parameters) {
 			$parameters = array();
 		}
@@ -171,24 +171,31 @@ class Pipe {
 		// Add the actual $value to the parameters array as its first element.
 		$parameters = array_merge(array(0 => $value), $parameters);
 
-		// Call string function.
+		// Call a String class method.
 		if (method_exists('\Automad\Core\Str', $function)) {
-			// Call a String class method.
 			$value = call_user_func_array('\Automad\Core\Str::' . $function, $parameters);
 			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call Str::' . $function);
-		} elseif (in_array(strtolower($function), Pipe::$phpFunctions)) {
-			// Call standard PHP string function.
-			$value = call_user_func_array($function, $parameters);
-			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call ' . $function);
-		} elseif (is_numeric($function)) {
-			// In case $function is a number, call Str::shorten() method and pass $function as paramter for the max number of characters.
-			Debug::log($value, 'Shorten content to max ' . $function . ' characters');
-			$value = Str::shorten($value, $function);
-		} else {
-			// Loading custom string functions as extensions.
-			$value = self::extension($function, $parameters, $value);
+
+			return $value;
 		}
 
-		return $value;
+		// Call standard PHP string function.
+		if (in_array(strtolower($function), Pipe::$phpFunctions)) {
+			$value = call_user_func_array($function, $parameters);
+			Debug::log(array('Result' => $value, 'Parameters' => $parameters), 'Call ' . $function);
+
+			return $value;
+		}
+
+		// In case $function is a number, call Str::shorten() method and pass $function as paramter
+		// for the max number of characters.
+		if (is_numeric($function)) {
+			Debug::log($value, 'Shorten content to max ' . $function . ' characters');
+
+			return Str::shorten($value, $function);
+		}
+
+		// Loading custom string functions as extensions.
+		return self::extension($function, $parameters, $value);
 	}
 }

@@ -56,43 +56,50 @@ class Str {
 	 * To be independent on the given format without explicitly specifying it, strtotime() is used generate a proper input date.
 	 * To use DateTime::createFromFormat() instead would require a third parameter (the original format)
 	 * and would therefore make things more complicated than needed.
-	 * The format can use either the date() or strftime() syntax. In case a locale is defined,
-	 * the strftime() syntax has to be used.
-	 * Multiple values can be passed as a CSV string for the locale parameter.
+	 * The format can use either the date() or ICU syntax. In case a locale is defined,
+	 * the ICU syntax is used.
 	 *
-	 * @param string|null $date
-	 * @param string|null $format
+	 * @see https://www.php.net/manual/en/intldateformatter.create.php
+	 * @see https://www.php.net/manual/en/intldateformatter.format.php
+	 * @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+	 * @see https://www.php.net/manual/en/datetime.format.php
+	 * @param string $date
+	 * @param string $format
 	 * @param string|null $locale
 	 * @return string The formatted date
 	 */
-	public static function dateFormat(?string $date, ?string $format = null, ?string $locale = null) {
-		if ($date) {
-			if (strpos($format, '%') !== false) {
-				$original = setlocale(LC_TIME, 0);
-
-				if ($locale) {
-					setlocale(LC_TIME, Parse::csv($locale));
-				}
-
-				$formatted = strftime($format, strtotime($date));
-				setlocale(LC_TIME, $original);
-			} else {
-				$formatted = date($format, strtotime($date));
-			}
-
-			return $formatted;
+	public static function dateFormat(string $date, string $format = 'D, d M Y', ?string $locale = null) {
+		if (!$date || !$format) {
+			return '';
 		}
+
+		$date = strtotime($date);
+
+		if ($locale && class_exists('\IntlDateFormatter')) {
+			$formatter = new \IntlDateFormatter(
+				$locale,
+				\IntlDateFormatter::LONG,
+				\IntlDateFormatter::NONE,
+				null,
+				null,
+				$format
+			);
+
+			return $formatter->format($date);
+		}
+
+		return date($format, $date);
 	}
 
 	/**
 	 * Set a default value for $str in case $str is empty.
 	 *
-	 * @param string|null $str
-	 * @param string|null $defaultValue
+	 * @param string $str
+	 * @param string $defaultValue
 	 * @return string The default value
 	 */
-	public static function def(?string $str, ?string $defaultValue = null) {
-		if ($str === null || trim($str) === '') {
+	public static function def(string $str, string $defaultValue = '') {
+		if (trim($str) === '') {
 			$str = $defaultValue;
 		}
 
@@ -102,14 +109,10 @@ class Str {
 	/**
 	 * Escapes a string to be used safely in a JSON string.
 	 *
-	 * @param string|null $str
+	 * @param string $str
 	 * @return string The escaped string
 	 */
-	public static function escape(?string $str) {
-		if ($str === null) {
-			return '';
-		}
-
+	public static function escape(string $str) {
 		// Escape values to be used in headless mode.
 		// The json_encode() function is used to create a valid JSON string
 		// with only one temporary key.
@@ -126,24 +129,34 @@ class Str {
 	/**
 	 * Find the URL of the first image within rendered HTML markup.
 	 *
-	 * @param string|null $str
-	 * @return string The URL of the first image or false
+	 * @param string $str
+	 * @return string The URL of the first image or an empty string
 	 */
-	public static function findFirstImage(?string $str) {
+	public static function findFirstImage(string $str) {
+		if (!$str) {
+			return '';
+		}
+
 		preg_match('/<img[^>]+src="([^"]+)"/is', $str, $matches);
 
 		if (!empty($matches[1])) {
 			return $matches[1];
 		}
+
+		return '';
 	}
 
 	/**
 	 * Find the first paragraph in rendered HTML and return its inner HTML.
 	 *
-	 * @param string|null $str
-	 * @return string The inner HTML of the first paragraph or false
+	 * @param string $str
+	 * @return string The inner HTML of the first paragraph or an empty string
 	 */
-	public static function findFirstParagraph(?string $str) {
+	public static function findFirstParagraph(string $str) {
+		if (!$str) {
+			return '';
+		}
+
 		// First remove any paragraph only containing an image.
 		$str = preg_replace('/<p>\s*<img.+?><\/p>/is', '', $str);
 		preg_match('/<p\b[^>]*>(.*?)<\/p>/is', $str, $matches);
@@ -151,50 +164,52 @@ class Str {
 		if (!empty($matches[1])) {
 			return $matches[1];
 		}
+
+		return '';
 	}
 
 	/**
 	 * Parse a markdown string. Optionally skip parsing in case $str is a single line string.
 	 *
-	 * @param string|null $str
+	 * @param string $str
 	 * @param bool $multilineOnly
 	 * @return string The parsed string
 	 */
-	public static function markdown(?string $str, $multilineOnly = false) {
+	public static function markdown(string $str, $multilineOnly = false) {
 		// In case $str has no line breaks and $multilineOnly is enabled, skip parsing.
 		if (strpos($str, "\n") === false && $multilineOnly) {
 			return $str;
-		} else {
-			$str = MarkdownExtra::defaultTransform($str);
-
-			return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function ($matches) {
-				$id = self::sanitize(self::stripTags($matches[2]), true, 100);
-
-				return "<h{$matches[1]} id=\"$id\">{$matches[2]}</h{$matches[1]}>";
-			}, $str);
 		}
+
+		$str = MarkdownExtra::defaultTransform($str);
+
+		return preg_replace_callback('/\<h(2|3)\>(.*?)\<\/h\1\>/i', function ($matches) {
+			$id = self::sanitize(self::stripTags($matches[2]), true, 100);
+
+			return "<h{$matches[1]} id=\"$id\">{$matches[2]}</h{$matches[1]}>";
+		}, $str);
 	}
 
 	/**
 	 * Perform a regex match.
 	 *
-	 * @param string|null $str
-	 * @param string|null $regex
+	 * @param string $str
+	 * @param string $regex
 	 * @return int 1 or 0
 	 */
-	public static function match(?string $str, ?string $regex = null) {
+	public static function match(string $str, string $regex = '') {
 		return preg_match($regex, $str);
 	}
 
 	/**
 	 * Search and replace by regex.
 	 *
-	 * @param string|null $str
-	 * @param string|null $regex
-	 * @param string|null $replace
+	 * @param string $str
+	 * @param string $regex
+	 * @param string $replace
 	 * @return string The processed string
 	 */
-	public static function replace(?string $str, ?string $regex = null, ?string $replace = null) {
+	public static function replace(string $str, string $regex = '', string $replace = '') {
 		return preg_replace($regex, $replace, $str);
 	}
 
@@ -206,12 +221,12 @@ class Str {
 	 * Note: To produce fully safe prefixes and directory names,
 	 * possible dots should be removed by setting $removeDots = true.
 	 *
-	 * @param string|null $str
+	 * @param string $str
 	 * @param bool $removeDots
 	 * @param int $maxChars
 	 * @return string The sanitized string
 	 */
-	public static function sanitize(?string $str, $removeDots = false, $maxChars = 100) {
+	public static function sanitize(string $str, $removeDots = false, $maxChars = 100) {
 		if (strlen($str) === 0) {
 			return '';
 		}
@@ -243,12 +258,16 @@ class Str {
 	/**
 	 * Shortens a string keeping full words. Note that this method also first strips all tags from the given string.
 	 *
-	 * @param string|null $str
+	 * @param string $str
 	 * @param int $maxChars
 	 * @param string $ellipsis
 	 * @return string The shortened string
 	 */
-	public static function shorten(?string $str, $maxChars, string $ellipsis = ' ...') {
+	public static function shorten(string $str, $maxChars, string $ellipsis = ' ...') {
+		if (strlen($str) === 0) {
+			return '';
+		}
+
 		$str = Str::stripTags($str);
 		$str = preg_replace('/[\n\r]+/s', ' ', $str);
 
@@ -274,12 +293,12 @@ class Str {
 	 * In case the sanitized string is empty or the string is shorter than 6 chars while the
 	 * input string is longer than 12 chars, the string is replaced with a md5 hash shortened to 16 chars.
 	 *
-	 * @param string|null $str
+	 * @param string $str
 	 * @param bool $removeDots
 	 * @param int $maxChars
 	 * @return string the slug
 	 */
-	public static function slug(?string $str, $removeDots = false, $maxChars = 100) {
+	public static function slug(string $str, $removeDots = false, $maxChars = 100) {
 		if (strlen($str) === 0) {
 			return '';
 		}
@@ -296,34 +315,32 @@ class Str {
 	/**
 	 * Strip substring from end of string.
 	 *
-	 * @param string|null $str
-	 * @param string|null $end
+	 * @param string $str
+	 * @param string $end
 	 * @return string The processed string
 	 */
-	public static function stripEnd(?string $str, ?string $end = null) {
+	public static function stripEnd(string $str, string $end = '') {
 		return preg_replace('/' . preg_quote($end, '/') . '$/', '', $str);
 	}
 
 	/**
 	 * Strip substring from start of string.
 	 *
-	 * @param string|null $str
-	 * @param string|null $start
+	 * @param string $str
+	 * @param string $start
 	 * @return string The processed string
 	 */
-	public static function stripStart(?string $str, ?string $start = null) {
+	public static function stripStart(string $str, string $start = '') {
 		return preg_replace('/^' . preg_quote($start, '/') . '/', '', $str);
 	}
 
 	/**
 	 * Removes all HTML and Markdown (!) tags.
 	 *
-	 * @param string|null $str
+	 * @param string $str
 	 * @return string The clean string
 	 */
-	public static function stripTags(?string $str) {
-		if ($str !== null) {
-			return trim(strip_tags(Str::markdown(strip_tags($str))));
-		}
+	public static function stripTags(string $str) {
+		return trim(strip_tags(Str::markdown(strip_tags($str))));
 	}
 }

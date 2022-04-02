@@ -52,10 +52,10 @@ class EditFileInfo {
 	 * Create the file edit modal dialog.
 	 *
 	 * @param string $title
-	 * @param string|null $url
+	 * @param string $url
 	 * @return string The HTML for the modal dialog
 	 */
-	public static function render(string $title, ?string $url = null) {
+	public static function render(string $title, string $url = '') {
 		$Text = Text::getObject();
 
 		return <<< HTML

@@ -69,9 +69,9 @@ class FileResultsModel {
 	 * @see FieldResultsModel
 	 * @param string $path
 	 * @param array $fieldResultsArray
-	 * @param string|null $url
+	 * @param string $url
 	 */
-	public function __construct(string $path, array $fieldResultsArray, ?string $url = null) {
+	public function __construct(string $path, array $fieldResultsArray, string $url = '') {
 		$this->path = $path;
 		$this->fieldResultsArray = $fieldResultsArray;
 		$this->url = (string) $url;

@@ -37,7 +37,6 @@
 namespace Automad\UI\Components\Layout\PasswordReset;
 
 use Automad\Core\Request;
-use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Components\Notify\Error;
 use Automad\UI\Utils\Text;
 
@@ -54,10 +53,10 @@ class TokenRequestForm {
 	/**
 	 * Render the token request form.
 	 *
-	 * @param string|null $error
+	 * @param string $error
 	 * @return string the rendered form.
 	 */
-	public static function render(?string $error = null) {
+	public static function render(string $error = '') {
 		$fn = function ($expression) {
 			return $expression;
 		};
