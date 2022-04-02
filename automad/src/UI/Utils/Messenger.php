@@ -49,7 +49,7 @@ class Messenger {
 	/**
 	 * The last pushed error.
 	 */
-	private $error = null;
+	private $error = '';
 
 	/**
 	 * The messenger constructor.
@@ -60,7 +60,7 @@ class Messenger {
 	/**
 	 * Return the stored error message.
 	 *
-	 * @return string|null the error message
+	 * @return string the error message
 	 */
 	public function getError() {
 		return $this->error;
