@@ -64,6 +64,8 @@ class Text {
 		if (isset(Text::$modules[$key])) {
 			return Text::$modules[$key];
 		}
+
+		return '';
 	}
 
 	/**
