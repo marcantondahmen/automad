@@ -67,7 +67,7 @@ class Snippet {
 	public static function render(object $data, Automad $Automad) {
 		// Prevent infinite recursion.
 		if (self::$snippetIsRendering) {
-			return false;
+			return '';
 		}
 
 		self::$snippetIsRendering = true;

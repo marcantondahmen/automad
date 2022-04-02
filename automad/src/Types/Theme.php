@@ -196,5 +196,7 @@ class Theme {
 		if (array_key_exists($key, $this->tooltips)) {
 			return $this->tooltips[$key];
 		}
+
+		return '';
 	}
 }

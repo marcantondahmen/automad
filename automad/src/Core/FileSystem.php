@@ -72,6 +72,8 @@ class FileSystem {
 		if (!empty($pathInfo['extension'])) {
 			return $pathInfo['extension'];
 		}
+
+		return '';
 	}
 
 	/**

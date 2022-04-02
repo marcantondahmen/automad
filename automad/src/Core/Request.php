@@ -130,9 +130,9 @@ class Request {
 	public static function post(string $key) {
 		if (isset($_POST[$key])) {
 			return $_POST[$key];
-		} else {
-			return '';
 		}
+
+		return '';
 	}
 
 	/**
@@ -146,8 +146,8 @@ class Request {
 	public static function query(string $key) {
 		if (isset($_GET[$key])) {
 			return htmlspecialchars($_GET[$key]);
-		} else {
-			return '';
 		}
+
+		return '';
 	}
 }

@@ -205,6 +205,8 @@ class Composer {
 		if ($getBuffer) {
 			return $bufferNoWarning;
 		}
+
+		return '';
 	}
 
 	/**

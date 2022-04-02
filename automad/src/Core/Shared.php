@@ -80,6 +80,8 @@ class Shared {
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
 		}
+
+		return '';
 	}
 
 	/**

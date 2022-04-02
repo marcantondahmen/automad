@@ -56,7 +56,7 @@ class FeatureProvider {
 	/**
 	 * Return the array of feature processor class names.
 	 *
-	 * @return string the class name array
+	 * @return array the class name array
 	 */
 	public static function getProcessorClasses() {
 		if (empty(self::$processorClasses)) {
@@ -69,7 +69,7 @@ class FeatureProvider {
 	/**
 	 * Find all existing feature processors.
 	 *
-	 * @return string the class name array
+	 * @return array the class name array
 	 */
 	private static function findProcessorClasses() {
 		$files = FileSystem::glob(__DIR__ . '/Processors/Features/*.php');

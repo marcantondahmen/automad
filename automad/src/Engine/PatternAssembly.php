@@ -85,12 +85,11 @@ class PatternAssembly {
 		if ($isVariableSubpattern) {
 			return 	self::value('(?-7)') .
 					'(?:,' . self::value('(?-8)') . ')*?';
-		} else {
-			$var = self::variable();
-
-			return 	self::value($var) .
-					'(?:,' . self::value($var) . ')*?';
 		}
+
+		$var = self::variable();
+
+		return 	self::value($var) . '(?:,' . self::value($var) . ')*?';
 	}
 
 	/**

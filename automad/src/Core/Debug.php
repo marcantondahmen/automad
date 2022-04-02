@@ -65,30 +65,32 @@ class Debug {
 	 * @return string The Javascript console log
 	 */
 	public static function consoleLog() {
-		if (AM_DEBUG_ENABLED) {
-			// Stop timer.
-			self::timerStop();
-
-			// Memory usage.
-			self::memory();
-
-			// Get user & server constants.
-			self::uc();
-			self::log($_SERVER, 'Server');
-
-			// Get last error.
-			self::log(error_get_last(), 'Last error');
-
-			$html = '<script type="text/javascript">' . "\n";
-
-			foreach (self::$buffer as $key => $item) {
-				$html .= 'console.log(' . json_encode($item) . ');' . "\n";
-			}
-
-			$html .= '</script>' . "\n";
-
-			return $html;
+		if (!AM_DEBUG_ENABLED) {
+			return '';
 		}
+
+		// Stop timer.
+		self::timerStop();
+
+		// Memory usage.
+		self::memory();
+
+		// Get user & server constants.
+		self::uc();
+		self::log($_SERVER, 'Server');
+
+		// Get last error.
+		self::log(error_get_last(), 'Last error');
+
+		$html = '<script type="text/javascript">' . "\n";
+
+		foreach (self::$buffer as $key => $item) {
+			$html .= 'console.log(' . json_encode($item) . ');' . "\n";
+		}
+
+		$html .= '</script>' . "\n";
+
+		return $html;
 	}
 
 	/**
