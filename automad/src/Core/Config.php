@@ -241,7 +241,7 @@ class Config {
 	 */
 	public static function overrides() {
 		foreach (self::read() as $name => $value) {
-			define($name, $value);
+			self::set($name, $value);
 		}
 	}
 
