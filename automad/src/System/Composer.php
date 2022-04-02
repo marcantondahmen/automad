@@ -166,7 +166,7 @@ class Composer {
 
 		Debug::log($command, 'Command');
 
-		$buffer = null;
+		$buffer = '';
 
 		try {
 			$application->run($input, $output);

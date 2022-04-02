@@ -59,7 +59,7 @@ class FileResultsModel {
 	public $path;
 
 	/**
-	 * The page URL or null for shared data.
+	 * The page URL or an empty string for shared data.
 	 */
 	public $url;
 
