@@ -281,32 +281,40 @@ class ContentProcessor {
 	 * @return string The value
 	 */
 	private function getValue(string $key) {
+		// Query string parameter.
 		if (strpos($key, '?') === 0) {
-			// Query string parameter.
 			$key = substr($key, 1);
 
 			return Request::query($key);
-		} elseif (strpos($key, '%') === 0) {
-			// Session variable.
+		}
+
+		// Session variable.
+		if (strpos($key, '%') === 0) {
 			return SessionData::get($key);
-		} elseif (strpos($key, '+') === 0) {
-			// Blocks variable.
+		}
+
+		// Blocks variable.
+		if (strpos($key, '+') === 0) {
 			$value = Blocks::render(
 				$this->Automad->Context->get()->get($key),
 				$this->Automad
 			);
 
 			return $value;
-		} else {
-			// First try to get the value from the current Runtime object.
-			$value = $this->Runtime->get($key);
+		}
 
-			// If $value is NULL (!), try the current context.
-			if (is_null($value)) {
-				$value = $this->Automad->Context->get()->get($key);
-			}
+		// First try to get the value from the current Runtime object.
+		$value = $this->Runtime->get($key);
 
+		// If $value is NULL (!), try the current context.
+		if (is_null($value)) {
+			$value = $this->Automad->Context->get()->get($key);
+		}
+
+		if ($value) {
 			return $value;
 		}
+
+		return '';
 	}
 }

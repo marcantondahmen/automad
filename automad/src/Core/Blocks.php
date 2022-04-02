@@ -81,11 +81,11 @@ class Blocks {
 		$html = '';
 
 		if (!is_object($data)) {
-			return false;
+			return $html;
 		}
 
 		if (!isset($data->blocks)) {
-			return false;
+			return $html;
 		}
 
 		$data = self::prepareData($data);

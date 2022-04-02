@@ -74,10 +74,10 @@ class Field {
 	 * @param string $value
 	 * @param bool $removeButton
 	 * @param Theme|null $Theme
-	 * @param string|null $label
+	 * @param string $label
 	 * @return string The generated HTML
 	 */
-	public static function render(Automad $Automad, string $key = '', $value = '', bool $removeButton = false, ?Theme $Theme = null, ?string $label = null) {
+	public static function render(Automad $Automad, string $key = '', $value = '', bool $removeButton = false, ?Theme $Theme = null, string $label = '') {
 		// Convert special characters in $value to HTML entities.
 		$value = htmlspecialchars($value);
 

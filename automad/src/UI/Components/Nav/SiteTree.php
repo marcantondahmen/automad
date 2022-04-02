@@ -58,10 +58,10 @@ class SiteTree {
 	 * @param string $parent
 	 * @param array $parameters (additional query string parameters to be passed along with the url)
 	 * @param bool $hideCurrent
-	 * @param string|null $header
+	 * @param string $header
 	 * @return string The branch's HTML
 	 */
-	public static function render(Automad $Automad, string $parent, array $parameters, bool $hideCurrent = false, ?string $header = null) {
+	public static function render(Automad $Automad, string $parent, array $parameters, bool $hideCurrent = false, string $header = '') {
 		$current = Request::query('url');
 
 		$selection = new Selection($Automad->getCollection());

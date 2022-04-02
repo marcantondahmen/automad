@@ -53,10 +53,10 @@ class ResetForm {
 	 * Render the reset form.
 	 *
 	 * @param string $username
-	 * @param string|null $error
+	 * @param string $error
 	 * @return string the rendered form.
 	 */
-	public static function render(string $username, ?string $error = null) {
+	public static function render(string $username, string $error = '') {
 		$fn = function ($expression) {
 			return $expression;
 		};

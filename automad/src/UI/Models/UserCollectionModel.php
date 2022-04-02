@@ -82,11 +82,11 @@ class UserCollectionModel {
 	 * @param string $username
 	 * @param string $password1
 	 * @param string $password2
-	 * @param string|null $email
+	 * @param string $email
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public function createUser(string $username, string $password1, string $password2, ?string $email = null, Messenger $Messenger) {
+	public function createUser(string $username, string $password1, string $password2, string $email, Messenger $Messenger) {
 		$username = trim($username);
 		$email = trim($email);
 
@@ -401,7 +401,7 @@ class UserCollectionModel {
 	 * @param string $email
 	 * @return bool true in case the username is valid
 	 */
-	private function validEmail(?string $email = null) {
+	private function validEmail(string $email = '') {
 		preg_match('/^[a-zA-Z0-9]+[\w\.\-\_]*@[\w\.\-\_]+\.[a-zA-Z]+$/', $email, $matches);
 
 		return $matches;

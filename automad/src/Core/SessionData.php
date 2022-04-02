@@ -61,7 +61,7 @@ class SessionData {
 			if (array_key_exists($key, $_SESSION['data'])) {
 				return $_SESSION['data'][$key];
 			} else {
-				return false;
+				return '';
 			}
 		} else {
 			return $_SESSION['data'];
