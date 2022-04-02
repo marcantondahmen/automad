@@ -57,39 +57,41 @@ class Mail extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(object $data, Automad $Automad) {
-		if (!empty($data->to)) {
-			$defaults = array(
-				'error' => '',
-				'success' => '',
-				'placeholderEmail' => '',
-				'placeholderSubject' => '',
-				'placeholderMessage' => '',
-				'textButton' => ''
-			);
-
-			$options = array_merge($defaults, (array) $data);
-			$data = (object) $options;
-
-			$status = SystemMail::send($data, $Automad);
-
-			if ($status) {
-				$status = "<h3>$status</h3>";
-			}
-
-			$class = self::classAttr();
-
-			return <<< HTML
-				<am-mail $class>
-					$status
-					<form action="" method="post">	
-						<input type="text" name="human" value="">	
-						<input class="am-input" type="text" name="from" value="" placeholder="$data->placeholderEmail">
-						<input class="am-input" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
-						<textarea class="am-input" name="message" placeholder="$data->placeholderMessage"></textarea>
-						<button class="am-button" type="submit">$data->textButton</button>	
-					</form>
-				</am-mail>
-			HTML;
+		if (empty($data->to)) {
+			return '';
 		}
+
+		$defaults = array(
+			'error' => '',
+			'success' => '',
+			'placeholderEmail' => '',
+			'placeholderSubject' => '',
+			'placeholderMessage' => '',
+			'textButton' => ''
+		);
+
+		$options = array_merge($defaults, (array) $data);
+		$data = (object) $options;
+
+		$status = SystemMail::send($data, $Automad);
+
+		if ($status) {
+			$status = "<h3>$status</h3>";
+		}
+
+		$class = self::classAttr();
+
+		return <<< HTML
+			<am-mail $class>
+				$status
+				<form action="" method="post">	
+					<input type="text" name="human" value="">	
+					<input class="am-input" type="text" name="from" value="" placeholder="$data->placeholderEmail">
+					<input class="am-input" type="text" name="subject" value="" placeholder="$data->placeholderSubject">
+					<textarea class="am-input" name="message" placeholder="$data->placeholderMessage"></textarea>
+					<button class="am-button" type="submit">$data->textButton</button>	
+				</form>
+			</am-mail>
+		HTML;
 	}
 }

@@ -63,9 +63,9 @@ class Blocks {
 		// Check if there is already any other script tag and try to prepend all assets as first items.
 		if (preg_match('/\<(script|link).*\<\/head\>/is', $str)) {
 			return preg_replace('/(\<(script|link).*\<\/head\>)/is', $assets . '$1', $str);
-		} else {
-			return str_replace('</head>', $assets . '</head>', $str);
 		}
+
+		return str_replace('</head>', $assets . '</head>', $str);
 	}
 
 	/**

@@ -112,6 +112,8 @@ class TemplateProcessor {
 						return $featureOutput;
 					}
 				}
+
+				return '';
 			},
 			$output
 		);

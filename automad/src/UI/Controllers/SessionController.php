@@ -65,6 +65,8 @@ class SessionController {
 				return Text::get('error_login');
 			}
 		}
+
+		return '';
 	}
 
 	/**

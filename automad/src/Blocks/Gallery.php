@@ -88,6 +88,8 @@ class Gallery extends AbstractBlock {
 
 			return '<am-gallery ' . self::classAttr() . $style . '>' . $html . '</am-gallery>';
 		}
+
+		return '';
 	}
 
 	/**

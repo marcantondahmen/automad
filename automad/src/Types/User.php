@@ -93,7 +93,7 @@ class User {
 	 * @param array $properties
 	 */
 	public function __unserialize(array $properties) {
-		$properties = array_merge(array('email' => null), $properties);
+		$properties = array_merge(array('email' => ''), $properties);
 
 		$this->name = $properties['name'];
 		$this->email = $properties['email'];
