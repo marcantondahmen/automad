@@ -79,12 +79,12 @@ class InPage {
 	/**
 	 * Inject a temporary markup for an edit button.
 	 *
-	 * @param string|null $value
+	 * @param string $value
 	 * @param string $key
 	 * @param Context $Context
 	 * @return string The processed $value
 	 */
-	public function injectTemporaryEditButton(?string $value, string $key, Context $Context) {
+	public function injectTemporaryEditButton(string $value, string $key, Context $Context) {
 		// Only inject button if $key is no runtime var and a user is logged in.
 		if (preg_match('/^(\+|\w)/', $key) && Session::getUsername()) {
 			$value .= 	AM_DEL_INPAGE_BUTTON_OPEN .

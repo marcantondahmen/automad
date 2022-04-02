@@ -137,9 +137,9 @@ class Response {
 	 * Set the error property.
 	 *
 	 * @see $error
-	 * @param string|null $value
+	 * @param string $value
 	 */
-	public function setError(?string $value = null) {
+	public function setError(string $value = '') {
 		$this->error = $value;
 	}
 
@@ -147,9 +147,9 @@ class Response {
 	 * Set the redirect property.
 	 *
 	 * @see $redirect
-	 * @param string|null $url
+	 * @param string $url
 	 */
-	public function setRedirect(?string $url = null) {
+	public function setRedirect(string $url = '') {
 		$this->redirect = $url;
 	}
 
@@ -167,9 +167,9 @@ class Response {
 	 * Set the success property.
 	 *
 	 * @see $success
-	 * @param string|null $value
+	 * @param string $value
 	 */
-	public function setSuccess(?string $value = null) {
+	public function setSuccess(string $value = '') {
 		$this->success = $value;
 	}
 }

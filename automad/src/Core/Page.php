@@ -122,28 +122,29 @@ class Page {
 	 * @return string The requested value
 	 */
 	public function get(string $key) {
-		// Check whether the requested data is part of the data array or has to be generated.
+		// Return value from the data array.
 		if (array_key_exists($key, $this->data)) {
-			// Return value from the data array.
 			return $this->data[$key];
-		} elseif (array_key_exists($key, $this->Shared->data)) {
-			// Return value from the Shared data array.
-			return $this->Shared->data[$key];
-		} else {
-			// Generate system variable value or return false.
-			switch ($key) {
-				case AM_KEY_CURRENT_PAGE:
-					return $this->isCurrent();
-				case AM_KEY_CURRENT_PATH:
-					return $this->isInCurrentPath();
-				case AM_KEY_BASENAME:
-					return basename($this->path);
-				case AM_KEY_MTIME:
-					return $this->getMtime();
-				default:
-					return false;
-			}
 		}
+
+		// Return value from the Shared data array.
+		if (array_key_exists($key, $this->Shared->data)) {
+			return $this->Shared->data[$key];
+		}
+
+		// Generate system variable value or return an empty string.
+		switch ($key) {
+			case AM_KEY_CURRENT_PAGE:
+				return $this->isCurrent();
+			case AM_KEY_CURRENT_PATH:
+				return $this->isInCurrentPath();
+			case AM_KEY_BASENAME:
+				return basename($this->path);
+			case AM_KEY_MTIME:
+				return $this->getMtime();
+			default:
+				return '';
+			}
 	}
 
 	/**

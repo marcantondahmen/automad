@@ -66,9 +66,9 @@ class User {
 	 *
 	 * @param string $name
 	 * @param string $password
-	 * @param string|null $email
+	 * @param string $email
 	 */
-	public function __construct(string $name, string $password, ?string $email = null) {
+	public function __construct(string $name, string $password, string $email = '') {
 		$this->name = $name;
 		$this->email = $email;
 		$this->setPasswordHash($password);

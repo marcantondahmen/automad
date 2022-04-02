@@ -128,11 +128,11 @@ class FileModel {
 	 * Import file from URL.
 	 *
 	 * @param string $importUrl
-	 * @param string|null $pageUrl
+	 * @param string $pageUrl
 	 * @param Messenger $Messenger
 	 * @return bool true on success
 	 */
-	public static function import(string $importUrl, ?string $pageUrl = null, Messenger $Messenger) {
+	public static function import(string $importUrl, string $pageUrl, Messenger $Messenger) {
 		if (!$importUrl) {
 			$Messenger->setError(Text::get('missingUrlError'));
 
