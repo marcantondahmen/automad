@@ -63,8 +63,6 @@ class PageController {
 	/**
 	 * Add page based on data in $_POST.
 	 *
-	 * /api/Page/add
-	 *
 	 * @return Response the response object
 	 */
 	public static function add() {
@@ -101,8 +99,6 @@ class PageController {
 	/**
 	 * Get a breadcrumb trail for a requested page.
 	 *
-	 * /api/Page/breadcrumbs
-	 *
 	 * @return Response the response data
 	 */
 	public static function breadcrumbs() {
@@ -132,8 +128,6 @@ class PageController {
 
 	/**
 	 * Send form when there is no posted data in the request or save data if there is.
-	 *
-	 * /api/Page/data
 	 *
 	 * @return Response the response object
 	 */
@@ -188,8 +182,6 @@ class PageController {
 	/**
 	 * Delete page.
 	 *
-	 * /api/Page/delete
-	 *
 	 * @return Response the response object
 	 */
 	public static function delete() {
@@ -226,8 +218,6 @@ class PageController {
 	/**
 	 * Duplicate a page.
 	 *
-	 * /api/Page/duplicate
-	 *
 	 * @return Response the response object
 	 */
 	public static function duplicate() {
@@ -254,8 +244,6 @@ class PageController {
 
 	/**
 	 * Move a page.
-	 *
-	 * /api/Page/move
 	 *
 	 * @return Response the response object
 	 */
@@ -335,7 +323,7 @@ class PageController {
 	/**
 	 * Get the theme/template file from posted data or return a default template name.
 	 *
-	 * @param array $array
+	 * @param array|null $array
 	 * @param string|null $key
 	 * @return string The template filename
 	 */

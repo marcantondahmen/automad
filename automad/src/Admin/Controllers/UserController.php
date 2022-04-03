@@ -37,7 +37,6 @@
 namespace Automad\UI\Controllers;
 
 use Automad\Core\Request;
-use Automad\UI\Components\Alert\Danger;
 use Automad\UI\Components\Layout\PasswordReset\ResetForm;
 use Automad\UI\Components\Layout\PasswordReset\ResetSuccess;
 use Automad\UI\Components\Layout\PasswordReset\TokenRequestForm;

@@ -54,9 +54,7 @@ class SessionController {
 	/**
 	 * Verify login information based on $_POST.
 	 *
-	 * /api/Session/login
-	 *
-	 * @return string Error message in case of an error.
+	 * @return Response the Response object
 	 */
 	public static function login() {
 		$Response = new Response();
@@ -72,8 +70,6 @@ class SessionController {
 
 	/**
 	 * Log out user.
-	 *
-	 * /api/Session/logout
 	 *
 	 * @return bool true on success
 	 */

@@ -59,7 +59,7 @@ class AppController {
 	/**
 	 * Send the minimum static data that is required to bootstrap the dashboard app.
 	 *
-	 * /api/App/boostrap
+	 * @return Response the Response object
 	 */
 	public static function bootstrap() {
 		$Response = new Response;
@@ -82,7 +82,7 @@ class AppController {
 	/**
 	 * Send updated dynamic data that is required to update the dashboard app state.
 	 *
-	 * /api/App/updateState
+	 * @return Response the Response object
 	 */
 	public static function updateState() {
 		$Response = new Response;
