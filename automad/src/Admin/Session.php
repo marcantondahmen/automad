@@ -68,7 +68,7 @@ class Session {
 			}
 		}
 
-		return false;
+		return '';
 	}
 
 	/**
@@ -80,6 +80,8 @@ class Session {
 		if (isset($_SESSION['username'])) {
 			return $_SESSION['username'];
 		}
+
+		return '';
 	}
 
 	/**

@@ -56,34 +56,39 @@ class Str {
 	 * To be independent on the given format without explicitly specifying it, strtotime() is used generate a proper input date.
 	 * To use DateTime::createFromFormat() instead would require a third parameter (the original format)
 	 * and would therefore make things more complicated than needed.
-	 * The format can use either the date() or strftime() syntax. In case a locale is defined,
-	 * the strftime() syntax has to be used.
-	 * Multiple values can be passed as a CSV string for the locale parameter.
+	 * The format can use either the date() or ICU syntax. In case a locale is defined,
+	 * the ICU syntax is used.
 	 *
+	 * @see https://www.php.net/manual/en/intldateformatter.create.php
+	 * @see https://www.php.net/manual/en/intldateformatter.format.php
+	 * @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+	 * @see https://www.php.net/manual/en/datetime.format.php
 	 * @param string $date
 	 * @param string $format
 	 * @param string|null $locale
 	 * @return string The formatted date
 	 */
-	public static function dateFormat(string $date, string $format = '', ?string $locale = null) {
+	public static function dateFormat(string $date, string $format = 'D, d M Y', ?string $locale = null) {
 		if (!$date || !$format) {
 			return '';
 		}
 
-		if (strpos($format, '%') !== false) {
-			$original = setlocale(LC_TIME, 0);
+		$date = strtotime($date);
 
-			if ($locale) {
-				setlocale(LC_TIME, Parse::csv($locale));
-			}
+		if ($locale && class_exists('\IntlDateFormatter')) {
+			$formatter = new \IntlDateFormatter(
+				$locale,
+				\IntlDateFormatter::LONG,
+				\IntlDateFormatter::NONE,
+				null,
+				null,
+				$format
+			);
 
-			$formatted = strftime($format, strtotime($date));
-			setlocale(LC_TIME, $original);
-
-			return $formatted;
+			return $formatter->format($date);
 		}
 
-		return date($format, strtotime($date));
+		return date($format, $date);
 	}
 
 	/**

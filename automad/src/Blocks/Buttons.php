@@ -116,7 +116,9 @@ class Buttons extends AbstractBlock {
 
 			$class = self::classAttr($classes);
 
-			return "<am-buttons $class>$html</am-buttons>";
+			$html = "<am-buttons $class>$html</am-buttons>";
 		}
+
+		return $html;
 	}
 }

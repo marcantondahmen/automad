@@ -114,10 +114,10 @@ class Resolve {
 		if (strpos($filePath, '/') === 0) {
 			// Relative to root
 			return AM_BASE_DIR . $filePath;
-		} else {
-			// Relative to page
-			return AM_BASE_DIR . AM_DIR_PAGES . $pagePath . $filePath;
 		}
+
+		// Relative to page
+		return AM_BASE_DIR . AM_DIR_PAGES . $pagePath . $filePath;
 	}
 
 	/**

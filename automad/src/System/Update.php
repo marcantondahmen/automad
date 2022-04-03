@@ -231,6 +231,8 @@ class Update {
 		if (preg_match('/\d[^\'"]+/', $str, $matches)) {
 			return $matches[0];
 		}
+
+		return '';
 	}
 
 	/**

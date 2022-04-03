@@ -58,38 +58,44 @@ class Slider extends AbstractBlock {
 	 * @return string the rendered HTML
 	 */
 	public static function render(object $data, Automad $Automad) {
-		if (!empty($data->globs) && !empty($data->width) && !empty($data->height)) {
-			if ($files = FileUtils::fileDeclaration($data->globs, $Automad->Context->get())) {
-				$files = array_filter($files, function ($file) {
-					return FileUtils::fileIsImage($file);
-				});
+		if (empty($data->globs) || empty($data->width) || empty($data->height)) {
+			return '';
+		}
 
-				$defaults = array('dots' => true, 'autoplay' => true);
-				$options = array_merge($defaults, (array) $data);
-				$options = array_intersect_key($options, $defaults);
+		$files = FileUtils::fileDeclaration($data->globs, $Automad->Context->get());
 
-				$first = 'am-active';
-				$html = '<div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
+		$files = array_filter($files, function ($file) {
+			return FileUtils::fileIsImage($file);
+		});
 
-				foreach ($files as $file) {
-					$Image = new Image($file, $data->width, $data->height, true);
-					$caption = FileUtils::caption($file);
+		if (empty($files)) {
+			return '';
+		}
 
-					$html .= <<< HTML
+		$defaults = array('dots' => true, 'autoplay' => true);
+		$options = array_merge($defaults, (array) $data);
+		$options = array_intersect_key($options, $defaults);
+
+		$first = 'am-active';
+		$html = '<div class="am-slider" data-am-block-slider=\'' . json_encode($options) . '\'>';
+
+		foreach ($files as $file) {
+			$Image = new Image($file, $data->width, $data->height, true);
+			$caption = FileUtils::caption($file);
+
+			$html .= <<< HTML
 						<div class="am-slider-item $first">
 							<img src="$Image->file">
 							<div class="am-slider-caption">$caption</div>
 						</div>
 					HTML;
 
-					$first = '';
-				}
-
-				$html .= '</div>';
-				$class = self::classAttr();
-
-				return "<am-slider $class>$html</am-slider>";
-			}
+			$first = '';
 		}
+
+		$html .= '</div>';
+		$class = self::classAttr();
+
+		return "<am-slider $class>$html</am-slider>";
 	}
 }

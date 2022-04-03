@@ -71,6 +71,8 @@ class FileUtils {
 		if (is_readable($captionFile)) {
 			return file_get_contents($captionFile);
 		}
+
+		return '';
 	}
 
 	/**

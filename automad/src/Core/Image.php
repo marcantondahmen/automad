@@ -115,11 +115,11 @@ class Image {
 	 * The constructor defines the main object properties from the given parameters and initiates the main methods.
 	 *
 	 * @param string $originalFile
-	 * @param int $requestedWidth
-	 * @param int $requestedHeight
+	 * @param ?float $requestedWidth
+	 * @param ?float $requestedHeight
 	 * @param bool $crop
 	 */
-	public function __construct(string $originalFile, ?int $requestedWidth = null, ?int $requestedHeight = null, bool $crop = false) {
+	public function __construct(string $originalFile, ?float $requestedWidth = null, ?float $requestedHeight = null, bool $crop = false) {
 		if ($originalFile) {
 			ini_set('memory_limit', -1);
 
@@ -227,10 +227,10 @@ class Image {
 			}
 		}
 
-		$this->width = $w;
-		$this->height = $h;
-		$this->cropX = $x;
-		$this->cropY = $y;
+		$this->width = round($w);
+		$this->height = round($h);
+		$this->cropX = round($x);
+		$this->cropY = round($y);
 	}
 
 	/**
@@ -264,7 +264,18 @@ class Image {
 
 		imagealphablending($dest, false);
 		imagesavealpha($dest, true);
-		imagecopyresampled($dest, $src, 0, 0, $this->cropX, $this->cropY, $this->width, $this->height, $this->originalWidth - (2 * $this->cropX), $this->originalHeight - (2 * $this->cropY));
+		imagecopyresampled(
+			$dest,
+			$src,
+			0,
+			0,
+			$this->cropX,
+			$this->cropY,
+			$this->width,
+			$this->height,
+			$this->originalWidth - (2 * $this->cropX),
+			$this->originalHeight - (2 * $this->cropY)
+		);
 
 		Debug::log($this, 'Saving "' . $this->fileFullPath . '"');
 

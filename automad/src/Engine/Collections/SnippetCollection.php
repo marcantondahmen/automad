@@ -71,6 +71,8 @@ class SnippetCollection {
 		if (array_key_exists($name, self::$snippets)) {
 			return self::$snippets[$name];
 		}
+
+		return '';
 	}
 
 	/**

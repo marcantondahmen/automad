@@ -97,5 +97,7 @@ class Mail {
 
 			return $data->success;
 		}
+
+		return '';
 	}
 }

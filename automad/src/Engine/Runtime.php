@@ -75,7 +75,7 @@ class Runtime {
 	 * Return the requested runtime variable.
 	 *
 	 * @param string $key
-	 * @return string The value of $key or NULL if the requested variable doesn't exsist
+	 * @return string|null The value of $key or NULL if the requested variable doesn't exsist
 	 */
 	public function get(string $key) {
 		// Check whether $key is generated within a loop and therefore stored in $this->data or

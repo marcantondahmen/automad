@@ -80,7 +80,7 @@ class CreateUser extends AbstractCommand {
 		$name = 'user_' . substr(str_shuffle(MD5(microtime())), 0, 5);
 		$password = substr(str_shuffle(MD5(microtime())), 0, 10);
 
-		$UserCollectionModel->createUser($name, $password, $password, null, $Messenger);
+		$UserCollectionModel->createUser($name, $password, $password, '', $Messenger);
 		$UserCollectionModel->save($Messenger);
 
 		if (!$Messenger->getError()) {
