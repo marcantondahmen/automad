@@ -64,6 +64,7 @@ export enum classes {
 	dropdownItems = 'am-c-dropdown__items',
 	dropdownItemsFullWidth = 'am-c-dropdown__items--full-width',
 	dropdownItem = 'am-c-dropdown__item',
+	dropdownItemDivider = 'am-c-dropdown__item--divider',
 	dropdownItemActive = 'am-c-dropdown__item--active',
 	dropdown = 'am-c-dropdown',
 	dropdownOpen = 'am-c-dropdown--open',

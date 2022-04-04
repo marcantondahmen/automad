@@ -59,6 +59,7 @@ export interface JumpbarItemData {
 	subtitle?: string;
 	target?: string;
 	external?: string;
+	cls?: string[];
 }
 
 export interface File {

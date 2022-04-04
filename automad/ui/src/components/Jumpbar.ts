@@ -65,6 +65,7 @@ const inPageData = (): JumpbarItemData[] => {
 			value: App.text('inPageEdit'),
 			title: App.text('inPageEdit'),
 			icon: 'window-desktop',
+			cls: [classes.dropdownItemDivider],
 		},
 	];
 };
@@ -78,13 +79,15 @@ const settingsData = (): JumpbarItemData[] => {
 	const item = (
 		section: string,
 		title: string,
-		icon: string
+		icon: string,
+		cls: string[] = []
 	): JumpbarItemData => {
 		return {
 			target: `${Routes.system}?section=${section}`,
 			value: `${App.text('systemTitle')} ${App.text(title)}`,
 			title: App.text(title),
 			icon,
+			cls,
 		};
 	};
 
@@ -96,7 +99,9 @@ const settingsData = (): JumpbarItemData[] => {
 		item(Sections.language, 'systemLanguage', 'translate'),
 		item(Sections.headless, 'systemHeadless', 'braces'),
 		item(Sections.debug, 'systemDebug', 'bug'),
-		item(Sections.config, 'systemConfigFile', 'file-earmark-code'),
+		item(Sections.config, 'systemConfigFile', 'file-earmark-code', [
+			classes.dropdownItemDivider,
+		]),
 	];
 
 	return data;
@@ -114,6 +119,7 @@ const sharedData = (): JumpbarItemData[] => {
 			value: App.text('sharedTitle'),
 			title: App.text('sharedTitle'),
 			icon: 'file-earmark-medical',
+			cls: [classes.dropdownItemDivider],
 		},
 	];
 };
@@ -130,6 +136,7 @@ const packagesData = (): JumpbarItemData[] => {
 			value: App.text('packagesTitle'),
 			title: App.text('packagesTitle'),
 			icon: 'box-seam',
+			cls: [classes.dropdownItemDivider],
 		},
 	];
 };
@@ -243,7 +250,12 @@ class JumpbarComponent extends AutocompleteComponent {
 			}
 		);
 
-		const element = create('am-link', [classes.dropdownItem], attributes);
+		const cls = item.cls || [];
+		const element = create(
+			'am-link',
+			cls.concat(classes.dropdownItem),
+			attributes
+		);
 
 		element.innerHTML = this.itemHtml(item.icon, item.title, item.subtitle);
 
