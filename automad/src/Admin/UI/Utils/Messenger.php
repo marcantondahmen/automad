@@ -54,7 +54,7 @@ class Messenger {
 	/**
 	 * The last pushed success.
 	 */
-	private $success = null;
+	private $success = '';
 
 	/**
 	 * The messenger constructor.
@@ -74,7 +74,7 @@ class Messenger {
 	/**
 	 * Return the stored success message.
 	 *
-	 * @return string|null the success message
+	 * @return string the success message
 	 */
 	public function getSuccess() {
 		return $this->success;

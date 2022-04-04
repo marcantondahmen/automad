@@ -32,7 +32,16 @@
  * Licensed under the MIT license.
  */
 
-import { App, classes, getTagFromRoute, html, Routes } from '../../core';
+import {
+	App,
+	Binding,
+	classes,
+	eventNames,
+	getTagFromRoute,
+	html,
+	listen,
+	Routes,
+} from '../../core';
 import { SystemSectionData } from '../../types';
 import { Sections } from '../Switcher/Switcher';
 import { renderCacheSection } from './Partials/System/Cache';
@@ -195,7 +204,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 		this.items.forEach((item: SystemSectionData) => {
 			sections += html`
 				<am-switcher-section name="${item.section}">
-					${item.render()}
+					${item.render(this.listeners)}
 				</am-switcher-section>
 			`;
 		});

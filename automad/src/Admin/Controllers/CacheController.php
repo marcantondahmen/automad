@@ -34,13 +34,13 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Admin\Controllers;
 
+use Automad\Admin\API\Response;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\Debug;
-use Automad\UI\Response;
-use Automad\UI\Utils\FileSystem;
-use Automad\UI\Utils\Text;
+use Automad\Core\FileSystem;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -60,7 +60,7 @@ class CacheController {
 	public static function clear() {
 		$Response = new Response();
 		Cache::clear();
-		$Response->setSuccess(Text::get('success_cache_cleared'));
+		$Response->setSuccess(Text::get('cacheClearedSuccess'));
 
 		return $Response;
 	}
@@ -75,10 +75,10 @@ class CacheController {
 		$tempDir = FileSystem::purgeCache();
 
 		if ($tempDir) {
-			$Response->setSuccess(Text::get('success_cache_purged'));
+			$Response->setSuccess(Text::get('cachePurgedSuccess'));
 			Debug::log($tempDir, 'temp directory');
 		} else {
-			$Response->setError(Text::get('error_cache_purged'));
+			$Response->setError(Text::get('cachePurgedError'));
 		}
 
 		return $Response;

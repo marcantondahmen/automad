@@ -58,6 +58,18 @@ brightnessTool: Brightness
 
 -
 
+cacheClearedSuccess: The cache got cleared successfully!
+
+-
+
+cachePurgedError: The cache directory could not be purged!
+
+-
+
+cachePurgedSuccess: The cache directory got purged successfully!
+
+-
+
 cancel: Cancel
 
 -
@@ -791,6 +803,10 @@ unsupportedFileTypeError: Unsupported file type
 -
 
 updatedAutomadSuccess: Successfully updated Automad!
+
+-
+
+updateConfigSuccess: Successfully updated configuration!
 
 -
 

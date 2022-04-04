@@ -34,15 +34,15 @@
  * https://automad.org/license
  */
 
-namespace Automad\UI\Controllers;
+namespace Automad\Admin\Controllers;
 
+use Automad\Admin\API\Response;
+use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\UI\Response;
-use Automad\UI\Utils\Text;
-use Automad\UI\Utils\SwitcherSections;
+use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -59,7 +59,7 @@ class ConfigController {
 	 *
 	 * @return Response the response object
 	 */
-	public static function save() {
+	/* public static function save() {
 		$Response = new Response();
 
 		if ($json = Request::post('json')) {
@@ -87,7 +87,7 @@ class ConfigController {
 
 			$html = <<< HTML
 				<div class="uk-overflow-container">
-					<textarea 
+					<textarea
 					class="uk-form-controls uk-width-1-1"
 					name="json"
 					>$json</textarea>
@@ -98,7 +98,7 @@ class ConfigController {
 		}
 
 		return $Response;
-	}
+	} */
 
 	/**
 	 * Update a single configuration item.
@@ -143,15 +143,15 @@ class ConfigController {
 			}
 
 			// Language
-			if ($type == 'language') {
+			/* if ($type == 'language') {
 				$language = Request::post('language');
 				$config['AM_FILE_UI_TRANSLATION'] = $language;
 				$Response->setRedirect('#' . SwitcherSections::get()->system->language);
 				$Response->setReload(true);
-			}
+			} */
 
 			// Headless
-			if ($type == 'headless') {
+			/* if ($type == 'headless') {
 				if (isset($_POST['headless'])) {
 					$config['AM_HEADLESS_ENABLED'] = true;
 				} else {
@@ -160,7 +160,7 @@ class ConfigController {
 
 				// Reload page to update the dashboard.
 				$Response->setReload(true);
-			}
+			} */
 
 			// Debugging
 			if ($type == 'debug') {
@@ -174,10 +174,10 @@ class ConfigController {
 
 		if (Config::write($config)) {
 			Debug::log($config, 'Updated config file');
-			$Response->setSuccess(Text::get('success_config_update'));
+			$Response->setSuccess(Text::get('updateConfigSuccess'));
 			Cache::clear();
 		} else {
-			$Response->setError(Text::get('error_permission') . '<br>' . Config::$file);
+			$Response->setError(Text::get('permissionsDeniedError') . '<br>' . Config::$file);
 		}
 
 		return $Response;
