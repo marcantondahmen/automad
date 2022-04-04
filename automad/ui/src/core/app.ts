@@ -35,6 +35,7 @@
 import { RootComponent } from '../components/Root';
 import { eventNames, fire, request, requestAPI } from '.';
 import { KeyValueMap, Pages, SystemSettings, ThemeCollection } from '../types';
+import { listen } from './events';
 
 /**
  * The static class that provides the app state and root element to be used across the application.
@@ -200,6 +201,12 @@ export class App {
 		const json = await response.json();
 
 		this._state = json.data;
+
+		listen(
+			window,
+			eventNames.appStateRequireUpdate,
+			this.updateState.bind(this)
+		);
 	}
 
 	/**

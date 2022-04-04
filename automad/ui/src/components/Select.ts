@@ -32,7 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import { classes, create, listen, query } from '../core';
+import { classes, create, eventNames, listen, query } from '../core';
 import { BaseComponent } from './Base';
 
 /**
@@ -75,7 +75,7 @@ class SelectComponent extends BaseComponent {
 
 		update();
 
-		listen(select, 'change', update);
+		listen(select, `change ${eventNames.changeByBinding}`, update);
 	}
 }
 

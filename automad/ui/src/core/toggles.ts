@@ -33,7 +33,7 @@
  */
 
 import { classes } from './classes';
-import { listen } from './events';
+import { eventNames, listen } from './events';
 import { queryAll } from './utils';
 
 export const initCheckboxToggles = (container: HTMLElement) => {
@@ -50,7 +50,7 @@ export const initCheckboxToggles = (container: HTMLElement) => {
 			});
 		};
 
-		listen(checkbox, 'change', toggleTargets);
+		listen(checkbox, `change ${eventNames.changeByBinding}`, toggleTargets);
 		toggleTargets();
 	});
 };

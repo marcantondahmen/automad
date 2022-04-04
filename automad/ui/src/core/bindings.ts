@@ -34,6 +34,7 @@
 
 import { create, fire, listen, queryAll } from '.';
 import { InputElement, KeyValueMap } from '../types';
+import { eventNames } from './events';
 
 /**
  * A data binding class that allows to bind an input node to a value modifier function.
@@ -156,13 +157,18 @@ export class Bindings {
 						case 'textContent':
 							element.textContent = binding.value;
 							break;
+						case 'checked':
+							(element as HTMLInputElement).checked =
+								binding.value;
+							break;
 						case 'value':
 							(element as InputElement).value = binding.value;
-							fire('input', element);
 							break;
 						default:
 							element.setAttribute(prop, binding.value);
 					}
+
+					fire(eventNames.changeByBinding, element);
 				});
 			};
 
