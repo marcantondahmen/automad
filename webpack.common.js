@@ -114,6 +114,7 @@ module.exports = (env, argv) => {
 				port: 3000,
 				proxy: 'http://localhost:8080/automad-development',
 				files: ['**/*.php'],
+				ignore: ['config/*'],
 			})
 		);
 
