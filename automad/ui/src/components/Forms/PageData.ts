@@ -122,9 +122,9 @@ const createSections = (form: PageDataComponent): PageSectionCollection => {
 	};
 
 	const sections: PageSectionCollection = {
-		settings: createSection(Sections[Sections.settings]),
-		text: createSection(Sections[Sections.text]),
-		colors: createSection(Sections[Sections.colors]),
+		settings: createSection(Sections.settings),
+		text: createSection(Sections.text),
+		colors: createSection(Sections.colors),
 	};
 
 	return sections;
@@ -187,7 +187,7 @@ const createBindings = (data: KeyValueMap): PageBindings => {
 		'pageLinkUI',
 		null,
 		(url: string) => {
-			return `${Routes[Routes.page]}?url=${encodeURIComponent(url)}`;
+			return `${Routes.page}?url=${encodeURIComponent(url)}`;
 		},
 		url
 	);

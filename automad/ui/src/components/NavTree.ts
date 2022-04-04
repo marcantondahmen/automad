@@ -304,9 +304,7 @@ export class NavTreeComponent extends BaseComponent {
 			'am-link',
 			[],
 			{
-				target: `${Routes[Routes.page]}?url=${encodeURIComponent(
-					page.url
-				)}`,
+				target: `${Routes.page}?url=${encodeURIComponent(page.url)}`,
 			},
 			summary
 		);
@@ -339,7 +337,7 @@ export class NavTreeComponent extends BaseComponent {
 	protected toggleItem(item: NavTreeItem, url: string): void {
 		item.wrapper.classList.toggle(
 			classes.navItemActive,
-			item.page.url == url && isActivePage(Routes[Routes.page])
+			item.page.url == url && isActivePage(Routes.page)
 		);
 	}
 

@@ -32,19 +32,21 @@
  * Licensed under the MIT license.
  */
 
-import { KeyValueMap, Listener } from '../types';
+import { Listener } from '../types';
 
 /**
  * The object with all custom event that are used by the UI.
  */
-export const eventNames: KeyValueMap = {
-	appStateChange: 'AutomadAppStateChange',
-	fileCollectionRender: 'AutomadFileCollectionRender',
-	filesChangeOnServer: 'AutomadFilesChangeOnServer',
-	modalClose: 'AutomadModalClose',
-	modalOpen: 'AutomadModalOpen',
-	switcherChange: 'AutomadSwitcherChange',
-};
+export enum eventNames {
+	appStateChange = 'AutomadAppStateChange',
+	appStateRequireUpdate = 'AutomadAppStateRequireUpdate',
+	changeByBinding = 'AutomadChangeByBinding',
+	fileCollectionRender = 'AutomadFileCollectionRender',
+	filesChangeOnServer = 'AutomadFilesChangeOnServer',
+	modalClose = 'AutomadModalClose',
+	modalOpen = 'AutomadModalOpen',
+	switcherChange = 'AutomadSwitcherChange',
+}
 
 /**
  * Fires an event on an element or the window.

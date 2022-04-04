@@ -58,4 +58,4 @@ export class LogoutComponent extends CenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.logout]), LogoutComponent);
+customElements.define(getTagFromRoute(Routes.logout), LogoutComponent);

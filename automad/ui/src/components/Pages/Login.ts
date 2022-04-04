@@ -81,4 +81,4 @@ export class LoginComponent extends CenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.login]), LoginComponent);
+customElements.define(getTagFromRoute(Routes.login), LoginComponent);

@@ -59,6 +59,6 @@ export class ResetPasswordComponent extends CenteredLayoutComponent {
 }
 
 customElements.define(
-	getTagFromRoute(Routes[Routes.resetpassword]),
+	getTagFromRoute(Routes.resetpassword),
 	ResetPasswordComponent
 );

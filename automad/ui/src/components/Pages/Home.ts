@@ -58,4 +58,4 @@ export class HomeComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.home]), HomeComponent);
+customElements.define(getTagFromRoute(Routes.home), HomeComponent);

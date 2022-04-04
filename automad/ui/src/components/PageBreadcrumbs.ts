@@ -79,9 +79,7 @@ class PageBreadcrumbsComponent extends BaseComponent {
 		}
 
 		data.forEach((page: KeyValueMap, index: number) => {
-			const target = `${Routes[Routes.page]}?url=${encodeURIComponent(
-				page.url
-			)}`;
+			const target = `${Routes.page}?url=${encodeURIComponent(page.url)}`;
 
 			const link = create(
 				'am-link',

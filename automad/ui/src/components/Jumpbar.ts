@@ -45,7 +45,7 @@ import { Sections } from './Switcher/Switcher';
 const searchData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Routes[Routes.search],
+			target: Routes.search,
 			value: App.text('searchTitle'),
 			title: App.text('searchTitle'),
 			icon: 'search',
@@ -81,7 +81,7 @@ const settingsData = (): JumpbarItemData[] => {
 		icon: string
 	): JumpbarItemData => {
 		return {
-			target: `${Routes[Routes.system]}?section=${section}`,
+			target: `${Routes.system}?section=${section}`,
 			value: `${App.text('systemTitle')} ${App.text(title)}`,
 			title: App.text(title),
 			icon,
@@ -89,18 +89,14 @@ const settingsData = (): JumpbarItemData[] => {
 	};
 
 	const data: JumpbarItemData[] = [
-		item(Sections[Sections.cache], 'systemCache', 'stack'),
-		item(Sections[Sections.users], 'systemUsers', 'people'),
-		item(Sections[Sections.update], 'systemUpdate', 'arrow-repeat'),
-		item(Sections[Sections.feed], 'systemRssFeed', 'rss'),
-		item(Sections[Sections.language], 'systemLanguage', 'translate'),
-		item(Sections[Sections.headless], 'systemHeadless', 'braces'),
-		item(Sections[Sections.debug], 'systemDebug', 'bug'),
-		item(
-			Sections[Sections.config],
-			'systemConfigFile',
-			'file-earmark-code'
-		),
+		item(Sections.cache, 'systemCache', 'stack'),
+		item(Sections.users, 'systemUsers', 'people'),
+		item(Sections.update, 'systemUpdate', 'arrow-repeat'),
+		item(Sections.feed, 'systemRssFeed', 'rss'),
+		item(Sections.language, 'systemLanguage', 'translate'),
+		item(Sections.headless, 'systemHeadless', 'braces'),
+		item(Sections.debug, 'systemDebug', 'bug'),
+		item(Sections.config, 'systemConfigFile', 'file-earmark-code'),
 	];
 
 	return data;
@@ -114,7 +110,7 @@ const settingsData = (): JumpbarItemData[] => {
 const sharedData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Routes[Routes.shared],
+			target: Routes.shared,
 			value: App.text('sharedTitle'),
 			title: App.text('sharedTitle'),
 			icon: 'file-earmark-medical',
@@ -130,7 +126,7 @@ const sharedData = (): JumpbarItemData[] => {
 const packagesData = (): JumpbarItemData[] => {
 	return [
 		{
-			target: Routes[Routes.packages],
+			target: Routes.packages,
 			value: App.text('packagesTitle'),
 			title: App.text('packagesTitle'),
 			icon: 'box-seam',
@@ -155,7 +151,7 @@ const pagesData = (): JumpbarItemData[] => {
 		const icon = page.private ? 'eye-slash-fill' : 'file-earmark-text';
 
 		data.push({
-			target: `${Routes[Routes.page]}?url=${page.url}`,
+			target: `${Routes.page}?url=${page.url}`,
 			value: `${page.title} ${page.url}`,
 			title: page.title,
 			subtitle: page.url,

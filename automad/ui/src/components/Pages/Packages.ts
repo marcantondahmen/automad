@@ -58,7 +58,4 @@ export class PackagesComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(
-	getTagFromRoute(Routes[Routes.packages]),
-	PackagesComponent
-);
+customElements.define(getTagFromRoute(Routes.packages), PackagesComponent);

@@ -39,19 +39,19 @@ import { SwitcherLabelComponent } from './SwitcherLabel';
 import { SwitcherSectionComponent } from './SwitcherSection';
 
 export enum Sections {
-	overview,
-	cache,
-	users,
-	update,
-	feed,
-	language,
-	headless,
-	debug,
-	config,
-	settings,
-	text,
-	colors,
-	files,
+	overview = 'overview',
+	cache = 'cache',
+	users = 'users',
+	update = 'update',
+	feed = 'feed',
+	language = 'language',
+	headless = 'headless',
+	debug = 'debug',
+	config = 'config',
+	settings = 'settings',
+	text = 'text',
+	colors = 'colors',
+	files = 'files',
 }
 
 /**

@@ -58,4 +58,4 @@ export class SharedComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.shared]), SharedComponent);
+customElements.define(getTagFromRoute(Routes.shared), SharedComponent);

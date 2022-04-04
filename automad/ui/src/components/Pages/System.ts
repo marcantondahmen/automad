@@ -56,56 +56,56 @@ export class SystemComponent extends SidebarLayoutComponent {
 	private get items(): SystemSectionData[] {
 		return [
 			{
-				section: Sections[Sections.cache],
+				section: Sections.cache,
 				icon: 'stack',
 				title: App.text('systemCache'),
 				info: 'info here',
 				render: renderCacheSection,
 			},
 			{
-				section: Sections[Sections.users],
+				section: Sections.users,
 				icon: 'people',
 				title: App.text('systemUsers'),
 				info: 'info here',
 				render: renderUsersSection,
 			},
 			{
-				section: Sections[Sections.update],
+				section: Sections.update,
 				icon: 'arrow-repeat',
 				title: App.text('systemUpdate'),
 				info: 'info here',
 				render: renderUpdateSection,
 			},
 			{
-				section: Sections[Sections.feed],
+				section: Sections.feed,
 				icon: 'rss',
 				title: App.text('systemRssFeed'),
 				info: 'info here',
 				render: renderFeedSection,
 			},
 			{
-				section: Sections[Sections.language],
+				section: Sections.language,
 				icon: 'translate',
 				title: App.text('systemLanguage'),
 				info: 'info here',
 				render: renderLanguageSection,
 			},
 			{
-				section: Sections[Sections.headless],
+				section: Sections.headless,
 				icon: 'braces',
 				title: App.text('systemHeadless'),
 				info: 'info here',
 				render: () => '',
 			},
 			{
-				section: Sections[Sections.debug],
+				section: Sections.debug,
 				icon: 'bug',
 				title: App.text('systemDebug'),
 				info: 'info here',
 				render: renderDebugSection,
 			},
 			{
-				section: Sections[Sections.config],
+				section: Sections.config,
 				icon: 'file-earmark-code',
 				title: App.text('systemConfigFile'),
 				info: 'info here',
@@ -173,7 +173,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 
 		return html`
 			<am-switcher class="${classes.flex}">
-				<am-switcher-link section="${Sections[Sections.overview]}">
+				<am-switcher-link section="${Sections.overview}">
 					<i class="bi bi-grid"></i>
 				</am-switcher-link>
 				<am-dropdown class="${classes.flexItemGrow}">
@@ -201,7 +201,7 @@ export class SystemComponent extends SidebarLayoutComponent {
 		});
 
 		return html`
-			<am-switcher-section name="${Sections[Sections.overview]}">
+			<am-switcher-section name="${Sections.overview}">
 				<div class="${classes.grid}" style="--min: 15rem;">
 					${this.renderOverviewCards()}
 				</div>
@@ -239,4 +239,4 @@ export class SystemComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.system]), SystemComponent);
+customElements.define(getTagFromRoute(Routes.system), SystemComponent);

@@ -52,7 +52,7 @@ class SystemMenuComponent extends BaseComponent {
 
 				this.classList.toggle(
 					classes.displayNone,
-					section == Sections[Sections.overview]
+					section == Sections.overview
 				);
 			})
 		);

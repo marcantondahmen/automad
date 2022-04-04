@@ -165,24 +165,16 @@ export class PageComponent extends SidebarLayoutComponent {
 				<menu class="am-l-main__content">
 					<div class="am-u-flex">
 						<am-switcher class="am-u-flex__item-grow">
-							<am-switcher-link
-								section="${Sections[Sections.settings]}"
-							>
+							<am-switcher-link section="${Sections.settings}">
 								$${App.text('pageSettings')}
 							</am-switcher-link>
-							<am-switcher-link
-								section="${Sections[Sections.text]}"
-							>
+							<am-switcher-link section="${Sections.text}">
 								$${App.text('pageContent')}
 							</am-switcher-link>
-							<am-switcher-link
-								section="${Sections[Sections.colors]}"
-							>
+							<am-switcher-link section="${Sections.colors}">
 								$${App.text('pageColors')}
 							</am-switcher-link>
-							<am-switcher-link
-								section="${Sections[Sections.files]}"
-							>
+							<am-switcher-link section="${Sections.files}">
 								$${App.text('uploadedFiles')}
 								<am-file-count></am-file-count>
 							</am-switcher-link>
@@ -196,7 +188,7 @@ export class PageComponent extends SidebarLayoutComponent {
 			<section class="am-l-main__row">
 				<div class="am-l-main__content">
 					<am-page-data api="Page/data"></am-page-data>
-					<am-switcher-section name="${Sections[Sections.files]}">
+					<am-switcher-section name="${Sections.files}">
 						<am-upload></am-upload>
 						<am-modal-toggle
 							class="${classes.button}"
@@ -253,4 +245,4 @@ export class PageComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.page]), PageComponent);
+customElements.define(getTagFromRoute(Routes.page), PageComponent);

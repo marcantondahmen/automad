@@ -35,16 +35,16 @@
 import { App } from '.';
 
 export enum Routes {
-	setup,
-	login,
-	resetpassword,
-	logout,
-	search,
-	home,
-	system,
-	shared,
-	packages,
-	page,
+	setup = 'setup',
+	login = 'login',
+	resetpassword = 'resetpassword',
+	logout = 'logout',
+	search = 'search',
+	home = 'home',
+	system = 'system',
+	shared = 'shared',
+	packages = 'packages',
+	page = 'page',
 }
 
 /**
@@ -80,7 +80,7 @@ export const getValidRouteOrRedirect = (): string => {
 		return slug;
 	}
 
-	window.location.href = `${App.dashboardURL}/${Routes[Routes.home]}`;
+	window.location.href = `${App.dashboardURL}/${Routes.home}`;
 };
 
 /**

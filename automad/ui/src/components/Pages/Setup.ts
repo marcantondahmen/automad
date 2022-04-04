@@ -58,4 +58,4 @@ export class SetupComponent extends CenteredLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.setup]), SetupComponent);
+customElements.define(getTagFromRoute(Routes.setup), SetupComponent);

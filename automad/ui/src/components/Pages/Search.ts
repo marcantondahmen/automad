@@ -58,4 +58,4 @@ export class SearchComponent extends SidebarLayoutComponent {
 	}
 }
 
-customElements.define(getTagFromRoute(Routes[Routes.search]), SearchComponent);
+customElements.define(getTagFromRoute(Routes.search), SearchComponent);
