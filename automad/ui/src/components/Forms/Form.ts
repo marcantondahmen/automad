@@ -282,13 +282,19 @@ export class FormComponent extends BaseComponent {
 	 */
 	onChange(): void {
 		if (this.auto) {
-			const lockId = App.addNavigationLock();
-
 			debounced(async () => {
+				const lockId = App.addNavigationLock();
+
 				await this.submit();
 
 				App.removeNavigationLock(lockId);
 			});
+
+			const lockId = App.addNavigationLock();
+
+			setTimeout(() => {
+				App.removeNavigationLock(lockId);
+			}, autoSubmitTimeout + 10);
 		}
 	}
 
