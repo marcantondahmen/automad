@@ -122,6 +122,7 @@ class Gallery extends AbstractBlock {
 				>
 					<img src="$Image->file" />
 				</a>
+				<caption>$caption</caption>
 			HTML;
 		}
 
@@ -174,6 +175,7 @@ class Gallery extends AbstractBlock {
 					<a href="$file" class="am-gallery-img-small" data-caption="$caption" data-am-block-lightbox>
 						<img src="$Image->file" />
 					</a>
+					<caption>$caption</caption>
 				</div>
 			HTML;
 		}
