@@ -79,6 +79,8 @@ import './components/Pages/Setup';
 import './components/Pages/Shared';
 import './components/Pages/System';
 
+import './components/State/Debug';
+
 import './components/Switcher/Switcher';
 import './components/Switcher/SwitcherLabel';
 import './components/Switcher/SwitcherLink';
