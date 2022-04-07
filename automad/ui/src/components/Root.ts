@@ -42,8 +42,10 @@ import {
 	listen,
 	Bindings,
 	initCheckboxToggles,
+	queryAll,
 } from '../core';
 import { BaseComponent } from './Base';
+import { ModalComponent } from './Modal/Modal';
 
 /**
  * The root app component.
@@ -103,6 +105,15 @@ export class RootComponent extends BaseComponent {
 	 * @async
 	 */
 	private async update(): Promise<void> {
+		const openModal = queryAll(`.${classes.modalOpen}`) as ModalComponent[];
+
+		if (openModal) {
+			openModal.forEach((modal) => {
+				modal.close();
+			});
+			await new Promise((resolve) => setTimeout(resolve, 250));
+		}
+
 		this.progressBar(25);
 
 		Bindings.reset();
