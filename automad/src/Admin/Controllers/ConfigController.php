@@ -42,7 +42,6 @@ use Automad\Core\Cache;
 use Automad\Core\Config;
 use Automad\Core\Debug;
 use Automad\Core\Request;
-use Automad\System\Server;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
 
@@ -108,68 +107,37 @@ class ConfigController {
 	public static function update() {
 		$Response = new Response();
 
-		// Get config from json file, if exsiting.
 		$config = Config::read();
 		ksort($config);
 
-		if ($type = Request::post('type')) {
-			// Cache
-			if ($type == 'cache') {
-				$cache = Request::post('cache');
+		switch (Request::post('type')) {
+			case 'cache':
+				$config['AM_CACHE_ENABLED'] = !empty(Request::post('cacheEnabled'));
+				$config['AM_CACHE_MONITOR_DELAY'] = intval(Request::post('cacheMonitorDelay'));
+				$config['AM_CACHE_LIFETIME'] = intval(Request::post('cacheLifetime'));
 
-				if (isset($cache['enabled'])) {
-					$config['AM_CACHE_ENABLED'] = true;
-				} else {
-					$config['AM_CACHE_ENABLED'] = false;
+				break;
+
+			case 'debug':
+				$config['AM_DEBUG_ENABLED'] = !empty(Request::post('debugEnabled'));
+
+				break;
+
+			case 'feed':
+				$config['AM_FEED_ENABLED'] = !empty(Request::post('feedEnabled'));
+				$config['AM_FEED_FIELDS'] = '';
+
+				if ($fields = Request::post('feedFields')) {
+					$config['AM_FEED_FIELDS'] = join(', ', array_unique(json_decode($fields)));
 				}
 
-				$config['AM_CACHE_MONITOR_DELAY'] = intval($cache['monitor-delay']);
-				$config['AM_CACHE_LIFETIME'] = intval($cache['lifetime']);
-			}
+				break;
 
-			// Feed
-			if ($type == 'feed') {
-				if (Request::post('feed')) {
-					$config['AM_FEED_ENABLED'] = true;
-				} else {
-					$config['AM_FEED_ENABLED'] = false;
-				}
-
-				if ($fields = Request::post('fields')) {
-					$config['AM_FEED_FIELDS'] = join(', ', $fields);
-				} else {
-					$config['AM_FEED_FIELDS'] = '';
-				}
-			}
-
-			// Language
-			/* if ($type == 'language') {
-				$language = Request::post('language');
-				$config['AM_FILE_UI_TRANSLATION'] = $language;
-				$Response->setRedirect('#' . SwitcherSections::get()->system->language);
+			case 'translation':
+				$config['AM_FILE_UI_TRANSLATION'] = Request::post('translation');
 				$Response->setReload(true);
-			} */
 
-			// Headless
-			/* if ($type == 'headless') {
-				if (isset($_POST['headless'])) {
-					$config['AM_HEADLESS_ENABLED'] = true;
-				} else {
-					$config['AM_HEADLESS_ENABLED'] = false;
-				}
-
-				// Reload page to update the dashboard.
-				$Response->setReload(true);
-			} */
-
-			// Debugging
-			if ($type == 'debug') {
-				if (isset($_POST['debug'])) {
-					$config['AM_DEBUG_ENABLED'] = true;
-				} else {
-					$config['AM_DEBUG_ENABLED'] = false;
-				}
-			}
+				break;
 		}
 
 		if (Config::write($config)) {

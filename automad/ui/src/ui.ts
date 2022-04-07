@@ -43,6 +43,7 @@ import './components/Fields/CheckboxSelect';
 import './components/Fields/Color';
 import './components/Fields/Date';
 import './components/Fields/Editor';
+import './components/Fields/FeedFieldSelect';
 import './components/Fields/Image';
 import './components/Fields/Input';
 import './components/Fields/Markdown';

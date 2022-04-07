@@ -1,0 +1,92 @@
+/*
+ *                    ....
+ *                  .:   '':.
+ *                  ::::     ':..
+ *                  ::.         ''..
+ *       .:'.. ..':.:::'    . :.   '':.
+ *      :.   ''     ''     '. ::::.. ..:
+ *      ::::.        ..':.. .''':::::  .
+ *      :::::::..    '..::::  :. ::::  :
+ *      ::'':::::::.    ':::.'':.::::  :
+ *      :..   ''::::::....':     ''::  :
+ *      :::::.    ':::::   :     .. '' .
+ *   .''::::::::... ':::.''   ..''  :.''''.
+ *   :..:::'':::::  :::::...:''        :..:
+ *   ::::::. '::::  ::::::::  ..::        .
+ *   ::::::::.::::  ::::::::  :'':.::   .''
+ *   ::: '::::::::.' '':::::  :.' '':  :
+ *   :::   :::::::::..' ::::  ::...'   .
+ *   :::  .::::::::::   ::::  ::::  .:'
+ *    '::'  '':::::::   ::::  : ::  :
+ *              '::::   ::::  :''  .:
+ *               ::::   ::::    ..''
+ *               :::: ..:::: .:''
+ *                 ''''  '''''
+ * 
+ *
+ * AUTOMAD
+ *
+ * Copyright (c) 2022 by Marc Anton Dahmen
+ * https://marcdahmen.de
+ *
+ * Licensed under the MIT license.
+ */
+
+.am-c-feed-field-select {
+	--gap: 3px;
+	--clr: var(--am-button-clr);
+	--bg: var(--am-button-bg);
+	--border: var(--am-clr-base);
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+	padding: var(--gap);
+
+	border-radius: ~'calc(var(--am-radius) + var(--gap))';
+	border: var(--am-border-width) dashed var(--am-border-clr);
+
+	&:after {
+		content: attr(data-text);
+		padding: 0.5rem;
+		text-align: center;
+		color: var(--am-clr-muted);
+	}
+
+	&__arrows {
+		line-height: 2.5;
+		text-align: center;
+	}
+
+	&__item {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 var(--am-button-padding);
+		line-height: var(--am-button-line-height);
+		color: var(--clr);
+		background-color: var(--bg);
+		border: var(--am-border-width) solid var(--border);
+		border-radius: var(--am-radius);
+		cursor: grab;
+
+		&--ghost {
+			--clr: transparent;
+			--border: var(--am-clr-success);
+			border-style: dashed;
+		}
+
+		&--drag {
+			box-shadow: var(--am-shadow);
+			opacity: 1 !important;
+		}
+
+		&--chosen {
+			box-shadow: var(--am-shadow);
+		}
+	}
+
+	&--muted {
+		--clr: var(--am-clr-muted);
+		--bg: var(--am-button-bg);
+		--border: var(--am-border-clr);
+	}
+}

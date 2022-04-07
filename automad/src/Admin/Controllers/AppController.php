@@ -43,7 +43,10 @@ use Automad\Admin\UI\Utils\Text;
 use Automad\Core\Cache;
 use Automad\Core\FileSystem;
 use Automad\Core\FileUtils;
+use Automad\Core\Parse;
+use Automad\Core\Str;
 use Automad\System\Fields;
+use Automad\System\Server;
 use Automad\System\ThemeCollection;
 
 defined('AUTOMAD') or die('Direct access not permitted!');
@@ -72,8 +75,11 @@ class AppController {
 			'base' => AM_BASE_URL,
 			'baseIndex' => AM_BASE_INDEX,
 			'dashboard' => AM_BASE_INDEX . AM_PAGE_DASHBOARD,
+			'feed' => Server::url() . AM_BASE_INDEX . AM_FEED_URL,
 			'reservedFields' => Fields::$reserved,
-			'allowedFileTypes' => FileUtils::allowedFileTypes()
+			'allowedFileTypes' => FileUtils::allowedFileTypes(),
+			'languages' => self::getLanguages(),
+			'contentFields' => self::getContentFields()
 		));
 
 		return $Response;
@@ -104,7 +110,7 @@ class AppController {
 				'debug' => AM_DEBUG_ENABLED,
 				'feed' => array(
 					'enabled' => AM_FEED_ENABLED,
-					'fields' => AM_FEED_FIELDS
+					'fields' => Parse::csv(AM_FEED_FIELDS)
 				),
 				'translation' => AM_FILE_UI_TRANSLATION,
 				'users'=> $UserCollectionModel->getCollection(),
@@ -113,5 +119,50 @@ class AppController {
 		));
 
 		return $Response;
+	}
+
+	/**
+	 * Get all relevant text based fields from all themes.
+	 *
+	 * @return array the fields array
+	 */
+	private static function getContentFields() {
+		$ThemeCollection = new ThemeCollection();
+		$fields = array();
+
+		foreach ($ThemeCollection->getThemes() as $Theme) {
+			foreach ($Theme->templates as $file) {
+				$fields = array_merge($fields, Fields::inTemplate($file));
+			}
+		}
+
+		$fields = array_unique($fields);
+		$fields = array_filter($fields, function ($field) {
+			return preg_match('/^(\+|text)/', $field);
+		});
+
+		return array_values($fields);
+	}
+
+	/**
+	 * Get the array of installed languages.
+	 *
+	 * @return array the array of languages
+	 */
+	private static function getLanguages() {
+		$languages = array();
+
+		foreach (glob(dirname(AM_FILE_UI_TEXT_MODULES) . '/*.txt') as $file) {
+			if (strpos($file, 'english.txt') !== false) {
+				$value = '';
+			} else {
+				$value = Str::stripStart($file, AM_BASE_DIR);
+			}
+
+			$key = ucfirst(str_replace(array('_', '.txt'), array(' ', ''), basename($file)));
+			$languages[$key] = $value;
+		}
+
+		return $languages;
 	}
 }

@@ -32,16 +32,7 @@
  * Licensed under the MIT license.
  */
 
-import {
-	App,
-	Binding,
-	classes,
-	eventNames,
-	getTagFromRoute,
-	html,
-	listen,
-	Routes,
-} from '../../core';
+import { App, classes, getTagFromRoute, html, Routes } from '../../core';
 import { SystemSectionData } from '../../types';
 import { Sections } from '../Switcher/Switcher';
 import { renderCacheSection } from './Partials/System/Cache';

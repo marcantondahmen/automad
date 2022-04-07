@@ -40,22 +40,16 @@ import {
 	eventNames,
 	html,
 	listen,
+	renderOptions,
 } from '../../../../core';
-import { KeyValueMap, Listener } from '../../../../types';
+import { Listener } from '../../../../types';
 
-const renderOptions = (options: KeyValueMap[]): string => {
-	let output = '';
-
-	options.forEach((option) => {
-		output += html`
-			<option value="${option.value}">${option.text}</option>
-		`;
-	});
-
-	return output;
-};
-
-const createBindings = (listeners: Listener[]) => {
+/**
+ * Create bindings for the form elements in the cache section.
+ *
+ * @param listeners
+ */
+const createBindings = (listeners: Listener[]): void => {
 	const cacheEnabled = new Binding(
 		'cacheEnabled',
 		null,
@@ -86,6 +80,12 @@ const createBindings = (listeners: Listener[]) => {
 	);
 };
 
+/**
+ * Render the cache section.
+ *
+ * @param listeners
+ * @returns the rendered HTML
+ */
 export const renderCacheSection = (listeners: Listener[]): string => {
 	createBindings(listeners);
 
@@ -97,24 +97,22 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 		>
 			<input type="hidden" name="type" value="cache" />
 			<p>$${App.text('systemCacheInfo')}</p>
-			<p>
-				${createField(
-					'am-checkbox-large',
-					null,
-					{
-						key: 'enabled',
-						value: App.system.cache.enabled,
-						name: 'cache[enabled]',
-						label: App.text('systemCacheEnable'),
-					},
-					[],
-					{
-						toggle: '.am-cache-settings',
-						bind: 'cacheEnabled',
-						bindto: 'checked',
-					}
-				).outerHTML}
-			</p>
+			${createField(
+				'am-checkbox-large',
+				null,
+				{
+					key: 'cacheEnabled',
+					value: App.system.cache.enabled,
+					name: 'cacheEnabled',
+					label: App.text('systemCacheEnable'),
+				},
+				[],
+				{
+					toggle: '.am-cache-settings',
+					bind: 'cacheEnabled',
+					bindto: 'checked',
+				}
+			).outerHTML}
 			<div class="am-cache-settings">
 				<p>$${App.text('systemCacheMonitorInfo')}</p>
 				<p>
@@ -122,7 +120,7 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 						$${App.text('systemCacheMonitor')}
 						<span></span>
 						<select
-							name="cache[monitor-delay]"
+							name="cacheMonitorDelay"
 							bind="cacheMonitorDelay"
 							bindto="value"
 						>
@@ -141,7 +139,7 @@ export const renderCacheSection = (listeners: Listener[]): string => {
 						$${App.text('systemCacheLifetime')}
 						<span></span>
 						<select
-							name="cache[lifetime]"
+							name="cacheLifetime"
 							bind="cacheLifetime"
 							bindto="value"
 						>

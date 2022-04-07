@@ -97,6 +97,24 @@ export class App {
 	}
 
 	/**
+	 * The feed URL.
+	 *
+	 * @static
+	 */
+	static get feedURL(): string {
+		return this._state.feed;
+	}
+
+	/**
+	 * The languages map.
+	 *
+	 * @static
+	 */
+	static get languages(): KeyValueMap {
+		return this._state.languages;
+	}
+
+	/**
 	 * The main theme path.
 	 *
 	 * @static
@@ -121,6 +139,15 @@ export class App {
 	 */
 	static get reservedFields(): KeyValueMap {
 		return this._state.reservedFields;
+	}
+
+	/**
+	 * The array of content field names.
+	 *
+	 * @static
+	 */
+	static get contentFields(): string[] {
+		return this._state.contentFields;
 	}
 
 	/**
