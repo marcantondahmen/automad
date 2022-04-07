@@ -113,33 +113,35 @@ class UserCollectionController {
 	/**
 	 * Install the first user account.
 	 *
-	 * @return string|null Error message in case of an error
+	 * @return string Error message in case of an error
 	 */
 	public static function install() {
-		if (!empty($_POST)) {
-			$UserCollectionModel = new UserCollectionModel();
-			$Messenger = new Messenger();
-
-			if (!$UserCollectionModel->createUser(
-				Request::post('username'),
-				Request::post('password1'),
-				Request::post('password2'),
-				Request::post('email'),
-				$Messenger
-			)) {
-				return $Messenger->getError();
-			}
-
-			header('Expires: -1');
-			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-			header('Pragma: public');
-			header('Content-Type: application/octet-stream');
-			header('Content-Transfer-Encoding: binary');
-			header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
-			ob_end_flush();
-
-			exit($UserCollectionModel->generatePHP());
+		if (empty($_POST)) {
+			return '';
 		}
+
+		$UserCollectionModel = new UserCollectionModel();
+		$Messenger = new Messenger();
+
+		if (!$UserCollectionModel->createUser(
+			Request::post('username'),
+			Request::post('password1'),
+			Request::post('password2'),
+			Request::post('email'),
+			$Messenger
+		)) {
+			return $Messenger->getError();
+		}
+
+		header('Expires: -1');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Content-Type: application/octet-stream');
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Disposition: attachment; filename=' . basename(AM_FILE_ACCOUNTS));
+		ob_end_flush();
+
+		exit($UserCollectionModel->generatePHP());
 	}
 
 	/**
